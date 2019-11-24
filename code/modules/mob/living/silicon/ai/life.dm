@@ -22,6 +22,9 @@
 			process_med_hud(src,0,src.eyeobj)
 	if(stunned == 0)
 		spend_cpu(-1)
+	for(var/i in active_cyberwarfare_effects)
+		var/datum/cyberwarfare_command/c = i
+		c.command_process()
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)

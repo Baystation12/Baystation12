@@ -6,6 +6,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/prep_EWAR_command,
 	/mob/living/silicon/ai/proc/prep_ewar_command_macroable,
 	/mob/living/silicon/ai/proc/check_EWAR_command,
+	/mob/living/silicon/ai/proc/reset_network_connection,
 	/mob/living/silicon/ai/proc/toggle_resist_carding,
 	//mob/living/silicon/ai/proc/ai_announcement,
 	//mob/living/silicon/ai/proc/ai_call_shuttle,
@@ -91,9 +92,14 @@ var/list/ai_verbs_default = list(
 	/datum/cyberwarfare_command/network_scan,
 	/datum/cyberwarfare_command/network_scan/l2,
 	/datum/cyberwarfare_command/network_scan/l3,
+	/datum/cyberwarfare_command/investigate_node,
 	/datum/cyberwarfare_command/hack_routing_node,
 	/datum/cyberwarfare_command/node_lockdown,
+	/datum/cyberwarfare_command/nuke_node,
 	/datum/cyberwarfare_command/shock_terminal,
+	/datum/cyberwarfare_command/shock_terminal/siphon,
+	/datum/cyberwarfare_command/flash_network,
+	/datum/cyberwarfare_command/disconnect_protect,
 	/datum/cyberwarfare_command/switch_terminal,
 	/datum/cyberwarfare_command/switch_terminal/stealth)
 
@@ -107,10 +113,11 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/switch_to_net_by_name(var/name)
 	var/new_net = all_networks[name]
-	if(!isnull(new_net) && !isnull(eyeobj))
+	if(!isnull(new_net))
 		our_visualnet = new_net
-		eyeobj.visualnet = our_visualnet
-		eyeobj.possess(src)
+		if(!isnull(eyeobj))
+			eyeobj.visualnet = our_visualnet
+			eyeobj.possess(src)
 
 /mob/living/silicon/ai/proc/toggle_resist_carding()
 	set name = "Toggle Resist Carding"
@@ -171,7 +178,16 @@ var/list/ai_verbs_default = list(
 		to_chat(src,"<span class = 'notice'>EWAR command selection cancelled.</span>")
 		return
 	var/datum/cyberwarfare_command/picked = name_to_command[command_pick]
-	to_chat(src,"<span class = 'notice'>\[[picked.name]\]\n[picked.desc]\nCost:[picked.cpu_cost]</span>")
+	picked.show_desc(src)
+
+/mob/living/silicon/ai/proc/reset_network_connection()
+	set name = "Reset Network Connection"
+	set category = "EWAR"
+
+	if(!our_terminal)
+		to_chat(src,"<span class = 'notice'>No terminal to reset to.</span>")
+		return
+	switch_to_net_by_name(our_terminal.inherent_network)
 
 /mob/living/silicon/ai/proc/get_ais_in_network(var/net_name)
 	var/list/ais_in_net = list()

@@ -30,8 +30,7 @@
 	if(!istype(user))
 		return
 	if(held_ai == user)
-		held_ai.cancel_camera()
-		held_ai.switch_to_net_by_name(held_ai.network)
+		held_ai.switch_to_net_by_name(inherent_network)
 
 /obj/structure/ai_terminal/proc/set_terminal_active(var/is_resisting_carding)
 	if(!is_resisting_carding)
@@ -59,13 +58,15 @@
 		ai.loc = null
 		set_terminal_active(1)
 
-/obj/structure/ai_terminal/proc/pre_move_to_node(var/mob/living/silicon/ai/ai)
-	var/clear_old = 0
-	if(!(ai.network == inherent_network || ai.native_network == inherent_network))
-		var/confirm = alert("This network holds no relation to any of your old networks. Switching will cause loss of previous node access.","Confirm Switch","Yes","No")
-		if(confirm == "No")
-			return
-		clear_old = 1
+/obj/structure/ai_terminal/proc/pre_move_to_node(var/mob/living/silicon/ai/ai,var/skip_check = 0)
+	var/clear_old = 1
+	if(!skip_check)
+		clear_old = 0
+		if(!(ai.network == inherent_network || ai.native_network == inherent_network))
+			var/confirm = alert("This network holds no relation to any of your old networks. Switching will cause loss of previous node access.","Confirm Switch","Yes","No")
+			if(confirm == "No")
+				return
+			clear_old = 1
 
 	if(move_to_node(ai) && clear_old)
 		clear_old_nodes(ai)
@@ -96,13 +97,14 @@
 	if(istype(W, /obj/item/weapon/aicard))
 		var/obj/item/weapon/aicard/card = W
 		if(card.carded_ai && !held_ai)
-			move_to_node(card.carded_ai)
+			pre_move_to_node(card.carded_ai,1)
 			card.carded_ai.control_disabled = 0
 			card.carded_ai.aiRadio.disabledAi = 0
 			card.carded_ai.create_eyeobj(loc)
 			card.carded_ai.cancel_camera()
 			to_chat(user, "<span class='notice'>Transfer successful:</span> [card.carded_ai.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")
 			to_chat(card.carded_ai, "You have been uploaded to a stationary terminal. Remote device connection restored.")
+			card.carded_ai.switch_to_net_by_name(inherent_network)
 			card.clear()
 
 		else if(held_ai)

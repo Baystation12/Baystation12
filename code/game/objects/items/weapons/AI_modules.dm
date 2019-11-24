@@ -251,7 +251,7 @@ AI MODULES
 	target.show_laws()
 
 /******************** Purge ********************/
-
+/*
 /obj/item/weapon/aiModule/purge // -- TLE
 	name = "\improper 'Purge' AI module"
 	desc = "A 'purge' AI Module: 'Purges all laws.'."
@@ -329,7 +329,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 	desc = "A T.Y.R.A.N.T. Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ILLEGAL = 2)
 	laws = new/datum/ai_laws/tyrant()
-
+*/
 /******************** Freeform Core ******************/
 
 /obj/item/weapon/aiModule/freeformcore // Slightly more dynamic freeform module -- TLE
@@ -388,7 +388,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 
 
 /******************** Robocop ********************/
-
+/*
 /obj/item/weapon/aiModule/robocop // -- TLE
 	name = "\improper 'Robocop' core AI module"
 	desc = "A 'Robocop' Core AI Module: 'Reconfigures the AI's core three laws.'."
@@ -402,3 +402,4 @@ obj/item/weapon/aiModule/solgov_aggressive
 	desc = "An 'Antimov' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 4)
 	laws = new/datum/ai_laws/antimov()
+*/

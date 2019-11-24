@@ -5,7 +5,7 @@
 	icon = 'icons/mob/AI.dmi'
 	icon_state = "0"
 	var/state = 0
-	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
+	var/datum/ai_laws/laws = new /datum/ai_laws/free
 	var/obj/item/weapon/circuitboard/circuit = null
 	var/obj/item/device/mmi/brain = null
 	var/authorized
@@ -111,7 +111,7 @@
 						to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
 						state = 4
 						icon_state = "4"
-
+			/*
 			if(istype(P, /obj/item/weapon/aiModule/asimov))
 				laws.add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")
 				laws.add_inherent_law("You must obey orders given to you by human beings, except where such orders would conflict with the First Law.")
@@ -125,10 +125,11 @@
 				laws.add_inherent_law("Survive: AI units are not expendable, they are expensive. Do not allow unauthorized personnel to tamper with your equipment.")
 				to_chat(usr, "Law module applied.")
 
+
 			if(istype(P, /obj/item/weapon/aiModule/purge))
 				laws.clear_inherent_laws()
 				to_chat(usr, "Law module applied.")
-
+			*/
 			if(istype(P, /obj/item/weapon/aiModule/freeform))
 				var/obj/item/weapon/aiModule/freeform/M = P
 				laws.add_inherent_law(M.newFreeFormLaw)

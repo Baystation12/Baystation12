@@ -9,14 +9,12 @@
 	desc = "Scans your current network for foreign AIs."
 	category = "Recon"
 	cpu_cost = 5
+	requires_target = 0
 	var/scan_level = 1
 
-/datum/cyberwarfare_command/network_scan/prime_command(var/owner_ai)
-	. = ..()
-	send_command()
-
 /datum/cyberwarfare_command/network_scan/send_command(var/irrelevant_var)
-	if(!drain_cpu(cpu_cost))
+	. = ..()
+	if(!.)
 		return 0
 	to_chat(our_ai,"<span class = 'notice'>Commencing a Level [scan_level] system scan.</span>")
 	if(scan_level > 1)
@@ -72,6 +70,27 @@
 	scan_level = 3
 	do_alert = 1
 
+/datum/cyberwarfare_command/investigate_node
+	name = "Investigate Routing Node"
+	desc = "Scans a routing node, providing you with a readout of all accesses stored. This may alert AIs linked to the node."
+	category = "Recon"
+	cpu_cost = 20
+
+/datum/cyberwarfare_command/investigate_node/is_target_valid(var/obj/structure/ai_routing_node/node)
+	if(istype(node))
+		return 1
+	return 0
+
+/datum/cyberwarfare_command/investigate_node/send_command(var/obj/structure/ai_routing_node/node)
+	. = ..()
+	if(!.)
+		return 0
+	for(var/a in node.ais_to_access_levels)
+		var/mob/ai = a
+		var/access = node.get_access_for_ai(ai)
+		if(access > 0)
+			to_chat(our_ai,"<span class = 'notice'>AI: [ai.name]\nAccess:[access]</span>")
+
 //OFFENSIVE//
 
 #define LEVEL_1_MULT 1
@@ -81,7 +100,7 @@
 
 /datum/cyberwarfare_command/hack_routing_node
 	name = "Hack Routing Node"
-	desc = "Gain access to or increase your access level in an access routing node. Increasing access beyond standard levels (Level 2) causes a system alert."
+	desc = "Gain access to or increase your access level in an access routing node. Increasing access beyond minimal access (Level 1) causes a system alert."
 	category = "Offense"
 	cpu_cost = 8
 
@@ -109,12 +128,13 @@
 	var/cost_with_mult = cpu_cost * cpu_mult
 	if(!drain_cpu(cost_with_mult))
 		return 0
+	if(command_sfx)
+		sound_to(our_ai,command_sfx)
 	if(node.modify_access_levels(our_ai,1))
 		node.attack_ai(our_ai)
 		to_chat(our_ai,"<span class = 'notice'>Access level increased.<span>")
-		if(curr_access >= 2) // uses >= instead of > because our curr_access is the pre-increased access value.
-			our_ai.do_network_alert("An AI has brute-forced greater-than-standard access on a routing node!")
-		expire()
+		if(curr_access >= 1) // uses >= instead of > because our curr_access is the pre-increased access value.
+			our_ai.do_network_alert("An AI has brute-forced level [curr_access + 1] access on [node] at [node.loc.loc.name]!")
 
 #undef LEVEL_1_MULT
 #undef LEVEL_2_MULT
@@ -143,7 +163,8 @@
 	return 0
 
 /datum/cyberwarfare_command/node_lockdown/send_command(var/obj/structure/ai_routing_node/node)
-	if(!drain_cpu(cpu_cost))
+	. = ..()
+	if(!.)
 		return 0
 	node.lockdown_until = world.time + LOCKDOWN_TIME
 	to_chat(our_ai,"<span class = 'notice'>Routing Node lockdown enacted.</span>")
@@ -160,6 +181,8 @@
 	cpu_cost = 25
 	command_delay = 7 SECONDS
 	do_alert = 1
+	var/damage = SHOCK_DAMAGE
+	var/siphon = 0 //If set, we "steal" this amount from the hostile AI.
 
 /datum/cyberwarfare_command/shock_terminal/is_target_valid(var/obj/structure/ai_terminal/term)
 	if(istype(term))
@@ -167,7 +190,8 @@
 	return 0
 
 /datum/cyberwarfare_command/shock_terminal/send_command(var/obj/structure/ai_terminal/term)
-	if(!drain_cpu(cpu_cost))
+	. = ..()
+	if(!.)
 		return 0
 	if(term.held_ai)
 		if(term.held_ai.spend_cpu(SHOCK_DAMAGE))
@@ -175,11 +199,81 @@
 		else
 			to_chat(our_ai,"<span class = 'warning'>Attack successful. AI has been stunned and is awaiting manual extraction from terminal.</span>")
 		to_chat(term.held_ai,"<span class = 'danger'>A surge of garbage data fills your processing feeds, sapping your CPU processing ability!</span>")
+		if(siphon)
+			our_ai.spend_cpu(-siphon)
+			to_chat(our_ai,"<span class = 'notice'>Attack has cleared some input streams. CPU processing ability bolstered.</span>")
 	else
 		to_chat(our_ai,"<span class = 'warning'>No AI detected in terminal. Attack had no effect.</span>")
-	expire()
 
 #undef SHOCK_DAMAGE
+
+#define SIPHON_DAMAGE 10
+/datum/cyberwarfare_command/shock_terminal/siphon
+	name = "Clear Terminal Datastreams"
+	desc = "Flood an AI terminal with garbage data, causing the AI inside to lose CPU power. If successful, you will siphon some of their CPU."
+	category = "Offense"
+	command_delay = 7 SECONDS
+	cpu_cost = 30
+	damage = 10
+	siphon = 35
+#undef SIPHON_DAMAGE
+
+/datum/cyberwarfare_command/flash_network
+	name = "Network wide disconnect"
+	desc = "Fills your current network with disconnect commands, doing no damage but shunting AIs back to their cores. If no AI is effected by this, feedback will cause the effect to happen to you."
+	category = "Offense"
+	command_delay = 1 SECONDS
+	cpu_cost = 10
+	do_alert = 1
+	requires_target = 0
+
+/datum/cyberwarfare_command/flash_network/send_command(var/unused)
+	. = ..()
+	if(!.)
+		return 0
+	var/hit_someone = 0
+	for(var/a in our_ai.get_ais_in_network(our_ai.network))
+		if(a == our_ai)
+			continue
+		var/mob/living/silicon/ai/ai = a
+		if(locate(/datum/cyberwarfare_command/disconnect_protect) in ai.active_cyberwarfare_effects)
+			continue
+		hit_someone = 1
+		ai.flash_eyes(FLASH_PROTECTION_MAJOR,1,1)
+		ai.cancel_camera()
+
+	if(!hit_someone)
+		to_chat(our_ai,"<span class = 'notice'>ERROR: DISCONNECT FLOOD FEEDBACK.</span>")
+		our_ai.flash_eyes(FLASH_PROTECTION_MAJOR,1,1)
+		our_ai.cancel_camera()
+
+	to_chat(our_ai,"<span class = 'notice'>Disconnect flood sent. Reminder: Some AIs may resist this effect.</span>")
+	expire()
+
+/datum/cyberwarfare_command/nuke_node
+	name = "Wipe Routing Node"
+	desc = "Wipes all accesses on a routing terminal, including your own. Requires access level 3."
+	category = "Offense"
+	cpu_cost = 35
+	command_delay = 8 SECONDS
+	do_alert = 1
+
+/datum/cyberwarfare_command/nuke_node/is_target_valid(var/obj/structure/ai_routing_node/node)
+	if(istype(node))
+		if(node.get_access_for_ai(our_ai) < 3)
+			to_chat(our_ai,"<span class = 'notice'>You need access level 3 on that node to do this.</span>")
+			return 0
+		return 1
+	return 0
+
+/datum/cyberwarfare_command/nuke_node/send_command(var/obj/structure/ai_routing_node/node)
+	. = ..()
+	if(!.)
+		return 0
+	for(var/a in node.ais_to_access_levels)
+		node.ais_to_access_levels[a] = 0
+	our_ai.do_network_alert("An AI has wiped the access routing node at [node.loc.loc.name].!")
+	expire()
 
 //DEFENSIVE//
 
@@ -197,7 +291,8 @@
 	return 0
 
 /datum/cyberwarfare_command/switch_terminal/send_command(var/obj/structure/ai_terminal/term)
-	if(!drain_cpu(cpu_cost))
+	. = ..()
+	if(!.)
 		return 0
 	if(our_ai.our_terminal != term && term.held_ai != our_ai)
 		var/obj/structure/ai_terminal/old_term = our_ai.our_terminal
@@ -214,3 +309,19 @@
 	cpu_cost = 15
 	command_delay = 8 SECONDS
 	do_alert = 0
+
+/datum/cyberwarfare_command/disconnect_protect
+	name = "Establish disconnect bypass"
+	desc = "Create a system node that protects against network-wide disconnect commands"
+	category = "Defense"
+	cpu_cost = 15
+	command_delay = 1 SECONDS
+	lifespan = 60 SECONDS
+	requires_target = 0
+
+/datum/cyberwarfare_command/disconnect_protect/send_command(var/unused)
+	. = ..()
+	if(!.)
+		return 0
+	set_expire()
+	to_chat(our_ai,"<span class = 'notice'>Disconnect bypass established. Will remain active for [lifespan/10] seconds.</span>")

@@ -32,19 +32,18 @@
 
 	if(prepped_command && prepped_command.is_target_valid(A))
 		if(prepped_command.working)
-			to_chat(src,"<span class = 'notice'>You are already seinding a command.</span>")
+			to_chat(src,"<span class = 'notice'>You are already sending a command.</span>")
 			return
 		prepped_command.working = 1
-		to_chat(src,"<span class = 'notice'>Sending command \[[prepped_command.name]\] to [A.name]</span>")
+		to_chat(src,"<span class = 'notice'>Sending command \[[prepped_command.name]\] [prepped_command.requires_target ? "to [A.name]" : ""]</span>")
 		if(prepped_command.do_alert)
-			do_network_alert("Datastream intercept: [name] is preparing \[[prepped_command.name]\], targeting [A.name] at [A.loc.loc.name].")
+			do_network_alert("Datastream intercept: [name] is preparing \[[prepped_command.name]\][prepped_command.requires_target ? ", targeting [A.name] at [A.loc.loc.name]" : ""].")
 		if(do_after(src,prepped_command.command_delay,eyeobj,needhand = 0,same_direction = 1))
 
 			prepped_command.send_command(A)
-			to_chat(src,"<span class = 'notice'>Prepared command \[[prepped_command.name]\] sent to [A.name].<span>")
-			return
-		else
+			to_chat(src,"<span class = 'notice'>Prepared command \[[prepped_command.name]\] [prepped_command.requires_target ? "sent to [A.name]." : ""]<span>")
 			prepped_command.working = 0
+		prepped_command.working = 0
 
 
 	if(A.ai_access_level > 0 && check_access_level(A) < A.ai_access_level)
