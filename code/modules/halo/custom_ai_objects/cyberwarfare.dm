@@ -6,10 +6,12 @@
 
 	var/mob/living/silicon/ai/our_ai
 
+	var/working = 0 //Are we currently doing anything (used for onclick stopping spamming)
+
 	var/cpu_cost = 0 //The cost of CPU points.
 	var/maint_cost = 0 //Whilst active, lower our max CPU count by this.
 	var/command_delay = 2 SECONDS //The do_after delay for sending out a command via AI OnClick
-	var/do_alert = 0 //Perform a network wide alert when this command is run. Some commands will override this.
+	var/do_alert = 0 //Perform a network wide alert when this command is run, occurring before the do_after completes.
 
 	var/lifespan = -1 //If -1, we don't apply a lifespan.
 	var/expire_at = -1

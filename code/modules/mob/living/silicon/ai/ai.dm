@@ -72,10 +72,13 @@ var/list/ai_verbs_default = list(
 
 	var/multitool_mode = 0
 
+	var/default_ai_icon = /datum/ai_icon/blue
+	var/static/list/custom_ai_icons_by_ckey_and_name
+
 	var/cpu_points_max = 100
 	var/cpu_points = 100 //Spent on Terminal access, node access and ability usage.
 
-	var/native_network = "Exodus"//If we're in this network, we don't spend CPU points UNLESS another AI is in the network..
+	var/native_network = "Exodus"//We recieve alerts from this network, even if we're not in it.
 	var/obj/structure/ai_terminal/our_terminal = null
 	var/list/nodes_accessed = list()
 
@@ -84,10 +87,15 @@ var/list/ai_verbs_default = list(
 	//CyberWarfare Stuff//
 	var/datum/cyberwarfare_command/prepped_command
 	var/list/active_cyberwarfare_effects = list() //Commands are placed in here if their code requires processing on life ticks.
-	var/list/cyberwarfare_commands = newlist(/datum/cyberwarfare_command/network_scan,/datum/cyberwarfare_command/network_scan/l2,/datum/cyberwarfare_command/network_scan/l3,/datum/cyberwarfare_command/hack_routing_node,/datum/cyberwarfare_command/node_lockdown)
-
-	var/default_ai_icon = /datum/ai_icon/blue
-	var/static/list/custom_ai_icons_by_ckey_and_name
+	var/list/cyberwarfare_commands = newlist(\
+	/datum/cyberwarfare_command/network_scan,
+	/datum/cyberwarfare_command/network_scan/l2,
+	/datum/cyberwarfare_command/network_scan/l3,
+	/datum/cyberwarfare_command/hack_routing_node,
+	/datum/cyberwarfare_command/node_lockdown,
+	/datum/cyberwarfare_command/shock_terminal,
+	/datum/cyberwarfare_command/switch_terminal,
+	/datum/cyberwarfare_command/switch_terminal/stealth)
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
 	src.verbs |= ai_verbs_default
@@ -127,11 +135,15 @@ var/list/ai_verbs_default = list(
 	set category = "EWAR"
 	set hidden = 1
 
-	prep_EWAR_command(command)
+	prep_ewar_command_proc(command)
 
-/mob/living/silicon/ai/proc/prep_EWAR_command(var/command_pick = "" as null)
-	set name = "Prepare EWAR Command"
+/mob/living/silicon/ai/proc/prep_EWAR_command()
+	set name = "Prepare EWAR command"
 	set category = "EWAR"
+
+	prep_ewar_command_proc(null)
+
+/mob/living/silicon/ai/proc/prep_ewar_command_proc(var/command_pick)
 
 	var/do_list_pick = isnull(command_pick) || command_pick == ""
 
@@ -390,17 +402,13 @@ var/list/ai_verbs_default = list(
 	return atom_area.ai_routing_node.get_access_for_ai(src)
 
 /mob/living/silicon/ai/proc/spend_cpu(var/amt,var/check_only = 0)
-	var/new_cpu = cpu_points - amt
+	var/new_cpu = min((cpu_points - amt),cpu_points_max)
 	if(new_cpu < 0)
 		if(!check_only)
 			var/new_stunned = stunned + -new_cpu
-			if(new_stunned > (cpu_points_max/2))
-				Stun((cpu_points_max/2))
-			else
-				Stun(new_stunned)
+			Stun(max(new_stunned,(cpu_points_max/2)))
+			cpu_points = 0
 		return 0
-	if(new_cpu > cpu_points_max)
-		new_cpu = cpu_points_max
 
 	if(!check_only)
 		cpu_points = new_cpu

@@ -33,6 +33,7 @@
 	if (!camera)
 		return 0
 
+	switch_to_net_by_name(network)
 	var/obj/machinery/camera/C = track.cameras[camera]
 	src.eyeobj.setLoc(C)
 

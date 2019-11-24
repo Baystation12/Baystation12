@@ -13,10 +13,10 @@
 	return 0
 
 /obj/machinery/camera/autoname/invis/debug_cov
-	network = "Covenant Ship"
+	network = "cov debug"
 
 /obj/machinery/camera/autoname/invis/debug_unsc
-	network = "UNSC Ship"
+	network = "unsc debug"
 
 /obj/machinery/camera/autoname/invis/debug_innie
-	network = "Innie Ship"
+	network = "innie debug"

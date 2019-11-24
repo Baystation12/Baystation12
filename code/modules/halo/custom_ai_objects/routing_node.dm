@@ -19,6 +19,7 @@
 	if(ai in ais_to_access_levels)
 		to_chat(ai,"<span class = 'notice'>Access credentials re-obtained from node.<span>")
 		ai.nodes_accessed |= src
+	to_chat(ai,"<span class = 'notice'>Current access level: [get_access_for_ai(ai)]</span>")
 
 /obj/structure/ai_routing_node/proc/add_ai_to_list(var/mob/living/silicon/ai,var/access_override = ROUTING_ACCESS_MINOR)
 	ais_to_access_levels[ai] = access_override
@@ -35,12 +36,13 @@
 /obj/structure/ai_routing_node/proc/modify_access_levels(var/mob/ai,var/modify_by = 1)
 	if(world.time < lockdown_until)
 		to_chat(ai,"<span class = 'notice'>Node is currently under lockdown. No access changes may occur.</span>")
-		return
+		return 0
 	var/curr_access = get_access_for_ai(ai)
 	if(curr_access == 0)
 		add_ai_to_list(ai,modify_by)
-		return
+		return 1
 	ais_to_access_levels[ai] = curr_access + modify_by
+	return 1
 
 /obj/structure/ai_routing_node/Initialize()
 	. = ..()

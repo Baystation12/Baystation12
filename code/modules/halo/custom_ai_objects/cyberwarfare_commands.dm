@@ -1,4 +1,6 @@
 
+//RECON//
+
 #define NET_SCAN_L2_NODESCAN_LOWER 5
 #define NET_SCAN_L2_NODESCAN_UPPER 10
 
@@ -7,7 +9,7 @@
 	desc = "Scans your current network for foreign AIs."
 	category = "Recon"
 	cpu_cost = 5
-	var/scan_level = 1 //1 - 3
+	var/scan_level = 1
 
 /datum/cyberwarfare_command/network_scan/prime_command(var/owner_ai)
 	. = ..()
@@ -37,9 +39,9 @@
 				for(var/i = 0,i<=rand(NET_SCAN_L2_NODESCAN_LOWER,NET_SCAN_L2_NODESCAN_LOWER),i++)
 					if(node_accessed_tmp.len == 0)
 						break
-					var/obj/picked = pick(node_accessed_tmp)
+					var/obj/structure/ai_routing_node/picked = pick(node_accessed_tmp)
 					node_accessed_tmp -= picked
-					to_chat(our_ai,"<span class = 'notice'>[picked.name] at [picked.loc.loc.name].<span>")
+					to_chat(our_ai,"<span class = 'notice'>[picked.name] at [picked.loc.loc.name], access level [picked.get_access_for_ai(ai)].<span>")
 
 		if(3)
 			for(var/ai_untyped in ais_in_net)
@@ -47,8 +49,9 @@
 					continue
 				var/mob/living/silicon/ai/ai = ai_untyped
 				to_chat(our_ai,"<span class = 'notice'>Artificial Intelligence Detected: [ai.name]\nDisplaying found access nodes:</span>")
-				for(var/obj/node in ai.nodes_accessed)
-					to_chat(our_ai,"<span class = 'notice'>[node.name] at [node.loc.loc.name].<span>")
+				for(var/n in ai.nodes_accessed)
+					var/obj/structure/ai_routing_node/node = n
+					to_chat(our_ai,"<span class = 'notice'>[node.name] at [node.loc.loc.name], access level [node.get_access_for_ai(ai)].<span>")
 
 	to_chat(our_ai,"<span class = 'notice'>Level [scan_level] system scan finished.<span>")
 	expire()
@@ -59,6 +62,7 @@
 	category = "Recon"
 	cpu_cost = 10
 	scan_level = 2
+	do_alert = 1
 
 /datum/cyberwarfare_command/network_scan/l3
 	name = "Network Scan (L3)"
@@ -66,6 +70,9 @@
 	category = "Recon"
 	cpu_cost = 20
 	scan_level = 3
+	do_alert = 1
+
+//OFFENSIVE//
 
 #define LEVEL_1_MULT 1
 #define LEVEL_2_MULT 1.5
@@ -74,7 +81,7 @@
 
 /datum/cyberwarfare_command/hack_routing_node
 	name = "Hack Routing Node"
-	desc = "Gain access to or increase your access level in an access routing node."
+	desc = "Gain access to or increase your access level in an access routing node. Increasing access beyond standard levels (Level 2) causes a system alert."
 	category = "Offense"
 	cpu_cost = 8
 
@@ -122,6 +129,7 @@
 	category = "Offense"
 	cpu_cost = 15 //Slightly less than getting to lvl 2 access.
 	command_delay = 5 SECONDS
+	do_alert = 1
 
 /datum/cyberwarfare_command/node_lockdown/is_target_valid(var/obj/structure/ai_routing_node/node)
 	if(istype(node))
@@ -141,3 +149,68 @@
 	to_chat(our_ai,"<span class = 'notice'>Routing Node lockdown enacted.</span>")
 	our_ai.do_network_alert("An AI has enacted a connection lockdown on a routing node.")
 	expire()
+
+#undef LOCKDOWN_TIME
+#define SHOCK_DAMAGE 20
+
+/datum/cyberwarfare_command/shock_terminal
+	name = "Shock Terminal"
+	desc = "Flood an AI terminal with garbage data, causing the AI inside to lose CPU power."
+	category = "Offense"
+	cpu_cost = 25
+	command_delay = 7 SECONDS
+	do_alert = 1
+
+/datum/cyberwarfare_command/shock_terminal/is_target_valid(var/obj/structure/ai_terminal/term)
+	if(istype(term))
+		return 1
+	return 0
+
+/datum/cyberwarfare_command/shock_terminal/send_command(var/obj/structure/ai_terminal/term)
+	if(!drain_cpu(cpu_cost))
+		return 0
+	if(term.held_ai)
+		if(term.held_ai.spend_cpu(SHOCK_DAMAGE))
+			to_chat(our_ai,"<span class = 'warning'>Attack successful. AI processing capability damaged.</span>")
+		else
+			to_chat(our_ai,"<span class = 'warning'>Attack successful. AI has been stunned and is awaiting manual extraction from terminal.</span>")
+		to_chat(term.held_ai,"<span class = 'danger'>A surge of garbage data fills your processing feeds, sapping your CPU processing ability!</span>")
+	else
+		to_chat(our_ai,"<span class = 'warning'>No AI detected in terminal. Attack had no effect.</span>")
+	expire()
+
+#undef SHOCK_DAMAGE
+
+//DEFENSIVE//
+
+/datum/cyberwarfare_command/switch_terminal
+	name = "Switch Terminal (Brute Force)"
+	desc = "Transfer your consciousness to another AI terminal. Sends a system-wide alert due to the brute force nature, but is faster."
+	category = "Defense"
+	cpu_cost = 10
+	command_delay = 4 SECONDS
+	do_alert = 1
+
+/datum/cyberwarfare_command/switch_terminal/is_target_valid(var/obj/structure/ai_terminal/term)
+	if(istype(term) && !istype(our_ai.loc,/obj/item/weapon/aicard))
+		return 1
+	return 0
+
+/datum/cyberwarfare_command/switch_terminal/send_command(var/obj/structure/ai_terminal/term)
+	if(!drain_cpu(cpu_cost))
+		return 0
+	if(our_ai.our_terminal != term && term.held_ai != our_ai)
+		var/obj/structure/ai_terminal/old_term = our_ai.our_terminal
+		if(term.check_move_to(our_ai))
+			if(!isnull(old_term))
+				old_term.ai_exit_node(our_ai)
+			term.pre_move_to_node(our_ai)
+			our_ai.cancel_camera()
+
+/datum/cyberwarfare_command/switch_terminal/stealth
+	name = "Switch Terminal (Infiltration)"
+	desc = "Transfer your consciousness to another AI terminal. Utilises software and hardware vulnerabilities to bypass the usual system alert, but is slower and more expensive."
+	category = "Defense"
+	cpu_cost = 15
+	command_delay = 8 SECONDS
+	do_alert = 0

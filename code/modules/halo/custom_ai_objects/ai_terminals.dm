@@ -4,6 +4,8 @@
 	desc = "This terminal contains hardware to store, upload and download AI constructs."
 	icon = 'code/modules/halo/icons/machinery/ai_terminals.dmi'
 	icon_state = "unscterminal"
+	anchored = 1
+	density = 1
 	var/mob/living/silicon/ai/held_ai = null
 	var/allow_remote_moveto = 1
 	var/inherent_network = "Exodus" //Our inherent camera network.
@@ -27,15 +29,9 @@
 /obj/structure/ai_terminal/attack_ai(var/mob/living/silicon/ai/user)
 	if(!istype(user))
 		return
-	if(user.our_terminal != src && held_ai != user)
-		var/obj/structure/ai_terminal/old_term = user.our_terminal
-		if(check_move_to(user))
-			if(!isnull(old_term))
-				old_term.ai_exit_node(user)
-			pre_move_to_node(user)
-			user.cancel_camera()
 	if(held_ai == user)
 		held_ai.cancel_camera()
+		held_ai.switch_to_net_by_name(held_ai.network)
 
 /obj/structure/ai_terminal/proc/set_terminal_active(var/is_resisting_carding)
 	if(!is_resisting_carding)
@@ -94,7 +90,7 @@
 
 /obj/structure/ai_terminal/proc/can_card_ai()
 	if(held_ai)
-		return !held_ai.resist_carding
+		return !held_ai.resist_carding || held_ai.stunned > 0
 
 /obj/structure/ai_terminal/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/aicard))
@@ -135,37 +131,48 @@
 /obj/structure/ai_terminal/spawn_terminal
 	name = "AI Core"
 	desc = "A terminal containing the main consciousness of an AI. Security reasons leave remote access disabled on this terminal."
-	icon = 'icons/mob/AI.dmi'
-	icon_state = "ai-empty"
 	allow_remote_moveto = 0
 
 /obj/structure/ai_terminal/spawn_terminal/unsc
+	icon_state = "unscspawn"
 	radio_channels_access = list("SHIPCOM","TEAMCOM","SQUADCOM","FLEETCOM","EBAND","TACCOM","ONICOM","SIERRACOM")
 
 /obj/structure/ai_terminal/spawn_terminal/city
+	icon_state = "unscspawn"
 	radio_channels_access = list("GCPD","MEDCOM","EBAND")
 
 /obj/structure/ai_terminal/spawn_terminal/covenant
+	icon_state = "covspawn"
 	radio_channels_access = list("BattleNet","EBAND")
 
 /obj/structure/ai_terminal/spawn_terminal/innie
+	icon_state = "urfspawn"
 	radio_channels_access = list("CMDOCOM","EBAND")
 
 /obj/structure/ai_terminal/spawn_terminal/innie/Initialize()
 	. = ..()
 	radio_channels_access += halo_frequencies.innie_channel_name
 
+/obj/structure/ai_terminal/spawn_terminal/unsc/unsc_debug
+	inherent_network = "unsc debug"
+
+/obj/structure/ai_terminal/spawn_terminal/covenant/cov_debug
+	inherent_network = "cov debug"
+
+/obj/structure/ai_terminal/spawn_terminal/innie/innie_debug
+	inherent_network = "innie debug"
+
 /obj/structure/ai_terminal/unsc_debug
 	icon_state = "unscterminal"
-	inherent_network = "UNSC Ship"
+	inherent_network = "unsc debug"
 
 /obj/structure/ai_terminal/cov_debug
 	icon_state = "covterminal"
-	inherent_network = "Covenant Ship"
+	inherent_network = "cov debug"
 
 /obj/structure/ai_terminal/innie_debug
 	icon_state = "urfterminal"
-	inherent_network = "Innie Ship"
+	inherent_network = "innie debug"
 
 /obj/structure/ai_terminal/debug
 	name = "Forerunner Access Terminal"
