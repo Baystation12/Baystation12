@@ -86,12 +86,11 @@
 	                    SKILL_MEDICAL     = SKILL_EXPERT,
 	                    SKILL_ANATOMY     = SKILL_EXPERT,
 	                    SKILL_CHEMISTRY   = SKILL_BASIC,
-	                    SKILL_VIROLOGY    = SKILL_BASIC)
+	                    SKILL_VIROLOGY    = HAS_PERK)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
+	                    SKILL_CHEMISTRY   = SKILL_MAX)
 	skill_points = 28
 
 /datum/job/hop

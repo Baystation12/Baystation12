@@ -29,13 +29,12 @@
 	                    SKILL_MEDICAL     = SKILL_EXPERT,
 	                    SKILL_ANATOMY     = SKILL_EXPERT,
 	                    SKILL_CHEMISTRY   = SKILL_BASIC,
-	                    SKILL_VIROLOGY    = SKILL_BASIC)
+	                    SKILL_VIROLOGY    = HAS_PERK)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
-	skill_points = 28
+	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	skill_points = 20
 
 	access = list(access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
 			            access_crematorium, access_chemistry, access_surgery,
@@ -77,7 +76,7 @@
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
+	                    SKILL_VIROLOGY    = HAS_PERK)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
@@ -85,7 +84,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
-	skill_points = 26
+	skill_points = 22
 
 /datum/job/medical_trainee
 	title = "Trainee Medical Technician"
@@ -121,7 +120,7 @@
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
 	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
+	                    SKILL_VIROLOGY    = HAS_PERK)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_surgery, access_medical_equip, access_solgov_crew)

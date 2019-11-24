@@ -119,7 +119,7 @@
 			SSnano.update_uis(src)
 
 	if((scanning || splicing || burning) && dish && dish.virus2)
-		infect_nearby(dish.virus2, 40, SKILL_PROF)
+		infect_nearby(dish.virus2, 80)
 
 /obj/machinery/computer/diseasesplicer/OnTopic(mob/user, href_list)
 	operator_skill = user.get_skill_value(core_skill)
