@@ -16,6 +16,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_goto_location,
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
+	/mob/living/silicon/ai/proc/manifest_hologram_verb,
 	//mob/living/silicon/ai/proc/ai_network_change,
 	/mob/living/silicon/ai/proc/ai_roster,
 	//mob/living/silicon/ai/proc/ai_statuschange,
@@ -57,6 +58,7 @@ var/list/ai_verbs_default = list(
 	var/list/connected_robots = list()
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.
+	var/obj/effect/ai_holo/our_holo
 	var/obj/item/device/pda/ai/aiPDA = null
 	var/obj/item/device/multitool/aiMulti = null
 	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
@@ -65,7 +67,7 @@ var/list/ai_verbs_default = list(
 	var/last_announcement = ""
 	var/control_disabled = 0
 	var/datum/announcement/priority/announcement
-	var/hologram_follow = 1 //This is used for the AI eye, to determine if a holopad's hologram should follow it or not
+	var/hologram_follow = 1
 	var/resist_carding = 1
 
 	var/datum/ai_icon/selected_sprite			// The selected icon set
@@ -296,7 +298,7 @@ var/list/ai_verbs_default = list(
 	to_chat(src, "<B>To look at other areas, click on yourself to get a camera menu.</B>")
 	to_chat(src, "<B>While observing through a camera, you can use most (networked) devices which you can see, such as computers, APCs, intercoms, doors, etc.</B>")
 	to_chat(src, "To use something, simply click on it.")
-	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active holopad.")
+	to_chat(src, "Use say [get_language_prefix()]b to speak to your cyborgs through binary. Use say :h to speak from an active hologram.")
 	to_chat(src, "For department channels, use the following say commands:")
 
 	job = "AI"
@@ -654,6 +656,26 @@ var/list/ai_verbs_default = list(
 
 	set_ai_status_displays(src)
 	return
+
+/mob/living/silicon/ai/proc/manifest_hologram_verb()
+	set name = "Manifest Hologram"
+	set desc = "Manifest your hologram at your AI eye's current location."
+	set category = "Silicon Commands"
+
+	manifest_hologram()
+
+/mob/living/silicon/ai/proc/manifest_hologram()
+	if(isnull(eyeobj))
+		to_chat(src,"<span class = 'notice'>You need to have an AI eye to manifest your hologram.</span>")
+		return
+
+	if(our_holo)
+		our_holo.visible_message("<span class = 'notice'>[our_holo.name] demanifests!</span>")
+		qdel(our_holo)
+		our_holo = null
+	else
+		our_holo = new(eyeobj.loc,src,holo_icon)
+		our_holo.visible_message("<span class = 'notice'>[our_holo.name] flickers to life before your eyes!</span>")
 
 //I am the icon meister. Bow fefore me.	//>fefore
 /mob/living/silicon/ai/proc/ai_hologram_change()

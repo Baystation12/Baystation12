@@ -42,8 +42,9 @@
 
 			prepped_command.send_command(A)
 			to_chat(src,"<span class = 'notice'>Prepared command \[[prepped_command.name]\] [prepped_command.requires_target ? "sent to [A.name]." : ""]<span>")
+
+		if(prepped_command) //Some commands auto-clear once sent.
 			prepped_command.working = 0
-		prepped_command.working = 0
 
 
 	if(A.ai_access_level > 0 && check_access_level(A) < A.ai_access_level)

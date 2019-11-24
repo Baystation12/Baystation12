@@ -126,6 +126,11 @@
 	ai.our_terminal = src
 	ai.network = inherent_network
 	ai.nodes_accessed |= inherent_nodes.Copy()
+	for(var/n in inherent_nodes)
+		var/obj/structure/ai_routing_node/node = n
+		var/access = node.get_access_for_ai(ai)
+		if(access < 3)
+			node.modify_access_levels(ai,3-access)
 	ai.switch_to_net_by_name(inherent_network)
 	set_terminal_active(ai.resist_carding)
 	apply_radio_channels(ai)

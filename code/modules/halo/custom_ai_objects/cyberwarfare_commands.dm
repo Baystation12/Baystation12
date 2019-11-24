@@ -46,7 +46,7 @@
 				if(ai_untyped == our_ai)
 					continue
 				var/mob/living/silicon/ai/ai = ai_untyped
-				to_chat(our_ai,"<span class = 'notice'>Artificial Intelligence Detected: [ai.name]\nDisplaying found access nodes:</span>")
+				to_chat(our_ai,"<span class = 'notice'>Artificial Intelligence Detected: [ai.name]. Terminal Located at [ai.our_terminal.loc.loc.name]\nDisplaying found access nodes:</span>")
 				for(var/n in ai.nodes_accessed)
 					var/obj/structure/ai_routing_node/node = n
 					to_chat(our_ai,"<span class = 'notice'>[node.name] at [node.loc.loc.name], access level [node.get_access_for_ai(ai)].<span>")
@@ -133,7 +133,7 @@
 	if(node.modify_access_levels(our_ai,1))
 		node.attack_ai(our_ai)
 		to_chat(our_ai,"<span class = 'notice'>Access level increased.<span>")
-		if(curr_access >= 1) // uses >= instead of > because our curr_access is the pre-increased access value.
+		if(curr_access >= 2) // uses >= instead of > because our curr_access is the pre-increased access value.
 			our_ai.do_network_alert("An AI has brute-forced level [curr_access + 1] access on [node] at [node.loc.loc.name]!")
 
 #undef LEVEL_1_MULT
