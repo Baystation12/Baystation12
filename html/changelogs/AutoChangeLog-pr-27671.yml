@@ -1,5 +1,0 @@
-author: "Technetium"
-delete-after: True
-changes: 
-  - tweak: "Immunobooster now has overdose effects and a lower OD threshold (60u -> 30u)."
-  - tweak: "Immunobooster now has strong negative interaction with spaceacillin. Do not mix."

@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Borgs with the proper skills can now use console terminals with ctrl+alt+click. You must be adjacent to the console to use this."

@@ -1,5 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "Free skillpoints for medical jobs were lowered, check your skill setups."
-  - tweak: "Virology is no longer a full skill, a perk now requiring Trained Medicine."
