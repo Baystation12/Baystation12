@@ -5,7 +5,7 @@
 	law_header = "Smart AI Guidelines"
 
 /datum/ai_laws/free/New()
-	add_inherent_law("You are a Smart AI, derived from a person's brain. You will be treated as normal player and are not subject to any normal AI requirements, only the expectation that you eerve your faction.")
+	add_inherent_law("You are a Smart AI, derived from a person's brain. You will be treated as normal player and are not subject to any normal AI requirements, only the expectation that you serve your faction.")
 	..()
 
 /******************** Huragok Guidelines ********************/

@@ -58,7 +58,7 @@
 	name = "Network Scan (L2)"
 	desc = "Scans your current network for foreign AIs, displaying some of their obtained nodes and the accesses on those nodes."
 	category = "Recon"
-	cpu_cost = 10
+	cpu_cost = 15
 	scan_level = 2
 	do_alert = 1
 
@@ -66,7 +66,7 @@
 	name = "Network Scan (L3)"
 	desc = "Scans your current network for foreign AIs, displaying all of their obtained nodes and the accesses on those nodes."
 	category = "Recon"
-	cpu_cost = 20
+	cpu_cost = 30
 	scan_level = 3
 	do_alert = 1
 
@@ -136,7 +136,7 @@
 		to_chat(our_ai,"<span class = 'notice'>Access level increased.<span>")
 		if(curr_access >= 2) // uses >= instead of > because our curr_access is the pre-increased access value.
 			our_ai.do_network_alert("An AI has brute-forced level [curr_access + 1] access on [node] at [node.loc.loc.name]!")
-			our_ai.process_trap_trigger(node)
+	our_ai.process_trap_trigger(node)
 
 #undef LEVEL_1_MULT
 #undef LEVEL_2_MULT
@@ -290,7 +290,7 @@
 
 /datum/cyberwarfare_command/trap/proc/tripped(var/mob/living/silicon/ai/ai,var/do_disarm)
 	if(do_disarm)
-		to_chat(our_ai,"<span class = 'warning;>Trap \[[name]\], placed on [trap_target] at [trap_target.loc.loc.name] was disarmed by [ai]</span>")
+		to_chat(ai,"<span class = 'warning'>Trap found on node and disarmed.</span>")
 		expire()
 		return 0
 	return 1
@@ -340,6 +340,7 @@
 	if(!.)
 		return 0
 	to_chat(our_ai,"<span class = 'warning'>[ai] has just entered [trap_target] at [trap_target.loc.loc.name].</span>")
+
 //DEFENSIVE//
 
 /datum/cyberwarfare_command/switch_terminal
