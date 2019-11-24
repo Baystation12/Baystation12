@@ -38,7 +38,8 @@
 			extension_data += args.Copy(3)
 		source.extensions[extension_base_type] = extension_data
 
-/proc/get_or_create_extension(var/datum/source, var/base_type, var/extension_type)
+/proc/get_or_create_extension(var/datum/source, var/datum/extension/extension_type)
+	var/base_type = initial(extension_type.base_type)
 	if(!has_extension(source, base_type))
 		set_extension(arglist(args))
 	return get_extension(source, base_type)
@@ -56,7 +57,7 @@
 
 //Fast way to check if it has an extension, also doesn't trigger instantiation of lazy loaded extensions
 /proc/has_extension(var/datum/source, var/base_type)
-	return (source.extensions && source.extensions[base_type])
+	return !!(source.extensions && source.extensions[base_type])
 
 /proc/construct_extension_instance(var/extension_type, var/datum/source, var/list/arguments)
 	arguments = list(source) + arguments
