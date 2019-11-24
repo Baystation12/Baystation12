@@ -39,9 +39,11 @@
 		if(prepped_command.do_alert)
 			do_network_alert("Datastream intercept: [name] is preparing \[[prepped_command.name]\][prepped_command.requires_target ? ", targeting [A.name] at [A.loc.loc.name]" : ""].")
 		if(do_after(src,prepped_command.command_delay,eyeobj,needhand = 0,same_direction = 1))
-
-			prepped_command.send_command(A)
-			to_chat(src,"<span class = 'notice'>Prepared command \[[prepped_command.name]\] [prepped_command.requires_target ? "sent to [A.name]." : ""]<span>")
+			if(prepped_command)
+				prepped_command.send_command(A)
+				to_chat(src,"<span class = 'notice'>Prepared command \[[prepped_command.name]\] [prepped_command.requires_target ? "sent to [A.name]." : ""]<span>")
+			else
+				to_chat(src,"<span class = 'notice'>ERROR: Command has been nulled.</span>")
 
 		if(prepped_command) //Some commands auto-clear once sent.
 			prepped_command.working = 0
