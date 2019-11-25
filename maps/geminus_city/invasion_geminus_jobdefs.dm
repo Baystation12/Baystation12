@@ -16,8 +16,10 @@
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_xo,\
 		/datum/job/bertelsunsc_ship_marine,\
+		/datum/job/unsc_ship_marinesquad,\
 		/datum/job/unscbertels_ship_crew,\
 		/datum/job/unsc_ship_iwo,\
+		/datum/job/unsc_ship_marinesergeant,\
 		/datum/job/unsc_ship_marineplatoon,\
 		/datum/job/bertelsODST,\
 		/datum/job/bertelsODSTO,\
@@ -30,7 +32,10 @@
 		/datum/job/covenant/sangheili_ultra,\
 		/datum/job/covenant/sangheili_shipmaster,\
 		/datum/job/covenant/kigyarminor,\
-		/datum/job/covenant/unggoy_minor,\
+		/datum/job/covenant/unggoy_minor,
+		/datum/job/covenant/unggoy_major,\
+		/datum/job/covenant/unggoy_ultra,\
+		/datum/job/covenant/unggoy_deacon,\
 		/datum/job/covenant/skirmmurmillo,\
 		/datum/job/covenant/skirmcommando,\
 		/datum/job/covenant/brute_minor,\

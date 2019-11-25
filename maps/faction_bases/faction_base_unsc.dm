@@ -25,6 +25,8 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 		/datum/job/unscbertels_co,\
 		/datum/job/unscbertels_medical_crew,\
 		/datum/job/unscbertels_ship_crew,\
+		/datum/job/unsc_ship_marinesergeant,\
+		/datum/job/unsc_ship_marinesquad,\
 )
 
 /datum/spawnpoint/unsc_base/New()

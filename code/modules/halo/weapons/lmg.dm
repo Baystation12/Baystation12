@@ -19,9 +19,8 @@
 	one_hand_penalty = -1
 	burst = 5
 	burst_delay = 1
-	fire_delay = 2
 	burst_accuracy = list(0,-1,-1,-2,-2)
-	dispersion = list(1.0, 1.2, 1.3, 1.4, 1.5)
+	dispersion = list(0.8, 1.0, 1.3, 1.5, 1.8)
 	w_class = ITEM_SIZE_HUGE
 	wielded_item_state = "SAW-wielded"
 	item_icons = list(
@@ -30,8 +29,8 @@
 		)
 
 	firemodes = list(
-		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(1.0, 1.1, 1.1, 1.1, 1.2)),
-		list(mode_name="long bursts",	burst=8, move_delay=8, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.1, 1.1, 1.2, 1.3, 1.3, 1.3, 1.4)),
+		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(0.8, 1.0, 1.3, 1.5, 1.8)),
+		list(mode_name="long bursts",	burst=8, move_delay=8, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(0.8, 1.0, 1.3, 1.5, 1.8)),
 		)
 
 /obj/item/weapon/gun/projectile/m739_lmg/update_icon()
@@ -58,9 +57,8 @@
 	one_hand_penalty = -1
 	burst = 5
 	burst_delay = 1
-	fire_delay = 2.5
 	burst_accuracy = list(0,-1,-1,-2,-2)
-	dispersion = list(1.1, 1.2, 1.4, 1.5, 1.6)
+	dispersion = list(0.8, 1.0, 1.3, 1.5, 1.8)
 
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
@@ -69,8 +67,8 @@
 		)
 
 	firemodes = list(
-		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(1.1, 1.2, 1.2, 1.3, 1.4)),
-		list(mode_name="long bursts",	burst=8, move_delay=8, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.1, 1.2, 1.2, 1.3, 1.4, 1.4, 1.4, 1.4)),
+		list(mode_name="short bursts",	burst=5, move_delay=6, burst_accuracy = list(0,-1,-1,-2,-2),          dispersion = list(0.8, 1.0, 1.3, 1.5, 1.8)),
+		list(mode_name="long bursts",	burst=8, move_delay=8, burst_accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(0.8, 1.0, 1.3, 1.5, 1.8)),
 		)
 
 /obj/item/weapon/gun/projectile/m739_lmg/lmg30cal/update_icon()

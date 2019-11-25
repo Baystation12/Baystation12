@@ -41,7 +41,7 @@
 /obj/item/clothing/head/helmet/marine/medic/visor
 	name = "Olive Camo CH251-V Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "CH252 Helmet Medic"
+	item_state = "CH252 Visor Helmet Medic"
 	icon_state = "helmet medic_obj"
 	body_parts_covered = HEAD|EYES
 
@@ -59,8 +59,26 @@
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "CH252 Visor Helmet B"
+	item_state = "CH252 Helmet B"
 	icon_state = "helmet_b"
+	body_parts_covered = HEAD|EYES
+
+/obj/item/clothing/head/helmet/marine/medic/brown
+	name = "Brown Camo CH251 Helmet"
+	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Helmet Medic B"
+	icon_state = "helmet medic-b_obj"
+	body_parts_covered = HEAD|EYES
+
+/obj/item/clothing/head/helmet/marine/medic/brownvisor
+	name = "Brown Camo CH251 Helmet"
+	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Visor Helmet Medic B"
+	icon_state = "helmet medic-b_obj"
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/helmet/marine/brownvisor
@@ -162,7 +180,7 @@
 	item_state = "UNSC Marine Ammo Belt"
 	storage_slots = 6
 
-	can_hold = list(/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/chem_grenade/incendiary)
+	can_hold = list(/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/ammo_casing)
 
 /obj/item/weapon/storage/belt/marine_medic
 	name = "Medical Supplies Storage Belt"

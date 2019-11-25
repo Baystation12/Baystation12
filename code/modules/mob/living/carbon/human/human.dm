@@ -113,7 +113,7 @@
 				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(target, 200, 4)
 			//return
-//				var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
+	//			var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
 				//user.throw_at(target, 200, 4)
 
 		if (2.0)
@@ -121,18 +121,19 @@
 			f_loss = 60
 
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage += 30
-				ear_deaf += 120
+				ear_damage = min(ear_damage + 30,100*species.explosion_effect_mod)
+				ear_deaf = min(ear_damage + 120,200*species.explosion_effect_mod)
 			if (prob(70))
-				confused += 10
+				confused = min(confused + 10,50*species.explosion_effect_mod)
 
 		if(3.0)
 			b_loss = 30
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage += 15
-				ear_deaf += 60
+				ear_damage = min(ear_damage + 15,100*species.explosion_effect_mod)
+				ear_deaf = min(ear_damage + 60,200*species.explosion_effect_mod)
 			if (prob(50))
-				confused += 10
+				confused = min(confused + 10,50*species.explosion_effect_mod)
+
 
 	// factor in armour / degrade armor
 	var/protection = blocked_mult(getarmor(null, "bomb"))

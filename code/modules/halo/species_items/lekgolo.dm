@@ -13,7 +13,7 @@
 
 	maxHealth = 500
 	health = 500
-	unsuitable_atoms_damage = 0
+	unsuitable_atmos_damage = 0
 	var/crouched = 0
 
 	stop_automated_movement = 1

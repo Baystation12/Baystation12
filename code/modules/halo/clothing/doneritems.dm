@@ -8,6 +8,20 @@
 //Obj sprites go in ITEM_INHAND or MARINE_INHAND
 //WORN sprites go in ODST_OVERRIDE or MARINE_OVERRIDE
 
+///////Donor Box\\\\\\
+
+//Parent Box - Do not remove!
+
+/obj/item/weapon/storage/box/large/donator
+	name = "Snowflake Crate"
+	desc = "Contains gear for those special snowflakes."
+	w_class = ITEM_SIZE_GARGANTUAN
+	max_storage_space = 46
+	max_w_class = ITEM_SIZE_GARGANTUAN
+	startswith = list()
+	can_hold = list()
+
+
 ////////ashvor\\\\\\\\
 
 //Marine
@@ -39,7 +53,7 @@
 	item_state = "ashvor-gloves_worn"
 	icon_state = "ashvor-gloves_obj"
 
-/obj/item/clothing/shoes/eva/marine/ashvor
+/obj/item/clothing/shoes/magboots/eva/marine/ashvor
 	desc = "The Atmospheric/Exoatmospheric sealed variant of the standard combat boots worn by the members of the UNSC Marine Corps."
 	name = "A/X Combat Boots"
 	item_state = "ashvor-boots_worn"
@@ -51,11 +65,25 @@
 	item_state = "ashvor-backpack_worn"
 	icon_state = "ashvor-backpack_obj"
 
+/obj/item/weapon/storage/box/large/donator/ashvor
+	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/ashvor,
+					/obj/item/clothing/suit/spaceeva/eva/ashvor,
+					/obj/item/clothing/gloves/thick/unsc/ashvor,
+					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
+					/obj/item/clothing/head/helmet/eva/marine/ashvor,
+					/obj/item/weapon/storage/backpack/odst/regular/ashvor)
+	can_hold = list(/obj/item/clothing/under/unsc/marine_fatigues/ashvor,
+					/obj/item/clothing/suit/spaceeva/eva/ashvor,
+					/obj/item/clothing/gloves/thick/unsc/ashvor,
+					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
+					/obj/item/clothing/head/helmet/eva/marine/ashvor,
+					/obj/item/weapon/storage/backpack/odst/regular/ashvor)
+
 /decl/hierarchy/outfit/ashvor_marine
 	name = "ashvor - marine"
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues/ashvor
 	suit = /obj/item/clothing/suit/spaceeva/eva/ashvor
-	shoes = /obj/item/clothing/shoes/eva/marine/ashvor
+	shoes = /obj/item/clothing/shoes/magboots/eva/marine/ashvor
 	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
 	head = /obj/item/clothing/head/helmet/eva/marine/ashvor
 	back = /obj/item/weapon/storage/backpack/odst/regular/ashvor
@@ -77,6 +105,13 @@
 	name = "Customized ODST Sniper Armour"
 
 	icon_state = "Odst Armor Caelum"
+
+/obj/item/weapon/storage/box/large/donator/caelumz
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/caelumz,
+					/obj/item/clothing/suit/armor/special/odst/donator/caelumz
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/caelumz,
+					/obj/item/clothing/suit/armor/special/odst/donator/caelumz)
 
 /decl/hierarchy/outfit/caelumz_odst
 	name = "caelumz - ODST"
@@ -148,6 +183,16 @@
 	item_state = "bobatnight-backpack_worn"
 	icon_state = "bobatnight-backpack_obj"
 
+/obj/item/weapon/storage/box/large/donator/bobatnight
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/bobatnight,
+					/obj/item/clothing/suit/armor/special/odst/donator/bobatnight,
+					/obj/item/weapon/storage/backpack/odst/bobatnight
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/bobatnight,
+					/obj/item/clothing/suit/armor/special/odst/donator/bobatnight,
+					/obj/item/weapon/storage/backpack/odst/bobatnight
+					)
+
 /decl/hierarchy/outfit/bobatnight_odst
 	name = "bobatnight - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/bobatnight
@@ -169,6 +214,16 @@
 /obj/item/weapon/grav_hammer/boltersam
 	icon_state = "goremaul"
 	item_state_slots = list(slot_l_hand_str = "goremaul", slot_r_hand_str = "goremaul", slot_back_str = "back_maul")
+
+/obj/item/weapon/storage/box/large/donator/boltersam
+	startswith = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
+					)
 
 /decl/hierarchy/outfit/boltersam_jiralhanae
 	name = "boltersam - jiralhanae"
@@ -200,6 +255,16 @@
 	item_state = "eonoc-backpack_worn"
 	icon_state = "eonoc-backpack_obj"
 
+/obj/item/weapon/storage/box/large/donator/eonoc
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/eonoc,
+					/obj/item/clothing/suit/armor/special/odst/donator/eonoc,
+					/obj/item/weapon/storage/backpack/odst/eonoc
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/eonoc,
+					/obj/item/clothing/suit/armor/special/odst/donator/eonoc,
+					/obj/item/weapon/storage/backpack/odst/eonoc
+					)
+
 /decl/hierarchy/outfit/eonoc_odst
 	name = "eonoc - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/eonoc
@@ -229,6 +294,16 @@
 	name = "Kashada's Backpack"
 	item_state = "Odst Flaksim Backpack"
 	icon_state = "Odst Flaksim Backpack"
+
+/obj/item/weapon/storage/box/large/donator/flaksim
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/flaksim,
+					/obj/item/clothing/suit/armor/special/odst/donator/flaksim,
+					/obj/item/weapon/storage/backpack/odst/donator/flaksim
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/flaksim,
+					/obj/item/clothing/suit/armor/special/odst/donator/flaksim,
+					/obj/item/weapon/storage/backpack/odst/donator/flaksim
+					)
 
 /decl/hierarchy/outfit/flaksim_odst
 	name = "flaksim - ODST"
@@ -289,10 +364,70 @@
 	icon_state = "gulag-armor_obj"
 	item_state = "gulag-armor_worn"
 
+/obj/item/weapon/storage/box/large/donator/gulag
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/gulag,
+					/obj/item/clothing/suit/armor/special/odst/donator/gulag
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/gulag,
+					/obj/item/clothing/suit/armor/special/odst/donator/gulag
+					)
+
 /decl/hierarchy/outfit/gulag_odst
 	name = "gulag - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/gulag
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/gulag
+
+
+///////Jul\\\\\\\
+
+//Ship/Oni Crew
+
+
+/obj/item/clothing/head/dress/Jul
+	name = "UNSC Officer Dress Cap"
+	item_state = "Jul Jul Cap_worn"
+	icon_state = "Jul Jul Cap_obj"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	desc = "A formal cap worn with the UNSC Dress Uniform."
+
+/obj/item/clothing/under/mildress/Jul
+	name = "UNSC Officer Dress Uniform"
+	item_state = "Jul Jul Dress"
+	icon_state = "Jul Jul Dress_obj"
+	worn_state = "Jul Jul Dress"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	desc = "A presentable dress uniform worn by UNSC Officers."
+
+/obj/item/clothing/shoes/black/Jul
+	name = "UNSC Dress Shoes"
+	item_state = "Jul Jul Shoes_worn"
+	icon_state = "Jul Jul Shoes_obj"
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+
+decl/hierarchy/outfit/Jul
+	name = "Jul Waters - officer"
+	uniform = /obj/item/clothing/under/mildress/Jul
+	shoes = /obj/item/clothing/shoes/black/Jul
+	head = /obj/item/clothing/head/dress/Jul
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+
+
+/obj/item/weapon/storage/box/large/donator/Jul
+	startswith = list(/obj/item/clothing/head/dress/Jul,
+					/obj/item/clothing/shoes/black/Jul,
+					/obj/item/clothing/under/mildress/Jul,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
+					)
+	can_hold = list(/obj/item/clothing/head/dress/Jul,
+					/obj/item/clothing/shoes/black/Jul,
+					/obj/item/clothing/under/mildress/Jul,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
+					)
+
+
 
 ////////karmac\\\\\\\
 
@@ -326,6 +461,20 @@
 	icon_override = MARINE_OVERRIDE
 	item_state = "karmac-marinegloves_worn"
 	icon_state = "karmac-marinegloves_obj"
+
+/obj/item/weapon/storage/box/large/donator/karmac
+	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/karmac,
+					/obj/item/clothing/suit/storage/marine/karmac,
+					/obj/item/clothing/shoes/marine/karmac,
+					/obj/item/clothing/gloves/thick/unsc/karmac,
+					/obj/item/clothing/head/helmet/marine/karmac
+					)
+	can_hold = list(/obj/item/clothing/under/unsc/marine_fatigues/karmac,
+					/obj/item/clothing/suit/storage/marine/karmac,
+					/obj/item/clothing/shoes/marine/karmac,
+					/obj/item/clothing/gloves/thick/unsc/karmac,
+					/obj/item/clothing/head/helmet/marine/karmac
+					)
 
 /decl/hierarchy/outfit/karmac_marine
 	name = "karmac - marine"
@@ -387,6 +536,18 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
+/obj/item/weapon/storage/box/large/donator/kozi
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/kozi,
+					/obj/item/clothing/suit/armor/special/odst/donator/kozi,
+					/obj/item/weapon/storage/backpack/odst/kozi,
+					/obj/item/weapon/material/machete/kozi
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/kozi,
+					/obj/item/clothing/suit/armor/special/odst/donator/kozi,
+					/obj/item/weapon/storage/backpack/odst/kozi,
+					/obj/item/weapon/material/machete/kozi
+					)
+
 /decl/hierarchy/outfit/kozi_odst
 	name = "kozi - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/kozi
@@ -410,6 +571,14 @@
 	name = "ODST EOD Suit"
 
 	icon_state = "osama-armor_worn"
+
+/obj/item/weapon/storage/box/large/donator/liam_gallagher
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/liam_gallagher,
+					/obj/item/clothing/suit/armor/special/odst/donator/liam_gallagher
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/liam_gallagher,
+					/obj/item/clothing/suit/armor/special/odst/donator/liam_gallagher
+					)
 
 /decl/hierarchy/outfit/liam_gallagher_odst
 	name = "liam gallagher - ODST"
@@ -436,7 +605,17 @@
 	icon_override = MARINE_OVERRIDE
 	item_state = "osama-UNSCsuit_worn"
 	icon_state = "osama-UNSCsuit_worn"
-	worn_state = "UNSC Marine Fatigues"
+	worn_state = "UNSC Marine Fatiguesold"
+
+/obj/item/weapon/storage/box/large/donator/liam_gallagheralt
+	startswith = list(/obj/item/clothing/suit/storage/marine/donator/liam_gallagher,
+					/obj/item/clothing/head/helmet/marine/donator/liam_gallagher,
+					/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher
+					)
+	can_hold = list(/obj/item/clothing/suit/storage/marine/donator/liam_gallagher,
+					/obj/item/clothing/head/helmet/marine/donator/liam_gallagher,
+					/obj/item/clothing/under/unsc/marine/marine_fatigues/liam_gallagher
+					)
 
 ////////Loafe\\\\\\\\
 
@@ -461,6 +640,16 @@
 	name = "Loafe's Backpack"
 	item_state = "loafe-backpack_worn"
 	icon_state = "loafe-backpack_obj"
+
+/obj/item/weapon/storage/box/large/donator/loafe
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/loafe,
+					/obj/item/clothing/suit/armor/special/odst/donator/loafe,
+					/obj/item/weapon/storage/backpack/odst/loafe
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/loafe,
+					/obj/item/clothing/suit/armor/special/odst/donator/loafe,
+					/obj/item/weapon/storage/backpack/odst/loafe
+					)
 
 /decl/hierarchy/outfit/loafe_odst
 	name = "loafe - ODST"
@@ -524,6 +713,14 @@
 
 	icon_state = "Odst Armor Mann"
 
+/obj/item/weapon/storage/box/large/donator/mann
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/mann,
+					/obj/item/clothing/suit/armor/special/odst/donator/mann
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/mann,
+					/obj/item/clothing/suit/armor/special/odst/donator/mann
+					)
+
 /decl/hierarchy/outfit/mann_odst
 	name = "mann - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/mann
@@ -564,6 +761,14 @@
 
 	icon_state = "Odst Armor Maxattacker"
 
+/obj/item/weapon/storage/box/large/donator/maxattacker
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/maxattacker,
+					/obj/item/clothing/suit/armor/special/odst/donator/maxattacker
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/maxattacker,
+					/obj/item/clothing/suit/armor/special/odst/donator/maxattacker
+					)
+
 /decl/hierarchy/outfit/maxattacker_odst
 	name = "maxattacker - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/maxattacker
@@ -582,6 +787,14 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 	name = "ODST 'Thorn' Armour"
 	icon_state = "maxattackeralt-armor_obj"
 	item_state = "maxattackeralt-armor_worn"
+
+/obj/item/weapon/storage/box/large/donator/maxattackeralt
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/maxattackeralt,
+					/obj/item/clothing/suit/armor/special/odst/donator/maxattackeralt
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/maxattackeralt,
+					/obj/item/clothing/suit/armor/special/odst/donator/maxattackeralt
+					)
 
 /decl/hierarchy/outfit/maxattacker_odst2
 	name = "maxattacker - ODST2"
@@ -661,12 +874,31 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 	suit = /obj/item/clothing/suit/armor/special/urfc/mclovin
 	l_hand = /obj/item/weapon/material/machete/mclovin
 
+/obj/item/weapon/storage/box/large/donator/mclovin_urfc
+	startswith = list(/obj/item/clothing/head/helmet/urfc/mclovin,
+					/obj/item/clothing/suit/armor/special/urfc/mclovin,
+					/obj/item/weapon/material/machete/mclovin
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/urfc/mclovin,
+					/obj/item/clothing/suit/armor/special/urfc/mclovin,
+					/obj/item/weapon/material/machete/mclovin
+					)
+
 /decl/hierarchy/outfit/mclovin_zeal
 	name = "mclovin - zeal"
 	head = /obj/item/clothing/head/helmet/zeal/mclovin
 	suit = /obj/item/clothing/suit/justice/zeal/mclovin
 	l_hand = /obj/item/weapon/material/machete/mclovin
 
+/obj/item/weapon/storage/box/large/donator/mclovin_zeal
+	startswith = list(/obj/item/clothing/head/helmet/zeal/mclovin,
+					/obj/item/clothing/suit/justice/zeal/mclovin,
+					/obj/item/weapon/material/machete/mclovin
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/zeal/mclovin,
+					/obj/item/clothing/suit/justice/zeal/mclovin,
+					/obj/item/weapon/material/machete/mclovin
+					)
 
 ////////Moerk\\\\\\\\
 
@@ -684,6 +916,14 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	name = "Moerk's Customized ODST Armour"
 
 	icon_state = "Odst Armor Moerk"
+
+/obj/item/weapon/storage/box/large/donator/moerk
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/moerk,
+					/obj/item/clothing/suit/armor/special/odst/donator/moerk
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/moerk,
+					/obj/item/clothing/suit/armor/special/odst/donator/moerk
+					)
 
 /decl/hierarchy/outfit/moerk_odst
 	name = "moerk - ODST"
@@ -718,6 +958,18 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	icon_state = "dogler_gloves_obj"
 	item_state = "dogler_gloves"
 
+/obj/item/weapon/storage/box/large/donator/dogler
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/dogler,
+					/obj/item/clothing/suit/armor/special/combatharness/dogler,
+					/obj/item/clothing/shoes/sangheili/dogler,
+					/obj/item/clothing/gloves/thick/sangheili/dogler
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/dogler,
+					/obj/item/clothing/suit/armor/special/combatharness/dogler,
+					/obj/item/clothing/shoes/sangheili/dogler,
+					/obj/item/clothing/gloves/thick/sangheili/dogler
+					)
+
 /decl/hierarchy/outfit/dogler_sangheili
 	name = "dogler/m.green - sangheili"
 	suit = /obj/item/clothing/suit/armor/special/combatharness/dogler
@@ -732,13 +984,13 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 
 //URFC
 
-/obj/item/clothing/head/helmet/urfc/pantascmdo
+/obj/item/clothing/head/helmet/soe/pantascmdo
 	name = "Eridanus Order's Helmet"
 
 	item_state = "pantascmdo_worn"
 	icon_state = "pantascmdo_helmet"
 
-/obj/item/clothing/suit/armor/special/urfc/pantascmdo
+/obj/item/clothing/suit/armor/special/soe/pantascmdo
 	name = "Eridanus Order's Armour"
 
 	item_state = "pantascmdo_armour_worn"
@@ -783,10 +1035,24 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	else
 		icon_state = "pantasAK47_unloaded"
 
+/obj/item/weapon/storage/box/large/donator/pantas_urfc
+	startswith = list(/obj/item/clothing/head/helmet/soe/pantascmdo,
+					/obj/item/clothing/suit/armor/special/soe/pantascmdo,
+					/obj/item/weapon/storage/backpack/cmdo/pantascmdo,
+					/obj/item/weapon/material/machete/pantascmdo,
+					/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/soe/pantascmdo,
+					/obj/item/clothing/suit/armor/special/soe/pantascmdo,
+					/obj/item/weapon/storage/backpack/cmdo/pantascmdo,
+					/obj/item/weapon/material/machete/pantascmdo,
+					/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
+					)
+
 /decl/hierarchy/outfit/pantas_urfc
 	name = "pantas - urfc"
-	head = /obj/item/clothing/head/helmet/urfc/pantascmdo
-	suit = /obj/item/clothing/suit/armor/special/urfc/pantascmdo
+	head = /obj/item/clothing/head/helmet/soe/pantascmdo
+	suit = /obj/item/clothing/suit/armor/special/soe/pantascmdo
 	back = /obj/item/weapon/storage/backpack/cmdo/pantascmdo
 	l_hand = /obj/item/weapon/material/machete/pantascmdo
 	r_hand = /obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
@@ -814,6 +1080,18 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	name = "Sanghelli Combat Gauntlets (Scribe Minor)"
 	icon_state = "pantas2_gloves_obj"
 	item_state = "pantas2_gloves"
+
+/obj/item/weapon/storage/box/large/donator/pantas_minor
+	startswith = list(/obj/item/clothing/suit/armor/special/combatharness/minor/pantas,
+					/obj/item/clothing/shoes/sangheili/minor/pantas,
+					/obj/item/clothing/gloves/thick/sangheili/minor/pantas,
+					/obj/item/clothing/head/helmet/sangheili/minor/pantas
+					)
+	can_hold = list(/obj/item/clothing/suit/armor/special/combatharness/minor/pantas,
+					/obj/item/clothing/shoes/sangheili/minor/pantas,
+					/obj/item/clothing/gloves/thick/sangheili/minor/pantas,
+					/obj/item/clothing/head/helmet/sangheili/minor/pantas
+					)
 
 /decl/hierarchy/outfit/pantas_sangheili_minor
 	name = "pantas - sangheili minor"
@@ -849,6 +1127,18 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	icon_state = "pantas_gloves_obj"
 	item_state = "pantas_gloves"
 
+/obj/item/weapon/storage/box/large/donator/pantas_major
+	startswith = list(/obj/item/clothing/suit/armor/special/combatharness/major/pantas,
+					/obj/item/clothing/gloves/thick/sangheili/major/pantas,
+					/obj/item/clothing/shoes/sangheili/major/pantas,
+					/obj/item/clothing/head/helmet/sangheili/major/pantas
+					)
+	can_hold = list(/obj/item/clothing/suit/armor/special/combatharness/major/pantas,
+					/obj/item/clothing/gloves/thick/sangheili/major/pantas,
+					/obj/item/clothing/shoes/sangheili/major/pantas,
+					/obj/item/clothing/head/helmet/sangheili/major/pantas
+					)
+
 /decl/hierarchy/outfit/pantas_sangheili_major
 	name = "pantas - sangheili major"
 	suit = /obj/item/clothing/suit/armor/special/combatharness/major/pantas
@@ -875,6 +1165,14 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "Pinstripe's ODST Armour"
 	icon_state = "pinstripe-armor_obj"
 	item_state = "pinstripe-armor_worn"
+
+/obj/item/weapon/storage/box/large/donator/pinstripe
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/pinstripe,
+					/obj/item/clothing/suit/armor/special/odst/donator/pinstripe
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/pinstripe,
+					/obj/item/clothing/suit/armor/special/odst/donator/pinstripe
+					)
 
 /decl/hierarchy/outfit/pinstripe_odst
 	name = "pinstripe - ODST"
@@ -914,6 +1212,14 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "Bishop's ODST Armour"
 
 	icon_state = "ragnarok-armor_worn"
+
+/obj/item/weapon/storage/box/large/donator/ragnarok
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/ragnarok,
+					/obj/item/clothing/suit/armor/special/odst/donator/ragnarok
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/ragnarok,
+					/obj/item/clothing/suit/armor/special/odst/donator/ragnarok
+					)
 
 /decl/hierarchy/outfit/ragnarok_odst
 	name = "ragnarok - ODST"
@@ -965,6 +1271,22 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "sleepybandana"
 	icon_state = "sleepybandana"
 
+/obj/item/weapon/storage/box/large/donator/sleepy_marine
+	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard,
+					/obj/item/clothing/mask/marine/sleepy_retard,
+					/obj/item/clothing/suit/storage/marine/sleepy_retard,
+					/obj/item/clothing/shoes/marine/sleepy_retard,
+					/obj/item/clothing/head/helmet/marine/sleepy_retard,
+					/obj/item/clothing/gloves/thick/unsc/sleepy_retard
+					)
+	can_hold = list(/obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard,
+					/obj/item/clothing/mask/marine/sleepy_retard,
+					/obj/item/clothing/suit/storage/marine/sleepy_retard,
+					/obj/item/clothing/shoes/marine/sleepy_retard,
+					/obj/item/clothing/head/helmet/marine/sleepy_retard,
+					/obj/item/clothing/gloves/thick/unsc/sleepy_retard)
+
+
 /decl/hierarchy/outfit/sleepy_marine
 	name = "sleepy - marine"
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard
@@ -995,6 +1317,11 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_override = ODST_OVERRIDE
 	item_state = "sleepy odst-backpack_worn"
 	icon_state = "sleepy odst-backpack_obj"
+
+/obj/item/weapon/storage/box/large/donator/sleepy
+	startswith = list(/obj/item/clothing/suit/armor/special/odst/sleepy,
+					/obj/item/clothing/head/helmet/odst/engineer/sleepy,
+					/obj/item/weapon/storage/backpack/odst/sleepy)
 
 /decl/hierarchy/outfit/sleepy_odst
 	name = "sleepy - odst Mechanist"
@@ -1078,6 +1405,18 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "socks-boots_worn"
 	icon_state = "socks-boots_obj"
 
+/obj/item/weapon/storage/box/large/donator/socks
+	startswith = list(/obj/item/clothing/head/helmet/urfc/socks,
+					/obj/item/clothing/suit/armor/special/urfc/socks,
+					/obj/item/clothing/under/urfc_jumpsuit/socks,
+					/obj/item/clothing/shoes/magboots/urfc/socks
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/urfc/socks,
+					/obj/item/clothing/suit/armor/special/urfc/socks,
+					/obj/item/clothing/under/urfc_jumpsuit/socks,
+					/obj/item/clothing/shoes/magboots/urfc/socks
+					)
+
 /decl/hierarchy/outfit/socks_urfc
 	name = "socks - URFC"
 	uniform = /obj/item/clothing/under/urfc_jumpsuit/socks
@@ -1128,6 +1467,18 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_state = "socks_gloves_obj"
 	item_state = "socks_gloves"
 
+/obj/item/weapon/storage/box/large/donator/socks_major
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/socks,
+					/obj/item/clothing/suit/armor/special/combatharness/socks,
+					/obj/item/clothing/shoes/sangheili/socks,
+					/obj/item/clothing/gloves/thick/sangheili/socks
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/socks,
+					/obj/item/clothing/suit/armor/special/combatharness/socks,
+					/obj/item/clothing/shoes/sangheili/socks,
+					/obj/item/clothing/gloves/thick/sangheili/socks
+					)
+
 /decl/hierarchy/outfit/socks_sangheili
 	name = "socks - sangheili"
 	suit = /obj/item/clothing/suit/armor/special/combatharness/socks
@@ -1144,13 +1495,13 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //Spartan
 
 /obj/item/clothing/head/helmet/spartan/stingray
-	name = "Ryan-073's MJOLNIR Powered Assault Armour Helmet"
+	name = "Ryan-074's MJOLNIR Powered Assault Armour Helmet"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon_state = "stingray-spartanhelm_obj"
 	item_state = "stingray-spartanhelm_worn"
 
 /obj/item/clothing/suit/armor/special/spartan/stingray
-	name = "Ryan-073's MJOLNIR Powered Assault Armour"
+	name = "Ryan-074's MJOLNIR Powered Assault Armour"
 	desc = "a technologically-advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a SPARTAN-II, supersoldier in the field of combat.This one appears to have been heavily modified per the user's tactical needs."
 	icon_state = "stingray-spartanarmor_obj"
 	item_state = "stingray-spartanarmor_worn"
@@ -1175,6 +1526,14 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "SPI Armour Mk I"
 	item_state = "wehraboo-armor_worn"
 	icon_state = "wehraboo-armor_obj"
+
+/obj/item/weapon/storage/box/large/donator/wehraboo
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/wehraboo,
+					/obj/item/clothing/suit/armor/special/odst/donator/wehraboo
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/wehraboo,
+					/obj/item/clothing/suit/armor/special/odst/donator/wehraboo
+					)
 
 /decl/hierarchy/outfit/wehraboo_odst
 	name = "wehraboo - ODST"
@@ -1216,6 +1575,14 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "amy-armor_worn"
 	icon_state = "amy-armor_obj"
 
+/obj/item/weapon/storage/box/large/donator/winterume
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/winterume,
+					/obj/item/clothing/suit/armor/special/odst/donator/winterume
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/winterume,
+					/obj/item/clothing/suit/armor/special/odst/donator/winterume
+					)
+
 /decl/hierarchy/outfit/winterume_odst
 	name = "winterume - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/winterume
@@ -1248,12 +1615,40 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_state = "riley-helmet_obj"
 	desc = " this is a CH252MC-V modified helmet of the CH252-V version, it contains a 1 eye visor, and a blue cross instead of a  red one , also it seems to have holographic cat ears attached"
 
+/obj/item/clothing/gloves/thick/unsc/riley
+	icon = MARINE_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "UNSC Combat Gloves OLD"
+	icon_state = "unsc gloves_obj"
+
+/obj/item/clothing/shoes/marine/riley
+	item_state = "boots OLD"
+	icon_state = "evalegs"
+
+/obj/item/clothing/under/unsc/marine_fatigues/riley
+	item_state = "UNSC Marine Fatiguesold"
+	icon_state = "uniform_obj"
+	worn_state = "UNSC Marine Fatiguesold"
+
 /obj/item/clothing/suit/storage/marine/riley
 	desc = "this is an  M52BMC a modified M52B marine armor with Blue instead of red crosses and and front chest an tac pad monitor witch displays a blinking red cross and a text with says (you fuck up i patch up) the armor also seems to be fitted with a holographic cat tail"
 	name = "M52BMC"
 	item_state = "riley-armor_worn"
 	icon_state = "riley-armor_obj"
 
+/obj/item/weapon/storage/box/large/donator/riley
+	startswith = list(/obj/item/clothing/head/helmet/marine/riley,
+					/obj/item/clothing/suit/storage/marine/riley,
+					/obj/item/clothing/shoes/marine/riley,
+					/obj/item/clothing/under/unsc/marine_fatigues/riley,
+					/obj/item/clothing/gloves/thick/unsc/riley
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/marine/riley,
+					/obj/item/clothing/suit/storage/marine/riley,
+					/obj/item/clothing/shoes/marine/riley,
+					/obj/item/clothing/under/unsc/marine_fatigues/riley,
+					/obj/item/clothing/gloves/thick/unsc/riley
+					)
 
 /decl/hierarchy/outfit/riley_marine
 	name = "riley - marine"

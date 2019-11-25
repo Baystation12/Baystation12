@@ -62,6 +62,7 @@
 	force = 40
 	is_heavy = 1
 	armor_penetration = 35
+	accuracy = -3
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 
@@ -87,8 +88,7 @@
 
 /obj/item/projectile/bullet/spiker
 	name = "Spike"
-	damage = 18
-	accuracy = -3
+	damage = 20
 
 /obj/item/projectile/bullet/spiker/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
 	if(blocked >= 100 || !istype(L))
@@ -122,6 +122,7 @@
 	force = 40
 	is_heavy = 1
 	armor_penetration = 35
+	accuracy = -3
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 
@@ -146,7 +147,6 @@
 
 /obj/item/projectile/bullet/mauler
 	damage = 75
-	accuracy = -3
 
 /obj/item/projectile/bullet/mauler/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
 	. = ..()
@@ -218,6 +218,7 @@
 	edge = 1
 	armor_penetration = 35
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
+	advanced_covenant = 1
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 

@@ -97,6 +97,7 @@
 	var/is_charging = 0
 	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
 	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
+	var/advanced_covenant = 0
 
 /obj/item/weapon/gun/New()
 	..()
@@ -231,6 +232,10 @@
 		else
 			handle_click_empty(user)
 		return 0
+	var/mob/living/carbon/human/h = user
+	if(h.species.can_operate_advanced_covenant == 0 && advanced_covenant == 1)
+		to_chat(h,"<span class= 'danger'>You don't know how to operate this weapon!</span>")
+		return 0
 	return 1
 
 /obj/item/weapon/gun/emp_act(severity)
@@ -267,6 +272,7 @@
 
 		is_charging = 1
 		if (!do_after(user,arm_time,src))
+			is_charging = 0
 			return
 		Fire(A,user,params)
 		is_charging = 0
@@ -330,7 +336,7 @@
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
 	//user.setMoveCooldown(shoot_time) //no moving while shooting either
-	next_fire_time = world.time + shoot_time
+	next_fire_time = world.time + shoot_time + fire_delay
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -367,7 +373,6 @@
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	//user.setMoveCooldown(move_delay)//
-	next_fire_time = world.time + fire_delay
 	return
 
 //obtains the next projectile to fire

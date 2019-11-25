@@ -13,9 +13,11 @@
 	can_hold = list(/obj/item/ammo_magazine,\
 		/obj/item/ammo_box,\
 		/obj/item/ammo_casing,\
-		/obj/item/weapon/grenade,\
 		/obj/item/weapon/melee/energy/elite_sword,\
-		/obj/item/clothing/gloves/shield_gauntlet)
+		/obj/item/clothing/gloves/shield_gauntlet,\
+		/obj/item/weapon/armor_patch/cov,\
+		/obj/item/weapon/plastique/covenant,\
+		/obj/item/weapon/tank/emergency/oxygen/covenant)
 
 /obj/item/weapon/storage/belt/covenant_medic
 	name = "Covenant Medical Belt"

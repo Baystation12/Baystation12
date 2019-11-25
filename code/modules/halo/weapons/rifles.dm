@@ -29,6 +29,8 @@
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
 	firemodes = list(
@@ -102,7 +104,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
 	attachment_slots = null
 	attachments_on_spawn = null
-	burst_delay = 0.9
+	burst_delay = 1
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
 	firemodes = list(
@@ -139,10 +141,10 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
-	fire_delay = 9
+	fire_delay = 7
 	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.1, 0.6, 0.8)
+	dispersion=list(0.1, 0.3, 0.5)
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -178,19 +180,21 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
-	fire_delay = 9
+	fire_delay = 8
 	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.1, 0.8, 1.0)
+	dispersion=list(0.1, 0.3, 0.5)
 	wielded_item_state = "br55-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock")
 	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/br55,/obj/item/weapon_attachment/br55_stock_cheekrest,/obj/item/weapon_attachment/br55_bottom,/obj/item/weapon_attachment/br55_upper,/obj/item/weapon_attachment/sight/br55_scope)
 
-/obj/item/weapon/gun/projectile/br85/br55/update_icon()
+/obj/item/weapon/gun/projectile/br55/update_icon()
 	if(ammo_magazine)
 		icon_state = "BR55-Loaded-Base"
 	else

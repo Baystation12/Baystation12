@@ -2,6 +2,14 @@
 	title = "Spartan II"
 	spawn_faction = "UNSC"
 	outfit_type = /decl/hierarchy/outfit/onispartan
+	alt_titles = list("Spartan II PO3" = /decl/hierarchy/outfit/onispartan/po3,\
+	"Spartan II PO2" = /decl/hierarchy/outfit/onispartan/po2,\
+	"Spartan II PO1" = /decl/hierarchy/outfit/onispartan/po1,\
+	"Spartan II CPO" = /decl/hierarchy/outfit/onispartan/cpo,\
+	"Spartan II SCPO" = /decl/hierarchy/outfit/onispartan/scpo,\
+	"Spartan II MCPO" = /decl/hierarchy/outfit/onispartan/mcpo,\
+	"Spartan II LJG" = /decl/hierarchy/outfit/onispartan/ljg,\
+	"Spartan II LT" = /decl/hierarchy/outfit/onispartan/lt)
 	total_positions = 1
 	spawn_positions = 1
 	account_allowed = 0
@@ -16,10 +24,10 @@
 
 /datum/job/ONI_Spartan_II/equip()
 	. = ..()
-	var/player_pop = 0
+	var/player_pop_nonunsc = 0
 	for(var/client/C in GLOB.clients)
-		if(!C.mob)
+		if(!C.mob || C.mob.faction != "UNSC")
 			continue
-		player_pop++
+		player_pop_nonunsc++
 	var/datum/job/to_modify = job_master.occupations_by_title[title]
-	to_modify.total_positions = min(round(player_pop/10),4)
+	to_modify.total_positions = min(round(player_pop_nonunsc/5),4)

@@ -25,6 +25,7 @@
 	flags_inv = HIDESUITSTORAGE|HIDEBACK
 	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 40, bio = 0, rad = 0)
 	armor_thickness_modifiers = list()
+	unacidable = 1
 
 	allowed = list(/obj/item/weapon/tank)
 	species_restricted = list("Unggoy")
@@ -44,6 +45,7 @@
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT | FLEXIBLEMATERIAL
 	armor = list(melee = 40, bullet = 20, laser = 35,energy = 35, bomb = 20, bio = 0, rad = 0)
 	armor_thickness = 10
+	unacidable = 1
 
 	var/rebreath_efficiency = 50 //Rebreather efficiency: Percentile
 
@@ -183,8 +185,8 @@
 
 	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 60, bio = 0, rad = 0)
 
-	totalshields = 100
-	specials = list(/datum/armourspecials/shields/unggoy)
+	//totalshields = 100
+	//specials = list(/datum/armourspecials/shields/unggoy)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	name = "Unggoy Combat Harness (Spec-Ops)"
