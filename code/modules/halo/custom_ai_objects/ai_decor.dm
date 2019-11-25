@@ -20,6 +20,7 @@
 /obj/structure/ai_decor/cov_holo
 	name = "Covenant Hologram"
 	icon_state = "cov_holo"
+	density = 0
 
 /obj/structure/ai_decor/unsc_1
 	icon_state = "unscdecal1"
