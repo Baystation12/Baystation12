@@ -27,6 +27,7 @@
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
+	unacidable = 1
 	on = 0
 	item_state_slots = list(slot_l_hand_str = "syndicate-helm-black", slot_r_hand_str = "syndicate-helm-black")
 
@@ -52,6 +53,7 @@
 	armor_thickness = 30
 	species_restricted = list("Spartan")
 	max_suitstore_w_class = ITEM_SIZE_HUGE
+	unacidable = 1
 
 	specials = list(/datum/armourspecials/shields/spartan,\
 		/datum/armourspecials/shieldmonitor,\
