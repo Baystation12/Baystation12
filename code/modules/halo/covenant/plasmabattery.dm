@@ -15,7 +15,7 @@
 	if(charge > 0)
 		if(!draining)
 			icon_state = "in_use"
-			GLOB.processing_objects += src
+			GLOB.processing_objects |= src
 			draining = 1
 	else
 		icon_state = "drained"
