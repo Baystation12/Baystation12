@@ -1118,7 +1118,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 
 
 /obj/item/clothing/head/helmet/urfc/pantas
-	name = "SOE Rifleman Helmet"
+	name = "SOE Bauk Helmet"
 	desc = "A simple helmet. Despite the old age, a lot of work has been put into adding additional armor and refining the base processes. It's quite heavy, but a lot of soft material has been added to the inside to make the metal more comfy. Outdated, but can be expected in combat engagements to perform on par with modern equipment, due to the extensive modifications."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
@@ -1127,7 +1127,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	item_state_slots = list(slot_l_hand_str = "pantas_soe_helmet_worn", slot_r_hand_str = "pantas_soe_helmet_worn")
 
 /obj/item/clothing/suit/armor/special/urfc/pantas
-	name = "SOE Rifleman Armour"
+	name = "SOE Bauk Armor"
 	desc = "A bulletproof vest. Filled with pouches and storage compartments, while still keeping a scary amount of both mobility and protection. An ideal collage of the strengths of the URF, but with the added protection found only in high tier UNSC equipment. It's quite comfy, probably won't last long in space."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "pantas_soe_armor_worn"
@@ -1136,7 +1136,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	item_state_slots = list(slot_l_hand_str = "pantas_soe_armor_worn", slot_r_hand_str = "pantas_soe_armor_worn")
 
 /obj/item/clothing/head/helmet/soe/pantas
-	name = "SOE Space Helmet"
+	name = "SOE Venerator Helmet"
 	desc = "Non-Standard issue short-EVA capable helmet issued to commandos."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "pantas_soe_space_helmet_worn"
@@ -1145,7 +1145,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	item_state_slots = list(slot_l_hand_str = "pantas_soe_space_helmet_worn", slot_r_hand_str = "pantas_soe_space_helmet_worn")
 
 obj/item/clothing/suit/armor/special/soe/pantas
-	name = "SOE Spacesuit"
+	name = "SOE Venerator Armor"
 	desc = "Heavyweight, somewhat durable armour issued to commandos for increased survivability in space."
 	icon = 'code/modules/halo/clothing/urf_commando.dmi'
 	item_state = "pantas_soe_spacesuit_worn"
