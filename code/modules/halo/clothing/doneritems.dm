@@ -19,7 +19,7 @@
 	name = "Snowflake Crate"
 	desc = "Contains gear for those special snowflakes."
 	w_class = ITEM_SIZE_GARGANTUAN
-	max_storage_space = 46
+	max_storage_space = 50
 	max_w_class = ITEM_SIZE_GARGANTUAN
 	startswith = list()
 	can_hold = list()
