@@ -201,8 +201,11 @@ var/list/ai_verbs_default = list(
 	set name = "Check Routing Node Ranges"
 	set category = "EWAR"
 
+	if(isnull(eyeobj))
+		to_chat(src,"<span class = 'notice'>You need an eye object to do this!</span>")
+		return
 
-	var/list/viewed_nodes = view(7,src) & nodes_accessed
+	var/list/viewed_nodes = view(7,eyeobj) & nodes_accessed
 
 	var/ctr = 0
 	for(var/n in viewed_nodes)
@@ -210,7 +213,7 @@ var/list/ai_verbs_default = list(
 		var/obj/structure/ai_routing_node/node = n
 		var/area/node_area = node.loc.loc
 		for(var/turf/t in node_area)
-			var/image/image_send = image(icon('code/modules/halo/icons/machinery/ai_area_displays.dmi',t,"area[ctr]"))
+			var/image/image_send = image('code/modules/halo/icons/machinery/ai_area_displays.dmi',t,"area[ctr]")
 			show_image(src,image_send)
 			spawn(RANGECHECK_DELETE_DELAY)
 				qdel(image_send)
