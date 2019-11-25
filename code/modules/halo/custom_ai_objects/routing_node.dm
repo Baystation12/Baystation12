@@ -19,7 +19,7 @@
 		ai.nodes_accessed += src
 	*/
 	//If we don't have our accesses from this node, but there are some stored, Reaquire them.
-	if(ai in ais_to_access_levels && get_access_for_ai(ai) > 0)
+	if(get_access_for_ai(ai) > 0)
 		to_chat(ai,"<span class = 'notice'>Access credentials re-obtained from node.<span>")
 		ai.nodes_accessed |= src
 	to_chat(ai,"<span class = 'notice'>Current access level: [get_access_for_ai(ai)]</span>")
@@ -47,7 +47,7 @@
 	ais_to_access_levels[ai] = curr_access + modify_by
 	return 1
 
-/obj/structure/ai_routing_node/Initialize()
+/obj/structure/ai_routing_node/New() //We use New() because we want to make sure this happens before the terminal's Initialize()
 	. = ..()
 	var/area/a = loc.loc
 	if(istype(a))
