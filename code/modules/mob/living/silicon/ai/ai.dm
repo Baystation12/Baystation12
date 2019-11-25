@@ -131,7 +131,7 @@ var/list/ai_verbs_default = list(
 	resist_carding = !resist_carding
 	to_chat(usr,"<span class = 'notice'>You will [resist_carding ? "now" : "no longer"] resist any carding.</span>")
 	if(our_terminal)
-		our_terminal.set_terminal_active(resist_carding)
+		our_terminal.set_terminal_inactive(resist_carding)
 
 /mob/living/silicon/ai/proc/get_command_list(var/apply_categories = 1)
 	var/list/name_to_command = list()
@@ -422,9 +422,11 @@ var/list/ai_verbs_default = list(
 	var/new_cpu = min((cpu_points - amt),cpu_points_max)
 	if(new_cpu < 0)
 		if(!check_only)
-			var/new_stunned = stunned + -new_cpu
+			var/new_stunned = stunned + -(new_cpu*2) //Mismanagement of CPU is punishing.
 			Stun(min(new_stunned,(initial(cpu_points_max)/AI_CPULOSS_STUNMAX_DIVISOR)))
 			cpu_points = 0
+			if(our_terminal)
+				our_terminal.set_terminal_inactive(0)
 		return 0
 
 	if(!check_only)
@@ -707,7 +709,7 @@ var/list/ai_verbs_default = list(
 		var/holograms_by_type = decls_repository.get_decls_of_subtype(/decl/ai_holo)
 		for (var/holo_type in holograms_by_type)
 			var/decl/ai_holo/holo = holograms_by_type[holo_type]
-			if (holo.may_be_used_by_ai(src))
+			if (holo.may_be_used_by_ai(ckey))
 				hologramsAICanUse.Add(holo)
 		var/decl/ai_holo/choice = input("Please select a hologram:") as null|anything in hologramsAICanUse
 		if(choice)
