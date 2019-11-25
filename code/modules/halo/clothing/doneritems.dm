@@ -1811,8 +1811,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_state = "riley-armor_obj"
 
 /obj/item/weapon/gun/projectile/m7_smg/riley
-	name = "P90 submachine gun"
-	desc = "A P90 Submachine Gun a fully automatic close quarters infantry and special operations weapon. Takes 5mm calibre magazines."
+	name = "P90-XTR"
+	desc = "This is a P90-XTR an old gun form the 21st century with seems to have been painted in a blue/greyish camo and updated and modified to take a 60 round magazine of 5mm bullets."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "p90"
 	item_state = "p90"
