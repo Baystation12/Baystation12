@@ -342,6 +342,46 @@
 	to_chat(our_ai,"<span class = 'warning'>[ai] has just entered [trap_target] at [trap_target.loc.loc.name].</span>")
 
 //DEFENSIVE//
+#define AI_HIDE_DURATION 2 SECONDS
+
+/datum/cyberwarfare_command/ai_hide
+	name = "Temporary Terminal Disconnect"
+	desc = "Disconnect yourself from your current terminal for a short duration. This can hide you from system wide scans and flashes."
+	category = "Defense"
+	lifespan = AI_HIDE_DURATION
+	cpu_cost = 15
+	command_delay = 0.5 SECONDS
+	requires_target = 0
+	var/obj/structure/ai_terminal/saved_terminal
+
+/datum/cyberwarfare_command/ai_hide/send_command(var/unused)
+	. = ..()
+	if(!.)
+		return 0
+	if(!our_ai.our_terminal)
+		to_chat(our_ai,"<span class = 'notice'>You need to be in a terminal to do that.</span>")
+		return
+	set_expire()
+	our_ai.Stun(2)
+	saved_terminal = our_ai.our_terminal
+	saved_terminal.held_ai = null
+	to_chat(our_ai,"<span class = 'notice'>You disconnect yourself from your terminal.<span>")
+
+/datum/cyberwarfare_command/ai_hide/command_process()
+	our_ai.Stun(2)
+	. = ..()
+
+/datum/cyberwarfare_command/ai_hide/expire()
+	if(saved_terminal.held_ai)
+		to_chat(our_ai,"<span class = 'notice'>As you try to reconnect to your old terminal, the connection is unexpectedly severed and you lose your connection to the material world...</span>")
+		our_ai.death()
+		. = ..()
+		return
+	saved_terminal.held_ai = our_ai
+	to_chat(our_ai,"<span class = 'notice'>You reconnect to your saved terminal.<span>")
+	. = ..()
+
+#undef AI_HIDE_DURATION
 
 /datum/cyberwarfare_command/switch_terminal
 	name = "Switch Terminal (Brute Force)"
