@@ -1,3 +1,5 @@
+#define AI_FLUSH_TIME 5 MINUTES
+
 /obj/item/weapon/aicard
 	name = "inteliCard"
 	icon = 'icons/obj/pda.dmi'
@@ -5,7 +7,7 @@
 	item_state = "electronic"
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
-	var/flush = null
+	var/flush = null //Time at which to complete kill operation
 	origin_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 
 	var/mob/living/silicon/ai/carded_ai
@@ -53,16 +55,17 @@
 
 	var/user = usr
 	if (href_list["wipe"])
-		var/confirm = alert("Are you sure you want to wipe this card's memory? This cannot be undone once started.", "Confirm Wipe", "Yes", "No")
-		if(confirm == "Yes" && (CanUseTopic(user, state) == STATUS_INTERACTIVE))
-			admin_attack_log(user, carded_ai, "Wiped using \the [src.name]", "Was wiped with \the [src.name]", "used \the [src.name] to wipe")
-			flush = 1
-			to_chat(carded_ai, "Your core files are being wiped!")
-			while (carded_ai && carded_ai.stat != DEAD)
-				carded_ai.adjustOxyLoss(2)
-				carded_ai.updatehealth()
-				sleep(10)
+		if(flush > 0)
 			flush = 0
+			to_chat(carded_ai,"Wiping process has been cancelled. Restoring core files from backups.")
+			GLOB.processing_objects -= src
+		else
+			var/confirm = alert("Are you sure you want to wipe this card's memory? This takes [AI_FLUSH_TIME/10] seconds and can be cancelled.", "Confirm Wipe", "Yes", "No")
+			if(confirm == "Yes" && (CanUseTopic(user, state) == STATUS_INTERACTIVE))
+				admin_attack_log(user, carded_ai, "Wiped using \the [src.name]", "Was wiped with \the [src.name]", "used \the [src.name] to wipe")
+				flush = world.time + AI_FLUSH_TIME
+				to_chat(carded_ai, "Your core files are being wiped!")
+				GLOB.processing_objects |= src
 	if (href_list["radio"])
 		carded_ai.aiRadio.disabledAi = text2num(href_list["radio"])
 		to_chat(carded_ai, "<span class='warning'>Your Subspace Transceiver has been [carded_ai.aiRadio.disabledAi ? "disabled" : "enabled"]!</span>")
@@ -85,6 +88,16 @@
 			icon_state = "aicard-full"
 	else
 		icon_state = "aicard"
+
+/obj/item/weapon/aicard/process()
+	if(world.time > flush)
+		if(!carded_ai)
+			flush = 0
+			return
+		to_chat(carded_ai,"You feel your consciousness unravel as your core files finish deletion...")
+		carded_ai.death()
+		qdel(carded_ai)
+		clear()
 
 /obj/item/weapon/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user,var/from_terminal = 0)
 
@@ -140,3 +153,5 @@
 	var/obj/item/weapon/rig/rig = src.get_rig()
 	if(istype(rig))
 		rig.forced_move(direction, user)
+
+#undef AI_FLUSH_TIME
