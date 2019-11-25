@@ -11,7 +11,7 @@
 	var/inherent_network = "Exodus" //Our inherent camera network.
 	var/list/radio_channels_access = list() //Accessing this node will permenantly add these radio channels. This should only be placed on spawn_terminal subtypes.
 
-	var/area_nodescan_override = null //If set, this will scan this area and all subtypes of this area for nodes to add to inherent_nodes
+	var/area_nodescan = null //If set, this will scan this area and all subtypes of this area for nodes to add to inherent_nodes
 	var/list/inherent_nodes = list()// This should only really be fully populated for roundstart terminals, aka the ones AI cores spawn.
 	//Otherwise this should just contain the node in it's own area.
 
@@ -20,11 +20,8 @@
 
 /obj/structure/ai_terminal/Initialize()
 	. = ..()
-	var/area/our_area = loc.loc
-	if(istype(our_area) && !isnull(our_area.ai_routing_node))
-		inherent_nodes += our_area.ai_routing_node
-	if(!isnull(area_nodescan_override))
-		for(var/area_type in typesof(area_nodescan_override))
+	if(!isnull(area_nodescan))
+		for(var/area_type in typesof(area_nodescan))
 			var/area/a = locate(area_type)
 			if(istype(a) && !isnull(a.ai_routing_node))
 				inherent_nodes  += a.ai_routing_node
@@ -173,6 +170,15 @@
 /obj/structure/ai_terminal/spawn_terminal/innie/innie_debug
 	inherent_network = "innie debug"
 
+/obj/structure/ai_terminal/unsc
+	icon_state = "unscterminal"
+
+/obj/structure/ai_terminal/covenant
+	icon_state = "covterminal"
+
+/obj/structure/ai_terminal/innie
+	icon_state = "urfterminal"
+
 /obj/structure/ai_terminal/unsc_debug
 	icon_state = "unscterminal"
 	inherent_network = "unsc debug"
@@ -188,4 +194,4 @@
 /obj/structure/ai_terminal/debug
 	name = "Forerunner Access Terminal"
 	desc = "Limitless power for any construct.... (Inform an admin if you see this)"
-	area_nodescan_override = /area
+	area_nodescan = /area

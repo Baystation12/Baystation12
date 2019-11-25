@@ -2,6 +2,7 @@
 #include "../faction_base_unsc.dm"
 
 #include "areas.dm"
+#include "ai_items.dm"
 #include "ODP_Cassius_1.dmm"
 #include "ODP_Cassius_2.dmm"
 
