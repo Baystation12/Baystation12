@@ -1,6 +1,7 @@
 #define AI_CHECK_WIRELESS 1
 #define AI_CHECK_RADIO 2
 #define AI_CPULOSS_STUNMAX_DIVISOR 3
+#define RANGECHECK_DELETE_DELAY 1 SECOND //Delay between spawning the image and deleting it.
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
@@ -9,6 +10,7 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/check_EWAR_command,
 	/mob/living/silicon/ai/proc/reset_network_connection,
 	/mob/living/silicon/ai/proc/toggle_resist_carding,
+	/mob/living/silicon/ai/proc/routing_node_check,
 	//mob/living/silicon/ai/proc/ai_announcement,
 	//mob/living/silicon/ai/proc/ai_call_shuttle,
 	//mob/living/silicon/ai/proc/ai_emergency_message,
@@ -104,6 +106,7 @@ var/list/ai_verbs_default = list(
 	/datum/cyberwarfare_command/flash_network,
 	/datum/cyberwarfare_command/trap/logic_bomb,
 	/datum/cyberwarfare_command/trap/terminal_tripwire,
+	/datum/cyberwarfare_command/ai_hide,
 	/datum/cyberwarfare_command/disconnect_protect,
 	/datum/cyberwarfare_command/switch_terminal,
 	/datum/cyberwarfare_command/switch_terminal/stealth)
@@ -193,6 +196,25 @@ var/list/ai_verbs_default = list(
 		to_chat(src,"<span class = 'notice'>No terminal to reset to.</span>")
 		return
 	switch_to_net_by_name(our_terminal.inherent_network)
+
+/mob/living/silicon/ai/proc/routing_node_check()
+	set name = "Check Routing Node Ranges"
+	set category = "EWAR"
+
+
+	var/list/viewed_nodes = view(7,src) & nodes_accessed
+
+	var/ctr = 0
+	for(var/n in viewed_nodes)
+		ctr++
+		var/obj/structure/ai_routing_node/node = n
+		var/area/node_area = node.loc.loc
+		for(var/turf/t in node_area)
+			var/image/image_send = image(icon('code/modules/halo/icons/machinery/ai_area_displays.dmi',t,"area[ctr]"))
+			show_image(src,image_send)
+			spawn(RANGECHECK_DELETE_DELAY)
+				qdel(image_send)
+
 
 /mob/living/silicon/ai/proc/do_network_alert(var/message,var/severity = "danger")
 	message = "\[NETWORK ALERT\] \[[network]\] [message]"
@@ -709,7 +731,7 @@ var/list/ai_verbs_default = list(
 		var/holograms_by_type = decls_repository.get_decls_of_subtype(/decl/ai_holo)
 		for (var/holo_type in holograms_by_type)
 			var/decl/ai_holo/holo = holograms_by_type[holo_type]
-			if (holo.may_be_used_by_ai(ckey))
+			if (holo.may_be_used_by_ai(ckey,faction))
 				hologramsAICanUse.Add(holo)
 		var/decl/ai_holo/choice = input("Please select a hologram:") as null|anything in hologramsAICanUse
 		if(choice)
@@ -866,6 +888,7 @@ var/list/ai_verbs_default = list(
 	if(rig)
 		rig.force_rest(src)
 
+#undef RANGECHECK_DELETE_DELAY
 #undef AI_CPULOSS_STUNMAX_DIVISOR
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO
