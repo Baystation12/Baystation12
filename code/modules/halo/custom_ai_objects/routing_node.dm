@@ -8,6 +8,9 @@
 	var/list/ais_to_access_levels = list() // ai_ref = access level. This is held until another AI spends resources cleaning it.
 	var/lockdown_until = 0
 
+/obj/structure/ai_routing_node/ex_act()
+	return
+
 /obj/structure/ai_routing_node/attack_ai(var/mob/living/silicon/ai/ai)
 	/*if(!(ai in ais_to_access_levels))
 		to_chat(ai,"<span class = 'notice'>DEBUG OVERRIDE: MAXIMUM ACCESS INSTANTLY GAINED.</span>")
@@ -16,7 +19,7 @@
 		ai.nodes_accessed += src
 	*/
 	//If we don't have our accesses from this node, but there are some stored, Reaquire them.
-	if(ai in ais_to_access_levels)
+	if(ai in ais_to_access_levels && get_access_for_ai(ai) > 0)
 		to_chat(ai,"<span class = 'notice'>Access credentials re-obtained from node.<span>")
 		ai.nodes_accessed |= src
 	to_chat(ai,"<span class = 'notice'>Current access level: [get_access_for_ai(ai)]</span>")

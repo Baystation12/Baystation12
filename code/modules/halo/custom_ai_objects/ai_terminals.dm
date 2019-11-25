@@ -15,6 +15,9 @@
 	var/list/inherent_nodes = list()// This should only really be fully populated for roundstart terminals, aka the ones AI cores spawn.
 	//Otherwise this should just contain the node in it's own area.
 
+/obj/structure/ai_terminal/ex_act()
+	return
+
 /obj/structure/ai_terminal/Initialize()
 	. = ..()
 	var/area/our_area = loc.loc
@@ -32,7 +35,7 @@
 	if(held_ai == user)
 		held_ai.switch_to_net_by_name(inherent_network)
 
-/obj/structure/ai_terminal/proc/set_terminal_active(var/is_resisting_carding)
+/obj/structure/ai_terminal/proc/set_terminal_inactive(var/is_resisting_carding)
 	if(!is_resisting_carding)
 		icon_state = "[initial(icon_state)]_on"
 	else
@@ -56,7 +59,7 @@
 		held_ai = null
 		contents -= ai
 		ai.loc = null
-		set_terminal_active(1)
+		set_terminal_inactive(1)
 
 /obj/structure/ai_terminal/proc/pre_move_to_node(var/mob/living/silicon/ai/ai,var/skip_check = 0)
 	var/clear_old = 1
@@ -133,7 +136,7 @@
 		if(access < 3)
 			node.modify_access_levels(ai,3-access)
 	ai.switch_to_net_by_name(inherent_network)
-	set_terminal_active(ai.resist_carding)
+	set_terminal_inactive(ai.resist_carding)
 	apply_radio_channels(ai)
 
 /obj/structure/ai_terminal/spawn_terminal

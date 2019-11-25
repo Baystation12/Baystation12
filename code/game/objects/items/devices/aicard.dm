@@ -98,6 +98,7 @@
 		carded_ai.death()
 		qdel(carded_ai)
 		clear()
+		flush = 0
 
 /obj/item/weapon/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user,var/from_terminal = 0)
 
