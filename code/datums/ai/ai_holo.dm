@@ -8,10 +8,11 @@
 	var/icon_colorize = FALSE
 	var/name = null
 	var/required_ckey = null
+	var/faction_lock = null
 
 
-/decl/ai_holo/proc/may_be_used_by_ai(var/ai_ckey)
-	return !isnull(name) && (isnull(required_ckey) || required_ckey == ai_ckey)
+/decl/ai_holo/proc/may_be_used_by_ai(var/ai_ckey,var/ai_faction)
+	return !isnull(name) && (isnull(required_ckey) || required_ckey == ai_ckey) && (isnull(faction_lock) || ai_faction == faction_lock)
 
 /decl/ai_holo/default
 	icon_state = "Default"
