@@ -1,0 +1,4 @@
+author: "Technetium"
+delete-after: True
+changes: 
+  - rscadd: "Carbon mobs now take radiation damage upon exposure, modified by their species radiation modifier -and- burn modifier."
