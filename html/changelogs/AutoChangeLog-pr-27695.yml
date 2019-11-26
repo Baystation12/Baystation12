@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - rscadd: "All Deity mode spells and structures now have a codex entry visible to the God Cultists that explains what they do, or how to use them."
