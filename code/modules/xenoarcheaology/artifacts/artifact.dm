@@ -308,3 +308,10 @@
 		my_effect.UpdateMove()
 	if(secondary_effect)
 		secondary_effect.UpdateMove()
+
+
+/obj/machinery/artifact/forerunner_artifact
+    name = "Forerunner Artifact"
+    desc = "A large device of Forerunner make."
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "ano51"
