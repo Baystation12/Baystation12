@@ -39,4 +39,4 @@ addons:
       - oracle-java9-set-default
 
 script:
-  - test/run-test.sh
+  - travis_wait 15 test/run-test.sh
