@@ -17,6 +17,7 @@
 	..()
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
 	hard_drive.store_file(new/datum/computer_file/program/records())
+	hard_drive.store_file(new/datum/computer_file/program/suit_sensors())
 	var/datum/extension/interactive/ntos/os = get_extension(src, /datum/extension/interactive/ntos)
 	if(os)
 		os.set_autorun("sensormonitor")

@@ -18208,6 +18208,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/table/standard,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "fDJ" = (
