@@ -34,6 +34,7 @@
 	item_state = "sterile"
 	w_class = ITEM_SIZE_SMALL
 	body_parts_covered = FACE
+	flags_inv = HIDEFACE
 	item_flags = ITEM_FLAG_FLEXIBLEMATERIAL
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.01
