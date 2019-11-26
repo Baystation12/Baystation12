@@ -85,3 +85,46 @@
 
 /area/exo_research_ice_facility/ground/interior/garage
 	name = "Kodiak Base Vehicle Garage"
+
+
+/area/exo_research_ice_facility/sublevel1/interior
+	name = "Kodiak Base sublevel 1 interior"
+	dynamic_lighting = 0
+	requires_power= 0
+	has_gravity = 1
+	luminosity = 1
+
+/area/exo_research_ice_facility/sublevel1/interior/Hallway
+	name = "Kodiak Base Sublevel 1 Main Hallway"
+
+/area/exo_research_ice_facility/sublevel1/interior/orionsector
+	name = "Kodiak Base Orion Sector"
+
+/area/exo_research_ice_facility/sublevel1/interior/mech
+	name = "Kodiak Base Mech Lab"
+
+/area/exo_research_ice_facility/sublevel1/interior/mechtest
+	name = "Kodiak Base Mech Testing Range"
+
+/area/exo_research_ice_facility/sublevel1/interior/destruct
+	name = "Kodiak Base Sanitation Room"
+
+/area/exo_research_ice_facility/sublevel1/interior/xenoresearch
+	name = "Kodiak Base Xeno Specimen Research"
+
+/area/exo_research_ice_facility/sublevel1/interior/xenoarchaeology
+	name = "Kodiak Base Xenoarchaeology Research"
+
+/area/exo_research_ice_facility/sublevel1/interior/virology
+	name = "Kodiak Base Virology Research"
+
+/area/exo_research_ice_facility/sublevel1/interior/botany
+	name = "Kodiak Base Botanical Research"
+
+
+/area/exo_research_ice_facility/sublevel1/exterior/Caves
+	name = "Northwind Lower Caves"
+	dynamic_lighting = 1
+	requires_power= 0
+	has_gravity = 1
+	luminosity = 0
