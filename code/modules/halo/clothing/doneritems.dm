@@ -1430,6 +1430,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_override = MARINE_OVERRIDE
 	item_state = "sleepybandana"
 	icon_state = "sleepybandana"
+	flags_inv = null
 
 /obj/item/weapon/storage/box/large/donator/sleepy_marine
 	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard,
@@ -1790,14 +1791,16 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	desc = " this is a CH252MC-V modified helmet of the CH252-V version, it contains a 1 eye visor, and a blue cross instead of a  red one , also it seems to have holographic cat ears attached"
 
 /obj/item/clothing/gloves/thick/unsc/riley
+	name = "UNSC Combat Gloves"
 	icon = MARINE_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "UNSC Combat Gloves OLD"
+	item_state = "UNSCMarineGloves"
 	icon_state = "unsc gloves_obj"
 
 /obj/item/clothing/shoes/marine/riley
+	name = "VZG7 Armored Boots"
 	item_state = "boots OLD"
-	icon_state = "evalegs"
+	icon_state = "VZG7 Armored Legs"
 
 /obj/item/clothing/under/unsc/marine_fatigues/riley
 	item_state = "UNSC Marine Fatiguesold"
