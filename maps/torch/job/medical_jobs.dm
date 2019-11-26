@@ -150,9 +150,10 @@
 						SKILL_VIROLOGY  = HAS_PERK,
 	                    SKILL_CHEMISTRY = SKILL_ADEPT)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
+	max_skill = list(   SKILL_MEDICAL     = SKILL_ADEPT,
+						SKILL_ANATOMY	  = SKILL_ADEPT,
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
-	skill_points = 26
+	skill_points = 16
 
 	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry,
 	 						access_virology, access_morgue, access_crematorium)
