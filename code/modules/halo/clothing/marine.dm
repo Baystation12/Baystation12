@@ -106,6 +106,18 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
+/obj/item/clothing/suit/storage/marine/pilot
+	name = "Flak Vest"
+	desc = "A vest made of flak to protect against ballistic or explosions projectiles."
+	icon_state = "unsc_pilot_armor-obj"
+	item_state = "unsc_pilot_armor-worn"
+	item_flags = THICKMATERIAL
+	w_class = ITEM_SIZE_LARGE
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	armor = list(melee = 30, bullet = 30, laser = 10, energy = 10, bomb = 45, bio = 0, rad = 0)
+	slots = 2
+	armor_thickness = 20
+
 /obj/item/clothing/suit/storage/marine/military_police
 	name = "M52A Body Armor NavSec"
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps. This one is modified for the use of naval security officers."
