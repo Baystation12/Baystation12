@@ -6,6 +6,8 @@
 
 #include "../Exoplanet Research/Exoplanet Research Ice/includes.dm"
 
+#include "../Admin Planet/includes.dm"
+
 #include "../UNSC_Halberd_Class/includes.dm"
 
 #include "../ONI_Prowler/includes.dm"
