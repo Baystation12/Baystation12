@@ -1,5 +1,0 @@
-author: "Rain7x"
-delete-after: True
-changes: 
-  - tweak: "The job Pharmacist is now called \"Laboratory Technician\". Their job has been expanded to include virology duties."
-  - rscdel: "The \"Laboratory Technician\" alt-title has been removed from the Research Assistant Role."
