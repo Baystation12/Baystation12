@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Shield generator monitoring programs now display the same shield statuses as the shield generator UI itself"
