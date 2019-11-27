@@ -4,6 +4,9 @@
 #define ITEM_INHAND 'code/modules/halo/clothing/odst_items.dmi'
 #define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
 #define MARINE_INHAND 'code/modules/halo/clothing/marine_items.dmi'
+#define URF_HAND 'code/modules/halo/clothing/head.dmi'
+#define URF_OVERRIDE 'code/modules/halo/clothing/urf_commando.dmi'
+
 
 //Obj sprites go in ITEM_INHAND or MARINE_INHAND
 //WORN sprites go in ODST_OVERRIDE or MARINE_OVERRIDE
@@ -16,7 +19,7 @@
 	name = "Snowflake Crate"
 	desc = "Contains gear for those special snowflakes."
 	w_class = ITEM_SIZE_GARGANTUAN
-	max_storage_space = 46
+	max_storage_space = 50
 	max_w_class = ITEM_SIZE_GARGANTUAN
 	startswith = list()
 	can_hold = list()
@@ -57,13 +60,30 @@
 	desc = "The Atmospheric/Exoatmospheric sealed variant of the standard combat boots worn by the members of the UNSC Marine Corps."
 	name = "A/X Combat Boots"
 	item_state = "ashvor-boots_worn"
-	icon_state = "ashvor-boots_obj"
+	icon_state = "ashvor-boots_obj0"
+	icon_base = "ashvor-boots_obj"
 
 /obj/item/weapon/storage/backpack/odst/regular/ashvor
 	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force."
 	name = "UNSC Tactical Backpack"
 	item_state = "ashvor-backpack_worn"
 	icon_state = "ashvor-backpack_obj"
+
+/obj/item/weapon/gun/projectile/m6d_magnum/ashvor
+	name = "\improper M6G Magnum"
+	desc = "A UNSC sidearm and one of the variants of Misriah Armory's M6 handgun series. Takes 12.7mm calibre magazines."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "m6g"
+	item_state = "m6g"
+	fire_sound = 'code/modules/halo/sounds/Magnum_Reach_Fire.wav'
+	reload_sound = 'code/modules/halo/sounds/Magnum_Reach_Reload.wav'
+
+/obj/item/weapon/gun/projectile/m6d_magnum/ashvor/update_icon()
+	if(ammo_magazine)
+		icon_state = "m6g"
+	else
+		icon_state = "m6g_unloaded"
+
 
 /obj/item/weapon/storage/box/large/donator/ashvor
 	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/ashvor,
@@ -270,6 +290,83 @@
 	head = /obj/item/clothing/head/helmet/odst/donator/eonoc
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/eonoc
 	back = /obj/item/weapon/storage/backpack/odst/eonoc
+
+////////eluxor\\\\\\\\
+
+//URFC
+
+/obj/item/clothing/under/urfc_jumpsuit/eluxor
+	name = "SOE Commando uniform"
+	desc = "Standard issue SOE Commando uniform, more badass than that, you die."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_state = "harun_clothes"
+	item_state = "harun_clothes"
+	worn_state = "harun_clothes"
+
+/obj/item/clothing/head/helmet/urfccommander/eluxor
+	name = "Harun's Turban"
+	desc = "A turban made of some kind of resistant material, it has an emblem with an Eagle and a fist on the front."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "harun_turban"
+	icon_state = "harun_turban_obj"
+
+/obj/item/clothing/suit/armor/special/urfc/eluxor
+	name = "Harun's Custom Armor"
+	desc = "A custom made armorset with a cape included, clearly made by an armorsmisth in a very rough and old fashioned way. Clearly made by the Khoros Raiders."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "harun_armor"
+	icon_state = "harun_armor_obj"
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+
+/obj/item/clothing/shoes/magboots/urfc/eluxor
+	name = "SOE Magboots"
+	desc = "Experimental black magnetic boots, used to ensure the user is safely attached to any surfaces during extra-vehicular operations. They're large enough to be worn over other footwear."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_state = "harun_boots_obj0"
+	icon_base = "harun_boots_obj"
+	item_state = "harun_boots"
+
+/obj/item/clothing/gloves/soegloves/urfc/eluxor
+	name = "SOE Gloves"
+	desc = "These  gloves are somewhat fire and impact-resistant."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "harun_gloves"
+	icon_state = "harun_gloves_obj"
+
+/obj/item/clothing/mask/gas/soebalaclava/eluxor
+	name = "SOE Balaclava"
+	desc = "Designed to both hide identities and keep your face comfy and warm, a mask that can be connected to an air supply. Filters harmful gases from the air."
+	icon_state = "harun_balaclava"
+	item_state = "harun_balaclava"
+
+/obj/item/weapon/storage/box/large/donator/eluxor
+	startswith = list(/obj/item/clothing/under/urfc_jumpsuit/eluxor,
+					/obj/item/clothing/head/helmet/urfccommander/eluxor,
+					/obj/item/clothing/suit/armor/special/urfc/eluxor,
+					/obj/item/clothing/shoes/magboots/urfc/eluxor,
+					/obj/item/clothing/gloves/soegloves/urfc/eluxor,
+					/obj/item/clothing/mask/gas/soebalaclava/eluxor,
+					)
+	can_hold = list(/obj/item/clothing/under/urfc_jumpsuit/eluxor,
+					/obj/item/clothing/head/helmet/urfccommander/eluxor,
+					/obj/item/clothing/suit/armor/special/urfc/eluxor,
+					/obj/item/clothing/shoes/magboots/urfc/eluxor,
+					/obj/item/clothing/gloves/soegloves/urfc/eluxor,
+					/obj/item/clothing/mask/gas/soebalaclava/eluxor,
+					)
+
+/decl/hierarchy/outfit/eluxor
+	name = "eluxor - urfc"
+	uniform = /obj/item/clothing/under/urfc_jumpsuit/eluxor
+	head = /obj/item/clothing/head/helmet/urfccommander/eluxor
+	suit = /obj/item/clothing/suit/armor/special/urfc/eluxor
+	gloves = /obj/item/clothing/gloves/soegloves/urfc/eluxor
+	shoes = /obj/item/clothing/shoes/magboots/urfc/eluxor
+	mask = /obj/item/clothing/mask/gas/soebalaclava/eluxor
 
 ////////flaksim\\\\\\\\
 
@@ -868,6 +965,24 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
+/obj/item/clothing/suit/armor/special/urfc/aztec
+	name = "Aztec Armour"
+
+	item_state = "aztecpack_worn"
+	icon_state = "aztecpack_obj"
+
+/obj/item/clothing/shoes/magboots/urfc/aztec
+	name = "Aztec Boots"
+
+	item_state = "aztecboots_worn"
+	icon_state = "scpboots_obj"
+
+/obj/item/clothing/gloves/soegloves/urfc/aztec
+	name = "Aztec Gloves"
+
+	item_state = "aztecgloves_worn"
+	icon_state = "scpgloves_obj"
+
 /decl/hierarchy/outfit/mclovin_urfc
 	name = "mclovin - urfc"
 	head = /obj/item/clothing/head/helmet/urfc/mclovin
@@ -899,6 +1014,23 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 					/obj/item/clothing/suit/justice/zeal/mclovin,
 					/obj/item/weapon/material/machete/mclovin
 					)
+
+/decl/hierarchy/outfit/mclovin_aztec
+	name = "mclovin - aztec"
+	head = /obj/item/clothing/head/helmet/zeal/mclovin
+	suit = /obj/item/clothing/suit/justice/zeal/mclovin
+	l_hand = /obj/item/weapon/material/machete/mclovin
+
+/obj/item/weapon/storage/box/large/donator/aztec
+	startswith = list(/obj/item/clothing/suit/armor/special/urfc/aztec,
+					/obj/item/clothing/shoes/magboots/urfc/aztec,
+					/obj/item/clothing/gloves/soegloves/urfc/aztec
+					)
+	can_hold = list(/obj/item/clothing/suit/armor/special/urfc/aztec,
+					/obj/item/clothing/shoes/magboots/urfc/aztec,
+					/obj/item/clothing/gloves/soegloves/urfc/aztec
+					)
+
 
 ////////Moerk\\\\\\\\
 
@@ -984,28 +1116,42 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 
 //URFC
 
-/obj/item/clothing/head/helmet/soe/pantascmdo
-	name = "Eridanus Order's Helmet"
 
-	item_state = "pantascmdo_worn"
-	icon_state = "pantascmdo_helmet"
+/obj/item/clothing/head/helmet/urfc/pantas
+	name = "SOE Bauk Helmet"
+	desc = "A simple helmet. Despite the old age, a lot of work has been put into adding additional armor and refining the base processes. It's quite heavy, but a lot of soft material has been added to the inside to make the metal more comfy. Outdated, but can be expected in combat engagements to perform on par with modern equipment, due to the extensive modifications."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "pantas_soe_helmet_worn"
+	icon_state = "pantas_soe_helmet_obj"
+	item_state_slots = list(slot_l_hand_str = "pantas_soe_helmet_worn", slot_r_hand_str = "pantas_soe_helmet_worn")
 
-/obj/item/clothing/suit/armor/special/soe/pantascmdo
-	name = "Eridanus Order's Armour"
+/obj/item/clothing/suit/armor/special/urfc/pantas
+	name = "SOE Bauk Armor"
+	desc = "A bulletproof vest. Filled with pouches and storage compartments, while still keeping a scary amount of both mobility and protection. An ideal collage of the strengths of the URF, but with the added protection found only in high tier UNSC equipment. It's quite comfy, probably won't last long in space."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "pantas_soe_armor_worn"
+	icon_state = "pantas_soe_armor_obj"
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state_slots = list(slot_l_hand_str = "pantas_soe_armor_worn", slot_r_hand_str = "pantas_soe_armor_worn")
 
-	item_state = "pantascmdo_armour_worn"
-	icon_state = "pantascmdo_armour_obj"
+/obj/item/clothing/head/helmet/soe/pantas
+	name = "SOE Venerator Helmet"
+	desc = "Non-Standard issue short-EVA capable helmet issued to commandos."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "pantas_soe_space_helmet_worn"
+	icon_state = "pantas_soe_space_helmet_obj"
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state_slots = list(slot_l_hand_str = "pantas_soe_space_helmet_worn", slot_r_hand_str = "pantas_soe_space_helmet_worn")
 
-/obj/item/weapon/storage/backpack/cmdo/pantascmdo
-	name = "Eridanus Order's Backpack"
-
-	icon_state = "c_packO_pantascmdo"
-	item_state = "c_pack_pantascmdo_worn"
-
-	item_state_slots = list(
-	slot_l_hand_str = "c_pack_pantascmdo",
-	slot_r_hand_str = "c_pack_pantascmdo",
-	)
+obj/item/clothing/suit/armor/special/soe/pantas
+	name = "SOE Venerator Armor"
+	desc = "Heavyweight, somewhat durable armour issued to commandos for increased survivability in space."
+	icon = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state = "pantas_soe_spacesuit_worn"
+	icon_state = "pantas_soe_spacesuit_obj"
+	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
+	item_state_slots = list(slot_l_hand_str = "pantas_soe_spacesuit_worn", slot_r_hand_str = "pantas_soe_spacesuit_worn")
 
 /obj/item/weapon/material/machete/pantascmdo
 	name = "Judgement of Eridanus"
@@ -1017,7 +1163,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
-/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
+/obj/item/weapon/gun/projectile/br85/pantasma3
 	name = "Ancient AK-47"
 	desc = "An ancient weapon used in forgettable times. How does it even still work?"
 	icon_state = "pantasAK47"
@@ -1027,35 +1173,49 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
-
-/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3/update_icon()
+/obj/item/weapon/gun/projectile/br85/pantasma3/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "pantasAK47"
 	else
 		icon_state = "pantasAK47_unloaded"
 
+/obj/item/weapon/tank/jetpack/void/urfc/pantas
+	icon_state = "pantas_soe_airtank_obj"
+	item_state = "pantas_soe_airtank_worn"
+
 /obj/item/weapon/storage/box/large/donator/pantas_urfc
-	startswith = list(/obj/item/clothing/head/helmet/soe/pantascmdo,
-					/obj/item/clothing/suit/armor/special/soe/pantascmdo,
-					/obj/item/weapon/storage/backpack/cmdo/pantascmdo,
+	startswith = list(/obj/item/clothing/head/helmet/urfc/pantas,
+					/obj/item/clothing/suit/armor/special/urfc/pantas,
+					/obj/item/clothing/head/helmet/soe/pantas,
+					/obj/item/clothing/suit/armor/special/soe/pantas,
 					/obj/item/weapon/material/machete/pantascmdo,
-					/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
+					/obj/item/weapon/gun/projectile/br85/pantasma3,
+					/obj/item/weapon/tank/jetpack/void/urfc/pantas
 					)
-	can_hold = list(/obj/item/clothing/head/helmet/soe/pantascmdo,
-					/obj/item/clothing/suit/armor/special/soe/pantascmdo,
-					/obj/item/weapon/storage/backpack/cmdo/pantascmdo,
+	can_hold = list(/obj/item/clothing/head/helmet/urfc/pantas,
+					/obj/item/clothing/suit/armor/special/urfc/pantas,
+					/obj/item/clothing/head/helmet/soe/pantas,
+					/obj/item/clothing/suit/armor/special/soe/pantas,
 					/obj/item/weapon/material/machete/pantascmdo,
-					/obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
+					/obj/item/weapon/gun/projectile/br85/pantasma3,
+					/obj/item/weapon/tank/jetpack/void/urfc/pantas
 					)
 
 /decl/hierarchy/outfit/pantas_urfc
 	name = "pantas - urfc"
-	head = /obj/item/clothing/head/helmet/soe/pantascmdo
-	suit = /obj/item/clothing/suit/armor/special/soe/pantascmdo
-	back = /obj/item/weapon/storage/backpack/cmdo/pantascmdo
+	head = /obj/item/clothing/head/helmet/urfc/pantas
+	suit = /obj/item/clothing/suit/armor/special/urfc/pantas
 	l_hand = /obj/item/weapon/material/machete/pantascmdo
-	r_hand = /obj/item/weapon/gun/projectile/ma5b_ar/MA3/pantasma3
+	r_hand = /obj/item/weapon/gun/projectile/br85/pantasma3
+
+/decl/hierarchy/outfit/pantas_soe
+	name = "pantas - soe"
+	head = /obj/item/clothing/head/helmet/soe/pantas
+	suit = /obj/item/clothing/suit/armor/special/urfc/pantas
+	l_hand = /obj/item/weapon/material/machete/pantascmdo
+	r_hand = /obj/item/weapon/gun/projectile/br85/pantasma3
+	back = /obj/item/weapon/tank/jetpack/void/urfc/pantas
 
 //SANGHEILI (MINOR)
 
@@ -1270,6 +1430,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_override = MARINE_OVERRIDE
 	item_state = "sleepybandana"
 	icon_state = "sleepybandana"
+	flags_inv = null
 
 /obj/item/weapon/storage/box/large/donator/sleepy_marine
 	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/sleepy_retard,
@@ -1317,6 +1478,20 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_override = ODST_OVERRIDE
 	item_state = "sleepy odst-backpack_worn"
 	icon_state = "sleepy odst-backpack_obj"
+
+/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/sleepy
+	name = "\improper M6G Golden Magnum"
+	desc = "A luxury firearm obtained by paycutting your fellow ODSTs."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "m6gold"
+	item_state = "m6gold"
+
+/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/sleepy/update_icon()
+	if(ammo_magazine)
+		icon_state = "m6gold"
+	else
+		icon_state = "m6gold_unloaded"
+
 
 /obj/item/weapon/storage/box/large/donator/sleepy
 	startswith = list(/obj/item/clothing/suit/armor/special/odst/sleepy,
@@ -1495,13 +1670,13 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //Spartan
 
 /obj/item/clothing/head/helmet/spartan/stingray
-	name = "Ryan-073's MJOLNIR Powered Assault Armour Helmet"
+	name = "Ryan-074's MJOLNIR Powered Assault Armour Helmet"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon_state = "stingray-spartanhelm_obj"
 	item_state = "stingray-spartanhelm_worn"
 
 /obj/item/clothing/suit/armor/special/spartan/stingray
-	name = "Ryan-073's MJOLNIR Powered Assault Armour"
+	name = "Ryan-074's MJOLNIR Powered Assault Armour"
 	desc = "a technologically-advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a SPARTAN-II, supersoldier in the field of combat.This one appears to have been heavily modified per the user's tactical needs."
 	icon_state = "stingray-spartanarmor_obj"
 	item_state = "stingray-spartanarmor_worn"
@@ -1616,14 +1791,16 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	desc = " this is a CH252MC-V modified helmet of the CH252-V version, it contains a 1 eye visor, and a blue cross instead of a  red one , also it seems to have holographic cat ears attached"
 
 /obj/item/clothing/gloves/thick/unsc/riley
+	name = "UNSC Combat Gloves"
 	icon = MARINE_INHAND
 	icon_override = MARINE_OVERRIDE
-	item_state = "UNSC Combat Gloves OLD"
+	item_state = "UNSCMarineGloves"
 	icon_state = "unsc gloves_obj"
 
 /obj/item/clothing/shoes/marine/riley
+	name = "VZG7 Armored Boots"
 	item_state = "boots OLD"
-	icon_state = "evalegs"
+	icon_state = "VZG7 Armored Legs"
 
 /obj/item/clothing/under/unsc/marine_fatigues/riley
 	item_state = "UNSC Marine Fatiguesold"
@@ -1636,18 +1813,41 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "riley-armor_worn"
 	icon_state = "riley-armor_obj"
 
+/obj/item/weapon/gun/projectile/m7_smg/riley
+	name = "P90-XTR"
+	desc = "This is a P90-XTR an old gun form the 21st century with seems to have been painted in a blue/greyish camo and updated and modified to take a 60 round magazine of 5mm bullets."
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "p90"
+	item_state = "p90"
+	wielded_item_state = null
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = null,
+		slot_s_store_str = null,
+		slot_belt_str = null,
+		)
+
+/obj/item/weapon/gun/projectile/m7_smg/riley/update_icon()
+	if(ammo_magazine)
+		icon_state = "p90"
+	else
+		icon_state = "p90_unloaded"
+
 /obj/item/weapon/storage/box/large/donator/riley
 	startswith = list(/obj/item/clothing/head/helmet/marine/riley,
 					/obj/item/clothing/suit/storage/marine/riley,
 					/obj/item/clothing/shoes/marine/riley,
 					/obj/item/clothing/under/unsc/marine_fatigues/riley,
-					/obj/item/clothing/gloves/thick/unsc/riley
+					/obj/item/clothing/gloves/thick/unsc/riley,
+					/obj/item/weapon/gun/projectile/m7_smg/riley
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/marine/riley,
 					/obj/item/clothing/suit/storage/marine/riley,
 					/obj/item/clothing/shoes/marine/riley,
 					/obj/item/clothing/under/unsc/marine_fatigues/riley,
-					/obj/item/clothing/gloves/thick/unsc/riley
+					/obj/item/clothing/gloves/thick/unsc/riley,
+					/obj/item/weapon/gun/projectile/m7_smg/riley
 					)
 
 /decl/hierarchy/outfit/riley_marine
@@ -1660,3 +1860,5 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 #undef ITEM_INHAND
 #undef MARINE_OVERRIDE
 #undef MARINE_INHAND
+#undef URF_OVERRIDE
+#undef URF_HAND

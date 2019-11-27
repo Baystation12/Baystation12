@@ -97,6 +97,7 @@
 	var/is_charging = 0
 	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
 	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
+	var/advanced_covenant = 0
 
 /obj/item/weapon/gun/New()
 	..()
@@ -230,6 +231,10 @@
 				M.drop_item()
 		else
 			handle_click_empty(user)
+		return 0
+	var/mob/living/carbon/human/h = user
+	if(h.species.can_operate_advanced_covenant == 0 && advanced_covenant == 1)
+		to_chat(h,"<span class= 'danger'>You don't know how to operate this weapon!</span>")
 		return 0
 	return 1
 

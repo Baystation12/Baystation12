@@ -671,6 +671,7 @@ BLIND     // can't see anything
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
+	var/fitfemale_down = 0 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	sprite_sheets = list(
 		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
 		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi'
@@ -686,10 +687,13 @@ BLIND     // can't see anything
 	..()
 	update_rolldown_status()
 	update_rollsleeves_status()
+	update_fitfemale_status() //ELUXOR
 	if(rolled_down == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsuit
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
+	if(fitfemale_down == -1)
+		verbs -= /obj/item/clothing/under/verb/fitfemale //mine
 
 /obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
@@ -703,7 +707,6 @@ BLIND     // can't see anything
 		ret.icon_state = icon_state
 	ret.icon_state = "[ret.icon_state]_s"
 	return ret
-
 
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(accessories && accessories.len)
@@ -773,11 +776,36 @@ BLIND     // can't see anything
 		rolled_sleeves = -1
 	if(H) update_clothing_icon()
 
+//HELP
+
+/obj/item/clothing/under/proc/update_fitfemale_status()
+	var/mob/living/carbon/human/H
+	if(istype(src.loc, /mob/living/carbon/human))
+		H = src.loc
+
+	var/icon/under_icon
+	if(icon_override)
+		under_icon = icon_override
+	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
+		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(item_icons && item_icons[slot_w_uniform_str])
+		under_icon = item_icons[slot_w_uniform_str]
+	else
+		under_icon = default_onmob_icons[slot_w_uniform_str]
+
+	if(("[worn_state]_f_s") in icon_states(under_icon))
+		if(fitfemale_down != 1)
+			fitfemale_down = 0
+	else
+		fitfemale_down = -1
+	if(H) update_clothing_icon()
+
+//END
+
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_w_uniform()
-
 
 /obj/item/clothing/under/examine(mob/user)
 	. = ..(user)
@@ -885,6 +913,9 @@ BLIND     // can't see anything
 	if(rolled_down == 1)
 		to_chat(usr, "<span class='notice'>You must roll up your [src] first!</span>")
 		return
+	if(fitfemale_down == 1)
+		to_chat(usr, "<span class='notice'>You cannot roll your [src]'s sleeves!</span>")
+		return
 
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
@@ -895,6 +926,40 @@ BLIND     // can't see anything
 		body_parts_covered = initial(body_parts_covered)
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
+	update_clothing_icon()
+
+//ELUXOR
+/obj/item/clothing/under/verb/fitfemale()
+	set name = "Fit uniform"
+	set category = "Object"
+	set src in usr
+	if(!istype(usr, /mob/living)) return
+	if(usr.stat) return
+
+	update_fitfemale_status()
+	if(fitfemale_down == -1)
+		to_chat(usr, "<span class='notice'>You cannot fit your [src]</span>")
+		return
+	if(rolled_down == 1)
+		to_chat(usr, "<span class='notice'>You must roll up your [src] first!</span>")
+		return
+
+	update_fitfemale_status()
+	if(fitfemale_down == -1)
+		to_chat(usr, "<span class='notice'>You cannot fit your [src]</span>")
+		return
+	if(rolled_sleeves == 1)
+		to_chat(usr, "<span class='notice'>You cannot fit the [src]'s with your sleeves up!</span>")
+		return
+
+
+	fitfemale_down = !fitfemale_down
+	if(fitfemale_down)
+		item_state_slots[slot_w_uniform_str] = "[worn_state]_f"
+		to_chat(usr, "<span class='notice'>You fit up your [src] into a female version.</span>")
+	else
+		item_state_slots[slot_w_uniform_str] = "[worn_state]"
+		to_chat(usr, "<span class='notice'>You let [src] be baggy.</span>")
 	update_clothing_icon()
 
 /obj/item/clothing/under/rank/New()

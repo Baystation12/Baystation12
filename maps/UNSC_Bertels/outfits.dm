@@ -9,7 +9,7 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/orange
-	shoes = /obj/item/clothing/shoes/workboots
+	shoes = /obj/item/clothing/shoes/jackboots
 	belt = /obj/item/weapon/storage/belt/utility/full
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
 
@@ -20,7 +20,7 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/blue
-	shoes =  /obj/item/clothing/shoes/black
+	shoes =  /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
 
 	flags = 0
@@ -30,7 +30,7 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/yellow
-	shoes =  /obj/item/clothing/shoes/black
+	shoes =  /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
 
 	flags = 0
@@ -40,8 +40,8 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/lblue
-	shoes =  /obj/item/clothing/shoes/black
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
+	shoes =  /obj/item/clothing/shoes/jackboots
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
 
 	flags = 0
 
@@ -61,7 +61,7 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/brown
-	shoes = /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted)
 
 	flags = 0
@@ -71,7 +71,7 @@
 
 	l_ear = /obj/item/device/radio/headset/unsc
 	uniform = /obj/item/clothing/under/unsc/red
-	shoes = /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
 
 	flags = 0

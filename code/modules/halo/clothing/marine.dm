@@ -41,7 +41,7 @@
 /obj/item/clothing/head/helmet/marine/medic/visor
 	name = "Olive Camo CH251-V Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "CH252 Helmet Medic"
+	item_state = "CH252 Visor Helmet Medic"
 	icon_state = "helmet medic_obj"
 	body_parts_covered = HEAD|EYES
 
@@ -105,6 +105,18 @@
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/marine/pilot
+	name = "Flak Vest"
+	desc = "A vest made of flak to protect against ballistic or explosions projectiles."
+	icon_state = "unsc_pilot_armor-obj"
+	item_state = "unsc_pilot_armor-worn"
+	item_flags = THICKMATERIAL
+	w_class = ITEM_SIZE_LARGE
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	armor = list(melee = 30, bullet = 30, laser = 10, energy = 10, bomb = 45, bio = 0, rad = 0)
+	slots = 2
+	armor_thickness = 20
 
 /obj/item/clothing/suit/storage/marine/military_police
 	name = "M52A Body Armor NavSec"
@@ -180,7 +192,7 @@
 	item_state = "UNSC Marine Ammo Belt"
 	storage_slots = 6
 
-	can_hold = list(/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/chem_grenade/incendiary)
+	can_hold = list(/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/ammo_casing)
 
 /obj/item/weapon/storage/belt/marine_medic
 	name = "Medical Supplies Storage Belt"
@@ -319,6 +331,7 @@
 	item_state = "evalegs"
 	icon_state = "evalegs"
 	item_flags = NOSLIP|STOPPRESSUREDAMAGE|AIRTIGHT
+	can_hold_knife = 1
 	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 30, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 

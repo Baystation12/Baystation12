@@ -4,7 +4,7 @@
 
 #include "../faction_bases/ODP_Cassius/ODP_Cassius.dm"
 
-#include "../Exoplanet Research/includes.dm"
+#include "../Exoplanet Research/Exoplanet Research Ice/includes.dm"
 
 #include "../Admin Planet/includes.dm"
 
