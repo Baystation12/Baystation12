@@ -121,6 +121,9 @@
 /area/exo_research_ice_facility/sublevel1/interior/botany
 	name = "Kodiak Base Botanical Research"
 
+/area/exo_research_ice_facility/sublevel1/interior/slipspacelab
+	name = "Kodiak Base Slipspace Lab"
+
 
 /area/exo_research_ice_facility/sublevel1/exterior/Caves
 	name = "Northwind Lower Caves"

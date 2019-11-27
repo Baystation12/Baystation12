@@ -4,6 +4,8 @@
 	supervisors = "the ONI Research Director"
 	total_positions = 4
 	spawn_positions = 4
+	account_allowed = 1
+	economic_modifier = 0.5
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	alt_titles = list("Doctor","Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")
 	selection_color = "#008000"
@@ -19,6 +21,8 @@
 	supervisors = "the directors of ONI Section III"
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 1
 	outfit_type = /decl/hierarchy/outfit/job/researchdirector
 	selection_color = "#008000"
 	access = list(310,311)
@@ -33,6 +37,8 @@
 	supervisors = "the ONI Security Commander"
 	total_positions = 8
 	spawn_positions = 4
+	account_allowed = 1
+	economic_modifier = 0.5
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
 	access = list(310,311)
@@ -47,6 +53,8 @@
 	supervisors = "the ONI Research Director"
 	total_positions = 1
 	spawn_positions = 1
+	account_allowed = 1
+	economic_modifier = 0.5
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
 	selection_color = "#008000"
 	access = list(310,311)
