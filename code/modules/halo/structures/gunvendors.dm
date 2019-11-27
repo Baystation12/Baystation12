@@ -23,7 +23,7 @@
 	desc = "Storage for advanced weapons and ammunition"
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
-	req_access = list(308)
+	req_access = list(308,311)
 	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 2
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/projectile/m41 = 1, /obj/item/weapon/storage/box/spnkr = 2,/obj/item/weapon/plastique = 2,/obj/item/weapon/armor_patch = 2)
 
@@ -84,7 +84,7 @@
 	desc = "A vendor full of attachments for the MA5B."
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
-	req_access = list(308)
+	req_access = list(308,311)
 	products = list(\
 	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
 	/obj/item/weapon_attachment/ma5_upper_railed =5,
