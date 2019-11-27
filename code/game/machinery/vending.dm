@@ -69,6 +69,8 @@
 	var/obj/item/weapon/coin/coin
 	var/datum/wires/vending/wires = null
 
+	ai_access_level = 2
+
 /obj/machinery/vending/New()
 	..()
 	wires = new(src)

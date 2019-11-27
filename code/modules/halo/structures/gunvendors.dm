@@ -1,6 +1,7 @@
 
 /obj/machinery/vending/armory
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
+	ai_access_level = 3
 
 /obj/machinery/vending/armory/attackby(var/atom/A,var/mob/user)
 	if(A in products)

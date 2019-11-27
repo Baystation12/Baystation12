@@ -1,7 +1,7 @@
 #define AI_CHECK_WIRELESS 1
 #define AI_CHECK_RADIO 2
 #define AI_CPULOSS_STUNMAX_DIVISOR 3
-#define RANGECHECK_DELETE_DELAY 1 SECOND //Delay between spawning the image and deleting it.
+#define RANGECHECK_DELETE_DELAY 5 SECONDS //Delay between spawning the image and deleting it.
 
 var/list/ai_list = list()
 var/list/ai_verbs_default = list(
@@ -195,7 +195,9 @@ var/list/ai_verbs_default = list(
 	if(!our_terminal)
 		to_chat(src,"<span class = 'notice'>No terminal to reset to.</span>")
 		return
+	destroy_eyeobj()
 	switch_to_net_by_name(our_terminal.inherent_network)
+	create_eyeobj(loc.loc)
 
 /mob/living/silicon/ai/proc/routing_node_check()
 	set name = "Check Routing Node Ranges"
