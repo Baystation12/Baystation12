@@ -20,7 +20,6 @@
 "at" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "au" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "av" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
-"aw" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "ax" = (/obj/machinery/door/airlock/halo_maint{name = "SOEIV Deployment Rack"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "ay" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/corvette/onifox/starboardengine)
 "az" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
@@ -77,7 +76,6 @@
 "bA" = (/obj/machinery/power/apc/infinite,/turf/simulated/wall/r_wall,/area/corvette/onifox/communications)
 "bB" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "bC" = (/obj/structure/table/woodentable,/obj/machinery/light{dir = 1},/obj/item/weapon/card/id/oni,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"bD" = (/obj/structure/closet/wall_medical{pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "bE" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "bF" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "bG" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/onifox/communications)
@@ -108,7 +106,6 @@
 "ci" = (/obj/machinery/light{dir = 1},/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "cj" = (/obj/structure/sign/halo_floorsign/bridge{tag = "icon-bridge (WEST)"; icon_state = "bridge"; dir = 8},/obj/machinery/light{dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "ck" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"cl" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "cm" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "cn" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "co" = (/obj/machinery/light{dir = 1},/obj/structure/closet/wall_medical{pixel_y = 32},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
@@ -212,7 +209,6 @@
 "eo" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/atmospherics/binary/fusion_cooling{icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "ep" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 9},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "eq" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
-"es" = (/obj/machinery/nav_computer/unsc,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "et" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "eu" = (/obj/machinery/atmospherics/pipe/manifold/hidden/blue{icon_state = "map"; dir = 8},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "ev" = (/obj/machinery/atmospherics/pipe/simple/hidden/blue{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 10},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
@@ -297,25 +293,51 @@
 "gb" = (/obj/machinery/button/remote/blast_door{_wifi_id = "prowlerportreactor"; id = "prowlerportreactor"; name = "Blast Door Control"; pixel_x = 24; pixel_y = 0; req_access = list(117)},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
 "gc" = (/obj/machinery/button/remote/blast_door{_wifi_id = "prowlerportreactor"; id = "prowlerportreactor"; name = "Blast Door Control"; pixel_x = -24; pixel_y = 0; req_access = list(117)},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "gd" = (/obj/machinery/organ_printer/flesh/mapped{stored_matter = 10000},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
-"hb" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Mixed''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/turf/simulated/floor/tiled,/area/space)
-"ib" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
+"gY" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"hk" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
+"iS" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
 "jb" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/corvette/onifox/communications)
+"jo" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/camera/autoname/invis/oni_prowler,/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
 "kb" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/machinery/light/colored/blue{icon_state = "blue1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"ky" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/space,/area/space)
 "lb" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
-"mb" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"nb" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"ob" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
+"mQ" = (/obj/structure/closet/crate/freezer{desc = "A Portable freezer."; icon_opened = "phoroncrateopen"; icon_state = "phoroncrate"; name = "UNSC MRE Packs ''Mixed''"; tag = "icon-phoroncrate"},/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Chicken,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Pizza,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/obj/item/weapon/storage/box/MRE/Spaghetti,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
+"ng" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
+"nY" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "pb" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/structure/table/glass/white,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/reagent_containers/glass/beaker/bluespace,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
+"pB" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
+"pT" = (/obj/machinery/light{dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "qb" = (/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "surgical sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/obj/machinery/button/remote/blast_door{_wifi_id = "prowlermedbay"; id = "prowlermedbay"; name = "Blast Door Control"; pixel_x = 24; pixel_y = 0; req_access = list(117)},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "rb" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/effect/landmark/start{name = "Spartan II"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
 "sb" = (/obj/machinery/chemical_dispenser/ert,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
-"tb" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
-"ub" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/door/blast/regular{_wifi_id = "prowlerportreactor"; id = "prowlerportreactor"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/portengine)
-"vb" = (/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
-"wb" = (/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"sS" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
+"uB" = (/obj/machinery/camera/autoname/invis/oni_prowler,/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
+"vG" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
+"wl" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "xb" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
-"yb" = (/turf/simulated/floor/tiled/dark,/area/corvette/onifox/portengine)
-"zb" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"xM" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"Ba" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"CC" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"CO" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/communications)
+"CR" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
+"Hx" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"JI" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"Ka" = (/obj/machinery/light/colored/orange,/obj/structure/ai_terminal/unsc/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"Lz" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"NK" = (/obj/machinery/light{dir = 1},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
+"NR" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/camera/autoname/invis/oni_prowler,/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
+"Oo" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/door/blast/regular{_wifi_id = "prowlerportreactor"; id = "prowlerportreactor"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Reactorcore)
+"Oz" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"OI" = (/obj/structure/ai_terminal/unsc/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"Pn" = (/obj/machinery/nav_computer/unsc,/obj/machinery/light,/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"QJ" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
+"QT" = (/obj/structure/table/steel_reinforced,/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
+"RI" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
+"TI" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"UG" = (/obj/structure/closet/wall_medical{pixel_x = 32},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"Vt" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
+"Ym" = (/obj/machinery/light{dir = 1},/obj/structure/ai_terminal/unsc/oni_prowler,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
+"YP" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -332,40 +354,40 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababacadadadababababababababaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababacaeadadabafahabadadadacaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagabababfOaiaiajakalabapadadacaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagaqababababasatajaiaifPababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagabababfOpBaiajakalabapadadacaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagaqababababQJatajaipBfPababaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagacadadadabauavababayabababaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagacaeadadabasatazabaDaHaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaqabababfOaiaiajasataJabaDaiaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKamanamamamamamamababasatazabaDaiaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagacaeadadabnYatazabaDaHaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaqabababfOpBaiajasataJabaDaiaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKamanamamamamamamababQJatazabaDpBaIaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKaoamaramaramaoamababaLataMabaDaiaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaKaaaaaaaaaaaaaaaaaaaKaKaKaKawamawamawamawamababasatasaOaiaiaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaKaaaaaaaaaaaaaaaaaaaKaKaKaKVtamVtamVtamVtamababasatasaOaiaiaIaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaKaKaKaKaKaKaKaKaKaKaKaKaKaKaxamaxamaxamaxamababauaPaQabaRaSaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaNaNaTaNaNaNaNaNaNaUaKaKaKaKblblfRaKaKfSaKaKaKaAaBaAaBaAaBaAamababbcbdbebebfbebebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNaNaNbgaNaNaNaNaNaNaNbjbihbbmibbnbnbnbobpbsbtbuaKaCaAaAaAfQaAaCamaFaGcIaVbebvbybzbAbeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNbBbCbDaNaNbnbnbnbnbnbnbnbnbEbEbFbnbEaKaCaAaAaAaWaAaCamaXaXaYaZbebGbHbIbebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNbJbKbLaNaNbnbMbnbnbMbnbnbnbNbObFbMbPaKbaaAaAbbaEaAbqamaXaXcIaVbebGjbbHbebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaNaNaTaNaNaNaNaNaNaUaKaKaKaKblblfRaKaKfSaKaKaKaANKaAaBaAaBaAamababbcbdbebebfbebebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNaNaNbgaNaNaNaNaNaNaNbjbimQbmYmbnbnbnbobpbsbtbuaKaCaAaAaAfQaAaCamaFaGcIaVbebvbybzbAbeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNbBbCUGaNaNbnbnbnwlbnbnvGbnQTbEbFbnbEaKaCaAaAaAaWaAaCamaXaXaYaZbebGCObIbebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNbJbKbLaNaNbnbMbnbnbMbnbnbnbNbObFbMbPaKbaaAaAbbaEhkbqamaXaXRIaVbebGjbbHbebeaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaNaNaTbRaNbSaNaNbraNaNaKaKaKbUaKaKaKaKaKaKbTaKaKaKambVbwamamamamamaXaXcIaVbebWbebebebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNaNaNbXbYbXaNkbbLckcpbxbZcacblbbZcecfcgbZchcicfcjcfclcmcncfcocfcfcfbZcfcbcfcxbebebebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNaNaNbXbYbXaNkbbLckcpbxbZcasSlbbZcecfcgpTchcicfcjcfNRcmcncfcocfcfYPbZcfcbYPcxbebebebeaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaacqcrcsctcucvcwcFcpcpcGcHcIcJcycIcIcJczcAcBcJcCcDcAcJcIaVcIcTcAcJcIcIczcJcWcIcIcJbebebebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNbYmbcLbYbLnbbLcNcOaNcPfNcQcPcRcRcRcRcRcRcScRcRcRcUdQfTcXcXcXcXcXcXcXcXcXcXcXcYcXcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaacqcZcsdacFdbdcddbLdedfaNdgdgobcPdidjdkdldmpbdodpdqcRezdsfYcXdtdudvdwdxdydzdAdBdCdDdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNaNaNdFbYdFaNdGdHdIaNdJdgdhcPdLdkdkdMdkdNdodOqbcRfXdRdScXdTdUdvdVdWdXdYdXdZeaebdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgrbcPeheidksbdkejdodOdkewcVtbcEubeAeAfUdVelemendYdXeoepdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNeqvbaNesaNdJdgfgcPdkdkdkdkdkdketeuevgaexfVcVeydvdvwbeBeAeAeCeDeAeEdvdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNeFeGaNaNaNegdgfMcPeIeJfZeKeLgdeMeNeOcRdrcVgbdEgcdvdveQdvdvdveRdvdveSdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcReTeUeVcXeWxbxbeXeWdvdveRdveWeSdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaNaNaTaNaNaNaNaNaNeYcPcPcPcRcRcReZcRcRcRcRcRcRfacVdScYdEdEdEfbdEdEfceRdEdEfbdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcRcVfdybcXcXcXcXcXfffCfhfifjfkcYfhflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaakyaNaNbYgYcLbYOITIOzcNcOaNcPfNcQcPcRcRcRcRcRcRcScRcRcRcUdQfTdEdEdEdEdEdEdEdEdEdEdEfbdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaacqcZcsdacFdbdcddbLdedfaNdgdgjocPdidjdkdldmpbdodpdqcRezdsfYdEdtdudvdwdxdydzdAdBdCdDdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNaNaNdFbYdFaNdGdHdIaNdJdgdhcPdLdkdkdMdkdNdodOqbcRfXdRdSdEdTdUdvdVdWdXdYdXdZeaebdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgrbcPeheidksbuBejdodOdkewcVngcEOoeAeAfUdVelemendYdXeoepdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNeqiSaNPnaNdJdgfgcPdkdkdkdkdkdketeuevgaexfVcVeydvdvBaeBeAeAeCeDHxeEdvdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNeFeGaNaNaNegdgfMcPeIeJfZeKeLgdeMeNeOcRdrcVgbdEgcdvdveQLzdvdveRdvdveSdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcReTeUeVdEKaxbxbeXeWdvdveRdveWeSdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaNaNaTaNaNaNaNaNaNeYcPcPcPcRcRcReZcRcRcRcRcRcRfaCRdSfbdEdEdEfbdEdEfceRdEdEfbdEdEdEaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcRcVfdcVcXcXcXcXcXfffCfhfifjfkcYfhflaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNcPaaaaaaaaaaaaaaaaaacRcRcRcRcXcXcXcXcXcXcXcXcXcXfhfmfnfncXfoflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXfpfmfqfrcXfhflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcYcXcXcXcYfffCfhzbftfufvfhflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagfwcXcXcXcXcXcXcXfhfmfhfxcXfoflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXfpfmfqfrcXCCflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcYcXcXcXcYfffCfhJIftfufvfhflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagfwcXcXcXcXcXcXcXfhxMfhfxcXfoflaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagfwcXcXcXcXcXcXfhfyfzfAcXfhflaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagfwcXcXcXfffCfhfhfhfBcYcXcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagfwcXcXcXcXfLcXfDfEcXcXcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagcXcXcXcXcXfFfGfhcXcXcXcXcXcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXfofhfBcXcXcXcXcXcXaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXfoCCfBcXcXcXcXcXcXaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXfHfIfJcXcXcXcXcXcXaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXcXcXcXcXcXcXcXaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXcXcXcXcXcXcXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -379,3 +401,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 fKaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
