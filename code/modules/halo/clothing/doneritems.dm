@@ -1828,7 +1828,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 		slot_belt_str = null,
 		)
 
-/obj/item/weapon/gun/projectile/m7_smg/update_icon()
+/obj/item/weapon/gun/projectile/m7_smg/riley/update_icon()
 	if(ammo_magazine)
 		icon_state = "p90"
 	else
