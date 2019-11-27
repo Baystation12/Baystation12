@@ -1,5 +1,0 @@
-author: "babydoll"
-delete-after: True
-changes: 
-  - rscadd: "Added two new types of fauna to volcanic exoplanets."
-  - tweak: "To account for their low health, simple animals take less damage from ballistic and laser projectiles."
