@@ -2,8 +2,8 @@
 /datum/job/researcher
 	title = "ONI Researcher"
 	supervisors = "the ONI Research Director"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 4
+	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/facil_researcher
 	alt_titles = list("Doctor","Physicist","Botanist","Chemist","Weapons Researcher","Surgeon","Geneticist")
 	selection_color = "#008000"
@@ -32,10 +32,10 @@
 	spawn_faction = "UNSC"
 	supervisors = "the ONI Security Commander"
 	total_positions = 8
-	spawn_positions = 3
+	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARD
 	selection_color = "#008000"
-	access = list(311)
+	access = list(310,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
