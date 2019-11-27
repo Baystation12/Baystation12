@@ -417,6 +417,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	icon_state = "ranger_chest_obj"
 	item_state = "ranger_chest"
 	totalshields = 100
+	armor = list(melee = 70, bullet = 60, laser = 55, energy = 55, bomb = 50, bio = 25, rad = 25)
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
