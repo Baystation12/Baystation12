@@ -83,7 +83,7 @@
 
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
 	..()
-	if(use_area)
+	if(use_area && istype(T))
 		T.mined_turf = prob(90) ? use_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava
