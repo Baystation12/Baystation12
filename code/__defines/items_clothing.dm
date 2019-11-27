@@ -4,7 +4,7 @@
 
 #define SHOES_SLOWDOWN         -1.0  // How much shoes slow you down by default. Negative values speed you up.
 
-#define BASE_WEAPON_PARRYCHANCE 20 //This is multiplied by the object's w_class - 1, so tiny objects can't block.
+#define BASE_WEAPON_PARRYCHANCE 10 //This is multiplied by the object's w_class - 1, so tiny objects can't block.
 #define BASE_PARRY_PLASMA_DESTROY 5 //Chance that parrying a plasma weapon will destroy your held weapon.
 
 #define CANDLE_LUM 3 // For how bright candles are.
