@@ -39,7 +39,7 @@
 						break
 					var/obj/structure/ai_routing_node/picked = pick(node_accessed_tmp)
 					node_accessed_tmp -= picked
-					to_chat(our_ai,"<span class = 'notice'>[picked.name] at [picked.loc.loc.name], access level [picked.get_access_for_ai(ai)].<span>")
+					to_chat(our_ai,"<span class = 'notice'>[picked.name] at [picked.loc.loc.name], access level [picked.get_access_for_ai(ai)].</span>")
 
 		if(3)
 			for(var/ai_untyped in ais_in_net)
@@ -49,9 +49,9 @@
 				to_chat(our_ai,"<span class = 'notice'>Artificial Intelligence Detected: [ai.name]. Terminal Located at [ai.our_terminal.loc.loc.name]\nDisplaying found access nodes:</span>")
 				for(var/n in ai.nodes_accessed)
 					var/obj/structure/ai_routing_node/node = n
-					to_chat(our_ai,"<span class = 'notice'>[node.name] at [node.loc.loc.name], access level [node.get_access_for_ai(ai)].<span>")
+					to_chat(our_ai,"<span class = 'notice'>[node.name] at [node.loc.loc.name], access level [node.get_access_for_ai(ai)].</span>")
 
-	to_chat(our_ai,"<span class = 'notice'>Level [scan_level] system scan finished.<span>")
+	to_chat(our_ai,"<span class = 'notice'>Level [scan_level] system scan finished.</span>")
 	expire()
 
 /datum/cyberwarfare_command/network_scan/l2
@@ -133,7 +133,7 @@
 		sound_to(our_ai,command_sfx)
 	if(node.modify_access_levels(our_ai,1))
 		node.attack_ai(our_ai)
-		to_chat(our_ai,"<span class = 'notice'>Access level increased.<span>")
+		to_chat(our_ai,"<span class = 'notice'>Access level increased.</span>")
 		if(curr_access >= 2) // uses >= instead of > because our curr_access is the pre-increased access value.
 			our_ai.do_network_alert("An AI has brute-forced level [curr_access + 1] access on [node] at [node.loc.loc.name]!")
 	our_ai.process_trap_trigger(node)
@@ -159,7 +159,7 @@
 			to_chat(our_ai,"<span class = 'notice'>Insufficient access to enact a node lockdown.</span>")
 			return 0
 		if(world.time < node.lockdown_until)
-			to_chat(our_ai,"<span class = 'notice'>A lockdown on this node is still ongoing.<span>")
+			to_chat(our_ai,"<span class = 'notice'>A lockdown on this node is still ongoing.</span>")
 			return 0
 		return 1
 	return 0
@@ -365,7 +365,7 @@
 	our_ai.Stun(2)
 	saved_terminal = our_ai.our_terminal
 	saved_terminal.held_ai = null
-	to_chat(our_ai,"<span class = 'notice'>You disconnect yourself from your terminal.<span>")
+	to_chat(our_ai,"<span class = 'notice'>You disconnect yourself from your terminal.</span>")
 
 /datum/cyberwarfare_command/ai_hide/command_process()
 	our_ai.Stun(2)
@@ -378,7 +378,7 @@
 		. = ..()
 		return
 	saved_terminal.held_ai = our_ai
-	to_chat(our_ai,"<span class = 'notice'>You reconnect to your saved terminal.<span>")
+	to_chat(our_ai,"<span class = 'notice'>You reconnect to your saved terminal.</span>")
 	. = ..()
 
 #undef AI_HIDE_DURATION

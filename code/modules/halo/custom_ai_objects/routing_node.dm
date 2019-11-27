@@ -20,7 +20,7 @@
 	*/
 	//If we don't have our accesses from this node, but there are some stored, Reaquire them.
 	if(get_access_for_ai(ai) > 0)
-		to_chat(ai,"<span class = 'notice'>Access credentials re-obtained from node.<span>")
+		to_chat(ai,"<span class = 'notice'>Access credentials re-obtained from node.</span>")
 		ai.nodes_accessed |= src
 	to_chat(ai,"<span class = 'notice'>Current access level: [get_access_for_ai(ai)]</span>")
 
