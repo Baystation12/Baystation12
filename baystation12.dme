@@ -1499,6 +1499,7 @@
 #include "code\modules\halo\covenant\huragok\huragok_modules.dm"
 #include "code\modules\halo\custom_ai_objects\ai_decor.dm"
 #include "code\modules\halo\custom_ai_objects\ai_holograms.dm"
+#include "code\modules\halo\custom_ai_objects\ai_outfit.dm"
 #include "code\modules\halo\custom_ai_objects\ai_terminals.dm"
 #include "code\modules\halo\custom_ai_objects\cyberwarfare.dm"
 #include "code\modules\halo\custom_ai_objects\cyberwarfare_commands.dm"
