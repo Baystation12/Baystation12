@@ -22,6 +22,7 @@
 	var/list/linked_consoles = list()
 	var/list/contained_rounds = list()
 	var/loading = 0
+	ai_access_level = 4
 
 /obj/machinery/mac_cannon/ammo_loader/New()
 	name = "[weapon_name] [name]"
@@ -205,6 +206,7 @@
 	desc = "Controls a limited power setting for orbital bombardment"
 	icon_state = "mac_bombard_control"
 	var/designator_spawn = /obj/item/weapon/laser_designator
+	ai_access_level = 4
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/New()
 	. = ..()

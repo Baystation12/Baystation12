@@ -29,6 +29,7 @@
 	var/jump_sound = 'code/modules/halo/sounds/slipspace_jump.ogg'
 
 	var/slipspace_target_status = 1		//1 = nullspace and back to realspace, 2 = nullspace permanently to despawn the ship ("leave the system")
+	ai_access_level = 4
 
 /obj/machinery/slipspace_engine/Initialize()
 	. = ..()

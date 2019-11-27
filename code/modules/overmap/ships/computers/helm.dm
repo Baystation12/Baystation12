@@ -9,6 +9,7 @@
 	var/list/known_sectors = list()
 	var/dx		//destnation
 	var/dy		//coordinates
+	ai_access_level = 4
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()

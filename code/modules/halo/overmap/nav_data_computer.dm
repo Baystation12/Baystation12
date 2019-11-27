@@ -10,6 +10,8 @@
 
 	var/obj/item/nav_data_chip/data_chip = new /obj/item/nav_data_chip
 
+	ai_access_level = 4
+
 /obj/machinery/nav_computer/ex_act(var/severity)
 	if(severity > 2)
 		if(prob(50))

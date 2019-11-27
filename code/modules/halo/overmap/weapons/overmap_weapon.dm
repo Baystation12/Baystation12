@@ -12,6 +12,7 @@
 	var/currently_tracked_proj = null
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
+	ai_access_level = 4
 
 /obj/machinery/overmap_weapon_console/attack_ai(var/mob/living/silicon/ai/ai)
 	if(!istype(ai))

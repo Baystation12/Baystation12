@@ -27,6 +27,7 @@
 
 /obj/structure/ai_decor/unsc_2
 	icon_state = "unscdecal2"
+	density = 0
 
 /obj/structure/ai_decor/unsc_3
 	icon_state = "unscdecal3"

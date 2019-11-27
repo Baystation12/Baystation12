@@ -330,9 +330,12 @@ var/list/ai_verbs_default = list(
 	eyeobj.possess(src)
 	var/obj/structure/ai_terminal/terminal = locate(/obj/structure/ai_terminal) in loc.contents
 	if(!isnull(terminal))
-		terminal.move_to_node(src)
-		switch_to_net_by_name(network)
-		terminal.apply_radio_channels(src)
+		if(isnull(terminal.held_ai))
+			to_chat(src,"<span class = 'notice'>An artificial intelligence is already in your spawn terminal!</span>")
+		else
+			terminal.move_to_node(src)
+			switch_to_net_by_name(network)
+			terminal.apply_radio_channels(src)
 
 	var/radio_text = ""
 	for(var/i = 1 to common_radio.channels.len)
