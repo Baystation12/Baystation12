@@ -330,7 +330,7 @@ var/list/ai_verbs_default = list(
 	eyeobj.possess(src)
 	var/obj/structure/ai_terminal/terminal = locate(/obj/structure/ai_terminal) in loc.contents
 	if(!isnull(terminal))
-		if(isnull(terminal.held_ai))
+		if(!isnull(terminal.held_ai))
 			to_chat(src,"<span class = 'notice'>An artificial intelligence is already in your spawn terminal!</span>")
 		else
 			terminal.move_to_node(src)
