@@ -333,6 +333,8 @@
 	equip_custom_items(character)
 
 	// AIs don't need a spawnpoint, they must spawn at an empty core
+	if(isnull(character))
+		return
 	if(character.mind.assigned_role == "AI")
 
 		character = character.AIize(move=0) // AIize the character, but don't move them yet

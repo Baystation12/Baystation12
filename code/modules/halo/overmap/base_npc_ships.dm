@@ -288,7 +288,7 @@
 
 	cargo_init()
 	damage_spawned_ship()
-	GLOB.processing_objects += src
+	GLOB.processing_objects |= src
 
 /obj/effect/overmap/ship/npc_ship/proc/damage_spawned_ship()
 	for(var/obj/item/projectile/overmap/proj in projectiles_to_spawn)

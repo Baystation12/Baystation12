@@ -38,6 +38,7 @@
 	#include "innie_supply/supply_shuttle.dm"
 
 	//#include "geminus_city_jobdefs.dm"
+	#include "ai_items.dm"
 	#include "invasion_geminus.dm"
 
 	//#include "geminuscity_4.dmm"

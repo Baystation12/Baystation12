@@ -20,7 +20,7 @@
 "at" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "au" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "av" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
-"aw" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
+"aw" = (/obj/structure/drop_pod_launchbay,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
 "ax" = (/obj/machinery/door/airlock/halo_maint{name = "SOEIV Deployment Rack"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "ay" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/corvette/onifox/starboardengine)
 "az" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
@@ -28,14 +28,14 @@
 "aB" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "aC" = (/obj/machinery/vending/armory/spartanvend,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "aD" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/structure/window/reinforced/crescent,/obj/machinery/door/window/eastleft,/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
-"aE" = (/obj/structure/table/rack,/obj/item/drop_pod_beacon,/obj/item/drop_pod_beacon,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
+"aE" = (/obj/structure/drop_pod_launchbay,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
 "aF" = (/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/portable_atmospherics/powered/pump/filled,/obj/machinery/light/colored/orange{tag = "icon-orange1 (NORTH)"; icon_state = "orange1"; dir = 1},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/corvette/onifox/hallway)
 "aG" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Emergency Air Pumps"},/turf/simulated/floor/plating,/area/corvette/onifox/hallway)
 "aH" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (NORTH)"; icon_state = "orange1"; dir = 1},/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
 "aI" = (/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
 "aJ" = (/obj/structure/table/rack,/obj/item/drop_pod_beacon,/obj/item/drop_pod_beacon,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "aK" = (/turf/simulated/wall/r_wall,/area/corvette/onifox/Crewmess)
-"aL" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
+"aL" = (/obj/machinery/light{dir = 8},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "aM" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "aN" = (/turf/simulated/wall/r_wall,/area/corvette/onifox/Bridge)
 "aO" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo,/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
@@ -79,7 +79,7 @@
 "bA" = (/obj/machinery/power/apc/infinite,/turf/simulated/wall/r_wall,/area/corvette/onifox/communications)
 "bB" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "bC" = (/obj/structure/table/woodentable,/obj/machinery/light{dir = 1},/obj/item/weapon/card/id/oni,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"bD" = (/obj/structure/closet/wall_medical{pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"bD" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
 "bE" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "bF" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "bG" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/onifox/communications)
@@ -121,11 +121,11 @@
 "cq" = (/obj/structure/grille,/obj/machinery/door/blast/regular{_wifi_id = "prowlerbridge"; id = "prowlerbridge"; name = "Blast Shield"},/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "cr" = (/obj/structure/cable/blue{icon_state = "0-4"},/obj/machinery/computer/helm{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "cs" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"ct" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"ct" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/structure/window/reinforced/crescent,/obj/machinery/door/window/eastleft,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
 "cu" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "cv" = (/obj/structure/stairs_decorative{tag = "icon-stairs (EAST)"; icon_state = "stairs"; dir = 4},/obj/machinery/light/colored/blue{tag = "icon-blue1 (NORTH)"; icon_state = "blue1"; dir = 1},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "cw" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"cx" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/closet/wall_medical{pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
+"cx" = (/obj/structure/closet/walllocker/emerglocker/west,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/starboardengine)
 "cy" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/structure/sign/halo_floorsign/cryobay,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "cz" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "cA" = (/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/obj/machinery/door/airlock/multi_tile/halo{name = "Airlock"; req_access = list(309)},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
@@ -159,7 +159,7 @@
 "dc" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "dd" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "de" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; dir = 4},/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
-"df" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; dir = 8},/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "0-8"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"df" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "dg" = (/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
 "dh" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/landmark/start{name = "Spartan II Commander"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
 "di" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (WEST)"; icon_state = "body_scanner_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
@@ -169,7 +169,7 @@
 "dm" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dn" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/structure/table/glass/white,/obj/item/weapon/storage/box/beakers,/obj/item/weapon/reagent_containers/glass/beaker/bluespace,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "do" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
-"dp" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
+"dp" = (/obj/structure/closet/wall_medical{pixel_x = 32},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/obj/structure/ai_routing_node/unsc,/obj/structure/ai_terminal/unsc/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "dq" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dr" = (/obj/machinery/button/remote/blast_door{_wifi_id = "prowlerportairlock"; id = "prowlerportairlock"; name = "Blast Door Control"; pixel_x = -32; pixel_y = 0; req_access = list(117)},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
 "ds" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
@@ -181,7 +181,7 @@
 "dy" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Reactorcore)
 "dz" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dA" = (/obj/structure/extinguisher_cabinet{pixel_y = 30},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
-"dB" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 6},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"dB" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "dC" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (NORTH)"; icon_state = "orange1"; dir = 1},/obj/machinery/atmospherics/binary/fusion_cooling{icon_state = "cooling_manifold"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dD" = (/obj/structure/closet/wall_medical{pixel_y = 32},/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 10},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dE" = (/turf/simulated/wall/r_wall,/area/corvette/onifox/Reactorcore)
@@ -190,7 +190,7 @@
 "dH" = (/obj/machinery/alarm{dir = 1; icon_state = "alarm0"; pixel_y = -22},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "dI" = (/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "dJ" = (/obj/machinery/cryopod/unsc{tag = "icon-off (EAST)"; icon_state = "off"; dir = 4},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
-"dK" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/effect/landmark/start{name = "Spartan II"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
+"dK" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/communications)
 "dL" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (WEST)"; icon_state = "sleeper_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dM" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dN" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
@@ -198,7 +198,7 @@
 "dP" = (/obj/structure/sink/kitchen{dir = 8; icon_state = "sink_alt"; name = "surgical sink"; pixel_x = 20; tag = "icon-sink_alt (WEST)"},/obj/machinery/button/remote/blast_door{_wifi_id = "prowlermedbay"; id = "prowlermedbay"; name = "Blast Door Control"; pixel_x = 24; pixel_y = 0; req_access = list(117)},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "dQ" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/door/blast/regular{_wifi_id = "prowlerhallwayairlock"; id = "prowlerhallwayairlock"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
 "dR" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/sign/halo_floorsign/engineering,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
-"dS" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
+"dS" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "dT" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/obj/machinery/slipspace_engine/human,/obj/machinery/door/window/eastleft{tag = "icon-left"; icon_state = "left"; dir = 2},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dU" = (/obj/machinery/door/window/eastleft,/obj/machinery/door/window/eastleft{tag = "icon-left"; icon_state = "left"; dir = 2},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "dV" = (/obj/machinery/atmospherics/pipe/tank/oxygen{dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
@@ -221,10 +221,10 @@
 "em" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 8; target_pressure = 15000},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "en" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "eo" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/atmospherics/binary/fusion_cooling{icon_state = "cooling_manifold"; dir = 8},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
-"ep" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 9},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"ep" = (/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "eq" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/obj/item/weapon/melee/baton/humbler,/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
 "er" = (/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
-"es" = (/obj/machinery/nav_computer/unsc,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"es" = (/obj/machinery/light,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 1},/turf/simulated/floor/tiled,/area/corvette/onifox/Crewmess)
 "et" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "eu" = (/obj/machinery/atmospherics/pipe/manifold/hidden/blue{icon_state = "map"; dir = 8},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "ev" = (/obj/machinery/atmospherics/pipe/simple/hidden/blue{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 10},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
@@ -238,16 +238,16 @@
 "eD" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "eE" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "eF" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/machinery/light,/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
-"eG" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/suit/armor/bulletproof/vest,/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
+"eG" = (/obj/structure/table/rack,/obj/item/drop_pod_beacon,/obj/item/drop_pod_beacon,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/storage/belt/marine_medic,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/weapon/tank/emergency/oxygen/double/odst,/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath,/obj/item/clothing/mask/breath{tag = "icon-halfgas"; icon_state = "halfgas"},/obj/item/clothing/mask/breath,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 1},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Armoury)
 "eH" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
 "eI" = (/obj/machinery/autosurgeon,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "eJ" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "eK" = (/obj/structure/table/glass/white,/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/defibrillator/loaded,/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "eL" = (/obj/machinery/light,/obj/structure/table/glass/white,/obj/item/weapon/defibrillator/compact/combat/loaded,/obj/item/weapon/defibrillator/compact/combat/loaded,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
-"eM" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
+"eM" = (/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 4},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "eN" = (/obj/machinery/atmospherics/portables_connector{dir = 1},/obj/machinery/portable_atmospherics/canister/oxygen,/obj/item/weapon/wrench,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "eO" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
-"eP" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
+"eP" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/plating,/area/corvette/onifox/communications)
 "eQ" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "eR" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "eS" = (/obj/machinery/portable_atmospherics/powered/scrubber,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
@@ -261,13 +261,13 @@
 "fa" = (/obj/machinery/button/remote/blast_door{_wifi_id = "prowlerportairlock"; id = "prowlerportairlock"; name = "Blast Door Control"; pixel_x = -32; pixel_y = 0; req_access = list(117)},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
 "fb" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/corvette/onifox/Reactorcore)
 "fc" = (/obj/machinery/door/firedoor/multi_tile,/obj/machinery/door/airlock/multi_tile/halo{dir = 2; icon_state = "door_closed"; name = "Port Engine Room"; req_access = list(117); tag = "icon-door_closed"},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
-"fd" = (/obj/docking_umbilical/south{name = "UNSC Fox Port Docking Umbilical"},/turf/simulated/floor/tiled,/area/corvette/onifox/umbilical)
+"fd" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/closet/wall_medical{pixel_x = 32},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "fe" = (/turf/simulated/floor/tiled/dark,/area/corvette/onifox/portengine)
-"ff" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"ff" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "2-4"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "fg" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/landmark/start{name = "Spartan II"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
 "fh" = (/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fi" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{dir = 8; icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
-"fj" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"fj" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "fk" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fl" = (/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/obj/structure/window/reinforced/treated{basestate = "invis"; dir = 4; icon_state = "invis"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fm" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
@@ -276,7 +276,7 @@
 "fp" = (/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fq" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fr" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
-"fs" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"fs" = (/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 1},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/hallway)
 "ft" = (/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fu" = (/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fv" = (/obj/machinery/door/airlock/halo,/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
@@ -287,16 +287,16 @@
 "fA" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fB" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fC" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Fusion Fuel Storage"; req_access = list(117)},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
-"fD" = (/obj/machinery/vending/tool,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"fD" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{tag = "icon-comm (NORTH)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; dir = 8},/obj/structure/cable/blue{icon_state = "1-8"},/obj/structure/cable/blue{icon_state = "0-8"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
 "fE" = (/obj/machinery/vending/engivend,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fF" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
-"fG" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/item/weapon/storage/toolbox/electrical,/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"fG" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "fH" = (/obj/structure/table/rack,/obj/item/clothing/head/welding,/obj/item/clothing/glasses/welding,/obj/item/weapon/weldingtool,/obj/item/weapon/storage/belt/utility,/obj/item/weapon/storage/belt/utility,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fI" = (/obj/structure/table/rack,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/weapon/storage/briefcase/inflatable,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fJ" = (/obj/structure/table/rack,/obj/item/weapon/weldpack,/obj/item/weapon/weldpack,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 "fK" = (/obj/effect/overmap/ship/oni_aegis,/turf/space,/area/space)
 "fL" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Tool Storage"; req_access = list(117)},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
-"fM" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/obj/effect/landmark/start{name = "Spartan II"},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
+"fM" = (/obj/machinery/atmospherics/unary/cryo_cell,/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "fN" = (/obj/machinery/computer/cryopod,/turf/simulated/wall/r_wall,/area/corvette/onifox/cryodorms)
 "fO" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
 "fP" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/starboardengine)
@@ -316,6 +316,27 @@
 "gd" = (/obj/machinery/organ_printer/flesh/mapped{stored_matter = 10000},/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
 "ge" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
 "gf" = (/obj/machinery/chemical_dispenser/ert,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
+"gg" = (/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"gh" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 6},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"gi" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
+"gj" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/effect/landmark/start{name = "Spartan II"},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
+"gk" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
+"gl" = (/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/machinery/atmospherics/pipe/simple/visible/blue{icon_state = "intact"; dir = 9},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"gm" = (/obj/machinery/nav_computer/unsc,/obj/machinery/light,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/Bridge)
+"gn" = (/obj/structure/ai_routing_node/unsc,/obj/structure/ai_terminal/unsc/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"go" = (/obj/structure/table/rack{dir = 8; layer = 2.9},/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/item/clothing/suit/armor/bulletproof/vest,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled,/area/corvette/onifox/Bridge)
+"gp" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/obj/effect/landmark/start{name = "Spartan II"},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/white,/area/corvette/onifox/cryodorms)
+"gq" = (/obj/machinery/power/apc{chargelevel = 0.001; dir = 2; name = "APC"; pixel_y = -24},/obj/structure/cable/blue,/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/white,/area/corvette/onifox/medbay)
+"gr" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/rods/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 1},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"gs" = (/obj/machinery/light/colored/orange,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 1},/turf/simulated/floor/plating,/area/corvette/onifox/Reactorcore)
+"gt" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 8},/obj/structure/ai_terminal/unsc/oni_prowler,/turf/simulated/floor/tiled/dark,/area/corvette/onifox/umbilical)
+"gu" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"gv" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "4-8"},/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"gw" = (/obj/docking_umbilical/south{name = "UNSC Fox Port Docking Umbilical"},/turf/simulated/floor/tiled/dark,/area/corvette/onifox/portengine)
+"gx" = (/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 4},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"gy" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"gz" = (/obj/machinery/vending/tool,/obj/machinery/camera/autoname/invis/oni_prowler{icon_state = "camera"; dir = 1},/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
+"gA" = (/obj/structure/closet{name = "Tools Closet"},/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/item/weapon/storage/toolbox/electrical,/obj/item/weapon/storage/toolbox/mechanical,/obj/machinery/camera/autoname/invis/oni_prowler,/turf/simulated/floor/plating,/area/corvette/onifox/portengine)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -330,41 +351,41 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababacadadadababababababababaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababacaeadadabafahabadadadacaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababacadadawababababababababaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababacaeadadabafahabaEadadacaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagabababfOaiaiajakalabapadadacaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagaqababababasatajaiaifPababaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagacadadadabauavababayabababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagacadadawabaLavababayabababaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagacaeadadabasatazabaDaHaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaqabababfOaiaiajasataJabaDaiaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKamanamamamamamamababasatazabaDaiaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKaoamaramaramaoamababaLataMabaDaiaIaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaKaaaaaaaaaaaaaaaaaaaKaKaKaKawamawamawamawamababasatasaOaiaiaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaqaqabababfOaiaiajasataJabaDbDaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKamanamamamamamamababasatazabctaiaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaKaoamaramaramaoamababcxataMabaDaiaIaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaKaaaaaaaaaaaaaaaaaaaKaKaKaKdfamdfamdfamdfamababasatasaOaiaiaIaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaKaKaKaKaKaKaKaKaKaKaKaKaKaKaxamaxamaxamaxamababauaPaQabaRaSaIaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaNaNaTaNaNaNaNaNaNaUaKaKaKaKblblfRaKaKfSaKaKaKaAaBaAaBaAaBaAamababbcbdbebebfbebebeaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNaNaNbgaNaNaNaNaNaNaNbjbibhbmbkbnbnbnbobpbsbtbuaKaCaAaAaAfQaAaCamaFaGcIaVbebvbybzbAbeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNbBbCbDaNaNbnbnbnbnbnbnbnbnbEbEbFbnbEaKaCaAaAaAaWaAaCamaXaXaYaZbebGbHbIbebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNbJbKbLaNaNbnbMbnbnbMbnbnbnbNbObFbMbPaKbaaAaAbbaEaAbqamaXaXcIaVbebGbQbHbebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNbBbCdpaNaNbnbnbnbnbnbnbnbnbEbEbFbnbEaKaCaAaAdBaWaAaCamaXaXaYaZbedKbHbIbebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNbJbKbLaNaNdSbMepbnbMbnepbnbNbObFesbPaKbaaAaAbbeGaAbqamaXaXeMaVbebGbQePbebeaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaNaNaTbRaNbSaNaNbraNaNaKaKaKbUaKaKaKaKaKaKbTaKaKaKambVbwamamamamamaXaXcIaVbebWbebebebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNaNaNbXbYbXaNcdbLckcpbxbZcacbccbZcecfcgbZchcicfcjcfclcmcncfcocfcfcfbZcfcbcfcxbebebebeaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaacqcrcsctcucvcwcFcpcpcGcHcIcJcycIcIcJczcAcBcJcCcDcAcJcIaVcIcTcAcJcIcIczcJcWcIcIcJbebebebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNaNaNbXbYbXaNcdbLckcpbxbZcacbccbZcecfcgbZchcicfcjcfclcmcncfcocfcfcfbZcfcbcffdbebebebeaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaacqcrcsffcucvcwfjcpcpcGcHcIcJcycIcIcJczcAcBcJcCcDcAcJcIaVcIcTcAcJcIfsczcJcWcIfscJbebebebeaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaNaNbYcKcLbYbLcMbLcNcOaNcPfNcQcPcRcRcRcRcRcRcScRcRcRcUdQfTcXcXcXcXcXcXcXcXcXcXcXcYcXcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaacqcZcsdacFdbdcddbLdedfaNdgdgeHcPdidjdkdldmdndodpdqcRezdsfYcXdtdudvdwdxdydzdAdBdCdDdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNaNaNdFbYdFaNdGdHdIaNdJdgdhcPdLdkdkdMdkdNdodOdPcRfXdRdScXdTdUdvdVdWdXdYdXdZeaebdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdgdKcPeheidkgfdkejdodOdkewcVePcEekeAeAfUdVelemendYdXeoepdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNeqeraNesaNdJdgfgcPdkdkdkdkdkdketeuevgaexfVcVeydvdvfWeBeAeAeCeDeAeEdvdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNeFeGaNaNaNegdgfMcPeIeJfZeKeLgdeMeNeOcRdrcVgbdEgcdvdveQdvdvdveRdvdveSdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcReTeUeVcXeWgegeeXeWdvdveRdveWeSdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaNaNaTaNaNaNaNaNaNeYcPcPcPcRcRcReZcRcRcRcRcRcRfacVdScYdEdEdEfbdEdEfceRdEdEfbdEcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcRcVfdfecXcXcXcXcXfffCfhfifjfkcYfhflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNcPaaaaaaaaaaaaaaaaaacRcRcRcRcXcXcXcXcXcXcXcXcXcXfhfmfnfncXfoflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXfpfmfqfrcXfhflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcYcXcXcXcYfffCfhfsftfufvfhflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagfwcXcXcXcXcXcXcXfhfmfhfxcXfoflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaacqcZcsdacFdbdcddbLdefDaNdgdgeHcPdidjfGdldmdndofMdqcRezdsfYcXdtduggdwdxdydzdAghdCdDdEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNaNaNdFbYdFaNdGdHdIaNdJdgdhcPdLdkdkdMdkdNdodOdPcRfXdRgicXdTdUdvdVdWdXdYdXdZeaebdEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaNaNaTecaNedaNeeaNefaNegdggjcPeheidkgfdkejdodOdkewcVgkcEekeAeAfUdVelemendYdXeogldEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNeqeraNgmaNdJdgfgcPdkdkdkdkdkdketeuevgaexfVcVeydvdvfWeBeAeAeCeDeAeEgndEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNeFgoaNaNaNegdggpcPeIeJfZeKeLgdgqeNeOcRdrcVgbdEgcdvdveQdvdvdveRdvdveSdEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcReTeUeVcXeWgegreXeWdvdveRdvgseSdEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaNaNaTaNaNaNaNaNaNeYcPcPcPcRcRcReZcRcRcRcRcRcRfacVgtcYdEdEdEfbdEdEfceRdEdEfbdEcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNaNcPcPcPcPcRcRcRcRcRcRcRcRcRcRcVcVfecXcXcXcXcXgufCfhfigvfkcYfhflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaNaNaNaNaNaNcPaaaaaaaaaaaaaaaaaacRcRcRcRcXgwcXcXcXcXcXcXcXcXfhfmfnfncXfoflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXfpfmfqfrcXgxflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcYcXcXcXcYgufCfhgyftfufvfhflaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagfwcXcXcXcXcXcXcXgxfmfhfxcXfoflaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagfwcXcXcXcXcXcXfhfyfzfAcXfhflaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagfwcXcXcXfffCfhfhfhfBcYcXcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagfwcXcXcXcXfLcXfDfEcXcXcXcXaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagcXcXcXcXcXfFfGfhcXcXcXcXcXcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagfwcXcXcXgufCfhfhfhfBcYcXcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagagagfwcXcXcXcXfLcXgzfEcXcXcXcXaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaagagcXcXcXcXcXfFgAfhcXcXcXcXcXcXcXaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXfofhfBcXcXcXcXcXcXaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXfHfIfJcXcXcXcXcXcXaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacXcXcXcXcXcXcXcXcXcXcXcXcXcXcXcXcXaaaaaaaaaaaaaaaaaaaaaaaa

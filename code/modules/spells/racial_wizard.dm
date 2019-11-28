@@ -10,12 +10,7 @@
 	throw_range = 3
 	force = 15
 	var/list/potentials = list(
-		SPECIES_HUMAN = /obj/item/weapon/storage/bag/cash/infinite,
-		SPECIES_VOX = /spell/targeted/shapeshift/true_form,
-		SPECIES_TAJARA = /spell/messa_shroud,
-		SPECIES_UNATHI = /spell/moghes_blessing,
-		SPECIES_SKRELL = /obj/item/weapon/contract/apprentice/skrell,
-		SPECIES_IPC = /spell/camera_connection)
+		SPECIES_HUMAN = /obj/item/weapon/storage/bag/cash/infinite)
 
 /obj/item/weapon/magic_rock/attack_self(mob/user)
 	if(!istype(user,/mob/living/carbon/human))
@@ -189,7 +184,7 @@
 		user.put_in_hands(I)
 		new /obj/item/weapon/contract/apprentice/skrell(get_turf(src),linked,contract_master)
 
-//IPC
+/*
 /spell/camera_connection
 	name = "Camera Connection"
 	desc = "This spell allows the wizard to connect to the local camera network and see what it sees."
@@ -242,6 +237,7 @@
 
 /mob/observer/eye/wizard_eye/New() //we dont use the Ai one because it has AI specific procs imbedded in it.
 	..()
+	var/
 	visualnet = cameranet
 
 /mob/living/proc/release_eye()
@@ -260,4 +256,4 @@
 		var/mob/living/L = eyeobj.owner
 		L.release_eye()
 	qdel(eyeobj)
-	return ..()
+	return ..()*/

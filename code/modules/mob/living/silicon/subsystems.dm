@@ -5,14 +5,6 @@
 		/datum/nano_module/law_manager
 	)
 
-/mob/living/silicon/ai/New()
-	silicon_subsystems.Cut()
-	for(var/subtype in subtypesof(/datum/nano_module))
-		var/datum/nano_module/NM = subtype
-		if(initial(NM.available_to_ai))
-			silicon_subsystems += NM
-	..()
-
 /mob/living/silicon/robot/syndicate
 	silicon_subsystems = list(
 		/datum/nano_module/law_manager

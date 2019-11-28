@@ -19,7 +19,7 @@
 	if(message_mode == "department")
 		return holopad_talk(message, verb, speaking)
 	else if(message_mode)
-		if (aiRadio.disabledAi || !has_power() || stat)
+		if (aiRadio.disabledAi || stat)
 			to_chat(src, "<span class='danger'>System Error - Transceiver Disabled.</span>")
 			return 0
 		if(message_mode == "general")
@@ -67,16 +67,10 @@
 
 	if (!message)
 		return
+	if(our_holo)
 
-	var/obj/machinery/hologram/holopad/H = src.holo
-	if(H && H.masters[src])//If there is a hologram and its master is the user.
-
-		// AI can hear their own message, this formats it for them.
-		if(speaking)
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [speaking.format_message(message, verb)]</span></i>")
-		else
-			to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [verb], <span class='message'><span class='body'>\"[message]\"</span></span></span></i>")
-
+		var/obj/effect/ai_holo/H = our_holo
+		hear_say(message,verb,speaking,null,null,src)
 		//This is so pAI's and people inside lockers/boxes,etc can hear the AI Holopad, the alternative being recursion through contents.
 		//This is much faster.
 		var/list/listening = list()
@@ -109,7 +103,7 @@
 
 
 	else
-		to_chat(src, "No holopad connected.")
+		to_chat(src,"<span class = 'notice'>You need to manifest your hologram to speak through it!</span>")
 		return 0
 	return 1
 
@@ -122,15 +116,13 @@
 	if (!message)
 		return
 
-	var/obj/machinery/hologram/holopad/T = src.holo
-	if(T && T.masters[src])
-		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
-		to_chat(src, "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>")
+	if(our_holo)
 
+		var/obj/effect/ai_holo/T = our_holo
 		for(var/mob/M in viewers(T.loc))
-			M.show_message(rendered, 2)
+			M.show_message(message, 2)
 	else //This shouldn't occur, but better safe then sorry.
-		to_chat(src, "No holopad connected.")
+		to_chat(src, "No hologram active.")
 		return 0
 	return 1
 

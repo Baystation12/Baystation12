@@ -124,7 +124,6 @@
 /area/exo_research_ice_facility/sublevel1/interior/slipspacelab
 	name = "Kodiak Base Slipspace Lab"
 
-
 /area/exo_research_ice_facility/sublevel1/exterior/Caves
 	name = "Northwind Lower Caves"
 	dynamic_lighting = 1

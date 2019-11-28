@@ -12,6 +12,16 @@
 	var/currently_tracked_proj = null
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
+	ai_access_level = 4
+
+/obj/machinery/overmap_weapon_console/attack_ai(var/mob/living/silicon/ai/ai)
+	if(!istype(ai))
+		return
+	if(!ai.console_operating)
+		ai.console_operating = src
+		ai.machine = src
+		ai.reset_view(map_sectors["[z]"])
+		to_chat(ai,"<span class = 'notice'>You are now operating a ship weapon. Use Cancel Camera View to leave, or use movement controls then click on an empty tile.</span>")
 
 /obj/machinery/overmap_weapon_console/ex_act(var/severity)
 	return
@@ -43,11 +53,11 @@
 /obj/machinery/overmap_weapon_console/proc/scan_linked_devices() //Overriden on a weapon-by-weapon basis
 
 /obj/machinery/overmap_weapon_console/check_eye(var/mob/user)
-	if(!istype(user.l_hand,/obj/item/weapon/gun/aim_tool) && !istype(user.r_hand,/obj/item/weapon/gun/aim_tool))
+	if(!istype(user,/mob/living/silicon/ai) && (!istype(user.l_hand,/obj/item/weapon/gun/aim_tool) && !istype(user.r_hand,/obj/item/weapon/gun/aim_tool)))
 		user.machine = null
 		user.reset_view(null)
 		return -1
-	if(get_dist(user,src) > 1)
+	if(!istype(user,/mob/living/silicon/ai) && get_dist(user,src) > 1)
 		user.machine = null
 		user.reset_view(null)
 		return -1

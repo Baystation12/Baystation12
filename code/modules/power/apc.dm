@@ -222,10 +222,6 @@
 		cell.forceMove(loc)
 		cell = null
 
-	// Malf AI, removes the APC from AI's hacked APCs list.
-	if((hacker) && (hacker.hacked_apcs) && (src in hacker.hacked_apcs))
-		hacker.hacked_apcs -= src
-
 	return ..()
 
 /obj/machinery/power/apc/proc/energy_fail(var/duration)
@@ -278,8 +274,6 @@
 		else
 			if (stat & MAINT)
 				to_chat(user, "The cover is closed. Something wrong with it: it doesn't work.")
-			else if (hacker && !hacker.hacked_apcs_hidden)
-				to_chat(user, "The cover is locked.")
 			else
 				to_chat(user, "The cover is closed.")
 
@@ -400,7 +394,7 @@
 			update_state |= UPDATE_OPENED1
 		if(opened==2)
 			update_state |= UPDATE_OPENED2
-	else if(emagged || (hacker && !hacker.hacked_apcs_hidden) || failure_timer)
+	else if(emagged || failure_timer)
 		update_state |= UPDATE_BLUESCREEN
 	else if(wiresexposed)
 		update_state |= UPDATE_WIREEXP
@@ -494,7 +488,7 @@
 		else if (opened!=2) //cover isn't removed
 			opened = 0
 			update_icon()
-	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) )
+	else if (istype(W, /obj/item/weapon/crowbar) && !((stat & BROKEN)) )
 		if(coverlocked && !(stat & MAINT))
 			to_chat(user, "<span class='warning'>The cover is locked and cannot be opened.</span>")
 			return
@@ -555,8 +549,6 @@
 			to_chat(user, "You must close the panel")
 		else if(stat & (BROKEN|MAINT))
 			to_chat(user, "Nothing happens.")
-		else if(hacker && !hacker.hacked_apcs_hidden)
-			to_chat(user, "<span class='warning'>Access denied.</span>")
 		else
 			if(src.allowed(usr) && !isWireCut(APC_WIRE_IDSCAN))
 				locked = !locked
@@ -657,7 +649,7 @@
 			"<span class='notice'>You replace the damaged APC frontal panel with a new one.</span>")
 		qdel(W)
 		update_icon()
-	else if (istype(W, /obj/item/frame/apc) && opened && ((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)))
+	else if (istype(W, /obj/item/frame/apc) && opened && ((stat & BROKEN)))
 		if (has_electronics)
 			to_chat(user, "<span class='warning'>You cannot repair this APC until you remove the electronics still inside.</span>")
 			return
@@ -669,15 +661,11 @@
 				"You replace the damaged APC frame with new one.")
 			qdel(W)
 			stat &= ~BROKEN
-			// Malf AI, removes the APC from AI's hacked APCs list.
-			if(hacker && hacker.hacked_apcs && (src in hacker.hacked_apcs))
-				hacker.hacked_apcs -= src
-				hacker = null
 			if (opened==2)
 				opened = 1
 			update_icon()
 	else
-		if (((stat & BROKEN) || (hacker && !hacker.hacked_apcs_hidden)) \
+		if (((stat & BROKEN)) \
 				&& !opened \
 				&& W.force >= 5 \
 				&& W.w_class >= 3.0 \
@@ -701,7 +689,7 @@
 // attack with hand - remove cell (if cover open) or interact with the APC
 
 /obj/machinery/power/apc/emag_act(var/remaining_charges, var/mob/user)
-	if (!(emagged || (hacker && !hacker.hacked_apcs_hidden)))		// trying to unlock with an emag card
+	if (!(emagged))		// trying to unlock with an emag card
 		if(opened)
 			to_chat(user, "You must close the cover to swipe an ID card.")
 		else if(wiresexposed)
@@ -884,7 +872,7 @@
 		to_chat(user, "<span class='warning'>You must stand to use [src]!</span>")
 		return 0
 	autoflag = 5
-	if (istype(user, /mob/living/silicon))
+	/*if (istype(user, /mob/living/silicon))
 		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user
 		var/mob/living/silicon/robot/robot = user
@@ -894,13 +882,12 @@
 			else if(istype(robot) && robot.connected_ai && robot.connected_ai == hacker) // Cyborgs can use APCs hacked by their AI
 				permit = 1
 
-		if(aidisabled && !permit)
+		if(aidisabled)
 			if(!loud)
 				to_chat(user, "<span class='danger'>\The [src] have AI control disabled!</span>")
-			return 0
-	else
-		if (!in_range(src, user) || !istype(src.loc, /turf))
-			return 0
+			return 0*/
+	if (!(in_range(src, user) && istype(usr,/mob/living/silicon)) || !istype(src.loc, /turf))
+		return 0
 	var/mob/living/carbon/human/H = user
 	if (istype(H) && prob(H.getBrainLoss()))
 		to_chat(user, "<span class='danger'>You momentarily forget how to use [src].</span>")
@@ -1271,16 +1258,6 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 		return 1
 	else
 		return 0
-
-// Malfunction: Transfers APC under AI's control
-/obj/machinery/power/apc/proc/ai_hack(var/mob/living/silicon/ai/A = null)
-	if(!A || !A.hacked_apcs || hacker || aidisabled || A.stat == DEAD)
-		return 0
-	src.hacker = A
-	A.hacked_apcs += src
-	locked = 1
-	update_icon()
-	return 1
 
 /obj/item/weapon/module/power_control
 	name = "power control module"
