@@ -74,7 +74,7 @@
 	icon_state = "shuttlegrn"
 
 /area/covenant_light_cruiser/dockingumbilicalstarboard
-	name = "CRS Unyielding Transgression Docking Umbilical Port"
+	name = "CRS Unyielding Transgression Docking Umbilical Starboard"
 	icon_state = "shuttlered"
 
 /area/covenant_light_cruiser/auxmedical
