@@ -144,6 +144,18 @@
 					if(hair_style.do_colouration && islist(h_col) && h_col.len >= 3)
 						hair_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), hair_style.blend)
 					res.overlays |= hair_s
+
+	for (var/M in markings)
+		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
+		if (mark_style.draw_target == MARKING_TARGET_HAIR)
+			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]")
+			if (mark_style.do_colouration)
+				mark_s.Blend(markings[M]["color"], ICON_ADD)
+			else if (islist(h_col) && h_col.len >= 3)
+				mark_s.Blend(rgb(h_col[1], h_col[2], h_col[3]), ICON_ADD)
+			res.overlays |= mark_s
+			icon_cache_key += "[M][markings[M]["color"]]"
+
 	return res
 
 /obj/item/organ/external/head/no_eyes
