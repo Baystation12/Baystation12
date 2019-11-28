@@ -12,7 +12,7 @@
 	item_state = "m7"
 	caliber = "5mm"
 	slot_flags = SLOT_BACK|SLOT_BELT
-	fire_sound = 'code/modules/halo/sounds/SMG_Short_Burst_Sound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/SMG_Mini_Burst_Sound_Effect.ogg'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_Short_Burst_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/SMG_Reload_New.wav'
 	load_method = MAGAZINE
@@ -53,6 +53,7 @@
 	icon_state = "m7smgs"
 	item_state = "m7s"
 	fire_sound = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
+	//fire_sound_burst = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/update_icon()
 	if(ammo_magazine)
