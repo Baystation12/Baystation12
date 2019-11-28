@@ -6,6 +6,7 @@
 	icon_state = "unscterminal"
 	anchored = 1
 	density = 1
+	var/spawn_faction = null //If placed into this terminal with the faction "neutral", this will override your faction
 	var/mob/living/silicon/ai/held_ai = null
 	var/allow_remote_moveto = 1
 	var/inherent_network = "Exodus" //Our inherent camera network.
@@ -135,6 +136,8 @@
 	ai.switch_to_net_by_name(inherent_network)
 	set_terminal_inactive(ai.resist_carding)
 	apply_radio_channels(ai)
+	if(spawn_faction && ai.faction == "neutral")
+		ai.faction = spawn_faction
 
 /obj/structure/ai_terminal/spawn_terminal
 	name = "AI Core"
@@ -143,6 +146,7 @@
 
 /obj/structure/ai_terminal/spawn_terminal/unsc
 	icon_state = "unscspawn"
+	spawn_faction = "UNSC"
 	radio_channels_access = list("SHIPCOM","TEAMCOM","SQUADCOM","FLEETCOM","EBAND","TACCOM","ONICOM","SIERRACOM")
 
 /obj/structure/ai_terminal/spawn_terminal/city
@@ -151,10 +155,12 @@
 
 /obj/structure/ai_terminal/spawn_terminal/covenant
 	icon_state = "covspawn"
+	spawn_faction = "Covenant"
 	radio_channels_access = list("BattleNet","EBAND")
 
 /obj/structure/ai_terminal/spawn_terminal/innie
 	icon_state = "urfspawn"
+	spawn_faction = "Insurrectionist"
 	radio_channels_access = list("CMDOCOM","EBAND")
 
 /obj/structure/ai_terminal/spawn_terminal/innie/Initialize()

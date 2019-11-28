@@ -11,7 +11,7 @@
 
 	var/sprint = 10
 	var/cooldown = 0
-	var/acceleration = 1
+	var/acceleration = 0
 	var/owner_follows_eye = 0
 
 	see_in_dark = 7

@@ -91,34 +91,32 @@
 	name = "Atlas"
 	faction_lock = "UNSC"
 
-//SWITCH URF ONES TO REFER TO THEIR FACTION IN THE FACTION LOCK WHEN THE URF GET A ROUNDSTART AI//
-
 /decl/ai_holo/halo/urf_mordred
 	icon_state = "urfhologram_mordred"
 	name = "Knight"
-	faction_lock = "neutral"
+	faction_lock = "Insurrectionist"
 
 /decl/ai_holo/halo/urf_cowboy
 	icon_state = "urfhologram_cowboy"
 	name = "Cowboy"
-	faction_lock = "neutral"
+	faction_lock = "Insurrectionist"
 
 /decl/ai_holo/halo/urf_brotherhood
 	icon_state = "urfhologram_brotherhood"
 	name = "Brotherhood"
-	faction_lock = "neutral"
+	faction_lock = "Insurrectionist"
 
 /decl/ai_holo/halo/urf_anonymous
 	icon_state = "urfhologram_anonymous"
 	name = "Anonymous"
-	faction_lock = "neutral"
+	faction_lock = "Insurrectionist"
 
 /decl/ai_holo/halo/urf_liberty
 	icon_state = "urfhologram_liberty"
 	name = "Sickle"
-	faction_lock = "neutral"
+	faction_lock = "Insurrectionist"
 
 /decl/ai_holo/halo/urf_undivided
 	icon_state = "urfhologram_undivided"
 	name = "Undivided"
-	faction_lock = "neutral"
+	faction_lock = "Insurrectionist"
