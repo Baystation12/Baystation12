@@ -3,7 +3,9 @@
 
 /decl/hierarchy/outfit/halo_ai_smart/equip(mob/living/carbon/human/H, var/rank, var/assignment)
 	var/turf/h_loc = H.loc
+	var/h_faction = H.faction
 	var/mob/living/silicon/ai/new_ai = H.AIize(0)
+	new_ai.faction = h_faction
 	var/obj/structure/ai_terminal/terminal = locate(/obj/structure/ai_terminal) in h_loc.contents
 	if(terminal)
 		terminal.pre_move_to_node(new_ai,1)

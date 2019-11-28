@@ -791,8 +791,9 @@ About the new airlock wires panel:
 		return 1
 
 	var/ai_access_level = -1
-	if(istype(usr,/mob/living/silicon/ai) && loc.loc.ai_routing_node)
-		ai_access_level = loc.loc.ai_routing_node.get_access_for_ai(usr)
+	var/area/our_area = loc.loc
+	if(istype(usr,/mob/living/silicon/ai) && our_area.ai_routing_node)
+		ai_access_level = our_area.ai_routing_node.get_access_for_ai(usr)
 	var/activate = text2num(href_list["activate"])
 	switch (href_list["command"])
 		if("idscan")
