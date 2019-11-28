@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Failing to do surgery due to thick material clothing items will now display an appropriate error message."
