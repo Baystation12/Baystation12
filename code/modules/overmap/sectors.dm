@@ -13,6 +13,7 @@ var/list/points_of_interest = list()
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
 	dir = 1
+	ai_access_level = 0
 	var/list/map_z = list()
 	var/list/map_z_data = list()
 	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)

@@ -37,8 +37,8 @@
 /datum/cyberwarfare_command/proc/expire()
 	if(our_ai.prepped_command == src)
 		our_ai.prepped_command = null
-		our_ai.active_cyberwarfare_effects -= src
-		qdel(src)
+	our_ai.active_cyberwarfare_effects -= src
+	qdel(src)
 
 /datum/cyberwarfare_command/proc/command_process()
 	if(check_command_expire())
