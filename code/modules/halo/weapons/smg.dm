@@ -12,7 +12,7 @@
 	item_state = "m7"
 	caliber = "5mm"
 	slot_flags = SLOT_BACK|SLOT_BELT
-	fire_sound = 'code/modules/halo/sounds/SMG_Mini_Burst_Sound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/SMG_Short_Burst_Sound_Effect.ogg'
 	//fire_sound_burst = 'code/modules/halo/sounds/SMG_Short_Burst_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/SMG_Reload_New.wav'
 	load_method = MAGAZINE
@@ -49,10 +49,10 @@
 	name = "M7S submachine gun"
 	desc = "The M7S is a special operations variant of the M7 submachine gun with inbuilt suppressor and host of other attachments. Takes 5mm calibre magazines."
 	silenced = 1
-	accuracy = -2
 	is_heavy = 1
 	icon_state = "m7smgs"
 	item_state = "m7s"
+	fire_sound = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/update_icon()
 	if(ammo_magazine)

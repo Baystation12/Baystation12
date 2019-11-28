@@ -80,6 +80,7 @@
 	magazine_type = /obj/item/ammo_magazine/m127_saphp
 	caliber = "12.7mm"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	fire_sound = 'code/modules/halo/sounds/Magnum_SOCOM_Fire.wav'
 	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	load_method = MAGAZINE
 	fire_delay = 3
