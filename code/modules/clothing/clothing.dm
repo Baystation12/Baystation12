@@ -966,6 +966,10 @@ BLIND     // can't see anything
 	else
 		user.visible_message("[user] adjusts the tracking sensor on [src]", "You adjust the sensor on [src].")
 
+	if (istype(loc, /mob/living))
+		var/mob/living/H = loc
+		H.hud_updateflag |= MEDICAL_HUDS
+
 /obj/item/clothing/under/emp_act(var/severity)
 	..()
 	var/new_mode
@@ -978,6 +982,10 @@ BLIND     // can't see anything
 			new_mode = pick(25;SUIT_SENSOR_OFF, 35;SUIT_SENSOR_BINARY, 30;SUIT_SENSOR_VITAL, 10;SUIT_SENSOR_TRACKING)
 
 	sensor_mode = new_mode
+
+	if (istype(loc, /mob/living))
+		var/mob/living/H = loc
+		H.hud_updateflag |= MEDICAL_HUDS
 
 /obj/item/clothing/under/verb/toggle()
 	set name = "Toggle Suit Sensors"

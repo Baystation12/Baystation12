@@ -14,42 +14,50 @@ proc/process_med_hud(var/mob/M, var/local_scanner, var/mob/Alt)
 		return
 
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.med_hud_users)
-	for(var/mob/living/carbon/human/patient in P.Mob.in_view(P.Turf))
-
+	for(var/mob/living/patient in P.Mob.in_view(P.Turf))
 		if(patient.is_invisible_to(P.Mob))
 			continue
 
 		if(local_scanner)
-			P.Client.images += patient.hud_list[HEALTH_HUD]
-			P.Client.images += patient.hud_list[STATUS_HUD]
+			add_hud_if_present(P, patient, HEALTH_HUD)
+			add_hud_if_present(P, patient, STATUS_HUD)
 		else
 			var/sensor_level = getsensorlevel(patient)
 			if(sensor_level >= SUIT_SENSOR_VITAL)
-				P.Client.images += patient.hud_list[HEALTH_HUD]
+				add_hud_if_present(P, patient, HEALTH_HUD)
 			if(sensor_level >= SUIT_SENSOR_BINARY)
-				P.Client.images += patient.hud_list[LIFE_HUD]
+				add_hud_if_present(P, patient, LIFE_HUD)
 
 //Security HUDs. Pass a value for the second argument to enable implant viewing or other special features.
 proc/process_sec_hud(var/mob/M, var/advanced_mode, var/mob/Alt)
 	if(!can_process_hud(M))
 		return
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.sec_hud_users)
-	for(var/mob/living/carbon/human/perp in P.Mob.in_view(P.Turf))
-
+	for(var/mob/living/perp in P.Mob.in_view(P.Turf))
 		if(perp.is_invisible_to(P.Mob))
 			continue
 
-		P.Client.images += perp.hud_list[ID_HUD]
+		add_hud_if_present(P, perp, ID_HUD)
 		if(advanced_mode)
-			P.Client.images += perp.hud_list[WANTED_HUD]
-			P.Client.images += perp.hud_list[IMPTRACK_HUD]
-			P.Client.images += perp.hud_list[IMPLOYAL_HUD]
-			P.Client.images += perp.hud_list[IMPCHEM_HUD]
+			add_hud_if_present(P, perp, WANTED_HUD)
+			add_hud_if_present(P, perp, IMPTRACK_HUD)
+			add_hud_if_present(P, perp, IMPLOYAL_HUD)
+			add_hud_if_present(P, perp, IMPCHEM_HUD)
 
 proc/process_jani_hud(var/mob/M, var/mob/Alt)
 	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.jani_hud_users)
 	for (var/obj/effect/decal/cleanable/dirtyfloor in view(P.Mob))
 		P.Client.images += dirtyfloor.hud_overlay
+
+proc/process_antag_hud(mob/M, mob/Alt)
+	if (!can_process_hud(M))
+		return
+	var/datum/arranged_hud_process/P = arrange_hud_process(M, Alt, GLOB.antag_hud_users)
+	for (var/mob/living/target in P.Mob.in_view(P.Turf))
+		if (target.is_invisible_to(P.Mob))
+			continue
+
+		add_hud_if_present(P, target, SPECIALROLE_HUD)
 
 datum/arranged_hud_process
 	var/client/Client
@@ -69,9 +77,13 @@ proc/can_process_hud(var/mob/M)
 		return 0
 	if(!M.client)
 		return 0
-	if(M.stat != CONSCIOUS)
+	if(M.stat != CONSCIOUS && !isobserver(M))
 		return 0
 	return 1
+
+proc/add_hud_if_present(datum/arranged_hud_process/P, mob/living/M, index)
+	if (length(M.hud_list) && M.hud_list[index] != null)
+		P.Client.images += M.hud_list[index]
 
 //Deletes the current HUD images so they can be refreshed with new ones.
 mob/proc/handle_hud_glasses() //Used in the life.dm of mobs that can use HUDs.

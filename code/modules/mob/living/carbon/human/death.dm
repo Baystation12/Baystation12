@@ -27,10 +27,8 @@
 
 	if(stat == DEAD) return
 
-	BITSET(hud_updateflag, HEALTH_HUD)
-	BITSET(hud_updateflag, STATUS_HUD)
-	BITSET(hud_updateflag, LIFE_HUD)
-	
+	hud_updateflag |= MEDICAL_HUDS
+
 	//Handle species-specific deaths.
 	species.handle_death(src)
 

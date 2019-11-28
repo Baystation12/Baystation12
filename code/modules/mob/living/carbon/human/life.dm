@@ -60,7 +60,7 @@
 	..()
 
 	if(life_tick%30==15)
-		hud_updateflag = 1022
+		hud_updateflag = HUD_ALL
 
 	voice = GetVoice()
 
@@ -285,7 +285,7 @@
 		damage = Floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
-			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT) 
+			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT)
 			updatehealth()
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)
@@ -953,64 +953,50 @@
 
 
 /mob/living/carbon/human/proc/handle_hud_list()
-	if (BITTEST(hud_updateflag, HEALTH_HUD) && hud_list[HEALTH_HUD])
-		var/image/holder = hud_list[HEALTH_HUD]
+	if (!length(hud_list))
+		hud_updateflag = 0
+		return
+
+	// Health Hud
+	if (check_hud_overlay_update(HEALTH_HUD))
 		if(stat == DEAD)
-			holder.icon_state = "0" 	// X_X
+			update_hud_overlay(HEALTH_HUD, "0")
 		else if(is_asystole())
-			holder.icon_state = "flatline"
+			update_hud_overlay(HEALTH_HUD, "flatline")
 		else
-			holder.icon_state = "[pulse()]"
-		hud_list[HEALTH_HUD] = holder
+			update_hud_overlay(HEALTH_HUD, "[pulse()]")
 
-	if (BITTEST(hud_updateflag, LIFE_HUD) && hud_list[LIFE_HUD])
-		var/image/holder = hud_list[LIFE_HUD]
+	// Life Hud
+	if (check_hud_overlay_update(LIFE_HUD))
 		if(stat == DEAD)
-			holder.icon_state = "huddead"
+			update_hud_overlay(LIFE_HUD, "huddead")
 		else
-			holder.icon_state = "hudhealthy"
-		hud_list[LIFE_HUD] = holder
+			update_hud_overlay(LIFE_HUD, "hudhealthy")
 
-	if (BITTEST(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
-		var/image/holder = hud_list[STATUS_HUD]
+	// Status Hud
+	if (check_hud_overlay_update(STATUS_HUD))
 		if(stat == DEAD)
-			holder.icon_state = "huddead"
-
+			update_hud_overlay(STATUS_HUD, "huddead")
 		else if(has_brain_worms())
 			var/mob/living/simple_animal/borer/B = has_brain_worms()
 			if(B.controlling)
-				holder.icon_state = "hudbrainworm"
-			else
-				holder.icon_state = "hudhealthy"
+				update_hud_overlay(STATUS_HUD, "hudbrainworm")
 		else
-			holder.icon_state = "hudhealthy"
+			update_hud_overlay(STATUS_HUD, "hudhealthy")
 
-		var/image/holder2 = hud_list[STATUS_HUD_OOC]
-		if(stat == DEAD)
-			holder2.icon_state = "huddead"
-		else if(has_brain_worms())
-			holder2.icon_state = "hudbrainworm"
-		else
-			holder2.icon_state = "hudhealthy"
-
-		hud_list[STATUS_HUD] = holder
-		hud_list[STATUS_HUD_OOC] = holder2
-
-	if (BITTEST(hud_updateflag, ID_HUD) && hud_list[ID_HUD])
-		var/image/holder = hud_list[ID_HUD]
-		holder.icon_state = "hudunknown"
+	// ID Hud
+	if (check_hud_overlay_update(ID_HUD))
+		update_hud_overlay(ID_HUD, "hudunknown")
 		if(wear_id)
 			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
 			if(I)
 				var/datum/job/J = SSjobs.get_by_title(I.GetJobName())
 				if(J)
-					holder.icon_state = J.hud_icon
+					update_hud_overlay(ID_HUD, J.hud_icon)
 
-		hud_list[ID_HUD] = holder
-
-	if (BITTEST(hud_updateflag, WANTED_HUD) && hud_list[WANTED_HUD])
-		var/image/holder = hud_list[WANTED_HUD]
-		holder.icon_state = "hudblank"
+	// Wanted Hud
+	if (check_hud_overlay_update(WANTED_HUD))
+		update_hud_overlay(WANTED_HUD, "hudblank")
 		var/perpname = name
 		if(wear_id)
 			var/obj/item/weapon/card/id/I = wear_id.GetIdCard()
@@ -1021,49 +1007,49 @@
 		if(E)
 			switch(E.get_criminalStatus())
 				if("Arrest")
-					holder.icon_state = "hudwanted"
+					update_hud_overlay(WANTED_HUD, "hudwanted")
 				if("Incarcerated")
-					holder.icon_state = "hudprisoner"
+					update_hud_overlay(WANTED_HUD, "hudprisoner")
 				if("Parolled")
-					holder.icon_state = "hudparolled"
+					update_hud_overlay(WANTED_HUD, "hudparolled")
 				if("Released")
-					holder.icon_state = "hudreleased"
-		hud_list[WANTED_HUD] = holder
+					update_hud_overlay(WANTED_HUD, "hudreleased")
 
-	if (  BITTEST(hud_updateflag, IMPLOYAL_HUD) \
-	   || BITTEST(hud_updateflag,  IMPCHEM_HUD) \
-	   || BITTEST(hud_updateflag, IMPTRACK_HUD))
-
-		var/image/holder1 = hud_list[IMPTRACK_HUD]
-		var/image/holder2 = hud_list[IMPLOYAL_HUD]
-		var/image/holder3 = hud_list[IMPCHEM_HUD]
-
-		holder1.icon_state = "hudblank"
-		holder2.icon_state = "hudblank"
-		holder3.icon_state = "hudblank"
+	// Implant Huds
+	if (check_hud_overlay_update(IMPTRACK_HUD, TRUE) || check_hud_overlay_update(IMPLOYAL_HUD, TRUE) || check_hud_overlay_update(IMPCHEM_HUD, TRUE))
+		var/tracking_exists = FALSE
+		var/loyalty_exists = FALSE
+		var/chemical_exists = FALSE
 
 		for(var/obj/item/weapon/implant/I in src)
 			if(I.implanted)
 				if(istype(I,/obj/item/weapon/implant/tracking))
-					holder1.icon_state = "hud_imp_tracking"
+					update_hud_overlay(IMPTRACK_HUD, "hud_imp_tracking")
+					tracking_exists = TRUE
 				if(istype(I,/obj/item/weapon/implant/loyalty))
-					holder2.icon_state = "hud_imp_loyal"
+					update_hud_overlay(IMPLOYAL_HUD, "hud_imp_loyal")
+					loyalty_exists = TRUE
 				if(istype(I,/obj/item/weapon/implant/chem))
-					holder3.icon_state = "hud_imp_chem"
+					update_hud_overlay(IMPCHEM_HUD, "hud_imp_chem")
+					chemical_exists = TRUE
 
-		hud_list[IMPTRACK_HUD] = holder1
-		hud_list[IMPLOYAL_HUD] = holder2
-		hud_list[IMPCHEM_HUD]  = holder3
+		if (!tracking_exists && hud_list[IMPTRACK_HUD] != null)
+			delete_hud_overlay(IMPTRACK_HUD)
+		if (!loyalty_exists && hud_list[IMPLOYAL_HUD] != null)
+			delete_hud_overlay(IMPLOYAL_HUD)
+		if (!chemical_exists && hud_list[IMPCHEM_HUD] != null)
+			delete_hud_overlay(IMPCHEM_HUD)
 
-	if (BITTEST(hud_updateflag, SPECIALROLE_HUD))
-		var/image/holder = hud_list[SPECIALROLE_HUD]
-		holder.icon_state = "hudblank"
+	// Special Role Hud (Antags)
+	if (check_hud_overlay_update(SPECIALROLE_HUD))
 		if(mind && mind.special_role)
 			if(GLOB.hud_icon_reference[mind.special_role])
-				holder.icon_state = GLOB.hud_icon_reference[mind.special_role]
+				update_hud_overlay(SPECIALROLE_HUD, GLOB.hud_icon_reference[mind.special_role])
 			else
-				holder.icon_state = "hudsyndicate"
-			hud_list[SPECIALROLE_HUD] = holder
+				update_hud_overlay(SPECIALROLE_HUD, "hudsyndicate")
+		else
+			delete_hud_overlay(SPECIALROLE_HUD)
+
 	hud_updateflag = 0
 
 /mob/living/carbon/human/handle_stunned()

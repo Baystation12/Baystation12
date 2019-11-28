@@ -5,6 +5,12 @@
 	known = 1
 	var/id = 1
 
+/obj/item/weapon/implant/tracking/removed()
+	if (implanted && istype(imp_in, /mob/living))
+		var/mob/living/H = imp_in
+		H.hud_updateflag |= HUDBIT(IMPTRACK_HUD)
+	. = ..()
+
 /obj/item/weapon/implant/tracking/get_data()
 	. = {"<b>Implant Specifications:</b><BR>
 	<b>Name:</b> Tracking Beacon<BR>
@@ -41,6 +47,12 @@
 		meltdown()
 	else if(prob(power * 40))
 		disable(rand(power*500,power*5000))//adds in extra time because this is the only other way to sabotage it
+
+/obj/item/weapon/implant/tracking/implanted(mob/M)
+	if (istype(M, /mob/living))
+		var/mob/living/H = M
+		H.create_hud_overlay(IMPTRACK_HUD)
+	. = ..()
 
 /obj/item/weapon/implantcase/tracking
 	name = "glass case - 'tracking'"

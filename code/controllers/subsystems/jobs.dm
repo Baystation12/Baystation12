@@ -556,9 +556,7 @@ SUBSYSTEM_DEF(jobs)
 			var/obj/item/clothing/glasses/G = H.glasses
 			G.prescription = 7
 
-	BITSET(H.hud_updateflag, ID_HUD)
-	BITSET(H.hud_updateflag, IMPLOYAL_HUD)
-	BITSET(H.hud_updateflag, SPECIALROLE_HUD)
+	H.hud_updateflag |= HUDBIT(ID_HUD) | HUDBIT(SPECIALROLE_HUD)
 
 	job.post_equip_rank(H, alt_title || rank)
 

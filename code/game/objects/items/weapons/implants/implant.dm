@@ -60,8 +60,6 @@
 			affected.implants += src
 			part = affected
 
-		BITSET(H.hud_updateflag, IMPLOYAL_HUD)
-
 	forceMove(M)
 	imp_in = M
 	implanted = 1
@@ -120,4 +118,5 @@
 /obj/item/weapon/implant/Destroy()
 	if(part)
 		part.implants.Remove(src)
+	removed()
 	return ..()

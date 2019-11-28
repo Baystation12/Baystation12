@@ -112,29 +112,9 @@ Works together with spawning an observer, noted above.
 	handle_hud_glasses()
 
 	if(antagHUD)
-		var/list/target_list = list()
-		for(var/mob/living/target in oview(src, 14))
-			if(target.mind && target.mind.special_role)
-				target_list += target
-		if(target_list.len)
-			assess_targets(target_list, src)
+		process_antag_hud(src)
 	if(medHUD)
-		process_medHUD(src)
-
-
-/mob/observer/ghost/proc/process_medHUD(var/mob/M)
-	var/client/C = M.client
-	for(var/mob/living/carbon/human/patient in oview(M, 14))
-		C.images += patient.hud_list[HEALTH_HUD]
-		C.images += patient.hud_list[STATUS_HUD_OOC]
-
-/mob/observer/ghost/proc/assess_targets(list/target_list, mob/observer/ghost/U)
-	var/client/C = U.client
-	for(var/mob/living/carbon/human/target in target_list)
-		C.images += target.hud_list[SPECIALROLE_HUD]
-	for(var/mob/living/silicon/target in target_list)
-		C.images += target.hud_list[SPECIALROLE_HUD]
-	return 1
+		process_med_hud(src, TRUE)
 
 /mob/proc/ghostize(var/can_reenter_corpse = CORPSE_CAN_REENTER)
 	// Are we the body of an aghosted admin? If so, don't make a ghost.

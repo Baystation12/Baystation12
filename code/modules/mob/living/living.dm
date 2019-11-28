@@ -403,9 +403,6 @@ default behaviour is:
 		if (C.handcuffed && !initial(C.handcuffed))
 			C.drop_from_inventory(C.handcuffed)
 		C.handcuffed = initial(C.handcuffed)
-	BITSET(hud_updateflag, HEALTH_HUD)
-	BITSET(hud_updateflag, STATUS_HUD)
-	BITSET(hud_updateflag, LIFE_HUD)
 	ExtinguishMob()
 	fire_stacks = 0
 
@@ -455,9 +452,7 @@ default behaviour is:
 	// make the icons look correct
 	regenerate_icons()
 
-	BITSET(hud_updateflag, HEALTH_HUD)
-	BITSET(hud_updateflag, STATUS_HUD)
-	BITSET(hud_updateflag, LIFE_HUD)
+	hud_updateflag |= MEDICAL_HUDS
 
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	reload_fullscreen()
@@ -476,9 +471,7 @@ default behaviour is:
 	stat = CONSCIOUS
 	regenerate_icons()
 
-	BITSET(hud_updateflag, HEALTH_HUD)
-	BITSET(hud_updateflag, STATUS_HUD)
-	BITSET(hud_updateflag, LIFE_HUD)
+	hud_updateflag |= MEDICAL_HUDS
 
 	failed_last_breath = 0 //So mobs that died of oxyloss don't revive and have perpetual out of breath.
 	reload_fullscreen()
@@ -562,7 +555,7 @@ default behaviour is:
 	if(!can_pull())
 		stop_pulling()
 		return
-	
+
 	if (!isliving(pulling))
 		step(pulling, get_dir(pulling.loc, old_loc))
 	else
@@ -874,3 +867,24 @@ default behaviour is:
 
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE
+
+/mob/living/proc/create_hud_overlay(index, default_state = "hudblank", icon_path = 'icons/mob/hud.dmi')
+	if (hud_list[index] == null)
+		hud_list[index] = new /image/hud_overlay(icon_path, src, default_state)
+	hud_updateflag |= HUDBIT(index)
+
+/mob/living/proc/update_hud_overlay(index, new_state)
+	if (hud_list[index] != null)
+		var/image/holder = hud_list[index]
+		holder.icon_state = new_state
+		hud_list[index] = holder
+
+/mob/living/proc/delete_hud_overlay(index)
+	QDEL_NULL(hud_list[index])
+	hud_updateflag |= HUDBIT(index)
+
+/mob/living/proc/check_hud_overlay_update(index, bypassExistsCheck = FALSE)
+	if (bypassExistsCheck)
+		return (hud_updateflag & HUDBIT(index))
+	else
+		return (hud_updateflag & HUDBIT(index)) && hud_list[index]

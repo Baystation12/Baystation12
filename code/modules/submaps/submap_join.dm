@@ -104,9 +104,7 @@
 				var/obj/item/clothing/glasses/G = user_human.glasses
 				G.prescription = 7
 
-		BITSET(character.hud_updateflag, ID_HUD)
-		BITSET(character.hud_updateflag, IMPLOYAL_HUD)
-		BITSET(character.hud_updateflag, SPECIALROLE_HUD)
+		character.hud_updateflag |= HUDBIT(ID_HUD) | HUDBIT(SPECIALROLE_HUD)
 
 		SSticker.mode.handle_offsite_latejoin(character)
 		GLOB.universe.OnPlayerLatejoin(character)

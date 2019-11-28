@@ -4,6 +4,12 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ESOTERIC = 3)
 	known = 1
 
+/obj/item/weapon/implant/loyalty/removed()
+	if (implanted && istype(imp_in, /mob/living))
+		var/mob/living/H = imp_in
+		H.hud_updateflag |= HUDBIT(IMPLOYAL_HUD)
+	. = ..()
+
 /obj/item/weapon/implant/loyalty/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
@@ -23,9 +29,9 @@
 	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
 		H.visible_message("[H] seems to resist the implant!", "You feel the corporate tendrils of [GLOB.using_map.company_name] try to invade your mind!")
 		return FALSE
-	else
-		clear_antag_roles(H.mind, 1)
-		to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [GLOB.using_map.company_name].</span>")
+	clear_antag_roles(H.mind, 1)
+	to_chat(H, "<span class='notice'>You feel a surge of loyalty towards [GLOB.using_map.company_name].</span>")
+	H.create_hud_overlay(IMPLOYAL_HUD)
 	return TRUE
 
 /obj/item/weapon/implanter/loyalty

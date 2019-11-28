@@ -64,6 +64,10 @@
 		if(nonstandard_role_msg)
 			to_chat(player.current, "<span class='notice'>[nonstandard_role_msg]</span>")
 		update_icons_added(player)
+
+	if(player.current)
+		player.current.create_hud_overlay(SPECIALROLE_HUD)
+
 	return 1
 
 /datum/antagonist/proc/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
@@ -81,7 +85,7 @@
 		update_icons_removed(player)
 
 		if(player.current)
-			BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
+			player.current.hud_updateflag |= HUDBIT(SPECIALROLE_HUD)
 			player.current.reset_skillset() //Reset their skills to be job-appropriate.
 
 		if(!is_special_character(player))

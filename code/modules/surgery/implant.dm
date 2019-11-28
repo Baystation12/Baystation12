@@ -201,8 +201,6 @@
 			"<span class='notice'>You take \the [obj] out of incision on \the [target]'s [affected.name] with \the [tool].</span>" )
 			target.remove_implant(obj, TRUE, affected)
 
-			BITSET(target.hud_updateflag, IMPLOYAL_HUD)
-
 			//Handle possessive brain borers.
 			if(istype(obj,/mob/living/simple_animal/borer))
 				var/mob/living/simple_animal/borer/worm = obj
@@ -231,4 +229,3 @@
 			playsound(imp.loc, 'sound/items/countdown.ogg', 75, 1, -3)
 			spawn(25)
 				imp.activate()
-

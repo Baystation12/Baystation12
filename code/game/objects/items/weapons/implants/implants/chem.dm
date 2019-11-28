@@ -4,6 +4,12 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2)
 	known = 1
 
+/obj/item/weapon/implant/chem/removed()
+	if (implanted && istype(imp_in, /mob/living))
+		var/mob/living/H = imp_in
+		H.hud_updateflag |= HUDBIT(IMPCHEM_HUD)
+	. = ..()
+
 /obj/item/weapon/implant/chem/get_data()
 	return {"
 	<b>Implant Specifications:</b><BR>
@@ -43,6 +49,12 @@
 				to_chat(user, "<span class='notice'>You inject 5 units of the solution. The syringe now contains [I.reagents.total_volume] units.</span>")
 	else
 		..()
+
+/obj/item/weapon/implant/chem/implanted(mob/M)
+	if (istype(M, /mob/living))
+		var/mob/living/H = M
+		H.create_hud_overlay(IMPCHEM_HUD)
+	. = ..()
 
 /obj/item/weapon/implantcase/chem
 	name = "glass case - 'chem'"

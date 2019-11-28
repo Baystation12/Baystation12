@@ -5,7 +5,6 @@
 	icon = 'icons/mob/human.dmi'
 	icon_state = "body_m_s"
 
-	var/list/hud_list[10]
 	var/embedded_flag	  //To check if we've need to roll for damage on movement while an item is imbedded in us.
 	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/list/stance_limbs
@@ -34,16 +33,11 @@
 		if(mind)
 			mind.name = real_name
 
-	hud_list[HEALTH_HUD]      = new /image/hud_overlay('icons/mob/hud_med.dmi', src, "100")
-	hud_list[STATUS_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[LIFE_HUD]	      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
-	hud_list[ID_HUD]          = new /image/hud_overlay(GLOB.using_map.id_hud_icons, src, "hudunknown")
-	hud_list[WANTED_HUD]      = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPLOYAL_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPCHEM_HUD]     = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[IMPTRACK_HUD]    = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[SPECIALROLE_HUD] = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudblank")
-	hud_list[STATUS_HUD_OOC]  = new /image/hud_overlay('icons/mob/hud.dmi', src, "hudhealthy")
+	hud_list = new /list(HUD_COUNT)
+	create_hud_overlay(HEALTH_HUD, "100", 'icons/mob/hud_med.dmi')
+	create_hud_overlay(STATUS_HUD, "hudhealthy")
+	create_hud_overlay(LIFE_HUD, "hudhealthy")
+	create_hud_overlay(ID_HUD, "hudunknown", GLOB.using_map.id_hud_icons)
 
 	GLOB.human_mob_list |= src
 	..()
@@ -453,7 +447,7 @@
 					modified = 1
 
 					spawn()
-						BITSET(hud_updateflag, WANTED_HUD)
+						hud_updateflag |= HUDBIT(WANTED_HUD)
 						if(istype(user,/mob/living/carbon/human))
 							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
