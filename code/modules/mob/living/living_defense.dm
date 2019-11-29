@@ -151,9 +151,9 @@
 
 /mob/living/proc/pin_if_possible(var/obj/pinner,var/pin_range,var/pin_dir)
 	//Handles embedding for non-humans and simple_animals.
-	embed(pinner)
 	var/turf/T = near_wall(dir,pin_range)
 	if(T)
+		embed(pinner)
 		src.loc = T
 		visible_message("<span class='warning'>[src] is pinned to the wall by [pinner]!</span>","<span class='warning'>You are pinned to the wall by [pinner]!</span>")
 		src.anchored = 1
