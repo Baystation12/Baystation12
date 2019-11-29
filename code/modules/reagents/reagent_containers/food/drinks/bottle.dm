@@ -378,8 +378,6 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/blackstrap, 100)
 
-
-
 /obj/item/weapon/reagent_containers/food/drinks/bottle/sake
 	name = "Takeo Sadow's Combined Sake"
 	desc = "Finest Sake allowed for import in the SCG."
@@ -535,9 +533,11 @@
 	item_state = "carton"
 	center_of_mass = "x=16;y=8"
 	isGlass = 0
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/drink/alien/unathijuice, 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/alien/unathijuice, 100)
+
 
 //Small bottles
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small
@@ -570,18 +570,20 @@
 	desc = "The best ale on Mars, according to the label."
 	icon_state = "hellshenbeer"
 	center_of_mass = "x=16;y=12"
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/ethanol/hellshenpa, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/hellshenpa/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/hellshenpa, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/gingerbeer
 	name = "Ginger Beer"
 	desc = "A delicious non-alcoholic beverage enjoyed across Sol space."
 	icon_state = "gingerbeer"
 	center_of_mass = "x=16;y=12"
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/drink/gingerbeer, 50)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/gingerbeer/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/gingerbeer, 50)
 
 //Probably not the right place for it, but no idea where else to put it without making a brand new DM and slogging through making vars from scratch.
 

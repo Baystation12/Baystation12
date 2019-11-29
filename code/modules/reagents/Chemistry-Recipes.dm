@@ -2143,9 +2143,9 @@
 	required_reagents = list(/datum/reagent/ethanol/beer = 1, /datum/reagent/drink/lemon_lime = 1)
 	result_amount = 2
 
-/datum/chemical_reaction/irishcarbomb
-	name = "Irish Car Bomb"
-	result = /datum/reagent/ethanol/irishcarbomb
+/datum/chemical_reaction/irishslammer
+	name = "Irish Slammer"
+	result = /datum/reagent/ethanol/irishslammer
 	required_reagents = list(/datum/reagent/ethanol/ale = 1, /datum/reagent/ethanol/irish_cream = 1)
 	result_amount = 2
 
@@ -2620,6 +2620,12 @@
 	required_reagents = list(/datum/reagent/ethanol/herbal = 2, /datum/reagent/water = 1)
 	catalysts = list(/datum/reagent/nutriment/mint)
 	result_amount = 3
+
+/datum/chemical_reaction/lonestarmule
+	name = "Lonestar Mule"
+	result = /datum/reagent/ethanol/lonestarmule
+	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/drink/gingerbeer = 1, /datum/reagent/drink/juice/lime = 1)
+	result_amount = 4
 
 /datum/chemical_reaction/llanbrydewhiskey
 	name = "Llanbryde Whiskey"
