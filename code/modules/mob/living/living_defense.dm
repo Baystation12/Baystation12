@@ -151,8 +151,9 @@
 
 /mob/living/proc/pin_if_possible(var/obj/pinner,var/pin_range)
 	//Handles embedding for non-humans and simple_animals.
+	throw_at(get_edge_target_turf(src,dir),1,pin_range)
 	embed(pinner)
-	var/turf/T = near_wall(dir,pin_range)
+	var/turf/T = near_wall(dir,2)
 	if(T)
 		src.loc = T
 		visible_message("<span class='warning'>[src] is pinned to the wall by [pinner]!</span>","<span class='warning'>You are pinned to the wall by [pinner]!</span>")
@@ -207,7 +208,7 @@
 			if(!O || !src) return
 
 			if(O.sharp) //Projectile is suitable for pinning.
-				pin_if_possible(O,1) //The relevant var is used for projectiles.
+				pin_if_possible(O,momentum) //The relevant var is used for projectiles.
 
 /mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	O.loc = src

@@ -44,7 +44,7 @@
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
 	var/pin_chance = 0
-	var/pin_range = 2
+	var/pin_range = 2 //this is essentially a knockback of
 
 	var/hitscan = 0		// whether the projectile should be hitscan
 	var/step_delay = 0.5	// the delay between iterations if not a hitscan projectile

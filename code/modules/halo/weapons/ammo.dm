@@ -271,7 +271,7 @@
 	armor_penetration = 70
 	tracer_type = null
 	tracer_delay_time = null
-	pin_range = 3
+	pin_range = 2
 	pin_chance = 70
 
 /obj/effect/projectile/srs99
