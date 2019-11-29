@@ -1,4 +1,0 @@
-author: "afterthought2"
-delete-after: True
-changes: 
-  - bugfix: "Robotic limb attachment and connection surgery now consistently checks robotic skills (complex devices, also anatomy if on flesh target)."
