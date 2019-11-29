@@ -233,7 +233,7 @@
 			handle_click_empty(user)
 		return 0
 	var/mob/living/carbon/human/h = user
-	if(h.species.can_operate_advanced_covenant == 0 && advanced_covenant == 1)
+	if(istype(h) && h.species.can_operate_advanced_covenant == 0 && advanced_covenant == 1)
 		to_chat(h,"<span class= 'danger'>You don't know how to operate this weapon!</span>")
 		return 0
 	return 1
