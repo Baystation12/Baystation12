@@ -149,11 +149,10 @@
 
 	return 1
 
-/mob/living/proc/pin_if_possible(var/obj/pinner,var/pin_range)
+/mob/living/proc/pin_if_possible(var/obj/pinner,var/pin_range,var/pin_dir)
 	//Handles embedding for non-humans and simple_animals.
-	throw_at(get_edge_target_turf(src,dir),1,pin_range)
 	embed(pinner)
-	var/turf/T = near_wall(dir,2)
+	var/turf/T = near_wall(dir,pin_range)
 	if(T)
 		src.loc = T
 		visible_message("<span class='warning'>[src] is pinned to the wall by [pinner]!</span>","<span class='warning'>You are pinned to the wall by [pinner]!</span>")
@@ -200,15 +199,15 @@
 		var/momentum = speed*mass
 
 		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/dir = get_dir(O.throw_source, src)
+			var/throw_dir = get_dir(O.throw_source, src)
 
 			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
-			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+			src.throw_at(get_edge_target_turf(src,throw_dir),1,momentum)
 
 			if(!O || !src) return
 
 			if(O.sharp) //Projectile is suitable for pinning.
-				pin_if_possible(O,momentum) //The relevant var is used for projectiles.
+				pin_if_possible(O,2,throw_dir) //The relevant var is used for projectiles.
 
 /mob/living/proc/embed(var/obj/O, var/def_zone=null, var/datum/wound/supplied_wound)
 	O.loc = src

@@ -201,10 +201,10 @@
 	else
 		target_mob.visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [mob_target_zone]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 
-	if(pin_chance > 0 && prob(pin_chance))
+	if(pin_chance > 0 && prob(pin_chance) && target_mob.pinned.len == 0)
 		var/obj/item/weapon/material/shard/shrapnel/S = new()
 		S.name = name
-		target_mob.pin_if_possible(S,pin_range)
+		target_mob.pin_if_possible(S,pin_range,get_dir(loc,target_mob))
 
 	//admin logs
 	if(!no_attack_log)
