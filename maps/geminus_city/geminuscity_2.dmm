@@ -676,7 +676,7 @@
 "amZ" = (/obj/structure/flora/pottedplant{icon_state = "plant-21"; pixel_y = 10; tag = "icon-plant-21"},/obj/structure/window/basic{dir = 4},/obj/structure/window/basic,/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/beach/water,/area/planets/Geminus/indoor/police_station)
 "ana" = (/obj/structure/sofa/right{tag = "icon-sofaend_right (EAST)"; icon_state = "sofaend_right"; dir = 4},/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/police_station)
 "anb" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/police_station)
-"anc" = (/obj/machinery/alarm/server{dir = 4; pixel_x = -22; pixel_y = 0},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/science)
+"anc" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/science)
 "and" = (/obj/effect/landmark{name = "blobstart"},/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/science)
 "ane" = (/obj/effect/landmark/start/colony_AI,/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/science)
 "anf" = (/obj/structure/grille,/obj/structure/window/reinforced/treated{dir = 1},/obj/structure/window/reinforced/treated{dir = 8},/obj/structure/window/reinforced/treated{dir = 4},/obj/structure/window/reinforced/treated,/turf/simulated/floor/reinforced,/area/planets/Geminus/outdoor/MAC)

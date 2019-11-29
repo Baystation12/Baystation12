@@ -89,7 +89,7 @@
 "bK" = (/obj/machinery/ai_status_display{pixel_y = 32},/obj/effect/floor_decal/corner/white/diagonal,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "bL" = (/obj/effect/floor_decal/corner/white/diagonal,/obj/machinery/light/colored{tag = "icon-yellow1 (WEST)"; icon_state = "yellow1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "bM" = (/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
-"bN" = (/obj/machinery/alarm/server{dir = 4; pixel_x = -22; pixel_y = 0},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/labs1)
+"bN" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/labs1)
 "bO" = (/obj/effect/landmark{name = "blobstart"},/turf/simulated/floor/greengrid,/area/planets/Geminus/indoor/labs1)
 "bP" = (/obj/machinery/door/airlock/diamond{name = "Bedroom"},/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/living1sw)
 "bQ" = (/obj/structure/closet/secure_closet,/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/living1sw)
