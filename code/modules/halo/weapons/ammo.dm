@@ -259,7 +259,7 @@
 	projectile_type = /obj/item/projectile/bullet/a145_ap/tracerless
 
 /obj/item/projectile/bullet/a145_ap
-	damage = 80
+	damage = 60
 	step_delay = 0.1
 	penetrating = 5
 	armor_penetration = 65
@@ -267,7 +267,7 @@
 	tracer_delay_time = 2 SECONDS
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
-	damage = 75
+	damage = 55
 	armor_penetration = 70
 	tracer_type = null
 	tracer_delay_time = null

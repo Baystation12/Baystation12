@@ -17,8 +17,9 @@
 	reload_sound = 'code/modules/halo/sounds/Sniper_Reload_New.wav'
 	one_hand_penalty = -1
 	scoped_accuracy = 7
-	accuracy = -1
+	accuracy = -5
 	screen_shake = 0
+	fire_delay = 10
 	burst = 1
 	wielded_item_state = "SRS99-wielded"
 	w_class = ITEM_SIZE_HUGE
