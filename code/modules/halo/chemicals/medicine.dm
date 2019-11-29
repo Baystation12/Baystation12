@@ -96,7 +96,7 @@
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
 				M.embedded -= embedded
 				M.pinned -= embedded
-				if(M.pinned.len() == 0)
+				if(M.pinned.len == 0)
 					M.anchored = 0
 				M.contents -= embedded
 				embedded.loc = M.loc //And placing it on the ground below
