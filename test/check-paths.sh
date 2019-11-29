@@ -34,9 +34,9 @@ exactly 43 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
 exactly 483 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 24 "text2path uses" 'text2path'
-exactly 1 "update_icon() override" '/update_icon\((.*)\)'  -P
-exactly 0 "goto uses" 'goto '
-exactly 516 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
+exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
+exactly 1 "goto uses" 'goto '
+exactly 515 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
 broken_files=0

@@ -46,6 +46,7 @@
 #define SS_INIT_SHUTTLE         -5
 #define SS_INIT_GOALS           -5
 #define SS_INIT_LIGHTING        -6
+#define SS_INIT_ZCOPY           -7
 #define SS_INIT_XENOARCH        -10
 #define SS_INIT_BAY_LEGACY      -12
 #define SS_INIT_TICKER          -20

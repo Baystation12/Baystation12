@@ -32,7 +32,7 @@
 						break
 			if(climb_target)
 				break
-				
+
 	if(climb_target)
 		climb_up(climb_target)
 
@@ -253,23 +253,20 @@
 
 
 /mob/living/carbon/human/proc/climb_up(atom/A)
-	if(!isturf(loc) || !shadow || is_physically_disabled())
+	if(!isturf(loc) || !bound_overlay || bound_overlay.destruction_timer || is_physically_disabled())	// This destruction_timer check ideally wouldn't be required, but I'm not awake enough to refactor this to not need it.
 		return FALSE
 
 	var/turf/T = get_turf(A)
-	var/turf/above = shadow.loc
-	if(T.Adjacent(shadow) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
+	var/turf/above = GetAbove(src)
+	if(above && T.Adjacent(bound_overlay) && above.CanZPass(src, UP)) //Certain structures will block passage from below, others not
 		var/area/location = get_area(loc)
 		if(location.has_gravity && !can_overcome_gravity())
 			return FALSE
 
 		visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
-		shadow.visible_message("<span class='notice'>[shadow] starts climbing onto \the [A]!</span>")
 		if(do_after(src, 50, A))
 			visible_message("<span class='notice'>[src] climbs onto \the [A]!</span>", "<span class='notice'>You climb onto \the [A]!</span>")
-			shadow.visible_message("<span class='notice'>[shadow] climbs onto \the [A]!</span>")
 			src.Move(T)
 		else
 			visible_message("<span class='warning'>[src] gives up on trying to climb onto \the [A]!</span>", "<span class='warning'>You give up on trying to climb onto \the [A]!</span>")
-			shadow.visible_message("<span class='warning'>[shadow] gives up on trying to climb onto \the [A]!</span>")
 		return TRUE
