@@ -267,10 +267,12 @@
 	tracer_delay_time = 2 SECONDS
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
-	damage = 55
+	damage = 50
 	armor_penetration = 70
 	tracer_type = null
 	tracer_delay_time = null
+	pin_range = 3
+	pin_chance = 70
 
 /obj/effect/projectile/srs99
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
