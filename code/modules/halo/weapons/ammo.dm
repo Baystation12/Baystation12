@@ -163,7 +163,7 @@
 	penetrating = 0
 
 /obj/item/projectile/bullet/a762_M392
-	damage = 40
+	damage = 30
 	armor_penetration = 45
 
 /obj/item/weapon/storage/box/m762_ap
