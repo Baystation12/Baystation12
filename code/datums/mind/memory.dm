@@ -190,7 +190,7 @@
 	set name = "Add Note"
 	set category = "IC"
 
-	msg = sanitize(msg,MAX_MESSAGE_LEN,1,1,0)
+	msg = sanitize(msg,extra = FALSE)
 	if(msg)
 		var/error = StoreMemory(msg)
 		if(error)
