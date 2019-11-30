@@ -16,23 +16,6 @@
 				return
 			container = I
 		return
-	if(istype(I,/obj/item/weapon/virusdish))
-		if(virusing)
-			to_chat(user, "<b>The pathogen materializer is still recharging..</b>")
-			return
-		var/obj/item/weapon/reagent_containers/glass/beaker/product = new(src.loc)
-
-		var/list/data = list("donor" = null, "blood_DNA" = null, "blood_type" = null, "trace_chem" = null, "virus2" = list(), "antibodies" = list())
-		data["virus2"] |= I:virus2
-		product.reagents.add_reagent(/datum/reagent/blood,30,data)
-
-		virusing = 1
-		spawn(1200) virusing = 0
-
-		state("The [src.name] Buzzes", "blue")
-		return
-	..()
-	return
 
 /obj/machinery/computer/curer/interface_interact(var/mob/user)
 	interact(user)
@@ -43,8 +26,6 @@
 	var/dat
 	if(curing)
 		dat = "Antibody production in progress"
-	else if(virusing)
-		dat = "Virus production in progress"
 	else if(container)
 		// check to see if we have the required reagents
 		if(container.reagents.get_reagent_amount(/datum/reagent/blood) >= 15 && container.reagents.get_reagent_amount(/datum/reagent/spaceacillin) >= 15 && container.reagents.get_reagent_amount(/datum/reagent/nutriment/virus_food) >= 15)
