@@ -42,6 +42,13 @@
 #define APC_UPOVERLAY_OPERATING 16
 
 // Various APC types
+/obj/machinery/power/apc/inactive
+	lighting = 0
+	equipment = 0
+	environ = 0
+	locked = 0
+	coverlocked = 0
+
 /obj/machinery/power/apc/critical
 	is_critical = 1
 
@@ -1130,9 +1137,9 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	switch(val)
 		if(2)
 			return POWERCHAN_OFF_AUTO
-		if(1) 
+		if(1)
 			return POWERCHAN_OFF_TEMP
-		else 
+		else
 			return POWERCHAN_OFF
 
 // Malfunction: Transfers APC under AI's control
