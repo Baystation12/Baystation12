@@ -88,6 +88,8 @@ proc/infection_chance(var/mob/living/carbon/M, var/vector = "Airborne")
 		return
 	if ("[disease.uniqueID]" in M.virus2)
 		return
+	if(M.virus2.len >= 2) // cap the number of viruses a mob can have to two
+		return
 	// if one of the antibodies in the mob's body matches one of the disease's antigens, don't infect
 	var/list/antibodies_in_common = M.antibodies & disease.antigen
 	if(antibodies_in_common.len)

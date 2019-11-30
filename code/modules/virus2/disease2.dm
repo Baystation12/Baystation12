@@ -127,6 +127,7 @@ LEGACY_RECORD_STRUCTURE(virus_records, virus_record)
 	if(istype(mob, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = mob
 		H.cure_virus(uniqueID)
+		H.immunity = min(H.immunity + 25, H.immunity_norm) // On virus cure, give a small boost to immunity to help prevent instant reinfection with another virus
 
 	if (mob_gains_antigens)
 		mob.antibodies |= antigen
