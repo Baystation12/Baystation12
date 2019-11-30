@@ -61,6 +61,7 @@
 	one_hand_penalty = -1
 	irradiate_non_cov = 15
 	wielded_item_state = "beamrifle-wielded"
+	fire_delay = 10
 	accuracy = -5
 	scoped_accuracy = 7
 	advanced_covenant = 1
