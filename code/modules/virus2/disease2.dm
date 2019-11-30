@@ -73,12 +73,6 @@ LEGACY_RECORD_STRUCTURE(virus_records, virus_record)
 		cure(mob)
 		return
 
-	if(mob.radiation > 50)
-		if((mob.species.name == SPECIES_DIONA) && prob(mob.radiation/25))
-			cure(mob)
-		else if(prob(1))
-			majormutate()
-
 	if(prob(mob.virus_immunity()) && prob(stage)) // Increasing chance of curing as the virus progresses
 		cure(mob,1)
 	//Waiting out the disease the old way
