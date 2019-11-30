@@ -46,12 +46,9 @@
 	else if(virusing)
 		dat = "Virus production in progress"
 	else if(container)
-		// see if there's any blood in the container
-		var/datum/reagent/blood/B = locate(/datum/reagent/blood) in container.reagents.reagent_list
-
-		if(B)
+		// check to see if we have the required reagents
+		if(container.reagents.get_reagent_amount(/datum/reagent/blood) >= 15 && container.reagents.get_reagent_amount(/datum/reagent/spaceacillin) >= 15 && container.reagents.get_reagent_amount(/datum/reagent/nutriment/virus_food) >= 15)
 			dat = "Blood sample inserted."
-			dat += "<BR>Antibodies: [antigens2string(B.data["antibodies"])]"
 			dat += "<BR><A href='?src=\ref[src];antibody=1'>Begin antibody production</a>"
 		else
 			dat += "<BR>Please check container contents."
@@ -87,12 +84,14 @@
 		attack_hand(user)
 
 /obj/machinery/computer/curer/proc/createcure(var/obj/item/weapon/reagent_containers/container)
-	var/obj/item/weapon/reagent_containers/glass/beaker/product = new(src.loc)
+	var/obj/item/weapon/reagent_containers/C = container
+	C.dropInto(loc)
 
 	var/datum/reagent/blood/B = locate() in container.reagents.reagent_list
 
 	var/list/data = list()
 	data["antibodies"] = B.data["antibodies"]
-	product.reagents.add_reagent(/datum/reagent/antibodies,30,data)
+	C.reagents.clear_reagents()
+	C.reagents.add_reagent(/datum/reagent/antibodies, 10, data)
 
 	state("\The [src.name] buzzes", "blue")
