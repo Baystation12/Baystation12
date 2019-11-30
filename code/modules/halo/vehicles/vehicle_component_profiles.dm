@@ -239,8 +239,9 @@
 	integrity_to_restore += integrity_restored_per_sheet
 
 /obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool,var/mob/user)
-	if(tool.type in repair_tools_typepaths)
-		repair_tools_typepaths -= tool.type
+	for(var/tool_type in repair_tools_typepaths)
+		if(istype(tool,tool_type))
+			repair_tools_typepaths -= tool.type
 
 	if(repair_tools_typepaths.len == 0)
 		finalise_repair()
