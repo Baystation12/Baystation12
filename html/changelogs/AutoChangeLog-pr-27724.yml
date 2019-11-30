@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "The delete warrant button in the main window of the Warrant Assistant program will now properly do its job."
