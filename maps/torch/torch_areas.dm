@@ -1120,6 +1120,9 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_crematorium)
 
+/area/medical/virology
+	name = "\improper Virology (decomissioned)"
+
 // Shield Rooms
 /area/shield
 	name = "\improper Shield Generator"

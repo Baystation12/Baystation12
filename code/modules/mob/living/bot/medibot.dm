@@ -20,7 +20,6 @@
 	var/treatment_oxy = /datum/reagent/tricordrazine
 	var/treatment_fire = /datum/reagent/tricordrazine
 	var/treatment_tox = /datum/reagent/tricordrazine
-	var/treatment_virus = /datum/reagent/spaceacillin
 	var/treatment_emag = /datum/reagent/toxin
 	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
 

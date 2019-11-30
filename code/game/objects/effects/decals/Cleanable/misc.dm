@@ -81,7 +81,6 @@
 	icon_state = "vomit_1"
 	persistent = TRUE
 	generic_filth = TRUE
-	var/list/viruses = list()
 
 /obj/effect/decal/cleanable/vomit/New()
 	random_icon_states = icon_states(icon)
