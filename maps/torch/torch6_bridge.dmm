@@ -15500,12 +15500,12 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/item/weapon/pen/green,
-/obj/item/weapon/pen/red{
+/obj/item/weapon/pen/retractable/green,
+/obj/item/weapon/pen/retractable/red{
 	pixel_x = -1;
 	pixel_y = 3
 	},
-/obj/item/weapon/pen/blue{
+/obj/item/weapon/pen/retractable/blue{
 	pixel_x = -5;
 	pixel_y = -1
 	},

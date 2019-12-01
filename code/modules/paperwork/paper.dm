@@ -298,6 +298,12 @@
 					return
 			else
 				return
+		
+		if(istype(i, /obj/item/weapon/pen/retractable))
+			var/obj/item/weapon/pen/retractable/R = i
+			if(!R.active)
+				to_chat(usr, SPAN_NOTICE("You'll have to activate \the [R] if you wish to write with it."))
+				return
 
 		if(istype(i, /obj/item/weapon/pen/crayon))
 			iscrayon = 1
