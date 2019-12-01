@@ -406,7 +406,7 @@ var/global/datum/controller/occupations/job_master
 			//Equip job items.
 			job.setup_account(H)
 			job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch)
-			if(!isnull(H))
+			if(isnull(H))
 				return
 			if(job.lace_access && isnull(H.GetLace()))
 				H.create_stack(job.access)
