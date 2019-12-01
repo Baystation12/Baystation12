@@ -94,6 +94,10 @@
 				if(!prob(BIOFOAM_PROB_REMOVE_EMBEDDED))
 					continue
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
+				M.embedded -= embedded
+				M.pinned -= embedded
+				if(M.pinned.len == 0)
+					M.anchored = 0
 				M.contents -= embedded
 				embedded.loc = M.loc //And placing it on the ground below
 				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")

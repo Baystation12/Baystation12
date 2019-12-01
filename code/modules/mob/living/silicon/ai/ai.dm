@@ -194,6 +194,9 @@ var/list/ai_verbs_default = list(
 	if(!our_terminal)
 		to_chat(src,"<span class = 'notice'>No terminal to reset to.</span>")
 		return
+	if(carded)
+		to_chat(src,"<span class = 'notice'>You can't do that whilst carded!</span>")
+		return
 	destroy_eyeobj()
 	switch_to_net_by_name(our_terminal.inherent_network)
 	create_eyeobj(loc.loc)

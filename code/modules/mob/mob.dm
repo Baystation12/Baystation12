@@ -961,7 +961,7 @@ mob/proc/yank_out_object()
 	if(!(U.l_hand && U.r_hand))
 		U.put_in_hands(selection)
 
-	for(var/obj/item/weapon/O in pinned)
+	for(var/obj/O in pinned)
 		if(O == selection)
 			pinned -= O
 		if(!pinned.len)
