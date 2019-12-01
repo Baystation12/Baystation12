@@ -51,11 +51,11 @@
 		"suppressor" = list(0.5,0,0.1),
 		"MA5 stock cheekrest" = list(0,0,0),
 		"MA5 basic stock butt" = list(0,0,0),
-		"MA5 extended stock butt" = list(-0.25,0,0.1),
+		"MA5 extended stock butt" = list(-0.25,0,0),
 		"vertical grip" = list(-0.2,0.5,0),
-		"underslung shotgun" = list(0.5,0,0.2),
+		"underslung shotgun" = list(0.5,0,0.1),
 		"MA5 basic upper" = list(0,0,0),
-		"underslung grenade launcher" = list(0,0,0,2),
+		"underslung grenade launcher" = list(0,0,0,0.2),
 		"flashlight attachment" = list(0,0,0.1),
 		"MA5 railed upper" = list(0,0,0.1)
 		)
@@ -93,7 +93,7 @@
 		"BR55 barrel attachment" = list(0,0,0),
 		"BR55 scope" = list(0,0,0),
 		"BR55 cheekrest" = list(0,0,0),
-		"SOE underslung shotgun" = list(0.5,0,0),
+		"SOE underslung shotgun" = list(0.5,0,0.1),
 		"BR55 hand guard" = list(0,0,0),
 		"vertical grip" = list(-0.2,0.5,0),
 		"BR55 carry handle" = list(0,0,0),
