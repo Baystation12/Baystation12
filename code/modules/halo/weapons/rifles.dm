@@ -47,7 +47,7 @@
 /obj/item/weapon/gun/projectile/ma5b_ar/New()
 	..()
 
-/obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
+/obj/item/weapon/gun/projectile/ma5b_ar/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA5-Base-Loaded"

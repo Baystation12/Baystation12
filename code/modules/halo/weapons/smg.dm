@@ -19,7 +19,7 @@
 	magazine_type = /obj/item/ammo_magazine/m5
 	handle_casings = CASELESS
 	burst = 4
-	burst_delay = 2
+	burst_delay = 1
 	burst_accuracy = list(0,-1,-1,-2)
 	dispersion = list(0.0, 0.4, 0.8, 1.0)
 	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5/rubber)
@@ -52,6 +52,8 @@
 	is_heavy = 1
 	icon_state = "m7smgs"
 	item_state = "m7s"
+	fire_sound = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
+	//fire_sound_burst = 'code/modules/halo/sounds/SMG_SOCOM_Fire.wav'
 
 /obj/item/weapon/gun/projectile/m7_smg/silenced/update_icon()
 	if(ammo_magazine)

@@ -44,6 +44,8 @@
 	desc = "Common handgun accessible to civilians with a lack of a scope. Takes 12.7mm calibre magazines."
 	icon_state = "m6b"
 	item_state = "m6b"
+	fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
+	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	magazine_type = /obj/item/ammo_magazine/r127
 
 /obj/item/weapon/gun/projectile/m6d_magnum/m6b/update_icon()
@@ -80,6 +82,7 @@
 	magazine_type = /obj/item/ammo_magazine/m127_saphp
 	caliber = "12.7mm"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	fire_sound = 'code/modules/halo/sounds/Magnum_SOCOM_Fire.wav'
 	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	load_method = MAGAZINE
 	fire_delay = 3
