@@ -140,6 +140,8 @@
 		return
 	playsound(src, 'sound/effects/tape.ogg',25)
 
+	layer = ABOVE_WINDOW_LAYER
+	
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])
