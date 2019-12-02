@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Antagonist HUD markers e.g. Cultist indicators will now properly show up instead of being under the floor layer sometimes."
