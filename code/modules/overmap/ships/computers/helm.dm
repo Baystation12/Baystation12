@@ -50,18 +50,51 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			var/acceleration = min(linked.get_acceleration(), accellimit)
 			var/speed = linked.get_speed()
 			var/heading = linked.get_heading()
+			var/adjustment = autopilot_get_course_adjust(heading, direction)
 
 			// Destination is current grid or speedlimit is exceeded
 			if ((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
 				linked.decelerate()
 			// Heading does not match direction
-			else if (heading & ~direction)
-				linked.accelerate(turn(heading & ~direction, 180), accellimit)
+			else if (adjustment)
+				linked.accelerate(adjustment, accellimit)
 			// All other cases, move toward direction
 			else if (speed + acceleration <= speedlimit)
 				linked.accelerate(direction, accellimit)
 		linked.operator_skill = null//if this is on you can't dodge meteors
 		return
+
+/obj/machinery/computer/ship/helm/proc/autopilot_get_course_adjust(current_heading, target_heading)
+	if (current_heading == target_heading)
+		return FALSE
+	var/adjustment = 0
+
+	// Heading north, target south or parallel
+	if (current_heading & NORTH && target_heading & ~NORTH)
+		adjustment |= SOUTH
+	// Heading south, target north or parallel
+	if (current_heading & SOUTH && target_heading & ~SOUTH)
+		adjustment |= NORTH
+	// Heading west, target east or parallel
+	if (current_heading & WEST && target_heading & ~WEST)
+		adjustment |= EAST
+	// Heading east, target west or parellel
+	if (current_heading & EAST && target_heading & ~EAST)
+		adjustment |= WEST
+	// No horizontal heading but target is east/west
+	if (current_heading & ~(EAST | WEST))
+		if (target_heading & WEST)
+			adjustment |= WEST
+		else if (target_heading & EAST)
+			adjustment |= EAST
+	// No vertical heading but target is north/south
+	if (current_heading & ~(NORTH | SOUTH))
+		if (target_heading & SOUTH)
+			adjustment |= SOUTH
+		else if (target_heading & NORTH)
+			adjustment |= NORTH
+
+	return adjustment
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
 	if(viewing_overmap(user) && linked)
