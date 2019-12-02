@@ -9,12 +9,6 @@
 	var/tmp/ao_neighbors_mimic
 	var/ao_queued = AO_UPDATE_NONE
 
-/turf/set_density(var/new_density)
-	var/last_density = density
-	..()
-	if(density != last_density && permit_ao)
-		regenerate_ao()
-
 /turf/proc/regenerate_ao()
 	for (var/thing in RANGE_TURFS(src, 1))
 		var/turf/T = thing
