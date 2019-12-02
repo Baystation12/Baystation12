@@ -8,8 +8,10 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	core_skill = SKILL_PILOT
 	var/autopilot = 0
 	var/list/known_sectors = list()
-	var/dx		//desitnation
-	var/dy		//coordinates
+	var/dx      // Current autopilot coordinates (X)
+	var/dy      // Current autopilot coordinates (Y)
+	var/next_dx // Next autopilot coordinates (X)
+	var/next_dy // Next autopilot coordinates (Y)
 	var/speedlimit = 1/(20 SECONDS) //top speed for autopilot, 5
 	var/accellimit = 0.001 //manual limiter for acceleration
 
@@ -33,7 +35,12 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	if (autopilot && dx && dy)
 		var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
 		if(linked.loc == T)
-			if(linked.is_still())
+			if (next_dx && next_dy)
+				dx = next_dx
+				dy = next_dy
+				next_dx = null
+				next_dy = null
+			else if(linked.is_still())
 				autopilot = 0
 			else
 				linked.decelerate()
@@ -80,6 +87,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["dest"] = dy && dx
 		data["d_x"] = dx
 		data["d_y"] = dy
+		data["next_dest"] = next_dy && next_dx
+		data["next_d_x"] = next_dx
+		data["next_d_y"] = next_dy
 		data["speedlimit"] = speedlimit ? speedlimit*1000 : "Halted"
 		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit*1000)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
@@ -159,31 +169,52 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			qdel(R)
 
 	if (href_list["setx"])
-		var/newx = input("Input new destiniation x coordinate", "Coordinate input", dx) as num|null
+		var/newx = input("Input new destination x coordinate", "Coordinate input", dx) as num|null
 		if(!CanInteract(user,state))
 			return
 		if (newx)
 			dx = Clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
-		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
+		var/newy = input("Input new destination y coordinate", "Coordinate input", dy) as num|null
 		if(!CanInteract(user,state))
 			return
 		if (newy)
 			dy = Clamp(newy, 1, world.maxy)
 
+	if (href_list["setnextx"])
+		var/new_next_dx = input("Input new follow-up x coordinate", "Coordinate input", next_dx) as num|null
+		if(!CanInteract(user,state))
+			return
+		if (new_next_dx)
+			next_dx = Clamp(new_next_dx, 1, world.maxx)
+
+	if (href_list["setnexty"])
+		var/new_next_dy = input("Input new follow-up y coordinate", "Coordinate input", next_dy) as num|null
+		if(!CanInteract(user,state))
+			return
+		if (new_next_dy)
+			next_dy = Clamp(new_next_dy, 1, world.maxy)
+
 	if (href_list["x"] && href_list["y"])
 		dx = text2num(href_list["x"])
 		dy = text2num(href_list["y"])
 
+	if (href_list["next_x"] && href_list["next_y"])
+		next_dx = text2num(href_list["next_x"])
+		next_dy = text2num(href_list["next_y"])
+
 	if (href_list["reset"])
 		dx = 0
 		dy = 0
+		next_dx = 0
+		next_dy = 0
 
 	if (href_list["speedlimit"])
 		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit*1000) as num|null
 		if(newlimit)
 			speedlimit = Clamp(newlimit/1000, 0, 100)
+
 	if (href_list["accellimit"])
 		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit*1000) as num|null
 		if(newlimit)
