@@ -18,7 +18,6 @@
 	flesh_color =             "#009999"
 	hud_type =                /datum/hud_data/mantid
 	move_trail =              /obj/effect/decal/cleanable/blood/tracks/snake
-	virus_immune =            TRUE
 
 	speech_chance = 100
 	speech_sounds = list(
@@ -211,7 +210,6 @@
 /datum/species/nabber/monarch
 	name = SPECIES_MONARCH_WORKER
 	name_plural = "Monarch Serpentid Workers"
-	virus_immune = TRUE
 	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 	has_organ = list(
 		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/nabber,

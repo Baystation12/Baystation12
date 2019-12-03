@@ -112,7 +112,6 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/virusdish/random,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
 "az" = (

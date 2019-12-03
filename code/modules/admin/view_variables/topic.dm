@@ -108,17 +108,6 @@
 		src.give_spell(M)
 		href_list["datumrefresh"] = href_list["give_spell"]
 
-	else if(href_list["give_disease2"])
-		if(!check_rights(R_ADMIN|R_FUN))	return
-
-		var/mob/M = locate(href_list["give_disease2"])
-		if(!istype(M))
-			to_chat(usr, "This can only be used on instances of type /mob")
-			return
-
-		src.give_disease2(M)
-		href_list["datumrefresh"] = href_list["give_spell"]
-
 	else if(href_list["godmode"])
 		if(!check_rights(R_REJUVINATE))	return
 
