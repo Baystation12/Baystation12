@@ -42,3 +42,9 @@
 	active = !active
 	playsound(src, 'sound/items/penclick.ogg', 5, 0, -4)
 	update_icon()
+
+/obj/item/weapon/pen/retractable/pen_usable(var/mob/living/user)
+	if(active)
+		return TRUE
+	else
+		to_chat(user, SPAN_NOTICE("You'll have to activate \the [src] if you wish to write with it."))

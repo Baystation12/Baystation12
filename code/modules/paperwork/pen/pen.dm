@@ -13,6 +13,9 @@
 	var/colour = "black"	//what colour the ink is!
 	var/color_description = "black ink"
 
+	var/iscrayon = FALSE
+	var/isfancy = FALSE
+
 /obj/item/weapon/pen/blue
 	name = "blue pen"
 	desc = "It's a normal blue ink pen."
@@ -54,3 +57,5 @@
 		var/obj/item/organ/external/head/head = A
 		head.write_on(user, src.color_description)
 
+/obj/item/weapon/pen/proc/pen_usable()
+	return TRUE

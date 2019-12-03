@@ -5,6 +5,7 @@
 	throwforce = 1 //pointy
 	colour = "#1c1713" //dark ashy brownish
 	matter = list(MATERIAL_STEEL = 15)
+	isfancy = TRUE
 
 /obj/item/weapon/pen/fancy/quill
 	name = "dire goose quill"
