@@ -108,6 +108,35 @@ Unique items
 			/obj/item/weapon/paper/liason_note
 	)
 
+/obj/item/clothing/accessory/watch/fancy/co
+	name = "captain's watch"
+	desc = "A heavy, gold, Falco-branded Mahimaku Spacemaster, one of only a few dozen that Falco \
+		commissioned and gifted to the Corps at its 24th Century expo."
+	color = ACCESSORY_COLOR_GOLD
+	face_color = ACCESSORY_COLOR_LIGHTYELLOW
+
+/obj/item/clothing/accessory/watch/fancy/officer
+	name = "officer's watch"
+	desc = "A white gold Montreux Voidfarer, given to some senior officers for their years of \
+		service."
+	color = ACCESSORY_COLOR_IVORY
+	face_color = ACCESSORY_COLOR_MIDNIGHTBLUE
+	hour24 = TRUE
+
+/obj/item/clothing/accessory/watch/fancy/cpo
+	name = "chief's watch"
+	desc = "A Montreux Voidfarer wristwatch, gifted by the MCPOF to those that attended the 2306 \
+		CPO board and sent to a few other senior NCOs."
+	color = ACCESSORY_COLOR_LIGHTSTEELBLUE
+	hour24 = TRUE
+
+/obj/item/clothing/accessory/watch/digital/xpl
+	name = "explorer's watch"
+	desc = "An unbranded edition of the Eclipse Chronos issued to many in Field Ops. Its ability \
+		to survive even the harshest of conditions is well-known among the exploration team."
+	color = ACCESSORY_COLOR_SLATEGRAY_25
+	inaccuracy = 2 MINUTES
+
 /******
 Weapons
 ******/

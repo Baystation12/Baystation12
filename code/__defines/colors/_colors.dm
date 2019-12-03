@@ -82,7 +82,6 @@
 #define COLOR_NULLGLASS        "#ff6088"
 #define COLOR_DIAMOND          "#d8d4ea"
 
-
 #define	PIPE_COLOR_GREY        "#808080"
 #define	PIPE_COLOR_RED         "#ff0000"
 #define	PIPE_COLOR_BLUE        "#0000ff"

@@ -30,6 +30,9 @@
 //For members of the security department
 #define SECURITY_ROLES list(/datum/job/hos, /datum/job/warden, /datum/job/detective, /datum/job/officer)
 
+//For members of jobs staffed by senior enlisted (E-7 and up), like brig chief and deck chief
+#define SENIOR_ENLISTED_ROLES list(/datum/job/sea, /datum/job/senior_engineer, /datum/job/warden, /datum/job/qm, /datum/job/nt_pilot)
+
 //For members of the supply department
 #define SUPPLY_ROLES list(/datum/job/qm, /datum/job/cargo_tech)
 

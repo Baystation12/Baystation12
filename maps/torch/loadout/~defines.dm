@@ -20,6 +20,8 @@
 
 #undef SECURITY_ROLES
 
+#undef SENIOR_ENLISTED_ROLES
+
 #undef SUPPLY_ROLES
 
 #undef SERVICE_ROLES

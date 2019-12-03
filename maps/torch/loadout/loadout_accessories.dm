@@ -34,6 +34,28 @@
 	solminors["instructor ribbon"] = /obj/item/clothing/accessory/ribbon/solgov/instructor
 	gear_tweaks += new/datum/gear_tweak/path(solminors)
 
+/datum/gear/accessory/watch/fancy/co
+	display_name = "watch, captain's"
+	path = /obj/item/clothing/accessory/watch/fancy/co
+	allowed_roles = list(/datum/job/captain)
+
+/datum/gear/accessory/watch/fancy/officer
+	display_name = "watch, senior officer's"
+	path = /obj/item/clothing/accessory/watch/fancy/officer
+	allowed_roles = list(/datum/job/captain, /datum/job/hop, /datum/job/cmo) //o4 and up
+	allowed_branches = UNIFORMED_BRANCHES
+
+/datum/gear/accessory/watch/fancy/cpo
+	display_name = "watch, chief petty officer's"
+	path = /obj/item/clothing/accessory/watch/fancy/cpo
+	allowed_roles = SENIOR_ENLISTED_ROLES
+	allowed_branches = list(/datum/mil_branch/fleet)
+
+/datum/gear/accessory/watch/digital/xpl
+	display_name = "watch, explorer's"
+	path = /obj/item/clothing/accessory/watch/digital/xpl
+	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
