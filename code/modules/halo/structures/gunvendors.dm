@@ -196,6 +196,7 @@
 	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
 	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
+	/obj/item/weapon/gun/projectile/m6c_magnum_s = 6,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
 	/obj/item/weapon/gun/projectile/m392_dmr = 2,
 	/obj/item/weapon/gun/projectile/br55 = 2,
