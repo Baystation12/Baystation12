@@ -1795,7 +1795,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
 	frequency = 1331;
-	id_tag = "calypso_shuttle_pump"
+	id_tag = "charon_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
