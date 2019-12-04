@@ -296,7 +296,7 @@
 "fJ" = (/obj/structure/table/glass,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
 "fK" = (/obj/structure/table/glass,/obj/item/weapon/flame/lighter/zippo,/obj/item/weapon/material/ashtray/bronze,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
 "fL" = (/obj/structure/table/glass,/obj/item/weapon/glass_extra/straw,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
-"fM" = (/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
+"fM" = (/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
 "fN" = (/obj/structure/table/rack,/obj/item/weapon/melee/classic_baton,/turf/simulated/floor/plating,/area/achlys/two/z2maintroom4)
 "fO" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/eight/z2cargoandhalls)
 "fP" = (/obj/machinery/vending/boozeomat,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
