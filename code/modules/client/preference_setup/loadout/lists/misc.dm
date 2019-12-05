@@ -244,3 +244,19 @@
 	crosstype["cross, silver"] = /obj/item/weapon/material/cross/silver
 	crosstype["cross, gold"] = /obj/item/weapon/material/cross/gold
 	gear_tweaks += new/datum/gear_tweak/path(crosstype)
+
+/datum/gear/fobwatch
+	display_name = "fob watch"
+	path = /obj/item/weapon/watch
+	
+/datum/gear/fobwatch
+	display_name = "fob watch, digital"
+	path = /obj/item/weapon/watch/digital
+	
+/datum/gear/fobwatch
+	display_name = "fob watch, 24-hour analog"
+	path = /obj/item/weapon/watch/spaceman
+	
+/datum/gear/fobwatch
+	display_name = "fob watch, fancy pocketwatch"
+	path = /obj/item/weapon/watch/fancy
