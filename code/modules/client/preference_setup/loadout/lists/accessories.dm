@@ -34,11 +34,11 @@
 	ties["striped tie"] = /obj/item/clothing/accessory/long
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
-/datum/gear/accessory/watch/selection
+/datum/gear/accessory/watch
 	display_name = "watch, selection"
 	path = /obj/item/clothing/accessory/watch
 
-/datum/gear/accessory/watch/selection/New()
+/datum/gear/accessory/watch/New()
 	..()
 	var/watches = list()
 	watches["24-hour analog watch"] = /obj/item/clothing/accessory/watch/spaceman
