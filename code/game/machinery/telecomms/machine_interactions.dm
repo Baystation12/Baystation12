@@ -7,9 +7,6 @@
 
 */
 
-#define STATION_Z 1
-#define TELECOMM_Z 3
-
 /obj/machinery/telecomms
 	var/temp = "" // output message
 	construct_state = /decl/machine_construction/tcomms/panel_closed
@@ -53,7 +50,7 @@
 /obj/machinery/telecomms/dismantle()
 	for(var/obj/x in (contents - component_parts))
 		x.dropInto(loc)
-	. = ..()	
+	. = ..()
 
 // This should all be a multitool extension, but outside the scope of current rework.
 /obj/machinery/telecomms/CanUseTopic(mob/user)
@@ -135,7 +132,7 @@
 
 	dat += "</font>"
 	temp = ""
-	
+
 	var/datum/browser/popup = new(user, "tcommmachine", "Telecommunications Machine Configuration Panel", 520, 600)
 	popup.set_content(JOINTEXT(dat))
 	popup.open()
@@ -284,12 +281,7 @@
 							return
 
 					var/tag = input(usr, "Specify tag.", src, "") as null|text
-					var/color = input(usr, "Select color.", src, "") as null|anything in (channel_color_presets + "Custom color")
-
-					if(color == "Custom color")
-						color = input("Select color.", src, rgb(0, 128, 0)) as null|color
-					else
-						color = channel_color_presets[color]
+					var/color = channel_color_presets[input(usr, "Select color.", src, "") as null|anything in channel_color_presets]
 
 					if(freq < 10000)
 						channel_tags.Add(list(list(freq, tag, color)))
