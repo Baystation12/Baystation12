@@ -34,26 +34,32 @@
 	ties["striped tie"] = /obj/item/clothing/accessory/long
 	gear_tweaks += new/datum/gear_tweak/path(ties)
 
+/datum/gear/accessory/watch/spaceman
+	display_name = "watch, 24-hour analog"
+	path = /obj/item/clothing/accessory/watch/spaceman
+
+/datum/gear/accessory/watch/cheap
+	display_name = "watch, cheap analog"
+	path = /obj/item/clothing/accessory/watch/cheap
+
+/datum/gear/accessory/watch/digital/cheap
+	display_name = "watch, cheap digital"
+	path = /obj/item/clothing/accessory/watch/digital/cheap
+
+/datum/gear/accessory/watch/fancy/random
+	display_name = "watch, random fancy analog"
+	path = /obj/item/clothing/accessory/watch/fancy/random
+
+/datum/gear/accessory/watch/fancy/random/digital
+	display_name = "watch, random fancy digital"
+	path = /obj/item/clothing/accessory/watch/fancy/random/digital
+
 /datum/gear/accessory/watch
-	display_name = "watch, selection"
-	path = /obj/item/clothing/accessory/watch
-
-/datum/gear/accessory/watch/New()
-	..()
-	var/watches = list()
-	watches["24-hour analog watch"] = /obj/item/clothing/accessory/watch/spaceman
-	watches["cheap analog watch"] = /obj/item/clothing/accessory/watch/cheap
-	watches["cheap digital watch"] = /obj/item/clothing/accessory/watch/digital/cheap
-	watches["fancy analog watch"] = /obj/item/clothing/accessory/watch/fancy/random
-	watches["fancy digital watch"] = /obj/item/clothing/accessory/watch/fancy/random/digital
-	gear_tweaks += new /datum/gear_tweak/path(watches)
-
-/datum/gear/accessory/watch_color
 	display_name = "watch, analog, colour select"
 	path = /obj/item/clothing/accessory/watch
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/accessory/watch_color
+/datum/gear/accessory/watch/digital
 	display_name = "watch, digital, colour select"
 	path = /obj/item/clothing/accessory/watch/digital
 	flags = GEAR_HAS_COLOR_SELECTION
