@@ -155,6 +155,8 @@
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_target_loc()
 	walk(src,0)
+	if(isnull(loc))
+		return
 	if(our_fleet && our_fleet.leader_ship != src)
 		target_loc = pick(range(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
 		return
