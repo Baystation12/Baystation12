@@ -199,6 +199,9 @@
 	var/list/pain_scream_sounds = list()
 	var/list/scream_sounds_female = list()
 
+	var/roll_distance = 2
+	var/per_roll_delay = 2
+
 	var/default_faction
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)

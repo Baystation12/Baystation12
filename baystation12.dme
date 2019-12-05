@@ -1695,6 +1695,7 @@
 #include "code\modules\halo\shuttles\dropship_overmap.dm"
 #include "code\modules\halo\species\ai-squads.dm"
 #include "code\modules\halo\species\brutes.dm"
+#include "code\modules\halo\species\dodge_roll.dm"
 #include "code\modules\halo\species\grunts.dm"
 #include "code\modules\halo\species\kig-yar.dm"
 #include "code\modules\halo\species\orion.dm"
