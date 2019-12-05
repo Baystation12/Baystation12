@@ -340,7 +340,7 @@
 		var/list/mobs = list()
 		for(var/mob/m in occupants)
 			mobs += m
-		if(!mobs)
+		if(mobs.len == 0)
 			return
 		mob_to_dam = pick(mobs)
 		if(!isnull(mob_to_dam))

@@ -55,6 +55,8 @@
 	'code/modules/halo/sounds/species_pain_screams/elitescream_10.ogg',
 	'code/modules/halo/sounds/species_pain_screams/elitescream_11.ogg')
 
+	roll_distance = 3 //One tile further than a human
+
 /datum/species/sangheili/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 

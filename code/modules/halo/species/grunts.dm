@@ -39,6 +39,8 @@
 	'code/modules/halo/sounds/species_pain_screams/gruntscream_6.ogg',
 	'code/modules/halo/sounds/species_pain_screams/gruntscream_7.ogg')
 
+	roll_distance = 1 //Stubby legs mean no long roll
+
 /datum/species/unggoy/create_organs(var/mob/living/carbon/human/H)
 	. = ..()
 	//I guess their leg-boots are kinda organs.

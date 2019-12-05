@@ -70,6 +70,9 @@
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
 
+	roll_distance = 3
+	per_roll_delay = 1.5 //Slightly faster than a human's dodge roll
+
 /datum/species/spartan/get_random_name(var/gender)
 	var/name = ""
 	if(gender == FEMALE)

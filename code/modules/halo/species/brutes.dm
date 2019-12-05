@@ -44,6 +44,8 @@
 	'code/modules/halo/sounds/species_pain_screams/brutescream7.ogg',
 	'code/modules/halo/sounds/species_pain_screams/brutescream8.ogg')
 
+	per_roll_delay = 3 //Slightly higher per roll delay than a human, because they're a bit bulkier
+
 /datum/species/brutes/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 
