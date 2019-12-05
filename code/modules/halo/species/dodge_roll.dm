@@ -52,8 +52,6 @@ mob/living/proc/getPerRollDelay()
 	var/obj/vehicles/v = loc
 	if(istype(v))
 		v.exit_vehicle(src)
-	if(client)
-		client.move_delay = max(client.move_delay,world.time + (roll_delay * roll_dist))
 	next_roll_at = world.time + ((roll_delay * roll_dist) + DODGE_ROLL_BASE_COOLDOWN)
 	to_chat(src,"<span class = 'warning'>[name] performs a dodge roll!</span>")
 	for(var/i = 0,i < roll_dist,i++)
@@ -68,6 +66,8 @@ mob/living/proc/getPerRollDelay()
 			m = transform
 		animate(src,transform = turn(m,359/(roll_dist)),time = roll_delay) //We use 359 instead of 360 to ensure the flip-vertically animation doesn't happen
 		setClickCooldown(roll_delay)
+		if(client)
+			client.move_delay = max(client.move_delay,world.time + roll_delay)
 		sleep(roll_delay)
 	animate(src,transform = null,time = 1)
 	return 1
