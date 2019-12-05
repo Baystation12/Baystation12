@@ -2441,7 +2441,7 @@
 	description = "A refreshing glass of apple cider."
 	taste_description = "cool apple cider"
 	color = "#cac089"
-	strength = 15
+	strength = 50
 
 	glass_name = "Apple Cider"
 	glass_desc = "A refreshing glass of apple cider."
@@ -2461,7 +2461,7 @@
 	description = "A classic mix of rum and molasses, typically consumed by Tersteners."
 	taste_description = "sweet and strong alcohol"
 	color = "#161612"
-	strength = 10
+	strength = 30
 
 	glass_name = "blackstrap"
 	glass_desc = "A classic mix of rum and molasses."
@@ -2471,7 +2471,7 @@
 	description = "A blend of Gin and Blackstrap."
 	taste_description = "conflicting tastes and a delicious resolution"
 	color = "#e8dfc1"
-	strength = 20
+	strength = 30
 
 	glass_name = "bogus"
 	glass_desc = "A blend of Gin and Molasses."
@@ -2481,7 +2481,7 @@
 	description = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
 	taste_description = "a superior taste of sparkling wine"
 	color = "#e8dfc1"
-	strength = 10
+	strength = 25
 
 	glass_name = "champagne"
 	glass_desc = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
@@ -2491,7 +2491,7 @@
 	description = "A blend of Blackstrap and Coffee. An ideal pick-me-up for any rancher."
 	taste_description = "comforting warmth"
 	color = "#e8dfc1"
-	strength = 5
+	strength = 50
 
 	glass_name = "gargled"
 	glass_desc = "A blend of Blackstrap and Coffee. An ideal pick-me-up for any rancher."
@@ -2501,7 +2501,7 @@
 	description = "A mix of vodka and lemon, extremely popular with Terrans."
 	taste_description = "refreshing clear fizz"
 	color = "#dfdeda"
-	strength = 15
+	strength = 30
 
 	glass_name = "Gilgamesh spring punch"
 	glass_desc = "A mix of vodka and lemon, extremely popular with Terrans."
@@ -2511,7 +2511,7 @@
 	description = "A type of ale drunk in the Hellshen regions of Mars."
 	taste_description = "dark musty hops and Martian pride"
 	color = "#aa9162"
-	strength = 20
+	strength = 50
 
 	glass_name = "Hellshen Pale Ale"
 	glass_desc = "A type of ale drunk in the Hellshen regions of Mars."
@@ -2541,7 +2541,7 @@
 	description = "The drink of choice of Jimmy Gideon, first man on Mars."
 	taste_description = "the legacy of greatness and chocolate"
 	color = "#d9cfa5"
-	strength = 15
+	strength = 30
 
 	glass_name = "Jimmy"
 	glass_desc = "The drink of choice of Jimmy Gideon, first man on Mars."
@@ -2551,7 +2551,7 @@
 	description = "An alcoholic drink commonly made from bread."
 	taste_description = "vkusnyy kvas, ypa!"
 	color = "#362f22"
-	strength = 10
+	strength = 30
 
 	glass_name = "kvass"
 	glass_desc = "An alcoholic drink commonly made from bread."
@@ -2571,7 +2571,7 @@
 	description = "A classic Martian take on the moscow mule. Replaces vodka with molasses."
 	taste_description = "crisp, refreshing ginger beer and molasses"
 	color = "#92938a"
-	strength = 10
+	strength = 15
 
 	glass_name = "lonestar mule"
 	glass_desc = "A blend of whiskey, ginger beer, and lime juice."
@@ -2601,7 +2601,7 @@
 	description = "A blend of vodka, ginger beer, and lime juice."
 	taste_description = "crisp, refreshing ginger and vodka"
 	color = "#e1dfd6"
-	strength = 10
+	strength = 15
 
 	glass_name = "moscow mule"
 	glass_desc = "A blend of vodka, ginger beer, and lime juice."
@@ -2611,7 +2611,7 @@
 	description = "A warm blend of 98 spices. Made in the heartlands of Tersten."
 	taste_description = "strong, creamy whiskey"
 	color = "#ce1900"
-	strength = 50
+	strength = 10
 
 	glass_name = "Nevadan gold whiskey"
 	glass_desc = "A warm blend of 98 spices, brewed on Tersten. A delicious mix."
@@ -2621,7 +2621,7 @@
 	description = "A delightful blend of glera grapes, native to Earth."
 	taste_description = "the trials of being a young woman in a rich man's world"
 	color = "#e8dfc1"
-	strength = 15
+	strength = 30
 
 	glass_name = "prosecco"
 	glass_desc = "A delightful blend of glera grapes, native to Earth."
@@ -2631,7 +2631,7 @@
 	description = "A dark red looking substance that smells like strong whiskey."
 	taste_description = "an intense throat burning sensation"
 	color = "#ce1900"
-	strength = 50
+	strength = 10
 
 	glass_name = "red whiskey"
 	glass_desc = "A dark red looking substance that smells like strong whiskey."
@@ -2641,7 +2641,7 @@
 	description = "A traditional brew consumed by various members of the Fleet."
 	taste_description = "relief from duty"
 	color = "#362f22"
-	strength = 5
+	strength = 100
 	glass_name = "stag"
 	glass_desc = "A classic mix of rum and tea, ideal for long nights on watch."
 
@@ -2650,7 +2650,7 @@
 	description = "A refreshing mix of vodka and cola."
 	taste_description = "vodka and cola"
 	color = "#474238"
-	strength = 10
+	strength = 15
 	glass_name = "vodka cola"
 	glass_desc = "A refreshing mix of vodka and cola."
 
