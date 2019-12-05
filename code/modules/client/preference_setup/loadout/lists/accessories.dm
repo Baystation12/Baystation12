@@ -54,12 +54,12 @@
 	display_name = "watch, random fancy digital"
 	path = /obj/item/clothing/accessory/watch/fancy/random/digital
 
-/datum/gear/accessory/watch
+/datum/gear/accessory/watch/basic
 	display_name = "watch, analog, colour select"
 	path = /obj/item/clothing/accessory/watch
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/accessory/watch/digital
+/datum/gear/accessory/watch/basic/digital
 	display_name = "watch, digital, colour select"
 	path = /obj/item/clothing/accessory/watch/digital
 	flags = GEAR_HAS_COLOR_SELECTION

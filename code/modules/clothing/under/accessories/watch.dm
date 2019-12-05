@@ -63,6 +63,9 @@
 		to_chat(user, "You change the display to [C.hour24 ? "24" : "12"]-hour mode.")
 
 // Define some watches
+
+// /basic is just used to add a color-select one for loadout without screwing all the other entries up
+
 /obj/item/clothing/accessory/watch/digital
 	name       = "digital watch"
 	desc       = "A digital watch."
@@ -71,6 +74,13 @@
 	color      = "#303040"
 	digital    = TRUE
 	inaccuracy = 3 MINUTES
+
+/obj/item/clothing/accessory/watch/basic
+	name       = "analog watch"
+	desc       = "The Mahimaku Journeyman, a universal wrist accessory."
+
+/obj/item/clothing/accessory/watch/digital/basic
+	desc       = "The Ward-Takahashi 2300, a universal wrist accessory for those who can't tell time."
 
 /obj/item/clothing/accessory/watch/cheap
 	name = "cheap watch"
