@@ -46,26 +46,28 @@ mob/living/proc/getPerRollDelay()
 		return 0
 	var/roll_dist = getRollDist()
 	var/roll_delay = getPerRollDelay()
-	if(roll_dist <= 0)
-		to_chat(src,"<span class = 'notice'>You can't dodge roll.</span>")
+	if(roll_dist <= 0 || incapacitated())
+		to_chat(src,"<span class = 'notice'>You can't dodge roll in your current state.</span>")
 		return 0
+	var/obj/vehicles/v = loc
+	if(istype(v))
+		v.exit_vehicle(src)
 	if(client)
 		client.move_delay = max(client.move_delay,world.time + (roll_delay * roll_dist))
-	setClickCooldown(roll_delay * roll_dist)
 	next_roll_at = world.time + ((roll_delay * roll_dist) + DODGE_ROLL_BASE_COOLDOWN)
 	to_chat(src,"<span class = 'warning'>[name] performs a dodge roll!</span>")
 	for(var/i = 0,i < roll_dist,i++)
 		var/turf/step_to = get_step(loc,dir)
-		if(step_to.density == 1)
+		if(step_to.density == 1 || !step(src,dir))
 			visible_message("<span class = 'warning'>[name] rolls into [step_to].</span>")
 			break
-		step(src,dir)
 		var/matrix/m
 		if(isnull(transform))
 			m = matrix()
 		else
 			m = transform
 		animate(src,transform = turn(m,360/(roll_dist)),time = roll_delay)
+		setClickCooldown(roll_delay)
 		sleep(roll_delay)
 	animate(src,transform = null,time = 1)
 	return 1
