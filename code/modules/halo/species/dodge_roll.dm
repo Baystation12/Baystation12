@@ -1,5 +1,5 @@
 
-#define DODGE_ROLL_BASE_COOLDOWN 2 SECONDS
+#define DODGE_ROLL_BASE_COOLDOWN 6 SECONDS
 
 /mob/living/verb/rollN()
 	set name = "Roll North"
@@ -51,8 +51,8 @@ mob/living/proc/getPerRollDelay()
 		return 0
 	if(client)
 		client.move_delay = max(client.move_delay,world.time + (roll_delay * roll_dist))
+	setClickCooldown(roll_delay * roll_dist)
 	next_roll_at = world.time + ((roll_delay * roll_dist) + DODGE_ROLL_BASE_COOLDOWN)
-	animate(src,transform = turn(matrix(),180),time = roll_delay * roll_dist,loop = 2)
 	to_chat(src,"<span class = 'warning'>[name] performs a dodge roll!</span>")
 	for(var/i = 0,i < roll_dist,i++)
 		var/turf/step_to = get_step(loc,dir)
@@ -60,7 +60,14 @@ mob/living/proc/getPerRollDelay()
 			visible_message("<span class = 'warning'>[name] rolls into [step_to].</span>")
 			break
 		step(src,dir)
+		var/matrix/m
+		if(isnull(transform))
+			m = matrix()
+		else
+			m = transform
+		animate(src,transform = turn(m,360/(roll_dist)),time = roll_delay)
 		sleep(roll_delay)
+	animate(src,transform = null,time = 1)
 	return 1
 
 #undef DODGE_ROLL_BASE_COOLDOWN
