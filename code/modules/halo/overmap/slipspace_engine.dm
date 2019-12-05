@@ -44,19 +44,26 @@
 
 /obj/machinery/slipspace_engine/proc/get_linked_ships()
 	. = list()
+	var/obj/effect/overmap/ship/om_ship = om_obj
+	if(istype(om_ship) && om_ship.our_fleet && om_ship.our_fleet.ships_infleet.len > 1)
+		for(var/obj/s in om_ship.our_fleet.ships_infleet)
+			. += s
 	for(var/obj/effect/overmap/ship/s in range(slipspace_carryalong_range,om_obj.loc)) //No check for null-loc because this should never be called when the ship is in slipspace.
 		. += s
 
 /obj/machinery/slipspace_engine/proc/do_slipspace(var/to_loc = null)
+	if(isnull(to_loc))
+		linked_ships = get_linked_ships()
 	for(var/obj/effect/overmap/om in linked_ships + om_obj)
 		if(isnull(to_loc))
 			om.slipspace_to_nullspace(slipspace_target_status,jump_sound)
 		else
+			if(om.loc != null)
+				linked_ships -= om
+				continue
 			om.slipspace_to_location(to_loc,slipspace_target_status,jump_sound)
 	if(!isnull(to_loc))
 		linked_ships = list()
-	else
-		linked_ships = get_linked_ships()
 
 /obj/machinery/slipspace_engine/proc/overload_engine(var/mob/user)
 	jump_charging = -1
