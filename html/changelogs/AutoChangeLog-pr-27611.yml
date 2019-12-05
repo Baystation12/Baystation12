@@ -1,0 +1,4 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - tweak: "Allows hand-labeler to label storage items when used with non-help intent."
