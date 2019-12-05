@@ -249,14 +249,14 @@
 	display_name = "fob watch"
 	path = /obj/item/weapon/watch
 	
-/datum/gear/fobwatch
+/datum/gear/fobwatch/digital
 	display_name = "fob watch, digital"
 	path = /obj/item/weapon/watch/digital
 	
-/datum/gear/fobwatch
+/datum/gear/fobwatch/spaceman
 	display_name = "fob watch, 24-hour analog"
 	path = /obj/item/weapon/watch/spaceman
 	
-/datum/gear/fobwatch
+/datum/gear/fobwatch/pocketwatch
 	display_name = "fob watch, fancy pocketwatch"
 	path = /obj/item/weapon/watch/fancy
