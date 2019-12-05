@@ -56,12 +56,12 @@
 
 /datum/gear/accessory/watch/basic
 	display_name = "watch, analog, colour select"
-	path = /obj/item/clothing/accessory/watch
+	path = /obj/item/clothing/accessory/watch/basic
 	flags = GEAR_HAS_COLOR_SELECTION
 
-/datum/gear/accessory/watch/basic/digital
+/datum/gear/accessory/watch/digital/basic
 	display_name = "watch, digital, colour select"
-	path = /obj/item/clothing/accessory/watch/digital
+	path = /obj/item/clothing/accessory/watch/digital/basic
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/accessory/locket
