@@ -13,6 +13,8 @@
 /obj/item/clothing/accessory/watch/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/clock, digital, hour24, inaccuracy)
+	verbs += /atom/proc/check_watch
+	verbs += /atom/proc/calibrate_watch
 	update_icon()
 
 // Layer the band and the watch together. color is band color, face_color is watch face color
@@ -27,33 +29,26 @@
 /obj/item/clothing/accessory/watch/examine(mob/user)
 	. = ..()
 	var/datum/extension/clock/C = get_extension(src, /datum/extension/clock)
-	C.check(user)
+	C.do_check(user)
 
-// Register our right-click verbs to check and calibrate
-/obj/item/clothing/accessory/watch/verb/Check_Watch(mob/user)
-	set src in usr
-	var/datum/extension/clock/C = get_extension(src, /datum/extension/clock)
-	C.check_verb(user)
+// Add clock extension's verbs when attached to a thing and remove them when removed from that thing
+/obj/item/clothing/accessory/watch/on_attached(obj/item/clothing/under/S, mob/user as mob)
+	..()
+	has_suit.verbs += /atom/proc/check_watch
+	has_suit.verbs += /atom/proc/calibrate_watch
 
-/obj/item/clothing/accessory/watch/verb/Calibrate_Watch(mob/user)
-	set src in usr
-	var/datum/extension/clock/C = get_extension(src, /datum/extension/clock)
-	C.calibrate_verb(user)
-
-// These three procs add a "Look" link when examining a uniform with attached watch
-/obj/item/clothing/accessory/watch/CanUseTopic(var/user)
-	if(user in view(get_turf(src)))
-		return STATUS_INTERACTIVE
-
-/obj/item/clothing/accessory/watch/OnTopic(var/mob/user, var/list/href_list)
-	if(href_list["look_at_watch"])
-		if(istype(user))
-			user.examinate(src)
-			return TOPIC_HANDLED
-
-/obj/item/clothing/accessory/watch/get_examine_line()
-	. = ..()
-	. += " <a href='?src=\ref[src];look_at_watch=1'>\[Look\]</a>"
+/obj/item/clothing/accessory/watch/on_removed(mob/user as mob)
+	if(has_suit)
+		var/remove_verb = TRUE
+		for(var/obj/accessory in has_suit.accessories)
+			if(accessory == src)
+				continue
+			if(has_extension(accessory, /datum/extension/clock))
+				remove_verb = FALSE
+		if(remove_verb)
+			has_suit.verbs -= /atom/proc/check_watch
+			has_suit.verbs -= /atom/proc/calibrate_watch
+	..()
 
 // Toggle 24-hour mode by activating a digital watch in hand
 /obj/item/clothing/accessory/watch/attack_self(mob/user)
@@ -64,8 +59,6 @@
 
 // Define some watches
 
-// /basic is just used to add a color-select one for loadout without screwing all the other entries up
-
 /obj/item/clothing/accessory/watch/digital
 	name       = "digital watch"
 	desc       = "A digital watch."
@@ -75,6 +68,7 @@
 	digital    = TRUE
 	inaccuracy = 3 MINUTES
 
+// basic is just used to add color-select ones for loadout without screwing all the other entries up
 /obj/item/clothing/accessory/watch/basic
 	name       = "analog watch"
 	desc       = "The Mahimaku Journeyman, a universal wrist accessory."

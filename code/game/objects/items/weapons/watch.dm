@@ -12,21 +12,13 @@
 /obj/item/weapon/watch/Initialize()
 	. = ..()
 	set_extension(src, /datum/extension/clock, digital, hour24, inaccuracy)
+	verbs += /atom/proc/check_watch
+	verbs += /atom/proc/calibrate_watch
 
 /obj/item/weapon/watch/examine(mob/user)
 	. = ..()
 	var/datum/extension/clock/C = get_extension(src, /datum/extension/clock)
-	C.check(user)
-
-/obj/item/weapon/watch/verb/Check_Watch(mob/user)
-	set src in usr
-	var/datum/extension/clock/C = get_extension(src, /datum/extension/clock)
-	C.check_verb(user)
-
-/obj/item/weapon/watch/verb/Calibrate_Watch(mob/user)
-	set src in usr
-	var/datum/extension/clock/C = get_extension(src, /datum/extension/clock)
-	C.calibrate_verb(user)
+	C.do_check(user)
 
 /obj/item/weapon/watch/digital
 	name       = "digital fob watch"
