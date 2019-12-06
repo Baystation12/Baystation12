@@ -45,227 +45,175 @@ research holder datum.
 ***************************************************************/
 
 /datum/research								//Holder for all the existing, archived, and known tech. Individual to console.
-	var
-		list								//Datum/tech go here.
-			possible_tech = list()			//List of all tech in the game that players have access to (barring special events).
-			known_tech = list()				//List of locally known tech.
-			possible_designs = list()		//List of all designs (at base reliability).
-			known_designs = list()			//List of available designs (at base reliability).
+	var/list/known_tech = list()			//List of locally known tech. Datum/tech go here.
+	var/list/possible_designs = list()		//List of all designs.
+	var/list/known_designs = list()			//List of available designs.
 
-	New()		//Insert techs into possible_tech here. Known_tech automatically updated.
-		for(var/T in typesof(/datum/tech) - /datum/tech)
-			possible_tech += new T(src)
-		for(var/D in typesof(/datum/design) - /datum/design)
-			possible_designs += new D(src)
-		RefreshResearch()
+/datum/research/New()		//Insert techs into possible_tech here. Known_tech automatically updated.
+	for(var/T in typesof(/datum/tech) - /datum/tech)
+		known_tech += new T(src)
+	for(var/D in typesof(/datum/design) - /datum/design)
+		possible_designs += new D(src)
+	RefreshResearch()
 
-	proc
+/datum/research/techonly
 
-		//Checks to see if tech has all the required pre-reqs.
-		//Input: datum/tech; Output: 0/1 (false/true)
-		TechHasReqs(var/datum/tech/T)
-			if(T.req_tech.len == 0)
-				return 1
-			var/matches = 0
-			for(var/req in T.req_tech)
-				for(var/datum/tech/known in known_tech)
-					if((req == known.id) && (known.level >= T.req_tech[req]))
-						matches++
-						break
-			if(matches == T.req_tech.len)
-				return 1
-			else
-				return 0
+/datum/research/techonly/New()
+	for(var/T in typesof(/datum/tech) - /datum/tech)
+		known_tech += new T(src)
+	RefreshResearch()
 
-		//Checks to see if design has all the required pre-reqs.
-		//Input: datum/design; Output: 0/1 (false/true)
-		DesignHasReqs(var/datum/design/D)
-			if(D.req_tech.len == 0)
-				return 1
-			var/matches = 0
-			var/list/k_tech = list()
-			for(var/datum/tech/known in known_tech)
-				k_tech[known.id] = known.level
-			for(var/req in D.req_tech)
-				if(!isnull(k_tech[req]) && k_tech[req] >= D.req_tech[req])
-					matches++
-			if(matches == D.req_tech.len)
-				return 1
-			else
-				return 0
-/*
-		//Checks to see if design has all the required pre-reqs.
-		//Input: datum/design; Output: 0/1 (false/true)
-		DesignHasReqs(var/datum/design/D)
-			if(D.req_tech.len == 0)
-				return 1
-			var/matches = 0
-			for(var/req in D.req_tech)
-				for(var/datum/tech/known in known_tech)
-					if((req == known.id) && (known.level >= D.req_tech[req]))
-						matches++
-						break
-			if(matches == D.req_tech.len)
-				return 1
-			else
-				return 0
-*/
-		//Adds a tech to known_tech list. Checks to make sure there aren't duplicates and updates existing tech's levels if needed.
-		//Input: datum/tech; Output: Null
-		AddTech2Known(var/datum/tech/T)
-			for(var/datum/tech/known in known_tech)
-				if(T.id == known.id)
-					if(T.level > known.level)
-						known.level = T.level
-					return
-			known_tech += T
+//Checks to see if design has all the required pre-reqs.
+//Input: datum/design; Output: 0/1 (false/true)
+/datum/research/proc/DesignHasReqs(var/datum/design/D)
+	if(D.req_tech.len == 0)
+		return 1
+
+	var/list/k_tech = list()
+
+	for(var/datum/tech/known in known_tech)
+		k_tech[known.id] = known.level
+
+	for(var/req in D.req_tech)
+		if(isnull(k_tech[req]) || k_tech[req] < D.req_tech[req])
+			return 0
+
+	return 1
+
+//Adds a tech to known_tech list. Checks to make sure there aren't duplicates and updates existing tech's levels if needed.
+//Input: datum/tech; Output: Null
+/datum/research/proc/AddTech2Known(var/datum/tech/T)
+	for(var/datum/tech/known in known_tech)
+		if(T.id == known.id)
+			if(T.level > known.level)
+				known.level = T.level
 			return
+	return
 
-		AddDesign2Known(var/datum/design/D)
-			for(var/datum/design/known in known_designs)
-				if(D.id == known.id)
-					if(D.reliability_mod > known.reliability_mod)
-						known.reliability_mod = D.reliability_mod
-					return
-			known_designs += D
+/datum/research/proc/AddDesign2Known(var/datum/design/D)
+	if(!known_designs.len) // Special case
+		known_designs.Add(D)
+		return
+	for(var/i = 1 to known_designs.len)
+		var/datum/design/A = known_designs[i]
+		if(A.id == D.id) // We are guaranteed to reach this if the ids are the same, because sort_string will also be the same
 			return
-
-		//Refreshes known_tech and known_designs list. Then updates the reliability vars of the designs in the known_designs list.
-		//Input/Output: n/a
-		RefreshResearch()
-			for(var/datum/tech/PT in possible_tech)
-				if(TechHasReqs(PT))
-					AddTech2Known(PT)
-			for(var/datum/design/PD in possible_designs)
-				if(DesignHasReqs(PD))
-					AddDesign2Known(PD)
-			for(var/datum/tech/T in known_tech)
-				T = between(1,T.level,20)
-			for(var/datum/design/D in known_designs)
-				D.CalcReliability(known_tech)
+		if(A.sort_string > D.sort_string)
+			known_designs.Insert(i, D)
 			return
+	known_designs.Add(D)
+	return
 
-		//Refreshes the levels of a given tech.
-		//Input: Tech's ID and Level; Output: null
-		UpdateTech(var/ID, var/level)
-			for(var/datum/tech/KT in known_tech)
-				if(KT.id == ID)
-					if(KT.level <= level) KT.level = max((KT.level + 1), (level - 1))
-			return
+//Refreshes known_tech and known_designs list
+//Input/Output: n/a
+/datum/research/proc/RefreshResearch()
+	for(var/datum/design/PD in possible_designs)
+		if(DesignHasReqs(PD))
+			AddDesign2Known(PD)
+	for(var/datum/tech/T in known_tech)
+		T = between(0, T.level, 20)
+	return
 
-		UpdateDesign(var/path)
-			for(var/datum/design/KD in known_designs)
-				if(KD.build_path == path)
-					KD.reliability_mod += rand(1,2)
-					break
-			return
+//Refreshes the levels of a given tech.
+//Input: Tech's ID and Level; Output: null
+/datum/research/proc/UpdateTech(var/ID, var/level)
+	// If a "brain expansion" event is active, we gain 1 extra level
+	for(var/datum/event/E in SSevent.active_events)
+		if(istype(E, /datum/event/brain_expansion))
+			level += 1
+			break
 
+	for(var/datum/tech/KT in known_tech)
+		if(KT.id == ID && KT.level <= level)
+			KT.level = max(KT.level + 1, level - 1)
+	return
 
-
+// A simple helper proc to find the name of a tech with a given ID.
+/proc/CallTechName(var/ID)
+	for(var/T in subtypesof(/datum/tech))
+		var/datum/tech/check_tech = T
+		if(initial(check_tech.id) == ID)
+			return  initial(check_tech.name)
 
 /***************************************************************
 **						Technology Datums					  **
 **	Includes all the various technoliges and what they make.  **
 ***************************************************************/
 
-datum
-	tech		//Datum of individual technologies.
-		var
-			name = "name"					//Name of the technology.
-			desc = "description"			//General description of what it does and what it makes.
-			id = "id"						//An easily referenced ID. Must be alphanumeric, lower-case, and no symbols.
-			level = 1						//A simple number scale of the research level. Level 0 = Secret tech.
-			list/req_tech = list()			//List of ids associated values of techs required to research this tech. "id" = #
+/datum/tech //Datum of individual technologies.
+	var/name = "name"					//Name of the technology.
+	var/desc = "description"			//General description of what it does and what it makes.
+	var/id = "id"						//An easily referenced ID. Must be alphanumeric, lower-case, and no symbols.
+	var/level = 1						//A simple number scale of the research level. Level 0 = Secret tech.
 
+/datum/tech/materials
+	name = "Materials"
+	desc = "Development of new and improved materials."
+	id = TECH_MATERIAL
 
-//Trunk Technologies (don't require any other techs and you start knowning them).
+/datum/tech/engineering
+	name = "Engineering"
+	desc = "Development of new and improved engineering parts."
+	id = TECH_ENGINEERING
 
-		materials
-			name = "Materials Research"
-			desc = "Development of new and improved materials."
-			id = "materials"
+/datum/tech/phorontech
+	name = "Phoron Technology"
+	desc = "Manipulation of the mysterious substance colloqually known as 'phoron'."
+	id = TECH_PHORON
 
-		engineering
-			name = "Engineering Research"
-			desc = "Development of new and improved engineering parts and."
-			id = "engineering"
+/datum/tech/powerstorage
+	name = "Power Manipulation Technology"
+	desc = "The various technologies behind the storage and generation of electicity."
+	id = TECH_POWER
 
-		plasmatech
-			name = "Plasma Research"
-			desc = "Research into the mysterious substance colloqually known as 'plasma'."
-			id = "plasmatech"
+/datum/tech/bluespace
+	name = "'Blue-space' Technology"
+	desc = "Devices that utilize the sub-reality known as 'blue-space'"
+	id = TECH_BLUESPACE
 
-		powerstorage
-			name = "Power Manipulation Technology"
-			desc = "The various technologies behind the storage and generation of electicity."
-			id = "powerstorage"
+/datum/tech/biotech
+	name = "Biological Technology"
+	desc = "Deeper mysteries of life and organic substances."
+	id = TECH_BIO
 
-		bluespace
-			name = "'Blue-space' Research"
-			desc = "Research into the sub-reality known as 'blue-space'"
-			id = "bluespace"
+/datum/tech/combat
+	name = "Combat Systems"
+	desc = "Offensive and defensive systems."
+	id = TECH_COMBAT
 
-		biotech
-			name = "Biological Technology"
-			desc = "Research into the deeper mysteries of life and organic substances."
-			id = "biotech"
+/datum/tech/magnets
+	name = "Electromagnetic Spectrum Technology"
+	desc = "Electromagnetic spectrum and magnetic devices. No clue how they actually work, though."
+	id = TECH_MAGNET
 
-		combat
-			name = "Combat Systems Research"
-			desc = "The development of offensive and defensive systems."
-			id = "combat"
+/datum/tech/programming
+	name = "Data Theory"
+	desc = "Computer and artificial intelligence and data storage systems."
+	id = TECH_DATA
 
-		magnets
-			name = "Electromagnetic Spectrum Research"
-			desc = "Research into the electromagnetic spectrum. No clue how they actually work, though."
-			id = "magnets"
-
-		programming
-			name = "Data Theory Research"
-			desc = "The development of new computer and artificial intelligence and data storage systems."
-			id = "programming"
-
-		syndicate
-			name = "Illegal Technologies Research"
-			desc = "The study of technologies that violate Nanotrassen regulations."
-			id = "syndicate"
-
-	/*	arcane
-			name = "Arcane Research"
-			desc = "Research into the acult and arcane field for use in practical science"
-			id = "arcane"
-			level = 0 //It didn't become "secret" as advertised.
-
-	//Branch Techs
-		explosives
-			name = "Explosives Research"
-			desc = "The creation and application of explosive materials."
-			id = "explosives"
-			req_tech = list("materials" = 3)
-
-		generators
-			name = "Power Generation Technology"
-			desc = "Research into more powerful and more reliable sources."
-			id = "generators"
-			req_tech = list("powerstorage" = 2)
-
-		robotics
-			name = "Robotics Technology"
-			desc = "The development of advanced automated, autonomous machines."
-			id = "robotics"
-			req_tech = list("materials" = 3, "programming" = 3)*/
-
+/datum/tech/esoteric
+	name = "Esoteric Technology"
+	desc = "A miscellaneous tech category filled with information on non-standard designs, personal projects and half-baked ideas."
+	id = TECH_ESOTERIC
+	level = 0
 
 /obj/item/weapon/disk/tech_disk
-	name = "Technology Disk"
-	desc = "A disk for storing technology data for further research."
-	icon = 'cloning.dmi'
+	name = "fabricator data disk"
+	desc = "A disk for storing fabricator learning data for backup."
+	icon = 'icons/obj/cloning.dmi'
 	icon_state = "datadisk2"
 	item_state = "card-id"
-	w_class = 1.0
-	m_amt = 30
-	g_amt = 10
+	w_class = ITEM_SIZE_SMALL
+	matter = list(MATERIAL_PLASTIC = 30, MATERIAL_STEEL = 30, MATERIAL_GLASS = 10)
 	var/datum/tech/stored
-	New()
-		src.pixel_x = rand(-5.0, 5)
-		src.pixel_y = rand(-5.0, 5)
+
+
+/obj/item/weapon/disk/design_disk
+	name = "component design disk"
+	desc = "A disk for storing device design data for construction in lathes."
+	icon = 'icons/obj/cloning.dmi'
+	icon_state = "datadisk2"
+	item_state = "card-id"
+	w_class = ITEM_SIZE_SMALL
+	matter = list(MATERIAL_PLASTIC = 30, MATERIAL_STEEL = 30, MATERIAL_GLASS = 10)
+	var/datum/design/blueprint

@@ -1,153 +1,225 @@
 /obj/machinery/recharge_station
-	name = "Cyborg Recharging Station"
-	icon = 'objects.dmi'
+	name = "cyborg recharging station"
+	desc = "A heavy duty rapid charging system, designed to quickly recharge cyborg power reserves."
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "borgcharger0"
 	density = 1
-	anchored = 1.0
-	use_power = 1
-	idle_power_usage = 5
-	active_power_usage = 1000
-	var/mob/occupant = null
+	anchored = 1
+	idle_power_usage = 50
+	base_type = /obj/machinery/recharge_station
+	uncreated_component_parts = null
+	stat_immune = 0
+	construct_state = /decl/machine_construction/default/panel_closed
 
+	var/overlay_icon = 'icons/obj/objects.dmi'
+	var/mob/living/occupant = null
+	var/charging = 0
+	var/last_overlay_state
 
+	var/charging_power			// W. Power rating used for charging the cyborg. 120 kW if un-upgraded
+	var/weld_rate = 0			// How much brute damage is repaired per tick
+	var/wire_rate = 0			// How much burn damage is repaired per tick
 
-	New()
-		..()
-		build_icon()
+	var/weld_power_use = 2300	// power used per point of brute damage repaired. 2.3 kW ~ about the same power usage of a handheld arc welder
+	var/wire_power_use = 500	// power used per point of burn damage repaired.
 
-	process()
-		..()
-		if(!(NOPOWER|BROKEN))
-			return
+/obj/machinery/recharge_station/Initialize()
+	. = ..()
+	update_icon()
 
-		if(src.occupant)
-			process_occupant()
-		return 1
-
-
-	allow_drop()
-		return 0
-
-
-	relaymove(mob/user as mob)
-		if(user.stat)
-			return
-		src.go_out()
+/obj/machinery/recharge_station/Process()
+	if(stat & (BROKEN | NOPOWER))
 		return
 
-	proc
-		build_icon()
-			if(NOPOWER|BROKEN)
-				if(src.occupant)
-					icon_state = "borgcharger1"
-				else
-					icon_state = "borgcharger0"
-			else
-				icon_state = "borgcharger0"
-
+	//First, recharge/repair/etc the occupant
+	if(occupant)
 		process_occupant()
-			if(src.occupant)
-				if (istype(occupant, /mob/living/silicon/robot))
-					var/mob/living/silicon/robot/R = occupant
-					restock_modules()
-					if(!R.cell)
-						return
-					else if(R.cell.charge >= R.cell.maxcharge)
-						R.cell.charge = R.cell.maxcharge
-						return
-					else
-						R.cell.charge += 200
-						return
 
+	if(overlay_state() != last_overlay_state)
+		update_icon()
+
+//Processes the occupant, drawing from the internal power cell if needed.
+/obj/machinery/recharge_station/proc/process_occupant()
+	// Check whether the mob is compatible
+	if(!isrobot(occupant) && !ishuman(occupant))
+		return
+
+	// If we have repair capabilities, repair any damage.
+	if(weld_rate && occupant.getBruteLoss())
+		var/repair = weld_rate - use_power_oneoff(weld_power_use * weld_rate, LOCAL) / weld_power_use
+		occupant.adjustBruteLoss(-repair)
+	if(wire_rate && occupant.getFireLoss())
+		var/repair = wire_rate - use_power_oneoff(wire_power_use * wire_rate, LOCAL) / wire_power_use
+		occupant.adjustFireLoss(-repair)
+
+	var/obj/item/weapon/cell/target
+	if(isrobot(occupant))
+		var/mob/living/silicon/robot/R = occupant
+		target = R.cell
+		if(R.module)
+			R.module.respawn_consumable(R, charging_power * CELLRATE / 250) //consumables are magical, apparently
+		// If we are capable of repairing damage, reboot destroyed components and allow them to be repaired for very large power spike.
+		var/list/damaged = R.get_damaged_components(1,1,1)
+		if(damaged.len && wire_rate && weld_rate)
+			for(var/datum/robot_component/C in damaged)
+				if((C.installed == -1) && use_power_oneoff(100 KILOWATTS, LOCAL) <= 0)
+					C.repair()
+
+	if(ishuman(occupant))
+		var/mob/living/carbon/human/H = occupant
+		var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
+		if(potato)
+			target = potato.cell
+		if((!target || target.percent() > 95) && istype(H.back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/R = H.back
+			if(R.cell && !R.cell.fully_charged())
+				target = R.cell
+
+	if(target && !target.fully_charged())
+		var/diff = min(target.maxcharge - target.charge, charging_power * CELLRATE) // Capped by charging_power / tick
+		if(ishuman(occupant))
+			var/mob/living/carbon/human/H = occupant
+			if(H.species.name == SPECIES_ADHERENT)
+				diff /= 2 //Adherents charge at half the normal rate.
+		var/charge_used = diff - use_power_oneoff(diff / CELLRATE, LOCAL) * CELLRATE
+		target.give(charge_used)
+
+/obj/machinery/recharge_station/examine(mob/user)
+	. = ..()
+	var/obj/item/weapon/cell/cell = get_cell()
+	if(cell)
+		to_chat(user, "The charge meter reads: [cell.percent()]%")
+	else
+		to_chat(user, "The indicator shows that the cell is missing.")
+
+/obj/machinery/recharge_station/relaymove(mob/user as mob)
+	if(user.stat)
+		return
+	go_out()
+
+/obj/machinery/recharge_station/emp_act(severity)
+	if(occupant)
+		occupant.emp_act(severity)
 		go_out()
-			if(!( src.occupant ))
-				return
-			//for(var/obj/O in src)
-			//	O.loc = src.loc
-			if (src.occupant.client)
-				src.occupant.client.eye = src.occupant.client.mob
-				src.occupant.client.perspective = MOB_PERSPECTIVE
-			src.occupant.loc = src.loc
-			src.occupant = null
-			build_icon()
-			src.use_power = 1
-			return
+	var/obj/item/weapon/cell/cell = get_cell()
+	if(cell)
+		cell.emp_act(severity)
+	..(severity)
 
-		restock_modules()
-			if(src.occupant)
-				if(istype(occupant, /mob/living/silicon/robot))
-					var/mob/living/silicon/robot/R = occupant
-					if(R.module && R.module.modules)
-						var/list/um = R.contents|R.module.modules
-						// ^ makes sinle list of active (R.contents) and inactive modules (R.module.modules)
-						for(var/obj/O in um)
-							// Engineering
-							if(istype(O,/obj/item/stack/sheet/metal) || istype(O,/obj/item/stack/sheet/rglass) || istype(O,/obj/item/weapon/cable_coil))
-								if(O:amount < 50)
-									O:amount += 1
-							// Security
-							if(istype(O,/obj/item/device/flash))
-								if(O:broken)
-									O:broken = 0
-									O:icon_state = "flash"
-							if(istype(O,/obj/item/weapon/gun/energy/taser/cyborg))
-								if(O:power_supply.charge < O:power_supply.maxcharge)
-									O:power_supply.give(100)
-							if(istype(O,/obj/item/weapon/melee/baton))
-								if(O:charges < 10)
-									O:charges += 1
-							//Service
-							if(istype(O,/obj/item/weapon/reagent_containers/food/condiment/enzyme))
-								if(O.reagents.get_reagent_amount("enzyme") < 50)
-									O.reagents.add_reagent("enzyme", 1)
-							//Medical
-							if(istype(O,/obj/item/weapon/reagent_containers/glass/bottle/robot))
-								var/obj/item/weapon/reagent_containers/glass/bottle/robot/B = O
-								if(B.reagent && (B.reagents.get_reagent_amount(B.reagent) < B.volume))
-									B.reagents.add_reagent(B.reagent, 2)
+/obj/machinery/recharge_station/components_are_accessible(path)
+	return !occupant && ..()
 
-						if(R)
-							if(R.module)
-								R.module.respawn_consumable(R)
+/obj/machinery/recharge_station/cannot_transition_to(state_path)
+	if(occupant)
+		return SPAN_NOTICE("You cannot do this while \the [src] is occupied!.")
+	return ..()
 
+/obj/machinery/recharge_station/RefreshParts()
+	..()
+	var/man_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 10)
+	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 10)
 
-	verb
-		move_eject()
-			set src in oview(1)
-			if (usr.stat != 0)
-				return
-			src.go_out()
-			add_fingerprint(usr)
-			return
+	charging_power = 40000 + 40000 * cap_rating
+	weld_rate = max(0, man_rating - 3)
+	wire_rate = max(0, man_rating - 5)
 
-		move_inside()
-			set src in oview(1)
-			if (usr.stat == 2)
-				//Whoever had it so that a borg with a dead cell can't enter this thing should be shot. --NEO
-				return
-			if (!(istype(usr, /mob/living/silicon/)))
-				usr << "\blue <B>Only non-organics may enter the recharger!</B>"
-				return
-			if (src.occupant)
-				usr << "\blue <B>The cell is already occupied!</B>"
-				return
-			if (!usr:cell)
-				usr<<"\blue Without a powercell, you can't be recharged."
-				//Make sure they actually HAVE a cell, now that they can get in while powerless. --NEO
-				return
-			usr.pulling = null
-			usr.client.perspective = EYE_PERSPECTIVE
-			usr.client.eye = src
-			usr.loc = src
-			src.occupant = usr
-			/*for(var/obj/O in src)
-				O.loc = src.loc*/
-			src.add_fingerprint(usr)
-			build_icon()
-			src.use_power = 2
-			return
+	desc = initial(desc)
+	desc += " Uses a dedicated internal power cell to deliver [charging_power]W when in use."
+	if(weld_rate)
+		desc += "<br>It is capable of repairing structural damage."
+	if(wire_rate)
+		desc += "<br>It is capable of repairing burn damage."
+
+/obj/machinery/recharge_station/proc/overlay_state()
+	var/obj/item/weapon/cell/cell = get_cell()
+	switch(cell && cell.percent() || 0)
+		if(0 to 20)
+			return "statn_c0"
+		if(20 to 40)
+			return "statn_c20"
+		if(40 to 60)
+			return "statn_c40"
+		if(60 to 80)
+			return "statn_c60"
+		if(80 to 98)
+			return "statn_c80"
+		if(90 to 110)
+			return "statn_c100"
+
+/obj/machinery/recharge_station/on_update_icon()
+	..()
+	if(stat & BROKEN)
+		icon_state = "borgcharger0"
+		return
+
+	if(occupant)
+		if(stat & NOPOWER)
+			icon_state = "borgcharger2"
+		else
+			icon_state = "borgcharger1"
+	else
+		icon_state = "borgcharger0"
+
+	last_overlay_state = overlay_state()
+	overlays = list(image(overlay_icon, overlay_state()))
+
+/obj/machinery/recharge_station/Bumped(var/mob/living/silicon/robot/R)
+	go_in(R)
+
+/obj/machinery/recharge_station/proc/go_in(var/mob/M)
 
 
+	if(occupant)
+		return
 
+	if(!hascell(M))
+		return
 
+	add_fingerprint(M)
+	M.reset_view(src)
+	M.forceMove(src)
+	occupant = M
+	update_icon()
+	return 1
 
+/obj/machinery/recharge_station/proc/hascell(var/mob/M)
+	if(isrobot(M))
+		var/mob/living/silicon/robot/R = M
+		return (R.cell)
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M		
+		if(H.isSynthetic()) // FBPs and IPCs
+			return 1
+		if(istype(H.back,/obj/item/weapon/rig))
+			var/obj/item/weapon/rig/R = H.back
+			return R.cell
+		return H.internal_organs_by_name["cell"]
+	return 0
+
+/obj/machinery/recharge_station/proc/go_out()
+	if(!occupant)
+		return
+
+	occupant.forceMove(loc)
+	occupant.reset_view()
+	occupant = null
+	update_icon()
+
+/obj/machinery/recharge_station/verb/move_eject()
+	set category = "Object"
+	set name = "Eject Recharger"
+	set src in oview(1)
+
+	if(usr.incapacitated())
+		return
+
+	go_out()
+	add_fingerprint(usr)
+	return
+
+/obj/machinery/recharge_station/verb/move_inside()
+	set category = "Object"
+	set name = "Enter Recharger"
+	set src in oview(1)
+
+	go_in(usr)

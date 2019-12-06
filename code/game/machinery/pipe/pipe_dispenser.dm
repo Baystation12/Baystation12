@@ -1,164 +1,129 @@
 /obj/machinery/pipedispenser
 	name = "Pipe Dispenser"
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
 	density = 1
-	anchored = 1
-	var/unwrenched = 0
-	var/wait = 0
+	anchored = 0
+	stat_immune = NOSCREEN//Doesn't need screen, just input for the parts wanted
 
-/obj/machinery/pipedispenser/attack_paw(user as mob)
-	return src.attack_hand(user)
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
 
-/obj/machinery/pipedispenser/attack_hand(user as mob)
-	if(..())
-		return
-	var/dat = {"
-<b>Regular pipes:</b><BR>
-<A href='?src=\ref[src];make=0;dir=1'>Pipe</A><BR>
-<A href='?src=\ref[src];make=1;dir=5'>Bent Pipe</A><BR>
-<A href='?src=\ref[src];make=5;dir=1'>Manifold</A><BR>
-<A href='?src=\ref[src];make=16;dir=1'>4-Way Manifold</A><BR>
-<A href='?src=\ref[src];make=8;dir=1'>Manual Valve</A><BR>
-<A href='?src=\ref[src];make=15;dir=1'>Manual T-Valve</A><BR>
-<b>Devices:</b><BR>
-<A href='?src=\ref[src];make=4;dir=1'>Connector</A><BR>
-<A href='?src=\ref[src];make=7;dir=1'>Unary Vent</A><BR>
-<A href='?src=\ref[src];make=9;dir=1'>Gas Pump</A><BR>
-<A href='?src=\ref[src];make=10;dir=1'>Scrubber</A><BR>
-<A href='?src=\ref[src];makemeter=1'>Meter</A><BR>
-<A href='?src=\ref[src];make=13;dir=1'>Gas Filter</A><BR>
-<A href='?src=\ref[src];make=14;dir=1'>Gas Mixer</A><BR>
-<b>Heat exchange:</b><BR>
-<A href='?src=\ref[src];make=2;dir=1'>Pipe</A><BR>
-<A href='?src=\ref[src];make=3;dir=5'>Bent Pipe</A><BR>
-<A href='?src=\ref[src];make=6;dir=1'>Junction</A><BR>
-<b>Insulated pipes:</b><BR>
-<A href='?src=\ref[src];make=11;dir=1'>Pipe</A><BR>
-<A href='?src=\ref[src];make=12;dir=5'>Bent Pipe</A><BR>
-"}
+	idle_power_usage = 500
+	power_channel = EQUIP
+	use_power = POWER_USE_OFF
 
+	var/pipe_color = "white"
 
-	user << browse("<HEAD><TITLE>[src]</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
-	onclose(user, "pipedispenser")
-	return
+/obj/machinery/pipedispenser/Initialize()//for mapping purposes. Anchor them by map var edit if needed.
+	. = ..()
+	if(anchored)
+		update_use_power(POWER_USE_IDLE)
+
+/obj/machinery/pipedispenser/proc/get_console_data(var/list/pipe_categories, var/color_options = FALSE)
+	. = list()
+	. += "<table>"
+	if(color_options)
+		. += "<tr><td>Color</td><td><a href='?src=\ref[src];color=\ref[src]'><font color = '[pipe_color]'>[pipe_color]</font></a></td></tr>"
+	for(var/category in pipe_categories)
+		var/datum/pipe/cat = category
+		. += "<tr><td><font color = '#517087'><strong>[initial(cat.category)]</strong></font></td></tr>"
+		for(var/datum/pipe/pipe in pipe_categories[category])
+			var/line = "[pipe.name]</td>"
+			. += "<tr><td>[line]<td><a href='?src=\ref[src];build=\ref[pipe]'>Dispense</a></td><td><a href='?src=\ref[src];buildfive=\ref[pipe]'>5x</a></td><td><a href='?src=\ref[src];buildten=\ref[pipe]'>10x</a></td></tr>"
+	.+= "</table>"
+	. = JOINTEXT(.)
+
+/obj/machinery/pipedispenser/proc/build_quantity(var/datum/pipe/P, var/quantity)
+	for(var/I = quantity;I > 0;I -= 1)
+		P.Build(P, loc, pipe_colors[pipe_color])
+		use_power_oneoff(500)
 
 /obj/machinery/pipedispenser/Topic(href, href_list)
-	if(..())
+	if((. = ..()))
 		return
-	if(unwrenched)
-		usr << browse(null, "window=pipedispenser")
-		return
-	usr.machine = src
-	src.add_fingerprint(usr)
-	if(href_list["make"])
-		if(!wait)
-			var/p_type = text2num(href_list["make"])
-			var/p_dir = text2num(href_list["dir"])
-			var/obj/item/pipe/P = new (/*usr.loc*/ src.loc, pipe_type=p_type, dir=p_dir)
-			P.update()
-			wait = 1
-			spawn(10)
-				wait = 0
-	if(href_list["makemeter"])
-		if(!wait)
-			new /obj/item/pipe_meter(/*usr.loc*/ src.loc)
-			wait = 1
-			spawn(15)
-				wait = 0
-	return
+	if(href_list["build"])
+		var/datum/pipe/P = locate(href_list["build"])
+		build_quantity(P, 1)
+	if(href_list["buildfive"])
+		var/datum/pipe/P = locate(href_list["buildfive"])
+		build_quantity(P, 5)
+	if(href_list["buildten"])
+		var/datum/pipe/P = locate(href_list["buildten"])
+		build_quantity(P, 10)
+	if(href_list["color"])
+		var/choice = input(usr, "What color do you want pipes to have?") as null|anything in pipe_colors
+		if(!choice)
+			return 1
+		pipe_color = choice
+		updateUsrDialog()
+
+/obj/machinery/pipedispenser/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/pipedispenser/interact(mob/user)
+	var/datum/browser/popup = new (user, "Pipe List", "[src] Control Panel")
+	popup.set_content(get_console_data(GLOB.all_pipe_datums_by_category, TRUE))
+	popup.open()
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
-		usr << "\blue You put [W] back to [src]."
-		del(W)
+		if(!user.unEquip(W))
+			return
+		to_chat(user, "<span class='notice'>You put \the [W] back into \the [src].</span>")
+		add_fingerprint(user)
+		qdel(W)
 		return
-	else if (istype(W, /obj/item/weapon/wrench))
-		if (unwrenched==0)
-			playsound(src.loc, 'Ratchet.ogg', 50, 1)
-			user << "\blue You begin to unfasten \the [src] from the floor..."
-			if (do_after(user, 40))
-				user.visible_message( \
-					"[user] unfastens \the [src].", \
-					"\blue You have unfastened \the [src]. Now it can be pulled somewhere else.", \
-					"You hear ratchet.")
-				src.anchored = 0
-				src.stat |= MAINT
-				src.unwrenched = 1
-				if (usr.machine==src)
-					usr << browse(null, "window=pipedispenser")
-		else /*if (unwrenched==1)*/
-			playsound(src.loc, 'Ratchet.ogg', 50, 1)
-			user << "\blue You begin to fasten \the [src] to the floor..."
-			if (do_after(user, 20))
-				user.visible_message( \
-					"[user] fastens \the [src].", \
-					"\blue You have fastened \the [src]. Now it can dispense pipes.", \
-					"You hear ratchet.")
-				src.anchored = 1
-				src.stat &= ~MAINT
-				src.unwrenched = 0
-				power_change()
-	else
-		return ..()
-
+	if(!panel_open)
+		if(isWrench(W))
+			add_fingerprint(user)
+			if(anchored)
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				to_chat(user, "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>")
+				if (do_after(user, 40, src))
+					user.visible_message( \
+						"<span class='notice'>\The [user] unfastens \the [src].</span>", \
+						"<span class='notice'>You have unfastened \the [src]. Now it can be pulled somewhere else.</span>", \
+						"You hear ratchet.")
+					anchored = 0
+					stat |= MAINT
+					update_use_power(POWER_USE_OFF)
+					if(user.machine==src)
+						user << browse(null, "window=pipedispenser")
+			else
+				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+				to_chat(user, "<span class='notice'>You begin to fasten \the [src] to the floor...</span>")
+				if (do_after(user, 20, src))
+					user.visible_message( \
+						"<span class='notice'>\The [user] fastens \the [src].</span>", \
+						"<span class='notice'>You have fastened \the [src]. Now it can dispense pipes.</span>", \
+						"You hear ratchet.")
+					anchored = 1
+					stat &= ~MAINT
+					update_use_power(POWER_USE_IDLE)
+			return
+	return ..()
 
 /obj/machinery/pipedispenser/disposal
 	name = "Disposal Pipe Dispenser"
-	icon = 'stationobjs.dmi'
+	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "pipe_d"
-	density = 1
-	anchored = 1.0
 
-
-/obj/machinery/pipedispenser/disposal/attack_hand(user as mob)
-	if(..())
+//Allow you to drag-drop disposal pipes into it
+/obj/machinery/pipedispenser/disposal/MouseDrop_T(var/obj/structure/disposalconstruct/pipe as obj, mob/user as mob)
+	if(!CanPhysicallyInteract(user))
 		return
 
-	var/dat = {"<b>Disposal Pipes</b><br><br>
-<A href='?src=\ref[src];dmake=0'>Pipe</A><BR>
-<A href='?src=\ref[src];dmake=1'>Bent Pipe</A><BR>
-<A href='?src=\ref[src];dmake=2'>Junction</A><BR>
-<A href='?src=\ref[src];dmake=3'>Y-Junction</A><BR>
-<A href='?src=\ref[src];dmake=4'>Trunk</A><BR>
-<A href='?src=\ref[src];dmake=5'>Sort Junction 1</A><BR>
-<A href='?src=\ref[src];dmake=6'>Sort Junction 2</A><BR>
-"}
-
-	user << browse("<HEAD><TITLE>[src]</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
-	return
-
-// 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk
-
-
-/obj/machinery/pipedispenser/disposal/Topic(href, href_list)
-	if(..())
+	if (!istype(pipe) || get_dist(src,pipe) > 1 )
 		return
-	usr.machine = src
-	src.add_fingerprint(usr)
-	if(href_list["dmake"])
-		if(!wait)
-			var/p_type = text2num(href_list["dmake"])
-			var/obj/structure/disposalconstruct/C = new (src.loc)
-			switch(p_type)
-				if(0)
-					C.ptype = 0
-				if(1)
-					C.ptype = 1
-				if(2)
-					C.ptype = 2
-				if(3)
-					C.ptype = 4
-				if(4)
-					C.ptype = 5
-				if(5)
-					C.ptype = 6
-				if(6)
-					C.ptype = 7
 
-			C.update()
-			wait = 1
-			spawn(15)
-				wait = 0
-	return
+	if (pipe.anchored)
+		return
 
+	qdel(pipe)
+
+/obj/machinery/pipedispenser/disposal/interact(mob/user)
+	var/datum/browser/popup = new (user, "Disposal Pipe List", "[src] Control Panel")
+	popup.set_content(get_console_data(GLOB.all_disposal_pipe_datums_by_category))
+	popup.open()

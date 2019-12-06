@@ -10,13 +10,16 @@
 		..()
 		events = new
 
-	proc/addEventType(event_type)
+	proc/addEventType(event_type as text)
 		if(!(event_type in events) || !islist(events[event_type]))
 			events[event_type] = list()
 			return 1
 		return
 
-	proc/addEvent(event_type,proc_holder,proc_name)
+
+	//	Arguments: event_type as text, proc_holder as datum, proc_name as text
+	//	Returns: New event, null on error.
+	proc/addEvent(event_type as text, proc_holder, proc_name as text)
 		if(!event_type || !proc_holder || !proc_name)
 			return
 		addEventType(event_type)
@@ -25,8 +28,11 @@
 		event += E
 		return E
 
+	//  Arguments: event_type as text, any number of additional arguments to pass to event handler
+	//  Returns: null
 	proc/fireEvent()
-		//world << "Events in [args[1]] called"
+//		log_debug("Events in [args[1]] called")
+
 		var/list/event = listgetindex(events,args[1])
 		if(istype(event))
 			spawn(-1)
@@ -35,7 +41,9 @@
 						clearEvent(args[1],E)
 		return
 
-	proc/clearEvent(event_type,datum/event/E)
+	// Arguments: event_type as text, E as /datum/event
+	// Returns: 1 if event cleared, null on error
+	proc/clearEvent(event_type as text, datum/event/E)
 		if(!event_type || !E)
 			return
 		var/list/event = listgetindex(events,event_type)
@@ -53,7 +61,8 @@
 		return ..()
 
 	proc/Fire()
-		//world << "Event fired"
+//		log_debug("Event fired")
+
 		if(listener)
 			call(listener,proc_name)(arglist(args))
 			return 1

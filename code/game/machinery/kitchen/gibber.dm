@@ -1,95 +1,131 @@
 
 /obj/machinery/gibber
-	name = "Gibber"
+	name = "meat grinder"
 	desc = "The name isn't descriptive enough?"
-	icon = 'kitchen.dmi'
+	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "grinder"
 	density = 1
 	anchored = 1
-	var/operating = 0 //Is it on?
-	var/dirty = 0 // Does it need cleaning?
-	var/gibtime = 40 // Time from starting until meat appears
-	var/mob/living/occupant // Mob who has been put inside
-	use_power = 1
+	req_access = list(access_kitchen,access_morgue)
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+
+	var/operating = 0        //Is it on?
+	var/dirty = 0            // Does it need cleaning?
+	var/mob/living/occupant  // Mob who has been put inside
+	var/gib_time = 40        // Time from starting until meat appears
+	var/gib_throw_dir = WEST // Direction to spit meat and gibs in.
+
 	idle_power_usage = 2
 	active_power_usage = 500
 
-/obj/machinery/gibber/New()
-	..()
-	src.overlays += image('kitchen.dmi', "grjam")
+/obj/machinery/gibber/Initialize()
+	. = ..()
+	update_icon()
 
-/obj/machinery/gibber/update_icon()
-	overlays = null
+/obj/machinery/gibber/Destroy()
+	if(occupant)
+		occupant.dropInto(loc)
+		occupant = null
+	. = ..()
+
+/obj/machinery/gibber/on_update_icon()
+	overlays.Cut()
 	if (dirty)
-		src.overlays += image('kitchen.dmi', "grbloody")
+		src.overlays += image('icons/obj/kitchen.dmi', "grbloody")
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if (!occupant)
-		src.overlays += image('kitchen.dmi', "grjam")
+		src.overlays += image('icons/obj/kitchen.dmi', "grjam")
 	else if (operating)
-		src.overlays += image('kitchen.dmi', "gruse")
+		src.overlays += image('icons/obj/kitchen.dmi', "gruse")
 	else
-		src.overlays += image('kitchen.dmi', "gridle")
-
-/obj/machinery/gibber/attack_paw(mob/user as mob)
-	return src.attack_hand(user)
+		src.overlays += image('icons/obj/kitchen.dmi', "gridle")
 
 /obj/machinery/gibber/relaymove(mob/user as mob)
 	src.go_out()
 	return
 
-/obj/machinery/gibber/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/gibber/physical_attack_hand(mob/user)
 	if(operating)
-		user << "\red It's locked and running"
-		return
-	else
-		src.startgibbing(user)
+		to_chat(user, "<span class='danger'>\The [src] is locked and running, wait for it to finish.</span>")
+		return TRUE
+	src.startgibbing(user)
+	return TRUE
 
-/obj/machinery/gibber/attackby(obj/item/weapon/grab/G as obj, mob/user as mob)
-	if(istype(G,/obj/item/weapon/card/emag))
-		var/obj/item/weapon/card/emag/E = G
-		if(E.uses)
-			E.uses--
-		else
-			return
-		user.visible_message( \
-			"\red [user] swipes a strange card through \the [src]'s control panel!", \
-			"\red You swipe a strange card through \the [src]'s control panel!", \
-			"You hear a scratchy sound.")
-		emagged = 1
+/obj/machinery/gibber/examine(mob/user)
+	. = ..()
+	to_chat(user, "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"].")
+
+/obj/machinery/gibber/emag_act(var/remaining_charges, var/mob/user)
+	emagged = !emagged
+	to_chat(user, "<span class='danger'>You [emagged ? "disable" : "enable"] \the [src]'s safety guard.</span>")
+	return 1
+
+/obj/machinery/gibber/components_are_accessible(path)
+	return !operating && ..()	
+
+/obj/machinery/gibber/cannot_transition_to(state_path, mob/user)
+	if(operating)
+		return SPAN_NOTICE("You must wait for \the [src] to finish operating first!")
+	return ..()	
+
+/obj/machinery/gibber/attackby(var/obj/item/W, var/mob/user)
+	if(!operating)
 		return
+	if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
+		if(!G.force_danger())
+			to_chat(user, "<span class='danger'>You need a better grip to do that!</span>")
+			return
+		qdel(G)
+		move_into_gibber(user,G.affecting)
+	else if(istype(W, /obj/item/organ))
+		if(!user.unEquip(W))
+			return
+		qdel(W)
+		user.visible_message("<span class='danger'>\The [user] feeds \the [W] into \the [src], obliterating it.</span>")
+	else
+		return ..()
+
+/obj/machinery/gibber/MouseDrop_T(mob/target, mob/user)
+	if(user.stat || user.restrained())
+		return
+	move_into_gibber(user,target)
+
+/obj/machinery/gibber/proc/move_into_gibber(var/mob/user,var/mob/living/victim)
 
 	if(src.occupant)
-		user << "\red \The [src] is full, empty it first!"
+		to_chat(user, "<span class='danger'>\The [src] is full, empty it first!</span>")
 		return
-	if (!istype(G, /obj/item/weapon/grab))
-		user << "\red This item is not suitable for \the [src]!"
-		return
-	if(istype(G.affecting, /mob/living/carbon/human))
-		if(!emagged)
-			user << "\red \The [src] buzzes and spits [G.affecting] back out."
-			return
-		if(G.affecting.abiotic(1))
-			user << "\red Subject may not have abiotic items on."
-			return
-	else if(istype(G.affecting, /mob/living/carbon/monkey) || istype(G.affecting, /mob/living/carbon/alien) || istype(G.affecting, /mob/living/simple_animal))
-		// do nothing special
-	else
-		user << "\red This item is not suitable for \the [src]!"
 
-	user.visible_message("\red [user] starts to put [G.affecting] into \the [src]!")
+	if(operating)
+		to_chat(user, "<span class='danger'>\The [src] is locked and running, wait for it to finish.</span>")
+		return
+
+	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_animal)) )
+		to_chat(user, "<span class='danger'>This is not suitable for \the [src]!</span>")
+		return
+
+	if(istype(victim,/mob/living/carbon/human) && !emagged)
+		to_chat(user, "<span class='danger'>\The [src] safety guard is engaged!</span>")
+		return
+
+
+	if(victim.abiotic(1))
+		to_chat(user, "<span class='danger'>\The [victim] may not have any abiotic items on.</span>")
+		return
+
+	user.visible_message("<span class='danger'>\The [user] starts to put \the [victim] into \the [src]!</span>")
 	src.add_fingerprint(user)
-	if(do_after(user, 30) && G && G.affecting && !occupant)
-		user.visible_message("\red [user] stuffs [G.affecting] into \the [src]!")
-		var/mob/M = G.affecting
-		if(M.client)
-			M.client.perspective = EYE_PERSPECTIVE
-			M.client.eye = src
-		M.loc = src
-		src.occupant = M
-		del(G)
+	if(do_after(user, 30, src) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
+		user.visible_message("<span class='danger'>\The [user] stuffs \the [victim] into \the [src]!</span>")
+		if(victim.client)
+			victim.client.perspective = EYE_PERSPECTIVE
+			victim.client.eye = src
+		victim.forceMove(src)
+		src.occupant = victim
 		update_icon()
 
 /obj/machinery/gibber/verb/eject()
@@ -104,101 +140,80 @@
 	return
 
 /obj/machinery/gibber/proc/go_out()
-	if (!src.occupant)
+	if(operating || !src.occupant)
 		return
-	for(var/obj/O in src)
-		O.loc = src.loc
+	for(var/obj/O in (contents - component_parts))
+		O.dropInto(loc)
 	if (src.occupant.client)
 		src.occupant.client.eye = src.occupant.client.mob
 		src.occupant.client.perspective = MOB_PERSPECTIVE
-	src.occupant.loc = src.loc
+	src.occupant.dropInto(loc)
 	src.occupant = null
 	update_icon()
 	return
-
 
 /obj/machinery/gibber/proc/startgibbing(mob/user as mob)
 	if(src.operating)
 		return
 	if(!src.occupant)
-		for(var/mob/M in viewers(src, null))
-			M.show_message("\red You hear a loud metallic grinding sound.", 1)
+		visible_message("<span class='danger'>You hear a loud metallic grinding sound.</span>")
 		return
-	use_power(1000)
-	for(var/mob/M in viewers(src, null))
-		M.show_message("\red You hear a loud squelchy grinding sound.", 1)
+
+	use_power_oneoff(1000)
+	visible_message("<span class='danger'>You hear a loud [occupant.isSynthetic() ? "metallic" : "squelchy"] grinding sound.</span>")
 	src.operating = 1
 	update_icon()
 
-	var/list/obj/item/weapon/reagent_containers/food/snacks/allmeat = new()
-
-	if(istype(occupant,/mob/living/carbon/human))
-		var/sourcename = src.occupant.real_name
-		var/sourcejob = src.occupant.job
-		var/sourcenutriment = src.occupant.nutrition / 15
-		var/sourcetotalreagents = src.occupant.reagents.total_volume
-		var/totalslabs = 8
-
-		for (var/i=1 to totalslabs)
-			var/obj/item/weapon/reagent_containers/food/snacks/sliceable/meat/human/newmeat = new()
-			newmeat.name = sourcename + newmeat.name
-			newmeat.subjectname = sourcename
-			newmeat.subjectjob = sourcejob
-			newmeat.reagents.add_reagent("nutriment", sourcenutriment / totalslabs) // Thehehe. Fat guys go first
-			src.occupant.reagents.trans_to(newmeat, round(sourcetotalreagents / totalslabs, 1)) // Transfer all the reagents from the
-			allmeat += newmeat
-	else if(istype(occupant,/mob/living/carbon/monkey))
-		var/sourcename = src.occupant.real_name
-		var/sourcenutriment = src.occupant.nutrition / 15
-		var/sourcetotalreagents = src.occupant.reagents.total_volume
-		var/totalslabs = 5
-
-		for (var/i=1 to totalslabs)
-			var/obj/item/weapon/reagent_containers/food/snacks/sliceable/meat/monkey/newmeat = new()
-			newmeat.name = sourcename + newmeat.name
-			newmeat.reagents.add_reagent("nutriment", sourcenutriment / totalslabs) // Thehehe. Fat guys go first
-			src.occupant.reagents.trans_to(newmeat, round(sourcetotalreagents / totalslabs, 1)) // Transfer all the reagents from the
-			allmeat += newmeat
-	else if(istype(occupant,/mob/living/carbon/alien))
-		var/sourcename = src.occupant.real_name
-		var/sourcenutriment = src.occupant.nutrition / 15
-		var/sourcetotalreagents = src.occupant.reagents.total_volume
-		var/totalslabs = 5
-
-		for (var/i=1 to totalslabs)
-			var/obj/item/weapon/reagent_containers/food/snacks/xenomeat/newmeat = new()
-			newmeat.name = sourcename + newmeat.name
-			newmeat.reagents.add_reagent("nutriment", sourcenutriment / totalslabs) // Thehehe. Fat guys go first
-			src.occupant.reagents.trans_to(newmeat, round(sourcetotalreagents / totalslabs, 1)) // Transfer all the reagents from the
-			allmeat += newmeat
-	else if(istype(occupant,/mob/living/simple_animal))
-		var/sourcenutriment = src.occupant.nutrition / 15
-		var/totalslabs = occupant:meat_amount
-
-		for (var/i=1 to totalslabs)
-			var/obj/item/weapon/reagent_containers/food/snacks/newmeat = new occupant:meat_type()
-			newmeat.reagents.add_reagent("nutriment", sourcenutriment / totalslabs) // Thehehe. Fat guys go first
-			allmeat += newmeat
-
-	for (var/mob/M in world)
-		if (M.client && M.client.holder && (M.client.holder.level != -3))
-			M << "\red [user.name]/[user.ckey] has gibbed [src.occupant.name]/[src.occupant.ckey]"
-	src.occupant.death(1)
+	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
 	src.occupant.ghostize()
-	del(src.occupant)
-	spawn(src.gibtime)
-		playsound(src.loc, 'splat.ogg', 50, 1)
-		operating = 0
-		var/iterator = 0
-		for (var/i=1 to allmeat.len)
-			var/obj/item/meatslab = allmeat[i]
-			var/turf/Tx = locate(src.x - i + iterator, src.y, src.z)
-			if(Tx.density)
-				iterator += 1
-				Tx = locate(src.x - i + iterator, src.y, src.z)
-			meatslab.loc = src.loc
-			meatslab.throw_at(Tx,i,3)
-			if (!Tx.density)
-				new /obj/effect/decal/cleanable/blood/gibs(Tx,i + iterator)
-		src.operating = 0
-		update_icon()
+	addtimer(CALLBACK(src, .proc/finish_gibbing), gib_time)
+
+	var/list/gib_products = shuffle(occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones())
+	if(length(gib_products) <= 0)
+		return
+
+	var/slab_name =  occupant.name
+	var/slab_nutrition = 20
+
+	if(iscarbon(occupant))
+		var/mob/living/carbon/C = occupant
+		slab_nutrition = C.nutrition / 15
+
+	if(istype(occupant, /mob/living/carbon/human))
+		slab_name = occupant.real_name
+
+	// Small mobs don't give as much nutrition.
+	if(issmall(src.occupant))
+		slab_nutrition *= 0.5
+
+	slab_nutrition /= gib_products.len
+
+	var/drop_products = Floor(gib_products.len * 0.35)
+	for(var/atom/movable/thing in gib_products)
+		if(drop_products)
+			drop_products--
+			qdel(thing)
+		else
+			thing.forceMove(src)
+			if(istype(thing, /obj/item/weapon/reagent_containers/food/snacks/meat))
+				var/obj/item/weapon/reagent_containers/food/snacks/meat/slab = thing
+				slab.SetName("[slab_name] [slab.name]")
+				slab.reagents.add_reagent(/datum/reagent/nutriment,slab_nutrition)
+
+/obj/machinery/gibber/proc/finish_gibbing()
+	operating = 0
+	if(QDELETED(occupant))
+		occupant = null
+		return
+	occupant.gib()
+	qdel(occupant)
+
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+	for (var/obj/thing in (contents - component_parts))
+		// There's a chance that the gibber will fail to destroy some evidence.
+		if(istype(thing,/obj/item/organ) && prob(80))
+			qdel(thing)
+			continue
+		thing.dropInto(loc) // Attempts to drop it onto the turf for throwing.
+		thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
+	update_icon()

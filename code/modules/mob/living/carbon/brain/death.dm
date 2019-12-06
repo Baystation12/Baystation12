@@ -1,42 +1,14 @@
 /mob/living/carbon/brain/death(gibbed)
-	if(!gibbed && container)//If not gibbed but in a container.
-		for(var/mob/O in viewers(container, null))
-			O.show_message(text("\red <B>[]'s MMI flatlines!</B>", src), 1, "\red You hear something flatline.", 2)
+	if(!gibbed && istype(container, /obj/item/device/mmi)) //If not gibbed but in a container.
 		container.icon_state = "mmi_dead"
-	stat = 2
+		return ..(gibbed,"beeps shrilly as the MMI flatlines!")
+	else
+		return ..(gibbed,"no message")
 
-	if(blind)
-		blind.layer = 0
-	sight |= SEE_TURFS
-	sight |= SEE_MOBS
-	sight |= SEE_OBJS
-
-	see_in_dark = 8
-	see_invisible = 2
-
-	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
-	var/cancel
-	store_memory("Time of death: [tod]", 0)
-
-	for(var/mob/M in world)
-		if ((M.client && !( M.stat )))
-			cancel = 1
-			break
-	if (!( cancel ))
-		world << "<B>Everyone is dead! Resetting in 30 seconds!</B>"
-
-		feedback_set_details("end_error","no live players")
-		feedback_set_details("round_end","[time2text(world.realtime)]")
-		if(blackbox)
-			blackbox.save_all_data_to_sql()
-
-		spawn( 300 )
-			log_game("Rebooting because of no live players")
-			world.Reboot()
-			return
-	if (key)
-		spawn(50)
-			if(key && stat == 2)
-				src << "You are now dead. If you cannot ghost at this point, relog into the game."
-				verbs += /mob/proc/ghost
-	return ..(gibbed)
+/mob/living/carbon/brain/gib()
+	if(istype(container, /obj/item/device/mmi))
+		qdel(container)//Gets rid of the MMI if there is one
+	if(loc)
+		if(istype(loc,/obj/item/organ/internal/brain))
+			qdel(loc)//Gets rid of the brain item
+	..(null,1)

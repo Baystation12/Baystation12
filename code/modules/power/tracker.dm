@@ -6,44 +6,77 @@
 /obj/machinery/power/tracker
 	name = "solar tracker"
 	desc = "A solar directional tracker."
-	icon = 'power.dmi'
+	icon = 'icons/obj/power.dmi'
 	icon_state = "tracker"
 	anchored = 1
 	density = 1
-	directwired = 1
 
+	var/id = 0
 	var/sun_angle = 0		// sun angle as set by sun datum
+	var/obj/machinery/power/solar_control/control = null
 
+/obj/machinery/power/tracker/New(var/turf/loc, var/obj/item/solar_assembly/S)
+	..(loc)
+	Make(S)
+	connect_to_network()
 
-	// called by datum/sun/calc_position() as sun's angle changes
-	proc/set_angle(angle)
+/obj/machinery/power/tracker/Destroy()
+	unset_control() //remove from control computer
+	..()
 
-		//set icon dir to show sun illumination
-		dir = turn(NORTH, -angle - 22.5)	// 22.5 deg bias ensures, e.g. 67.5-112.5 is EAST
+//set the control of the tracker to a given computer if closer than SOLAR_MAX_DIST
+/obj/machinery/power/tracker/proc/set_control(var/obj/machinery/power/solar_control/SC)
+	if(SC && (get_dist(src, SC) > SOLAR_MAX_DIST))
+		return 0
+	control = SC
+	return 1
 
-		// check we can draw power
-		if(stat & NOPOWER)
-			return
+//set the control of the tracker to null and removes it from the previous control computer if needed
+/obj/machinery/power/tracker/proc/unset_control()
+	if(control)
+		control.connected_tracker = null
+	control = null
 
-		// find all solar controls and update them
-		// currently, just update all controllers in world
-		// ***TODO: better communication system using network
-		if(powernet)
-			for(var/obj/machinery/power/solar_control/C in powernet.nodes)
-				C.tracker_update(angle)
+/obj/machinery/power/tracker/proc/Make(var/obj/item/solar_assembly/S)
+	if(!S)
+		S = new /obj/item/solar_assembly(src)
+		S.glass_type = /obj/item/stack/material/glass
+		S.tracker = 1
+		S.anchored = 1
+	S.forceMove(src)
+	update_icon()
 
+//updates the tracker icon and the facing angle for the control computer
+/obj/machinery/power/tracker/proc/set_angle(var/angle)
+	sun_angle = angle
 
-	// timed process
-	// make sure we can draw power from the powernet
-	process()
-		var/avail = surplus()
+	//set icon dir to show sun illumination
+	set_dir(turn(NORTH, -angle - 22.5))	// 22.5 deg bias ensures, e.g. 67.5-112.5 is EAST
 
-		if(avail > 500)
-			add_load(500)
-			stat &= ~NOPOWER
-		else
-			stat |= NOPOWER
+	if(powernet && (powernet == control.powernet)) //update if we're still in the same powernet
+		control.cdir = angle
 
-	// override power change to do nothing since we don't care about area power
-	power_change()
+/obj/machinery/power/tracker/attackby(var/obj/item/weapon/W, var/mob/user)
+
+	if(isCrowbar(W))
+		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar tracker.</span>")
+		if(do_after(user, 50,src))
+			var/obj/item/solar_assembly/S = locate() in src
+			if(S)
+				S.dropInto(loc)
+				S.give_glass()
+			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			user.visible_message("<span class='notice'>[user] takes the glass off the tracker.</span>")
+			qdel(src)
 		return
+	..()
+
+// Tracker Electronic
+
+/obj/item/weapon/tracker_electronics
+
+	name = "tracker electronics"
+	icon = 'icons/obj/doors/door_assembly.dmi'
+	icon_state = "door_electronics"
+	w_class = ITEM_SIZE_SMALL

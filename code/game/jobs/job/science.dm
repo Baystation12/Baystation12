@@ -1,64 +1,71 @@
 /datum/job/rd
-	title = "Research Director"
-	flag = RD
-	department_flag = MEDSCI
-	faction = "Station"
+	title = "Chief Science Officer"
+	head_position = 1
+	department = "Science"
+	department_flag = COM|SCI
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/heads/rd(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/clothing/shoes/brown(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/research_director(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/device/pda/heads/rd(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/weapon/clipboard(H), H.slot_l_store)
-		return 1
-
-
+	selection_color = "#ad6bad"
+	req_admin_notify = 1
+	economic_power = 15
+	access = list(access_rd, access_bridge, access_tox, access_morgue,
+			            access_tox_storage, access_teleporter, access_sec_doors, access_heads,
+			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
+			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
+	minimal_access = list(access_rd, access_bridge, access_tox, access_morgue,
+			            access_tox_storage, access_teleporter, access_sec_doors, access_heads,
+			            access_research, access_robotics, access_xenobiology, access_ai_upload, access_tech_storage,
+			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
+	minimal_player_age = 14
+	ideal_character_age = 50
+	outfit_type = /decl/hierarchy/outfit/job/science/rd
 
 /datum/job/scientist
 	title = "Scientist"
-	flag = SCIENTIST
-	department_flag = MEDSCI
-	faction = "Station"
+	department = "Science"
+	department_flag = SCI
+
 	total_positions = 5
 	spawn_positions = 3
-	supervisors = "the research director"
-	alt_titles = list("Plasma Researcher", "Xenobiologist")
+	supervisors = "the Chief Science Officer"
+	selection_color = "#633d63"
+	economic_power = 7
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenoarch)
+	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
+	alt_titles = list("Xenoarcheologist", "Anomalist", "Phoron Researcher")
+	minimal_player_age = 7
+	outfit_type = /decl/hierarchy/outfit/job/science/scientist
 
+/datum/job/xenobiologist
+	title = "Xenobiologist"
+	department = "Science"
+	department_flag = SCI
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_sci(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/scientist(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/white(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/toxins(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat/science(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/mask/gas(H), H.slot_wear_mask)
-		H.equip_if_possible(new /obj/item/weapon/tank/oxygen(H), H.slot_l_hand)
-		return 1
+	total_positions = 3
+	spawn_positions = 2
+	supervisors = "the Chief Science Officer"
+	selection_color = "#633d63"
+	economic_power = 7
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
+	minimal_access = list(access_research, access_xenobiology, access_hydroponics)
+	alt_titles = list("Xenobotanist")
+	minimal_player_age = 7
+	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
 
+/datum/job/roboticist
+	title = "Roboticist"
+	department = "Science"
+	department_flag = SCI
 
-
-/datum/job/chemist
-	title = "Chemist"
-	flag = CHEMIST
-	department_flag = MEDSCI
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the chief medical officer and the research director"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_medsci(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/chemist(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/white(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/toxins(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat/chemist(H), H.slot_wear_suit)
-		return 1
+	total_positions = 2
+	spawn_positions = 2
+	supervisors = "the Chief Science Officer"
+	selection_color = "#633d63"
+	economic_power = 5
+	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
+	alt_titles = list("Biomechanical Engineer","Mechatronic Engineer")
+	minimal_player_age = 3
+	outfit_type = /decl/hierarchy/outfit/job/science/roboticist

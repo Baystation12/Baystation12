@@ -1,0 +1,55 @@
+<center><h2>Skills for {{:data.name}}</h2></center>
+<h3>Current assignment: {{:data.job}}</h3>
+{{if data.can_choose}}
+	<h3>Choose extra skills:</h3>
+	{{for data.selection_data}}
+		<div class='item'>
+			<div class = 'itemLabel'>
+				{{:value.name}}
+			</div>
+			<div class = 'itemContent'>
+				Remaining: {{:value.remaining}}
+			</div>
+		</div>
+		<div class='block'>
+			{{for value.selected :selected_value:selected_key}}
+				{{:helper.link(selected_value.name, null, {'remove_skill' : selected_value.ref})}}<br><br>
+			{{/for}}
+		</div>	
+		{{:helper.link("Add", null, {'add_skill' : value.level}, value.remaining ? null : 'disabled')}}
+	{{/for}}
+	<br><br>
+	{{:helper.link("Submit selection", null, {'submit' : 1})}}
+{{else}}
+	<h3>You may not reselect your skills.</h3>
+	{{:helper.link("Ask admins for a reset", null, {'admin_reset' : 1})}}
+{{/if}}
+<center><h2>Current Skills</h2></center>
+<table style="width:100%">
+{{for data.skills_by_cat}}
+	<tr>
+	<th>
+		{{:value.name}}
+	</th>
+	</tr>
+	{{for value.skills :skill_value:skill_key}}
+		<tr>
+		<td>
+		<div class="itemLabel">
+			{{:skill_value.name}}:
+		</div>
+		</td>
+		{{for skill_value.levels :level_value:level_key}}
+			<td>
+			{{if !level_value.blank}}
+			<div class={{if level_value.selected}}'selected'{{else}}'null'{{/if}}>
+				{{:level_value.name}}
+			</div>
+			{{/if}}
+			</td>
+		{{/for}}
+		</tr>
+	{{/for}}
+{{/for}}
+</table>
+

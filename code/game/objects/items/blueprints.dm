@@ -1,4 +1,9 @@
 /obj/item/blueprints
+	name = "blueprints"
+	desc = "Blueprints..."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "blueprints"
+	attack_verb = list("attacked", "bapped", "hit")
 	var/const/AREA_ERRNONE = 0
 	var/const/AREA_STATION = 1
 	var/const/AREA_SPACE =   2
@@ -14,19 +19,21 @@
 	var/const/ROOM_ERR_SPACE = -1
 	var/const/ROOM_ERR_TOOLARGE = -2
 
+/obj/item/blueprints/Initialize()
+	. = ..()
+	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
+
 /obj/item/blueprints/attack_self(mob/M as mob)
 	if (!istype(M,/mob/living/carbon/human))
-		M << "This is stack of useless pieces of harsh paper." //monkeys cannot into projecting
+		to_chat(M, "This stack of blue paper means nothing to you.")//monkeys cannot into projecting
+
 		return
 	interact()
-	return
 
-/obj/item/blueprints/Topic(href, href_list)
-	..()
-	if ((usr.restrained() || usr.stat || usr.equipped() != src))
-		return
-	if (!href_list["action"])
-		return
+/obj/item/blueprints/DefaultTopicState()
+	return GLOB.physical_state
+
+/obj/item/blueprints/OnTopic(user, href_list)
 	switch(href_list["action"])
 		if ("create_area")
 			if (get_area_type()!=AREA_SPACE)
@@ -38,139 +45,115 @@
 				interact()
 				return
 			edit_area()
+		if ("delete_area")
+			//skip the sanity checking, delete_area() does it anyway
+			delete_area()
 
-/obj/item/blueprints/proc/interact()
-	var/area/A = get_area()
-	var/text = {"<HTML><head><title>[src]</title></head><BODY>
-<h2>[station_name()] blueprints</h2>
-<small>Property of Nanotrasen. For heads of staff only. Store in high-secure storage.</small><hr>
-"}
-	switch (get_area_type())
+/obj/item/blueprints/proc/get_header()
+	return "<h2>[station_name()] blueprints</h2><small>Property of [GLOB.using_map.company_name]. For heads of staff only. Store in high-secure storage.</small><hr>"
+
+/obj/item/blueprints/interact()
+	var/area/A = get_area(src)
+	var/list/dat =  list(get_header())
+
+	switch (get_area_type(A))
 		if (AREA_SPACE)
-			text += {"
-<p>According this blueprints you are in <b>open space</b> now.</p>
-<p><a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a></p>
-"}
+			dat += "According \the [src], you are now <b>outside the facility</b>."
+			dat += "<a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a>"
 		if (AREA_STATION)
-			text += {"
-<p>According this blueprints you are in <b>[A.name]</b> now.</p>
-<p>You may <a href='?src=\ref[src];action=edit_area'>
-move an amendment</a> to the drawing.</p>
-"}
-		if (AREA_SPECIAL)
-			text += {"
-<p>This place doesn't noted on this blueprints.</p>
-"}
+			dat += "According \the [src], you are now in <b>\"[A.name]\"</b>."
+			dat += "You may <a href='?src=\ref[src];action=edit_area'> move an amendment</a> to the drawing."
+			if (A.apc)
+				dat += "You can't erase this area, because it has an APC.</p>"
+			else
+				dat += "You <a href='?src=\ref[src];action=delete_area'>erase a part of it</a>.</p>"
 		else
-			return
-	text += "</BODY></HTML>"
-	usr << browse(text, "window=blueprints")
-	onclose(usr, "blueprints")
+			dat += "This place isn't noted on \the [src]."
+	var/datum/browser/popup = new(usr, "blueprints", name, 290, 300)
+	popup.set_content(jointext(dat, "<br>"))
+	popup.open()
 
-
-/obj/item/blueprints/proc/get_area()
-	var/turf/T = get_turf_loc(usr)
-	var/area/A = T.loc
-	A = A.master
-	return A
-
-/obj/item/blueprints/proc/get_area_type(var/area/A = get_area())
-	if (A.name == "Space")
+/obj/item/blueprints/proc/get_area_type(var/area/A = get_area(src))
+	if(istype(A, /area/space))
 		return AREA_SPACE
-	var/list/SPECIALS = list(
-		/area/shuttle,
-		/area/admin,
-		/area/arrival,
-		/area/centcom,
-		/area/asteroid,
-		/area/tdome,
-		/area/syndicate_station,
-		/area/wizard_station,
-		/area/prison
-		// /area/derelict //commented out, all hail derelict-rebuilders!
-	)
-	for (var/type in SPECIALS)
-		if ( istype(A,type) )
-			return AREA_SPECIAL
-	return AREA_STATION
+
+	if(A.z in GLOB.using_map.station_levels)
+		return AREA_STATION
+
+	return AREA_SPECIAL
 
 /obj/item/blueprints/proc/create_area()
-	//world << "DEBUG: create_area"
-	var/res = detect_room(get_turf_loc(usr))
+//	log_debug("create_area")
+
+	var/res = detect_room(get_turf(usr))
 	if(!istype(res,/list))
 		switch(res)
 			if(ROOM_ERR_SPACE)
-				usr << "\red New area must be complete airtight!"
+				to_chat(usr, "<span class='warning'>The new area must be completely airtight!</span>")
 				return
 			if(ROOM_ERR_TOOLARGE)
-				usr << "\red New area too large!"
+				to_chat(usr, "<span class='warning'>The new area too large!</span>")
 				return
 			else
-				usr << "\red Error! Please notify administration!"
+				to_chat(usr, "<span class='warning'>Error! Please notify administration!</span>")
 				return
 	var/list/turf/turfs = res
-	var/str = sanitize(trim(input(usr,"New area title","Blueprints editing")))
+	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", ""), MAX_NAME_LEN)
 	if(!str || !length(str)) //cancel
 		return
 	if(length(str) > 50)
-		usr << "\red Text too long."
+		to_chat(usr, "<span class='warning'>Name too long.</span>")
 		return
 	var/area/A = new
-	A.name = str
-	A.tag="[A.type]_[md5(str)]" // without this dynamic light system ruin everithing
-	//var/ma
-	//ma = A.master ? "[A.master]" : "(null)"
-	//world << "DEBUG: create_area: <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]"
+	A.SetName(str)
 	A.power_equip = 0
 	A.power_light = 0
 	A.power_environ = 0
-	move_turfs_to_area(turfs, A)
-	spawn(5)
-		//ma = A.master ? "[A.master]" : "(null)"
-		//world << "DEBUG: create_area(5): <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]"
-		interact()
-	return
-
-
-/obj/item/blueprints/proc/move_turfs_to_area(var/list/turf/turfs, var/area/A)
-	A.contents.Add(turfs)
-		//oldarea.contents.Remove(usr.loc) // not needed
-		//T.loc = A //error: cannot change constant value
-
+	A.always_unpowered = 0
+	for(var/T in turfs)
+		ChangeArea(T, A)
+	A.always_unpowered = 0
+	interact()
 
 /obj/item/blueprints/proc/edit_area()
-	var/area/A = get_area()
-	//world << "DEBUG: edit_area"
+	var/area/A = get_area(src)
+
 	var/prevname = A.name
-	var/str = sanitize(trim(input(usr,"New area title","Blueprints editing",prevname)))
+	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", prevname), MAX_NAME_LEN)
 	if(!str || !length(str) || str==prevname) //cancel
 		return
 	if(length(str) > 50)
-		usr << "\red Text too long."
+		to_chat(usr, "<span class='warning'>Text too long.</span>")
 		return
 	set_area_machinery_title(A,str,prevname)
-	for(var/area/RA in A.related)
-		RA.name = str
-	usr << "\blue You set the area '[prevname]' title to '[str]'."
+	A.SetName(str)
+	to_chat(usr, "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>")
 	interact()
-	return
 
-
+/obj/item/blueprints/proc/delete_area()
+	var/area/A = get_area(src)
+	if (get_area_type(A)!=AREA_STATION || A.apc) //let's just check this one last time, just in case
+		interact()
+		return
+	to_chat(usr, "<span class='notice'>You scrub [A.name] off the blueprint.</span>")
+	log_and_message_admins("deleted area [A.name] via station blueprints.")
+	qdel(A)
+	interact()
 
 /obj/item/blueprints/proc/set_area_machinery_title(var/area/A,var/title,var/oldtitle)
-	if (!oldtitle) // or dd_replacetext goes to infinite loop
+	if (!oldtitle) // or replacetext goes to infinite loop
 		return
-	for(var/area/RA in A.related)
-		for(var/obj/machinery/alarm/M in RA)
-			M.name = dd_replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/power/apc/M in RA)
-			M.name = dd_replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/atmospherics/unary/vent_scrubber/M in RA)
-			M.name = dd_replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/atmospherics/unary/vent_pump/M in RA)
-			M.name = dd_replacetext(M.name,oldtitle,title)
-		for(var/obj/machinery/door/M in RA)
-			M.name = dd_replacetext(M.name,oldtitle,title)
+
+	for(var/obj/machinery/alarm/M in A)
+		M.SetName(replacetext(M.name,oldtitle,title))
+	for(var/obj/machinery/power/apc/M in A)
+		M.SetName(replacetext(M.name,oldtitle,title))
+	for(var/obj/machinery/atmospherics/unary/vent_scrubber/M in A)
+		M.SetName(replacetext(M.name,oldtitle,title))
+	for(var/obj/machinery/atmospherics/unary/vent_pump/M in A)
+		M.SetName(replacetext(M.name,oldtitle,title))
+	for(var/obj/machinery/door/M in A)
+		M.SetName(replacetext(M.name,oldtitle,title))
 	//TODO: much much more. Unnamed airlocks, cameras, etc.
 
 /obj/item/blueprints/proc/check_tile_is_border(var/turf/T2,var/dir)
@@ -195,10 +178,6 @@ move an amendment</a> to the drawing.</p>
 			return BORDER_BETWEEN
 	if (locate(/obj/machinery/door) in T2)
 		return BORDER_2NDTILE
-	if (locate(/obj/structure/falsewall) in T2)
-		return BORDER_2NDTILE
-	if (locate(/obj/structure/falserwall) in T2)
-		return BORDER_2NDTILE
 
 	return BORDER_NONE
 
@@ -210,7 +189,7 @@ move an amendment</a> to the drawing.</p>
 			return ROOM_ERR_TOOLARGE
 		var/turf/T = pending[1] //why byond havent list::pop()?
 		pending -= T
-		for (var/dir in cardinal)
+		for (var/dir in GLOB.cardinal)
 			var/skip = 0
 			for (var/obj/structure/window/W in T)
 				if(dir == W.dir || (W.dir in list(NORTHEAST,SOUTHEAST,NORTHWEST,SOUTHWEST)))
@@ -237,31 +216,27 @@ move an amendment</a> to the drawing.</p>
 		found+=T
 	return found
 
-/*
-/proc/check_apc(var/area/A)
-	for(var/area/RA in A.related)
-		for(var/obj/machinery/power/apc/FINDME in RA)
-			return 1
-	return 0
+//For use on exoplanets
+/obj/item/blueprints/outpost
+	name = "outpost blueprints"
+	icon_state = "blueprints2"
 
-/proc/fuckingfreemachinery()
-	for(var/obj/machinery/machine in machines)
-		if (istype(machine,/obj/machinery/power/solar))
-			continue
-		var/area/A = machine.loc.loc		// make sure it's in an area
-		if (istype(A,/area/tdome))
-			continue
-		if (istype(A,/area/shuttle))
-			continue
-		if(!A || !isarea(A))
-			world << "DEBUG: @[machine.x],[machine.y],[machine.z] ([A.name]) machine \"[machine.name]\" ([machine.type]) hasnt area!"
-			continue
-		A = A.master
-		if (A.name=="Space")
-			world << "DEBUG: @[machine.x],[machine.y],[machine.z] ([A.name]) machine \"[machine.name]\" ([machine.type]) work in space!"
-			continue
-		if (!check_apc(A))
-			world << "DEBUG: @[machine.x],[machine.y],[machine.z] ([A.name]) machine \"[machine.name]\" ([machine.type]) work without APC!"
-	world << "\red END ====="
+/obj/item/blueprints/outpost/Initialize()
+	. = ..()
+	desc = "Blueprints for the daring souls wanting to establish a planetary outpost. Has some sketchy looking stains and what appears to be bite holes."
 
-*/
+/obj/item/blueprints/outpost/get_header()
+	return "<h2>Exoplanetary outpost blueprints</h2><small>Property of [GLOB.using_map.company_name].</small><hr>"
+
+/obj/item/blueprints/outpost/check_tile_is_border(var/turf/T2,var/dir)
+	if (istype(T2, /turf/simulated/floor/exoplanet/))
+		return BORDER_SPACE
+	. = ..()
+
+/obj/item/blueprints/outpost/get_area_type(var/area/A = get_area(src))
+	if(istype(A, /area/exoplanet))
+		return AREA_SPACE
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	if(istype(E))
+		return AREA_STATION
+	return AREA_SPECIAL

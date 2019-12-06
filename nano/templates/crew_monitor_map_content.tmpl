@@ -1,0 +1,13 @@
+<!--
+Title: Crew Monitoring Console (Map content)
+Used In File(s): code\modules\modular_computers\file_system\programs\medical\suit_sensors.dm
+ -->
+{{for data.crewmembers}}
+	{{if value.sensor_type == 3 && value.z == config.mapZLevel}}
+		<div class="mapIcon mapIcon16 rank-{{:value.rank.ckey()}} {{:value.alert ? 'dead' : 'alive'}}" style="left: {{:(value.x + 0.2)}}px; bottom: {{:(value.y - 14.75)}}px;" unselectable="on">
+			<div class="tooltip hidden">
+				{{:value.name}} ({{:value.assignment}}) - {{:value.alert ? 'Medical issue detected' : 'No issues detected'}} - {{:value.area}} ({{:value.x}}, {{:value.y}})
+			</div>
+		</div>
+	{{/if}}
+{{/for}}

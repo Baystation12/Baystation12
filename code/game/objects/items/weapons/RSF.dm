@@ -3,219 +3,105 @@ CONTAINS:
 RSF
 
 */
-/obj/item/weapon/rsf/New()
-	desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-	return
+
+/obj/item/weapon/rsf
+	name = "\improper Rapid-Service-Fabricator"
+	desc = "A device used to rapidly deploy service items."
+	icon = 'icons/obj/tools.dmi'
+	icon_state = "rcd"
+	opacity = 0
+	density = 0
+	anchored = 0.0
+	var/stored_matter = 30
+	var/mode = 1
+	w_class = ITEM_SIZE_NORMAL
+
+/obj/item/weapon/rsf/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 0)
+		to_chat(user, "It currently holds [stored_matter]/30 fabrication-units.")
 
 /obj/item/weapon/rsf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if (istype(W, /obj/item/weapon/rcd_ammo))
-		if ((matter + 10) > 30)
-			user << "The RSF cant hold any more matter."
+
+		if ((stored_matter + 10) > 30)
+			to_chat(user, "The RSF can't hold any more matter.")
 			return
-		del(W)
-		matter += 10
-		playsound(src.loc, 'click.ogg', 10, 1)
-		user << "The RSF now holds [matter]/30 fabrication-units."
-		desc = "A RSF. It currently holds [matter]/30 fabrication-units."
+
+		qdel(W)
+
+		stored_matter += 10
+		playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
+		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")
 		return
 
 /obj/item/weapon/rsf/attack_self(mob/user as mob)
-	playsound(src.loc, 'pop.ogg', 50, 0)
+	playsound(src.loc, 'sound/effects/pop.ogg', 50, 0)
 	if (mode == 1)
 		mode = 2
-		user << "Changed dispensing mode to 'Drinking Glass'"
+		to_chat(user, "Changed dispensing mode to 'Drinking Glass'")
 		return
 	if (mode == 2)
 		mode = 3
-		user << "Changed dispensing mode to 'Paper'"
+		to_chat(user, "Changed dispensing mode to 'Paper'")
 		return
 	if (mode == 3)
 		mode = 4
-		user << "Changed dispensing mode to 'Pen'"
+		to_chat(user, "Changed dispensing mode to 'Pen'")
 		return
 	if (mode == 4)
 		mode = 5
-		user << "Changed dispensing mode to 'Dice Pack'"
+		to_chat(user, "Changed dispensing mode to 'Dice Pack'")
 		return
 	if (mode == 5)
-		mode = 6
-		user << "Changed dispensing mode to 'Cigarette'"
-		return
-	if (mode == 6)
 		mode = 1
-		user << "Changed dispensing mode to 'Dosh'"
-		return
-	// Change mode
-
-/obj/item/weapon/rsf/afterattack(atom/A, mob/user as mob)
-	if (!(istype(A, /obj/structure/table) || istype(A, /turf/simulated/floor)))
+		to_chat(user, "Changed dispensing mode to 'Cigarette'")
 		return
 
-	if (istype(A, /obj/structure/table) && mode == 1)
-		if (istype(A, /obj/structure/table) && matter >= 1)
-			user << "Dispensing Dosh..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/spacecash/c10( A.loc )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200 //once money becomes useful, I guess changing this to a high ammount, like 500 units a kick, till then, enjoy dosh!
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
+/obj/item/weapon/rsf/afterattack(atom/A, mob/user as mob, proximity)
+
+	if(!proximity) return
+
+	if(istype(user,/mob/living/silicon/robot))
+		var/mob/living/silicon/robot/R = user
+		if(R.stat || !R.cell || R.cell.charge <= 0)
+			return
+	else
+		if(stored_matter <= 0)
+			return
+
+	if(!istype(A, /obj/structure/table) && !istype(A, /turf/simulated/floor))
 		return
 
-	else if (istype(A, /turf/simulated/floor) && mode == 1)
-		if (istype(A, /turf/simulated/floor) && matter >= 1)
-			user << "Dispensing Dosh..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/spacecash/c10( A )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200 //once money becomes useful, I guess changing this to a high ammount, like 500 units a kick, till then, enjoy dosh!
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
+	playsound(src.loc, 'sound/machines/click.ogg', 10, 1)
+	var/used_energy = 0
+	var/obj/product
 
-	else if (istype(A, /obj/structure/table) && mode == 2)
-		if (istype(A, /obj/structure/table) && matter >= 1)
-			user << "Dispensing Drinking Glass..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass( A.loc )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
+	switch(mode)
+		if(1)
+			product = new /obj/item/clothing/mask/smokable/cigarette()
+			used_energy = 10
+		if(2)
+			product = new /obj/item/weapon/reagent_containers/food/drinks/glass2()
+			used_energy = 50
+		if(3)
+			product = new /obj/item/weapon/paper()
+			used_energy = 10
+		if(4)
+			product = new /obj/item/weapon/pen()
+			used_energy = 50
+		if(5)
+			product = new /obj/item/weapon/storage/pill_bottle/dice()
+			used_energy = 200
 
-	else if (istype(A, /turf/simulated/floor) && mode == 2)
-		if (istype(A, /turf/simulated/floor) && matter >= 1)
-			user << "Dispensing Drinking Glass..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/reagent_containers/food/drinks/drinkingglass( A )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
+	to_chat(user, "Dispensing [product ? product : "product"]...")
+	product.dropInto(A.loc)
 
-	else if (istype(A, /obj/structure/table) && mode == 3)
-		if (istype(A, /obj/structure/table) && matter >= 1)
-			user << "Dispensing Paper Sheet..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/paper( A.loc )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
-
-	else if (istype(A, /turf/simulated/floor) && mode == 3)
-		if (istype(A, /turf/simulated/floor) && matter >= 1)
-			user << "Dispensing Paper Sheet..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/paper( A )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
-
-	else if (istype(A, /obj/structure/table) && mode == 4)
-		if (istype(A, /obj/structure/table) && matter >= 1)
-			user << "Dispensing Pen..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/pen( A.loc )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
-
-	else if (istype(A, /turf/simulated/floor) && mode == 4)
-		if (istype(A, /turf/simulated/floor) && matter >= 1)
-			user << "Dispensing Pen..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/pen( A )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 50
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
-
-	else if (istype(A, /obj/structure/table) && mode == 5)
-		if (istype(A, /obj/structure/table) && matter >= 1)
-			user << "Dispensing Dice Pack..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/storage/dice( A.loc )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
-
-	else if (istype(A, /turf/simulated/floor) && mode == 5)
-		if (istype(A, /turf/simulated/floor) && matter >= 1)
-			user << "Dispensing Dice Pack..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/weapon/storage/dice( A )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 200
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
-
-	else if (istype(A, /obj/structure/table) && mode == 6)
-		if (istype(A, /obj/structure/table) && matter >= 1)
-			user << "Dispensing Cigarette..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/clothing/mask/cigarette( A.loc )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
-
-	else if (istype(A, /turf/simulated/floor) && mode == 6)
-		if (istype(A, /turf/simulated/floor) && matter >= 1)
-			user << "Dispensing Cigarette..."
-			playsound(src.loc, 'click.ogg', 10, 1)
-			new /obj/item/clothing/mask/cigarette( A )
-			if (isrobot(user))
-				var/mob/living/silicon/robot/engy = user
-				engy.cell.charge -= 10
-			else
-				matter--
-				user << "The RSF now holds [matter]/30 fabrication-units."
-				desc = "A RSF. It currently holds [matter]/30 fabrication-units."
-		return
+	if(isrobot(user))
+		var/mob/living/silicon/robot/R = user
+		if(R.cell)
+			R.cell.use(used_energy)
+	else
+		stored_matter--
+		to_chat(user, "The RSF now holds [stored_matter]/30 fabrication-units.")

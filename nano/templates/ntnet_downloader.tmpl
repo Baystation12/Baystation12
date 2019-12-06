@@ -1,0 +1,104 @@
+<i>Welcome to the software download utility. Please select which software you wish to download.</i><hr>
+{{if data.error}}
+	<h2>Download Error</h2>
+	<div class="itemLabel">
+		Information: 
+	</div>
+	<div class="itemContent">
+		{{:data.error}}
+	</div>
+	<div class="itemLabel">
+		Reset Program: 
+	</div>
+	<div class="itemContent">
+		{{:helper.link("RESET", null, {'PRG_reseterror' : 1})}}
+	</div>	
+	<hr>
+{{/if}}
+
+	<h2>{{:data.downloadname ? 'Download Running' : 'No Downloads In Progress'}}</h2>
+	<i>{{:data.downloadname ? 'Please wait...' : 'Standing by...'}}</i>
+	<div class="item">
+		<div class="itemLabel">
+			File name: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloadname ? data.downloadname : 'N/A'}}
+		</div>
+		<div class="itemLabel">
+			File description: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloadname ? data.downloaddesc : 'N/A'}}
+		</div>
+		<div class="itemLabel">
+			File size: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloadname ? (data.downloadcompletion + 'GQ / ' + data.downloadsize + 'GQ') : 'N/A'}}
+		</div>
+		<div class="itemLabel">
+			Transfer Rate: 
+		</div>
+		<div class="itemContent">
+			{{:data.downloadname ? data.downloadspeed : '0'}} GQ/s
+		</div>
+		<div class="itemLabel">
+			Download progress: 
+		</div>
+		<div class="itemContent">
+			{{:helper.displayBar(data.downloadcompletion, 0, data.downloadname ? data.downloadsize : 0, 'good')}}
+		</div>
+	</div>
+
+	<br><hr>
+	
+	<h2>Downloads Queue</h2>
+	<div class="item">
+	{{for data.downloads_queue}}
+		<div class="itemLabel">
+			{{:index + 1}}:
+		</div>
+		<div class="itemContent">
+			{{:value}}
+			{{:helper.link('', 'close', {'PRG_removequeued' : value})}}
+		</div>
+	{{empty}}
+		<i>The queue is currently empty.</i>
+	{{/for}}
+	</div>
+	<br><hr>
+	
+	<h2>Primary software repository</h2>
+	<div class="itemLabel">
+		Hard drive: 
+	</div>
+	<div class="itemContent">
+		{{:helper.displayBar(data.disk_used, 0, data.disk_size, 'good')}}
+		{{:data.disk_used}}GQ / {{:data.disk_size}}GQ
+	</div>
+	<table>
+	{{for data.downloadable_programs}}
+		<tr><td colspan=4><hr><center><h2>{{:value.category}}</h2></center>
+		{{for value.programs :inner:innerKey}}
+			<tr><td>{{:helper.link('', inner.icon, {'PRG_downloadfile' : inner.filename})}}	
+				<td><span class='white'>{{:inner.filedesc}}</span>
+				<td>{{:inner.fileinfo}}
+				<td>{{:inner.size}} GQ
+			</div>
+		{{/for}}
+	{{/for}}
+	</table>
+	{{if data.hackedavailable}}
+		<h2>*UNKNOWN* software repository</h2>
+		<i>Please note that NanoTrasen does not recommend download of software from non-official servers.</i>
+		<table>
+		{{for data.hacked_programs}}
+			<tr><td>{{:helper.link('', value.icon, {'PRG_downloadfile' : value.filename})}}	
+				<td><span class='white'>{{:value.filedesc}}</span>
+				<td>{{:value.fileinfo}}
+				<td>{{:value.size}} GQ
+		</div>
+		{{/for}}
+		</table>
+	{{/if}}

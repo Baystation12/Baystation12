@@ -1,0 +1,133 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/structure/flora/ausbushes/grassybush,
+/turf/template_noop,
+/area/template_noop)
+"c" = (
+/obj/structure/flora/ausbushes/stalkybush,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/structure/hygiene/sink/puddle,
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/structure/flora/ausbushes/palebush,
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+c
+b
+a
+"}
+(4,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}
+(5,1,1) = {"
+a
+a
+b
+a
+b
+a
+a
+"}
+(6,1,1) = {"
+a
+a
+a
+d
+a
+a
+a
+"}
+(7,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}
+(8,1,1) = {"
+a
+b
+c
+a
+a
+f
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+e
+a
+a
+"}
+(10,1,1) = {"
+a
+a
+a
+a
+a
+b
+a
+"}
+(11,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}
+(12,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+"}

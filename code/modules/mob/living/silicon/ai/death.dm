@@ -1,74 +1,21 @@
-/mob/living/silicon/ai/death(gibbed)
-	var/cancel
-	stat = 2
-	canmove = 0
-	if(blind)
-		blind.layer = 0
-	sight |= SEE_TURFS
-	sight |= SEE_MOBS
-	sight |= SEE_OBJS
-	see_in_dark = 8
-	see_invisible = 2
-	icon_state = "ai-crash"
+/mob/living/silicon/ai/death(gibbed, deathmessage, show_dead_message)
 
-	var/callshuttle = 0
+	if(stat == DEAD)
+		return
 
-	for(var/obj/machinery/computer/communications/commconsole in world)
-		if(istype(commconsole.loc,/turf))
-			break
-		callshuttle++
+	if(src.eyeobj)
+		src.eyeobj.setLoc(get_turf(src))
 
-	for(var/obj/item/weapon/circuitboard/communications/commboard in world)
-		if(istype(commboard.loc,/turf) || istype(commboard.loc,/obj/item/weapon/storage))
-			break
-		callshuttle++
 
-	for(var/mob/living/silicon/ai/shuttlecaller in world)
-		if(!shuttlecaller.stat && shuttlecaller.client && istype(shuttlecaller.loc,/turf))
-			break
-		callshuttle++
+	stop_malf(0) // Remove AI's malfunction status, that will fix all hacked APCs, disable delta, etc.
+	remove_ai_verbs(src)
 
-	if(ticker.mode.name == "revolution" || ticker.mode.name == "AI malfunction" || sent_strike_team)
-		callshuttle = 0
-
-	if(callshuttle == 3) //if all three conditions are met
-		emergency_shuttle.incall(2)
-		log_game("All the AIs, comm consoles and boards are destroyed. Shuttle called.")
-		message_admins("All the AIs, comm consoles and boards are destroyed. Shuttle called.", 1)
-		world << "\blue <B>Alert: The emergency shuttle has been called. It will arrive in [round(emergency_shuttle.timeleft()/60)] minutes.</B>"
-		world << sound('shuttlecalled.ogg')
-
-	if(explosive)
-		spawn(10)
-			explosion(src.loc, 3, 6, 12, 15)
-
-	for(var/obj/machinery/ai_status_display/O in world) //change status
-		spawn( 0 )
+	for(var/obj/machinery/ai_status_display/O in world)
 		O.mode = 2
-		if (istype(loc, /obj/item/device/aicard))
-			loc.icon_state = "aicard-404"
 
-	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
-	mind.store_memory("Time of death: [tod]", 0)
+	if (istype(loc, /obj/item/weapon/aicard))
+		var/obj/item/weapon/aicard/card = loc
+		card.update_icon()
 
-	for(var/mob/M in world)
-		if ((M.client && !( M.stat )))
-			cancel = 1
-			break
-	if (!( cancel ))
-		world << "<B>Everyone is dead! Resetting in 30 seconds!</B>"
-
-		feedback_set_details("end_error","no live players")
-		feedback_set_details("round_end","[time2text(world.realtime)]")
-		if(blackbox)
-			blackbox.save_all_data_to_sql()
-
-		spawn( 300 )
-			log_game("Rebooting because of no live players")
-			world.Reboot()
-			return
-	if (key)
-		spawn(50)
-			if(key && stat == 2)
-				verbs += /mob/proc/ghost
-	return ..(gibbed)
+	. = ..(gibbed,"gives one shrill beep before falling lifeless.", "You have suffered a critical system failure, and are dead.")
+	set_density(1)

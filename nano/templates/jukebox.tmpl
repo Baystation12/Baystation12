@@ -1,0 +1,30 @@
+<!-- 
+Title: Jukebox UI
+Used In File(s): \code\game\machinery\jukebox.dm
+ -->
+
+<H3><span class="white">Current track:</span> <span class="average">{{:data.current_track}}</span></H3>
+<div>
+    {{:helper.link('Play' , 'play', {'play' : 1}, data.playing == 1 ? 'disabled' : null, null)}}
+    {{:helper.link('Stop' , 'stop', {'stop' : 1}, data.playing == 0 ? 'disabled' : null, null)}}
+</div>
+
+<H3><span class="white">Volume:</span></H3>
+{{:helper.displayBar(data.volume*2, 0, 100, 'average')}}
+<div class="itemContent">
+    {{:helper.link('0' , null, {'volume' : 0}, data.volume == 0 ? 'disabled' : null, null)}}
+    {{:helper.link('20' , null, {'volume' : 10}, data.volume == 10 ? 'disabled' : null, null)}}
+    {{:helper.link('40' , null, {'volume' : 20}, data.volume == 20 ? 'disabled' : null, null)}}
+    {{:helper.link('60' , null, {'volume' : 30}, data.volume == 30 ? 'disabled' : null, null)}}
+    {{:helper.link('80' , null, {'volume' : 40}, data.volume == 40 ? 'disabled' : null, null)}}
+    {{:helper.link('100' , null, {'volume' : 50}, data.volume == 50 ? 'disabled' : null, null)}}
+</div>
+
+<H3><span class="white">Available tracks:</span></H3>
+<div class="itemContent">
+    {{for data.tracks}}
+        <div class="item">
+            {{:helper.link( value.track, 'gear', {'title' : value.track}, value.track == data.current_track ? 'disabled' : null, null)}}    
+        </div>
+    {{/for}}
+</div>

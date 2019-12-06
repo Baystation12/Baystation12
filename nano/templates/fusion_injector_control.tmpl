@@ -1,0 +1,41 @@
+<h3>Fusion plant: {{:data.id}}</h3>
+{{for data.injectors}}
+	<h3>{{:value.id}}</h3>
+	<div class="item">
+		<div class="itemLabel">
+			Status
+		</div>
+		<div class="itemContent">
+			 {{if value.injecting}}
+				Online.<br/>{{:helper.link('Shut down.', null, {'toggle_injecting': value.ref})}}
+			 {{else}}
+				Offline.<br/>{{:helper.link('Start up.', null, {'toggle_injecting': value.ref})}}
+			 {{/if}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Fuel material
+		</div>
+		<div class="itemContent">
+			{{:value.fueltype}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Fuel depletion
+		</div>
+		<div class="itemContent">
+			{{:value.depletion}}
+		</div>
+	</div>
+{{empty}}
+	<div class="item">
+		<div class="itemLabel">
+			Error:
+		</div>
+		<div class="itemContent">
+			No fuel injectors connected.
+		</div>
+	</div>
+{{/for}}

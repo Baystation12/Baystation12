@@ -1,6 +1,50 @@
+# ignore misc BYOND files
+Thumbs.db
 *.log
 *.int
 *.rsc
 *.dmb
 *.lk
-info.json
+*.backup
+*.before
+data/
+cfg/
+build_log.txt
+use_map
+stopserver
+reboot_called
+atupdate
+
+# ignore config, but not subdirs
+!config/*/
+config/*
+sql/test_db
+
+# vscode
+.vscode/*
+.history
+
+# swap
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-v][a-z]
+[._]sw[a-p]
+
+# session
+Session.vim
+
+# temporary
+.netrwhist
+*~
+
+# auto-generated tag files
+tags
+baystation12.code-workspace
+
+# ignore built libs
+lib/*.dll
+lib/*.so
+
+# python
+*.pyc
+__pycache__

@@ -1,14 +1,19 @@
 /datum/job/assistant
 	title = "Assistant"
-	flag = ASSISTANT
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Civilian"
+	department_flag = CIV
+
 	total_positions = -1
 	spawn_positions = -1
 	supervisors = "absolutely everyone"
+	economic_power = 1
+	access = list()			//See /datum/job/assistant/get_access()
+	minimal_access = list()	//See /datum/job/assistant/get_access()
+	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Visitor")
+	outfit_type = /decl/hierarchy/outfit/job/assistant
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/clothing/under/color/grey(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		return 1
+/datum/job/assistant/get_access()
+	if(config.assistant_maint)
+		return list(access_maint_tunnels)
+	else
+		return list()

@@ -1,84 +1,107 @@
-/mob/living/carbon/human/death(gibbed)
-	if(halloss > 0 && (!gibbed))
-		//hallucination = 0
-		halloss = 0
-		// And the suffocation was a hallucination (lazy)
-		//oxyloss = 0
-		return
-	if(src.stat == 2)
-		return
-	if(src.healths)
-		src.healths.icon_state = "health5"
-	src.stat = 2
-	src.dizziness = 0
-	src.jitteriness = 0
-	src.sleeping = 0
-	src.sleeping_willingly = 0
+/mob/living/carbon/human/gib()
+	for(var/obj/item/organ/I in internal_organs)
+		I.removed()
+		if(!QDELETED(I) && isturf(loc))
+			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 
-	tension_master.death(src)
+	for(var/obj/item/organ/external/E in src.organs)
+		E.droplimb(0,DROPLIMB_EDGE,1)
 
-	if (!gibbed)
-		emote("deathgasp") //let the world KNOW WE ARE DEAD
+	sleep(1)
 
-		//For ninjas exploding when they die./N
-		if (istype(wear_suit, /obj/item/clothing/suit/space/space_ninja)&&wear_suit:s_initialized)
-			src << browse(null, "window=spideros")//Just in case.
-			var/location = loc
-			explosion(location, 1, 2, 3, 4)
+	for(var/obj/item/I in src)
+		drop_from_inventory(I)
+		if(!QDELETED(I))
+			I.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)), rand(1,3), round(30/I.w_class))
 
-		canmove = 0
-		if(src.client)
-			src.blind.layer = 0
-		lying = 1
-		var/h = src.hand
-		hand = 0
-		drop_item()
-		hand = 1
-		drop_item()
-		hand = h
-		//This is where the suicide assemblies checks would go
+	..(species.gibbed_anim)
+	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
 
-		if (client)
-			spawn(10)
-				if(client && src.stat == 2)
-					verbs += /mob/proc/ghost
+/mob/living/carbon/human/dust()
+	if(species)
+		..(species.dusted_anim, species.remains_type)
+	else
+		..()
 
-	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
-	if(mind)
-		mind.store_memory("Time of death: [tod]", 0)
-	sql_report_death(src)
+/mob/living/carbon/human/death(gibbed,deathmessage="seizes up and falls limp...", show_dead_message = "You have died.")
 
-	//Calls the rounds wincheck, mainly for wizard, malf, and changeling now
-	ticker.mode.check_win()
-	//Traitor's dead! Oh no!
-	if (ticker.mode.name == "traitor" && src.mind && src.mind.special_role == "traitor")
-		message_admins("\red Traitor [key_name_admin(src)] has died.")
-		log_game("Traitor [key_name(src)] has died.")
+	if(stat == DEAD) return
 
-	var/cancel
-	for (var/mob/M in world)
-		if (M.client && !M.stat)
-			cancel = 1
-			break
+	BITSET(hud_updateflag, HEALTH_HUD)
+	BITSET(hud_updateflag, STATUS_HUD)
+	BITSET(hud_updateflag, LIFE_HUD)
+	
+	//Handle species-specific deaths.
+	species.handle_death(src)
 
-	if (!cancel && !abandon_allowed)
-		spawn (50)
-			cancel = 0
-			for (var/mob/M in world)
-				if (M.client && !M.stat)
-					cancel = 1
-					break
+	animate_tail_stop()
 
-			if (!cancel && !abandon_allowed)
-				world << "<B>Everyone is dead! Resetting in 30 seconds!</B>"
+	//Handle brain slugs.
+	var/obj/item/organ/external/head = get_organ(BP_HEAD)
+	var/mob/living/simple_animal/borer/B
 
-				feedback_set_details("end_error","no live players")
-				feedback_set_details("round_end","[time2text(world.realtime)]")
-				if(blackbox)
-					blackbox.save_all_data_to_sql()
+	if(head)
+		for(var/I in head.implants)
+			if(istype(I,/mob/living/simple_animal/borer))
+				B = I
+		if(B)
+			if(!B.ckey && ckey && B.controlling)
+				B.ckey = ckey
+				B.controlling = 0
+			if(B.host_brain.ckey)
+				ckey = B.host_brain.ckey
+				B.host_brain.ckey = null
+				B.host_brain.SetName("host brain")
+				B.host_brain.real_name = "host brain"
 
-				spawn (300)
-					log_game("Rebooting because of no live players")
-					world.Reboot()
+			verbs -= /mob/living/carbon/proc/release_control
 
-	return ..(gibbed)
+	callHook("death", list(src, gibbed))
+
+	if(SSticker.mode)
+		SSticker.mode.check_win()
+
+	if(wearing_rig)
+		wearing_rig.notify_ai("<span class='danger'>Warning: user death event. Mobility control passed to integrated intelligence system.</span>")
+
+	. = ..(gibbed,"no message")
+	if(!gibbed)
+		handle_organs()
+		if(species.death_sound)
+			playsound(loc, species.death_sound, 80, 1, 1)
+	handle_hud_list()
+
+/mob/living/carbon/human/proc/ChangeToHusk()
+	if(MUTATION_HUSK in mutations)	return
+
+	if(f_style)
+		f_style = "Shaved"		//we only change the icon_state of the hair datum, so it doesn't mess up their UI/UE
+	if(h_style)
+		h_style = "Bald"
+	update_hair(0)
+
+	mutations.Add(MUTATION_HUSK)
+	for(var/obj/item/organ/external/E in organs)
+		E.status |= ORGAN_DISFIGURED
+	update_body(1)
+	return
+
+/mob/living/carbon/human/proc/Drain()
+	ChangeToHusk()
+	mutations |= MUTATION_HUSK
+	return
+
+/mob/living/carbon/human/proc/ChangeToSkeleton()
+	if(MUTATION_SKELETON in src.mutations)	return
+
+	if(f_style)
+		f_style = "Shaved"
+	if(h_style)
+		h_style = "Bald"
+	update_hair(0)
+
+	mutations.Add(MUTATION_SKELETON)
+	for(var/obj/item/organ/external/E in organs)
+		E.status |= ORGAN_DISFIGURED
+	update_body(1)
+	return

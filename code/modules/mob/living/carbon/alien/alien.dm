@@ -1,21 +1,37 @@
-/mob/living/carbon/alien/adjustToxLoss(amount)
-	storedPlasma = min(max(storedPlasma + amount,0),max_plasma) //upper limit of max_plasma, lower limit of 0
-	return
-
-/mob/living/carbon/alien/proc/getPlasma()
-	return storedPlasma
-
-/mob/living/carbon/alien/eyecheck()
-	return 2
+/mob/living/carbon/alien
+	name = "alien"
+	desc = "What IS that?"
+	pass_flags = PASS_FLAG_TABLE
+	health = 100
+	maxHealth = 100
+	mob_size = 4
+	var/dead_icon
+	var/language
+	var/death_msg = "lets out a waning guttural screech, green blood bubbling from its maw."
+	var/instance_num
 
 /mob/living/carbon/alien/New()
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+
+	instance_num = rand(1, 1000)
+	name = "[initial(name)] ([instance_num])"
+	real_name = name
+	regenerate_icons()
+
+	if(language)
+		add_language(language)
+
+	gender = NEUTER
+
 	..()
 
-	for(var/obj/item/clothing/mask/facehugger/facehugger in world)
-		if(facehugger.stat == CONSCIOUS)
-			var/image/activeIndicator = image('alien.dmi', loc = facehugger, icon_state = "facehugger_active")
-			activeIndicator.override = 1
-			client.images += activeIndicator
+/mob/living/carbon/alien/u_equip(obj/item/W as obj)
+	return
 
-/mob/living/carbon/alien/IsAdvancedToolUser()
-	return has_fine_manipulation
+/mob/living/carbon/alien/restrained()
+	return 0
+
+/mob/living/carbon/alien/show_inv(mob/user as mob)
+	return //Consider adding cuffs and hats to this, for the sake of fun.

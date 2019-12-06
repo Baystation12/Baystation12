@@ -6,14 +6,13 @@
 
 /obj/machinery/magnetic_module
 
-	icon = 'objects.dmi'
+	icon = 'icons/obj/objects.dmi'
 	icon_state = "floor_magnet-f"
 	name = "Electromagnetic Generator"
-	desc = "A device that uses station power to create points of magnetic energy."
+	desc = "A device that uses powernet to create points of magnetic energy."
 	level = 1		// underfloor
-	layer = 2.5
+	layer = ABOVE_WIRE_LAYER
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 50
 
 	var/freq = 1449		// radio frequency
@@ -32,7 +31,7 @@
 	New()
 		..()
 		var/turf/T = loc
-		hide(T.intact)
+		hide(!T.is_plating())
 		center = T
 
 		spawn(10)	// must wait for map loading to finish
@@ -44,11 +43,11 @@
 
 	// update the invisibility and icon
 	hide(var/intact)
-		invisibility = intact ? 101 : 0
-		updateicon()
+		set_invisibility(intact ? 101 : 0)
+		update_icon()
 
 	// update the icon_state
-	proc/updateicon()
+	update_icon()
 		var/state="floor_magnet"
 		var/onstate=""
 		if(!on)
@@ -128,8 +127,7 @@
 
 
 
-	process()
-		..()
+	Process()
 		if(stat & NOPOWER)
 			on = 0
 
@@ -152,10 +150,10 @@
 
 		// Update power usage:
 		if(on)
-			use_power = 2
-			active_power_usage = electricity_level*15
+			update_use_power(POWER_USE_ACTIVE)
+			change_power_consumption(electricity_level*15, POWER_USE_ACTIVE)
 		else
-			use_power = 0
+			update_use_power(POWER_USE_IDLE)
 
 
 		// Overload conditions:
@@ -165,10 +163,10 @@
 				if(prob(electricity_level))
 					explosion(loc, 0, 1, 2, 3) // ooo dat shit EXPLODES son
 					spawn(2)
-						del(src)
+						qdel(src)
 		*/
 
-		updateicon()
+		update_icon()
 
 
 	proc/magnetic_process() // proc that actually does the pulling
@@ -179,28 +177,29 @@
 			center = locate(x+center_x, y+center_y, z)
 			if(center)
 				for(var/obj/M in orange(magnetic_field, center))
-					if(!M.anchored && (M.flags & CONDUCT))
+					if(!M.anchored && (M.obj_flags & OBJ_FLAG_CONDUCTIBLE))
 						step_towards(M, center)
 
 				for(var/mob/living/silicon/S in orange(magnetic_field, center))
 					if(istype(S, /mob/living/silicon/ai)) continue
 					step_towards(S, center)
 
-			use_power(electricity_level * 5)
+			use_power_oneoff(electricity_level * 5)
 			sleep(13 - electricity_level)
 
 		pulling = 0
 
-
-
+/obj/machinery/magnetic_module/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, freq)
+	..()
 
 /obj/machinery/magnetic_controller
 	name = "Magnetic Control Console"
-	icon = 'airlock_machines.dmi' // uses an airlock machine icon, THINK GREEN HELP THE ENVIRONMENT - RECYCLING!
+	icon = 'icons/obj/airlock_machines.dmi' // uses an airlock machine icon, THINK GREEN HELP THE ENVIRONMENT - RECYCLING!
 	icon_state = "airlock_control_standby"
 	density = 1
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 45
 	var/frequency = 1449
 	var/code = 0
@@ -237,8 +236,7 @@
 			filter_path() // renders rpath
 
 
-	process()
-		..()
+	Process()
 		if(magnets.len == 0 && autolink)
 			for(var/obj/machinery/magnetic_module/M in world)
 				if(M.freq == frequency && M.code == code)
@@ -251,7 +249,7 @@
 	attack_hand(mob/user as mob)
 		if(stat & (BROKEN|NOPOWER))
 			return
-		user.machine = src
+		user.set_machine(src)
 		var/dat = "<B>Magnetic Control Console</B><BR><BR>"
 		if(!autolink)
 			dat += {"
@@ -277,10 +275,11 @@
 		onclose(user, "magnet")
 
 	Topic(href, href_list)
+		if(..())
+			return 1
 		if(stat & (BROKEN|NOPOWER))
 			return
-		usr.machine = src
-		src.add_fingerprint(usr)
+		usr.set_machine(src)
 
 		if(href_list["radio-op"])
 
@@ -309,7 +308,7 @@
 
 			// Broadcast the signal
 
-			radio_connection.post_signal(src, signal, filter = RADIO_MAGNETS)
+			radio_connection.post_signal(src, signal, radio_filter = RADIO_MAGNETS)
 
 			spawn(1)
 				updateUsrDialog() // pretty sure this increases responsiveness
@@ -325,7 +324,7 @@
 					if(speed <= 0)
 						speed = 1
 				if("setpath")
-					var/newpath = input(usr, "Please define a new path!",,path) as text|null
+					var/newpath = sanitize(input(usr, "Please define a new path!",,path) as text|null)
 					if(newpath && newpath != "")
 						moving = 0 // stop moving
 						path = newpath
@@ -366,7 +365,7 @@
 				// N, S, E, W are directional
 				// C is center
 				// R is random (in magnetic field's bounds)
-				del(signal)
+				qdel(signal)
 				break // break the loop if the character located is invalid
 
 			signal.data["command"] = nextmove
@@ -376,7 +375,7 @@
 
 			// Broadcast the signal
 			spawn()
-				radio_connection.post_signal(src, signal, filter = RADIO_MAGNETS)
+				radio_connection.post_signal(src, signal, radio_filter = RADIO_MAGNETS)
 
 			if(speed == 10)
 				sleep(1)
@@ -401,25 +400,7 @@
 
 			// there doesn't HAVE to be separators but it makes paths syntatically visible
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/obj/machinery/magnetic_controller/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	..()

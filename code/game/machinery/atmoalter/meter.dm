@@ -1,15 +1,36 @@
-/obj/machinery/meter/New()
-	..()
+/obj/machinery/meter
+	name = "meter"
+	desc = "A gas flow meter."
+	icon = 'icons/obj/meter.dmi'
+	icon_state = "meterX"
+	var/atom/target = null //A pipe for the base type
+	anchored = 1.0
+	power_channel = ENVIRON
+	var/frequency = 0
+	var/id
+	idle_power_usage = 15
 
-	src.target = locate(/obj/machinery/atmospherics/pipe) in loc
-
-	return 1
-
-/obj/machinery/meter/initialize()
+/obj/machinery/meter/Initialize()
+	. = ..()
 	if (!target)
-		src.target = locate(/obj/machinery/atmospherics/pipe) in loc
+		set_target(locate(/obj/machinery/atmospherics/pipe) in loc)
 
-/obj/machinery/meter/process()
+/obj/machinery/meter/proc/set_target(atom/new_target)
+	clear_target()
+	target = new_target
+	GLOB.destroyed_event.register(target, src, .proc/clear_target)
+
+/obj/machinery/meter/proc/clear_target()
+	if(target)
+		GLOB.destroyed_event.unregister(target, src)
+		target = null	
+
+/obj/machinery/meter/Destroy()
+	clear_target()
+	. = ..()
+
+/obj/machinery/meter/Process()
+	..()
 	if(!target)
 		icon_state = "meterX"
 		return 0
@@ -17,8 +38,6 @@
 	if(stat & (BROKEN|NOPOWER))
 		icon_state = "meter0"
 		return 0
-
-	use_power(5)
 
 	var/datum/gas_mixture/environment = target.return_air()
 	if(!environment)
@@ -56,56 +75,51 @@
 		)
 		radio_connection.post_signal(src, signal)
 
-/obj/machinery/meter/examine()
-	set src in view(3)
+/obj/machinery/meter/examine(mob/user, distance)
+	. = ..()
 
-	var/t = "A gas flow meter. "
-	if (src.target)
+	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
+		to_chat(user, "<span class='warning'>You are too far away to read it.</span>")
+
+	else if(stat & (NOPOWER|BROKEN))
+		to_chat(user, "<span class='warning'>The display is off.</span>")
+
+	else if(src.target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)
-			t += "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]&deg;K ([round(environment.temperature-T0C,0.01)]&deg;C)"
+			to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
 		else
-			t += "The sensor error light is blinking."
+			to_chat(user, "The sensor error light is blinking.")
 	else
-		t += "The connect error light is blinking."
+		to_chat(user, "The connect error light is blinking.")
 
-	usr << t
 
-/obj/machinery/meter/attack_ai(mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/meter/Click()
 
-/obj/machinery/meter/attack_paw(mob/user as mob)
-	return attack_hand(user)
-
-/obj/machinery/meter/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
+	if(istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
+		usr.examinate(src)
 		return 1
 
-	var/t = null
-	if (get_dist(user, src) <= 3 || istype(user, /mob/living/silicon/ai) || istype(user, /mob/dead))
-		if (src.target)
-			var/datum/gas_mixture/environment = target.return_air()
-			if(environment)
-				t = "<B>Pressure:</B> [round(environment.return_pressure(), 0.01)] kPa; <B>Temperature:</B> [round(environment.temperature,0.01)]&deg;K ([round(environment.temperature-T0C,0.01)]&deg;C)"
-			else
-				t = "\red <B>Results: Sensor Error!</B>"
-		else
-			t = "\red <B>Results: Connection Error!</B>"
-	else
-		usr << "\blue <B>You are too far away.</B>"
-
-	usr << t
-	return 1
+	return ..()
 
 /obj/machinery/meter/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!istype(W, /obj/item/weapon/wrench))
+	if(!isWrench(W))
 		return ..()
-	playsound(src.loc, 'Ratchet.ogg', 50, 1)
-	user << "\blue You begin to unfasten \the [src]..."
-	if (do_after(user, 40))
+	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
+	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
+	if (do_after(user, 40, src))
 		user.visible_message( \
-			"[user] unfastens \the [src].", \
-			"\blue You have unfastened \the [src].", \
+			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
+			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear ratchet.")
 		new /obj/item/pipe_meter(src.loc)
-		del(src)
+		qdel(src)
+
+// TURF METER - REPORTS A TILE'S AIR CONTENTS
+
+/obj/machinery/meter/turf/Initialize()
+	if (!target)
+		set_target(loc)
+	. = ..()
+
+/obj/machinery/meter/turf/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)

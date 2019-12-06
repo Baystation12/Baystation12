@@ -1,0 +1,145 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/space,
+/area/space)
+"b" = (
+/turf/simulated/wall,
+/area/space)
+"c" = (
+/turf/simulated/floor/tiled,
+/area/space)
+"d" = (
+/obj/effect/landmark/test/safe_turf,
+/turf/simulated/floor/tiled,
+/area/space)
+"e" = (
+/obj/effect/landmark/start{
+	name = "JoinLate"
+	},
+/turf/simulated/floor/tiled,
+/area/space)
+"f" = (
+/obj/effect/landmark/test/space_turf,
+/turf/space,
+/area/space)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+f
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(4,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(5,1,1) = {"
+b
+b
+b
+b
+b
+b
+a
+a
+a
+a
+"}
+(6,1,1) = {"
+b
+c
+c
+c
+e
+b
+a
+a
+a
+a
+"}
+(7,1,1) = {"
+b
+c
+d
+c
+c
+b
+a
+a
+a
+a
+"}
+(8,1,1) = {"
+b
+c
+c
+c
+c
+b
+a
+a
+a
+a
+"}
+(9,1,1) = {"
+b
+c
+c
+c
+c
+b
+a
+a
+a
+a
+"}
+(10,1,1) = {"
+b
+b
+b
+b
+b
+b
+a
+a
+a
+a
+"}

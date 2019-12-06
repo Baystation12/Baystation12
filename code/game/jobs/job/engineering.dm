@@ -1,108 +1,43 @@
 /datum/job/chief_engineer
 	title = "Chief Engineer"
-	flag = CHIEF
-	department_flag = ENGSEC
-	faction = "Station"
+	head_position = 1
+	department = "Engineering"
+	department_flag = ENG|COM
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
+	selection_color = "#7f6e2c"
+	req_admin_notify = 1
+	economic_power = 10
+
+	ideal_character_age = 50
 
 
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/heads/ce(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/industrial (H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/chief_engineer(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/device/pda/heads/ce(H), H.slot_l_store)
-		H.equip_if_possible(new /obj/item/clothing/shoes/brown(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/clothing/head/helmet/hardhat/white(H), H.slot_head)
-		H.equip_if_possible(new /obj/item/weapon/storage/belt/utility/full(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/gloves/black(H), H.slot_gloves)
-		var/list/wire_index = list(
-				"Orange" = 1,
-				"Dark red" = 2,
-				"White" = 3,
-				"Yellow" = 4,
-				"Red" = 5,
-				"Blue" = 6,
-				"Green" = 7,
-				"Grey" = 8,
-				"Black" = 9,
-				"Pink" = 10,
-				"Brown" = 11,
-				"Maroon" = 12)
-		H.mind.store_memory("<b>The door wires are as follows:</b>")
-		H.mind.store_memory("<b>Power:</b> [wire_index[airlockIndexToWireColor[2]]] and [wire_index[airlockIndexToWireColor[3]]]")
-		H.mind.store_memory("<b>Backup Power:</b> [wire_index[airlockIndexToWireColor[5]]] and [wire_index[airlockIndexToWireColor[6]]]")
-		H.mind.store_memory("<b>Door Bolts:</b> [wire_index[airlockIndexToWireColor[4]]]")
-		H << "\blue You have memorised the important wires for the vessel.  Use them wisely."
-		return 1
-
-
+	access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_heads,
+			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
+			            access_bridge, access_construction, access_sec_doors,
+			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
+	minimal_access = list(access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_heads,
+			            access_teleporter, access_external_airlocks, access_atmospherics, access_emergency_storage, access_eva,
+			            access_bridge, access_construction, access_sec_doors,
+			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
+	minimal_player_age = 14
+	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
 
 /datum/job/engineer
-	title = "Station Engineer"
-	flag = ENGINEER
-	department_flag = ENGSEC
-	faction = "Station"
-	total_positions = 5
-	spawn_positions = 5
+	title = "Engineer"
+	department = "Engineering"
+	department_flag = ENG
+
+	total_positions = 8
+	spawn_positions = 7
 	supervisors = "the chief engineer"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_eng(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/industrial(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/engineer(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/orange(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/engineering(H), H.slot_l_store)
-		H.equip_if_possible(new /obj/item/clothing/head/helmet/hardhat(H), H.slot_head)
-		H.equip_if_possible(new /obj/item/weapon/storage/belt/utility/full(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/device/t_scanner(H), H.slot_r_store)
-		return 1
-
-
-
-/datum/job/atmos
-	title = "Atmospheric Technician"
-	flag = ATMOSTECH
-	department_flag = ENGSEC
-	faction = "Station"
-	total_positions = 2
-	spawn_positions = 2
-	supervisors = "the chief engineer"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_eng(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/atmospheric_technician(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/engineering(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/weapon/storage/toolbox/mechanical(H), H.slot_l_hand)
-		return 1
-
-
-
-/datum/job/roboticist
-	title = "Roboticist"
-	flag = ROBOTICIST
-	department_flag = ENGSEC
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the chief engineer and research director"
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_eng(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/roboticist(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/engineering(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/labcoat(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/gloves/black(H), H.slot_gloves)
-		H.equip_if_possible(new /obj/item/weapon/storage/toolbox/mechanical(H), H.slot_l_hand)
-		return 1
+	selection_color = "#5b4d20"
+	economic_power = 5
+	minimal_player_age = 7
+	access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	minimal_access = list(access_eva, access_engine, access_engine_equip, access_tech_storage, access_maint_tunnels, access_external_airlocks, access_construction, access_atmospherics, access_emergency_storage)
+	alt_titles = list("Maintenance Technician","Engine Technician","Electrician",
+		"Atmospheric Technician" = /decl/hierarchy/outfit/job/engineering/atmos)
+	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer

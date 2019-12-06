@@ -9,68 +9,75 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
+	remove_typing_indicator()
 	usr.say(message)
 
 /mob/verb/me_verb(message as text)
 	set name = "Me"
 	set category = "IC"
 
-	message = trim(copytext(sanitize(message), 1, MAX_MESSAGE_LEN))
+	message = sanitize(message)
 
-	usr.emote("me",1,message)
+	remove_typing_indicator()
+	if(use_me)
+		usr.emote("me",usr.emote_type,message)
+	else
+		usr.emote(message)
 
 /mob/proc/say_dead(var/message)
-	var/name = src.real_name
-	var/alt_name = ""
+	communicate(/decl/communication_channel/dsay, client, message)
 
-	if(original_name) //Original name is only used in ghost chat! It is not to be edited by anything!
-		name = src.original_name
-		if( original_name != real_name )
-			alt_name = " (died as [src.real_name])"
+/mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 
-	message = src.say_quote(message)
+	if (src.stat == 2)		//Dead
+		return 1
 
-	var/rendered = "<span class='game deadsay'><span class='prefix'>DEAD:</span> <span class='name'>[name]</span>[alt_name] <span class='message'>[message]</span></span>"
+	//Universal speak makes everything understandable, for obvious reasons.
+	else if(src.universal_speak || src.universal_understand)
+		return 1
 
-	for (var/mob/M in world)
-		if (istype(M, /mob/new_player))
-			continue
-		if (M.stat == 2 || (M.client && M.client.holder && M.client.deadchat)) //admins can toggle deadchat on and off. This is a proc in admin.dm and is only give to Administrators and above
-			if(M.client && !M.client.STFU_ghosts) //Admin shut-off for ghosts chatter
-				M.show_message(rendered, 2)
+	//Languages are handled after.
+	if (!speaking)
+		if(!other)
+			return 1
+		if(other.universal_speak)
+			return 1
+		if(isAI(src) && ispAI(other))
+			return 1
+		if (istype(other, src.type) || istype(src, other.type))
+			return 1
+		return 0
 
-/mob/proc/say_understands(var/mob/other)
-	if(!other)
+	if(speaking.flags & INNATE)
 		return 1
-	if (src.stat == 2)
-		return 1
-	else if (istype(other, src.type))
-		return 1
-	else if(other.universal_speak || src.universal_speak)
-		return 1
-	else if(isAI(src) && ispAI(other))
-		return 1
+
+	//Language check.
+	for(var/datum/language/L in src.languages)
+		if(speaking.name == L.name)
+			return 1
+
 	return 0
 
-/mob/proc/say_quote(var/text)
-	var/ending = copytext(text, length(text))
-	if (src.disease_symptoms & DISEASE_HOARSE)
-		return "rasps, \"[text]\"";
-	if (src.stuttering)
-		return "stammers, \"[text]\"";
-	if (src.slurring)
-		return "slurrs, \"[text]\"";
-	if (src.brainloss >= 60)
-		return "gibbers, \"[text]\"";
-	if (ending == "?")
-		return "asks, \"[text]\"";
-	else if (ending == "!")
-		return "exclaims, \"[text]\"";
+/mob/proc/say_quote(var/message, var/datum/language/speaking = null)
+	var/ending = copytext(message, length(message))
+	if(speaking)
+		return speaking.get_spoken_verb(ending)
 
-	return "says, \"[text]\"";
+	var/verb = pick(speak_emote)
+	if(verb == "says") //a little bit of a hack, but we can't let speak_emote default to an empty list without breaking other things
+		if(ending == "!")
+			verb = pick("exclaims","shouts","yells")
+		else if(ending == "?")
+			verb ="asks"
+	return verb
 
-/mob/proc/emote(var/act)
-	return
+/mob/proc/get_ear()
+	// returns an atom representing a location on the map from which this
+	// mob can hear things
+
+	// should be overloaded for all mobs whose "ear" is separate from their "mob"
+
+	return get_turf(src)
 
 /mob/proc/say_test(var/text)
 	var/ending = copytext(text, length(text))
@@ -79,3 +86,31 @@
 	else if (ending == "!")
 		return "2"
 	return "0"
+
+//parses the message mode code (e.g. :h, :w) from text, such as that supplied to say.
+//returns the message mode string or null for no message mode.
+//standard mode is the mode returned for the special ';' radio code.
+/mob/proc/parse_message_mode(var/message, var/standard_mode="headset")
+	if(length(message) >= 1 && copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
+		return standard_mode
+
+	if(length(message) >= 2)
+		var/channel_prefix = copytext(message, 1 ,3)
+		return department_radio_keys[channel_prefix]
+
+	return null
+
+//parses the language code (e.g. :j) from text, such as that supplied to say.
+//returns the language object only if the code corresponds to a language that src can speak, otherwise null.
+/mob/proc/parse_language(var/message)
+	var/prefix = copytext(message,1,2)
+	if(length(message) >= 1 && prefix == get_prefix_key(/decl/prefix/audible_emote))
+		return all_languages["Noise"]
+
+	if(length(message) >= 2 && is_language_prefix(prefix))
+		var/language_prefix = lowertext(copytext(message, 2 ,3))
+		var/datum/language/L = language_keys[language_prefix]
+		if (can_speak(L))
+			return L
+
+	return null

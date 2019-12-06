@@ -1,265 +1,119 @@
-datum/preferences
-	//The mob should have a gender you want before running this proc.
-	proc/randomize_appearance_for(var/mob/living/carbon/human/H)
-		if(H.gender == MALE)
-			gender = MALE
-		else
-			gender = FEMALE
-		randomize_skin_tone()
-		randomize_hair(gender)
-		randomize_hair_color("hair")
-		if(gender == MALE)//only for dudes.
-			randomize_facial()
-			randomize_hair_color("facial")
-		randomize_eyes_color()
-		underwear = 1
-		b_type = pick("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-		age = rand(19,35)
-		copy_to(H,1)
+#define ASSIGN_LIST_TO_COLORS(L, R, G, B) if(L) { R = L[1]; G = L[2]; B = L[3]; }
 
-	proc/randomize_name()
-		if(gender == MALE)
-			real_name = capitalize(pick(first_names_male) + " " + capitalize(pick(last_names)))
+/datum/preferences
+	//The mob should have a gender you want before running this proc. Will run fine without H
+	proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
+		var/datum/species/current_species = all_species[species]
+		if(!current_species) current_species = all_species[SPECIES_HUMAN]
+		gender = pick(current_species.genders)
+
+		h_style = random_hair_style(gender, species)
+		f_style = random_facial_hair_style(gender, species)
+		if(current_species)
+			if(current_species.appearance_flags & HAS_A_SKIN_TONE)
+				s_tone = current_species.get_random_skin_tone() || s_tone
+			if(current_species.appearance_flags & HAS_EYE_COLOR)
+				ASSIGN_LIST_TO_COLORS(current_species.get_random_eye_color(), r_eyes, g_eyes, b_eyes)
+			if(current_species.appearance_flags & HAS_SKIN_COLOR)
+				ASSIGN_LIST_TO_COLORS(current_species.get_random_skin_color(), r_skin, g_skin, b_skin)
+			if(current_species.appearance_flags & HAS_HAIR_COLOR)
+				var/hair_colors = current_species.get_random_hair_color()
+				if(hair_colors)
+					ASSIGN_LIST_TO_COLORS(hair_colors, r_hair, g_hair, b_hair)
+
+					if(prob(75))
+						r_facial = r_hair
+						g_facial = g_hair
+						b_facial = b_hair
+					else
+						ASSIGN_LIST_TO_COLORS(current_species.get_random_facial_hair_color(), r_facial, g_facial, b_facial)
+
+		if(current_species.appearance_flags & HAS_UNDERWEAR)
+			if(all_underwear)
+				all_underwear.Cut()
+			for(var/datum/category_group/underwear/WRC in GLOB.underwear.categories)
+				var/datum/category_item/underwear/WRI = pick(WRC.items)
+				all_underwear[WRC.name] = WRI.name
+
+		backpack = decls_repository.get_decl(pick(subtypesof(/decl/backpack_outfit)))
+		age = rand(current_species.min_age, current_species.max_age)
+		b_type = RANDOM_BLOOD_TYPE
+		if(H)
+			copy_to(H)
+
+#undef ASSIGN_LIST_TO_COLORS
+
+/datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
+	var/update_icon = FALSE
+	copy_to(mannequin, TRUE)
+
+	var/datum/job/previewJob
+	if(equip_preview_mob)
+		// Determine what job is marked as 'High' priority, and dress them up as such.
+		if(GLOB.using_map.default_assistant_title in job_low)
+			previewJob = SSjobs.get_by_title(GLOB.using_map.default_assistant_title)
 		else
-			real_name = capitalize(pick(first_names_female) + " " + capitalize(pick(last_names)))
+			previewJob = SSjobs.get_by_title(job_high)
+	else
 		return
 
-	proc/randomize_hair(var/gender)
-		// Generate list of all possible hairs via typesof(), subtract the parent type however
-		var/list/all_hairs = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
+	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
+		mannequin.job = previewJob.title
+		var/datum/mil_branch/branch = mil_branches.get_branch(branches[previewJob.title])
+		var/datum/mil_rank/rank = mil_branches.get_rank(branches[previewJob.title], ranks[previewJob.title])
+		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], branch, rank)
+		update_icon = TRUE
 
-		// List of hair datums. Used in pick() to select random hair
-		var/list/hairs = list()
+	if(!(mannequin.species.appearance_flags && mannequin.species.appearance_flags & HAS_UNDERWEAR))
+		if(all_underwear)
+			all_underwear.Cut()
 
-		// Loop through potential hairs
-		for(var/x in all_hairs)
-			var/datum/sprite_accessory/hair/H = new x // create new hair datum based on type x
+	if((equip_preview_mob & EQUIP_PREVIEW_LOADOUT) && !(previewJob && (equip_preview_mob & EQUIP_PREVIEW_JOB) && (previewJob.type == /datum/job/ai || previewJob.type == /datum/job/cyborg)))
+		// Equip custom gear loadout, replacing any job items
+		var/list/loadout_taken_slots = list()
+		for(var/thing in Gear())
+			var/datum/gear/G = gear_datums[thing]
+			if(G)
+				var/permitted = 0
+				if(G.allowed_roles && G.allowed_roles.len)
+					if(previewJob)
+						for(var/job_type in G.allowed_roles)
+							if(previewJob.type == job_type)
+								permitted = 1
+				else
+					permitted = 1
 
-			if(gender == FEMALE && H.choose_female) // if female and hair is female-suitable, add to possible hairs
-				hairs.Add(H)
+				if(G.whitelisted && !(mannequin.species.name in G.whitelisted))
+					permitted = 0
 
-			else if(gender != FEMALE && H.choose_male) // if male and hair is male-suitable, add to hairs
-				hairs.Add(H)
+				if(!permitted)
+					continue
 
-			else
-				del(H) // delete if incompatible
+				if(G.slot && G.slot != slot_tie && !(G.slot in loadout_taken_slots) && G.spawn_on_mob(mannequin, gear_list[gear_slot][G.display_name]))
+					loadout_taken_slots.Add(G.slot)
+					update_icon = TRUE
 
-		if(hairs.len > 0) // if hairs could be generated
-			hair_style = pick(hairs) // assign random hair
-			h_style = hair_style.name
+	if(update_icon)
+		mannequin.update_icons()
 
-	proc/randomize_facial() // uncommented, see randomize_hair() for commentation
-		var/list/all_fhairs = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
+/datum/preferences/proc/update_preview_icon()
+	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
+	mannequin.delete_inventory(TRUE)
+	dress_preview_mob(mannequin)
 
-		var/list/fhairs = list()
+	preview_icon = icon('icons/effects/128x48.dmi', bgstate)
+	preview_icon.Scale(48+32, 16+32)
 
-		for(var/x in all_fhairs)
-			var/datum/sprite_accessory/facial_hair/H = new x
+	mannequin.dir = NORTH
+	var/icon/stamp = getFlatIcon(mannequin, NORTH, always_use_defdir = 1)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
 
-			if(gender == FEMALE && H.choose_female)
-				fhairs.Add(H)
-			else if(gender != FEMALE && H.choose_male)
-				fhairs.Add(H)
-			else
-				del(H)
+	mannequin.dir = WEST
+	stamp = getFlatIcon(mannequin, WEST, always_use_defdir = 1)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
 
-		if(fhairs.len > 0)
-			facial_hair_style = pick(fhairs)
-			f_style = facial_hair_style.name
+	mannequin.dir = SOUTH
+	stamp = getFlatIcon(mannequin, SOUTH, always_use_defdir = 1)
+	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
 
-	proc/randomize_skin_tone()
-		var/tone
-
-		var/tmp = pickweight ( list ("caucasian" = 55, "afroamerican" = 15, "african" = 10, "latino" = 10, "albino" = 5, "weird" = 5))
-		switch (tmp)
-			if ("caucasian")
-				tone = -45 + 35
-			if ("afroamerican")
-				tone = -150 + 35
-			if ("african")
-				tone = -200 + 35
-			if ("latino")
-				tone = -90 + 35
-			if ("albino")
-				tone = -1 + 35
-			if ("weird")
-				tone = -(rand (1, 220)) + 35
-
-		s_tone = min(max(tone + rand (-25, 25), -185), 34)
-
-	proc/randomize_hair_color(var/target = "hair")
-		if (prob (75) && target == "facial") // Chance to inherit hair color
-			r_facial = r_hair
-			g_facial = g_hair
-			b_facial = b_hair
-			return
-
-		var/red
-		var/green
-		var/blue
-
-		var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "old", "punk")
-		switch (col)
-			if ("blonde")
-				red = 255
-				green = 255
-				blue = 0
-			if ("black")
-				red = 0
-				green = 0
-				blue = 0
-			if ("chestnut")
-				red = 153
-				green = 102
-				blue = 51
-			if ("copper")
-				red = 255
-				green = 153
-				blue = 0
-			if ("brown")
-				red = 102
-				green = 51
-				blue = 0
-			if ("wheat")
-				red = 255
-				green = 255
-				blue = 153
-			if ("old")
-				red = rand (100, 255)
-				green = red
-				blue = red
-			if ("punk")
-				red = rand (0, 255)
-				green = rand (0, 255)
-				blue = rand (0, 255)
-
-		red = max(min(red + rand (-25, 25), 255), 0)
-		green = max(min(green + rand (-25, 25), 255), 0)
-		blue = max(min(blue + rand (-25, 25), 255), 0)
-
-		switch (target)
-			if ("hair")
-				r_hair = red
-				g_hair = green
-				b_hair = blue
-			if ("facial")
-				r_facial = red
-				g_facial = green
-				b_facial = blue
-
-	proc/randomize_eyes_color()
-		var/red
-		var/green
-		var/blue
-
-		var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino", "weird")
-		switch (col)
-			if ("black")
-				red = 0
-				green = 0
-				blue = 0
-			if ("grey")
-				red = rand (100, 200)
-				green = red
-				blue = red
-			if ("brown")
-				red = 102
-				green = 51
-				blue = 0
-			if ("chestnut")
-				red = 153
-				green = 102
-				blue = 0
-			if ("blue")
-				red = 51
-				green = 102
-				blue = 204
-			if ("lightblue")
-				red = 102
-				green = 204
-				blue = 255
-			if ("green")
-				red = 0
-				green = 102
-				blue = 0
-			if ("albino")
-				red = rand (200, 255)
-				green = rand (0, 150)
-				blue = rand (0, 150)
-			if ("weird")
-				red = rand (0, 255)
-				green = rand (0, 255)
-				blue = rand (0, 255)
-
-		red = max(min(red + rand (-25, 25), 255), 0)
-		green = max(min(green + rand (-25, 25), 255), 0)
-		blue = max(min(blue + rand (-25, 25), 255), 0)
-
-		r_eyes = red
-		g_eyes = green
-		b_eyes = blue
-
-	proc/update_preview_icon()
-		del(preview_icon)
-
-		var/g = "m"
-		if (gender == MALE)
-			g = "m"
-		else if (gender == FEMALE)
-			g = "f"
-
-		preview_icon = new /icon('human.dmi', "body_[g]_s", "dir" = preview_dir)
-
-		// Skin tone
-		if (s_tone >= 0)
-			preview_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
-		else
-			preview_icon.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
-
-		if (underwear > 0)
-			preview_icon.Blend(new /icon('human.dmi', "underwear[underwear]_[g]_s", "dir" = preview_dir), ICON_OVERLAY)
-
-		var/icon/eyes_s = new/icon("icon" = 'human_face.dmi', "icon_state" = "eyes_s", "dir" = preview_dir)
-		eyes_s.Blend(rgb(r_eyes, g_eyes, b_eyes), ICON_ADD)
-
-
-		// Hair and facial hair, improved by Doohl
-		var/icon/hair_s = new/icon("icon" = hair_style.icon, "icon_state" = "[hair_style.icon_state]_s", "dir" = preview_dir)
-		hair_s.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
-
-		var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s", "dir" = preview_dir)
-		facial_s.Blend(rgb(r_facial, g_facial, b_facial), ICON_ADD)
-
-
-		var/icon/mouth_s = new/icon("icon" = 'human_face.dmi', "icon_state" = "mouth_[g]_s", "dir" = preview_dir)
-
-		eyes_s.Blend(hair_s, ICON_OVERLAY)
-		eyes_s.Blend(mouth_s, ICON_OVERLAY)
-		eyes_s.Blend(facial_s, ICON_OVERLAY)
-
-		preview_icon.Blend(eyes_s, ICON_OVERLAY)
-
-		del(mouth_s)
-		del(facial_s)
-		del(hair_s)
-		del(eyes_s)
-
-
-	proc/style_to_datum()
-		// use h_style and f_style to load /datum hairs
-
-		// hairs
-		for(var/x in typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair)
-			var/datum/sprite_accessory/hair/H = new x
-			if(H.name == h_style)
-				hair_style = H
-			else
-				del(H)
-
-		// facial hairs
-		for(var/x in typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair)
-			var/datum/sprite_accessory/facial_hair/H = new x
-			if(H.name == f_style)
-				facial_hair_style = H
-			else
-				del(H)
+	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.

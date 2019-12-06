@@ -1,0 +1,60 @@
+{{if data.message}}
+<p>{{:helper.link('X', null, {'clear_message' : 1})}}{{:data.message}}</p>
+{{/if}}
+{{if data.uid}}
+{{:helper.link('BACK', '', {'clear_active' : 1})}}{{:helper.link('PRINT', '', {'print_active' : 1})}}<br><br>
+<div class='statusDisplay'>
+	<div style="text-align: center">
+		<h3>GENERIC INFORMATION</h3>
+		<div style="display: inline-block;">
+			<img src='front_{{:data.uid}}.png' width = 128px>
+			<img src='side_{{:data.uid}}.png' width = 128px>
+		</div>
+	</div>
+	{{if data.pic_edit}}
+		<div class='item'>
+			<div class='itemLabel'>&nbsp</div>
+			<div class='itemBody'>{{:helper.link('Edit Front', 'pencil', {'edit_photo_front' : 1}, null)}}{{:helper.link('Edit Side', 'pencil', {'edit_photo_side' : 1}, null)}}</div>
+		</div>
+	{{/if}}
+	{{for data.fields}}
+		{{if value.access}}
+			<div class='item'>
+				{{if value.access_edit}}
+					<div class='itemLabel'>{{:helper.link(value.name, 'pencil', {'edit_field' : value.ID}, null)}}</div>
+				{{else}}
+					<div class='itemLabel'>{{:value.name}}:</div>
+				{{/if}}
+				{{if value.needs_big_box}}
+					<div style="display: inline-block;">
+					{{:value.value}}
+					</div>
+				{{else}}
+					<div class='itemBody'>{{:value.value}}</div>
+				{{/if}}
+			</div>
+		{{/if}}
+	{{/for}}
+</div>
+{{else}}
+{{if data.creation}}
+	{{:helper.link('New Record', 'document', {'new_record' : 1}, null)}}
+{{/if}}
+{{:helper.link('Name Search', 'search', {'search' : 'Name'}, null)}}
+{{if data.dnasearch}}
+	{{:helper.link('DNA Search', 'search', {'search' : 'DNA'}, null)}}
+{{/if}}
+{{if data.fingersearch}}
+	{{:helper.link('Fingerprint Search', 'search', {'search' : 'Fingerprint'}, null)}}
+{{/if}}
+<br><br>
+<h2>Available records:</h2>
+<table style="width:100%">
+<tr><td style="width:40%">Name<th>Position<th>Rank
+{{for data.all_records}}
+	<tr class="candystripe"><td>{{:helper.link(value.name, '', {'set_active' : value.id})}}
+	<td>{{:value.rank}}
+	<td>{{:value.milrank}}
+{{/for}}
+</table>
+{{/if}}

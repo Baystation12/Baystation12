@@ -1,51 +1,15 @@
-/mob/living/silicon/robot/death(gibbed)
-	var/cancel
-	if (!gibbed)
-		src.emote("deathgasp")
-	src.stat = 2
-	src.canmove = 0
+/mob/living/silicon/robot/dust()
+	//Delete the MMI first so that it won't go popping out.
+	if(mmi)
+		qdel(mmi)
+	..()
 
-	tension_master.death(src)
-
-	src.camera.status = 0.0
-
-	if(src.in_contents_of(/obj/machinery/recharge_station))//exit the recharge station
-		var/obj/machinery/recharge_station/RC = src.loc
-		RC.go_out()
-
-	if(src.blind)
-		src.blind.layer = 0
-	src.sight |= SEE_TURFS
-	src.sight |= SEE_MOBS
-	src.sight |= SEE_OBJS
-
-	src.see_in_dark = 8
-	src.see_invisible = 2
-	src.updateicon()
-
-	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
-	store_memory("Time of death: [tod]", 0)
-
-	sql_report_cyborg_death(src)
-
-	for(var/mob/M in world)
-		if ((M.client && !( M.stat )))
-			cancel = 1
-			break
-	if (!( cancel ))
-		world << "<B>Everyone is dead! Resetting in 30 seconds!</B>"
-
-		feedback_set_details("end_error","no live players")
-		feedback_set_details("round_end","[time2text(world.realtime)]")
-		if(blackbox)
-			blackbox.save_all_data_to_sql()
-
-		spawn( 300 )
-			log_game("Rebooting because of no live players")
-			world.Reboot()
-			return
-	if (src.key)
-		spawn(50)
-			if(src.key && src.stat == 2)
-				src.verbs += /mob/proc/ghost
-	return ..(gibbed)
+/mob/living/silicon/robot/death(gibbed,deathmessage, show_dead_message)
+	if(camera)
+		camera.status = 0
+	if(module)
+		for(var/obj/item/weapon/gripper/G in module.equipment)
+			G.drop_gripped_item()
+	locked = 0
+	remove_robot_verbs()
+	..(gibbed,"shudders violently for a moment, then becomes motionless, its eyes slowly darkening.", "You have suffered a critical system failure, and are dead.")

@@ -1,0 +1,28 @@
+pool:
+  vmImage: 'Ubuntu 16.04'
+
+variables:
+  imageName: 'registry.baystation12.net/baystation12:latest'
+
+steps:
+- script: git clone https://github.com/Baystation12/custom-items
+  displayName: 'clone custom items'
+
+- task: Docker@0
+  displayName: 'build'
+  inputs:
+    imageName: '$(imageName)'
+    buildArguments: BUILD_ARGS=-Icustom-items/inc.dm
+
+- task: Docker@1
+  displayName: 'registry login'
+  inputs:
+    containerregistrytype: 'Container Registry'
+    dockerRegistryEndpoint: 'bs12_2'
+    command: login
+
+- task: Docker@1
+  displayName: 'push'
+  inputs:
+    command: 'push'
+    imageName: '$(imageName)'

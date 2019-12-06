@@ -1,128 +1,74 @@
 /datum/job/hos
 	title = "Head of Security"
-	flag = HOS
-	department_flag = ENGSEC
-	faction = "Station"
+	head_position = 1
+	department = "Security"
+	department_flag = SEC|COM
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the captain"
+	selection_color = "#8e2929"
+	req_admin_notify = 1
+	economic_power = 10
+	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_heads,
+			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
+			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
+			            access_bridge, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
+	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_heads,
+			            access_forensics_lockers, access_morgue, access_maint_tunnels, access_all_personal_lockers,
+			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
+			            access_bridge, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
+	minimal_player_age = 14
+	outfit_type = /decl/hierarchy/outfit/job/security/hos
 
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/security (H), H.slot_back)
-		H.equip_if_possible(new /obj/item/device/radio/headset/heads/hos(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/head_of_security(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/armourrigvest(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/shoes/jackboots(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/heads/hos(H), H.slot_belt)
-//		H.equip_if_possible(new /obj/item/clothing/suit/armor/hos(H), H.slot_wear_suit)
-//We're Bay12, not Goon.  We don't need armor 24/7
-		H.equip_if_possible(new /obj/item/clothing/gloves/hos(H), H.slot_gloves)
-		H.equip_if_possible(new /obj/item/clothing/head/helmet/HoS(H), H.slot_head)
-		H.equip_if_possible(new /obj/item/clothing/glasses/sunglasses/sechud(H), H.slot_glasses)
-		H.equip_if_possible(new /obj/item/weapon/handcuffs(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/gun/energy/gun(H), H.slot_s_store)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		return 1
-
-
+/datum/job/hos/equip(var/mob/living/carbon/human/H)
+	. = ..()
+	if(.)
+		H.implant_loyalty(H)
 
 /datum/job/warden
 	title = "Warden"
-	flag = WARDEN
-	department_flag = ENGSEC
-	faction = "Station"
+	department = "Security"
+	department_flag = SEC
+
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of security"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_sec(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/security(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/warden(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/jackboots(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/security(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/suit/armor/vest(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/head/helmet/warden(H), H.slot_head)
-		H.equip_if_possible(new /obj/item/clothing/gloves/red(H), H.slot_gloves)
-		H.equip_if_possible(new /obj/item/clothing/glasses/sunglasses/sechud(H), H.slot_glasses)
-		H.equip_if_possible(new /obj/item/weapon/handcuffs(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/device/flash(H), H.slot_l_store)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		return 1
-
-
+	selection_color = "#601c1c"
+	economic_power = 5
+	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
+	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
+	minimal_player_age = 7
+	outfit_type = /decl/hierarchy/outfit/job/security/warden
 
 /datum/job/detective
 	title = "Detective"
-	flag = DETECTIVE
-	department_flag = ENGSEC
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
+	department = "Security"
+	department_flag = SEC
+
+	total_positions = 2
+	spawn_positions = 2
 	supervisors = "the head of security"
-	alt_titles = list("Forensic Technician")
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_sec(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/det(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/det_suit(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/shoes/brown(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/detective(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/head/det_hat(H), H.slot_head)
-/*		var/obj/item/clothing/mask/cigarette/CIG = new /obj/item/clothing/mask/cigarette(H)
-		CIG.light("")
-		H.equip_if_possible(CIG, H.slot_wear_mask)	*/
-		//Fuck that thing.  --SkyMarshal
-		H.equip_if_possible(new /obj/item/clothing/gloves/detective(H), H.slot_gloves)
-		H.equip_if_possible(new /obj/item/weapon/storage/box/evidence(H.back), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/fcardholder(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/device/detective_scanner(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/reagent_containers/food/drinks/dflask(H.back), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/zippo(H), H.slot_l_store)
-//		H.equip_if_possible(new /obj/item/weapon/reagent_containers/food/snacks/candy_corn(H), H.slot_h_store)
-//		No... just no. --SkyMarshal
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		return 1
-
-
+	selection_color = "#601c1c"
+	alt_titles = list("Forensic Technician" = /decl/hierarchy/outfit/job/security/detective/forensic)
+	economic_power = 5
+	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
+	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
+	minimal_player_age = 7
+	outfit_type = /decl/hierarchy/outfit/job/security/detective
 
 /datum/job/officer
 	title = "Security Officer"
-	flag = OFFICER
-	department_flag = ENGSEC
-	faction = "Station"
-	total_positions = 5
-	spawn_positions = 5
+	department = "Security"
+	department_flag = SEC
+
+	total_positions = 4
+	spawn_positions = 4
 	supervisors = "the head of security"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_sec(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/security(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/security(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/jackboots(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/security(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/gearharness(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/head/secsoft(H), H.slot_head)
-		H.equip_if_possible(new /obj/item/weapon/handcuffs(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/clothing/gloves/red(H), H.slot_gloves)
-		H.equip_if_possible(new /obj/item/weapon/handcuffs(H), H.slot_s_store)
-		H.equip_if_possible(new /obj/item/device/flash(H), H.slot_l_store)
-		var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(H)
-		L.imp_in = H
-		L.implanted = 1
-		return 1
+	selection_color = "#601c1c"
+	alt_titles = list("Junior Officer")
+	economic_power = 4
+	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
+	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
+	minimal_player_age = 7
+	outfit_type = /decl/hierarchy/outfit/job/security/officer

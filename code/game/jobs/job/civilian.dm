@@ -1,266 +1,118 @@
-
-
-
-
-
 //Food
 /datum/job/bartender
 	title = "Bartender"
-	flag = BARTENDER
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Service"
+	department_flag = SRV
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/bartender(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/clothing/suit/armor/vest(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/ammo_casing/shotgun/beanbag(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/ammo_casing/shotgun/beanbag(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/ammo_casing/shotgun/beanbag(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/ammo_casing/shotgun/beanbag(H), H.slot_in_backpack)
-		return 1
-
-
+	access = list(access_hydroponics, access_bar, access_kitchen)
+	minimal_access = list(access_bar)
+	alt_titles = list("Barista")
+	outfit_type = /decl/hierarchy/outfit/job/service/bartender
 
 /datum/job/chef
 	title = "Chef"
-	flag = CHEF
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/clothing/under/rank/chef(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/chef(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/clothing/head/chefhat(H), H.slot_head)
-		return 1
-
-
-
-/datum/job/hydro
-	title = "Botanist"
-	flag = BOTANIST
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Service"
+	department_flag = SRV
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the head of personnel"
+	access = list(access_hydroponics, access_bar, access_kitchen)
+	minimal_access = list(access_kitchen)
+	alt_titles = list("Cook")
+	outfit_type = /decl/hierarchy/outfit/job/service/chef
 
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/clothing/under/rank/hydroponics(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/clothing/gloves/botanic_leather(H), H.slot_gloves)
-		H.equip_if_possible(new /obj/item/clothing/suit/storage/apron(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/device/analyzer/plant_analyzer(H), H.slot_s_store)
-		return 1
-
-
+/datum/job/hydro
+	title = "Gardener"
+	department = "Service"
+	department_flag = SRV
+	total_positions = 2
+	spawn_positions = 1
+	supervisors = "the head of personnel"
+	access = list(access_hydroponics, access_bar, access_kitchen)
+	minimal_access = list(access_hydroponics)
+	alt_titles = list("Hydroponicist")
+	outfit_type = /decl/hierarchy/outfit/job/service/gardener
 
 //Cargo
 /datum/job/qm
 	title = "Quartermaster"
-	flag = QUARTERMASTER
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Supply"
+	department_flag = SUP
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/heads/qm(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/cargo(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/quartermaster(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/glasses/sunglasses(H), H.slot_glasses)
-		H.equip_if_possible(new /obj/item/weapon/clipboard(H), H.slot_r_store)
-		return 1
-
-
+	economic_power = 5
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	minimal_access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	minimal_player_age = 3
+	ideal_character_age = 40
+	outfit_type = /decl/hierarchy/outfit/job/cargo/qm
 
 /datum/job/cargo_tech
 	title = "Cargo Technician"
-	flag = CARGOTECH
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Supply"
+	department_flag = SUP
 	total_positions = 2
 	spawn_positions = 2
 	supervisors = "the quartermaster and the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_cargo(H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/cargo(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/quartermaster(H), H.slot_belt)
-		return 1
-
-
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
+	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
 
 /datum/job/mining
 	title = "Shaft Miner"
-	flag = MINER
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Supply"
+	department_flag = SUP
 	total_positions = 3
 	spawn_positions = 3
 	supervisors = "the quartermaster and the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/device/radio/headset/headset_mine (H), H.slot_ears)
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/industrial (H), H.slot_back)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/miner(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/weapon/crowbar(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/satchel(H), H.slot_in_backpack)
-		return 1
-
-
-
-/*
-//Griff
-/datum/job/clown
-	title = "Clown"
-	flag = CLOWN
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack/clown(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/weapon/storage/box/survival(H.back), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/clothing/under/rank/clown(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/clown_shoes(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/clown(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/mask/gas/clown_hat(H), H.slot_wear_mask)
-		H.equip_if_possible(new /obj/item/weapon/reagent_containers/food/snacks/grown/banana(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/bikehorn(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/stamp/clown(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/toy/crayon/rainbow(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/toy/crayonbox(H), H.slot_in_backpack)
-		H.mutations |= CLOWN
-		return 1
-
-
-
-/datum/job/mime
-	title = "Mime"
-	flag = MIME
-	department_flag = CIVILIAN
-	faction = "Station"
-	total_positions = 1
-	spawn_positions = 1
-	supervisors = "the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
-		H.equip_if_possible(new /obj/item/weapon/storage/box/survival(H.back), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/clothing/under/mime(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/mime(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/clothing/gloves/white(H), H.slot_gloves)
-		H.equip_if_possible(new /obj/item/clothing/mask/gas/mime(H), H.slot_wear_mask)
-		H.equip_if_possible(new /obj/item/clothing/head/beret(H), H.slot_head)
-		H.equip_if_possible(new /obj/item/clothing/suit/suspenders(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/toy/crayon/mime(H), H.slot_in_backpack)
-		H.equip_if_possible(new /obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing(H), H.slot_in_backpack)
-		H.verbs += /client/proc/mimespeak
-		H.verbs += /client/proc/mimewall
-		H.mind.special_verbs += /client/proc/mimespeak
-		H.mind.special_verbs += /client/proc/mimewall
-		H.miming = 1
-		return 1
-*/
-
-
+	economic_power = 5
+	access = list(access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot, access_qm, access_mining, access_mining_station)
+	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
+	alt_titles = list("Drill Technician","Prospector")
+	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
 
 /datum/job/janitor
 	title = "Janitor"
-	flag = JANITOR
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Service"
+	department_flag = SRV
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
-
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/clothing/under/rank/janitor(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/janitor(H), H.slot_belt)
-		return 1
-
-
+	access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
+	minimal_access = list(access_janitor, access_maint_tunnels, access_engine, access_research, access_sec_doors, access_medical)
+	alt_titles = list("Custodian","Sanitation Technician")
+	outfit_type = /decl/hierarchy/outfit/job/service/janitor
 
 //More or less assistants
 /datum/job/librarian
 	title = "Librarian"
-	flag = LIBRARIAN
-	department_flag = CIVILIAN
-	faction = "Station"
+	department = "Civilian"
+	department_flag = CIV
 	total_positions = 1
 	spawn_positions = 1
 	supervisors = "the head of personnel"
+	access = list(access_library, access_maint_tunnels)
+	minimal_access = list(access_library)
+	alt_titles = list("Journalist")
+	outfit_type = /decl/hierarchy/outfit/job/librarian
 
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/clothing/under/suit_jacket/red(H), H.slot_w_uniform)
-		H.equip_if_possible(new /obj/item/clothing/shoes/black(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/weapon/barcodescanner(H), H.slot_l_store)
-		return 1
-
-
-
-var/global/lawyer = 0//Checks for another lawyer
 /datum/job/lawyer
-	title = "Lawyer"
-	flag = LAWYER
-	department_flag = CIVILIAN
-	faction = "Station"
+	title = "Internal Affairs Agent"
+	department = "Support"
+	department_flag = SPT
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of personnel"
+	supervisors = "company officials and Corporate Regulations"
+	economic_power = 7
+	access = list(access_lawyer, access_sec_doors, access_maint_tunnels, access_bridge)
+	minimal_access = list(access_lawyer, access_sec_doors, access_bridge)
+	minimal_player_age = 10
+	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
 
-
-	equip(var/mob/living/carbon/human/H)
-		if(!H)	return 0
-		H.equip_if_possible(new /obj/item/weapon/storage/backpack(H), H.slot_back)
-		if(!lawyer)
-			lawyer = 1
-			H.equip_if_possible(new /obj/item/clothing/under/lawyer/bluesuit(H), H.slot_w_uniform)
-			H.equip_if_possible(new /obj/item/clothing/suit/lawyer/bluejacket(H), H.slot_wear_suit)
-		else
-			H.equip_if_possible(new /obj/item/clothing/under/lawyer/purpsuit(H), H.slot_w_uniform)
-			H.equip_if_possible(new /obj/item/clothing/suit/lawyer/purpjacket(H), H.slot_wear_suit)
-		H.equip_if_possible(new /obj/item/clothing/shoes/brown(H), H.slot_shoes)
-		H.equip_if_possible(new /obj/item/device/pda/lawyer(H), H.slot_belt)
-		H.equip_if_possible(new /obj/item/device/detective_scanner(H), H.slot_in_backpack)//Why do they even get this?
-		H.equip_if_possible(new /obj/item/weapon/storage/briefcase(H), H.slot_l_hand)
-		return 1
-
-
+/datum/job/lawyer/equip(var/mob/living/carbon/human/H)
+	. = ..()
+	if(.)
+		H.implant_loyalty(H)

@@ -1,27 +1,43 @@
-/mob/living/silicon/robot/examine()
-	set src in oview()
+/mob/living/silicon/robot/examine(mob/user, distance)
+	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
+	. = ..(user, distance, infix = custom_infix)
 
-	usr << "\blue *---------*"
-	usr << text("\blue This is \icon[src] <B>[src.name]</B>!")
-	if (src.stat == 2)
-		usr << text("\red [src.name] is powered-down.")
+	var/msg = ""
+	msg += "<span class='warning'>"
 	if (src.getBruteLoss())
 		if (src.getBruteLoss() < 75)
-			usr << text("\red [src.name] looks slightly dented")
+			msg += "It looks slightly dented.\n"
 		else
-			usr << text("\red <B>[src.name] looks severely dented!</B>")
+			msg += "<B>It looks severely dented!</B>\n"
 	if (src.getFireLoss())
 		if (src.getFireLoss() < 75)
-			usr << text("\red [src.name] looks slightly burnt!")
+			msg += "It looks slightly charred.\n"
 		else
-			usr << text("\red <B>[src.name] looks severely burnt!</B>")
-	if (src.stat == 1)
-		usr << text("\red [src.name] doesn't seem to be responding.")
+			msg += "<B>It looks severely burnt and heat-warped!</B>\n"
+	msg += "</span>"
+
 	if(opened)
-		usr << "The cover is open and the power cell is [ cell ? "installed" : "missing"]."
+		msg += "<span class='warning'>Its cover is open and the power cell is [cell ? "installed" : "missing"].</span>\n"
 	else
-		usr << "The cover is closed."
+		msg += "Its cover is closed.\n"
 
-	print_flavor_text()
+	if(!has_power)
+		msg += "<span class='warning'>It appears to be running on backup power.</span>\n"
 
+	switch(src.stat)
+		if(CONSCIOUS)
+			if(!src.client)	msg += "It appears to be in stand-by mode.\n" //afk
+		if(UNCONSCIOUS)		msg += "<span class='warning'>It doesn't seem to be responding.</span>\n"
+		if(DEAD)			msg += "<span class='deadsay'>It looks completely unsalvageable.</span>\n"
+	msg += "*---------*"
+
+	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
+
+	if (pose)
+		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
+			pose = addtext(pose,".") //Makes sure all emotes end with a period.
+		msg += "\nIt [pose]"
+
+	to_chat(user, msg)
+	user.showLaws(src)
 	return

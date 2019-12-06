@@ -1,0 +1,121 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/obj/random/trash,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/random/loot,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/machinery/floodlight,
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/obj/machinery/mining/brace,
+/turf/template_noop,
+/area/template_noop)
+"g" = (
+/obj/structure/ore_box,
+/turf/template_noop,
+/area/template_noop)
+"j" = (
+/obj/random/tool,
+/turf/template_noop,
+/area/template_noop)
+"k" = (
+/obj/machinery/mining/drill,
+/turf/template_noop,
+/area/template_noop)
+"l" = (
+/obj/structure/pit,
+/turf/template_noop,
+/area/template_noop)
+"n" = (
+/obj/random/drinkbottle,
+/turf/template_noop,
+/area/template_noop)
+"s" = (
+/obj/random/loot,
+/turf/template_noop,
+/area/template_noop)
+"y" = (
+/obj/random/hat,
+/turf/template_noop,
+/area/template_noop)
+"H" = (
+/obj/random/powercell,
+/turf/template_noop,
+/area/template_noop)
+"O" = (
+/obj/random/toolbox,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+b
+a
+a
+j
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+f
+a
+b
+n
+a
+"}
+(3,1,1) = {"
+b
+d
+g
+a
+k
+a
+O
+"}
+(4,1,1) = {"
+a
+a
+a
+s
+l
+a
+a
+"}
+(5,1,1) = {"
+a
+e
+b
+a
+a
+b
+a
+"}
+(6,1,1) = {"
+a
+H
+b
+a
+j
+b
+y
+"}
+(7,1,1) = {"
+a
+a
+a
+b
+a
+a
+a
+"}

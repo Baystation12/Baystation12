@@ -1,0 +1,90 @@
+<h3>Sensors control console</h3>
+<div class='block'>
+	{{:helper.link(data.on ? 'Switch off' : 'Switch on', 'gear', { 'toggle' : 1 }, data.status != 'MISSING' ? null : 'disabled', data.on ? 'selected' : null)}}
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Status:</span>
+		</div>
+		<div class="itemContent">
+			{{:data.status}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			<span class='white'>Range:</span>
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.range, null, { 'range' : 1 }, null, null)}}
+		</div>
+	</div>
+</div>
+<div class='block'>
+	<div class='item'>
+		<div class="itemLabel">
+			Integrity:
+		</div>
+		<div class="itemContent">
+			{{if data.health < (data.max_health * 0.25)}}
+				{{:helper.displayBar(data.health, 0, data.max_health, 'bad')}}
+				<br><span class="bad">{{:data.health}}/{{:data.max_health}}</span>
+			{{else data.health < data.max_health *.75}}
+				{{:helper.displayBar(data.health, 0, data.max_health, 'average')}}
+				<br><span class="average">{{:data.health}}/{{:data.max_health}}</span>
+			{{else}}
+				{{:helper.displayBar(data.health, 0, data.max_health, 'good')}}
+				<br><span class="good">{{:data.health}}/{{:data.max_health}}</span>
+			{{/if}}
+		</div>
+	</div>
+	<div class='item'>
+		<div class="itemLabel">
+			Temperature:
+		</div>
+		<div class="itemContent">
+			{{if data.heat < (data.critical_heat * 0.5)}}
+				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'good')}}
+			{{else data.heat < (data.critical_heat * 0.75)}}
+				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'average')}}
+			{{else}}
+				{{:helper.displayBar(data.heat, 0, data.critical_heat, 'bad')}}
+			{{/if}}
+		</div>
+		<div class="itemContent">
+			{{if data.heat < (data.critical_heat * 0.5)}}
+				<span class="good">Temperature low.</span>
+			{{else data.heat < (data.critical_heat * 0.75)}}
+				<span class="average">Sensor temperature high!</span>
+			{{else}}
+				<span class="bad">TEMPERATURE CRITICAL: Disable or reduce power immediately!</span>
+			{{/if}}
+		</div>
+	</div>
+</div>
+<div class='item'>
+	<div class="itemContent">
+		<div class='item'>
+			<span class='white'>Sector map view</span>
+			{{:helper.link(data.viewing ? 'Engaged' : 'Disengaged', 'shuffle', { 'viewing' : 1 }, null, data.viewing ? 'selected' : null)}}
+		</div>
+	</div>
+</div>
+<h4>Sensor contacts</h4>
+<div class='block'>
+{{if data.contacts}}
+	<table>
+	{{for data.contacts}}
+	<tr>
+	<div class='item'>
+		<td>{{:helper.link('Scan', 'search' ,{ 'scan' : value.ref }, null, null)}}</td>
+		<td><span class='white'>{{:value.name}}</span>, bearing {{:value.bearing}}</td>
+	</div>
+	</tr>
+	{{/for}}
+	</table>
+{{/if}}
+</div>
+{{if data.status == 'MISSING'}}
+	<div class='item'>
+		{{:helper.link('Link up with the sensor suite', 'gear', { 'link' : 1 }, data.status == 'MISSING' ? null : 'disabled', null)}}
+	</div>
+{{/if}}

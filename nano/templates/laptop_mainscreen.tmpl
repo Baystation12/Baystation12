@@ -1,0 +1,16 @@
+{{if data.updating}}
+<div class='block' style="background-color: #001d4c; color: #FFFFFF; text-align: center; padding: 50px 0;">
+	Please do not power off or unplug your machine.
+	<br>
+	Installing update {{:data.update_progress}}/{{:data.updates}}
+</div>
+{{else}}
+<i>No program loaded. Please select program from list below.</i>
+<table>
+{{for data.programs}}
+	<tr><td>{{:helper.link(value.desc, value.icon, {'PC_runprogram' : value.name})}}
+	<td>{{:helper.link('X', null, {'PC_killprogram' : value.name}, (value.running ? null : 'disabled'))}} 
+	<td>{{:helper.link('AR', null, {'PC_setautorun' : value.name}, null, (value.autorun ? 'yellowButton' : null))}} 
+{{/for}}
+</table>
+{{/if}}

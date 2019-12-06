@@ -1,0 +1,131 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/wall/diamond,
+/area/template_noop)
+"b" = (
+/turf/simulated/floor,
+/area/template_noop)
+"c" = (
+/mob/living/simple_animal/corgi,
+/turf/simulated/floor,
+/area/template_noop)
+"d" = (
+/turf/simulated/open,
+/area/template_noop)
+"e" = (
+/turf/unsimulated/floor/shuttle_ceiling,
+/area/template_noop)
+"f" = (
+/obj/effect/landmark/map_data{
+	height = 3
+	},
+/turf/unsimulated/floor/shuttle_ceiling,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+b
+b
+b
+a
+"}
+(3,1,1) = {"
+a
+b
+c
+b
+a
+"}
+(4,1,1) = {"
+a
+b
+b
+b
+a
+"}
+(5,1,1) = {"
+a
+a
+a
+a
+a
+"}
+
+(1,1,2) = {"
+a
+a
+a
+a
+a
+"}
+(2,1,2) = {"
+a
+d
+d
+d
+a
+"}
+(3,1,2) = {"
+a
+d
+d
+d
+a
+"}
+(4,1,2) = {"
+a
+d
+d
+d
+a
+"}
+(5,1,2) = {"
+a
+a
+a
+a
+a
+"}
+
+(1,1,3) = {"
+e
+e
+e
+e
+f
+"}
+(2,1,3) = {"
+e
+e
+e
+e
+e
+"}
+(3,1,3) = {"
+e
+e
+e
+e
+e
+"}
+(4,1,3) = {"
+e
+e
+e
+e
+e
+"}
+(5,1,3) = {"
+e
+e
+e
+e
+e
+"}

@@ -1,0 +1,194 @@
+{{if data.error}}
+	{{:data.error}}<br>
+	{{:helper.link('Return', null, {'reset' : 1})}}
+{{else data.downloading}}
+		<p>Downloading attachment...</p>
+		<div class="item">
+		<div class="itemLabel">
+			File name:
+		</div>
+		<div class="itemContent">
+			{{:data.down_filename}}&nbsp
+		</div>
+		<div class="itemLabel">
+			Progress:
+		</div>
+		<div class="itemContent">
+			{{:helper.displayBar(data.down_progress, 0, data.down_size)}} {{:data.down_progress}} / {{:data.down_size}} GQ
+		</div>
+		<div class="itemLabel">
+			Download rate:
+		</div>
+		<div class="itemContent">
+			{{:data.down_speed}} GQ/s&nbsp
+		</div>
+	</div>
+	{{:helper.link('Cancel Download', null, {'canceldownload' : 1})}}
+{{else data.current_account}}
+	<b>Welcome to your account, {{:data.current_account}}</b><br>
+	{{:helper.link('New Message', 'mail-closed', {'new_message' : 1})}}
+	{{:helper.link('Change Password', 'locked', {'changepassword' : 1})}}
+	{{:helper.link('Log Out', 'key', {'logout' : 1})}}<br><br>
+	{{if data.addressbook}}
+		{{:helper.link('Back', null, {'close_addressbook' : 1})}}
+		{{:helper.link('Enter Email', 'pencil', {'edit_recipient' : 1})}}
+		<br><br>
+		<table>
+		<tr><td>Address book:
+		{{for data.accounts}}
+			<tr class="candystripe"><td>{{:value.name}}<td>{{:value.job}}<td>{{:helper.link(value.login, null, {'set_recipient' : value.login})}}
+		{{/for}}
+		</table>
+	{{else data.new_message}}
+		<div class="item">
+			<div class="itemLabel">
+				{{:helper.link('', 'pencil', {'edit_title' : 1})}} Title:
+			</div>
+			<div class="itemContent">
+				<div class="statusDisplayComm" style="width:100%;min-height:1.7em;padding-bottom: 0;">
+					{{:data.msg_title}}
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				{{:helper.link('', 'plusthick', {'addressbook' : 1})}} Recipient:
+			</div>
+			<div class="itemContent">
+				<div class="statusDisplayComm" style="width:100%;min-height:1.7em;padding-bottom: 0;">
+					{{:data.msg_recipient}}
+				</div>
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				{{:helper.link('','pencil', {'edit_body' : 1})}} Message:
+			</div>
+			<div class="itemContent">
+				<div class="statusDisplayComm" style="width:100%;min-height:1.7em;padding-bottom: 0;">
+					{{:data.msg_body}}
+				</div>
+			</div>
+		</div>
+			{{if data.msg_hasattachment}}
+				<div class="item">
+					<div class="itemLabel">
+						Attachment:
+					</div>
+					<div class="itemContent">
+						{{:data.msg_attachment_filename}} ({{:data.msg_attachment_size}}GQ)
+					</div>
+				</div>
+			{{/if}}
+			<div class="itemContent">
+				{{:helper.link('Add attachment', null, {'addattachment' : 1})}}
+				{{if data.msg_hasattachment}}
+					{{:helper.link('Remove attachment', null, {'remove_attachment' : 1})}}
+				{{/if}}
+				{{:helper.link('Send', null, {'send' : 1})}}
+				{{:helper.link('Cancel', null, {'cancel' : 1})}}
+			</div>
+		</div>
+	{{else data.cur_title}}
+		<div class="item">
+			<div class="itemLabel">
+				Title:
+			</div>
+			<div class="itemContent">
+				{{:data.cur_title}}&nbsp
+			</div>
+			<div class="itemLabel">
+				Origin:
+			</div>
+			<div class="itemContent">
+				{{:data.cur_source}}&nbsp
+			</div>
+			<div class="itemLabel">
+				Received at:
+			</div>
+			<div class="itemContent">
+				{{:data.cur_timestamp}}&nbsp
+			</div>
+			<div class="itemLabel">
+				Message:
+			</div>
+			<div class="itemContent">
+				{{:data.cur_body}}&nbsp
+			</div>
+			{{if data.cur_hasattachment}}
+				<div class="itemLabel">
+					Attachment:
+				</div>
+				<div class="itemContent">
+					{{:data.cur_attachment_filename}} ({{:data.cur_attachment_size}}GQ)
+				</div>
+			{{/if}}
+			<div class="itemLabel">
+				Options:
+			</div>
+			<div class="itemContent">
+				{{:helper.link('Reply', null, {'reply' : data.cur_uid})}}
+				{{:helper.link('Delete', null, {'delete' : data.cur_uid})}}
+				{{:helper.link('Close', null, {'cancel' : data.cur_uid})}}
+				{{:helper.link('Save to Disk', null, {'save' : data.cur_uid})}}
+				{{if data.cur_hasattachment}}
+					{{:helper.link('Save Attachment', null, {'downloadattachment' : 1})}}
+				{{/if}}
+			</div>
+		</div>
+	{{else}}
+		{{:helper.link('Inbox', 'mail-closed', {'set_folder' : 'Inbox'}, data.folder == 'Inbox' ? 'selected' : null)}}
+		{{:helper.link('Sent', 'arrowreturnthick-1-w', {'set_folder' : 'Sent'}, data.folder == 'Sent' ? 'selected' : null)}}
+		{{:helper.link('Spam', 'cancel', {'set_folder' : 'Spam'}, data.folder == 'Spam' ? 'selected' : null)}}
+		{{:helper.link('Deleted', 'trash', {'set_folder' : 'Deleted'}, data.folder == 'Deleted' ? 'selected' : null)}}
+		<br><br>
+		{{if data.messagecount}}
+			<table>
+				<tr>
+					<th>Source</th>
+					<th>Title</th>
+					<th>Received at</th>
+					<th></th>
+				</tr>
+				{{for data.messages}}
+					<tr class="candystripe">
+						<td>{{:value.source}}&nbsp</td>
+						<td>{{:value.title}}&nbsp</td>
+						<td>{{:value.timestamp}}&nbsp</td>
+						<td>
+							{{:helper.link('', 'trash', {'delete' : value.uid})}}
+							{{:helper.link('', 'arrowreturnthick-1-w', {'reply' :  value.uid})}}
+							{{:helper.link('', 'search', {'view' :  value.uid})}}
+						</td>
+					</tr>
+				{{/for}}
+			</table>
+		{{else}}
+			<b>No messages found in selected folder</b>
+		{{/if}}
+	{{/if}}
+{{else}}
+	<b>Welcome to NTNet Email System. Please log in.</b>
+	<div class="item">
+		<div class="itemLabel">
+			Email address:
+		</div>
+		<div class="itemContent">
+			{{:data.stored_login}}&nbsp
+		</div>
+		<div class="itemLabel">
+			Password:
+		</div>
+		<div class="itemContent">
+			{{:data.stored_password}}&nbsp
+		</div>
+		<div class="itemLabel">
+			Options:
+		</div>
+		<div class="itemContent">
+			{{:helper.link('Enter Login', null, {'edit_login' : 1})}}
+			{{:helper.link('Enter Password', null, {'edit_password' : 1})}}
+			{{:helper.link('Log In', null, {'login' : 1})}}
+		</div>
+	</div>
+{{/if}}

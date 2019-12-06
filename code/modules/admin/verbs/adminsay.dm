@@ -2,28 +2,38 @@
 	set category = "Special Verbs"
 	set name = "Asay" //Gave this shit a shorter name so you only have to time out "asay" rather than "admin say" to use it --NeoFite
 	set hidden = 1
+	if(!check_rights(R_ADMIN))	return
 
-	//	All admins should be authenticated, but... what if?
+	msg = sanitize(msg)
+	if(!msg)	return
 
-	if (!src.holder)
-		src << "Only administrators may use this command."
+	log_admin("ADMIN: [key_name(src)] : [msg]")
+
+	if(check_rights(R_ADMIN,0))
+		for(var/client/C in GLOB.admins)
+			if(R_ADMIN & C.holder.rights)
+				to_chat(C, "<span class='admin_channel'>" + create_text_tag("admin", "ADMIN:", C) + " <span class='name'>[key_name(usr, 1)]</span>([admin_jump_link(mob, src)]): <span class='message'>[msg]</span></span>")
+
+	SSstatistics.add_field_details("admin_verb","M") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
+/client/proc/cmd_mod_say(msg as text)
+	set category = "Special Verbs"
+	set name = "Msay"
+	set hidden = 1
+
+	if(!check_rights(R_ADMIN|R_MOD))
 		return
 
-	if (src.muted || src.muted_complete)
-		src << "You are muted."
-		return
-
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
-	log_admin("[key_name(src)] : [msg]")
-
+	msg = sanitize(msg)
+	log_admin("MOD: [key_name(src)] : [msg]")
 
 	if (!msg)
 		return
 
-	for (var/mob/M in world)
-		if (M.client && M.client.holder)
-			if (src.holder.rank == "Admin Observer")
-				M << "<span class=\"gfartadmin\"><span class=\"prefix\">ADMIN:</span> <span class=\"name\">[key_name(usr, M)]:</span> <span class=\"message\">[msg]</span></span>"
-			else
-				M << "<span class=\"admin\"><span class=\"prefix\">ADMIN:</span> <span class=\"name\">[key_name(usr, M)]</span><a href='?src=\ref[M.client.holder];jumpto=\ref[mob]'>X</a>: <span class=\"message\">[msg]</span></span>"
+	var/sender_name = key_name(usr, 1)
+	if(check_rights(R_ADMIN, 0))
+		sender_name = "<span class='admin'>[sender_name]</span>"
+	for(var/client/C in GLOB.admins)
+		to_chat(C, "<span class='mod_channel'>" + create_text_tag("mod", "MOD:", C) + " <span class='name'>[sender_name]</span>([admin_jump_link(mob, C.holder)]): <span class='message'>[msg]</span></span>")
 
+	SSstatistics.add_field_details("admin_verb","MS") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

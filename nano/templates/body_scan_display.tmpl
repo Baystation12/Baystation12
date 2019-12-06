@@ -1,0 +1,14 @@
+<table class='block' border='1' width='98%'><tr><th colspan='3'>Scans</th></tr>
+<tr><th>Patient Name</th><th>Scan Time</th><th>Action</th></tr>
+{{for data.scans}}
+    <tr><td>{{:value.name}}</td><td>{{:value.time}}</td><td align='center'>{{:helper.link('View', null, {'view' : index+1  })}}{{:helper.link('','trash',{'delete' : index+1 })}}</td></tr>
+{{empty}}
+    <tr><td colspan='3'><center>There are no scans available.</center></td></tr>
+{{/for}}
+</table>
+<hr>
+{{if data.selected > 0}}
+	{{:data.scan_header}}
+    {{:data.scan_health}}
+    {{:data.scan_body}}
+{{/if}}

@@ -1,20 +1,19 @@
-/client/proc/ticklag(number as num)
+//Merged Doohl's and the existing ticklag as they both had good elements about them ~Carn
+
+/client/proc/ticklag()
 	set category = "Debug"
-	set name = "Ticklag"
-	set desc = "Ticklag"
-	set hidden = 1
-	if(Debug2)
-		if(src.holder)
-			if(!src.mob)
-				return
-			if(src.holder.rank in list("Game Admin", "Game Master"))
-				world.tick_lag = number
-				log_admin("[key_name(src.mob)] set tick_lag to [number]")
-				message_admins("[key_name_admin(usr)] modified world's tick_lag to [number]")
-			else
-				alert("Fuck off, no crashing dis server")
-				return
+	set name = "Set Ticklag"
+	set desc = "Sets a new tick lag. Recommend you don't mess with this too much! Stable, time-tested ticklag value is 0.9"
+
+	if(!check_rights(R_DEBUG))	return
+
+	var/newtick = input("Sets a new tick lag. Please don't mess with this too much! The stable, time-tested ticklag value is 0.9","Lag of Tick", world.tick_lag) as num|null
+	//I've used ticks of 2 before to help with serious singulo lags
+	if(newtick && newtick <= 2 && newtick > 0)
+		log_admin("[key_name(src)] has modified world.tick_lag to [newtick]", 0)
+		message_admins("[key_name(src)] has modified world.tick_lag to [newtick]", 0)
+		world.tick_lag = newtick
+		SSstatistics.add_field_details("admin_verb","TICKLAG") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	else
-		alert("Debugging is disabled")
-		return
+		to_chat(src, "<span class='warning'>Error: ticklag(): Invalid world.ticklag value. No changes made.</span>")
 
