@@ -1,0 +1,5 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Engineering bay and atmospherics have been remapped to be less cramped and more space efficient."
+  - maptweak: "RPDs added to atmospherics lockers. Additional EVA hardsuit and Atmos Voidsuit added to engineering."
