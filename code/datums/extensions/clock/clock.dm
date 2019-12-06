@@ -44,13 +44,13 @@
 		[pick("glances at", "checks", "consults", "looks at", "studies", "contemplates", \
 		"considers", "observes", "eyes", "views", "eyeballs", "takes a look at", \
 		"takes a glance at", "takes a gander at")] \
-		their [holder].</span>","<span class='notice'>You check your [holder].</span>")
+		their [holder.name].</span>","<span class='notice'>You check your [holder.name].</span>")
 	check(user)
 
 /datum/extension/clock/verb/calibrate_verb(mob/user)
 	if (do_after(user, 80 - 60*digital, src))
-		user.visible_message("<span class='notice'>[user] adjusts their [holder].</span>", \
-			"<span>You adjust your [holder]. Perfect!</span>")
+		user.visible_message("<span class='notice'>[user] adjusts their [holder.name].</span>", \
+			"<span>You adjust your [holder.name]. Perfect!</span>")
 		if (inaccuracy > 30 MINUTES)
 			inaccuracy = 30 MINUTES
 		inaccuracy *= 2 * (rand() - 0.5) * (0.1 * user.skill_fail_chance(SKILL_BUREAUCRACY, 20, SKILL_MAX))
