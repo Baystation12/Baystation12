@@ -1,0 +1,4 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - tweak: "You can no longer hear aiming sounds, unless you are being aimed at/aiming at."
