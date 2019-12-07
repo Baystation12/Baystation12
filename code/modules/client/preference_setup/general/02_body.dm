@@ -207,6 +207,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ_name = BP_LIVER
 			if(BP_KIDNEYS)
 				organ_name = BP_KIDNEYS
+			if(BP_STOMACH)
+				organ_name = BP_STOMACH
 			if(BP_CHEST)
 				organ_name = "upper body"
 			if(BP_GROIN)
@@ -557,7 +559,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					for(var/other_limb in (BP_ALL_LIMBS - BP_CHEST))
 						pref.organ_data[other_limb] = null
 						pref.rlimb_data[other_limb] = null
-						for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_BRAIN))
+						for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH,BP_BRAIN))
 							pref.organ_data[internal_organ] = null
 				pref.organ_data[limb] = null
 				pref.rlimb_data[limb] = null
@@ -613,7 +615,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["organs"])
-		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes", "Lungs", "Liver", "Kidneys")
+		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes", "Lungs", "Liver", "Kidneys", "Stomach")
 		if(!organ_name) return
 
 		var/organ = null
@@ -628,6 +630,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ = BP_LIVER
 			if("Kidneys")
 				organ = BP_KIDNEYS
+			if("Stomach")
+				organ = BP_STOMACH
 
 		var/list/organ_choices = list("Normal","Assisted","Synthetic")
 

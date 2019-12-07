@@ -37,9 +37,15 @@
 /obj/item/weapon/melee/baton/get_cell()
 	return bcell
 
+/obj/item/weapon/melee/baton/proc/update_status()
+	if(bcell.charge < hitcost)
+		status = 0
+		update_icon()
+
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
 		if(bcell.checked_use(chrgdeductamt))
+			update_status()
 			return 1
 		else
 			status = 0
@@ -103,7 +109,7 @@
 		..()
 
 /obj/item/weapon/melee/baton/proc/set_status(var/newstatus, mob/user)
-	if(bcell && bcell.charge > hitcost)
+	if(bcell && bcell.charge >= hitcost)
 		if(status != newstatus)
 			change_status(newstatus)
 			to_chat(user, "<span class='notice'>[src] is now [status ? "on" : "off"].</span>")
@@ -170,7 +176,6 @@
 	if(status)
 		target.stun_effect_act(stun, agony, hit_zone, src)
 		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
-
 		deductcharge(hitcost)
 
 		if(ishuman(target))
