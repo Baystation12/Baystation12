@@ -6,6 +6,8 @@
 	icon = 'code/modules/halo/icons/overmap/32x32 Overmap Space Station.dmi'
 	icon_state = "Static Station"
 
+	anchored = 1
+
 	ship_name_list = list()
 
 	messages_on_hit = list("Automated Shipyard taking fire!")
