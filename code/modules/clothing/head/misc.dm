@@ -147,6 +147,15 @@
 		)
 	siemens_coefficient = 0.9
 
+/obj/item/clothing/head/flatcap/gray
+	icon_state = "gentcap"
+
+/obj/item/clothing/head/flatcap/black
+	icon_state = "flatblack"
+
+/obj/item/clothing/head/flatcap/navy
+	icon_state = "flatnavy"
+
 /obj/item/clothing/head/pirate
 	name = "pirate hat"
 	desc = "Yarr."

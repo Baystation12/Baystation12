@@ -36,7 +36,6 @@
 	var/caps = list()
 	caps["black cap"] = /obj/item/clothing/head/soft/black
 	caps["blue cap"] = /obj/item/clothing/head/soft/blue
-	caps["flat cap"] = /obj/item/clothing/head/flatcap
 	caps["green cap"] = /obj/item/clothing/head/soft/green
 	caps["grey cap"] = /obj/item/clothing/head/soft/grey
 	caps["mailman cap"] = /obj/item/clothing/head/mailman
@@ -48,6 +47,19 @@
 	caps["yellow cap"] = /obj/item/clothing/head/soft/yellow
 	caps["major bill's shipping cap"] = /obj/item/clothing/head/soft/mbill
 	gear_tweaks += new/datum/gear_tweak/path(caps)
+
+/datum/gear/head/flatcap
+	display_name = "flatcap selection"
+	path = /obj/item/clothing/head/flatcap
+
+/datum/gear/head/flatcap/New()
+	..()
+	var/flatcaps = list()
+	flatcaps["brown flatcap"] = /obj/item/clothing/head/flatcap
+	flatcaps["gray flatcap"] = /obj/item/clothing/head/flatcap/gray
+	flatcaps["black flatcap"] = /obj/item/clothing/head/flatcap/black
+	flatcaps["navy flatcap"] = /obj/item/clothing/head/flatcap/navy
+	gear_tweaks += new/datum/gear_tweak/path(flatcaps)
 
 /datum/gear/head/hairflower
 	display_name = "hair flower pin"
