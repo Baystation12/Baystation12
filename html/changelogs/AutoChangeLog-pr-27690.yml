@@ -1,0 +1,6 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - rscadd: "Added option to change type of stomach in character setup menu"
+  - bugfix: "Fixed bug allowing to use stun batons without charges"
+  - bugfix: "Fixed bug preventing stun prods from working with standard device cells"
