@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Burn damage from radiation exposure is nerfed by 75%."
