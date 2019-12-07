@@ -15,7 +15,7 @@
 
 /datum/preferences/proc/get_total_skill_value(datum/job/job, decl/hierarchy/skill/req_skill)
 	if(!(job in skills_allocated))
-		return 0
+		return get_min_skill(job, req_skill)
 	var/allocated = skills_allocated[job]
 	if(req_skill in allocated)
 		return allocated[req_skill] + get_min_skill(job, req_skill)
