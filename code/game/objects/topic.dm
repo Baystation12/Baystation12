@@ -14,15 +14,16 @@
 /atom/proc/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	return TOPIC_NOACTION
 
+// Override prescribes default state argument.
 /atom/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
+
+/obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
 	return min(..(), user.CanUseObjTopic(src, state))
 
-/mob/living/CanUseObjTopic(var/atom/O, var/datum/topic_state/state)
+/mob/living/CanUseObjTopic(var/obj/O, var/datum/topic_state/state)
 	. = ..()
-	if(state.check_access && ismovable(O))
-		var/atom/movable/AM = O
-		if(!AM.check_access(src))
-			. = min(., STATUS_UPDATE)
+	if(state.check_access && !O.check_access(src))
+		. = min(., STATUS_UPDATE)
 
 /mob/proc/CanUseObjTopic()
 	return STATUS_INTERACTIVE
