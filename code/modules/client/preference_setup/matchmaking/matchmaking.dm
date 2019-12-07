@@ -202,15 +202,20 @@ var/global/datum/matchmaker/matchmaker = new()
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/mob/living/Topic(href, href_list)
-	if(..())
-		return 1
+/mob/living/OnTopic(mob/living/user, href_list)
+	if(href_list["show_relations"])
+		if(istype(user))
+			user.see_relationship_info_with(src)
+			return TOPIC_HANDLED
+	return ..()
+
+/mob/living/OnSelfTopic(href_list)
 	if(href_list["del_relation"])
 		var/datum/relation/R = locate(href_list["del_relation"])
 		if(istype(R))
 			R.sever()
 			see_relationship_info()
-			return 1
+			return TOPIC_HANDLED
 	if(href_list["info_relation"])
 		var/datum/relation/R = locate(href_list["info_relation"])
 		if(istype(R))
@@ -218,7 +223,7 @@ var/global/datum/matchmaker/matchmaker = new()
 			if(info)
 				R.info = info
 				see_relationship_info()
-				return 1
+				return TOPIC_HANDLED
 	if(href_list["relations_close"])
 		var/ok = "Close anyway"
 		ok = alert("HEY! You have some non-finalized relationships. You can terminate them if they do not fit your character, or edit the info tidbit that the other party is given. THIS IS YOUR ONLY CHANCE to do so - after you close the window, they won't be editable.","Finalize relationships","Return to edit", "Close anyway")
@@ -229,9 +234,5 @@ var/global/datum/matchmaker/matchmaker = new()
 			show_browser(usr,null, "window=relations")
 		else
 			show_browser(usr,null, "window=relations")
-		return 1
-	if(href_list["show_relations"])
-		var/mob/living/L = usr
-		if(istype(L))
-			L.see_relationship_info()
-			return 1
+		return TOPIC_HANDLED
+	return ..()
