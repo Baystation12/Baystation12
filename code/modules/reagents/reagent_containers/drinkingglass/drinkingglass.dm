@@ -27,6 +27,9 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	temperature_coefficient = 4
 
+	var/custom_name
+	var/custom_desc
+
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M)
 	. = ..()
 
@@ -103,7 +106,7 @@
 	if (reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
 		SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
-		desc = R.glass_desc ? R.glass_desc : initial(desc)
+		desc = R.glass_desc || custom_desc || initial(desc)
 
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
@@ -138,8 +141,8 @@
 		for(var/k in over_liquid)
 			overlays += image(icon, src, k, -1)
 	else
-		SetName(initial(name))
-		desc = initial(desc)
+		SetName(custom_name || initial(name))
+		desc = custom_desc || initial(desc)
 
 	var/side = "left"
 	for(var/item in extras)

@@ -163,7 +163,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/punitelli
 	name = "#1 monkey coffee cup"
-	desc = "A white coffee cup, prominently featuring a \"#1 monkey\"."
+	desc = "A white coffee cup, prominently featuring a \"#1 monkey\" decal."
 	icon_state = "coffeecup_punitelli"
 	base_name = "#1 monkey cup"
 
@@ -238,3 +238,10 @@
 	filling_states = "100"
 	base_name = "teacup"
 	base_icon = "teacup"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/custom/inherit_custom_item_data(var/datum/custom_item/citem)
+	. = ..()
+	if(citem.additional_data["base_name"])
+		base_name = citem.additional_data["base_name"] || base_name
+	custom_name = citem.item_name
+	custom_desc = citem.item_desc
