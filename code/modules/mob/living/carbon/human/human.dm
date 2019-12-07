@@ -416,16 +416,20 @@
 
 	return ..()
 
+/mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	if(href_list["refresh"] || href_list["item"])
+		return ..(user, GLOB.physical_state, href_list)
+	return ..()
+
 /mob/living/carbon/human/OnTopic(mob/user, href_list)
 	if (href_list["refresh"])
-		if(Adjacent(src, user))
-			show_inv(user)
-			return TOPIC_HANDLED
+		show_inv(user)
+		return TOPIC_HANDLED
 
 	if(href_list["item"])
 		if(!handle_strip(href_list["item"],user,locate(href_list["holder"])))
 			show_inv(user)
-			return TOPIC_HANDLED
+		return TOPIC_HANDLED
 
 	if (href_list["criminal"])
 		if(hasHUD(user, HUD_SECURITY))

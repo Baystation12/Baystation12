@@ -434,6 +434,9 @@
 	unset_machine()
 	reset_view(null)
 
+/mob/DefaultTopicState()
+	return GLOB.view_state
+
 // Use to field Topic calls for which usr == src is required, which will first be funneled into here.
 /mob/proc/OnSelfTopic(href_list)
 	if(href_list["mach_close"])
