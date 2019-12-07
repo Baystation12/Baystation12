@@ -147,12 +147,12 @@
 	onclose(user, "mob[real_name]")
 	return
 
-/mob/living/simple_animal/hostile/retaliate/parrot/Topic(href, href_list, state = GLOB.physical_state)
-	if((. = ..()))
-		return
+/mob/living/simple_animal/hostile/retaliate/parrot/DefaultTopicState()
+	return GLOB.physical_state
 
-	//Is the usr's mob type able to do this?
-	if(ishuman(usr) || issmall(usr) || isrobot(usr))
+/mob/living/simple_animal/hostile/retaliate/parrot/OnTopic(mob/user, href_list)
+	//Is the user's mob type able to do this?
+	if(ishuman(user) || issmall(user) || isrobot(user))
 
 		//Removing from inventory
 		if(href_list["remove_inv"])
@@ -170,34 +170,34 @@
 							if(copytext(possible_phrase,1,3) in department_radio_keys)
 								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
 					else
-						to_chat(usr, "<span class='warning'>There is nothing to remove from its [remove_from].</span>")
-						return
+						to_chat(user, "<span class='warning'>There is nothing to remove from its [remove_from].</span>")
+			return TOPIC_HANDLED
 
 		//Adding things to inventory
-		else if(href_list["add_inv"])
+		if(href_list["add_inv"])
 			var/add_to = href_list["add_inv"]
-			if(!usr.get_active_hand())
-				to_chat(usr, "<span class='warning'>You have nothing in your hand to put on its [add_to].</span>")
-				return
+			if(!user.get_active_hand())
+				to_chat(user, "<span class='warning'>You have nothing in your hand to put on its [add_to].</span>")
+				return TOPIC_HANDLED
 			switch(add_to)
 				if("ears")
 					if(ears)
-						to_chat(usr, "<span class='warning'>It's already wearing something.</span>")
-						return
+						to_chat(user, "<span class='warning'>It's already wearing something.</span>")
+						return TOPIC_HANDLED
 					else
 						var/obj/item/item_to_add = usr.get_active_hand()
 						if(!item_to_add)
-							return
+							return TOPIC_HANDLED
 
 						if( !istype(item_to_add,  /obj/item/device/radio/headset) )
-							to_chat(usr, "<span class='warning'>This object won't fit.</span>")
-							return
-						if(!usr.unEquip(item_to_add, src))
-							return
+							to_chat(user, "<span class='warning'>This object won't fit.</span>")
+							return TOPIC_HANDLED
+						if(!user.unEquip(item_to_add, src))
+							return TOPIC_HANDLED
 						var/obj/item/device/radio/headset/headset_to_add = item_to_add
 
 						src.ears = headset_to_add
-						to_chat(usr, "You fit the headset onto [src].")
+						to_chat(user, "You fit the headset onto [src].")
 
 						clearlist(available_channels)
 						for(var/ch in headset_to_add.channels)
@@ -216,8 +216,9 @@
 									available_channels.Add(":d")
 								if("Cargo")
 									available_channels.Add(":q")
-		else
-			..()
+			return TOPIC_HANDLED
+
+	return ..()
 
 
 /*
