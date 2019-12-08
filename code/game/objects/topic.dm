@@ -29,8 +29,6 @@
 	return STATUS_INTERACTIVE
 
 /atom/proc/CouldUseTopic(var/mob/user)
-
-/obj/CouldUseTopic(var/mob/user)
 	user.AddTopicPrint(src)
 
 /mob/proc/AddTopicPrint(var/atom/target)
