@@ -91,7 +91,7 @@
 /obj/item/weapon/gun/energy/chameleon/get_antag_info()
 	. = ..()
 	. += "This gun is actually a hologram projector that can alter its appearance to mimick other weapons. To change the appearance, use \
-	the appropriate verb in the chameleon items tab. Any beams or projectiles fired from this gun are actually holograms and useless for actual combat. \
+	the appropriate verb in the object tab. Any beams or projectiles fired from this gun are actually holograms and useless for actual combat. \
 	Projecting these holograms over distance uses a little bit of charge.<br>"
 
 /datum/codex_entry/energy_weapons
