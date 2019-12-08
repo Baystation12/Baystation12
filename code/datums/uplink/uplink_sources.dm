@@ -82,7 +82,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/unit
 	name = "Uplink Unit"
-	desc = "Teleports an uplink unit to your location. Gives extra 30% of the initial TC amount."
+	desc = "Teleports an uplink unit to your location. Has 30% more TC."
 
 /decl/uplink_source/unit/setup_uplink_source(var/mob/M, var/amount)
 	var/obj/item/device/radio/uplink/U = new(M, M.mind, round(amount * 1.3))
@@ -90,7 +90,7 @@ GLOBAL_LIST_INIT(default_uplink_source_priority, list(
 
 /decl/uplink_source/telecrystals
 	name = "Telecrystals"
-	desc = "Get your telecrystals in pure form, without the means to trade them for goods, Gives 150% of initial TC amout"
+	desc = "Get your telecrystals in pure form, without the means to trade them for goods, Gives 150% of initial TC amount"
 
 /decl/uplink_source/telecrystals/setup_uplink_source(var/mob/M, var/amount)
 	amount = round(amount * 1.5)
