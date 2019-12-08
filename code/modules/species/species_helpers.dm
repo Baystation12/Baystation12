@@ -34,7 +34,9 @@ var/list/stored_shock_by_ref = list()
 				canvas.Blend(equip, ICON_OVERLAY, facing_list["x"]+1, facing_list["y"]+1)
 				final_I.Insert(canvas, dir = use_dir)
 			equip_overlays[image_key] = overlay_image(final_I, color = color, flags = RESET_COLOR)
-		return equip_overlays[image_key]
+		var/image/I = new() // We return a copy of the cached image, in case downstream procs mutate it.
+		I.appearance = equip_overlays[image_key]
+		return I
 	return overlay_image(mob_icon, mob_state, color, RESET_COLOR)
 
 /datum/species/proc/water_act(var/mob/living/carbon/human/H, var/depth)
