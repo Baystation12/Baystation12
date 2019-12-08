@@ -116,6 +116,11 @@
 	handled_vars = list("name" = /atom/proc/SetName)
 	predicates = list(/proc/is_text_predicate)
 
+/decl/vv_set_handler/desc_handler
+	handled_type = /atom
+	handled_vars = list("desc" = /atom/proc/SetDesc)
+	predicates = list(/proc/is_text_predicate)
+
 /decl/vv_set_handler/light_handler
 	handled_type = /atom
 	handled_vars = list("light_max_bright","light_inner_range","light_outer_range","light_falloff_curve")

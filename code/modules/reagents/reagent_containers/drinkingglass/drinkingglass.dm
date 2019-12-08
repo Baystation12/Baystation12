@@ -27,9 +27,6 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	temperature_coefficient = 4
 
-	var/custom_name
-	var/custom_desc
-
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M)
 	. = ..()
 
@@ -86,6 +83,8 @@
 	. = ..()
 	if(!icon_state)
 		icon_state = base_icon
+	set_extension(src, /datum/extension/base_name, name)
+	set_extension(src, /datum/extension/base_desc, desc)
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/on_reagent_change()
 	temperature_coefficient = 4 / max(1, reagents.total_volume)
@@ -105,8 +104,10 @@
 
 	if (reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
-		SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
-		desc = R.glass_desc || custom_desc || initial(desc)
+		ChangeName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
+
+		var/datum/extension/base_desc/bd = get_extension(src, /datum/extension/base_desc)
+		desc = R.glass_desc || bd.base_desc
 
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
@@ -141,8 +142,10 @@
 		for(var/k in over_liquid)
 			overlays += image(icon, src, k, -1)
 	else
-		SetName(custom_name || initial(name))
-		desc = custom_desc || initial(desc)
+		var/datum/extension/base_name/bn = get_extension(src, /datum/extension/base_name)
+		var/datum/extension/base_desc/bd = get_extension(src, /datum/extension/base_desc)
+		ChangeName(bn.base_name)
+		desc = bd.base_desc
 
 	var/side = "left"
 	for(var/item in extras)

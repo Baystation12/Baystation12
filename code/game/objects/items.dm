@@ -844,14 +844,20 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/inherit_custom_item_data(var/datum/custom_item/citem)
 	. = src
+	var/update_icon = FALSE
 	if(citem.item_name)
-		SetName(citem.item_name)
+		SetName(citem.item_name, FALSE)
+		update_icon = TRUE
 	if(citem.item_desc)
-		desc = citem.item_desc
+		SetDesc(citem.item_desc, FALSE)
+		update_icon = TRUE
 	if(citem.item_icon_state)
 		item_state_slots = null
 		item_icons = null
 		icon = CUSTOM_ITEM_OBJ
-		set_icon_state(citem.item_icon_state)
+		set_icon_state(citem.item_icon_state, FALSE)
 		item_state = null
 		icon_override = CUSTOM_ITEM_MOB
+		update_icon = TRUE
+	if(update_icon)
+		update_icon()

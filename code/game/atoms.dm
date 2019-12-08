@@ -271,13 +271,24 @@ its easier to just keep the beam vertical.
 	dir = new_dir
 	return TRUE
 
-/atom/proc/set_icon_state(var/new_icon_state)
-	if(has_extension(src, /datum/extension/base_icon_state))
-		var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+/atom/proc/set_icon_state(new_icon_state, update_icon = TRUE)
+	var/datum/extension/base_icon_state/bis = get_extension(src, /datum/extension/base_icon_state)
+	if(bis)
 		bis.base_icon_state = new_icon_state
-		update_icon()
+		if(update_icon)
+			update_icon()
 	else
 		icon_state = new_icon_state
+
+// If description changes get an event you may need to implement separate Set/Change procs, see Set/ChangeName
+/atom/proc/SetDesc(new_desc, update_icon = TRUE)
+	var/datum/extension/base_desc/bd = get_extension(src, /datum/extension/base_desc)
+	if(bd)
+		bd.base_desc = new_desc
+		if(update_icon)
+			update_icon()
+	else
+		desc = new_desc
 
 /atom/proc/update_icon()
 	on_update_icon(arglist(args))

@@ -817,8 +817,8 @@ BLIND     // can't see anything
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 
 /obj/item/clothing/under/inherit_custom_item_data(var/datum/custom_item/citem)
-	. = ..()
 	worn_state = icon_state
+	. = ..()
 	update_rolldown_status()
 
 /obj/item/clothing/under/proc/get_gender_suffix(var/suffix = "_s")

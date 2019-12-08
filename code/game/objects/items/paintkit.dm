@@ -34,10 +34,10 @@
 	var/new_mob_icon_file
 
 /obj/item/device/kit/suit/inherit_custom_item_data(var/datum/custom_item/citem)
-	. = ..()
 	if(citem.additional_data["light_overlay"])
 		new_light_overlay = citem.additional_data["light_overlay"]
 	new_mob_icon_file = CUSTOM_ITEM_MOB
+	. = ..()
 
 /obj/item/clothing/head/helmet/space/void/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/device/kit/suit))
