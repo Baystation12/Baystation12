@@ -270,6 +270,7 @@
 #include "code\datums\communication\pray.dm"
 #include "code\datums\communication\~defines.dm"
 #include "code\datums\extensions\_defines.dm"
+#include "code\datums\extensions\chameleon.dm"
 #include "code\datums\extensions\event_registration.dm"
 #include "code\datums\extensions\extensions.dm"
 #include "code\datums\extensions\fake_data.dm"
