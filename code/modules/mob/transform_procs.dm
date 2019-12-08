@@ -80,7 +80,7 @@
 		for(var/obj/effect/landmark/start/sloc in landmarks_list)
 			if (sloc.name != "AI")
 				continue
-			if ((locate(/mob/living) in sloc.loc) || (locate(/obj/structure/AIcore) in sloc.loc))
+			if (locate(/mob/living) in sloc.loc)
 				continue
 			loc_landmark = sloc
 		if (!loc_landmark)
