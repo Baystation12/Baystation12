@@ -1,5 +1,5 @@
 /mob/living/proc/convert_to_rev(mob/M as mob in able_mobs_in_oview(src))
-	set name = "Convert Bourgeoise"
+	set name = "Recruit to Faction"
 	set category = "Abilities"
 	if(!M.mind || !M.client)
 		return
@@ -29,7 +29,7 @@
 	log_admin("[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_role_text] faction.")
 	message_admins("<span class='danger'>[src]([src.ckey]) attempted to convert [player.current] to the [faction.faction_role_text] faction.</span>")
 
-	player.rev_cooldown = world.time+100
+	player.rev_cooldown = world.time + 5 SECONDS
 	if (!faction.is_antagonist(player))
 		var/choice = alert(player.current,"Asked by [src]: Do you want to join the [faction.faction_descriptor]?","Join the [faction.faction_descriptor]?","No!","Yes!")
 		if(choice == "Yes!" && faction.add_antagonist_mind(player, 0, faction.faction_role_text, faction.faction_welcome))
@@ -40,7 +40,7 @@
 	to_chat(src, "<span class='danger'>\The [player.current] does not support the [faction.faction_descriptor]!</span>")
 
 /mob/living/proc/convert_to_loyalist(mob/M as mob in able_mobs_in_oview(src))
-	set name = "Convert Recidivist"
+	set name = "Convince Recidivist"
 	set category = "Abilities"
 	if(!M.mind || !M.client)
 		return
