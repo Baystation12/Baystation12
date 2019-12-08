@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Robots can now wrench portable rechargers to move/anchor them."
