@@ -15,6 +15,7 @@ GLOBAL_DATUM_INIT(actor, /datum/antagonist/actor, new)
 	initial_spawn_req = 1
 	initial_spawn_target = 1
 	show_objectives_on_creation = 0 //actors are not antagonists and do not need the antagonist greet text
+	required_language = LANGUAGE_HUMAN_EURO
 
 /datum/antagonist/actor/greet(var/datum/mind/player)
 	if(!..())
