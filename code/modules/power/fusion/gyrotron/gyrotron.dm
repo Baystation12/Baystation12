@@ -18,6 +18,7 @@
 		/obj/item/weapon/stock_parts/radio/receiver,
 	)
 	stat_immune = 0
+	base_type = /obj/machinery/power/emitter/gyrotron
 
 /obj/machinery/power/emitter/gyrotron/anchored
 	anchored = 1

@@ -40,6 +40,12 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod11/station)
+"ad" = (
+/obj/machinery/fusion_fuel_injector/mapped{
+	initial_id_tag = "aux_fusion_plant"
+	},
+/turf/simulated/floor/reinforced,
+/area/vacant/prototype/engine)
 "ae" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -2238,7 +2244,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/obj/machinery/power/emitter/gyrotron{
+/obj/machinery/power/emitter/gyrotron/anchored{
 	dir = 8;
 	initial_id_tag = "aux_fusion_plant"
 	},
@@ -2271,6 +2277,16 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"ew" = (
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/port_gen/pacman/mrs{
+	anchored = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/vacant/prototype/engine)
 "ex" = (
 /obj/random/torchcloset,
 /turf/simulated/floor/plating,
@@ -2371,6 +2387,14 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/central)
+"eH" = (
+/obj/machinery/fusion_fuel_injector/mapped{
+	dir = 1;
+	icon_state = "injector0";
+	initial_id_tag = "aux_fusion_plant"
+	},
+/turf/simulated/floor/reinforced,
+/area/vacant/prototype/engine)
 "eI" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14447,13 +14471,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/seconddeck/forestarboard)
-"Lg" = (
-/obj/machinery/fusion_fuel_injector/mapped{
-	anchored = 0;
-	initial_id_tag = "aux_fusion_plant"
-	},
-/turf/simulated/floor/reinforced,
-/area/vacant/prototype/engine)
 "Lh" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -16896,14 +16913,6 @@
 	},
 /turf/space,
 /area/space)
-"Tg" = (
-/obj/structure/cable/yellow{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/machinery/power/port_gen/pacman/mrs,
-/turf/simulated/floor/reinforced/airless,
-/area/vacant/prototype/engine)
 "Th" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -18102,15 +18111,6 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/vacant/prototype/control)
-"Xj" = (
-/obj/machinery/fusion_fuel_injector/mapped{
-	anchored = 0;
-	dir = 1;
-	icon_state = "injector0";
-	initial_id_tag = "aux_fusion_plant"
-	},
-/turf/simulated/floor/reinforced,
-/area/vacant/prototype/engine)
 "Xk" = (
 /obj/machinery/door/blast/regular{
 	dir = 1;
@@ -27668,7 +27668,7 @@ aa
 aa
 qw
 Lc
-Lg
+ad
 Ej
 Kf
 Fg
@@ -27676,7 +27676,7 @@ Xg
 Oh
 Kf
 Ej
-Xj
+eH
 qj
 qw
 aa
@@ -27870,7 +27870,7 @@ aa
 aa
 qw
 md
-Lg
+ad
 Ej
 Kf
 Gg
@@ -27878,7 +27878,7 @@ eh
 Ph
 Kf
 Ej
-Xj
+eH
 rj
 qw
 aa
@@ -28072,7 +28072,7 @@ aa
 aa
 qw
 Lc
-Lg
+ad
 Ej
 Kf
 Hg
@@ -28080,7 +28080,7 @@ mh
 Qh
 Kf
 Ej
-Xj
+eH
 qj
 qw
 aa
@@ -29487,7 +29487,7 @@ fU
 JX
 OY
 mb
-Tg
+ew
 Qf
 Ng
 Vi
