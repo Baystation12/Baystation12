@@ -2732,7 +2732,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_o2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -2834,7 +2833,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_n2_sensor"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
