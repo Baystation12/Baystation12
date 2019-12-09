@@ -50,3 +50,6 @@
 		if(istype(owner, /datum/mind))
 			var/datum/mind/mind = owner
 			to_chat(mind.current, "<font color='green'><b>[completion_message]</b></font>")
+
+/datum/goal/proc/is_valid()
+	return TRUE
