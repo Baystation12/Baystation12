@@ -90,3 +90,9 @@
 
 /decl/stock_part_preset/radio/basic_transmitter/air_sensor/engine
 	frequency = ATMOS_ENGINE_FREQ
+
+/obj/machinery/air_sensor/dist
+	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/air_sensor/engine = 1)
+
+/decl/stock_part_preset/radio/basic_transmitter/air_sensor/engine
+	frequency = ATMOS_DIST_FREQ

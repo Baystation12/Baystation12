@@ -2620,8 +2620,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/air_sensor{
-	frequency = 1443;
+/obj/machinery/air_sensor/dist{
 	id_tag = "d_air_sensor"
 	},
 /turf/simulated/floor/reinforced/airmix,
