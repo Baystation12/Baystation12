@@ -8,6 +8,15 @@
 /datum/fabricator_recipe/device_component/tesla_component
 	path = /obj/item/weapon/stock_parts/power/apc/buildable
 
+/datum/fabricator_recipe/device_component/radio_transmitter
+	path = /obj/item/weapon/stock_parts/radio/transmitter/basic/buildable
+
+/datum/fabricator_recipe/device_component/radio_transmitter_event
+	path = /obj/item/weapon/stock_parts/radio/transmitter/on_event/buildable
+
+/datum/fabricator_recipe/device_component/radio_receiver
+	path = /obj/item/weapon/stock_parts/radio/receiver/buildable
+
 /datum/fabricator_recipe/device_component/battery_backup_crap
 	name = "battery backup (weak)"
 	path = /obj/item/weapon/stock_parts/power/battery/buildable/crap

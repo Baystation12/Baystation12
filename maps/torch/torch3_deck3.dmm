@@ -8971,7 +8971,6 @@
 /area/hallway/primary/thirddeck/center)
 "si" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d3sh_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
@@ -10709,7 +10708,6 @@
 /area/hallway/primary/thirddeck/aft)
 "wm" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d3ph_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
@@ -16985,7 +16983,6 @@
 /area/storage/tools)
 "MR" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d3po2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -18875,7 +18872,6 @@
 /area/maintenance/thirddeck/port)
 "SJ" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d3so2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,

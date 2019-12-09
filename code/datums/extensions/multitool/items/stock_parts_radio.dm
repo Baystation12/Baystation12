@@ -35,7 +35,9 @@
 	var/list/dat = list()
 
 	dat += "<a href='?src=\ref[src];unlink=1'>Unlink Machine</a><br>"
-
+	var/obj/machinery/actual_machine = machine && machine.resolve()
+	if(actual_machine && actual_machine.can_apply_preset_to(radio))
+		dat += "<a href='?src=\ref[src];stockreset=1'>Reset to Machine Defaults</a><br>"
 	dat += "<b>Configuration for \the [radio].</b><br>"
 	dat += "Frequency: <a href='?src=\ref[src];frequency=1'>[radio.frequency || "none"]</a><br>"
 	dat += "ID: <a href='?src=\ref[src];id_tag=1'>[radio.id_tag || "none"]</a><br>"
@@ -82,6 +84,12 @@
 		if(new_encryption == radio.encryption)
 			return MT_NOACTION
 		radio.encryption = new_encryption
+		return MT_REFRESH
+	if(href_list["stockreset"])
+		var/obj/machinery/actual_machine = machine && machine.resolve()
+		if(!actual_machine)
+			return MT_CLOSE
+		actual_machine.apply_preset_to(radio)
 		return MT_REFRESH
 
 // Helper.

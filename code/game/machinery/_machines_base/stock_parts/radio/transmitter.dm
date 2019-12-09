@@ -101,3 +101,9 @@
 		var/decl/public_access/public_variable/check_variable = transmit_on_event[thing]
 		dat[thing] = check_variable.access_var(machine)
 	queue_transmit(dat)
+
+/obj/item/weapon/stock_parts/radio/transmitter/basic/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+
+/obj/item/weapon/stock_parts/radio/transmitter/on_event/buildable
+	part_flags = PART_FLAG_HAND_REMOVE

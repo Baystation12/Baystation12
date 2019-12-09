@@ -59,6 +59,22 @@ GLOBAL_LIST_INIT(machine_path_to_circuit_type, cache_circuits_by_build_path())
 				if(number == 0)
 					break
 
+// Returns the first valid preset decl for a given part, or null
+/obj/machinery/proc/can_apply_preset_to(var/obj/item/weapon/stock_parts/part)
+	if(!stock_part_presets)
+		return
+	for(var/path in stock_part_presets)
+		var/decl/stock_part_preset/preset = decls_repository.get_decl(path)
+		if(istype(part, preset.expected_part_type))
+			return preset
+
+// Applies the first valid preset to the given part. Returns preset applied, or null.
+/obj/machinery/proc/apply_preset_to(var/obj/item/weapon/stock_parts/part)
+	var/decl/stock_part_preset/preset = can_apply_preset_to(part)
+	if(preset)
+		preset.apply(null, part)
+		return preset
+
 // Returns a list of subtypes of the given component type, with associated value = number of that component.
 /obj/machinery/proc/types_of_component(var/part_type)
 	. = list()

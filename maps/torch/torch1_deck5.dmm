@@ -241,7 +241,6 @@
 "az" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "toxins_sensor"
 	},
 /turf/simulated/floor/reinforced/airless,
@@ -13117,7 +13116,6 @@
 /area/shuttle/petrov/maint)
 "Ht" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "phoron_sensor"
 	},
 /turf/simulated/floor/reinforced,
