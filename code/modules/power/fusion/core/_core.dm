@@ -12,6 +12,9 @@
 	idle_power_usage = 50
 	active_power_usage = 500 //multiplied by field strength
 	anchored = 0
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/obj/effect/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
