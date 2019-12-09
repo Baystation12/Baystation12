@@ -15,6 +15,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	base_type = /obj/machinery/power/fusion_core
 
 	var/obj/effect/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
