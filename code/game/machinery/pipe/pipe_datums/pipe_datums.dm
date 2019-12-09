@@ -176,7 +176,7 @@
 	build_path = /obj/item/pipe
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "up"
-	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/supply
+	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers
 
 /datum/pipe/pipe_dispenser/scrubber/down
 	name = "downward scrubber pipe fitting"
@@ -184,7 +184,7 @@
 	build_path = /obj/item/pipe
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "down"
-	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/supply
+	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
 
 /datum/pipe/pipe_dispenser/fuel
 	category = "Fuel Pipes"
