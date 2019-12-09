@@ -149,5 +149,5 @@
 
 /obj/item/weapon/gun/launcher/syringe/disguised/examine(mob/user, distance)
 	. = ..()
-	if(distance == 0)
+	if(distance <= 1)
 		to_chat(user, "The button is a little stiff.")
