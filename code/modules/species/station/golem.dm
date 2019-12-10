@@ -36,6 +36,12 @@
 	death_message = "becomes completely motionless..."
 	genders = list(NEUTER)
 
+	force_cultural_info = list(
+		TAG_CULTURE =   CULTURE_CULTIST,
+		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
+		TAG_FACTION =   FACTION_OTHER
+	)
+
 /datum/species/golem/handle_post_spawn(var/mob/living/carbon/human/H)
 	if(H.mind)
 		H.mind.reset()
