@@ -9,8 +9,8 @@
 	real_name = "Huragok"
 	icon = 'code/modules/halo/covenant/engineer.dmi'
 	icon_state = "engineer"
-	maxHealth = 75
-	health = 75
+	maxHealth = 200
+	health = 200
 	faction = "Covenant"
 	spawn_sound = null
 	speak_statement = "chirps"
