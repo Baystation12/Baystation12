@@ -49,6 +49,8 @@
 		for(var/obj/s in om_ship.our_fleet.ships_infleet)
 			. += s
 	for(var/obj/effect/overmap/ship/s in range(slipspace_carryalong_range,om_obj.loc)) //No check for null-loc because this should never be called when the ship is in slipspace.
+		if(s.anchored)
+			continue
 		. += s
 
 /obj/machinery/slipspace_engine/proc/do_slipspace(var/to_loc = null)

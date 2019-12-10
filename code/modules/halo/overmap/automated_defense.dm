@@ -15,6 +15,7 @@
 	var/defense_range = 7
 	block_slipspace = 1
 	var/obj/item/projectile/overmap/proj_fired = /obj/item/projectile/overmap/auto_defense_proj
+	anchored = 1
 
 /obj/effect/overmap/ship/npc_ship/automated_defenses/Initialize()
 	. = ..()
