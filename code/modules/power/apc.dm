@@ -886,7 +886,7 @@
 			if(!loud)
 				to_chat(user, "<span class='danger'>\The [src] have AI control disabled!</span>")
 			return 0*/
-	if (!(in_range(src, user) && istype(usr,/mob/living/silicon)) || !istype(src.loc, /turf))
+	if (!(in_range(src, user) || istype(usr,/mob/living/silicon)) || !istype(src.loc, /turf))
 		return 0
 	var/mob/living/carbon/human/H = user
 	if (istype(H) && prob(H.getBrainLoss()))
