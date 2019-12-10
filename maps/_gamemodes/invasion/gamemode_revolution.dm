@@ -13,6 +13,8 @@
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
+		/datum/job/covenant/huragok,\
+		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_ultra,\

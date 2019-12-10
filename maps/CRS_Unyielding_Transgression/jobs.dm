@@ -8,6 +8,13 @@
 	create_record = 0
 	latejoin_at_spawnpoints = 1
 
+/datum/job/covenant/huragok
+	title = "Covenant Huragok"
+	total_positions = 2
+	spawn_positions = 2
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/huragok_cov
+
 /datum/job/covenant/AI
 	title = "Covenant AI"
 	total_positions = 1
