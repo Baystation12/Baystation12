@@ -158,6 +158,12 @@
 	if(accessories.len > ties.len)
 		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
 
+/obj/item/clothing/examine(mob/user)
+	. = ..()
+	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
+	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
+		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
+
 /obj/item/clothing/CanUseTopic(var/user)
 	if(user in view(get_turf(src)))
 		return STATUS_INTERACTIVE
@@ -169,6 +175,13 @@
 			for(var/accessory in accessories)
 				ties += "\icon[accessory] \a [accessory]"
 			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
+		return TOPIC_HANDLED
+	if(href_list["list_armor_damage"])
+		var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
+		var/list/damages = armor_datum.get_visible_damage()
+		to_chat(user, "\The [src] \icon[src] has some damage:")
+		for(var/key in damages)
+			to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 		return TOPIC_HANDLED
 
 ///////////////////////////////////////////////////////////////////////

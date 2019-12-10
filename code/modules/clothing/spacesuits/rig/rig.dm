@@ -16,6 +16,7 @@
 	center_of_mass = null
 
 	// These values are passed on to all component pieces.
+	armor_type = /datum/extension/armor/rig
 	armor = list(
 		melee = ARMOR_MELEE_RESISTANT, 
 		bullet = ARMOR_BALLISTIC_MINOR, 
@@ -178,7 +179,7 @@
 		if(islist(armor))
 			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
-			set_extension(piece, /datum/extension/armor/rig, armor)
+			set_extension(piece, armor_type, armor, armor_degradation_speed)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)
