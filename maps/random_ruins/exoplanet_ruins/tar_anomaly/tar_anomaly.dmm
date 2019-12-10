@@ -11,6 +11,7 @@
 /area/template_noop)
 "d" = (
 /obj/machinery/artifact,
+/obj/effect/landmark/clear,
 /turf/simulated/floor/exoplanet/shrouded,
 /area/template_noop)
 "e" = (

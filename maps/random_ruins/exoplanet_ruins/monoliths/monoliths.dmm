@@ -4,6 +4,7 @@
 /area/template_noop)
 "b" = (
 /obj/structure/monolith,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "c" = (
@@ -12,19 +13,23 @@
 "d" = (
 /obj/machinery/artifact,
 /obj/structure/window/phoronreinforced{
-	 icon_state = "phoronrwindow";
+	icon_state = "phoronrwindow";
 	dir = 4
 	},
 /obj/structure/window/phoronreinforced{
-	 icon_state = "phoronrwindow";
+	icon_state = "phoronrwindow";
 	dir = 1
 	},
 /obj/structure/window/phoronreinforced{
-	 icon_state = "phoronrwindow";
+	icon_state = "phoronrwindow";
 	dir = 8
 	},
 /obj/structure/window/phoronreinforced,
 /turf/simulated/floor/fixed/alium/ruin,
+/area/template_noop)
+"e" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
 /area/template_noop)
 
 (1,1,1) = {"
@@ -43,9 +48,9 @@ a
 a
 a
 a
-a
+e
 b
-a
+e
 a
 a
 a
@@ -54,11 +59,11 @@ a
 (3,1,1) = {"
 a
 a
-a
-a
-a
-a
-a
+e
+e
+e
+e
+e
 a
 a
 a
@@ -66,59 +71,59 @@ a
 (4,1,1) = {"
 a
 b
-a
-a
-a
-a
-a
+e
+e
+e
+e
+e
 b
 a
 a
 "}
 (5,1,1) = {"
 a
-a
-a
-a
+e
+e
+e
 c
-a
-a
-a
+e
+e
+e
 a
 a
 "}
 (6,1,1) = {"
 a
-a
-a
+e
+e
 c
 d
 c
-a
-a
+e
+e
 a
 a
 "}
 (7,1,1) = {"
 a
-a
-a
-a
+e
+e
+e
 c
-a
-a
-a
+e
+e
+e
 a
 a
 "}
 (8,1,1) = {"
 a
 b
-a
-a
-a
-a
-a
+e
+e
+e
+e
+e
 b
 a
 a
@@ -126,11 +131,11 @@ a
 (9,1,1) = {"
 a
 a
-a
-a
-a
-a
-a
+e
+e
+e
+e
+e
 a
 a
 a
@@ -139,9 +144,9 @@ a
 a
 a
 a
-a
+e
 b
-a
+e
 a
 a
 a
