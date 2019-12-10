@@ -2,7 +2,7 @@
 //Dependencies located in robot.dm and robot_modules.dm, they are vital for this to work//
 //////////////////////////////////////////////////////////////////////////////////////////
 
-#define HURAGOK_REGEN 0.5
+#define HURAGOK_REGEN 1
 
 /mob/living/silicon/robot/huragok
 	name = "Huragok"
@@ -38,7 +38,7 @@
 
 /mob/living/silicon/robot/huragok/Life()
 	. = ..()
-	if(!stat)
+	if(stat)
 		return
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
