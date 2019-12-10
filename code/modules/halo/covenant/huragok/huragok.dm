@@ -32,6 +32,9 @@
 	radio = /obj/item/device/radio/headset/covenant
 	common_radio = /obj/item/device/radio/headset/covenant
 
+/mob/living/silicon/robot/huragok/emp_act()
+	return
+
 /mob/living/silicon/robot/huragok/Login()
 	. =.. ()
 	to_chat(src,"<span class='notice'>You can set a custom name by using the <b>Namepick</b> command in the <b>Silicon Commands</b> tab. Make sure to use a proper huragok name, the naming rule still apply!</span> <span class='warning'>This role and its mechanics are experimental! It is nowhere near a finished stated as it lacks proper balance and unique features. Expect to need a lot of admin assistance!</span>")
