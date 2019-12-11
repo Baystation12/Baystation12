@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - bugfix: "Biowaste disposal cart access to only require surgery access instead of requiring 6 different accesses. Corpsmen rejoice!"
