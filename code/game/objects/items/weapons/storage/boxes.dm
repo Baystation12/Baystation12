@@ -455,9 +455,9 @@
 	item_state = "medicalpack"
 	foldable = null
 	max_w_class = ITEM_SIZE_NORMAL
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_LARGE
 	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
-	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
 	temperature = -16 CELSIUS
 

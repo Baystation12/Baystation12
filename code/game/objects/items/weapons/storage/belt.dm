@@ -181,7 +181,8 @@
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/storage/med_pouch,
 		/obj/item/bodybag,
-		/obj/item/clothing/gloves
+		/obj/item/clothing/gloves,
+		/obj/item/weapon/reagent_containers/ivbag
 		)
 
 /obj/item/weapon/storage/belt/medical/emt
