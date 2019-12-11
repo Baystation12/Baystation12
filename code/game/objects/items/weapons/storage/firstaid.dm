@@ -107,9 +107,9 @@
 		/obj/item/weapon/storage/pill_bottle/bicaridine,
 		/obj/item/weapon/storage/pill_bottle/dermaline,
 		/obj/item/weapon/storage/pill_bottle/dexalin_plus,
-		/obj/item/weapon/storage/pill_bottle/dylovene,
 		/obj/item/weapon/storage/pill_bottle/tramadol,
-		/obj/item/weapon/storage/pill_bottle/spaceacillin,
+		/obj/item/weapon/storage/pill_bottle/assorted,
+		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/medical/splint,
 		)
 
