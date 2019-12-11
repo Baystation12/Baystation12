@@ -51,7 +51,7 @@
 	for(var/gas in air_sample.gas)				
 		var/gaspercent = round(air_sample.gas["[gas]"]*100/total_moles,0.01)
 		var/gas_list = list("symbol" = gas_data.symbol_html["[gas]"], "percent" = gaspercent)
-		.["gas"] += list(gas_list)
+		. += list(gas_list)
 
 /decl/public_access/public_variable/pressure
 	expected_type = /obj/machinery/air_sensor
@@ -59,7 +59,7 @@
 	desc = "The pressure of the gas at the sensor."
 	can_write = FALSE
 	has_updates = FALSE
-	var_type = IC_FORMAT_NUMBER
+	var_type = IC_FORMAT_STRING
 
 /decl/public_access/public_variable/pressure/access_var(obj/machinery/air_sensor/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
@@ -73,9 +73,9 @@
 	has_updates = FALSE
 	var_type = IC_FORMAT_NUMBER
 
-/decl/public_access/public_variable/pressure/access_var(obj/machinery/air_sensor/sensor)
+/decl/public_access/public_variable/temperature/access_var(obj/machinery/air_sensor/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
-	return air_sample && num2text(round(air_sample.temperature,0.1))
+	return air_sample && round(air_sample.temperature,0.1)
 
 /decl/stock_part_preset/radio/basic_transmitter/air_sensor
 	transmit_on_tick = list(
