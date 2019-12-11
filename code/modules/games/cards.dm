@@ -17,11 +17,7 @@
 	. = ..()
 	if(islist(citem.additional_data["extra_cards"]))
 		for(var/card_decl in citem.additional_data["extra_cards"])
-			if(ispath(text2path(card_decl), /datum/playingcard))
-				var/card_path = text2path(card_decl)
-				var/datum/playingcard/P = new card_path()
-				cards += P
-			else if(islist(card_decl))
+			if(islist(card_decl))
 				var/datum/playingcard/custom/P = new()
 				if(!isnull(card_decl["name"]))
 					P.name = card_decl["name"]
