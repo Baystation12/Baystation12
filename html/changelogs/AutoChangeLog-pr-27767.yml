@@ -1,0 +1,4 @@
+author: "Rowtree"
+delete-after: True
+changes: 
+  - bugfix: "Fixes recently added drink strengths to a more accurate level."
