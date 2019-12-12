@@ -1,4 +1,4 @@
-/datum/game_mode/extended
+/*/datum/game_mode/extended
 	name = "Extended"
 	config_tag = "extended"
 	required_players = 0
@@ -6,3 +6,4 @@
 	extended_round_description = "There are no antagonists during extended, unless an admin decides to be cheeky. Just play your character, mess around with your job, and have fun."
 	addantag_allowed = ADDANTAG_ADMIN // No add antag vote allowed on extended, except when manually called by admins.
 	allowed_ghost_roles = list(/datum/ghost_role/mouse)
+*/
