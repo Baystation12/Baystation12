@@ -17,6 +17,7 @@
 	src.modules += new /obj/item/weapon/reagent_containers/dropper/industrial(src)
 	src.modules += new /obj/item/weapon/reagent_containers/syringe(src)
 	src.modules += new /obj/item/weapon/gripper/chemistry(src)
+	src.modules += new /obj/item/weapon/gripper/cilia(src)
 	src.modules += new /obj/item/weapon/scalpel/manager(src)
 	src.modules += new /obj/item/weapon/scalpel/covenant(src)
 	src.modules += new /obj/item/weapon/hemostat/covenant(src)
