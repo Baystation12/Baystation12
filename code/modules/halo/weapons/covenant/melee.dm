@@ -25,11 +25,6 @@
 	var/failsafe = 0
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
 	var/next_leapwhen
-	sprite_sheets = list(
-		"Tvaoan Kig-Yar" = null,\
-		"Jiralhanae" = null,\
-		"Sangheili" = null\
-		)
 	parry_projectiles = 1
 
 /obj/item/weapon/melee/energy/elite_sword/New()

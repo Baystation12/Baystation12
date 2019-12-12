@@ -29,11 +29,6 @@
 		)
 
 	irradiate_non_cov = 7
-	sprite_sheets = list(
-		"Tvaoan Kig-Yar" = null,\
-		"Jiralhanae" = null,\
-		"Sangheili" = null\
-		)
 
 /obj/item/weapon/gun/energy/plasmarifle/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)

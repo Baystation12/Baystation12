@@ -43,7 +43,7 @@
 	var/penalty = 100 // A simple penalty gives admins the ability to increase the weight to again be part of the random event selection
 
 /datum/event_meta/extended_penalty/get_weight()
-	return ..() - (ticker && istype(ticker.mode, /datum/game_mode/extended) ? penalty : 0)
+	return ..() //- (ticker && istype(ticker.mode, /datum/game_mode/extended) ? penalty : 0)
 
 
 /datum/event	//NOTE: Times are measured in master controller ticks!

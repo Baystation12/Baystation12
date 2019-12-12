@@ -15,7 +15,7 @@
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	pain_mod = 0.40 //Lower pain damage taken than sangheili
-	item_icon_offsets = list(-1,3)
+	item_icon_offsets = list(list(1,0),list(1,0),null,list(0,0),null,null,null,list(0,0),null)
 	slowdown = -0.75
 	can_force_door = 1
 	additional_langs = list("Sign Language")

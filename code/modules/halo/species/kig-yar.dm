@@ -20,7 +20,7 @@
 	darksight = 6
 	brute_mod = 1.1
 	gluttonous = GLUT_ANYTHING
-	item_icon_offsets = list(0,0)
+	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 	total_health = 200
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/bird_punch)
@@ -95,7 +95,7 @@
 	total_health = 200
 	pixel_offset_x = -4
 
-	item_icon_offsets = list(4,-1)
+	item_icon_offsets = list(list(4,-1),list(4,-1),null,list(0,0),null,null,null,list(0,0),null)
 
 	has_limbs = list( //Normal limbs. A bit better than ruutian
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),

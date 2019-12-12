@@ -668,19 +668,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
-	var/list/offset_to_apply = list(0,0)
+	var/list/offset_to_apply = user_mob.get_mob_offset_for(src)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
 		bodytype = user_human.species.get_bodytype(user_human)
-		var/obj/item/clothing/c = src
-		var/list/new_offsets = user_human.species.item_icon_offsets[dir]
-		if(!isnull(new_offsets))
-			if(istype(c))
-				if(c.mob_can_equip(user_mob, slot, 1))
-					if(!("[user_human.species.name]" in sprite_sheets))
-						offset_to_apply = new_offsets
-			else
-				offset_to_apply = new_offsets
+
 	var/mob_state
 	if(item_state_slots && item_state_slots[slot])
 		mob_state = item_state_slots[slot]
