@@ -721,6 +721,22 @@
 /obj/item/device/radio/announcer/subspace
 	subspace_transmission = 1
 
+/obj/item/device/radio/announcer/autosay(var/message, var/from, var/channel, var/language_name) //BS12 EDIT
+	var/datum/radio_frequency/connection = null
+	if(channel && channels && channels.len > 0)
+		if (channel == "department")
+			channel = channels[1]
+		connection = secure_radio_connections[channel]
+	else
+		connection = radio_connection
+		channel = null
+	if (!istype(connection))
+		return
+	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
+	A.fully_replace_character_name(from)
+	Broadcast_Message(connection,A,0,"states",src,message,from,"Ship",from,from,4,0,list(0),connection.frequency)
+	qdel(A)
+
 /obj/item/device/radio/phone
 	broadcasting = 0
 	icon = 'icons/obj/items.dmi'

@@ -20,9 +20,15 @@
 	icon_state = "sheet-metal"
 	default_type = "steel"
 
+/obj/item/stack/material/cyborg/steel/high_cap
+	charge_costs = list(0.1)
+
 /obj/item/stack/material/cyborg/plasteel
 	icon_state = "sheet-plasteel"
 	default_type = "plasteel"
+
+/obj/item/stack/material/cyborg/plasteel/high_cap
+	charge_costs = list(0.1)
 
 /obj/item/stack/material/cyborg/wood
 	icon_state = "sheet-wood"
@@ -32,7 +38,13 @@
 	icon_state = "sheet-glass"
 	default_type = "glass"
 
+/obj/item/stack/material/cyborg/glass/high_cap
+	charge_costs = list(0.1)
+
 /obj/item/stack/material/cyborg/glass/reinforced
 	icon_state = "sheet-rglass"
 	default_type = "rglass"
 	charge_costs = list(500, 1000)
+
+/obj/item/stack/material/cyborg/glass/reinforced/high_cap
+	charge_costs = list(0.1)

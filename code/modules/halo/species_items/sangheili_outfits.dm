@@ -3,7 +3,6 @@
 
 	uniform = /obj/item/clothing/under/covenant/sangheili
 	l_ear = /obj/item/device/radio/headset/covenant
-	l_hand = /obj/item/weapon/melee/energy/elite_sword/dagger
 
 /decl/hierarchy/outfit/sangheili/minor
 	name = "Sangheili (Minor)"
@@ -77,6 +76,7 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/shipmaster
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	r_hand = /obj/item/weapon/melee/energy/elite_sword
+	l_hand = /obj/item/language_learner/unggoy_to_common
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/thick/sangheili/shipmaster

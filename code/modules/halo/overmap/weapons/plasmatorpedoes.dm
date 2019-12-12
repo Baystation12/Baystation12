@@ -14,7 +14,7 @@
 	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
 	icon_state = "covie_console"
 	fire_sound = 'code/modules/halo/sounds/plasma_torpedoes_fire.ogg'
-	fired_projectile = /obj/item/projectile/overmap/plas_torp
+	fired_projectile = /obj/item/projectile/overmap/missile/plas_torp
 	deck_gun_area = null
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control/New()
@@ -28,7 +28,7 @@
 	icon = 'code/modules/halo/overmap/weapons/plasma_torpedo.dmi'
 	icon_state = "plasma_pod"
 	fire_sound = 'code/modules/halo/sounds/plasma_torpedoes_fire.ogg'
-	fired_projectile = /obj/item/projectile/overmap/plas_torp
+	fired_projectile = /obj/item/projectile/overmap/missile/plas_torp
 	round_reload_time = 10 SECONDS
 	rounds_loaded = 1
 	max_rounds_loadable = 1
@@ -37,14 +37,15 @@
 	return list(src,src)
 
 //Projectiles//
-/obj/item/projectile/overmap/plas_torp
+/obj/item/projectile/overmap/missile/plas_torp
 	name = "plasma torpedo"
 	desc = "A ball of plasma contained within a magnetic field"
 	icon = 'code/modules/halo/overmap/weapons/plasma_torpedo.dmi'
 	icon_state = "plasma_torp_om_proj"
 	ship_damage_projectile = /obj/item/projectile/plas_torp_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/plasma_torpedoes_impact.ogg'
-	step_delay = 0.8 SECOND
+	damage = 100
+	step_delay = 0.5 SECOND
 
 /obj/item/projectile/overmap/plas_torp/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 

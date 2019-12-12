@@ -214,7 +214,7 @@
 	return
 
 /mob/living/silicon/proc/toggle_sensor_mode()
-	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Security", "Medical","Disable")
+	var/sensor_type = input("Please select sensor type.", "Sensor Integration", null) in list("Medical","Disable") //Security would immediately allow people to tell who is/isn't an innie.
 	switch(sensor_type)
 		if ("Security")
 			sensor_mode = SEC_HUD
@@ -327,16 +327,6 @@
 	for(var/obj/machinery/camera/C in A.cameras())
 		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
 	to_chat(src, "[A.alarm_name()]! ([(cameratext)? cameratext : "No Camera"])")
-
-
-/mob/living/silicon/proc/is_traitor()
-	return mind && (mind in traitors.current_antagonists)
-
-/mob/living/silicon/proc/is_malf()
-	return mind && (mind in malf.current_antagonists)
-
-/mob/living/silicon/proc/is_malf_or_traitor()
-	return is_traitor() || is_malf()
 
 /mob/living/silicon/adjustEarDamage()
 	return

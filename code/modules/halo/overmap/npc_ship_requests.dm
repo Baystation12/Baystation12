@@ -1,13 +1,13 @@
 
 #define BASE_CARGO_STAY_TIME 10 MINUTES
 #define BASE_CARGO_DEPART_TIME 2 MINUTES
+#define SHIPYARD_REPAIR_COOLDOWN 10 MINUTES
 
 /datum/npc_ship_request/cargo_call
 	request_name = "Trade With"
 	request_auth_levels = ALL_AUTHORITY_LEVELS
 	request_requires_processing = 1
 
-	var/obj/effect/overmap/ship/npc_ship/our_ship
 	var/atom/cargo_call_target
 	var/cargo_stay_time = BASE_CARGO_STAY_TIME
 	var/warn_depart_time = BASE_CARGO_DEPART_TIME
@@ -53,9 +53,6 @@
 				ship_source.pick_target_loc()
 		else
 			ship_source.target_loc = cargo_call_target.loc
-
-			walk(ship_source,get_dir(ship_source,ship_source.target_loc),ship_source.move_delay)
-			ship_source.dir = get_dir(ship_source,ship_source.target_loc)
 
 		return 1 //Don't let any normal move-processing happen.
 
@@ -173,6 +170,9 @@
 
 /datum/npc_ship_request/add_to_fleet/do_request(var/obj/effect/overmap/ship/npc_ship/ship_source,var/mob/requester)
 	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
+	if(origin_ship && !origin_ship.our_fleet)
+		origin_ship.our_fleet = new /datum/npc_fleet
+		origin_ship.our_fleet.assign_leader(origin_ship)
 	if(!origin_ship || !istype(origin_ship) || !origin_ship.our_fleet)
 		return
 	origin_ship.our_fleet.add_tofleet(ship_source)
@@ -186,7 +186,7 @@
 	if(!origin_ship || !istype(origin_ship) || !origin_ship.our_fleet)
 		return
 	ship_source.our_fleet = origin_ship.our_fleet
-	origin_ship.our_fleet = new /datum/npc_fleet (origin_ship)
+	origin_ship.our_fleet = new /datum/npc_fleet
 	ship_source.our_fleet.assign_leader(ship_source)
 
 /datum/npc_ship_request/control_fleet/unsc
@@ -214,4 +214,76 @@
 	request_auth_levels = list(AUTHORITY_LEVEL_INNIE)
 
 /datum/npc_ship_request/give_control/cov
+	request_auth_levels = list(AUTHORITY_LEVEL_COV)
+
+/datum/npc_ship_request/shipyard_repair
+	request_name = "Rapair/Refit Ship"
+	request_auth_levels = list(AUTHORITY_LEVEL_UNSC)
+
+/datum/npc_ship_request/shipyard_repair/do_request(var/obj/effect/overmap/ship/npc_ship/shipyard/ship_source,var/mob/requester)
+	if(!istype(ship_source))
+		return 0
+	var/obj/effect/overmap/ship/origin_ship = map_sectors["[requester.z]"]
+	if(world.time < ship_source.next_repair_at)
+		ship_source.radio_message("ERROR: Recovering resources from previous repair. Please wait.")
+		return 0
+	if(get_dist(origin_ship,ship_source) > 1)
+		ship_source.radio_message("ERROR: Vessel out of repair range.")
+		return 0
+
+	//Get all the typepaths
+	var/list/template_paths = list()
+	for(var/entry in ship_source.templates_available)
+		if("[entry]" == "[origin_ship.type]")
+			template_paths += ship_source.templates_available[entry]
+
+	if(template_paths.len == 0)
+		ship_source.radio_message("ERROR: No compatible schematic on file.")
+		return 0
+
+	var/user_input = input("Select Repair Type","Repair Type","Cancel") in list("Walls","Floors")
+	if(user_input == "Cancel")
+		return 0
+
+	for(var/path in template_paths)
+		template_paths -= path
+		path = "[path]_[user_input].dmm"
+		template_paths += path
+
+	//Modify the typepaths according to previous wall/floor selection.
+
+	ship_source.radio_message("Repair teams prepping and dispatching.")
+
+	if(get_dist(origin_ship,ship_source) > 1)
+		ship_source.radio_message("ERROR: Vessel has left repair range.")
+		return 0
+	if(world.time < ship_source.next_repair_at)
+		ship_source.radio_message("ERROR: Recovering resources from previous repair. Please wait.")
+		return 0
+
+	ship_source.next_repair_at = world.time + SHIPYARD_REPAIR_COOLDOWN
+	var/ctr = 0
+	for(var/path in template_paths)
+		ctr += 1
+		log_admin("Repair Underway. This may lag.")
+		maploader.load_map(path,origin_ship.map_z[ctr],0,0,1)
+		create_lighting_overlays_zlevel(origin_ship.map_z[ctr])
+
+	ship_source.mapload_reset_lights(origin_ship.map_z)
+	return 1
+
+// The /insecure subtype reports it's location to EBAND once a certain amount of activations is reached.
+/datum/npc_ship_request/shipyard_repair/insecure
+	var/repairs_until_loc_transmit = 2 //loc transmit will trigger on 3rd repair.
+	var/transmit_lang = "Galactic Common"
+
+/datum/npc_ship_request/shipyard_repair/insecure/do_request(var/obj/effect/overmap/ship/npc_ship/shipyard/ship_source,var/mob/requester)
+	. = ..()
+	if(.)
+		if(repairs_until_loc_transmit > 0)
+			repairs_until_loc_transmit--
+		else
+			GLOB.global_headset.autosay("Previously unlogged object located at [ship_source.x],[ship_source.y]", "System Scan", "EBAND", transmit_lang)
+
+/datum/npc_ship_request/shipyard_repair/insecure/cov
 	request_auth_levels = list(AUTHORITY_LEVEL_COV)

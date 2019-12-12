@@ -6,15 +6,15 @@
 	step_in = 3
 	dir_in = 1 //Facing North.
 	health = 500
-	deflect_chance = 35
-	damage_absorption = list("brute"=0.5,"fire"=0.7,"bullet"=0.5,"laser"=0.5,"energy"=0.55,"bomb"=0.7)
+	deflect_chance = 15
+	damage_absorption = list("brute"=0.6,"fire"=0.7,"bullet"=0.6,"laser"=0.6,"energy"=0.6,"bomb"=0.7)
 	max_temperature = 25000
 	infra_luminosity = 6
 	var/overload = 0
 	var/overload_coeff = 2
 	wreckage = /obj/effect/decal/mecha_wreckage/hrunting
 	internal_damage_threshold = 35
-	max_equip = 5
+	max_equip = 3
 
 /obj/mecha/combat/hrunting/add_cell()
 	cell = new /obj/item/weapon/cell/hyper(src)
@@ -42,7 +42,7 @@
 /obj/mecha/combat/hrunting/do_move(direction)
 	if(!..()) return
 	if(overload)
-		health--
+		health -= 2
 		if(health < initial(health) - initial(health)/3)
 			overload = 0
 			step_in = initial(step_in)

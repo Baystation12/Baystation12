@@ -12,8 +12,6 @@
 
 	armor_thickness = 20
 
-	armor_thickness_modifiers = list(BURN = 0.5)
-
 /obj/item/clothing/suit/armor/vest/old //just realized these had never been removed
 	name = "armor"
 	desc = "An armored vest that protects against some damage."
@@ -142,7 +140,7 @@
 			var/turf/curloc = get_turf(user)
 
 			// redirect the projectile
-			P.redirect(new_x, new_y, curloc, user)
+			P.redirect(locate(new_x, new_y,curloc.z), curloc, user)
 
 			return PROJECTILE_CONTINUE // complete projectile permutation
 

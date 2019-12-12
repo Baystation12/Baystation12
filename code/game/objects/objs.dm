@@ -11,7 +11,7 @@
 	var/in_use = 0 // If we have a user using us, this will be set on. We will check if the user has stopped using us, and thus stop updating and LAGGING EVERYTHING!
 	var/damtype = "brute"
 	var/armor_penetration = 0
-
+	ai_access_level = 1
 /obj/Destroy()
 	GLOB.processing_objects -= src
 	return ..()
@@ -180,8 +180,8 @@
 		. |= DAM_EDGE
 	if(is_sharp(src))
 		. |= DAM_SHARP
-		if(damtype == BURN)
-			. |= DAM_LASER
+	if(damtype == BURN)
+		. |= DAM_LASER
 
 /obj/attackby(obj/item/O as obj, mob/user as mob)
 	if(flags & OBJ_ANCHORABLE)

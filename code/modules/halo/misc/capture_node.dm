@@ -14,6 +14,7 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 	var/capture_time = 8 SECONDS
 	var/mob/living/interacting
 	var/list/capture_npc_spawnlocs = list()
+	ai_access_level = 4
 
 /obj/machinery/computer/capture_node/New()
 	. = ..()

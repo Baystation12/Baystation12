@@ -14,6 +14,7 @@
 	use_power = 0
 	idle_power_usage = 0
 	active_power_usage = 0
+	ai_access_level = 3
 
 /obj/machinery/power/Initialize()
 	. = ..()

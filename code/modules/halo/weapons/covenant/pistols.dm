@@ -14,10 +14,19 @@
 	screen_shake = 0
 	irradiate_non_cov = 5
 	var/overcharge_cost = 1
+	accuracy = 1
 	sprite_sheets = list(
 		"Tvaoan Kig-Yar" = null,\
 		"Jiralhanae" = null,\
 		"Sangheili" = null\
+		)
+	item_state = "plasmapistol"
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
+		slot_s_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
 /obj/item/weapon/gun/energy/plasmapistol/New()
@@ -93,6 +102,7 @@
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		)
 	sprite_sheets = list(
 		"Tvaoan Kig-Yar" = null,\

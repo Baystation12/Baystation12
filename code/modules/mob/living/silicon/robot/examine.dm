@@ -1,21 +1,22 @@
 /mob/living/silicon/robot/examine(mob/user)
-	var/custom_infix = custom_name ? ", [modtype] [braintype]" : ""
+	var/custom_infix = custom_name ? ", [modtype]" : ""
 	. = ..(user, infix = custom_infix)
 
 	var/msg = ""
 	msg += "<span class='warning'>"
 	if (src.getBruteLoss())
 		if (src.getBruteLoss() < 75)
-			msg += "It looks slightly dented.\n"
+			msg += "It looks slightly injured.\n"
 		else
-			msg += "<B>It looks severely dented!</B>\n"
+			msg += "<B>It looks severely injured!</B>\n"
 	if (src.getFireLoss())
 		if (src.getFireLoss() < 75)
 			msg += "It looks slightly charred.\n"
 		else
-			msg += "<B>It looks severely burnt and heat-warped!</B>\n"
+			msg += "<B>It looks severely burnt!</B>\n"
 	msg += "</span>"
 
+/*
 	if(opened)
 		msg += "<span class='warning'>Its cover is open and the power cell is [cell ? "installed" : "missing"].</span>\n"
 	else
@@ -23,12 +24,13 @@
 
 	if(!has_power)
 		msg += "<span class='warning'>It appears to be running on backup power.</span>\n"
+*/
 
 	switch(src.stat)
 		if(CONSCIOUS)
-			if(!src.client)	msg += "It appears to be in stand-by mode.\n" //afk
+			if(!src.client)	msg += "It doesn't seem to be responding.\n" //afk
 		if(UNCONSCIOUS)		msg += "<span class='warning'>It doesn't seem to be responding.</span>\n"
-		if(DEAD)			msg += "<span class='deadsay'>It looks completely unsalvageable.</span>\n"
+//		if(DEAD)			msg += "<span class='deadsay'>It looks completely unsalvageable.</span>\n"
 	msg += "*---------*"
 
 	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"

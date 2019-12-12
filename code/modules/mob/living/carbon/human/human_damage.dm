@@ -45,7 +45,7 @@
 	var/amount = 0
 	for(var/obj/item/organ/external/E in organs)
 		amount += E.get_pain()
-	return amount
+	return amount * species.pain_mod
 
 /mob/living/carbon/human/setHalLoss(var/amount)
 	adjustHalLoss(getHalLoss()-amount)
@@ -355,7 +355,8 @@ This function restores all organs.
 	return organs_by_name[check_zone(zone)]
 
 /mob/living/carbon/human/proc/degrade_affected_armor(var/damage,var/damage_type = BRUTE,var/obj/item/organ/external/def_zone = null)
-	def_zone = get_organ(def_zone)
+	if(!istype(def_zone))
+		def_zone = get_organ(def_zone)
 	//Code (mostly) ripped from human_defense.dm's getarmor_organ proc.
 	var/list/protective_gear = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
 	for(var/gear in protective_gear)
@@ -433,8 +434,6 @@ This function restores all organs.
 		traumatic_shock *= 0.75
 	if(stat == UNCONSCIOUS)
 		traumatic_shock *= 0.5
-	if(species && species.pain_mod)
-		traumatic_shock *= species.pain_mod
 
 	return max(0,traumatic_shock)
 

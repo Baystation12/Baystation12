@@ -58,8 +58,10 @@ var/intercom_range_display_status = 0
 		qdel(C)
 
 	if(camera_range_display_status)
-		for(var/obj/machinery/camera/C in cameranet.cameras)
-			new/obj/effect/debugging/camera_range(C.loc)
+		for(var/name in all_networks)
+			var/datum/visualnet/camera/c = all_networks[name]
+			for(var/obj/cam in c.cameras)
+				new/obj/effect/debugging/camera_range(cam.loc)
 	feedback_add_details("admin_verb","mCRD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -74,8 +76,10 @@ var/intercom_range_display_status = 0
 
 	var/list/obj/machinery/camera/CL = list()
 
-	for(var/obj/machinery/camera/C in cameranet.cameras)
-		CL += C
+	for(var/name in all_networks)
+		var/datum/visualnet/camera/c = all_networks[name]
+		for(var/cam in c.cameras)
+			CL += cam
 
 	var/output = {"<B>CAMERA ANNOMALITIES REPORT</B><HR>
 <B>The following annomalities have been detected. The ones in red need immediate attention: Some of those in black may be intentional.</B><BR><ul>"}

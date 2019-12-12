@@ -10,10 +10,11 @@
 	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
 	icon_state = "SMAC"
 	faction = "UNSC"
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unscironwill)
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsclightbrigade)
 	base = 1
 	block_slipspace = 1
 	fore_dir = WEST
+	anchored = 1
 
 	parent_area_type = /area/faction_base/unsc
 
@@ -22,3 +23,20 @@
 /obj/effect/overmap/ship/unsc_cassius/Initialize()
 	. = ..()
 	GLOB.overmap_tiles_uncontrolled -= range(7,src)
+
+
+/area/faction_base/unsc/upperlevel
+	name = "UNSC Cassius Station (Upper)"
+	icon_state = "green"
+
+/area/faction_base/unsc/lowerlevel
+	name = "UNSC Cassius Station (Lower)"
+	icon_state = "yellow"
+
+/area/faction_base/unsc/mac
+	name = "UNSC Cassius Station MAC"
+	icon_state = "firingrange"
+
+/area/faction_base/unsc/engineering
+	name = "UNSC Cassius Station Shuttle"
+	icon_state = "engine"

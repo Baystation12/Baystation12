@@ -5,9 +5,9 @@
 		var/mob/moving_mob = mover
 		if ((other_mobs && moving_mob.other_mobs))
 			return 1
-		return (!mover.density || !density || lying)
+		return (!mover.density || !density || lying || mover.elevation != elevation)
 	else
-		return (!mover.density || !density || lying)
+		return (!mover.density || !density || lying || mover.elevation != elevation)
 	return
 
 /mob/proc/setMoveCooldown(var/timeout)
@@ -124,12 +124,6 @@
 
 //This proc should never be overridden elsewhere at /atom/movable to keep directions sane.
 /atom/movable/Move(var/turf/newloc , direct)
-	if(newloc && newloc.density == 0) //No need to deal with elevation if there's a wall in the way. This also fixes projectiles phasing through walls.
-		for(var/atom/movable/AM in newloc.contents)
-			if(AM.elevation != src.elevation && AM.density != 0)
-				AM.density = 0
-				spawn(5)//Delay for a very short time.
-					AM.density = 1 //Reset the changed atoms
 	if (direct & (direct - 1))
 		if (direct & 1)
 			if (direct & 4)
@@ -174,6 +168,7 @@
 		src.m_flag = 1
 		if ((A != src.loc && A && A.z == src.z))
 			src.last_move = get_dir(A, src.loc)
+
 	return
 
 /client/proc/Move_object(direct)

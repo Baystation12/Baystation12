@@ -10,7 +10,6 @@
 	var/projectilesound
 	var/list/attack_sfx = list()
 	var/obj/item/ammo_casing/casingtype
-	var/move_to_delay = 4 //delay for the automated movement.
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
 	var/break_stuff_probability = 10
@@ -48,11 +47,12 @@
 		if(!sorted)
 			our_overmind.other_troops += src
 
-
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
 		. = v.relaymove(src,dir)
+		if(v.guns_disabled)
+			qdel(using_vehicle_gun)
 	else
 		if(using_vehicle_gun)
 			qdel(using_vehicle_gun)
@@ -60,6 +60,8 @@
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
+		return null
+	if(hold_fire)
 		return null
 	var/atom/T = null
 	//stop_automated_movement = 0
@@ -95,7 +97,7 @@
 			var/obj/vehicles/v = A
 			var/attack_vehicle = 0
 			for(var/mob/m in v.occupants)
-				if(m.stat == CONSCIOUS && m.faction != src.faction)
+				if((m.stat == CONSCIOUS || istype(m,/mob/living/simple_animal/hostile)) && m.faction != src.faction)
 					attack_vehicle = 1
 					break
 			if(attack_vehicle)
@@ -118,7 +120,7 @@
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(7))
 		if(ranged || istype(loc,/obj/vehicles))
-			if(get_dist(loc, target_mob) <= 6)
+			if(target_mob in ListTargets(6))
 				walk(src, 0)
 				OpenFire(target_mob)
 			else
@@ -128,14 +130,17 @@
 			walk_to(src, target_mob, 1, move_to_delay)
 			spawn(get_dist(src,target_mob)*move_to_delay) //If the target is within range after our original move, we attack them.
 				AttackTarget()
+	else
+		target_mob = null
+		stance = HOSTILE_STANCE_IDLE
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
-		LoseTarget()
+		LostTarget()
 		return 0
 	if(!(target_mob in ListTargets(7)))
-		LostTarget()
+		LoseTarget()
 		return 0
 	if(next_move >= world.time)
 		return 0
@@ -150,6 +155,7 @@
 	UnarmedAttack(target_mob)
 
 /mob/living/simple_animal/hostile/UnarmedAttack(var/atom/attacked,var/prox_flag)
+	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	if(istype(attacked,/mob/living))
 		var/mob/living/L = attacked
 		var/damage_to_apply = rand(melee_damage_lower,melee_damage_upper)
@@ -176,11 +182,11 @@
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	var/obj/vehicles/v = loc
 	if(istype(v))
-		if(!using_vehicle_gun && src in v.get_occupants_in_position("gunner"))
+		if(!using_vehicle_gun && !v.guns_disabled && src in v.get_occupants_in_position("gunner"))
 			var/using_vehicle_gun_type = pick(v.comp_prof.gunner_weapons)
 			using_vehicle_gun = new using_vehicle_gun_type
 	else if(using_vehicle_gun)
-		using_vehicle_gun = null
+		qdel(using_vehicle_gun)
 
 	if(!ranged && !using_vehicle_gun)
 		return
@@ -189,7 +195,7 @@
 	var/casingtype_use = casingtype
 	var/burstsize_use = burst_size
 	var/burstdelay_use = burst_delay
-	if(using_vehicle_gun)
+	if(using_vehicle_gun && !v.guns_disabled)
 		casingtype_use = null
 		burstsize_use = using_vehicle_gun.burst
 		burstdelay_use = using_vehicle_gun.burst_delay
@@ -202,6 +208,10 @@
 				if(!isnull(casing.BB))
 					casing.expend()
 			sleep(burstdelay_use)
+	var/fire_delay_use = 6 //Same as base gun fire delay.
+	if(using_vehicle_gun && !v.guns_disabled)
+		fire_delay_use = using_vehicle_gun.fire_delay
+	setClickCooldown(fire_delay_use)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -213,6 +223,9 @@
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 8)
+	if(istype(loc,/obj/vehicles))
+		var/obj/vehicles/v = loc
+		dist *= v.vehicle_view_modifier
 	var/list/L = list()
 
 	for(var/A in view(dist,src.loc))
@@ -236,6 +249,20 @@
 	stop_automated_movement = 0
 	walk(src, 0)
 
+/mob/living/simple_animal/hostile/proc/damage_toggle_hold_fire()
+	for(var/mob/living/simple_animal/hostile/h in range(7,src))
+		if(h.faction == faction)
+			if(h.hold_fire == TRUE)
+				h.toggle_hold_fire()
+
+/mob/living/simple_animal/hostile/adjustFireLoss(var/amount)
+	. = ..()
+	damage_toggle_hold_fire()
+
+/mob/living/simple_animal/hostile/adjustBruteLoss(var/amount)
+	. = ..()
+	damage_toggle_hold_fire()
+
 /mob/living/simple_animal/hostile/Life()
 
 	. = ..()
@@ -243,6 +270,7 @@
 		walk(src, 0)
 		return 0
 	if(client || ckey)
+		walk(src,0)
 		return 0
 	if(isturf(src.loc) || istype(src.loc,/obj/vehicles))
 		if(!stat)
@@ -252,6 +280,7 @@
 
 					if(!target_mob)
 						handle_assault_pathing()
+						handle_leader_pathing()
 
 				if(HOSTILE_STANCE_ATTACK)
 					if(destroy_surroundings)
@@ -274,7 +303,7 @@
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
 	var/oldhealth = health
 	. = ..()
-	if(health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(health < oldhealth && user.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
 		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
@@ -282,7 +311,7 @@
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
 	. = ..()
-	if(M.a_intent == I_HURT && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(M.a_intent == I_HURT && M.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = M
 		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
@@ -291,23 +320,28 @@
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
-	if(!target_mob && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
+	if(!target_mob && Proj.firer && Proj.firer.faction != faction && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
 		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
 		Life()
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
+	if(hold_fire)
+		target_mob = null
+		stance = HOSTILE_STANCE_IDLE
+		return
 	RangedAttack(target_mob)
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
+	var/obj/vehicles/v = loc
 	if(target == start)
 		return
 	var/projtype_use = projectiletype
 	var/projsound_use = projectilesound
-	if(using_vehicle_gun)
+	if(using_vehicle_gun && !v.guns_disabled)
 		projtype_use = using_vehicle_gun.projectile_fired
 		projsound_use = using_vehicle_gun.fire_sound
 
@@ -319,6 +353,7 @@
 	A.launch(target, def_zone)
 
 GLOBAL_LIST_INIT(hostile_attackables, list(\
+	/obj/structure/table,\
 	/obj/structure/window,\
 	/obj/structure/closet,\
 	/obj/structure/table,\

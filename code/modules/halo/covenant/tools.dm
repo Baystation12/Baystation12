@@ -23,7 +23,10 @@
 /obj/item/device/multitool/covenant
 	icon = 'tools.dmi'
 
-
+/obj/item/clothing/head/welding/covenant
+	icon = 'code/modules/halo/covenant/tools.dmi'
+	icon_state = "covwelding"
+	base_state = "covwelding"
 
 /* MEDICAL TOOLS */
 

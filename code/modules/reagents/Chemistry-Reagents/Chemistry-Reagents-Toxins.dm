@@ -237,8 +237,6 @@
 	taste_description = "acid"
 	reagent_state = LIQUID
 	color = "#8E18A9"
-	power = 10
-	meltdose = 4
 
 /datum/reagent/lexorin
 	name = "Lexorin"

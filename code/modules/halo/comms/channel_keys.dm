@@ -1,7 +1,7 @@
 
 var/global/datum/halo_frequencies/halo_frequencies = new()
 
-//These defines are undef'd in commsitems.dm
+//These defines are undef'd in telecomms_jammers.
 #define SHIPCOM_NAME "SHIPCOM"
 #define TEAMCOM_NAME "TEAMCOM"
 #define SQUADCOM_NAME "SQUADCOM"
@@ -16,13 +16,14 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 #define URFC_NAME "CMDOCOM"
 #define MED_NAME "MEDCOM"
 #define INNIE_DEFAULT "INNIECOM"
+#define SPARTAN_NAME "SIERRACOM"
 
 /datum/halo_frequencies
 	var/innie_channel_name = "INNIECOM"
 	var/const/civ_freq = 1459
 	var/list/frequencies_by_number = list()
 	var/list/all_frequencies = list()
-	var/list/frequencies_human = list(INNIE_DEFAULT,SHIPCOM_NAME,BERTELS_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,SEC_NAME,ODST_NAME,ONI_NAME,URFC_NAME,MED_NAME)
+	var/list/frequencies_human = list(INNIE_DEFAULT,SHIPCOM_NAME,BERTELS_NAME,TEAMCOM_NAME,SQUADCOM_NAME,FLEETCOM_NAME,EBAND_NAME,CIV_NAME,SEC_NAME,ODST_NAME,ONI_NAME,URFC_NAME,MED_NAME,SPARTAN_NAME)
 	var/list/frequencies_cov = list("RamNet","BoulderNet","BattleNet")
 
 /datum/halo_frequencies/New()
@@ -124,6 +125,9 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 /obj/item/device/encryptionkey/teamcom
 	channels = list(SHIPCOM_NAME = 1,TEAMCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1)
 
+/obj/item/device/encryptionkey/spartancom
+	channels = list(ONI_NAME = 1,SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1,FLEETCOM = 1, ODST_NAME = 1, SPARTAN_NAME = 1)
+
 /obj/item/device/encryptionkey/spartan_oprf
 	channels = list(SQUADCOM_NAME = 1)
 
@@ -179,6 +183,10 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 		//ONI private comms
 		if(ONI_NAME)
 			return "comradio"
+
+		//Spartan comms
+		if(SPARTAN_NAME)
+			return "Sierracom"
 
 		//unsc officers chat
 		if(FLEETCOM_NAME)

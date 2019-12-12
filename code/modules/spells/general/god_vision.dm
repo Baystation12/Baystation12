@@ -1,4 +1,4 @@
-/spell/camera_connection/god_vision
+/*/spell/camera_connection/god_vision
 	name = "All Seeing Eye"
 	desc = "See what your master sees."
 
@@ -17,4 +17,4 @@
 
 /spell/camera_connection/god_vision/Destroy()
 	vision.visualnet = null
-	return ..()
+	return ..()*/

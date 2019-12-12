@@ -1,4 +1,8 @@
 
+/obj/item/clothing/glasses/hud/tactical/spartan_hud
+	darkness_view = 7
+	see_invisible = SEE_INVISIBLE_NOLIGHTING
+
 /obj/item/clothing/head/helmet/spartan
 	name = "MJOLNIR Powered Assault Armor Helmet Mark IV"
 	desc = "Ave, Imperator, morituri te salutant."
@@ -15,17 +19,19 @@
 	cold_protection = HEAD|FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
-	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 35,bio = 100,rad = 25)
+	flash_protection = FLASH_PROTECTION_MAJOR
+	armor = list(melee = 60,bullet = 75,laser = 50,energy = 55,bomb = 60,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
-	armor_thickness = 20
+	armor_thickness = 30
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
+	unacidable = 1
 	on = 0
 	item_state_slots = list(slot_l_hand_str = "syndicate-helm-black", slot_r_hand_str = "syndicate-helm-black")
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/spartan_hud
 
 /obj/item/clothing/suit/armor/special/spartan
 	name = "MJOLNIR Powered Assault Armor Mark IV"
@@ -36,7 +42,7 @@
 	icon_override = 'code/modules/halo/clothing/spartan_armour.dmi'
 
 	blood_overlay_type = "armor"
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
+	armor = list(melee = 60, bullet = 75, laser = 50, energy = 55, bomb = 60, bio = 100, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDETAIL
@@ -46,17 +52,21 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	armor_thickness = 30
 	species_restricted = list("Spartan")
+	max_suitstore_w_class = ITEM_SIZE_HUGE
+	unacidable = 1
 
-	specials = list(/datum/armourspecials/gear/human_tank,\
-		/datum/armourspecials/shields/spartan,
-		/datum/armourspecials/shieldmonitor/)
+	specials = list(/datum/armourspecials/shields/spartan,\
+		/datum/armourspecials/shieldmonitor,\
+		/datum/armourspecials/self_destruct)
 		/*/datum/armourspecials/gear/mjolnir_gloves,\
 		/datum/armourspecials/gear/mjolnir_boots,\
 		/datum/armourspecials/gear/mjolnir_jumpsuit)*/
-	allowed = list(/obj/item/weapon/tank)
-	totalshields = 150
+	totalshields = 125
 	item_state_slots = list(slot_l_hand_str = "syndicate-black", slot_r_hand_str = "syndicate-black")
-	var/list/available_abilities = list(\
+	var/list/available_abilities = list()
+
+/obj/item/clothing/suit/armor/special/spartan/AA
+	available_abilities = list(	\
 		"Hologram Decoy Emitter" = /datum/armourspecials/holo_decoy,\
 		"Personal Cloaking Device" = /datum/armourspecials/cloaking/limited,\
 		"Personal Regeneration Field" = /datum/armourspecials/regeneration,\

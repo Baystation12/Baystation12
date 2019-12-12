@@ -16,6 +16,10 @@
 
 	parent_area_type = /area/covenant_corvette
 
+/obj/effect/overmap/ship/covenant_corvette/LateInitialize()
+	. = ..()
+	new /obj/effect/overmap/ship/npc_ship/shipyard/cov (loc)
+
 //overmap weapons//
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turretport/kig_yar_corvette
 	deck_gun_area = /area/covenant_corvette/pulse_lasersport

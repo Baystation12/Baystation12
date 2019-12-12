@@ -22,6 +22,7 @@
 	var/list/linked_consoles = list()
 	var/list/contained_rounds = list()
 	var/loading = 0
+	ai_access_level = 4
 
 /obj/machinery/mac_cannon/ammo_loader/New()
 	name = "[weapon_name] [name]"
@@ -89,7 +90,7 @@
 
 /obj/machinery/mac_cannon/capacitor/process()
 	if(recharging && (world.time > recharging))
-		var/drained = draw_powernet_power(CAPACITOR_MAX_STORED_CHARGE/charge_time)
+		var/drained = draw_powernet_power(CAPACITOR_MAX_STORED_CHARGE/(charge_time / 2)) //We're giving the charge time in seconds and we process every 2, so multiply our chargetime by 2.
 		var/new_stored = capacitor[1] + drained
 		if(new_stored > capacitor[2])
 			capacitor[1] = capacitor[2]
@@ -180,7 +181,7 @@
 			play_fire_sound(target)
 
 /obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = src.loc)
-	if(isnull(src.fire_sound) || !istype(overmap_object))
+	if(isnull(fire_sound) || !istype(overmap_object) || isnull(loc_soundfrom))
 		return
 	if(overmap_object.map_z.len ==0)
 		return
@@ -204,12 +205,12 @@
 	name = "MAC Orbital Bombardment Console"
 	desc = "Controls a limited power setting for orbital bombardment"
 	icon_state = "mac_bombard_control"
+	var/designator_spawn = /obj/item/weapon/laser_designator
+	ai_access_level = 4
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/New()
 	. = ..()
-	var/obj/ld = new /obj/item/weapon/laser_designator (src)
-	ld.loc = loc
-	ld = new /obj/item/weapon/laser_designator (src)
+	var/obj/ld = new designator_spawn (loc)
 	ld.loc = loc
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attack_hand(var/mob/user)
@@ -241,6 +242,9 @@
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/fire_projectile()
 	return
 
+/obj/machinery/overmap_weapon_console/mac/orbital_bombard/proc/bombard_impact(var/atom/hit_turf)
+	explosion(hit_turf,4,6,7,20, adminlog = 0)
+
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/fire(var/atom/target,var/mob/user)
 	if(!do_power_check(user))
 		return
@@ -252,7 +256,7 @@
 		play_fire_sound()
 		var/obj/effect/overmap/targ_overmap = map_sectors["[target.z]"]
 		play_fire_sound(targ_overmap,target_turf)
-		explosion(target_turf,4,5,6,20, adminlog = 0)
+		bombard_impact(target_turf)
 		targ_overmap.adminwarn_attack()
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attackby(var/obj/item/weapon/W, var/mob/user)
@@ -271,17 +275,15 @@
 //MAC SHIPHIT PROJECTILE//
 /obj/item/projectile/mac_round
 	name = "MAC Slug"
-	penetrating = 2
+	penetrating = 1
 	var/warned = 0
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
 	var/increase_from_damage = (damage/250)
 	if(increase_from_damage > 2)
-		increase_from_damage = (increase_from_damage-2)/4
-	else
-		increase_from_damage = 0
-	explosion(impacted,3 + increase_from_damage,5 + increase_from_damage,7 + increase_from_damage,10 + increase_from_damage, adminlog = 0)
+		increase_from_damage *= 0.25
+	explosion(impacted,2 + increase_from_damage,4 + increase_from_damage,5 + increase_from_damage,6 + increase_from_damage, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

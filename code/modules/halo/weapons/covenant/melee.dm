@@ -18,6 +18,7 @@
 	throwforce = 1
 	active_force = 75
 	active_throwforce = 12
+	armor_penetration = 35
 	var/hits_burn_mobs = 1
 	edge = 0
 	sharp = 0
@@ -34,6 +35,9 @@
 /obj/item/weapon/melee/energy/elite_sword/New()
 	. = ..()
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
+
+/obj/item/weapon/melee/energy/elite_sword/can_embed()
+	return FALSE
 
 /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe()
 	set name = "Enable weapon failsafe"
@@ -167,6 +171,7 @@
 	w_class = ITEM_SIZE_SMALL
 	active_force = 30
 	active_throwforce = 12
+	armor_penetration = 35
 	edge = 0
 	sharp = 0
 	parry_projectiles = 0
@@ -205,6 +210,7 @@
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
 	force = 40
+	armor_penetration = 40
 	hits_burn_mobs = 0
 	//active_force = 60
 	throwforce = 10
@@ -260,6 +266,7 @@
 	desc = "A huge, scary-looking energy axe, which looks too heavy to be wielded by humans..."
 	icon = 'code/modules/halo/icons/dogler_weapon_sprites.dmi'
 	force = 65
+	armor_penetration = 35
 	icon_state = "dogler_axe"
 	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
 	item_state_slots = list(
@@ -271,3 +278,10 @@
 
 /obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
 	return
+
+/obj/item/weapon/melee/baton/humbler/covenant
+	name = "Type-12 Antipersonnel Incapacitator"
+	desc = "A retractable baton capable of inducing a large amount of pain via electrical shocks."
+	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon_state = "Type-12 Antipersonnel Incapacitator"
+	item_state = "telebaton_0"

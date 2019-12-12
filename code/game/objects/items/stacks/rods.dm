@@ -27,7 +27,7 @@
 	gender = NEUTER
 	matter = null
 	uses_charge = 1
-	charge_costs = list(500)
+	charge_costs = list(0.1)
 	stacktype = /obj/item/stack/rods
 
 /obj/item/stack/rods/New()

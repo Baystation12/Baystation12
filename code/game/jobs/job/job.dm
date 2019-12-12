@@ -47,6 +47,8 @@
 	var/list/whitelisted_species = list()		//job can only be filled by these species
 	var/open_slot_on_death = 0
 
+	var/lace_access = 0 //Forces the job to have a neural lace, so we can store the access in it instead of in the ID..
+
 /datum/job/New()
 	..()
 	if(prob(100-availablity_chance))	//Close positions, blah blah.

@@ -59,3 +59,6 @@
 	name = "Wire Synthesizer"
 	max_energy = 50
 	recharge_rate = 2
+
+/datum/matter_synth/nanolaminate
+	name = "Nanolaminate Synthesizer"

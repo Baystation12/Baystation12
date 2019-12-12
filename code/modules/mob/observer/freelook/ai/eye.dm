@@ -9,16 +9,11 @@
 
 /mob/observer/eye/cameranet/New()
 	..()
-	visualnet = cameranet
 
 /mob/observer/eye/aiEye
 	name = "Inactive AI Eye"
 	name_sufix = "AI Eye"
 	icon_state = "AI-eye"
-
-/mob/observer/eye/aiEye/New()
-	..()
-	visualnet = cameranet
 
 /mob/observer/eye/aiEye/setLoc(var/T, var/cancel_tracking = 1)
 	. = ..()
@@ -27,9 +22,9 @@
 		if(cancel_tracking)
 			ai.ai_cancel_tracking()
 
-		//Holopad
-		if(ai.holo && ai.hologram_follow)
-			ai.holo.move_hologram(ai)
+		//Hologram
+		if(ai.our_holo && ai.hologram_follow)
+			ai.our_holo.forceMove(T)
 		return 1
 
 /mob/observer/eye/aiEye/set_dir(new_dir)
@@ -38,16 +33,13 @@
 		var/mob/living/silicon/ai/ai = owner
 
 		//Holopad
-		if(ai.holo && ai.hologram_follow)
-			ai.holo.set_dir_hologram(new_dir, ai)
+		if(ai.our_holo && ai.hologram_follow)
+			ai.our_holo.set_dir(new_dir)
 		return 1
 
 // AI MOVEMENT
 
 // The AI's "eye". Described on the top of the page.
-
-/mob/living/silicon/ai
-	var/obj/machinery/hologram/holopad/holo = null
 
 /mob/living/silicon/ai/proc/destroy_eyeobj(var/atom/new_eye)
 	if(!eyeobj) return
@@ -62,6 +54,7 @@
 	if(eyeobj) destroy_eyeobj()
 	if(!newloc) newloc = get_turf(src)
 	eyeobj = new /mob/observer/eye/aiEye(newloc)
+	eyeobj.visualnet = our_visualnet
 	eyeobj.possess(src)
 
 // Intiliaze the eye by assigning it's "ai" variable to us. Then set it's loc to us.

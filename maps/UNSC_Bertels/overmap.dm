@@ -14,7 +14,7 @@
 	parent_area_type = /area/corvette/unscbertels
 
 /obj/machinery/button/toggle/alarm_button/corvette
-	area_base = /area/corvette/odst_corvette
+	area_base = /area/corvette/unscbertels
 
 /obj/machinery/button/toggle/alarm_button/corvette/v2
 	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j1.ogg'

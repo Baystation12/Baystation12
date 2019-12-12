@@ -12,7 +12,7 @@
 	return ..()
 
 /obj/item/projectile/covenant/trainingpistol
-	armor_penetration = 1
+	armor_penetration = 0
 	nodamage = 1
 	agony = 10
 	damage_type = PAIN
@@ -21,7 +21,6 @@
 
 /obj/item/projectile/covenant/plasmapistol
 	damage = 45
-	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 
@@ -29,27 +28,24 @@
 	damage = 60
 	icon_state = "Overcharged_Plasmapistol shot"
 
-/obj/item/projectile/covenant/plasmapistol/overcharge/on_impact()
+/obj/item/projectile/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
-	empulse(src.loc,1,2)
+	empulse(impacted.loc,0,1)
 
 /obj/item/projectile/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
-	accuracy = 1
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/covenant/plasmarifle/brute
-	damage = 33
-	accuracy = 0.5
+	damage = 30
 	icon_state = "heavy_plas_cannon"
 
 /obj/item/projectile/covenant/beamrifle
 	name = "energy beam"
 	desc = ""
-	damage = 75
-	accuracy = 3
-	armor_penetration = 70
+	damage = 55
+	armor_penetration = 65
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	step_delay = 0
@@ -98,6 +94,7 @@
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
+	armor_penetration = 20
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
@@ -141,7 +138,8 @@
 	if(kill_count % 2 == 0)
 		return
 	if(locked_target)
-		redirect(locked_target.x, locked_target.y, loc)
+		redirect(locked_target, loc)
+		dir = get_dir(loc,locked_target)
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"
@@ -164,8 +162,7 @@
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
-	damage = 45
-	accuracy = 2
+	damage = 40
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
@@ -207,12 +204,12 @@
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
 	damage = 30
-	accuracy = 2
 	shards_to_explode = 3
 	shard_name = "Rifle Needle shrapnel"
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	tracer_delay_time = 0.5 SECONDS
 	invisibility = 101
+	armor_penetration = 35
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle/Move()
 	if(kill_count - initial(kill_count) > RIFLENEEDLE_TRACK_DIST)

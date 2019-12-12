@@ -53,3 +53,4 @@
 
 	var/obj/screen/cells = null
 	var/next_scream_at = 0 //For painscreams, used for both simplemobs and humanmobs
+	var/next_roll_at = 0

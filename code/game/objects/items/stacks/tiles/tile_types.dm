@@ -114,7 +114,7 @@
 	gender = NEUTER
 	matter = null
 	uses_charge = 1
-	charge_costs = list(250)
+	charge_costs = list(0.1)
 	stacktype = /obj/item/stack/tile/floor
 	build_type = /obj/item/stack/tile/floor
 

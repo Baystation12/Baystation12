@@ -48,6 +48,7 @@
 	var/armor_thickness //The thickness of the armor, in mm. Keep null to opt-out usage of system for item. This value, set at compile time is the maximum value of thickness for this item. Armor can only lose 10% of this value per-hit.
 	var/list/armor_thickness_modifiers = list()//A list containing the weaknesses of the armor, used when performing armor-thickness depletion. Format: damage_type - multiplier
 	var/list/allowed = null //suit storage stuff.
+	var/max_suitstore_w_class = ITEM_SIZE_LARGE //suitstore stuff
 	var/obj/item/device/uplink/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
 	var/zoom = 0 //1 if item is actively being used to zoom. For scoped guns and binoculars.
@@ -77,6 +78,7 @@
 	// Species-specific sprite sheets for inventory sprites
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
+	var/dam_desc = ""
 
 /obj/item/New()
 	..()
@@ -170,7 +172,8 @@
 			size = "bulky"
 		if(ITEM_SIZE_HUGE + 1 to INFINITY)
 			size = "huge"
-	return ..(user, distance, "", "It is a [size] item.")
+	. = ..(user, distance, "", "It is a [size] item.")
+	to_chat(user,dam_desc) 
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -302,7 +305,7 @@ var/list/global/slot_flags_enumeration = list(
 //If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.
 //Set disable_warning to 1 if you wish it to not give you outputs.
 //Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
-/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = 0)
+/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = 0,item_w_class)
 	if(!slot) return 0
 	if(!M) return 0
 
@@ -364,7 +367,7 @@ var/list/global/slot_flags_enumeration = list(
 				if(!disable_warning)
 					to_chat(usr, "<span class='warning'>You somehow have a suit with no defined allowed items for suit storage, stop that.</span>")
 				return 0
-			if( !(istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || is_type_in_list(src, H.wear_suit.allowed)) )
+			if( !(istype(src, /obj/item/device/pda) || istype(src, /obj/item/weapon/pen) || (is_type_in_list(src, H.wear_suit.allowed) && item_w_class <= H.wear_suit.max_suitstore_w_class)))
 				return 0
 		if(slot_handcuffed)
 			if(!istype(src, /obj/item/weapon/handcuffs))
@@ -701,14 +704,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 #define ARMOR_DAMAGED 0
 
 /obj/item/proc/degrade_armor_thickness(var/damage,var/damage_type)
-	var/current_thickness_percentile = (armor_thickness / initial(armor_thickness))*100
-	damage *= (current_thickness_percentile/100)/10 //The lower the thickness of the armor, the harder it gets to damage it further. Divided by 10 to keep loss-per-shot sane.
+	damage /= 10 //The lower the thickness of the armor, the harder it gets to damage it further. Divided by 10 to keep loss-per-shot sane.
 	var/thickness_dam_cap = (initial(armor_thickness)/10)
 	if(damage_type in armor_thickness_modifiers)
 		thickness_dam_cap /= armor_thickness_modifiers[damage_type]
 	if(damage > thickness_dam_cap)
 		damage = thickness_dam_cap
-	var/new_thickness = (armor_thickness - damage)
+	var/new_thickness = (armor_thickness - min(damage,thickness_dam_cap))
 	if(new_thickness < 0)
 		armor_thickness = 0
 		update_damage_description()
@@ -731,7 +733,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		desc_addition_to_apply = "<span class = 'warning'> It is [damage_type == BURN ? "mostly melted" : "scarred and shattered"].</span>"
 	if(armor_thickness <= 0)
 		desc_addition_to_apply = "<span class = 'warning'> It has [damage_type == BURN ? "melted away" : "become scarred and deformed"].</span>"
-	desc = initial(desc) + desc_addition_to_apply
+	dam_desc = desc_addition_to_apply
 
 /obj/item/proc/can_use_when_prone()
 	return (w_class <= ITEM_SIZE_NORMAL)
+
+/obj/item/proc/can_embed()
+	return 1
