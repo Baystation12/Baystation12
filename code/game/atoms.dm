@@ -1,4 +1,4 @@
-#define BASE_ELEVATION 1
+#define BASE_ELEVATION 0
 /atom
 	var/level = 2
 	var/flags = 0

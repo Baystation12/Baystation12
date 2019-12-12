@@ -81,7 +81,11 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/update_floating()
 
-	if(anchored || buckled || check_solid_ground())
+	if(elevation > 0)
+		make_floating(1)
+
+
+	if((anchored || buckled || check_solid_ground()))
 		make_floating(0)
 		return
 
