@@ -4,7 +4,7 @@
 	config_tag = "outer_colonies"
 	round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
-	required_players = 0 //Temp until
+	required_players = 15
 	probability = 1
 	var/faction_safe_time = 10 MINUTES
 	var/faction_safe_duration = 10 MINUTES

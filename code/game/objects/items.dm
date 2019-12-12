@@ -679,7 +679,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 				if(c.mob_can_equip(user_mob, slot, 1))
 					if(!("[user_human.species.name]" in sprite_sheets))
 						offset_to_apply = new_offsets
-						world << "applying offset to [name]"
 			else
 				offset_to_apply = new_offsets
 	var/mob_state
