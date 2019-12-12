@@ -3,7 +3,7 @@
 
 	head = null
 	l_ear = /obj/item/device/radio/headset/covenant
-	eyes = /obj/item/clothing/glasses/hud/tactical/covenant
+	glasses = /obj/item/clothing/glasses/hud/tactical/covenant
 	uniform = /obj/item/clothing/under/yanmee_internal
 	suit = null
 	back = null
