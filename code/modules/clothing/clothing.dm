@@ -693,7 +693,7 @@ BLIND     // can't see anything
 	if(rolled_sleeves == -1)
 		verbs -= /obj/item/clothing/under/verb/rollsleeves
 	if(fitfemale_down == -1)
-		verbs -= /obj/item/clothing/under/verb/fitfemale //mine
+		verbs -= /obj/item/clothing/under/verb/fitfemale
 
 /obj/item/clothing/under/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()

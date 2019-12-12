@@ -8,9 +8,12 @@ var/global/list/human_icon_cache = list()
 var/global/list/tail_icon_cache = list() //key is [species.race_key][r_skin][g_skin][b_skin]
 var/global/list/light_overlay_cache = list()
 
-/proc/overlay_image(icon,icon_state,color,flags)
+/proc/overlay_image(var/icon,var/icon_state,var/color,var/flags,var/offset = list(0,0))
 	var/image/ret = image(icon,icon_state)
 	ret.color = color
+	if(offset[1] != 0 || offset[2] != 0)
+		ret.pixel_x = offset[1]
+		ret.pixel_y = offset[2]
 	ret.appearance_flags = flags
 	return ret
 
@@ -610,8 +613,11 @@ var/global/list/damage_icon_parts = list()
 
 
 /mob/living/carbon/human/proc/apply_hand_offsets(var/image/image)
-	image.pixel_x = species.item_icon_offsets[1]
-	image.pixel_y = species.item_icon_offsets[2]
+	var/list/offset_list = species.item_icon_offsets[dir]
+	if(isnull(offset_list))
+		return
+	image.pixel_x = offset_list[1]
+	image.pixel_y = offset_list[2]
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)

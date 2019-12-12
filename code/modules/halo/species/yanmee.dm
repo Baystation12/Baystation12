@@ -20,6 +20,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	language = "Sangheili"
 	additional_langs = list("Yanme e Hivemind")
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
+	inherent_verbs = list(/mob/living/carbon/human/proc/take_flight)
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 4
@@ -33,7 +34,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	warning_low_pressure = 25
 	hazard_low_pressure = -1
 
-	item_icon_offsets = list(list(2,0),list(2,0),null,list(1,0),null,null,null,list(-1,0),null)
+	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(-1,0),null)
 
 	roll_distance = 3
 
@@ -73,3 +74,6 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	..()
 	H.name = "Yanme\'e [rand(0,999)] \"[H.name]\""
 	H.real_name = H.name
+
+/datum/species/yanmee/apply_species_name_formatting(var/to_format_name)
+	return "Yanme\'e [rand(1,999)] \"[to_format_name]\""
