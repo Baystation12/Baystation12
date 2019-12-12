@@ -3,10 +3,11 @@
 
 	head = null
 	l_ear = /obj/item/device/radio/headset/covenant
+	glasses = /obj/item/clothing/glasses/hud/tactical/covenant
 	uniform = /obj/item/clothing/under/yanmee_internal
 	suit = null
 	back = null
-	belt = /obj/item/weapon/storage/belt/utility/full
+	belt = /obj/item/weapon/storage/belt/covenant/full
 	gloves = /obj/item/clothing/gloves/drone_gloves
 	shoes = /obj/item/clothing/shoes/drone_boots
 	l_pocket = null

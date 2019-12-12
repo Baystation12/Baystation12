@@ -55,6 +55,7 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	species_restricted = list("Yanme e")
 	armor = list(melee = 65, bullet = 55, laser = 20, energy = 20, bomb = 45, bio = 25, rad = 20)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS|HANDS|FEET|HEAD
+	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
 	canremove = 0
 	unacidable = 1
 
