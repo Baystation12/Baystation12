@@ -2,13 +2,15 @@
 //Dependencies located in robot.dm and robot_modules.dm, they are vital for this to work//
 //////////////////////////////////////////////////////////////////////////////////////////
 
+#define HURAGOK_REGEN 1
+
 /mob/living/silicon/robot/huragok
 	name = "Huragok"
 	real_name = "Huragok"
 	icon = 'code/modules/halo/covenant/engineer.dmi'
 	icon_state = "engineer"
-	maxHealth = 75
-	health = 75
+	maxHealth = 200
+	health = 200
 	faction = "Covenant"
 	spawn_sound = null
 	speak_statement = "chirps"
@@ -30,9 +32,23 @@
 	radio = /obj/item/device/radio/headset/covenant
 	common_radio = /obj/item/device/radio/headset/covenant
 
+/mob/living/silicon/robot/huragok/emp_act()
+	return
+
 /mob/living/silicon/robot/huragok/Login()
 	. =.. ()
 	to_chat(src,"<span class='notice'>You can set a custom name by using the <b>Namepick</b> command in the <b>Silicon Commands</b> tab. Make sure to use a proper huragok name, the naming rule still apply!</span> <span class='warning'>This role and its mechanics are experimental! It is nowhere near a finished stated as it lacks proper balance and unique features. Expect to need a lot of admin assistance!</span>")
+
+/mob/living/silicon/robot/huragok/Life()
+	. = ..()
+	if(stat)
+		return
+	for(var/V in components)
+		var/datum/robot_component/C = components[V]
+		if(C.brute_damage > 0)
+			C.brute_damage = max(0,C.brute_damage - HURAGOK_REGEN)
+		if(C.electronics_damage > 0)
+			C.electronics_damage = max(0,C.electronics_damage - HURAGOK_REGEN)
 
 /mob/living/silicon/robot/huragok/Initialize()
 	. =.. ()
@@ -41,3 +57,5 @@
 	remove_language(LANGUAGE_GALCOM, 1)
 	remove_language(LANGUAGE_SOL_COMMON, 1)
 	add_language(LANGUAGE_SIGN, 1)
+
+#undef HURAGOK_REGEN

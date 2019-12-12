@@ -28,6 +28,7 @@
 		/datum/job/colonist_mayor,\
 		/datum/job/police,\
 		/datum/job/police_chief,\
+		/datum/job/covenant/huragok,\
 		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\

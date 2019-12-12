@@ -8,7 +8,5 @@
 	/datum/species/sanshyuum,\
 	/datum/species/yanmee,\
 	/mob/living/simple_animal/mgalekgolo,\
-	/mob/living/simple_animal/engineer,\
-	/mob/living/simple_animal/hostile/done,\
-	/mob/living/simple_animal/mgalekgolo,\
-	/mob/living/carbon/human/covenant/sanshyuum,)
+	/mob/living/silicon/robot/huragok,\
+	/mob/living/carbon/human/covenant/sanshyuum)
