@@ -1,7 +1,7 @@
-/atom/proc/DefaultTopicState()
+/obj/proc/DefaultTopicState()
 	return GLOB.default_state
 
-/atom/Topic(var/href, var/href_list = list(), var/datum/topic_state/state)
+/obj/Topic(var/href, var/href_list = list(), var/datum/topic_state/state)
 	if((. = ..()))
 		return
 	state = state || DefaultTopicState() || GLOB.default_state
@@ -11,11 +11,8 @@
 	CouldNotUseTopic(usr)
 	return TRUE
 
-/atom/proc/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
+/obj/proc/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
 	return TOPIC_NOACTION
-
-// Override prescribes default state argument.
-/atom/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
 
 /obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
 	return min(..(), user.CanUseObjTopic(src, state))
@@ -28,7 +25,7 @@
 /mob/proc/CanUseObjTopic()
 	return STATUS_INTERACTIVE
 
-/atom/proc/CouldUseTopic(var/mob/user)
+/obj/proc/CouldUseTopic(var/mob/user)
 	user.AddTopicPrint(src)
 
 /mob/proc/AddTopicPrint(var/atom/target)
@@ -49,4 +46,5 @@
 		return
 	target.add_hiddenprint(src)
 
-/atom/proc/CouldNotUseTopic(var/mob/user)
+/obj/proc/CouldNotUseTopic(var/mob/user)
+	return

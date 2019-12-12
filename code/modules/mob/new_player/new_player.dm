@@ -95,11 +95,12 @@
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
-/mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
-	if(usr != src)
-		return TOPIC_NOACTION
+/mob/new_player/Topic(href, href_list[])
+	// These return values are 0 as to not interfere with ..() calls in unexpected ways
 	if(!client)
-		return TOPIC_NOACTION
+		return 0
+	if(usr != src)
+		return 0
 
 	if(href_list["show_preferences"])
 		client.prefs.ShowChoices(src)
