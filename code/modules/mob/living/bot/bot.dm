@@ -153,13 +153,20 @@
 	popup.set_content(dat)
 	popup.open()
 
-/mob/living/bot/DefaultTopicState()
-	return GLOB.physical_state
+/mob/living/bot/Topic(var/href, var/href_list)
+	if(..())
+		return 1
 
-/mob/living/bot/OnTopic(mob/user, href_list)
+	if(!issilicon(usr) && !Adjacent(usr))
+		return
+
+	if(usr.incapacitated())
+		return
+
 	if(href_list["command"])
-		ProcessCommand(user, href_list["command"], href_list)
-	Interact(user)
+		ProcessCommand(usr, href_list["command"], href_list)
+
+	Interact(usr)
 
 /mob/living/bot/proc/GetInteractTitle()
 	return
