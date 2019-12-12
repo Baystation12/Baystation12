@@ -27,7 +27,7 @@
 	can_force_door = 1
 	default_faction = "Covenant"
 	pixel_offset_x = -12
-	item_icon_offsets = list(5,4)
+	item_icon_offsets = list(list(10,4),list(10,4),null,list(6,2),null,null,null,list(6,2),null)
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 

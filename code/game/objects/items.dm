@@ -173,7 +173,7 @@
 		if(ITEM_SIZE_HUGE + 1 to INFINITY)
 			size = "huge"
 	. = ..(user, distance, "", "It is a [size] item.")
-	to_chat(user,dam_desc) 
+	to_chat(user,dam_desc)
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -668,6 +668,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_mob_overlay(mob/user_mob, slot)
 	var/bodytype = "Default"
+	var/list/offset_to_apply = user_mob.get_mob_offset_for(src)
 	if(ishuman(user_mob))
 		var/mob/living/carbon/human/user_human = user_mob
 		bodytype = user_human.species.get_bodytype(user_human)
@@ -698,7 +699,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		mob_icon = item_icons[slot]
 	else
 		mob_icon = default_onmob_icons[slot]
-	return overlay_image(mob_icon,mob_state,color,RESET_COLOR)
+	return overlay_image(mob_icon,mob_state,color,RESET_COLOR,offset_to_apply)
 
 #define ARMOR_DESTROYED 1
 #define ARMOR_DAMAGED 0

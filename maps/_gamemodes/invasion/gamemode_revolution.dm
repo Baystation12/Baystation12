@@ -29,6 +29,10 @@
 		/datum/job/covenant/brute_minor,\
 		/datum/job/covenant/brute_major,\
 		/datum/job/covenant/brute_captain,\
+		/datum/job/covenant/yanmee_minor,\
+		/datum/job/covenant/yanmee_major,\
+		/datum/job/covenant/yanmee_ultra,\
+		/datum/job/covenant/yanmee_leader,\
 		/datum/job/ONI_Spartan_II,)
 
 /datum/game_mode/outer_colonies/revolution/setup_objectives()

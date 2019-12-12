@@ -192,7 +192,7 @@ datum/preferences
 		else if(firstspace == name_length)
 			real_name += "[pick(GLOB.last_names)]"
 
-	character.fully_replace_character_name(real_name)
+	character.fully_replace_character_name(character.species.apply_species_name_formatting(real_name))
 
 	character.gender = gender
 	character.age = age

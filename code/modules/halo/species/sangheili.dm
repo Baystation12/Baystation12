@@ -23,7 +23,7 @@
 	explosion_effect_mod = 0.5
 	can_force_door = 1
 	pixel_offset_x = -8
-	item_icon_offsets = list(16,0)
+	item_icon_offsets = list(list(9,1),list(9,1),null,list(6,1),null,null,null,list(6,1),null)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/elite_punch)

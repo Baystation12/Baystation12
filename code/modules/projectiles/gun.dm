@@ -337,6 +337,10 @@
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
 	//user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time + fire_delay
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/h = user
+		for(var/obj/item/weapon/gun/g in h.contents)
+			g.next_fire_time = next_fire_time
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.

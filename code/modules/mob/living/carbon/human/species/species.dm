@@ -191,7 +191,7 @@
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
 
-	var/list/item_icon_offsets = list(0,0) //A list (x,y) of offsets to apply to inhand images.
+	var/list/item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null) //A list (x,y) of offsets to apply to inhand images, each list corrresponds to a dir.
 	//NOTE FOR ABOVE: Posive X moves right, positive Y moves up.
 	var/melee_force_multiplier = 1
 	var/equipment_slowdown_multiplier = 1	//for strong or weak species
@@ -203,6 +203,9 @@
 	var/per_roll_delay = 2
 
 	var/default_faction
+
+/datum/species/proc/apply_species_name_formatting(var/to_format)
+	return to_format
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
