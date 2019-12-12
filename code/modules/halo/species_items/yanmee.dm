@@ -11,8 +11,8 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	flags = RESTRICTED|NO_TALK_MSG|NO_STUTTER|HIVEMIND
 
 /obj/item/clothing/under/yanmee_internal
-	name = "Yanme e Exoskeletion"
-	desc = "The exoskeleton of a Yanme e."
+	name = "Yanme\'e Exoskeletion"
+	desc = "The exoskeleton of a Yanme\'e."
 	icon = YANMEE_ICON
 	icon_override = YANMEE_ICON
 	icon_state = "exoskeleton"
@@ -46,8 +46,8 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	unacidable = 1
 
 /obj/item/clothing/suit/armor/special/yanmee
-	name = "Yanme\'e Exoskeleton"
-	desc = "A painted exoskeleton with integrated armour and micro antigravity units to assist in flight"
+	name = "Yanme\'e Carapace"
+	desc = "A painted carapace with integrated armour and micro antigravity units to assist in flight"
 	icon = YANMEE_ICON
 	icon_override = YANMEE_ICON
 	icon_state = "minor_harness"
