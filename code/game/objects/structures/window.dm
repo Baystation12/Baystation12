@@ -133,8 +133,8 @@
 		return 1
 	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
-	if(get_dir(loc, target) & dir)
-		return (!density || !(mover && mover.elevation != elevation))
+	if(get_dir(loc, target) & dir && mover && mover.elevation == elevation)
+		return (!density)
 	else
 		return 1
 
