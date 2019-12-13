@@ -154,7 +154,7 @@
 	popup.open()
 
 /mob/living/bot/DefaultTopicState()
-	return GLOB.physical_state
+	return GLOB.default_state
 
 /mob/living/bot/OnTopic(mob/user, href_list)
 	if(href_list["command"])
