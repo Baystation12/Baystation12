@@ -26,7 +26,7 @@
 
 /obj/item/weapon/material/knife/folding/swiss/attack_self(mob/user)
 	var/choice	
-	if(user.a_intent != I_HELP && ((SWISSKNF_LBLADE in tools) || (SWISSKNF_SBLADE in tools)) && active_tool == SWISSKNF_CLOSED) //check it, shit doesnt work
+	if(user.a_intent != I_HELP && ((SWISSKNF_LBLADE in tools) || (SWISSKNF_SBLADE in tools)) && active_tool == SWISSKNF_CLOSED)
 		open = TRUE
 		if(SWISSKNF_LBLADE in tools)
 			choice = SWISSKNF_LBLADE
