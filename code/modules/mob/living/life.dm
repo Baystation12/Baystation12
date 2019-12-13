@@ -31,11 +31,16 @@
 		handle_stomach()
 
 		. = 1
+
 	else if(timeofdeath && (world.time - timeofdeath < 150))
 		//This is to make dead people process reagents for a few ticks, so they can be treated and defibrilated
 		handle_chemicals_in_body()
 
 		. = 1
+
+	if(stat != 0 && elevation > 0)
+		visible_message("[name] is unable to support their flight and falls to the ground!")
+		change_elevation(-elevation)
 
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
