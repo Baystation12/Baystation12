@@ -16,6 +16,7 @@
 
 // Override prescribes default state argument.
 /atom/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
+	return ..()
 
 /obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = DefaultTopicState() || GLOB.default_state, var/href_list)
 	return min(..(), user.CanUseObjTopic(src, state))
