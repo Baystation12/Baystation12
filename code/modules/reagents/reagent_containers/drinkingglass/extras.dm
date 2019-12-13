@@ -51,7 +51,6 @@
 	desc = "This goes on a glass."
 	var/glass_addition
 	var/glass_desc
-	var/glass_color
 	w_class = ITEM_SIZE_TINY
 	icon = 'icons/obj/drink_glasses/extras.dmi'
 
@@ -61,6 +60,12 @@
 	glass_addition = "stick"
 	glass_desc = "There is a stick in the glass."
 	icon_state = "stick"
+	color = COLOR_BLACK
+	
+/obj/item/weapon/glass_extra/stick/Initialize()
+	. = ..()
+	if(prob(50))
+		color = get_random_colour(0,50,150)
 
 /obj/item/weapon/glass_extra/straw
 	name = "straw"

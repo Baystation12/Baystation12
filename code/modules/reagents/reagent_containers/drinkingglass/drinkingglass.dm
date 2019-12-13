@@ -137,19 +137,21 @@
 		var/amnt = get_filling_state()
 
 		if(has_ice())
-			over_liquid |= "[base_icon][amnt]_ice"
+			over_liquid |= image(icon, src, "[base_icon][amnt]_ice", -1)
+
+		if(has_fizz())
+			over_liquid |= get_extra_overlay(amnt, "fizz")
 
 		if(has_vapor())
-			over_liquid |= "[base_icon]_vapor"
+			over_liquid |= image(icon, src, "[base_icon]_vapor", -1)
 
 		for(var/S in R.glass_special)
 			if("[base_icon]_[S]" in icon_states(icon))
-				under_liquid |= "[base_icon]_[S]"
+				under_liquid |= image(icon, src, "[base_icon]_[S]", -3)
 			else if("[base_icon][amnt]_[S]" in icon_states(icon))
-				over_liquid |= "[base_icon][amnt]_[S]"
+				over_liquid |= image(icon, src, "[base_icon][amnt]_[S]", -1)
 
-		for(var/k in under_liquid)
-			underlays += image(icon, src, k, -3)
+		underlays += under_liquid
 
 		var/image/filling = get_filling_image(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
@@ -158,11 +160,8 @@
 		else
 			underlays += filling
 
-		for(var/k in over_liquid)
-			overlays += image(icon, src, k, -1)
+		overlays += over_liquid
 		
-		if(has_fizz())
-			overlays += get_extra_overlay(amnt, "fizz")
 	else
 		SetName(custom_name || initial(name))
 		desc = custom_desc || initial(desc)
@@ -172,8 +171,7 @@
 		if(istype(item, /obj/item/weapon/glass_extra))
 			var/obj/item/weapon/glass_extra/GE = item
 			var/image/I = image(icon, src, "[base_icon]_[GE.glass_addition][side]")
-			if(GE.glass_color)
-				I.color = GE.glass_color
+			I.color = GE.color
 			underlays += I
 		else if(rim_pos && istype(item, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
 			var/obj/FS = item
