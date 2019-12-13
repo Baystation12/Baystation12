@@ -1758,6 +1758,7 @@
 #include "code\modules\fabrication\designs\general\designs_medical.dm"
 #include "code\modules\fabrication\designs\general\designs_tools.dm"
 #include "code\modules\fabrication\designs\micro\designs_cutlery.dm"
+#include "code\modules\fabrication\designs\micro\designs_glasses.dm"
 #include "code\modules\fabrication\designs\replicator\designs_food.dm"
 #include "code\modules\flufftext\Dreaming.dm"
 #include "code\modules\flufftext\TextFilters.dm"
