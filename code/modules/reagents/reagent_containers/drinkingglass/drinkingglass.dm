@@ -2,7 +2,7 @@
 /var/const/DRINK_ICE = "ice"
 /var/const/DRINK_VAPOR = "vapor"
 /var/const/DRINK_ICON_DEFAULT = ""
-/var/const/DRINK_ICON_NOISY = "_noise"
+/var/const/DRINK_ICON_NOISY = "noise"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty
@@ -19,6 +19,7 @@
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
 	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
+	var/global/list/filling_icons_cache = list()
 
 	center_of_mass ="x=16;y=9"
 
@@ -59,13 +60,14 @@
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_fizz()
 	if(reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
-		if(!("fizz" in R.glass_special))
-			var/totalfizzy = 0
-			for(var/datum/reagent/re in reagents.reagent_list)
-				if("fizz" in re.glass_special)
-					totalfizzy += re.volume
-			if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
-				return 1
+		if(("fizz" in R.glass_special))
+			return 1
+		var/totalfizzy = 0
+		for(var/datum/reagent/re in reagents.reagent_list)
+			if("fizz" in re.glass_special)
+				totalfizzy += re.volume
+		if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
+			return 1
 	return 0
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_vapor()
@@ -99,6 +101,27 @@
 
 	return 1
 
+/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/get_filling_image(amount, texture)
+	var/image/I = new()
+	if(!filling_icons_cache["[base_icon][amount][texture]"])
+		var/icon/base = new/icon(icon, "[base_icon][amount]")
+		if(texture)
+			var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', texture)
+			base.Blend(extra, ICON_MULTIPLY)
+		filling_icons_cache["[base_icon][amount][texture]"] = new/mutable_appearance(base)
+	I.appearance = filling_icons_cache["[base_icon][amount][texture]"]
+	return I
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/get_extra_overlay(amount, extra_type)
+	var/image/I = new()
+	if(!filling_icons_cache["[base_icon][amount]-[extra_type]"])
+		var/icon/base = new/icon(icon, "[base_icon][amount]")
+		var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', extra_type)
+		base.Blend(extra, ICON_MULTIPLY)
+		filling_icons_cache["[base_icon][amount]-[extra_type]"] = new/mutable_appearance(base)
+	I.appearance = filling_icons_cache["[base_icon][amount]-[extra_type]"]
+	return I
+
 /obj/item/weapon/reagent_containers/food/drinks/glass2/on_update_icon()
 	underlays.Cut()
 	overlays.Cut()
@@ -116,9 +139,6 @@
 		if(has_ice())
 			over_liquid |= "[base_icon][amnt]_ice"
 
-		if(has_fizz())
-			over_liquid |= "[base_icon][amnt]_fizz"
-
 		if(has_vapor())
 			over_liquid |= "[base_icon]_vapor"
 
@@ -131,7 +151,7 @@
 		for(var/k in under_liquid)
 			underlays += image(icon, src, k, -3)
 
-		var/image/filling = image(icon, src, "[base_icon][amnt][R.glass_icon]", -2)
+		var/image/filling = get_filling_image(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
 		if(filling_overlayed)
 			overlays += filling
@@ -140,6 +160,9 @@
 
 		for(var/k in over_liquid)
 			overlays += image(icon, src, k, -1)
+		
+		if(has_fizz())
+			overlays += get_extra_overlay(amnt, "fizz")
 	else
 		SetName(custom_name || initial(name))
 		desc = custom_desc || initial(desc)
