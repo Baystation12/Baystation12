@@ -401,23 +401,38 @@
 	for(var/atom/E in EMP)
 		E.emp_act(severity)
 
-/mob/living/carbon/human/Topic(href, href_list)
+/mob/living/carbon/human/OnSelfTopic(href_list)
+	if (href_list["lookitem"])
+		var/obj/item/I = locate(href_list["lookitem"])
+		if(I)
+			src.examinate(I)
+			return TOPIC_HANDLED
 
+	if (href_list["lookmob"])
+		var/mob/M = locate(href_list["lookmob"])
+		if(M)
+			src.examinate(M)
+			return TOPIC_HANDLED
+
+	return ..()
+
+/mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	. = ..()
+	if(href_list["refresh"] || href_list["item"])
+		return min(., ..(user, GLOB.physical_state, href_list))
+
+/mob/living/carbon/human/OnTopic(mob/user, href_list)
 	if (href_list["refresh"])
-		if(Adjacent(src, usr))
-			show_inv(usr)
-
-	if (href_list["mach_close"])
-		var/t1 = text("window=[]", href_list["mach_close"])
-		unset_machine()
-		src << browse(null, t1)
+		show_inv(user)
+		return TOPIC_HANDLED
 
 	if(href_list["item"])
-		if(!handle_strip(href_list["item"],usr,locate(href_list["holder"])))
-			show_inv(usr)
+		if(!handle_strip(href_list["item"],user,locate(href_list["holder"])))
+			show_inv(user)
+		return TOPIC_HANDLED
 
 	if (href_list["criminal"])
-		if(hasHUD(usr, HUD_SECURITY))
+		if(hasHUD(user, HUD_SECURITY))
 
 			var/modified = 0
 			var/perpname = "wot"
@@ -432,22 +447,24 @@
 
 			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 			if(R)
-				var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
+				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
 					R.set_criminalStatus(setcriminal)
 					modified = 1
 
 					spawn()
 						BITSET(hud_updateflag, WANTED_HUD)
-						if(istype(usr,/mob/living/carbon/human))
-							var/mob/living/carbon/human/U = usr
+						if(istype(user,/mob/living/carbon/human))
+							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(usr,/mob/living/silicon/robot))
-							var/mob/living/silicon/robot/U = usr
+						if(istype(user,/mob/living/silicon/robot))
+							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 
 			if(!modified)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
+
 	if (href_list["secrecord"])
 		if(hasHUD(usr, HUD_SECURITY))
 			var/perpname = "wot"
@@ -460,16 +477,18 @@
 				perpname = src.name
 			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
-				if(hasHUD(usr, HUD_SECURITY))
-					to_chat(usr, "<b>Name:</b> [E.get_name()]")
-					to_chat(usr, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
-					to_chat(usr, "<b>Details:</b> [E.get_secRecord()]")
+				if(hasHUD(user, HUD_SECURITY))
+					to_chat(user, "<b>Name:</b> [E.get_name()]")
+					to_chat(user, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
+					to_chat(user, "<b>Details:</b> [E.get_secRecord()]")
 					read = 1
 
 			if(!read)
-				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
+
 	if (href_list["medical"])
-		if(hasHUD(usr, HUD_MEDICAL))
+		if(hasHUD(user, HUD_MEDICAL))
 			var/perpname = "wot"
 			var/modified = 0
 
@@ -481,23 +500,25 @@
 
 			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
-				var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
-				if(hasHUD(usr, HUD_MEDICAL) && setmedical)
+				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
+				if(hasHUD(user, HUD_MEDICAL) && setmedical)
 					E.set_status(setmedical)
 					modified = 1
 
 					spawn()
-						if(istype(usr,/mob/living/carbon/human))
-							var/mob/living/carbon/human/U = usr
+						if(istype(user,/mob/living/carbon/human))
+							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(usr,/mob/living/silicon/robot))
-							var/mob/living/silicon/robot/U = usr
+						if(istype(user,/mob/living/silicon/robot))
+							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 
 			if(!modified)
-				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
+
 	if (href_list["medrecord"])
-		if(hasHUD(usr, HUD_MEDICAL))
+		if(hasHUD(user, HUD_MEDICAL))
 			var/perpname = "wot"
 			var/read = 0
 
@@ -509,7 +530,7 @@
 
 			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
-				if(hasHUD(usr, HUD_MEDICAL))
+				if(hasHUD(user, HUD_MEDICAL))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
 					to_chat(usr, "<b>Species:</b> [E.get_species()]")
@@ -517,39 +538,27 @@
 					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
 					read = 1
 			if(!read)
-				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
 
-	if (href_list["lookitem"])
-		var/obj/item/I = locate(href_list["lookitem"])
-		if(I)
-			src.examinate(I)
+	return ..()
 
-	if (href_list["lookmob"])
-		var/mob/M = locate(href_list["lookmob"])
-		if(M)
-			src.examinate(M)
-
-	if(href_list["show_relations"])
-		var/mob/living/M = usr
-		if(istype(M))
-			M.see_relationship_info_with(src)
-
-	if (href_list["flavor_change"])
-		switch(href_list["flavor_change"])
-			if("done")
-				src << browse(null, "window=flavor_changes")
+/mob/living/carbon/human/update_flavor_text(key)
+	var/msg
+	switch(key)
+		if("done")
+			show_browser(src, null, "window=flavor_changes")
+			return
+		if("general")
+			msg = sanitize(input(src,"Update the general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)
+		else
+			if(!(key in flavor_texts))
 				return
-			if("general")
-				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
-				flavor_texts[href_list["flavor_change"]] = msg
-				return
-			else
-				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
-				flavor_texts[href_list["flavor_change"]] = msg
-				set_flavor()
-				return
-	..()
-	return
+			msg = sanitize(input(src,"Update the flavor text for your [key].","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)
+	if(!CanInteract(src, GLOB.self_state))
+		return
+	flavor_texts[key] = msg
+	set_flavor()
 
 ///eyecheck()
 ///Returns a number between -1 to 2
