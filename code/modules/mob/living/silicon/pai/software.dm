@@ -97,7 +97,10 @@ var/global/list/default_pai_software = list()
 		ui.open()
 		ui.set_auto_update(1)
 
-/mob/living/silicon/pai/OnSelfTopic(href_list)
+/mob/living/silicon/pai/Topic(href, href_list)
+	. = ..()
+	if(.) return
+
 	if(href_list["software"])
 		var/soft = href_list["software"]
 		var/datum/pai_software/S = software[soft]
@@ -105,13 +108,13 @@ var/global/list/default_pai_software = list()
 			S.toggle(src)
 		else
 			ui_interact(src, ui_key = soft)
-		return TOPIC_HANDLED
+		return 1
 
 	else if(href_list["stopic"])
 		var/soft = href_list["stopic"]
 		var/datum/pai_software/S = software[soft]
 		if(S)
-			return S.Topic(list2params(href_list), href_list)
+			return S.Topic(href, href_list)
 
 	else if(href_list["purchase"])
 		var/soft = href_list["purchase"]
@@ -120,12 +123,10 @@ var/global/list/default_pai_software = list()
 			ram -= S.ram_cost
 			software[S.id] = S
 			S.on_purchase(src)
-		return TOPIC_HANDLED
+		return 1
 
 	else if(href_list["image"])
 		var/img = text2num(href_list["image"])
 		if(1 <= img && img <= pai_emotions.len)
 			card.setEmotion(img)
-		return TOPIC_HANDLED
-
-	return ..()
+		return 1

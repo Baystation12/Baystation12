@@ -802,28 +802,33 @@
 	src << browse(dat, "window=robotmod")
 
 
-/mob/living/silicon/robot/OnSelfTopic(href_list)
+/mob/living/silicon/robot/Topic(href, href_list)
+	if(..())
+		return 1
+	if(usr != src)
+		return 1
+
 	if (href_list["showalerts"])
 		open_subsystem(/datum/nano_module/alarm_monitor/all)
-		return TOPIC_HANDLED
+		return 1
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
 		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
-		return TOPIC_HANDLED
+		return 1
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
 		if (!istype(O))
-			return TOPIC_HANDLED
+			return 1
 
 		if(!((O in module.equipment) || (O == src.module.emag)))
-			return TOPIC_HANDLED
+			return 1
 
 		if(activated(O))
 			to_chat(src, "Already activated")
-			return TOPIC_HANDLED
+			return 1
 		if(!module_state_1)
 			module_state_1 = O
 			O.hud_layerise()
@@ -845,7 +850,7 @@
 		else
 			to_chat(src, "You need to disable a module first!")
 		installed_modules()
-		return TOPIC_HANDLED
+		return 1
 
 	if (href_list["deact"])
 		var/obj/item/O = locate(href_list["deact"])
@@ -864,8 +869,8 @@
 		else
 			to_chat(src, "Module isn't activated")
 		installed_modules()
-		return TOPIC_HANDLED
-	return ..()
+		return 1
+	return
 
 /mob/living/silicon/robot/proc/radio_menu()
 	silicon_radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code
