@@ -91,11 +91,12 @@
 		)
 /obj/item/weapon/storage/belt/covenant/full/New()
 	. = ..()
-	new /obj/item/weapon/screwdriver(src)
-	new /obj/item/weapon/wrench(src)
-	new /obj/item/weapon/weldingtool(src)
-	new /obj/item/weapon/crowbar(src)
-	new /obj/item/weapon/wirecutters(src)
+	new /obj/item/weapon/screwdriver/covenant(src)
+	new /obj/item/weapon/wrench/covenant(src)
+	new /obj/item/weapon/weldingtool/covenant(src)
+	new /obj/item/weapon/crowbar/covenant(src)
+	new /obj/item/weapon/wirecutters/covenant(src)
+	new /obj/item/device/multitool/covenant(src)
 	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
 
 /obj/item/weapon/cell/covenant

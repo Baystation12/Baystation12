@@ -56,16 +56,16 @@
 	fire_sound = 'code/modules/halo/sounds/spirit_firesound.ogg'
 	projectile_fired = /obj/item/projectile/covenant/spirit_cannon
 
-	fire_delay = 1.75 SECONDS
+	fire_delay = 2 SECONDS
 
 	burst = 3
 
 	irradiate_non_cov = 12
 
 /obj/item/projectile/covenant/spirit_cannon
-	damage = 50
+	damage = 25
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "heavy_plas_cannon"
 
 /obj/item/projectile/covenant/spirit_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,-1,1,3,guaranteed_damage = 30,guaranteed_damage_range = 1)
+	explosion(impacted,-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1)
