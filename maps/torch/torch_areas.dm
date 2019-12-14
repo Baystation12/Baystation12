@@ -1480,6 +1480,10 @@
 	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
 
+/area/medical/presurgery
+	name = "\improper Pre-Op Ward"
+	icon_state = "surgery"
+
 /area/medical/surgery
 	name = "\improper Operating Theatre 1"
 	icon_state = "surgery"
