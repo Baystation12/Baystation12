@@ -179,7 +179,7 @@ SUBSYSTEM_DEF(throwing)
 		M.inertia_dir = init_dir
 
 	if(t_target)
-		thrownthing.throw_impact(target, src)
+		thrownthing.throw_impact(t_target, src)
 
 	if (callback)
 		callback.Invoke()
