@@ -170,10 +170,10 @@
 
 //Subtypes
 /obj/structure/wall_frame/standard
-	paint_color = COLOR_WALL_GUNMETAL
+	paint_color = WALL_COLOR_GUNMETAL
 
 /obj/structure/wall_frame/titanium
 	material = MATERIAL_TITANIUM
 
 /obj/structure/wall_frame/hull
-	paint_color = COLOR_HULL
+	paint_color = WALL_COLOR_HULL

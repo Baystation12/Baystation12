@@ -43,7 +43,7 @@
 	color = COLOR_RED
 
 /obj/effect/paint/silver
-	color = COLOR_SILVER
+	color = COLOR_SILVER_GRAY
 
 /obj/effect/paint/black
 	color = COLOR_DARK_GRAY
@@ -95,7 +95,7 @@
 	color = COLOR_PALE_PURPLE_GRAY
 
 /obj/effect/paint_stripe/white
-	color = COLOR_SILVER
+	color = COLOR_SILVER_GRAY
 
 /obj/effect/paint/brown
 	color = COLOR_DARK_BROWN

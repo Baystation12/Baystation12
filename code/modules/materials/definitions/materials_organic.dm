@@ -189,7 +189,7 @@
 
 /material/skin/goat
 	name = MATERIAL_SKIN_GOATHIDE
-	icon_colour = COLOR_SILVER
+	icon_colour = COLOR_SILVER_GRAY
 
 /material/skin/cow
 	name = MATERIAL_SKIN_COWHIDE
@@ -209,7 +209,7 @@
 
 /material/skin/feathers
 	name = MATERIAL_SKIN_FEATHERS
-	icon_colour = COLOR_SILVER
+	icon_colour = COLOR_SILVER_GRAY
 
 /material/skin/feathers/purple
 	name = MATERIAL_SKIN_FEATHERS_PURPLE

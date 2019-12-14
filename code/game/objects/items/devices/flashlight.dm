@@ -21,9 +21,14 @@
 	var/flashlight_outer_range = 3 //outer range of light when on, can be negative
 	var/flashlight_flags = 0 // FLASHLIGHT_ bitflags
 
+	var/uses_compound_icons = TRUE //uses icon + overlays
+	var/valid_colors = list(COLOR_CYAN_BLUE, COLOR_BLUE_GRAY, COLOR_DARK_GREEN_GRAY, COLOR_DARK_GRAY)
+
 /obj/item/device/flashlight/Initialize()
 	. = ..()
 
+	if(uses_compound_icons)
+		color = pick(valid_colors)
 	set_flashlight()
 	update_icon()
 
@@ -31,10 +36,15 @@
 	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
 		return // Prevent update_icon shennanigans with objects that won't have on/off variant sprites
 
-	if(on)
-		icon_state = "[initial(icon_state)]-on"
+	if(!uses_compound_icons)
+		if(on)
+			icon_state = "[initial(icon_state)]-on"
+		else
+			icon_state = "[initial(icon_state)]"
 	else
-		icon_state = "[initial(icon_state)]"
+		overlays.Cut()
+		overlays += overlay_image(icon, "[icon_state]_lens_[on]", flags = RESET_COLOR)
+
 
 /obj/item/device/flashlight/attack_self(mob/user)
 	if (flashlight_flags & FLASHLIGHT_ALWAYS_ON)
@@ -133,10 +143,11 @@
 /obj/item/device/flashlight/upgraded
 	name = "\improper LED flashlight"
 	desc = "An energy efficient flashlight."
-	icon_state = "biglight"
-	item_state = "biglight"
+	icon_state = "led"
+	item_state = "led"
 	flashlight_max_bright = 0.75
 	flashlight_outer_range = 4
+	valid_colors = list(COLOR_YELLOW, COLOR_WARM_YELLOW, COLOR_ORANGE)
 
 /obj/item/device/flashlight/flashdark
 	name = "flashdark"
@@ -147,6 +158,7 @@
 	flashlight_max_bright = -1
 	flashlight_outer_range = 4
 	flashlight_inner_range = 1
+	uses_compound_icons = FALSE
 
 /obj/item/device/flashlight/pen
 	name = "penlight"
@@ -159,6 +171,7 @@
 	flashlight_max_bright = 0.25
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 2
+	uses_compound_icons = FALSE
 
 /obj/item/device/flashlight/maglight
 	name = "maglight"
@@ -171,6 +184,7 @@
 	hitsound = "swing_hit"
 	flashlight_max_bright = 0.5
 	flashlight_outer_range = 5
+	uses_compound_icons = FALSE
 
 /******************************Lantern*******************************/
 /obj/item/device/flashlight/lantern
@@ -186,6 +200,7 @@
 	slot_flags = SLOT_BELT
 	matter = list(MATERIAL_STEEL = 200,MATERIAL_GLASS = 100)
 	flashlight_outer_range = 5
+	uses_compound_icons = FALSE
 
 /obj/item/device/flashlight/lantern/on_update_icon()
 	..()
@@ -206,7 +221,7 @@
 	flashlight_max_bright = 0.25
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 2
-
+	uses_compound_icons = FALSE
 
 // the desk lamps are a bit special
 /obj/item/device/flashlight/lamp
@@ -219,8 +234,8 @@
 	flashlight_max_bright = 0.3
 	flashlight_inner_range = 2
 	flashlight_outer_range = 5
-
 	on = 1
+	uses_compound_icons = FALSE
 
 // green-shaded desk lamp
 /obj/item/device/flashlight/lamp/green
@@ -256,6 +271,7 @@
 	flashlight_max_bright = 0.8
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 5
+	uses_compound_icons = FALSE
 
 /obj/item/device/flashlight/flare/Initialize()
 	. = ..()
@@ -400,6 +416,7 @@
 	flashlight_max_bright = 1
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 5
+	uses_compound_icons = FALSE
 
 /obj/item/device/flashlight/slime/New()
 	..()

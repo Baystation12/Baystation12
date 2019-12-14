@@ -9,7 +9,7 @@
 	door_icon_base = "stone"
 	table_icon_base = "stone"
 	icon_reinf = "reinf_stone"
-	icon_colour = "#007a00"
+	icon_colour = COLOR_URANIUM
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	chem_products = list(
@@ -53,7 +53,7 @@
 /material/gold/bronze //placeholder for ashtrays
 	name = MATERIAL_BRONZE
 	lore_text = "An alloy of copper and tin."
-	icon_colour = "#edd12f"
+	icon_colour = COLOR_BRONZE
 	construction_difficulty = MATERIAL_HARD_DIY
 	ore_smelts_to = null
 	ore_compresses_to = null
@@ -86,7 +86,7 @@
 	lore_text = "A soft, white, lustrous transition metal. Has many and varied industrial uses in electronics, solar panels and mirrors."
 	wall_name = "bulkhead"
 	stack_type = /obj/item/stack/material/silver
-	icon_colour = "#d1e6e3"
+	icon_colour = COLOR_SILVER
 	weight = 22
 	hardness = MATERIAL_FLEXIBLE + 10
 	stack_origin_tech = list(TECH_MATERIAL = 3)

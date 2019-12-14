@@ -165,7 +165,7 @@ var/last_chew = 0
 	color = COLOR_SKY_BLUE
 
 /obj/item/weapon/handcuffs/cable/white
-	color = COLOR_SILVER
+	color = COLOR_SILVER_GRAY
 
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1

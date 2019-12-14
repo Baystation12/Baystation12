@@ -87,7 +87,7 @@
 
 
 /turf/simulated/floor/shuttle_ceiling/skrell
-	color = COLOR_HULL
+	color = WALL_COLOR_HULL
 
 /turf/simulated/floor/shuttle_ceiling/skrell/air
 	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)

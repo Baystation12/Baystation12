@@ -151,7 +151,7 @@
 	desc = "A solid, heavy set of flooring plates."
 	icon = 'icons/turf/flooring/tiles.dmi'
 	icon_base = "tiled"
-	color = COLOR_DARK_GUNMETAL
+	color = FLOOR_COLOR_DARK
 	has_damage_range = 4
 	damage_temperature = T0C+1400
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
@@ -164,23 +164,23 @@
 	build_type = /obj/item/stack/tile/mono
 
 /decl/flooring/tiling/mono/dark
-	color = COLOR_DARK_GRAY
+	color = FLOOR_COLOR_DARK
 	build_type = /obj/item/stack/tile/mono/dark
 
 /decl/flooring/tiling/mono/white
 	icon_base = "monotile_light"
-	color = COLOR_OFF_WHITE
+	color = FLOOR_COLOR_LIGHT
 	build_type = /obj/item/stack/tile/mono/white
 
 /decl/flooring/tiling/white
 	icon_base = "tiled_light"
 	desc = "How sterile."
-	color = COLOR_OFF_WHITE
+	color = FLOOR_COLOR_LIGHT
 	build_type = /obj/item/stack/tile/floor_white
 
 /decl/flooring/tiling/dark
 	desc = "How ominous."
-	color = COLOR_DARK_GRAY
+	color = FLOOR_COLOR_DARK
 	build_type = /obj/item/stack/tile/floor_dark
 
 /decl/flooring/tiling/dark/mono
@@ -228,16 +228,16 @@
 
 /decl/flooring/tiling/new_tile/monofloor
 	icon_base = "monofloor"
-	color = COLOR_GUNMETAL
+	color = FLOOR_COLOR_GUNMETAL
 
 /decl/flooring/tiling/new_tile/steel_grid
 	icon_base = "grid"
-	color = COLOR_GUNMETAL
+	color = FLOOR_COLOR_GUNMETAL
 	build_type = /obj/item/stack/tile/grid
 
 /decl/flooring/tiling/new_tile/steel_ridged
 	icon_base = "ridged"
-	color = COLOR_GUNMETAL
+	color = FLOOR_COLOR_GUNMETAL
 	build_type = /obj/item/stack/tile/ridge
 
 /decl/flooring/wood

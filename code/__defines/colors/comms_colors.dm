@@ -1,0 +1,17 @@
+// BYOND lower-cases color values, and thus we do so as well to ensure atom.color == COLOR_X will work correctly
+
+#define	COMMS_COLOR_DEFAULT    "#ff00ff"
+#define	COMMS_COLOR_ENTERTAIN  "#666666"
+#define	COMMS_COLOR_AI         "#ff00ff"
+#define	COMMS_COLOR_COMMON     "#408010"
+#define	COMMS_COLOR_SERVICE    "#709b00"
+#define	COMMS_COLOR_SUPPLY     "#7f6539"
+#define	COMMS_COLOR_SCIENCE    "#993399"
+#define	COMMS_COLOR_MEDICAL    "#009190"
+#define	COMMS_COLOR_EXPLORER   "#929820"
+#define	COMMS_COLOR_ENGINEER   "#a66300"
+#define	COMMS_COLOR_SECURITY   "#930000"
+#define	COMMS_COLOR_COMMAND    "#204090"
+#define	COMMS_COLOR_CENTCOMM   "#5c5c7c"
+#define	COMMS_COLOR_SYNDICATE  "#6d3f40"
+#define	COMMS_COLOR_SKRELL     "#7331c4"

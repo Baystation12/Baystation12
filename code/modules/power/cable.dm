@@ -68,7 +68,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	color = COLOR_SKY_BLUE
 
 /obj/structure/cable/white
-	color = COLOR_SILVER
+	color = COLOR_SILVER_GRAY
 
 /obj/structure/cable/New()
 	..()
@@ -818,7 +818,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 	color = COLOR_SKY_BLUE
 
 /obj/item/stack/cable_coil/white
-	color = COLOR_SILVER
+	color = COLOR_SILVER_GRAY
 
 /obj/item/stack/cable_coil/random/New()
 	color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
