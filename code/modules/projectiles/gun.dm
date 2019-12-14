@@ -535,10 +535,12 @@
 			y_offset = rand(-1,1)
 			x_offset = rand(-1,1)
 
-	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
+	var/obj/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
 
 	if(launched)
 		play_fire_sound(user,P)
+		if(get_dist(target,user) <= 1)
+			change_elevation(target.elevation-launched.elevation)
 
 	return launched
 
