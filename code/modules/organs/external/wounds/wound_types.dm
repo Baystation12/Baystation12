@@ -199,7 +199,6 @@ datum/wound/puncture/massive
 
 	bleed_threshold = 20
 	max_bleeding_stage = 3 //only large bruise and above can bleed.
-	autoheal_cutoff = 30
 	damage_type = BRUISE
 
 /** BURNS **/

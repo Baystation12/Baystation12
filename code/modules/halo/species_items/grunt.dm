@@ -173,8 +173,6 @@
 	icon_state = "combatharness_major"
 	item_state = "combatharness_major"
 
-	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0) //As good as armor
-
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
 	name = "Unggoy Combat Harness (Ultra)"
 	desc = "A combat harness with an inbuilt gas tank"
@@ -183,7 +181,7 @@
 	icon_state = "combatharness_ultra"
 	item_state = "combatharness_ultra"
 
-	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
 
 	//totalshields = 100
 	//specials = list(/datum/armourspecials/shields/unggoy)
