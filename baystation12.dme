@@ -1619,6 +1619,7 @@
 #include "code\modules\halo\misc\tools_items_gear.dm"
 #include "code\modules\halo\misc\xeno_plant.dm"
 #include "code\modules\halo\misc\animals\alligator.dm"
+#include "code\modules\halo\misc\animals\combatdogs.dm"
 #include "code\modules\halo\misc\animals\dogs.dm"
 #include "code\modules\halo\misc\animals\giant_rat.dm"
 #include "code\modules\halo\misc\animals\great_white.dm"
