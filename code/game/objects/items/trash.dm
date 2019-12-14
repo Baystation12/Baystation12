@@ -183,5 +183,21 @@
 	desc = "a stick from some snack food item or a lollipop, not even useful as crafting material."
 	icon_state = "stick"
 
+/obj/item/trash/tissues
+	name = "tissue box"
+	desc = "an empty box of tissues."
+	icon_state = "tissuebox"
+
+/obj/item/trash/glovebox
+	name = "glove box"
+	desc = "an empty box of medical gloves."
+	icon_state = "glovebox"
+
+/obj/item/trash/matchbox
+	name = "match box"
+	desc = "an empty box of matches."
+	icon_state = "matchbox"
+
+
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return
