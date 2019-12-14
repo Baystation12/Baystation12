@@ -21,7 +21,7 @@
 	var/list/stages            // stages such as "cut", "deep cut", etc.
 	var/max_bleeding_stage = 0 // maximum stage at which bleeding should still happen. Beyond this stage bleeding is prevented.
 	var/damage_type = CUT      // one of CUT, PIERCE, BRUISE, BURN
-	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
+	var/autoheal_cutoff = 9999   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
 	var/tmp/list/embedded_objects = list()
