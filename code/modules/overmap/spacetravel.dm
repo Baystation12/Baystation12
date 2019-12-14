@@ -50,6 +50,9 @@ proc/get_deepspace(x,y)
 /mob/lost_in_space()
 	return isnull(client)
 
+/mob/living/carbon/human/lost_in_space()
+	return isnull(client) && !last_ckey && stat == DEAD
+
 proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if (!T || !A)
 		return
