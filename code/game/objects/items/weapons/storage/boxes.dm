@@ -536,6 +536,17 @@
 	desc = "A box full of blank tapes."
 	startswith = list(/obj/item/device/tape/random = 14)
 
+/obj/item/weapon/storage/box/taperolls
+	name = "box of spare taperolls"
+	desc = "A box full of mixed barricade tapes."
+	startswith = list(/obj/item/taperoll/police,
+						/obj/item/taperoll/engineering,
+						/obj/item/taperoll/atmos,
+						/obj/item/taperoll/research,
+						/obj/item/taperoll/medical,
+						/obj/item/taperoll/bureaucracy
+					)
+
 /obj/item/weapon/storage/box/cola
 	name = "box of sodas"
 	desc = "A box full of soda cans."
