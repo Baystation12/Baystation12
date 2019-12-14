@@ -1,4 +1,5 @@
 /mob/living/simple_animal/hostile/battledog
+	name = "\improper Combat Dog"
 	real_name ="Dog"
 	desc = "It's a battledog trained by the UNSC"
 	icon = 'code/modules/halo/misc/animals/dogs.dmi'
@@ -32,6 +33,8 @@
 
 
 /mob/living/simple_animal/hostile/battledog/pmc
+	name = "\improper Combat Dog"
+	desc = "It's a battledog trained by the UNSC. This has a black pelt and sports a fancy, white beret with a blue insignia. Better not anger a potential veteran, this one looks like he could get out of a room with your forearm."
 	icon_state = "pmc_gshep"
 	icon_living = "pmc_gshep"
 	icon_dead = "pmc_gshep_d"
@@ -40,4 +43,4 @@
 
 	speak = list("Bark!","Arf!","Bork!")
 
-//Thanks to Fingerspitzengefï¿½hl#9389 on discord for the sprites.
+//Thanks to Fingerspitzengefühl#9389 on discord for the sprites.
