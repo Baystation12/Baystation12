@@ -349,3 +349,11 @@
 	containername = "\improper Auto-Compressor crate"
 	containertype = /obj/structure/closet/crate/secure
 	access = access_medical_equip
+
+/decl/hierarchy/supply_pack/medical/gloves
+	name = "Gear - Medical Gloves"
+	contains = list(/obj/item/weapon/storage/box/gloves = 2,
+					/obj/item/weapon/dispenser/gloves = 2)
+	cost = 8
+	containertype = /obj/structure/closet/crate
+	containername = "sterile gloves crate"
