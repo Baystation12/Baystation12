@@ -6,14 +6,13 @@
 "af" = (/obj/structure/jump_pad{id = "deck 2 starboard cargo"; name = "Covenant Jump Pad - deck 2 starboard cargo bay"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "ag" = (/obj/structure/jump_pad{id = "deck 1 starboard hangar"; name = "Covenant Jump Pad - deck 1 starboard hangar"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "ah" = (/obj/structure/closet/covenant,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
-"ai" = (/mob/living/simple_animal/hostile/drones,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
+"ai" = (/mob/living/simple_animal/hostile/done,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "aj" = (/obj/effect/landmark{name = "Observer-Start"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "ak" = (/obj/structure/covenant_comms_tower,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "al" = (/obj/structure/jump_pad{id = "deck4 starboard hangar"; name = "Covenant Jump Pad - deck 4 starboard hangar"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "am" = (/obj/structure/jump_pad{id = "topdeck airlock"; name = "Covenant Jump Pad - deck 5 external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "an" = (/obj/structure/grav_elevator_external,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "ao" = (/obj/structure/energybarricade{can_deconstruct = 0},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
-"ap" = (/mob/living/simple_animal/hostile/defender_mob/cov/grunt,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "aq" = (/obj/structure/jump_pad{id = "deck4 port hangar"; name = "Covenant Jump Pad - deck 4 port hangar"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "ar" = (/obj/structure/tanktrap,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
 "as" = (/obj/structure/tanktrap_dead,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
@@ -43,8 +42,8 @@
 "aQ" = (/obj/effect/landmark/start/spartan_two,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aR" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aS" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"aT" = (/mob/living/simple_animal/hostile/defender_mob/cov/kig,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
-"aU" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aT" = (/obj/item/weapon/gun/projectile/m41,/obj/structure/table/rack,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/obj/item/ammo_casing/rocket,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aU" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aV" = (/obj/structure/table/rack,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aW" = (/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/structure/table/rack,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aX" = (/obj/structure/table/rack,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
@@ -76,24 +75,22 @@
 "bx" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/ccs_battlecruiser/planet_staging)
 "by" = (/turf/simulated/floor/tiled,/area/ccs_battlecruiser/planet_staging)
 "bz" = (/turf/unsimulated/mineral,/area/space)
-"bA" = (/obj/item/weapon/gun/projectile/m41,/obj/structure/table/rack,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/gun/projectile/m41,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bB" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/storage/box/m762_ap,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 
 (1,1,1) = {"
 aaababababababababababababababababababababababababababababababababababababababab
 abababababababababababababababababababababababacacadadadadababababababababababab
 ababababababababababababababababacaeaeaeaeacacacacacacacacacafababababababababab
-ababababababababababababagagagagacacapacacacacacahacacacapacacafabababababababab
+ababababababababababababagagagagacacacacacacacacahacacacacacacafabababababababab
 abababababababababababacacacacacacacacacacacacaiacacacaiacacacacafababababababab
-ababababababababababacacacacacapacaiacacacaTacacacacacacacacacaTacafabababababab
+ababababababababababacacacacacacacaiacacacacacacacacacacacacacacacafabababababab
 ababababababababababacacacacacacacacacajajajajajajajajajajajacacacacacababababab
-ababababababababababacacacahacacacajajajacapacacacacacacacajajajacacacacacacabab
-ababababababababababacapacacacacajajacacacacacacacacakacacacacajajacacaiacacalab
+ababababababababababacacacahacacacajajajacacacacacacacacacajajajacacacacacacabab
+ababababababababababacacacacacacajajacacacacacacacacakacacacacajajacacaiacacalab
 abababababababababamacacacacacacajacacacacacacacacacacacacacacacacajacacacacalab
-abababababababababamacacacaoacacajacacapacacacacacacacaTacacacapacajacacacacalab
+abababababababababamacacacaoacacajacacacacacacacacacacacacacacacacajacacacacalab
 abababababababababamacaiacacacacajacacacacacacacacacacacaiacacacacajacacacacalab
-abababababababababamacacacacaTacajaTacacaTacanacacacacacacahacacacajacacacacacab
-abababababababababacacacapacacacajacacaoacacacacacacaTacacacacacajajacacacaqabab
+abababababababababamacacacacacacajacacacacacanacacacacacacahacacacajacacacacacab
+abababababababababacacacacacacacajacacaoacacacacacacacacacacacacajajacacacaqabab
 abababababababababaracacacasacacajacacacacacaiacacacacacacacacajajacacacacaqabab
 ababababababababababacacacacacacacajajacacacacacahacacacacacajajacacacacacaqabab
 ababababababababababaracacacacaiacacacajajajacacacacacajajajajacacacaiacacaqabab
@@ -109,9 +106,9 @@ abaHauauauauauauauauaJaJaJaxabababababababababababababababababaxaFauaDababababab
 abaHauauauauauauauauauauauaAababababababababababababababaxauauauauauauauabababab
 abaHauauauauauauauauauauauauaxaAaDaFaKaKaKaKaKaKaAaxababaLauauaMaMaMaMauaxababab
 abaHauauauauauauauauauauauauauauauauauauauauauauauauababaLauauaNaOaNaNauaAababab
-abaHauaUauauauauauauauauauauauauauauauauauauauauauauauababauauaNaPaOaNauauababab
-abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSaubAbBaVauaWaXaYauababauaZaZaZaZauauauabab
-abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSaubabBaVaubbbcbcauauauauauauauauauauaFabab
+abaHauauauauauauauauauauauauauauauauauauauauauauauauauababauauaNaPaOaNauauababab
+abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSauaTaUaVauaWaXaYauababauaZaZaZaZauauauabab
+abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSaubaaUaVaubbbcbcauauauauauauauauauauaFabab
 abaAauauauauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauauauauauauauauaxabab
 abaxauaubdauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauabbebfbfbeababaxabab
 ababaDauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibjbiaubkblbmauauababauauauauababababab
