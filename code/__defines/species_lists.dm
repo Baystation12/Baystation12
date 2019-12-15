@@ -7,6 +7,7 @@
 	/datum/species/kig_yar_skirmisher,\
 	/datum/species/sanshyuum,\
 	/datum/species/yanmee,\
+	/mob/living/simple_animal/hostile/drones,\
 	/mob/living/simple_animal/mgalekgolo,\
 	/mob/living/silicon/robot/huragok,\
 	/mob/living/carbon/human/covenant/sanshyuum)
