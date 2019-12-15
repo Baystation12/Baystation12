@@ -4,6 +4,7 @@
 	icon = 'code/modules/halo/icons/mobs/defense_mobs.dmi'
 	health = 100
 	maxHealth = 100
+	resistance = 15
 	var/list/possible_weapons = list()
 	var/icon/gun_overlay
 

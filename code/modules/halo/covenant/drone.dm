@@ -10,6 +10,7 @@
 	maxHealth = 100
 	melee_damage_lower = 15
 	melee_damage_upper = 10
+	resistance = 15
 	attacktext = "swiped"
 	emote_hear = list("chitters","buzzes")
 	emote_see = list("flutters its wings")

@@ -30,6 +30,7 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 35
 	melee_damage_upper = 45
+	resistance = 15
 
 
 /mob/living/simple_animal/hostile/battledog/pmc
