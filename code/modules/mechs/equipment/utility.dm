@@ -210,6 +210,24 @@
 	name = "drill head"
 	desc = "A replaceable drill head usually used in exosuit drills."
 	icon_state = "drill_head"
+
+/obj/item/weapon/material/drill_head/proc/get_durability_percentage()
+	return (durability * 100) / (2 * material.integrity)
+
+/obj/item/weapon/material/drill_head/examine(mob/user, distance)
+	. = ..()
+	var/percentage = get_durability_percentage()
+	var/descriptor = "looks close to breaking"
+	if(percentage > 10)
+		descriptor = "is very worn"
+	if(percentage > 50)
+		descriptor = "is fairly worn"
+	if(percentage > 75)
+		descriptor = "shows some signs of wear"
+	if(percentage > 95)
+		descriptor = "shows no wear"
+		
+	to_chat(user, "It [descriptor].")
 	
 /obj/item/weapon/material/drill_head/Initialize()
 	. = ..()
@@ -240,7 +258,26 @@
 			owner.visible_message(SPAN_WARNING("[owner] revs the [drill_head], menancingly."))
 			playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
 
+/obj/item/mech_equipment/drill/get_hardpoint_maptext()
+	if(drill_head)
+		return "Integrity: [round(drill_head.get_durability_percentage())]%"
+	return
 
+/obj/item/mech_equipment/drill/attackby(obj/item/weapon/W, mob/user)
+	if(istype(W,/obj/item/weapon/material/drill_head))
+		var/obj/item/weapon/material/drill_head/DH = W
+		if(!user.unEquip(DH))
+			return
+		if(drill_head)
+			visible_message(SPAN_NOTICE("\The [user] detaches the [drill_head] mounted on the [src]."))
+			drill_head.forceMove(get_turf(src))
+		DH.forceMove(src)
+		drill_head = DH
+		to_chat(user, SPAN_NOTICE("You install \the [drill_head] in \the [src]."))
+		visible_message(SPAN_NOTICE("\The [user] mounts the [drill_head] on the [src]."))
+		return
+	. = ..()
+	
 /obj/item/mech_equipment/drill/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 	if(.)
