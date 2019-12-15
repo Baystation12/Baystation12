@@ -27,6 +27,7 @@ em						{font-style: normal;font-weight: bold;}
 .ooc .aooc				{color: #960018;}
 
 .staffwarn				{color: #ff0000; font-weight:bold; font-size: 150%;}
+
 /* Admin: Private Messages */
 .pm  .howto				{color: #ff0000;	font-weight: bold;		font-size: 200%;}
 .pm  .in				{color: #ff0000;}
@@ -74,10 +75,10 @@ h1.alert, h2.alert		{color: #000000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
-.italic				{font-style: italic;}
+.italic					{font-style: italic;}
 .bold					{font-weight: bold;}
 .danger					{color: #ff0000; font-weight: bold;}
-.bigdanger					{color: #ff0000; font-weight: bold; font-size: 115%;}
+.bigdanger				{color: #ff0000; font-weight: bold; font-size: 115%;}
 .warning				{color: #ff0000; font-style: italic;}
 .bigwarning				{color: #ff0000; font-style: italic; font-size: 115%;}
 .boldannounce			{color: #ff0000; font-weight: bold;}
@@ -112,7 +113,7 @@ h1.alert, h2.alert		{color: #000000;}
 .russian				{color: #9c250b;}
 .arabic					{color: #128b11;}
 .spacer					{color: #9c660b;}
-.selenian       {color: #22228b;}
+.selenian       		{color: #22228b;}
 
 .interface				{color: #330033;}
 
