@@ -15,7 +15,7 @@
 
 	src.reset_view(src)
 	if(machine)
-		to_chat(usr,"<span class = 'notice'>You can't do that!</span>")
+		to_chat(src,"<span class = 'notice'>You can't do that!</span>")
 		return
 
 	switch(src.dir)
