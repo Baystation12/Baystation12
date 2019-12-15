@@ -612,6 +612,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else if(!zoom && usr.get_active_hand() != src)
 		to_chat(user, "<span class='warning'>You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better.</span>")
 		cannotzoom = 1
+	else if(!zoom && user.machine)
+		to_chat(user,"<span class = 'warning'>You're too distracted to look through the [devicename].</span>")
+		cannotzoom = 1
 
 	if(!zoom && !cannotzoom)
 		if(user.hud_used.hud_shown)

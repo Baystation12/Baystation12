@@ -14,6 +14,9 @@
 		return
 
 	src.reset_view(src)
+	if(machine)
+		to_chat("<span class = 'notice'>You can't do that!</span>")
+		return
 
 	switch(src.dir)
 		if(NORTH)
