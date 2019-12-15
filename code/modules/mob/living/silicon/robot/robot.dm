@@ -120,8 +120,10 @@
 	icontype = "Basic"
 	updatename(modtype)
 	update_icon()
-
-	radio = new /obj/item/device/radio/borg(src)
+	if(radio)
+		radio = new radio(src)
+	else
+		radio = new(src)
 	common_radio = radio
 
 	if(!scrambledcodes && !camera)
