@@ -240,10 +240,10 @@
 	..()
 	if(url)		// URL provided for this manual
 		// If we haven't wikiurl or it included in url - just use url
-		if(config.wikiurl && !findtextEx(url, config.wikiurl, 1, length(config.wikiurl)+1))
+		if(config.wikiurl && !findtext_charEx(url, config.wikiurl, 1, length(config.wikiurl)+1))
 			// If we have wikiurl, but it hasn't "index.php" then add it and making full link in url
-			if(config.wikiurl && !findtextEx(config.wikiurl, "/index.php", -10))
-				if(findtextEx(config.wikiurl, "/", -1))
+			if(config.wikiurl && !findtext_charEx(config.wikiurl, "/index.php", -10))
+				if(findtext_charEx(config.wikiurl, "/", -1))
 					url = config.wikiurl + "index.php?title=" + url
 				else
 					url = config.wikiurl + "/index.php?title=" + url

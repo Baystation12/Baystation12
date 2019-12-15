@@ -127,9 +127,9 @@
 			cloneloss = "minor"
 		var/scan = medical_scan_results(occupant)
 		scan += "<br><br>Genetic degradation: [cloneloss]"
-		scan = replacetext(scan,"'scan_notice'","'white'")
-		scan = replacetext(scan,"'scan_warning'","'average'")
-		scan = replacetext(scan,"'scan_danger'","'bad'")
+		scan = replacetext_char(scan,"'scan_notice'","'white'")
+		scan = replacetext_char(scan,"'scan_warning'","'average'")
+		scan = replacetext_char(scan,"'scan_danger'","'bad'")
 		scan += "<br>Cryostasis factor: [occupant.stasis_value]x"
 		data["occupant"] = scan
 
@@ -272,8 +272,8 @@
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.forceMove(get_step(loc, SOUTH))
-	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) 
-		occupant.bodytemperature = 261									  
+	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70)
+		occupant.bodytemperature = 261
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
 	update_use_power(POWER_USE_IDLE)

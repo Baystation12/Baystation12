@@ -32,16 +32,16 @@
 	return FALSE
 
 /datum/language/mantid/muddle(var/message)
-	message = replacetext(message, "...",  ".")
-	message = replacetext(message, "!?",   ".")
-	message = replacetext(message, "?!",   ".")
-	message = replacetext(message, "!",    ".")
-	message = replacetext(message, "?",    ".")
-	message = replacetext(message, ",",    "")
-	message = replacetext(message, ";",    "")
-	message = replacetext(message, ":",    "")
-	message = replacetext(message, ".",    "...")
-	message = replacetext(message, "&#39", "'")
+	message = replacetext_char(message, "...",  ".")
+	message = replacetext_char(message, "!?",   ".")
+	message = replacetext_char(message, "?!",   ".")
+	message = replacetext_char(message, "!",    ".")
+	message = replacetext_char(message, "?",    ".")
+	message = replacetext_char(message, ",",    "")
+	message = replacetext_char(message, ";",    "")
+	message = replacetext_char(message, ":",    "")
+	message = replacetext_char(message, ".",    "...")
+	message = replacetext_char(message, "&#39", "'")
 	return message
 
 /datum/language/mantid/broadcast(var/mob/living/speaker,var/message,var/speaker_mask)
@@ -92,7 +92,7 @@
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND 
+	flags = RESTRICTED | NO_STUTTER | NONVERBAL | HIVEMIND
 	shorthand = "KB"
 
 /datum/language/mantid/worldnet/check_special_condition(var/mob/living/carbon/other)

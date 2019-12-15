@@ -68,8 +68,8 @@
 	if(stance != COMMANDED_HEAL || stance != COMMANDED_HEALING) //dont want attack to bleed into heal.
 		allowed_targets = list()
 		target_mob = null
-	if(findtext(text,"heal")) //heal shit pls
-		if(findtext(text,"me")) //assumed want heals on master.
+	if(findtext_char(text,"heal")) //heal shit pls
+		if(findtext_char(text,"me")) //assumed want heals on master.
 			target_mob = speaker
 			stance = COMMANDED_HEAL
 			return 1
@@ -80,18 +80,18 @@
 		target_mob = targets[1]
 		stance = COMMANDED_HEAL
 		return 1
-	if(findtext(text,"emergency protocol"))
-		if(findtext(text,"deactivate"))
+	if(findtext_char(text,"emergency protocol"))
+		if(findtext_char(text,"deactivate"))
 			if(emergency_protocols)
 				src.say("EMERGENCY PROTOCOLS DEACTIVATED.")
 			emergency_protocols = 0
 			return 1
-		if(findtext(text,"activate"))
+		if(findtext_char(text,"activate"))
 			if(!emergency_protocols)
 				src.say("EMERGENCY PROTOCOLS ACTIVATED.")
 			emergency_protocols = 1
 			return 1
-		if(findtext(text,"check"))
+		if(findtext_char(text,"check"))
 			src.say("EMERGENCY PROTOCOLS [emergency_protocols ? "ACTIVATED" : "DEACTIVATED"].")
 			return 1
 	return 0

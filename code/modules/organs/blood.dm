@@ -171,10 +171,10 @@
 		if(blood_species != species.name)
 			return 1
 
-	var/donor_antigen = copytext(blood_type, 1, lentext(blood_type))
-	var/receiver_antigen = copytext(dna.b_type, 1, lentext(dna.b_type))
-	var/donor_rh = (findtext(blood_type, "+") > 0)
-	var/receiver_rh = (findtext(dna.b_type, "+") > 0)
+	var/donor_antigen = copytext_char(blood_type, 1, length_char(blood_type))
+	var/receiver_antigen = copytext_char(dna.b_type, 1, length_char(dna.b_type))
+	var/donor_rh = (findtext_char(blood_type, "+") > 0)
+	var/receiver_rh = (findtext_char(dna.b_type, "+") > 0)
 
 	if(donor_rh && !receiver_rh) return 1
 	switch(receiver_antigen)

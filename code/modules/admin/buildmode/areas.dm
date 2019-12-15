@@ -78,7 +78,7 @@ Right Click       - List/Create Area
 		var/ref = "\ref[T.loc]"
 		if (!vision_colors[ref])
 			if (++used_colors > max_colors)
-				vision_colors[ref] = "#" + copytext(md5(ref), 1, 7)
+				vision_colors[ref] = "#" + copytext_char(md5(ref), 1, 7)
 			else
 				vision_colors[ref] = distinct_colors[used_colors]
 		I.color = vision_colors[ref]

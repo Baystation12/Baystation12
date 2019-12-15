@@ -31,7 +31,7 @@
 		var/text = command_buffer[2]
 		var/filtered_name = lowertext(html_decode(name))
 		if(dd_hasprefix(text,filtered_name) || dd_hasprefix(text,"everyone") || dd_hasprefix(text, "everybody")) //in case somebody wants to command 8 bears at once.
-			var/substring = copytext(text,length(filtered_name)+1) //get rid of the name.
+			var/substring = copytext_char(text,length(filtered_name)+1) //get rid of the name.
 			listen(speaker,substring)
 		command_buffer.Remove(command_buffer[1],command_buffer[2])
 	. = ..()
@@ -82,7 +82,7 @@
 
 /mob/living/simple_animal/hostile/commanded/proc/listen(var/mob/speaker, var/text)
 	for(var/command in known_commands)
-		if(findtext(text,command))
+		if(findtext_char(text,command))
 			switch(command)
 				if("stay")
 					if(stay_command(speaker,text)) //find a valid command? Stop. Dont try and find more.
@@ -109,14 +109,14 @@
 		if(filter_friendlies && ((weakref(M) in friends) || M.faction == faction || M == master))
 			continue
 		var/found = 0
-		if(findtext(text, "[M]"))
+		if(findtext_char(text, "[M]"))
 			found = 1
 		else
 			var/list/parsed_name = splittext(replace_characters(lowertext(html_decode("[M]")),list("-"=" ", "."=" ", "," = " ", "'" = " ")), " ") //this big MESS is basically 'turn this into words, no punctuation, lowercase so we can check first name/last name/etc'
 			for(var/a in parsed_name)
 				if(a == "the" || length(a) < 2) //get rid of shit words.
 					continue
-				if(findtext(text,"[a]"))
+				if(findtext_char(text,"[a]"))
 					found = 1
 					break
 		if(found)
@@ -127,7 +127,7 @@
 	target_mob = null //want me to attack something? Well I better forget my old target.
 	walk_to(src,0)
 	stance = HOSTILE_STANCE_IDLE
-	if(text == "attack" || findtext(text,"everyone") || findtext(text,"anybody") || findtext(text, "somebody") || findtext(text, "someone")) //if its just 'attack' then just attack anybody, same for if they say 'everyone', somebody, anybody. Assuming non-pickiness.
+	if(text == "attack" || findtext_char(text,"everyone") || findtext_char(text,"anybody") || findtext_char(text, "somebody") || findtext_char(text, "someone")) //if its just 'attack' then just attack anybody, same for if they say 'everyone', somebody, anybody. Assuming non-pickiness.
 		allowed_targets = list("everyone")//everyone? EVERYONE
 		return 1
 
@@ -152,7 +152,7 @@
 
 /mob/living/simple_animal/hostile/commanded/proc/follow_command(var/mob/speaker,var/text)
 	//we can assume 'stop following' is handled by stop_command
-	if(findtext(text,"me"))
+	if(findtext_char(text,"me"))
 		stance = COMMANDED_FOLLOW
 		target_mob = speaker //this wont bite me in the ass later.
 		return 1

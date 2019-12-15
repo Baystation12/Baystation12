@@ -36,8 +36,8 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		var/list/archivedwarrants = list()
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			var/charges = W.fields["charges"]
-			if(lentext(charges) > 50)
-				charges = copytext(charges, 1, 50) + "..."
+			if(length_char(charges) > 50)
+				charges = copytext_char(charges, 1, 50) + "..."
 			var/warrant = list(
 			"warrantname" = W.fields["namewarrant"],
 			"charges" = charges,
@@ -149,7 +149,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			// string trickery to extract name & job
 			var/entry_components = splittext(new_person, " \[")
 			var/name = entry_components[1]
-			var/job = copytext(entry_components[2], 1, length(entry_components[2]))
+			var/job = copytext_char(entry_components[2], 1, length(entry_components[2]))
 			activewarrant.fields["namewarrant"] = name
 			activewarrant.fields["jobwarrant"] = job
 

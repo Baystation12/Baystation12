@@ -53,9 +53,9 @@
 		return
 	var/new_eyes = input("Please select eye color.", "Eye Color", rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes)) as color|null
 	if(new_eyes)
-		var/r_eyes = hex2num(copytext(new_eyes, 2, 4))
-		var/g_eyes = hex2num(copytext(new_eyes, 4, 6))
-		var/b_eyes = hex2num(copytext(new_eyes, 6, 8))
+		var/r_eyes = hex2num(copytext_char(new_eyes, 2, 4))
+		var/g_eyes = hex2num(copytext_char(new_eyes, 4, 6))
+		var/b_eyes = hex2num(copytext_char(new_eyes, 6, 8))
 		if(do_after(owner, 10) && owner.change_eye_color(r_eyes, g_eyes, b_eyes))
 			update_colour()
 			// Finally, update the eye icon on the mob.

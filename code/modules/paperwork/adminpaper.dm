@@ -42,7 +42,7 @@
 
 /obj/item/weapon/paper/admin/proc/generateHeader()
 	var/originhash = md5("[origin]")
-	var/challengehash = copytext(md5("[game_id]"),1,10) // changed to a hash of the game ID so it's more consistant but changes every round.
+	var/challengehash = copytext_char(md5("[game_id]"),1,10) // changed to a hash of the game ID so it's more consistant but changes every round.
 	var/text = null
 	//TODO change logo based on who you're contacting.
 	text = "<center><img src = [logo]></br>"
@@ -90,7 +90,7 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 		var last_fields_value = fields
 
 		//t = html_encode(t)
-		t = replacetext(t, "\n", "<BR>")
+		t = replacetext_char(t, "\n", "<BR>")
 		t = parsepencode(t,,, isCrayon) // Encode everything from pencode to html
 
 

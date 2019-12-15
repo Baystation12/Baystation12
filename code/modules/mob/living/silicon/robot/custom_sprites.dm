@@ -11,12 +11,12 @@ var/list/robot_custom_icons
 	robot_custom_icons = list()
 	for(var/line in lines)
 		//split entry into ckey and real_name
-		var/split_idx = findtext(line, "-") //this works if ckey cannot contain dashes, and findtext starts from the beginning
+		var/split_idx = findtext_char(line, "-") //this works if ckey cannot contain dashes, and findtext_char starts from the beginning
 		if(!split_idx || split_idx == length(line))
 			continue //bad entry
 
-		var/ckey = copytext(line, 1, split_idx)
-		var/real_name = copytext(line, split_idx+1)
+		var/ckey = copytext_char(line, 1, split_idx)
+		var/real_name = copytext_char(line, split_idx+1)
 
 		robot_custom_icons[ckey] = real_name
 	return 1

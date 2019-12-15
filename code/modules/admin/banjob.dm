@@ -30,10 +30,10 @@ var/jobban_keylist[0]		//to store the keys & ranks
 
 /proc/ckey_is_jobbanned(var/check_key, var/rank)
 	for(var/s in jobban_keylist)
-		if(findtext(s,"[check_key] - [rank]") == 1 )
-			var/startpos = findtext(s, "## ")+3
+		if(findtext_char(s,"[check_key] - [rank]") == 1 )
+			var/startpos = findtext_char(s, "## ")+3
 			if(startpos && startpos<length(s))
-				var/text = copytext(s, startpos, 0)
+				var/text = copytext_char(s, startpos, 0)
 				if(text)
 					return text
 			return "Reason Unspecified"
@@ -96,7 +96,7 @@ var/jobban_keylist[0]		//to store the keys & ranks
 
 /proc/jobban_remove(X)
 	for (var/i = 1; i <= length(jobban_keylist); i++)
-		if( findtext(jobban_keylist[i], "[X]") )
+		if( findtext_char(jobban_keylist[i], "[X]") )
 			jobban_keylist.Remove(jobban_keylist[i])
 			jobban_savebanfile()
 			return 1

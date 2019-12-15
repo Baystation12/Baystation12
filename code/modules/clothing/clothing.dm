@@ -838,7 +838,7 @@ BLIND     // can't see anything
 		. = item_state_slots[slot]
 	else
 		. = icon_state
-	if(!findtext(.,"_s", -2)) // If we don't already have our suffix
+	if(!findtext_char(.,"_s", -2)) // If we don't already have our suffix
 		if((icon_state + "_f_s") in icon_states(default_onmob_icons[slot_w_uniform_str]))
 			. +=  get_gender_suffix()
 		else

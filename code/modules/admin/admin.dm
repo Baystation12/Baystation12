@@ -273,7 +273,7 @@ var/global/floorIsLava = 0
 
 	if(filter_term)
 		for(var/t in note_keys)
-			if(findtext(lowertext(t), lowertext(filter_term)))
+			if(findtext_char(lowertext(t), lowertext(filter_term)))
 				continue
 			note_keys -= t
 
@@ -294,7 +294,7 @@ var/global/floorIsLava = 0
 
 
 /datum/admins/proc/player_has_info(var/key as text)
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
 	if(!infos || !infos.len) return 0
@@ -320,7 +320,7 @@ var/global/floorIsLava = 0
 			break
 	dat += "<b>Player age: [p_age]</b><br><ul id='notes'>"
 
-	var/savefile/info = new("data/player_saves/[copytext(key, 1, 2)]/[key]/info.sav")
+	var/savefile/info = new("data/player_saves/[copytext_char(key, 1, 2)]/[key]/info.sav")
 	var/list/infos
 	info >> infos
 	if(!infos)
@@ -630,8 +630,8 @@ var/global/floorIsLava = 0
 	var/dat = "<B>Job Bans!</B><HR><table>"
 	for(var/t in jobban_keylist)
 		var/r = t
-		if( findtext(r,"##") )
-			r = copytext( r, 1, findtext(r,"##") )//removes the description
+		if( findtext_char(r,"##") )
+			r = copytext_char( r, 1, findtext_char(r,"##") )//removes the description
 		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
 	usr << browse(dat, "window=ban;size=400x400")
@@ -722,7 +722,7 @@ var/global/floorIsLava = 0
 	var/message = input("Global message to send:", "Admin Announce", null, null) as message
 	message = sanitize(message, 500, extra = 0)
 	if(message)
-		message = replacetext(message, "\n", "<br>") // required since we're putting it in a <p> tag
+		message = replacetext_char(message, "\n", "<br>") // required since we're putting it in a <p> tag
 		to_world("<span class=notice><b>[usr.key] Announces:</b><p style='text-indent: 50px'>[message]</p></span>")
 		log_admin("Announce: [key_name(usr)] : [message]")
 	SSstatistics.add_field_details("admin_verb","A") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -1020,7 +1020,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn every possible custom closet. Do not do this on live."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN))	
+	if(!check_rights(R_SPAWN))
 		return
 
 	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")
@@ -1113,7 +1113,7 @@ var/global/floorIsLava = 0
 	var/list/matches = new()
 
 	for(var/path in types)
-		if(findtext("[path]", object))
+		if(findtext_char("[path]", object))
 			matches += path
 
 	if(matches.len==0)

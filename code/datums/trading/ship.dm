@@ -21,4 +21,4 @@
 	var/length = round(amt/100)
 	duration_of_stay += length
 	. = get_response("bribe_accept", "Sure, I'll stay for TIME more minutes.")
-	. = replacetext(., "TIME", length)
+	. = replacetext_char(., "TIME", length)

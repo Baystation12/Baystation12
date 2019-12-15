@@ -4,6 +4,6 @@
 		var/mobjs = null
 		mobjs = jointext(typesof(/mob), ";")
 		create_mob_html = file2text('html/create_object.html')
-		create_mob_html = replacetext(create_mob_html, "null /* object types */", "\"[mobjs]\"")
+		create_mob_html = replacetext_char(create_mob_html, "null /* object types */", "\"[mobjs]\"")
 
-	user << browse(replacetext(create_mob_html, "/* ref src */", "\ref[src]"), "window=create_mob;size=425x475")
+	user << browse(replacetext_char(create_mob_html, "/* ref src */", "\ref[src]"), "window=create_mob;size=425x475")

@@ -19,7 +19,7 @@
 			continue
 		if(starts_with(icon_state, "eyes-"))
 			continue
-		if(findtext(icon_state, "openpanel"))
+		if(findtext_char(icon_state, "openpanel"))
 			continue
 		var/eye_icon_state = "eyes-[icon_state]"
 		if(!(eye_icon_state in valid_states))

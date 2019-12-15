@@ -213,7 +213,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 /*Checkers, cost takers, message makers, etc*/
 
 /spell/proc/cast_check(skipcharge = 0,mob/user = usr, var/list/targets) //checks if the spell can be cast based on its settings; skipcharge is used when an additional cast_check is called inside the spell
-	
+
 	if(silenced > 0)
 		return 0
 
@@ -318,12 +318,12 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 			if(prob(50))//Auto-mute? Fuck that noise
 				user.say(invocation)
 			else
-				user.say(replacetext(invocation," ","`"))
+				user.say(replacetext_char(invocation," ","`"))
 		if(SpI_WHISPER)
 			if(prob(50))
 				user.whisper(invocation)
 			else
-				user.whisper(replacetext(invocation," ","`"))
+				user.whisper(replacetext_char(invocation," ","`"))
 		if(SpI_EMOTE)
 			user.custom_emote(VISIBLE_MESSAGE, invocation)
 

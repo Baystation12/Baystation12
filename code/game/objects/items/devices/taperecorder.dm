@@ -277,8 +277,8 @@
 
 		var/turf/T = get_turf(src)
 		var/playedmessage = mytape.storedinfo[i]
-		if (findtextEx(playedmessage,"*",1,2)) //remove marker for action sounds
-			playedmessage = copytext(playedmessage,2)
+		if (findtext_charEx(playedmessage,"*",1,2)) //remove marker for action sounds
+			playedmessage = copytext_char(playedmessage,2)
 		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: [playedmessage]</font>")
 
 		if(mytape.storedinfo.len < i+1)
@@ -345,7 +345,7 @@
 	var/t1 = "<B>Transcript:</B><BR><BR>"
 	for(var/i=1,mytape.storedinfo.len >= i,i++)
 		var/printedmessage = mytape.storedinfo[i]
-		if (findtextEx(printedmessage,"*",1,2)) //replace action sounds
+		if (findtext_charEx(printedmessage,"*",1,2)) //replace action sounds
 			printedmessage = "\[[time2text(mytape.timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"
 		t1 += "[printedmessage]<BR>"
 	P.info = t1
@@ -496,7 +496,7 @@
 		var/index = text2num(href_list["cut_after"])
 		if(index >= timestamp.len)
 			return
-		
+
 		to_chat(user, "<span class='notice'>You remove part of the tape off.</span>")
 		get_loose_tape(user, index)
 		cut(user)

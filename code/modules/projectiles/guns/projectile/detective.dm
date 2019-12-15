@@ -35,7 +35,7 @@
 	var/input = sanitizeSafe(input("What do you want to name the gun?","Rename gun"), MAX_NAME_LEN)
 
 	if(src && input && !M.incapacitated() && in_range(M,src))
-		if(!findtext(input, "the", 1, 4))
+		if(!findtext_char(input, "the", 1, 4))
 			input = "\improper [input]"
 		name = input
 		unique_name = input

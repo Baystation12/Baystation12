@@ -107,7 +107,7 @@
 			return
 		for(var/datum/computer_file/report/crew_record/R in GLOB.all_crew_records)
 			var/datum/report_field/field = R.field_from_name(field_name)
-			if(findtext(lowertext(field.get_value()), lowertext(search)))
+			if(findtext_char(lowertext(field.get_value()), lowertext(search)))
 				active_record = R
 				return 1
 		message = "Unable to find record containing '[search]'"

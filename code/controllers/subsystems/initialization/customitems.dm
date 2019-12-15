@@ -26,10 +26,10 @@ SUBSYSTEM_DEF(customitems)
 			continue
 		for(var/checkfile in flist(checkdir))
 			checkfile = "[checkdir][checkfile]"
-			if(copytext(checkfile, -1) == "/")
+			if(copytext_char(checkfile, -1) == "/")
 				directories_to_check += checkfile
 				dir_count++
-			else if(copytext(checkfile, -5) == ".json")
+			else if(copytext_char(checkfile, -5) == ".json")
 				try
 					var/datum/custom_item/citem = new(json_decode(file2text(checkfile)))
 					var/result = citem.validate()

@@ -197,7 +197,7 @@
 		for(var/obj/machinery/flasher/F in targets)
 			F.flash()
 		. =  TOPIC_REFRESH
-		
+
 	if (href_list["adjust"])
 		timetoset += text2num(href_list["adjust"])
 		timetoset = Clamp(timetoset, 0, 36000)
@@ -250,10 +250,10 @@
 //Stolen from status_display
 /obj/machinery/door_timer/proc/texticon(var/tn, var/px = 0, var/py = 0)
 	var/image/I = image('icons/obj/status_display.dmi', "blank")
-	var/len = lentext(tn)
+	var/len = length_char(tn)
 
 	for(var/d = 1 to len)
-		var/char = copytext(tn, len-d+1, len-d+2)
+		var/char = copytext_char(tn, len-d+1, len-d+2)
 		if(char == " ")
 			continue
 		var/image/ID = image('icons/obj/status_display.dmi', icon_state=char)

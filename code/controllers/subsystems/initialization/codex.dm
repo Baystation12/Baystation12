@@ -10,8 +10,8 @@ SUBSYSTEM_DEF(codex)
 	var/list/search_cache =      list()
 
 /datum/controller/subsystem/codex/Initialize()
-	// Codex link syntax is such: 
-	// <l>keyword</l> when keyword is mentioned verbatim, 
+	// Codex link syntax is such:
+	// <l>keyword</l> when keyword is mentioned verbatim,
 	// <span codexlink='keyword'>whatever</span> when shit gets tricky
 	linkRegex = regex(@"<(span|l)(\s+codexlink='([^>]*)'|)>([^<]+)</(span|l)>","g")
 
@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(codex)
 		var/replacement = linkRegex.group[4]
 		if(linked_entry)
 			replacement = "<a href='?src=\ref[SScodex];show_examined_info=\ref[linked_entry];show_to=\ref[viewer]'>[replacement]</a>"
-		string = replacetextEx(string, linkRegex.match, replacement)
+		string = replacetextEx_char(string, linkRegex.match, replacement)
 	return string
 
 /datum/controller/subsystem/codex/proc/get_codex_entry(var/entry)
@@ -96,10 +96,10 @@ SUBSYSTEM_DEF(codex)
 			results = list()
 			for(var/entry_title in entries_by_string)
 				var/datum/codex_entry/entry = entries_by_string[entry_title]
-				if(findtext(entry.display_name, searching) || \
-				 findtext(entry.lore_text, searching) || \
-				 findtext(entry.mechanics_text, searching) || \
-				 findtext(entry.antag_text, searching))
+				if(findtext_char(entry.display_name, searching) || \
+				 findtext_char(entry.lore_text, searching) || \
+				 findtext_char(entry.mechanics_text, searching) || \
+				 findtext_char(entry.antag_text, searching))
 					results |= entry
 		search_cache[searching] = dd_sortedObjectList(results)
 	return search_cache[searching]
@@ -109,7 +109,7 @@ SUBSYSTEM_DEF(codex)
 	if(!. && href_list["show_examined_info"] && href_list["show_to"])
 		var/mob/showing_mob =   locate(href_list["show_to"])
 		if(!istype(showing_mob) || !showing_mob.can_use_codex())
-			return 
+			return
 		var/atom/showing_atom = locate(href_list["show_examined_info"])
 		var/entry
 		if(istype(showing_atom, /datum/codex_entry))

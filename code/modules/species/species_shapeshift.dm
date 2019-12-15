@@ -161,9 +161,9 @@ var/list/wrapped_species_by_ref = list()
 
 /mob/living/carbon/human/proc/shapeshifter_set_colour(var/new_skin)
 
-	r_skin =   hex2num(copytext(new_skin, 2, 4))
-	g_skin =   hex2num(copytext(new_skin, 4, 6))
-	b_skin =   hex2num(copytext(new_skin, 6, 8))
+	r_skin =   hex2num(copytext_char(new_skin, 2, 4))
+	g_skin =   hex2num(copytext_char(new_skin, 4, 6))
+	b_skin =   hex2num(copytext_char(new_skin, 6, 8))
 
 	var/datum/species/shapeshifter/S = species
 	if(S.monochromatic)

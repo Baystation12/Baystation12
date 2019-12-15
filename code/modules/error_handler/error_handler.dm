@@ -83,15 +83,15 @@ GLOBAL_VAR_INIT(actual_error_file_line, new/regex("^%% (.*?),(.*?) %% "))
 	var/list/desclines = list()
 	if(LAZYLEN(splitlines) > ERROR_USEFUL_LEN) // If there aren't at least three lines, there's no info
 		for(var/line in splitlines)
-			if(LAZYLEN(line) < 3 || findtext(line, "source file:") || findtext(line, "usr.loc:"))
+			if(LAZYLEN(line) < 3 || findtext_char(line, "source file:") || findtext_char(line, "usr.loc:"))
 				continue
-			if(findtext(line, "usr:"))
+			if(findtext_char(line, "usr:"))
 				if(usrinfo)
 					desclines.Add(usrinfo)
 					usrinfo = null
 				continue // Our usr info is better, replace it
 
-			if(copytext(line, 1, 3) != "  ")
+			if(copytext_char(line, 1, 3) != "  ")
 				desclines += ("  " + line) // Pad any unpadded lines, so they look pretty
 			else
 				desclines += line

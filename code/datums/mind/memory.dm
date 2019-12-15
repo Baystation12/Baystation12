@@ -70,7 +70,7 @@
 		var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
 		output += "<HR><B>Ambitions:</B> [ambition.summarize()]"
 
-	show_browser(recipient, replacetext(jointext(output, "<BR>"),"\n","<BR>"),"window=memory")
+	show_browser(recipient, replacetext_char(jointext(output, "<BR>"),"\n","<BR>"),"window=memory")
 
 /***********
 * Memories *

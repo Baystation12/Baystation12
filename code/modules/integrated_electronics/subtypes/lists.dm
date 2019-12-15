@@ -135,23 +135,23 @@
 		if(sample_list)
 			for(var/sample_item in sample_list)
 				if(!isnull(sample_item))
-					if(istext(input_item) && istext(sample_item) && findtext(input_item, sample_item))
+					if(istext(input_item) && istext(sample_item) && findtext_char(input_item, sample_item))
 						output += input_item
 					if(istype(input_item, /atom) && istext(sample_item))
 						var/atom/input_item_atom = input_item
-						if(istext(sample_item) && findtext(input_item_atom.name, sample_item))
+						if(istext(sample_item) && findtext_char(input_item_atom.name, sample_item))
 							output += input_item
 				if(!istext(input_item))
 					if(input_item == sample_item)
 						output += input_item
 		else
 			if(!isnull(sample))
-				if(istext(input_item) && istext(sample) && findtext(input_item, sample))
+				if(istext(input_item) && istext(sample) && findtext_char(input_item, sample))
 					output += input_item
 					continue
 				if(istype(input_item, /atom) && istext(sample))
 					var/atom/input_itema = input_item
-					if(findtext(input_itema.name, sample))
+					if(findtext_char(input_itema.name, sample))
 						output += input_item
 			if(!istext(input_item))
 				if(input_item == sample)
@@ -185,7 +185,7 @@
 		if(e in output_list)
 			continue
 		output_list.Add(e)
-		
+
 	set_pin_data(IC_OUTPUT, 1, output_list)
 	push_data()
 	activate_pin(2)

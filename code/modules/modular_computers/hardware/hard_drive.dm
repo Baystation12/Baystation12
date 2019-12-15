@@ -128,7 +128,7 @@
 
 	var/list/badchars = list("/","\\",":","*","?","\"","<",">","|","#", ".")
 	for(var/char in badchars)
-		if(findtext(F.filename, char))
+		if(findtext_char(F.filename, char))
 			return 0
 
 	// This file is already stored. Don't store it again.

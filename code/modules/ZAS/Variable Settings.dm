@@ -88,7 +88,7 @@ var/global/vs_control/vsc = new
 		settings -= V
 
 	for(var/V in settings)
-		if(findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC") || findtextEx(V,"_METHOD"))
+		if(findtext_charEx(V,"_RANDOM") || findtext_charEx(V,"_DESC") || findtext_charEx(V,"_METHOD"))
 			settings -= V
 
 	settings -= "settings"
@@ -99,7 +99,7 @@ var/global/vs_control/vsc = new
 	//var/which = input(user,"Choose a setting:") in L
 	var/dat = ""
 	for(var/ch in L)
-		if(findtextEx(ch,"_RANDOM") || findtextEx(ch,"_DESC") || findtextEx(ch,"_METHOD") || findtextEx(ch,"_NAME")) continue
+		if(findtext_charEx(ch,"_RANDOM") || findtext_charEx(ch,"_DESC") || findtext_charEx(ch,"_METHOD") || findtext_charEx(ch,"_NAME")) continue
 		var/vw
 		var/vw_desc = "No Description."
 		var/vw_name = ch
@@ -335,7 +335,7 @@ var/global/vs_control/vsc = new
 		settings -= V
 
 	for(var/V in settings)
-		if(findtextEx(V,"_RANDOM") || findtextEx(V,"_DESC"))
+		if(findtext_charEx(V,"_RANDOM") || findtext_charEx(V,"_DESC"))
 			settings -= V
 
 	settings -= "settings"
@@ -347,17 +347,17 @@ var/global/vs_control/vsc = new
 			newvalue = prob(vars["[V]_RANDOM"])
 		else if(istext(vars["[V]_RANDOM"]))
 			var/txt = vars["[V]_RANDOM"]
-			if(findtextEx(txt,"PROB"))
+			if(findtext_charEx(txt,"PROB"))
 				txt = splittext(txt,"/")
-				txt[1] = replacetext(txt[1],"PROB","")
+				txt[1] = replacetext_char(txt[1],"PROB","")
 				var/p = text2num(txt[1])
 				var/r = txt[2]
 				if(prob(p))
 					newvalue = roll(r)
 				else
 					newvalue = vars[V]
-			else if(findtextEx(txt,"PICK"))
-				txt = replacetext(txt,"PICK","")
+			else if(findtext_charEx(txt,"PICK"))
+				txt = replacetext_char(txt,"PICK","")
 				txt = splittext(txt,",")
 				newvalue = pick(txt)
 			else

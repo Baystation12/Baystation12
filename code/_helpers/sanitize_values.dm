@@ -65,9 +65,9 @@
 	var/fragment = ""
 	. = list()
 	for(var/i = 1, i <= length(format), i++)
-		fragment += copytext(format,i,i+1)
+		fragment += copytext_char(format,i,i+1)
 		if(fragment in list("YY", "YEAR", "MM", "DD", "hh", "mm", "ss"))
-			. += sanitize_one_time(copytext(time, i - length(fragment) + 1, i + 1), copytext(default, i - length(fragment) + 1, i + 1), fragment)
+			. += sanitize_one_time(copytext_char(time, i - length(fragment) + 1, i + 1), copytext_char(default, i - length(fragment) + 1, i + 1), fragment)
 			fragment = ""
 		else if(fragment in list(":", "-", " "))
 			. += fragment

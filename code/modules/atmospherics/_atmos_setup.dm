@@ -98,7 +98,7 @@ var/global/list/pipe_colors = list(
 	var/icon/pipe = new('icons/atmos/pipes.dmi')
 
 	for(var/state in pipe.IconStates())
-		if(!state || findtext(state, "map"))
+		if(!state || findtext_char(state, "map"))
 			continue
 
 		var/cache_name = state
@@ -112,13 +112,13 @@ var/global/list/pipe_colors = list(
 
 	pipe = new ('icons/atmos/heat.dmi')
 	for(var/state in pipe.IconStates())
-		if(!state || findtext(state, "map"))
+		if(!state || findtext_char(state, "map"))
 			continue
 		pipe_icons["hepipe" + state] = image('icons/atmos/heat.dmi', icon_state = state)
 
 	pipe = new ('icons/atmos/junction.dmi')
 	for(var/state in pipe.IconStates())
-		if(!state || findtext(state, "map"))
+		if(!state || findtext_char(state, "map"))
 			continue
 		pipe_icons["hejunction" + state] = image('icons/atmos/junction.dmi', icon_state = state)
 
@@ -130,12 +130,12 @@ var/global/list/pipe_colors = list(
 	var/icon/pipe = new('icons/atmos/manifold.dmi')
 
 	for(var/state in pipe.IconStates())
-		if(findtext(state, "clamps"))
+		if(findtext_char(state, "clamps"))
 			var/image/I = image('icons/atmos/manifold.dmi', icon_state = state)
 			manifold_icons[state] = I
 			continue
 
-		if(findtext(state, "core") || findtext(state, "4way"))
+		if(findtext_char(state, "core") || findtext_char(state, "4way"))
 			var/image/I = image('icons/atmos/manifold.dmi', icon_state = state)
 			manifold_icons[state] = I
 			for(var/pipe_color in pipe_colors)
@@ -151,13 +151,13 @@ var/global/list/pipe_colors = list(
 
 	device = new('icons/atmos/vent_pump.dmi')
 	for(var/state in device.IconStates())
-		if(!state || findtext(state, "map"))
+		if(!state || findtext_char(state, "map"))
 			continue
 		device_icons["vent" + state] = image('icons/atmos/vent_pump.dmi', icon_state = state)
 
 	device = new('icons/atmos/vent_scrubber.dmi')
 	for(var/state in device.IconStates())
-		if(!state || findtext(state, "map"))
+		if(!state || findtext_char(state, "map"))
 			continue
 		device_icons["scrubber" + state] = image('icons/atmos/vent_scrubber.dmi', icon_state = state)
 
@@ -168,7 +168,7 @@ var/global/list/pipe_colors = list(
 	var/icon/omni = new('icons/atmos/omni_devices.dmi')
 
 	for(var/state in omni.IconStates())
-		if(!state || findtext(state, "map"))
+		if(!state || findtext_char(state, "map"))
 			continue
 		omni_icons[state] = image('icons/atmos/omni_devices.dmi', icon_state = state)
 

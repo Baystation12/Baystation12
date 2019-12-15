@@ -592,7 +592,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		customname = "[command_name()] Update"
 
 	//New message handling
-	post_comm_message(customname, replacetext(input, "\n", "<br/>"))
+	post_comm_message(customname, replacetext_char(input, "\n", "<br/>"))
 
 	switch(alert("Should this be announced to the general population?",,"Yes","No"))
 		if("Yes")

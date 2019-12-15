@@ -586,7 +586,7 @@
 						var/atom/thing = i
 						if(ismob(thing) && !isliving(thing))
 							continue
-						if(findtext(addtext(thing.name," ",thing.desc), item, 1, 0) )
+						if(findtext_char(addtext(thing.name," ",thing.desc), item, 1, 0) )
 							valid_things.Add(weakref(thing))
 				else
 					var/atom/A = item
@@ -654,7 +654,7 @@
 			var/atom/thing = i
 			if(ismob(thing) && !isliving(thing))
 				continue
-			if(findtext(addtext(thing.name," ",thing.desc), DT, 1, 0) )
+			if(findtext_char(addtext(thing.name," ",thing.desc), DT, 1, 0) )
 				valid_things.Add(thing)
 	if(valid_things.len)
 		O.data = weakref(pick(valid_things))

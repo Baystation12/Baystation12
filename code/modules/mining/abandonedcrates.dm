@@ -174,7 +174,7 @@
 	. = 1
 	lastattempt.Cut()
 	for(var/i in 1 to codelen)
-		var/guesschar = copytext(input, i, i+1)
+		var/guesschar = copytext_char(input, i, i+1)
 		lastattempt += guesschar
 		if(guesschar != code[i])
 			. = 0

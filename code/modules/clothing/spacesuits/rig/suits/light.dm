@@ -130,7 +130,7 @@
 	if(M.incapacitated()) return 0
 	var/input = sanitizeSafe(input("What do you want to name your suit?", "Rename suit"), MAX_NAME_LEN)
 	if(src && input && !M.incapacitated() && in_range(M,src))
-		if(!findtext(input, "the", 1, 4))
+		if(!findtext_char(input, "the", 1, 4))
 			input = "\improper [input]"
 		SetName(input)
 		to_chat(M, "Suit naming succesful!")

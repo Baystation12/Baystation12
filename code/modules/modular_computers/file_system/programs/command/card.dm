@@ -62,7 +62,7 @@
 			var/list/all_centcom_access = list()
 			for(var/access in get_all_centcom_access())
 				all_centcom_access.Add(list(list(
-					"desc" = replacetext(get_centcom_access_desc(access), " ", "&nbsp"),
+					"desc" = replacetext_char(get_centcom_access_desc(access), " ", "&nbsp"),
 					"ref" = access,
 					"allowed" = (access in id_card.access) ? 1 : 0)))
 			data["all_centcom_access"] = all_centcom_access
@@ -73,7 +73,7 @@
 				for(var/access in get_region_accesses(i))
 					if (get_access_desc(access))
 						accesses.Add(list(list(
-							"desc" = replacetext(get_access_desc(access), " ", "&nbsp"),
+							"desc" = replacetext_char(get_access_desc(access), " ", "&nbsp"),
 							"ref" = access,
 							"allowed" = (access in id_card.access) ? 1 : 0)))
 
@@ -94,7 +94,7 @@
 	var/list/formatted = list()
 	for(var/job in jobs)
 		formatted.Add(list(list(
-			"display_name" = replacetext(job, " ", "&nbsp"),
+			"display_name" = replacetext_char(job, " ", "&nbsp"),
 			"target_rank" = id_card && id_card.assignment ? id_card.assignment : "Unassigned",
 			"job" = job)))
 

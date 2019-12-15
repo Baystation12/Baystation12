@@ -90,9 +90,9 @@ var/list/whitelist = list()
 	else
 		//Config File Whitelist
 		for(var/s in alien_whitelist)
-			if(findtext(s,"[ckey] - [item]"))
+			if(findtext_char(s,"[ckey] - [item]"))
 				return 1
-			if(findtext(s,"[ckey] - All"))
+			if(findtext_char(s,"[ckey] - All"))
 				return 1
 	return 0
 

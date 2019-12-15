@@ -214,10 +214,10 @@
 	if (speech_buffer.len > 0)
 		var/who = speech_buffer[1] // Who said it?
 		var/phrase = speech_buffer[2] // What did they say?
-		if ((findtext(phrase, num2text(number)) || findtext(phrase, "slimes"))) // Talking to us
-			if (findtext(phrase, "hello") || findtext(phrase, "hi"))
+		if ((findtext_char(phrase, num2text(number)) || findtext_char(phrase, "slimes"))) // Talking to us
+			if (findtext_char(phrase, "hello") || findtext_char(phrase, "hi"))
 				to_say = pick("Hello...", "Hi...")
-			else if (findtext(phrase, "follow"))
+			else if (findtext_char(phrase, "follow"))
 				if (Leader)
 					if (Leader == who) // Already following him
 						to_say = pick("Yes...", "Lead...", "Following...")
@@ -232,7 +232,7 @@
 						to_say = "I follow..."
 					else // Not friendly enough
 						to_say = pick("No...", "I won't follow...")
-			else if (findtext(phrase, "stop"))
+			else if (findtext_char(phrase, "stop"))
 				if (Victim) // We are asked to stop feeding
 					if (Friends[who] > 4)
 						Victim = null
@@ -260,7 +260,7 @@
 							to_say = "Yes... I'll stop..."
 						else
 							to_say = "No... I'll keep following..."
-			else if (findtext(phrase, "stay"))
+			else if (findtext_char(phrase, "stay"))
 				if (Leader)
 					if (Leader == who)
 						holding_still = Friends[who] * 10

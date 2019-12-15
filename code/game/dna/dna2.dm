@@ -222,7 +222,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 
 // Get a sub-block from a block.
 /datum/dna/proc/GetUISubBlock(var/block,var/subBlock)
-	return copytext(GetUIBlock(block),subBlock,subBlock+1)
+	return copytext_char(GetUIBlock(block),subBlock,subBlock+1)
 
 // Do not use this unless you absolutely have to.
 // Set a block from a hex string.  This is inefficient.  If you can, use SetUIValue().
@@ -235,7 +235,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		if(i==subBlock)
 			newBlock+=newSubBlock
 		else
-			newBlock+=copytext(oldBlock,i,i+1)
+			newBlock+=copytext_char(oldBlock,i,i+1)
 	SetUIBlock(block,newBlock,defer)
 
 ///////////////////////////////////////
@@ -310,7 +310,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	return SetSEValue(block,nval,defer)
 
 /datum/dna/proc/GetSESubBlock(var/block,var/subBlock)
-	return copytext(GetSEBlock(block),subBlock,subBlock+1)
+	return copytext_char(GetSEBlock(block),subBlock,subBlock+1)
 
 // Do not use this unless you absolutely have to.
 // Set a sub-block from a hex character.  This is inefficient.  If you can, use SetUIValue().
@@ -323,7 +323,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 		if(i==subBlock)
 			newBlock+=newSubBlock
 		else
-			newBlock+=copytext(oldBlock,i,i+1)
+			newBlock+=copytext_char(oldBlock,i,i+1)
 	//testing("SetSESubBlock([block],[subBlock],[newSubBlock],[defer]): [oldBlock] -> [newBlock]")
 	SetSEBlock(block,newBlock,defer)
 

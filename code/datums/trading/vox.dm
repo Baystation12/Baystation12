@@ -73,7 +73,7 @@
 	if(!speech["hail_[specific][hailed_vox]"])
 		specific = "generic"
 	. = get_response("hail_[specific][hailed_vox]", "Greetings, MOB!")
-	. = replacetext(., "MOB", user.name)
+	. = replacetext_char(., "MOB", user.name)
 
 /datum/trader/ship/vox/can_hail()
 	if(hailed_vox >= 0)

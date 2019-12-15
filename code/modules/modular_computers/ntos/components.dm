@@ -8,7 +8,7 @@
 
 /datum/extension/interactive/ntos/proc/find_hardware_by_name(var/partname)
 	for(var/obj/item/weapon/stock_parts/P in holder)
-		if(findtext(P.name, partname))
+		if(findtext_char(P.name, partname))
 			return P
 
 /datum/extension/interactive/ntos/proc/has_component(var/part_type)
@@ -18,14 +18,14 @@
 	var/obj/item/weapon/stock_parts/computer/nano_printer/printer = get_component(PART_PRINTER)
 	if(printer)
 		return printer.print_text(content, title)
-		
+
 /datum/extension/interactive/ntos/proc/get_network_tag()
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		return network_card.get_network_tag()
 	else
 		return "N/A"
-		
+
 /datum/extension/interactive/ntos/proc/get_ntnet_status(var/specific_action = 0)
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)

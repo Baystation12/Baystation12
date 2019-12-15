@@ -30,7 +30,7 @@
 	can_escape = TRUE
 	can_pull_size = ITEM_SIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
-	var/is_angry = FALSE 
+	var/is_angry = FALSE
 
 /mob/living/simple_animal/opossum/Life()
 	. = ..()
@@ -74,7 +74,7 @@
 		update_icon()
 
 /mob/living/simple_animal/opossum/on_update_icon()
-	
+
 	if(stat == DEAD || (resting && is_angry))
 		icon_state = icon_dead
 	else if(resting || stat == UNCONSCIOUS)
@@ -107,6 +107,6 @@
 	if(!client && stat == CONSCIOUS)
 		message = lowertext(message)
 		for(var/aaa in aaa_words)
-			if(findtext(message, aaa))
+			if(findtext_char(message, aaa))
 				respond_to_damage()
 				return

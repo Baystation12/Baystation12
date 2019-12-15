@@ -265,7 +265,7 @@
 	var/r
 	var/c
 	for(var/i = 1 to length(str)/2)
-		c = hex2num(copytext(str,i*2-1,i*2+1), safe)
+		c = hex2num(copytext_char(str,i*2-1,i*2+1), safe)
 		if(isnull(c))
 			return null
 		r += ascii2text(c)

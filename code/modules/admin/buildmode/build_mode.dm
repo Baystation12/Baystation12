@@ -47,7 +47,7 @@
 	var/list/matches = list()
 
 	for(var/path in types)
-		if(findtext("[path]", desired_path))
+		if(findtext_char("[path]", desired_path))
 			matches += path
 
 	if(!matches.len)

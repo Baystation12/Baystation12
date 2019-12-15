@@ -23,7 +23,7 @@
 	if(!new_message || new_message == "")
 		use_message = "Halt! Security!"
 	else
-		use_message = capitalize(copytext(sanitize(new_message), 1, MAX_MESSAGE_LEN))
+		use_message = capitalize(copytext_char(sanitize(new_message), 1, MAX_MESSAGE_LEN))
 
 	to_chat(usr, "You configure the hailer to shout \"[use_message]\".")
 

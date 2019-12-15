@@ -147,8 +147,8 @@
 		var/message
 		if(prob(80))
 			var/list/names = list()
-			var/lastname = copytext(holder.real_name, findtext(holder.real_name, " ")+1)
-			var/firstname = copytext(holder.real_name, 1, findtext(holder.real_name, " "))
+			var/lastname = copytext_char(holder.real_name, findtext_char(holder.real_name, " ")+1)
+			var/firstname = copytext_char(holder.real_name, 1, findtext_char(holder.real_name, " "))
 			if(lastname) names += lastname
 			if(firstname) names += firstname
 			if(!names.len)

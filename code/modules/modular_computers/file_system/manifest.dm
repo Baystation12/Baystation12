@@ -90,8 +90,8 @@
 				dat += "<tr class='candystripe'><td>[mil_ranks[name]][name]</td><td>[names[name]]</td><td>[isactive[name]]</td></tr>"
 
 	dat += "</table>"
-	dat = replacetext(dat, "\n", "") // so it can be placed on paper correctly
-	dat = replacetext(dat, "\t", "")
+	dat = replacetext_char(dat, "\n", "") // so it can be placed on paper correctly
+	dat = replacetext_char(dat, "\t", "")
 	return dat
 
 /proc/silicon_nano_crew_manifest(var/list/filter)
