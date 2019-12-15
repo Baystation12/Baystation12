@@ -1097,6 +1097,11 @@
 	icon_state = "locker"
 	req_access = list(access_medical_equip)
 
+/area/medical/medic
+	name = "\improper Medic Quarters"
+	icon_state = "locker"
+	req_access = list(access_medical_equip)
+
 /area/medical/subacute
 	name = "\improper Sub-Acute Ward"
 	icon_state = "patients"
@@ -1119,9 +1124,6 @@
 	icon_state = "chapel"
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_crematorium)
-
-/area/medical/virology
-	name = "\improper Virology (decomissioned)"
 
 // Shield Rooms
 /area/shield
