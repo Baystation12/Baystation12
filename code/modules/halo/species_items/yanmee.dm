@@ -67,12 +67,12 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	icon_state = "ultra_harness"
 	item_state = "ultra_harness"
 	specials = list(/datum/armourspecials/shields)
-	totalshields = 50
+	totalshields = 30
 
 /obj/item/clothing/suit/armor/special/yanmee/leader
 	icon_state = "leader_harness"
 	item_state = "leader_harness"
 	specials = list(/datum/armourspecials/shields)
-	totalshields = 75
+	totalshields = 50
 
 #undef YANMEE_ICON
