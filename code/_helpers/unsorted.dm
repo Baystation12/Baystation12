@@ -255,7 +255,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 
 //Returns whether or not a player is a guest using their ckey as an input
 /proc/IsGuestKey(key)
-	if (findtext_char(key, "Guest-", 1, 7) != 1) //was findtext_charEx
+	if (findtext_char(key, "Guest-", 1, 7) != 1) //was findtextEx_char
 		return 0
 
 	var/i = 7, ch, len = length(key)

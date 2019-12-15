@@ -277,7 +277,7 @@
 
 		var/turf/T = get_turf(src)
 		var/playedmessage = mytape.storedinfo[i]
-		if (findtext_charEx(playedmessage,"*",1,2)) //remove marker for action sounds
+		if (findtextEx_char(playedmessage,"*",1,2)) //remove marker for action sounds
 			playedmessage = copytext_char(playedmessage,2)
 		T.audible_message("<font color=Maroon><B>Tape Recorder</B>: [playedmessage]</font>")
 
@@ -345,7 +345,7 @@
 	var/t1 = "<B>Transcript:</B><BR><BR>"
 	for(var/i=1,mytape.storedinfo.len >= i,i++)
 		var/printedmessage = mytape.storedinfo[i]
-		if (findtext_charEx(printedmessage,"*",1,2)) //replace action sounds
+		if (findtextEx_char(printedmessage,"*",1,2)) //replace action sounds
 			printedmessage = "\[[time2text(mytape.timestamp[i]*10,"mm:ss")]\] (Unrecognized sound)"
 		t1 += "[printedmessage]<BR>"
 	P.info = t1

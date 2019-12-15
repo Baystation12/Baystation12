@@ -423,7 +423,7 @@ obj/structure/ex_act(severity)
 	else
 		tube_dirs = parse_dirs(icon_state)
 
-		if(copytext_char(icon_state, 1, 3) == "D-" || findtext_charEx(icon_state, "Pass"))
+		if(copytext_char(icon_state, 1, 3) == "D-" || findtextEx_char(icon_state, "Pass"))
 			set_density(0)
 
 
