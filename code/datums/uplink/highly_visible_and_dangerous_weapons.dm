@@ -104,7 +104,7 @@
 /datum/uplink_item/item/visible_weapons/heavysniper
 	name = "Anti-materiel Sniper Rifle"
 	desc = "A secure briefcase that contains an immensely powerful penetrating rifle, as well as seven extra sniper rounds."
-	item_cost = 68
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT - (DEFAULT_TELECRYSTAL_AMOUNT % 6)) / 6
 	path = /obj/item/weapon/storage/secure/briefcase/heavysniper
 	antag_roles = list(MODE_MERCENARY)
 
