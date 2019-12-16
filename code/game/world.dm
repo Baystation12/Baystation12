@@ -66,6 +66,8 @@
 
 #define RECOMMENDED_VERSION 512
 /world/New()
+
+	enable_debugger()
 	//set window title
 	name = "[server_name] - [GLOB.using_map.full_name]"
 
@@ -688,3 +690,8 @@ proc/establish_old_db_connection()
 		return 1
 
 #undef FAILED_DB_CONNECTION_CUTOFF
+
+/world/proc/enable_debugger()
+	var/dll = world.GetConfig("env", "EXTOOLS_DLL")
+	if (dll)
+		call(dll, "debug_initialize")()
