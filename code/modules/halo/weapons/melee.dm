@@ -36,16 +36,15 @@
 	attack_verb = list("chopped", "torn", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	unacidable = 1
-	lunge_dist = 3
+	lunge_dist = 2
 
 /obj/item/weapon/material/machete/officersword
 	name = "CO's Sword"
-	w_class = ITEM_SIZE_LARGE
 	desc = "A reinforced sword capable of safely parrying blows from energy weapons."
-	icon_state = "officersword"
-	item_state = "officersword"
+	icon_state = "COsword_obj"
+	item_state = "machete"
 	applies_material_colour = FALSE
-	lunge_dist = 4
+	lunge_dist = 3
 	parry_projectiles = 1
 
 //Humbler Baton

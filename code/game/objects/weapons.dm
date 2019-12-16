@@ -11,7 +11,7 @@
 
 /obj/item/weapon/handle_shield(var/mob/user, var/damage, var/atom/dam_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/damage_source = dam_source
-	if(!attacker && isnull(damage_source))
+	if(isnull(damage_source))
 		return 0
 	//Checks done, Parrycode starts here.//
 	if(attacker && istype(attacker,/mob/living) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
@@ -21,18 +21,8 @@
 	var/obj/item/weapon/gun/this_weapon = src
 	if(istype(this_weapon) && this_weapon.one_hand_penalty == -1 && !this_weapon.is_held_twohanded(user))//Ensure big twohanded guns are worse at parrying when not twohanded.
 		parry_chance_divisor = 2
-	if(istype(damage_source,/obj/item/projectile))
-		if(parry_projectiles)
-			parry_chance_divisor = 2
-			force_half_damage = 1
-		else
-			return 0
 	if(!prob((BASE_WEAPON_PARRYCHANCE * (w_class - 1))/parry_chance_divisor)) //Do our base parrychance calculation.
 		return 0
-	if(!damage_source || damage_source == attacker)
-		visible_message("<span class = 'danger'>[user] counters [attacker]'s unarmed attack with their [src.name]!</span>")
-		attack(attacker,user,pick("l_arm","r_arm","chest"))
-		force_half_damage = 1
 	else if (attacker)
 		visible_message("<span class = 'danger'>[user] parries [attacker]'s [damage_source.name] with their [src.name]</span>")
 		playsound(loc, hitsound, 50, 1, -1)
@@ -60,17 +50,10 @@
 
 	if(force_half_damage)
 		to_chat(user,"<span class = 'warning'>[src] fails to fully deflect [attacker]'s attack!</span>")
-		var/obj/item/projectile/proj = item_to_disintegrate
 		var/orig_force = item_to_disintegrate.force
-		if(istype(proj))
-			orig_force = proj.damage
-			proj.damage /= 2
-			spawn(2)
-				proj.damage = orig_force
-		else
-			item_to_disintegrate.force /= 2
-			spawn(2)
-				item_to_disintegrate.force = orig_force
+		item_to_disintegrate.force /= 2
+		spawn(2)
+			item_to_disintegrate.force = orig_force
 		return 0
 
 	visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]" : "[attacker]"] cuts through [mob_holding_disintegrated]'s [item_to_disintegrate.name] with their [item_to_disintegrate == damage_source ? "[src.name]" : "[damage_source.name]"], rendering it useless!</span>")
