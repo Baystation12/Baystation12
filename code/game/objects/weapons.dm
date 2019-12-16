@@ -13,6 +13,8 @@
 	var/obj/item/damage_source = dam_source
 	if(isnull(damage_source))
 		return 0
+	if(istype(damage_source,/obj/item/projectile) && !parry_projectiles)
+		return 0
 	//Checks done, Parrycode starts here.//
 	if(attacker && istype(attacker,/mob/living) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
 		return 0
