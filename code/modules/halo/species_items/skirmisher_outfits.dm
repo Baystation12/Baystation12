@@ -38,6 +38,7 @@
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/commando
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_hand = /obj/item/language_learner/unggoy_to_common
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/commando
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando
