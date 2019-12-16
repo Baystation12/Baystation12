@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Drill heads show current status while mounted and can be examined for information when not mounted on an exosuit drill."

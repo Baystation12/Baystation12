@@ -1,5 +1,0 @@
-author: "EcklesFire"
-delete-after: True
-changes: 
-  - tweak: "Adjusted renegade numbers."
-  - bugfix: "Removed duplicate vars."
