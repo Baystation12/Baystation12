@@ -46,6 +46,7 @@
 	item_state = "officersword"
 	applies_material_colour = FALSE
 	lunge_dist = 4
+	parry_projectiles = 1
 
 //Humbler Baton
 /obj/item/weapon/melee/baton/humbler
