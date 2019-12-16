@@ -202,7 +202,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 			return 1
 	return 0
 
-/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_lunge_dist(var/mob/living/carbon/human/mob)
 	return 2
 
 /obj/item/weapon/melee/energy/elite_sword/g_dagger/dropped()

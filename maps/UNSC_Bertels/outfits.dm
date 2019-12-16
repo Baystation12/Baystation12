@@ -82,7 +82,8 @@
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/co
 	shoes = /obj/item/clothing/shoes/brown
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
+	l_hand = /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum
+	belt = /obj/item/weapon/material/machete/officersword
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o6)
 
 	flags = 0

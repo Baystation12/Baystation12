@@ -111,6 +111,9 @@
 		reload_gun()
 		next_reload_time = world.time + round_reload_time
 
+/obj/machinery/deck_gun/ex_act()
+	return
+
 /obj/machinery/deck_gun/proc/do_fire_animation()
 	flick("[icon_state]_fire",src)
 

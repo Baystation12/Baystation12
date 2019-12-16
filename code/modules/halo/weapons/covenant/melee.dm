@@ -1,6 +1,5 @@
 #define ESWORD_LEAP_DIST 2
 #define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan, /datum/species/kig_yar_skirmisher)
-#define LUNGE_DELAY 5 SECONDS
 #define STAFF_LEAP_DIST 7
 
 /obj/effect/esword_path
@@ -24,8 +23,11 @@
 	sharp = 0
 	var/failsafe = 0
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
-	var/next_leapwhen
 	parry_projectiles = 1
+
+	lunge_dist = ESWORD_LEAP_DIST
+
+	unacidable = 1
 
 /obj/item/weapon/melee/energy/elite_sword/New()
 	. = ..()
@@ -50,67 +52,26 @@
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
 
-/obj/item/weapon/melee/energy/elite_sword/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
+/obj/item/weapon/melee/energy/elite_sword/get_lunge_dist(var/mob/living/carbon/human/mob)
 	if(isnull(mob) || !istype(mob))
 		return 0
 	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
 		return 4
-	return ESWORD_LEAP_DIST
-
-/obj/item/weapon/melee/energy/elite_sword/afterattack(var/atom/target,var/mob/user)
-	if(user.loc.Adjacent(target))
-		return
-	if(world.time < next_leapwhen)
-		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
-		return
-	if(!istype(target,/mob))
-		if(istype(target,/turf))
-			var/turf/targ_turf = target
-			var/list/turf_mobs = list()
-			for(var/mob/m in targ_turf.contents)
-				turf_mobs += m
-			if(turf_mobs.len > 0)
-				target = pick(turf_mobs)
-			else
-				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-				return
-		else
-			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-			return
-	if(!(target in view(7,user.loc)))
-		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
-		return
-	if(get_dist(user,target) <= get_species_leap_dist(user))
-		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
-		var/image/user_image = image(user)
-		user_image.dir = user.dir
-		for(var/i = 0 to get_dist(user,target))
-			var/obj/after_image = new /obj/effect/esword_path
-			if(i == 0)
-				after_image.loc = user.loc
-			else
-				after_image.loc = get_step(user,get_dir(user,target))
-				if(!user.Move(after_image.loc))
-					break
-			after_image.dir = user.dir
-			after_image.overlays += user_image
-			spawn(5)
-				qdel(after_image)
-		if(user.Adjacent(target) && ismob(target))
-			attack(target,user)
-		next_leapwhen = world.time + LUNGE_DELAY
+	return lunge_dist
 
 /obj/item/weapon/melee/energy/elite_sword/proc/change_misc_variables(var/deactivate = 0)
 	if(deactivate)
 		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
 		item_state_slots = null
 		hitsound = "swing_hit"
+		parry_slice_objects = 0
 	else
 		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/Energy Sword_inhand Human.dmi',slot_r_hand_str = 'code/modules/halo/icons/Energy Sword_inhand Human.dmi')
 		item_state_slots = list(
 		slot_l_hand_str = "Energy sword_inhand Human l",
 		slot_r_hand_str = "Energy sword_inhand Human r" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+		parry_slice_objects = 1
 
 /obj/item/weapon/melee/energy/elite_sword/activate(mob/living/user)
 	..()
@@ -171,6 +132,8 @@
 	sharp = 0
 	parry_projectiles = 0
 
+	lunge_dist = 2
+
 /obj/item/weapon/melee/energy/elite_sword/dagger/activate(mob/living/user)
 	..()
 	w_class = ITEM_SIZE_NORMAL
@@ -179,20 +142,22 @@
 	..()
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/melee/energy/elite_sword/dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
-	return ESWORD_LEAP_DIST
+/obj/item/weapon/melee/energy/elite_sword/dagger/get_lunge_dist(var/mob/living/carbon/human/mob)
+	return lunge_dist
 
 /obj/item/weapon/melee/energy/elite_sword/dagger/change_misc_variables(var/deactivate = 0)
 	if(deactivate)
 		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
 		item_state_slots = null
 		hitsound = "swing_hit"
+		parry_slice_objects = 0
 	else
 		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/energy_dagger_inhand.dmi',slot_r_hand_str = 'code/modules/halo/icons/energy_dagger_inhand.dmi')
 		item_state_slots = list(
 		slot_l_hand_str = "en_dag_l_hand",
 		slot_r_hand_str = "en_dag_r_hand" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+		parry_slice_objects = 1
 
 //HONOUR GUARD STAFF
 
@@ -214,13 +179,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
-
-/obj/item/weapon/melee/energy/elite_sword/honour_staff/get_species_leap_dist(var/mob/living/carbon/human/mob)
-	if(isnull(mob) || !istype(mob))
-		return 0
-	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
-		return 7
-	return STAFF_LEAP_DIST
+	lunge_dist = STAFF_LEAP_DIST
 
 /obj/item/weapon/melee/energy/elite_sword/honour_staff/activate(mob/living/user)
 	return

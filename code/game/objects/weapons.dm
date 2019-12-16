@@ -23,7 +23,7 @@
 		parry_chance_divisor = 2
 	if(istype(damage_source,/obj/item/projectile))
 		if(parry_projectiles)
-			parry_chance_divisor = 4
+			parry_chance_divisor = 2
 			force_half_damage = 1
 		else
 			return 0
@@ -45,10 +45,10 @@
 	var/mob/living/mob_holding_disintegrated
 
 	//Grab a set of references to the weapon and person being disintegrated.
-	if(istype(src,/obj/item/weapon/melee/energy/elite_sword) && !istype(damage_source,/obj/item/weapon/melee/energy/elite_sword))
+	if(parry_slice_objects && !damage_source.parry_slice_objects && !damage_source.unacidable)
 		item_to_disintegrate = damage_source
 		mob_holding_disintegrated = attacker
-	if(istype(damage_source,/obj/item/weapon/melee/energy/elite_sword) && !istype(src,/obj/item/weapon/melee/energy/elite_sword))
+	if(damage_source.parry_slice_objects && !unacidable)
 		item_to_disintegrate = src
 		mob_holding_disintegrated = user
 

@@ -35,6 +35,17 @@
 	unbreakable = 1
 	attack_verb = list("chopped", "torn", "cut")
 	hitsound = 'sound/weapons/bladeslice.ogg'
+	unacidable = 1
+	lunge_dist = 3
+
+/obj/item/weapon/material/machete/officersword
+	name = "CO's Sword"
+	w_class = ITEM_SIZE_LARGE
+	desc = "A reinforced sword capable of safely parrying blows from energy weapons."
+	icon_state = "officersword"
+	item_state = "officersword"
+	applies_material_colour = FALSE
+	lunge_dist = 4
 
 //Humbler Baton
 /obj/item/weapon/melee/baton/humbler
