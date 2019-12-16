@@ -142,11 +142,11 @@
 	bone_amount = 3
 
 //pupplies cannot wear anything.
-/mob/living/simple_animal/corgi/puppy/Topic(href, href_list)
+/mob/living/simple_animal/corgi/puppy/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(usr, "<span class='warning'>You can't fit this on [src]</span>")
-		return
-	..()
+		to_chat(user, "<span class='warning'>You can't fit this on [src]</span>")
+		return TOPIC_HANDLED
+	return ..()
 
 //LISA! SQUEEEEEEEEE~
 /mob/living/simple_animal/corgi/Lisa
@@ -164,11 +164,11 @@
 	var/puppies = 0
 
 //Lisa already has a cute bow!
-/mob/living/simple_animal/corgi/Lisa/Topic(href, href_list)
+/mob/living/simple_animal/corgi/Lisa/OnTopic(mob/user, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
-		to_chat(usr, "<span class='warning'>[src] already has a cute bow!</span>")
-		return
-	..()
+		to_chat(user, "<span class='warning'>[src] already has a cute bow!</span>")
+		return TOPIC_HANDLED
+	return ..()
 
 /mob/living/simple_animal/corgi/Lisa/Life()
 	. = ..()
