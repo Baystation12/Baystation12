@@ -10,7 +10,7 @@
 
 /obj/item/device/scanner/price/scan(atom/movable/target, mob/user)
 	scan_title = "Price estimations"
-	var/data = "\The [target]: [get_value(target)] Thalers"
+	var/data = "\The [target]: [get_value(target)] [GLOB.using_map.local_currency_name]"
 	if(!scan_data)
 		scan_data = data
 	else

@@ -110,6 +110,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/supply_currency_name = "Credits"
 	var/supply_currency_name_short = "Cr."
+	var/local_currency_name = "thalers"
+	var/local_currency_name_singular = "thaler"
+	var/local_currency_name_short = "T"
 
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
