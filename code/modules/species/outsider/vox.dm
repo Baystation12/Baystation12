@@ -39,7 +39,7 @@
 
 	cold_level_1 = 80
 	cold_level_2 = 50
-	cold_level_3 = 0
+	cold_level_3 = -1
 	
 	min_age = 1
 	max_age = 100
