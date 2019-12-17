@@ -29,8 +29,7 @@
 	light_power = 3
 
 	cell = /obj/item/weapon/cell/infinite
-	radio = /obj/item/device/radio/headset/covenant
-	common_radio = /obj/item/device/radio/headset/covenant
+	radio_key_type = /obj/item/device/encryptionkey/covenant
 
 /mob/living/silicon/robot/huragok/emp_act()
 	return
@@ -50,12 +49,13 @@
 		if(C.electronics_damage > 0)
 			C.electronics_damage = max(0,C.electronics_damage - HURAGOK_REGEN)
 
-/mob/living/silicon/robot/huragok/Initialize()
+/mob/living/silicon/robot/huragok/New()
 	. =.. ()
 	remove_language("Robot Talk", 1)
 	remove_language(LANGUAGE_EAL, 1)
-	remove_language(LANGUAGE_GALCOM, 1)
 	remove_language(LANGUAGE_SOL_COMMON, 1)
 	add_language(LANGUAGE_SIGN, 1)
+	add_language("Sangheili",1)
+	default_language = all_languages[LANGUAGE_SIGN]
 
 #undef HURAGOK_REGEN
