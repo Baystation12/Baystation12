@@ -40,6 +40,8 @@
 	set popup_menu = 0
 	if(usr!=src.occupant)
 		return
+	if(do_after(usr,1.5 SECONDS,src,1,1,INCAPACITATION_DEFAULT,1))
+		return
 	defence = !defence
 	if(defence)
 		deflect_chance += def_boost
