@@ -25,7 +25,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	flags = NO_MINOR_CUT
 	darksight = 4
 	brute_mod = 1.2
-	slowdown = -0.45
+	slowdown = -0.3
 	gluttonous = GLUT_ANYTHING
 	pixel_offset_x = -1
 	default_faction = "Covenant"
@@ -37,20 +37,6 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(-1,0),null)
 
 	roll_distance = 3
-
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/hollow_bones),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/hollow_bones),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/hollow_bones),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/hollow_bones),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/hollow_bones),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/hollow_bones),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/hollow_bones),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
-		)
 
 	pain_scream_sounds = list(\
 		'code/modules/halo/sounds/species_pain_screams/kiggyscream_1.ogg',
