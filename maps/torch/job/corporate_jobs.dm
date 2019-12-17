@@ -72,6 +72,7 @@
 						access_nanotrasen, access_commissary, access_petrov,
 						access_sec_guard)
 	defer_roundstart_spawn = TRUE
+	is_semi_antagonist = TRUE
 
 /datum/job/bodyguard/is_position_available()
 	if(..())
