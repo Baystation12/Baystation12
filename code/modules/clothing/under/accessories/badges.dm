@@ -174,7 +174,7 @@
 	name = "\improper SFP Agent's badge"
 	desc = "A leather-backed gold badge displaying the crest of the Sol Federal Police."
 	icon_state = "agentbadge"
-	slot_flags = SLOT_BELT | SLOT_TIE
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
 	slot = ACCESSORY_SLOT_INSIGNIA
 	badge_string = "Sol Federal Police"
 
