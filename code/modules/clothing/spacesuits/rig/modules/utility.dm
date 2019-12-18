@@ -25,6 +25,28 @@
 
 	var/obj/item/device
 
+obj/item/rig_module/device/Initialize()
+	. = ..()
+	if(ispath(device))
+		device = new device(src)
+		device.canremove = 0
+
+/obj/item/rig_module/device/engage(atom/target)
+	if(!..() || !device)
+		return 0
+
+	if(!target)
+		device.attack_self(holder.wearer)
+		return 1
+
+	if(!target.Adjacent(holder.wearer))
+		return 0
+
+	var/resolved = target.attackby(device,holder.wearer)
+	if(!resolved && device && target)
+		device.afterattack(target,holder.wearer,1)
+	return 1
+
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
 	desc = "A hardsuit-mounted health scanner."
@@ -107,29 +129,6 @@
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
 	device = /obj/item/weapon/rcd/mounted
 
-/obj/item/rig_module/device/Initialize()
-	. = ..()
-	if(ispath(device))
-		device = new device(src)
-		device.canremove = 0
-
-/obj/item/rig_module/device/engage(atom/target)
-	if(!..() || !device)
-		return 0
-
-	if(!target)
-		device.attack_self(holder.wearer)
-		return 1
-
-	if(!target.Adjacent(holder.wearer))
-		return 0
-
-	var/resolved = target.attackby(device,holder.wearer)
-	if(!resolved && device && target)
-		device.afterattack(target,holder.wearer,1)
-	return 1
-
-
 /obj/item/rig_module/chem_dispenser
 	name = "mounted chemical dispenser"
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
@@ -139,19 +138,28 @@
 	toggleable = 0
 	disruptive = 0
 	use_power_cost = 500
+	module_cooldown = 5
 
 	engage_string = "Inject"
 
 	interface_name = "integrated chemical dispenser"
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
-
+	var/is_rescue = 0
+	
+	var/obj/item/prybar = /obj/item/weapon/crowbar/prybar
+	var/obj/item/analyzer = /obj/item/device/scanner/health
+	var/obj/item/inflatable_dispenser = /obj/item/weapon/inflatable_dispenser/mini
+	
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
 		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
 		list("dylovene",      "dylovene",      /datum/reagent/dylovene,          80),
 		list("hyronalin",     "hyronalin",     /datum/reagent/hyronalin,         80),
 		list("spaceacillin",  "spaceacillin",  /datum/reagent/spaceacillin,      80),
-		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80)
+		list("tramadol",      "tramadol",      /datum/reagent/tramadol,          80),
+		list("nanoblood",     "nanoblood",     /datum/reagent/nanoblood,         80),
+		list("bicaridine",    "bicaridine",    /datum/reagent/bicaridine,        0),
+		list("dermaline",     "dermaline",     /datum/reagent/dermaline,         0)
 		)
 
 	var/max_reagent_volume = 80 //Used when refilling.
@@ -208,6 +216,27 @@
 
 	if(!..())
 		return 0
+	
+	if(!target.Adjacent(holder.wearer))
+		return 0
+		
+	var/obj/item/use_on
+	if(is_rescue)
+		
+		if(istype(target,/obj/machinery/door))
+			use_on = prybar
+			
+		else if(istype(target, /obj/item/inflatable) || istype(target, /obj/structure/inflatable) || istype(target, /turf) || istype(target, /obj/item/inflatable))
+			use_on = inflatable_dispenser
+			
+		else if (istype(target,/mob/living/carbon) && holder.wearer.a_intent == I_DISARM)
+			use_on = analyzer
+			
+		if(use_on)
+			var/resolved = target.attackby(use_on,holder.wearer)
+			if(!resolved && use_on && target)
+				use_on.afterattack(target,holder.wearer,1)
+				return 1
 
 	var/mob/living/carbon/human/H = holder.wearer
 
@@ -233,6 +262,7 @@
 			target_mob = target
 		else
 			return 0
+			
 	else
 		target_mob = H
 
@@ -245,6 +275,17 @@
 	if(charge.charges < 0) charge.charges = 0
 
 	return 1
+
+/obj/item/rig_module/chem_dispenser/Initialize()
+	. = ..()
+	
+	prybar = new prybar (src)
+	analyzer = new analyzer(src)
+	inflatable_dispenser = new inflatable_dispenser(src)
+	
+	prybar.canremove = 0
+	analyzer.canremove = 0
+	inflatable_dispenser.canremove = 0
 
 /obj/item/rig_module/chem_dispenser/combat
 
@@ -261,7 +302,6 @@
 	interface_name = "combat chem dispenser"
 	interface_desc = "Dispenses loaded chemicals directly into the bloodstream."
 
-
 /obj/item/rig_module/chem_dispenser/injector
 
 	name = "mounted chemical injector"
@@ -274,7 +314,17 @@
 
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
-
+	
+/obj/item/rig_module/chem_dispenser/injector/rescue
+	name = "rescue module"
+	desc = "Ultimate rescue tool, combines prybar, health analyzer, inflatable dispenser and chemical injector in one module!."
+	interface_name = "rescue module"
+	interface_desc = "Can dispense chemicals, show health readout, pry open doors and deploy inflatable doors"
+	engage_string = "Inject/Pry open/Use"
+	
+	is_rescue = 1
+	use_power_cost = 1000
+	
 /obj/item/rig_module/voice
 
 	name = "hardsuit voice synthesiser"
@@ -498,3 +548,4 @@
 	H.bodytemperature -= temp_adj
 	active_power_cost = round((temp_adj/max_cooling)*charge_consumption)
 	return active_power_cost
+	
