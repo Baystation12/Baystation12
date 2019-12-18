@@ -250,7 +250,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	armor_penetration = 35
 	var/explode_delay = 10 SECONDS
 	var/explode_at = -1
-	var/regen_delay = 40 SECONDS
+	var/regen_delay = 2 MINUTES
 	var/regen_at = -1
 	var/explode_damage = 40
 
