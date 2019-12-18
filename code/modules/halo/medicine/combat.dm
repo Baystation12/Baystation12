@@ -49,7 +49,7 @@
 /obj/item/stack/medical/compression
 	name = "compression bandages"
 	singular_name = "compression bandage"
-	desc = "Special bandages designed reduce the severity of arterial bleeding"
+	desc = "Special bandages designed to reduce the severity of arterial bleeding"
 	amount = 8
 
 	icon_state = "brutepack" //todo: change this?
