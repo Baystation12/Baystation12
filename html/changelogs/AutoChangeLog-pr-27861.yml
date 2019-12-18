@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "PTR bullets aren't hitscan and do a little less damage and penetration."
