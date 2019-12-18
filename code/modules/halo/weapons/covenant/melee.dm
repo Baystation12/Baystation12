@@ -233,6 +233,129 @@
 /obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
 	return
 
+/obj/item/weapon/material/shard/shrapnel/blamite
+	name = "Blamite Blade"
+
+/obj/item/weapon/melee/blamite
+	name = "Blamite Weapon"
+	desc = "\
+A weapon with a blade made of Blamite. An internal mechanism cultivates the quick growth of a blamite crystal,\
+although this leaves it brittle and prone to breaking.\
+Luckily, this isn't a downside due to the explosive properties of such a large and quick grown crystal."
+	icon = 'code/modules/halo/weapons/icons/blamite.dmi'
+	icon_state = "invalid"
+	item_icons = list(slot_l_hand_str ='code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi')
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BACK | SLOT_BELT | SLOT_POCKET
+	armor_penetration = 35
+	var/explode_delay = 10 SECONDS
+	var/explode_at = -1
+	var/regen_delay = 40 SECONDS
+	var/regen_at = -1
+	var/explode_damage = 40
+
+/obj/item/weapon/melee/blamite/update_icon()
+	if(regen_at != -1)
+		icon_state = "[initial(icon_state)]_handle"
+	else if(explode_at != -1)
+		icon_state = "[initial(icon_state)]_charging"
+	else
+		icon_state = initial(icon_state)
+
+/obj/item/weapon/melee/blamite/proc/set_blade_active(var/active)
+	if(active)
+		force = initial(force)
+		throwforce = initial(throwforce)
+		parry_projectiles = initial(parry_projectiles)
+		lunge_dist = initial(lunge_dist)
+		armor_penetration = initial(armor_penetration)
+	else
+		force = 5
+		throwforce = 5
+		parry_projectiles = 0
+		armor_penetration = 0
+		lunge_dist = 0
+
+/obj/item/weapon/melee/blamite/proc/regen_crystal()
+	regen_at = -1
+	update_icon()
+	set_blade_active(1)
+
+/obj/item/weapon/melee/blamite/proc/det_in_hand()
+	regen_at = world.time + regen_delay * 2
+	explode_at = -1
+	update_icon()
+	set_blade_active(0)
+	//you fucked up and held it for too long. kablooey//
+	var/mob/living/holder = loc
+	if(istype(holder))
+		holder.adjustFireLoss(explode_damage * 1.5) //Enough to gib a limb
+		holder.visible_message("<span class = 'danger'>[name] overloads, burning [holder.name]!</spam>")
+	else
+		visible_message("<span class = 'warning'>[name] overloads, singing the air around it!</spam>")
+	GLOB.processing_objects -= src
+
+/obj/item/weapon/melee/blamite/proc/do_explode_in_player(var/mob/living/player)
+	//Kabloeey in a player//
+	if(player)
+		player.adjustFireLoss(explode_damage)
+		player.visible_message("<span class = 'notice'>The embedded Blamite Blade overloads, burning [player.name]!</spam>")
+		GLOB.processing_objects -= src
+
+/obj/item/weapon/melee/blamite/proc/pre_explode_in_player(var/mob/living/user,var/mob/living/carbon/human/target)
+	if(!istype(target))
+		return
+	user.visible_message("<span class = 'warning'>[user.name] lodges the blade of their [name] into [target.name], snapping it off at the hilt.</span>")
+	regen_at = world.time + regen_delay
+	explode_at = -1
+	update_icon()
+	set_blade_active(0)
+	//Create shard, embed in enemy. Delay explosion by timeframe, then check for shard again. If present, call do_explode_in_player()//
+	var/obj/shard = new /obj/item/weapon/material/shard/shrapnel/blamite
+	var/obj/item/organ/external/embed_organ = pick(target.organs)
+	embed_organ.embed(shard)
+	spawn(explode_delay)
+		if(target && locate(/obj/item/weapon/material/shard/shrapnel/blamite) in target.embedded)
+			do_explode_in_player(target)
+
+/obj/item/weapon/melee/blamite/attack_self(var/mob/user)
+	if(regen_at != -1)
+		to_chat(user,"<span class = 'notice'>[name] has no blade to prime for explosion!</span>")
+		return
+	if(explode_at != -1)
+		to_chat(user,"<span class = 'notice'>[name] is already primed for explosion.</span>")
+		return
+	user.visible_message("<span class = 'warning'>[user.name] primes their [src] for detonation!</span>")
+	explode_at = world.time + explode_delay
+	GLOB.processing_objects |= src
+	update_icon()
+
+/obj/item/weapon/melee/blamite/process()
+	if(explode_at != -1 && world.time > explode_at)
+		det_in_hand()
+	if(regen_at != -1 && world.time > regen_at)
+		regen_crystal()
+
+/obj/item/weapon/melee/blamite/apply_hit_effect(var/mob/living/carbon/human/target, mob/living/user, var/hit_zone)
+	. = ..()
+	if(explode_at == -1 || . == 100 || !istype(target))
+		return
+	pre_explode_in_player(user,target)
+
+/obj/item/weapon/melee/blamite/cutlass
+	name = "Blamite Cutlass"
+	icon_state = "bl_dag"
+	item_state = "blamite_cutlass"
+	force = 30
+	throwforce = 15
+
+/obj/item/weapon/melee/blamite/dagger
+	name = "Blamite Dagger"
+	icon_state = "bl_dag"
+	item_state = "blamite_dagger"
+	force = 25
+	throwforce = 10
+
 /obj/item/weapon/melee/baton/humbler/covenant
 	name = "Type-12 Antipersonnel Incapacitator"
 	desc = "A retractable baton capable of inducing a large amount of pain via electrical shocks."

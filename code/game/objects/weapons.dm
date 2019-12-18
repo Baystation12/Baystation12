@@ -47,7 +47,7 @@
 		item_to_disintegrate = src
 		mob_holding_disintegrated = user
 
-	if(isnull(item_to_disintegrate) || isnull(mob_holding_disintegrated) && !force_half_damage)
+	if(isnull(item_to_disintegrate))
 		return 1
 
 	if(!isnull(item_to_disintegrate) && istype(item_to_disintegrate,/obj/item/weapon/gun) && !prob(BASE_PARRY_PLASMA_DESTROY))
