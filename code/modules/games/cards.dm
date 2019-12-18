@@ -4,10 +4,43 @@
 	var/back_icon = "card_back"
 	var/desc = "regular old playing card."
 
+/datum/playingcard/proc/card_image(concealed, deck_icon)
+	return image(deck_icon, concealed ? back_icon : card_icon)
+
+/datum/playingcard/custom
+	var/use_custom_front = TRUE
+	var/use_custom_back = TRUE
+
+/datum/playingcard/custom/card_image(concealed, deck_icon)
+	if(concealed)
+		return image((src.use_custom_back ? CUSTOM_ITEM_OBJ : deck_icon), "[back_icon]")
+	else
+		return image((src.use_custom_front ? CUSTOM_ITEM_OBJ : deck_icon), "[card_icon]")
+
 /obj/item/weapon/deck
 	w_class = ITEM_SIZE_SMALL
 	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
+
+/obj/item/weapon/deck/inherit_custom_item_data(var/datum/custom_item/citem)
+	. = ..()
+	if(islist(citem.additional_data["extra_cards"]))
+		for(var/card_decl in citem.additional_data["extra_cards"])
+			if(islist(card_decl))
+				var/datum/playingcard/custom/P = new()
+				if(!isnull(card_decl["name"]))
+					P.name = card_decl["name"]
+				if(!isnull(card_decl["card_icon"]))
+					P.card_icon = card_decl["card_icon"]
+				if(!isnull(card_decl["back_icon"]))
+					P.back_icon = card_decl["back_icon"]
+				if(!isnull(card_decl["desc"]))
+					P.desc = card_decl["desc"]
+				if(!isnull(card_decl["use_custom_front"]))
+					P.use_custom_front = card_decl["use_custom_front"]
+				if(!isnull(card_decl["use_custom_back"]))
+					P.use_custom_back = card_decl["use_custom_back"]
+				cards += P
 
 /obj/item/weapon/deck/holder
 	name = "card box"
@@ -254,7 +287,7 @@
 
 	if(cards.len == 1)
 		var/datum/playingcard/P = cards[1]
-		var/image/I = new(src.icon, (concealed ? "[P.back_icon]" : "[P.card_icon]") )
+		var/image/I = P.card_image(concealed, src.icon)
 		I.pixel_x += (-5+rand(10))
 		I.pixel_y += (-5+rand(10))
 		overlays += I
@@ -277,7 +310,7 @@
 				M.Translate(-2,  0)
 	var/i = 0
 	for(var/datum/playingcard/P in cards)
-		var/image/I = new(src.icon, (concealed ? "[P.back_icon]" : "[P.card_icon]") )
+		var/image/I = P.card_image(concealed, src.icon)
 		//I.pixel_x = origin+(offset*i)
 		switch(direction)
 			if(SOUTH)
