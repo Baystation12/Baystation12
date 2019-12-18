@@ -101,25 +101,15 @@
 
 	return 1
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/get_filling_image(amount, texture)
+/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/get_filling_overlay(amount, overlay)
 	var/image/I = new()
-	if(!filling_icons_cache["[base_icon][amount][texture]"])
+	if(!filling_icons_cache["[base_icon][amount][overlay]"])
 		var/icon/base = new/icon(icon, "[base_icon][amount]")
-		if(texture)
-			var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', texture)
+		if(overlay)
+			var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', overlay)
 			base.Blend(extra, ICON_MULTIPLY)
-		filling_icons_cache["[base_icon][amount][texture]"] = new/mutable_appearance(base)
-	I.appearance = filling_icons_cache["[base_icon][amount][texture]"]
-	return I
-
-/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/get_extra_overlay(amount, extra_type)
-	var/image/I = new()
-	if(!filling_icons_cache["[base_icon][amount]-[extra_type]"])
-		var/icon/base = new/icon(icon, "[base_icon][amount]")
-		var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', extra_type)
-		base.Blend(extra, ICON_MULTIPLY)
-		filling_icons_cache["[base_icon][amount]-[extra_type]"] = new/mutable_appearance(base)
-	I.appearance = filling_icons_cache["[base_icon][amount]-[extra_type]"]
+		filling_icons_cache["[base_icon][amount][overlay]"] = image(base)
+	I.appearance = filling_icons_cache["[base_icon][amount][overlay]"]
 	return I
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/on_update_icon()
@@ -137,23 +127,23 @@
 		var/amnt = get_filling_state()
 
 		if(has_ice())
-			over_liquid |= image(icon, src, "[base_icon][amnt]_ice", -1)
+			over_liquid |= image(icon, src, "[base_icon][amnt]_ice")
 
 		if(has_fizz())
-			over_liquid |= get_extra_overlay(amnt, "fizz")
+			over_liquid |= get_filling_overlay(amnt, "fizz")
 
 		if(has_vapor())
-			over_liquid |= image(icon, src, "[base_icon]_vapor", -1)
+			over_liquid |= image(icon, src, "[base_icon]_vapor")
 
 		for(var/S in R.glass_special)
 			if("[base_icon]_[S]" in icon_states(icon))
-				under_liquid |= image(icon, src, "[base_icon]_[S]", -3)
+				under_liquid |= image(icon, src, "[base_icon]_[S]")
 			else if("[base_icon][amnt]_[S]" in icon_states(icon))
-				over_liquid |= image(icon, src, "[base_icon][amnt]_[S]", -1)
+				over_liquid |= image(icon, src, "[base_icon][amnt]_[S]")
 
 		underlays += under_liquid
 
-		var/image/filling = get_filling_image(amnt, R.glass_icon)
+		var/image/filling = get_filling_overlay(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
 		if(filling_overlayed)
 			overlays += filling

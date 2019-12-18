@@ -3,17 +3,12 @@
 		return "#ffffffff"
 	if(reagent_list.len == 1) // It's pretty common and saves a lot of work
 		var/datum/reagent/R = reagent_list[1]
-		if(length(R.color) == 7)
-			return R.color + num2hex(R.alpha)
-		else
-			return R.color
+		return R.color + num2hex(R.alpha)
 
 	var/list/colors = list(0, 0, 0, 0)
 	var/tot_w = 0
 	for(var/datum/reagent/R in reagent_list)
-		var/hex = uppertext(R.color)
-		if(length(hex) == 7)
-			hex += num2hex(R.alpha)
+		var/hex = uppertext(R.color) + num2hex(R.alpha)
 		if(length(hex) != 9) // PANIC PANIC PANIC
 			warning("Reagent [R.type] has an incorrect color set ([R.color])")
 			hex = "#ffffffFF"
