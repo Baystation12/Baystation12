@@ -350,6 +350,12 @@
 	required_reagents = list(/datum/reagent/carbon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/dylovene = 1)
 	result_amount = 2
 
+/datum/chemical_reaction/otomax
+	name = "Otomax"
+	result = /datum/reagent/otomax
+	required_reagents = list(/datum/reagent/carbon = 1, /datum/reagent/hydrazine = 1, /datum/reagent/potassium = 1)
+	result_amount = 2
+
 /datum/chemical_reaction/ethylredoxrazine
 	name = "Ethylredoxrazine"
 	required_reagents = list(/datum/reagent/acetone = 1, /datum/reagent/dylovene = 1, /datum/reagent/carbon = 1)

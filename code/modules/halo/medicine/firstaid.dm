@@ -49,6 +49,7 @@
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector/painkiller = 3,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector/antibiotic = 2,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector/necrosis,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector/otomax,
 		/obj/item/stack/medical/compression,
 		/obj/item/stack/medical/splint,
 		/obj/item/device/healthanalyzer

@@ -171,7 +171,7 @@
 	else if(ear_damage < 25)
 		adjustEarDamage(-0.05, -1)	// having ear damage impairs the recovery of ear_deaf
 	else if(ear_damage < 100)
-		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100. TODO meds that heal ear_damage
+		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100.
 
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()
