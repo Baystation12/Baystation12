@@ -1,4 +1,12 @@
 <h3>Fusion plant: {{:data.id}}</h3>
+<div class="item">
+	<div class="itemLabel">
+		Injector Control:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Toggle All', null, {'global_toggle' : 1})}}
+	</div>
+</div>
 {{for data.injectors}}
 	<h3>{{:value.id}}</h3>
 	<div class="item">
@@ -11,6 +19,14 @@
 			 {{else}}
 				Offline.<br/>{{:helper.link('Start up.', null, {'toggle_injecting': value.ref})}}
 			 {{/if}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Injection rate
+		</div>
+		<div class="itemContent">
+			{{:helper.link(value.injection_rate, null, {'machine': value.ref, 'injection_rate': 1})}}
 		</div>
 	</div>
 	<div class="item">

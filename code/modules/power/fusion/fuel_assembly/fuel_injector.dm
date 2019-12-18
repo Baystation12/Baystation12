@@ -16,6 +16,7 @@
 	var/initial_id_tag
 	var/injecting = 0
 	var/obj/item/weapon/fuel_assembly/cur_assembly
+	var/injection_rate = 1
 
 /obj/machinery/fusion_fuel_injector/Initialize()
 	set_extension(src, /datum/extension/local_network_member)
@@ -112,7 +113,7 @@
 		var/amount_left = 0
 		for(var/reagent in cur_assembly.rod_quantities)
 			if(cur_assembly.rod_quantities[reagent] > 0)
-				var/amount = cur_assembly.rod_quantities[reagent] * fuel_usage
+				var/amount = cur_assembly.rod_quantities[reagent] * fuel_usage * injection_rate
 				if(amount < 1)
 					amount = 1
 				var/obj/effect/accelerated_particle/A = new/obj/effect/accelerated_particle(get_turf(src), dir)
