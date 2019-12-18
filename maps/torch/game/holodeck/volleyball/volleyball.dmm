@@ -1,0 +1,292 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"b" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert4"
+	},
+/area/holodeck/volleyball)
+"c" = (
+/obj/effect/floor_decal/beach/corner{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"d" = (
+/obj/effect/floor_decal/beach{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"e" = (
+/obj/item/weapon/beach_ball/holovolleyball,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"f" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"g" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/beach{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"j" = (
+/obj/effect/floor_decal/spline/plain,
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert1"
+	},
+/area/holodeck/volleyball)
+"k" = (
+/obj/effect/floor_decal/beach/corner,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"l" = (
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"m" = (
+/obj/effect/floor_decal/beach{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"o" = (
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"p" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"q" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert3"
+	},
+/area/holodeck/volleyball)
+"s" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert1"
+	},
+/area/holodeck/volleyball)
+"t" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert2"
+	},
+/area/holodeck/volleyball)
+"u" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert2"
+	},
+/area/holodeck/volleyball)
+"v" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert4"
+	},
+/area/holodeck/volleyball)
+"y" = (
+/obj/effect/floor_decal/beach{
+	dir = 8
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"z" = (
+/obj/effect/floor_decal/beach{
+	dir = 4
+	},
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"D" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"E" = (
+/obj/effect/floor_decal/spline/plain,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"F" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 4
+	},
+/obj/structure/holonet/end{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"H" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert2"
+	},
+/area/holodeck/volleyball)
+"L" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 8
+	},
+/obj/structure/holonet/end,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"O" = (
+/obj/effect/floor_decal/beach{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"P" = (
+/obj/structure/holonet,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"R" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/beach{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/volleyball)
+"W" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+"X" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/volleyball)
+
+(1,1,1) = {"
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+"}
+(2,1,1) = {"
+k
+y
+R
+R
+R
+O
+y
+y
+y
+y
+"}
+(3,1,1) = {"
+m
+u
+D
+D
+D
+L
+D
+D
+D
+p
+"}
+(4,1,1) = {"
+m
+f
+l
+l
+s
+P
+H
+l
+b
+j
+"}
+(5,1,1) = {"
+m
+f
+q
+l
+l
+P
+l
+l
+l
+E
+"}
+(6,1,1) = {"
+m
+f
+l
+l
+l
+P
+l
+l
+l
+E
+"}
+(7,1,1) = {"
+m
+f
+l
+l
+l
+P
+l
+e
+q
+E
+"}
+(8,1,1) = {"
+m
+v
+W
+t
+W
+F
+W
+W
+W
+X
+"}
+(9,1,1) = {"
+c
+z
+g
+g
+g
+d
+g
+g
+g
+z
+"}
+(10,1,1) = {"
+o
+o
+o
+o
+o
+o
+o
+o
+o
+o
+"}

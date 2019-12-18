@@ -7,6 +7,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/space_ruins_templates = list()
 	var/list/exoplanet_ruins_templates = list()
 	var/list/away_sites_templates = list()
+	var/list/holodeck_templates = list()
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
 
@@ -24,6 +25,7 @@ SUBSYSTEM_DEF(mapping)
 	space_ruins_templates = SSmapping.space_ruins_templates
 	exoplanet_ruins_templates = SSmapping.exoplanet_ruins_templates
 	away_sites_templates = SSmapping.away_sites_templates
+	holodeck_templates = SSmapping.holodeck_templates
 
 /datum/controller/subsystem/mapping/proc/preloadTemplates(path = "maps/templates/") //see master controller setup
 	var/list/filelist = flist(path)
@@ -68,3 +70,5 @@ SUBSYSTEM_DEF(mapping)
 			space_ruins_templates[MT.name] = MT
 		else if(istype(MT, /datum/map_template/ruin/away_site))
 			away_sites_templates[MT.name] = MT
+		else if(istype(MT, /datum/map_template/holodeck))
+			holodeck_templates[MT.name] = MT

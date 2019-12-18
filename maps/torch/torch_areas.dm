@@ -1323,77 +1323,81 @@
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
 
-/area/holodeck/source_plating
+/area/holodeck/plating
 	name = "\improper Holodeck - Off"
 
-/area/holodeck/source_emptycourt
+/area/holodeck/emptycourt
 	name = "\improper Holodeck - Empty Court"
 	sound_env = ARENA
 
-/area/holodeck/source_boxingcourt
+/area/holodeck/boxingcourt
 	name = "\improper Holodeck - Boxing Court"
 	sound_env = ARENA
 
-/area/holodeck/source_basketball
+/area/holodeck/basketball
 	name = "\improper Holodeck - Basketball Court"
 	sound_env = ARENA
 
-/area/holodeck/source_thunderdomecourt
+/area/holodeck/thunderdomecourt
 	name = "\improper Holodeck - Thunderdome Court"
 	sound_env = ARENA
 
-/area/holodeck/source_courtroom
+/area/holodeck/courtroom
 	name = "\improper Holodeck - Courtroom"
 	sound_env = AUDITORIUM
 
-/area/holodeck/source_beach
+/area/holodeck/beach
 	name = "\improper Holodeck - Beach"
 	sound_env = PLAIN
 
-/area/holodeck/source_wildlife
+/area/holodeck/wildlife
 	name = "\improper Holodeck - Wildlife Simulation"
 
-/area/holodeck/source_meetinghall
+/area/holodeck/meetinghall
 	name = "\improper Holodeck - Meeting Hall"
 	sound_env = AUDITORIUM
 
-/area/holodeck/source_theatre
+/area/holodeck/theatre
 	name = "\improper Holodeck - Theatre"
 	sound_env = CONCERT_HALL
 
-/area/holodeck/source_picnicarea
+/area/holodeck/picnicarea
 	name = "\improper Holodeck - Picnic Area"
 	sound_env = PLAIN
 
-/area/holodeck/source_snowfield
+/area/holodeck/snowfield
 	name = "\improper Holodeck - Snow Field"
 	sound_env = FOREST
 
-/area/holodeck/source_desert
+/area/holodeck/desert
 	name = "\improper Holodeck - Desert"
 	sound_env = PLAIN
 
-/area/holodeck/source_space
+/area/holodeck/space
 	name = "\improper Holodeck - Space"
 	has_gravity = 0
 	sound_env = SPACE
 
-/area/holodeck/source_cafe
+/area/holodeck/cafe
 	name = "\improper Holodeck - Cafe"
 	sound_env = PLAIN
 
-/area/holodeck/source_volleyball
+/area/holodeck/volleyball
 	name = "\improper Holodeck - Volleyball"
 	sound_env = PLAIN
 
-/area/holodeck/source_temple
+/area/holodeck/temple
 	name = "\improper Holodeck - Temple"
 	sound_env = SMALL_ENCLOSED
 
-/area/holodeck/source_plaza
+/area/holodeck/plaza
 	name = "\improper Holodeck - Plaza"
 	sound_env = SMALL_ENCLOSED
 
+/area/holodeck/firingrange
+	name = "\improper Holodeck - Firing Range"
+	sound_env = SMALL_ENCLOSED
+	
 // Engineering
 
 /area/engineering/atmos/storage

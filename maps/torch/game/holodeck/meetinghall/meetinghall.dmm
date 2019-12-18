@@ -1,0 +1,299 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"d" = (
+/obj/effect/floor_decal/carpet{
+	dir = 5
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 6
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"e" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"f" = (
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 5
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"h" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/meetinghall)
+"i" = (
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/meetinghall)
+"j" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"o" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet{
+	dir = 8
+	},
+/area/holodeck/meetinghall)
+"p" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"r" = (
+/obj/structure/flora/pottedplant{
+	icon_state = "plant-06"
+	},
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/meetinghall)
+"u" = (
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/meetinghall)
+"v" = (
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"w" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/meetinghall)
+"D" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"F" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"G" = (
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"K" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/lino,
+/area/holodeck/meetinghall)
+"L" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"O" = (
+/turf/simulated/floor/holofloor/lino,
+/area/holodeck/meetinghall)
+"P" = (
+/obj/structure/table/holo_woodentable,
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/meetinghall)
+"S" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"T" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+"U" = (
+/obj/structure/holostool,
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/meetinghall)
+
+(1,1,1) = {"
+i
+i
+h
+K
+d
+d
+O
+O
+O
+O
+"}
+(2,1,1) = {"
+i
+i
+h
+K
+D
+F
+F
+F
+U
+O
+"}
+(3,1,1) = {"
+i
+v
+P
+K
+e
+p
+p
+p
+S
+O
+"}
+(4,1,1) = {"
+i
+G
+P
+K
+e
+p
+p
+p
+S
+O
+"}
+(5,1,1) = {"
+i
+G
+P
+K
+e
+p
+p
+p
+S
+O
+"}
+(6,1,1) = {"
+i
+G
+P
+K
+e
+p
+p
+p
+S
+O
+"}
+(7,1,1) = {"
+i
+f
+P
+K
+e
+p
+p
+p
+S
+O
+"}
+(8,1,1) = {"
+i
+i
+h
+K
+T
+L
+L
+o
+j
+O
+"}
+(9,1,1) = {"
+i
+i
+h
+K
+O
+O
+O
+O
+O
+O
+"}
+(10,1,1) = {"
+r
+i
+h
+w
+u
+u
+u
+u
+u
+u
+"}

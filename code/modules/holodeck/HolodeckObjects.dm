@@ -90,6 +90,7 @@
 	icon_state = "reinforced"
 
 /turf/simulated/floor/holofloor/space/New()
+	..()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
 /turf/simulated/floor/holofloor/beach
@@ -247,12 +248,10 @@
 	var/item_color
 
 /obj/item/weapon/holo/esword/green
-	New()
-		item_color = "green"
+	item_color = "green"
 
 /obj/item/weapon/holo/esword/red
-	New()
-		item_color = "red"
+	item_color = "red"
 
 /obj/item/weapon/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	. = ..()
@@ -266,6 +265,7 @@
 	return active ? ..() : 0
 
 /obj/item/weapon/holo/esword/New()
+	..()
 	item_color = pick("red","blue","green","purple")
 
 /obj/item/weapon/holo/esword/attack_self(mob/living/user as mob)
@@ -377,10 +377,6 @@
 	to_chat(user, "The AI is not to interact with these devices!")
 	return
 
-/obj/machinery/readybutton/New()
-	..()
-
-
 /obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	to_chat(user, "The device is a solid button, there's nothing you can do with it!")
 
@@ -425,6 +421,58 @@
 	for(var/mob/M in currentarea)
 		to_chat(M, "FIGHT!")
 
+// Firing Range Objects
+
+/obj/machinery/reset_holotarget
+	name = "Reset Holo-targets"
+	desc = "This button is used to replace your holotarget, and clear away the mess."
+	icon = 'icons/obj/stationobjs.dmi'
+	icon_state = "blastctrl"
+	var/holotarget_tag = null
+	var/area/currentarea = null
+	var/list/obj/effect/landmark/target_landmarks = list()
+
+	anchored = 1.0
+	idle_power_usage = 2
+	active_power_usage = 6
+	power_channel = ENVIRON
+
+/obj/machinery/reset_holotarget/physical_attack_hand()
+	currentarea = get_area(src)
+	if(!currentarea)
+		qdel(src)
+		return TRUE
+
+	for(var/mob/living/carbon/human/dummy/holotarget/H in currentarea)
+		if(holotarget_tag == H.target_tag)
+			if(has_extension(H, /datum/extension/holographic))
+				H.rejuvenate()
+				playsound(src.loc, 'sound/effects/holo_beep.ogg', 25, 2)
+	
+	for(var/obj/effect/decal/cleanable/blood/B in currentarea)
+		qdel(B)
+
+	for(var/obj/effect/landmark/L in currentarea)
+		if(L.name == holotarget_tag)
+			target_landmarks += L
+
+	for(var/obj/effect/L in target_landmarks) // Find a linked landmark that does not have a target dummy
+		if(instances_of_type_in_list(/mob/living/carbon/human/dummy/holotarget,currentarea) < target_landmarks.len)
+			var/mob/living/carbon/human/dummy/holotarget/target_exists = locate() in get_turf(L)
+			if(!target_exists)
+				var/mob/living/carbon/human/dummy/holotarget/H = new /mob/living/carbon/human/dummy/holotarget(L.loc)
+				H.target_tag = L.name
+		else
+			break
+	return TRUE
+
+/mob/living/carbon/human/dummy/holotarget
+	var/target_tag = null
+
+/mob/living/carbon/human/dummy/holotarget/Initialize()
+	. = ..()
+	set_extension(src, /datum/extension/holographic)
+
 //Holocarp
 
 /mob/living/simple_animal/hostile/carp/holodeck
@@ -460,10 +508,3 @@
 		melee_damage_upper = initial(melee_damage_upper)
 		environment_smash = initial(environment_smash)
 		destroy_surroundings = initial(destroy_surroundings)
-
-/mob/living/simple_animal/hostile/carp/holodeck/gib()
-	death()
-
-/mob/living/simple_animal/hostile/carp/holodeck/death()
-	..(null, "fades away!", "You have been destroyed.")
-	qdel(src)

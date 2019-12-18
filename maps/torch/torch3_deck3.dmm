@@ -5980,6 +5980,14 @@
 /obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/thirddeck)
+"lG" = (
+/obj/effect/landmark{
+	name = "alphadeck"
+	},
+/turf/simulated/floor/reinforced{
+	name = "Holodeck Projector Floor"
+	},
+/area/holodeck/alphadeck)
 "lH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
 	dir = 9;
@@ -6728,7 +6736,7 @@
 	icon_state = "computer";
 	dir = 8;
 	linkedholodeck_area = /area/holodeck/alphadeck;
-	programs_list_id = "TorchMainPrograms"
+	linkedholodeck_landmark_id = "alphadeck"
 	},
 /turf/simulated/floor/tiled,
 /area/holocontrol)
@@ -44776,7 +44784,7 @@ hA
 hA
 hA
 hA
-hA
+lG
 gE
 Bg
 AR

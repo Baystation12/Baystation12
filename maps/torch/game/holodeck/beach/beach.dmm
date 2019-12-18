@@ -1,0 +1,233 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 8;
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+"c" = (
+/obj/item/weapon/inflatable_duck,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/beach)
+"d" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert4"
+	},
+/area/holodeck/beach)
+"h" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert3"
+	},
+/area/holodeck/beach)
+"n" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert1"
+	},
+/area/holodeck/beach)
+"q" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert_dug"
+	},
+/area/holodeck/beach)
+"r" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert2"
+	},
+/area/holodeck/beach)
+"s" = (
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/beach)
+"t" = (
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/beach)
+"u" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 6;
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+"v" = (
+/obj/item/clothing/glasses/sunglasses,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/beach)
+"w" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 4;
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+"y" = (
+/obj/item/weapon/beach_ball,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/beach)
+"A" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 9;
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+"B" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 10;
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+"F" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 5;
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+"L" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 8;
+	icon_state = "beachcorner"
+	},
+/area/holodeck/beach)
+"N" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 4;
+	icon_state = "beachcorner"
+	},
+/area/holodeck/beach)
+"P" = (
+/obj/effect/overlay/palmtree_r,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/beach)
+"S" = (
+/obj/effect/overlay/palmtree_l,
+/obj/effect/overlay/coconut,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/beach)
+"V" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	dir = 1;
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+"X" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "beach"
+	},
+/area/holodeck/beach)
+
+(1,1,1) = {"
+t
+t
+t
+F
+w
+L
+s
+s
+s
+s
+"}
+(2,1,1) = {"
+t
+t
+t
+t
+t
+V
+s
+P
+S
+s
+"}
+(3,1,1) = {"
+t
+t
+t
+t
+t
+V
+r
+s
+s
+s
+"}
+(4,1,1) = {"
+t
+A
+a
+B
+t
+V
+y
+s
+n
+s
+"}
+(5,1,1) = {"
+t
+V
+r
+X
+t
+V
+d
+s
+s
+h
+"}
+(6,1,1) = {"
+t
+V
+s
+X
+t
+V
+q
+s
+s
+s
+"}
+(7,1,1) = {"
+t
+V
+s
+X
+t
+V
+v
+s
+c
+s
+"}
+(8,1,1) = {"
+t
+V
+h
+X
+t
+V
+s
+h
+s
+s
+"}
+(9,1,1) = {"
+t
+F
+w
+u
+t
+V
+s
+S
+s
+s
+"}
+(10,1,1) = {"
+t
+A
+a
+a
+a
+N
+s
+s
+s
+h
+"}

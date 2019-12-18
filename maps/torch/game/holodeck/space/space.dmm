@@ -1,0 +1,131 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"E" = (
+/obj/effect/landmark{
+	name = "Holocarp Spawn Random"
+	},
+/turf/simulated/floor/holofloor/space,
+/area/holodeck/space)
+"T" = (
+/turf/simulated/floor/holofloor/space,
+/area/holodeck/space)
+
+(1,1,1) = {"
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+"}
+(2,1,1) = {"
+T
+T
+T
+E
+T
+T
+T
+T
+E
+T
+"}
+(3,1,1) = {"
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+"}
+(4,1,1) = {"
+T
+E
+T
+T
+T
+T
+E
+T
+T
+T
+"}
+(5,1,1) = {"
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+"}
+(6,1,1) = {"
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+"}
+(7,1,1) = {"
+T
+T
+T
+E
+T
+T
+T
+T
+E
+T
+"}
+(8,1,1) = {"
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+"}
+(9,1,1) = {"
+T
+E
+T
+T
+T
+T
+E
+T
+T
+T
+"}
+(10,1,1) = {"
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+"}

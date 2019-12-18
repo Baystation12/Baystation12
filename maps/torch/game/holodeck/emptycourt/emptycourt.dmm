@@ -1,0 +1,35 @@
+"a" = (/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/emptycourt)
+"b" = (/obj/structure/holostool,/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"c" = (/obj/structure/holostool,/obj/structure/window/reinforced/holowindow{dir = 4},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"d" = (/obj/structure/table/holotable,/obj/machinery/readybutton,/obj/effect/floor_decal/corner/red/three_quarters{dir = 8},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"e" = (/obj/structure/table/holotable,/obj/item/clothing/head/helmet/thunderdome,/obj/item/clothing/suit/armor/tdome/red,/obj/item/clothing/under/color/red,/obj/item/weapon/holo/esword/red,/obj/effect/floor_decal/corner/red{dir = 5},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"f" = (/obj/structure/table/holotable,/obj/effect/floor_decal/corner/red/three_quarters{dir = 1},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"g" = (/obj/effect/floor_decal/corner/red{dir = 9},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"h" = (/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"i" = (/obj/effect/floor_decal/corner/red{dir = 6},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"j" = (/obj/machinery/door/window/holowindoor{dir = 4; name = "Red Team"},/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/emptycourt)
+"k" = (/obj/structure/window/reinforced/holowindow/disappearing,/obj/effect/floor_decal/corner/red/three_quarters,/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"l" = (/obj/structure/window/reinforced/holowindow/disappearing,/obj/effect/floor_decal/corner/red{dir = 10},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"m" = (/obj/structure/window/reinforced/holowindow/disappearing,/obj/effect/floor_decal/corner/red/three_quarters{dir = 4},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"n" = (/obj/structure/window/reinforced/holowindow/disappearing{dir = 1},/obj/effect/floor_decal/corner/green/three_quarters{dir = 8},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"o" = (/obj/structure/window/reinforced/holowindow/disappearing{dir = 1},/obj/effect/floor_decal/corner/green{dir = 5},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"p" = (/obj/structure/window/reinforced/holowindow/disappearing{dir = 1},/obj/effect/floor_decal/corner/green/three_quarters{dir = 1},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"q" = (/obj/effect/floor_decal/corner/green{dir = 9},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"r" = (/obj/effect/floor_decal/corner/green{dir = 6},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"s" = (/obj/machinery/door/window/holowindoor{base_state = "right"; dir = 4; icon_state = "right"; name = "Green Team"},/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/emptycourt)
+"t" = (/obj/structure/table/holotable,/obj/effect/floor_decal/corner/green/three_quarters,/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"u" = (/obj/structure/table/holotable,/obj/item/clothing/head/helmet/thunderdome,/obj/item/clothing/suit/armor/tdome/green,/obj/item/clothing/under/color/green,/obj/item/weapon/holo/esword/green,/obj/effect/floor_decal/corner/green{dir = 10},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+"v" = (/obj/structure/table/holotable,/obj/machinery/readybutton,/obj/effect/floor_decal/corner/green/three_quarters{dir = 4},/turf/simulated/floor/holofloor/tiled,/area/holodeck/emptycourt)
+
+(1,1,1) = {"
+abcdeeeeef
+abcghhhhhi
+aajghhhhhi
+abcghhhhhi
+abcklllllm
+abcnooooop
+abcqhhhhhr
+aasqhhhhhr
+abcqhhhhhr
+abctuuuuuv
+"}

@@ -7,6 +7,7 @@ GLOBAL_VAR_INIT(use_preloader, FALSE)
 GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 /datum/map_load_metadata
+	var/tfile
 	var/bounds
 	var/list/atoms_to_initialise
 
@@ -199,6 +200,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 				for(var/atom/to_delete in atoms_to_delete)
 					qdel(to_delete)
 		var/datum/map_load_metadata/M = new
+		M.tfile = tfile
 		M.bounds = bounds
 		M.atoms_to_initialise = atoms_to_initialise
 		return M

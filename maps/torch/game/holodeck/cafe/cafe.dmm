@@ -1,0 +1,324 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/table/holo_woodentable,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"b" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/effect/floor_decal/spline/plain/grey{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/cafe)
+"d" = (
+/obj/structure/flora/ausbushes/genericbush,
+/obj/effect/floor_decal/spline/plain/grey{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/cafe)
+"f" = (
+/obj/structure/bed/chair/wood,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"g" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"h" = (
+/turf/simulated/wall/wood,
+/area/holodeck/cafe)
+"i" = (
+/obj/structure/table/holo_woodentable,
+/obj/item/device/synthesized_instrument/violin,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"j" = (
+/obj/structure/flora/ausbushes/brflowers,
+/obj/effect/floor_decal/spline/plain/grey{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/cafe)
+"k" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"l" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"m" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"u" = (
+/obj/structure/bed/chair/wood,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"v" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"x" = (
+/obj/structure/table/holo_woodentable,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/obj/item/weapon/flame/candle,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"A" = (
+/obj/structure/flora/ausbushes/genericbush,
+/obj/effect/floor_decal/spline/plain/grey{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/cafe)
+"B" = (
+/obj/structure/table/holo_woodentable,
+/obj/item/weapon/flame/candle,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"C" = (
+/obj/structure/table/holo_woodentable,
+/obj/item/weapon/reagent_containers/glass/rag,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"D" = (
+/obj/structure/bed/chair/wood{
+	dir = 8
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"E" = (
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"F" = (
+/obj/structure/table/holo_woodentable,
+/obj/item/weapon/tray,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"G" = (
+/obj/structure/flora/pottedplant{
+	icon_state = "plant-22"
+	},
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"H" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/effect/floor_decal/spline/plain/grey{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/cafe)
+"I" = (
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/cafe)
+"N" = (
+/obj/machinery/door/unpowered/simple/wood,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"O" = (
+/obj/structure/bed/chair/wood{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"P" = (
+/obj/structure/bed/chair/wood,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"Q" = (
+/obj/structure/window/holowindow/full,
+/turf/simulated/floor/holofloor,
+/area/holodeck/cafe)
+"T" = (
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+"U" = (
+/obj/structure/table/holo_woodentable,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/obj/item/weapon/flame/candle,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"W" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"X" = (
+/obj/structure/bed/chair/wood,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/cafe)
+"Y" = (
+/obj/structure/table/holo_woodentable,
+/obj/item/weapon/reagent_containers/food/drinks/teapot,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/cafe)
+
+(1,1,1) = {"
+I
+I
+I
+I
+I
+I
+I
+I
+I
+I
+"}
+(2,1,1) = {"
+b
+j
+b
+d
+I
+I
+A
+H
+b
+b
+"}
+(3,1,1) = {"
+Q
+Q
+Q
+h
+N
+N
+h
+Q
+Q
+Q
+"}
+(4,1,1) = {"
+u
+x
+g
+G
+T
+T
+G
+X
+x
+k
+"}
+(5,1,1) = {"
+T
+T
+T
+T
+T
+T
+T
+T
+T
+T
+"}
+(6,1,1) = {"
+T
+E
+i
+T
+T
+T
+T
+T
+T
+O
+"}
+(7,1,1) = {"
+T
+T
+a
+T
+f
+l
+l
+W
+T
+U
+"}
+(8,1,1) = {"
+T
+T
+F
+T
+P
+B
+B
+m
+T
+U
+"}
+(9,1,1) = {"
+T
+T
+a
+T
+X
+v
+v
+g
+T
+D
+"}
+(10,1,1) = {"
+E
+C
+Y
+T
+T
+T
+T
+T
+T
+T
+"}

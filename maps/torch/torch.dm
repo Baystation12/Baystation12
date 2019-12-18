@@ -165,6 +165,26 @@
 	#include "../away/voxship/voxship.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
 
+	#include "game/holodeck/basketball/basketball.dm"
+	#include "game/holodeck/beach/beach.dm"
+	#include "game/holodeck/boxingcourt/boxingcourt.dm"
+	#include "game/holodeck/cafe/cafe.dm"
+	#include "game/holodeck/courtroom/courtroom.dm"
+	#include "game/holodeck/desert/desert.dm"
+	#include "game/holodeck/emptycourt/emptycourt.dm"
+	#include "game/holodeck/meetinghall/meetinghall.dm"
+	#include "game/holodeck/off/off.dm"
+	#include "game/holodeck/picnicarea/picnicarea.dm"
+	#include "game/holodeck/plaza/plaza.dm"
+	#include "game/holodeck/snowfield/snowfield.dm"
+	#include "game/holodeck/space/space.dm"
+	#include "game/holodeck/temple/temple.dm"
+	#include "game/holodeck/theatre/theatre.dm"
+	#include "game/holodeck/thunderdomecourt/thunderdomecourt.dm"
+	#include "game/holodeck/volleyball/volleyball.dm"
+	#include "game/holodeck/wildlife/wildlife.dm"
+	#include "game/holodeck/firingrange/firingrange.dm"
+
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 
 	#define using_map_DATUM /datum/map/torch

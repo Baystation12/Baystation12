@@ -1,0 +1,15 @@
+"a" = (/mob/living/simple_animal/hostile/carp/holodeck,/turf/simulated/floor/holofloor/reinforced,/area/holodeck/wildlife)
+"A" = (/turf/simulated/floor/holofloor/reinforced,/area/holodeck/wildlife)
+
+(1,1,1) = {"
+AAAAAAAAAA
+AaAAAAAAaA
+AAAAAAAAAA
+AAAaAAaAAA
+AAAAAAAAAA
+AAAAAAAAAA
+AAAaAAaAAA
+AAAAAAAAAA
+AaAAAAAAaA
+AAAAAAAAAA
+"}

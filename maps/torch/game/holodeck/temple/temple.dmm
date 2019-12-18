@@ -1,0 +1,287 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"c" = (
+/obj/effect/floor_decal/stoneborder/corner{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+"d" = (
+/turf/simulated/wall/sandstone,
+/area/holodeck/temple)
+"e" = (
+/obj/effect/floor_decal/stoneborder,
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/temple)
+"h" = (
+/obj/structure/fountain/mundane{
+	alpha = 204;
+	pixel_x = 0
+	},
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/temple)
+"j" = (
+/obj/structure/curtain{
+	color = "#68ccab"
+	},
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken6"
+	},
+/area/holodeck/temple)
+"k" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken6"
+	},
+/area/holodeck/temple)
+"l" = (
+/obj/structure/curtain,
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken4"
+	},
+/area/holodeck/temple)
+"m" = (
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+"n" = (
+/obj/effect/overlay/palmtree_r,
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/temple)
+"o" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+"p" = (
+/obj/structure/bed/chair/wood,
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+"s" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert2"
+	},
+/area/holodeck/temple)
+"u" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken4"
+	},
+/area/holodeck/temple)
+"x" = (
+/obj/effect/floor_decal/stoneborder/corner{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+"z" = (
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+"A" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken3"
+	},
+/area/holodeck/temple)
+"C" = (
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/temple)
+"D" = (
+/obj/effect/floor_decal/stoneborder{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/temple)
+"F" = (
+/obj/structure/table/rack/holorack,
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken2"
+	},
+/area/holodeck/temple)
+"H" = (
+/obj/structure/table/rack/holorack,
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken3"
+	},
+/area/holodeck/temple)
+"I" = (
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/temple)
+"L" = (
+/obj/effect/floor_decal/stoneborder{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/beach/sand,
+/area/holodeck/temple)
+"M" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+"N" = (
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert3"
+	},
+/area/holodeck/temple)
+"O" = (
+/obj/effect/floor_decal/stoneborder/corner{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/temple)
+"Q" = (
+/obj/effect/floor_decal/stoneborder{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/temple)
+"R" = (
+/obj/effect/floor_decal/stoneborder{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/beach/sand{
+	icon_state = "desert2"
+	},
+/area/holodeck/temple)
+"T" = (
+/obj/structure/curtain{
+	color = "#cd6889"
+	},
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken3"
+	},
+/area/holodeck/temple)
+"W" = (
+/obj/structure/table/rack/holorack,
+/turf/simulated/floor/holofloor/wood{
+	icon_state = "wood_broken1"
+	},
+/area/holodeck/temple)
+"X" = (
+/obj/effect/floor_decal/stoneborder/corner,
+/turf/simulated/floor/holofloor/beach/water,
+/area/holodeck/temple)
+"Y" = (
+/obj/machinery/door/unpowered/simple/sandstone,
+/turf/simulated/floor/holofloor/tiled/stone,
+/area/holodeck/temple)
+
+(1,1,1) = {"
+C
+N
+C
+C
+s
+C
+C
+R
+L
+C
+"}
+(2,1,1) = {"
+d
+d
+d
+d
+d
+d
+n
+c
+x
+n
+"}
+(3,1,1) = {"
+H
+d
+p
+z
+M
+d
+d
+Y
+Y
+d
+"}
+(4,1,1) = {"
+A
+j
+m
+m
+m
+m
+m
+m
+m
+m
+"}
+(5,1,1) = {"
+d
+d
+m
+m
+o
+m
+o
+m
+m
+o
+"}
+(6,1,1) = {"
+F
+d
+m
+X
+D
+D
+D
+D
+D
+O
+"}
+(7,1,1) = {"
+u
+l
+m
+e
+I
+I
+I
+I
+I
+Q
+"}
+(8,1,1) = {"
+d
+d
+m
+e
+I
+I
+h
+I
+I
+Q
+"}
+(9,1,1) = {"
+W
+d
+o
+e
+I
+I
+I
+I
+I
+Q
+"}
+(10,1,1) = {"
+k
+T
+m
+e
+I
+I
+I
+I
+I
+Q
+"}

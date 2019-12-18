@@ -1,0 +1,270 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"e" = (
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"f" = (
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/basketball)
+"h" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"i" = (
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"q" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"r" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"u" = (
+/obj/effect/floor_decal/corner/green/three_quarters,
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"v" = (
+/obj/item/weapon/beach_ball/holoball,
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"x" = (
+/obj/structure/holohoop{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/green{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"y" = (
+/obj/effect/floor_decal/corner/red/three_quarters,
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"A" = (
+/obj/structure/holostool,
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"B" = (
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"E" = (
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"J" = (
+/obj/machinery/door/window/holowindoor{
+	dir = 4;
+	name = "Red Team"
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/basketball)
+"K" = (
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"L" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"O" = (
+/obj/structure/holohoop,
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"P" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"R" = (
+/obj/machinery/door/window/holowindoor{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Green Team"
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/basketball)
+"S" = (
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"U" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"V" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"X" = (
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+"Z" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/basketball)
+
+(1,1,1) = {"
+f
+f
+f
+f
+f
+f
+f
+f
+f
+f
+"}
+(2,1,1) = {"
+L
+L
+f
+L
+L
+L
+L
+f
+L
+L
+"}
+(3,1,1) = {"
+A
+A
+J
+A
+A
+A
+A
+R
+A
+A
+"}
+(4,1,1) = {"
+K
+r
+r
+r
+y
+i
+V
+V
+V
+u
+"}
+(5,1,1) = {"
+U
+X
+X
+X
+q
+Z
+X
+X
+X
+h
+"}
+(6,1,1) = {"
+K
+r
+U
+X
+q
+Z
+X
+h
+V
+u
+"}
+(7,1,1) = {"
+O
+X
+U
+X
+v
+Z
+X
+h
+X
+x
+"}
+(8,1,1) = {"
+B
+a
+U
+X
+q
+Z
+X
+h
+P
+S
+"}
+(9,1,1) = {"
+U
+X
+X
+X
+q
+Z
+X
+X
+X
+h
+"}
+(10,1,1) = {"
+B
+a
+a
+a
+e
+E
+P
+P
+P
+S
+"}

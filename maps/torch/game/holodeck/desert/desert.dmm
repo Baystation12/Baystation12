@@ -1,0 +1,133 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"B" = (
+/turf/simulated/floor/holofloor/desert,
+/area/holodeck/desert)
+"R" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/simulated/floor/holofloor/desert,
+/area/holodeck/desert)
+"W" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/simulated/floor/holofloor/desert,
+/area/holodeck/desert)
+
+(1,1,1) = {"
+B
+B
+B
+B
+B
+B
+B
+B
+B
+R
+"}
+(2,1,1) = {"
+B
+B
+W
+B
+B
+B
+B
+B
+B
+B
+"}
+(3,1,1) = {"
+B
+B
+B
+B
+R
+B
+B
+W
+B
+B
+"}
+(4,1,1) = {"
+R
+B
+B
+B
+B
+B
+B
+B
+B
+B
+"}
+(5,1,1) = {"
+B
+B
+B
+B
+B
+B
+B
+B
+B
+W
+"}
+(6,1,1) = {"
+B
+B
+B
+R
+B
+B
+W
+B
+B
+B
+"}
+(7,1,1) = {"
+B
+B
+B
+B
+R
+B
+B
+B
+B
+B
+"}
+(8,1,1) = {"
+B
+B
+B
+B
+B
+B
+B
+B
+B
+B
+"}
+(9,1,1) = {"
+B
+W
+B
+B
+B
+B
+B
+B
+B
+B
+"}
+(10,1,1) = {"
+B
+B
+B
+B
+B
+B
+R
+B
+B
+W
+"}

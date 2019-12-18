@@ -1,0 +1,29 @@
+"a" = (/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"b" = (/obj/structure/window/reinforced,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"c" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/table/steel_reinforced,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"d" = (/obj/effect/landmark{name = "holotarget_2"},/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"e" = (/obj/structure/window/reinforced{dir = 2; health = 1e+007},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"f" = (/obj/structure/table/steel_reinforced,/obj/structure/window/reinforced{dir = 4},/obj/effect/floor_decal/industrial/warning,/obj/item/clothing/ears/earmuffs,/obj/machinery/reset_holotarget{holotarget_tag = "holotarget_1"},/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"g" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/table/steel_reinforced,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"h" = (/turf/simulated/floor/holofloor/tiled/stone,/area/holodeck/firingrange)
+"i" = (/obj/effect/landmark{name = "holotarget_1"},/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"j" = (/obj/structure/table/steel_reinforced,/obj/structure/window/reinforced{dir = 8},/obj/effect/floor_decal/industrial/warning,/obj/item/clothing/ears/earmuffs,/obj/machinery/reset_holotarget{holotarget_tag = "holotarget_2"},/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"k" = (/obj/structure/table/standard,/turf/simulated/floor/holofloor/tiled/stone,/area/holodeck/firingrange)
+"l" = (/obj/structure/table/rack,/obj/item/weapon/gun/energy/laser/practice,/obj/item/weapon/gun/energy/laser/practice,/turf/simulated/floor/holofloor/tiled/stone,/area/holodeck/firingrange)
+"m" = (/obj/effect/floor_decal/industrial/outline,/turf/simulated/floor/holofloor/tiled/stone,/area/holodeck/firingrange)
+"n" = (/obj/structure/table/standard,/obj/machinery/recharger{use_power = 0},/turf/simulated/floor/holofloor/tiled/stone,/area/holodeck/firingrange)
+"o" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+"p" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/firingrange)
+
+(1,1,1) = {"
+oooooooooo
+aaaaaaaaaa
+aaiaaaddda
+aaaaaaaaaa
+aaaaaaaaaa
+aaaaaaaaaa
+pbcfbejgbb
+hhmhhhhmhl
+hhhhhhhhhn
+hhhhhhhhhk
+"}

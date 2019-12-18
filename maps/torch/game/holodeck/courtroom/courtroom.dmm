@@ -1,0 +1,443 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"b" = (
+/obj/structure/bed/chair/holochair{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"c" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/obj/structure/flora/pottedplant{
+	icon_state = "plant-10"
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/courtroom)
+"e" = (
+/obj/structure/window/reinforced/holowindow,
+/obj/machinery/door/window/holowindoor{
+	base_state = "right";
+	dir = 1;
+	icon_state = "right";
+	name = "Witness Box"
+	},
+/obj/structure/bed/chair/holochair,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"f" = (
+/obj/structure/bed/chair/holochair,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"g" = (
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"j" = (
+/obj/structure/bed/chair/holochair{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet/corners{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"l" = (
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"m" = (
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"n" = (
+/obj/structure/window/reinforced/holowindow,
+/obj/machinery/door/window/holowindoor{
+	dir = 1;
+	name = "Court Reporter's Box"
+	},
+/obj/structure/bed/chair/holochair,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"o" = (
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"q" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"r" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
+	},
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"t" = (
+/obj/structure/bed/chair/holochair{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"u" = (
+/obj/structure/table/holo_woodentable,
+/obj/structure/window/reinforced/holowindow,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"v" = (
+/obj/structure/table/holo_woodentable,
+/obj/structure/window/reinforced/holowindow,
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"w" = (
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"x" = (
+/obj/structure/table/holo_woodentable,
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"y" = (
+/obj/structure/bed/chair/holochair{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"B" = (
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"C" = (
+/obj/structure/bed/chair/holochair{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"E" = (
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/courtroom)
+"F" = (
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet,
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"G" = (
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"I" = (
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"J" = (
+/obj/structure/table/holo_woodentable,
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"K" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
+	},
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"M" = (
+/obj/structure/bed/chair/holochair{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"N" = (
+/obj/machinery/door/window/holowindoor{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/courtroom)
+"O" = (
+/obj/machinery/door/window/holowindoor{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right"
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/courtroom)
+"Q" = (
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"R" = (
+/obj/machinery/door/window/holowindoor{
+	dir = 1;
+	name = "Jury Box"
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"T" = (
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"U" = (
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"V" = (
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"X" = (
+/obj/structure/bed/chair/holochair{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/carpet,
+/area/holodeck/courtroom)
+"Y" = (
+/obj/structure/table/holo_woodentable,
+/obj/structure/window/reinforced/holowindow,
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/wood,
+/area/holodeck/courtroom)
+"Z" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/courtroom)
+
+(1,1,1) = {"
+E
+E
+E
+E
+E
+E
+E
+E
+E
+E
+"}
+(2,1,1) = {"
+c
+N
+Z
+Z
+Z
+Z
+Z
+O
+Z
+c
+"}
+(3,1,1) = {"
+o
+Q
+Q
+n
+w
+J
+M
+T
+M
+g
+"}
+(4,1,1) = {"
+o
+Q
+o
+Y
+V
+m
+I
+U
+I
+F
+"}
+(5,1,1) = {"
+o
+Q
+f
+u
+V
+U
+U
+U
+I
+F
+"}
+(6,1,1) = {"
+o
+Q
+o
+v
+V
+m
+I
+U
+I
+F
+"}
+(7,1,1) = {"
+o
+Q
+Q
+e
+a
+x
+l
+G
+l
+B
+"}
+(8,1,1) = {"
+o
+Q
+r
+q
+q
+q
+q
+q
+q
+q
+"}
+(9,1,1) = {"
+o
+Q
+K
+t
+X
+X
+X
+X
+C
+o
+"}
+(10,1,1) = {"
+o
+Q
+R
+j
+b
+b
+b
+b
+y
+o
+"}

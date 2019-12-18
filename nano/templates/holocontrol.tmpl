@@ -1,0 +1,51 @@
+{{if data.linkedholodeck}}
+	<div class="item">
+		<div class="itemLabel">
+			Holodeck is currently: 
+		</div>
+		<div class="itemContent">
+			{{:data.islocked ? "Locked" : "Unlocked"}}<br>
+			{{:helper.link('Toggle Lock', null, {'togglehololock': 1})}}
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Holodeck Safety:
+		</div>
+		<div class="itemContent">
+			{{:data.safety_disabled ? "Disabled" : "Enabled"}}<br>
+		</div>
+	</div>
+	<div class="item">
+		<div class="itemLabel">
+			Holodeck Gravity:
+		</div>
+		<div class="itemContent">
+			{{:data.has_gravity ? "Online" : "Offline"}}<br>
+			{{:helper.link('Toggle Gravity', null, {'gravity': 1})}}
+		</div>
+	</div>
+	{{for data.supported_programs}}
+		<div class="itemLabelWide">
+			{{:helper.link(value, null, {'program': value})}}<br>
+		</div>
+	{{empty}}
+		<div class="item">
+			<div class="itemLabel">
+				Error:
+			</div>
+			<div class="itemContent">
+				This holodeck has no supported holoprograms.
+			</div>
+		</div>
+	{{/for}}
+{{else}}
+	<div class="item">
+		<div class="itemLabel">
+			Error:
+		</div>
+		<div class="itemContent">
+			No linked holodeck!
+		</div>
+	</div>
+{{/if}}

@@ -1,0 +1,169 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"i" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"j" = (
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"l" = (
+/obj/structure/flora/ausbushes/leafybush,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"n" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"s" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/holofloor/desert,
+/area/holodeck/picnicarea)
+"w" = (
+/obj/structure/flora/ausbushes/palebush,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"y" = (
+/obj/structure/flora/ausbushes/reedbush,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"A" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"D" = (
+/obj/structure/flora/ausbushes/sunnybush,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"E" = (
+/obj/structure/flora/ausbushes/ppflowers,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"J" = (
+/obj/structure/flora/ausbushes/brflowers,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+"Q" = (
+/obj/structure/flora/ausbushes/genericbush,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/picnicarea)
+
+(1,1,1) = {"
+A
+J
+i
+w
+j
+j
+J
+A
+s
+s
+"}
+(2,1,1) = {"
+J
+J
+i
+J
+A
+J
+E
+j
+i
+s
+"}
+(3,1,1) = {"
+j
+n
+n
+A
+J
+J
+j
+A
+A
+s
+"}
+(4,1,1) = {"
+E
+n
+J
+i
+j
+j
+Q
+s
+s
+J
+"}
+(5,1,1) = {"
+j
+J
+j
+E
+s
+s
+s
+j
+A
+j
+"}
+(6,1,1) = {"
+J
+A
+A
+s
+j
+A
+A
+j
+J
+j
+"}
+(7,1,1) = {"
+A
+J
+s
+s
+j
+E
+y
+J
+j
+A
+"}
+(8,1,1) = {"
+j
+D
+s
+s
+J
+j
+A
+j
+A
+j
+"}
+(9,1,1) = {"
+E
+j
+A
+J
+s
+s
+j
+J
+i
+i
+"}
+(10,1,1) = {"
+j
+J
+j
+E
+j
+l
+j
+i
+i
+i
+"}

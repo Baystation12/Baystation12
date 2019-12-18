@@ -1,0 +1,275 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"h" = (
+/obj/structure/holostool,
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"i" = (
+/obj/structure/window/reinforced/holowindow/disappearing,
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"j" = (
+/obj/machinery/door/window/holowindoor{
+	dir = 4;
+	name = "Red Team"
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/thunderdomecourt)
+"p" = (
+/obj/structure/table/holotable,
+/obj/machinery/readybutton,
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"r" = (
+/obj/structure/window/reinforced/holowindow/disappearing{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"u" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"x" = (
+/obj/structure/window/reinforced/holowindow/disappearing{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"y" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"z" = (
+/obj/structure/table/holotable,
+/obj/item/clothing/head/helmet/thunderdome,
+/obj/item/clothing/suit/armor/tdome/red,
+/obj/item/clothing/under/color/red,
+/obj/item/weapon/holo/esword/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"A" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"B" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"C" = (
+/obj/machinery/door/window/holowindoor{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Green Team"
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/thunderdomecourt)
+"D" = (
+/obj/structure/window/reinforced/holowindow/disappearing,
+/obj/effect/floor_decal/corner/red{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"E" = (
+/obj/structure/table/holotable,
+/obj/machinery/readybutton,
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"F" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"L" = (
+/obj/structure/table/holotable,
+/obj/item/clothing/head/helmet/thunderdome,
+/obj/item/clothing/suit/armor/tdome/green,
+/obj/item/clothing/under/color/green,
+/obj/item/weapon/holo/esword/green,
+/obj/effect/floor_decal/corner/green{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"N" = (
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/thunderdomecourt)
+"R" = (
+/obj/structure/window/reinforced/holowindow/disappearing{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"T" = (
+/obj/structure/table/holotable,
+/obj/effect/floor_decal/corner/green/three_quarters,
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"U" = (
+/obj/structure/table/holotable,
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"V" = (
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+"Y" = (
+/obj/structure/window/reinforced/holowindow/disappearing,
+/obj/effect/floor_decal/corner/red/three_quarters,
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/thunderdomecourt)
+
+(1,1,1) = {"
+N
+N
+N
+N
+N
+N
+N
+N
+N
+N
+"}
+(2,1,1) = {"
+y
+y
+N
+y
+y
+y
+y
+N
+y
+y
+"}
+(3,1,1) = {"
+h
+h
+j
+h
+h
+h
+h
+C
+h
+h
+"}
+(4,1,1) = {"
+E
+A
+A
+A
+Y
+r
+u
+u
+u
+T
+"}
+(5,1,1) = {"
+z
+V
+V
+V
+D
+R
+V
+V
+V
+L
+"}
+(6,1,1) = {"
+z
+V
+V
+V
+D
+R
+V
+V
+V
+L
+"}
+(7,1,1) = {"
+z
+V
+V
+V
+D
+R
+V
+V
+V
+L
+"}
+(8,1,1) = {"
+z
+V
+V
+V
+D
+R
+V
+V
+V
+L
+"}
+(9,1,1) = {"
+z
+V
+V
+V
+D
+R
+V
+V
+V
+L
+"}
+(10,1,1) = {"
+U
+B
+B
+B
+i
+x
+F
+F
+F
+p
+"}

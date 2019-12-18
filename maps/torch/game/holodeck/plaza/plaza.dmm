@@ -1,0 +1,295 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"b" = (
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"c" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"d" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/effect/floor_decal/spline/fancy/wood,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"g" = (
+/obj/structure/bed/chair/wood{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"h" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"i" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/ausbushes/brflowers,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"j" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"k" = (
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"n" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"p" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"r" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"s" = (
+/obj/structure/bed/chair/wood{
+	dir = 8
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"u" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"v" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"z" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/ausbushes/brflowers,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"B" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"C" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/ausbushes/brflowers,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"E" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"G" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"H" = (
+/obj/effect/floor_decal/spline/fancy/wood/corner{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"I" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/brflowers,
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"L" = (
+/obj/structure/table/holo_woodentable,
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"P" = (
+/obj/structure/bed/chair/wood{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"R" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/ausbushes/brflowers,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"S" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/ausbushes/ppflowers,
+/obj/structure/flora/ausbushes/brflowers,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/grass,
+/area/holodeck/plaza)
+"U" = (
+/obj/structure/bed/chair/wood,
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+"Y" = (
+/obj/structure/bed/chair/wood{
+	dir = 4
+	},
+/obj/effect/floor_decal/spline/fancy/wood{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/concrete,
+/area/holodeck/plaza)
+
+(1,1,1) = {"
+B
+C
+j
+C
+B
+C
+j
+j
+n
+k
+"}
+(2,1,1) = {"
+j
+c
+Y
+v
+v
+Y
+E
+B
+n
+k
+"}
+(3,1,1) = {"
+j
+U
+L
+k
+k
+L
+d
+j
+n
+k
+"}
+(4,1,1) = {"
+C
+n
+P
+k
+k
+k
+b
+I
+n
+k
+"}
+(5,1,1) = {"
+B
+n
+k
+R
+z
+k
+r
+v
+H
+k
+"}
+(6,1,1) = {"
+C
+n
+k
+S
+i
+k
+G
+h
+h
+h
+"}
+(7,1,1) = {"
+j
+n
+g
+k
+k
+k
+b
+C
+j
+B
+"}
+(8,1,1) = {"
+j
+U
+L
+k
+k
+L
+d
+j
+C
+j
+"}
+(9,1,1) = {"
+j
+p
+s
+h
+h
+s
+u
+C
+B
+C
+"}
+(10,1,1) = {"
+C
+I
+j
+j
+C
+B
+j
+j
+C
+j
+"}

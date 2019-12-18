@@ -1,0 +1,31 @@
+"a" = (/obj/structure/table/rack/holorack,/obj/item/clothing/mask/chameleon,/obj/item/clothing/under/chameleon,/obj/item/clothing/glasses/chameleon,/obj/item/clothing/shoes/chameleon,/obj/item/clothing/gloves/chameleon,/obj/item/clothing/suit/chameleon,/obj/item/clothing/head/chameleon,/obj/item/weapon/storage/backpack/chameleon,/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/theatre)
+"b" = (/obj/structure/holostool,/obj/effect/floor_decal/carpet{dir = 4},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"c" = (/obj/structure/flora/pottedplant{icon_state = "plant-06"},/turf/simulated/floor/holofloor/tiled,/area/holodeck/theatre)
+"f" = (/obj/effect/floor_decal/carpet{dir = 1},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"i" = (/obj/effect/floor_decal/carpet{dir = 8},/obj/effect/floor_decal/carpet{dir = 4},/obj/effect/floor_decal/carpet,/obj/effect/floor_decal/carpet{dir = 6},/obj/effect/floor_decal/carpet{dir = 10},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"k" = (/obj/effect/floor_decal/carpet{dir = 8},/obj/effect/floor_decal/carpet{dir = 4},/obj/effect/floor_decal/carpet{dir = 1},/obj/effect/floor_decal/carpet{dir = 5},/obj/effect/floor_decal/carpet{dir = 9},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"l" = (/turf/simulated/floor/holofloor/tiled/dark,/area/holodeck/theatre)
+"m" = (/obj/structure/holostool,/obj/effect/floor_decal/carpet{dir = 4},/obj/effect/floor_decal/carpet,/obj/effect/floor_decal/carpet{dir = 6},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"q" = (/obj/effect/floor_decal/carpet{dir = 4},/obj/effect/floor_decal/carpet{dir = 1},/obj/effect/floor_decal/carpet{dir = 5},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"u" = (/obj/effect/floor_decal/carpet{dir = 8},/obj/effect/floor_decal/carpet{dir = 4},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"v" = (/obj/structure/holostool,/obj/effect/floor_decal/carpet{dir = 8},/obj/effect/floor_decal/carpet,/obj/effect/floor_decal/carpet{dir = 10},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"w" = (/obj/structure/holostool,/obj/effect/floor_decal/carpet{dir = 8},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"x" = (/obj/effect/floor_decal/carpet{dir = 5},/obj/effect/floor_decal/carpet{dir = 6},/obj/effect/floor_decal/carpet{dir = 10},/obj/effect/floor_decal/carpet{dir = 9},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"C" = (/turf/simulated/floor/holofloor/tiled,/area/holodeck/theatre)
+"E" = (/obj/structure/holostool,/obj/effect/floor_decal/carpet,/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"H" = (/obj/effect/floor_decal/spline/plain{dir = 1},/turf/simulated/floor/holofloor/tiled,/area/holodeck/theatre)
+"P" = (/obj/effect/floor_decal/carpet{dir = 8},/obj/effect/floor_decal/carpet{dir = 1},/obj/effect/floor_decal/carpet{dir = 9},/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+"U" = (/obj/structure/holostool,/turf/simulated/floor/holofloor/carpet,/area/holodeck/theatre)
+
+(1,1,1) = {"
+aaaaaaaaaa
+llllllllll
+llllllllll
+HHHHHHHHHk
+CCPffffqCu
+CCwUUUUbCu
+CCwUUUUbCu
+CCwUUUUbCu
+CCvEEEEmCi
+cCCCCCCCCx
+"}

@@ -1,0 +1,264 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/table/holotable,
+/obj/item/clothing/gloves/boxing/hologlove,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"e" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 9
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"f" = (
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"g" = (
+/obj/machinery/door/window/holowindoor{
+	base_state = "right";
+	icon_state = "right";
+	name = "Red Corner"
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"j" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"l" = (
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/green{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/black{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"o" = (
+/obj/structure/table/holotable,
+/obj/item/device/megaphone,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"p" = (
+/obj/effect/floor_decal/corner/red/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"q" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"u" = (
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"v" = (
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"x" = (
+/obj/structure/table/holotable,
+/obj/item/toy/ringbell,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"A" = (
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"D" = (
+/obj/machinery/door/window/holowindoor{
+	dir = 1;
+	name = "Green Corner"
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"G" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 10
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"H" = (
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/green{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/black{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"J" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"K" = (
+/obj/effect/floor_decal/corner/red{
+	dir = 5
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"M" = (
+/obj/structure/window/reinforced/holowindow,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"O" = (
+/obj/effect/floor_decal/corner/green/three_quarters{
+	dir = 4
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"U" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 6
+	},
+/turf/simulated/floor/holofloor/tiled,
+/area/holodeck/boxingcourt)
+"V" = (
+/obj/structure/bed/chair/holochair,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"Y" = (
+/obj/structure/holostool,
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+"Z" = (
+/obj/structure/table/holotable,
+/obj/item/clothing/gloves/boxing/hologlove{
+	icon_state = "boxinggreen";
+	item_state = "boxinggreen"
+	},
+/turf/simulated/floor/holofloor/tiled/dark,
+/area/holodeck/boxingcourt)
+
+(1,1,1) = {"
+a
+v
+v
+v
+v
+v
+v
+v
+v
+v
+"}
+(2,1,1) = {"
+a
+v
+v
+Y
+Y
+Y
+Y
+v
+v
+v
+"}
+(3,1,1) = {"
+v
+v
+v
+q
+q
+q
+q
+v
+v
+v
+"}
+(4,1,1) = {"
+v
+v
+g
+p
+e
+e
+u
+j
+Y
+v
+"}
+(5,1,1) = {"
+v
+Y
+M
+K
+A
+H
+G
+j
+Y
+v
+"}
+(6,1,1) = {"
+v
+Y
+M
+K
+l
+f
+G
+j
+Y
+v
+"}
+(7,1,1) = {"
+v
+Y
+M
+u
+U
+U
+O
+D
+v
+v
+"}
+(8,1,1) = {"
+v
+v
+v
+J
+J
+J
+J
+v
+v
+v
+"}
+(9,1,1) = {"
+V
+x
+v
+Y
+Y
+Y
+Y
+v
+v
+Z
+"}
+(10,1,1) = {"
+v
+o
+v
+v
+v
+v
+v
+v
+v
+Z
+"}

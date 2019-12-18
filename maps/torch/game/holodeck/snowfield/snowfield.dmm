@@ -1,0 +1,145 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"g" = (
+/turf/simulated/floor/holofloor/snow,
+/area/holodeck/snowfield)
+"E" = (
+/obj/structure/flora/grass/both,
+/turf/simulated/floor/holofloor/snow,
+/area/holodeck/snowfield)
+"H" = (
+/obj/structure/flora/grass/brown,
+/turf/simulated/floor/holofloor/snow,
+/area/holodeck/snowfield)
+"I" = (
+/obj/structure/flora/tree/pine,
+/turf/simulated/floor/holofloor/snow,
+/area/holodeck/snowfield)
+"V" = (
+/obj/structure/flora/tree/dead,
+/turf/simulated/floor/holofloor/snow,
+/area/holodeck/snowfield)
+"Z" = (
+/obj/structure/flora/grass/green,
+/turf/simulated/floor/holofloor/snow,
+/area/holodeck/snowfield)
+
+(1,1,1) = {"
+g
+g
+g
+g
+g
+g
+g
+H
+g
+g
+"}
+(2,1,1) = {"
+g
+E
+g
+g
+g
+g
+g
+g
+Z
+g
+"}
+(3,1,1) = {"
+g
+g
+g
+V
+g
+g
+g
+g
+g
+g
+"}
+(4,1,1) = {"
+g
+g
+g
+g
+Z
+g
+g
+g
+V
+g
+"}
+(5,1,1) = {"
+g
+g
+g
+I
+g
+g
+E
+g
+g
+H
+"}
+(6,1,1) = {"
+g
+g
+g
+g
+g
+g
+g
+H
+g
+g
+"}
+(7,1,1) = {"
+g
+E
+g
+g
+g
+g
+V
+g
+Z
+g
+"}
+(8,1,1) = {"
+g
+g
+g
+g
+g
+g
+g
+g
+g
+g
+"}
+(9,1,1) = {"
+g
+g
+I
+g
+Z
+g
+g
+g
+V
+g
+"}
+(10,1,1) = {"
+g
+g
+g
+g
+g
+g
+E
+g
+g
+H
+"}
