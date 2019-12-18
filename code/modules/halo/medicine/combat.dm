@@ -36,6 +36,16 @@
 
 	starts_with = list(/datum/reagent/oxycodone = 10)
 
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/otomax
+	name = "otomax autoinjector"
+	desc = "Contains chemicals that reduce ear damage"
+	band_color = COLOR_YELLOW
+
+	amount_per_transfer_from_this = 10
+	volume = 10
+
+	starts_with = list(/datum/reagent/otomax = 10)
+
 /obj/item/stack/medical/compression
 	name = "compression bandages"
 	singular_name = "compression bandage"
