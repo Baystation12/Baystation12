@@ -9,9 +9,6 @@
 	var/tot_w = 0
 	for(var/datum/reagent/R in reagent_list)
 		var/hex = uppertext(R.color) + num2hex(R.alpha)
-		if(length(hex) != 9) // PANIC PANIC PANIC
-			warning("Reagent [R.type] has an incorrect color set ([R.color])")
-			hex = "#ffffffFF"
 		colors[1] += hex2num(copytext(hex, 2, 4)) * R.volume * R.color_weight
 		colors[2] += hex2num(copytext(hex, 4, 6)) * R.volume * R.color_weight
 		colors[3] += hex2num(copytext(hex, 6, 8)) * R.volume * R.color_weight
