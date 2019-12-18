@@ -291,15 +291,15 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	var/mob/living/holder = loc
 	if(istype(holder))
 		holder.adjustFireLoss(explode_damage * 1.5) //Enough to gib a limb
-		holder.visible_message("<span class = 'danger'>[name] overloads, burning [holder.name]!</spam>")
+		holder.visible_message("<span class = 'danger'>[name] overloads, burning [holder.name]!</span>")
 	else
-		visible_message("<span class = 'warning'>[name] overloads, singing the air around it!</spam>")
+		visible_message("<span class = 'warning'>[name] overloads, singing the air around it!</span>")
 
 /obj/item/weapon/melee/blamite/proc/do_explode_in_player(var/mob/living/player)
 	//Kabloeey in a player//
 	if(player)
 		player.adjustFireLoss(explode_damage)
-		player.visible_message("<span class = 'notice'>The embedded Blamite Blade overloads, burning [player.name]!</spam>")
+		player.visible_message("<span class = 'notice'>The embedded Blamite Blade overloads, burning [player.name]!</span>")
 
 /obj/item/weapon/melee/blamite/proc/pre_explode_in_player(var/mob/living/user,var/mob/living/carbon/human/target)
 	if(!istype(target))
