@@ -1,6 +1,5 @@
 #define ESWORD_LEAP_DIST 2
 #define ESWORD_LEAP_FAR_SPECIES list(/datum/species/sangheili,/datum/species/spartan, /datum/species/kig_yar_skirmisher)
-#define LUNGE_DELAY 5 SECONDS
 #define STAFF_LEAP_DIST 7
 
 /obj/effect/esword_path
@@ -24,8 +23,11 @@
 	sharp = 0
 	var/failsafe = 0
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
-	var/next_leapwhen
 	parry_projectiles = 1
+
+	lunge_dist = ESWORD_LEAP_DIST
+
+	unacidable = 1
 
 /obj/item/weapon/melee/energy/elite_sword/New()
 	. = ..()
@@ -50,67 +52,26 @@
 	verbs += /obj/item/weapon/melee/energy/elite_sword/proc/enable_failsafe
 	verbs -= /obj/item/weapon/melee/energy/elite_sword/proc/disable_failsafe
 
-/obj/item/weapon/melee/energy/elite_sword/proc/get_species_leap_dist(var/mob/living/carbon/human/mob)
+/obj/item/weapon/melee/energy/elite_sword/get_lunge_dist(var/mob/living/carbon/human/mob)
 	if(isnull(mob) || !istype(mob))
 		return 0
 	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
 		return 4
-	return ESWORD_LEAP_DIST
-
-/obj/item/weapon/melee/energy/elite_sword/afterattack(var/atom/target,var/mob/user)
-	if(user.loc.Adjacent(target))
-		return
-	if(world.time < next_leapwhen)
-		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
-		return
-	if(!istype(target,/mob))
-		if(istype(target,/turf))
-			var/turf/targ_turf = target
-			var/list/turf_mobs = list()
-			for(var/mob/m in targ_turf.contents)
-				turf_mobs += m
-			if(turf_mobs.len > 0)
-				target = pick(turf_mobs)
-			else
-				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-				return
-		else
-			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
-			return
-	if(!(target in view(7,user.loc)))
-		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
-		return
-	if(get_dist(user,target) <= get_species_leap_dist(user))
-		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
-		var/image/user_image = image(user)
-		user_image.dir = user.dir
-		for(var/i = 0 to get_dist(user,target))
-			var/obj/after_image = new /obj/effect/esword_path
-			if(i == 0)
-				after_image.loc = user.loc
-			else
-				after_image.loc = get_step(user,get_dir(user,target))
-				if(!user.Move(after_image.loc))
-					break
-			after_image.dir = user.dir
-			after_image.overlays += user_image
-			spawn(5)
-				qdel(after_image)
-		if(user.Adjacent(target) && ismob(target))
-			attack(target,user)
-		next_leapwhen = world.time + LUNGE_DELAY
+	return lunge_dist
 
 /obj/item/weapon/melee/energy/elite_sword/proc/change_misc_variables(var/deactivate = 0)
 	if(deactivate)
 		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
 		item_state_slots = null
 		hitsound = "swing_hit"
+		parry_slice_objects = 0
 	else
 		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/Energy Sword_inhand Human.dmi',slot_r_hand_str = 'code/modules/halo/icons/Energy Sword_inhand Human.dmi')
 		item_state_slots = list(
 		slot_l_hand_str = "Energy sword_inhand Human l",
 		slot_r_hand_str = "Energy sword_inhand Human r" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+		parry_slice_objects = 1
 
 /obj/item/weapon/melee/energy/elite_sword/activate(mob/living/user)
 	..()
@@ -171,6 +132,8 @@
 	sharp = 0
 	parry_projectiles = 0
 
+	lunge_dist = 2
+
 /obj/item/weapon/melee/energy/elite_sword/dagger/activate(mob/living/user)
 	..()
 	w_class = ITEM_SIZE_NORMAL
@@ -179,20 +142,22 @@
 	..()
 	w_class = ITEM_SIZE_SMALL
 
-/obj/item/weapon/melee/energy/elite_sword/dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
-	return ESWORD_LEAP_DIST
+/obj/item/weapon/melee/energy/elite_sword/dagger/get_lunge_dist(var/mob/living/carbon/human/mob)
+	return lunge_dist
 
 /obj/item/weapon/melee/energy/elite_sword/dagger/change_misc_variables(var/deactivate = 0)
 	if(deactivate)
 		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
 		item_state_slots = null
 		hitsound = "swing_hit"
+		parry_slice_objects = 0
 	else
 		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/energy_dagger_inhand.dmi',slot_r_hand_str = 'code/modules/halo/icons/energy_dagger_inhand.dmi')
 		item_state_slots = list(
 		slot_l_hand_str = "en_dag_l_hand",
 		slot_r_hand_str = "en_dag_r_hand" )
 		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+		parry_slice_objects = 1
 
 //HONOUR GUARD STAFF
 
@@ -214,13 +179,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
-
-/obj/item/weapon/melee/energy/elite_sword/honour_staff/get_species_leap_dist(var/mob/living/carbon/human/mob)
-	if(isnull(mob) || !istype(mob))
-		return 0
-	if(mob.species.type in ESWORD_LEAP_FAR_SPECIES)
-		return 7
-	return STAFF_LEAP_DIST
+	lunge_dist = STAFF_LEAP_DIST
 
 /obj/item/weapon/melee/energy/elite_sword/honour_staff/activate(mob/living/user)
 	return
@@ -273,6 +232,131 @@
 
 /obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
 	return
+
+/obj/item/weapon/material/shard/shrapnel/blamite
+	name = "Blamite Blade"
+
+/obj/item/weapon/melee/blamite
+	name = "Blamite Weapon"
+	desc = "\
+A weapon with a blade made of Blamite. An internal mechanism cultivates the quick growth of a blamite crystal,\
+although this leaves it brittle and prone to breaking.\
+Luckily, this isn't a downside due to the explosive properties of such a large and quick grown crystal."
+	icon = 'code/modules/halo/weapons/icons/blamite.dmi'
+	icon_state = "invalid"
+	item_icons = list(slot_l_hand_str ='code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi')
+	w_class = ITEM_SIZE_LARGE
+	slot_flags = SLOT_BACK | SLOT_BELT | SLOT_POCKET
+	armor_penetration = 35
+	var/explode_delay = 10 SECONDS
+	var/explode_at = -1
+	var/regen_delay = 2 MINUTES
+	var/regen_at = -1
+	var/explode_damage = 40
+
+/obj/item/weapon/melee/blamite/update_icon()
+	if(regen_at != -1)
+		icon_state = "[initial(icon_state)]_handle"
+	else if(explode_at != -1)
+		icon_state = "[initial(icon_state)]_charging"
+	else
+		icon_state = initial(icon_state)
+
+/obj/item/weapon/melee/blamite/proc/set_blade_active(var/active)
+	if(active)
+		force = initial(force)
+		throwforce = initial(throwforce)
+		parry_projectiles = initial(parry_projectiles)
+		lunge_dist = initial(lunge_dist)
+		armor_penetration = initial(armor_penetration)
+	else
+		force = 5
+		throwforce = 5
+		parry_projectiles = 0
+		armor_penetration = 0
+		lunge_dist = 0
+
+/obj/item/weapon/melee/blamite/proc/regen_crystal()
+	regen_at = -1
+	update_icon()
+	set_blade_active(1)
+	GLOB.processing_objects -= src
+
+/obj/item/weapon/melee/blamite/proc/det_in_hand()
+	regen_at = world.time + regen_delay * 2
+	explode_at = -1
+	update_icon()
+	set_blade_active(0)
+	//you fucked up and held it for too long. kablooey//
+	var/mob/living/holder = loc
+	if(istype(holder))
+		holder.adjustFireLoss(explode_damage * 1.5) //Enough to gib a limb
+		holder.visible_message("<span class = 'danger'>[name] overloads, burning [holder.name]!</span>")
+	else
+		visible_message("<span class = 'warning'>[name] overloads, singing the air around it!</span>")
+
+/obj/item/weapon/melee/blamite/proc/do_explode_in_player(var/mob/living/player)
+	//Kabloeey in a player//
+	if(player)
+		player.adjustFireLoss(explode_damage)
+		player.visible_message("<span class = 'notice'>The embedded Blamite Blade overloads, burning [player.name]!</span>")
+
+/obj/item/weapon/melee/blamite/proc/pre_explode_in_player(var/mob/living/user,var/mob/living/carbon/human/target)
+	if(!istype(target))
+		return
+	user.visible_message("<span class = 'warning'>[user.name] lodges the blade of their [name] into [target.name], snapping it off at the hilt.</span>")
+	regen_at = world.time + regen_delay
+	explode_at = -1
+	update_icon()
+	set_blade_active(0)
+	//Create shard, embed in enemy. Delay explosion by timeframe, then check for shard again. If present, call do_explode_in_player()//
+	var/obj/shard = new /obj/item/weapon/material/shard/shrapnel/blamite
+	shard.name = initial(shard.name)
+	var/obj/item/organ/external/embed_organ = pick(target.organs)
+	embed_organ.embed(shard)
+	spawn(explode_delay)
+		if(target && locate(/obj/item/weapon/material/shard/shrapnel/blamite) in target.embedded)
+			do_explode_in_player(target)
+
+/obj/item/weapon/melee/blamite/attack_self(var/mob/user)
+	if(regen_at != -1)
+		to_chat(user,"<span class = 'notice'>[name] has no blade to prime for explosion!</span>")
+		return
+	if(explode_at != -1)
+		to_chat(user,"<span class = 'notice'>[name] is already primed for explosion.</span>")
+		return
+	user.visible_message("<span class = 'warning'>[user.name] primes their [src] for detonation!</span>")
+	explode_at = world.time + explode_delay
+	GLOB.processing_objects |= src
+	update_icon()
+
+/obj/item/weapon/melee/blamite/process()
+	if(explode_at != -1 && world.time > explode_at)
+		det_in_hand()
+	if(regen_at != -1 && world.time > regen_at)
+		regen_crystal()
+
+/obj/item/weapon/melee/blamite/apply_hit_effect(var/mob/living/carbon/human/target, mob/living/user, var/hit_zone)
+	. = ..()
+	if(explode_at == -1 || . == 100 || !istype(target))
+		return
+	pre_explode_in_player(user,target)
+
+/obj/item/weapon/melee/blamite/cutlass
+	name = "Blamite Cutlass"
+	icon_state = "bl_cutlass"
+	item_state = "blamite_cutlass"
+	force = 30
+	throwforce = 15
+	lunge_dist = 3
+
+/obj/item/weapon/melee/blamite/dagger
+	name = "Blamite Dagger"
+	icon_state = "bl_dag"
+	item_state = "blamite_dagger"
+	force = 25
+	throwforce = 10
+	lunge_dist = 2
 
 /obj/item/weapon/melee/baton/humbler/covenant
 	name = "Type-12 Antipersonnel Incapacitator"

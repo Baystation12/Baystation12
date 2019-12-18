@@ -222,6 +222,9 @@
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 
+/obj/item/weapon/gun/launcher/grenade/brute_shot/can_embed()
+	return FALSE
+
 /obj/item/weapon/gun/launcher/grenade/brute_shot/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/grenade/brute_shot))
 		user.visible_message("<span class='info'>[user] begins reloading \icon[src][src]...</span>")
@@ -258,9 +261,6 @@
 
 	//automatically cycle the chamber
 	pump(user, 1)
-
-/obj/item/weapon/gun/launcher/grenade/brute_shot/can_embed()
-	return FALSE
 
 /obj/item/weapon/grenade/brute_shot
 	name = "belt of type-25 antipersonnel grenades"

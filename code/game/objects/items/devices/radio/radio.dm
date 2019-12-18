@@ -218,6 +218,7 @@
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
 	A.fully_replace_character_name(from)
 	talk_into(A, message, channel,"states", all_languages[language_name])
+	A.loc = null
 	qdel(A)
 
 // Interprets the message mode when talking into a radio, possibly returning a connection datum

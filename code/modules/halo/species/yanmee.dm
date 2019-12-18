@@ -38,20 +38,6 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 
 	roll_distance = 3
 
-	has_limbs = list(
-		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
-		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head),
-		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/hollow_bones),
-		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/hollow_bones),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/hollow_bones),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/hollow_bones),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/hollow_bones),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/hollow_bones),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/hollow_bones),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/hollow_bones)
-		)
-
 	pain_scream_sounds = list(\
 		'code/modules/halo/sounds/species_pain_screams/kiggyscream_1.ogg',
 		'code/modules/halo/sounds/species_pain_screams/kiggyscream_2.ogg',
