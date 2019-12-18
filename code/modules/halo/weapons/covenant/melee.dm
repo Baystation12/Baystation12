@@ -280,6 +280,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	regen_at = -1
 	update_icon()
 	set_blade_active(1)
+	GLOB.processing_objects -= src
 
 /obj/item/weapon/melee/blamite/proc/det_in_hand()
 	regen_at = world.time + regen_delay * 2
@@ -293,14 +294,12 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 		holder.visible_message("<span class = 'danger'>[name] overloads, burning [holder.name]!</spam>")
 	else
 		visible_message("<span class = 'warning'>[name] overloads, singing the air around it!</spam>")
-	GLOB.processing_objects -= src
 
 /obj/item/weapon/melee/blamite/proc/do_explode_in_player(var/mob/living/player)
 	//Kabloeey in a player//
 	if(player)
 		player.adjustFireLoss(explode_damage)
 		player.visible_message("<span class = 'notice'>The embedded Blamite Blade overloads, burning [player.name]!</spam>")
-		GLOB.processing_objects -= src
 
 /obj/item/weapon/melee/blamite/proc/pre_explode_in_player(var/mob/living/user,var/mob/living/carbon/human/target)
 	if(!istype(target))
@@ -312,6 +311,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	set_blade_active(0)
 	//Create shard, embed in enemy. Delay explosion by timeframe, then check for shard again. If present, call do_explode_in_player()//
 	var/obj/shard = new /obj/item/weapon/material/shard/shrapnel/blamite
+	shard.name = initial(shard.name)
 	var/obj/item/organ/external/embed_organ = pick(target.organs)
 	embed_organ.embed(shard)
 	spawn(explode_delay)
@@ -348,6 +348,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	item_state = "blamite_cutlass"
 	force = 30
 	throwforce = 15
+	lunge_dist = 3
 
 /obj/item/weapon/melee/blamite/dagger
 	name = "Blamite Dagger"
@@ -355,6 +356,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	item_state = "blamite_dagger"
 	force = 25
 	throwforce = 10
+	lunge_dist = 2
 
 /obj/item/weapon/melee/baton/humbler/covenant
 	name = "Type-12 Antipersonnel Incapacitator"
