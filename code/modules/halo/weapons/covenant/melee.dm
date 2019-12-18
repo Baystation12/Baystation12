@@ -344,7 +344,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 
 /obj/item/weapon/melee/blamite/cutlass
 	name = "Blamite Cutlass"
-	icon_state = "bl_dag"
+	icon_state = "bl_cutlass"
 	item_state = "blamite_cutlass"
 	force = 30
 	throwforce = 15
