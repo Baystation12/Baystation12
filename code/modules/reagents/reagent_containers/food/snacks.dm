@@ -1349,7 +1349,7 @@
 	icon_state = "coldchili"
 	filling_color = "#2b00ff"
 	center_of_mass = "x=15;y=9"
-	nutriment_desc = list("ice peppers" = 3)
+	nutriment_desc = list("chilly peppers" = 3)
 	nutriment_amt = 3
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 5
