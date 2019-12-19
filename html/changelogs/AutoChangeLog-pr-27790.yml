@@ -1,0 +1,5 @@
+author: "afterthought2"
+delete-after: True
+changes: 
+  - rscadd: "Buildable radio components for machines are now available. They will have limited use with machines currently."
+  - tweak: "When building air sensors, you now must also add a power component and a radio transmitter. You can use a multitool on the radio transmitter while standing near a machine to configure it."
