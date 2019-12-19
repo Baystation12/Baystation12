@@ -109,8 +109,8 @@
 		text = default
 	text = replacetext(text, "MERCHANT", name)
 	text = replacetext(text, "ORIGIN", origin)
-	text = replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
-	return replacetext(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
+	text = replacetext(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
+	return replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)
