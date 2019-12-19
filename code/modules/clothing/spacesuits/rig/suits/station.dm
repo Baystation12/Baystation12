@@ -302,17 +302,23 @@
 	)
 
 /obj/item/clothing/suit/space/rig/medical/attackby(obj/item/W as obj, mob/user as mob)
-	if(hold)
+	..()
+	var/obj/item/weapon/rig/rig = user.back
+	if(istype(rig) && !rig.canremove && hold)
 		return hold.attackby(W, user)
-		
-/obj/item/clothing/suit/space/rig/medical/attack_hand(mob/user as mob)
-	if(hold && hold.handle_attack_hand(user))
-		..(user)		
 	
+/obj/item/clothing/suit/space/rig/medical/attack_hand(mob/user as mob)
+	var/obj/item/weapon/rig/rig = user.back
+	if(istype(rig) && !rig.canremove && hold)
+		if(hold.handle_attack_hand(user))
+			return ..(user)
+	else
+		..()
+
 /obj/item/clothing/suit/space/rig/medical/emp_act(severity)
 	if(hold)
 		hold.emp_act(severity)
-		..()
+	..()
 
 /obj/item/clothing/shoes/magboots/rig/medical
 	species_restricted = list(SPECIES_HUMAN,SPECIES_SKRELL, SPECIES_UNATHI)

@@ -149,6 +149,7 @@ obj/item/rig_module/device/Initialize()
 	var/obj/item/prybar = /obj/item/weapon/crowbar/prybar
 	var/obj/item/analyzer = /obj/item/device/scanner/health
 	var/obj/item/inflatable_dispenser = /obj/item/weapon/inflatable_dispenser/mini
+	var/list/inflatables_list = list(/obj/item/inflatable, /obj/structure/inflatable, /turf, /obj/item/inflatable)
 	
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
@@ -217,7 +218,12 @@ obj/item/rig_module/device/Initialize()
 	if(!..())
 		return 0
 	
-	if(!target.Adjacent(holder.wearer))
+	var/mob/living/carbon/human/H = holder.wearer
+	
+	if(!target)
+		target = H
+	
+	if(!target.Adjacent(H))
 		return 0
 		
 	var/obj/item/use_on
@@ -226,55 +232,48 @@ obj/item/rig_module/device/Initialize()
 		if(istype(target,/obj/machinery/door))
 			use_on = prybar
 			
-		else if(istype(target, /obj/item/inflatable) || istype(target, /obj/structure/inflatable) || istype(target, /turf) || istype(target, /obj/item/inflatable))
+		else if(is_type_in_list(target, inflatables_list))
 			use_on = inflatable_dispenser
 			
-		else if (istype(target,/mob/living/carbon) && holder.wearer.a_intent == I_DISARM)
+		else if (istype(target,/mob/living/carbon) && H.a_intent == I_DISARM)
 			use_on = analyzer
 			
 		if(use_on)
-			var/resolved = target.attackby(use_on,holder.wearer)
+			var/resolved = target.attackby(use_on,H)
 			if(!resolved && use_on && target)
-				use_on.afterattack(target,holder.wearer,1)
+				use_on.afterattack(target,H,1)
 				return 1
 
-	var/mob/living/carbon/human/H = holder.wearer
 
-	if(!charge_selected)
-		to_chat(H, "<span class='danger'>You have not selected a chemical type.</span>")
-		return 0
 
-	var/datum/rig_charge/charge = charges[charge_selected]
-
-	if(!charge)
-		return 0
-
-	var/chems_to_use = 10
-	if(charge.charges <= 0)
-		to_chat(H, "<span class='danger'>Insufficient chems!</span>")
-		return 0
-	else if(charge.charges < chems_to_use)
-		chems_to_use = charge.charges
-
-	var/mob/living/carbon/target_mob
-	if(target)
-		if(istype(target,/mob/living/carbon))
-			target_mob = target
-		else
+	if(istype(target,/mob/living/carbon))
+		var/datum/rig_charge/charge = charges[charge_selected]
+		
+		if(!charge_selected)
+			to_chat(H, "<span class='danger'>You have not selected a chemical type.</span>")
 			return 0
-			
-	else
-		target_mob = H
 
-	if(target_mob != H)
-		to_chat(H, "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>")
-	to_chat(target_mob, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
-	target_mob.reagents.add_reagent(charge.product_type, chems_to_use)
+		if(!charge)
+			return 0
 
-	charge.charges -= chems_to_use
-	if(charge.charges < 0) charge.charges = 0
+		var/chems_to_use = 10
+		if(charge.charges <= 0)
+			to_chat(H, "<span class='danger'>Insufficient chems!</span>")
+			return 0
+		else if(charge.charges < chems_to_use)
+			chems_to_use = charge.charges
 
-	return 1
+		if(target != H)
+			to_chat(H, "<span class='danger'>You inject [target] with [chems_to_use] unit\s of [charge.display_name].</span>")
+		to_chat(target, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
+		target.reagents.add_reagent(charge.product_type, chems_to_use)
+
+		charge.charges -= chems_to_use
+		if(charge.charges < 0) charge.charges = 0
+		return 1
+	
+	return 0
+
 
 /obj/item/rig_module/chem_dispenser/Initialize()
 	. = ..()
@@ -286,6 +285,12 @@ obj/item/rig_module/device/Initialize()
 	prybar.canremove = 0
 	analyzer.canremove = 0
 	inflatable_dispenser.canremove = 0
+
+/obj/item/rig_module/chem_dispenser/Destroy()
+	QDEL_NULL(prybar)
+	QDEL_NULL(analyzer)
+	QDEL_NULL(inflatable_dispenser)
+	. = ..()
 
 /obj/item/rig_module/chem_dispenser/combat
 
