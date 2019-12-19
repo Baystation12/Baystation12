@@ -241,14 +241,13 @@
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
 	if (!id_tag)
 		id_tag = num2text(sequential_id("obj/machinery"))
-	. = ..()
 	if(controlled)
 		var/area/A = get_area(src)
 		if(A && !A.air_vent_names[id_tag])
 			var/new_name = "[A.name] Vent Pump #[A.air_vent_names.len+1]"
 			A.air_vent_names[id_tag] = new_name
 			SetName(new_name)
-	toggle_input_toggle()
+	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/proc/purge()
 	pressure_checks &= ~PRESSURE_CHECK_EXTERNAL
@@ -257,6 +256,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/refresh()
 	..()
 	hibernate = FALSE
+	toggle_input_toggle()
+
+/obj/machinery/atmospherics/unary/vent_pump/RefreshParts()
+	. = ..()
 	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
@@ -472,12 +475,14 @@
 	frequency = ATMOS_TANK_FREQ
 
 /obj/machinery/atmospherics/unary/vent_pump/tank
+	controlled = FALSE
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/vent_pump/tank = 1,
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
 	)
 
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank
+	controlled = FALSE
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/vent_pump/tank = 1,
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
@@ -490,6 +495,7 @@
 	frequency = EXTERNAL_AIR_FREQ
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air
+	controlled = FALSE
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/vent_pump/external_air = 1,
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/external_air = 1
@@ -502,6 +508,14 @@
 	frequency = SHUTTLE_AIR_FREQ
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle
+	controlled = FALSE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle = 1
+	)
+
+// This is intended for hybrid airlock-room setups, where unlike the above, this one is controlled by the air alarm and attached to the internal atmos system.
+/obj/machinery/atmospherics/unary/vent_pump/shuttle_auxiliary
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle = 1
@@ -514,6 +528,7 @@
 	frequency = AIRLOCK_AIR_FREQ
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
+	controlled = FALSE
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1
@@ -529,6 +544,7 @@
 	name = "Engine Core Vent"
 	power_channel = ENVIRON
 	power_rating = 30000
+	controlled = FALSE
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/vent_pump/engine = 1,
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/engine = 1

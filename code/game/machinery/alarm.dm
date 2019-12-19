@@ -177,6 +177,17 @@
 		return list()
 	return ..()
 
+// Request updates for air vents and scrubbers which appear to have been added.
+/obj/machinery/alarm/power_change()
+	. = ..()
+	if(. && !(stat & NOPOWER) && alarm_area)
+		for(var/id_tag in alarm_area.air_vent_names)
+			if(!alarm_area.air_vent_info[id_tag])
+				send_signal(id_tag, list("status" = TRUE))
+		for(var/id_tag in alarm_area.air_scrub_names)
+			if(!alarm_area.air_scrub_info[id_tag])
+				send_signal(id_tag, list("status" = TRUE))
+
 /obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return

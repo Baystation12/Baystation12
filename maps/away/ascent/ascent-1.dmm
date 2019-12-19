@@ -839,9 +839,8 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "cn" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/shuttle,
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1331;
 	master_tag = "ascent_seedship_fore_dock_controller";
 	pixel_x = -4;
 	pixel_y = 24
@@ -4096,9 +4095,8 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_port)
 "jH" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
-	dir = 1;
-	frequency = 1331
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/shuttle{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_port)

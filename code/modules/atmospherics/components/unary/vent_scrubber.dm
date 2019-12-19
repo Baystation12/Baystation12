@@ -104,7 +104,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	if (!id_tag)
 		id_tag = num2text(sequential_id("obj/machinery"))
-	. = ..()
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
 		for(var/g in gas_data.gases)
@@ -115,6 +114,10 @@
 		var/new_name = "[A.name] Vent Scrubber #[A.air_scrub_names.len+1]"
 		A.air_scrub_names[id_tag] = new_name
 		SetName(new_name)
+	. = ..()
+
+/obj/machinery/atmospherics/unary/vent_scrubber/RefreshParts()
+	. = ..()
 	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Process()
@@ -331,4 +334,17 @@
 		"panic_siphon" = /decl/public_access/public_variable/panic,
 		"set_scrubbing" = /decl/public_access/public_variable/scrubbing,
 		"init" = /decl/public_access/public_variable/name
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_scrubber/shuttle
+	frequency = SHUTTLE_AIR_FREQ
+
+/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/shuttle
+	frequency = SHUTTLE_AIR_FREQ
+
+// Similar to the vent of the same name, for hybrid airlock-rooms
+/obj/machinery/atmospherics/unary/vent_scrubber/on/shuttle_auxiliary
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_scrubber/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/shuttle = 1
 	)

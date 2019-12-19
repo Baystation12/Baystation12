@@ -76,17 +76,19 @@
 			continue
 		if(!isPlayerLevel(A.z))
 			continue
-		var/obj/machinery/alarm/alarm = locate() in A
+		var/obj/machinery/alarm/alarm = locate() in A // Only test areas with functional alarms
 		if(!alarm)
+			continue
+		if(alarm.stat & (NOPOWER | BROKEN))
 			continue
 
 		for(var/tag in A.air_vent_names) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
 			if(!A.air_vent_info[tag])
-				log_bad("Air vent [A.air_vent_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				log_bad("[log_info_line(A.air_vent_names[tag])] with id_tag [tag] did not update the air alarm in area [A].")
 				failed = TRUE
 		for(var/tag in A.air_scrub_names)
 			if(!A.air_scrub_info[tag])
-				log_bad("Air scrubber [A.air_scrub_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				log_bad("[log_info_line(A.air_vent_names[tag])] with id_tag [tag] did not update the air alarm in area [A].")
 				failed = TRUE
 
 	if(failed)
