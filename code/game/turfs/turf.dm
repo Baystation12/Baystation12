@@ -75,6 +75,9 @@
 		SSao.queue -= src
 		ao_queued = 0
 
+	if (z_flags & ZM_MIMIC_BELOW)
+		cleanup_zmimic()
+
 	if (bound_overlay)
 		QDEL_NULL(bound_overlay)
 

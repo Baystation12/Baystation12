@@ -43,6 +43,14 @@
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
+/turf/space/Destroy()
+	// Cleanup cached z_eventually_space values above us.
+	if (above)
+		var/turf/T = src
+		while ((T = GetAbove(T)))
+			T.z_eventually_space = FALSE
+	return ..()
+
 /turf/space/LateInitialize()
 	if(GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
