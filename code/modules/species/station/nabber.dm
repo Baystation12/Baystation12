@@ -49,7 +49,13 @@
 	total_health = 200
 	brute_mod = 0.9
 	burn_mod =  1.35
-	natural_armour_values = list(melee = 30, bullet = 15, laser = 0, energy = 0, bomb = 30, bio = 100, rad = 5)
+	natural_armour_values = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = 0.5*ARMOR_RAD_MINOR
+		)
 
 	gluttonous = GLUT_SMALLER
 	mob_size = MOB_LARGE
@@ -137,7 +143,7 @@
 	pain_emotes_with_pain_level = list(
 			list(/decl/emote/audible/bug_hiss) = 40
 	)
-	
+
 /datum/species/nabber/New()
 	equip_adjust = list(
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),

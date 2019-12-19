@@ -7,6 +7,9 @@
 	filename = "deckmngr"
 	filedesc = "Deck Management"
 	nanomodule_path = /datum/nano_module/deck_management
+	program_icon_state = "request"
+	program_key_state = "rd_key"
+	program_menu_icon = "clock"
 	extended_desc = "A tool for managing shuttles, filling out flight plans, and submitting flight-related paperwork."
 	size = 18
 	available_on_ntnet = 1
@@ -148,7 +151,7 @@
 	var/mission_data = list()
 	mission_data["name"] = mission.name
 	mission_data["departure"] = mission.depart_time || "N/A"
-	mission_data["return"] = mission.return_time || "N/A"
+	mission_data["return_time"] = mission.return_time || "N/A"
 	switch(mission.stage)
 		if(SHUTTLE_MISSION_QUEUED)
 			mission_data["status"] = "Mission Scheduled."

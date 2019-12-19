@@ -5,7 +5,7 @@
 
 /obj/item/weapon/stock_parts/circuitboard/stationalert/New()
 	alarm_handlers = new()
-	set_extension(src, /datum/extension/interactive/multitool, /datum/extension/interactive/multitool/circuitboards/stationalert)
+	set_extension(src, /datum/extension/interactive/multitool/circuitboards/stationalert)
 	..()
 
 /obj/item/weapon/stock_parts/circuitboard/stationalert/construct(var/obj/machinery/computer/station_alert/SA)

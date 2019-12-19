@@ -1,3 +1,5 @@
+var/global/list/empty_playable_ai_cores = list()
+
 /obj/structure/AIcore
 	density = 1
 	anchored = 0

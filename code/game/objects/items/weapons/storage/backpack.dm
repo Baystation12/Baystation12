@@ -25,7 +25,7 @@
 
 /obj/item/weapon/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))
-		set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
+		set_extension(src, /datum/extension/appearance/cardborg)
 	..()
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -142,7 +142,7 @@
 	icon_state = "viropack"
 
 /obj/item/weapon/storage/backpack/chemistry
-	name = "chemistry backpack"
+	name = "pharmacist's backpack"
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
 
@@ -236,6 +236,17 @@
 	icon_state = "duffle_eng"
 	item_state_slots = list(slot_l_hand_str = "duffle_eng", slot_r_hand_str = "duffle_eng")
 
+/obj/item/weapon/storage/backpack/dufflebag/firefighter
+	startswith = list(
+		/obj/item/weapon/storage/belt/fire_belt/full,
+		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/extinguisher,
+		/obj/item/clothing/gloves/fire,
+		/obj/item/clothing/accessory/fire_overpants,
+		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/clothing/head/hardhat/firefighter,
+		/obj/item/weapon/extinguisher
+	)
 /*
  * Satchel Types
  */
@@ -319,8 +330,8 @@
 	icon_state = "satchel-vir"
 
 /obj/item/weapon/storage/backpack/satchel/chem
-	name = "chemist satchel"
-	desc = "A sterile satchel with chemist colours."
+	name = "pharmacist satchel"
+	desc = "A sterile satchel with pharmacist colours."
 	icon_state = "satchel-chem"
 
 /obj/item/weapon/storage/backpack/satchel/gen
@@ -438,7 +449,7 @@
 	icon_state = "courierbag"
 
 /obj/item/weapon/storage/backpack/messenger/chem
-	name = "chemistry messenger bag"
+	name = "pharmacy messenger bag"
 	desc = "A serile backpack worn over one shoulder.  This one is in Chemsitry colors."
 	icon_state = "courierbagchem"
 

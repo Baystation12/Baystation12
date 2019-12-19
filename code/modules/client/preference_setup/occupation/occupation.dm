@@ -150,6 +150,7 @@
 				var/help_link = "</td><td width = '10%' align = 'center'><a href='?src=\ref[src];job_info=[title]'>?</a></td>"
 				lastJob = job
 
+				var/bodytype = S.get_bodytype()
 				var/bad_message = ""
 				if(job.total_positions == 0 && job.spawn_positions == 0)
 					bad_message = "<b>\[UNAVAILABLE]</b>"
@@ -158,8 +159,8 @@
 				else if(!job.player_old_enough(user.client))
 					var/available_in_days = job.available_in_days(user.client)
 					bad_message = "\[IN [(available_in_days)] DAYS]"
-				else if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
-					bad_message = "\[MINIMUM CHARACTER AGE: [job.minimum_character_age]]"
+				else if(LAZYACCESS(job.minimum_character_age, bodytype) && user.client && (user.client.prefs.age < job.minimum_character_age[bodytype]))
+					bad_message = "\[MIN CHAR AGE: [job.minimum_character_age[bodytype]]]"
 				else if(!job.is_species_allowed(S))
 					bad_message = "<b>\[SPECIES RESTRICTED]</b>"
 				else if(!S.check_background(job, user.client.prefs))

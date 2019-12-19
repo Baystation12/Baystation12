@@ -52,16 +52,19 @@
 	allowed_roles = RESTRICTED_ROLES
 
 /datum/gear/suit/labcoat
-	allowed_roles = STERILE_ROLES
+	allowed_roles = DOCTOR_ROLES
 
 /datum/gear/suit/labcoat_corp
-	allowed_roles = STERILE_ROLES
+	allowed_roles = DOCTOR_ROLES
 	allowed_branches = CIVILIAN_BRANCHES
+
+/datum/gear/suit/labcoat_blue
+	allowed_roles = DOCTOR_ROLES
 
 /datum/gear/suit/labcoat_ec
 	display_name = "labcoat, Expeditionary Corps"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science/ec
-	allowed_roles = STERILE_ROLES
+	allowed_roles = DOCTOR_ROLES
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
 /datum/gear/suit/labcoat_ec_cso
@@ -110,7 +113,7 @@
 	armors["tan plate carrier"] = /obj/item/clothing/suit/armor/pcarrier/tan
 	gear_tweaks += new/datum/gear_tweak/path(armors)
 
-/datum/gear/suit/ocie
+/datum/gear/suit/sfp
 	display_name = "Agent's jacket"
 	path = /obj/item/clothing/suit/storage/toggle/agent_jacket
 	allowed_roles = list(/datum/job/detective)

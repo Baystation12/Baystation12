@@ -33,7 +33,6 @@
 	                    SKILL_SCIENCE = SKILL_MAX,
 	                    SKILL_MEDICAL = SKILL_MAX,
 	                    SKILL_ANATOMY = SKILL_MAX,
-	                    SKILL_VIROLOGY = SKILL_MAX,
 	                    SKILL_CHEMISTRY = SKILL_MAX)
 
 	var/info = "You have survived a terrible disaster. Make the best of things that you can."
@@ -63,8 +62,9 @@
 	return TRUE
 
 /datum/job/submap/is_restricted(var/datum/preferences/prefs, var/feedback)
-	if(minimum_character_age && (prefs.age < minimum_character_age))
-		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age].</span>")
+	var/datum/species/S = all_species[prefs.species]
+	if(LAZYACCESS(minimum_character_age, S.get_bodytype()) && (prefs.age < minimum_character_age[S.get_bodytype()]))
+		to_chat(feedback, "<span class='boldannounce'>Not old enough. Minimum character age is [minimum_character_age[S.get_bodytype()]].</span>")
 		return TRUE
 	if(LAZYLEN(whitelisted_species) && !(prefs.species in whitelisted_species))
 		to_chat(feedback, "<span class='boldannounce'>Your current species, [prefs.species], is not permitted as [title] on \a [owner.archetype.descriptor].</span>")

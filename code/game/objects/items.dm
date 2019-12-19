@@ -49,7 +49,9 @@
 	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. This is an associative list: item slot - slowdown
 	var/slowdown_accessory // How much an accessory will slow you down when attached to a worn article of clothing.
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
-	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	var/armor_type = /datum/extension/armor
+	var/list/armor
+	var/armor_degradation_speed //How fast armor will degrade, multiplier to blocked damage to get armor damage value.
 	var/list/allowed = null //suit storage stuff.
 	var/obj/item/device/uplink/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
 	var/zoomdevicename = null //name used for message when binoculars/scope is used
@@ -95,7 +97,7 @@
 	if(islist(armor))
 		for(var/type in armor)
 			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
-				set_extension(src, /datum/extension/armor, /datum/extension/armor, armor)
+				set_extension(src, armor_type, armor, armor_degradation_speed)
 				break
 
 /obj/item/Destroy()
@@ -156,7 +158,7 @@
 			if (prob(5))
 				qdel(src)
 
-/obj/item/examine(mob/user, var/distance = -1)
+/obj/item/examine(mob/user, distance)
 	var/size
 	switch(src.w_class)
 		if(ITEM_SIZE_TINY)
@@ -218,7 +220,9 @@
 		var/obj/item/weapon/storage/S = loc
 		S.remove_from_storage(src)
 
-	throwing = 0
+	if(!QDELETED(throwing))
+		throwing.finalize(hit=TRUE)
+
 	if (loc == user)
 		if(!user.unEquip(src))
 			return
@@ -251,8 +255,7 @@
 		R.hud_used.update_robot_modules_display()
 
 /obj/item/attackby(obj/item/weapon/W, mob/user)
-
-	if(SSfabrication.try_craft_with(src, W, user))
+	if((. = SSfabrication.try_craft_with(src, W, user)))
 		return
 
 	if(istype(W, /obj/item/weapon/storage))
@@ -263,7 +266,6 @@
 					S.gather_all(src.loc, user)
 			else if(S.can_be_inserted(src, user))
 				S.handle_item_insertion(src)
-				return
 
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return
@@ -823,13 +825,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/get_pressure_weakness(pressure)
 	. = 1
 	if(pressure > ONE_ATMOSPHERE)
-		if(max_pressure_protection != null) 
+		if(max_pressure_protection != null)
 			if(max_pressure_protection < pressure)
 				return min(1, round((pressure - max_pressure_protection) / max_pressure_protection, 0.01))
 			else
 				return 0
 	if(pressure < ONE_ATMOSPHERE)
-		if(min_pressure_protection != null) 
+		if(min_pressure_protection != null)
 			if(min_pressure_protection > pressure)
 				return min(1, round((min_pressure_protection - pressure) / min_pressure_protection, 0.01))
 			else

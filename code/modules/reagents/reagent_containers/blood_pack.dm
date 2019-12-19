@@ -29,8 +29,6 @@
 	else
 		w_class = ITEM_SIZE_TINY
 
-/obj/item/weapon/reagent_containers/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
 /obj/item/weapon/reagent_containers/ivbag/on_update_icon()
 	overlays.Cut()
 	var/percent = round(reagents.total_volume / volume * 100)
@@ -91,7 +89,7 @@
 	..()
 	if(blood_type)
 		name = "blood pack [blood_type]"
-		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list()))
+		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
 
 /obj/item/weapon/reagent_containers/ivbag/blood/APlus
 	blood_type = "A+"

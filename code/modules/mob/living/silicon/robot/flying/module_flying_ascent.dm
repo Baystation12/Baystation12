@@ -57,6 +57,30 @@
 		LANGUAGE_SKRELLIAN        = TRUE,
 		LANGUAGE_NABBER           = TRUE
 	)
+	
+	skills = list(
+		SKILL_BUREAUCRACY	= SKILL_ADEPT,
+		SKILL_FINANCE		= SKILL_EXPERT,
+		SKILL_EVA			= SKILL_EXPERT,
+		SKILL_MECH			= HAS_PERK,
+		SKILL_PILOT			= SKILL_EXPERT,
+		SKILL_HAULING		= SKILL_EXPERT,
+		SKILL_COMPUTER		= SKILL_EXPERT,
+		SKILL_BOTANY		= SKILL_EXPERT,
+		SKILL_COOKING		= SKILL_EXPERT,
+		SKILL_COMBAT		= SKILL_EXPERT,
+		SKILL_WEAPONS		= SKILL_EXPERT,
+		SKILL_FORENSICS		= SKILL_EXPERT,
+		SKILL_CONSTRUCTION	= SKILL_EXPERT,
+		SKILL_ELECTRICAL	= SKILL_EXPERT,
+		SKILL_ATMOS			= SKILL_EXPERT,
+		SKILL_ENGINES		= SKILL_EXPERT,
+		SKILL_DEVICES		= SKILL_EXPERT,
+		SKILL_SCIENCE		= SKILL_EXPERT,
+		SKILL_MEDICAL		= SKILL_EXPERT,
+		SKILL_ANATOMY		= SKILL_EXPERT,
+		SKILL_CHEMISTRY		= SKILL_EXPERT
+	)
 
 // Copypasted from repair bot - todo generalize this step.
 /obj/item/weapon/robot_module/flying/ascent/finalize_synths()
@@ -93,11 +117,6 @@
 	var/obj/item/stack/nanopaste/N = locate() in equipment
 	N.synths = list(nanite)
 
-	. = ..()
-
-/obj/item/weapon/robot_module/flying/ascent/Initialize()
-	for(var/decl/hierarchy/skill/skill in GLOB.skills)
-		skills[skill.type] = SKILL_EXPERT
 	. = ..()
 
 /obj/item/weapon/robot_module/flying/ascent/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)

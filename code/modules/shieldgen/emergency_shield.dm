@@ -89,16 +89,19 @@
 				qdel(src)
 
 
-/obj/machinery/shield/hitby(AM as mob|obj)
+/obj/machinery/shield/hitby(AM as mob|obj, var/datum/thrownthing/TT)
 	//Let everyone know we've been hit!
 	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
 
 	//Super realistic, resource-intensive, real-time damage calculations.
 	var/tforce = 0
-	if(ismob(AM))
-		tforce = 40
+
+	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
+		var/mob/I = AM
+		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	else
-		tforce = AM:throwforce
+		var/obj/O = AM
+		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 
 	src.health -= tforce
 

@@ -9,7 +9,7 @@
 	integrity = 50
 	shard_type = SHARD_SHARD
 	tableslam_noise = 'sound/effects/Glasshit.ogg'
-	hardness = 50
+	hardness = MATERIAL_RIGID + 10	
 	melting_point = T0C + 100
 	weight = 14
 	brute_armor = 1
@@ -35,6 +35,7 @@
 	display_name = "borosilicate glass"
 	stack_type = /obj/item/stack/material/glass/phoronglass
 	flags = MATERIAL_BRITTLE
+	hardness = MATERIAL_HARD
 	integrity = 70
 	brute_armor = 2
 	burn_armor = 5

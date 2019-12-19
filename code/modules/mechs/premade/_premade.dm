@@ -21,6 +21,10 @@
 	if(!material)
 		material = SSmaterials.get_material_by_name(MATERIAL_STEEL)
 	. = ..()
+
+	spawn_mech_equipment()
+
+/mob/living/exosuit/premade/proc/spawn_mech_equipment()
 	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 
 /mob/living/exosuit/premade/random

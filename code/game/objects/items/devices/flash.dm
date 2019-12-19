@@ -75,6 +75,8 @@
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
 					flash_strength = round(H.getFlashMod() * flash_strength)
+					if(safety > FLASH_PROTECTION_NONE)
+						flash_strength = (flash_strength / 2)
 				if(flash_strength > 0)
 					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
 					M.Stun(flash_strength / 2)

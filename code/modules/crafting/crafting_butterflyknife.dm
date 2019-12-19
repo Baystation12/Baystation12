@@ -18,6 +18,7 @@
 	begins_with_object_type = /obj/item/weapon/material/butterflyhandle
 	item_desc = "It's an unfinished balisong with some loose screws."
 	item_icon_state = "butterfly"
+	consume_completion_trigger = TRUE
 	completion_trigger_type = /obj/item/weapon/material/butterflyblade
 	progress_message = "You attach the knife blade to the handle."
 	next_stages = list(/decl/crafting_stage/screwdriver/balisong)

@@ -4,6 +4,7 @@
 	icon_state = "xenobio"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/scanbeep.ogg'
+	printout_color = "#f3e6ff"
 	origin_tech = list(TECH_MAGNET = 1, TECH_BIO = 1)
 
 	var/list/valid_targets = list(
@@ -15,6 +16,9 @@
 /obj/item/device/scanner/xenobio/is_valid_scan_target(atom/O)
 	if(is_type_in_list(O, valid_targets))
 		return TRUE
+	if(istype(O, /obj/structure/stasis_cage))
+		var/obj/structure/stasis_cage/cagie = O
+		return !!cagie.contained
 	return FALSE
 
 /obj/item/device/scanner/xenobio/scan(mob/O, mob/user)
@@ -30,6 +34,9 @@
 
 /proc/xenobio_scan_results(mob/target)
 	. = list()
+	if(istype(target, /obj/structure/stasis_cage))
+		var/obj/structure/stasis_cage/cagie = target
+		target = cagie.contained
 	if(istype(target, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = target
 		. += "Data for [H]:"
@@ -46,6 +53,16 @@
 		. += "Breathes:\t[list_gases(A.min_gas)]"
 		. += "Known toxins:\t[list_gases(A.max_gas)]"
 		. += "Temperature comfort zone:\t[A.minbodytemp] K to [A.maxbodytemp] K"
+		var/area/map = locate(/area/overmap)
+		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
+			if((A in P.animals) || is_type_in_list(A, P.repopulate_types))
+				var/list/discovered = SSstatistics.get_field(STAT_XENOFAUNA_SCANNED)
+				if(!discovered)
+					discovered = list()
+				discovered |= "[P.name]-[A.type]"
+				SSstatistics.set_field(STAT_XENOFAUNA_SCANNED, discovered)
+				. += "New xenofauna species discovered!"
+				break
 	else if(istype(target, /mob/living/carbon/slime/))
 		var/mob/living/carbon/slime/T = target
 		. += "Slime scan result for \the [T]:"
@@ -83,5 +100,5 @@
 		. += "Growth progress:\t[T.amount_grown]/10."
 	else
 		. += "Incompatible life form, analysis failed."
-	
+
 	. = jointext(., "<br>")

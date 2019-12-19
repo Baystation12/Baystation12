@@ -133,9 +133,9 @@
 		list(mode_name="long bursts",  burst=6, fire_delay=null, move_delay=10,    one_hand_penalty=2, burst_accuracy=list(0,-1,-1,-1,-2), dispersion=list(0.6, 0.6, 1.0, 1.0, 1.2)),
 		)
 
-/obj/item/weapon/gun/magnetic/railgun/automatic/examine(var/mob/user)
-	. = ..(user,1)
-	if(.)
+/obj/item/weapon/gun/magnetic/railgun/automatic/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, "<span class='notice'>Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.</span>")
 
 /obj/item/weapon/gun/magnetic/railgun/automatic/mmi

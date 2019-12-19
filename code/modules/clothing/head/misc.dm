@@ -110,7 +110,7 @@
 
 /obj/item/clothing/head/cardborg/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/appearance, /datum/extension/appearance/cardborg)
+	set_extension(src, /datum/extension/appearance/cardborg)
 
 /obj/item/clothing/head/justice
 	name = "justice hat"
@@ -140,7 +140,7 @@
 /obj/item/clothing/head/flatcap
 	name = "flat cap"
 	desc = "A working man's cap."
-	icon_state = "flat_cap"
+	icon_state = "gentcap"
 	item_state_slots = list(
 		slot_l_hand_str = "det_hat",
 		slot_r_hand_str = "det_hat",
@@ -315,7 +315,10 @@
 	icon_state = "tank"
 	flags_inv = BLOCKHEADHAIR
 	color = "#5f5f5f"
-	armor = list(melee = 20)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bomb = ARMOR_BOMB_PADDED
+		)
 
 /obj/item/clothing/head/tank/olive
 	color = "#727c58"

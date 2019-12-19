@@ -32,6 +32,10 @@
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 
+/area/Destroy()
+	..()
+	return QDEL_HINT_HARDDEL
+
 // Changes the area of T to A. Do not do this manually.
 // Area is expected to be a non-null instance.
 /proc/ChangeArea(var/turf/T, var/area/A)
@@ -247,7 +251,7 @@ var/list/mob/living/forced_ambiance_list = new
 	else
 		if(L.client.ambience_playing)
 			L.client.ambience_playing = 0
-			sound_to(L, sound(null, channel = 2))
+			sound_to(L, sound(null, channel = GLOB.ambience_sound_channel))
 
 	if(L.lastarea != src)
 		if(LAZYLEN(forced_ambience))

@@ -13,7 +13,7 @@
 	. = ..()
 	if(thing.force) shed_atom(forcefully = TRUE)
 
-/obj/structure/diona_gestalt/hitby(var/atom/movable/AM, var/speed = THROWFORCE_SPEED_DIVISOR)
+/obj/structure/diona_gestalt/hitby()
 	. = ..()
 	shed_atom(forcefully = TRUE)
 

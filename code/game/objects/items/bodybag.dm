@@ -38,6 +38,7 @@
 	density = 0
 	storage_capacity = (MOB_MEDIUM * 2) - 1
 	var/contains_body = 0
+	var/has_label = FALSE
 
 /obj/structure/closet/body_bag/attackby(var/obj/item/W, mob/user as mob)
 	if (istype(W, /obj/item/weapon/pen))
@@ -50,16 +51,27 @@
 		if (t)
 			src.SetName("body bag - ")
 			src.name += t
-			src.overlays += image(src.icon, "bodybag_label")
+			has_label = TRUE
 		else
 			src.SetName("body bag")
-	//..() //Doesn't need to run the parent. Since when can fucking bodybags be welded shut? -Agouri
+		src.update_icon()
 		return
 	else if(isWirecutter(W))
 		src.SetName("body bag")
-		src.overlays.Cut()
+		has_label = FALSE
 		to_chat(user, "You cut the tag off \the [src].")
+		src.update_icon()
 		return
+
+/obj/structure/closet/body_bag/on_update_icon()
+	if(opened)
+		icon_state = "open"
+	else
+		icon_state = "closed_unlocked"
+
+	src.overlays.Cut()
+	if(has_label)
+		src.overlays += image(src.icon, "bodybag_label")
 
 /obj/structure/closet/body_bag/store_mobs(var/stored_units)
 	contains_body = ..()

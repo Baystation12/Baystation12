@@ -139,7 +139,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "ay" = (
-/obj/item/modular_computer/console/preset/merchant,
+/obj/machinery/computer/modular/preset/merchant,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "az" = (

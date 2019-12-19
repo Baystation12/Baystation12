@@ -1,6 +1,6 @@
 #include "derelict_areas.dm"
 
-/obj/effect/overmap/sector/derelict
+/obj/effect/overmap/visitable/sector/derelict
 	name = "debris field"
 	desc = "A large field of miscellanious debris."
 	icon_state = "object"

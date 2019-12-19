@@ -47,10 +47,10 @@
 		return
 	. = ..()
 
-/obj/structure/hygiene/examine()
+/obj/structure/hygiene/examine(mob/user)
 	. = ..()
 	if(clogged > 0)
-		to_chat(usr, "<span class='warning'>It seems to be badly clogged.</span>")
+		to_chat(user, "<span class='warning'>It seems to be badly clogged.</span>")
 
 /obj/structure/hygiene/Process()
 	if(clogged <= 0)
@@ -380,18 +380,18 @@
 		return
 
 	to_chat(usr, "<span class='notice'>You start washing your hands.</span>")
+	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	sleep(40)
+	if(!do_after(user, 40, src))
+		busy = 0
+		return TRUE
 	busy = 0
 
-	if(!Adjacent(user)) return		//Person has moved away from the sink
-
 	user.clean_blood()
-	if(ishuman(user))
-		user:update_inv_gloves()
-	for(var/mob/V in viewers(src, null))
-		V.show_message("<span class='notice'>[user] washes their hands using \the [src].</span>")
+	user.visible_message( \
+		"<span class='notice'>[user] washes their hands using \the [src].</span>", \
+		"<span class='notice'>You wash your hands using \the [src].</span>")
 
 
 /obj/structure/hygiene/sink/attackby(obj/item/O as obj, var/mob/living/user)
@@ -407,6 +407,7 @@
 	if (istype(RG) && RG.is_open_container() && RG.reagents)
 		RG.reagents.add_reagent(/datum/reagent/water, min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
+		playsound(loc, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
 	else if (istype(O, /obj/item/weapon/melee/baton))
@@ -439,6 +440,7 @@
 	if(!I || !istype(I,/obj/item)) return
 
 	to_chat(usr, "<span class='notice'>You start washing \the [I].</span>")
+	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
 	if(!do_after(user, 40, src))

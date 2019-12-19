@@ -5,12 +5,12 @@
 		var/datum/extension/armor/armor_datum = armor
 		. = armor_datum.apply_damage_modifications(arglist(.))
 
-/mob/living/proc/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen)
+/mob/living/proc/get_blocked_ratio(def_zone, damage_type, damage_flags, armor_pen, damage)
 	var/list/armors = get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = 0
 	for(var/armor in armors)
 		var/datum/extension/armor/armor_datum = armor
-		. = 1 - (1 - .) * (1 - armor_datum.get_blocked(damage_type, damage_flags, armor_pen)) // multiply the amount we let through
+		. = 1 - (1 - .) * (1 - armor_datum.get_blocked(damage_type, damage_flags, armor_pen, damage)) // multiply the amount we let through
 	. = min(1, .)
 
 /mob/living/proc/get_armors_by_zone(def_zone, damage_type, damage_flags)
@@ -36,9 +36,19 @@
 	var/damaged
 	if(!P.nodamage)
 		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
+		bullet_impact_visuals(P, def_zone, damaged)
 	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
-		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration)
+		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.damage)
 	P.on_hit(src, ., def_zone)
+
+// For visuals and blood splatters etc
+/mob/living/proc/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone, var/damage)
+	var/list/impact_sounds = LAZYACCESS(P.impact_sounds, get_bullet_impact_effect_type(def_zone))
+	if(length(impact_sounds))
+		playsound(src, pick(impact_sounds), 75)
+
+/mob/living/get_bullet_impact_effect_type(var/def_zone)
+	return BULLET_IMPACT_MEAT
 
 /mob/living/proc/aura_check(var/type)
 	if(!auras)
@@ -115,7 +125,7 @@
 	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I)
 
 //this proc handles being hit by a thrown atom
-/mob/living/hitby(var/atom/movable/AM, var/speed = THROWFORCE_SPEED_DIVISOR)
+/mob/living/hitby(var/atom/movable/AM, var/datum/thrownthing/TT)
 
 	if(isliving(AM))
 		var/mob/living/M = AM
@@ -126,18 +136,15 @@
 			M.Weaken(rand(4,8))
 		M.visible_message(SPAN_DANGER("\The [M] collides with \the [src]!"))
 
-	if(!aura_check(AURA_TYPE_THROWN, AM, speed))
+	if(!aura_check(AURA_TYPE_THROWN, AM, TT.speed))
 		return
 
 	if(istype(AM,/obj/))
 		var/obj/O = AM
 		var/dtype = O.damtype
-		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
+		var/throw_damage = O.throwforce*(TT.speed/THROWFORCE_SPEED_DIVISOR)
 
-		var/miss_chance = 15
-		if (O.throw_source)
-			var/distance = get_dist(O.throw_source, loc)
-			miss_chance = max(15*(distance-2), 0)
+		var/miss_chance = max(15*(TT.dist_travelled-2),0)
 
 		if (prob(miss_chance))
 			visible_message("<span class='notice'>\The [O] misses [src] narrowly!</span>")
@@ -146,23 +153,20 @@
 		src.visible_message("<span class='warning'>\The [src] has been hit by \the [O]</span>.")
 		apply_damage(throw_damage, dtype, null, O.damage_flags(), O)
 
-		O.throwing = 0		//it hit, so stop moving
-
-		if(ismob(O.thrower))
-			var/mob/M = O.thrower
-			var/client/assailant = M.client
+		if(TT.thrower)
+			var/client/assailant = TT.thrower.client
 			if(assailant)
-				admin_attack_log(M, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
+				admin_attack_log(TT.thrower, src, "Threw \an [O] at the victim.", "Had \an [O] thrown at them.", "threw \an [O] at")
 
 		// Begin BS12 momentum-transfer code.
 		var/mass = 1.5
 		if(istype(O, /obj/item))
 			var/obj/item/I = O
 			mass = I.w_class/THROWNOBJ_KNOCKBACK_DIVISOR
-		var/momentum = speed*mass
+		var/momentum = TT.speed*mass
 
-		if(O.throw_source && momentum >= THROWNOBJ_KNOCKBACK_SPEED)
-			var/dir = get_dir(O.throw_source, src)
+		if(momentum >= THROWNOBJ_KNOCKBACK_SPEED)
+			var/dir = TT.init_dir
 
 			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
@@ -189,8 +193,8 @@
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
 	visible_message("<span class='danger'>[src] slams into \the [T]!</span>")
-	playsound(loc, 'sound/effects/bangtaper.ogg', 50, 1, -1)
-	src.take_organ_damage(speed*5)
+	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
+	apply_damage(speed*5, BRUTE)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)

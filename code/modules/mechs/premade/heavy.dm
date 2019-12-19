@@ -18,8 +18,11 @@
 
 	. = ..()
 
+/mob/living/exosuit/premade/heavy/spawn_mech_equipment()
+	..()
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_LEFT_HAND)
 	install_system(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)
+	install_system(new /obj/item/mech_equipment/shields(src), HARDPOINT_BACK)
 
 /obj/item/mech_component/manipulators/heavy
 	name = "heavy arms"

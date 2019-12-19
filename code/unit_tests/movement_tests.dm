@@ -22,7 +22,7 @@
 	else
 		pass("The target was crossed 1 time.")
 
-	qdel(target)
+	qdel(mover)
 	qdel(crossed)
 	return TRUE
 

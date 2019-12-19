@@ -29,7 +29,6 @@
 	var/components_per_page = 5
 	health = 30
 	pass_flags = 0
-	armor = list("melee" = 50, "bullet" = 70, "laser" = 70, "energy" = 100, "bomb" = 10, "bio" = 100, "rad" = 100, "fire" = 0, "acid" = 0)
 	anchored = FALSE
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 	var/list/color_whitelist = list( //This is just for checking that hacked colors aren't in the save data.
@@ -53,8 +52,6 @@
 
 /obj/item/device/electronic_assembly/examine(mob/user)
 	. = ..()
-	if(!.)
-		return
 	if(IC_FLAG_ANCHORABLE & circuit_flags)
 		to_chat(user, "<span class='notice'>The anchoring bolts [anchored ? "are" : "can be"] <b>wrenched</b> in place and the maintenance panel [opened ? "can be" : "is"] <b>screwed</b> in place.</span>")
 	else
@@ -301,7 +298,7 @@
 	overlays += detail_overlay
 
 /obj/item/device/electronic_assembly/examine(mob/user)
-	..()
+	. = ..()
 	for(var/I in assembly_components)
 		var/obj/item/integrated_circuit/IC = I
 		IC.external_examine(user)

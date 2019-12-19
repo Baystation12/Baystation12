@@ -1,5 +1,5 @@
-// This system is used to grab a ghost from observers with the required preferences and
-// lack of bans set. See posibrain.dm for an example of how they are called/used. ~Z
+// This system is used to grab a ghost from observers with the required preferences 
+// and lack of bans set. See posibrain.dm for an example of how they are called/used.
 
 var/list/ghost_traps
 

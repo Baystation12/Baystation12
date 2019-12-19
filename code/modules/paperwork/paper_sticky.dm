@@ -46,11 +46,10 @@
 		return
 	..()
 
-/obj/item/sticky_pad/examine(var/mob/user)
+/obj/item/sticky_pad/examine(mob/user)
 	. = ..()
-	if(.)
-		to_chat(user, SPAN_NOTICE("It has [papers] sticky note\s left."))
-		to_chat(user, SPAN_NOTICE("You can click it on grab intent to pick it up."))
+	to_chat(user, SPAN_NOTICE("It has [papers] sticky note\s left."))
+	to_chat(user, SPAN_NOTICE("You can click it on grab intent to pick it up."))
 
 /obj/item/sticky_pad/attack_hand(var/mob/user)
 	if(user.a_intent == I_GRAB)
@@ -109,7 +108,7 @@
 
 /obj/item/weapon/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)
 
-	if(!in_range(user, A) || istype(A, /obj/machinery/door) || icon_state == "scrap")
+	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/weapon/storage) || icon_state == "scrap")
 		return
 
 	var/turf/target_turf = get_turf(A)

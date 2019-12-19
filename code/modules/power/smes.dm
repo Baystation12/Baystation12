@@ -11,6 +11,7 @@
 	density = 1
 	anchored = 1
 	clicksound = "switch"
+	core_skill = SKILL_ELECTRICAL
 	power_channel = LOCAL // Draws power from direct connections to powernets.
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
@@ -378,7 +379,7 @@
 	// Given the SMES creates another explosion on it's destruction it sounds fairly reasonable.
 	take_damage(250 / severity)
 
-/obj/machinery/power/smes/examine(var/mob/user)
+/obj/machinery/power/smes/examine(mob/user)
 	. = ..()
 	to_chat(user, "The service hatch is [panel_open ? "open" : "closed"].")
 	if(!damage)

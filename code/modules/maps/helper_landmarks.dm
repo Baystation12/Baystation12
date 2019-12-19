@@ -17,3 +17,30 @@
 			spawn()
 				AM.throw_at_random(FALSE, movement_range, 1)
 	return ..()
+
+//Clears walls
+/obj/effect/landmark/clear
+	name = "clear turf"
+	icon_state = "clear"
+	delete_me = TRUE
+
+/obj/effect/landmark/clear/Initialize()
+	var/turf/simulated/wall/W = get_turf(src)
+	if(istype(W))
+		W.dismantle_wall(1,1,1)
+	var/turf/simulated/mineral/M = W
+	if(istype(M))
+		M.GetDrilled()
+	. = ..()
+
+//Applies fire act to the turf
+/obj/effect/landmark/scorcher
+	name = "fire"
+	icon_state = "fire"
+	var/temp = T0C + 3000
+
+/obj/effect/landmark/scorcher/Initialize()
+	var/turf/simulated/T = get_turf(src)
+	if(istype(T))
+		T.fire_act(exposed_temperature = temp)
+	. = ..()

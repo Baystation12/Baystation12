@@ -3,7 +3,15 @@
 /obj/item/clothing/suit/space/vox
 	w_class = ITEM_SIZE_NORMAL
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
-	armor = list(melee = 60, bullet = 50, laser = 40,energy = 15, bomb = 30, bio = 30, rad = 15)
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR, 
+		bullet = ARMOR_BALLISTIC_PISTOL, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SMALL, 
+		rad = ARMOR_RAD_MINOR
+		)
 	siemens_coefficient = 0.6
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
@@ -14,7 +22,15 @@
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/space/vox
-	armor = list(melee = 60, bullet = 50, laser = 40, energy = 15, bomb = 30, bio = 30, rad = 15)
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR, 
+		bullet = ARMOR_BALLISTIC_PISTOL, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SMALL, 
+		rad = ARMOR_RAD_MINOR
+		)
 	siemens_coefficient = 0.6
 	item_flags = 0
 	flags_inv = 0
@@ -132,7 +148,7 @@
 		canremove = 1
 
 /obj/item/clothing/shoes/magboots/vox/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if (magpulse)
 		to_chat(user, "It would be hard to take these off without relaxing your grip first.")//theoretically this message should only be seen by the wearer when the claws are equipped.
 

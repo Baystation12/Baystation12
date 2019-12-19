@@ -1,7 +1,13 @@
 /obj/item/clothing/head/overseerhood
 	name = "grim hood"
 	desc = "Darker than dark. What... what is this <i>made</i> of?"
-	armor = list(melee = 100, bullet = 100, laser = 100,energy = 100, bomb = 100, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SHIELDED, 
+		bullet = ARMOR_BALLISTIC_HEAVY, 
+		laser = ARMOR_LASER_HEAVY,
+		energy = ARMOR_ENERGY_SHIELDED, 
+		bomb = ARMOR_BOMB_SHIELDED
+		)
 	icon_state = "necromancer"
 	item_flags = ITEM_FLAG_AIRTIGHT
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
@@ -13,7 +19,13 @@
 	name = "grim cloak"
 	desc = "The void of space woven into fabric. It's hard to tell where its edges are."
 	icon_state = "overseercloak"
-	armor = list(melee = 100, bullet = 100, laser = 100,energy = 100, bomb = 100, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SHIELDED, 
+		bullet = ARMOR_BALLISTIC_HEAVY, 
+		laser = ARMOR_LASER_HEAVY,
+		energy = ARMOR_ENERGY_SHIELDED, 
+		bomb = ARMOR_BOMB_SHIELDED
+		)
 	item_flags = ITEM_FLAG_AIRTIGHT
 	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	min_pressure_protection = 0

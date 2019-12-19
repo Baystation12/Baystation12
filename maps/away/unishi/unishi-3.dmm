@@ -3,7 +3,7 @@
 /turf/space,
 /area/space)
 "ab" = (
-/obj/effect/overmap/ship/unishi{
+/obj/effect/overmap/visitable/ship/unishi{
 	color = "green"
 	},
 /turf/space,
@@ -2017,12 +2017,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
-"nC" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "pd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -5401,7 +5395,7 @@ aa
 aa
 aa
 aa
-nC
+aa
 aa
 aa
 aa
@@ -7165,7 +7159,7 @@ aa
 aa
 aa
 aa
-nC
+aa
 aa
 aa
 aa
@@ -8321,7 +8315,7 @@ aa
 aa
 aa
 aa
-nC
+aa
 aa
 aa
 aa
@@ -9371,7 +9365,7 @@ aa
 aa
 aa
 aa
-nC
+aa
 aa
 aa
 aa

@@ -18,9 +18,9 @@
 	GLOB.registered_weapons -= src
 	. = ..()
 
-/obj/item/weapon/gun/examine(var/mob/user)
-	var/near = ..(user, 0)
-	if(near && is_secure_gun())
+/obj/item/weapon/gun/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 0 && is_secure_gun())
 		to_chat(user, "The registration screen shows, \"" + (registered_owner ? "[registered_owner]" : "unregistered") + "\"")
 
 /obj/item/weapon/gun/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -40,7 +40,7 @@
 /obj/item/weapon/gun/emag_act(var/charges, var/mob/user)
 	if(!charges)
 		return NO_EMAG_ACT
-	
+
 	if(is_secure_gun())
 		registered_owner = null
 		GLOB.registered_weapons -= src
@@ -48,7 +48,7 @@
 		req_access.Cut()
 		to_chat(user, SPAN_NOTICE("\The [src]'s authorization chip fries, giving you full access."))
 		return 1
-	
+
 	return ..()
 
 
@@ -60,12 +60,12 @@
 	if(issilicon(usr))
 		to_chat(usr, SPAN_WARNING("You are not permitted to modify weapon registrations."))
 		return
-	
+
 	usr.visible_message("[usr] presses the reset button on \the [src].", range = 3)
 	if(!allowed(usr))
 		to_chat(usr, SPAN_WARNING("\The [src] buzzes quietly, refusing your access."))
 		return
-	
+
 	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
 	registered_owner = null
 	GLOB.registered_weapons -= src

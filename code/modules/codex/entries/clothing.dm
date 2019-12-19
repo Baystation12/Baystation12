@@ -11,10 +11,13 @@
 		"rad" = "radiation"
 		)
 
+/obj/item/clothing/get_lore_info()
+	return desc
+
 /obj/item/clothing/get_mechanics_info()
 	var/list/armor_strings = list()
 	for(var/armor_type in armour_to_descriptive_term)
-		if(armor[armor_type])
+		if(LAZYACCESS(armor, armor_type))
 			switch(armor[armor_type])
 				if(1 to 20)
 					armor_strings += "It barely protects against [armour_to_descriptive_term[armor_type]]."

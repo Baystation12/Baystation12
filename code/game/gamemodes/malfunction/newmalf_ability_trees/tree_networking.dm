@@ -161,8 +161,9 @@
 		return
 	log_ability_use(user, "system override (STARTED)")
 	var/list/remaining_apcs = list()
+	var/list/valid_zlevels = GetConnectedZlevels(user.z)
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
-		if(!(A.z in GLOB.using_map.station_levels)) 		// Only station APCs
+		if(!(A.z in valid_zlevels)) 		// Only station APCs
 			continue
 		if(A.hacker == user || A.aidisabled) 		// This one is already hacked, or AI control is disabled on it.
 			continue
@@ -206,7 +207,7 @@
 	sleep(1 MINUTE)
 	// Hack all APCs, including those built during hack sequence.
 	for(var/obj/machinery/power/apc/A in SSmachines.machinery)
-		if((!A.hacker || A.hacker != src) && !A.aidisabled && A.z in GLOB.using_map.station_levels)
+		if((!A.hacker || A.hacker != src) && !A.aidisabled && (A.z in valid_zlevels))
 			A.ai_hack(src)
 
 	log_ability_use(user, "system override (FINISHED)")

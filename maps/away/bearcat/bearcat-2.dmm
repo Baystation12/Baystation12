@@ -41,7 +41,7 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/command/bridge)
 "ag" = (
-/obj/item/modular_computer/console/preset/command,
+/obj/machinery/computer/modular/preset/cardslot/command,
 /turf/simulated/floor/bluegrid/airless,
 /area/ship/scrap/command/bridge)
 "ah" = (
@@ -110,7 +110,7 @@
 /turf/space,
 /area/space)
 "aq" = (
-/obj/effect/overmap/ship/bearcat,
+/obj/effect/overmap/visitable/ship/bearcat,
 /turf/space,
 /area/space)
 "ar" = (
@@ -167,7 +167,7 @@
 /obj/item/device/radio/intercom{
 	pixel_x = -32
 	},
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 1
 	},
@@ -183,7 +183,7 @@
 /area/ship/scrap/command/bridge)
 "aA" = (
 /obj/machinery/light,
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 1
 	},
@@ -3247,7 +3247,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/library,
+/obj/machinery/computer/modular/preset/library,
 /obj/structure/table/standard,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
@@ -4481,7 +4481,6 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/engineering)
 "hE" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -4630,6 +4629,7 @@
 /area/ship/scrap/maintenance/power)
 "hM" = (
 /obj/item/stack/material/rods,
+/obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "hN" = (
@@ -4757,7 +4757,7 @@
 	name = "CORE SCRAM";
 	pixel_y = -26
 	},
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 1
 	},
@@ -4831,11 +4831,12 @@
 /area/ship/scrap/maintenance/power)
 "id" = (
 /obj/item/weapon/material/shard,
+/obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "ie" = (
 /obj/item/stack/material/steel,
-/turf/space,
+/turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/atmos)
 "if" = (
 /obj/structure/window/reinforced{
@@ -4934,11 +4935,8 @@
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "io" = (
+/obj/structure/lattice,
 /mob/living/simple_animal/hostile/carp,
-/turf/space,
-/area/ship/scrap/maintenance/atmos)
-"ip" = (
-/obj/item/stack/material/plasteel,
 /turf/space,
 /area/ship/scrap/maintenance/atmos)
 "iq" = (
@@ -4983,6 +4981,7 @@
 	icon_state = "corner_white";
 	dir = 4
 	},
+/obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "iu" = (
@@ -5218,7 +5217,6 @@
 	icon_state = "corner_white";
 	dir = 4
 	},
-/obj/machinery/portable_atmospherics/powered/pump/filled,
 /obj/machinery/light/small{
 	icon_state = "bulb1";
 	dir = 4
@@ -5327,6 +5325,7 @@
 /area/ship/scrap/maintenance/power)
 "jc" = (
 /obj/item/stack/material/rods,
+/obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/power)
 "jd" = (
@@ -5406,6 +5405,7 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jm" = (
+/obj/structure/cable,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/power)
 "jn" = (
@@ -5590,6 +5590,7 @@
 "jN" = (
 /obj/item/stack/material/steel,
 /obj/item/stack/material/rods,
+/obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jO" = (
@@ -5634,15 +5635,17 @@
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "jT" = (
+/obj/structure/lattice,
 /mob/living/simple_animal/hostile/carp,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jU" = (
 /obj/item/stack/material/plasteel,
+/obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jV" = (
-/obj/item/stack/material/steel,
+/obj/structure/lattice,
 /turf/space,
 /area/ship/scrap/maintenance/engine/aft)
 "jW" = (
@@ -5723,16 +5726,11 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/toilets)
-"lF" = (
-/obj/machinery/meter/turf,
-/turf/simulated/floor/airless,
-/area/ship/scrap/maintenance/atmos)
-"mB" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
+"lX" = (
+/obj/item/stack/material/steel,
+/obj/structure/lattice,
 /turf/space,
-/area/space)
+/area/ship/scrap/maintenance/power)
 "nS" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -5753,6 +5751,14 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/crew/medbay)
+"sy" = (
+/obj/structure/lattice,
+/turf/simulated/floor/airless,
+/area/ship/scrap/maintenance/atmos)
+"ts" = (
+/obj/structure/lattice,
+/turf/space,
+/area/ship/scrap/maintenance/power)
 "uf" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	icon_state = "intact";
@@ -5761,6 +5767,11 @@
 /obj/effect/decal/cleanable/ash,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
+"uM" = (
+/obj/item/stack/material/steel,
+/obj/structure/lattice,
+/turf/space,
+/area/ship/scrap/maintenance/atmos)
 "vs" = (
 /obj/structure/lattice,
 /obj/effect/paint/brown,
@@ -5779,7 +5790,6 @@
 /turf/simulated/wall/r_wall,
 /area/space)
 "zT" = (
-/obj/machinery/meter/turf,
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
@@ -5809,6 +5819,10 @@
 /obj/item/weapon/cell/crap,
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/power)
+"Eq" = (
+/obj/structure/lattice,
+/turf/space,
+/area/ship/scrap/maintenance/atmos)
 "FI" = (
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /turf/simulated/floor/airless,
@@ -5880,7 +5894,6 @@
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/fire)
 "Mm" = (
-/obj/machinery/meter/turf,
 /obj/effect/floor_decal/corner/red/diagonal{
 	icon_state = "corner_white_diagonal";
 	dir = 4
@@ -5962,6 +5975,10 @@
 /obj/effect/decal/cleanable/molten_item,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
+"Yl" = (
+/obj/structure/lattice,
+/turf/simulated/wall/r_wall,
+/area/ship/scrap/maintenance/atmos)
 "Yv" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -9195,7 +9212,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -10083,7 +10100,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -11666,7 +11683,7 @@ aa
 aa
 aa
 aa
-hw
+sy
 aa
 aa
 aa
@@ -11785,13 +11802,13 @@ aa
 aa
 xU
 vs
-hw
+sy
 hM
 id
 io
 id
 iO
-hw
+Yl
 aa
 aa
 aa
@@ -11908,14 +11925,14 @@ xU
 wp
 gY
 hx
-hw
+hx
 ie
-ip
+iQ
 hw
 iP
-hw
+Eq
 id
-hw
+Yl
 Hd
 aa
 aa
@@ -12032,12 +12049,12 @@ hh
 hx
 hN
 ie
-id
-hw
+hN
+hx
 iQ
 hx
 hw
-ie
+uM
 aa
 aa
 aa
@@ -12154,7 +12171,7 @@ hi
 zT
 hO
 HQ
-lF
+hx
 hx
 IG
 Mm
@@ -12771,9 +12788,9 @@ jf
 js
 Wu
 jO
-jU
-jV
-jO
+vN
+jY
+jZ
 aa
 aa
 aa
@@ -12905,7 +12922,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -13079,7 +13096,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -13866,7 +13883,7 @@ iB
 iM
 jb
 jm
-jc
+hg
 bY
 aa
 aa
@@ -13988,7 +14005,7 @@ iC
 hg
 iN
 jn
-jn
+lX
 aa
 aa
 aa
@@ -14110,7 +14127,7 @@ hg
 iN
 jc
 jo
-jo
+ts
 aa
 aa
 aa
@@ -15574,7 +15591,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa
@@ -16879,7 +16896,7 @@ aa
 aa
 aa
 aa
-mB
+aa
 aa
 aa
 aa

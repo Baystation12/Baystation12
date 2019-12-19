@@ -73,7 +73,7 @@ SUBSYSTEM_DEF(shuttle)
 		registered_shuttle_landmarks[shuttle_landmark_tag] = shuttle_landmark
 		last_landmark_registration_time = world.time
 
-		var/obj/effect/overmap/O = landmarks_still_needed[shuttle_landmark_tag]
+		var/obj/effect/overmap/visitable/O = landmarks_still_needed[shuttle_landmark_tag]
 		if(O) //These need to be added to sectors, which we handle.
 			try_add_landmark_tag(shuttle_landmark_tag, O)
 			landmarks_still_needed -= shuttle_landmark_tag
@@ -86,7 +86,7 @@ SUBSYSTEM_DEF(shuttle)
 
 //Checks if the given sector's landmarks have initialized; if so, registers them with the sector, if not, marks them for assignment after they come in.
 //Also adds automatic landmarks that were waiting on their sector to spawn.
-/datum/controller/subsystem/shuttle/proc/initialize_sector(obj/effect/overmap/given_sector)
+/datum/controller/subsystem/shuttle/proc/initialize_sector(obj/effect/overmap/visitable/given_sector)
 	given_sector.populate_sector_objects() // This is a late init operation that sets up the sector's map_z and does non-overmap-related init tasks.
 
 	for(var/landmark_tag in given_sector.initial_generic_waypoints)
@@ -105,7 +105,7 @@ SUBSYSTEM_DEF(shuttle)
 			given_sector.add_landmark(landmark, landmark.shuttle_restricted)
 			landmarks_awaiting_sector -= landmark
 
-/datum/controller/subsystem/shuttle/proc/try_add_landmark_tag(landmark_tag, obj/effect/overmap/given_sector)
+/datum/controller/subsystem/shuttle/proc/try_add_landmark_tag(landmark_tag, obj/effect/overmap/visitable/given_sector)
 	var/obj/effect/shuttle_landmark/landmark = get_landmark(landmark_tag)
 	if(!landmark)
 		return
@@ -140,7 +140,7 @@ SUBSYSTEM_DEF(shuttle)
 		return
 	overmap_halted = !overmap_halted
 	for(var/ship in ships)
-		var/obj/effect/overmap/ship/ship_effect = ship
+		var/obj/effect/overmap/visitable/ship/ship_effect = ship
 		overmap_halted ? ship_effect.halt() : ship_effect.unhalt()
 
 /datum/controller/subsystem/shuttle/stat_entry()

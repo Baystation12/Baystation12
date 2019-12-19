@@ -207,6 +207,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ_name = BP_LIVER
 			if(BP_KIDNEYS)
 				organ_name = BP_KIDNEYS
+			if(BP_STOMACH)
+				organ_name = BP_STOMACH
 			if(BP_CHEST)
 				organ_name = "upper body"
 			if(BP_GROIN)
@@ -458,10 +460,14 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["marking_style"])
+		var/list/disallowed_markings = list()
+		for (var/M in pref.body_markings)
+			var/datum/sprite_accessory/marking/mark_style = GLOB.body_marking_styles_list[M]
+			disallowed_markings |= mark_style.disallows
 		var/list/usable_markings = pref.body_markings.Copy() ^ GLOB.body_marking_styles_list.Copy()
 		for(var/M in usable_markings)
 			var/datum/sprite_accessory/S = usable_markings[M]
-			if((S.species_allowed && !(mob_species.get_bodytype() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
+			if(is_type_in_list(S, disallowed_markings) || (S.species_allowed && !(mob_species.get_bodytype() in S.species_allowed)) || (S.subspecies_allowed && !(mob_species.name in S.subspecies_allowed)))
 				usable_markings -= M
 
 		var/new_marking = input(user, "Choose a body marking:", CHARACTER_PREFERENCE_INPUT_TITLE)  as null|anything in usable_markings
@@ -553,7 +559,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					for(var/other_limb in (BP_ALL_LIMBS - BP_CHEST))
 						pref.organ_data[other_limb] = null
 						pref.rlimb_data[other_limb] = null
-						for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_BRAIN))
+						for(var/internal_organ in list(BP_HEART,BP_EYES,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH,BP_BRAIN))
 							pref.organ_data[internal_organ] = null
 				pref.organ_data[limb] = null
 				pref.rlimb_data[limb] = null
@@ -609,7 +615,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["organs"])
-		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes", "Lungs", "Liver", "Kidneys")
+		var/organ_name = input(user, "Which internal function do you want to change?") as null|anything in list("Heart", "Eyes", "Lungs", "Liver", "Kidneys", "Stomach")
 		if(!organ_name) return
 
 		var/organ = null
@@ -624,6 +630,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 				organ = BP_LIVER
 			if("Kidneys")
 				organ = BP_KIDNEYS
+			if("Stomach")
+				organ = BP_STOMACH
 
 		var/list/organ_choices = list("Normal","Assisted","Synthetic")
 

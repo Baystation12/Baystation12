@@ -49,9 +49,6 @@
 /datum/species/proc/get_blood_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_BLOOD_COLOUR : blood_color)
 
-/datum/species/proc/get_virus_immune(var/mob/living/carbon/human/H)
-	return ((H && H.isSynthetic()) ? 1 : virus_immune)
-
 /datum/species/proc/get_flesh_colour(var/mob/living/carbon/human/H)
 	return ((H && H.isSynthetic()) ? SYNTH_FLESH_COLOUR : flesh_color)
 

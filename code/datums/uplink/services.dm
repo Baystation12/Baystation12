@@ -68,9 +68,9 @@
 		deactivate()
 	. = ..()
 
-/obj/item/device/uplink_service/examine(var/user)
-	. = ..(user, 1)
-	if(.)
+/obj/item/device/uplink_service/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		switch(state)
 			if(AWAITING_ACTIVATION)
 				to_chat(user, "It is labeled '[service_label]' and appears to be awaiting activation.")
@@ -83,8 +83,9 @@
 	if(state != AWAITING_ACTIVATION)
 		to_chat(user, "<span class='warning'>\The [src] won't activate again.</span>")
 		return
-	if(!(user.z in GLOB.using_map.station_levels))
-		to_chat(user, SPAN_WARNING("You are too far away from \the [GLOB.using_map.name] to make use of this service."))
+	var/obj/effect/overmap/visitable/O = map_sectors["[get_z(src)]"]
+	var/choice = alert(user, "This will only affect your current location[istype(O) ? " ([O])" : ""]. Proceed?","Confirmation", "Yes", "No")
+	if(choice != "Yes")
 		return
 	if(!enable())
 		return
@@ -157,7 +158,7 @@
 	service_label = "Ion Storm Announcement"
 
 /obj/item/device/uplink_service/fake_ion_storm/enable(var/mob/user = usr)
-	ion_storm_announcement()
+	ion_storm_announcement(GetConnectedZlevels(get_z(src)))
 	. = ..()
 
 /*****************
@@ -187,7 +188,7 @@
 
 	if(CanUseTopic(user, GLOB.hands_state) != STATUS_INTERACTIVE)
 		return FALSE
-	command_announcement.Announce(message, title, msg_sanitized = 1)
+	command_announcement.Announce(message, title, msg_sanitized = 1, zlevels = GetConnectedZlevels(get_z(src)))
 	return TRUE
 
 /*********************************

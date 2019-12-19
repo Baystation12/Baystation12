@@ -10,14 +10,6 @@
 	containertype = /obj/structure/largecrate
 	containername = "reagent dispenser crate"
 
-/decl/hierarchy/supply_pack/science/virus
-	name = "Samples - Virus (BIOHAZARD)"
-	contains = list(/obj/item/weapon/virusdish/random = 4)
-	cost = 25
-	containertype = /obj/structure/closet/crate/secure
-	containername = "virus sample crate"
-	access = access_cmo
-
 /decl/hierarchy/supply_pack/science/coolanttank
 	name = "Liquid - Coolant tank"
 	contains = list(/obj/structure/reagent_dispensers/coolanttank)

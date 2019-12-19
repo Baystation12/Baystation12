@@ -1,7 +1,9 @@
 // Submap specific atom definitions.
 
-MANTIDIFY(/obj/item/weapon/storage/bag/trash/purple, "sample collection carrier", "material storer pickerupper")
-MANTIDIFY(/obj/structure/bed/chair/padded/purple, "mantid nest", "resting place")
+MANTIDIFY(/obj/item/weapon/storage/bag/trash/purple,   "sample collection carrier", "material storage")
+MANTIDIFY(/obj/structure/bed/chair/padded/purple,      "mantid nest",               "resting place")
+MANTIDIFY(/obj/item/weapon/pickaxe/diamonddrill,       "lithobliterator",           "drilling")
+MANTIDIFY(/obj/item/weapon/tank/jetpack/carbondioxide, "maneuvering pack",          "propulsion")
 
 /obj/structure/bed/chair/padded/purple/ascent
 	icon_state = "nest_chair"

@@ -70,7 +70,7 @@ MRE Stuff
 
 /obj/item/weapon/storage/mre/menu8
 	meal_desc = " This one is menu 8, hot chili."
-	main_meal = /obj/item/weapon/storage/mrebag/menu3
+	main_meal = /obj/item/weapon/storage/mrebag/menu8
 
 /obj/item/weapon/storage/mre/menu9
 	name = "vegan MRE"
@@ -109,6 +109,9 @@ MRE Stuff
 	/obj/random/mre/sauce/crayon,
 	/obj/random/mre/sauce/crayon
 	)
+
+/obj/item/weapon/storage/mre/menu11/special
+	meal_desc = "This one doesn't have a menu listing. How odd. It has the initials \"A.B.\" written on the back."
 
 /obj/item/weapon/storage/mre/random
 	meal_desc = "The menu label is faded out."

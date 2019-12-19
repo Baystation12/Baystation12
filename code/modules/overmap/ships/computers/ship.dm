@@ -1,15 +1,15 @@
 /*
 While these computers can be placed anywhere, they will only function if placed on either a non-space, non-shuttle turf
-with an /obj/effect/overmap/ship present elsewhere on that z level, or else placed in a shuttle area with an /obj/effect/overmap/ship
+with an /obj/effect/overmap/visitable/ship present elsewhere on that z level, or else placed in a shuttle area with an /obj/effect/overmap/visitable/ship
 somewhere on that shuttle. Subtypes of these can be then used to perform ship overmap movement functions.
 */
 /obj/machinery/computer/ship
-	var/obj/effect/overmap/ship/linked
+	var/obj/effect/overmap/visitable/ship/linked
 	var/list/viewers // Weakrefs to mobs in direct-view mode.
 	var/extra_view = 0 // how much the view is increased by when the mob is in overmap mode.
 
 // A late init operation called in SSshuttle, used to attach the thing to the right ship.
-/obj/machinery/computer/ship/proc/attempt_hook_up(obj/effect/overmap/ship/sector)
+/obj/machinery/computer/ship/proc/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
 	if(!istype(sector))
 		return
 	if(sector.check_ownership(src))
@@ -17,15 +17,15 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		return 1
 
 /obj/machinery/computer/ship/proc/sync_linked()
-	var/obj/effect/overmap/ship/sector = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/ship/sector = map_sectors["[z]"]
 	if(!sector)
 		return
 	return attempt_hook_up_recursive(sector)
 
-/obj/machinery/computer/ship/proc/attempt_hook_up_recursive(obj/effect/overmap/ship/sector)
+/obj/machinery/computer/ship/proc/attempt_hook_up_recursive(obj/effect/overmap/visitable/ship/sector)
 	if(attempt_hook_up(sector))
 		return sector
-	for(var/obj/effect/overmap/ship/candidate in sector)
+	for(var/obj/effect/overmap/visitable/ship/candidate in sector)
 		if((. = .(candidate)))
 			return
 

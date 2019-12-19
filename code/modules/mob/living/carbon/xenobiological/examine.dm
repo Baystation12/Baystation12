@@ -1,5 +1,5 @@
 /mob/living/carbon/slime/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	var/msg = ""
 	if (src.stat == DEAD)
 		msg += "<span class='deadsay'>It is limp and unresponsive.</span>\n"

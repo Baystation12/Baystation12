@@ -18,3 +18,16 @@
 	turn_delay = 7
 	power_use = 150
 	color = COLOR_WHITE
+
+/obj/item/mech_component/chassis/pod
+	name = "spherical exosuit chassis"
+	hatch_descriptor = "hatch"
+	pilot_coverage = 100
+	transparent_cabin = TRUE
+	hide_pilot = TRUE //Sprite too small, legs clip through, so for now hide pilot
+	exosuit_desc_string = "a spherical chassis"
+	icon_state = "pod_body"
+	max_damage = 70
+	power_use = 5
+	has_hardpoints = list(HARDPOINT_BACK)
+	desc = "The NanoTrasen Katamari series cockpits have won a massive tender by SCG few years back. No one is sure why, but these terrible things keep popping up on every government facility."

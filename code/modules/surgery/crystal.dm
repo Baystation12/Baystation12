@@ -59,3 +59,10 @@
 		/obj/item/stack/medical/resin = 100
 	)
 	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NO_FLESH
+
+/decl/surgery_step/fix_vein/crystal
+	name = "Repair arteries in crystalline beings"
+	allowed_tools = list(
+		/obj/item/stack/medical/resin = 100
+	)
+	surgery_candidate_flags = SURGERY_NO_ROBOTIC | SURGERY_NO_STUMP | SURGERY_NO_FLESH

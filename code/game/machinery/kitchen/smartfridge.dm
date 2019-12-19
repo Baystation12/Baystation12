@@ -93,8 +93,6 @@
 /obj/machinery/smartfridge/secure/virology/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/glass/beaker/vial/))
 		return 1
-	if(istype(O,/obj/item/weapon/virusdish/))
-		return 1
 	return 0
 
 /obj/machinery/smartfridge/chemistry
@@ -401,7 +399,7 @@
 	if(!throw_item)
 		return 0
 	spawn(0)
-		throw_item.throw_at(target,16,3,src)
+		throw_item.throw_at(target,16,3)
 	src.visible_message("<span class='warning'>[src] launches [throw_item.name] at [target.name]!</span>")
 	update_icon()
 	return 1

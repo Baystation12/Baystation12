@@ -6,6 +6,7 @@
 	icon_state = "hydro"
 	item_state = "analyzer"
 	scan_sound = 'sound/effects/fastbeep.ogg'
+	printout_color = "#eeffe8"
 	var/global/list/valid_targets = list(
 		/obj/item/weapon/reagent_containers/food/snacks/grown,
 		/obj/item/weapon/grown,
@@ -48,9 +49,13 @@
 	if(!grown_seed)
 		return
 
-	if(grown_seed.mysterious && !grown_seed.scanned && !(get_z(src) in GLOB.using_map.station_levels))
+	if(grown_seed.mysterious && !grown_seed.scanned)
 		grown_seed.scanned = TRUE
-		SSstatistics.add_field("xenoplants_scanned", 1)
+		var/area/map = locate(/area/overmap)
+		for(var/obj/effect/overmap/visitable/sector/exoplanet/P in map)
+			if(grown_seed in P.seeds)
+				SSstatistics.add_field(STAT_XENOPLANTS_SCANNED, 1)
+				break
 
 	var/list/dat = list()
 

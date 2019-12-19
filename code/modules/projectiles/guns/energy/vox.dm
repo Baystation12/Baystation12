@@ -1,3 +1,6 @@
+/datum/extension/voxform
+	base_type = /datum/extension/voxform
+
 /datum/extension/voxform/proc/check_held_user(var/mob/living/carbon/human/user, var/atom/movable/thing)
 	if(!istype(user))
 		return FALSE
@@ -34,7 +37,7 @@
 
 /obj/item/weapon/gun/energy/darkmatter/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/voxform, /datum/extension/voxform)
+	set_extension(src, /datum/extension/voxform)
 
 /*
  * Vox Sonic Cannon
@@ -58,4 +61,4 @@
 
 /obj/item/weapon/gun/energy/sonic/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/voxform, /datum/extension/voxform)
+	set_extension(src, /datum/extension/voxform)

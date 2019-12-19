@@ -41,13 +41,12 @@
 	hitsound = material.hitsound
 
 /turf/simulated/wall/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	START_PROCESSING(SSturf, src) //Used for radiation.
 	. = ..()
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturf, src)
-	dismantle_wall(null,null,1)
 	. = ..()
 
 // Walls always hide the stuff below them.
@@ -92,17 +91,14 @@
 	take_damage(damage)
 	return
 
-/turf/simulated/wall/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
+/turf/simulated/wall/hitby(AM as mob|obj, var/datum/thrownthing/TT)
+	if(!ismob(AM))
+		var/obj/O = AM
+		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
+		if (tforce >= 15)
+			take_damage(tforce)
 	..()
-	if(ismob(AM))
-		return
-
-	var/obj/O = AM
-	var/tforce = O.throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
-	if (tforce < 15)
-		return
-
-	take_damage(tforce)
 
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
@@ -120,10 +116,7 @@
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)
-	. = ..(user)
-
-	if(!.)
-		return
+	. = ..()
 
 	if(!damage)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")

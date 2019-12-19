@@ -91,11 +91,11 @@
 //alternate button with the same functionality, except has a door control sprite instead
 /obj/machinery/button/alternate
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "doorctrl0"
+	icon_state = "doorctrl"
 
 /obj/machinery/button/alternate/on_update_icon()
 	if(operating)
-		icon_state = "doorctrl0"
+		icon_state = "doorctrl"
 	else
 		icon_state = "doorctrl2"
 

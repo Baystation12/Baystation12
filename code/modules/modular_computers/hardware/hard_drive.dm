@@ -55,11 +55,11 @@
 	icon_state = "hdd_micro"
 	hardware_size = 1
 
-/obj/item/weapon/stock_parts/computer/hard_drive/diagnostics(var/mob/user)
-	..()
+/obj/item/weapon/stock_parts/computer/hard_drive/diagnostics()
+	. = ..()
 	// 999 is a byond limit that is in place. It's unlikely someone will reach that many files anyway, since you would sooner run out of space.
-	to_chat(user, "NT-NFS File Table Status: [stored_files.len]/999")
-	to_chat(user, "Storage capacity: [used_capacity]/[max_capacity]GQ")
+	. += "NT-NFS File Table Status: [stored_files.len]/999"
+	. += "Storage capacity: [used_capacity]/[max_capacity]GQ"
 
 // Use this proc to add file to the drive. Returns 1 on success and 0 on failure. Contains necessary sanity checks.
 /obj/item/weapon/stock_parts/computer/hard_drive/proc/store_file(var/datum/computer_file/F)
@@ -90,6 +90,7 @@
 
 	if(F in stored_files)
 		stored_files -= F
+		F.holder = null
 		recalculate_size()
 		return 1
 	else
@@ -157,8 +158,6 @@
 	return null
 
 /obj/item/weapon/stock_parts/computer/hard_drive/Destroy()
-	if(holder2 && (holder2.hard_drive == src))
-		holder2.hard_drive = null
 	stored_files = null
 	return ..()
 

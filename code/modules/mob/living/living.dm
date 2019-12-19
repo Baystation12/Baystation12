@@ -62,9 +62,8 @@ default behaviour is:
 	// This is boilerplate from /atom/movable/Bump() but in all honest
 	// I have no clue what is going on in the logic below this and I'm
 	// afraid to touch it in case it explodes and kills me.
-	if(throwing)
-		throw_impact(AM)
-		throwing = FALSE
+	if(!QDELETED(throwing))
+		throwing.hit_atom(AM)
 		return
 	// End boilerplate.
 
@@ -572,7 +571,7 @@ default behaviour is:
 			if (prob(75))
 				var/obj/item/grab/G = pick(M.grabbed_by)
 				if(istype(G))
-					M.visible_message(M, SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]"))
+					M.visible_message(SPAN_WARNING("[G.affecting] has been pulled from [G.assailant]'s grip by [src]!"), SPAN_WARNING("[G.affecting] has been pulled from your grip by [src]!"))
 					qdel(G)
 		if (!M.grabbed_by.len)
 			M.handle_pull_damage(src)

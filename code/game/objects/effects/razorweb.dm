@@ -43,7 +43,7 @@
 			spinner.existing_webs -= src
 		owner = null
 	. = ..()
-	
+
 /obj/effect/razorweb/mapped
 	decays = FALSE
 
@@ -139,7 +139,7 @@
 		visible_message(SPAN_DANGER("\The [L] blunders into \the [src]!"))
 
 	var/severed = FALSE
-	var/armour_prob = prob(100 * L.get_blocked_ratio(null, BRUTE))
+	var/armour_prob = prob(100 * L.get_blocked_ratio(null, BRUTE, damage = ARMOR_MELEE_RESISTANT))
 	if(H && prob(35))
 		var/obj/item/organ/external/E
 		for(var/thing in shuffle(H.organs_by_name))

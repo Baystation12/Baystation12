@@ -58,7 +58,7 @@
 
 /obj/item/weapon/gun/energy/stunrevolver/rifle
 	name = "stun rifle"
-	desc = "An A&M X10 Thor. A vastly oversized variant of the A&M X6 Zeus. Fires overcharged electrodes to take down hostile armored targets without harming them too much."
+	desc = "An A&M X10 Thor. A vastly oversized variant of the A&M X6 Zeus. Fires overcharged electrodes to obliterate pain receptors without harming them too much."
 	icon = 'icons/obj/guns/stunrifle.dmi'
 	icon_state = "stunrifle"
 	item_state = "stunrifle"

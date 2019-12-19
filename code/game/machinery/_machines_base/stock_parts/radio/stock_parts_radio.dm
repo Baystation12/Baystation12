@@ -11,7 +11,7 @@
 	if(frequency)
 		set_frequency(frequency, filter)
 	if(multitool_extension)
-		set_extension(src, /datum/extension/interactive/multitool, multitool_extension)
+		set_extension(src, multitool_extension)
 	. = ..()
 
 /obj/item/weapon/stock_parts/radio/on_install(obj/machinery/machine)

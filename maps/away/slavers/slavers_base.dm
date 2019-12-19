@@ -1,7 +1,7 @@
 #include "slavers_base_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/sector/slavers_base
+/obj/effect/overmap/visitable/sector/slavers_base
 	name = "large asteroid"
 	desc = "Sensor array is reading an artificial structure inside the asteroid."
 	icon_state = "object"
@@ -185,4 +185,9 @@
 	icon_state = "abol_suit"
 	item_icons = list(slot_w_uniform_str = 'maps/away/slavers/slavers_base_sprites.dmi')
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
-	armor = list(melee = 30, bullet = 25, laser = 10, energy = 10, bomb = 5, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_PISTOL, 
+		laser = ARMOR_LASER_MINOR, 
+		energy = ARMOR_ENERGY_MINOR
+		)

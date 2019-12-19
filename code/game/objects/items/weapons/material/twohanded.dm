@@ -73,11 +73,11 @@
 	name = "fire axe"
 	desc = "Truly, the weapon of a madman. Who would think to fight fire with an axe?"
 
+	max_force = 60	//for wielded
 	force_divisor = 0.6
 	unwielded_force_divisor = 0.3
 	sharp = 1
 	edge = 1
-	force_wielded = 30
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	applies_material_colour = 0
 	worth_multiplier = 31
@@ -104,7 +104,7 @@
 	base_icon = "spearglass"
 	name = "spear"
 	desc = "A haphazardly-constructed yet still deadly weapon of ancient design."
-	force = 10
+	max_force = 20	//for wielded
 	applies_material_colour = 0
 	force_divisor = 0.33 // 12/19 with hardness 60 (steel) or 10/16 with hardness 50 (glass)
 	unwielded_force_divisor = 0.20
@@ -135,6 +135,7 @@
 	attack_verb = list("smashed", "beaten", "slammed", "smacked", "struck", "battered", "bonked")
 	hitsound = 'sound/weapons/genhit3.ogg'
 	default_material = MATERIAL_MAPLE
+	max_force = 40	//for wielded
 	force_divisor = 1.1           // 22 when wielded with weight 20 (steel)
 	unwielded_force_divisor = 0.7 // 15 when unwielded based on above.
 	attack_cooldown_modifier = 1

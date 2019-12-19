@@ -23,6 +23,18 @@
 	var/obj/item/I = new balloon_type(loc)
 	return I
 
+/datum/uplink_item/item/badassery/crayonmre
+	name = "Crayon MRE"
+	desc = "Exceptionally robust MRE"
+	item_cost = DEFAULT_TELECRYSTAL_AMOUNT
+	path = /obj/item/weapon/storage/mre/menu11/special
+
+/datum/uplink_item/item/badassery/modded_foam_gun
+	name = "Modded foam gun"
+	desc = "It's a Jorf revolver blaster and 14 weighted darts. Even after aftermarket modification to increase its range and launch velocity, it's not a very effective weapon."
+	item_cost = 32
+	path = /obj/item/weapon/storage/box/large/foam_gun/revolver/tampered
+
 /**************
 * Random Item *
 **************/

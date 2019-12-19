@@ -31,7 +31,7 @@
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
 
 	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, PAIN are the only things that should be in here
+	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, ELECTROCUTE are the only things that should be in here, Try not to use PAIN as it doesn't go through stun_effect_act
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/damage_flags = DAM_BULLET
 	var/projectile_type = /obj/item/projectile
@@ -60,6 +60,7 @@
 	var/fire_sound
 	var/miss_sounds
 	var/ricochet_sounds
+	var/list/impact_sounds	//for different categories, IMPACT_MEAT etc
 	var/shrapnel_type = /obj/item/weapon/material/shard/shrapnel
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
@@ -485,4 +486,28 @@
 	qdel(trace) //No need for it anymore
 	return output //Send it back to the gun!
 
+/obj/item/projectile/after_wounding(obj/item/organ/external/organ, datum/wound/wound)
+	//Check if we even broke skin in first place
+	if(!wound || !(wound.damage_type == CUT || wound.damage_type == PIERCE))
+		return
+	//Check if we can do nasty stuff inside
+	if(!can_embed() || (organ.species.species_flags & SPECIES_FLAG_NO_EMBED))
+		return
+	//Embed or sever artery
+	var/damage_prob = 0.5 * wound.damage * penetration_modifier
+	if(prob(damage_prob))
+		var/obj/item/shrapnel = get_shrapnel()
+		if(shrapnel)
+			shrapnel.forceMove(organ)
+			organ.embed(shrapnel)
+	else if(prob(2 * damage_prob))
+		organ.sever_artery()
 
+	organ.owner.projectile_hit_bloody(src, wound.damage*5, null, organ)
+
+/obj/item/projectile/proc/get_shrapnel()
+	if(shrapnel_type)
+		var/obj/item/SP = new shrapnel_type()
+		SP.SetName((name != "shrapnel")? "[name] shrapnel" : "shrapnel")
+		SP.desc += " It looks like it was fired from [shot_from]."
+		return SP

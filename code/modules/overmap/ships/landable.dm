@@ -2,7 +2,7 @@
 // Mapping location doesn't matter, so long as on a map loaded at the same time as the shuttle areas.
 // Multiz shuttles currently not supported. Non-autodock shuttles currently not supported.
 
-/obj/effect/overmap/ship/landable
+/obj/effect/overmap/visitable/ship/landable
 	var/shuttle                                         // Name of associated shuttle. Must be autodock.
 	var/obj/effect/shuttle_landmark/ship/landmark       // Record our open space landmark for easy reference.
 	var/multiz = 0										// Index of multi-z levels, starts at 0
@@ -10,21 +10,21 @@
 	icon_state = "shuttle"
 	moving_state = "shuttle_moving"
 
-/obj/effect/overmap/ship/landable/Destroy()
+/obj/effect/overmap/visitable/ship/landable/Destroy()
 	GLOB.shuttle_moved_event.unregister(SSshuttle.shuttles[shuttle], src)
 	return ..()
 
-/obj/effect/overmap/ship/landable/can_burn()
+/obj/effect/overmap/visitable/ship/landable/can_burn()
 	if(status != SHIP_STATUS_OVERMAP)
 		return 0
 	return ..()
 
-/obj/effect/overmap/ship/landable/burn()
+/obj/effect/overmap/visitable/ship/landable/burn()
 	if(status != SHIP_STATUS_OVERMAP)
 		return 0
 	return ..()
 
-/obj/effect/overmap/ship/landable/check_ownership(obj/object)
+/obj/effect/overmap/visitable/ship/landable/check_ownership(obj/object)
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	if(!shuttle_datum)
 		return
@@ -33,16 +33,10 @@
 		return 1
 
 // We autobuild our z levels.
-/obj/effect/overmap/ship/landable/find_z_levels()
+/obj/effect/overmap/visitable/ship/landable/find_z_levels()
 	for(var/i = 0 to multiz)
 		world.maxz++
 		map_z += world.maxz
-		// Autobuild carpspawns for shuttles, it boxes them in
-		for(var/x = round(world.maxx/2) - 12, x <= round(world.maxx/2) + 12, x+= 12)
-			for(var/y = round(world.maxy/2) - 18, y <= round(world.maxy/2) + 18, y+= 18)
-				if(x == round(world.maxx/2) && y == round(world.maxy/2))//Skips the center spawn
-					continue
-				new /obj/effect/landmark/carpspawn(locate(x + rand(-2, 2), y + rand(-4, 4), world.maxz))//not too far, not too close
 
 	var/turf/center_loc = locate(round(world.maxx/2), round(world.maxy/2), world.maxz)
 	landmark = new (center_loc, shuttle)
@@ -58,17 +52,13 @@
 	if(multiz)
 		new /obj/effect/landmark/map_data(center_loc, (multiz + 1))
 
-/obj/effect/landmark/carpspawn
-	name ="carpspawn"
-	movable_flags = MOVABLE_FLAG_DEL_SHUTTLE
-
-/obj/effect/overmap/ship/landable/get_areas()
+/obj/effect/overmap/visitable/ship/landable/get_areas()
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	if(!shuttle_datum)
 		return list()
 	return shuttle_datum.find_childfree_areas()
 
-/obj/effect/overmap/ship/landable/populate_sector_objects()
+/obj/effect/overmap/visitable/ship/landable/populate_sector_objects()
 	..()
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	GLOB.shuttle_moved_event.register(shuttle_datum, src, .proc/on_shuttle_jump)
@@ -87,7 +77,7 @@
 	. = ..()
 
 /obj/effect/shuttle_landmark/ship/Destroy()
-	var/obj/effect/overmap/ship/landable/ship = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/ship/landable/ship = map_sectors["[z]"]
 	if(istype(ship) && ship.landmark == src)
 		ship.landmark = null
 	. = ..()
@@ -132,7 +122,7 @@
 		GLOB.shuttle_moved_event.unregister(shuttle, src)
 		LAZYREMOVE(core_landmark.visitors, src)
 
-/obj/effect/overmap/ship/landable/proc/on_shuttle_jump(datum/shuttle/given_shuttle, obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
+/obj/effect/overmap/visitable/ship/landable/proc/on_shuttle_jump(datum/shuttle/given_shuttle, obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
 	if(given_shuttle != SSshuttle.shuttles[shuttle])
 		return
 	var/datum/shuttle/autodock/auto = given_shuttle
@@ -147,11 +137,11 @@
 	status = SHIP_STATUS_LANDED
 	on_landing(from, into)
 
-/obj/effect/overmap/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
-	var/obj/effect/overmap/target = map_sectors["[into.z]"]
+/obj/effect/overmap/visitable/ship/landable/proc/on_landing(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
+	var/obj/effect/overmap/visitable/target = map_sectors["[into.z]"]
 	var/datum/shuttle/shuttle_datum = SSshuttle.shuttles[shuttle]
 	if(into.landmark_tag == shuttle_datum.motherdock) // If our motherdock is a landable ship, it won't be found properly here so we need to find it manually.
-		for(var/obj/effect/overmap/ship/landable/landable in SSshuttle.ships)
+		for(var/obj/effect/overmap/visitable/ship/landable/landable in SSshuttle.ships)
 			if(landable.shuttle == shuttle_datum.mothershuttle)
 				target = landable
 				break
@@ -160,18 +150,18 @@
 	forceMove(target)
 	halt()
 
-/obj/effect/overmap/ship/landable/proc/on_takeoff(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
+/obj/effect/overmap/visitable/ship/landable/proc/on_takeoff(obj/effect/shuttle_landmark/from, obj/effect/shuttle_landmark/into)
 	if(!isturf(loc))
 		forceMove(get_turf(loc))
 		unhalt()
 
-/obj/effect/overmap/ship/landable/get_landed_info()
+/obj/effect/overmap/visitable/ship/landable/get_landed_info()
 	switch(status)
 		if(SHIP_STATUS_LANDED)
-			var/obj/effect/overmap/location = loc
-			if(istype(loc, /obj/effect/overmap/sector))
+			var/obj/effect/overmap/visitable/location = loc
+			if(istype(loc, /obj/effect/overmap/visitable/sector))
 				return "Landed on \the [location.name]. Use secondary thrust to get clear before activating primary engines."
-			if(istype(loc, /obj/effect/overmap/ship))
+			if(istype(loc, /obj/effect/overmap/visitable/ship))
 				return "Docked with \the [location.name]. Use secondary thrust to get clear before activating primary engines."
 			return "Docked with an unknown object."
 		if(SHIP_STATUS_TRANSIT)

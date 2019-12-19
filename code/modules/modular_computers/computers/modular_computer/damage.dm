@@ -1,4 +1,4 @@
-/obj/item/modular_computer/examine(var/mob/user)
+/obj/item/modular_computer/examine(mob/user)
 	. = ..()
 	if(damage > broken_damage)
 		to_chat(user, "<span class='danger'>It is heavily damaged!</span>")

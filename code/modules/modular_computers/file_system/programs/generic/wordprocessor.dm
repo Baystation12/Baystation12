@@ -24,22 +24,9 @@
 		return 1
 
 /datum/computer_file/program/wordprocessor/proc/save_file(var/filename)
-	var/datum/computer_file/data/F = get_file(filename)
-	if(!F) //try to make one if it doesn't exist
-		F = create_file(filename, loaded_data, /datum/computer_file/data/text)
-		return !isnull(F)
-	var/datum/computer_file/data/backup = F.clone()
-	var/obj/item/weapon/stock_parts/computer/hard_drive/HDD = computer.hard_drive
-	if(!HDD)
-		return
-	HDD.remove_file(F)
-	F.stored_data = loaded_data
-	F.calculate_size()
-	if(!HDD.store_file(F))
-		HDD.store_file(backup)
-		return 0
-	is_edited = 0
-	return 1
+	. = computer.save_file(filename, loaded_data, /datum/computer_file/data/text)
+	if(.)
+		is_edited = 0
 
 /datum/computer_file/program/wordprocessor/Topic(href, href_list)
 	if(..())
@@ -128,11 +115,8 @@
 
 	if(href_list["PRG_printfile"])
 		. = 1
-		if(!computer.nano_printer)
-			error = "Missing Hardware: Your computer does not have the required hardware to complete this operation."
-			return 1
-		if(!computer.nano_printer.print_text(digitalPencode2html(loaded_data)))
-			error = "Hardware error: Printer was unable to print the file. It may be out of paper."
+		if(!computer.print_paper(digitalPencode2html(loaded_data)))
+			error = "Hardware error: Printer missing or out of paper."
 			return 1
 
 /datum/nano_module/program/computer_wordprocessor
@@ -143,18 +127,15 @@
 	var/datum/computer_file/program/wordprocessor/PRG
 	PRG = program
 
-	var/obj/item/weapon/stock_parts/computer/hard_drive/HDD
-	var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD
 	if(PRG.error)
 		data["error"] = PRG.error
 	if(PRG.browsing)
 		data["browsing"] = PRG.browsing
-		if(!PRG.computer || !PRG.computer.hard_drive)
+		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
 			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
-			HDD = PRG.computer.hard_drive
 			var/list/files[0]
-			for(var/datum/computer_file/F in HDD.stored_files)
+			for(var/datum/computer_file/F in PRG.computer.get_all_files())
 				if(F.filetype == "TXT")
 					files.Add(list(list(
 						"name" = F.filename,
@@ -162,11 +143,11 @@
 					)))
 			data["files"] = files
 
-			RHDD = PRG.computer.portable_drive
+			var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
 			if(RHDD)
 				data["usbconnected"] = 1
 				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in RHDD.stored_files)
+				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
 					if(F.filetype == "TXT")
 						usbfiles.Add(list(list(
 							"name" = F.filename,

@@ -23,6 +23,7 @@
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
 	#include "datums/uniforms_fleet.dm"
+	#include "datums/game_modes/torch_revolution.dm"
 	#include "datums/reports/command.dm"
 	#include "datums/reports/corporate.dm"
 	#include "datums/reports/exploration.dm"
@@ -54,7 +55,9 @@
 	#include "items/rigs.dm"
 	#include "items/solbanner.dm"
 	#include "items/explo_shotgun.dm"
+	#include "items/mecha.dm"
 
+	#include "items/clothing/ec_skillbadges.dm"
 	#include "items/clothing/solgov-accessory.dm"
 	#include "items/clothing/solgov-armor.dm"
 	#include "items/clothing/solgov-feet.dm"
@@ -121,6 +124,7 @@
 
 	#include "loadout/_defines.dm"
 	#include "loadout/loadout_accessories.dm"
+	#include "loadout/loadout_ec_skillbadges.dm"
 	#include "loadout/loadout_eyes.dm"
 	#include "loadout/loadout_gloves.dm"
 	#include "loadout/loadout_head.dm"

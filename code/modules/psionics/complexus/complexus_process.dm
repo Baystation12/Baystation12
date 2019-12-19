@@ -121,6 +121,7 @@
 
 	var/heal_general =  FALSE
 	var/heal_poison =   FALSE
+	var/heal_internal = FALSE
 	var/heal_bleeding = FALSE
 	var/heal_rate =     0
 	var/mend_prob =     0
@@ -129,20 +130,24 @@
 	if(use_rank >= PSI_RANK_PARAMOUNT)
 		heal_general = TRUE
 		heal_poison = TRUE
+		heal_internal = TRUE
 		heal_bleeding = TRUE
 		mend_prob = 50
 		heal_rate = 7
 	else if(use_rank == PSI_RANK_GRANDMASTER)
-		heal_bleeding = TRUE
 		heal_poison = TRUE
+		heal_internal = TRUE
+		heal_bleeding = TRUE
 		mend_prob = 20
 		heal_rate = 5
 	else if(use_rank == PSI_RANK_MASTER)
+		heal_internal = TRUE
 		heal_bleeding = TRUE
 		mend_prob = 10
 		heal_rate = 3
 	else if(use_rank == PSI_RANK_OPERANT)
 		heal_bleeding = TRUE
+		mend_prob = 5
 		heal_rate = 1
 	else
 		return
@@ -166,16 +171,17 @@
 				H.resuscitate()
 
 			// Heal organ damage.
-			for(var/obj/item/organ/I in H.internal_organs)
+			if(heal_internal)
+				for(var/obj/item/organ/I in H.internal_organs)
 
-				if(BP_IS_ROBOTIC(I) || BP_IS_CRYSTAL(I))
-					continue
+					if(BP_IS_ROBOTIC(I) || BP_IS_CRYSTAL(I))
+						continue
 
-				if(I.damage > 0 && spend_power(heal_rate))
-					I.damage = max(I.damage - heal_rate, 0)
-					if(prob(25))
-						to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))
-					return
+					if(I.damage > 0 && spend_power(heal_rate))
+						I.damage = max(I.damage - heal_rate, 0)
+						if(prob(25))
+							to_chat(H, SPAN_NOTICE("Your innards itch as your autoredactive faculty mends your [I.name]."))
+						return
 
 			// Heal broken bones.
 			if(H.bad_external_organs.len)
@@ -184,7 +190,7 @@
 					if(BP_IS_ROBOTIC(E))
 						continue
 
-					if ((E.status & ORGAN_BROKEN) && E.damage < (E.min_broken_damage * config.organ_health_multiplier)) // So we don't mend and autobreak.
+					if(heal_internal && (E.status & ORGAN_BROKEN) && E.damage < (E.min_broken_damage * config.organ_health_multiplier)) // So we don't mend and autobreak.
 						if(spend_power(heal_rate))
 							if(E.mend_fracture())
 								to_chat(H, SPAN_NOTICE("Your autoredactive faculty coaxes together the shattered bones in your [E.name]."))

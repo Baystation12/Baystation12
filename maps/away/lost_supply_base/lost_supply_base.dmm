@@ -437,7 +437,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/lost_supply_base/office)
 "aU" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/airless,
@@ -589,7 +589,7 @@
 /turf/space,
 /area/space)
 "bp" = (
-/obj/effect/overmap/sector/lost_supply_base,
+/obj/effect/overmap/visitable/sector/lost_supply_base,
 /turf/space,
 /area/space)
 "bq" = (
@@ -1545,7 +1545,7 @@
 	},
 /area/space)
 "ej" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/shuttle/blue,
 /area/space)
 "ek" = (
@@ -2309,7 +2309,7 @@
 	},
 /area/lost_supply_base/supply)
 "Jd" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/shuttle/blue,

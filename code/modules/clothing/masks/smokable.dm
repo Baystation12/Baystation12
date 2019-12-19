@@ -173,6 +173,11 @@
 	for(var/R in filling)
 		reagents.add_reagent(R, filling[R])
 
+/obj/item/clothing/mask/smokable/cigarette/light(var/flavor_text = "[usr] lights the [name].")
+	..()
+	if(is_processing)
+		set_scent_by_reagents(src)
+
 /obj/item/clothing/mask/smokable/cigarette/on_update_icon()
 	..()
 	overlays.Cut()
@@ -187,12 +192,13 @@
 
 /obj/item/clothing/mask/smokable/extinguish(var/mob/user, var/no_message)
 	..()
+	remove_extension(src, /datum/extension/scent)
 	if (type_butt)
 		var/obj/item/butt = new type_butt(get_turf(src))
 		transfer_fingerprints_to(butt)
 		butt.color = color
 		if(brand)
-			butt.desc += " This one is \a [brand]."
+			butt.desc += " This one is a [brand]."
 		if(ismob(loc))
 			var/mob/living/M = loc
 			if (!no_message)
@@ -362,6 +368,7 @@
 	zippomes = "<span class='rose'>With a flick of their wrist, USER lights their NAME with their FLAME.</span>"
 	weldermes = "<span class='notice'>USER insults NAME by lighting it with FLAME.</span>"
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
+	brand = null
 	filling = list(/datum/reagent/tobacco/fine = 5)
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
@@ -369,6 +376,7 @@
 	desc = "There's little more you could want from a cigar."
 	icon_state = "cigar2off"
 	icon_on = "cigar2on"
+	brand = "Cohiba Robusto"
 
 /obj/item/clothing/mask/smokable/cigarette/cigar/havana
 	name = "premium Havanian cigar"
@@ -377,6 +385,7 @@
 	icon_on = "cigar2on"
 	smoketime = 3000
 	chem_volume = 20
+	brand = "Havana"
 	filling = list(/datum/reagent/tobacco/fine = 10)
 
 /obj/item/trash/cigbutt
@@ -463,6 +472,7 @@
 			M.update_inv_wear_mask(0)
 			M.update_inv_l_hand(0)
 			M.update_inv_r_hand(1)
+		set_scent_by_reagents(src)
 
 /obj/item/clothing/mask/smokable/pipe/extinguish(var/mob/user, var/no_message)
 	..()
@@ -471,6 +481,7 @@
 		var/mob/living/M = loc
 		if (!no_message)
 			to_chat(M, "<span class='notice'>Your [name] goes out, and you empty the ash.</span>")
+	remove_extension(src, /datum/extension/scent)
 
 /obj/item/clothing/mask/smokable/pipe/attack_self(var/mob/user)
 	if(lit == 1)
@@ -478,6 +489,7 @@
 		lit = 0
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
+		remove_extension(src, /datum/extension/scent)
 	else if (smoketime)
 		var/turf/location = get_turf(user)
 		user.visible_message("<span class='notice'>[user] empties out [src].</span>", "<span class='notice'>You empty out [src].</span>")

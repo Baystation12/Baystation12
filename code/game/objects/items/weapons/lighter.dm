@@ -17,7 +17,7 @@
 	. = ..()
 	create_reagents(max_fuel)
 	reagents.add_reagent(/datum/reagent/fuel, max_fuel)
-	set_extension(src, /datum/extension/base_icon_state, /datum/extension/base_icon_state, icon_state)
+	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(random_colour)
 		color = pick(available_colors)
 	update_icon()
@@ -29,7 +29,7 @@
 	lit = 1
 	update_icon()
 	light_effects(user)
-	set_light(0.6, 0.5, 2)
+	set_light(0.6, 0.5, 2, l_color = COLOR_PALE_ORANGE)
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/flame/lighter/proc/light_effects(mob/living/carbon/user)

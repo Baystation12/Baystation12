@@ -10,6 +10,7 @@
 	density = 0
 	opacity = 0
 	anchored = 1
+	obj_flags = OBJ_FLAG_NOFALL
 
 	var/allowed_directions = DOWN
 	var/obj/structure/ladder/target_up
@@ -31,6 +32,10 @@
 				return
 	update_icon()
 
+
+	set_extension(src, /datum/extension/turf_hand)
+
+
 /obj/structure/ladder/Destroy()
 	if(target_down)
 		target_down.target_up = null
@@ -42,6 +47,31 @@
 
 /obj/structure/ladder/attackby(obj/item/I, mob/user)
 	climb(user, I)
+
+/turf/hitby(atom/movable/AM)
+	if(isobj(AM))
+		var/obj/structure/ladder/L = locate() in contents
+		if(L)
+			L.hitby(AM)
+			return
+	..()
+
+/obj/structure/ladder/hitby(obj/item/I)
+	var/area/room = get_area(src)
+	if(!room.has_gravity())
+		return
+	var/atom/blocker
+	var/turf/landing = get_turf(target_down)
+	for(var/atom/A in landing)
+		if(!A.CanPass(I, I.loc, 1.5, 0))
+			blocker = A
+			break
+	if(blocker)
+		visible_message(SPAN_WARNING("\The [I] fails to go down \the [src], blocked by the [blocker]!"))
+	else
+		visible_message(SPAN_WARNING("\The [I] goes down \the [src]!"))
+		I.forceMove(landing)
+		landing.visible_message(SPAN_WARNING("\The [I] falls from the top of \the [target_down]!"))
 
 /obj/structure/ladder/attack_hand(var/mob/M)
 	climb(M)
@@ -240,10 +270,10 @@
 /obj/structure/stairs/west
 	dir = WEST
 	bound_width = 64
-	
+
 /obj/structure/stairs/short
 	bound_height = 32
 	bound_width = 32
-	
+
 /obj/structure/stairs/short/west
 	dir = WEST

@@ -61,6 +61,15 @@
 	Any SCG citizen of age (18 and older) with no outstanding SCG-wide warrants can sign up for a 2-year contract. \
 	Officer candidates are required to have at least a bachelor's degree in a relevant field (astrogation, engineering, xenoarcheology, etc)."
 
+/decl/cultural_info/faction/police
+	name = FACTION_SPACECOPS
+	description = "The Sol Federal (SFP) is a government law enforcement agency tasked with enforcing Sol Central Government law, \
+	investigating breaches of law, fugitive recovery and transport, and securing ports of entry. \
+	Some Agents embedded with other organizations (e.g. an <l>Expeditionary Corps</l> ship) and are expected to answer to their superiours from those organizations. \
+	Notable units are Organized Crime & Vice (self-explanatory), Territory Support (ports of entry and helping local law enforcement), \
+	Special Investigations (sensitive and urgent cases) and Fugitive Recovery Division (for when local authorities are unable or unwilling to arrest someone). \
+	The contractor SFP Trackers are also used find and arrest low-profile fugitives from justice."
+
 /decl/cultural_info/faction/remote/nanotrasen
 	name = FACTION_NANOTRASEN
 	description = "The NanoTrasen Corporation, commonly referred to as NT, is one of the great megacorporations of the modern day.\

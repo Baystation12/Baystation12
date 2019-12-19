@@ -6,10 +6,10 @@
 SUBSYSTEM_DEF(atoms)
 	name = "Atoms"
 	init_order = SS_INIT_ATOMS
-	flags = SS_NO_FIRE
+	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 
-	var/init_state = INITIALIZATION_INSSATOMS
-	var/old_init_state
+	var/atom_init_stage = INITIALIZATION_INSSATOMS
+	var/old_init_stage
 
 	var/list/late_loaders
 	var/list/created_atoms = list()
@@ -17,15 +17,15 @@ SUBSYSTEM_DEF(atoms)
 	var/list/BadInitializeCalls = list()
 
 /datum/controller/subsystem/atoms/Initialize(timeofday)
-	init_state = INITIALIZATION_INNEW_MAPLOAD
+	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 	return ..()
 
 /datum/controller/subsystem/atoms/proc/InitializeAtoms()
-	if(init_state <= INITIALIZATION_INSSATOMS_LATE)
+	if(atom_init_stage <= INITIALIZATION_INSSATOMS_LATE)
 		return
 
-	init_state = INITIALIZATION_INNEW_MAPLOAD
+	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 
 	LAZYINITLIST(late_loaders)
 
@@ -43,7 +43,7 @@ SUBSYSTEM_DEF(atoms)
 	// If wondering why not just store all atoms in created_atoms and use the block above: that turns out unbearably expensive.
 	// Instead, atoms without extra arguments in New created on server start are fished out of world directly.
 	// We do this exactly once.
-	if(!initialized) 
+	if(!initialized)
 		for(var/atom/A in world)
 			if(!(A.atom_flags & ATOM_FLAG_INITIALIZED))
 				InitAtom(A, mapload_arg)
@@ -53,7 +53,7 @@ SUBSYSTEM_DEF(atoms)
 	report_progress("Initialized [count] atom\s")
 	pass(count)
 
-	init_state = INITIALIZATION_INNEW_REGULAR
+	atom_init_stage = INITIALIZATION_INNEW_REGULAR
 
 	if(late_loaders.len)
 		for(var/I in late_loaders)
@@ -101,17 +101,17 @@ SUBSYSTEM_DEF(atoms)
 	..("Bad Initialize Calls:[BadInitializeCalls.len]")
 
 /datum/controller/subsystem/atoms/proc/map_loader_begin()
-	old_init_state = init_state
-	init_state = INITIALIZATION_INSSATOMS_LATE
+	old_init_stage = atom_init_stage
+	atom_init_stage = INITIALIZATION_INSSATOMS_LATE
 
 /datum/controller/subsystem/atoms/proc/map_loader_stop()
-	init_state = old_init_state
+	atom_init_stage = old_init_stage
 
 /datum/controller/subsystem/atoms/Recover()
-	init_state = SSatoms.init_state
-	if(init_state == INITIALIZATION_INNEW_MAPLOAD)
+	atom_init_stage = SSatoms.atom_init_stage
+	if(atom_init_stage == INITIALIZATION_INNEW_MAPLOAD)
 		InitializeAtoms()
-	old_init_state = SSatoms.old_init_state
+	old_init_stage = SSatoms.old_init_stage
 	BadInitializeCalls = SSatoms.BadInitializeCalls
 
 /datum/controller/subsystem/atoms/proc/InitLog()

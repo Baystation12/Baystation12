@@ -5,7 +5,15 @@
 	icon_state = "void"
 
 	heat_protection = HEAD
-	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 10)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_MINOR
+		)
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = VOIDSUIT_MAX_PRESSURE
 	min_pressure_protection = 0
@@ -29,7 +37,15 @@
 	icon_state = "void"
 	w_class = ITEM_SIZE_HUGE//bulky item
 	desc = "A high-tech dark red space suit. Used for AI satellite maintenance."
-	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 10)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_MINOR
+		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
@@ -82,13 +98,13 @@ else if(##equipment_var) {\
 	QDEL_NULL(helmet)
 	QDEL_NULL(tank)
 
-/obj/item/clothing/suit/space/void/examine(user)
-	. = ..(user)
+/obj/item/clothing/suit/space/void/examine(user,distance)
+	. = ..()
 	var/list/part_list = new
 	for(var/obj/item/I in list(helmet,boots,tank))
 		part_list += "\a [I]"
 	to_chat(user, "\The [src] has [english_list(part_list)] installed.")
-	if(tank && in_range(src,user))
+	if(tank && distance <= 1)
 		to_chat(user, "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>")
 
 /obj/item/clothing/suit/space/void/refit_for_species(var/target_species)
@@ -204,10 +220,13 @@ else if(##equipment_var) {\
 	var/slot = H.get_inventory_slot(src)
 	if(slot != slot_wear_suit && slot != slot_l_hand && slot != slot_r_hand) return// let them eject those tanks when they're in hand or stuff for ease of use
 
+
 	to_chat(H, "<span class='info'>You press the emergency release, ejecting \the [tank] from your suit.</span>")
 	tank.canremove = 1
+	H.drop_from_inventory(tank, src)
 	H.put_in_hands(tank)
 	src.tank = null
+	playsound(loc, 'sound/effects/spray3.ogg', 50)
 
 /obj/item/clothing/suit/space/void/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -225,6 +244,7 @@ else if(##equipment_var) {\
 			var/choice = input("What component would you like to remove?") as null|anything in list(helmet,boots,tank)
 			if(!choice) return
 
+			playsound(loc, 'sound/items/Screwdriver.ogg', 50)
 			if(choice == tank)	//No, a switch doesn't work here. Sorry. ~Techhead
 				to_chat(user, "You pop \the [tank] out of \the [src]'s storage compartment.")
 				user.put_in_hands(tank)
@@ -251,6 +271,7 @@ else if(##equipment_var) {\
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s helmet mount.")
 			src.helmet = W
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/clothing/shoes/magboots))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
@@ -263,6 +284,7 @@ else if(##equipment_var) {\
 				return
 			to_chat(user, "You attach \the [W] to \the [src]'s boot mounts.")
 			boots = W
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 	else if(istype(W,/obj/item/weapon/tank))
 		if(user.get_inventory_slot(src) == slot_wear_suit)
@@ -275,6 +297,7 @@ else if(##equipment_var) {\
 				return
 			to_chat(user, "You insert \the [W] into \the [src]'s storage compartment.")
 			tank = W
+			playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		return
 
 	..()

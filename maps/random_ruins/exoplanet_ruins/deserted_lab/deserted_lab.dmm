@@ -23,6 +23,7 @@
 /area/template_noop)
 "af" = (
 /obj/structure/anomaly_container,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ag" = (
@@ -39,6 +40,7 @@
 /area/template_noop)
 "ai" = (
 /obj/machinery/floodlight,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aj" = (
@@ -68,6 +70,7 @@
 /area/template_noop)
 "ap" = (
 /obj/structure/closet/crate,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "aq" = (
@@ -76,10 +79,12 @@
 /area/template_noop)
 "ar" = (
 /obj/structure/closet/crate/trashcart,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "as" = (
 /obj/structure/closet/crate/freezer/rations,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "at" = (
@@ -112,7 +117,6 @@
 /obj/structure/table/standard{
 	name = "plastic table frame"
 	},
-/obj/item/weapon/virusdish/random,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
 "az" = (
@@ -133,9 +137,6 @@
 "aC" = (
 /obj/random/closet,
 /turf/simulated/floor/carpet/blue2,
-/area/template_noop)
-"aD" = (
-/turf/simulated/floor/tiled/steel_ridged,
 /area/template_noop)
 "aE" = (
 /obj/structure/bookcase/manuals/xenoarchaeology,
@@ -299,6 +300,10 @@
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/white,
 /area/template_noop)
+"za" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
 aa
@@ -311,7 +316,7 @@ aa
 aa
 aa
 aa
-aa
+za
 aa
 aa
 "}
@@ -341,7 +346,7 @@ aV
 aL
 ab
 aB
-aD
+au
 ab
 ao
 "}
@@ -355,7 +360,7 @@ aq
 aJ
 ac
 aP
-aD
+au
 aW
 ab
 aa
@@ -424,7 +429,7 @@ aa
 aa
 ab
 at
-aD
+au
 aT
 bd
 av
@@ -468,7 +473,7 @@ aa
 (12,1,1) = {"
 aa
 ab
-aa
+za
 af
 ab
 ai
@@ -483,15 +488,15 @@ aa
 (13,1,1) = {"
 aa
 aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
-aa
+za
+za
+za
+za
+za
+za
+za
+za
+za
 aa
 aa
 "}

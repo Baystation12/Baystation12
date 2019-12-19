@@ -260,3 +260,13 @@
 	contains = list(/obj/item/device/kit/paint/powerloader/flames_blue)
 	cost = 50
 	containername = "heavy exosuit modkit crate"
+
+/decl/hierarchy/supply_pack/nonessent/aromatherapy
+	name = "Rec - Aromatherapy"
+	contains = list(
+		/obj/item/weapon/paper/aromatherapy_disclaimer,
+		/obj/item/weapon/storage/candle_box/scented = 3,
+		/obj/item/weapon/storage/candle_box/incense = 6,
+		/obj/item/weapon/flame/lighter/random)
+	cost = 15
+	containername = "aromatherapy crate"

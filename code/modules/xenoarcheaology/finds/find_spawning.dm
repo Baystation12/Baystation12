@@ -59,7 +59,7 @@
 
 	var/engravings = ""
 	if(apply_image_decorations)
-		var/obj/effect/overmap/sector/exoplanet/E = map_sectors["[z]"]
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		engravings = "[pick("Engraved","Carved","Etched")] on the item is [pick("an image of","a frieze of","a depiction of")] "
 		if(istype(E))
 			engravings += E.get_engravings()
@@ -276,18 +276,21 @@
 
 /obj/item/weapon/archaeological_find/material
 	item_type = "material lump"
+	desc = "Salvaged lump of usable material."
 	find_type = ARCHAEO_METAL
 	apply_material_decorations = 0
+	var/list/possible_materials = list(MATERIAL_STEEL, MATERIAL_PLASTEEL, MATERIAL_TITANIUM, MATERIAL_GLASS)
 
 /obj/item/weapon/archaeological_find/material/spawn_item()
-	var/list/possible_spawns = list()
-	possible_spawns += /obj/item/stack/material/aliumium
-	possible_spawns += /obj/item/stack/material/phoron
-	possible_spawns += /obj/item/stack/material/uranium
-	var/new_type = pick(possible_spawns)
-	var/obj/item/stack/material/new_item = new new_type(loc)
+	var/mat_to_spawn = pickweight(possible_materials)
+	var/material/M = SSmaterials.materials_by_name[mat_to_spawn]
+	var/obj/item/stack/material/new_item = new M.stack_type(loc)
 	new_item.amount = rand(5,45)
 	return new_item
+
+/obj/item/weapon/archaeological_find/material/exotic
+	item_type = "rare material lump"
+	possible_materials = list(MATERIAL_ALIENALLOY, MATERIAL_PHORON, MATERIAL_HYDROGEN, MATERIAL_PHORON_GLASS)
 
 /obj/item/weapon/archaeological_find/crystal
 	item_type = "crystal"

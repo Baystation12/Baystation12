@@ -44,6 +44,14 @@
 	else
 		. = TRUE
 
+/decl/surgery_step/limb/attach/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/organ/external/tool)
+	if(istype(tool) && BP_IS_ROBOTIC(tool))
+		if(target.isSynthetic())
+			return SURGERY_SKILLS_ROBOTIC
+		else
+			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+	return ..()
+
 /decl/surgery_step/limb/attach/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/E = tool
@@ -85,6 +93,15 @@
 	can_infect = 1
 	min_duration = 100
 	max_duration = 120
+
+/decl/surgery_step/limb/connect/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool, target_zone)
+	var/obj/item/organ/external/E = target && target.get_organ(target_zone)
+	if(istype(E) && BP_IS_ROBOTIC(E))
+		if(target.isSynthetic())
+			return SURGERY_SKILLS_ROBOTIC
+		else
+			return SURGERY_SKILLS_ROBOTIC_ON_MEAT
+	return ..()
 
 /decl/surgery_step/limb/connect/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())

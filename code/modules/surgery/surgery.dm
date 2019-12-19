@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(surgery_tool_exceptions, list(
 	/obj/item/weapon/reagent_containers/hypospray,
 	/obj/item/modular_computer,
 	/obj/item/weapon/reagent_containers/syringe,
-	/obj/item/device/antibody_scanner
+	/obj/item/weapon/reagent_containers/borghypo
 ))
 GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
@@ -52,7 +52,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 
 	return 1
 
-/decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+/decl/surgery_step/proc/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool, target_zone)
 	if(delicate)
 		return SURGERY_SKILLS_DELICATE
 	else
@@ -69,6 +69,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			// Check if clothing is blocking access
 			var/obj/item/I = target.get_covering_equipped_item_by_zone(target_zone)
 			if(I && (I.item_flags & ITEM_FLAG_THICKMATERIAL))
+				to_chat(user,SPAN_NOTICE("The material covering this area is too thick for you to do surgery through!"))
 				return FALSE
 			// Check various conditional flags.
 			if(((surgery_candidate_flags & SURGERY_NO_ROBOTIC) && BP_IS_ROBOTIC(affected)) || \
@@ -123,12 +124,12 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 /decl/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return null
 
-/decl/surgery_step/proc/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
+/decl/surgery_step/proc/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool, target_zone)
 	. = tool_quality(tool)
 	if(user == target)
 		. -= 10
 
-	var/skill_reqs = get_skill_reqs(user, target, tool)
+	var/skill_reqs = get_skill_reqs(user, target, tool, target_zone)
 	for(var/skill in skill_reqs)
 		var/penalty = delicate ? 40 : 20
 		. -= max(0, penalty * (skill_reqs[skill] - user.get_skill_value(skill)))
@@ -195,7 +196,7 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 	else if(LAZYLEN(possible_surgeries) >= 1)
 		if(user.client) // In case of future autodocs.
 			S = input(user, "Which surgery would you like to perform?", "Surgery") as null|anything in possible_surgeries
-		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src)))
+		if(S && !user.skill_check_multiple(S.get_skill_reqs(user, M, src, zone)))
 			S = pick(possible_surgeries)
 
 	// We didn't find a surgery, or decided not to perform one.
@@ -222,9 +223,9 @@ GLOBAL_LIST_INIT(surgery_tool_exception_cache, new)
 			if(operation_data)
 				LAZYSET(M.surgeries_in_progress, zone, operation_data)
 				S.begin_step(user, M, zone, src)
-				var/skill_reqs = S.get_skill_reqs(user, M, src)
+				var/skill_reqs = S.get_skill_reqs(user, M, src, zone)
 				var/duration = user.skill_delay_mult(skill_reqs[1]) * rand(S.min_duration, S.max_duration)
-				if(prob(S.success_chance(user, M, src)) && do_mob(user, M, duration))
+				if(prob(S.success_chance(user, M, src, zone)) && do_mob(user, M, duration))
 					S.end_step(user, M, zone, src)
 					handle_post_surgery()
 				else if ((src in user.contents) && user.Adjacent(M))

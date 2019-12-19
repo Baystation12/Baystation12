@@ -42,6 +42,13 @@
 #define APC_UPOVERLAY_OPERATING 16
 
 // Various APC types
+/obj/machinery/power/apc/inactive
+	lighting = 0
+	equipment = 0
+	environ = 0
+	locked = 0
+	coverlocked = 0
+
 /obj/machinery/power/apc/critical
 	is_critical = 1
 
@@ -224,8 +231,9 @@
 	var/obj/item/weapon/stock_parts/power/terminal/term = get_component_of_type(/obj/item/weapon/stock_parts/power/terminal)
 	return term && term.terminal
 
-/obj/machinery/power/apc/examine(mob/user)
-	if(..(user, 1))
+/obj/machinery/power/apc/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		if(stat & BROKEN)
 			to_chat(user, "Looks broken.")
 			return
@@ -670,6 +678,9 @@
 				else
 					to_chat(user, "<span class='warning'>You fail to [ locked ? "unlock" : "lock"] the APC interface.</span>")
 				return 1
+
+/obj/machinery/power/apc/CanUseTopicPhysical(var/mob/user)
+	return GLOB.physical_state.can_use_topic(nano_host(), user)
 
 /obj/machinery/power/apc/physical_attack_hand(mob/user)
 	//Human mob special interaction goes here.
@@ -1126,9 +1137,9 @@ obj/machinery/power/apc/proc/autoset(var/cur_state, var/on)
 	switch(val)
 		if(2)
 			return POWERCHAN_OFF_AUTO
-		if(1) 
+		if(1)
 			return POWERCHAN_OFF_TEMP
-		else 
+		else
 			return POWERCHAN_OFF
 
 // Malfunction: Transfers APC under AI's control

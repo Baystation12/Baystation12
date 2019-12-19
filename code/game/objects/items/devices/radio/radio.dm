@@ -139,7 +139,10 @@
 
 /mob/proc/has_internal_radio_channel_access(var/list/req_one_accesses)
 	var/obj/item/weapon/card/id/I = GetIdCard()
-	return has_access(list(req_one_accesses), I ? I.GetAccess() : list()) // Double list does an OR check instead of the usual AND.
+	if (!length(req_one_accesses))
+		return TRUE // No access flags means all access
+	else
+		return has_access(list(req_one_accesses), I ? I.GetAccess() : list()) // Double list does an OR check instead of the usual AND.
 
 /mob/observer/ghost/has_internal_radio_channel_access(var/list/req_one_accesses)
 	return can_admin_interact()
@@ -264,7 +267,7 @@
 		if ((istype(C)) && (C.chem_effects[CE_SEDATE] || C.incapacitated(INCAPACITATION_DISRUPTED)))
 			to_chat(M, SPAN_WARNING("You're unable to reach \the [src]."))
 			return 0
-		
+
 		if((istype(C)) && C.radio_interrupt_cooldown > world.time)
 			to_chat(M, SPAN_WARNING("You're disrupted as you reach for \the [src]."))
 			return 0
@@ -544,14 +547,13 @@
 		return get_mobs_or_objects_in_view(canhear_range, src)
 
 
-/obj/item/device/radio/examine(mob/user)
+/obj/item/device/radio/examine(mob/user, distance)
 	. = ..()
-	if ((in_range(src, user) || loc == user))
+	if (distance <= 1 || loc == user)
 		if (b_stat)
-			user.show_message("<span class='notice'>\The [src] can be attached and modified!</span>")
+			to_chat(user, "<span class='notice'>\The [src] can be attached and modified!</span>")
 		else
-			user.show_message("<span class='notice'>\The [src] can not be modified or attached!</span>")
-	return
+			to_chat(user, "<span class='notice'>\The [src] can not be modified or attached!</span>")
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -856,6 +858,3 @@
 
 /obj/item/device/radio/exosuit/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.mech_state)
 	. = ..()
-
-
-

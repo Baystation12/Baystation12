@@ -7,8 +7,3 @@
 	hardware_size = 1
 	origin_tech = list(TECH_DATA = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	var/passive_charging_rate = 250			// W
-
-/obj/item/weapon/stock_parts/computer/tesla_link/Destroy()
-	if(holder2 && (holder2.tesla_link == src))
-		holder2.tesla_link = null
-	return ..()

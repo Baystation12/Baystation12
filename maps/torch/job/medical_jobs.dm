@@ -3,6 +3,7 @@
 	department = "Medical"
 	department_flag = MED
 	minimal_player_age = 2
+	minimum_character_age = list(SPECIES_HUMAN = 29)
 	ideal_character_age = 45
 	total_positions = 2
 	spawn_positions = 2
@@ -27,14 +28,12 @@
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_EXPERT,
 	                    SKILL_ANATOMY     = SKILL_EXPERT,
-	                    SKILL_CHEMISTRY   = SKILL_BASIC,
-	                    SKILL_VIROLOGY    = SKILL_BASIC)
+	                    SKILL_CHEMISTRY   = SKILL_BASIC)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
-	skill_points = 28
+	                    SKILL_CHEMISTRY   = SKILL_MAX)
+	skill_points = 20
 
 	access = list(access_medical, access_morgue, access_virology, access_maint_tunnels, access_emergency_storage,
 			            access_crematorium, access_chemistry, access_surgery,
@@ -49,10 +48,10 @@
 	spawn_positions = 3
 	supervisors = "Physicians and the Chief Medical Officer"
 	economic_power = 7
+	minimum_character_age = list(SPECIES_HUMAN = 19)
 	ideal_character_age = 40
 	minimal_player_age = 0
 	alt_titles = list(
-		"Nursing Assistant",
 		"Paramedic",
 		"Corpsman")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/doctor
@@ -75,8 +74,7 @@
 	                    SKILL_ANATOMY = SKILL_BASIC)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
+	                    SKILL_CHEMISTRY   = SKILL_MAX)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_eva, access_surgery, access_medical_equip, access_solgov_crew, access_hangar)
@@ -84,7 +82,7 @@
 
 	software_on_spawn = list(/datum/computer_file/program/suit_sensors,
 							 /datum/computer_file/program/camera_monitor)
-	skill_points = 26
+	skill_points = 22
 
 /datum/job/medical_trainee
 	title = "Trainee Medical Technician"
@@ -94,6 +92,7 @@
 	spawn_positions = 1
 	supervisors = "Medical personnel, and the Chief Medical Officer"
 	selection_color = "#013d3b"
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 	alt_titles = list(
 		"Corpsman Trainee")
@@ -118,8 +117,7 @@
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
+	                    SKILL_CHEMISTRY   = SKILL_MAX)
 
 	access = list(access_medical, access_morgue, access_maint_tunnels, access_external_airlocks, access_emergency_storage,
 			            access_surgery, access_medical_equip, access_solgov_crew)
@@ -131,7 +129,7 @@
 	return "You are a Trainee Medical Technician. You are learning how to treat and recover wounded crew from the more experienced medical personnel aboard. You are subordinate to the rest of the medical team."
 
 /datum/job/chemist
-	title = "Chemist"
+	title = "Laboratory Technician"
 	department = "Medical"
 	department_flag = MED
 	total_positions = 1
@@ -139,20 +137,26 @@
 	supervisors = "the Chief Medical Officer, the Corporate Liaison and Medical Personnel"
 	selection_color = "#013d3b"
 	economic_power = 4
+	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 30
-	minimal_player_age = 0
+	minimal_player_age = 7
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
 	allowed_branches = list(/datum/mil_branch/civilian)
 	allowed_ranks = list(/datum/mil_rank/civ/contractor)
-	min_skill = list(   SKILL_MEDICAL   = SKILL_BASIC,
+	min_skill = list(   SKILL_MEDICAL   = SKILL_ADEPT,
 	                    SKILL_CHEMISTRY = SKILL_ADEPT)
 
-	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
+	max_skill = list(   SKILL_MEDICAL     = SKILL_ADEPT,
+						SKILL_ANATOMY	  = SKILL_ADEPT,
 	                    SKILL_CHEMISTRY   = SKILL_MAX)
-	skill_points = 26
+	skill_points = 16
 
-	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry)
+	access = list(access_medical, access_maint_tunnels, access_emergency_storage, access_medical_equip, access_solgov_crew, access_chemistry,
+	 						access_virology, access_morgue, access_crematorium)
 	minimal_access = list()
+
+/datum/job/chemist/get_description_blurb()
+	return "You are a Laboratory Technician. You make medicine, and work in the virology lab. You are not a doctor or medic, but have surface level knowledge in those fields. You should not be treating patients, but rather providing the the medicine to do so. You are subordinate to Physicians and Medical Techncians."	
 
 /datum/job/psychiatrist
 	title = "Counselor"
@@ -160,6 +164,7 @@
 	spawn_positions = 1
 	ideal_character_age = 40
 	economic_power = 5
+	minimum_character_age = list(SPECIES_HUMAN = 24)
 	minimal_player_age = 0
 	supervisors = "the Chief Medical Officer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
@@ -174,7 +179,6 @@
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/fleet/o1,
-		/datum/mil_rank/fleet/o2,
 		/datum/mil_rank/ec/o1)
 	min_skill = list(
 		SKILL_BUREAUCRACY = SKILL_BASIC,

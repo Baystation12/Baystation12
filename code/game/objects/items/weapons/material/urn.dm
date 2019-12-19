@@ -3,6 +3,7 @@
 	desc = "A vase used to store the ashes of the deceased."
 	icon = 'icons/obj/urn.dmi'
 	icon_state = "urn"
+	max_force = 5
 	applies_material_colour = TRUE
 	w_class = ITEM_SIZE_SMALL
 	default_material = MATERIAL_WOOD
@@ -28,5 +29,5 @@
 
 /obj/item/weapon/material/urn/examine(mob/user)
 	. = ..()
-	if(. && contents.len)
+	if(contents.len)
 		to_chat(user, "\The [src] is full.")

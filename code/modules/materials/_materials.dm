@@ -2,7 +2,7 @@
 	MATERIAL DATUMS
 	This data is used by various parts of the game for basic physical properties and behaviors
 	of the metals/materials used for constructing many objects. Each var is commented and should be pretty
-	self-explanatory but the various object types may have their own documentation. ~Z
+	self-explanatory but the various object types may have their own documentation.
 
 	PATHS THAT USE DATUMS
 		turf/simulated/wall
@@ -88,7 +88,7 @@
 	var/list/window_options = list()
 
 	// Damage values.
-	var/hardness = 60            // Prob of wall destruction by hulk, used for edge damage in weapons.
+	var/hardness = MATERIAL_HARD            // Prob of wall destruction by hulk, used for edge damage in weapons.
 	var/weight = 20              // Determines blunt damage/throwforce for weapons.
 
 	// Noise when someone is faceplanted onto a table made of this material.
@@ -233,4 +233,8 @@
 	return !!(flags & MATERIAL_BRITTLE)
 
 /material/proc/combustion_effect(var/turf/T, var/temperature)
+	return
+
+// Dumb overlay to apply over wall sprite for cheap texture effect
+/material/proc/get_wall_texture()
 	return

@@ -10,7 +10,7 @@
 	var/list/toilets = SSfluids.hygiene_props.Copy()
 	while(clog_amt && toilets.len)
 		var/obj/structure/hygiene/toilet = pick_n_take(toilets)
-		if((toilet.z in GLOB.using_map.station_levels) && toilet.clog(clog_severity)) clog_amt--
+		if((toilet.z in affecting_z) && toilet.clog(clog_severity)) clog_amt--
 
 /datum/event/toilet_clog/flood
 	clog_min = 3

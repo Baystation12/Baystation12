@@ -626,7 +626,7 @@
 			C.installed = 1
 			C.wrapped = W
 			C.install()
-			//This will mean that removing and replacing a power cell will repair the mount, but I don't care at this point. ~Z
+			// This means that removing and replacing a power cell will repair the mount.
 			C.brute_damage = 0
 			C.electronics_damage = 0
 
@@ -802,33 +802,28 @@
 	src << browse(dat, "window=robotmod")
 
 
-/mob/living/silicon/robot/Topic(href, href_list)
-	if(..())
-		return 1
-	if(usr != src)
-		return 1
-
+/mob/living/silicon/robot/OnSelfTopic(href_list)
 	if (href_list["showalerts"])
 		open_subsystem(/datum/nano_module/alarm_monitor/all)
-		return 1
+		return TOPIC_HANDLED
 
 	if (href_list["mod"])
 		var/obj/item/O = locate(href_list["mod"])
 		if (istype(O) && (O.loc == src))
 			O.attack_self(src)
-		return 1
+		return TOPIC_HANDLED
 
 	if (href_list["act"])
 		var/obj/item/O = locate(href_list["act"])
 		if (!istype(O))
-			return 1
+			return TOPIC_HANDLED
 
 		if(!((O in module.equipment) || (O == src.module.emag)))
-			return 1
+			return TOPIC_HANDLED
 
 		if(activated(O))
 			to_chat(src, "Already activated")
-			return 1
+			return TOPIC_HANDLED
 		if(!module_state_1)
 			module_state_1 = O
 			O.hud_layerise()
@@ -850,7 +845,7 @@
 		else
 			to_chat(src, "You need to disable a module first!")
 		installed_modules()
-		return 1
+		return TOPIC_HANDLED
 
 	if (href_list["deact"])
 		var/obj/item/O = locate(href_list["deact"])
@@ -869,8 +864,8 @@
 		else
 			to_chat(src, "Module isn't activated")
 		installed_modules()
-		return 1
-	return
+		return TOPIC_HANDLED
+	return ..()
 
 /mob/living/silicon/robot/proc/radio_menu()
 	silicon_radio.interact(src)//Just use the radio's Topic() instead of bullshit special-snowflake code

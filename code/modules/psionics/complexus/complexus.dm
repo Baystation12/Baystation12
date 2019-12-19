@@ -37,7 +37,7 @@
 /datum/psi_complexus/proc/get_aura_image()
 	if(_aura_image && !istype(_aura_image))
 		var/atom/A = _aura_image
-		debug_print("Non-image found in psi complexus: \ref[A] - \the [A] - [istype(A) ? A.type : "non-atom"]")
+		log_debug("Non-image found in psi complexus: \ref[A] - \the [A] - [istype(A) ? A.type : "non-atom"]")
 		destroy_aura_image(_aura_image)
 		_aura_image = null
 	if(!_aura_image)
@@ -71,7 +71,7 @@
 /datum/psi_complexus/New(var/mob/_owner)
 	owner = _owner
 	START_PROCESSING(SSpsi, src)
-	set_extension(src, /datum/extension/armor, /datum/extension/armor/psionic)
+	set_extension(src, /datum/extension/armor/psionic)
 
 /datum/psi_complexus/Destroy()
 	destroy_aura_image(_aura_image)

@@ -1,0 +1,7352 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/space,
+/area/space)
+"ab" = (
+/turf/simulated/mineral,
+/area/space)
+"ac" = (
+/obj/structure/grille,
+/obj/structure/lattice,
+/turf/space,
+/area/space)
+"ad" = (
+/obj/structure/lattice,
+/turf/space,
+/area/space)
+"ae" = (
+/obj/structure/lattice,
+/obj/structure/grille,
+/turf/space,
+/area/space)
+"af" = (
+/obj/structure/lattice,
+/obj/structure/grille/broken,
+/turf/space,
+/area/space)
+"ag" = (
+/turf/unsimulated/wall,
+/area/map_template/syndicate_mothership)
+"ah" = (
+/turf/simulated/mineral,
+/area/map_template/syndicate_mothership)
+"ai" = (
+/obj/structure/table/standard,
+/obj/item/device/flashlight/lamp{
+	pixel_x = 4;
+	pixel_y = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"aj" = (
+/obj/structure/table/standard,
+/obj/effect/landmark{
+	name = "Nuclear-Code"
+	},
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"ak" = (
+/obj/structure/table/standard,
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/item/weapon/pen{
+	pixel_y = 4
+	},
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"al" = (
+/obj/effect/wingrille_spawn/reinforced/crescent,
+/turf/unsimulated/wall/fakeglass{
+	dir = 1;
+	icon_state = "fakewindows"
+	},
+/area/map_template/syndicate_mothership)
+"am" = (
+/obj/item/weapon/bedsheet/hos,
+/obj/structure/bed/padded,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"an" = (
+/obj/effect/landmark{
+	name = "Syndicate-Spawn"
+	},
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"ao" = (
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"ap" = (
+/obj/effect/wingrille_spawn/reinforced/crescent,
+/turf/unsimulated/wall/fakeglass{
+	icon_state = "fakewindows2";
+	dir = 1
+	},
+/area/map_template/syndicate_mothership)
+"aq" = (
+/obj/effect/wingrille_spawn/reinforced/crescent,
+/turf/unsimulated/wall/fakeglass,
+/area/map_template/syndicate_mothership)
+"ar" = (
+/obj/structure/bed/padded,
+/obj/item/weapon/bedsheet/hos,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"as" = (
+/obj/machinery/acting/changer,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"at" = (
+/obj/item/modular_computer/pda/syndicate,
+/obj/structure/table/standard,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"au" = (
+/obj/structure/undies_wardrobe,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"av" = (
+/obj/structure/table/standard,
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"aw" = (
+/obj/effect/wingrille_spawn/reinforced/crescent,
+/turf/unsimulated/floor{
+	icon_state = "plating";
+	name = "plating"
+	},
+/area/map_template/syndicate_mothership)
+"ax" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Barracks";
+	opacity = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "lino"
+	},
+/area/map_template/syndicate_mothership)
+"ay" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"az" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "syndieshutters";
+	name = "Blast Doors";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"aA" = (
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"aB" = (
+/obj/structure/sign/double/map/left{
+	pixel_y = 32
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"aC" = (
+/obj/structure/sign/double/map/right{
+	pixel_y = 32
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"aD" = (
+/obj/machinery/vending/snack{
+	name = "hacked Getmore Chocolate Corp";
+	prices = list()
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"aE" = (
+/obj/structure/table/standard,
+/obj/machinery/chemical_dispenser/bar_soft/full{
+	pixel_x = 2;
+	pixel_y = 6
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"aF" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/box/glasses,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"aG" = (
+/obj/structure/hygiene/sink/kitchen{
+	pixel_y = 28
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"aH" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"aI" = (
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/ammo_magazine/pistol/small,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/obj/item/weapon/gun/projectile/pistol/holdout,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"aJ" = (
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"aK" = (
+/obj/structure/table/rack,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"aL" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"aM" = (
+/obj/structure/shuttle/engine/propulsion{
+	icon_state = "propulsion_l";
+	dir = 1
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"aN" = (
+/obj/machinery/recharger,
+/obj/structure/table/reinforced,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aO" = (
+/obj/machinery/camera/network/mercenary,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aP" = (
+/obj/machinery/computer/shuttle_control/multi/syndicate,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aQ" = (
+/obj/machinery/constructable_frame/computerframe,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aR" = (
+/obj/machinery/button/blast_door{
+	id_tag = "syndieshutters";
+	name = "remote shutter control"
+	},
+/obj/structure/table/reinforced,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aS" = (
+/obj/structure/bed/chair/comfy/black,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"aT" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Kitchen";
+	opacity = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"aU" = (
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"aV" = (
+/obj/structure/table/reinforced,
+/obj/machinery/microwave{
+	pixel_x = -1;
+	pixel_y = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"aW" = (
+/obj/item/weapon/storage/box/smokes,
+/obj/item/weapon/storage/box/teargas,
+/obj/item/weapon/storage/box/flashbangs,
+/obj/structure/table/rack,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/storage/box/frags,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"aX" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"aY" = (
+/obj/vehicle/bike/electric,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 1
+	},
+/area/map_template/syndicate_mothership)
+"aZ" = (
+/obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
+	dir = 1
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"ba" = (
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bb" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 1
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bc" = (
+/obj/structure/bed/chair/comfy/black{
+	dir = 4
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"bd" = (
+/obj/item/weapon/folder{
+	pixel_y = 2
+	},
+/obj/structure/table/glass,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"be" = (
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 7
+	},
+/obj/item/weapon/pen{
+	pixel_y = 4
+	},
+/obj/structure/table/glass,
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"bf" = (
+/obj/structure/bed/chair/comfy/black{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"bg" = (
+/obj/machinery/vending/coffee{
+	prices = list()
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"bh" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/storage/box/donkpockets{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"bi" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/launcher/grenade,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"bj" = (
+/obj/structure/table/rack,
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 37;
+	pixel_y = 5
+	},
+/obj/item/weapon/gun/energy/plasmastun,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"bk" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/microwave{
+	pixel_x = -1;
+	pixel_y = 2
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bl" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bm" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/camera/network/mercenary,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/item/device/radio/intercom/syndicate{
+	pixel_y = 22
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bn" = (
+/obj/structure/bed/chair/comfy/black{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"bo" = (
+/obj/machinery/vending/cola{
+	name = "hacked Robust Softdrinks";
+	prices = list()
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"bp" = (
+/obj/structure/closet/secure_closet/freezer/kitchen{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"bq" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/tray{
+	pixel_y = 5
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"br" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka{
+	pixel_x = 3;
+	pixel_y = 12
+	},
+/obj/item/weapon/reagent_containers/food/drinks/bottle/wine{
+	pixel_x = -1;
+	pixel_y = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "white"
+	},
+/area/map_template/syndicate_mothership)
+"bs" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunammo,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/storage/box/ammo/shotgunshells,
+/obj/item/weapon/storage/box/ammo/beanbags,
+/obj/item/weapon/storage/box/ammo/beanbags,
+/obj/item/weapon/storage/box/ammo/stunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
+/obj/item/weapon/gun/projectile/shotgun/pump,
+/obj/item/weapon/gun/projectile/shotgun/pump,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"bt" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Garage";
+	opacity = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"bu" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/storage/box/sinpockets,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bv" = (
+/obj/machinery/light,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bw" = (
+/obj/item/weapon/paper_bin{
+	pixel_x = -3;
+	pixel_y = 8
+	},
+/obj/item/weapon/pen{
+	pixel_y = 4
+	},
+/obj/structure/table/reinforced,
+/obj/item/clothing/ears/headphones,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bx" = (
+/obj/machinery/vending/cigarette{
+	name = "hacked cigarette machine";
+	prices = list();
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	},
+/turf/unsimulated/floor{
+	name = "plating";
+	icon_state = "cult"
+	},
+/area/map_template/syndicate_mothership)
+"by" = (
+/obj/structure/table/rack,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 4;
+	pixel_x = -22
+	},
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/ammo_magazine/rifle,
+/obj/item/weapon/gun/projectile/automatic/assault_rifle,
+/obj/item/weapon/gun/projectile/automatic/assault_rifle,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"bz" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/energy/ionrifle,
+/obj/item/weapon/gun/energy/ionrifle,
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 37;
+	pixel_y = 5
+	},
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"bA" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle)
+"bB" = (
+/obj/machinery/door/window/northright{
+	name = "Flight Deck"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bC" = (
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"bD" = (
+/obj/structure/aliumizer,
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"bE" = (
+/obj/structure/hygiene/urinal{
+	pixel_y = 32
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/syndicate_mothership)
+"bF" = (
+/obj/structure/hygiene/shower{
+	pixel_y = 32
+	},
+/obj/structure/window/basic{
+	dir = 8
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/syndicate_mothership)
+"bG" = (
+/obj/structure/hygiene/shower{
+	pixel_y = 32
+	},
+/obj/item/weapon/soap,
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/syndicate_mothership)
+"bH" = (
+/obj/structure/table/rack,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/ammo_magazine/smg,
+/obj/item/weapon/gun/projectile/automatic/merc_smg,
+/obj/item/weapon/gun/projectile/automatic/merc_smg,
+/obj/item/weapon/gun/projectile/automatic/merc_smg,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"bI" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/energy/gun,
+/obj/item/weapon/gun/energy/gun,
+/obj/item/weapon/gun/energy/gun,
+/obj/machinery/recharger/wallcharger{
+	pixel_x = 37;
+	pixel_y = 5
+	},
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"bJ" = (
+/obj/structure/shuttle/engine/propulsion{
+	icon_state = "propulsion_l";
+	dir = 8
+	},
+/obj/effect/paint/red,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
+/area/map_template/merc_shuttle)
+"bK" = (
+/obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/yellow{
+	dir = 4
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/obj/effect/paint/red,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
+/area/map_template/merc_shuttle)
+"bL" = (
+/obj/machinery/porta_turret_construct,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bM" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bN" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bO" = (
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bP" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/holster/security,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bQ" = (
+/obj/machinery/porta_turret/crescent{
+	check_synth = 1;
+	enabled = 0;
+	installation = "";
+	name = "Incomplete turret"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bR" = (
+/obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/yellow{
+	dir = 4
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"bS" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 4
+	},
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"bT" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Bathroom";
+	opacity = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/syndicate_mothership)
+"bU" = (
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/syndicate_mothership)
+"bV" = (
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/syndicate_mothership)
+"bW" = (
+/obj/machinery/recharger/wallcharger{
+	pixel_x = -25
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bX" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bY" = (
+/obj/structure/closet,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/obj/item/device/flash,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bZ" = (
+/obj/item/weapon/storage/mirror{
+	dir = 4;
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/obj/structure/hygiene/sink{
+	icon_state = "sink";
+	dir = 8;
+	pixel_x = -12;
+	pixel_y = 2
+	},
+/turf/unsimulated/floor{
+	icon_state = "freezerfloor";
+	dir = 2
+	},
+/area/map_template/syndicate_mothership)
+"ca" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Armory";
+	opacity = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"cb" = (
+/obj/machinery/recharger/wallcharger{
+	pixel_x = -25
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cc" = (
+/obj/structure/closet,
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cd" = (
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"ce" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cf" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/medical,
+/obj/item/weapon/storage/belt/medical,
+/obj/item/weapon/storage/belt/medical,
+/obj/item/weapon/storage/belt/medical,
+/obj/item/weapon/storage/belt/medical,
+/obj/item/weapon/storage/belt/medical,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cg" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/holster/security/tactical,
+/obj/item/weapon/storage/belt/holster/security/tactical,
+/obj/item/weapon/storage/belt/holster/security/tactical,
+/obj/item/weapon/storage/belt/holster/security/tactical,
+/obj/item/weapon/storage/belt/holster/security/tactical,
+/obj/item/weapon/storage/belt/holster/security/tactical,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"ch" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"ci" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cj" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"ck" = (
+/turf/simulated/floor/shuttle/black,
+/area/map_template/merc_shuttle)
+"cl" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/shuttle/black,
+/area/map_template/merc_shuttle)
+"cm" = (
+/obj/item/device/radio/electropack,
+/turf/simulated/floor/shuttle/black,
+/area/map_template/merc_shuttle)
+"cn" = (
+/obj/structure/sign/poster/bay_50{
+	pixel_x = -32
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"co" = (
+/obj/structure/closet,
+/obj/item/weapon/reagent_containers/food/snacks/tastybread,
+/obj/item/weapon/reagent_containers/food/snacks/tastybread,
+/obj/item/weapon/reagent_containers/food/snacks/tastybread,
+/obj/item/weapon/reagent_containers/food/snacks/tastybread,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cp" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1331;
+	id_tag = "merc_shuttle_pump"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1331;
+	id_tag = "merc_shuttle_sensor";
+	pixel_x = 0;
+	pixel_y = 25
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cq" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 1
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1331;
+	id_tag = "merc_shuttle";
+	pixel_x = 0;
+	pixel_y = 25;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cr" = (
+/obj/machinery/button/blast_door{
+	id_tag = "smindicate";
+	pixel_x = 5;
+	pixel_y = 20
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1331;
+	id_tag = "merc_shuttle_pump"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cs" = (
+/obj/structure/window/reinforced/crescent,
+/turf/space,
+/area/map_template/syndicate_mothership)
+"ct" = (
+/obj/machinery/embedded_controller/radio/simple_docking_controller{
+	frequency = 1331;
+	id_tag = "merc_base";
+	pixel_x = -25;
+	pixel_y = -5
+	},
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"cu" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cv" = (
+/obj/item/weapon/pinpointer/nukeop,
+/obj/item/weapon/pinpointer/nukeop,
+/obj/item/weapon/pinpointer/nukeop,
+/obj/item/weapon/pinpointer/nukeop,
+/obj/item/weapon/pinpointer/nukeop,
+/obj/item/weapon/pinpointer/nukeop,
+/obj/structure/table/rack,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cw" = (
+/obj/structure/table/rack,
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/steel{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/obj/item/stack/material/glass{
+	amount = 50
+	},
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cx" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "syndieprisonshutters";
+	name = "Blast Doors";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"cy" = (
+/obj/machinery/flasher{
+	id_tag = "syndieflash";
+	name = "Floor mounted flash";
+	pixel_x = 0
+	},
+/turf/simulated/floor/shuttle/black,
+/area/map_template/merc_shuttle)
+"cz" = (
+/obj/structure/closet/secure_closet/medical_wall{
+	pixel_x = -32;
+	pixel_y = 0;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/stack/medical/splint,
+/obj/item/stack/medical/ointment,
+/obj/item/stack/medical/ointment,
+/obj/item/stack/medical/bruise_pack,
+/obj/item/stack/medical/bruise_pack,
+/obj/item/stack/medical/bruise_pack,
+/obj/item/weapon/storage/belt/medical,
+/obj/item/weapon/storage/belt/medical,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cA" = (
+/obj/item/device/radio/intercom/syndicate{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cB" = (
+/obj/structure/closet/walllocker/emerglocker{
+	pixel_x = 28
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cC" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 4;
+	frequency = 1331;
+	id_tag = "merc_shuttle_pump"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cD" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cE" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	dir = 8;
+	frequency = 1331;
+	id_tag = "merc_shuttle_pump"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cF" = (
+/obj/machinery/door/airlock/external{
+	density = 1;
+	frequency = 1331;
+	id_tag = "merc_shuttle_outer";
+	name = "Ship External Access"
+	},
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "smindicate";
+	name = "Outer Airlock";
+	opacity = 0
+	},
+/obj/machinery/shield_diffuser,
+/obj/effect/shuttle_landmark/merc/start,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"cG" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "merc_base_hatch"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"cH" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/structure/window/reinforced/crescent,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"cI" = (
+/obj/machinery/door/airlock/vault{
+	name = "Equipment"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"cJ" = (
+/obj/effect/landmark{
+	name = "Syndicate-Uplink"
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"cK" = (
+/obj/machinery/fabricator/hacked,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cL" = (
+/obj/structure/hygiene/toilet{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/black,
+/area/map_template/merc_shuttle)
+"cM" = (
+/obj/item/trash/cigbutt,
+/turf/simulated/floor/shuttle/black,
+/area/map_template/merc_shuttle)
+"cN" = (
+/obj/machinery/door/window{
+	dir = 2;
+	name = "Seating"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cO" = (
+/obj/structure/table/standard,
+/obj/machinery/button/blast_door{
+	id_tag = "smindicate"
+	},
+/obj/machinery/door/window{
+	dir = 4;
+	name = "Blast Door Control"
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"cP" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "smindicate";
+	name = "Outer Airlock";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"cQ" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/turf/space,
+/area/map_template/syndicate_mothership)
+"cR" = (
+/obj/structure/flora/pottedplant/flower,
+/turf/unsimulated/floor{
+	dir = 2;
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"cS" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cT" = (
+/obj/machinery/suit_cycler/syndicate{
+	locked = 0
+	},
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"cU" = (
+/obj/machinery/door/window{
+	dir = 1;
+	name = "Cell"
+	},
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cV" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/structure/table/reinforced,
+/obj/item/stack/material/glass{
+	amount = 15
+	},
+/obj/item/weapon/cell{
+	charge = 100;
+	maxcharge = 15000
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cW" = (
+/obj/machinery/vending/assist/antag,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cX" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"cY" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1331;
+	id_tag = "merc_shuttle_inner";
+	name = "Ship External Access"
+	},
+/obj/machinery/atmospherics/pipe/simple/visible,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"cZ" = (
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"da" = (
+/obj/structure/table/rack,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"db" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/item/device/radio/intercom/syndicate{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dc" = (
+/obj/structure/table/rack,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dd" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/storage/bandolier,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"de" = (
+/obj/structure/table/rack,
+/obj/item/device/suit_cooling_unit,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"df" = (
+/obj/machinery/vending/cigarette{
+	name = "hacked cigarette machine";
+	prices = list();
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dg" = (
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/machinery/button/flasher{
+	id_tag = "syndieflash";
+	name = "Flasher";
+	pixel_x = 27;
+	pixel_y = 5
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "syndieprisonshutters";
+	name = "Prison shutters";
+	pixel_x = 28;
+	pixel_y = -5
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dh" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	dir = 4;
+	start_pressure = 740.5
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"di" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dj" = (
+/obj/machinery/access_button{
+	command = "cycle_interior";
+	frequency = 1331;
+	master_tag = "merc_shuttle";
+	name = "interior access button";
+	pixel_x = 25;
+	pixel_y = 25;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 9
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dk" = (
+/obj/machinery/suit_cycler/syndicate{
+	locked = 0
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dl" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Softsuit Storage";
+	opacity = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"dm" = (
+/obj/machinery/door/airlock/centcom{
+	name = "Suit Storage";
+	opacity = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "dark"
+	},
+/area/map_template/syndicate_mothership)
+"dn" = (
+/obj/item/weapon/reagent_containers/syringe/drugs{
+	pixel_x = 3;
+	pixel_y = -1
+	},
+/obj/item/weapon/reagent_containers/syringe/drugs{
+	pixel_x = 3;
+	pixel_y = 4
+	},
+/obj/item/weapon/reagent_containers/syringe/drugs{
+	pixel_x = 3;
+	pixel_y = 9
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/structure/table/glass,
+/obj/item/clothing/shoes/magboots/rig/combat,
+/obj/item/weapon/melee/telebaton,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"do" = (
+/obj/machinery/door/window{
+	dir = 4;
+	name = "Brig"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dp" = (
+/obj/machinery/door/window{
+	base_state = "right";
+	dir = 8;
+	icon_state = "right";
+	name = "Preparation"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dq" = (
+/obj/structure/closet/syndicate/suit{
+	name = "suit closet"
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dr" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/syndicate/black/med,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/head/helmet/space/syndicate/black/med,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"ds" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/syndicate/black/blue,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/head/helmet/space/syndicate/black/blue,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dt" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/void/merc,
+/obj/item/clothing/mask/gas/syndicate,
+/obj/item/clothing/head/helmet/space/void/merc,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"du" = (
+/obj/structure/closet{
+	name = "custodial"
+	},
+/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/item/weapon/mop,
+/obj/item/weapon/reagent_containers/spray/cleaner,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dv" = (
+/obj/machinery/door/window{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Brig"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dw" = (
+/obj/machinery/door/window{
+	base_state = "left";
+	dir = 8;
+	icon_state = "left";
+	name = "Preparation"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dx" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/backpack/dufflebag/syndie,
+/obj/item/weapon/storage/backpack/dufflebag/syndie,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dy" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/toolbox/syndicate{
+	pixel_x = -1;
+	pixel_y = 3
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dz" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/syndicate/black/engie,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/head/helmet/space/syndicate/black/engie,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dA" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/syndicate/black/orange,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/head/helmet/space/syndicate/black/orange,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dB" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/syndicate/black,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/head/helmet/space/syndicate/black,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dC" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/syndicate/black/red,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/head/helmet/space/syndicate/black/red,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dD" = (
+/obj/machinery/sleeper{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dE" = (
+/obj/machinery/atmospherics/unary/cryo_cell,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dF" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dG" = (
+/obj/structure/table/standard,
+/obj/item/roller{
+	pixel_y = 8
+	},
+/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
+/obj/item/weapon/reagent_containers/ivbag/blood/OMinus,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{
+	pixel_x = 0;
+	pixel_y = 0
+	},
+/obj/item/clothing/glasses/hud/health,
+/obj/item/device/scanner/health,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dH" = (
+/obj/structure/table/standard,
+/obj/structure/closet/secure_closet/medical_wall{
+	pixel_y = 32;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/weapon/reagent_containers/glass/bottle/antitoxin{
+	pixel_x = -4;
+	pixel_y = 8
+	},
+/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline{
+	pixel_x = 4;
+	pixel_y = 7
+	},
+/obj/item/weapon/reagent_containers/syringe,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/bodybag/cryobag,
+/obj/item/bodybag/cryobag,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dI" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/item/device/radio/intercom/syndicate{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dJ" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dK" = (
+/obj/item/clothing/gloves/insulated,
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/item/clothing/glasses/night,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/structure/table/steel,
+/obj/random/tech_supply,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dL" = (
+/obj/structure/table/steel,
+/obj/machinery/cell_charger,
+/obj/item/clothing/gloves/insulated,
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/item/clothing/glasses/night,
+/obj/random/tech_supply,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dM" = (
+/obj/item/clothing/gloves/insulated,
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/item/clothing/glasses/night,
+/obj/structure/table/steel,
+/obj/random/tech_supply,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dN" = (
+/obj/item/clothing/gloves/insulated,
+/obj/item/device/assembly/prox_sensor{
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/clothing/glasses/night,
+/obj/structure/table/steel,
+/obj/random/tech_supply,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dO" = (
+/obj/item/clothing/gloves/insulated,
+/obj/item/device/assembly/prox_sensor{
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/obj/item/clothing/glasses/night,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/table/steel,
+/obj/random/tech_supply,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dP" = (
+/obj/structure/table/rack,
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/suit/space/syndicate/black/green,
+/obj/item/clothing/mask/breath,
+/obj/item/clothing/head/helmet/space/syndicate/black/green,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dQ" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "syndieshutters_infirmary";
+	name = "Blast Doors";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"dR" = (
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dU" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/box/bodybags,
+/obj/item/weapon/storage/box/gloves,
+/obj/item/weapon/storage/box/masks,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"dV" = (
+/obj/item/device/radio/intercom/syndicate{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dW" = (
+/obj/item/weapon/screwdriver,
+/obj/structure/table/steel,
+/obj/random/tech_supply,
+/obj/effect/spawner/newbomb/timer/syndicate,
+/obj/random/loot,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"dX" = (
+/obj/machinery/door/blast/regular{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "syndieshutters_workshop";
+	name = "Blast Doors";
+	opacity = 0
+	},
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"dY" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rig/merc/empty,
+/obj/item/weapon/rig/merc/heavy/empty,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/syndicate_mothership)
+"dZ" = (
+/obj/machinery/door/window{
+	dir = 4;
+	name = "Infirmary"
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"ea" = (
+/obj/machinery/door/window/westright{
+	name = "Tool Storage"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eb" = (
+/obj/item/weapon/stool/padded,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ec" = (
+/obj/structure/table/steel,
+/obj/item/weapon/pickaxe/diamonddrill,
+/obj/random/tech_supply,
+/obj/effect/spawner/newbomb/timer/syndicate,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ed" = (
+/obj/structure/bed/roller,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"ee" = (
+/obj/machinery/door/window{
+	base_state = "right";
+	dir = 4;
+	icon_state = "right";
+	name = "Infirmary"
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"ef" = (
+/obj/machinery/door/window{
+	dir = 8;
+	name = "Tool Storage"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eg" = (
+/obj/item/weapon/aicard,
+/obj/structure/table/steel,
+/obj/random/tech_supply,
+/obj/effect/spawner/newbomb/timer/syndicate,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eh" = (
+/obj/machinery/button/blast_door{
+	id_tag = "syndieshutters_infirmary";
+	name = "remote shutter control";
+	pixel_x = -25
+	},
+/obj/machinery/bodyscanner{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"ei" = (
+/obj/machinery/body_scanconsole,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"ej" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/firstaid/combat,
+/obj/item/weapon/storage/firstaid/regular,
+/obj/item/weapon/storage/backpack/dufflebag/syndie/med,
+/obj/item/weapon/defibrillator/compact/combat/loaded,
+/obj/item/weapon/storage/box/freezer,
+/obj/item/weapon/storage/box/freezer,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"ek" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/structure/table/standard,
+/obj/item/weapon/storage/firstaid/o2{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/weapon/storage/firstaid/fire{
+	pixel_x = 1
+	},
+/obj/item/weapon/storage/firstaid/toxin{
+	pixel_x = 3;
+	pixel_y = 3
+	},
+/obj/item/weapon/storage/firstaid/adv{
+	pixel_x = 1
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"el" = (
+/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"em" = (
+/obj/machinery/door/window{
+	dir = 1;
+	name = "Secure Storage"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"en" = (
+/obj/structure/table/rack,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/item/weapon/storage/backpack/dufflebag/syndie/ammo,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eo" = (
+/obj/structure/table/rack,
+/obj/item/device/multitool,
+/obj/item/device/multitool,
+/obj/item/weapon/tape_roll,
+/obj/item/weapon/tape_roll,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ep" = (
+/obj/machinery/button/blast_door{
+	id_tag = "syndieshutters_telebay";
+	name = "remote shutter control";
+	pixel_x = -24;
+	pixel_y = -25
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eq" = (
+/obj/structure/mopbucket,
+/obj/item/weapon/mop,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"er" = (
+/obj/machinery/button/blast_door{
+	id_tag = "syndieshutters_workshop";
+	name = "remote shutter control";
+	pixel_x = 25
+	},
+/obj/structure/table/steel,
+/obj/item/weapon/plastique,
+/obj/item/weapon/plastique,
+/obj/item/weapon/plastique,
+/obj/item/weapon/plastique,
+/obj/item/device/multitool/hacktool,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"es" = (
+/obj/structure/table/standard,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/item/weapon/defibrillator/loaded,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"et" = (
+/obj/machinery/door/window{
+	dir = 1;
+	name = "Surgery"
+	},
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"eu" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/structure/iv_drip,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"ev" = (
+/obj/item/weapon/weldingtool,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ew" = (
+/obj/structure/sign/warning/caution{
+	pixel_x = 32
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ex" = (
+/obj/machinery/telecomms/allinone{
+	intercept = 1
+	},
+/obj/machinery/door/window/northright{
+	name = "Telecoms Mainframe"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ey" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "syndieshutters_telebay";
+	name = "Outer Airlock"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ez" = (
+/obj/structure/shuttle/engine/propulsion{
+	icon_state = "propulsion_l";
+	dir = 8
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eA" = (
+/obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
+	dir = 8
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eB" = (
+/obj/structure/table/standard,
+/obj/item/weapon/reagent_containers/spray/sterilizine,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/item/weapon/reagent_containers/spray/cleaner,
+/obj/item/device/scanner/health,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"eC" = (
+/obj/structure/closet/secure_closet/medical_wall{
+	pixel_x = 32;
+	pixel_y = 0;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/structure/hygiene/sink{
+	dir = 4;
+	icon_state = "sink";
+	pixel_x = 11;
+	pixel_y = 0
+	},
+/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
+/obj/item/weapon/reagent_containers/glass/bottle/stoxin,
+/obj/item/weapon/reagent_containers/syringe,
+/obj/item/weapon/reagent_containers/syringe,
+/obj/item/clothing/mask/surgical,
+/obj/item/clothing/gloves/latex,
+/obj/item/weapon/tank/anesthetic,
+/obj/item/clothing/mask/breath/medical,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"eD" = (
+/obj/effect/landmark{
+	name = "Nuclear-Bomb"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eE" = (
+/obj/item/weapon/crowbar,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eF" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eG" = (
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"eH" = (
+/obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
+	dir = 4
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eI" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 4
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eJ" = (
+/obj/structure/table/standard,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/weapon/reagent_containers/syringe/antiviral,
+/obj/item/stack/medical/advanced/bruise_pack,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"eK" = (
+/obj/machinery/optable,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"eL" = (
+/obj/item/device/radio/intercom/syndicate{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/structure/table/standard,
+/obj/item/weapon/storage/firstaid/surgery,
+/turf/simulated/floor/shuttle/white,
+/area/map_template/merc_shuttle)
+"eM" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eN" = (
+/obj/machinery/constructable_frame/computerframe,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"eO" = (
+/obj/machinery/teleport/station,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"eP" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/teleport/hub,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"eQ" = (
+/obj/structure/shuttle/engine/heater,
+/obj/structure/window/reinforced/crescent{
+	dir = 1
+	},
+/obj/effect/paint/black,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
+/area/map_template/merc_shuttle)
+"eR" = (
+/obj/structure/shuttle/engine/propulsion{
+	icon_state = "propulsion_l"
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eS" = (
+/obj/structure/shuttle/engine/propulsion,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eT" = (
+/obj/structure/shuttle/engine/propulsion{
+	icon_state = "propulsion_r"
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"eU" = (
+/obj/structure/shuttle/engine/propulsion{
+	icon_state = "propulsion_l"
+	},
+/obj/effect/paint/black,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
+/area/map_template/merc_shuttle)
+"eV" = (
+/obj/structure/shuttle/engine/propulsion,
+/obj/effect/paint/black,
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
+/area/map_template/merc_shuttle)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(3,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(5,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(6,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(8,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(9,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(10,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(11,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(12,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(14,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(15,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(16,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(17,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aL
+aL
+aL
+ay
+ay
+dQ
+dQ
+dQ
+ay
+ay
+ez
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(18,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ay
+ay
+cx
+ay
+ay
+ay
+ay
+ay
+ay
+dD
+dR
+dR
+ed
+eh
+ay
+eA
+aL
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(19,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ay
+ay
+ck
+ck
+cL
+ay
+df
+dn
+du
+bA
+dE
+dS
+dR
+dR
+ei
+es
+eB
+eJ
+eQ
+eS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(20,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aL
+aL
+aL
+aL
+ay
+bJ
+ay
+ay
+cl
+cy
+cM
+cx
+ba
+ba
+ba
+bA
+dF
+dT
+dR
+dR
+dR
+et
+dR
+eK
+eQ
+eT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(21,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aM
+aZ
+ay
+ay
+ay
+bK
+ay
+ay
+cm
+ck
+ck
+cU
+ba
+ba
+ba
+bA
+dG
+dR
+dR
+dR
+ej
+eu
+eC
+eL
+eQ
+eT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+ay
+ay
+ay
+bk
+bu
+bA
+bL
+ay
+ay
+ay
+ay
+ay
+ay
+dg
+ba
+ba
+bA
+dH
+dU
+dR
+dR
+ek
+ay
+aL
+aL
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(23,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+az
+aN
+ba
+ba
+ba
+bB
+ba
+bW
+cb
+cn
+cz
+bA
+bA
+bA
+do
+dv
+bA
+bA
+bA
+dZ
+ee
+bA
+ay
+aL
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(24,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+az
+aO
+ba
+ba
+ba
+bA
+bM
+bX
+bM
+bM
+cA
+bA
+cV
+ba
+ba
+ba
+ba
+dI
+ba
+ba
+ba
+el
+ev
+ba
+eM
+eR
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+az
+aP
+bb
+ba
+bv
+bA
+bN
+bl
+bl
+bl
+ba
+cN
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+ba
+em
+ba
+eD
+eM
+eS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(26,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+az
+aQ
+ba
+ba
+ba
+bA
+bO
+ba
+ba
+ba
+cB
+bA
+cW
+ba
+ba
+ba
+ba
+dJ
+ba
+ba
+ba
+el
+ew
+eE
+eM
+eT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(27,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+az
+aR
+ba
+bl
+ba
+bA
+bP
+bY
+cc
+co
+bA
+bA
+bA
+bA
+dp
+dw
+bA
+bA
+bA
+ea
+ef
+bA
+ay
+aL
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(28,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ay
+ay
+ay
+bm
+bw
+bA
+bQ
+ay
+ay
+bA
+bA
+cO
+bA
+dh
+ba
+ba
+bA
+dK
+dV
+ba
+ba
+en
+ex
+aL
+aL
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(29,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aM
+aZ
+ay
+ay
+ay
+bR
+ay
+ay
+cp
+cC
+cC
+cX
+di
+ba
+ba
+bA
+dL
+ba
+ba
+ba
+eo
+ay
+eF
+eN
+eQ
+eU
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(30,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+ac
+ac
+ae
+af
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aL
+aL
+aL
+aL
+ay
+bS
+ay
+ay
+cq
+cD
+cD
+cY
+dj
+ba
+dx
+bA
+dM
+ba
+ba
+ba
+ep
+ey
+eG
+eO
+eQ
+eU
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(31,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ad
+aa
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aw
+aw
+aw
+aw
+aw
+aw
+aw
+aa
+ay
+ay
+cr
+cE
+cE
+cX
+dk
+dq
+dy
+bA
+dN
+ba
+eb
+ba
+eq
+ay
+eG
+eP
+eQ
+eV
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(32,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aw
+aA
+aA
+bc
+aA
+aA
+aw
+aa
+aa
+ay
+ay
+cF
+cP
+ay
+ay
+ay
+ay
+ay
+dO
+dW
+ec
+eg
+er
+ay
+eH
+aL
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(33,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aw
+aB
+aS
+bd
+bn
+aA
+aw
+aa
+aa
+af
+cs
+cG
+cQ
+aa
+aL
+aL
+aL
+ay
+ay
+dX
+dX
+dX
+ay
+ay
+eI
+aL
+aL
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(34,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ag
+al
+ap
+aq
+ag
+aa
+aw
+aC
+aS
+be
+bn
+aA
+aw
+aa
+aa
+ac
+cs
+cH
+cQ
+aa
+aa
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(35,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ag
+ag
+am
+am
+ar
+ag
+ag
+ag
+aA
+aA
+bf
+aA
+aA
+ag
+aw
+aw
+ag
+ag
+cG
+ag
+ag
+ad
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(36,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ag
+ai
+an
+an
+an
+as
+au
+ag
+aA
+aA
+aA
+aA
+aA
+bC
+bC
+bC
+bC
+ct
+bC
+cR
+aw
+aa
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(37,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ag
+aj
+ao
+ao
+ao
+ao
+ao
+ax
+aA
+aA
+aA
+aA
+aA
+bC
+bC
+bC
+bC
+bC
+bC
+bC
+aw
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(38,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ag
+ak
+an
+an
+an
+at
+av
+ag
+aD
+aA
+bg
+bo
+bx
+bD
+bC
+bC
+cd
+bC
+bC
+bC
+aw
+aa
+aa
+aa
+ac
+ac
+af
+ac
+ac
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(39,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ag
+ag
+am
+am
+am
+ag
+ag
+ag
+ag
+aT
+ag
+ag
+ag
+ag
+bT
+ag
+ag
+bC
+bC
+bC
+ag
+ab
+aa
+aa
+aa
+ad
+aa
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(40,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ah
+ag
+ag
+ag
+ag
+ag
+ah
+ag
+aE
+aU
+aU
+bp
+ag
+bE
+bU
+bZ
+ag
+ag
+cI
+ag
+ag
+ab
+ab
+aa
+ad
+ab
+ab
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(41,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+aF
+aU
+aU
+aU
+ag
+bE
+bU
+bU
+ag
+cu
+aJ
+cS
+ag
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ad
+aa
+ac
+ac
+ac
+ac
+ac
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(42,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+aG
+aU
+aU
+bq
+ag
+bF
+bV
+ag
+ag
+cv
+aJ
+cS
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ab
+ab
+aa
+aa
+ad
+aa
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(43,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+aH
+aV
+bh
+br
+ag
+bG
+bV
+ag
+ce
+aJ
+aJ
+aJ
+cZ
+aw
+dr
+dz
+dB
+dB
+ag
+ab
+ab
+ab
+ad
+ad
+ad
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(44,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+cf
+aJ
+aJ
+aJ
+aJ
+dl
+aJ
+aJ
+aJ
+aJ
+ag
+ab
+ab
+ab
+ab
+ab
+aa
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(45,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+aI
+aW
+bi
+bs
+by
+bH
+bH
+aw
+cg
+aJ
+aJ
+aJ
+da
+aw
+ds
+dA
+dC
+dP
+ag
+ab
+ab
+ab
+ab
+ab
+ab
+ad
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(46,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+aJ
+aJ
+aJ
+aJ
+aJ
+aJ
+aJ
+ca
+aJ
+aJ
+cJ
+aJ
+db
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ab
+ab
+ab
+ab
+ab
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(47,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+aJ
+aJ
+aJ
+aJ
+aJ
+aJ
+aJ
+ca
+aJ
+aJ
+aJ
+aJ
+dc
+aw
+dt
+dt
+dt
+dt
+dY
+ag
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(48,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+aK
+aX
+bj
+aJ
+bz
+bI
+bI
+aw
+ch
+aJ
+aJ
+aJ
+aJ
+dm
+aJ
+aJ
+aJ
+aJ
+aJ
+ag
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(49,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ag
+ag
+ag
+ag
+bt
+ag
+ag
+ag
+ag
+ci
+aJ
+aJ
+aJ
+dd
+aw
+dt
+dt
+dt
+dt
+dY
+ag
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(50,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ah
+ag
+aY
+aJ
+aJ
+aJ
+aY
+ag
+ag
+cj
+aJ
+aJ
+aJ
+de
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(51,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ah
+ag
+aY
+aJ
+aJ
+aJ
+aY
+ag
+ag
+ag
+cw
+cK
+cT
+ag
+ag
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(52,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ah
+ag
+aY
+aJ
+aJ
+aJ
+aY
+ag
+ah
+ag
+ag
+ag
+ag
+ag
+ah
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(53,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ah
+ag
+ag
+ag
+ag
+ag
+ag
+ag
+ah
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(54,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(55,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(56,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(57,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(58,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(59,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(60,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(61,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(62,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(63,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(64,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(65,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(66,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(67,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(68,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(69,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(70,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}

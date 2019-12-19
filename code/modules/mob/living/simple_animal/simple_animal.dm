@@ -83,10 +83,14 @@
 	var/ability_cooldown
 	var/time_last_used_ability
 
+	//for simple animals that reflect damage when attacked in melee
+	var/return_damage_min
+	var/return_damage_max
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	if(LAZYLEN(natural_armor))
-		set_extension(src, /datum/extension/armor, armor_type, natural_armor)
+		set_extension(src, armor_type, natural_armor)
 
 /mob/living/simple_animal/Life()
 	. = ..()
@@ -220,12 +224,17 @@
 	var/damage = Proj.damage
 	if(Proj.damtype == STUN)
 		damage = Proj.damage / 6
+	if(Proj.damtype == BRUTE)
+		damage = Proj.damage / 2
+	if(Proj.damtype == BURN)
+		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
 		if(health < Proj.agony * 3)
 			Paralyse(Proj.agony / 20)
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
+	bullet_impact_visuals(Proj)
 	adjustBruteLoss(damage)
 	Proj.on_hit(src)
 	return 0
@@ -431,6 +440,20 @@
 	if(meat_amount <= 0)
 		to_chat(user, SPAN_NOTICE("\The [src] carcass is ruined beyond use."))
 
+/mob/living/simple_animal/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone)
+	..()
+	switch(get_bullet_impact_effect_type(def_zone))
+		if(BULLET_IMPACT_MEAT)
+			if(P.damtype == BRUTE)
+				var/hit_dir = get_dir(P.starting, src)
+				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
+				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
+				B.basecolor = bleed_colour
+				var/scale = min(1, round(mob_size / MOB_MEDIUM, 0.1))
+				var/matrix/M = new()
+				B.transform = M.Scale(scale)
+				B.update_icon()
+
 /mob/living/simple_animal/handle_fire()
 	return
 
@@ -476,3 +499,14 @@
 			return FLASH_PROTECTION_MAJOR
 		else 
 			return FLASH_PROTECTION_MAJOR
+
+/mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
+	if(attacker.a_intent == I_HURT)
+		var/hand_hurtie
+		if(attacker.hand)
+			hand_hurtie = BP_L_HAND
+		else
+			hand_hurtie = BP_R_HAND
+		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, hand_hurtie, used_weapon = description)
+		if(rand(25))
+			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))

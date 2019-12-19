@@ -75,10 +75,9 @@ var/list/gear_datums = list()
 
 /datum/category_item/player_setup_item/loadout/proc/skill_check(var/list/jobs, var/list/skills_required)
 	for(var/datum/job/J in jobs)
-		var/list/skills = pref.skills_allocated[J]
 		. = TRUE
 		for(var/R in skills_required)
-			if(skills[R] + pref.get_min_skill(J, R) < skills_required[R])
+			if(pref.get_total_skill_value(J, R) < skills_required[R])
 				. = FALSE
 				break
 		if(.)

@@ -490,7 +490,7 @@
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "br" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/plating,
 /area/errant_pisces/enginering)
 "bs" = (
@@ -2883,7 +2883,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
 "gr" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/wood,
@@ -3618,7 +3618,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "iE" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
 "iF" = (
@@ -4184,7 +4184,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kf" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
 "kg" = (
@@ -5089,7 +5089,7 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -6243,7 +6243,7 @@
 /turf/simulated/floor/wood,
 /area/errant_pisces/bridge)
 "oY" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/wood,
@@ -6323,7 +6323,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pj" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -6415,7 +6415,7 @@
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pz" = (
-/obj/effect/overmap/ship/errant_pisces,
+/obj/effect/overmap/visitable/ship/errant_pisces,
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "pA" = (
@@ -7019,7 +7019,7 @@
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/head_m)
 "Ti" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,

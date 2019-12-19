@@ -263,6 +263,7 @@
 	desc = "A machinery brace for an industrial drill. It looks easily two feet thick."
 	icon_state = "mining_brace"
 	obj_flags = OBJ_FLAG_ROTATABLE
+	interact_offline = 1
 
 	var/obj/machinery/mining/drill/connected
 

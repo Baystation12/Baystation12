@@ -1,4 +1,3 @@
-
 /datum/extension/armor/psionic
 	expected_type = /datum/psi_complexus
 	full_block_message = "You block the blow with your mind!"
@@ -8,6 +7,6 @@
 	var/datum/psi_complexus/psi = holder
 	psi.get_armour(key)
 
-/datum/extension/armor/psionic/on_blocking(damage, blocked)
+/datum/extension/armor/psionic/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
 	var/datum/psi_complexus/psi = holder
-	psi.spend_power(round(blocked * 10))
+	psi.spend_power(round(damage * blocked))

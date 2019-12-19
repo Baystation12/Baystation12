@@ -288,7 +288,12 @@
 	switch(lowertext(query_list[1]))
 		if("delete")
 			for(var/datum/t in objs)
-				qdel(t)
+				// turfs are special snowflakes that explode if qdeleted
+				if (isturf(t))
+					var/turf/T = t
+					T.ChangeTurf(world.turf)
+				else
+					qdel(t)
 
 		if("update")
 			for(var/datum/t in objs)

@@ -94,7 +94,7 @@
 /turf/space,
 /area/derelict/ship)
 "am" = (
-/obj/item/modular_computer/console/preset/medical,
+/obj/machinery/computer/modular/preset/medical,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "an" = (
@@ -775,7 +775,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cs" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "ct" = (
@@ -1921,7 +1921,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "fT" = (
-/obj/effect/overmap/sector/derelict,
+/obj/effect/overmap/visitable/sector/derelict,
 /turf/simulated/floor/airless,
 /area/constructionsite/solar)
 "fU" = (

@@ -8,23 +8,24 @@ var/global/list/image/splatter_cache=list()
 
 /obj/effect/decal/cleanable/blood
 	name = "blood"
-	desc = "It's thick and gooey. Perhaps it's the chef's cooking?"
+	desc = "It's some blood. That's not supposed to be there."
 	gender = PLURAL
 	icon = 'icons/effects/blood.dmi'
 	icon_state = "mfloor1"
-	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7")
+	random_icon_states = list("mfloor1", "mfloor2", "mfloor3", "mfloor4", "mfloor5", "mfloor6", "mfloor7", "dir_splatter_1", "dir_splatter_2")
 	blood_DNA = list()
 	generic_filth = TRUE
 	persistent = TRUE
 	appearance_flags = NO_CLIENT_COLOR
+	cleanable_scent = "blood"
+	scent_descriptor = SCENT_DESC_ODOR
+
 	var/base_icon = 'icons/effects/blood.dmi'
-	var/list/viruses = list()
 	var/basecolor=COLOR_BLOOD_HUMAN // Color when wet.
-	var/list/datum/disease2/disease/virus2 = list()
 	var/amount = 5
 	var/drytime
 	var/dryname = "dried blood"
-	var/drydesc = "It's dry and crusty. Someone is not doing their job."
+	var/drydesc = "It's dry and crusty. Someone isn't doing their job."
 	var/blood_size = BLOOD_SIZE_MEDIUM // A relative size; larger-sized blood will not override smaller-sized blood, except maybe at mapload.
 
 /obj/effect/decal/cleanable/blood/reveal_blood()
@@ -39,6 +40,7 @@ var/global/list/image/splatter_cache=list()
 		set_invisibility(100)
 		amount = 0
 		STOP_PROCESSING(SSobj, src)
+		remove_extension(src, /datum/extension/scent)
 	..(ignore=1)
 
 /obj/effect/decal/cleanable/blood/hide()
@@ -139,6 +141,7 @@ var/global/list/image/splatter_cache=list()
 	desc = drydesc
 	color = adjust_brightness(color, -50)
 	amount = 0
+	remove_extension(src, /datum/extension/scent)
 	STOP_PROCESSING(SSobj, src)
 
 /obj/effect/decal/cleanable/blood/attack_hand(mob/living/carbon/human/user)
@@ -161,17 +164,22 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("mgibbl1", "mgibbl2", "mgibbl3", "mgibbl4", "mgibbl5")
 	amount = 2
 	blood_size = BLOOD_SIZE_BIG
+	scent_intensity = /decl/scent_intensity/strong
+	scent_range = 3
 
 /obj/effect/decal/cleanable/blood/drip
 	name = "drips of blood"
-	desc = "It's red."
+	desc = "Drips and drops of blood."
 	gender = PLURAL
 	icon = 'icons/effects/drip.dmi'
 	icon_state = "1"
 	random_icon_states = list("1","2","3","4","5")
 	amount = 0
-	var/list/drips
 	blood_size = BLOOD_SIZE_SMALL
+	scent_intensity = /decl/scent_intensity
+	scent_range = 1
+
+	var/list/drips
 
 /obj/effect/decal/cleanable/blood/drip/Initialize()
 	. = ..()
@@ -186,6 +194,8 @@ var/global/list/image/splatter_cache=list()
 	amount = 0
 	var/message
 	blood_size = BLOOD_SIZE_BIG
+	scent_intensity = /decl/scent_intensity
+	scent_range = 1
 
 /obj/effect/decal/cleanable/blood/writing/New()
 	..()
@@ -197,7 +207,7 @@ var/global/list/image/splatter_cache=list()
 		icon_state = "writing1"
 
 /obj/effect/decal/cleanable/blood/writing/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	to_chat(user, "It reads: <font color='[basecolor]'>\"[message]\"</font>")
 
 /obj/effect/decal/cleanable/blood/gibs
@@ -209,6 +219,9 @@ var/global/list/image/splatter_cache=list()
 	random_icon_states = list("gib1", "gib2", "gib3", "gib5", "gib6")
 	var/fleshcolor = "#ffffff"
 	blood_size = BLOOD_SIZE_NO_MERGE
+	cleanable_scent = "viscera"
+	scent_intensity = /decl/scent_intensity/strong
+	scent_range = 4
 
 /obj/effect/decal/cleanable/blood/gibs/on_update_icon()
 
@@ -267,8 +280,6 @@ var/global/list/image/splatter_cache=list()
 	icon_state = "mucus"
 	generic_filth = TRUE
 	persistent = TRUE
-
-	var/list/datum/disease2/disease/virus2 = list()
 	var/dry=0 // Keeps the lag down
 
 /obj/effect/decal/cleanable/mucus/New()

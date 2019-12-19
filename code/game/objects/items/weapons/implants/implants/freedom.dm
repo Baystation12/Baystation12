@@ -31,11 +31,14 @@
 	return
 
 /obj/item/weapon/implant/freedom/trigger(emote, mob/living/carbon/source as mob)
-	if (src.uses < 1)	return 0
-	if (emote == src.activation_emote)
-		if(remove_cuffs_and_unbuckle(source))
-			src.uses--
-			to_chat(source, "You feel a faint click.")
+	if (emote == activation_emote)
+		activate()
+
+/obj/item/weapon/implant/freedom/activate()
+	if(uses < 1 || malfunction)	return 0
+	if(remove_cuffs_and_unbuckle(imp_in))
+		uses--
+		to_chat(imp_in, "You feel a faint click.")
 
 /obj/item/weapon/implant/freedom/proc/remove_cuffs_and_unbuckle(mob/living/carbon/user)
 	if(!user.handcuffed)

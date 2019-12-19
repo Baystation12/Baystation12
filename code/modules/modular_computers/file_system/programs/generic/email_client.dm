@@ -16,7 +16,7 @@
 	nanomodule_path = /datum/nano_module/email_client
 
 // Persistency. Unless you log out, or unless your password changes, this will pre-fill the login data when restarting the program
-/datum/computer_file/program/email_client/kill_program()
+/datum/computer_file/program/email_client/on_shutdown()
 	if(NM)
 		var/datum/nano_module/email_client/NME = NM
 		if(NME.current_account)
@@ -28,7 +28,7 @@
 			stored_password = ""
 	. = ..()
 
-/datum/computer_file/program/email_client/run_program()
+/datum/computer_file/program/email_client/on_startup()
 	. = ..()
 
 	if(NM)
@@ -40,8 +40,7 @@
 		NME.check_for_new_messages(1)
 
 /datum/computer_file/program/email_client/proc/new_mail_notify()
-	computer.visible_message("\The [computer] beeps softly, indicating a new email has been received.", 1)
-	playsound(computer, 'sound/machines/twobeep.ogg', 50, 1)
+	computer.visible_notification("You got mail!")
 
 /datum/computer_file/program/email_client/process_tick()
 	..()
@@ -82,6 +81,14 @@
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 
+/datum/nano_module/email_client/proc/get_functional_drive()
+	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
+	var/obj/item/weapon/stock_parts/computer/hard_drive/drive = os && os.get_component(/obj/item/weapon/stock_parts/computer/hard_drive)
+	if(!drive || !drive.check_functionality())
+		error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
+		return
+	return drive
+
 /datum/nano_module/email_client/proc/mail_received(var/datum/computer_file/data/email_message/received_message)
 	var/mob/living/L = get_holder_of_type(host, /mob/living)
 	if(L)
@@ -101,15 +108,13 @@
 
 /datum/nano_module/email_client/proc/log_in()
 	var/list/id_login
-
-	if(istype(host, /obj/item/modular_computer))
-		var/obj/item/modular_computer/computer = host
-		var/obj/item/weapon/card/id/id = computer.GetIdCard()
-		if(!id && ismob(computer.loc))
-			var/mob/M = computer.loc
-			id = M.GetIdCard()
-		if(id)
-			id_login = id.associated_email_login.Copy()
+	var/atom/movable/A = nano_host()
+	var/obj/item/weapon/card/id/id = A.GetIdCard()
+	if(!id && ismob(A.loc))
+		var/mob/M = A.loc
+		id = M.GetIdCard()
+	if(id)
+		id_login = id.associated_email_login.Copy()
 
 	var/datum/computer_file/data/email_account/target
 	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
@@ -296,14 +301,13 @@
 		return
 	download_progress = min(download_progress + netspeed, downloading.size)
 	if(download_progress >= downloading.size)
-		var/obj/item/modular_computer/MC = nano_host()
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
-			error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
+		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
+		if(!drive)
 			downloading = null
 			download_progress = 0
 			return 1
 
-		if(MC.hard_drive.store_file(downloading))
+		if(drive.store_file(downloading))
 			error = "File successfully downloaded to local device."
 		else
 			error = "Error saving file: I/O Error: The hard drive may be full or nonfunctional."
@@ -487,10 +491,8 @@
 
 	if(href_list["save"])
 		// Fully dependant on modular computers here.
-		var/obj/item/modular_computer/MC = nano_host()
-
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
-			error = "Error exporting file. Are you using a functional and NTOS-compliant device?"
+		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
+		if(!drive)
 			return 1
 
 		var/filename = sanitize(input(user,"Please specify file name:", "Message export"), 100)
@@ -502,22 +504,22 @@
 		if(!istype(mail))
 			return 1
 		mail.filename = filename
-		if(!MC.hard_drive || !MC.hard_drive.store_file(mail))
+
+		drive = get_functional_drive()
+		if(!drive || !drive.store_file(mail))
 			error = "Internal I/O error when writing file, the hard drive may be full."
 		else
 			error = "Email exported successfully"
 		return 1
 
 	if(href_list["addattachment"])
-		var/obj/item/modular_computer/MC = nano_host()
+		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
 		msg_attachment = null
-
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
-			error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
+		if(!drive)
 			return 1
 
 		var/list/filenames = list()
-		for(var/datum/computer_file/CF in MC.hard_drive.stored_files)
+		for(var/datum/computer_file/CF in drive.stored_files)
 			if(CF.unsendable)
 				continue
 			filenames.Add(CF.filename)
@@ -526,11 +528,11 @@
 		if(!picked_file)
 			return 1
 
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
-			error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
+		drive = get_functional_drive()
+		if(!drive)
 			return 1
 
-		for(var/datum/computer_file/CF in MC.hard_drive.stored_files)
+		for(var/datum/computer_file/CF in drive.stored_files)
 			if(CF.unsendable)
 				continue
 			if(CF.filename == picked_file)
@@ -551,9 +553,8 @@
 	if(href_list["downloadattachment"])
 		if(!current_account || !current_message || !current_message.attachment)
 			return 1
-		var/obj/item/modular_computer/MC = nano_host()
-		if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
-			error = "Error downloading file. Are you using a functional and NTOSv2-compliant device?"
+		var/obj/item/weapon/stock_parts/computer/hard_drive/drive = get_functional_drive()
+		if(!drive)
 			return 1
 
 		downloading = current_message.attachment.clone()

@@ -13,7 +13,10 @@
 		slot_r_hand_str = "s_helmet",
 		)
 	permeability_coefficient = 0
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 25)
+	armor = list(
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	cold_protection = HEAD
@@ -65,8 +68,9 @@
 		else
 			to_chat(usr, "<span class='notice'>Camera deactivated.</span>")
 
-/obj/item/clothing/head/helmet/space/examine(var/mob/user)
-	if(..(user, 1) && camera)
+/obj/item/clothing/head/helmet/space/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 && camera)
 		to_chat(user, "This helmet has a built-in camera. Its [!ispath(camera) && camera.status ? "" : "in"]active.")
 
 /obj/item/clothing/head/helmet/space/proc/update_tint()
@@ -112,7 +116,10 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/device/suit_cooling_unit)
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 25)
+	armor = list(
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_SMALL
+		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE

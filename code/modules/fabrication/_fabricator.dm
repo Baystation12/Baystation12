@@ -45,7 +45,7 @@
 	QDEL_NULL_LIST(queued_orders)
 	. = ..()
 
-/obj/machinery/fabricator/examine(var/mob/user)
+/obj/machinery/fabricator/examine(mob/user)
 	. = ..()
 	if(length(storage_capacity))
 		var/list/material_names = list()

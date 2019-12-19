@@ -62,7 +62,7 @@
 
 /obj/item/weapon/storage/belt/holster/Initialize()
 	. = ..()
-	set_extension(src, /datum/extension/holster, /datum/extension/holster, src, sound_in, sound_out, can_holster)
+	set_extension(src, /datum/extension/holster, src, sound_in, sound_out, can_holster)
 
 /obj/item/weapon/storage/belt/holster/attackby(obj/item/W as obj, mob/user as mob)
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
@@ -79,7 +79,7 @@
 		. = ..(user)
 
 /obj/item/weapon/storage/belt/holster/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
 	H.examine_holster(user)
 
@@ -470,3 +470,26 @@
 /obj/item/weapon/storage/belt/waistpack/big/Initialize()
 	.=..()
 	slowdown_per_slot[slot_belt] = 1
+
+/obj/item/weapon/storage/belt/fire_belt
+	name = "firefighting equipment belt"
+	desc = "A belt specially designed for firefighting."
+	icon_state = "firebelt"
+	item_state = "gear"
+	storage_slots = 5
+	overlay_flags = BELT_OVERLAY_ITEMS
+	can_hold = list(
+		/obj/item/weapon/grenade/chem_grenade/water,
+		/obj/item/weapon/crowbar/emergency_forcing_tool,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/inflatable/door
+		)
+
+
+/obj/item/weapon/storage/belt/fire_belt/full
+	startswith = list(
+		/obj/item/inflatable/door,
+		/obj/item/weapon/crowbar/emergency_forcing_tool,
+		/obj/item/weapon/extinguisher/mini,
+		/obj/item/weapon/grenade/chem_grenade/water = 2
+	)

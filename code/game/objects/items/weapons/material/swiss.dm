@@ -17,6 +17,7 @@
 	handle_icon = "swissknf_handle"
 	takes_colour = FALSE
 	valid_colors = null
+	max_force = 10
 
 	var/active_tool = SWISSKNF_CLOSED
 	var/tools = list(SWISSKNF_LBLADE, SWISSKNF_CLIFTER, SWISSKNF_COPENER)
@@ -43,9 +44,7 @@
 	add_fingerprint(user)
 
 /obj/item/weapon/material/knife/folding/swiss/examine(mob/user)
-	. = ..(user)
-	if(!.)
-		return
+	. = ..()
 	to_chat(user, active_tool == SWISSKNF_CLOSED ? "It is closed." : "Its [lowertext(active_tool)] is folded out.")
 
 /obj/item/weapon/material/knife/folding/swiss/update_force()

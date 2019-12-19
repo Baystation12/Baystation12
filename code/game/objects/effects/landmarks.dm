@@ -1,6 +1,6 @@
 /obj/effect/landmark
 	name = "landmark"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/effects/landmarks.dmi'
 	icon_state = "x2"
 	anchored = 1.0
 	unacidable = 1
@@ -119,7 +119,7 @@
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/mad(src.loc)
-	new /obj/item/clothing/glasses/gglasses(src.loc)
+	new /obj/item/clothing/glasses/prescription/gglasses(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/elpresidente/New()
@@ -138,7 +138,7 @@
 	new /obj/item/clothing/under/blackskirt(src.loc)
 	var/CHOICE = pick( /obj/item/clothing/head/beret , /obj/item/clothing/head/rabbitears )
 	new CHOICE(src.loc)
-	new /obj/item/clothing/glasses/sunglasses/blindfold(src.loc)
+	new /obj/item/clothing/glasses/blindfold(src.loc)
 	delete_me = 1
 
 /obj/effect/landmark/costume/butler/New()

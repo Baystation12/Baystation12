@@ -236,7 +236,6 @@
 		var/obj/item/underwear/UW = entry
 		dat += "<BR><a href='?src=\ref[src];item=\ref[UW]'>Remove \the [UW]</a>"
 
-	dat += "<BR><A href='?src=\ref[src];item=splints'>Remove splints</A>"
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
 
@@ -363,6 +362,10 @@
 
 	for(var/obj/item/organ/external/E in to_shock)
 		total_damage += ..(shock_damage, E.organ_tag, base_siemens_coeff * get_siemens_coefficient_organ(E))
+
+	if(total_damage > 10)
+		local_emp(initial_organ, 3)
+
 	return total_damage
 
 /mob/living/carbon/human/proc/trace_shock(var/obj/item/organ/external/init, var/obj/item/organ/external/floor)
@@ -386,23 +389,50 @@
 
 	return traced_organs
 
-/mob/living/carbon/human/Topic(href, href_list)
+/mob/living/carbon/human/proc/local_emp(var/list/limbs, var/severity = 2)
+	if(!islist(limbs))
+		limbs = list(limbs)
 
+	var/list/EMP = list()
+	for(var/obj/item/organ/external/limb in limbs)
+		EMP += limb
+		EMP += limb.internal_organs
+		EMP += limb.implants
+	for(var/atom/E in EMP)
+		E.emp_act(severity)
+
+/mob/living/carbon/human/OnSelfTopic(href_list)
+	if (href_list["lookitem"])
+		var/obj/item/I = locate(href_list["lookitem"])
+		if(I)
+			src.examinate(I)
+			return TOPIC_HANDLED
+
+	if (href_list["lookmob"])
+		var/mob/M = locate(href_list["lookmob"])
+		if(M)
+			src.examinate(M)
+			return TOPIC_HANDLED
+
+	return ..()
+
+/mob/living/carbon/human/CanUseTopic(mob/user, datum/topic_state/state, href_list)
+	. = ..()
+	if(href_list && (href_list["refresh"] || href_list["item"]))
+		return min(., ..(user, GLOB.physical_state, href_list))
+
+/mob/living/carbon/human/OnTopic(mob/user, href_list)
 	if (href_list["refresh"])
-		if(Adjacent(src, usr))
-			show_inv(usr)
-
-	if (href_list["mach_close"])
-		var/t1 = text("window=[]", href_list["mach_close"])
-		unset_machine()
-		src << browse(null, t1)
+		show_inv(user)
+		return TOPIC_HANDLED
 
 	if(href_list["item"])
-		if(!handle_strip(href_list["item"],usr,locate(href_list["holder"])))
-			show_inv(usr)
+		if(!handle_strip(href_list["item"],user,locate(href_list["holder"])))
+			show_inv(user)
+		return TOPIC_HANDLED
 
 	if (href_list["criminal"])
-		if(hasHUD(usr, HUD_SECURITY))
+		if(hasHUD(user, HUD_SECURITY))
 
 			var/modified = 0
 			var/perpname = "wot"
@@ -417,22 +447,24 @@
 
 			var/datum/computer_file/report/crew_record/R = get_crewmember_record(perpname)
 			if(R)
-				var/setcriminal = input(usr, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
+				var/setcriminal = input(user, "Specify a new criminal status for this person.", "Security HUD", R.get_criminalStatus()) as null|anything in GLOB.security_statuses
 				if(hasHUD(usr, HUD_SECURITY) && setcriminal)
 					R.set_criminalStatus(setcriminal)
 					modified = 1
 
 					spawn()
 						BITSET(hud_updateflag, WANTED_HUD)
-						if(istype(usr,/mob/living/carbon/human))
-							var/mob/living/carbon/human/U = usr
+						if(istype(user,/mob/living/carbon/human))
+							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(usr,/mob/living/silicon/robot))
-							var/mob/living/silicon/robot/U = usr
+						if(istype(user,/mob/living/silicon/robot))
+							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 
 			if(!modified)
 				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
+
 	if (href_list["secrecord"])
 		if(hasHUD(usr, HUD_SECURITY))
 			var/perpname = "wot"
@@ -445,16 +477,18 @@
 				perpname = src.name
 			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
-				if(hasHUD(usr, HUD_SECURITY))
-					to_chat(usr, "<b>Name:</b> [E.get_name()]")
-					to_chat(usr, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
-					to_chat(usr, "<b>Details:</b> [E.get_secRecord()]")
+				if(hasHUD(user, HUD_SECURITY))
+					to_chat(user, "<b>Name:</b> [E.get_name()]")
+					to_chat(user, "<b>Criminal Status:</b> [E.get_criminalStatus()]")
+					to_chat(user, "<b>Details:</b> [E.get_secRecord()]")
 					read = 1
 
 			if(!read)
-				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
+
 	if (href_list["medical"])
-		if(hasHUD(usr, HUD_MEDICAL))
+		if(hasHUD(user, HUD_MEDICAL))
 			var/perpname = "wot"
 			var/modified = 0
 
@@ -466,23 +500,25 @@
 
 			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
-				var/setmedical = input(usr, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
-				if(hasHUD(usr, HUD_MEDICAL) && setmedical)
+				var/setmedical = input(user, "Specify a new medical status for this person.", "Medical HUD", E.get_status()) as null|anything in GLOB.physical_statuses
+				if(hasHUD(user, HUD_MEDICAL) && setmedical)
 					E.set_status(setmedical)
 					modified = 1
 
 					spawn()
-						if(istype(usr,/mob/living/carbon/human))
-							var/mob/living/carbon/human/U = usr
+						if(istype(user,/mob/living/carbon/human))
+							var/mob/living/carbon/human/U = user
 							U.handle_regular_hud_updates()
-						if(istype(usr,/mob/living/silicon/robot))
-							var/mob/living/silicon/robot/U = usr
+						if(istype(user,/mob/living/silicon/robot))
+							var/mob/living/silicon/robot/U = user
 							U.handle_regular_hud_updates()
 
 			if(!modified)
-				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
+
 	if (href_list["medrecord"])
-		if(hasHUD(usr, HUD_MEDICAL))
+		if(hasHUD(user, HUD_MEDICAL))
 			var/perpname = "wot"
 			var/read = 0
 
@@ -494,7 +530,7 @@
 
 			var/datum/computer_file/report/crew_record/E = get_crewmember_record(perpname)
 			if(E)
-				if(hasHUD(usr, HUD_MEDICAL))
+				if(hasHUD(user, HUD_MEDICAL))
 					to_chat(usr, "<b>Name:</b> [E.get_name()]")
 					to_chat(usr, "<b>Gender:</b> [E.get_sex()]")
 					to_chat(usr, "<b>Species:</b> [E.get_species()]")
@@ -502,39 +538,27 @@
 					to_chat(usr, "<b>Details:</b> [E.get_medRecord()]")
 					read = 1
 			if(!read)
-				to_chat(usr, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+				to_chat(user, "<span class='warning'>Unable to locate a data core entry for this person.</span>")
+			return TOPIC_HANDLED
 
-	if (href_list["lookitem"])
-		var/obj/item/I = locate(href_list["lookitem"])
-		if(I)
-			src.examinate(I)
+	return ..()
 
-	if (href_list["lookmob"])
-		var/mob/M = locate(href_list["lookmob"])
-		if(M)
-			src.examinate(M)
-
-	if(href_list["show_relations"])
-		var/mob/living/M = usr
-		if(istype(M))
-			M.see_relationship_info_with(src)
-
-	if (href_list["flavor_change"])
-		switch(href_list["flavor_change"])
-			if("done")
-				src << browse(null, "window=flavor_changes")
+/mob/living/carbon/human/update_flavor_text(key)
+	var/msg
+	switch(key)
+		if("done")
+			show_browser(src, null, "window=flavor_changes")
+			return
+		if("general")
+			msg = sanitize(input(src,"Update the general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)
+		else
+			if(!(key in flavor_texts))
 				return
-			if("general")
-				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing. Do not include OOC information here.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
-				flavor_texts[href_list["flavor_change"]] = msg
-				return
-			else
-				var/msg = sanitize(input(usr,"Update the flavor text for your [href_list["flavor_change"]].","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
-				flavor_texts[href_list["flavor_change"]] = msg
-				set_flavor()
-				return
-	..()
-	return
+			msg = sanitize(input(src,"Update the flavor text for your [key].","Flavor Text",html_decode(flavor_texts[key])) as message, extra = 0)
+	if(!CanInteract(src, GLOB.self_state))
+		return
+	flavor_texts[key] = msg
+	set_flavor()
 
 ///eyecheck()
 ///Returns a number between -1 to 2
@@ -892,11 +916,6 @@
 						H.brainmob.mind.transfer_to(src)
 						qdel(H)
 
-
-	for (var/ID in virus2)
-		var/datum/disease2/disease/V = virus2[ID]
-		V.cure(src)
-
 	losebreath = 0
 
 	..()
@@ -924,6 +943,16 @@
 
 /mob/living/carbon/human/clean_blood(var/clean_feet)
 	.=..()
+	if(gloves)
+		if(gloves.clean_blood())
+			update_inv_gloves(1)
+		gloves.germ_level = 0
+	else
+		if(!isnull(bloody_hands))
+			bloody_hands = null
+			update_inv_gloves(1)
+		germ_level = 0
+
 	for(var/obj/item/organ/external/organ in organs)
 		if(clean_feet || (organ.organ_tag in list(BP_L_HAND,BP_R_HAND)))
 			organ.gunshot_residue = null
@@ -986,6 +1015,33 @@
 		custom_pain(msg,40,affecting = organ)
 	organ.take_external_damage(rand(1,3) + O.w_class, DAM_EDGE, 0)
 
+/mob/living/carbon/human/proc/remove_splints()
+	set category = "Object"
+	set name = "Remove Splints"
+	set desc = "Carefully remove splints from someone's limbs."
+	set src in view(1)
+	var/mob/living/user = usr
+	var/removed_splint = 0
+
+	if(usr.stat || usr.restrained() || !isliving(usr)) return
+
+	for(var/obj/item/organ/external/o in organs)
+		if (o && o.splinted)
+			var/obj/item/S = o.splinted
+			if(!istype(S) || S.loc != o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
+				to_chat(user, "<span class='warning'>You cannot remove any splints on [src]'s [o.name] - [o.splinted] is supporting some of the breaks.</span>")
+			else
+				S.add_fingerprint(user)
+				if(o.remove_splint())
+					user.put_in_active_hand(S)
+					removed_splint = 1
+	if(removed_splint)
+		user.visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
+	else
+		to_chat(user, "<span class='warning'>\The [src] has no splints that can be removed.</span>")
+	verbs -= /mob/living/carbon/human/proc/remove_splints
+
+
 /mob/living/carbon/human/verb/check_pulse()
 	set category = "Object"
 	set name = "Check pulse"
@@ -1024,14 +1080,14 @@
 
 	if(!is_physically_disabled())
 		var/turf/above = GetAbove(src)
-		if(shadow)
-			if(client.eye == shadow)
+		if(bound_overlay)
+			if(client.eye == bound_overlay)
 				reset_view(0)
 				return
 			if(istype(above, /turf/simulated/open))
 				to_chat(src, "<span class='notice'>You look up.</span>")
 				if(client)
-					reset_view(shadow)
+					reset_view(bound_overlay)
 				return
 		to_chat(src, "<span class='notice'>You can see \the [above].</span>")
 	else
@@ -1093,7 +1149,7 @@
 	maxHealth = species.total_health
 	remove_extension(src, /datum/extension/armor)
 	if(species.natural_armour_values)
-		set_extension(src, /datum/extension/armor, /datum/extension/armor, species.natural_armour_values)
+		set_extension(src, /datum/extension/armor, species.natural_armour_values)
 
 	default_pixel_x = initial(pixel_x) + species.pixel_offset_x
 	default_pixel_y = initial(pixel_y) + species.pixel_offset_y
@@ -1741,3 +1797,25 @@
 	. = ..()
 	if(.)
 		drip(1)
+
+/mob/living/carbon/human/get_bullet_impact_effect_type(var/def_zone)
+	var/obj/item/organ/external/E = get_organ(def_zone)
+	if(!E || E.is_stump())
+		return BULLET_IMPACT_NONE
+	if(BP_IS_ROBOTIC(E))
+		return BULLET_IMPACT_METAL
+	return BULLET_IMPACT_MEAT
+
+/mob/living/carbon/human/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone, var/damage)
+	..()
+	switch(get_bullet_impact_effect_type(def_zone))
+		if(BULLET_IMPACT_MEAT)
+			if(damage && P.damtype == BRUTE)
+				var/hit_dir = get_dir(P.starting, src)
+				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
+				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
+				var/scale = min(1, round(P.damage / 50, 0.2))
+				var/matrix/M = new()
+				B.transform = M.Scale(scale)
+
+				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.blood_color)

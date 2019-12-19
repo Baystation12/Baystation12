@@ -16,7 +16,16 @@
 	center_of_mass = null
 
 	// These values are passed on to all component pieces.
-	armor = list(melee = 40, bullet = 5, laser = 20,energy = 5, bomb = 35, bio = 100, rad = 10)
+	armor_type = /datum/extension/armor/rig
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_SHIELDED, 
+		rad = ARMOR_RAD_MINOR
+		)
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	max_pressure_protection = RIG_MAX_PRESSURE
@@ -96,22 +105,22 @@
 /obj/item/weapon/rig/get_cell()
 	return cell
 
-/obj/item/weapon/rig/examine()
+/obj/item/weapon/rig/examine(mob/user)
 	. = ..()
 	if(wearer)
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
 			if(!piece || piece.loc != wearer)
 				continue
-			to_chat(usr, "\icon[piece] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed.")
+			to_chat(user, "\icon[piece] \The [piece] [piece.gender == PLURAL ? "are" : "is"] deployed.")
 
-	if(src.loc == usr)
-		to_chat(usr, "The access panel is [locked? "locked" : "unlocked"].")
-		to_chat(usr, "The maintenance panel is [open ? "open" : "closed"].")
-		to_chat(usr, "The wire panel is [p_open ? "open" : "closed"].")
-		to_chat(usr, "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"].")
+	if(src.loc == user)
+		to_chat(user, "The access panel is [locked? "locked" : "unlocked"].")
+		to_chat(user, "The maintenance panel is [open ? "open" : "closed"].")
+		to_chat(user, "The wire panel is [p_open ? "open" : "closed"].")
+		to_chat(user, "Hardsuit systems are [offline ? "<font color='red'>offline</font>" : "<font color='green'>online</font>"].")
 
 		if(open)
-			to_chat(usr, "It's equipped with [english_list(installed_modules)].")
+			to_chat(user, "It's equipped with [english_list(installed_modules)].")
 
 /obj/item/weapon/rig/Initialize()
 	. = ..()
@@ -170,7 +179,7 @@
 		if(islist(armor))
 			piece.armor = armor.Copy() // codex reads the armor list, not extensions. this list does not have any effect on in game mechanics
 			remove_extension(piece, /datum/extension/armor)
-			set_extension(piece, /datum/extension/armor, /datum/extension/armor/rig, armor)
+			set_extension(piece, armor_type, armor, armor_degradation_speed)
 
 	set_slowdown_and_vision(!offline)
 	update_icon(1)

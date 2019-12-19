@@ -158,6 +158,12 @@
 	if(accessories.len > ties.len)
 		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
 
+/obj/item/clothing/examine(mob/user)
+	. = ..()
+	var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
+	if(istype(armor_datum) && LAZYLEN(armor_datum.get_visible_damage()))
+		to_chat(user, SPAN_WARNING("It has some <a href='?src=\ref[src];list_armor_damage=1'>damage</a>."))
+
 /obj/item/clothing/CanUseTopic(var/user)
 	if(user in view(get_turf(src)))
 		return STATUS_INTERACTIVE
@@ -169,6 +175,13 @@
 			for(var/accessory in accessories)
 				ties += "\icon[accessory] \a [accessory]"
 			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
+		return TOPIC_HANDLED
+	if(href_list["list_armor_damage"])
+		var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)
+		var/list/damages = armor_datum.get_visible_damage()
+		to_chat(user, "\The [src] \icon[src] has some damage:")
+		for(var/key in damages)
+			to_chat(user, "<li><b>[capitalize(damages[key])]</b> damage to the <b>[key]</b> armor.")
 		return TOPIC_HANDLED
 
 ///////////////////////////////////////////////////////////////////////
@@ -581,8 +594,7 @@ BLIND     // can't see anything
 		QDEL_NULL(attached_cuffs)
 
 /obj/item/clothing/shoes/examine(mob/user)
-	if (!(. = ..()))
-		return
+	. = ..()
 	if (attached_cuffs)
 		to_chat(user, SPAN_WARNING("They are connected by \the [attached_cuffs]."))
 	if (hidden_item)
@@ -716,7 +728,6 @@ BLIND     // can't see anything
 	var/fire_resist = T0C+100
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	allowed = list(/obj/item/weapon/tank/emergency)
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
 	blood_overlay_type = "suit"
 	siemens_coefficient = 0.9
@@ -767,7 +778,6 @@ BLIND     // can't see anything
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_ICLOTHING
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	w_class = ITEM_SIZE_NORMAL
 	force = 0
 	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
@@ -908,7 +918,7 @@ BLIND     // can't see anything
 
 
 /obj/item/clothing/under/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	switch(src.sensor_mode)
 		if(0)
 			to_chat(user, "Its sensors appear to be disabled.")

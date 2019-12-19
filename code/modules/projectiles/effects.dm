@@ -244,3 +244,34 @@
 
 /obj/effect/projectile/stun/darkmatter/impact
 	icon_state = "impact_darkt"
+
+//----------------------------
+// Point defense
+//----------------------------
+/obj/effect/projectile/pointdefense
+	light_color = COLOR_GOLD
+	light_max_bright = 1
+
+/obj/effect/projectile/pointdefense/tracer
+	icon_state = "beam_pointdef_d"
+
+/obj/effect/projectile/pointdefense/muzzle
+	icon_state = "muzzle_pointdef_d"
+
+/obj/effect/projectile/pointdefense/impact
+	icon_state = "impact_pointdef_d"
+
+//----------------------------
+// incendiary laser
+//----------------------------
+/obj/effect/projectile/incen
+	light_color = COLOR_PALE_ORANGE
+
+/obj/effect/projectile/incen/tracer
+	icon_state = "beam_incen"
+
+/obj/effect/projectile/incen/muzzle
+	icon_state = "muzzle_incen"
+
+/obj/effect/projectile/incen/impact
+	icon_state = "impact_incen"

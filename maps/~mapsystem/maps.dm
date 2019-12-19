@@ -222,7 +222,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(lobby_tracks.len)
-		lobby_track_type = pick(lobby_tracks - exclude)
+		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
 		lobby_track_type = pick(subtypesof(/music_track) - exclude)
 	return decls_repository.get_decl(lobby_track_type)
@@ -274,8 +274,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		return
 
 	for(var/i = 0, i < num_exoplanets, i++)
-		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/sector/exoplanet))
-		var/obj/effect/overmap/sector/exoplanet/new_planet = new exoplanet_type(null, planet_size[1], planet_size[2])
+		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
+		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, planet_size[1], planet_size[2])
 		new_planet.build_level()
 
 // Used to apply various post-compile procedural effects to the map.

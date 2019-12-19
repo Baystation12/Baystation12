@@ -416,7 +416,7 @@ var/list/mining_floors = list()
 	base_desc = "Gritty and unpleasant."
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	base_icon_state = "asteroid"
-	footstep_type = FOOTSTEP_ASTEROID
+	footstep_type = /decl/footsteps/asteroid
 
 	initial_flooring = null
 	initial_gas = null

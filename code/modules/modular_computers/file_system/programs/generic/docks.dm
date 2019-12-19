@@ -13,22 +13,23 @@
 	requires_ntnet = 1
 	category = PROG_SUPPLY
 
-/datum/nano_module/docking
-	name = "Docking Control program"
-	var/list/docking_controllers = list() //list of tags
-
-/datum/computer_file/program/docking/run_program()
+/datum/computer_file/program/docking/on_startup()
 	. = ..()
 	if(NM)
 		var/datum/nano_module/docking/NMD = NM
 		NMD.refresh_docks()
 
+/datum/nano_module/docking
+	name = "Docking Control program"
+	var/list/docking_controllers = list() //list of tags
+
+/datum/nano_module/docking/New(var/datum/host, var/topic_manager)
+	..()
+	refresh_docks()
+
 /datum/nano_module/docking/proc/refresh_docks()
-	var/atom/movable/AM = nano_host()
-	if(!istype(AM))
-		return
 	docking_controllers.Cut()
-	var/list/zlevels = GetConnectedZlevels(AM.z)
+	var/list/zlevels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/embedded_controller/radio/airlock/docking_port/D in SSmachines.machinery)
 		if(D.z in zlevels)
 			var/shuttleside = 0

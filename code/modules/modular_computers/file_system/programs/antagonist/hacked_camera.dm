@@ -20,7 +20,7 @@
 	// The program is active and connected to one of the station's networks. Has a very small chance to trigger IDS alarm every tick.
 	if(HNM && HNM.current_network && (HNM.current_network in GLOB.using_map.station_networks) && prob((SKILL_MAX - operator_skill) * 0.05))
 		if(ntnet_global.intrusion_detection_enabled)
-			ntnet_global.add_log("IDS WARNING - Unauthorised access detected to camera network [HNM.current_network] by device with NID [computer.network_card.get_network_tag()]")
+			ntnet_global.add_log("IDS WARNING - Unauthorised access detected to camera network [HNM.current_network] by device with NID [computer.get_network_tag()]")
 			ntnet_global.intrusion_detection_alarm = 1
 
 /datum/computer_file/program/camera_monitor/hacked/ui_interact(mob/user)

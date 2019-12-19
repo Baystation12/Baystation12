@@ -46,11 +46,11 @@
 	var/list/data = host.initial_data()
 
 	if(program)
-		data["emagged"] = program.computer_emagged
 		data["net_comms"] = !!program.get_signal(NTNET_COMMUNICATION) //Double !! is needed to get 1 or 0 answer
 		data["net_syscont"] = !!program.get_signal(NTNET_SYSTEMCONTROL)
 		if(program.computer)
-			data["have_printer"] = !!program.computer.nano_printer
+			data["emagged"] = program.computer.emagged()
+			data["have_printer"] =  program.computer.has_component(PART_PRINTER)
 		else
 			data["have_printer"] = 0
 	else
@@ -140,13 +140,10 @@
 				if(announcment_cooldown)
 					to_chat(usr, "Please allow at least one minute to pass between announcements")
 					return TRUE
-				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|text
+				var/input = input(usr, "Please write a message to announce to the [station_name()].", "Priority Announcement") as null|message
 				if(!input || !can_still_topic())
 					return 1
-				var/affected_zlevels = GLOB.using_map.contact_levels
-				var/atom/A = host
-				if(istype(A))
-					affected_zlevels = GetConnectedZlevels(A.z)
+				var/affected_zlevels = GetConnectedZlevels(get_host_z())
 				crew_announcement.Announce(input, zlevels = affected_zlevels)
 				announcment_cooldown = 1
 				spawn(600)//One minute cooldown
@@ -155,7 +152,7 @@
 			. = 1
 			if(href_list["target"] == "emagged")
 				if(program)
-					if(is_autenthicated(user) && program.computer_emagged && !issilicon(usr) && ntn_comm)
+					if(is_autenthicated(user) && program.computer.emagged() && !issilicon(usr) && ntn_comm)
 						if(centcomm_message_cooldown)
 							to_chat(usr, "<span class='warning'>Arrays recycling. Please stand by.</span>")
 							SSnano.update_uis(src)
@@ -248,11 +245,8 @@
 		if("printmessage")
 			. = 1
 			if(is_autenthicated(user) && ntn_comm)
-				if(program && program.computer && program.computer.nano_printer)
-					if(!program.computer.nano_printer.print_text(current_viewing_message["contents"],current_viewing_message["title"]))
-						to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
-					else
-						program.computer.visible_message("<span class='notice'>\The [program.computer] prints out a paper.</span>")
+				if(!program.computer.print_paper(current_viewing_message["contents"],current_viewing_message["title"]))
+					to_chat(usr, "<span class='notice'>Hardware Error: Printer was unable to print the selected file.</span>")
 		if("unbolt_doors")
 			GLOB.using_map.unbolt_saferooms()
 			to_chat(usr, "<span class='notice'>The console beeps, confirming the signal was sent to have the saferooms unbolted.</span>")

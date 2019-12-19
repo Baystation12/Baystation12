@@ -4,9 +4,9 @@
 	var/datum/browser/panel
 	var/list/history = list()
 	var/list/history_max_length = 20
-	var/obj/item/modular_computer/computer
+	var/datum/extension/interactive/ntos/computer
 
-/datum/terminal/New(mob/user, obj/item/modular_computer/computer)
+/datum/terminal/New(mob/user, datum/extension/interactive/ntos/computer)
 	..()
 	src.computer = computer
 	if(user && can_use(user))
@@ -28,7 +28,7 @@
 		return FALSE
 	if(!CanInteractWith(user, computer, GLOB.default_state))
 		return FALSE
-	if(!computer || !computer.enabled)
+	if(!computer || !computer.on)
 		return FALSE
 	return TRUE
 
@@ -54,6 +54,7 @@
 /datum/terminal/proc/update_content()
 	var/list/content = history.Copy()
 	content += "<form action='byond://'><input type='hidden' name='src' value='\ref[src]'>> <input type='text' size='40' name='input' autofocus><input type='submit' value='Enter'></form>"
+	content += "<i>type `man` for a list of available commands.</i>"
 	panel.set_content(jointext(content, "<br>"))
 
 /datum/terminal/Topic(href, href_list)

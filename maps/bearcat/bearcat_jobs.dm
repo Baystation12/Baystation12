@@ -30,7 +30,7 @@
 		return
 	GLOB.using_map.station_short = ship
 	GLOB.using_map.station_name = "FTV [ship]"
-	var/obj/effect/overmap/ship/bearcat/B = locate() in world
+	var/obj/effect/overmap/visitable/ship/bearcat/B = locate() in world
 	if(B)
 		B.SetName(GLOB.using_map.station_name)
 	command_announcement.Announce("Attention all hands on [GLOB.using_map.station_name]! Thank you for your attention.", "Ship re-christened")
@@ -85,13 +85,11 @@
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_MEDICAL     = SKILL_EXPERT,
 	                    SKILL_ANATOMY     = SKILL_EXPERT,
-	                    SKILL_CHEMISTRY   = SKILL_BASIC,
-	                    SKILL_VIROLOGY    = SKILL_BASIC)
+	                    SKILL_CHEMISTRY   = SKILL_BASIC)
 
 	max_skill = list(   SKILL_MEDICAL     = SKILL_MAX,
 	                    SKILL_ANATOMY     = SKILL_MAX,
-	                    SKILL_CHEMISTRY   = SKILL_MAX,
-	                    SKILL_VIROLOGY    = SKILL_MAX)
+	                    SKILL_CHEMISTRY   = SKILL_MAX)
 	skill_points = 28
 
 /datum/job/hop

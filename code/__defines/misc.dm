@@ -13,6 +13,7 @@
 #define INVISIBILITY_OBSERVER    60
 #define INVISIBILITY_EYE         61
 #define INVISIBILITY_SYSTEM      99
+#define INVISIBILITY_ABSTRACT   101	// special: this can never be seen, regardless of see_invisible
 
 #define SEE_INVISIBLE_LIVING     25
 #define SEE_INVISIBLE_NOLIGHTING 15
@@ -118,9 +119,9 @@
 #define NTNET_SYSTEMCONTROL 4		// Control of various systems, RCon, air alarm control, etc.
 
 // NTNet transfer speeds, used when downloading/uploading a file/program.
-#define NTNETSPEED_LOWSIGNAL 0.25	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
-#define NTNETSPEED_HIGHSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on High signal
-#define NTNETSPEED_ETHERNET 1		// GQ/s transfer speed when the device is using wired connection
+#define NTNETSPEED_LOWSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
+#define NTNETSPEED_HIGHSIGNAL 1	// GQ/s transfer speed when the device is wirelessly connected and on High signal
+#define NTNETSPEED_ETHERNET 2		// GQ/s transfer speed when the device is using wired connection
 #define NTNETSPEED_DOS_AMPLIFICATION 5	// Multiplier for Denial of Service program. Resulting load on NTNet relay is this multiplied by NTNETSPEED of the device
 
 // Program bitflags
@@ -206,9 +207,9 @@
 #define ERROR_USEFUL_LEN 2
 
 #define RAD_LEVEL_LOW 1 // Around the level at which radiation starts to become harmful
-#define RAD_LEVEL_MODERATE 5
-#define RAD_LEVEL_HIGH 20
-#define RAD_LEVEL_VERY_HIGH 40
+#define RAD_LEVEL_MODERATE 25
+#define RAD_LEVEL_HIGH 40
+#define RAD_LEVEL_VERY_HIGH 100
 
 #define RADIATION_THRESHOLD_CUTOFF 0.1	// Radiation will not affect a tile when below this value.
 
@@ -242,6 +243,11 @@
 #define EMAIL_DOCUMENTS "document.server@internal-services.net"
 #define EMAIL_SYSADMIN  "admin@internal-services.net"
 #define EMAIL_BROADCAST "broadcast@internal-services.net"
+
+//Stats for department goals etc
+#define STAT_XENOPLANTS_SCANNED  "xenoplants_scanned"
+#define STAT_XENOFAUNA_SCANNED  "xenofauna_scanned"
+#define STAT_FLAGS_PLANTED  "planet_flags"
 
 //Number of slots a modular computer has which can be tweaked via gear tweaks.
 #define TWEAKABLE_COMPUTER_PART_SLOTS 7

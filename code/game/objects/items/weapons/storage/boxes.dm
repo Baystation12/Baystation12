@@ -95,6 +95,7 @@
 	icon_state = "survivalvox"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
@@ -103,7 +104,7 @@
 	name = "engineer survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
 	icon_state = "survivaleng"
-	startswith = list(/obj/item/clothing/mask/breath = 1,
+	startswith = list(/obj/item/clothing/mask/breath/scba = 1,
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad = 1,
@@ -260,7 +261,7 @@
 	name = "box of prescription glasses"
 	desc = "This box contains nerd glasses."
 	icon_state = "glasses"
-	startswith = list(/obj/item/clothing/glasses/regular = 7)
+	startswith = list(/obj/item/clothing/glasses/prescription = 7)
 
 /obj/item/weapon/storage/box/cdeathalarm_kit
 	name = "death alarm kit"

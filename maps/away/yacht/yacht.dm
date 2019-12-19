@@ -1,6 +1,6 @@
 #include "yacht_areas.dm"
 
-/obj/effect/overmap/ship/yacht
+/obj/effect/overmap/visitable/ship/yacht
 	name = "private yacht"
 	desc = "Sensor array is detecting a small vessel with unknown lifeforms on board"
 	color = "#ffc966"
@@ -13,7 +13,7 @@
 		"nav_yacht_antag"
 	)
 
-/obj/effect/overmap/ship/yacht/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/ship/yacht/New(nloc, max_x, max_y)
 	name = "IPV [pick("Razorshark", "Aurora", "Lighting", "Pequod", "Anansi")], \a [name]"
 	..()
 

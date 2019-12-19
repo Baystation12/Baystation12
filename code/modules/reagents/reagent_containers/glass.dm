@@ -30,11 +30,9 @@
 		/mob/living/bot/medbot,
 		/obj/item/weapon/storage/secure/safe,
 		/obj/structure/iv_drip,
-		/obj/machinery/disease2/incubator,
 		/obj/machinery/disposal,
 		/mob/living/simple_animal/cow,
 		/mob/living/simple_animal/hostile/retaliate/goat,
-		/obj/machinery/computer/centrifuge,
 		/obj/machinery/sleeper,
 		/obj/machinery/smartfridge/,
 		/obj/machinery/biogenerator,
@@ -46,9 +44,11 @@
 	..()
 	base_name = name
 
-/obj/item/weapon/reagent_containers/glass/examine(var/mob/user)
-	if(!..(user, 2))
+/obj/item/weapon/reagent_containers/glass/examine(mob/user, distance)
+	. = ..()
+	if(distance > 2)
 		return
+	
 	if(reagents && reagents.reagent_list.len)
 		to_chat(user, "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>")
 	else

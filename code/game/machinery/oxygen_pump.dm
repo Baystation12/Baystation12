@@ -154,7 +154,7 @@
 	if(istype(W, /obj/item/weapon/tank) && !stat)
 		to_chat(user, "<span class='warning'>Please open the maintenance hatch first.</span>")
 
-/obj/machinery/oxygen_pump/examine(var/mob/user)
+/obj/machinery/oxygen_pump/examine(mob/user)
 	. = ..()
 	if(tank)
 		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())]")

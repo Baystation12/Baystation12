@@ -1,7 +1,7 @@
 // It is a gizmo that flashes a small area
 
 /obj/machinery/flasher
-	name = "Mounted flash"
+	name = "mounted flash"
 	desc = "A wall-mounted flashbulb device."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "mflash1"
@@ -23,14 +23,6 @@
 	)
 	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/flasher = 1)
 
-/obj/machinery/flasher/portable //Portable version of the flasher. Only flashes when anchored
-	name = "portable flasher"
-	desc = "A portable flashing device. Wrench to activate and deactivate. Cannot detect slow movements."
-	icon_state = "pflash1"
-	strength = 8
-	anchored = 0
-	base_state = "pflash"
-	density = 1
 
 /obj/machinery/flasher/on_update_icon()
 	if ( !(stat & (BROKEN|NOPOWER)) )
@@ -108,6 +100,15 @@
 	if(prob(75/severity))
 		flash()
 	..(severity)
+
+/obj/machinery/flasher/portable //Portable version of the flasher. Only flashes when anchored
+	name = "portable flasher"
+	desc = "A portable flashing device. Wrench to activate and deactivate. Cannot detect slow movements."
+	icon_state = "pflash1"
+	strength = 8
+	anchored = 0
+	base_state = "pflash"
+	density = 1
 
 /obj/machinery/flasher/portable/HasProximity(atom/movable/AM as mob|obj)
 	if(!anchored || disable || last_flash && world.time < last_flash + 150)

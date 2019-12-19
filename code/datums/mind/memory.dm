@@ -70,7 +70,7 @@
 		var/datum/goal/ambition/ambition = SSgoals.ambitions[src]
 		output += "<HR><B>Ambitions:</B> [ambition.summarize()]"
 
-	show_browser(recipient, jointext(output, "<BR>"),"window=memory")
+	show_browser(recipient, replacetext(jointext(output, "<BR>"),"\n","<BR>"),"window=memory")
 
 /***********
 * Memories *
@@ -186,11 +186,11 @@
 	else
 		to_chat(src, SPAN_WARNING("There is no mind to retrieve stored memories from."))
 
-/mob/verb/AddMemory(var/msg as text)
+/mob/verb/AddMemory(var/msg as message)
 	set name = "Add Note"
 	set category = "IC"
 
-	msg = sanitize(msg)
+	msg = sanitize(msg,extra = FALSE)
 	if(msg)
 		var/error = StoreMemory(msg)
 		if(error)

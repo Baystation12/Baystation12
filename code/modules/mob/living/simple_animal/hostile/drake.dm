@@ -24,7 +24,12 @@
 	maxHealth = 200
 	melee_damage_lower = 14
 	melee_damage_upper = 19
-	natural_armor = list(melee = 25, energy = 100, laser = 100, bomb = 100)
+	natural_armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		energy = ARMOR_ENERGY_SHIELDED, 
+		laser = ARMOR_LASER_HEAVY, 
+		bomb = ARMOR_BOMB_SHIELDED
+	)
 	ability_cooldown = 80 SECONDS
 
 	var/empowered_attack = FALSE

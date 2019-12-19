@@ -17,11 +17,11 @@
 	frontier colony SDTF's, or functions as an intermediary SDTF for systems where a presence has yet to be established. The Skrell of Yii'Talana \
 	are some of the more experienced on the far skrellian frontier."
 
-/decl/cultural_info/faction/skrell/krigli
-	name = FACTION_SKRELL_KRIGLI
-	description = "Kri'gli is a Skrell aerospace manufacturing and research corporation from the city-state of Tibrivuu in the Go'kal system,\
+/decl/cultural_info/faction/skrell/krrigli
+	name = FACTION_SKRELL_KRRIGLI
+	description = "Krri'gli is a Skrell aerospace manufacturing and research corporation from the city-state of Tibrivuu in the Go'kal system,\
 	and one of the more well known Skrell corporations in human space as a result of its contribution to the SEV Torch Project.\
-	Kri'gli is mostly concerned with the design and construction of bluespace drives, and is one of the largest providers in the human side \
+	Krri'gli is mostly concerned with the design and construction of bluespace drives, and is one of the largest providers in the human side \
 	of Skrell space. Their participation in the Torch project is their first human venture, and has resulted in their sending science staff \
 	as a part of the Expeditionary Corps Organization to provide expertise and gather mission data firsthand."
 	additional_langs = list(LANGUAGE_HUMAN_EURO)

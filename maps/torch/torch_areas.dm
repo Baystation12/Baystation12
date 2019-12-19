@@ -541,24 +541,6 @@
 	icon_state = "shuttle3"
 	base_turf = /turf/simulated/open
 
-// Ninja areas
-/area/ninja_dojo
-	name = "\improper Ninja Base"
-	icon_state = "green"
-	requires_power = 0
-	dynamic_lighting = 1
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_syndicate)
-
-/area/ninja_dojo/dojo
-	name = "\improper Clan Dojo"
-	dynamic_lighting = 0
-
-/area/ninja_dojo/start
-	name = "\improper Clan Dojo"
-	icon_state = "shuttlered"
-	base_turf = /turf/simulated/floor/plating
-
 //Merchant
 
 /area/shuttle/merchant/home
@@ -566,49 +548,6 @@
 	icon_state = "shuttlegrn"
 	req_access = list(access_merchant)
 	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-
-//Merc
-
-/area/syndicate_mothership
-	name = "\improper Mercenary Base"
-	icon_state = "syndie-ship"
-	requires_power = 0
-	dynamic_lighting = 0
-	req_access = list(access_syndicate)
-
-/area/syndicate_station/start
-	name = "\improper Mercenary Forward Operating Base"
-	icon_state = "yellow"
-	requires_power = 0
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-	req_access = list(access_syndicate)
-
-//Skipjack
-
-/area/skipjack_station
-	name = "Raider Outpost"
-	icon_state = "yellow"
-	requires_power = 0
-	req_access = list(access_syndicate)
-
-//NT rescue shuttle
-
-/area/rescue_base
-	name = "\improper Response Team Base"
-	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 1
-	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
-
-/area/rescue_base/base
-	name = "\improper Barracks"
-	icon_state = "yellow"
-	dynamic_lighting = 0
-
-/area/rescue_base/start
-	name = "\improper Response Team Base"
-	icon_state = "shuttlered"
-	base_turf = /turf/unsimulated/floor/rescue_base
 
 // Elevator areas.
 /area/turbolift/torch_top
@@ -1147,10 +1086,6 @@
 	icon_state = "medbay"
 	req_access = list(access_medical)
 
-/area/medical/infirmary/annex
-	name = "\improper Infirmary Annex"
-	color = COLOR_ALUMINIUM
-
 /area/medical/infirmreception
 	name = "\improper Infirmary Reception"
 	icon_state = "medbay2"
@@ -1185,6 +1120,9 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_crematorium)
 
+/area/medical/virology
+	name = "\improper Virology (decomissioned)"
+
 // Shield Rooms
 /area/shield
 	name = "\improper Shield Generator"
@@ -1196,12 +1134,6 @@
 	name = "\improper Bridge Shield Generator"
 
 // Misc
-/area/deity_spawn
-	name = "\improper Deity Spawn"
-	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 0
-
 /area/teleporter
 	name = "\improper Teleporter"
 	icon_state = "teleporter"
@@ -1251,7 +1183,7 @@
 // Command
 
 /area/bridge
-	name = "\improper Bridge"
+	name = "\improper SEV Torch Bridge"
 	icon_state = "bridge"
 	req_access = list(access_bridge)
 
@@ -1482,11 +1414,6 @@
 	sound_env = SMALL_ENCLOSED
 	req_access = list(access_robotics)
 
-/area/engineering/engine_eva
-	name = "\improper Engine EVA"
-	icon_state = "engine_eva"
-	req_access = list(access_engine, access_eva)
-
 /area/engineering/engine_monitoring
 	name = "\improper Engine Monitoring Room"
 	icon_state = "engine_monitoring"
@@ -1510,6 +1437,11 @@
 
 /area/engineering/locker_room
 	name = "\improper Engineering Locker Room"
+	icon_state = "engineering_locker"
+	req_access = list(access_engine)
+
+/area/engineering/engineering_bay
+	name = "\improper Engineering Bay"
 	icon_state = "engineering_locker"
 	req_access = list(access_engine)
 
@@ -1588,16 +1520,6 @@
 	name = "\improper Research Break Room"
 	icon_state = "researchbreak"
 	req_access = list(list(access_research, access_nanotrasen))
-
-/area/alien
-	name = "\improper Alien base"
-	icon_state = "yellow"
-	requires_power = 0
-
-/area/shuttle/alien/base
-	icon_state = "shuttle"
-	name = "\improper Alien Shuttle Base"
-	requires_power = 1
 
 // Shuttles
 /area/shuttle/administration/centcom
@@ -1688,12 +1610,6 @@
 	ambience = list('sound/ambience/ambimalf.ogg')
 	req_access = list(access_ai_upload)
 
-/area/turret_protected/ai_cyborg_station
-	name = "\improper Cyborg Station"
-	icon_state = "ai_cyborg"
-	sound_env = SMALL_ENCLOSED
-	req_access = list(access_ai_upload)
-
 /area/turret_protected/ai_upload
 	name = "\improper AI Upload Chamber"
 	icon_state = "ai_upload"
@@ -1727,12 +1643,6 @@
 	name = "\improper Merchant Station"
 	icon_state = "LP"
 	req_access = list(access_merchant)
-
-// Syndicate
-
-/area/syndicate_mothership/raider_base
-	name = "\improper Raider Base"
-	req_access = list(access_syndicate)
 
 // ACTORS GUILD
 /area/acting

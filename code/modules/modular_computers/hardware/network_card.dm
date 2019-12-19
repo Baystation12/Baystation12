@@ -15,16 +15,16 @@ var/global/ntnet_card_uid = 1
 	var/proxy_id     // If set, uses the value to funnel connections through another network card.
 	malfunction_probability = 1
 
-/obj/item/weapon/stock_parts/computer/network_card/diagnostics(var/mob/user)
-	..()
-	to_chat(user, "NIX Unique ID: [identification_id]")
-	to_chat(user, "NIX User Tag: [identification_string]")
-	to_chat(user, "Supported protocols:")
-	to_chat(user, "511.m SFS (Subspace) - Standard Frequency Spread")
+/obj/item/weapon/stock_parts/computer/network_card/diagnostics()
+	. = ..()
+	. += "NIX Unique ID: [identification_id]"
+	. += "NIX User Tag: [identification_string]"
+	. += "Supported protocols:"
+	. += "511.m SFS (Subspace) - Standard Frequency Spread"
 	if(long_range)
-		to_chat(user, "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth")
+		. += "511.n WFS/HB (Subspace) - Wide Frequency Spread/High Bandiwdth"
 	if(ethernet)
-		to_chat(user, "OpenEth (Physical Connection) - Physical network connection port")
+		. += "OpenEth (Physical Connection) - Physical network connection port"
 
 /obj/item/weapon/stock_parts/computer/network_card/New(var/l)
 	..(l)
@@ -50,18 +50,18 @@ var/global/ntnet_card_uid = 1
 	hardware_size = 3
 
 /obj/item/weapon/stock_parts/computer/network_card/Destroy()
-	if(holder2 && (holder2.network_card == src))
-		holder2.network_card = null
-	holder2 = null
+	ntnet_global.unregister(identification_id)
 	return ..()
 
 // Returns a string identifier of this network card
 /obj/item/weapon/stock_parts/computer/network_card/proc/get_network_tag(list/routed_through) // Argument is a safety parameter for internal calls. Don't use manually.
 	if(proxy_id && !(src in routed_through))
-		var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(proxy_id)
+		var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
 		if(comp) // If not we default to exposing ourselves, but it means there was likely a logic error elsewhere.
 			LAZYADD(routed_through, src)
-			return comp.network_card.get_network_tag(routed_through)
+			var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
+			if(network_card)
+				return network_card.get_network_tag(routed_through)
 	return "[identification_string] (NID [identification_id])"
 
 /obj/item/weapon/stock_parts/computer/network_card/proc/is_banned()
@@ -70,9 +70,6 @@ var/global/ntnet_card_uid = 1
 // 0 - No signal, 1 - Low signal, 2 - High signal. 3 - Wired Connection
 /obj/item/weapon/stock_parts/computer/network_card/proc/get_signal(var/specific_action = 0, list/routed_through)
 	. = 0
-	if(!holder2) // Hardware is not installed in anything. No signal. How did this even get called?
-		return
-
 	if(!enabled)
 		return
 
@@ -89,7 +86,7 @@ var/global/ntnet_card_uid = 1
 	else if(long_range)
 		strength = 2
 
-	var/turf/T = get_turf(holder2)
+	var/turf/T = get_turf(src)
 	if(!istype(T)) //no reception in nullspace
 		return
 	if(T.z in GLOB.using_map.station_levels)
@@ -99,10 +96,28 @@ var/global/ntnet_card_uid = 1
 		. = strength - 1
 
 	if(proxy_id)
-		var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(proxy_id)
-		if(!comp || !comp.enabled)
+		var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
+		if(!comp || !comp.on)
 			return 0
 		if(src in routed_through) // circular proxy chain
 			return 0
 		LAZYADD(routed_through, src)
-		. = min(., comp.network_card.get_signal(specific_action, routed_through))
+		var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
+		if(network_card)
+			. = min(., network_card.get_signal(specific_action, routed_through))
+
+/obj/item/weapon/stock_parts/computer/network_card/on_disable()
+	ntnet_global.unregister(identification_id)
+
+/obj/item/weapon/stock_parts/computer/network_card/on_enable(var/datum/extension/interactive/ntos/os)
+	ntnet_global.register(identification_id, os)
+
+/obj/item/weapon/stock_parts/computer/network_card/on_install(var/obj/machinery/machine)
+	..()
+	var/datum/extension/interactive/ntos/os = get_extension(machine, /datum/extension/interactive/ntos)
+	if(os)
+		on_enable(os)
+
+/obj/item/weapon/stock_parts/computer/network_card/on_uninstall(var/obj/machinery/machine, var/temporary = FALSE)
+	..()
+	on_disable()

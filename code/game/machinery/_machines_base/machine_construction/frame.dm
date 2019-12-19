@@ -69,7 +69,7 @@
 		return TRUE
 
 
-/decl/machine_construction/frame/unwrenched/mechanics_info()
+/decl/machine_construction/frame/wrenched/mechanics_info()
 	. = list()
 	. += "Use a wrench to unfasten the frame from the floor and prepare it for deconstruction."
 	. += "Add cables to make it ready for a circuit."

@@ -31,6 +31,7 @@
 	allowed_magazines = /obj/item/ammo_magazine/pistol/double
 	icon = 'icons/obj/guns/military_pistol.dmi'
 	icon_state = "military"
+	item_state = "secgundark"
 	safety_icon = "safety"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	fire_delay = 7
@@ -63,7 +64,7 @@
 	desc = "The HelTek Magnus, a robust Terran handgun that uses high-caliber ammo."
 	icon = 'icons/obj/guns/magnum_pistol.dmi'
 	icon_state = "magnum"
-	item_state = "revolver"
+	item_state = "magnum"
 	safety_icon = "safety"
 	force = 9
 	caliber = CALIBER_PISTOL_MAGNUM

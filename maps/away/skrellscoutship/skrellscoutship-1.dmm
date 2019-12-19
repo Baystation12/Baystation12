@@ -642,7 +642,7 @@
 	icon_state = "computer";
 	dir = 4
 	},
-/obj/effect/overmap/ship/landable/skrellscoutshuttle,
+/obj/effect/overmap/visitable/ship/landable/skrellscoutshuttle,
 /turf/simulated/floor/tiled/skrell/red,
 /area/ship/skrellscoutshuttle)
 "bM" = (
@@ -2516,12 +2516,6 @@
 	},
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/crew/hallway/d2)
-"AC" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "Bo" = (
 /obj/structure/table/rack/dark,
 /obj/item/weapon/magnetic_ammo/skrell,
@@ -6658,7 +6652,7 @@ aa
 aa
 aa
 aa
-AC
+aa
 aa
 aa
 aa
@@ -8224,7 +8218,7 @@ aa
 aa
 aa
 aa
-AC
+aa
 aa
 aa
 aa
@@ -11431,7 +11425,7 @@ aa
 aa
 aa
 aa
-AC
+aa
 aa
 aa
 aa
