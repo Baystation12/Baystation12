@@ -14,7 +14,7 @@
 				"trade_no_goods"    = "I'm sorry but we only take cash.",
 				"trade_blacklisted" = "Sir that's... highly illegal.",
 				"trade_not_enough"  = "Uhh... that's not enough money for pizza.",
-				"how_much"          = "That pizza will cost you VALUE thalers.",
+				"how_much"          = "That pizza will cost you VALUE CURRENCY.",
 
 				"compliment_deny"   = "That's a bit forward, don't you think?",
 				"compliment_accept" = "Thanks, sir! You're very nice!",
@@ -69,7 +69,7 @@
 				"trade_blacklist"    = "No, that is very odd. Why would you trade that away?",
 				"trade_no_goods"     = "I only accept money transfers.",
 				"trade_not_enough"   = "No, I am sorry, that is not possible. I need to make a living.",
-				"how_much"           = "I give you ITEM, for VALUE thalers. No more, no less.",
+				"how_much"           = "I give you ITEM, for VALUE CURRENCY. No more, no less.",
 
 				"compliment_deny"    = "That was an odd thing to say. You are very odd.",
 				"compliment_accept"  = "Good philosophy, see good in bad, I like.",
@@ -117,7 +117,7 @@
 				"trade_blacklist"    = "I... wow, that's... no, sir. No.",
 				"trade_no_goods"     = "ORIGIN only accepts cash, sir.",
 				"trade_not_enough"   = "That is not enough money, sir.",
-				"how_much"           = "Sir, that'll cost you VALUE thalers. Will that be all?",
+				"how_much"           = "Sir, that'll cost you VALUE CURRENCY. Will that be all?",
 
 				"compliment_deny"    = "Sir, this is a professional environment. Please don't make me get my manager.",
 				"compliment_accept"  = "Thank you, sir!",
@@ -140,7 +140,7 @@
 				"trade_blacklist"    = "We only accept money. Not... that.",
 				"trade_no_goods"     = "Cash for cakes! That's our business!",
 				"trade_not_enough"   = "Our dishes are much more expensive than that, sir.",
-				"how_much"           = "That lovely dish will cost you VALUE thalers.",
+				"how_much"           = "That lovely dish will cost you VALUE CURRENCY.",
 
 				"compliment_deny"    = "Oh wow, how nice of you...",
 				"compliment_accept"  = "You're almost as sweet as my pies!",

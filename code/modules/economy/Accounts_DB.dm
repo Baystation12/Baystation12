@@ -173,7 +173,7 @@
 					text = {"
 						[accounting_letterhead(title)]
 						<u>Holder:</u> [detailed_account_view.owner_name]<br>
-						<u>Balance:</u> T[detailed_account_view.money]<br>
+						<u>Balance:</u> [GLOB.using_map.local_currency_name_short][detailed_account_view.money]<br>
 						<u>Status:</u> [detailed_account_view.suspended ? "Suspended" : "Active"]<br>
 						<u>Transactions:</u> ([detailed_account_view.transaction_log.len])<br>
 						<table>
@@ -228,7 +228,7 @@
 								<tr>
 									<td>#[D.account_number]</td>
 									<td>[D.owner_name]</td>
-									<td>T[D.money]</td>
+									<td>[GLOB.using_map.local_currency_name_short][D.money]</td>
 									<td>[D.suspended ? "Suspended" : "Active"]</td>
 								</tr>
 						"}
