@@ -37,7 +37,6 @@
 	desc = "A battery full of plasma used to power the energy projector"
 	icon = 'code/modules/halo/overmap/weapons/plasma_cannon.dmi'
 	icon_state = "drained"
-	charge_time = 20
 
 /obj/machinery/overmap_weapon_console/mac/energy_projector
 	name = "Energy Fire Control"
