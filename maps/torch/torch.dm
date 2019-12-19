@@ -4,6 +4,7 @@
 	#include "torch_antagonism.dm"
 	#include "torch_areas.dm"
 	#include "torch_elevator.dm"
+	#include "torch_events.dm"
 	#include "torch_holodecks.dm"
 	#include "torch_lobby.dm"
 	#include "torch_machinery.dm"
