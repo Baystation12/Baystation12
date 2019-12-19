@@ -14035,7 +14035,6 @@
 /area/security/processing)
 "bdz" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1po2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -15498,7 +15497,6 @@
 /area/security/bo)
 "cHm" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1sh_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
@@ -19715,7 +19713,6 @@
 /area/security/oldopscheck)
 "hml" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1so2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -23328,7 +23325,6 @@
 /area/security/opscheck)
 "lom" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1ph_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
@@ -27248,7 +27244,6 @@
 /area/rnd/xenobiology/xenoflora)
 "qbb" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "xenobot_sensor"
 	},
 /turf/simulated/floor/reinforced,
@@ -29247,7 +29242,6 @@
 /area/thruster/d1port)
 "sqb" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "testchamber_sensor"
 	},
 /obj/effect/landmark{

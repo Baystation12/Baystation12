@@ -718,6 +718,7 @@
 #include "code\game\machinery\_machines_base\machine_construction\computer.dm"
 #include "code\game\machinery\_machines_base\machine_construction\default.dm"
 #include "code\game\machinery\_machines_base\machine_construction\frame.dm"
+#include "code\game\machinery\_machines_base\machine_construction\item_chassis.dm"
 #include "code\game\machinery\_machines_base\machine_construction\tcomms.dm"
 #include "code\game\machinery\_machines_base\stock_parts\_stock_parts.dm"
 #include "code\game\machinery\_machines_base\stock_parts\building_material.dm"

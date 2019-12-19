@@ -2620,8 +2620,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/air_sensor{
-	frequency = 1443;
+/obj/machinery/air_sensor/dist{
 	id_tag = "d_air_sensor"
 	},
 /turf/simulated/floor/reinforced/airmix,
@@ -2733,7 +2732,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_o2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -2835,7 +2833,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_n2_sensor"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
