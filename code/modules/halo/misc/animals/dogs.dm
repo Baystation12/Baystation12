@@ -41,4 +41,16 @@
 
 	speak = list("Bark!","Arf!","Bork!")
 
+/mob/living/simple_animal/dog/odst
+	name = "\improper ODST Dog"
+	desc = "This is an ODST Dog. Commonly referred to as ODSD, which stands for Orbital Drop Shock Dog. Helljumping has never been so badass until the squad got the opportunity to bring a pack of dogs for the trip."
+	icon_state = "odst_gshep"
+	icon_living = "odst_gshep"
+	icon_dead = "odst_gshep_d"
+	faction = "UNSC"
+	pass_flags = PASSTABLE
+	mob_size = MOB_MEDIUM
+
+	speak = list("Bark!","Arf!","Bork!")
+
 //Thanks to Fingerspitzengefühl#9389 on discord for the sprites.
