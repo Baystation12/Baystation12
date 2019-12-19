@@ -24,8 +24,8 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 4
-	brute_mod = 1.2
-	slowdown = -0.3
+	brute_mod = 1.3
+	slowdown = 0
 	gluttonous = GLUT_ANYTHING
 	pixel_offset_x = -1
 	default_faction = "Covenant"
