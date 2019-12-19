@@ -261,9 +261,8 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aM" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 8;
-	frequency = 1379;
 	id_tag = "unishi_vent"
 	},
 /turf/simulated/floor,
@@ -514,7 +513,7 @@
 "bt" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 1;
-	frequency = 2001;
+	frequency = 1438;
 	icon_state = "map_injector";
 	id = "unishi_fuel_in";
 	use_power = 1
@@ -636,7 +635,7 @@
 "bG" = (
 /obj/machinery/computer/air_control{
 	dir = 4;
-	frequency = 2001;
+	frequency = 1438;
 	input_tag = "unishi_fuel_in";
 	name = "Fuel Supply Control";
 	output_tag = "unishi_fuel_out";
@@ -690,7 +689,6 @@
 	dir = 4;
 	external_pressure_bound = 100;
 	external_pressure_bound_default = 0;
-	frequency = 2001;
 	icon_state = "map_vent_in";
 	id_tag = "unishi_fuel_out";
 	initialize_directions = 1;

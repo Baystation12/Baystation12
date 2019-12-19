@@ -2422,9 +2422,8 @@
 /turf/simulated/floor/reinforced,
 /area/icarus/vessel)
 "hH" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	frequency = 1331;
 	id_tag = "vox_west_vent"
 	},
 /turf/simulated/floor/reinforced,

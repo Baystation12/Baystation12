@@ -2745,9 +2745,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "fc" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	frequency = 1331;
 	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor{
@@ -2769,9 +2768,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fe" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	frequency = 1331;
 	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
@@ -2885,9 +2883,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
 "ft" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	frequency = 1331;
 	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/light{
@@ -2905,9 +2902,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fw" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	frequency = 1331;
 	id_tag = "rescue_shuttle_pump"
 	},
 /obj/machinery/light{

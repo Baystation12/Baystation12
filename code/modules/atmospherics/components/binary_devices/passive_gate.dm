@@ -144,8 +144,8 @@
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
 
-	if("power" in signal.data)
-		unlocked = text2num(signal.data["power"])
+	if("set_power" in signal.data)
+		unlocked = text2num(signal.data["set_power"])
 
 	if("power_toggle" in signal.data)
 		unlocked = !unlocked

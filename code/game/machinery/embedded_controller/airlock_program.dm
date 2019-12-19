@@ -334,11 +334,12 @@
 	signal.data = list(
 		"tag" = tag,
 		"sigtype" = "command",
-		"power" = power,
-		"direction" = direction,
-		"set_external_pressure" = pressure
+		"set_power" = power,
+		"set_direction" = direction ? "release" : "siphon",
+		"set_external_pressure" = pressure,
+		"status" = TRUE
 	)
-	post_signal(signal)
+	post_signal(signal, RADIO_FROM_AIRALARM)
 
 //this is called to set the appropriate door state at the end of a cycling process, or for the exterior buttons
 /datum/computer/file/embedded_program/airlock/proc/cycleDoors(var/target)

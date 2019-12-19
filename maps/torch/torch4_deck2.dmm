@@ -379,9 +379,8 @@
 /obj/machinery/oxygen_pump{
 	pixel_x = -32
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 2;
-	frequency = 1379;
 	id_tag = "solar_starboard_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -1329,9 +1328,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "cJ" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 2;
-	frequency = 1379;
 	id_tag = "auxdock_pump"
 	},
 /obj/machinery/airlock_sensor{
@@ -3197,9 +3195,8 @@
 	dir = 1
 	},
 /obj/structure/bed/chair/shuttle,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "escape_pod_11_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -3505,9 +3502,8 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "escape_pod_10_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -3828,9 +3824,8 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "escape_pod_11_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -3852,9 +3847,8 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "escape_pod_11_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -8818,11 +8812,10 @@
 /turf/simulated/floor/plating,
 /area/engineering/atmos)
 "uE" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "co2_out";
 	initialize_directions = 1;
@@ -9334,9 +9327,8 @@
 	dir = 1
 	},
 /obj/structure/bed/chair/shuttle,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "escape_pod_10_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -9350,9 +9342,8 @@
 /area/shuttle/escape_pod10/station)
 "wk" = (
 /obj/structure/bed/chair/shuttle,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "escape_pod_10_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -9924,9 +9915,8 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "escape_pod_10_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -10392,11 +10382,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "zx" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "n2o_out";
 	initialize_directions = 1;
@@ -12157,9 +12146,8 @@
 	tag_exterior_door = "solar_port_outer";
 	tag_interior_door = "solar_port_inner"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 1;
-	frequency = 1379;
 	id_tag = "solar_port_pump"
 	},
 /obj/machinery/airlock_sensor{
@@ -12281,11 +12269,10 @@
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/wastetank)
 "Eu" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "waste_out";
 	initialize_directions = 1;
@@ -12567,11 +12554,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "Fb" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 4;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "o2_out";
 	initialize_directions = 1;
@@ -12769,11 +12755,10 @@
 /turf/simulated/floor/plating,
 /area/engineering/fuelbay)
 "Ft" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 4;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "n2_out";
 	initialize_directions = 1;
@@ -15763,11 +15748,10 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck)
 "Pn" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "h2_out";
 	initialize_directions = 1;
@@ -16055,11 +16039,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/engine_room)
 "Qo" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "fuel_out";
 	initialize_directions = 1;
@@ -17884,9 +17867,8 @@
 /area/hallway/primary/seconddeck)
 "WC" = (
 /obj/structure/bed/chair/shuttle,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "escape_pod_11_pump"
 	},
 /turf/simulated/floor/tiled/monotile,
@@ -18650,7 +18632,6 @@
 	dir = 8;
 	external_pressure_bound = 100;
 	external_pressure_bound_default = 0;
-	frequency = 1438;
 	icon_state = "map_vent_in";
 	id_tag = "cooling_out";
 	initialize_directions = 1;

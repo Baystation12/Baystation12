@@ -3880,11 +3880,10 @@
 /area/engineering/hardstorage)
 "hI" = (
 /obj/structure/lattice,
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 2;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3ph_out";
 	initialize_directions = 1;
@@ -4820,7 +4819,7 @@
 	pixel_x = 28
 	},
 /obj/machinery/alarm/warm{
-	alarm_frequency = 1438;
+	alarm_frequency = 1439;
 	pixel_y = 24
 	},
 /obj/item/weapon/stool/wood,
@@ -5319,8 +5318,7 @@
 /area/crew_quarters/head/sauna)
 "kg" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	frequency = 1438
+	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
@@ -10281,9 +10279,8 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/thirddeck/aftstarboard)
 "vf" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bsa_pump"
 	},
 /obj/machinery/airlock_sensor{
@@ -10320,11 +10317,10 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "vj" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3po2_out";
 	initialize_directions = 1;
@@ -14249,9 +14245,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
 "Gb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/machinery/light{
@@ -16596,11 +16591,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "LH" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3so2_out";
 	initialize_directions = 1;
@@ -17390,9 +17384,8 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "Oh" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -17746,9 +17739,8 @@
 /obj/machinery/oxygen_pump{
 	pixel_y = 32
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -20426,14 +20418,12 @@
 /area/chapel/office)
 "Xb" = (
 /obj/structure/lattice,
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3sh_out";
-	initial_loc = null;
 	initialize_directions = 1;
 	internal_pressure_bound = 2000;
 	internal_pressure_bound_default = 2000;
@@ -20508,9 +20498,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/turret_protected/ai_upload)
 "Xh" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -20859,9 +20848,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Yh" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -21161,9 +21149,8 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,

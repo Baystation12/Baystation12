@@ -1546,8 +1546,7 @@
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "eS" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1379;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -2567,7 +2566,7 @@
 /area/constructionsite/hallway/aft)
 "iy" = (
 /obj/machinery/computer/air_control{
-	frequency = 1443;
+	frequency = 1439;
 	input_tag = "d_air_in";
 	name = "Mixed Air Supply Control";
 	output_tag = "d_air_out";
@@ -2603,8 +2602,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
 	external_pressure_bound = 0;
-	external_pressure_bound_default = 0;
-	frequency = 1443;
+	external_pressure_bound_default = 0
 	icon_state = "map_vent_in";
 	id_tag = "d_air_out";
 	internal_pressure_bound = 2000;
@@ -2652,7 +2650,7 @@
 "iH" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1443;
+	frequency = 1439;
 	icon_state = "map_injector";
 	id = "d_air_in";
 	use_power = 1
@@ -2710,11 +2708,10 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "iP" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d_o2_out";
 	initialize_directions = 1;
@@ -2811,11 +2808,10 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "jd" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d_n2_out";
 	initialize_directions = 1;
@@ -3649,8 +3645,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ob" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1379;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{

@@ -653,7 +653,6 @@ var/list/worths = list(
 					/obj/machinery/atmospherics/tvalve = -150,
 					/obj/machinery/atmospherics/valve = -120,
 					/obj/machinery/atmospherics/binary/circulator = -2500,
-					/obj/machinery/atmospherics/binary/dp_vent_pump = -850,
 					/obj/machinery/atmospherics/binary/passive_gate = -1600,
 					/obj/machinery/atmospherics/pipeturbine = -3000,
 					/obj/machinery/atmospherics/binary/pump = -1900,

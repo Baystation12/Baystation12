@@ -109,13 +109,13 @@
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1289;
+	frequency = 1439;
 	id_tag = "xil_dock_outer";
 	locked = 1
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
-	frequency = 1289;
+	frequency = 1439;
 	master_tag = "xil_dock";
 	pixel_x = -32;
 	pixel_y = 6
@@ -136,7 +136,6 @@
 "ar" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 1289;
 	id_tag = "xil_dock_pump"
 	},
 /turf/simulated/floor/plating,
@@ -154,11 +153,10 @@
 "aw" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
-	frequency = 1289;
 	id_tag = "xil_dock_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1289;
+	frequency = 1439;
 	id_tag = "xil_dock_sensor";
 	pixel_x = 24
 	},
@@ -236,11 +234,10 @@
 /area/ship/skrellscoutship/dock)
 "aH" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1289;
 	id_tag = "xil_dock_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1289;
+	frequency = 1439;
 	id_tag = "xil_dock";
 	pixel_x = -22
 	},
@@ -248,7 +245,6 @@
 /area/ship/skrellscoutship/dock)
 "aI" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1289;
 	id_tag = "xil_dock_pump"
 	},
 /turf/simulated/floor/plating,
@@ -653,7 +649,7 @@
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1289;
+	frequency = 1439;
 	id_tag = "xil_dock_outer";
 	locked = 1
 	},
@@ -710,7 +706,7 @@
 /obj/machinery/light,
 /obj/machinery/access_button{
 	command = "cycle_interior";
-	frequency = 1289;
+	frequency = 1439;
 	master_tag = "xil_dock";
 	pixel_y = 24
 	},
@@ -806,7 +802,7 @@
 "bZ" = (
 /obj/machinery/access_button{
 	command = "cycle_interior";
-	frequency = 1291;
+	frequency = 1439;
 	master_tag = "xil_solar";
 	pixel_x = 24;
 	pixel_y = 0
@@ -890,17 +886,16 @@
 /obj/machinery/light/small,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
-	frequency = 1291;
 	id_tag = "xil_solar_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1291;
+	frequency = 1439;
 	id_tag = "xil_solar_sensor";
 	pixel_x = 0;
 	pixel_y = 24
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1291;
+	frequency = 1439;
 	id_tag = "xil_solar";
 	pixel_y = -24
 	},
@@ -993,7 +988,7 @@
 "cq" = (
 /obj/machinery/access_button{
 	command = "cycle_exterior";
-	frequency = 1291;
+	frequency = 1439;
 	master_tag = "xil_solar";
 	pixel_x = -24;
 	pixel_y = 0
@@ -1056,7 +1051,7 @@
 /area/ship/skrellscoutship/maintenance/power)
 "cx" = (
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1289;
+	frequency = 1439;
 	id_tag = "xil_dock_inner";
 	locked = 1
 	},
@@ -1068,7 +1063,7 @@
 /area/ship/skrellscoutship/dock)
 "cy" = (
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1291;
+	frequency = 1439;
 	id_tag = "xil_solar_inner";
 	locked = 1
 	},
@@ -1191,7 +1186,7 @@
 	id_tag = "xil_airlock"
 	},
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1291;
+	frequency = 1439;
 	id_tag = "xil_solar_outer";
 	locked = 1
 	},
@@ -1377,7 +1372,7 @@
 /area/ship/skrellscoutship/dock/alt)
 "cX" = (
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1289;
+	frequency = 1439;
 	id_tag = "xil_dock_inner";
 	locked = 1
 	},
@@ -1390,7 +1385,7 @@
 "cY" = (
 /obj/machinery/access_button{
 	command = "cycle_interior";
-	frequency = 1290;
+	frequency = 1439;
 	master_tag = "xil_air";
 	pixel_y = -24
 	},
@@ -1424,7 +1419,7 @@
 /area/ship/skrellscoutship/dock)
 "dd" = (
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1290;
+	frequency = 1439;
 	id_tag = "xil_air_inner";
 	locked = 1
 	},
@@ -1436,16 +1431,15 @@
 "df" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
-	frequency = 1290;
 	id_tag = "xil_air_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1290;
+	frequency = 1439;
 	id_tag = "xil_air_sensor";
 	pixel_x = 24
 	},
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
-	frequency = 1290;
+	frequency = 1439;
 	id_tag = "xil_air";
 	pixel_x = -22
 	},
@@ -1505,7 +1499,7 @@
 	name = "Blast Doors"
 	},
 /obj/machinery/door/airlock/external/glass{
-	frequency = 1290;
+	frequency = 1439;
 	id_tag = "xil_air_outer";
 	locked = 1
 	},
@@ -1517,7 +1511,7 @@
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
-	frequency = 1290;
+	frequency = 1439;
 	master_tag = "xil_air";
 	pixel_x = -32;
 	pixel_y = -6
