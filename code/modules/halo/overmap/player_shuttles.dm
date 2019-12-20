@@ -24,29 +24,36 @@
 	to_chat(user,"<span class = 'notice'>Next [ship_type_name] available in [time_until_shuttle] seconds.</span>")
 
 /obj/machinery/shuttle_spawner/proc/spawn_shuttlecraft()
-	if(!ship_to_spawn)
-		log_error("[src] tried to spawn a [ship_type_name] at [map_sectors["[loc.z]"]]'s location, but it doesn't have a ship_to_spawn set!")
-		return
 	var/obj/effect/overmap/om_loc = map_sectors["[loc.z]"]
 	if(isnull(om_loc))
 		log_error("[src] tried to spawn a [ship_type_name] without having an overmap-object assigned to it's z-level. ([loc.z])")
 		return
+	if(!ship_to_spawn)
+		log_error("[src] tried to spawn a [ship_type_name] at [om_loc.name]'s location, but it doesn't have a ship_to_spawn set!")
+		return
 	var/obj/effect/overmap/ship/npc_ship/ship = new ship_to_spawn (om_loc.loc)
-	ship.forceMove(om_loc.loc)
+	ship.loc = null
+	ship.slipspace_to_location(om_loc.loc,0)
 	ship.make_player_controlled()
+
+/obj/machinery/shuttle_spawner/proc/check_requisition_allowed()
+	if(world.time < next_shuttle_at)
+		visible_message("<span class = 'notice'>Undergoing refit, currently unavailable.</span>")
+		return 0
+	return 1
 
 /obj/machinery/shuttle_spawner/ex_act(var/severity)
 	return
 
-/obj/machinery/shuttle_spawner/attack_hand(var/mob/user)
-	if(world.time < next_shuttle_at)
-		to_chat(user,"<span class = 'notice'>[ship_type_name] are undergoing refit, currently unavailable.</span>")
+/obj/machinery/shuttle_spawner/attack_hand(var/mob/living/user)
+	if(!istype(user))
+		return
+	if(!check_requisition_allowed())
 		return
 	user.visible_message("<span class = 'notice'>[user] starts requisitioning a [ship_type_name] from [src]...</span>")
 	if(!do_after(user,SHUTTLE_REQ_DELAY,user))
 		return
-	if(world.time < next_shuttle_at)
-		to_chat(user,"<span class = 'notice'>[ship_type_name] are undergoing refit, currently unavailable.</span>")
+	if(!check_requisition_allowed())
 		return
 	user.visible_message("<span class = 'notice'>[user] requisitions a [ship_type_name] from [src].</span>")
 	visible_message("<span class = 'notice'>[src] announces: \"[ship_type_name] Requisitioned. Connect umbilical for access.\"</span>")
@@ -108,3 +115,76 @@
 
 /obj/machinery/shuttle_spawner/innie
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/innie
+
+/obj/machinery/shuttle_spawner/multi_choice
+	name = "Long Range Requisition Console"
+	desc = "\
+This console identifies and maintains vulnerabilities in sector wide jamming software,\
+allowing periodic long range transmission."
+	ship_type_name = "Ship"
+	var/list/choices = newlist()
+
+/obj/machinery/shuttle_spawner/multi_choice/check_requisition_allowed()
+	if(world.time < next_shuttle_at)
+		visible_message("<span class = 'notice'>Communications Jammed. Attempting Reconnection....</span>")
+		return 0
+	return 1
+
+/obj/machinery/shuttle_spawner/multi_choice/attack_hand(var/mob/living/user)
+	if(!istype(user))
+		return
+	var/list/categories = list()
+	for(var/c in choices)
+		var/datum/spawner_choice/choice = c
+		if(!choice.can_mob_use(user))
+			continue
+		if(choice.choice_category in categories)
+			categories[choice.choice_category] += choice
+		else
+			categories[choice.choice_category] = list(choice)
+	var/chosen_category = input(user,"Choose a category","Category Choice","Cancel") in categories + list("Cancel")
+	if(chosen_category == "Cancel")
+		return
+	var/list/choices_available = categories[chosen_category]
+	var/list/readable_choices = list()
+	for(var/c in choices_available)
+		var/datum/spawner_choice/choice = c
+		readable_choices += choice.choice_name
+	var/choice_chosen = input(user,"Make a ship choice","Ship Choice","Cancel") in readable_choices + list("Cancel")
+	if(choice_chosen == "Cancel")
+		return
+	var/datum/spawner_choice/final = choices_available[readable_choices.Find(choice_chosen)]
+	shuttle_refresh_time = final.cooldown_apply
+	ship_to_spawn = final.spawned_ship
+	. = ..()
+
+/obj/machinery/shuttle_spawner/multi_choice/debug
+	choices = newlist(/datum/spawner_choice/debug1,/datum/spawner_choice/debug2,/datum/spawner_choice/debug3)
+
+/datum/spawner_choice
+	var/choice_name = "Ship"
+	var/choice_category = "Category"
+	var/obj/spawned_ship = null
+	var/cooldown_apply = 0
+
+/datum/spawner_choice/proc/can_mob_use(var/mob/m)
+	return 1
+
+/datum/spawner_choice/debug1
+	choice_name = "Debug1"
+	choice_category = "Category1"
+	spawned_ship = /obj/effect/overmap/ship/npc_ship/combat/unsc
+	cooldown_apply = 10 SECONDS
+
+/datum/spawner_choice/debug2
+	choice_name = "Debug2"
+	choice_category = "Category1"
+	spawned_ship = /obj/effect/overmap/ship/npc_ship/combat/covenant
+	cooldown_apply = 15 SECONDS
+
+/datum/spawner_choice/debug3
+	choice_name = "Debug3"
+	choice_category = "Category2"
+	spawned_ship = /obj/effect/overmap/ship/npc_ship/cargo
+	cooldown_apply = 20 SECONDS
+
