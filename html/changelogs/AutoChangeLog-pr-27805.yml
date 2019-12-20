@@ -1,0 +1,7 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - tweak: "Delay for removing knives from boots was decreased to one second"
+  - tweak: "Using combi-knifes on intent other than help intent will now open their blade"
+  - tweak: "Portable freezers can now fit inside backpacks and have capacity of large box"
+  - tweak: "Combat knifes can now fit inside boots"
