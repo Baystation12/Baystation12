@@ -109,14 +109,6 @@ SUBSYSTEM_DEF(zcopy)
 			WARNING("Turf [T] at [T.x],[T.y],[T.z] was queued, but had no shadower.")
 			continue
 
-		if (T.z_queued > 1)
-			T.z_queued -= 1
-			if (no_mc_tick)
-				CHECK_TICK
-			else if (MC_TICK_CHECK)
-				break
-			continue
-
 		// Figure out how many z-levels down we are.
 		var/depth = 0
 		var/turf/Td = T

@@ -60,6 +60,7 @@
 /turf/proc/cleanup_zmimic()
 	SSzcopy.openspace_turfs -= 1
 	// Don't remove ourselves from the queue, the subsystem will explode. We'll naturally fall out of the queue.
+	z_queued = 0
 
 	QDEL_NULL(shadower)
 
