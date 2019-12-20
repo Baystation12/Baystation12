@@ -90,9 +90,9 @@
 	if (!(status & ORGAN_DISFIGURED))
 		if (brute_dam > 40)
 			if (prob(50))
-				disfigure("brute")
+				disfigure(BRUTE)
 		if (burn_dam > 40)
-			disfigure("burn")
+			disfigure(BURN)
 
 /obj/item/organ/external/head/on_update_icon()
 
