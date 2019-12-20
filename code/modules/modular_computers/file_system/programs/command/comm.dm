@@ -327,7 +327,7 @@ var/last_message_id = 0
 
 /proc/is_relay_online()
 	for(var/obj/machinery/bluespacerelay/M in SSmachines.machinery)
-		if(M.stat == 0)
+		if(M.stat == CONSCIOUS)
 			return 1
 	return 0
 

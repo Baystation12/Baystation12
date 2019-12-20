@@ -29,7 +29,7 @@
 
 /mob/proc/say_understands(var/mob/other,var/datum/language/speaking = null)
 
-	if (src.stat == 2)		//Dead
+	if (src.stat == DEAD)		//Dead
 		return 1
 
 	//Universal speak makes everything understandable, for obvious reasons.
@@ -90,7 +90,7 @@
 //parses the message mode code (e.g. :h, :w) from text, such as that supplied to say.
 //returns the message mode string or null for no message mode.
 //standard mode is the mode returned for the special ';' radio code.
-/mob/proc/parse_message_mode(var/message, var/standard_mode="headset")
+/mob/proc/parse_message_mode(var/message, var/standard_mode=MESSAGE_MODE_HEADSET)
 	if(length(message) >= 1 && copytext(message,1,2) == get_prefix_key(/decl/prefix/radio_main_channel))
 		return standard_mode
 

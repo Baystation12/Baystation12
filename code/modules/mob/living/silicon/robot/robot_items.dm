@@ -312,7 +312,7 @@
 		return
 
 	//n_name = copytext(n_name, 1, 32)
-	if(( get_dist(user,paper) <= 1  && user.stat == 0))
+	if(( get_dist(user,paper) <= 1  && user.stat == CONSCIOUS))
 		paper.SetName("paper[(n_name ? text("- '[n_name]'") : null)]")
 		paper.last_modified_ckey = user.ckey
 	add_fingerprint(user)

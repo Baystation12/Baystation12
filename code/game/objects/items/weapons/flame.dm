@@ -10,7 +10,7 @@
 
 /obj/item/weapon/flame/proc/extinguish(var/mob/user, var/no_message)
 	lit = 0
-	damtype = "brute"
+	damtype = BRUTE
 	STOP_PROCESSING(SSobj, src)
 
 /obj/item/weapon/flame/water_act(var/depth)

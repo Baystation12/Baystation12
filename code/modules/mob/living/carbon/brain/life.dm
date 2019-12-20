@@ -46,7 +46,7 @@
 
 		handle_temperature_damage(HEAD, environment.temperature, environment_heat_capacity*transfer_coefficient)
 
-	if(stat==2)
+	if(stat == DEAD)
 		bodytemperature += 0.1*(environment.temperature - bodytemperature)*environment_heat_capacity/(environment_heat_capacity + 270000)
 
 	//Account for massive pressure differences
@@ -158,7 +158,7 @@
 /mob/living/carbon/brain/handle_regular_hud_updates()
 	update_sight()
 	if (healths)
-		if (stat != 2)
+		if (stat != DEAD)
 			switch(health)
 				if(100 to INFINITY)
 					healths.icon_state = "health0"
@@ -194,7 +194,7 @@
 
 	return 1
 
-	if (stat != 2)
+	if (stat != DEAD)
 		if (machine)
 			if (machine.check_eye(src) < 0)
 				reset_view(null)

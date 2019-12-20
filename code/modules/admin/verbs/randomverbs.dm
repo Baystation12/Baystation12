@@ -541,7 +541,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(!input)
 		return
 	for(var/mob/living/silicon/ai/M in SSmobs.mob_list)
-		if (M.stat == 2)
+		if (M.stat == DEAD)
 			to_chat(usr, "Upload failed. No signal is being detected from the AI.")
 		else if (M.see_in_dark == 0)
 			to_chat(usr, "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power.")

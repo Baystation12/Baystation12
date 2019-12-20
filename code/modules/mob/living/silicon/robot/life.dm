@@ -69,7 +69,7 @@
 /mob/living/silicon/robot/handle_regular_status_updates()
 
 	if(src.camera && !scrambledcodes)
-		if(src.stat == 2 || wires.IsIndexCut(BORG_WIRE_CAMERA))
+		if(src.stat == DEAD || wires.IsIndexCut(BORG_WIRE_CAMERA))
 			src.camera.set_status(0)
 		else
 			src.camera.set_status(1)
@@ -83,7 +83,7 @@
 	if(src.resting)
 		Weaken(5)
 
-	if(health < config.health_threshold_dead && src.stat != 2) //die only once
+	if(health < config.health_threshold_dead && src.stat != DEAD) //die only once
 		death()
 
 	if (src.stat != DEAD) //Alive.
@@ -165,7 +165,7 @@
 				process_med_hud(src,0)
 
 	if (src.healths)
-		if (src.stat != 2)
+		if (src.stat != DEAD)
 			if(istype(src,/mob/living/silicon/robot/drone))
 				switch(health)
 					if(35 to INFINITY)

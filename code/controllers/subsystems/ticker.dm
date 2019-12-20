@@ -401,7 +401,7 @@ Helpers
 	to_world("<br>")
 
 	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
-		if (aiPlayer.stat != 2)
+		if (aiPlayer.stat != DEAD)
 			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")
 
 		else
@@ -424,7 +424,7 @@ Helpers
 			continue
 
 		if (!robo.connected_ai)
-			if (robo.stat != 2)
+			if (robo.stat != DEAD)
 				to_world("<b>[robo.name] (Played by: [robo.key]) survived as an AI-less synthetic! Its laws were:</b>")
 
 			else

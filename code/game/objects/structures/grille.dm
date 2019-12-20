@@ -175,9 +175,9 @@
 		user.do_attack_animation(src)
 		playsound(loc, 'sound/effects/grillehit.ogg', 80, 1)
 		switch(W.damtype)
-			if("fire")
+			if(BURN)
 				take_damage(W.force)
-			if("brute")
+			if(BRUTE)
 				take_damage(W.force * 0.1)
 	..()
 

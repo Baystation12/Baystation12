@@ -185,11 +185,11 @@
 
 	var/damage = 0
 	switch(W.damtype)
-		if("fire")
+		if(BURN)
 			damage = (W.force / fire_resist)
 			if(isWelder(W))
 				playsound(loc, 'sound/items/Welder.ogg', 100, 1)
-		if("brute")
+		if(BRUTE)
 			damage = (W.force / brute_resist)
 
 	take_damage(damage)

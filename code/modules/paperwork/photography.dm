@@ -60,7 +60,7 @@ var/global/photo_count = 0
 /obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
 	if(istype(P, /obj/item/weapon/pen))
 		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 128)
-		if(loc == user && user.stat == 0)
+		if(loc == user && user.stat == CONSCIOUS)
 			scribble = txt
 	..()
 

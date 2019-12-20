@@ -146,7 +146,7 @@ var/global/list/empty_playable_ai_cores = list()
 				if(!B)
 					to_chat(user, "<span class='warning'>Sticking an empty [P] into the frame would sort of defeat the purpose.</span>")
 					return
-				if(B.stat == 2)
+				if(B.stat == DEAD)
 					to_chat(user, "<span class='warning'>Sticking a dead [P] into the frame would sort of defeat the purpose.</span>")
 					return
 

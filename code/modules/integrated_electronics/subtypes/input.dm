@@ -683,7 +683,7 @@
 	power_draw_idle = 5
 	power_draw_per_use = 40
 	cooldown_per_use = 5
-	var/frequency = 1357
+	var/frequency = ENG_FREQ
 	var/code = 30
 	var/datum/radio_frequency/radio_connection
 

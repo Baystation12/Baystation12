@@ -25,7 +25,7 @@
 	for(var/datum/mind/antag in current_antagonists)
 		if(mob_path && !istype(antag.current,mob_path))
 			continue
-		if(antag.current.stat==2)
+		if(antag.current.stat==DEAD)
 			continue
 		return 0
 	return 1

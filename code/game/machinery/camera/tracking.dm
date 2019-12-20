@@ -9,7 +9,7 @@
 	return !(T && T.z in GLOB.using_map.player_levels)
 
 /mob/living/silicon/ai/proc/get_camera_list()
-	if(src.stat == 2)
+	if(src.stat == DEAD)
 		return
 
 	var/list/T = list()
@@ -100,7 +100,7 @@
 	var/list/cameras = list()
 
 /mob/living/silicon/ai/proc/trackable_mobs()
-	if(usr.stat == 2)
+	if(usr.stat == DEAD)
 		return list()
 
 	var/datum/trackable/TB = new()
@@ -131,7 +131,7 @@
 	set name = "Follow With Camera"
 	set desc = "Select who you would like to track."
 
-	if(src.stat == 2)
+	if(src.stat == DEAD)
 		to_chat(src, "You can't follow [target_name] with cameras because you are dead!")
 		return
 	if(!target_name)

@@ -81,7 +81,7 @@ obj/var/contaminated = 0
 	if(vsc.plc.CLOTH_CONTAMINATION) contaminate()
 
 	//Anything else requires them to not be dead.
-	if(stat >= 2)
+	if(stat >= DEAD)
 		return
 
 	//Burn skin if exposed.

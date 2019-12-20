@@ -229,7 +229,7 @@
 
 
 /obj/item/weapon/stool/stone/New(var/newloc)
-	..(newloc,"sandstone")
+	..(newloc,MATERIAL_SANDSTONE)
 
 /turf/simulated/floor/airless/stone
 	name = "temple floor"

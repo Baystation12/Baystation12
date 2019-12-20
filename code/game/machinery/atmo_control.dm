@@ -5,7 +5,7 @@
 
 	name = "Atmospherics Control Console"
 
-	var/frequency = 1441
+	var/frequency = ATMOS_TANK_FREQ
 	var/datum/radio_frequency/radio_connection
 
 	var/pressure_setting = ONE_ATMOSPHERE * 45
@@ -325,5 +325,5 @@ obj/machinery/computer/air_control/Destroy()
 
 /obj/machinery/computer/air_control/supermatter_core
 	icon = 'icons/obj/computer.dmi'
-	frequency = 1438
+	frequency = ATMOS_ENGINE_FREQ
 	out_pressure_mode = 1

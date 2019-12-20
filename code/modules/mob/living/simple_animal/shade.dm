@@ -45,7 +45,7 @@
 	OnDeathInLife()
 
 /mob/living/simple_animal/shade/proc/OnDeathInLife()
-	if(stat == 2)
+	if(stat == DEAD)
 		new /obj/item/weapon/ectoplasm (src.loc)
 		for(var/mob/M in viewers(src, null))
 			if((M.client && !( M.blinded )))

@@ -2,7 +2,7 @@
 	name = T_BOARD("atmosphere monitoring console")
 	build_path = /obj/machinery/computer/air_control
 	var/console_name
-	var/frequency = 1441
+	var/frequency = ATMOS_TANK_FREQ
 	var/sensor_tag
 	var/sensor_name
 	var/list/sensor_information = list()
@@ -10,7 +10,7 @@
 /obj/item/weapon/stock_parts/circuitboard/air_management/supermatter_core
 	name = T_BOARD("core control")
 	build_path = /obj/machinery/computer/air_control/supermatter_core
-	frequency = 1438
+	frequency = ATMOS_ENGINE_FREQ
 	var/input_tag
 	var/output_tag
 

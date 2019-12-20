@@ -302,7 +302,7 @@
 		if ((world.time - time_entered < time_till_despawn) && (occupant.ckey))
 			return
 
-		if(!occupant.client && occupant.stat<2) //Occupant is living and has no client.
+		if(!occupant.client && occupant.stat<DEAD) //Occupant is living and has no client.
 			if(!control_computer)
 				if(!find_control_computer(urgent=1))
 					return
@@ -468,7 +468,7 @@
 	set name = "Eject Pod"
 	set category = "Object"
 	set src in oview(1)
-	if(usr.stat != 0)
+	if(usr.stat != CONSCIOUS)
 		return
 
 	icon_state = base_icon_state
@@ -492,7 +492,7 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(usr.stat != 0 || !check_occupant_allowed(usr))
+	if(usr.stat != CONSCIOUS || !check_occupant_allowed(usr))
 		return
 
 	if(src.occupant)

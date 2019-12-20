@@ -80,7 +80,7 @@
 	set name = "Revive Host"
 	set desc = "Send a jolt of electricity through your host, reviving them."
 
-	if(stat != 2)
+	if(stat != DEAD)
 		to_chat(usr, SPAN_WARNING("Your host is already alive."))
 		return
 

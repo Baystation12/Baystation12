@@ -72,7 +72,7 @@
 		return
 
 	if(occupant)
-		if(occupant.stat != 2)
+		if(occupant.stat != DEAD)
 			process_occupant()
 
 	if(has_air_contents)
@@ -333,7 +333,7 @@
 	set category = "Object"
 	set src in oview(1)
 	if(usr == occupant)//If the user is inside the tube...
-		if (usr.stat == 2)//and he's not dead....
+		if (usr.stat == DEAD)//and he's not dead....
 			return
 		to_chat(usr, "<span class='notice'>Release sequence activated. This will take two minutes.</span>")
 		sleep(1200)
@@ -341,7 +341,7 @@
 			return
 		go_out()//and release him from the eternal prison.
 	else
-		if (usr.stat != 0)
+		if (usr.stat != CONSCIOUS)
 			return
 		go_out()
 	add_fingerprint(usr)
@@ -355,7 +355,7 @@
 		if(M.Victim == usr)
 			to_chat(usr, "You're too busy getting your life sucked out of you.")
 			return
-	if (usr.stat != 0)
+	if (usr.stat != CONSCIOUS)
 		return
 	put_mob(usr)
 	return

@@ -179,7 +179,7 @@ obj/structure/net/Initialize(var/mapload)
 	throwforce = 5.0
 	throw_speed = 5
 	throw_range = 10
-	matter = list("cloth" = 1875, "plasteel" = 350)
+	matter = list(MATERIAL_CLOTH = 1875, MATERIAL_PLASTEEL = 350)
 	max_amount = 30
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")

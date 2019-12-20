@@ -8,7 +8,7 @@
 	var/elevel
 	var/phrase
 	var/code = 13
-	var/frequency = 1443
+	var/frequency = ATMOS_DIST_FREQ
 	var/datum/radio_frequency/radio_connection
 	var/warning_message = "Tampering detected. Tampering detected."
 

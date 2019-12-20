@@ -162,13 +162,13 @@
 
 /mob/living/carbon/human/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
 	switch(message_mode)
-		if("intercom")
+		if(MESSAGE_MODE_INTERCOM)
 			if(!src.restrained())
 				for(var/obj/item/device/radio/intercom/I in view(1))
 					I.talk_into(src, message, null, verb, speaking)
 					I.add_fingerprint(src)
 					used_radios += I
-		if("headset")
+		if(MESSAGE_MODE_HEADSET)
 			if(l_ear && istype(l_ear,/obj/item/device/radio))
 				var/obj/item/device/radio/R = l_ear
 				R.talk_into(src,message,null,verb,speaking)
@@ -177,7 +177,7 @@
 				var/obj/item/device/radio/R = r_ear
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += r_ear
-		if("right ear")
+		if(MESSAGE_MODE_RIGHT_EAR)
 			var/obj/item/device/radio/R
 			var/has_radio = 0
 			if(r_ear && istype(r_ear,/obj/item/device/radio))
@@ -189,7 +189,7 @@
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += R
-		if("left ear")
+		if(MESSAGE_MODE_LEFT_EAR)
 			var/obj/item/device/radio/R
 			var/has_radio = 0
 			if(l_ear && istype(l_ear,/obj/item/device/radio))
@@ -201,7 +201,7 @@
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += R
-		if("whisper") //It's going to get sanitized again immediately, so decode.
+		if(MESSAGE_MODE_WHISPER) //It's going to get sanitized again immediately, so decode.
 			whisper_say(html_decode(message), speaking, alt_name)
 			return 1
 		else

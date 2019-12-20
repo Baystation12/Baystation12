@@ -1,6 +1,6 @@
 /mob/living/silicon/pai/Life()
 
-	if (src.stat == 2)
+	if (src.stat == DEAD)
 		return
 
 	if(src.cable)

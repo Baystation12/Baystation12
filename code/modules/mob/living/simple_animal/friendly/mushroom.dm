@@ -38,7 +38,7 @@
 	set desc = "Spread your spores!"
 	set src = usr
 
-	if(stat == 2)
+	if(stat == DEAD)
 		to_chat(usr, "<span class='danger'>You are dead; it is too late for that.</span>")
 		return
 

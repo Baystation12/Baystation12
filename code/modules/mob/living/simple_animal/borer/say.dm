@@ -6,7 +6,7 @@
 	if(!message)
 		return
 
-	if (stat == 2)
+	if (stat == DEAD)
 		return say_dead(message)
 
 	if (stat)

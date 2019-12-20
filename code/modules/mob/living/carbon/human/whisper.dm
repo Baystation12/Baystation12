@@ -7,7 +7,7 @@
 			to_chat(src, "<span class='warning'>You cannot whisper (muted).</span>")
 			return
 
-	if (src.stat == 2)
+	if (src.stat == DEAD)
 		return src.say_dead(message)
 
 	if (src.stat)

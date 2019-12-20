@@ -163,7 +163,7 @@ var/list/mob_hat_cache = list()
 /mob/living/silicon/robot/drone/on_update_icon()
 
 	overlays.Cut()
-	if(stat == 0)
+	if(stat == CONSCIOUS)
 		if(controlling_ai)
 			overlays += "eyes-[icon_state]-ai"
 		else if(emagged)
@@ -209,7 +209,7 @@ var/list/mob_hat_cache = list()
 
 	else if (istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/modular_computer))
 
-		if(stat == 2)
+		if(stat == DEAD)
 
 			if(!config.allow_drone_spawn || emagged || health < -35) //It's dead, Dave.
 				to_chat(user, "<span class='danger'>The interface is fried, and a distressing burned smell wafts from the robot's interior. You're not rebooting this one.</span>")
@@ -239,7 +239,7 @@ var/list/mob_hat_cache = list()
 	..()
 
 /mob/living/silicon/robot/drone/emag_act(var/remaining_charges, var/mob/user)
-	if(!client || stat == 2)
+	if(!client || stat == DEAD)
 		to_chat(user, "<span class='danger'>There's not much point subverting this heap of junk.</span>")
 		return
 
@@ -312,7 +312,7 @@ var/list/mob_hat_cache = list()
 		to_chat(src, "<span class='warning'>Someone issues a remote law reset order for this unit, but you disregard it.</span>")
 		return
 
-	if(stat != 2)
+	if(stat != DEAD)
 		if(emagged)
 			to_chat(src, "<span class='danger'>You feel something attempting to modify your programming, but your hacked subroutines are unaffected.</span>")
 		else
@@ -326,7 +326,7 @@ var/list/mob_hat_cache = list()
 		to_chat(src, "<span class='warning'>Someone issues a remote kill order for this unit, but you disregard it.</span>")
 		return
 
-	if(stat != 2)
+	if(stat != DEAD)
 		if(emagged)
 			to_chat(src, "<span class='danger'>You feel a system kill order percolate through your tiny brain, but it doesn't seem like a good idea to you.</span>")
 		else

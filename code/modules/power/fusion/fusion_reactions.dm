@@ -100,7 +100,7 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 /decl/fusion_reaction/iron_iron
 	p_react = "iron"
 	s_react = "iron"
-	products = list("silver" = 10, "gold" = 10, "platinum" = 10) // Not realistic but w/e
+	products = list(MATERIAL_SILVER = 10, MATERIAL_GOLD = 10, MATERIAL_PLATINUM = 10) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
 	instability = 2

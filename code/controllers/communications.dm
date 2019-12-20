@@ -251,6 +251,15 @@ GLOBAL_LIST_INIT(all_selectable_radio_filters, list(
 	RADIO_MAGNETS
 ))
 
+//Say message modes
+var/const/MESSAGE_MODE_WHISPER      = "whisper"
+var/const/MESSAGE_MODE_HEADSET      = "headset"
+var/const/MESSAGE_MODE_DEPARTMENT   = "department"
+var/const/MESSAGE_MODE_GENERAL      = "general"
+var/const/MESSAGE_MODE_LEFT_EAR     = "left ear"
+var/const/MESSAGE_MODE_RIGHT_EAR    = "right ear"
+var/const/MESSAGE_MODE_INTERCOM     = "intercom"
+
 var/global/datum/controller/radio/radio_controller
 
 /hook/startup/proc/createRadioController()

@@ -1424,7 +1424,7 @@
 
 	usr.setClickCooldown(20)
 
-	if(usr.stat > 0)
+	if(usr.stat > CONSCIOUS)
 		to_chat(usr, "You are unconcious and cannot do that!")
 		return
 

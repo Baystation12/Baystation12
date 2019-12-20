@@ -157,7 +157,7 @@
 		src.unset_machine()
 		src.reset_view(null)
 		return 0
-	if (stat == 2 || !C.status || !(src.network in C.network)) return 0
+	if (stat == DEAD || !C.status || !(src.network in C.network)) return 0
 
 	// ok, we're alive, camera is good and in our network...
 
@@ -297,7 +297,7 @@
 	else
 		visible_message("<span class='warning'>[user] bonks [src] harmlessly with [W].</span>")
 	spawn(1)
-		if(stat != 2) close_up()
+		if(stat != DEAD) close_up()
 	return
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
