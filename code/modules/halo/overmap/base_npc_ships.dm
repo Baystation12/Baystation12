@@ -131,7 +131,7 @@
 		next_message = message
 
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
-	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
+	if(hull > initial(hull)/4 || is_player_controlled())//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
 	unload_at = world.time + NPC_SHIP_LOSE_DELAY / 2
 	for(var/mob/player in GLOB.player_list)

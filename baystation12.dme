@@ -1666,6 +1666,7 @@
 #include "code\modules\halo\overmap\npc_cargo_crate.dm"
 #include "code\modules\halo\overmap\npc_cargo_ship.dm"
 #include "code\modules\halo\overmap\npc_fleets.dm"
+#include "code\modules\halo\overmap\npc_ship_comms_stations.dm"
 #include "code\modules\halo\overmap\npc_ship_playercontrol.dm"
 #include "code\modules\halo\overmap\npc_ship_requests.dm"
 #include "code\modules\halo\overmap\npc_shipmap_handler.dm"

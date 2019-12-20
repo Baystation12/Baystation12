@@ -101,6 +101,10 @@
 	else
 		return null
 
+/obj/effect/overmap/ship/Move(var/newloc,var/dir)
+	. = ..()
+	break_umbilicals()
+
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
 	if(moving_dir == direction)
 		moving_dir = 0
@@ -191,13 +195,11 @@
 	. = ..()
 	if(moving_dir)
 		accelerate(moving_dir)
-		break_umbilicals()
 		if(!lock_thrust)
 			moving_dir = 0
 			icon_state = initial(icon_state)
 	else if(braking)
 		decelerate()
-		break_umbilicals()
 		if(!lock_thrust)
 			braking = 0
 			icon_state = initial(icon_state)
@@ -217,7 +219,7 @@
 
 /obj/effect/overmap/ship/proc/break_umbilicals()
 	for(var/obj/docking_umbilical/umbi in connectors)
-		if(umbi.current_connected)
+		if(umbi.current_connected && get_dist(umbi.our_ship,umbi.current_connected.our_ship) > 1)
 			umbi.current_connected.umbi_rip()
 			umbi.umbi_rip()
 

@@ -146,7 +146,8 @@ var/list/points_of_interest = list()
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(exit_loc,sound)
+	if(sound)
+		play_jump_sound(exit_loc,sound)
 	send_jump_alert(exit_loc)
 	loc = T
 	walk_to(src,exit_loc,0,1,0)
@@ -165,7 +166,8 @@ var/list/points_of_interest = list()
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(T,sound)
+	if(sound)
+		play_jump_sound(T,sound)
 	//rapidly move into the portal
 	walk_to(src,T,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
@@ -232,7 +234,8 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.overmap_z && GLOB.using_map.use_overmap)
 		build_overmap()
 
-	map_z |= loc.z
+	if(!isnull(loc))
+		map_z |= loc.z
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
 	map_sectors["[z]"] = src
