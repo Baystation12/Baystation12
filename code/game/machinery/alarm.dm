@@ -394,6 +394,7 @@
 		return
 	if(alarm_id == signal.data["alarm_id"] && signal.data["command"] == "shutdown")
 		mode = AALARM_MODE_OFF
+		report_danger_level = FALSE
 		apply_mode()
 		return
 

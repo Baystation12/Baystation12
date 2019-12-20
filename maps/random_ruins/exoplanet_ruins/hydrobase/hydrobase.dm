@@ -8,7 +8,9 @@
 	ruin_tags = RUIN_ALIEN
 	apc_test_exempt_areas = list(
 		/area/map_template/hydrobase = NO_SCRUBBER|NO_VENT|NO_APC,
-		/area/map_template/hydrobase/station = NO_SCRUBBER
+		/area/map_template/hydrobase/station = NO_SCRUBBER,
+		/area/map_template/hydrobase/station/solarlock = NO_SCRUBBER|NO_VENT,
+		/area/map_template/hydrobase/station/dockport = NO_SCRUBBER|NO_VENT
 	)
 
 // Areas //

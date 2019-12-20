@@ -473,6 +473,7 @@
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/tank
 	frequency = ATMOS_TANK_FREQ
+	filter = RADIO_ATMOSIA
 
 /obj/machinery/atmospherics/unary/vent_pump/tank
 	controlled = FALSE
@@ -493,6 +494,7 @@
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/external_air
 	frequency = EXTERNAL_AIR_FREQ
+	filter = RADIO_AIRLOCK
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air
 	controlled = FALSE
@@ -506,6 +508,7 @@
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle
 	frequency = SHUTTLE_AIR_FREQ
+	filter = RADIO_AIRLOCK
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle
 	controlled = FALSE
@@ -514,11 +517,14 @@
 		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle = 1
 	)
 
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux
+	filter = RADIO_TO_AIRALARM
+
 // This is intended for hybrid airlock-room setups, where unlike the above, this one is controlled by the air alarm and attached to the internal atmos system.
 /obj/machinery/atmospherics/unary/vent_pump/shuttle_auxiliary
 	stock_part_presets = list(
 		/decl/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
-		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle = 1
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux = 1
 	)
 
 /decl/stock_part_preset/radio/receiver/vent_pump/airlock
@@ -526,6 +532,7 @@
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock
 	frequency = AIRLOCK_AIR_FREQ
+	filter = RADIO_AIRLOCK
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
 	controlled = FALSE

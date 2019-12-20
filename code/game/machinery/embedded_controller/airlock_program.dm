@@ -327,7 +327,7 @@
 	var/datum/signal/signal = new
 	signal.data["alarm_id"] = tag_air_alarm
 	signal.data["command"] = "shutdown"
-	post_signal(signal)
+	post_signal(signal, RADIO_TO_AIRALARM)
 
 /datum/computer/file/embedded_program/airlock/proc/signalPump(var/tag, var/power, var/direction, var/pressure)
 	var/datum/signal/signal = new

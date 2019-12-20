@@ -722,7 +722,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/engineering)
 "ca" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/shuttle{
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
@@ -838,7 +838,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/habitation)
 "cn" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/shuttle,
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent,
 /obj/machinery/access_button/airlock_interior{
 	master_tag = "ascent_seedship_fore_dock_controller";
 	pixel_x = -4;
@@ -4094,7 +4094,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_port)
 "jH" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/shuttle{
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/ascent,
