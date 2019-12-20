@@ -6,6 +6,8 @@
 		)
 
 /datum/event/psi/balm/apply_psi_effect(var/datum/psi_complexus/psi)
+	if (!..())
+		return
 	var/soothed
 	if(psi.stun > 1)
 		psi.stun--

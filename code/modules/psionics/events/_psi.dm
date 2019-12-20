@@ -21,4 +21,4 @@
 		apply_psi_effect(thing)
 
 /datum/event/psi/proc/apply_psi_effect(var/datum/psi_complexus/psi)
-	return
+	return psi && ishuman(psi.owner)
