@@ -46,18 +46,18 @@
 	)
 
 	attribute_modifications = list(\
-		"red dot sight" = list(0,0.5,0.1),
-		"acog sight" = list(0,0.5,0.1),
-		"suppressor" = list(0.5,0,0.1),
+		"red dot sight" = list(0,0.5,0.005),
+		"acog sight" = list(0,0.5,0.005),
+		"suppressor" = list(0.5,0,0.01),
 		"MA5 stock cheekrest" = list(0,0,0),
 		"MA5 basic stock butt" = list(0,0,0),
 		"MA5 extended stock butt" = list(-0.25,0,0),
 		"vertical grip" = list(-0.2,0.5,0),
-		"underslung shotgun" = list(0.5,0,0.1),
+		"underslung shotgun" = list(0.5,0,0.0.02),
 		"MA5 basic upper" = list(0,0,0),
-		"underslung grenade launcher" = list(0,0,0,0.2),
-		"flashlight attachment" = list(0,0,0.1),
-		"MA5 railed upper" = list(0,0,0.1)
+		"underslung grenade launcher" = list(0,0,0,0.03),
+		"flashlight attachment" = list(0,0,0.01),
+		"MA5 railed upper" = list(0,0,0.005)
 		)
 
 /datum/attachment_profile/BR55
@@ -93,13 +93,13 @@
 		"BR55 barrel attachment" = list(0,0,0),
 		"BR55 scope" = list(0,0,0),
 		"BR55 cheekrest" = list(0,0,0),
-		"SOE underslung shotgun" = list(0.5,0,0.1),
+		"SOE underslung shotgun" = list(0.5,0,0.01),
 		"BR55 hand guard" = list(0,0,0),
 		"vertical grip" = list(-0.2,0.5,0),
 		"BR55 carry handle" = list(0,0,0),
-		"red dot sight" = list(0,0.5,0.1),
-		"acog sight" = list(0,0.5,0.1),
-		"flashlight attachment" = list(0,0,0.1)
+		"red dot sight" = list(0,0.5,0.01),
+		"acog sight" = list(0,0.5,0.01),
+		"flashlight attachment" = list(0,0,0.01)
 		)
 
 /datum/attachment_profile/M395
@@ -143,8 +143,8 @@
 	attribute_modifications = list(\
 		"suppressor" = list(-0.5,0.5,0),
 		"M395 barrel attachment" = list(0,0,0),
-		"red dot sight" = list(0,0.5,0.1),
-		"acog sight" = list(0,0.5,0.1),
+		"red dot sight" = list(0,0.5,0.01),
+		"acog sight" = list(0,0.5,0.01),
 		"M395 scope" = list(0,0,0)
 		)
 
@@ -168,9 +168,9 @@
 	attribute_modifications = list(\
 		"SOE underslung shotgun" = list(0.5,0,0),
 		"vertical grip" = list(-0.2,0.5,0),
-		"red dot sight" = list(0,0.5,0.1),
+		"red dot sight" = list(0,0.5,0.01),
 		"acog sight" = list(0,0.5,0.1),
-		"flashlight attachment" = list(0,0,0.1),
+		"flashlight attachment" = list(0,0,0.01),
 		"suppressor" = list(-0.5,0.5,0)
 		)
        //dispersion,accuracy,slowdown//
