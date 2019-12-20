@@ -130,9 +130,7 @@ allowing periodic long range transmission."
 		return 0
 	return 1
 
-/obj/machinery/shuttle_spawner/multi_choice/attack_hand(var/mob/living/user)
-	if(!istype(user))
-		return
+/obj/machinery/shuttle_spawner/multi_choice/proc/get_spawner_choice(var/mob/user)
 	var/list/categories = list()
 	for(var/c in choices)
 		var/datum/spawner_choice/choice = c
@@ -144,7 +142,7 @@ allowing periodic long range transmission."
 			categories[choice.choice_category] = list(choice)
 	var/chosen_category = input(user,"Choose a category","Category Choice","Cancel") in categories + list("Cancel")
 	if(chosen_category == "Cancel")
-		return
+		return null
 	var/list/choices_available = categories[chosen_category]
 	var/list/readable_choices = list()
 	for(var/c in choices_available)
@@ -152,11 +150,23 @@ allowing periodic long range transmission."
 		readable_choices += choice.choice_name
 	var/choice_chosen = input(user,"Make a ship choice","Ship Choice","Cancel") in readable_choices + list("Cancel")
 	if(choice_chosen == "Cancel")
+		return null
+
+	return choices_available[readable_choices.Find(choice_chosen)]
+
+/obj/machinery/shuttle_spawner/multi_choice/attack_hand(var/mob/living/user)
+	if(!istype(user))
 		return
-	var/datum/spawner_choice/final = choices_available[readable_choices.Find(choice_chosen)]
-	shuttle_refresh_time = final.cooldown_apply
-	ship_to_spawn = final.spawned_ship
-	. = ..()
+	var/deploy_or_check = alert(user,"Check ship description or send spawn request?",,"Deploy","Check Description")
+	var/datum/spawner_choice/final = get_spawner_choice(user)
+	switch(deploy_or_check)
+		if("Check Description")
+			to_chat(user,"[final.choice_name] - [final.choice_category]\n[final.choice_desc]\nCooldown:[final.cooldown_apply/10] seconds.")
+			return
+		if("Deploy")
+			shuttle_refresh_time = final.cooldown_apply
+			ship_to_spawn = final.spawned_ship
+			. = ..()
 
 /obj/machinery/shuttle_spawner/multi_choice/debug
 	choices = newlist(/datum/spawner_choice/debug1,/datum/spawner_choice/debug2,/datum/spawner_choice/debug3)
@@ -164,6 +174,7 @@ allowing periodic long range transmission."
 /datum/spawner_choice
 	var/choice_name = "Ship"
 	var/choice_category = "Category"
+	var/choice_desc = "Description"
 	var/obj/spawned_ship = null
 	var/cooldown_apply = 0
 
@@ -173,18 +184,21 @@ allowing periodic long range transmission."
 /datum/spawner_choice/debug1
 	choice_name = "Debug1"
 	choice_category = "Category1"
+	choice_desc = "Description1"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/combat/unsc
 	cooldown_apply = 10 SECONDS
 
 /datum/spawner_choice/debug2
 	choice_name = "Debug2"
 	choice_category = "Category1"
+	choice_desc = "Description2"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/combat/covenant
 	cooldown_apply = 15 SECONDS
 
 /datum/spawner_choice/debug3
 	choice_name = "Debug3"
 	choice_category = "Category2"
+	choice_desc = "Description3"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/cargo
 	cooldown_apply = 20 SECONDS
 
