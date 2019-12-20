@@ -1,6 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - tweak: "R-UST now has a prompt to tell you when hitting the shutdown button will cause an instant explosion, asking whether you're sure."
-  - maptweak: "R-UST room machinery starts the round anchored."
-  - tweak: "Improves the fuel injector controller UI, with injection rate and toggle all injectors controls."

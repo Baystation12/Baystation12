@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Sleepers will now properly display the amount of a drug in the occupant on the UI."
