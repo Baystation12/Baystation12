@@ -698,7 +698,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='warning'>You need two sheets of metal to continue construction.</span>")
 				return
 
-			else if(istype(I, /obj/item/weapon/wrench))
+			else if(isWrench(I))
 				playsound(loc, 'sound/items/Ratchet.ogg', 75, 1)
 				to_chat(user, "<span class='notice'>You unfasten the external bolts.</span>")
 				anchored = 0
@@ -707,7 +707,7 @@ var/list/turret_icons
 
 
 		if(2)
-			if(istype(I, /obj/item/weapon/wrench))
+			if(isWrench(I))
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You bolt the metal armor into place.</span>")
 				build_step = 3
@@ -748,7 +748,7 @@ var/list/turret_icons
 				qdel(I) //delete the gun :(
 				return
 
-			else if(istype(I, /obj/item/weapon/wrench))
+			else if(isWrench(I))
 				playsound(loc, 'sound/items/Ratchet.ogg', 100, 1)
 				to_chat(user, "<span class='notice'>You remove the turret's metal armor bolts.</span>")
 				build_step = 2
@@ -785,7 +785,7 @@ var/list/turret_icons
 					to_chat(user, "<span class='warning'>You need two sheets of metal to continue construction.</span>")
 				return
 
-			else if(istype(I, /obj/item/weapon/screwdriver))
+			else if(isScrewdriver(I))
 				playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 				build_step = 5
 				to_chat(user, "<span class='notice'>You open the internal access hatch.</span>")

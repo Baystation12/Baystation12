@@ -410,7 +410,7 @@
 
 
 /obj/item/device/electronic_assembly/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/weapon/wrench))
+	if(isWrench(I))
 		if(istype(loc, /turf) && (IC_FLAG_ANCHORABLE & circuit_flags))
 			user.visible_message("\The [user] wrenches \the [src]'s anchoring bolts [anchored ? "back" : "into position"].")
 			playsound(get_turf(user), 'sound/items/Ratchet.ogg',50)
@@ -425,7 +425,7 @@
 			for(var/obj/item/integrated_circuit/input/S in assembly_components)
 				S.attackby_react(I,user,user.a_intent)
 			return ..()
-	else if(istype(I, /obj/item/device/multitool) || istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger))
+	else if(isMultitool(I) || istype(I, /obj/item/device/integrated_electronics/wirer) || istype(I, /obj/item/device/integrated_electronics/debugger))
 		if(opened)
 			interact(user)
 			return TRUE
@@ -458,7 +458,7 @@
 		var/obj/item/device/integrated_electronics/detailer/D = I
 		detail_color = D.detail_color
 		update_icon()
-	else if(istype(I, /obj/item/weapon/screwdriver))
+	else if(isScrewdriver(I))
 		var/hatch_locked = FALSE
 		for(var/obj/item/integrated_circuit/manipulation/hatchlock/H in assembly_components)
 			// If there's more than one hatch lock, only one needs to be enabled for the assembly to be locked

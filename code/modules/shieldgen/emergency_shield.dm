@@ -28,7 +28,7 @@
 		return
 
 /obj/machinery/shield/New()
-	src.set_dir(pick(1,2,3,4))
+	src.set_dir(pick(GLOB.cardinal))
 	..()
 	update_nearby_tiles(need_rebuild=1)
 
@@ -302,7 +302,7 @@
 				to_chat(user, "<span class='notice'>You repair the [src]!</span>")
 				update_icon()
 
-	else if(istype(W, /obj/item/weapon/wrench))
+	else if(isWrench(W))
 		if(locked)
 			to_chat(user, "The bolts are covered, unlocking this would retract the covers.")
 			return

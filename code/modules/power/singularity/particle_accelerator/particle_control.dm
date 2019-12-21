@@ -12,7 +12,7 @@
 	active_power_usage = 70000 //70 kW per unit of strength
 	construction_state = 0
 	active = 0
-	dir = 1
+	dir = NORTH
 	var/strength_upper_limit = 2
 	var/interface_control = 1
 	var/list/obj/structure/particle_accelerator/connected_parts

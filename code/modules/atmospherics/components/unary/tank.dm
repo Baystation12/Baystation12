@@ -10,7 +10,7 @@
 	var/filling // list of gas ratios to use.
 
 	level = 1
-	dir = 2
+	dir = SOUTH
 	initialize_directions = 2
 	density = 1
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL

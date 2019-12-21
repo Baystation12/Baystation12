@@ -640,7 +640,7 @@
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"].")
 		update_icon()
 
-	else if(istype(W, /obj/item/weapon/screwdriver) && opened && cell)	// radio
+	else if(isScrewdriver(W) && opened && cell)	// radio
 		if(silicon_radio)
 			silicon_radio.attackby(W,user)//Push it to the radio to let it handle everything
 		else

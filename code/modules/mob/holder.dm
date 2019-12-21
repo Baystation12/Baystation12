@@ -95,7 +95,7 @@ var/list/holder_mob_icon_cache = list()
 	..()
 
 /obj/item/weapon/holder/proc/sync(var/mob/living/M)
-	dir = 2
+	dir = SOUTH
 	overlays.Cut()
 	icon = M.icon
 	icon_state = M.icon_state

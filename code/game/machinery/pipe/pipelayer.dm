@@ -64,8 +64,8 @@
 
 	if(isScrewdriver(W))
 		if(metal)
-			var/m = round(input(usr,"Please specify the amount of metal to remove","Remove metal",min(round(metal),50)) as num, 1)
-			m = min(m, 50)
+			var/m = round(input(usr,"Please specify the amount of metal to remove","Remove metal",min(round(metal),max_metal)) as num, 1)
+			m = min(m, max_metal)
 			m = min(m, round(metal))
 			m = round(m)
 			if(m)
@@ -114,7 +114,7 @@
 	return new_turf.is_plating()
 
 /obj/machinery/pipelayer/proc/layPipe(var/turf/w_turf,var/M_Dir,var/old_dir)
-	if(!on || !(M_Dir in list(1, 2, 4, 8)) || M_Dir==old_dir)
+	if(!on || !(M_Dir in GLOB.cardinal) || M_Dir==old_dir)
 		return reset()
 	if(!use_metal(0.25))
 		return reset()

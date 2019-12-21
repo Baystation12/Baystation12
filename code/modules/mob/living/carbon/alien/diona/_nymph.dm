@@ -109,7 +109,7 @@
 	for(var/mob/living/carbon/alien/diona/nymph in donor.contents)
 		nymph.dropInto(donor.loc)
 		transfer_languages(donor, nymph, (WHITELISTED|RESTRICTED))
-		nymph.set_dir(pick(NORTH, SOUTH, EAST, WEST))
+		nymph.set_dir(pick(GLOB.cardinal))
 		// Collect any available nymphs
 		if(!nymph.client && nymph.stat != DEAD)
 			available_nymphs += nymph

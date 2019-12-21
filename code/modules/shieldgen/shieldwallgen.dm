@@ -50,7 +50,7 @@
 			user.visible_message("\The [user] turned the shield generator off.", \
 				"You turn off the shield generator.", \
 				"You hear heavy droning fade out.")
-			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
+			for(var/dir in GLOB.cardinal) src.cleanup(dir)
 		else
 			src.active = 1
 			update_icon()
@@ -150,7 +150,7 @@
 				"You hear heavy droning fade out")
 			src.active = 0
 			update_icon()
-			for(var/dir in list(1,2,4,8)) src.cleanup(dir)
+			for(var/dir in GLOB.cardinal) src.cleanup(dir)
 
 /obj/machinery/shieldwallgen/proc/setup_field(var/NSEW = 0)
 	var/turf/T = get_turf(src)

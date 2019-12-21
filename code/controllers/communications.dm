@@ -134,6 +134,7 @@ var/const/ATMOS_DIST_FREQ   = 1443 // Alternative atmos frequency.
 var/const/BUTTON_FREQ       = 1301 // Used by generic buttons controlling stuff
 var/const/BLAST_DOORS_FREQ  = 1303 // Used by blast doors, buttons controlling them, and mass drivers.
 var/const/AIRLOCK_FREQ      = 1305 // Used by airlocks and buttons controlling them.
+var/const/AIRLOCK_CTRL_FREQ = 1379 // Used by airlocks controllers, airlocks they operate, and their sensors
 
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,

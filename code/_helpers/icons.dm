@@ -454,13 +454,13 @@ proc/RGBtoHSV(rgb)
 		var/dir
 		var/mid
 		if(hi == r)
-			if(lo == b) {hue=0; dir=1; mid=g}
+			if(lo == b) {hue=0; dir=NORTH; mid=g}
 			else {hue=1535; dir=-1; mid=b}
 		else if(hi == g)
-			if(lo == r) {hue=512; dir=1; mid=b}
+			if(lo == r) {hue=512; dir=NORTH; mid=b}
 			else {hue=511; dir=-1; mid=r}
 		else if(hi == b)
-			if(lo == g) {hue=1024; dir=1; mid=r}
+			if(lo == g) {hue=1024; dir=NORTH; mid=r}
 			else {hue=1023; dir=-1; mid=g}
 		hue += dir * round((mid-lo) * 255 / (hi-lo), 1)
 

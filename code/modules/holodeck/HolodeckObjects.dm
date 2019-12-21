@@ -224,7 +224,7 @@
 	..()
 
 /obj/structure/bed/chair/holochair/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/wrench))
+	if(isWrench(W))
 		to_chat(user, ("<span class='notice'>It's a holochair, you can't dismantle it!</span>"))
 	return
 
@@ -340,7 +340,7 @@
 	anchored = 1
 	layer = TABLE_LAYER
 	throwpass = 1
-	dir = 4
+	dir = EAST
 
 /obj/structure/holonet/end
 	icon_state = "volleynet_end"

@@ -150,7 +150,7 @@
 	power_channel = ENVIRON
 
 	var/master_tag
-	var/frequency = 1379
+	var/frequency = AIRLOCK_CTRL_FREQ
 	var/command = "cycle"
 
 	var/datum/radio_frequency/radio_connection
@@ -292,9 +292,9 @@
 	return ..()
 
 /obj/machinery/access_button/airlock_interior
-	frequency = 1379
+	frequency = AIRLOCK_CTRL_FREQ
 	command = "cycle_interior"
 
 /obj/machinery/access_button/airlock_exterior
-	frequency = 1379
+	frequency = AIRLOCK_CTRL_FREQ
 	command = "cycle_exterior"

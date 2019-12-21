@@ -60,7 +60,7 @@
 	// You need a multitool to use this, or be silicon
 	if(!issilicon(user))
 		// istype returns false if the value is null
-		if(!istype(user.get_active_hand(), /obj/item/device/multitool))
+		if(!isMultitool(user.get_active_hand()))
 			return STATUS_CLOSE
 	return ..()
 

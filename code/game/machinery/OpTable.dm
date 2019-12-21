@@ -19,7 +19,7 @@
 
 /obj/machinery/optable/Initialize()
 	. = ..()
-	for(dir in list(NORTH,EAST,SOUTH,WEST))
+	for(dir in GLOB.cardinal)
 		computer = locate(/obj/machinery/computer/operating, get_step(src, dir))
 		if (computer)
 			computer.table = src

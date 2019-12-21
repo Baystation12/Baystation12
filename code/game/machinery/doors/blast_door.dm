@@ -26,7 +26,7 @@
 	var/close_sound = 'sound/machines/blastdoor_close.ogg'
 
 	closed_layer = ABOVE_WINDOW_LAYER
-	dir = 1
+	dir = NORTH
 	explosion_resistance = 25
 
 	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,

@@ -199,7 +199,7 @@
 	name = "teleporter hub"
 	desc = "The teleporter hub handles all of the impossibly complex busywork required in instant matter transmission."
 	icon_state = "tele0"
-	dir = 4
+	dir = EAST
 	idle_power_usage = 10
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
@@ -230,7 +230,7 @@
 	name = "projector"
 	desc = "This machine is capable of projecting a miniature wormhole leading directly to its provided target."
 	icon_state = "controller"
-	dir = 4
+	dir = EAST
 	var/engaged = 0
 	idle_power_usage = 10
 	active_power_usage = 2000
