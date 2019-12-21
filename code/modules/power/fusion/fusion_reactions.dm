@@ -98,8 +98,8 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	products = list("silicon"= 1)
 
 /decl/fusion_reaction/iron_iron
-	p_react = "iron"
-	s_react = "iron"
+	p_react = MATERIAL_IRON
+	s_react = MATERIAL_IRON
 	products = list(MATERIAL_SILVER = 10, MATERIAL_GOLD = 10, MATERIAL_PLATINUM = 10) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
@@ -112,12 +112,12 @@ proc/get_fusion_reaction(var/p_react, var/s_react, var/m_energy)
 	energy_consumption = 10
 	energy_production = 0
 	instability = 5
-	products = list("mhydrogen" = 1)
+	products = list(MATERIAL_HYDROGEN = 1)
 	minimum_reaction_temperature = 8000
 
 // VERY UNIDEAL REACTIONS.
 /decl/fusion_reaction/phoron_supermatter
-	p_react = "supermatter"
+	p_react = MATERIAL_SUPERMATTER
 	s_react = GAS_PHORON
 	energy_consumption = 0
 	energy_production = 5
