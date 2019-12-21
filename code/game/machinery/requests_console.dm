@@ -190,27 +190,6 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 
 					//err... hacking code, which has no reason for existing... but anyway... it was once supposed to unlock priority 3 messanging on that console (EXTREME priority...), but the code for that was removed.
 /obj/machinery/requests_console/attackby(var/obj/item/weapon/O as obj, var/mob/user as mob)
-	/*
-	if (isCrowbar(O))
-		if(open)
-			open = 0
-			icon_state="req_comp0"
-		else
-			open = 1
-			if(hackState == 0)
-				icon_state="req_comp_open"
-			else if(hackState == 1)
-				icon_state="req_comp_rewired"
-	if (isScrewdriver(O))
-		if(open)
-			if(hackState == 0)
-				hackState = 1
-				icon_state="req_comp_rewired"
-			else if(hackState == 1)
-				hackState = 0
-				icon_state="req_comp_open"
-		else
-			to_chat(user, "You can't do much with that.") */
 	if (istype(O, /obj/item/weapon/card/id))
 		if(inoperable(MAINT)) return
 		if(screen == RCS_MESSAUTH)
