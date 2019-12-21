@@ -23,6 +23,7 @@
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
 	#include "datums/uniforms_fleet.dm"
+	#include "datums/game_modes/torch_traitor.dm"
 	#include "datums/game_modes/torch_revolution.dm"
 	#include "datums/game_modes/torch_meteor.dm"
 	#include "datums/reports/command.dm"
