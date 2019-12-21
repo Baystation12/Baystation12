@@ -103,24 +103,35 @@
 		var/mob/living/carbon/human/H = occupant
 		var/repaired_organ
 
-		// Replace limbs for crystalline species.
-		if((H.species.name == SPECIES_ADHERENT || H.species.name == SPECIES_GOLEM) && prob(10))
-			for(var/limb_type in H.species.has_limbs)
-				var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-				if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
-					E.removed()
-					qdel(E)
-					E = null
-				if(!E)
-					var/list/organ_data = H.species.has_limbs[limb_type]
-					var/limb_path = organ_data["path"]
-					var/obj/item/organ/O = new limb_path(H)
-					organ_data["descriptor"] = O.name
-					H.species.post_organ_rejuvenate(O, H)
-					to_chat(occupant, "<span class='notice'>You feel your [O.name] reform in the crystal bath.</span>")
-					H.update_body()
-					repaired_organ = TRUE
-					break
+		// For crystalline species only
+		if(H.species.name == SPECIES_ADHERENT || H.species.name == SPECIES_GOLEM)
+			// Replace limbs
+			if(prob(10))
+				for(var/limb_type in H.species.has_limbs)
+					var/obj/item/organ/external/E = H.organs_by_name[limb_type]
+					if(E && !E.is_usable() && !(E.limb_flags & ORGAN_FLAG_HEALS_OVERKILL))
+						E.removed()
+						qdel(E)
+						E = null
+					if(!E)
+						var/list/organ_data = H.species.has_limbs[limb_type]
+						var/limb_path = organ_data["path"]
+						var/obj/item/organ/O = new limb_path(H)
+						organ_data["descriptor"] = O.name
+						H.species.post_organ_rejuvenate(O, H)
+						to_chat(occupant, "<span class='notice'>You feel your [O.name] reform in the crystal bath.</span>")
+						H.update_body()
+						repaired_organ = TRUE
+						break
+
+			// Cure all mutations, just like Ryetalyn
+			if((H.mutations.len > 0 || H.disabilities || H.sdisabilities) && prob(3))
+				H.disabilities = 0
+				H.sdisabilities = 0
+				if(H.mutations.len > 0)
+					H.dna.ResetUI()
+					H.dna.ResetSE()
+					domutcheck(H, null, MUTCHK_FORCED)
 
 		// Repair crystalline internal organs.
 		if(prob(10))
@@ -143,9 +154,9 @@
 							qdel(implanted_object)
 					if(E.brute_dam || E.burn_dam)
 						E.heal_damage(rand(3,5), rand(3,5), robo_repair = 1)
-						if(prob(25))
-							to_chat(H, "<span class='notice'>The mineral-rich bath mends your [E.name].</span>")
 						if(!BP_IS_CRYSTAL(E) && !BP_IS_BRITTLE(E))
 							E.status |= ORGAN_BRITTLE
-							to_chat(H, "<span class='warning'>It feels a bit brittle, though...</span>")
+							to_chat(H, "<span class='warning'>The mineral-rich bath mends your [E.name]. It feels a bit brittle, though...</span>")
+						else if(prob(25))
+							to_chat(H, "<span class='notice'>The mineral-rich bath mends your [E.name].</span>")
 						break
