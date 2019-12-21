@@ -125,9 +125,7 @@ SUBSYSTEM_DEF(zcopy)
 		// Handle space parallax.
 		if (T.below.z_eventually_space)
 			T.z_eventually_space = TRUE
-
-			if (istype(T.below, /turf/space))
-				t_target = SPACE_PLANE
+			t_target = SPACE_PLANE
 
 		if (!(T.z_flags & ZM_MIMIC_OVERWRITE))
 			// Some openturfs have icons, so we can't overwrite their appearance.
