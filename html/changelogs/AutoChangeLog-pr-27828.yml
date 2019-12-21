@@ -1,6 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "During the metor rounds, evacuation jump will be called automatically after announcement that rocks are coming. It will take 30ish minutes to arrive"
-  - tweak: "Since there's less time and Torch is /very/ sturdy (thicc hull and PD), initial intensity is bumped a bit and escalation is going faster, so will hit max intensity at around 30 minutes mark."
-  - tweak: "After the jump mode will check for some important things and will print red/green text about them:  helm console (need to have at least one and powered), thrusters (ditto), bluespace drive (the room must be powered)."
