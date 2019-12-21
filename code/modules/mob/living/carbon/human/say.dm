@@ -177,7 +177,7 @@
 				var/obj/item/device/radio/R = r_ear
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += r_ear
-		if(MESSAGE_MODE_RIGHT_EAR)
+		if(MESSAGE_MODE_RIGHT)
 			var/obj/item/device/radio/R
 			var/has_radio = 0
 			if(r_ear && istype(r_ear,/obj/item/device/radio))
@@ -189,7 +189,7 @@
 			if(has_radio)
 				R.talk_into(src,message,null,verb,speaking)
 				used_radios += R
-		if(MESSAGE_MODE_LEFT_EAR)
+		if(MESSAGE_MODE_LEFT)
 			var/obj/item/device/radio/R
 			var/has_radio = 0
 			if(l_ear && istype(l_ear,/obj/item/device/radio))

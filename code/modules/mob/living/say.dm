@@ -1,6 +1,6 @@
 var/list/department_radio_keys = list(
-	  ":r" = MESSAGE_MODE_RIGHT_EAR,	".r" = MESSAGE_MODE_RIGHT_EAR,
-	  ":l" = MESSAGE_MODE_LEFT_EAR,		".l" = MESSAGE_MODE_LEFT_EAR,
+	  ":r" = MESSAGE_MODE_RIGHT,		".r" = MESSAGE_MODE_RIGHT,
+	  ":l" = MESSAGE_MODE_LEFT,			".l" = MESSAGE_MODE_LEFT,
 	  ":i" = MESSAGE_MODE_INTERCOM,		".i" = MESSAGE_MODE_INTERCOM,
 	  ":h" = MESSAGE_MODE_DEPARTMENT,	".h" = MESSAGE_MODE_DEPARTMENT,
 	  ":+" = "special",					".+" = "special", //activate radio-specific special functions
@@ -19,8 +19,8 @@ var/list/department_radio_keys = list(
 	  ":y" = "Exploration",				".y" = "Exploration",
 	  ":k" = "Recon",					".k" = "Recon",	//Skrell Recon ship
 
-	  ":R" = MESSAGE_MODE_RIGHT_EAR,	".R" = MESSAGE_MODE_RIGHT_EAR,
-	  ":L" = MESSAGE_MODE_LEFT_EAR,		".L" = MESSAGE_MODE_LEFT_EAR,
+	  ":R" = MESSAGE_MODE_RIGHT,		".R" = MESSAGE_MODE_RIGHT,
+	  ":L" = MESSAGE_MODE_LEFT,			".L" = MESSAGE_MODE_LEFT,
 	  ":I" = MESSAGE_MODE_INTERCOM,		".I" = MESSAGE_MODE_INTERCOM,
 	  ":H" = MESSAGE_MODE_DEPARTMENT,	".H" = MESSAGE_MODE_DEPARTMENT,
 	  ":C" = "Command",					".C" = "Command",
@@ -39,8 +39,8 @@ var/list/department_radio_keys = list(
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = MESSAGE_MODE_RIGHT_EAR,	".ê" = MESSAGE_MODE_RIGHT_EAR,
-	  ":ä" = MESSAGE_MODE_LEFT_EAR,		".ä" = MESSAGE_MODE_LEFT_EAR,
+	  ":ê" = MESSAGE_MODE_RIGHT,		".ê" = MESSAGE_MODE_RIGHT,
+	  ":ä" = MESSAGE_MODE_LEFT,			".ä" = MESSAGE_MODE_LEFT,
 	  ":ø" = MESSAGE_MODE_INTERCOM,		".ø" = MESSAGE_MODE_INTERCOM,
 	  ":ð" = MESSAGE_MODE_DEPARTMENT,	".ð" = MESSAGE_MODE_DEPARTMENT,
 	  ":ñ" = "Command",					".ñ" = "Command",
