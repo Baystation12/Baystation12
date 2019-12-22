@@ -91,10 +91,8 @@
 		/obj/item/weapon/reagent_containers/food/snacks/monkeycube,
 		/obj/item/weapon/stock_parts/computer,
 		/obj/item/device/transfer_valve,
-		/obj/item/device/assembly/signaler,
-		/obj/item/device/assembly/timer,
-		/obj/item/device/assembly/igniter,
-		/obj/item/device/assembly/infra,
+		/obj/item/device/assembly,
+		/obj/item/device/assembly_holder,
 		/obj/item/weapon/tank
 		)
 
