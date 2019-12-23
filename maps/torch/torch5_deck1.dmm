@@ -3424,6 +3424,14 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
+/obj/item/weapon/material/urn,
+/obj/item/weapon/material/urn,
+/obj/item/weapon/material/urn,
+/obj/structure/closet/walllocker{
+	name = "Crematorium Equipment";
+	pixel_x = 0;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/dark,
 /area/chapel/crematorium)
 "ajD" = (
@@ -14587,13 +14595,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/security/locker)
-"cpC" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/subacute)
 "cqb" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/table/rack,
@@ -14708,10 +14709,6 @@
 	dir = 9
 	},
 /obj/structure/table/glass,
-/obj/machinery/light_switch{
-	pixel_x = -22;
-	pixel_y = 0
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
@@ -14779,6 +14776,9 @@
 	name = "Medical Reception"
 	},
 /obj/effect/catwalk_plated/white,
+/obj/machinery/light/spot{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "czN" = (
@@ -14899,9 +14899,6 @@
 /obj/effect/floor_decal/corner/pink{
 	dir = 10
 	},
-/obj/machinery/light/spot{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "cEg" = (
@@ -14996,10 +14993,11 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/firstdeck/centralstarboard)
 "cLm" = (
+/obj/machinery/door/firedoor,
 /obj/machinery/smartfridge/secure/medbay{
+	dir = 8;
 	req_access = list(list("ACCESS_CHEMISTRY","ACCESS_MEDICAL_EQUIP"))
 	},
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "cNb" = (
@@ -15136,9 +15134,7 @@
 /obj/effect/floor_decal/corner/green{
 	dir = 6
 	},
-/obj/structure/closet/secure_closet/personal/patient{
-	anchored = 1
-	},
+/obj/structure/table/glass,
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
 "cXj" = (
@@ -16471,6 +16467,10 @@
 /obj/item/weapon/storage/firstaid/adv,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/item/weapon/reagent_containers/spray/cleaner/drone,
+/obj/machinery/light_switch{
+	pixel_x = 22;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eQK" = (
@@ -16600,6 +16600,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = -8
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
@@ -16852,19 +16856,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
-"fpV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/subacute)
 "fqI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/camera/network/medbay{
 	c_tag = "Infirmary - Emergency Treatment Center Aft";
 	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden,
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "frA" = (
@@ -17849,12 +17846,15 @@
 /obj/item/weapon/reagent_containers/syringe/inaprovaline,
 /turf/simulated/wall/prepainted,
 /area/medical/sleeper)
+"gLf" = (
+/obj/machinery/vending/medical/torch,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/white,
+/area/medical/sleeper)
 "gMb" = (
-/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
-/obj/random/medical/lite,
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "gNb" = (
@@ -19408,7 +19408,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/crew_quarters/safe_room/firstdeck)
 "ixV" = (
-/obj/structure/table/glass,
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 9
 	},
@@ -19419,6 +19418,9 @@
 	pixel_y = 8
 	},
 /obj/item/roller,
+/obj/structure/table/rack{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/infirmary)
 "iyb" = (
@@ -20939,6 +20941,10 @@
 /obj/machinery/camera/network/medbay{
 	c_tag = "Infirmary - Sub Acute Ward";
 	dir = 4
+	},
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/subacute)
@@ -22479,6 +22485,18 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/hardstorage/aux)
+"lQe" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/closet/secure_closet/personal/patient{
+	anchored = 1
+	},
+/obj/effect/floor_decal/corner/green{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/subacute)
 "lRa" = (
 /obj/machinery/light_switch{
 	pixel_x = -6;
@@ -25060,11 +25078,6 @@
 /obj/effect/floor_decal/techfloor,
 /turf/simulated/floor/tiled/steel_grid,
 /area/turbolift/robotics_lift)
-"oMM" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/vending/medical/torch,
-/turf/simulated/floor/tiled/white,
-/area/medical/sleeper)
 "oOb" = (
 /obj/machinery/disposal,
 /obj/effect/floor_decal/corner/red{
@@ -30374,6 +30387,10 @@
 /obj/effect/floor_decal/corner/paleblue,
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/surgery,
+/obj/machinery/light_switch{
+	pixel_x = -22;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "vhs" = (
@@ -52230,7 +52247,7 @@ alD
 qPw
 dOb
 eTb
-anN
+gLf
 gMb
 ixV
 mcb
@@ -52834,7 +52851,7 @@ gKm
 dMb
 mGD
 jdU
-oMM
+rFw
 cLm
 aeo
 fdb
@@ -54042,10 +54059,10 @@ adv
 dwi
 aak
 rap
-cpC
+rap
 rap
 hxX
-fpV
+gSb
 gSb
 fbb
 oVI
@@ -54244,10 +54261,10 @@ adt
 amL
 aRW
 aRW
-amL
+lQe
 aRW
 aRW
-amL
+lQe
 aRW
 feb
 amL
