@@ -106,6 +106,9 @@
 	break_umbilicals()
 
 /obj/effect/overmap/ship/relaymove(mob/user, direction)
+	if(world.time < ticker.mode.ship_lockdown_until)
+		to_chat(user,"<span class = 'notice'>The ship is still finalising deployment preparations!</span>")
+		return
 	if(moving_dir == direction)
 		moving_dir = 0
 	else

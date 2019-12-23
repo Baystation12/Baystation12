@@ -38,7 +38,7 @@
 	if(!linked)
 		linked = map_sectors["[z]"]
 	if(..())
-		if (autopilot && dx && dy)
+		if (world.time >= ticker.mode.ship_lockdown_until && autopilot && dx && dy)
 			var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
 			if(linked.loc == T)
 				if(linked.is_still())

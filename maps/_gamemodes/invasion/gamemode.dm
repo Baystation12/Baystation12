@@ -6,8 +6,7 @@
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	required_players = 15
 	probability = 1
-	var/faction_safe_time = 10 MINUTES
-	var/faction_safe_duration = 10 MINUTES
+	ship_lockdown_duration = 10 MINUTES
 	var/safe_expire_warning = 0
 	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection)
 	var/list/overmap_hide = list()
@@ -97,7 +96,6 @@
 
 /datum/game_mode/outer_colonies/post_setup(var/announce = 0)
 	. = ..()
-	faction_safe_time = world.time + faction_safe_duration
 	for(var/datum/faction/F in factions)
 		for(var/datum/objective/objective in F.objectives_without_targets)
 			if(objective.find_target())
