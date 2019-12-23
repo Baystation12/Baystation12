@@ -5,7 +5,7 @@
 /obj/item/fusion_fuel
 	name = "fusion fuel packet"
 	desc = "A packet of fuel for the starship fusion reactors."
-	icon = 'fusion_drive.dmi'
+	icon = 'code/modules/halo/power/fusion_drive.dmi'
 	icon_state = "fuel_packet"
 	item_state = "box"
 	var/fuel_left = 3600

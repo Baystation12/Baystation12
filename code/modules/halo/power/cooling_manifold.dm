@@ -4,7 +4,7 @@
 /obj/machinery/atmospherics/binary/fusion_cooling
 	name = "coolant manifold"
 	desc = "A cooling device for starship fusion reactors."
-	icon = 'fusion_drive.dmi'
+	icon = 'code/modules/halo/power/fusion_drive.dmi'
 	icon_state = "cooling_manifold"
 
 	density = 1

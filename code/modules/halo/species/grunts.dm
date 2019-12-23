@@ -29,7 +29,7 @@
 	hazard_low_pressure = -1
 	equipment_slowdown_multiplier = 0.75
 	ignore_equipment_threshold = 2
-	slowdown = 1
+	slowdown = 0.25
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/gruntscream_1.ogg',
 	'code/modules/halo/sounds/species_pain_screams/gruntscream_2.ogg',
