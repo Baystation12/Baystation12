@@ -2,7 +2,7 @@
 /area/om_ships
 	name = "Overmap Ship"
 	icon_state = "red"
-	requires_power = 1
+	requires_power = 0
 	has_gravity = 1
 
 //I wanted to make this area dynamically create another instance of itself so APCs didn't overlap.//
