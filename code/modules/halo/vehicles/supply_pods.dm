@@ -22,7 +22,7 @@
 	var/turf/spawnloc = get_step(loc,dir)
 	new pod_to_spawn (spawnloc)
 
-/obj/structure/supply_pod_dispenser
+/obj/structure/supply_pod_dispenser/covenant
 	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
 	icon_state = "covie_console"
 	pod_to_spawn = /obj/vehicles/drop_pod/overmap/supply_pod/covenant
@@ -43,7 +43,7 @@
 
 	pod_range = 4
 	drop_accuracy = 2
-	launch_arm_time = 1 SECOND
+	launch_arm_time = 3 SECOND
 	vehicle_size = 16
 
 /obj/vehicles/drop_pod/supply_pod/update_object_sprites()
