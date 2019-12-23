@@ -1797,6 +1797,7 @@
 #include "code\modules\halo\vehicles\shadow.dm"
 #include "code\modules\halo\vehicles\SOEIV.dm"
 #include "code\modules\halo\vehicles\spirit_dropship.dm"
+#include "code\modules\halo\vehicles\supply_pods.dm"
 #include "code\modules\halo\vehicles\track_bound.dm"
 #include "code\modules\halo\vehicles\vehicle_component_profiles.dm"
 #include "code\modules\halo\vehicles\vehiclebase.dm"
