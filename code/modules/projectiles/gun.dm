@@ -358,7 +358,7 @@
 			process_point_blank(projectile, user, target)
 
 		var/target_zone
-		if(user.zone_sel)
+		if(user && user.zone_sel)
 			target_zone = user.zone_sel.selecting
 		else
 			target_zone = "chest"
@@ -539,7 +539,7 @@
 
 	if(launched)
 		play_fire_sound(user,P)
-		if(get_dist(target,user) <= 1)
+		if(istype(target,/atom/movable) && get_dist(target,user) <= 1)
 			change_elevation(target.elevation-launched.elevation)
 
 	return launched

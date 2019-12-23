@@ -37,7 +37,6 @@
 	desc = "A battery full of plasma used to power the energy projector"
 	icon = 'code/modules/halo/overmap/weapons/plasma_cannon.dmi'
 	icon_state = "drained"
-	charge_time = 20
 
 /obj/machinery/overmap_weapon_console/mac/energy_projector
 	name = "Energy Fire Control"
@@ -113,7 +112,7 @@
 	icon_state = ""
 	alpha = 0
 	damage = 900
-	penetrating = 2
+	penetrating = 3
 	step_delay = 0.0 SECONDS
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj

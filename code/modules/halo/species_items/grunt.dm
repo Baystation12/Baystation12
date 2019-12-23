@@ -208,6 +208,17 @@
 
 	specials = list(/datum/armourspecials/shields/unggoy)
 
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness/honour_guard
+	name = "Unggoy Combat Harness (Honour Guard)"
+	desc = "A combat harness with an inbuilt gas tank."
+	icon = GRUNT_GEAR_ICON
+	icon_override = GRUNT_GEAR_ICON
+	icon_state = "combatharness_honour"
+	item_state = "combatharness_honour"
+	totalshields = 100 //Pretty much just a distinguishing feature.
+
+	specials = list(/datum/armourspecials/shields/unggoy)
+
 /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	name = "Unggoy Rebreather Mask (Spec-Ops)"
 

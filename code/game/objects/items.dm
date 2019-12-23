@@ -80,6 +80,12 @@
 	var/list/sprite_sheets_obj = list()
 	var/dam_desc = ""
 
+	var/parry_slice_objects = 0 //Does this melee weapon, when parried, slice through the object?
+
+	var/lunge_dist = 0
+	var/lunge_delay = 5 SECONDS
+	var/next_leapwhen = 0
+
 /obj/item/New()
 	..()
 	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
@@ -96,6 +102,55 @@
 		m.update_inv_l_hand()
 		src.loc = null
 	return ..()
+
+/obj/item/proc/get_lunge_dist(var/mob/user)
+	return lunge_dist
+
+/obj/item/afterattack(var/atom/target,var/mob/user)
+	. = ..()
+	if(lunge_dist == 0)
+		return
+	if(user.loc.Adjacent(target))
+		return
+	if(world.time < next_leapwhen)
+		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
+		return
+	if(!istype(target,/mob))
+		if(istype(target,/turf))
+			var/turf/targ_turf = target
+			var/list/turf_mobs = list()
+			for(var/mob/m in targ_turf.contents)
+				turf_mobs += m
+			if(turf_mobs.len > 0)
+				target = pick(turf_mobs)
+			else
+				to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
+				return
+		else
+			to_chat(user,"<span class = 'notice'>You can't leap at non-mobs!</span>")
+			return
+	if(!(target in view(7,user.loc)))
+		to_chat(user,"<span class = 'notice'>That's not in your view!</span>")
+		return
+	if(get_dist(user,target) <= get_lunge_dist(user))
+		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
+		var/image/user_image = image(user)
+		user_image.dir = user.dir
+		for(var/i = 0 to get_dist(user,target))
+			var/obj/after_image = new /obj/effect/esword_path
+			if(i == 0)
+				after_image.loc = user.loc
+			else
+				after_image.loc = get_step(user,get_dir(user,target))
+				if(!user.Move(after_image.loc))
+					break
+			after_image.dir = user.dir
+			after_image.overlays += user_image
+			spawn(5)
+				qdel(after_image)
+		if(user.Adjacent(target) && ismob(target))
+			attack(target,user)
+		next_leapwhen = world.time + lunge_delay
 
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
@@ -611,6 +666,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		cannotzoom = 1
 	else if(!zoom && usr.get_active_hand() != src)
 		to_chat(user, "<span class='warning'>You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better.</span>")
+		cannotzoom = 1
+	else if(!zoom && user.machine)
+		to_chat(user,"<span class = 'warning'>You're too distracted to look through the [devicename].</span>")
 		cannotzoom = 1
 
 	if(!zoom && !cannotzoom)

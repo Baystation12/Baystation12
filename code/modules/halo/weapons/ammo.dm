@@ -24,7 +24,7 @@
 	projectile_type = /obj/item/projectile/bullet/a127_saphe
 
 /obj/item/projectile/bullet/a127_saphe
-	damage = 50		//deadly but inaccurate
+	damage = 70		//deadly but inaccurate
 	accuracy = -1
 
 /obj/item/projectile/bullet/a127

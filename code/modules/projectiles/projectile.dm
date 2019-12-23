@@ -226,6 +226,8 @@
 
 /obj/item/projectile/proc/do_supression_aoe(var/location)
 	for(var/mob/living/carbon/human/h in orange(1,location))
+		if(h in permutated)
+			continue
 		h.supression_act(src)
 
 /obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)

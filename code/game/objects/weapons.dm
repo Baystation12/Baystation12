@@ -11,7 +11,9 @@
 
 /obj/item/weapon/handle_shield(var/mob/user, var/damage, var/atom/dam_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	var/obj/item/damage_source = dam_source
-	if(!attacker && isnull(damage_source))
+	if(isnull(damage_source))
+		return 0
+	if(istype(damage_source,/obj/item/projectile) && !parry_projectiles)
 		return 0
 	//Checks done, Parrycode starts here.//
 	if(attacker && istype(attacker,/mob/living) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
@@ -21,18 +23,8 @@
 	var/obj/item/weapon/gun/this_weapon = src
 	if(istype(this_weapon) && this_weapon.one_hand_penalty == -1 && !this_weapon.is_held_twohanded(user))//Ensure big twohanded guns are worse at parrying when not twohanded.
 		parry_chance_divisor = 2
-	if(istype(damage_source,/obj/item/projectile))
-		if(parry_projectiles)
-			parry_chance_divisor = 4
-			force_half_damage = 1
-		else
-			return 0
 	if(!prob((BASE_WEAPON_PARRYCHANCE * (w_class - 1))/parry_chance_divisor)) //Do our base parrychance calculation.
 		return 0
-	if(!damage_source || damage_source == attacker)
-		visible_message("<span class = 'danger'>[user] counters [attacker]'s unarmed attack with their [src.name]!</span>")
-		attack(attacker,user,pick("l_arm","r_arm","chest"))
-		force_half_damage = 1
 	else if (attacker)
 		visible_message("<span class = 'danger'>[user] parries [attacker]'s [damage_source.name] with their [src.name]</span>")
 		playsound(loc, hitsound, 50, 1, -1)
@@ -45,14 +37,17 @@
 	var/mob/living/mob_holding_disintegrated
 
 	//Grab a set of references to the weapon and person being disintegrated.
-	if(istype(src,/obj/item/weapon/melee/energy/elite_sword) && !istype(damage_source,/obj/item/weapon/melee/energy/elite_sword))
+	if(istype(damage_source,/obj/item/projectile))
+		item_to_disintegrate = damage_source
+		mob_holding_disintegrated = null
+	else if(parry_slice_objects && !damage_source.parry_slice_objects && !damage_source.unacidable)
 		item_to_disintegrate = damage_source
 		mob_holding_disintegrated = attacker
-	if(istype(damage_source,/obj/item/weapon/melee/energy/elite_sword) && !istype(src,/obj/item/weapon/melee/energy/elite_sword))
+	else if(damage_source.parry_slice_objects && !unacidable)
 		item_to_disintegrate = src
 		mob_holding_disintegrated = user
 
-	if(isnull(item_to_disintegrate) || isnull(mob_holding_disintegrated) && !force_half_damage)
+	if(isnull(item_to_disintegrate))
 		return 1
 
 	if(!isnull(item_to_disintegrate) && istype(item_to_disintegrate,/obj/item/weapon/gun) && !prob(BASE_PARRY_PLASMA_DESTROY))
@@ -60,21 +55,17 @@
 
 	if(force_half_damage)
 		to_chat(user,"<span class = 'warning'>[src] fails to fully deflect [attacker]'s attack!</span>")
-		var/obj/item/projectile/proj = item_to_disintegrate
 		var/orig_force = item_to_disintegrate.force
-		if(istype(proj))
-			orig_force = proj.damage
-			proj.damage /= 2
-			spawn(2)
-				proj.damage = orig_force
-		else
-			item_to_disintegrate.force /= 2
-			spawn(2)
-				item_to_disintegrate.force = orig_force
+		item_to_disintegrate.force /= 2
+		spawn(2)
+			item_to_disintegrate.force = orig_force
 		return 0
-
-	visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]" : "[attacker]"] cuts through [mob_holding_disintegrated]'s [item_to_disintegrate.name] with their [item_to_disintegrate == damage_source ? "[src.name]" : "[damage_source.name]"], rendering it useless!</span>")
-	mob_holding_disintegrated.drop_from_inventory(item_to_disintegrate)
+	if(damage_source && !mob_holding_disintegrated)
+		visible_message("<span class = 'danger'>[user] slices [damage_source] in half!</span>")
+	else
+		visible_message("<span class = 'danger'>[item_to_disintegrate == damage_source ? "[user]" : "[attacker]"] cuts through [mob_holding_disintegrated]'s [item_to_disintegrate.name] with their [item_to_disintegrate == damage_source ? "[src.name]" : "[damage_source.name]"], rendering it useless!</span>")
+	if(mob_holding_disintegrated)
+		mob_holding_disintegrated.drop_from_inventory(item_to_disintegrate)
 	new /obj/effect/decal/cleanable/ash (item_to_disintegrate.loc)
 	new /obj/item/metalscrap (item_to_disintegrate.loc)
 	qdel(item_to_disintegrate)

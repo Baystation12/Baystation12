@@ -19,6 +19,7 @@
 	suit = /obj/item/clothing/suit/armor/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
+	l_hand = /obj/item/weapon/melee/blamite/dagger
 
 	flags = 0
 
@@ -61,7 +62,7 @@ Transmission-For the purpose of resource acquisition and organisation infiltrati
 	belt = /obj/item/ammo_magazine/type51mag
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
-	r_hand = /obj/item/weapon/melee/energy/sword/pirate
+	l_hand = /obj/item/weapon/melee/blamite/cutlass
 
 	flags = 0
 

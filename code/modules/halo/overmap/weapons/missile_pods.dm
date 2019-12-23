@@ -66,7 +66,7 @@
 	icon = 'code/modules/halo/overmap/weapons/deck_missile_pod.dmi'
 	icon_state = "missile"
 	penetrating = 1
-	damage = 7 //It's a missile, it has no innate damage.
+	damage = 7
 
 /obj/item/projectile/missile_damage_proj/on_impact(var/atom/impacted)
 	if(!istype(impacted,/obj/effect/shield))
