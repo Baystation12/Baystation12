@@ -6,6 +6,7 @@
 	desc = "A fusion reactor for powering starships."
 	icon = 'code/modules/halo/power/fusion_drive.dmi'
 	icon_state = "reactor0"
+	density = 1
 	var/obj/item/fusion_fuel/held_fuel
 	var/fuel_consumption_rate = 12
 	var/next_fuel_tick = 0
