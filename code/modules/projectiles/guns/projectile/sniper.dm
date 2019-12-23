@@ -77,3 +77,25 @@
 		return
 	..()
 
+
+/obj/item/weapon/gun/projectile/heavysniper/boltaction
+	name = "Bolt Action Rifle"
+	desc = "An old bolt action rifle from some forgotten war, still commonplace among farmers and colonists as an anti-varmint rifle."
+	icon = 'icons/obj/guns/boltaction.dmi'
+	icon_state = "boltaction"
+	item_state = "boltaction"
+	w_class = ITEM_SIZE_LARGE
+	origin_tech = list(TECH_COMBAT = 2)
+	caliber = CALIBER_RIFLE
+	ammo_type = /obj/item/ammo_casing/rifle
+	load_method = SINGLE_CASING|SPEEDLOADER
+	max_shells = 5
+	accuracy = 8
+	wielded_item_state = "boltaction-wielded"
+
+/obj/item/weapon/gun/projectile/heavysniper/boltaction/on_update_icon()
+	..()
+	if(bolt_open)
+		icon_state = "boltaction-open"
+	else
+		icon_state = "boltaction"

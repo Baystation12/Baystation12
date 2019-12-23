@@ -21,7 +21,7 @@
 	desc = "A cheap replica of an earth handgun. To reload, buy another."
 	item_cost = 16
 	path = /obj/item/weapon/gun/projectile/pistol/throwback
-	
+
 /datum/uplink_item/item/visible_weapons/dartgun
 	name = "Dart Gun"
 	desc = "A gas-powered dart gun capable of delivering chemical payloads across short distances. \
@@ -194,3 +194,10 @@
 			Most of these blasters were swiftly bought back and destroyed - but not this one."
 	item_cost = 40
 	path = /obj/item/weapon/gun/energy/incendiary_laser
+
+/datum/uplink_item/item/visible_weapons/boltaction
+	name = "Bolt Action Rifle"
+	desc = "For arming your comrades on the cheap!"
+	item_cost = 24
+	path = /obj/item/weapon/gun/projectile/heavysniper/boltaction
+	antag_roles = list(MODE_REVOLUTIONARY)
