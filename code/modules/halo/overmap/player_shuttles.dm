@@ -180,6 +180,15 @@ allowing periodic long range transmission."
 			ship_to_spawn = final.spawned_ship
 			. = ..()
 
+/obj/machinery/shuttle_spawner/attackby(var/obj/item/comms_bypass_key/I, var/mob/user)
+	if(istype(I))
+		if(world.time > next_shuttle_at)
+			to_chat(user,"<span class = 'notice'>Scanning [I] would have no effect, a ship is already available!</span>")
+			return
+		var/new_time = max(world.time,(next_shuttle_at - world.time)/I.cooldown_divisor)
+		to_chat(user,"<span class = 'notice'>You scan [I] on [src], cutting the remaining time to [new_time/10] seconds.</span>")
+		next_shuttle_at = world.time + new_time
+
 /obj/machinery/shuttle_spawner/multi_choice/debug
 	choices = newlist(/datum/spawner_choice/cheap_unsc_combat,/datum/spawner_choice/heavyarmed_unsc_combat)
 
