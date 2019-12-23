@@ -32,6 +32,7 @@
 	round_reload_time = 10 SECONDS
 	rounds_loaded = 1
 	max_rounds_loadable = 1
+	tag_prefix = "plastorp_control"
 
 /obj/machinery/deck_gun/missile_pod/plasma_torpedo/return_list_addto()
 	return list(src,src)

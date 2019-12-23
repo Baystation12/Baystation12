@@ -40,7 +40,7 @@
 /obj/machinery/fusion_thruster
 	name = "fusion thruster"
 	desc = "Simple thermal nozzle, uses heated gas to propel the ship."
-	icon = 'fusion_thruster.dmi'
+	icon = 'code/modules/halo/overmap/fusion_thruster.dmi'
 	icon_state = "nozzle0"
 	anchored = 1
 	use_power = 1

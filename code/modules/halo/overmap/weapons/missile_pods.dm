@@ -27,6 +27,7 @@
 	round_reload_time = 12 SECONDS
 	rounds_loaded = 4
 	max_rounds_loadable = 4
+	tag_prefix = "missile_control"
 
 /obj/machinery/deck_gun/missile_pod/return_list_addto()
 	return list(src,src,src,src)

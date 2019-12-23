@@ -25,6 +25,7 @@
 	round_reload_time = 5 SECONDS
 	rounds_loaded = 1
 	max_rounds_loadable = 1
+	tag_prefix = "cov_pulse_turrets"
 
 /obj/machinery/deck_gun/cov_pulse_turret/return_list_addto()
 	return list(src)

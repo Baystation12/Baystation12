@@ -1,4 +1,4 @@
-#define CAPACITOR_DAMAGE_AMOUNT 27 //3 Direct MAC shots to down a fully charged shield from a 22-capacitor MAC.
+#define CAPACITOR_DAMAGE_AMOUNT 20 //5 Direct MAC shots to down a fully charged shield from a 20-capacitor MAC.
 #define CAPACITOR_MAX_STORED_CHARGE 50000
 #define BASE_AMMO_LIMIT 3
 #define LOAD_AMMO_DELAY 70
@@ -162,7 +162,7 @@
 		return
 
 	for(var/z_level in overmap_object.map_z)
-		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 100,1, 255,,1)
+		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 20,1, 255,,1)
 
 /obj/machinery/overmap_weapon_console/mac/get_linked_device_damage_mod()
 	var/damage_mod = 0
