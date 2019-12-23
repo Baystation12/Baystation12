@@ -198,6 +198,6 @@
 /datum/uplink_item/item/visible_weapons/boltaction
 	name = "Bolt Action Rifle"
 	desc = "For arming your comrades on the cheap!"
-	item_cost = 24
+	item_cost = 12
 	path = /obj/item/weapon/gun/projectile/heavysniper/boltaction
 	antag_roles = list(MODE_REVOLUTIONARY)

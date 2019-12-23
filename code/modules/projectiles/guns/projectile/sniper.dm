@@ -79,7 +79,7 @@
 
 
 /obj/item/weapon/gun/projectile/heavysniper/boltaction
-	name = "Bolt Action Rifle"
+	name = "bolt action rifle"
 	desc = "An old bolt action rifle from some forgotten war, still commonplace among farmers and colonists as an anti-varmint rifle."
 	icon = 'icons/obj/guns/boltaction.dmi'
 	icon_state = "boltaction"
