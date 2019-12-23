@@ -129,7 +129,9 @@ var/list/points_of_interest = list()
 		mobs_to_alert |= GLOB.mobs_in_sectors[om]
 	var/list/dirlist = list("north","south","n/a","east","northeast","southeast","n/a","west","northwest","southwest")
 	for(var/mob/m in mobs_to_alert)
-		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[get_dir(map_sectors["[m.z]"],alert_origin)]]</span>")
+		var/dir_to_ship = get_dir(map_sectors["[m.z]"],alert_origin)
+		if(dir_to_ship != 0)
+			to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[dir_to_ship]]</span>")
 
 
 /obj/effect/overmap/proc/do_slipspace_exit_effects(var/exit_loc,var/sound)
