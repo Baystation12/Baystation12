@@ -84,8 +84,7 @@
 	. = ..()
 	if(toggleable)
 		if(citem.additional_data["icon_on"])
-			remove_extension(src, /datum/extension/base_icon_state)
-			set_extension(src, /datum/extension/base_icon_state, citem.additional_data["icon_on"])
+			set_icon_state(citem.additional_data["icon_on"])
 		if(citem.additional_data["icon_off"])
 			off_state = citem.additional_data["icon_off"]
 
