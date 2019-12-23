@@ -167,11 +167,15 @@ allowing periodic long range transmission."
 		return
 	var/deploy_or_check = alert(user,"Check ship description or send spawn request?",,"Deploy","Check Description")
 	var/datum/spawner_choice/final = get_spawner_choice(user)
+	if(isnull(final))
+		return
 	switch(deploy_or_check)
 		if("Check Description")
 			to_chat(user,"[final.choice_name] - [final.choice_category]\n[final.choice_desc]\nCooldown:[final.cooldown_apply/10] seconds.")
 			return
 		if("Deploy")
+			if(!check_requisition_allowed())
+				return
 			shuttle_refresh_time = final.cooldown_apply
 			ship_to_spawn = final.spawned_ship
 			. = ..()
