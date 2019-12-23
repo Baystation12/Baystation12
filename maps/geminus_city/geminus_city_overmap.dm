@@ -19,7 +19,7 @@
 
 /obj/effect/overmap/sector/geminus_city/LateInitialize()
 	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(21,src)
+	GLOB.overmap_tiles_uncontrolled -= range(28,src)
 	new /obj/effect/overmap/ship/npc_ship/shipyard/unsc (loc)
 
 /obj/structure/co_ord_console/vt9_gc
