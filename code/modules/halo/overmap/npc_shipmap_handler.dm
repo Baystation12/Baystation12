@@ -6,6 +6,8 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 
 	var/list/free_ship_map_zs = list()
 
+	var/list/area_instances = list () //FORMAT: Instance = z-level
+
 	var/max_z_cached = 0
 
 /datum/npc_ship_map_handler/New()

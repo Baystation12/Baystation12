@@ -261,7 +261,6 @@
 		l.set_light(text2num(lights_reset[l]))
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
-	set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)
@@ -287,6 +286,7 @@
 	mapload_reset_lights()
 
 	lighting_overlays_initialised = TRUE
+	makepowernets()
 
 	cargo_init()
 	damage_spawned_ship()
@@ -324,33 +324,33 @@
 /datum/npc_ship_request/proc/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source) //Return 1 in this to stop normal NPC ship move processing.
 
 /datum/npc_ship
-	var/list/mapfile_links = list('maps/npc_ships/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
+	var/list/mapfile_links = list('maps/npc_ships/old/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
 
 	var/fore_dir = WEST //The direction of "fore" for the mapfile.
 	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile. Format: Topleft-x,Topleft-y,bottomright-x,bottomright-y
 
 /datum/npc_ship/ccv_star
-	mapfile_links = list('maps/npc_ships/CCV_Star.dmm')
+	mapfile_links = list('maps/npc_ships/old/CCV_Star.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_comet
-	mapfile_links = list('maps/npc_ships/CCV_Comet.dmm')
+	mapfile_links = list('maps/npc_ships/old/CCV_Comet.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_sbs
-	mapfile_links = list('maps/npc_ships/CCV_Slow_But_Steady.dmm')
+	mapfile_links = list('maps/npc_ships/old/CCV_Slow_But_Steady.dmm')
 	fore_dir = WEST
 	map_bounds = list(6,51,72,27)
 
 /datum/npc_ship/unsc_patrol
-	mapfile_links = list('maps/npc_ships/UNSC_Corvette.dmm')
+	mapfile_links = list('maps/npc_ships/old/UNSC_Corvette.dmm')
 	fore_dir = WEST
 	map_bounds = list(7,70,54,29)
 
 /datum/npc_ship/cov_patrol
-	mapfile_links = list('maps/npc_ships/kigyar_missionary.dmm')
+	mapfile_links = list('maps/npc_ships/old/kigyar_missionary.dmm')
 	fore_dir = WEST
 	map_bounds = list(2,114,139,44)
 

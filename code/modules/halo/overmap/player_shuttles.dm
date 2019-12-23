@@ -11,6 +11,7 @@
 	var/ship_type_name = "shuttlecraft"
 	var/shuttle_refresh_time = 5 MINUTES
 	var/next_shuttle_at = 0
+	var/allow_rename = 0
 
 /obj/machinery/shuttle_spawner/examine(var/mob/examiner)
 	. = ..()
@@ -35,6 +36,7 @@
 	ship.loc = null
 	ship.slipspace_to_location(om_loc.loc,0)
 	ship.make_player_controlled()
+	return ship
 
 /obj/machinery/shuttle_spawner/proc/check_requisition_allowed()
 	if(world.time < next_shuttle_at)
@@ -55,9 +57,14 @@
 		return
 	if(!check_requisition_allowed())
 		return
+	var/new_ship_name = null
+	if(allow_rename)
+		new_ship_name = sanitizeName(input(user,"Enter the Ship's Name","Ship Name","Ship"))
 	user.visible_message("<span class = 'notice'>[user] requisitions a [ship_type_name] from [src].</span>")
 	visible_message("<span class = 'notice'>[src] announces: \"[ship_type_name] Requisitioned. Connect umbilical for access.\"</span>")
-	spawn_shuttlecraft()
+	var/obj/spawned = spawn_shuttlecraft()
+	if(spawned && new_ship_name)
+		spawned.name = new_ship_name
 	next_shuttle_at = world.time + shuttle_refresh_time
 
 /obj/machinery/shuttle_spawner/debug
@@ -122,6 +129,7 @@
 This console identifies and maintains vulnerabilities in sector wide jamming software,\
 allowing periodic long range transmission."
 	ship_type_name = "Ship"
+	allow_rename = 1
 	var/list/choices = newlist()
 
 /obj/machinery/shuttle_spawner/multi_choice/check_requisition_allowed()
@@ -169,7 +177,7 @@ allowing periodic long range transmission."
 			. = ..()
 
 /obj/machinery/shuttle_spawner/multi_choice/debug
-	choices = newlist(/datum/spawner_choice/debug1,/datum/spawner_choice/debug2,/datum/spawner_choice/debug3)
+	choices = newlist(/datum/spawner_choice/cheap_unsc_combat,/datum/spawner_choice/heavyarmed_unsc_combat)
 
 /datum/spawner_choice
 	var/choice_name = "Ship"
@@ -180,25 +188,3 @@ allowing periodic long range transmission."
 
 /datum/spawner_choice/proc/can_mob_use(var/mob/m)
 	return 1
-
-/datum/spawner_choice/debug1
-	choice_name = "Debug1"
-	choice_category = "Category1"
-	choice_desc = "Description1"
-	spawned_ship = /obj/effect/overmap/ship/npc_ship/combat/unsc
-	cooldown_apply = 10 SECONDS
-
-/datum/spawner_choice/debug2
-	choice_name = "Debug2"
-	choice_category = "Category1"
-	choice_desc = "Description2"
-	spawned_ship = /obj/effect/overmap/ship/npc_ship/combat/covenant
-	cooldown_apply = 15 SECONDS
-
-/datum/spawner_choice/debug3
-	choice_name = "Debug3"
-	choice_category = "Category2"
-	choice_desc = "Description3"
-	spawned_ship = /obj/effect/overmap/ship/npc_ship/cargo
-	cooldown_apply = 20 SECONDS
-
