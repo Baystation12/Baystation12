@@ -27,8 +27,6 @@
 		/area/hallway,
 		/area/maintenance,
 		/area/medical,
-		/area/medical/virology,
-		/area/medical/virologyaccess,
 		/area/overmap,
 		/area/rnd,
 		/area/rnd/xenobiology,
