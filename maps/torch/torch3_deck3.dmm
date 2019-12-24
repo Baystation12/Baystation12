@@ -3253,9 +3253,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "gz" = (
@@ -3784,10 +3781,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "hx" = (
 /obj/structure/fitness/weightlifter,
@@ -5268,9 +5264,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "kc" = (
@@ -7694,15 +7687,13 @@
 /area/thruster/d3port)
 "pw" = (
 /obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
-	},
-/obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "py" = (
@@ -8601,10 +8592,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "rN" = (
 /obj/machinery/atmospherics/binary/pump/on{
@@ -12204,13 +12194,9 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "Ar" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -12289,11 +12275,9 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/machinery/vending/cigarette,
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "AD" = (
 /obj/structure/table/standard,
@@ -16765,6 +16749,10 @@
 /obj/effect/shuttle_landmark/ert/deck3,
 /turf/space,
 /area/space)
+"Me" = (
+/obj/machinery/vending/cigarette,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "Mf" = (
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/techfloor,
@@ -17468,6 +17456,10 @@
 	tag = "icon-railing0 (EAST)"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/computer/modular/preset/civilian{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "Ou" = (
@@ -18953,9 +18945,6 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "ST" = (
@@ -19001,10 +18990,9 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "Te" = (
 /obj/structure/table/steel,
@@ -20066,10 +20054,9 @@
 	name = "Hydroponics";
 	sort_type = "Hydroponics"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "VU" = (
 /turf/simulated/floor/tiled,
@@ -20767,6 +20754,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
+"XQ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/obj/structure/flora/tree/pine/xmas,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
+/area/crew_quarters/mess)
 "XR" = (
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
@@ -21386,16 +21383,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "ZK" = (
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/machinery/computer/modular/preset/civilian,
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "ZN" = (
 /turf/simulated/wall/r_wall/hull,
@@ -39317,7 +39312,7 @@ wn
 Pn
 bA
 AC
-Tb
+XQ
 hw
 iv
 gz
@@ -40733,7 +40728,7 @@ cl
 NH
 Ux
 cl
-aY
+Me
 vd
 RB
 RB
