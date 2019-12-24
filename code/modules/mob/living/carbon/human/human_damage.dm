@@ -5,8 +5,6 @@
 		health = maxHealth
 		set_stat(CONSCIOUS)
 		return
-	else
-		status_flags |= GODMODE
 
 	health = maxHealth - getBrainLoss()
 

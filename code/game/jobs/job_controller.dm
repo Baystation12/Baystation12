@@ -362,6 +362,7 @@ var/global/datum/controller/occupations/job_master
 
 	proc/EquipRank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
 		if(!H)	return null
+		H.status_flags |= GODMODE
 
 		var/datum/job/job = GetJob(rank)
 		var/list/spawn_in_storage = list()
