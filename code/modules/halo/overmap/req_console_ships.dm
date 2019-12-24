@@ -74,6 +74,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_podcarrier
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/unsc_podcarrier)
+	ship_max_speed = 3.5
 
 /datum/spawner_choice/unsc_podcarrier
 	choice_name = "Podcarrier Transport Ship"
@@ -82,7 +83,6 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 A lightly armored vessel fitted for orbital troop deployment, boarding and orbital troop support operations. Armed with deck guns."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_podcarrier
 	cooldown_apply = 2 MINUTES
-	ship_max_speed = 3.5
 
 /datum/npc_ship/unsc_trooptransport
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_trooptransport.dmm')
@@ -101,3 +101,5 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 A lightly armored vessel fitted for troop and vehicle deployment. Armed with deck guns."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_trooptransport
 	cooldown_apply = 2 MINUTES
+
+

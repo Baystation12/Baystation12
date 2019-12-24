@@ -53,9 +53,9 @@
 "vd" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "vo" = (/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "yy" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"zZ" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "AE" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "BJ" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"Cw" = (/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "CN" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "CY" = (/obj/machinery/power/fusion_drive_simple,/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Di" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist,/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -95,6 +95,7 @@
 "XZ" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "ZF" = (/obj/structure/reagent_dispensers/watertank,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "ZP" = (/obj/effect/landmark/dropship_land_point/unsc{name = "Ship Hangar"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
+"ZQ" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{dir = 8; germ_level = 110; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-comm (NORTH)"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -108,9 +109,9 @@ aaaaaaaalslslslslslslslslslslsFcFcAEFcZPFcFcIDlsruruaaaaaaaaaaaaruruqXqXqXqXqXqX
 aaaaaalslslsqXqXqXqXqXqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXqXqXqXqXRkdMFbKGhdhdhdqXFcFcshaaaa
 aaaaaarZEdXZEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsraKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOEdEdtDqXEdEdEdEdEdEdqXFcFcjUcNcNcNcNoZWthdhdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXqXmAFcshaaaa
-aaaagECwEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcdrFcFcFcqXhdPwPwPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcqXtzFcshaaaa
+aaaagEZQEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcdrFcFcFcqXhdPwPwPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcqXtzFcshaaaa
 aaaagEoSebgJqXfJEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyydZdZdZdZdZdZstqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
-aaaagECwEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcvdFcFcFcqXhdHzHzHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcqXjWFcshaaaa
+aaaagEzZEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcvdFcFcFcqXhdHzHzHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcqXjWFcshaaaa
 aaaaDivoEdEdtDqXEdEdEdEdEdEdqXFcFccJojojojojTYWthdhdhdhdhdhdhdhdtshdhdhdqXhdVwhdqXqXMTqXqXolFcshaaaa
 aaaaaaGuEdIXEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsViUxlHkzRycysrceqXhdlbhdqXXihdhdhdhdhdhdMTFcFcshaaaa
 aaaaaalslslsqXqXqXqXqXqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXqXqXqXqXWFMIZFKGhdhdhdqXFcFcshaaaa

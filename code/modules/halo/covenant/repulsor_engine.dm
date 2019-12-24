@@ -40,7 +40,7 @@
 /obj/machinery/repulsor_engine
 	name = "repulsor engine"
 	desc = "A sophisticated gravitic drive that allows great speed and maneuvrability."
-	icon = 'repulsor.dmi'
+	icon = 'code/modules/halo/covenant/repulsor.dmi'
 	icon_state = "off"
 	anchored = 1
 	use_power = 1

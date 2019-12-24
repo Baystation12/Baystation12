@@ -9,6 +9,12 @@
 /turf/simulated/wall/covenant/New(var/newloc)
 	..(newloc,"nanolaminate")
 
+/turf/simulated/wall/covenant/reinforced
+	icon_state = "covie_reinf"
+
+/turf/simulated/wall/covenant/reinforced/New(var/newloc)
+	..(newloc,"nanolaminate","nanolaminate")
+
 /turf/simulated/wall/drone_biomass
 	name = "biomass covered wall"
 	desc = "An armor-plated wall which acts as both protection and separation. It is covered in a hardened alien biomass"

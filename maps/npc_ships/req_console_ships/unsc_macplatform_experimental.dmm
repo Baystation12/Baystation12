@@ -22,6 +22,7 @@
 "pA" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "qN" = (/obj/structure/window/reinforced/projresist{dir = 2},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "qX" = (/turf/simulated/wall,/area/om_ships/req_console_ship)
+"ra" = (/obj/structure/computerframe{anchored = 1; dir = 2; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{dir = 2; germ_level = 110; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-comm (NORTH)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "rm" = (/obj/machinery/mac_cannon/accelerator{icon_state = "mac_accelerator"; dir = 8},/obj/machinery/mac_cannon/accelerator{icon_state = "mac_accelerator"; dir = 8},/turf/space,/area/space)
 "ru" = (/obj/structure/lattice,/turf/space,/area/space)
 "rM" = (/obj/machinery/vending/tool,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -41,6 +42,7 @@
 "Ie" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 2},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "IL" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Ja" = (/obj/machinery/mac_cannon/capacitor{icon_state = "mac_capacitor"; dir = 8},/turf/space,/area/space)
+"JM" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "JN" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "MT" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Or" = (/obj/structure/table/steel,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
@@ -71,13 +73,13 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslsqXqXqXqXqXqXqXqX
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXqXqXqXqXaaaaruqXqXqXqXqXFcFcILFcqXaaruaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslsruruqXqXqXqXaaaaaaaaaaaaqXqXhdcOhdqXqXqXqXMTqXqXqXqXaaaa
 aaaaaaaaaaaaaalslslslslslslslsruaaaaaaaaaaruruuNezGvqXqXqXqXqXqXqXqXqXRkhdhdhdWWdMrMJNhdqXFcFcshaaaa
-aalslslslslslslsruaaaaaarururururuaaaaaaruruuNqNEdEdWVEdEdEdEdEdqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
+aalslslslslslslsruaaaaaarururururuaaaaaaruruuNqNEdEdWVEdEdEdEdraqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aarururuaarururururuaarururururururuaarururuIeEdEdEdqXEdEdTxEdEddDqXhdhdhdqXqXMTqXqXUehdqXTCFcshaaaa
 aarutntnJatntntntntntntntnJatnJatntntntntnJahWEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaa
 aaaWHqaWaWaWHqaWHqaWaWrmHqHqaWHqHqaWaWaWHqHqzXEdEdqXHoebEdEdEdEdEdBJRXqXRZqXUQcSakqXqXBJqXqXqXqXaaaa
 aarutntntntntntntntntntntnJatnJatntntntntnJasbEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXVwhdqXFcFcshaaaa
 aarururuaarururururuaarururururururuaarururuTtEdEdEdqXEdEdTxEdEdfJqXhdhdhdqXqXMTqXqXUehdqXTCFcshaaaa
-aalslslslslslslsruaaaaaarururururuaaaaaaruruvdswEdEdWVEdEdEdEdEdqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
+aalslslslslslslsruaaaaaarururururuaaaaaaruruvdswEdEdWVEdEdEdEdJMqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaaaaaaaaaaaalslslslslslslslsruaaaaaaaaaaruruvdezGvqXqXqXqXqXqXqXqXqXWFhdhdhdpAbShbjWhdqXFcFcshaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslsruruqXqXqXqXaaaaaaaaaaaaqXqXhdlbhdqXqXqXqXMTqXqXqXqXaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXqXqXqXqXaaaaruqXqXqXqXqXFcFclqFcqXaaruaaaaaa

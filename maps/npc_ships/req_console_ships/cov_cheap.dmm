@@ -1,123 +1,94 @@
 "aa" = (/turf/space,/area/space)
-"aG" = (/obj/structure/table/steel,/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"bw" = (/obj/structure/closet/secure_closet/miner,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"bC" = (/turf/simulated/floor/shuttle/white,/area/om_ships/comms_station/station1)
-"bO" = (/mob/living/simple_animal/hostile/russian,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"fd" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/window/reinforced/projresist{dir = 2},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/comms_station/station1)
-"ft" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/shuttle/black,/area/om_ships/comms_station/station1)
-"fu" = (/obj/structure/closet/wardrobe/xenos,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"mM" = (/turf/simulated/mineral,/area/space)
-"nz" = (/obj/structure/tanktrap,/turf/simulated/floor/shuttle/black,/area/om_ships/comms_station/station1)
-"sh" = (/turf/simulated/floor/beach/sand/desert,/area/space)
-"tu" = (/obj/structure/table/steel,/obj/item/comms_bypass_key,/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"tS" = (/obj/structure/window/basic{dir = 8},/turf/simulated/floor/water/shallow,/area/om_ships/comms_station/station1)
-"ut" = (/obj/structure/closet/wardrobe/lawyer_black,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"uv" = (/obj/machinery/door/airlock/maintenance_hatch/bolted,/turf/simulated/floor/shuttle/white,/area/om_ships/comms_station/station1)
-"wq" = (/obj/structure/bed,/mob/living/simple_animal/hostile/russian,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"xj" = (/mob/living/simple_animal/hostile/russian/ranged,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"zf" = (/turf/simulated/floor/water,/area/om_ships/comms_station/station1)
-"AB" = (/obj/structure/table/steel,/obj/structure/table/steel,/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"AY" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"CK" = (/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"Ea" = (/obj/structure/closet/wardrobe/engineering_yellow,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"FV" = (/turf/simulated/floor/water/shallow,/area/om_ships/comms_station/station1)
-"Gi" = (/obj/structure/curtain/open,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"Gr" = (/obj/structure/barricadeunsc{dir = 4},/turf/simulated/floor/shuttle/black,/area/om_ships/comms_station/station1)
-"Hc" = (/obj/structure/bed,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"Hl" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"Ht" = (/obj/structure/closet/wardrobe/mixed,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"Hx" = (/turf/simulated/mineral,/area/om_ships/comms_station/station1)
-"IZ" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"JA" = (/turf/simulated/floor/asteroid,/area/space)
-"Ln" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/shuttle/blue,/area/om_ships/comms_station/station1)
-"Nf" = (/turf/simulated/wall,/area/om_ships/comms_station/station1)
-"Or" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/comms_station/station1)
-"Rp" = (/obj/structure/barricadeunsc,/turf/simulated/floor/shuttle/black,/area/om_ships/comms_station/station1)
-"Rz" = (/turf/simulated/floor/shuttle/black,/area/om_ships/comms_station/station1)
-"SG" = (/mob/living/simple_animal/hostile/russian/ranged,/turf/simulated/floor/shuttle/black,/area/om_ships/comms_station/station1)
-"SY" = (/mob/living/simple_animal/hostile/russian,/turf/simulated/floor/shuttle/black,/area/om_ships/comms_station/station1)
-"Ua" = (/obj/structure/curtain,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"Vp" = (/obj/structure/closet/secure_closet/cargotech,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"Wo" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/comms_station/station1)
-"YX" = (/obj/structure/bookcase,/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"Zi" = (/turf/simulated/floor/shuttle/yellow,/area/om_ships/comms_station/station1)
-"ZZ" = (/turf/simulated/wall/r_wall,/area/om_ships/comms_station/station1)
+"ab" = (/turf/simulated/wall/covenant/reinforced,/area/space)
+"bs" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"ck" = (/obj/machinery/repulsor_engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"cY" = (/turf/simulated/wall/covenant,/area/space)
+"gc" = (/obj/structure/reagent_dispensers/fueltank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"hM" = (/obj/structure/stairs_decorative{icon_state = "stairs"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"is" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"ku" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"kW" = (/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/wirecutters/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/space)
+"lO" = (/obj/structure/closet/secure_closet/freezer/kitchen{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"mI" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"mK" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"nl" = (/obj/machinery/repulsor_engine{dir = 4; icon_state = "nozzle"; tag = "icon-nozzle (WEST)"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"px" = (/obj/structure/reagent_dispensers/watertank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"pF" = (/obj/structure/window/reinforced/projresist/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"pV" = (/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/weldingtool/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/space)
+"pW" = (/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/o2/covenant,/obj/item/weapon/storage/firstaid/o2/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"tu" = (/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"uN" = (/obj/structure/table/marble,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"uZ" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"wS" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"xi" = (/obj/structure/table/marble,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"yj" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"yX" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"zl" = (/obj/machinery/computer/helm{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_nav"; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"zW" = (/obj/machinery/computer/helm{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_nav"; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"AH" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"AX" = (/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Cg" = (/obj/structure/bed/chair/covenant_stool{dir = 8; icon_state = "coviechair2"; name = "Shipmaster's anti-grav chair"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Cs" = (/obj/machinery/telecomms/allinone{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Battlenet Server Hub"; tag = "icon-covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Et" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"EB" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"EJ" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Fv" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/glass/phoronrglass/ten,/obj/item/stack/material/glass/phoronrglass/ten,/obj/item/stack/material/glass/phoronrglass/ten,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"FE" = (/obj/item/weapon/crowbar/covenant,/obj/item/weapon/crowbar/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/space)
+"GK" = (/obj/item/weapon/wrench/covenant,/obj/item/weapon/wrench/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/space)
+"GR" = (/obj/item/device/multitool/covenant,/obj/item/device/multitool/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/space)
+"HL" = (/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"IV" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"JS" = (/obj/machinery/cooker/oven{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Ki" = (/obj/machinery/repulsor_engine{dir = 10; icon_state = "nozzle"; tag = "icon-nozzle (WEST)"},/obj/machinery/repulsor_engine{dir = 4; icon_state = "nozzle"; tag = "icon-nozzle (WEST)"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Kl" = (/obj/item/weapon/screwdriver/covenant,/obj/item/weapon/screwdriver/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"LB" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"LE" = (/obj/machinery/cooker/fryer{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Mj" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"MP" = (/obj/docking_umbilical/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"MW" = (/obj/machinery/portable_atmospherics/canister/oxygen{canister_color = "black"; icon_state = "black"; name = "\improper Covenant Canister: \[O2]"; start_pressure = 7559.63},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Nc" = (/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Nd" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/stairs_decorative{dir = 4; icon_state = "stairs"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"OH" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Qf" = (/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/structure/table/marble,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Qz" = (/obj/machinery/overmap_weapon_console/npc_comms_console/cov{icon_state = "covie_nav_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"QU" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/stairs_decorative{dir = 4; icon_state = "stairs"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"RV" = (/obj/machinery/repulsor_engine{tag = "icon-nozzle (WEST)"; icon_state = "nozzle"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"SJ" = (/obj/machinery/overmap_weapon_console/ship_scanning_console/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Ty" = (/obj/machinery/door/airlock/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"UL" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"VJ" = (/obj/machinery/cooker/grill{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"VM" = (/obj/structure/janitorialcart{color = "#ff99ff"},/obj/item/weapon/mop{color = "#ff99ff"},/obj/item/weapon/reagent_containers/glass/bucket{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Wk" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Ws" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Xa" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"XG" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
+"Yk" = (/obj/structure/table/rack,/obj/item/clothing/head/welding/covenant,/obj/item/clothing/head/welding/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/space)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfNfmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMNfRzRzSGGrRzRzRzRzRzRzRzRzRzRzRzRzSGGrRzRzRzRzRzRzRzRzNfbCtSzfzfzfFVFVNfmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMNfRzRzSGRzRzRzRzRzRzRzRzRzRzGrRzRzSGGrRzRzRzRzRzRzRzSYftbCtSzfzfzfzfFVNfmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMNfRzRzSGGrRzRzRzRzRzRzRzRzSGGrRzRzRznzRzRzRzRzRzRzRzRzNfbCtSFVzfzfzfzfNfmMmMaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMZZZZRzRzZZZZZZZZZZZZZZZZNfNfNfNfNfNfNfNfNfNfNfNfRpRzRpNfNfNfNfNfNfNfNfNfmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMZZCKCKCKCKCKCKCKCKCKCKZZZiZiZiZiZiZiZiZiZiZiZiNfRzRzRzNfYXYXYXZiUaUaNfmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMZZCKCKCKCKCKCKCKCKCKCKuvZiZiZiZiZiZiZiZiZiZiZiNfRzRzRzftZiZiZiZiGiHcNfmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMZZIZCKCKABaGaGaGaGCKCKZZZiZiNfZibOZiZixjNfZiZiNfRzRzRzNfUaUaZiZiUaUaNfmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMZZHlCKCKaGCKCKCKaGCKCKZZZiZiNfHtHtutEaEaNfZiZiNfRzRzRzNfwqUaZiZiGiwqNfmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMZZAYCKCKaGCKtuCKaGCKCKZZZiZiNfNfNfNfNfNfNfZiZiftSGSGRzNfUaUaZiZiUaUaNfmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMZZLnCKCKaGCKCKCKaGCKCKZZZiZiNfbwVpVpfufuNfZiZiNfRpRpRzNfHcGiZiZiUawqNfmMmMaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMZZHxCKCKaGaGaGaGaGCKCKZZZiZiNfZixjZixjZiNfZiZiNfRzRzSGNfUaUaZiZiUaUaNfmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMHxCKCKHxCKCKCKCKCKCKCKuvZiZiZiZiZiZiZiZiZiZiZiNfRzRpRpftZiZiZiZiGiwqNfmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMHxHxCKCKCKCKCKCKCKCKCKZZZiZiZiZiZiZiZiZiZiZiZiNfRzRzSYNfYXYXYXZiUaUaNfmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMHxHxZZZZZZZZZZZZZZZZZZZZNfNfNfNfNfNfNfNfNfNfNfNfRzSYRzNfNfNfNfNfNfNfNfmMmMmMaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAmMJAOrRzRzRzNfJAJAJAmMmMmMmMmMmMshaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAJAWoRzRzRzOrJAmMJAmMmMmMmMmMshshaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAWoRzRzRzWoJAJAJAmMmMmMmMmMshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAWoRzRzRzWoJAmMmMmMmMmMmMshshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAmMmMJAWoRzRzRzWoJAmMmMmMmMmMmMshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAJAJAJAJAWoRzRzRzWoJAmMmMmMmMmMshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAmMJAJAJAWoRzRzRzWoJAmMmMmMshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAmMJAJAJAfdRzRzRzfdJAmMshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAJAHxRzRzRzHxJAshshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAHxHxHxHxHxJAshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAJAJAJAJAJAshshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAJAJAJAshshshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAJAmMshshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMJAmMshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMshshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMmMshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMmMshshshshmMmMmMmMmMmMmMmMmMmMmMmMshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMmMshshshshshshmMmMmMmMmMmMmMmMmMmMshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMmMshshshshshshshmMmMmMmMmMmMmMmMmMshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMmMmMmMshshshshshshshshmMmMmMmMmMmMmMmMshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMmMmMmMmMmMshshshshshshshshmMmMmMmMshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMmMmMshshshshshshshshshshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamMshshshshshshshshshshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaababababababaaaaaaaaabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaababababababababaaaaaaaaaaaaababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabababaaaaaaaaaaaaaaaaaaaaaaabababababtututututuabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaababababababababababababababababtutututupWQfxitututututuababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabababababababababababababababtutututututututututututututuabababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaKiyXtututututututututututuTytutututututututututututututututuabababababababaaaaaaaaaaaaaaaaaa
+aaaaaaaaaanlmItututututututututucYcYcYcYcYcYtututututucYcYcYcYcYtutuTytuabababababababababababaaaaaa
+aaaaaaaacYcYcYcYcYcYcYcYcYcYTycYcYlOVJLEJScYcYcYTycYcYcYtuMPtucYcYcYcYtupVKlkWGKabababababababaaaaaa
+aaaaWkIVcYCscYcYtututututututucYtutututututucYtutugccYtututututucYFEGRtututututututututupFckaaaaaaaa
+aaaaOHSJtutuEBcYtuNdyjWsEttutucYtuAXAXAXAXtuTytutuYkcYtututututuTytututuNctubsFvXacYTycYcYcYaaaaaaaa
+aaaaOHzlCgtutuTytuzWCgtutuhMtuTytuuNuNuNuNtucYMWtutuTytututututucYcYcYTycYTycYcYcYcYtuRVaaaaaaaaaaaa
+aaaaOHQztutuEJcYtuQUuZLBMjtutucYtuAXAXAXAXtuTytutuVMcYtututututuTytututuNctubsFvXacYTycYcYcYaaaaaaaa
+aaaakuAHcYmKcYcYtututututututucYtutututututucYtutupxcYtututututucYFEGRtututututututututupFckaaaaaaaa
+aaaaaaaacYcYcYcYcYcYcYcYcYcYTycYcYXGwSuNuNcYcYcYTycYcYcYtuULtucYcYcYcYtupVKlkWGKabababababababaaaaaa
+aaaaaaaaaanlmItututututututututucYcYcYcYcYcYtututututucYcYcYcYcYtutuTytuabababababababababababaaaaaa
+aaaaaaaanlistututututututututututuTytutututututututututututututututuabababababababaaaaaaaaaaaaaaaaaa
+aaaaaaabababababababababababababababtutututututututututututututuabababababaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaababababababababababababababababtutututupWHLxitututututuababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabababaaaaaaaaaaaaaaaaaaaaaaabababababtututututuabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaababababababababaaaaaaaaaaaaababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaababababababaaaaaaaaabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
 
