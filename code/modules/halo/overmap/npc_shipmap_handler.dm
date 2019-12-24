@@ -53,8 +53,12 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	var/ship_type = pick(F.ship_types)
 	if(ship_type)
 		for(var/i = 0, i < amount, i++)
-			var/obj/effect/overmap/ship = new ship_type(spawn_loc)
+			var/obj/effect/overmap/ship/npc_ship/ship = new ship_type(spawn_loc)
 			ship.my_faction = F
 			F.npc_ships.Add(ship)
+			if(faction_name == "UNSC") //This is to make sure the UNSC doesn't get free system scouting from ships moving to a planet.
+				ship.pick_target_loc()
+				if(!isnull(ship.target_loc))
+					ship.forceMove(ship.target_loc)
 	else
 		message_admins("WARNING: Attempted to spawn a \"[faction_name]\" NPC ship but there were none to choose from.")

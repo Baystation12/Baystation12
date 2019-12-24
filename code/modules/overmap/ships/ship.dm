@@ -1,4 +1,4 @@
-#define SHIP_DEFAULT_PIXEL_SPEED 5
+#define SHIP_DEFAULT_PIXEL_SPEED 3
 #define SHIP_DEFAULT_PIXEL_ACCEL 1
 
 /obj/effect/overmap/ship
@@ -20,6 +20,8 @@
 	var/thrust_limit = 1 //global thrust limit for all engines, 0..1
 
 	var/datum/npc_fleet/our_fleet
+	var/ship_max_speed = SHIP_DEFAULT_PIXEL_SPEED
+	var/ship_acceleration = SHIP_DEFAULT_PIXEL_ACCEL
 
 	var/moving_dir = 0
 	var/lock_thrust = 0
@@ -51,7 +53,7 @@
 	GLOB.processing_objects.Add(src)
 
 	my_pixel_transform = init_pixel_transform(src)
-	my_pixel_transform.max_pixel_speed = SHIP_DEFAULT_PIXEL_SPEED
+	my_pixel_transform.max_pixel_speed = ship_max_speed
 	my_pixel_transform.my_observers = my_observers
 
 /obj/effect/overmap/ship/proc/assign_fleet(var/assign)
@@ -123,7 +125,7 @@
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/ship/proc/get_acceleration()
-	return SHIP_DEFAULT_PIXEL_ACCEL
+	return ship_acceleration
 	//return round(get_total_thrust()/vessel_mass, 0.1)
 
 //Does actual burn and returns the resulting acceleration

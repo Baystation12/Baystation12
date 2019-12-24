@@ -253,10 +253,12 @@
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
-	var/increase_from_damage = (damage/250)
+	var/increase_from_damage = round(damage/250)
 	if(increase_from_damage > 2)
-		increase_from_damage *= 0.25
-	explosion(impacted,2 + increase_from_damage,4 + increase_from_damage,5 + increase_from_damage,6 + increase_from_damage, adminlog = 0)
+		increase_from_damage -= 2
+		increase_from_damage = round(increase_from_damage * 0.5)
+		increase_from_damage += 2
+	explosion(impacted,0 + increase_from_damage,2 + increase_from_damage,3 + increase_from_damage,4 + increase_from_damage, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

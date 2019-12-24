@@ -190,7 +190,14 @@ allowing periodic long range transmission."
 		next_shuttle_at = world.time + new_time
 
 /obj/machinery/shuttle_spawner/multi_choice/debug
-	choices = newlist(/datum/spawner_choice/cheap_unsc_combat,/datum/spawner_choice/heavyarmed_unsc_combat)
+	choices = newlist(\
+/datum/spawner_choice/cheap_unsc_combat,\
+/datum/spawner_choice/heavyarmed_unsc_combat,\
+/datum/spawner_choice/experimental_unsc_combat,\
+/datum/spawner_choice/unsc_slipspace_tender,\
+/datum/spawner_choice/unsc_podcarrier,\
+/datum/spawner_choice/unsc_trooptransport\
+)
 
 /datum/spawner_choice
 	var/choice_name = "Ship"
