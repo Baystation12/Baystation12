@@ -4,7 +4,7 @@
 	var/obj/machinery/fusion_thruster/nozzle
 
 /datum/ship_engine/fusion/New(var/obj/machinery/_holder)
-	..()
+	. = ..()
 	nozzle = _holder
 
 /datum/ship_engine/fusion/Destroy()

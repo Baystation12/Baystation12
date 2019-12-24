@@ -12,7 +12,7 @@
 	volume = 10
 
 /obj/item/weapon/reagent_containers/food/snacks/tallista_spice/New()
-	..()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/tallista_spice, 10)
 
 /datum/reagent/tallista_spice

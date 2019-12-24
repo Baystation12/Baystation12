@@ -26,6 +26,7 @@
 
 /obj/machinery/mac_cannon/ammo_loader/New()
 	name = "[weapon_name] [name]"
+	. = ..()
 
 /obj/machinery/mac_cannon/ammo_loader/proc/update_ammo()
 	for(var/obj/machinery/overmap_weapon_console/console in linked_consoles)

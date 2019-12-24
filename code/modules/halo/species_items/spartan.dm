@@ -1,6 +1,6 @@
 
 /mob/living/carbon/human/spartan/New(var/new_loc)
-	..(new_loc,"Spartan")
+	. = ..(new_loc,"Spartan")
 
 	name = species.get_random_name()
 	real_name = name

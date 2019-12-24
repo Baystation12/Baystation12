@@ -943,7 +943,7 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 	icon_state = "mclovin-eagle_helmet"
 
 /obj/item/clothing/suit/justice/zeal/mclovin/New()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/justice/zeal/mclovin

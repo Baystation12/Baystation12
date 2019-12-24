@@ -43,7 +43,7 @@
 	icon_state = "covbandolier"
 
 /obj/item/clothing/accessory/storage/bandolier/covenant/New()
-	..()
+	. = ..()
 	hold.can_hold = list(
 		/obj/item/ammo_casing,
 		/obj/item/weapon/material/hatchet/tacknife,

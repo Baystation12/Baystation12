@@ -260,6 +260,7 @@
 	var/time_to_die = 0
 
 /obj/effect/slipspace_rupture/New()
+	. = ..()
 	time_to_die = world.time + 6
 	GLOB.processing_objects += src
 

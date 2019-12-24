@@ -68,7 +68,7 @@
 
 
 /obj/item/weapon/melee/baton/humbler/New()
-	..()
+	. = ..()
 	bcell = new/obj/item/weapon/cell/high(src)
 	update_icon()
 	return

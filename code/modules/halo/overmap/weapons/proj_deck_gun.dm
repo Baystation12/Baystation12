@@ -15,6 +15,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/New()
 	if(isnull(control_tag))
 		control_tag = "deck_gun_control - [z]"
+	. = ..()
 
 /obj/machinery/overmap_weapon_console/toggle_projectile_tracking()
 	. = ..()

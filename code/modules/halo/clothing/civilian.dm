@@ -15,7 +15,7 @@
 		)
 
 /obj/item/clothing/suit/armor/vest/police/New()
-	..()
+	. =..()
 	slowdown_per_slot[slot_wear_suit] = 2
 
 /obj/item/clothing/suit/armor/vest/police_medium//medium armor
@@ -34,7 +34,7 @@
 		)
 
 /obj/item/clothing/suit/armor/vest/police_medium/New()//speeds are factoring other gear and chasing people on foot, meant to encourage using lighter armors to reduce meta
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = -1
 
 /obj/item/clothing/suit/storage/vest/tactical/police//light armor
@@ -53,7 +53,7 @@
 	body_parts_covered = UPPER_TORSO
 
 /obj/item/clothing/suit/storage/vest/tactical/police/New()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = -2
 
 /obj/item/clothing/mask/balaclava/tactical/police

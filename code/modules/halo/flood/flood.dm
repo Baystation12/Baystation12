@@ -55,7 +55,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/New()
 	our_overmind = flood_overmind
-	..()
+	. = ..()
 	GLOB.live_flood_simplemobs.Add(src)
 	/*if(prob(50))
 		wander = 1
@@ -139,12 +139,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "dead"
 
 /obj/effect/dead_infestor/New()
-	..()
+	. = ..()
 	pixel_x = rand(-8,8)
 	pixel_y = rand(0,24)
 
 /mob/living/simple_animal/hostile/flood/infestor/New()
-	..()
+	. = ..()
 	pixel_x = rand(-8,8)
 	pixel_y = rand(0,24)
 	spawn(30)
@@ -466,7 +466,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	attacktext = "bashed"
 
 /mob/living/simple_animal/hostile/flood/combat_form/ODST/New()
-	..()
+	. = ..()
 	var/gun_type_spawn = pick(ODST_FLOOD_GUN_LIST)
 	pickup_gun(new gun_type_spawn (loc))
 

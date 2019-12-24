@@ -5,6 +5,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/missile_control/New()
 	if(isnull(control_tag))
 		control_tag = "missile_control - [z]"
+	. = ..()
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control
 	name = "Local Missile Control Console"
@@ -15,6 +16,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/New()
 	if(isnull(control_tag))
 		control_tag = "missile_control - [z]"
+	. = ..()
 
 //Missile "deck gun"//
 /obj/machinery/deck_gun/missile_pod

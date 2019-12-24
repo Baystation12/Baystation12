@@ -4,6 +4,7 @@
 	icon_state = "covie_console"
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/cov_pulse_turret/New()
+	. = ..()
 	if(isnull(control_tag))
 		control_tag = "cov_pulse_turrets - [z]"
 

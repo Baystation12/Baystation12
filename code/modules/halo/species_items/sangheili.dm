@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 #define SANGHEILI_BLEEDBLOCK_CHANCE 50
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
+	. = ..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI

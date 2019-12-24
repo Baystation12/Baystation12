@@ -8,6 +8,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/plastorp_control/New()
 	if(isnull(control_tag))
 		control_tag = "plastorp_control - [z]"
+	. = ..()
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control
 	name = "Local Plasma Torpedo Control Console"
@@ -20,6 +21,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control/New()
 	if(isnull(control_tag))
 		control_tag = "plastorp_control - [z]"
+	. = ..()
 
 //Missile "deck gun"//
 /obj/machinery/deck_gun/missile_pod/plasma_torpedo

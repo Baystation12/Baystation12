@@ -26,7 +26,7 @@
 	var/icon/fuel_overlay
 
 /obj/machinery/power/fusion_drive/New()
-	..()
+	. = ..()
 	heat_energy = T20C * internal_heat_capacity
 
 /obj/machinery/power/fusion_drive/Initialize()

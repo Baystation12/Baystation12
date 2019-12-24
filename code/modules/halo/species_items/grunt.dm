@@ -1,7 +1,7 @@
 #define GRUNT_GEAR_ICON 'code/modules/halo/icons/species/grunt_gear.dmi'
 
 /mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
+	. = ..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
 
 /datum/language/balahese
 	name = "Balahese"
@@ -102,7 +102,7 @@
 	starting_pressure = 0
 
 /obj/item/weapon/tank/methane/New()
-	..()
+	. = ..()
 	if(starting_pressure > 0)
 		air_contents.adjust_gas("methane", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 

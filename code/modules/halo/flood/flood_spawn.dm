@@ -18,6 +18,7 @@
 	/mob/living/simple_animal/hostile/flood/combat_form/major)
 
 /datum/flood_spawner/New(var/atom/a_owner, var/a_max_flood, var/a_respawn_delay,var/list/a_spawn_pool)
+	. = ..()
 	owner = a_owner
 	max_flood = a_max_flood
 	respawn_delay = a_respawn_delay

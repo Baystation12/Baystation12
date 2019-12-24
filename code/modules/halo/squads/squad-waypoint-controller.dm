@@ -7,6 +7,7 @@
 	var/list/active_waypoints = list()
 
 /datum/waypoint_controller/New(var/creator)
+	. = ..()
 	controller_manager_device = creator
 
 /datum/waypoint_controller/proc/create_waypoint(var/atom/waypoint_turf,var/mob/user)

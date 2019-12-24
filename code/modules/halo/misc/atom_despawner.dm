@@ -9,7 +9,7 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 	var/max_cleanup_per_tick = 5
 
 /datum/controller/process/atom_despawner/New()
-	..()
+	. = ..()
 	atom_despawner = src
 
 /datum/controller/process/atom_despawner/doWork()
