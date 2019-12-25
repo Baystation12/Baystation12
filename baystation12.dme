@@ -1743,6 +1743,7 @@
 #include "code\modules\halo\structures\barricade.dm"
 #include "code\modules\halo\structures\citymapturfs.dm"
 #include "code\modules\halo\structures\closets.dm"
+#include "code\modules\halo\structures\covvendors.dm"
 #include "code\modules\halo\structures\cryopod.dm"
 #include "code\modules\halo\structures\diesel_gen.dm"
 #include "code\modules\halo\structures\electric_fence.dm"

@@ -102,8 +102,8 @@
 "Ry" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "RX" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "RZ" = (/obj/structure/closet/crate,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"Tc" = (/obj/structure/table/glass/white,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "Tk" = (/obj/machinery/light{dir = 8},/obj/structure/closet/crate/trashcart,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"Ue" = (/obj/structure/table/glass/white,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "UQ" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "VL" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Wt" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -127,13 +127,13 @@ aaaaaaaaaaaaaaaalslslslslslslslslslsrurururururulslslslslslslslsruaaruaaaaaaaaqX
 aaaaaaaaaalslslslslsaaaaaaaaruaaaaaaaaaaaaaaaaruaaaaaaaaaaaaaarurururuaaaaaaaaqXFcFcILFcqXaaruaaaaaa
 aaaaaaaalslslslslslslslslslslslslslslslslslslsruaaaaaaaaaaaaaaaaaaruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
 aaaaaalslslsqXmBmBmBmBmBmBmBmBmBmBmBmBmBmBmBlslslslsqXqXqXqXqXqXqXqXqXawtztztzVLhcKGtzhdqXEZFcshaaaa
-aaaaaarZebXZEdWVZHZHxlZHZHZHpCZHZHZHxlvyUemBKGKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
+aaaaaarZebXZEdWVZHZHxlZHZHZHpCZHZHZHxlvyTcmBKGKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOebEdtDmBGJmNZHcpZHLcmBpXNhZHZHZHZHWthdhdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXqXqXsVFcshaaaa
 aaaagERgEdebmBmBIDDeIfEEuoOqmBZHZHZHZHMzZHmBdDqXyyPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcjIzEqXzgFcshaaaa
 aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhddZdZdZdZstqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa
 aaaagEgvEdebmBmBydPxDOYQGLvxmBZCMRZHZHOVZHmBfJqXyyHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcaJMqqXHkFcshaaaa
 aaaaDivoebEdtDmBGJmNZHFpZHLcmBpXNhxSZHZHZHWthdhdhdhdhdhdhdhdtshdhdhdqXhdhdhdqXqXMTqXqXqXqXTkFcshaaaa
-aaaaaaGuebIXEdWVZHZHbCZHZHZHpCdiZHZHbCvyUemBCGkzRyaAlHcysrceqXhdlbhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
+aaaaaaGuebIXEdWVZHZHbCZHZHZHpCdiZHZHbCvyTcmBCGkzRyaAlHcysrceqXhdlbhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaaaalslslslsmBmBmBmBmBmBmBmBmBmBmBmBmBmBmBlslslslsqXqXqXqXqXqXqXqXqXawtztztzsFZFKGtzhdqXQvFcshaaaa
 aaaaaaaalslslslslslslslslslslslslslslslslslslsruaaaaaaaaaaaaaaaaaaruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
 aaaaaaaaaalslslslslsaaaaaaaaruaaaaaaaaaaaaaaaaruaaaaaaaaaaaaaarurururuaaaaaaaaqXFcFclqFcqXaaruaaaaaa
