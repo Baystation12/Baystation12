@@ -6,8 +6,8 @@
 	var/base_state = "left"
 	min_force = 4
 	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
-	health = 150
+	maxHealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
+	maxHealth = 150
 	visible = 0.0
 	use_power = POWER_USE_OFF
 	uncreated_component_parts = null
@@ -229,7 +229,7 @@
 		var/aforce = I.force
 		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<span class='danger'>[src] was hit by [I].</span>")
-		if(I.damtype == BRUTE || I.damtype == BURN)
+		if(I.damage_type == BRUTE || I.damage_type == BURN)
 			take_damage(aforce)
 		return
 
@@ -255,8 +255,7 @@
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
 	var/id = null
-	maxhealth = 300
-	health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	maxHealth = 300.0 //Stronger doors for prison (regular window door health is 150)
 	pry_mod = 0.65
 
 

@@ -3,7 +3,7 @@
 	icon_state = "laser"
 	fire_sound='sound/weapons/Laser.ogg'
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
-	damage = 40
+	force = 40
 	damage_type = BURN
 	sharp = 1 //concentrated burns
 	damage_flags = DAM_LASER
@@ -19,15 +19,15 @@
 
 /obj/item/projectile/beam/practice
 	fire_sound = 'sound/weapons/Taser.ogg'
-	damage = 2
+	force = 2
 	eyeblur = 2
 
 /obj/item/projectile/beam/smalllaser
-	damage = 25
+	force = 25
 	armor_penetration = 10
 
 /obj/item/projectile/beam/midlaser
-	damage = 50
+	force = 50
 	armor_penetration = 20
 	distance_falloff = 1
 
@@ -35,7 +35,7 @@
 	name = "heavy laser"
 	icon_state = "heavylaser"
 	fire_sound = 'sound/weapons/lasercannonfire.ogg'
-	damage = 60
+	force = 60
 	armor_penetration = 30
 	distance_falloff = 0.5
 
@@ -47,7 +47,7 @@
 	name = "x-ray beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/laser3.ogg'
-	damage = 30
+	force = 30
 	armor_penetration = 30
 	penetration_modifier = 0.8
 
@@ -56,28 +56,28 @@
 	impact_type = /obj/effect/projectile/laser/xray/impact
 
 /obj/item/projectile/beam/xray/midlaser
-	damage = 30
+	force = 30
 	armor_penetration = 50
 
 /obj/item/projectile/beam/pulse
 	name = "pulse"
 	icon_state = "u_laser"
 	fire_sound='sound/weapons/pulse.ogg'
-	damage = 15 //lower damage, but fires in bursts
+	force = 15 //lower force, but fires in bursts
 
 	muzzle_type = /obj/effect/projectile/laser/pulse/muzzle
 	tracer_type = /obj/effect/projectile/laser/pulse/tracer
 	impact_type = /obj/effect/projectile/laser/pulse/impact
 
 /obj/item/projectile/beam/pulse/mid
-	damage = 20
+	force = 20
 
 /obj/item/projectile/beam/pulse/heavy
-	damage = 25
+	force = 25
 
 /obj/item/projectile/beam/pulse/destroy
 	name = "destroyer pulse"
-	damage = 100 //badmins be badmins I don't give a fuck
+	force = 100 //badmins be badmins I don't give a fuck
 	armor_penetration = 100
 
 /obj/item/projectile/beam/pulse/destroy/on_hit(var/atom/target, var/blocked = 0)
@@ -87,22 +87,22 @@
 
 /obj/item/projectile/beam/pulse/skrell
 	icon_state = "pu_laser"
-	damage = 20
+	force = 20
 	muzzle_type = /obj/effect/projectile/laser/pulse/skrell/muzzle
 	tracer_type = /obj/effect/projectile/laser/pulse/skrell/tracer
 	impact_type = /obj/effect/projectile/laser/pulse/skrell/impact
 
 /obj/item/projectile/beam/pulse/skrell/heavy
-	damage = 30
+	force = 30
 
 /obj/item/projectile/beam/pulse/skrell/single
-	damage = 50
+	force = 50
 
 /obj/item/projectile/beam/emitter
 	name = "emitter beam"
 	icon_state = "emitter"
 	fire_sound = 'sound/weapons/emitter.ogg'
-	damage = 0 // The actual damage is computed in /code/modules/power/singularity/emitter.dm
+	force = 0 // The actual force is computed in /code/modules/power/singularity/emitter.dm
 
 	muzzle_type = /obj/effect/projectile/laser/emitter/muzzle
 	tracer_type = /obj/effect/projectile/laser/emitter/tracer
@@ -112,7 +112,7 @@
 	name = "lasertag beam"
 	icon_state = "bluelaser"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
-	damage = 0
+	force = 0
 	no_attack_log = 1
 	damage_type = BURN
 
@@ -131,7 +131,7 @@
 	name = "lasertag beam"
 	icon_state = "laser"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
-	damage = 0
+	force = 0
 	no_attack_log = 1
 	damage_type = BURN
 
@@ -146,7 +146,7 @@
 	name = "lasertag beam"
 	icon_state = "omnilaser"
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GLASS | PASS_FLAG_GRILLE
-	damage = 0
+	force = 0
 	damage_type = BURN
 
 	muzzle_type = /obj/effect/projectile/laser/omni/muzzle
@@ -164,7 +164,7 @@
 	name = "sniper beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/marauder.ogg'
-	damage = 50
+	force = 50
 	armor_penetration = 10
 	stun = 3
 	weaken = 3
@@ -194,20 +194,20 @@
 /obj/item/projectile/beam/stun/shock
 	name = "shock beam"
 	damage_type = ELECTROCUTE
-	damage = 10
+	force = 10
 	agony  = 5
 	fire_sound='sound/weapons/pulse.ogg'
 
 /obj/item/projectile/beam/stun/shock/heavy
 	name = "heavy shock beam"
-	damage = 20
+	force = 20
 	agony  = 10
 
 /obj/item/projectile/beam/plasmacutter
 	name = "plasma arc"
 	icon_state = "omnilaser"
 	fire_sound = 'sound/weapons/plasma_cutter.ogg'
-	damage = 15
+	force = 15
 	sharp = 1
 	edge = 1
 	damage_type = BURN
@@ -229,7 +229,7 @@
 	name = "disorientator ray"
 	icon_state = "beam_grass"
 	fire_sound='sound/weapons/confuseray.ogg'
-	damage = 2
+	force = 2
 	agony = 7
 	sharp = FALSE
 	distance_falloff = 5
@@ -260,7 +260,7 @@
 /obj/item/projectile/beam/particle
 	name = "particle lance"
 	icon_state = "particle"
-	damage = 35
+	force = 35
 	armor_penetration = 50
 	muzzle_type = /obj/effect/projectile/laser_particle/muzzle
 	tracer_type = /obj/effect/projectile/laser_particle/tracer
@@ -269,14 +269,14 @@
 
 /obj/item/projectile/beam/particle/small
 	name = "particle beam"
-	damage = 20
+	force = 20
 	armor_penetration = 20
 	penetration_modifier = 0.3
 
 /obj/item/projectile/beam/darkmatter
 	name = "dark matter bolt"
 	icon_state = "darkb"
-	damage = 40
+	force = 40
 	armor_penetration = 35
 	damage_type = BRUTE
 	muzzle_type = /obj/effect/projectile/darkmatter/muzzle

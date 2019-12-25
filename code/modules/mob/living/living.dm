@@ -1,5 +1,7 @@
 /mob/living/New()
 	..()
+	if(!health) //If health not set to anything, set to maxHealth
+		health = maxHealth
 	if(stat == DEAD)
 		add_to_dead_mob_list()
 	else
@@ -189,14 +191,14 @@ default behaviour is:
 
 /mob/living/verb/succumb()
 	set hidden = 1
-	if ((src.health < src.maxHealth/2)) // Health below half of maxhealth.
+	if ((src.health < src.maxHealth/2)) // Health below half of maxHealth.
 		src.adjustBrainLoss(src.health + src.maxHealth * 2) // Deal 2x health in BrainLoss damage, as before but variable.
 		updatehealth()
 		to_chat(src, "<span class='notice'>You have given up life and succumbed to death.</span>")
 
 /mob/living/proc/updatehealth()
 	if(status_flags & GODMODE)
-		health = 100
+		health = maxHealth
 		set_stat(CONSCIOUS)
 	else
 		health = maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - getHalLoss()

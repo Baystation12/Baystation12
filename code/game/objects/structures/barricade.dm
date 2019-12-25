@@ -7,8 +7,7 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = ABOVE_WINDOW_LAYER
 
-	var/health = 100
-	var/maxhealth = 100
+	maxHealth = 100
 	var/spiky = FALSE
 
 /obj/structure/barricade/Initialize(var/mapload, var/material_name)
@@ -21,8 +20,8 @@
 	SetName("[material.display_name] barricade")
 	desc = "A heavy, solid barrier made of [material.display_name]."
 	color = material.icon_colour
-	maxhealth = material.integrity
-	health = maxhealth
+	maxHealth = material.integrity
+	health = maxHealth
 
 /obj/structure/barricade/get_material()
 	return material
@@ -49,21 +48,21 @@
 		var/obj/item/stack/D = W
 		if(D.get_material_name() != material.name)
 			return //hitting things with the wrong type of stack usually doesn't produce messages, and probably doesn't need to.
-		if (health < maxhealth)
+		if (health < maxHealth)
 			if (D.get_amount() < 1)
 				to_chat(user, "<span class='warning'>You need one sheet of [material.display_name] to repair \the [src].</span>")
 				return
 			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-			if(do_after(user,20,src) && health < maxhealth)
+			if(do_after(user,20,src) && health < maxHealth)
 				if (D.use(1))
-					health = maxhealth
+					health = maxHealth
 					visible_message("<span class='notice'>[user] repairs \the [src].</span>")
 				return
 		return
 
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		switch(W.damtype)
+		switch(W.damage_type)
 			if(BURN)
 				take_damage(W.force * 1)
 			if(BRUTE)

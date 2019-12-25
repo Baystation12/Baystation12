@@ -76,14 +76,13 @@
 	req_access = list()
 
 /obj/item/projectile/beam/drone/weak
-	damage = 7
+	force = 7
 
 
 // Mobs //
 /mob/living/simple_animal/hostile/retaliate/goat/hydro
 	name = "goat"
 	desc = "An impressive goat, in size and coat. His horns look pretty serious!"
-	health = 100
 	maxHealth = 100
 	melee_damage_lower = 10
 	melee_damage_upper = 15
@@ -99,7 +98,6 @@
 	icon_living = "farmbot"
 	icon_dead = "farmbot_dead"
 	faction = "farmbots"
-	health = 225
 	maxHealth = 225
 	malfunctioning = 0
 

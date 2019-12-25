@@ -105,7 +105,6 @@
 	icon_state = "behemoth"
 	icon_living = "behemoth"
 	maxHealth = 250
-	health = 250
 	speak_emote = list("rumbles")
 	response_harm   = "harmlessly punches"
 	harm_intent_damage = 0
@@ -128,9 +127,9 @@
 
 /mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
-		var/reflectchance = 80 - round(P.damage/3)
+		var/reflectchance = 80 - round(P.force/3)
 		if(prob(reflectchance))
-			adjustBruteLoss(P.damage * 0.5)
+			adjustBruteLoss(P.force * 0.5)
 			visible_message("<span class='danger'>The [P.name] gets reflected by [src]'s shell!</span>", \
 							"<span class='userdanger'>The [P.name] gets reflected by [src]'s shell!</span>")
 
@@ -162,7 +161,6 @@
 	icon_living = "floating"
 	icon_dead = "floating_dead"
 	maxHealth = 75
-	health = 75
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	attacktext = "slashed"
@@ -185,7 +183,6 @@
 	icon_state = "artificer"
 	icon_living = "artificer"
 	maxHealth = 50
-	health = 50
 	response_harm = "viciously beaten"
 	harm_intent_damage = 5
 	melee_damage_lower = 5
@@ -213,7 +210,6 @@
 	icon_state = "behemoth"
 	icon_living = "behemoth"
 	maxHealth = 750
-	health = 750
 	speak_emote = list("rumbles")
 	response_harm   = "harmlessly punched"
 	harm_intent_damage = 0
@@ -242,7 +238,6 @@
 	icon_living = "harvester"
 	icon_dead = "harvester_dead"
 	maxHealth = 150
-	health = 150
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	attacktext = "violently stabbed"

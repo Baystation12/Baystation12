@@ -30,7 +30,7 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	pestlevel = 0
 	weedlevel = 0
 	mutation_level = 0
-	health = 100
+	maxHealth = 100
 	sampled = 0
 	. = ..()
 

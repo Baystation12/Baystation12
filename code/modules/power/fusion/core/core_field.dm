@@ -457,7 +457,7 @@
 	. = ..()
 
 /obj/effect/fusion_em_field/bullet_act(var/obj/item/projectile/Proj)
-	AddEnergy(Proj.damage)
+	AddEnergy(Proj.force)
 	update_icon()
 	return 0
 

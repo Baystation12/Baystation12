@@ -113,7 +113,7 @@
 	anchored = 1
 	can_buckle = 0 //no manual buckling or unbuckling
 
-	var/health = 25
+	maxHealth = 25
 	var/countdown = 15
 	var/temporary = 1
 	var/mob/living/carbon/captured = null
@@ -125,7 +125,7 @@
 	desc = "An energized net meant to subdue animals."
 
 	anchored = 0
-	health = 5
+	maxHealth = 5
 	temporary = 0
 	min_free_time = 5
 	max_free_time = 10

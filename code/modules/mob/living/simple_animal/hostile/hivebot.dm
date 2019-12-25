@@ -5,7 +5,6 @@
 	icon_state = "basic"
 	icon_living = "basic"
 	icon_dead = "basic"
-	health = 55
 	maxHealth = 55
 	melee_damage_lower = 2
 	melee_damage_upper = 3
@@ -38,7 +37,6 @@
 
 /mob/living/simple_animal/hostile/hivebot/strong
 	desc = "A junky looking robot with four spiky legs - this one has thick armour plating."
-	health = 120
 	maxHealth = 120
 	ranged = 1
 	can_escape = 1
@@ -61,7 +59,6 @@ Teleporter beacon, and its subtypes
 	desc = "Some odd beacon thing."
 	icon_state = "def_radar-off"
 	icon_living = "def_radar-off"
-	health = 200
 	maxHealth = 200
 	status_flags = 0
 	anchored = 1
@@ -114,7 +111,7 @@ Teleporter beacon, and its subtypes
 Special projectiles
 */
 /obj/item/projectile/bullet/pistol/holdout/hivebot
-	damage = 20
+	force = 20
 
 /obj/item/projectile/bullet/gyro/megabot
 	name = "microrocket"
@@ -122,7 +119,7 @@ Special projectiles
 	distance_falloff = 1.3
 
 /obj/item/projectile/beam/megabot
-	damage = 45
+	force = 45
 	distance_falloff = 0.5
 
 /*
@@ -139,7 +136,6 @@ The megabot
 	icon_state = "megabot"
 	icon_living = "megabot"
 	icon_dead = "megabot_dead"
-	health = 440
 	maxHealth = 440
 	melee_damage_lower = 15
 	melee_damage_upper = 19

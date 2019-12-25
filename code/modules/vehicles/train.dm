@@ -4,8 +4,7 @@
 
 	move_delay = 1
 
-	health = 100
-	maxhealth = 100
+	maxHealth = 100
 	fire_dam_coeff = 0.7
 	brute_dam_coeff = 0.5
 

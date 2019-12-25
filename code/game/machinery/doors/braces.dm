@@ -19,8 +19,7 @@
 	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/airlock_machines.dmi'
 	icon_state = "brace_open"
-	var/cur_health
-	var/max_health = 450
+	maxHealth = 450
 	var/obj/machinery/door/airlock/airlock = null
 	var/obj/item/weapon/airlock_electronics/brace/electronics
 
@@ -54,7 +53,6 @@
 
 /obj/item/weapon/airlock_brace/New()
 	..()
-	cur_health = max_health
 	electronics = new/obj/item/weapon/airlock_electronics/brace(src)
 	update_access()
 
@@ -102,21 +100,21 @@
 
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/C = W
-		if(cur_health == max_health)
+		if(health == maxHealth)
 			to_chat(user, "\The [src] does not require repairs.")
 			return
 		if(C.remove_fuel(0,user))
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			cur_health = min(cur_health + rand(80,120), max_health)
-			if(cur_health == max_health)
+			health = min(health + rand(80,120), maxHealth)
+			if(health == maxHealth)
 				to_chat(user, "You repair some dents on \the [src]. It is in perfect condition now.")
 			else
 				to_chat(user, "You repair some dents on \the [src].")
 
 
 /obj/item/weapon/airlock_brace/proc/take_damage(var/amount)
-	cur_health = between(0, cur_health - amount, max_health)
-	if(!cur_health)
+	health = between(0, health - amount, maxHealth)
+	if(!health)
 		if(airlock)
 			airlock.visible_message("<span class='danger'>\The [src] breaks off of \the [airlock]!</span>")
 		unlock_brace(null)
@@ -138,9 +136,9 @@
 
 
 /obj/item/weapon/airlock_brace/proc/health_percentage()
-	if(!max_health)
+	if(!maxHealth)
 		return 0
-	return (cur_health / max_health) * 100
+	return (health / maxHealth) * 100
 
 /obj/item/weapon/airlock_brace/proc/update_access()
 	if(!electronics)

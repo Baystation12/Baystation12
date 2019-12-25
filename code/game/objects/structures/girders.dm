@@ -5,7 +5,7 @@
 	layer = BELOW_OBJ_LAYER
 	w_class = ITEM_SIZE_NO_CONTAINER
 	var/state = 0
-	var/health = 200
+	maxHealth = 200
 	var/cover = 50 //how much cover the girder provides against projectiles.
 	var/material/reinf_material
 	var/reinforcing = 0
@@ -17,7 +17,7 @@
 /obj/structure/girder/displaced
 	icon_state = "displaced"
 	anchored = 0
-	health = 50
+	maxHealth = 50
 	cover = 25
 
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
@@ -53,7 +53,7 @@
 /obj/structure/girder/proc/reset_girder()
 	anchored = 1
 	cover = initial(cover)
-	health = min(health,initial(health))
+	health = min(health,maxHealth)
 	state = 0
 	icon_state = initial(icon_state)
 	reinforcing = 0
@@ -127,7 +127,8 @@
 			to_chat(user, "<span class='notice'>You dislodged the girder!</span>")
 			icon_state = "displaced"
 			anchored = 0
-			health = 50
+			maxHealth = 50
+			health = maxHealth
 			cover = 25
 
 	else if(istype(W, /obj/item/stack/material))
@@ -203,7 +204,7 @@
 
 /obj/structure/girder/proc/reinforce_girder()
 	cover = 75
-	health = 500
+	maxHealth = 500
 	state = 2
 	icon_state = "reinforced"
 	reinforcing = 0
@@ -239,7 +240,7 @@
 /obj/structure/girder/cult
 	icon= 'icons/obj/cult.dmi'
 	icon_state= "cultgirder"
-	health = 250
+	maxHealth = 250
 	cover = 70
 
 /obj/structure/girder/cult/dismantle()

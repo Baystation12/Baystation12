@@ -30,8 +30,8 @@
 	var/dispersion = 0.0
 	var/distance_falloff = 2  //multiplier, higher value means accuracy drops faster with distance
 
-	var/damage = 10
-	var/damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, PAIN are the only things that should be in here
+	force = 10
+	damage_type = BRUTE //BRUTE, BURN, TOX, OXY, CLONE, PAIN are the only things that should be in here
 	var/nodamage = 0 //Determines if the projectile will skip any damage inflictions
 	var/damage_flags = DAM_BULLET
 	var/projectile_type = /obj/item/projectile
@@ -70,7 +70,6 @@
 										//  have to be recreated multiple times
 
 /obj/item/projectile/Initialize()
-	damtype = damage_type //TODO unify these vars properly
 	if(!hitscan)
 		animate_movement = SLIDE_STEPS
 	else animate_movement = NO_STEPS
@@ -97,7 +96,7 @@
 //called when the projectile stops flying because it collided with something
 /obj/item/projectile/proc/on_impact(var/atom/A)
 	impact_effect(effect_transform)		// generate impact effect
-	if(damage && damage_type == BURN)
+	if(force && damage_type == BURN)
 		var/turf/T = get_turf(A)
 		if(T)
 			T.hotspot_expose(700, 5)
@@ -111,7 +110,7 @@
 
 /obj/item/projectile/proc/get_structure_damage()
 	if(damage_type == BRUTE || damage_type == BURN)
-		return damage
+		return force
 	return 0
 
 //return 1 if the projectile should be allowed to pass through after all, 0 if not.

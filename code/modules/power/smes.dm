@@ -371,7 +371,7 @@
 
 /obj/machinery/power/smes/bullet_act(var/obj/item/projectile/Proj)
 	if(Proj.damage_type == BRUTE || Proj.damage_type == BURN)
-		take_damage(Proj.damage)
+		take_damage(Proj.force)
 
 /obj/machinery/power/smes/ex_act(var/severity)
 	// Two strong explosions will destroy a SMES.

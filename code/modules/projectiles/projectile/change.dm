@@ -1,7 +1,7 @@
 /obj/item/projectile/change
 	name = "bolt of change"
 	icon_state = "ice_1"
-	damage = 0
+	force = 0
 	damage_type = BURN
 	damage_flags = 0
 	nodamage = 1

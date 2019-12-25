@@ -69,7 +69,6 @@
 	icon_dead = "samak_dead"
 	move_to_delay = 2
 	maxHealth = 125
-	health = 125
 	speed = 2
 	melee_damage_lower = 5
 	melee_damage_upper = 15
@@ -97,7 +96,6 @@
 	icon_dead = "diyaab_dead"
 	move_to_delay = 1
 	maxHealth = 25
-	health = 25
 	speed = 1
 	melee_damage_lower = 1
 	melee_damage_upper = 8
@@ -119,7 +117,6 @@
 	icon_dead = "shantak_dead"
 	move_to_delay = 1
 	maxHealth = 75
-	health = 75
 	speed = 1
 	melee_damage_lower = 3
 	melee_damage_upper = 12
@@ -172,7 +169,6 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 	icon_dead = "royalcrab_dead"
 	move_to_delay = 3
 	maxHealth = 150
-	health = 150
 	speed = 1
 	melee_damage_lower = 2
 	melee_damage_upper = 5
@@ -190,12 +186,11 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 	icon_dead = "jelly_dead"
 	move_to_delay = 1
 	maxHealth = 75
-	health = 75
 	speed = 1
 	melee_damage_lower = 3
 	melee_damage_upper = 12
 	attacktext = "stung"
-	damtype = BURN
+	damage_type = BURN
 	speak_chance = 1
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 	var/gets_random_color = TRUE
@@ -215,7 +210,6 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 	name = "zeq queen"
 	desc = "A gigantic jellyfish-like creature. Its bell wobbles about almost as if it's ready to burst."
 	maxHealth = 300
-	health = 300
 	melee_damage_lower = 18
 	melee_damage_upper = 30
 	gets_random_color = FALSE
@@ -255,7 +249,6 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 	name = "zeq duchess"
 	desc = "A huge jellyfish-like creature."
 	maxHealth = 150
-	health = 150
 	melee_damage_lower = 9
 	melee_damage_upper = 15
 	can_escape = TRUE
@@ -265,7 +258,6 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/quarter
 	name = "zeqling"
 	desc = "A jellyfish-like creature."
-	health = 75
 	maxHealth = 75
 	melee_damage_lower = 4.5
 	melee_damage_upper = 7.5
@@ -276,7 +268,6 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/fourth
 	name = "zeqetta"
 	desc = "A tiny jellyfish-like creature."
-	health = 40
 	maxHealth = 40
 	melee_damage_lower = 3
 	melee_damage_upper = 4
@@ -286,7 +277,6 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 /mob/living/simple_animal/hostile/retaliate/jelly/mega/eighth
 	name = "zeqttina"
 	desc = "An absolutely tiny jellyfish-like creature."
-	health = 20
 	maxHealth = 20
 	melee_damage_lower = 1.5
 	melee_damage_upper = 2

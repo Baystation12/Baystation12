@@ -17,7 +17,6 @@
 	emote_see = list("beeps menacingly","whirrs threateningly","scans its immediate vicinity")
 	a_intent = I_HURT
 	stop_automated_movement_when_pulled = 0
-	health = 300
 	maxHealth = 300
 	speed = 8
 	move_to_delay = 6
@@ -280,7 +279,7 @@
 	..()
 
 /obj/item/projectile/beam/drone
-	damage = 15
+	force = 15
 
 /obj/item/projectile/beam/pulse/drone
-	damage = 10
+	force = 10

@@ -14,7 +14,6 @@
 	response_harm = "hits"
 	speed = -1
 	maxHealth = 250
-	health = 250
 
 	pixel_x = -16
 

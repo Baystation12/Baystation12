@@ -21,7 +21,7 @@ Expected inputs per arg:
 target: Mob
 user: mob/user
 damage: Num. Defaults to 30 if not set. Can be zero, if you just want the backstab check itself. This is the flat damage done to SIMPLE MOBS. Humans recieve organ damage instead.
-damtype: Expects a damage type macro. Can accept the damage strings, but it is recommended you use the macro instead.
+damage_type: Expects a damage type macro. Can accept the damage strings, but it is recommended you use the macro instead.
 target_zone: target zone intent.
 location_check: bool. allows facestabs if set to false, skipping the check for both mob's locations. Automatically set to false if the target is lying down -AND- lying face down.
 ---------------

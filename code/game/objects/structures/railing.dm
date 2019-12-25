@@ -12,8 +12,7 @@
 	obj_flags = OBJ_FLAG_ROTATABLE
 
 	var/broken =    FALSE
-	var/health =    70
-	var/maxhealth = 70
+	maxHealth = 70
 	var/neighbor_status = 0
 
 /obj/structure/railing/mapped
@@ -44,8 +43,8 @@
 
 	name = "[material.display_name] [initial(name)]"
 	desc = "A simple [material.display_name] railing designed to protect against careless trespass."
-	maxhealth = round(material.integrity / 5)
-	health = maxhealth
+	maxHealth = round(material.integrity / 5)
+	health = maxHealth
 	color = material.icon_colour
 
 	if(material.products_need_process())
@@ -76,8 +75,8 @@
 
 /obj/structure/railing/examine(mob/user)
 	. = ..()
-	if(health < maxhealth)
-		switch(health / maxhealth)
+	if(health < maxHealth)
+		switch(health / maxHealth)
 			if(0.0 to 0.5)
 				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
 			if(0.25 to 0.5)
@@ -240,15 +239,15 @@
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/F = W
 		if(F.isOn())
-			if(health >= maxhealth)
+			if(health >= maxHealth)
 				to_chat(user, "<span class='warning'>\The [src] does not need repairs.</span>")
 				return
 			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
 			if(do_after(user, 20, src))
-				if(health >= maxhealth)
+				if(health >= maxHealth)
 					return
 				user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>", "<span class='notice'>You repair some damage to \the [src].</span>")
-				health = min(health+(maxhealth/5), maxhealth)
+				health = min(health+(maxHealth/5), maxHealth)
 			return
 
 	// Install
@@ -264,7 +263,7 @@
 			update_icon()
 		return
 
-	if(W.force && (W.damtype == "fire" || W.damtype == "brute"))
+	if(W.force && (W.damage_type == "fire" || W.damage_type == "brute"))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		visible_message("<span class='danger'>\The [src] has been [LAZYLEN(W.attack_verb) ? pick(W.attack_verb) : "attacked"] with \the [W] by \the [user]!</span>")
 		take_damage(W.force)
@@ -286,4 +285,4 @@
 	. = ..()
 	if(.)
 		if(!anchored || material.is_brittle())
-			take_damage(maxhealth) // Fatboy
+			take_damage(maxHealth) // Fatboy

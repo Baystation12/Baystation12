@@ -248,10 +248,10 @@
 				T.visible_message(SPAN_WARNING("\The [src] turns on."))
 			if (istype(src, /obj/item/weapon/weldingtool/electric))
 				src.force = 11
-				src.damtype = ELECTROCUTE
+				src.damage_type = ELECTROCUTE
 			else
 				src.force = tank.lit_force
-				src.damtype = BURN
+				src.damage_type = BURN
 			welding = 1
 			update_icon()
 			START_PROCESSING(SSobj, src)
@@ -270,7 +270,7 @@
 			src.force = initial(force)
 		else
 			src.force = tank.unlit_force
-		src.damtype = BRUTE
+		src.damage_type = BRUTE
 		src.welding = 0
 		update_icon()
 

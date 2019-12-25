@@ -5,7 +5,7 @@
 /datum/breach
 	var/class = 0                           // Size. Lower is smaller. Uses floating point values!
 	var/descriptor                          // 'gaping hole' etc.
-	var/damtype = BURN                      // Punctured or melted
+	var/damage_type = BURN                      // Punctured or melted
 	var/patched = FALSE
 	var/obj/item/clothing/suit/space/holder // Suit containing the list of breaches holding this instance.
 	var/global/list/breach_brute_descriptors = list(
@@ -39,15 +39,15 @@
 	//Sanity...
 	class = between(1, round(class), 5)
 	//Apply the correct descriptor.
-	if(damtype == BURN)
+	if(damage_type == BURN)
 		descriptor = breach_burn_descriptors[class]
-	else if(damtype == BRUTE)
+	else if(damage_type == BRUTE)
 		descriptor = breach_brute_descriptors[class]
 	if(patched)
 		descriptor = "patched [descriptor]"
 
 //Repair a certain amount of brute or burn damage to the suit.
-/obj/item/clothing/suit/space/proc/repair_breaches(var/damtype, var/amount, var/mob/user)
+/obj/item/clothing/suit/space/proc/repair_breaches(var/damage_type, var/amount, var/mob/user)
 
 	if(!can_breach || !breaches || !breaches.len || !damage)
 		to_chat(user, "There are no breaches to repair on \the [src].")
@@ -56,7 +56,7 @@
 	var/list/valid_breaches = list()
 
 	for(var/datum/breach/B in breaches)
-		if(B.damtype == damtype)
+		if(B.damage_type == damage_type)
 			valid_breaches += B
 
 	if(!valid_breaches.len)
@@ -79,7 +79,7 @@
 	user.visible_message("<b>[user]</b> patches some of the damage on \the [src].")
 	calc_breach_damage()
 
-/obj/item/clothing/suit/space/proc/create_breaches(var/damtype, var/amount)
+/obj/item/clothing/suit/space/proc/create_breaches(var/damage_type, var/amount)
 
 	amount -= src.breach_threshold
 	amount *= src.resilience
@@ -95,7 +95,7 @@
 	//Increase existing breaches.
 	for(var/datum/breach/existing in breaches)
 
-		if(existing.damtype != damtype)
+		if(existing.damage_type != damage_type)
 			continue
 
 		//keep in mind that 10 breach damage == full pressure loss.
@@ -109,9 +109,9 @@
 				existing.class = 5
 				amount -= needs
 
-			if(existing.damtype == BRUTE)
+			if(existing.damage_type == BRUTE)
 				visible_message("<span class = 'warning'>\The [existing.descriptor] on [src] gapes wider[existing.patched ? ", tearing the patch" : ""]!</span>")
-			else if(existing.damtype == BURN)
+			else if(existing.damage_type == BURN)
 				visible_message("<span class = 'warning'>\The [existing.descriptor] on [src] widens[existing.patched ? ", ruining the patch" : ""]!</span>")
 
 			existing.patched = FALSE
@@ -123,13 +123,13 @@
 
 		B.class = min(amount,5)
 
-		B.damtype = damtype
+		B.damage_type = damage_type
 		B.update_descriptor()
 		B.holder = src
 
-		if(B.damtype == BRUTE)
+		if(B.damage_type == BRUTE)
 			visible_message("<span class = 'warning'>\A [B.descriptor] opens up on [src]!</span>")
-		else if(B.damtype == BURN)
+		else if(B.damage_type == BURN)
 			visible_message("<span class = 'warning'>\A [B.descriptor] marks the surface of [src]!</span>")
 
 	calc_breach_damage()
@@ -155,9 +155,9 @@
 				all_patched = FALSE
 				damage += B.class
 
-			if(B.damtype == BRUTE)
+			if(B.damage_type == BRUTE)
 				brute_damage += B.class
-			else if(B.damtype == BURN)
+			else if(B.damage_type == BURN)
 				burn_damage += B.class
 
 	if(damage >= 3)

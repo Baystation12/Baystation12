@@ -47,7 +47,7 @@
 		//Draw the cover.
 		if(closed_system)
 			new_overlays += "hydrocover2"
-		if(seed && health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
+		if(seed && plant_health <= (seed.get_trait(TRAIT_ENDURANCE) / 2))
 			new_overlays += "over_lowhealth3"
 		if(waterlevel <= 10)
 			new_overlays += "over_lowwater3"

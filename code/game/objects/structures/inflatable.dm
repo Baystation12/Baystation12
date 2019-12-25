@@ -2,10 +2,8 @@
 	name = "inflatable"
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/inflatable.dmi'
-	var/deploy_path = null
-	var/inflatable_health
-
 	atmos_canpass = CANPASS_DENSITY
+	var/deploy_path = null
 
 /obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
@@ -18,8 +16,8 @@
 	var/obj/structure/inflatable/R = new deploy_path(user.loc)
 	transfer_fingerprints_to(R)
 	R.add_fingerprint(user)
-	if(inflatable_health)
-		R.health = inflatable_health
+	if(health)
+		R.health = health
 	qdel(src)
 
 
@@ -45,7 +43,7 @@
 	icon_state = "wall"
 
 	var/undeploy_path = null
-	var/health = 10
+	maxHealth = 10
 	var/taped
 
 	var/max_pressure_diff = RIG_MAX_PRESSURE
@@ -86,17 +84,17 @@
 
 	if(prob(50) && (max_pressure - min_pressure > max_pressure_diff || max_local_temp > max_temp))
 		take_damage(1)
-		if(health == round(0.7*initial(health)))
+		if(health == round(0.7 * maxHealth))
 			visible_message(SPAN_WARNING("\The [src] is taking damage!"))
-		if(health == round(0.3*initial(health)))
+		if(health == round(0.3 * maxHealth))
 			visible_message(SPAN_WARNING("\The [src] is barely holding up!"))
 
 /obj/structure/inflatable/examine(mob/user)
 	. = ..()
 	if(.)
-		if(health >= initial(health))
+		if(health >= maxHealth)
 			to_chat(user, SPAN_NOTICE("It's undamaged."))
-		else if(health >= 0.5 * initial(health))
+		else if(health >= 0.5 * maxHealth)
 			to_chat(user, SPAN_WARNING("It's showing signs of damage."))
 		else if(health >= 0)
 			to_chat(user, SPAN_DANGER("It's heavily damaged!"))
@@ -130,7 +128,7 @@
 /obj/structure/inflatable/attackby(obj/item/weapon/W, mob/user)
 	if(!istype(W) || istype(W, /obj/item/weapon/inflatable_dispenser)) return
 
-	if(istype(W, /obj/item/weapon/tape_roll) && health < initial(health) - 3)
+	if(istype(W, /obj/item/weapon/tape_roll) && health < maxHealth - 3)
 		if(taped)
 			to_chat(user, SPAN_NOTICE("\The [src] can't be patched any more with \the [W]!"))
 			return TRUE
@@ -139,7 +137,7 @@
 			to_chat(user, SPAN_NOTICE("You patch some damage in \the [src] with \the [W]!"))
 			take_damage(-3)
 			return TRUE
-	else if((W.damtype == BRUTE || W.damtype == BURN) && (W.can_puncture() || W.force > 10))
+	else if((W.damage_type == BRUTE || W.damage_type == BURN) && (W.can_puncture() || W.force > 10))
 		..()
 		if(hit(W.force))
 			visible_message("<span class='danger'>[user] pierces [src] with [W]!</span>")
@@ -173,7 +171,7 @@
 		spawn(50)
 			var/obj/item/inflatable/R = new undeploy_path(src.loc)
 			src.transfer_fingerprints_to(R)
-			R.inflatable_health = health
+			R.health = health
 			qdel(src)
 
 /obj/structure/inflatable/verb/hand_deflate()

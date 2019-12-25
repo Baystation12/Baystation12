@@ -2,7 +2,7 @@
 	name = "ion bolt"
 	icon_state = "ion"
 	fire_sound = 'sound/weapons/Laser.ogg'
-	damage = 0
+	force = 0
 	damage_type = BURN
 	damage_flags = 0
 	nodamage = 1
@@ -25,7 +25,7 @@
 /obj/item/projectile/bullet/gyro
 	name ="explosive bolt"
 	icon_state= "bolter"
-	damage = 50
+	force = 50
 	damage_flags = DAM_BULLET | DAM_SHARP | DAM_EDGE
 
 	on_hit(var/atom/target, var/blocked = 0)
@@ -36,7 +36,7 @@
 	name = "freeze beam"
 	icon_state = "ice_2"
 	fire_sound = 'sound/weapons/pulse3.ogg'
-	damage = 0
+	force = 0
 	damage_type = BURN
 	damage_flags = 0
 	nodamage = 1
@@ -52,7 +52,7 @@
 	name = "meteor"
 	icon = 'icons/obj/meteor.dmi'
 	icon_state = "smallf"
-	damage = 0
+	force = 0
 	damage_type = BRUTE
 	nodamage = 1
 
@@ -81,7 +81,7 @@
 	name = "alpha somatoray"
 	icon_state = "energy"
 	fire_sound = 'sound/effects/stealthoff.ogg'
-	damage = 0
+	force = 0
 	damage_type = TOX
 	nodamage = 1
 
@@ -114,7 +114,7 @@
 	name = "gamma somatoray"
 	icon_state = "energy2"
 	fire_sound = 'sound/effects/stealthoff.ogg'
-	damage = 0
+	force = 0
 	damage_type = TOX
 	nodamage = 1
 	var/decl/plantgene/gene = null
@@ -123,7 +123,7 @@
 	name = "beta somatoray"
 	icon_state = "energy2"
 	fire_sound = 'sound/effects/stealthoff.ogg'
-	damage = 0
+	force = 0
 	damage_type = TOX
 	nodamage = 1
 
@@ -150,7 +150,7 @@
 /obj/item/projectile/chameleon
 	name = "bullet"
 	icon_state = "bullet"
-	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
+	force = 1 // stop trying to murderbone with a fake gun dumbass!!!
 	embed = 0 // nope
 	nodamage = 1
 	damage_type = PAIN
@@ -160,7 +160,7 @@
 /obj/item/projectile/venom
 	name = "venom bolt"
 	icon_state = "venom"
-	damage = 5 //most damage is in the reagent
+	force = 5 //most force is in the reagent
 	damage_type = TOX
 	damage_flags = 0
 

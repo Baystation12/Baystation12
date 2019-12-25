@@ -6,7 +6,6 @@
 	icon_living = "grey baby slime"
 	icon_dead = "grey baby slime dead"
 	speak_emote = list("chirps")
-	health = 100
 	maxHealth = 100
 	response_help  = "pets"
 	response_disarm = "shoos"
@@ -24,7 +23,6 @@
 	name = "pet slime"
 	desc = "A lovable, domesticated slime."
 	icon = 'icons/mob/simple_animal/slimes.dmi'
-	health = 200
 	maxHealth = 200
 	icon_state = "grey adult slime"
 	icon_living = "grey adult slime"

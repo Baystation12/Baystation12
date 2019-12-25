@@ -17,7 +17,7 @@
 	response_harm   = "kicks"
 	faction = "goat"
 	attacktext = "kicked"
-	health = 40
+	maxHealth = 40
 	melee_damage_lower = 1
 	melee_damage_upper = 5
 
@@ -108,7 +108,7 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 	attacktext = "kicked"
-	health = 50
+	maxHealth = 50
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/beef
 	meat_amount = 6
@@ -174,7 +174,7 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 	attacktext = "kicked"
-	health = 1
+	maxHealth = 1
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 	mob_size = MOB_MINISCULE
 
@@ -219,7 +219,7 @@ var/global/chicken_count = 0
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 	attacktext = "kicked"
-	health = 10
+	maxHealth = 10
 	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 

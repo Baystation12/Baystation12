@@ -6,7 +6,6 @@
 	speak_emote = list("chirps")
 
 	maxHealth = 150
-	health = 150
 	gender = NEUTER
 
 	update_icon = 0

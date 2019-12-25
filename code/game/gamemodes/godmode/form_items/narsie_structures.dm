@@ -8,7 +8,7 @@
 	desc = "This forge gives off no heat, no light, its flames look almost unnatural."
 	icon_state = "forge"
 	build_cost = 1000
-	health = 50
+	maxHealth = 50
 	var/busy = 0
 	var/recipe_feat_list = "Blood Crafting"
 	var/text_modifications = list("Cost" = "Blood",
@@ -75,7 +75,7 @@
 	name = "bloody stone"
 	desc = "A jagged stone covered in the various stages of blood, from dried to fresh."
 	icon_state = "blood_stone"
-	health = 100 //Its a piece of rock.
+	maxHealth = 100 //Its a piece of rock.
 	build_cost = 700
 
 /obj/structure/deity/blood_stone/attack_hand(var/mob/user)

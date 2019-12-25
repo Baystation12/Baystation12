@@ -47,7 +47,7 @@
 /obj/item/projectile/beam/blood_effect
 	name = "blood jet"
 	icon_state = "blood"
-	damage = 0
+	force = 0
 	randpixel = 0
 	no_attack_log = 1
 	muzzle_type = /obj/effect/projectile/blood

@@ -159,7 +159,7 @@ field_generator power level display
 
 /obj/machinery/field_generator/bullet_act(var/obj/item/projectile/Proj)
 	if(istype(Proj, /obj/item/projectile/beam))
-		power += Proj.damage * EMITTER_DAMAGE_POWER_TRANSFER
+		power += Proj.force * EMITTER_DAMAGE_POWER_TRANSFER
 		update_icon()
 	return 0
 

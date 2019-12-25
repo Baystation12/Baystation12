@@ -13,7 +13,6 @@
 	response_disarm = "gently pushes aside"
 	response_harm = "strikes"
 	attacktext = "smacked around"
-	health = 45
 	maxHealth = 45
 	melee_damage_lower = 4
 	melee_damage_upper = 6
@@ -54,7 +53,6 @@
 	melee_damage_upper = min((melee_damage_upper + potency), max_upper)
 	if(!loose && prob(25) && (melee_damage_lower >= 15)) //second wind
 		loose = TRUE
-		health = 80
 		maxHealth = 80
 		enrage_potency = 4
 		desc = "The goose is loose! Oh no!"

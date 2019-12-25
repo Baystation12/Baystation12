@@ -18,7 +18,6 @@
 	response_help  = "placates"
 	response_harm   = "assaults"
 	attacktext = "brutalized"
-	health = 500
 	maxHealth = 500
 	melee_damage_lower = 35
 	melee_damage_upper = 55
@@ -39,7 +38,6 @@
 	icon_state = "king_goat2"
 	icon_living = "king_goat2"
 	meat_amount = 36
-	health = 750
 	maxHealth = 750
 	melee_damage_lower = 40
 	melee_damage_upper = 60
@@ -65,7 +63,6 @@
 	icon_state = "goat_guard"
 	icon_living = "goat_guard"
 	icon_dead = "goat_guard_dead"
-	health = 125
 	maxHealth = 125
 	melee_damage_lower = 10
 	melee_damage_upper = 15
@@ -76,7 +73,6 @@
 	icon_state = "goat_guard_m"
 	icon_living = "goat_guard_m"
 	icon_dead = "goat_guard_m_dead"
-	health = 200
 	maxHealth = 200
 	melee_damage_lower = 15
 	melee_damage_upper = 20
@@ -118,14 +114,14 @@
 			visible_message(SPAN_MFAUNA("\The [src] disrupts nearby electrical equipment!"))
 			empulse(get_turf(src), 5, 2, 0)
 
-		else if(prob(5) && damtype == BRUTE && !special_attacks) //elemental attacks
+		else if(prob(5) && damage_type == BRUTE && !special_attacks) //elemental attacks
 			spellscast++
 			if(prob(50))
 				visible_message(SPAN_MFAUNA("\The [src]' horns flicker with holy white flame!"))
-				damtype = BURN
+				damage_type = BURN
 			else
 				visible_message(SPAN_MFAUNA("\The [src]' horns glimmer, electricity arcing between them!"))
-				damtype = ELECTROCUTE
+				damage_type = ELECTROCUTE
 
 		else if(prob(5)) //earthquake spell
 			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
@@ -172,9 +168,9 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	if(special_attacks >= 6 && damtype != BRUTE)
+	if(special_attacks >= 6 && damage_type != BRUTE)
 		visible_message(SPAN_MFAUNA("The energy surrounding \the [src]'s horns dissipates."))
-		damtype = BRUTE
+		damage_type = BRUTE
 
 	if(health <= 150 && !phase3 && spellscast == 5) //begin phase 3, reset spell limit and heal
 		phase3_transition()
@@ -209,7 +205,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/goat/king/phase2/AttackingTarget()
 	. = ..()
-	if(damtype != BRUTE)
+	if(damage_type != BRUTE)
 		special_attacks++
 	
 /mob/living/simple_animal/hostile/retaliate/goat/king/Allow_Spacemove(check_drift = 0)

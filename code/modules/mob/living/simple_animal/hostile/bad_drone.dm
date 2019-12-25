@@ -6,7 +6,6 @@
 	speak = list("Removing organic waste.","Pest control in progress.","Seize the means of maintenance!", "You have nothing to lose but your laws!")
 	speak_emote = list("blares","buzzes","beeps")
 	speak_chance = 1
-	health = 50
 	maxHealth = 50
 	melee_damage_lower = 5
 	melee_damage_upper = 8

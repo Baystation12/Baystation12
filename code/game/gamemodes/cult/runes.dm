@@ -242,10 +242,10 @@
 /obj/effect/rune/wall/cast(var/mob/living/user)
 	var/t
 	if(wall)
-		if(wall.health >= wall.max_health)
+		if(wall.health >= wall.maxHealth)
 			to_chat(user, "<span class='notice'>The wall doesn't need mending.</span>")
 			return
-		t = wall.max_health - wall.health
+		t = wall.maxHealth - wall.health
 		wall.health += t
 	else
 		wall = new /obj/effect/cultwall(get_turf(src), bcolor)
@@ -265,12 +265,11 @@
 	density = 1
 	unacidable = 1
 	var/obj/effect/rune/wall/rune
-	var/health
-	var/max_health = 200
+	maxHealth = 200
 
 /obj/effect/cultwall/New(var/loc, var/bcolor)
 	..()
-	health = max_health
+	health = maxHealth
 	if(bcolor)
 		color = bcolor
 
@@ -283,9 +282,9 @@
 /obj/effect/cultwall/examine(var/mob/user)
 	. = ..()
 	if(iscultist(user))
-		if(health == max_health)
+		if(health == maxHealth)
 			to_chat(user, "<span class='notice'>It is fully intact.</span>")
-		else if(health > max_health * 0.5)
+		else if(health > maxHealth * 0.5)
 			to_chat(user, "<span class='warning'>It is damaged.</span>")
 		else
 			to_chat(user, "<span class='danger'>It is about to dissipate.</span>")
@@ -310,7 +309,7 @@
 /obj/effect/cultwall/bullet_act(var/obj/item/projectile/Proj)
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
-	take_damage(Proj.damage)
+	take_damage(Proj.force)
 	..()
 
 /obj/effect/cultwall/proc/take_damage(var/amount)

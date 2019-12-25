@@ -43,8 +43,8 @@
 	pass_flags = PASS_FLAG_TABLE
 	mouse_opacity = 1
 
-	var/health = 10
-	var/max_health = 100
+	health = 10
+	maxHealth = 100
 	var/growth_threshold = 0
 	var/growth_type = 0
 	var/max_growth = 0
@@ -70,7 +70,7 @@
 	seed = newseed
 	if(start_matured)
 		mature_time = 0
-		health = max_health
+		health = maxHealth
 	..()
 
 /obj/effect/vine/Initialize()
@@ -84,15 +84,15 @@
 	if(!seed)
 		return INITIALIZE_HINT_QDEL
 	name = seed.display_name
-	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
+	maxHealth = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD) == 2)
 		mouse_opacity = 2
 		max_growth = VINE_GROWTH_STAGES
-		growth_threshold = max_health/VINE_GROWTH_STAGES
+		growth_threshold = maxHealth/VINE_GROWTH_STAGES
 		growth_type = seed.get_growth_type()
 	else
 		max_growth = seed.growth_stages
-		growth_threshold = max_growth && max_health/max_growth
+		growth_threshold = max_growth && maxHealth/max_growth
 
 	if(max_growth > 2 && prob(50))
 		max_growth-- //Ensure some variation in final sprite, makes the carpet of crap look less wonky.
@@ -275,12 +275,12 @@
 	return
 
 /obj/effect/vine/proc/adjust_health(value)
-	health = Clamp(health + value, 0, max_health)
+	health = Clamp(health + value, 0, maxHealth)
 	if(health <= 0)
 		die_off()
 
 /obj/effect/vine/proc/is_mature()
-	return (health >= (max_health/3) && world.time > mature_time)
+	return (health >= (maxHealth/3) && world.time > mature_time)
 
 /obj/effect/vine/is_burnable()
 	return seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000

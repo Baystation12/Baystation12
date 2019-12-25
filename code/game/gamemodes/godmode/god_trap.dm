@@ -1,6 +1,6 @@
 /obj/structure/deity/trap
 	density = 0
-	health = 1
+	maxHealth = 1
 	var/triggered = 0
 
 /obj/structure/deity/trap/New()

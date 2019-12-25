@@ -11,7 +11,7 @@ var/global/list/rad_collectors = list()
 	req_access = list(access_engine_equip)
 	var/obj/item/weapon/tank/phoron/P = null
 
-	var/health = 100
+	maxHealth = 100
 	var/max_safe_temp = 1000 + T0C
 	var/melted
 

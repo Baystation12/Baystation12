@@ -4,7 +4,6 @@
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "ghostian"
 	blend_mode = BLEND_SUBTRACT
-	health = 100
 	maxHealth = 100
 	melee_damage_lower = 15
 	melee_damage_upper = 30

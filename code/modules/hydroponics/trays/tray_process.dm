@@ -67,9 +67,9 @@
 	// water and nutrients will cause a plant to become healthier.
 	var/healthmod = rand(1,3) * HYDRO_SPEED_MULTIPLIER
 	if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) && prob(35))
-		health += (nutrilevel < 2 ? -healthmod : healthmod)
+		plant_health += (nutrilevel < 2 ? -healthmod : healthmod)
 	if(seed.get_trait(TRAIT_REQUIRES_WATER) && prob(35))
-		health += (waterlevel < 10 ? -healthmod : healthmod)
+		plant_health += (waterlevel < 10 ? -healthmod : healthmod)
 
 	// Check that pressure, heat and light are all within bounds.
 	// First, handle an open system or an unconnected closed system.
@@ -84,9 +84,9 @@
 
 	// Seed datum handles gasses, light and pressure.
 	if(mechanical && closed_system)
-		health -= seed.handle_environment(T,environment,tray_light)
+		plant_health -= seed.handle_environment(T,environment,tray_light)
 	else
-		health -= seed.handle_environment(T,environment)
+		plant_health -= seed.handle_environment(T,environment)
 
 	// If we're attached to a pipenet, then we should let the pipenet know we might have modified some gasses
 	if (closed_system && connected_port)
@@ -97,25 +97,25 @@
 	if(toxins > 0)
 		var/toxin_uptake = max(1,round(toxins/10))
 		if(toxins > seed.get_trait(TRAIT_TOXINS_TOLERANCE))
-			health -= toxin_uptake
+			plant_health -= toxin_uptake
 		toxins -= toxin_uptake
 
 	// Check for pests and weeds.
 	// Some carnivorous plants happily eat pests.
 	if(pestlevel > 0)
 		if(seed.get_trait(TRAIT_CARNIVOROUS))
-			health += HYDRO_SPEED_MULTIPLIER
+			plant_health += HYDRO_SPEED_MULTIPLIER
 			pestlevel -= HYDRO_SPEED_MULTIPLIER
 		else if (pestlevel >= seed.get_trait(TRAIT_PEST_TOLERANCE))
-			health -= HYDRO_SPEED_MULTIPLIER
+			plant_health -= HYDRO_SPEED_MULTIPLIER
 
 	// Some plants thrive and live off of weeds.
 	if(weedlevel > 0)
 		if(seed.get_trait(TRAIT_PARASITE))
-			health += HYDRO_SPEED_MULTIPLIER
+			plant_health += HYDRO_SPEED_MULTIPLIER
 			weedlevel -= HYDRO_SPEED_MULTIPLIER
 		else if (weedlevel >= seed.get_trait(TRAIT_WEED_TOLERANCE))
-			health -= HYDRO_SPEED_MULTIPLIER
+			plant_health -= HYDRO_SPEED_MULTIPLIER
 
 	// Handle life and death.
 	// When the plant dies, weeds thrive and pests die off.

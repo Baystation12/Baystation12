@@ -6,7 +6,7 @@
 	density = 1
 	anchored = 1
 	setup = 0
-	health = 0 //destroying the statue kills the mob within
+	maxHealth = 0 //destroying the statue kills the mob within
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock
 	var/intialFire = 0	//it's a little sloppy I know but it was this or the GODMODE flag. Lesser of two evils.
 	var/intialBrute = 0
@@ -23,6 +23,7 @@
 			L.client.eye = src
 		L.forceMove(src)
 		L.set_sdisability(MUTE)
+		maxHealth = L.maxHealth + 100
 		health = L.health + 100 //stoning damaged mobs will result in easier to shatter statues
 		intialTox = L.getToxLoss()
 		intialFire = L.getFireLoss()

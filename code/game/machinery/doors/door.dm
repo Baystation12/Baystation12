@@ -23,8 +23,7 @@
 	var/normalspeed = 1
 	var/heat_proof = 0 // For glass airlocks/opacity firedoors
 	var/air_properties_vary_with_direction = 0
-	var/maxhealth = 300
-	var/health
+	maxHealth = 300
 	var/destroy_hits = 10 //How many strong hits it takes to destroy the door
 	var/min_force = 10 //minimum amount of force needed to damage the door with a melee weapon
 	var/hitsound = 'sound/weapons/smash.ogg' //sound door makes when hit with a weapon
@@ -74,7 +73,6 @@
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
 
-	health = maxhealth
 	update_connections(1)
 	update_icon()
 
@@ -214,7 +212,7 @@
 		if(stat & BROKEN)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return
-		if(health >= maxhealth)
+		if(health >= maxHealth)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 			return
 		if(!density)
@@ -222,7 +220,7 @@
 			return
 
 		//figure out how much metal we need
-		var/amount_needed = (maxhealth - health) / DOOR_REPAIR_AMOUNT
+		var/amount_needed = (maxHealth - health) / DOOR_REPAIR_AMOUNT
 		amount_needed = ceil(amount_needed)
 
 		var/obj/item/stack/stack = I
@@ -254,7 +252,7 @@
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 			if(do_after(user, 5 * repairing.amount, src) && welder && welder.isOn())
 				to_chat(user, "<span class='notice'>You finish repairing the damage to \the [src].</span>")
-				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
+				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxHealth)
 				update_icon()
 				qdel(repairing)
 				repairing = null
@@ -298,7 +296,7 @@
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(W.damage_type == BRUTE || W.damage_type == BURN)
 			user.do_attack_animation(src)
 			if(W.force < min_force)
 				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")
@@ -312,11 +310,11 @@
 	src.health = max(0, src.health - damage)
 	if(src.health <= 0 && initialhealth > 0)
 		src.set_broken(TRUE)
-	else if(src.health < src.maxhealth / 4 && initialhealth >= src.maxhealth / 4)
+	else if(src.health < src.maxHealth / 4 && initialhealth >= src.maxHealth / 4)
 		visible_message("\The [src] looks like it's about to break!" )
-	else if(src.health < src.maxhealth / 2 && initialhealth >= src.maxhealth / 2)
+	else if(src.health < src.maxHealth / 2 && initialhealth >= src.maxHealth / 2)
 		visible_message("\The [src] looks seriously damaged!" )
-	else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
+	else if(src.health < src.maxHealth * 3/4 && initialhealth >= src.maxHealth * 3/4)
 		visible_message("\The [src] shows signs of damage!" )
 	update_icon()
 	return
@@ -326,11 +324,11 @@
 	. = ..()
 	if(src.health <= 0)
 		to_chat(user, "\The [src] is broken!")
-	else if(src.health < src.maxhealth / 4)
+	else if(src.health < src.maxHealth / 4)
 		to_chat(user, "\The [src] looks like it's about to break!")
-	else if(src.health < src.maxhealth / 2)
+	else if(src.health < src.maxHealth / 2)
 		to_chat(user, "\The [src] looks seriously damaged!")
-	else if(src.health < src.maxhealth * 3/4)
+	else if(src.health < src.maxHealth * 3/4)
 		to_chat(user, "\The [src] shows signs of damage!")
 
 
@@ -490,7 +488,7 @@
 		deconstruct(null, TRUE)
 
 /obj/machinery/door/proc/CheckPenetration(var/base_chance, var/damage)
-	. = damage/maxhealth*180
+	. = damage/maxHealth*180
 	if(glass)
 		. *= 2
 	. = round(.)

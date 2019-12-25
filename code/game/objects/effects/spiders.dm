@@ -5,7 +5,7 @@
 	icon = 'icons/effects/effects.dmi'
 	anchored = 1
 	density = 0
-	var/health = 15
+	maxHealth = 15
 
 //similar to weeds, but only barfed out by nurses manually
 /obj/effect/spider/ex_act(severity)
@@ -311,7 +311,7 @@
 	name = "cocoon"
 	desc = "Something wrapped in silky spider web."
 	icon_state = "cocoon1"
-	health = 60
+	maxHealth = 60
 
 /obj/effect/spider/cocoon/Initialize()
 	. = ..()

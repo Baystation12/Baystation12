@@ -20,7 +20,6 @@
 	faction = "crabs"
 	pry_time = 2 SECONDS
 
-	health = 350
 	maxHealth = 350
 	melee_damage_lower = 15
 	melee_damage_upper = 18

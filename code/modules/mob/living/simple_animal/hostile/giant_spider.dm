@@ -21,7 +21,6 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
 	maxHealth = 125
-	health = 125
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 	melee_damage_flags = DAM_SHARP
@@ -62,7 +61,6 @@
 	icon_dead = "brown_dead"
 	meat_amount = 4
 	maxHealth = 200
-	health = 200
 	melee_damage_lower = 13
 	melee_damage_upper = 18
 	poison_per_bite = 5
@@ -82,7 +80,6 @@
 	icon_living = "beige"
 	icon_dead = "beige_dead"
 	maxHealth = 80
-	health = 80
 	melee_damage_lower = 10
 	melee_damage_upper = 14
 	harm_intent_damage = 6 //soft
@@ -109,7 +106,6 @@
 	icon_living = "black"
 	icon_dead = "black_dead"
 	maxHealth = 150
-	health = 150
 	melee_damage_lower = 17
 	melee_damage_upper = 20
 	poison_per_bite = 10
@@ -133,7 +129,6 @@
 	icon_living = "purple"
 	icon_dead = "purple_dead"
 	maxHealth = 90
-	health = 90
 	melee_damage_lower = 10
 	melee_damage_upper = 14
 	poison_per_bite = 15

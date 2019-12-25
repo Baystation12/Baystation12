@@ -8,7 +8,6 @@
 	desc = "The botanist's best friend."
 	icon = 'icons/mob/bot/farmbot.dmi'
 	icon_state = "farmbot0"
-	health = 50
 	maxHealth = 50
 	req_access = list(list(access_hydroponics, access_robotics))
 

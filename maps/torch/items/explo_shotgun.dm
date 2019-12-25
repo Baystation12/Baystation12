@@ -63,7 +63,7 @@
 		var/damage = chambered.BB.get_structure_damage()
 		if(istype(chambered.BB, /obj/item/projectile/bullet/pellet))
 			var/obj/item/projectile/bullet/pellet/PP = chambered.BB
-			damage = PP.damage*PP.pellets
+			damage = PP.force * PP.pellets
 		if(damage > 30)
 			var/mob/living/carbon/C = loc
 			if(istype(loc))
@@ -97,7 +97,7 @@
 
 /obj/item/projectile/bullet/shotgun/beanbag/net
 	name = "netshell"
-	damage = 5
+	force = 5
 	agony = 10
 
 /obj/item/projectile/bullet/shotgun/beanbag/net/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)

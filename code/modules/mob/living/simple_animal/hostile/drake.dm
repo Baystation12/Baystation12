@@ -20,7 +20,6 @@
 	bleed_colour = COLOR_VIOLET
 	melee_damage_flags = DAM_EDGE
 
-	health = 200
 	maxHealth = 200
 	melee_damage_lower = 14
 	melee_damage_upper = 19

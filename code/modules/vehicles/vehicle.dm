@@ -19,8 +19,7 @@
 
 	var/attack_log = null
 	var/on = 0
-	var/health = 0	//do not forget to set health for your vehicle!
-	var/maxhealth = 0
+	maxHealth = 0	//do not forget to set health for your vehicle!
 	var/fire_dam_coeff = 1.0
 	var/brute_dam_coeff = 1.0
 	var/open = 0	//Maint panel
@@ -89,9 +88,9 @@
 	else if(isWelder(W))
 		var/obj/item/weapon/weldingtool/T = W
 		if(T.welding)
-			if(health < maxhealth)
+			if(health < maxHealth)
 				if(open)
-					health = min(maxhealth, health+10)
+					health = min(maxHealth, health+10)
 					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 					user.visible_message("<span class='warning'>\The [user] repairs \the [src]!</span>","<span class='notice'>You repair \the [src]!</span>")
 				else
@@ -100,9 +99,9 @@
 				to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
 		else
 			to_chat(user, "<span class='notice'>Unable to repair while [src] is off.</span>")
-	else if(hasvar(W,"force") && hasvar(W,"damtype"))
+	else if(hasvar(W,"force") && hasvar(W,"damage_type"))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		switch(W.damtype)
+		switch(W.damage_type)
 			if("fire")
 				health -= W.force * fire_dam_coeff
 			if("brute")

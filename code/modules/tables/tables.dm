@@ -10,8 +10,7 @@
 	throwpass = 1
 	mob_offset = 12
 	var/flipped = 0
-	var/maxhealth = 10
-	var/health = 10
+	maxHealth = 10
 
 	// For racks.
 	var/can_reinforce = 1
@@ -34,16 +33,16 @@
 	..()
 
 /obj/structure/table/proc/update_material()
-	var/old_maxhealth = maxhealth
+	var/old_maxhealth = maxHealth
 	if(!material)
-		maxhealth = 10
+		maxHealth = 10
 	else
-		maxhealth = material.integrity / 2
+		maxHealth = material.integrity / 2
 
 		if(reinforced)
-			maxhealth += reinforced.integrity / 2
+			maxHealth += reinforced.integrity / 2
 
-	health += maxhealth - old_maxhealth
+	health += maxHealth - old_maxhealth
 
 /obj/structure/table/take_damage(amount)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
@@ -87,8 +86,8 @@
 
 /obj/structure/table/examine(mob/user)
 	. = ..()
-	if(health < maxhealth)
-		switch(health / maxhealth)
+	if(health < maxHealth)
+		switch(health / maxHealth)
 			if(0.0 to 0.5)
 				to_chat(user, "<span class='warning'>It looks severely damaged!</span>")
 			if(0.25 to 0.5)
@@ -138,7 +137,7 @@
 		dismantle(W, user)
 		return 1
 
-	if(health < maxhealth && isWelder(W))
+	if(health < maxHealth && isWelder(W))
 		var/obj/item/weapon/weldingtool/F = W
 		if(F.welding)
 			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
@@ -147,7 +146,7 @@
 				return
 			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
 			                              "<span class='notice'>You repair some damage to \the [src].</span>")
-			health = max(health+(maxhealth/5), maxhealth) // 20% repair per application
+			health = max(health+(maxHealth/5), maxHealth) // 20% repair per application
 			return 1
 
 	if(!material && can_plate && istype(W, /obj/item/stack/material))

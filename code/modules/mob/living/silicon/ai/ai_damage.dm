@@ -48,10 +48,10 @@
 	..()
 	add_ai_verbs(src)
 
-// Returns percentage of AI's remaining backup capacitor charge (maxhealth - oxyloss).
+// Returns percentage of AI's remaining backup capacitor charge (maxHealth - oxyloss).
 /mob/living/silicon/ai/proc/backup_capacitor()
 	return ((getOxyLoss() - maxHealth) / maxHealth) * (-100)
 
-// Returns percentage of AI's remaining hardware integrity (maxhealth - (bruteloss + fireloss))
+// Returns percentage of AI's remaining hardware integrity (maxHealth - (bruteloss + fireloss))
 /mob/living/silicon/ai/proc/hardware_integrity()
 	return (health / maxHealth) * 100

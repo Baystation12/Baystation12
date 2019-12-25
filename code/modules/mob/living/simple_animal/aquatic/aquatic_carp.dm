@@ -6,7 +6,6 @@
 	icon_dead = "carp_dead"
 	faction = "fishes"
 	maxHealth = 20
-	health = 20
 	harm_intent_damage = 5
 	melee_damage_lower = 12
 	melee_damage_upper = 12

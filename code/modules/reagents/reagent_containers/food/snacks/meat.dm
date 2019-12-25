@@ -5,7 +5,7 @@
 	icon_state = "meat"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/rawcutlet
 	slices_num = 3
-	health = 180
+	maxHealth = 180
 	filling_color = "#ff1c1c"
 	center_of_mass = "x=16;y=14"
 	New()

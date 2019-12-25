@@ -15,7 +15,6 @@
 	turns_per_move = 5
 	see_in_dark = 6
 	maxHealth = 5
-	health = 5
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "stamps on"

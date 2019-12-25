@@ -39,7 +39,6 @@
 	icon_dead = "hive_executioner_dead"
 	move_to_delay = 5
 	speed = -1
-	health = 280
 	maxHealth = 280
 	can_escape = TRUE
 
@@ -98,7 +97,7 @@
 
 /mob/living/simple_animal/hostile/hive_alien/defender/wounded
 	name = "wounded hive defender"
-	health = 80
+	maxHealth = 80
 	can_escape = FALSE
 
 /obj/effect/shuttle_landmark/nav_blueriv/nav1

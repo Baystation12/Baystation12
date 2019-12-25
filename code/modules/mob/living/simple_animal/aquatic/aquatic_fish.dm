@@ -6,7 +6,6 @@
 	icon_dead = "content_dead"
 	faction = "fishes"
 	maxHealth = 10
-	health = 10
 	mob_size = MOB_TINY
 
 	meat_amount = 1

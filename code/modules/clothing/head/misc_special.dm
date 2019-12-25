@@ -135,13 +135,13 @@
 	src.onfire = !( src.onfire )
 	if (src.onfire)
 		src.force = 3
-		src.damtype = "fire"
+		src.damage_type = "fire"
 		src.icon_state = "cake1"
 		src.item_state = "cake1"
 		START_PROCESSING(SSobj, src)
 	else
 		src.force = null
-		src.damtype = "brute"
+		src.damage_type = "brute"
 		src.icon_state = "cake0"
 		src.item_state = "cake0"
 	return

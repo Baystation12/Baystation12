@@ -5,7 +5,6 @@
 	icon_state = "leech"
 	icon_living = "leech"
 	icon_dead = "leech_dead"
-	health = 15
 	maxHealth = 15
 	harm_intent_damage = 5
 	melee_damage_lower = 2

@@ -137,7 +137,7 @@
 			visible_message("<span class='notice'>\The [src] misses its attack on \the [target_mob]!</span>")
 			return
 		var/mob/living/L = target_mob
-		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damtype,defense,melee_damage_flags)
+		L.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext,environment_smash,damage_type,defense,melee_damage_flags)
 		return L
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()

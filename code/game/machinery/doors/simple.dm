@@ -25,8 +25,8 @@
 	if(!material)
 		qdel(src)
 		return
-	maxhealth = max(100, material.integrity*10)
-	health = maxhealth
+	maxHealth = max(100, material.integrity*10)
+	health = maxHealth
 	if(!icon_base)
 		icon_base = material.door_icon_base
 	hitsound = material.hitsound
@@ -141,7 +141,7 @@
 		if(stat & BROKEN)
 			to_chat(user, "<span class='notice'>It looks like \the [src] is pretty busted. It's going to need more than just patching up now.</span>")
 			return
-		if(health >= maxhealth)
+		if(health >= maxHealth)
 			to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 			return
 		if(!density)
@@ -150,19 +150,19 @@
 
 		//figure out how much metal we need
 		var/obj/item/stack/stack = I
-		var/amount_needed = ceil((maxhealth - health)/DOOR_REPAIR_AMOUNT)
+		var/amount_needed = ceil((maxHealth - health)/DOOR_REPAIR_AMOUNT)
 		var/used = min(amount_needed,stack.amount)
 		if (used)
 			to_chat(user, "<span class='notice'>You fit [used] [stack.singular_name]\s to damaged and broken parts on \the [src].</span>")
 			stack.use(used)
-			health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxhealth)
+			health = between(health, health + used*DOOR_REPAIR_AMOUNT, maxHealth)
 		return
 
 	//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
 	if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
 		var/obj/item/weapon/W = I
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(W.damage_type == BRUTE || W.damage_type == BURN)
 			user.do_attack_animation(src)
 			if(W.force < min_force)
 				user.visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W] with no visible effect.</span>")

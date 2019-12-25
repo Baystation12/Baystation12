@@ -136,7 +136,6 @@
 	icon_living = "test_subject"
 	icon_dead = "test_subject_dead"
 	maxHealth = 40
-	health = 40
 	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 10
@@ -173,7 +172,6 @@
 	desc = "Guard dressed at Zeng-Hu Pharmaceuticals uniform."
 	icon_state = "guard_light"
 	maxHealth = 60
-	health = 60
 	harm_intent_damage = 5
 	melee_damage_lower = 20
 	melee_damage_upper = 20
@@ -208,7 +206,6 @@
 	desc = "Virologist dressed at Zeng-Hu Pharmaceuticals uniform."
 	icon_state = "virologist_m"
 	maxHealth = 50
-	health = 50
 	harm_intent_damage = 5
 	melee_damage_lower = 8
 	melee_damage_upper = 12

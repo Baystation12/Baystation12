@@ -2,7 +2,7 @@
 // This class of weapons takes force and appearance data from a material datum.
 // They are also fragile based on material data and many can break/smash apart.
 /obj/item/weapon/material
-	health = 10
+	maxHealth = 10
 	hitsound = 'sound/weapons/bladeslice.ogg'
 	gender = NEUTER
 	throw_speed = 3
@@ -58,7 +58,8 @@
 	if(!material)
 		qdel(src)
 	else
-		health = round(material.integrity/5)
+		maxHealth = round(material.integrity/5)
+		health = maxHealth
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)

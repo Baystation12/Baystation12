@@ -13,8 +13,6 @@
 	var/material/reinf_material
 	var/init_material = MATERIAL_GLASS
 	var/init_reinf_material = null
-	var/maxhealth
-	var/health
 	var/damage_per_fire_tick = 2 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
 	var/construction_state = 2
 	var/id
@@ -52,15 +50,15 @@
 	if (start_dir)
 		set_dir(start_dir)
 
-	maxhealth = material.integrity
+	maxHealth = material.integrity
 	if(reinf_material)
-		maxhealth += 0.25 * reinf_material.integrity
+		maxHealth += 0.25 * reinf_material.integrity
 
 	if(is_fulltile())
-		maxhealth *= 4
+		maxHealth *= 4
 		layer = FULL_WINDOW_LAYER
 
-	health = maxhealth
+	health = maxHealth
 
 	set_anchored(!constructed)
 	update_connections(1)
@@ -79,10 +77,10 @@
 	. = ..(user)
 	if(reinf_material)
 		to_chat(user, "<span class='notice'>It is reinforced with the [reinf_material.display_name] lattice.</span>")
-	if(health == maxhealth)
+	if(health == maxHealth)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
 	else
-		var/perc = health / maxhealth
+		var/perc = health / maxHealth
 		if(perc > 0.75)
 			to_chat(user, "<span class='notice'>It has a few cracks.</span>")
 		else if(perc > 0.5)
@@ -105,11 +103,11 @@
 	else
 		if(sound_effect)
 			playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
-		if(health < maxhealth / 4 && initialhealth >= maxhealth / 4)
+		if(health < maxHealth / 4 && initialhealth >= maxHealth / 4)
 			visible_message("<span class='notice'>\The [src] looks like it's about to shatter!</span>")
-		else if(health < maxhealth / 2 && initialhealth >= maxhealth / 2)
+		else if(health < maxHealth / 2 && initialhealth >= maxHealth / 2)
 			visible_message("\The [src] looks seriously damaged!" )
-		else if(health < maxhealth * 3/4 && initialhealth >= maxhealth * 3/4)
+		else if(health < maxHealth * 3/4 && initialhealth >= maxHealth * 3/4)
 			visible_message("Cracks begin to appear in \the [src]!" )
 	return
 
@@ -286,7 +284,7 @@
 			set_anchored(0)
 	else
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-		if(W.damtype == BRUTE || W.damtype == BURN)
+		if(W.damage_type == BRUTE || W.damage_type == BURN)
 			user.do_attack_animation(src)
 			hit(W.force)
 			if(health <= 7)

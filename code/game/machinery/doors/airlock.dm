@@ -179,7 +179,7 @@ var/list/airlock_overlays = list()
 	name = "Glass Airlock"
 	icon_state = "preview_glass"
 	hitsound = 'sound/effects/Glasshit.ogg'
-	maxhealth = 300
+	maxHealth = 300
 	explosion_resistance = 5
 	opacity = 0
 	glass = 1
@@ -287,7 +287,7 @@ var/list/airlock_overlays = list()
 	opacity = 0
 
 /obj/machinery/door/airlock/external/glass
-	maxhealth = 300
+	maxHealth = 300
 	explosion_resistance = 5
 	opacity = 0
 	glass = 1
@@ -703,7 +703,7 @@ About the new airlock wires panel:
 				weld_overlay = welded_file
 			if(stat & BROKEN)
 				damage_overlay = sparks_broken_file
-			else if(health < maxhealth * 3/4)
+			else if(health < maxHealth * 3/4)
 				damage_overlay = sparks_damaged_file
 			if(lights && src.arePowerSystemsOn())
 				if(locked)
@@ -717,7 +717,7 @@ About the new airlock wires panel:
 				panel_overlay = panel_file
 			if(stat & BROKEN)
 				damage_overlay = sparks_broken_file
-			else if(health < maxhealth * 3/4)
+			else if(health < maxHealth * 3/4)
 				damage_overlay = sparks_damaged_file
 			if(welded)
 				weld_overlay = welded_file
@@ -731,7 +731,7 @@ About the new airlock wires panel:
 				panel_overlay = panel_file
 			if(stat & BROKEN)
 				damage_overlay = sparks_broken_file
-			else if(health < maxhealth * 3/4)
+			else if(health < maxHealth * 3/4)
 				damage_overlay = sparks_damaged_file
 			if(welded)
 				weld_overlay = welded_file
@@ -746,7 +746,7 @@ About the new airlock wires panel:
 		if(AIRLOCK_OPEN)
 			if(stat & BROKEN)
 				damage_overlay = sparks_broken_file
-			else if(health < maxhealth * 3/4)
+			else if(health < maxHealth * 3/4)
 				damage_overlay = sparks_damaged_file
 
 		if(AIRLOCK_OPENING)

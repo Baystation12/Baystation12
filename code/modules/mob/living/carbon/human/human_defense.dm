@@ -14,7 +14,7 @@ meteor_act
 		return PROJECTILE_FORCE_MISS //if they don't have the organ in question then the projectile just passes by.
 
 	//Shields
-	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
+	var/shield_check = check_shields(P.force, P, null, def_zone, "the [P.name]")
 	if(shield_check)
 		if(shield_check < 0)
 			return shield_check
@@ -24,7 +24,7 @@ meteor_act
 
 	var/obj/item/organ/external/organ = get_organ(def_zone)
 	var/blocked = ..(P, def_zone)
-	var/penetrating_damage = ((P.damage + P.armor_penetration) * P.penetration_modifier) - blocked
+	var/penetrating_damage = ((P.force + P.armor_penetration) * P.penetration_modifier) - blocked
 
 	//Embed or sever artery
 	if(P.can_embed() && !(species.species_flags & SPECIES_FLAG_NO_EMBED) && prob(22.5 + max(penetrating_damage, -10)) && !(prob(50) && (organ.sever_artery())))
@@ -34,7 +34,7 @@ meteor_act
 		SP.forceMove(organ)
 		organ.embed(SP)
 
-	projectile_hit_bloody(P, P.damage*blocked_mult(blocked), def_zone)
+	projectile_hit_bloody(P, P.force*blocked_mult(blocked), def_zone)
 
 	radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8)
 
@@ -178,7 +178,7 @@ meteor_act
 	if(!affecting)
 		return 0
 
-	var/blocked = get_blocked_ratio(hit_zone, I.damtype, I.damage_flags(), I.armor_penetration)
+	var/blocked = get_blocked_ratio(hit_zone, I.damage_type, I.damage_flags(), I.armor_penetration)
 	// Handle striking to cripple.
 	if(user.a_intent == I_DISARM)
 		effective_force *= 0.66 //reduced effective force...
@@ -194,7 +194,7 @@ meteor_act
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(GLOB.hit_appends)	//forcesay checks stat already
 		radio_interrupt_cooldown = world.time + (RADIO_INTERRUPT_DEFAULT * 0.8) //getting beat on can briefly prevent radio use
-	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
+	if((I.damage_type == BRUTE || I.damage_type == PAIN) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
 				//Harder to score a stun but if you do it lasts a bit longer
@@ -215,7 +215,7 @@ meteor_act
 	return 1
 
 /mob/living/carbon/human/proc/attack_bloody(obj/item/W, mob/living/attacker, var/effective_force, var/hit_zone)
-	if(W.damtype != BRUTE)
+	if(W.damage_type != BRUTE)
 		return
 
 	//make non-sharp low-force weapons less likely to be bloodied
@@ -277,7 +277,7 @@ meteor_act
 /mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked)
 	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
 		return 0
-	if(W.damtype != BRUTE)
+	if(W.damage_type != BRUTE)
 		return 0
 
 	//want the dislocation chance to be such that the limb is expected to dislocate after dealing a fraction of the damage needed to break the limb
@@ -314,7 +314,7 @@ meteor_act
 					throw_mode_off()
 					return
 
-		var/dtype = O.damtype
+		var/dtype = O.damage_type
 		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/zone = BP_CHEST
@@ -429,10 +429,10 @@ meteor_act
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
+/mob/living/carbon/human/proc/handle_suit_punctures(var/damage_type, var/damage, var/def_zone)
 
 	// Tox and oxy don't matter to suits.
-	if(damtype != BURN && damtype != BRUTE) return
+	if(damage_type != BURN && damage_type != BRUTE) return
 
 	// The rig might soak this hit, if we're wearing one.
 	if(back && istype(back,/obj/item/weapon/rig))
@@ -443,7 +443,7 @@ meteor_act
 	if(!wear_suit) return
 	if(!istype(wear_suit,/obj/item/clothing/suit/space)) return
 	var/obj/item/clothing/suit/space/SS = wear_suit
-	SS.create_breaches(damtype, damage)
+	SS.create_breaches(damage_type, damage)
 
 /mob/living/carbon/human/reagent_permeability()
 	var/perm = 0

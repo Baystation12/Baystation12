@@ -7,7 +7,6 @@
 	icon_dead = "brownbear_dead"
 	icon_gib = "brownbear_gib"
 
-	health = 75
 	maxHealth = 75
 
 	density = 1

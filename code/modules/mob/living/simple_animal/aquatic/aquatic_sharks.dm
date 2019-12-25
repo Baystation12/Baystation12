@@ -5,7 +5,6 @@
 	icon_living = "shark"
 	icon_dead = "shark_dead"
 	maxHealth = 150
-	health = 150
 	harm_intent_damage = 8
 	melee_damage_lower = 15
 	melee_damage_upper = 30
@@ -33,7 +32,6 @@
 	speed = 0
 	mob_size = MOB_LARGE
 	pixel_x = -16
-	health = 400
 	maxHealth = 400
 	harm_intent_damage = 5
 	melee_damage_lower = 30

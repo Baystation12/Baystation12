@@ -3,7 +3,7 @@
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "yellow"
 	density = 1
-	var/health = 100.0
+	maxHealth = 100.0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_GARGANTUAN
 	construct_state = null
@@ -247,8 +247,8 @@ update_flag
 	if(!(Proj.damage_type == BRUTE || Proj.damage_type == BURN))
 		return
 
-	if(Proj.damage)
-		src.health -= round(Proj.damage / 2)
+	if(Proj.force)
+		src.health -= round(Proj.force / 2)
 		healthcheck()
 	..()
 

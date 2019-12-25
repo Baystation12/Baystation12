@@ -7,7 +7,6 @@
 	speak_chance = 0
 	turns_per_move = 5
 	maxHealth = 15
-	health = 15
 	response_help  = "prods"
 	response_disarm = "pushes aside"
 	response_harm   = "smacks"

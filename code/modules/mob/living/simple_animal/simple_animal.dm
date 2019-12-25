@@ -1,7 +1,6 @@
 /mob/living/simple_animal
 	name = "animal"
 	icon = 'icons/mob/simple_animal/animal.dmi'
-	health = 20
 	maxHealth = 20
 	universal_speak = FALSE
 
@@ -62,7 +61,7 @@
 	var/friendly = "nuzzles"
 	var/environment_smash = 0
 	var/resistance		  = 0	// Damage reduction
-	var/damtype = BRUTE
+	var/damage_type = BRUTE
 	var/defense = "melee" //what armor protects against its attacks
 	var/armor_type = /datum/extension/armor
 	var/list/natural_armor //what armor animal has
@@ -217,9 +216,9 @@
 	if(!Proj || Proj.nodamage)
 		return
 
-	var/damage = Proj.damage
-	if(Proj.damtype == STUN)
-		damage = Proj.damage / 6
+	var/damage = Proj.force
+	if(Proj.damage_type == STUN)
+		damage = Proj.force / 6
 	if(Proj.agony)
 		damage += Proj.agony / 6
 		if(health < Proj.agony * 3)
@@ -318,9 +317,9 @@
 		return 0
 
 	var/damage = O.force
-	if (O.damtype == PAIN)
+	if (O.damage_type == PAIN)
 		damage = 0
-	if (O.damtype == STUN)
+	if (O.damage_type == STUN)
 		damage = (O.force / 8)
 	if(supernatural && istype(O,/obj/item/weapon/nullrod))
 		damage *= 2

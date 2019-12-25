@@ -14,7 +14,6 @@
 	faction = "antlions"
 	bleed_colour = COLOR_SKY_BLUE
 
-	health = 65
 	maxHealth = 65
 	melee_damage_lower = 7
 	melee_damage_upper = 15
@@ -111,7 +110,6 @@
 	icon_living = "queen"
 	icon_dead = "queen_dead"
 	mob_size = MOB_LARGE
-	health = 275
 	maxHealth = 275
 	melee_damage_lower = 21
 	melee_damage_upper = 29

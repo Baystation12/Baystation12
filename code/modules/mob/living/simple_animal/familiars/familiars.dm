@@ -33,7 +33,6 @@
 	speak_emote = list("chitters","clicks")
 
 
-	health = 200
 	maxHealth = 200
 	melee_damage_lower = 10
 	melee_damage_upper = 15
@@ -56,7 +55,6 @@
 
 	speak_emote = list("gnashes")
 
-	health = 100
 	maxHealth = 100
 	melee_damage_lower = 10
 	melee_damage_upper = 10
@@ -80,7 +78,6 @@
 
 	response_help = "thinks better of touching"
 
-	health = 150
 	maxHealth = 150
 	melee_damage_lower = 5
 	melee_damage_upper = 8
@@ -107,7 +104,6 @@
 	speak_emote = list("entones")
 	mob_size = MOB_SMALL
 
-	health = 25
 	maxHealth = 25
 
 	wizardy_spells = list(/spell/targeted/heal_target,
@@ -143,7 +139,6 @@
 
 	response_harm = "stamps on"
 
-	health = 15
 	maxHealth = 15
 	melee_damage_lower = 1
 	melee_damage_upper = 1
@@ -171,7 +166,6 @@
 	holder_type = /obj/item/weapon/holder/cat
 	mob_size = MOB_SMALL
 
-	health = 25
 	maxHealth = 25
 	melee_damage_lower = 3
 	melee_damage_upper = 4

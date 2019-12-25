@@ -11,7 +11,6 @@
 	response_harm = "hits the"
 	speed = 2
 	maxHealth = 50
-	health = 50
 
 	harm_intent_damage = 8
 	melee_damage_lower = 10

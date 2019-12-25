@@ -6,7 +6,6 @@
 	icon_living = "lizard"
 	icon_dead = "lizard-dead"
 	speak_emote = list("hisses")
-	health = 5
 	maxHealth = 5
 	attacktext = "bitten"
 	melee_damage_lower = 1

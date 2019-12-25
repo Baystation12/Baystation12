@@ -29,7 +29,6 @@ var/global/list/protected_objects = list(/obj/machinery,
 	response_harm = "hits"
 	speed = 4
 	maxHealth = 100
-	health = 100
 
 	harm_intent_damage = 5
 	melee_damage_lower = 8

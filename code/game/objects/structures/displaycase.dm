@@ -7,7 +7,7 @@
 	anchored = 1
 	unacidable = 1//Dissolving the case would also delete the gun.
 	alpha = 150
-	var/health = 14
+	maxHealth = 14
 	var/destroyed = 0
 
 /obj/structure/displaycase/Initialize()

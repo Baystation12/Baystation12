@@ -66,7 +66,7 @@
 			other.vine_overrun(seed, src)
 
 	//Growing up
-	if(health < max_health)
+	if(health < maxHealth)
 		adjust_health(1)
 		if(growth_threshold && !(health % growth_threshold))
 			update_icon()
@@ -107,14 +107,14 @@
 
 /obj/effect/vine/proc/can_spawn_plant()
 	var/turf/simulated/T = get_turf(src)
-	return parent == src && health == max_health && !plant && istype(T) && !T.CanZPass(src, DOWN)
+	return parent == src && health == maxHealth && !plant && istype(T) && !T.CanZPass(src, DOWN)
 
 /obj/effect/vine/proc/should_sleep()
 	if(buckled_mob) //got a victim to fondle
 		return FALSE
 	if(get_neighbors().len) //got places to spread to
 		return FALSE
-	if(health < max_health) //got some growth to do
+	if(health < maxHealth) //got some growth to do
 		return FALSE
 	if(targets_in_range()) //got someone to grab
 		return FALSE

@@ -2,7 +2,7 @@
 	name = "bullet"
 	icon_state = "bullet"
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
-	damage = 50
+	force = 50
 	damage_type = BRUTE
 	damage_flags = DAM_BULLET | DAM_SHARP
 	nodamage = 0
@@ -21,14 +21,14 @@
 		shake_camera(L, 3, 2)
 
 /obj/item/projectile/bullet/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier)
-	if(penetrating > 0 && damage > 20 && prob(damage))
+	if(penetrating > 0 && force > 20 && prob(force))
 		mob_passthrough_check = 1
 	else
 		mob_passthrough_check = 0
 	. = ..()
 
 	if(. == 1 && iscarbon(target_mob))
-		damage *= 0.7 //squishy mobs absorb KE
+		force *= 0.7 //squishy mobs absorb KE
 
 /obj/item/projectile/bullet/can_embed()
 	//prevent embedding if the projectile is passing through the mob
@@ -44,10 +44,10 @@
 			return 0
 		return 1
 
-	var/chance = damage
+	var/chance = force
 	if(has_extension(A, /datum/extension/penetration))
 		var/datum/extension/penetration/P = get_extension(A, /datum/extension/penetration)
-		chance = P.PenetrationProbability(chance, damage, damage_type)
+		chance = P.PenetrationProbability(chance, force, damage_type)
 
 	if(prob(chance))
 		if(A.opacity)
@@ -60,7 +60,7 @@
 //For projectiles that actually represent clouds of projectiles
 /obj/item/projectile/bullet/pellet
 	name = "shrapnel" //'shrapnel' sounds more dangerous (i.e. cooler) than 'pellet'
-	damage = 22.5
+	force = 22.5
 	//icon_state = "bullet" //TODO: would be nice to have it's own icon state
 	var/pellets = 4			//number of pellets
 	var/range_step = 2		//projectile will lose a fragment each time it travels this distance. Can be a non-integer.
@@ -121,17 +121,17 @@
 
 /obj/item/projectile/bullet/pistol
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	damage = 30
+	force = 30
 	distance_falloff = 3
 
 /obj/item/projectile/bullet/pistol/holdout
-	damage = 25
+	force = 25
 	penetration_modifier = 1.2
 	distance_falloff = 4
 
 /obj/item/projectile/bullet/pistol/strong
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
-	damage = 50
+	force = 50
 	armor_penetration = 20
 	penetration_modifier = 0.8
 	distance_falloff = 2.5
@@ -139,14 +139,14 @@
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
 	damage_flags = 0
-	damage = 5
+	force = 5
 	agony = 30
 	embed = 0
 
 //4mm. Tiny, very low damage, does not embed, but has very high penetration. Only to be used for the experimental SMG.
 /obj/item/projectile/bullet/flechette
 	fire_sound = 'sound/weapons/gunshot/gunshot_4mm.ogg'
-	damage = 8
+	force = 8
 	penetrating = 1
 	armor_penetration = 70
 	embed = 0
@@ -157,12 +157,12 @@
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 55
+	force = 55
 	armor_penetration = 20
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
-	damage = 25
+	force = 25
 	damage_flags = 0
 	agony = 60
 	embed = 0
@@ -174,7 +174,7 @@
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 15
+	force = 15
 	pellets = 6
 	range_step = 1
 	spread_step = 10
@@ -183,7 +183,7 @@
 
 /obj/item/projectile/bullet/rifle
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
-	damage = 30
+	force = 30
 	armor_penetration = 25
 	penetration_modifier = 1.5
 	penetrating = 1
@@ -191,13 +191,13 @@
 
 /obj/item/projectile/bullet/rifle/military
 	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
-	damage = 25
+	force = 25
 	armor_penetration = 40
 	penetration_modifier = 1
 
 /obj/item/projectile/bullet/rifle/shell
 	fire_sound = 'sound/weapons/gunshot/sniper.ogg'
-	damage = 80
+	force = 80
 	stun = 3
 	weaken = 3
 	penetrating = 5
@@ -207,7 +207,7 @@
 	distance_falloff = 0.5
 
 /obj/item/projectile/bullet/rifle/shell/apds
-	damage = 75
+	force = 75
 	penetrating = 6
 	armor_penetration = 95
 	penetration_modifier = 1.5
@@ -227,20 +227,20 @@
 
 /obj/item/projectile/bullet/blank
 	invisibility = 101
-	damage = 1
+	force = 1
 	embed = 0
 
 /* Practice */
 
 /obj/item/projectile/bullet/pistol/practice
-	damage = 5
+	force = 5
 
 /obj/item/projectile/bullet/rifle/military/practice
-	damage = 5
+	force = 5
 
 /obj/item/projectile/bullet/shotgun/practice
 	name = "practice"
-	damage = 5
+	force = 5
 
 /obj/item/projectile/bullet/pistol/cap
 	name = "cap"
@@ -248,7 +248,7 @@
 	fire_sound = null
 	damage_type = PAIN
 	damage_flags = 0
-	damage = 0
+	force = 0
 	nodamage = 1
 	embed = 0
 
@@ -259,7 +259,7 @@
 /obj/item/projectile/bullet/rock //spess dust
 	name = "micrometeor"
 	icon_state = "rock"
-	damage = 40
+	force = 40
 	armor_penetration = 25
 	life_span = 255
 	distance_falloff = 0

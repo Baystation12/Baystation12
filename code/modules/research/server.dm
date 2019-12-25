@@ -5,7 +5,7 @@
 	base_type = /obj/machinery/r_n_d/server
 	construct_state = /decl/machine_construction/default/panel_closed
 	var/datum/research/files
-	var/health = 100
+	maxHealth = 100
 	var/list/id_with_upload = list()	//List of R&D consoles with upload to server access.
 	var/list/id_with_download = list()	//List of R&D consoles with download from server access.
 	var/id_with_upload_string = ""		//String versions for easy editing in map editor.

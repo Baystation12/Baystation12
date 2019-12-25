@@ -13,7 +13,6 @@
 
 	pixel_x = -16
 
-	health = 150
 	maxHealth = 150
 
 	harm_intent_damage = 5

@@ -6,7 +6,6 @@
 	attack_state = "ed209-c"
 	layer = MOB_LAYER
 	density = 1
-	health = 100
 	maxHealth = 100
 
 	is_ranged = 1

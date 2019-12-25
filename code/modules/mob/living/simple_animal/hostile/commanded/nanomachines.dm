@@ -7,7 +7,6 @@
 	icon = 'icons/mob/simple_animal/critter.dmi'
 	icon_state = "blobsquiggle_grey"
 	attacktext = "swarmed"
-	health = 10
 	maxHealth = 10
 	var/regen_time = 0
 	melee_damage_lower = 1

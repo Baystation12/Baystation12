@@ -12,8 +12,7 @@
 
 	layer = BLOB_SHIELD_LAYER
 
-	var/maxHealth = 30
-	var/health
+	maxHealth = 30
 	var/regen_rate = 5
 	var/brute_resist = 4.3
 	var/fire_resist = 0.8
@@ -27,7 +26,6 @@
 	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
 
 /obj/effect/blob/New(loc)
-	health = maxHealth
 	update_icon()
 	return ..(loc)
 
@@ -160,9 +158,9 @@
 
 	switch(Proj.damage_type)
 		if(BRUTE)
-			take_damage(Proj.damage / brute_resist)
+			take_damage(Proj.force / brute_resist)
 		if(BURN)
-			take_damage((Proj.damage / laser_resist) / fire_resist)
+			take_damage((Proj.force / laser_resist) / fire_resist)
 	return 0
 
 /obj/effect/blob/attackby(var/obj/item/weapon/W, var/mob/user)
@@ -184,7 +182,7 @@
 				return
 
 	var/damage = 0
-	switch(W.damtype)
+	switch(W.damage_type)
 		if("fire")
 			damage = (W.force / fire_resist)
 			if(isWelder(W))
@@ -370,7 +368,7 @@ regen() will cover update_icon() for this proc
 				origin_tech = list(TECH_MATERIAL = 2)
 			if("fire")
 				desc = "A tendril removed from an asteroclast. It's hot to the touch."
-				damtype = BURN
+				damage_type = BURN
 				force = 15
 				color = COLOR_AMBER
 				origin_tech = list(TECH_POWER = 2)

@@ -1,7 +1,7 @@
 /obj/structure/deity/altar
 	name = "altar"
 	desc = "A structure made for the express purpose of religion."
-	health = 50
+	maxHealth = 50
 	power_adjustment = 5
 	deity_flags = DEITY_STRUCTURE_ALONE
 	build_cost = 1000

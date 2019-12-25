@@ -18,7 +18,7 @@
 /obj/structure/deity
 	icon = 'icons/obj/cult.dmi'
 	var/mob/living/deity/linked_god
-	var/health = 10
+	maxHealth = 10
 	var/power_adjustment = 1 //How much power we get/lose
 	var/build_cost = 0 //How much it costs to build this item.
 	var/deity_flags = DEITY_STRUCTURE_NEAR_IMPORTANT
@@ -57,7 +57,7 @@
 		qdel(src)
 
 /obj/structure/deity/bullet_act(var/obj/item/projectile/P)
-	take_damage(P.damage)
+	take_damage(P.force)
 
 /obj/structure/deity/proc/attack_deity(var/mob/living/deity/deity)
 	return

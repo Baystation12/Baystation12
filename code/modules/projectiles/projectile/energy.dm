@@ -1,7 +1,7 @@
 /obj/item/projectile/energy
 	name = "energy"
 	icon_state = "spark"
-	damage = 0
+	force = 0
 	damage_type = BURN
 	damage_flags = 0
 	distance_falloff = 2.5
@@ -11,7 +11,7 @@
 	name = "chemical shell"
 	icon_state = "bullet"
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	damage = 5
+	force = 5
 	agony = 20
 	life_span = 15 //if the shell hasn't hit anything after travelling this far it just explodes.
 	muzzle_type = /obj/effect/projectile/bullet/muzzle
@@ -43,7 +43,7 @@
 
 //blinds people like the flash round, but in a larger area and can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
-	damage = 10
+	force = 10
 	agony = 25
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	flash_range = 2
@@ -71,7 +71,7 @@
 
 /obj/item/projectile/energy/electrode/stunshot
 	nodamage = 0
-	damage = 15
+	force = 15
 	agony = 70
 	damage_type = BURN
 	armor_penetration = 10
@@ -80,21 +80,21 @@
 	name = "decloner beam"
 	icon_state = "declone"
 	fire_sound = 'sound/weapons/pulse3.ogg'
-	damage = 30
+	force = 30
 	damage_type = CLONE
 	irradiate = 40
 
 /obj/item/projectile/energy/dart
 	name = "dart"
 	icon_state = "toxin"
-	damage = 5
+	force = 5
 	damage_type = TOX
 	weaken = 5
 
 /obj/item/projectile/energy/bolt
 	name = "bolt"
 	icon_state = "cbbolt"
-	damage = 10
+	force = 10
 	damage_type = TOX
 	nodamage = 0
 	agony = 40
@@ -102,13 +102,13 @@
 
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
-	damage = 20
+	force = 20
 	agony = 60
 
 /obj/item/projectile/energy/neurotoxin
 	name = "neuro"
 	icon_state = "neurotoxin"
-	damage = 5
+	force = 5
 	damage_type = TOX
 	weaken = 5
 
@@ -116,7 +116,7 @@
 	name = "phoron bolt"
 	icon_state = "energy"
 	fire_sound = 'sound/effects/stealthoff.ogg'
-	damage = 20
+	force = 20
 	damage_type = TOX
 	irradiate = 20
 
@@ -126,7 +126,7 @@
 	fire_sound = 'sound/weapons/blaster.ogg'
 	armor_penetration = 10
 	life_span = 4
-	damage = 5
+	force = 5
 	agony = 70
 	damage_type = BURN
 	vacuum_traversal = 0
@@ -177,7 +177,7 @@
 	name = "sonic pulse"
 	icon_state = "sound"
 	fire_sound = 'sound/effects/basscannon.ogg'
-	damage = 5
+	force = 5
 	armor_penetration = 40
 	damage_type = BRUTE
 	vacuum_traversal = 0
@@ -196,13 +196,13 @@
 	agony = 70
 
 /obj/item/projectile/energy/plasmastun/sonic/strong
-	damage = 20
+	force = 20
 	penetrating = 1
 
 /obj/item/projectile/energy/darkmatter
 	name = "dark matter pellet"
 	icon_state = "dark_pellet"
 	fire_sound = 'sound/weapons/eLuger.ogg'
-	damage = 10
+	force = 10
 	armor_penetration = 35
 	damage_type = BRUTE

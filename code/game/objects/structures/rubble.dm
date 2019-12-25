@@ -11,7 +11,7 @@
 	var/list/loot = list(/obj/item/weapon/cell,/obj/item/stack/material/iron,/obj/item/stack/material/rods)
 	var/lootleft = 1
 	var/emptyprob = 95
-	var/health = 40
+	maxHealth = 40
 	var/is_rummaging = 0
 
 /obj/structure/rubble/New()

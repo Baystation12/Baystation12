@@ -31,7 +31,7 @@
 		signaler.signal()
 
 	//Armor
-	var/damage = P.damage
+	var/damage = P.force
 	var/flags = P.damage_flags()
 	var/damaged
 	if(!P.nodamage)
@@ -96,7 +96,7 @@
 
 	. = standard_weapon_hit_effects(I, user, effective_force, hit_zone)
 
-	if(I.damtype == BRUTE && prob(33)) // Added blood for whacking non-humans too
+	if(I.damage_type == BRUTE && prob(33)) // Added blood for whacking non-humans too
 		var/turf/simulated/location = get_turf(src)
 		if(istype(location)) location.add_blood_floor(src)
 
@@ -112,7 +112,7 @@
 	//Apply weapon damage
 	var/damage_flags = I.damage_flags()
 
-	return apply_damage(effective_force, I.damtype, hit_zone, damage_flags, used_weapon=I)
+	return apply_damage(effective_force, I.damage_type, hit_zone, damage_flags, used_weapon=I)
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(var/atom/movable/AM, var/speed = THROWFORCE_SPEED_DIVISOR)
@@ -131,7 +131,7 @@
 
 	if(istype(AM,/obj/))
 		var/obj/O = AM
-		var/dtype = O.damtype
+		var/dtype = O.damage_type
 		var/throw_damage = O.throwforce*(speed/THROWFORCE_SPEED_DIVISOR)
 
 		var/miss_chance = 15

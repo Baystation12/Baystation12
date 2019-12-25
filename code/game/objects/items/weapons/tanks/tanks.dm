@@ -591,7 +591,7 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/projectile/bullet/pellet/fragment/tank
 	name = "metal fragment"
-	damage = 9  //Big chunks flying off.
+	force = 9  //Big chunks flying off.
 	range_step = 1 //controls damage falloff with distance. projectiles lose a "pellet" each time they travel this distance. Can be a non-integer.
 
 	base_spread = 0 //causes it to be treated as a shrapnel explosion instead of cone
@@ -605,9 +605,9 @@ var/list/global/tank_gauge_cache = list()
 
 /obj/item/projectile/bullet/pellet/fragment/tank/small
 	name = "small metal fragment"
-	damage = 6
+	force = 6
 
 /obj/item/projectile/bullet/pellet/fragment/tank/big
 	name = "large metal fragment"
-	damage = 17
+	force = 17
 

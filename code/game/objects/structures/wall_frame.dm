@@ -13,7 +13,7 @@
 	throwpass = 1
 	layer = TABLE_LAYER
 
-	var/health = 100
+	maxHealth = 100
 	var/paint_color
 	var/stripe_color
 	rad_resistance_modifier = 0.5

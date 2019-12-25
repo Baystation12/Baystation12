@@ -38,7 +38,7 @@
 
 /obj/machinery/power/emitter/gyrotron/get_emitter_beam()
 	var/obj/item/projectile/beam/emitter/E = ..()
-	E.damage = mega_energy * 50
+	E.force = mega_energy * 50
 	return E
 
 /obj/machinery/power/emitter/gyrotron/on_update_icon()

@@ -1,6 +1,5 @@
 /mob/living/bot
 	name = "Bot"
-	health = 20
 	maxHealth = 20
 	icon = 'icons/mob/bot/placeholder.dmi'
 	universal_speak = TRUE

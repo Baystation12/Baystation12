@@ -12,8 +12,7 @@
 	anchored = 0.0
 	density = 1
 	icon_state = "barrier0"
-	var/health = 100.0
-	var/maxhealth = 100.0
+	maxHealth = 100.0
 	var/locked = 0.0
 //	req_access = list(access_maint_tunnels)
 
@@ -43,8 +42,8 @@
 					return
 			return
 		else if(isWrench(W))
-			if (src.health < src.maxhealth)
-				src.health = src.maxhealth
+			if (src.health < src.maxHealth)
+				src.health = src.maxHealth
 				src.emagged = 0
 				src.req_access = list(access_security)
 				visible_message("<span class='warning'>[user] repairs \the [src]!</span>")
@@ -56,7 +55,7 @@
 				return
 			return
 		else
-			switch(W.damtype)
+			switch(W.damage_type)
 				if("fire")
 					src.health -= W.force * 0.75
 				if("brute")
