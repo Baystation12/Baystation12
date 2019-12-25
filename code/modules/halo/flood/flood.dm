@@ -547,6 +547,16 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	bound_width = 96
 	bound_height = 96
 
+/mob/living/simple_animal/hostile/flood/combat_form/juggernaut
+	name = "A Christmas.. Abomination"
+	desc = "A corruption of the christmas spirit, given human form. Dear God..."
+	icon = 'code/modules/halo/flood/santaflood.dmi'
+	icon_state = "normal"
+	icon_living = "normal"
+	icon_dead = "dead"
+	bound_width = 32
+	bound_height = 32
+
 //below are prison related flood
 //these flood are gamemode specific and shouldn't be used elsewhere as they're crafted
 //specifically for the achlys gamemode. you've been warned.
