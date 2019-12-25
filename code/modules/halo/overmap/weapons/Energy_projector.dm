@@ -90,6 +90,10 @@
 					F.ChangeTurf(glassed_turf_use)
 			else
 				F.ChangeTurf(glassed_turf_use)
+			for(var/atom/a in F.contents)
+				F.Entered(a,F) //Make the lava do it's thing, then just delete it.
+				if(a)
+					qdel(a)
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	if(initial(kill_count) - kill_count > 1)
