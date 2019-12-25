@@ -76,6 +76,9 @@
 			bound_width = world.icon_size
 			bound_height = width * world.icon_size
 
+	if (turf_hand_priority)
+		set_extension(src, /datum/extension/turf_hand, turf_hand_priority)
+
 	update_connections(1)
 	update_icon()
 
