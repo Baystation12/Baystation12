@@ -1,4 +1,3 @@
-
 /obj/machinery/vending/armory/covenant
 	icon = 'code/modules/halo/icons/machinery/covenant/covendor.dmi'
 
