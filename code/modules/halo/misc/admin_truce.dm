@@ -14,10 +14,16 @@
 			m.status_flags &= GODMODE
 
 /datum/admin_secret_item/fun_secret/enact_truce/execute(var/mob/user)
+	var/do_message = alert(user,"Do you want to show the worldwide alert? (Choose no if refreshing invicibility or stealth-disabling)","Show Message?","Yes","No")
+	var/message = ""
 	if(truce_active)
-		to_world("<span class = 'danger'>The truce has ended. Return to your assigned ships and get ready to finish the fight.</span>")
+		message = "The truce has ended. Return to your assigned ships and get ready to finish the fight.")
 		toggle_truce(0)
 	else
-		to_world("<span class = 'danger'>A faction wide truce has been enacted.</span>")
+		message = "A faction wide truce has been enacted.")
 		toggle_truce(1)
+	if(do_message == "Yes")
+		to_world("<span class = 'danger'>[message]</span>")
+	else
+		to_chat(user,"<span class = 'notice'>[message]</span>")
 	truce_active = !truce_active
