@@ -75,6 +75,9 @@
 "bw" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bx" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "by" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"mP" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"wM" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"Sz" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -87,12 +90,12 @@ aaaaaaaaabababababaaaaaaaaaaaaaaabababacacacacajakalacacacacacacabababababaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababamacacanacaoapaqacanacacacacacacabababababababaaaaaaaaaaaaaaaaaa
 aaaaaaababababababababababababababamamamamamacacacacacamamamamamanacaracabababababababababababaaaaaa
 aaaaaaabamamamamamamamamamamababamasatauavamamamaramamamacawacamamamamacaxayazaAabababababababaaaaaa
-aaaaaBaCamaDamamacacacaEacacaFamacacacacacacamaGacaHamacacacacacamaIaJacacacacacacacacanaKaLaaaaaaaa
+aaaaaBaCamaDamamacacacaEacacaFambwacacacacbvamaGacaHamacacacacacamaIaJacacacacacacacacanaKaLaaaaaaaa
 aaaaaMaNaEacaOamacaPaQaRaSacacamaTaUaUaUaUacaracacaVamaTacacacacaracacacaWacaXaYaZamaramamamaaaaaaaa
 aaaaaMbabbacacaracbcbbacacbdacaracbebebebebfambgacacaracacacacbfamamamaramaramamamamaTbhaaaaaaaaaaaa
 aaaaaMbianacbjamacbkblbmbnacacamaTaUaUaUaUacaracacboamaTacacacacaracacacbpacaXaYaZamaramamamaaaaaaaa
 aaaabqbrambsamamacacacanacacbtamacacacacacacamaGacbuamacacacacacamaIaJacacacacacacacacaEaKaLaaaaaaaa
-aaaaaaabababababababababababababambvbwbxbxamamamaramamamacbyacamamamamacaxayazaAabababababababaaaaaa
+aaaaaaabababababababababababababambxwMSzmPamamamaramamamacbyacamamamamacaxayazaAabababababababaaaaaa
 aaaaaaababababababababababababababamamamamamacacacacacamamamamamaEacaracabababababababababababaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababamacacaEacaoapaqacaEacacacacacacabababababababaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababacacacacadaeafacacacacacacabababababaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -103,3 +106,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaabababababababababaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

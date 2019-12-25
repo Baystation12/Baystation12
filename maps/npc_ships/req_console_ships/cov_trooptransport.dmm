@@ -67,6 +67,9 @@
 "bo" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bp" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bq" = (/obj/machinery/deck_gun/missile_pod/plasma_torpedo,/turf/space,/area/space)
+"fh" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"mC" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"rF" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -79,12 +82,12 @@ aaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadagadadadadadadadadabababahabaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadajadadadadadadadadadadadadabababahabahabaaaaaaaaaaaaaaaaaa
 aaaaaaababababababababababababababaiaiaiaiaiadadadadadajadadadadajadakadabababababababababababaaaaaa
 aaaaaaabaiaiaiaiaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiaiaiaiaiaiaiaiadapaqarasabababababababaaaaaa
-aaaaatauaiavaiaiadadadaeadadawaiadadadadadadaiaxadayaiaiadazadaiaiaAaBadadadadadadadadajaCaDaaaaaaaa
+aaaaatauaiavaiaiadadadaeadadawaiboadadadadbnaiaxadayaiaiadazadaiaiaAaBadadadadadadadadajaCaDaaaaaaaa
 aaaaaEaFaeadaGaiadaHaIaJaKadadaiafaLaLaLaLadakadadaMaiafadadadadakadadadaNadaOaPaQaiakaiaiaiaaaaaaaa
 aaaaaEaRaSadadakadaTaSadadaUadakadaVaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiafaYaaaaaaaaaaaa
 aaaaaEaZajadbaaiadbbbcbdbeadadaiafaLaLaLaLadakadadbfaiafadadadadakadadadbgadaOaPaQaiakaiaiaiaaaaaaaa
 aaaabhbiaibjaiaiadadadajadadbkaiadadadadadadaiaxadblaiaiadbmadaiaiaAaBadadadadadadadadaeaCaDaaaaaaaa
-aaaaaaabababababababababababababaibnbobpbpaiaiaiakaiaiaiaiaiaiaiaiaiaiadapaqarasabababababababaaaaaa
+aaaaaaabababababababababababababaibpmCfhrFaiaiaiakaiaiaiaiaiaiaiaiaiaiadapaqarasabababababababaaaaaa
 aaaaaaababababababababababababababaiaiaiaiaiadadadadadaeadadadadaeadakadabababababababababababaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadaeadadadadadadadadadadadadabababababababaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadadadadadadadadadadabababababbqaabqaaaaaaaaaaaaaaaaaaaa
@@ -95,3 +98,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+
