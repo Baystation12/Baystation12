@@ -1595,6 +1595,7 @@
 #include "code\modules\halo\misc\admin_ert_ship_spawn.dm"
 #include "code\modules\halo\misc\admin_fleet_spawn.dm"
 #include "code\modules\halo\misc\admin_start_flood_attack.dm"
+#include "code\modules\halo\misc\artifact_pinpointer.dm"
 #include "code\modules\halo\misc\atom_despawner.dm"
 #include "code\modules\halo\misc\capture_node.dm"
 #include "code\modules\halo\misc\capture_node_mobs.dm"
