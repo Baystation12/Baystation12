@@ -11,7 +11,7 @@
 		if(on)
 			m.status_flags |= GODMODE
 		else
-			m.status_flags &= GODMODE
+			m.status_flags &= ~GODMODE
 
 /datum/admin_secret_item/fun_secret/enact_truce/execute(var/mob/user)
 	var/do_message = alert(user,"Do you want to show the worldwide alert? (Choose no if refreshing invicibility or stealth-disabling)","Show Message?","Yes","No")

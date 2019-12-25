@@ -49,7 +49,7 @@
 	return amount * species.pain_mod
 
 /mob/living/carbon/human/setHalLoss(var/amount)
-	if(status_flags & GODMODE) return
+	if(status_flags & GODMODE) return 0
 	adjustHalLoss(getHalLoss()-amount)
 
 /mob/living/carbon/human/adjustHalLoss(var/amount)
