@@ -15,11 +15,7 @@
 "ao" = (/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ap" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aq" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"ar" = (/obj/machinery/bodyscanner/covenant{icon_state = "body_scanner_0"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"as" = (/obj/machinery/body_scanconsole/covenant{icon_state = "body_scannerconsole"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"at" = (/obj/machinery/light/covenant/north,/obj/machinery/sleeper/covenant{dir = 2; icon_state = "sleeper_0"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "au" = (/obj/structure/table/glass/purple,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"av" = (/obj/structure/table/glass/purple,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/combat/unsc/cov,/obj/item/weapon/storage/firstaid/combat/unsc/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aw" = (/obj/structure/closet/secure_closet/freezer/kitchen{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ax" = (/obj/machinery/cooker/grill{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ay" = (/obj/machinery/cooker/fryer{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -81,15 +77,22 @@
 "bC" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bD" = (/obj/structure/bed/roller/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bE" = (/obj/machinery/iv_drip,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"bF" = (/obj/machinery/light/covenant/south,/obj/machinery/sleeper/covenant{icon_state = "sleeper_0"; dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bG" = (/obj/machinery/autosurgeon/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bH" = (/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bI" = (/obj/structure/reagent_dispensers/watertank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bJ" = (/obj/structure/janitorialcart{color = "#ff99ff"},/obj/item/weapon/mop{color = "#ff99ff"},/obj/item/weapon/reagent_containers/glass/bucket{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bK" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bL" = (/obj/machinery/deck_gun/cov_pulse_turret{dir = 2},/turf/space,/area/space)
+"ck" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"pl" = (/obj/structure/table/glass/purple,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/combat/unsc/cov,/obj/item/weapon/storage/firstaid/combat/unsc/cov,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"rg" = (/obj/machinery/light/covenant/south,/obj/machinery/bodyscanner/covenant{dir = 8; icon_state = "body_scanner_0"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "rU" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"EC" = (/obj/machinery/slipspace_engine/covenant,/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/machinery/door/window/southleft,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Oi" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"OF" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"PR" = (/obj/machinery/body_scanconsole/covenant{dir = 8; icon_state = "body_scannerconsole"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"TJ" = (/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/machinery/door/window/southright,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"Wa" = (/obj/machinery/sleeper/covenant{dir = 4; icon_state = "sleeper_0"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "WJ" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
@@ -101,15 +104,15 @@ aaaaaaaaaaaaaaaaabaaacacacacacaaaaacacacacacaeafaeacacacacacacacacacaaaaaaaaaaaa
 aaaaaaaaaaabaaacacacacacaaaaaaaaaaacacacagahaeaeaeahaiaiaiajakacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaacacacacacaaaaaaaaaaaaaaacacacaeaealaeaeaealaeamaeaeaeaeaeacacacacaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacahanaoahapaeaqahahahahahahahaeaeacacacacacacacaaaaaaaaaaaaaaaaaa
-aaaaaaacacacacacacacacacacacacacacahahahahahaeaeaeaharasatauavahamaealaeacacacacacacacacacacacaaaaaa
-aaaaaaacahahahahahahahahahahacacahawaxayazahahalahahaeaeaeaeaAahahahahaeaBaCaDaEacacacacacacacaaaaaa
-aaaaaFaGahaHahahaeaeaeaIaeaeaeahbBaeaeaeaebAahaeaeaIaeaeaeaeaeaealaeaeaeaeaeaeaeaeaeaeamaJaKaaaaaaaa
-aaaaaLaMaIaeaNahaeaOaPaPaPaQaeahapaRaRaRaRaealaeaSaTaUaeaeaeaVaeahaWaXaeaYaeaZbabbahalahahahaaaaaaaa
-aaaaaLbcbdaeaealaebebdaRbfaeaealaebgbgbgbgaqahapbhaRaeaeaebibjbkahahahalahalahahahahapblaaaaaaaaaaaa
-aaaaaLbmamaebnahaebobpbpbpaQaeahapaRaRaRaRaealaebqbrbsaeaeaebtaeahbubvaebwaeaZbabbahalahahahaaaaaaaa
-aaaabxbyahbzahahaeaeaeamaeaeaeahaeaeaeaeaeaeahaeaeamaeaeaeaeaeaealaeaeaeaeaeaeaeaeaeaeaIaJaKaaaaaaaa
-aaaaaaacacacacacacacacacacacacacahbCOirUWJahahalahahbDbDaeaeaeahahahahaeaBaCaDaEacacacacacacacaaaaaa
-aaaaaaacacacacacacacacacacacacacacahahahahahaeaeaeahbEbEbFbGaeahaIaealaeacacacacacacacacacacacaaaaaa
+aaaaaaacacacacacacacacacacacacacacahahahahahaeaeaeahbEauplOFckahamaealaeacacacacacacacacacacacaaaaaa
+aaaaaaacahahahahahahahahahahacacahawaxayazahahalahahbDaeaAECTJahahahahaeaBaCaDaEacacacacacacacaaaaaa
+aaaaaFaGahaHahahaeaeaeaIaeaeaeahbBaeaeaeaebAahaeaeaIaeaeaeaeaeaeaealaeaeaeaeaeaeaeaeaeamaJaKaaaaaaaa
+aaaaaLaMaIaeaNahaeaOaPaPaPaQaeahapaRaRaRaRaealaeaSaTaUWaaeaeaeaVaeahaWaXaYaeaZbabbahalahahahaaaaaaaa
+aaaaaLbcbdaeaealaebebdaRbfaeaealaebgbgbgbgaqahapbhaRaeaeaeaebibjbkahahahahalahahahahapblaaaaaaaaaaaa
+aaaaaLbmamaebnahaebobpbpbpaQaeahapaRaRaRaRaealaebqbrbsWaaeaeaebtaeahbubvbwaeaZbabbahalahahahaaaaaaaa
+aaaabxbyahbzahahaeaeaeamaeaeaeahaeaeaeaeaeaeahaeaeamaeaeaeaeaeaeaealaeaeaeaeaeaeaeaeaeaIaJaKaaaaaaaa
+aaaaaaacacacacacacacacacacacacacahbCOirUWJahahalahahbDaeaeaeaeahahahahaeaBaCaDaEacacacacacacacaaaaaa
+aaaaaaacacacacacacacacacacacacacacahahahahahaeaeaeahbErgPRbGaeahaIaealaeacacacacacacacacacacacaaaaaa
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacahanbHacapaeaqacahahahahahahaeaeacacacacacacacaaaaaaaaaaaaaaaaaa
 aaaaaaaaacacacacacaaaaaaaaaaaaaaacacacaeaealaeaeaealaeaIaeaeaeaeaeacacacacaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaabaaacacacacacaaaaaaaaaaacacacagacaeaeaeacaiaiaibIbJacacacacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
