@@ -17,10 +17,10 @@
 	var/do_message = alert(user,"Do you want to show the worldwide alert? (Choose no if refreshing invicibility or stealth-disabling)","Show Message?","Yes","No")
 	var/message = ""
 	if(truce_active)
-		message = "The truce has ended. Return to your assigned ships and get ready to finish the fight.")
+		message = "The truce has ended. Return to your assigned ships and get ready to finish the fight."
 		toggle_truce(0)
 	else
-		message = "A faction wide truce has been enacted.")
+		message = "A faction wide truce has been enacted."
 		toggle_truce(1)
 	if(do_message == "Yes")
 		to_world("<span class = 'danger'>[message]</span>")
