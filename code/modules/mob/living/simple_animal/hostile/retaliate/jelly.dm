@@ -12,7 +12,7 @@
 	melee_damage_lower = 3
 	melee_damage_upper = 12
 	attacktext = "stung"
-	damtype = BURN
+	damage_type = BURN
 	speak_chance = 1
 	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
 	var/gets_random_color = TRUE

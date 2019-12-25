@@ -63,7 +63,7 @@
 	icon_state = "spark"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	agony = 50
-	damage = 2
+	force = 2
 	damage_type = BURN
 	eyeblur = 1//Some feedback that you've been hit
 	step_delay = 0.7

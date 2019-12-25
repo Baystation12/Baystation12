@@ -38,7 +38,7 @@
 		damaged = apply_damage(damage, P.damage_type, def_zone, flags, P, P.armor_penetration)
 		bullet_impact_visuals(P, def_zone, damaged)
 	if(damaged || P.nodamage) // Run the block computation if we did damage or if we only use armor for effects (nodamage)
-		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.damage)
+		. = get_blocked_ratio(def_zone, P.damage_type, flags, P.armor_penetration, P.force)
 	P.on_hit(src, ., def_zone)
 
 // For visuals and blood splatters etc

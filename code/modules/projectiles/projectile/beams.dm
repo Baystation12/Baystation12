@@ -182,7 +182,7 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	damage_flags = 0
 	sharp = 0 //not a laser
-	damage = 1//flavor burn! still not a laser, dmg will be reduce by energy resistance not laser resistances
+	force = 1//flavor burn! still not a laser, dmg will be reduce by energy resistance not laser resistances
 	damage_type = BURN
 	eyeblur = 1//Some feedback that you've been hit
 	agony = 40
@@ -301,7 +301,7 @@
 /obj/item/projectile/beam/pointdefense
 	name = "point defense salvo"
 	icon_state = "laser"
-	damage = 15
+	force = 15
 	damage_type = ELECTROCUTE //You should be safe inside a voidsuit
 	sharp = FALSE //"Wide" spectrum beam
 	muzzle_type = /obj/effect/projectile/pointdefense/muzzle
@@ -312,7 +312,7 @@
 	name = "scattered laser blast"
 	icon_state = "beam_incen"
 	fire_sound='sound/weapons/scan.ogg'
-	damage = 12
+	force = 12
 	agony = 8
 	eyeblur = 8
 	sharp = FALSE

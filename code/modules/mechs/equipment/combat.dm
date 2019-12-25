@@ -182,13 +182,13 @@
 		return
 	if(shields)
 		if(shields.charge)
-			P.damage = shields.stop_damage(P.damage)
+			P.force = shields.stop_damage(P.force)
 			user.visible_message(SPAN_WARNING("\The [shields.owner]'s shields flash and crackle."))
 			flick("shield_impact", src)
 			playsound(user,'sound/effects/basscannon.ogg',35,1)
 			//light up the night.
 			new /obj/effect/effect/smoke/illumination(user.loc, 5, 4, 1, "#ffffff")
-			if(P.damage <= 0)
+			if(P.force <= 0)
 				return AURA_FALSE|AURA_CANCEL
 
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()

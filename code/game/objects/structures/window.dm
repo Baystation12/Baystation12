@@ -52,7 +52,7 @@
 
 	maxHealth = material.integrity
 	if(reinf_material)
-		maxhealth += 0.5 * reinf_material.integrity
+		maxHealth += 0.5 * reinf_material.integrity
 
 	if(is_fulltile())
 		layer = FULL_WINDOW_LAYER
