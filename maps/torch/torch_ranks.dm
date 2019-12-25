@@ -662,9 +662,9 @@
 	accessory = list(/obj/item/clothing/accessory/badge/solgov/representative)
 
 /datum/mil_rank/sol/agent
-	name = "OCIE Agent"
+	name = "SFP Agent"
 	name_short = "AGT"
-	accessory = list(/obj/item/clothing/accessory/badge/ocieagent)
+	accessory = list(/obj/item/clothing/accessory/badge/agent)
 
 /datum/mil_rank/sol/scientist
 	name = "Government Scientist"

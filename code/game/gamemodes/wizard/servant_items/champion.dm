@@ -2,7 +2,14 @@
 	name = "champion's crown"
 	desc = "A spiky, golden crown. It's probably worth more than your bank account."
 	icon_state = "champhelm"
-	armor = list(melee = 80, bullet = 70, laser = 40, energy = 20, bomb = 60, bio = 25, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH, 
+		bullet = ARMOR_BALLISTIC_AP, 
+		laser = ARMOR_LASER_HANDGUNS, 
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_MINOR
+		)
 	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/suit/champarmor
@@ -11,7 +18,14 @@
 	icon_state = "champarmor"
 	siemens_coefficient = 0.5
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
-	armor = list(melee = 80, bullet = 70, laser = 60, energy = 50, bomb = 70, bio = 25, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH, 
+		bullet = ARMOR_BALLISTIC_AP, 
+		laser = ARMOR_LASER_HANDGUNS, 
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_RESISTANT, 
+		bio = ARMOR_BIO_MINOR
+		)
 
 /obj/item/clothing/under/bluetunic
 	name = "blue tunic"
@@ -19,7 +33,9 @@
 	icon_state = "bluetunic"
 	siemens_coefficient = 0.8
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 5, bullet = 5, laser = 5,energy = 5, bomb = 5, bio = 5, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_MINOR
+	)
 	species_restricted = list(SPECIES_HUMAN)
 
 /obj/item/clothing/shoes/jackboots/medievalboots
@@ -27,7 +43,13 @@
 	desc = "Old-fashioned leather boots. Probably not something you want to get kicked with."
 	icon_state = "medievalboots"
 	force = 5
-	armor = list(melee = 45, bullet = 10, laser = 5, energy = 15, bomb = 30, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_MINOR, 
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_PADDED
+	)
 
 /obj/item/weapon/excalibur
 	name = "champion's blade"

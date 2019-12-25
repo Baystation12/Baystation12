@@ -3,6 +3,7 @@
 	desc = "A sharp, perfectly weighted piece of metal."
 	icon_state = "star"
 	randpixel = 12
+	max_force = 10
 	force_divisor = 0.1 // 6 with hardness 60 (steel)
 	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
 	throw_speed = 10

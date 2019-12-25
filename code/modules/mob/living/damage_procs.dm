@@ -1,4 +1,3 @@
-
 /*
 	apply_damage() args
 	damage - How much damage to take
@@ -10,14 +9,14 @@
 */
 /mob/living/proc/apply_damage(var/damage = 0,var/damagetype = BRUTE, var/def_zone = null, var/damage_flags = 0, var/used_weapon = null, var/armor_pen, var/silent = FALSE)
 	if(!damage)
-		return 0
+		return FALSE
 
 	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, silent)
 	damage = after_armor[1]
 	damagetype = after_armor[2]
 	damage_flags = after_armor[3] // args modifications in case of parent calls
 	if(!damage)
-		return 0
+		return FALSE
 
 	switch(damagetype)
 		if(BRUTE)
@@ -37,10 +36,18 @@
 		if(ELECTROCUTE)
 			electrocute_act(damage, used_weapon, 1, def_zone)
 		if(IRRADIATE)
-			radiation += damage
+			apply_radiation(damage)
 
 	updatehealth()
-	return 1
+	return TRUE
+
+
+/mob/living/proc/apply_radiation(var/damage = 0)
+	if(!damage)
+		return FALSE
+
+	radiation += damage
+	return TRUE
 
 
 /mob/living/proc/apply_damages(var/brute = 0, var/burn = 0, var/tox = 0, var/oxy = 0, var/clone = 0, var/halloss = 0, var/def_zone = null, var/damage_flags = 0)
@@ -50,11 +57,11 @@
 	if(oxy)		apply_damage(oxy, OXY, def_zone)
 	if(clone)	apply_damage(clone, CLONE, def_zone)
 	if(halloss) apply_damage(halloss, PAIN, def_zone)
-	return 1
+	return TRUE
 
 
 /mob/living/proc/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
-	if(!effect || (blocked >= 100))	return 0
+	if(!effect || (blocked >= 100))	return FALSE
 
 	switch(effecttype)
 		if(STUN)
@@ -73,7 +80,7 @@
 		if(DROWSY)
 			drowsyness = max(drowsyness, effect * blocked_mult(blocked))
 	updatehealth()
-	return 1
+	return TRUE
 
 /mob/living/proc/apply_effects(var/stun = 0, var/weaken = 0, var/paralyze = 0, var/stutter = 0, var/eyeblur = 0, var/drowsy = 0, var/agony = 0, var/blocked = 0)
 	if(stun)		apply_effect(stun,      STUN, blocked)
@@ -83,4 +90,4 @@
 	if(eyeblur)		apply_effect(eyeblur,   EYE_BLUR, blocked)
 	if(drowsy)		apply_effect(drowsy,    DROWSY, blocked)
 	if(agony)		apply_effect(agony,     PAIN, blocked)
-	return 1
+	return TRUE

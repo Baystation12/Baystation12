@@ -47,10 +47,10 @@
 	GLOB.dismembered_event.register(affecting, src, .proc/on_organ_loss)
 	GLOB.zone_selected_event.register(assailant.zone_sel, src, .proc/on_target_change)
 
-/obj/item/grab/examine(var/user)
-	..()
+/obj/item/grab/examine(mob/user)
+	. = ..()
 	var/obj/item/O = get_targeted_organ()
-	to_chat(user,"A grab on \the [affecting]'s [O.name].")
+	to_chat(user, "A grab on \the [affecting]'s [O.name].")
 
 /obj/item/grab/Process()
 	current_grab.process(src)

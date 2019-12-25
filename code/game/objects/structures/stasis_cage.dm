@@ -16,10 +16,19 @@
 		contain(A)
 
 /obj/structure/stasis_cage/attack_hand(var/mob/user)
-	release()
+	try_release(user)
 
 /obj/structure/stasis_cage/attack_robot(var/mob/user)
 	if(Adjacent(user))
+		try_release(user)
+
+/obj/structure/stasis_cage/proc/try_release(mob/user)
+	if(!contained)
+		to_chat(user, SPAN_NOTICE("There's no animals inside \the [src]"))
+		return
+	user.visible_message("[user] begins undoing the locks and latches on \the [src].")
+	if(do_after(user, 20, src))
+		user.visible_message("[user] releases \the [contained] from \the [src]!")
 		release()
 
 /obj/structure/stasis_cage/on_update_icon()
@@ -30,7 +39,7 @@
 
 /obj/structure/stasis_cage/examine(mob/user)
 	. = ..()
-	if(. && contained)
+	if(contained)
 		to_chat(user, "\The [contained] is kept inside.")
 
 /obj/structure/stasis_cage/proc/contain(var/mob/living/simple_animal/animal)
@@ -58,7 +67,7 @@
 /mob/living/simple_animal/MouseDrop(var/obj/structure/stasis_cage/over_object)
 	if(istype(over_object) && Adjacent(over_object) && CanMouseDrop(over_object, usr))
 
-		if(!src.buckled || !istype(src.buckled, /obj/effect/energy_net))
+		if(!stat && !istype(src.buckled, /obj/effect/energy_net))
 			to_chat(usr, "It's going to be difficult to convince \the [src] to move into \the [over_object] without capturing it in a net.")
 			return
 

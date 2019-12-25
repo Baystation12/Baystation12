@@ -231,8 +231,14 @@
 			E.damage += rand(1, 2)
 			if(E.damage > 12)
 				eye_blurry += rand(3,6)
+		if(FLASH_PROTECTION_MINOR)
+			to_chat(src, "<span class='warning'>Your eyes stings!</span>")
+			E.damage += rand(1, 4)
+			if(E.damage > 10)
+				eye_blurry += rand(3,6)
+				E.damage += rand(1, 4)
 		if(FLASH_PROTECTION_NONE)
-			to_chat(src, "<span class='warning'>Your eyes burn.</span>")
+			to_chat(src, "<span class='warning'>Your eyes burn!</span>")
 			E.damage += rand(2, 4)
 			if(E.damage > 10)
 				E.damage += rand(4,10)
@@ -332,3 +338,12 @@
 	if(isSynthetic())
 		return // Can't cure disabilites, so don't give them.
 	..()
+
+/mob/living/carbon/human/proc/has_meson_effect()
+	. = FALSE
+	for(var/obj/screen/equipment_screen in equipment_overlays) // check through our overlays to see if we have any source of the meson overlay
+		if (equipment_screen.icon_state == "meson_hud")
+			return TRUE
+
+/mob/living/carbon/human/proc/is_in_pocket(var/obj/item/I)
+	return I in list(l_store, r_store)

@@ -1,6 +1,20 @@
+#if DM_VERSION < 513
+
+#define any2ref(x) "\ref[x]"
+
+#define islist(A) istype(A, /list)
+
+#define ismovable(A) istype(A, /atom/movable)
+
+#else
+
+#define any2ref(x) ref(x)
+
+#endif
+
 #define PUBLIC_GAME_MODE SSticker.master_mode
 
-#define Clamp(value, low, high) 	(value <= low ? low : (value >= high ? high : value))
+#define Clamp(value, low, high) (value <= low ? low : (value >= high ? high : value))
 #define CLAMP01(x) 		(Clamp(x, 0, 1))
 
 #define get_turf(A) get_step(A,0)
@@ -39,13 +53,9 @@
 
 #define isitem(A) istype(A, /obj/item)
 
-#define islist(A) istype(A, /list)
-
 #define isliving(A) istype(A, /mob/living)
 
 #define ismouse(A) istype(A, /mob/living/simple_animal/mouse)
-
-#define ismovable(A) istype(A, /atom/movable)
 
 #define isnewplayer(A) istype(A, /mob/new_player)
 
@@ -105,8 +115,6 @@
 
 #define RANDOM_BLOOD_TYPE pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 
-#define any2ref(x) "\ref[x]"
-
 #define CanInteract(user, state) (CanUseTopic(user, state) == STATUS_INTERACTIVE)
 
 #define CanInteractWith(user, target, state) (target.CanUseTopic(user, state) == STATUS_INTERACTIVE)
@@ -124,36 +132,6 @@
 #define DROP_NULL(x) if(x) { x.dropInto(loc); x = null; }
 
 #define ARGS_DEBUG log_debug("[__FILE__] - [__LINE__]") ; for(var/arg in args) { log_debug("\t[log_info_line(arg)]") }
-
-// Helper macros to aid in optimizing lazy instantiation of lists.
-// All of these are null-safe, you can use them without knowing if the list var is initialized yet
-
-//Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
-// Ensures L is initailized after this point
-#define LAZYINITLIST(L) if (!L) L = list()
-// Sets a L back to null iff it is empty
-#define UNSETEMPTY(L) if (L && !L.len) L = null
-// Removes I from list L, and sets I to null if it is now empty
-#define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
-// Adds I to L, initalizing L if necessary
-#define LAZYADD(L, I) if(!L) { L = list(); } L += I;
-// Insert I into L at position X, initalizing L if necessary
-#define LAZYINSERT(L, I, X) if(!L) { L = list(); } L.Insert(X, I);
-// Adds I to L, initalizing L if necessary, if I is not already in L
-#define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
-// Sets L[A] to I, initalizing L if necessary
-#define LAZYSET(L, A, I) if(!L) { L = list(); } L[A] = I;
-// Reads I from L safely - Works with both associative and traditional lists.
-#define LAZYACCESS(L, I) (L ? (isnum(I) ? (I > 0 && I <= length(L) ? L[I] : null) : L[I]) : null)
-// Reads the length of L, returning 0 if null
-#define LAZYLEN(L) length(L)
-// Safely checks if I is in L
-#define LAZYISIN(L, I) (L ? (I in L) : FALSE)
-// Null-safe L.Cut()
-#define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
-// Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
-#define SANITIZE_LIST(L) ( islist(L) ? L : list() )
 
 // Insert an object A into a sorted list using cmp_proc (/code/_helpers/cmp.dm) for comparison.
 #define ADD_SORTED(list, A, cmp_proc) if(!list.len) {list.Add(A)} else {list.Insert(FindElementIndex(A, list, cmp_proc), A)}
@@ -182,6 +160,8 @@
 #define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
 
 #define SPAN_MFAUNA(X) "<span class='mfauna'>[X]</span>"
+
+#define SPAN_SUBTLE(X) "<span class='subtle'>[X]</span>"
 
 #define FONT_SMALL(X) "<font size='1'>[X]</font>"
 

@@ -24,6 +24,7 @@
 #define FACTION_DAIS           "Deimos Advanced Information Systems"
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_TEST_SUBJECTS  "Test Subjects"
+#define FACTION_SPACECOPS  "Sol Federal Police"
 
 #define HOME_SYSTEM_EARTH      "Earth"
 #define HOME_SYSTEM_LUNA       "Luna"
@@ -103,7 +104,7 @@
 #define FACTION_SKRELL_QERRVOAL "Qerr'voal"
 #define FACTION_SKRELL_QALAOA "Qala'oa"
 #define FACTION_SKRELL_YIITALANA "Yii'talana"
-#define FACTION_SKRELL_KRIGLI "Kri'gli"
+#define FACTION_SKRELL_KRRIGLI "Krri'gli"
 #define FACTION_SKRELL_QONPRRI "Qon'prri"
 
 // Adherent cultures.

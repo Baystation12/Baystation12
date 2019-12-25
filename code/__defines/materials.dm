@@ -9,6 +9,7 @@
 #define MATERIAL_URANIUM                 "uranium"
 #define MATERIAL_CRYSTAL                 "crystal"
 #define MATERIAL_SANDSTONE               "sandstone"
+#define MATERIAL_CONCRETE                "concrete"
 #define MATERIAL_IRON                    "iron"
 #define MATERIAL_PLATINUM                "platinum"
 #define MATERIAL_BRONZE                  "bronze"
@@ -125,3 +126,10 @@
 #define USE_MATERIAL_COLOR 				0x1
 #define USE_MATERIAL_SINGULAR_NAME    	0x2
 #define USE_MATERIAL_PLURAL_NAME    	0x4
+
+//Arbitrary hardness thresholds
+#define  MATERIAL_SOFT   10
+#define  MATERIAL_FLEXIBLE  20
+#define  MATERIAL_RIGID  40
+#define  MATERIAL_HARD  60
+#define  MATERIAL_VERY_HARD  80

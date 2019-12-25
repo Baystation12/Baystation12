@@ -29,6 +29,14 @@
 	contraband = 1
 	supply_method = /decl/supply_method/randomized
 
+/decl/hierarchy/supply_pack/operations/plasma_cutter
+	name = "Equipment - Plasma Cutter"
+	contains = list(/obj/item/weapon/gun/energy/plasmacutter)
+	cost = 120
+	containertype = /obj/structure/closet/crate/secure
+	containername = "plasma cutter crate"
+	access = list(list(access_mining,access_engine))
+
 /decl/hierarchy/supply_pack/operations/orebox
 	name = "Equipment - Ore box"
 	contains = list(/obj/structure/ore_box)
@@ -83,8 +91,8 @@
 /decl/hierarchy/supply_pack/operations/bureaucracy
 	contains = list(/obj/item/weapon/material/clipboard,
 					 /obj/item/weapon/material/clipboard,
-					 /obj/item/weapon/pen/red,
-					 /obj/item/weapon/pen/blue,
+					 /obj/item/weapon/pen/retractable/red,
+					 /obj/item/weapon/pen/retractable/blue,
 					 /obj/item/weapon/pen/green,
 					 /obj/item/device/camera_film,
 					 /obj/item/weapon/folder/blue,

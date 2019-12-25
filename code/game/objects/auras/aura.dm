@@ -9,7 +9,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/New(var/mob/living/target)
 	..()
 	if(target)
-		user = target
+		added_to(target)
 		user.add_aura(src)
 
 /obj/aura/Destroy()
@@ -32,7 +32,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	return 0
 
-/obj/aura/hitby(var/atom/movable/M, var/speed)
+/obj/aura/hitby()
 	return 0
 
 /obj/aura/debug
@@ -50,6 +50,6 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 	log_debug("Life tick")
 	return returning
 
-/obj/aura/debug/hitby(var/atom/movable/M, var/speed)
-	log_debug("Hit By for \ref[src]: [M], [speed]")
+/obj/aura/debug/hitby(var/atom/movable/M, var/datum/thrownthing/TT)
+	log_debug("Hit By for \ref[src]: [M], [TT.speed]")
 	return returning

@@ -43,7 +43,7 @@
 
 //Chemist is a medical job damnit	//YEAH FUCK YOU SCIENCE	-Pete	//Guys, behave -Erro
 /datum/job/chemist
-	title = "Chemist"
+	title = "Pharmacist"
 	department = "Medical"
 	department_flag = MED
 
@@ -55,7 +55,6 @@
 	economic_power = 5
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
-	alt_titles = list("Pharmacist")
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 
 /datum/job/geneticist

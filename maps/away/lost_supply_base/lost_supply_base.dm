@@ -1,7 +1,7 @@
 #include "lost_supply_base_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/sector/lost_supply_base
+/obj/effect/overmap/visitable/sector/lost_supply_base
 	name = "supply station"
 	desc = "This looks like abandoned and heavy damaged supply station."
 	icon_state = "object"

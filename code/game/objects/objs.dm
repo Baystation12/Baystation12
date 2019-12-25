@@ -168,11 +168,11 @@
 	if(obj_flags & OBJ_FLAG_ROTATABLE)
 		rotate(user)
 	..()
-	
+
 /obj/examine(mob/user)
 	. = ..()
-	if(. && (obj_flags & OBJ_FLAG_ROTATABLE))
-		to_chat(user, "<span class='subtle'>Can be rotated with alt-click.</span>")
+	if((obj_flags & OBJ_FLAG_ROTATABLE))
+		to_chat(user, SPAN_SUBTLE("Can be rotated with alt-click."))
 
 /obj/proc/rotate(mob/user)
 	if(!CanPhysicallyInteract(user))
@@ -181,7 +181,10 @@
 
 	if(anchored)
 		to_chat(user, SPAN_NOTICE("\The [src] is secured to the floor!"))
-		return 
+		return
 
 	set_dir(turn(dir, 90))
 	update_icon() 
+
+//For things to apply special effects after damaging an organ, called by organ's take_damage
+/obj/proc/after_wounding(obj/item/organ/external/organ, datum/wound)

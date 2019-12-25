@@ -70,8 +70,9 @@
 		descriptor = "chest."
 
 
-/obj/item/organ/internal/augment/examine(mob/user)
-	if((. = ..(user, 1)))
+/obj/item/organ/internal/augment/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, "It is configured to be attached to the [descriptor].")
 		if(augment_flags & AUGMENTATION_MECHANIC && augment_flags & AUGMENTATION_ORGANIC)
 			to_chat(user, "It can interface with both prosthetic and fleshy organs.")

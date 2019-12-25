@@ -6,7 +6,7 @@
 	extra_view = 4
 	var/obj/machinery/shipsensors/sensors
 
-/obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/ship/sector)
+/obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
 	if(!(. = ..()))
 		return
 	find_sensors()
@@ -45,6 +45,8 @@
 		var/list/contacts = list()
 		for(var/obj/effect/overmap/O in view(7,linked))
 			if(linked == O)
+				continue
+			if(!O.scannable)
 				continue
 			var/bearing = round(90 - Atan2(O.x - linked.x, O.y - linked.y),5)
 			if(bearing < 0)

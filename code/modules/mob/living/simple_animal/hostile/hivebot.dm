@@ -11,13 +11,15 @@
 	melee_damage_flags = DAM_SHARP|DAM_EDGE
 	attacktext = "clawed"
 	projectilesound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	projectiletype = /obj/item/projectile/bullet/pistol/holdout/hivebot
+	projectiletype = /obj/item/projectile/beam/smalllaser
 	faction = "hivebot"
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
 	speed = 4
-	natural_armor = list(melee = 20)
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 	bleed_colour = SYNTH_BLOOD_COLOUR
 
 	meat_type =     null
@@ -30,6 +32,7 @@
 /mob/living/simple_animal/hostile/hivebot/range
 	desc = "A junky looking robot with four spiky legs. It's equipped with some kind of small-bore gun."
 	ranged = 1
+	speed = 7
 
 /mob/living/simple_animal/hostile/hivebot/rapid
 	ranged = 1
@@ -40,7 +43,9 @@
 	maxHealth = 120
 	ranged = 1
 	can_escape = 1
-	natural_armor = list(melee = 30)
+	natural_armor = list(
+		melee = ARMOR_MELEE_RESISTANT
+		)
 
 /mob/living/simple_animal/hostile/hivebot/death()
 	..(null, "blows apart!")
@@ -110,9 +115,6 @@ Teleporter beacon, and its subtypes
 /*
 Special projectiles
 */
-/obj/item/projectile/bullet/pistol/holdout/hivebot
-	force = 20
-
 /obj/item/projectile/bullet/gyro/megabot
 	name = "microrocket"
 	gyro_light_impact = 1
@@ -142,7 +144,10 @@ The megabot
 	melee_damage_flags = DAM_SHARP|DAM_EDGE
 	attacktext = "sawed"
 	speed = 0
-	natural_armor = list(melee = 50, bullet = 20)
+	natural_armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_PISTOL
+		)
 	can_escape = TRUE
 	armor_type = /datum/extension/armor/toggle
 	ability_cooldown = 3 MINUTES
@@ -162,7 +167,7 @@ The megabot
 	. = ..()
 	if(!.)
 		return
-	
+
 	if(time_last_used_ability < world.time)
 		switch_mode(ATTACK_MODE_ROCKET)
 
@@ -174,21 +179,20 @@ The megabot
 /mob/living/simple_animal/hostile/hivebot/mega/on_update_icon()
 	if(stat != DEAD)
 		if(deactivated)
-			icon_state = "megabot_deactivate"
-			icon_living = "megabot_deactivate"
+			icon_state = "megabot_standby"
+			icon_living = "megabot_standby"
 			return
 
+		overlays.Cut()
+		overlays += image(icon, "active_indicator")
 		switch(attack_mode)
 			if(ATTACK_MODE_MELEE)
-				icon_state = "megabot"
-				icon_living = "megabot"
+				overlays += image(icon, "melee")
 			if(ATTACK_MODE_LASER)
-				icon_state = "megabot_laser"
-				icon_living = "megabot_laser"
+				overlays += image(icon, "laser")
 			if(ATTACK_MODE_ROCKET)
-				icon_state = "megabot_rocket"
-				icon_living = "megabot_rocket"
-		
+				overlays += image(icon, "rocket")
+
 /mob/living/simple_animal/hostile/hivebot/mega/proc/switch_mode(var/new_mode)
 	if(!new_mode || new_mode == attack_mode)
 		return

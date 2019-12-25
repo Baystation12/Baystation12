@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(statistics)
 	name = "Statistics"
 	wait = 10 MINUTES
 	init_order = SS_INIT_MISC_LATE
-	flags = SS_NO_INIT
+	flags = SS_NO_INIT | SS_NEEDS_SHUTDOWN
 
 	var/extracted_slime_cores_amount = 0
 	var/crew_death_count = 0
@@ -59,7 +59,7 @@ SUBSYSTEM_DEF(statistics)
 	query.Execute(db)
 	if(query.Error() || query.ErrorMsg())
 		to_world_log( "SQL error - creating death table - [query.Error()] - [query.ErrorMsg()]")
-	
+
 	query = new("CREATE TABLE IF NOT EXISTS population (game_id TEXT NOT NULL, timestamp TEXT NOT NULL, players INTEGER, admin INTEGER);")
 	query.Execute(db)
 	if(query.Error() || query.ErrorMsg())
@@ -105,7 +105,7 @@ SUBSYSTEM_DEF(statistics)
 			if(query.Error() || query.ErrorMsg())
 				to_world_log( "SQL error - logging population - [query.Error()] - [query.ErrorMsg()]")
 
-	// These values are arbitrary and largely unused, so using JSON is far easier than expecting 
+	// These values are arbitrary and largely unused, so using JSON is far easier than expecting
 	// people to maintain a hard list of fields and migrate the tables every time they change.
 	if(LAZYLEN(values))
 		for(var/field in values)
@@ -162,7 +162,7 @@ SUBSYSTEM_DEF(statistics)
 		death.brainloss = dead.getBrainLoss()
 		death.oxyloss =   dead.getOxyLoss()
 		death.using_map_name = GLOB.using_map.full_name
-		var/obj/effect/overmap/cell = map_sectors ? map_sectors["[dead.z]"] : null
+		var/obj/effect/overmap/visitable/cell = map_sectors ? map_sectors["[dead.z]"] : null
 		death.overmap_location_name = cell ? cell.name : "Unknown"
 		LAZYADD(deaths, death)
 

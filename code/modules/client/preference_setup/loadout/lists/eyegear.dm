@@ -5,7 +5,7 @@
 
 /datum/gear/eyes/glasses
 	display_name = "prescription glasses"
-	path = /obj/item/clothing/glasses/regular
+	path = /obj/item/clothing/glasses/prescription
 
 /datum/gear/eyes/eyepatch
 	display_name = "eyepatch"
@@ -18,10 +18,10 @@
 /datum/gear/eyes/fashionglasses/New()
 	..()
 	var/glasses = list()
-	glasses["green glasses"] = /obj/item/clothing/glasses/gglasses
-	glasses["hipster glasses"] = /obj/item/clothing/glasses/regular/hipster
+	glasses["green glasses"] = /obj/item/clothing/glasses/prescription/gglasses
+	glasses["hipster glasses"] = /obj/item/clothing/glasses/prescription/hipster
 	glasses["monocle"] = /obj/item/clothing/glasses/monocle
-	glasses["scanning goggles"] = /obj/item/clothing/glasses/regular/scanners
+	glasses["scanning goggles"] = /obj/item/clothing/glasses/prescription/scanners
 	gear_tweaks += new/datum/gear_tweak/path(glasses)
 
 /datum/gear/eyes/sciencegoggles
@@ -110,7 +110,7 @@
 
 /datum/gear/eyes/blindfold
 	display_name = "blindfold"
-	path = /obj/item/clothing/glasses/sunglasses/blindfold
+	path = /obj/item/clothing/glasses/blindfold
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/eyes/janitor

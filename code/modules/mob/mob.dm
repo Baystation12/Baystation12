@@ -113,8 +113,8 @@
 			M.show_message(blind_message, AUDIBLE_MESSAGE)
 			continue
 	//Multiz, have shadow do same
-	if(shadow)
-		shadow.visible_message(message, self_message, blind_message)
+	if(bound_overlay)
+		bound_overlay.visible_message(message, self_message, blind_message)
 
 // Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
@@ -310,7 +310,17 @@
 						continue
 					to_chat(M, "<span class='subtle'><b>\The [src]</b> looks at \the [A].</span>")
 
-	A.examine(src)
+	var/distance = INFINITY
+	if(isghost(src) || stat == DEAD)
+		distance = 0
+	else
+		var/turf/source_turf = get_turf(src)
+		var/turf/target_turf = get_turf(A)
+		if(source_turf && source_turf.z == target_turf?.z)
+			distance = get_dist(source_turf, target_turf)
+
+	if(!A.examine(src, distance))
+		crash_with("Improper /examine() override: [log_info_line(A)]")
 
 /mob/verb/pointed(atom/A as mob|obj|turf in view())
 	set name = "Point To"
@@ -369,12 +379,10 @@
 		else
 			attack_empty_hand(BP_R_HAND)
 
-/mob/proc/update_flavor_text()
-	set src in usr
-	if(usr != src)
-		to_chat(usr, "No.")
+/mob/proc/update_flavor_text(var/key)
 	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
-
+	if(!CanInteract(usr, GLOB.self_state))
+		return
 	if(msg != null)
 		flavor_text = msg
 
@@ -426,20 +434,36 @@
 	unset_machine()
 	reset_view(null)
 
-/mob/Topic(href, href_list)
+/mob/DefaultTopicState()
+	return GLOB.view_state
+
+// Use to field Topic calls for which usr == src is required, which will first be funneled into here.
+/mob/proc/OnSelfTopic(href_list)
 	if(href_list["mach_close"])
 		var/t1 = text("window=[href_list["mach_close"]]")
 		unset_machine()
-		src << browse(null, t1)
-
-	if(href_list["flavor_more"])
-		usr << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", name, replacetext(flavor_text, "\n", "<BR>")), text("window=[];size=500x200", name))
-		onclose(usr, "[name]")
+		show_browser(src, null, t1)
+		return TOPIC_HANDLED
 	if(href_list["flavor_change"])
-		update_flavor_text()
+		update_flavor_text(href_list["flavor_change"])
+		return TOPIC_HANDLED
 
-//	..()
-	return
+// If usr != src, or if usr == src but the Topic call was not resolved, this is called next.
+/mob/OnTopic(mob/user, href_list, datum/topic_state/state)
+	if(href_list["flavor_more"])
+		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>", "window=[name];size=500x200")
+		onclose(user, "[name]")
+		return TOPIC_HANDLED
+
+// You probably do not need to override this proc. Use one of the two above.
+/mob/Topic(href, href_list, datum/topic_state/state)
+	if(CanUseTopic(usr, GLOB.self_state, href_list) == STATUS_INTERACTIVE)
+		. = OnSelfTopic(href_list)
+		if(.)
+			return
+	else if(href_list["flavor_change"] && !is_admin(usr) && (usr != src))
+		log_and_message_admins(usr, "is suspected of trying to change flavor text on [key_name_admin(src)] via Topic exploits.")
+	return ..()
 
 /mob/proc/pull_damage()
 	return 0
@@ -598,6 +622,8 @@
 				stat("Master Controller:", "ERROR")
 			if(Failsafe)
 				Failsafe.stat_entry()
+			else if (Master.initializing)
+				stat("Failsafe Controller:", "Waiting for MC")
 			else
 				stat("Failsafe Controller:", "ERROR")
 			if(Master)

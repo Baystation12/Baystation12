@@ -108,10 +108,14 @@
 /datum/recipe/proc/make_food(var/obj/container as obj)
 	if(!result)
 		log_error("<span class='danger'>Recipe [type] is defined without a result, please bug this.</span>")
-
 		return
 	var/obj/result_obj = new result(container)
-	for (var/obj/O in (container.InsertedContents()-result_obj))
+	container.reagents.clear_reagents()
+	//Checked here in case LAZYCLEARLIST nulls and no more physical ingredients are added
+	var/list/container_contents = container.InsertedContents()
+	if(!container_contents)
+		return result_obj
+	for (var/obj/O in (container_contents-result_obj))
 		if (O.reagents)
 			O.reagents.del_reagent(/datum/reagent/nutriment)
 			O.reagents.update_total()
@@ -120,7 +124,6 @@
 			var/obj/item/weapon/holder/H = O
 			H.destroy_all()
 		qdel(O)
-	container.reagents.clear_reagents()
 	return result_obj
 
 /proc/select_recipe(var/list/datum/recipe/avaiable_recipes, var/obj/obj as obj, var/exact)

@@ -151,7 +151,6 @@
 		if(zone_exposure >= 1)
 			return 1
 		pressure_adjustment_coefficient = max(pressure_adjustment_coefficient, zone_exposure)
-
 	pressure_adjustment_coefficient = Clamp(pressure_adjustment_coefficient, 0, 1) // So it isn't less than 0 or larger than 1.
 
 	return pressure_adjustment_coefficient
@@ -286,6 +285,7 @@
 		damage = Floor(damage * species.get_radiation_mod(src))
 		if(damage)
 			adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
+			immunity = max(0, immunity - damage * 15 * RADIATION_SPEED_COEFFICIENT) 
 			updatehealth()
 			if(!isSynthetic() && organs.len)
 				var/obj/item/organ/external/O = pick(organs)
@@ -302,14 +302,6 @@
 		return
 	..()
 
-/mob/living/carbon/human/handle_post_breath(datum/gas_mixture/breath)
-	..()
-	//spread some viruses while we are at it
-	if(breath && !internal && virus2.len > 0 && prob(10))
-		for(var/mob/living/carbon/M in view(1,src))
-			src.spread_disease_to(M)
-
-
 /mob/living/carbon/human/get_breath_from_internal(volume_needed=STD_BREATH_VOLUME)
 	if(internal)
 
@@ -319,7 +311,7 @@
 			if(!rig.offline && (rig.air_supply && internal == rig.air_supply))
 				rig_supply = rig.air_supply
 
-		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))	
+		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)) || (head && (head.item_flags & ITEM_FLAG_AIRTIGHT)))))
 			set_internals(null)
 
 		if(internal)
@@ -489,6 +481,10 @@
 		if(C)
 			if(C.max_heat_protection_temperature && C.max_heat_protection_temperature >= temperature)
 				. |= C.heat_protection
+			if(C.accessories.len)
+				for(var/obj/item/clothing/accessory/A in C.accessories)
+					if(A.max_heat_protection_temperature && A.max_heat_protection_temperature >= temperature)
+						. |= A.heat_protection
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
 /mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
@@ -498,6 +494,11 @@
 		if(C)
 			if(C.min_cold_protection_temperature && C.min_cold_protection_temperature <= temperature)
 				. |= C.cold_protection
+			if(C.accessories.len)
+				for(var/obj/item/clothing/accessory/A in C.accessories)
+					if(A.min_cold_protection_temperature && A.min_cold_protection_temperature <= temperature)
+						. |= A.cold_protection
+
 
 /mob/living/carbon/human/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
 	var/thermal_protection_flags = get_heat_protection_flags(temperature)
@@ -971,17 +972,10 @@
 		hud_list[LIFE_HUD] = holder
 
 	if (BITTEST(hud_updateflag, STATUS_HUD) && hud_list[STATUS_HUD] && hud_list[STATUS_HUD_OOC])
-		var/foundVirus = 0
-		for (var/ID in virus2)
-			if (ID in virusDB)
-				foundVirus = 1
-				break
-
 		var/image/holder = hud_list[STATUS_HUD]
 		if(stat == DEAD)
 			holder.icon_state = "huddead"
-		else if(foundVirus)
-			holder.icon_state = "hudill"
+
 		else if(has_brain_worms())
 			var/mob/living/simple_animal/borer/B = has_brain_worms()
 			if(B.controlling)
@@ -996,8 +990,6 @@
 			holder2.icon_state = "huddead"
 		else if(has_brain_worms())
 			holder2.icon_state = "hudbrainworm"
-		else if(virus2.len)
-			holder2.icon_state = "hudill"
 		else
 			holder2.icon_state = "hudhealthy"
 
@@ -1115,6 +1107,7 @@
 	full_prosthetic = null
 	shock_stage = 0
 	..()
+	adjust_stamina(100)
 
 /mob/living/carbon/human/reset_view(atom/A)
 	..()
@@ -1136,7 +1129,7 @@
 			reset_view(null)
 	else
 		var/isRemoteObserve = 0
-		if(shadow && client.eye == shadow && !is_physically_disabled())
+		if(bound_overlay && client.eye == bound_overlay && !is_physically_disabled())
 			isRemoteObserve = 1
 		else if((mRemote in mutations) && remoteview_target)
 			if(remoteview_target.stat == CONSCIOUS)

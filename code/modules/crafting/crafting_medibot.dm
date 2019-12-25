@@ -1,8 +1,13 @@
 /decl/crafting_stage/empty_storage/medibot
 	begins_with_object_type = /obj/item/weapon/storage/firstaid
-	progress_message = "You prop the health scanner up on the first aid kit."
-	completion_trigger_type = /obj/item/device/scanner/health
+	progress_message = "You add the robot arm to the first aid kit."
+	completion_trigger_type = /obj/item/robot_parts
 	item_icon_state = "medibot_1"
+	next_stages = list(/decl/crafting_stage/scanner)
+
+/decl/crafting_stage/scanner
+	progress_message = "You add the health sensor to the assembly"
+	item_icon_state = "medibot_2"
 	next_stages = list(/decl/crafting_stage/proximity/medibot)
 
 /decl/crafting_stage/proximity/medibot

@@ -397,10 +397,8 @@
 			continue
 		if (BP_IS_ROBOTIC(eyes))
 			continue
-		if (istype(subject.glasses, /obj/item/clothing/glasses/meson))
-			var/obj/item/clothing/glasses/meson/mesons = subject.glasses
-			if (mesons.active)
-				continue
+		if(subject.has_meson_effect())
+			continue
 		var/effect = max(0, min(200, power * config_hallucination_power * sqrt( 1 / max(1,get_dist(subject, src)))) )
 		subject.adjust_hallucination(effect, 0.25 * effect)
 

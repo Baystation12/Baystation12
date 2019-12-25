@@ -27,13 +27,12 @@
 	for(var/obj/item/thing in contents)
 		thing.emp_act(severity)
 
-/obj/item/mech_component/examine()
+/obj/item/mech_component/examine(mob/user)
 	. = ..()
-	if(.)
-		if(ready_to_install())
-			to_chat(usr, SPAN_NOTICE("It is ready for installation."))
-		else
-			show_missing_parts(usr)
+	if(ready_to_install())
+		to_chat(user, SPAN_NOTICE("It is ready for installation."))
+	else
+		show_missing_parts(user)
 
 //These icons have multiple directions but before they're attached we only want south.
 /obj/item/mech_component/set_dir()

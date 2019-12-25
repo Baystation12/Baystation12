@@ -1,4 +1,4 @@
-/obj/effect/overmap/ship/torch
+/obj/effect/overmap/visitable/ship/torch
 	name = "SEV Torch"
 	desc = "A bluespace-capable corvette bearing markings of the SCG Expeditionary Corps."
 	fore_dir = WEST
@@ -68,7 +68,7 @@
 		"nav_ert_dock"
 	)
 
-/obj/effect/overmap/ship/landable/exploration_shuttle
+/obj/effect/overmap/visitable/ship/landable/exploration_shuttle
 	name = "Charon"
 	desc = "A medium-sized long-range shuttle. It bears markings of the SCG Expeditionary Corps."
 	shuttle = "Charon"
@@ -79,7 +79,7 @@
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_SMALL
 
-/obj/effect/overmap/ship/landable/aquila
+/obj/effect/overmap/visitable/ship/landable/aquila
 	name = "Aquila"
 	desc = "A vessel escort gunship. It bears markings of the SCG Fleet."
 	shuttle = "Aquila"
@@ -89,7 +89,7 @@
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
 
-/obj/effect/overmap/ship/landable/guppy
+/obj/effect/overmap/visitable/ship/landable/guppy
 	name = "Guppy"
 	desc = "A small general utility pod. It's capable of limited independant space travel. It's marked as TORCH GUP #1"
 	shuttle = "Guppy"

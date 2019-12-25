@@ -45,7 +45,7 @@
 
 /obj/machinery/embedded_controller/radio
 	icon = 'icons/obj/airlock_machines.dmi'
-	icon_state = "airlock_control_standby"
+	icon_state = "airlock_control_off"
 	power_channel = ENVIRON
 	density = 0
 	unacidable = 1
@@ -63,12 +63,26 @@ obj/machinery/embedded_controller/radio/Destroy()
 	..()
 
 /obj/machinery/embedded_controller/radio/on_update_icon()
+	overlays.Cut()
 	if(!on || !istype(program))
-		icon_state = "airlock_control_off"
-	else if(program.memory["processing"])
-		icon_state = "airlock_control_process"
+		return
+	if(!program.memory["processing"])
+		overlays += image(icon, "screen_standby")
+		overlays += image(icon, "indicator_done")
 	else
-		icon_state = "airlock_control_standby"
+		overlays += image(icon, "indicator_active")
+	var/datum/computer/file/embedded_program/docking/airlock/docking_program = program
+	var/datum/computer/file/embedded_program/airlock/docking/airlock_program = program
+	if(istype(docking_program))
+		if(docking_program.override_enabled)
+			overlays += image(icon, "indicator_forced")
+		airlock_program = docking_program.airlock_program
+	
+	if(istype(airlock_program) && airlock_program.memory["processing"])
+		if(airlock_program.memory["pump_status"] == "siphon")
+			overlays += image(icon, "screen_drain")
+		else
+			overlays += image(icon, "screen_fill")
 
 /obj/machinery/embedded_controller/radio/post_signal(datum/signal/signal, var/radio_filter = null)
 	signal.transmission_method = TRANSMISSION_RADIO

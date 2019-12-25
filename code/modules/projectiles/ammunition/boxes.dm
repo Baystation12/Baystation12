@@ -48,6 +48,16 @@
 		I.color = marking_color
 		overlays += I
 
+/obj/item/ammo_magazine/shotholder/attack_hand(mob/user)
+	if((user.a_intent == I_HURT) && (stored_ammo.len))
+		var/obj/item/ammo_casing/C = stored_ammo[stored_ammo.len]
+		stored_ammo-=C
+		user.put_in_hands(C)
+		user.visible_message("\The [user] removes \a [C] from [src].", "<span class='notice'>You remove \a [C] from [src].</span>")
+		update_icon()
+	else
+		..()
+
 /obj/item/ammo_magazine/shotholder/shell
 	name = "shotgun shell holder"
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet

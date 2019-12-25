@@ -11,11 +11,10 @@
 		return
 	next_click = world.time + 1
 
-	if(istype(loc, /mob/living/exosuit) && !(A in src.contents))
-		var/mob/living/exosuit/M = loc
-		return M.ClickOn(A, params, src)
-
 	var/list/modifiers = params2list(params)
+	if (modifiers["ctrl"] && modifiers["alt"])
+		CtrlAltClickOn(A)
+		return
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
 		return
@@ -116,6 +115,9 @@
 /mob/living/silicon/robot/AltClickOn(var/atom/A)
 	A.BorgAltClick(src)
 
+/mob/living/silicon/robot/CtrlAltClickOn(atom/A)
+	A.BorgCtrlAltClick(src)
+
 /atom/proc/BorgCtrlShiftClick(var/mob/living/silicon/robot/user) //forward to human click if not overriden
 	CtrlShiftClick(user)
 
@@ -145,13 +147,19 @@
 	return
 
 /obj/machinery/door/airlock/BorgAltClick() // Eletrifies doors. Forwards to AI code.
-	AICtrlAltClick()
+	if (usr.a_intent != I_HELP)
+		AICtrlAltClick()
+	else
+		..()
 
 /obj/machinery/turretid/BorgAltClick() //turret lethal on/off. Forwards to AI code.
 	AIAltClick()
 
 /obj/machinery/atmospherics/binary/pump/BorgAltClick()
 	return AltClick()
+
+/atom/proc/BorgCtrlAltClick(var/mob/living/silicon/robot/user)
+	CtrlAltClick(user)
 
 /*
 	As with AI, these are not used in click code,

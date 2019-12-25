@@ -130,6 +130,16 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/sodawater/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/sodawater, 30)
+	
+/obj/item/weapon/reagent_containers/food/drinks/cans/beastenergy
+	name = "Beast Energy"
+	desc = "100% pure energy, and 150% pure liver disease."
+	icon_state = "beastenergy"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/beastenergy/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/drink/beastenergy, 30)
 
 //Items exclusive to the BODA machine on deck 4 and wherever else it pops up. First two are a bit jokey. Second two are genuine article.
 

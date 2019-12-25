@@ -139,7 +139,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "ay" = (
-/obj/item/modular_computer/console/preset/merchant,
+/obj/machinery/computer/modular/preset/merchant,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/command)
 "az" = (
@@ -873,7 +873,6 @@
 	dir = 10
 	},
 /obj/machinery/air_sensor{
-	frequency = 7664;
 	id_tag = "c1"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -940,7 +939,6 @@
 	dir = 10
 	},
 /obj/machinery/air_sensor{
-	frequency = 7663;
 	id_tag = "c2"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -964,7 +962,6 @@
 	dir = 10
 	},
 /obj/machinery/air_sensor{
-	frequency = 7662;
 	id_tag = "c3"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -1020,7 +1017,7 @@
 "ce" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7664;
+	frequency = 1441;
 	id = "cn2n"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -1052,7 +1049,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
-	frequency = 7664;
+	frequency = 1441;
 	id_tag = "cn2o"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -1230,7 +1227,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
-	frequency = 7663;
+	frequency = 1441;
 	id_tag = "co2o"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -1285,7 +1282,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7663;
+	frequency = 1441;
 	id = "co2n"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -1302,7 +1299,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7662;
+	frequency = 1441;
 	id = "cco2n"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -1458,7 +1455,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
-	frequency = 7662;
+	frequency = 1441;
 	id_tag = "cco2o"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -1898,7 +1895,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 7664;
+	frequency = 1441;
 	input_tag = "cn2n";
 	name = "Nitrogen Supply Control";
 	output_tag = "cn2o";
@@ -2722,7 +2719,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 7663;
+	frequency = 1441;
 	input_tag = "co2n";
 	name = "Oxygen Supply Control";
 	output_tag = "co2o";
@@ -2816,7 +2813,7 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 7662;
+	frequency = 1441;
 	input_tag = "cco2n";
 	name = "Carbon Dioxide Tank Control";
 	output_tag = "cco2o";
@@ -6385,7 +6382,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7664;
+	frequency = 1441;
 	id = "cn2n"
 	},
 /turf/simulated/floor/reinforced/nitrogen,

@@ -51,7 +51,6 @@
 	appearance_flags = HAS_EYE_COLOR | HAS_BASE_SKIN_COLOURS
 	blood_color = "#2de00d"
 	flesh_color = "#90edeb"
-	virus_immune = 1
 	slowdown = -1
 	hud_type = /datum/hud_data/adherent
 
@@ -131,6 +130,9 @@
 
 /datum/species/adherent/can_fall(var/mob/living/carbon/human/H)
 	. = !can_overcome_gravity(H)
+
+/datum/species/adherent/get_slowdown(var/mob/living/carbon/human/H)
+	return slowdown
 
 /datum/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
 

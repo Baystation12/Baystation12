@@ -91,7 +91,10 @@
 		/obj/item/device/paicard,
 		/obj/item/device/synthesized_instrument/violin,
 		/obj/item/weapon/storage/belt/utility/full,
-		/obj/item/clothing/accessory/horrible)
+		/obj/item/clothing/accessory/horrible,
+		/obj/item/weapon/storage/box/large/foam_gun,
+		/obj/item/weapon/storage/box/large/foam_gun/burst,
+		/obj/item/weapon/storage/box/large/foam_gun/revolver)
 
 	if(!ispath(gift_type,/obj/item))	return
 
@@ -182,8 +185,9 @@
 	return
 
 
-/obj/item/weapon/wrapping_paper/examine(mob/user)
-	if(..(user, 1))
+/obj/item/weapon/wrapping_paper/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)

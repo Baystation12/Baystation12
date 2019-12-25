@@ -138,8 +138,8 @@ patches
 scarves
 *****/
 /obj/item/clothing/accessory/solgov/ec_scarf
-	name = "expeditionary dress scarf"
-	desc = "An SCG blue silk scarf, meant to be worn with the Expeditionary Corps dress uniform."
+	name = "expeditionary scarf"
+	desc = "An SCG blue silk scarf, meant to be worn with Expeditionary Corps uniforms."
 	icon = 'icons/obj/clothing/obj_accessories.dmi'
 	accessory_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_accessories.dmi', slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
 	icon_state = "whitescarf"
@@ -148,13 +148,13 @@ scarves
 	check_codex_val = FACTION_EXPEDITIONARY
 
 /obj/item/clothing/accessory/solgov/ec_scarf/observatory
-	name = "\improper Observatory dress scarf"
-	desc = "A silk scarf in Expeditionary Corps Observatory section colors, meant to be worn with the Expeditionary Corps dress uniform."
+	name = "\improper Observatory scarf"
+	desc = "A silk scarf in Expeditionary Corps Observatory section colors, meant to be worn with Expeditionary Corps uniforms."
 	color = "#58bb59"
 
 /obj/item/clothing/accessory/solgov/ec_scarf/fieldops
-	name = "\improper Field Operations dress scarf"
-	desc = "A silk scarf in Expeditionary Corps Field Operations section colors, meant to be worn with the Expeditionary Corps dress uniform."
+	name = "\improper Field Operations scarf"
+	desc = "A silk scarf in Expeditionary Corps Field Operations section colors, meant to be worn with Expeditionary Corps uniforms."
 	color = "#9f84b3"
 
 /******
@@ -228,8 +228,8 @@ specialty pins
 	icon_state = "fleetspec_counselor"
 
 /obj/item/clothing/accessory/solgov/specialty/chemist
-	name = "chemistry blazes"
-	desc = "Orange blazes denoting a chemist."
+	name = "pharmacy blazes"
+	desc = "Orange blazes denoting a pharmacist."
 	icon_state = "fleetspec_chemist"
 
 /obj/item/clothing/accessory/solgov/specialty/enlisted
@@ -352,8 +352,8 @@ armour attachments
 	icon_state = "medictag"
 
 /obj/item/clothing/accessory/armor/tag/solgov/agent
-	name = "\improper OCIE AGENT tag"
-	desc = "An armor tag with the word OCIE AGENT printed in gold lettering on it."
+	name = "\improper SFP AGENT tag"
+	desc = "An armor tag with the words SFP AGENT printed in gold lettering on it."
 	icon_state = "agenttag"
 
 /obj/item/clothing/accessory/armor/tag/solgov/com

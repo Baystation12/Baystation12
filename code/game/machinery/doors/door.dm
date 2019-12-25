@@ -40,6 +40,9 @@
 	dir = SOUTH
 	var/width = 1
 
+	//Used for intercepting clicks on our turf. Set 0 to disable click interception
+	var/turf_hand_priority = 3
+
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
 
@@ -187,15 +190,15 @@
 
 
 
-/obj/machinery/door/hitby(AM as mob|obj, var/speed=5)
+/obj/machinery/door/hitby(AM as mob|obj, var/datum/thrownthing/TT)
 
 	..()
 	visible_message("<span class='danger'>[src.name] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM))
-		tforce = 15 * (speed/5)
+		tforce = 3 * TT.speed
 	else
-		tforce = AM:throwforce * (speed/5)
+		tforce = AM:throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	playsound(src.loc, hitsound, 100, 1)
 	take_damage(tforce)
 	return
@@ -513,7 +516,7 @@
 				W.update_connections(1)
 				W.update_icon()
 
-		else if( istype(T, /turf/simulated/shuttle/wall) ||  istype(T, /turf/unsimulated/wall))
+		else if( istype(T, /turf/simulated/shuttle/wall) ||	istype(T, /turf/unsimulated/wall))
 			success = 1
 		else
 			for(var/obj/O in T)
@@ -552,7 +555,7 @@
 	var/area/aft = access_area_by_dir(GLOB.reverse_dir[dir])
 	fore = fore || aft
 	aft = aft || fore
-	
+
 	if (!fore && !aft)
 		req_access = list()
 	else if (fore.secure || aft.secure)

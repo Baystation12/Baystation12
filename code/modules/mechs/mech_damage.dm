@@ -1,7 +1,7 @@
 /mob/living/exosuit/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
 	if(!effect || (blocked >= 100))
 		return 0
-	if(LAZYLEN(pilots) && !prob(body.pilot_coverage))
+	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		if(effect > 0 && effecttype == IRRADIATE)
 			effect = max((1-(get_armors_by_zone(null, IRRADIATE)/100))*effect/(blocked+1),0)
 		var/mob/living/pilot = pick(pilots)
@@ -14,11 +14,18 @@
 		user.visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly with \the [I]."))
 		return
 
-	if(LAZYLEN(pilots) && !prob(body.pilot_coverage))
+	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		var/mob/living/pilot = pick(pilots)
 		return pilot.resolve_item_attack(I, user, def_zone)
 
 	return def_zone //Careful with effects, mechs shouldn't be stunned
+
+/mob/living/exosuit/hitby(atom/movable/AM, var/datum/thrownthing/TT)
+	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+		var/mob/living/pilot = pick(pilots)
+		return pilot.hitby(AM, TT)
+	. = ..()
+
 
 /mob/living/exosuit/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
@@ -63,7 +70,7 @@
 
 	if(!damage)
 		return 0
-	
+
 	var/target = zoneToComponent(def_zone)
 	//Only 3 types of damage concern mechs and vehicles
 	switch(damagetype)
@@ -99,9 +106,9 @@
 
 /mob/living/exosuit/emp_act(var/severity)
 
-	var ratio = get_blocked_ratio(null, BURN, null, 0)
+	var/ratio = get_blocked_ratio(null, BURN, null, (4-severity) * 20)
 
-	if(ratio >= 1)
+	if(ratio >= 0.5)
 		for(var/mob/living/m in pilots)
 			to_chat(m, SPAN_NOTICE("Your Faraday shielding absorbed the pulse!"))
 		return

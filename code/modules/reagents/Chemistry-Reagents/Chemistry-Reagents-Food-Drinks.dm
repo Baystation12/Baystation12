@@ -160,6 +160,10 @@
 	nutriment_factor = 1
 	color = "#482000"
 
+/datum/reagent/nutriment/coffee/instant
+	name = "Instant Coffee Powder"
+	description = "A bitter powder made by processing coffee beans."
+
 /datum/reagent/nutriment/tea
 	name = "Tea Powder"
 	description = "A dark, tart powder made from black tea leaves."
@@ -167,6 +171,9 @@
 	taste_mult = 1.3
 	nutriment_factor = 1
 	color = "#101000"
+
+/datum/reagent/nutriment/tea/instant
+	name = "Instant Tea Powder"
 
 /datum/reagent/nutriment/coco
 	name = "Coco Powder"
@@ -291,15 +298,6 @@
 	if(volume >= 3)
 		T.wet_floor()
 
-/datum/reagent/nutriment/virus_food
-	name = "Virus Food"
-	description = "A mixture of water, milk, and oxygen. Virus cells can use this mixture to reproduce."
-	taste_description = "vomit"
-	taste_mult = 2
-	reagent_state = LIQUID
-	nutriment_factor = 2
-	color = "#899613"
-
 /datum/reagent/nutriment/sprinkles
 	name = "Sprinkles"
 	description = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
@@ -356,8 +354,8 @@
 	value = 0.2
 
 /datum/reagent/frostoil
-	name = "Frost Oil"
-	description = "A special oil that noticably chills the body. Extracted from Ice Peppers."
+	name = "Chilly Oil"
+	description = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
 	taste_description = "arctic mint"
 	taste_mult = 1.5
 	reagent_state = LIQUID
@@ -833,21 +831,34 @@
 /datum/reagent/drink/coffee/soy_latte
 	name = "Soy Latte"
 	description = "A nice and tasty beverage while you are reading your hippie books."
-	taste_description = "creamy coffee"
+	taste_description = "bitter creamy coffee"
 	color = "#c65905"
 	adj_temp = 5
 
 	glass_name = "soy latte"
-	glass_desc = "A nice and refrshing beverage while you are reading."
+	glass_desc = "A nice and refreshing beverage while you are reading your hippie books."
 
 /datum/reagent/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.heal_organ_damage(0.5 * removed, 0)
+
+/datum/reagent/drink/coffee/icecoffee/soy_latte
+	name = "Iced Soy Latte"
+	description = "A nice and tasty beverage while you are reading your hippie books. This one's cold."
+	taste_description = "cold bitter creamy coffee"
+	color = "#c65905"
+
+	glass_name = "iced soy latte"
+	glass_desc = "A nice and refreshing beverage while you are reading your hippie books. This one's cold."
+
+/datum/reagent/drink/coffee/icecoffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
 
 /datum/reagent/drink/coffee/cafe_latte
 	name = "Cafe Latte"
 	description = "A nice, strong and tasty beverage while you are reading."
-	taste_description = "bitter cream"
+	taste_description = "bitter creamy coffee"
 	color = "#c65905"
 	adj_temp = 5
 
@@ -857,6 +868,83 @@
 /datum/reagent/drink/coffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	M.heal_organ_damage(0.5 * removed, 0)
+
+/datum/reagent/drink/coffee/icecoffee/cafe_latte
+	name = "Iced Cafe Latte"
+	description = "A nice, strong and refreshing beverage while you are reading. This one's cold."
+	taste_description = "cold bitter creamy coffee"
+	color = "#c65905"
+
+	glass_name = "iced cafe latte"
+	glass_desc = "A nice, strong and refreshing beverage while you are reading. This one's cold."
+
+/datum/reagent/drink/coffee/icecoffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.heal_organ_damage(0.5 * removed, 0)
+
+/datum/reagent/drink/coffee/cafe_latte/mocha
+	name = "Mocha Latte"
+	description = "Coffee and chocolate, smooth and creamy."
+	taste_description = "bitter creamy chocolate"
+
+	glass_name = "mocha latte"
+	glass_desc = "Coffee and chocolate, smooth and creamy."
+
+/datum/reagent/drink/coffee/soy_latte/mocha
+	name = "Mocha Soy Latte"
+	description = "Coffee, soy, and chocolate, smooth and creamy."
+	taste_description = "bitter creamy chocolate"
+
+	glass_name = "mocha soy latte"
+	glass_desc = "Coffee, soy, and chocolate, smooth and creamy."
+
+/datum/reagent/drink/coffee/icecoffee/cafe_latte/mocha
+	name = "Iced Mocha Latte"
+	description = "Coffee and chocolate, smooth and creamy. This one's cold."
+	taste_description = "cold bitter creamy chocolate"
+
+	glass_name = "iced mocha latte"
+	glass_desc = "Coffee and chocolate, smooth and creamy. This one's cold."
+
+/datum/reagent/drink/coffee/icecoffee/soy_latte/mocha
+	name = "Iced Soy Mocha Latte"
+	description = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
+	taste_description = "cold bitter creamy chocolate"
+
+	glass_name = "iced soy mocha latte"
+	glass_desc = "Coffee, soy, and chocolate, smooth and creamy. This one's cold."
+
+/datum/reagent/drink/coffee/cafe_latte/pumpkin
+	name = "Pumpkin Spice Latte"
+	description = "Smells and tastes like Autumn."
+	taste_description = "bitter creamy pumpkin spice"
+
+	glass_name = "pumpkin spice latte"
+	glass_desc = "Smells and tastes like Autumn."
+
+/datum/reagent/drink/coffee/soy_latte/pumpkin
+	name = "Pumpkin Spice Soy Latte"
+	description = "Smells and tastes like Autumn."
+	taste_description = "bitter creamy pumpkin spice"
+
+	glass_name = "pumpkin spice soy latte"
+	glass_desc = "Smells and tastes like Autumn."
+
+/datum/reagent/drink/coffee/icecoffee/cafe_latte/pumpkin
+	name = "Iced Pumpkin Spice Latte"
+	description = "Smells and tastes like Autumn. This one's cold"
+	taste_description = "cold bitter creamy pumpkin spice"
+
+	glass_name = "iced pumpkin spice latte"
+	glass_desc = "Smells and tastes like Autumn. This one's cold."
+
+/datum/reagent/drink/coffee/icecoffee/soy_latte/pumpkin
+	name = "Iced Pumpkin Spice Soy Latte"
+	description = "Smells and tastes like Autumn. This one's cold"
+	taste_description = "cold bitter creamy pumpkin spice"
+
+	glass_name = "iced pumpkin spice soy latte"
+	glass_desc = "Smells and tastes like Autumn. This one's cold."
 
 /datum/reagent/drink/hot_coco
 	name = "Hot Chocolate"
@@ -1720,15 +1808,15 @@
 	glass_desc = "A beer so frosty, the air around it freezes."
 	glass_special = list(DRINK_ICE)
 
-/datum/reagent/ethanol/irishcarbomb
-	name = "Irish Car Bomb"
+/datum/reagent/ethanol/irishslammer
+	name = "Irish Slammer"
 	description = "Mmm, tastes like chocolate cake..."
 	taste_description = "delicious anger"
 	color = "#2e6671"
 	strength = 15
 
-	glass_name = "Irish Car Bomb"
-	glass_desc = "An irish car bomb."
+	glass_name = "Irish slammer"
+	glass_desc = "An Irish slammer, mixed with cream, whiskey, and ale."
 
 /datum/reagent/ethanol/coffee/irishcoffee
 	name = "Irish Coffee"
@@ -2154,6 +2242,38 @@
 	glass_name = "Baron Grey tea"
 	glass_desc = "Black tea prepared with standard orange flavoring. Much less fancy than the bergamot in Earl Grey, but the chances of you getting any of that stuff out here is pretty slim."
 
+/datum/reagent/drink/tea/barongrey/latte
+	name = "London Fog"
+	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
+	taste_description = "creamy, tangy black tea"
+
+	glass_name = "London Fog"
+	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte."
+
+/datum/reagent/drink/tea/barongrey/soy_latte
+	name = "Soy London Fog"
+	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
+	taste_description = "creamy, tangy black tea"
+
+	glass_name = "Soy London Fog"
+	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte."
+
+/datum/reagent/drink/tea/icetea/barongrey/latte
+	name = "Iced London Fog"
+	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
+	taste_description = "cold, creamy, tangy black tea"
+
+	glass_name = "iced london fog"
+	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed milk, making a pleasant tangy tea latte. This one's cold."
+
+/datum/reagent/drink/tea/icetea/barongrey/soy_latte
+	name = "Iced Soy London Fog"
+	description = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
+	taste_description = "cold, creamy, tangy black tea"
+
+	glass_name = "iced soy london fog"
+	glass_desc = "A blend of Earl Grey (Or more likely Baron Grey) and steamed soy milk, making a pleasant tangy tea latte. This one's cold."
+
 //green tea
 /datum/reagent/drink/tea/green
 	name = "Green Tea"
@@ -2189,3 +2309,449 @@
 
 	glass_name = "Maghrebi mint tea"
 	glass_desc = "Iced green tea prepared with mint and sugar. Refreshing!"
+
+/datum/reagent/drink/tea/chai
+	name = "Chai Tea"
+	description = "A spiced, dark tea. Goes great with milk."
+	taste_description = "spiced black tea"
+	color = "#151000"
+
+	glass_name = "chai tea"
+	glass_desc = "A spiced, dark tea. Goes great with milk."
+
+/datum/reagent/drink/tea/icetea/chai
+	name = "Iced Chai Tea"
+	description = "It's the chai tea you know and love, but now it's cold."
+	taste_description = "cold spiced black tea"
+	color = "#151000"
+
+	glass_name = "iced chai tea"
+	glass_desc = "It's the chai tea you know and love, but now it's cold."
+
+/datum/reagent/drink/tea/icetea/chai/sweet
+	name = "Sweet Chai Tea"
+	description = "It's the chai tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet spiced black tea"
+
+	glass_name = "sweet chai tea"
+	glass_desc = "It's the chai tea you know and love, but now it's cold. And sweet."
+
+/datum/reagent/drink/tea/chai/latte
+	name = "Chai Latte"
+	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
+	taste_description = "creamy spiced tea"
+	color = "#c8a988"
+
+	glass_name = "chai latte"
+	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk."
+
+/datum/reagent/drink/tea/chai/soy_latte
+	name = "Chai Soy Latte"
+	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
+	taste_description = "creamy spiced tea"
+	color = "#c8a988"
+
+	glass_name = "chai soy latte"
+	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk."
+
+/datum/reagent/drink/tea/icetea/chai/latte
+	name = "Iced Chai Latte"
+	description = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
+	taste_description = "cold creamy spiced tea"
+	color = "#c8a988"
+
+	glass_name = "iced chai latte"
+	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed milk. This one's cold."
+
+/datum/reagent/drink/tea/icetea/chai/soy_latte
+	name = "Iced Chai Soy Latte"
+	description = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
+	taste_description = "cold creamy spiced tea"
+	color = "#c8a988"
+
+	glass_name = "iced chai soy latte"
+	glass_desc = "A warm, inviting cup of spiced, dark tea mixed with steamed soy milk. This one's cold."
+
+/datum/reagent/drink/tea/red
+	name = "Rooibos Tea"
+	description = "A caffeine-free dark red tea, flavorful and full of antioxidants."
+	taste_description = "nutty red tea"
+	color = "#ab4c3a"
+
+	glass_name = "rooibos tea"
+	glass_desc = "A caffeine-free dark red tea, flavorful and full of antioxidants."
+
+/datum/reagent/drink/tea/icetea/red
+	name = "Iced Rooibos Tea"
+	description = "It's the red tea you know and love, but now it's cold."
+	taste_description = "cold nutty red tea"
+	color = "#ab4c3a"
+
+	glass_name = "iced rooibos tea"
+	glass_desc = "It's the red tea you know and love, but now it's cold."
+
+/datum/reagent/drink/tea/icetea/red/sweet
+	name = "Sweet Rooibos Tea"
+	description = "It's the red tea you know and love, but now it's cold. And sweet."
+	taste_description = "sweet nutty red tea"
+
+	glass_name = "sweet rooibos tea"
+	glass_desc = "It's the red tea you know and love, but now it's cold. And sweet."
+
+/datum/reagent/drink/syrup_chocolate
+	name = "Chocolate Syrup"
+	description = "Thick chocolate syrup used to flavor drinks."
+	taste_description = "chocolate"
+	color = "#542a0c"
+
+	glass_name = "chocolate syrup"
+	glass_desc = "Thick chocolate syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_caramel
+	name = "Caramel Syrup"
+	description = "Thick caramel syrup used to flavor drinks."
+	taste_description = "caramel"
+	color = "#85461e"
+
+	glass_name = "caramel syrup"
+	glass_desc = "Thick caramel syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_vanilla
+	name = "Vanilla Syrup"
+	description = "Thick vanilla syrup used to flavor drinks."
+	taste_description = "vanilla"
+	color = "#f3e5ab"
+
+	glass_name = "vanilla syrup"
+	glass_desc = "Thick vanilla syrup used to flavor drinks."
+
+/datum/reagent/drink/syrup_pumpkin
+	name = "Pumpkin Spice Syrup"
+	description = "Thick spiced pumpkin syrup used to flavor drinks."
+	taste_description = "spiced pumpkin"
+	color = "#d88b4c"
+
+	glass_name = "pumpkin spice syrup"
+	glass_desc = "Thick spiced pumpkin syrup used to flavor drinks."
+
+// Alcohol Expansion
+
+/datum/reagent/ethanol/applecider
+	name = "Apple Cider"
+	description = "A refreshing glass of apple cider."
+	taste_description = "cool apple cider"
+	color = "#cac089"
+	strength = 50
+
+	glass_name = "Apple Cider"
+	glass_desc = "A refreshing glass of apple cider."
+
+/datum/reagent/ethanol/arak
+	name = "Arak"
+	description = "An unsweetened aniseed and grape mixture."
+	taste_description = "oil and licorice"
+	color = "#f7f6e0"
+	strength = 20
+
+	glass_name = "arak"
+	glass_desc = "An unsweetened mixture of aniseed and grape."
+
+/datum/reagent/ethanol/blackstrap
+	name = "Blackstrap"
+	description = "A classic mix of rum and molasses, typically consumed by Tersteners."
+	taste_description = "sweet and strong alcohol"
+	color = "#161612"
+	strength = 30
+
+	glass_name = "blackstrap"
+	glass_desc = "A classic mix of rum and molasses."
+
+/datum/reagent/ethanol/bogus
+	name = "Bogus"
+	description = "A blend of Gin and Blackstrap."
+	taste_description = "conflicting tastes and a delicious resolution"
+	color = "#e8dfc1"
+	strength = 30
+
+	glass_name = "bogus"
+	glass_desc = "A blend of Gin and Molasses."
+
+/datum/reagent/ethanol/champagne
+	name = "Champagne"
+	description = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
+	taste_description = "a superior taste of sparkling wine"
+	color = "#e8dfc1"
+	strength = 25
+
+	glass_name = "champagne"
+	glass_desc = "Smooth sparkling wine, produced in the same region of France as it has for centuries."
+
+/datum/reagent/ethanol/coffee/gargled
+	name = "Gargled"
+	description = "A blend of Blackstrap and Coffee. An ideal pick-me-up for any rancher."
+	taste_description = "comforting warmth"
+	color = "#e8dfc1"
+	strength = 50
+
+	glass_name = "gargled"
+	glass_desc = "A blend of Blackstrap and Coffee. An ideal pick-me-up for any rancher."
+
+/datum/reagent/ethanol/springpunch
+	name = "Gilgamesh Spring Punch"
+	description = "A mix of vodka and lemon, extremely popular with Terrans."
+	taste_description = "refreshing clear fizz"
+	color = "#dfdeda"
+	strength = 30
+
+	glass_name = "Gilgamesh spring punch"
+	glass_desc = "A mix of vodka and lemon, extremely popular with Terrans."
+
+/datum/reagent/ethanol/hellshenpa
+	name = "Hellshen Pale Ale"
+	description = "A type of ale drunk in the Hellshen regions of Mars."
+	taste_description = "dark musty hops and Martian pride"
+	color = "#aa9162"
+	strength = 50
+
+	glass_name = "Hellshen Pale Ale"
+	glass_desc = "A type of ale drunk in the Hellshen regions of Mars."
+
+/datum/reagent/ethanol/jagerbomb
+	name = "Jagerbomb"
+	description = "A mix of energy drink and alcohol. Guaranteed to make you feel like an underage drinker again."
+	taste_description = "a pick-me-up and put-me-down"
+	color = "#996862"
+	strength = 10
+
+	glass_name = "jagerbomb"
+	glass_desc = "A mix of energy drink and alcohol. Guaranteed to make you feel like an underage drinker again."
+
+/datum/reagent/ethanol/jagermeister
+	name = "Jagermeister"
+	description = "A special blend of alcohol, herbs, and spices. It has remained a popular Earther drink."
+	taste_description = "herbs, spices, and alcohol"
+	color = "#596e3e"
+	strength = 20
+
+	glass_name = "jagermeister"
+	glass_desc = "A special blend of alcohol, herbs, and spaces. It has remained a popular Earther drink."
+
+/datum/reagent/ethanol/jimmygideon
+	name = "Jimmy Gideon"
+	description = "The drink of choice of Jimmy Gideon, first man on Mars."
+	taste_description = "the legacy of greatness and chocolate"
+	color = "#d9cfa5"
+	strength = 30
+
+	glass_name = "Jimmy"
+	glass_desc = "The drink of choice of Jimmy Gideon, first man on Mars."
+
+/datum/reagent/ethanol/kvass
+	name = "Kvass"
+	description = "An alcoholic drink commonly made from bread."
+	taste_description = "vkusnyy kvas, ypa!"
+	color = "#362f22"
+	strength = 30
+
+	glass_name = "kvass"
+	glass_desc = "An alcoholic drink commonly made from bread."
+
+/datum/reagent/ethanol/llanbrydewhiskey
+	name = "Llanbryde Whiskey"
+	description = "Welsh Whiskey. So good it should be illegal."
+	taste_description = "distilled welsh highlands"
+	color = "#805200"
+	strength = 10
+
+	glass_name = "Llanbryde whiskey"
+	glass_desc = "A premium Welsh whiskey."
+
+/datum/reagent/ethanol/lonestarmule
+	name = "Lonestar Mule"
+	description = "A classic Martian take on the moscow mule. Replaces vodka with molasses."
+	taste_description = "crisp, refreshing ginger beer and molasses"
+	color = "#92938a"
+	strength = 15
+
+	glass_name = "lonestar mule"
+	glass_desc = "A blend of whiskey, ginger beer, and lime juice."
+
+/datum/reagent/ethanol/lordaniawine
+	name = "Lordanian Wine"
+	description = "An earthy type of wine distilled from grapes on Lordania."
+	taste_description = "an acquired taste and elitism"
+	color = "#362f22"
+	strength = 10
+
+	glass_name = "Lordanian wine"
+	glass_desc = "An earthy type of wine distilled from grapes on Lordania."
+
+/datum/reagent/ethanol/lunabrandy
+	name = "Lunar Brandy"
+	description = "A strong fermented brandy typically consumed on Luna."
+	taste_description = "distilled wine and snobbery"
+	color = "#bdb6a9"
+	strength = 20
+
+	glass_name = "Lunar Brandy"
+	glass_desc = "A strong brandy largely consumed by the upper classes of Luna."
+
+/datum/reagent/ethanol/moscowmule
+	name = "Moscow Mule"
+	description = "A blend of vodka, ginger beer, and lime juice."
+	taste_description = "crisp, refreshing ginger and vodka"
+	color = "#e1dfd6"
+	strength = 15
+
+	glass_name = "moscow mule"
+	glass_desc = "A blend of vodka, ginger beer, and lime juice."
+
+/datum/reagent/ethanol/nevadan_gold
+	name = "Nevadan Gold Whiskey"
+	description = "A warm blend of 98 spices. Made in the heartlands of Tersten."
+	taste_description = "strong, creamy whiskey"
+	color = "#ce1900"
+	strength = 10
+
+	glass_name = "Nevadan gold whiskey"
+	glass_desc = "A warm blend of 98 spices, brewed on Tersten. A delicious mix."
+
+/datum/reagent/ethanol/prosecco
+	name = "Prosecco"
+	description = "A delightful blend of glera grapes, native to Earth."
+	taste_description = "the trials of being a young woman in a rich man's world"
+	color = "#e8dfc1"
+	strength = 30
+
+	glass_name = "prosecco"
+	glass_desc = "A delightful blend of glera grapes, native to Earth."
+
+/datum/reagent/ethanol/red_whiskey
+	name = "Red Whiskey"
+	description = "A dark red looking substance that smells like strong whiskey."
+	taste_description = "an intense throat burning sensation"
+	color = "#ce1900"
+	strength = 10
+
+	glass_name = "red whiskey"
+	glass_desc = "A dark red looking substance that smells like strong whiskey."
+
+/datum/reagent/ethanol/stag
+	name = "Stag"
+	description = "A traditional brew consumed by various members of the Fleet."
+	taste_description = "relief from duty"
+	color = "#362f22"
+	strength = 100
+	glass_name = "stag"
+	glass_desc = "A classic mix of rum and tea, ideal for long nights on watch."
+
+/datum/reagent/ethanol/vodkacola
+	name = "Vodka Cola"
+	description = "A refreshing mix of vodka and cola."
+	taste_description = "vodka and cola"
+	color = "#474238"
+	strength = 15
+	glass_name = "vodka cola"
+	glass_desc = "A refreshing mix of vodka and cola."
+
+// Alien Drinks
+
+/datum/reagent/drink/alien/unathijuice
+	name = "Hrukhza Leaf Extract"
+	description = "A bitter liquid used in most recipes on Moghes."
+	taste_description = "bland, disgusting bitterness"
+	color = "#e78108"
+	glass_name = "hrukhza leaf extract"
+	glass_desc = "A bitter extract from the hrukhza."
+
+/datum/reagent/drink/alien/kzkzaa
+	name = "Kzkzaa"
+	description = "Fish extract from Moghes."
+	taste_description = "fishy fish"
+	color = "#e78108"
+	glass_name = "kzkzaa"
+	glass_desc = "A glass of Kzkzaa, fish extract, commonly drank on Moghes."
+
+/datum/reagent/drink/alien/mumbaksting
+	name = "Mumbak Sting"
+	description = "A drink made from the venom of the Yuum."
+	taste_description = "harsh and stinging sweetness"
+	color = "#7e4c2e"
+	glass_name = "Mumbak sting"
+	glass_desc = "A drink made from the venom of the Yuum."
+
+/datum/reagent/ethanol/alien/wasgaelhi
+	name = "Wasgaelhi"
+	description = "Wine made from various fruits from the swamps of Moghes."
+	taste_description = "swampy fruit"
+	color = "#678e46"
+	strength = 10
+	glass_name = "wasgaelhi"
+	glass_desc = "Wine made from various fruits from the swamps of Moghes."
+
+/datum/reagent/drink/alien/skrianhi
+	name = "Skrianhi Tea"
+	description = "A blend of teas from Moghes, commonly drank by Unathi."
+	taste_description = "bitter energising tea"
+	color = "#0e0900"
+	glass_name = "skiranhi tea"
+	glass_desc = "A blend of teas from Moghes, commonly drank by Unathi."
+
+// Non-Alcoholic Drinks
+
+/datum/reagent/drink/fools_gold
+	name = "Fool's Gold"
+	description = "A non-alcoholic beverage typically served as an alternative to whiskey."
+	taste_description = "watered down whiskey"
+	color = "#e78108"
+	glass_name = "fools gold"
+	glass_desc = "A non-alcoholic beverage typically served as an alternative to whiskey."
+
+/datum/reagent/drink/snowball
+	name = "Snowball"
+	description = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
+	taste_description = "intellectual thought and brain-freeze"
+	color = "#eeecea"
+	adj_temp = -5
+	glass_name = "snowball"
+	glass_desc = "A cold pick-me-up frequently drunk in scientific outposts and academic fields."
+
+/datum/reagent/drink/browndwarf
+	name = "Brown Dwarf"
+	description = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
+	taste_description = "dark chocolatey matter"
+	color = "#44371f"
+	glass_name = "brown dwarf"
+	glass_desc = "A large gas body made of chocolate that has failed to sustain nuclear fusion."
+
+/datum/reagent/drink/gingerbeer
+	name = "Ginger Beer"
+	description = "A hearty, non-alcoholic beverage extremely popular around the SCG."
+	taste_description = "carbonated ginger"
+	color = "#44371f"
+	glass_name = "ginger beer"
+	glass_desc = "A hearty, non-alcoholic beverage extremely popular around the SCG."
+
+/datum/reagent/drink/beastenergy
+	name = "Beast Energy"
+	description = "A bottle of 100% pure energy."
+	taste_description = "your heart crying"
+	color = "#d69115"
+	glass_name = "beast energy"
+	glass_desc = "Why would you drink this without mixer?"
+
+/datum/reagent/drink/beastenergy/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(alien == IS_DIONA)
+		return
+	M.drowsyness = max(0, M.drowsyness - 7)
+	M.make_jittery(2)
+	M.add_chemical_effect(CE_PULSE, 1)
+
+/datum/reagent/drink/kefir
+	name = "Kefir"
+	description = "Fermented milk. Actually very tasty."
+	taste_description = "sharp, frothy yougurt"
+	color = "#ece4e3"
+	glass_name = "Kefir"
+	glass_desc = "Fermented milk, looks a lot like yougurt."

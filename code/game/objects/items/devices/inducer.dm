@@ -149,7 +149,7 @@
 
 
 /obj/item/inducer/examine(mob/living/M)
-	..()
+	. = ..()
 	var/obj/item/weapon/cell/MyC = get_cell()
 	if(MyC)
 		to_chat(M, "<span class='notice'>Its display shows: [MyC.percent()]%.</span>")

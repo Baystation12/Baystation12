@@ -1,7 +1,7 @@
 /decl/hierarchy/mil_uniform
 	name = "Master outfit hierarchy"
 	hierarchy_type = /decl/hierarchy/mil_uniform
-	var/branch = null
+	var/list/branches = null
 	var/departments = 0
 	var/min_rank = 0
 
@@ -32,7 +32,7 @@
 /decl/hierarchy/mil_uniform/ec
 	name = "Master EC outfit"
 	hierarchy_type = /decl/hierarchy/mil_uniform/ec
-	branch = /datum/mil_branch/expeditionary_corps
+	branches = list(/datum/mil_branch/expeditionary_corps)
 
 	pt_under = /obj/item/clothing/under/solgov/pt/expeditionary
 	pt_shoes = /obj/item/clothing/shoes/black
@@ -60,7 +60,7 @@
 /decl/hierarchy/mil_uniform/fleet
 	name = "Master fleet outfit"
 	hierarchy_type = /decl/hierarchy/mil_uniform/fleet
-	branch = /datum/mil_branch/fleet
+	branches = list(/datum/mil_branch/fleet)
 
 	pt_under = /obj/item/clothing/under/solgov/pt/fleet
 	pt_shoes = /obj/item/clothing/shoes/black
@@ -85,10 +85,10 @@
 
 	dress_extra = list(/obj/item/clothing/head/beret/solgov/fleet/dress)
 
-decl/hierarchy/mil_uniform/civilian
+/decl/hierarchy/mil_uniform/civilian
 	name = "Master civilian outfit"		//Basically just here for the rent-a-tux, ahem, I mean... dress uniform.
 	hierarchy_type = /decl/hierarchy/mil_uniform/civilian
-	branch = /datum/mil_branch/civilian
+	branches = list(/datum/mil_branch/civilian,/datum/mil_branch/solgov)
 
 	service_under = /obj/item/clothing/under/suit_jacket/really_black
 	service_skirt = /obj/item/clothing/under/skirt_c/dress/black

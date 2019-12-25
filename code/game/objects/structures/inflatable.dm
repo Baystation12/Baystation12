@@ -31,6 +31,7 @@
 	name = "inflatable door"
 	desc = "A folded membrane which rapidly expands into a simple door on activation."
 	icon_state = "folded_door"
+	item_state = "folded_door"
 	deploy_path = /obj/structure/inflatable/door
 
 /obj/structure/inflatable
@@ -91,14 +92,13 @@
 
 /obj/structure/inflatable/examine(mob/user)
 	. = ..()
-	if(.)
-		if(health >= maxHealth)
-			to_chat(user, SPAN_NOTICE("It's undamaged."))
-		else if(health >= 0.5 * maxHealth)
-			to_chat(user, SPAN_WARNING("It's showing signs of damage."))
-		else if(health >= 0)
-			to_chat(user, SPAN_DANGER("It's heavily damaged!"))
-		to_chat(user, SPAN_NOTICE("It's been duct taped in few places."))
+	if(health >= maxHealth)
+		to_chat(user, SPAN_NOTICE("It's undamaged."))
+	else if(health >= 0.5 * maxHealth)
+		to_chat(user, SPAN_WARNING("It's showing signs of damage."))
+	else if(health >= 0)
+		to_chat(user, SPAN_DANGER("It's heavily damaged!"))
+	to_chat(user, SPAN_NOTICE("It's been duct taped in few places."))
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	return 0

@@ -20,29 +20,38 @@
 	. = ..()
 
 /obj/item/weapon/stock_parts/power/terminal/machine_process(var/obj/machinery/machine)
-	if(!terminal)
-		machine.update_power_channel(cached_channel)
-		machine.power_change()
+
+	if(!terminal) //Terminal is gone, give up
+		if(status & PART_STAT_ACTIVE)
+			machine.update_power_channel(cached_channel)
+			machine.power_change()
 		return
 	
+
+
 	var/surplus = terminal.surplus()
 	var/usage = machine.get_power_usage()
-	terminal.draw_power(usage)
-	if(surplus >= usage)
-		return // had enough power and good to go.
 
-	// Try and use other (local) sources of power to make up for the deficit.
-	var/deficit = machine.use_power_oneoff(usage - surplus)
-	if(deficit > 0)
-		machine.update_power_channel(cached_channel)
+	if((machine.stat & NOPOWER) && surplus > usage)
 		machine.power_change()
+		return // This suggests that we should be powering the machine instead, so let's try that
+
+	if(status & PART_STAT_ACTIVE)
+		terminal.draw_power(usage)
+		if(surplus >= usage)
+			return // had enough power and good to go.
+		else 
+			// Try and use other (local) sources of power to make up for the deficit.
+			var/deficit = machine.use_power_oneoff(usage - surplus)
+			if(deficit > 0)
+				machine.update_power_channel(cached_channel)
+				machine.power_change()
 
 //Is willing to provide power if the wired contribution is nonnegligible and there is enough total local power to run the machine.
 /obj/item/weapon/stock_parts/power/terminal/can_provide_power(var/obj/machinery/machine)
 	if(terminal && terminal.surplus() && machine.can_use_power_oneoff(machine.get_power_usage(), LOCAL) <= 0)
 		set_status(machine, PART_STAT_ACTIVE)
 		machine.update_power_channel(LOCAL)
-		start_processing(machine)
 		return TRUE
 	return FALSE
 
@@ -58,7 +67,6 @@
 
 /obj/item/weapon/stock_parts/power/terminal/not_needed(var/obj/machinery/machine)
 	unset_status(machine, PART_STAT_ACTIVE)
-	stop_processing(machine)
 
 /obj/item/weapon/stock_parts/power/terminal/proc/set_terminal(var/obj/machinery/machine, var/obj/machinery/power/new_terminal)
 	if(terminal)
@@ -67,8 +75,9 @@
 	terminal.master = src
 	GLOB.destroyed_event.register(terminal, src, .proc/unset_terminal)
 
-	set_extension(src, /datum/extension/event_registration/shuttle_stationary, /datum/extension/event_registration/shuttle_stationary, GLOB.moved_event, machine, .proc/machine_moved, get_area(src))
+	set_extension(src, /datum/extension/event_registration/shuttle_stationary, GLOB.moved_event, machine, .proc/machine_moved, get_area(src))
 	set_status(machine, PART_STAT_CONNECTED)
+	start_processing(machine)
 
 /obj/item/weapon/stock_parts/power/terminal/proc/machine_moved(var/obj/machinery/machine, var/turf/old_loc, var/turf/new_loc)
 	if(!terminal)
@@ -95,6 +104,7 @@
 	if(machine)
 		unset_status(machine, PART_STAT_CONNECTED)
 	terminal = null
+	stop_processing(machine)
 
 /obj/item/weapon/stock_parts/power/terminal/proc/blocking_terminal_at_loc(var/obj/machinery/machine, var/turf/T, var/mob/user)
 	. = FALSE
@@ -169,3 +179,11 @@
 /obj/item/weapon/stock_parts/power/terminal/buildable
 	part_flags = PART_FLAG_HAND_REMOVE
 	matter = list(MATERIAL_STEEL = 400)
+
+/decl/stock_part_preset/terminal_setup
+	expected_part_type = /obj/item/weapon/stock_parts/power/terminal
+
+/decl/stock_part_preset/terminal_setup/apply(obj/machinery/machine, var/obj/item/weapon/stock_parts/power/terminal/part)
+	var/obj/machinery/power/terminal/term = locate() in machine.loc
+	if(istype(term) && !term.master)
+		part.set_terminal(machine, term)

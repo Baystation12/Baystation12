@@ -1,7 +1,7 @@
 #include "casino_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/ship/casino
+/obj/effect/overmap/visitable/ship/casino
 	name = "passenger liner"
 	desc = "Sensors detect an undamaged vessel without any signs of activity."
 	color = "#bd6100"
@@ -20,7 +20,7 @@
 		"Casino Cutter" = list("nav_casino_hangar"),
 	)
 
-/obj/effect/overmap/ship/casino/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/ship/casino/New(nloc, max_x, max_y)
 	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
 	..()
 

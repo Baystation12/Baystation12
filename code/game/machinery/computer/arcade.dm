@@ -5,30 +5,33 @@
 	icon_keyboard = null
 	icon_screen = "invaders"
 	var/random = TRUE
-	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops										= 2,
-							/obj/item/toy/blink															= 2,
-							/obj/item/clothing/under/syndicate/tacticool								= 2,
-							/obj/item/toy/sword															= 2,
-							/obj/item/weapon/gun/projectile/revolver/capgun								= 2,
-							/obj/item/toy/crossbow														= 2,
-							/obj/item/clothing/suit/syndicatefake										= 2,
-							/obj/item/weapon/storage/fancy/crayons										= 2,
-							/obj/item/toy/spinningtoy													= 2,
-							/obj/item/toy/prize/powerloader													= 1,
-							/obj/item/toy/prize/fireripley												= 1,
-							/obj/item/toy/prize/deathripley												= 1,
-							/obj/item/toy/prize/gygax													= 1,
-							/obj/item/toy/prize/durand													= 1,
-							/obj/item/toy/prize/honk													= 1,
-							/obj/item/toy/prize/marauder												= 1,
-							/obj/item/toy/prize/seraph													= 1,
-							/obj/item/toy/prize/mauler													= 1,
-							/obj/item/toy/prize/odysseus												= 1,
-							/obj/item/toy/prize/phazon													= 1,
-							/obj/item/weapon/reagent_containers/spray/waterflower						= 1,
-							/obj/random/action_figure													= 1,
-							/obj/random/plushie															= 1,
-							/obj/item/toy/cultsword														= 1
+	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops										= 200,
+							/obj/item/toy/blink															= 200,
+							/obj/item/clothing/under/syndicate/tacticool								= 200,
+							/obj/item/toy/sword															= 200,
+							/obj/item/weapon/gun/projectile/revolver/capgun								= 200,
+							/obj/item/toy/crossbow														= 200,
+							/obj/item/weapon/storage/fancy/crayons										= 200,
+							/obj/item/toy/spinningtoy													= 200,
+							/obj/item/toy/prize/powerloader												= 100,
+							/obj/item/toy/prize/fireripley												= 100,
+							/obj/item/toy/prize/deathripley												= 100,
+							/obj/item/toy/prize/gygax													= 100,
+							/obj/item/toy/prize/durand													= 100,
+							/obj/item/toy/prize/honk													= 100,
+							/obj/item/toy/prize/marauder												= 100,
+							/obj/item/toy/prize/seraph													= 100,
+							/obj/item/toy/prize/mauler													= 100,
+							/obj/item/toy/prize/odysseus												= 100,
+							/obj/item/toy/prize/phazon													= 100,
+							/obj/item/weapon/reagent_containers/spray/waterflower						= 100,
+							/obj/random/action_figure													= 100,
+							/obj/random/plushie															= 100,
+							/obj/item/toy/cultsword														= 100,
+							/obj/item/weapon/storage/box/large/foam_gun									= 100,
+							/obj/item/weapon/storage/box/large/foam_gun/burst							= 50,
+							/obj/item/weapon/storage/box/large/foam_gun/revolver						= 25,
+							/obj/item/weapon/storage/box/large/foam_gun/revolver/tampered				= 1
 							)
 
 /obj/machinery/computer/arcade/Initialize()
@@ -46,16 +49,8 @@
 	return TRUE
 
 /obj/machinery/computer/arcade/proc/prizevend()
-	if(!contents.len)
-		var/prizeselect = pickweight(prizes)
-		new prizeselect(src.loc)
-
-		if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
-			new	/obj/item/clothing/head/syndicatefake(src.loc)
-
-	else
-		var/atom/movable/prize = pick(contents)
-		prize.forceMove(src.loc)
+	var/prizeselect = pickweight(prizes)
+	new prizeselect(get_turf(src))
 
 /obj/machinery/computer/arcade/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN))

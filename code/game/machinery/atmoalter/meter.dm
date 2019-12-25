@@ -75,10 +75,10 @@
 		)
 		radio_connection.post_signal(src, signal)
 
-/obj/machinery/meter/examine(mob/user)
+/obj/machinery/meter/examine(mob/user, distance)
 	. = ..()
 
-	if(get_dist(user, src) > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
+	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || isghost(user)))
 		to_chat(user, "<span class='warning'>You are too far away to read it.</span>")
 
 	else if(stat & (NOPOWER|BROKEN))

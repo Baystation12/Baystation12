@@ -149,7 +149,7 @@
 	access = access_medical_equip
 
 /decl/hierarchy/supply_pack/medical/chemistgear
-	name = "Gear - Chemist equipment"
+	name = "Gear - Pharmacist equipment"
 	contains = list(/obj/item/weapon/storage/box/beakers,
 					/obj/item/device/radio/headset/headset_med,
 					/obj/item/weapon/storage/box/autoinjectors,
@@ -165,7 +165,7 @@
 					/obj/item/weapon/reagent_containers/syringe)
 	cost = 15
 	containertype = /obj/structure/closet/crate/secure
-	containername = "chemist equipment crate"
+	containername = "pharmacist equipment crate"
 	access = access_chemistry
 
 /decl/hierarchy/supply_pack/medical/paramedicgear

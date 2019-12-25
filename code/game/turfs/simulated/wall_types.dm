@@ -141,6 +141,9 @@
 /turf/simulated/wall/voxshuttle/attackby()
 	return
 
+/turf/simulated/wall/concrete/New(var/newloc)
+	..(newloc,MATERIAL_CONCRETE)
+
 //Alien metal walls
 /turf/simulated/wall/alium
 	icon_state = "jaggy"

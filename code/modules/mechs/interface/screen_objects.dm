@@ -33,7 +33,7 @@
 
 	maptext_x = 34
 	maptext_y = 3
-	maptext_width = 64
+	maptext_width = 72
 
 /obj/screen/movable/exosuit/hardpoint/MouseDrop()
 	..()
@@ -124,6 +124,10 @@
 /obj/screen/movable/exosuit/hardpoint/Click(var/location, var/control, var/params)
 
 	if(!(..()))
+		return
+
+	if(!owner.hatch_closed)
+		to_chat(usr, SPAN_WARNING("Error: Hardpoint interface disabled while [owner.body.hatch_descriptor] is open."))
 		return
 
 	var/modifiers = params2list(params)

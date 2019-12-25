@@ -8,6 +8,7 @@
 	selection_color = "#5b4d20"
 	economic_power = 6
 	minimal_player_age = 3
+	minimum_character_age = list(SPECIES_HUMAN = 27)
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer
 	allowed_branches = list(
@@ -55,12 +56,11 @@
 	supervisors = "the Chief Engineer"
 	economic_power = 5
 	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 19)
 	ideal_character_age = 30
 	alt_titles = list(
-		"Maintenance Technician",
 		"Engine Technician",
 		"Damage Control Technician",
-		"EVA Technician",
 		"Electrician",
 		"Atmospheric Technician",
 		)
@@ -116,6 +116,7 @@
 	spawn_positions = 2
 	supervisors = "the Chief Engineer and Engineering Personnel"
 	selection_color = "#5b4d20"
+	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 20
 
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
@@ -167,6 +168,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	minimal_player_age = 0
+	minimum_character_age = list(SPECIES_HUMAN = 25)
 	supervisors = "the Chief Engineer and the Corporate Liaison."
 	selection_color = "#5b4d20"
 	economic_power = 6

@@ -283,15 +283,12 @@ proc/get_radio_key_from_channel(var/channel)
 	speech_bubble.layer = layer
 	speech_bubble.plane = plane
 	// VOREStation Port - Attempt Multi-Z Talking
-	var/mob/above = src.shadow
-	while(!QDELETED(above))
-		var/turf/ST = get_turf(above)
-		if(ST)
-
-			get_mobs_and_objs_in_view_fast(ST, world.view, listening, listening_obj, /datum/client_preference/ghost_ears)
-			var/image/z_speech_bubble = image('icons/mob/talk.dmi', above, "h[speech_bubble_test]")
-			spawn(30) qdel(z_speech_bubble)
-		above = above.shadow
+	// for (var/atom/movable/AM in get_above_oo())
+	// 	var/turf/ST = get_turf(AM)
+	// 	if(ST)
+	// 		get_mobs_and_objs_in_view_fast(ST, world.view, listening, listening_obj, /datum/client_preference/ghost_ears)
+	// 		var/image/z_speech_bubble = image('icons/mob/talk.dmi', AM, "h[speech_bubble_test]")
+	// 		QDEL_IN(z_speech_bubble, 30)
 
 	// VOREStation Port End
 

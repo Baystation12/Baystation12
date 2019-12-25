@@ -3,6 +3,7 @@
 	desc = "You feel the urge to poke someone with this."
 	icon_state = "stick"
 	item_state = "stickmat"
+	max_force = 10
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	w_class = ITEM_SIZE_NORMAL

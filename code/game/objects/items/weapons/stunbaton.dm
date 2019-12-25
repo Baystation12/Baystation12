@@ -37,9 +37,15 @@
 /obj/item/weapon/melee/baton/get_cell()
 	return bcell
 
+/obj/item/weapon/melee/baton/proc/update_status()
+	if(bcell.charge < hitcost)
+		status = 0
+		update_icon()
+
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
 		if(bcell.checked_use(chrgdeductamt))
+			update_status()
 			return 1
 		else
 			status = 0
@@ -60,11 +66,10 @@
 	else
 		set_light(0)
 
-/obj/item/weapon/melee/baton/examine(mob/user)
-	if(!..(user, 1))
-		return 0
-	examine_cell(user)
-	return 1
+/obj/item/weapon/melee/baton/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
+		examine_cell(user)
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/weapon/melee/baton/proc/examine_cell(mob/user)
@@ -97,14 +102,14 @@
 	set_status(!status, user)
 	add_fingerprint(user)
 
-/obj/item/weapon/melee/baton/throw_impact(atom/hit_atom, var/speed)
+/obj/item/weapon/melee/baton/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	if(istype(hit_atom,/mob/living))
-		apply_hit_effect(hit_atom, hit_zone = pick(BP_HEAD, BP_CHEST, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
+		apply_hit_effect(hit_atom, hit_zone = ran_zone(TT.target_zone, 30))//more likely to hit the zone you target!
 	else
 		..()
 
 /obj/item/weapon/melee/baton/proc/set_status(var/newstatus, mob/user)
-	if(bcell && bcell.charge > hitcost)
+	if(bcell && bcell.charge >= hitcost)
 		if(status != newstatus)
 			change_status(newstatus)
 			to_chat(user, "<span class='notice'>[src] is now [status ? "on" : "off"].</span>")
@@ -171,7 +176,6 @@
 	if(status)
 		target.stun_effect_act(stun, agony, hit_zone, src)
 		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
-
 		deductcharge(hitcost)
 
 		if(ishuman(target))

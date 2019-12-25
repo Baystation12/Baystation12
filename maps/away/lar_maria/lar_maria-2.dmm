@@ -21,7 +21,7 @@
 /turf/simulated/floor/reinforced,
 /area/space)
 "af" = (
-/obj/effect/overmap/sector/lar_maria,
+/obj/effect/overmap/visitable/sector/lar_maria,
 /turf/simulated/floor/reinforced,
 /area/space)
 "ag" = (
@@ -1092,7 +1092,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cI" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/wood,
@@ -1162,7 +1162,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -1270,7 +1270,7 @@
 /area/lar_maria/dorms)
 "dh" = (
 /obj/structure/window/basic,
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1293,7 +1293,7 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -1435,7 +1435,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1835,7 +1835,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eW" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eX" = (
@@ -3593,7 +3593,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "DG" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,

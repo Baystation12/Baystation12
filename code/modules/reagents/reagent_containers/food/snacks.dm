@@ -107,8 +107,9 @@
 
 	return 0
 
-/obj/item/weapon/reagent_containers/food/snacks/examine(mob/user)
-	if(!..(user, 1))
+/obj/item/weapon/reagent_containers/food/snacks/examine(mob/user, distance)
+	. = ..()
+	if(distance > 1)
 		return
 	if (bitecount==0)
 		return
@@ -469,8 +470,7 @@
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/spider/Initialize()
-	.=..()
-	name = "giant spider leg" //since most mobs use a generic meat type and append the name of the mob onto it ('parrot meat')
+	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 9)
 
 /obj/item/weapon/reagent_containers/food/snacks/spider/cooked
@@ -1349,7 +1349,7 @@
 	icon_state = "coldchili"
 	filling_color = "#2b00ff"
 	center_of_mass = "x=15;y=9"
-	nutriment_desc = list("ice peppers" = 3)
+	nutriment_desc = list("chilly peppers" = 3)
 	nutriment_amt = 3
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 5
@@ -3117,8 +3117,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/examine(mob/user)
 	. = ..()
-	if (.)
-		to_chat(user, "It is [sealed ? "" : "un"]sealed.")
+	to_chat(user, "It is [sealed ? "" : "un"]sealed.")
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/proc/unseal()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER

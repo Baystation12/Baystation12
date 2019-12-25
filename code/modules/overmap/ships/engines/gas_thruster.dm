@@ -64,7 +64,7 @@
 
 	construct_state = /decl/machine_construction/default/panel_closed
 	maximum_component_parts = list(/obj/item/weapon/stock_parts = 6)//don't want too many, let upgraded component shine
-	uncreated_component_parts = null
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/apc/buildable = 1)
 
 	use_power = POWER_USE_OFF
 	power_channel = EQUIP
@@ -87,7 +87,7 @@
 	update_nearby_tiles(need_rebuild=1)
 
 	for(var/ship in SSshuttle.ships)
-		var/obj/effect/overmap/ship/S = ship
+		var/obj/effect/overmap/visitable/ship/S = ship
 		if(S.check_ownership(src))
 			S.engines |= controller
 			if(dir != S.fore_dir)
@@ -211,5 +211,9 @@
 		/obj/item/pipe = 2)
 	additional_spawn_components = list(
 		/obj/item/weapon/stock_parts/matter_bin = 1,
-		/obj/item/weapon/stock_parts/capacitor = 2,
-		/obj/item/weapon/stock_parts/power/apc/buildable = 1)
+		/obj/item/weapon/stock_parts/capacitor = 2)
+
+/obj/machinery/atmospherics/unary/engine/terminal
+	base_type = /obj/machinery/atmospherics/unary/engine
+	stock_part_presets = list(/decl/stock_part_preset/terminal_setup)
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/terminal/buildable = 1)

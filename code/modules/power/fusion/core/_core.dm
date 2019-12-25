@@ -12,6 +12,10 @@
 	idle_power_usage = 50
 	active_power_usage = 500 //multiplied by field strength
 	anchored = 0
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
+	base_type = /obj/machinery/power/fusion_core
 
 	var/obj/effect/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
@@ -23,9 +27,9 @@
 /obj/machinery/power/fusion_core/Initialize()
 	. = ..()
 	connect_to_network()
-	set_extension(src, /datum/extension/fusion_plant_member, /datum/extension/fusion_plant_member)
+	set_extension(src, /datum/extension/local_network_member)
 	if(initial_id_tag)
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.set_tag(null, initial_id_tag)
 
 /obj/machinery/power/fusion_core/Process()
@@ -91,7 +95,7 @@
 		return
 
 	if(isMultitool(W))
-		var/datum/extension/fusion_plant_member/fusion = get_extension(src, /datum/extension/fusion_plant_member)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
 		fusion.get_new_tag(user)
 		return
 	

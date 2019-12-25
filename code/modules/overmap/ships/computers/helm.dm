@@ -10,22 +10,16 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
-	var/speedlimit = 1/(45 SECONDS) //top speed for autopilot
+	var/speedlimit = 1/(20 SECONDS) //top speed for autopilot, 5
 	var/accellimit = 0.001 //manual limiter for acceleration
 
 /obj/machinery/computer/ship/helm/Initialize()
 	. = ..()
 	get_known_sectors()
-	speedlimit = round(speedlimit)
-
-/obj/machinery/computer/ship/helm/attempt_hook_up(obj/effect/overmap/ship/sector)
-	if(!(. = ..()))
-		return
-	sector.nav_control = src
 
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
-	for(var/obj/effect/overmap/sector/S in map)
+	for(var/obj/effect/overmap/visitable/sector/S in map)
 		if (S.known)
 			var/datum/computer_file/data/waypoint/R = new()
 			R.fields["name"] = S.name
@@ -51,7 +45,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			var/heading = linked.get_heading()
 
 			// Destination is current grid or speedlimit is exceeded
-			if ((get_dist(linked.loc, T) <= brake_path) || ((speedlimit) && (speed > speedlimit)))
+			if ((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
 				linked.decelerate()
 			// Heading does not match direction
 			else if (heading & ~direction)
@@ -59,6 +53,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			// All other cases, move toward direction
 			else if (speed + acceleration <= speedlimit)
 				linked.accelerate(direction, accellimit)
+		linked.operator_skill = null//if this is on you can't dodge meteors
 		return
 
 /obj/machinery/computer/ship/helm/relaymove(var/mob/user, direction)
@@ -75,7 +70,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		display_reconnect_dialog(user, "helm")
 	else
 		var/turf/T = get_turf(linked)
-		var/obj/effect/overmap/sector/current_sector = locate() in T
+		var/obj/effect/overmap/visitable/sector/current_sector = locate() in T
 
 		data["sector"] = current_sector ? current_sector.name : "Deep Space"
 		data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
@@ -85,7 +80,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		data["dest"] = dy && dx
 		data["d_x"] = dx
 		data["d_y"] = dy
-		data["speedlimit"] = speedlimit ? speedlimit*1000 : "None"
+		data["speedlimit"] = speedlimit ? speedlimit*1000 : "Halted"
 		data["accel"] = min(round(linked.get_acceleration()*1000, 0.01),accellimit*1000)
 		data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
 		data["autopilot"] = autopilot
@@ -186,7 +181,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		dy = 0
 
 	if (href_list["speedlimit"])
-		var/newlimit = input("Input new speed limit for autopilot (0 to disable)", "Autopilot speed limit", speedlimit*1000) as num|null
+		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit*1000) as num|null
 		if(newlimit)
 			speedlimit = Clamp(newlimit/1000, 0, 100)
 	if (href_list["accellimit"])
@@ -227,7 +222,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 
 	var/turf/T = get_turf(linked)
-	var/obj/effect/overmap/sector/current_sector = locate() in T
+	var/obj/effect/overmap/visitable/sector/current_sector = locate() in T
 
 	data["sector"] = current_sector ? current_sector.name : "Deep Space"
 	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
@@ -260,3 +255,15 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	if (href_list["viewing"])
 		viewing_overmap(user) ? unlook(user) : look(user)
 		return TOPIC_REFRESH
+
+/obj/machinery/computer/ship/navigation/telescreen	//little hacky but it's only used on one ship so it should be okay
+	icon_state = "tele_nav"
+	density = 0
+
+/obj/machinery/computer/ship/navigation/telescreen/on_update_icon()
+	if(reason_broken & MACHINE_BROKEN_NO_PARTS || stat & NOPOWER || stat & BROKEN)
+		icon_state = "tele_off"
+		set_light(0)
+	else
+		icon_state = "tele_nav"
+		set_light(light_max_bright_on, light_inner_range_on, light_outer_range_on, 2, light_color)

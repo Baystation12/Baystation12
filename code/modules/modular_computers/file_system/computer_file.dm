@@ -24,10 +24,6 @@ var/global/file_uid = 0
 		return
 
 	holder.remove_file(src)
-	// holder.holder is the computer that has drive installed. If we are Destroy()ing program that's currently running kill it.
-	if(holder.holder2 && holder.holder2.active_program == src)
-		holder.holder2.kill_program(1)
-	holder = null
 
 // Returns independent copy of this file.
 /datum/computer_file/proc/clone(var/rename = 0)

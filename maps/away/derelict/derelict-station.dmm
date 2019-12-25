@@ -94,7 +94,7 @@
 /turf/space,
 /area/derelict/ship)
 "am" = (
-/obj/item/modular_computer/console/preset/medical,
+/obj/machinery/computer/modular/preset/medical,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "an" = (
@@ -775,7 +775,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cs" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "ct" = (
@@ -1921,7 +1921,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "fT" = (
-/obj/effect/overmap/sector/derelict,
+/obj/effect/overmap/visitable/sector/derelict,
 /turf/simulated/floor/airless,
 /area/constructionsite/solar)
 "fU" = (
@@ -2620,8 +2620,7 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/air_sensor{
-	frequency = 1443;
+/obj/machinery/air_sensor/dist{
 	id_tag = "d_air_sensor"
 	},
 /turf/simulated/floor/reinforced/airmix,
@@ -2733,7 +2732,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_o2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -2835,7 +2833,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_n2_sensor"
 	},
 /turf/simulated/floor/reinforced/nitrogen,

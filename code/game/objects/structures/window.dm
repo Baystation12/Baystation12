@@ -52,10 +52,9 @@
 
 	maxHealth = material.integrity
 	if(reinf_material)
-		maxHealth += 0.25 * reinf_material.integrity
+		maxhealth += 0.5 * reinf_material.integrity
 
 	if(is_fulltile())
-		maxHealth *= 4
 		layer = FULL_WINDOW_LAYER
 
 	health = maxHealth
@@ -104,17 +103,20 @@
 		if(sound_effect)
 			playsound(loc, 'sound/effects/Glasshit.ogg', 100, 1)
 		if(health < maxHealth / 4 && initialhealth >= maxHealth / 4)
-			visible_message("<span class='notice'>\The [src] looks like it's about to shatter!</span>")
+			visible_message(SPAN_DANGER("\The [src] looks like it's about to shatter!"))
+			playsound(loc, "glasscrack", 100, 1)
 		else if(health < maxHealth / 2 && initialhealth >= maxHealth / 2)
-			visible_message("\The [src] looks seriously damaged!" )
+			visible_message(SPAN_WARNING("\The [src] looks seriously damaged!"))
+			playsound(loc, "glasscrack", 100, 1)
 		else if(health < maxHealth * 3/4 && initialhealth >= maxHealth * 3/4)
-			visible_message("Cracks begin to appear in \the [src]!" )
+			visible_message(SPAN_WARNING("Cracks begin to appear in \the [src]!"))
+			playsound(loc, "glasscrack", 100, 1)
 	return
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
-		visible_message("<span class='notice'>\The [src] shatters!</span>")
+		visible_message("<span class='warning'>\The [src] shatters!</span>")
 
 	var/debris_count = is_fulltile() ? 4 : 1
 	for(var/i = 0 to debris_count)
@@ -156,16 +158,16 @@
 		return 0
 	return 1
 
-/obj/structure/window/hitby(atom/movable/AM)
+/obj/structure/window/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	..()
 	visible_message("<span class='danger'>[src] was hit by [AM].</span>")
 	var/tforce = 0
 	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
 		var/mob/I = AM
-		tforce = I.mob_size * 2 * I.throw_multiplier
+		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	else if(isobj(AM))
 		var/obj/item/I = AM
-		tforce = I.throwforce
+		tforce = I.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	if(reinf_material) tforce *= 0.25
 	if(health - tforce <= 7 && !reinf_material)
 		set_anchored(FALSE)
@@ -256,7 +258,7 @@
 				S.update_strings()
 				S.update_icon()
 			qdel(src)
-	else if(isCoil(W) && reinf_material && !polarized)
+	else if(isCoil(W) && !polarized && is_fulltile())
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
 			playsound(src.loc, 'sound/effects/sparks1.ogg', 75, 1)
@@ -412,6 +414,9 @@
 /obj/structure/window/basic/full
 	dir = 5
 	icon_state = "window_full"
+
+/obj/structure/window/basic/full/polarized
+	polarized = 1
 
 /obj/structure/window/phoronbasic
 	name = "phoron window"

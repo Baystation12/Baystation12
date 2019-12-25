@@ -68,6 +68,8 @@ PACK(sugar,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/sugar, 
 PACK(ice,        /obj/item/weapon/reagent_containers/chem_disp_cartridge/ice,        "Reagent refill - Ice",                 "ice reagent cartridge crate",                           15)
 PACK(tea,        /obj/item/weapon/reagent_containers/chem_disp_cartridge/tea,        "Reagent refill - Tea",                 "tea reagent cartridge crate",                           15)
 PACK(green_tea,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/green_tea,  "Reagent refill - Green Tea",           "green tea reagent cartridge crate",                     15)
+PACK(chai_tea,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/chai_tea,   "Reagent refill - Chai Tea",            "chai tea reagent cartridge crate",                      15)
+PACK(red_tea,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/red_tea,    "Reagent refill - Rooibos Tea",         "rooibos tea reagent cartridge crate",                   15)
 PACK(cola,       /obj/item/weapon/reagent_containers/chem_disp_cartridge/cola,       "Reagent refill - Space Cola",          "\improper Space Cola reagent cartridge crate",          15)
 PACK(smw,        /obj/item/weapon/reagent_containers/chem_disp_cartridge/smw,        "Reagent refill - Space Mountain Wind", "\improper Space Mountain Wind reagent cartridge crate", 15)
 PACK(dr_gibb,    /obj/item/weapon/reagent_containers/chem_disp_cartridge/dr_gibb,    "Reagent refill - Dr. Gibb",            "\improper Dr. Gibb reagent cartridge crate",            15)
@@ -84,6 +86,11 @@ PACK(soy_latte,  /obj/item/weapon/reagent_containers/chem_disp_cartridge/soy_lat
 PACK(hot_coco,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/hot_coco,   "Reagent refill - Hot Coco",            "hot coco reagent cartridge crate",                      15)
 PACK(milk,       /obj/item/weapon/reagent_containers/chem_disp_cartridge/milk,       "Reagent refill - Milk",                "milk reagent cartridge crate",                          15)
 PACK(cream,      /obj/item/weapon/reagent_containers/chem_disp_cartridge/cream,      "Reagent refill - Cream",               "cream reagent cartridge crate",                         15)
+
+PACK(syrup_chocolate, /obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_chocolate, "Reagent refill - Chocolate Syrup",     "chocolate syrup reagent cartridge crate", 15)
+PACK(syrup_caramel,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_caramel,   "Reagent refill - Caramel Syrup",       "caramel syrup reagent cartridge crate",   15)
+PACK(syrup_vanilla,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_vanilla,   "Reagent refill - Vanilla Syrup",       "vanilla syrup reagent cartridge crate",   15)
+PACK(syrup_pumpkin,   /obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_pumpkin,   "Reagent refill - Pumpkin Spice Syrup", "pumpkin spice syrup reagent cartridge crate",   15)
 
 #undef SEC_PACK
 #undef PACK

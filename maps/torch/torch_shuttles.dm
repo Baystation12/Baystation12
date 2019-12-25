@@ -77,8 +77,6 @@ TORCH_ESCAPE_POD(17)
 
 //Ninja Shuttle.
 /datum/shuttle/autodock/multi/antag/ninja
-	name = "Ninja"
-	warmup_time = 0
 	destination_tags = list(
 		"nav_ninja_deck1",
 		"nav_ninja_deck2",
@@ -96,23 +94,8 @@ TORCH_ESCAPE_POD(17)
 		"nav_magshield_antag",
 		"nav_casino_antag",
 		"nav_yacht_antag",
-		"nav_slavers_base_antag",
+		"nav_slavers_base_antag"
 		)
-	shuttle_area = /area/ninja_dojo/start
-	current_location = "nav_ninja_start"
-	landmark_transition = "nav_ninja_transition"
-	announcer = "SEV Torch Sensor Array"
-	arrival_message = "Attention, anomalous sensor reading detected entering vessel proximity."
-	departure_message = "Attention, anomalous sensor reading detected leaving vessel proximity."
-
-
-/obj/effect/shuttle_landmark/ninja/start
-	name = "Clan Dojo"
-	landmark_tag = "nav_ninja_start"
-
-/obj/effect/shuttle_landmark/ninja/internim
-	name = "In transit"
-	landmark_tag = "nav_ninja_transition"
 
 /obj/effect/shuttle_landmark/ninja/hanger
 	name = "West of Hanger Deck"
@@ -201,54 +184,6 @@ TORCH_ESCAPE_POD(17)
 	landmark_tag = "nav_ferry_out"
 	docking_controller = "centcom_shuttle_dock_airlock"
 
-//Merc
-
-/datum/shuttle/autodock/multi/antag/mercenary
-	name = "Mercenary"
-	warmup_time = 0
-	destination_tags = list(
-		"nav_merc_deck1",
-		"nav_merc_deck2",
-		"nav_merc_deck3",
-		"nav_merc_deck4",
-		"nav_merc_deck5",
-		"nav_merc_hanger",
-		"nav_away_5",
-		"nav_derelict_6",
-		"nav_cluster_5",
-		"nav_merc_dock",
-		"nav_merc_start",
-		"nav_lost_supply_base_antag",
-		"nav_marooned_antag",
-		"nav_smugglers_antag",
-		"nav_magshield_antag",
-		"nav_casino_antag",
-		"nav_yacht_antag",
-		"nav_slavers_base_antag",
-		)
-	shuttle_area = /area/syndicate_station/start
-	dock_target = "merc_shuttle"
-	current_location = "nav_merc_start"
-	landmark_transition = "nav_merc_transition"
-	announcer = "SEV Torch Sensor Array"
-	home_waypoint = "nav_merc_start"
-	arrival_message = "Attention, vessel detected entering vessel proximity."
-	departure_message = "Attention, vessel detected leaving vessel proximity."
-
-/obj/effect/shuttle_landmark/merc/start
-	name = "Mercenary Base"
-	landmark_tag = "nav_merc_start"
-	docking_controller = "merc_base"
-
-/obj/effect/shuttle_landmark/merc/internim
-	name = "In transit"
-	landmark_tag = "nav_merc_transition"
-
-/obj/effect/shuttle_landmark/merc/dock
-	name = "Docking Port"
-	landmark_tag = "nav_merc_dock"
-	docking_controller = "nuke_shuttle_dock_airlock"
-
 /obj/effect/shuttle_landmark/merc/hanger
 	name = "Northeast of Hanger Deck"
 	landmark_tag = "nav_merc_hanger"
@@ -274,10 +209,7 @@ TORCH_ESCAPE_POD(17)
 	landmark_tag = "nav_merc_deck5"
 
 //Skipjack
-
 /datum/shuttle/autodock/multi/antag/skipjack
-	name = "Skipjack"
-	warmup_time = 0
 	destination_tags = list(
 		"nav_skipjack_deck1",
 		"nav_skipjack_deck2",
@@ -298,28 +230,6 @@ TORCH_ESCAPE_POD(17)
 		"nav_yacht_antag",
 		"nav_slavers_base_antag",
 		)
-	shuttle_area =  /area/skipjack_station/start
-	dock_target = "skipjack_shuttle"
-	current_location = "nav_skipjack_start"
-	landmark_transition = "nav_skipjack_transition"
-	announcer = "SEV Torch Sensor Array"
-	home_waypoint = "nav_skipjack_start"
-	arrival_message = "Attention, vessel detected entering vessel proximity."
-	departure_message = "Attention, vessel detected leaving vessel proximity."
-
-/obj/effect/shuttle_landmark/skipjack/start
-	name = "Raider Outpost"
-	landmark_tag = "nav_skipjack_start"
-	docking_controller = "skipjack_base"
-
-/obj/effect/shuttle_landmark/skipjack/internim
-	name = "In transit"
-	landmark_tag = "nav_skipjack_transition"
-
-/obj/effect/shuttle_landmark/skipjack/dock
-	name = "Docking Port"
-	landmark_tag = "nav_skipjack_dock"
-	docking_controller = "skipjack_shuttle_dock_airlock"
 
 /obj/effect/shuttle_landmark/skipjack/hanger
 	name = "North of Hanger Deck"
@@ -348,8 +258,6 @@ TORCH_ESCAPE_POD(17)
 //NT Rescue Shuttle
 
 /datum/shuttle/autodock/multi/antag/rescue
-	name = "Rescue"
-	warmup_time = 0
 	destination_tags = list(
 		"nav_ert_deck1",
 		"nav_ert_deck2",
@@ -370,28 +278,6 @@ TORCH_ESCAPE_POD(17)
 		"nav_yacht_antag",
 		"nav_slavers_base_antag",
 		)
-	shuttle_area = /area/rescue_base/start
-	dock_target = "rescue_shuttle"
-	current_location = "nav_ert_start"
-	landmark_transition = "nav_ert_transition"
-	home_waypoint = "nav_ert_start"
-	announcer = "SEV Torch Sensor Array"
-	arrival_message = "Attention, vessel detected entering vessel proximity."
-	departure_message = "Attention, vessel detected leaving vessel proximity."
-
-/obj/effect/shuttle_landmark/ert/start
-	name = "Response Team Base"
-	landmark_tag = "nav_ert_start"
-	docking_controller = "rescue_base"
-
-/obj/effect/shuttle_landmark/ert/internim
-	name = "In transit"
-	landmark_tag = "nav_ert_transition"
-
-/obj/effect/shuttle_landmark/ert/dock
-	name = "Docking Port"
-	landmark_tag = "nav_ert_dock"
-	docking_controller = "rescue_shuttle_dock_airlock"
 
 /obj/effect/shuttle_landmark/ert/hanger
 	name =  "Southeast of Hanger deck"

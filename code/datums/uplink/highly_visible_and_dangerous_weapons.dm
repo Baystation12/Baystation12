@@ -4,6 +4,24 @@
 /datum/uplink_item/item/visible_weapons
 	category = /datum/uplink_category/visible_weapons
 
+/datum/uplink_item/item/visible_weapons/zipgun
+	name = "Zip Gun"
+	desc = "A pipe attached to crude wooden stock with firing mechanism, holds one round."
+	item_cost = 8
+	path = /obj/item/weapon/gun/projectile/pirate
+
+/datum/uplink_item/item/visible_weapons/smallenergy_gun
+	name = "Small Energy Gun"
+	desc = "A pocket-sized energy based sidearm with three different lethality settings."
+	item_cost = 16
+	path = /obj/item/weapon/gun/energy/gun/small
+
+/datum/uplink_item/item/visible_weapons/ancient
+	name = "Replica Pistol"
+	desc = "A cheap replica of an earth handgun. To reload, buy another."
+	item_cost = 16
+	path = /obj/item/weapon/gun/projectile/pistol/throwback
+	
 /datum/uplink_item/item/visible_weapons/dartgun
 	name = "Dart Gun"
 	desc = "A gas-powered dart gun capable of delivering chemical payloads across short distances. \
@@ -42,6 +60,12 @@
 	desc = "A energy based sidearm with three different lethality settings."
 	item_cost = 32
 	path = /obj/item/weapon/gun/energy/gun
+
+/datum/uplink_item/item/visible_weapons/ionpistol
+	name = "Ion Pistol"
+	desc = "Ion rifle in compact form."
+	item_cost = 40
+	path = /obj/item/weapon/gun/energy/ionrifle/small
 
 /datum/uplink_item/item/visible_weapons/revolver
 	name = "Magnum Revolver"
@@ -163,3 +187,10 @@
 	name = "Explosive Harpoon"
 	item_cost = 12
 	path = /obj/item/weapon/material/harpoon/bomb
+
+/datum/uplink_item/item/visible_weapons/incendiary_laser
+	name = "Incendiary Laser Blaster"
+	desc = "A laser weapon developed and subsequently banned in Sol space, it sets its targets on fire with dispersed laser technology. \
+			Most of these blasters were swiftly bought back and destroyed - but not this one."
+	item_cost = 40
+	path = /obj/item/weapon/gun/energy/incendiary_laser

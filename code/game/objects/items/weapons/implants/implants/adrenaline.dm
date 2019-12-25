@@ -18,13 +18,16 @@
 	<b>Integrity:</b> Implant can only be used three times before the nanobots are depleted."}
 
 /obj/item/weapon/implant/adrenalin/trigger(emote, mob/source)
-	if (src.uses < 1)	return 0
 	if (emote == "pale")
-		src.uses--
-		to_chat(source, "<span class='notice'>You feel a sudden surge of energy!</span>")
-		source.SetStunned(0)
-		source.SetWeakened(0)
-		source.SetParalysis(0)
+		activate()
+		
+/obj/item/weapon/implant/adrenalin/activate()//this implant is unused but I'm changing it for the sake of consistency
+	if (uses < 1 || malfunction || !imp_in)	return 0
+	uses--
+	to_chat(imp_in, "<span class='notice'>You feel a sudden surge of energy!</span>")
+	imp_in.SetStunned(0)
+	imp_in.SetWeakened(0)
+	imp_in.SetParalysis(0)
 
 /obj/item/weapon/implant/adrenalin/implanted(mob/source)
 	source.StoreMemory("A implant can be activated by using the pale emote, <B>say *pale</B> to attempt to activate.", /decl/memory_options/system)

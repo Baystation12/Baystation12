@@ -101,13 +101,13 @@
 			I.pixel_y = -3
 		overlays += I
 
-/obj/structure/bigDelivery/examine(mob/user)
-	if(..(user, 4))
+/obj/structure/bigDelivery/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 4)
 		if(sortTag)
 			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
-	return
 
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
@@ -223,13 +223,13 @@
 				I.pixel_y = -3
 		overlays += I
 
-/obj/item/smallDelivery/examine(mob/user)
-	if(..(user, 4))
+/obj/item/smallDelivery/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 4)
 		if(sortTag)
 			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
-	return
 
 /obj/item/stack/package_wrap
 	name = "package wrapper"

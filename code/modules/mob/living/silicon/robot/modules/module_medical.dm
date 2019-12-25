@@ -42,7 +42,8 @@
 		/obj/item/weapon/shockpaddles/robot,
 		/obj/item/weapon/crowbar,
 		/obj/item/stack/nanopaste,
-		/obj/item/stack/medical/advanced/bruise_pack
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/weapon/reagent_containers/dropper/
 	)
 	synths = list(
 		/datum/matter_synth/medicine = 10000,
@@ -51,7 +52,6 @@
 	skills = list(
 		SKILL_ANATOMY     = SKILL_PROF,
 		SKILL_MEDICAL     = SKILL_ADEPT,
-		SKILL_VIROLOGY    = SKILL_ADEPT,
 		SKILL_CHEMISTRY   = SKILL_ADEPT,
 		SKILL_BUREAUCRACY = SKILL_ADEPT,
 		SKILL_DEVICES     = SKILL_EXPERT
@@ -123,7 +123,6 @@
 	skills = list(
 		SKILL_ANATOMY     = SKILL_BASIC,
 		SKILL_MEDICAL     = SKILL_PROF,
-		SKILL_VIROLOGY    = SKILL_ADEPT,
 		SKILL_CHEMISTRY   = SKILL_ADEPT,
 		SKILL_BUREAUCRACY = SKILL_ADEPT,
 		SKILL_EVA         = SKILL_EXPERT,

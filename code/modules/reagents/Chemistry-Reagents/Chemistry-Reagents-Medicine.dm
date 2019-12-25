@@ -470,7 +470,7 @@
 	scannable = 1
 	overdose = REAGENTS_OVERDOSE
 	value = 3.6
-	
+
 /datum/reagent/ryetalyn/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/needs_update = M.mutations.len > 0
 
@@ -770,8 +770,12 @@
 	reagent_state = SOLID
 	color = "#684b3c"
 	scannable = 1
-	var/nicotine = REM * 0.2
 	value = 3
+	scent = "cigarette smoke"
+	scent_descriptor = SCENT_DESC_ODOR
+	scent_range = 4
+
+	var/nicotine = REM * 0.2
 
 /datum/reagent/tobacco/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -781,11 +785,16 @@
 	name = "Fine Tobacco"
 	taste_description = "fine tobacco"
 	value = 5
+	scent = "fine tobacco smoke"
+	scent_descriptor = SCENT_DESC_FRAGRANCE
 
 /datum/reagent/tobacco/bad
 	name = "Terrible Tobacco"
 	taste_description = "acrid smoke"
 	value = 0
+	scent = "acrid tobacco smoke"
+	scent_intensity = /decl/scent_intensity/strong
+	scent_descriptor = SCENT_DESC_ODOR
 
 /datum/reagent/tobacco/liquid
 	name = "Nicotine Solution"
@@ -794,6 +803,10 @@
 	taste_mult = 0
 	color = "#fcfcfc"
 	nicotine = REM * 0.1
+	scent = null
+	scent_intensity = null
+	scent_descriptor = null
+	scent_range = null
 
 /datum/reagent/menthol
 	name = "Menthol"
@@ -976,3 +989,30 @@
 	if(do_giggle && prob(20))
 		M.emote(pick("giggle", "laugh"))
 	M.add_chemical_effect(CE_PULSE, -1)
+
+
+	// Immunity-restoring reagent
+/datum/reagent/immunobooster
+	name = "Immunobooster"
+	description = "A drug that helps restore the immune system. Will not replace a normal immunity."
+	taste_description = "chalky"
+	reagent_state = LIQUID
+	color = "#ffc0cb"
+	metabolism = REM
+	overdose = REAGENTS_OVERDOSE
+	value = 1.5
+	scannable = 1
+
+/datum/reagent/immunobooster/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	if(volume < REAGENTS_OVERDOSE && !M.chem_effects[CE_ANTIVIRAL])
+		M.immunity = min(M.immunity_norm * 0.5, removed + M.immunity) // Rapidly brings someone up to half immunity.
+	if(M.chem_effects[CE_ANTIVIRAL]) //don't take with 'cillin
+		M.add_chemical_effect(CE_TOXIN, 4) // as strong as taking vanilla 'toxin'
+
+
+/datum/reagent/immunobooster/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	M.add_chemical_effect(CE_TOXIN, 1)
+	M.immunity -= 0.5 //inverse effects when abused

@@ -73,9 +73,9 @@
 	var/collect = mode["collect"]
 	var/message = "<span class='notice'>\The [src] [!T?"don't ":""]has [!T?"":"[T.get_amount()] [T] "]tile\s, dismantle is [dismantle?"on":"off"], laying is [laying?"on":"off"], collect is [collect?"on":"off"].</span>"
 	to_chat(user, message)
+
 /obj/machinery/floorlayer/proc/reset()
-	on=0
-	return
+	on = 0
 
 /obj/machinery/floorlayer/proc/dismantleFloor(var/turf/new_turf)
 	if(istype(new_turf, /turf/simulated/floor))

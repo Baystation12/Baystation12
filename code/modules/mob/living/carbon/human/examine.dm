@@ -1,4 +1,5 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/carbon/human/examine(mob/user, distance)
+	. = TRUE
 	var/skipgloves = 0
 	var/skipsuitstorage = 0
 	var/skipjumpsuit = 0
@@ -27,7 +28,7 @@
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
 	//no accuately spotting headsets from across the room.
-	if(get_dist(user, src) > 3)
+	if(distance > 3)
 		skipears = 1
 
 	var/list/msg = list("<span class='info'>*---------*\nThis is ")
@@ -49,8 +50,9 @@
 	if(!(skipjumpsuit && skipface))
 		var/species_name = "\improper "
 		if(is_synth && species.cyborg_noun)
-			species_name += "[species.cyborg_noun] "
-		species_name += "[species.name]"
+			species_name += "[species.cyborg_noun] [species.get_bodytype(src)]"
+		else
+			species_name += "[species.name]"
 		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value())) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
 
 	var/extra_species_text = species.get_additional_examine_text(src)
@@ -160,11 +162,6 @@
 	if(mSmallsize in mutations)
 		msg += "[T.He] [T.is] small halfling!\n"
 
-	var/distance = 0
-	if(isghost(user) || user.stat == DEAD) // ghosts can see anything
-		distance = 1
-	else
-		distance = get_dist(user,src)
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be unconscious.</span>\n"
 		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)

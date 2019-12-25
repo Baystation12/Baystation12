@@ -150,6 +150,7 @@ var/list/debug_verbs = list (
 		,/client/proc/atmos_toggle_debug
 		,/client/proc/spawn_tanktransferbomb
 		,/client/proc/find_leaky_pipes
+		,/client/proc/analyze_openturf
 	)
 
 

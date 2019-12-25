@@ -1,6 +1,7 @@
 /obj/item/projectile/energy
 	name = "energy"
 	icon_state = "spark"
+	temperature = T0C + 300
 	force = 0
 	damage_type = BURN
 	damage_flags = 0
@@ -57,24 +58,22 @@
 	//residual illumination
 	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240), range=8, power=1, color=light_colour) //same lighting power as flare
 
-/obj/item/projectile/energy/electrode
+/obj/item/projectile/energy/electrode	//has more pain than a beam because it's harder to hit
 	name = "electrode"
 	icon_state = "spark"
 	fire_sound = 'sound/weapons/Taser.ogg'
-	nodamage = 1
 	agony = 50
-	damage_type = PAIN //Damage will be handled on the MOB side, to prevent window shattering.
+	damage = 2
+	damage_type = BURN
+	eyeblur = 1//Some feedback that you've been hit
 	step_delay = 0.7
 
 /obj/item/projectile/energy/electrode/green
 	icon_state = "spark_green"
 
 /obj/item/projectile/energy/electrode/stunshot
-	nodamage = 0
-	force = 15
-	agony = 70
-	damage_type = BURN
-	armor_penetration = 10
+	agony = 80
+	force = 3
 
 /obj/item/projectile/energy/declone
 	name = "decloner beam"

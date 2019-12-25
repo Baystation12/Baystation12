@@ -1,11 +1,12 @@
 #include "errant_pisces_areas.dm"
 
-/obj/effect/overmap/ship/errant_pisces
+/obj/effect/overmap/visitable/ship/errant_pisces
 	name = "XCV Ahab's Harpoon"
 	desc = "Sensors detect civilian vessel with unusual signs of life aboard."
 	color = "#bd6100"
 	max_speed = 1/(3 SECONDS)
 	burn_delay = 15 SECONDS
+	fore_dir = SOUTH
 
 /datum/map_template/ruin/away_site/errant_pisces
 	name = "Errant Pisces"
@@ -100,14 +101,14 @@ obj/structure/net/Initialize(var/mapload)
 					continue
 				N.update_connections()
 
-/obj/structure/net/examine()
-	..()
+/obj/structure/net/examine(mob/user)
+	. = ..()
 	if (health < 20)
-		to_chat(usr, "\The [src] is barely hanging on a few last threads.")
+		to_chat(user, "\The [src] is barely hanging on a few last threads.")
 	else if (health < 50)
-		to_chat(usr, "Many ribbons of \the [src] are cut away.")
+		to_chat(user, "Many ribbons of \the [src] are cut away.")
 	else if (health < 90)
-		to_chat(usr, "Few ribbons of \the [src] are cut away.")
+		to_chat(user, "Few ribbons of \the [src] are cut away.")
 
 /obj/structure/net/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/material)) //sharp objects can cut thorugh

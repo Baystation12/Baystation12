@@ -61,7 +61,7 @@
 			return 1
 		var/type = form["armor"]
 		var/obj/item/I = new type(T)
-		var/datum/extension/deity_be_near/extension = set_extension(I, /datum/extension/deity_be_near, form["extension"], linked)
+		var/datum/extension/deity_be_near/extension = set_extension(I, form["extension"], linked)
 		L.equip_to_slot_or_store_or_drop(I, slot_wear_suit)
 		if(form["helm"])
 			var/h_type = form["helm"]

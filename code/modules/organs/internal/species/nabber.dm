@@ -141,7 +141,6 @@
 	organ_tag = BP_TRACH
 	parent_organ = BP_GROIN
 	active_breathing = 0
-	min_breath_pressure = 30
 	safe_toxins_max = 10
 
 /obj/item/organ/internal/lungs/insectoid/nabber/rupture()

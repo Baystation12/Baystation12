@@ -43,7 +43,7 @@
 	user.visible_message("<span class='notice'>[user] has made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have made a bloodless incision on [target]'s [affected.name] with \the [tool].</span>",)
 	affected.createwound(CUT, affected.min_broken_damage/2, 1)
-	affected.clamp()
+	affected.clamp_organ()
 	spread_germs_to_organ(affected, user)
 
 /decl/surgery_step/generic/cut_with_laser/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -76,7 +76,7 @@
 	user.visible_message("<span class='notice'>[user] has constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>", \
 	"<span class='notice'>You have constructed a prepared incision on and within [target]'s [affected.name] with \the [tool].</span>",)
 	affected.createwound(CUT, affected.min_broken_damage/2, 1) // incision
-	affected.clamp() // clamp
+	affected.clamp_organ() // clamp
 	affected.open_incision() // retract
 
 /decl/surgery_step/generic/managed/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -133,7 +133,9 @@
 /decl/surgery_step/generic/cut_open/success_chance(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	. = ..()
 	if(user.skill_check(SKILL_FORENSICS, SKILL_ADEPT))
-		. += 10
+		. += 40
+		if(target.stat == DEAD)
+			. += 40
 
 //////////////////////////////////////////////////////////////////
 //	 bleeder clamping surgery step
@@ -166,7 +168,7 @@
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	user.visible_message("<span class='notice'>[user] clamps bleeders in [target]'s [affected.name] with \the [tool].</span>",	\
 	"<span class='notice'>You clamp bleeders in [target]'s [affected.name] with \the [tool].</span>")
-	affected.clamp()
+	affected.clamp_organ()
 	spread_germs_to_organ(affected, user)
 	playsound(target.loc, 'sound/items/Welder.ogg', 15, 1)
 

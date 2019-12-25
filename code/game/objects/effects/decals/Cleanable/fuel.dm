@@ -4,6 +4,7 @@
 	icon_state = "fuel"
 	layer = BLOOD_LAYER
 	var/amount = 1
+	cleanable_scent = "fuel"
 
 /obj/effect/decal/cleanable/liquid_fuel/proc/Spread(exclude=list())
 	//Allows liquid fuels to sometimes flow into other tiles.

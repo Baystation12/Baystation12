@@ -409,27 +409,31 @@
 
 	return
 
-/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O, var/mob/user)
 
 	if (O.is_open_container())
 		return 0
 
-	if(isWirecutter(O) || istype(O, /obj/item/weapon/scalpel))
+	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
 
 		if(!seed)
-			to_chat(user, "There is nothing to take a sample from in \the [src].")
+			to_chat(user, SPAN_WARNING("There is nothing to take a sample from in \the [src]."))
 			return
 
 		if(sampled)
-			to_chat(user, "You have already sampled from this plant.")
+			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
 			return
 
 		if(dead)
-			to_chat(user, "The plant is dead.")
+			to_chat(user, SPAN_WARNING("The plant is dead."))
 			return
 
-		// Create a sample.
-		seed.harvest(user,yield_mod,1)
+		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
+			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
+		else
+			// Create a sample.
+			seed.harvest(user,yield_mod,1)
 		plant_health -= (rand(3,5)*10)
 
 		if(prob(30))
@@ -636,4 +640,3 @@
 	else if(harvest)
 		harvest()
 	return TRUE
-

@@ -423,3 +423,10 @@ RADIATION_LOWER_LIMIT 0.15
 
 ## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
 #MINIMUM_BYOND_BUILD
+
+## Direct clients to preload the server resource file from a URL pointing to a .rsc file. NOTE: At this time (byond 512),
+## the client/resource_rsc var does not function as one would expect. See client_defines.dm, the "preload_rsc" var's
+## comments on how to use it properly. If you use a resource URL, you must set preload_rsc to 0 at compile time or
+## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
+## Spaces are prohibited in each URL by spec, you must use encoded spaces.
+#RESOURCE_URLS URL URL2 URL3

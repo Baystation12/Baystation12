@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(persistence)
 	name = "Persistence"
 	init_order = SS_INIT_MISC_LATE
-	flags = SS_NO_FIRE
+	flags = SS_NO_FIRE | SS_NEEDS_SHUTDOWN
 	var/list/tracking_values = list()
 	var/list/persistence_datums = list()
 

@@ -31,11 +31,6 @@
 	stored_files = list()
 	recalculate_size()
 
-/obj/item/weapon/stock_parts/computer/hard_drive/portable/Destroy()
-	if(holder2 && (holder2.portable_drive == src))
-		holder2.portable_drive = null
-	return ..()
-
 // For idiot merchants who wipe the program from their console.
 /obj/item/weapon/stock_parts/computer/hard_drive/portable/merchant
 	name = "merchant_list_1155_CRACKZ_1155_no_keygen_repack"

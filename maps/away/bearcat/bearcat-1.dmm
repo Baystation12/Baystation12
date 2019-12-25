@@ -1199,6 +1199,12 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken2)
 "cr" = (
@@ -1213,6 +1219,9 @@
 	d2 = 2;
 	icon_state = "1-2";
 	pixel_y = 0
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
 	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/lower)
@@ -1695,6 +1704,12 @@
 	dir = 4
 	},
 /obj/item/taperoll/engineering/applied,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/broken1)
 "do" = (
@@ -1788,7 +1803,7 @@
 "dx" = (
 /obj/structure/mopbucket,
 /obj/structure/table/rack{
-	dir = 8;
+	dir = 8
 	},
 /obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/device/multitool{
@@ -2280,6 +2295,12 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/techstorage)
 "er" = (
@@ -2531,6 +2552,11 @@
 	dir = 9
 	},
 /obj/structure/table/rack,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/maintenance/storage)
 "eI" = (
@@ -2726,12 +2752,6 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/broken1)
-"oJ" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
 "vU" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -7467,7 +7487,7 @@ aa
 aa
 aa
 aa
-oJ
+aa
 aa
 aa
 aa
@@ -9690,7 +9710,7 @@ aa
 aa
 aa
 aa
-oJ
+aa
 aa
 aa
 aa
@@ -12104,7 +12124,7 @@ aa
 aa
 aa
 aa
-oJ
+aa
 aa
 aa
 aa

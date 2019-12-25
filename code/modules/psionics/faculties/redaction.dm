@@ -94,20 +94,21 @@
 				return TRUE
 
 		for(var/datum/wound/W in E.wounds)
-			if (W.bleeding() && (W.current_stage > 1 || redaction_rank >= PSI_RANK_MASTER)) 
-				to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
-				W.bleed_timer = 0
-				W.clamped = TRUE
-				E.status &= ~ORGAN_BLEEDING
-				return TRUE
-			else if (W.current_stage == 1)
-				to_chat(user, SPAN_NOTICE("This [W.desc] is beyond your power to heal."))
+			if(W.bleeding())
+				if(redaction_rank >= PSI_RANK_MASTER || W.wound_damage() < 30)
+					to_chat(user, SPAN_NOTICE("You knit together severed veins and broken flesh, stemming the bleeding."))
+					W.bleed_timer = 0
+					W.clamped = TRUE
+					E.status &= ~ORGAN_BLEEDING
+					return TRUE
+				else
+					to_chat(user, SPAN_NOTICE("This [W.desc] is beyond your power to heal."))
 
 		if(redaction_rank >= PSI_RANK_GRANDMASTER)
 			for(var/obj/item/organ/internal/I in E.internal_organs)
 				if(!BP_IS_ROBOTIC(I) && !BP_IS_CRYSTAL(I) && I.damage > 0)
 					to_chat(user, SPAN_NOTICE("You encourage the damaged tissue of \the [I] to repair itself."))
-					var/heal_rate = user.psi.get_rank(PSI_REDACTION)
+					var/heal_rate = redaction_rank
 					I.damage = max(0, I.damage - rand(heal_rate,heal_rate*2))
 					return TRUE
 

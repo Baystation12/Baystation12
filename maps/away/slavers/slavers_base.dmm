@@ -1902,13 +1902,13 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eQ" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	name = "Cameras console"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eR" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	name = "Riot control console"
 	},
 /obj/machinery/power/apc{
@@ -4313,7 +4313,7 @@
 /turf/space,
 /area/slavers_base/maint)
 "kW" = (
-/obj/effect/overmap/sector/slavers_base,
+/obj/effect/overmap/visitable/sector/slavers_base,
 /turf/space,
 /area/space)
 "kX" = (

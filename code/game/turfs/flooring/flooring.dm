@@ -14,7 +14,7 @@
 	var/icon
 	var/icon_base
 	var/color
-	var/footstep_type = FOOTSTEP_BLANK
+	var/footstep_type = /decl/footsteps/blank
 
 	var/has_base_range
 	var/has_damage_range
@@ -91,7 +91,7 @@
 	damage_temperature = T0C+200
 	flags = TURF_HAS_CORNERS | TURF_HAS_INNER_CORNERS | TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 	can_engrave = FALSE
-	footstep_type = FOOTSTEP_CARPET
+	footstep_type = /decl/footsteps/carpet
 	floor_smooth = SMOOTH_NONE
 	wall_smooth = SMOOTH_NONE
 	space_smooth = SMOOTH_NONE
@@ -144,7 +144,7 @@
 	can_paint = 1
 	build_type = /obj/item/stack/tile/linoleum
 	flags = TURF_REMOVE_SCREWDRIVER
-	footstep_type = FOOTSTEP_TILES
+	footstep_type = /decl/footsteps/tiles
 
 /decl/flooring/tiling
 	name = "floor"
@@ -157,7 +157,7 @@
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
 	build_type = /obj/item/stack/tile/floor
 	can_paint = 1
-	footstep_type = FOOTSTEP_TILES
+	footstep_type = /decl/footsteps/tiles
 
 /decl/flooring/tiling/mono
 	icon_base = "monotile"
@@ -250,7 +250,7 @@
 	descriptor = "planks"
 	build_type = /obj/item/stack/tile/wood
 	flags = TURF_CAN_BREAK | TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER
-	footstep_type = FOOTSTEP_WOOD
+	footstep_type = /decl/footsteps/wood
 	color = WOOD_COLOR_GENERIC
 
 /decl/flooring/wood/mahogany
@@ -289,7 +289,7 @@
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
 	can_paint = 1
-	footstep_type = FOOTSTEP_PLATING
+	footstep_type = /decl/footsteps/plating
 
 /decl/flooring/reinforced/circuit
 	name = "processing strata"
@@ -325,7 +325,7 @@
 	name = "floor"
 	icon = 'icons/turf/shuttle.dmi'
 	build_type = null
-	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_WRENCH
+	flags = TURF_ACID_IMMUNE | TURF_CAN_BREAK | TURF_REMOVE_CROWBAR
 	can_paint = 1
 	can_engrave = FALSE
 

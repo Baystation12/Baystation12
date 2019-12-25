@@ -203,6 +203,9 @@
 					Radiate()
 	return
 
+/obj/effect/fusion_em_field/proc/is_shutdown_safe()
+	return plasma_temperature < 1000
+
 /obj/effect/fusion_em_field/proc/Rupture()
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
 	set_light(1, 0.1, 15, 2, "#ccccff")

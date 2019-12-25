@@ -9,18 +9,18 @@
 	var/board = list()
 	var/selected = -1
 
-/obj/item/weapon/board/examine(mob/user, var/distance = -1)
-	if(in_range(user,src))
+/obj/item/weapon/board/ShiftClick(mob/user)
+	if(CanPhysicallyInteract(user))
 		user.set_machine(src)
 		interact(user)
-		return
-	..()
+	else
+		..()
 
 /obj/item/weapon/board/attack_hand(mob/living/carbon/human/M as mob)
 	if(M.machine == src)
-		..()
+		return ..()
 	else
-		src.examine(M)
+		M.examinate(src)
 
 obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	if(!addPiece(I,user))

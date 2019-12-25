@@ -25,7 +25,7 @@
 	bloodstr.clear_reagents()
 	touching.clear_reagents()
 	var/datum/reagents/R = get_ingested_reagents()
-	if(istype(R)) 
+	if(istype(R))
 		R.clear_reagents()
 	set_nutrition(400)
 	set_hydration(400)
@@ -119,11 +119,13 @@
 		)
 
 	switch(shock_damage)
+		if(11 to 15)
+			Stun(1)
 		if(16 to 20)
 			Stun(2)
 		if(21 to 25)
 			Weaken(2)
-		if(26 to 25)
+		if(26 to 30)
 			Weaken(5)
 		if(31 to INFINITY)
 			Weaken(10) //This should work for now, more is really silly and makes you lay there forever
@@ -257,21 +259,6 @@
 
 // ++++ROCKDTBEN++++ MOB PROCS //END
 
-/mob/living/carbon/clean_blood()
-	. = ..()
-	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
-		if(H.gloves)
-			if(H.gloves.clean_blood())
-				H.update_inv_gloves(0)
-			H.gloves.germ_level = 0
-		else
-			if(!isnull(H.bloody_hands))
-				H.bloody_hands = null
-				H.update_inv_gloves(0)
-			H.germ_level = 0
-	update_icons()	//apply the now updated overlays to the mob
-
 //Throwing stuff
 /mob/proc/throw_item(atom/target)
 	return
@@ -378,17 +365,18 @@
 	if(now_pushing || !yes)
 		return
 	..()
-	if(istype(AM, /mob/living/carbon) && prob(10))
-		src.spread_disease_to(AM, "Contact")
 
-/mob/living/carbon/slip(var/slipped_on,stun_duration=8)
+/mob/living/carbon/slip(slipped_on, stun_duration = 8)
+	var/area/A = get_area(src)
+	if(!A.has_gravity())
+		return FALSE
 	if(buckled)
-		return 0
+		return FALSE
 	stop_pulling()
-	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
-	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	to_chat(src, SPAN_WARNING("You slipped on [slipped_on]!"))
+	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(Floor(stun_duration/2))
-	return 1
+	return TRUE
 
 /mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
 	if(effect in chem_effects)

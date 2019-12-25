@@ -1,6 +1,7 @@
 /obj/item/weapon/stock_parts/computer/scanner/paper
 	name = "paper scanner module"
 	desc = "A paper scanning module. It can scan writing and save it to a file."
+	external_slot = TRUE
 
 /obj/item/weapon/stock_parts/computer/scanner/paper/can_use_scanner(mob/user, obj/item/weapon/paper/target, proximity = TRUE)
 	if(!..())

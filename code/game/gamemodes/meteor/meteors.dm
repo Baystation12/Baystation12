@@ -79,7 +79,7 @@
 	var/obj/effect/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
 	spawn(0)
-		walk_towards(M, M.dest, 1)
+		walk_towards(M, M.dest, 3)
 	return
 
 /proc/spaceDebrisStartLoc(startSide, Z)
@@ -150,6 +150,10 @@
 	..()
 	z_original = z
 
+/obj/effect/meteor/Initialize()
+	. = ..()
+	GLOB.meteor_list += src
+
 /obj/effect/meteor/Move()
 	. = ..() //process movement...
 	move_count++
@@ -162,6 +166,7 @@
 
 /obj/effect/meteor/Destroy()
 	walk(src,0) //this cancels the walk_towards() proc
+	GLOB.meteor_list -= src
 	return ..()
 
 /obj/effect/meteor/New()

@@ -314,9 +314,9 @@
 			return
 		if(prob(50))
 			I.dropInto(loc)
-			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>", 3)
+			visible_message("<span class='notice'>Swish! \the [I] lands in \the [src].</span>", range = 3)
 		else
-			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>", 3)
+			visible_message("<span class='warning'>\The [I] bounces off of \the [src]'s rim!</span>", range = 3)
 		return 0
 	else
 		return ..(mover, target, height, air_group)
@@ -352,7 +352,7 @@
 			return
 		if(prob(10))
 			I.dropInto(loc)
-			visible_message("<span class='notice'>Swish! \the [I] gets caught in \the [src].</span>", 3)
+			visible_message("<span class='notice'>Swish! \the [I] gets caught in \the [src].</span>", range = 3)
 			return 0
 		else
 			return 1

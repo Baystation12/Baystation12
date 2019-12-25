@@ -42,12 +42,10 @@
 /obj/structure/closet/firecloset/WillContain()
 	return list(
 		/obj/item/weapon/storage/med_pouch/burn,
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/weapon/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight,
-		/obj/item/weapon/tank/oxygen/red,
-		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/firefighter)
+		/obj/item/device/flashlight
+		)
 
 /obj/structure/closet/firecloset/chief
 
@@ -165,12 +163,9 @@
 	return list(
 		/obj/item/inflatable/door = 2,
 		/obj/item/weapon/storage/med_pouch/burn = 2,
-		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/device/flashlight,
-		/obj/item/weapon/tank/oxygen/red,
-		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/firefighter)
+		/obj/item/weapon/storage/backpack/dufflebag/firefighter
+		)
 
 /*
  * First Aid

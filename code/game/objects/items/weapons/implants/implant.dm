@@ -24,6 +24,21 @@
 /obj/item/weapon/implant/proc/activate()
 	return
 
+/obj/item/weapon/implant/proc/disable(var/time = 100)
+	if(malfunction)
+		return 0
+
+	malfunction = MALFUNCTION_TEMPORARY
+	addtimer(CALLBACK(src,.proc/restore),time)
+	return 1
+
+/obj/item/weapon/implant/proc/restore()
+	if(malfunction == MALFUNCTION_PERMANENT || !malfunction)
+		return 0
+
+	malfunction = 0
+	return 1
+
 // What does the implant do upon injection?
 // return 0 if the implant fails (ex. Revhead and loyalty implant.)
 // return TRUE if the implant succeeds (ex. Nonrevhead and loyalty implant.)
@@ -81,7 +96,8 @@
 	return FALSE
 
 /obj/item/weapon/implant/proc/meltdown()	//breaks it down, making implant unrecongizible
-	to_chat(imp_in, "<span class='warning'>You feel something melting inside [part ? "your [part.name]" : "you"]!</span>")
+	if(malfunction == MALFUNCTION_PERMANENT) return
+	to_chat(imp_in, SPAN_DANGER("You feel something melting inside [part ? "your [part.name]" : "you"]!"))
 	if (part)
 		part.take_external_damage(burn = 15, used_weapon = "Electronics meltdown")
 	else
@@ -91,6 +107,15 @@
 	desc = "Charred circuit in melted plastic case. Wonder what that used to be..."
 	icon_state = "implant_melted"
 	malfunction = MALFUNCTION_PERMANENT
+
+/obj/item/weapon/implant/emp_act(severity)
+	var/power = 4 - severity
+	if(prob(power * 15))
+		meltdown()
+	else if(prob(power * 25))
+		activate()
+	else if(prob(power * 33))
+		disable(rand(power*100,power*1000))
 
 /obj/item/weapon/implant/Destroy()
 	if(part)

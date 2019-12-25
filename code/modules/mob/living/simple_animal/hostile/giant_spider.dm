@@ -440,7 +440,7 @@ Hunter caste procs
 	if(!isnull(first_stop_automation))
 		stop_automation = first_stop_automation
 	
-/mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom, var/speed)
+/mob/living/simple_animal/hostile/giant_spider/hunter/throw_impact(atom/hit_atom)
 	if(isliving(hit_atom))
 		var/mob/living/target = hit_atom
 		stop_automation = FALSE

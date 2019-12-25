@@ -1,7 +1,7 @@
 // Submap shuttles.
 // Trichoptera - Shuttle One, Port Side
 // Lepidoptera - Shuttle Two, Starboard Side
-/obj/effect/overmap/ship/landable/ascent
+/obj/effect/overmap/visitable/ship/landable/ascent
 	name = "Trichoptera"
 	shuttle = "Trichoptera"
 	moving_state = "ship_moving"
@@ -12,7 +12,7 @@
 	skill_needed = SKILL_BASIC
 	vessel_size = SHIP_SIZE_SMALL
 
-/obj/effect/overmap/ship/landable/ascent/two
+/obj/effect/overmap/visitable/ship/landable/ascent/two
 	name = "Lepidoptera"
 	shuttle = "Lepidoptera"
 	fore_dir = NORTH
@@ -56,6 +56,12 @@
 
 /datum/shuttle/autodock/overmap/ascent/two
 	name = "Lepidoptera"
-	shuttle_area = /area/ship/ascent/shuttle_starboard
+	warmup_time = 5
 	current_location = "nav_hangar_ascent_two"
-	dock_target = "ascent_starboard_shuttle_dock"
+	range = 2
+	dock_target = "ascent_starboard"
+	shuttle_area = /area/ship/ascent/shuttle_starboard
+	defer_initialisation = TRUE
+	flags = SHUTTLE_FLAGS_PROCESS
+	skill_needed = SKILL_NONE
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling/ascent

@@ -535,11 +535,6 @@
 	icon_state = "1-2"
 	},
 /obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/yellow{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
@@ -609,17 +604,7 @@
 	},
 /turf/simulated/floor,
 /area/unishi/common)
-"bD" = (
-/obj/structure/table/standard,
-/obj/item/weapon/pen/blue,
-/turf/simulated/floor/tiled/dark,
-/area/unishi/classroom)
 "bE" = (
-/turf/simulated/floor/tiled/dark,
-/area/unishi/classroom)
-"bF" = (
-/obj/structure/table/standard,
-/obj/item/weapon/pen/crayon/green,
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
 "bG" = (
@@ -694,13 +679,6 @@
 	},
 /turf/simulated/open,
 /area/unishi/common)
-"bM" = (
-/obj/structure/bed/chair,
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/unishi/classroom)
 "bO" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/tiled/dark,
@@ -1355,11 +1333,11 @@
 /turf/space,
 /area/space)
 "dx" = (
-/obj/item/modular_computer/console/preset/research,
+/obj/machinery/computer/modular/preset/aislot/research,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "dy" = (
-/obj/item/modular_computer/console/preset/research,
+/obj/machinery/computer/modular/preset/aislot/research,
 /obj/random/smokes,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
@@ -2732,7 +2710,7 @@
 /obj/effect/decal/cleanable/ash,
 /obj/effect/decal/cleanable/blood,
 /obj/item/clothing/under/blazer,
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	icon_state = "console";
 	dir = 4
 	},
@@ -3000,7 +2978,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hr" = (
-/obj/item/modular_computer/console/preset/engineering{
+/obj/machinery/computer/modular/preset/engineering{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -3087,12 +3065,20 @@
 /obj/structure/lattice,
 /turf/space,
 /area/unishi/smresearch)
-"Ul" = (
-/obj/effect/landmark{
-	name = "carpspawn"
-	},
-/turf/space,
-/area/space)
+"qW" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/white,
+/area/unishi/chem)
+"xD" = (
+/obj/machinery/reagentgrinder,
+/turf/simulated/floor/tiled/white,
+/area/unishi/chem)
+"OW" = (
+/obj/structure/table/standard,
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/white,
+/area/unishi/chem)
 
 (1,1,1) = {"
 aa
@@ -6407,7 +6393,7 @@ aa
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa
@@ -7508,8 +7494,8 @@ ax
 ax
 ay
 ay
-bm
-bm
+ay
+ay
 bm
 bm
 bm
@@ -7609,11 +7595,11 @@ aA
 aL
 aT
 bb
+xD
+bj
 bj
 bn
 bt
-bD
-bM
 bQ
 bt
 ca
@@ -7711,11 +7697,11 @@ aB
 aM
 aM
 aM
-bj
+aM
+aM
+aM
 bn
 bu
-bE
-bE
 bR
 bE
 bE
@@ -7813,11 +7799,11 @@ aC
 aN
 aU
 bc
+OW
+qW
 bk
 bn
 bv
-bF
-bt
 bS
 bt
 cb
@@ -7916,10 +7902,10 @@ aO
 aV
 bd
 bd
+bd
+bd
 bn
 bw
-bn
-bn
 bT
 bW
 cc
@@ -8019,9 +8005,9 @@ aW
 be
 be
 bo
-bx
+be
 bG
-bn
+bw
 bU
 bn
 bn
@@ -8100,7 +8086,7 @@ aa
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa
@@ -8123,7 +8109,7 @@ bf
 bf
 by
 bH
-bf
+dD
 bV
 bf
 cd
@@ -9186,7 +9172,7 @@ gJ
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa
@@ -9774,7 +9760,7 @@ aa
 aa
 aa
 aa
-Ul
+aa
 aa
 aa
 aa

@@ -140,7 +140,7 @@
 	The planet's population is primarily divided into northern, urban Tersteners who often are seen in the military; and southern, rural Tersteners, who make up the farmers and ranchers of the planet. \
 	While much of the North has been developed, large parts of the South remain undeveloped. \
 	Tersten is an isolated border world, with little influence in the larger community. Still, it is a proud member of the SCG, and Tersten City has become a haunt for Third Fleet forces on shore leave. \
-	The OCIE maintain an office in the city of Moore, and various Trans-Stellar Corporations have a foothold in the city of South Harelstone. \
+	The SFP maintain an office in the city of Moore, and various Trans-Stellar Corporations have a foothold in the city of South Harelstone. \
 	<br><br>The Tersten people are separated into various cultures. For example, urban Tersteners, known as 'Pinascs', live around Tersten City, and are often seen in the defence forces.  \
 	Rural Tersteners, known as 'Nevokies', live in the south central region around the city of Nevada.  Many Martian and Earthling enclaves exist on the planet, significantly in South Harelstone. \
 	The divide between north and south could also be considered a divide between rich and poor. Even the poorest city dweller will likely be richer than most farmers. \
@@ -225,7 +225,7 @@
 	distance = "14 light years"
 	description = "Gaia is the sole planet in the Galilei system, serving as the DMZ between the SCG and the GCC. \
 	It is an agricultural world, though various conflicts across the planet's surface have left it scarred. The planet is divided into \
-	Sol-Controlled <b>Northern Gaia</b> and Independent-Controlled <b>Southern Gaia</b>, with New Venice remaining a neutral zone inside the DMZ. \
+	Sol-Controlled <b>Southern Gaia</b> and Independent-Controlled <b>Northern Gaia</b>, with New Venice remaining a neutral zone inside the DMZ. \
 	The planet's population remain divided even 10 years after the Gaian Conflict. New Venice sits on the edge of Lake Cabot. While Gaia is divided \
 	the current Mayor of New Venice serves as a vital mediator between both sides. <br><br> The Gaian People are tired of war, and long to see their families \
 	once again.  They suffered hard twenty years prior, and fear they may suffer again."

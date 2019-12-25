@@ -156,7 +156,7 @@
 			dat = "<center><h1>[event_title]</h1>[event_desc]<br><br>Distance to next port: [distance]<br><b>[event_info]</b><br></center><br>[event_actions]"
 		if(ORION_VIEW_SUPPLIES)
 			dat  = "<center><h1>Supplies</h1>View your supplies or buy more when at a spaceport.</center><BR>"
-			dat += "<center>You have [supplies["6"]] thalers.</center>"
+			dat += "<center>You have [supplies["6"]] [GLOB.using_map.local_currency_name].</center>"
 			for(var/i=1; i<6; i++)
 				var/amm = (i>3?10:1)
 				dat += "[supplies["[i]"]] [supply_name["[i]"]][event==ORION_TRAIL_SPACEPORT ? ", <a href='?src=\ref[src];buy=[i]'>buy [amm] for [supply_cost["[i]"]]T</a>" : ""]<BR>"

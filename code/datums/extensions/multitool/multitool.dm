@@ -1,4 +1,5 @@
 /datum/extension/interactive/multitool
+	base_type = /datum/extension/interactive/multitool
 	var/window_x = 370
 	var/window_y = 470
 

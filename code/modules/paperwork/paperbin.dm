@@ -99,14 +99,13 @@
 			to_chat(user, "<span class='notice'>The photo cannot go into \the [src].</span>")
 
 
-/obj/item/weapon/paper_bin/examine(mob/user)
+/obj/item/weapon/paper_bin/examine(mob/user, distance)
 	. = ..()
-	if(get_dist(src, user) <= 1)
+	if(distance <= 1)
 		if(amount)
 			to_chat(user, "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>")
 		else
 			to_chat(user, "<span class='notice'>There are no papers in the bin.</span>")
-	return
 
 
 /obj/item/weapon/paper_bin/on_update_icon()

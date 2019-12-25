@@ -16,7 +16,7 @@
 	welcome_text += "<hr>Current system:<br /><b>[system_name()]</b><br /><br>"
 
 	var/list/space_things = list()
-	var/obj/effect/overmap/torch = map_sectors["1"]
+	var/obj/effect/overmap/visitable/torch = map_sectors["1"]
 
 	welcome_text += "Current Coordinates:<br /><b>[torch.x]:[torch.y]</b><br /><br>"
 	welcome_text += "Next system targeted for jump:<br /><b>[generate_system_name()]</b><br /><br>"
@@ -25,15 +25,15 @@
 	welcome_text += "Scan results show the following points of interest:<br />"
 	
 	for(var/zlevel in map_sectors)
-		var/obj/effect/overmap/O = map_sectors[zlevel]
+		var/obj/effect/overmap/visitable/O = map_sectors[zlevel]
 		if(O.name == torch.name)
 			continue
-		if(istype(O, /obj/effect/overmap/ship/landable)) //Don't show shuttles
+		if(istype(O, /obj/effect/overmap/visitable/ship/landable)) //Don't show shuttles
 			continue
 		space_things |= O
 
 	var/list/distress_calls
-	for(var/obj/effect/overmap/O in space_things)
+	for(var/obj/effect/overmap/visitable/O in space_things)
 		var/location_desc = " at present co-ordinates."
 		if(O.loc != torch.loc)
 			var/bearing = round(90 - Atan2(O.x - torch.x, O.y - torch.y),5) //fucking triangles how do they work

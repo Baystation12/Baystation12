@@ -12,7 +12,7 @@
 	meat_amount = 3
 	bone_material = MATERIAL_BONE_GENERIC
 	bone_amount = 5
-	skin_material = MATERIAL_SKIN_GENERIC 
+	skin_material = MATERIAL_SKIN_GENERIC
 	skin_amount = 5
 
 	var/show_stat_health = 1	//does the percentage health show in the stat panel for the mob
@@ -70,7 +70,7 @@
 	//Null rod stuff
 	var/supernatural = 0
 	var/purge = 0
-	
+
 	var/bleed_ticks = 0
 	var/bleed_colour = COLOR_BLOOD_HUMAN
 	var/can_bleed = TRUE
@@ -82,10 +82,14 @@
 	var/ability_cooldown
 	var/time_last_used_ability
 
+	//for simple animals that reflect damage when attacked in melee
+	var/return_damage_min
+	var/return_damage_max
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	if(LAZYLEN(natural_armor))
-		set_extension(src, /datum/extension/armor, armor_type, natural_armor)
+		set_extension(src, armor_type, natural_armor)
 
 /mob/living/simple_animal/Life()
 	. = ..()
@@ -117,7 +121,7 @@
 	handle_confused()
 	handle_supernatural()
 	handle_impaired_vision()
-	
+
 	if(can_bleed && bleed_ticks > 0)
 		handle_bleeding()
 
@@ -219,12 +223,17 @@
 	var/damage = Proj.force
 	if(Proj.damage_type == STUN)
 		damage = Proj.force / 6
+	if(Proj.damage_type == BRUTE)
+		damage = Proj.force / 2
+	if(Proj.damage_type == BURN)
+		damage = Proj.force / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
 		if(health < Proj.agony * 3)
 			Paralyse(Proj.agony / 20)
 			visible_message("<span class='warning'>[src] is stunned momentarily!</span>")
 
+	bullet_impact_visuals(Proj)
 	adjustBruteLoss(damage)
 	Proj.on_hit(src)
 	return 0
@@ -294,14 +303,14 @@
 					to_chat(user, SPAN_NOTICE("You botch harvesting \the [src], and ruin some of the meat in the process."))
 					subtract_meat(user)
 					return
-				else	
+				else
 					harvest(user, user.get_skill_value(SKILL_COOKING))
 					return
 			else
 				to_chat(user, SPAN_NOTICE("Your hand slips with your movement, and some of the meat is ruined."))
 				subtract_meat(user)
 				return
-				
+
 	else
 		if(!O.force)
 			visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
@@ -430,6 +439,20 @@
 	if(meat_amount <= 0)
 		to_chat(user, SPAN_NOTICE("\The [src] carcass is ruined beyond use."))
 
+/mob/living/simple_animal/bullet_impact_visuals(var/obj/item/projectile/P, var/def_zone)
+	..()
+	switch(get_bullet_impact_effect_type(def_zone))
+		if(BULLET_IMPACT_MEAT)
+			if(P.damtype == BRUTE)
+				var/hit_dir = get_dir(P.starting, src)
+				var/obj/effect/decal/cleanable/blood/B = blood_splatter(get_step(src, hit_dir), src, 1, hit_dir)
+				B.icon_state = pick("dir_splatter_1","dir_splatter_2")
+				B.basecolor = bleed_colour
+				var/scale = min(1, round(mob_size / MOB_MEDIUM, 0.1))
+				var/matrix/M = new()
+				B.transform = M.Scale(scale)
+				B.update_icon()
+
 /mob/living/simple_animal/handle_fire()
 	return
 
@@ -451,13 +474,13 @@
 		bleed_ticks = max(bleed_ticks, amount)
 	else
 		bleed_ticks = max(bleed_ticks + amount, 0)
-		
+
 	bleed_ticks = round(bleed_ticks)
-	
+
 /mob/living/simple_animal/proc/handle_bleeding()
 	bleed_ticks--
 	adjustBruteLoss(1)
-	
+
 	var/obj/effect/decal/cleanable/blood/drip/drip = new(get_turf(src))
 	drip.basecolor = bleed_colour
 	drip.update_icon()
@@ -473,5 +496,16 @@
 			return FLASH_PROTECTION_NONE
 		if(0)
 			return FLASH_PROTECTION_MAJOR
-		else 
+		else
 			return FLASH_PROTECTION_MAJOR
+
+/mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
+	if(attacker.a_intent == I_HURT)
+		var/hand_hurtie
+		if(attacker.hand)
+			hand_hurtie = BP_L_HAND
+		else
+			hand_hurtie = BP_R_HAND
+		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, hand_hurtie, used_weapon = description)
+		if(rand(25))
+			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))

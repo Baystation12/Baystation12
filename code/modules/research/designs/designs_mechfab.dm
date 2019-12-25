@@ -294,6 +294,13 @@
 	build_path = /obj/item/mech_component/propulsion/tracks
 	req_tech = list(TECH_MATERIAL = 4)
 
+/datum/design/item/mechfab/exosuit/sphere_torso
+	name = "spherical chassis"
+	id = "sphere_body"
+	build_path = /obj/item/mech_component/chassis/pod
+	time = 50
+	materials = list(MATERIAL_STEEL = 18000)
+
 /datum/design/item/robot_upgrade
 	build_type = MECHFAB
 	time = 12
@@ -434,6 +441,14 @@
 	name = "mounted extinguisher"
 	id   = "mech_extinguisher"
 	build_path = /obj/item/mech_equipment/mounted_system/extinguisher
+
+/datum/design/item/exosuit/mechshields
+	name = "energy shield drone"
+	id = "mech_shield"
+	time = 90
+	materials = list(MATERIAL_STEEL = 20000, MATERIAL_SILVER = 12000, MATERIAL_GOLD = 12000)
+	req_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 4, TECH_POWER = 4, TECH_COMBAT = 2)
+	build_path = /obj/item/mech_equipment/shields
 // End mechs.
 
 /datum/design/item/synthetic_flash

@@ -30,7 +30,7 @@ datum/preferences
 	if(istype(C))
 		client = C
 		client_ckey = C.ckey
-		SScharacter_setup.preferences_datums += src
+		SScharacter_setup.preferences_datums[C.ckey] = src
 		if(SScharacter_setup.initialized)
 			setup()
 		else
@@ -223,7 +223,7 @@ datum/preferences
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
 	if(!is_preview_copy)
-		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
+		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH))
 			var/status = organ_data[name]
 			if(!status)
 				continue

@@ -79,6 +79,6 @@ mob/observer/check_airflow_movable()
 	if(T)
 		forceMove(T)
 		inertia_dir = 0
-		throwing = 0
+		throwing = null
 		to_chat(src, "<span class='notice'>You cannot move further in this direction.</span>")
 

@@ -888,7 +888,7 @@
 	icon_state = "corner_white_three_quarters";
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -2546,7 +2546,7 @@
 /area/outpost/abandoned)
 "hL" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/overmap/sector/away,
+/obj/effect/overmap/visitable/sector/away,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "ib" = (
@@ -2649,7 +2649,7 @@
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "wb" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 4
 	},

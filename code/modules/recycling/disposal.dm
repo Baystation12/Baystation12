@@ -131,11 +131,7 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(!user.unEquip(I, src))
 		return
 
-	to_chat(user, "You place \the [I] into the [src].")
-	for(var/mob/M in viewers(src))
-		if(M == user)
-			continue
-		M.show_message("[user.name] places \the [I] into the [src].", 3)
+	user.visible_message("\The [user] places \the [I] into \the [src].", "You place \the [I] into \the [src].")
 
 	update_icon()
 
@@ -446,7 +442,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 
 			AM.forceMove(src.loc)
 			AM.pipe_eject(0)
-			if(!istype(AM,/mob/living/silicon/robot/drone)) //Poor drones kept smashing windows and taking system damage being fired out of disposals. ~Z
+			// Poor drones kept smashing windows and taking system damage being fired out of disposals.
+			if(!istype(AM,/mob/living/silicon/robot/drone))
 				spawn(1)
 					if(AM)
 						AM.throw_at(target, 5, 1)
@@ -461,11 +458,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 			return
 		if(prob(75))
 			I.forceMove(src)
-			for(var/mob/M in viewers(src))
-				M.show_message("\The [I] lands in \the [src].", 3)
+			visible_message("\The [I] lands in \the [src].")
 		else
-			for(var/mob/M in viewers(src))
-				M.show_message("\The [I] bounces off of \the [src]'s rim!", 3)
+			visible_message("\The [I] bounces off of \the [src]'s rim!")
 		return 0
 	else
 		return ..(mover, target, height, air_group)
@@ -574,7 +569,8 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		for(var/atom/movable/AM in H)
 			AM.forceMove(src.loc)
 			AM.pipe_eject(dir)
-			if(!istype(AM,/mob/living/silicon/robot/drone)) //Drones keep smashing windows from being fired out of chutes. Bad for the station. ~Z
+			// Drones keep smashing windows from being fired out of chutes.
+			if(!istype(AM,/mob/living/silicon/robot/drone))
 				spawn(5)
 					AM.throw_at(target, 3, 1)
 		H.vent_gas(src.loc)
@@ -620,6 +616,11 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 		else
 			to_chat(user, "You need more welding fuel to complete this task.")
 			return
+
+/obj/structure/disposaloutlet/forceMove()//updates this when shuttle moves. So you can YEET things out the airlock
+	. = ..()
+	if(.)
+		target = get_ranged_target_turf(src, dir, 10)
 
 // called when movable is expelled from a disposal pipe or outlet
 // by default does nothing, override for special behaviour

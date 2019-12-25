@@ -1,10 +1,10 @@
 /obj/item/weapon/stock_parts/circuitboard/fusion/core_control
-	name = "circuit board (fusion core controller)"
+	name = T_BOARD("fusion core controller")
 	build_path = /obj/machinery/computer/fusion/core_control
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/stock_parts/circuitboard/kinetic_harvester
-	name = "internal circuitry (kinetic harvester)"
+	name = T_BOARD("kinetic harvester")
 	build_path = /obj/machinery/kinetic_harvester
 	board_type = "machine"
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
@@ -16,7 +16,7 @@
 		)
 
 /obj/item/weapon/stock_parts/circuitboard/fusion_fuel_compressor
-	name = "circuit board (fusion fuel compressor)"
+	name = T_BOARD("fusion fuel compressor")
 	build_path = /obj/machinery/fusion_fuel_compressor
 	board_type = "machine"
 	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
@@ -28,17 +28,17 @@
 							)
 
 /obj/item/weapon/stock_parts/circuitboard/fusion_fuel_control
-	name = "circuit board (fusion fuel controller)"
+	name = T_BOARD("fusion fuel controller")
 	build_path = /obj/machinery/computer/fusion/fuel_control
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/stock_parts/circuitboard/gyrotron_control
-	name = "circuit board (gyrotron controller)"
+	name = T_BOARD("gyrotron controller")
 	build_path = /obj/machinery/computer/fusion/gyrotron
 	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/stock_parts/circuitboard/fusion_core
-	name = "internal circuitry (fusion core)"
+	name = T_BOARD("fusion core")
 	build_path = /obj/machinery/power/fusion_core
 	board_type = "machine"
 	origin_tech = list(TECH_BLUESPACE = 2, TECH_MAGNET = 4, TECH_POWER = 4)
@@ -51,7 +51,7 @@
 							)
 
 /obj/item/weapon/stock_parts/circuitboard/fusion_injector
-	name = "internal circuitry (fusion fuel injector)"
+	name = T_BOARD("fusion fuel injector")
 	build_path = /obj/machinery/fusion_fuel_injector
 	board_type = "machine"
 	origin_tech = list(TECH_POWER = 3, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
@@ -61,6 +61,16 @@
 							/obj/item/weapon/stock_parts/matter_bin/super = 1,
 							/obj/item/weapon/stock_parts/console_screen = 1,
 							/obj/item/stack/cable_coil = 5
+							)
+
+/obj/item/weapon/stock_parts/circuitboard/gyrotron
+	name = T_BOARD("gyrotron")
+	build_path = /obj/machinery/power/emitter/gyrotron
+	board_type = "machine"
+	origin_tech = list(TECH_POWER = 4, TECH_ENGINEERING = 4)
+	req_components = list(
+							/obj/item/stack/cable_coil = 20,
+							/obj/item/weapon/stock_parts/micro_laser/ultra = 2
 							)
 
 /datum/design/circuit/fusion
@@ -106,3 +116,9 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/kinetic_harvester
 	sort_string = "LAAAJ"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4, TECH_MATERIAL = 4)
+
+/datum/design/circuit/fusion/gyrotron
+	name = "gyrotron"
+	id = "gyrotron"
+	build_path = /obj/item/weapon/stock_parts/circuitboard/gyrotron
+	sort_string = "LAAAK"

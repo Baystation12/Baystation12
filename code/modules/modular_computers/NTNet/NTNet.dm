@@ -14,6 +14,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/email_accounts = list()				// I guess we won't have more than 999 email accounts active at once in single round, so this will do until Servers are implemented someday.
 	var/list/available_reports = list()             // A list containing one of each available report datums, used for the report editor program.
 	var/list/banned_nids = list()
+	var/list/registered_nids = list()				// list of nid - os datum pairs
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
 	var/setting_maxlogcount = 100
@@ -74,10 +75,14 @@ var/global/datum/ntnet/ntnet_global = new()
 				P.store_file(file)
 			file.stored_data += log_text + "\[br\]"
 
-/datum/ntnet/proc/get_computer_by_nid(var/NID)
-	for(var/obj/item/modular_computer/comp in SSobj.processing)
-		if(comp && comp.network_card && comp.network_card.identification_id == NID)
-			return comp
+/datum/ntnet/proc/get_os_by_nid(var/NID)
+	return registered_nids["[NID]"]
+
+/datum/ntnet/proc/register(var/NID, var/datum/extension/interactive/ntos/os)
+	registered_nids["[NID]"] = os
+
+/datum/ntnet/proc/unregister(var/NID)
+	registered_nids -= "[NID]"
 
 /datum/ntnet/proc/check_banned(var/NID)
 	if(!relays || !relays.len)

@@ -64,7 +64,7 @@
 	},
 /area/bluespaceriver/ground)
 "al" = (
-/obj/effect/overmap/sector/arcticplanet{
+/obj/effect/overmap/visitable/sector/arcticplanet{
 	desc = "Sensor array an arctic planet with a small vessle on the surface. The vessle is located in the western region of a plateu surrounded by mineral rich mountains on all four sides. Scans further indicate strange energy levels below the planet's surface. Sunrise expected in 56 hours."
 	},
 /turf/simulated/floor/exoplanet/snow{

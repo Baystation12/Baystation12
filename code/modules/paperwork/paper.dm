@@ -70,11 +70,11 @@
 	if(new_text)
 		free_space -= length(strip_html_properly(new_text))
 
-/obj/item/weapon/paper/examine(mob/user)
+/obj/item/weapon/paper/examine(mob/user, distance)
 	. = ..()
 	if(name != "sheet of paper")
 		to_chat(user, "It's titled '[name]'.")
-	if(in_range(user, src) || isghost(user))
+	if(distance <= 1)
 		show_content(usr)
 	else
 		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
@@ -285,24 +285,28 @@
 		if(!t)
 			return
 
-		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check what type of pen
+		var/obj/item/I = usr.get_active_hand() // Check to see if he still got that darn pen, also check what type of pen
 		var/iscrayon = 0
 		var/isfancy = 0
-		if(!istype(i, /obj/item/weapon/pen))
+		if(!istype(I, /obj/item/weapon/pen))
 			if(usr.back && istype(usr.back,/obj/item/weapon/rig))
 				var/obj/item/weapon/rig/r = usr.back
 				var/obj/item/rig_module/device/pen/m = locate(/obj/item/rig_module/device/pen) in r.installed_modules
 				if(!r.offline && m)
-					i = m.device
+					I = m.device
 				else
 					return
 			else
 				return
+		
+		var/obj/item/weapon/pen/P = I
+		if(!P.pen_usable(usr))
+			return
 
-		if(istype(i, /obj/item/weapon/pen/crayon))
+		if(P.iscrayon)
 			iscrayon = 1
 
-		if(istype(i, /obj/item/weapon/pen/fancy))
+		if(P.isfancy)
 			isfancy = 1
 
 
@@ -312,7 +316,7 @@
 
 		var/last_fields_value = fields
 
-		t = parsepencode(t, i, usr, iscrayon, isfancy) // Encode everything from pencode to html
+		t = parsepencode(t, I, usr, iscrayon, isfancy) // Encode everything from pencode to html
 
 
 		if(fields > MAX_FIELDS)
@@ -497,3 +501,7 @@
 /obj/item/weapon/paper/travelvisa/New()
 	..()
 	icon_state = "travelvisa"
+
+/obj/item/weapon/paper/aromatherapy_disclaimer
+	name = "aromatherapy disclaimer"
+	info = "<I>The manufacturer and the retailer make no claims of the contained products' effacy.</I> <BR><BR><B>Use at your own risk.</B>"

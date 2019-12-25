@@ -11,7 +11,7 @@
 	possible_transfer_amounts = null
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	volume = 60
+	volume = 30
 
 /obj/item/weapon/reagent_containers/pill/New()
 	..()
@@ -25,7 +25,7 @@
 		if(!M.can_eat(src))
 			return
 
-		to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
+		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
 		if(reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
@@ -35,11 +35,11 @@
 		if(!M.can_force_feed(user, src))
 			return
 
-		user.visible_message("<span class='warning'>[user] attempts to force [M] to swallow \the [src].</span>")
+		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(!do_mob(user, M))
 			return
-		user.visible_message("<span class='warning'>[user] forces [M] to swallow \the [src].</span>")
+		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
 		var/contained = reagentlist()
 		admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 		if(reagents.total_volume)
@@ -84,6 +84,7 @@
 	name = "toxins pill"
 	desc = "Highly toxic."
 	icon_state = "pill4"
+	volume = 50
 /obj/item/weapon/reagent_containers/pill/tox/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin, 50)
@@ -94,6 +95,7 @@
 	name = "strange pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
+	volume = 50
 /obj/item/weapon/reagent_containers/pill/cyanide/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)
@@ -358,7 +360,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/cream
 	name = "creamer pod"
-	
+
 /obj/item/weapon/reagent_containers/pill/pod/cream/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/milk, 5)
@@ -366,7 +368,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/cream_soy
 	name = "non-dairy creamer pod"
-	
+
 /obj/item/weapon/reagent_containers/pill/pod/cream_soy/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/milk/soymilk, 5)
@@ -374,7 +376,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/orange
 	name = "orange flavorpod"
-	
+
 /obj/item/weapon/reagent_containers/pill/pod/orange/New()
 	..()
 	reagents.add_reagent(/datum/reagent/drink/juice/orange, 5)
@@ -382,7 +384,7 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 
 /obj/item/weapon/reagent_containers/pill/pod/mint
 	name = "mint flavorpod"
-	
+
 /obj/item/weapon/reagent_containers/pill/pod/mint/New()
 	..()
 	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing

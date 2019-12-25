@@ -232,23 +232,25 @@ Buildable meters
 		
 	qdel(src)
 
-/obj/item/air_sensor
+/obj/item/machine_chassis
+	var/build_type
+
+/obj/item/machine_chassis/attackby(var/obj/item/weapon/W, var/mob/user)
+	if(!isWrench(W))
+		return ..()
+	var/obj/machinery/machine = new build_type(get_turf(src), dir, FALSE)
+	machine.apply_component_presets()
+	machine.RefreshParts()
+	if(machine.construct_state)
+		machine.construct_state.post_construct(machine)
+	playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
+	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
+	qdel(src)
+
+/obj/item/machine_chassis/air_sensor
 	name = "gas sensor"
 	desc = "A sensor. It detects gasses."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "gsensor1"
 	w_class = ITEM_SIZE_LARGE
-	var/frequency = 1441
-	var/output = 3
-	var/id_tag
-
-/obj/item/air_sensor/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	..()
-	if(!isWrench(W))
-		return ..()
-	var/obj/machinery/air_sensor/sensor = new /obj/machinery/air_sensor(src.loc)
-	sensor.frequency = frequency
-	sensor.set_frequency(frequency)
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You have fastened the [src].</span>")
-	qdel(src)
+	build_type = /obj/machinery/air_sensor/buildable

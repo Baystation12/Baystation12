@@ -37,5 +37,9 @@ SUBSYSTEM_DEF(fabrication)
 
 /datum/controller/subsystem/fabrication/proc/try_craft_with(var/obj/item/target, var/obj/item/thing, var/mob/user)
 	for(var/decl/crafting_stage/initial_stage in SSfabrication.find_crafting_recipes(target.type))
-		if(initial_stage.can_begin_with(target) && initial_stage.progress_to(thing, user, target))
-			return new /obj/item/crafting_holder(get_turf(target), initial_stage, target, thing, user)
+		if(initial_stage.can_begin_with(target) && initial_stage.is_appropriate_tool(thing))
+			var/obj/item/crafting_holder/H = new /obj/item/crafting_holder(get_turf(target), initial_stage, target, thing, user)
+			if(initial_stage.progress_to(thing, user, H))
+				return H
+			else
+				qdel(H)

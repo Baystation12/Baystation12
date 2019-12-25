@@ -175,6 +175,12 @@
 		owner.custom_pain("Something inside your [src] burns a [severity < 2 ? "bit" : "lot"]!", power * 15) //robotic organs won't feel it anyway
 		take_external_damage(0, burn_damage, 0, used_weapon = "Hot metal")
 
+	if(owner && limb_flags & ORGAN_FLAG_CAN_GRASP)
+		owner.grasp_damage_disarm(src)
+
+	if(owner && limb_flags & ORGAN_FLAG_CAN_STAND)
+		owner.stance_damage_prone(src)
+
 /obj/item/organ/external/attack_self(var/mob/user)
 	if((owner && loc == owner) || !contents.len)
 		return ..()
@@ -196,16 +202,16 @@
 		return //no eating the limb until everything's been removed
 	return ..()
 
-/obj/item/organ/external/examine()
+/obj/item/organ/external/examine(mob/user, distance)
 	. = ..()
-	if(in_range(usr, src) || isghost(usr))
+	if(distance <= 1 || isghost(user))
 		for(var/obj/item/I in contents)
 			if(istype(I, /obj/item/organ))
 				continue
-			to_chat(usr, "<span class='danger'>There is \a [I] sticking out of it.</span>")
+			to_chat(user, "<span class='danger'>There is \a [I] sticking out of it.</span>")
 		var/ouchies = get_wounds_desc()
 		if(ouchies != "nothing")
-			to_chat(usr, "<span class='notice'>There is [ouchies] visible on it.</span>")
+			to_chat(user, "<span class='notice'>There is [ouchies] visible on it.</span>")
 
 	return
 
@@ -986,7 +992,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 		W.germ_level = 0
 	return rval
 
-/obj/item/organ/external/proc/clamp()
+/obj/item/organ/external/proc/clamp_organ()
 	var/rval = 0
 	src.status &= ~ORGAN_BLEEDING
 	for(var/datum/wound/W in wounds)
@@ -1332,188 +1338,12 @@ obj/item/organ/external/proc/remove_clamps()
 		var/obj/item/organ/internal/I = pick(internal_organs)
 		I.take_internal_damage(rand(3,5))
 
-/obj/item/organ/external/proc/get_wounds_desc()
-	if(BP_IS_ROBOTIC(src))
-		var/list/descriptors = list()
-		if(brute_dam)
-			switch(brute_dam)
-				if(0 to 20)
-					descriptors += "some dents"
-				if(21 to INFINITY)
-					descriptors += pick("a lot of dents","severe denting")
-		if(burn_dam)
-			switch(burn_dam)
-				if(0 to 20)
-					descriptors += "some burns"
-				if(21 to INFINITY)
-					descriptors += pick("a lot of burns","severe melting")
-		switch(hatch_state)
-			if(HATCH_UNSCREWED)
-				descriptors += "a closed but unsecured panel"
-			if(HATCH_OPENED)
-				descriptors += "an open panel"
-
-		return english_list(descriptors)
-
-	var/list/flavor_text = list()
-	if((status & ORGAN_CUT_AWAY) && !is_stump() && !(parent && parent.status & ORGAN_CUT_AWAY))
-		flavor_text += "a tear at the [amputation_point] so severe that it hangs by a scrap of flesh"
-
-	var/list/wound_descriptors = list()
-	for(var/datum/wound/W in wounds)
-		var/this_wound_desc = W.desc
-		if(W.damage_type == BURN && W.salved)
-			this_wound_desc = "salved [this_wound_desc]"
-
-		if(W.bleeding())
-			if(W.wound_damage() > W.bleed_threshold)
-				this_wound_desc = "<b>bleeding</b> [this_wound_desc]"
-			else
-				this_wound_desc = "bleeding [this_wound_desc]"
-		else if(W.bandaged)
-			this_wound_desc = "bandaged [this_wound_desc]"
-
-		if(W.germ_level > 600)
-			this_wound_desc = "badly infected [this_wound_desc]"
-		else if(W.germ_level > 330)
-			this_wound_desc = "lightly infected [this_wound_desc]"
-
-		if(wound_descriptors[this_wound_desc])
-			wound_descriptors[this_wound_desc] += W.amount
-		else
-			wound_descriptors[this_wound_desc] = W.amount
-
-	if(how_open() >= SURGERY_RETRACTED)
-		var/bone = encased ? encased : "bone"
-		if(status & ORGAN_BROKEN)
-			bone = "broken [bone]"
-		wound_descriptors["a [bone] exposed"] = 1
-
-		if(!encased || how_open() >= SURGERY_ENCASED)
-			var/list/bits = list()
-			for(var/obj/item/organ/internal/organ in internal_organs)
-				bits += organ.get_visible_state()
-			for(var/obj/item/weapon/implant in implants)
-				bits += implant.name
-			if(bits.len)
-				wound_descriptors["[english_list(bits)] visible in the wounds"] = 1
-
-	for(var/wound in wound_descriptors)
-		switch(wound_descriptors[wound])
-			if(1)
-				flavor_text += "a [wound]"
-			if(2)
-				flavor_text += "a pair of [wound]s"
-			if(3 to 5)
-				flavor_text += "several [wound]s"
-			if(6 to INFINITY)
-				flavor_text += "a ton of [wound]\s"
-
-	return english_list(flavor_text)
-
-/obj/item/organ/external/get_scan_results()
-	. = ..()
-	if(status & ORGAN_ARTERY_CUT)
-		. += "[capitalize(artery_name)] ruptured"
-	if(status & ORGAN_TENDON_CUT)
-		. += "Severed [tendon_name]"
-	if(dislocated == 2) // non-magical constants when
-		. += "Dislocated"
-	if(splinted)
-		. += "Splinted"
-	if(status & ORGAN_BLEEDING)
-		. += "Bleeding"
-	if(status & ORGAN_BROKEN)
-		. += capitalize(broken_description)
-	if (implants.len)
-		var/unknown_body = 0
-		for(var/I in implants)
-			var/obj/item/weapon/implant/imp = I
-			if(istype(I,/obj/item/weapon/implant))
-				if(imp.hidden)
-					continue
-				if (imp.known)
-					. += "[capitalize(imp.name)] implanted"
-					continue
-			unknown_body++
-		if(unknown_body)
-			. += "Unknown body present"
-	for(var/obj/item/organ/internal/augment/aug in internal_organs)
-		if(istype(aug) && aug.known)
-			. += "[capitalize(aug.name)] implanted"
-
-/obj/item/organ/external/proc/inspect(mob/user)
-	if(is_stump())
-		to_chat(user, "<span class='notice'>[owner] is missing that bodypart.</span>")
-		return
-
-	user.visible_message("<span class='notice'>[user] starts inspecting [owner]'s [name] carefully.</span>")
-	if(LAZYLEN(wounds))
-		to_chat(user, "<span class='warning'>You find [get_wounds_desc()]</span>")
-		var/list/stuff = list()
-		for(var/datum/wound/wound in wounds)
-			if(LAZYLEN(wound.embedded_objects))
-				stuff |= wound.embedded_objects
-		if(stuff.len)
-			to_chat(user, "<span class='warning'>There's [english_list(stuff)] sticking out of [owner]'s [name].</span>")
-	else
-		to_chat(user, "<span class='notice'>You find no visible wounds.</span>")
-
-	to_chat(user, "<span class='notice'>Checking skin now...</span>")
-	if(!do_mob(user, owner, 10))
-		to_chat(user, "<span class='notice'>You must stand still to check [owner]'s skin for abnormalities.</span>")
-		return
-
-	var/list/badness = list()
-	if(owner.shock_stage >= 30)
-		badness += "clammy and cool to the touch"
-	if(owner.getToxLoss() >= 25)
-		badness += "jaundiced"
-	if(owner.get_blood_oxygenation() <= 50)
-		badness += "turning blue"
-	if(owner.get_blood_circulation() <= 60)
-		badness += "very pale"
-	if(status & ORGAN_DEAD)
-		badness += "rotting"
-	if(!badness.len)
-		to_chat(user, "<span class='notice'>[owner]'s skin is normal.</span>")
-	else
-		to_chat(user, "<span class='warning'>[owner]'s skin is [english_list(badness)].</span>")
-
-	to_chat(user, "<span class='notice'>Checking bones now...</span>")
-	if(!do_mob(user, owner, 10))
-		to_chat(user, "<span class='notice'>You must stand still to feel [src] for fractures.</span>")
-		return
-
-	if(status & ORGAN_BROKEN)
-		to_chat(user, "<span class='warning'>The [encased ? encased : "bone in the [name]"] moves slightly when you poke it!</span>")
-		owner.custom_pain("Your [name] hurts where it's poked.",40, affecting = src)
-	else
-		to_chat(user, "<span class='notice'>The [encased ? encased : "bones in the [name]"] seem to be fine.</span>")
-
-	if(status & ORGAN_TENDON_CUT)
-		to_chat(user, "<span class='warning'>The tendons in [name] are severed!</span>")
-	if(dislocated == 2)
-		to_chat(user, "<span class='warning'>The [joint] is dislocated!</span>")
-	return 1
-
-/obj/item/organ/external/listen()
-	var/list/sounds = list()
-	for(var/obj/item/organ/internal/I in internal_organs)
-		var/gutsound = I.listen()
-		if(gutsound)
-			sounds += gutsound
-	if(!sounds.len)
-		if(owner.pulse())
-			sounds += "faint pulse"
-	return sounds
-
 /obj/item/organ/external/proc/jointlock(mob/attacker)
 	if(!can_feel_pain())
 		return
 
-	var/armor = 100 * owner.get_blocked_ratio(owner, BRUTE)
-	if(armor < 100)
+	var/armor = 100 * owner.get_blocked_ratio(owner, BRUTE, damage = 30)
+	if(armor < 70)
 		to_chat(owner, "<span class='danger'>You feel extreme pain!</span>")
 
 		var/max_halloss = round(owner.species.total_health * 0.8 * ((100 - armor) / 100)) //up to 80% of passing out, further reduced by armour
@@ -1535,7 +1365,7 @@ obj/item/organ/external/proc/remove_clamps()
 	return !BP_IS_ROBOTIC(src) && species && species.sexybits_location == organ_tag
 
 // Added to the mob's move delay tally if this organ is being used to move with.
-obj/item/organ/external/proc/movement_delay(max_delay)
+/obj/item/organ/external/proc/movement_delay(max_delay)
 	. = 0
 	if(is_stump())
 		. += max_delay

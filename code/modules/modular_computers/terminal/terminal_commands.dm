@@ -80,11 +80,12 @@ Subtypes
 	pattern = "^ifconfig$"
 
 /datum/terminal_command/ifconfig/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	if(!terminal.computer.network_card)
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = terminal.computer.get_component(PART_NETWORK)
+	if(!istype(network_card))
 		return "No network adaptor found."
-	if(!terminal.computer.network_card.check_functionality())
+	if(!network_card.check_functionality())
 		return "Network adaptor not activated."
-	return "Visible tag: [terminal.computer.network_card.get_network_tag()]. Real nid: [terminal.computer.network_card.identification_id]."
+	return "Visible tag: [network_card.get_network_tag()]. Real nid: [network_card.identification_id]."
 
 /datum/terminal_command/hwinfo
 	name = "hwinfo"
@@ -103,8 +104,9 @@ Subtypes
 	var/obj/item/weapon/stock_parts/computer/ch = terminal.computer.find_hardware_by_name(text)
 	if(!ch)
 		return "hwinfo: No such hardware found."
-	ch.diagnostics(user)
-	return "Running diagnostic protocols..."	
+	. = list("Running diagnostic protocols...")
+	. += ch.diagnostics()
+	return
 
 // Sysadmin
 /datum/terminal_command/relays
@@ -151,14 +153,14 @@ Subtypes
 	. = "Failed to find device with given nid. Try ping for diagnostics."
 	if(length(text) < 8)
 		return
-	var/obj/item/modular_computer/origin = terminal.computer
+	var/datum/extension/interactive/ntos/origin = terminal.computer
 	if(!origin || !origin.get_ntnet_status())
 		return
 	var/nid = text2num(copytext(text, 8))
-	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
-	if(!comp || !comp.enabled || !comp.get_ntnet_status())
+	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
+	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
 		return
-	return "... Estimating location: [get_area(comp)]"
+	return "... Estimating location: [get_area(comp.get_physical_host())]"
 
 /datum/terminal_command/ping
 	name = "ping"
@@ -171,13 +173,13 @@ Subtypes
 	if(length(text) < 6)
 		. += "ping: Improper syntax. Use ping nid."
 		return
-	var/obj/item/modular_computer/origin = terminal.computer
+	var/datum/extension/interactive/ntos/origin = terminal.computer
 	if(!origin || !origin.get_ntnet_status())
 		. += "failed. Check network status."
 		return
 	var/nid = text2num(copytext(text, 6))
-	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
-	if(!comp || !comp.enabled || !comp.get_ntnet_status())
+	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
+	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
 		. += "failed. Target device not responding."
 		return
 	. += "ping successful."
@@ -193,14 +195,14 @@ Subtypes
 		return "ssh is not supported on remote terminals."
 	if(length(text) < 5)
 		return "ssh: Improper syntax. Use ssh nid."
-	var/obj/item/modular_computer/origin = terminal.computer
+	var/datum/extension/interactive/ntos/origin = terminal.computer
 	if(!origin || !origin.get_ntnet_status())
 		return "ssh: Check network connectivity."
 	var/nid = text2num(copytext(text, 5))
-	var/obj/item/modular_computer/comp = ntnet_global.get_computer_by_nid(nid)
+	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(nid)
 	if(comp == origin)
 		return "ssh: Error; can not open remote terminal to self."
-	if(!comp || !comp.enabled || !comp.get_ntnet_status())
+	if(!comp || !comp.host_status() || !comp.get_ntnet_status())
 		return "ssh: No active device with this nid found."
 	if(comp.has_terminal(user))
 		return "ssh: A remote terminal to this device is already active."
@@ -223,19 +225,20 @@ Subtypes
 	req_access = list(access_network)
 
 /datum/terminal_command/proxy/proper_input_entered(text, mob/user, datum/terminal/terminal)
-	var/obj/item/modular_computer/comp = terminal.computer
-	if(!comp || !comp.network_card || !comp.network_card.check_functionality())
+	var/datum/extension/interactive/ntos/comp = terminal.computer
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp && comp.get_component(PART_NETWORK)
+	if(!comp || !network_card || !network_card.check_functionality())
 		return "proxy: Error; check networking hardware."
 	if(text == "proxy")
-		if(!comp.network_card.proxy_id)
+		if(!network_card.proxy_id)
 			return "proxy: This device is not using a proxy."
-		return "proxy: This device is set to connect via proxy with nid [comp.network_card.proxy_id]."
+		return "proxy: This device is set to connect via proxy with nid [network_card.proxy_id]."
 	if(text == "proxy -s")
-		if(!comp.network_card.proxy_id)
+		if(!network_card.proxy_id)
 			return "proxy: Error; this device is not using a proxy."
-		comp.network_card.proxy_id = null
+		network_card.proxy_id = null
 		return "proxy: Device proxy cleared."
-	if(!comp.network_card || !comp.network_card.check_functionality() || !comp.get_ntnet_status())
+	if(!network_card || !network_card.check_functionality() || !comp.get_ntnet_status())
 		return "proxy: Error; check networking hardware."
 	var/syntax_error = "proxy: Invalid input. Enter man proxy for syntax help."
 	if(length(text) < 10)
@@ -245,16 +248,14 @@ Subtypes
 	var/id = text2num(copytext(text, 10))
 	if(!id)
 		return syntax_error
-	var/obj/item/modular_computer/target = ntnet_global.get_computer_by_nid(id)
+	var/datum/extension/interactive/ntos/target = ntnet_global.get_os_by_nid(id)
 	if(target == comp) return "proxy: Cannot setup a device to be its own proxy"
-	if(!target || !target.enabled || !target.get_ntnet_status())
+	if(!target || !target.host_status() || !target.get_ntnet_status())
 		return "proxy: Error; cannot locate target device."
-	if(target.hard_drive)
-		var/datum/computer_file/data/logfile/file = target.hard_drive.find_file_by_name("proxy")
-		if(!istype(file))
-			file = new()
-			file.filename = "proxy"
-			target.hard_drive.store_file(file) // May fail, which is fine with us.
-		file.stored_data += "([time_stamp()]) Proxy routing request accepted from: [comp.network_card.get_network_tag()].\[br\]"
-	comp.network_card.proxy_id = id
+	var/datum/computer_file/data/logfile/file = target.get_file("proxy")
+	if(!istype(file))
+		file = target.create_file("proxy")
+	if(file)
+		file.stored_data += "([time_stamp()]) Proxy routing request accepted from: [comp.get_network_tag()].\[br\]"
+	network_card.proxy_id = id
 	return "proxy: Device proxy set to [id]."

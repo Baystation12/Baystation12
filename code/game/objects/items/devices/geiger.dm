@@ -39,8 +39,8 @@
 	update_icon()
 
 /obj/item/device/geiger/examine(mob/user)
-	. = ..(user)
-	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] Bq."
+	. = ..()
+	var/msg = "[scanning ? "ambient" : "stored"] Radiation level: [radiation_count ? radiation_count : "0"] Roentgen."
 	if(radiation_count > RAD_LEVEL_LOW)
 		to_chat(user, "<span class='warning'>[msg]</span>")
 	else
@@ -71,7 +71,7 @@
 			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_LOW + 0.01 to RAD_LEVEL_MODERATE)
 			icon_state = "geiger_on_2"
-			geiger_volume = 16
+			geiger_volume = 10
 			sound_token.SetVolume(geiger_volume)
 		if(RAD_LEVEL_MODERATE + 0.1 to RAD_LEVEL_HIGH)
 			icon_state = "geiger_on_3"

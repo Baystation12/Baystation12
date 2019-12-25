@@ -22,7 +22,7 @@
 
 /obj/item/projectile/blood_shard
 	name = "bloodshard"
-	force = 15
+	force = 25
 	icon_state = "blood"
 	damage_type = BRUTE
 	damage_flags = 0
@@ -37,4 +37,4 @@
 
 /obj/item/projectile/bullet/pellet/blood
 	name = "blood fragment"
-	force = 4
+	force = 10

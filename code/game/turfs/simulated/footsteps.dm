@@ -1,83 +1,28 @@
-GLOBAL_LIST_INIT(footstep_sounds, list(
-	FOOTSTEP_CATWALK = list(
-		'sound/effects/footstep/catwalk1.ogg',
-		'sound/effects/footstep/catwalk2.ogg',
-		'sound/effects/footstep/catwalk3.ogg',
-		'sound/effects/footstep/catwalk4.ogg',
-		'sound/effects/footstep/catwalk5.ogg'),
-	FOOTSTEP_WOOD = list(
-		'sound/effects/footstep/wood1.ogg',
-		'sound/effects/footstep/wood2.ogg',
-		'sound/effects/footstep/wood3.ogg',
-		'sound/effects/footstep/wood4.ogg',
-		'sound/effects/footstep/wood5.ogg'),
-	FOOTSTEP_TILES = list(
-		'sound/effects/footstep/floor1.ogg',
-		'sound/effects/footstep/floor2.ogg',
-		'sound/effects/footstep/floor3.ogg',
-		'sound/effects/footstep/floor4.ogg',
-		'sound/effects/footstep/floor5.ogg'),
-	FOOTSTEP_PLATING =  list(
-		'sound/effects/footstep/plating1.ogg',
-		'sound/effects/footstep/plating2.ogg',
-		'sound/effects/footstep/plating3.ogg',
-		'sound/effects/footstep/plating4.ogg',
-		'sound/effects/footstep/plating5.ogg'),
-	FOOTSTEP_CARPET = list(
-		'sound/effects/footstep/carpet1.ogg',
-		'sound/effects/footstep/carpet2.ogg',
-		'sound/effects/footstep/carpet3.ogg',
-		'sound/effects/footstep/carpet4.ogg',
-		'sound/effects/footstep/carpet5.ogg'),
-	FOOTSTEP_ASTEROID = list(
-		'sound/effects/footstep/asteroid1.ogg',
-		'sound/effects/footstep/asteroid2.ogg',
-		'sound/effects/footstep/asteroid3.ogg',
-		'sound/effects/footstep/asteroid4.ogg',
-		'sound/effects/footstep/asteroid5.ogg'),
-	FOOTSTEP_GRASS = list(
-		'sound/effects/footstep/grass1.ogg',
-		'sound/effects/footstep/grass2.ogg',
-		'sound/effects/footstep/grass3.ogg',
-		'sound/effects/footstep/grass4.ogg'),
-	FOOTSTEP_WATER = list(
-		'sound/effects/footstep/water1.ogg',
-		'sound/effects/footstep/water2.ogg',
-		'sound/effects/footstep/water3.ogg',
-		'sound/effects/footstep/water4.ogg'),
-	FOOTSTEP_LAVA = list(
-		'sound/effects/footstep/lava1.ogg',
-		'sound/effects/footstep/lava2.ogg',
-		'sound/effects/footstep/lava3.ogg'),
-	FOOTSTEP_BLANK = list(
-		'sound/effects/footstep/blank.ogg')
-))
-
 /proc/get_footstep(var/footstep_type, var/mob/caller)
 	. = caller && caller.get_footstep(footstep_type)
-	if(!. && GLOB.footstep_sounds[footstep_type])
-		. = pick(GLOB.footstep_sounds[footstep_type])
+	if(!.)
+		var/decl/footsteps/FS = decls_repository.get_decl(footstep_type)
+		. = pick(FS.footstep_sounds)
 
 /turf/simulated/proc/get_footstep_sound(var/mob/caller)
-
 	for(var/obj/structure/S in contents)
 		if(S.footstep_type)
 			return get_footstep(S.footstep_type, caller)
 
 	if(check_fluid_depth(10) && !is_flooded(TRUE))
-		return get_footstep(FOOTSTEP_WATER, caller)
-
-	if(is_plating())
-		return get_footstep(FOOTSTEP_PLATING, caller)
+		return get_footstep(/decl/footsteps/water, caller)
 
 	if(footstep_type)
 		return get_footstep(footstep_type, caller)
+
+	if(is_plating())
+		return get_footstep(/decl/footsteps/plating, caller)
 
 /turf/simulated/floor/get_footstep_sound(var/mob/caller)
 	. = ..()
 	if(!.)
 		if(!flooring || !flooring.footstep_type)
-			return get_footstep(FOOTSTEP_BLANK, caller)
+			return get_footstep(/decl/footsteps/blank, caller)
 		else
 			return get_footstep(flooring.footstep_type, caller)
 
@@ -100,7 +45,6 @@ GLOBAL_LIST_INIT(footstep_sounds, list(
 	return TRUE
 
 /mob/living/carbon/human/proc/handle_footsteps()
-
 	if(!has_footsteps())
 		return
 

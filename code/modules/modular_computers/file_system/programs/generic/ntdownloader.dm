@@ -24,7 +24,7 @@
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
 
-/datum/computer_file/program/ntnetdownload/kill_program()
+/datum/computer_file/program/ntnetdownload/on_shutdown()
 	..()
 	downloaded_file = null
 	download_completion = 0
@@ -56,10 +56,10 @@
 		return 0
 
 	// Attempting to download antag only program, but without having emagged computer. No.
-	if(PRG.available_on_syndinet && !computer_emagged)
+	if(PRG.available_on_syndinet && !computer.emagged())
 		return 0
 
-	if(!computer || !computer.hard_drive || !computer.hard_drive.try_store_file(PRG))
+	if(!computer || !computer.try_store_file(PRG))
 		return 0
 
 	return 1
@@ -87,7 +87,7 @@
 	if(!downloaded_file)
 		return
 	generate_network_log("Completed download of file [file_info].")
-	if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(downloaded_file))
+	if(!computer || !computer.store_file(downloaded_file))
 		// The download failed
 		downloaderror = "I/O ERROR - Unable to save file. Check whether you have enough free space on your hard drive and whether your hard drive is properly connected. If the issue persists contact your system administrator for assistance."
 	downloaded_file = null
@@ -106,7 +106,7 @@
 	// Download speed according to connectivity state. NTNet server is assumed to be on unlimited speed so we're limited by our local connectivity
 	download_netspeed = 0
 	// Speed defines are found in misc.dm
-	switch(ntnet_status)
+	switch(computer.get_ntnet_status(NTNET_SOFTWAREDOWNLOAD))
 		if(1)
 			download_netspeed = NTNETSPEED_LOWSIGNAL
 		if(2)
@@ -138,15 +138,8 @@
 
 /datum/nano_module/program/computer_ntnetdownload
 	name = "Network Downloader"
-	var/obj/item/modular_computer/my_computer = null
 
 /datum/nano_module/program/computer_ntnetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	if(program)
-		my_computer = program.computer
-
-	if(!istype(my_computer))
-		return
-
 	var/list/data = list()
 	var/datum/computer_file/program/ntnetdownload/prog = program
 	// For now limited to execution by the downloader program
@@ -165,8 +158,8 @@
 		data["downloadspeed"] = prog.download_netspeed
 		data["downloadcompletion"] = round(prog.download_completion, 0.1)
 
-	data["disk_size"] = my_computer.hard_drive.max_capacity
-	data["disk_used"] = my_computer.hard_drive.used_capacity
+	data["disk_size"] = program.computer.max_disk_capacity()
+	data["disk_used"] = program.computer.used_disk_capacity()
 	var/list/all_entries[0]
 	for(var/category in ntnet_global.available_software_by_category)
 		var/list/category_list[0]
@@ -174,7 +167,7 @@
 			// Only those programs our user can run will show in the list
 			if(!P.can_run(user) && P.requires_access_to_download)
 				continue
-			if(!P.is_supported_by_hardware(my_computer.hardware_flag, 1, user))
+			if(!P.is_supported_by_hardware(program.computer.get_hardware_flag(), user, TRUE))
 				continue
 			category_list.Add(list(list(
 			"filename" = P.filename,
@@ -187,7 +180,7 @@
 			all_entries.Add(list(list("category"=category, "programs"=category_list)))
 
 	data["hackedavailable"] = 0
-	if(prog.computer_emagged) // If we are running on emagged computer we have access to some "bonus" software
+	if(prog.computer.emagged()) // If we are running on emagged computer we have access to some "bonus" software
 		var/list/hacked_programs[0]
 		for(var/datum/computer_file/program/P in ntnet_global.available_antag_software)
 			data["hackedavailable"] = 1

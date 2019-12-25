@@ -41,3 +41,7 @@
 		if(!isnull(signal.data[thing]))
 			var/decl/public_access/public_method/method = receive_and_call[thing]
 			method.perform(machine)
+
+/obj/item/weapon/stock_parts/radio/receiver/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+	matter = list(MATERIAL_STEEL = 400)

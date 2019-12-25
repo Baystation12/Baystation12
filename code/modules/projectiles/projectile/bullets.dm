@@ -14,6 +14,7 @@
 	miss_sounds = list('sound/weapons/guns/miss1.ogg','sound/weapons/guns/miss2.ogg','sound/weapons/guns/miss3.ogg','sound/weapons/guns/miss4.ogg')
 	ricochet_sounds = list('sound/weapons/guns/ricochet1.ogg', 'sound/weapons/guns/ricochet2.ogg',
 							'sound/weapons/guns/ricochet3.ogg', 'sound/weapons/guns/ricochet4.ogg')
+	impact_sounds = list(BULLET_IMPACT_MEAT = SOUNDS_BULLET_MEAT, BULLET_IMPACT_METAL = SOUNDS_BULLET_METAL)
 
 /obj/item/projectile/bullet/on_hit(var/atom/target, var/blocked = 0)
 	if (..(target, blocked))
@@ -60,7 +61,7 @@
 //For projectiles that actually represent clouds of projectiles
 /obj/item/projectile/bullet/pellet
 	name = "shrapnel" //'shrapnel' sounds more dangerous (i.e. cooler) than 'pellet'
-	force = 22.5
+	force = 37.5
 	//icon_state = "bullet" //TODO: would be nice to have it's own icon state
 	var/pellets = 4			//number of pellets
 	var/range_step = 2		//projectile will lose a fragment each time it travels this distance. Can be a non-integer.
@@ -121,20 +122,20 @@
 
 /obj/item/projectile/bullet/pistol
 	fire_sound = 'sound/weapons/gunshot/gunshot_pistol.ogg'
-	force = 30
+	force = 45
 	distance_falloff = 3
 
 /obj/item/projectile/bullet/pistol/holdout
-	force = 25
+	force = 40
 	penetration_modifier = 1.2
 	distance_falloff = 4
 
 /obj/item/projectile/bullet/pistol/strong
 	fire_sound = 'sound/weapons/gunshot/gunshot_strong.ogg'
 	force = 50
-	armor_penetration = 20
 	penetration_modifier = 0.8
 	distance_falloff = 2.5
+	armor_penetration = 15
 
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
@@ -143,10 +144,13 @@
 	agony = 30
 	embed = 0
 
+/obj/item/projectile/bullet/pistol/rubber/holdout
+	agony = 20
+
 //4mm. Tiny, very low damage, does not embed, but has very high penetration. Only to be used for the experimental SMG.
 /obj/item/projectile/bullet/flechette
 	fire_sound = 'sound/weapons/gunshot/gunshot_4mm.ogg'
-	force = 8
+	force = 23
 	penetrating = 1
 	armor_penetration = 70
 	embed = 0
@@ -157,8 +161,8 @@
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	force = 55
-	armor_penetration = 20
+	force = 65
+	armor_penetration = 10
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
@@ -174,7 +178,7 @@
 /obj/item/projectile/bullet/pellet/shotgun
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	force = 15
+	force = 30
 	pellets = 6
 	range_step = 1
 	spread_step = 10
@@ -183,7 +187,7 @@
 
 /obj/item/projectile/bullet/rifle
 	fire_sound = 'sound/weapons/gunshot/gunshot3.ogg'
-	force = 30
+	force = 45
 	armor_penetration = 25
 	penetration_modifier = 1.5
 	penetrating = 1
@@ -191,8 +195,8 @@
 
 /obj/item/projectile/bullet/rifle/military
 	fire_sound = 'sound/weapons/gunshot/gunshot2.ogg'
-	force = 25
-	armor_penetration = 40
+	force = 40
+	armor_penetration = 35
 	penetration_modifier = 1
 
 /obj/item/projectile/bullet/rifle/shell
@@ -200,16 +204,15 @@
 	force = 80
 	stun = 3
 	weaken = 3
-	penetrating = 5
-	armor_penetration = 80
-	hitscan = 1 //so the PTR isn't useless as a sniper weapon
-	penetration_modifier = 1.25
+	penetrating = 3
+	armor_penetration = 70
+	penetration_modifier = 1.2
 	distance_falloff = 0.5
 
 /obj/item/projectile/bullet/rifle/shell/apds
-	force = 75
-	penetrating = 6
-	armor_penetration = 95
+	force = 70
+	penetrating = 5
+	armor_penetration = 80
 	penetration_modifier = 1.5
 
 /* Miscellaneous */

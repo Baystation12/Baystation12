@@ -83,7 +83,7 @@
 
 /obj/item/weapon/folder/envelope/captain/LateInitialize()
 	..()
-	var/obj/effect/overmap/torch = map_sectors["[z]"]
+	var/obj/effect/overmap/visitable/torch = map_sectors["[z]"]
 	var/memo = {"
 	<tt><center><b><font color='red'>SECRET - CODE WORDS: TORCH</font></b>
 	<h3>SOL CENTRAL GOVERNMENT EXPEDITIONARY COMMAND</h3>

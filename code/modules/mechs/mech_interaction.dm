@@ -33,6 +33,24 @@
 	if(selected_system)
 		return selected_system.MouseDragInteraction(src_object, over_object, src_location, over_location, src_control, over_control, params, user)
 
+/datum/click_handler/default/mech/OnClick(var/atom/A, var/params)
+	var/mob/living/exosuit/E = user.loc
+	if(!istype(E))
+		//If this happens something broke tbh
+		user.RemoveClickHandler(src)
+		return
+	if(E.hatch_closed)
+		return E.ClickOn(A, params, user)
+	else return ..()
+
+/datum/click_handler/default/mech/OnDblClick(var/atom/A, var/params)
+	OnClick(A, params)
+
+/mob/living/exosuit/allow_click_through(atom/A, params, mob/user)
+	if(LAZYISIN(pilots, user) && !hatch_closed)
+		return TRUE
+	. = ..()
+	
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
 	if(!user || incapacitated() || user.incapacitated())
@@ -43,7 +61,7 @@
 
 	var/modifiers = params2list(params)
 	if(modifiers["shift"])
-		A.examine(user)
+		user.examinate(A)
 		return
 
 	if(!(user in pilots) && user != src)
@@ -142,7 +160,7 @@
 			var/extra_delay = 0
 			if(ME != null)
 				ME = selected_system
-				extra_delay = ME.equipment_delay	
+				extra_delay = ME.equipment_delay
 			setClickCooldown(arms ? arms.action_delay + extra_delay : 15 + extra_delay)
 			if(system_moved)
 				temp_system.forceMove(selected_system)
@@ -211,6 +229,7 @@
 	if(user.client) user.client.screen |= hud_elements
 	LAZYDISTINCTADD(user.additional_vision_handlers, src)
 	update_pilots()
+	user.PushClickHandler(/datum/click_handler/default/mech)
 	return 1
 
 /mob/living/exosuit/proc/sync_access()
@@ -235,7 +254,8 @@
 		if(!silent)
 			to_chat(user, SPAN_NOTICE("You climb out of \the [src]."))
 
-	user.forceMove(get_turf(src))
+	user.RemoveClickHandler(/datum/click_handler/default/mech)
+	user.dropInto(loc)
 	LAZYREMOVE(user.additional_vision_handlers, src)
 	if(user.client)
 		user.client.screen -= hud_elements
@@ -332,6 +352,38 @@
 				var/obj/item/mech_component/to_fix = input(user,"Which component would you like to fix") as null|anything in damaged_parts
 				if(CanPhysicallyInteract(user) && !QDELETED(to_fix) && (to_fix in src) && to_fix.burn_damage)
 					to_fix.repair_burn_generic(thing, user)
+				return
+			else if(isCrowbar(thing))
+				if(!maintenance_protocols)
+					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
+					return
+				if(!body || !body.cell)
+					to_chat(user, SPAN_WARNING("There is no cell here for you to remove!"))
+					return
+				var/delay = 20 * user.skill_delay_mult(SKILL_DEVICES)
+				if(!do_after(user, delay) || !maintenance_protocols || !body || !body.cell)
+					return
+
+				user.put_in_hands(body.cell)
+				to_chat(user, SPAN_NOTICE("You remove \the [body.cell] from \the [src]."))
+				playsound(user.loc, 'sound/items/Crowbar.ogg', 50, 1)
+				visible_message(SPAN_NOTICE("\The [user] pries out \the [body.cell] using the \the [thing]."))
+				body.cell = null
+				return
+			else if(istype(thing, /obj/item/weapon/cell))
+				if(!maintenance_protocols)
+					to_chat(user, SPAN_WARNING("The cell compartment remains locked while maintenance protocols are disabled."))
+					return
+				if(!body || body.cell)
+					to_chat(user, SPAN_WARNING("There is already a cell in there!"))
+					return
+				
+				if(user.unEquip(thing))
+					thing.forceMove(body)
+					body.cell = thing
+					to_chat(user, SPAN_NOTICE("You install \the [body.cell] into \the [src]."))
+					playsound(user.loc, 'sound/items/Screwdriver.ogg', 50, 1)
+					visible_message(SPAN_NOTICE("\The [user] installs \the [body.cell] into \the [src]."))
 				return
 	return ..()
 

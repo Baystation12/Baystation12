@@ -45,8 +45,9 @@
 		usr << browse(null, "window=stack")
 	return ..()
 
-/obj/item/stack/examine(mob/user)
-	if(..(user, 1))
+/obj/item/stack/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		if(!uses_charge)
 			to_chat(user, "There [src.amount == 1 ? "is" : "are"] [src.amount] [src.singular_name]\s in the stack.")
 		else
@@ -75,12 +76,10 @@
 		if (istype(E, /datum/stack_recipe_list))
 			t1+="<br>"
 			var/datum/stack_recipe_list/srl = E
-			t1 += "<a href='?src=\ref[src];sublist=[i]'>[srl.title]</a>"
+			t1 += "\[Sub-menu] <a href='?src=\ref[src];sublist=[i]'>[srl.title]</a>"
 
 		if (istype(E, /datum/stack_recipe))
 			var/datum/stack_recipe/R = E
-			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
-				continue
 			t1+="<br>"
 			var/max_multiplier = round(src.get_amount() / R.req_amount)
 			var/title
@@ -91,11 +90,14 @@
 			else
 				title+= "[R.display_name()]"
 			title+= " ([R.req_amount] [src.singular_name]\s)"
+			var/skill_label = ""
+			if(!user.skill_check(SKILL_CONSTRUCTION, R.difficulty))
+				var/decl/hierarchy/skill/S = decls_repository.get_decl(SKILL_CONSTRUCTION)
+				skill_label = "<font color='red'>\[[S.levels[R.difficulty]]]</font>"
 			if (can_build)
-				t1 += text("<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>  ")
+				t1 +="[skill_label]<A href='?src=\ref[src];sublist=[recipes_sublist];make=[i];multiplier=1'>[title]</A>"
 			else
-				t1 += text("[]", title)
-				continue
+				t1 += "[skill_label][title]"
 			if (R.max_res_amount>1 && max_multiplier>1)
 				max_multiplier = min(max_multiplier, round(R.max_res_amount/R.res_amount))
 				t1 += " |"
@@ -113,8 +115,6 @@
 /obj/item/stack/proc/produce_recipe(datum/stack_recipe/recipe, var/quantity, mob/user)
 	var/required = quantity*recipe.req_amount
 	var/produced = min(quantity*recipe.res_amount, recipe.max_res_amount)
-	if(!user.skill_check(SKILL_CONSTRUCTION, recipe.difficulty))
-		return
 
 	if (!can_use(required))
 		if (produced>1)
@@ -132,6 +132,9 @@
 			return
 
 	if (use(required))
+		if(user.skill_fail_prob(SKILL_CONSTRUCTION, 90, recipe.difficulty))
+			to_chat(user, "<span class='warning'>You waste some [name] and fail to build \the [recipe.display_name()]!</span>")
+			return
 		var/atom/O = recipe.spawn_result(user, user.loc, produced)
 		O.add_fingerprint(user)
 

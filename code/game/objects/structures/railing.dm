@@ -23,6 +23,13 @@
 	. = ..()
 	color = COLOR_GUNMETAL // They're not painted!
 
+/obj/structure/railing/mapped/no_density
+	density = 0
+
+/obj/structure/railing/mapped/no_density/Initialize()
+	. = ..()
+	update_icon()
+
 /obj/structure/railing/New(var/newloc, var/material_key = DEFAULT_FURNITURE_MATERIAL)
 	material = material_key // Converted to datum in initialize().
 	..(newloc)
@@ -198,7 +205,7 @@
 				if(user.a_intent == I_HURT)
 					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
 					playsound(loc, 'sound/effects/grillehit.ogg', 50, 1)
-					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE)
+					var/blocked = G.affecting.get_blocked_ratio(BP_HEAD, BRUTE, damage = 8)
 					if (prob(30 * (1 - blocked)))
 						G.affecting.Weaken(5)
 					G.affecting.apply_damage(8, BRUTE, BP_HEAD)

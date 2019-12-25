@@ -530,6 +530,11 @@
 /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate,
 /obj/item/weapon/reagent_containers/glass/bottle/chloralhydrate,
 /obj/structure/table/rack,
+/obj/item/weapon/gun/projectile/dartgun/vox/raider,
+/obj/item/ammo_magazine/chemdart,
+/obj/item/ammo_magazine/chemdart,
+/obj/item/ammo_magazine/chemdart,
+/obj/item/ammo_magazine/chemdart,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "bB" = (
@@ -909,10 +914,9 @@
 /turf/simulated/floor/reinforced/nitrogen,
 /area/voxship/base)
 "cv" = (
-/obj/item/clothing/suit/armor/vox_scrap,
-/obj/item/clothing/suit/armor/vox_scrap,
-/obj/item/clothing/suit/armor/vox_scrap,
 /obj/structure/table/rack,
+/obj/item/weapon/rig/vox,
+/obj/item/weapon/rig/vox,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "cw" = (
@@ -1354,6 +1358,8 @@
 /obj/item/clothing/suit/armor/vox_scrap,
 /obj/item/clothing/suit/armor/vox_scrap,
 /obj/structure/table/rack,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/suit/armor/vox_scrap,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "dK" = (
@@ -1361,12 +1367,10 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "dL" = (
-/obj/item/weapon/gun/projectile/dartgun/vox/raider,
-/obj/item/ammo_magazine/chemdart,
-/obj/item/ammo_magazine/chemdart,
-/obj/item/ammo_magazine/chemdart,
 /obj/structure/table/rack,
 /obj/item/weapon/gun/launcher/alien/spikethrower,
+/obj/item/weapon/gun/energy/sonic,
+/obj/item/weapon/gun/energy/darkmatter,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "dM" = (
@@ -1840,11 +1844,11 @@
 	},
 /area/voxship/base)
 "eY" = (
-/obj/effect/overmap/sector/vox_base,
+/obj/effect/overmap/visitable/sector/vox_base,
 /turf/space,
 /area/space)
 "eZ" = (
-/obj/effect/overmap/ship/landable/vox,
+/obj/effect/overmap/visitable/ship/landable/vox,
 /turf/space,
 /area/space)
 "fa" = (

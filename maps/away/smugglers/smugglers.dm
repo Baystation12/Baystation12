@@ -1,7 +1,7 @@
 #include "smugglers_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/sector/smugglers
+/obj/effect/overmap/visitable/sector/smugglers
 	name = "asteroid station"
 	desc = "A small station built into an asteroid. No radio traffic detected."
 	icon_state = "object"

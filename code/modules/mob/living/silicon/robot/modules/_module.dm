@@ -177,7 +177,8 @@
 
 	// Then add back all the original languages, and the relevant synthezising ability
 	for(var/original_language in original_languages)
-		R.add_language(original_language, original_languages[original_language])
+		var/datum/language/language_datum = original_language
+		R.add_language(language_datum.name, original_languages[original_language])
 	original_languages.Cut()
 
 /obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
@@ -213,7 +214,10 @@
 
 /obj/item/weapon/robot_module/proc/grant_skills(var/mob/living/silicon/robot/R)
 	reset_skills(R) // for safety
-	R.buff_skill(skills, buff_type = /datum/skill_buff/robot)
+	var/list/skill_mod = list()
+	for(var/skill_type in skills)
+		skill_mod[skill_type] = skills[skill_type] - SKILL_MIN // the buff is additive, so normalize accordingly
+	R.buff_skill(skill_mod, buff_type = /datum/skill_buff/robot)
 
 /obj/item/weapon/robot_module/proc/reset_skills(var/mob/living/silicon/robot/R)
 	for(var/datum/skill_buff/buff in R.fetch_buffs_of_type(/datum/skill_buff/robot))

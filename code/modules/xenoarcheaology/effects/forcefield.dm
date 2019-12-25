@@ -3,10 +3,6 @@
 	var/list/created_field = list()
 	effect_type = EFFECT_PARTICLE
 
-/datum/artifact_effect/forcefield/New()
-	..()
-	trigger = TRIGGER_TOUCH
-
 /datum/artifact_effect/forcefield/Destroy()
 	for(var/obj/effect/energy_field/F in created_field)
 		created_field.Remove(F)

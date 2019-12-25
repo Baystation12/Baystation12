@@ -49,7 +49,7 @@
 	if(!CanInteract(usr, GLOB.conscious_state))
 		return
 
-	for(var/obj/effect/overmap/sector/exoplanet/E)
+	for(var/obj/effect/overmap/visitable/sector/exoplanet/E)
 		if(src in E.animals)
 			var/newname = input("What do you want to name this species?", "Species naming", E.get_random_species_name()) as text|null
 			newname = sanitizeName(newname, allow_numbers = TRUE, force_first_letter_uppercase = FALSE)
@@ -79,7 +79,9 @@
 	speak = list("Hruuugh!","Hrunnph")
 	emote_see = list("paws the ground","shakes its mane","stomps")
 	emote_hear = list("snuffles")
-	natural_armor = list(melee = 20)
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 /mob/living/simple_animal/hostile/retaliate/beast/samak/alt
 	desc = "A fast, armoured predator accustomed to hiding and ambushing."
@@ -160,7 +162,7 @@
 	emote_hear = list("scratches the ground","chitters")
 	mob_size = MOB_MINISCULE
 
-mob/living/simple_animal/hostile/retaliate/royalcrab
+/mob/living/simple_animal/hostile/retaliate/royalcrab
 	name = "cragenoy"
 	desc = "It looks like a crustacean with an exceedingly hard carapace. Watch the pinchers!"
 	faction = "crab"
@@ -175,110 +177,50 @@ mob/living/simple_animal/hostile/retaliate/royalcrab
 	attacktext = "pinched"
 	speak_chance = 1
 	emote_see = list("skitters","oozes liquid from its mouth", "scratches at the ground", "clicks its claws")
-	natural_armor = list(melee = 20)
+	natural_armor = list(
+		melee = ARMOR_MELEE_RESISTANT
+		)
 
-/mob/living/simple_animal/hostile/retaliate/jelly
-	name = "zeq"
-	desc = "It looks like a floating jellyfish. How does it do that?"
-	faction = "zeq"
-	icon_state = "jelly"
-	icon_living = "jelly"
-	icon_dead = "jelly_dead"
-	move_to_delay = 1
-	maxHealth = 75
-	speed = 1
-	melee_damage_lower = 3
-	melee_damage_upper = 12
-	attacktext = "stung"
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby
+	name = "charbaby"
+	desc = "A huge grubby creature."
+	icon_state = "char"
+	icon_living = "char"
+	icon_dead = "char_dead"
+	mob_size = MOB_LARGE
 	damage_type = BURN
-	speak_chance = 1
-	emote_see = list("wobbles slightly","oozes something out of tentacles' ends")
-	var/gets_random_color = TRUE
+	maxHealth = 45
+	melee_damage_lower = 2
+	melee_damage_upper = 3
+	speed = 2
+	response_help =  "pats briefly"
+	response_disarm = "gently pushes"
+	response_harm = "strikes"
+	attacktext = "singed"
+	return_damage_min = 2
+	return_damage_max = 3
+	harm_intent_damage = 1
+	blood_color = COLOR_NT_RED
+	natural_armor = list(
+		laser = ARMOR_LASER_HANDGUNS
+		)
 
-/mob/living/simple_animal/hostile/retaliate/jelly/New()
-	..()
-	if(gets_random_color)
-		color = color_rotation(round(rand(0,360),20))
-
-/mob/living/simple_animal/hostile/retaliate/jelly/alt
-	icon_state = "jelly-alt"
-	icon_living = "jelly-alt"
-	icon_dead = "jelly-alt_dead"
-
-//megajellyfish
-/mob/living/simple_animal/hostile/retaliate/jelly/mega
-	name = "zeq queen"
-	desc = "A gigantic jellyfish-like creature. Its bell wobbles about almost as if it's ready to burst."
-	maxHealth = 300
-	melee_damage_lower = 18
-	melee_damage_upper = 30
-	gets_random_color = FALSE
-	can_escape = TRUE
-
-	var/jelly_scale = 3
-	var/split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/half
-	var/static/megajelly_color
-
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/Initialize()
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby/attack_hand(mob/living/carbon/human/H)
 	. = ..()
-	var/matrix/M = new
-	M.Scale(jelly_scale)
-	transform = M
-	if(!megajelly_color)
-		megajelly_color = color_rotation(round(rand(0,360),20))
-	color = megajelly_color
+	reflect_unarmed_damage(H, BURN, "amorphous mass")
 
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/death()
-	if(split_type)
-		jelly_split()
-	else
-		..()
+/mob/living/simple_animal/hostile/retaliate/beast/charbaby/AttackingTarget()
+	. = ..()
+	if(isliving(target_mob) && prob(25))
+		var/mob/living/L = target_mob
+		if(prob(10))
+			L.adjust_fire_stacks(1)
+			L.IgniteMob()
 
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/proc/jelly_split()
-	visible_message(SPAN_MFAUNA("\The [src] rumbles briefly before splitting into two!"))
-	var/kidnum = 2
-	for(var/i = 0 to kidnum)
-		var/mob/living/simple_animal/child = new split_type(get_turf(src))
-		child.min_gas = min_gas.Copy()
-		child.max_gas = max_gas.Copy()
-		child.minbodytemp = minbodytemp
-		child.maxbodytemp = maxbodytemp
-	QDEL_NULL(src)
-
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/half
-	name = "zeq duchess"
-	desc = "A huge jellyfish-like creature."
-	maxHealth = 150
-	melee_damage_lower = 9
-	melee_damage_upper = 15
-	can_escape = TRUE
-	jelly_scale = 1.5
-	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/quarter
-
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/quarter
-	name = "zeqling"
-	desc = "A jellyfish-like creature."
-	maxHealth = 75
-	melee_damage_lower = 4.5
-	melee_damage_upper = 7.5
-	jelly_scale = 0.75
-	can_escape = FALSE
-	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/fourth
-
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/fourth
-	name = "zeqetta"
-	desc = "A tiny jellyfish-like creature."
-	maxHealth = 40
-	melee_damage_lower = 3
-	melee_damage_upper = 4
-	jelly_scale = 0.375
-	split_type = /mob/living/simple_animal/hostile/retaliate/jelly/mega/eighth
-
-/mob/living/simple_animal/hostile/retaliate/jelly/mega/eighth
-	name = "zeqttina"
-	desc = "An absolutely tiny jellyfish-like creature."
-	maxHealth = 20
-	melee_damage_lower = 1.5
-	melee_damage_upper = 2
-	jelly_scale = 0.1875
-	split_type = null
+/mob/living/simple_animal/hostile/retaliate/beast/shantak/lava
+	desc = "A vaguely canine looking beast. It looks as though its fur is made of stone wool."
+	icon_state = "lavadog"
+	icon_living = "lavadog"
+	icon_dead = "lavadog_dead"
+	attacktext = "bit"
+	speak = list("Karuph","Karump")

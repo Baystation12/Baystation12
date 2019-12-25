@@ -5,7 +5,8 @@
 	icon = 'icons/obj/knife.dmi'
 	icon_state = "knife"
 	item_state = "knife"
-	force_divisor = 0.15 // 9 when wielded with hardness 60 (steel)
+	max_force = 15
+	force_divisor = 0.3
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	matter = list(MATERIAL_STEEL = 12000)
 	origin_tech = list(TECH_MATERIAL = 1)
@@ -33,6 +34,7 @@
 	desc = "A simple table knife, used to cut up individual portions of food."
 	icon_state = "table"
 	default_material = MATERIAL_ALUMINIUM
+	max_force = 7
 	force_divisor = 0.1
 	sharp = FALSE
 	attack_verb = list("prodded")
@@ -61,6 +63,7 @@
 	name = "butcher's cleaver"
 	desc = "A heavy blade used to process food, especially animal carcasses."
 	icon_state = "butch"
+	armor_penetration = 5
 	force_divisor = 0.18
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -76,6 +79,7 @@
 	desc = "A blade with a saw-like pattern on the reverse edge and a heavy handle."
 	icon_state = "tacknife"
 	force_divisor = 0.2
+	w_class = ITEM_SIZE_SMALL
 
 //random stuff
 /obj/item/weapon/material/knife/hook

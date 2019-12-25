@@ -9,7 +9,7 @@
 
 /obj/machinery/disperser/examine(mob/user)
 	. = ..()
-	if(. && panel_open)
+	if(panel_open)
 		to_chat(user, "The maintenance panel is open.")
 
 /obj/machinery/disperser/attackby(obj/item/I, mob/user)

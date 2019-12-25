@@ -14,7 +14,7 @@
 		return
 
 	set_species(new_species)
-	var/datum/antagonist/antag = player_is_antag(src)
+	var/datum/antagonist/antag = mind && player_is_antag(mind)
 	if (antag && antag.required_language)
 		add_language(antag.required_language)
 		set_default_language(all_languages[antag.required_language])

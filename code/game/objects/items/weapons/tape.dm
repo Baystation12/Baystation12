@@ -32,7 +32,7 @@
 
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!</span>")
-			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/blindfold/tape(H), slot_glasses)
+			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses)
 
 		else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
 			if(!H.organs_by_name[BP_HEAD])
@@ -101,8 +101,8 @@
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
-/obj/item/weapon/ducttape/examine(mob/user)
-	return stuck ? stuck.examine(user) : ..()
+/obj/item/weapon/ducttape/examine()
+	return stuck ? stuck.examine(arglist(args)) : ..()
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
 	stuck = W
@@ -140,6 +140,8 @@
 		return
 	playsound(src, 'sound/effects/tape.ogg',25)
 
+	layer = ABOVE_WINDOW_LAYER
+	
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])

@@ -85,8 +85,14 @@
 	if(stat & BROKEN)
 		overlays += image(icon,"[icon_state]_broken", overlay_layer)
 	else
-		overlays += image(icon,icon_screen, overlay_layer)
+		overlays += get_screen_overlay()
 
+	overlays += get_keyboard_overlay()
+
+/obj/machinery/computer/proc/get_screen_overlay()
+	return image(icon,icon_screen, overlay_layer)
+
+/obj/machinery/computer/proc/get_keyboard_overlay()
 	if(icon_keyboard)
 		overlays += image(icon, icon_keyboard, overlay_layer)
 

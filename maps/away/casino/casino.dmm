@@ -167,7 +167,7 @@
 /turf/space,
 /area/space)
 "ax" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -177,7 +177,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aA" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8;
 	name = "Gambling console"
 	},
@@ -257,7 +257,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_bridge)
 "aM" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8;
 	name = "Security console"
 	},
@@ -989,7 +989,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "cC" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8;
 	name = "Gambling console"
 	},
@@ -1098,7 +1098,7 @@
 	dir = 4;
 	icon_state = "tube1"
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	name = "Cameras console";
 	icon_state = "console";
 	dir = 8
@@ -1218,7 +1218,7 @@
 /turf/simulated/floor/tiled,
 /area/casino/casino_security)
 "dm" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8;
 	name = "Security console"
 	},
@@ -1483,7 +1483,7 @@
 /turf/simulated/floor/shuttle/yellow,
 /area/casino/casino_cutter)
 "eb" = (
-/obj/effect/overmap/ship/casino,
+/obj/effect/overmap/visitable/ship/casino,
 /turf/space,
 /area/space)
 "ec" = (
@@ -4848,7 +4848,7 @@
 /turf/space,
 /area/space)
 "mG" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -5625,7 +5625,7 @@
 /turf/simulated/floor/carpet,
 /area/casino/casino_mainfloor)
 "Kb" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	name = "Cameras console";
 	icon_state = "console";
 	dir = 8

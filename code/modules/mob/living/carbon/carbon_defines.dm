@@ -1,8 +1,6 @@
 /mob/living/carbon/
 	gender = MALE
 	var/datum/species/species //Contains icon generation and language information, set during New().
-	var/list/datum/disease2/disease/virus2 = list()
-	var/list/antibodies = list()
 
 	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
 	var/obj/item/handcuffed = null //Whether or not the mob is handcuffed

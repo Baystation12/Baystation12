@@ -44,6 +44,7 @@
 	playsound(start, 'sound/machines/disperser_fire.ogg', 100, 1)
 	handle_beam(start, direction)
 	handle_overbeam()
+	qdel(atomcharge)
 
 	//Some moron disregarded the cooldown warning. Let's blow in their face.
 	if(prob(cool_failchance()))
@@ -58,25 +59,24 @@
 
 	var/list/candidates = list()
 
-	for(var/obj/effect/overmap_event/O in get_step(linked, overmapdir))
+	for(var/obj/effect/overmap/event/O in get_step(linked, overmapdir))
 		candidates += O
 
 	//Way to waste a charge
 	if(!length(candidates))
 		return TRUE
 
-	var/obj/effect/overmap/finaltarget = pick(candidates)
+	var/obj/effect/overmap/event/finaltarget = pick(candidates)
 	log_and_message_admins("A type [chargetype] disperser beam was launched at [finaltarget].", location=finaltarget)
 
 	fire_at_event(finaltarget, chargetype)
-	qdel(atomcharge)
 	return TRUE
 
-/obj/machinery/computer/ship/disperser/proc/fire_at_event(obj/effect/overmap_event/finaltarget, chargetype)
-	var/list/events_by_turf = overmap_event_handler.get_event_turfs_by_z_level(linked.z)
-	var/datum/overmap_event/tokill = events_by_turf[get_turf(finaltarget)]
-	if(chargetype & tokill.weaknesses)
+/obj/machinery/computer/ship/disperser/proc/fire_at_event(obj/effect/overmap/event/finaltarget, chargetype)
+	if(chargetype & finaltarget.weaknesses)
+		var/turf/T = finaltarget.loc
 		qdel(finaltarget)
+		overmap_event_handler.update_hazards(T)
 
 /obj/machinery/computer/ship/disperser/proc/handle_beam(turf/start, direction)
 	set waitfor = FALSE

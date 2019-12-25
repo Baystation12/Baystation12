@@ -39,6 +39,8 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 	var/initializations_finished_with_no_players_logged_in	//I wonder what this could be?
 
+	var/initializing = FALSE
+
 	// The type of the last subsystem to be process()'d.
 	var/last_type_processed
 
@@ -88,9 +90,12 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	sortTim(subsystems, /proc/cmp_subsystem_init)
 	reverseRange(subsystems)
 	for(var/datum/controller/subsystem/ss in subsystems)
-		report_progress("Shutting down [ss.name] subsystem...")
-		ss.Shutdown()
-	report_progress("Shutdown complete")
+		if (ss.flags & SS_NEEDS_SHUTDOWN)
+			var/time = REALTIMEOFDAY
+			report_progress("Shutting down [ss] subsystem...")
+			ss.Shutdown()
+			report_progress("[ss] shutdown in [(REALTIMEOFDAY - time)/10]s.")
+	report_progress("Shutdown complete.")
 
 // Returns 1 if we created a new mc, 0 if we couldn't due to a recent restart,
 //	-1 if we encountered a runtime trying to recreate it
@@ -168,6 +173,8 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 
 	report_progress("Initializing subsystems...")
 
+	initializing = TRUE
+
 	// Sort subsystems by init_order, so they initialize in the correct order.
 	sortTim(subsystems, /proc/cmp_subsystem_init)
 
@@ -177,7 +184,7 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	for (var/datum/controller/subsystem/SS in subsystems)
 		if (SS.flags & SS_NO_INIT)
 			continue
-		SS.Initialize(REALTIMEOFDAY)
+		SS.DoInitialize(REALTIMEOFDAY)
 		CHECK_TICK
 	current_ticklimit = TICK_LIMIT_RUNNING
 	var/time = (REALTIMEOFDAY - start_timeofday) / 10
@@ -185,6 +192,8 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	var/msg = "Initializations complete within [time] second\s!"
 	report_progress(msg)
 	log_world(msg)
+
+	initializing = FALSE
 
 	if (!current_runlevel)
 		SetRunLevel(RUNLEVEL_LOBBY)
@@ -220,7 +229,6 @@ GLOBAL_REAL(Master, /datum/controller/master) = new
 	if(delay)
 		sleep(delay)
 	report_progress("Master starting processing")
-	SSwebhooks.send(WEBHOOK_ROUNDSTART, list("url" = get_world_url()))
 	var/rtn = Loop()
 	if (rtn > 0 || processing < 0)
 		return //this was suppose to happen.

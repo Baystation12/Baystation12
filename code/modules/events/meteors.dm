@@ -103,7 +103,7 @@
 	next_meteor_lower = 5
 	next_meteor_upper = 10
 	next_meteor = 0
-	var/obj/effect/overmap/ship/victim
+	var/obj/effect/overmap/visitable/ship/victim
 
 /datum/event/meteor_wave/overmap/Destroy()
 	victim = null

@@ -14,14 +14,14 @@
 		/datum/job/submap/bearcat_crewman
 	)
 
-/obj/effect/overmap/ship/bearcat
+/obj/effect/overmap/visitable/ship/bearcat
 	name = "light freighter"
 	color = "#00ffff"
 	vessel_mass = 60
 	max_speed = 1/(10 SECONDS)
 	burn_delay = 10 SECONDS
 
-/obj/effect/overmap/ship/bearcat/New()
+/obj/effect/overmap/visitable/ship/bearcat/New()
 	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"

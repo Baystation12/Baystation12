@@ -10,6 +10,7 @@
 	thrown_force_divisor = 1
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("attacked", "stabbed", "poked")
+	max_force = 5
 	sharp = 0
 	edge = 0
 	force_divisor = 0.1 // 6 when wielded with hardness 60 (steel)
@@ -100,6 +101,7 @@
 	icon_state = "rolling_pin"
 	attack_verb = list("bashed", "battered", "bludgeoned", "thrashed", "whacked")
 	default_material = MATERIAL_WOOD
+	max_force = 15
 	force_divisor = 0.7 // 10 when wielded with weight 15 (wood)
 	thrown_force_divisor = 1 // as above
 

@@ -17,7 +17,9 @@
 	maxHealth = 65
 	melee_damage_lower = 7
 	melee_damage_upper = 15
-	natural_armor = list(melee = 10)
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 	ability_cooldown = 30 SECONDS
 
 	meat_type =     /obj/item/weapon/reagent_containers/food/snacks/xenomeat
@@ -113,7 +115,9 @@
 	maxHealth = 275
 	melee_damage_lower = 21
 	melee_damage_upper = 29
-	natural_armor = list(melee = 20)
+	natural_armor = list(
+		melee = ARMOR_MELEE_RESISTANT
+		)
 	heal_amount = 9
 	ability_cooldown = 45 SECONDS
 	can_escape = TRUE
