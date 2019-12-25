@@ -6,9 +6,11 @@
 
 /obj/item/weapon/pinpointer/artifact/attack_self(mob/user as mob)
 	if(!active)
+		active = 1
 		if(workdisk())
-			active = 1
 			to_chat(user, "<span class='notice'>Artifact Locator Active.</span>")
+		else
+			active = 0
 	else
 		active = 0
 		icon_state = "pinoff"
@@ -16,12 +18,12 @@
 
 
 /obj/item/weapon/pinpointer/artifact/workdisk()
-	if(!active) return
+	if(!active) return 0
 	if(!artif)
 		artif = locate()
 		if(!artif)
 			icon_state = "pinonnull"
-			return
+			return 0
 		else
 			var/turf/artif_turf = get_turf(artif)
 			var/turf/our_turf = get_turf(src)

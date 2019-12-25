@@ -68,4 +68,4 @@
 	icon_state = "heavy_plas_cannon"
 
 /obj/item/projectile/covenant/spirit_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1)
+	explosion(impacted,-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1,adminwarn = 0)

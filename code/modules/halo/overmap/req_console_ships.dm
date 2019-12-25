@@ -10,7 +10,7 @@
 	ship_datums = list(/datum/npc_ship/cheap_unsc_combat)
 
 /datum/spawner_choice/cheap_unsc_combat
-	choice_name = "Combat Scout Ship"
+	choice_name = "Human Combat Scout Ship"
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard UNSC armor, armed with missiles and deck guns."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_unsc_combat
@@ -59,7 +59,7 @@
 	ship_max_speed = 3.5//Non combat ships are provided with a speed boost to allow them to dodge combat ships more effectively.
 
 /datum/spawner_choice/unsc_slipspace_tender
-	choice_name = "Slipspace Support Ship"
+	choice_name = "Human Slipspace Support Ship"
 	choice_category = "Shuttles"
 	choice_desc = "\
 One of the few ships with a slipspace drive and full medical bay,\
@@ -78,7 +78,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 	ship_max_speed = 3.5
 
 /datum/spawner_choice/unsc_podcarrier
-	choice_name = "Podcarrier Transport Ship"
+	choice_name = "Human Podcarrier Transport Ship"
 	choice_category = "Transport"
 	choice_desc = "\
 A lightly armored vessel fitted for orbital troop deployment, boarding and orbital troop support operations. Armed with deck guns."
@@ -96,7 +96,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 	ship_max_speed = 3.5
 
 /datum/spawner_choice/unsc_trooptransport
-	choice_name = "Troop Transport Ship"
+	choice_name = "Human Troop Transport Ship"
 	choice_category = "Transport"
 	choice_desc = "\
 A lightly armored vessel fitted for troop and vehicle deployment. Armed with deck guns."
@@ -114,7 +114,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 	ship_datums = list(/datum/npc_ship/cheap_cov_combat)
 
 /datum/spawner_choice/cheap_cov_combat
-	choice_name = "Combat Scout Ship"
+	choice_name = "Covenant Combat Scout Ship"
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard Covenant ship plating, armed with plasma torpedoes and pulse lasers."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_cov_combat
@@ -163,7 +163,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 	ship_max_speed = 3.5//Non combat ships are provided with a speed boost to allow them to dodge combat ships more effectively.
 
 /datum/spawner_choice/cov_slipspace_tender
-	choice_name = "Slipspace Support Ship"
+	choice_name = "Covenant Slipspace Support Ship"
 	choice_category = "Shuttles"
 	choice_desc = "\
 One of the few ships with a slipspace drive and full medical bay,\
@@ -182,7 +182,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 	ship_max_speed = 3.5
 
 /datum/spawner_choice/cov_podcarrier
-	choice_name = "Podcarrier Transport Ship"
+	choice_name = "Covenant Podcarrier Transport Ship"
 	choice_category = "Transport"
 	choice_desc = "\
 A lightly armored vessel fitted for orbital troop deployment, boarding and orbital troop support operations. Armed with pulse lasers."
@@ -200,7 +200,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 	ship_max_speed = 3.5
 
 /datum/spawner_choice/cov_trooptransport
-	choice_name = "Troop Transport Ship"
+	choice_name = "Covenant Troop Transport Ship"
 	choice_category = "Transport"
 	choice_desc = "\
 A lightly armored vessel fitted for troop and vehicle deployment. Armed with pulse lasers."
