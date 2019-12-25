@@ -547,7 +547,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	bound_width = 96
 	bound_height = 96
 
-/mob/living/simple_animal/hostile/flood/combat_form/juggernaut
+/mob/living/simple_animal/hostile/flood/combat_form/santa
 	name = "A Christmas.. Abomination"
 	desc = "A corruption of the christmas spirit, given human form. Dear God..."
 	icon = 'code/modules/halo/flood/santaflood.dmi'
