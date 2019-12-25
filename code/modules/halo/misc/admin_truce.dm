@@ -20,3 +20,4 @@
 	else
 		to_world("<span class = 'danger'>A faction wide truce has been enacted.</span>")
 		toggle_truce(1)
+	truce_active = !truce_active
