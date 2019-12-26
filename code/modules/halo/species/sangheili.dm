@@ -17,6 +17,7 @@
 	total_health = 250 // Stronger than humans at base health.
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
+	appearance_flags = HAS_SKIN_TONE
 	brute_mod = 0.9
 	pain_mod = 0.75 //Pain has quarter an effect on them
 	slowdown = -0.5

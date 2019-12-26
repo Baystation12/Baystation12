@@ -17,6 +17,7 @@
 	language = "Sangheili"
 	additional_langs = list("Doisacci")
 	flags = NO_MINOR_CUT
+	appearance_flags = HAS_SKIN_TONE
 	total_health = 300 //Higher base health than spartans and sangheili
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN

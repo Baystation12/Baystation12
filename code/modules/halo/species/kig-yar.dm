@@ -17,6 +17,7 @@
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
+	appearance_flags = HAS_SKIN_TONE | HAS_UNDERWEAR
 	darksight = 6
 	brute_mod = 1.1
 	gluttonous = GLUT_ANYTHING
@@ -87,6 +88,7 @@
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/bird_punch)
+	appearance_flags = HAS_SKIN_TONE | HAS_UNDERWEAR
 
 	pain_mod = 0.8
 	brute_mod = 1.2
