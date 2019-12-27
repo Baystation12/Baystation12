@@ -3,7 +3,7 @@
 	name = "Redaction"
 	associated_intent = I_HELP
 	armour_types = list("bio", "rad")
-	
+
 /decl/psionic_power/redaction
 	faculty = PSI_REDACTION
 	admin_log = FALSE
@@ -154,11 +154,11 @@
 	use_grab =        TRUE
 	min_rank =        PSI_RANK_PARAMOUNT
 	faculty =         PSI_REDACTION
-	use_description = "Obtain a grab on a dead target, target the head, then select help intent and use the grab against them to attempt to bring them back to life. The process is lengthy and failure is punished harshly."
+	use_description = "Obtain a grab on a dead target, target the eyes, then select help intent and use the grab against them to attempt to bring them back to life. The process is lengthy and failure is punished harshly."
 	admin_log = FALSE
 
 /decl/psionic_power/revive/invoke(var/mob/living/user, var/mob/living/target)
-	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_HEAD)
+	if(!isliving(target) || !istype(target) || user.zone_sel.selecting != BP_EYES)
 		return FALSE
 	. = ..()
 	if(.)
@@ -183,4 +183,28 @@
 		target.visible_message(SPAN_NOTICE("\The [target] shudders violently!"))
 		target.adjustOxyLoss(-rand(15,20))
 		target.basic_revival()
+		return TRUE
+
+/decl/psionic_power/redaction/assay
+	name =            "Assay"
+	cost =            15
+	cooldown =        100
+	use_grab =        TRUE
+	min_rank =        PSI_RANK_OPERANT
+	use_description = "Grab a patient, target the head, then use the grab on them while on help intent, in order to perform a deep coercive-redactive probe of their psionic potential."
+
+/decl/psionic_power/redaction/assay/invoke(var/mob/living/user, var/mob/living/target)
+	if(user.zone_sel.selecting != BP_HEAD)
+		return FALSE
+	. = ..()
+	if(.)
+		user.visible_message(SPAN_WARNING("\The [user] holds the head of \the [target] in both hands..."))
+		to_chat(user, SPAN_NOTICE("You insinuate your mentality into that of \the [target]..."))
+		to_chat(target, SPAN_WARNING("Your persona is being probed by the psychic lens of \the [user]."))
+		if(!do_after(user, (target.stat == CONSCIOUS ? 50 : 25), target, 0, 1))
+			user.psi.backblast(rand(5,10))
+			return TRUE
+		to_chat(user, SPAN_NOTICE("You retreat from \the [target], holding your new knowledge close."))
+		to_chat(target, SPAN_DANGER("Your mental complexus is laid bare to judgement of \the [user]."))
+		target.show_psi_assay(user)
 		return TRUE
