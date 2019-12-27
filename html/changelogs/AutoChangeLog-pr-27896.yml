@@ -1,0 +1,4 @@
+author: "Cheb Pomidorov"
+delete-after: True
+changes: 
+  - tweak: "Scientists and Research Assistants can now enter areas such as Medbay and Brig's hallways and the Bridge Entry."
