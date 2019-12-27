@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - tweak: "Mercenary and Provocateur starting points are hidden from the Torch's roundstart sensor message."

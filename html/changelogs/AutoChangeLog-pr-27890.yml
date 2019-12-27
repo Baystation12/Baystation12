@@ -1,4 +1,0 @@
-author: "zkxs"
-delete-after: True
-changes: 
-  - bugfix: "The psionic signal event can no longer give synthetics genetic disabilities"
