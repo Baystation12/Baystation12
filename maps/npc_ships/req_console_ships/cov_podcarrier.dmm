@@ -67,13 +67,13 @@
 "bo" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bp" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bq" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"br" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bs" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bt" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bu" = (/obj/structure/reagent_dispensers/fueltank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bv" = (/obj/structure/table/rack,/obj/item/clothing/head/welding/covenant,/obj/item/clothing/head/welding/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bw" = (/obj/machinery/door/airlock/covenant/cov_ship_preset,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bx" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bD" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Hz" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Lb" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "TV" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -86,17 +86,17 @@ aaaaaaaaaaaaaaaaaaaaaaacaaabababaaaaababababababababababababababaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaacaaabababababaaaaababababababadaeadababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaabafafafabadadadadadabafafafababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaababagafafabadadadadadabahafafababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaabababaaaaaaaaaaaaaaaaababababadadadaiadadadadadaiadadadajadadabababababababaaaaaaaaaaaaaaaaaa
+aaaaaaabababaaaaaaaaaaaaaaaaababababadadadaiadadadbhadaiadadadajadadabababababababaaaaaaaaaaaaaaaaaa
 aaaaaaababababababababababababababakakakakakadadadakakakakakakakaladajadabababababababababababaaaaaa
 aaaaaaabakakakakakakakakakakababakamanaoapakakajakakaqarasasatakakakakadauavawaxabababababababaaaaaa
-aaaaayazakaAakakadadadaBadadadakbsadadadadbrakadadaBadadadadadaBajadadadadadadadadadadalaCaDaaaaaaaa
+aaaaayazakaAakakadadadaBadadadakbsadadadadbDakadadaBadadadadadaBajadadadadadadadadaGadalaCaDaaaaaaaa
 aaaaaEaFaBadaGakadaHaIaIaIaJadakaKaLaLaLaLadajadadaMadaNadaNadafakaOaPadaQadaRaSaTakajakakakaaaaaaaa
 aaaaaEaUaVadadajadaWaVaLaXadadajadaYaYaYaYaZakbaadbbadbcaZakbdbeakakakajakajakakakakaKbfaaaaaaaaaaaa
 aaaaaEbgaladbhakadbibjbjbjaJadakaKaLaLaLaLadajadadbkadaNadaNadafakblbmadbnadaRaSaTakajakakakaaaaaaaa
-aaaabobpakbqakakadadadaladadadakadadadadadadakadadaladadadadadalajadadadadadadadadadadaBaCaDaaaaaaaa
+aaaabobpakbqakakadadadaladadadakadadadadadbhakadadaladadadadadalajadadadadadadadadbhadaBaCaDaaaaaaaa
 aaaaaaabababababababababababababakbtTVLbHzakakajakakbubvasasatakakakakadauavawaxabababababababaaaaaa
 aaaaaaababababababababababababababakakakakakadadadakakakakakakakaBadajadabababababababababababaaaaaa
-aaaaaaabababaaaaaaaaaaaaaaaaababababadadadbwadadadadadbwadadadajadadabababababababaaaaaaaaaaaaaaaaaa
+aaaaaaabababaaaaaaaaaaaaaaaaababababadadadbwadadadaGadbwadadadajadadabababababababaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaababafafafabadadadadadabafafafababababababaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaabagafafabadadadadadabahafafababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaacaaabababababaaaaababababababadbxadababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

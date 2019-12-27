@@ -61,12 +61,12 @@
 "bi" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bj" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bk" = (/obj/structure/reagent_dispensers/watertank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"bl" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bm" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bn" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bo" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bp" = (/obj/machinery/deck_gun/missile_pod/plasma_torpedo,/turf/space,/area/space)
 "bq" = (/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"df" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "kb" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "nm" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "nL" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -76,23 +76,23 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaacaaabababaaaaababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaacaaabababababaaaaabababababadadadadadabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaaabababababaaaaabababababadadaFadadabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadaeafagadadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababadadadadadadadadadadadadadabababahabaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadajadadadadadajadadadadadadabababahabahabaaaaaaaaaaaaaaaaaa
 aaaaaaababababababababababababababaiaiaiaiaiadadadadadaiaiaiaiaiajadakadabababababababababababaaaaaa
 aaaaaaabaiaiaiaiaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiadapadaiaiaiaiadaqarasatabababababababaaaaaa
-aaaaauavaiawaiaiadadadaxadadadaibmadadadadblaiadadayaiadadadadadaiazaAadadadadadadadadajaBaCaaaaaaaa
+aaaaauavaiawaiaiadadadaxadadadaibmadadadaddfaiadadayaiadadadadadaiazaAadadadadadaFadadajaBaCaaaaaaaa
 aaaaaDaEaxadaFaiadaGaHaIaJadadaiaKaLaLaLaLadakadadaMaiaKadadadadakadadadaNadaOaPaQaiakaiaiaiaaaaaaaa
 aaaaaDaRaSadadakadaTaSadadaUadakadaVaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiaKaYaaaaaaaaaaaa
 aaaaaDaZajadbaaiadbbbcbdbeadadaiaKaLaLaLaLadakadadbfaiaKadadadadakadadadbgadaOaPaQaiakaiaiaiaaaaaaaa
-aaaabhbiaibjaiaiadadadajadadadaiadadadadadadaiadadbkaiadadadadadaiazaAadadadadadadadadaxaBaCaaaaaaaa
+aaaabhbiaibjaiaiadadadajadadadaiadadadadadbaaiadadbkaiadadadadadaiazaAadadadadadbaadadaxaBaCaaaaaaaa
 aaaaaaabababababababababababababaibnnLkbnmaiaiaiakaiaiaiadboadaiaiaiaiadaqarasatabababababababaaaaaa
 aaaaaaababababababababababababababaiaiaiaiaiadadadadadaiaiaiaiaiaxadakadabababababababababababaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadaxadadadadadaxadadadadadadabababababababaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababadadadadadadadadadadadadadabababababbpaabpaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadaebqagadadadadadababababbpaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaacaaabababababaaaaabababababadadadadadabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaacaaabababababaaaaabababababadadbaadadabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaacaaabababaaaaababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaabababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

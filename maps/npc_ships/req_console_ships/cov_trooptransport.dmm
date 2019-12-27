@@ -63,13 +63,13 @@
 "bk" = (/obj/item/weapon/storage/firstaid/o2/covenant,/obj/item/weapon/storage/firstaid/o2/covenant,/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/o2/covenant,/obj/item/weapon/storage/firstaid/o2/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bl" = (/obj/structure/reagent_dispensers/watertank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bm" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"bn" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bo" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bp" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bq" = (/obj/machinery/deck_gun/missile_pod/plasma_torpedo,/turf/space,/area/space)
 "fh" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "mC" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "rF" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"vj" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -80,15 +80,15 @@ aaaaaaaaaaaaaaaaacaaabababababaaaaababadadadadadadadadadadadadabababaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadadadadadadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadagadadadadadadadadabababahabaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadajadadadadadadadadadadadadabababahabahabaaaaaaaaaaaaaaaaaa
-aaaaaaababababababababababababababaiaiaiaiaiadadadadadajadadadadajadakadabababababababababababaaaaaa
+aaaaaaababababababababababababababaiaiaiaiaiadadadadadajadbaadadajadakadabababababababababababaaaaaa
 aaaaaaabaiaiaiaiaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiaiaiaiaiaiaiaiadapaqarasabababababababaaaaaa
-aaaaatauaiavaiaiadadadaeadadawaiboadadadadbnaiaxadayaiaiadazadaiaiaAaBadadadadadadadadajaCaDaaaaaaaa
+aaaaatauaiavaiaiadadadaeadadawaiboadadadadvjaiaxadayaiaiadazadaiaiaAaBadadadadadadaGadajaCaDaaaaaaaa
 aaaaaEaFaeadaGaiadaHaIaJaKadadaiafaLaLaLaLadakadadaMaiafadadadadakadadadaNadaOaPaQaiakaiaiaiaaaaaaaa
 aaaaaEaRaSadadakadaTaSadadaUadakadaVaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiafaYaaaaaaaaaaaa
 aaaaaEaZajadbaaiadbbbcbdbeadadaiafaLaLaLaLadakadadbfaiafadadadadakadadadbgadaOaPaQaiakaiaiaiaaaaaaaa
-aaaabhbiaibjaiaiadadadajadadbkaiadadadadadadaiaxadblaiaiadbmadaiaiaAaBadadadadadadadadaeaCaDaaaaaaaa
+aaaabhbiaibjaiaiadadadajadadbkaiadadadadadbaaiaxadblaiaiadbmadaiaiaAaBadadadadadadbaadaeaCaDaaaaaaaa
 aaaaaaabababababababababababababaibpmCfhrFaiaiaiakaiaiaiaiaiaiaiaiaiaiadapaqarasabababababababaaaaaa
-aaaaaaababababababababababababababaiaiaiaiaiadadadadadaeadadadadaeadakadabababababababababababaaaaaa
+aaaaaaababababababababababababababaiaiaiaiaiadadadadadaeadaGadadaeadakadabababababababababababaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadaeadadadadadadadadadadadadabababababababaaaaaaaaaaaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadadadadadadadadadadabababababbqaabqaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadadadadadadadadadababababbqaaaaaaaaaaaaaaaaaaaaaaaaaaaa

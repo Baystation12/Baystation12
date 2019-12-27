@@ -72,7 +72,6 @@
 "bx" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "by" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bz" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"bA" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bB" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bC" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bD" = (/obj/structure/bed/roller/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -94,6 +93,7 @@
 "TJ" = (/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/machinery/door/window/southright,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Wa" = (/obj/machinery/sleeper/covenant{dir = 4; icon_state = "sleeper_0"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "WJ" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"Yk" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -106,11 +106,11 @@ aaaaaaaaacacacacacaaaaaaaaaaaaaaacacacaeaealaeaeaealaeamaeaeaeaeaeacacacacaaaaaa
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacahanaoahapaeaqahahahahahahahaeaeacacacacacacacaaaaaaaaaaaaaaaaaa
 aaaaaaacacacacacacacacacacacacacacahahahahahaeaeaeahbEauplOFckahamaealaeacacacacacacacacacacacaaaaaa
 aaaaaaacahahahahahahahahahahacacahawaxayazahahalahahbDaeaAECTJahahahahaeaBaCaDaEacacacacacacacaaaaaa
-aaaaaFaGahaHahahaeaeaeaIaeaeaeahbBaeaeaeaebAahaeaeaIaeaeaeaeaeaeaealaeaeaeaeaeaeaeaeaeamaJaKaaaaaaaa
+aaaaaFaGahaHahahaeaeaeaIaeaeaeahbBaeaeaeaeYkahaeaeaIaeaeaeaeaeaNaealaeaeaeaeaeaeaeaNaeamaJaKaaaaaaaa
 aaaaaLaMaIaeaNahaeaOaPaPaPaQaeahapaRaRaRaRaealaeaSaTaUWaaeaeaeaVaeahaWaXaYaeaZbabbahalahahahaaaaaaaa
 aaaaaLbcbdaeaealaebebdaRbfaeaealaebgbgbgbgaqahapbhaRaeaeaeaebibjbkahahahahalahahahahapblaaaaaaaaaaaa
 aaaaaLbmamaebnahaebobpbpbpaQaeahapaRaRaRaRaealaebqbrbsWaaeaeaebtaeahbubvbwaeaZbabbahalahahahaaaaaaaa
-aaaabxbyahbzahahaeaeaeamaeaeaeahaeaeaeaeaeaeahaeaeamaeaeaeaeaeaeaealaeaeaeaeaeaeaeaeaeaIaJaKaaaaaaaa
+aaaabxbyahbzahahaeaeaeamaeaeaeahaeaeaeaeaebnahaeaeamaeaeaeaeaebnaealaeaeaeaeaeaeaebnaeaIaJaKaaaaaaaa
 aaaaaaacacacacacacacacacacacacacahbCOirUWJahahalahahbDaeaeaeaeahahahahaeaBaCaDaEacacacacacacacaaaaaa
 aaaaaaacacacacacacacacacacacacacacahahahahahaeaeaeahbErgPRbGaeahaIaealaeacacacacacacacacacacacaaaaaa
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacahanbHacapaeaqacahahahahahahaeaeacacacacacacacaaaaaaaaaaaaaaaaaa
