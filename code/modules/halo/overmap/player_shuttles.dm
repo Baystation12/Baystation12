@@ -202,6 +202,45 @@ allowing periodic long range transmission."
 /datum/spawner_choice/experimental_cov_combat,\
 /datum/spawner_choice/cov_slipspace_tender,\
 /datum/spawner_choice/cov_podcarrier,\
+/datum/spawner_choice/cov_trooptransport,\
+/datum/spawner_choice/cheap_urf_combat,\
+/datum/spawner_choice/heavyarmed_urf_combat,\
+/datum/spawner_choice/experimental_urf_combat,\
+/datum/spawner_choice/urf_slipspace_tender,\
+/datum/spawner_choice/urf_podcarrier,\
+/datum/spawner_choice/urf_trooptransport\
+)
+
+/obj/machinery/shuttle_spawner/multi_choice/unsc
+	choices = newlist(\
+/datum/spawner_choice/cheap_unsc_combat,\
+/datum/spawner_choice/heavyarmed_unsc_combat,\
+/datum/spawner_choice/experimental_unsc_combat,\
+/datum/spawner_choice/unsc_slipspace_tender,\
+/datum/spawner_choice/unsc_podcarrier,\
+/datum/spawner_choice/unsc_trooptransport,\
+/datum/spawner_choice/cheap_cov_combat\
+)
+
+/obj/machinery/shuttle_spawner/multi_choice/urf
+	choices = newlist(\
+/datum/spawner_choice/cheap_urf_combat,\
+/datum/spawner_choice/heavyarmed_urf_combat,\
+/datum/spawner_choice/experimental_urf_combat,\
+/datum/spawner_choice/urf_slipspace_tender,\
+/datum/spawner_choice/urf_podcarrier,\
+/datum/spawner_choice/urf_trooptransport\
+)
+
+/obj/machinery/shuttle_spawner/multi_choice/cov
+	icon = 'code/modules/halo/overmap/nav_computer.dmi'
+	icon_state = "cov_nav"
+	choices = newlist(\
+/datum/spawner_choice/cheap_cov_combat,\
+/datum/spawner_choice/heavyarmed_cov_combat,\
+/datum/spawner_choice/experimental_cov_combat,\
+/datum/spawner_choice/cov_slipspace_tender,\
+/datum/spawner_choice/cov_podcarrier,\
 /datum/spawner_choice/cov_trooptransport\
 )
 

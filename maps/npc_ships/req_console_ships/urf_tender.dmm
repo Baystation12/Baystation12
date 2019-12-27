@@ -25,6 +25,13 @@
 "ay" = (/obj/machinery/door/airlock/halo_maint/innie_ship_preset,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "az" = (/obj/machinery/iv_drip,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "aA" = (/obj/structure/table/glass/white,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
+"aB" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"aC" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"aD" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"aE" = (/obj/machinery/cooker/grill,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"aF" = (/obj/machinery/cooker/fryer,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"aG" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"aH" = (/obj/docking_umbilical/north,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aI" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aJ" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "aK" = (/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -47,6 +54,9 @@
 "bb" = (/obj/machinery/chemical_dispenser/full,/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/window/reinforced/projresist{dir = 4},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "bc" = (/obj/machinery/atmospherics/unary/freezer{tag = "icon-freezer_1"; icon_state = "freezer_1"; dir = 2},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "bd" = (/obj/machinery/nav_computer/unsc,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
+"be" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"bf" = (/obj/structure/bed/chair{dir = 2},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"bg" = (/obj/machinery/door/airlock/multi_tile/halo/innie_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bh" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bi" = (/obj/machinery/door/airlock/halo_maint/innie_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bj" = (/obj/structure/window/reinforced/projresist{dir = 1},/obj/machinery/door/window/westleft,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -61,6 +71,7 @@
 "bs" = (/obj/machinery/atmospherics/portables_connector{dir = 4},/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "bt" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "bu" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
+"bv" = (/obj/structure/table/steel,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bw" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bx" = (/obj/structure/closet/crate,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "by" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -79,6 +90,7 @@
 "bL" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (WEST)"; icon_state = "body_scannerconsole"; dir = 8},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "bM" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; tag = "icon-freezer_1"},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "bN" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
+"bO" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bP" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "bQ" = (/obj/machinery/light/small{dir = 4},/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "bR" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/obj/item/weapon/reagent_containers/glass/bucket,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -91,70 +103,44 @@
 "bY" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "bZ" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "ca" = (/obj/structure/lattice,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
+"cb" = (/obj/machinery/vending/props,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"cc" = (/obj/machinery/vending/fitness,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"cd" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"ce" = (/obj/machinery/vending/snack,/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
+"cf" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"cg" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"ch" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"ci" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"cj" = (/obj/docking_umbilical/south,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "ck" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/obj/item/stack/material/glass/reinforced/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cl" = (/obj/structure/reagent_dispensers/watertank,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cm" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "cn" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"dC" = (/obj/structure/barricade,/obj/structure/barricade,/turf/simulated/mineral/planet,/area/om_ships/req_console_ship)
-"eO" = (/obj/machinery/vending/snack,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"ni" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"nn" = (/turf/simulated/mineral/planet,/area/om_ships/req_console_ship)
-"oy" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"pR" = (/obj/machinery/vending/boozeomat,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"qj" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"qs" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"qF" = (/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"rA" = (/obj/structure/bed/chair{dir = 2},/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"sI" = (/obj/structure/inflatable/wall,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"ta" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"tS" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"ue" = (/obj/machinery/vending/coffee,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"yx" = (/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"At" = (/obj/machinery/cooker/oven,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"CA" = (/obj/machinery/door/airlock/halo/innie_ship_preset,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"GD" = (/obj/structure/lattice,/obj/structure/barricade,/turf/space,/area/space)
-"HU" = (/obj/machinery/door/airlock/multi_tile/halo/innie_ship_preset,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"JH" = (/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
-"KF" = (/obj/machinery/cooker/grill,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"Lk" = (/obj/structure/barricade,/obj/structure/barricade,/obj/structure/barricade,/turf/simulated/mineral/planet,/area/om_ships/req_console_ship)
-"Lv" = (/obj/structure/table/steel,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"LI" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"Nx" = (/obj/structure/barricade,/obj/structure/barricade,/turf/space,/area/space)
-"OZ" = (/obj/machinery/vending/props,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"PM" = (/obj/structure/barricade,/turf/simulated/mineral/planet,/area/om_ships/req_console_ship)
-"Qx" = (/obj/structure/barricade,/turf/space,/area/space)
-"Uf" = (/turf/simulated/wall/wood,/area/om_ships/req_console_ship)
-"US" = (/obj/docking_umbilical/south,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"Xo" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"Yu" = (/obj/docking_umbilical/north,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"Zo" = (/obj/machinery/vending/cola,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
-"ZB" = (/obj/machinery/cooker/fryer,/turf/simulated/floor/wood,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaQxQxQxQxQxQxQxaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaQxQxQxQxQxQxQxQxaaaaaaaaaaaaaaQxQxQxQxQxQxQxnnnnnnnnnnnnababababaaaaaa
-aaaaaaaaaaaaaaQxQxQxQxQxQxQxQxQxnnnnnnnnnnnnnnacGDGDGDGDGDGDGDnnnnnnnnnnnnnnnnnnadadadadabababababaa
-aaaaaaaaQxQxQxQxnnnnnnnnnnnnnnnnnnnnacacacacacacnnnnnnnnnnnnnnnnacaaacaaaaaaaannafadadadaeaaaaaaaaaa
-aaaaaaQxQxnnnnnnnnnnaaaaaaaaacaaaaaaaaaaaaaaaaacaaaaaaaaaaaaaaacacacacaaaaaaaannadadagadaeaaacaaaaaa
-aaaaQxQxnnnnnnnnnnababababababJHJHJHJHJHJHJHJHacaaaaaaaaaaaaaaaaaaacJHJHJHJHJHJHaeaeaeahaeaeaeaeaaaa
-aaaaQxnnnnnnnnaiaiaiaiaiaiaiJHJHJHJHJHJHaiUfJHJHJHJHUfUfUfUfUfaeaeaeJHajakakakalamanakaoaeapadaqaaaa
-aaaaQxarasatauavawawaxawawawayawawawaxazaAUfqFqFqjtaqsKFZBAtUfyxYuaosIaIaoaoaoaoaoaoaoaoahadadaqaaaa
-aaaaaJaKasauaLaiaMaNawaOawaPaiaQaRawawawyxCAyxyxyxyxyxyxyxyxyxyxyxaosIaoaoaoJHJHahsIJHJHJHaTadaqaaaa
-aaaaaUaVauassIaiaWaXaYaZbabbsIawawawawbcawUfbdUfXorArArArAyxHUyxyxbhsIbiaebisIadadadbjbkJHbladaqaaaa
-aaaaaUbmasbnsIboawawawawbpbqsIbrawawbsbtbuUfbmasyxLvLvLvLvLIUfyxyxaobibwsIbxsIbybzbAbBbCJHaeaeaeaaaa
-aaaaaUbDauassIsIbEbFbGbHbIbJsIbKbLawawbMawUfbNUfXoninininiyxyxyxyxLIaebiaebiJHadadadbPbQJHbRadaqaaaa
-aaaabSbTasauaLaiaMaNawbUawaPsIaQaRbVawawawaSyxyxyxyxyxyxyxyxHUyxyxyxaeaoaoaoJHJHahsIsIsIJHbWadaqaaaa
-aaaaaabXasbYauavawawbZawawawaycaawawbZazaAUfOZueoyeOeOpRZotSUfyxUSyxaeaIaoaoaoaoaoaoaoaoahadadaqaaaa
-aaaaaannnnPMnnaiaiaiaiaiaiaiaiaiaiaiaiaiaiUfJHJHJHJHUfUfUfUfUfaeaeaeaeajakakakckclanakaoaecmadaqaaaa
-aaaaaaaannPMnnnnnnnnnnnnababababababababababJHGDaaaaaaaaaaaaaaaaaaacaeaeaeaeaeaesIsIaeahaeaeaeaeaaaa
-aaaaaaaaaaPMnnnnnnnnaaaaaaaaGDaaaaaaaaaaaaaaaaGDQxQxQxaaaaaaaaacacacacaaaaaaaaaeadadcnadaeaaacaaaaaa
-aaaaaaaaaaQxQxQxnnnnnnnnnnnnPMnnnnnnGDGDGDGDGDGDnnnnnnnnnnnnnnnnacaaacQxQxQxQxPMadadadadaeaaaaaaaaaa
-aaaaaaaaaaaaaaQxQxQxQxQxQxQxNxQxnnnnnnnnnnnnnnGDacacacacacacacnnnnnnnnnnnnnnLkPMafadadadabababababaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaQxQxQxQxQxQxnndCnnnnababababababaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaQxQxQxNxQxQxQxaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababacacacacacacacacabababababababababadadadadabababababaa
+aaaaaaaaaaaaaaaaababababababababababacacacacacacababababababababacaaacaaaaaaaaaeafadadadaeaaaaaaaaaa
+aaaaaaaaaaabababababaaaaaaaaacaaaaaaaaaaaaaaaaacaaaaaaaaaaaaaaacacacacaaaaaaaaaeadadagadaeaaacaaaaaa
+aaaaaaaaabababababababababababababababababababacaaaaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeahaeaeaeaeaaaa
+aaaaaaabababaeaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiababababaeaeaeaeaeaeaeaeaeajakakakalamanakaoaeapadaqaaaa
+aaaaaaarasatauavawawaxawawawayawawawaxazaAaiananaBaCaDaEaFaGaeaoaHaoaeaIaoaoaoaoaoaoaoaoahadadaqaaaa
+aaaaaJaKasauaLaiaMaNawaOawaPaiaQaRawawawawaSaoaoaoaoaoaoaoaoaoaoaoaoaeaoaoaoaeaeahaeaeaeaeaTadaqaaaa
+aaaaaUaVauasaiaiaWaXaYaZbabbaiawawawawbcawaibdaebebfbfbfbfaobgaoaobhaebiaebiaeadadadbjbkaebladaqaaaa
+aaaaaUbmasbnaiboawawawawbpbqaibrawawbsbtbuaibmasaobvbvbvbvbhaeaoaoaobibwaebxaebybzbAbBbCaeaeaeaeaaaa
+aaaaaUbDauasaiaibEbFbGbHbIbJaibKbLawawbMawaibNaebebObObObOaoaoaoaobhaebiaebiaeadadadbPbQaebRadaqaaaa
+aaaabSbTasauaLaiaMaNawbUawaPaiaQaRbVawawawaSaoaoaoaoaoaoaoaobgaoaoaoaeaoaoaoaeaeahaeaeaeaebWadaqaaaa
+aaaaaabXasbYauavawawbZawawawaycaawawbZazaAaicbcccdcecfcgchciaeaocjaoaeaIaoaoaoaoaoaoaoaoahadadaqaaaa
+aaaaaaababababaiaiaiaiaiaiaiaiaiaiaiaiaiaiaiababababaeaeaeaeaeaeaeaeaeajakakakckclanakaoaecmadaqaaaa
+aaaaaaaaabababababababababababababababababababacaaaaaaaaaaaaaaaaaaacaeaeaeaeaeaeaeaeaeahaeaeaeaeaaaa
+aaaaaaaaaaabababababaaaaaaaaacaaaaaaaaaaaaaaaaacaaaaaaaaaaaaaaacacacacaaaaaaaaaeadadcnadaeaaacaaaaaa
+aaaaaaaaaaaaaaaaababababababababababacacacacacacababababababababacaaacaaaaaaaaaeadadadadaeaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababacacacacacacacacabababababababababafadadadabababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-
