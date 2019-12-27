@@ -39,13 +39,13 @@
 	desc = "A magazine for assault rifles. Contains 20 rounds."
 	item_cost = 8
 	path = /obj/item/ammo_magazine/rifle
-	
+
 /datum/uplink_item/item/ammo/bullpup //for zipguns
 	name = "Bullpup Rifle Magazine"
 	desc = "A magazine for bullpup assault rifles. Contains 15 rounds."
 	item_cost = 8
 	path = /obj/item/ammo_magazine/mil_rifle
-	
+
 /datum/uplink_item/item/ammo/sniperammo
 	name = "Ammobox of Sniper Rounds"
 	desc = "A container of rounds for the anti-materiel rifle. Contains 7 rounds."
@@ -121,3 +121,9 @@
 	desc = "A box of EMP ammo for small pistols and revolvers. Contains 8 rounds."
 	item_cost = 6
 	path = /obj/item/ammo_magazine/box/emp/smallpistol
+
+/datum/uplink_item/item/ammo/stripperclip
+	name = "Stripper Clip"
+	desc = "A stripper clip used to load bolt action rifles. Contains just 5 rounds."
+	item_cost = 2
+	path = /obj/item/ammo_magazine/speedloader/clip
