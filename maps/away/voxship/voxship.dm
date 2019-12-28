@@ -22,6 +22,10 @@
 		"nav_voxbase_1",
 	)
 
+	initial_restricted_waypoints = list(
+		"Vox Shuttle" = list("nav_hangar_vox"),
+	)
+
 /obj/effect/shuttle_landmark/nav_voxbase/nav1
 	name = "Northest of Large Asteroid"
 	landmark_tag = "nav_voxbase_1"
