@@ -164,6 +164,7 @@
 			stop_automated_movement = 0
 			if (prob(10))
 				say("Meow!")
+				playsound(src, "sound/voice/meow.ogg", 50, 1)
 
 	if (!friend || movement_target != friend)
 		..()
@@ -179,12 +180,14 @@
 			if (prob((friend.stat < DEAD)? 50 : 15))
 				var/verb = pick("meows", "mews", "mrowls")
 				audible_emote(pick("[verb] in distress.", "[verb] anxiously."))
+				playsound(src, "sound/voice/meow.ogg", 50, 1)
 		else
 			if (prob(5))
 				visible_emote(pick("nuzzles [friend].",
 								   "brushes against [friend].",
 								   "rubs against [friend].",
 								   "purrs."))
+				playsound(src, "sound/voice/purr.ogg", 50, 1)
 	else if (friend.health <= 50)
 		if (prob(10))
 			var/verb = pick("meows", "mews", "mrowls")
@@ -209,8 +212,9 @@
 						   "brushes against [friend].",
 						   "rubs against [friend].",
 						   "purrs."))
+		playsound(src, "sound/voice/purr.ogg", 50, 1)
 	else
-		to_chat(usr, "<span class='notice'>[src] ignores you.</span>")
+		to_chat(usr, SPAN_NOTICE("[src] ignores you."))
 	return
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
