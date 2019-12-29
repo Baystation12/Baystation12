@@ -34,7 +34,7 @@
 				playsound(src.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
 
 				//stop the bleeding
-				surgery_target_ext.clamp()
+				surgery_target_ext.clamp_organ()
 				buckled_mob:shock_stage += 20
 				src.visible_message("<span class='info'>\The [src] opens a surgical incision on [buckled_mob]'s [surgery_target_ext.name] then clamps the wound.</span>")
 				. = 1

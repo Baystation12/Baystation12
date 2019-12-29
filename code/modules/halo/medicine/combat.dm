@@ -71,7 +71,7 @@
 			if(do_after(user, 20, M))
 				user.visible_message("<span class='notice'>[user] bandages [M]'s [affecting.name].</span>", \
 					             "<span class='notice'>bandage [M]'s [affecting.name].</span>")
-				affecting.clamp()
+				affecting.clamp_organ()
 				use(1)
 				affecting.update_damages()
 		else
