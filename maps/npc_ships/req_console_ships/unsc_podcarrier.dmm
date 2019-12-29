@@ -3,6 +3,7 @@
 "bC" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "ce" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cy" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"cA" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cO" = (/obj/docking_umbilical/north,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "dD" = (/obj/machinery/nav_computer/unsc,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "dM" = (/obj/structure/table/rack,/obj/item/clothing/head/welding,/obj/item/clothing/head/welding,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -102,7 +103,7 @@ aaaaaalslslsqXqXqXqXqXqXqXqXqXqXFcFcFcFcFcFcFcqXqXqXqXqXlslslslsqXqXqXqXqXhdhdRk
 aaaaaarZtDXZEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXqXqXqXqXewrXpZpRgmPTqXhdcOhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa
 aaaahIkOEdEdqXqXEdEdEdEdEdWVhdhdhdSqhdhdhdhdhdhdWthdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXqXWLFcshaaaa
 aaaagEjIEdEdqXfJgJqXCNEdEdqXuJqXuJqXuJqXNhqXhdNLqXhdPwPwPwPwhdtshdhdhdstqXBJqXBJqXFcFcFcqXqLFcshaaaa
-aaaagEoSebgJqXqXEdoSebQVNKqXvuhdNLhdNLhdnEJnhdbzqXyydZdZdZdZstqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
+aaaagEoSebgJqXqXEdoSebQVNKqXvuhdNLhdNLhdnEJnhdbzqXyydZdZdZdZcAqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
 aaaagEbCEdEdqXdDgJqXCNEdEdqXuJqXuJqXuJqXNhqXhdNLqXhdHzHzHzHzhdhdhdhdhdstqXBJqXBJqXFcFcFcqXnmFcshaaaa
 aaaaDivoEdEdqXqXEdEdEdEdEdWVhdhdhdZkhdhdhdhdhdhdWthdhdhdhdhdhdtshdhdhdhdqXhdVwhdqXqXMTqXqXYcFcshaaaa
 aaaaaaGutDIXEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXqXqXqXqXmVlHRycysrceqXhdlbhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa

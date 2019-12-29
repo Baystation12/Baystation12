@@ -69,6 +69,21 @@
 		return 1
 	return 0
 
+/obj/machinery/vending/armory/covenant/yanmee
+	name = "Yanmee Vendors"
+	desc = "Test"
+	icon_state ="covendor"
+	icon_deny = "covendor-deny"
+
+/obj/machinery/vending/armory/covenant/yanmee/allowed(var/mob/living/carbon/human/h)
+	if(istype(h,/mob/living/silicon))
+		return 1
+	if(!istype(h))
+		return 0
+	if(h.species.type == /datum/species/yanmee)
+		return 1
+	return 0
+
 /obj/machinery/vending/armory/covenant/sangheili/weapon // Both ammo, and guns!
 	name = "Covenant - Sangheili Weapon Vendor"
 	desc = "Storage for Covenant Sangheili weapons and ammo"
@@ -195,6 +210,22 @@
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/covenant/uoi = 20,/obj/item/weapon/reagent_containers/food/snacks/covenant/uoi/stew = 15,/obj/item/weapon/reagent_containers/food/snacks/covenant/irukanbar = 30)
 
+/obj/machinery/vending/armory/covenant/yanmee/equipment
+	name = "Covenant - Yanmee Equipment Vendor"
+	desc = "Storage for Covenant Yanmee equipment"
+	icon_state ="covendor" // SPRITES
+	icon_deny = "covendor-deny"
+	products = list(/obj/item/weapon/storage/belt/covenant_medic = 4,/obj/item/weapon/storage/belt/covenant_ammo = 4,/obj/item/clothing/accessory/storage/bandolier/covenant = 4
+		,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 16)
+
+/obj/machinery/vending/armory/covenant/yanmee/weapon
+	name = "Covenant - Yanmee Weapon Vendor"
+	desc = "Storage for Covenant Yanmee weapons and ammo"
+	icon_state ="covendor" // SPRITES
+	icon_deny = "covendor-deny"
+	products = list(/obj/item/weapon/gun/energy/plasmapistol = 15,/obj/item/weapon/gun/projectile/needler = 4,/obj/item/ammo_magazine/needles = 32
+		,/obj/item/weapon/grenade/plasma = 12,/obj/item/weapon/melee/energy/elite_sword/dagger = 12)
+
 /obj/machinery/vending/armory/covenant/general/food
 	name = "Covenant - Lesser Food Vendor"
 	desc = "A food vendor for the lesser species."
@@ -207,7 +238,7 @@
 	desc = "A vendor that supplies medical equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/storage/firstaid/unsc/cov = 5, /obj/item/weapon/storage/firstaid/regular/covenant = 5, /obj/item/weapon/storage/firstaid/fire/covenant = 2
+	products = list(/obj/item/bodybag/cryobag/covenant = 3,/obj/item/weapon/storage/firstaid/unsc/cov = 5, /obj/item/weapon/storage/firstaid/regular/covenant = 5, /obj/item/weapon/storage/firstaid/fire/covenant = 2
 		,/obj/item/weapon/storage/firstaid/o2/covenant = 2,/obj/item/weapon/storage/firstaid/toxin/covenant = 2,/obj/item/weapon/storage/firstaid/erk/cov = 2,/obj/item/weapon/storage/firstaid/combat/unsc/cov = 2,/obj/item/weapon/storage/firstaid/adv = 2)
 
 /obj/machinery/vending/armory/covenant/general/medical/surgery

@@ -106,6 +106,7 @@
 "Tk" = (/obj/machinery/light{dir = 8},/obj/structure/closet/crate/trashcart,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "UQ" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "VL" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"Wh" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Wt" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WV" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "WW" = (/obj/structure/closet/emcloset/legacy,/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 2},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
@@ -130,7 +131,7 @@ aaaaaalslslsqXmBmBmBmBmBmBmBmBmBmBmBmBmBmBmBlslslslsqXqXqXqXqXqXqXqXqXawtztztzVL
 aaaaaarZebXZEdWVZHZHxlZHZHZHpCZHZHZHxlvyTcmBKGKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOebEdtDmBGJmNZHcpZHLcmBpXNhZHZHZHZHWthdhdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXqXqXsVFcshaaaa
 aaaagERgEdebmBmBIDDeIfEEuoOqmBZHZHZHZHMzZHmBdDqXyyPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcjIzEqXzgFcshaaaa
-aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhddZdZdZdZstqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa
+aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhddZdZdZdZWhqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa
 aaaagEgvEdebmBmBydPxDOYQGLvxmBZCMRZHZHOVZHmBfJqXyyHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcaJMqqXHkFcshaaaa
 aaaaDivoebEdtDmBGJmNZHFpZHLcmBpXNhxSZHZHZHWthdhdhdhdhdhdhdhdtshdhdhdqXhdhdhdqXqXMTqXqXqXqXTkFcshaaaa
 aaaaaaGuebIXEdWVZHZHbCZHZHZHpCdiZHZHbCvyTcmBCGkzRyaAlHcysrceqXhdlbhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa

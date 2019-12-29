@@ -24,6 +24,7 @@
 "qH" = (/obj/machinery/light/spot{dir = 1},/turf/space,/area/om_ships/req_console_ship)
 "qN" = (/obj/structure/window/reinforced/projresist{dir = 2},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "qX" = (/turf/simulated/wall,/area/om_ships/req_console_ship)
+"ri" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "rr" = (/obj/machinery/deck_gun{dir = 2},/turf/space,/area/space)
 "ru" = (/obj/structure/lattice,/turf/space,/area/space)
 "sb" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/overmap_weapon_console/mac/orbital_bombard{icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -58,7 +59,6 @@
 "JQ" = (/obj/structure/table/steel,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "MT" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "NK" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local{dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/obj/structure/computerframe{anchored = 1; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
-"NM" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Pw" = (/obj/structure/bed/chair{dir = 2},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "QV" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Rk" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -92,7 +92,7 @@ aaaaaaaaaaaaaaqHaaaaaaaaaauNezGvqXqXlslslslslsqXqXqXqXqXqXqXqXqXqXqXqXRkhdtudMFb
 aaaaaaaaaaaaaaaaaaaaaaaauNqNEdEdWVEdEdEdEdtREbVeqXcyfDsrqXhdcOhdqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaIeEdEdEdqXEdEdEdEdEdEdEdWthdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXXihdqXTCFcshaaaa
 aaaaJaJaJaJaJaJaJaJaJaJahWEdgJqXqXgJqXCNQVyOgJqXqXPwPwhdtshdhdhdstqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaa
-aaHqHqHqHqHqHqHqHqHqHqHqzXEdEdqXfJEdoSebQVNKEddDqXJQdZNMqXyyhdhdhdBJRXqXRZqXUQcSakqXqXBJqXqXqXqXaaaa
+aaHqHqHqHqHqHqHqHqHqHqHqzXEdEdqXfJEdoSebQVNKEddDqXJQdZriqXyyhdhdhdBJRXqXRZqXUQcSakqXqXBJqXqXqXqXaaaa
 aaaaJaJaJaJaJaJaJaJaJaJasbEdgJqXqXgJqXCNQVHWgJqXqXHzHzhdhdhdhdhdstqXBJqXBJqXFcFcFcqXVwhdqXFcFcshaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaTtEdEdEdqXEdEdEdEdEdEdEdWthdhdhdtshdhdhdhdqXhdhdhdqXqXMTqXqXXihdqXTCFcshaaaa
 aaaaaaaaaaaaaaaaaaaaaaaavdswEdEdWVEdEdEdEdtREbVeqXlHfDRyqXhdlbhdqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa

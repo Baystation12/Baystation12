@@ -45,10 +45,10 @@
 		/datum/objective/overmap/covenant_ship,\
 		/datum/objective/protect/leader,\
 		/datum/objective/glass_colony,\
-		///datum/objective/retrieve/steal_ai,
+		//datum/objective/retrieve/steal_ai,
 		/datum/objective/retrieve/nav_data,\
 		/datum/objective/overmap/covenant_unsc_ship,
-		/datum/objective/overmap/covenant_odp,
+		//datum/objective/overmap/covenant_odp,
 		//datum/objective/colony_capture/cov,
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
@@ -68,7 +68,6 @@
 		/datum/objective/overmap/unsc_innie_base)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
-	GLOB.UNSC.base_desc = "Orbital Defence Platform"
 
 	//setup innie objectives
 	objective_types = list(\
