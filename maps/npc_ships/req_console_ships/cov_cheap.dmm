@@ -67,7 +67,9 @@
 "bp" = (/obj/machinery/deck_gun/missile_pod/plasma_torpedo,/turf/space,/area/space)
 "bq" = (/obj/structure/table/marble,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bI" = (/obj/machinery/light/covenant/south,/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"cZ" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
 "df" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"fa" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
 "kb" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "lx" = (/obj/machinery/photocopier/faxmachine{department = "CRS Unyielding Transgression"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "nm" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -87,15 +89,15 @@ aaaaaaaaaaaaaaaaacaaabababababaaaaabababababadadaFadadabababababababaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadaeafagadadadadadababababaaaaaaaaahababababababaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababadadadadadadadadadadadadadabababahabahabababababababababaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadajadadadadadajadadadadadadababababababababadadadabababaaaa
-aaaaaaababababababababababababababaiaiaiaiaiadadadadadaiaiaiaiaibIadakadababababababRFadadababababaa
-aaaaaaabaiaiaiaiaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiadapadaiaiaiaiadaqarasatababadadadababaaaaaa
+aaaaaaababababababababababababababaiaicZaiaiadadadadadaiaicZaiaibIadakadababababababRFadadababababaa
+aaaaaaabaiaiaicZaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiadapadaiaiaiaiadaqarasatababadadadababaaaaaa
 aaaaauavaiawaiaiadadadaxadadadaibmadadadaddfaiadadayaiadadadadadaiazaAadadadadadadqqadajaBaCaaaaaaaa
-aaaaaDaEaxadaFaiadaGaHaIaJadadaiaKaLaLaLaLadakadadaMaiaKadadadadakadadadaNadaOaPaQaiakaiaiaiaaaaaaaa
+aaaaaDaEaxadaFaiadaGaHaIaJadadaiaKaLaLaLaLadakadadaMaiaKadadadadakadadadaNadaOaPaQcZakaiaiaiaaaaaaaa
 aaaaaDaRaSadadakadaTaSadadaUadakadaVaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiaKaYaaaaaaaaaaaa
-aaaaaDaZajadbaaiadbbbcbdbeadadaiaKaLaLaLaLadakadadbfaiaKadadadadakadadadbgadaOaPaQaiakaiaiaiaaaaaaaa
+aaaaaDaZajadbaaiadbbbcbdbeadadaiaKaLaLaLaLadakadadbfaiaKadadadadakadadadbgadaOaPaQcZakaiaiaiaaaaaaaa
 aaaabhbiaibjaiaiadadadajadadadailxadadadadYpaiadadbkaiadadadadadaiazaAadadadadadadLladaxaBaCaaaaaaaa
-aaaaaaabababababababababababababaibnnLkbnmaiaiaiakaiaiaiadboadaiaiaiaiadaqarasatababadadadababaaaaaa
-aaaaaaababababababababababababababaiaiaiaiaiadadadadadaiaiaiaiaiMvadakadababababababadadadababababaa
+aaaaaaababababfaababababababababaibnnLkbnmaiaiaiakaiaiaiadboadaiaiaiaiadaqarasatababadadadababaaaaaa
+aaaaaaababababababababababababababaiaicZaiaiadadadadadaiaicZaiaiMvadakadababababababadadadababababaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadaxadadadadadaxadadadadadadababababababababRFadadabababaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababadadadadadadadadadadadadadabababababababababababababababaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadaebqagadadadadadababababbpaabpaaabababababababaaaaaaaa

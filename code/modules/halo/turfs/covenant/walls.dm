@@ -13,7 +13,7 @@
 	icon_state = "covie_reinf"
 
 /turf/simulated/wall/covenant/reinforced/New(var/newloc)
-	. = ..(newloc,"nanolaminate","nanolaminate")
+	..(newloc,"nanolaminate","nanolaminate")
 
 /turf/simulated/wall/drone_biomass
 	name = "biomass covered wall"

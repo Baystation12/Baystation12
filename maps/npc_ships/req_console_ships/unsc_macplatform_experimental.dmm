@@ -21,7 +21,6 @@
 "ny" = (/obj/vehicles/drop_pod/escape_pod/bumblebee/west,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "pA" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "qN" = (/obj/structure/window/reinforced/projresist{dir = 2},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"qR" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "qX" = (/turf/simulated/wall,/area/om_ships/req_console_ship)
 "ra" = (/obj/structure/computerframe{anchored = 1; dir = 2; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{dir = 2; germ_level = 110; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-comm (NORTH)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "rm" = (/obj/machinery/mac_cannon/accelerator{icon_state = "mac_accelerator"; dir = 8},/obj/machinery/mac_cannon/accelerator{icon_state = "mac_accelerator"; dir = 8},/turf/space,/area/space)
@@ -35,6 +34,7 @@
 "vd" = (/obj/structure/window/reinforced/projresist{dir = 2},/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "zX" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/overmap_weapon_console/mac{icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "BJ" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"Dj" = (/obj/effect/hull_segment,/turf/simulated/wall,/area/om_ships/req_console_ship)
 "Ed" = (/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Fc" = (/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Gv" = (/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
@@ -55,6 +55,7 @@
 "TC" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "TG" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Ue" = (/obj/machinery/light{dir = 8},/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"Ux" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{density = 0; department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "UQ" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Vw" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WF" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -71,17 +72,17 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslsqX
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslsqXqXFcFcFcFcqXqXlslsaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslsqXqXqXqXqXqXqXqXnyFcFcFcqXqXqXlsaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXqXqXqXqXaaaaruqXqXqXqXqXFcFcILFcqXaaruaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslsruruqXqXqXqXaaaaaaaaaaaaqXqXhdcOhdqXqXqXqXMTqXqXqXqXaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslsruruqXDjqXqXaaaaaaaaaaaaqXqXhdcOhdqXqXqXqXMTqXqXqXqXaaaa
 aaaaaaaaaaaaaalslslslslslslslsruaaaaaaaaaaruruuNezGvqXqXqXqXqXqXqXqXqXRkhdhdhdWWdMrMJNhdqXFcFcshaaaa
-aalslslslslslslsruaaaaaarururururuaaaaaaruruuNqNEdEdWVEdEdEdEdraqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
-aarururuaarururururuaarururururururuaarururuIeEdEdEdqXEdEdTxEdEddDqXhdhdhdqXqXMTqXqXUehdqXTCFcshaaaa
+aalslslslslslslsruaaaaaarururururuaaaaaaruruuNqNEdEdWVEdEdEdEdraqXDjqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
+aarururuaarururururuaarururururururuaarururuIeEdEdEdqXEdEdTxEdEddDqXhdhdhdqXqXMTqXqXUehdDjTCFcshaaaa
 aarutntnJatntntntntntntntnJatnJatntntntntnJahWEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaa
-aaaWHqaWaWaWHqaWHqaWaWrmHqHqaWHqHqaWaWaWHqHqzXEdEdqXHoebEdEdEdEdEdBJqRqXRZqXUQcSakqXqXBJqXqXqXqXaaaa
+aaaWHqaWaWaWHqaWHqaWaWrmHqHqaWHqHqaWaWaWHqHqzXEdEdqXHoebEdEdEdEdEdBJUxqXRZqXUQcSakqXqXBJqXqXqXqXaaaa
 aarutntntntntntntntntntntnJatnJatntntntntnJasbEdgJqXqXSsEdeYOrEdTGqXBJqXBJqXFcFcFcqXVwhdqXFcFcshaaaa
-aarururuaarururururuaarururururururuaarururuTtEdEdEdqXEdEdTxEdEdfJqXhdhdhdqXqXMTqXqXUehdqXTCFcshaaaa
+aarururuaarururururuaarururururururuaarururuTtEdEdEdqXEdEdTxEdEdfJqXhdhdhdqXqXMTqXqXUehdDjTCFcshaaaa
 aalslslslslslslsruaaaaaarururururuaaaaaaruruvdswEdEdWVEdEdEdEdJMqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
-aaaaaaaaaaaaaalslslslslslslslsruaaaaaaaaaaruruvdezGvqXqXqXqXqXqXqXqXqXWFhdhdhdpAbShbjWhdqXFcFcshaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslsruruqXqXqXqXaaaaaaaaaaaaqXqXhdlbhdqXqXqXqXMTqXqXqXqXaaaa
+aaaaaaaaaaaaaalslslslslslslslsruaaaaaaaaaaruruvdezGvqXqXqXqXqXqXqXDjqXWFhdhdhdpAbShbjWhdqXFcFcshaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslsruruqXDjqXqXaaaaaaaaaaaaqXqXhdlbhdqXqXqXqXMTqXqXqXqXaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXqXqXqXqXaaaaruqXqXqXqXqXFcFclqFcqXaaruaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslsqXqXqXqXqXqXqXqXFcFcFcFcqXqXqXlsaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslsqXqXnyFcFcFcqXqXlslsaaaa

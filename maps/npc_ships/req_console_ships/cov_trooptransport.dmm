@@ -70,12 +70,14 @@
 "rF" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "vj" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "yj" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"yC" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
 "yW" = (/turf/space,/area/om_ships/req_console_ship)
 "BE" = (/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "EN" = (/obj/vehicles/drop_pod/escape_pod/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Fe" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "JR" = (/obj/machinery/photocopier/faxmachine{department = "CRS Unyielding Transgression"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "MZ" = (/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"PX" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -86,15 +88,15 @@ aaaaaaaaaaaaaaaaacaaabababababaaaaababadadadadadadadadadadadadabababaaaaaaaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadadadadadadadadadababababaaaaaaaaabababababababaaaaaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadagadadadadadadadadabababababababababababababababaaaaaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadajadadadadadadadadadadadBEababababababababadadadabababaaaa
-aaaaaaababababababababababababababaiaiaiaiaiadadadadadajadbaadadajadakadababababababENadadababababaa
-aaaaaaabaiaiaiaiaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiaiaiaiaiaiaiaiadapaqarasababadadadababaaaaaa
+aaaaaaababababababababababababababaiaiPXaiaiadadadadadajadbaadadajadakadababababababENadadababababaa
+aaaaaaabaiaiaiPXaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiaiPXaiaiaiaiaiadapaqarasababadadadababaaaaaa
 aaaaatauaiavaiaiadadadaeadadawaiboadadadadvjaiaxadayaiaiadazadaiaiaAaBadadadadadadFeadajaCaDaaaaaaaa
-aaaaaEaFaeadaGaiadaHaIaJaKadadaiafaLaLaLaLadakadadaMaiafadadadadakadadadaNadaOaPaQaiakaiaiaiaaaaaaaa
+aaaaaEaFaeadaGaiadaHaIaJaKadadaiafaLaLaLaLadakadadaMaiafadadadadakadadadaNadaOaPaQPXakaiaiaiaaaaaaaa
 aaaaaEaRaSadadakadaTaSadadaUadakadaVaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiafaYyWyWaaaaaaaa
-aaaaaEaZajadbaaiadbbbcbdbeadadaiafaLaLaLaLadakadadbfaiafadadadadakadadadbgadaOaPaQaiakaiaiaiaaaaaaaa
+aaaaaEaZajadbaaiadbbbcbdbeadadaiafaLaLaLaLadakadadbfaiafadadadadakadadadbgadaOaPaQPXakaiaiaiaaaaaaaa
 aaaabhbiaibjaiaiadadadajadadbkaiJRadadadadehaiaxadblaiaiadbmadaiaiaAaBadadadadadadyjadaeaCaDaaaaaaaa
-aaaaaaabababababababababababababaibpmCfhrFaiaiaiakaiaiaiaiaiaiaiaiaiaiadapaqarasababadadadababaaaaaa
-aaaaaaababababababababababababababaiaiaiaiaiadadadadadaeadaGadadaeadakadababababababadadadababababaa
+aaaaaaababababyCababababababababaibpmCfhrFaiaiaiakaiaiaiaiPXaiaiaiaiaiadapaqarasababadadadababaaaaaa
+aaaaaaababababababababababababababaiaiPXaiaiadadadadadaeadaGadadaeadakadababababababadadadababababaa
 aaaaaaabababaaaaaaaaaaaaaaaaababababaiadadaeadadadadadadadadadadadMZababababababababENadadabababaaaa
 aaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadadadadadadadadadadabababababababababababababababaaaaaa
 aaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadadadadadadadadadababababaaaaaaaaabababababababaaaaaaaa

@@ -208,7 +208,6 @@
 				dismantle_wall(1,1)
 		if(3.0)
 			take_damage(rand(0, 250))
-		else
 	return
 
 // Wall-rot effect, a nasty fungus that destroys walls.

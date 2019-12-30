@@ -3,7 +3,6 @@
 "bC" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "ce" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cy" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"cA" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cO" = (/obj/docking_umbilical/north,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "dD" = (/obj/machinery/nav_computer/unsc,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "dM" = (/obj/structure/table/rack,/obj/item/clothing/head/welding,/obj/item/clothing/head/welding,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -55,6 +54,7 @@
 "Ed" = (/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Fc" = (/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Gu" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
+"GM" = (/obj/effect/hull_segment,/turf/simulated/wall,/area/om_ships/req_console_ship)
 "GV" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Hz" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "IL" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -65,6 +65,7 @@
 "MI" = (/obj/structure/closet/crate/trashcart,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "MT" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Nh" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/supply_pod,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"NH" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{density = 0; department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "NK" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local{dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/obj/structure/computerframe{anchored = 1; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "NL" = (/obj/vehicles/drop_pod/overmap/SOEIV,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Pw" = (/obj/structure/bed/chair{dir = 2},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -99,15 +100,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaatHlslslslslslslslslslsaaaaaaaaaaaaaaaalslslslslslslsls
 aaaaaaaaaaaaaaaaaaaaaaaatHlslslslslslslslslslslslsaaaaaaaaaalslslslslslslslslsqXnyFcFcFcqXqXlslsaaaa
 aaaaaaaatHlslslslslslslslslsqXqXGVGVGVqXGVGVGVqXlslslslsaaaaaaaaaaaaruaaaaaaaaqXFcFcILFcqXaaruaaaaaa
 aaaaaaaalslslslslslslslslsqXqXqXSWGVGVyPTPGVGVqXqXlslslslslslsaaaaaaqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
-aaaaaalslslsqXqXqXqXqXqXqXqXqXqXFcFcFcFcFcFcFcqXqXqXqXqXlslslslsqXqXqXqXqXhdhdRkdMJNKGhdqXFcFcshaaaa
-aaaaaarZtDXZEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXqXqXqXqXewrXpZpRgmPTqXhdcOhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa
-aaaahIkOEdEdqXqXEdEdEdEdEdWVhdhdhdSqhdhdhdhdhdhdWthdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXqXWLFcshaaaa
+aaaaaalslslsqXqXqXqXGMqXqXqXqXqXFcFcFcFcFcFcFcqXqXqXqXqXlslslslsqXGMqXqXqXhdhdRkdMJNKGhdqXFcFcshaaaa
+aaaaaarZtDXZEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXGMqXqXqXewrXpZpRgmPTqXhdcOhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa
+aaaahIkOEdEdqXqXEdEdEdEdEdWVhdhdhdSqhdhdhdhdhdhdWthdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXGMWLFcshaaaa
 aaaagEjIEdEdqXfJgJqXCNEdEdqXuJqXuJqXuJqXNhqXhdNLqXhdPwPwPwPwhdtshdhdhdstqXBJqXBJqXFcFcFcqXqLFcshaaaa
-aaaagEoSebgJqXqXEdoSebQVNKqXvuhdNLhdNLhdnEJnhdbzqXyydZdZdZdZcAqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
+aaaagEoSebgJqXqXEdoSebQVNKqXvuhdNLhdNLhdnEJnhdbzqXyydZdZdZdZNHqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
 aaaagEbCEdEdqXdDgJqXCNEdEdqXuJqXuJqXuJqXNhqXhdNLqXhdHzHzHzHzhdhdhdhdhdstqXBJqXBJqXFcFcFcqXnmFcshaaaa
-aaaaDivoEdEdqXqXEdEdEdEdEdWVhdhdhdZkhdhdhdhdhdhdWthdhdhdhdhdhdtshdhdhdhdqXhdVwhdqXqXMTqXqXYcFcshaaaa
-aaaaaaGutDIXEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXqXqXqXqXmVlHRycysrceqXhdlbhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa
-aaaaaalslslsqXqXqXqXqXqXqXqXqXqXFcFcFcFcFcFcFcqXqXqXqXqXlslslslsqXqXqXqXqXhdhdWFMIZFKGhdqXFcFcshaaaa
+aaaaDivoEdEdqXqXEdEdEdEdEdWVhdhdhdZkhdhdhdhdhdhdWthdhdhdhdhdhdtshdhdhdhdqXhdVwhdqXqXMTqXGMYcFcshaaaa
+aaaaaaGutDIXEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXGMqXqXqXmVlHRycysrceqXhdlbhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa
+aaaaaalslslsqXqXqXqXGMqXqXqXqXqXFcFcFcFcFcFcFcqXqXqXqXqXlslslslsqXGMqXqXqXhdhdWFMIZFKGhdqXFcFcshaaaa
 aaaaaaaalslslslslslslslslsqXqXqXGVGVGVqkGVGVGVqXqXlslslslslslsaaaaaaqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
 aaaaaaaatHlslslslslslslslslsqXqXSWGVGVqXTPGVGVqXlslslslsaaaaaaaaaaaaruaaaaaaaaqXFcFclqFcqXaaruaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaatHlslslslslslslslslslslslsaaaaaaaaaalslslslslslslslslsqXFcFcFcFcqXqXlslsaaaa

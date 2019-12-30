@@ -3,6 +3,7 @@
 "aA" = (/obj/machinery/vending/snack,/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "aJ" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "bC" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
+"bE" = (/obj/effect/hull_segment,/turf/simulated/wall/silver{tag = "icon-solidfwall_opening"; icon_state = "solidfwall_opening"},/area/om_ships/req_console_ship)
 "ce" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cp" = (/obj/machinery/organ_printer/flesh/mapped{max_stored_matter = 1e+007},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "cu" = (/obj/machinery/atmospherics/pipe/manifold4w/visible/blue,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
@@ -65,6 +66,7 @@
 "zE" = (/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/window/reinforced/projresist{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "BJ" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "CG" = (/obj/machinery/vending/props,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"CO" = (/obj/effect/hull_segment,/turf/simulated/wall,/area/om_ships/req_console_ship)
 "CY" = (/obj/machinery/power/fusion_drive_simple,/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "De" = (/obj/structure/window/reinforced/projresist{dir = 1},/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "Di" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist,/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -99,6 +101,7 @@
 "PT" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Qv" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Rg" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{dir = 8; germ_level = 110; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-comm (NORTH)"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
+"Rw" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{density = 0; department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Ry" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "RX" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "RZ" = (/obj/structure/closet/crate,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -106,7 +109,6 @@
 "Tk" = (/obj/machinery/light{dir = 8},/obj/structure/closet/crate/trashcart,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "UQ" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "VL" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"Wh" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Wt" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WV" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "WW" = (/obj/structure/closet/emcloset/legacy,/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 2},/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
@@ -127,15 +129,15 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslsrurururururururulslslslslslslslsls
 aaaaaaaaaaaaaaaalslslslslslslslslslsrurururururulslslslslslslslsruaaruaaaaaaaaqXnyFcFcFcqXaaaaaaaaaa
 aaaaaaaaaalslslslslsaaaaaaaaruaaaaaaaaaaaaaaaaruaaaaaaaaaaaaaarurururuaaaaaaaaqXFcFcILFcqXaaruaaaaaa
 aaaaaaaalslslslslslslslslslslslslslslslslslslsruaaaaaaaaaaaaaaaaaaruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
-aaaaaalslslsqXmBmBmBmBmBmBmBmBmBmBmBmBmBmBmBlslslslsqXqXqXqXqXqXqXqXqXawtztztzVLhcKGtzhdqXEZFcshaaaa
+aaaaaalslslsqXmBmBmBbEmBmBmBmBmBmBmBmBmBmBbElslslslsqXqXqXqXqXqXqXCOqXawtztztzVLhcKGtzhdqXEZFcshaaaa
 aaaaaarZebXZEdWVZHZHxlZHZHZHpCZHZHZHxlvyTcmBKGKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
-aaaahIkOebEdtDmBGJmNZHcpZHLcmBpXNhZHZHZHZHWthdhdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXqXqXsVFcshaaaa
+aaaahIkOebEdtDmBGJmNZHcpZHLcmBpXNhZHZHZHZHWthdhdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXqXCOsVFcshaaaa
 aaaagERgEdebmBmBIDDeIfEEuoOqmBZHZHZHZHMzZHmBdDqXyyPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcjIzEqXzgFcshaaaa
-aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhddZdZdZdZWhqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa
+aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhddZdZdZdZRwqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa
 aaaagEgvEdebmBmBydPxDOYQGLvxmBZCMRZHZHOVZHmBfJqXyyHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcaJMqqXHkFcshaaaa
-aaaaDivoebEdtDmBGJmNZHFpZHLcmBpXNhxSZHZHZHWthdhdhdhdhdhdhdhdtshdhdhdqXhdhdhdqXqXMTqXqXqXqXTkFcshaaaa
+aaaaDivoebEdtDmBGJmNZHFpZHLcmBpXNhxSZHZHZHWthdhdhdhdhdhdhdhdtshdhdhdqXhdhdhdqXqXMTqXqXqXCOTkFcshaaaa
 aaaaaaGuebIXEdWVZHZHbCZHZHZHpCdiZHZHbCvyTcmBCGkzRyaAlHcysrceqXhdlbhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
-aaaaaalslslslsmBmBmBmBmBmBmBmBmBmBmBmBmBmBmBlslslslsqXqXqXqXqXqXqXqXqXawtztztzsFZFKGtzhdqXQvFcshaaaa
+aaaaaalslslslsmBmBmBbEmBmBmBmBmBmBmBmBmBmBbElslslslsqXqXqXqXqXqXqXCOqXawtztztzsFZFKGtzhdqXQvFcshaaaa
 aaaaaaaalslslslslslslslslslslslslslslslslslslsruaaaaaaaaaaaaaaaaaaruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
 aaaaaaaaaalslslslslsaaaaaaaaruaaaaaaaaaaaaaaaaruaaaaaaaaaaaaaarurururuaaaaaaaaqXFcFclqFcqXaaruaaaaaa
 aaaaaaaaaaaaaaaalslslslslslslslslslsrurururururulslslslslslslslsruaaruaaaaaaaaqXFcFcFcFcqXaaaaaaaaaa

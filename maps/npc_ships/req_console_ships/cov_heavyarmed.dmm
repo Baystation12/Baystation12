@@ -77,11 +77,13 @@
 "bz" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bA" = (/obj/machinery/deck_gun/cov_pulse_turret{dir = 2},/turf/space,/area/space)
 "gc" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"jY" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
 "sx" = (/obj/machinery/photocopier/faxmachine{department = "CRS Unyielding Transgression"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "wj" = (/obj/machinery/light/covenant/north,/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "zi" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/structure/closet/crate/covenant{name = "Supraluminal Communications Equipment"},/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/card/id{desc = "Superluminal Communications Array Authentication Disk"; icon = 'code/modules/halo/covenant/Cards.dmi'; icon_state = "sangzealot_id"; name = "Superluminal Auth Disk."; tag = "icon-pinkGold"},/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Au" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "BV" = (/obj/vehicles/drop_pod/escape_pod/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"Fv" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
 "HC" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "JR" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "MV" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -97,15 +99,15 @@ aaaaaaaaaaaaaaaaabaaacacacacacaaaaacacacacacacaeafaeacacacacacacacacaaaaaaaaaaaa
 aaaaaaaaaaabaaacacacacacaaaaaaaaaaacacaeaeaeaeaeaeaeaeaeaBaeaeacacacacaaaaaaaaacacacacacacacaaaaaaaa
 aaaaaaaaacacacacacaaaaaaaaaaaaaaacacacaeaeaeaeaeaeaeaeaeaeaeaeaeacacacacacacacacacacacacacacacaaaaaa
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacagaeaeahaeaeaeaeaeahaeaeaeaeaeaeacacacacacacacacaeaeaeacacacaaaa
-aaaaaaacacacacacacacacacacacacacacagagagagagaeaeaeagagagagagagagTZaeaiaeacacacacacacBVaeaeacacacacaa
-aaaaaaacagagagagagagagagagagacacagajakalamagagaiagaganaoapaeaeagagagagaeaqarasatacacaeaeaeacacaaaaaa
+aaaaaaacacacacacacacacacacacacacacagagFvagagaeaeaeagagagagFvagagTZaeaiaeacacacacacacBVaeaeacacacacaa
+aaaaaaacagagagFvagagagagagagacacagajakalamagagaiagaganaoapaeaeagagagagaeaqarasatacacaeaeaeacacaaaaaa
 aaaaauavagawagagaeaeaeapaeaeaeagbvaeaeaeaeMXagaeaeapaeaeaeaeaeaeaiaeaeaeaeaeaeaeaeJRaeahaxayaaaaaaaa
-aaaaazaAapaeaBagaeaCaDaDaDaEaeagaFaGaGaGaGaeaiaeaeaHaeaIaJaKaLaeagaMaNaeaOaeaPaQaRagaiagagagaaaaaaaa
+aaaaazaAapaeaBagaeaCaDaDaDaEaeagaFaGaGaGaGaeaiaeaeaHaeaIaJaKaLaeagaMaNaeaOaeaPaQaRFvaiagagagaaaaaaaa
 aaaaazaSaTaeaeaiaeaUaTaGaVaeaeaiaeaWaWaWaWaXagaYaeaZaebabbbcbdaXagagagaiagaiagagagagaFbeaaaaaaaaaaaa
-aaaaazbfahaebgagaebhbibibiaEaeagaFaGaGaGaGaeaiaeaebjaebkblbmbnaeagbobpaebqaeaPaQaRagaiagagagaaaaaaaa
+aaaaazbfahaebgagaebhbibibiaEaeagaFaGaGaGaGaeaiaeaebjaebkblbmbnaeagbobpaebqaeaPaQaRFvaiagagagaaaaaaaa
 aaaabrbsagbtagagaeaeaeahaeaeaeagsxaeaeaeaeziagaeaeahaeaeaeaeaeaeaiaeaeaeaeaeaeaeaeMVaeapaxayaaaaaaaa
-aaaaaaacacacacacacacacacacacacacagbwgcHCAuagagaiagagbxbyahaeaeagagagagaeaqarasatacacaeaeaeacacaaaaaa
-aaaaaaacacacacacacacacacacacacacacagagagagagaeaeaeagagagagagagagwjaeaiaeacacacacacacaeaeaeacacacacaa
+aaaaaaacacacacjYacacacacacacacacagbwgcHCAuagagaiagagbxbyahaeaeagagagagaeaqarasatacacaeaeaeacacaaaaaa
+aaaaaaacacacacacacacacacacacacacacagagFvagagaeaeaeagagagagFvagagwjaeaiaeacacacacacacaeaeaeacacacacaa
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacagaeaeapaeaeaeaeaeapaeaeaeaeaeaeacacacacacacacacBVaeaeacacacaaaa
 aaaaaaaaacacacacacaaaaaaaaaaaaaaacacacaeaeaeaeaeaeaeaeaeaeaeaeaeacacacacacacacacacacacacacacacaaaaaa
 aaaaaaaaaaabaaacacacacacaaaaaaaaaaacacaeaeaeaeaeaeaeaeaebgaeaeacacacacaaaaaaaaacacacacacacacaaaaaaaa

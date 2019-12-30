@@ -179,6 +179,9 @@
 	if(!allow_user_operate(user))
 		to_chat(user,"<span class = 'notice'>You are unable to decipher the controls.</span>")
 		return
+	if(world.time < ticker.mode.ship_lockdown_until)
+		to_chat(user,"<span class = 'notice'>This cannot be activated until the ship finalises deployment preperatiosn!</span>")
+		return
 	if(user.a_intent == "harm")
 		user_overload_engine(user)
 		return

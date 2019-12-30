@@ -218,8 +218,7 @@ allowing periodic long range transmission."
 /datum/spawner_choice/experimental_unsc_combat,\
 /datum/spawner_choice/unsc_slipspace_tender,\
 /datum/spawner_choice/unsc_podcarrier,\
-/datum/spawner_choice/unsc_trooptransport,\
-/datum/spawner_choice/cheap_cov_combat\
+/datum/spawner_choice/unsc_trooptransport\
 )
 
 /obj/machinery/shuttle_spawner/multi_choice/urf

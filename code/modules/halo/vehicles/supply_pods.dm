@@ -7,7 +7,7 @@
 
 	density = 1
 
-	var/pod_to_spawn = /obj/vehicles/drop_pod/supply_pod
+	var/pod_to_spawn = /obj/vehicles/drop_pod/overmap/supply_pod
 	var/pod_delay = 2 MINUTES
 	var/next_pod = 0
 
