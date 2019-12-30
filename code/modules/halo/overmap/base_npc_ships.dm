@@ -163,7 +163,7 @@
 	var/list/sectors_onmap = list()
 	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
 		var/obj/effect/overmap/om_obj = locate(type)
-		if(om_obj && !isnull(om_obj.loc) && om_obj.base && !(om_obj.faction in my_faction.enemy_factions)) //Only even try going if it's a "base" object
+		if(om_obj && !isnull(om_obj.loc) && om_obj.base && !(om_obj.get_faction() in my_faction.enemy_factions)) //Only even try going if it's a "base" object
 			sectors_onmap += om_obj
 	if(sectors_onmap.len == 0)
 		target_loc = pick(GLOB.overmap_tiles_uncontrolled)
@@ -174,7 +174,10 @@
 			if(istype(t,/turf/unsimulated/map/edge))
 				continue
 			turfs_nearobj += t
-		target_loc = pick(turfs_nearobj)
+		if(target_loc.len > 0)
+			target_loc = pick(turfs_nearobj)
+		else
+			target_loc = loc
 
 /obj/effect/overmap/ship/npc_ship/can_burn()
 	if(!is_player_controlled())
