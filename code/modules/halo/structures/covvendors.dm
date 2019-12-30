@@ -83,7 +83,7 @@
 	if(h.species.type == /datum/species/yanmee)
 		return 1
 	return 0
-
+  
 /obj/machinery/vending/armory/covenant/sangheili/weapon // Both ammo, and guns!
 	name = "Covenant - Sangheili Weapon Vendor"
 	desc = "Storage for Covenant Sangheili weapons and ammo"
