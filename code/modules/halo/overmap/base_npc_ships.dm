@@ -174,7 +174,7 @@
 			if(istype(t,/turf/unsimulated/map/edge))
 				continue
 			turfs_nearobj += t
-		if(target_loc.len > 0)
+		if(turfs_nearobj.len > 0)
 			target_loc = pick(turfs_nearobj)
 		else
 			target_loc = loc
