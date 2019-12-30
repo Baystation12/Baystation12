@@ -19,7 +19,7 @@ MRE Stuff
 	/obj/random/mre/spread,
 	/obj/random/mre/drink,
 	/obj/random/mre/sauce,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+	/obj/item/weapon/material/kitchen/utensil/spork/plastic
 	)
 
 /obj/item/weapon/storage/mre/Initialize()
