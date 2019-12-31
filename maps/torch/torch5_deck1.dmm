@@ -13734,6 +13734,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/questioning)
+"bpC" = (
+/obj/machinery/body_scanconsole{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/pink{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/pink{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/sleeper)
 "bqb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -15153,15 +15165,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/security/wing)
-"cXO" = (
-/obj/effect/floor_decal/corner/pink{
-	dir = 6
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/sleeper)
 "cYb" = (
 /obj/machinery/status_display,
 /turf/simulated/wall/prepainted,
@@ -15631,26 +15634,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
-"dyb" = (
-/obj/effect/floor_decal/corner/pink{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/sleeper)
-"dzb" = (
-/obj/effect/floor_decal/corner/pink{
-	dir = 10
-	},
-/obj/effect/floor_decal/corner/pink{
-	dir = 5
-	},
-/obj/machinery/body_scanconsole{
-	dir = 4;
-	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
-	icon_state = "body_scannerconsole"
-	},
-/turf/simulated/floor/tiled/white,
-/area/medical/sleeper)
 "dzG" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/disposal,
@@ -16154,9 +16137,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/corner/pink{
-	dir = 9
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "equ" = (
@@ -19227,9 +19207,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/pink{
-	dir = 9
-	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "isb" = (
@@ -26902,8 +26879,8 @@
 /area/rnd/misc_lab)
 "qPw" = (
 /obj/machinery/bodyscanner{
-	icon_state = "body_scanner_0";
-	dir = 4
+	dir = 1;
+	icon_state = "body_scanner_0"
 	},
 /obj/effect/floor_decal/corner/pink{
 	dir = 5
@@ -51838,9 +51815,9 @@ aeo
 sSw
 alD
 iCP
-cXO
-bQT
-dyb
+wjo
+alD
+alD
 uVE
 eJq
 anL
@@ -52040,9 +52017,9 @@ aeo
 cEb
 cTb
 hDV
-dzb
 alD
-dzb
+bQT
+alD
 dOb
 dxb
 aeo
@@ -52243,8 +52220,8 @@ czb
 hrF
 hDV
 qPw
-alD
-qPw
+bpC
+cTb
 dOb
 eTb
 gLf
