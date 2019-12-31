@@ -70,6 +70,7 @@
 "CY" = (/obj/machinery/power/fusion_drive_simple,/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "De" = (/obj/structure/window/reinforced/projresist{dir = 1},/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "Di" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist,/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
+"DB" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "DO" = (/obj/machinery/door/window/southleft,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "Ed" = (/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "EE" = (/obj/structure/table/glass,/obj/item/device/reagent_scanner/adv,/obj/item/weapon/reagent_containers/dropper,/obj/structure/window/reinforced/projresist{dir = 1},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
@@ -133,7 +134,7 @@ aaaaaalslslsqXmBmBmBbEmBmBmBmBmBmBmBmBmBmBbElslslslsqXqXqXqXqXqXqXCOqXawtztztzVL
 aaaaaarZebXZEdWVZHZHxlZHZHZHpCZHZHZHxlvyTcmBKGKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOebEdtDmBGJmNZHcpZHLcmBpXNhZHZHZHZHWthdhdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXqXCOsVFcshaaaa
 aaaagERgEdebmBmBIDDeIfEEuoOqmBZHZHZHZHMzZHmBdDqXyyPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcjIzEqXzgFcshaaaa
-aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhddZdZdZdZRwqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa
+aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhddZdZdZDBRwqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa
 aaaagEgvEdebmBmBydPxDOYQGLvxmBZCMRZHZHOVZHmBfJqXyyHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcaJMqqXHkFcshaaaa
 aaaaDivoebEdtDmBGJmNZHFpZHLcmBpXNhxSZHZHZHWthdhdhdhdhdhdhdhdtshdhdhdqXhdhdhdqXqXMTqXqXqXCOTkFcshaaaa
 aaaaaaGuebIXEdWVZHZHbCZHZHZHpCdiZHZHbCvyTcmBCGkzRyaAlHcysrceqXhdlbhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa

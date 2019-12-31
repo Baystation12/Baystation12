@@ -18,6 +18,7 @@
 "gJ" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "hd" = (/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "hI" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
+"hR" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "iE" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (WEST)"; icon_state = "warningcorner_dust"; dir = 8},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "jU" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "jW" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -114,7 +115,7 @@ aaaaaalslslsqXqXqXqXZaqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXZaqXqXqXRkdMFb
 aaaaaarZEdXZEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsraKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOEdEdtDqXEdEdEdEdEdEdqXFcFcjUcNcNcNcNoZWthdhdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXZamAFcshaaaa
 aaaagEZQEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcdrFcFcFcqXhdPwPwPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcqXtzFcshaaaa
-aaaagEoSebgJqXfJEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyydZdZdZdZdZdZxoqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
+aaaagEoSebgJqXfJEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyydZdZdZdZdZhRxoqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
 aaaagEzZEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcvdFcFcFcqXhdHzHzHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcqXjWFcshaaaa
 aaaaDivoEdEdtDqXEdEdEdEdEdEdqXFcFccJojojojojTYWthdhdhdhdhdhdhdhdtshdhdhdqXhdVwhdqXqXMTqXZaolFcshaaaa
 aaaaaaGuEdIXEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsViUxlHkzRycysrceqXhdlbhdqXXihdhdhdhdhdhdMTFcFcshaaaa

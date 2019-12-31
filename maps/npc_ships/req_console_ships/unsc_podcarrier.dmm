@@ -33,6 +33,7 @@
 "qL" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "qX" = (/turf/simulated/wall,/area/om_ships/req_console_ship)
 "ru" = (/obj/structure/lattice,/turf/space,/area/space)
+"rO" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "rX" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "rZ" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "sh" = (/obj/machinery/fusion_thruster/fueled{dir = 8},/obj/structure/window/reinforced/projresist{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -104,7 +105,7 @@ aaaaaalslslsqXqXqXqXGMqXqXqXqXqXFcFcFcFcFcFcFcqXqXqXqXqXlslslslsqXGMqXqXqXhdhdRk
 aaaaaarZtDXZEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXGMqXqXqXewrXpZpRgmPTqXhdcOhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa
 aaaahIkOEdEdqXqXEdEdEdEdEdWVhdhdhdSqhdhdhdhdhdhdWthdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXGMWLFcshaaaa
 aaaagEjIEdEdqXfJgJqXCNEdEdqXuJqXuJqXuJqXNhqXhdNLqXhdPwPwPwPwhdtshdhdhdstqXBJqXBJqXFcFcFcqXqLFcshaaaa
-aaaagEoSebgJqXqXEdoSebQVNKqXvuhdNLhdNLhdnEJnhdbzqXyydZdZdZdZNHqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
+aaaagEoSebgJqXqXEdoSebQVNKqXvuhdNLhdNLhdnEJnhdbzqXyydZdZdZrONHqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
 aaaagEbCEdEdqXdDgJqXCNEdEdqXuJqXuJqXuJqXNhqXhdNLqXhdHzHzHzHzhdhdhdhdhdstqXBJqXBJqXFcFcFcqXnmFcshaaaa
 aaaaDivoEdEdqXqXEdEdEdEdEdWVhdhdhdZkhdhdhdhdhdhdWthdhdhdhdhdhdtshdhdhdhdqXhdVwhdqXqXMTqXGMYcFcshaaaa
 aaaaaaGutDIXEdWVEdEdEdEdEdqXqXqXqXqXqXCZqXGMqXqXqXmVlHRycysrceqXhdlbhdqXqXXihdhdhdhdhdhdBJFcFcshaaaa

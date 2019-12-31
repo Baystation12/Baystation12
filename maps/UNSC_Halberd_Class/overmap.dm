@@ -13,5 +13,7 @@
 
 	parent_area_type = /area/destroyer/unsclightbrigade
 
+	ship_max_speed = 2
+
 /obj/machinery/button/toggle/alarm_button/destroyer
 	area_base = /area/destroyer/unsclightbrigade

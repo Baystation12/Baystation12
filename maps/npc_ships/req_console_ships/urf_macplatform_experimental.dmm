@@ -55,7 +55,6 @@
 "bc" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "bd" = (/obj/structure/window/reinforced/projresist{dir = 2},/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "be" = (/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"bf" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "bg" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bh" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bi" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/obj/item/weapon/reagent_containers/glass/bucket,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -63,6 +62,7 @@
 "bk" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bl" = (/obj/docking_umbilical/south,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bm" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
+"YL" = (/obj/item/weapon/paper_bin,/obj/structure/table/steel,/obj/item/weapon/pen,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -80,7 +80,7 @@ aaafaEaEaFaEaEaEaEaEaEaEaEaFaEaFaEaEaEaEaEaFaGavaHacacaIavaJaKavaLacaMacaMacadad
 aaaOaPaOaOaOaPaOaPaOaOaQaPaPaOaPaPaOaOaOaPaPaRavavacaSaTavavavavavaMaUacaVacaWaXaYacacaMacacacacaaaa
 aaafaEaEaEaEaEaEaEaEaEaEaEaFaEaFaEaEaEaEaEaFaZavaHacacaIavaJaKavaLacaMacaMacadadadacbaaiacadadataaaa
 aaafafafaaafafafafafaaafafafafafafafaaafafafbbavavavacavavaAavavbcacaiaiaiacacakacacaCaiahaDadataaaa
-aaabababababababafaaaaaaafafafafafaaaaaaafafbdbeavavawavavavavbfacacacayaiaiaiaiaiaiaiaiakadadataaaa
+aaabababababababafaaaaaaafafafafafaaaaaaafafbdbeavavawavavavavYLacacacayaiaiaiaiaiaiaiaiakadadataaaa
 aaaaaaaaaaaaaaababababababababafaaaaaaaaaaafafbdamanacacacacacacacahacbgaiaiaibhbibjbkaiacadadataaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababafafacahacacaaaaaaaaaaaaacacaiblaiacacacacakacacacacaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababacacacacacacacacaaaaafacacacacacadadbmadacaaafaaaaaa
@@ -91,3 +91,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

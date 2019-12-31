@@ -16,6 +16,8 @@
 
 	parent_area_type = /area/covenant_light_cruiser
 
+	ship_max_speed = 2
+
 //overmap weapons//
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turretport/covenant_light_cruiser
 	deck_gun_area = /area/covenant_light_cruiser/pulse_lasersport

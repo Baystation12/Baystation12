@@ -42,6 +42,7 @@
 "xx" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control{dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/obj/structure/computerframe{anchored = 1; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "yy" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "yO" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; tag = "icon-engine (NORTH)"},/obj/structure/computerframe{anchored = 1; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
+"yZ" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "zj" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "BJ" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "CN" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
@@ -101,7 +102,7 @@ aaaaaalslslsqXqXqXqXaRqXqXqXqXqXqXlslslslszjqXqXqXqXqXqXqXqXqXqXqXqXqXRkhdtzdMFb
 aaaaaarZEdXZEdWVEdEdEdEdEdEdWVhdSqhdhdhdhdqXewrXpZpRgmPTqXhdcOhdqXaRqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOEdEdtDqXEdEdEdEdEdEdqXKGhdhdhdhdhdWthdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXXihdaRTCFcshaaaa
 aaaagEGIEdEdqXqXgJqXCNQVyOgJqXqXhdEhUCUPhdqXhdPwPwPwPwhdtshdhdhdstqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaa
-aaaagEoSebgJqXfJEdoSebQVNKEddDqXWtqXqXqXWtqXyydZdZdZdZDgqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXBJqXqXqXqXaaaa
+aaaagEoSebgJqXfJEdoSebQVNKEddDqXWtqXqXqXWtqXyydZdZdZyZDgqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXBJqXqXqXqXaaaa
 aaaagEOJEdEdqXqXgJqXCNQVxxgJqXqXhdEhOaUPhdqXhdHzHzHzHzhdhdhdhdhdstqXBJqXBJqXFcFcFcqXVwhdqXFcFcshaaaa
 aaaaDivoEdEdtDqXEdEdEdEdEdEdqXKGhdhdhdhdhdWthdhdhdhdhdhdtshdhdhdhdqXhdhdhdqXqXMTqXqXXihdaRTCFcshaaaa
 aaaaaaGuEdIXEdWVEdEdEdEdEdEdWVhdTghdhdhdhdqXlHkzRycysrceqXhdlbhdqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa

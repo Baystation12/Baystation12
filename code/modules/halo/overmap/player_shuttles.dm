@@ -134,7 +134,7 @@ allowing periodic long range transmission."
 
 /obj/machinery/shuttle_spawner/multi_choice/check_requisition_allowed()
 	if(world.time < next_shuttle_at)
-		visible_message("<span class = 'notice'>Communications Jammed. Attempting Reconnection....</span>")
+		visible_message("<span class = 'notice'>Unable to connect to external requisition node due to timed lockout, Examine console for more information. Attempting Reconnection....</span>")
 		return 0
 	return 1
 
