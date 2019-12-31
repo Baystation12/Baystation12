@@ -12,6 +12,17 @@
 "aad" = (
 /turf/space,
 /area/shuttle/syndicate_elite/mothership)
+"aae" = (
+/obj/effect/floor_decal/corner/green{
+	dir = 5
+	},
+/obj/machinery/telecomms/allinone{
+	intercept = 1
+	},
+/turf/unsimulated/floor{
+	icon_state = "steel"
+	},
+/area/centcom/control)
 "aao" = (
 /turf/space,
 /area/shuttle/escape_pod1/centcom)
@@ -23701,7 +23712,7 @@ avN
 avm
 avU
 awa
-awC
+aae
 awG
 awG
 axy
