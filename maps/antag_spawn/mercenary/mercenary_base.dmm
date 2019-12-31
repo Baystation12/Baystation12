@@ -127,6 +127,17 @@
 	},
 /turf/simulated/floor/shuttle/darkred,
 /area/map_template/merc_shuttle)
+"al" = (
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals_central6,
+/obj/machinery/telecomms/allinone{
+	intercept = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_spawn)
 "am" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
@@ -2570,14 +2581,6 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/airless,
-/area/map_template/merc_spawn)
-"wC" = (
-/obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
-	},
-/obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_spawn)
 "wG" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -10104,7 +10107,7 @@ aa
 aa
 XS
 vO
-wC
+al
 XS
 aa
 aa
