@@ -2,6 +2,7 @@
 /datum/gear/utility
 	sort_category = "Utility"
 	category = /datum/gear/utility
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/utility/briefcase
 	display_name = "briefcase"

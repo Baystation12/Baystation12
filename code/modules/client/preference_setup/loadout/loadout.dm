@@ -360,6 +360,9 @@ var/list/gear_datums = list()
 		description = initial(O.desc)
 	if(flags & GEAR_HAS_COLOR_SELECTION)
 		gear_tweaks += gear_tweak_free_color_choice()
+	if(flags & GEAR_HAS_CUSTOM_SELECTION)
+		gear_tweaks += gear_tweak_free_name
+		gear_tweaks += gear_tweak_free_desc
 	if(flags & GEAR_HAS_TYPE_SELECTION)
 		gear_tweaks += new/datum/gear_tweak/path/type(path)
 	if(flags & GEAR_HAS_SUBTYPE_SELECTION)

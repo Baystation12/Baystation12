@@ -3,6 +3,7 @@
 	slot = slot_gloves
 	sort_category = "Gloves and Handwear"
 	category = /datum/gear/gloves
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/gloves/colored
 	display_name = "gloves, colored"
@@ -26,7 +27,7 @@
 /datum/gear/gloves/evening
 	display_name = "gloves, evening, colour select"
 	path = /obj/item/clothing/gloves/color/evening
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/ring
 	display_name = "ring"

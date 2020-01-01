@@ -3,6 +3,7 @@
 	sort_category = "Accessories"
 	category = /datum/gear/accessory
 	slot = slot_tie
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/accessory/tie
 	display_name = "tie selection"
@@ -25,7 +26,7 @@
 /datum/gear/accessory/tie_color
 	display_name = "colored tie"
 	path = /obj/item/clothing/accessory
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/accessory/tie_color/New()
 	..()
@@ -41,7 +42,7 @@
 /datum/gear/accessory/necklace
 	display_name = "necklace, colour select"
 	path = /obj/item/clothing/accessory/necklace
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/accessory/bowtie
 	display_name = "bowtie, horrible"
@@ -50,7 +51,7 @@
 /datum/gear/accessory/bowtie/color
 	display_name = "bowtie, colour select"
 	path = /obj/item/clothing/accessory/bowtie/color
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/accessory/ntaward
 	display_name = "corporate award selection"
@@ -125,5 +126,5 @@
 	display_name = "bracelet, color select"
 	path = /obj/item/clothing/accessory/bracelet
 	cost = 1
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 

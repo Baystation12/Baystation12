@@ -3,17 +3,18 @@
 	sort_category = "Clothing Pieces"
 	category = /datum/gear/clothing/
 	slot = slot_tie
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/flannel
 	display_name = "flannel (colorable)"
 	path = /obj/item/clothing/accessory/toggleable/flannel
 	slot = slot_tie
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/scarf
 	display_name = "scarf"
 	path = /obj/item/clothing/accessory/scarf
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/hawaii
 	display_name = "hawaii shirt"
@@ -30,7 +31,7 @@
 /datum/gear/clothing/vest
 	display_name = "suit vest, colour select"
 	path = /obj/item/clothing/accessory/toggleable/vest/
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/suspenders
 	display_name = "suspenders"
@@ -39,17 +40,17 @@
 /datum/gear/clothing/wcoat
 	display_name = "waistcoat, colour select"
 	path = /obj/item/clothing/accessory/wcoat
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/zhongshan
 	display_name = "zhongshan jacket, colour select"
 	path = /obj/item/clothing/accessory/toggleable/zhongshan
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/dashiki
 	display_name = "dashiki selection"
 	path = /obj/item/clothing/accessory/dashiki
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/thawb
 	display_name = "thawb"
@@ -58,19 +59,19 @@
 /datum/gear/clothing/sherwani
 	display_name = "sherwani, colour select"
 	path = /obj/item/clothing/accessory/sherwani
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/qipao
 	display_name = "qipao blouse, colour select"
 	path = /obj/item/clothing/accessory/qipao
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/sweater
 	display_name = "turtleneck sweater, colour select"
 	path = /obj/item/clothing/accessory/sweater
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/clothing/tangzhuang
 	display_name = "tangzhuang jacket, colour select"
 	path = /obj/item/clothing/accessory/tangzhuang
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION

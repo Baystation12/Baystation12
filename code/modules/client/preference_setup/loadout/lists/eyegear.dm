@@ -2,6 +2,7 @@
 	sort_category = "Glasses and Eyewear"
 	category = /datum/gear/eyes
 	slot = slot_glasses
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/eyes/glasses
 	display_name = "prescription glasses"
@@ -111,7 +112,7 @@
 /datum/gear/eyes/blindfold
 	display_name = "blindfold"
 	path = /obj/item/clothing/glasses/blindfold
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/eyes/janitor
 	display_name = "JaniHUD"

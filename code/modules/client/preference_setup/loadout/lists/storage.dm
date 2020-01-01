@@ -2,6 +2,7 @@
 	sort_category = "Storage Accessories"
 	category = /datum/gear/storage/
 	slot = slot_tie
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/storage/brown_vest
 	display_name = "webbing, brown"
@@ -71,7 +72,7 @@
 /datum/gear/accessory/wallet
 	display_name = "wallet, colour select"
 	path = /obj/item/weapon/storage/wallet
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/accessory/wallet_poly
 	display_name = "wallet, polychromic"

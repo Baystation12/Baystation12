@@ -2,16 +2,17 @@
 	sort_category = "Uniforms and Casual Dress"
 	slot = slot_w_uniform
 	category = /datum/gear/uniform
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/jumpsuit
 	display_name = "jumpsuit, colour select"
 	path = /obj/item/clothing/under/color
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/shortjumpskirt
 	display_name = "short jumpskirt, colour select"
 	path = /obj/item/clothing/under/shortjumpskirt
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/blackjumpshorts
 	display_name = "black jumpsuit shorts"
@@ -59,11 +60,11 @@
 /datum/gear/uniform/scrubs
 	display_name = "standard medical scrubs"
 	path = /obj/item/clothing/under/rank/medical/scrubs
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/scrubs/custom
 	display_name = "scrubs, colour select"
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/dress
 	display_name = "dress selection"
@@ -84,67 +85,67 @@
 /datum/gear/uniform/cheongsam
 	display_name = "cheongsam, colour select"
 	path = /obj/item/clothing/under/cheongsam
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/abaya
 	display_name = "abaya, colour select"
 	path = /obj/item/clothing/under/abaya
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/skirt
 	display_name = "skirt selection"
 	path = /obj/item/clothing/under/skirt
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/skirt_c
 	display_name = "short skirt, colour select"
 	path = /obj/item/clothing/under/skirt_c
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/skirt_c/dress
 	display_name = "simple dress, colour select"
 	path = /obj/item/clothing/under/skirt_c/dress
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/casual_pants
 	display_name = "casual pants selection"
 	path = /obj/item/clothing/under/casual_pants
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/formal_pants
 	display_name = "formal pants selection"
 	path = /obj/item/clothing/under/formal_pants
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/formal_pants/custom
 	display_name = "suit pants, colour select"
 	path = /obj/item/clothing/under/formal_pants
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/formal_pants/baggycustom
 	display_name = "baggy suit pants, colour select"
 	path = /obj/item/clothing/under/formal_pants/baggy
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/shorts
 	display_name = "shorts selection"
 	path = /obj/item/clothing/under/shorts/jeans
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/shorts/custom
 	display_name = "athletic shorts, colour select"
 	path = /obj/item/clothing/under/shorts/
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/turtleneck
 	display_name = "sweater, colour select"
 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/kimono
 	display_name = "kimono, colour select"
 	path = /obj/item/clothing/under/kimono
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/corporate
 	display_name = "corporate uniform selection"
@@ -174,22 +175,22 @@
 /datum/gear/uniform/corp_exec
 	display_name = "corporate colours, senior researcher"
 	path = /obj/item/clothing/under/rank/scientist/executive
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/corp_overalls
 	display_name = "corporate colours, coveralls"
 	path = /obj/item/clothing/under/rank/ntwork
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/corp_flight
 	display_name = "corporate colours, flight suit"
 	path = /obj/item/clothing/under/rank/ntpilot
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/corp_exec_jacket
 	display_name = "corporate colours, liason suit"
 	path = /obj/item/clothing/under/suit_jacket/corp
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/uniform/sterile
 	display_name = "sterile jumpsuit"

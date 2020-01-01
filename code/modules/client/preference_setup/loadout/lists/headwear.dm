@@ -2,11 +2,12 @@
 	sort_category = "Hats and Headwear"
 	slot = slot_head
 	category = /datum/gear/head
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/beret
 	display_name = "beret, colour select"
 	path = /obj/item/clothing/head/beret/plaincolor
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
 /datum/gear/head/bandana
@@ -20,17 +21,17 @@
 /datum/gear/head/beanie
 	display_name = "beanie, color select"
 	path = /obj/item/clothing/head/beanie
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
 	path = /obj/item/clothing/head/hairflower/bow
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/flat_cap
 	display_name = "flat cap, colour select"
 	path = /obj/item/clothing/head/flatcap
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/cap
 	display_name = "cap selection"
@@ -115,22 +116,22 @@
 /datum/gear/head/hijab
 	display_name = "hijab, colour select"
 	path = /obj/item/clothing/head/hijab
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/kippa
 	display_name = "kippa, colour select"
 	path = /obj/item/clothing/head/kippa
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/turban
 	display_name = "turban, colour select"
 	path = /obj/item/clothing/head/turban
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/taqiyah
 	display_name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/rastacap
 	display_name = "rastacap"
@@ -139,11 +140,11 @@
 /datum/gear/head/surgical
 	display_name = "standard surgical caps"
 	path = /obj/item/clothing/head/surgery
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/surgical/custom
 	display_name = "surgical cap, colour select"
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/welding
 	display_name = "welding mask selection"

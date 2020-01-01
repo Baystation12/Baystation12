@@ -3,11 +3,12 @@
 	sort_category = "Shoes and Footwear"
 	slot = slot_shoes
 	category = /datum/gear/shoes
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/shoes/athletic
 	display_name = "athletic shoes, colour select"
 	path = /obj/item/clothing/shoes/athletic
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/shoes/boots
 	display_name = "boot selection"
@@ -49,12 +50,12 @@
 /datum/gear/shoes/flats
 	display_name = "flats, colour select"
 	path = /obj/item/clothing/shoes/flats
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/shoes/high
 	display_name = "high tops selection"
 	path = /obj/item/clothing/shoes/hightops
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/shoes/sandal
 	display_name = "wooden sandals"
@@ -63,4 +64,4 @@
 /datum/gear/shoes/heels
 	display_name = "high heels, colour select"
 	path = /obj/item/clothing/shoes/heels
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION

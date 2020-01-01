@@ -5,6 +5,7 @@
 	sort_category = "Xenowear"
 	category = /datum/gear/suit/unathi/
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/unathi/mantle
 	display_name = "hide mantle (Unathi)"
@@ -38,39 +39,40 @@
 	sort_category = "Xenowear"
 	category = /datum/gear/ears/skrell/
 	whitelisted = list(SPECIES_SKRELL)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/ears/skrell/chains
 	display_name = "headtail chain selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/chain
-	flags = GEAR_HAS_SUBTYPE_SELECTION
+	flags = GEAR_HAS_SUBTYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/ears/skrell/colored/chain
 	display_name = "colored headtail chain, colour select (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/chain
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 //Skrell Bands
 /datum/gear/ears/skrell/bands
 	display_name = "headtail band selection (Skrell)"
 	path = /obj/item/clothing/ears/skrell/band
-	flags = GEAR_HAS_SUBTYPE_SELECTION
+	flags = GEAR_HAS_SUBTYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/ears/skrell/colored/band
 	display_name = "headtail bands, colour select (Skrell)"
 	path = /obj/item/clothing/ears/skrell/colored/band
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 //Skrell Cloth
 /datum/gear/ears/skrell/cloth/male
 	display_name = "male headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_male
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 
 /datum/gear/ears/skrell/cloth/female
 	display_name = "female headtail cloth (Skrell)"
 	path = /obj/item/clothing/ears/skrell/cloth_female
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/head/skrell_helmet
 	display_name = "Skrellian helmet"
@@ -78,6 +80,7 @@
 	whitelisted = list(SPECIES_SKRELL)
 	sort_category = "Xenowear"
 	allowed_roles = list(/datum/job/hos, /datum/job/warden, /datum/job/officer, /datum/job/detective)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/accessory/skrell_badge
 	display_name = "skrellian SDTF badge"
@@ -99,6 +102,7 @@
 	slot = slot_wear_suit
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_IPC)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 // Misc clothing
 /datum/gear/uniform/harness
@@ -106,16 +110,19 @@
 	path = /obj/item/clothing/under/harness
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_IPC,SPECIES_DIONA, SPECIES_NABBER)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/shoes/toeless
 	display_name = "toeless jackboots"
 	path = /obj/item/clothing/shoes/jackboots/unathi
 	sort_category = "Xenowear"
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/shoes/wrk_toeless
 	display_name = "toeless workboots"
 	path = /obj/item/clothing/shoes/workboots/toeless
 	sort_category = "Xenowear"
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 // Pre-modified gloves
 
@@ -124,42 +131,49 @@
 	path = /obj/item/clothing/gloves/color/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION | GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/gloves/latex/modified
 	display_name = "modified gloves, latex"
 	path = /obj/item/clothing/gloves/latex/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/gloves/nitrile/modified
 	display_name = "modified gloves, nitrile"
 	path = /obj/item/clothing/gloves/latex/nitrile/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/gloves/rainbow/modified
 	display_name = "modified gloves, rainbow"
 	path = /obj/item/clothing/gloves/rainbow/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/gloves/evening/modified
 	display_name = "modified gloves, evening"
 	path = /obj/item/clothing/gloves/color/evening/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/gloves/botany/modified
 	display_name = "modified gloves, botany"
 	path = /obj/item/clothing/gloves/thick/botany/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/gloves/work/modified
 	display_name = "modified gloves, work"
 	path = /obj/item/clothing/gloves/thick/modified
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_UNATHI, SPECIES_YEOSA)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 // Vox clothing
 /datum/gear/mask/gas/vox
@@ -167,4 +181,5 @@
 	path = /obj/item/clothing/mask/gas/vox
 	sort_category = "Xenowear"
 	whitelisted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+	flags = GEAR_HAS_CUSTOM_SELECTION
 

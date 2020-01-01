@@ -1,6 +1,7 @@
 /datum/gear/cane
 	display_name = "cane"
 	path = /obj/item/weapon/cane
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/union_card
 	display_name = "union membership"
@@ -43,6 +44,7 @@
 /datum/gear/flask
 	display_name = "flask"
 	path = /obj/item/weapon/reagent_containers/food/drinks/flask/barflask
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/flask/New()
 	..()
@@ -51,6 +53,7 @@
 /datum/gear/vacflask
 	display_name = "vacuum-flask"
 	path = /obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/vacflask/New()
 	..()
@@ -59,28 +62,32 @@
 /datum/gear/coffeecup
 	display_name = "coffee cup"
 	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/knife
 	display_name = "folding knife"
 	path = /obj/item/weapon/material/knife/folding
 	cost = 3
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/knife_wood
 	display_name = "peasant knife"
 	path = /obj/item/weapon/material/knife/folding/wood
 	cost = 3
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/knife_tacticool
 	display_name = "tactical folding knife"
 	path = /obj/item/weapon/material/knife/folding/tacticool
 	cost = 3
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/lunchbox
 	display_name = "lunchbox"
 	description = "A little lunchbox."
 	cost = 2
 	path = /obj/item/weapon/storage/lunchbox
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/lunchbox/New()
 	..()
@@ -95,12 +102,13 @@
 /datum/gear/towel
 	display_name = "towel"
 	path = /obj/item/weapon/towel
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/plush_toy
 	display_name = "plush toy"
 	description = "A plush toy."
 	path = /obj/item/toy/plushie
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/plush_toy/New()
 	..()
@@ -122,37 +130,43 @@
 	display_name = "handheld mirror"
 	sort_category = "Cosmetics"
 	path = /obj/item/weapon/mirror
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/lipstick
 	display_name = "lipstick selection"
 	path = /obj/item/weapon/lipstick
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/comb
 	display_name = "plastic comb"
 	path = /obj/item/weapon/haircomb
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/mask
 	display_name = "sterile mask"
 	path = /obj/item/clothing/mask/surgical
 	cost = 2
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/smokingpipe
 	display_name = "pipe, smoking"
 	path = /obj/item/clothing/mask/smokable/pipe
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/cornpipe
 	display_name = "pipe, corn"
 	path = /obj/item/clothing/mask/smokable/pipe/cobpipe
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/matchbook
 	display_name = "matchbook"
 	path = /obj/item/weapon/storage/box/matches
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/lighter
 	display_name = "cheap lighter"
 	path = /obj/item/weapon/flame/lighter
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/lighter/New()
 	..()
@@ -168,6 +182,7 @@
 /datum/gear/zippo
 	display_name = "zippo"
 	path = /obj/item/weapon/flame/lighter/zippo
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/zippo/New()
 	..()
@@ -183,15 +198,18 @@
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
 	path = /obj/item/weapon/material/ashtray/plastic
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/cigars
 	display_name = "fancy cigar case"
 	path = /obj/item/weapon/storage/fancy/cigar
 	cost = 2
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/cigar
 	display_name = "fancy cigar"
 	path = /obj/item/clothing/mask/smokable/cigarette/cigar
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/cigar/New()
 	..()
@@ -203,11 +221,13 @@
 /datum/gear/ecig
 	display_name = "electronic cigarette"
 	path = /obj/item/clothing/mask/smokable/ecig/util
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/ecig/deluxe
 	display_name = "electronic cigarette, deluxe"
 	path = /obj/item/clothing/mask/smokable/ecig/deluxe
 	cost = 2
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/bible
 	display_name = "holy book"
@@ -229,13 +249,14 @@
 	display_name = "multi-tool"
 	path = /obj/item/weapon/material/knife/folding/swiss
 	cost = 4
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 
 /datum/gear/cross
 	display_name = "cross"
 	path = /obj/item/weapon/material/cross
 	cost = 2
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/cross/New()
 	..()

@@ -2,12 +2,13 @@
 	slot = slot_wear_suit
 	sort_category = "Suits and Overwear"
 	category = /datum/gear/suit
+	flags = GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
 	path = /obj/item/clothing/suit/poncho/colored
 	cost = 1
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/security_poncho
 	display_name = "poncho, security"
@@ -48,17 +49,17 @@
 /datum/gear/suit/custom_suit_jacket
 	display_name = "suit jacket, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/suit
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/hazard
 	display_name = "hazard vests"
 	path = /obj/item/clothing/suit/storage/hazardvest
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie, colour select"
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/hoodie_sel
 	display_name = "standard hoodies"
@@ -76,7 +77,7 @@
 /datum/gear/suit/labcoat
 	display_name = "labcoat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/labcoat_blue
 	display_name = "blue trimmed labcoat"
@@ -85,12 +86,12 @@
 /datum/gear/suit/labcoat_corp
 	display_name = "labcoat, corporate colors"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	flags = GEAR_HAS_TYPE_SELECTION
+	flags = GEAR_HAS_TYPE_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/coat
 	display_name = "coat, colour select"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/coat
-	flags = GEAR_HAS_COLOR_SELECTION
+	flags = GEAR_HAS_COLOR_SELECTION | GEAR_HAS_CUSTOM_SELECTION
 
 /datum/gear/suit/leather
 	display_name = "jacket selection"
