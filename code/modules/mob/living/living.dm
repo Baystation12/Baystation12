@@ -874,3 +874,12 @@ default behaviour is:
 
 /mob/living/proc/eyecheck()
 	return FLASH_PROTECTION_NONE
+
+/mob/living/proc/has_jaundice()
+	return FALSE
+
+/mob/living/proc/has_cyanosis()
+	return FALSE
+
+/mob/living/proc/has_low_circulation()
+	return FALSE

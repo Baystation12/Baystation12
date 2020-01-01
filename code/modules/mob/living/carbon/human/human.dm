@@ -1819,3 +1819,12 @@
 				B.transform = M.Scale(scale)
 
 				new /obj/effect/temp_visual/bloodsplatter(loc, hit_dir, species.blood_color)
+
+/mob/living/carbon/human/has_jaundice()
+	return (getToxLoss() >= 25)
+
+/mob/living/carbon/human/has_cyanosis()
+	return (get_blood_oxygenation() <= 50)
+
+/mob/living/carbon/human/has_low_circulation()
+	return (get_blood_circulation() <= 60)

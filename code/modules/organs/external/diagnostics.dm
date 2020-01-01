@@ -206,7 +206,7 @@
 	explanation = "Patient has internal organ damage."
 
 /decl/diagnostic_sign/liver/manifested_in(obj/item/organ/external/victim)
-	return victim.owner && victim.owner.getToxLoss() >= 25
+	return victim.owner && victim.owner.has_jaundice()
 
 /decl/diagnostic_sign/oxygenation
 	name = "Cyanosis"
@@ -214,7 +214,7 @@
 	explanation = "Patient has low blood oxygenation."
 
 /decl/diagnostic_sign/oxygenation/manifested_in(obj/item/organ/external/victim)
-	return victim.owner && victim.owner.get_blood_oxygenation() <= 50
+	return victim.owner && victim.owner.has_cyanosis()
 
 /decl/diagnostic_sign/circulation
 	name = "Paleness"
@@ -222,7 +222,7 @@
 	explanation = "Patient has issues with blood circulaion or volume."
 
 /decl/diagnostic_sign/circulation/manifested_in(obj/item/organ/external/victim)
-	return victim.owner && victim.owner.get_blood_circulation() <= 60
+	return victim.owner && victim.owner.has_low_circulation()
 
 /decl/diagnostic_sign/gangrene
 	name = "Rot"

@@ -278,6 +278,13 @@ var/global/list/damage_icon_parts = list()
 	var/hulk = (MUTATION_HULK in src.mutations)
 	var/skeleton = (MUTATION_SKELETON in src.mutations)
 
+	var/jaundiced_color_mod = COLOR_YELLOW
+	var/pale_color_mod = COLOR_WHITE
+
+	var/jaundiced = has_jaundice()
+	var/low_oxygen = has_cyanosis()
+	var/paleness = has_low_circulation()
+
 	//CACHING: Generate an index key from visible bodyparts.
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
 
@@ -293,6 +300,8 @@ var/global/list/damage_icon_parts = list()
 	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
 	if(lip_style)
 		icon_key += "[lip_style]"
+	else if(low_oxygen)
+		icon_key += "lips_blue_s"
 	else
 		icon_key += "nolips"
 	var/obj/item/organ/internal/eyes/eyes = internal_organs_by_name[species.vision_organ ? species.vision_organ : BP_EYES]
@@ -329,7 +338,7 @@ var/global/list/damage_icon_parts = list()
 		else
 			icon_key += "1"
 
-	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
+	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0][jaundiced ? 1 : 0][paleness ? 1 : 0]"
 
 	var/icon/base_icon
 	if(human_icon_cache[icon_key])
@@ -368,6 +377,11 @@ var/global/list/damage_icon_parts = list()
 			else if(hulk)
 				var/list/tone = ReadRGB(hulk_color_mod)
 				base_icon.MapColors(rgb(tone[1],0,0),rgb(0,tone[2],0),rgb(0,0,tone[3]))
+			else if(istype(species, /datum/species/human))
+				if(jaundiced)
+					base_icon.ColorTone(jaundiced_color_mod)
+				if(paleness)
+					base_icon.ColorTone(pale_color_mod)
 
 		//Handle husk overlay.
 		if(husk)

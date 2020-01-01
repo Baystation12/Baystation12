@@ -81,6 +81,8 @@
 
 		handle_medical_side_effects()
 
+		handle_diagonostic_signs()
+
 		if(!client && !mind)
 			species.handle_npc(src)
 
@@ -1145,3 +1147,8 @@
 	..()
 	if((CE_THIRDEYE in chem_effects) || (MUTATION_XRAY in mutations))
 		set_sight(sight|SEE_TURFS|SEE_MOBS|SEE_OBJS)
+
+/mob/living/carbon/human/proc/handle_diagonostic_signs()
+	// runs an update to check if we've become jaundiced, pale or low on oxygen resulting in icon changes
+	if(stat != DEAD && !(life_tick % 15)) // don't want to do this too often. update_body() also won't do anything if nothing has changed
+		update_body()
