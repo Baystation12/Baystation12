@@ -1,4 +1,0 @@
-author: "zkxs"
-delete-after: True
-changes: 
-  - bugfix: "Fixes a runtime when using an atmos analyzer on a pit"

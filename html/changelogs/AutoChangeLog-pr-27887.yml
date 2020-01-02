@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Nymphs and Golems are no longer valid targets for auto-traitor."
