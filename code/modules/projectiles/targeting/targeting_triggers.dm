@@ -27,5 +27,5 @@
 	var/obj/item/weapon/gun/G = aiming_with
 	if(istype(G))
 		var/gun_shoot_time = (G.burst - 1)* G.burst_delay
-		owner.setMoveCooldown(max(1,(3*(gun_shoot_time/4)))) //Allows for movement near the end of the burst but mostly holds the player in one spot.
+		//owner.setMoveCooldown(max(1,(3*(gun_shoot_time/4)))) //Allows for movement near the end of the burst but mostly holds the player in one spot.
 		G.Fire(aiming_at, owner)
