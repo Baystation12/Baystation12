@@ -1,0 +1,5 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - tweak: "Changes \"restricted roles\" to the broader \"casual roles\" in loadoout."
+  - tweak: "Adjusts several loadout item restrictions."
