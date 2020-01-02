@@ -85,7 +85,7 @@
 	var/tmp/list/mob/living/aim_targets //List of who yer targeting.
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
-	var/tmp/lock_time = -100
+	var/lock_time = 1 SECOND
 
 	//Attachment System Stuff//
 	var/list/attachment_slots = list()
