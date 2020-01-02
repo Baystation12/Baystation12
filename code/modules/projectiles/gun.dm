@@ -243,7 +243,7 @@
 		O.emp_act(severity)
 
 /obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
-	if(adjacent) return //A is adjacent, is the user, or is on the user's person
+	if(adjacent) return ..()//A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)
 		user.aiming = new(user)
@@ -259,6 +259,8 @@
 		return
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
+		if(get_lunge_dist() > 0) //If we're on help intent and we have a lunge, do the lunge.
+			return ..()
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 		return
 
