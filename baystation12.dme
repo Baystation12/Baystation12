@@ -1733,6 +1733,7 @@
 #include "code\modules\events\rogue_drones.dm"
 #include "code\modules\events\sensor_suit_jamming.dm"
 #include "code\modules\events\shipping_error.dm"
+#include "code\modules\events\singularity.dm"
 #include "code\modules\events\solar_storm.dm"
 #include "code\modules\events\spacevine.dm"
 #include "code\modules\events\spider_infestation.dm"

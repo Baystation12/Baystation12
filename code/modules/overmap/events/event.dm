@@ -239,6 +239,11 @@
 	difficulty = EVENT_LEVEL_MAJOR
 	event_icon_states = list("carp3", "carp4")
 
+/obj/effect/overmap/event/singularity
+	name = "rogue singularity"
+	difficulty = EVENT_LEVEL_MAJOR
+	event_icon_states = list("singularity")
+
 //These now are basically only used to spawn hazards. Will be useful when we need to spawn group of moving hazards
 /datum/overmap_event
 	var/name = "map event"
