@@ -65,6 +65,7 @@
 /obj/item/weapon/gun/energy/gun/secure/mounted/Initialize()
 	var/mob/borg = get_holder_of_type(src, /mob/living/silicon/robot)
 	if(!borg)
+		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid spawn location.")
 	registered_owner = borg.name
 	GLOB.registered_cyborg_weapons += src

@@ -45,6 +45,7 @@
 	. = ..()
 	if(buildtype_select)
 		if(get_extension(src, /datum/extension/interactive/multitool))
+			. = INITIALIZE_HINT_QDEL
 			CRASH("A circuitboard of type [type] has conflicting multitool extensions")
 		set_extension(src, /datum/extension/interactive/multitool/circuitboards/buildtype_select)
 

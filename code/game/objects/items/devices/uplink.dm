@@ -38,6 +38,7 @@
 /obj/item/device/uplink/Initialize(mapload, var/datum/mind/owner, var/telecrystals = DEFAULT_TELECRYSTAL_AMOUNT)
 	. = ..(mapload)
 	if(!istype(loc, /atom))
+		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid spawn location. Expected /atom, was [log_info_line(loc)]")
 
 	nanoui_data = list()

@@ -609,6 +609,7 @@
 /obj/item/device/radio/borg/Initialize()
 	. = ..()
 	if(!isrobot(loc))
+		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
 	if(keyslot)
 		keyslot = new keyslot(src)

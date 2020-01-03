@@ -20,6 +20,7 @@
 		if(istype(H))
 			var/obj/item/organ/external/E = H.get_organ(parent_organ)
 			if(!E)
+				. = INITIALIZE_HINT_QDEL
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
 			E.internal_organs |= src
 

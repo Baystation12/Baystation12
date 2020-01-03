@@ -20,6 +20,7 @@ var/list/all_virtual_listeners = list()
 /mob/observer/virtual/Initialize(mapload, var/atom/movable/host)
 	. = ..()
 	if(!istype(host, host_type))
+		. = INITIALIZE_HINT_QDEL
 		CRASH("Received an unexpected host type. Expected [host_type], was [log_info_line(host)].")
 	src.host = host
 	GLOB.moved_event.register(host, src, /atom/movable/proc/move_to_turf_or_null)

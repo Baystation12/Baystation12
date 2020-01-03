@@ -16,6 +16,7 @@
 
 /obj/item/weapon/contraband/poster/Initialize(mapload, var/given_poster_type)
 	if(given_poster_type && !ispath(given_poster_type, /decl/poster))
+		. = INITIALIZE_HINT_QDEL
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
 
 	poster_type = given_poster_type || poster_type
