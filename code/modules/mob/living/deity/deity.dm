@@ -24,8 +24,8 @@
 	var/datum/current_boon
 	var/mob/living/following
 
-/mob/living/deity/New()
-	..()
+/mob/living/deity/Initialize()
+	. = ..()
 	var/visualnet = new /datum/visualnet/cultnet()
 	eyeobj = new /mob/observer/eye/cult(get_turf(src), visualnet)
 	eyeobj.possess(src)

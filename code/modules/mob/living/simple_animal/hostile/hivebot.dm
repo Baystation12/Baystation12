@@ -77,8 +77,8 @@ Teleporter beacon, and its subtypes
 	var/spawn_delay = 100
 	var/spawn_time = 0
 
-/mob/living/simple_animal/hostile/hivebot/tele/New()
-	..()
+/mob/living/simple_animal/hostile/hivebot/tele/Initialize()
+	. = ..()
 	var/datum/effect/effect/system/smoke_spread/smoke = new /datum/effect/effect/system/smoke_spread()
 	smoke.set_up(5, 0, src.loc)
 	smoke.start()

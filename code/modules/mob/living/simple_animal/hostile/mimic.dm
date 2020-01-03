@@ -50,11 +50,11 @@ var/global/list/protected_objects = list(/obj/machinery,
 	var/knockdown_people = 0
 	pass_flags = PASS_FLAG_TABLE
 
-/mob/living/simple_animal/hostile/mimic/New(newloc, var/obj/o, var/mob/living/creator)
-	..()
+/mob/living/simple_animal/hostile/mimic/Initialize(mapload, var/obj/o, var/mob/living/creator)
+	. = ..()
 	if(o)
 		if(ispath(o))
-			o = new o(newloc)
+			o = new o(loc)
 		CopyObject(o,creator)
 
 /mob/living/simple_animal/hostile/mimic/FindTarget()

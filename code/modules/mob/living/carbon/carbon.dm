@@ -1,4 +1,4 @@
-/mob/living/carbon/New()
+/mob/living/carbon/Initialize()
 	//setup reagent holders
 	bloodstr = new/datum/reagents/metabolism(120, src, CHEM_BLOOD)
 	touching = new/datum/reagents/metabolism(1000, src, CHEM_TOUCH)
@@ -6,7 +6,7 @@
 
 	if (!default_language && species_language)
 		default_language = all_languages[species_language]
-	..()
+	. = ..()
 
 /mob/living/carbon/Destroy()
 	QDEL_NULL(touching)

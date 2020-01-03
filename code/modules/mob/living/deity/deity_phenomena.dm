@@ -5,8 +5,8 @@
 	var/static/list/control_types = list("control", "controlshift", "shift")
 
 
-/mob/living/deity/New()
-	..()
+/mob/living/deity/Initialize()
+	. = ..()
 	for(var/intent in intents) //Just in case we somehow remove/add a new intent #futureproofing
 		populate_intent(intent)
 	set_phenomena(add_phenomena(/datum/phenomena/communicate), I_HELP, "shift")

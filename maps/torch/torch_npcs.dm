@@ -3,8 +3,8 @@
 	id = "Punitelli"
 	item_path = /mob/living/carbon/human/monkey/punitelli
 
-/mob/living/carbon/human/monkey/punitelli/New()
-	..()
+/mob/living/carbon/human/monkey/punitelli/Initialize()
+	. = ..()
 	name = "Warrant Officer Punitelli"
 	real_name = name
 	gender = MALE

@@ -19,8 +19,8 @@
 	bone_material = MATERIAL_BONE_FISH
 	skin_material = MATERIAL_SKIN_FISH
 
-/mob/living/simple_animal/aquatic/New()
-	..()
+/mob/living/simple_animal/aquatic/Initialize()
+	. = ..()
 	default_pixel_x = rand(-12,12)
 	default_pixel_y = rand(-12,12)
 	pixel_x = default_pixel_x

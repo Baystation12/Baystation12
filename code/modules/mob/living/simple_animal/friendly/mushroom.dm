@@ -26,8 +26,8 @@
 	var/min_explode_time = 1200
 	var/global/total_mushrooms = 0
 
-/mob/living/simple_animal/mushroom/New()
-	..()
+/mob/living/simple_animal/mushroom/Initialize()
+	. = ..()
 	harvest_time = world.time
 	total_mushrooms++
 

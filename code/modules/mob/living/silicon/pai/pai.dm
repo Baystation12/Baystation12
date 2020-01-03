@@ -77,9 +77,9 @@
 
 	var/translator_on = 0 // keeps track of the translator module
 
-/mob/living/silicon/pai/New(var/obj/item/device/paicard)
+/mob/living/silicon/pai/Initialize()
 	status_flags |= NO_ANTAG
-	card = paicard
+	card = loc
 
 	//As a human made device, we'll understand sol common without the need of the translator
 	add_language(LANGUAGE_HUMAN_EURO, 1)
@@ -88,7 +88,7 @@
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 	verbs -= /mob/living/verb/ghost
 
-	..()
+	. = ..()
 
 	if(card)
 		if(!card.radio)

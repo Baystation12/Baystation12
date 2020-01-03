@@ -923,10 +923,6 @@ FIRE ALARM
 	var/decl/security_state/security_state = decls_repository.get_decl(GLOB.using_map.security_state)
 	to_chat(user, "The current alert level is [security_state.current_security_level.name].")
 
-/obj/machinery/firealarm/Initialize()
-	. = ..()
-	update_icon()
-
 /obj/machinery/firealarm/proc/get_cached_overlay(state)
 	if(!LAZYACCESS(overlays_cache, state))
 		LAZYSET(overlays_cache, state, image(icon, state))
@@ -1155,7 +1151,7 @@ FIRE ALARM
 
 
 /obj/machinery/firealarm/Initialize(mapload, dir, atom/frame)
-	..(mapload)
+	. = ..(mapload)
 
 	if(dir)
 		src.set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])

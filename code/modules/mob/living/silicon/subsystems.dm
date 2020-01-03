@@ -6,13 +6,13 @@
 		/datum/nano_module/email_client
 	)
 
-/mob/living/silicon/ai/New()
+/mob/living/silicon/ai/Initialize()
 	silicon_subsystems.Cut()
 	for(var/subtype in subtypesof(/datum/nano_module))
 		var/datum/nano_module/NM = subtype
 		if(initial(NM.available_to_ai))
 			silicon_subsystems += NM
-	..()
+	. = ..()
 
 /mob/living/silicon/robot/syndicate
 	silicon_subsystems = list(

@@ -33,11 +33,12 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 	var/obj/item/device/multitool/ghost_multitool
 	var/list/hud_images // A list of hud images
 
-/mob/observer/ghost/New(mob/body)
+/mob/observer/ghost/Initialize()
 	see_in_dark = 100
 	verbs += /mob/proc/toggle_antag_pool
 
 	var/turf/T
+	var/mob/body = loc
 	if(ismob(body))
 		T = get_turf(body)               //Where is the body located?
 		attack_logs_ = body.attack_logs_ //preserve our attack logs by copying them to our ghost
@@ -73,7 +74,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 
 	GLOB.ghost_mob_list += src
 
-	..()
+	. = ..()
 
 /mob/observer/ghost/Destroy()
 	GLOB.ghost_mob_list -= src

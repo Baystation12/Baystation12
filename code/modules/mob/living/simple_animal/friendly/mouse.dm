@@ -64,8 +64,8 @@
 	..()
 	icon_state = resting ? "mouse_[body_color]_sleep" : "mouse_[body_color]"
 
-/mob/living/simple_animal/mouse/New()
-	..()
+/mob/living/simple_animal/mouse/Initialize()
+	. = ..()
 
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
@@ -125,8 +125,8 @@
 	name = "Tom"
 	desc = "Jerry the cat is not amused."
 
-/mob/living/simple_animal/mouse/brown/Tom/New()
-	..()
+/mob/living/simple_animal/mouse/brown/Tom/Initialize()
+	. = ..()
 	// Change my name back, don't want to be named Tom (666)
 	SetName(initial(name))
 	real_name = name

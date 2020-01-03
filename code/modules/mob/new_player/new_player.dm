@@ -19,8 +19,8 @@
 
 	virtual_mob = null // Hear no evil, speak no evil
 
-/mob/new_player/New()
-	..()
+/mob/new_player/Initialize()
+	. = ..()
 	verbs += /mob/proc/toggle_antag_pool
 
 /mob/new_player/proc/new_player_panel(force = FALSE)

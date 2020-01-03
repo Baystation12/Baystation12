@@ -30,8 +30,8 @@
 	faction = "scarybat"
 	var/mob/living/owner
 
-/mob/living/simple_animal/hostile/scarybat/New(loc, mob/living/L as mob)
-	..()
+/mob/living/simple_animal/hostile/scarybat/Initialize(mapload, mob/living/L)
+	. = ..()
 	if(istype(L))
 		owner = L
 

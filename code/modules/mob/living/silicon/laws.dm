@@ -2,8 +2,8 @@
 	var/datum/ai_laws/laws
 	var/list/additional_law_channels = list("State" = "")
 
-/mob/living/silicon/New()
-	..()
+/mob/living/silicon/Initialize()
+	. = ..()
 	if(!laws)
 		laws = GLOB.using_map.default_law_type
 	if(ispath(laws))

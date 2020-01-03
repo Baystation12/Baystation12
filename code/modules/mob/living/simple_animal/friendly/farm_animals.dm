@@ -29,9 +29,9 @@
 
 	var/datum/reagents/udder = null
 
-/mob/living/simple_animal/hostile/retaliate/goat/New()
+/mob/living/simple_animal/hostile/retaliate/goat/Initialize()
+	. = ..()
 	udder = new(50, src)
-	..()
 
 /mob/living/simple_animal/hostile/retaliate/goat/Destroy()
 	QDEL_NULL(udder)
@@ -118,9 +118,9 @@
 
 	var/datum/reagents/udder = null
 
-/mob/living/simple_animal/cow/New()
+/mob/living/simple_animal/cow/Initialize()
+	. = ..()
 	udder = new(50, src)
-	..()
 
 /mob/living/simple_animal/cow/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	var/obj/item/weapon/reagent_containers/glass/G = O
@@ -186,8 +186,8 @@
 
 	var/amount_grown = 0
 
-/mob/living/simple_animal/chick/New()
-	..()
+/mob/living/simple_animal/chick/Initialize()
+	. = ..()
 	pixel_x = rand(-6, 6)
 	pixel_y = rand(0, 10)
 
@@ -230,8 +230,8 @@ var/global/chicken_count = 0
 	var/eggsleft = 0
 	var/body_color
 
-/mob/living/simple_animal/chicken/New()
-	..()
+/mob/living/simple_animal/chicken/Initialize()
+	. = ..()
 	if(!body_color)
 		body_color = pick( list("brown","black","white") )
 	icon_state = "chicken_[body_color]"

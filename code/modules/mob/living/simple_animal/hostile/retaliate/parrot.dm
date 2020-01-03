@@ -95,8 +95,8 @@
 	var/icon_set = "parrot"
 
 
-/mob/living/simple_animal/hostile/retaliate/parrot/New()
-	..()
+/mob/living/simple_animal/hostile/retaliate/parrot/Initialize()
+	. = ..()
 	if(!ears)
 		var/headset = pick(/obj/item/device/radio/headset/headset_sec, \
 						/obj/item/device/radio/headset/headset_eng, \
@@ -707,10 +707,10 @@
 	desc = "Poly the Parrot. An expert on quantum cracker theory."
 	speak = list("Poly wanna cracker!", ":e Check the singlo, you chucklefucks!",":e Wire the solars, you lazy bums!",":e WHO TOOK THE DAMN HARDSUITS?",":e OH GOD ITS FREE CALL THE SHUTTLE")
 
-/mob/living/simple_animal/hostile/retaliate/parrot/Poly/New()
+/mob/living/simple_animal/hostile/retaliate/parrot/Poly/Initialize()
 	ears = new /obj/item/device/radio/headset/headset_eng(src)
 	available_channels = list(":e")
-	..()
+	. = ..()
 
 /mob/living/simple_animal/hostile/retaliate/parrot/say(var/message)
 

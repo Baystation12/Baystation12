@@ -19,8 +19,8 @@
 	bone_material = MATERIAL_BONE_FISH
 	skin_material = MATERIAL_SKIN_FISH
 
-/mob/living/simple_animal/hostile/retaliate/aquatic/carp/New()
-	..()
+/mob/living/simple_animal/hostile/retaliate/aquatic/carp/Initialize()
+	. = ..()
 	default_pixel_x = rand(-8,8)
 	default_pixel_y = rand(-8,8)
 	pixel_x = default_pixel_x

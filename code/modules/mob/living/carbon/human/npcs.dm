@@ -1,5 +1,5 @@
-/mob/living/carbon/human/monkey/punpun/New()
-	..()
+/mob/living/carbon/human/monkey/punpun/Initialize()
+	. = ..()
 	name = "Pun Pun"
 	real_name = name
 	var/obj/item/clothing/C
@@ -29,8 +29,8 @@
 		C.has_sensor  = SUIT_LOCKED_SENSORS
 		C.sensor_mode = SUIT_SENSOR_OFF
 
-/mob/living/carbon/human/blank/New(var/new_loc)
-	..(new_loc, "Vat-Grown Human")
+/mob/living/carbon/human/blank/Initialize(mapload)
+	. = ..(mapload, "Vat-Grown Human")
 
 /mob/living/carbon/human/blank/Initialize()
 	. = ..()
