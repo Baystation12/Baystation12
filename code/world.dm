@@ -79,7 +79,7 @@
 	loop_checks = FALSE
 #endif
 
-#define RECOMMENDED_VERSION 511
+#define RECOMMENDED_VERSION 513
 /world/New()
 	//Log startup times
 	var/startedAt = world.timeofday
