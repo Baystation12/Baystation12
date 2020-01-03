@@ -151,4 +151,4 @@
 		return
 	if(locate(/obj/effect/floor_decal) in T)
 		return
-	new /obj/effect/floor_decal(T, newappearance = get_grass_overlay())
+	new /obj/effect/floor_decal(T, null, null, get_grass_overlay())

@@ -1,3 +1,5 @@
+// Note: this machine is not compatible with the current pipe construction code. Needs a refactor of the lay pipe and pipe selection procs before using.
+
 /obj/machinery/pipelayer
 
 	name = "automatic pipe layer"
@@ -126,7 +128,8 @@
 	else
 		p_dir=M_Dir
 
-	var/obj/item/pipe/P = new (w_turf, dir=p_dir)
+	var/obj/item/pipe/P = new (w_turf)
+	P.set_dir(p_dir)
 	P.attackby(W , src)
 
 	return 1

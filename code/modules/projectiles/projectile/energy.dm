@@ -56,7 +56,7 @@
 	..() //initial flash
 
 	//residual illumination
-	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240), range=8, power=1, color=light_colour) //same lighting power as flare
+	new /obj/effect/effect/smoke/illumination(loc, rand(190,240), 8, 1, light_colour) //same lighting power as flare
 
 /obj/item/projectile/energy/electrode	//has more pain than a beam because it's harder to hit 
 	name = "electrode"
