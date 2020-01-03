@@ -1425,10 +1425,10 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/autoname
 
-/obj/machinery/door/airlock/autoname/New()
+/obj/machinery/door/airlock/autoname/Initialize()
 	var/area/A = get_area(src)
 	name = A.name
-	..()
+	. = ..()
 
 /obj/machinery/door/airlock/proc/paint_airlock(var/paint_color)
 	door_color = paint_color

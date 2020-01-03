@@ -17,7 +17,8 @@
 	var/mat_efficiency = 1
 	var/speed = 1
 
-/obj/machinery/r_n_d/protolathe/New()
+/obj/machinery/r_n_d/protolathe/Initialize()
+	. = ..()
 	materials = default_material_composition.Copy()
 	..()
 

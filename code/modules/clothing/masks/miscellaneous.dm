@@ -144,10 +144,10 @@
 	var/active = FALSE
 	var/mob/observer/eye/cameranet/eye
 
-/obj/item/clothing/mask/ai/New()
+/obj/item/clothing/mask/ai/Initialize()
+	. = ..()
 	eye = new(src)
 	eye.name_sufix = "camera MIU"
-	..()
 
 /obj/item/clothing/mask/ai/Destroy()
 	if(eye)

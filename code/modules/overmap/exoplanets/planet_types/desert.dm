@@ -73,9 +73,9 @@
 	var/exposed = 0
 	var/busy
 
-/obj/structure/quicksand/New()
+/obj/structure/quicksand/Initialize()
+	. = ..()
 	icon_state = "intact[rand(0,2)]"
-	..()
 
 /obj/structure/quicksand/user_unbuckle_mob(mob/user)
 	if(buckled_mob && !user.stat && !user.restrained())

@@ -5,9 +5,9 @@
 	var/hoodtype = null //so the chaplain hoodie or other hoodies can override this
 	var/suittoggled = 0
 
-/obj/item/clothing/suit/storage/hooded/New()
+/obj/item/clothing/suit/storage/hooded/Initialize()
+	. = ..()
 	MakeHood()
-	..()
 
 /obj/item/clothing/suit/storage/hooded/Destroy()
 	QDEL_NULL(hood)

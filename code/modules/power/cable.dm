@@ -820,9 +820,9 @@ obj/structure/cable/proc/cableColor(var/colorC)
 /obj/item/stack/cable_coil/white
 	color = COLOR_SILVER
 
-/obj/item/stack/cable_coil/random/New()
+/obj/item/stack/cable_coil/random/Initialize()
 	color = GLOB.possible_cable_colours[pick(GLOB.possible_cable_colours)]
-	..()
+	. = ..()
 
 // Produces cable coil from a rig power cell.
 /obj/item/stack/cable_coil/fabricator

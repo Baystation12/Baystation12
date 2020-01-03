@@ -242,10 +242,6 @@
 			launch()
 		..()
 
-/obj/machinery/cryopod/New()
-	announce = new /obj/item/device/radio/intercom(src)
-	..()
-
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
 		occupant.forceMove(loc)
@@ -254,6 +250,7 @@
 
 /obj/machinery/cryopod/Initialize()
 	. = ..()
+	announce = new /obj/item/device/radio/intercom(src)
 	find_control_computer()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)

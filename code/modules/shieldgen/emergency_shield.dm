@@ -27,9 +27,9 @@
 		qdel(src)
 		return
 
-/obj/machinery/shield/New()
+/obj/machinery/shield/Initialize()
+	. = ..()
 	src.set_dir(pick(1,2,3,4))
-	..()
 	update_nearby_tiles(need_rebuild=1)
 
 /obj/machinery/shield/Destroy()

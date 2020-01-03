@@ -9,10 +9,10 @@
 	var/max_cable = 100
 	var/on = 0
 
-/obj/machinery/cablelayer/New()
+/obj/machinery/cablelayer/Initialize()
+	. = ..()
 	cable = new(src)
 	cable.amount = 100
-	..()
 
 /obj/machinery/cablelayer/Move(new_turf,M_Dir)
 	..()

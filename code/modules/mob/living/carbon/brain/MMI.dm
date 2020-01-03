@@ -1,6 +1,6 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-/obj/item/device/mmi/digital/New()
+/obj/item/device/mmi/digital/Initialize()
 	src.brainmob = new(src)
 	src.brainmob.set_stat(CONSCIOUS)
 	src.brainmob.add_language("Robot Talk")
@@ -9,7 +9,7 @@
 	src.brainmob.container = src
 	src.brainmob.silent = 0
 	PickName()
-	..()
+	. = ..()
 
 /obj/item/device/mmi/digital/proc/PickName()
 	return

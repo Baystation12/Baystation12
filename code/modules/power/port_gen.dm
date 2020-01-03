@@ -462,9 +462,9 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	anchored = 1
 
-/obj/machinery/power/port_gen/pacman/super/potato/New()
+/obj/machinery/power/port_gen/pacman/super/potato/Initialize()
 	create_reagents(120)
-	..()
+	. = ..()
 
 /obj/machinery/power/port_gen/pacman/super/potato/examine(mob/user)
 	. = ..()

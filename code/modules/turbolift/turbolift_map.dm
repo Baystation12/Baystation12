@@ -19,12 +19,10 @@
 	turbolifts -= src
 	return ..()
 
-/obj/turbolift_map_holder/New()
-	turbolifts += src
-	..()
-
 /obj/turbolift_map_holder/Initialize()
 	. = ..()
+	turbolifts += src
+
 	// Create our system controller.
 	var/datum/turbolift/lift = new()
 

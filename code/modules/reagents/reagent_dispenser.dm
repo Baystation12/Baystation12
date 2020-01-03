@@ -15,7 +15,8 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		return
 
-/obj/structure/reagent_dispensers/New()
+/obj/structure/reagent_dispensers/Initialize()
+	. = ..()
 	create_reagents(initial_capacity)
 
 	if (!possible_transfer_amounts)
@@ -24,8 +25,6 @@
 	for(var/reagent_type in initial_reagent_types)
 		var/reagent_ratio = initial_reagent_types[reagent_type]
 		reagents.add_reagent(reagent_type, reagent_ratio * initial_capacity)
-
-	..()
 
 /obj/structure/reagent_dispensers/examine(mob/user, distance)
 	. = ..()

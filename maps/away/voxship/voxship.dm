@@ -60,10 +60,10 @@
 /obj/effect/submap_landmark/joinable_submap/voxship
 	archetype = /decl/submap_archetype/derelict/voxship
 
-/obj/effect/submap_landmark/joinable_submap/voxship/New()
+/obj/effect/submap_landmark/joinable_submap/voxship/Initialize(mapload)
 	var/datum/language/vox/pidgin = all_languages[LANGUAGE_VOX]
 	name = "[pidgin.get_random_name()]-[pidgin.get_random_name()]"
-	..()
+	. = ..()
 
 /decl/webhook/submap_loaded/vox
 	id = WEBHOOK_SUBMAP_LOADED_VOX

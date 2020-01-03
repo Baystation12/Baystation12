@@ -122,7 +122,8 @@
 	icon = 'icons/obj/grenade.dmi'
 	icon_state = "clusterbang_segment"
 
-/obj/item/weapon/grenade/flashbang/clusterbang/segment/New()//Segments should never exist except part of the clusterbang, since these immediately 'do their thing' and asplode
+/obj/item/weapon/grenade/flashbang/clusterbang/segment/Initialize()
+	. = ..() //Segments should never exist except part of the clusterbang, since these immediately 'do their thing' and asplode
 	icon_state = "clusterbang_segment_active"
 	active = 1
 	banglet = 1
@@ -132,7 +133,6 @@
 	var/dettime = rand(15,60)
 	spawn(dettime)
 		detonate()
-	..()
 
 /obj/item/weapon/grenade/flashbang/clusterbang/segment/detonate()
 	var/numspawned = rand(4,8)
@@ -147,15 +147,14 @@
 	qdel(src)
 	return
 
-/obj/item/weapon/grenade/flashbang/cluster/New()//Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
-	spawn(0)
-		icon_state = "flashbang_active"
-		active = 1
-		banglet = 1
-		var/stepdist = rand(1,3)
-		var/temploc = src.loc
-		walk_away(src,temploc,stepdist)
-		var/dettime = rand(15,60)
-		spawn(dettime)
+/obj/item/weapon/grenade/flashbang/cluster/Initialize()
+	. = ..() //Same concept as the segments, so that all of the parts don't become reliant on the clusterbang
+	icon_state = "flashbang_active"
+	active = 1
+	banglet = 1
+	var/stepdist = rand(1,3)
+	var/temploc = src.loc
+	walk_away(src,temploc,stepdist)
+	var/dettime = rand(15,60)
+	spawn(dettime)
 		detonate()
-	..()

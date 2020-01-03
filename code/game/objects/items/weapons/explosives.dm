@@ -14,10 +14,10 @@
 	var/open_panel = 0
 	var/image_overlay = null
 
-/obj/item/weapon/plastique/New()
+/obj/item/weapon/plastique/Initialize()
+	. = ..()
 	wires = new(src)
 	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
-	..()
 
 /obj/item/weapon/plastique/Destroy()
 	qdel(wires)

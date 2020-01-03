@@ -13,9 +13,9 @@
 	slot_flags = SLOT_EARS
 	var/string_colour
 
-/obj/item/weapon/material/coin/New()
+/obj/item/weapon/material/coin/Initialize()
+	. = ..()
 	icon_state = "coin[rand(1,10)]"
-	..()
 
 /obj/item/weapon/material/coin/on_update_icon()
 	..()

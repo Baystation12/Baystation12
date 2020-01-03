@@ -98,7 +98,8 @@
 	else if(href_list["eject_drive"] && uninstall_component(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
 		visible_message("\icon[src] [src] beeps and ejects its portable disk.")
 
-/obj/machinery/ntnet_relay/New()
+/obj/machinery/ntnet_relay/Initialize()
+	. = ..()
 	uid = gl_uid
 	gl_uid++
 	if(ntnet_global)

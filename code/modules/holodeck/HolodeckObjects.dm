@@ -265,7 +265,8 @@
 /obj/item/weapon/holo/esword/get_parry_chance(mob/user)
 	return active ? ..() : 0
 
-/obj/item/weapon/holo/esword/New()
+/obj/item/weapon/holo/esword/Initialize()
+	. = ..()
 	item_color = pick("red","blue","green","purple")
 
 /obj/item/weapon/holo/esword/attack_self(mob/living/user as mob)

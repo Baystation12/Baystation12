@@ -45,7 +45,7 @@
 	var/list/reagent_whitelist //if this is set, the subliminator will only work with the listed reagents
 	var/output_temperature = T20C
 
-/obj/machinery/portable_atmospherics/reagent_sublimator/New()
+/obj/machinery/portable_atmospherics/reagent_sublimator/Initialize()
 	. = ..()
 	if(holding)   verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_tank
 	if(container) verbs |= /obj/machinery/portable_atmospherics/reagent_sublimator/proc/remove_container

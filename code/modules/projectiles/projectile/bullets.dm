@@ -267,8 +267,8 @@
 	life_span = 255
 	distance_falloff = 0
 
-/obj/item/projectile/bullet/rock/New()
+/obj/item/projectile/bullet/rock/Initialize()
+	. = ..()
 	icon_state = "rock[rand(1,3)]"
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
-	..()

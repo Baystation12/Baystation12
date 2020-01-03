@@ -382,9 +382,9 @@
 	desc = "A party-grade glowstick."
 	color = "#ff00ff"
 
-/obj/item/device/flashlight/flare/glowstick/random/New()
+/obj/item/device/flashlight/flare/glowstick/random/Initialize()
 	color = rgb(rand(50,255),rand(50,255),rand(50,255))
-	..()
+	. = ..()
 
 /obj/item/device/flashlight/slime
 	gender = PLURAL

@@ -9,15 +9,17 @@
 	desc = "It's a fossil."
 	var/animal = 1
 
-/obj/item/weapon/fossil/base/New()
+/obj/item/weapon/fossil/base/Initialize()
+	..()
 	var/list/l = list(/obj/item/weapon/fossil/bone=9,/obj/item/weapon/fossil/skull=3,
 	/obj/item/weapon/fossil/skull/horned=2)
 	var/t = pickweight(l)
 	var/obj/item/weapon/W = new t(src.loc)
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/simulated/mineral))
-		T:last_find = W
-	qdel(src)
+		var/turf/simulated/mineral/mineral = T
+		mineral.last_find = W
+	return INITIALIZE_HINT_QDEL
 
 /obj/item/weapon/fossil/bone
 	name = "fossilised bone"
@@ -52,7 +54,8 @@
 	var/bstate = 0
 	var/plaque_contents = "Unnamed alien creature"
 
-/obj/skeleton/New()
+/obj/skeleton/Initialize()
+	. = ..()
 	src.breq = rand(6)+3
 	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 
@@ -97,5 +100,6 @@
 	desc = " A fossilised shred of alien plant matter."
 	animal = 0
 
-/obj/item/weapon/fossil/plant/New()
+/obj/item/weapon/fossil/plant/Initialize()
+	. = ..()
 	icon_state = "plant[rand(1,4)]"

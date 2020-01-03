@@ -115,12 +115,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	else
 		return 0
 
-
-/obj/machinery/telecomms/New()
-	telecomms_list += src
-	..()
-
 /obj/machinery/telecomms/Initialize()
+	. = ..()
 	//Set the listening_levels if there's none.
 	if(!listening_levels)
 		//Defaults to our Z level!
@@ -133,10 +129,16 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			for(var/obj/machinery/telecomms/T in orange(20, src))
 				add_link(T)
 		else
-			for(var/obj/machinery/telecomms/T in telecomms_list)
-				add_link(T)
-	. = ..()
+			. = INITIALIZE_HINT_LATELOAD
+
+	telecomms_list += src
 	update_power()
+
+/obj/machinery/telecomms/LateInitialize()
+	..()
+	if(autolinkers.len && long_range_link)
+		for(var/obj/machinery/telecomms/T in telecomms_list)
+			add_link(T)
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src

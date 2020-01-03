@@ -14,13 +14,10 @@
 	var/health = 40
 	var/is_rummaging = 0
 
-/obj/structure/rubble/New()
-	if(prob(emptyprob)) 
-		lootleft = 0
-	..()
-
 /obj/structure/rubble/Initialize()
 	. = ..()
+	if(prob(emptyprob)) 
+		lootleft = 0
 	update_icon()
 
 /obj/structure/rubble/on_update_icon()

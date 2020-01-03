@@ -161,6 +161,6 @@
 	stored_files = null
 	return ..()
 
-/obj/item/weapon/stock_parts/computer/hard_drive/New()
+/obj/item/weapon/stock_parts/computer/hard_drive/Initialize()
+	. = ..()
 	install_default_programs()
-	..()

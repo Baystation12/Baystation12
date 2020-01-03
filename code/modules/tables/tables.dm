@@ -26,12 +26,12 @@
 
 	connections = list("nw0", "ne0", "sw0", "se0")
 
-/obj/structure/table/New()
+/obj/structure/table/Initialize()
+	. = ..()
 	if(istext(material))
 		material = SSmaterials.get_material_by_name(material)
 	if(istext(reinforced))
 		reinforced = SSmaterials.get_material_by_name(reinforced)
-	..()
 
 /obj/structure/table/proc/update_material()
 	var/old_maxhealth = maxhealth

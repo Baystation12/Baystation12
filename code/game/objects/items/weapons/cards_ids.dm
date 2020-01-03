@@ -365,9 +365,9 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Captain"
 	detail_color = COLOR_AMBER
 
-/obj/item/weapon/card/id/captains_spare/New()
+/obj/item/weapon/card/id/captains_spare/Initialize()
+	. = ..()
 	access = get_all_station_access()
-	..()
 
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"
@@ -376,9 +376,9 @@ var/const/NO_EMAG_ACT = -50
 	assignment = "Synthetic"
 	detail_color = COLOR_AMBER
 
-/obj/item/weapon/card/id/synthetic/New()
+/obj/item/weapon/card/id/synthetic/Initialize()
+	. = ..()
 	access = get_all_station_access() + access_synth
-	..()
 
 /obj/item/weapon/card/id/centcom
 	name = "\improper CentCom. ID"
@@ -388,10 +388,6 @@ var/const/NO_EMAG_ACT = -50
 	color = COLOR_GRAY40
 	detail_color = COLOR_COMMAND_BLUE
 	extra_details = list("goldstripe")
-
-/obj/item/weapon/card/id/centcom/New()
-	access = get_all_centcom_access()
-	..()
 
 /obj/item/weapon/card/id/centcom/station/Initialize()
 	. = ..()
@@ -454,9 +450,9 @@ var/const/NO_EMAG_ACT = -50
 	detail_color = COLOR_MAROON
 	extra_details = list("goldstripe")
 
-/obj/item/weapon/card/id/all_access/New()
+/obj/item/weapon/card/id/all_access/Initialize()
+	. = ..()
 	access = get_access_ids()
-	..()
 
 // Department-flavor IDs
 /obj/item/weapon/card/id/medical

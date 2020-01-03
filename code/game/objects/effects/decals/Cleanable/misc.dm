@@ -82,9 +82,9 @@
 	persistent = TRUE
 	generic_filth = TRUE
 
-/obj/effect/decal/cleanable/vomit/New()
+/obj/effect/decal/cleanable/vomit/Initialize(ml, _age)
 	random_icon_states = icon_states(icon)
-	..()
+	. = ..()
 	atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 	create_reagents(30, src)
 	if(prob(75))

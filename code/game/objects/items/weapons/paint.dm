@@ -70,6 +70,6 @@ var/global/list/cached_icons = list()
 /obj/item/weapon/reagent_containers/glass/paint/random
 	name = "odd paint bucket"
 
-/obj/item/weapon/reagent_containers/glass/paint/random/New()
+/obj/item/weapon/reagent_containers/glass/paint/random/Initialize()
 	paint_hex = rgb(rand(1,255),rand(1,255),rand(1,255))
-	..()
+	. = ..()

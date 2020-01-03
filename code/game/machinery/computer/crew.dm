@@ -8,9 +8,9 @@
 	active_power_usage = 500
 	var/datum/nano_module/crew_monitor/crew_monitor
 
-/obj/machinery/computer/crew/New()
+/obj/machinery/computer/crew/Initialize()
+	. = ..()
 	crew_monitor = new(src)
-	..()
 
 /obj/machinery/computer/crew/Destroy()
 	qdel(crew_monitor)

@@ -12,9 +12,9 @@
 	var/show_violations = FALSE
 	var/authorized
 
-/obj/machinery/psi_monitor/New()
+/obj/machinery/psi_monitor/Initialize()
+	. = ..()
 	SSpsi.psi_monitors += src
-	..()
 
 /obj/machinery/psi_monitor/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)

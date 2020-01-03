@@ -108,11 +108,11 @@
 
 /obj/item/clothing/accessory/toggleable
 	var/icon_closed
-/obj/item/clothing/accessory/toggleable/New()
+
+/obj/item/clothing/accessory/toggleable/Initialize()
+	. = ..()
 	if(!icon_closed)
 		icon_closed = icon_state
-	..()
-
 /obj/item/clothing/accessory/toggleable/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
 	has_suit.verbs += /obj/item/clothing/accessory/toggleable/verb/toggle

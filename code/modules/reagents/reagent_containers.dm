@@ -30,9 +30,9 @@
 	if(N)
 		amount_per_transfer_from_this = N
 
-/obj/item/weapon/reagent_containers/New()
+/obj/item/weapon/reagent_containers/Initialize()
+	. = ..()
 	create_reagents(volume)
-	..()
 	if(!possible_transfer_amounts)
 		src.verbs -= /obj/item/weapon/reagent_containers/verb/set_amount_per_transfer_from_this
 

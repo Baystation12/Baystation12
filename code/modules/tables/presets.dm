@@ -44,16 +44,16 @@
 	icon_state = "holo_preview"
 	color = COLOR_OFF_WHITE
 
-/obj/structure/table/holotable/New()
+/obj/structure/table/holotable/Initialize()
 	material = "holo[DEFAULT_FURNITURE_MATERIAL]"
-	..()
+	. = ..()
 
 /obj/structure/table/holo_woodentable
 	icon_state = "holo_preview"
 
-/obj/structure/table/holo_woodentable/New()
+/obj/structure/table/holo_woodentable/Initialize()	
 	material = "holo[MATERIAL_WOOD]"
-	..()
+	. = ..()
 
 //wood wood wood
 /obj/structure/table/woodentable

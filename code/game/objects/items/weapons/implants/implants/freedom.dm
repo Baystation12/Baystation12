@@ -25,10 +25,9 @@
 	life can drive down to only 1 use.<HR>
 	No Implant Specifics"}
 
-/obj/item/weapon/implant/freedom/New()
+/obj/item/weapon/implant/freedom/Initialize()
+	. = ..()
 	uses = rand(1, 5)
-	..()
-	return
 
 /obj/item/weapon/implant/freedom/trigger(emote, mob/living/carbon/source as mob)
 	if (emote == activation_emote)

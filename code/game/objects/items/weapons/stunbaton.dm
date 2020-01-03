@@ -22,11 +22,11 @@
 /obj/item/weapon/melee/baton/loaded
 	bcell = /obj/item/weapon/cell/device/high
 
-/obj/item/weapon/melee/baton/New()
+/obj/item/weapon/melee/baton/Initialize()
+	. = ..()
 	if(ispath(bcell))
 		bcell = new bcell(src)
 		update_icon()
-	..()
 
 /obj/item/weapon/melee/baton/Destroy()
 	if(bcell && !ispath(bcell))

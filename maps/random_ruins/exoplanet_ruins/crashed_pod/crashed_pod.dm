@@ -46,7 +46,7 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 	archetype = /decl/submap_archetype/crashed_pod
 	submap_datum_type = /datum/submap/crashed_pod
 
-/obj/effect/submap_landmark/joinable_submap/crashed_pod/New()
+/obj/effect/submap_landmark/joinable_submap/crashed_pod/Initialize(mapload)
 	var/list/possible_ship_names = list(
 		"Hornet",		"Witchmoth",	"Planthopper",
 		"Mayfly",		"Locust",		"Cicada",
@@ -59,4 +59,4 @@ GLOBAL_LIST_INIT(crashed_pod_areas, new)
 		"Emperor",		"Skipper",		"Tarantula Hawk",
 		"Adder",		"Bumblebee")
 	name = "[pick("SEV", "SIC", "FTUV", "ICV", "HMS")] [pick(possible_ship_names)]"
-	..()
+	. = ..()

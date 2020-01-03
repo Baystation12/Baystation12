@@ -21,12 +21,9 @@
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	clicksound = "keyboard"
 
-/obj/machinery/computer/New()
-	overlay_layer = layer
-	..()
-
 /obj/machinery/computer/Initialize()
 	. = ..()
+	overlay_layer = layer
 	update_icon()
 
 /obj/machinery/computer/emp_act(severity)

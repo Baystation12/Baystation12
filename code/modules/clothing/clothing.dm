@@ -512,11 +512,11 @@ BLIND     // can't see anything
 /obj/item/clothing/mask/proc/filters_water()
 	return FALSE
 
-/obj/item/clothing/mask/New()
+/obj/item/clothing/mask/Initialize()
+	. = ..()
 	if(pull_mask)
 		action_button_name = "Adjust Mask"
 		verbs += /obj/item/clothing/mask/proc/adjust_mask
-	..()
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -1035,9 +1035,9 @@ BLIND     // can't see anything
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 
-/obj/item/clothing/under/rank/New()
+/obj/item/clothing/under/rank/Initialize()
 	sensor_mode = pick(0,1,2,3)
-	..()
+	. = ..()
 
 /obj/item/clothing/under/AltClick(var/mob/user)
 	if(CanPhysicallyInteract(user))

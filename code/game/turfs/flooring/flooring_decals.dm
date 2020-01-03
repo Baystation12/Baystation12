@@ -1019,9 +1019,9 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/beach/corner
 	icon_state = "beachbordercorner"
 
-/obj/effect/floor_decal/asteroid/New()
+/obj/effect/floor_decal/asteroid/Initialize()
+	. = ..()
 	icon_state = "asteroid[rand(0,9)]"
-	..()
 
 /obj/effect/floor_decal/chapel
 	name = "chapel"

@@ -60,8 +60,10 @@
 		visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
 	attack_animation(user)
 
-/obj/machinery/door/New()
+/obj/machinery/door/Initialize()
+	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
 	. = ..()
+
 	if(density)
 		layer = closed_layer
 		update_heat_protection(get_turf(src))
@@ -86,9 +88,6 @@
 
 	update_nearby_tiles(need_rebuild=1)
 
-/obj/machinery/door/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
-	. = ..()
 	if(autoset_access)
 #ifdef UNIT_TEST
 		if(length(req_access))

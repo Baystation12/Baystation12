@@ -40,9 +40,9 @@
 	icon_state = "waterballoon-e"
 	item_state = "balloon-empty"
 
-/obj/item/toy/water_balloon/New()
+/obj/item/toy/water_balloon/Initialize()
+	. = ..()
 	create_reagents(10)
-	..()
 
 /obj/item/toy/water_balloon/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
