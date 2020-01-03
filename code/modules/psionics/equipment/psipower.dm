@@ -7,13 +7,12 @@
 	var/maintain_cost = 3
 	var/mob/living/owner
 
-/obj/item/psychic_power/New(var/mob/living/_owner)
-	owner = _owner
+/obj/item/psychic_power/Initialize()
+	owner = loc
 	if(!istype(owner))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	START_PROCESSING(SSprocessing, src)
-	..()
+	return ..()
 
 /obj/item/psychic_power/Destroy()
 	if(istype(owner) && owner.psi)

@@ -29,8 +29,8 @@
 		return
 	return
 
-/obj/effect/portal/New(var/start, var/end, var/delete_after = 300, var/failure_rate)
-	..()
+/obj/effect/portal/Initialize(mapload, var/end, var/delete_after = 300, var/failure_rate)
+	. = ..()
 	if(failure_rate)
 		failchance = failure_rate
 		if(prob(failchance))
@@ -40,8 +40,7 @@
 	target = end
 
 	if(delete_after)
-		spawn(delete_after)
-			qdel(src)
+		QDEL_IN(src, delete_after)
 
 /obj/effect/portal/Destroy()
 	target = null

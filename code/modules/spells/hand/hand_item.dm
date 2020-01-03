@@ -13,10 +13,11 @@ Basically: I can use it to target things where I click. I can then pass these ta
 	var/next_spell_time = 0
 	var/spell/hand/hand_spell
 
-/obj/item/magic_hand/New(var/spell/hand/S)
-	hand_spell = S
-	name = "[name] ([S.name])"
-	icon_state = S.hand_state
+/obj/item/magic_hand/Initialize()
+	. = ..()
+	hand_spell = loc
+	name = "[name] ([hand_spell.name])"
+	icon_state = hand_spell.hand_state
 
 /obj/item/magic_hand/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER

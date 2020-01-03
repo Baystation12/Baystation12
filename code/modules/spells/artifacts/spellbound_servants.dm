@@ -199,9 +199,9 @@
 	var/datum/spellbound_type/stype
 	var/last_called = 0
 
-/obj/effect/cleanable/spellbound/New(var/loc, var/spell_type)
+/obj/effect/cleanable/spellbound/Initialize(mapload, var/spell_type)
+	. = ..(mapload)
 	stype = new spell_type()
-	return ..(loc)
 
 /obj/effect/cleanable/spellbound/attack_hand(var/mob/user)
 	if(last_called > world.time )

@@ -28,8 +28,8 @@
 	var/fixture_type = /obj/machinery/light
 	var/sheets_refunded = 2
 
-/obj/machinery/light_construct/New(atom/newloc, var/newdir, atom/fixture = null)
-	..(newloc)
+/obj/machinery/light_construct/Initialize(mapload, var/newdir, atom/fixture = null)
+	. = ..(mapload)
 
 	if(newdir)
 		set_dir(newdir)
@@ -658,8 +658,8 @@
 	I.color = null
 	overlays += I
 
-/obj/item/weapon/light/New(atom/newloc, obj/machinery/light/fixture = null)
-	..()
+/obj/item/weapon/light/Initialize(mapload, obj/machinery/light/fixture = null)
+	. = ..()
 	update_icon()
 
 // attack bulb/tube with object

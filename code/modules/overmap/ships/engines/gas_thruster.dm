@@ -191,15 +191,16 @@
 	light_color = "#ed9200"
 	anchored = 1
 
-/obj/effect/engine_exhaust/New(var/turf/nloc, var/ndir, var/flame)
-	..(nloc)
+/obj/effect/engine_exhaust/Initialize(mapload, var/ndir, var/flame)
+	. = ..(mapload)
 	if(flame)
 		icon_state = "exhaust"
-		nloc.hotspot_expose(1000,125)
+		if(isturf(loc))
+			var/turf/T = loc
+			T.hotspot_expose(1000,125)
 		set_light(0.5, 1, 4)
 	set_dir(ndir)
-	spawn(20)
-		qdel(src)
+	QDEL_IN(src, 2 SECONDS)
 
 /obj/item/weapon/stock_parts/circuitboard/unary_atmos/engine//why don't we move this elsewhere?
 	name = T_BOARD("gas thruster")

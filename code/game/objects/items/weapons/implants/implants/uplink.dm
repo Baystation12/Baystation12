@@ -5,10 +5,10 @@
 	hidden = 1
 	var/activation_emote
 
-/obj/item/weapon/implant/uplink/New(var/loc, var/amount)
+/obj/item/weapon/implant/uplink/Initialize(mapload, var/amount)
 	amount = amount || IMPLANT_TELECRYSTAL_AMOUNT(DEFAULT_TELECRYSTAL_AMOUNT)
 	hidden_uplink = new(src, telecrystals = amount)
-	..()
+	. = ..()
 
 /obj/item/weapon/implant/uplink/implanted(mob/source)
 	var/emote_options = list("blink", "blink_r", "eyebrow", "chuckle", "twitch_v", "frown", "nod", "blush", "giggle", "grin", "groan", "shrug", "smile", "pale", "sniff", "whimper", "wink")

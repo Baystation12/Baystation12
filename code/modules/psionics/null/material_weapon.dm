@@ -8,5 +8,5 @@
 		. = max(0, -(health))
 		check_health(consumed = TRUE)
 
-/obj/item/weapon/material/shard/nullglass/New(var/newloc)
-	..(newloc, MATERIAL_NULLGLASS)
+/obj/item/weapon/material/shard/nullglass/Initialize(mapload)
+	. = ..(mapload,  MATERIAL_NULLGLASS)

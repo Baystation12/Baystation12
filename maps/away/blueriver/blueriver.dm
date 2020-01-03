@@ -12,9 +12,9 @@
 		"nav_blueriv_antag"
 	)
 
-/obj/effect/overmap/visitable/sector/arcticplanet/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/sector/arcticplanet/Initialize()
 	name = "[generate_planet_name()], \a [name]"
-	..()
+	. = ..()
 
 /datum/map_template/ruin/away_site/blueriver
 	name = "Bluespace River"

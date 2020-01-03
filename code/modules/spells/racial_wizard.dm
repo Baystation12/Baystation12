@@ -160,8 +160,8 @@
 	color = "#3366ff"
 	contract_spells = list(/spell/contract/return_master) //somewhat of a necessity due to how many spells they would have after a while.
 
-/obj/item/weapon/contract/apprentice/skrell/New(var/newloc,var/spellbook, var/owner)
-	..()
+/obj/item/weapon/contract/apprentice/skrell/Initialize(mapload, var/spellbook, var/owner)
+	. = ..()
 	if(istype(spellbook,/obj/item/weapon/spellbook))
 		linked = spellbook
 	if(istype(owner,/mob))

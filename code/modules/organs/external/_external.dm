@@ -92,8 +92,8 @@
 	if(proximity && get_fingerprint())
 		A.add_partial_print(get_fingerprint())
 
-/obj/item/organ/external/New(var/mob/living/carbon/holder)
-	..()
+/obj/item/organ/external/Initialize()
+	. = ..()
 	if(isnull(pain_disability_threshold))
 		pain_disability_threshold = (max_damage * 0.75)
 	if(owner)

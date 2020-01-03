@@ -44,8 +44,8 @@
 
 	var/scan_file_type = /datum/computer_file/data/text
 
-/obj/item/weapon/paper/New(loc, text, title, list/md = null)
-	..(loc)
+/obj/item/weapon/paper/Initialize(mapload, text, title, list/md = null)
+	. = ..(mapload)
 	set_content(text ? text : info, title)
 	metadata = md
 

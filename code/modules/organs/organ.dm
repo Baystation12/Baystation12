@@ -50,8 +50,8 @@ var/list/organ_cache = list()
 	return (damage >= min_broken_damage || (status & ORGAN_CUT_AWAY) || (status & ORGAN_BROKEN))
 
 //Second argument may be a dna datum; if null will be set to holder's dna.
-/obj/item/organ/New(var/mob/living/carbon/holder, var/datum/dna/given_dna)
-	..(holder)
+/obj/item/organ/Initialize(mapload, var/datum/dna/given_dna)
+	. = ..(mapload)
 	if(!istype(given_dna))
 		given_dna = null
 
@@ -60,13 +60,13 @@ var/list/organ_cache = list()
 	else
 		max_damage = min_broken_damage * 2
 
-	if(istype(holder))
-		owner = holder
-		w_class = max(w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
-		if(!given_dna && holder.dna)
-			given_dna = holder.dna
+	if(iscarbon(loc))
+		owner = loc
+		w_class = max(w_class + mob_size_difference(owner.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
+		if(!given_dna && owner.dna)
+			given_dna = owner.dna
 		else
-			log_debug("[src] spawned in [holder] without a proper DNA.")
+			log_debug("[src] spawned in [owner] without a proper DNA.")
 
 	if (given_dna)
 		set_dna(given_dna)

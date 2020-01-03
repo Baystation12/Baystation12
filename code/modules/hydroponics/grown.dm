@@ -11,20 +11,11 @@
 	var/datum/seed/seed
 	var/potency = -1
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/New(newloc,planttype)
+/obj/item/weapon/reagent_containers/food/snacks/grown/Initialize(mapload, planttype)
+	. = ..(mapload)
 	if(planttype)
 		plantname = planttype
-	..()
-	fill_reagents()
-
-/obj/item/weapon/reagent_containers/food/snacks/grown/Initialize()
-	. = ..()
-	if(!SSplants)
-		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-		return INITIALIZE_HINT_QDEL
-
 	seed = SSplants.seeds[plantname]
-
 	if(!seed)
 		return INITIALIZE_HINT_QDEL
 
@@ -33,6 +24,7 @@
 	if(!dried_type)
 		dried_type = type
 
+	fill_reagents()
 	update_icon()
 
 
@@ -309,12 +301,11 @@
 
 var/list/fruit_icon_cache = list()
 
-/obj/item/weapon/reagent_containers/food/snacks/fruit_slice/New(var/newloc, var/datum/seed/S)
-	..(newloc)
+/obj/item/weapon/reagent_containers/food/snacks/fruit_slice/Initialize(mapload, var/datum/seed/S)
+	. = ..(mapload)
 	// Need to go through and make a general image caching controller. Todo.
 	if(!istype(S))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	name = "[S.seed_name] slice"
 	desc = "A slice of \a [S.seed_name]. Tasty, probably."

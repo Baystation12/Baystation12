@@ -12,13 +12,10 @@
 	var/radioactivity = 0
 	var/initial_amount
 
-/obj/item/weapon/fuel_assembly/New(var/newloc, var/_material, var/_colour)
+/obj/item/weapon/fuel_assembly/Initialize(mapload, var/_material, var/_colour)
+	. = ..(mapload)
 	fuel_type = _material
 	fuel_colour = _colour
-	..(newloc)
-
-/obj/item/weapon/fuel_assembly/Initialize()
-	. = ..()
 
 	if(ispath(fuel_type, /datum/reagent))
 		var/datum/reagent/R = fuel_type
@@ -61,17 +58,17 @@
 	return ..()
 
 // Mapper shorthand.
-/obj/item/weapon/fuel_assembly/deuterium/New(var/newloc)
-	..(newloc, MATERIAL_DEUTERIUM)
+/obj/item/weapon/fuel_assembly/deuterium/Initialize(mapload)
+	. = ..(mapload,  MATERIAL_DEUTERIUM)
 
-/obj/item/weapon/fuel_assembly/tritium/New(var/newloc)
-	..(newloc, MATERIAL_TRITIUM)
+/obj/item/weapon/fuel_assembly/tritium/Initialize(mapload)
+	. = ..(mapload,  MATERIAL_TRITIUM)
 
-/obj/item/weapon/fuel_assembly/phoron/New(var/newloc)
-	..(newloc, MATERIAL_PHORON)
+/obj/item/weapon/fuel_assembly/phoron/Initialize(mapload)
+	. = ..(mapload,  MATERIAL_PHORON)
 
-/obj/item/weapon/fuel_assembly/supermatter/New(var/newloc)
-	..(newloc, MATERIAL_SUPERMATTER)
+/obj/item/weapon/fuel_assembly/supermatter/Initialize(mapload)
+	. = ..(mapload,  MATERIAL_SUPERMATTER)
 
-/obj/item/weapon/fuel_assembly/hydrogen/New(var/newloc)
-	..(newloc, MATERIAL_HYDROGEN)
+/obj/item/weapon/fuel_assembly/hydrogen/Initialize(mapload)
+	. = ..(mapload,  MATERIAL_HYDROGEN)

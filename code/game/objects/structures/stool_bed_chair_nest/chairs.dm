@@ -90,35 +90,35 @@
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
 
-/obj/structure/bed/chair/padded/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_CARPET)
+/obj/structure/bed/chair/padded/red/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/padded/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
+/obj/structure/bed/chair/padded/brown/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/padded/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "teal")
+/obj/structure/bed/chair/padded/teal/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "teal")
 
-/obj/structure/bed/chair/padded/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "black")
+/obj/structure/bed/chair/padded/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "black")
 
-/obj/structure/bed/chair/padded/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "green")
+/obj/structure/bed/chair/padded/green/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "green")
 
-/obj/structure/bed/chair/padded/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "purple")
+/obj/structure/bed/chair/padded/purple/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "purple")
 
-/obj/structure/bed/chair/padded/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "blue")
+/obj/structure/bed/chair/padded/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "blue")
 
-/obj/structure/bed/chair/padded/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "beige")
+/obj/structure/bed/chair/padded/beige/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "beige")
 
-/obj/structure/bed/chair/padded/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "lime")
+/obj/structure/bed/chair/padded/lime/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "lime")
 
-/obj/structure/bed/chair/padded/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "yellow")
+/obj/structure/bed/chair/padded/yellow/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "yellow")
 
 // Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
@@ -127,35 +127,35 @@
 	icon_state = "comfychair_preview"
 	base_icon = "comfychair"
 
-/obj/structure/bed/chair/comfy/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
+/obj/structure/bed/chair/comfy/brown/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/comfy/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_CARPET)
+/obj/structure/bed/chair/comfy/red/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/comfy/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "teal")
+/obj/structure/bed/chair/comfy/teal/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "teal")
 
-/obj/structure/bed/chair/comfy/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "black")
+/obj/structure/bed/chair/comfy/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "black")
 
-/obj/structure/bed/chair/comfy/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "green")
+/obj/structure/bed/chair/comfy/green/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "green")
 
-/obj/structure/bed/chair/comfy/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "purple")
+/obj/structure/bed/chair/comfy/purple/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "purple")
 
-/obj/structure/bed/chair/comfy/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "blue")
+/obj/structure/bed/chair/comfy/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "blue")
 
-/obj/structure/bed/chair/comfy/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "beige")
+/obj/structure/bed/chair/comfy/beige/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "beige")
 
-/obj/structure/bed/chair/comfy/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "lime")
+/obj/structure/bed/chair/comfy/lime/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "lime")
 
-/obj/structure/bed/chair/comfy/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "yellow")
+/obj/structure/bed/chair/comfy/yellow/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "yellow")
 
 /obj/structure/bed/chair/comfy/captain
 	name = "captain chair"
@@ -170,8 +170,8 @@
 	I.layer = ABOVE_HUMAN_LAYER
 	overlays |= I
 
-/obj/structure/bed/chair/comfy/captain/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc,MATERIAL_STEEL,"blue")
+/obj/structure/bed/chair/comfy/captain/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload,MATERIAL_STEEL,"blue")
 
 /obj/structure/bed/chair/armchair
 	name = "armchair"
@@ -179,35 +179,35 @@
 	icon_state = "armchair_preview"
 	base_icon = "armchair"
 
-/obj/structure/bed/chair/armchair/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
+/obj/structure/bed/chair/armchair/brown/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/armchair/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_CARPET)
+/obj/structure/bed/chair/armchair/red/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/armchair/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "teal")
+/obj/structure/bed/chair/armchair/teal/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "teal")
 
-/obj/structure/bed/chair/armchair/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "black")
+/obj/structure/bed/chair/armchair/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "black")
 
-/obj/structure/bed/chair/armchair/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "green")
+/obj/structure/bed/chair/armchair/green/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "green")
 
-/obj/structure/bed/chair/armchair/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "purple")
+/obj/structure/bed/chair/armchair/purple/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "purple")
 
-/obj/structure/bed/chair/armchair/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "blue")
+/obj/structure/bed/chair/armchair/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "blue")
 
-/obj/structure/bed/chair/armchair/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "beige")
+/obj/structure/bed/chair/armchair/beige/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "beige")
 
-/obj/structure/bed/chair/armchair/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "lime")
+/obj/structure/bed/chair/armchair/lime/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "lime")
 
-/obj/structure/bed/chair/armchair/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "yellow")
+/obj/structure/bed/chair/armchair/yellow/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "yellow")
 
 /obj/structure/bed/chair/office
 	name = "office chair"
@@ -253,11 +253,11 @@
 			victim.apply_damage(10, BRUTE, def_zone)
 		occupant.visible_message("<span class='danger'>[occupant] crashed into \the [A]!</span>")
 
-/obj/structure/bed/chair/office/light/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_CLOTH)
+/obj/structure/bed/chair/office/light/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_CLOTH)
 
-/obj/structure/bed/chair/office/dark/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "black")
+/obj/structure/bed/chair/office/dark/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "black")
 
 /obj/structure/bed/chair/office/comfy
 	name = "comfy office chair"
@@ -265,35 +265,35 @@
 	icon_state = "comfyofficechair_preview"
 	base_icon = "comfyofficechair"
 
-/obj/structure/bed/chair/office/comfy/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
+/obj/structure/bed/chair/office/comfy/brown/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/chair/office/comfy/red/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, MATERIAL_CARPET)
+/obj/structure/bed/chair/office/comfy/red/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, MATERIAL_CARPET)
 
-/obj/structure/bed/chair/office/comfy/teal/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "teal")
+/obj/structure/bed/chair/office/comfy/teal/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "teal")
 
-/obj/structure/bed/chair/office/comfy/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "black")
+/obj/structure/bed/chair/office/comfy/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "black")
 
-/obj/structure/bed/chair/office/comfy/green/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "green")
+/obj/structure/bed/chair/office/comfy/green/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "green")
 
-/obj/structure/bed/chair/office/comfy/purple/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "purple")
+/obj/structure/bed/chair/office/comfy/purple/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "purple")
 
-/obj/structure/bed/chair/office/comfy/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "blue")
+/obj/structure/bed/chair/office/comfy/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "blue")
 
-/obj/structure/bed/chair/office/comfy/beige/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "beige")
+/obj/structure/bed/chair/office/comfy/beige/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "beige")
 
-/obj/structure/bed/chair/office/comfy/lime/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "lime")
+/obj/structure/bed/chair/office/comfy/lime/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "lime")
 
-/obj/structure/bed/chair/office/comfy/yellow/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc, newmaterial, "yellow")
+/obj/structure/bed/chair/office/comfy/yellow/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload, newmaterial, "yellow")
 
 /obj/structure/bed/chair/shuttle
 	name = "shuttle seat"
@@ -318,14 +318,14 @@
 			I.color = material.icon_colour
 		overlays |= I
 
-/obj/structure/bed/chair/shuttle/blue/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc,MATERIAL_STEEL,"blue")
+/obj/structure/bed/chair/shuttle/blue/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload,MATERIAL_STEEL,"blue")
 
-/obj/structure/bed/chair/shuttle/black/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc,MATERIAL_STEEL,"black")
+/obj/structure/bed/chair/shuttle/black/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload,MATERIAL_STEEL,"black")
 
-/obj/structure/bed/chair/shuttle/white/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
-	..(newloc,MATERIAL_STEEL,MATERIAL_CLOTH)
+/obj/structure/bed/chair/shuttle/white/Initialize(mapload, newmaterial = DEFAULT_FURNITURE_MATERIAL)
+	. = ..(mapload,MATERIAL_STEEL,MATERIAL_CLOTH)
 
 /obj/structure/bed/chair/wood
 	name = "classic chair"
@@ -340,8 +340,8 @@
 		return
 	..()
 
-/obj/structure/bed/chair/wood/New(var/newloc)
-	..(newloc, chair_material)
+/obj/structure/bed/chair/wood/Initialize(mapload)
+	. = ..(mapload,  chair_material)
 
 /obj/structure/bed/chair/wood/mahogany
 	color = WOOD_COLOR_RICH
@@ -393,8 +393,8 @@
 	icon_state = "pew_left"
 	base_icon = "pew_left"
 
-/obj/structure/bed/chair/pew/New(var/newloc)
-	..(newloc, pew_material)
+/obj/structure/bed/chair/pew/Initialize(mapload)
+	. = ..(mapload,  pew_material)
 
 /obj/structure/bed/chair/pew/mahogany
 	color = WOOD_COLOR_RICH

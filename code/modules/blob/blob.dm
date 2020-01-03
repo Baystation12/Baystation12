@@ -26,13 +26,10 @@
 	var/product = /obj/item/weapon/blob_tendril
 	var/attack_freq = 5 //see proc/attempt_attack; lower is more often, min 1
 
-/obj/effect/blob/New(loc)
-	health = maxHealth
-	update_icon()
-	return ..(loc)
-
 /obj/effect/blob/Initialize()
 	. = ..()
+	health = maxHealth
+	update_icon()
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/blob/CanPass(var/atom/movable/mover, var/turf/target, var/height = 0, var/air_group = 0)

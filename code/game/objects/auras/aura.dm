@@ -6,10 +6,10 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura
 	var/mob/living/user
 
-/obj/aura/New(var/mob/living/target)
-	..()
-	if(target)
-		added_to(target)
+/obj/aura/Initialize()
+	. = ..()
+	if(isliving(loc))
+		added_to(loc)
 		user.add_aura(src)
 
 /obj/aura/Destroy()

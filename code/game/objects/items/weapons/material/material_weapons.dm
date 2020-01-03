@@ -27,15 +27,14 @@
 	var/drops_debris = 1
 	var/worth_multiplier = 1
 
-/obj/item/weapon/material/New(var/newloc, var/material_key)
+/obj/item/weapon/material/Initialize(mapload, var/material_key)
 	if(!material_key)
 		material_key = default_material
 	set_material(material_key)
-	..(newloc)
+	. = ..(mapload)
 	queue_icon_update()
 	if(!material)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	matter = material.get_matter()
 	if(matter.len)

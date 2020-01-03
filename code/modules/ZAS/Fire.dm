@@ -188,12 +188,11 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	animate(src, color = fire_color(air_contents.temperature), 5)
 	set_light(l_color = color)
 
-/obj/fire/New(newLoc,fl)
-	..()
+/obj/fire/Initialize(mapload, fl)
+	. = ..()
 
 	if(!istype(loc, /turf))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	set_dir(pick(GLOB.cardinal))
 

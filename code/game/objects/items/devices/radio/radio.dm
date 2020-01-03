@@ -606,16 +606,13 @@
 /obj/item/device/radio/borg/syndicate
 	keyslot = /obj/item/device/encryptionkey/syndicate
 
-/obj/item/device/radio/borg/New(var/mob/living/silicon/robot/loc)
-	if(!istype(loc))
+/obj/item/device/radio/borg/Initialize()
+	. = ..()
+	if(!isrobot(loc))
 		CRASH("Invalid spawn location: [log_info_line(loc)]")
-	..()
 	if(keyslot)
 		keyslot = new keyslot(src)
 	myborg = loc
-
-/obj/item/device/radio/borg/Initialize()
-	. = ..()
 	recalculateChannels()
 
 /obj/item/device/radio/borg/Destroy()

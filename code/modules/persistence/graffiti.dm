@@ -13,8 +13,8 @@
 	var/graffiti_age = 0
 	var/author = "unknown"
 
-/obj/effect/decal/writing/New(var/newloc, var/_age, var/_message, var/_author)
-	..(newloc)
+/obj/effect/decal/writing/Initialize(mapload, var/_age, var/_message, var/_author)
+	. = ..(mapload)
 	if(!isnull(_age))
 		graffiti_age = _age
 	message = _message

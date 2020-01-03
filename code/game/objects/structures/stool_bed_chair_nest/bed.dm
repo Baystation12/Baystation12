@@ -22,13 +22,12 @@
 	var/material_alteration = MATERIAL_ALTERATION_ALL
 	var/buckling_sound = 'sound/effects/buckle.ogg'
 
-/obj/structure/bed/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
-	..(newloc)
+/obj/structure/bed/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
 	color = null
 	material = SSmaterials.get_material_by_name(new_material)
 	if(!istype(material))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
+	. = ..(mapload)
 	if(new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
 	update_icon()
@@ -174,11 +173,11 @@
 	icon_state = "psychbed"
 	base_icon = "psychbed"
 
-/obj/structure/bed/psych/New(var/newloc)
-	..(newloc,MATERIAL_WALNUT, MATERIAL_LEATHER_GENERIC)
+/obj/structure/bed/psych/Initialize(mapload)
+	. = ..(mapload, MATERIAL_WALNUT, MATERIAL_LEATHER_GENERIC)
 
-/obj/structure/bed/padded/New(var/newloc)
-	..(newloc,MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
+/obj/structure/bed/padded/Initialize(mapload)
+	. = ..(mapload, MATERIAL_ALUMINIUM,MATERIAL_CLOTH)
 
 /*
  * Roller beds

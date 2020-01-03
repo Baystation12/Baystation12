@@ -13,9 +13,9 @@
 		"nav_yacht_antag"
 	)
 
-/obj/effect/overmap/visitable/ship/yacht/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/ship/yacht/Initialize()
 	name = "IPV [pick("Razorshark", "Aurora", "Lighting", "Pequod", "Anansi")], \a [name]"
-	..()
+	. = ..()
 
 /datum/map_template/ruin/away_site/yacht
 	name = "Yacht"

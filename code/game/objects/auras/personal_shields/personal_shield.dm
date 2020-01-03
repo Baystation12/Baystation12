@@ -25,8 +25,8 @@
 	if(shield)
 		shield.take_charge()
 
-/obj/aura/personal_shield/device/New(var/mob/living/user, var/user_shield)
-	..()
+/obj/aura/personal_shield/device/Initialize(mapload, var/user_shield)
+	. = ..()
 	shield = user_shield
 
 /obj/aura/personal_shield/device/Destroy()

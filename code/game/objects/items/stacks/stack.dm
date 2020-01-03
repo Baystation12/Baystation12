@@ -26,15 +26,12 @@
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
 
-/obj/item/stack/New(var/loc, var/amount=null)
+/obj/item/stack/Initialize(mapload, var/amount=null)
+	. = ..()
 	if (!stacktype)
 		stacktype = type
 	if (amount >= 1)
 		src.amount = amount
-	..()
-
-/obj/item/stack/Initialize()
-	. = ..()
 	if(!plural_name)
 		plural_name = "[singular_name]s"
 

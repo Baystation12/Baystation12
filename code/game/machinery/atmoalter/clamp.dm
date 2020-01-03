@@ -13,8 +13,8 @@
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2
 
-/obj/machinery/clamp/New(loc, var/obj/machinery/atmospherics/pipe/simple/to_attach = null)
-	..()
+/obj/machinery/clamp/Initialize(mapload, var/obj/machinery/atmospherics/pipe/simple/to_attach = null)
+	. = ..(mapload)
 	if(istype(to_attach))
 		target = to_attach
 	else
@@ -22,7 +22,6 @@
 	if(target)
 		update_networks()
 		dir = target.dir
-	return 1
 
 /obj/machinery/clamp/proc/update_networks()
 	if(!target)

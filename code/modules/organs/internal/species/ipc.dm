@@ -28,10 +28,10 @@
 		)
 	var/shackle = 0
 
-/obj/item/organ/internal/posibrain/New(var/mob/living/carbon/H)
-	..()
-	if(!brainmob && H)
-		init(H)
+/obj/item/organ/internal/posibrain/Initialize()
+	. = ..()
+	if(!brainmob && iscarbon(loc))
+		init(loc)
 	robotize()
 	unshackle()
 	update_icon()

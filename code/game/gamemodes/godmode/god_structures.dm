@@ -26,8 +26,8 @@
 	anchored = 1
 	icon_state = "tomealtar"
 
-/obj/structure/deity/New(var/newloc, var/god)
-	..(newloc)
+/obj/structure/deity/Initialize(mapload, var/god)
+	. = ..(mapload)
 	if(god)
 		linked_god = god
 		linked_god.form.sync_structure(src)

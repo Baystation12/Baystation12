@@ -17,8 +17,8 @@
 	var/constructed_path = /obj/structure/disposalpipe
 	var/built_icon_state
 
-/obj/structure/disposalconstruct/New(loc, var/P = null)
-	. = ..()
+/obj/structure/disposalconstruct/Initialize(mapload, var/P = null)
+	. = ..(mapload)
 	if(P)
 		if(istype(P, /obj/structure/disposalpipe))//Unfortunately a necessary evil since some things are machines and other things are structures
 			var/obj/structure/disposalpipe/D = P

@@ -78,8 +78,8 @@ obj/structure/ex_act(severity)
 
 
 
-/obj/structure/transit_tube_pod/New(loc)
-	..(loc)
+/obj/structure/transit_tube_pod/Initialize()
+	. = ..()
 
 	air_contents.adjust_multi(GAS_OXYGEN, MOLES_O2STANDARD * 2, GAS_NITROGEN, MOLES_N2STANDARD)
 	air_contents.temperature = T20C
@@ -90,8 +90,8 @@ obj/structure/ex_act(severity)
 
 
 
-/obj/structure/transit_tube/New(loc)
-	..(loc)
+/obj/structure/transit_tube/Initialize()
+	. = ..()
 
 	if(tube_dirs == null)
 		init_dirs()
@@ -106,9 +106,6 @@ obj/structure/ex_act(severity)
 	else
 		AM.dropInto(loc)
 		to_chat(AM, "<span class='info'>You slip under the tube.</span>")
-
-/obj/structure/transit_tube/station/New(loc)
-	..(loc)
 
 /obj/structure/transit_tube/station/Bumped(mob/AM as mob|obj)
 	if(!pod_moving && icon_state == "open" && istype(AM, /mob))

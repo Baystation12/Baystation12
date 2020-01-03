@@ -77,11 +77,10 @@
 	var/reality = 0
 	simulated = 0
 
-/obj/effect/bluegoast/New(nloc, ndaddy)
-	..(nloc)
+/obj/effect/bluegoast/Initialize(mapload, ndaddy)
+	. = ..(mapload)
 	if(!ndaddy)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	daddy = ndaddy
 	set_dir(daddy.dir)
 	appearance = daddy.appearance

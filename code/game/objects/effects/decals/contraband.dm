@@ -14,16 +14,14 @@
 	icon_state = "rolled_poster"
 	var/poster_type
 
-/obj/item/weapon/contraband/poster/New(var/maploading, var/given_poster_type)
+/obj/item/weapon/contraband/poster/Initialize(mapload, var/given_poster_type)
 	if(given_poster_type && !ispath(given_poster_type, /decl/poster))
 		CRASH("Invalid poster type: [log_info_line(given_poster_type)]")
 
 	poster_type = given_poster_type || poster_type
 	if(!poster_type)
 		poster_type = pick(subtypesof(/decl/poster))
-	..()
 
-/obj/item/weapon/contraband/poster/Initialize()
 	var/list/posters = subtypesof(/decl/poster)
 	var/serial_number = posters.Find(poster_type)
 	name += " - No. [serial_number]"
@@ -92,9 +90,8 @@
 /obj/structure/sign/poster/bay_50
 	poster_type = /decl/poster/bay_50
 
-/obj/structure/sign/poster/New(var/newloc, var/placement_dir = null, var/give_poster_type = null)
-	..(newloc)
-
+/obj/structure/sign/poster/Initialize(mapload, var/placement_dir = null, var/give_poster_type = null)
+	. = ..(mapload)
 	if(!poster_type)
 		if(give_poster_type)
 			poster_type = give_poster_type

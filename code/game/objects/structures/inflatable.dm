@@ -56,12 +56,9 @@
 	name = "inflatable wall"
 	undeploy_path = /obj/item/inflatable/wall
 
-/obj/structure/inflatable/New(location)
-	..()
-	update_nearby_tiles(need_rebuild=1)
-
 /obj/structure/inflatable/Initialize()
 	. = ..()
+	update_nearby_tiles(need_rebuild=1)
 	START_PROCESSING(SSobj,src)
 
 /obj/structure/inflatable/Destroy()

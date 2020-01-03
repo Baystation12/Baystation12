@@ -26,9 +26,9 @@
 	icon_state = "arrow_left"
 	var/obj/screen/psi/hub/controller
 
-/obj/screen/psi/toggle_psi_menu/New(var/mob/living/_owner, var/obj/screen/psi/hub/_controller)
+/obj/screen/psi/toggle_psi_menu/Initialize(mapload, var/obj/screen/psi/hub/_controller)
+	. = ..(mapload)
 	controller = _controller
-	..(_owner)
 
 /obj/screen/psi/toggle_psi_menu/Click()
 	var/set_hidden = !hidden

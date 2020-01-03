@@ -228,8 +228,8 @@
 	to_chat(user, "It's been engraved with the symbols '<font face='Shage'>RWH QaG [number]</font>'.") //i am not a linguist
 
 
-/obj/item/weapon/stool/stone/New(var/newloc)
-	..(newloc,"sandstone")
+/obj/item/weapon/stool/stone/Initialize(mapload)
+	. = ..(mapload, "sandstone")
 
 /turf/simulated/floor/airless/stone
 	name = "temple floor"

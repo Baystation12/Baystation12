@@ -5,8 +5,8 @@
 	mouse_opacity = 0
 	pass_flags = PASS_FLAG_TABLE | PASS_FLAG_GRILLE
 
-/obj/effect/effect/water/New(loc)
-	..()
+/obj/effect/effect/water/Initialize()
+	. = ..()
 	QDEL_IN(src, 15 SECONDS) // In case whatever made it forgets to delete it
 
 /obj/effect/effect/water/proc/set_color() // Call it after you move reagents to it

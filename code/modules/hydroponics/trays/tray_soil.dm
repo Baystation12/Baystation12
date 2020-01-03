@@ -36,8 +36,8 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/is_burnable()
 	return ..() && seed.get_trait(TRAIT_HEAT_TOLERANCE) < 1000
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/New(var/newloc,var/datum/seed/newseed, var/start_mature)
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize(mapload,var/datum/seed/newseed, var/start_mature)
+	. = ..()
 	seed = newseed
 	dead = 0
 	age = start_mature ? seed.get_trait(TRAIT_MATURATION) : 1
@@ -48,9 +48,6 @@
 	if(seed)
 		name = seed.display_name
 	check_health()
-
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize()
-	. = ..()
 	connected_zlevels = GetConnectedZlevels(z)
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Process()

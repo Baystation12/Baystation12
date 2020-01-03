@@ -31,19 +31,16 @@
 	. = ..()
 	update_icon()
 
-/obj/structure/railing/New(var/newloc, var/material_key = DEFAULT_FURNITURE_MATERIAL)
-	material = material_key // Converted to datum in initialize().
-	..(newloc)
-
 /obj/structure/railing/Process()
 	if(!material || !material.radioactivity)
 		return
 	for(var/mob/living/L in range(1,src))
 		L.apply_damage(round(material.radioactivity/20),IRRADIATE, damage_flags = DAM_DISPERSED)
 
-/obj/structure/railing/Initialize()
+/obj/structure/railing/Initialize(mapload, var/material_key = DEFAULT_FURNITURE_MATERIAL)
 	. = ..()
 
+	material = material_key
 	if(!isnull(material) && !istype(material))
 		material = SSmaterials.get_material_by_name(material)
 	if(!istype(material))

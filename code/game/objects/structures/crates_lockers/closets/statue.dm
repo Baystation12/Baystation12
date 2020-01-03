@@ -13,7 +13,7 @@
 	var/intialOxy = 0
 	var/timer = 240 //eventually the person will be freed
 
-/obj/structure/closet/statue/New(loc, var/mob/living/L)
+/obj/structure/closet/statue/Initialize(mapload, var/mob/living/L)
 	if(L && (ishuman(L) || L.isMonkey() || iscorgi(L)))
 		if(L.buckled)
 			L.buckled = 0
@@ -41,11 +41,10 @@
 			desc = "If it takes forever, I will wait for you..."
 
 	if(health == 0) //meaning if the statue didn't find a valid target
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	START_PROCESSING(SSobj, src)
-	..()
+	. = ..(mapload)
 
 /obj/structure/closet/statue/Process()
 	timer--

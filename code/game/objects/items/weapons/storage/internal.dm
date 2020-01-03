@@ -3,11 +3,11 @@
 /obj/item/weapon/storage/internal
 	var/obj/item/master_item
 
-/obj/item/weapon/storage/internal/New(obj/item/MI)
-	master_item = MI
+/obj/item/weapon/storage/internal/Initialize()
+	. = ..()
+	master_item = loc
 	name = master_item.name
 	verbs -= /obj/item/verb/verb_pickup	//make sure this is never picked up.
-	..()
 
 /obj/item/weapon/storage/internal/Destroy()
 	master_item = null
@@ -86,11 +86,11 @@
 	return master_item.Adjacent(neighbor)
 
 // Used by webbings, coat pockets, etc
-/obj/item/weapon/storage/internal/pockets/New(var/newloc, var/slots, var/slot_size)
+/obj/item/weapon/storage/internal/pockets/Initialize(mapload, var/slots, var/slot_size)
 	storage_slots = slots
 	max_w_class = slot_size
-	..()
+	. = ..()
 
-/obj/item/weapon/storage/internal/pouch/New(var/newloc, var/storage_space)
+/obj/item/weapon/storage/internal/pouch/Initialize(mapload, var/storage_space)
 	max_storage_space = storage_space
-	..()
+	. = ..()

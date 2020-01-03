@@ -59,8 +59,8 @@
 
 	var/spell/mark_recall/spell
 
-/obj/effect/cleanable/wizard_mark/New(var/newloc,var/mrspell)
-	..()
+/obj/effect/cleanable/wizard_mark/Initialize(mapload,var/mrspell)
+	. = ..()
 	spell = mrspell
 
 /obj/effect/cleanable/wizard_mark/Destroy()

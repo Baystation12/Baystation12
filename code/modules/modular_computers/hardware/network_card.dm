@@ -26,8 +26,8 @@ var/global/ntnet_card_uid = 1
 	if(ethernet)
 		. += "OpenEth (Physical Connection) - Physical network connection port"
 
-/obj/item/weapon/stock_parts/computer/network_card/New(var/l)
-	..(l)
+/obj/item/weapon/stock_parts/computer/network_card/Initialize()
+	. = ..()
 	identification_id = ntnet_card_uid
 	ntnet_card_uid++
 

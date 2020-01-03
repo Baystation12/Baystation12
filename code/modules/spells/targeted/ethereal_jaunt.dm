@@ -86,9 +86,9 @@
 	anchored = 1
 	var/turf/last_valid_turf
 
-/obj/effect/dummy/spell_jaunt/New(var/location)
-	..()
-	last_valid_turf = get_turf(location)
+/obj/effect/dummy/spell_jaunt/Initialize()
+	. = ..()
+	last_valid_turf = get_turf(loc)
 
 /obj/effect/dummy/spell_jaunt/Destroy()
 	// Eject contents if deleted somehow

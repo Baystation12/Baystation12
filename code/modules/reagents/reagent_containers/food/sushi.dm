@@ -6,9 +6,8 @@
 	bitesize = 1
 	var/fish_type = "fish"
 
-/obj/item/weapon/reagent_containers/food/snacks/sushi/New(var/newloc, var/obj/item/weapon/reagent_containers/food/snacks/rice, var/obj/item/weapon/reagent_containers/food/snacks/topping)
-
-	..(newloc)
+/obj/item/weapon/reagent_containers/food/snacks/sushi/Initialize(mapload, var/obj/item/weapon/reagent_containers/food/snacks/rice, var/obj/item/weapon/reagent_containers/food/snacks/topping)
+	. = ..(mapload)
 
 	if(istype(topping))
 		for(var/taste_thing in topping.nutriment_desc)
@@ -59,8 +58,8 @@
 	var/fish_type = "fish"
 	var/slices = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/sashimi/New(var/newloc, var/_fish_type)
-	..(newloc)
+/obj/item/weapon/reagent_containers/food/snacks/sashimi/Initialize(mapload, var/_fish_type)
+	. = ..(mapload)
 	if(_fish_type) fish_type = _fish_type
 	name = "[fish_type] sashimi"
 	update_icon()

@@ -8,13 +8,13 @@
 	var/image/on_cooldown
 	var/list/components
 
-/obj/screen/psi/hub/New(var/mob/living/_owner)
+/obj/screen/psi/hub/Initialize()
+	. = ..()
 	on_cooldown = image(icon, "cooldown")
 	components = list(
-		new /obj/screen/psi/armour(_owner),
-		new /obj/screen/psi/toggle_psi_menu(_owner, src)
+		new /obj/screen/psi/armour(loc),
+		new /obj/screen/psi/toggle_psi_menu(loc, src)
 		)
-	..()
 	START_PROCESSING(SSprocessing, src)
 
 /obj/screen/psi/hub/on_update_icon()

@@ -6,8 +6,8 @@
 	var/list/evidence = list()
 	var/object
 
-/obj/item/weapon/sample/New(var/newloc, var/atom/supplied)
-	..(newloc)
+/obj/item/weapon/sample/Initialize(mapload, var/atom/supplied)
+	. = ..(mapload)
 	if(supplied)
 		copy_evidence(supplied)
 		name = "[initial(name)] (\the [supplied])"
@@ -18,8 +18,8 @@
 	if(distance <= 1 && object)
 		to_chat(user, "The label says: '[object]'")
 
-/obj/item/weapon/sample/print/New(var/newloc, var/atom/supplied)
-	..(newloc, supplied)
+/obj/item/weapon/sample/print/Initialize()
+	. = ..()
 	if(evidence && evidence.len)
 		icon_state = "fingerprint1"
 

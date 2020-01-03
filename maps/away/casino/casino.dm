@@ -20,9 +20,9 @@
 		"Casino Cutter" = list("nav_casino_hangar"),
 	)
 
-/obj/effect/overmap/visitable/ship/casino/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/ship/casino/Initialize()
 	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
-	..()
+	. = ..()
 
 /datum/map_template/ruin/away_site/casino
 	name = "Casino"

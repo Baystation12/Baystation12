@@ -133,11 +133,8 @@
 		elect_master(exclude_self = TRUE)
 	return ..()
 
-/obj/machinery/alarm/New(var/loc, var/dir, atom/frame)
-	..(loc)
-
-	if(dir)
-		src.set_dir(dir)
+/obj/machinery/alarm/Initialize(mapload, var/dir, atom/frame)
+	. = ..(mapload, dir)
 
 	if(istype(frame))
 		buildstage = 0
@@ -147,8 +144,6 @@
 		update_icon()
 		frame.transfer_fingerprints_to(src)
 
-/obj/machinery/alarm/Initialize()
-	. = ..()
 	alarm_area = get_area(src)
 	area_uid = alarm_area.uid
 	if (name == "alarm")
@@ -1159,8 +1154,8 @@ FIRE ALARM
 
 
 
-/obj/machinery/firealarm/New(loc, dir, atom/frame)
-	..(loc)
+/obj/machinery/firealarm/Initialize(mapload, dir, atom/frame)
+	..(mapload)
 
 	if(dir)
 		src.set_dir((dir & (NORTH|SOUTH)) ? dir : GLOB.reverse_dir[dir])
@@ -1173,8 +1168,6 @@ FIRE ALARM
 		update_icon()
 		frame.transfer_fingerprints_to(src)
 
-/obj/machinery/firealarm/Initialize()
-	. = ..()
 	if(z in GLOB.using_map.contact_levels)
 		update_icon()
 

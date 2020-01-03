@@ -6,8 +6,8 @@
 	color = COLOR_GRAY40
 	detail_color = COLOR_NT_RED
 
-/obj/item/weapon/card/id/syndicate/New(mob/user as mob)
-	..()
+/obj/item/weapon/card/id/syndicate/Initialize()
+	. = ..()
 	access = syndicate_access.Copy()
 
 /obj/item/weapon/card/id/syndicate/station_access/Initialize()

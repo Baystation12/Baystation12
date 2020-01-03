@@ -29,16 +29,15 @@
 
 	var/chained = 0//Adminbus chain-grab
 
-/obj/singularity/New(loc, var/starting_energy = 50, var/temp = 0)
+/obj/singularity/Initialize(mapload, var/starting_energy = 50, var/temp = 0)
+	. = ..(mapload)
+
 	//CARN: admin-alert for chuckle-fuckery.
 	admin_investigate_setup()
 	energy = starting_energy
 
 	if (temp)
-		spawn (temp)
-			qdel(src)
-
-	..()
+		QDEL_IN(src, temp)
 	START_PROCESSING(SSobj, src)
 	for(var/obj/machinery/power/singularity_beacon/singubeacon in SSmachines.machinery)
 		if(singubeacon.active)

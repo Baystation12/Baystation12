@@ -2,9 +2,10 @@
 var/list/z_levels = list()// Each bit re... haha just kidding this is a list of bools now
 
 // If the height is more than 1, we mark all contained levels as connected.
-/obj/effect/landmark/map_data/New(turf/loc, _height)
+/obj/effect/landmark/map_data/Initialize(mapload, _height)
 	..()
-	if(!istype(loc)) // Using loc.z is safer when using the maploader and New.
+	. = INITIALIZE_HINT_QDEL
+	if(!isturf(loc)) // Using loc.z is safer when using the maploader and New.
 		return
 	if(_height)
 		height = _height
@@ -12,10 +13,6 @@ var/list/z_levels = list()// Each bit re... haha just kidding this is a list of 
 		if (z_levels.len <i)
 			z_levels.len = i
 		z_levels[i] = TRUE
-
-/obj/effect/landmark/map_data/Initialize()
-	..()
-	return INITIALIZE_HINT_QDEL
 
 /proc/HasAbove(var/z)
 	if(z >= world.maxz || z < 1 || z > z_levels.len)

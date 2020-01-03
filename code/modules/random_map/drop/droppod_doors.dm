@@ -10,8 +10,8 @@
 	var/deploying
 	var/deployed
 
-/obj/structure/droppod_door/New(var/newloc, var/autoopen)
-	..(newloc)
+/obj/structure/droppod_door/Initialize(mapload, var/autoopen)
+	. = ..(mapload)
 	if(autoopen)
 		spawn(10 SECONDS)
 			deploy()

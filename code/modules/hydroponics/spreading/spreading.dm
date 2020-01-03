@@ -61,28 +61,24 @@
 /obj/effect/vine/single
 	spread_chance = 0
 
-/obj/effect/vine/New(var/newloc, var/datum/seed/newseed, var/obj/effect/vine/newparent, var/start_matured = 0)
+/obj/effect/vine/Initialize(mapload, var/datum/seed/newseed, var/obj/effect/vine/newparent, var/start_matured = 0)
+	. = ..(mapload)
+
 	if(!newparent)
 		parent = src
 	else
 		parent = newparent
 		parent.possible_children = max(0, parent.possible_children - 1)
+
 	seed = newseed
 	if(start_matured)
 		mature_time = 0
 		health = max_health
-	..()
-
-/obj/effect/vine/Initialize()
-	. = ..()
-
-	if(!SSplants)
-		log_error("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-		return INITIALIZE_HINT_QDEL
 	if(!istype(seed))
 		seed = SSplants.seeds[DEFAULT_SEED]
 	if(!seed)
 		return INITIALIZE_HINT_QDEL
+
 	name = seed.display_name
 	max_health = round(seed.get_trait(TRAIT_ENDURANCE)/2)
 	if(seed.get_trait(TRAIT_SPREAD) == 2)

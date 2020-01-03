@@ -22,8 +22,8 @@
 	noblend_objects = list(/obj/machinery/door/window)
 	material = DEFAULT_WALL_MATERIAL
 
-/obj/structure/wall_frame/New(var/new_loc, var/materialtype)
-	..(new_loc)
+/obj/structure/wall_frame/Initialize(mapload, var/materialtype)
+	. = ..(mapload)
 
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL

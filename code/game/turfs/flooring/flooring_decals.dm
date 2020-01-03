@@ -12,13 +12,11 @@ var/list/floor_decals = list()
 	var/detail_overlay
 	var/detail_color
 
-/obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour, var/newappearance)
+/obj/effect/floor_decal/Initialize(mapload, var/newdir, var/newcolour, var/newappearance)
 	supplied_dir = newdir
 	if(newappearance) appearance = newappearance
 	if(newcolour) color = newcolour
-	..(newloc)
 
-/obj/effect/floor_decal/Initialize()
 	if(supplied_dir) set_dir(supplied_dir)
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
@@ -1138,9 +1136,9 @@ var/list/floor_decals = list()
 	icon_state = "manydot"
 	appearance_flags = 0
 
-/obj/effect/floor_decal/floordetail/New(var/newloc, var/newdir, var/newcolour)
+/obj/effect/floor_decal/floordetail/Initialize()
 	color = null //color is here just for map preview, if left it applies both our and tile colors.
-	..()
+	. = ..()
 
 /obj/effect/floor_decal/floordetail/tiled
 	icon_state = "manydot_tiled"

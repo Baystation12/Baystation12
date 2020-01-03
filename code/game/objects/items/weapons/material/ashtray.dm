@@ -66,11 +66,11 @@
 		update_icon()
 	return ..()
 
-/obj/item/weapon/material/ashtray/plastic/New(var/newloc)
-	..(newloc, MATERIAL_PLASTIC)
+/obj/item/weapon/material/ashtray/plastic/Initialize(mapload)
+	. = ..(mapload, MATERIAL_PLASTIC)
 
-/obj/item/weapon/material/ashtray/bronze/New(var/newloc)
-	..(newloc, MATERIAL_BRONZE)
+/obj/item/weapon/material/ashtray/bronze/Initialize(mapload)
+	. = ..(mapload, MATERIAL_BRONZE)
 
-/obj/item/weapon/material/ashtray/glass/New(var/newloc)
-	..(newloc, MATERIAL_GLASS)
+/obj/item/weapon/material/ashtray/glass/Initialize(mapload)
+	. = ..(mapload, MATERIAL_GLASS)

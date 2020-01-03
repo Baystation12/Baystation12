@@ -198,8 +198,8 @@
 	target.hotspot_expose((tank.air_contents.temperature*2) + 380,500) // -- More of my "how do I shot fire?" dickery. -- TLE
 	//location.hotspot_expose(1000,500,1)
 
-/obj/item/weapon/flamethrower/full/New(var/loc)
-	..()
+/obj/item/weapon/flamethrower/full/Initialize()
+	. = ..()
 	weldtool = new /obj/item/weapon/weldingtool(src)
 	weldtool.status = 0
 	igniter = new /obj/item/device/assembly/igniter(src)

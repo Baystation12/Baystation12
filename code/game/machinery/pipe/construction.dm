@@ -196,8 +196,8 @@ Buildable meters
 	var/frequency
 	var/id
 
-/obj/item/pipe/injector/New(loc, obj/machinery/atmospherics/P)
-	..(loc, null)
+/obj/item/pipe/injector/Initialize(mapload, obj/machinery/atmospherics/P)
+	. = ..(mapload)
 	var/obj/machinery/atmospherics/unary/outlet_injector/I = P
 	if(!I)
 		return

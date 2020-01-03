@@ -22,8 +22,8 @@
 	id = "round_end_belt"
 
 	// create a conveyor
-/obj/machinery/conveyor/New(loc, newdir, on = 0)
-	..(loc)
+/obj/machinery/conveyor/Initialize(mapload, newdir, on = 0)
+	. = ..(mapload)
 	if(newdir)
 		set_dir(newdir)
 
@@ -155,8 +155,8 @@
 
 
 
-/obj/machinery/conveyor_switch/New(loc, newid)
-	..(loc)
+/obj/machinery/conveyor_switch/Initialize(mapload, newid)
+	. = ..(mapload)
 	if(!id)
 		id = newid
 	update_icon()

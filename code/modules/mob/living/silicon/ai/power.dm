@@ -197,10 +197,10 @@
 	var/mob/living/silicon/ai/powered_ai = null
 	invisibility = 100
 
-/obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
-	powered_ai = ai
+/obj/machinery/ai_powersupply/Initialize()
+	. = ..()
+	powered_ai = loc
 	powered_ai.psupply = src
-	..()
 
 /obj/machinery/ai_powersupply/Destroy()
 	. = ..()

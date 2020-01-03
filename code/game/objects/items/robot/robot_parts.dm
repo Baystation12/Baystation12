@@ -14,8 +14,8 @@
 /obj/item/robot_parts/set_dir()
 	return
 
-/obj/item/robot_parts/New(var/newloc, var/model)
-	..(newloc)
+/obj/item/robot_parts/Initialize(mapload, var/model)
+	. = ..(mapload)
 	if(model_info && model)
 		model_info = model
 		var/datum/robolimb/R = all_robolimbs[model]

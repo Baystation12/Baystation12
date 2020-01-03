@@ -24,7 +24,8 @@
 	movement_range = 15
 	energy = 15
 
-/obj/effect/accelerated_particle/New(loc, dir = 2)
+/obj/effect/accelerated_particle/Initialize(mapload, dir = 2)
+	. = ..(mapload)
 	set_dir(dir)
 	if(movement_range > 20)
 		movement_range = 20
