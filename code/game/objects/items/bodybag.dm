@@ -16,15 +16,16 @@
 	name = "body bags"
 	desc = "This box contains body bags."
 	icon_state = "bodybags"
-	New()
-		..()
-		new /obj/item/bodybag(src)
-		new /obj/item/bodybag(src)
-		new /obj/item/bodybag(src)
-		new /obj/item/bodybag(src)
-		new /obj/item/bodybag(src)
-		new /obj/item/bodybag(src)
-		new /obj/item/bodybag(src)
+
+/obj/item/weapon/storage/box/bodybags/Initialize()
+	. = ..()
+	new /obj/item/bodybag(src)
+	new /obj/item/bodybag(src)
+	new /obj/item/bodybag(src)
+	new /obj/item/bodybag(src)
+	new /obj/item/bodybag(src)
+	new /obj/item/bodybag(src)
+	new /obj/item/bodybag(src)
 
 
 /obj/structure/closet/body_bag

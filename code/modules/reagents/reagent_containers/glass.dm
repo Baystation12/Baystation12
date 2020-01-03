@@ -231,17 +231,15 @@
 	matter = list(MATERIAL_GLASS = 5000, MATERIAL_PLASTIC = 2500)
 	volume = 120
 
-/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/cryoxadone, 30)
-		update_icon()
+/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/cryoxadone, 30)
+	update_icon()
 
-/obj/item/weapon/reagent_containers/glass/beaker/sulphuric
-	New()
-		..()
-		reagents.add_reagent(/datum/reagent/acid, 60)
-		update_icon()
+/obj/item/weapon/reagent_containers/glass/beaker/sulphuric/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/acid, 60)
+	update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bucket
 	name = "bucket"
