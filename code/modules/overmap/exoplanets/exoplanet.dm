@@ -57,10 +57,7 @@
 		else
 			habitability_class = HABITABILITY_BAD
 
-/obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, max_x, max_y)
-	if(!GLOB.using_map.use_overmap)
-		return ..()
-
+/obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
 	maxx = max_x ? max_x : world.maxx
 	maxy = max_y ? max_y : world.maxy
 	planetary_area = new planetary_area()
@@ -81,9 +78,7 @@
 		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
 			continue
 		possible_features += new ruin
-	return ..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()
 	generate_habitability()
 	generate_atmosphere()
 	generate_map()
