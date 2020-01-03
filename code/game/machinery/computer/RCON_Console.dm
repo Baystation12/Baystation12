@@ -14,8 +14,8 @@
 	var/current_tag = null
 	var/datum/nano_module/rcon/rcon
 
-/obj/machinery/computer/rcon/New()
-	..()
+/obj/machinery/computer/rcon/Initialize()
+	. = ..()
 	rcon = new(src)
 
 /obj/machinery/computer/rcon/Destroy()

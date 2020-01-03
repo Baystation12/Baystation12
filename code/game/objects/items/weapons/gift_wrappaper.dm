@@ -15,13 +15,12 @@
 	item_state = "gift1"
 	randpixel = 10
 
-/obj/item/weapon/a_gift/New()
-	..()
+/obj/item/weapon/a_gift/Initialize()
+	. = ..()
 	if(w_class > 0 && w_class < ITEM_SIZE_HUGE)
 		icon_state = "gift[w_class]"
 	else
 		icon_state = "gift[pick(1, 2, 3)]"
-	return
 
 /obj/item/weapon/a_gift/ex_act()
 	qdel(src)

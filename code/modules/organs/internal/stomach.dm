@@ -15,8 +15,8 @@
 	QDEL_NULL(ingested)
 	. = ..()
 
-/obj/item/organ/internal/stomach/New()
-	..()
+/obj/item/organ/internal/stomach/Initialize()
+	. = ..()
 	ingested = new/datum/reagents/metabolism(240, owner, CHEM_INGEST)
 	if(!ingested.my_atom)
 		ingested.my_atom = src

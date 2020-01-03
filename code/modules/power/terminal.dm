@@ -12,11 +12,10 @@
 	var/obj/item/weapon/stock_parts/power/terminal/master
 	anchored = 1
 
-/obj/machinery/power/terminal/New()
-	..()
+/obj/machinery/power/terminal/Initialize()
+	. = ..()
 	var/turf/T = src.loc
 	if(level==1) hide(!T.is_plating())
-	return
 
 /obj/machinery/power/terminal/proc/master_machine()
 	var/obj/machinery/machine = master && master.loc

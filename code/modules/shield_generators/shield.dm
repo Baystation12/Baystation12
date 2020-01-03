@@ -32,8 +32,8 @@
 	return 0
 
 
-/obj/effect/shield/New()
-	..()
+/obj/effect/shield/Initialize()
+	. = ..()
 	update_nearby_tiles()
 
 

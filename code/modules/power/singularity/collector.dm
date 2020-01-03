@@ -28,8 +28,8 @@ var/global/list/rad_collectors = list()
 	var/end_time = 0
 	var/alert_delay = 10 SECONDS
 
-/obj/machinery/power/rad_collector/New()
-	..()
+/obj/machinery/power/rad_collector/Initialize()
+	. = ..()
 	rad_collectors += src
 
 /obj/machinery/power/rad_collector/Destroy()

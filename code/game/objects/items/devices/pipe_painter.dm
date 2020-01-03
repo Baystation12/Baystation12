@@ -7,8 +7,8 @@
 	var/list/modes
 	var/mode
 
-/obj/item/device/pipe_painter/New()
-	..()
+/obj/item/device/pipe_painter/Initialize()
+	. = ..()
 	modes = new()
 	for(var/C in pipe_colors)
 		modes += "[C]"

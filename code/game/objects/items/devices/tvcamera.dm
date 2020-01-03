@@ -9,10 +9,6 @@
 	var/obj/machinery/camera/network/thunder/camera
 	var/obj/item/device/radio/radio
 
-/obj/item/device/camera/tvcamera/New()
-	..()
-	GLOB.listening_objects += src
-
 /obj/item/device/camera/tvcamera/Destroy()
 	GLOB.listening_objects -= src
 	QDEL_NULL(camera)
@@ -27,6 +23,7 @@
 	radio.listening = FALSE
 	radio.set_frequency(ENT_FREQ)
 	radio.power_usage = 0
+	GLOB.listening_objects += src
 	. = ..()
 
 /obj/item/device/camera/tvcamera/examine(mob/user)

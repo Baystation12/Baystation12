@@ -262,6 +262,6 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 /obj/sound_test
 	var/sound = 'sound/misc/TestLoop1.ogg'
 
-/obj/sound_test/New()
-	..()
+/obj/sound_test/Initialize()
+	. = ..()
 	GLOB.sound_player.PlayLoopingSound(src, /obj/sound_test, sound, 50, 3)

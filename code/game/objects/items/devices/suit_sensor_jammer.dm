@@ -13,8 +13,8 @@
 	var/list/suit_sensor_jammer_methods_by_type
 	var/list/suit_sensor_jammer_methods
 
-/obj/item/device/suit_sensor_jammer/New()
-	..()
+/obj/item/device/suit_sensor_jammer/Initialize()
+	. = ..()
 	if(ispath(bcell))
 		bcell = new bcell(src)
 	suit_sensor_jammer_methods = list()

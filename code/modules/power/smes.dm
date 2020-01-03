@@ -66,15 +66,11 @@
 	charge -= smes_amt
 	return smes_amt / CELLRATE
 
-
-/obj/machinery/power/smes/New()
-	..()
-	if(!should_be_mapped)
-		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
-
 /obj/machinery/power/smes/Initialize()
 	. = ..()
-	update_icon()
+	if(!should_be_mapped)
+		warning("Non-buildable or Non-magical SMES at [src.x]X [src.y]Y [src.z]Z")
+	queue_icon_update()
 
 /obj/machinery/power/smes/populate_parts()
 	for(var/d in GLOB.cardinal)

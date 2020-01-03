@@ -72,8 +72,8 @@
 	if(prob(10))
 		ironed_state = WRINKLES_WRINKLY
 
-/obj/item/clothing/New()
-	..()
+/obj/item/clothing/Initialize()
+	. = ..()
 	if(starting_accessories)
 		for(var/T in starting_accessories)
 			var/obj/item/clothing/accessory/tie = new T(src)
@@ -807,8 +807,8 @@ BLIND     // can't see anything
 	valid_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_HOLSTER,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT,ACCESSORY_SLOT_DECOR,ACCESSORY_SLOT_MEDAL,ACCESSORY_SLOT_INSIGNIA)
 	restricted_accessory_slots = list(ACCESSORY_SLOT_UTILITY,ACCESSORY_SLOT_HOLSTER,ACCESSORY_SLOT_ARMBAND,ACCESSORY_SLOT_RANK,ACCESSORY_SLOT_DEPT)
 
-/obj/item/clothing/under/New()
-	..()
+/obj/item/clothing/under/Initialize()
+	. = ..()
 	update_rolldown_status()
 	update_rollsleeves_status()
 	if(rolled_down == -1)
@@ -851,8 +851,8 @@ BLIND     // can't see anything
 		return
 	..()
 
-/obj/item/clothing/under/New()
-	..()
+/obj/item/clothing/under/Initialize()
+	. = ..()
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()

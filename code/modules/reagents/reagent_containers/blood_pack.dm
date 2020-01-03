@@ -77,16 +77,16 @@
 	reagents.trans_to_mob(attached, amount_per_transfer_from_this, CHEM_BLOOD)
 	update_icon()
 
-/obj/item/weapon/reagent_containers/ivbag/nanoblood/New()
-	..()
+/obj/item/weapon/reagent_containers/ivbag/nanoblood/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/nanoblood, volume)
 
 /obj/item/weapon/reagent_containers/ivbag/blood
 	name = "blood pack"
 	var/blood_type = null
 
-/obj/item/weapon/reagent_containers/ivbag/blood/New()
-	..()
+/obj/item/weapon/reagent_containers/ivbag/blood/Initialize()
+	. = ..()
 	if(blood_type)
 		name = "blood pack [blood_type]"
 		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))

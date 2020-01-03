@@ -61,8 +61,8 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 		if(icon_state == "req_comp_off")
 			icon_state = "req_comp[newmessagepriority]"
 
-/obj/machinery/requests_console/New()
-	..()
+/obj/machinery/requests_console/Initialize()
+	. = ..()
 
 	announcement.title = "[department] announcement"
 	announcement.newscast = 1

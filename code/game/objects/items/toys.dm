@@ -105,8 +105,8 @@
 	item_state = "syndballoon"
 	w_class = ITEM_SIZE_HUGE
 
-/obj/item/toy/balloon/New()
-	..()
+/obj/item/toy/balloon/Initialize()
+	. = ..()
 	desc = "Across the balloon is printed: \"[desc]\""
 
 /obj/item/toy/balloon/nanotrasen

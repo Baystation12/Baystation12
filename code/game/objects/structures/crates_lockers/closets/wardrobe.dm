@@ -7,8 +7,8 @@
 	name = "security wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/red
 
-/obj/structure/closet/wardrobe/red/New()
-	..()
+/obj/structure/closet/wardrobe/red/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/security(src)
 	new /obj/item/clothing/under/rank/security(src)
 	new /obj/item/clothing/under/rank/security(src)
@@ -33,8 +33,8 @@
 	closet_appearance = /decl/closet_appearance/wardrobe/pink
 
 
-/obj/structure/closet/wardrobe/pink/New()
-	..()
+/obj/structure/closet/wardrobe/pink/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/pink(src)
 	new /obj/item/clothing/under/color/pink(src)
 	new /obj/item/clothing/under/color/pink(src)
@@ -46,8 +46,8 @@
 	name = "black wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/black
 
-/obj/structure/closet/wardrobe/black/New()
-	..()
+/obj/structure/closet/wardrobe/black/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/black(src)
 	new /obj/item/clothing/under/color/black(src)
 	new /obj/item/clothing/under/color/black(src)
@@ -66,8 +66,8 @@
 	desc = "It's a storage unit for approved religious attire."
 	closet_appearance = /decl/closet_appearance/wardrobe/black
 
-/obj/structure/closet/wardrobe/chaplain_black/New()
-	..()
+/obj/structure/closet/wardrobe/chaplain_black/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/chaplain(src)
 	new /obj/item/clothing/shoes/black(src)
 	new /obj/item/clothing/suit/nun(src)
@@ -85,8 +85,8 @@
 	name = "green wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/green
 
-/obj/structure/closet/wardrobe/green/New()
-	..()
+/obj/structure/closet/wardrobe/green/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/green(src)
 	new /obj/item/clothing/under/color/green(src)
 	new /obj/item/clothing/under/color/green(src)
@@ -98,8 +98,8 @@
 	name = "xenos wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/green
 
-/obj/structure/closet/wardrobe/xenos/New()
-	..()
+/obj/structure/closet/wardrobe/xenos/Initialize()
+	. = ..()
 	new /obj/item/clothing/suit/unathi/mantle(src)
 	new /obj/item/clothing/suit/unathi/robe(src)
 	new /obj/item/clothing/shoes/sandal(src)
@@ -111,8 +111,8 @@
 	desc = "It's a storage unit for regulation prisoner attire."
 	closet_appearance = /decl/closet_appearance/wardrobe/orange
 
-/obj/structure/closet/wardrobe/orange/New()
-	..()
+/obj/structure/closet/wardrobe/orange/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/orange(src)
 	new /obj/item/clothing/under/color/orange(src)
 	new /obj/item/clothing/under/color/orange(src)
@@ -127,8 +127,8 @@
 	name = "yellow wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/yellow
 
-/obj/structure/closet/wardrobe/yellow/New()
-	..()
+/obj/structure/closet/wardrobe/yellow/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/yellow(src)
 	new /obj/item/clothing/under/color/yellow(src)
 	new /obj/item/clothing/under/color/yellow(src)
@@ -140,8 +140,8 @@
 	name = "atmospherics wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/yellow
 
-/obj/structure/closet/wardrobe/atmospherics_yellow/New()
-	..()
+/obj/structure/closet/wardrobe/atmospherics_yellow/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/atmospheric_technician(src)
 	new /obj/item/clothing/under/rank/atmospheric_technician(src)
 	new /obj/item/clothing/under/rank/atmospheric_technician(src)
@@ -159,8 +159,8 @@
 	name = "engineering wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/yellow
 
-/obj/structure/closet/wardrobe/engineering_yellow/New()
-	..()
+/obj/structure/closet/wardrobe/engineering_yellow/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/engineer(src)
 	new /obj/item/clothing/under/rank/engineer(src)
 	new /obj/item/clothing/under/rank/engineer(src)
@@ -178,8 +178,8 @@
 	name = "white wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white
 
-/obj/structure/closet/wardrobe/white/New()
-	..()
+/obj/structure/closet/wardrobe/white/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/white(src)
 	new /obj/item/clothing/under/color/white(src)
 	new /obj/item/clothing/under/color/white(src)
@@ -191,8 +191,8 @@
 	name = "pajama wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white
 
-/obj/structure/closet/wardrobe/pjs/New()
-	..()
+/obj/structure/closet/wardrobe/pjs/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/pj/red(src)
 	new /obj/item/clothing/under/pj/red(src)
 	new /obj/item/clothing/under/pj/blue(src)
@@ -206,8 +206,8 @@
 	name = "science wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white
 
-/obj/structure/closet/wardrobe/science_white/New()
-	..()
+/obj/structure/closet/wardrobe/science_white/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)
 	new /obj/item/clothing/under/rank/scientist(src)
@@ -222,8 +222,8 @@
 	name = "robotics wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/black
 
-/obj/structure/closet/wardrobe/robotics_black/New()
-	..()
+/obj/structure/closet/wardrobe/robotics_black/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/roboticist(src)
 	new /obj/item/clothing/under/rank/roboticist(src)
 	new /obj/item/clothing/suit/storage/toggle/labcoat(src)
@@ -237,8 +237,8 @@
 	name = "chemistry wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white
 
-/obj/structure/closet/wardrobe/chemistry_white/New()
-	..()
+/obj/structure/closet/wardrobe/chemistry_white/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/chemist(src)
 	new /obj/item/clothing/under/rank/chemist(src)
 	new /obj/item/clothing/shoes/white(src)
@@ -250,8 +250,8 @@
 	name = "genetics wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white
 
-/obj/structure/closet/wardrobe/genetics_white/New()
-	..()
+/obj/structure/closet/wardrobe/genetics_white/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/geneticist(src)
 	new /obj/item/clothing/under/rank/geneticist(src)
 	new /obj/item/clothing/shoes/white(src)
@@ -263,8 +263,8 @@
 	name = "virology wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white
 
-/obj/structure/closet/wardrobe/virology_white/New()
-	..()
+/obj/structure/closet/wardrobe/virology_white/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/virologist(src)
 	new /obj/item/clothing/under/rank/virologist(src)
 	new /obj/item/clothing/shoes/white(src)
@@ -278,8 +278,8 @@
 	name = "medical wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/white
 
-/obj/structure/closet/wardrobe/medic_white/New()
-	..()
+/obj/structure/closet/wardrobe/medic_white/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/medical(src)
 	new /obj/item/clothing/under/rank/medical(src)
 	new /obj/item/clothing/under/rank/medical/scrubs/blue(src)
@@ -303,8 +303,8 @@
 	name = "grey wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/grey
 
-/obj/structure/closet/wardrobe/grey/New()
-	..()
+/obj/structure/closet/wardrobe/grey/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/grey(src)
 	new /obj/item/clothing/under/color/grey(src)
 	new /obj/item/clothing/under/color/grey(src)
@@ -319,8 +319,8 @@
 	name = "mixed wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/mixed
 
-/obj/structure/closet/wardrobe/mixed/New()
-	..()
+/obj/structure/closet/wardrobe/mixed/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/color/blue(src)
 	new /obj/item/clothing/under/color/yellow(src)
 	new /obj/item/clothing/under/color/green(src)
@@ -342,8 +342,8 @@
 	name = "tactical equipment"
 	closet_appearance = /decl/closet_appearance/tactical
 
-/obj/structure/closet/wardrobe/tactical/New()
-	..()
+/obj/structure/closet/wardrobe/tactical/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/tactical(src)
 	new /obj/item/clothing/suit/storage/vest/tactical(src)
 	new /obj/item/clothing/head/helmet/tactical(src)
@@ -357,8 +357,8 @@
 	name = "formal clothing locker"
 	closet_appearance = /decl/closet_appearance/wardrobe/mixed
 
-/obj/structure/closet/wardrobe/suit/New()
-	..()
+/obj/structure/closet/wardrobe/suit/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/suit_jacket/charcoal(src)
 	new /obj/item/clothing/under/suit_jacket/navy(src)
 	new /obj/item/clothing/under/suit_jacket/burgundy(src)
@@ -387,8 +387,8 @@
 	name = "internal affairs wardrobe"
 	closet_appearance = /decl/closet_appearance/wardrobe/black
 
-/obj/structure/closet/wardrobe/lawyer_black/New()
-	..()
+/obj/structure/closet/wardrobe/lawyer_black/Initialize()
+	. = ..()
 	new /obj/item/clothing/under/rank/internalaffairs(src)
 	new /obj/item/clothing/under/rank/internalaffairs(src)
 	new /obj/item/clothing/suit/storage/toggle/suit/black(src)

@@ -130,8 +130,8 @@
 		)
 
 
-/obj/item/weapon/storage/belt/utility/full/New()
-	..()
+/obj/item/weapon/storage/belt/utility/full/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
@@ -141,8 +141,8 @@
 	update_icon()
 
 
-/obj/item/weapon/storage/belt/utility/atmostech/New()
-	..()
+/obj/item/weapon/storage/belt/utility/atmostech/Initialize()
+	. = ..()
 	new /obj/item/weapon/screwdriver(src)
 	new /obj/item/weapon/wrench(src)
 	new /obj/item/weapon/weldingtool(src)
@@ -415,8 +415,8 @@
 		/obj/item/device/soulstone
 		)
 
-/obj/item/weapon/storage/belt/soulstone/full/New()
-	..()
+/obj/item/weapon/storage/belt/soulstone/full/Initialize()
+	. = ..()
 	new /obj/item/device/soulstone(src)
 	new /obj/item/device/soulstone(src)
 	new /obj/item/device/soulstone(src)

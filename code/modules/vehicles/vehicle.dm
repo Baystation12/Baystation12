@@ -41,9 +41,6 @@
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
-/obj/vehicle/New()
-	..()
-	//spawn the cell you want in each vehicle
 
 /obj/vehicle/Move()
 	if(world.time > l_move_time + move_delay)

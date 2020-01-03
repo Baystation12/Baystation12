@@ -70,8 +70,8 @@ By design, d1 is the smallest direction and d2 is the highest
 /obj/structure/cable/white
 	color = COLOR_SILVER
 
-/obj/structure/cable/New()
-	..()
+/obj/structure/cable/Initialize()
+	. = ..()
 
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 

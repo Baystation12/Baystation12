@@ -23,8 +23,8 @@
 	var/skill_to_check = SKILL_CHEMISTRY
 	var/grind_sound = 'sound/machines/grinder.ogg'
 
-/obj/machinery/reagentgrinder/New()
-	..()
+/obj/machinery/reagentgrinder/Initialize()
+	. = ..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
 	update_icon()
 

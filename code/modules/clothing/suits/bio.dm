@@ -38,8 +38,8 @@
 	item_flags = ITEM_FLAG_THICKMATERIAL
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/suit/bio_suit/New()
-	..()
+/obj/item/clothing/suit/bio_suit/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1.0
 
 //Standard biosuit, orange stripe

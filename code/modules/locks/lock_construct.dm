@@ -6,8 +6,8 @@
 	w_class = ITEM_SIZE_TINY
 	var/lock_data
 
-/obj/item/weapon/material/lock_construct/New()
-	..()
+/obj/item/weapon/material/lock_construct/Initialize()
+	. = ..()
 	force = 0
 	throwforce = 0
 	lock_data = generateRandomString(round(material.integrity/50))

@@ -9,8 +9,8 @@
 
 	material = DEFAULT_FURNITURE_MATERIAL
 
-/obj/structure/table/rack/New()
-	..()
+/obj/structure/table/rack/Initialize()
+	. = ..()
 	verbs -= /obj/structure/table/verb/do_flip
 	verbs -= /obj/structure/table/proc/do_put
 

@@ -401,9 +401,6 @@
 	flashlight_inner_range = 0.1
 	flashlight_outer_range = 5
 
-/obj/item/device/flashlight/slime/New()
-	..()
-
 //hand portable floodlights for emergencies. Less bulky than the large ones. But also less light. Unused green variant in the sheet.
 
 /obj/item/device/flashlight/lamp/floodlamp

@@ -16,8 +16,8 @@
 	var/list/seen_turfs
 	var/datum/proximity_trigger/line/proximity_trigger
 
-/obj/item/device/assembly/infra/New()
-	..()
+/obj/item/device/assembly/infra/Initialize()
+	. = ..()
 	beams = list()
 	seen_turfs = list()
 	proximity_trigger = new(src, /obj/item/device/assembly/infra/proc/on_beam_entered, /obj/item/device/assembly/infra/proc/on_visibility_change, world.view, PROXIMITY_EXCLUDE_HOLDER_TURF)

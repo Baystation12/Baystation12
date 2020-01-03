@@ -9,8 +9,8 @@
 	var/last_temperature = 0 //People with heat protection above this temp will be immune.
 	var/pressure = 0 //Larger the number, worse burns.
 
-/obj/effect/fake_fire/New()
-	..()
+/obj/effect/fake_fire/Initialize()
+	. = ..()
 	set_light(0.5, 1, 3, l_color = color)
 	START_PROCESSING(SSobj,src)
 	if(lifetime)

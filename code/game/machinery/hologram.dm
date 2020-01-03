@@ -56,8 +56,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 
 	var/allow_ai = TRUE
 
-/obj/machinery/hologram/holopad/New()
-	..()
+/obj/machinery/hologram/holopad/Initialize()
+	. = ..()
 	desc = "It's a floor-mounted device for projecting holographic images. Its ID is '[loc.loc]'"
 
 /obj/machinery/hologram/holopad/interface_interact(var/mob/living/carbon/human/user) //Carn: Hologram requests.

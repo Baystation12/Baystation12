@@ -41,8 +41,8 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/toolbox,/obj/item/weapon/storage/briefcase/inflatable,/obj/item/device/t_scanner,/obj/item/weapon/rcd)
 
-/obj/item/clothing/suit/space/void/engineering/New()
-	..()
+/obj/item/clothing/suit/space/void/engineering/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/space/void/engineering/prepared
@@ -252,8 +252,8 @@
 		rad = ARMOR_RAD_SHIELDED
 		)
 
-/obj/item/clothing/suit/space/void/engineering/alt/New()
-	..()
+/obj/item/clothing/suit/space/void/engineering/alt/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 2
 
 /obj/item/clothing/suit/space/void/engineering/alt/prepared
@@ -303,8 +303,8 @@
 		rad = ARMOR_RAD_RESISTANT
 		)
 
-/obj/item/clothing/suit/space/void/medical/alt/New()
-	..()
+/obj/item/clothing/suit/space/void/medical/alt/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
 /obj/item/clothing/suit/space/void/medical/alt/prepared

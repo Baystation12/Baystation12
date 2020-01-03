@@ -103,6 +103,6 @@
 /obj/effect/flood/ex_act()
 	return
 
-/obj/effect/flood/New()
-	..()
+/obj/effect/flood/Initialize()
+	. = ..()
 	verbs.Cut()

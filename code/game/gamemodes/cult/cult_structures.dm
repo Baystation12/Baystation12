@@ -113,8 +113,8 @@
 		/mob/living/simple_animal/hostile/faithless/cult
 	)
 
-/obj/effect/gateway/active/New()
-	..()
+/obj/effect/gateway/active/Initialize()
+	. = ..()
 	addtimer(CALLBACK(src, .proc/create_and_delete), rand(30,60) SECONDS)
 
 

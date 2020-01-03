@@ -1,8 +1,8 @@
 /obj/structure/bookcase/manuals/xenoarchaeology
 	name = "Xenoarchaeology Manuals bookcase"
 
-/obj/structure/bookcase/manuals/xenoarchaeology/New()
-	..()
+/obj/structure/bookcase/manuals/xenoarchaeology/Initialize()
+	. = ..()
 	new /obj/item/weapon/book/manual/excavation(src)
 	new /obj/item/weapon/book/manual/mass_spectrometry(src)
 	new /obj/item/weapon/book/manual/materials_chemistry_analysis(src)
@@ -16,8 +16,8 @@
 	req_access = list(access_xenoarch)
 	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
 
-/obj/structure/closet/secure_closet/xenoarchaeologist/New()
-	..()
+/obj/structure/closet/secure_closet/xenoarchaeologist/Initialize()
+	. = ..()
 	if(prob(50))
 		new /obj/item/weapon/storage/backpack/toxins(src)
 	else
@@ -39,8 +39,8 @@
 	name = "excavation tools"
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/excavation/New()
-	..()
+/obj/structure/closet/excavation/Initialize()
+	. = ..()
 	new /obj/item/weapon/storage/belt/archaeology(src)
 	new /obj/item/weapon/storage/excavation(src)
 	new /obj/item/device/flashlight/lantern(src)

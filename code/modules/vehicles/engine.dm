@@ -81,8 +81,8 @@
 /obj/item/weapon/engine/thermal/prefill()
 	fuel_points = 5000
 
-/obj/item/weapon/engine/thermal/New()
-	..()
+/obj/item/weapon/engine/thermal/Initialize()
+	. = ..()
 	create_reagents(500)
 	temp_reagents_holder = new()
 	temp_reagents_holder.create_reagents(15)

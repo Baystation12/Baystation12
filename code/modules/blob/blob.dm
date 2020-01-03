@@ -315,8 +315,8 @@ regen() will cover update_icon() for this proc
 	expandType = /obj/effect/blob/ravaging
 	light_color = BLOB_COLOR_SHIELD
 
-/obj/effect/blob/shield/New()
-	..()
+/obj/effect/blob/shield/Initialize()
+	. = ..()
 	update_nearby_tiles()
 
 /obj/effect/blob/shield/Destroy()

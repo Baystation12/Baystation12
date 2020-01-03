@@ -25,8 +25,8 @@
 	name = "budget insulated gloves"
 	siemens_coefficient = 1			//Set to a default of 1, gets overridden in New()
 
-/obj/item/clothing/gloves/insulated/cheap/New()
-	..()
+/obj/item/clothing/gloves/insulated/cheap/Initialize()
+	. = ..()
 	//average of 0.4, better than regular gloves' 0.75
 	siemens_coefficient = pick(0, 0.1, 0.2, 0.3, 0.4, 0.6, 1.3)
 

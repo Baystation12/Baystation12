@@ -142,6 +142,6 @@
 	throw_range = 3
 	throw_speed = 1
 
-/obj/item/weapon/shreddedp/New()
-	..()
+/obj/item/weapon/shreddedp/Initialize()
+	. = ..()
 	if(prob(65)) color = pick("#bababa","#7f7f7f")

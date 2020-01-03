@@ -101,8 +101,8 @@
 	var/multi = 1
 	var/lfwb =TRUE
 
-/obj/item/integrated_circuit/passive/power/chemical_cell/New()
-	..()
+/obj/item/integrated_circuit/passive/power/chemical_cell/Initialize()
+	. = ..()
 	create_reagents(volume)
 	extended_desc +="But no fuel can be compared with blood of living human."
 

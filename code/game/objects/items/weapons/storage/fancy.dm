@@ -118,8 +118,8 @@
 	key_type = /obj/item/clothing/mask/smokable/cigarette
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette = 6)
 
-/obj/item/weapon/storage/fancy/cigarettes/New()
-	..()
+/obj/item/weapon/storage/fancy/cigarettes/Initialize()
+	. = ..()
 	atom_flags |= ATOM_FLAG_NO_REACT|ATOM_FLAG_OPEN_CONTAINER
 	create_reagents(5 * max_storage_space)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
@@ -173,8 +173,8 @@
 	icon_state = "Bpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/killthroat = 6)
 
-/obj/item/weapon/storage/fancy/cigarettes/killthroat/New()
-	..()
+/obj/item/weapon/storage/fancy/cigarettes/killthroat/Initialize()
+	. = ..()
 	fill_cigarre_package(src,list(/datum/reagent/fuel = 4))
 
 // New exciting ways to kill your lungs! - Earthcrusher //
@@ -257,8 +257,8 @@
 	key_type = /obj/item/clothing/mask/smokable/cigarette/cigar
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/cigar = 6)
 
-/obj/item/weapon/storage/fancy/cigar/New()
-	..()
+/obj/item/weapon/storage/fancy/cigar/Initialize()
+	. = ..()
 	atom_flags |= ATOM_FLAG_NO_REACT
 	create_reagents(10 * storage_slots)
 
@@ -302,8 +302,8 @@
 	storage_slots = 12
 	req_access = list(access_virology)
 
-/obj/item/weapon/storage/lockbox/vials/New()
-	..()
+/obj/item/weapon/storage/lockbox/vials/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/item/weapon/storage/lockbox/vials/on_update_icon()

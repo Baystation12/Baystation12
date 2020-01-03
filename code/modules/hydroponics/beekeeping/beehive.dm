@@ -238,8 +238,8 @@
 	desc = "A frame for the beehive that the bees have filled with honeycombs."
 	honey = 20
 
-/obj/item/honey_frame/filled/New()
-	..()
+/obj/item/honey_frame/filled/Initialize()
+	. = ..()
 	overlays += "honeycomb"
 
 /obj/item/beehive_assembly
@@ -262,8 +262,8 @@
 	icon = 'icons/obj/beekeeping.dmi'
 	icon_state = "wax"
 
-/obj/item/stack/wax/New()
-	..()
+/obj/item/stack/wax/Initialize()
+	. = ..()
 	recipes = wax_recipes
 
 var/global/list/datum/stack_recipe/wax_recipes = list(
@@ -277,8 +277,8 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	icon_state = "beepack"
 	var/full = 1
 
-/obj/item/bee_pack/New()
-	..()
+/obj/item/bee_pack/Initialize()
+	. = ..()
 	overlays += "beepack-full"
 
 /obj/item/bee_pack/proc/empty()
@@ -299,8 +299,8 @@ var/global/list/datum/stack_recipe/wax_recipes = list(
 	name = "beekeeping crate"
 	desc = "All you need to set up your own beehive."
 
-/obj/structure/closet/crate/hydroponics/beekeeping/New()
-	..()
+/obj/structure/closet/crate/hydroponics/beekeeping/Initialize()
+	. = ..()
 	new /obj/item/beehive_assembly(src)
 	new /obj/item/bee_smoker(src)
 	new /obj/item/honey_frame(src)

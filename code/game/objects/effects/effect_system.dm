@@ -101,16 +101,13 @@ steam.start() -- spawns the effect
 	anchored = 1.0
 	mouse_opacity = 0
 
-/obj/effect/sparks/New()
-	..()
+/obj/effect/sparks/Initialize()
+	. = ..()
+	QDEL_IN(src, 5 SECONDS)
 	playsound(src.loc, "sparks", 100, 1)
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-
-/obj/effect/sparks/Initialize()
-	. = ..()
-	QDEL_IN(src, 5 SECONDS)
 
 /obj/effect/sparks/Destroy()
 	var/turf/T = src.loc
@@ -176,8 +173,8 @@ steam.start() -- spawns the effect
 	pixel_x = -32
 	pixel_y = -32
 
-/obj/effect/effect/smoke/New()
-	..()
+/obj/effect/effect/smoke/Initialize()
+	. = ..()
 	QDEL_IN(src, time_to_live)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )

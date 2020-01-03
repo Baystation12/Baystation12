@@ -15,10 +15,10 @@
 	clicksound = "switch"
 
 
-/obj/machinery/space_heater/New()
-	..()
+/obj/machinery/space_heater/Initialize()
+	. = ..()
 	cell = new/obj/item/weapon/cell/high(src)
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/space_heater/on_update_icon(var/rebuild_overlay = 0)
 	if(!on)

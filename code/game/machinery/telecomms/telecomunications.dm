@@ -457,8 +457,8 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	var/language = "human"
 	var/obj/item/device/radio/headset/server_radio = null
 
-/obj/machinery/telecomms/server/New()
-	..()
+/obj/machinery/telecomms/server/Initialize()
+	. = ..()
 	server_radio = new()
 
 /obj/machinery/telecomms/server/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)

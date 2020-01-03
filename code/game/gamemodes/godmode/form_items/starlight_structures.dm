@@ -48,8 +48,8 @@
 											)
 										)
 
-/obj/structure/deity/gateway/New()
-	..()
+/obj/structure/deity/gateway/Initialize()
+	. = ..()
 	if(linked_god)
 		linked_god.power_per_regen -= power_drain
 	START_PROCESSING(SSobj, src)

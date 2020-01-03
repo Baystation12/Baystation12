@@ -15,22 +15,16 @@
 	var/maximum_pressure = 90 * ONE_ATMOSPHERE
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 
-/obj/machinery/portable_atmospherics/New()
+/obj/machinery/portable_atmospherics/Initialize()
 	..()
-
 	air_contents.volume = volume
 	air_contents.temperature = T20C
-
-	return 1
+	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/portable_atmospherics/Destroy()
 	QDEL_NULL(air_contents)
 	QDEL_NULL(holding)
 	. = ..()
-
-/obj/machinery/portable_atmospherics/Initialize()
-	..()
-	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/portable_atmospherics/LateInitialize()
 	var/obj/machinery/atmospherics/portables_connector/port = locate() in loc

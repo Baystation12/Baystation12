@@ -131,8 +131,8 @@
 	service_label = "Suit Sensor Shutdown"
 	var/suit_sensor_jammer_method/ssjm = /suit_sensor_jammer_method/cap_off
 
-/obj/item/device/uplink_service/jamming/New()
-	..()
+/obj/item/device/uplink_service/jamming/Initialize()
+	. = ..()
 	ssjm = new ssjm()
 
 /obj/item/device/uplink_service/jamming/Destroy()

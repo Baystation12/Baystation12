@@ -18,8 +18,8 @@
 	var/max_pilot_size = MOB_LARGE
 	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 
-/obj/item/mech_component/chassis/New()
-	..()
+/obj/item/mech_component/chassis/Initialize()
+	. = ..()
 	if(isnull(pilot_positions))
 		pilot_positions = list(
 			list(

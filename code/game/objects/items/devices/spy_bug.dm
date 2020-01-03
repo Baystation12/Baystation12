@@ -19,8 +19,8 @@
 	var/obj/item/device/radio/spy/radio
 	var/obj/machinery/camera/spy/camera
 
-/obj/item/device/spy_bug/New()
-	..()
+/obj/item/device/spy_bug/Initialize()
+	. = ..()
 	radio = new(src)
 	camera = new(src)
 	GLOB.listening_objects += src
@@ -66,8 +66,8 @@
 	var/obj/machinery/camera/spy/selected_camera
 	var/list/obj/machinery/camera/spy/cameras = new()
 
-/obj/item/device/spy_monitor/New()
-	..()
+/obj/item/device/spy_monitor/Initialize()
+	. = ..()
 	radio = new(src)
 	GLOB.listening_objects += src
 
@@ -149,8 +149,8 @@
 	// These cheap toys are accessible from the mercenary camera console as well
 	network = list(NETWORK_MERCENARY)
 
-/obj/machinery/camera/spy/New()
-	..()
+/obj/machinery/camera/spy/Initialize()
+	. = ..()
 	name = "DV-136ZB #[random_id(/obj/machinery/camera/spy, 1000,9999)]"
 	c_tag = name
 

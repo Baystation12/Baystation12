@@ -26,6 +26,6 @@
 	changer.voice = voice
 	to_chat(usr, "<span class='notice'>You are now mimicking <B>[changer.voice]</B>.</span>")
 
-/obj/item/clothing/mask/chameleon/voice/New()
-	..()
+/obj/item/clothing/mask/chameleon/voice/Initialize()
+	. = ..()
 	changer = new(src)

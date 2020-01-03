@@ -49,6 +49,6 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 
-/obj/item/clothing/suit/armor/captain/New()
-	..()
+/obj/item/clothing/suit/armor/captain/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1.5

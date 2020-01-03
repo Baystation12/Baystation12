@@ -24,8 +24,8 @@
 	var/list/supported_programs = list()
 	var/list/restricted_programs = list()
 
-/obj/machinery/computer/HolodeckControl/New()
-	..()
+/obj/machinery/computer/HolodeckControl/Initialize()
+	. = ..()
 	linkedholodeck = locate(linkedholodeck_area)
 	if (programs_list_id in GLOB.using_map.holodeck_supported_programs)
 		supported_programs |= GLOB.using_map.holodeck_supported_programs[programs_list_id]

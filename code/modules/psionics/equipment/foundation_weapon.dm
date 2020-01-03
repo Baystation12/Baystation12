@@ -17,8 +17,8 @@
 /obj/item/weapon/storage/briefcase/foundation/disrupts_psionics()
 	return FALSE
 
-/obj/item/weapon/storage/briefcase/foundation/New()
-	..()
+/obj/item/weapon/storage/briefcase/foundation/Initialize()
+	. = ..()
 	new /obj/item/ammo_magazine/speedloader/magnum/nullglass(src)
 	new /obj/item/weapon/gun/projectile/revolver/foundation(src)
 	make_exact_fit()

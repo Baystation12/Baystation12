@@ -164,8 +164,8 @@
 	desc = "Cozy suit jacket."
 	icon_state = "tan_jacket"
 
-/obj/item/clothing/accessory/toggleable/tan_jacket/New()
-	..()
+/obj/item/clothing/accessory/toggleable/tan_jacket/Initialize()
+	. = ..()
 	do_toggle()
 
 /obj/item/clothing/accessory/toggleable/charcoal_jacket
@@ -225,8 +225,8 @@
 	desc = "A stylish Chinese tunic suit jacket."
 	icon_state = "zhongshan"
 
-/obj/item/clothing/accessory/toggleable/hawaii/random/New()
-	..()
+/obj/item/clothing/accessory/toggleable/hawaii/random/Initialize()
+	. = ..()
 	if(prob(50))
 		icon_state = "hawaii2"
 		icon_closed = "hawaii2"

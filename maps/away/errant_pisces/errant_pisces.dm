@@ -74,8 +74,8 @@
 	filling_color = "#cecece"
 	center_of_mass = "x=17;y=13"
 
-/obj/item/weapon/reagent_containers/food/snacks/sharkmeat/New()
-	..()
+/obj/item/weapon/reagent_containers/food/snacks/sharkmeat/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 5)
 	reagents.add_reagent(/datum/reagent/space_drugs, 1)
 	reagents.add_reagent(/datum/reagent/toxin/phoron, 1)

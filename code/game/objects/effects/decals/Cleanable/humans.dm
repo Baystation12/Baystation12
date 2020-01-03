@@ -197,8 +197,8 @@ var/global/list/image/splatter_cache=list()
 	scent_intensity = /decl/scent_intensity
 	scent_range = 1
 
-/obj/effect/decal/cleanable/blood/writing/New()
-	..()
+/obj/effect/decal/cleanable/blood/writing/Initialize()
+	. = ..()
 	if(LAZYLEN(random_icon_states))
 		for(var/obj/effect/decal/cleanable/blood/writing/W in loc)
 			random_icon_states.Remove(W.icon_state)
@@ -282,8 +282,8 @@ var/global/list/image/splatter_cache=list()
 	persistent = TRUE
 	var/dry=0 // Keeps the lag down
 
-/obj/effect/decal/cleanable/mucus/New()
-	..()
+/obj/effect/decal/cleanable/mucus/Initialize()
+	. = ..()
 	spawn(DRYING_TIME * 2)
 		dry=1
 

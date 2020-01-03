@@ -21,8 +21,8 @@
 /obj/machinery/portable_atmospherics/powered/pump/filled
 	start_pressure = 90 * ONE_ATMOSPHERE
 
-/obj/machinery/portable_atmospherics/powered/pump/New()
-	..()
+/obj/machinery/portable_atmospherics/powered/pump/Initialize()
+	. = ..()
 
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN], GAS_NITROGEN, air_mix[GAS_NITROGEN])

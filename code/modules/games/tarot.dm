@@ -6,8 +6,8 @@
 	desc = "For all your occult needs!"
 	icon_state = "deck_tarot"
 
-/obj/item/weapon/deck/tarot/New()
-	..()
+/obj/item/weapon/deck/tarot/Initialize()
+	. = ..()
 
 	var/datum/playingcard/P
 	for(var/name in list("Fool","Magician","High Priestess","Empress","Emperor","Hierophant","Lovers","Chariot","Strength","Hermit","Wheel of Fortune","Justice","Hanged Man","Death","Temperance","Devil","Tower","Star","Moon","Sun","Judgement","World"))

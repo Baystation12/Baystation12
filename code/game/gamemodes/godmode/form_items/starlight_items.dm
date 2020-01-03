@@ -20,8 +20,8 @@
 	desc = "This ring seems to shine with more light than is put on it."
 	icon_state = "starring"
 
-/obj/item/clothing/ring/aura_ring/talisman_of_starborn/New()
-	..()
+/obj/item/clothing/ring/aura_ring/talisman_of_starborn/Initialize()
+	. = ..()
 	granted_aura = new /obj/aura/starborn()
 
 /obj/item/clothing/ring/aura_ring/talisman_of_blueforged
@@ -29,8 +29,8 @@
 	desc = "The gem on this ring is quite peculiar..."
 	icon_state = "bluering"
 
-/obj/item/clothing/ring/aura_ring/talisman_of_blueforged/New()
-	..()
+/obj/item/clothing/ring/aura_ring/talisman_of_blueforged/Initialize()
+	. = ..()
 	granted_aura = new /obj/aura/blueforge_aura()
 
 /obj/item/clothing/ring/aura_ring/talisman_of_shadowling
@@ -38,8 +38,8 @@
 	desc = "If you weren't looking at this, you probably wouldn't have noticed it."
 	icon_state = "shadowring"
 
-/obj/item/clothing/ring/aura_ring/talisman_of_shadowling/New()
-	..()
+/obj/item/clothing/ring/aura_ring/talisman_of_shadowling/Initialize()
+	. = ..()
 	granted_aura = new /obj/aura/shadowling_aura()
 
 /obj/item/clothing/suit/armor/sunsuit

@@ -6,8 +6,8 @@
 /obj/structure/closet/syndicate/personal
 	desc = "It's a storage unit for operative gear."
 
-/obj/structure/closet/syndicate/personal/New()
-	..()
+/obj/structure/closet/syndicate/personal/Initialize()
+	. = ..()
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/mask/gas/syndicate(src)
 	new /obj/item/clothing/under/syndicate(src)
@@ -24,8 +24,8 @@
 /obj/structure/closet/syndicate/suit
 	desc = "It's a storage unit for voidsuits."
 
-/obj/structure/closet/syndicate/suit/New()
-	..()
+/obj/structure/closet/syndicate/suit/Initialize()
+	. = ..()
 	new /obj/item/weapon/tank/jetpack/oxygen(src)
 	new /obj/item/clothing/shoes/magboots(src)
 	new /obj/item/clothing/suit/space/void/merc(src)
@@ -36,8 +36,8 @@
 /obj/structure/closet/syndicate/nuclear
 	desc = "It's a storage unit for nuclear-operative gear."
 
-/obj/structure/closet/syndicate/nuclear/New()
-	..()
+/obj/structure/closet/syndicate/nuclear/Initialize()
+	. = ..()
 
 	new /obj/item/ammo_magazine/smg(src)
 	new /obj/item/ammo_magazine/smg(src)

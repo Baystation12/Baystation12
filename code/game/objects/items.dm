@@ -86,12 +86,6 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
-/obj/item/New()
-	..()
-	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
-		pixel_x = rand(-randpixel, randpixel)
-		pixel_y = rand(-randpixel, randpixel)
-
 /obj/item/Initialize()
 	. = ..()
 	if(islist(armor))
@@ -99,6 +93,9 @@
 			if(armor[type]) // Don't set it if it gives no armor anyway, which is many items.
 				set_extension(src, armor_type, armor, armor_degradation_speed)
 				break
+	if(randpixel && (!pixel_x && !pixel_y) && isturf(loc)) //hopefully this will prevent us from messing with mapper-set pixel_x/y
+		pixel_x = rand(-randpixel, randpixel)
+		pixel_y = rand(-randpixel, randpixel)
 
 /obj/item/Destroy()
 	QDEL_NULL(hidden_uplink)

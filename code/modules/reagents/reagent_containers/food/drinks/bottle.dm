@@ -13,8 +13,8 @@
 	var/obj/item/weapon/reagent_containers/glass/rag/rag = null
 	var/rag_underlay = "rag"
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/New()
-	..()
+/obj/item/weapon/reagent_containers/food/drinks/bottle/Initialize()
+	. = ..()
 	if(isGlass) unacidable = 1
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/Destroy()
@@ -446,8 +446,8 @@
 	icon_state = "premiumvodka"
 	center_of_mass = "x=17;y=3"
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka/New()
-	..()
+/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/vodka/premium, 100)
 	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Indie","STS-35")
 	var/typepick = pick("Absolut","Gold","Quadruple Distilled","Platinum","Standard")
@@ -459,8 +459,8 @@
 	icon_state = "premiumwine"
 	center_of_mass = "x=16;y=4"
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine/New()
-	..()
+/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/wine/premium, 100)
 	var/namepick = pick("Calumont","Sciacchemont","Recioto","Torcalota")
 	var/agedyear = rand(game_year-150,game_year)

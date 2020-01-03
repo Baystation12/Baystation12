@@ -64,8 +64,8 @@
 	name = "map"
 	desc = "A framed map."
 
-/obj/structure/sign/double/map/New()
-	..()
+/obj/structure/sign/double/map/Initialize()
+	. = ..()
 	desc = "A framed map of the [station_name()]."
 
 /obj/structure/sign/double/map/left
@@ -86,8 +86,8 @@
 /obj/structure/sign/warning/detailed
 	icon_state = "securearea2"
 
-/obj/structure/sign/warning/New()
-	..()
+/obj/structure/sign/warning/Initialize()
+	. = ..()
 	desc = "A warning sign which reads '[sanitize(name)]'."
 
 /obj/structure/sign/warning/airlock
@@ -142,8 +142,8 @@
 	name = "\improper LETHAL TURRETS"
 	icon_state = "turrets"
 
-/obj/structure/sign/warning/lethal_turrets/New()
-	..()
+/obj/structure/sign/warning/lethal_turrets/Initialize()
+	. = ..()
 	desc += " Enter at own risk!"
 
 /obj/structure/sign/warning/mail_delivery
@@ -347,8 +347,8 @@
 	desc = "A direction sign, claiming to know the way."
 	icon_state = "direction"
 
-/obj/structure/sign/directions/New()
-	..()
+/obj/structure/sign/directions/Initialize()
+	. = ..()
 	desc = "A direction sign, pointing out which way \the [src] is."
 
 /obj/structure/sign/directions/science

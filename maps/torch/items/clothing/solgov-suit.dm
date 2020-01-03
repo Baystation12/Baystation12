@@ -373,8 +373,8 @@
 	desc = "A light, radiation resistant voidsuit commonly used among SCG uniformed services. This one has an EC seal on its chest plate and command department markings."
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/storage/briefcase/inflatable)
 
-/obj/item/clothing/suit/space/void/command/New()
-	..()
+/obj/item/clothing/suit/space/void/command/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 0
 
 /obj/item/clothing/suit/space/void/command/prepared

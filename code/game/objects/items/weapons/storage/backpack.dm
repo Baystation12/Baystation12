@@ -50,10 +50,6 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 56
 
-/obj/item/weapon/storage/backpack/holding/New()
-	..()
-	return
-
 /obj/item/weapon/storage/backpack/holding/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/storage/backpack/holding) || istype(W, /obj/item/weapon/storage/bag/trash/bluespace))
 		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
@@ -184,8 +180,8 @@
 	w_class = ITEM_SIZE_HUGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE + 10
 
-/obj/item/weapon/storage/backpack/dufflebag/New()
-	..()
+/obj/item/weapon/storage/backpack/dufflebag/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_back] = 3
 	slowdown_per_slot[slot_r_hand] = 1
 	slowdown_per_slot[slot_l_hand] = 1
@@ -196,8 +192,8 @@
 	icon_state = "duffle_syndie"
 	item_state_slots = list(slot_l_hand_str = "duffle_syndie", slot_r_hand_str = "duffle_syndie")
 
-/obj/item/weapon/storage/backpack/dufflebag/syndie/New()
-	..()
+/obj/item/weapon/storage/backpack/dufflebag/syndie/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_back] = 1
 
 /obj/item/weapon/storage/backpack/dufflebag/syndie/med

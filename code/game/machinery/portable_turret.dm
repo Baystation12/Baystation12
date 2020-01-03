@@ -88,8 +88,8 @@
 	change_power_consumption(round(initial(active_power_usage) * 5), POWER_USE_ACTIVE)
 	return 1
 
-/obj/machinery/porta_turret/New()
-	..()
+/obj/machinery/porta_turret/Initialize()
+	. = ..()
 
 	//Sets up a spark system
 	spark_system = new /datum/effect/effect/system/spark_spread

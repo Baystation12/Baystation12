@@ -236,8 +236,8 @@
 	unique = 1   // 0 - Normal book, 1 - Should not be treated as normal book, unable to be copied, unable to be modified
 	var/url // Using full url or just tittle, example - Standard_Operating_Procedure (https://wiki.baystation12.net/index.php?title=Standard_Operating_Procedure)
 
-/obj/item/weapon/book/manual/New()
-	..()
+/obj/item/weapon/book/manual/Initialize()
+	. = ..()
 	if(url)		// URL provided for this manual
 		// If we haven't wikiurl or it included in url - just use url
 		if(config.wikiurl && !findtextEx(url, config.wikiurl, 1, length(config.wikiurl)+1))

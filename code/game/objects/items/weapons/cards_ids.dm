@@ -393,16 +393,16 @@ var/const/NO_EMAG_ACT = -50
 	access = get_all_centcom_access()
 	..()
 
-/obj/item/weapon/card/id/centcom/station/New()
-	..()
+/obj/item/weapon/card/id/centcom/station/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/centcom/ERT
 	name = "\improper Emergency Response Team ID"
 	assignment = "Emergency Response Team"
 
-/obj/item/weapon/card/id/centcom/ERT/New()
-	..()
+/obj/item/weapon/card/id/centcom/ERT/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/foundation_civilian
@@ -442,8 +442,8 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/foundation/on_update_icon()
 	return
 
-/obj/item/weapon/card/id/foundation/New()
-	..()
+/obj/item/weapon/card/id/foundation/Initialize()
+	. = ..()
 	access |= get_all_station_access()
 
 /obj/item/weapon/card/id/all_access

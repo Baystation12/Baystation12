@@ -23,11 +23,10 @@
 	var/effective_gen = 0
 	var/lastgenlev = 0
 
-/obj/machinery/power/generator/New()
-	..()
+/obj/machinery/power/generator/Initialize()
+	. = ..()
 	desc = initial(desc) + " Rated for [round(max_power/1000)] kW."
-	spawn(1)
-		reconnect()
+	reconnect()
 
 //generators connect in dir and reverse_dir(dir) directions
 //mnemonic to determine circulator/generator directions: the cirulators orbit clockwise around the generator

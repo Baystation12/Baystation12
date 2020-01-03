@@ -205,14 +205,11 @@
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
 
-/obj/item/weapon/melee/energy/blade/New()
-	..()
+/obj/item/weapon/melee/energy/blade/Initialize()
+	. = ..()
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
-
-/obj/item/weapon/melee/energy/blade/Initialize()
-	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/melee/energy/blade/Destroy()

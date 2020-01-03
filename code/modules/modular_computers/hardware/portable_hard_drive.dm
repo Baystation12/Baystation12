@@ -26,8 +26,8 @@
 	max_capacity = 256
 	origin_tech = list(TECH_DATA = 4)
 
-/obj/item/weapon/stock_parts/computer/hard_drive/portable/New()
-	..()
+/obj/item/weapon/stock_parts/computer/hard_drive/portable/Initialize()
+	. = ..()
 	stored_files = list()
 	recalculate_size()
 

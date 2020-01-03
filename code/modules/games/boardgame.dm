@@ -174,8 +174,8 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 	nutriment_amt = 1
 	var/piece_color ="black"
 
-/obj/item/weapon/reagent_containers/food/snacks/checker/New()
-	..()
+/obj/item/weapon/reagent_containers/food/snacks/checker/Initialize()
+	. = ..()
 	icon_state = "[name]_[piece_color]"
 	name = "[piece_color] [name]"
 

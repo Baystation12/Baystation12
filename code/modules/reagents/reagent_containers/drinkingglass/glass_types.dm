@@ -167,8 +167,8 @@
 	icon_state = "coffeecup_punitelli"
 	base_name = "#1 monkey cup"
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/punitelli/New()
-	..()
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/punitelli/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/juice/banana, 30)
 	update_icon()
 

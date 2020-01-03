@@ -162,8 +162,8 @@
 	var/global/gid = 1
 	var/id = 0
 
-/obj/machinery/portable_atmospherics/powered/scrubber/huge/New()
-	..()
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/Initialize()
+	. = ..()
 
 	id = gid
 	gid++

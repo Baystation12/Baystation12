@@ -95,8 +95,9 @@ obj/item/clothing/mask/chewable/Destroy()
 	desc = "A chewy wad of synthetic rubber, laced with nicotine. Possibly the least disgusting method of nicotine delivery."
 	icon_state = "nic_gum"
 	type_butt = /obj/item/trash/cigbutt/spitgum
-/obj/item/clothing/mask/chewable/tobacco/nico/New()
-	..()
+
+/obj/item/clothing/mask/chewable/tobacco/nico/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/nicotine, 2)
 	color = reagents.get_color()
 
@@ -128,8 +129,8 @@ obj/item/clothing/mask/chewable/Destroy()
 	icon_state = "gum"
 	item_state = "gum"
 
-/obj/item/clothing/mask/chewable/candy/gum/New()
-	..()
+/obj/item/clothing/mask/chewable/candy/gum/Initialize()
+	. = ..()
 	reagents.add_reagent(pick(list(
 				/datum/reagent/drink/juice/grape,
 				/datum/reagent/drink/juice/orange,
@@ -149,8 +150,8 @@ obj/item/clothing/mask/chewable/Destroy()
 	icon_state = "lollipop"
 	item_state = "lollipop"
 
-/obj/item/clothing/mask/chewable/candy/lolli/New()
-	..()
+/obj/item/clothing/mask/chewable/candy/lolli/Initialize()
+	. = ..()
 	reagents.add_reagent(pick(list(
 				/datum/reagent/fuel,
 				/datum/reagent/drink/juice/grape,
@@ -170,8 +171,8 @@ obj/item/clothing/mask/chewable/Destroy()
 	type_butt = /obj/item/trash/cigbutt/lollibutt
 	icon_state = "lollipop"
 
-/obj/item/clothing/mask/chewable/candy/lolli/meds/New()
-	..()
+/obj/item/clothing/mask/chewable/candy/lolli/meds/Initialize()
+	. = ..()
 	reagents.add_reagent(pick(list(
 				/datum/reagent/dexalinp,
 				/datum/reagent/tricordrazine,
@@ -190,8 +191,8 @@ obj/item/clothing/mask/chewable/Destroy()
 	desc = "A sucrose sphere on a small handle, it has been infused with medication."
 	filling = list(/datum/reagent/sugar = 6)
 
-/obj/item/clothing/mask/chewable/candy/lolli/weak_meds/New()
-	..()
+/obj/item/clothing/mask/chewable/candy/lolli/weak_meds/Initialize()
+	. = ..()
 	var/datum/reagent/payload = pick(list(
 				/datum/reagent/antidexafen,
 				/datum/reagent/paracetamol,

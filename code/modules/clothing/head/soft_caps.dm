@@ -10,8 +10,8 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
-/obj/item/clothing/head/soft/New()
-	..()
+/obj/item/clothing/head/soft/Initialize()
+	. = ..()
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	update_icon()
 

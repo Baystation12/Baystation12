@@ -42,8 +42,8 @@
 		/obj/item/weapon/storage/med_pouch/trauma = 4
 		)
 
-/obj/item/weapon/storage/firstaid/trauma/New()
-	..()
+/obj/item/weapon/storage/firstaid/trauma/Initialize()
+	. = ..()
 	icon_state = pick("radfirstaid", "radfirstaid2", "radfirstaid3")
 
 /obj/item/weapon/storage/firstaid/fire
@@ -56,8 +56,8 @@
 		/obj/item/weapon/storage/med_pouch/burn = 4
 		)
 
-/obj/item/weapon/storage/firstaid/fire/New()
-	..()
+/obj/item/weapon/storage/firstaid/fire/Initialize()
+	. = ..()
 	icon_state = pick("ointment","firefirstaid")
 
 /obj/item/weapon/storage/firstaid/toxin
@@ -70,8 +70,8 @@
 		/obj/item/weapon/storage/med_pouch/toxin = 4
 		)
 
-/obj/item/weapon/storage/firstaid/toxin/New()
-	..()
+/obj/item/weapon/storage/firstaid/toxin/Initialize()
+	. = ..()
 	icon_state = pick("antitoxin","antitoxfirstaid","antitoxfirstaid2","antitoxfirstaid3")
 
 /obj/item/weapon/storage/firstaid/o2

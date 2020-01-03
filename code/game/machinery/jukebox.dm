@@ -46,14 +46,11 @@ datum/track/proc/GetTrack()
 	state_base = "jukebox2"
 	pixel_x = 0
 
-/obj/machinery/media/jukebox/New()
-	..()
-	update_icon()
-	sound_id = "[/obj/machinery/media/jukebox]_[sequential_id(/obj/machinery/media/jukebox)]"
-
 /obj/machinery/media/jukebox/Initialize()
 	. = ..()
 	tracks = setup_music_tracks(tracks)
+	queue_icon_update()
+	sound_id = "[/obj/machinery/media/jukebox]_[sequential_id(/obj/machinery/media/jukebox)]"
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()

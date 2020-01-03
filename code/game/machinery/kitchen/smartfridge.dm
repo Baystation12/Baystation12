@@ -25,13 +25,13 @@
 /obj/machinery/smartfridge/secure
 	is_secure = 1
 
-/obj/machinery/smartfridge/New()
-	..()
+/obj/machinery/smartfridge/Initialize()
 	if(is_secure)
 		wires = new/datum/wires/smartfridge/secure(src)
 	else
 		wires = new/datum/wires/smartfridge(src)
-	update_icon()
+	. = ..()
+	queue_icon_update()
 
 /obj/machinery/smartfridge/Destroy()
 	for(var/datum/stored_items/S in item_records)

@@ -7,8 +7,8 @@
 	var/list/swag = list()
 	var/cooldown
 
-/obj/structure/skele_stand/New()
-	..()
+/obj/structure/skele_stand/Initialize()
+	. = ..()
 	gender = pick(MALE, FEMALE)
 
 /obj/structure/skele_stand/proc/rattle_bones(mob/user, atom/thingy)

@@ -139,8 +139,8 @@ obj/item/weapon/paper/prof2
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle-3"
 
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone/New()
-	..()
+/obj/item/weapon/reagent_containers/glass/bottle/tericadone/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/phoron/safe , 60)
 	update_icon()
 

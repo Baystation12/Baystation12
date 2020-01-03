@@ -48,8 +48,8 @@
 	force = force_unwielded
 
 
-/obj/item/weapon/material/twohanded/New()
-	..()
+/obj/item/weapon/material/twohanded/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/item/weapon/material/twohanded/get_parry_chance(mob/user)

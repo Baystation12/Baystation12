@@ -26,8 +26,8 @@
 		else
 			to_chat(user, "It says '[icon_state]'")
 
-/obj/structure/sign/double/barsign/New()
-	..()
+/obj/structure/sign/double/barsign/Initialize()
+	. = ..()
 	icon_state = pick(get_valid_states())
 
 /obj/structure/sign/double/barsign/attackby(obj/item/I, mob/user)

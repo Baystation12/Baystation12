@@ -57,8 +57,8 @@
 	amount_per_transfer_from_this = 5
 	volume = 0
 
-/obj/item/weapon/reagent_containers/hypospray/vial/New()
-	..()
+/obj/item/weapon/reagent_containers/hypospray/vial/Initialize()
+	. = ..()
 	loaded_vial = new /obj/item/weapon/reagent_containers/glass/beaker/vial(src)
 	volume = loaded_vial.volume
 	reagents.maximum_volume = loaded_vial.reagents.maximum_volume
@@ -128,12 +128,11 @@
 	var/band_color = COLOR_CYAN
 	var/time = 1 SECONDS // takes less time than a normal syringe
 
-/obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
-	..()
+/obj/item/weapon/reagent_containers/hypospray/autoinjector/Initialize()
+	. = ..()
 	for(var/T in starts_with)
 		reagents.add_reagent(T, starts_with[T])
 	update_icon()
-	return
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
 	if(user != M && !M.incapacitated())

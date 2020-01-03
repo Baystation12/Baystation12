@@ -212,8 +212,8 @@
 	item_flags = ITEM_FLAG_INVALID_FOR_CHAMELEON
 	var/global/list/clothing_choices
 
-/obj/item/clothing/gloves/chameleon/New()
-	..()
+/obj/item/clothing/gloves/chameleon/Initialize()
+	. = ..()
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/gloves)
 

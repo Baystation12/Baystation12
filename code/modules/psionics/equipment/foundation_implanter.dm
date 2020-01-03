@@ -13,6 +13,6 @@
 	implant.psi_mode = choice
 	to_chat(user, "<span class='notice'>You set \the [src] to configure implants with the '[implant.psi_mode]' setting.</span>")
 
-/obj/item/weapon/implanter/psi/New()
-	..()
+/obj/item/weapon/implanter/psi/Initialize()
+	. = ..()
 	imp = new /obj/item/weapon/implant/psi_control(src)

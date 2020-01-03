@@ -19,8 +19,8 @@
 	var/list/desc_screens = list()
 	screen_loc = "EAST-5:122,SOUTH:8"
 
-/obj/screen/intent/deity/New()
-	..()
+/obj/screen/intent/deity/Initialize()
+	. = ..()
 	overlays += image('icons/mob/screen_phenomena.dmi', icon_state = "hud", pixel_x = -138, pixel_y = -1)
 
 /obj/screen/intent/deity/proc/sync_to_mob(var/mob)

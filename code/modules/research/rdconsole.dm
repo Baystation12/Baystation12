@@ -110,8 +110,8 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 				D.linked_console = src
 	return
 
-/obj/machinery/computer/rdconsole/New()
-	..()
+/obj/machinery/computer/rdconsole/Initialize()
+	. = ..()
 	files = new /datum/research(src) //Setup the research data holder.
 	if(!id)
 		for(var/obj/machinery/r_n_d/server/centcom/S in SSmachines.machinery)

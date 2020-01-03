@@ -125,8 +125,8 @@
 	w_class = ITEM_SIZE_SMALL
 	siemens_coefficient = 0.9
 
-/obj/item/clothing/mask/horsehead/New()
-	..()
+/obj/item/clothing/mask/horsehead/Initialize()
+	. = ..()
 	// The horse mask doesn't cause voice changes by default, the wizard spell changes the flag as necessary
 	say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
 	say_verbs = list("whinnies", "neighs", "says")
@@ -228,8 +228,8 @@
 	icon_state = "manmet"
 	var/species = SPECIES_HUMAN
 
-/obj/item/clothing/mask/rubber/species/New()
-	..()
+/obj/item/clothing/mask/rubber/species/Initialize()
+	. = ..()
 	visible_name = species
 	var/datum/species/S = all_species[species]
 	if(istype(S))

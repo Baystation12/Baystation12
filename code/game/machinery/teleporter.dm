@@ -204,8 +204,8 @@
 	active_power_usage = 2000
 	var/obj/machinery/computer/teleporter/com
 
-/obj/machinery/teleport/hub/New()
-	..()
+/obj/machinery/teleport/hub/Initialize()
+	. = ..()
 	underlays.Cut()
 	underlays += image('icons/obj/stationobjs.dmi', icon_state = "tele-wires")
 
@@ -237,8 +237,8 @@
 	var/obj/machinery/computer/teleporter/com
 	var/obj/machinery/teleport/hub/hub
 
-/obj/machinery/teleport/station/New()
-	..()
+/obj/machinery/teleport/station/Initialize()
+	. = ..()
 	overlays.Cut()
 	overlays += image('icons/obj/stationobjs.dmi', icon_state = "controller-wires")
 

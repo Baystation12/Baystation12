@@ -80,8 +80,8 @@
 	can_label = 1
 	var/obj/machinery/portable_atmospherics/canister/canister_type = /obj/machinery/portable_atmospherics/canister
 
-/obj/machinery/portable_atmospherics/canister/empty/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/empty/Initialize()
+	. = ..()
 	name = 	initial(canister_type.name)
 	icon_state = 	initial(canister_type.icon_state)
 	canister_color = 	initial(canister_type.canister_color)
@@ -356,104 +356,75 @@ update_flag
 		return STATUS_CLOSE
 	return ..()
 
-/obj/machinery/portable_atmospherics/canister/phoron/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/phoron/Initialize()
+	. = ..()
+	air_contents.adjust_gas(GAS_PHORON, MolesForPressure())
+	queue_icon_update()
 
-	src.air_contents.adjust_gas(GAS_PHORON, MolesForPressure())
-	src.update_icon()
-	return 1
 
-/obj/machinery/portable_atmospherics/canister/oxygen/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/oxygen/Initialize()
+	. = ..()
+	air_contents.adjust_gas(GAS_OXYGEN, MolesForPressure())
+	queue_icon_update()
 
-	src.air_contents.adjust_gas(GAS_OXYGEN, MolesForPressure())
-	src.update_icon()
-	return 1
+/obj/machinery/portable_atmospherics/canister/hydrogen/Initialize()
+	. = ..()
+	air_contents.adjust_gas(GAS_HYDROGEN, MolesForPressure())
+	queue_icon_update()
 
-/obj/machinery/portable_atmospherics/canister/hydrogen/New()
-	..()
-	src.air_contents.adjust_gas(GAS_HYDROGEN, MolesForPressure())
-	src.update_icon()
-	return 1
+/obj/machinery/portable_atmospherics/canister/oxygen/prechilled/Initialize()
+	. = ..()
+	air_contents.temperature = 80
+	queue_icon_update()
 
-/obj/machinery/portable_atmospherics/canister/oxygen/prechilled/New()
-	..()
-	src.air_contents.temperature = 80
-	src.update_icon()
-	return 1
-
-/obj/machinery/portable_atmospherics/canister/sleeping_agent/New()
-	..()
-
+/obj/machinery/portable_atmospherics/canister/sleeping_agent/Initialize()
+	. = ..()
 	air_contents.adjust_gas(GAS_N2O, MolesForPressure())
-	src.update_icon()
-	return 1
+	queue_icon_update()
 
-//Dirty way to fill room with gas. However it is a bit easier to do than creating some floor/engine/n2o -rastaf0
-/obj/machinery/portable_atmospherics/canister/sleeping_agent/roomfiller/New()
-	..()
-	air_contents.gas[GAS_N2O] = 9*4000
-	spawn(10)
-		var/turf/simulated/location = src.loc
-		if (istype(src.loc))
-			while (!location.air)
-				sleep(10)
-			location.assume_air(air_contents)
-			air_contents = new
-	return 1
-
-/obj/machinery/portable_atmospherics/canister/nitrogen/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/nitrogen/Initialize()
+	. = ..()
 	src.air_contents.adjust_gas(GAS_NITROGEN, MolesForPressure())
-	src.update_icon()
-	return 1
+	queue_icon_update()
 
-/obj/machinery/portable_atmospherics/canister/nitrogen/prechilled/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/nitrogen/prechilled/Initialize()
+	. = ..()
 	src.air_contents.temperature = 80
-	src.update_icon()
-	return 1
+	queue_icon_update()
 
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/Initialize()
+	. = ..()
 	src.air_contents.adjust_gas(GAS_CO2, MolesForPressure())
-	src.update_icon()
-	return 1
+	queue_icon_update()
 
 
-/obj/machinery/portable_atmospherics/canister/air/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/air/Initialize()
+	. = ..()
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi(GAS_OXYGEN, air_mix[GAS_OXYGEN], GAS_NITROGEN, air_mix[GAS_NITROGEN])
-
-	src.update_icon()
-	return 1
-
+	queue_icon_update()
 
 
 // Special types used for engine setup admin verb, they contain double amount of that of normal canister.
-/obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/nitrogen/engine_setup/Initialize()
+	. = ..()
 	src.air_contents.adjust_gas(GAS_NITROGEN, MolesForPressure())
-	src.update_icon()
-	return 1
+	queue_icon_update()
 
-/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide/engine_setup/Initialize()
+	. = ..()
 	src.air_contents.adjust_gas(GAS_CO2, MolesForPressure())
-	src.update_icon()
-	return 1
+	queue_icon_update()
 
-/obj/machinery/portable_atmospherics/canister/phoron/engine_setup/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/phoron/engine_setup/Initialize()
+	. = ..()
 	src.air_contents.adjust_gas(GAS_PHORON, MolesForPressure())
-	src.update_icon()
-	return 1
+	queue_icon_update()
 
-/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/hydrogen/engine_setup/Initialize()
+	. = ..()
 	src.air_contents.adjust_gas(GAS_HYDROGEN, MolesForPressure())
-	src.update_icon()
+	queue_icon_update()
 
 // Spawn debug tanks.
 /obj/machinery/portable_atmospherics/canister/helium
@@ -462,10 +433,10 @@ update_flag
 	canister_color = "black"
 	can_label = 0
 
-/obj/machinery/portable_atmospherics/canister/helium/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/helium/Initialize()
+	. = ..()
 	air_contents.adjust_gas(GAS_HELIUM, MolesForPressure())
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/methyl_bromide
 	name = "\improper Canister \[CH3Br\]"
@@ -473,10 +444,10 @@ update_flag
 	canister_color = "black"
 	can_label = 0
 
-/obj/machinery/portable_atmospherics/canister/methyl_bromide/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/methyl_bromide/Initialize()
+	. = ..()
 	air_contents.adjust_gas(GAS_METHYL_BROMIDE, MolesForPressure())
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/portable_atmospherics/canister/chlorine
 	name = "\improper Canister \[Cl\]"
@@ -484,8 +455,8 @@ update_flag
 	canister_color = "black"
 	can_label = 0
 
-/obj/machinery/portable_atmospherics/canister/chlorine/New()
-	..()
+/obj/machinery/portable_atmospherics/canister/chlorine/Initialize()
+	. = ..()
 	air_contents.adjust_gas(GAS_CHLORINE, MolesForPressure())
-	update_icon()
+	queue_icon_update()
 // End debug tanks.

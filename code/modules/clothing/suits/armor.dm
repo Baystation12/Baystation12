@@ -84,8 +84,8 @@
 	blood_overlay_type = "armor"
 	armor = null
 
-/obj/item/clothing/suit/armor/reactive/New()
-	..()
+/obj/item/clothing/suit/armor/reactive/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/armor/reactive/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
@@ -423,8 +423,8 @@
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	siemens_coefficient = 0
 
-/obj/item/clothing/suit/armor/heavy/New()
-	..()
+/obj/item/clothing/suit/armor/heavy/Initialize()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 3
 
 /obj/item/clothing/suit/armor/tdome

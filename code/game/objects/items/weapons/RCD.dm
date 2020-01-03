@@ -50,8 +50,8 @@
 		to_chat(user, "The current mode is '[work_mode]'")
 		to_chat(user, "It currently holds [stored_matter]/[max_stored_matter] matter-units.")
 
-/obj/item/weapon/rcd/New()
-	..()
+/obj/item/weapon/rcd/Initialize()
+	. = ..()
 	src.spark_system = new /datum/effect/effect/system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)

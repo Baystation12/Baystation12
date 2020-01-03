@@ -49,10 +49,10 @@
 			/obj/item/clothing/suit/storage/toggle/bomber = 500,
 			/obj/item/clothing/suit/storage/hooded/wintercoat = 500))
 
-/obj/machinery/biogenerator/New()
-	..()
+/obj/machinery/biogenerator/Initialize()
 	create_reagents(1000)
 	beaker = new /obj/item/weapon/reagent_containers/glass/bottle(src)
+	. = ..()
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()

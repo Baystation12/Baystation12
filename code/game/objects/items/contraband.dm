@@ -30,10 +30,10 @@
 		list(/datum/reagent/impedrezene = 15)                                  = 2,
 		list(/datum/reagent/toxin/zombiepowder = 10)                           = 1)
 
-/obj/item/weapon/reagent_containers/glass/beaker/vial/random/New()
-	..()
+/obj/item/weapon/reagent_containers/glass/beaker/vial/random/Initialize()
+	. = ..()
 	if(is_open_container())
-		atom_flags ^= ATOM_FLAG_OPEN_CONTAINER
+		atom_flags |= ATOM_FLAG_OPEN_CONTAINER
 
 	var/list/picked_reagents = pickweight(random_reagent_list)
 	for(var/reagent in picked_reagents)

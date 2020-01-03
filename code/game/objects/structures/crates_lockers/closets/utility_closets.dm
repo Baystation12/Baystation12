@@ -67,8 +67,8 @@
 	desc = "It's a storage unit for tools."
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
-/obj/structure/closet/toolcloset/New()
-	..()
+/obj/structure/closet/toolcloset/Initialize()
+	. = ..()
 	if(prob(40))
 		new /obj/item/clothing/suit/storage/hazardvest(src)
 	if(prob(70))

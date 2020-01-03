@@ -21,8 +21,8 @@
 	<b>Integrity:</b> Implant will last so long as the subject is alive. However, if the subject suffers from prolonged malnutrition,<BR>
 	nine or more days without nutrients, the implant may become unstable and either pre-maturely inject the subject or simply break."}
 
-/obj/item/weapon/implant/chem/New()
-	..()
+/obj/item/weapon/implant/chem/Initialize()
+	. = ..()
 	create_reagents(50)
 
 /obj/item/weapon/implant/chem/activate(var/amount)

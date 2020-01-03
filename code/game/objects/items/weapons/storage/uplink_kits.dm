@@ -115,8 +115,8 @@
 	name = "\improper Tricky smokes"
 	desc = "Smokes so good, you'd think it was a trick!"
 
-/obj/item/weapon/storage/box/syndie_kit/cigarette/New()
-	..()
+/obj/item/weapon/storage/box/syndie_kit/cigarette/Initialize()
+	. = ..()
 	var/obj/item/weapon/storage/fancy/cigarettes/pack
 	pack = new /obj/item/weapon/storage/fancy/cigarettes(src)
 	fill_cigarre_package(pack, list(/datum/reagent/aluminium = 1, /datum/reagent/potassium = 1, /datum/reagent/sulfur = 1))

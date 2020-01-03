@@ -46,8 +46,8 @@
 		icon_state = "generator0"
 
 
-/obj/machinery/power/shield_generator/New()
-	..()
+/obj/machinery/power/shield_generator/Initialize()
+	. = ..()
 	connect_to_network()
 
 	mode_list = list()

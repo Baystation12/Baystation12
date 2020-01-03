@@ -6,8 +6,8 @@
 	var/drainage = 0.5
 	var/last_gurgle = 0
 
-/obj/structure/hygiene/New()
-	..()
+/obj/structure/hygiene/Initialize()
+	. = ..()
 	SSfluids.hygiene_props += src
 	START_PROCESSING(SSobj, src)
 
@@ -214,8 +214,8 @@
 	var/is_washing = 0
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
 
-/obj/structure/hygiene/shower/New()
-	..()
+/obj/structure/hygiene/shower/Initialize()
+	. = ..()
 	create_reagents(50)
 
 //add heat controls? when emagged, you can freeze to death in it?

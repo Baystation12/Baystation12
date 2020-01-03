@@ -60,8 +60,8 @@ var/list/tape_roll_applications = list()
 		I.color = detail_color
 		overlays |= I
 
-/obj/item/tape/New()
-	..()
+/obj/item/tape/Initialize()
+	. = ..()
 	if(!hazard_overlays)
 		hazard_overlays = list()
 		hazard_overlays["[NORTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "N")

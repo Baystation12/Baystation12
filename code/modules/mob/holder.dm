@@ -21,8 +21,8 @@ var/list/holder_mob_icon_cache = list()
 
 	var/last_holder
 
-/obj/item/weapon/holder/New()
-	..()
+/obj/item/weapon/holder/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/holder/proc/destroy_all()

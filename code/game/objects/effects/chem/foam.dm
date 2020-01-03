@@ -131,8 +131,8 @@
 	desc = "A lightweight foamed metal wall."
 	var/metal = 1 // 1 = aluminium, 2 = iron
 
-/obj/structure/foamedmetal/New()
-	..()
+/obj/structure/foamedmetal/Initialize()
+	. = ..()
 	update_nearby_tiles(1)
 
 /obj/structure/foamedmetal/Destroy()

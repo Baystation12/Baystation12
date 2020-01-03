@@ -21,8 +21,8 @@
 	name = "rubber suit bag"
 	desc = "A cheap plastic bag that contains an emergency party set."
 
-/obj/item/weapon/clothingbag/rubbersuit/New()
-	..()
+/obj/item/weapon/clothingbag/rubbersuit/Initialize()
+	. = ..()
 	switch(rand(1,3))
 		if(1)
 			new/obj/item/clothing/suit/rubber(src)
@@ -38,7 +38,7 @@
 	name = "rubber masks bag"
 	desc = "A cheap plastic bag that contains emergency Halloween supplies."
 
-/obj/item/weapon/clothingbag/rubbermask/New()
-	..()
+/obj/item/weapon/clothingbag/rubbermask/Initialize()
+	. = ..()
 	for(var/T in subtypesof(/obj/item/clothing/mask/rubber))
 		new T(src)

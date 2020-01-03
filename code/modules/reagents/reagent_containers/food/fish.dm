@@ -7,8 +7,8 @@
 	bitesize = 6
 	var/fish_type = "fish"
 
-/obj/item/weapon/reagent_containers/food/snacks/fish/New()
-	..()
+/obj/item/weapon/reagent_containers/food/snacks/fish/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 6)
 	name = "[fish_type] fillet"
 // This will remove carp poison etc. Deliberate, meant to be similar to preparing pufferfish.
@@ -35,8 +35,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/fish/poison
 	fish_type = "space carp"
 
-/obj/item/weapon/reagent_containers/food/snacks/fish/poison/New()
-	..()
+/obj/item/weapon/reagent_containers/food/snacks/fish/poison/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/toxin/carpotoxin, 6)
 
 /obj/item/weapon/reagent_containers/food/snacks/fish/shark

@@ -21,8 +21,8 @@
 	throw_speed = 4
 	throw_range = 20
 
-/obj/item/device/taperecorder/New()
-	..()
+/obj/item/device/taperecorder/Initialize()
+	. = ..()
 	wires = new(src)
 	set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(ispath(mytape))

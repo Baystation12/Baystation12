@@ -18,10 +18,6 @@
 	air_properties_vary_with_direction = 1
 	pry_mod = 0.5
 
-/obj/machinery/door/window/New()
-	..()
-	update_nearby_tiles()
-
 /obj/machinery/door/window/Initialize(mapload, obj/structure/windoor_assembly/assembly)
 	if(assembly)
 		set_dir(assembly.dir)
@@ -37,6 +33,7 @@
 			electronics = assembly.electronics
 			electronics.forceMove(src)
 	. = ..()
+	update_nearby_tiles()
 
 /obj/machinery/door/window/on_update_icon()
 	if(density)
