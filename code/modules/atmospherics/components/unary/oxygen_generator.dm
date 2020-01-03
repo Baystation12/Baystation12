@@ -13,37 +13,34 @@ obj/machinery/atmospherics/unary/oxygen_generator
 
 	var/oxygen_content = 10
 
-	update_icon()
-		if(node)
-			icon_state = "intact_[on?("on"):("off")]"
-		else
-			icon_state = "exposed_off"
+obj/machinery/atmospherics/unary/oxygen_generator/on_update_icon()
+	if(node)
+		icon_state = "intact_[on?("on"):("off")]"
+	else
+		icon_state = "exposed_off"
 
-			on = 0
+		on = 0
 
-		return
+obj/machinery/atmospherics/unary/oxygen_generator/Initialize()
+	. = ..()
+	air_contents.volume = 50
 
-	New()
-		..()
+obj/machinery/atmospherics/unary/oxygen_generator/Process()
+	..()
+	if(!on)
+		return 0
 
-		air_contents.volume = 50
+	var/total_moles = air_contents.total_moles
 
-	Process()
-		..()
-		if(!on)
-			return 0
+	if(total_moles < oxygen_content)
+		var/current_heat_capacity = air_contents.heat_capacity()
 
-		var/total_moles = air_contents.total_moles
+		var/added_oxygen = oxygen_content - total_moles
 
-		if(total_moles < oxygen_content)
-			var/current_heat_capacity = air_contents.heat_capacity()
+		air_contents.temperature = (current_heat_capacity*air_contents.temperature + 20*added_oxygen*T0C)/(current_heat_capacity+20*added_oxygen)
+		air_contents.adjust_gas(GAS_OXYGEN, added_oxygen)
 
-			var/added_oxygen = oxygen_content - total_moles
+		if(network)
+			network.update = 1
 
-			air_contents.temperature = (current_heat_capacity*air_contents.temperature + 20*added_oxygen*T0C)/(current_heat_capacity+20*added_oxygen)
-			air_contents.adjust_gas(GAS_OXYGEN, added_oxygen)
-
-			if(network)
-				network.update = 1
-
-		return 1
+	return 1

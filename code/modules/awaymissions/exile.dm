@@ -27,13 +27,11 @@
 	name = "Exile Implants"
 	req_access = list(access_hos)
 
-	New()
-		..()
-		sleep(2)
-		new /obj/item/weapon/implanter/exile(src)
-		new /obj/item/weapon/implantcase/exile(src)
-		new /obj/item/weapon/implantcase/exile(src)
-		new /obj/item/weapon/implantcase/exile(src)
-		new /obj/item/weapon/implantcase/exile(src)
-		new /obj/item/weapon/implantcase/exile(src)
-		return
+/obj/structure/closet/secure_closet/exile/Initialize()
+	. = ..()
+	new /obj/item/weapon/implanter/exile(src)
+	new /obj/item/weapon/implantcase/exile(src)
+	new /obj/item/weapon/implantcase/exile(src)
+	new /obj/item/weapon/implantcase/exile(src)
+	new /obj/item/weapon/implantcase/exile(src)
+	new /obj/item/weapon/implantcase/exile(src)

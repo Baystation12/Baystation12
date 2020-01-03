@@ -36,7 +36,7 @@ length to avoid portals or something i guess?? Not that they're counted right no
 
 // Also added 'exclude' turf to avoid travelling over; defaults to null
 
-PathNode
+/PathNode
 	var/datum/position
 	var/PathNode/previous_node
 
@@ -46,21 +46,21 @@ PathNode
 	var/cost
 	var/nodes_traversed
 
-	New(_position, _previous_node, _known_cost, _cost, _nodes_traversed)
-		position = _position
-		previous_node = _previous_node
+/PathNode/New(_position, _previous_node, _known_cost, _cost, _nodes_traversed)
+	position = _position
+	previous_node = _previous_node
 
-		known_cost = _known_cost
-		cost = _cost
-		estimated_cost = cost + known_cost
+	known_cost = _known_cost
+	cost = _cost
+	estimated_cost = cost + known_cost
 
-		best_estimated_cost = estimated_cost
-		nodes_traversed = _nodes_traversed
+	best_estimated_cost = estimated_cost
+	nodes_traversed = _nodes_traversed
 
-proc/PathWeightCompare(PathNode/a, PathNode/b)
+/proc/PathWeightCompare(PathNode/a, PathNode/b)
 	return a.estimated_cost - b.estimated_cost
 
-proc/AStar(var/start, var/end, var/proc/adjacent, var/proc/dist, var/max_nodes, var/max_node_depth = 30, var/min_target_dist = 0, var/min_node_dist, var/id, var/datum/exclude)
+/proc/AStar(var/start, var/end, var/proc/adjacent, var/proc/dist, var/max_nodes, var/max_node_depth = 30, var/min_target_dist = 0, var/min_node_dist, var/id, var/datum/exclude)
 	var/PriorityQueue/open = new /PriorityQueue(/proc/PathWeightCompare)
 	var/list/closed = list()
 	var/list/path

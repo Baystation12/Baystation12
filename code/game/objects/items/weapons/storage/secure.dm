@@ -187,10 +187,10 @@
 	density = 0
 	cant_hold = list(/obj/item/weapon/storage/secure/briefcase)
 
-	New()
-		..()
-		new /obj/item/weapon/paper(src)
-		new /obj/item/weapon/pen(src)
+/obj/item/weapon/storage/secure/safe/Initialize()
+	. = ..()
+	new /obj/item/weapon/paper(src)
+	new /obj/item/weapon/pen(src)
 
-	attack_hand(mob/user as mob)
-		return attack_self(user)
+/obj/item/weapon/storage/secure/safe/attack_hand(mob/user as mob)
+	return attack_self(user)
