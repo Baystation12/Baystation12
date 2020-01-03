@@ -1,4 +1,4 @@
-obj/item/device/cable_painter
+/obj/item/device/cable_painter
 	name = "cable painter"
 	desc = "A device for repainting cables."
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -8,8 +8,8 @@ obj/item/device/cable_painter
 	var/list/modes
 	w_class = ITEM_SIZE_SMALL
 
-obj/item/device/cable_painter/New()
-	..()
+/obj/item/device/cable_painter/Initialize()
+	. = ..()
 	color_selection = pick(GLOB.possible_cable_colours)
 
 obj/item/device/cable_painter/examine(mob/user, distance)

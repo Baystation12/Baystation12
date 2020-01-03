@@ -266,8 +266,8 @@
 	name = "Noexcutite (15u)"
 	desc = "Feeling jittery? This should calm you down."
 	icon_state = "pill4"
-obj/item/weapon/reagent_containers/pill/noexcutite/New()
-	..()
+/obj/item/weapon/reagent_containers/pill/noexcutite/Initialize()
+	. = ..()
 	reagents.add_reagent(/datum/reagent/noexcutite, 15)
 	color = reagents.get_color()
 

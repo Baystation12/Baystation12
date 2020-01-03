@@ -27,11 +27,31 @@
 	connections = list("nw0", "ne0", "sw0", "se0")
 
 /obj/structure/table/Initialize()
-	. = ..()
+	..()
 	if(istext(material))
 		material = SSmaterials.get_material_by_name(material)
 	if(istext(reinforced))
 		reinforced = SSmaterials.get_material_by_name(reinforced)
+	// One table per turf.
+	for(var/obj/structure/table/T in loc)
+		if(T != src)
+			// There's another table here that's not us, break to metal.
+			// break_to_parts calls qdel(src)
+			break_to_parts(full_return = 1)
+			return
+
+	// reset color/alpha, since they're set for nice map previews
+	color = "#ffffff"
+	alpha = 255
+	update_material()
+	return INITIALIZE_HINT_LATELOAD
+
+// We do this because need to make sure adjacent tables init their material before we try and merge.
+/obj/structure/table/LateInitialize()
+	..()
+	update_connections(1)
+	update_icon()
+	update_desc()
 
 /obj/structure/table/proc/update_material()
 	var/old_maxhealth = maxhealth
@@ -57,25 +77,6 @@
 	if(health <= 0)
 		visible_message("<span class='warning'>\The [src] breaks down!</span>")
 		return break_to_parts() // if we break and form shards, return them to the caller to do !FUN! things with
-
-/obj/structure/table/Initialize()
-	. = ..()
-
-	// One table per turf.
-	for(var/obj/structure/table/T in loc)
-		if(T != src)
-			// There's another table here that's not us, break to metal.
-			// break_to_parts calls qdel(src)
-			break_to_parts(full_return = 1)
-			return
-
-	// reset color/alpha, since they're set for nice map previews
-	color = "#ffffff"
-	alpha = 255
-	update_connections(1)
-	update_icon()
-	update_desc()
-	update_material()
 
 /obj/structure/table/Destroy()
 	material = null

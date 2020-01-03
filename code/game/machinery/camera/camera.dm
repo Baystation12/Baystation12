@@ -70,6 +70,8 @@
 	return 1
 
 /obj/machinery/camera/Initialize()
+	. = ..()
+
 	assembly = new(src)
 	assembly.state = 4
 
@@ -88,10 +90,7 @@
 			error("[src.name] in [get_area(src)]has errored. [src.network?"Empty network list":"Null network list"]")
 		ASSERT(src.network)
 		ASSERT(src.network.len > 0)
-	..()
 
-/obj/machinery/camera/Initialize()
-	. = ..()
 	if(!c_tag)
 		number = 1
 		var/area/A = get_area(src)

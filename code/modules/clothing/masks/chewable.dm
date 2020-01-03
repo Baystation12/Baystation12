@@ -10,8 +10,8 @@
 	var/brand
 	var/list/filling = list()
 
-obj/item/clothing/mask/chewable/New()
-	..()
+/obj/item/clothing/mask/chewable/Initialize()
+	. = ..()
 	atom_flags |= ATOM_FLAG_NO_REACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 	for(var/R in filling)
