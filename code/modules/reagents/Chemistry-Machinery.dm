@@ -29,7 +29,6 @@
 /obj/machinery/chem_master/Initialize()
 	. = ..()
 	create_reagents(120)
-	..()
 
 /obj/machinery/chem_master/ex_act(severity)
 	switch(severity)

@@ -31,7 +31,7 @@
 	return material
 
 /obj/structure/window/Initialize(mapload, start_dir=null, constructed=0, var/new_material, var/new_reinf_material)
-	. = ..()
+	..()
 	if(!new_material)
 		new_material = init_material
 		if(!new_material)
@@ -61,7 +61,12 @@
 
 	health = maxhealth
 
-	set_anchored(!constructed)
+	return INITIALIZE_HINT_LATELOAD
+
+// Updating connections may depend on material properties.
+/obj/structure/window/LateInitialize(mapload, start_dir=null, constructed=0, var/new_material, var/new_reinf_material)
+	..()
+	set_anchored(!constructed) // calls update_connections, potentially
 	update_connections(1)
 	update_icon()
 	update_nearby_tiles(need_rebuild=1)

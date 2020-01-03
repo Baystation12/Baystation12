@@ -21,7 +21,8 @@
 	return material
 
 /obj/structure/grille/Initialize(mapload, var/new_material)
-	. = ..()
+	..()
+	. = INITIALIZE_HINT_LATELOAD
 	if(!new_material)
 		new_material = init_material
 	material = SSmaterials.get_material_by_name(new_material)
@@ -33,6 +34,9 @@
 	desc = "A lattice of [material.display_name] rods, with screws to secure it to the floor."
 	color =  material.icon_colour
 	health = max(1, round(material.integrity/15))
+
+/obj/structure/grille/LateInitialize()
+	..()
 	update_connections(1)
 	update_icon()
 

@@ -20,7 +20,6 @@
 /obj/machinery/r_n_d/protolathe/Initialize()
 	. = ..()
 	materials = default_material_composition.Copy()
-	..()
 
 /obj/machinery/r_n_d/protolathe/Process()
 	..()

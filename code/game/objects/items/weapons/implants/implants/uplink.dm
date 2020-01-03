@@ -7,7 +7,7 @@
 
 /obj/item/weapon/implant/uplink/Initialize(mapload, var/amount)
 	amount = amount || IMPLANT_TELECRYSTAL_AMOUNT(DEFAULT_TELECRYSTAL_AMOUNT)
-	hidden_uplink = new(src, telecrystals = amount)
+	hidden_uplink = new(src, null, amount)
 	. = ..()
 
 /obj/item/weapon/implant/uplink/implanted(mob/source)

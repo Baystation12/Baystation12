@@ -1,5 +1,5 @@
-/obj/structure/window/Initialize()
-	. = ..()
+/obj/structure/window/LateInitialize()
+	..()
 	for(var/obj/structure/table/T in view(src, 1))
 		T.update_connections()
 		T.update_icon()

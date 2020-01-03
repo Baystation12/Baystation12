@@ -12,13 +12,16 @@
 	var/obj/item/stack/tile/mono/plated_tile
 
 /obj/structure/catwalk/Initialize()
-	. = ..()
+	..()
 	for(var/obj/structure/catwalk/C in get_turf(src))
 		if(C != src)
 			qdel(C)
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/catwalk/LateInitialize()
+	..()
 	update_connections(1)
 	update_icon()
-
 
 /obj/structure/catwalk/Destroy()
 	redraw_nearby_catwalks()
