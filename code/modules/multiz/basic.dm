@@ -18,16 +18,6 @@ var/list/z_levels = list()// Each bit re... haha just kidding this is a list of 
 	..()
 	return INITIALIZE_HINT_QDEL
 
-/proc/HasAbove(var/z)
-	if(z >= world.maxz || z < 1 || z > z_levels.len)
-		return 0
-	return z_levels[z]
-
-/proc/HasBelow(var/z)
-	if(z > world.maxz || z < 2 || (z-1) > z_levels.len)
-		return 0
-	return z_levels[z-1]
-
 // Thankfully, no bitwise magic is needed here.
 /proc/GetAbove(var/atom/atom)
 	var/turf/turf = get_turf(atom)

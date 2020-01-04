@@ -63,7 +63,7 @@
 /turf/space/proc/update_starlight()
 	if(!config.starlight)
 		return
-	if(locate(/turf/simulated) in orange(src,1)) //Let's make sure not to break everything if people use a crazy setting.
+	if(locate(/turf/simulated) in RANGE_TURFS(src, 1)) //Let's make sure not to break everything if people use a crazy setting.
 		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
 	else
 		set_light(0)
