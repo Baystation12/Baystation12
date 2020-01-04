@@ -19,16 +19,19 @@
 		im.plane = DUST_PLANE
 		im.alpha = 80
 		im.blend_mode = BLEND_ADD
-		dust_cache["[i]"] = im
 
+		var/image/I = new()
+		I.appearance = /turf/space
+		I.icon_state = "white"
+		I.overlays += im
+		dust_cache["[i]"] = I
 
 /turf/space/Initialize()
 	. = ..()
-	icon_state = "white"
 	update_starlight()
 	if (!dust_cache)
 		build_dust_cache()
-	overlays += dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
+	appearance = dust_cache["[((x + y) ^ ~(x * y) + z) % 25]"]
 
 	if(!HasBelow(z))
 		return
