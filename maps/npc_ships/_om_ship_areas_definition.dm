@@ -27,10 +27,6 @@
 
 		newarea.contents.Add(t)
 	. = ..()	*/
-
-/area/om_ships/req_console_ship
-	name = "Ship"
-
 /*
 /area/om_ship_replace
 	name = "Ship"
