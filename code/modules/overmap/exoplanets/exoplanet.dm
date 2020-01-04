@@ -57,23 +57,20 @@
 		else
 			habitability_class = HABITABILITY_BAD
 
-/obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, max_x, max_y)
-	var/time = world.time
-	if(!GLOB.using_map.use_overmap)
-		return ..()
+/obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, z_level)
+	if(GLOB.using_map.use_overmap)
+		forceMove(locate(1, 1, z_level))
+	return ..()
 
+/obj/effect/overmap/visitable/sector/exoplanet/proc/build_level(max_x, max_y)
 	maxx = max_x ? max_x : world.maxx
 	maxy = max_y ? max_y : world.maxy
 	planetary_area = new planetary_area()
-
-	name = "[generate_planet_name()], \a [name]"
-
-	world.maxz++
-	forceMove(locate(1,1,world.maxz))
-
 	if(LAZYLEN(possible_themes))
 		var/datum/exoplanet_theme/T = pick(possible_themes)
 		themes += new T
+
+	name = "[generate_planet_name()], \a [name]"
 
 	for(var/T in subtypesof(/datum/map_template/ruin/exoplanet))
 		var/datum/map_template/ruin/exoplanet/ruin = T
@@ -82,10 +79,6 @@
 		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
 			continue
 		possible_features += new ruin
-	to_world_log("Exoplanet Initialize took [world.time - time] to run")
-	return ..()
-
-/obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()
 	generate_habitability()
 	generate_atmosphere()
 	generate_map()

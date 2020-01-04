@@ -275,7 +275,8 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	for(var/i = 0, i < num_exoplanets, i++)
 		var/exoplanet_type = pick(subtypesof(/obj/effect/overmap/visitable/sector/exoplanet))
-		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type()
+		world.maxz++
+		var/obj/effect/overmap/visitable/sector/exoplanet/new_planet = new exoplanet_type(null, world.maxz)
 		new_planet.build_level(planet_size[1], planet_size[2])
 
 // Used to apply various post-compile procedural effects to the map.
