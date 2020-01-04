@@ -58,6 +58,7 @@
 			habitability_class = HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/Initialize(mapload, max_x, max_y)
+	var/time = world.time
 	if(!GLOB.using_map.use_overmap)
 		return ..()
 
@@ -81,6 +82,7 @@
 		if(ruin_tags_blacklist & initial(ruin.ruin_tags))
 			continue
 		possible_features += new ruin
+	to_world_log("Exoplanet Initialize took [world.time - time] to run")
 	return ..()
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()
