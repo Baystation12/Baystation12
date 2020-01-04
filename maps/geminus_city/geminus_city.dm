@@ -45,8 +45,6 @@
 	#include "geminuscity_3.dmm"
 	#include "geminuscity_2.dmm"
 	#include "geminuscity_1.dmm"
-	#include "../urf_flagship/includes.dm"
-	#include "../urf_flagship/first_deck.dmm"
 
 #elif !defined(MAP_OVERRIDE)
 

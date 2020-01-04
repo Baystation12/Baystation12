@@ -18,7 +18,7 @@
 
 #include "../CRS_Unyielding_Transgression/includes.dm"
 
-#include "innie_overmap.dm"
+#include "../urf_flagship/includes.dm"
 
 #include "invasion_geminus_jobdefs.dm"
 #include "invasion_geminus_unit_tests.dm"
