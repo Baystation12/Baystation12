@@ -1,6 +1,4 @@
 
-#include "faction_base.dm"
-
 /* COVENANT BASE */
 
 /obj/effect/overmap/ship/faction_base/cov

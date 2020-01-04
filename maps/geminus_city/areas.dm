@@ -244,7 +244,7 @@
 /area/geminus_underground/southeast
 	name = "\improper Geminus Underground South"
 	icon_state = "green"
-
+/*
 /area/geminus_underground/innie
 	name = "\improper Rabbit Hole Base Alpha Sector"
 	icon_state = "red"
@@ -282,3 +282,4 @@
 
 /area/x52/laboratory
 	name = "\improper X52 Laboratory"
+*/
