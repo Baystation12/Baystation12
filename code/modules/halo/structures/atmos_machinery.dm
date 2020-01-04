@@ -5,7 +5,7 @@
 	//pump_efficiency = 1000		//default is 2.5 | Not entirely sure what this does. Causes errors though.
 
 /obj/machinery/atmospherics/unary/vent_pump/hangar_vent/New()
-	..()
+	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 

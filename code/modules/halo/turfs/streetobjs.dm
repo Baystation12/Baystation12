@@ -141,7 +141,7 @@
 	return ..()
 
 /obj/structure/billboard/New()
-	..()
+	. = ..()
 	icon_state = pick("ssl","ntbuilding","keeptidy")
 
 /obj/structure/billboard/city
@@ -157,5 +157,5 @@
 	return ..()
 
 /obj/structure/billboard/city/New()
-	..()
+	. = ..()
 	icon_state = "welcome"

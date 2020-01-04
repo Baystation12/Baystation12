@@ -26,7 +26,7 @@
 	var/weapon_delay = 3 //The time in ticks between each weapon firing.
 
 /obj/item/weapon/gun/dual_wield_placeholder/New()
-	.=..()
+	. =..()
 	name = ""
 
 /obj/item/weapon/gun/dual_wield_placeholder/proc/add_wielding_weapon(var/obj/weapon,var/mob/user)

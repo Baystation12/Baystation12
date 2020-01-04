@@ -10,7 +10,7 @@
 	req_access = list(308)
 
 /obj/structure/closet/secure_closet/bertels_mp/New()
-	..()
+	. = ..()
 	new /obj/item/clothing/under/unsc/tactical(src)
 	new /obj/item/clothing/shoes/jackboots(src)
 	new /obj/item/device/radio/headset/unsc(src)

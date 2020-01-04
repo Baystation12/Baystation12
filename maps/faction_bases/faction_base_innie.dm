@@ -1,6 +1,4 @@
 
-#include "faction_base.dm"
-
 /* INNIE BASE */
 
 /obj/effect/overmap/ship/faction_base/innie

@@ -7,6 +7,7 @@
 
 /datum/armourspecials/cloaking/limited/New(var/obj/item/source_item)
 	source_item.action_button_name = "Toggle Active Camouflage"
+	. = ..()
 
 /datum/armourspecials/cloaking/limited/activate_cloak(var/voluntary = 1)
 	if(current_charge >= max_charge * 0.25)

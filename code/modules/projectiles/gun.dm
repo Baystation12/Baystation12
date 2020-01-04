@@ -85,7 +85,7 @@
 	var/tmp/list/mob/living/aim_targets //List of who yer targeting.
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
-	var/tmp/lock_time = -100
+	var/lock_time = 1 SECOND
 
 	//Attachment System Stuff//
 	var/list/attachment_slots = list()
@@ -243,7 +243,7 @@
 		O.emp_act(severity)
 
 /obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
-	if(adjacent) return //A is adjacent, is the user, or is on the user's person
+	if(adjacent) return ..()//A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)
 		user.aiming = new(user)
@@ -259,6 +259,8 @@
 		return
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
+		if(get_lunge_dist() > 0) //If we're on help intent and we have a lunge, do the lunge.
+			return ..()
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 		return
 

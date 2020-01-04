@@ -116,11 +116,14 @@
 	if(isnull(fire_sound))
 		return
 
-	playsound(loc_sound_origin, fire_sound, 5, 1, 5, 5,1)
+	playsound(loc_sound_origin, fire_sound, 10, 1, 5, 5,1)
 
 /obj/machinery/overmap_weapon_console/proc/can_fire(var/atom/target,var/mob/living/user,var/click_params)
 	scan_linked_devices()
 	if(!user)
+		return 0
+	if(get_dist(user,src) > 1)
+		to_chat(user,"<span class = 'notice'>You need to be next to the firing console to do that!</span>")
 		return 0
 	var/obj/overmap_sector = map_sectors["[z]"]
 	if(!overmap_sector)

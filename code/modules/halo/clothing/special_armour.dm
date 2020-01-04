@@ -4,7 +4,7 @@
 	var/totalshields
 
 /obj/item/clothing/suit/armor/special/New()
-	..()
+	. = ..()
 	for(var/i in specials)
 		specials -= i
 		specials += new i (src)

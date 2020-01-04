@@ -34,6 +34,7 @@
 	var/eva_mode_active = 0
 
 /datum/armourspecials/shields/New(var/obj/item/clothing/suit/armor/special/c) //Needed the type path for typecasting to use the totalshields var.
+	. = ..()
 	connectedarmour = c
 	totalshields = connectedarmour.totalshields
 	shieldstrength = totalshields

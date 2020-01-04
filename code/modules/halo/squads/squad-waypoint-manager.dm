@@ -11,6 +11,7 @@
 	var/waypoint_limit = 8
 
 /obj/item/squad_manager/New()
+	. = ..()
 	if(!linked_controller)
 		linked_controller = new(src)
 

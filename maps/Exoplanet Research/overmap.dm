@@ -12,4 +12,4 @@
 
 /obj/effect/overmap/sector/exo_research/LateInitialize()
 	. = ..()
-	new /obj/effect/overmap/ship/npc_ship/shipyard/unsc (loc)
+	GLOB.overmap_tiles_uncontrolled -= range(28,src)

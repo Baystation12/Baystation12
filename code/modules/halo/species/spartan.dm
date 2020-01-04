@@ -11,6 +11,7 @@
 	deform = 'code/modules/halo/icons/species/r_Augmented_Human.dmi'
 	icon_template = 'code/modules/halo/icons/species/r_Augmented_Human_template.dmi'
 	flags = NO_MINOR_CUT
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_EYE_COLOR
 	total_health = 250 //Same base health as sangheili
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili

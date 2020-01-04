@@ -23,6 +23,7 @@
 
 /obj/item/clothing/glasses/hud/tactical/odst_hud/medic/process_hud(var/mob/M)
 	process_med_hud(M, 1)
+	. = ..()
 
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Rifleman Helmet"

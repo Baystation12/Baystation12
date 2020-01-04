@@ -131,7 +131,7 @@
 		next_message = message
 
 /obj/effect/overmap/ship/npc_ship/proc/lose_to_space()
-	if(hull > initial(hull)/4)//If they still have more than quarter of their "hull" left, let them drift in space.
+	if(hull > initial(hull)/4 || is_player_controlled())//If they still have more than quarter of their "hull" left, let them drift in space.
 		return
 	unload_at = world.time + NPC_SHIP_LOSE_DELAY / 2
 	for(var/mob/player in GLOB.player_list)
@@ -163,7 +163,7 @@
 	var/list/sectors_onmap = list()
 	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
 		var/obj/effect/overmap/om_obj = locate(type)
-		if(om_obj && !isnull(om_obj.loc) && om_obj.base && om_obj.loc in GLOB.overmap_tiles_uncontrolled) //Only even try going if it's a "base" object
+		if(om_obj && !isnull(om_obj.loc) && om_obj.base && my_faction && !(om_obj.get_faction() in my_faction.enemy_factions)) //Only even try going if it's a "base" object
 			sectors_onmap += om_obj
 	if(sectors_onmap.len == 0)
 		target_loc = pick(GLOB.overmap_tiles_uncontrolled)
@@ -174,7 +174,10 @@
 			if(istype(t,/turf/unsimulated/map/edge))
 				continue
 			turfs_nearobj += t
-		target_loc = pick(turfs_nearobj)
+		if(turfs_nearobj.len > 0)
+			target_loc = pick(turfs_nearobj)
+		else
+			target_loc = loc
 
 /obj/effect/overmap/ship/npc_ship/can_burn()
 	if(!is_player_controlled())
@@ -261,7 +264,6 @@
 		l.set_light(text2num(lights_reset[l]))
 
 /obj/effect/overmap/ship/npc_ship/proc/load_mapfile()
-	set background = 1
 	if(unload_at)
 		return
 	if(!chosen_ship_datum)
@@ -287,6 +289,7 @@
 	mapload_reset_lights()
 
 	lighting_overlays_initialised = TRUE
+	makepowernets()
 
 	cargo_init()
 	damage_spawned_ship()
@@ -324,33 +327,33 @@
 /datum/npc_ship_request/proc/do_request_process(var/obj/effect/overmap/ship/npc_ship/ship_source) //Return 1 in this to stop normal NPC ship move processing.
 
 /datum/npc_ship
-	var/list/mapfile_links = list('maps/npc_ships/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
+	var/list/mapfile_links = list('maps/npc_ships/old/civhauler.dmm')//Multi-z maps should be included in a bottom to top order.
 
 	var/fore_dir = WEST //The direction of "fore" for the mapfile.
 	var/list/map_bounds = list(1,50,50,1)//Used for projectile collision bounds for the selected mapfile. Format: Topleft-x,Topleft-y,bottomright-x,bottomright-y
 
 /datum/npc_ship/ccv_star
-	mapfile_links = list('maps/npc_ships/CCV_Star.dmm')
+	mapfile_links = list('maps/npc_ships/old/CCV_Star.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_comet
-	mapfile_links = list('maps/npc_ships/CCV_Comet.dmm')
+	mapfile_links = list('maps/npc_ships/old/CCV_Comet.dmm')
 	fore_dir = WEST
 	map_bounds = list(1,50,50,1)
 
 /datum/npc_ship/ccv_sbs
-	mapfile_links = list('maps/npc_ships/CCV_Slow_But_Steady.dmm')
+	mapfile_links = list('maps/npc_ships/old/CCV_Slow_But_Steady.dmm')
 	fore_dir = WEST
 	map_bounds = list(6,51,72,27)
 
 /datum/npc_ship/unsc_patrol
-	mapfile_links = list('maps/npc_ships/UNSC_Corvette.dmm')
+	mapfile_links = list('maps/npc_ships/old/UNSC_Corvette.dmm')
 	fore_dir = WEST
 	map_bounds = list(7,70,54,29)
 
 /datum/npc_ship/cov_patrol
-	mapfile_links = list('maps/npc_ships/kigyar_missionary.dmm')
+	mapfile_links = list('maps/npc_ships/old/kigyar_missionary.dmm')
 	fore_dir = WEST
 	map_bounds = list(2,114,139,44)
 

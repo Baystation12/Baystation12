@@ -17,6 +17,7 @@
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
+	appearance_flags = HAS_SKIN_TONE | HAS_UNDERWEAR
 	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/grunt_punch)
@@ -29,7 +30,7 @@
 	hazard_low_pressure = -1
 	equipment_slowdown_multiplier = 0.75
 	ignore_equipment_threshold = 2
-	slowdown = 1
+	slowdown = 0.25
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/gruntscream_1.ogg',
 	'code/modules/halo/sounds/species_pain_screams/gruntscream_2.ogg',

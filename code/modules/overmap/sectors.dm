@@ -129,7 +129,9 @@ var/list/points_of_interest = list()
 		mobs_to_alert |= GLOB.mobs_in_sectors[om]
 	var/list/dirlist = list("north","south","n/a","east","northeast","southeast","n/a","west","northwest","southwest")
 	for(var/mob/m in mobs_to_alert)
-		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[get_dir(map_sectors["[m.z]"],alert_origin)]]</span>")
+		var/dir_to_ship = get_dir(map_sectors["[m.z]"],alert_origin)
+		if(dir_to_ship != 0)
+			to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[dir_to_ship]]</span>")
 
 
 /obj/effect/overmap/proc/do_slipspace_exit_effects(var/exit_loc,var/sound)
@@ -146,7 +148,8 @@ var/list/points_of_interest = list()
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(exit_loc,sound)
+	if(sound)
+		play_jump_sound(exit_loc,sound)
 	send_jump_alert(exit_loc)
 	loc = T
 	walk_to(src,exit_loc,0,1,0)
@@ -165,7 +168,8 @@ var/list/points_of_interest = list()
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(T,sound)
+	if(sound)
+		play_jump_sound(T,sound)
 	//rapidly move into the portal
 	walk_to(src,T,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
@@ -232,7 +236,8 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.overmap_z && GLOB.using_map.use_overmap)
 		build_overmap()
 
-	map_z |= loc.z
+	if(!isnull(loc))
+		map_z |= loc.z
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
 	map_sectors["[z]"] = src

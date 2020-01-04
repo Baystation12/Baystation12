@@ -4,7 +4,7 @@
 	desc = "A boarding pod of unknown make, model or origin."
 	density = 1
 	anchored = 1
-	launch_arm_time = 10 SECONDS
+	launch_arm_time = 5 SECONDS
 	drop_accuracy = 5
 	occupants = list(8,0)
 	pod_range = 8

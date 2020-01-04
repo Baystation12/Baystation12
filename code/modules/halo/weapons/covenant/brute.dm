@@ -22,6 +22,16 @@
 	explosion_size = 0
 	num_fragments = 250 //50 more than a high yield frag bomb
 
+	lunge_dist = 3
+
+/obj/item/weapon/grenade/frag/spike/get_lunge_dist(var/mob/living/carbon/human/user)
+	if(!istype(user))
+		return 0
+	if(istype(user.species,/datum/species/brutes))
+		return lunge_dist
+	else
+		return 0
+
 /obj/item/weapon/grenade/frag/spike/can_embed()
 	return FALSE
 
@@ -62,9 +72,18 @@
 	force = 40
 	is_heavy = 1
 	armor_penetration = 35
-	accuracy = -3
+	accuracy = -1
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
+	lunge_dist = 3
+
+/obj/item/weapon/gun/projectile/spiker/get_lunge_dist(var/mob/living/carbon/human/user)
+	if(!istype(user))
+		return 0
+	if(istype(user.species,/datum/species/brutes))
+		return lunge_dist
+	else
+		return 0
 
 /obj/item/weapon/gun/projectile/spiker/can_embed()
 	return FALSE
@@ -92,12 +111,12 @@
 
 /obj/item/projectile/bullet/spiker/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
 	if(blocked >= 100 || !istype(L))
-		. = ..()
 		return
 	var/obj/shard = new /obj/item/weapon/material/shard/shrapnel
 	var/obj/item/organ/external/embed_organ = pick(L.organs)
 	shard.name = "Spike shrapnel"
 	embed_organ.embed(shard)
+	. = ..()
 
 #undef CASELESS
 
@@ -122,9 +141,18 @@
 	force = 40
 	is_heavy = 1
 	armor_penetration = 35
-	accuracy = -3
+	accuracy = -1
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
+	lunge_dist = 3
+
+/obj/item/weapon/gun/projectile/mauler/get_lunge_dist(var/mob/living/carbon/human/user)
+	if(!istype(user))
+		return 0
+	if(istype(user.species,/datum/species/brutes))
+		return lunge_dist
+	else
+		return 0
 
 /obj/item/weapon/gun/projectile/mauler/can_embed()
 	return FALSE
@@ -221,6 +249,16 @@
 	advanced_covenant = 1
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
+
+	lunge_dist = 3
+
+/obj/item/weapon/gun/launcher/grenade/brute_shot/get_lunge_dist(var/mob/living/carbon/human/user)
+	if(!istype(user))
+		return 0
+	if(istype(user.species,/datum/species/brutes))
+		return lunge_dist
+	else
+		return 0
 
 /obj/item/weapon/gun/launcher/grenade/brute_shot/can_embed()
 	return FALSE

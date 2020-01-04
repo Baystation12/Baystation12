@@ -13,7 +13,7 @@
 	large = 0
 
 /obj/structure/closet/wall_emergency/New()
-	..()
+	. = ..()
 	new /obj/item/device/flashlight/unsc(src)
 	new /obj/item/device/flashlight/unsc(src)
 	new /obj/item/device/flashlight/unsc(src)
@@ -36,7 +36,7 @@
 	large = 0
 
 /obj/structure/closet/wall_medical/New()
-	..()
+	. = ..()
 	new /obj/item/weapon/storage/firstaid/unsc(src)
 	new /obj/item/weapon/storage/firstaid/unsc(src)
 	new /obj/item/weapon/storage/firstaid/unsc(src)
@@ -55,7 +55,7 @@
 	var/dispense_level = 6
 
 /obj/structure/oxy_dispenser/New()
-	..()
+	. = ..()
 	while(src.contents.len < max_contents)
 		new contents_type(src)
 	overlays += "dispenser_on"

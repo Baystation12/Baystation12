@@ -5,6 +5,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/missile_control/New()
 	if(isnull(control_tag))
 		control_tag = "missile_control - [z]"
+	. = ..()
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control
 	name = "Local Missile Control Console"
@@ -15,6 +16,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/New()
 	if(isnull(control_tag))
 		control_tag = "missile_control - [z]"
+	. = ..()
 
 //Missile "deck gun"//
 /obj/machinery/deck_gun/missile_pod
@@ -27,6 +29,7 @@
 	round_reload_time = 12 SECONDS
 	rounds_loaded = 4
 	max_rounds_loadable = 4
+	tag_prefix = "missile_control"
 
 /obj/machinery/deck_gun/missile_pod/return_list_addto()
 	return list(src,src,src,src)
@@ -70,7 +73,7 @@
 
 /obj/item/projectile/missile_damage_proj/on_impact(var/atom/impacted)
 	if(!istype(impacted,/obj/effect/shield))
-		explosion(loc,0,4,5,5, adminlog = 0)
+		explosion(loc,0,2,6,7, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
 	. = ..()

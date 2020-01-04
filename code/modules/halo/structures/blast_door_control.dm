@@ -152,7 +152,7 @@ obj/machinery/door/blast/proc/set_frequency(new_frequency)
 
 
 obj/machinery/door/blast/New()
-	..()
+	. = ..()
 
 	if(radio_controller)
 		set_frequency(frequency)

@@ -193,3 +193,4 @@
 
 /obj/dropship_movement_placeholder/New(var/obj/creator_dropship)
 	bounds = creator_dropship.bounds
+	. = ..()

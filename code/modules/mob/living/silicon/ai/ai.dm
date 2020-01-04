@@ -444,8 +444,10 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/check_access_level(var/atom/a)
 	var/area/atom_area = a.loc.loc
-	if(!istype(atom_area) || !istype(atom_area.ai_routing_node))
+	if(!istype(atom_area))
 		return -1
+	if(!istype(atom_area.ai_routing_node)) //If we don't have a routing node, access isn't restricted at all.
+		return 999
 	if(!(atom_area.ai_routing_node in nodes_accessed))
 		return -1
 	return atom_area.ai_routing_node.get_access_for_ai(src)

@@ -12,7 +12,7 @@
 	var/obj/item/clothing/suit/armor/special/source_item
 
 /datum/armourspecials/holo_decoy/New(var/obj/item/controller)
-	..()
+	. = ..()
 	source_item = controller
 	source_item.action_button_name = "Activate Holo Decoy"
 
