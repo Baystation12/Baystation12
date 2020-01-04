@@ -80,6 +80,7 @@
 "ck" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "dj" = (/obj/machinery/light/covenant/south,/obj/machinery/light/covenant/south,/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ft" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
+"oj" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "pl" = (/obj/structure/table/glass/purple,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/combat/unsc/cov,/obj/item/weapon/storage/firstaid/combat/unsc/cov,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "rg" = (/obj/machinery/light/covenant/south,/obj/machinery/bodyscanner/covenant{dir = 8; icon_state = "body_scanner_0"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "rt" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/glass/phoronrglass/ten,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -115,7 +116,7 @@ aaaaaaacacacacacacacacacacacacacacahahftahahaeaeaeahbEauplOFckahdjaealaeacacacac
 aaaaaaacahahahftahahahahahahacacahawaxayazahahalahahbDaeaAECTJahahahahaeaBaCaDaEacacaeaeaeacacaaaaaa
 aaaaaFaGahaHahahaeaeaeaIaeaeaeahbBaeaeaeaeYkahaeaeaIaeaeaeaeaeaNaealaeaeaeaeaeaeaeDmaeamaJaKaaaaaaaa
 aaaaaLaMaIaeaNahaeaOaPaPaPaQaeahapaRaRaRaRaealaeaSaTaUWaaeaeaeaVaeahaWaeaYaePErtJeftalahahahaaaaaaaa
-aaaaaLbcbdaeaealaebebdaRbfaeaealaebgbgbgbgaqahapbhaRaeaeaeaebibjbkahahalahalahahahahapblaaaaaaaaaaaa
+aaaaaLbcbdaeaealaebebdaRbfaeaealaeojbgbgbgaqahapbhaRaeaeaeaebibjbkahahalahalahahahahapblaaaaaaaaaaaa
 aaaaaLbmamaebnahaebobpbpbpaQaeahapaRaRaRaRaealaebqbrbsWaaeaeaebtaeahbuaebwaePErtJeftalahahahaaaaaaaa
 aaaabxbyahbzahahaeaeaeamaeaeaeahyxaeaeaeaeZHahaeaeamaeaeaeaeaebnaealaeaeaeaeaeaeaeHwaeaIaJaKaaaaaaaa
 aaaaaaacacacacyCacacacacacacacacahbCOirUWJahahalahahbDaeaeaeaeahahahahaeaBaCaDaEacacaeaeaeacacaaaaaa

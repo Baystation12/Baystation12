@@ -56,11 +56,11 @@
 "IL" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Ja" = (/obj/machinery/mac_cannon/capacitor{icon_state = "mac_capacitor"; dir = 8},/turf/space,/area/space)
 "JN" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"JQ" = (/obj/structure/table/steel,/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "MT" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "NK" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local{dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/obj/structure/computerframe{anchored = 1; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "NP" = (/obj/effect/hull_segment,/turf/simulated/wall,/area/om_ships/req_console_ship)
 "Pw" = (/obj/structure/bed/chair{dir = 2},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"Qf" = (/obj/structure/table/steel,/obj/machinery/light{dir = 8},/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "QV" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Rk" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Ry" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -94,7 +94,7 @@ aaaaaaaaaaaaaaqHaaaaaaaaaauNezGvqXqXlslslsvAlsqXqXqXqXqXqXqXqXqXqXqXqXRkhdtudMFb
 aaaaaaaaaaaaaaaaaaaaaaaauNqNEdEdWVEdEdEdEdtREbVeqXcyfDsrqXhdcOhdqXNPqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaIeEdEdEdqXEdEdEdEdEdEdEdWthdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXXihdNPTCFcshaaaa
 aaaaJaJaJaJaJaJaJaJaJaJahWEdgJqXqXgJqXCNQVyOgJqXqXPwPwhdtshdhdhdstqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaa
-aaHqHqHqHqHqHqHqHqHqHqHqzXEdEdqXfJEdoSebQVNKEddDqXJQvGTIqXyyhdhdhdBJRXqXRZqXUQcSakqXqXBJqXqXqXqXaaaa
+aaHqHqHqHqHqHqHqHqHqHqHqzXEdEdqXfJEdoSebQVNKEddDqXQfvGTIqXyyhdhdhdBJRXqXRZqXUQcSakqXqXBJqXqXqXqXaaaa
 aaaaJaJaJaJaJaJaJaJaJaJasbEdgJqXqXgJqXCNQVHWgJqXqXHzHzhdhdhdhdhdstqXBJqXBJqXFcFcFcqXVwhdqXFcFcshaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaTtEdEdEdqXEdEdEdEdEdEdEdWthdhdhdtshdhdhdhdqXhdhdhdqXqXMTqXqXXihdNPTCFcshaaaa
 aaaaaaaaaaaaaaaaaaaaaaaavdswEdEdWVEdEdEdEdtREbVeqXlHfDRyqXhdlbhdqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa

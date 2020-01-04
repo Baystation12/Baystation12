@@ -79,6 +79,7 @@
 "ox" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
 "pw" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "zw" = (/obj/vehicles/drop_pod/escape_pod/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"Ch" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Hz" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "JX" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/structure/closet/crate/covenant{name = "Supraluminal Communications Equipment"},/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/card/id{desc = "Superluminal Communications Array Authentication Disk"; icon = 'code/modules/halo/covenant/Cards.dmi'; icon_state = "sangzealot_id"; name = "Superluminal Auth Disk."; tag = "icon-pinkGold"},/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Lb" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -99,7 +100,7 @@ aaaaaaababababababababababababababakakoxakakadadadakakakakoxakakMyadajadabababab
 aaaaaaabakakakoxakakakakakakababakamanaoapakakajakakaqarasasatakakakakadauavawaxababadadadababaaaaaa
 aaaaayazakaAakakadadadaBadadadakbsadadadadbDakadadaBadadadadadaBajadadadadadadadadPDadalaCaDaaaaaaaa
 aaaaaEaFaBadaGakadaHaIaIaIaJadakaKaLaLaLaLadajadadaMadafadafadafakaOaPadaQadaRaSaToxajakakakaaaaaaaa
-aaaaaEaUaVadadajadaWaVaLaXadadajadaYaYaYaYaZakbaadbbadbcaZakbdbeakakakajakajakakakakaKbfaaaaaaaaaaaa
+aaaaaEaUaVadadajadaWaVaLaXadadajadChaYaYaYaZakbaadbbadbcaZakbdbeakakakajakajakakakakaKbfaaaaaaaaaaaa
 aaaaaEbgaladbhakadbibjbjbjaJadakaKaLaLaLaLadajadadbkadafadafadafakblbmadbnadaRaSaToxajakakakaaaaaaaa
 aaaabobpakbqakakadadadaladadadakdoadadadadJXakadadaladadadadadalajadadadadadadadadpwadaBaCaDaaaaaaaa
 aaaaaaababababimababababababababakbtTVLbHzakakajakakbubvasasatakakakakadauavawaxababadadadababaaaaaa

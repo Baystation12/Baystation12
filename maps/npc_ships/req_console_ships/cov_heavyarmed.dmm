@@ -78,6 +78,7 @@
 "bA" = (/obj/machinery/deck_gun/cov_pulse_turret{dir = 2},/turf/space,/area/space)
 "gc" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "jY" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
+"ps" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "sx" = (/obj/machinery/photocopier/faxmachine{department = "CRS Unyielding Transgression"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "wj" = (/obj/machinery/light/covenant/north,/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "zi" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/structure/closet/crate/covenant{name = "Supraluminal Communications Equipment"},/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/card/id{desc = "Superluminal Communications Array Authentication Disk"; icon = 'code/modules/halo/covenant/Cards.dmi'; icon_state = "sangzealot_id"; name = "Superluminal Auth Disk."; tag = "icon-pinkGold"},/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -103,7 +104,7 @@ aaaaaaacacacacacacacacacacacacacacagagFvagagaeaeaeagagagagFvagagTZaeaiaeacacacac
 aaaaaaacagagagFvagagagagagagacacagajakalamagagaiagaganaoapaeaeagagagagaeaqarasatacacaeaeaeacacaaaaaa
 aaaaauavagawagagaeaeaeapaeaeaeagbvaeaeaeaeMXagaeaeapaeaeaeaeaeaeaiaeaeaeaeaeaeaeaeJRaeahaxayaaaaaaaa
 aaaaazaAapaeaBagaeaCaDaDaDaEaeagaFaGaGaGaGaeaiaeaeaHaeaIaJaKaLaeagaMaNaeaOaeaPaQaRFvaiagagagaaaaaaaa
-aaaaazaSaTaeaeaiaeaUaTaGaVaeaeaiaeaWaWaWaWaXagaYaeaZaebabbbcbdaXagagagaiagaiagagagagaFbeaaaaaaaaaaaa
+aaaaazaSaTaeaeaiaeaUaTaGaVaeaeaiaepsaWaWaWaXagaYaeaZaebabbbcbdaXagagagaiagaiagagagagaFbeaaaaaaaaaaaa
 aaaaazbfahaebgagaebhbibibiaEaeagaFaGaGaGaGaeaiaeaebjaebkblbmbnaeagbobpaebqaeaPaQaRFvaiagagagaaaaaaaa
 aaaabrbsagbtagagaeaeaeahaeaeaeagsxaeaeaeaeziagaeaeahaeaeaeaeaeaeaiaeaeaeaeaeaeaeaeMVaeapaxayaaaaaaaa
 aaaaaaacacacacjYacacacacacacacacagbwgcHCAuagagaiagagbxbyahaeaeagagagagaeaqarasatacacaeaeaeacacaaaaaa

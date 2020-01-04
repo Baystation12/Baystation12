@@ -83,6 +83,7 @@
 "wM" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "xH" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "yD" = (/obj/machinery/light/covenant/north,/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"yX" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "CA" = (/obj/machinery/light/covenant/south,/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "He" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "MW" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -101,7 +102,7 @@ aaaaaaababababababababababababababamamshamamacacacacacamamshamamCAacaracabababab
 aaaaaaabamamamshamamamamamamababamasatauavamamamaramamamacawacamamamamacaxayazaAababacacacababaaaaaa
 aaaaaBaCamaDamamacacacaEacacaFambwacacacacMWamaGacaHamacacacacacamaIaJacacacacacacxHacanaKaLaaaaaaaa
 aaaaaMaNaEacaOamacaPaQaRaSacacamaTaUaUaUaUacaracacaVamaTacacacacaracacacaWacaXaYaZsharamamamaaaaaaaa
-aaaaaMbabbacacaracbcbbacacbdacaracbebebebebfambgacacaracacacacbfamamamaramaramamamamaTbhaaaaaaaaaaaa
+aaaaaMbabbacacaracbcbbacacbdacaracyXbebebebfambgacacaracacacacbfamamamaramaramamamamaTbhaaaaaaaaaaaa
 aaaaaMbianacbjamacbkblbmbnacacamaTaUaUaUaUacaracacboamaTacacacacaracacacbpacaXaYaZsharamamamaaaaaaaa
 aaaabqbrambsamamacacacanacacbtamovacacacacqkamaGacbuamacacacacacamaIaJacacacacacacHeacaEaKaLaaaaaaaa
 aaaaaaababababsQababababababababambxwMSzmPamamamaramamamacbyacamamamamacaxayazaAababacacacababaaaaaa

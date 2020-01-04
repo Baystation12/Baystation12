@@ -8,6 +8,32 @@
 		/obj/item/weapon/reagent_containers/food/condiment/sugar = 4,
 		/obj/item/weapon/reagent_containers/food/condiment/enzyme = 2
 	)
+/obj/structure/closet/secure_closet/freezer/kitchen/Initialize()
+	. = ..()
+	var/grown_list = list(\
+	"tomato" = 7,
+	"cherry" = 7,
+	"cocoa" = 5,
+	"lime" = 6,
+	"orange" = 6,
+	"lemon" = 6,
+	"rice" = 8,
+	"wheat" = 8,
+	"soybean" = 5,
+	"potato" = 8,
+	"banana" = 8,
+	"cabbage" = 6,
+	"grapes" = 6,
+	"mushrooms" = 6,
+	"apple" = 5,
+	"berries" = 5,
+	"blueberries" = 5,
+	"chili" = 6,
+	"icechili" = 4
+	)
+	for(var/name in grown_list)
+		for(var/i = 0,i < grown_list[name],i++)
+			contents += new /obj/item/weapon/reagent_containers/food/snacks/grown (src,name)
 
 /obj/structure/closet/secure_closet/freezer/kitchen/mining
 	req_access = list()
@@ -23,7 +49,7 @@
 
 /obj/structure/closet/secure_closet/freezer/meat/WillContain()
 	return list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey = 10
+		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey = 15
 	)
 
 /obj/structure/closet/secure_closet/freezer/fridge

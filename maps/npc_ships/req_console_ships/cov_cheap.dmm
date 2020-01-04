@@ -75,6 +75,7 @@
 "nm" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "nL" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "qq" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"AQ" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Ll" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Mv" = (/obj/machinery/light/covenant/north,/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "RF" = (/obj/vehicles/drop_pod/escape_pod/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -93,7 +94,7 @@ aaaaaaababababababababababababababaiaicZaiaiadadadadadaiaicZaiaibIadakadabababab
 aaaaaaabaiaiaicZaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiadapadaiaiaiaiadaqarasatababadadadababaaaaaa
 aaaaauavaiawaiaiadadadaxadadadaibmadadadaddfaiadadayaiadadadadadaiazaAadadadadadadqqadajaBaCaaaaaaaa
 aaaaaDaEaxadaFaiadaGaHaIaJadadaiaKaLaLaLaLadakadadaMaiaKadadadadakadadadaNadaOaPaQcZakaiaiaiaaaaaaaa
-aaaaaDaRaSadadakadaTaSadadaUadakadaVaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiaKaYaaaaaaaaaaaa
+aaaaaDaRaSadadakadaTaSadadaUadakadAQaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiaKaYaaaaaaaaaaaa
 aaaaaDaZajadbaaiadbbbcbdbeadadaiaKaLaLaLaLadakadadbfaiaKadadadadakadadadbgadaOaPaQcZakaiaiaiaaaaaaaa
 aaaabhbiaibjaiaiadadadajadadadailxadadadadYpaiadadbkaiadadadadadaiazaAadadadadadadLladaxaBaCaaaaaaaa
 aaaaaaababababfaababababababababaibnnLkbnmaiaiaiakaiaiaiadboadaiaiaiaiadaqarasatababadadadababaaaaaa

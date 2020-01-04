@@ -76,6 +76,7 @@
 "My" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "MI" = (/obj/structure/closet/crate/trashcart,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "MT" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
+"Ns" = (/obj/structure/table/steel,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "NK" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local{dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/obj/structure/computerframe{anchored = 1; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Pw" = (/obj/structure/bed/chair{dir = 2},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "PT" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -115,7 +116,7 @@ aaaaaalslslsqXqXqXqXZaqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXZaqXqXqXRkdMFb
 aaaaaarZEdXZEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsraKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOEdEdtDqXEdEdEdEdEdEdqXFcFcjUcNcNcNcNoZWthdhdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXZamAFcshaaaa
 aaaagEZQEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcdrFcFcFcqXhdPwPwPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcqXtzFcshaaaa
-aaaagEoSebgJqXfJEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyydZdZdZdZdZhRxoqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
+aaaagEoSebgJqXfJEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyyNsdZdZdZdZhRxoqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa
 aaaagEzZEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcvdFcFcFcqXhdHzHzHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcqXjWFcshaaaa
 aaaaDivoEdEdtDqXEdEdEdEdEdEdqXFcFccJojojojojTYWthdhdhdhdhdhdhdhdtshdhdhdqXhdVwhdqXqXMTqXZaolFcshaaaa
 aaaaaaGuEdIXEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsViUxlHkzRycysrceqXhdlbhdqXXihdhdhdhdhdhdMTFcFcshaaaa

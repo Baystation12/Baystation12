@@ -64,6 +64,7 @@
 "bm" = (/obj/docking_umbilical/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bo" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bp" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"bL" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "eh" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/structure/closet/crate/covenant{name = "Supraluminal Communications Equipment"},/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/card/id{desc = "Superluminal Communications Array Authentication Disk"; icon = 'code/modules/halo/covenant/Cards.dmi'; icon_state = "sangzealot_id"; name = "Superluminal Auth Disk."; tag = "icon-pinkGold"},/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "fh" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "mC" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -92,7 +93,7 @@ aaaaaaababababababababababababababaiaiPXaiaiadadadadadajadbaadadajadakadabababab
 aaaaaaabaiaiaiPXaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiaiPXaiaiaiaiaiadapaqarasababadadadababaaaaaa
 aaaaatauaiavaiaiadadadaeadadawaiboadadadadvjaiaxadayaiaiadazadaiaiaAaBadadadadadadFeadajaCaDaaaaaaaa
 aaaaaEaFaeadaGaiadaHaIaJaKadadaiafaLaLaLaLadakadadaMaiafadadadadakadadadaNadaOaPaQPXakaiaiaiaaaaaaaa
-aaaaaEaRaSadadakadaTaSadadaUadakadaVaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiafaYyWyWaaaaaaaa
+aaaaaEaRaSadadakadaTaSadadaUadakadbLaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiafaYyWyWaaaaaaaa
 aaaaaEaZajadbaaiadbbbcbdbeadadaiafaLaLaLaLadakadadbfaiafadadadadakadadadbgadaOaPaQPXakaiaiaiaaaaaaaa
 aaaabhbiaibjaiaiadadadajadadbkaiJRadadadadehaiaxadblaiaiadbmadaiaiaAaBadadadadadadyjadaeaCaDaaaaaaaa
 aaaaaaababababyCababababababababaibpmCfhrFaiaiaiakaiaiaiaiPXaiaiaiaiaiadapaqarasababadadadababaaaaaa
