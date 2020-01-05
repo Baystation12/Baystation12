@@ -284,7 +284,10 @@
 	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
 
-	if(s && isnull(H.internal_organs_by_name["stack"]))
+	if(s)
+		var/obj/current_lace = H.internal_organs_by_name["stack"]
+		if(current_lace)
+			qdel(current_lace)
 		H.internal_organs_by_name["stack"] = s
 		H.internal_organs += s
 		s.owner = H

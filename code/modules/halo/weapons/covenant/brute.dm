@@ -27,7 +27,7 @@
 /obj/item/weapon/grenade/frag/spike/get_lunge_dist(var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return 0
-	if(istype(user.species,/datum/species/brutes))
+	if(user.species.type == /datum/species/brutes)
 		return lunge_dist
 	else
 		return 0
@@ -80,7 +80,7 @@
 /obj/item/weapon/gun/projectile/spiker/get_lunge_dist(var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return 0
-	if(istype(user.species,/datum/species/brutes))
+	if(user.species.type == /datum/species/brutes)
 		return lunge_dist
 	else
 		return 0
@@ -149,7 +149,7 @@
 /obj/item/weapon/gun/projectile/mauler/get_lunge_dist(var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return 0
-	if(istype(user.species,/datum/species/brutes))
+	if(user.species.type == /datum/species/brutes)
 		return lunge_dist
 	else
 		return 0
@@ -255,7 +255,7 @@
 /obj/item/weapon/gun/launcher/grenade/brute_shot/get_lunge_dist(var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return 0
-	if(istype(user.species,/datum/species/brutes))
+	if(user.species.type == /datum/species/brutes)
 		return lunge_dist
 	else
 		return 0
