@@ -19,6 +19,7 @@
 	cold_protection = HEAD|FACE
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 1
+	flash_protection = FLASH_PROTECTION_MAJOR
 	armor = list(melee = 60,bullet = 75,laser = 50,energy = 55,bomb = 60,bio = 100,rad = 25)
 	species_restricted = list("Spartan")
 	armor_thickness = 30
@@ -26,6 +27,7 @@
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
+	unacidable = 1
 	on = 0
 	item_state_slots = list(slot_l_hand_str = "syndicate-helm-black", slot_r_hand_str = "syndicate-helm-black")
 
@@ -51,6 +53,7 @@
 	armor_thickness = 30
 	species_restricted = list("Spartan")
 	max_suitstore_w_class = ITEM_SIZE_HUGE
+	unacidable = 1
 
 	specials = list(/datum/armourspecials/shields/spartan,\
 		/datum/armourspecials/shieldmonitor,\

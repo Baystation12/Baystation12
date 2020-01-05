@@ -15,7 +15,7 @@
 		)
 
 /obj/machinery/diesel_generator/New()
-	..()
+	. = ..()
 	name = name + " #[rand(0,9)]"
 
 /*

@@ -35,8 +35,8 @@
 "aI" = (/obj/machinery/atmospherics/binary/pump/high_power/on{dir = 4; target_pressure = 15000},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
 "aJ" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 10},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
 "aK" = (/obj/machinery/atmospherics/binary/fusion_cooling,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
-"aL" = (/obj/structure/table/steel_reinforced,/obj/item/clothing/suit/straight_jacket,/obj/item/clothing/mask/muzzle,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
-"aM" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"aL" = (/obj/machinery/vending/boozeomat,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"aM" = (/obj/structure/table/steel_reinforced,/obj/item/clothing/suit/straight_jacket,/obj/item/clothing/mask/muzzle,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/obj/item/weapon/reagent_containers/food/snacks/tallista_spice,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/obj/item/weapon/handcuffs,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "aN" = (/obj/structure/closet/crate/radiation,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
 "aO" = (/obj/effect/decal/cleanable/fruit_smudge,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "aP" = (/obj/structure/drop_pod_launchbay,/obj/vehicles/drop_pod/overmap/boarding_pod,/turf/simulated/floor/tiled,/area/soe_argentum/portboardingpods)
@@ -50,7 +50,7 @@
 "aX" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/obj/item/trash/pistachios,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
 "aY" = (/obj/machinery/atmospherics/pipe/simple/visible/blue{dir = 5},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
 "aZ" = (/obj/machinery/atmospherics/binary/fusion_cooling{tag = "icon-cooling_manifold (WEST)"; icon_state = "cooling_manifold"; dir = 8},/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/soe_argentum/powercore)
-"ba" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Cell "; req_access = list(142)},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
+"ba" = (/obj/machinery/door/firedoor,/obj/machinery/door/airlock/halo{name = "Cell "; req_access = list(250)},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "bb" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/soe_argentum/engine)
 "bc" = (/obj/machinery/telecomms/relay/ship_relay{name = "Signal Relay"},/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/soe_argentum/engine)
 "bd" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
@@ -97,6 +97,7 @@
 "bS" = (/obj/structure/window/reinforced/treated,/obj/structure/cable/blue{icon_state = "1-4"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
 "bT" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
 "bU" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
+"bV" = (/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 1},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/machinery/squad_camera_console{icon_state = "camera_console"; dir = 8},/obj/item/squad_manager,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "bW" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "bX" = (/obj/docking_umbilical/east{name = "Argentum Docking Port"; pixel_x = 0},/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
 "bY" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/plating,/area/soe_argentum/powercore)
@@ -116,9 +117,9 @@
 "cm" = (/obj/structure/sign/neon/lovehotel,/turf/simulated/wall/r_wall,/area/soe_argentum/Messhall)
 "cn" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "co" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
-"cp" = (/obj/structure/table/standard,/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 1},/obj/item/weapon/paper_bin,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
-"cq" = (/obj/machinery/overmap_weapon_console/npc_comms_console/innie,/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 1},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
-"cr" = (/obj/machinery/overmap_weapon_console/deck_gun_control{control_tag = null; dir = 2; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "comm"; tag = "icon-comm (NORTH)"},/obj/structure/computerframe{tag = "icon-computer"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cp" = (/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 1},/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cq" = (/obj/structure/window/reinforced/treated{icon_state = "fwindow"; dir = 1},/obj/structure/closet/emcloset,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cr" = (/obj/structure/sign/monkey_painting{desc = "Rest in Peace Miggy...best Sons of Eridanus mascot we ever had...'"; name = "\improper Miggy's portrait"},/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
 "cs" = (/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
 "ct" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "cu" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
@@ -137,7 +138,7 @@
 "cH" = (/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "cI" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/computer/navigation{tag = "icon-engine"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"; dir = 8},/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "cJ" = (/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/obj/effect/landmark/start/commando_officer_spawn,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
-"cK" = (/obj/structure/bed/chair/comfy/captain{dir = 1; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (NORTH)"},/obj/effect/landmark/start/commando_officer_spawn,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cK" = (/obj/effect/landmark/start/commando_officer_spawn,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "cL" = (/obj/effect/landmark/start/commando_spawn,/obj/structure/bed,/obj/item/weapon/bedsheet/hos,/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "cM" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "cN" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/effect/decal/cleanable/dirt,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
@@ -151,7 +152,7 @@
 "cV" = (/obj/machinery/door/airlock/hatch,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "cW" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/plating,/area/soe_argentum/Messhall)
 "cX" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
-"cY" = (/obj/structure/table/standard,/obj/item/weapon/pen,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"cY" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "2-4"},/obj/machinery/overmap_weapon_console/npc_comms_console/innie,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "cZ" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "da" = (/obj/effect/landmark/start/commando_captain_spawn,/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "db" = (/obj/structure/cable/blue{icon_state = "1-4"},/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
@@ -171,7 +172,7 @@
 "dp" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
 "dq" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "dr" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
-"ds" = (/obj/docking_umbilical/east,/turf/simulated/wall/r_wall,/area/soe_argentum/engine)
+"ds" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/effect/floor_decal/carpet/corners,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "dt" = (/obj/machinery/optable,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
 "du" = (/obj/structure/table/steel_reinforced,/obj/machinery/power/apc{chargelevel = 0.001; dir = 1; name = "APC"; pixel_y = 24},/obj/structure/cable/blue{icon_state = "0-4"},/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun_soe,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/obj/item/clothing/accessory/storage/bandolier,/turf/simulated/floor/plating,/area/soe_argentum/Armory)
 "dv" = (/obj/structure/table/standard,/obj/item/weapon/tank/anesthetic,/obj/item/clothing/mask/breath/anesthetic,/obj/structure/table/standard,/obj/machinery/recharger,/turf/simulated/floor/tiled,/area/soe_argentum/Messhall)
@@ -179,9 +180,9 @@
 "dx" = (/turf/simulated/wall/r_wall,/area/soe_argentum/Armory)
 "dy" = (/obj/structure/sign/neon/armory,/turf/simulated/wall/r_wall,/area/soe_argentum/Armory)
 "dz" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
-"dA" = (/obj/structure/table/standard,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
-"dB" = (/obj/machinery/computer/engines{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 1},/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (NORTH)"},/obj/structure/window/reinforced/treated,/obj/structure/cable/blue,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
-"dC" = (/obj/structure/window/reinforced/treated,/obj/machinery/squad_camera_console{tag = "icon-camera_console (NORTH)"; icon_state = "camera_console"; dir = 1},/obj/item/squad_manager,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dA" = (/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 8},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/obj/machinery/computer/engines{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dB" = (/obj/structure/window/reinforced/treated,/obj/structure/cable/blue,/obj/structure/bed/chair/comfy/captain{dir = 8; icon_state = "capchair_preview"; name = "Bridge chair"; tag = "icon-capchair_preview (WEST)"},/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
+"dC" = (/obj/structure/window/reinforced/treated,/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/item/weapon/pen,/turf/simulated/floor/tiled,/area/soe_argentum/Bridge)
 "dD" = (/obj/structure/sign/poster,/turf/simulated/wall/r_wall,/area/soe_argentum/Bridge)
 "dE" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/plating,/area/soe_argentum/Bridge)
 "dF" = (/turf/simulated/wall/r_wall,/area/soe_argentum/storageroom)
@@ -332,14 +333,14 @@ eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUahahadadadadaiaicvaaaaaacvaiaiabajapalamanaoapapaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadadararasaaaaaaatarauabakavawayazaAaBaCaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadadaDadararaEaaaaaaaFararabakazaGaHaIaJaxaKacacacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaMaLaOadaParaQaaaRaaaSbkarabaNaUaVaWaXaYaZaTacbbbcacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaLaMaOadaParaQaaaRaaaSbkarabaNaUaVaWaXaYaZaTacbbbcacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadbdbebacFbhbibjadblaFaFbfbnbCaEaFblabbmbtbubrbsbrbtbtacbvbwbNaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadbybzbAbBbzbgbzfwbDaabEbFbGbFaaefaafxbHbtbIbJbtbtbtboacbxbwbwaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadbAbAadbLbMbqbgbObPbQbRbRbSbTbTbUbWabbKbtbYbZcacbccbpcecfcgchaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadcicjckfwcladcmadfwcncocpcqcrcsfyctcufzabcwcxabababcyabfAczacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadcicjckfwcladcmadfwcncobVcpcqcrfyctcufzabcwcxabababcyabfAczacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadcAcBcCcDadeQcGfacLadcHcocIcJcKdjcsctcHbWcMbWctcNbPbPbPcscPcQaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadcRcScTcUcVcWcWcWcWcVcXcocYcZdadbdcdddededededfcHbPbPbPcsacdgaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
-eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddhbzdiadcEdofadkadctdldmdncHfvcsctcHdpfucHctdqbPdrbPbXdscQaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadcRcScTcUcVcWcWcWcWcVcXcocYcZdadbdcdddsdedededfcHbPbPbPcsacdgaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
+eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddhbzdiadcEdofadkadctdldmdncHfvcsctcHdpfucHctdqbPdrbPbXaccQaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadaddtcddvfwdwdxdxdxdydzcodAdBdCdDfydEcufBdFdFdGdFdFdFdHdFfAdIacacaceUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadaddJdKdudMdNdOdedPdPeqdQbTdRdedSeHdUdVdUdWdXdYdZceeaebchaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU
 eUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUadadadadadedeeeeeefCeresereIeJeIerererfBdFdFegeheiejekelacemendLaqeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeUeU

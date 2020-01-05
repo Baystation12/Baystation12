@@ -17,6 +17,7 @@
 	var/overlay_layer
 	flags = OBJ_CLIMBABLE
 	clicksound = "keyboard"
+	ai_access_level = 3
 
 /obj/machinery/computer/New()
 	overlay_layer = layer

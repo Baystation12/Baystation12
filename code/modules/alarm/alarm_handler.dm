@@ -67,11 +67,11 @@
 	return 0
 
 /datum/alarm_handler/proc/on_alarm_change(var/datum/alarm/alarm, var/was_raised)
-	for(var/obj/machinery/camera/C in alarm.cameras())
+	/*for(var/obj/machinery/camera/C in alarm.cameras())
 		if(was_raised)
-			C.add_network(category)
+			C.set_network(category)
 		else
-			C.remove_network(category)
+			C.remove_network(category)*/
 	notify_listeners(alarm, was_raised)
 
 /datum/alarm_handler/proc/get_alarm_severity_for_origin(var/atom/origin)

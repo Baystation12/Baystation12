@@ -2,8 +2,8 @@
 
 proc/Intoxicated(phrase)
 	phrase = html_decode(phrase)
-	var/leng=lentext(phrase)
-	var/counter=lentext(phrase)
+	var/leng=length(phrase)
+	var/counter=length(phrase)
 	var/newphrase=""
 	var/newletter=""
 	while(counter>=1)
@@ -97,19 +97,19 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 	message = html_decode(message)
 	var/new_message = ""
 	var/input_size = length(message)
-	var/lentext = 0
+	var/length = 0
 	if(input_size < 20) // Short messages get distorted too. Bit hacksy.
 		distortion += (20-input_size)/2
-	while(lentext <= input_size)
-		var/newletter=copytext(message, lentext, lentext+1)
+	while(length <= input_size)
+		var/newletter=copytext(message, length, length+1)
 		if(!prob(distortion_chance))
 			new_message += newletter
-			lentext += 1
+			length += 1
 			continue
 		if(newletter != " ")
 			if(prob(0.08 * distortion)) // Major cutout
 				newletter = "*zzzt*"
-				lentext += rand(1, (length(message) - lentext)) // Skip some characters
+				length += rand(1, (length(message) - length)) // Skip some characters
 				distortion += 1 * distortion_speed
 			else if(prob(0.8 * distortion)) // Minor cut out
 				if(prob(25))
@@ -168,6 +168,6 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 		if(prob(20))
 			capitalize(newletter)
 		new_message += newletter
-		lentext += 1
+		length += 1
 	return new_message
 

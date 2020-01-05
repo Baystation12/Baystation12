@@ -26,6 +26,7 @@
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
 	flags_inv = HIDEEARS
+	unacidable = 1
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 50, rad = 25)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -82,6 +83,7 @@
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS
 	armor_thickness = 20
 	item_flags = THICKMATERIAL
+	unacidable = 1
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 

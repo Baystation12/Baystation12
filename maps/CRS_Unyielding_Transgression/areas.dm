@@ -74,7 +74,7 @@
 	icon_state = "shuttlegrn"
 
 /area/covenant_light_cruiser/dockingumbilicalstarboard
-	name = "CRS Unyielding Transgression Docking Umbilical Port"
+	name = "CRS Unyielding Transgression Docking Umbilical Starboard"
 	icon_state = "shuttlered"
 
 /area/covenant_light_cruiser/auxmedical
@@ -134,16 +134,3 @@
 /area/covenant_light_cruiser/boardcraft
 	name = "CRS Unyielding Transgression Boarding Craft Bay"
 	icon_state = "engine_port"
-
-//Weapon areas
-/area/covenant_light_cruiser/pulse_lasersstarboard
-	icon_state = "red"
-
-/area/covenant_light_cruiser/pulse_lasersport
-	icon_state = "bluenew"
-
-/area/covenant_light_cruiser/plastorpsport
-	icon_state = "yellow"
-
-/area/covenant_light_cruiser/plastorpsstarboard
-	icon_state = "green"

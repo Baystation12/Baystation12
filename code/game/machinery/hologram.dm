@@ -33,19 +33,19 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 
 /obj/machinery/hologram/holopad
 	name = "\improper AI holopad"
-	desc = "It's a floor-mounted device for projecting holographic images."
+	desc = "An old, outdated device for projecting AI holograms. Now obsolete."
 	icon_state = "holopad0"
 
 	plane = ABOVE_TURF_PLANE
 	layer = ABOVE_TILE_LAYER
-
+/*
 	var/power_per_hologram = 500 //per usage per hologram
 	idle_power_usage = 5
 	use_power = 1
 
 	var/list/mob/living/silicon/ai/masters = new() //List of AIs that use the holopad
 	var/last_request = 0 //to prevent request spam. ~Carn
-	var/holo_range = 5 // Change to change how far the AI can move away from the holopad before deactivating.
+	var/holo_range = 250 // Change to change how far the AI can move away from the holopad before deactivating.
 
 	var/incoming_connection = 0
 	var/mob/living/caller_id
@@ -134,7 +134,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 
 /obj/machinery/hologram/holopad/check_eye(mob/user)
 	return 0
-
+/*
 /obj/machinery/hologram/holopad/attack_ai(mob/living/silicon/ai/user)
 	if (!istype(user))
 		return
@@ -147,8 +147,8 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 		activate_holo(user)
 	else//If there is a hologram, remove it.
 		clear_holo(user)
-	return
-
+	return*/
+/*
 /obj/machinery/hologram/holopad/proc/activate_holo(mob/living/silicon/ai/user)
 	if(!(stat & NOPOWER) && user.eyeobj && user.eyeobj.loc == src.loc)//If the projector has power and client eye is on it
 		if (user.holo)
@@ -159,7 +159,7 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 	else
 		to_chat(user, "<span class='danger'>ERROR:</span> Unable to project hologram.")
 	return
-
+*/
 /obj/machinery/hologram/holopad/proc/activate_holocall(mob/living/carbon/caller_id)
 	if(caller_id)
 		src.visible_message("A holographic image of [caller_id] flicks to life right before your eyes!")
@@ -235,9 +235,6 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		hologram.overlays += getHologramIcon(icon(tempicon)) // Add the callers image as an overlay to keep coloration!
 	else
 		hologram.overlays += A.holo_icon // Add the AI's configured holo Icon
-	if(A)
-		if(A.holo_icon_malf == TRUE)
-			hologram.overlays += icon("icons/effects/effects.dmi", "malf-scanline")
 	hologram.mouse_opacity = 0//So you can't click on it.
 	hologram.plane = ABOVE_HUMAN_PLANE
 	hologram.layer = ABOVE_HUMAN_LAYER //Above all the other objects/mobs. Or the vast majority of them.
@@ -385,7 +382,7 @@ Holographic project of everything else.
 	desc = "It makes a hologram appear...with magnets or something..."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "hologram0"
-
+*/
 
 #undef RANGE_BASED
 #undef AREA_BASED

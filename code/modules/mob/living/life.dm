@@ -31,11 +31,16 @@
 		handle_stomach()
 
 		. = 1
+
 	else if(timeofdeath && (world.time - timeofdeath < 150))
 		//This is to make dead people process reagents for a few ticks, so they can be treated and defibrilated
 		handle_chemicals_in_body()
 
 		. = 1
+
+	if(stat != 0 && elevation > 0)
+		visible_message("[name] is unable to support their flight and falls to the ground!")
+		change_elevation(-elevation)
 
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
@@ -166,7 +171,7 @@
 	else if(ear_damage < 25)
 		adjustEarDamage(-0.05, -1)	// having ear damage impairs the recovery of ear_deaf
 	else if(ear_damage < 100)
-		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100. TODO meds that heal ear_damage
+		adjustEarDamage(-0.05, 0)	// deafness recovers slowly over time, unless ear_damage is over 100.
 
 
 //this handles hud updates. Calls update_vision() and handle_hud_icons()

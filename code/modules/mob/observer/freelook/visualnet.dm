@@ -166,6 +166,7 @@
 				call(c, proc_call)(arglist(proc_args))
 
 // Debug verb for VVing the chunk that the turf is in.
+/*
 /turf/proc/view_chunk()
 	set name = "View Chunk"
 	set category = "Debug"
@@ -183,3 +184,4 @@
 	if(cameranet.is_chunk_generated(x, y, z))
 		var/datum/chunk/chunk = cameranet.get_chunk(x, y, z)
 		chunk.visibility_changed(TRUE)
+*/

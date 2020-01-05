@@ -26,6 +26,40 @@
 	if(stat)
 		return
 
+	if(stunned > 0)
+		to_chat(src,"<span class = 'warning'>You are stunned and cannot act!</span>")
+		return
+
+	if(prepped_command && prepped_command.is_target_valid(A))
+		if(prepped_command.working)
+			to_chat(src,"<span class = 'notice'>You are already sending a command.</span>")
+			return
+		prepped_command.working = 1
+		to_chat(src,"<span class = 'notice'>Sending command \[[prepped_command.name]\] [prepped_command.requires_target ? "to [A.name]" : ""]</span>")
+		if(prepped_command.do_alert)
+			do_network_alert("Datastream intercept: [name] is preparing \[[prepped_command.name]\][prepped_command.requires_target ? ", targeting [A.name] at [A.loc.loc.name]" : ""].")
+		if(do_after(src,prepped_command.command_delay,eyeobj,needhand = 0,same_direction = 1))
+			if(prepped_command)
+				prepped_command.send_command(A)
+				to_chat(src,"<span class = 'notice'>Prepared command \[[prepped_command.name]\] [prepped_command.requires_target ? "sent to [A.name]." : ""]</span>")
+			else
+				to_chat(src,"<span class = 'notice'>ERROR: Command has been nulled.</span>")
+
+		if(prepped_command) //Some commands auto-clear once sent.
+			prepped_command.working = 0
+
+
+	if(A.ai_access_level > 0 && check_access_level(A) < A.ai_access_level)
+		to_chat(src,"<span class = 'notice'>Insufficient access level in local area to access this machinery.</span>")
+		return
+
+	if(console_operating)
+		if(!istype(A,/turf/unsimulated/map) && !istype(A,/obj/effect/overmap))
+			cancel_camera()
+			console_operating = null
+		else
+			console_operating.fire(A,src)
+
 	var/list/modifiers = params2list(params)
 	if(modifiers["shift"] && modifiers["ctrl"])
 		CtrlShiftClickOn(A)
@@ -67,7 +101,11 @@
 	else
 	*/
 	A.add_hiddenprint(src)
-	A.attack_ai(src)
+	if(A.ai_access_cost > 0)
+		if(spend_cpu(ai_access_cost))
+			A.attack_ai(src)
+	else
+		A.attack_ai(src)
 
 /*
 	AI has no need for the UnarmedAttack() and RangedAttack() procs,
@@ -183,7 +221,7 @@
 //
 
 /mob/living/silicon/ai/TurfAdjacent(var/turf/T)
-	return (cameranet && cameranet.is_turf_visible(T))
+	return (our_visualnet && our_visualnet.is_turf_visible(T))
 
 /mob/living/silicon/ai/face_atom(var/atom/A)
 	if(eyeobj)

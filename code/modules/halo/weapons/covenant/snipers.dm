@@ -17,6 +17,7 @@
 	irradiate_non_cov = 10
 	accuracy = 2
 	wielded_item_state = "carbine-wielded"
+	advanced_covenant = 1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -60,8 +61,10 @@
 	one_hand_penalty = -1
 	irradiate_non_cov = 15
 	wielded_item_state = "beamrifle-wielded"
-	accuracy = -1
+	fire_delay = 10
+	accuracy = -5
 	scoped_accuracy = 7
+	advanced_covenant = 1
 
 	var/next_allowed_fire
 
@@ -118,6 +121,7 @@
 	one_hand_penalty = -1
 	accuracy = 2
 	wielded_item_state = "needlerifle-wielded"
+	advanced_covenant = 1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

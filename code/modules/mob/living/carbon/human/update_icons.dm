@@ -8,9 +8,12 @@ var/global/list/human_icon_cache = list()
 var/global/list/tail_icon_cache = list() //key is [species.race_key][r_skin][g_skin][b_skin]
 var/global/list/light_overlay_cache = list()
 
-/proc/overlay_image(icon,icon_state,color,flags)
+/proc/overlay_image(var/icon,var/icon_state,var/color,var/flags,var/offset = list(0,0))
 	var/image/ret = image(icon,icon_state)
 	ret.color = color
+	if(offset[1] != 0 || offset[2] != 0)
+		ret.pixel_x = offset[1]
+		ret.pixel_y = offset[2]
 	ret.appearance_flags = flags
 	return ret
 
@@ -608,10 +611,37 @@ var/global/list/damage_icon_parts = list()
 		if(hud_used)
 			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
 
+/mob/living/carbon/human/get_mob_offset_for(var/obj/item/a)
+	var/obj/item/clothing/c = a
+	if(istype(a,/obj/item/clothing) && (species.get_bodytype(src) in c.species_restricted))
+		if (!("exclude" in c.species_restricted)) // are they included?
+			return list(0,0)//Already modified for them, let's not apply any more modifications.
+	if(species.get_bodytype(src) in a.sprite_sheets)
+		return list(0,0) //Custom sprite sheet, let's not apply offsets.
 
-/mob/living/carbon/human/proc/apply_hand_offsets(var/image/image)
-	image.pixel_x = species.item_icon_offsets[1]
-	image.pixel_y = species.item_icon_offsets[2]
+	. = species.item_icon_offsets[dir]
+	if(isnull(.))
+		return list(0,0)
+
+/mob/living/carbon/human/proc/apply_hand_offsets(var/image/image,var/right_hand = 0)
+	var/list/offset_list = species.item_icon_offsets[dir]
+	if(isnull(offset_list))
+		return
+	var/extra_mod_x = 0
+	switch(dir)
+		if(NORTH)
+			if(r_hand)
+				extra_mod_x = -species.pixel_offset_x/2
+			else
+				extra_mod_x = species.pixel_offset_x/2
+		if(SOUTH)
+			if(!r_hand)
+				extra_mod_x = -species.pixel_offset_x/2
+			else
+				extra_mod_x = species.pixel_offset_x/2
+
+	image.pixel_x += offset_list[1] + extra_mod_x
+	image.pixel_y += offset_list[2]
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
 	if(handcuffed)
@@ -623,7 +653,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_r_hand(var/update_icons=1)
 	if(r_hand)
 		var/image/standing = r_hand.get_mob_overlay(src,slot_r_hand_str)
-		apply_hand_offsets(standing)
+		apply_hand_offsets(standing,1)
 		if(standing)
 			standing.appearance_flags |= RESET_ALPHA
 		overlays_standing[R_HAND_LAYER] = standing
@@ -638,7 +668,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/update_inv_l_hand(var/update_icons=1)
 	if(l_hand)
 		var/image/standing = l_hand.get_mob_overlay(src,slot_l_hand_str)
-		apply_hand_offsets(standing)
+		apply_hand_offsets(standing,0)
 		if(standing)
 			standing.appearance_flags |= RESET_ALPHA
 		overlays_standing[L_HAND_LAYER] = standing

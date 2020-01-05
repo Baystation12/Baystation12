@@ -33,7 +33,7 @@
 
 
 /obj/machinery/body_scanconsole/covenant/New()
-	..()
+	. = ..()
 	spawn( 5 )
 		src.connected = locate(/obj/machinery/bodyscanner/covenant, get_step(src, WEST))
 		return

@@ -7,6 +7,7 @@
 	var/global/global_uid = 0
 	var/uid
 	var/list/mobs_in_area = list()
+	var/obj/structure/ai_routing_node/ai_routing_node = null
 
 /area/New()
 	icon_state = ""

@@ -127,6 +127,8 @@
 	var/blinded = null
 	var/ear_deaf = null		//Carbon
 
+	var/datum/visualnet/our_visualnet
+
 //The last mob/living/carbon to push/drag/grab this mob (mostly used by slimes friend recognition)
 	var/mob/living/carbon/LAssailant = null
 

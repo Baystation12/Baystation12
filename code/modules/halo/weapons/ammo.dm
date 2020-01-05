@@ -24,7 +24,7 @@
 	projectile_type = /obj/item/projectile/bullet/a127_saphe
 
 /obj/item/projectile/bullet/a127_saphe
-	damage = 50		//deadly but inaccurate
+	damage = 70		//deadly but inaccurate
 	accuracy = -1
 
 /obj/item/projectile/bullet/a127
@@ -163,7 +163,7 @@
 	penetrating = 0
 
 /obj/item/projectile/bullet/a762_M392
-	damage = 40
+	damage = 30
 	armor_penetration = 45
 
 /obj/item/weapon/storage/box/m762_ap
@@ -259,7 +259,7 @@
 	projectile_type = /obj/item/projectile/bullet/a145_ap/tracerless
 
 /obj/item/projectile/bullet/a145_ap
-	damage = 80
+	damage = 60
 	step_delay = 0.1
 	penetrating = 5
 	armor_penetration = 65
@@ -267,10 +267,12 @@
 	tracer_delay_time = 2 SECONDS
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
-	damage = 75
+	damage = 50
 	armor_penetration = 70
 	tracer_type = null
 	tracer_delay_time = null
+	pin_range = 3
+	pin_chance = 70
 
 /obj/effect/projectile/srs99
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'

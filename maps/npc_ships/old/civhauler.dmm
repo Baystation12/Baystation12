@@ -1,0 +1,262 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/obj/structure/lattice,/turf/space,/area/space)
+"ac" = (/obj/structure/lattice,/turf/simulated/wall/r_wall,/area/om_ships/hauler)
+"ad" = (/turf/simulated/wall/r_wall,/area/om_ships/hauler)
+"ae" = (/obj/docking_umbilical/north{name = "Port Cargo Umbilical"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"af" = (/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 2; frequency = 1379; id_tag = "solar_tool_pump"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "solar_tool_sensor"; pixel_x = 25; pixel_y = 12},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{tag_airpump = "solar_tool_pump"; tag_exterior_door = "solar_tool_outer"; frequency = 1379; id_tag = "solar_tool_airlock"; tag_interior_door = "solar_tool_inner"; pixel_x = 25; req_access = list(13); tag_chamber_sensor = "solar_tool_sensor"},/obj/effect/decal/warning_stripes,/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ag" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_tool_inner"; locked = 1; name = "Starboard Cargo Airlock"; req_access = list(11,13)},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ah" = (/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ai" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aj" = (/obj/structure/ore_box,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ak" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"al" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/button/toggle/door{desc = "A remote control switch for docking airlock."; name = "Dock interior access button"; pixel_x = -25; pixel_y = 25},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"am" = (/obj/effect/decal/warning_stripes,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"an" = (/obj/effect/decal/warning_stripes,/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock{name = "Starboard Cargo"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ao" = (/obj/structure/ore_box,/obj/item/stack/material/iron,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ap" = (/obj/structure/ore_box,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aq" = (/obj/structure/closet/crate,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ar" = (/obj/structure/ore_box,/obj/item/stack/material/glass,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"as" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"at" = (/turf/simulated/wall,/area/om_ships/hauler)
+"au" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"av" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aw" = (/obj/structure/closet/crate,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ax" = (/obj/vehicle/train/cargo/trolley,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ay" = (/obj/structure/closet/crate,/obj/random/toolbox,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"az" = (/obj/random/toolbox,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aA" = (/obj/structure/closet/crate,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aB" = (/obj/structure/closet/crate,/obj/item/stack/material/glass,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aC" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aD" = (/obj/effect/decal/warning_stripes,/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aE" = (/obj/structure/ore_box,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/obj/item/stack/material/iron,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aF" = (/obj/structure/closet/crate,/obj/random/tool,/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aG" = (/obj/structure/closet/crate,/obj/random/tech_supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aH" = (/obj/structure/window/reinforced/full,/obj/machinery/door/firedoor/border_only,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aI" = (/obj/structure/closet/crate,/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aJ" = (/obj/structure/closet/cabinet,/obj/random/handgun,/obj/random/tool,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aK" = (/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aL" = (/obj/structure/bed,/obj/item/weapon/book/manual/evaguide,/obj/effect/landmark/ship_captain_ghost_spawn,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aM" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aN" = (/obj/structure/closet/secure_closet/freezer/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/obj/item/weapon/reagent_containers/food/snacks/meat,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aO" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aP" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aQ" = (/obj/structure/table/steel,/obj/item/trash/plate,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aR" = (/obj/item/weapon/material/kitchen/utensil/fork,/obj/structure/table/steel,/obj/item/trash/plate,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aS" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aT" = (/obj/structure/closet/crate,/obj/random/action_figure,/obj/random/action_figure,/obj/random/action_figure,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aU" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aV" = (/obj/effect/decal/warning_stripes,/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"aW" = (/obj/structure/bookcase{name = "bookcase (Reference)"},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aX" = (/obj/structure/closet/secure_closet/captains,/obj/item/weapon/storage/fancy/cigar,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aY" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"aZ" = (/obj/structure/table/steel,/obj/random/single{icon = 'icons/obj/drinks.dmi'; icon_state = "cola"; name = "randomly spawned cola"; spawn_nothing_percentage = 50; spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"ba" = (/obj/structure/bed/chair{dir = 8},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bb" = (/obj/machinery/light/small,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bc" = (/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bd" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"be" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bf" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bg" = (/obj/structure/table/steel,/obj/item/weapon/storage/fancy/cigar,/obj/random/action_figure,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bh" = (/obj/structure/closet/emcloset,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bi" = (/obj/structure/table/steel,/obj/item/weapon/material/kitchen/utensil/knife,/obj/random/single{icon = 'icons/obj/drinks.dmi'; icon_state = "cola"; name = "randomly spawned cola"; spawn_nothing_percentage = 50; spawn_object = /obj/item/weapon/reagent_containers/food/drinks/cans/cola},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bj" = (/obj/machinery/door/airlock{name = "Starboard Cargo #1"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bk" = (/obj/machinery/door/airlock{name = "Starboard Cargo #2"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bl" = (/obj/machinery/computer/station_alert,/turf/simulated/floor,/area/om_ships/hauler)
+"bm" = (/obj/machinery/computer/crew,/turf/simulated/floor,/area/om_ships/hauler)
+"bn" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bo" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bp" = (/obj/structure/table/steel,/obj/machinery/microwave,/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bq" = (/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,/obj/effect/decal/warning_stripes,/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"br" = (/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bs" = (/obj/machinery/portable_atmospherics/canister/air,/obj/effect/decal/warning_stripes,/obj/machinery/atmospherics/portables_connector,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bt" = (/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,/obj/effect/decal/warning_stripes,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bu" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bv" = (/obj/machinery/portable_atmospherics/canister/empty/nitrogen,/obj/effect/decal/warning_stripes,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bw" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/food/snacks/cracker,/obj/machinery/light{dir = 1},/turf/simulated/floor,/area/om_ships/hauler)
+"bx" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"by" = (/obj/structure/cable{d1 = 2; d2 = 4; icon_state = "2-4"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bz" = (/obj/machinery/door/airlock/command{name = "Captain's Quarters"; req_access = newlist()},/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/om_ships/hauler)
+"bA" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bB" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bC" = (/obj/structure/bed/chair/comfy/black{dir = 8},/obj/item/weapon/cigbutt/cigarbutt,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bD" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bE" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bF" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bG" = (/obj/machinery/vending/snack,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bH" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bI" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bJ" = (/obj/machinery/atmospherics/pipe/simple/visible/red{tag = "icon-intact (NORTHEAST)"; icon_state = "intact"; dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bK" = (/obj/machinery/atmospherics/pipe/manifold/visible/red{dir = 4; icon_state = "map"; tag = "icon-map (WEST)"},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bL" = (/obj/random/tool,/obj/machinery/atmospherics/pipe/simple/hidden/universal{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bM" = (/obj/machinery/atmospherics/binary/pump{dir = 8},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bN" = (/obj/machinery/atmospherics/pipe/manifold/visible/green,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bO" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 9; icon_state = "intact"; tag = "icon-intact (SOUTHEAST)"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bP" = (/obj/vehicle/train/cargo/engine,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bQ" = (/obj/item/modular_computer/console,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bR" = (/obj/item/weapon/cigbutt/cigarbutt,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bS" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bT" = (/obj/structure/cable,/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"bU" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/glass{name = "Diner"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor,/area/om_ships/hauler)
+"bV" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bW" = (/obj/machinery/atmospherics/pipe/simple/hidden/universal,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bX" = (/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bY" = (/obj/machinery/atmospherics/unary/vent_pump/on,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"bZ" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ca" = (/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/power/apc/super/critical,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cb" = (/obj/machinery/atmospherics/unary/heater{dir = 2},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cc" = (/obj/structure/window/reinforced{dir = 8},/obj/machinery/atmospherics/pipe/manifold/visible/black{dir = 8},/turf/simulated/floor/airless,/area/om_ships/hauler)
+"cd" = (/obj/machinery/atmospherics/unary/engine{dir = 8},/turf/space,/area/om_ships/hauler)
+"ce" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 5},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cf" = (/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cg" = (/obj/machinery/door/airlock/glass_command{id_tag = "sbridgedoor"; name = "Bridge"; req_access = newlist()},/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/om_ships/hauler)
+"ch" = (/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/om_ships/hauler)
+"ci" = (/obj/machinery/light{dir = 1},/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/om_ships/hauler)
+"cj" = (/obj/structure/cable,/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,/turf/simulated/floor,/area/om_ships/hauler)
+"ck" = (/obj/machinery/light{dir = 1},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/turf/simulated/floor,/area/om_ships/hauler)
+"cl" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{dir = 1},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/turf/simulated/floor,/area/om_ships/hauler)
+"cm" = (/obj/machinery/door/airlock{name = "Power and armos access"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor,/area/om_ships/hauler)
+"cn" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"co" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cp" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cq" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/manifold/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cr" = (/obj/machinery/door/airlock{name = "Cargo Access"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cs" = (/obj/effect/decal/warning_stripes,/obj/structure/cable,/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ct" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/structure/cable,/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cu" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/manifold/hidden/supply{dir = 1},/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cv" = (/obj/machinery/door/airlock{name = "Thurst Engine Access"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 4; d2 = 8; icon_state = "4-8"; pixel_x = 0},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cw" = (/obj/structure/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cx" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 9},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cy" = (/obj/machinery/atmospherics/pipe/manifold/visible/black{dir = 8},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cz" = (/obj/structure/window/reinforced{dir = 8},/obj/machinery/atmospherics/pipe/manifold4w/visible/black,/turf/simulated/floor/airless,/area/om_ships/hauler)
+"cA" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cB" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/glass{name = "Dormitory"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor{icon_state = "neutral"; dir = 4},/area/om_ships/hauler)
+"cC" = (/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock{name = "Head"},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor,/area/om_ships/hauler)
+"cD" = (/obj/machinery/door/airlock/glass_medical{name = "Medbay"; req_one_access = newlist()},/obj/machinery/door/firedoor/border_only{dir = 2},/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor,/area/om_ships/hauler)
+"cE" = (/obj/machinery/power/smes,/obj/effect/decal/warning_stripes,/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/structure/cable,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cF" = (/obj/structure/closet/crate,/obj/item/stack/material/phoron,/obj/item/stack/material/phoron,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cG" = (/obj/structure/closet/crate,/obj/item/stack/material/phoron,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cH" = (/obj/structure/closet/crate,/obj/item/stack/material/steel,/obj/item/stack/material/glass,/obj/item/stack/material/glass,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cI" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cJ" = (/obj/structure/closet/secure_closet/engineering_personal,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cK" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 1},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cL" = (/obj/machinery/atmospherics/binary/pump{dir = 1},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cM" = (/obj/structure/table/steel,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/om_ships/hauler)
+"cN" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cO" = (/obj/machinery/vending/wallmed1{pixel_x = 25},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cP" = (/obj/structure/table/steel,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cQ" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cR" = (/obj/machinery/light{dir = 1},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cS" = (/obj/structure/cable,/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cT" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/structure/mirror{pixel_x = -25},/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cU" = (/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cV" = (/obj/structure/table/steel,/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"cW" = (/obj/structure/cable/yellow{d2 = 2; icon_state = "0-2"},/obj/structure/cable/yellow{d2 = 4; icon_state = "0-4"},/obj/structure/cable/yellow,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cX" = (/obj/structure/cable/yellow{d1 = 2; d2 = 8; icon_state = "2-8"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cY" = (/obj/machinery/portable_atmospherics/canister/air,/obj/effect/decal/warning_stripes,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"cZ" = (/obj/structure/table/steel,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"da" = (/obj/machinery/portable_atmospherics/canister/empty/nitrogen,/obj/machinery/atmospherics/portables_connector{dir = 1},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"db" = (/obj/machinery/computer/station_alert,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dc" = (/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dd" = (/obj/structure/closet,/obj/random/single{icon = 'icons/obj/items.dmi'; icon_state = "lighter-g"; name = "randomly spawned lighter"; spawn_nothing_percentage = 50; spawn_object = /obj/item/weapon/flame/lighter},/obj/random/tool,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"de" = (/obj/structure/closet,/obj/random/contraband,/obj/random/toolbox,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"df" = (/obj/structure/closet,/obj/random/tool,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dg" = (/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dh" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"di" = (/obj/machinery/power/port_gen/pacman,/obj/effect/decal/warning_stripes,/obj/structure/cable/yellow,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dj" = (/obj/structure/table/standard,/obj/random/powercell,/obj/item/stack/material/phoron,/obj/machinery/light/small,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dk" = (/obj/structure/table/standard,/obj/item/weapon/storage/toolbox/electrical,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dl" = (/obj/structure/table/standard,/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dm" = (/obj/structure/table/steel,/obj/random/tool,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dn" = (/obj/structure/bed,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"do" = (/obj/structure/toilet{dir = 4},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dp" = (/obj/machinery/door/airlock{name = "Toilet"},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dq" = (/obj/structure/closet/secure_closet/medical1,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dr" = (/obj/machinery/door/airlock{name = "Port Cargo #1"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ds" = (/obj/machinery/door/airlock{name = "Port Cargo #2"},/obj/machinery/door/firedoor/border_only,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dt" = (/obj/structure/closet,/obj/random/contraband,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"du" = (/obj/structure/closet,/obj/random/ammo,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dv" = (/obj/structure/closet,/obj/random/single{icon = 'icons/obj/items.dmi'; icon_state = "lighter-g"; name = "randomly spawned lighter"; spawn_nothing_percentage = 50; spawn_object = /obj/item/weapon/flame/lighter},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dw" = (/obj/structure/table/steel,/obj/random/medical,/obj/random/medical,/obj/random/medical,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dx" = (/obj/vehicle/train/cargo/engine,/obj/structure/cable{icon_state = "0-4"; d2 = 4},/obj/machinery/atmospherics/unary/vent_scrubber/on{dir = 4},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dy" = (/obj/effect/decal/warning_stripes,/obj/structure/cable,/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/structure/cable{icon_state = "0-2"; d2 = 2},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 9},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dz" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 5},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dA" = (/obj/structure/bed,/obj/random/plushie,/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dB" = (/obj/machinery/shower{dir = 4; icon_state = "shower"; pixel_x = 0; pixel_y = -3},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dC" = (/obj/machinery/door/airlock{name = "Shower"},/turf/simulated/floor/tiled,/area/om_ships/hauler)
+"dD" = (/obj/structure/closet/crate,/obj/item/stack/material/plastic{amount = 10},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dE" = (/obj/structure/ore_box,/obj/item/stack/material/plastic,/obj/item/stack/material/plastic,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dF" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dG" = (/obj/effect/decal/warning_stripes,/obj/machinery/atmospherics/unary/vent_pump/on{dir = 1},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dH" = (/obj/structure/closet/crate,/obj/item/stack/material/plastic,/obj/item/stack/material/plastic,/obj/item/stack/material/plastic,/obj/item/stack/material/plastic,/obj/item/stack/material/plastic,/obj/item/stack/material/plastic,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dI" = (/obj/structure/closet/crate,/obj/item/stack/material/plastic,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dJ" = (/obj/structure/closet/crate,/obj/item/stack/material/steel,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dK" = (/obj/structure/ore_box,/obj/item/stack/material/wood,/obj/item/stack/material/wood,/obj/item/stack/material/wood,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dL" = (/obj/structure/closet/crate,/obj/random/contraband,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dM" = (/obj/structure/ore_box,/obj/item/stack/material/wood,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dN" = (/obj/structure/ore_box,/obj/item/stack/material/steel,/obj/item/stack/material/steel,/obj/item/stack/material/steel,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dO" = (/obj/structure/closet/crate,/obj/item/stack/material/uranium,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dP" = (/obj/structure/closet/crate,/obj/random/contraband,/obj/random/contraband,/obj/random/contraband,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dQ" = (/obj/structure/closet/crate,/obj/random/firstaid,/obj/random/firstaid,/obj/random/firstaid,/obj/random/firstaid,/obj/random/firstaid,/obj/random/firstaid,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dR" = (/obj/structure/closet/crate,/obj/item/stack/material/silver,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dS" = (/obj/structure/closet/crate,/obj/item/stack/material/platinum,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dT" = (/obj/structure/closet/crate,/obj/random/handgun,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dU" = (/obj/structure/ore_box,/obj/item/stack/material/diamond,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dV" = (/obj/effect/decal/warning_stripes,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/button/toggle/door{desc = "A remote control switch for docking airlock."; name = "Dock interior access button"; pixel_x = -25; pixel_y = -25},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dW" = (/obj/effect/decal/warning_stripes,/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock{name = "Port Cargo"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dX" = (/obj/structure/closet/crate,/obj/random/medical,/obj/random/medical,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dY" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_xeno_inner"; locked = 1; name = "Port Cargo Airlock"; req_access = list(11,13)},/obj/machinery/atmospherics/pipe/simple/visible,/obj/structure/cable{d1 = 1; d2 = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+"dZ" = (/obj/machinery/embedded_controller/radio/airlock/airlock_controller{tag_airpump = "solar_xeno_pump"; tag_exterior_door = "solar_xeno_outer"; frequency = 1379; id_tag = "solar_xeno_airlock"; tag_interior_door = "solar_xeno_inner"; pixel_x = 25; req_access = list(13); tag_chamber_sensor = "solar_xeno_sensor"},/obj/machinery/airlock_sensor{frequency = 1379; id_tag = "solar_xeno_sensor"; pixel_x = 25; pixel_y = 12},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 1; frequency = 1379; id_tag = "solar_xeno_pump"},/obj/effect/decal/warning_stripes,/obj/structure/cable,/turf/simulated/floor/plating,/area/om_ships/hauler)
+"ea" = (/obj/docking_umbilical/south{name = "Starboard Cargo Umbilical"},/turf/simulated/floor/plating,/area/om_ships/hauler)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababadaeadababababababababababababaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadaaaaaaaaaaaaadafadaaaaaaaaaaaaaaaaaaaaadadaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadadagadadadadadadadadadadadadadadadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahahahaiajajakahahahalamanamahaoaoaoaiapapaoahaoahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahahaqajaiarahahahahasahatamahahapaiaoaiaoaiahahaoadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadauahahahaqahahahaqahasahatamahahahahahapahaqahahavadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahaiahawahahaxahahahasahatamahahayahahahahahaxahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahahaiahahahahahahahasahatamahahahahaqazaqahahahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahaAahaBahahaqahaqahasaCataDahaoaEahahahahahahahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahahahahahaiahahahahasahatamahahahaiahaqaqahahahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaqahaFahaqahahahaqahasahatamahahaGaiahaqaqahahahahadaaaaaa
+aaaaaaaaaaaaaaadadaHadadadadadadadadadadadauahahahahahaIahahahasahatamahahahahahaqaqahaqahavadaaaaaa
+aaaaaaaaaaaaaaadaJaKaLadaMaMaNaOaPaQaRaSadahahaTaiaiaiahahahahaUahataVahahaoahahahahahahahahadaaaaaa
+aaaaaaaaaaaaaaadaWaKaXadaYaKaKaKaPaZaQbaadahahahaiaiaibbahahbcbdahatbebfahahbbahahahahahahahadaaaaaa
+aaaaababadaHadadbgaKbhadbiaKaKaKaKaKaKaKadatatatatatatatatatatbjatatbkatatatatatatatatatatatadaaaaaa
+aaaaabadadblbmadbnaKboadbpaKaKaKaKaKaKaKadbqbqakbrbsbsatbtbtakbuaxaxbuahaqahakahahahatbvbvbvadaaaaaa
+aaaaadadbwbxbybzbAbBbCadbDbEaKaKbFbGbHbIadbJbKbLbMbNbOatbtbtahbubPahbuahahahahahaqahatbvbvbvadaaaaaa
+aaaaaHbQbRbSbTadadadadadbUatatatatatatatadbVbWahbXbYahatbZahahbuahbXbuahahahahahaqahatcabYcbcccdaaaa
+aaaaaHbQaScecfcgchcichchcjchchchckchchclcmcncocpcocqcpcrcscpcpctcpcuctcpcpcpcpcpcpcpcvcwcxcyczcdaaaa
+aaaaaHbQaKcAaKadatatatatcBatatatcCatatcDadcEahcFcGcHcGatahahahbuahcIbuahahahaxahahahatcJcKcLcccdaaaa
+aaaaadadcMcNcOadcPcQaKcRcSatcTcUcSatcVcSadcWcXahahahahatcYcYahbuahahbuaxahbPahahaxahatcZahdaadaaaaaa
+aaaaabadaddbdcadddaKdeaKdfatatatdgatbxdhaddididjdkdlcJatcYcYbbbuahahbuahaxahbbahahahatdmahahadaaaaaa
+aaaaababadaHadaddnaKdnaKdnatdodpaKatdqaKadatatatatatatatatatatdratatdsatatatatatatatatatatatadaaaaaa
+aaaaaaaaaaaaaaaddtaKduaKdvatatataKatdwaKadahahahahahahakahaxdxdyahatdzbfahahakahahahahahahahadaaaaaa
+aaaaaaaaaaaaaaaddnaKdnaKdAatdBdCaKatdnaKadahdDahahdEahahahahahdFahatdGahahahaiahahahaGahahahadaaaaaa
+aaaaaaaaaaaaaaadadadadadadadadadadadadadadauahdHdIahahdJahahahasahatamahdKaGdLahdMdMaGahahavadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadayahaiahaiahahahdNahasahatamahdMaqaqahdMdKaqahaqahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahahdOahaiaIahdJahahasahatamahahahahahahahahahahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahaxahaqahdPahahahahasaCataDahahaqahahaqaqcGcGahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahahahahahahahdQahahasahatamahahahahaiaqaqaqaqahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahahaiaiaqahahahahahasahatamahdRahaxahaqaqaqdSahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadauaqaiaiaiaiahahahahasahatamahahahahahahaiaiahahavadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahdTahaiaiaiahaqahahasahatamahaiahahaqaqaiaiahahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadahdUahaiaiaibbaqahahdVamdWamahahahbbdXaqahahahahahadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadadadadadadaddYadadadadadadadadadadadadadadadaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadaaaaaaaaaaaaaddZadaaaaaaaaaaaaaaaaaaaaadadaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababadeaadababababababababababababaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

@@ -4,7 +4,7 @@
 	var/obj/machinery/repulsor_engine/nozzle
 
 /datum/ship_engine/repulsor/New(var/obj/machinery/_holder)
-	..()
+	. = ..()
 	nozzle = _holder
 
 /datum/ship_engine/repulsor/Destroy()
@@ -40,7 +40,7 @@
 /obj/machinery/repulsor_engine
 	name = "repulsor engine"
 	desc = "A sophisticated gravitic drive that allows great speed and maneuvrability."
-	icon = 'repulsor.dmi'
+	icon = 'code/modules/halo/covenant/repulsor.dmi'
 	icon_state = "off"
 	anchored = 1
 	use_power = 1

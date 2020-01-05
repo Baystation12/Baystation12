@@ -29,6 +29,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	var/reporter_loc //Used for REPORT_CASUALTY
 
 /datum/npc_report/New(var/type,var/reporter,var/report_obj_target,var/num_targets,var/reporter_assault,var/reporter_location)
+	. = ..()
 	report_type = type
 	reporter_mob = reporter
 	if(report_obj_target)
@@ -264,7 +265,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 /obj/structure/overmind_controller/Initialize()
 	controlling_overmind =  flood_overmind
-	GLOB.processing_objects += flood_overmind
+	GLOB.processing_objects |= flood_overmind
 	flood_overmind.overmind_active = 1
 	flood_overmind.reports.Cut() //We're likely activating the overmind here. Cut all previous reports out, they're likely outdated.
 	. = ..()

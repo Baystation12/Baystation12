@@ -30,7 +30,7 @@
 
 /obj/item/projectile/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
-	empulse(impacted,0,1)
+	empulse(impacted.loc,0,1)
 
 /obj/item/projectile/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
@@ -44,7 +44,7 @@
 /obj/item/projectile/covenant/beamrifle
 	name = "energy beam"
 	desc = ""
-	damage = 75
+	damage = 55
 	armor_penetration = 65
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
@@ -162,7 +162,7 @@
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
-	damage = 45
+	damage = 40
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"

@@ -37,7 +37,6 @@
 	desc = "A battery full of plasma used to power the energy projector"
 	icon = 'code/modules/halo/overmap/weapons/plasma_cannon.dmi'
 	icon_state = "drained"
-	charge_time = 20
 
 /obj/machinery/overmap_weapon_console/mac/energy_projector
 	name = "Energy Fire Control"
@@ -91,6 +90,10 @@
 					F.ChangeTurf(glassed_turf_use)
 			else
 				F.ChangeTurf(glassed_turf_use)
+			for(var/atom/a in F.contents)
+				F.Entered(a,F) //Make the lava do it's thing, then just delete it.
+				if(a)
+					qdel(a)
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	if(initial(kill_count) - kill_count > 1)
@@ -113,7 +116,7 @@
 	icon_state = ""
 	alpha = 0
 	damage = 900
-	penetrating = 3
+	penetrating = 2
 	step_delay = 0.0 SECONDS
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj
@@ -135,10 +138,12 @@
 
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
+	if(!.)
+		return
 	if(isnull(glass_effect_beam))
 		glass_effect_beam = new
 	explosion(a,2,3,4,5, adminlog = 0)
-	glass_effect_beam.do_glassing_effect(a,2,/turf/unsimulated/floor/lava/glassed_turf/to_space)
+	glass_effect_beam.do_glassing_effect(a,1,/turf/unsimulated/floor/lava/glassed_turf/to_space)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

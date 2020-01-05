@@ -143,6 +143,13 @@
 	item_state = "unsc-dress-uniform-obj"
 	worn_state = "unsc-dress-uniform"
 
+/obj/item/clothing/under/unsc/dress/admiral
+	name = "UNSC Navy Admiral Uniform"
+	desc = "A formal uniform known to be worn by admrials."
+	icon_state = "unsc-admiral-uniform-obj"
+	item_state = "unsc-admiral-uniform-obj"
+	worn_state = "unsc-admiral-uniform"
+
 /obj/item/clothing/shoes/dress/unsc
 	name = "UNSC Navy Dress Shoes"
 	desc = "A pair of clean dress shoes."

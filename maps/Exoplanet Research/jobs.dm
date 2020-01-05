@@ -10,6 +10,7 @@
 	access = list(310,311)
 	spawnpoint_override = "Research Facility Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
@@ -24,6 +25,7 @@
 	access = list(310,311)
 	spawnpoint_override = "Research Facility Director Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
@@ -38,6 +40,7 @@
 	access = list(311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
@@ -49,8 +52,9 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/facil_ONIGUARDS
 	selection_color = "#008000"
-	access = list(311)
+	access = list(310,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE

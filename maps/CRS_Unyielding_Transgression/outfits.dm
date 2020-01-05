@@ -1,3 +1,16 @@
+/decl/hierarchy/outfit/huragok_cov
+	name = "Huragok"
+
+/decl/hierarchy/outfit/huragok_cov/equip(mob/living/carbon/human/H, var/rank, var/assignment)
+	. = ..()
+	var/turf/h_loc = H.loc
+	var/mob/living/silicon/robot/huragok/huragok = new(h_loc)
+	huragok.faction = "Covenant"
+	huragok.ckey = H.ckey
+	huragok.Login()
+	qdel(H)
+	return 1
+
 /decl/hierarchy/outfit/kigyarcorvette
 	name = "Kig-Yar Corvette Crew"
 
@@ -6,6 +19,7 @@
 	suit = /obj/item/clothing/suit/armor/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
+	l_hand = /obj/item/weapon/melee/blamite/dagger
 
 	flags = 0
 
@@ -48,7 +62,7 @@ Transmission-For the purpose of resource acquisition and organisation infiltrati
 	belt = /obj/item/ammo_magazine/type51mag
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
-	r_hand = /obj/item/weapon/melee/energy/sword/pirate
+	l_hand = /obj/item/weapon/melee/blamite/cutlass
 
 	flags = 0
 

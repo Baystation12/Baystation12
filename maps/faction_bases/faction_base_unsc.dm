@@ -1,8 +1,6 @@
 
-#include "faction_base.dm"
-
 /* UNSC BASE */
-
+/*
 /obj/effect/overmap/ship/faction_base/unsc
 	name = "Deviance Station"
 	icon_state = "base_unsc"
@@ -10,7 +8,7 @@
 	defense_type = /obj/effect/overmap/ship/npc_ship/automated_defenses/unsc
 	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsclightbrigade)
 	base = 1
-
+*/
 GLOBAL_LIST_EMPTY(unsc_base_spawns)
 
 /datum/spawnpoint/unsc_base
@@ -40,7 +38,7 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 	..()
 	GLOB.unsc_base_spawns += loc
 
-
+/*
 /area/faction_base/unsc_defense_platform
 	name = "UNSC Defense Platform"
 	icon_state = "firingrange"
@@ -48,3 +46,4 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 /area/faction_base/unsc_shuttle
 	name = "UNSC Shuttle"
 	icon_state = "shuttle"
+*/

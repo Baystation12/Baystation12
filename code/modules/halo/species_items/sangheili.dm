@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 #define SANGHEILI_BLEEDBLOCK_CHANCE 50
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
+	. = ..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
@@ -58,6 +58,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	species_restricted = list("Sangheili")
 	body_parts_covered = HEAD
 	item_flags = THICKMATERIAL
+	unacidable = 1
 	armor = list(melee = 40,bullet = 20,laser = 40,energy = 5,bomb = 30,bio = 0,rad = 0) //Slightly higher bullet resist than Spartan helmets. Lower laser, energy and melee.
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant/sangheili
@@ -73,6 +74,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
 	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 55, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
 	armor_thickness_modifiers = list()
+	unacidable = 1
 	allowed = list(/obj/item/weapon/melee/energy/elite_sword, /obj/item/weapon/grenade/plasma, /obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle)
 
 /obj/item/clothing/shoes/sangheili
@@ -200,7 +202,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 			return 1
 	return 0
 
-/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_lunge_dist(var/mob/living/carbon/human/mob)
 	return 2
 
 /obj/item/weapon/melee/energy/elite_sword/g_dagger/dropped()
@@ -415,6 +417,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	icon_state = "ranger_chest_obj"
 	item_state = "ranger_chest"
 	totalshields = 100
+	armor = list(melee = 70, bullet = 60, laser = 55, energy = 55, bomb = 50, bio = 25, rad = 25)
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -462,7 +465,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		return
 	for(var/obj/item/organ/external/e in owner.bad_external_organs)
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
-			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
+			e.clamp_organ() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
 			w.damage -= 0.1
 

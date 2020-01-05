@@ -26,6 +26,12 @@
 	owner.visible_message("<span class='danger'>\The [owner] pulls the trigger reflexively!</span>")
 	var/obj/item/weapon/gun/G = aiming_with
 	if(istype(G))
-		var/gun_shoot_time = (G.burst - 1)* G.burst_delay
-		owner.setMoveCooldown(max(1,(3*(gun_shoot_time/4)))) //Allows for movement near the end of the burst but mostly holds the player in one spot.
 		G.Fire(aiming_at, owner)
+		locked = 0 //Reset our aim lock, and make our gun delay a bit higher.
+		var/to_add = 35
+		if(G.lock_time > 0)
+			to_add = G.lock_time
+
+		lock_time = world.time + to_add
+		G.next_fire_time += to_add
+		update_aiming()

@@ -5,6 +5,7 @@
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_hand = /obj/item/weapon/melee/blamite/dagger
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher
 	shoes = /obj/item/clothing/shoes/skirmisher
@@ -16,6 +17,7 @@
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/major
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_hand = /obj/item/weapon/melee/blamite/dagger
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/major
 	shoes = /obj/item/clothing/shoes/skirmisher/major
@@ -27,6 +29,7 @@
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/murmillo
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_hand = /obj/item/weapon/melee/blamite/dagger
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/murmillo
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets
@@ -38,6 +41,8 @@
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/commando
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_hand = /obj/item/language_learner/unggoy_to_common
+	r_hand = /obj/item/weapon/melee/blamite/cutlass
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/commando
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando
@@ -49,6 +54,7 @@
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/champion
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_hand = /obj/item/weapon/melee/blamite/dagger
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/champion
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets/champion

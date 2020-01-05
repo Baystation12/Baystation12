@@ -1,4 +1,4 @@
-/datum/computer_file/program/camera_monitor/hacked
+/*/datum/computer_file/program/camera_monitor/hacked
 	filename = "camcrypt"
 	filedesc = "Camera Decryption Tool"
 	nanomodule_path = /datum/nano_module/camera_monitor/hacked
@@ -34,4 +34,4 @@
 	networks.Add(list(list("tag" = NETWORK_MERCENARY, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_ERT, "has_access" = 1)))
 	networks.Add(list(list("tag" = NETWORK_CRESCENT, "has_access" = 1)))
-	return networks
+	return networks*/

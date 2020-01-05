@@ -13,6 +13,7 @@ var/list/points_of_interest = list()
 	icon = 'icons/obj/overmap.dmi'
 	icon_state = "object"
 	dir = 1
+	ai_access_level = 0
 	var/list/map_z = list()
 	var/list/map_z_data = list()
 	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
@@ -113,6 +114,78 @@ var/list/points_of_interest = list()
 
 	my_faction = GLOB.factions_by_name[faction]
 
+/obj/effect/overmap/proc/play_jump_sound(var/sound_loc_origin,var/sound)
+	var/list/mobs_to_sendsound = list()
+	mobs_to_sendsound += GLOB.mobs_in_sectors[src]
+	for(var/obj/effect/overmap/om in range(SLIPSPACE_JUMPSOUND_RANGE,sound_loc_origin))
+		mobs_to_sendsound |= GLOB.mobs_in_sectors[om]
+	for(var/mob/m in mobs_to_sendsound)
+		playsound(m,sound,100)
+
+/obj/effect/overmap/proc/send_jump_alert(var/alert_origin)
+	var/list/mobs_to_alert = list()
+	mobs_to_alert += GLOB.mobs_in_sectors[src]
+	for(var/obj/effect/overmap/om in range(SLIPSPACE_JUMP_ALERT_RANGE,alert_origin))
+		mobs_to_alert |= GLOB.mobs_in_sectors[om]
+	var/list/dirlist = list("north","south","n/a","east","northeast","southeast","n/a","west","northwest","southwest")
+	for(var/mob/m in mobs_to_alert)
+		var/dir_to_ship = get_dir(map_sectors["[m.z]"],alert_origin)
+		if(dir_to_ship != 0)
+			to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[dir_to_ship]]</span>")
+
+
+/obj/effect/overmap/proc/do_slipspace_exit_effects(var/exit_loc,var/sound)
+	var/obj/effect/overmap/ship/om_ship = src
+	if(istype(om_ship))
+		om_ship.speed = list(0,0)
+
+	var/headingdir = dir
+	var/turf/T = exit_loc
+	//Below code should flip the dirs.
+	T = get_step(T,headingdir)
+	headingdir = get_dir(T,exit_loc)
+	T = exit_loc
+	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
+		T = get_step(T,headingdir)
+	new /obj/effect/slipspace_rupture(T)
+	if(sound)
+		play_jump_sound(exit_loc,sound)
+	send_jump_alert(exit_loc)
+	loc = T
+	walk_to(src,exit_loc,0,1,0)
+	spawn(SLIPSPACE_PORTAL_DIST)
+		walk_to(src,null)
+
+/obj/effect/overmap/proc/do_slipspace_enter_effects(var/sound)
+	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS, MODIFIED.//
+	var/obj/effect/overmap/ship/om_ship = src
+	if(istype(om_ship))
+		om_ship.speed = list(0,0)
+		om_ship.break_umbilicals()
+	//animate the slipspacejump
+	var/headingdir = dir
+	var/turf/T = loc
+	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
+		T = get_step(T,headingdir)
+	new /obj/effect/slipspace_rupture(T)
+	if(sound)
+		play_jump_sound(T,sound)
+	//rapidly move into the portal
+	walk_to(src,T,0,1,0)
+	spawn(SLIPSPACE_PORTAL_DIST)
+		loc = null
+		walk_to(src,null)
+
+/obj/effect/overmap/proc/slipspace_to_location(var/turf/location,var/target_status,var/sound)
+	do_slipspace_exit_effects(location,sound)
+	if(!isnull(target_status))
+		slipspace_status = 0
+
+/obj/effect/overmap/proc/slipspace_to_nullspace(var/target_status,sound)
+	do_slipspace_enter_effects(sound)
+	if(!isnull(target_status))
+		slipspace_status = target_status
+
 /obj/effect/overmap/proc/generate_targetable_areas()
 	if(isnull(parent_area_type))
 		return
@@ -163,7 +236,8 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.overmap_z && GLOB.using_map.use_overmap)
 		build_overmap()
 
-	map_z |= loc.z
+	if(!isnull(loc))
+		map_z |= loc.z
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
 	map_sectors["[z]"] = src
@@ -258,6 +332,7 @@ var/list/points_of_interest = list()
 	for(var/mob/player in GLOB.mobs_in_sectors[src])
 		player.dust()
 	loc = null
+
 	message_admins("NOTICE: Overmap object [src] has been destroyed. Please wait as it is deleted.")
 	log_admin("NOTICE: Overmap object [src] has been destroyed.")
 	sleep(10)//To allow the previous message to actually be seen

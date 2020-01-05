@@ -978,7 +978,7 @@
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 
 /obj/item/clothing/suit/justice/zeal/New()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/zeal

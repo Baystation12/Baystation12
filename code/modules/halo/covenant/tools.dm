@@ -89,6 +89,15 @@
 		"Tvaoan Kig-Yar" = null,\
 		"Sangheili" = null\
 		)
+/obj/item/weapon/storage/belt/covenant/full/New()
+	. = ..()
+	new /obj/item/weapon/screwdriver/covenant(src)
+	new /obj/item/weapon/wrench/covenant(src)
+	new /obj/item/weapon/weldingtool/covenant(src)
+	new /obj/item/weapon/crowbar/covenant(src)
+	new /obj/item/weapon/wirecutters/covenant(src)
+	new /obj/item/device/multitool/covenant(src)
+	new /obj/item/stack/cable_coil(src,30,pick("red","yellow","orange"))
 
 /obj/item/weapon/cell/covenant
 	name = "covenant power cell"
@@ -117,7 +126,7 @@
 	item_state = "toolbox_red"
 
 /obj/item/weapon/storage/toolbox/covenant_emg/New()
-	..()
+	. = ..()
 	new /obj/item/weapon/crowbar/covenant(src)
 	var/item = pick(list(/obj/item/device/flashlight/covenant, /obj/item/device/flashlight/glowstick/blue))
 	new item(src)
@@ -130,7 +139,7 @@
 	item_state = "toolbox_blue"
 
 /obj/item/weapon/storage/toolbox/covenant_mech/New()
-	..()
+	. = ..()
 	new /obj/item/weapon/screwdriver/covenant(src)
 	new /obj/item/weapon/wrench/covenant(src)
 	new /obj/item/weapon/weldingtool/covenant(src)
@@ -145,7 +154,7 @@
 	item_state = "toolbox_yellow"
 
 /obj/item/weapon/storage/toolbox/covenant_elec/New()
-	..()
+	. = ..()
 	new /obj/item/weapon/screwdriver/covenant(src)
 	new /obj/item/weapon/wirecutters/covenant(src)
 	new /obj/item/device/t_scanner(src)

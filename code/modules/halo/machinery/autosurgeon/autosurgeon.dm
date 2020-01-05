@@ -3,7 +3,7 @@
 	name = "autosurgeon"
 	desc = "An advanced piece of machinery for automatically patching up external physical ailments."
 	icon = 'autosurgeon.dmi'
-	icon_state = "autosurgeon0"
+	icon_state = "code/modules/halo/machinery/autosurgeon/autosurgeon0"
 	density = 1
 	anchored = 1
 	var/icon_state_base = "autosurgeon"

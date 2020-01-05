@@ -113,7 +113,7 @@
 	var/list/valid_exit_locs = list()
 	for(var/turf/t in locs)
 		for(var/turf/t_2 in range(1,t))
-			if(!(t_2 in locs))
+			if(!(t_2 in locs) && t_2.density == 0)
 				valid_exit_locs |= t
 				break
 	if(valid_exit_locs.len == 0)
@@ -233,7 +233,7 @@
 
 	occupants += user
 	occupants[user] = position
-	user.loc = contents
+	user.forceMove(src)
 	contents += user
 	update_object_sprites()
 	update_user_view(user)
@@ -340,7 +340,7 @@
 		var/list/mobs = list()
 		for(var/mob/m in occupants)
 			mobs += m
-		if(!mobs)
+		if(mobs.len == 0)
 			return
 		mob_to_dam = pick(mobs)
 		if(!isnull(mob_to_dam))

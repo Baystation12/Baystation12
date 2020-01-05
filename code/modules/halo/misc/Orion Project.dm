@@ -1,6 +1,6 @@
 //Should add in Orion Project Race
 /mob/living/carbon/human/Orion/New(var/new_loc)
-	..(new_loc,"Orion")
+	. = ..(new_loc,"Orion")
 
 /obj/item/clothing/shoes/swat/theta
 	name = "Orion Boots"

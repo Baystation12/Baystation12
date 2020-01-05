@@ -54,7 +54,6 @@ var/global/list/robot_modules = list(
 
 	R.module = src
 
-	add_camera_networks(R)
 	add_languages(R)
 	add_subsystems(R)
 	apply_status_flags(R)
@@ -69,7 +68,6 @@ var/global/list/robot_modules = list(
 		I.canremove = 0
 
 /obj/item/weapon/robot_module/proc/Reset(var/mob/living/silicon/robot/R)
-	remove_camera_networks(R)
 	remove_languages(R)
 	remove_subsystems(R)
 	remove_status_flags(R)
@@ -143,19 +141,19 @@ var/global/list/robot_modules = list(
 	for(var/original_language in original_languages)
 		R.add_language(original_language, original_languages[original_language])
 	original_languages.Cut()
-
+/*
 /obj/item/weapon/robot_module/proc/add_camera_networks(var/mob/living/silicon/robot/R)
-	if(R.camera && (NETWORK_ROBOTS in R.camera.network))
+	if(R.camera && (NETWORK_ROBOTS == R.camera.network))
 		for(var/network in networks)
 			if(!(network in R.camera.network))
-				R.camera.add_network(network)
+				R.camera.set_network(network)
 				added_networks |= network
 
 /obj/item/weapon/robot_module/proc/remove_camera_networks(var/mob/living/silicon/robot/R)
 	if(R.camera)
 		R.camera.remove_networks(added_networks)
 	added_networks.Cut()
-
+*/
 /obj/item/weapon/robot_module/proc/add_subsystems(var/mob/living/silicon/robot/R)
 	for(var/subsystem_type in subsystems)
 		R.init_subsystem(subsystem_type)

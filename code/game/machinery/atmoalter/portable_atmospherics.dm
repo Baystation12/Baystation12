@@ -12,6 +12,7 @@
 	var/start_pressure = ONE_ATMOSPHERE
 	var/maximum_pressure = 90 * ONE_ATMOSPHERE
 	flags = OBJ_CLIMBABLE
+	ai_access_level = 3
 
 /obj/machinery/portable_atmospherics/New()
 	..()

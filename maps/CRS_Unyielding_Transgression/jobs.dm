@@ -8,6 +8,22 @@
 	create_record = 0
 	latejoin_at_spawnpoints = 1
 
+/datum/job/covenant/huragok
+	title = "Covenant Huragok"
+	total_positions = 2
+	spawn_positions = 2
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/huragok_cov
+
+/datum/job/covenant/AI
+	title = "Covenant AI"
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#80080"
+	outfit_type = /decl/hierarchy/outfit/halo_ai_smart
+	//faction_whitelist = "Covenant" //Uncomment this once testing is done.
+	whitelisted_species = list()
+
 /datum/job/covenant/lesser_prophet
 	title = "Lesser Prophet"
 	department_flag = COM
@@ -129,8 +145,8 @@
 
 /datum/job/covenant/skirmmurmillo
 	title = "T-Voan Murmillo"
-	total_positions = 1
-	spawn_positions = 1
+	total_positions = 2
+	spawn_positions = 2
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo
 	access = list(240,250)
@@ -221,3 +237,41 @@
 	access = list(230,250)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
+
+/datum/job/covenant/yanmee_minor
+	title = "Yanme e Minor"
+	total_positions = -1
+	spawn_positions = -1
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/yanmee/minor
+	access = list(230,250)
+	whitelisted_species = list(/datum/species/yanmee)
+
+/datum/job/covenant/yanmee_major
+	title = "Yanme e Major"
+	total_positions = 4
+	spawn_positions = 4
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/yanmee/major
+	access = list(230,250)
+	whitelisted_species = list(/datum/species/yanmee)
+
+/datum/job/covenant/yanmee_ultra
+	title = "Yanme e Ultra"
+	total_positions = 2
+	spawn_positions = 2
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/yanmee/ultra
+	faction_whitelist = "Covenant"
+	access = list(230,250)
+	whitelisted_species = list(/datum/species/yanmee)
+
+/datum/job/covenant/yanmee_leader
+	title = "Yanme e Leader"
+	total_positions = 1
+	spawn_positions = 1
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/yanmee/leader
+	faction_whitelist = "Covenant"
+	access = list(230,250)
+	whitelisted_species = list(/datum/species/yanmee)

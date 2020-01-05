@@ -7,11 +7,12 @@
 
 /datum/armourspecials/cloaking/limited/New(var/obj/item/source_item)
 	source_item.action_button_name = "Toggle Active Camouflage"
+	. = ..()
 
 /datum/armourspecials/cloaking/limited/activate_cloak(var/voluntary = 1)
 	if(current_charge >= max_charge * 0.25)
 		last_process_time = world.time
-		GLOB.processing_objects += src
+		GLOB.processing_objects |= src
 		to_chat(usr,"<span class='notice'>Current cloak charge: [100*current_charge/max_charge]%.</span>")
 		return ..()
 	else

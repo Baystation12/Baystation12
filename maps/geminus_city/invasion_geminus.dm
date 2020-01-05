@@ -2,15 +2,15 @@
 #include "../npc_ships/om_ship_areas.dm"
 #include "../area_holders/overmap_ship_area_holder.dmm"
 
-#include "../faction_bases/ODP_Cassius/ODP_Cassius.dm"
-
-#include "../Exoplanet Research/includes.dm"
+#include "../Exoplanet Research/Exoplanet Research Ice/includes.dm"
 
 #include "../Admin Planet/includes.dm"
 
 #include "../UNSC_Halberd_Class/includes.dm"
 
-#include "../ONI_Prowler/includes.dm"
+#include "../ONI_Prowler/outfits.dm"
+
+#include "../ONI_Prowler/jobs.dm"
 
 #include "../SOE_Argentum/includes.dm"
 
@@ -18,7 +18,7 @@
 
 #include "../CRS_Unyielding_Transgression/includes.dm"
 
-#include "innie_overmap.dm"
+#include "../urf_flagship/includes.dm"
 
 #include "invasion_geminus_jobdefs.dm"
 #include "invasion_geminus_unit_tests.dm"

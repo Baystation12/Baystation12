@@ -209,6 +209,8 @@
 			return global.all_languages;
 		if("all_money_accounts")
 			return global.all_money_accounts;
+		if("all_networks")
+			return global.all_networks;
 		if("all_objectives")
 			return global.all_objectives;
 		if("all_robolimbs")
@@ -257,6 +259,8 @@
 			return global.assistant_occupations;
 		if("atmosphere_alarm")
 			return global.atmosphere_alarm;
+		if("atom_despawner")
+			return global.atom_despawner;
 		if("attack_log_repository")
 			return global.attack_log_repository;
 		if("autolathe_categories")
@@ -297,10 +301,6 @@
 			return global.camera_range_display_status;
 		if("camera_repository")
 			return global.camera_repository;
-		if("cameranet")
-			return global.cameranet;
-		if("cameranet_")
-			return global.cameranet_;
 		if("can_call_ert")
 			return global.can_call_ert;
 		if("captain_announcement")
@@ -677,8 +677,6 @@
 			return global.magazine_icondata_states;
 		if("maint_all_access")
 			return global.maint_all_access;
-		if("malf")
-			return global.malf;
 		if("mannequins_")
 			return global.mannequins_;
 		if("map_count")
@@ -919,8 +917,6 @@
 			return global.req_console_supplies;
 		if("responsive_carriers")
 			return global.responsive_carriers;
-		if("restricted_camera_networks")
-			return global.restricted_camera_networks;
 		if("revdata")
 			return global.revdata;
 		if("revs")
@@ -1438,6 +1434,8 @@
 			global.all_languages=newval;
 		if("all_money_accounts")
 			global.all_money_accounts=newval;
+		if("all_networks")
+			global.all_networks=newval;
 		if("all_objectives")
 			global.all_objectives=newval;
 		if("all_robolimbs")
@@ -1486,6 +1484,8 @@
 			global.assistant_occupations=newval;
 		if("atmosphere_alarm")
 			global.atmosphere_alarm=newval;
+		if("atom_despawner")
+			global.atom_despawner=newval;
 		if("attack_log_repository")
 			global.attack_log_repository=newval;
 		if("autolathe_categories")
@@ -1526,10 +1526,6 @@
 			global.camera_range_display_status=newval;
 		if("camera_repository")
 			global.camera_repository=newval;
-		if("cameranet")
-			global.cameranet=newval;
-		if("cameranet_")
-			global.cameranet_=newval;
 		if("can_call_ert")
 			global.can_call_ert=newval;
 		if("captain_announcement")
@@ -1906,8 +1902,6 @@
 			global.magazine_icondata_states=newval;
 		if("maint_all_access")
 			global.maint_all_access=newval;
-		if("malf")
-			global.malf=newval;
 		if("mannequins_")
 			global.mannequins_=newval;
 		if("map_count")
@@ -2148,8 +2142,6 @@
 			global.req_console_supplies=newval;
 		if("responsive_carriers")
 			global.responsive_carriers=newval;
-		if("restricted_camera_networks")
-			global.restricted_camera_networks=newval;
 		if("revdata")
 			global.revdata=newval;
 		if("revs")
@@ -2562,6 +2554,7 @@
 	"all_grabstates",
 	"all_languages",
 	"all_money_accounts",
+	"all_networks",
 	"all_objectives",
 	"all_robolimbs",
 	"all_species",
@@ -2586,6 +2579,7 @@
 	"assigned_blocks",
 	"assistant_occupations",
 	"atmosphere_alarm",
+	"atom_despawner",
 	"attack_log_repository",
 	"autolathe_categories",
 	"autolathe_recipes",
@@ -2606,8 +2600,6 @@
 	"camera_alarm",
 	"camera_range_display_status",
 	"camera_repository",
-	"cameranet",
-	"cameranet_",
 	"can_call_ert",
 	"captain_announcement",
 	"cargo_positions",
@@ -2796,7 +2788,6 @@
 	"magazine_icondata_keys",
 	"magazine_icondata_states",
 	"maint_all_access",
-	"malf",
 	"mannequins_",
 	"map_count",
 	"map_datas",
@@ -2917,7 +2908,6 @@
 	"req_console_information",
 	"req_console_supplies",
 	"responsive_carriers",
-	"restricted_camera_networks",
 	"revdata",
 	"revs",
 	"robot_custom_icons",

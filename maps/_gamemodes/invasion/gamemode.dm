@@ -4,10 +4,9 @@
 	config_tag = "outer_colonies"
 	round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
-	required_players = 0 //Temp until
+	required_players = 15
 	probability = 1
-	var/faction_safe_time = 10 MINUTES
-	var/faction_safe_duration = 10 MINUTES
+	ship_lockdown_duration = 10 MINUTES
 	var/safe_expire_warning = 0
 	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection)
 	var/list/overmap_hide = list()
@@ -46,10 +45,10 @@
 		/datum/objective/overmap/covenant_ship,\
 		/datum/objective/protect/leader,\
 		/datum/objective/glass_colony,\
-		///datum/objective/retrieve/steal_ai,
+		//datum/objective/retrieve/steal_ai,
 		/datum/objective/retrieve/nav_data,\
 		/datum/objective/overmap/covenant_unsc_ship,
-		/datum/objective/overmap/covenant_odp,
+		//datum/objective/overmap/covenant_odp,
 		//datum/objective/colony_capture/cov,
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
@@ -69,7 +68,6 @@
 		/datum/objective/overmap/unsc_innie_base)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
-	GLOB.UNSC.base_desc = "Orbital Defence Platform"
 
 	//setup innie objectives
 	objective_types = list(\
@@ -97,7 +95,6 @@
 
 /datum/game_mode/outer_colonies/post_setup(var/announce = 0)
 	. = ..()
-	faction_safe_time = world.time + faction_safe_duration
 	for(var/datum/faction/F in factions)
 		for(var/datum/objective/objective in F.objectives_without_targets)
 			if(objective.find_target())

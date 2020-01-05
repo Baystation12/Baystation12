@@ -53,17 +53,17 @@
 		return 1
 
 	if(href_list["add_ion_law"])
-		if(ion_law && is_malf(usr))
+		if(ion_law)
 			owner.add_ion_law(ion_law)
 		return 1
 
 	if(href_list["add_inherent_law"])
-		if(inherent_law && is_malf(usr))
+		if(inherent_law)
 			owner.add_inherent_law(inherent_law)
 		return 1
 
 	if(href_list["add_supplied_law"])
-		if(supplied_law && supplied_law_position >= 1 && MIN_SUPPLIED_LAW_NUMBER <= MAX_SUPPLIED_LAW_NUMBER && is_malf(usr))
+		if(supplied_law && supplied_law_position >= 1 && MIN_SUPPLIED_LAW_NUMBER <= MAX_SUPPLIED_LAW_NUMBER)
 			owner.add_supplied_law(supplied_law_position, supplied_law)
 		return 1
 
@@ -98,20 +98,18 @@
 		return 1
 
 	if(href_list["edit_law"])
-		if(is_malf(usr))
-			var/datum/ai_law/AL = locate(href_list["edit_law"]) in owner.laws.all_laws()
-			if(AL)
-				var/new_law = sanitize(input(usr, "Enter new law. Leaving the field blank will cancel the edit.", "Edit Law", AL.law))
-				if(new_law && new_law != AL.law && is_malf(usr) && can_still_topic())
-					log_and_message_admins("has changed a law of [owner] from '[AL.law]' to '[new_law]'")
-					AL.law = new_law
-			return 1
+		var/datum/ai_law/AL = locate(href_list["edit_law"]) in owner.laws.all_laws()
+		if(AL)
+			var/new_law = sanitize(input(usr, "Enter new law. Leaving the field blank will cancel the edit.", "Edit Law", AL.law))
+			if(new_law && new_law != AL.law && can_still_topic())
+				log_and_message_admins("has changed a law of [owner] from '[AL.law]' to '[new_law]'")
+				AL.law = new_law
+		return 1
 
 	if(href_list["delete_law"])
-		if(is_malf(usr))
-			var/datum/ai_law/AL = locate(href_list["delete_law"]) in owner.laws.all_laws()
-			if(AL && is_malf(usr))
-				owner.delete_law(AL)
+		var/datum/ai_law/AL = locate(href_list["delete_law"]) in owner.laws.all_laws()
+		if(AL)
+			owner.delete_law(AL)
 		return 1
 
 	if(href_list["state_laws"])
@@ -125,12 +123,11 @@
 		return 1
 
 	if(href_list["transfer_laws"])
-		if(is_malf(usr))
-			var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
-			if(ALs)
-				log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
-				ALs.sync(owner, 0)
-				current_view = 0
+		var/datum/ai_laws/ALs = locate(href_list["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
+		if(ALs)
+			log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
+			ALs.sync(owner, 0)
+			current_view = 0
 		return 1
 
 	if(href_list["notify_laws"])
@@ -164,7 +161,6 @@
 	package_laws(data, "supplied_laws", owner.laws.supplied_laws)
 
 	data["isAI"] = isAI(owner)
-	data["isMalf"] = is_malf(user)
 	data["isSlaved"] = owner.is_slaved()
 	data["isAdmin"] = is_admin(user)
 	data["view"] = current_view
@@ -178,7 +174,7 @@
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "law_manager.tmpl", sanitize("[src] - [owner]"), 800, is_malf(user) ? 600 : 400, state = state)
+		ui = new(user, src, ui_key, "law_manager.tmpl", sanitize("[src] - [owner]"), 800, 400, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -201,9 +197,6 @@
 		law_sets[++law_sets.len] = list("name" = ALs.name, "header" = ALs.law_header, "ref" = "\ref[ALs]","laws" = packaged_laws)
 
 	return law_sets
-
-/datum/nano_module/law_manager/proc/is_malf(var/mob/user)
-	return (is_admin(user) && !owner.is_slaved()) || owner.is_malf_or_traitor()
 
 /mob/living/silicon/proc/is_slaved()
 	return 0

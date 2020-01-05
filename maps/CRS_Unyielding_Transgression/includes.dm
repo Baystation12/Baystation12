@@ -1,4 +1,5 @@
 #include "areas.dm"
+#include "ai_items.dm"
 #include "overmap.dm"
 #include "jobs.dm"
 #include "outfits.dm"

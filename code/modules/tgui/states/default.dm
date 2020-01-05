@@ -43,7 +43,7 @@
 		return
 
 	// The AI can interact with anything it can see nearby, or with cameras.
-	if((get_dist(src, src_object) <= client.view) || cameranet.is_turf_visible(get_turf_pixel(src_object)))
+	if((get_dist(src, src_object) <= client.view) || our_visualnet.is_turf_visible(get_turf_pixel(src_object)))
 		return UI_INTERACTIVE
 	return UI_CLOSE
 

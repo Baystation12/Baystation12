@@ -7,12 +7,14 @@
 	required_players = 0
 	end_conditions_required = 1
 	factions = list(/datum/faction/unsc, /datum/faction/insurrection)
-	overmap_hide = list(/obj/effect/overmap/sector/exo_research, /obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/soe_argentum, /obj/effect/overmap/ship/covenant_light_cruiser)
+	overmap_hide = list(/obj/effect/overmap/sector/exo_research_ice, /obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/soe_argentum, /obj/effect/overmap/ship/covenant_light_cruiser)
 	disabled_jobs_types = list(\
 		/datum/job/researchdirector,\
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
 		/datum/job/ONIGUARDS,\
+		/datum/job/covenant/huragok,\
+		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
 		/datum/job/covenant/sangheili_ultra,\
@@ -27,6 +29,10 @@
 		/datum/job/covenant/brute_minor,\
 		/datum/job/covenant/brute_major,\
 		/datum/job/covenant/brute_captain,\
+		/datum/job/covenant/yanmee_minor,\
+		/datum/job/covenant/yanmee_major,\
+		/datum/job/covenant/yanmee_ultra,\
+		/datum/job/covenant/yanmee_leader,\
 		/datum/job/ONI_Spartan_II,)
 
 /datum/game_mode/outer_colonies/revolution/setup_objectives()

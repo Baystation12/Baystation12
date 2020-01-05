@@ -56,6 +56,7 @@
 	var/obj/linked_console
 
 /obj/effect/bombardment_beacon/New(var/obj/linked_to)
+	. = ..()
 	linked_console = linked_to
 	var/beacons_existing = 0
 	for(var/obj/effect/bombardment_beacon/b in world)

@@ -1,26 +1,26 @@
 /obj/machinery/camera/network/engineering
-	network = list(NETWORK_ENGINEERING)
+	network = NETWORK_ENGINEERING
 
 /obj/machinery/camera/network/ert
-	network = list(NETWORK_ERT)
+	network = NETWORK_ERT
 
 /obj/machinery/camera/network/medbay
-	network = list(NETWORK_MEDICAL)
+	network = NETWORK_MEDICAL
 
 /obj/machinery/camera/network/mercenary
-	network = list(NETWORK_MERCENARY)
+	network = NETWORK_MERCENARY
 
 /obj/machinery/camera/network/mining
-	network = list(NETWORK_MINE)
+	network = NETWORK_MINE
 
 /obj/machinery/camera/network/research
-	network = list(NETWORK_RESEARCH)
+	network = NETWORK_RESEARCH
 
 /obj/machinery/camera/network/security
-	network = list(NETWORK_SECURITY)
+	network = NETWORK_SECURITY
 
 /obj/machinery/camera/network/thunder
-	network = list(NETWORK_THUNDER)
+	network = NETWORK_THUNDER
 
 // EMP
 

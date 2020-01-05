@@ -1,4 +1,4 @@
-#define BASE_ELEVATION 1
+#define BASE_ELEVATION 0
 /atom
 	var/level = 2
 	var/flags = 0
@@ -12,6 +12,9 @@
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 	var/simulated = 1 //filter for actions - used by lighting overlays
 	var/fluorescent // Shows up under a UV light.
+
+	var/ai_access_cost = 0//The cost of CPU points for accessing this item's attack_ai()
+	var/ai_access_level = 0
 
 	///Chemistry.
 	var/datum/reagents/reagents = null

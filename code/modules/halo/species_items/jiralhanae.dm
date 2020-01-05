@@ -4,7 +4,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 #define JIRALHANAE_ICON_PATH_OBJ 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 
 /mob/living/carbon/human/covenant/jiralhanae/New(var/new_loc)
-	..(new_loc,"Jiralhanae")
+	. = ..(new_loc,"Jiralhanae")
 
 /datum/language/doisacci
 	name = "Doisacci"
@@ -106,6 +106,16 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	desc = "This modified helmet is of some significance to Jiralhanae clans. It is a mark of importance, however now diminished by the covenant hierarchy."
 	icon_state = "helm_captain"
 
+/obj/item/clothing/head/helmet/jiralhanae/covenant/EVA
+	name = "Jiralhanae Softsuit Helmet"
+	desc = "This helmet was designed to keep Jiralhanae alive during EVA activity."
+	icon_state = "helm_soft"
+	armor = list(melee = 0, bullet = 0, laser = 15, energy = 0, bomb = 15, bio = 100, rad = 100)
+	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	body_parts_covered = HEAD|FACE
+	cold_protection = HEAD|FACE
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+
 /* ARMOUR */
 
 
@@ -135,7 +145,6 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	icon_state = "armour_captain"
 	armor = list(melee = 40, bullet = 30, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
-
 
 
 /obj/item/clothing/suit/armor/jiralhanae/red
@@ -179,6 +188,16 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	desc = "The armour of Jiralhanae soldiers within the covenant."
 	armor = list(melee = 90, bullet = 50, laser = 45, energy = 45, bomb = 50, bio = 25, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
+
+/obj/item/clothing/suit/armor/jiralhanae/covenant/EVA
+	name = "Jiralhanae Softsuit"
+	desc = "This softsuit was designed to keep Jiralhanae alive during EVA activity."
+	icon_state = "armour_soft"
+	armor = list(melee = 30, bullet = 10, laser = 20, energy = 10, bomb = 25, bio = 100, rad = 100)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
+	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/minor
 	name = "Jiralhanae Armor (Minor)"

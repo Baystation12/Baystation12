@@ -41,7 +41,7 @@
 /obj/item/clothing/head/helmet/marine/medic/visor
 	name = "Olive Camo CH251-V Helmet Medic"
 	desc = "A medic variant of the standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "CH252 Helmet Medic"
+	item_state = "CH252 Visor Helmet Medic"
 	icon_state = "helmet medic_obj"
 	body_parts_covered = HEAD|EYES
 
@@ -99,12 +99,24 @@
 	icon_state = "M52B Body Armor regular_obj"
 	blood_overlay_type = "armor"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 50, bullet = 45, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 45, laser = 40, energy = 45, bomb = 35, bio = 0, rad = 0)
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/marine/pilot
+	name = "Flak Vest"
+	desc = "A vest made of flak to protect against ballistic or explosions projectiles."
+	icon_state = "unsc_pilot_armor-obj"
+	item_state = "unsc_pilot_armor-worn"
+	item_flags = THICKMATERIAL
+	w_class = ITEM_SIZE_LARGE
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	armor = list(melee = 30, bullet = 30, laser = 10, energy = 10, bomb = 45, bio = 0, rad = 0)
+	slots = 2
+	armor_thickness = 20
 
 /obj/item/clothing/suit/storage/marine/military_police
 	name = "M52A Body Armor NavSec"
@@ -233,12 +245,12 @@
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/suit/space/void/unsc/prepared/New()
-	..()
+	. = ..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/unsc
 	boots = new /obj/item/clothing/shoes/magboots
 
 /obj/item/clothing/suit/space/void/unsc/New()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/marine/winter

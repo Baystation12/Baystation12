@@ -89,7 +89,11 @@ Used In File(s): \code\game\objects\items\devices\aicard.dm
                 <td>{{:helper.link("Disabled", null, {'wireless' : 1}, data.wireless ? null : 'redButton' )}}</td>
             </tr>
             {{if data.flushing}}
-                <tr><td><span class='notice'>AI wipe in progress...</span></td></tr>
+                <tr>
+					<td><span class='notice'>AI wipe in progress...</span></td>
+					<td><span class='itemLabelWidest'>Stop AI Wipe</span></td>
+					<td>{{:helper.link("Stop Wipe", 'radiation', {'wipe' : 1}, null, 'redButton')}}</td>
+				</tr>
             {{else}}
                 <tr>
                     <td><span class='itemLabelWidest'>Wipe AI</span></td>

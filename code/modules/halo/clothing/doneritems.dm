@@ -943,7 +943,7 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 	icon_state = "mclovin-eagle_helmet"
 
 /obj/item/clothing/suit/justice/zeal/mclovin/New()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/suit/justice/zeal/mclovin
@@ -1670,13 +1670,13 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //Spartan
 
 /obj/item/clothing/head/helmet/spartan/stingray
-	name = "Ryan-073's MJOLNIR Powered Assault Armour Helmet"
+	name = "Ryan-074's MJOLNIR Powered Assault Armour Helmet"
 	desc = "Ave, Imperator, morituri te salutant."
 	icon_state = "stingray-spartanhelm_obj"
 	item_state = "stingray-spartanhelm_worn"
 
 /obj/item/clothing/suit/armor/special/spartan/stingray
-	name = "Ryan-073's MJOLNIR Powered Assault Armour"
+	name = "Ryan-074's MJOLNIR Powered Assault Armour"
 	desc = "a technologically-advanced combat exoskeleton system designed to vastly improve the strength, speed, agility, reflexes and durability of a SPARTAN-II, supersoldier in the field of combat.This one appears to have been heavily modified per the user's tactical needs."
 	icon_state = "stingray-spartanarmor_obj"
 	item_state = "stingray-spartanarmor_worn"

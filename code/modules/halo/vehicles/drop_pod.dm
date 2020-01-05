@@ -19,13 +19,15 @@
 
 	exposed_positions = list()
 
+	var/faction_tag = "UNSC"
+
 	var/list/species_offsets = list("Human" = "0,7")
 
 	var/launched = 0
 
 	var/drop_accuracy = 3 //The accuracy in tiles (+ or - from drop point)
 
-	var/launch_arm_time = 5 SECONDS
+	var/launch_arm_time = 2.5 SECONDS
 
 	var/pod_range = 8 //Range of pod in overmap tiles
 
@@ -89,7 +91,7 @@
 	for(var/obj/effect/landmark/drop_pod_landing/l in world)
 		valid_points += l
 	for(var/obj/item/drop_pod_beacon/b in world)
-		if(b.is_active == 1)
+		if(b.is_active == 1 && b.faction_tag == faction_tag)
 			if(!beacons_present) //If we've not already realised we have beacons, remove all normal drop-pod markers from pick-choice.
 				valid_points.Cut()
 				visible_message("<span class = 'notice'>Electronic Locator beacon detected. Overriding landing systems.</span>")
@@ -123,7 +125,7 @@
 		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
 		return
 
-	proc_launch_pod(get_occupants_in_position("driver")[1],drop_turf)
+	proc_launch_pod(usr,drop_turf)
 
 /obj/vehicles/drop_pod/proc/proc_launch_pod(var/mob/user,var/turf/drop_turf)
 	visible_message("<span class = 'danger'>[user] starts arming [src]'s launch mechanism.</span>")
@@ -139,7 +141,7 @@
 	if(prob(POD_FAIL_CHANCE))
 		on_death()//do death effects
 		return
-	explosion(drop_turf,0,0,2,5)
+	explosion(drop_turf,-1,0,2,5)
 
 /obj/vehicles/drop_pod/relaymove() //We're a drop pod, we don't move normally.
 	return
@@ -173,7 +175,7 @@
 		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
 		return
 
-	proc_launch_pod(get_occupants_in_position("driver")[1],drop_turf)
+	proc_launch_pod(usr,drop_turf)
 
 /obj/vehicles/drop_pod/overmap/get_drop_point(var/list/om_targ_zs)
 	var/list/valid_points = list()
@@ -205,10 +207,9 @@
 	. = ..()
 
 /datum/component_profile/drop_pod
-
 	gunner_weapons = list()
 	pos_to_check = "gunner" //Allows for overriding position checks for equip/firing of mounted weapon.
-	vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/drop_pod) //Vital components, engine, thrusters etc.
 	cargo_capacity = 8 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
 
 /obj/item/vehicle_component/health_manager/drop_pod

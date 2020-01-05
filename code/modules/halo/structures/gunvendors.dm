@@ -1,6 +1,7 @@
 
 /obj/machinery/vending/armory
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
+	ai_access_level = 3
 
 /obj/machinery/vending/armory/attackby(var/atom/A,var/mob/user)
 	if(A in products)
@@ -14,7 +15,7 @@
 	icon_deny = "ironhammer-deny"
 	req_access = list(308)
 	products = list(/obj/item/ammo_magazine/m127_saphe =20,/obj/item/ammo_magazine/m127_saphp =20,/obj/item/ammo_magazine/m762_ap/MA5B = 40,/obj/item/ammo_magazine/m762_ap/MA5B/TTR = 15,/obj/item/ammo_magazine/m762_ap/M392 = 30
-					,/obj/item/ammo_magazine/m95_sap/br55 = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/ammo_box/shotgun = 10,/obj/item/ammo_box/shotgun/slug = 10,/obj/item/weapon/material/knife/combat_knife =15,/obj/item/weapon/material/machete = 2
+					,/obj/item/ammo_magazine/m95_sap/br55 = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/ammo_magazine/m5/rubber = 10,/obj/item/ammo_box/shotgun = 10,/obj/item/ammo_box/shotgun/slug = 10,/obj/item/ammo_box/shotgun/beanbag = 10,/obj/item/weapon/material/knife/combat_knife =15,/obj/item/weapon/material/machete = 2
 					,/obj/item/weapon/gun/projectile/m6d_magnum = 15,/obj/item/weapon/gun/projectile/ma5b_ar = 15,/obj/item/weapon/gun/projectile/br55 = 2
 					,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 8,/obj/item/weapon/gun/projectile/m7_smg = 8,/obj/item/weapon/gun/projectile/m392_dmr = 5,/obj/item/weapon/grenade/frag/m9_hedp = 5,/obj/item/weapon/grenade/smokebomb = 5, /obj/item/weapon/armor_patch = 5,/obj/item/drop_pod_beacon = 1)
 
@@ -23,8 +24,8 @@
 	desc = "Storage for advanced weapons and ammunition"
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
-	req_access = list(308)
-	products = list(/obj/item/ammo_magazine/m145_ap = 2,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 2
+	req_access = list(308,311)
+	products = list(/obj/item/ammo_magazine/m145_ap = 4,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 2
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/projectile/m41 = 1, /obj/item/weapon/storage/box/spnkr = 2,/obj/item/weapon/plastique = 2,/obj/item/weapon/armor_patch = 2)
 
 /obj/machinery/vending/armory/police
@@ -84,7 +85,7 @@
 	desc = "A vendor full of attachments for the MA5B."
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
-	req_access = list(308)
+	req_access = list(308,311)
 	products = list(\
 	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
 	/obj/item/weapon_attachment/ma5_upper_railed =5,
@@ -195,6 +196,7 @@
 	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
 	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
+	/obj/item/weapon/gun/projectile/m6c_magnum_s = 6,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
 	/obj/item/weapon/gun/projectile/m392_dmr = 2,
 	/obj/item/weapon/gun/projectile/br55 = 2,
@@ -208,7 +210,7 @@
 	/obj/item/ammo_magazine/m5 = 24,
 	/obj/item/ammo_magazine/m95_sap/br55 = 10,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
-	/obj/item/ammo_magazine/m145_ap = 2,
+	/obj/item/ammo_magazine/m145_ap = 4,
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
 	/obj/item/weapon/grenade/smokebomb = 8,
@@ -230,10 +232,6 @@
 	/obj/item/clothing/suit/armor/special/spartan = 1,
 	/obj/item/clothing/gloves/spartan = 1,
 	/obj/item/clothing/shoes/magboots/spartan = 1,
-	/obj/item/clothing/head/helmet/spartan/mkv = 1,
-	/obj/item/clothing/suit/armor/special/spartan/mkv = 1,
-	/obj/item/clothing/head/helmet/spartan/mkv_gungnir = 1,
-	/obj/item/clothing/suit/armor/special/spartan/mkv_gungnir = 1,
 	/obj/item/clothing/glasses/hud/tactical/odst_hud/medic = 1,
 	/obj/item/weapon/storage/backpack/odst/regular = 2,
 	/obj/item/weapon/storage/belt/marine_ammo = 2,

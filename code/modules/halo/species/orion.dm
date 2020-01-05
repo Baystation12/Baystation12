@@ -9,6 +9,7 @@
 	slowdown = -1.5 //Increased move speed
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR
 
 	//Spartan 1's have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes

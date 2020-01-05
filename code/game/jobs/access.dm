@@ -38,6 +38,8 @@
 	return has_access(req_access, req_one_access, L)
 
 /proc/has_access(var/list/req_access, var/list/req_one_access, var/list/accesses)
+	if("SILICON ALL ACCESS" in accesses)
+		return 1
 	for(var/req in req_access)
 		if(!(req in accesses)) //doesn't have this access
 			return 0

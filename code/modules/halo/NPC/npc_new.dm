@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/npc/New()
-	..()
+	. = ..()
 	if(prob(50))
 		gender = FEMALE
 	else

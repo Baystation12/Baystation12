@@ -23,6 +23,7 @@
 
 /obj/item/clothing/glasses/hud/tactical/odst_hud/medic/process_hud(var/mob/M)
 	process_med_hud(M, 1)
+	. = ..()
 
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Rifleman Helmet"
@@ -50,6 +51,7 @@
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
+	unacidable = 1
 	on = 0
 	var/visr_on = 1
 	armor_thickness = 20
@@ -68,6 +70,7 @@
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+	unacidable = 1
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE

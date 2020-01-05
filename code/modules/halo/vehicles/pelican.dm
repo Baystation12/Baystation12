@@ -74,7 +74,7 @@
 	pixel_x = -32
 	pixel_y = -32
 
-	overmap_range = 8
+	overmap_range = 2
 
 	takeoff_overlay_icon_state = "thrust"
 	takeoff_sound = 'code/modules/halo/shuttles/pelican_takeoff.ogg'

@@ -21,7 +21,7 @@
 			return 0
 
 	return access_security // Default for all other networks
-
+/*
 /datum/computer_file/program/camera_monitor
 	filename = "cammon"
 	filedesc = "Camera Monitoring"
@@ -179,4 +179,4 @@
 
 /datum/nano_module/camera_monitor/remove_visual(mob/M)
 	if(current_camera)
-		current_camera.remove_visual(M)
+		current_camera.remove_visual(M)*/
