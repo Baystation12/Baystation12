@@ -294,6 +294,7 @@
 	cargo_init()
 	damage_spawned_ship()
 	GLOB.processing_objects |= src
+	superstructure_failing = 0 //If we had a process tick inbetween all of this, let's reset our superstructure failure status.
 
 /obj/effect/overmap/ship/npc_ship/proc/damage_spawned_ship()
 	for(var/obj/item/projectile/overmap/proj in projectiles_to_spawn)

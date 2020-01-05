@@ -222,11 +222,15 @@
 		update_icon()
 		*/
 
-/obj/effect/overmap/ship/proc/break_umbilicals()
+/obj/effect/overmap/ship/proc/break_umbilicals(var/force_break = 0)
 	for(var/obj/docking_umbilical/umbi in connectors)
-		if(umbi.current_connected && get_dist(umbi.our_ship,umbi.current_connected.our_ship) > 1)
+		if(force_break || (umbi.current_connected && get_dist(umbi.our_ship,umbi.current_connected.our_ship) > 1))
 			umbi.current_connected.umbi_rip()
 			umbi.umbi_rip()
+
+/obj/effect/overmap/ship/do_superstructure_fail()
+	break_umbilicals(1)
+	. = ..()
 
 /*
 /obj/effect/overmap/ship/update_icon()

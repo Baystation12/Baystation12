@@ -332,6 +332,7 @@ var/list/points_of_interest = list()
 	for(var/mob/player in GLOB.mobs_in_sectors[src])
 		player.dust()
 	loc = null
+
 	message_admins("NOTICE: Overmap object [src] has been destroyed. Please wait as it is deleted.")
 	log_admin("NOTICE: Overmap object [src] has been destroyed.")
 	sleep(10)//To allow the previous message to actually be seen

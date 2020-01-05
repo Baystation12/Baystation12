@@ -147,8 +147,11 @@
 	desc = "Storage for Covenant Kig-Yar equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6
-		,/obj/item/weapon/pickaxe/plasma_drill = 1,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,/obj/item/clothing/gloves/shield_gauntlet/kigyar = 4,/obj/item/weapon/pinpointer/artifact = 2)
+	products = list(/obj/item/weapon/storage/belt/covenant_medic = 5,
+	/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,
+	/obj/item/clothing/under/kigyar/armless = 8,,/obj/item/weapon/pickaxe/plasma_drill = 1,
+	/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,
+	/obj/item/clothing/gloves/shield_gauntlet/kigyar = 4,/obj/item/weapon/pinpointer/artifact = 2)
 
 /obj/machinery/vending/armory/covenant/kigyar/heavy // Equipment for Kig-Yar
 	name = "Covenant - Kig-Yar Heavy Vendor"

@@ -27,7 +27,7 @@
 /obj/item/weapon/grenade/frag/spike/get_lunge_dist(var/mob/living/carbon/human/user)
 	if(!istype(user))
 		return 0
-	if(istype(user.species,/datum/species/brutes))
+	if(user.species ==/datum/species/brutes)
 		return lunge_dist
 	else
 		return 0
