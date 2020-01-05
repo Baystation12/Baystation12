@@ -114,7 +114,7 @@ SUBSYSTEM_DEF(throwing)
 		delayed_time += world.time - last_move
 		return
 
-	if (dist_travelled && hitcheck()) //to catch sneaky things moving on our tile while we slept
+	if (dist_travelled && hitcheck(get_turf(thrownthing))) //to catch sneaky things moving on our tile while we slept
 		finalize()
 		return
 
@@ -141,6 +141,10 @@ SUBSYSTEM_DEF(throwing)
 			diagonal_error += (diagonal_error < 0) ? dist_x/2 : -dist_y
 
 		if (!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
+			finalize()
+			return
+
+		if (hitcheck(step))
 			finalize()
 			return
 
@@ -191,8 +195,8 @@ SUBSYSTEM_DEF(throwing)
 /datum/thrownthing/proc/hit_atom(atom/A)
 	finalize(hit=TRUE, t_target=A)
 
-/datum/thrownthing/proc/hitcheck()
-	for (var/thing in get_turf(thrownthing))
+/datum/thrownthing/proc/hitcheck(var/turf/T)
+	for (var/thing in T)
 		var/atom/movable/AM = thing
 		if (AM == thrownthing || (AM == thrower && !ismob(thrownthing)))
 			continue
