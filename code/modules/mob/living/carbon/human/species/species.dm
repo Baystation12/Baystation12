@@ -285,7 +285,7 @@
 		O.owner = H
 
 	if(s)
-		var/obj/current_lace = H.internal_organs_by_names["stack"]
+		var/obj/current_lace = H.internal_organs_by_name["stack"]
 		if(current_lace)
 			qdel(current_lace)
 		H.internal_organs_by_name["stack"] = s
