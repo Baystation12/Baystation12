@@ -9,6 +9,7 @@
 "dr" = (/obj/machinery/light/spot{dir = 2},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "dD" = (/obj/machinery/nav_computer/unsc,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "dM" = (/obj/structure/table/rack,/obj/item/clothing/head/welding,/obj/item/clothing/head/welding,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"dT" = (/obj/structure/closet/secure_closet/freezer/fridge,/obj/structure/sink/kitchen{dir = 2; pixel_x = 16; pixel_y = 22},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "dZ" = (/obj/structure/table/steel,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "eb" = (/obj/structure/bed/chair/comfy/black{dir = 8},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "ew" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -37,7 +38,6 @@
 "oZ" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "pf" = (/obj/effect/floor_decal/industrial/warning/dust/corner,/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "pR" = (/obj/machinery/cooker/grill,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"pZ" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "qX" = (/turf/simulated/wall,/area/om_ships/req_console_ship)
 "ra" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "ru" = (/obj/structure/lattice,/turf/space,/area/space)
@@ -113,7 +113,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaMolslslslsaNFcFcFcFcIDlslslslslslsrulslslslslslslslslsqX
 aaaaaaaaaalslslslslslslslslslslsFcAEFcFcFcFcIDlsruaaaaaaaaaaaaaaaaruruaaaaaaaaqXFcFcILFcqXaaruaaaaaa
 aaaaaaaalslslslslslslslslslslsFcFcAEFcZPFcFcIDlsruruaaaaaaaaaaaaruruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
 aaaaaalslslsqXqXqXqXZaqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXZaqXqXqXRkdMFbKGhdhdhdqXFcFcshaaaa
-aaaaaarZEdXZEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsraKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdMTFcFcshaaaa
+aaaaaarZEdXZEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsraKGewrXdTpRgmPTqXhdcOhdqXXihdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOEdEdtDqXEdEdEdEdEdEdqXFcFcjUcNcNcNcNoZWthdhdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXZamAFcshaaaa
 aaaagEZQEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcdrFcFcFcqXhdPwPwPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcqXtzFcshaaaa
 aaaagEoSebgJqXfJEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyyNsdZdZdZdZhRxoqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaa

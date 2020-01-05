@@ -37,7 +37,6 @@
 "pC" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "pR" = (/obj/machinery/cooker/grill,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "pX" = (/obj/structure/bed{tag = "icon-bed2 (EAST)"; icon_state = "bed2"; dir = 4},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
-"pZ" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "qz" = (/obj/machinery/slipspace_engine/human,/obj/structure/window/reinforced/projresist{dir = 2},/obj/machinery/door/window/westright,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "qX" = (/turf/simulated/wall,/area/om_ships/req_console_ship)
 "ru" = (/obj/structure/lattice,/turf/space,/area/space)
@@ -100,6 +99,7 @@
 "OV" = (/obj/machinery/atmospherics/unary/freezer{dir = 1; icon_state = "freezer_1"; tag = "icon-freezer_1"},/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
 "Pw" = (/obj/structure/bed/chair{dir = 2},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Px" = (/obj/structure/window/reinforced/projresist{dir = 2},/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/om_ships/req_console_ship)
+"PD" = (/obj/structure/closet/secure_closet/freezer/fridge,/obj/structure/sink/kitchen{dir = 2; pixel_x = 16; pixel_y = 22},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "PT" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Qv" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/reagent_containers/spray/cleaner,/obj/item/weapon/reagent_containers/spray/cleaner,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Rg" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{dir = 8; germ_level = 110; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-comm (NORTH)"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
@@ -132,7 +132,7 @@ aaaaaaaaaaaaaaaalslslslslslslslslslsrurururururulslslslslslslslsruaaruaaaaaaaaqX
 aaaaaaaaaalslslslslsaaaaaaaaruaaaaaaaaaaaaaaaaruaaaaaaaaaaaaaarurururuaaaaaaaaqXFcFcILFcqXaaruaaaaaa
 aaaaaaaalslslslslslslslslslslslslslslslslslslsruaaaaaaaaaaaaaaaaaaruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaa
 aaaaaalslslsqXmBmBmBbEmBmBmBmBmBmBmBmBmBmBbElslslslsqXqXqXqXqXqXqXCOqXawtztztzVLhcKGtzhdqXEZFcshaaaa
-aaaaaarZebXZEdWVZHZHxlZHZHZHpCZHZHZHxlvyTcmBKGKGewrXpZpRgmPTqXhdcOhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
+aaaaaarZebXZEdWVZHZHxlZHZHZHpCZHZHZHxlvyTcmBKGKGewrXPDpRgmPTqXhdcOhdqXXihdhdhdhdhdhdhdhdMTFcFcshaaaa
 aaaahIkOebEdtDmBGJmNZHcpZHLcmBpXNhZHZHZHZHWthdhdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXqXCOsVFcshaaaa
 aaaagERgEdebmBmBIDDeIfEEuoOqmBZHZHZHZHMzZHmBdDqXyyPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcjIzEqXzgFcshaaaa
 aaaagEoSebgJmBWWZHZHZHZHwEHSmBxpZHZHZdcuHPmBoSebhdJpdZdZDBRwqXhdhdhdBJRXqXRZqXUQCYnPqzuWqXqXqXqXaaaa

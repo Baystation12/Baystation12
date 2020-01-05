@@ -29,7 +29,6 @@
 "aC" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aD" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aE" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"aF" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aG" = (/obj/machinery/cooker/grill,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aH" = (/obj/machinery/cooker/fryer,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aI" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -100,6 +99,7 @@
 "bV" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "bW" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "bX" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
+"hM" = (/obj/structure/closet/secure_closet/freezer/fridge,/obj/structure/sink/kitchen{dir = 2; pixel_x = 16; pixel_y = 22},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Ie" = (/obj/structure/table/steel,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
@@ -112,7 +112,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaabacacacacaiahahahahajacacacacacacakacacacacacacacacacal
 aaaaaaaaaaacacacacacacacacacacacahanahahahahajacakaaaaaaaaaaaaaaaaakakaaaaaaaaalahahaoahalaaakaaaaaa
 aaaaaaaaacacacacacacacacacacacahahanahapahahajacakakaaaaaaaaaaaaakakalalalalalalalalalaqalalalalaaaa
 aaaaaaacacacalalalalaralalalalahahanahahahahajacalalalacacacacacalaralalalasatauavawawawalahahaxaaaa
-aaaaaaayazaAazaBazazazazazazaBahahanahahahahajacaCavaDaEaFaGaHaIalawaJawalaKawawawawawawaqahahaxaaaa
+aaaaaaayazaAazaBazazazazazazaBahahanahahahahajacaCavaDaEhMaGaHaIalawaJawalaKawawawawawawaqahahaxaaaa
 aaaaaLaMazazaNalazazazazazazalahahaOaPaPaPaPaQaRawawawawawawawawawawawawalawaSawalalaqalaraTahaxaaaa
 aaaaaUaVazazalalaWalaXazazaWalalahahahaYahahahalawaZaZaZaZaZaZawbaawawbbalbcalbcalahahahalbdahaxaaaa
 aaaaaUbebfaWalbgazbebfbhbiazbjalalbkalalalbkalalblIebmbmbmbmbmbnalblawawbcboalbpalbqbrbsalalalalaaaa

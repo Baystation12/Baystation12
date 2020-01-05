@@ -12,7 +12,9 @@
 
 #include "../ONI_Prowler/jobs.dm"
 
-#include "../SOE_Argentum/includes.dm"
+#include "../SOE_Argentum/jobs.dm"
+#include "../SOE_Argentum/outfits.dm"
+#include "../SOE_Argentum/spawns.dm"
 
 #include "../Asteroid Listening Post/includes.dm"
 

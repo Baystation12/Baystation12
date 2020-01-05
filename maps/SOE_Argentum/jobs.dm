@@ -11,7 +11,7 @@
 	total_positions = 8
 	spawn_positions = 8
 	selection_color = "#ff0000"
-	access = list(access_innie_prowler,access_innie_asteroid)
+	access = list(access_innie,access_innie_prowler,access_innie_asteroid)
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
 
@@ -27,7 +27,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#ff0000"
-	access = list(access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
+	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)
 
@@ -42,6 +42,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#ff0000"
-	access = list(access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
+	access = list(access_innie,access_innie_prowler,access_innie_asteroid,access_innie_asteroid_boss)
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/human)

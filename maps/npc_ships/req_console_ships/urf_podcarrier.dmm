@@ -26,7 +26,6 @@
 "az" = (/obj/machinery/door/airlock/halo/innie_ship_preset,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "aA" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aB" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"aC" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aD" = (/obj/machinery/cooker/grill,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aE" = (/obj/machinery/cooker/fryer,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aF" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -90,6 +89,7 @@
 "bL" = (/obj/structure/reagent_dispensers/watertank,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "bM" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "gun"; tag = "icon-gun"},/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer"},/obj/machinery/light{dir = 2},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "bN" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
+"Gf" = (/obj/structure/closet/secure_closet/freezer/fridge,/obj/structure/sink/kitchen{dir = 2; pixel_x = 16; pixel_y = 22},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "XQ" = (/obj/structure/table/steel,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
@@ -102,7 +102,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaabacacacacacacacacacacacacaaaaaaaaaaacacacacacacacacacae
 aaaaaaaaabacacacacacacacacacaeaeagagagaeagagagaeacacacacaaaaaaaaaaaaahaaaaaaaaaeadadaiadaeaaahaaaaaa
 aaaaaaaaacacacacacacacacacaeaeaeajagagakalagagaeaeacacacacacacaaaaaaaeaeaeaeaeaeaeaeaeamaeaeaeaeaaaa
 aaaaaaacacacaeaeaeaeanaeaeaeaeaeadadadadadadadaeaeaeaeaeacacacacaeanaeaeaeaoaoapaqarasaoaeadadataaaa
-aaaaaaauavawaxayaxaxaxaxaxaeaeaeaeaeaeazaeanaeaeaeaAaBaCaDaEaFaeaoaGaoaeaeaHaoaoaoaoaoaoaIadadataaaa
+aaaaaaauavawaxayaxaxaxaxaxaeaeaeaeaeaeazaeanaeaeaeaAaBGfaDaEaFaeaoaGaoaeaeaHaoaoaoaoaoaoaIadadataaaa
 aaaaaJaKaxaxaeaeaxaxaxaxaxayaoaoaoaLaoaoaoaoaoaoaMaoaoaoaoaoaoaoaoaoaoaoaeaoaNaoaeaeamaeanaOadataaaa
 aaaaaPaQaxaxaeaRaSaeaTaxaxaeaUaeaUaeaUaeaVaeaoaWaeaoaXaXaXaXaoaYaoaoaoaZaeaIaeaIaeadadadaebaadataaaa
 aaaaaPbbbcaSaeaeaxbbbcbdbeaebfaoaWaoaWaobgbhaobiaebjXQbkbkbkblaebjaoaoaoaIbmaebnaebobpbqaeaeaeaeaaaa
