@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - bugfix: "Combining stacks from an inventory no longer leaves bugged sprites"
