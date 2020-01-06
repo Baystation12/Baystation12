@@ -1136,8 +1136,7 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cB" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1331;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	id_tag = "vox_west_vent"
 	},
 /obj/random/junk,
@@ -1175,9 +1174,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
 "cH" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "merc_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1199,9 +1197,8 @@
 	pixel_x = 24;
 	tag_chamber_sensor = "vox_west_sensor"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	frequency = 1331;
 	id_tag = "vox_west_vent"
 	},
 /obj/machinery/light/small,
@@ -1268,9 +1265,8 @@
 	pixel_y = 8;
 	req_access = list("ACCESS_SYNDICATE")
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	dir = 4;
-	frequency = 1380;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4
 	id_tag = "skipjack_shuttle_pump"
 	},
 /turf/simulated/floor/plating,

@@ -704,14 +704,12 @@
 /area/map_template/merc_shuttle)
 "bh" = (
 /obj/structure/handrai,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	controlled = 0;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1435;
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1435;
+	frequency = 1380;
 	id_tag = "merc_shuttle_sensor";
 	pixel_x = 0;
 	pixel_y = 25
@@ -836,7 +834,7 @@
 /area/map_template/merc_shuttle)
 "bp" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1435;
+	frequency = 1380;
 	id_tag = "merc_shuttle_inner";
 	name = "Ship External Access"
 	},
@@ -862,7 +860,7 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 2;
-	frequency = 1435;
+	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -965,10 +963,8 @@
 /turf/simulated/floor/plating,
 /area/map_template/merc_shuttle)
 "bA" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	controlled = 0;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	frequency = 1435;
 	id_tag = "merc_shuttle_pump_out_internal"
 	},
 /obj/structure/cable{
@@ -980,10 +976,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bB" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	controlled = 0;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1435;
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/structure/cable{
@@ -999,7 +993,7 @@
 /obj/machinery/door/airlock/external{
 	density = 1;
 	dir = 4;
-	frequency = 1435;
+	frequency = 1380;
 	id_tag = "merc_shuttle_outer";
 	name = "Ship External Access"
 	},
@@ -1079,24 +1073,20 @@
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
 	cycle_to_external_air = 1;
 	dir = 1;
-	frequency = 1435;
+	frequency = 1380;
 	id_tag = "merc_shuttle";
 	pixel_x = 0;
 	pixel_y = -25;
 	req_access = list("ACCESS_SYNDICATE")
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	controlled = 0;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	frequency = 1435;
 	id_tag = "merc_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle)
 "bK" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	controlled = 0;
-	frequency = 1437;
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	icon_state = "map_vent_in";
 	id_tag = "fuel_out";
 	internal_pressure_bound = 15000;
@@ -1107,7 +1097,6 @@
 	use_power = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1437;
 	id_tag = "fuel_sensor"
 	},
 /obj/machinery/light/small{
@@ -1124,7 +1113,7 @@
 /area/map_template/merc_shuttle/rear)
 "bN" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 1437;
+	frequency = 1441;
 	id = "fuel_in";
 	id_tag = null;
 	use_power = 0
@@ -1344,7 +1333,7 @@
 /area/map_template/merc_shuttle/rear)
 "cd" = (
 /obj/machinery/computer/air_control{
-	frequency = 1437;
+	frequency = 1441;
 	input_tag = "fuel_in";
 	name = "Fuel Supply Control";
 	output_tag = "fuel_out";
@@ -1935,10 +1924,8 @@
 	icon_state = "handrail";
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	controlled = 0;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1435;
 	id_tag = "merc_shuttle_pump"
 	},
 /obj/machinery/light/small,
@@ -2057,12 +2044,11 @@
 /area/map_template/merc_spawn)
 "gc" = (
 /obj/structure/catwalk,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1435;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	id_tag = "merc_shuttle_pump_out_external"
 	},
 /obj/machinery/airlock_sensor/airlock_exterior{
-	frequency = 1435;
+	frequency = 1380;
 	id_tag = "merc_shuttle_exterior_sensor";
 	pixel_x = 0;
 	pixel_y = -28
@@ -2078,7 +2064,7 @@
 	initial_id_tag = "merc_pd"
 	},
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1435;
+	frequency = 1380;
 	master_tag = "merc_shuttle";
 	pixel_x = 37;
 	pixel_y = -32;
@@ -2502,10 +2488,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/merc_spawn)
 "sC" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	controlled = 0;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	frequency = 1435;
 	id_tag = "merc_shuttle_pump_out_internal"
 	},
 /obj/structure/handrai,

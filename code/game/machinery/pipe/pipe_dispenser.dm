@@ -68,7 +68,7 @@
 	popup.open()
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
+	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
 		if(!user.unEquip(W))
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] back into \the [src].</span>")

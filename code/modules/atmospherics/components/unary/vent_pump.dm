@@ -18,10 +18,8 @@
 	power_rating = 30000			// 30000 W ~ 40 HP
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_FUEL //connects to regular, supply pipes, and fuel pipes
-
-	var/area/initial_loc
 	level = 1
-	var/area_uid
+	identifier = "AVP"
 
 	var/hibernate = 0 //Do we even process?
 	var/pump_direction = 1 //0 = siphoning, 1 = releasing
@@ -41,14 +39,43 @@
 
 	var/welded = 0 // Added for aliens -- TLE
 
-	var/frequency = 1439
-	var/datum/radio_frequency/radio_connection
-
-	var/radio_filter_out
-	var/radio_filter_in
-
 	var/controlled = TRUE  //if we should register with an air alarm on spawn
 	build_icon_state = "uvent"
+
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable,
+		/obj/item/weapon/stock_parts/radio/receiver/buildable,
+		/obj/item/weapon/stock_parts/radio/transmitter/on_event/buildable,
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/area_uid,
+		/decl/public_access/public_variable/identifier,
+		/decl/public_access/public_variable/use_power,
+		/decl/public_access/public_variable/pump_dir,
+		/decl/public_access/public_variable/pump_checks,
+		/decl/public_access/public_variable/pressure_bound,
+		/decl/public_access/public_variable/pressure_bound/external,
+		/decl/public_access/public_variable/power_draw,
+		/decl/public_access/public_variable/flow_rate,
+		/decl/public_access/public_variable/name
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_power,
+		/decl/public_access/public_method/purge_pump,
+		/decl/public_access/public_method/refresh	
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump = 1
+	)
+
+	frame_type = /obj/item/pipe
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	base_type = /obj/machinery/atmospherics/unary/vent_pump/buildable
+
+/obj/machinery/atmospherics/unary/vent_pump/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/unary/vent_pump/on
 	use_power = POWER_USE_IDLE
@@ -77,10 +104,10 @@
 	icon = null
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
-	unregister_radio(src, frequency)
-	if(initial_loc)
-		initial_loc.air_vent_info -= id_tag
-		initial_loc.air_vent_names -= id_tag
+	var/area/A = get_area(src)
+	if(A)
+		A.air_vent_info -= id_tag
+		A.air_vent_names -= id_tag
 	. = ..()
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
@@ -92,14 +119,6 @@
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
-/obj/machinery/atmospherics/unary/vent_pump/engine
-	name = "Engine Core Vent"
-	power_channel = ENVIRON
-	power_rating = 30000
-
-/obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()
-	. = ..()
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
 
 /obj/machinery/atmospherics/unary/vent_pump/on_update_icon(var/safety = 0)
 	if(!check_icon_cache())
@@ -216,123 +235,32 @@
 
 	return pressure_delta
 
-/obj/machinery/atmospherics/unary/vent_pump/proc/broadcast_status()
-	if(!radio_connection)
-		return 0
-
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.source = src
-
-	signal.data = list(
-		"area" = controlled ? area_uid : "NONE",
-		"tag" = id_tag,
-		"device" = "AVP",
-		"power" = use_power,
-		"direction" = pump_direction?("release"):("siphon"),
-		"checks" = pressure_checks,
-		"internal" = internal_pressure_bound,
-		"external" = external_pressure_bound,
-		"timestamp" = world.time,
-		"sigtype" = "status",
-		"power_draw" = last_power_draw,
-		"flow_rate" = last_flow_rate,
-	)
-
-	if(controlled)
-		if(!initial_loc.air_vent_names[id_tag])
-			var/new_name = "[initial_loc.name] Vent Pump #[initial_loc.air_vent_names.len+1]"
-			initial_loc.air_vent_names[id_tag] = new_name
-			SetName(new_name)
-		initial_loc.air_vent_info[id_tag] = signal.data
-
-	radio_connection.post_signal(src, signal, radio_filter_out)
-
-	return 1
-
+/obj/machinery/atmospherics/unary/vent_pump/area_uid()
+	return controlled ? ..() : "NONE"
 
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
-	. = ..()
-	initial_loc = get_area(loc)
-	area_uid = initial_loc.uid
 	if (!id_tag)
-		assign_uid()
-		id_tag = num2text(uid)
-	//some vents work his own special way
-	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null
-	radio_filter_out = frequency==1439?(RADIO_TO_AIRALARM):null
-	if(frequency)
-		radio_connection = register_radio(src, frequency, frequency, radio_filter_in)
-		src.broadcast_status()
+		id_tag = num2text(sequential_id("obj/machinery"))
+	if(controlled)
+		var/area/A = get_area(src)
+		if(A && !A.air_vent_names[id_tag])
+			var/new_name = "[A.name] Vent Pump #[A.air_vent_names.len+1]"
+			A.air_vent_names[id_tag] = new_name
+			SetName(new_name)
+	. = ..()
 
-/obj/machinery/atmospherics/unary/vent_pump/receive_signal(datum/signal/signal)
-	if(stat & (NOPOWER|BROKEN))
-		return
+/obj/machinery/atmospherics/unary/vent_pump/proc/purge()
+	pressure_checks &= ~PRESSURE_CHECK_EXTERNAL
+	pump_direction = 0
 
-	hibernate = 0
+/obj/machinery/atmospherics/unary/vent_pump/refresh()
+	..()
+	hibernate = FALSE
+	toggle_input_toggle()
 
-	//log_admin("DEBUG \[[world.timeofday]\]: /obj/machinery/atmospherics/unary/vent_pump/receive_signal([signal.debug_print()])")
-	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || (signal.data["sigtype"]!="command"))
-		return 0
-
-	if(signal.data["purge"] != null)
-		pressure_checks &= ~1
-		pump_direction = 0
-
-	if(signal.data["stabalize"] != null)
-		pressure_checks |= 1
-		pump_direction = 1
-
-	if(signal.data["power"] != null)
-		update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
-
-	if(signal.data["power_toggle"] != null)
-		update_use_power(!use_power)
-
-	if(signal.data["checks"] != null)
-		if (signal.data["checks"] == "default")
-			pressure_checks = pressure_checks_default
-		else
-			pressure_checks = text2num(signal.data["checks"])
-
-	if(signal.data["checks_toggle"] != null)
-		pressure_checks = (pressure_checks?0:3)
-
-	if(signal.data["direction"] != null)
-		pump_direction = text2num(signal.data["direction"])
-
-	if(signal.data["set_internal_pressure"] != null)
-		if (signal.data["set_internal_pressure"] == "default")
-			internal_pressure_bound = internal_pressure_bound_default
-		else
-			internal_pressure_bound = between(0,text2num(signal.data["set_internal_pressure"]), MAX_PUMP_PRESSURE)
-
-	if(signal.data["set_external_pressure"] != null)
-		if (signal.data["set_external_pressure"] == "default")
-			external_pressure_bound = external_pressure_bound_default
-		else
-			external_pressure_bound = between(0,text2num(signal.data["set_external_pressure"]),MAX_PUMP_PRESSURE)
-
-	if(signal.data["adjust_internal_pressure"] != null)
-		internal_pressure_bound = between(0,internal_pressure_bound + text2num(signal.data["adjust_internal_pressure"]),MAX_PUMP_PRESSURE)
-
-	if(signal.data["adjust_external_pressure"] != null)
-		external_pressure_bound = between(0,external_pressure_bound + text2num(signal.data["adjust_external_pressure"]),MAX_PUMP_PRESSURE)
-
-	if(signal.data["init"] != null)
-		SetName(signal.data["init"])
-		return
-
-	if(signal.data["status"] != null)
-		spawn(2)
-			broadcast_status()
-		return //do not update_icon
-
-		//log_admin("DEBUG \[[world.timeofday]\]: vent_pump/receive_signal: unknown command \"[signal.data["command"]]\"\n[signal.debug_print()]")
-	spawn(2)
-		broadcast_status()
-	update_icon()
-	return
+/obj/machinery/atmospherics/unary/vent_pump/RefreshParts()
+	. = ..()
+	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
 	if(isWelder(W))
@@ -417,12 +345,6 @@
 	. += "<table>"
 	. += "<tr><td><b>Name:</b></td><td>[name]</td>"
 	. += "<tr><td><b>Pump Status:</b></td><td>[pump_direction?("<font color = 'green'>Releasing</font>"):("<font color = 'red'>Siphoning</font>")]</td><td><a href='?src=\ref[src];switchMode=\ref[src]'>Toggle</a></td></tr>"
-	. += "<tr><td><b>ID Tag:</b></td><td>[id_tag]</td><td><a href='?src=\ref[src];settag=\ref[id_tag]'>Set ID Tag</a></td></td></tr>"
-	if(frequency%10)
-		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10]</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
-	else
-		. += "<tr><td><b>Frequency:</b></td><td>[frequency/10].0</td><td><a href='?src=\ref[src];setfreq=\ref[frequency]'>Set Frequency</a></td></td></tr>"
-	.+= "</table>"
 	. = JOINTEXT(.)
 
 /obj/machinery/atmospherics/unary/vent_pump/OnTopic(mob/user, href_list, datum/topic_state/state)
@@ -433,26 +355,211 @@
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
 		queue_icon_update() //force the icon to refresh after changing directional mode.
 		return TOPIC_REFRESH
-	if(href_list["settag"])		
-		var/t = sanitizeSafe(input(user, "Enter the ID tag for [src.name]", src.name, id_tag), MAX_NAME_LEN)
-		if(t && CanInteract(user, state))
-			id_tag = t
-			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
-	if(href_list["setfreq"])
-		var/freq = input(user, "Enter the Frequency for [src.name]. Decimal will automatically be inserted", src.name, frequency) as num|null
-		if(freq && CanInteract(user, state))
-			set_frequency(freq)
-			to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
-			return TOPIC_REFRESH
-		return TOPIC_HANDLED
 
-/obj/machinery/atmospherics/unary/vent_pump/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
+/decl/public_access/public_variable/pump_dir
+	expected_type = /obj/machinery/atmospherics/unary/vent_pump
+	name = "pump direction"
+	desc = "The pump mode of the vent. Expected values are \"siphon\" or \"release\"."
+	can_write = TRUE
+	has_updates = TRUE
+	var_type = IC_FORMAT_STRING
+
+/decl/public_access/public_variable/pump_dir/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+	return machine.pump_direction ? "release" : "siphon"
+
+/decl/public_access/public_variable/pump_dir/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+	if(!(new_value in list("release", "siphon")))
+		return FALSE
+	. = ..()
+	if(.)
+		machine.pump_direction = (new_value == "release")
+
+/decl/public_access/public_variable/pump_checks
+	expected_type = /obj/machinery/atmospherics/unary/vent_pump
+	name = "pump checks"
+	desc = "Numerical codes for whether the pump checks internal or internal pressure (or both) prior to operating. Can also be supplied the string keyword \"default\"."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_ANY
+
+/decl/public_access/public_variable/pump_checks/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+	return machine.pressure_checks
+
+/decl/public_access/public_variable/pump_checks/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+	if(new_value == "default")
+		new_value = machine.pressure_checks_default
+	var/sanitized = sanitize_integer(new_value, 0, 3)
+	if(new_value != sanitized)
+		return FALSE
+	. = ..()
+	if(.)
+		machine.pressure_checks = new_value
+
+/decl/public_access/public_variable/pressure_bound
+	expected_type = /obj/machinery/atmospherics/unary/vent_pump
+	name = "internal pressure bound"
+	desc = "The bound on internal pressure used in checks (a number). When writing, can be supplied the string keyword \"default\" instead."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_ANY
+
+/decl/public_access/public_variable/pressure_bound/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+	return machine.internal_pressure_bound
+
+/decl/public_access/public_variable/pressure_bound/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+	if(new_value == "default")
+		new_value = machine.internal_pressure_bound_default
+	new_value = Clamp(new_value, 0, MAX_PUMP_PRESSURE)
+	. = ..()
+	if(.)
+		machine.internal_pressure_bound = new_value
+
+/decl/public_access/public_variable/pressure_bound/external
+	expected_type = /obj/machinery/atmospherics/unary/vent_pump
+	name = "external pressure bound"
+	desc = "The bound on external pressure used in checks (a number). When writing, can be supplied the string keyword \"default\" instead."
+
+/decl/public_access/public_variable/pressure_bound/external/access_var(obj/machinery/atmospherics/unary/vent_pump/machine)
+	return machine.external_pressure_bound
+
+/decl/public_access/public_variable/pressure_bound/external/write_var(obj/machinery/atmospherics/unary/vent_pump/machine, new_value)
+	if(new_value == "default")
+		new_value = machine.external_pressure_bound_default
+	new_value = Clamp(new_value, 0, MAX_PUMP_PRESSURE)
+	. = ..()
+	if(.)
+		machine.external_pressure_bound = new_value
+
+/decl/public_access/public_method/purge_pump
+	name = "activate purge mode"
+	desc = "Activates purge mode, overriding pressure checks and removing air."
+	call_proc = /obj/machinery/atmospherics/unary/vent_pump/proc/purge
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump
+	frequency = PUMP_FREQ
+	filter = RADIO_TO_AIRALARM
+	event = /decl/public_access/public_variable/input_toggle
+	transmit_on_event = list(
+		"area" = /decl/public_access/public_variable/area_uid,
+		"device" = /decl/public_access/public_variable/identifier,
+		"power" = /decl/public_access/public_variable/use_power,
+		"direction" = /decl/public_access/public_variable/pump_dir,
+		"checks" = /decl/public_access/public_variable/pump_checks,
+		"internal" = /decl/public_access/public_variable/pressure_bound,
+		"external" = /decl/public_access/public_variable/pressure_bound/external,
+		"power_draw" = /decl/public_access/public_variable/power_draw,
+		"flow_rate" = /decl/public_access/public_variable/flow_rate
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_pump
+	frequency = PUMP_FREQ
+	filter = RADIO_FROM_AIRALARM
+	receive_and_call = list(
+		"power_toggle" = /decl/public_access/public_method/toggle_power,
+		"purge" = /decl/public_access/public_method/purge_pump,
+		"status" = /decl/public_access/public_method/refresh
+	)
+	receive_and_write = list(
+		"set_power" = /decl/public_access/public_variable/use_power,
+		"set_direction" = /decl/public_access/public_variable/pump_dir,
+		"set_checks" = /decl/public_access/public_variable/pump_checks,
+		"set_internal_pressure" = /decl/public_access/public_variable/pressure_bound,
+		"set_external_pressure" = /decl/public_access/public_variable/pressure_bound/external,
+		"init" = /decl/public_access/public_variable/name
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_pump/tank
+	frequency = ATMOS_TANK_FREQ
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank
+	frequency = ATMOS_TANK_FREQ
+	filter = RADIO_ATMOSIA
+
+/obj/machinery/atmospherics/unary/vent_pump/tank
+	controlled = FALSE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/tank = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
+	)
+
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank
+	controlled = FALSE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/tank = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/tank = 1
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_pump/external_air
+	frequency = EXTERNAL_AIR_FREQ
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/external_air
+	frequency = EXTERNAL_AIR_FREQ
+	filter = RADIO_AIRLOCK
+
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air
+	controlled = FALSE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/external_air = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/external_air = 1
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_pump/shuttle
+	frequency = SHUTTLE_AIR_FREQ
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle
+	frequency = SHUTTLE_AIR_FREQ
+	filter = RADIO_AIRLOCK
+
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle
+	controlled = FALSE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle = 1
+	)
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux
+	filter = RADIO_TO_AIRALARM
+
+// This is intended for hybrid airlock-room setups, where unlike the above, this one is controlled by the air alarm and attached to the internal atmos system.
+/obj/machinery/atmospherics/unary/vent_pump/shuttle_auxiliary
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/shuttle/aux = 1
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_pump/airlock
+	frequency = AIRLOCK_AIR_FREQ
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock
+	frequency = AIRLOCK_AIR_FREQ
+	filter = RADIO_AIRLOCK
+
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
+	controlled = FALSE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/airlock = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/airlock = 1
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_pump/engine
+	frequency = ATMOS_ENGINE_FREQ
+
+/decl/stock_part_preset/radio/event_transmitter/vent_pump/engine
+	frequency = ATMOS_ENGINE_FREQ
+
+/obj/machinery/atmospherics/unary/vent_pump/engine
+	name = "Engine Core Vent"
+	power_channel = ENVIRON
+	power_rating = 30000
+	controlled = FALSE
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_pump/engine = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_pump/engine = 1
+	)
+
+/obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()
+	. = ..()
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
 
 #undef DEFAULT_PRESSURE_DELTA
 

@@ -77,6 +77,11 @@
 	var/decl/public_access/public_variable/event
 	var/list/transmit_on_event
 
+/obj/item/weapon/stock_parts/radio/transmitter/on_event/is_valid_event(obj/machinery/machine, decl/public_access/variable)
+	if(istype(variable, /decl/public_access/public_method))
+		return LAZYACCESS(machine.public_methods, variable.type)
+	return ..()
+
 /obj/item/weapon/stock_parts/radio/transmitter/on_event/on_install(obj/machinery/machine)
 	..()
 	sanitize_events(machine, transmit_on_event)

@@ -30,9 +30,9 @@
 		/area/constructionsite = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/constructionsite/ai = NO_SCRUBBER|NO_VENT,
 		/area/constructionsite/atmospherics = NO_SCRUBBER,
-		/area/constructionsite/teleporter = NO_SCRUBBER,
+		/area/constructionsite/teleporter = NO_SCRUBBER|NO_VENT,
 		/area/derelict/ship = NO_SCRUBBER|NO_VENT,
-		/area/djstation = NO_SCRUBBER|NO_APC
+		/area/djstation = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 	area_coherency_test_subarea_count = list(
 		/area/constructionsite = 7,

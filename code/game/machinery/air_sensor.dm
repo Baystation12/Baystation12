@@ -32,14 +32,14 @@
 		icon_state = "gsensor[use_power]"
 
 /decl/public_access/public_variable/gas
-	expected_type = /obj/machinery/air_sensor
+	expected_type = /obj/machinery
 	name = "gas data"
 	desc = "A list of gas data from the sensor location; the list entries are two-entry lists with \"symbol\" and \"percent\" fields."
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = IC_FORMAT_LIST
 
-/decl/public_access/public_variable/gas/access_var(obj/machinery/air_sensor/sensor)
+/decl/public_access/public_variable/gas/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
 	if(!air_sample)
 		return
@@ -54,26 +54,26 @@
 		. += list(gas_list)
 
 /decl/public_access/public_variable/pressure
-	expected_type = /obj/machinery/air_sensor
+	expected_type = /obj/machinery
 	name = "pressure data"
 	desc = "The pressure of the gas at the sensor."
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = IC_FORMAT_STRING
 
-/decl/public_access/public_variable/pressure/access_var(obj/machinery/air_sensor/sensor)
+/decl/public_access/public_variable/pressure/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
 	return air_sample && num2text(round(air_sample.return_pressure(),0.1))
 
 /decl/public_access/public_variable/temperature
-	expected_type = /obj/machinery/air_sensor
+	expected_type = /obj/machinery
 	name = "temperature data"
 	desc = "The temperature of the gas at the sensor."
 	can_write = FALSE
 	has_updates = FALSE
 	var_type = IC_FORMAT_NUMBER
 
-/decl/public_access/public_variable/temperature/access_var(obj/machinery/air_sensor/sensor)
+/decl/public_access/public_variable/temperature/access_var(obj/machinery/sensor)
 	var/datum/gas_mixture/air_sample = sensor.return_air()
 	return air_sample && round(air_sample.temperature,0.1)
 

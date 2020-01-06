@@ -509,3 +509,25 @@
 		return jointext(status, " ")
 	else
 		return status.len
+
+/decl/public_access/public_variable/power_draw
+	expected_type = /obj/machinery/atmospherics
+	name = "last power draw"
+	desc = "The most recent data on the amount of power the machine used."
+	can_write = FALSE
+	has_updates = FALSE
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/power_draw/access_var(obj/machinery/atmospherics/machine)
+	return machine.last_power_draw
+
+/decl/public_access/public_variable/flow_rate
+	expected_type = /obj/machinery/atmospherics
+	name = "last flow_rate"
+	desc = "The most recent data on the volume of air the machine moved."
+	can_write = FALSE
+	has_updates = FALSE
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/flow_rate/access_var(obj/machinery/atmospherics/machine)
+	return machine.last_flow_rate
