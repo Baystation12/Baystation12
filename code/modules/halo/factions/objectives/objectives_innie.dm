@@ -39,8 +39,8 @@
 	win_points = 100
 
 /datum/objective/overmap/innie_base
-	short_text = "Protect Rabbit Hole Base"
-	explanation_text = "Protect your hidden base. From there you can launch the campaign to take over Geminus and beyond!"
+	short_text = "Protect Flagship"
+	explanation_text = "Protect your flagship. From there you can launch the campaign to take over Geminus and beyond!"
 	target_faction_name = "Insurrection"
 	overmap_type = 0
 	lose_points = 100

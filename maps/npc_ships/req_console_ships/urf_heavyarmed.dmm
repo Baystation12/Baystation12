@@ -27,7 +27,6 @@
 "aA" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "aB" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "aC" = (/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/structure/table/steel,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
-"aD" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aE" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aF" = (/obj/docking_umbilical/north,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aG" = (/obj/effect/hull_segment,/turf/simulated/wall,/area/om_ships/req_console_ship)
@@ -80,6 +79,7 @@
 "bC" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "bD" = (/obj/machinery/deck_gun{dir = 2},/turf/space,/area/space)
 "zw" = (/obj/structure/table/steel,/obj/machinery/light{dir = 8},/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"FY" = (/obj/machinery/vending/coffee,/obj/structure/sink/kitchen{dir = 2; pixel_x = 16; pixel_y = 22},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -91,7 +91,7 @@ aaaaaaaaaaaaabacacacacacacacacacacacacadaaadadacacacacacacacacacacacacacacacacaf
 aaaaaaabacacacacacacacacacacacacacacacacaaacacacacacacacacacacacaaaaahaaaaaaaaafaeaeaiaeafaaahaaaaaa
 aaabacacacacacacaaaaaaaaaaaaacajacaaaaaaaaaaaaahaaaaaaaaaaaaaaaaaaaaafafafafafafafafafakafafafafaaaa
 aaaaaaaaaaaaaaalaaaaaaaaaaamanaoafafacacacajacafafafafafafafafafafafafapaqarasatauavaqaqafaeaeawaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaamaxayayazayayayayaAaBaCafaDavaEafaqaFaqafaGafaHaqaqaqaqaqaqaqaqakaeaeawaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaamaxayayazayayayayaAaBaCafFYavaEafaqaFaqafaGafaHaqaqaqaqaqaqaqaqakaeaeawaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaIayayayafayayayayayayayaJaqaqaqaqaqaqaqaqafaqaqaqafafakafafaHaqaGaKaeawaaaa
 aaaaaLaLaLaLaLaLaLaLaLaLaMayaNafafaNafaOaPaQaNafafaRaRaqaSaqaqaqaTafaUafaUafaeaeaeafaVaqafaeaeawaaaa
 aaaWaWaWaWaWaWaWaWaWaWaWaXayayafaYayaZbaaPbbaybcafzwbebfafbgaqaqaqaUbhafbiafbjbkblafafaUafafafafaaaa

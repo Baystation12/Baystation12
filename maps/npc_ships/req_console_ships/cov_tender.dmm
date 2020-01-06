@@ -67,8 +67,6 @@
 "bx" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "by" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bz" = (/obj/machinery/nav_computer/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"bB" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"bC" = (/obj/machinery/vending/armory/covenant/general/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bD" = (/obj/structure/bed/roller/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bE" = (/obj/machinery/iv_drip,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "bG" = (/obj/machinery/autosurgeon/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -92,6 +90,7 @@
 "EC" = (/obj/machinery/slipspace_engine/covenant,/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/machinery/door/window/southleft,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Hw" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Je" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/nanolaminate/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"MJ" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/sink/kitchen{pixel_y = 22},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Oi" = (/obj/machinery/vending/armory/covenant/jiralhanae/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "OF" = (/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/window/reinforced/projresist/covenant{dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "PE" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/steel/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -101,6 +100,7 @@
 "Wa" = (/obj/machinery/sleeper/covenant{dir = 4; icon_state = "sleeper_0"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "WJ" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Yk" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"YE" = (/obj/machinery/vending/dinnerware{icon = 'code/modules/halo/icons/machinery/covenant/covendor.dmi'; icon_deny = "covendor-deny"; icon_vend = null},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ZH" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/structure/closet/crate/covenant{name = "Supraluminal Communications Equipment"},/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/card/id{desc = "Superluminal Communications Array Authentication Disk"; icon = 'code/modules/halo/covenant/Cards.dmi'; icon_state = "sangzealot_id"; name = "Superluminal Auth Disk."; tag = "icon-pinkGold"},/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
@@ -114,12 +114,12 @@ aaaaaaaaacacacacacaaaaaaaaaaacacacacaeaeaealaeaeaealaeamaeaeaeaeaeacacacacacacac
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacaeanaoahapaeaqahahahahftahahaeaeacacacacacacacacaeaeaeacacacaaaa
 aaaaaaacacacacacacacacacacacacacacahahftahahaeaeaeahbEauplOFckahdjaealaeacacacacacacUNaeaeacacacacaa
 aaaaaaacahahahftahahahahahahacacahawaxayazahahalahahbDaeaAECTJahahahahaeaBaCaDaEacacaeaeaeacacaaaaaa
-aaaaaFaGahaHahahaeaeaeaIaeaeaeahbBaeaeaeaeYkahaeaeaIaeaeaeaeaeaNaealaeaeaeaeaeaeaeDmaeamaJaKaaaaaaaa
+aaaaaFaGahaHahahaeaeaeaIaeaeaeahMJaeaeaeaeYkahaeaeaIaeaeaeaeaeaNaealaeaeaeaeaeaeaeDmaeamaJaKaaaaaaaa
 aaaaaLaMaIaeaNahaeaOaPaPaPaQaeahapaRaRaRaRaealaeaSaTaUWaaeaeaeaVaeahaWaeaYaePErtJeftalahahahaaaaaaaa
 aaaaaLbcbdaeaealaebebdaRbfaeaealaeojbgbgbgaqahapbhaRaeaeaeaebibjbkahahalahalahahahahapblaaaaaaaaaaaa
 aaaaaLbmamaebnahaebobpbpbpaQaeahapaRaRaRaRaealaebqbrbsWaaeaeaebtaeahbuaebwaePErtJeftalahahahaaaaaaaa
 aaaabxbyahbzahahaeaeaeamaeaeaeahyxaeaeaeaeZHahaeaeamaeaeaeaeaebnaealaeaeaeaeaeaeaeHwaeaIaJaKaaaaaaaa
-aaaaaaacacacacyCacacacacacacacacahbCOirUWJahahalahahbDaeaeaeaeahahahahaeaBaCaDaEacacaeaeaeacacaaaaaa
+aaaaaaacacacacyCacacacacacacacacahYEOirUWJahahalahahbDaeaeaeaeahahahahaeaBaCaDaEacacaeaeaeacacaaaaaa
 aaaaaaacacacacacacacacacacacacacacahahftahahaeaeaeahbErgPRbGaeahyBaealaeacacacacacacaeaeaeacacacacaa
 aaaaaaacacacaaaaaaaaaaaaaaaaacacacacaeanbHacapaeaqacahahahftahahaeaeacacacacacacacacUNaeaeacacacaaaa
 aaaaaaaaacacacacacaaaaaaaaaaacacacacaeaeaealaeaeaealaeaIaeaeaeaeaeacacacacacacacacacacacacacacaaaaaa
