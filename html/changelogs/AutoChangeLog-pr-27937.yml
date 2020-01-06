@@ -1,0 +1,4 @@
+author: "Xaytan"
+delete-after: True
+changes: 
+  - tweak: "Adds welding goggles as an option in loadout."
