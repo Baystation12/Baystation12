@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
-	for(var/jobtype in (list(/datum/job/assistant) | GLOB.using_map.allowed_jobs))
+	for(var/jobtype in (list(DEFAULT_JOB_TYPE) | GLOB.using_map.allowed_jobs))
 		var/datum/job/job = get_by_path(jobtype)
 		if(!job)
 			job = new jobtype
@@ -363,7 +363,7 @@ SUBSYSTEM_DEF(jobs)
 	// For those who wanted to be assistant if their preferences were filled, here you go.
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
-			var/datum/job/ass = /datum/job/assistant
+			var/datum/job/ass = DEFAULT_JOB_TYPE
 			if((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
 				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job

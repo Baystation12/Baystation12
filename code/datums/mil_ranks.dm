@@ -106,7 +106,7 @@ var/datum/mil_branches/mil_branches = new()
 	var/list/rank_types       // list of paths used to init the ranks list
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
-	var/assistant_job = /datum/job/assistant
+	var/assistant_job = DEFAULT_JOB_TYPE
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.net"
