@@ -13,6 +13,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#800080"
+	faction_whitelist = "Covenant"
 	outfit_type = /decl/hierarchy/outfit/huragok_cov
 
 /datum/job/covenant/AI
@@ -226,6 +227,7 @@
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/unggoy/ultra
 	access = list(230,250)
+	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
 
 /datum/job/covenant/unggoy_deacon
