@@ -21,13 +21,12 @@
 	else
 		overlays.Cut()
 
-/obj/machinery/cell_charger/examine(mob/user)
-	if(!..(user, 5))
-		return
-
-	to_chat(user, "There's [charging ? "a" : "no"] cell in the charger.")
-	if(charging)
-		to_chat(user, "Current charge: [charging.charge]")
+/obj/machinery/cell_charger/examine(var/mob/user, var/distance)
+	. = ..()
+	if(distance <= 5)
+		to_chat(user, "There's [charging ? "a" : "no"] cell in the charger.")
+		if(charging)
+			to_chat(user, "Current charge: [charging.charge]")
 
 /obj/machinery/cell_charger/attackby(obj/item/weapon/W, mob/user)
 	if(stat & BROKEN)
