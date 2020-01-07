@@ -9,6 +9,7 @@
 		/area/map_template/ecship/cockpit = NO_SCRUBBER|NO_APC
 	)
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 
 /area/map_template/ecship/crew
 	name = "\improper Crew Area"
