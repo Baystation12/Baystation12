@@ -274,7 +274,8 @@
 	icon_state = "revolver"
 
 /obj/random/projectile/spawn_choices()
-	return list(/obj/item/weapon/gun/projectile/shotgun/pump = 3,
+	return list(/obj/item/weapon/gun/projectile/heavysniper/boltaction = 4,
+				/obj/item/weapon/gun/projectile/shotgun/pump = 3,
 				/obj/item/weapon/gun/projectile/automatic/merc_smg = 2,
 				/obj/item/weapon/gun/projectile/automatic/assault_rifle = 2,
 				/obj/item/weapon/gun/projectile/automatic/bullpup_rifle = 2,

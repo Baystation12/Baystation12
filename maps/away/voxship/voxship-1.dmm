@@ -151,6 +151,7 @@
 /obj/random/medical,
 /obj/random/medical,
 /obj/item/weapon/storage/firstaid/combat,
+/obj/item/weapon/storage/box/detergent,
 /obj/machinery/light/small{
 	dir = 1
 	},
