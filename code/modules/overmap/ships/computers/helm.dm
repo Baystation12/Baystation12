@@ -152,6 +152,10 @@
 	if (!linked)
 		return
 
+	if(get_dist(user, src) > 1)
+		to_chat(user,"<span class = 'notice'>You need to be next to [src] to do that!</span>")
+		return
+
 	if (href_list["add"])
 		var/datum/data/record/R = new()
 		var/sec_name = input("Input naviation entry name", "New navigation entry", "Sector #[known_sectors.len]") as text

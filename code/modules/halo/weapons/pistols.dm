@@ -130,7 +130,7 @@
 	item_state = "handgonne"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	caliber = "14.5mm"
-	screen_shake = 2 //extra kickback
+	screen_shake = 1 //extra kickback
 	max_shells = 3
 	one_hand_penalty = 0
 	ammo_type = /obj/item/ammo_casing/a145_ap/tracerless
