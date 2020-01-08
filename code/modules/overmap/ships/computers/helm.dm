@@ -152,8 +152,8 @@
 	if (!linked)
 		return
 
-	if(get_dist(user, src) > 1)
-		to_chat(user,"<span class = 'notice'>You need to be next to [src] to do that!</span>")
+	if(get_dist(usr, src) > 1)
+		to_chat(usr,"<span class = 'notice'>You need to be next to [src] to do that!</span>")
 		return
 
 	if (href_list["add"])
