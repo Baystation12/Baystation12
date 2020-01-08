@@ -1892,7 +1892,6 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	input_tag = "cn2n";
 	name = "Nitrogen Supply Control";
 	output_tag = "cn2o";
@@ -2716,7 +2715,6 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	input_tag = "co2n";
 	name = "Oxygen Supply Control";
 	output_tag = "co2o";
@@ -2810,7 +2808,6 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	input_tag = "cco2n";
 	name = "Carbon Dioxide Tank Control";
 	output_tag = "cco2o";

@@ -28012,7 +28012,6 @@
 /area/rnd/xenobiology/xenoflora)
 "rab" = (
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	name = "Xenoflora Gas Monitor";
 	sensor_tag = "xenobot_sensor";
 	sensor_name = "Xenoflora Environment"

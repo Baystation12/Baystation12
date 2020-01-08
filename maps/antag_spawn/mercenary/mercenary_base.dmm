@@ -1333,7 +1333,6 @@
 /area/map_template/merc_shuttle/rear)
 "cd" = (
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	input_tag = "fuel_in";
 	name = "Fuel Supply Control";
 	output_tag = "fuel_out";
