@@ -21,7 +21,7 @@
 	brute_armor = 15
 	burn_armor = 10 //Not as defensive when burn applied.
 
-	integrity = 650
+	integrity = 700
 
 	explosion_resistance = 30
 

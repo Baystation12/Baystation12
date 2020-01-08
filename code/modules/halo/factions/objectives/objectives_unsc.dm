@@ -80,9 +80,9 @@
 	radio_name = "UNSC Overwatch"
 
 /datum/objective/overmap/unsc_innie_base
-	short_text = "Demolish the Insurrectionist base"
-	explanation_text = "Without a command center, the Insurrectionists will be less organized in their defiance. Demolish their base by taking out structural weak points."
+	short_text = "Eliminate the URF Flagship."
+	explanation_text = "Without a command center, the Insurrectionists will be less organized in their defiance. Destroy their flagship."
 	target_faction_name = "Insurrection"
 	objective_type = 0
-	overmap_type = 0
+	overmap_type = 1
 	win_points = 100
