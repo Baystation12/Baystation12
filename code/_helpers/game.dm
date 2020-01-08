@@ -125,6 +125,9 @@
 
 	return dist
 
+/proc/get_dist_bounds(var/target, var/source) // Alternative to get_dist for multi-turf objects
+	return Ceiling(bounds_dist(target, source)/world.icon_size) + 1
+
 /proc/circlerangeturfs(center=usr,radius=3)
 	var/turf/centerturf = get_turf(center)
 	. = list()

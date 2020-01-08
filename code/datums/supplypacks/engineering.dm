@@ -173,6 +173,14 @@
 	containername = "shield generator construction kit crate"
 	access = access_engine
 
+/decl/hierarchy/supply_pack/engineering/inertial_damper
+	name = "Equipment - inertial damper construction kit"
+	contains = list(/obj/item/weapon/stock_parts/circuitboard/inertial_damper, /obj/item/weapon/stock_parts/capacitor, /obj/item/weapon/stock_parts/micro_laser, /obj/item/weapon/stock_parts/console_screen)
+	cost = 30
+	containertype = /obj/structure/closet/crate/secure
+	containername = "inertial damper construction kit crate"
+	access = access_engine
+
 /decl/hierarchy/supply_pack/engineering/smbig
 	name = "Power - Supermatter core"
 	contains = list(/obj/machinery/power/supermatter)

@@ -728,6 +728,11 @@
 	name = "\improper Auxiliary Engineering Hard Storage"
 	icon_state = "engineering_storage"
 
+/area/engineering/inertial_damper
+	name = "\improper Inertial Damper"
+	icon_state = "engineering"
+	req_access = list(access_engine, access_engine_equip)
+
 //Vacant Areas
 /area/vacant
 	name = "\improper Vacant Area"
@@ -1287,11 +1292,6 @@
 /area/maintenance/disposal
 	name = "Waste Disposal"
 	icon_state = "disposal"
-
-/area/maintenance/incinerator
-	name = "\improper Incinerator"
-	icon_state = "disposal"
-	req_access = list(list(access_engine, access_medical, access_cargo))
 
 /area/maintenance/waterstore
 	name = "\improper Cistern"

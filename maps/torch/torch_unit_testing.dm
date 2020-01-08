@@ -22,7 +22,6 @@
 		/area/maintenance/exterior = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance/firstdeck/foreport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/firstdeck/forestarboard = NO_SCRUBBER|NO_VENT,
-		/area/maintenance/incinerator = NO_SCRUBBER,
 		/area/maintenance/seconddeck/aftport = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/seconddeck/forestarboard = NO_SCRUBBER|NO_VENT,
 		/area/maintenance/thirddeck/aftstarboard = NO_SCRUBBER|NO_VENT,

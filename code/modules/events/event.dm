@@ -143,6 +143,10 @@
 //Called during building of skybox to get overlays
 /datum/event/proc/get_skybox_image()
 
+//Called when picking a random event to check whether there are requirements for the event to be chosen
+/datum/event/proc/check_conditions()
+	return TRUE
+
 /datum/event/New(var/datum/event_meta/EM)
 	// event needs to be responsible for this, as stuff like APLUs currently make their own events for curious reasons
 	SSevent.active_events += src

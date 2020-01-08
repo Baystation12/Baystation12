@@ -1,0 +1,33 @@
+<h3>Inertial Damper Control</h3>
+<div class="item">
+	<div class="itemLabel">
+		Inertial Damper Control:
+	</div>
+	<div class="itemContent">
+		{{:helper.link('Toggle', null, {'toggle' : 1})}}
+	</div>	
+</div>
+<div class="item">
+	<div class="itemLabel">
+		Dampening Strength:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.damping_strength, null, {'set_strength': 1})}}
+	</div>
+</div>
+{{if data.online}}
+	<div class="item">
+		<div class="itemLabel">
+			Power Usage:
+		</div>
+		<div class="itemContent">
+			{{:data.power_usage}}kW
+		</div>
+	</div>
+{{else}}
+	<div class="item">
+		<div class="itemLabel">
+			SYSTEM OFFLINE
+		</div>
+	</div>
+{{/if}}

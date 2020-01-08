@@ -29,6 +29,16 @@
 			<span class='white'>{{:data.total_thrust}}</span>
 		</div>
 	</div>
+	{{if data.needs_dampers}}
+		<div class='item'>
+			<div class="itemLabel">
+				<span class='average'>Inertial Dampening:</span>
+			</div>
+			<div class="itemContent">
+				<span class='white'>{{:data.damping_strength}} Gm/h</span>
+			</div>
+		</div>
+	{{/if}}
 </div>
 {{if data.state == "engines"}}
 	{{if data.engines_info}}

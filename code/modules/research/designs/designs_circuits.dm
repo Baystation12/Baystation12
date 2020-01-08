@@ -677,7 +677,7 @@
 	id = "shield_generator"
 	req_tech = list(TECH_MAGNET = 3, TECH_POWER = 4)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/shield_generator
-	sort_string = "VAAAC"
+	sort_string = "VAAAA"
 
 /datum/design/circuit/shield_diffuser
 	name = "Shield Diffuser"
@@ -694,6 +694,14 @@
 	req_tech = list(TECH_COMBAT = 2, TECH_ENGINEERING = 2)
 	build_path = /obj/item/weapon/stock_parts/circuitboard/pointdefense
 	sort_string = "VAAAC"
+
+/datum/design/circuit/inertial_damper
+	name = "Inertial dampener"
+	desc = "Allows for the construction of an inertial dampener circuit board."
+	id = "inertialdampener"
+	req_tech = list(TECH_ENGINEERING = 5, TECH_MAGNET = 3)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/inertial_damper
+	sort_string = "VAAAD"
 
 /datum/design/circuit/pointdefense_control
 	name = "Fire Assist Mainframe"

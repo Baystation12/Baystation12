@@ -32,6 +32,13 @@
 	data["engines_info"] = enginfo
 	data["total_thrust"] = total_thrust
 
+	var/damping_strength = 0
+	for(var/datum/ship_inertial_damper/I in linked.inertial_dampers)
+		var/obj/machinery/inertial_damper/ID = I.holder
+		damping_strength += ID.get_damping_strength(FALSE)
+	data["damping_strength"] = damping_strength
+	data["needs_dampers"] = linked.needs_dampers
+
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "engines_control.tmpl", "[linked.name] Engines Control", 390, 530)

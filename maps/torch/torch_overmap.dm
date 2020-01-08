@@ -6,6 +6,8 @@
 	burn_delay = 2 SECONDS
 	base = TRUE
 
+	needs_dampers = TRUE
+
 	initial_restricted_waypoints = list(
 		"Charon" = list("nav_hangar_calypso"), 	//can't have random shuttles popping inside the ship
 		"Guppy" = list("nav_hangar_guppy"),

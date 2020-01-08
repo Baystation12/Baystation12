@@ -59,9 +59,10 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 
 	var/list/possible_events = list()
 	for(var/datum/event_meta/EM in available_events)
-		var/event_weight = get_weight(EM, active_with_role)
-		if(event_weight)
-			possible_events[EM] = event_weight
+		if(EM.event_type.check_conditions())
+			var/event_weight = get_weight(EM, active_with_role)
+			if(event_weight)
+				possible_events[EM] = event_weight
 
 	if(possible_events.len == 0)
 		return null
@@ -161,6 +162,7 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Electrical Storm",			/datum/event/electrical_storm, 			10,		list(ASSIGNMENT_ENGINEER = 15, ASSIGNMENT_JANITOR = 10)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Gravity Failure",						/datum/event/gravity,	 				75,		list(ASSIGNMENT_ENGINEER = 25)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Grid Check",							/datum/event/grid_check, 				200,	list(ASSIGNMENT_ENGINEER = 10)),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Inertial Damper Recalibration",		/datum/event/inertial_damper,	 		75,		list(ASSIGNMENT_ENGINEER = 25)),		
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Ion Storm",					/datum/event/ionstorm, 					0,		list(ASSIGNMENT_AI = 50, ASSIGNMENT_CYBORG = 50, ASSIGNMENT_ENGINEER = 15, ASSIGNMENT_SCIENTIST = 5)),
 		new /datum/event_meta/no_overmap(EVENT_LEVEL_MODERATE, "Meteor Shower",				/datum/event/meteor_wave,				0,		list(ASSIGNMENT_ENGINEER = 20)),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Prison Break",							/datum/event/prison_break,				0,		list(ASSIGNMENT_SECURITY = 100)),
