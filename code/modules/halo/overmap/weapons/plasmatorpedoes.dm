@@ -47,6 +47,7 @@
 	icon_state = "plasma_torp_om_proj"
 	ship_damage_projectile = /obj/item/projectile/plas_torp_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/plasma_torpedoes_impact.ogg'
+	penetrating = 1
 	damage = 100
 	step_delay = 0.5 SECOND
 
@@ -61,7 +62,9 @@
 	damage = 7 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/plas_torp_damage_proj/on_impact(var/atom/impacted)
-	explosion(loc,1,3,4,5, adminlog = 0)
+	if(!istype(impacted,/obj/effect/shield))
+		if(penetrating > 0)
+			explosion(loc,1,3,4,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
 	. = ..()
