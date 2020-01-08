@@ -68,8 +68,15 @@
 
 /datum/unit_test/air_alarm_connectivity
 	name = "MAP: Air alarms shall receive updates."
+	async = TRUE // Waits for SStimers to finish one full run before testing
 
 /datum/unit_test/air_alarm_connectivity/start_test()
+	return 1
+
+/datum/unit_test/air_alarm_connectivity/subsystems_to_await()
+	return list(SStimer)
+
+/datum/unit_test/air_alarm_connectivity/check_result()
 	var/failed = FALSE
 	for(var/area/A in world)
 		if(!A.z)
@@ -84,11 +91,11 @@
 
 		for(var/tag in A.air_vent_names) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
 			if(!A.air_vent_info[tag])
-				log_bad("[log_info_line(A.air_vent_names[tag])] with id_tag [tag] did not update the air alarm in area [A].")
+				log_bad("Vent [A.air_vent_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
 				failed = TRUE
 		for(var/tag in A.air_scrub_names)
 			if(!A.air_scrub_info[tag])
-				log_bad("[log_info_line(A.air_vent_names[tag])] with id_tag [tag] did not update the air alarm in area [A].")
+				log_bad("Scrubber [A.air_scrub_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
 				failed = TRUE
 
 	if(failed)
