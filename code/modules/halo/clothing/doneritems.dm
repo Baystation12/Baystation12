@@ -1112,6 +1112,48 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	shoes = /obj/item/clothing/shoes/sangheili/dogler
 	head = /obj/item/clothing/head/helmet/sangheili/dogler
 	l_pocket = /obj/item/weapon/grenade/plasma
+
+////////NANU\\\\\\\\\
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/nanu
+	name = "ODST Snow Variant Mk-3 Helmet"
+
+	item_state = "nanu-helmet_worn"
+	icon_state = "nanu-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/nanu
+	name = "ODST Snow Variant Mk-3 Armor"
+	desc = "The Mk3 armor was made to give more camouflage in cold and artic environments due to its special nature of being extra insulated against the elements and is therefore also made for prolonged exposure to space."
+
+	item_state = "nanu-armor_obj"
+	icon_state = "nanu-armor_worn"
+
+/obj/item/weapon/storage/backpack/odst/nanu
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "ODST Snow Variant Mk-3 Armor Backpack"
+	item_state = "nanu-backpack_worn"
+	icon_state = "nanu-backpack_obj"
+
+/obj/item/weapon/storage/box/large/donator/nanu
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/nanu,
+					/obj/item/clothing/suit/armor/special/odst/donator/nanu,
+					/obj/item/weapon/storage/backpack/odst/nanu
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/nanu,
+					/obj/item/clothing/suit/armor/special/odst/donator/nanu,
+					/obj/item/weapon/storage/backpack/odst/nanu
+					)
+
+/decl/hierarchy/outfit/eonoc_odst
+	name = "eonoc - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/nanu
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/nanu
+	back = /obj/item/weapon/storage/backpack/odst/nanu
+
+
 ////////PANTAS\\\\\\\\
 
 //URFC
