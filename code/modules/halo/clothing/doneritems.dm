@@ -800,15 +800,16 @@ decl/hierarchy/outfit/Jul
 /obj/item/clothing/head/helmet/odst/donator/mann
 	name = "Mann's ODST Helmet"
 
-	item_state = "Odst Helmet Mann"
-	icon_state = "Odst Helmet Mann"
-	item_state_novisr = "Odst Helmet Mann"
-	icon_state_novisr = "Odst Helmet Mann"
+	item_state = "mann-odst-helmet_worn"
+	icon_state = "mann-odst-helmet_obj"
+	item_state_novisr = "mann-odst-helmet-open_worn"
+	icon_state_novisr = "mann-odst-helmet-open_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/mann
 	name = "Mann's ODST Armour"
 
-	icon_state = "Odst Armor Mann"
+	icon_state = "mann-odst-armor_obj"
+	item_state = "mann-odst-armor_worn"
 
 /obj/item/weapon/storage/box/large/donator/mann
 	startswith = list(/obj/item/clothing/head/helmet/odst/donator/mann,
@@ -1527,6 +1528,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "m6gold"
 	item_state = "m6gold"
+	hitsound = 'code/modules/halo/sounds/hurtflesh2.ogg'
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s/donator/sleepy/update_icon()
 	if(ammo_magazine)
