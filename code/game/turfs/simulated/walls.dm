@@ -201,9 +201,9 @@
 		if(1.0)
 			dismantle_wall(1,1)
 		if(2.0)
-			take_damage(rand(max_health()/2, (max_health()/4) * 2))
+			take_damage(rand(max_health()/4, (max_health()/2)))
 		if(3.0)
-			take_damage(rand(max_health()/4, max_health()/2))
+			take_damage(rand(max_health()/8, max_health()/4))
 	return
 
 // Wall-rot effect, a nasty fungus that destroys walls.
