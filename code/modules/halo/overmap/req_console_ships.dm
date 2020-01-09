@@ -15,7 +15,7 @@
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard UNSC armor, armed with missiles and deck guns."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_unsc_combat
-	cooldown_apply = 2 MINUTES
+	cooldown_apply = 4 MINUTES
 
 /datum/npc_ship/heavyarmed_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_heavyarmed.dmm')
@@ -32,7 +32,7 @@
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard UNSC armor, armed with a MAC and deck guns"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_unsc_combat
-	cooldown_apply = 6 MINUTES
+	cooldown_apply = 7 MINUTES
 
 /datum/npc_ship/experimental_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_macplatform_experimental.dmm')
@@ -49,7 +49,7 @@
 	choice_category = "Gunboats"
 	choice_desc = "A ship with stripped down armor, armed with a large MAC gun"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_unsc_combat
-	cooldown_apply = 8 MINUTES
+	cooldown_apply = 9 MINUTES
 
 /datum/npc_ship/unsc_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_tender.dmm')
@@ -125,7 +125,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard Covenant ship plating, armed with plasma torpedoes and pulse lasers."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_cov_combat
-	cooldown_apply = 2 MINUTES
+	cooldown_apply = 4 MINUTES
 
 /datum/npc_ship/heavyarmed_cov_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_heavyarmed.dmm')
@@ -142,7 +142,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard Covenant ship plating, armed with an Energy  Projector and pulse lasers"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_cov_combat
-	cooldown_apply = 6 MINUTES
+	cooldown_apply = 7 MINUTES
 
 /datum/npc_ship/experimental_cov_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_laserplatform_experimental.dmm')
@@ -159,7 +159,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 	choice_category = "Gunboats"
 	choice_desc = "A ship with stripped down armor, armed soely with two Energy Projectors."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_cov_combat
-	cooldown_apply = 8 MINUTES
+	cooldown_apply = 9 MINUTES
 
 /datum/npc_ship/cov_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_tender.dmm')
@@ -234,7 +234,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard URF armor, armed with missiles and deck guns."
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_urf_combat
-	cooldown_apply = 2 MINUTES
+	cooldown_apply = 4 MINUTES
 
 /datum/npc_ship/heavyarmed_urf_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_heavyarmed.dmm')
@@ -250,7 +250,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 	choice_category = "Gunboats"
 	choice_desc = "A ship with standard URF armor, armed with a MAC and deck guns"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_urf_combat
-	cooldown_apply = 6 MINUTES
+	cooldown_apply = 7 MINUTES
 
 /datum/npc_ship/experimental_urf_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_macplatform_experimental.dmm')
@@ -266,7 +266,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 	choice_category = "Gunboats"
 	choice_desc = "A ship with stripped down armor, armed with a large MAC gun"
 	spawned_ship = /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_urf_combat
-	cooldown_apply = 8 MINUTES
+	cooldown_apply = 9 MINUTES
 
 /datum/npc_ship/urf_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_tender.dmm')
