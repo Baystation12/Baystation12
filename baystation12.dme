@@ -2749,7 +2749,6 @@
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Core.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Dispenser.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Food-Drinks.dm"
-#include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Helpers.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Medicine.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Other.dm"
 #include "code\modules\reagents\Chemistry-Reagents\Chemistry-Reagents-Toxins.dm"
