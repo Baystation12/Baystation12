@@ -1148,7 +1148,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 					)
 
 /decl/hierarchy/outfit/eonoc_odst
-	name = "eonoc - ODST"
+	name = "nanu - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/nanu
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/nanu
 	back = /obj/item/weapon/storage/backpack/odst/nanu
