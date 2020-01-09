@@ -33,7 +33,7 @@
 /datum/event/minispasm/proc/do_spasm(var/mob/living/victim, var/obj/item/device/radio/source)
 	set waitfor = 0
 
-	if(iscarbon(victim))
+	if(iscarbon(victim) && !victim.isSynthetic())
 		var/list/disabilities = list(NEARSIGHTED, EPILEPSY, TOURETTES, NERVOUS)
 		for(var/disability in disabilities)
 			if(victim.disabilities & disability)

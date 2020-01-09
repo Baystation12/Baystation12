@@ -3253,9 +3253,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "gz" = (
@@ -3784,10 +3781,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "hx" = (
 /obj/structure/fitness/weightlifter,
@@ -3880,11 +3876,10 @@
 /area/engineering/hardstorage)
 "hI" = (
 /obj/structure/lattice,
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 2;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3ph_out";
 	initialize_directions = 1;
@@ -4820,7 +4815,7 @@
 	pixel_x = 28
 	},
 /obj/machinery/alarm/warm{
-	alarm_frequency = 1438;
+	alarm_frequency = 1439;
 	pixel_y = 24
 	},
 /obj/item/weapon/stool/wood,
@@ -5268,9 +5263,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "kc" = (
@@ -5319,8 +5311,7 @@
 /area/crew_quarters/head/sauna)
 "kg" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1;
-	frequency = 1438
+	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
 /area/crew_quarters/head/sauna)
@@ -7694,15 +7685,13 @@
 /area/thruster/d3port)
 "pw" = (
 /obj/structure/railing/mapped{
-	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
-	},
-/obj/structure/railing/mapped{
 	dir = 1;
 	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair{
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "py" = (
@@ -8601,10 +8590,9 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "rN" = (
 /obj/machinery/atmospherics/binary/pump/on{
@@ -10281,9 +10269,8 @@
 /turf/simulated/wall/prepainted,
 /area/maintenance/thirddeck/aftstarboard)
 "vf" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bsa_pump"
 	},
 /obj/machinery/airlock_sensor{
@@ -10320,11 +10307,10 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "vj" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3po2_out";
 	initialize_directions = 1;
@@ -12204,13 +12190,9 @@
 	dir = 4;
 	pixel_x = 24
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "Ar" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -12289,11 +12271,9 @@
 /obj/machinery/light/spot{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/obj/machinery/vending/cigarette,
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "AD" = (
 /obj/structure/table/standard,
@@ -14249,9 +14229,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/habcheck)
 "Gb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/machinery/light{
@@ -16596,11 +16575,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "LH" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3so2_out";
 	initialize_directions = 1;
@@ -16765,6 +16743,10 @@
 /obj/effect/shuttle_landmark/ert/deck3,
 /turf/space,
 /area/space)
+"Me" = (
+/obj/machinery/vending/cigarette,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/starboard)
 "Mf" = (
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled/techfloor,
@@ -17390,9 +17372,8 @@
 /turf/simulated/floor/lino,
 /area/crew_quarters/office)
 "Oh" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -17468,6 +17449,10 @@
 	tag = "icon-railing0 (EAST)"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/computer/modular/preset/civilian{
+	icon_state = "console";
+	dir = 1
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "Ou" = (
@@ -17746,9 +17731,8 @@
 /obj/machinery/oxygen_pump{
 	pixel_y = 32
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -18953,9 +18937,6 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/mess)
 "ST" = (
@@ -19001,10 +18982,9 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "Te" = (
 /obj/structure/table/steel,
@@ -20066,10 +20046,9 @@
 	name = "Hydroponics";
 	sort_type = "Hydroponics"
 	},
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "VU" = (
 /turf/simulated/floor/tiled,
@@ -20426,14 +20405,12 @@
 /area/chapel/office)
 "Xb" = (
 /obj/structure/lattice,
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d3sh_out";
-	initial_loc = null;
 	initialize_directions = 1;
 	internal_pressure_bound = 2000;
 	internal_pressure_bound_default = 2000;
@@ -20508,9 +20485,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/turret_protected/ai_upload)
 "Xh" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -20767,6 +20743,16 @@
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
+"XQ" = (
+/obj/structure/disposalpipe/segment{
+	dir = 2;
+	icon_state = "pipe-c"
+	},
+/obj/structure/flora/tree/pine/xmas,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
+/area/crew_quarters/mess)
 "XR" = (
 /turf/simulated/floor/tiled,
 /area/crew_quarters/cryolocker)
@@ -20859,9 +20845,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d3starboard)
 "Yh" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -21161,9 +21146,8 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
-	frequency = 1380;
 	id_tag = "eva_pump"
 	},
 /obj/effect/floor_decal/techfloor,
@@ -21386,16 +21370,14 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "ZK" = (
-/obj/effect/floor_decal/corner/blue/diagonal{
-	dir = 4
-	},
 /obj/machinery/alarm{
 	dir = 8;
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/machinery/computer/modular/preset/civilian,
-/turf/simulated/floor/tiled/white,
+/obj/item/clothing/head/festive,
+/obj/item/clothing/head/festive,
+/turf/simulated/floor/carpet/green,
 /area/crew_quarters/mess)
 "ZN" = (
 /turf/simulated/wall/r_wall/hull,
@@ -39317,7 +39299,7 @@ wn
 Pn
 bA
 AC
-Tb
+XQ
 hw
 iv
 gz
@@ -40733,7 +40715,7 @@ cl
 NH
 Ux
 cl
-aY
+Me
 vd
 RB
 RB

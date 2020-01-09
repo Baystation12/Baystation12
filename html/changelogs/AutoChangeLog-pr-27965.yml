@@ -1,0 +1,4 @@
+author: "MrKicker"
+delete-after: True
+changes: 
+  - tweak: "AI can now make multi-line announcements"

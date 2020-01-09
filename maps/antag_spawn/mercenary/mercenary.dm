@@ -8,6 +8,7 @@
 	desc = "Sensor array detects a medium cargo vessel with high structural damage."
 	in_space = 1
 	icon_state = "ship"
+	hide_from_reports = TRUE
 	initial_generic_waypoints = list(
 		"nav_merc_1",
 		"nav_merc_2",

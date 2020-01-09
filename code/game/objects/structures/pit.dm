@@ -60,7 +60,10 @@
 	update_icon()
 
 /obj/structure/pit/return_air()
-	return open
+	if(open && loc)
+		return loc.return_air()
+	else
+		return null
 
 /obj/structure/pit/proc/digout(mob/escapee)
 	var/breakout_time = 1 //2 minutes by default

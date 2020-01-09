@@ -5,10 +5,11 @@
 	suffixes = list("ec_old_crash/ec_old_crash.dmm")
 	cost = 0.5
 	apc_test_exempt_areas = list(
-		/area/map_template/ecship/engine = NO_SCRUBBER|NO_APC,
+		/area/map_template/ecship/engine = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/map_template/ecship/cockpit = NO_SCRUBBER|NO_APC
 	)
 	ruin_tags = RUIN_HUMAN|RUIN_WRECK
+	template_flags = TEMPLATE_FLAG_CLEAR_CONTENTS | TEMPLATE_FLAG_NO_RUINS
 
 /area/map_template/ecship/crew
 	name = "\improper Crew Area"

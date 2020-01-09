@@ -27,14 +27,37 @@ Thus, the two variables affect pump operation are set in New():
 	use_power = POWER_USE_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 30000			// 30000 W ~ 40 HP
+	identifier = "AGP"
 
 	var/max_pressure_setting = MAX_PUMP_PRESSURE
 
-	var/frequency = 0
-	var/id = null
-	var/datum/radio_frequency/radio_connection
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "pump"
+
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/identifier,
+		/decl/public_access/public_variable/use_power,
+		/decl/public_access/public_variable/pump_target_output
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_power,
+		/decl/public_access/public_method/refresh	
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/pump = 1,
+		/decl/stock_part_preset/radio/event_transmitter/pump = 1
+	)
+
+	frame_type = /obj/item/pipe
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	base_type = /obj/machinery/atmospherics/binary/pump/buildable
+
+/obj/machinery/atmospherics/binary/pump/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/binary/pump/Initialize()
 	. = ..()
@@ -94,34 +117,6 @@ Thus, the two variables affect pump operation are set in New():
 
 	return 1
 
-//Radio remote control
-
-/obj/machinery/atmospherics/binary/pump/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, radio_filter = RADIO_ATMOSIA)
-
-/obj/machinery/atmospherics/binary/pump/proc/broadcast_status()
-	if(!radio_connection)
-		return 0
-
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.source = src
-
-	signal.data = list(
-		"tag" = id,
-		"device" = "AGP",
-		"power" = use_power,
-		"target_output" = target_pressure,
-		"sigtype" = "status"
-	)
-
-	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
-
-	return 1
-
 /obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(stat & (BROKEN|NOPOWER))
 		return
@@ -147,45 +142,6 @@ Thus, the two variables affect pump operation are set in New():
 		ui.set_initial_data(data)	// when the ui is first opened this is the data it will use
 		ui.open()					// open the new ui window
 		ui.set_auto_update(1)		// auto update every Master Controller tick
-
-/obj/machinery/atmospherics/binary/pump/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
-
-/obj/machinery/atmospherics/binary/pump/Destroy()
-	unregister_radio(src, frequency)
-	. = ..()
-
-/obj/machinery/atmospherics/binary/pump/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
-		return 0
-
-	if(signal.data["power"])
-		if(text2num(signal.data["power"]))
-			update_use_power(POWER_USE_IDLE)
-		else
-			update_use_power(POWER_USE_OFF)
-
-	if("power_toggle" in signal.data)
-		update_use_power(!use_power)
-
-	if(signal.data["set_output_pressure"])
-		target_pressure = between(
-			0,
-			text2num(signal.data["set_output_pressure"]),
-			ONE_ATMOSPHERE*50
-		)
-
-	if(signal.data["status"])
-		spawn(2)
-			broadcast_status()
-		return //do not update_icon
-
-	spawn(2)
-		broadcast_status()
-	update_icon()
-	return
 
 /obj/machinery/atmospherics/binary/pump/interface_interact(mob/user)
 	ui_interact(user)
@@ -213,24 +169,51 @@ Thus, the two variables affect pump operation are set in New():
 	if(.)
 		src.update_icon()
 
-/obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!isWrench(W))
-		return ..()
-	if (!(stat & NOPOWER) && use_power)
-		to_chat(user, "<span class='warning'>You cannot unwrench this [src], turn it off first.</span>")
-		return 1
-	var/datum/gas_mixture/int_air = return_air()
-	var/datum/gas_mixture/env_air = loc.return_air()
-	if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-		to_chat(user, "<span class='warning'>You cannot unwrench this [src], it too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40, src))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear ratchet.")
-		new /obj/item/pipe(loc, src)
-		qdel(src)
+/obj/machinery/atmospherics/binary/pump/cannot_transition_to(state_path, mob/user)
+	if(state_path == /decl/machine_construction/default/deconstructed)
+		if (!(stat & NOPOWER) && use_power)
+			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
+		var/datum/gas_mixture/int_air = return_air()
+		var/datum/gas_mixture/env_air = loc.return_air()
+		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
+			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
+	return ..()
+
+/decl/public_access/public_variable/pump_target_output
+	expected_type = /obj/machinery/atmospherics/binary/pump
+	name = "output pressure"
+	desc = "The output pressure of the pump."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_NUMBER
+
+/decl/public_access/public_variable/pump_target_output/access_var(obj/machinery/atmospherics/binary/pump/machine)
+	return machine.target_pressure
+
+/decl/public_access/public_variable/pump_target_output/write_var(obj/machinery/atmospherics/binary/pump/machine, new_value)
+	new_value = Clamp(new_value, 0, machine.max_pressure_setting)
+	. = ..()
+	if(.)
+		machine.target_pressure = new_value
+
+/decl/stock_part_preset/radio/event_transmitter/pump
+	frequency = PUMP_FREQ
+	filter = RADIO_ATMOSIA
+	event = /decl/public_access/public_variable/input_toggle
+	transmit_on_event = list(
+		"device" = /decl/public_access/public_variable/identifier,
+		"power" = /decl/public_access/public_variable/use_power,
+		"target_output" = /decl/public_access/public_variable/pump_target_output
+	)
+
+/decl/stock_part_preset/radio/receiver/pump
+	frequency = PUMP_FREQ
+	filter = RADIO_ATMOSIA
+	receive_and_call = list(
+		"power_toggle" = /decl/public_access/public_method/toggle_power,
+		"status" = /decl/public_access/public_method/refresh
+	)
+	receive_and_write = list(
+		"set_power" = /decl/public_access/public_variable/use_power,
+		"set_output_pressure" = /decl/public_access/public_variable/pump_target_output
+	)

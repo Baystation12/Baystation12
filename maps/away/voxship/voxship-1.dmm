@@ -217,7 +217,7 @@
 /area/voxship/base)
 "aM" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 2002;
+	frequency = 1439;
 	id_tag = "vox_ship_in";
 	injecting = 1;
 	use_power = 1
@@ -230,7 +230,7 @@
 /area/voxship/ship)
 "aN" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 2002;
+	frequency = 1439;
 	id_tag = "vox_ship_in";
 	injecting = 1;
 	use_power = 1
@@ -312,7 +312,7 @@
 "aZ" = (
 /obj/machinery/computer/air_control{
 	dir = 4;
-	frequency = 2002;
+	frequency = 1439;
 	input_tag = "vox_ship_in";
 	name = "Ship Juice Control";
 	output_tag = "vox_ship_out";
@@ -455,7 +455,6 @@
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 2002;
 	icon_state = "map_vent_in";
 	id_tag = "vox_ship_out";
 	initialize_directions = 1;
@@ -540,7 +539,7 @@
 "bB" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 4;
-	frequency = 2002;
+	frequency = 1439;
 	icon_state = "map_injector";
 	id = "vox_ship_in";
 	use_power = 1
@@ -1626,7 +1625,6 @@
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 2002;
 	icon_state = "map_vent_in";
 	id_tag = "vox_base_out";
 	initialize_directions = 1;
@@ -1878,7 +1876,7 @@
 /obj/item/weapon/storage/toolbox/syndicate,
 /obj/machinery/computer/air_control{
 	dir = 4;
-	frequency = 2002;
+	frequency = 1439;
 	input_tag = "vox_base_in";
 	name = "Base Breath Control";
 	output_tag = "vox_base_out"

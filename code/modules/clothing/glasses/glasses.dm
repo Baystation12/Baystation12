@@ -21,6 +21,8 @@
 
 /obj/item/clothing/glasses/Initialize()
 	. = ..()
+	if(toggleable)
+		set_extension(src, /datum/extension/base_icon_state, icon_state)
 	if(ispath(hud))
 		hud = new hud(src)
 
@@ -51,6 +53,7 @@
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
+		var/datum/extension/base_icon_state/BIS = get_extension(src, /datum/extension/base_icon_state)
 		if(active)
 			active = FALSE
 			icon_state = off_state
@@ -63,7 +66,7 @@
 				to_chat(user, "You deactivate the optical matrix on \the [src].")
 		else
 			active = TRUE
-			icon_state = initial(icon_state)
+			icon_state = BIS.base_icon_state
 			user.update_inv_glasses()
 			if(activation_sound)
 				sound_to(user, activation_sound)
@@ -76,6 +79,14 @@
 		update_clothing_icon()
 		update_vision()
 		user.update_action_buttons()
+
+/obj/item/clothing/glasses/inherit_custom_item_data(datum/custom_item/citem)
+	. = ..()
+	if(toggleable)
+		if(citem.additional_data["icon_on"])
+			set_icon_state(citem.additional_data["icon_on"])
+		if(citem.additional_data["icon_off"])
+			off_state = citem.additional_data["icon_off"]
 
 /obj/item/clothing/glasses/meson
 	name = "optical meson scanner"

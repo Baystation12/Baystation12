@@ -1,0 +1,4 @@
+author: "Anticept"
+delete-after: True
+changes: 
+  - tweak: "Farmbots now refill from a sink at a higher rate, up from 10 to 100 per cycle."

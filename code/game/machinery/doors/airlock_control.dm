@@ -104,7 +104,7 @@
 		if (bumped)
 			signal.data["bumped_with_access"] = 1
 
-		radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, radio_filter = RADIO_AIRLOCK)
+		radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
 
 
 /obj/machinery/door/airlock/open(surpress_send)
@@ -176,7 +176,7 @@
 	signal.data["tag"] = master_tag
 	signal.data["command"] = command
 
-	radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, radio_filter = RADIO_AIRLOCK)
+	radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
 	flick("airlock_sensor_cycle", src)
 	return TRUE
 
@@ -192,7 +192,7 @@
 			signal.data["timestamp"] = world.time
 			signal.data["pressure"] = num2text(pressure)
 
-			radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, radio_filter = RADIO_AIRLOCK)
+			radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
 
 			previousPressure = pressure
 
@@ -265,7 +265,7 @@
 		signal.data["tag"] = master_tag
 		signal.data["command"] = command
 
-		radio_connection.post_signal(src, signal, range = AIRLOCK_CONTROL_RANGE, radio_filter = RADIO_AIRLOCK)
+		radio_connection.post_signal(src, signal, RADIO_AIRLOCK, AIRLOCK_CONTROL_RANGE)
 	flick("access_button_cycle", src)
 	return TRUE
 

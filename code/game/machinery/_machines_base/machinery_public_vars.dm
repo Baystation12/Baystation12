@@ -32,7 +32,7 @@ Must be implemented by subtypes.
 /decl/public_access/public_variable/proc/write_var_protected(datum/owner, new_value)
 	if(!can_write)
 		return FALSE
-	write_var(new_value)
+	write_var(owner, new_value)
 
 /*
 Listener registration. You must unregister yourself if you are destroyed; the owner being destroyed will be handled automatically.
@@ -87,9 +87,13 @@ Public methods machines can expose. Pretty bare-bones; just wraps a proc and giv
 
 /decl/public_access/public_method
 	var/call_proc
+	var/forward_args = FALSE
 
-/decl/public_access/public_method/proc/perform(datum/owner)
-	call(owner, call_proc)()
+/decl/public_access/public_method/proc/perform(datum/owner, ...)
+	if(forward_args)
+		call(owner, call_proc)(arglist(args.Copy(2)))
+	else
+		call(owner, call_proc)()
 
 /*
 Machinery implementation

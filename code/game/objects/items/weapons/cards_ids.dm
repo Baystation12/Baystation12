@@ -550,7 +550,7 @@ var/const/NO_EMAG_ACT = -50
 /obj/item/weapon/card/id/civilian
 	name = "identification card"
 	desc = "A card issued to civilian staff."
-	job_access_type = /datum/job/assistant
+	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
 /obj/item/weapon/card/id/civilian/bartender

@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Portable drives now work properly in modular computers for all operations."

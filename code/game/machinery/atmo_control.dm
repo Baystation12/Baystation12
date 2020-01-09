@@ -255,6 +255,7 @@ obj/machinery/computer/air_control/Destroy()
 		return TOPIC_HANDLED
 
 	signal.data["sigtype"] = "command"
+	signal.data["status"] = TRUE
 	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)	
 
 /obj/machinery/computer/air_control/fuel_injection
@@ -315,7 +316,7 @@ obj/machinery/computer/air_control/Destroy()
 
 		signal.data = list(
 			"tag" = device_tag,
-			"power" = injecting,
+			"set_power" = injecting,
 			"sigtype" = "command"
 		)
 

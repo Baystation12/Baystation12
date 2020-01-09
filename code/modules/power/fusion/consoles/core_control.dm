@@ -18,6 +18,9 @@
 
 		if(href_list["toggle_active"])
 			if(!C.Startup()) //Startup() whilst the device is active will return null.
+				if(!C.owned_field.is_shutdown_safe())
+					if(alert(user, "Shutting down this fusion core without proper safety procedures will cause serious damage, do you wish to continue?", "Shut Down?", "Yes", "No") == "No")
+						return TOPIC_NOACTION
 				C.Shutdown()
 			return TOPIC_REFRESH
 

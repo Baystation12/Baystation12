@@ -120,7 +120,7 @@ Used In File(s): \code\game\machinery\alarm.dm
 					Operating:
 				</div>
 				<div class="itemContent">
-					{{:helper.link(value.power ? 'On' : 'Off', null, { 'id_tag' : value.id_tag, 'command' : 'power', 'val' : value.power ? 0 : 1}, null, value.power ? null : 'redButton')}}
+					{{:helper.link(value.power ? 'On' : 'Off', null, { 'id_tag' : value.id_tag, 'command' : 'set_power', 'val' : value.power ? 0 : 1}, null, value.power ? null : 'redButton')}}
 				</div>
 			</div>
 			<div class="item">
@@ -136,8 +136,8 @@ Used In File(s): \code\game\machinery\alarm.dm
 					Pressure Checks:
 				</div>
 				<div class="itemContent">
-					{{:helper.link('External', null, { 'id_tag' : value.id_tag, 'command' : 'checks', 'val' : value.checks^1}, null, value.checks&1 ? 'selected' : null)}}
-					{{:helper.link('Internal', null, { 'id_tag' : value.id_tag, 'command' : 'checks', 'val' : value.checks^2}, null, value.checks&2 ? 'selected' : null)}}
+					{{:helper.link('External', null, { 'id_tag' : value.id_tag, 'command' : 'set_checks', 'val' : value.checks^1}, null, value.checks&1 ? 'selected' : null)}}
+					{{:helper.link('Internal', null, { 'id_tag' : value.id_tag, 'command' : 'set_checks', 'val' : value.checks^2}, null, value.checks&2 ? 'selected' : null)}}
 				</div>
 			</div>
 			<div class="item">
@@ -162,7 +162,7 @@ Used In File(s): \code\game\machinery\alarm.dm
 					Operating:
 				</div>
 				<div class="itemContent">
-					{{:helper.link(value.power ? 'On' : 'Off', null, { 'id_tag' : value.id_tag, 'command' : 'power', 'val' : value.power ? 0 : 1}, null, value.power ? null : 'redButton')}}
+					{{:helper.link(value.power ? 'On' : 'Off', null, { 'id_tag' : value.id_tag, 'command' : 'set_power', 'val' : value.power ? 0 : 1}, null, value.power ? null : 'redButton')}}
 				</div>
 			</div>
 			<div class="item">
@@ -170,9 +170,9 @@ Used In File(s): \code\game\machinery\alarm.dm
 					Operation Mode:
 				</div>
 				<div class="itemContent">
-					{{:helper.link('Scrub', null, { 'id_tag' : value.id_tag, 'command' : 'scrubbing', 'scrub_mode' : 'scrub'}, null, value.scrubbing == 'scrub' ? 'selected' : null)}}
-					{{:helper.link('Exchange', null, { 'id_tag' : value.id_tag, 'command' : 'scrubbing', 'scrub_mode' : 'exchange'}, null, value.scrubbing == 'exchange' ? 'selected' : null)}}
-					{{:helper.link('Siphon', null, { 'id_tag' : value.id_tag, 'command' : 'scrubbing', 'scrub_mode' : 'siphon'}, null, value.scrubbing == 'siphon' ? 'redButton' : null)}}
+					{{:helper.link('Scrub', null, { 'id_tag' : value.id_tag, 'command' : 'set_scrubbing', 'scrub_mode' : 'scrub'}, null, value.scrubbing == 'scrub' ? 'selected' : null)}}
+					{{:helper.link('Exchange', null, { 'id_tag' : value.id_tag, 'command' : 'set_scrubbing', 'scrub_mode' : 'exchange'}, null, value.scrubbing == 'exchange' ? 'selected' : null)}}
+					{{:helper.link('Siphon', null, { 'id_tag' : value.id_tag, 'command' : 'set_scrubbing', 'scrub_mode' : 'siphon'}, null, value.scrubbing == 'siphon' ? 'redButton' : null)}}
 				</div>
 			</div>
 			<div class="item">
@@ -181,7 +181,7 @@ Used In File(s): \code\game\machinery\alarm.dm
 				</div>
 				<div class="itemContent">
 					{{for value.filters :filterValue:filterIndex}}
-						{{:helper.link(filterValue.name, null, { 'id_tag' : value.id_tag, 'command' : filterValue.command, 'val' : filterValue.val ? 0 : 1}, null, filterValue.val ? 'selected' : null)}}
+						{{:helper.link(filterValue.name, null, { 'id_tag' : value.id_tag, 'command' : 'set_scrub_gas', 'gas_id' : filterValue.id, 'val' : filterValue.val ? 0 : 1}, null, filterValue.val ? 'selected' : null)}}
 					{{/for}}
 				</div>
 			</div>

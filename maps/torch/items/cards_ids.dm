@@ -3,7 +3,7 @@
 /obj/item/weapon/card/id/torch
 	name = "identification card"
 	desc = "An identification card issued to personnel aboard the SEV Torch."
-	job_access_type = /datum/job/assistant
+	job_access_type = DEFAULT_JOB_TYPE
 
 /obj/item/weapon/card/id/torch/silver
 	desc = "A silver identification card belonging to heads of staff."
@@ -29,7 +29,7 @@
 
 /obj/item/weapon/card/id/torch/contractor
 	desc = "An identification card issued to private contractors aboard the SEV Torch."
-	job_access_type = /datum/job/assistant
+	job_access_type = DEFAULT_JOB_TYPE
 	color = COLOR_GRAY80
 
 
@@ -108,7 +108,7 @@
 	detail_color = COLOR_BROWN
 
 /obj/item/weapon/card/id/torch/crew/service //unused
-	job_access_type = /datum/job/assistant
+	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
 /obj/item/weapon/card/id/torch/crew/service/janitor
@@ -121,7 +121,7 @@
 	job_access_type = /datum/job/chaplain
 
 /obj/item/weapon/card/id/torch/contractor/service //unused
-	job_access_type = /datum/job/assistant
+	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_CIVIE_GREEN
 
 /obj/item/weapon/card/id/torch/contractor/service/bartender
@@ -176,7 +176,7 @@
 
 /obj/item/weapon/card/id/torch/passenger
 	desc = "A card issued to passengers aboard the SEV Torch."
-	job_access_type = /datum/job/assistant
+	job_access_type = DEFAULT_JOB_TYPE
 	detail_color = COLOR_PAKISTAN_GREEN
 
 /obj/item/weapon/card/id/torch/passenger/research

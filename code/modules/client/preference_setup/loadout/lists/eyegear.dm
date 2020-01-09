@@ -79,6 +79,10 @@
 	display_name = "Meson Goggles, prescription"
 	path = /obj/item/clothing/glasses/meson/prescription
 
+/datum/gear/eyes/welding
+	display_name = "Welding Goggles"
+	path = /obj/item/clothing/glasses/welding
+
 /datum/gear/eyes/meson/ipatch
 	display_name = "HUDpatch, Meson"
 	path = /obj/item/clothing/glasses/eyepatch/hud/meson
