@@ -7,6 +7,7 @@
 	fore_dir = WEST
 	vessel_mass = 4
 	faction = "Insurrection"
+	flagship = 1
 
 	map_bounds = list(4,99,142,52)
 

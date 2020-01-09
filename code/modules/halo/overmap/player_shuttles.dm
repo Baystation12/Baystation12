@@ -60,6 +60,8 @@
 	var/new_ship_name = null
 	if(allow_rename)
 		new_ship_name = sanitizeName(input(user,"Enter the Ship's Name","Ship Name","Ship"))
+	if(!check_requisition_allowed())
+		return
 	user.visible_message("<span class = 'notice'>[user] requisitions a [ship_type_name] from [src].</span>")
 	visible_message("<span class = 'notice'>[src] announces: \"[ship_type_name] Requisitioned. Connect umbilical for access.\"</span>")
 	var/obj/spawned = spawn_shuttlecraft()

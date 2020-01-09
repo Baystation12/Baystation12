@@ -25,7 +25,6 @@
 "ay" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "az" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aA" = (/obj/structure/closet/secure_closet/freezer/meat,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"aB" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aC" = (/obj/machinery/cooker/grill,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aD" = (/obj/machinery/cooker/fryer,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aE" = (/obj/machinery/cooker/oven,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -88,6 +87,7 @@
 "bJ" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "bK" = (/obj/machinery/deck_gun/missile_pod{dir = 1},/turf/space,/area/space)
 "kT" = (/obj/structure/table/steel,/obj/machinery/microwave,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"SD" = (/obj/structure/closet/secure_closet/freezer/fridge,/obj/structure/sink/kitchen{dir = 2; pixel_x = 16; pixel_y = 22},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -99,7 +99,7 @@ aaaaaaaaaaaaaeaaaaaeaaaaaeaaaaaaaaaaaaaaaaaaaaabacacacacacacacacacacacacacacacaf
 aaaaaaaaaaacacacacacacacacacacacacacaaaaacacacacacacacacacacacacaaaaahaaaaaaaaafadadaiadafaaahaaaaaa
 aaaaaaaaacacacacacacacacacacacacacacacaaaaaaahaaaaaaaaaaaaaaaaaaaaaaafafafafafafafafafajafafafafaaaa
 aaaaaaacacacafafafafakafafafafafafacacacacalafafafafafafafafafafafafafamanaoapaqarasananafadadataaaa
-aaaaaaauavawavaxavavavavavavaxanayananananafazaAaBaCaDaEafanaFanafakafaGananananananananajadadataaaa
+aaaaaaauavawavaxavavavavavavaxanayananananafazaASDaCaDaEafanaFanafakafaGananananananananajadadataaaa
 aaaaaHaIavavaJafavavavavavavafasanananananaKanananananananananananafanananafafajafafaGanakaLadataaaa
 aaaaaMaNavavafafaOafaPaQaRaOafafanaSaTaUanafanaVaVaVaVanaWanananaXafaYafaYafadadadafaZanafadadataaaa
 aaaaaMbabbaOafbcavbabbaQbdavbeafaKafafafaKafbfkTbgbgbgbhafbfanananaYbiafbjafbkblbmafafaYafafafafaaaa

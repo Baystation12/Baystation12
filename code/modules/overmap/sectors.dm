@@ -86,6 +86,9 @@ var/list/points_of_interest = list()
 	setup_object()
 	generate_targetable_areas()
 
+	if(flagship)
+		GLOB.overmap_tiles_uncontrolled -= range(28,src)
+
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/overmap/LateInitialize()

@@ -254,8 +254,6 @@
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
-	if(!.)
-		return
 	var/increase_from_damage = round(damage/250)
 	if(increase_from_damage > 2)
 		increase_from_damage -= 2

@@ -49,7 +49,7 @@
 	one_hand_penalty = -1
 	burst = 2
 	fire_delay = 1
-	screen_shake = 2
+	screen_shake = 1
 	accuracy = -1
 	dispersion=list(0.0, 0.6)
 	w_class = ITEM_SIZE_LARGE
