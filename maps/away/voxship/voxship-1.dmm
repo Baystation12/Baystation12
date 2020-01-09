@@ -3,8 +3,9 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/simulated/wall/r_wall/hull,
-/area/space)
+/obj/structure/inflatable/wall,
+/turf/simulated/floor/airless,
+/area/voxship/base)
 "ac" = (
 /turf/simulated/mineral/random/high_chance,
 /area/space)
@@ -13,9 +14,6 @@
 /area/voxship/base)
 "ae" = (
 /turf/simulated/mineral/random,
-/area/space)
-"af" = (
-/turf/simulated/floor/airless,
 /area/space)
 "ag" = (
 /obj/random/junk,
@@ -470,14 +468,6 @@
 "bq" = (
 /turf/simulated/floor/airless,
 /area/voxship/ship)
-"br" = (
-/obj/structure/girder,
-/turf/space,
-/area/space)
-"bs" = (
-/obj/structure/girder,
-/turf/simulated/floor/asteroid,
-/area/space)
 "bu" = (
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1;
@@ -650,10 +640,6 @@
 /obj/machinery/portable_atmospherics/canister/nitrogen,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
-"bQ" = (
-/obj/item/weapon/reagent_containers/glass/bottle/cyanide,
-/turf/simulated/floor/airless,
-/area/space)
 "bR" = (
 /obj/random/toolbox,
 /obj/structure/cable/cyan{
@@ -893,9 +879,14 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
 "cr" = (
-/obj/item/weapon/reagent_containers/food/snacks/clownburger,
-/turf/simulated/floor/airless,
-/area/space)
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/turf/simulated/floor/plating/vox{
+	icon_state = "dmg4"
+	},
+/area/voxship/base)
 "cs" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -1169,14 +1160,10 @@
 	icon_state = "dmg4"
 	},
 /area/voxship/base)
-"dg" = (
-/obj/machinery/atmospherics/unary/engine,
-/turf/simulated/wall/r_wall/hull,
-/area/space)
 "dh" = (
 /obj/item/weapon/reagent_containers/food/snacks/bearmeat,
 /turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
+	icon_state = "dmg4"
 	},
 /area/voxship/base)
 "di" = (
@@ -1372,16 +1359,6 @@
 /obj/item/weapon/gun/energy/darkmatter,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
-"dM" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	icon_state = "intact-supply";
-	dir = 5
-	},
-/obj/machinery/power/smes/buildable/preset/voxship/ship,
-/obj/structure/cable/yellow,
-/obj/structure/catwalk,
-/turf/simulated/floor/tiled/techmaint/vox,
-/area/voxship/base)
 "dN" = (
 /obj/item/stack/material/tritium/ten,
 /obj/item/stack/material/tritium/ten,
@@ -1567,14 +1544,6 @@
 	},
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/structure/catwalk,
-/turf/simulated/floor/plating/vox,
-/area/voxship/base)
-"ek" = (
-/obj/machinery/space_heater,
-/obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
-	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
 "el" = (
@@ -1838,7 +1807,7 @@
 "eX" = (
 /obj/item/stack/material/steel,
 /turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
+	icon_state = "dmg4"
 	},
 /area/voxship/base)
 "eY" = (
@@ -2085,24 +2054,6 @@
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
-"fH" = (
-/obj/structure/foamedmetal,
-/turf/simulated/floor/plating/vox,
-/area/voxship/base)
-"fI" = (
-/obj/item/stack/material/steel,
-/obj/item/stack/material/steel,
-/obj/item/stack/material/rods,
-/obj/structure/foamedmetal,
-/turf/simulated/floor/plating/vox,
-/area/voxship/base)
-"fJ" = (
-/obj/item/stack/material/steel,
-/obj/item/stack/material/steel,
-/obj/item/stack/material/rods,
-/obj/structure/grille,
-/turf/simulated/floor/plating/vox,
-/area/voxship/base)
 "fK" = (
 /obj/effect/floor_decal/asteroid,
 /obj/structure/foamedmetal,
@@ -2111,18 +2062,13 @@
 "fL" = (
 /obj/item/stack/material/rods,
 /turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
-	},
-/area/voxship/base)
-"fM" = (
-/turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
+	icon_state = "dmg4"
 	},
 /area/voxship/base)
 "fN" = (
 /obj/effect/decal/cleanable/blood/gibs/robot,
 /turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
+	icon_state = "dmg4"
 	},
 /area/voxship/base)
 "fO" = (
@@ -2138,41 +2084,21 @@
 /obj/effect/decal/cleanable/blood/oil/streak,
 /turf/simulated/floor/plating/vox,
 /area/voxship/base)
-"fQ" = (
-/obj/item/stack/material/rods,
-/obj/effect/decal/cleanable/ash,
-/obj/effect/decal/cleanable/blood/oil,
-/turf/simulated/floor/plating/vox{
-	icon_state = "dmg4"
-	},
+"mR" = (
+/obj/machinery/atmospherics/unary/engine,
+/turf/simulated/wall/r_wall/hull,
 /area/voxship/base)
-"fR" = (
-/obj/item/stack/material/steel,
-/obj/structure/barricade,
-/turf/simulated/floor/plating/vox{
-	icon_state = "dmg4"
+"sO" = (
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
 	},
+/turf/simulated/floor/plating/vox,
 /area/voxship/base)
-"fS" = (
-/obj/item/stack/material/rods,
-/obj/effect/decal/cleanable/blood/gibs/robot,
+"um" = (
+/obj/structure/inflatable/wall,
 /turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
-	},
-/area/voxship/base)
-"fT" = (
-/obj/item/stack/material/steel,
-/obj/item/stack/material/rods,
-/turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
-	},
-/area/voxship/base)
-"fU" = (
-/obj/item/stack/material/steel,
-/obj/item/stack/material/rods,
-/obj/structure/barricade,
-/turf/simulated/floor/plating/vox{
-	icon_state = "dmg2"
+	icon_state = "dmg1"
 	},
 /area/voxship/base)
 "va" = (
@@ -2198,6 +2124,9 @@
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
+"BO" = (
+/turf/simulated/floor/airless,
+/area/voxship/base)
 "Cj" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black,
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -2206,7 +2135,41 @@
 "Fm" = (
 /obj/structure/inflatable/door,
 /turf/simulated/floor/tiled/techmaint/vox,
-/area/space)
+/area/voxship/base)
+"HD" = (
+/obj/structure/inflatable/door,
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/obj/structure/window/basic,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
+"IY" = (
+/obj/machinery/space_heater{
+	pixel_y = 2
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
+"QH" = (
+/obj/structure/inflatable/wall,
+/turf/simulated/floor/plating/vox{
+	icon_state = "dmg4"
+	},
+/area/voxship/base)
+"Ua" = (
+/obj/structure/window/reinforced{
+	dir = 1;
+	health = 1e+006
+	},
+/turf/simulated/floor/plating/vox{
+	icon_state = "dmg1"
+	},
+/area/voxship/base)
 "Wm" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black,
 /turf/simulated/floor/plating/vox,
@@ -5235,7 +5198,7 @@ ac
 ac
 aa
 aa
-ac
+ae
 ac
 ac
 ac
@@ -6245,7 +6208,7 @@ ac
 ac
 ae
 ae
-ae
+ac
 ae
 ae
 ae
@@ -6649,7 +6612,7 @@ ad
 ad
 ad
 ad
-ac
+um
 ac
 ac
 ac
@@ -6751,9 +6714,9 @@ fr
 cS
 cZ
 dc
-ac
-ac
-ac
+um
+um
+QH
 ac
 ac
 ac
@@ -6853,9 +6816,9 @@ ai
 cT
 cW
 de
-ac
-fH
-ac
+cV
+dm
+QH
 ac
 ac
 ac
@@ -6949,16 +6912,16 @@ aV
 aQ
 fl
 fo
-fn
+ai
 ai
 ai
 cV
 da
 df
 eX
-fI
-ac
-ac
+fN
+um
+aq
 ac
 ac
 ac
@@ -7058,9 +7021,9 @@ ai
 cV
 dh
 fL
-fJ
-ac
-ac
+db
+db
+um
 ac
 ac
 ac
@@ -7159,11 +7122,11 @@ aQ
 aQ
 aQ
 aQ
-fM
-fQ
-ac
-ac
-ac
+db
+fL
+cV
+aq
+um
 ac
 ac
 ac
@@ -7262,11 +7225,11 @@ fE
 aV
 dm
 db
-fR
-ac
-ac
-ac
-ac
+cV
+dm
+cV
+um
+QH
 ac
 ac
 ac
@@ -7345,7 +7308,7 @@ cL
 bd
 bF
 cU
-dM
+aV
 dS
 dX
 bV
@@ -7364,11 +7327,11 @@ fF
 ai
 cV
 fN
-fS
-ac
-ac
-ac
-ac
+cV
+fN
+cV
+dm
+QH
 ac
 ac
 ac
@@ -7447,7 +7410,7 @@ bz
 be
 bL
 dl
-bG
+ai
 bT
 bT
 bG
@@ -7466,11 +7429,11 @@ fG
 db
 db
 db
-fT
-fU
-ac
-ac
-ac
+fL
+db
+db
+QH
+aq
 ac
 ac
 ac
@@ -7539,7 +7502,7 @@ aa
 aa
 aa
 aa
-ab
+ad
 ad
 aj
 ai
@@ -7568,10 +7531,10 @@ ai
 cX
 dq
 fL
-ac
-ac
-ac
-ac
+db
+um
+um
+aq
 ac
 ac
 ac
@@ -7670,8 +7633,8 @@ aQ
 aQ
 aQ
 aQ
-ac
-ac
+QH
+aq
 ac
 ac
 ac
@@ -8085,7 +8048,7 @@ ac
 ac
 aT
 aT
-bs
+aT
 aT
 aT
 ac
@@ -8269,9 +8232,9 @@ aV
 ef
 ew
 dP
-aV
-ek
+IY
 cx
+ai
 aQ
 eq
 eB
@@ -8373,7 +8336,7 @@ ad
 ex
 ad
 ad
-ad
+aI
 ad
 ad
 ex
@@ -8463,24 +8426,24 @@ aa
 aa
 aa
 aa
-ab
+ad
 Fm
-ab
+ad
 aa
 aa
-ab
 aa
-ab
+aa
+aa
 aa
 eC
 aa
+bE
+HD
+bE
 aa
-aa
-aa
-ab
 eC
 aa
-aa
+ac
 ac
 ac
 ac
@@ -8565,24 +8528,24 @@ aa
 aa
 aa
 aa
-ab
+ad
 Fm
-ab
-aa
-aa
-ab
-aa
-ab
+ad
 aa
 aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-aa
+ad
+ad
+ad
+ad
+aI
+ad
+ad
+ad
+ad
+ac
 ac
 ac
 ac
@@ -8672,20 +8635,20 @@ aa
 aa
 aa
 aa
-ab
 aa
 aa
 aa
 aa
-aa
+mR
+BO
+BO
+BO
+BO
+BO
+BO
+ad
 ab
 ab
-ab
-ab
-ab
-ab
-ab
-ac
 ac
 ac
 ac
@@ -8778,18 +8741,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-dg
-af
-af
-af
+mR
+BO
+BO
+BO
+BO
+BO
+BO
 cr
-af
-af
-ac
-ac
+cV
+ab
+ab
+ab
 ac
 ac
 ac
@@ -8880,18 +8843,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-dg
-bQ
-af
-ac
-ac
-ac
-ac
-ac
-ac
+mR
+BO
+BO
+BO
+BO
+BO
+BO
+sO
+ai
+db
+cV
+ab
 ac
 ac
 ac
@@ -8982,18 +8945,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-dg
-ac
-ac
-ac
-ac
-ac
-ac
-ac
-ac
+mR
+BO
+BO
+BO
+BO
+BO
+BO
+sO
+ai
+cV
+db
+ab
 ac
 ac
 ac
@@ -9084,18 +9047,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-dg
-af
-ac
-ac
-ac
-ac
-ac
-ac
-ac
+mR
+BO
+BO
+BO
+BO
+BO
+BO
+ai
+ai
+ai
+db
+ab
 ac
 ac
 ac
@@ -9186,18 +9149,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-dg
-af
-ac
-ac
-ac
-ac
-ac
-ac
-ac
+mR
+BO
+BO
+BO
+BO
+BO
+BO
+Ua
+ai
+ai
+db
+ab
 ac
 ac
 ac
@@ -9288,18 +9251,18 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-dg
-af
-af
-ac
-ac
-ac
-ac
-ac
-ac
+mR
+BO
+BO
+BO
+BO
+BO
+BO
+cr
+cV
+db
+db
+ab
 ac
 ac
 ac
@@ -9389,19 +9352,19 @@ aa
 aa
 aa
 aa
-aa
-aa
-aa
-aa
-dg
-af
-af
-af
-ac
-ac
-ac
-aa
-ac
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ac
 ac
 ac
@@ -9494,15 +9457,15 @@ aa
 aa
 aa
 aa
-ab
-ab
-ab
-ab
-ab
-ab
+aa
+aa
+aa
+aa
+aa
+aa
 ac
 ac
-br
+ac
 ac
 ac
 ac
@@ -9604,7 +9567,7 @@ aa
 aa
 aa
 aa
-aa
+ac
 ac
 ac
 ac
