@@ -146,7 +146,7 @@
 			if(48 to 57)	//0-9
 				dat += ascii2text(ascii_char)
 				last_was_space = 0
-			if(32)			//space
+			if(32, 46)	//space or .
 				if(last_was_space)
 					continue
 				dat += "."		//We turn these into ., but avoid repeats or . at start.
