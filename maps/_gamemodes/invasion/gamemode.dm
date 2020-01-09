@@ -29,7 +29,6 @@
 	setup_objectives()
 
 	shipmap_handler.spawn_ship("Human Colony", 3)
-	shipmap_handler.spawn_ship("UNSC", 2)
 
 	for(var/faction_type in factions)
 		factions.Remove(faction_type)
