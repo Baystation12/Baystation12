@@ -59,7 +59,7 @@
 /datum/access/soe_officer
 	id = access_soe_officer
 	access_type = ACCESS_TYPE_SYNDICATE
-	desc = "Sons of Eridanus Command"
+	desc = "Sons of Eridanus Officer"
 
 /var/const/access_soe_captain = 858
 /datum/access/soe_captain
