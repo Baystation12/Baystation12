@@ -657,7 +657,11 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bA" = (
 /obj/structure/table/rack,
-/obj/item/weapon/rig/vox,
+/obj/item/clothing/suit/space/vox/carapace,
+/obj/item/clothing/head/helmet/space/vox/carapace,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/weapon/gun/launcher/alien/spikethrower,
 /obj/item/clothing/under/vox/vox_casual,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
@@ -665,14 +669,12 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bB" = (
 /obj/structure/table/rack,
+/obj/item/clothing/suit/space/vox/carapace,
+/obj/item/clothing/head/helmet/space/vox/carapace,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/gloves/vox,
 /obj/item/weapon/gun/launcher/alien/spikethrower,
-/obj/item/weapon/gun/launcher/alien/spikethrower,
-/obj/item/weapon/gun/projectile/dartgun/vox/medical,
-/obj/item/weapon/gun/projectile/dartgun/vox/raider,
-/obj/item/weapon/gun/energy/sonic,
-/obj/item/weapon/gun/energy/sonic,
-/obj/item/weapon/gun/energy/darkmatter,
-/obj/item/weapon/gun/energy/darkmatter,
+/obj/item/clothing/under/vox/vox_robes,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -860,6 +862,7 @@
 /obj/item/clothing/shoes/magboots/vox,
 /obj/item/clothing/gloves/vox,
 /obj/item/clothing/under/vox/vox_robes,
+/obj/item/weapon/gun/projectile/dartgun/vox/raider,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -879,22 +882,25 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bX" = (
 /obj/structure/table/rack,
-/obj/item/clothing/under/vox/vox_casual,
-/obj/item/clothing/suit/space/vox/carapace,
-/obj/item/clothing/head/helmet/space/vox/carapace,
+/obj/item/clothing/suit/space/vox/pressure,
+/obj/item/clothing/head/helmet/space/vox/pressure,
 /obj/item/clothing/shoes/magboots/vox,
 /obj/item/clothing/gloves/vox,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/weapon/gun/projectile/dartgun/vox/raider,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bY" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/pressure,
-/obj/item/clothing/head/helmet/space/vox/pressure,
+/obj/item/clothing/suit/space/vox/stealth,
+/obj/item/clothing/head/helmet/space/vox/stealth,
 /obj/item/clothing/shoes/magboots/vox,
 /obj/item/clothing/gloves/vox,
-/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/glasses/thermal/plain/monocle,
+/obj/item/clothing/under/vox/vox_robes,
+/obj/item/weapon/gun/projectile/dartgun/vox/medical,
 /turf/unsimulated/floor{
 	icon_state = "asteroid"
 	},
@@ -1952,27 +1958,6 @@
 	name = "plating"
 	},
 /area/map_template/syndicate_mothership/raider_base)
-"eJ" = (
-/obj/structure/table/rack,
-/obj/item/clothing/suit/space/vox/stealth,
-/obj/item/clothing/head/helmet/space/vox/stealth,
-/obj/item/clothing/shoes/magboots/vox,
-/obj/item/clothing/gloves/vox,
-/obj/item/clothing/under/vox/vox_robes,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/map_template/syndicate_mothership/raider_base)
-"eK" = (
-/obj/item/weapon/storage/box/detergent,
-/turf/simulated/floor/plating,
-/area/map_template/skipjack_station/start)
-"eL" = (
-/obj/item/clothing/suit/armor/vox_scrap,
-/turf/unsimulated/floor{
-	icon_state = "asteroid"
-	},
-/area/map_template/syndicate_mothership/raider_base)
 
 (1,1,1) = {"
 aa
@@ -2867,7 +2852,7 @@ aq
 aq
 bA
 bU
-bY
+bX
 aq
 aq
 aq
@@ -2940,7 +2925,7 @@ bk
 aq
 aq
 aq
-eL
+aq
 aQ
 cp
 ab
@@ -3007,11 +2992,11 @@ aq
 aq
 aq
 aq
-eL
+aq
 aq
 bB
-bX
-eJ
+bA
+bY
 aq
 aq
 cq
@@ -5113,7 +5098,7 @@ cR
 di
 dr
 dx
-eK
+dm
 dP
 ed
 cw
