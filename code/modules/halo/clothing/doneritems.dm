@@ -813,16 +813,19 @@ decl/hierarchy/outfit/Jul
 
 /obj/item/weapon/storage/box/large/donator/mann
 	startswith = list(/obj/item/clothing/head/helmet/odst/donator/mann,
-					/obj/item/clothing/suit/armor/special/odst/donator/mann
+					/obj/item/clothing/suit/armor/special/odst/donator/mann,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/mann,
-					/obj/item/clothing/suit/armor/special/odst/donator/mann
+					/obj/item/clothing/suit/armor/special/odst/donator/mann,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
 					)
 
 /decl/hierarchy/outfit/mann_odst
 	name = "mann - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/mann
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/mann
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 
 //Spartan
 
