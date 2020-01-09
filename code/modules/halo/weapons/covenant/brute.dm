@@ -24,14 +24,6 @@
 
 	lunge_dist = 3
 
-/obj/item/weapon/grenade/frag/spike/get_lunge_dist(var/mob/living/carbon/human/user)
-	if(!istype(user))
-		return 0
-	if(user.species.type == /datum/species/brutes)
-		return lunge_dist
-	else
-		return 0
-
 /obj/item/weapon/grenade/frag/spike/can_embed()
 	return FALSE
 
@@ -76,14 +68,6 @@
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 	lunge_dist = 3
-
-/obj/item/weapon/gun/projectile/spiker/get_lunge_dist(var/mob/living/carbon/human/user)
-	if(!istype(user))
-		return 0
-	if(user.species.type == /datum/species/brutes)
-		return lunge_dist
-	else
-		return 0
 
 /obj/item/weapon/gun/projectile/spiker/can_embed()
 	return FALSE
@@ -145,14 +129,6 @@
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 	lunge_dist = 3
-
-/obj/item/weapon/gun/projectile/mauler/get_lunge_dist(var/mob/living/carbon/human/user)
-	if(!istype(user))
-		return 0
-	if(user.species.type == /datum/species/brutes)
-		return lunge_dist
-	else
-		return 0
 
 /obj/item/weapon/gun/projectile/mauler/can_embed()
 	return FALSE
@@ -251,14 +227,6 @@
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 
 	lunge_dist = 3
-
-/obj/item/weapon/gun/launcher/grenade/brute_shot/get_lunge_dist(var/mob/living/carbon/human/user)
-	if(!istype(user))
-		return 0
-	if(user.species.type == /datum/species/brutes)
-		return lunge_dist
-	else
-		return 0
 
 /obj/item/weapon/gun/launcher/grenade/brute_shot/can_embed()
 	return FALSE
