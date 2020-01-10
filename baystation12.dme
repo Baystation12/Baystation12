@@ -2966,7 +2966,6 @@
 #include "code\modules\sprite_accessories\_accessory_hair.dm"
 #include "code\modules\sprite_accessories\_accessory_markings.dm"
 #include "code\modules\sprite_accessories\_accessory_skin.dm"
-#include "code\modules\sprite_accessories\accessory_booster.dm"
 #include "code\modules\sprite_accessories\accessory_ipc.dm"
 #include "code\modules\sprite_accessories\accessory_skrell.dm"
 #include "code\modules\sprite_accessories\accessory_unathi.dm"
