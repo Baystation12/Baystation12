@@ -35,9 +35,9 @@
 #define NERVOUS     0x10
 
 // sdisabilities
-#define BLIND 0x1
-#define MUTE  0x2
-#define DEAF  0x4
+#define BLINDED 0x1
+#define MUTED  0x2
+#define DEAFENED  0x4
 
 // The way blocks are handled badly needs a rewrite, this is horrible.
 // Too much of a project to handle at the moment, TODO for later.
