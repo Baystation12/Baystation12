@@ -7,8 +7,7 @@ SUBSYSTEM_DEF(timer)
 	name = "Timer"
 	wait = 1 //SS_TICKER subsystem, so wait is in ticks
 	priority = SS_PRIORITY_TIMER
-
-	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
+	flags = SS_NO_INIT | SS_TICKER
 
 	var/list/datum/timedevent/second_queue = list() //awe, yes, you've had first queue, but what about second queue?
 	var/list/hashes = list()
