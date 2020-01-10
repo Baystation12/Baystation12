@@ -105,6 +105,7 @@
 	taste_description = "pure alcohol"
 	reagent_state = LIQUID
 	color = "#404030"
+	alpha = 180
 	touch_met = 5
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
