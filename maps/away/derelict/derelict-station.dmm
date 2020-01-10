@@ -2566,14 +2566,12 @@
 /area/constructionsite/hallway/aft)
 "iy" = (
 /obj/machinery/computer/air_control{
-	frequency = 1439;
 	input_tag = "d_air_in";
 	name = "Mixed Air Supply Control";
 	output_tag = "d_air_out";
 	pressure_setting = 2000;
 	sensor_tag = "d_air_sensor";
-	sensor_name = "Air Supply Tank";
-	
+	sensor_name = "Air Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2599,7 +2597,7 @@
 /turf/simulated/floor/plating,
 /area/constructionsite/atmospherics)
 "iA" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0
@@ -2650,7 +2648,7 @@
 "iH" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1439;
+	frequency = 1441;
 	icon_state = "map_injector";
 	id = "d_air_in";
 	use_power = 1
@@ -2695,7 +2693,6 @@
 /area/constructionsite/atmospherics)
 "iO" = (
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	input_tag = "d_o2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d_o2_out";
@@ -2795,7 +2792,6 @@
 /area/constructionsite/atmospherics)
 "jc" = (
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	input_tag = "d_n2_in";
 	name = "Nitrogen Supply Control";
 	output_tag = "d_n2_out";

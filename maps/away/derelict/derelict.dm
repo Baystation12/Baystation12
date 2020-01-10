@@ -29,7 +29,7 @@
 		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/constructionsite = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/constructionsite/ai = NO_SCRUBBER|NO_VENT,
-		/area/constructionsite/atmospherics = NO_SCRUBBER,
+		/area/constructionsite/atmospherics = NO_SCRUBBER|NO_VENT,
 		/area/constructionsite/teleporter = NO_SCRUBBER|NO_VENT,
 		/area/derelict/ship = NO_SCRUBBER|NO_VENT,
 		/area/djstation = NO_SCRUBBER|NO_VENT|NO_APC
