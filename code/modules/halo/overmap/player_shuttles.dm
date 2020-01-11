@@ -34,8 +34,8 @@
 		return
 	var/obj/effect/overmap/ship/npc_ship/ship = new ship_to_spawn (om_loc.loc)
 	ship.loc = null
-	ship.slipspace_to_location(om_loc.loc,0)
 	ship.make_player_controlled()
+	ship.slipspace_to_location(om_loc.loc,0)
 	return ship
 
 /obj/machinery/shuttle_spawner/proc/check_requisition_allowed()

@@ -78,7 +78,7 @@
 		/datum/objective/colony_capture/innie,\
 		/datum/objective/overmap/innie_base)
 	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
-	GLOB.INSURRECTION.has_base = 1
+	GLOB.INSURRECTION.has_flagship = 1
 	GLOB.INSURRECTION.base_desc = "secret underground HQ"
 
 	GLOB.HUMAN_CIV.name = "Geminus City"
