@@ -1,25 +1,25 @@
 /datum/job/submap/unishi_crew
-	title = "Unishi Crew"
+	title = "Vessel Crewman"
 	total_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/unishi/crew
+	outfit_type = /decl/hierarchy/outfit/job/unishi/captain
 	supervisors = "your survival"
 	info = "You remember waking up to alarms blaring in your face. Before you could react, a gush of hot air blew \
-	you away, knocking you cold unconcious.  Before this happened you were a crew member \
+	you away, knocking you cold unconcious.  Before this happened, you were a crewman \
 	on this research vessel, SRV Verne, as it carried the members of the presitigous Ceti Technical institute in \
 	their pursuit of research. "
 	required_language = LANGUAGE_HUMAN_EURO
 
 /datum/job/submap/unishi_researcher
-	title = "Unishi Researcher"
+	title = "Vessel Research Student"
 	supervisors = "the crew"
 	total_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/unishi/researcher
 	info = "You remember waking up to alarms blaring in your face. Before you could react, a gush of hot air blew \
-	you away, knocking you cold unconcious. Before this happened, you were a researcher, aboard SRV Verne."
+	you away, knocking you cold unconcious. Before this happened, you were a researcher, aboard the SRV Verne."
 	required_language = LANGUAGE_HUMAN_EURO
 
 
-#define UNISHI_OUTFIT_JOB_NAME(job_name) ("CTI Research Vessel - Job - " + job_name)
+#define UNISHI_OUTFIT_JOB_NAME(job_name) ("SRV Verne - Job - " + job_name)
 /decl/hierarchy/outfit/job/unishi
 	hierarchy_type = /decl/hierarchy/outfit/job/unishi
 	pda_type = /obj/item/modular_computer/pda
@@ -28,7 +28,7 @@
 	r_ear = null
 
 /decl/hierarchy/outfit/job/unishi/crew
-	name = UNISHI_OUTFIT_JOB_NAME("Unishi Crewman")
+	name = UNISHI_OUTFIT_JOB_NAME("Crew")
 	r_pocket = /obj/item/device/radio
 	shoes = /obj/item/clothing/shoes/black
 	belt = /obj/item/weapon/storage/belt/utility/full
