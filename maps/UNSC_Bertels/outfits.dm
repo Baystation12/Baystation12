@@ -240,7 +240,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_iwo
-	name = "Marine Squad Leader"
+	name = "Infantry Weapons Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	glasses = /obj/item/clothing/glasses/hud/tactical
