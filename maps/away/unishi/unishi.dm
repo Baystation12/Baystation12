@@ -15,8 +15,8 @@
 
 /obj/effect/overmap/visitable/ship/unishi
 	name = "SRV Verne"
-	desc = "Sensor array detects unknown class medium size vessel. The vessel appears unarmed.\
-	A small amount of radiation has been detected at the aft of the ship"
+	desc = "Sensor array detects unknown class medium size vessel. The vessel appears unarmed\
+	undamaged. A small amount of radiation has been detected at the aft of the ship"
 	vessel_mass = 5000
 	max_speed = 1/(3 SECONDS)
 	initial_generic_waypoints = list(
@@ -35,15 +35,15 @@
 
 
 /obj/effect/shuttle_landmark/nav_unishi/nav1
-	name = "CTI Research Vessel Deck 1 Port"
+	name = "SRV Verne Deck 1 Port"
 	landmark_tag = "nav_unishi_1"
 
 /obj/effect/shuttle_landmark/nav_unishi/nav2
-	name = "CTI Research Vessel Deck 2 Starboard"
+	name = "SRV Verne Deck 2 Starboard"
 	landmark_tag = "nav_unishi_2"
 
 /obj/effect/shuttle_landmark/nav_unishi/nav3
-	name = "CTI Research Vessel Deck 3 Aft"
+	name = "SRV Verne Deck 3 Aft"
 	landmark_tag = "nav_unishi_3"
 
 
