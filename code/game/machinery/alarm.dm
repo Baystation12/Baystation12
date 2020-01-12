@@ -177,17 +177,6 @@
 		return list()
 	return ..()
 
-// Request updates for air vents and scrubbers which appear to have been added.
-/obj/machinery/alarm/power_change()
-	. = ..()
-	if(. && !(stat & NOPOWER) && alarm_area)
-		for(var/id_tag in alarm_area.air_vent_names)
-			if(!alarm_area.air_vent_info[id_tag])
-				send_signal(id_tag, list("status" = TRUE))
-		for(var/id_tag in alarm_area.air_scrub_names)
-			if(!alarm_area.air_scrub_info[id_tag])
-				send_signal(id_tag, list("status" = TRUE))
-
 /obj/machinery/alarm/Process()
 	if((stat & (NOPOWER|BROKEN)) || shorted || buildstage != 2)
 		return
@@ -382,8 +371,6 @@
 	set_light(0.25, 0.1, 1, 2, new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
-	if(stat & (NOPOWER|BROKEN))
-		return
 	if (alarm_area.master_air_alarm != src)
 		if (master_is_operating())
 			return
@@ -420,10 +407,7 @@
 	else if (device_type=="AScr")
 		new_name = "[alarm_area.name] Air Scrubber #[alarm_area.air_scrub_names.len+1]"
 		alarm_area.air_scrub_names[m_id] = new_name
-	else
-		return
-	spawn (10)
-		send_signal(m_id, list("init" = new_name) )
+	send_signal(m_id, list("init" = new_name) )
 
 /obj/machinery/alarm/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)

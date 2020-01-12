@@ -6,8 +6,7 @@
 SUBSYSTEM_DEF(throwing)
 	name = "Throwing"
 	wait = 1
-	flags = SS_NO_INIT|SS_KEEP_TIMING|SS_TICKER
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	flags = SS_NO_INIT|SS_KEEP_TIMING
 
 	var/list/currentrun
 	var/list/processing = list()
