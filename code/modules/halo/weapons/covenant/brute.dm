@@ -25,7 +25,7 @@
 	lunge_dist = 3
 
 /obj/item/weapon/grenade/frag/spike/can_embed()
-	return FALSE
+	return 0
 
 /obj/item/weapon/grenade/frag/spike/activate(mob/user as mob)
 	. = ..()
@@ -70,7 +70,7 @@
 	lunge_dist = 3
 
 /obj/item/weapon/gun/projectile/spiker/can_embed()
-	return FALSE
+	return 0
 
 /obj/item/ammo_magazine/spiker
 	name = "spiker magazine"
@@ -131,7 +131,7 @@
 	lunge_dist = 3
 
 /obj/item/weapon/gun/projectile/mauler/can_embed()
-	return FALSE
+	return 0
 
 /obj/item/ammo_magazine/mauler
 	name = "mauler magazine"
@@ -229,7 +229,7 @@
 	lunge_dist = 3
 
 /obj/item/weapon/gun/launcher/grenade/brute_shot/can_embed()
-	return FALSE
+	return 0
 
 /obj/item/weapon/gun/launcher/grenade/brute_shot/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/grenade/brute_shot))

@@ -62,7 +62,7 @@
 	damage = 7 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/plas_torp_damage_proj/on_impact(var/atom/impacted)
-	if(!istype(impacted,/obj/effect/shield))
+	if(!istype(impacted,/obj/effect/shield) && penetrating > 0)
 		explosion(loc,1,3,4,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
