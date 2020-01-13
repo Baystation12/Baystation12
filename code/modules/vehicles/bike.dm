@@ -139,6 +139,8 @@
 		unload(user)
 		visible_message("<span class='warning'>\The [user] falls off \the [src]!</span>")
 		return
+	if(direction & (UP|DOWN))
+		return
 	return Move(get_step(src, direction))
 
 /obj/vehicle/bike/Move(var/turf/destination)
