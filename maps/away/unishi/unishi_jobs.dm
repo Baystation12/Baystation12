@@ -1,5 +1,5 @@
 /datum/job/submap/unishi_crew
-	title = "Verne Crewman"
+	title = "SRV Verne Crewman"
 	total_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unishi/captain
 	supervisors = "your survival"
@@ -10,7 +10,7 @@
 	required_language = LANGUAGE_HUMAN_EURO
 
 /datum/job/submap/unishi_researcher
-	title = "Verne Research Student"
+	title = "SRV Verne Research Student"
 	supervisors = "the crew"
 	total_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/unishi/researcher
