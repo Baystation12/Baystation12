@@ -488,7 +488,7 @@
 /area/unishi/engineroom)
 "bq" = (
 /obj/machinery/suit_storage_unit/engineering
-islocked = 0,
+	islocked = 0},
 /obj/structure/sign/warning/fire{
 	dir = 4;
 	pixel_x = -32
@@ -527,7 +527,8 @@ islocked = 0,
 /area/unishi/engineroom)
 "bv" = (
 /obj/machinery/suit_storage_unit/engineering
-islocked = 0
+	islocked = 0
+	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bw" = (
@@ -564,7 +565,8 @@ islocked = 0
 	dir = 8
 	},
 /obj/machinery/suit_storage_unit/engineering
-islocked= 0,
+	islocked= 0
+	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bA" = (
