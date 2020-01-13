@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Humanoid Dionaea now get the audible chirp emotes."
+  - soundadd: "Added a new multichirp (*mchirp) audible emote sound effect for humanoid Dionaea."
