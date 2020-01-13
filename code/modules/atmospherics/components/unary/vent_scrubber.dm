@@ -315,8 +315,8 @@
 		"area" = /decl/public_access/public_variable/area_uid,
 		"device" = /decl/public_access/public_variable/identifier,
 		"power" = /decl/public_access/public_variable/use_power,
-		"scrubbing" = /decl/public_access/public_variable/scrubbing,
 		"panic" = /decl/public_access/public_variable/panic,
+		"scrubbing" = /decl/public_access/public_variable/scrubbing,
 		"scrubbing_gas" = /decl/public_access/public_variable/scrubbing_gas
 	)
 
