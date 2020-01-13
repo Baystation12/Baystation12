@@ -1,7 +1,7 @@
 /datum/job/submap/unishi_crew
 	title = "SRV Verne Crewman"
 	total_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/unishi/captain
+	outfit_type = /decl/hierarchy/outfit/job/unishi/crew
 	supervisors = "your survival"
 	info = "You remember waking up to alarms blaring in your face. Before you could react, a gush of hot air blew \
 	you away, knocking you cold unconcious.  Before this happened, you were a crewman \
