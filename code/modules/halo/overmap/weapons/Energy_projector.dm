@@ -129,18 +129,11 @@
 	damtype = BURN
 	. = ..()
 
-/obj/item/projectile/projector_laser_damage_proj/Bump(var/atom/impacted)
-	var/turf/simulated/wall/wall = impacted
-	if(istype(wall) && wall.reinf_material)
-		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls
-	. = ..()
-
-
 /obj/item/projectile/projector_laser_damage_proj/check_penetrate(var/atom/a)
 	. = ..()
 	if(isnull(glass_effect_beam))
 		glass_effect_beam = new
-	explosion(a,2,3,4,5, adminlog = 0)
+	explosion(a,-1,-1,2,5, adminlog = 0)
 	glass_effect_beam.do_glassing_effect(a,1,/turf/unsimulated/floor/lava/glassed_turf/to_space)
 	if(!warned)
 		warned = 1
