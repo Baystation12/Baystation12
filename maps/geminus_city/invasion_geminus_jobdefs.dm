@@ -8,6 +8,7 @@
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
+		/datum/job/geminus_innie/orion_defector,\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
 		/datum/job/soe_commando_captain,\

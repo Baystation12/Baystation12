@@ -89,3 +89,7 @@
 
 	for(var/datum/mind/player in antag.faction_members)
 		to_chat(player.current,"<span class='info'>[title] [H] has arrived at the base.</span>")
+
+/datum/job/geminus_innie/orion_defector
+	title = "Insurrectionist Orion Defector"
+	whitelisted_species = list(/datum/species/sanshyuum)
