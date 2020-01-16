@@ -89,3 +89,19 @@
 
 	for(var/datum/mind/player in antag.faction_members)
 		to_chat(player.current,"<span class='info'>[title] [H] has arrived at the base.</span>")
+
+/datum/job/geminus_innie/orion_defector
+	title = "Insurrectionist Orion Defector"
+	whitelisted_species = list(/datum/species/sanshyuum)
+	total_positions = 2
+	spawn_positions = 2
+	faction_whitelist = "Insurrection"
+
+/datum/job/insurrectionist_ai
+	title = "Insurrectionist AI"
+	spawn_faction = "Insurrection"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/halo_ai_smart
+	//faction_whitelist = "Insurrection"
+	whitelisted_species = list()

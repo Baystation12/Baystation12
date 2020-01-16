@@ -1037,6 +1037,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 		return
 	if(species.flags & NO_EMBED)
 		return
+	if(!W.can_embed())
+		return
 	if(!silent)
 		if(supplied_message)
 			owner.visible_message("<span class='danger'>[supplied_message]</span>")

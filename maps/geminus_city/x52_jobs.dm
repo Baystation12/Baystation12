@@ -5,7 +5,7 @@
 	total_positions = 4
 	spawn_positions = 4
 	outfit_type = /decl/hierarchy/outfit/job/geminus_x52
-	access = list(access_x52)
+	access = list(access_x52,access_innie)
 	selection_color = " #a01b01"
 	spawnpoint_override = "X52 Researcher"
 	alt_titles = null
@@ -21,7 +21,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/geminus_x52_rd
-	access = list(access_x52_rd, access_x52)
+	access = list(access_x52_rd, access_x52,access_innie)
 	selection_color = " #a01b01"
 	spawnpoint_override = "X52 RD"
 	alt_titles = null
