@@ -10,7 +10,7 @@
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
 		/datum/job/geminus_innie/orion_defector,\
-		/datum/job/geminus_ship_ai,\
+		/datum/job/insurrectionist_ai,\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
 		/datum/job/soe_commando_captain,\
