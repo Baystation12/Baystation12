@@ -1131,8 +1131,8 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	name = "ODST Snow Variant Mk-3 Armor"
 	desc = "The Mk3 armor was made to give more camouflage in cold and artic environments due to its special nature of being extra insulated against the elements and is therefore also made for prolonged exposure to space."
 
-	item_state = "nanu-armor_obj"
-	icon_state = "nanu-armor_worn"
+	item_state = "nanu-armor_worn"
+	icon_state = "nanu-armor_obj"
 
 /obj/item/weapon/storage/backpack/odst/nanu
 	icon = ITEM_INHAND
@@ -1151,7 +1151,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 					/obj/item/weapon/storage/backpack/odst/nanu
 					)
 
-/decl/hierarchy/outfit/eonoc_odst
+/decl/hierarchy/outfit/nanu
 	name = "nanu - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/nanu
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/nanu
