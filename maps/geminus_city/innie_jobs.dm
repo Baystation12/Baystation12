@@ -93,3 +93,6 @@
 /datum/job/geminus_innie/orion_defector
 	title = "Insurrectionist Orion Defector"
 	whitelisted_species = list(/datum/species/sanshyuum)
+	total_positions = 2
+	spawn_positions = 2
+	faction_whitelist = "Insurrection"
