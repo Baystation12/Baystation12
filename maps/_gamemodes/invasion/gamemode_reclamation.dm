@@ -18,6 +18,7 @@
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
 		/datum/job/geminus_innie/orion_defector,\
+		/datum/job/geminus_ship_ai,\
 		/datum/job/police,\
 		/datum/job/police_chief,\
 		/datum/job/colonist,\

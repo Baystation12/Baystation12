@@ -96,3 +96,12 @@
 	total_positions = 2
 	spawn_positions = 2
 	faction_whitelist = "Insurrection"
+
+/datum/job/geminus_ship_ai
+	title = "Insurrectionist AI"
+	spawn_faction = "Insurrection"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/halo_ai_smart
+	//faction_whitelist = "Insurrection"
+	whitelisted_species = list()
