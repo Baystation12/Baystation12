@@ -88,7 +88,7 @@
 	. = ..()
 	for(var/obj/item/organ/external/e in owner.bad_external_organs)
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
-			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
+			e.clamp_organ() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
 			w.damage -= 0.05
 

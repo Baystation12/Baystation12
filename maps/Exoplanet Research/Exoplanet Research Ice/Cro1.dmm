@@ -298,7 +298,7 @@
 "fL" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled/white,/area/exo_research_ice_facility/ground/interior/medicalbay)
 "fM" = (/obj/structure/closet/crate/secure/weapon{name = "Explosive Mines Crate"},/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/obj/item/device/landmine/explosive,/turf/simulated/floor/tiled,/area/exo_research_ice_facility/ground/interior/armory)
 "fN" = (/obj/machinery/vending/armory/hybrid{req_access = list()},/turf/simulated/floor/tiled,/area/exo_research_ice_facility/ground/interior/armory)
-"fO" = (/obj/machinery/vending/armory/armor,/turf/simulated/floor/tiled,/area/exo_research_ice_facility/ground/interior/armory)
+"fO" = (/obj/machinery/vending/armory/oni,/turf/simulated/floor/tiled,/area/exo_research_ice_facility/ground/interior/armory)
 "fP" = (/obj/machinery/vending/armory/attachment{req_access = list()},/turf/simulated/floor/tiled,/area/exo_research_ice_facility/ground/interior/armory)
 "fQ" = (/obj/machinery/vending/armory/heavy,/turf/simulated/floor/tiled,/area/exo_research_ice_facility/ground/interior/armory)
 "fR" = (/turf/simulated/floor/tiled,/area/exo_research_ice_facility/ground/interior/hangar)

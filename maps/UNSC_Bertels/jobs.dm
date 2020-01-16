@@ -84,7 +84,7 @@
 	spawn_positions = 1
 	account_allowed = 1
 	economic_modifier = 1
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_xo
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_iwo
 	selection_color = "#0A0A95"
 	access = list(access_unsc,142,144,145,192,access_unsc_armoury, access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"

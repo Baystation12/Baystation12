@@ -800,28 +800,32 @@ decl/hierarchy/outfit/Jul
 /obj/item/clothing/head/helmet/odst/donator/mann
 	name = "Mann's ODST Helmet"
 
-	item_state = "Odst Helmet Mann"
-	icon_state = "Odst Helmet Mann"
-	item_state_novisr = "Odst Helmet Mann"
-	icon_state_novisr = "Odst Helmet Mann"
+	item_state = "mann-odst-helmet_worn"
+	icon_state = "mann-odst-helmet_obj"
+	item_state_novisr = "mann-odst-helmet-open_worn"
+	icon_state_novisr = "mann-odst-helmet-open_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/mann
 	name = "Mann's ODST Armour"
 
-	icon_state = "Odst Armor Mann"
+	icon_state = "mann-odst-armor_obj"
+	item_state = "mann-odst-armor_worn"
 
 /obj/item/weapon/storage/box/large/donator/mann
 	startswith = list(/obj/item/clothing/head/helmet/odst/donator/mann,
-					/obj/item/clothing/suit/armor/special/odst/donator/mann
+					/obj/item/clothing/suit/armor/special/odst/donator/mann,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/mann,
-					/obj/item/clothing/suit/armor/special/odst/donator/mann
+					/obj/item/clothing/suit/armor/special/odst/donator/mann,
+					/obj/item/weapon/gun/projectile/m6c_magnum_s
 					)
 
 /decl/hierarchy/outfit/mann_odst
 	name = "mann - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/mann
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/mann
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
 
 //Spartan
 
@@ -1112,6 +1116,48 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	shoes = /obj/item/clothing/shoes/sangheili/dogler
 	head = /obj/item/clothing/head/helmet/sangheili/dogler
 	l_pocket = /obj/item/weapon/grenade/plasma
+
+////////NANU\\\\\\\\\
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/nanu
+	name = "ODST Snow Variant Mk-3 Helmet"
+
+	item_state = "nanu-helmet_worn"
+	icon_state = "nanu-helmet_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/nanu
+	name = "ODST Snow Variant Mk-3 Armor"
+	desc = "The Mk3 armor was made to give more camouflage in cold and artic environments due to its special nature of being extra insulated against the elements and is therefore also made for prolonged exposure to space."
+
+	item_state = "nanu-armor_worn"
+	icon_state = "nanu-armor_obj"
+
+/obj/item/weapon/storage/backpack/odst/nanu
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "ODST Snow Variant Mk-3 Armor Backpack"
+	item_state = "nanu-backpack_worn"
+	icon_state = "nanu-backpack_obj"
+
+/obj/item/weapon/storage/box/large/donator/nanu
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/nanu,
+					/obj/item/clothing/suit/armor/special/odst/donator/nanu,
+					/obj/item/weapon/storage/backpack/odst/nanu
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/nanu,
+					/obj/item/clothing/suit/armor/special/odst/donator/nanu,
+					/obj/item/weapon/storage/backpack/odst/nanu
+					)
+
+/decl/hierarchy/outfit/nanu
+	name = "nanu - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/nanu
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/nanu
+	back = /obj/item/weapon/storage/backpack/odst/nanu
+
+
 ////////PANTAS\\\\\\\\
 
 //URFC
@@ -1485,6 +1531,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "m6gold"
 	item_state = "m6gold"
+	hitsound = 'code/modules/halo/sounds/hurtflesh2.ogg'
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s/donator/sleepy/update_icon()
 	if(ammo_magazine)
