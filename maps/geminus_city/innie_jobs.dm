@@ -97,7 +97,7 @@
 	spawn_positions = 2
 	faction_whitelist = "Insurrection"
 
-/datum/job/geminus_ship_ai
+/datum/job/insurrectionist_ai
 	title = "Insurrectionist AI"
 	spawn_faction = "Insurrection"
 	total_positions = 1

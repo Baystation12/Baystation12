@@ -5,6 +5,7 @@
 		/datum/job/ONIGUARDS,\
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
+		/datum/job/insurrectionist_ai,\
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
