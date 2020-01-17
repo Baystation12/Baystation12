@@ -87,6 +87,8 @@
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
 	var/lock_time = 1 SECOND
 
+	var/last_elevation = BASE_ELEVATION
+
 	//Attachment System Stuff//
 	var/list/attachment_slots = list()
 	var/list/attachments_on_spawn = list()
@@ -295,6 +297,9 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
+	if(target.elevation != last_elevation && istype(target,/obj/vehicles) || istype(target,/mob/living))
+		last_elevation = target.elevation
+		visible_message("<span class = 'warning'>[user.name] changes their firing elevation to target [target.name]</span>")
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
 		var/user_position = V.occupants[user]
@@ -353,6 +358,9 @@
 			handle_click_empty(user)
 			. = 0
 			break
+		if(istype(projectile,/obj/item/projectile))
+			var/obj/item/projectile/proj_obj = projectile
+			proj_obj.target_elevation = last_elevation
 
 		process_accuracy(projectile, user, target, i, held_twohanded)
 
@@ -514,7 +522,7 @@
 		//If you aim at someone beforehead, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
-		P.accuracy += 1
+		P.accuracy += 2
 
 //does the actual launching of the projectile
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
