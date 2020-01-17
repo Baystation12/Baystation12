@@ -35,18 +35,21 @@
 	item_state = "ashvor-uniform"
 	icon_state = "ashvor-uniform_obj"
 	worn_state = "ashvor-uniform"
+	item_state_slots = list(slot_l_hand_str = "ashvor-uniform", slot_r_hand_str = "ashvor-uniform")
 
 /obj/item/clothing/head/helmet/eva/marine/ashvor
 	desc = "The ECH252 is an enclosed variant of the standard CH252 helmet. The helmet can be fully enclosed and environmentally sealed,"
 	name = "ECH252 Enclosed Helmet"
 	item_state = "ashvor-helmet_worn"
 	icon_state = "ashvor-helmet_obj"
+	item_state_slots = list(slot_l_hand_str = "ashvor-helmet", slot_r_hand_str = "ashvor-helmet")
 
 /obj/item/clothing/suit/spaceeva/eva/ashvor
 	desc = "A pressurized Atmospheric/Exoatmospheric (A/X) version of the standard M52 Body Armor, Worn mitigate the atmospheric hazards caused by nearby glassing,"
 	name = "M52A/X Body Armor"
 	item_state = "ashvor-armor_worn"
 	icon_state = "ashvor-armor_obj"
+	item_state_slots = list(slot_l_hand_str = "ashvor-armor", slot_r_hand_str = "ashvor-armor")
 
 /obj/item/clothing/gloves/thick/unsc/ashvor
 	desc = "The pressurized and sealed combat gloves worn with the A/X armor for the members of the UNSC Marine Corps."
@@ -55,6 +58,7 @@
 	icon_override = MARINE_OVERRIDE
 	item_state = "ashvor-gloves_worn"
 	icon_state = "ashvor-gloves_obj"
+	item_state_slots = list(slot_l_hand_str = "ashvor-gloves", slot_r_hand_str = "ashvor-gloves")
 
 /obj/item/clothing/shoes/magboots/eva/marine/ashvor
 	desc = "The Atmospheric/Exoatmospheric sealed variant of the standard combat boots worn by the members of the UNSC Marine Corps."
@@ -62,12 +66,14 @@
 	item_state = "ashvor-boots_worn"
 	icon_state = "ashvor-boots_obj0"
 	icon_base = "ashvor-boots_obj"
+	item_state_slots = list(slot_l_hand_str = "ashvor-boots", slot_r_hand_str = "ashvor-boots")
 
 /obj/item/weapon/storage/backpack/odst/regular/ashvor
 	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force."
 	name = "UNSC Tactical Backpack"
 	item_state = "ashvor-backpack_worn"
 	icon_state = "ashvor-backpack_obj"
+	item_state_slots = list(slot_l_hand_str = "ashvor-backpack", slot_r_hand_str = "ashvor-backpack")
 
 /obj/item/weapon/gun/projectile/m6d_magnum/ashvor
 	name = "\improper M6G Magnum"
@@ -78,12 +84,17 @@
 	fire_sound = 'code/modules/halo/sounds/Magnum_Reach_Fire.wav'
 	reload_sound = 'code/modules/halo/sounds/Magnum_Reach_Reload.wav'
 
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
+		)
+
 /obj/item/weapon/gun/projectile/m6d_magnum/ashvor/update_icon()
 	if(ammo_magazine)
 		icon_state = "m6g"
 	else
 		icon_state = "m6g_unloaded"
-
 
 /obj/item/weapon/storage/box/large/donator/ashvor
 	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/ashvor,
@@ -107,7 +118,6 @@
 	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
 	head = /obj/item/clothing/head/helmet/eva/marine/ashvor
 	back = /obj/item/weapon/storage/backpack/odst/regular/ashvor
-
 
 ////////caelumz\\\\\\\\
 
@@ -525,7 +535,6 @@ decl/hierarchy/outfit/Jul
 					)
 
 
-
 ////////karmac\\\\\\\
 
 //Marine
@@ -583,6 +592,35 @@ decl/hierarchy/outfit/Jul
 
 
 ////////Kelso\\\\\\\\
+
+//ODST
+
+/obj/item/clothing/head/helmet/odst/donator/kelso
+	name = "Recon Helmet"
+
+	item_state = "kelso-odst-helmet_worn"
+	icon_state = "kelso-odst-helmet_obj"
+	item_state_novisr = "kelso-odst-helmet-open_worn"
+	icon_state_novisr = "kelso-odst-helmet-open_obj"
+
+/obj/item/clothing/suit/armor/special/odst/donator/kelso
+	name = "Recon Armor"
+
+	item_state = "kelso-odst-armor_worn"
+	icon_state = "kelso-odst-armor_obj"
+
+/obj/item/weapon/storage/box/large/donator/kelso
+	startswith = list(/obj/item/clothing/head/helmet/odst/donator/kelso,
+					/obj/item/clothing/suit/armor/special/odst/donator/kelso
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/kelso,
+					/obj/item/clothing/suit/armor/special/odst/donator/kelso
+					)
+
+/decl/hierarchy/outfit/kelso
+	name = "kelso - ODST"
+	head = /obj/item/clothing/head/helmet/odst/donator/kelso
+	suit = /obj/item/clothing/suit/armor/special/odst/donator/kelso
 
 //Spartan
 
@@ -811,21 +849,35 @@ decl/hierarchy/outfit/Jul
 	icon_state = "mann-odst-armor_obj"
 	item_state = "mann-odst-armor_worn"
 
+/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
+	name = "\improper Collectors SOCOM"
+	desc = "A gun sporting a blue steel finish on it's slide, with a bone white ivory grip, decorated with the shocktrooper insignia. Screwed on the threaded barrel is a hard to find silencer. This gun is a coveted collectors piece, sought after by ODST officers as reminder of the UNSC Bertels. Etched onto the slide of the gun is the words on the left side 'And the light shineth in darkness...'"
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "socom-collector"
+	item_state = "socom-collector"
+
+/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann/update_icon()
+	if(ammo_magazine)
+		icon_state = "socom-collector"
+	else
+		icon_state = "socom-collector_unloaded"
+
+
 /obj/item/weapon/storage/box/large/donator/mann
 	startswith = list(/obj/item/clothing/head/helmet/odst/donator/mann,
 					/obj/item/clothing/suit/armor/special/odst/donator/mann,
-					/obj/item/weapon/gun/projectile/m6c_magnum_s
+					/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/mann,
 					/obj/item/clothing/suit/armor/special/odst/donator/mann,
-					/obj/item/weapon/gun/projectile/m6c_magnum_s
+					/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
 					)
 
 /decl/hierarchy/outfit/mann_odst
 	name = "mann - ODST"
 	head = /obj/item/clothing/head/helmet/odst/donator/mann
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/mann
-	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s
+	belt = /obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
 
 //Spartan
 
@@ -1126,6 +1178,8 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 
 	item_state = "nanu-helmet_worn"
 	icon_state = "nanu-helmet_obj"
+	item_state_novisr = "nanu-helmet-open_worn"
+	icon_state_novisr = "nanu-helmet-open_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/nanu
 	name = "ODST Snow Variant Mk-3 Armor"
@@ -1156,7 +1210,6 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	head = /obj/item/clothing/head/helmet/odst/donator/nanu
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/nanu
 	back = /obj/item/weapon/storage/backpack/odst/nanu
-
 
 ////////PANTAS\\\\\\\\
 
@@ -1510,6 +1563,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	desc = "Standard issue short-EVA capable helmet issued to ODST forces. This one is highlighted yellow, in accordance to the now-defunct Mechanist Corps."
 	item_state = "sleepy odst-helmet_worn"
 	icon_state = "sleepy odst-helmet_obj"
+	item_state_novisr = "sleepy odst-helmet-open_worn"
+	icon_state_novisr = "sleepy odst-helmet-open_obj"
 
 /obj/item/clothing/suit/armor/special/odst/sleepy
 	name = "ODST Mechanist Armour"
@@ -1550,7 +1605,6 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/armor/special/odst/sleepy
 	head = /obj/item/clothing/head/helmet/odst/engineer/sleepy
 	back = /obj/item/weapon/storage/backpack/odst/sleepy
-
 
 ////////Spartankiller\\\\\\\\
 
@@ -1901,6 +1955,57 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "riley - marine"
 	suit = /obj/item/clothing/suit/storage/marine/riley
 	head = /obj/item/clothing/head/helmet/marine/riley
+
+///////Zane\\\\\\\\
+
+//Sangheili (MAJOR)
+
+/obj/item/clothing/head/helmet/sangheili/zane
+	name = "‘Nasan Clan - Major Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "bluekro_helm_obj"
+	item_state = "bluekro_helm"
+
+/obj/item/clothing/suit/armor/special/combatharness/zane
+	name = "‘Nasan Clan - Major Combat Harness"
+	icon_state = "bluekro_chest_obj"
+	item_state = "bluekro_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/zane
+	name = "‘Nasan Clan - Major Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "bluekro_legs_obj"
+	item_state = "bluekro_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/zane
+	name = "‘Nasan Clan - Major Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "bluekro_gloves_obj"
+	item_state = "bluekro_gloves"
+
+/obj/item/weapon/storage/box/large/donator/zane_major
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/zane,
+					/obj/item/clothing/suit/armor/special/combatharness/zane,
+					/obj/item/clothing/shoes/sangheili/zane,
+					/obj/item/clothing/gloves/thick/sangheili/zane
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/zane,
+					/obj/item/clothing/suit/armor/special/combatharness/zane,
+					/obj/item/clothing/shoes/sangheili/zane,
+					/obj/item/clothing/gloves/thick/sangheili/zane
+					)
+
+/decl/hierarchy/outfit/zane_sangheili
+	name = "Zane - Major"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/zane
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/zane
+	shoes = /obj/item/clothing/shoes/sangheili/zane
+	head = /obj/item/clothing/head/helmet/sangheili/zane
+	l_pocket = /obj/item/weapon/grenade/plasma
 
 
 #undef ODST_OVERRIDE
