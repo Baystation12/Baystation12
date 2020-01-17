@@ -851,7 +851,7 @@ decl/hierarchy/outfit/Jul
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
 	name = "\improper Collectors SOCOM"
-	desc = "A gun sporting a blue steel finish on it's slide, with a bone white ivory grip, decorated with the shocktrooper insignia. Screwed on the threaded barrel is a hard to find silencer. This gun is a coveted collectors piece, sought after by ODST officers as reminder of the UNSC Bertels. Etched onto the slide of the gun is the words on the left side 'And the light shineth in darkness...'"
+	desc = "Sporting the profile of an M6C-M, emblazoned cold-blue steel finish, decorated with a golden ODST Shocktrooper insignia on it's Gúta bone-ivory grip, alongside a threaded barrel with a custom-fitted silencer. This gun is a coveted collectors piece, sought after by ODST officers as reminder of the UNSC Bertels. Etched into the blue steel slide on the left side, is an ode to Empires of Humanity’s past, it reads; “VENI, VIDI, VICI”"
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "socom-collector"
 	item_state = "socom-collector"
