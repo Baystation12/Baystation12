@@ -182,3 +182,19 @@
 	else
 		playsound(user.loc,'code/modules/halo/sounds/worting.ogg',50,0,7)
 	h.next_scream_at = world.time + SCREAM_COOLDOWN
+
+/decl/emote/audible/need_weapon
+	key = "weapon"
+	emote_message_3p = "USER exclaims their need for a weapon!"
+
+/decl/emote/audible/need_weapon/do_extra(var/atom/user, var/atom/target)
+	var/mob/living/carbon/human/h = user
+	if(!istype(h))
+		return
+	if(h.stat != CONSCIOUS)
+		return
+	if(world.time < h.next_scream_at)
+		return
+	if(h.species.type == /datum/species/spartan)
+		playsound(user.loc,'code/modules/halo/sounds/need_weapon.ogg',50,0,7)
+	h.next_scream_at = world.time + SCREAM_COOLDOWN

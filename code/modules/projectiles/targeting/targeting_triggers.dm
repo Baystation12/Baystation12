@@ -32,7 +32,7 @@
 		locked = 0 //Reset our aim lock, and make our gun delay a bit higher.
 		var/to_add = 35
 		if(G.lock_time > 0)
-			to_add = G.lock_time
+			to_add = G.lock_time/2
 
 		lock_time = world.time + to_add
 		G.next_fire_time += to_add
