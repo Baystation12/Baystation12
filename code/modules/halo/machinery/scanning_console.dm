@@ -51,7 +51,7 @@
 		to_chat(firer,"<span class = 'notice'>No superstructure to scan.</span>")
 		return
 	var/superstructure_strength = om_obj.get_superstructure_strength() * 100
-	if(istype(npc))
+	if(istype(npc) && !npc.is_player_controlled())
 		superstructure_strength = (npc.hull/initial(npc.hull)) * 100
 	to_chat(firer,"<span class = 'notice'>Scanning superstructure...</span>")
 	sleep(1 SECOND)
