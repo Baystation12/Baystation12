@@ -356,11 +356,11 @@ var/list/points_of_interest = list()
 		targeting_datum.targeted_location = "target lost"
 	if(superstructure_failing == -1)
 		return
-	if(superstructure_failing == 1)
+	if(superstructure_failing == 1 && (world.time % 4) == 0)
 		if(hull_segments.len == 0)
 			return
 		var/obj/explode_at = pick(hull_segments)
-		explosion(explode_at.loc,0,2,4,8, adminlog = 0)
+		explosion(explode_at.loc,0,1,3,5, adminlog = 0)
 		return
 	var/list/superstructure_strength = get_superstructure_strength()
 	if(isnull(superstructure_strength))
