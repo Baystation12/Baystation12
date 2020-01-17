@@ -16,6 +16,8 @@ var/global/datum/controller/occupations/job_master
 		//Debug info
 	var/list/job_debug = list()
 
+	var/list/jobs_poplocked = list()
+
 	var/alt_titled_jobs = 0
 
 	proc/SetupOccupations(var/setup_titles = 0)
@@ -60,6 +62,9 @@ var/global/datum/controller/occupations/job_master
 			//count how many jobs have alt titles so we can format the character setup screen more nicely
 			if(job.alt_titles && job.alt_titles.len > 1)
 				alt_titled_jobs += 1
+
+			if(job.poplock_divisor > 1)
+				jobs_poplocked += job
 
 		return 1
 
@@ -112,6 +117,13 @@ var/global/datum/controller/occupations/job_master
 				job.current_positions++
 				if(job.track_players)
 					job.assign_player(player.mind)
+				for(var/datum/job/poplocked in jobs_poplocked)
+					var/player_pop_nonfaction = 0
+					for(var/client/C in GLOB.clients)
+						if(!C.mob || isnull(poplocked.spawn_faction) || C.mob.faction == poplocked.spawn_faction)
+							continue
+						player_pop_nonfaction++
+					poplocked.total_positions = min(round(player_pop_nonfaction/poplocked.poplock_divisor),poplocked.poplock_max)
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
