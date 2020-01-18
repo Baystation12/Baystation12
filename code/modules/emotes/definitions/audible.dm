@@ -196,5 +196,5 @@
 	if(world.time < h.next_scream_at)
 		return
 	if(h.species.type == /datum/species/spartan)
-		playsound(user.loc,'code/modules/halo/sounds/need_weapon.ogg',50,0,7)
+		playsound(user.loc,'code/modules/halo/sounds/need_weapon.ogg',75,0,7)
 	h.next_scream_at = world.time + SCREAM_COOLDOWN
