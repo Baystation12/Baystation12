@@ -123,7 +123,13 @@ var/global/datum/controller/occupations/job_master
 						if(!C.mob || isnull(poplocked.spawn_faction) || C.mob.faction == poplocked.spawn_faction)
 							continue
 						player_pop_nonfaction++
-					poplocked.total_positions = min(round(player_pop_nonfaction/poplocked.poplock_divisor),poplocked.poplock_max)
+					var/amt_job = min(round(player_pop_nonfaction/poplocked.poplock_divisor),poplocked.poplock_max)
+					if(poplocked.total_positions == 0)
+						FreeRole(poplocked.title)
+						amt_job--
+					if(amt_job > 0)
+						poplocked.total_positions = amt_job
+
 				return 1
 		Debug("AR has failed, Player: [player], Rank: [rank]")
 		return 0
