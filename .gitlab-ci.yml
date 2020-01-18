@@ -1,0 +1,45 @@
+image: ubuntu:16.04
+
+stages:
+   - test
+
+code check:
+  stage: test
+  before_script:
+  - export DATABASE_URL=postgres://postgres:@postgres:5432/python-test-app
+  - apt-get update -qy
+  - apt-get install -y default-jdk python3-dev python3-pip uchardet curl gawk zip unzip libc6-i386 libgcc1 libstdc++6 lib32stdc++6
+  script:
+    - test/run-test.sh
+  cache:
+    paths:
+      - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+  variables: {TEST: "CODE"}
+    
+.map_template: &map_definition
+  stage: test
+  before_script:
+  - export DATABASE_URL=postgres://postgres:@postgres:5432/python-test-app
+  - apt-get update -qy
+  - apt-get install -y default-jdk python3-dev python3-pip uchardet curl gawk zip unzip libc6-i386 libgcc1 libstdc++6 lib32stdc++6
+  script:
+  - test/run-test.sh
+  cache:
+    paths:
+      - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
+    
+map example:
+  <<: *map_definition
+  variables: {TEST: "MAP", MAP_PATH: "example"}
+    
+map torch:
+  <<: *map_definition
+  variables: {TEST: "MAP", MAP_PATH: "torch"}
+  
+map bearcat:
+  <<: *map_definition
+  variables: {TEST: "MAP", MAP_PATH: "bearcat"}
+
+map away sites:
+  <<: *map_definition
+  variables: {TEST: "MAP", MAP_PATH: "away_sites_testing"}
