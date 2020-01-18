@@ -165,7 +165,7 @@ function find_code_deps {
     need_cmd awk
     need_cmd md5sum
     need_cmd python3
-    need_cmd pip
+    need_cmd pip3
 }
 
 function find_web_deps {
@@ -196,8 +196,8 @@ function find_code {
 function run_code_tests {
     msg "*** running code tests ***"
     find_code_deps
-    pip install --user PyYaml -q
-    pip install --user beautifulsoup4 -q
+    pip3 install --user PyYaml -q
+    pip3 install --user beautifulsoup4 -q
     shopt -s globstar
     run_test "check travis contains all maps" "scripts/validateTravisContainsAllMaps.sh"
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
