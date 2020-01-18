@@ -198,6 +198,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		return list2params(L)
 
 	else if(copytext(T,1,5) == "laws")
+		if(!config.comms_password)
+			return "Not enabled"
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
@@ -253,6 +255,8 @@ var/world_topic_spam_protect_time = world.timeofday
 			return list2params(ret)
 
 	else if(copytext(T,1,5) == "info")
+		if(!config.comms_password)
+			return "Not enabled"
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
@@ -320,7 +324,8 @@ var/world_topic_spam_protect_time = world.timeofday
 				4. sender = the ircnick that send the message.
 		*/
 
-
+		if(!config.comms_password)
+			return "Not enabled"
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
@@ -371,6 +376,8 @@ var/world_topic_spam_protect_time = world.timeofday
 				1. notes = ckey of person the notes lookup is for
 				2. validationkey = the key the bot has, it should match the gameservers commspassword in it's configuration.
 		*/
+		if(!config.comms_password)
+			return "Not enabled"
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
@@ -386,6 +393,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		return show_player_info_irc(ckey(input["notes"]))
 
 	else if(copytext(T,1,4) == "age")
+		if(!config.comms_password)
+			return "Not enabled"
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
@@ -407,9 +416,9 @@ var/world_topic_spam_protect_time = world.timeofday
 			return "Database connection failed or not set up"
 
 	else if(copytext(T,1,14) == "placepermaban")
-		var/input[] = params2list(T)
 		if(!config.ban_comms_password)
 			return "Not enabled"
+		var/input[] = params2list(T)
 		if(input["bankey"] != config.ban_comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
 				spawn(50)
@@ -439,6 +448,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		qdel(C)
 
 	else if(copytext(T,1,19) == "prometheus_metrics")
+		if(!config.comms_password)
+			return "Not enabled"
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
 			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
