@@ -152,7 +152,7 @@
 	if (!linked)
 		return
 
-	if(get_dist(usr, src) > 1)
+	if(!istype(usr,/mob/living/silicon) && get_dist(usr, src) > 1)
 		to_chat(usr,"<span class = 'notice'>You need to be next to [src] to do that!</span>")
 		return
 

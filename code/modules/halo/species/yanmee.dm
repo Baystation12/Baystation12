@@ -24,8 +24,8 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
 	darksight = 4
-	brute_mod = 1.1
-	slowdown = 0
+	brute_mod = 1.2
+	slowdown = -0.7
 	gluttonous = GLUT_ANYTHING
 	pixel_offset_x = -1
 	default_faction = "Covenant"
@@ -47,7 +47,6 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 
 /datum/species/yanmee/create_organs(var/mob/living/carbon/human/H)
 	. = ..()
-
 	H.equip_to_slot(new /obj/item/clothing/under/yanmee_internal,slot_w_uniform)
 	H.equip_to_slot(new /obj/item/clothing/shoes/drone_boots,slot_shoes)
 	H.equip_to_slot(new /obj/item/clothing/gloves/drone_gloves,slot_gloves)
