@@ -15,8 +15,10 @@
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
 	if(owner && LAZYISIN(owner.pilots, user))
 		if(!owner.hatch_closed && carrying)
+			if(!do_after(user, 30, owner)) return
 			if(user.put_in_active_hand(carrying))
 				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [carrying] from \the [src]."))
+				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 				carrying = null
 	. = ..()
 
@@ -44,7 +46,7 @@
 				O.forceMove(src)
 				carrying = O
 				owner.visible_message(SPAN_NOTICE("\The [owner] loads \the [O] into its cargo compartment."))
-
+				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 
 		//attacking - Cannot be carrying something, cause then your clamp would be full
 		else if(istype(target,/mob/living))
@@ -70,7 +72,9 @@
 		if(!carrying)
 			to_chat(user, SPAN_WARNING("You are not carrying anything in \the [src]."))
 		else
+			if(!do_after(user, 20, owner)) return
 			owner.visible_message(SPAN_NOTICE("\The [owner] unloads \the [carrying]."))
+			playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 			carrying.forceMove(get_turf(src))
 			carrying = null
 
@@ -256,7 +260,7 @@
 	if(.)
 		if(drill_head)
 			owner.visible_message(SPAN_WARNING("[owner] revs the [drill_head], menancingly."))
-			playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
+			playsound(src, 'sound/mecha/mechdrill.ogg', 50, 1)
 
 /obj/item/mech_equipment/drill/get_hardpoint_maptext()
 	if(drill_head)
@@ -293,6 +297,7 @@
 			DH.forceMove(src)
 			drill_head = DH
 			owner.visible_message(SPAN_NOTICE("\The [owner] mounts the [drill_head] on the [src]."))
+			playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
 			return
 
 		if(drill_head == null)
@@ -303,6 +308,7 @@
 		if(istype(C))
 			C.use(active_power_use * CELLRATE)
 		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		playsound(src, 'sound/mecha/mechdrill.ogg', 50, 1)
 
 		var/T = target.loc
 
@@ -351,8 +357,6 @@
 								if(get_dir(owner,ore)&owner.dir)
 									ore.Move(ore_box)
 
-				playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
-		
 		else
 			to_chat(user, "You must stay still while the drill is engaged!")		
 
