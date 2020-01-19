@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Guest pass icon will now change colour to black when expired."
+  - tweak: "Guest pass machine gets an updated UI."
