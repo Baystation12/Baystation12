@@ -120,7 +120,7 @@ var/global/datum/controller/occupations/job_master
 				for(var/datum/job/poplocked in jobs_poplocked)
 					var/player_pop_nonfaction = 0
 					for(var/client/C in GLOB.clients)
-						if(!C.mob || isnull(poplocked.spawn_faction) || C.mob.faction == poplocked.spawn_faction)
+						if(!C.mob || !istype(C.mob,/mob/living) || isnull(poplocked.spawn_faction) || C.mob.faction == poplocked.spawn_faction)
 							continue
 						player_pop_nonfaction++
 					var/amt_job = min(round(player_pop_nonfaction/poplocked.poplock_divisor),poplocked.poplock_max)
