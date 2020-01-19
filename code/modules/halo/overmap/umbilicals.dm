@@ -161,6 +161,8 @@
 			to_chat(user,"<span class = 'notice'>Connection point selection cancelled.</span>")
 			return
 	if(umbi)
+		if(umbi.our_ship.superstructure_failing)
+			to_chat(user,"<span class = 'danger'>Superstructure of vessel is failing. Ensure caution when boarding.</span>")
 		current_connected = umbi
 		visual_umbi_change()
 		umbi.current_connected = src

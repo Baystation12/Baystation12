@@ -244,7 +244,7 @@
 	var/obj/item/device/flashlight/flare/fired = AM
 	fired.turn_on()
 	..()
-
+/*
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
 	name = "\improper SRM-8 missile rack"
 	icon_state = "mecha_missilerack"
@@ -258,7 +258,7 @@
 	var/obj/item/missile/M = AM
 	M.primed = 1
 	..()
-
+*/
 /obj/item/missile
 	name = "missile"
 	icon_state = "ssr"

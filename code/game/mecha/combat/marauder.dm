@@ -5,7 +5,7 @@
 	initial_icon = "marauder"
 	step_in = 5
 	health = 500
-	deflect_chance = 25
+	deflect_chance = 15
 	damage_absorption = list("brute"=0.5,"fire"=0.7,"bullet"=0.45,"laser"=0.6,"energy"=0.7,"bomb"=0.7)
 	max_temperature = 60000
 	infra_luminosity = 3
