@@ -244,13 +244,13 @@
 	var/obj/item/device/flashlight/flare/fired = AM
 	fired.turn_on()
 	..()
-/*
+
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive
 	name = "\improper SRM-8 missile rack"
 	icon_state = "mecha_missilerack"
 	projectile = /obj/item/missile
 	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
-	projectiles = 4
+	projectiles = 2
 	projectile_energy_cost = 200 KILOWATTS
 	equip_cooldown = 60
 
@@ -258,7 +258,7 @@
 	var/obj/item/missile/M = AM
 	M.primed = 1
 	..()
-*/
+
 /obj/item/missile
 	name = "missile"
 	icon_state = "ssr"
