@@ -34,7 +34,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/scorpion_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/scorpion)
-	cargo_capacity = 8 //Can hold, at max, two normals
 
 /obj/item/weapon/gun/vehicle_turret/switchable/scorpion_cannon
 	name = "Scorpion Cannon"

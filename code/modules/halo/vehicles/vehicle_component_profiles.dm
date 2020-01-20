@@ -12,12 +12,6 @@
 	var/list/vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
 	var/obj/item/vehicle_component/component_last_inspected
 
-	var/cargo_capacity = 0 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
-	var/vehicle_capacity = 0 //The capacity of the vehicle hold. Vehicles increase space taken by base_storage_cost(vehicle_size + 5)
-	var/max_vehicle_size = 0//Determines the maximum vehicle size. Used alongside vehicle ferrying to determine biggest vehicle carriable and quantity.
-	var/cargo_allow_massive = 0
-	var/list/current_cargo = list()
-
 /datum/component_profile/New(var/obj/vehicles/creator)
 	. = ..()
 	contained_vehicle = creator

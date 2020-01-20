@@ -26,7 +26,7 @@
 	//Cargo
 	var/used_cargo_space = 0
 	var/cargo_capacity = 0
-	var/capacity_flag = ITEM_SIZE_HUGE
+	var/capacity_flag = ITEM_SIZE_SMALL
 	var/list/cargo_contents = list()
 
 	//Vehicle ferrying//

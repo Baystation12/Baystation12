@@ -18,7 +18,7 @@
 	exposed_positions = list("driver" = 25,"passenger" = 25,"gunner" = 25)
 
 	vehicle_size = ITEM_SIZE_VEHICLE
-	capacity_flag = ITEM_SIZE_VEHICLE_SMALL
+	capacity_flag = ITEM_SIZE_NORMAL
 
 	move_sound = 'code/modules/halo/sounds/warthog_move.ogg'
 
@@ -36,7 +36,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/warthog_turret)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/warthog)
-	cargo_capacity = 20 //Can hold, at max, 5 normals
 
 /obj/item/weapon/gun/vehicle_turret/warthog_turret
 	name = "Warthog Turret"
@@ -58,6 +57,7 @@
 	icon_state = "warthog-turretless"
 
 	vehicle_move_delay = 1.6
+	capacity_flag = ITEM_SIZE_LARGE
 
 	occupants = list(2,0)
 	exposed_positions = list("driver" = 15,"passenger" = 20)
@@ -70,6 +70,7 @@
 	icon_state = "Warthog"
 
 	vehicle_move_delay = 1.4
+	capacity_flag = ITEM_SIZE_HUGE
 
 	occupants = list(4,0)
 	exposed_positions = list("driver" = 15,"passenger" = 30)

@@ -44,10 +44,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/shadow_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/shadow)
-	max_vehicle_size = 16
-	vehicle_capacity = 16
-	cargo_capacity = 36 //Can hold, at max, 9 normals
-	cargo_allow_massive = 1
 
 /obj/item/weapon/gun/vehicle_turret/shadow_cannon
 	name = "Shadow Cannon"

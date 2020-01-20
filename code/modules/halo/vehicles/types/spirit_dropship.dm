@@ -46,10 +46,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/spirit_main)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/spirit)
-	cargo_capacity = 48 //Can hold, at max, 9 normals
-	max_vehicle_size = 64
-	vehicle_capacity = 64
-	cargo_allow_massive = 1
 
 /obj/item/weapon/gun/vehicle_turret/spirit_main
 	name = "Heavy Plasma Cannon"

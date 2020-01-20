@@ -42,7 +42,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/wraith)
-	cargo_capacity = 12 //Can hold, at max, two normals
 
 /obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon
 	name = "Wraith Cannon"

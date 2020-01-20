@@ -39,10 +39,6 @@
 /datum/component_profile/pelican
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican)
-	cargo_capacity = 48 //Can hold, at max, 9 normals
-	max_vehicle_size = 64
-	vehicle_capacity = 64
-	cargo_allow_massive = 1
 
 /obj/vehicles/air/pelican/unsc
 	faction = "unsc"

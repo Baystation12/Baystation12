@@ -42,4 +42,3 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/warthog_turret)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/bull)
-	cargo_capacity = 32 //Can hold, at max, 8 normals

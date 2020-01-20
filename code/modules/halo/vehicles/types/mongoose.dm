@@ -71,4 +71,3 @@
 
 /datum/component_profile/mongoose
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/mongoose)
-	cargo_capacity = 4 //Can hold, at max, a single normal

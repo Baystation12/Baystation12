@@ -18,6 +18,7 @@
 	occupants = list(2,1)
 
 	vehicle_size = ITEM_SIZE_VEHICLE
+	capacity_flag = ITEM_SIZE_NORMAL
 
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
@@ -111,7 +112,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/cobra_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/cobra)
-	cargo_capacity = 8 //Can hold, at max, two normals
 
 /obj/item/weapon/gun/vehicle_turret/cobra_cannon
 	name = "Cobra Cannon"
