@@ -36,7 +36,7 @@
 					src.visible_message("<span class='info'>[user] begins working at the console of [src]...</span>")
 					if(do_after(user, slipspace_activate_timer))
 						slipspace_jump_time = world.time + slipspace_chargeup_timer
-						GLOB.processing_objects += src
+						GLOB.processing_objects |= src
 						log_admin("[user] the [user.mind.assigned_role] (CKEY: [user.ckey]) activated the slipspace engine. Jump timer: [slipspace_chargeup_timer / 10] seconds.")
 						if(istype(ship))
 							to_chat(user,"<span class='notice'>[src] has been activated. [ship] will enter slipspace in [slipspace_chargeup_timer / 10] seconds.</span>")

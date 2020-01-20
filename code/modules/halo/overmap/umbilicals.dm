@@ -6,8 +6,8 @@
 
 	icon = 'code/modules/halo/icons/overmap/umbilical_full.dmi'
 	icon_state = "umbi_contracted"
-	plane = ABOVE_HUMAN_PLANE
-	layer = ABOVE_HUMAN_LAYER
+	plane = OBJ_PLANE
+	layer = ABOVE_WINDOW_LAYER
 
 	opacity = 1
 	density = 1

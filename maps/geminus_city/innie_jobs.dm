@@ -49,7 +49,7 @@
 /datum/job/geminus_innie/equip(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch)
 	. = ..()
 
-	antag.add_antagonist_mind(H.mind, 1, 1)
+	antag.add_antagonist_mind(H.mind, 1, "Geminus Insurrectionist")
 
 /datum/job/geminus_innie/officer
 	title = "Insurrectionist Officer"
@@ -89,3 +89,19 @@
 
 	for(var/datum/mind/player in antag.faction_members)
 		to_chat(player.current,"<span class='info'>[title] [H] has arrived at the base.</span>")
+
+/datum/job/geminus_innie/orion_defector
+	title = "Insurrectionist Orion Defector"
+	whitelisted_species = list(/datum/species/orion)
+	total_positions = 2
+	spawn_positions = 2
+	faction_whitelist = "Insurrection"
+
+/datum/job/insurrectionist_ai
+	title = "Insurrectionist AI"
+	spawn_faction = "Insurrection"
+	total_positions = 1
+	spawn_positions = 1
+	outfit_type = /decl/hierarchy/outfit/halo_ai_smart
+	//faction_whitelist = "Insurrection"
+	whitelisted_species = list()

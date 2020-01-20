@@ -9,7 +9,6 @@
 	uniform = /obj/item/clothing/under/unggoy_internal
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	mask = /obj/item/clothing/mask/rebreather
-	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/unggoy/post_equip(mob/living/carbon/human/H)
@@ -46,6 +45,7 @@
 	name = "Unggoy (Ultra)"
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
+	l_hand = /obj/item/language_learner/unggoy_to_common
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 
 /decl/hierarchy/outfit/unggoy/specops
@@ -60,5 +60,5 @@
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
 	mask = /obj/item/clothing/mask/rebreather/unggoy_deacon
-	l_pocket = /obj/item/weapon/grenade/plasma/heavy_plasma
+	l_hand = /obj/item/language_learner/unggoy_to_common
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue

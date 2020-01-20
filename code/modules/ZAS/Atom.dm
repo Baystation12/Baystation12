@@ -5,7 +5,7 @@
 	//Inputs: The moving atom (optional), target turf, "height" and air group
 	//Outputs: Boolean if can pass.
 
-	return (!density || !height || air_group)
+	return (!density || (mover && mover.elevation != elevation) || !height || air_group)
 
 /turf/CanPass(atom/movable/mover, turf/target, height=1.5,air_group=0)
 	if(!target) return 0
@@ -56,7 +56,7 @@ turf/c_airblock(turf/other)
 	#endif
 	if(((blocks_air & AIR_BLOCKED) || (other.blocks_air & AIR_BLOCKED)))
 		return BLOCKED
-	
+
 	//Z-level handling code. Always block if there isn't an open space.
 	#ifdef MULTIZAS
 	if(other.z != src.z)
@@ -73,7 +73,7 @@ turf/c_airblock(turf/other)
 			return ZONE_BLOCKED
 		else
 			return AIR_BLOCKED
-			
+
 	var/result = 0
 	for(var/atom/movable/M in contents)
 		result |= M.c_airblock(other)

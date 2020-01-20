@@ -59,4 +59,4 @@
 	if(air_group) return 0
 	if(istype(mover) && mover.checkpass(PASSGLASS))
 		return !opacity
-	return !density
+	return (!density || mover.elevation != elevation)

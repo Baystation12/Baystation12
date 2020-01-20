@@ -6,8 +6,8 @@
 	step_in = 3
 	dir_in = 1 //Facing North.
 	health = 500
-	deflect_chance = 35
-	damage_absorption = list("brute"=0.5,"fire"=0.7,"bullet"=0.5,"laser"=0.5,"energy"=0.55,"bomb"=0.7)
+	deflect_chance = 15
+	damage_absorption = list("brute"=0.6,"fire"=0.7,"bullet"=0.6,"laser"=0.6,"energy"=0.6,"bomb"=0.7)
 	max_temperature = 25000
 	infra_luminosity = 6
 	var/overload = 0

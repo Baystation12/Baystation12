@@ -5,6 +5,7 @@
 	icon = 'code/modules/halo/covenant/crate.dmi'
 	icon_state = "weapon_rack"
 	density = 1
+	w_class = ITEM_SIZE_HUGE
 	var/list/held_items = list()
 	var/list/charging_items = list()
 	var/charging = 0

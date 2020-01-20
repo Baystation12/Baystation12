@@ -19,7 +19,6 @@
 
 /mob/living/silicon/proc/set_zeroth_law(var/law, var/law_borg)
 	laws_sanity_check()
-	laws.set_zeroth_law(law, law_borg)
 	log_law("has given [src] the zeroth law: '[law]'[law_borg ? " / '[law_borg]'" : ""]")
 
 /mob/living/silicon/robot/set_zeroth_law(var/law, var/law_borg)

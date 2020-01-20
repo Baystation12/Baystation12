@@ -1,6 +1,6 @@
 
 /obj/vehicles/air/overmap
-	var/overmap_range = 8 //The amount of overmap "tiles" this vehicle can move with move_to_waypoint
+	var/overmap_range = 2 //The amount of overmap "tiles" this vehicle can move with move_to_waypoint
 
 	vehicle_view_modifier = 1.5
 

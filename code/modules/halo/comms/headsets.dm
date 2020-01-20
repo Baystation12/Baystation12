@@ -45,6 +45,11 @@
 	icon_state = "cent_headset"
 	ks1type = /obj/item/device/encryptionkey/taccomo
 
+/obj/item/device/radio/headset/unsc/spartan
+	name = "Spartan radio headset"
+	icon_state = "cent_headset"
+	ks1type = /obj/item/device/encryptionkey/spartancom
+
 //unsc officer headset
 /obj/item/device/radio/headset/unsc/officer
 	name = "UNSC officer radio headset"

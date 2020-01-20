@@ -13,18 +13,21 @@
 	caliber = "14.5mm"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m145_ap
-	fire_sound = 'code/modules/halo/sounds/SniperShotSoundEffect.ogg'
-	reload_sound = 'code/modules/halo/sounds/SniperRifleReloadSoundEffect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Sniper_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Sniper_Reload_New.wav'
 	one_hand_penalty = -1
 	scoped_accuracy = 7
-	accuracy = 2
+	accuracy = -5
 	screen_shake = 0
+	fire_delay = 10
 	burst = 1
-	burst_delay = 2
+	wielded_item_state = "SRS99-wielded"
 	w_class = ITEM_SIZE_HUGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/can_use_when_prone()
@@ -50,60 +53,45 @@
 	name = "M392 Designated Marksman Rifle"
 	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance. Has an inbuilt underbarrel flashlight.  Takes 7.62mm calibre magazines."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
-	icon_state = "M395"
+	icon_state = "M395-Loaded-Base"
 	item_state = "m392"
 	load_method = MAGAZINE
 	caliber = "a762dmr"
 	slot_flags = SLOT_BACK
 	magazine_type = /obj/item/ammo_magazine/m762_ap/M392
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/M392) //Disallows loading LMG boxmags into the DMR.
-	fire_sound = 'code/modules/halo/sounds/DMR_ShotSoundEffect.ogg'
-	reload_sound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/DMR_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/DMR_Reload_New.wav'
 	one_hand_penalty = -1
 	w_class = ITEM_SIZE_LARGE
 	accuracy = 2
 	scoped_accuracy = 3
-	fire_delay = 4
-	burst_delay = 4
 	var/on = 0
-	var/activation_sound = 'sound/effects/flashlight.ogg'
+	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
+	wielded_item_state = "m392-wielded"
+	attachment_slots = list("barrel","sight")
+	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/M395,/obj/item/weapon_attachment/sight/M395_scope)
 
 /obj/item/weapon/gun/projectile/m392_dmr/can_use_when_prone()
 	return 1
 
-/obj/item/weapon/gun/projectile/m392_dmr/verb/scope()
-	set category = "Weapon"
-	set name = "Use Scope"
-	set popup_menu = 1
-
-	toggle_scope(usr, 1.35)
-
 /obj/item/weapon/gun/projectile/m392_dmr/update_icon()
 	if(ammo_magazine)
-		icon_state = "M395"
+		icon_state = "M395-Loaded-Base"
 	else
-		icon_state = "M395_unloaded"
+		icon_state = "M395_Unloaded-Base"
 	. = ..()
-
-/obj/item/weapon/gun/projectile/m392_dmr/verb/toggle_light()
-	set category = "Weapon"
-	set name = "Toggle Gun Light"
-	on = !on
-	if(on && activation_sound)
-		playsound(src.loc, activation_sound, 75, 1)
-		set_light(4)
-	else
-		set_light(0)
 
 /obj/item/weapon/gun/projectile/m392_dmr/innie
 	name = "Modified M392 DMR"
 	desc = "A heavily modified M392 remade without a bullpup design and including a hardened barrel for a faster fire rate. Has both semi and burst functionality. Takes 7.62mm rounds."
-	icon_state = "innie_M392"
 	fire_sound = 'code/modules/halo/sounds/innieDMRfirfix.ogg'
 	reload_sound = 'code/modules/halo/sounds/InnieDMRreload.ogg'
 	fire_delay = 1.5
@@ -120,12 +108,6 @@
 		list(mode_name="semi-automatic", 	burst=1, fire_delay=1.5, move_delay=6,    burst_accuracy=list(1), dispersion=list(0.0)),
 		)
 
-/obj/item/weapon/gun/projectile/m392_dmr/innie/update_icon()
-	if(ammo_magazine)
-		icon_state = "innie_M392"
-	else
-		icon_state = "innie_M392_unloaded"
-	. = ..()
 
 /obj/item/weapon/gun/energy/SDSR_10
 	name = "SDSR-10"

@@ -34,16 +34,6 @@ var/datum/antagonist/rogue_ai/malf
 			candidates -= player
 	return candidates
 
-
-// Ensures proper reset of all malfunction related things.
-/datum/antagonist/rogue_ai/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
-	if(..(player,show_message,implanted))
-		var/mob/living/silicon/ai/p = player.current
-		if(istype(p))
-			p.stop_malf()
-		return 1
-	return 0
-
 // Malf setup things have to be here, since game tends to break when it's moved somewhere else. Don't blame me, i didn't design this system.
 /datum/antagonist/rogue_ai/greet(var/datum/mind/player)
 

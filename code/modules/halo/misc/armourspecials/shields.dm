@@ -28,17 +28,16 @@
 	var/obj/effect/overlay/shields/shieldoverlay = new /obj/effect/overlay/shields
 	var/image/mob_overlay
 	var/obj/item/clothing/suit/armor/special/connectedarmour
-	var/list/armourvalue
 	var/armour_state = SHIELD_IDLE
 	var/tick_recharge = 30
 	var/intercept_chance = 100
 	var/eva_mode_active = 0
 
 /datum/armourspecials/shields/New(var/obj/item/clothing/suit/armor/special/c) //Needed the type path for typecasting to use the totalshields var.
+	. = ..()
 	connectedarmour = c
 	totalshields = connectedarmour.totalshields
 	shieldstrength = totalshields
-	armourvalue = connectedarmour.armor
 	add_evamode_verb()
 
 /datum/armourspecials/shields/proc/add_evamode_verb() //Proc-ified to allow subtypes to disable EVA mode.
@@ -60,7 +59,6 @@
 		connectedarmour.visible_message("[toggler] reroutes their shields, prioritising defense.")
 		take_damage(shieldstrength) //drop our shields to 0
 		totalshields = connectedarmour.totalshields
-		armourvalue = connectedarmour.armor
 		connectedarmour.item_flags = initial(connectedarmour.item_flags)
 		connectedarmour.min_cold_protection_temperature = initial(connectedarmour.min_cold_protection_temperature)
 		connectedarmour.cold_protection = initial(connectedarmour.cold_protection)
@@ -75,8 +73,6 @@
 	if(istype(attacker) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
 		return 0
 	if(take_damage(damage))
-		connectedarmour.armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0) //This is needed because shields don't work if armour absorbs the blow instead.
-
 		//Melee damage through shields is reduced
 		var/obj/item/dam_source = damage_source
 		if(istype(dam_source) &&!istype(dam_source,/obj/item/projectile) && dam_source.loc.Adjacent(connectedarmour.loc))
@@ -87,7 +83,6 @@
 			return 0
 		return 1
 	else
-		connectedarmour.armor =  armourvalue
 		return 0
 
 /datum/armourspecials/shields/proc/update_overlay(var/new_icon_state)
@@ -127,7 +122,7 @@
 /datum/armourspecials/shields/proc/reset_recharge(var/extra_delay = 0)
 	//begin counting down the recharge
 	if(armour_state == SHIELD_IDLE)
-		GLOB.processing_objects += src
+		GLOB.processing_objects |= src
 
 	//update the shield effect overlay
 	if(shieldstrength > 0)
@@ -175,6 +170,7 @@
 		armour_state = SHIELD_IDLE
 		GLOB.processing_objects -= src
 		update_overlay("shield_overlay")
+		user.update_icons()
 
 /datum/armourspecials/shields/tryemp(severity)
 	switch(severity)

@@ -29,7 +29,7 @@
 /decl/hierarchy/outfit/spartan_two_oprf
 	name = "OPRF Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
-	suit = /obj/item/clothing/suit/armor/special/spartan
+	suit = /obj/item/clothing/suit/armor/special/spartan/AA
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	shoes = /obj/item/clothing/shoes/magboots/spartan
 	gloves = /obj/item/clothing/gloves/spartan

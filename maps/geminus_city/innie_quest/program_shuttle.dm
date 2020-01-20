@@ -122,7 +122,7 @@
 
 			to_chat(user, "\icon[MC] <span class='notice'>Shuttle launching...</span>")
 			//playsound(MC.loc, 'sound/effects/start.ogg', 25, 5)
-			my_shuttle.fuel_left -= fuel_needed
+			//my_shuttle.fuel_left -= fuel_needed //CURRENTLY LACKING REFUELLING.
 
 			//quests are one shot only - finish our current quest if we are here
 			if(my_shuttle.current_name == my_shuttle.instance_quest.location_name)

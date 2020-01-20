@@ -8,8 +8,8 @@
 	name = "UNSC Ship Engineer"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/technician
-	shoes = /obj/item/clothing/shoes/workboots
+	uniform = /obj/item/clothing/under/unsc/orange
+	shoes = /obj/item/clothing/shoes/jackboots
 	belt = /obj/item/weapon/storage/belt/utility/full
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e4)
 
@@ -19,8 +19,8 @@
 	name = "UNSC Ship Helmsman"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/pilot
-	shoes =  /obj/item/clothing/shoes/black
+	uniform = /obj/item/clothing/under/unsc/blue
+	shoes =  /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
 
 	flags = 0
@@ -29,8 +29,18 @@
 	name = "UNSC Ship Bridge Crew"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/command
-	shoes =  /obj/item/clothing/shoes/black
+	uniform = /obj/item/clothing/under/unsc/yellow
+	shoes =  /obj/item/clothing/shoes/jackboots
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmedicalcrew
+	name = "UNSC Medical Crew"
+
+	l_ear = /obj/item/device/radio/headset/unsc
+	uniform = /obj/item/clothing/under/unsc/lblue
+	shoes =  /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
 
 	flags = 0
@@ -39,9 +49,9 @@
 	name = "UNSC Ship Pelican Pilot"
 
 	l_ear = /obj/item/device/radio/headset/unsc/pilot
-	uniform = /obj/item/clothing/under/unsc/pilot
-	shoes = /obj/item/clothing/shoes/black
-	head = /obj/item/clothing/head/helmet/pilot
+	uniform = /obj/item/clothing/under/unsc/newpilot
+	shoes = /obj/item/clothing/shoes/jackboots
+	head = /obj/item/clothing/head/helmet/newpilot
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e5)
 
 	flags = 0
@@ -50,8 +60,8 @@
 	name = "UNSC Ship Janitor"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/logistics
-	shoes = /obj/item/clothing/shoes/black
+	uniform = /obj/item/clothing/under/unsc/brown
+	shoes = /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted)
 
 	flags = 0
@@ -60,8 +70,8 @@
 	name = "UNSC Ship Ship Crew"
 
 	l_ear = /obj/item/device/radio/headset/unsc
-	uniform = /obj/item/clothing/under/unsc/tactical
-	shoes = /obj/item/clothing/shoes/black
+	uniform = /obj/item/clothing/under/unsc/red
+	shoes = /obj/item/clothing/shoes/jackboots
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
 
 	flags = 0
@@ -70,10 +80,11 @@
 	name = "UNSC Ship Commanding Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/commander
-	uniform = /obj/item/clothing/under/unsc/command
+	uniform = /obj/item/clothing/under/unsc/co
 	shoes = /obj/item/clothing/shoes/brown
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o4)
+	l_hand = /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum
+	belt = /obj/item/weapon/material/machete/officersword
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o6)
 
 	flags = 0
 
@@ -81,9 +92,9 @@
 	name = "UNSC Ship Executive Officer"
 
 	l_ear = /obj/item/device/radio/headset/unsc/officer
-	uniform = /obj/item/clothing/under/unsc/command
+	uniform = /obj/item/clothing/under/unsc/grey
 	shoes = /obj/item/clothing/shoes/brown
-	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o3)
+	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o4)
 
 	flags = 0
 
@@ -107,6 +118,7 @@
 	name = "UNSC Marine"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
+	mask = /obj/item/clothing/mask/marine
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
 	shoes = /obj/item/clothing/shoes/marine
@@ -114,7 +126,84 @@
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/unsc
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsevamarine
+	name = "EVA Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	mask = /obj/item/clothing/mask/breath
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/magboots/eva/marine
+	head = /obj/item/clothing/head/helmet/eva/marine
+	suit = /obj/item/clothing/suit/space/void/unsc
+	belt = /obj/item/weapon/tank/emergency/oxygen/double
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelscombatmedic
+	name = "Marine Combat Medic"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	mask = /obj/item/clothing/mask/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine/medic
+	suit = /obj/item/clothing/suit/storage/marine/medic
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmachinegunner
+	name = "Machine Gunner Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelscombattechie
+	name = "Marine Combat Technician"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e3, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsscoutsniper
+	name = "Scout Sniper Marine"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -130,17 +219,45 @@
 	suit = /obj/item/clothing/suit/storage/marine
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/unsc
-	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/enlisted/e7)
+	starting_accessories = list(/obj/item/clothing/accessory/rank/marine/officer/, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_so
+	name = "Marine Squad Leader"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	mask = /obj/item/clothing/mask/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	head = /obj/item/clothing/head/helmet/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_iwo
+	name = "Infantry Weapons Officer"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e9, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
 
 //ODST Outfits
 
 /decl/hierarchy/outfit/job/bertelsfacil_ODST
 	name = "Bertels ODST Rifleman"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -156,7 +273,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTSharpshooter
 	name = "Bertels ODST Sharpshooter"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -172,7 +288,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTMedic
 	name = "Bertels ODST Field Medic"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -188,7 +303,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTCQC
 	name = "Bertels ODST CQC Specialist"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -204,7 +318,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTengineer
 	name = "Bertels ODST Combat Engineer"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -220,7 +333,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTRifleman
 	name = "Bertels ODST corporal"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -236,7 +348,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTRifleman2
 	name = "Bertels ODST sarge"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -252,7 +363,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTstaffsergeant
 	name = "Bertels ODST staffsarge"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -268,7 +378,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTgunnerysergeant
 	name = "Bertels ODST gunnysarge"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -284,7 +393,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTFireteamLead
 	name = "Bertels ODST Fireteam Leader"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -300,7 +408,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTsecondlieutenant
 	name = "Bertels ODST Second Lieutenant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -316,7 +423,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTfirstlieutenant
 	name = "Bertels ODST First Lieutenant"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -333,7 +439,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTcaptain
 	name = "Bertels ODST odstCaptain"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -349,7 +454,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTmajor
 	name = "Bertels ODST Major"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -365,7 +469,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTltcolonel
 	name = "Bertels ODST LtColonel"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots
@@ -381,7 +484,6 @@
 /decl/hierarchy/outfit/job/bertelsODSTcolonel
 	name = "Bertels ODST Colonel"
 	l_ear = /obj/item/device/radio/headset/unsc/odst
-	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/tactical
 	shoes = /obj/item/clothing/shoes/jungleboots

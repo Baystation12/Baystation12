@@ -7,17 +7,20 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	icon_state = "m90"
 	item_state = "m90"
-	fire_sound = 'code/modules/halo/sounds/Shotgun_Shot_Sound_Effect.ogg'
-	reload_sound = 'code/modules/halo/sounds/Shotgun_Pump_Slide.ogg'
+	fire_sound = 'code/modules/halo/sounds/Shotgun_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Shotgun_Reload_New.wav'
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	max_shells = 8
 	one_hand_penalty = -1
 	var/on = 0
-	var/activation_sound = 'sound/effects/flashlight.ogg'
+	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 	w_class = ITEM_SIZE_LARGE
+	wielded_item_state = "m90-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
 
@@ -46,7 +49,7 @@
 	one_hand_penalty = -1
 	burst = 2
 	fire_delay = 1
-	screen_shake = 2
+	screen_shake = 1
 	accuracy = -1
 	dispersion=list(0.0, 0.6)
 	w_class = ITEM_SIZE_LARGE

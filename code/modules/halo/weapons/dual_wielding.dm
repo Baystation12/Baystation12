@@ -18,12 +18,15 @@
 	name = "Dual Wield Placeholder"
 	desc = "You're holding two guns in such a way as to allow you to fire both at once."
 
+	w_class = 9
+	slot_flags = 0
+
 	one_hand_penalty = -1
 	var/list/weapons_wielded = list()
-	var/weapon_delay = 2 //The time in ticks between each weapon firing.
+	var/weapon_delay = 3 //The time in ticks between each weapon firing.
 
 /obj/item/weapon/gun/dual_wield_placeholder/New()
-	.=..()
+	. =..()
 	name = ""
 
 /obj/item/weapon/gun/dual_wield_placeholder/proc/add_wielding_weapon(var/obj/weapon,var/mob/user)
@@ -62,7 +65,7 @@
 /obj/item/weapon/gun/dual_wield_placeholder/Fire(atom/target, mob/living/user, clickparams, pointblank, reflex)
 	for(var/obj/item/weapon/gun/weapon in weapons_wielded)
 		var/index = weapons_wielded.Find(weapon)
-		spawn((weapon_delay * (index - 1)))
+		spawn(weapon_delay * index)
 			weapon.Fire(target,user,clickparams,pointblank,reflex)
 
 /obj/item/weapon/gun/dual_wield_placeholder/update_twohanding() //Overriden to do nothing so the name doesn't get reset to "dual wield placeholder"

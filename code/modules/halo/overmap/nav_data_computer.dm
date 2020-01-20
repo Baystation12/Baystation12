@@ -10,6 +10,8 @@
 
 	var/obj/item/nav_data_chip/data_chip = new /obj/item/nav_data_chip
 
+	ai_access_level = 4
+
 /obj/machinery/nav_computer/ex_act(var/severity)
 	if(severity > 2)
 		if(prob(50))
@@ -197,35 +199,39 @@
 
 /obj/item/nav_data_chip/unsc
 	chip_faction = "UNSC"
-	known_sectors = list("Deviance Station","VT9-042","KS7-535","Geminus City Colony")
+	known_sectors = list("Deviance Station","VT9-042","Northwind","KS7-535","Geminus Colony")
 
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "Covenant"
-	known_sectors = list("Vanguard's Mantle","VT9-042")
+	known_sectors = list("Vanguard's Mantle","VT9-042","Northwind")
 
 /obj/item/nav_data_chip/innie
 	chip_faction = "Insurrection"
-	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus Colony")
+
+/obj/item/nav_data_chip/civilian
+	chip_faction = "civilian"
+	known_sectors = list("Geminus Colony")
 
 /obj/item/nav_data_chip/fragmented/unsc
 	name = "Fragmented Nav Data Chip"
 	chip_faction = "UNSC"
-	known_sectors = list("Deviance Station","VT9-042","KS7-535","Geminus City Colony")
+	known_sectors = list("Deviance Station","VT9-042","Northwind","KS7-535","Geminus Colony")
 
 /obj/item/nav_data_chip/fragmented/covenant
 	name = "Fragmented Nav Data Chip"
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "Covenant"
-	known_sectors = list("Vanguard's Mantle","VT9-042")
+	known_sectors = list("Vanguard's Mantle","VT9-042","Northwind")
 
 /obj/item/nav_data_chip/fragmented/covenant/kig_yar
-	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535","Geminus City Colony")
+	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535","Geminus Colony")
 
 /obj/item/nav_data_chip/fragmented/innie
 	name = "Fragmented Nav Data Chip"
 	chip_faction = "Insurrection"
-	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus City Colony")
+	known_sectors = list("Camp New Hope","Asteroid","KS7-535","Geminus Colony")
 
 /obj/machinery/nav_computer/npc/unsc
 	data_chip = new /obj/item/nav_data_chip/fragmented/unsc
@@ -250,3 +256,6 @@
 
 /obj/machinery/nav_computer/innie
 	data_chip = new /obj/item/nav_data_chip/innie
+
+/obj/machinery/nav_computer/civilian
+	data_chip = new /obj/item/nav_data_chip/civilian

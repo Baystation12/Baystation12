@@ -46,19 +46,19 @@
 	<div class='item'>
 		<div class="itemLabel">
 			<div class='item'>
-				{{:helper.link('', 'triangle-1-nw', { 'move' : 9 }, null, null)}}
-				{{:helper.link('', 'triangle-1-n', { 'move' : 1 }, null, null)}}
-				{{:helper.link('', 'triangle-1-ne', { 'move' : 5 }, null, null)}}
+				{{:helper.link('', 'triangle-1-nw', { 'move' : 9 }, null, data.moving_dir == 9 ? 'selected' : null)}}
+				{{:helper.link('', 'triangle-1-n', { 'move' : 1 }, null, data.moving_dir == 1 ? 'selected' : null)}}
+				{{:helper.link('', 'triangle-1-ne', { 'move' : 5 }, null, data.moving_dir == 5 ? 'selected' : null)}}
 			</div>
 			<div class='item'>
-				{{:helper.link('', 'triangle-1-w', { 'move' : 8 }, null, null)}}
-				{{:helper.link('', 'circle-close', { 'brake' : 1 }, null, null)}}
-				{{:helper.link('', 'triangle-1-e', { 'move' : 4 }, null, null)}}
+				{{:helper.link('', 'triangle-1-w', { 'move' : 8 }, null, data.moving_dir == 8 ? 'selected' : null)}}
+				{{:helper.link('', 'circle-close', { 'brake' : 1 }, null, data.braking ? 'selected' : null)}}
+				{{:helper.link('', 'triangle-1-e', { 'move' : 4 }, null, data.moving_dir == 4 ? 'selected' : null)}}
 			</div>
 			<div class='item'>
-				{{:helper.link('', 'triangle-1-sw', { 'move' : 10 }, null, null)}}
-				{{:helper.link('', 'triangle-1-s', { 'move' : 2 }, null, null)}}
-				{{:helper.link('', 'triangle-1-se', { 'move' : 6 }, null, null)}}
+				{{:helper.link('', 'triangle-1-sw', { 'move' : 10 }, null, data.moving_dir == 10 ? 'selected' : null)}}
+				{{:helper.link('', 'triangle-1-s', { 'move' : 2 }, null, data.moving_dir == 2 ? 'selected' : null)}}
+				{{:helper.link('', 'triangle-1-se', { 'move' : 6 }, null, data.moving_dir == 6 ? 'selected' : null)}}
 			</div>
 		</div>
 
@@ -66,6 +66,10 @@
 			<div class='item'>
 				<span class='white'>Direct control</span>
 				{{:helper.link(data.manual_control ? 'Engaged' : 'Disengaged', 'shuffle', { 'manual' : 1 }, null, data.manual_control ? 'selected' : null)}}
+			</div>
+			<div class='item'>
+				<span class='white'>Lock thrust</span>
+				{{:helper.link(data.lock_thrust ? 'Locked' : 'Unlocked', 'shuffle', { 'lock_thrust' : 1 }, null, data.lock_thrust ? 'selected' : null)}}
 			</div>
 		</div>
 	</div>

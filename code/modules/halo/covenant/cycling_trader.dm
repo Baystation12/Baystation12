@@ -13,6 +13,7 @@
 	var/clan_name = "Hidden Clan"
 
 /obj/effect/landmark/cycling_trader/New()
+	. = ..()
 	GLOB.processing_objects.Add(src)
 	time_cycle_trader = world.time + trader_gap_max
 

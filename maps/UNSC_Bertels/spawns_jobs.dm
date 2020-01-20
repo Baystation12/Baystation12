@@ -91,7 +91,7 @@ GLOBAL_LIST_EMPTY(corvetteodst_marineplatoon_spawns)
 
 /datum/spawnpoint/corvetteodst_marineplatoon
 	display_name = "UNSC Ship Marine Platoon Leader Spawn"
-	restrict_job = list("UNSC Marine Platoon Leader")
+	restrict_job = list("UNSC Marine Platoon Leader", "Marine Squad Leader", "Marine Platoon Sergeant")
 
 /datum/spawnpoint/corvetteodst_marineplatoon/New()
 	..()

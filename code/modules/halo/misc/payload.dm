@@ -136,6 +136,7 @@
 	var/list/bomblocations = list()
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator/New()
+	. = ..()
 	for(var/obj/effect/bomblocation/b in world)
 		bomblocations += b.loc
 	if(bomblocations.len == 0)
@@ -156,6 +157,6 @@
 
 /datum/explosion/nuclearexplosion/New(var/obj/payload/b)
 	radiation_repository.radiate(b.loc,1000,10000)
-	..()
+	. = ..()
 	var/obj/effect/overmap/OM = map_sectors["[b.z]"]
 	OM.nuked = 1

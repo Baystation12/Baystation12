@@ -4,12 +4,20 @@
 	icon = 'code/modules/halo/icons/mobs/defense_mobs.dmi'
 	health = 100
 	maxHealth = 100
+	resistance = 15
 	var/list/possible_weapons = list()
 	var/icon/gun_overlay
 
 /mob/living/simple_animal/hostile/defender_mob/Initialize()
 	. = ..()
 	process_weapon()
+
+/mob/living/simple_animal/hostile/defender_mob/toggle_hold_fire()
+	hold_fire = !hold_fire
+	if(hold_fire == FALSE)
+		visible_message("<span class = 'danger'>[src] raises their weapon, ready to fire.</span>")
+	else
+		visible_message("<span class = 'notice'>[src] lowers their weapon, warily watching.</span>")
 
 /mob/living/simple_animal/hostile/defender_mob/proc/process_weapon()
 	if(possible_weapons.len == 0)
@@ -95,7 +103,7 @@
 	icon_living  = "heavy_innie_brown"
 	icon_dead = "dead_heavy_innie_brown"
 
-	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie,/obj/item/weapon/gun/projectile/shotgun/pump)
+	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts)
 
 /mob/living/simple_animal/hostile/defender_mob/cov
 	faction = "Covenant"

@@ -203,6 +203,8 @@
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
 /proc/equip_custom_items(mob/living/carbon/human/M, var/before_job = 0, var/target_slot)
+	if(isnull(M))
+		return
 	var/list/key_list = custom_items[M.ckey]
 	if(!key_list || key_list.len < 1)
 		return
@@ -216,7 +218,7 @@
 		// Check for requisite ckey and character name.
 		if((citem.assoc_key && lowertext(citem.assoc_key) != lowertext(M.ckey)) || (citem.character_name && lowertext(citem.character_name) != lowertext(M.real_name)))
 			continue
-			
+
 		// Once we've decided that the custom item belongs to this player, validate it
 		if(!citem.is_valid(M))
 			return

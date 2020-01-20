@@ -4,7 +4,7 @@
 /obj/machinery/power/fusion_drive
 	name = "Mark II Hanley-Messer Fusion Drive"
 	desc = "A fusion reactor for powering starships."
-	icon = 'fusion_drive.dmi'
+	icon = 'code/modules/halo/power/fusion_drive.dmi'
 	icon_state = "reactor0"
 
 	density = 1
@@ -26,7 +26,7 @@
 	var/icon/fuel_overlay
 
 /obj/machinery/power/fusion_drive/New()
-	..()
+	. = ..()
 	heat_energy = T20C * internal_heat_capacity
 
 /obj/machinery/power/fusion_drive/Initialize()

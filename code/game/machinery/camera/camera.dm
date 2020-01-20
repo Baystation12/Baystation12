@@ -9,7 +9,7 @@
 	plane = ABOVE_HUMAN_PLANE
 	layer = CAMERA_LAYER
 
-	var/list/network = list(NETWORK_EXODUS)
+	var/network = NETWORK_EXODUS
 	var/c_tag = null
 	var/c_tag_order = 999
 	var/status = 1
@@ -31,8 +31,6 @@
 	var/light_disabled = 0
 	var/alarm_on = 0
 	var/busy = 0
-
-	var/on_open_network = 0
 
 	var/affected_by_emp_until = 0
 
@@ -64,6 +62,9 @@
 	M.machine_visual = null
 	return 1
 
+/obj/machinery/camera/proc/get_cameranet()
+	return all_networks[network]
+
 /obj/machinery/camera/New()
 	wires = new(src)
 	assembly = new(src)
@@ -75,13 +76,18 @@
 		if(C != src && C.c_tag == src.c_tag && tempnetwork.len)
 			world.log << "[src.c_tag] [src.x] [src.y] [src.z] conflicts with [C.c_tag] [C.x] [C.y] [C.z]"
 	*/
-	if(!src.network || src.network.len < 1)
+	var/datum/visualnet/camera/net = get_cameranet()
+	if(isnull(net))
+		all_networks[network] = new /datum/visualnet/camera
+		net = get_cameranet()
+
+	if(!src.network)
 		if(loc)
 			error("[src.name] in [get_area(src)] (x:[src.x] y:[src.y] z:[src.z] has errored. [src.network?"Empty network list":"Null network list"]")
 		else
 			error("[src.name] in [get_area(src)]has errored. [src.network?"Empty network list":"Null network list"]")
 		ASSERT(src.network)
-		ASSERT(src.network.len > 0)
+		//ASSERT(src.network.len > 0)
 	..()
 
 /obj/machinery/camera/Destroy()
@@ -139,7 +145,9 @@
 
 /obj/machinery/camera/proc/setViewRange(var/num = 7)
 	src.view_range = num
-	cameranet.update_visibility(src, 0)
+	var/datum/visualnet/cam_net = get_cameranet()
+	if(!isnull(cam_net))
+		cam_net.update_visibility(src, 0)
 
 /obj/machinery/camera/attack_hand(mob/living/carbon/human/user as mob)
 	if(!istype(user))
@@ -386,50 +394,10 @@
 	user.set_machine(src)
 	wires.Interact(user)
 
-/obj/machinery/camera/proc/add_network(var/network_name)
-	add_networks(list(network_name))
-
-/obj/machinery/camera/proc/remove_network(var/network_name)
-	remove_networks(list(network_name))
-
-/obj/machinery/camera/proc/add_networks(var/list/networks)
-	var/network_added
-	network_added = 0
-	for(var/network_name in networks)
-		if(!(network_name in src.network))
-			network += network_name
-			network_added = 1
-
-	if(network_added)
-		update_coverage(1)
-
-/obj/machinery/camera/proc/remove_networks(var/list/networks)
-	var/network_removed
-	network_removed = 0
-	for(var/network_name in networks)
-		if(network_name in src.network)
-			network -= network_name
-			network_removed = 1
-
-	if(network_removed)
-		update_coverage(1)
-
-/obj/machinery/camera/proc/replace_networks(var/list/networks)
-	if(networks.len != network.len)
-		network = networks
-		update_coverage(1)
-		return
-
-	for(var/new_network in networks)
-		if(!(new_network in network))
-			network = networks
-			update_coverage(1)
-			return
-
-/obj/machinery/camera/proc/clear_all_networks()
-	if(network.len)
-		network.Cut()
-		update_coverage(1)
+/obj/machinery/camera/proc/set_network(var/new_network)
+	ready_for_netswitch()
+	network = new_network
+	update_coverage(1)
 
 /obj/machinery/camera/proc/nano_structure()
 	var/cam[0]

@@ -22,6 +22,7 @@
 	name = "boarding beacon"
 	icon = 'code/modules/halo/machinery/boarding_beacon_proj.dmi'
 	icon_state = "beacon"
+	step_delay = 0.3 SECONDS
 
 /obj/item/projectile/boarding_beacon/on_impact(var/atom/impacted)
 	new /obj/structure/boarding_beacon (loc)

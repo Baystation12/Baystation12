@@ -20,7 +20,6 @@
 	var/list/shield_colour_values = list("300" = "#6d63ff","200" = "#ffa76d","100" = "#ff4248")//Associative list with shield-charge as key and colour value as keyvalue. Ordered highest to lowest. EG: "200" = "#6D63FF"
 	var/shield_recharge_delay = 6 //The delay between taking damage and starting to recharge, in seconds.
 	var/shield_next_charge
-	var/limb_hit_chance = 5 //The chance to hit arms and legs even if the shield were to block the shot. Percentile.
 	var/active_slowdown_amount = 5
 
 /obj/item/clothing/gloves/shield_gauntlet/New()
@@ -174,13 +173,10 @@
 		if(get_dir(src,damage_source) in get_allowed_attack_dirs())
 			return 0
 
-	if((def_zone in list("l_hand","r_hand")) && prob(creator_gauntlet.limb_hit_chance))
-		return 0
+	if(!isnull(attacker))
+		creator_gauntlet.current_user.visible_message("<span class = 'danger'>[attacker]'s attack is deflected by the [creator_gauntlet.name].</span>")
 	else
-		if(!isnull(attacker))
-			creator_gauntlet.current_user.visible_message("<span class = 'danger'>[attacker]'s attack is deflected by the [creator_gauntlet.name].</span>")
-		else
-			creator_gauntlet.current_user.visible_message("<span class = 'danger'>[damage_source] is deflected by the [creator_gauntlet.name].</span>")
+		creator_gauntlet.current_user.visible_message("<span class = 'danger'>[damage_source] is deflected by the [creator_gauntlet.name].</span>")
 
 	return 1
 

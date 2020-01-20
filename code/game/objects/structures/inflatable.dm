@@ -52,7 +52,10 @@
 	return ..()
 
 /obj/structure/inflatable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	return 0
+	if(air_group)
+		return 0
+	else
+		. = ..()
 
 /obj/structure/inflatable/bullet_act(var/obj/item/projectile/Proj)
 	var/proj_damage = Proj.get_structure_damage()
@@ -166,7 +169,7 @@
 		return state
 	if(istype(mover, /obj/effect/beam))
 		return !opacity
-	return !density
+	return (!density || (mover && mover.elevation != elevation))
 
 /obj/structure/inflatable/door/proc/TryToSwitchState(atom/user)
 	if(isSwitchingStates) return

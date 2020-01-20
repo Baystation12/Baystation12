@@ -85,7 +85,9 @@
 	var/tmp/list/mob/living/aim_targets //List of who yer targeting.
 	var/tmp/mob/living/last_moved_mob //Used to fire faster at more than one person.
 	var/tmp/told_cant_shoot = 0 //So that it doesn't spam them with the fact they cannot hit them.
-	var/tmp/lock_time = -100
+	var/lock_time = 1 SECOND
+
+	var/last_elevation = BASE_ELEVATION
 
 	//Attachment System Stuff//
 	var/list/attachment_slots = list()
@@ -97,6 +99,7 @@
 	var/is_charging = 0
 	var/irradiate_non_cov = 0 //Set this to anything above 0, and it'll irradiate humans when fired. Spartans and Orions are ok.
 	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
+	var/advanced_covenant = 0
 
 /obj/item/weapon/gun/New()
 	..()
@@ -231,6 +234,10 @@
 		else
 			handle_click_empty(user)
 		return 0
+	var/mob/living/carbon/human/h = user
+	if(istype(h) && h.species.can_operate_advanced_covenant == 0 && advanced_covenant == 1)
+		to_chat(h,"<span class= 'danger'>You don't know how to operate this weapon!</span>")
+		return 0
 	return 1
 
 /obj/item/weapon/gun/emp_act(severity)
@@ -238,7 +245,7 @@
 		O.emp_act(severity)
 
 /obj/item/weapon/gun/afterattack(atom/A, mob/living/user, adjacent, params)
-	if(adjacent) return //A is adjacent, is the user, or is on the user's person
+	if(adjacent) return ..()//A is adjacent, is the user, or is on the user's person
 
 	if(!user.aiming)
 		user.aiming = new(user)
@@ -254,6 +261,8 @@
 		return
 
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
+		if(get_lunge_dist() > 0) //If we're on help intent and we have a lunge, do the lunge.
+			return ..()
 		to_chat(user, "<span class='warning'>You refrain from firing your [src] as your intent is set to help.</span>")
 		return
 
@@ -267,6 +276,7 @@
 
 		is_charging = 1
 		if (!do_after(user,arm_time,src))
+			is_charging = 0
 			return
 		Fire(A,user,params)
 		is_charging = 0
@@ -287,6 +297,9 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
+	if(target.elevation != last_elevation && istype(target,/obj/vehicles) || istype(target,/mob/living))
+		last_elevation = target.elevation
+		visible_message("<span class = 'warning'>[user.name] changes their firing elevation to target [target.name]</span>")
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
 		var/user_position = V.occupants[user]
@@ -330,7 +343,11 @@
 	var/shoot_time = (burst - 1)* burst_delay
 	user.setClickCooldown(shoot_time) //no clicking on things while shooting
 	//user.setMoveCooldown(shoot_time) //no moving while shooting either
-	next_fire_time = world.time + shoot_time
+	next_fire_time = world.time + shoot_time + fire_delay
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/h = user
+		for(var/obj/item/weapon/gun/g in h.contents)
+			g.next_fire_time = next_fire_time
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
@@ -341,6 +358,9 @@
 			handle_click_empty(user)
 			. = 0
 			break
+		if(istype(projectile,/obj/item/projectile))
+			var/obj/item/projectile/proj_obj = projectile
+			proj_obj.target_elevation = last_elevation
 
 		process_accuracy(projectile, user, target, i, held_twohanded)
 
@@ -348,7 +368,7 @@
 			process_point_blank(projectile, user, target)
 
 		var/target_zone
-		if(user.zone_sel)
+		if(user && user.zone_sel)
 			target_zone = user.zone_sel.selecting
 		else
 			target_zone = "chest"
@@ -367,7 +387,6 @@
 	//update timing
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	//user.setMoveCooldown(move_delay)//
-	next_fire_time = world.time + fire_delay
 	return
 
 //obtains the next projectile to fire
@@ -503,8 +522,7 @@
 		//If you aim at someone beforehead, it'll hit more often.
 		//Kinda balanced by fact you need like 2 seconds to aim
 		//As opposed to no-delay pew pew
-		//Increased to +3 to add a larger incentive to use it, even if you are stuck in one spot with the fast-paced combat system
-		P.accuracy += 3
+		P.accuracy += 2
 
 //does the actual launching of the projectile
 /obj/item/weapon/gun/proc/process_projectile(obj/projectile, mob/user, atom/target, var/target_zone, var/params=null)
@@ -527,10 +545,12 @@
 			y_offset = rand(-1,1)
 			x_offset = rand(-1,1)
 
-	var/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
+	var/obj/launched = !P.launch_from_gun(target, user, src, target_zone, x_offset, y_offset)
 
 	if(launched)
 		play_fire_sound(user,P)
+		if(istype(target,/atom/movable) && get_dist(target,user) <= 1)
+			change_elevation(target.elevation-launched.elevation)
 
 	return launched
 
@@ -589,9 +609,10 @@
 	var/cumulative_slowdownmod = 0
 	for(var/obj/item/weapon_attachment/attachment in get_attachments())
 		var/list/attrib_mods = attachment.get_attribute_mods(src)
-		cumulative_dispmod += attrib_mods[1]
-		cumulative_accmod += attrib_mods[2]
-		cumulative_slowdownmod += attrib_mods[3]
+		if(!isnull(attrib_mods))
+			cumulative_dispmod += attrib_mods[1]
+			cumulative_accmod += attrib_mods[2]
+			cumulative_slowdownmod += attrib_mods[3]
 
 	dispersion += cumulative_dispmod
 	accuracy += cumulative_accmod
@@ -655,6 +676,11 @@
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]
 		to_chat(user, "The fire selector is set to [current_mode.name].")
+	var/list/attachments_names = get_attachments(1)
+	if(attachments_names.len > 0)
+		to_chat(user,"It has the following attachments:")
+		for(var/name in attachments_names)
+			to_chat(user,"\n[name]")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
 	if(firemodes.len <= 1)

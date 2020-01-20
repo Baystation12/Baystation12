@@ -84,7 +84,7 @@
 	var/berth_prefix = ""
 
 /obj/structure/sign/berth/New()
-	..()
+	. = ..()
 	if(berth_prefix)
 		name = "\improper [berth_prefix] Berth [berth_num]"
 	else

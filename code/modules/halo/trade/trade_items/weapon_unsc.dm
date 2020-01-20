@@ -44,10 +44,12 @@
 	category = "weapon_unsc"
 
 /datum/trade_item/br85
-	name = "BR85 Battle Rifle"
-	item_type = /obj/item/weapon/gun/projectile/br85
-	quantity = 1
+	name = "BR55 Battle Rifle"
+	item_type = /obj/item/weapon/gun/projectile/br55
+	quantity = 8
 	value = 12000
+	trader_weight = 5
+	bonus_items = list(/obj/item/ammo_magazine/m95_sap/br55)
 	category = "weapon_unsc"
 
 /datum/trade_item/m739_lmg
@@ -58,23 +60,28 @@
 	category = "weapon_unsc"
 	bonus_items = list(/obj/item/ammo_magazine/a762_box_ap)
 
-///datum/trade_item/m392_dmr
-//	name = "M392 Designated Marksman Rifle"
-//	item_type = /obj/item/weapon/gun/projectile/m392_dmr
-//	quantity = 1
-//	value = 17000
-//	category = "weapon_unsc"
+/datum/trade_item/m392_dmr
+	name = "M392 Designated Marksman Rifle"
+	item_type = /obj/item/weapon/gun/projectile/m392_dmr
+	quantity = 4
+	value = 17000
+	trader_weight = 5
+	bonus_items = list(/obj/item/ammo_magazine/m762_ap/M392)
+	category = "weapon_unsc"
 
-///datum/trade_item/m41_ssr
-//	name = "M41 rocket launcher"
-//	item_type = /obj/item/weapon/gun/launcher/rocket/m41_ssr
-//	quantity = 1
-//	value = 25000
-//	category = "weapon_unsc"
+/datum/trade_item/m41_ssr
+	name = "M41 rocket launcher"
+	item_type = /obj/item/weapon/gun/projectile/m41
+	quantity = 1
+	value = 75000
+	bonus_items = list(/obj/item/weapon/storage/box/spnkr)
+	trader_weight = 1
+	category = "weapon_unsc"
 
-///datum/trade_item/srs99_sniper
-//	name = "SRS99 sniper rifle"
-//	item_type = /obj/item/weapon/gun/projectile/srs99_sniper
-//	quantity = 1
-//	value = 35000
-//	category = "weapon_unsc"
+/datum/trade_item/srs99_sniper
+	name = "SRS99 sniper rifle"
+	item_type = /obj/item/weapon/gun/projectile/srs99_sniper
+	quantity = 1
+	value = 75000
+	trader_weight = 1
+	category = "weapon_unsc"

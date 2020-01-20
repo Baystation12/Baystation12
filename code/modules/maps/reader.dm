@@ -16,7 +16,7 @@ var/global/dmm_suite/preloader/_preloader = null
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(var/dmm_file as file, var/z_offset as num, var/x_offset as num, var/y_offset as num)
+/dmm_suite/load_map(var/dmm_file as file, var/z_offset as num, var/x_offset as num, var/y_offset as num,var/ignore_prepresent_wall = 0 as num)
 	if(!z_offset)//what z_level we are creating the map on
 		z_offset = world.maxz+1
 
@@ -78,7 +78,7 @@ var/global/dmm_suite/preloader/_preloader = null
 			for(var/mpos=1;mpos<=x_depth;mpos+=key_len)
 				xcrd++
 				var/model_key = copytext(grid_line,mpos,mpos+key_len)
-				parse_grid(grid_models[model_key],xcrd+x_offset-1,ycrd+y_offset-1,zcrd+z_offset)
+				parse_grid(grid_models[model_key],xcrd+x_offset,ycrd+y_offset,zcrd+z_offset,ignore_prepresent_wall)
 
 			//reached end of current map
 			if(gpos+x_depth+1>z_depth)
@@ -110,7 +110,7 @@ var/global/dmm_suite/preloader/_preloader = null
  * 4) Instanciates the atom with its variables
  *
  */
-/dmm_suite/proc/parse_grid(var/model as text,var/xcrd as num,var/ycrd as num,var/zcrd as num)
+/dmm_suite/proc/parse_grid(var/model as text,var/xcrd as num,var/ycrd as num,var/zcrd as num,var/ignore_prepresent_wall = 0 as num)
 	/*Method parse_grid()
 	- Accepts a text string containing a comma separated list of type paths of the
 		same construction as those contained in a .dmm file, and instantiates them.
@@ -166,10 +166,12 @@ var/global/dmm_suite/preloader/_preloader = null
 	//first instance the /area and remove it from the members list
 	index = members.len
 	var/atom/instance
+
 	_preloader = new(members_attributes[index])//preloader for assigning  set variables on atom creation
 
 	instance = locate(members[index])
-	instance.contents.Add(locate(xcrd,ycrd,zcrd))
+	if(instance && !isnull(locate(xcrd,ycrd,zcrd)))
+		instance.contents.Add(locate(xcrd,ycrd,zcrd))
 
 	if(_preloader && instance)
 		_preloader.load(instance)
@@ -183,20 +185,31 @@ var/global/dmm_suite/preloader/_preloader = null
 		first_turf_index++
 
 	//instanciate the first /turf
-	var/turf/T = instance_atom(members[first_turf_index],members_attributes[first_turf_index],xcrd,ycrd,zcrd)
+	var/turf/T
+	if(ignore_prepresent_wall)
+		//if oldloc is space, instance new. If oldloc is floor and we are wall, instance new. If oldloc is floor and we are floor, Instance new (replace floor)
+		if(((istype(locate(xcrd,ycrd,zcrd),/turf/space) && !ispath(members[first_turf_index],/turf/space)) || (ispath(members[first_turf_index],/turf/simulated/wall) && istype(locate(xcrd,ycrd,zcrd),/turf/simulated/floor)) || (ispath(members[first_turf_index],/turf/simulated/floor) && istype(locate(xcrd,ycrd,zcrd),/turf/simulated/floor))))
+			T = instance_atom(members[first_turf_index],members_attributes[first_turf_index],xcrd,ycrd,zcrd)
+		else
+			T = locate(xcrd,ycrd,zcrd)
+	else
+		T = instance_atom(members[first_turf_index],members_attributes[first_turf_index],xcrd,ycrd,zcrd)
 
 	//if others /turf are presents, simulates the underlays piling effect
 	index = first_turf_index + 1
 	while(index <= members.len)
 		turfs_underlays.Insert(1,image(T.icon,null,T.icon_state,T.layer,T.dir))//add the current turf image to the underlays list
 		var/turf/UT = instance_atom(members[index],members_attributes[index],xcrd,ycrd,zcrd)//instance new turf
-		add_underlying_turf(UT,T,turfs_underlays)//simulates the DMM piling effect
-		T = UT
+		if(istype(UT))
+			add_underlying_turf(UT,T,turfs_underlays)//simulates the DMM piling effect
+			T = UT
 		index++
 
 	//finally instance all remainings objects/mobs
 	for(index=1,index < first_turf_index,index++)
 		instance_atom(members[index],members_attributes[index],xcrd,ycrd,zcrd)
+
+	air_master.mark_for_update(T)
 
 ////////////////
 //Helpers procs

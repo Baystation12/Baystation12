@@ -26,6 +26,7 @@
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
 	flags_inv = HIDEEARS
+	unacidable = 1
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 50, rad = 25)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -79,9 +80,10 @@
 	blood_overlay_type = "armor"
 	item_state_slots = list(slot_l_hand_str = "urf_armour", slot_r_hand_str = "urf_armour")
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 50, rad = 25)
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS
 	armor_thickness = 20
 	item_flags = THICKMATERIAL
+	unacidable = 1
 	var/slots = 4
 	var/max_w_class = ITEM_SIZE_SMALL
 
@@ -93,9 +95,9 @@
 	icon_state = "soe_spacesuit"
 	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
 	blood_overlay_type = "armor"
-	armor = list(melee = 20, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 100, rad = 25)
+	armor = list(melee = 20, bullet = 45, laser = 45,energy = 30, bomb = 25, bio = 100, rad = 25)
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS| FEET | HANDS
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS

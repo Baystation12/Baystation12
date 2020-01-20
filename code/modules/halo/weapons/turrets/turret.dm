@@ -150,6 +150,10 @@
 	set category = "Object"
 	set src in view(1)
 
+	if(!istype(usr,/mob/living))
+		to_chat(usr,"<span class = 'notice'>You cannot do that!</span>")
+		return
+
 	/*if(!(usr.species in GLOB.turret_carry_species))
 		to_chat(usr,"<span class = 'notice'>You're not strong enough to carry the [src.name]</span>")
 		return*/

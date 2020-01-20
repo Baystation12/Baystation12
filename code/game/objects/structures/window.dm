@@ -134,13 +134,13 @@
 	if(is_full_window())
 		return 0	//full tile window, you can't move into it!
 	if(get_dir(loc, target) & dir)
-		return !density
+		return (!density)
 	else
 		return 1
 
 
 /obj/structure/window/CheckExit(atom/movable/O as mob|obj, target as turf)
-	if(istype(O) && O.checkpass(PASSGLASS))
+	if(istype(O) && (O.checkpass(PASSGLASS) || O.elevation != elevation))
 		return 1
 	if(get_dir(O.loc, target) == dir)
 		return 0

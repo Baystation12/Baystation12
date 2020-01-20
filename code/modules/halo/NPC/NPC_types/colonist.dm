@@ -130,7 +130,7 @@
 		if(speech_trigger_type)
 			speech_triggers.Add(new speech_trigger_type())
 	desc = "This is [src]. [initial(desc)]."
-	..()
+	. = ..()
 
 /mob/living/simple_animal/npc/colonist/labourer
 	jumpsuits = list(\

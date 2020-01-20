@@ -96,7 +96,7 @@
 	randpixel = 4
 
 /obj/item/flood_spore/New()
-	..()
+	. = ..()
 	icon_state = "spore[rand(1,8)]"
 
 /obj/item/flood_spore_growing
@@ -106,7 +106,7 @@
 	randpixel = 4
 
 /obj/item/flood_spore_growing/New()
-	..()
+	. = ..()
 	icon_state = "animated[rand(1,6)]"
 
 /obj/structure/biomass/tiny

@@ -172,7 +172,9 @@ cloak disrupt override
 	visible_message("<span class='danger'>[src] has been [I.attack_verb.len? pick(I.attack_verb) : "attacked"] in the [affecting.name] with [I.name] by [user]!</span>")
 
 	var/blocked = run_armor_check(hit_zone, "melee", I.armor_penetration, "Your armor has protected your [affecting.name].", "Your armor has softened the blow to your [affecting.name].")
-	standard_weapon_hit_effects(I, user, effective_force, blocked, hit_zone)
+	if(!standard_weapon_hit_effects(I, user, effective_force, blocked, hit_zone))
+		var/mob/living/carbon/human/h = src
+		h.degrade_affected_armor(I.force,I.damtype,hit_zone)
 
 	return blocked
 
@@ -353,6 +355,8 @@ cloak disrupt override
 			if(prob(armor))
 				damage_flags &= ~(DAM_SHARP|DAM_EDGE)
 			created_wound = apply_damage(throw_damage, dtype, zone, armor, damage_flags, O)
+		else
+			degrade_affected_armor(throw_damage,dtype,zone)
 
 		if(ismob(O.thrower))
 			var/mob/M = O.thrower
@@ -375,7 +379,7 @@ cloak disrupt override
 
 				//Sharp objects will always embed if they do enough damage.
 				//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
-				if((sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
+				if((sharp && I.can_embed() && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
 					affecting.embed(I, supplied_wound = created_wound)
 
 		// Begin BS12 momentum-transfer code.

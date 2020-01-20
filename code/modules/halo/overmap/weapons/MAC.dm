@@ -1,4 +1,4 @@
-#define CAPACITOR_DAMAGE_AMOUNT 27 //3 Direct MAC shots to down a fully charged shield from a 22-capacitor MAC.
+#define CAPACITOR_DAMAGE_AMOUNT 20 //5 Direct MAC shots to down a fully charged shield from a 20-capacitor MAC.
 #define CAPACITOR_MAX_STORED_CHARGE 50000
 #define BASE_AMMO_LIMIT 3
 #define LOAD_AMMO_DELAY 70
@@ -22,9 +22,11 @@
 	var/list/linked_consoles = list()
 	var/list/contained_rounds = list()
 	var/loading = 0
+	ai_access_level = 4
 
 /obj/machinery/mac_cannon/ammo_loader/New()
 	name = "[weapon_name] [name]"
+	. = ..()
 
 /obj/machinery/mac_cannon/ammo_loader/proc/update_ammo()
 	for(var/obj/machinery/overmap_weapon_console/console in linked_consoles)
@@ -63,41 +65,20 @@
 	desc = "A powerful capacitor used to store and channel the energy required for acceleration of a MAC round."
 	icon_state = "mac_capacitor"
 
-	var/list/capacitor = list(0,CAPACITOR_MAX_STORED_CHARGE) //Format: (Current, MAX)
-	var/charge_time = 10 //This is in seconds.
+	var/charge_time = 10 SECONDS
 	//Each capacitor contributes a certain amount of damage, modeled after the frigate's MAC.
-	var/recharging = 0
+	var/charged_at = 0
 
 /obj/machinery/mac_cannon/capacitor/examine(var/mob/user)
 	. =..()
-	if(capacitor[1] == capacitor[2])
+	if(world.time >= charged_at)
 		to_chat(user,"<span class = 'warning'>[name]'s coils crackle and hum, electricity periodically arcing between them.</span>")
 
-/obj/machinery/mac_cannon/capacitor/proc/draw_powernet_power(var/amount)
-	var/area/area_contained = loc.loc
-	if(!istype(area_contained))
-		return
-	var/datum/powernet/area_powernet = area_contained.apc.terminal.powernet
-	if(isnull(area_powernet))
-		return
-	return area_powernet.draw_power(amount)
+/obj/machinery/mac_cannon/capacitor/proc/set_requires_charge()
+	charged_at = world.time + charge_time
 
-/obj/machinery/mac_cannon/capacitor/proc/restart_power_drain()
-	if(capacitor[1] == capacitor[2])
-		return
-	recharging = 1
-
-/obj/machinery/mac_cannon/capacitor/process()
-	if(recharging && (world.time > recharging))
-		var/drained = draw_powernet_power(CAPACITOR_MAX_STORED_CHARGE/charge_time)
-		var/new_stored = capacitor[1] + drained
-		if(new_stored > capacitor[2])
-			capacitor[1] = capacitor[2]
-			recharging = 0
-			return
-		else
-			capacitor[1] = new_stored
-		recharging = world.time + 1 SECOND
+/obj/machinery/mac_cannon/capacitor/proc/is_charged()
+	return world.time >= charged_at
 
 //MAC CANNON CONSOLE//
 /obj/machinery/overmap_weapon_console/mac
@@ -138,14 +119,10 @@
 		loader.update_ammo()
 
 /obj/machinery/overmap_weapon_console/mac/proc/do_power_check(var/mob/user)
-	var/overall_stored_charge = list(0,0)//Contains the current and maximum possible stored charge. Format: (Current,Max)
 	for(var/obj/machinery/mac_cannon/capacitor/capacitor in linked_devices)
-		overall_stored_charge[1] += capacitor.capacitor[1]
-		overall_stored_charge[2] += capacitor.capacitor[2]
-		capacitor.restart_power_drain()
-	if(overall_stored_charge[1] < overall_stored_charge[2])
-		to_chat(user,"<span class = 'warning'>The capacitors are not sufficiently charged to fire!</span>")
-		return 0
+		if(!capacitor.is_charged())
+			to_chat(user,"<span class = 'warning'>The capacitors are not sufficiently charged to fire!</span>")
+			return 0
 	return 1
 
 /obj/machinery/overmap_weapon_console/mac/proc/acceleration_rail_effects()
@@ -180,21 +157,19 @@
 			play_fire_sound(target)
 
 /obj/machinery/overmap_weapon_console/mac/play_fire_sound(var/obj/effect/overmap/overmap_object = map_sectors["[z]"],var/turf/loc_soundfrom = src.loc)
-	if(isnull(src.fire_sound) || !istype(overmap_object))
+	if(isnull(fire_sound) || !istype(overmap_object) || isnull(loc_soundfrom))
 		return
 	if(overmap_object.map_z.len ==0)
 		return
 
 	for(var/z_level in overmap_object.map_z)
-		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 100,1, 255,,1)
+		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 20,1, 255,,1)
 
 /obj/machinery/overmap_weapon_console/mac/get_linked_device_damage_mod()
 	var/damage_mod = 0
 	for(var/obj/machinery/mac_cannon/capacitor/cap in linked_devices)
-		var/damage_capacitor = (cap.capacitor[1]/cap.capacitor[2]) * CAPACITOR_DAMAGE_AMOUNT
-		damage_mod += damage_capacitor
-		cap.capacitor[1] = 0
-		cap.restart_power_drain()
+		damage_mod += CAPACITOR_DAMAGE_AMOUNT
+		cap.set_requires_charge()
 	return damage_mod
 
 #undef CAPACITOR_DAMAGE_AMOUNT
@@ -204,12 +179,12 @@
 	name = "MAC Orbital Bombardment Console"
 	desc = "Controls a limited power setting for orbital bombardment"
 	icon_state = "mac_bombard_control"
+	var/designator_spawn = /obj/item/weapon/laser_designator
+	ai_access_level = 4
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/New()
 	. = ..()
-	var/obj/ld = new /obj/item/weapon/laser_designator (src)
-	ld.loc = loc
-	ld = new /obj/item/weapon/laser_designator (src)
+	var/obj/ld = new designator_spawn (loc)
 	ld.loc = loc
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attack_hand(var/mob/user)
@@ -241,6 +216,9 @@
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/fire_projectile()
 	return
 
+/obj/machinery/overmap_weapon_console/mac/orbital_bombard/proc/bombard_impact(var/atom/hit_turf)
+	explosion(hit_turf,4,6,7,20, adminlog = 0)
+
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/fire(var/atom/target,var/mob/user)
 	if(!do_power_check(user))
 		return
@@ -252,7 +230,7 @@
 		play_fire_sound()
 		var/obj/effect/overmap/targ_overmap = map_sectors["[target.z]"]
 		play_fire_sound(targ_overmap,target_turf)
-		explosion(target_turf,4,5,6,20, adminlog = 0)
+		bombard_impact(target_turf)
 		targ_overmap.adminwarn_attack()
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/attackby(var/obj/item/weapon/W, var/mob/user)
@@ -276,10 +254,12 @@
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
-	var/increase_from_damage = (damage/250)
+	var/increase_from_damage = round(damage/250)
 	if(increase_from_damage > 2)
-		increase_from_damage *= 0.25
-	explosion(impacted,2 + increase_from_damage,4 + increase_from_damage,5 + increase_from_damage,6 + increase_from_damage, adminlog = 0)
+		increase_from_damage -= 2
+		increase_from_damage = round(increase_from_damage * 0.5)
+		increase_from_damage += 2
+	explosion(impacted,0 + increase_from_damage,2 + increase_from_damage,3 + increase_from_damage,4 + increase_from_damage, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

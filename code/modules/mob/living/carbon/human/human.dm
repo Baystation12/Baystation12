@@ -113,7 +113,7 @@
 				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
 				throw_at(target, 200, 4)
 			//return
-//				var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
+	//			var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
 				//user.throw_at(target, 200, 4)
 
 		if (2.0)
@@ -121,26 +121,30 @@
 			f_loss = 60
 
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage += 30
-				ear_deaf += 120
+				ear_damage = min(ear_damage + 30,50*species.explosion_effect_mod)
+				ear_deaf = min(ear_damage + 120,120*species.explosion_effect_mod)
 			if (prob(70))
-				confused += 10
+				confused = min(confused + 10,30*species.explosion_effect_mod)
 
 		if(3.0)
 			b_loss = 30
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage += 15
-				ear_deaf += 60
+				ear_damage = min(ear_damage + 15,50*species.explosion_effect_mod)
+				ear_deaf = min(ear_damage + 60,120*species.explosion_effect_mod)
 			if (prob(50))
-				confused += 10
+				confused = min(confused + 10,30*species.explosion_effect_mod)
 
-	// factor in armour
+
+	// factor in armour / degrade armor
 	var/protection = blocked_mult(getarmor(null, "bomb"))
-	b_loss *= protection
-	f_loss *= protection
 
 	// focus most of the blast on one organ
 	var/obj/item/organ/external/take_blast = pick(organs)
+	degrade_affected_armor(b_loss,BRUTE,take_blast)
+	degrade_affected_armor(f_loss,BURN,take_blast)
+	b_loss *= protection
+	f_loss *= protection
+
 	take_blast.take_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
 
 	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)

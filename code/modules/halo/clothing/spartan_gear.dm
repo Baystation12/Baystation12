@@ -32,6 +32,7 @@
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 	species_restricted = list("Spartan")
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 /obj/item/clothing/gloves/spartan
 	name = "Mjolnir gloves"

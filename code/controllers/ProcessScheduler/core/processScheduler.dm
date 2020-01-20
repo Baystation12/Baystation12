@@ -282,10 +282,10 @@ var/global/datum/controller/processScheduler/processScheduler
 		highest_run_time[process] = time
 
 	var/list/lastTwenty = last_twenty_run_times[process]
-	if (lastTwenty.len == 20)
+	if (lastTwenty && lastTwenty.len == 20)
 		lastTwenty.Cut(1, 2)
-	lastTwenty.len++
-	lastTwenty[lastTwenty.len] = time
+		lastTwenty.len++
+		lastTwenty[lastTwenty.len] = time
 
 	total_run_time[process] += time
 

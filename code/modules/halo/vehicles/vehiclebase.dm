@@ -102,7 +102,7 @@
 	var/list/valid_exit_locs = list()
 	for(var/turf/t in locs)
 		for(var/turf/t_2 in range(1,t))
-			if(!(t_2 in locs))
+			if(!(t_2 in locs) && t_2.density == 0)
 				valid_exit_locs |= t
 				break
 	if(valid_exit_locs.len == 0)
@@ -175,6 +175,8 @@
 		var/list/mobs = list()
 		for(var/mob/m in occupants)
 			mobs += m
+		if(mobs.len == 0)
+			return
 		mob_to_dam = pick(mobs)
 		if(!isnull(mob_to_dam))
 			mob_to_dam.bullet_act(P)
@@ -210,7 +212,7 @@
 	if(!is_driver)
 		return
 	. = Move(new_loc,direction)
-	if(move_sound)
+	if(move_sound && world.time % 2 == 0)
 		playsound(loc,move_sound,75,0,4)
 	user.client.move_delay = world.time + vehicle_move_delay
 

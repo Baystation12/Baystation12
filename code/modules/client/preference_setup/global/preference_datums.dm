@@ -190,11 +190,20 @@ var/list/_client_preferences_by_type
 	disabled_description = "Hide"
 	enabled_by_default = FALSE
 
+/datum/client_preference/admin/show_controller_crash
+	description = "Controller Crash Messages"
+	key = "STOP_ADMINCRASH"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+	enabled_by_default = FALSE
+
 /datum/client_preference/holder/show_rlooc
 	description ="Remote LOOC chat"
 	key = "CHAT_RLOOC"
 	enabled_description = "Show"
 	disabled_description = "Hide"
+
+
 
 /********************
 * Debug Preferences *

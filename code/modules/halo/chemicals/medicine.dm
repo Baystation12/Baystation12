@@ -51,7 +51,7 @@
 	if(o.status & ORGAN_BLEEDING || o.status & ORGAN_ARTERY_CUT && istype(o))
 		o.status &= ~ORGAN_ARTERY_CUT
 		o.status &= ~ORGAN_BLEEDING
-		o.clamp()
+		o.clamp_organ()
 		o.update_damages()
 		to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
 
@@ -94,6 +94,10 @@
 				if(!prob(BIOFOAM_PROB_REMOVE_EMBEDDED))
 					continue
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
+				M.embedded -= embedded
+				M.pinned -= embedded
+				if(M.pinned.len == 0)
+					M.anchored = 0
 				M.contents -= embedded
 				embedded.loc = M.loc //And placing it on the ground below
 				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")

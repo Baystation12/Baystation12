@@ -18,6 +18,13 @@
 	darkness_view = 4
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 
+/obj/item/clothing/glasses/hud/tactical/odst_hud/medic
+	name = "Medic HUD"
+
+/obj/item/clothing/glasses/hud/tactical/odst_hud/medic/process_hud(var/mob/M)
+	process_med_hud(M, 1)
+	. = ..()
+
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Rifleman Helmet"
 	desc = "Standard issue short-EVA capable helmet issued to ODST forces"
@@ -44,6 +51,7 @@
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
+	unacidable = 1
 	on = 0
 	var/visr_on = 1
 	armor_thickness = 20
@@ -62,6 +70,7 @@
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+	unacidable = 1
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
@@ -70,7 +79,6 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
-	armor_thickness = 20
 
 
 /obj/item/clothing/shoes/magboots/odst
@@ -83,6 +91,7 @@
 	item_state = "magboots"
 	can_hold_knife = 1
 	force = 5
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 //Defines for armour subtypes//
 
@@ -164,6 +173,8 @@
 	icon_state = "Helmet Medic"
 	item_state_novisr = "Odst Helmet Medic Transparent"
 	icon_state_novisr = "Helmet Medic Transparent"
+
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud/medic
 
 ///obj/item/clothing/head/helmet/odst/medic/health/process_hud(var/mob/M)
 //	process_med_hud(M, 1)

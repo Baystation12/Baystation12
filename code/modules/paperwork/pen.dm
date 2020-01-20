@@ -191,3 +191,21 @@
 	New()
 		name = "[colourName] crayon"
 		..()
+
+
+/*
+ * Covenant_Crayon
+ */
+
+/obj/item/weapon/pen/covenant_crayon
+	name = "covenant crayon"
+	desc = "A large purple crayon. Please refrain from eating it or putting it in your nose unggoy."
+	icon = 'icons/obj/crayons.dmi'
+	icon_state = "covenantcrayon"
+	w_class = ITEM_SIZE_TINY
+	attack_verb = list("attacked", "coloured")
+	colour = "#FF0000" //RGB
+	var/shadeColour = "#75487A" //RGB
+	var/uses = 30 //0 for unlimited uses
+	var/instant = 0
+	var/colourName = "purple" //for updateIcon purposes

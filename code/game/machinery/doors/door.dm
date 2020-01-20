@@ -37,6 +37,8 @@
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
 
+	ai_access_level = 2
+
 /obj/machinery/door/attack_generic(var/mob/user, var/damage)
 	if(damage >= 10)
 		visible_message("<span class='danger'>\The [user] smashes into \the [src]!</span>")
@@ -132,8 +134,8 @@
 /obj/machinery/door/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group) return !block_air_zones
 	if(istype(mover) && mover.checkpass(PASSGLASS))
-		return !opacity
-	return !density
+		return (!opacity)
+	return (!density)
 
 
 /obj/machinery/door/proc/bumpopen(mob/user as mob)

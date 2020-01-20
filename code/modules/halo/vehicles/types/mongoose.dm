@@ -12,7 +12,7 @@
 
 	comp_prof = /datum/component_profile/mongoose
 
-	vehicle_move_delay = 0.5
+	vehicle_move_delay = 1
 
 	occupants = list(1,0)
 	exposed_positions = list("driver" = 10,"passenger" = 25)

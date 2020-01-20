@@ -74,7 +74,7 @@
 	var/radiation_mod =  1                    // Radiation modifier
 	var/flash_mod =      1                    // Stun from blindness modifier.
 	var/metabolism_mod = 1                    // Reagent metabolism modifier
-	var/pain_mod = 1						  //Traumatic Shock modifier
+	var/pain_mod = 1						  //GetHalLoss modifier
 	var/vision_flags = SEE_SELF               // Same flags as glasses.
 
 	// Death vars.
@@ -124,6 +124,10 @@
 		"You shiver suddenly.",
 		"Your chilly flesh stands out in goosebumps."
 		)
+
+	var/explosion_effect_mod = 1.0 //Modifier on how much a species can resist explosive sideeffects
+	var/can_force_door = 0
+	var/can_operate_advanced_covenant = 1
 
 	// HUD data vars.
 	var/datum/hud_data/hud
@@ -187,7 +191,7 @@
 	var/pass_flags = 0
 	var/breathing_sound = 'sound/voice/monkey.ogg'
 
-	var/list/item_icon_offsets = list(0,0) //A list (x,y) of offsets to apply to inhand images.
+	var/list/item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null) //A list (x,y) of offsets to apply to inhand images, each list corrresponds to a dir.
 	//NOTE FOR ABOVE: Posive X moves right, positive Y moves up.
 	var/melee_force_multiplier = 1
 	var/equipment_slowdown_multiplier = 1	//for strong or weak species
@@ -195,7 +199,13 @@
 	var/list/pain_scream_sounds = list()
 	var/list/scream_sounds_female = list()
 
+	var/roll_distance = 2
+	var/per_roll_delay = 2
+
 	var/default_faction
+
+/datum/species/proc/apply_species_name_formatting(var/to_format)
+	return to_format
 
 /datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
 	return
@@ -237,8 +247,9 @@
 /datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
 
 	H.mob_size = mob_size
+	var/obj/item/organ/internal/stack/s = H.GetLace()
 	for(var/obj/item/organ/organ in H.contents)
-		if((organ in H.organs) || (organ in H.internal_organs))
+		if(!istype(organ,/obj/item/organ/internal/stack) && ((organ in H.organs) || (organ in H.internal_organs))) //Preserve neural laces / cortical stacl
 			qdel(organ)
 
 	if(H.organs)                  H.organs.Cut()
@@ -272,6 +283,14 @@
 
 	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
+
+	if(s)
+		var/obj/current_lace = H.internal_organs_by_name["stack"]
+		if(current_lace)
+			qdel(current_lace)
+		H.internal_organs_by_name["stack"] = s
+		H.internal_organs += s
+		s.owner = H
 
 	H.sync_organ_dna()
 

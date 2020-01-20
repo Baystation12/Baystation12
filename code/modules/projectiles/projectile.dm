@@ -43,6 +43,8 @@
 	var/drowsy = 0
 	var/agony = 0
 	var/embed = 0 // whether or not the projectile can embed itself in the mob
+	var/pin_chance = 0
+	var/pin_range = 2 //this is essentially a knockback of
 
 	var/hitscan = 0		// whether the projectile should be hitscan
 	var/step_delay = 0.5	// the delay between iterations if not a hitscan projectile
@@ -57,6 +59,8 @@
 	var/fire_sound
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
+
+	var/target_elevation = BASE_ELEVATION
 
 	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
 	var/datum/vector_loc/location		// current location of the projectile in pixel space
@@ -87,7 +91,7 @@
 	return
 
 //Checks if the projectile is eligible for embedding. Not that it necessarily will.
-/obj/item/projectile/proc/can_embed()
+/obj/item/projectile/can_embed()
 	//embed must be enabled and damage type must be brute
 	if(!embed || damage_type != BRUTE)
 		return 0
@@ -162,8 +166,9 @@
 	return launch(target, target_zone, x_offset, y_offset)
 
 //Used to change the direction of the projectile in flight.
-/obj/item/projectile/proc/redirect(var/new_x, var/new_y, var/atom/starting_loc, var/mob/new_firer=null)
-	var/turf/new_target = locate(new_x, new_y, src.z)
+/obj/item/projectile/proc/redirect(var/atom/new_target, var/atom/starting_loc, var/mob/new_firer=null)
+	if(isnull(new_target))
+		return
 
 	original = new_target
 	if(new_firer)
@@ -198,6 +203,11 @@
 	else
 		target_mob.visible_message("<span class='danger'>\The [target_mob] is hit by \the [src] in the [mob_target_zone]!</span>")//X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 
+	if(pin_chance > 0 && prob(pin_chance) && target_mob.pinned.len == 0 && !isnull(starting))
+		var/obj/item/weapon/material/shard/shrapnel/S = new()
+		S.name = name
+		target_mob.pin_if_possible(S,pin_range,get_dir(starting,target_mob))
+
 	//admin logs
 	if(!no_attack_log)
 		if(istype(firer, /mob))
@@ -218,6 +228,8 @@
 
 /obj/item/projectile/proc/do_supression_aoe(var/location)
 	for(var/mob/living/carbon/human/h in orange(1,location))
+		if(h in permutated)
+			continue
 		h.supression_act(src)
 
 /obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
@@ -320,9 +332,12 @@
 			return
 
 		//Deals with moving a projectile up / down to hit targets on the ground or in air
-		if(original  && elevation != original.elevation)
-			var/elevation_mod = original.elevation - elevation
-			change_elevation(elevation_mod)
+		if(elevation != target_elevation)
+			if(elevation > target_elevation)
+				change_elevation(-1)
+			else
+				change_elevation(1)
+
 		before_move()
 		Move(location.return_turf())
 

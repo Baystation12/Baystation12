@@ -2,7 +2,6 @@
 
 	#define STRANDED_INCLUDES 1
 
-	#include "atom_despawner.dm"
 	#include "evac_pelican.dm"
 	#include "materials.dm"
 	#include "mode_stranded.dm"

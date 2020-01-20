@@ -4,6 +4,7 @@
 	var/mob/living/simple_animal/mgalekgolo/owner
 
 /obj/item/hunter_action/New()
+	. = ..()
 	owner = loc
 	if(!istype(owner))
 		qdel(src)

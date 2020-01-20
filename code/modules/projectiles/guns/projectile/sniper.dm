@@ -14,8 +14,8 @@
 	max_shells = 1
 	ammo_type = /obj/item/ammo_casing/a145_ap/tracerless
 	one_hand_penalty = -1
-	accuracy = -2
-	scoped_accuracy = 5 //increased accuracy over the LWAP because only one shot
+	accuracy = -5
+	scoped_accuracy = 10 //increased accuracy over the LWAP because only one shot
 	var/bolt_open = 0
 	wielded_item_state = "heavysniper-wielded" //sort of placeholder
 

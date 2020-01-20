@@ -6,8 +6,7 @@
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	required_players = 15
 	probability = 1
-	var/faction_safe_time = 10 MINUTES
-	var/faction_safe_duration = 10 MINUTES
+	ship_lockdown_duration = 10 MINUTES
 	var/safe_expire_warning = 0
 	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection)
 	var/list/overmap_hide = list()
@@ -30,7 +29,6 @@
 	setup_objectives()
 
 	shipmap_handler.spawn_ship("Human Colony", 3)
-	shipmap_handler.spawn_ship("UNSC", 2)
 
 	for(var/faction_type in factions)
 		factions.Remove(faction_type)
@@ -46,10 +44,10 @@
 		/datum/objective/overmap/covenant_ship,\
 		/datum/objective/protect/leader,\
 		/datum/objective/glass_colony,\
-		///datum/objective/retrieve/steal_ai,
+		//datum/objective/retrieve/steal_ai,
 		/datum/objective/retrieve/nav_data,\
 		/datum/objective/overmap/covenant_unsc_ship,
-		/datum/objective/overmap/covenant_odp,
+		//datum/objective/overmap/covenant_odp,
 		//datum/objective/colony_capture/cov,
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
@@ -60,7 +58,7 @@
 		/datum/objective/overmap/unsc_ship,\
 		/datum/objective/retrieve/artifact/unsc,\
 		/datum/objective/protect/leader,\
-		/datum/objective/capture_innies,\
+//		/datum/objective/capture_innies,
 		/datum/objective/retrieve/steal_ai/cole_protocol,\
 		/datum/objective/retrieve/nav_data/cole_protocol,\
 		/datum/objective/overmap/unsc_cov_ship,\
@@ -69,7 +67,6 @@
 		/datum/objective/overmap/unsc_innie_base)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
-	GLOB.UNSC.base_desc = "Orbital Defence Platform"
 
 	//setup innie objectives
 	objective_types = list(\
@@ -81,7 +78,7 @@
 		/datum/objective/colony_capture/innie,\
 		/datum/objective/overmap/innie_base)
 	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
-	GLOB.INSURRECTION.has_base = 1
+	GLOB.INSURRECTION.has_flagship = 1
 	GLOB.INSURRECTION.base_desc = "secret underground HQ"
 
 	GLOB.HUMAN_CIV.name = "Geminus City"
@@ -97,7 +94,6 @@
 
 /datum/game_mode/outer_colonies/post_setup(var/announce = 0)
 	. = ..()
-	faction_safe_time = world.time + faction_safe_duration
 	for(var/datum/faction/F in factions)
 		for(var/datum/objective/objective in F.objectives_without_targets)
 			if(objective.find_target())
@@ -177,32 +173,33 @@
 
 	//work out survivors
 	var/clients = 0
-	var/surviving_humans = 0
 	var/surviving_total = 0
 	var/ghosts = 0
-	//var/escaped_humans = 0
-	//var/escaped_total = 0
+	var/list/survivor_factions = list()
 
 	for(var/mob/M in GLOB.player_list)
 		if(M.client)
 			clients++
 			if(M.stat != DEAD)
 				surviving_total++
-				if(ishuman(M))
-					surviving_humans++
-				/*var/area/A = get_area(M)
-				if(A && is_type_in_list(A, GLOB.using_map.post_round_safe_areas))
-					escaped_total++
-					if(ishuman(M))
-						escaped_humans++*/
+				if(!M.faction)
+					M.faction = "unaligned"
+				if(survivor_factions[M.faction])
+					survivor_factions[M.faction] += 1
+				else
+					survivor_factions[M.faction] = 1
+
 			else if(isghost(M))
 				ghosts++
 
 	var/text = ""
 	if(surviving_total > 0)
-		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
+		var/list/formatted_survivors = list()
+		for(var/faction_name in survivor_factions)
+			formatted_survivors.Add("[survivor_factions[faction_name]] [faction_name]")
+		text += "<br>There was [english_list(formatted_survivors)] survivor[surviving_total != 1 ? "s" : ""] (<b>[ghosts] ghost[ghosts != 1 ? "s" : ""]</b>)."
 	else
-		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
+		text += "There were <b>no survivors</b> (<b>[ghosts] ghost[ghosts > 1 ? "s" : ""]</b>)."
 
 	text += "<br><br>"
 
@@ -258,13 +255,10 @@
 	else if(all_points <= 0)
 		text += "<h2>Stalemate! All factions failed in their objectives.</h2>"
 	else
-		//check if only the winning faction scored, then treat them slightly differently
-		//this rates the victory based on how many objectives are completed... disabling it means victories are only rated compared to other factions
-		if(all_points == winning_faction.points)
-			all_points = winning_faction.max_points
+		//calculate the win type based on whether other faction scored points and how many of the winning faction objectives are completed
+		win_ratio = (winning_faction.points) / (all_points + winning_faction.max_points - winning_faction.points)
 
 		var/win_type = "Pyrrhic"
-		win_ratio = winning_faction.points/all_points
 		if(win_ratio <= 0.34)
 			//this should never or rarely happen
 			win_type = "Pyrrhic"
@@ -277,21 +271,15 @@
 		else
 			win_type = "Supreme"
 
-		text += "<h2>[win_type] [winning_faction.name] Victory! ([round(100*win_ratio)]% of possible score)</h2>"
+		text += "<h2>[win_type] [winning_faction.name] Victory! ([round(100*win_ratio)]% of objectives)</h2>"
 	to_world(text)
 
 	if(clients > 0)
 		feedback_set("round_end_clients",clients)
 	if(ghosts > 0)
 		feedback_set("round_end_ghosts",ghosts)
-	if(surviving_humans > 0)
-		feedback_set("survived_human",surviving_humans)
 	if(surviving_total > 0)
 		feedback_set("survived_total",surviving_total)
-	/*if(escaped_humans > 0)
-		feedback_set("escaped_human",escaped_humans)
-	if(escaped_total > 0)
-		feedback_set("escaped_total",escaped_total)*/
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
 
@@ -300,15 +288,14 @@
 /datum/game_mode/outer_colonies/handle_mob_death(var/mob/M, var/unsc_capture = 0)
 	. = ..()
 
-	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander","Insurrectionist Officer") || M.mind.faction == "Insurrectionist")
+/*	if(M.mind.assigned_role in list("Insurrectionist","Insurrectionist Commander","Insurrectionist Officer") || M.mind.faction == "Insurrectionist")
 		var/datum/faction/unsc/unsc = locate() in factions
-		if(unsc)
-			var/datum/objective/capture_innies/capture_innies = locate() in unsc.all_objectives
+		if(unsc)			var/datum/objective/capture_innies/capture_innies = locate() in unsc.all_objectives
 			if(capture_innies)
 				if(unsc_capture)
 					capture_innies.minds_captured.Add(M.mind)
 				else
-					capture_innies.minds_killed.Add(M.mind)
+					capture_innies.minds_killed.Add(M.mind)*/
 
 	if(M.mind)
 		for(var/datum/faction/F in factions)

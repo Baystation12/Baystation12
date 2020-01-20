@@ -11,17 +11,22 @@
 	deform = 'code/modules/halo/icons/species/r_Augmented_Human.dmi'
 	icon_template = 'code/modules/halo/icons/species/r_Augmented_Human_template.dmi'
 	flags = NO_MINOR_CUT
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_LIPS | HAS_EYE_COLOR
 	total_health = 250 //Same base health as sangheili
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	pain_mod = 0.40 //Lower pain damage taken than sangheili
-	item_icon_offsets = list(-1,3)
-	slowdown = -1
+	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(1,0),null)
+	slowdown = -0.75
+	can_force_door = 1
+	additional_langs = list("Sign Language")
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
+	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
 
 	metabolism_mod = 1.25 //Faster metabolism
 	breath_pressure = 14.5 //Better lungs!
 	darksight = 4 //Better night vision!
+	explosion_effect_mod = 0.5
 
 	//Spartans have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes
@@ -35,9 +40,9 @@
 	cold_level_2 = 190 //-83C
 	cold_level_3 = 114 //-159C
 
-	//As of 2018-03-24 we're in 2525 - 2526, thus Spartans IIs were just augmented
-	min_age = 14
-	max_age = 15
+	//As of 2018-03-24 we're in 2525 - 2526, thus Spartans IIs were just augmented - updated as of server timeline moving to 2531
+	min_age = 19
+	max_age = 20
 
 	//Spartan's have some better organs than normal humans. Also, we'll say the UNSC cut out their appendix already
 	has_organ = list(
@@ -66,6 +71,9 @@
 	equipment_slowdown_multiplier = 0.5
 	ignore_equipment_threshold = 3
 
+	roll_distance = 3
+	per_roll_delay = 1.5 //Slightly faster than a human's dodge roll
+
 /datum/species/spartan/get_random_name(var/gender)
 	var/name = ""
 	if(gender == FEMALE)
@@ -83,3 +91,10 @@
 
 /datum/species/spartan/sanitize_name(name)
 	return sanitizeName(name, allow_numbers=TRUE)
+
+/datum/unarmed_attack/spartan_punch
+    attack_verb = list("jabs", "slams", "punches", "knees", "kicks", "strikes")
+    attack_noun = list("fist")
+    eye_attack_text = "fingers"
+    eye_attack_text_victim = "digits"
+    damage = 20

@@ -18,7 +18,7 @@
 	var/list/responses
 
 /datum/npc_speech_trigger/colonist_unsc/New()
-	..()
+	. = ..()
 	if(prob(50))
 		responses = list(\
 		"The UNSC are only doing what's best.",\
@@ -70,7 +70,7 @@
 	var/list/responses
 
 /datum/npc_speech_trigger/colonist_innie/New()
-	..()
+	. = ..()
 	if(prob(50))
 		responses = list(\
 		"The United Rebel Front are just terrorists.",\
@@ -120,7 +120,7 @@
 	var/list/responses
 
 /datum/npc_speech_trigger/colonist_covenant/New()
-	..()
+	. = ..()
 	responses = list(\
 	"I've heard aliens are real! And they're hunting down humans.",\
 	"What are the Covenant? I wish I could find out more.",\

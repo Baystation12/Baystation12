@@ -34,17 +34,11 @@
 /area/destroyer/unsclightbrigade/starboarddocking
 	name = "UNSC Light Brigade Starboard Docking Port"
 
-/area/destroyer/unsclightbrigade/janitor
-	name = "UNSC Light Brigade Janitorial Supplies"
-
 /area/destroyer/unsclightbrigade/medbay
 	name = "UNSC Light Brigade Medical Bay"
 
 /area/destroyer/unsclightbrigade/morgue
 	name = "UNSC Light Brigade Morgue"
-
-/area/destroyer/unsclightbrigade/odst
-	name = "UNSC Light Brigade ODST Staging Area"
 
 /area/destroyer/unsclightbrigade/briefingroom
 	name = "UNSC Light Brigade Briefing Room"
@@ -56,11 +50,13 @@
 	name = "UNSC Light Brigade Cryo Bay"
 
 /area/destroyer/unsclightbrigade/crewbunk
-	name = "UNSC Light Brigade Crew Bunks"
-
+	name = "UNSC Light Brigade ODST Armory"
 
 /area/destroyer/unsclightbrigade/brig
 	name = "UNSC Light Brigade Brig"
+
+/area/destroyer/unsclightbrigade/atmos
+	name = "UNSC Light Brigade Atmospherics"
 
 /area/destroyer/unsclightbrigade/storage
 	name = "UNSC Light Brigade Storage Room"
@@ -70,31 +66,3 @@
 
 /area/destroyer/unsclightbrigade/centralhall
 	name = "UNSC Light Brigade Central Hallway"
-
-/area/destroyer/unsclightbrigade/portguns
-	name = "UNSC Light Brigade Port Deck Guns"
-
-/area/destroyer/unsclightbrigade/starboardguns
-	name = "UNSC Light Brigade Starboard Deck Guns"
-
-/area/destroyer/unsclightbrigade/portmissiles
-	name = "UNSC Light Brigade Port Missiles"
-
-/area/destroyer/unsclightbrigade/starboardmissiles
-	name = "UNSC Light Brigade Starboard Missiles"
-
-//Overmap Weapon Console Defines//
-
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/unsclightbrigadeport
-	deck_gun_area = /area/destroyer/unsclightbrigade/portguns
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/unsclightbrigadestarboard
-	deck_gun_area = /area/destroyer/unsclightbrigade/starboardguns
-
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/unsclightbrigadeport
-	deck_gun_area = /area/destroyer/unsclightbrigade/portmissiles
-
-/obj/machinery/overmap_weapon_console/deck_gun_control/local/missile_control/unsclightbrigadestarboard
-	deck_gun_area = /area/destroyer/unsclightbrigade/starboardmissiles

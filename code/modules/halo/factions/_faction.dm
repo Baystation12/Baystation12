@@ -94,10 +94,16 @@
 	return living_minds.len
 
 /datum/faction/proc/get_flagship()
+	if(!flagship)
+		for(var/obj/effect/overmap/check_ship in world)
+			if(check_ship.flagship && check_ship.faction == src.name)
+				flagship = check_ship
+				break
+
 	return flagship
 
 /datum/faction/proc/get_flagship_name()
-	if(!flagship)
+	if(!flagship && has_flagship)
 		return archived_flagship_name
 	archived_flagship_name = "[name] \"[flagship.name]\""
 	return archived_flagship_name
@@ -111,6 +117,11 @@
 			break*/
 
 /datum/faction/proc/get_base()
+	if(!base && has_base)
+		for(var/obj/effect/overmap/check_base in world)
+			if(check_base.base && check_base.faction == src.name)
+				base = check_base
+				break
 	return base
 
 /*/datum/faction/proc/find_base()

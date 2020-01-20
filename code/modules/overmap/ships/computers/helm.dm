@@ -9,6 +9,7 @@
 	var/list/known_sectors = list()
 	var/dx		//destnation
 	var/dy		//coordinates
+	ai_access_level = 4
 
 /obj/machinery/computer/helm/Initialize()
 	. = ..()
@@ -37,7 +38,7 @@
 	if(!linked)
 		linked = map_sectors["[z]"]
 	if(..())
-		if (autopilot && dx && dy)
+		if (world.time >= ticker.mode.ship_lockdown_until && autopilot && dx && dy)
 			var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
 			if(linked.loc == T)
 				if(linked.is_still())
@@ -62,11 +63,25 @@
 		return 1
 
 /obj/machinery/computer/helm/check_eye(var/mob/user as mob)
+	. = 0
+
 	if (!manual_control)
-		return -1
+		. = -1
 	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		return -1
-	return 0
+		. = -1
+
+	//reset some custom view settings for ship control before resetting the view entirely
+	if(. < 0)
+		if(linked)
+			linked.my_observers.Remove(user)
+			//linked.hud_waypoint_controller.remove_hud_from_mob(user)
+		if(user.client)
+			user.client.pixel_x = 0
+			user.client.pixel_y = 0
+	else
+		user.reset_view(linked, 0)
+		linked.my_observers.Remove(user)		//so we can avoid doubleups
+		linked.my_observers.Add(user)
 
 /obj/machinery/computer/helm/attack_hand(var/mob/user as mob)
 	if(!linked)
@@ -102,9 +117,12 @@
 	data["d_y"] = dy
 	data["speed"] = linked.get_speed()
 	data["accel"] = linked.get_acceleration()
-	data["heading"] = linked.get_heading() ? dir2angle(linked.get_heading()) : 0
+	data["heading"] = linked.get_heading()
+	data["braking"] = linked.braking
 	data["autopilot"] = autopilot
 	data["manual_control"] = manual_control
+	data["lock_thrust"] = linked.lock_thrust
+	data["moving_dir"] = linked.moving_dir
 
 	var/list/locations[0]
 	for (var/key in known_sectors)
@@ -132,6 +150,10 @@
 		return 1
 
 	if (!linked)
+		return
+
+	if(!istype(usr,/mob/living/silicon) && get_dist(usr, src) > 1)
+		to_chat(usr,"<span class = 'notice'>You need to be next to [src] to do that!</span>")
 		return
 
 	if (href_list["add"])
@@ -183,13 +205,22 @@
 		linked.relaymove(usr, ndir)
 
 	if (href_list["brake"])
-		linked.decelerate()
+		linked.brake()
 
 	if (href_list["apilot"])
 		autopilot = !autopilot
 
+	if (href_list["lock_thrust"])
+		linked.lock_thrust = !linked.lock_thrust
+
 	if (href_list["manual"])
 		manual_control = !manual_control
+		var/mob/living/user = usr
+		if(istype(user))
+			if(manual_control)
+				linked.my_observers |= user
+			else
+				linked.my_observers -= user
 
 	add_fingerprint(usr)
 	updateUsrDialog()
@@ -220,12 +251,21 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/navigation/check_eye(var/mob/user as mob)
-	if (!viewing)
-		return -1
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		viewing = 0
-		return -1
-	return 0
+	. = 0
+
+	if(!user)
+		. = -1
+	else if(user.client && user.client.eye != linked)
+		. = -1
+
+	//reset some custom view settings for ship control before resetting the view entirely
+	if(. < 0 && user)
+		if(linked)
+			linked.my_observers.Remove(user)
+			//linked.hud_waypoint_controller.remove_hud_from_mob(user)
+		if(user.client)
+			user.client.pixel_x = 0
+			user.client.pixel_y = 0
 
 /obj/machinery/computer/navigation/attack_hand(var/mob/user as mob)
 	if(..())

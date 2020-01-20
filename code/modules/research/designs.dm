@@ -1477,13 +1477,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/telecomms/receiver
 	sort_string = "PAAAG"
 
-/datum/design/circuit/shield_generator
+/*/datum/design/circuit/shield_generator
 	name = "Shield Generator"
 	desc = "Allows for the construction of a shield generator circuit board."
 	id = "shield_generator"
 	req_tech = list(TECH_MAGNET = 3, TECH_POWER = 4)
 	build_path = /obj/item/weapon/circuitboard/shield_generator
-	sort_string = "VAAAC"
+	sort_string = "VAAAC"*/
 
 /datum/design/circuit/shield_diffuser
 	name = "Shield Diffuser"

@@ -20,7 +20,7 @@
 	var/health = 100
 
 /obj/structure/sandbag/New()
-	..()
+	. = ..()
 	if(dir == 2)
 		//might regret this but it looks cool
 		layer = 5
@@ -32,7 +32,7 @@
 		if(mover.checkpass(PASSTABLE))
 			return 1
 	if(get_dir(loc, target) == dir)
-		return !density
+		return (!density || (mover && mover.elevation != elevation))
 	else
 		return 1
 

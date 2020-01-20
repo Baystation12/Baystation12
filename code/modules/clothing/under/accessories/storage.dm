@@ -125,7 +125,6 @@
 	..()
 	hold.can_hold = list(
 		/obj/item/ammo_casing,
-		/obj/item/weapon/grenade,
 		/obj/item/weapon/material/hatchet/tacknife,
 		/obj/item/weapon/material/kitchen/utensil/knife,
 		/obj/item/weapon/material/knife,

@@ -67,7 +67,7 @@ var/list/button_sound = list('sound/machines/button1.ogg','sound/machines/button
 		var/mob/M = P
 		if(!M || !M.client)
 			continue
-		if(is_global && M.loc.z == source.z)
+		if(is_global && M.loc && M.loc.z == source.z)
 			M.playsound_local(turf_source, soundin, vol, vary, frequency, falloff, is_global)
 			continue //No more processing needed if we've determined it to b ea global-sound
 		if(get_dist(M, turf_source) <= (world.view + extrarange) * 2)

@@ -50,7 +50,7 @@
 /obj/item/weapon/gun/vehicle_turret/proc/relay_fire_action(var/mob/user,var/atom/target)
 	playsound(user, fire_sound, 50, 1)
 	var/obj/item/projectile/new_projectile_fired = new projectile_fired
-	new_projectile_fired.permutated += linked_vehicle
+	new_projectile_fired.permutated += list(linked_vehicle) + linked_vehicle.occupants.Copy()
 	new_projectile_fired.loc = pick(linked_vehicle.locs)
 	new_projectile_fired.launch(target)
 

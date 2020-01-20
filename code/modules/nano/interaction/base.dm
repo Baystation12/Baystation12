@@ -22,8 +22,6 @@
 	return STATUS_INTERACTIVE
 
 /mob/living/silicon/ai/shared_nano_interaction()
-	if(!has_power())
-		return STATUS_CLOSE
 	if (check_unable(1, 0))
 		return STATUS_CLOSE
 	return ..()

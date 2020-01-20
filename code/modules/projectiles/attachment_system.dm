@@ -11,6 +11,11 @@
 	var/can_remove = 1 //Can this attachment be removed completely?
 
 /obj/item/weapon_attachment/proc/check_attach_valid(var/obj/item/weapon/gun/gun,var/mob/user)
+	if(!cached_profile)
+		cached_profile = get_attachment_profile(gun)
+	if(cached_profile && !(name in cached_profile.on_item_icon_states))
+		to_chat(user,"<span class = 'notice'>[gun.name] doesn't seem to support [name].</span>")
+		return 0
 	if(!(weapon_slot in gun.attachment_slots))
 		to_chat(user,"<span class = 'notice'>[gun.name] doesn't have a [weapon_slot] attachment point.</span>")
 		return 0
@@ -41,6 +46,8 @@
 /obj/item/weapon_attachment/proc/remove_attachment_effects(var/obj/item/weapon/gun/gun)
 
 /obj/item/weapon_attachment/proc/get_attribute_mods(var/obj/item/gun_caller)
+	if(isnull(cached_profile))
+		return list(0,0,0)
 	if(!(gun_caller.name == cached_profile.weapon_name))
 		var/datum/attachment_profile/profile = get_attachment_profile(gun_caller)
 		if(isnull(profile))

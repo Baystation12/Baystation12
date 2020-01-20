@@ -19,9 +19,8 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 	BUMP_TELEPORTERS -= src
 	return ..()
 
-/obj/effect/bump_teleporter/Bumped(atom/user)
-	if(!ismob(user))
-		//user.loc = src.loc	//Stop at teleporter location
+/obj/effect/bump_teleporter/Bumped(atom/movable/user)
+	if(!istype(user))
 		return
 
 	if(!id_target)
@@ -30,5 +29,5 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 
 	for(var/obj/effect/bump_teleporter/BT in BUMP_TELEPORTERS)
 		if(BT.id == src.id_target)
-			usr.forceMove(BT.loc)	//Teleport to location with correct id.
+			user.forceMove(BT.loc)	//Teleport to location with correct id.
 			return

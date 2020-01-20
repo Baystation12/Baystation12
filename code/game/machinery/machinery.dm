@@ -115,6 +115,7 @@ Class Procs:
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/clicksound			// sound played on succesful interface use by a carbon lifeform
 	var/clickvol = 40		// sound played on succesful interface use
+	ai_access_level = 2
 
 /obj/machinery/New(l, d=0)
 	..(l)

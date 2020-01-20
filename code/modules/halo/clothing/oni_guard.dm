@@ -13,7 +13,7 @@
 
 
 /obj/item/clothing/head/helmet/oni_guard
-	name = "CH252 Helmet"
+	name = "CH251 Helmet"
 	desc = "An ONI variant of the standard CH252 Helmet"
 	icon = ITEM_INHAND
 	icon_override = ONI_OVERRIDE
@@ -33,7 +33,7 @@
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/oni_guard/visor
-	name = "CH252-V Helmet"
+	name = "CH251-V Helmet"
 	desc = "An ONI variant of the standard CH252 Helmet. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
 	icon_override = ONI_OVERRIDE
@@ -42,8 +42,8 @@
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/suit/storage/oni_guard
-	name = "M52B Body Armor"
-	desc = "An ONI variant of the M52B Body Armor."
+	name = "M52A Body Armor"
+	desc = "An ONI variant of the M52A Body Armor."
 	icon = ITEM_INHAND
 	icon_override = ONI_OVERRIDE
 	item_state = "armor"
@@ -74,16 +74,19 @@
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 
 /obj/item/clothing/gloves/thick/oni_guard
 	desc = "Standard Issue ONI security gloves."
 	name = "ONI Combat gloves"
-	icon_state = "unsc_gloves"
+	icon_state = "unsc gloves_obj"
 	item_state = "unsc_gloves"
+	icon = ITEM_INHAND
+	icon_override = ONI_OVERRIDE
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS
-	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 20, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 50, laser = 45, energy = 45, bomb = 40, bio = 5, rad = 5)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS

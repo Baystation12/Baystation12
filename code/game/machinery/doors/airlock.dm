@@ -737,7 +737,32 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(src.shock(user, 100))
 				return
+	var/mob/living/carbon/human/h = user
 
+	if (istype(h) && h.species.can_force_door == 1 && h.a_intent == I_GRAB)
+		if(arePowerSystemsOn() && !locked && !brace)
+			to_chat(h,"<span class='notice'>The airlock's motors are resisting your efforts to force it, but you're strong enough to overcome them.</span>")
+			if(!do_after(h,5 SECONDS,src))
+				to_chat(h,"<span class = 'notice'>You stop forcing the airlock.</span>")
+				return
+			if(density)
+				to_chat(h,"<span class = 'notice'>You force the airlock open.</span>")
+				open()
+			else
+				to_chat(h,"<span class = 'notice'>You force the airlock closed.</span>")
+				close()
+
+		else if (locked)
+			to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
+		else if(brace)
+			to_chat(user, "<span class='notice'>The airlock's brace holds it firmly in place.</span>")
+		else
+			if (density)
+				to_chat(h,"<span class = 'notice'>You force the airlock open.</span>")
+				open(1)
+			else
+				to_chat(h,"<span class = 'notice'>You force the airlock closed.</span>")
+				close(1)
 	if(src.p_open)
 		user.set_machine(src)
 		wires.Interact(user)
@@ -765,17 +790,33 @@ About the new airlock wires panel:
 	if(..())
 		return 1
 
+	var/ai_access_level = -1
+	var/area/our_area = loc.loc
+	if(istype(usr,/mob/living/silicon/ai) && our_area.ai_routing_node)
+		ai_access_level = our_area.ai_routing_node.get_access_for_ai(usr)
 	var/activate = text2num(href_list["activate"])
 	switch (href_list["command"])
 		if("idscan")
+			if(ai_access_level != -1 && ai_access_level < 3)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			set_idscan(activate, 1)
 		if("main_power")
+			if(ai_access_level != -1 && ai_access_level < 3)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			if(!main_power_lost_until)
 				src.loseMainPower()
 		if("backup_power")
+			if(ai_access_level != -1 && ai_access_level < 3)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			if(!backup_power_lost_until)
 				src.loseBackupPower()
 		if("bolts")
+			if(ai_access_level != -1 && ai_access_level < 3)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			if(src.isWireCut(AIRLOCK_WIRE_DOOR_BOLTS))
 				to_chat(usr, "The door bolt control wire is cut - Door bolts permanently dropped.")
 			else if(activate && src.lock())
@@ -783,8 +824,14 @@ About the new airlock wires panel:
 			else if(!activate && src.unlock())
 				to_chat(usr, "The door bolts have been raised.")
 		if("electrify_temporary")
+			if(ai_access_level != -1 && ai_access_level < 3)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			electrify(30 * activate, 1)
 		if("electrify_permanently")
+			if(ai_access_level != -1 && ai_access_level < 4)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			electrify(-1 * activate, 1)
 		if("open")
 			if(src.welded)
@@ -796,8 +843,14 @@ About the new airlock wires panel:
 			else if(!activate && !density)
 				close()
 		if("safeties")
+			if(ai_access_level != -1 && ai_access_level < 3)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			set_safeties(!activate, 1)
 		if("timing")
+			if(ai_access_level != -1 && ai_access_level < 3)
+				to_chat(usr,"<span class = 'notice'>Insufficient Access to perform this action.</span>")
+				return
 			// Door speed control
 			if(src.isWireCut(AIRLOCK_WIRE_SPEED))
 				to_chat(usr, text("The timing wire is cut - Cannot alter timing."))
@@ -1256,13 +1309,14 @@ About the new airlock wires panel:
 		electronics.one_access = 1
 
 /obj/machinery/door/airlock/emp_act(var/severity)
-	if(prob(20/severity))
-		spawn(0)
-			open()
-	if(prob(40/severity))
-		var/duration = SecondsToTicks(30 / severity)
-		if(electrified_until > -1 && (duration + world.time) > electrified_until)
-			electrify(duration)
+	if(health <= maxhealth/4)
+		if(prob(30/severity))
+			spawn(0)
+				open()
+		else if(prob(50/severity))
+			var/duration = SecondsToTicks(30 / severity)
+			if(electrified_until > -1 && (duration + world.time) > electrified_until)
+				electrify(duration)
 	..()
 
 /obj/machinery/door/airlock/power_change() //putting this is obj/machinery/door itself makes non-airlock doors turn invisible for some reason

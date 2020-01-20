@@ -8,7 +8,7 @@
 			return !density
 		else
 			return 1
-	if(istype(mover) && mover.checkpass(PASSTABLE))
+	if(istype(mover) && (mover.checkpass(PASSTABLE) || mover.elevation != elevation))
 		return 1
 	var/obj/structure/table/T = (locate() in get_turf(mover))
 	return (T && !T.flipped) 	//If we are moving from a table, check if it is flipped.

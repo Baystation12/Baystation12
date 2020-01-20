@@ -2,6 +2,7 @@
 /obj/item/weapon_attachment/light
 	name = "flashlight attachment"
 	desc = "An attachment designed to provide light."
+	weapon_slot = "underbarrel rail"
 
 	var/on = 0
 	var/intensity = 4
@@ -13,6 +14,6 @@
 /obj/item/weapon_attachment/light/remove_attachment_effects(var/obj/item/weapon/gun/gun)
 	gun.verbs -= /obj/item/weapon/gun/proc/toggle_attachment_light
 
-/obj/item/weapon_attachment/light/ma5_flashlight
+/obj/item/weapon_attachment/light/flashlight
 	name = "flashlight attachment"
-	icon_state = "MA5-Grip-Basic-FlashlightOff"
+	icon_state = "basic-flashlight"

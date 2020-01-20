@@ -7,7 +7,7 @@
 	suit = null
 	uniform = /obj/item/clothing/under/sterile
 	shoes = /obj/item/clothing/shoes/white
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/device/radio/headset/insurrection
 	gloves = null
 	pda_slot = null
 
@@ -27,7 +27,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	uniform = /obj/item/clothing/under/rank/research_director
 	shoes = /obj/item/clothing/shoes/brown
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/device/radio/headset/insurrection
 	gloves = null
 	pda_slot = null
 

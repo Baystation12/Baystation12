@@ -17,13 +17,17 @@
 	total_health = 250 // Stronger than humans at base health.
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
+	appearance_flags = HAS_SKIN_TONE
 	brute_mod = 0.9
 	pain_mod = 0.75 //Pain has quarter an effect on them
 	slowdown = -0.5
+	explosion_effect_mod = 0.5
+	can_force_door = 1
 	pixel_offset_x = -8
-	item_icon_offsets = list(16,0)
+	item_icon_offsets = list(list(9,1),list(9,1),null,list(6,1),null,null,null,list(6,1),null)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	default_faction = "Covenant"
+	unarmed_types = list(/datum/unarmed_attack/elite_punch)
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,
@@ -52,6 +56,8 @@
 	'code/modules/halo/sounds/species_pain_screams/elitescream_10.ogg',
 	'code/modules/halo/sounds/species_pain_screams/elitescream_11.ogg')
 
+	roll_distance = 3 //One tile further than a human
+
 /datum/species/sangheili/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return
 
@@ -60,3 +66,10 @@
 	newname += " "
 	newname += pick(GLOB.last_names_sangheili)
 	return newname
+
+/datum/unarmed_attack/elite_punch
+    attack_verb = list("jabs", "strikes", "side-kicks", "punches", "knees", "kicks")
+    attack_noun = list("fist")
+    eye_attack_text = "fingers"
+    eye_attack_text_victim = "digits"
+    damage = 15

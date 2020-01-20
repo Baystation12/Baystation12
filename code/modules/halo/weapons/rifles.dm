@@ -11,9 +11,9 @@
 	item_state = "ma5b"
 	caliber = "a762"
 	slot_flags = SLOT_BACK
-	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
-	//fire_sound_burst = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
-	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Fire_New.wav'
+	//fire_sound_burst = 'code/modules/halo/sounds/Assault_Rifle_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Assault_Rifle_Reload_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA5B) //Disallows loading LMG boxmags into the MA5B
@@ -22,12 +22,15 @@
 	one_hand_penalty = -1
 	dispersion = list(0)
 	var/on = 0
-	var/activation_sound = 'sound/effects/flashlight.ogg'
+	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 	w_class = ITEM_SIZE_LARGE
+	wielded_item_state = "ma5b-wielded"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
 	firemodes = list(
@@ -36,15 +39,12 @@
 		)
 
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock", "stock")
-	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper)
+	attachments_on_spawn = list(/obj/item/weapon_attachment/ma5_stock_cheekrest,/obj/item/weapon_attachment/ma5_stock_butt,/obj/item/weapon_attachment/ma5_upper,/obj/item/weapon_attachment/light/flashlight)
 
 /obj/item/weapon/gun/projectile/ma5b_ar/can_use_when_prone()
 	return 1
 
-/obj/item/weapon/gun/projectile/ma5b_ar/New()
-	..()
-
-/obj/item/weapon/gun/projectile/ma5b_ar/MA37/update_icon()
+/obj/item/weapon/gun/projectile/ma5b_ar/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA5-Base-Loaded"
@@ -65,6 +65,9 @@
 	desc = "Also formally known as the MA5. Takes 7.62mm ammo."
 	icon_state = "MA37"
 	item_state = "ma37"
+	fire_sound = 'code/modules/halo/sounds/MA37_Fire_New.wav'
+	//fire_sound_burst = 'code/modules/halo/sounds/MA37_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/MA37_Reload_New.wav'
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
@@ -98,7 +101,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
 	attachment_slots = null
 	attachments_on_spawn = null
-	burst_delay = 0.9
+	burst_delay = 1
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
 	firemodes = list(
@@ -106,13 +109,16 @@
 		list(mode_name="short bursts", 	burst=6, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1,-2,-2), dispersion=list(0.3, 0.7, 1.2, 1.2, 1.6, 1.6)),
 		)
 
+	attachment_slots = list("underbarrel rail","sight","barrel")
+	attachments_on_spawn = list(/obj/item/weapon_attachment/light/flashlight)
+
+
 /obj/item/weapon/gun/projectile/ma5b_ar/MA3/update_icon()
 	. = ..()
 	if(ammo_magazine)
 		icon_state = "MA3"
 	else
 		icon_state = "MA3_unloaded"
-
 
 //BR85 battle
 
@@ -132,10 +138,10 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
-	fire_delay = 2
-	accuracy = 2
+	fire_delay = 7
+	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.0, 0.6, 0.6)
+	dispersion=list(0.1, 0.3, 0.5)
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -165,24 +171,27 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	caliber = "9.5mm"
 	slot_flags = SLOT_BACK
-	fire_sound = 'code/modules/halo/sounds/BattleRifleShotSoundEffect.ogg'
-	reload_sound = 'code/modules/halo/sounds/AssaultRifle&BattleRifle_ReloadSound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Battle_Rifle_Fire_New.wav'
+	reload_sound = 'code/modules/halo/sounds/Battle_Rifle_Reload_New.wav'
 	load_method = MAGAZINE
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 0.5
-	fire_delay = 9
+	fire_delay = 8
 	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.1, 0.8, 0.8)
+	dispersion=list(0.1, 0.3, 0.5)
+	wielded_item_state = "br55-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock")
 	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/br55,/obj/item/weapon_attachment/br55_stock_cheekrest,/obj/item/weapon_attachment/br55_bottom,/obj/item/weapon_attachment/br55_upper,/obj/item/weapon_attachment/sight/br55_scope)
 
-/obj/item/weapon/gun/projectile/br85/br55/update_icon()
+/obj/item/weapon/gun/projectile/br55/update_icon()
 	if(ammo_magazine)
 		icon_state = "BR55-Loaded-Base"
 	else

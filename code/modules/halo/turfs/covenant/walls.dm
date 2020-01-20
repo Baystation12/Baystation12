@@ -7,7 +7,13 @@
 	floor_type = /turf/simulated/floor/covenant
 
 /turf/simulated/wall/covenant/New(var/newloc)
-	..(newloc,"nanolaminate")
+	. = ..(newloc,"nanolaminate")
+
+/turf/simulated/wall/covenant/reinforced
+	icon_state = "covie_reinf"
+
+/turf/simulated/wall/covenant/reinforced/New(var/newloc)
+	..(newloc,"nanolaminate","nanolaminate")
 
 /turf/simulated/wall/drone_biomass
 	name = "biomass covered wall"
@@ -16,4 +22,4 @@
 	floor_type = /turf/simulated/floor/drone_biomass
 
 /turf/simulated/wall/drone_biomass/New(var/newloc)
-	..(newloc,"drone biomass")
+	. = ..(newloc,"drone biomass")

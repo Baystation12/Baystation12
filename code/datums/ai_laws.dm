@@ -71,7 +71,6 @@
 
 /datum/ai_laws/proc/sync(var/mob/living/silicon/S, var/full_sync = 1)
 	// Add directly to laws to avoid log-spam
-	S.sync_zeroth(zeroth_law, zeroth_law_borg)
 
 	if(full_sync || ion_laws.len)
 		S.laws.clear_ion_laws()
@@ -88,32 +87,9 @@
 		if(law)
 			S.laws.add_supplied_law(law.index, law.law)
 
-
-/mob/living/silicon/proc/sync_zeroth(var/datum/ai_law/zeroth_law, var/datum/ai_law/zeroth_law_borg)
-	if (!is_malf_or_traitor(src))
-		if(zeroth_law_borg)
-			laws.set_zeroth_law(zeroth_law_borg.law)
-		else if(zeroth_law)
-			laws.set_zeroth_law(zeroth_law.law)
-
-/mob/living/silicon/ai/sync_zeroth(var/datum/ai_law/zeroth_law, var/datum/ai_law/zeroth_law_borg)
-	if(zeroth_law)
-		laws.set_zeroth_law(zeroth_law.law, zeroth_law_borg ? zeroth_law_borg.law : null)
-
 /****************
 *	Add Laws	*
 ****************/
-/datum/ai_laws/proc/set_zeroth_law(var/law, var/law_borg = null)
-	if(!law)
-		return
-
-	zeroth_law = new(law)
-	if(law_borg) //Making it possible for slaved borgs to see a different law 0 than their AI. --NEO
-		zeroth_law_borg = new(law_borg)
-	else
-		zeroth_law_borg = null
-	sorted_laws.Cut()
-
 /datum/ai_laws/proc/add_ion_law(var/law)
 	if(!law)
 		return

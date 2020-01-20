@@ -13,9 +13,9 @@
 	armor = list()
 	species_restricted = list("Tvaoan Kig-Yar")
 	var/datum/armourspecials/shields/tvoan/my_shield
-	var/shieldstrength = 200
-	var/totalshields = 200
-	var/intercept_chance = 33	//only 33% chance to block the bullets
+	var/shieldstrength = 1
+	var/totalshields = 1
+	var/intercept_chance = 100	//A 100% chance to block only a single bullet.
 
 /obj/effect/overlay/shields/tvoan
 	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
@@ -61,5 +61,5 @@
 	name = "T'Voan Champion shield gauntlets"
 	item_state = "championshield"
 	icon_state = "championglove"
-	shieldstrength = 300
-	totalshields = 300
+	shieldstrength = 70
+	totalshields = 70

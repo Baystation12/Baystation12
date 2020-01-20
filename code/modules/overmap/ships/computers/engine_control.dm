@@ -6,6 +6,7 @@
 	icon_screen = "engines"
 	var/state = "status"
 	var/obj/effect/overmap/ship/linked
+	ai_access_level = 4
 
 /obj/machinery/computer/engines/Initialize()
 	. = ..()

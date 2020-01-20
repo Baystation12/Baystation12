@@ -296,6 +296,27 @@
 			if(E.damage > 0)
 				E.damage = max(E.damage - 5 * removed, 0)
 
+/datum/reagent/otomax
+	name = "Otomax"
+	description = "Heals ear damage"
+	taste_description = "earwax"
+	reagent_state = LIQUID
+	color = "#EEDC82"
+	overdose = 15
+	scannable = 1
+	flags = IGNORE_MOB_SIZE
+
+/datum/reagent/otomax/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.adjustEarDamage(-1, -1)
+
+/datum/reagent/otomax/overdose(var/mob/living/carbon/M, var/alien)
+	..()
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[BP_EYES]
+		if(E && istype(E))
+			E.take_damage(5)
+
 /datum/reagent/peridaxon
 	name = "Peridaxon"
 	description = "Used to encourage recovery of internal organs and nervous systems. Medicate cautiously."

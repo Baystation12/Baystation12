@@ -1,7 +1,9 @@
-/mob/living/carbon/human/proc/create_stack()
+/mob/living/carbon/human/proc/create_stack(var/list/access_init = list())
 	set waitfor=0
 	sleep(10)
-	internal_organs_by_name[BP_STACK] = new /obj/item/organ/internal/stack(src,1)
+	var/obj/item/organ/internal/stack/s = new(src,1)
+	s.access = access_init
+	internal_organs_by_name[BP_STACK] = s
 	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>")
 
 /obj/item/organ/internal/stack
@@ -18,6 +20,7 @@
 	var/invasive
 	var/default_language
 	var/list/languages = list()
+	var/list/access = list()
 	var/datum/mind/backup
 
 /obj/item/organ/internal/stack/emp_act()
