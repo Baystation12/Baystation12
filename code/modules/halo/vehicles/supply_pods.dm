@@ -27,11 +27,8 @@
 	icon_state = "covie_console"
 	pod_to_spawn = /obj/vehicles/drop_pod/overmap/supply_pod/covenant
 
+//leave this as a placeholder for now 20/1/20 -C
 /datum/component_profile/drop_pod/supply_pod
-	cargo_capacity = 32
-	vehicle_capacity = 32
-	max_vehicle_size = 16
-	cargo_allow_massive = 1
 
 /obj/vehicles/drop_pod/overmap/supply_pod
 	name = "Resupply Canister, Capsule Type-B"
@@ -45,6 +42,9 @@
 	drop_accuracy = 2
 	launch_arm_time = 3 SECOND
 	vehicle_size = 16
+
+	capacity_flag = ITEM_SIZE_VEHICLE
+	vehicle_carry_size = ITEM_SIZE_VEHICLE_LARGE
 
 /obj/vehicles/drop_pod/supply_pod/update_object_sprites()
 	return
