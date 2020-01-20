@@ -6,14 +6,13 @@
 	step_in = 3
 	dir_in = 1 //Facing North.
 	health = 500
-	deflect_chance = 15
+	deflect_chance = 5
 	damage_absorption = list("brute"=0.6,"fire"=0.7,"bullet"=0.6,"laser"=0.6,"energy"=0.6,"bomb"=0.7)
 	max_temperature = 25000
 	infra_luminosity = 6
 	var/overload = 0
 	var/overload_coeff = 2
 	wreckage = /obj/effect/decal/mecha_wreckage/hrunting
-	internal_damage_threshold = 35
 	max_equip = 3
 
 /obj/mecha/combat/hrunting/add_cell()

@@ -76,7 +76,7 @@
 
 /obj/item/projectile/pulse_laser_damage_proj/Bump(var/atom/impacted)
 	if(!istype(impacted,/obj/effect/shield))
-		explosion(impacted,-1,-1,2,3, adminlog = 0)
+		explosion(impacted,-1,-1,1,3, adminlog = 0)
 	var/turf/simulated/wall/wall = impacted
 	if(istype(wall) && wall.reinf_material)
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls

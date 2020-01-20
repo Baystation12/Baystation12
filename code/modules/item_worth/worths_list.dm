@@ -531,7 +531,6 @@ var/list/worths = list(
 					/obj/item/mecha_parts/mecha_equipment/weapon/energy/pulse = 5000,
 					/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/scattershot = 4750,
 					/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg = 5800,
-					/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/explosive = 2500,
 					/obj/item/mecha_parts = 500,
 					/obj/item/mecha_parts/mecha_equipment = 1000,
 					/obj/item/missile = 1200,
