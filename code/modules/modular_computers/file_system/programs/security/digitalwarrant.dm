@@ -38,7 +38,7 @@ var/warrant_uid = 0
 		var/list/archivedwarrants = list()
 		for(var/datum/data/record/warrant/W in GLOB.data_core.warrants)
 			var/charges = W.fields["charges"]
-			if(lentext(charges) > 50)
+			if(length(charges) > 50)
 				charges = copytext(charges, 1, 50) + "..."
 			var/warrant = list(
 			"warrantname" = W.fields["namewarrant"],

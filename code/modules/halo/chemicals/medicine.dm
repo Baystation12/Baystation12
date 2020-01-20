@@ -51,7 +51,7 @@
 	if(o.status & ORGAN_BLEEDING || o.status & ORGAN_ARTERY_CUT && istype(o))
 		o.status &= ~ORGAN_ARTERY_CUT
 		o.status &= ~ORGAN_BLEEDING
-		o.clamp()
+		o.clamp_organ()
 		o.update_damages()
 		to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
 
