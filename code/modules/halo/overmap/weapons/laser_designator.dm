@@ -52,6 +52,8 @@
 	icon_state = "r2a"
 	anchored = 1
 	density = 0
+	plane = EFFECTS_BELOW_LIGHTING_PLANE
+	layer = POINTER_LAYER
 	var/created_at = 0
 	var/obj/linked_console
 
