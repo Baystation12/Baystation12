@@ -1063,11 +1063,12 @@ About the new airlock wires panel:
 		if(!W.remove_fuel(0,user))
 			to_chat(user, SPAN_NOTICE("Your [W.name] doesn't have enough fuel."))
 			return
-		playsound(loc, 'sound/items/Welder.ogg', 50, 1)
+		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 		user.visible_message(SPAN_WARNING("\The [user] begins welding \the [src] [welded ? "open" : "closed"]!"),
 							SPAN_NOTICE("You begin welding \the [src] [welded ? "open" : "closed"]."))
 		if(do_after(user, (rand(3,5)) SECONDS, src))
 			if(density && !(operating > 0) && !repairing)
+				playsound(src, 'sound/items/Welder2.ogg', 50, 1)
 				welded = !welded
 				update_icon()
 				return
