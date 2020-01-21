@@ -4,7 +4,7 @@
 	icon_state = "purplefireaid"
 
 /obj/item/weapon/storage/firstaid/fire/covenant/New()
-	..()
+	. = ..()
 	icon_state = "purplefireaid"
 
 /obj/item/weapon/storage/firstaid/toxin/covenant
@@ -12,7 +12,7 @@
 	icon_state = "purpletoxaid"
 
 /obj/item/weapon/storage/firstaid/toxin/covenant/New()
-	..()
+	. = ..()
 	icon_state = "purpletoxaid"
 
 /obj/item/weapon/storage/firstaid/toxin/covenant

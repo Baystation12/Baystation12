@@ -15,11 +15,6 @@
 	irradiate_non_cov = 5
 	var/overcharge_cost = 1
 	accuracy = 1
-	sprite_sheets = list(
-		"Tvaoan Kig-Yar" = null,\
-		"Jiralhanae" = null,\
-		"Sangheili" = null\
-		)
 	item_state = "plasmapistol"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -31,7 +26,7 @@
 
 /obj/item/weapon/gun/energy/plasmapistol/New()
 	. = ..()
-	overcharge_cost = initial(charge_cost)*2
+	overcharge_cost = initial(charge_cost)*4
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(power_supply.charge >= overcharge_cost)
@@ -54,7 +49,7 @@
 			overcharge = 1
 			overlays += "overcharge"
 			set_light(3, 1, "66FF00")
-			fire_delay = initial(fire_delay) * 3 //Quadruples the fire delay.
+			fire_delay = initial(fire_delay) * 3 //triples the fire delay.
 		else
 			if(user)
 				visible_message("<span class='notice'>[user.name]'s [src]'s lights darken</span>","<span class='notice'>You deactivate your [src]'s overcharge</span>")
@@ -103,9 +98,4 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
-		)
-	sprite_sheets = list(
-		"Tvaoan Kig-Yar" = null,\
-		"Jiralhanae" = null,\
-		"Sangheili" = null\
 		)

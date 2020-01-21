@@ -67,7 +67,7 @@ obj/machinery/door/blast/regular/triple
 	maxhealth = 2000
 
 obj/machinery/door/blast/regular/triple/New()
-	..()
+	. = ..()
 
 	//only east-west variant for now
 	bound_width = 3 * world.icon_size
@@ -86,7 +86,7 @@ obj/machinery/door/blast/regular/quadruple
 	maxhealth = 2500
 
 obj/machinery/door/blast/regular/quadruple/New()
-	..()
+	. = ..()
 
 	//only east-west variant for now
 	bound_width = 4 * world.icon_size

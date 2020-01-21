@@ -3,8 +3,10 @@
 /decl/hierarchy/outfit/onispartan
 	name = "ONI Aegis Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
+	head = /obj/item/clothing/head/helmet/spartan
 	gloves = /obj/item/clothing/gloves/spartan
 	shoes = /obj/item/clothing/shoes/magboots/spartan
+	suit = /obj/item/clothing/suit/armor/special/spartan
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	l_ear = /obj/item/device/radio/headset/unsc/spartan
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double

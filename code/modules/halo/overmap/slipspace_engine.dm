@@ -27,6 +27,8 @@
 	var/precise_jump = 0 //Makes the slipspace jump arrive precisely. Also allows exit and entrance jumps to occur when within grav-field of objects.
 	var/drive_inaccuracy = SLIPSPACE_ENGINE_INACCURACY //If precise_jump is set to 1, this is ignored.
 	var/jump_sound = 'code/modules/halo/sounds/slipspace_jump.ogg'
+	var/slipspace_carryalong_range = 2
+	var/list/linked_ships = list()
 
 	var/slipspace_target_status = 1		//1 = nullspace and back to realspace, 2 = nullspace permanently to despawn the ship ("leave the system")
 	ai_access_level = 4
@@ -40,24 +42,30 @@
 /obj/machinery/slipspace_engine/proc/allow_user_operate(var/mob/user)
 	return 1
 
-/obj/machinery/slipspace_engine/proc/play_jump_sound(var/sound_loc_origin)
-	if(jump_sound == null)
-		return
-	var/list/mobs_to_sendsound = list()
-	mobs_to_sendsound += GLOB.mobs_in_sectors[om_obj]
-	for(var/obj/effect/overmap/om in range(SLIPSPACE_JUMPSOUND_RANGE,sound_loc_origin))
-		mobs_to_sendsound |= GLOB.mobs_in_sectors[om]
-	for(var/mob/m in mobs_to_sendsound)
-		playsound(m,jump_sound,100)
+/obj/machinery/slipspace_engine/proc/get_linked_ships()
+	. = list()
+	var/obj/effect/overmap/ship/om_ship = om_obj
+	if(istype(om_ship) && om_ship.our_fleet && om_ship.our_fleet.ships_infleet.len > 1)
+		for(var/obj/s in om_ship.our_fleet.ships_infleet)
+			. += s
+	for(var/obj/effect/overmap/ship/s in range(slipspace_carryalong_range,om_obj.loc)) //No check for null-loc because this should never be called when the ship is in slipspace.
+		if(s.anchored)
+			continue
+		. += s
 
-/obj/machinery/slipspace_engine/proc/send_jump_alert(var/alert_origin)
-	var/list/mobs_to_alert = list()
-	mobs_to_alert += GLOB.mobs_in_sectors[om_obj]
-	for(var/obj/effect/overmap/om in range(SLIPSPACE_JUMP_ALERT_RANGE,alert_origin))
-		mobs_to_alert |= GLOB.mobs_in_sectors[om]
-	var/list/dirlist = list("north","south","n/a","east","northeast","southeast","n/a","west","northwest","southwest")
-	for(var/mob/m in mobs_to_alert)
-		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[get_dir(map_sectors["[m.z]"],alert_origin)]]</span>")
+/obj/machinery/slipspace_engine/proc/do_slipspace(var/to_loc = null)
+	if(isnull(to_loc))
+		linked_ships = get_linked_ships()
+	for(var/obj/effect/overmap/om in linked_ships + om_obj)
+		if(isnull(to_loc))
+			om.slipspace_to_nullspace(slipspace_target_status,jump_sound)
+		else
+			if(om.loc != null)
+				linked_ships -= om
+				continue
+			om.slipspace_to_location(to_loc,slipspace_target_status,jump_sound)
+	if(!isnull(to_loc))
+		linked_ships = list()
 
 /obj/machinery/slipspace_engine/proc/overload_engine(var/mob/user)
 	jump_charging = -1
@@ -88,56 +96,6 @@
 			return 0
 	return 1
 
-/obj/machinery/slipspace_engine/proc/do_slipspace_enter_effects()
-	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS, MODIFIED.//
-	var/obj/effect/overmap/ship/om_ship = om_obj
-	if(istype(om_ship))
-		om_ship.speed = list(0,0)
-		om_ship.break_umbilicals()
-	//animate the slipspacejump
-	var/headingdir = om_obj.dir
-	var/turf/T = om_obj.loc
-	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
-		T = get_step(T,headingdir)
-	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(T)
-	//rapidly move into the portal
-	walk_to(om_obj,T,0,1,0)
-	spawn(SLIPSPACE_PORTAL_DIST)
-		om_obj.loc = null
-		walk_to(om_obj,null)
-
-/obj/machinery/slipspace_engine/proc/do_slipspace_exit_effects(var/exit_loc)
-	var/obj/effect/overmap/ship/om_ship = om_obj
-	if(istype(om_ship))
-		om_ship.speed = list(0,0)
-
-	var/headingdir = om_obj.dir
-	var/turf/T = exit_loc
-	//Below code should flip the dirs.
-	T = get_step(T,headingdir)
-	headingdir = get_dir(T,exit_loc)
-	T = exit_loc
-	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
-		T = get_step(T,headingdir)
-	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(T)
-	send_jump_alert(T)
-	om_obj.loc = T
-	walk_to(om_obj,exit_loc,0,1,0)
-	spawn(SLIPSPACE_PORTAL_DIST)
-		walk_to(om_obj,null)
-
-/obj/machinery/slipspace_engine/proc/slipspace_to_location(var/turf/location)
-	do_slipspace_exit_effects(location)
-	var/obj/effect/overmap/ship = map_sectors["[src.z]"]
-	ship.slipspace_status = 0
-
-/obj/machinery/slipspace_engine/proc/slipspace_to_nullspace()
-	do_slipspace_enter_effects()
-	var/obj/effect/overmap/ship = map_sectors["[src.z]"]
-	ship.slipspace_status = slipspace_target_status
-
 /obj/machinery/slipspace_engine/proc/user_slipspace_to_maploc(var/mob/user)
 	var/targ_x = text2num(input(user,"Enter the target location's X value.(0 or null to cancel.)"))
 	var/targ_y = text2num(input(user,"Enter the target location's Y value.(0 or null to cancel.)"))
@@ -163,7 +121,7 @@
 	visible_message("<span class = 'notice'>[user] preps [src] for a jump to realspace.</span>")
 	spawn(jump_delay)
 		visible_message("<span class = 'notice'>[src] momentarily glows bright, then activates!</span>")
-		slipspace_to_location(input_loc)
+		do_slipspace(input_loc)
 
 /obj/machinery/slipspace_engine/proc/user_slipspace_to_nullspace(var/mob/user)
 	if(!precise_jump && !check_jump_allowed(om_obj.loc))
@@ -178,7 +136,7 @@
 	log_admin("[user] the [user.mind.assigned_role] (CKEY: [user.ckey]) activated a slipspace engine, transporting [om_obj] to nullspace. Jump timer: [jump_delay / 10] seconds.")
 	spawn(jump_delay)
 		visible_message("<span class = 'notice'>[src] momentarily glows bright, then activates!</span>")
-		slipspace_to_nullspace()
+		do_slipspace()
 
 /obj/machinery/slipspace_engine/process()
 	if(jump_charging == 2)
@@ -204,7 +162,7 @@
 
 /obj/machinery/slipspace_engine/Destroy()
 	if(om_obj && om_obj.loc == null)
-		slipspace_to_location(pick(block(locate(1,1,GLOB.using_map.overmap_z),locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z))))
+		do_slipspace(pick(block(locate(1,1,GLOB.using_map.overmap_z),locate(GLOB.using_map.overmap_size,GLOB.using_map.overmap_size,GLOB.using_map.overmap_z))))
 	. = ..()
 
 /obj/machinery/slipspace_engine/examine(var/mob/user)
@@ -220,6 +178,9 @@
 		return
 	if(!allow_user_operate(user))
 		to_chat(user,"<span class = 'notice'>You are unable to decipher the controls.</span>")
+		return
+	if(world.time < ticker.mode.ship_lockdown_until)
+		to_chat(user,"<span class = 'notice'>This cannot be activated until the ship finalises deployment preperatiosn!</span>")
 		return
 	if(user.a_intent == "harm")
 		user_overload_engine(user)
@@ -302,6 +263,7 @@
 	var/time_to_die = 0
 
 /obj/effect/slipspace_rupture/New()
+	. = ..()
 	time_to_die = world.time + 6
 	GLOB.processing_objects += src
 

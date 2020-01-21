@@ -27,6 +27,7 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 	var/list/frequencies_cov = list("RamNet","BoulderNet","BattleNet")
 
 /datum/halo_frequencies/New()
+	. = ..()
 	//this should be set in the map
 	/*if(GLOB.using_map.use_global_covenant_comms)
 		new /obj/item/device/mobilecomms/commsbackpack/covenant (locate(1,1,1))*/
@@ -91,12 +92,12 @@ var/global/datum/halo_frequencies/halo_frequencies = new()
 //reset the channel name due to a randomised innie comm channel name
 /obj/item/device/encryptionkey/inniecom/New()
 	channels = list(halo_frequencies.innie_channel_name = 1, EBAND_NAME = 1)
-	..()
+	. = ..()
 
 //also this one
 /obj/item/device/encryptionkey/urfccom/New()
 	channels = list(URFC_NAME = 1, halo_frequencies.innie_channel_name = 1, EBAND_NAME = 1)
-	..()
+	. = ..()
 
 /obj/item/device/encryptionkey/onicom
 	channels = list(ONI_NAME = 1,SHIPCOM_NAME = 1,SQUADCOM_NAME = 1,EBAND_NAME = 1,FLEETCOM = 1)

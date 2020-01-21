@@ -5,9 +5,12 @@
 		/datum/job/ONIGUARDS,\
 		/datum/job/researcher,\
 		/datum/job/ONIGUARD,\
+		/datum/job/insurrectionist_ai,\
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
+		/datum/job/geminus_innie/orion_defector,\
+		/datum/job/insurrectionist_ai,\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
 		/datum/job/soe_commando_captain,\
@@ -28,6 +31,7 @@
 		/datum/job/colonist_mayor,\
 		/datum/job/police,\
 		/datum/job/police_chief,\
+		/datum/job/covenant/huragok,\
 		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
@@ -43,6 +47,10 @@
 		/datum/job/covenant/brute_minor,\
 		/datum/job/covenant/brute_major,\
 		/datum/job/covenant/brute_captain,\
+		/datum/job/covenant/yanmee_minor,\
+		/datum/job/covenant/yanmee_major,\
+		/datum/job/covenant/yanmee_ultra,\
+		/datum/job/covenant/yanmee_leader,\
 		/datum/job/ONI_Spartan_II,\
 		)
 

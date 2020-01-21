@@ -6,6 +6,7 @@
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/kigyar
 	back = null
+	l_hand = /obj/item/weapon/melee/blamite/dagger
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar

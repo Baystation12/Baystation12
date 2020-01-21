@@ -17,6 +17,7 @@
 	language = "Sangheili"
 	additional_langs = list("Doisacci")
 	flags = NO_MINOR_CUT
+	appearance_flags = HAS_SKIN_TONE
 	total_health = 300 //Higher base health than spartans and sangheili
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
@@ -27,7 +28,7 @@
 	can_force_door = 1
 	default_faction = "Covenant"
 	pixel_offset_x = -12
-	item_icon_offsets = list(5,4)
+	item_icon_offsets = list(list(10,4),list(10,4),null,list(6,2),null,null,null,list(6,2),null)
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 
@@ -43,6 +44,8 @@
 	'code/modules/halo/sounds/species_pain_screams/brutescream6.ogg',
 	'code/modules/halo/sounds/species_pain_screams/brutescream7.ogg',
 	'code/modules/halo/sounds/species_pain_screams/brutescream8.ogg')
+
+	per_roll_delay = 3 //Slightly higher per roll delay than a human, because they're a bit bulkier
 
 /datum/species/brutes/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	return

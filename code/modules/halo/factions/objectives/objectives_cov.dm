@@ -1,5 +1,5 @@
 
-#define COLONY_GLASSED_AMOUNT_REQUIRED 5 //5 projector hit for glassing to count.
+#define COLONY_GLASSED_AMOUNT_REQUIRED 5 //4 projector hit for glassing to count.
 
 /* COVENANT */
 
@@ -9,7 +9,7 @@
 	target_faction_name = "UNSC"
 	objective_type = 0
 	win_points = 50
-
+/*
 /datum/objective/overmap/covenant_odp
 	short_text = "Destroy the human defence platform"
 	explanation_text = "We require safe access to the human worlds. Take out their defence platforms!"
@@ -17,7 +17,7 @@
 	objective_type = 0
 	overmap_type = 0
 	win_points = 50
-
+*/
 /datum/objective/overmap/covenant_ship
 	short_text = "Protect Covenant ship"
 	explanation_text = "Your ship is your only route back to Covenant space. Do not allow it to be destroyed."

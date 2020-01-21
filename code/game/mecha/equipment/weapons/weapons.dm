@@ -250,7 +250,7 @@
 	icon_state = "mecha_missilerack"
 	projectile = /obj/item/missile
 	fire_sound = 'code/modules/halo/sounds/RocketLauncherShotSoundEffect.ogg'
-	projectiles = 4
+	projectiles = 2
 	projectile_energy_cost = 200 KILOWATTS
 	equip_cooldown = 60
 

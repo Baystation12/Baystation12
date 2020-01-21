@@ -7,7 +7,7 @@
 	var/image/segment_image
 
 /turf/simulated/wall/r_wall/demo/New(var/newloc)
-	..(newloc, "plasteel","plasteel")
+	. = ..(newloc, "plasteel","plasteel")
 
 	manager = GLOB.DEMOLITION_MANAGER_LIST["[z]"]
 	if(!manager)

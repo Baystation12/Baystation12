@@ -6,6 +6,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/cov_pulse_turret/New()
 	if(isnull(control_tag))
 		control_tag = "cov_pulse_turrets - [z]"
+	. = ..()
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret
 	name = "Pulse Turret Local Control"
@@ -14,6 +15,11 @@
 	fire_sound = 'code/modules/halo/sounds/pulse_turret_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/pulse_laser
 	deck_gun_area = null
+
+/obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret/New()
+	if(isnull(control_tag))
+		control_tag = "cov_pulse_turrets - [z]"
+	. = ..()
 
 /obj/machinery/deck_gun/cov_pulse_turret
 	name = "Pulse Turret"
@@ -25,6 +31,7 @@
 	round_reload_time = 5 SECONDS
 	rounds_loaded = 1
 	max_rounds_loadable = 1
+	tag_prefix = "cov_pulse_turrets"
 
 /obj/machinery/deck_gun/cov_pulse_turret/return_list_addto()
 	return list(src)
@@ -68,6 +75,8 @@
 	. = ..()
 
 /obj/item/projectile/pulse_laser_damage_proj/Bump(var/atom/impacted)
+	if(!istype(impacted,/obj/effect/shield))
+		explosion(impacted,-1,-1,1,3, adminlog = 0)
 	var/turf/simulated/wall/wall = impacted
 	if(istype(wall) && wall.reinf_material)
 		damage *= wall.reinf_material.brute_armor //negates the damage loss from reinforced walls

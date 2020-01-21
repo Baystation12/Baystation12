@@ -79,6 +79,7 @@
 "bG" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
 "bH" = (/obj/structure/closet/secure_closet/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
 "bI" = (/obj/machinery/vending/security,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
+"oW" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/pavement/empty,/area/planets/Geminus/indoor/quest_instance)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababacadaeaeaeafaeaeae
@@ -102,13 +103,14 @@ aaaaaabiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aabjaZaZaZbkaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aablaZaZbmbnaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aaboaZaZaZbpaaaabqbraaaabsbtbubvbtbvbtbtbvbvbubtbvaaaaaaabab
-aabwaZaFaZaZbxbybyaGbybxbyaHbybyaGbyaHbybybybyaHbyaaaaaaabab
+aabwaZaFaZaZbxbybyaGbybxbyaHbybyaGbyaHbybybybyaHaGaaaaaaabab
 aabzbAaZaZaZbxbybybybybxbyaHbybybybyaHbyaIbybyaHbyaaaaaaabab
 aabBaZaZaZaZaaaabqbCaaaabvbtbDbvbvbvbtbvbvbvbDbtbtaaaaaaabab
 aaaaaabEaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aaaaaaaZaZaZbFaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
 aaaaaabGaZaFbHaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabab
-aaaaaaaabIaaaaaaaaaaaaababababababababababababababababababab
-aaaaaaaaaaaaaaaaaaaaabababababababababababababababababababab
+aaaaaaaabIaaaaaaaaaaaaababababababababababababababababoWabab
+aaaaaaaaaaaaaaaaaaaaabababoWabababababababababababababababab
 aaaaaaaaaaaaaaaaaaaaabababababababababababababababababababab
 "}
+

@@ -4,7 +4,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 #define JIRALHANAE_ICON_PATH_OBJ 'code/modules/halo/icons/species/jiralhanae_obj.dmi'
 
 /mob/living/carbon/human/covenant/jiralhanae/New(var/new_loc)
-	..(new_loc,"Jiralhanae")
+	. = ..(new_loc,"Jiralhanae")
 
 /datum/language/doisacci
 	name = "Doisacci"

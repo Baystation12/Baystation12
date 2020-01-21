@@ -19,6 +19,7 @@ GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/species_it
 	language = "Sangheili"
 	additional_langs = list("Janjur Qomi","Galactic Common")
 	spawn_flags = SPECIES_CAN_JOIN
+	item_icon_offsets = list(list(0,2),list(0,2),null,list(0,2),null,null,null,list(0,2),null)
 	total_health = 150		//weaker than a human
 	slowdown = 2			//slight slowdown
 	equipment_slowdown_multiplier = 2

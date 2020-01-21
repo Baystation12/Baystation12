@@ -8,6 +8,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/plastorp_control/New()
 	if(isnull(control_tag))
 		control_tag = "plastorp_control - [z]"
+	. = ..()
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control
 	name = "Local Plasma Torpedo Control Console"
@@ -20,6 +21,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control/New()
 	if(isnull(control_tag))
 		control_tag = "plastorp_control - [z]"
+	. = ..()
 
 //Missile "deck gun"//
 /obj/machinery/deck_gun/missile_pod/plasma_torpedo
@@ -32,6 +34,7 @@
 	round_reload_time = 10 SECONDS
 	rounds_loaded = 1
 	max_rounds_loadable = 1
+	tag_prefix = "plastorp_control"
 
 /obj/machinery/deck_gun/missile_pod/plasma_torpedo/return_list_addto()
 	return list(src,src)
@@ -44,6 +47,7 @@
 	icon_state = "plasma_torp_om_proj"
 	ship_damage_projectile = /obj/item/projectile/plas_torp_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/plasma_torpedoes_impact.ogg'
+	penetrating = 1
 	damage = 100
 	step_delay = 0.5 SECOND
 
@@ -58,7 +62,8 @@
 	damage = 7 //It's a missile, it has no innate damage.
 
 /obj/item/projectile/plas_torp_damage_proj/on_impact(var/atom/impacted)
-	explosion(loc,1,3,4,5, adminlog = 0)
+	if(!istype(impacted,/obj/effect/shield) && penetrating > 0)
+		explosion(loc,-1,4,3,5, adminlog = 0)
 	var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 	S.adminwarn_attack()
 	. = ..()

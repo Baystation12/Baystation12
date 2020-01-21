@@ -15,4 +15,4 @@
 
 /mob/living/simple_animal/npc/colonist/weapon_smuggler/New()
 	speech_triggers.Add(new /datum/npc_speech_trigger/smuggler_response())
-	..()
+	. = ..()

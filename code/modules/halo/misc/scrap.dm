@@ -6,7 +6,7 @@
 	icon_state = "base1"
 
 /obj/item/metalscrap/New()
-	..()
+	. = ..()
 	icon_state = "base[rand(1,18)]"
 
 /obj/item/metalscrap/attackby(var/obj/item/I, var/mob/living/user)

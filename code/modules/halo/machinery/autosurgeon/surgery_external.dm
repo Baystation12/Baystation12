@@ -91,7 +91,7 @@
 				playsound(src.loc, 'sound/weapons/bladeslice.ogg', 15, 1)
 
 				//stop the bleeding
-				surgery_target_ext.clamp()
+				surgery_target_ext.clamp_organ()
 				surgery_target_ext.update_damages()
 
 				buckled_mob:shock_stage += 10

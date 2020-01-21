@@ -35,7 +35,8 @@
 	suit = /obj/item/clothing/suit/armor/special/combatharness/honour_guard
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/melee/energy/elite_sword/honour_staff
-	l_hand = /obj/item/weapon/melee/energy/elite_sword
+	l_hand = /obj/item/language_learner/unggoy_to_common
+	r_hand = /obj/item/weapon/melee/energy/elite_sword
 	gloves = /obj/item/clothing/gloves/thick/sangheili/honour_guard
 	shoes = /obj/item/clothing/shoes/sangheili/honour_guard
 	head = /obj/item/clothing/head/helmet/sangheili/honour_guard
@@ -49,6 +50,8 @@
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	l_hand = /obj/item/language_learner/unggoy_to_common
+	r_hand = /obj/item/weapon/melee/energy/elite_sword
 	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra
 	shoes = /obj/item/clothing/shoes/sangheili/ultra
 	head = /obj/item/clothing/head/helmet/sangheili/ultra
@@ -60,14 +63,14 @@
 
 	suit = /obj/item/clothing/suit/armor/special/combatharness/zealot
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	l_hand = /obj/item/weapon/melee/energy/elite_sword
+	l_hand = /obj/item/language_learner/unggoy_to_common
 	r_hand = /obj/item/weapon/melee/energy/elite_sword
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/thick/sangheili/zealot
 	shoes = /obj/item/clothing/shoes/sangheili/zealot
 	head = /obj/item/clothing/head/helmet/sangheili/zealot
-	l_pocket = /obj/item/weapon/grenade/plasma
+	l_pocket = /obj/item/weapon/melee/energy/elite_sword
 	r_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/sangheili/shipmaster

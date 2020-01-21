@@ -1,7 +1,7 @@
 #define GRUNT_GEAR_ICON 'code/modules/halo/icons/species/grunt_gear.dmi'
 
 /mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
+	. = ..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
 
 /datum/language/balahese
 	name = "Balahese"
@@ -102,7 +102,7 @@
 	starting_pressure = 0
 
 /obj/item/weapon/tank/methane/New()
-	..()
+	. = ..()
 	if(starting_pressure > 0)
 		air_contents.adjust_gas("methane", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
@@ -173,8 +173,6 @@
 	icon_state = "combatharness_major"
 	item_state = "combatharness_major"
 
-	armor = list(melee = 50, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0) //As good as armor
-
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
 	name = "Unggoy Combat Harness (Ultra)"
 	desc = "A combat harness with an inbuilt gas tank"
@@ -183,7 +181,7 @@
 	icon_state = "combatharness_ultra"
 	item_state = "combatharness_ultra"
 
-	armor = list(melee = 45, bullet = 40, laser = 15, energy = 15, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
 
 	//totalshields = 100
 	//specials = list(/datum/armourspecials/shields/unggoy)
@@ -207,6 +205,17 @@
 	icon_state = "combatharness_deacon"
 	item_state = "combatharness_deacon"
 	totalshields = 50 //Pretty much just a distinguishing feature.
+
+	specials = list(/datum/armourspecials/shields/unggoy)
+
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness/honour_guard
+	name = "Unggoy Combat Harness (Honour Guard)"
+	desc = "A combat harness with an inbuilt gas tank."
+	icon = GRUNT_GEAR_ICON
+	icon_override = GRUNT_GEAR_ICON
+	icon_state = "combatharness_honour"
+	item_state = "combatharness_honour"
+	totalshields = 100 //Pretty much just a distinguishing feature.
 
 	specials = list(/datum/armourspecials/shields/unggoy)
 

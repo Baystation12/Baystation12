@@ -1,14 +1,15 @@
 /datum/species/orion
 	name = "Orion"
 	name_plural = "Orion Subjects"
-	spawn_flags = SPECIES_IS_RESTRICTED
+	spawn_flags = SPECIES_CAN_JOIN
 	pain_mod = 0.9 //Slight reduction in pain recieved
 	total_health = 220 //Slightly more health then a normal human
 	metabolism_mod = 1.15 //Slightly faster metabolism
 	darksight = 3 //Slightly better night vision!
-	slowdown = -1.5 //Increased move speed
+	slowdown = -0.4 //Increased move speed
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
+	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE | HAS_EYE_COLOR
 
 	//Spartan 1's have a bit better temperature tolerance
 	siemens_coefficient = 0.9 //Better insulated against temp changes

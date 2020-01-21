@@ -2,6 +2,7 @@
 //Types that use this should consider overriding emp_act() and hear_talk(), unless they shield their contents somehow.
 /obj/item/weapon/storage/internal
 	var/obj/item/master_item
+	cant_hold = list()
 
 /obj/item/weapon/storage/internal/New(obj/item/MI)
 	master_item = MI

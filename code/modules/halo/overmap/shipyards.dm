@@ -6,6 +6,8 @@
 	icon = 'code/modules/halo/icons/overmap/32x32 Overmap Space Station.dmi'
 	icon_state = "Static Station"
 
+	anchored = 1
+
 	ship_name_list = list()
 
 	messages_on_hit = list("Automated Shipyard taking fire!")
@@ -17,6 +19,10 @@
 	var/list/templates_available = list() //FORMAT: ship typepath = base mapfile path, omitting .dmm. Multi-z entries should be placed in order of high to low.
 
 	var/next_repair_at = 0
+
+/obj/effect/overmap/ship/npc_ship/shipyard/New()
+	. = ..()
+	GLOB.overmap_tiles_uncontrolled -= range(14,src)
 
 /obj/effect/overmap/ship/npc_ship/shipyard/pick_target_loc()
 	target_loc = loc

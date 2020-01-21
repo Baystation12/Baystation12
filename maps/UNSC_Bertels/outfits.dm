@@ -82,7 +82,8 @@
 	l_ear = /obj/item/device/radio/headset/unsc/commander
 	uniform = /obj/item/clothing/under/unsc/co
 	shoes = /obj/item/clothing/shoes/brown
-	belt = /obj/item/weapon/gun/projectile/m6d_magnum
+	l_hand = /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum
+	belt = /obj/item/weapon/material/machete/officersword
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/officer/o6)
 
 	flags = 0
@@ -235,6 +236,20 @@
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 	gloves = /obj/item/clothing/gloves/thick/unsc
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e5, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_iwo
+	name = "Infantry Weapons Officer"
+
+	l_ear = /obj/item/device/radio/headset/unsc/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	shoes = /obj/item/clothing/shoes/marine
+	suit = /obj/item/clothing/suit/storage/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e9, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 

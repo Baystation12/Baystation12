@@ -15,6 +15,7 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/New()
 	if(isnull(control_tag))
 		control_tag = "deck_gun_control - [z]"
+	. = ..()
 
 /obj/machinery/overmap_weapon_console/toggle_projectile_tracking()
 	. = ..()
@@ -46,9 +47,10 @@
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/scan_linked_devices()
 	var/list/devices = list()
-	var/area/dg_area = locate(deck_gun_area) in world
-	if(dg_area)
-		for(var/obj/machinery/deck_gun/dg in dg_area.contents)
+	//We've found one of them, now we make sure it's the right one.//
+	//This is to allow re-use of areas in the dynamic ship spawn system.//
+	for(var/obj/machinery/deck_gun/dg in world)
+		if(dg.control_tag == control_tag)
 			devices += dg
 	linked_devices = devices
 
@@ -99,6 +101,8 @@
 	icon = 'code/modules/halo/overmap/weapons/deck_gun.dmi'
 	icon_state = "deck_gun"
 	anchored = 1
+	var/tag_prefix = "deck_gun_control"
+	var/control_tag = ""
 	var/sound/fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
 	var/obj/item/projectile/overmap/fired_projectile = /obj/item/projectile/overmap/deck_gun_proj
 	var/round_reload_time = DECK_GUN_ROUND_RELOAD_TIME //Time it takes to reload a single round.
@@ -106,10 +110,18 @@
 	var/rounds_loaded = DECK_GUN_BASE_MAXROUNDS
 	var/max_rounds_loadable = DECK_GUN_BASE_MAXROUNDS
 
+/obj/machinery/deck_gun/Initialize()
+	. = ..()
+	if(!control_tag)
+		control_tag = "[tag_prefix] - [z]"
+
 /obj/machinery/deck_gun/process()
 	if(world.time > next_reload_time && next_reload_time != 0)
 		reload_gun()
 		next_reload_time = world.time + round_reload_time
+
+/obj/machinery/deck_gun/ex_act()
+	return
 
 /obj/machinery/deck_gun/proc/do_fire_animation()
 	flick("[icon_state]_fire",src)
@@ -171,7 +183,7 @@
 /obj/item/projectile/deck_gun_damage_proj/on_impact(var/atom/a)
 	. = ..()
 	if(!istype(a,/obj/effect/shield))
-		explosion(a,-1,-1,2,4, adminlog = 0)
+		explosion(a,-1,0,2,4, adminlog = 0)
 
 /obj/item/projectile/overmap/deck_gun_proj
 	name = "deck gun round"

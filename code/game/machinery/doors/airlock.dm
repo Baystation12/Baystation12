@@ -742,7 +742,7 @@ About the new airlock wires panel:
 	if (istype(h) && h.species.can_force_door == 1 && h.a_intent == I_GRAB)
 		if(arePowerSystemsOn() && !locked && !brace)
 			to_chat(h,"<span class='notice'>The airlock's motors are resisting your efforts to force it, but you're strong enough to overcome them.</span>")
-			if(!do_after(h,5,src))
+			if(!do_after(h,5 SECONDS,src))
 				to_chat(h,"<span class = 'notice'>You stop forcing the airlock.</span>")
 				return
 			if(density)

@@ -151,7 +151,7 @@
 
 /mob/living/proc/pin_if_possible(var/obj/pinner,var/pin_range,var/pin_dir)
 	//Handles embedding for non-humans and simple_animals.
-	var/turf/T = near_wall(dir,pin_range)
+	var/turf/T = near_wall(pin_dir,pin_range)
 	if(T)
 		embed(pinner)
 		src.loc = T

@@ -10,6 +10,7 @@
 	access = list(310,311)
 	spawnpoint_override = "Research Facility Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
@@ -24,6 +25,7 @@
 	access = list(310,311)
 	spawnpoint_override = "Research Facility Director Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
@@ -38,6 +40,7 @@
 	access = list(311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE
 
@@ -52,5 +55,6 @@
 	access = list(310,311)
 	spawnpoint_override = "Research Facility Security Spawn"
 	whitelisted_species = list(/datum/species/human)
+	spawn_faction = "UNSC"
 	loadout_allowed = TRUE
 	lace_access = TRUE

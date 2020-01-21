@@ -37,6 +37,18 @@
 
 	toggle_scope(usr, 1.1)
 
+/obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum
+	name = "\improper CO\'s Magnum"
+	desc = "I don't keep it loaded, Son. You'll have to find ammo as you go."
+	accuracy = 3
+	burst = 2
+
+/obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum/New()
+	. = ..()
+	var/oldammo = ammo_magazine
+	ammo_magazine = null
+	qdel(oldammo)
+
 //M6B Civvie and GCPD pistol
 
 /obj/item/weapon/gun/projectile/m6d_magnum/m6b
@@ -118,7 +130,7 @@
 	item_state = "handgonne"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	caliber = "14.5mm"
-	screen_shake = 2 //extra kickback
+	screen_shake = 1 //extra kickback
 	max_shells = 3
 	one_hand_penalty = 0
 	ammo_type = /obj/item/ammo_casing/a145_ap/tracerless

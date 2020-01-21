@@ -10,20 +10,20 @@
 	shard_can_repair = 0 //I doubt you can melt nanolaminate with a hand welder.
 
 	icon_base = "nanolaminate"
-	door_icon_base = "nanolaminate"
-	icon_reinf = "nanolaminate"
+	//door_icon_base = "nanolaminate"
+	icon_reinf = "reinf_over"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 
-	cut_delay = 120
+	cut_delay = 120 SECONDS
 
 	melting_point = 17273
 
 	brute_armor = 15
 	burn_armor = 10 //Not as defensive when burn applied.
 
-	integrity = 600
+	integrity = 700
 
-	explosion_resistance = 20
+	explosion_resistance = 30
 
 	stack_type = /obj/item/stack/material/nanolaminate
 

@@ -14,6 +14,7 @@
 	base = 1
 	block_slipspace = 1
 	fore_dir = WEST
+	anchored = 1
 
 	parent_area_type = /area/faction_base/unsc
 

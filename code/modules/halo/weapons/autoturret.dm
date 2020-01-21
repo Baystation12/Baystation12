@@ -174,6 +174,7 @@
 	icon_state = "artifact"
 
 /obj/structure/autoturret/ONI/New()
+	. = ..()
 	fabricate_rounds(max_rounds/5)
 	anchored = 1
 	GLOB.processing_objects += src

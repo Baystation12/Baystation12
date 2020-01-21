@@ -60,6 +60,8 @@
 
 	var/vacuum_traversal = 1 //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 
+	var/target_elevation = BASE_ELEVATION
+
 	var/datum/plot_vector/trajectory	// used to plot the path of the projectile
 	var/datum/vector_loc/location		// current location of the projectile in pixel space
 	var/matrix/effect_transform			// matrix to rotate and scale projectile effects - putting it here so it doesn't
@@ -226,6 +228,8 @@
 
 /obj/item/projectile/proc/do_supression_aoe(var/location)
 	for(var/mob/living/carbon/human/h in orange(1,location))
+		if(h in permutated)
+			continue
 		h.supression_act(src)
 
 /obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
@@ -328,9 +332,12 @@
 			return
 
 		//Deals with moving a projectile up / down to hit targets on the ground or in air
-		if(original  && elevation != original.elevation)
-			var/elevation_mod = original.elevation - elevation
-			change_elevation(elevation_mod)
+		if(elevation != target_elevation)
+			if(elevation > target_elevation)
+				change_elevation(-1)
+			else
+				change_elevation(1)
+
 		before_move()
 		Move(location.return_turf())
 

@@ -8,7 +8,7 @@
 	gloves = /obj/item/clothing/gloves/soegloves/urfc
 	l_ear = /obj/item/device/radio/headset/commando
 	uniform = /obj/item/clothing/under/urfc_jumpsuit
-	shoes =  /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/marine
 	starting_accessories = list(/obj/item/clothing/accessory/holster/thigh)
 
 	flags = 0
@@ -21,7 +21,7 @@
 	gloves = /obj/item/clothing/gloves/soegloves/urfc
 	l_ear = /obj/item/device/radio/headset/commando
 	uniform = /obj/item/clothing/under/urfc_jumpsuit/jumpsuit
-	shoes = /obj/item/clothing/shoes/magboots/urfc
+	shoes = /obj/item/clothing/shoes/marine
 	mask = /obj/item/clothing/mask/gas/soebalaclava
 	belt = /obj/item/weapon/gun/projectile/heavysniper/handgonne
 	starting_accessories = list(/obj/item/clothing/accessory/holster/thigh)
@@ -36,7 +36,7 @@
 	gloves = /obj/item/clothing/gloves/soegloves/urfc
 	l_ear = /obj/item/device/radio/headset/commando
 	uniform = /obj/item/clothing/under/urfc_jumpsuit/commander
-	shoes = /obj/item/clothing/shoes/magboots/urfc
+	shoes = /obj/item/clothing/shoes/marine
 	belt = /obj/item/weapon/gun/projectile/heavysniper/handgonne
 	starting_accessories = list(/obj/item/clothing/accessory/holster/thigh)
 

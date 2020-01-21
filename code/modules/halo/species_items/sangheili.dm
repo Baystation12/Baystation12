@@ -6,7 +6,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 #define SANGHEILI_BLEEDBLOCK_CHANCE 50
 
 /mob/living/carbon/human/covenant/sangheili/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
-	..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
+	. = ..(new_loc,"Sangheili")							//Code breaks if not placed in species folder,
 
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
@@ -202,7 +202,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 			return 1
 	return 0
 
-/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_species_leap_dist(var/mob/living/carbon/human/mob)
+/obj/item/weapon/melee/energy/elite_sword/g_dagger/get_lunge_dist(var/mob/living/carbon/human/mob)
 	return 2
 
 /obj/item/weapon/melee/energy/elite_sword/g_dagger/dropped()
@@ -465,7 +465,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 		return
 	for(var/obj/item/organ/external/e in owner.bad_external_organs)
 		if(!e.clamped() && prob(SANGHEILI_BLEEDBLOCK_CHANCE))
-			e.clamp() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
+			e.clamp_organ() //Clamping, not bandaging ensures that no passive healing is gained from the wounds being bandaged
 		for(var/datum/wound/w in e.wounds)
 			w.damage -= 0.1
 

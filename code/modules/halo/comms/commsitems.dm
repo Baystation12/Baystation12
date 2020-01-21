@@ -20,7 +20,7 @@
 		)
 
 /obj/item/device/mobilecomms/commsbackpack/New()
-	..()
+	. = ..()
 	telecomms_list += src
 
 /obj/item/device/mobilecomms/commsbackpack/Initialize()

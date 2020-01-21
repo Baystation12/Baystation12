@@ -12,7 +12,6 @@
 
 /obj/effect/overmap/sector/exo_research_ice/LateInitialize()
 	. = ..()
-	new /obj/effect/overmap/ship/npc_ship/shipyard/unsc (loc)
 
 /obj/effect/overmap/sector/exo_research_ice/New()
     loot_distributor.loot_list["artifactRandom"] = list(/obj/machinery/artifact/forerunner_artifact,null,null,null,null)

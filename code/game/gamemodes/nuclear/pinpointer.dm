@@ -17,40 +17,43 @@ var/list/nuke_disks = list()
 	var/active = 0
 
 
-	attack_self()
-		if(!active)
-			active = 1
-			to_chat(usr, "<span class='notice'>You activate the pinpointer</span>")
-			workdisk()
-		else
-			active = 0
-			icon_state = "pinoff"
-			to_chat(usr, "<span>You deactivate the pinpointer</span>")
+/obj/item/weapon/pinpointer/attack_self()
+	if(!active)
+		active = 1
+		to_chat(usr, "<span class='notice'>You activate the pinpointer</span>")
+		workdisk()
+	else
+		active = 0
+		icon_state = "pinoff"
+		to_chat(usr, "<span>You deactivate the pinpointer</span>")
 
-	proc/workdisk()
-		if(!active) return
+/obj/item/weapon/pinpointer/proc/workdisk()
+	if(!active) return
+	if(!the_disk)
+		the_disk = locate()
 		if(!the_disk)
-			the_disk = locate()
-			if(!the_disk)
-				icon_state = "pinonnull"
-				return
-		set_dir(get_dir(src,the_disk))
-		switch(get_dist(src,the_disk))
-			if(0)
-				icon_state = "pinondirect"
-			if(1 to 8)
-				icon_state = "pinonclose"
-			if(9 to 16)
-				icon_state = "pinonmedium"
-			if(16 to INFINITY)
-				icon_state = "pinonfar"
-		spawn(5) .()
+			icon_state = "pinonnull"
+			return
+	set_dir(get_dir(src,the_disk))
+	switch(get_dist(src,the_disk))
+		if(0)
+			icon_state = "pinondirect"
+		if(1 to 8)
+			icon_state = "pinonclose"
+		if(9 to 16)
+			icon_state = "pinonmedium"
+		if(16 to INFINITY)
+			icon_state = "pinonfar"
+	spawn(5) .()
 
-	examine(mob/user)
-		. = ..(user)
-		for(var/obj/machinery/nuclearbomb/bomb in world)
-			if(bomb.timing)
-				to_chat(user, "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]")
+/obj/item/weapon/pinpointer/proc/examine_additions(var/mob/user)
+	for(var/obj/machinery/nuclearbomb/bomb in world)
+		if(bomb.timing)
+			to_chat(user, "Extreme danger.  Arming signal detected.   Time remaining: [bomb.timeleft]")
+
+/obj/item/weapon/pinpointer/examine(mob/user)
+	. = ..(user)
+	examine_additions(user)
 
 /obj/item/weapon/pinpointer/Destroy()
 	active = 0

@@ -1,3 +1,4 @@
+
 /obj/item/stack/material/cyborg/nanolaminate
 	icon = 'code/modules/halo/icons/materials/covenant/materials.dmi'
 	icon_state = "nanolaminate"
@@ -17,7 +18,7 @@
 	charge_tick = 0
 	recharge_time = 10 //Time it takes for shots to recharge (in seconds)
 
-	reagent_ids = list(/datum/reagent/biofoam, /datum/reagent/triadrenaline, /datum/reagent/tricordrazine, /datum/reagent/inaprovaline, /datum/reagent/spaceacillin, /datum/reagent/bicaridine, /datum/reagent/dermaline, /datum/reagent/dylovene, /datum/reagent/dexalinp, /datum/reagent/alkysine, /datum/reagent/peridaxon, /datum/reagent/imidazoline)
+	reagent_ids = list(/datum/reagent/biofoam, /datum/reagent/triadrenaline, /datum/reagent/tricordrazine, /datum/reagent/inaprovaline,/datum/reagent/iron, /datum/reagent/spaceacillin, /datum/reagent/bicaridine, /datum/reagent/dermaline, /datum/reagent/dylovene, /datum/reagent/dexalinp, /datum/reagent/alkysine, /datum/reagent/peridaxon, /datum/reagent/imidazoline)
 	reagent_volumes = list()
 	reagent_names = list()
 
