@@ -1,0 +1,4 @@
+author: "quardbreak"
+delete-after: True
+changes: 
+  - tweak: "Tweaked welding sounds on airlock and vents. Now after weld operation you should hear second sound like you end your action."
