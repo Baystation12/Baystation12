@@ -455,6 +455,25 @@
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkiv_security
 	head = /obj/item/clothing/head/helmet/spartan/mkiv_security
 
+////////Franz\\\\\\\\
+
+//Spartan
+
+/obj/item/clothing/head/helmet/spartan/mkv_franz
+	name = "MJOLNIR Powered Assault Armor Helmet Mark V Franz"
+	icon_state = "mk5-commandohelm_obj"
+	item_state = "mk5-commandohelm_worn"
+
+/obj/item/clothing/suit/armor/special/spartan/mkv_franz
+	name = "MJOLNIR Powered Assault Armor Mark V Franz"
+	icon_state = "mk5-shell_obj"
+	item_state = "mk5-shell_worn"
+
+/decl/hierarchy/outfit/franz_spartan
+	name = "franz - spartan"
+	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_franz
+	head = /obj/item/clothing/head/helmet/spartan/mkv_franz
+
 ////////Gulag\\\\\\\\
 
 //ODST
@@ -1720,25 +1739,25 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 //Sangheili (MAJOR)
 
 /obj/item/clothing/head/helmet/sangheili/socks
-	name = "‘Nasan Clan - Major Sangheili Helmet"
+	name = "‘Nasan Clan - Bluekro Sangheili Helmet"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_helm_obj"
 	item_state = "socks_helm"
 
 /obj/item/clothing/suit/armor/special/combatharness/socks
-	name = "‘Nasan Clan - Major Combat Harness"
+	name = "‘Nasan Clan - Bluekro Combat Harness"
 	icon_state = "socks_chest_obj"
 	item_state = "socks_chest"
 	totalshields = 125
 
 /obj/item/clothing/shoes/sangheili/socks
-	name = "‘Nasan Clan - Major Leg Armour"
+	name = "‘Nasan Clan - Bluekro Leg Armour"
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_legs_obj"
 	item_state = "socks_legs"
 
 /obj/item/clothing/gloves/thick/sangheili/socks
-	name = "‘Nasan Clan - Major Gauntlets"
+	name = "‘Nasan Clan - Bluekro Gauntlets"
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "socks_gloves_obj"
 	item_state = "socks_gloves"
@@ -1956,35 +1975,87 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/storage/marine/riley
 	head = /obj/item/clothing/head/helmet/marine/riley
 
+///////Voloxus\\\\\\\\
+
+//Sangheili (ULTRA/MAJOR)
+
+/obj/item/clothing/head/helmet/sangheili/voloxus
+	name = "‘Vurom Clan Armor - Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Leevrukah_helmet_obj"
+	item_state = "Leevrukah_helmet"
+
+/obj/item/clothing/suit/armor/special/combatharness/voloxus
+	name = "‘Vurom Clan Armor - Combat Harness"
+	desc = "Worn only by those within the 'Vurom Clan that have distinguished themselves among the most faithful, and zealous within the Covenant."
+	icon_state = "Leevrukah_chest_obj"
+	item_state = "Leevrukah_chest"
+	totalshields = 125
+
+/obj/item/clothing/shoes/sangheili/voloxus
+	name = "‘Vurom Clan Armor - Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Leevrukah_legs_obj"
+	item_state = "Leevrukah_legs"
+
+/obj/item/clothing/gloves/thick/sangheili/voloxus
+	name = "‘Vurom Clan Armor - Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Leevrukah_gloves_obj"
+	item_state = "Leevrukah_gloves"
+
+/obj/item/weapon/storage/box/large/donator/voloxus_sangheili
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/voloxus,
+					/obj/item/clothing/suit/armor/special/combatharness/voloxus,
+					/obj/item/clothing/shoes/sangheili/voloxus,
+					/obj/item/clothing/gloves/thick/sangheili/voloxus
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/voloxus,
+					/obj/item/clothing/suit/armor/special/combatharness/voloxus,
+					/obj/item/clothing/shoes/sangheili/voloxus,
+					/obj/item/clothing/gloves/thick/sangheili/voloxus
+					)
+
+/decl/hierarchy/outfit/zane_sangheili
+	name = "voloxus - Ultra/Major"
+	suit = /obj/item/clothing/suit/armor/special/combatharness/voloxus
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/voloxus
+	shoes = /obj/item/clothing/shoes/sangheili/voloxus
+	head = /obj/item/clothing/head/helmet/sangheili/voloxus
+	l_pocket = /obj/item/weapon/grenade/plasma
+
 ///////Zane\\\\\\\\
 
-//Sangheili (MAJOR)
+//Sangheili (ULTRA)
 
 /obj/item/clothing/head/helmet/sangheili/zane
-	name = "‘Nasan Clan - Major Sangheili Helmet"
+	name = "‘Nasan Clan - Ultra Sangheili Helmet"
 	desc = "Head armour, to be used with the Sangheili Combat Harness."
 	icon_state = "bluekro_helm_obj"
 	item_state = "bluekro_helm"
 
 /obj/item/clothing/suit/armor/special/combatharness/zane
-	name = "‘Nasan Clan - Major Combat Harness"
+	name = "‘Nasan Clan - Ultra Combat Harness"
 	icon_state = "bluekro_chest_obj"
 	item_state = "bluekro_chest"
 	totalshields = 125
 
 /obj/item/clothing/shoes/sangheili/zane
-	name = "‘Nasan Clan - Major Leg Armour"
+	name = "‘Nasan Clan - Ultra Leg Armour"
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon_state = "bluekro_legs_obj"
 	item_state = "bluekro_legs"
 
 /obj/item/clothing/gloves/thick/sangheili/zane
-	name = "‘Nasan Clan - Major Gauntlets"
+	name = "‘Nasan Clan - Ultra Gauntlets"
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
 	icon_state = "bluekro_gloves_obj"
 	item_state = "bluekro_gloves"
 
-/obj/item/weapon/storage/box/large/donator/zane_major
+/obj/item/weapon/storage/box/large/donator/zane_ultra
 	startswith = list(/obj/item/clothing/head/helmet/sangheili/zane,
 					/obj/item/clothing/suit/armor/special/combatharness/zane,
 					/obj/item/clothing/shoes/sangheili/zane,
@@ -1997,7 +2068,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 					)
 
 /decl/hierarchy/outfit/zane_sangheili
-	name = "Zane - Major"
+	name = "zane - Ultra"
 	suit = /obj/item/clothing/suit/armor/special/combatharness/zane
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
 	back = /obj/item/weapon/gun/energy/plasmarifle

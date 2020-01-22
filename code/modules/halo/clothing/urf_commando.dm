@@ -28,6 +28,9 @@
 	flags_inv = HIDEEARS
 	unacidable = 1
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 50, rad = 25)
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/urfccommander
@@ -40,6 +43,9 @@
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
 	armor = list(melee = 20, bullet = 25, laser = 10,energy = 10, bomb = 0, bio = 20, rad = 5)
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/soe

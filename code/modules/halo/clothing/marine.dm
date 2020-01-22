@@ -29,6 +29,10 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/marine/medic
@@ -319,6 +323,10 @@
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
 	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 15, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
