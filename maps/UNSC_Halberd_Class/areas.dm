@@ -92,8 +92,8 @@
 /area/destroyer/unsclightbrigade/toolstorageaft
 	name = "UNSC Light Brigade Tool Storage Aft"
 
-/area/destroyer/unsclightbrigade/foreaiandnukestorage
-	name = "UNSC Light Brigade AI - Nuke Storage Fore"
+/area/destroyer/unsclightbrigade/foreaiandnavcomstorage
+	name = "UNSC Light Brigade AI - Navcom Storage Fore"
 	icon_state = "blue-red"
 
 /area/destroyer/unsclightbrigade/canteen
