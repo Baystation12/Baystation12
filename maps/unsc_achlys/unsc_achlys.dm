@@ -13,6 +13,7 @@
 	#include "unsc_achlys_Z1.dmm"
 	#include "unsc_achlys_Z2.dmm"
 	#include "unsc_achlys_Z3.dmm"
+	#include "unsc_achlys_Z4.dmm"
 
 	#include "../../code/modules/halo/lobby_music/flood.dm"
 

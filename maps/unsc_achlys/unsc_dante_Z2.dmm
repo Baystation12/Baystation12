@@ -29,7 +29,7 @@
 "aC" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/dante)
 "aD" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "MAC Chamber"; req_access = list(145)},/turf/simulated/floor/tiled/dark,/area/dante)
 "aE" = (/turf/simulated/floor/tiled/dark,/area/dante)
-"aF" = (/obj/vehicles/air/pelican/unsc{desc = "An average Pelican with a nosegun on the front. This one has the infamous ferryman painted on the side."; name = "Charon"},/turf/simulated/floor/plating,/area/dante)
+"aF" = (/obj/vehicles/air/pelican/unsc{desc = "An average Pelican with a nosegun on the front. This one has the infamous ferryman painted on the side."; name = "Charon"},/obj/effect/landmark/dropship_land_point/dante_north{faction = "unsc"},/turf/simulated/floor/plating,/area/dante)
 "aG" = (/obj/structure/stairs/north,/turf/simulated/floor/tiled,/area/dante)
 "aH" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/dante)
 "aI" = (/obj/machinery/door/airlock/multi_tile/halo{name = "Pelican Bay Alpha"; req_access = list(142)},/turf/simulated/floor/plating,/area/dante)
@@ -90,6 +90,7 @@
 "bL" = (/obj/machinery/cryopod/unsc,/turf/simulated/floor/tiled/white,/area/dante)
 "bM" = (/obj/machinery/light/small,/turf/simulated/floor/plating,/area/dante)
 "bN" = (/obj/effect/landmark/map_data{name = "Dante"},/turf/space,/area/space)
+"bO" = (/obj/effect/landmark/dropship_land_point/dante_south{faction = "unsc"},/turf/simulated/floor/plating,/area/dante)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -154,7 +155,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababaZ
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakbdakakakakabaxaxaxaxaxaxaxbeacacbfabbgbhbgabbibjbkababaSacacacabaEaEaEblaYaYaYaYaYaYaYaYaYaYaYaYaYaYaYaYaYaYaYabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakabauacacacacacacacacacacabbmbmbmabbnbobkababauacacacabaLaEaEaEbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakakacacacacacacacacacacacbqbobobrabbobobkababacacacacabaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaJabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakbsacacacacayacacayacacacabbtbobobuboboboababacacbvbvabaEaEaEbwaEaEaEaEaEaEbwaEaEaEaEaEaEbwaEaEaEaEaEabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakbOakakakakakakbsacacacacayacacayacacacabbtbobobuboboboababacacbvbvabaEaEaEbwaEaEaEaEaEaEbwaEaEaEaEaEaEbwaEaEaEaEaEabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakabacacacaAabaBacabababababbmbmbmabbobobkababacacababababaDaEabababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabavakakakakakakakakawabaOaOaOaOabacacaoacacapabbgbhbhabbxbobkababacacacacaoacacacaoacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakbyakakakakakakababababababacacacacacapabababababbzbAbkababauacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
