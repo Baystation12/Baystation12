@@ -122,7 +122,7 @@
 	scan_linked_devices()
 	if(!user)
 		return 0
-	if(get_dist(user,src) > 1)
+	if(!istype(user,/mob/living/silicon/ai) && get_dist(user,src) > 1)
 		to_chat(user,"<span class = 'notice'>You need to be next to the firing console to do that!</span>")
 		return 0
 	var/obj/overmap_sector = map_sectors["[z]"]
