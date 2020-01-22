@@ -4,6 +4,8 @@
 	name = "magboots"
 	icon_state = "magboots0"
 	can_hold_knife = 1
+	armor = list(melee = 25, bullet = 25, laser = 5, energy = 15, bomb = 10, bio = 0, rad = 0)
+
 	species_restricted = null
 	force = 3
 	overshoes = 1
