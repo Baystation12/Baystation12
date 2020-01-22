@@ -112,7 +112,7 @@ GLOBAL_LIST_EMPTY(dante_pilot_spawns)
 	access = list(144)
 	spawnpoint_override = "Dante Pilot"
 	latejoin_at_spawnpoints = TRUE
-	into_blurb = "You are a pilot. Your job is to fly one of the two dropships and transport the marines between the two ships. You may become makeshift messengers in the event of a comms malfunction. Do not die."
+	intro_blurb = "You are a pilot. Your job is to fly one of the two dropships and transport the marines between the two ships. You may become makeshift messengers in the event of a comms malfunction. Do not die."
 
 GLOBAL_LIST_EMPTY(dante_officer_spawns)
 
