@@ -25,13 +25,15 @@
 	armor_thickness = 30
 
 	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
+	light_overlay = "helmet_light_dual"
 	brightness_on = 4
 	unacidable = 1
 	on = 0
 	item_state_slots = list(slot_l_hand_str = "syndicate-helm-black", slot_r_hand_str = "syndicate-helm-black")
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/spartan_hud
+
+
 
 /obj/item/clothing/suit/armor/special/spartan
 	name = "MJOLNIR Powered Assault Armor Mark IV"
