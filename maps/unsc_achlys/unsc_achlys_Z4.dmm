@@ -769,8 +769,8 @@
 "oO" = (/obj/machinery/door/blast/regular/open{p_open = 0},/turf/simulated/floor/tech/orange{icon_state = "techfloor_orangefulltwogrid"; dir = 4},/area/achlys/eight/z4cellblock4)
 "oP" = (/obj/structure/floodspawner{spawn_spot_x = 56; spawn_spot_y = 41},/obj/structure/floodspawner{spawn_spot_x = 62; spawn_spot_y = 42},/turf/simulated/floor/tech,/area/achlys/eight/z4cellblock4)
 "oQ" = (/obj/structure/vent,/turf/simulated/floor/tech/gray,/area/achlys/eight/z4cellblock4)
-"oR" = (/obj/effect/landmark/dropship_land_point/achlys_north,/turf/simulated/floor/tech/gray,/area/achlys/four/z4hanger2)
-"oS" = (/obj/effect/landmark/dropship_land_point/achlys_south,/turf/simulated/floor/tech/gray,/area/achlys/four/z4hanger1)
+"oR" = (/obj/effect/landmark/dropship_land_point/achlys_north{faction = "unsc"},/turf/simulated/floor/tech/gray,/area/achlys/four/z4hanger2)
+"oS" = (/obj/effect/landmark/dropship_land_point/achlys_south{faction = "unsc"},/turf/simulated/floor/tech/gray,/area/achlys/four/z4hanger1)
 "oT" = (/obj/structure/stairs/east,/turf/simulated/floor/tiled/dark,/area/achlys/five/z4secstation2)
 "oU" = (/obj/effect/landmark/map_data{name = "Achlys"},/turf/space,/area/space)
 
