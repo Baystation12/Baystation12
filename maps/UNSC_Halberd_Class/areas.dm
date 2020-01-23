@@ -7,9 +7,6 @@
 	requires_power = 1
 
 //deck 1 areas
-/area/destroyer/unsclightbrigade/macgguns
-	name = "UNSC Light Brigade MAC Cannons"
-	icon_state = "blueold"
 
 /area/destroyer/unsclightbrigade/bridge
 	name = "UNSC Light Brigade Bridge"
@@ -67,8 +64,13 @@
 	name = "UNSC Light Brigade Brig"
 	icon_state = "red"
 
-/area/destroyer/unsclightbrigade/atmos
-	name = "UNSC Light Brigade Atmospherics"
+/area/destroyer/unsclightbrigade/atmosfore
+	name = "UNSC Light Brigade Fore Atmospherics"
+	icon_state = "yellow"
+
+/area/destroyer/unsclightbrigade/atmosaft
+	name = "UNSC Light Brigade Aft Atmospherics"
+	icon_state = "yellow"
 
 /area/destroyer/unsclightbrigade/generalstorage
 	name = "UNSC Light Brigade General Storage Room"
@@ -82,11 +84,16 @@
 
 /area/destroyer/unsclightbrigade/portsidehall
 	name = "UNSC Light Brigade Portisde Hallway"
+	icon_state = "green"
 
 /area/destroyer/unsclightbrigade/starboardhall
 	name = "UNSC Light Brigade Starboard Hallway"
+	icon_state = "blue"
 
 /area/destroyer/unsclightbrigade/centralstorage
+	name = "UNSC Light Brigade Centralstorage Hallway"
+
+/area/destroyer/unsclightbrigade/centralstoragefore
 	name = "UNSC Light Brigade Centralstorage Hallway"
 
 /area/destroyer/unsclightbrigade/toolstorageaft
