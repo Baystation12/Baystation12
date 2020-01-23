@@ -35,7 +35,7 @@
 
 /datum/antagonist/proc/print_player(var/datum/mind/ply)
 	var/role = ply.assigned_role ? "\improper[ply.assigned_role]" : (ply.special_role ? "\improper[ply.special_role]" : "unknown role")
-	var/text = "<br><b>[ply.name]</b> (<b>[ply.key]</b>) as \a <b>[role]</b> ("
+	var/text = "<br><b>[ply.name]</b> [check_client_pref(ply.current, "SHOW_CKEY_CREDITS", GLOB.PREF_SHOW) ? "(<b>[ply.key]</b>)" : ""] as \a <b>[role]</b> ("
 	if(ply.current)
 		if(ply.current.stat == DEAD)
 			text += "died"

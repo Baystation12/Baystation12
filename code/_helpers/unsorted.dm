@@ -1127,3 +1127,9 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 		M.start_pulling(t)
 	else
 		step(user.pulling, get_dir(user.pulling.loc, A))
+
+/proc/check_client_pref(var/mob/M, var/pref_key, var/pref_choice)
+	if(M.ckey && M.client)
+		if(M.client.get_preference_value(get_client_preference_by_key(pref_key)) == pref_choice)
+			return TRUE
+	return FALSE

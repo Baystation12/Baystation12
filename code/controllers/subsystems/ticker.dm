@@ -400,19 +400,19 @@ Helpers
 					to_chat(Player, "<font color='red'><b>You did not survive the events on [station_name()]...</b></font>")
 	to_world("<br>")
 
-	for (var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
-		if (aiPlayer.stat != 2)
-			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws at the end of the round were:</b>")
+	for(var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
+		if(aiPlayer.stat != 2)
+			to_world("<b>[aiPlayer.name] [check_client_pref(aiPlayer, "SHOW_CKEY_CREDITS", GLOB.PREF_SHOW) ? "(Played by: [aiPlayer.key])\'s" : ""] laws at the end of the round were:</b>")
 
 		else
-			to_world("<b>[aiPlayer.name] (Played by: [aiPlayer.key])'s laws when it was deactivated were:</b>")
+			to_world("<b>[aiPlayer.name] [check_client_pref(aiPlayer, "SHOW_CKEY_CREDITS", GLOB.PREF_SHOW) ? "(Played by: [aiPlayer.key])\'s" : ""] laws when it was deactivated were:</b>")
 
 		aiPlayer.show_laws(1)
 
 		if (aiPlayer.connected_robots.len)
 			var/robolist = "<b>The AI's loyal minions were:</b> "
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
-				robolist += "[robo.name][robo.stat?" (Deactivated) (Played by: [robo.key]), ":" (Played by: [robo.key]), "]"
+				robolist += "[robo.name][robo.stat ? " (Deactivated)" : ""] [check_client_pref(robo, "SHOW_CKEY_CREDITS", GLOB.PREF_SHOW) ? "(Played by: [robo.key])" : ""],"
 			to_world("[robolist]")
 
 	var/dronecount = 0
@@ -422,13 +422,13 @@ Helpers
 		if(istype(robo,/mob/living/silicon/robot/drone))
 			dronecount++
 			continue
-
+			
 		if (!robo.connected_ai)
 			if (robo.stat != 2)
-				to_world("<b>[robo.name] (Played by: [robo.key]) survived as an AI-less synthetic! Its laws were:</b>")
+				to_world("<b>[robo.name] [check_client_pref(robo, "SHOW_CKEY_CREDITS", GLOB.PREF_SHOW) ? "(Played by: [robo.key])" : ""] survived as an AI-less synthetic! Its laws were:</b>")
 
 			else
-				to_world("<b>[robo.name] (Played by: [robo.key]) was unable to survive the rigors of being a synthetic without an AI. Its laws were:</b>")
+				to_world("<b>[robo.name] [check_client_pref(robo, "SHOW_CKEY_CREDITS", GLOB.PREF_SHOW) ? "(Played by: [robo.key])" : ""] was unable to survive the rigors of being a synthetic without an AI. Its laws were:</b>")
 
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
