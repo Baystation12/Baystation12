@@ -1,4 +1,4 @@
-/area/destroyer/unsclightbrigade
+	/area/destroyer/unsclightbrigade
 	name = "UNSC Light Brigade"
 	has_gravity = 1
 	power_environ = 1
@@ -74,13 +74,6 @@
 
 /area/destroyer/unsclightbrigade/generalstorage
 	name = "UNSC Light Brigade General Storage Room"
-
-/area/destroyer/unsclightbrigade/crewbathroom
-	name = "UNSC Light Brigade Crew Bathroom"
-
-/area/destroyer/unsclightbrigade/centralhall
-	name = "UNSC Light Brigade Central Hallway"
-	icon_state = "yellow"
 
 /area/destroyer/unsclightbrigade/portsidehall
 	name = "UNSC Light Brigade Portisde Hallway"
