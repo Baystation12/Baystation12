@@ -26,7 +26,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/unsc_achlys/marine
-	name = "Marine"
+	name = "Marine Standard"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
