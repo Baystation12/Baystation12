@@ -170,27 +170,25 @@
 			icon_state = "drying_rack-close"
 
 /obj/machinery/smartfridge/drying_rack/proc/dry()
-
 	for(var/datum/stored_items/I in item_records)
 		for(var/thing in I.instances)
-
 			var/remove_thing = FALSE
 			if(istype(thing, /obj/item/weapon/reagent_containers/food/snacks))
 				var/obj/item/weapon/reagent_containers/food/snacks/S = thing
-				if(S.dry || !I.get_specific_product(get_turf(src), S)) 
+				if(S.dry || !I.get_specific_product(get_turf(src), S))
 					continue
 				if(S.dried_type == S.type)
 					S.dry = 1
 					S.SetName("dried [S.name]")
 					S.color = "#a38463"
 					stock_item(S)
-					return
+					remove_thing = TRUE
 				else
 					var/D = S.dried_type
 					new D(get_turf(src))
 					remove_thing = TRUE
 
-			if(istype(thing, /obj/item/stack/material))
+			else if(istype(thing, /obj/item/stack/material))
 				var/obj/item/stack/material/skin = thing
 				if(!istype(skin.material, /material/skin))
 					continue
@@ -200,7 +198,7 @@
 				var/material/leather_mat = SSmaterials.get_material_by_name(skin_mat.tans_to)
 				stock_item(new leather_mat.stack_type(get_turf(src), skin.amount, skin_mat.tans_to))
 				remove_thing = TRUE
-			
+
 			if(remove_thing)
 				I.instances -= thing
 				I.amount--
