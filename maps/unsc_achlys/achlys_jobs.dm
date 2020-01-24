@@ -21,6 +21,7 @@ GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 	spawn_positions = 10
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_anchlys/sangheili
+	whitelisted_species = list(/datum/job/achlys/sangheili)
 	spawnpoint_override = "Achlys Prison"
 	faction_whitelist = "Covenant"
 	latejoin_at_spawnpoints = TRUE
@@ -32,6 +33,7 @@ GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 	spawn_positions = 10
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/prisoner
+	whitelisted_species = list(/datum/species/human)
 	spawnpoint_override = "Achlys Prison"
 	latejoin_at_spawnpoints = TRUE
 	intro_blurb = "You are a prisoner on the UNSC Achlys where something terrible has happened. You've been drifting in space for what felt like days but something changed with the monsters. Something big is happening in engineering."
@@ -59,6 +61,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	spawn_positions = 18
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine
+	whitelisted_species = list(/datum/species/human)
 	access = list(142)
 	spawnpoint_override = "Dante Enlisted"
 	latejoin_at_spawnpoints = TRUE
@@ -70,6 +73,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	spawn_positions = 6
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine/operative
+	whitelisted_species = list(/datum/species/human)
 	access = list(142)
 	spawnpoint_override = "Dante Enlisted"
 	latejoin_at_spawnpoints = TRUE
@@ -81,6 +85,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	spawn_positions = 2
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/SL
+	whitelisted_species = list(/datum/species/human)
 	access = list(142,143)
 	spawnpoint_override = "Dante Enlisted"
 	latejoin_at_spawnpoints = TRUE
@@ -109,6 +114,7 @@ GLOBAL_LIST_EMPTY(dante_pilot_spawns)
 	spawn_positions = 2
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/pilot
+	whitelisted_species = list(/datum/species/human)
 	access = list(144)
 	spawnpoint_override = "Dante Pilot"
 	latejoin_at_spawnpoints = TRUE
@@ -137,6 +143,7 @@ GLOBAL_LIST_EMPTY(dante_officer_spawns)
 	spawn_positions = 1
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/CO
+	whitelisted_species = list(/datum/species/human)
 	access = list(142,143,144,145)
 	spawnpoint_override = "Dante Officer"
 	latejoin_at_spawnpoints = TRUE
@@ -147,5 +154,4 @@ GLOBAL_LIST_EMPTY(dante_officer_spawns)
 	allowed_spawns = list("Dante Officer","Dante Pilot","Dante Enlisted","Achlys Prison")
 
 	species_to_job_whitelist = list(/datum/species/sangheili = list(/datum/job/achlys/sangheili))
-
 	species_to_job_blacklist = list(/datum/species/human = list(/datum/job/achlys/sangheili))
