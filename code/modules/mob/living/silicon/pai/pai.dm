@@ -4,7 +4,7 @@
 	icon_state = "repairbot"
 
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
-	pass_flags = 1
+	pass_flags = PASS_FLAG_TABLE
 	mob_size = MOB_SMALL
 
 	can_pull_size = ITEM_SIZE_SMALL

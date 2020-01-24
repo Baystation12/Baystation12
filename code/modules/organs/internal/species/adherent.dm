@@ -100,8 +100,13 @@
 
 /obj/item/organ/internal/powered/float/Process()
 	. = ..()
-	if(active && owner && owner.floatiness <= 5)
-		owner.make_floating(5)
+	if(owner)
+		if(active)
+			owner.pass_flags |= PASS_FLAG_TABLE
+			if(owner.floatiness <= 5)
+				owner.make_floating(5)
+		else
+			owner.pass_flags &= ~PASS_FLAG_TABLE
 
 /obj/item/organ/internal/eyes/adherent
 	name = "receptor prism"
