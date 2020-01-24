@@ -35,7 +35,7 @@
 	var/icon_state_novisr = "Helmet ODST Transparent"
 	var/item_state_novisr = "Odst Helmet Transparent"
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
-	body_parts_covered = HEAD|FACE
+	body_parts_covered = HEAD|FACE|EYES
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	flash_protection = FLASH_PROTECTION_MODERATE
 	cold_protection = HEAD | FACE
