@@ -1,0 +1,4 @@
+author: "WezYo"
+delete-after: True
+changes: 
+  - bugfix: "Flying drones can now open windoors"
