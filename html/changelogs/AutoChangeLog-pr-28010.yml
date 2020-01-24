@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - bugfix: "Having more than 10 brain damage no longer grants immunity to peridaxon's side effects (confusion and drowsiness)"
