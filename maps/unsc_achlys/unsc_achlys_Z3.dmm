@@ -217,7 +217,7 @@
 "ei" = (/obj/machinery/light/small{dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "ej" = (/turf/simulated/floor/tranquility/catwalk4,/area/achlys/one/z3prisonupper4)
 "ek" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/random/achlock,/obj/structure/floodspawner{spawn_spot_x = 74; spawn_spot_y = 76},/turf/simulated/floor/tiled,/area/achlys/three/z3dormhalls)
-"el" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/table/standard,/obj/item/weapon/handcuffs,/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
+"el" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/table/standard,/obj/item/weapon/handcuffs,/obj/item/weapon/research/sekrits{tag = "retrievethis"},/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
 "em" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms2)
 "en" = (/obj/structure/vent,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms2)
 "eo" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
