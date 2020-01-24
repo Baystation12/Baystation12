@@ -150,12 +150,8 @@ var/global/list/image/splatter_cache=list()
 	amount = 0
 	var/list/drips = list()
 
-/obj/effect/decal/cleanable/blood/drip/Initialize()
-	..()
-	return INITIALIZE_HINT_NORMAL
-
 /obj/effect/decal/cleanable/blood/drip/New()
-	..()
+	. = ..()
 	drips |= icon_state
 
 /obj/effect/decal/cleanable/blood/writing
