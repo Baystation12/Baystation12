@@ -20,7 +20,7 @@ GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 	total_positions = 10
 	spawn_positions = 10
 	selection_color = "#800080"
-	outfit_type = /decl/hierarchy/outfit/job/unsc_anchlys/sangheili
+	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/sangheili
 	whitelisted_species = list(/datum/job/achlys/sangheili)
 	spawnpoint_override = "Achlys Prison"
 	faction_whitelist = "Covenant"
@@ -72,7 +72,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	total_positions = 6
 	spawn_positions = 6
 	selection_color = "#0A0A95"
-	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine/operative
+	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/operative
 	whitelisted_species = list(/datum/species/human)
 	access = list(142)
 	spawnpoint_override = "Dante Enlisted"
