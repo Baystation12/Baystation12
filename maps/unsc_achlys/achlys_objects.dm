@@ -175,6 +175,7 @@
 	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth."
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "nav_computer"
+	health = 30
 	light_range = 1
 	light_color = "#ebf7fe"
 	density = 1
