@@ -73,7 +73,7 @@
 	name = "Prisoner"
 
 	l_ear = null
-	r_ear = /obj/item/device/flashlight/pen
+	r_ear = /obj/item/device/flashlight/pen/bright
 	uniform = /obj/item/clothing/under/color/orange
 	shoes = /obj/item/clothing/shoes/orange
 	pda_slot = null
