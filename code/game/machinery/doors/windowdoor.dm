@@ -83,7 +83,7 @@
 	var/mob/M = AM // we've returned by here if M is not a mob
 	if (src.operating)
 		return
-	if (src.density && (!issmall(M) || ishuman(M)) && src.allowed(AM))
+	if (src.density && (!issmall(M) || ishuman(M) || issilicon(M)) && src.allowed(AM))
 		open()
 		if(src.check_access(null))
 			sleep(50)
