@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - imageadd: "Adds animations for the sleeper & bodyscanner when active & occupied."
+  - soundadd: "Adds a scanning sound for the bodyscanner."
