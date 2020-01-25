@@ -78,6 +78,7 @@
 	var/obj/machinery/mineral/output = null
 	var/held_items = list()
 	var/stack_amt = 50; // Amount to stack before releassing
+	var/list/loading = list()
 
 /obj/machinery/mineral/stacking_machine/New()
 	..()
@@ -94,10 +95,8 @@
 
 /obj/machinery/mineral/stacking_machine/process()
 	if (src.output && src.input)
-		var/turf/T = get_turf(input)
-		for(var/obj/item/O in T.contents)
+		for(var/obj/item/O in loading)
 			if(istype(O, /obj/item/stack/material))
-
 				var/obj/item/stack/material/S = O
 				var/obj/item/stack/material/held_stack
 				if(held_items[S.default_type])
@@ -109,9 +108,15 @@
 					held_stack.loc = src
 					held_items[S.default_type] = held_stack
 				try_produce_stack(held_stack)
-
 			else
 				O.loc = output.loc
+
+		//delay 1 tick in grabbing resources
+		loading.Cut()
+		var/turf/T = get_turf(input)
+		for(var/obj/item/O in T.contents)
+			loading += O
+
 
 	if(console)
 		console.updateUsrDialog()

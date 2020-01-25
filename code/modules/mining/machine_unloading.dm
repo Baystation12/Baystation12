@@ -9,6 +9,7 @@
 	anchored = 1.0
 	var/obj/machinery/mineral/input = null
 	var/obj/machinery/mineral/output = null
+	var/list/loading = list()
 
 
 /obj/machinery/mineral/unloading_machine/New()
@@ -34,13 +35,14 @@
 				i++
 				if (i>=10)
 					return
-		if (locate(/obj/item, input.loc))
-			var/obj/item/O
-			var/i
-			for (i = 0; i<10; i++)
-				O = locate(/obj/item, input.loc)
-				if (O)
-					O.loc = src.output.loc
-				else
-					return
+
+		for(var/obj/item/O in loading)
+			O.loc = src.output.loc
+
+		//delay 1 tick in grabbing resources
+		loading.Cut()
+		for(var/obj/item/O in input.loc)
+			loading += O
+			if(loading.len >= 10)
+				break
 	return
