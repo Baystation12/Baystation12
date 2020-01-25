@@ -239,6 +239,13 @@
 
 	flags = 0
 
+/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_so/plat_sergeant
+	name = "Marine Platoon Sergeant"
+
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e6, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
 /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_iwo
 	name = "Infantry Weapons Officer"
 

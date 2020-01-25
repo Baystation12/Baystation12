@@ -48,10 +48,11 @@
 		light.destroy()
 		light = null
 	return ..()
-	
+
+/atom/var/dont_block_lighting = 0
 /atom/set_opacity()
 	. = ..()
-	if(.)
+	if(. && !dont_block_lighting)
 		var/turf/T = loc
 		if(istype(T))
 			T.handle_opacity_change(src)

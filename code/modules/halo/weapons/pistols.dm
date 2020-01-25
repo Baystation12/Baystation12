@@ -40,7 +40,7 @@
 /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum
 	name = "\improper CO\'s Magnum"
 	desc = "I don't keep it loaded, Son. You'll have to find ammo as you go."
-	accuracy = 3
+	accuracy = 2
 	burst = 2
 
 /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum/New()

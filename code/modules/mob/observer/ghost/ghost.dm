@@ -58,7 +58,13 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		spawn(10) // wait for the observer mob to receive the client's key
 			mind = new /datum/mind(key)
 			mind.current = src
-	if(!T)	T = pick(GLOB.latejoin_ghosts | GLOB.latejoin | GLOB.latejoin_cryo | GLOB.latejoin_gateway)			//Safety in case we cannot find the body's position
+	if(!T)
+		var/list/spawn_candidates = GLOB.latejoin_ghosts | GLOB.latejoin | GLOB.latejoin_cryo | GLOB.latejoin_gateway
+		if(spawn_candidates.len)
+			T = pick(spawn_candidates)			//Safety in case we cannot find the body's position
+		else
+			T = locate(1,1,1)
+			log_admin("WARNING: No valid spawn points found for observers, spawning [src] (ckey:[src.ckey]) at 1,1,1")
 	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts

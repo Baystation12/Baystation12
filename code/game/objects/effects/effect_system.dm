@@ -12,6 +12,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	mouse_opacity = 0
 	unacidable = 1//So effect are not targeted by alien acid.
 	pass_flags = PASSTABLE | PASSGRILLE
+	dont_block_lighting = 1
 
 /datum/effect/effect/system
 	var/number = 3
