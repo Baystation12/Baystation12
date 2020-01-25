@@ -3,7 +3,7 @@
 	name = "M12 Warthog LRV"
 	desc = "A nimble vehicle capable of providing anti-infantry support and small-scale troop transport."
 
-	icon = 'code/modules/halo/vehicles/finalwarthog-chaingun.dmi'
+	icon = 'code/modules/halo/vehicles/types/finalwarthog-chaingun.dmi'
 	icon_state = "warthog-chaingun"
 	anchored = 1
 
@@ -17,7 +17,8 @@
 	occupants = list(1,1)
 	exposed_positions = list("driver" = 25,"passenger" = 25,"gunner" = 25)
 
-	vehicle_size = 32
+	vehicle_size = ITEM_SIZE_VEHICLE
+	capacity_flag = ITEM_SIZE_NORMAL
 
 	move_sound = 'code/modules/halo/sounds/warthog_move.ogg'
 
@@ -35,7 +36,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/warthog_turret)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/warthog)
-	cargo_capacity = 20 //Can hold, at max, 5 normals
 
 /obj/item/weapon/gun/vehicle_turret/warthog_turret
 	name = "Warthog Turret"
@@ -53,10 +53,11 @@
 	name = "M12 Warthog LRV Recon Modified"
 	desc = "A nimble vehicle capable of performing small scale recon operations."
 
-	icon = 'code/modules/halo/vehicles/finalwarthog-turretless.dmi'
+	icon = 'code/modules/halo/vehicles/types/finalwarthog-turretless.dmi'
 	icon_state = "warthog-turretless"
 
 	vehicle_move_delay = 1.6
+	capacity_flag = ITEM_SIZE_LARGE
 
 	occupants = list(2,0)
 	exposed_positions = list("driver" = 15,"passenger" = 20)
@@ -65,10 +66,11 @@
 	name = "M12 Warthog LRV Troop Transport Modified"
 	desc = "A nimble vehicle capable of providing small to medium scale troop transport."
 
-	icon = 'code/modules/halo/vehicles/finalwarthog.dmi'
+	icon = 'code/modules/halo/vehicles/types/finalwarthog.dmi'
 	icon_state = "Warthog"
 
 	vehicle_move_delay = 1.4
+	capacity_flag = ITEM_SIZE_HUGE
 
 	occupants = list(4,0)
 	exposed_positions = list("driver" = 15,"passenger" = 30)
@@ -77,5 +79,5 @@
 	name = "M12 Warthog LRV Police Modified"
 	desc = "A nimble vehicle capable of providing small to medium scale troop transport."
 
-	icon = 'code/modules/halo/vehicles/GCPD_Warthog.dmi'
+	icon = 'code/modules/halo/vehicles/types/GCPD_Warthog.dmi'
 	icon_state = "Warthog"

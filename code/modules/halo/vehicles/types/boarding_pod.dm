@@ -9,8 +9,6 @@
 	occupants = list(8,0)
 	pod_range = 8
 
-	vehicle_size = 128
-
 	light_color = "#E1FDFF"
 
 /obj/vehicles/drop_pod/overmap/boarding_pod/update_object_sprites()
@@ -50,7 +48,7 @@
 /obj/vehicles/drop_pod/overmap/boarding_pod
 	name = "Class-3 Armoured Boarding Pod"
 	desc = "A modified varient of the \"Bumblebee\" lifeboat, with extra armour plating to survive impact with other spacefaring vessels."
-	icon = 'code/modules/halo/vehicles/bumblebee_full.dmi'
+	icon = 'code/modules/halo/vehicles/types/bumblebee_full.dmi'
 	icon_state = "boarding"
 
 	bound_width = 64
@@ -79,7 +77,7 @@
 /obj/vehicles/drop_pod/overmap/boarding_pod/covenant
 	name = "Boarding Pod"
 	desc = "A modified escape pod, with extra armour plating to enable survival on impact with other spacefaring vessels."
-	icon = 'code/modules/halo/vehicles/covenant_pods.dmi'
+	icon = 'code/modules/halo/vehicles/types/covenant_pods.dmi'
 	icon_state = "cov_boarding"
 
 	bound_width = 64

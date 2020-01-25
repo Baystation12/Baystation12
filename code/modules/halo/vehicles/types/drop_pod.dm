@@ -13,7 +13,8 @@
 
 	occupants = list(0,0)
 
-	vehicle_size = 32
+	vehicle_size = ITEM_SIZE_VEHICLE_SMALL
+	capacity_flag = ITEM_SIZE_VEHICLE_SMALL
 
 	comp_prof =/datum/component_profile/drop_pod
 
@@ -210,7 +211,6 @@
 	gunner_weapons = list()
 	pos_to_check = "gunner" //Allows for overriding position checks for equip/firing of mounted weapon.
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/drop_pod) //Vital components, engine, thrusters etc.
-	cargo_capacity = 8 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
 
 /obj/item/vehicle_component/health_manager/drop_pod
 	integrity = 100

@@ -8,8 +8,6 @@
 	drop_accuracy = 10
 	occupants = list(8,0)
 
-	vehicle_size = 128
-
 /obj/vehicles/drop_pod/escape_pod/update_object_sprites()
 	//Enclosed, we don't need to care about the person-sprites.
 
@@ -33,7 +31,7 @@
 /obj/vehicles/drop_pod/escape_pod/bumblebee
 	name = "Class-3 Enclosed Heavy Lifeboat"
 	desc = "An enclosed environment for use in emergency evacuation procedures."
-	icon = 'code/modules/halo/vehicles/bumblebee_full.dmi'
+	icon = 'code/modules/halo/vehicles/types/bumblebee_full.dmi'
 	icon_state = "escape"
 
 	bound_width = 64
@@ -62,7 +60,7 @@
 /obj/vehicles/drop_pod/escape_pod/covenant
 	name = "Escape Pod"
 	desc = "An enclosed environment for use in emergency evacuation procedures."
-	icon = 'code/modules/halo/vehicles/covenant_pods.dmi'
+	icon = 'code/modules/halo/vehicles/types/covenant_pods.dmi'
 	icon_state = "cov_escape"
 
 	bound_width = 64

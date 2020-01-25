@@ -188,7 +188,7 @@ proc/age2agedescription(age)
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0)
+/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/progbar_on_user = 0)
 	if(!user)
 		return 0
 	var/atom/target_loc = null
@@ -206,7 +206,7 @@ proc/age2agedescription(age)
 
 	var/datum/progressbar/progbar
 	if (progress)
-		progbar = new(user, delay, target)
+		progbar = new(user, delay, progbar_on_user ? user : target)
 
 	var/endtime = world.time + delay
 	var/starttime = world.time

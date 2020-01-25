@@ -3,7 +3,7 @@
 	name = "Bull APC"
 	desc = "An old APC chassis with modern modifications and a mounted machine gun."
 
-	icon = 'code/modules/halo/vehicles/Bull.dmi'
+	icon = 'code/modules/halo/vehicles/types/Bull.dmi'
 	icon_state = "bull"
 	anchored = 1
 
@@ -17,7 +17,8 @@
 	occupants = list(4,1)
 	exposed_positions = list("driver" = 5,"gunner" = 5)
 
-	vehicle_size = 64
+	vehicle_carry_size = ITEM_SIZE_VEHICLE_SMALL
+	capacity_flag = ITEM_SIZE_VEHICLE
 
 	move_sound = 'code/modules/halo/sounds/warthog_move.ogg'
 
@@ -41,4 +42,3 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/warthog_turret)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/bull)
-	cargo_capacity = 32 //Can hold, at max, 8 normals

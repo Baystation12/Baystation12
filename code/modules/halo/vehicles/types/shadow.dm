@@ -3,7 +3,7 @@
 	name = "Type 29 Troop/Vehicle Transport"
 	desc = "A well armoured and armed heavy troop and vehicle transport vehicle."
 
-	icon = 'code/modules/halo/vehicles/shadow.dmi'
+	icon = 'code/modules/halo/vehicles/types/shadow.dmi'
 	icon_state = "shadow"
 	anchored = 1
 
@@ -17,7 +17,8 @@
 
 	occupants = list(4,1)
 
-	vehicle_size = 64
+	vehicle_carry_size = ITEM_SIZE_VEHICLE_SMALL
+	capacity_flag = ITEM_SIZE_VEHICLE
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
@@ -43,10 +44,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/shadow_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/shadow)
-	max_vehicle_size = 16
-	vehicle_capacity = 16
-	cargo_capacity = 36 //Can hold, at max, 9 normals
-	cargo_allow_massive = 1
 
 /obj/item/weapon/gun/vehicle_turret/shadow_cannon
 	name = "Shadow Cannon"

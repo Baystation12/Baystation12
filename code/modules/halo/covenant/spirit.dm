@@ -6,7 +6,7 @@
 	desc = "A large, tuning fork shaped ship with a underslung heavy plasma cannon. This one appears to have it's controls locked out."
 	anchored = 1
 	density = 1
-	icon = 'code/modules/halo/vehicles/spirit.dmi'
+	icon = 'code/modules/halo/vehicles/types/spirit.dmi'
 	icon_state = "base"
 	bound_x = 144
 	bound_y = 144

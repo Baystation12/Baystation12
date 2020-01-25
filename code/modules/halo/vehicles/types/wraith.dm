@@ -3,7 +3,7 @@
 	name = "Type-26 Assault Gun Carriage"
 	desc = "The Type-26 Assault Gun Carriage is equipped with a heavy plasma mortar and a set of twin linked medium plasma cannons."
 
-	icon = 'code/modules/halo/vehicles/Wraith.dmi'
+	icon = 'code/modules/halo/vehicles/types/Wraith.dmi'
 	icon_state = "wraith"
 	anchored = 1
 
@@ -17,7 +17,7 @@
 
 	occupants = list(0,1)
 
-	vehicle_size = 64
+	vehicle_size = ITEM_SIZE_VEHICLE
 
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
@@ -42,7 +42,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/wraith)
-	cargo_capacity = 12 //Can hold, at max, two normals
 
 /obj/item/weapon/gun/vehicle_turret/switchable/wraith_cannon
 	name = "Wraith Cannon"
@@ -77,7 +76,7 @@
 
 /obj/item/projectile/covenant/wraith_cannon
 	damage = 100
-	icon = 'code/modules/halo/vehicles/Wraith.dmi'
+	icon = 'code/modules/halo/vehicles/types/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
 	damage_type = "bomb"
 	density = 0
