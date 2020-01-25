@@ -75,7 +75,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 55, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
 	armor_thickness_modifiers = list()
 	unacidable = 1
-	allowed = list(/obj/item/weapon/melee/energy/elite_sword, /obj/item/weapon/grenade/plasma, /obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/energy/plasmarifle)
+	max_suitstore_w_class = ITEM_SIZE_HUGE
 
 /obj/item/clothing/shoes/sangheili
 	name = "Sanghelli Leg Armour"

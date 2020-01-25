@@ -98,8 +98,8 @@
 /datum/job/bertelsunsc_ship_marine
 	title = "UNSC Marine"
 	spawn_faction = "UNSC"
-	total_positions = 32
-	spawn_positions = 32
+	total_positions = 16
+	spawn_positions = 16
 	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine
 	selection_color = "#0A0A95"
 	alt_titles = list("Machine Gunner Marine" = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmachinegunner,"Marine Combat Medic" = /decl/hierarchy/outfit/job/UNSC_ship/bertelscombatmedic,"Assault Recon Marine",\
@@ -107,7 +107,6 @@
 	"EVA Combat Marine","Marine Combat Technician" = /decl/hierarchy/outfit/job/UNSC_ship/bertelscombattechie)
 	access = list(access_unsc,144,192)
 	spawnpoint_override = "UNSC Base Spawns"
-	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
 	account_allowed = 1
@@ -123,7 +122,6 @@
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_armoury,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
-	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
 	account_allowed = 1
@@ -135,11 +133,10 @@
 	spawn_faction = "UNSC"
 	total_positions = 1
 	spawn_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_so
+	outfit_type = /decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine_so/plat_sergeant
 	selection_color = "#0A0A95"
 	access = list(access_unsc,144,145,192,access_unsc_armoury,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
-	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
 	account_allowed = 1
@@ -155,7 +152,6 @@
 	selection_color = "#0A0A95"
 	access = list(access_unsc,142,144,145,192,access_unsc_armoury,access_unsc_marine)
 	spawnpoint_override = "UNSC Base Spawns"
-	open_slot_on_death = 1
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
 	account_allowed = 1

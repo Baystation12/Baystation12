@@ -24,7 +24,7 @@
 	projectile_type = /obj/item/projectile/bullet/a127_saphe
 
 /obj/item/projectile/bullet/a127_saphe
-	damage = 70		//deadly but inaccurate
+	damage = 55		//deadly but inaccurate
 	accuracy = -1
 
 /obj/item/projectile/bullet/a127
@@ -75,7 +75,7 @@
 
 //deadly but inaccurate
 /obj/item/projectile/bullet/a127_saphp
-	damage = 20
+	damage = 40
 	armor_penetration = 20
 	accuracy = 1
 
@@ -164,7 +164,7 @@
 
 /obj/item/projectile/bullet/a762_M392
 	damage = 30
-	armor_penetration = 45
+	armor_penetration = 15
 
 /obj/item/weapon/storage/box/m762_ap
 	name = "box of 7.62mm M118 magazines"

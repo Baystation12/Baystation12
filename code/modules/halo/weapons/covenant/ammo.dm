@@ -89,7 +89,7 @@
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
 	damage = 20 // Low damage, special effect would do the most damage.
-	accuracy = 1
+	accuracy = 0
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
@@ -199,7 +199,7 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
-#define RIFLENEEDLE_TRACK_DIST 5
+#define RIFLENEEDLE_TRACK_DIST 2
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
@@ -209,7 +209,7 @@
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	tracer_delay_time = 0.5 SECONDS
 	invisibility = 101
-	armor_penetration = 35
+	armor_penetration = 20
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle/Move()
 	if(kill_count - initial(kill_count) > RIFLENEEDLE_TRACK_DIST)

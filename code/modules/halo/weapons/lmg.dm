@@ -20,7 +20,7 @@
 	burst = 5
 	burst_delay = 1
 	burst_accuracy = list(0,-1,-1,-2,-2)
-	dispersion = list(0.8, 1.0, 1.3, 1.5, 1.8)
+	dispersion = list(0.5, 0.7, 1.0, 1.2, 1.5)
 	w_class = ITEM_SIZE_HUGE
 	wielded_item_state = "SAW-wielded"
 	item_icons = list(
