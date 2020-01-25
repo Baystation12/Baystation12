@@ -268,7 +268,8 @@ var/list/ai_verbs_default = list(
 	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
 	our_visualnet = all_networks[network]
 	if(isnull(our_visualnet))
-		all_networks[network] = new /datum/visualnet/camera
+		our_visualnet = new /datum/visualnet/camera
+		all_networks[network] = our_visualnet
 
 	if (istype(loc, /turf))
 		add_ai_verbs(src)
