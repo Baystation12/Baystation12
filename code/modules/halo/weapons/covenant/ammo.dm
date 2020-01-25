@@ -94,8 +94,8 @@
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
-	armor_penetration = 20
-	var/shards_to_explode = 6
+	armor_penetration = 0
+	var/shards_to_explode = 8
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
 
