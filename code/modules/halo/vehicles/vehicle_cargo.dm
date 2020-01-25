@@ -1,6 +1,5 @@
 
 /obj/vehicles/proc/can_put_cargo(var/obj/object)
-	world << "/obj/vehicles/proc/can_put_cargo([object] [object.type])"
 	if(!istype(object))
 		return 0
 	if(object.anchored)
