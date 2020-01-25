@@ -86,9 +86,6 @@
 /area/destroyer/unsclightbrigade/centralstorage
 	name = "UNSC Light Brigade Centralstorage Hallway"
 
-/area/destroyer/unsclightbrigade/centralstoragefore
-	name = "UNSC Light Brigade Centralstorage Hallway"
-
 /area/destroyer/unsclightbrigade/toolstorageaft
 	name = "UNSC Light Brigade Tool Storage Aft"
 
