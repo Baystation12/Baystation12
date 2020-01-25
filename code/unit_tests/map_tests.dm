@@ -482,6 +482,18 @@ datum/unit_test/ladder_check/start_test()
 		pass("All simple pipes faced an appropriate direction.")
 	return 1
 
+//=======================================================================================
+
+/datum/unit_test/map_has_observer_spawns
+	name = "MAP: Observer spawn points should exist"
+
+/datum/unit_test/map_has_observer_spawns/start_test()
+	var/list/spawn_candidates = GLOB.latejoin_ghosts | GLOB.latejoin | GLOB.latejoin_cryo | GLOB.latejoin_gateway
+	if(!spawn_candidates.len)
+		fail("No valid observer spawn points found.")
+	else
+		pass("Found valid observer spawn points.")
+	return 1
 
 #undef SUCCESS
 #undef FAILURE
