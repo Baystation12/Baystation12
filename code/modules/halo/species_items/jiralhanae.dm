@@ -71,21 +71,17 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	icon_state = "helm_captain"
 	armor = list(melee = 40, bullet = 30, laser = 10,energy = 10, bomb = 10, bio = 0, rad = 0)
 
-
-
-
 /obj/item/clothing/head/helmet/jiralhanae/chieftain_boulder
 	name = "Boulder Chieftain Helm"
 	icon_state = "helm_chieftain_red"
 	armor = list(melee = 40, bullet = 30, laser = 10,energy = 10, bomb = 10, bio = 0, rad = 0)
-
+	armor_thickness = 25
 
 /obj/item/clothing/head/helmet/jiralhanae/chieftain_ram
 	name = "Ram Chieftain Helm"
 	icon_state = "helm_chieftain_blue"
 	armor = list(melee = 40, bullet = 30, laser = 10,energy = 10, bomb = 10, bio = 0, rad = 0)
-
-
+	armor_thickness = 25
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant
 	icon_state = "helm_covenant"
@@ -161,8 +157,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	icon_state = "armour_chieftain_red"
 	armor = list(melee = 40, bullet = 30, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
-
-
+	armor_thickness = 25
 
 /obj/item/clothing/suit/armor/jiralhanae/blue
 	name = "Jiralhanae Ram Chest Armour"
@@ -181,7 +176,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	icon_state = "armour_chieftain_blue"
 	armor = list(melee = 40, bullet = 30, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
-
+	armor_thickness = 25
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant
 	icon_state = "armour_covenant"
