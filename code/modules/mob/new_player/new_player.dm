@@ -487,10 +487,6 @@
 	new_character.update_eyes()
 	new_character.regenerate_icons()
 
-	if(key == "The_grey_tide")
-		new_character.adjustBrainLoss(10)
-		new_character.disabilities &= (EPILEPSY | TOURETTES | NERVOUS)
-
 	new_character.key = key		//Manually transfer the key to log them in
 	return new_character
 
