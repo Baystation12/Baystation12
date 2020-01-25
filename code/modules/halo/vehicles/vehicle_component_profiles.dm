@@ -176,7 +176,7 @@
 /obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool,var/mob/user)
 	for(var/tool_type in repair_tools_typepaths)
 		if(istype(tool,tool_type))
-			repair_tools_typepaths -= tool.type
+			repair_tools_typepaths -= tool_type
 
 	if(repair_tools_typepaths.len == 0)
 		finalise_repair()
