@@ -1,4 +1,4 @@
-	/area/destroyer/unsclightbrigade
+/area/destroyer/unsclightbrigade
 	name = "UNSC Light Brigade"
 	has_gravity = 1
 	power_environ = 1
