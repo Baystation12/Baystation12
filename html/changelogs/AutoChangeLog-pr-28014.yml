@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Space-Adapted humans' stamina now depends slightly upon gravity levels, with better stamina than baseline humans in low-gravity, worse in standard gravity."
+  - tweak: "Space-Adapted humans are adapted for lower-pressure environments, but suffer in higher pressure environments faster relative to baseline humans."
