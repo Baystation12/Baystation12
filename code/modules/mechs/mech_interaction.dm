@@ -84,7 +84,7 @@
 		setClickCooldown(15)
 		return
 
-	if(!get_cell().checked_use(arms.power_use * CELLRATE))
+	if(!get_cell()?.checked_use(arms.power_use * CELLRATE))
 		to_chat(user, SPAN_WARNING("Error: Power levels insufficient."))
 
 	// User is not necessarily the exosuit, or the same person, so update intent.

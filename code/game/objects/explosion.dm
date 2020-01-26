@@ -2,7 +2,7 @@
 
 proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped)
 	var/multi_z_scalar = 0.35
-	src = null	//so we don't abort once src is deleted
+	UNLINT(src = null)	//so we don't abort once src is deleted
 	spawn(0)
 		var/start = world.timeofday
 		epicenter = get_turf(epicenter)

@@ -68,7 +68,7 @@
 
 	hud_health.overlays.Cut()
 
-	if(!body || !get_cell() || (get_cell().charge <= 0))
+	if(!body || !get_cell() || (get_cell()?.charge <= 0))
 		return
 
 	if(!body.diagnostics || !body.diagnostics.is_functional() || ((emp_damage>EMP_GUI_DISRUPT) && prob(emp_damage*2)))

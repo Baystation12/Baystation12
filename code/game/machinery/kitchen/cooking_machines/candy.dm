@@ -13,6 +13,6 @@
 		"Jelly" = /obj/item/weapon/reagent_containers/food/snacks/variable/jelly
 		)
 
-/obj/machinery/cooker/candy/change_product_appearance(var/obj/item/weapon/reagent_containers/food/snacks/cooked/product)
+/obj/machinery/cooker/candy/change_product_appearance(var/obj/item/weapon/reagent_containers/food/snacks/product)
 	food_color = get_random_colour(1)
 	. = ..()

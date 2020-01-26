@@ -17,7 +17,7 @@
 		D.add_phenomena(phenomena_path)
 		D.update_phenomenas()
 
-/datum/deity_item/boon/single_charge/buy(vaar/mob/living/deity/D)
+/datum/deity_item/boon/single_charge/buy(var/mob/living/deity/D)
 	. = ..()
 	if(istype(.,/spell))
 		var/spell/S = .

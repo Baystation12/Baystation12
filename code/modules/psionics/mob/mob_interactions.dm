@@ -28,7 +28,6 @@
 /mob/living/proc/check_psi_grab(var/obj/item/grab/grab)
 	if(psi && ismob(grab.affecting))
 		INVOKE_PSI_POWERS(src, psi.get_grab_powers(SSpsi.faculties_by_intent[a_intent]), grab.affecting, FALSE)
-	. = ..()
 
 /mob/living/attack_empty_hand(var/bp_hand)
 	if(psi)
