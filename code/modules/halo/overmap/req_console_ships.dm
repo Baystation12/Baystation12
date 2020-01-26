@@ -3,7 +3,7 @@
 /datum/npc_ship/cheap_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_cheap.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_unsc_combat
 	name = "Ship"
@@ -20,7 +20,7 @@
 /datum/npc_ship/heavyarmed_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_heavyarmed.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_unsc_combat
 	name = "Ship"
@@ -37,7 +37,7 @@
 /datum/npc_ship/experimental_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_macplatform_experimental.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_unsc_combat
 	name = "Ship"
@@ -54,7 +54,7 @@
 /datum/npc_ship/unsc_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_tender.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_slipspace_tender
 	name = "Ship"
@@ -74,7 +74,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 /datum/npc_ship/unsc_podcarrier
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_podcarrier.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_podcarrier
 	name = "Ship"
@@ -93,7 +93,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 /datum/npc_ship/unsc_trooptransport
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_trooptransport.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_trooptransport
 	name = "Ship"
