@@ -53,6 +53,14 @@
 	short_text = "Secure the alien artifact"
 	explanation_text = "ONI reports a high value unidentified alien artifact in the sector. It must be secured by the UNSC to prevent falling into the wrong hands."
 
+/datum/objective/retrieve/artifact/unsc/find_target()
+	if(!delivery_areas)
+		for(var/cur_area in (typesof(/area/exo_research_ice_facility/ground/interior) - /area/exo_research_ice_facility/ground/interior) + typesof(/area/exo_research_ice_facility/sublevel1/interior) - /area/exo_research_ice_facility/sublevel1/interior))
+			var/area/A = locate(cur_area)
+			delivery_areas.Add(A)
+
+	return delivery_areas.len
+
 /datum/objective/protect_colony
 	short_text = "Protect the UEG colony from destruction"
 	explanation_text = "There are a million innocent civilians on that colony. Prevent its destruction by any means necessary."
