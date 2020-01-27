@@ -49,6 +49,10 @@
 	win_points += minds_killed.len * points_per_kill
 	return win_points > 0
 */
+//Placeholder areas for below//
+/area/exo_research_ice_facility/ground/interior
+/area/exo_research_ice_facility/sublevel1/interior
+
 /datum/objective/retrieve/artifact/unsc
 	short_text = "Secure the alien artifact"
 	explanation_text = "ONI reports a high value unidentified alien artifact in the sector. It must be secured by the UNSC to prevent falling into the wrong hands."
