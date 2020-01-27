@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - rscdel: "IPCs can no longer be counsellors."
