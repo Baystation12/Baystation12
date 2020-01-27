@@ -67,6 +67,7 @@
 		/datum/objective/overmap/unsc_innie_base)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
 	GLOB.UNSC.has_flagship = 1
+	GLOB.UNSC.has_base = 1
 
 	//setup innie objectives
 	objective_types = list(\

@@ -49,9 +49,6 @@
 	win_points += minds_killed.len * points_per_kill
 	return win_points > 0
 */
-//Placeholder areas for below//
-/area/exo_research_ice_facility/ground/interior
-/area/exo_research_ice_facility/sublevel1/interior
 
 /datum/objective/retrieve/artifact/unsc
 	short_text = "Secure the alien artifact"
