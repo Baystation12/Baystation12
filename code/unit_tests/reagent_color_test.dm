@@ -1,6 +1,6 @@
 
 /datum/unit_test/reagent_colors_test
-	name = "REAGENST: Reagents must have valid colors without alpha in color value"
+	name = "REAGENTS: Reagents must have valid colors without alpha in color value"
 
 /datum/unit_test/reagent_colors_test/start_test()
 	var/list/bad_reagents = list()
