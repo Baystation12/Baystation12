@@ -88,7 +88,7 @@
 	icon_template = 'code/modules/halo/icons/species/r_skirmisher_template.dmi'
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/bird_punch)
-	appearance_flags = HAS_SKIN_TONE | HAS_UNDERWEAR
+	appearance_flags = HAS_SKIN_TONE | HAS_HAIR_COLOR
 
 	pain_mod = 0.8
 	brute_mod = 1.2
