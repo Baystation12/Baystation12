@@ -55,7 +55,7 @@
 
 /datum/objective/retrieve/artifact/unsc/find_target()
 	if(!delivery_areas)
-		for(var/cur_area in (typesof(/area/exo_research_ice_facility/ground/interior) - /area/exo_research_ice_facility/ground/interior) + typesof(/area/exo_research_ice_facility/sublevel1/interior) - /area/exo_research_ice_facility/sublevel1/interior))
+		for(var/cur_area in (typesof(/area/exo_research_ice_facility/ground/interior) - /area/exo_research_ice_facility/ground/interior) + (typesof(/area/exo_research_ice_facility/sublevel1/interior) - /area/exo_research_ice_facility/sublevel1/interior))
 			var/area/A = locate(cur_area)
 			delivery_areas.Add(A)
 
