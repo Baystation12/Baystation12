@@ -3,7 +3,7 @@
 /datum/npc_ship/cheap_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_cheap.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_unsc_combat
 	name = "Ship"
@@ -20,7 +20,7 @@
 /datum/npc_ship/heavyarmed_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_heavyarmed.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_unsc_combat
 	name = "Ship"
@@ -37,7 +37,7 @@
 /datum/npc_ship/experimental_unsc_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_macplatform_experimental.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_unsc_combat
 	name = "Ship"
@@ -54,7 +54,7 @@
 /datum/npc_ship/unsc_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_tender.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_slipspace_tender
 	name = "Ship"
@@ -74,7 +74,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 /datum/npc_ship/unsc_podcarrier
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_podcarrier.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_podcarrier
 	name = "Ship"
@@ -93,7 +93,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 /datum/npc_ship/unsc_trooptransport
 	mapfile_links = list('maps/npc_ships/req_console_ships/unsc_trooptransport.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc_trooptransport
 	name = "Ship"
@@ -113,7 +113,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 /datum/npc_ship/cheap_cov_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_cheap.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(15,36,61,14)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_cov_combat
 	name = "Ship"
@@ -130,7 +130,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 /datum/npc_ship/heavyarmed_cov_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_heavyarmed.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(15,36,61,14)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_cov_combat
 	name = "Ship"
@@ -147,7 +147,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 /datum/npc_ship/experimental_cov_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_laserplatform_experimental.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(15,36,61,14)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_cov_combat
 	name = "Ship"
@@ -164,7 +164,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 /datum/npc_ship/cov_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_tender.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(15,36,61,14)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cov_slipspace_tender
 	name = "Ship"
@@ -184,7 +184,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 /datum/npc_ship/cov_podcarrier
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_podcarrier.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(15,36,61,14)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cov_podcarrier
 	name = "Ship"
@@ -203,7 +203,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 /datum/npc_ship/cov_trooptransport
 	mapfile_links = list('maps/npc_ships/req_console_ships/cov_trooptransport.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(15,36,61,14)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cov_trooptransport
 	name = "Ship"
@@ -223,7 +223,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /datum/npc_ship/cheap_urf_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_cheap.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_urf_combat
 	name = "Ship"
@@ -239,7 +239,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /datum/npc_ship/heavyarmed_urf_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_heavyarmed.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_urf_combat
 	name = "Ship"
@@ -255,7 +255,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /datum/npc_ship/experimental_urf_combat
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_macplatform_experimental.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_urf_combat
 	name = "Ship"
@@ -271,7 +271,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /datum/npc_ship/urf_slipspace_tender
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_tender.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/urf_slipspace_tender
 	name = "Ship"
@@ -290,7 +290,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 /datum/npc_ship/urf_podcarrier
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_podcarrier.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/urf_podcarrier
 	name = "Ship"
@@ -308,7 +308,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 /datum/npc_ship/urf_trooptransport
 	mapfile_links = list('maps/npc_ships/req_console_ships/urf_trooptransport.dmm')
 	fore_dir = WEST
-	map_bounds = list(2,24,49,2)
+	map_bounds = list(12,38,63,12)
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/urf_trooptransport
 	name = "Ship"
