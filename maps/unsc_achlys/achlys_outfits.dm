@@ -26,7 +26,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/unsc_achlys/marine
-	name = "Marine"
+	name = "Marine Standard"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
@@ -104,7 +104,7 @@
 		var/obj/item/weapon/material/twohanded/N = new /obj/item/weapon/material/twohanded/baseballbat
 		H.equip_to_slot_or_del(N,slot_r_hand)
 	else if(prob(5))
-		var/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/U = new /obj/item/weapon/gun/projectile/shotgun/pump/m90_ts/police
+		var/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/U = new /obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police
 		H.equip_to_slot_or_del(U,slot_back)
 	else if(prob(5))
 		var/obj/item/weapon/material/twohanded/T = new /obj/item/weapon/material/twohanded/spear

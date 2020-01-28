@@ -16,6 +16,7 @@
 
 	var/list/affecting	// the list of all items that will be moved this ptick
 	var/id = ""			// the control ID	- must match controller ID
+	var/list/receiving = list()
 
 /obj/machinery/conveyor/centcom_auto
 	id = "round_end_belt"
@@ -68,15 +69,24 @@
 	use_power(100)
 
 	affecting = loc.contents - src		// moved items will be all in loc
-	spawn(1)	// slight delay to prevent infinite propagation due to map order	//TODO: please no spawn() in process(). It's a very bad idea
-		var/items_moved = 0
-		for(var/atom/movable/A in affecting)
-			if(!A.anchored)
-				if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
-					step(A,movedir)
-					items_moved++
-			if(items_moved >= 10)
-				break
+	//spawn(1)	// slight delay to prevent infinite propagation due to map order	//TODO: please no spawn() in process(). It's a very bad idea
+
+	var/obj/machinery/conveyor/other = locate() in get_step(src, movedir)
+	var/items_moved = 0
+	for(var/atom/movable/A in affecting)
+		if(A in receiving)
+			continue
+		if(!A.anchored)
+			if(A.loc == src.loc) // prevents the object from being affected if it's not currently here.
+				if(other)
+					other.receiving += A
+				step(A,movedir)
+				items_moved++
+		if(items_moved >= 10)
+			break
+
+	//clear out the stuff we got this tick
+	receiving = list()
 
 // attack with item, place item on conveyor
 /obj/machinery/conveyor/attackby(var/obj/item/I, mob/user)

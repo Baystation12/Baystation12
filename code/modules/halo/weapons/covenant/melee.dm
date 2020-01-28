@@ -175,18 +175,22 @@
 	//active_force = 60
 	throwforce = 10
 	damtype = PAIN
+	parry_projectiles = 1
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 	lunge_dist = STAFF_LEAP_DIST
 
-/obj/item/weapon/melee/energy/elite_sword/honour_staff/activate(mob/living/user)
-	return
-
-/obj/item/weapon/melee/energy/elite_sword/honour_staff/deactivate(mob/living/user)
-	return
-
+/obj/item/weapon/melee/energy/elite_sword/honour_staff/change_misc_variables(var/deactivate = 0)
+	if(deactivate)
+		hitsound = "swing_hit"
+		damtype = PAIN
+		parry_slice_objects = 0
+	else
+		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+		damtype = BURN
+		parry_slice_objects = 1
 
 //DONER
 
@@ -215,7 +219,6 @@
 //Axe
 
 /obj/item/weapon/melee/energy/elite_sword/dogleraxe
-
 	name = "Sya'tenee's Energy Axe"
 	desc = "A huge, scary-looking energy axe, which looks too heavy to be wielded by humans..."
 	icon = 'code/modules/halo/icons/dogler_weapon_sprites.dmi'

@@ -15,7 +15,7 @@
 	burst_delay = 1.3
 	charge_meter = 0
 	burst_accuracy = list(-2,-2,-2,-1,0,0)
-	dispersion = list(2, 1.8, 1.5, 1.2,0.8, 0.8)
+	dispersion = list(1.7, 1.5, 1.2, 0.9,0.5, 0.5)
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 5
 	advanced_covenant = 1

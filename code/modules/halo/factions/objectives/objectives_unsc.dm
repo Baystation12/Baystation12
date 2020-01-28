@@ -49,6 +49,7 @@
 	win_points += minds_killed.len * points_per_kill
 	return win_points > 0
 */
+
 /datum/objective/retrieve/artifact/unsc
 	short_text = "Secure the alien artifact"
 	explanation_text = "ONI reports a high value unidentified alien artifact in the sector. It must be secured by the UNSC to prevent falling into the wrong hands."
@@ -80,9 +81,9 @@
 	radio_name = "UNSC Overwatch"
 
 /datum/objective/overmap/unsc_innie_base
-	short_text = "Demolish the Insurrectionist base"
-	explanation_text = "Without a command center, the Insurrectionists will be less organized in their defiance. Demolish their base by taking out structural weak points."
+	short_text = "Eliminate the URF Flagship."
+	explanation_text = "Without a command center, the Insurrectionists will be less organized in their defiance. Destroy their flagship."
 	target_faction_name = "Insurrection"
 	objective_type = 0
-	overmap_type = 0
+	overmap_type = 1
 	win_points = 100

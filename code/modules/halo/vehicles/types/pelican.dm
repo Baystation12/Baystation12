@@ -23,7 +23,9 @@
 
 	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
 
-	vehicle_size = 128
+	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
+	vehicle_carry_size = ITEM_SIZE_VEHICLE
+	capacity_flag = ITEM_SIZE_VEHICLE_LARGE
 
 	light_color = "#E1FDFF"
 
@@ -37,10 +39,6 @@
 /datum/component_profile/pelican
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican)
-	cargo_capacity = 48 //Can hold, at max, 9 normals
-	max_vehicle_size = 64
-	vehicle_capacity = 64
-	cargo_allow_massive = 1
 
 /obj/vehicles/air/pelican/unsc
 	faction = "unsc"
@@ -74,7 +72,7 @@
 	pixel_x = -32
 	pixel_y = -32
 
-	overmap_range = 8
+	overmap_range = 2
 
 	takeoff_overlay_icon_state = "thrust"
 	takeoff_sound = 'code/modules/halo/shuttles/pelican_takeoff.ogg'

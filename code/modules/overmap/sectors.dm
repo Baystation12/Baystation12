@@ -86,6 +86,9 @@ var/list/points_of_interest = list()
 	setup_object()
 	generate_targetable_areas()
 
+	if(flagship)
+		GLOB.overmap_tiles_uncontrolled -= range(28,src)
+
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/overmap/LateInitialize()
@@ -129,7 +132,9 @@ var/list/points_of_interest = list()
 		mobs_to_alert |= GLOB.mobs_in_sectors[om]
 	var/list/dirlist = list("north","south","n/a","east","northeast","southeast","n/a","west","northwest","southwest")
 	for(var/mob/m in mobs_to_alert)
-		to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[get_dir(map_sectors["[m.z]"],alert_origin)]]</span>")
+		var/dir_to_ship = get_dir(map_sectors["[m.z]"],alert_origin)
+		if(dir_to_ship != 0)
+			to_chat(m,"<span class = 'danger'>ALERT: Slipspace rupture detected to the [dirlist[dir_to_ship]]</span>")
 
 
 /obj/effect/overmap/proc/do_slipspace_exit_effects(var/exit_loc,var/sound)
@@ -146,7 +151,8 @@ var/list/points_of_interest = list()
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(exit_loc,sound)
+	if(sound)
+		play_jump_sound(exit_loc,sound)
 	send_jump_alert(exit_loc)
 	loc = T
 	walk_to(src,exit_loc,0,1,0)
@@ -165,7 +171,8 @@ var/list/points_of_interest = list()
 	for(var/i=0, i<SLIPSPACE_PORTAL_DIST, i++)
 		T = get_step(T,headingdir)
 	new /obj/effect/slipspace_rupture(T)
-	play_jump_sound(T,sound)
+	if(sound)
+		play_jump_sound(T,sound)
 	//rapidly move into the portal
 	walk_to(src,T,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
@@ -232,7 +239,8 @@ var/list/points_of_interest = list()
 	if(!GLOB.using_map.overmap_z && GLOB.using_map.use_overmap)
 		build_overmap()
 
-	map_z |= loc.z
+	if(!isnull(loc))
+		map_z |= loc.z
 	//map_z = GetConnectedZlevels(z)
 	//for(var/zlevel in map_z)
 	map_sectors["[z]"] = src
@@ -327,6 +335,7 @@ var/list/points_of_interest = list()
 	for(var/mob/player in GLOB.mobs_in_sectors[src])
 		player.dust()
 	loc = null
+
 	message_admins("NOTICE: Overmap object [src] has been destroyed. Please wait as it is deleted.")
 	log_admin("NOTICE: Overmap object [src] has been destroyed.")
 	sleep(10)//To allow the previous message to actually be seen
@@ -347,11 +356,11 @@ var/list/points_of_interest = list()
 		targeting_datum.targeted_location = "target lost"
 	if(superstructure_failing == -1)
 		return
-	if(superstructure_failing == 1)
+	if(superstructure_failing == 1 && (world.time % 4) == 0)
 		if(hull_segments.len == 0)
 			return
 		var/obj/explode_at = pick(hull_segments)
-		explosion(explode_at.loc,2,4,6,8, adminlog = 0)
+		explosion(explode_at.loc,0,1,3,5, adminlog = 0)
 		return
 	var/list/superstructure_strength = get_superstructure_strength()
 	if(isnull(superstructure_strength))

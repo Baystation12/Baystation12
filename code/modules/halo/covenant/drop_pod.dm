@@ -3,6 +3,7 @@
 	name = "T-55 \'IBC\' Drop Pod"
 	desc = "Aerodynamically streamlined for speed and maneuverability for deployment of Covenant warriors to the planet's surface."
 	icon_state = "cov_pod"
+	faction_tag = "Covenant"
 
 /obj/structure/drop_pod_launchbay/covenant
 	icon_state = "cov_bay"

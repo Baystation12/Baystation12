@@ -29,7 +29,7 @@
 	arm_time = 30 //Deciseconds
 	charge_meter = 0
 	force = 10
-	screen_shake = 1
+	screen_shake = 0.5
 
 	fire_sound = null
 

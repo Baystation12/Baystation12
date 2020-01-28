@@ -1,6 +1,7 @@
 
 /datum/job/researcher
 	title = "ONI Researcher"
+	spawn_faction = "UNSC"
 	supervisors = "the ONI Research Director"
 	total_positions = 4
 	spawn_positions = 4

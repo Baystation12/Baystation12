@@ -8,18 +8,17 @@
 	map_bounds = list(1,160,175,1)
 	targeting_locations = list("MAC Cannon" = list(154,106,174,89))
 
-	overmap_spawn_in_me = list(/obj/effect/overmap/sector/rabbit_hole_base)
+	overmap_spawn_in_me = list()
 
 	faction = "Human Colony"
 	base = 1
 	block_slipspace = 1
 
 	parent_area_type = /area/planets/Geminus
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius)
 
 /obj/effect/overmap/sector/geminus_city/LateInitialize()
 	. = ..()
-	new /obj/effect/overmap/ship/npc_ship/shipyard/unsc (loc)
+	GLOB.overmap_tiles_uncontrolled -= range(28,src)
 
 /obj/structure/co_ord_console/vt9_gc
 	icon = 'code/modules/halo/icons/machinery/computer.dmi'

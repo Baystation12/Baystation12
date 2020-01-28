@@ -40,6 +40,8 @@ var/global/list/additional_antag_types = list()
 	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
 
 	var/list/allowed_ghost_roles = list(/datum/ghost_role/mouse)
+	var/ship_lockdown_duration = 0
+	var/ship_lockdown_until = 0
 
 /datum/game_mode/New()
 	..()
@@ -233,6 +235,8 @@ var/global/list/additional_antag_types = list()
 
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
+
+	ship_lockdown_until = world.time + ship_lockdown_duration
 
 	feedback_set_details("round_start","[time2text(world.realtime)]")
 	if(ticker && ticker.mode)

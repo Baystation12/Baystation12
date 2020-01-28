@@ -23,6 +23,7 @@
 
 /obj/item/clothing/glasses/hud/tactical/odst_hud/medic/process_hud(var/mob/M)
 	process_med_hud(M, 1)
+	. = ..()
 
 /obj/item/clothing/head/helmet/odst
 	name = "ODST Rifleman Helmet"
@@ -34,7 +35,7 @@
 	var/icon_state_novisr = "Helmet ODST Transparent"
 	var/item_state_novisr = "Odst Helmet Transparent"
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
-	body_parts_covered = HEAD|FACE
+	body_parts_covered = HEAD|FACE|EYES
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	flash_protection = FLASH_PROTECTION_MODERATE
 	cold_protection = HEAD | FACE
@@ -65,7 +66,6 @@
 	icon_override = ODST_OVERRIDE
 	blood_overlay_type = "armor"
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 100, rad = 25)
-	//specials = list(/datum/armourspecials/internal_air_tank/human) This line is disabled untill a dev can fix the internals code for it.
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL

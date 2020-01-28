@@ -44,9 +44,6 @@
 /obj/item/weapon/gun/projectile/ma5b_ar/can_use_when_prone()
 	return 1
 
-/obj/item/weapon/gun/projectile/ma5b_ar/New()
-	..()
-
 /obj/item/weapon/gun/projectile/ma5b_ar/update_icon()
 	. = ..()
 	if(ammo_magazine)

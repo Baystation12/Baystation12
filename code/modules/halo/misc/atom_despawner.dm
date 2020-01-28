@@ -9,7 +9,7 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 	var/max_cleanup_per_tick = 5
 
 /datum/controller/process/atom_despawner/New()
-	..()
+	. = ..()
 	atom_despawner = src
 
 /datum/controller/process/atom_despawner/doWork()
@@ -32,6 +32,9 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 /datum/controller/process/atom_despawner/proc/attempt_clean(var/list_index = 1)
 	var/atom/movable/target = cleanables[list_index]
 	var/spawn_time = cleanables[target]
+	if(isnull(target))
+		cleanables -= target
+		return
 
 	//check if its time to despawn
 	if(world.time > spawn_time + atom_timeout)

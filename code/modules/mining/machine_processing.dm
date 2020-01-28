@@ -114,6 +114,7 @@
 	var/list/ores_stored[0]
 	var/static/list/alloy_data
 	var/active = 0
+	var/list/loading = list()
 
 /obj/machinery/mineral/processing_unit/New()
 	..()
@@ -147,15 +148,20 @@
 	var/list/tick_alloys = list()
 
 	//Grab some more ore to process this tick.
-	for(var/i = 0,i<sheets_per_tick,i++)
-		var/obj/item/weapon/ore/O = locate() in input.loc
-		if(!O) break
+	for(var/obj/item/weapon/ore/O in loading)
 		if(O.ore && !isnull(ores_stored[O.ore.name]))
 			ores_stored[O.ore.name]++
 		else
 			world.log << "[src] encountered ore [O] with oretag [O.ore ? O.ore : "(no ore)"] which this machine did not have an entry for!"
 
 		qdel(O)
+
+	//delay 1 tick in grabbing resources
+	loading.Cut()
+	for(var/i = 0,i<sheets_per_tick,i++)
+		var/obj/item/weapon/ore/O = locate() in input.loc
+		if(!O) break
+		loading += O
 
 	if(!active)
 		return

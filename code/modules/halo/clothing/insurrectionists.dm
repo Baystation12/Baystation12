@@ -29,6 +29,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/lighturf/brown
@@ -46,6 +50,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -65,6 +73,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/lighturf/green
@@ -82,6 +94,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -101,6 +117,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/lighturf/white
@@ -118,6 +138,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -137,6 +161,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/mediumurf/blue
@@ -154,6 +182,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -173,6 +205,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/mediumurf/black
@@ -190,6 +226,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -209,6 +249,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/heavyurf/brown
@@ -226,6 +270,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -245,6 +293,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/heavyurf/blue
@@ -262,6 +314,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -281,6 +337,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/heavyurf/green
@@ -298,6 +358,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -317,6 +381,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/heavyurf/black
@@ -334,6 +402,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -353,6 +425,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/heavyurf/white
@@ -371,6 +447,10 @@
 		slot_r_hand_str = null,
 		)
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/heavyurf/vwhite
@@ -388,6 +468,10 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
@@ -978,7 +1062,7 @@
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 
 /obj/item/clothing/suit/justice/zeal/New()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/zeal

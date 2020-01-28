@@ -45,7 +45,6 @@
 	#include "geminuscity_3.dmm"
 	#include "geminuscity_2.dmm"
 	#include "geminuscity_1.dmm"
-	#include "geminus_innie_base.dmm"
 
 #elif !defined(MAP_OVERRIDE)
 

@@ -80,6 +80,9 @@
 #endif
 
 #define RECOMMENDED_VERSION 513
+#if DM_VERSION < RECOMMENDED_VERSION
+#error Your BYOND is out of date!
+#endif
 /world/New()
 	//Log startup times
 	var/startedAt = world.timeofday

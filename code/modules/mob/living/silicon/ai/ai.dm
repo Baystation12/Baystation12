@@ -268,7 +268,8 @@ var/list/ai_verbs_default = list(
 	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
 	our_visualnet = all_networks[network]
 	if(isnull(our_visualnet))
-		all_networks[network] = new /datum/visualnet/camera
+		our_visualnet = new /datum/visualnet/camera
+		all_networks[network] = our_visualnet
 
 	if (istype(loc, /turf))
 		add_ai_verbs(src)
@@ -444,8 +445,10 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/check_access_level(var/atom/a)
 	var/area/atom_area = a.loc.loc
-	if(!istype(atom_area) || !istype(atom_area.ai_routing_node))
+	if(!istype(atom_area))
 		return -1
+	if(!istype(atom_area.ai_routing_node)) //If we don't have a routing node, access isn't restricted at all.
+		return 999
 	if(!(atom_area.ai_routing_node in nodes_accessed))
 		return -1
 	return atom_area.ai_routing_node.get_access_for_ai(src)

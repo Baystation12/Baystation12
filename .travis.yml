@@ -23,7 +23,7 @@ env:
     - TEST=MAP MAP_PATH=ccs_battlecruiser
     - TEST=MAP MAP_PATH=doisac
     - TEST=MAP MAP_PATH=crashsite_zeta
-    # - TEST=MAP MAP_PATH=unsc_achlys
+    - TEST=MAP MAP_PATH=unsc_achlys
 
 cache:
   directories:

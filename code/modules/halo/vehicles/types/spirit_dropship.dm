@@ -2,7 +2,7 @@
 	name = "Type-25 \"Spirit\" Troop Carrier"
 	desc = "A large, tuning fork shaped ship with a underslung heavy plasma cannon."
 
-	icon = 'code/modules/halo/vehicles/spirit.dmi'
+	icon = 'code/modules/halo/vehicles/types/spirit.dmi'
 	icon_state = "base"
 	vehicle_move_delay = 1.2
 	faction = "covenant"
@@ -23,7 +23,9 @@
 
 	exposed_positions = list()//No-one can get hit when inside this.
 
-	vehicle_size = 128
+	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
+	vehicle_carry_size = ITEM_SIZE_VEHICLE
+	capacity_flag = ITEM_SIZE_VEHICLE_LARGE
 
 	light_color = "#C1CEFF"
 
@@ -44,10 +46,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/spirit_main)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/spirit)
-	cargo_capacity = 48 //Can hold, at max, 9 normals
-	max_vehicle_size = 64
-	vehicle_capacity = 64
-	cargo_allow_massive = 1
 
 /obj/item/weapon/gun/vehicle_turret/spirit_main
 	name = "Heavy Plasma Cannon"
@@ -68,4 +66,4 @@
 	icon_state = "heavy_plas_cannon"
 
 /obj/item/projectile/covenant/spirit_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1)
+	explosion(impacted,-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1,adminwarn = 0)

@@ -3,7 +3,7 @@
 	name = "M808B Scorpion"
 	desc = "The M808B Main Battle Tank is equipped with a 90mm cannon loaded with HE shells and a linked machine gun firing 7.62mm AP rounds. This will present a great foe to any force."
 
-	icon = 'code/modules/halo/vehicles/Scorpion.dmi'
+	icon = 'code/modules/halo/vehicles/types/Scorpion.dmi'
 	icon_state = "move"
 	anchored = 1
 
@@ -17,7 +17,7 @@
 
 	occupants = list(4,1)
 
-	vehicle_size = 64
+	vehicle_size = ITEM_SIZE_VEHICLE
 
 	move_sound = 'code/modules/halo/sounds/scorp_move.ogg'
 
@@ -34,7 +34,6 @@
 	pos_to_check = "gunner"
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/switchable/scorpion_cannon)
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/scorpion)
-	cargo_capacity = 8 //Can hold, at max, two normals
 
 /obj/item/weapon/gun/vehicle_turret/switchable/scorpion_cannon
 	name = "Scorpion Cannon"

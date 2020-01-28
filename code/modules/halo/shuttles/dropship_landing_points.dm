@@ -6,7 +6,7 @@
 	var/occupied = 0 //Is this landing point currently occupied?
 
 /obj/effect/landmark/dropship_land_point/New()
-	..()
+	. = ..()
 	dropship_landing_controller.add_land_point(src)
 
 /obj/effect/landmark/dropship_land_point/inactive

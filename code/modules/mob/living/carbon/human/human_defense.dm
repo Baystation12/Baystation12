@@ -379,7 +379,7 @@ cloak disrupt override
 
 				//Sharp objects will always embed if they do enough damage.
 				//Thrown sharp objects have some momentum already and have a small chance to embed even if the damage is below the threshold
-				if((sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
+				if((sharp && I.can_embed() && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance)))
 					affecting.embed(I, supplied_wound = created_wound)
 
 		// Begin BS12 momentum-transfer code.

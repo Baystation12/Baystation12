@@ -1,4 +1,4 @@
-#define CAPACITOR_DAMAGE_AMOUNT 27 //3 Direct MAC shots to down a fully charged shield from a 22-capacitor MAC.
+#define CAPACITOR_DAMAGE_AMOUNT 20 //5 Direct MAC shots to down a fully charged shield from a 20-capacitor MAC.
 #define CAPACITOR_MAX_STORED_CHARGE 50000
 #define BASE_AMMO_LIMIT 3
 #define LOAD_AMMO_DELAY 70
@@ -26,6 +26,7 @@
 
 /obj/machinery/mac_cannon/ammo_loader/New()
 	name = "[weapon_name] [name]"
+	. = ..()
 
 /obj/machinery/mac_cannon/ammo_loader/proc/update_ammo()
 	for(var/obj/machinery/overmap_weapon_console/console in linked_consoles)
@@ -162,7 +163,7 @@
 		return
 
 	for(var/z_level in overmap_object.map_z)
-		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 100,1, 255,,1)
+		playsound(locate(loc_soundfrom.x,loc_soundfrom.y,z_level), src.fire_sound, 20,1, 255,,1)
 
 /obj/machinery/overmap_weapon_console/mac/get_linked_device_damage_mod()
 	var/damage_mod = 0
@@ -253,10 +254,12 @@
 
 /obj/item/projectile/mac_round/check_penetrate(var/atom/impacted)
 	. = ..()
-	var/increase_from_damage = (damage/250)
+	var/increase_from_damage = round(damage/250)
 	if(increase_from_damage > 2)
-		increase_from_damage *= 0.25
-	explosion(impacted,2 + increase_from_damage,4 + increase_from_damage,5 + increase_from_damage,6 + increase_from_damage, adminlog = 0)
+		increase_from_damage -= 2
+		increase_from_damage = round(increase_from_damage * 0.5)
+		increase_from_damage += 2
+	explosion(impacted,0 + increase_from_damage,2 + increase_from_damage,3 + increase_from_damage,4 + increase_from_damage, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

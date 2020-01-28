@@ -121,18 +121,18 @@
 			f_loss = 60
 
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage = min(ear_damage + 30,100*species.explosion_effect_mod)
-				ear_deaf = min(ear_damage + 120,200*species.explosion_effect_mod)
+				ear_damage = min(ear_damage + 30,50*species.explosion_effect_mod)
+				ear_deaf = min(ear_damage + 120,120*species.explosion_effect_mod)
 			if (prob(70))
-				confused = min(confused + 10,50*species.explosion_effect_mod)
+				confused = min(confused + 10,30*species.explosion_effect_mod)
 
 		if(3.0)
 			b_loss = 30
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
-				ear_damage = min(ear_damage + 15,100*species.explosion_effect_mod)
-				ear_deaf = min(ear_damage + 60,200*species.explosion_effect_mod)
+				ear_damage = min(ear_damage + 15,50*species.explosion_effect_mod)
+				ear_deaf = min(ear_damage + 60,120*species.explosion_effect_mod)
 			if (prob(50))
-				confused = min(confused + 10,50*species.explosion_effect_mod)
+				confused = min(confused + 10,30*species.explosion_effect_mod)
 
 
 	// factor in armour / degrade armor

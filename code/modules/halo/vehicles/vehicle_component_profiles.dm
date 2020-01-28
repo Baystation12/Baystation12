@@ -12,12 +12,6 @@
 	var/list/vital_components = newlist(/obj/item/vehicle_component/health_manager) //Vital components, engine, thrusters etc.
 	var/obj/item/vehicle_component/component_last_inspected
 
-	var/cargo_capacity = 0 //The capacity of the cargo hold. Items increase the space taken by  base_storage_cost(w_class) formula used in inventory_sizes.dm.
-	var/vehicle_capacity = 0 //The capacity of the vehicle hold. Vehicles increase space taken by base_storage_cost(vehicle_size + 5)
-	var/max_vehicle_size = 0//Determines the maximum vehicle size. Used alongside vehicle ferrying to determine biggest vehicle carriable and quantity.
-	var/cargo_allow_massive = 0
-	var/list/current_cargo = list()
-
 /datum/component_profile/New(var/obj/vehicles/creator)
 	. = ..()
 	contained_vehicle = creator
@@ -26,70 +20,11 @@
 	for(var/obj/comp in vital_components)
 		contained_vehicle.contents += comp
 
-/datum/component_profile/proc/can_attach_vehicle(var/vehicle_size)
-	return can_put_cargo(vehicle_size,1)
-
-/datum/component_profile/proc/can_put_cargo(var/item_w_class,var/for_vehicle = 0)
-	if(isnull(item_w_class))
-		return 0
-	var/used_capacity = cargo_capacity
-	if(for_vehicle)
-		used_capacity = vehicle_capacity
-		if(item_w_class > max_vehicle_size)
-			return 0
-	if(item_w_class == ITEM_SIZE_NO_CONTAINER && !for_vehicle)
-		return 0
-	if(!cargo_allow_massive && !for_vehicle)
-		if((item_w_class == ITEM_SIZE_HUGE || item_w_class == ITEM_SIZE_GARGANTUAN))
-			return 0
-	var/new_used = get_cargo_used(for_vehicle)
-	if(for_vehicle)
-		new_used += item_w_class
-		if(new_used > vehicle_capacity)
-			return 0
-	else
-		new_used = base_storage_cost(item_w_class)
-		if(new_used > used_capacity)
-			return 0
-	return 1
-
-/datum/component_profile/proc/get_cargo_used(var/get_vehicle = 0)
-	var/total_amount = 0
-	if(get_vehicle)
-		for(var/obj/vehicles/vehicle in current_cargo)
-			total_amount += vehicle.vehicle_size
-	else
-		for(var/obj/item in current_cargo)
-			if(istype(item,/obj/vehicles))
-				continue
-			if(istype(item,/obj/structure/closet))
-				total_amount += base_storage_cost(ITEM_SIZE_GARGANTUAN)
-			else
-				total_amount +=  base_storage_cost(item.w_class)
-	return total_amount
-
 /datum/component_profile/proc/get_coverage_sum()
 	var/coverage_sum = 0
 	for(var/obj/item/vehicle_component/component in components)
 		coverage_sum += component.coverage * (component.integrity/initial(component.integrity))
 	return coverage_sum
-
-/datum/component_profile/proc/cargo_transfer(var/obj/object,var/remove = 0)
-	if(remove && !(object in current_cargo))
-		return 0
-	else if(remove)
-		contained_vehicle.contents -= object
-		current_cargo -= object
-		object.loc = contained_vehicle.pick_valid_exit_loc()
-		return object
-	else
-		var/obj/vehicles/vehicle = object
-		if(istype(vehicle))
-			vehicle.kick_occupants()
-		object.loc = null
-		contained_vehicle.contents += object
-		current_cargo += object
-		return 1
 
 /datum/component_profile/proc/take_component_damage(var/proj_damage,var/proj_damtype)
 	var/max_comp_coverage = get_coverage_sum()
@@ -241,7 +176,7 @@
 /obj/item/vehicle_component/proc/repair_with_tool(var/obj/item/tool,var/mob/user)
 	for(var/tool_type in repair_tools_typepaths)
 		if(istype(tool,tool_type))
-			repair_tools_typepaths -= tool.type
+			repair_tools_typepaths -= tool_type
 
 	if(repair_tools_typepaths.len == 0)
 		finalise_repair()

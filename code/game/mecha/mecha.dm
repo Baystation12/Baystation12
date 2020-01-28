@@ -27,7 +27,7 @@
 	var/dir_in = 2//What direction will the mech face when entered/powered on? Defaults to South.
 	var/step_energy_drain = 200		// Energy usage per step in joules.
 	var/health = 300 //health is health
-	var/deflect_chance = 10 //chance to deflect incoming projectiles, hits, or lesser the effect of ex_act.
+	var/deflect_chance = 0 //chance to deflect incoming projectiles, hits, or lesser the effect of ex_act.
 	var/r_deflect_coeff = 1
 	var/m_deflect_coeff = 1
 	//ranged and melee damage multipliers
@@ -695,7 +695,7 @@
 
 /obj/mecha/emp_act(severity)
 	if(use_power((cell.charge/2)/severity))
-		take_damage(50 / severity,"energy")
+		take_damage(50 * (1 + (health-200)/100) / severity,"energy")
 	src.log_message("EMP detected",1)
 	check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT),1)
 	return

@@ -1,6 +1,6 @@
 
 /mob/living/carbon/human/covenant/sanshyuum/New(var/new_loc)
-	..(new_loc,"San Shyuum")
+	. = ..(new_loc,"San Shyuum")
 
 /obj/item/clothing/suit/prophet_robe
 	name = "San Shyuum Robe"

@@ -49,7 +49,7 @@
 	src.modules += B
 	src.modules += S
 
-	..()
+	. = ..()
 
 /obj/item/weapon/robot_module/huragok_engineer
 	name = "huragok engineer specialization"
@@ -128,7 +128,7 @@
 	ZW.synths = list(nanolaminate)
 	src.modules += ZW
 
-	..()
+	. = ..()
 
 /obj/item/weapon/robot_module/engineering/general/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/device/lightreplacer/LR = locate() in src.modules

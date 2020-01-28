@@ -38,7 +38,7 @@
 	if(!linked)
 		linked = map_sectors["[z]"]
 	if(..())
-		if (autopilot && dx && dy)
+		if (world.time >= ticker.mode.ship_lockdown_until && autopilot && dx && dy)
 			var/turf/T = locate(dx,dy,GLOB.using_map.overmap_z)
 			if(linked.loc == T)
 				if(linked.is_still())
@@ -150,6 +150,10 @@
 		return 1
 
 	if (!linked)
+		return
+
+	if(!istype(usr,/mob/living/silicon) && get_dist(usr, src) > 1)
+		to_chat(usr,"<span class = 'notice'>You need to be next to [src] to do that!</span>")
 		return
 
 	if (href_list["add"])

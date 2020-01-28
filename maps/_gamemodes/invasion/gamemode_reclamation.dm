@@ -7,7 +7,7 @@
 	required_players = 0
 	end_conditions_required = 1
 	factions = list(/datum/faction/unsc, /datum/faction/covenant)
-	overmap_hide = list(/obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/soe_argentum)
+	overmap_hide = list(/obj/effect/overmap/sector/exo_listen)
 	disabled_jobs_types = list(\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
@@ -17,6 +17,8 @@
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
+		/datum/job/geminus_innie/orion_defector,\
+		/datum/job/insurrectionist_ai,\
 		/datum/job/police,\
 		/datum/job/police_chief,\
 		/datum/job/colonist,\

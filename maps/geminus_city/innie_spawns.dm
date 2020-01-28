@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(geminus_innie_spawns)
 
 /datum/spawnpoint/geminus_innie
 	display_name = "Geminus Innie"
-	restrict_job = list("Insurrectionist","Insurrectionist Officer","Insurrectionist Commander")
+	restrict_job = list("Insurrectionist","Insurrectionist Officer","Insurrectionist Commander","Insurrectionist Orion Defector")
 
 /datum/spawnpoint/geminus_innie/New()
 	..()

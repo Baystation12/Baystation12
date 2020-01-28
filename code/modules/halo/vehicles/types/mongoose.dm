@@ -4,7 +4,7 @@
 	name = "M274 Ultra-Light All-Terrain Vehicle"
 	desc = "Also known as the \"Mongoose\""
 
-	icon = 'code/modules/halo/vehicles/mongoose.dmi'
+	icon = 'code/modules/halo/vehicles/types/mongoose.dmi'
 	icon_state = "base"
 
 	bound_height = 32
@@ -19,7 +19,7 @@
 
 	sprite_offsets = list("1" = list(0,3),"2" = list(0,3),"4" = list(0,3),"8" = list(0,3))
 
-	vehicle_size = 16
+	vehicle_size = ITEM_SIZE_VEHICLE_SMALL
 
 	light_color = "#E1FDFF"
 
@@ -71,4 +71,3 @@
 
 /datum/component_profile/mongoose
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/mongoose)
-	cargo_capacity = 4 //Can hold, at max, a single normal

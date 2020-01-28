@@ -130,12 +130,11 @@
 	icon_state = "hospital"
 
 /turf/simulated/wall/chrome/New(var/newloc)
-	..(newloc,"chrome")
-
+	. = ..(newloc,"chrome")
 
 /turf/simulated/wall/tech
 	icon = 'maps/geminus_city/citymap_icons/walls.dmi'
 	icon_state = "tech"
 
 /turf/simulated/wall/tech/New(var/newloc)
-	..(newloc,"blackchrome")
+	. = ..(newloc,"blackchrome")

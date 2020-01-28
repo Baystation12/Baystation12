@@ -143,9 +143,9 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	if(owner.incapacitated())
 		to_chat(owner, "<span class='warning'>You cannot aim a gun in your current state.</span>")
 		return
-	if(owner.lying)
+	/*if(owner.lying)
 		to_chat(owner, "<span class='warning'>You cannot aim a gun while prone.</span>")
-		return
+		return*/
 	if(owner.restrained())
 		to_chat(owner, "<span class='warning'>You cannot aim a gun while handcuffed.</span>")
 		return
@@ -163,8 +163,13 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	to_chat(target, "<span class='danger'>You now have a gun pointed at you. No sudden moves!</span>")
 	aiming_with = thing
 	aiming_at = target
+	var/lock_time_add = 35 //Just a basic value.
 	if(istype(aiming_with, /obj/item/weapon/gun))
+		var/obj/item/weapon/gun/g = aiming_with
 		playsound(get_turf(owner), 'sound/weapons/TargetOn.ogg', 50,1)
+		if(g.lock_time >0)
+			lock_time_add = g.lock_time
+
 
 	forceMove(get_turf(target))
 	GLOB.processing_objects |= src
@@ -173,7 +178,7 @@ obj/aiming_overlay/proc/update_aiming_deferred()
 	toggle_active(1)
 	locked = 0
 	update_icon()
-	lock_time = world.time + 35
+	lock_time = world.time + lock_time_add
 	GLOB.moved_event.register(owner, src, /obj/aiming_overlay/proc/update_aiming)
 	GLOB.moved_event.register(aiming_at, src, /obj/aiming_overlay/proc/target_moved)
 	GLOB.destroyed_event.register(aiming_at, src, /obj/aiming_overlay/proc/cancel_aiming)

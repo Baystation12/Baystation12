@@ -29,6 +29,10 @@
 	siemens_coefficient = 0.7
 	w_class = 3
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/head/helmet/marine/medic
@@ -98,6 +102,7 @@
 	item_state = "M52B Body Armor regular"
 	icon_state = "M52B Body Armor regular_obj"
 	blood_overlay_type = "armor"
+	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 40, energy = 45, bomb = 35, bio = 0, rad = 0)
 	var/slots = 4
@@ -245,12 +250,12 @@
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/suit/space/void/unsc/prepared/New()
-	..()
+	. = ..()
 	helmet = new /obj/item/clothing/head/helmet/space/void/unsc
 	boots = new /obj/item/clothing/shoes/magboots
 
 /obj/item/clothing/suit/space/void/unsc/New()
-	..()
+	. = ..()
 	slowdown_per_slot[slot_wear_suit] = 1
 
 /obj/item/clothing/head/helmet/marine/winter
@@ -319,6 +324,10 @@
 	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 15, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
+	action_button_name = "Toggle Helmet Light"
+	light_overlay = "helmet_light"
+	brightness_on = 4
+
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
 /obj/item/clothing/shoes/magboots/eva/marine
@@ -365,6 +374,7 @@
 	icon_override = MARINE_OVERRIDE
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
+	item_state_slots = list(slot_l_hand_str = "gloves", slot_r_hand_str = "gloves")
 	body_parts_covered = HANDS
 	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)
 	cold_protection = HANDS
@@ -389,7 +399,7 @@
 	icon_override = MARINE_OVERRIDE
 	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_NORMAL
-	item_state_slots = null
+	item_state_slots = list(slot_l_hand_str = "backpack", slot_r_hand_str = "backpack")
 
 /obj/item/weapon/storage/backpack/marine/brown
 	name = "Brown Camo Marine Backpack"

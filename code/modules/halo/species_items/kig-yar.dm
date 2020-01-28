@@ -2,7 +2,7 @@
 GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species_items/first_kig-yar.txt'))
 
 /mob/living/carbon/human/covenant/kigyar/New(var/new_loc)
-	..(new_loc,"Kig-Yar")
+	. = ..(new_loc,"Kig-Yar")
 
 /datum/language/ruuhti
 	name = "Ruuhti"
@@ -14,7 +14,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	flags = RESTRICTED
 
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
-	..(new_loc,"Tvaoan Kig-Yar")
+	. = ..(new_loc,"Tvaoan Kig-Yar")
 	faction = "Covenant"
 
 /datum/language/tvoai
