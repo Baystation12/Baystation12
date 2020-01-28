@@ -6,7 +6,7 @@
 	flags = EXTENSION_FLAG_IMMEDIATE
 	var/decl/observ/event
 	var/datum/target
-	var/proc/callproc
+	var/callproc
 
 /datum/extension/event_registration/New(datum/holder, decl/observ/event, datum/target, callproc)
 	..()

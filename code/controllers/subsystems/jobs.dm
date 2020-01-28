@@ -141,6 +141,7 @@ SUBSYSTEM_DEF(jobs)
 	return titles_to_datums[rank]
 
 /datum/controller/subsystem/jobs/proc/get_by_path(var/path)
+	RETURN_TYPE(/datum/job)
 	return types_to_datums[path]
 
 /datum/controller/subsystem/jobs/proc/check_general_join_blockers(var/mob/new_player/joining, var/datum/job/job)
@@ -399,7 +400,7 @@ SUBSYSTEM_DEF(jobs)
 			if(G)
 				var/permitted = 0
 				if(G.allowed_branches)
-					if(H.char_branch && H.char_branch.type in G.allowed_branches)
+					if(H.char_branch && (H.char_branch.type in G.allowed_branches))
 						permitted = 1
 				else
 					permitted = 1

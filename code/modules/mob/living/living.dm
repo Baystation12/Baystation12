@@ -357,7 +357,7 @@ default behaviour is:
 
 /mob/living/proc/get_organ_target()
 	var/mob/shooter = src
-	var/t = shooter:zone_sel.selecting
+	var/t = shooter.zone_sel?.selecting
 	if ((t in list( BP_EYES, BP_MOUTH )))
 		t = BP_HEAD
 	var/obj/item/organ/external/def_zone = ran_zone(t)
@@ -365,7 +365,7 @@ default behaviour is:
 
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
-/mob/living/proc/heal_organ_damage(var/brute, var/burn)
+/mob/living/proc/heal_organ_damage(var/brute, var/burn, var/affect_robo = 0)
 	adjustBruteLoss(-brute)
 	adjustFireLoss(-burn)
 	src.updatehealth()

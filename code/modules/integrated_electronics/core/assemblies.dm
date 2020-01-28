@@ -163,8 +163,6 @@
 
 
 /obj/item/device/electronic_assembly/proc/open_interact(mob/user)
-	. = ..()
-
 	var/total_part_size = return_total_size()
 	var/total_complexity = return_total_complexity()
 	var/list/HTML = list()

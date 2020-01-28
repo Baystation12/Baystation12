@@ -56,7 +56,7 @@
 	damage_type = BRUTE
 	nodamage = 1
 
-	Bump(atom/A as mob|obj|turf|area)
+	Bump(atom/A as mob|obj|turf|area, forced=0)
 		if(A == firer)
 			forceMove(A.loc)
 			return

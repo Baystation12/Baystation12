@@ -64,7 +64,7 @@
 			return T
 
 /decl/overmap_event_handler/proc/start_hazard(var/obj/effect/overmap/visitable/ship/ship, var/obj/effect/overmap/event/hazard)//make these accept both hazards or events
-	if(!ship in ship_events)
+	if(!(ship in ship_events))
 		ship_events += ship
 
 	for(var/event_type in hazard.events)

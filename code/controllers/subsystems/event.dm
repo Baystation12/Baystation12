@@ -59,8 +59,7 @@ SUBSYSTEM_DEF(event)
 			return
 
 	while (pos <= EVENT_LEVEL_MAJOR)
-		var/list/datum/event_container/EC = event_containers[pos]
-		EC.process()
+		event_containers[pos].process()
 		pos++
 		
 		if (MC_TICK_CHECK)
@@ -87,7 +86,7 @@ SUBSYSTEM_DEF(event)
 	log_debug("Event '[EM.name]' has completed at [worldtime2stationtime(world.time)].")
 
 /datum/controller/subsystem/event/proc/delay_events(var/severity, var/delay)
-	var/list/datum/event_container/EC = event_containers[severity]
+	var/datum/event_container/EC = event_containers[severity]
 	EC.next_event_time += delay
 
 /datum/controller/subsystem/event/proc/Interact(var/mob/living/user)
