@@ -56,7 +56,7 @@
 	name = "UNSC Light Brigade Cryo Bay"
 	icon_state = "blue"
 
-/area/destroyer/unsclightbrigade/crewbunk
+/area/destroyer/unsclightbrigade/odstarmory
 	name = "UNSC Light Brigade ODST Armory"
 	icon_state = "white"
 
@@ -114,7 +114,7 @@
 	icon_state = "shuttle"
 
 /area/destroyer/unsclightbrigade/foreportsidecleaner
-	name = "UNSC Light Brigade Fore Hangar"
+	name = "UNSC Light Brigade Fore Portside Air Cleaner"
 	icon_state = "green"
 
 /area/destroyer/unsclightbrigade/forestarboardaircleaner
