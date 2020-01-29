@@ -69,3 +69,26 @@
 		out[++out.len] = list(list("type" = "del"), SSgarbage.totaldels)
 
 	return out
+
+
+/datum/metric_family/ss13_players
+	name = "ss13_players"
+	metric_type = PROMETHEUS_METRIC_GAUGE
+	help = "Count of players currently connected to the server"
+
+/datum/metric_family/ss13_players/collect()
+	var/players = 0
+	var/admins = 0
+
+	for(var/client/C)
+		if(!(C.connection == "seeker" || C.connection == "web"))
+			continue
+		if(C.holder && !C.is_stealthed())
+			admins++
+			continue
+		players++
+
+	return list(
+		list(list("admin" = "0"), players),
+		list(list("admin" = "1"), admins)
+	)
