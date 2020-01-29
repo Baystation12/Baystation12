@@ -15,7 +15,7 @@
 		user.visible_message("<span class = 'warning'>[user] activates their active camoflage</span>")
 	else
 		to_chat(user,"<span class = 'danger'>Your active camoflage recovers!</span>")
-		user.visible_message("<span calss = 'warning'>[user]'s active camoflage lets out a soft ping and [user] starts to fade.</span>")
+		user.visible_message("<span class = 'warning'>[user]'s active camoflage lets out a soft ping and [user] starts to fade.</span>")
 
 /datum/armourspecials/cloaking/proc/deactivate_cloak(var/voluntary = 1)
 	src.cloak_active = 0
