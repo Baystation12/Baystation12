@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Hand teleporters will now create portals that aren't random, when you are linked to a teleport computer on a connected z-level."
+  - tweak: "Hand teleporters will now only list teleport computers that are on a connected z-level."
