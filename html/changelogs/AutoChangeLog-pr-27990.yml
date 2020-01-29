@@ -1,0 +1,4 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - rscadd: "Added a new roles to Vox Scavenger away site, \"Shoal Biotechnician\", \"Shoal Technician\" and \"Quill\""
