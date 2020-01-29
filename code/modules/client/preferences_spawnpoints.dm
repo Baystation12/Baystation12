@@ -24,6 +24,10 @@ GLOBAL_VAR(spawntypes)
 	var/list/unsafe_turfs
 
 /datum/spawnpoint/proc/check_job_spawning(var/datum/job/job_datum, var/joined_late = 0)
+
+	if(!job_datum)
+		return "invalid job (NULL)"
+
 	if(restrict_job && !(job_datum.title in restrict_job))
 		return "restricted job"
 

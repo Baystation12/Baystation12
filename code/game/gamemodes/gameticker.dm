@@ -282,7 +282,27 @@ var/global/datum/controller/gameticker/ticker
 				else if(!player.mind.assigned_role)
 					continue
 				else
+					//check if they are an antag that overrides ordinary job spawning
+					if(player.mind.special_role)
+						var/antag_id = antag_names_to_ids_[player.mind.special_role]
+						var/datum/antagonist/antag = all_antag_types_[antag_id]
+						if(antag.flags & ANTAG_OVERRIDE_MOB)
+							continue
+
 					var/datum/spawnpoint/spawnpoint = job_master.get_spawnpoint_for(player.client, job_master.occupations_by_title[player.mind.assigned_role])
+
+					//sanity checking
+					if(!spawnpoint)
+						var/datum/job/J = job_master.occupations_by_title[player.mind.assigned_role]
+						var/error_msg = "SPAWN ERROR: was not able to find valid spawnpoint for \
+							player: \'[player.ckey]\' \
+							assigned_role: \'[player.mind.assigned_role]\' \
+							job: \'[J ? J.type : "NULL"]\'."
+						to_chat(player,"<span class = 'warning'>[error_msg]</span>")
+						log_debug(error_msg)
+						message_admins(error_msg)
+						continue
+
 					var/turf/spawn_turf = spawnpoint.get_spawn_turf(player.mind.assigned_role)
 
 					if(player.create_character(spawn_turf))
