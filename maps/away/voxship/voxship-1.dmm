@@ -383,6 +383,13 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /turf/simulated/wall/ocp_wall,
 /area/voxship/ship)
+"bi" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/doc,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/base)
 "bj" = (
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/effect/floor_decal/steeldecal/steel_decals_central2{
@@ -478,6 +485,12 @@
 /obj/structure/girder,
 /turf/simulated/floor/asteroid,
 /area/space)
+"bt" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/catwalk,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/engineer,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
 "bu" = (
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1;
@@ -1312,6 +1325,17 @@
 	},
 /turf/simulated/wall/iron,
 /area/voxship/base)
+"dD" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
 "dE" = (
 /obj/effect/shuttle_landmark/vox_base/hangar/vox_shuttle,
 /obj/effect/floor_decal/borderfloor/full,
@@ -1558,16 +1582,9 @@
 /turf/space,
 /area/space)
 "ej" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/effect/submap_landmark/spawnpoint/voxship_crew,
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/structure/catwalk,
-/turf/simulated/floor/plating/vox,
+/obj/effect/floor_decal/steeldecal/steel_decals_central1,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/quill,
+/turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "ek" = (
 /obj/machinery/space_heater,
@@ -1815,7 +1832,6 @@
 /area/voxship/ship)
 "eU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/submap_landmark/spawnpoint/voxship_crew,
 /obj/item/weapon/tank/oxygen,
 /obj/item/weapon/tank/oxygen,
 /obj/item/weapon/tank/oxygen,
@@ -2012,10 +2028,6 @@
 	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
-"fx" = (
-/obj/effect/floor_decal/steeldecal/steel_decals_central1,
-/turf/simulated/floor/tiled/techmaint/vox,
-/area/voxship/base)
 "fy" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -6842,7 +6854,7 @@ ec
 bz
 eA
 aV
-fx
+ej
 aV
 aQ
 fk
@@ -6942,7 +6954,7 @@ aQ
 dT
 aV
 eh
-eE
+bi
 eE
 eE
 aV
@@ -7045,7 +7057,7 @@ dU
 ed
 em
 ce
-bG
+bt
 eG
 aV
 aQ
@@ -7147,7 +7159,7 @@ dT
 bU
 cP
 dw
-ej
+dD
 eU
 ey
 aQ
