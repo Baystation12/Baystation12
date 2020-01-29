@@ -23,10 +23,13 @@ GLOBAL_LIST_EMPTY(player_nav_waypoints)
 		var/obj/effect/landmark/playernav/playernav = GLOB.player_nav_waypoints[playernav_id]
 		var/outtext = "[playernav]"
 		var/mob/M = src.mob
+		var/dist = get_dist(M, playernav)
+		outtext += " (distance: [dist] tiles"
 		if(playernav.z < M.z)
-			outtext += " (below [M.z - playernav.z] level/s)"
+			outtext += ", above [M.z - playernav.z] level/s"
 		else if(playernav.z > M.z)
-			outtext += " (above [playernav.z - M.z] level/s)"
+			outtext += ", below [playernav.z - M.z] level/s"
+		outtext += ")"
 
 		to_chat(src,"	<span class='info'>[outtext]</span>")
 
@@ -50,7 +53,7 @@ GLOBAL_LIST_EMPTY(player_nav_waypoints)
 		var/outtext = "Direction to [playernav]: "
 		var/mob/M = src.mob
 		var/targetdir = get_dir(M, playernav)
-		outtext += dir2text(targetdir)
+		outtext += "[get_dist(M,playernav)] tiles [dir2text(targetdir)]"
 		if(playernav.z < M.z)
 			outtext += " and down"
 		else if(playernav.z > M.z)
