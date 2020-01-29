@@ -44,7 +44,7 @@
 "aR" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aS" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/obj/item/ammo_box/shotgun,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aT" = (/mob/living/simple_animal/hostile/defender_mob/cov/kig,/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
-"aU" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aU" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/cloak,/obj/item/device/armour_ability/spartan/cloak,/obj/item/device/armour_ability/spartan/cloak,/obj/item/device/armour_ability/spartan/cloak,/obj/item/device/armour_ability/spartan/cloak,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aV" = (/obj/structure/table/rack,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/obj/item/device/flashlight/flare,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aW" = (/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/item/weapon/crowbar/brace_jack,/obj/structure/table/rack,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aX" = (/obj/structure/table/rack,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
@@ -78,6 +78,13 @@
 "bz" = (/turf/unsimulated/mineral,/area/space)
 "bA" = (/obj/item/weapon/gun/projectile/m41,/obj/structure/table/rack,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/storage/box/spnkr,/obj/item/weapon/gun/projectile/m41,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bB" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m392_dmr,/obj/item/weapon/storage/box/m762_ap,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bC" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/holo,/obj/item/device/armour_ability/spartan/holo,/obj/item/device/armour_ability/spartan/holo,/obj/item/device/armour_ability/spartan/holo,/obj/item/device/armour_ability/spartan/holo,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bD" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/overshield,/obj/item/device/armour_ability/spartan/overshield,/obj/item/device/armour_ability/spartan/overshield,/obj/item/device/armour_ability/spartan/overshield,/obj/item/device/armour_ability/spartan/overshield,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bE" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bF" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bG" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"bH" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/unsimulated/mineral,/area/ccs_battlecruiser/planet_staging)
+"bI" = (/obj/item/device/mobilecomms/commsbackpack/covenant,/turf/unsimulated/mineral,/area/ccs_battlecruiser/planet_staging)
 
 (1,1,1) = {"
 aaababababababababababababababababababababababababababababababababababababababab
@@ -104,20 +111,20 @@ abababababaxaxaxaxaxauauauauacavaracacacacacacacacacacacacayazazazacabababababab
 abababaxaxaxaAauauaBauauauauauabababababababaracaCaCaCaCacababababababababababab
 ababaDauauaEauauauauauauauauabababababababababababababababababababababababababab
 abaFauauauaEauauauauauauaGababababababababababababababababababababababababababab
-abaHauauauaEauauauauauauaIababababababababababababababababababababababababababab
+abaHauaUauaEauauauauauauaIababababababababababababababababababababababababababab
 abaHauauauauauauauauaJaJaJaxabababababababababababababababababaxaFauaDababababab
-abaHauauauauauauauauauauauaAababababababababababababababaxauauauauauauauabababab
+abaHaubCauauauauauauauauauaAababababababababababababababaxauauauauauauauabababab
 abaHauauauauauauauauauauauauaxaAaDaFaKaKaKaKaKaKaAaxababaLauauaMaMaMaMauaxababab
-abaHauauauauauauauauauauauauauauauauauauauauauauauauababaLauauaNaOaNaNauaAababab
-abaHauaUauauauauauauauauauauauauauauauauauauauauauauauababauauaNaPaOaNauauababab
-abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSaubAbBaVauaWaXaYauababauaZaZaZaZauauauabab
+abaHaubDauauauauauauauauauauauauauauauauauauauauauauababaLauauaNaOaNaNauaAababab
+abaHauauauauauauauauauauauauauauauauauauauauauauauauauababauauaNaPaOaNauauababab
+abaHaubEauauaQaQaQaQaQauaRaRaRauaSaSaSaubAbBaVauaWaXaYauababauaZaZaZaZauauauabab
 abaHauauauauaQaQaQaQaQauaRaRaRauaSaSaSaubabBaVaubbbcbcauauauauauauauauauauaFabab
-abaAauauauauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauauauauauauauauaxabab
+abaAaubFauauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauauauauauauauauaxabab
 abaxauaubdauaQaQaQaQaQauauauauauauauauauauauauauauauauauauauabbebfbfbeababaxabab
-ababaDauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibjbiaubkblbmauauababauauauauababababab
+ababaDbGauauaQaQaQaQaQaubgbgbgaubhbhbhaubibjbiaubkblbmauauababauauauauababababab
 ababaxauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibibiaubkblbmauababbnaubnbnaubnabababab
 abababaFauauauauauauauauauauauauauauauauauauauauauauauauababbnaubnbnaubnabababab
 abbzababaDauauauauauauauauauauauauauauauauauauauauauaFabababbnaubnbnaubnabababab
-ababbxababaxaxbobobpbqbrbsbtaAaxaxbubububvbvbvaDaxababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababab
+abbHbxababaxaxbobobpbqbrbsbtaAaxaxbubububvbvbvaDaxababababababababababababababab
+bIababababababababababababababababababababababababababababababababababababababab
 "}

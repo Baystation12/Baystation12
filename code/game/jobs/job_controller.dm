@@ -655,7 +655,7 @@ var/global/datum/controller/occupations/job_master
 	var/spawnpoint_id = DEFAULT_SPAWNPOINT_ID
 
 	//check if this job has a spawnpoint override
-	if(job_datum.spawnpoint_override)
+	if(job_datum && job_datum.spawnpoint_override)
 		//to_chat(H,"<span class = 'notice'>Job has spawnpoint override set. Ignoring preference-set spawnpoint.</span>")
 		spawnpoint_id = job_datum.spawnpoint_override
 
@@ -667,9 +667,9 @@ var/global/datum/controller/occupations/job_master
 		if(!retval)
 			return candidate
 		else
-			to_chat(C,"<span class = 'warning'>SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is blocked! Reason: [retval] (client: [C])</span>")
-			log_debug("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is blocked! (client: [C]) Reason: [retval]")
-			message_admins("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum.type]\' is blocked! (client: [C]) Reason: [retval]")
+			to_chat(C,"<span class = 'warning'>SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum ? job_datum.type : "NULL JOB"]\' is blocked! Reason: [retval] (client: [C])</span>")
+			log_debug("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum ? job_datum.type : "NULL JOB"]\' is blocked! (client: [C]) Reason: [retval]")
+			message_admins("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum ? job_datum.type : "NULL JOB"]\' is blocked! (client: [C]) Reason: [retval]")
 	else
 		to_chat(C,"<span class = 'warning'>SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist!</span> (client: [C])")
 		log_debug("SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist! (client: [C], job:[job_datum.type])")

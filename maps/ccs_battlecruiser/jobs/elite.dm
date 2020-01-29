@@ -34,7 +34,7 @@
 	title = "Sangheili Honour Guard"
 	supervisors = "the Prophet"
 	total_positions = 2
-	spawn_positions = 2
+	spawn_positions = 4
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/honour_guard
 	whitelisted_species = list(/datum/species/sangheili)
