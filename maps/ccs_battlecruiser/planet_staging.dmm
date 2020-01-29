@@ -83,7 +83,8 @@
 "bE" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/obj/item/device/armour_ability/spartan/regen,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bF" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/obj/item/device/armour_ability/spartan/speed,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "bG" = (/obj/structure/table/rack,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/obj/item/device/armour_ability/spartan/strength,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
-"bH" = (/obj/item/device/mobilecomms/commsbackpack/covenant,/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/unsimulated/mineral,/area/ccs_battlecruiser/planet_staging)
+"bH" = (/obj/item/device/mobilecomms/commsbackpack/unsc/permanant,/turf/unsimulated/mineral,/area/ccs_battlecruiser/planet_staging)
+"bI" = (/obj/item/device/mobilecomms/commsbackpack/covenant,/turf/unsimulated/mineral,/area/ccs_battlecruiser/planet_staging)
 
 (1,1,1) = {"
 aaababababababababababababababababababababababababababababababababababababababab
@@ -125,5 +126,5 @@ ababaxauauauaQaQaQaQaQaubgbgbgaubhbhbhaubibibiaubkblbmauababbnaubnbnaubnabababab
 abababaFauauauauauauauauauauauauauauauauauauauauauauauauababbnaubnbnaubnabababab
 abbzababaDauauauauauauauauauauauauauauauauauauauauauaFabababbnaubnbnaubnabababab
 abbHbxababaxaxbobobpbqbrbsbtaAaxaxbubububvbvbvaDaxababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababab
+bIababababababababababababababababababababababababababababababababababababababab
 "}
