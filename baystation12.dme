@@ -1428,6 +1428,7 @@
 #include "code\modules\halo\clothing\oni_guard.dm"
 #include "code\modules\halo\clothing\pilot.dm"
 #include "code\modules\halo\clothing\spartan_armour.dm"
+#include "code\modules\halo\clothing\spartan_armour_abilities.dm"
 #include "code\modules\halo\clothing\spartan_armour_variants.dm"
 #include "code\modules\halo\clothing\spartan_gear.dm"
 #include "code\modules\halo\clothing\special_armour.dm"
