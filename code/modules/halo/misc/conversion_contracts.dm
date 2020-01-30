@@ -5,6 +5,8 @@
 	icon = 'code/modules/halo/misc/convert_contract.dmi'
 	icon_state = "neutral_contract"
 
+	w_class = ITEM_SIZE_SMALL
+
 	var/primed = 0
 	var/mob/curr_target
 	var/faction_to = "neutral" //To convert to
@@ -50,37 +52,29 @@
 	curr_target = target
 	log_admin("[user.name],([user.ckey]) is attempting to convert [target.name] ([target.ckey])")
 	to_chat(target,"<span class = 'notice'>[user.name] is attempting to convert you. You are under no obligation to accept.</span>")
-	var/mob/living/carbon/human/h_user = user
-	if(istype(h_user))
-		h_user.forcesay("Repeat after me:")
-	else
 		user.say("Repeat after me.")
 	for(var/line in lines)
-		if(istype(h_user))
-			h_user.forcesay(line)
-		else
-			user.say(line)
-		var/will_say = alert("Repeat the line?",,"Yes","No")
+		if(!check_convert(user,target))
+			return
+		user.say(line)
+		var/will_say = alert(target,"Repeat the line?",,"Yes","No")
 		if(will_say == "No")
 			convert_fail_message(target)
 			curr_target = null
 			return
-		var/mob/living/carbon/human/h_target = target
-		if(istype(h_target))
-			h_target.forcesay(line)
-		else
-			target.say(line)
+		target.say(line)
+		sleep(1 SECOND)
 	do_convert(target)
 
 /obj/item/conversion_contract/proc/do_convert(var/mob/target)
+	curr_target = null
 	target.faction = faction_to
 	log_admin("[target.name] ([target.ckey]), has been successfully converted, faction changed to [faction_to]")
 
 /obj/item/conversion_contract/attack_self(var/mob/user)
-	if(..())
-		primed = !primed
-		curr_target = null
-		to_chat(user,"<span class = 'notice'>You [primed ? "ready":"unready" ] [src] for easy reading and conversion...</span>")
+	primed = !primed
+	curr_target = null
+	to_chat(user,"<span class = 'notice'>You [primed ? "ready":"unready" ] [src] for easy reading and conversion...</span>")
 
 /obj/item/conversion_contract/attack(var/mob/living/carbon/target, var/mob/living/carbon/user)
 	if(primed)
@@ -93,6 +87,9 @@
 
 
 /obj/item/conversion_contract/unsc
+	name = "UNSC Field Allegiance Declaration Document X-55."
+	desc = "A document allowing another person to declare their legally binding allegiance to the UNSC / UEG."
+	icon_state = "unsc_contract"
 	faction_to = "UNSC"
 	lines = list(\
 	"I do solemnly swear my loyalty and my life to Earth and her colonies.",\
@@ -101,6 +98,9 @@
 	)
 
 /obj/item/conversion_contract/innie
+	name = "Lines Of Freedom"
+	desc = "Paper containing the lines many use to pledge their allegiance to the URF."
+	icon_state = "urf_contract"
 	faction_to = "Insurrection"
 	lines = list(\
 	"I do solemnly swear my life to the cause of freedom.",\
@@ -110,6 +110,9 @@
 	)
 
 /obj/item/conversion_contract/cov
+	name = "Hymn Of Allegiance"
+	desc = "A tablet containing the lines needed to induct someone into the covenant. Links to the covenant Battlenet to perform the relevant admnistratorial duties automatically."
+	icon_state = "cov_contract"
 	faction_to = "Covenant"
 	lines = list(\
 	"I devote myself to further the Great Journey in any capacity even to my last dying breath.",\
@@ -117,3 +120,10 @@
 	"In exchange for my service, my undying loyalty, and my devotion to the cause, I will be granted repentance and a place in the Great Journey.",\
 	"On swearing of this pledge, I will be protected from all previous transgressions coming from my past."
 	)
+
+/obj/item/conversion_contract/cov/do_convert(var/mob/target)
+	. = ..()
+	var/mob/living/carbon/human/h = target
+	if(istype(h))
+		h.add_language(LANGUAGE_SANGHEILI)
+		to_chat(h,"<span class = 'notice'>A glowing artifact embedded into [src] grows dim for a moment as knowledge rushes into your mind.</span>")
