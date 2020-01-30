@@ -30,7 +30,7 @@
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/murmillo
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	l_hand = /obj/item/weapon/melee/blamite/dagger
-	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger
+	l_pocket = /obj/item/language_learner/unggoy_to_common
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/murmillo
 	gloves = /obj/item/clothing/gloves/skirmisher_shield_gauntlets
 	shoes = /obj/item/clothing/shoes/skirmisher/murmillo
