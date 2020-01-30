@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "The Vox shuttle can now return to its hangar properly."
