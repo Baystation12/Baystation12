@@ -1,4 +1,4 @@
-#define ITEM_REPAIR_DELAY 30 SECONDS
+#define ITEM_REPAIR_DELAY 10 SECONDS
 
 /obj/item/weapon/armor_patch
 	name ="\improper Armor Repair Kit"
