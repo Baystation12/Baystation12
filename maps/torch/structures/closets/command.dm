@@ -90,7 +90,7 @@
 		/obj/item/clothing/suit/armor/pcarrier/medium/command,
 		/obj/item/clothing/head/helmet/solgov/command,
 		/obj/item/weapon/storage/belt/holster/general,
-		/obj/item/weapon/gun/energy/revolver/secure,
+		/obj/item/weapon/gun/energy/confuseray,
 		/obj/item/device/radio/headset/sea,
 		/obj/item/device/radio/headset/sea/alt,
 		/obj/item/weapon/storage/belt/general,
