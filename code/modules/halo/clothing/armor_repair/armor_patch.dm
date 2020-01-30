@@ -7,7 +7,7 @@
 	icon_state = "armor_patch"
 	w_class = ITEM_SIZE_NORMAL
 	slot_flags = SLOT_BELT | SLOT_POCKET
-	var/repair_supplies = 10 //The amount of armor damage this patch can repair
+	var/repair_supplies = 30 //The amount of armor damage this patch can repair
 
 /obj/item/weapon/armor_patch/examine(var/mob/examiner)
 	. = ..()
