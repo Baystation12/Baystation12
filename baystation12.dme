@@ -1603,6 +1603,7 @@
 #include "code\modules\halo\misc\chasm.dm"
 #include "code\modules\halo\misc\co_ord_console.dm"
 #include "code\modules\halo\misc\comms_bypass_key.dm"
+#include "code\modules\halo\misc\conversion_contracts.dm"
 #include "code\modules\halo\misc\faction_whitelist.dm"
 #include "code\modules\halo\misc\flaming_torch.dm"
 #include "code\modules\halo\misc\gas_collector.dm"
