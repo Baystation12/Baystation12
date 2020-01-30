@@ -10,7 +10,7 @@
 	max_shots = 80
 	slowdown_general = 0
 	var/overcharge = 0
-	projectile_type = /obj/item/projectile/covenant/plasmapistol
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmapistol
 	screen_shake = 0
 	irradiate_non_cov = 5
 	var/overcharge_cost = 1
@@ -44,7 +44,7 @@
 		if(new_overcharge)
 			if(user)
 				visible_message("<span class='notice'>[user.name]'s [src]'s lights brighten</span>","<span class='notice'>You activate your [src]'s overcharge</span>")
-			projectile_type = /obj/item/projectile/covenant/plasmapistol/overcharge
+			projectile_type = /obj/item/projectile/bullet/covenant/plasmapistol/overcharge
 			charge_cost = overcharge_cost
 			overcharge = 1
 			overlays += "overcharge"
@@ -72,7 +72,7 @@
 	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact. This one appears to be modified to fire very weak bolts of energy."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "Training Pistol"
-	projectile_type = /obj/item/projectile/covenant/trainingpistol
+	projectile_type = /obj/item/projectile/bullet/covenant/trainingpistol
 
 /obj/item/weapon/gun/energy/plasmapistol/trainingpistol/set_overcharge(var/new_overcharge = 1, var/mob/user = null)
 	return

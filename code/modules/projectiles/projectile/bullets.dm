@@ -44,18 +44,7 @@
 			return 0
 		return 1
 
-	var/chance = damage
-	if(istype(A, /turf/simulated/wall))
-		var/turf/simulated/wall/W = A
-		chance = round(damage/W.material.integrity*180)
-	else if(istype(A, /obj/machinery/door))
-		var/obj/machinery/door/D = A
-		chance = round(damage/D.maxhealth*180)
-		if(D.glass) chance *= 2
-	else if(istype(A, /obj/structure/girder))
-		chance = 100
-
-	if(prob(chance))
+	if(penetrating > 0)
 		if(A.opacity)
 			//display a message so that people on the other side aren't so confused
 			A.visible_message("<span class='warning'>\The [src] pierces through \the [A]!</span>")

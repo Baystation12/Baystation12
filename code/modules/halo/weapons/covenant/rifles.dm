@@ -9,7 +9,7 @@
 	charge_meter = 1
 	max_shots = 120 //Less shots, more damage. Exactly 40 bursts.
 	burst = 3
-	projectile_type = /obj/item/projectile/covenant/plasmarifle
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
 	screen_shake = 0
 	is_heavy = 1
 	fire_delay = 10 //4 more ticks than usual
@@ -50,7 +50,7 @@
 	max_shots = 0 //Less shots, more damage. Exactly 10 bursts.
 	recharge_time = 500
 	burst = 1
-	projectile_type = /obj/item/projectile/covenant/plasmarifle
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
 	screen_shake = 0
 	dispersion=list(0.0, 0.6, 0.8)
 	item_icons = list(
@@ -62,7 +62,7 @@
 	name = "Type-25 Directed Energy Rifle (overcharged)"
 	icon_state = "Brute Plasma Rifle"
 	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma at an accelerated rate. This one appears to be overcharged for fire speed."
-	projectile_type = /obj/item/projectile/covenant/plasmarifle/brute
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle/brute
 	fire_delay = 6
 	accuracy = 0
 	burst_delay = 1

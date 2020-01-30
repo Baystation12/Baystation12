@@ -55,7 +55,7 @@
 	icon_state = "chaingun_obj"
 	item_state = ""
 
-	projectile_fired = /obj/item/projectile/covenant/plasmarifle
+	projectile_fired = /obj/item/projectile/bullet/covenant/plasmarifle
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	burst_delay = 0.3 SECONDS
 	fire_delay = 1.5 SECONDS

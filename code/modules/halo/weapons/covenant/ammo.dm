@@ -1,17 +1,19 @@
 #define NEEDLER_EMBED_PROB 33
 
  // need icons for all projectiles and magazines
-/obj/item/projectile/covenant
+/obj/item/projectile/bullet/covenant
 	name = "Plasma Bolt"
 	desc = "A searing hot bolt of plasma."
 	check_armour = "energy"
+	embed = 0
+	sharp = 0
 
-/obj/item/projectile/covenant/attack_mob()
+/obj/item/projectile/bullet/covenant/attack_mob()
 	damage_type = BURN
 	damtype = BURN
 	return ..()
 
-/obj/item/projectile/covenant/trainingpistol
+/obj/item/projectile/bullet/covenant/trainingpistol
 	armor_penetration = 0
 	nodamage = 1
 	agony = 10
@@ -19,29 +21,29 @@
 	penetrating = 0
 	icon_state = "Trainingpistol Shot"
 
-/obj/item/projectile/covenant/plasmapistol
+/obj/item/projectile/bullet/covenant/plasmapistol
 	damage = 45
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 
-/obj/item/projectile/covenant/plasmapistol/overcharge
+/obj/item/projectile/bullet/covenant/plasmapistol/overcharge
 	damage = 60
 	icon_state = "Overcharged_Plasmapistol shot"
 
-/obj/item/projectile/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
+/obj/item/projectile/bullet/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
 	empulse(impacted.loc,1,1)
 
-/obj/item/projectile/covenant/plasmarifle
+/obj/item/projectile/bullet/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
-/obj/item/projectile/covenant/plasmarifle/brute
+/obj/item/projectile/bullet/covenant/plasmarifle/brute
 	damage = 30
 	icon_state = "heavy_plas_cannon"
 
-/obj/item/projectile/covenant/beamrifle
+/obj/item/projectile/bullet/covenant/beamrifle
 	name = "energy beam"
 	desc = ""
 	damage = 55
@@ -168,6 +170,8 @@
 	tracer_type = /obj/effect/projectile/type51carbine
 	tracer_delay_time = 1.5 SECONDS
 	invisibility = 101
+	embed = 1
+	sharp = 1
 
 /obj/item/projectile/bullet/covenant/type51carbine/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
@@ -246,6 +250,7 @@
 	step_delay = 1.2
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
+	embed = 1
 
 /obj/item/projectile/bullet/fuel_rod/on_impact(var/atom/A)
 	. = ..()

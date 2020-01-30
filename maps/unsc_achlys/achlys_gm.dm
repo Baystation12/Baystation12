@@ -10,7 +10,7 @@
 	round_description = ""
 	extended_round_description = ""
 	config_tag = "achlys"
-	votable = 1
+	votable = 0
 	probability = 0
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.

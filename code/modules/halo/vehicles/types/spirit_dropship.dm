@@ -52,7 +52,7 @@
 	desc = "A cannon that fires large bolts of plasma"
 
 	fire_sound = 'code/modules/halo/sounds/spirit_firesound.ogg'
-	projectile_fired = /obj/item/projectile/covenant/spirit_cannon
+	projectile_fired = /obj/item/projectile/bullet/covenant/spirit_cannon
 
 	fire_delay = 2 SECONDS
 
@@ -60,10 +60,10 @@
 
 	irradiate_non_cov = 12
 
-/obj/item/projectile/covenant/spirit_cannon
+/obj/item/projectile/bullet/covenant/spirit_cannon
 	damage = 25
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "heavy_plas_cannon"
 
-/obj/item/projectile/covenant/spirit_cannon/on_impact(var/atom/impacted)
+/obj/item/projectile/bullet/covenant/spirit_cannon/on_impact(var/atom/impacted)
 	explosion(impacted,-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1,adminwarn = 0)

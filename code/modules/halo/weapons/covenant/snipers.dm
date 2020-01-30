@@ -57,7 +57,7 @@
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
 	charge_meter = 0
 	max_shots = 10
-	projectile_type = /obj/item/projectile/covenant/beamrifle
+	projectile_type = /obj/item/projectile/bullet/covenant/beamrifle
 	one_hand_penalty = -1
 	irradiate_non_cov = 15
 	wielded_item_state = "beamrifle-wielded"

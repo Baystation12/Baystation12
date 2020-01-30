@@ -208,14 +208,14 @@
 
 /obj/item/ammo_magazine/a762_box_ap
 	name = "box magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 rounds. Designed for heavier use."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 150 rounds. Designed for heavier use."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	mag_type = MAGAZINE
 	icon_state = "M739mag"
 	ammo_type = /obj/item/ammo_casing/a762_ap
 	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
 	caliber = "a762"
-	max_ammo = 72
+	max_ammo = 150
 	multiple_sprites = 1
 
 /obj/item/ammo_magazine/a762_box_ap/empty
@@ -223,14 +223,14 @@
 
 /obj/item/ammo_magazine/lmg_30cal_box_ap
 	name = "box magazine (7.62mm) M118 FMJ-AP"
-	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 72 rounds. Designed for heavier use."
+	desc = "7.62x51mm M118 Full Metal Jacket Armor Piercing box magazine containing 150 rounds. Designed for heavier use."
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	mag_type = MAGAZINE
 	icon_state = "Innie 30cal box - Full"
 	ammo_type = /obj/item/ammo_casing/a762_ap
 	matter = list(DEFAULT_WALL_MATERIAL = 5000) //7.62mm casing = 50 metal each
 	caliber = "a762"
-	max_ammo = 72
+	max_ammo = 150
 	multiple_sprites = 1
 
 
@@ -312,7 +312,7 @@
 	projectile_type = /obj/item/projectile/bullet/m5/rubber
 
 /obj/item/projectile/bullet/m5
-	damage = 20
+	damage = 25
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
 	name = "rubber bullet"

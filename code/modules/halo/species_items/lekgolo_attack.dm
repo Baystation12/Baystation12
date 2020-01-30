@@ -22,7 +22,7 @@
 /datum/mgalekgolo_weapon/fuel_rod_cannon
 	name = "Fuel Rod Cannon"
 
-	proj = /obj/item/projectile/covenant/hunter_fuel_rod
+	proj = /obj/item/projectile/bullet/covenant/hunter_fuel_rod
 	fire_sound = 'code/modules/halo/sounds/hunter_cannon.ogg'
 	charge_sound = 'code/modules/halo/sounds/hunter_charge.ogg'
 
