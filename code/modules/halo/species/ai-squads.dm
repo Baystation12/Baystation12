@@ -20,7 +20,7 @@
 	icon_dead = "Grunt_mob_dead"
 	ranged = 1
 	destroy_surroundings = 0
-	projectiletype = /obj/item/projectile/covenant/plasmapistol
+	projectiletype = /obj/item/projectile/bullet/covenant/plasmapistol
 	projectilesound = 'code/modules/halo/sounds/haloplasmapistol.ogg'
 
 /mob/living/carbon/human/covenant/sangheili/proc/grunts()

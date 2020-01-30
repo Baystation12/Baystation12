@@ -7,11 +7,11 @@
 	item_state = "plasmarifle"//Need an inhand sprite. Plasrifle used as placeholder.
 	w_class = ITEM_SIZE_HUGE
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
-	projectile_type = /obj/item/projectile/covenant/plasmarifle
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
 	slot_flags = 0	//too unwieldy to carry on your back
 	one_hand_penalty = -1
 	burst = 6
-	max_shots =200
+	max_shots =415
 	burst_delay = 1.3
 	charge_meter = 0
 	burst_accuracy = list(-2,-2,-2,-1,0,0)

@@ -60,4 +60,4 @@
 	desc = "A self-contained power cell for the Type-52 Directed Energy Support Weapon"
 	icon = 'code/modules/halo/weapons/turrets/turret_cov_casing.dmi'
 	caliber = "plas_turret_cells"
-	projectile_type = /obj/item/projectile/covenant/plasmarifle
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
