@@ -170,6 +170,8 @@
 	tracer_type = /obj/effect/projectile/type51carbine
 	tracer_delay_time = 1.5 SECONDS
 	invisibility = 101
+	embed = 1
+	sharp = 1
 
 /obj/item/projectile/bullet/covenant/type51carbine/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
@@ -248,6 +250,7 @@
 	step_delay = 1.2
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
+	embed = 1
 
 /obj/item/projectile/bullet/fuel_rod/on_impact(var/atom/A)
 	. = ..()
