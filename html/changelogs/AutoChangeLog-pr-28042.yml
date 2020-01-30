@@ -1,0 +1,6 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Paper will now check if your pen works before you start writing instead of after you've written your text."
+  - tweak: "If your retractable pen isn't in its active state when you start writing on something, your character will automatically click it."
+  - tweak: "Retractable pens will now toggle to their active state when you write on anything (union cards, people, the wall) instead of only paper."
