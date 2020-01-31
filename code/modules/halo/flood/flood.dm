@@ -476,7 +476,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "guard_infested"
 	icon_living = "guard_infested"
 	icon_dead = "guard_dead"
-	//
+	inventory = "/obj/item/ammo_magazine/m762_ap/MA37"
 	move_to_delay = 2
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
