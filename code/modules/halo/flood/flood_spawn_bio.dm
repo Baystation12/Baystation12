@@ -113,10 +113,8 @@
 	icon = 'flood_bio.dmi'
 	icon_state = "pulsating"
 	max_flood = 3
-	/datum/flood_spawner/flood_spawner/achlys
 	spawn_pool = list(\
 	/mob/living/simple_animal/hostile/flood/combat_form/prisoner, \
 	/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard, \
-	/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew \
-	)
+	/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew)
 	respawn_delay = 300
