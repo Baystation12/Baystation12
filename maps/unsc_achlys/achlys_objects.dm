@@ -332,10 +332,3 @@
 	mouse_opacity = 0
 	density = 0
 	layer = 2
-
-/datum/flood_spawner/achlys
-	spawn_pool = list(\
-	/mob/living/simple_animal/hostile/flood/combat_form/prisoner, \
-	/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard, \
-	/mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew \
-	)
