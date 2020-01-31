@@ -195,10 +195,16 @@ SUBSYSTEM_DEF(throwing)
 	finalize(hit=TRUE, t_target=A)
 
 /datum/thrownthing/proc/hitcheck(var/turf/T)
+	var/atom/movable/hit_thing
 	for (var/thing in T)
 		var/atom/movable/AM = thing
 		if (AM == thrownthing || (AM == thrower && !ismob(thrownthing)))
 			continue
-		if (AM.density && !(AM.throwpass))//check if ATOM_FLAG_CHECKS_BORDER as an atom_flag is needed
-			finalize(hit=TRUE, t_target=AM)
-			return TRUE
+		if (!AM.density || AM.throwpass)//check if ATOM_FLAG_CHECKS_BORDER as an atom_flag is needed
+			continue
+		if (!hit_thing || AM.layer > hit_thing.layer)
+			hit_thing = AM
+
+	if(hit_thing)
+		finalize(hit=TRUE, t_target=hit_thing)
+		return TRUE
