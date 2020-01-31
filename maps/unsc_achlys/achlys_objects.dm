@@ -175,20 +175,36 @@
 	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth."
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "nav_computer"
-	var/health = 30
+	var/health
+	var/maxhealth = 30
 	light_range = 1
 	light_color = "#ebf7fe"
 	density = 1
 	anchored = 1
 
-/obj/structure/navconsole/attackby(atom/movable/AM as mob|obj)
-	if(istype(AM, /mob/living/simple_animal/hostile/flood))
-		return
-
-/obj/structure/navconsole/proc/damage(var/damage)
+/obj/structure/navconsole/proc/take_damage(var/damage = 0)// I want to know who the fuck made structures take this much work to break.
 	health -= damage
+	health = max(0, health - damage)
 	if(health <= 0)
 		qdel(src)
+	return
+
+/obj/structure/navconsole/bullet_act(var/obj/item/projectile/Proj)
+
+	var/proj_damage = Proj.get_structure_damage()
+	if(!proj_damage) return
+
+	..()
+	take_damage(proj_damage)
+	return
+
+/obj/structure/navconsole/proc/hit(var/damage)
+	take_damage(damage)
+	return
+
+/obj/structure/navconsole/attack_generic(var/mob/user, var/damage)
+	if(damage)
+		return
 
 /obj/item/weapon/reference
 	name = "gold coin"
