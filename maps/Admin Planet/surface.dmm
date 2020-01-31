@@ -157,7 +157,7 @@
 "da" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/decor{tag = "icon-darkbrown"; icon_state = "darkbrown"},/area/admin)
 "db" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/decor{tag = "icon-darkbrown"; icon_state = "darkbrown"},/area/admin)
 "dc" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/decor{tag = "icon-darkbrown"; icon_state = "darkbrown"},/area/admin)
-"dd" = (/obj/structure/tanktrap,/turf/unsimulated/floor/grass4,/area/admin)
+"dd" = (/obj/structure/barricade/tanktrap,/turf/unsimulated/floor/grass4,/area/admin)
 "de" = (/obj/structure/sandbag{tag = "icon-sandbag (WEST)"; icon_state = "sandbag"; dir = 8},/turf/unsimulated/floor/grass4,/area/admin)
 "df" = (/obj/structure/table/steel_reinforced,/obj/machinery/button/remote/blast_door{id = "base_en1"; name = "First Gate"},/turf/simulated/floor/decor{tag = "icon-darkbrown"; icon_state = "darkbrown"},/area/admin)
 "dg" = (/obj/structure/table/steel_reinforced,/obj/item/modular_computer/laptop/preset/custom_loadout/advanced,/turf/simulated/floor/decor{tag = "icon-darkbrown"; icon_state = "darkbrown"},/area/admin)
