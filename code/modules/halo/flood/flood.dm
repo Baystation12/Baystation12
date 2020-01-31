@@ -213,6 +213,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(!attempt_nearby_infect())
 		if(!revive_nearby_combatforms())
 			infest_airlocks_nearby()
+	if(health <= 0)
+		death()
+		return
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
 	. = ..()
@@ -294,6 +297,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return
 
 	health = 0
+
+/mob/living/simple_animal/hostile/flood/carrier/Move()
+	. = ..()
+	if(health <= 0)
+		death()
+		return
 
 /mob/living/simple_animal/hostile/flood/carrier/death(gibbed, deathmessage = "bursts!")
 	to_chat(src,"<span class='danger'>You burst, propelling flood infestors in all directions!</span>")
@@ -422,6 +431,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
 	. = ..()
+	if(health <= 0)
+		death()
+		return
 	if(stat == DEAD)
 		return
 	if(ckey || client)
