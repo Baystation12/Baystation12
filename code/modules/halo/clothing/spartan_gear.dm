@@ -22,7 +22,7 @@
 	icon_base = "neuralboots_obj"
 	item_state = "neuralboots"
 	force = 5
-	armor = null
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 50, bio = 0, rad = 0)
 	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
@@ -44,7 +44,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	body_parts_covered = HANDS
-	armor = null
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 35, bio = 0, rad = 0)
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
