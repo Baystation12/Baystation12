@@ -94,7 +94,7 @@
 	))
 	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/barrel, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
-	recipes += new/datum/stack_recipe("tank trap", /obj/structure/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("tank trap", /obj/structure/barricade/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
 /material/plasteel/generate_recipes()
 	..()
 	//recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)

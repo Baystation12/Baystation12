@@ -6,6 +6,7 @@
 #define MARINE_INHAND 'code/modules/halo/clothing/marine_items.dmi'
 #define URF_HAND 'code/modules/halo/clothing/head.dmi'
 #define URF_OVERRIDE 'code/modules/halo/clothing/urf_commando.dmi'
+#define SPARTAN_OVERRIDE 'code/modules/halo/clothing/SpartanHussarKit.dmi'
 
 
 //Obj sprites go in ITEM_INHAND or MARINE_INHAND
@@ -24,13 +25,12 @@
 	startswith = list()
 	can_hold = list()
 
-
 ////////ashvor\\\\\\\\
 
 //Marine
 
 /obj/item/clothing/under/unsc/marine_fatigues/ashvor
-	desc = "A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps"
+	desc = "A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps."
 	name = "UNSC Cross Branch Battle Dress Uniform"
 	item_state = "ashvor-uniform"
 	icon_state = "ashvor-uniform_obj"
@@ -68,7 +68,7 @@
 	icon_base = "ashvor-boots_obj"
 	item_state_slots = list(slot_l_hand_str = "ashvor-boots", slot_r_hand_str = "ashvor-boots")
 
-/obj/item/weapon/storage/backpack/odst/regular/ashvor
+/obj/item/weapon/storage/backpack/marine/ashvor
 	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force."
 	name = "UNSC Tactical Backpack"
 	item_state = "ashvor-backpack_worn"
@@ -102,13 +102,13 @@
 					/obj/item/clothing/gloves/thick/unsc/ashvor,
 					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
 					/obj/item/clothing/head/helmet/eva/marine/ashvor,
-					/obj/item/weapon/storage/backpack/odst/regular/ashvor)
+					/obj/item/weapon/storage/backpack/marine/ashvor)
 	can_hold = list(/obj/item/clothing/under/unsc/marine_fatigues/ashvor,
 					/obj/item/clothing/suit/spaceeva/eva/ashvor,
 					/obj/item/clothing/gloves/thick/unsc/ashvor,
 					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
 					/obj/item/clothing/head/helmet/eva/marine/ashvor,
-					/obj/item/weapon/storage/backpack/odst/regular/ashvor)
+					/obj/item/weapon/storage/backpack/marine/ashvor)
 
 /decl/hierarchy/outfit/ashvor_marine
 	name = "ashvor - marine"
@@ -117,7 +117,69 @@
 	shoes = /obj/item/clothing/shoes/magboots/eva/marine/ashvor
 	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
 	head = /obj/item/clothing/head/helmet/eva/marine/ashvor
-	back = /obj/item/weapon/storage/backpack/odst/regular/ashvor
+	back = /obj/item/weapon/storage/backpack/marine/ashvor
+
+//ODST
+
+/obj/item/clothing/under/unsc/odst_jumpsuit/ashvor
+	name = "UNSC Cross Branch Battle Dress Uniform"
+	desc = "A variant of the standard issue uniform used with the pressurized Atmospheric/Exoatmospheric armor worn by members of the UNSC Marine Corps. This uniform sports ODST colors."
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	item_state = "ashvor-odst-uniform"
+	icon_state = "ashvor-odst-uniform_obj"
+	worn_state = "ashvor-odst-uniform"
+	item_icons = list(
+		slot_l_hand_str = null,
+		slot_r_hand_str = null,
+		)
+
+/obj/item/clothing/head/helmet/odst/ashvor
+	desc = "A modified ECH252 Enclosed Helmet, has been brought into line with ODST Armor Specs and Requirements,"
+	name = "Modified ECH252 Enclosed Helmet"
+	item_state = "ashvor-odst-helmet_worn"
+	icon_state = "ashvor-odst-helmet_obj"
+	item_state_novisr = "ashvor-odst-helmet-open_worn"
+	icon_state_novisr = "ashvor-odst-helmet-open_obj"
+	item_state_slots = list(slot_l_hand_str = "ashvor-odst-helmet", slot_r_hand_str = "ashvor-odst-helmet")
+
+/obj/item/clothing/suit/armor/special/odst/ashvor
+	desc = "The standard M52A/X worn by Marines, further modified with ODST armor chestplate. Additional plates have been added across the suit and a new two piece ballistic plate fitted to the left shoulder."
+	name = "Modified M52A/X Body Armor"
+	item_state = "ashvor-odst-armor_worn"
+	icon_state = "ashvor-odst-armor_obj"
+	flags_inv = HIDETAIL
+	item_state_slots = list(slot_l_hand_str = "ashvor-odst-armor", slot_r_hand_str = "ashvor-odst-armor")
+
+/obj/item/weapon/storage/backpack/odst/donator/general/ashvor
+	desc = "The a softcase backpack with capacity to carry ammunition, tools, and medical supplies. Used by the UNSC Army, Marines, and Air Force. This one sports ODST markings and coat."
+	name = "UNSC Tactical Backpack"
+	item_state = "ashvor-odst-backpack_worn"
+	icon_state = "ashvor-odst-backpack_obj"
+	item_state_slots = list(slot_l_hand_str = "ashvor-odst-backpack", slot_r_hand_str = "ashvor-odst-backpack")
+
+/obj/item/weapon/storage/box/large/odst/donator/ashvor
+	startswith = list(/obj/item/clothing/under/unsc/odst_jumpsuit/ashvor,
+					/obj/item/clothing/suit/armor/special/odst/ashvor,
+					/obj/item/clothing/gloves/thick/unsc/ashvor,
+					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
+					/obj/item/clothing/head/helmet/odst/ashvor,
+					/obj/item/weapon/storage/backpack/odst/donator/general/ashvor)
+	can_hold = list(/obj/item/clothing/under/unsc/odst_jumpsuit/ashvor,
+					/obj/item/clothing/suit/armor/special/odst/ashvor,
+					/obj/item/clothing/gloves/thick/unsc/ashvor,
+					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
+					/obj/item/clothing/head/helmet/odst/ashvor,
+					/obj/item/weapon/storage/backpack/odst/donator/general/ashvor)
+
+/decl/hierarchy/outfit/ashvor_odst
+	name = "ashvor - odst"
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit/ashvor
+	suit = /obj/item/clothing/suit/armor/special/odst/ashvor
+	shoes = /obj/item/clothing/shoes/magboots/eva/marine/ashvor
+	gloves = /obj/item/clothing/gloves/thick/unsc/ashvor
+	head = /obj/item/clothing/head/helmet/odst/ashvor
+	back = /obj/item/weapon/storage/backpack/odst/donator/general/ashvor
 
 ////////caelumz\\\\\\\\
 
@@ -708,6 +770,28 @@ decl/hierarchy/outfit/Jul
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/kozi
 	l_hand = /obj/item/weapon/material/machete/kozi
 	back = /obj/item/weapon/storage/backpack/odst/kozi
+
+//Spartan
+
+/obj/item/clothing/head/helmet/spartan/kozi_spartan
+	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Hassar"
+	icon = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	icon_state = "osama-spartan-helm_obj"
+	item_state = "osama-spartan-helm_worn"
+	icon_override = SPARTAN_OVERRIDE
+
+/obj/item/clothing/suit/armor/special/spartan/kozi_spartan
+	name = "MJOLNIR Powered Assault Armor Mark IV Hassar"
+	icon = 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+	icon_state = "osama-spartan-armor_obj"
+	item_state = "osama-spartan-armor_worn"
+	icon_override = SPARTAN_OVERRIDE
+
+/decl/hierarchy/outfit/kozi_spartan
+	name = "kozi - spartan"
+	suit = /obj/item/clothing/suit/armor/special/spartan/kozi_spartan
+	head = /obj/item/clothing/head/helmet/spartan/kozi_spartan
+	l_hand = /obj/item/weapon/material/machete/kozi
 
 ////////liam_gallagher\\\\\\\\
 
@@ -2085,3 +2169,4 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 #undef MARINE_INHAND
 #undef URF_OVERRIDE
 #undef URF_HAND
+#undef SPARTAN_OVERRIDE

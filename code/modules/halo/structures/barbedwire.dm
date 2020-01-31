@@ -67,9 +67,23 @@
 	center_of_mass = null
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
+	var/is_spooling = 0
 
 /obj/item/stack/barbedwire/attack_self(var/mob/user)
-	if(do_after(user, 10) && use(1))
-		new /obj/structure/bardbedwire(user.loc)
-		user.visible_message("<span class='info'>[user] spools out from a coil of barbed wire.</span>",\
+	for(var/obj/structure/bardbedwire/D in user.loc)
+		if(istype(D))
+			to_chat(user, "<span class='warning'>There is a spool already here!</span>")
+			return
+	if(!is_spooling)
+		visible_message("[user] starts spooling the \the [src].")
+		is_spooling = 1
+		if(do_after(user, 10) && use(1))
+			new /obj/structure/bardbedwire(user.loc)
+			user.visible_message("<span class='info'>[user] spools out from a coil of barbed wire.</span>",\
 			"<span class = 'info'>You spool out from the coil of barbed wire.</span>")
+		is_spooling = 0
+	else
+		to_chat(user, "<span class='warning'>Someone is already spooling barbedwire here!</span>")
+
+
+
