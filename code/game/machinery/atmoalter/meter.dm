@@ -9,7 +9,7 @@
 	idle_power_usage = 15
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc/buildable
+		/obj/item/weapon/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
@@ -19,8 +19,8 @@
 	stock_part_presets = list(/decl/stock_part_preset/radio/basic_transmitter/meter = 1)
 
 	frame_type = /obj/item/machine_chassis/pipe_meter
-	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
-	base_type = /obj/machinery/meter/buildable
+	construct_state = /decl/machine_construction/default/item_chassis
+	base_type = /obj/machinery/meter
 
 /obj/machinery/meter/Initialize()
 	. = ..()
@@ -102,9 +102,6 @@
 	if (!target)
 		set_target(loc)
 	. = ..()
-
-/obj/machinery/meter/buildable
-	uncreated_component_parts = null
 
 /obj/machinery/meter/starts_with_radio
 	uncreated_component_parts = list(
