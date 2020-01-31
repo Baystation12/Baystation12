@@ -151,7 +151,7 @@ var/global/list/image/splatter_cache=list()
 	var/list/drips = list()
 
 /obj/effect/decal/cleanable/blood/drip/New()
-	..()
+	. = ..()
 	drips |= icon_state
 
 /obj/effect/decal/cleanable/blood/writing

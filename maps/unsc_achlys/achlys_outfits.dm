@@ -26,7 +26,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/unsc_achlys/marine
-	name = "Marine Standard"
+	name = "Marine"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
@@ -38,13 +38,8 @@
 
 	hierarchy_type = /decl/hierarchy/outfit/job
 
-/decl/hierarchy/outfit/job/unsc_achlys/marine/equip_id(mob/living/carbon/human/H)
-	var/obj/item/weapon/card/id/C = ..()
-	C.assignment = "Marine"
-	H.set_id_info(C)
-
-/decl/hierarchy/outfit/job/unsc_achlys/marine/operative
-	name = "Marine"
+/decl/hierarchy/outfit/job/unsc_achlys/operative
+	name = "Operative"
 
 	l_ear = /obj/item/device/radio/headset/unsc/marine
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues
@@ -56,6 +51,11 @@
 	flags = 0
 
 	hierarchy_type = /decl/hierarchy/outfit/job
+
+/decl/hierarchy/outfit/job/unsc_achlys/operative/equip_id(mob/living/carbon/human/H)
+	var/obj/item/weapon/card/id/C = ..()
+	C.assignment = "Marine"
+	H.set_id_info(C)
 
 /decl/hierarchy/outfit/job/unsc_achlys/pilot
 	name = "Pilot"
@@ -73,7 +73,7 @@
 	name = "Prisoner"
 
 	l_ear = null
-	r_ear = /obj/item/device/flashlight/pen
+	r_ear = /obj/item/device/flashlight/pen/bright
 	uniform = /obj/item/clothing/under/color/orange
 	shoes = /obj/item/clothing/shoes/orange
 	pda_slot = null
@@ -117,7 +117,7 @@
 	equip_special(H)
 	. = ..()
 
-/decl/hierarchy/outfit/job/unsc_anchlys/sangheili
+/decl/hierarchy/outfit/job/unsc_achlys/sangheili
 	name = "Sangheili Prisoner"
 
 	l_ear = null
