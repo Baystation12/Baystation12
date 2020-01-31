@@ -681,7 +681,7 @@
 "ne" = (/obj/structure/closet,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/six/z4barrack1)
 "nf" = (/obj/structure/closet{icon_state = "open"; opened = 1},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/six/z4barrack2)
 "ng" = (/turf/simulated/wall/strong,/area/achlys/four/z4hanger1)
-"nh" = (/obj/machinery/slipspace_engine/human,/obj/item/flood_spore,/turf/simulated/floor/tech,/area/achlys/four/z4engineeringmain)
+"nh" = (/obj/machinery/slipspace_engine/human,/obj/item/flood_spore,/obj/structure/overmind_controller,/turf/simulated/floor/tech,/area/achlys/four/z4engineeringmain)
 "ni" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tech/gray,/area/achlys/four/z4hanger1)
 "nj" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tech/gray,/area/achlys/four/z4hanger1)
 "nk" = (/turf/simulated/floor/tech/gray,/area/achlys/four/z4hanger1)
