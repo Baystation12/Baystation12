@@ -4,16 +4,16 @@
 	name = "cryo cell"
 	icon = 'icons/obj/cryogenics.dmi' // map only
 	icon_state = "pod_preview"
-	density = 1
-	anchored = 1.0
-	interact_offline = 1
+	density = TRUE
+	anchored = TRUE
+	interact_offline = TRUE
 	layer = ABOVE_HUMAN_LAYER
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
 
-	var/on = 0
+	var/on = FALSE
 	idle_power_usage = 20
 	active_power_usage = 200
 	clicksound = 'sound/machines/buttonbeep.ogg'
@@ -24,6 +24,9 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 
 	var/current_heat_capacity = 50
+
+	movement_handlers = list(/datum/movement_handler/move_relay)
+	var/mob_breaking_out = FALSE
 
 /obj/machinery/atmospherics/unary/cryo_cell/Initialize()
 	. = ..()
@@ -72,7 +75,7 @@
 		return
 
 	if(occupant)
-		if(occupant.stat != 2)
+		if(occupant.stat != DEAD)
 			process_occupant()
 
 	if(has_air_contents)
@@ -81,14 +84,18 @@
 		expel_gas()
 
 	if(abs(temperature_archived-air_contents.temperature) > 1)
-		network.update = 1
+		network.update = TRUE
 
-	return 1
+	return TRUE
 
-/obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user as mob)
-	// note that relaymove will also be called for mobs outside the cell with UI open
-	if(src.occupant == user && !user.stat)
-		go_out()
+/obj/machinery/atmospherics/unary/cryo_cell/relaymove(mob/user)
+	if(occupant == user)
+		if(user.stat == CONSCIOUS)
+			go_out()
+		else if(user.stat == UNCONSCIOUS && !mob_breaking_out)
+			to_chat(user, SPAN_NOTICE("You begin to struggle out of \the [initial(src.name)], this will take two minutes."))
+			mob_breaking_out = !!addtimer(CALLBACK(src, /obj/machinery/atmospherics/unary/cryo_cell/proc/go_out), 2 MINUTES, TIMER_UNIQUE)
+		return MOVEMENT_HANDLED
 
 /obj/machinery/atmospherics/unary/cryo_cell/interface_interact(user)
 	ui_interact(user)
@@ -112,7 +119,7 @@
 	// this is the data which will be sent to the ui
 	var/data[0]
 	data["isOperating"] = on
-	data["hasOccupant"] = occupant ? 1 : 0
+	data["hasOccupant"] = occupant ? TRUE : FALSE
 
 	if (occupant)
 		var/cloneloss = "none"
@@ -140,7 +147,7 @@
 	else if(air_contents.temperature > 225)
 		data["cellTemperatureStatus"] = "average"
 
-	data["isBeakerLoaded"] = beaker ? 1 : 0
+	data["isBeakerLoaded"] = beaker ? TRUE : FALSE
 
 	data["beakerLabel"] = null
 	data["beakerVolume"] = 0
@@ -164,16 +171,14 @@
 /obj/machinery/atmospherics/unary/cryo_cell/OnTopic(user, href_list)
 	if(user == occupant)
 		return STATUS_CLOSE
-	. = ..()
 
-/obj/machinery/atmospherics/unary/cryo_cell/OnTopic(user, href_list)
 	if(href_list["switchOn"])
-		on = 1
+		on = TRUE
 		update_icon()
 		return TOPIC_REFRESH
 
 	if(href_list["switchOff"])
-		on = 0
+		on = FALSE
 		update_icon()
 		return TOPIC_REFRESH
 
@@ -194,12 +199,12 @@
 	if(istype(new_state))
 		updateUsrDialog()
 
-/obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/G, var/mob/user)
 	if(component_attackby(G, user))
 		return TRUE
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
-			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
+			to_chat(user, SPAN_WARNING("A beaker is already loaded into the machine."))
 			return
 		if(!user.unEquip(G, src))
 			return // Temperature will be adjusted on Entered()
@@ -264,7 +269,8 @@
 		return
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/go_out()
-	if(!( occupant ))
+	mob_breaking_out = FALSE
+	if(!occupant)
 		return
 	//for(var/obj/O in src)
 	//	O.loc = loc
@@ -272,8 +278,7 @@
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.forceMove(get_step(loc, SOUTH))
-	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) 
-		occupant.bodytemperature = 261									  
+	occupant.bodytemperature = max(occupant.bodytemperature, 261)
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
 	update_use_power(POWER_USE_IDLE)
@@ -281,22 +286,22 @@
 	SetName(initial(name))
 	return
 
-/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
+/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M)
 	if (stat & (NOPOWER|BROKEN))
-		to_chat(usr, "<span class='warning'>The cryo cell is not functioning.</span>")
-		return
+		to_chat(usr, SPAN_WARNING("The cryo cell is not functioning."))
+		return FALSE
 	if (!istype(M))
-		to_chat(usr, "<span class='danger'>The cryo cell cannot handle such a lifeform!</span>")
-		return
+		to_chat(usr, SPAN_DANGER("The cryo cell cannot handle such a lifeform!"))
+		return FALSE
 	if (occupant)
-		to_chat(usr, "<span class='danger'>The cryo cell is already occupied!</span>")
-		return
+		to_chat(usr, SPAN_DANGER("The cryo cell is already occupied!"))
+		return FALSE
 	if (M.abiotic())
-		to_chat(usr, "<span class='warning'>Subject may not have abiotic items on.</span>")
-		return
+		to_chat(usr, SPAN_WARNING("Subject may not have abiotic items on."))
+		return FALSE
 	if(!node)
-		to_chat(usr, "<span class='warning'>The cell is not correctly connected to its pipe network!</span>")
-		return
+		to_chat(usr, SPAN_WARNING("The cell is not correctly connected to its pipe network!"))
+		return FALSE
 	if (M.client)
 		M.client.perspective = EYE_PERSPECTIVE
 		M.client.eye = src
@@ -304,14 +309,16 @@
 	M.forceMove(src)
 	M.ExtinguishMob()
 	if(M.health > -100 && (M.health < 0 || M.sleeping))
-		to_chat(M, "<span class='notice'><b>You feel a cold liquid surround you. Your skin starts to freeze up.</b></span>")
+		to_chat(M, SPAN_NOTICE("<b>You feel a cold liquid surround you. Your skin starts to freeze up.</b>"))
 	occupant = M
+	occupant.AddMovementHandler(/datum/movement_handler/move_relay) // Adds a new move_relay handler to the top of the list, so that it is checked before consciousness checks
+	GLOB.moved_event.register(occupant, src, .proc/remove_handler)
 	current_heat_capacity = HEAT_CAPACITY_HUMAN
 	update_use_power(POWER_USE_ACTIVE)
 	add_fingerprint(usr)
 	update_icon()
 	SetName("[name] ([occupant])")
-	return 1
+	return TRUE
 
 	//Like grab-putting, but for mouse-dropping.
 /obj/machinery/atmospherics/unary/cryo_cell/MouseDrop_T(var/mob/target, var/mob/user)
@@ -320,9 +327,9 @@
 	if (!istype(target))
 		return
 	if (target.buckled)
-		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
+		to_chat(user, SPAN_WARNING("Unbuckle the subject before attempting to move them."))
 		return
-	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
+	user.visible_message(SPAN_NOTICE("\The [user] begins placing \the [target] into \the [src]."), SPAN_NOTICE("You start placing \the [target] into \the [src]."))
 	if(!do_after(user, 30, src))
 		return
 	put_mob(target)
@@ -333,15 +340,9 @@
 	set category = "Object"
 	set src in oview(1)
 	if(usr == occupant)//If the user is inside the tube...
-		if (usr.stat == 2)//and he's not dead....
-			return
-		to_chat(usr, "<span class='notice'>Release sequence activated. This will take two minutes.</span>")
-		sleep(1200)
-		if(!src || !usr || !occupant || (occupant != usr)) //Check if someone's released/replaced/bombed him already
-			return
-		go_out()//and release him from the eternal prison.
+		return
 	else
-		if (usr.stat != 0)
+		if (usr.stat != CONSCIOUS)
 			return
 		go_out()
 	add_fingerprint(usr)
@@ -355,13 +356,18 @@
 		if(M.Victim == usr)
 			to_chat(usr, "You're too busy getting your life sucked out of you.")
 			return
-	if (usr.stat != 0)
+	if (usr.stat != CONSCIOUS)
 		return
 	put_mob(usr)
 	return
 
 /obj/machinery/atmospherics/unary/cryo_cell/return_air()
 	return air_contents
+
+// Removes the movement handlers given to the occupant upon getting into the cryo-cell
+/obj/machinery/atmospherics/unary/cryo_cell/proc/remove_handler()
+	occupant.RemoveMovementHandler(/datum/movement_handler/move_relay) // Adds a new move_relay handler to the top of the list, so that it is checked before consciousness checks
+	GLOB.moved_event.unregister(occupant, src)
 
 //This proc literally only exists for cryo cells.
 /atom/proc/return_air_for_internal_lifeform()
@@ -378,7 +384,7 @@
 /datum/data/function/proc/reset()
 	return
 
-/datum/data/function/proc/r_input(href, href_list, mob/user as mob)
+/datum/data/function/proc/r_input(href, href_list, mob/user)
 	return
 
 /datum/data/function/proc/display()
