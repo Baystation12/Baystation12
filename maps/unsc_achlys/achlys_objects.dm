@@ -195,12 +195,14 @@
 	desc = "This coin isn't as soft as normal gold, and seems to be an improper size. Clearly a fraud."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "coin_gold"
+	w_class = 1
 
 /obj/item/weapon/research //the red herring
 	name = "research documents"
 	desc = "Random useless papers documenting some kind of nerd experiments."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "envelope_sealed"
+	w_class = 1
 
 /obj/item/weapon/research/sekrits //the mcguffin
 	name = "strange documents"
