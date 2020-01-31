@@ -21,7 +21,7 @@ GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 	spawn_positions = 10
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/sangheili
-	whitelisted_species = list(/datum/job/achlys/sangheili)
+	whitelisted_species = list(/datum/species/sangheili)
 	spawnpoint_override = "Achlys Prison"
 	faction_whitelist = "Covenant"
 	latejoin_at_spawnpoints = TRUE
