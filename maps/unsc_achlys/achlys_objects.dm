@@ -175,10 +175,16 @@
 	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth."
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "nav_computer"
+	var/health = 30
 	light_range = 1
 	light_color = "#ebf7fe"
 	density = 1
 	anchored = 1
+
+/obj/structure/navconsole/proc/damage(var/damage)
+	health -= damage
+	if(health <= 0)
+		qdel(src)
 
 /obj/item/weapon/reference
 	name = "gold coin"
@@ -292,6 +298,10 @@
 
 /obj/machinery/door/airlock/maintenance/welded
 	welded = 1
+
+/obj/item/device/flashlight/pen/bright
+	brightness_on = 3
+	light_power = 2
 
 /obj/structure/vent
 	icon = 'icons/atmos/vent_pump.dmi'
