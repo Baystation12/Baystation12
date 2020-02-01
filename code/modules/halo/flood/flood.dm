@@ -332,7 +332,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/obj/item/weapon/gun/our_gun
 
 	var/corpse_pulped = 0 //1 = cannot be revived, -1 = can be revived infinitely.
-	var/obj/item/inventory = null //an item goes in this variable of the instance with the full path "in/quotes". item in var will drop upon death
+	var/list/inventory //list of objects to select from for drop on death
 
 /mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
 	. = ..()
@@ -422,7 +422,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/proc/dump_inventory()
 	if(inventory)
-		new src.inventory(loc)
+		var/i = pick(src.inventory)
+		new i(loc)
 
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
@@ -488,7 +489,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "guard_infested"
 	icon_living = "guard_infested"
 	icon_dead = "guard_dead"
-	inventory = "/obj/item/ammo_magazine/m762_ap/MA37"
+	inventory = list(/obj/item/ammo_magazine/m762_ap/MA37)
 	move_to_delay = 2
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
