@@ -378,9 +378,10 @@
 		if(. & AIR_BLOCKED)
 			continue
 		var/area/A = get_area(neighbour)
-		if(!A.master_air_alarm)
-			return
 		if(A.atmosalm)
+			return
+		var/obj/machinery/alarm/alarm = locate() in A
+		if(!alarm || (alarm.stat & (NOPOWER|BROKEN)))
 			return
 	return TRUE
 
