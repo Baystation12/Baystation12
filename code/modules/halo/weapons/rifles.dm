@@ -11,7 +11,7 @@
 	item_state = "ma5b"
 	caliber = "a762"
 	slot_flags = SLOT_BACK
-	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_New.wav'
 	//fire_sound_burst = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
 	reload_sound = 'code/modules/halo/sounds/Assault_Rifle_Reload_New.wav'
 	load_method = MAGAZINE
