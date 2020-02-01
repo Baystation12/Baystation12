@@ -158,21 +158,6 @@
 	icon_state = "ashvor-odst-backpack_obj"
 	item_state_slots = list(slot_l_hand_str = "ashvor-odst-backpack", slot_r_hand_str = "ashvor-odst-backpack")
 
-/obj/item/weapon/storage/box/large/odst/donator/ashvor
-	max_storage_space = 75
-	startswith = list(/obj/item/clothing/under/unsc/odst_jumpsuit/ashvor,
-					/obj/item/clothing/suit/armor/special/odst/ashvor,
-					/obj/item/clothing/gloves/thick/unsc/ashvor,
-					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
-					/obj/item/clothing/head/helmet/odst/ashvor,
-					/obj/item/weapon/storage/backpack/odst/donator/general/ashvor)
-	can_hold = list(/obj/item/clothing/under/unsc/odst_jumpsuit/ashvor,
-					/obj/item/clothing/suit/armor/special/odst/ashvor,
-					/obj/item/clothing/gloves/thick/unsc/ashvor,
-					/obj/item/clothing/shoes/magboots/eva/marine/ashvor,
-					/obj/item/clothing/head/helmet/odst/ashvor,
-					/obj/item/weapon/storage/backpack/odst/donator/general/ashvor)
-
 /decl/hierarchy/outfit/ashvor_odst
 	name = "ashvor - odst"
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit/ashvor
