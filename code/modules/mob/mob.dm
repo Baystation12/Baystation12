@@ -454,6 +454,10 @@
 		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(flavor_text, "\n", "<BR>")]</TT></BODY></HTML>", "window=[name];size=500x200")
 		onclose(user, "[name]")
 		return TOPIC_HANDLED
+	else if(href_list["neck_markings_description_more"])
+		show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY><TT>[replacetext(neck_markings_text, "\n", "<BR>")]</TT></BODY></HTML>", "window=[name];size=500x200")
+		onclose(user, "[name]")
+		return TOPIC_HANDLED
 
 // You probably do not need to override this proc. Use one of the two above.
 /mob/Topic(href, href_list, datum/topic_state/state)

@@ -187,7 +187,8 @@
 	var/drowsyness = 0.0//Carbon
 
 	var/flavor_text = ""
-
+	var/neck_markings_text = ""
+	
 	var/datum/skillset/skillset = /datum/skillset
 
 

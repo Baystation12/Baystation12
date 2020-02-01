@@ -1,6 +1,7 @@
 /datum/preferences
 	var/list/flavor_texts        = list()
 	var/list/flavour_texts_robot = list()
+	var/neck_markings_description = ""
 
 /datum/category_item/player_setup_item/physical/flavor
 	name = "Flavor"
@@ -21,6 +22,8 @@
 	S["flavour_texts_robot_Default"] >> pref.flavour_texts_robot["Default"]
 	for(var/module in SSrobots.all_module_names)
 		S["flavour_texts_robot_[module]"] >> pref.flavour_texts_robot[module]
+	
+	from_file(S["neck_markings_description"], pref.neck_markings_description)
 
 /datum/category_item/player_setup_item/physical/flavor/save_character(var/savefile/S)
 	S["flavor_texts_general"]	<< pref.flavor_texts["general"]
@@ -36,15 +39,19 @@
 	S["flavour_texts_robot_Default"] << pref.flavour_texts_robot["Default"]
 	for(var/module in SSrobots.all_module_names)
 		S["flavour_texts_robot_[module]"] << pref.flavour_texts_robot[module]
+		
+	to_file(S["neck_markings_description"], pref.neck_markings_description)
 
 /datum/category_item/player_setup_item/physical/flavor/sanitize_character()
 	if(!istype(pref.flavor_texts))        pref.flavor_texts = list()
 	if(!istype(pref.flavour_texts_robot)) pref.flavour_texts_robot = list()
-
+	
 /datum/category_item/player_setup_item/physical/flavor/content(var/mob/user)
 	. += "<b>Flavor:</b><br>"
 	. += "<a href='?src=\ref[src];flavor_text=open'>Set Flavor Text</a><br/>"
 	. += "<a href='?src=\ref[src];flavour_text_robot=open'>Set Robot Flavor Text</a><br/>"
+	if((pref.species == SPECIES_VOX) || (pref.species == SPECIES_VOX_ARMALIS))
+		. += "<a href='?src=\ref[src];neck_markings=open'>Set Stack Lineage Descriptor</a><br/>"
 
 /datum/category_item/player_setup_item/physical/flavor/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if(href_list["flavor_text"])
@@ -74,7 +81,15 @@
 					pref.flavour_texts_robot[href_list["flavour_text_robot"]] = msg
 		SetFlavourTextRobot(user)
 		return TOPIC_HANDLED
-
+	
+	else if(href_list["neck_markings"])
+		switch(href_list["neck_markings"])
+			if("open")
+				var/msg = sanitize(input(usr,"Stack Lineage description.","Stack Lineage description",html_decode(pref.neck_markings_description)) as message, extra = 0)
+				if(CanUseTopic(user))
+					pref.neck_markings_description = msg
+		return TOPIC_HANDLED
+	
 	return ..()
 
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavorText(mob/user)

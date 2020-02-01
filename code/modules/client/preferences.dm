@@ -290,6 +290,9 @@ datum/preferences
 	character.flavor_texts["legs"] = flavor_texts["legs"]
 	character.flavor_texts["feet"] = flavor_texts["feet"]
 
+	if(isspecies(character, SPECIES_VOX) || isspecies(character, SPECIES_VOX_ARMALIS))
+		character.neck_markings_text = neck_markings_description
+
 	character.public_record = public_record
 	character.med_record = med_record
 	character.sec_record = sec_record

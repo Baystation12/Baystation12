@@ -309,7 +309,11 @@
 
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
-
+	
+	var/are_vox = (isspecies(user, SPECIES_VOX) || isspecies(user, SPECIES_VOX_ARMALIS)) && (isspecies(src, SPECIES_VOX) || isspecies(src, SPECIES_VOX_ARMALIS))
+	if(are_vox && (neck_markings_text && neck_markings_text != ""))
+		msg += "<span class='notice'>[T.His] neck markings <a href='byond://?src=\ref[src];neck_markings_description_more=1'>indicate...</a></span>\n"
+	
 	if(mind && user.mind && name == real_name)
 		var/list/relations = matchmaker.get_relationships_between(user.mind, mind, TRUE)
 		if(length(relations))
