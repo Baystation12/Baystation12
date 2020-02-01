@@ -7,7 +7,7 @@
 */
 
 #define SPECIES_LARGE list(/datum/species/sangheili,/datum/species/brutes,/datum/species/spartan,/datum/species/orion)
-#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 5 //half a second
+#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 0.75 SECONDS //half a second
 
 /datum/firemode
 	var/name = "default"
@@ -60,7 +60,7 @@
 	var/burst = 1
 	var/fire_delay = 6 	//delay after shooting before the gun can be used again
 	var/burst_delay = 2	//delay between shots, if firing in bursts
-	var/move_delay_malus = 0.15
+	var/move_delay_malus = 0.75
 	var/fire_sound = 'sound/weapons/gunshot/gunshot.ogg'
 	var/fire_sound_text = "gunshot"
 	var/screen_shake = 0 //shouldn't be greater than 2 unless zoomed
