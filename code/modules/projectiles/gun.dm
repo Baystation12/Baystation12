@@ -7,7 +7,7 @@
 */
 
 #define SPECIES_LARGE list(/datum/species/sangheili,/datum/species/brutes,/datum/species/spartan,/datum/species/orion)
-#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 0.75 SECONDS //half a second
+#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 0.75 SECONDS
 
 /datum/firemode
 	var/name = "default"
