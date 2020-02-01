@@ -85,7 +85,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	species_restricted = list("Sangheili")
 	item_flags = NOSLIP // Because marines get it.
-	body_parts_covered = LEGS | FEET
+	body_parts_covered = LEGS
 	armor = list(melee = 40, bullet = 60, laser = 5, energy = 5, bomb = 45, bio = 0, rad = 0)
 
 /obj/item/clothing/gloves/thick/sangheili
