@@ -175,28 +175,50 @@
 	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth."
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "nav_computer"
-	var/health = 30
+	var/health
+	var/maxhealth = 30
 	light_range = 1
 	light_color = "#ebf7fe"
 	density = 1
 	anchored = 1
 
-/obj/structure/navconsole/proc/damage(var/damage)
+/obj/structure/navconsole/proc/take_damage(var/damage = 0)// I want to know who the fuck made structures take this much work to break.
 	health -= damage
+	health = max(0, health - damage)
 	if(health <= 0)
 		qdel(src)
+	return
+
+/obj/structure/navconsole/bullet_act(var/obj/item/projectile/Proj)
+
+	var/proj_damage = Proj.get_structure_damage()
+	if(!proj_damage) return
+
+	..()
+	take_damage(proj_damage)
+	return
+
+/obj/structure/navconsole/proc/hit(var/damage)
+	take_damage(damage)
+	return
+
+/obj/structure/navconsole/attack_generic(var/mob/user, var/damage)
+	if(damage)
+		return
 
 /obj/item/weapon/reference
 	name = "gold coin"
 	desc = "This coin isn't as soft as normal gold, and seems to be an improper size. Clearly a fraud."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "coin_gold"
+	w_class = 1
 
 /obj/item/weapon/research //the red herring
 	name = "research documents"
 	desc = "Random useless papers documenting some kind of nerd experiments."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "envelope_sealed"
+	w_class = 1
 
 /obj/item/weapon/research/sekrits //the mcguffin
 	name = "strange documents"

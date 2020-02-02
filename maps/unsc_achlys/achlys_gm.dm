@@ -133,6 +133,7 @@ All 3 of these cannot spawn on open space
 
 /datum/game_mode/achlys/declare_completion()
 	..()
+	to_world("<span class='warning'>Cole Protocol has been enacted. Marine victory.</span>")
 
 /datum/game_mode/achlys/handle_mob_death(var/mob/victim, var/list/args = list())
 	..()
