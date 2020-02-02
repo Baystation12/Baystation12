@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Fixes a bug where (for example) throwing an object at a grilled window would hit the grill inside the window instead of the window."
