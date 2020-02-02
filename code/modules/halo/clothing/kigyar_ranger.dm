@@ -12,10 +12,10 @@
 		slot_r_hand_str = null,
 		)
 	item_flags = STOPPRESSUREDAMAGE
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | FEET | ARMS | HANDS
 	flags_inv = HIDETAIL
-	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
-	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	cold_protection = UPPER_TORSO | LOWER_TORSO | FEET | ARMS | HANDS
+	heat_protection = UPPER_TORSO | LOWER_TORSO | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 
@@ -28,12 +28,12 @@
 	item_state = "Ranger_armor"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/clothing/ranger_kigyar.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/clothing/ranger_kigyar.dmi')
 	blood_overlay_type = "armor"
-	armor = list(melee = 40, bullet = 45, laser = 65, energy = 55, bomb = 40, bio = 100, rad = 35)
+	armor = list(melee = 40, bullet = 35, laser = 35, energy = 35, bomb = 40, bio = 100, rad = 35)
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | LEGS
 	flags_inv = HIDETAIL
-	cold_protection = UPPER_TORSO | LOWER_TORSO
-	heat_protection = UPPER_TORSO | LOWER_TORSO
+	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS
+	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	item_icons = list(
@@ -57,7 +57,7 @@
 	heat_protection = HEAD
 	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
-	armor = list(melee = 40, bullet = 45, laser = 45,energy = 45, bomb = 20, bio = 100, rad = 35)
+	armor = list(melee = 40, bullet = 35, laser = 35,energy = 35, bomb = 20, bio = 100, rad = 35)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
