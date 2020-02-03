@@ -30,7 +30,7 @@
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/ammo_magazine/m127_saphp = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m5 = 1,
+	/obj/item/ammo_magazine/m5 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/clothing/head/helmet/marine/medic = 1,
 	/obj/item/clothing/mask/marine = 1,
@@ -54,7 +54,7 @@
 	/obj/item/weapon/storage/box/MRE/Pizza = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m5 = 1,
+	/obj/item/ammo_magazine/m5 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/ammo_box/shotgun/slug = 1,
@@ -89,7 +89,7 @@
 	/obj/item/weapon/armor_patch = 2,
 	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 1,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/storage/box/flares = 1)
 
@@ -105,9 +105,9 @@
 	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
 	/obj/item/weapon/storage/box/flares = 2,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 1,
+	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 3,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/clothing/head/helmet/marine = 1,
@@ -131,9 +131,9 @@
 	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 1,
+	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 1,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/device/taperecorder = 1,
 	/obj/item/squad_manager = 1,
@@ -261,7 +261,7 @@
 
 /obj/structure/doorwreckage
 	name = "wrecked airlock"
-	desc = "An airlock. Something strong pried it open."
+	desc = "An airlock. Something strong pried it open. It could be cut apart with a welding tool."
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_as_0"
 	density = 1
@@ -278,9 +278,7 @@
 		return 0
 
 /obj/structure/doorwreckage/Bumped(atom/movable/AM)
-	if(isliving(AM) && AM:a_intent == I_HELP)
-		if(istype(AM, /mob/living/simple_animal/))
-			return
+	if(isliving(AM))
 		if(istype(AM, /mob/living/simple_animal/hostile))
 			var/mob/living/simple_animal/hostile/H = AM
 			if(!H.assault_target && !H.target_mob)
