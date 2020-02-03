@@ -32,7 +32,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	icon = 'code/modules/halo/icons/species/jackalclothing.dmi'
 	icon_state = "scouthelm"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
-	armor = list(melee = 50, bullet = 15, laser = 50,energy = 10, bomb = 20, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 55, laser = 40,energy = 40, bomb = 20, bio = 0, rad = 0)
 	species_restricted = list("Kig-Yar")
 	action_button_name = "Toggle Night Vision"
 	flags_inv = null
@@ -77,7 +77,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 		"Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',\
 		"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
-	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 45, bio = 25, rad = 20)
+	armor = list(melee = 75, bullet = 65, laser = 40, energy = 40, bomb = 45, bio = 25, rad = 20)
 	armor_thickness_modifiers = list()
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 

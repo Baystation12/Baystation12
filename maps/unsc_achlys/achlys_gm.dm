@@ -77,6 +77,7 @@
 		var/obj/machinery/telecomms_jammers/spawned_jammer = new /obj/machinery/telecomms_jammers (item_spawn_turf)
 		spawned_jammer.jam_chance = 50
 		spawned_jammer.jam_range = 999
+		spawned_jammer.jamming_active = 1
 		spawn(COMMS_CUTIN_EVENT_DURATION)
 			qdel(spawned_nopower_area)
 			qdel(spawned_relay)
@@ -133,6 +134,7 @@ All 3 of these cannot spawn on open space
 
 /datum/game_mode/achlys/declare_completion()
 	..()
+	to_world("<span class='warning'>Cole Protocol has been enacted. Marine victory.</span>")
 
 /datum/game_mode/achlys/handle_mob_death(var/mob/victim, var/list/args = list())
 	..()
