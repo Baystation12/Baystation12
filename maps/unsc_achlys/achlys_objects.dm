@@ -261,7 +261,7 @@
 
 /obj/structure/doorwreckage
 	name = "wrecked airlock"
-	desc = "An airlock. Something strong pried it open."
+	desc = "An airlock. Something strong pried it open. It could be cut apart with a welding tool."
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_as_0"
 	density = 1
@@ -278,9 +278,7 @@
 		return 0
 
 /obj/structure/doorwreckage/Bumped(atom/movable/AM)
-	if(isliving(AM) && AM:a_intent == I_HELP)
-		if(istype(AM, /mob/living/simple_animal/))
-			return
+	if(isliving(AM))
 		if(istype(AM, /mob/living/simple_animal/hostile))
 			var/mob/living/simple_animal/hostile/H = AM
 			if(!H.assault_target && !H.target_mob)
