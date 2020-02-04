@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - admin: "Mobs without the UI elements to use psionics can no longer be granted psionics. e.g. simple animals."
