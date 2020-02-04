@@ -228,9 +228,9 @@
 		dist *= v.vehicle_view_modifier
 	var/list/L = list()
 
-	var/list/view_list = range(1,src.loc) + view(dist,src.loc) // Range is use to ensure adjacents aren't invisible to us.
+	var/turf/loc_infront = get_step(src,dir) //This is used when in complete darkenss, seeing only what's directly in front of them.
 
-	for(var/A in view_list)
+	for(var/A in view(dist,src.loc) | loc_infront.contents)
 		if(istype(A,/mob/living))
 			L += A
 			continue
