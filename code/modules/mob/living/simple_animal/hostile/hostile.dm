@@ -228,7 +228,9 @@
 		dist *= v.vehicle_view_modifier
 	var/list/L = list()
 
-	for(var/A in view(dist,src.loc))
+	var/list/view_list = range(1,src.loc) + view(dist,src.loc) // Range is use to ensure adjacents aren't invisible to us.
+
+	for(var/A in view_list)
 		if(istype(A,/mob/living))
 			L += A
 			continue
@@ -326,7 +328,7 @@
 	. = ..()
 	if(!target_mob && Proj.firer && Proj.firer.faction != faction && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
-		//MoveToTarget()
+		MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
 		Life()
 
