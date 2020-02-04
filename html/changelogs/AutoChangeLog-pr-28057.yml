@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - bugfix: "Polytools now allow you to extend tools again."
