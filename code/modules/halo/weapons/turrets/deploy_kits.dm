@@ -16,7 +16,7 @@
 		)
 
 	var/obj/turret_contained = /obj/structure/turret
-	var/deploy_time = 15 //The time it takes to deploy the turret, in seconds.
+	var/deploy_time = 7 //The time it takes to deploy the turret, in seconds.
 
 /obj/item/turret_deploy_kit/attack_self(var/mob/user)
 	visible_message("<span class = 'danger'>[user] starts setting up a turret emplacement</span>")
