@@ -1,5 +1,6 @@
 
-#define COMMS_CUTIN_EVENT_CHANCE 10
+#define COMMS_CUTIN_EVENT_MIN 15 MINUTES
+#define COMMS_CUTIN_EVENT_MAX 30 MINUTES
 #define COMMS_CUTIN_EVENT_DURATION 1 MINUTES
 #define FLOOD_EVENT_MINOR_START 25 MINUTES
 #define FLOOD_EVENT_MAJOR_START 30 MINUTES
@@ -37,8 +38,7 @@
 	flood_spawn_event_major = world.time + FLOOD_EVENT_MAJOR_START
 	populate_items_destroy()
 	populate_items_retrieve()
-	if(prob(COMMS_CUTIN_EVENT_CHANCE))
-		special_event_starttime = world.time + 5 MINUTES //TODO: MAKE THIS RANDOMISED.
+	special_event_starttime = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
 
 /datum/game_mode/achlys/check_finished()
 	. = 0
