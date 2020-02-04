@@ -52,7 +52,7 @@
 	icon_state = "carbine_casing"
 	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
-	tracer_delay_time = 1 SECOND
+	tracer_delay_time = 1.25 SECONDS
 	penetrating = 2
 	invisibility = 101
 
