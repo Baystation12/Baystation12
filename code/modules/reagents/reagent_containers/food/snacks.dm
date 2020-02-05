@@ -1113,6 +1113,10 @@
 	reagents.add_reagent(/datum/reagent/sodiumchloride, 1)
 	reagents.add_reagent(/datum/reagent/blackpepper, 1)
 
+/obj/item/weapon/reagent_containers/food/snacks/meatsteak/synthetic
+	name = "meaty steak"
+	desc = "A piece of hot spicy pseudo-meat."
+
 /obj/item/weapon/reagent_containers/food/snacks/loadedsteak
 	name = "loaded steak"
 	desc = "A steak slathered in sauce with sauteed onions and mushrooms."

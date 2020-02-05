@@ -191,7 +191,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/valve/return_network_air(datum/network/reference)
+/obj/machinery/atmospherics/valve/return_network_air(datum/pipe_network/reference)
 	return null
 
 /obj/machinery/atmospherics/valve/disconnect(obj/machinery/atmospherics/reference)

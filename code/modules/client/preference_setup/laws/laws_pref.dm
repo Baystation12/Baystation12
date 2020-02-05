@@ -85,7 +85,7 @@
 		if(chosen_lawset)
 			var/path = valid_lawsets[chosen_lawset]
 			var/datum/ai_laws/lawset = new path()
-			var/datum/ai_law/list/laws = lawset.all_laws()
+			var/list/datum/ai_law/laws = lawset.all_laws()
 			pref.laws.Cut()
 			for(var/datum/ai_law/law in laws)
 				pref.laws += sanitize_text("[law.law]", default="")

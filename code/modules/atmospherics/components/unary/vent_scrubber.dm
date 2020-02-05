@@ -202,7 +202,7 @@
 			return 1
 
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
-		playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
 		if(!do_after(user, 20, src))
 			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
@@ -217,6 +217,7 @@
 
 		welded = !welded
 		update_icon()
+		playsound(src, 'sound/items/Welder2.ogg', 50, 1)
 		user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
 			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
 			"You hear welding.")

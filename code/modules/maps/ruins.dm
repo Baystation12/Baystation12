@@ -2,13 +2,13 @@ GLOBAL_LIST_EMPTY(banned_ruin_ids)
 
 /proc/seedRuins(list/z_levels = null, budget = 0, whitelist = /area/space, list/potentialRuins, var/maxx = world.maxx, var/maxy = world.maxy)
 	if(!z_levels || !z_levels.len)
-		WARNING("No Z levels provided - Not generating ruins")
+		UNLINT(WARNING("No Z levels provided - Not generating ruins"))
 		return
 
 	for(var/zl in z_levels)
 		var/turf/T = locate(1, 1, zl)
 		if(!T)
-			WARNING("Z level [zl] does not exist - Not generating ruins")
+			UNLINT(WARNING("Z level [zl] does not exist - Not generating ruins"))
 			return
 
 	var/list/ruins = potentialRuins.Copy()

@@ -11,7 +11,7 @@ var/global/list/mechas_list = list()				//list of all mechs. Used by hostile mob
 
 //Languages/species/whitelist.
 var/global/list/all_species[0]
-var/global/list/all_languages[0]
+var/global/list/datum/language/all_languages = list()
 var/global/list/language_keys[0]					// Table of say codes for all languages
 var/global/list/playable_species = list(SPECIES_HUMAN)    // A list of ALL playable species, whitelisted, latejoin or otherwise.
 

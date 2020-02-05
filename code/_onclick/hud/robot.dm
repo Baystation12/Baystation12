@@ -61,11 +61,11 @@ var/obj/screen/robot_inventory
 	action_intent = using
 
 	//Cell
-	mymob:cells = new /obj/screen()
-	mymob:cells.icon = 'icons/mob/screen1_robot.dmi'
-	mymob:cells.icon_state = "charge-empty"
-	mymob:cells.SetName("cell")
-	mymob:cells.screen_loc = ui_toxin
+	mymob.cells = new /obj/screen()
+	mymob.cells.icon = 'icons/mob/screen1_robot.dmi'
+	mymob.cells.icon_state = "charge-empty"
+	mymob.cells.SetName("cell")
+	mymob.cells.screen_loc = ui_toxin
 
 	//Health
 	mymob.healths = new /obj/screen()

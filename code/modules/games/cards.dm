@@ -225,7 +225,7 @@
 	w_class = ITEM_SIZE_TINY
 
 	var/concealed = 0
-	var/list/cards = list()
+	var/list/datum/playingcard/cards = list()
 
 /obj/item/weapon/hand/attack_self(var/mob/user)
 	concealed = !concealed

@@ -68,6 +68,7 @@
 #include "code\__defines\shields.dm"
 #include "code\__defines\shuttle.dm"
 #include "code\__defines\skills.dm"
+#include "code\__defines\spaceman_dmm.dm"
 #include "code\__defines\species.dm"
 #include "code\__defines\subsystem-priority.dm"
 #include "code\__defines\subsystems.dm"

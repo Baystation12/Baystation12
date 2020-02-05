@@ -455,10 +455,12 @@
 		for(var/obj/item/organ/internal/I in H.internal_organs)
 			if(!BP_IS_ROBOTIC(I))
 				if(I.organ_tag == BP_BRAIN)
-					if(I.damage >= I.min_bruised_damage)
-						continue
+					// if we have located an organic brain, apply side effects
 					H.confused++
 					H.drowsyness++
+					// peridaxon only heals minor brain damage
+					if(I.damage >= I.min_bruised_damage)
+						continue
 				I.heal_damage(removed)
 
 /datum/reagent/ryetalyn

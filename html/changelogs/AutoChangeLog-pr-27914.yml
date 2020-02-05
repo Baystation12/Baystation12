@@ -1,4 +1,0 @@
-author: "Cheb Pomidorov"
-delete-after: True
-changes: 
-  - rscadd: "You can now lock and unlock coffins using a screwdriver. Locked coffins can be struggled out of, similarly to welded closets."

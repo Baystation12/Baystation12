@@ -100,9 +100,11 @@
 
 /obj/machinery/bodyscanner/on_update_icon()
 	if(!occupant)
-		src.icon_state = "body_scanner_0"
+		icon_state = "body_scanner_0"
+	else if(stat & (BROKEN|NOPOWER))
+		icon_state = "body_scanner_1"
 	else
-		src.icon_state = "body_scanner_1"
+		icon_state = "body_scanner_2"
 
 //Like grap-put, but for mouse-drop.
 /obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)

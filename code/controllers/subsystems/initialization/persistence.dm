@@ -27,7 +27,7 @@ SUBSYSTEM_DEF(persistence)
 	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
 		return
 
-	if((!T.z in GLOB.using_map.station_levels) || !initialized)
+	if(!(T.z in GLOB.using_map.station_levels) || !initialized)
 		return
 
 	if(!tracking_values[track_type])

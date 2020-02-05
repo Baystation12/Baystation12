@@ -21,7 +21,7 @@ var/list/solars_list = list()
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
-	
+
 /obj/machinery/power/solar/improved
 	name = "improved solar panel"
 	efficiency = 2
@@ -331,14 +331,14 @@ var/list/solars_list = list()
 			if(istype(M, /obj/machinery/power/solar))
 				var/obj/machinery/power/solar/S = M
 				if(!S.control) //i.e unconnected
-					S.set_control(src)
-					connected_panels |= S
+					if(S.set_control(src))
+						connected_panels |= S
 			else if(istype(M, /obj/machinery/power/tracker))
 				if(!connected_tracker) //if there's already a tracker connected to the computer don't add another
 					var/obj/machinery/power/tracker/T = M
 					if(!T.control) //i.e unconnected
-						connected_tracker = T
-						T.set_control(src)
+						if(T.set_control(src))
+							connected_tracker = T
 
 //called by the sun controller, update the facing angle (either manually or via tracking) and rotates the panels accordingly
 /obj/machinery/power/solar_control/proc/update()

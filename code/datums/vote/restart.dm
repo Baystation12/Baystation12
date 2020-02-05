@@ -6,7 +6,7 @@
 	results_length = 1
 
 /datum/vote/restart/can_run(mob/creator, automatic)
-	if(!automatic && (!config.allow_vote_restart || !is_admin(creator)))
+	if(!automatic && !config.allow_vote_restart && !is_admin(creator))
 		return FALSE // Admins and autovotes bypass the config setting.
 	return ..()
 
