@@ -442,7 +442,7 @@ client/verb/character_setup()
 		winset(usr, "mainwindow", "is-maximized=true")
 		winset(usr, "mainwindow", "statusbar=false")
 		winset(usr, "mainwindow", "menu=")
-		winset(usr, "mainwindow.mainvsplit", "size=0x0")
+//		winset(usr, "mainwindow.mainvsplit", "size=0x0")
 	else
 		winset(usr, "mainwindow", "is-maximized=false")
 		winset(usr, "mainwindow", "titlebar=true")

@@ -202,21 +202,6 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		return TRUE
 	return FALSE
 
-
-//For sending entire directories of assets
-/datum/asset/directories
-	var/list/dirs = list()
-
-/datum/asset/directories/register()
-	// Crawl the directories to find files.
-	for (var/path in dirs)
-		var/list/filenames = flist(path)
-		for(var/filename in filenames)
-			if(copytext(filename, length(filename)) != "/") // Ignore directories.
-				if(fexists(path + filename))
-					assets[filename] = fcopy_rsc(path + filename)
-	..()
-
 //If you don't need anything complicated.
 /datum/asset/simple
 	assets = list()
@@ -241,6 +226,20 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 	for(var/type in children)
 		var/datum/asset/A = get_asset_datum(type)
 		A.send(C)
+
+//For sending entire directories of assets
+/datum/asset/directories
+	var/list/dirs = list()
+
+/datum/asset/directories/register()
+	// Crawl the directories to find files.
+	for (var/path in dirs)
+		var/list/filenames = flist(path)
+		for(var/filename in filenames)
+			if(copytext(filename, length(filename)) != "/") // Ignore directories.
+				if(fexists(path + filename))
+					assets[filename] = fcopy_rsc(path + filename)
+	..()
 
 //DEFINITIONS FOR ASSET DATUMS START HERE.
 /datum/asset/directories/nanoui
