@@ -371,6 +371,8 @@
 	set_light(0.25, 0.1, 1, 2, new_color)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
+	if(stat & (NOPOWER|BROKEN))
+		return
 	if (alarm_area.master_air_alarm != src)
 		if (master_is_operating())
 			return
