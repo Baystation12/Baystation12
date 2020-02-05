@@ -228,7 +228,9 @@
 		dist *= v.vehicle_view_modifier
 	var/list/L = list()
 
-	for(var/A in view(dist,src.loc))
+	var/turf/loc_infront = get_step(src,dir) //This is used when in complete darkenss, seeing only what's directly in front of them.
+
+	for(var/A in view(dist,src.loc) | loc_infront.contents)
 		if(istype(A,/mob/living))
 			L += A
 			continue
@@ -266,6 +268,10 @@
 /mob/living/simple_animal/hostile/Life()
 
 	. = ..()
+	if(client)
+		see_in_dark = 5//setting this 2 points above human for now
+	else
+		see_in_dark = 3//NPCs will target people beside them
 	if(!.)
 		walk(src, 0)
 		return 0
@@ -322,7 +328,7 @@
 	. = ..()
 	if(!target_mob && Proj.firer && Proj.firer.faction != faction && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = Proj.firer
-		//MoveToTarget()
+		MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
 		Life()
 

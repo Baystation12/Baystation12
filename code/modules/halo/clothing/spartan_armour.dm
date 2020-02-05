@@ -45,7 +45,7 @@
 
 	blood_overlay_type = "armor"
 	armor = list(melee = 60, bullet = 75, laser = 50, energy = 55, bomb = 60, bio = 100, rad = 25)
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDETAIL
 	heat_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS

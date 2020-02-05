@@ -69,6 +69,9 @@
 	if(mRun in mutations)
 		tally = 0
 
+	var/turf/T = get_turf(src)
+	tally += T.get_movement_delay()
+
 	if((CE_SLOWREMOVE in chem_effects) && (tally > 0)) //Goes here because it checks the full tally first.
 		if(tally > SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED)
 			tally -= SLOWDOWN_REMOVAL_CHEM_MAX_REMOVED
@@ -77,9 +80,6 @@
 
 	if(CE_SPEEDBOOST in chem_effects)
 		tally -= SPEEDBOOST_CHEM_SPEED_INCREASE
-
-	var/turf/T = get_turf(src)
-	tally += T.get_movement_delay()
 
 	return (tally+config.human_delay)
 

@@ -61,7 +61,7 @@
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret.dmi'
 	icon_state = ""
 	alpha = 0
-	damage = 500
+	damage = 300
 	penetrating = 2
 	step_delay = 0.0 SECONDS
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
@@ -74,7 +74,8 @@
 	damtype = BURN
 	. = ..()
 
-/obj/item/projectile/pulse_laser_damage_proj/Bump(var/atom/impacted)
+/obj/item/projectile/pulse_laser_damage_proj/on_impact(var/atom/impacted)
+	. = ..()
 	if(!istype(impacted,/obj/effect/shield))
 		explosion(impacted,-1,-1,1,3, adminlog = 0)
 

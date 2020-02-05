@@ -17,6 +17,6 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	system_name = "Soell System"
-	overmap_size= 0
+	overmap_size= 2
 
-	use_overmap = 0
+	use_overmap = 1

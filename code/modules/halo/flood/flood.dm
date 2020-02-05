@@ -213,6 +213,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	if(!attempt_nearby_infect())
 		if(!revive_nearby_combatforms())
 			infest_airlocks_nearby()
+	if(health <= 0)
+		death()
+		return
 
 /mob/living/simple_animal/hostile/flood/infestor/AttackingTarget()
 	. = ..()
@@ -295,6 +298,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 	health = 0
 
+/mob/living/simple_animal/hostile/flood/carrier/Move()
+	. = ..()
+	if(health <= 0)
+		death()
+		return
+
 /mob/living/simple_animal/hostile/flood/carrier/death(gibbed, deathmessage = "bursts!")
 	to_chat(src,"<span class='danger'>You burst, propelling flood infestors in all directions!</span>")
 	src.visible_message("<span class='danger'>[src] bursts, propelling flood infestors in all directions!</span>")
@@ -323,7 +332,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/obj/item/weapon/gun/our_gun
 
 	var/corpse_pulped = 0 //1 = cannot be revived, -1 = can be revived infinitely.
-	var/obj/item/inventory = null //an item goes in this variable of the instance with the full path "in/quotes". item in var will drop upon death
+	var/list/inventory //list of objects to select from for drop on death
 
 /mob/living/simple_animal/hostile/flood/combat_form/examine(var/examiner)
 	. = ..()
@@ -380,6 +389,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/UnarmedAttack(var/atom/attacked)
 	. = ..(attacked)
+	if(!.)
+		return 0
+	var/mob/living/carbon/human/h = attacked
+	if(istype(h))
+		h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,melee_damage_lower/3)
 	pickup_gun(attacked)
 
 /mob/living/simple_animal/hostile/flood/combat_form/RangedAttack(var/atom/attacked)
@@ -413,7 +427,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/proc/dump_inventory()
 	if(inventory)
-		new src.inventory(loc)
+		var/i = pick(src.inventory)
+		new i(loc)
 
 /mob/living/simple_animal/hostile/flood/combat_form/death()
 	drop_gun()
@@ -422,6 +437,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
 	. = ..()
+	if(health <= 0)
+		death()
+		return
 	if(stat == DEAD)
 		return
 	if(ckey || client)
@@ -476,7 +494,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "guard_infested"
 	icon_living = "guard_infested"
 	icon_dead = "guard_dead"
-	//
+	inventory = list(/obj/item/ammo_magazine/m762_ap/MA37)
 	move_to_delay = 2
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
