@@ -20,7 +20,7 @@
 	burst = 3
 	burst_delay = 1.5
 	one_hand_penalty = -1
-	dispersion = list(0)
+	dispersion = list(0.0,0.6,0.6)
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 	w_class = ITEM_SIZE_LARGE
