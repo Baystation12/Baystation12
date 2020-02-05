@@ -34,7 +34,7 @@
 #define COLOR_DARK_GREEN_GRAY  "#54654c"
 #define COLOR_BLUE_GRAY        "#6a97b0"
 #define COLOR_DARK_BLUE_GRAY   "#3e4855"
-#define COLOR_SURGERY_BLUE     "#e0f2f6" 
+#define COLOR_SURGERY_BLUE     "#e0f2f6"
 #define COLOR_SUN              "#ec8b2f"
 #define COLOR_PURPLE_GRAY      "#a2819e"
 #define COLOR_BLUE_LIGHT       "#33ccff"
@@ -170,3 +170,7 @@
 #define CODEX_COLOR_ANTAG     "#e5a2a2"
 
 #define COLOR_WEBHOOK_DEFAULT 0x8bbbd5
+
+#define COLOR_DARKMODE_BACKGROUND "#202020"
+#define COLOR_DARKMODE_DARKBACKGROUND "#171717"
+#define COLOR_DARKMODE_TEXT "#a4bad6"
