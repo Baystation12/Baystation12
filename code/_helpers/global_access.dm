@@ -847,8 +847,6 @@
 			return global.tape_roll_applications;
 		if("telecomms_list")
 			return global.telecomms_list;
-		if("text_tag_icons")
-			return global.text_tag_icons;
 		if("ticket_panels")
 			return global.ticket_panels;
 		if("tickets")
@@ -1764,8 +1762,6 @@
 			global.tape_roll_applications=newval;
 		if("telecomms_list")
 			global.telecomms_list=newval;
-		if("text_tag_icons")
-			global.text_tag_icons=newval;
 		if("ticket_panels")
 			global.ticket_panels=newval;
 		if("tickets")
@@ -2257,7 +2253,6 @@
 	"tank_gauge_cache",
 	"tape_roll_applications",
 	"telecomms_list",
-	"text_tag_icons",
 	"ticket_panels",
 	"tickets",
 	"total_lighting_corners",
