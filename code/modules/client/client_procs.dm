@@ -91,7 +91,7 @@
 
 	switch(href_list["action"])
 		if("openLink")
-			src << link(href_list["link"])
+			open_link(src, href_list["link"])
 
 	if(codex_topic(href, href_list))
 		return
