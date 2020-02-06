@@ -1,8 +1,0 @@
-author: "Chinsky"
-delete-after: True
-changes: 
-  - tweak: "Various drinking glasses are now printed from a microlathe instead of being vended. Bar now has pre-loaded microlathe for this purpose."
-  - rscadd: "Added new type of drinking glass - flute glass."
-  - tweak: "Added transparency to some reagents, namely water and booze."
-  - tweak: "Can now select recipies category in fabricators"
-  - tweak: "More types of glasses can take accessories like sticks or straws now, try it out."
