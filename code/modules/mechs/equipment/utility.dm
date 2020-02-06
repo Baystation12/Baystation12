@@ -15,7 +15,7 @@
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
 	if(owner && LAZYISIN(owner.pilots, user))
 		if(!owner.hatch_closed && carrying)
-			if(!do_after(user, 30, owner)) return
+			if(!do_after(user, 20, owner)) return
 			if(user.put_in_active_hand(carrying))
 				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [carrying] from \the [src]."))
 				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
@@ -72,7 +72,6 @@
 		if(!carrying)
 			to_chat(user, SPAN_WARNING("You are not carrying anything in \the [src]."))
 		else
-			if(!do_after(user, 20, owner)) return
 			owner.visible_message(SPAN_NOTICE("\The [owner] unloads \the [carrying]."))
 			playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 			carrying.forceMove(get_turf(src))
@@ -88,7 +87,7 @@
 		carrying.dropInto(loc)
 		carrying = null
 	. = ..()
-	
+
 // A lot of this is copied from floodlights.
 /obj/item/mech_equipment/light
 	name = "floodlight"
@@ -124,7 +123,7 @@
 	on = FALSE
 	update_icon()
 	. = ..()
-	
+
 #define CATAPULT_SINGLE 1
 #define CATAPULT_AREA   2
 
@@ -186,7 +185,7 @@
 						locked = null
 						to_chat(user, SPAN_NOTICE("Lock on [locked] disengaged."))
 			if(CATAPULT_AREA)
-				
+
 				var/list/atoms = list()
 				if(isturf(target))
 					atoms = range(target,3)
@@ -230,9 +229,9 @@
 		descriptor = "shows some signs of wear"
 	if(percentage > 95)
 		descriptor = "shows no wear"
-		
+
 	to_chat(user, "It [descriptor].")
-	
+
 /obj/item/weapon/material/drill_head/Initialize()
 	. = ..()
 	durability = 2 * material.integrity
@@ -248,7 +247,7 @@
 	//Drill can have a head
 	var/obj/item/weapon/material/drill_head/drill_head
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
-	
+
 
 
 /obj/item/mech_equipment/drill/Initialize()
@@ -281,7 +280,7 @@
 		visible_message(SPAN_NOTICE("\The [user] mounts the [drill_head] on the [src]."))
 		return
 	. = ..()
-	
+
 /obj/item/mech_equipment/drill/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 	if(.)
@@ -303,7 +302,7 @@
 		if(drill_head == null)
 			to_chat(user, SPAN_WARNING("Your drill doesn't have a head!"))
 			return
-		
+
 		var/obj/item/weapon/cell/C = owner.get_cell()
 		if(istype(C))
 			C.use(active_power_use * CELLRATE)
@@ -312,7 +311,7 @@
 
 		var/T = target.loc
 
-		//Better materials = faster drill! 
+		//Better materials = faster drill!
 		var/delay = max(5, 20 - drill_head.material.brute_armor)
 		owner.setClickCooldown(delay) //Don't spamclick!
 		if(do_after(owner, delay, target) && drill_head)
@@ -343,9 +342,9 @@
 					drill_head.durability -= 1
 					log_and_message_admins("[src] used to drill [target].", user, owner.loc)
 
-				
 
-	
+
+
 				if(owner.hardpoints.len) //if this isn't true the drill should not be working to be fair
 					for(var/hardpoint in owner.hardpoints)
 						var/obj/item/I = owner.hardpoints[hardpoint]
@@ -358,11 +357,11 @@
 									ore.Move(ore_box)
 
 		else
-			to_chat(user, "You must stay still while the drill is engaged!")		
+			to_chat(user, "You must stay still while the drill is engaged!")
 
-				
+
 		return 1
-		
+
 
 
 
@@ -378,5 +377,5 @@
 /obj/item/weapon/gun/energy/plasmacutter/mounted/mech
 	use_external_power = TRUE
 	has_safety = FALSE
-	
+
 
