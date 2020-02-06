@@ -589,7 +589,7 @@
 /datum/reagent/hell_water
 	name = "Hell water"
 	reagent_state = LIQUID
-	color = "#0050a177"
+	color = "#0050a1"
 	metabolism = REM * 0.1
 
 /datum/reagent/hell_water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
