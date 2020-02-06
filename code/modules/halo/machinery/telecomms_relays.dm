@@ -19,3 +19,8 @@
 	name = "Shipboard Signal Relay"
 	desc = "A compact signal relay designed for signal range extension."
 	signal_range = 14 //Two screens of range.
+
+/obj/machinery/telecomms/relay/flagship_relay
+	name = "Heavy Duty Long Range Relay"
+	desc = "Sends signals an incredible range."
+	signal_range = 999 //INFINITRANSMIT

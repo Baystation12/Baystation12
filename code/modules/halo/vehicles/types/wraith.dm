@@ -79,30 +79,18 @@
 	icon = 'code/modules/halo/vehicles/types/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
 	damage_type = "bomb"
-	density = 0
 	step_delay = 1.5
 	armor_penetration = 25
 
-/obj/item/projectile/bullet/covenant/wraith_cannon/change_elevation()
-	return
+/obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
+	. = ..()
+	kill_count = get_dist(starting,original) + rand(-2,2) //Sometimes it can fly a bit over or under the target
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
-	if(dir == NORTH || dir == SOUTH)
-		bounds = "64,64"
-	else
-		bounds = "96,32"
-
-	if(original in range(1,loc))
-		Bump(loc)
-		return
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
 		change_elevation(1)
 	else
 		change_elevation(-1)
-	. = ..()
-
-/obj/item/projectile/bullet/covenant/wraith_cannon/process()
-	set_density(0)
 	. = ..()
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/on_impact(var/atom/impacted)
