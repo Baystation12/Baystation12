@@ -310,7 +310,7 @@
 		if(reagents.total_volume)
 			filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
 
-			filling.icon_state = "c[rounded_vol]"
+			filling.icon_state = "syringe[rounded_vol]"
 
 			filling.color = reagents.get_color()
 			overlays += filling
