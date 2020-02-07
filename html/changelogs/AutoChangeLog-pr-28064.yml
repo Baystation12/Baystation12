@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - maptweak: "Removes Explorer and Pilot access to Xenobiology, Xenoarchaeology, Toxins, and assorted labs. Pathfinder retains their original access."
