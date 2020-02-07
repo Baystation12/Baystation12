@@ -299,12 +299,13 @@
 		if (!rig_supply && (!contents.Find(internal) || !((wear_mask && (wear_mask.item_flags & AIRTIGHT)) || (head && (head.item_flags & AIRTIGHT)))))
 			internal = null
 
-		if(internal && wear_mask)
-			var/datum/gas_mixture/air_removed = internal.remove_air_volume(volume_needed)
-			wear_mask.post_internals_breathe(air_removed,internal)
-			return air_removed
-		else if(internals)
-			internals.icon_state = "internal0"
+		if(internal)
+			if (internals)
+				internals.icon_state = "internal1"
+			return internal.remove_air_volume(volume_needed)
+		else
+			if (internals)
+				internals.icon_state = "internal0"
 	return null
 
 /mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)

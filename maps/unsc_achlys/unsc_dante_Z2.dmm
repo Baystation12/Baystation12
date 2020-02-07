@@ -79,10 +79,9 @@
 "bA" = (/obj/machinery/light,/turf/simulated/floor/tiled/white,/area/dante)
 "bB" = (/obj/machinery/door/airlock/multi_tile/halo{dir = 1; name = "Cryobay"; req_access = list(102)},/turf/simulated/floor/tiled/white,/area/dante)
 "bC" = (/obj/machinery/door/airlock/multi_tile/halo{name = "Pelican Bay Bravo"; req_access = list(144)},/turf/simulated/floor/plating,/area/dante)
-"bD" = (/turf/simulated/wall/strong,/area/space)
-"bE" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/space)
-"bF" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/space)
-"bG" = (/turf/simulated/floor/plating,/area/space)
+"bD" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/dante)
+"bE" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/dante)
+"bF" = (/obj/machinery/telecomms/relay,/turf/simulated/floor/plating,/area/dante)
 "bH" = (/obj/machinery/door/airlock/halo{name = "Communications Array"; req_access = list(202)},/turf/simulated/floor/plating,/area/dante)
 "bI" = (/obj/machinery/computer/cryopod{pixel_y = 25},/turf/simulated/floor/tiled/white,/area/dante)
 "bJ" = (/obj/machinery/light/small/red,/turf/simulated/floor/plating,/area/dante)
@@ -164,9 +163,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakabacacacaAabaBacab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabavakakakakakakakakawabaOaOaOaOabacacaoacacapabbgbhbhabbxbobkababacacacacaoacacacaoacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakbyakakakakakakababababababacacacacacapabababababbzbAbkababauacacacacacacacacacacacacacabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakakacacacapababababababababakakakababababababababbBboababababababababatababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakbCacayacapabaaaaaaaaaaaabDbEbFbGbGbHbobobobjbobobobobobIbjboboboabakakakabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbJakakakakakakakakbJababababababaaaaaaaaaaaabDbGbGbGbDabboboboboboboboboboboboboboboabakanakabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababajakakakajakakakababaaaaaaaaaaaaaaaaaaaaaabDbDbDbDbDabbKbobobobobobobobobobobobLboabakbMakabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabakakakakakakakakakakbCacayacapabaaaaaaaaaaaaabbDbEakakbHbobobobjbobobobobobIbjboboboabakakakabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbJakakakakakakakakbJababababababaaaaaaaaaaaaabakbFakababboboboboboboboboboboboboboboabakanakabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababajakakakajakakakababaaaaaaaaaaaaaaaaaaaaaaababababababbKbobobobobobobobobobobobLboabakbMakabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbtboboboboboababbobobobobobrabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabboboboboboboababboboboboboboabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbKbobobobLboababbKbobobobLboabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
