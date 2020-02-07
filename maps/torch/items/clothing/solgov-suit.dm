@@ -260,10 +260,10 @@
 	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
 	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
 	armor = list(
-		melee = ARMOR_MELEE_SMALL, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_MINOR, 
+		melee = ARMOR_MELEE_SMALL,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_MINOR,
 		rad = ARMOR_RAD_MINOR
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
@@ -272,9 +272,9 @@
 	name = "army winter coat"
 	icon_state = "coatar"
 	armor = list(
-		melee = ARMOR_MELEE_SMALL, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
+		melee = ARMOR_MELEE_SMALL,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_MINOR
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
@@ -283,12 +283,31 @@
 	name = "fleet winter coat"
 	icon_state = "coatfl"
 	armor = list(
-		melee = ARMOR_MELEE_SMALL, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
-		energy = ARMOR_ENERGY_MINOR, 
+		melee = ARMOR_MELEE_SMALL,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
 		bomb = ARMOR_BOMB_MINOR
 		)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA)
+
+/obj/item/clothing/suit/storage/jacket/solgov/fleet
+	name = "fleet engineering jacket"
+	desc = "A jacket commonly issued by the fleet to its engineers. It sports some yellow reflective stripes, and has elbow pads."
+	icon_state = "navyengjacket"
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	armor = list(
+		melee = ARMOR_MELEE_SMALL,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_MINOR,
+		rad = ARMOR_RAD_MINOR
+		)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+	allowed = list (/obj/item/device/scanner/gas, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, \
+	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency, \
+	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering,/obj/item/clothing/head/hardhat)
+
 
 //SolGov Hardsuits
 
@@ -393,11 +412,11 @@
 		)
 	sprite_sheets_obj = list()
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
@@ -415,11 +434,11 @@
 		)
 	sprite_sheets_obj = list()
 	armor = list(
-		melee = ARMOR_MELEE_RESISTANT, 
-		bullet = ARMOR_BALLISTIC_MINOR, 
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = ARMOR_BALLISTIC_MINOR,
 		laser = ARMOR_LASER_MINOR,
-		energy = ARMOR_ENERGY_RESISTANT, 
-		bomb = ARMOR_BOMB_PADDED, 
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
 		bio = ARMOR_BIO_SHIELDED,
 		rad = ARMOR_RAD_RESISTANT
 		)
