@@ -39,7 +39,7 @@
 	var/slowdown_total = 0
 	for(var/obj/A in inv)
 		slowdown_total += base_storage_cost(A.w_class) * BACKPACK_SLOWDOWN_MOD
-	var/min_slowdown = (max_storage_space*(BACKPACK_SLOWDOWN_MOD/2))-1 //4 normals.
+	var/min_slowdown = (max_storage_space*(BACKPACK_SLOWDOWN_MOD)) //5-6 normals.
 	if(slowdown_total <= min_slowdown)
 		slowdown_total = 0
 	else
