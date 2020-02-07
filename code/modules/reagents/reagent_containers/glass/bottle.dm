@@ -58,12 +58,6 @@
 			var/image/lid = image(icon, src, "lid_[icon_state]")
 			overlays += lid
 
-///obj/item/weapon/reagent_containers/glass/bottle/bottlecov
-//	name = "Nanolaminate Bottle"
-//	desc = "A nanolaminate treated bottle."
-//	icon = 'icons/obj/chemical.dmi'
-//	icon_state = "bottle-5"
-
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline
 	name = "inaprovaline bottle"
 	desc = "A small bottle. Contains inaprovaline - used to stabilize patients."
