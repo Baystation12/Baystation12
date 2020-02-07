@@ -283,6 +283,38 @@
 			to_chat(user, "<span class='notice'>This syringe is too big to stab someone with it.</span>")
 		..()
 
+/obj/item/weapon/reagent_containers/syringe/covenant
+	icon = 'icons/obj/syringe.dmi'
+	item_state = "syringe_c0"
+	icon_state = "c0"
+
+	update_icon()
+		overlays.Cut()
+
+		if(mode == SYRINGE_BROKEN)
+			icon_state = "cbroken"
+			return
+
+		var/rounded_vol = round(reagents.total_volume, round(reagents.maximum_volume / 3))
+		if(ismob(loc))
+			var/injoverlay
+			switch(mode)
+				if (SYRINGE_DRAW)
+					injoverlay = "draw"
+				if (SYRINGE_INJECT)
+					injoverlay = "inject"
+			overlays += injoverlay
+		icon_state = "c[rounded_vol]"
+		item_state = "c[rounded_vol]"
+
+		if(reagents.total_volume)
+			filling = image('icons/obj/reagentfillings.dmi', src, "syringe10")
+
+			filling.icon_state = "syringe[rounded_vol]"
+
+			filling.color = reagents.get_color()
+			overlays += filling
+
 ////////////////////////////////////////////////////////////////////////////////
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
