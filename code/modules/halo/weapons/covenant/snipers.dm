@@ -57,11 +57,11 @@
 	fire_sound = 'code/modules/halo/sounds/beam_rifle_fire.ogg'
 	charge_meter = 0
 	max_shots = 10
-	projectile_type = /obj/item/projectile/covenant/beamrifle
+	projectile_type = /obj/item/projectile/bullet/covenant/beamrifle
 	one_hand_penalty = -1
 	irradiate_non_cov = 15
 	wielded_item_state = "beamrifle-wielded"
-	fire_delay = 10
+	fire_delay = 0 //Click as fast as you want. we have an overcharge system to deal with spamming
 	accuracy = -5
 	scoped_accuracy = 7
 	advanced_covenant = 1
@@ -85,7 +85,7 @@
 
 	toggle_scope(usr, 1.5)
 
-/obj/item/weapon/gun/energy/beam_rifle/proc/update_next_allowed_fire(var/seconds_increase = 1)
+/obj/item/weapon/gun/energy/beam_rifle/proc/update_next_allowed_fire(var/seconds_increase = 1.25)
 	next_allowed_fire = world.time + seconds_increase SECONDS
 
 /obj/item/weapon/gun/energy/beam_rifle/Fire(atom/target,var/mob/living/user)

@@ -39,14 +39,13 @@
 	var/slowdown_total = 0
 	for(var/obj/A in inv)
 		slowdown_total += base_storage_cost(A.w_class) * BACKPACK_SLOWDOWN_MOD
-	var/min_slowdown = 1.5//(max_storage_space*BACKPACK_SLOWDOWN_MOD)-1 //With backpack slowdown mod of 0.05, means you can carry max 2 normal before slowdown kicks in.
+	var/min_slowdown = (max_storage_space*(BACKPACK_SLOWDOWN_MOD/2))-1 //4 normals.
 	if(slowdown_total <= min_slowdown)
 		slowdown_total = 0
 	else
 		slowdown_total -= min_slowdown
 
-	if(slowdown_general != slowdown_total)
-		slowdown_general = slowdown_total
+	slowdown_general = slowdown_total
 
 /obj/item/weapon/storage/MouseDrop(obj/over_object as obj)
 	if(!canremove)

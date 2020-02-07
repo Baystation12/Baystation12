@@ -33,12 +33,12 @@
 	New()
 		..()
 		if(!icon_state)
-			icon_state = "bottle-[rand(1,4)]"
+			icon_state = "bottle-[rand(1,5)]"
 
 	update_icon()
 		overlays.Cut()
 
-		if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4"))
+		if(reagents.total_volume && (icon_state == "bottle-1" || icon_state == "bottle-2" || icon_state == "bottle-3" || icon_state == "bottle-4" || icon_state == "bottle-5"))
 			var/image/filling = image('icons/obj/reagentfillings.dmi', src, "[icon_state]10")
 
 			var/percent = round((reagents.total_volume / volume) * 100)
@@ -55,9 +55,8 @@
 			overlays += filling
 
 		if (!is_open_container())
-			var/image/lid = image(icon, src, "lid_bottle")
+			var/image/lid = image(icon, src, "lid_[icon_state]")
 			overlays += lid
-
 
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline
 	name = "inaprovaline bottle"

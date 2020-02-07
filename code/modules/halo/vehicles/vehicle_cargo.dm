@@ -24,7 +24,7 @@
 	if(!src.Adjacent(user) || !src.Adjacent(O))
 		return
 	if(!can_put_cargo(O))
-		to_chat(user,"<span class = 'notice'>[src] can not be loaded into [O]</span>")
+		to_chat(user,"<span class = 'notice'>[O] can not be loaded into [src]</span>")
 		return
 	var/confirm = alert(user,"Place [O] into [src]'s storage?",,"Yes","No")
 	if(confirm != "Yes")
@@ -52,7 +52,7 @@
 	for(var/mob/living/M in v)
 		to_chat(user,"<span class = 'notice'>[src] cannot be loaded while it's carrying live passengers!</span>")
 		return
-	if(src.Adjacent(v))
+	if(!src.Adjacent(v))
 		to_chat(user,"<span class = 'notice'>Both the vehicle and the person attaching the vehicle must be next to the targeted storage vehicle.</span>")
 		return
 

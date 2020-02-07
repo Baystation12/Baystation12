@@ -30,7 +30,7 @@
 	/obj/item/weapon/material/knife/combat_knife = 1,
 	/obj/item/ammo_magazine/m127_saphp = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m5 = 1,
+	/obj/item/ammo_magazine/m5 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/clothing/head/helmet/marine/medic = 1,
 	/obj/item/clothing/mask/marine = 1,
@@ -54,7 +54,7 @@
 	/obj/item/weapon/storage/box/MRE/Pizza = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m5 = 1,
+	/obj/item/ammo_magazine/m5 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/ammo_box/shotgun/slug = 1,
@@ -89,7 +89,7 @@
 	/obj/item/weapon/armor_patch = 2,
 	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 1,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/storage/box/flares = 1)
 
@@ -105,9 +105,9 @@
 	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
 	/obj/item/weapon/storage/box/flares = 2,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 1,
+	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 3,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
 	/obj/item/clothing/head/helmet/marine = 1,
@@ -131,9 +131,9 @@
 	/obj/item/weapon/storage/box/MRE/Spaghetti = 1,
 	/obj/item/weapon/storage/box/flares = 1,
 	/obj/item/weapon/material/knife/combat_knife = 1,
-	/obj/item/ammo_magazine/m127_saphe = 1,
+	/obj/item/ammo_magazine/m127_saphe = 2,
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 1,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 2,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/device/taperecorder = 1,
 	/obj/item/squad_manager = 1,
@@ -175,22 +175,50 @@
 	desc = "A robust system with it's own power supply that holds nav data on it's hard drive. This includes the location of the planet Earth."
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "nav_computer"
+	var/health
+	var/maxhealth = 30
 	light_range = 1
 	light_color = "#ebf7fe"
 	density = 1
 	anchored = 1
+
+/obj/structure/navconsole/proc/take_damage(var/damage = 0)// I want to know who the fuck made structures take this much work to break.
+	health -= damage
+	health = max(0, health - damage)
+	if(health <= 0)
+		qdel(src)
+	return
+
+/obj/structure/navconsole/bullet_act(var/obj/item/projectile/Proj)
+
+	var/proj_damage = Proj.get_structure_damage()
+	if(!proj_damage) return
+
+	..()
+	take_damage(proj_damage)
+	return
+
+/obj/structure/navconsole/proc/hit(var/damage)
+	take_damage(damage)
+	return
+
+/obj/structure/navconsole/attack_generic(var/mob/user, var/damage)
+	if(damage)
+		return
 
 /obj/item/weapon/reference
 	name = "gold coin"
 	desc = "This coin isn't as soft as normal gold, and seems to be an improper size. Clearly a fraud."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "coin_gold"
+	w_class = 1
 
 /obj/item/weapon/research //the red herring
 	name = "research documents"
 	desc = "Random useless papers documenting some kind of nerd experiments."
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "envelope_sealed"
+	w_class = 1
 
 /obj/item/weapon/research/sekrits //the mcguffin
 	name = "strange documents"
@@ -233,7 +261,7 @@
 
 /obj/structure/doorwreckage
 	name = "wrecked airlock"
-	desc = "An airlock. Something strong pried it open."
+	desc = "An airlock. Something strong pried it open. It could be cut apart with a welding tool."
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_as_0"
 	density = 1
@@ -250,9 +278,7 @@
 		return 0
 
 /obj/structure/doorwreckage/Bumped(atom/movable/AM)
-	if(isliving(AM) && AM:a_intent == I_HELP)
-		if(istype(AM, /mob/living/simple_animal/))
-			return
+	if(isliving(AM))
 		if(istype(AM, /mob/living/simple_animal/hostile))
 			var/mob/living/simple_animal/hostile/H = AM
 			if(!H.assault_target && !H.target_mob)
@@ -292,6 +318,10 @@
 
 /obj/machinery/door/airlock/maintenance/welded
 	welded = 1
+
+/obj/item/device/flashlight/pen/bright
+	brightness_on = 3
+	light_power = 2
 
 /obj/structure/vent
 	icon = 'icons/atmos/vent_pump.dmi'

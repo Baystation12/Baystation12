@@ -17,6 +17,36 @@
 	New()
 		update_state()
 
+/obj/structure/door_assembly/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(air_group || (height==0))
+		return 1
+	if(istype(mover) && (mover.checkpass(PASSTABLE) || mover.elevation != elevation))
+		return 1
+	else
+		return 0
+
+/obj/structure/door_assembly/Bumped(atom/movable/AM)
+	if(isliving(AM) && AM:a_intent == I_HELP)
+		if(istype(AM, /mob/living/simple_animal/))
+			return
+		if(istype(AM, /mob/living/simple_animal/hostile))
+			var/mob/living/simple_animal/hostile/H = AM
+			if(!H.assault_target && !H.target_mob)
+				return
+		var/turf/T = get_step(AM, AM.dir)
+		if(T.CanPass(AM, T))
+			if(ismob(AM))
+				var/mob/moving = AM
+				moving.show_message("<span class='notice'>You start maneuvring through [src]...</span>")
+			spawn(0)
+				if(do_after(AM, 30))
+					src.visible_message("<span class='info'>[AM] slips through [src].</span>")
+					AM.loc = T
+		else if(ismob(AM))
+			var/mob/moving = AM
+			moving.show_message("<span class='warning'>Something is blocking you from maneuvering through [src].</span>")
+	..()
+
 /obj/structure/door_assembly/door_assembly_com
 	base_icon_state = "com"
 	base_name = "Command Airlock"

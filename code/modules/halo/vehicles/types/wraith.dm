@@ -47,7 +47,7 @@
 	name = "Wraith Cannon"
 	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."
 
-	projectile_fired = /obj/item/projectile/covenant/wraith_cannon
+	projectile_fired = /obj/item/projectile/bullet/covenant/wraith_cannon
 
 	fire_delay = 4.5 SECONDS
 	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
@@ -63,7 +63,7 @@
 	burst_delay = 1
 	fire_delay = 4.5 SECONDS
 	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
-	proj_fired = /obj/item/projectile/covenant/wraith_cannon
+	proj_fired = /obj/item/projectile/bullet/covenant/wraith_cannon
 
 /datum/vehicle_gun/wraith_machinegun
 	name = "Wraith Medium Plasma Cannons"
@@ -72,39 +72,27 @@
 	burst_delay = 0.15 SECONDS
 	fire_delay = 0.6 SECONDS
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
-	proj_fired = /obj/item/projectile/covenant/plasmarifle
+	proj_fired = /obj/item/projectile/bullet/covenant/plasmarifle
 
-/obj/item/projectile/covenant/wraith_cannon
+/obj/item/projectile/bullet/covenant/wraith_cannon
 	damage = 100
 	icon = 'code/modules/halo/vehicles/types/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
 	damage_type = "bomb"
-	density = 0
 	step_delay = 1.5
 	armor_penetration = 25
 
-/obj/item/projectile/covenant/wraith_cannon/change_elevation()
-	return
+/obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
+	. = ..()
+	kill_count = get_dist(starting,original) + rand(-2,2) //Sometimes it can fly a bit over or under the target
 
-/obj/item/projectile/covenant/wraith_cannon/Move(var/newloc,var/dir)
-	if(dir == NORTH || dir == SOUTH)
-		bounds = "64,64"
-	else
-		bounds = "96,32"
-
-	if(original in range(1,loc))
-		Bump(loc)
-		return
+/obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
 		change_elevation(1)
 	else
 		change_elevation(-1)
 	. = ..()
 
-/obj/item/projectile/covenant/wraith_cannon/process()
-	set_density(0)
-	. = ..()
-
-/obj/item/projectile/covenant/wraith_cannon/on_impact(var/atom/impacted)
+/obj/item/projectile/bullet/covenant/wraith_cannon/on_impact(var/atom/impacted)
 	explosion(impacted,0,2,3,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
 	. = ..()

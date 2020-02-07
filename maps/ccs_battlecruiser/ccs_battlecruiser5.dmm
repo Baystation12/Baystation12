@@ -20,7 +20,7 @@
 "t" = (/obj/structure/table/marble,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "u" = (/obj/structure/bed/chair/covenant,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "v" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type51carbine,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
-"w" = (/obj/effect/landmark/playernav{name = "Sangheili Ranger Quarters"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
+"w" = (/obj/effect/landmark/playernav{name = "Deck 5: Sangheili Ranger Quarters"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "x" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "y" = (/obj/machinery/door/airlock/multi_tile/covenant/four,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "z" = (/obj/machinery/telecomms/allinone,/turf/simulated/wall/covenant,/area/ccs_battlecruiser/deck5)
@@ -34,7 +34,7 @@
 "H" = (/obj/machinery/door/airlock/covenant{name = "External Airlock"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "I" = (/obj/machinery/door/airlock/covenant,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "J" = (/obj/machinery/door/airlock/multi_tile/covenant/three/eastwest,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
-"K" = (/obj/effect/landmark/playernav{name = "Deck 5 Forward Blister"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
+"K" = (/obj/effect/landmark/playernav{name = "Deck 5: Forward Blister"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "L" = (/obj/effect/landmark/playernav{name = "Deck 5: Dorsal Airlocks"},/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "M" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/grille,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
 "N" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/airless,/area/ccs_battlecruiser/deck5)
@@ -44,7 +44,6 @@
 "R" = (/obj/effect/landmark/map_data{name = "CCS Battlecruiser"},/turf/space,/area/space)
 "S" = (/obj/effect/overmap{tag = "CCS Battlecruiser"},/turf/space,/area/space)
 "T" = (/obj/structure/weapon_rack,/turf/simulated/floor/covenant,/area/ccs_battlecruiser/deck5)
-"U" = (/obj/structure/weapon_rack,/turf/simulated/floor/covenant,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -165,7 +164,7 @@ aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbddddcccccccccccccdddddbbbbbbbbbbbb
 aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbdddcccccccccccccccddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddddddddcccccccglggggggcoppccccddddddbbbbbbddddddccccccjgggllccggcccccccccccccccdddddddbbbbbbbbbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbdddddddcccccccccccccccccdddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddddddcccccccccllgggqggcgggcccccdddddbbbbbbdddddcccccccllggggccjgccccccccccccccccddddddbbbbbbbbbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbddddddcccccccccccccccccccdddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddccccccccccccnggllcjgrgggcccccdddddbbbbbbdddddcccccccglggTnccigcccccccccccccccccdddddbbbbbbbbbbbbbbbbbbbbbbb
-aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbdddddcccccccccccccccccccccddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddddddcccgkgccccccccnUgslcggcgggccccccddddbbbbbbddddccccccccccigccccggmgggggkgccccccccccddddbbbbbbbbbbbbbbbbbbbbbbb
+aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbdddddcccccccccccccccccccccddddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddddddddcccgkgccccccccnTgslcggcgggccccccddddbbbbbbddddccccccccccigccccggmgggggkgccccccccccddddbbbbbbbbbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbdddccccccccccccccccccccccccdddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddddddccccccjegccccccccccccccggctugcTmgvcdddddbbbbbddddccccggggggggggggggggggggegcccccccccccdddbbbbbbbbbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbddcccccclggggggggmglccccccccddddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddcccccccccccgggccccccccccccccghcttsrgwgvcdddddbbbbbdddcccccgggsggggggsggggsggggggccccccggggccdbbbbbbbbbbbbbbbbbbbbbbbb
 aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbddddccccccclgglgglgglglccccccccccddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddddccccccccccccccccccgggccccccccccccccigcccccgggxccddddbbbbbdddcccccggccccigcccygggccccgggccccccggggccdbbbbbbbbbbbbbbbbbbbbbbbb

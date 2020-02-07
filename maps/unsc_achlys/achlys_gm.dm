@@ -1,5 +1,6 @@
 
-#define COMMS_CUTIN_EVENT_CHANCE 10
+#define COMMS_CUTIN_EVENT_MIN 15 MINUTES
+#define COMMS_CUTIN_EVENT_MAX 30 MINUTES
 #define COMMS_CUTIN_EVENT_DURATION 1 MINUTES
 #define FLOOD_EVENT_MINOR_START 25 MINUTES
 #define FLOOD_EVENT_MAJOR_START 30 MINUTES
@@ -10,7 +11,7 @@
 	round_description = ""
 	extended_round_description = ""
 	config_tag = "achlys"
-	votable = 1
+	votable = 0
 	probability = 0
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
@@ -37,8 +38,7 @@
 	flood_spawn_event_major = world.time + FLOOD_EVENT_MAJOR_START
 	populate_items_destroy()
 	populate_items_retrieve()
-	if(prob(COMMS_CUTIN_EVENT_CHANCE))
-		special_event_starttime = world.time + 5 MINUTES //TODO: MAKE THIS RANDOMISED.
+	special_event_starttime = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
 
 /datum/game_mode/achlys/check_finished()
 	. = 0
@@ -77,6 +77,7 @@
 		var/obj/machinery/telecomms_jammers/spawned_jammer = new /obj/machinery/telecomms_jammers (item_spawn_turf)
 		spawned_jammer.jam_chance = 50
 		spawned_jammer.jam_range = 999
+		spawned_jammer.jamming_active = 1
 		spawn(COMMS_CUTIN_EVENT_DURATION)
 			qdel(spawned_nopower_area)
 			qdel(spawned_relay)
@@ -133,6 +134,7 @@ All 3 of these cannot spawn on open space
 
 /datum/game_mode/achlys/declare_completion()
 	..()
+	to_world("<span class='warning'>Cole Protocol has been enacted. Marine victory.</span>")
 
 /datum/game_mode/achlys/handle_mob_death(var/mob/victim, var/list/args = list())
 	..()
