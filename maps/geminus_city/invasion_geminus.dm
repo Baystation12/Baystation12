@@ -2,7 +2,7 @@
 #include "../npc_ships/om_ship_areas.dm"
 #include "../area_holders/overmap_ship_area_holder.dmm"
 
-#include "../Exoplanet Research/Exoplanet Research Ice/includes.dm"
+#include "../Exoplanet Research/includes.dm"
 
 #include "../Admin Planet/includes.dm"
 

@@ -12,7 +12,7 @@
 	var/list/overmap_hide = list()
 	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
-	var/end_conditions_required = 2
+	var/end_conditions_required = 3
 
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()

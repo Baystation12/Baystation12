@@ -18,10 +18,11 @@
 	name = "sentinel beam"
 	icon_state = "beam_blue"
 
-	damage = 30
+	damage = 10
 	damage_type = BURN
 	check_armour = "laser"
 	armor_penetration = 10
+	tracer_delay_time = 2
 
 	muzzle_type = /obj/effect/projectile/laser_gold/muzzle
 	tracer_type = /obj/effect/projectile/laser_gold/tracer
@@ -31,7 +32,10 @@
 	name = "Sentinel Beam"
 	self_recharge = 1
 	recharge_time = 0
+	max_shots = 500
 	fire_delay = 20
+	channel_time = 3 SECONDS
+	channel_delay = 2 //Make sure this aligns with the tracer delay time
 
 	//fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
 	fire_sound = 'sound/weapons/pulse3.ogg'
@@ -65,7 +69,7 @@
 	maxHealth = 200
 	ranged = 1
 	move_to_delay = 5
-	resistance = 10
+	resistance = 15
 	speak_chance = 1
 	speak = list()
 	emote_see = list("extends and retracts its manipulator arms","scans its body for damage","scans the environment")
@@ -76,9 +80,10 @@
 /mob/living/simple_animal/hostile/sentinel/New()
 	. = ..()
 	sentinel_beam = new(src)
+	set_light(8)
 
 /mob/living/simple_animal/hostile/sentinel/RangedAttack(var/atom/attacked)
-	sentinel_beam.Fire(attacked, src)
+	sentinel_beam.afterattack(attacked, src)
 
 /mob/living/simple_animal/hostile/sentinel/death(gibbed, deathmessage = "crashes into the ground!", show_dead_message = 1)
 	new /obj/effect/gibspawner/robot(src.loc)
