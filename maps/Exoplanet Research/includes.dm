@@ -5,7 +5,6 @@
 #include "spawns.dm"
 #include "outfits.dm"
 #include "jobs.dm"
-#include "lift.dm"
 
 
 #include "ExoResearch_0.dmm"
