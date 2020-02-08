@@ -1,6 +1,7 @@
 /area/exo_research_facility
 	name = "Research Facility"
 	dynamic_lighting = 0
+	has_gravity = 1
 	base_turf = /turf/simulated/floor/asteroid/planet
 
 /area/exo_research_facility/ground/exterior
@@ -118,8 +119,9 @@
 	luminosity = 0
 
 /area/exo_research_facility/sublevel1/interior
-	dynamic_lighting = 1
-	luminosity = 0
+	dynamic_lighting = 0
+	luminosity = 1
+	requires_power = 0
 
 /area/exo_research_facility/sublevel1/interior/xenoresearch
 	name = "Crescent Base Xeno-Research"
