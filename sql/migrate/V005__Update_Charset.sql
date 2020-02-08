@@ -1,4 +1,3 @@
---Halostation Table
 ALTER TABLE death CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE erro_admin CONVERT TO CHARACTER SET utf8mb4;
 ALTER TABLE erro_admin_log CONVERT TO CHARACTER SET utf8mb4;
