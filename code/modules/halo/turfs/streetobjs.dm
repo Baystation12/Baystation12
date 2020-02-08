@@ -101,10 +101,19 @@
 	density = 1
 
 /obj/machinery/light/invis
-	icon = 'maps/geminus_city/citymap_icons/floorlights.dmi'
-	icon_state = "inv1"
-	base_state = "inv"
+	name = "Invisible Light"
+	use_power = 0
+	on = 1
+	invisibility = 101
+	opacity = 0
 	brightness_range = 8
+	brightness_power = 10
+
+/obj/machinery/light/invis/emp_act()
+	return
+
+/obj/machinery/light/invis/ex_act()
+	return
 
 /obj/structure/grille/smallfence/
 	icon = 'maps/geminus_city/citymap_icons/structures.dmi'
