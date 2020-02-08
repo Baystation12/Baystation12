@@ -40,3 +40,6 @@
 
 /obj/structure/sentinel_spawner/proc/reset_spawn_time()
 	next_sentinel_spawn = world.time + sentinel_respawn_time
+
+/obj/structure/sentinel_spawner/respawn30sec
+	sentinel_respawn_time = 30 SECONDS

@@ -65,7 +65,7 @@
 	maxHealth = 200
 	ranged = 1
 	move_to_delay = 5
-	resistance = 10
+	resistance = 15
 	speak_chance = 1
 	speak = list()
 	emote_see = list("extends and retracts its manipulator arms","scans its body for damage","scans the environment")
@@ -76,6 +76,7 @@
 /mob/living/simple_animal/hostile/sentinel/New()
 	. = ..()
 	sentinel_beam = new(src)
+	set_light(6)
 
 /mob/living/simple_animal/hostile/sentinel/RangedAttack(var/atom/attacked)
 	sentinel_beam.Fire(attacked, src)
