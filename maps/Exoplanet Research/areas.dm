@@ -112,6 +112,52 @@
 /area/exo_research_facility/roof/exterior/northeastr
 	name = "VT9-042 Rooftop Exterior"
 
+/area/exo_research_facility/sublevel1/exterior/Caves
+	name = "VT9 Lower Caves"
+	dynamic_lighting = 1
+	luminosity = 0
+
+/area/exo_research_facility/sublevel1/interior
+	dynamic_lighting = 1
+	luminosity = 0
+
+/area/exo_research_facility/sublevel1/interior/xenoresearch
+	name = "Crescent Base Xeno-Research"
+
+/area/exo_research_facility/sublevel1/interior/virology
+	name = "Crescent Base Virology"
+
+/area/exo_research_facility/sublevel1/interior/orionsector
+	name = "Crescent Base Orion-Sector"
+
+/area/exo_research_facility/sublevel1/interior/slipspacelab
+	name = "Crescent Base Slipspace Lab"
+
+/area/exo_research_facility/sublevel1/interior/xenoarchaeology
+	name = "Crescent Base Xeno-Archaeo"
+
+/area/exo_research_facility/sublevel1/interior/botany
+	name = "Crescent Base Botany"
+
+/area/exo_research_facility/sublevel1/interior/comms
+	name = "Crescent Base Comms"
+
+/area/exo_research_facility/sublevel1/interior/Hallway
+	name = "Crescent Base Hallway"
+
+/area/exo_research_facility/sublevel1/interior/entrance
+	name = "Crescent Base Sublevel Entrance"
+
+/area/exo_research_facility/sublevel1/interior/mech
+	name = "Crescent Base Mechbay"
+
+/area/exo_research_facility/sublevel1/interior/mechtest
+	name = "Crescent Base Mechtest Bay"
+
+/area/exo_research_facility/sublevel1/interior/destruct
+	name = "Emergency Sanitation Storage"
+
+/*
 /area/exo_research_facility/sublevel1/interior
 	name = "Crescent Base sublevel 1 interior"
 	dynamic_lighting = 0
@@ -215,3 +261,4 @@
 	requires_power= 0
 	has_gravity = 1
 	luminosity = 0
+*/
