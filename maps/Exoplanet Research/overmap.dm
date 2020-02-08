@@ -46,10 +46,19 @@
 	/obj/structure/sentinel_spawner/respawn30sec,\
 	/obj/structure/sentinel_spawner/respawn30sec,\
 	null,null)
+	loot_distributor.loot_list["gauntletLoot"] = list(\
+	/obj/item/weapon/reagent_containers/glass/bottle/floodtox,\
+	/obj/item/weapon/reagent_containers/glass/bottle/floodtox,\
+	/obj/structure/xeno_plant,\
+	/obj/structure/autoturret/ONI,\
+	null,null,null)
 
 /obj/effect/overmap/sector/exo_research/LateInitialize()
 	. = ..()
 	GLOB.overmap_tiles_uncontrolled -= range(28,src)
+
+/obj/effect/loot_marker/gauntlet_loot
+	loot_type = "gauntletLoot"
 
 /obj/effect/loot_marker/gauntlet_spawns
 	loot_type = "gauntletSpawns"

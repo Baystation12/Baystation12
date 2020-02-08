@@ -391,6 +391,7 @@
 "hU" = (/obj/machinery/door/airlock/halo{name = "Sleeping Quarters"},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
 "hV" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exo_research_facility/ground/exterior/wildsn)
 "hW" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random/high_chance,/area/exo_research_facility/ground/exterior/Caves)
+"hX" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 2"; id = "Security Checkpoint 2"; name = "Security Gate Control"; pixel_x = -32; pixel_y = 0},/obj/structure/ladder/up,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/centralg)
 "hY" = (/obj/machinery/light/spot{dir = 8},/obj/machinery/telecomms/receiver,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
 "hZ" = (/obj/machinery/light/spot{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
 "ia" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/commsg)
@@ -460,6 +461,7 @@
 "qC" = (/mob/living/simple_animal/yithian,/turf/simulated/floor/pavement/empty,/area/exo_research_facility/ground/exterior/wildsn)
 "qF" = (/obj/item/remains/human,/turf/simulated/floor/tiled,/area/exo_research_facility/ground/exterior/wildsn)
 "rj" = (/obj/item/weapon/storage/toolbox/mechanical,/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/exo_research_facility/ground/exterior/wildsn)
+"rL" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/centralg)
 "rS" = (/obj/item/weapon/storage/lunchbox/filled,/turf/simulated/floor/tiled,/area/exo_research_facility/ground/exterior/wildsn)
 "rU" = (/turf/simulated/open,/area/exo_research_facility/ground/exterior/wildsn)
 "tk" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/plating,/area/exo_research_facility/ground/exterior/wildsn)
@@ -484,8 +486,6 @@
 "KX" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_research_facility/ground/exterior/wildsn)
 "La" = (/obj/machinery/door/airlock/multi_tile/halo/triple{layer = 10; name = "Blast Door"; req_access = list(311)},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/sciencelabs)
 "Ls" = (/obj/structure/flora/ausbushes/fullgrass,/turf/unsimulated/mineral,/area/exo_research_facility/ground/exterior/wildsn)
-"Me" = (/obj/structure/flora/ausbushes/fullgrass,/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/centralg)
-"Nc" = (/obj/structure/flora/ausbushes/fullgrass,/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 2"; id = "Security Checkpoint 2"; name = "Security Gate Control"; pixel_x = -32; pixel_y = 0},/obj/structure/ladder/up,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/centralg)
 "NC" = (/turf/simulated/floor/plating,/area/exo_research_facility/ground/exterior/wildsn)
 "Pe" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/exo_research_facility/ground/exterior/umbilical)
 "Pl" = (/turf/simulated/floor/plating,/area/exo_research_facility/ground/exterior/umbilical)
@@ -582,7 +582,7 @@ HnacacacacacacacacacacaNaOaeaeaCfTahgkgngngoaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaq
 HnacacacacacacaMaMacacadaeaeaeaefTahgkgngrgjgjgscgcggtcgcggscgcggscgcggscgcggscgcggscgcggscgcgajajgvjjgugugvgvgvgwgvgscgcggscgcggscgcggscgcggscgcggscgcggscgcgglglgxgqgmanagacacacacacacacacaaaaaaaaaaaaaaaaaaaaaahchcaaaaaaaaacacacacacacacacacppppHYppppacacSpSpSpSpSpSpSpSpacacppppHYacppacacacacacacaaHn
 HnacacacacacacacacacacbzbAaeaeaeagahgkgngngygocgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgamancgcgcgcgcggzgAgBgvcgcgcgdocgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcggpgCgqgqgmanagacacacacacacacacaaaaaaaaaaaaaaaaaahchchchcaaaaaaaaacacacacacacacacacppppHYppppacSpSpKXPXKXKXPXKXSpSpacppppHYacppacacacacacaaaaHn
 HnacaMacacacacacacacacacadaeaeaeagahgjgEgngngkcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgcgamancgcgcgcgcggzgFgGgvcgcgcgcgcgcgcggHcgcgcgdocgcgcgcgcgdocgcgcggmgqgqgIglcsagacacacacacacacaaaaaaaaaaaaaaaaaaaaaahchchchcaaaaaaacacacacacacacacacppppHYppacacSpKXKXqoqoqoqoKXKXSpacppppHYppppacacacacacacaaHn
-HnacacacacacacacacacacacadaeaeaeagahgjgjgkgkgjgKgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgMcggNamancgcgcgcgcggzMeNcgQgLgLgRgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgSglgmgmglglanagacacacacacacacaaaaaaaaaaaaaaaaaaaaaahchchchchchchcacacacacacacacacacacppHYppacacKXKXqoqoqoqoqoqoKXKXacppppHYppacacacacacacacacHn
+HnacacacacacacacacacacacadaeaeaeagahgjgjgkgkgjgKgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgMcggNamancgcgcgcgcggzrLhXgQgLgLgRgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgLgSglgmgmglglanagacacacacacacacaaaaaaaaaaaaaaaaaaaaaahchchchchchchcacacacacacacacacacacppHYppacacKXKXqoqoqoqoqoqoKXKXacppppHYppacacacacacacacacHn
 HnacacacacacacacacacacacadaeaeaeaggTgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUXwgUgUgUgUgVgLgWgLancgcgcgcggXgvgzljgvgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgUgYfTacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaahchchchchchcacacacacacacacacacppppHYppacacKXqoqoYIqFYKYKrSqoKXacppppacacacacacacacacacacHn
 HnacacacaMacacacacacacacadaeaeaeagagagagagagagagagagagagagagagagagagagagagagagagagagagaggTgUgNgUgYcgcgcgdocggZgZRJRJagfTagagfTfTfTfTfTagfTfTfTagagagagagagagagagagagagfTfTfTacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaahchchchchchchcacacacacacacacacacppHYacacacKXKXSlqoYKYKYKPtKXKXacppacacacacacacacacacacacHn
 HnacacacacacacacacacaMacadaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaedudwacacacacacacaMaMacacacacaMacacacacacacacacacacaMacacacacacacacacacacacacacacaMacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaahchchchchchchchcacacacacacacacacacppHYacacacacKXSlSlqoYKVvKXKXacacppacacppppacacacacacacacHn
