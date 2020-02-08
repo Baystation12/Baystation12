@@ -18,7 +18,7 @@
 	name = "sentinel beam"
 	icon_state = "beam_blue"
 
-	damage = 5
+	damage = 10
 	damage_type = BURN
 	check_armour = "laser"
 	armor_penetration = 10

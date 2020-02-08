@@ -109,6 +109,9 @@
 	brightness_range = 8
 	brightness_power = 10
 
+/obj/machinery/light/powered()
+	return 1
+
 /obj/machinery/light/invis/emp_act()
 	return
 
