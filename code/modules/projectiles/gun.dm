@@ -561,7 +561,7 @@
 
 	if(launched)
 		play_fire_sound(user,P)
-		if(istype(target,/atom/movable) && get_dist(target,user) <= 1)
+		if(istype(target,/atom/movable) && istype(launched) && get_dist(target,user) <= 1)
 			change_elevation(target.elevation-launched.elevation)
 
 	return launched
