@@ -41,7 +41,7 @@
 		if(A.w_class == 1)
 			continue
 		slowdown_total += base_storage_cost(A.w_class) * BACKPACK_SLOWDOWN_MOD
-	var/min_threshold_slowdown = (base_storage_cost(ITEM_SIZE_NORMAL) * BACKPACK_SLOWDOWN_MOD) * 3 //3 normals.
+	var/min_threshold_slowdown = (base_storage_cost(ITEM_SIZE_NORMAL) * BACKPACK_SLOWDOWN_MOD) * 2 //2 normals.
 	if(slowdown_total <= min_threshold_slowdown)
 		slowdown_total = 0
 	else
