@@ -80,7 +80,7 @@
 /mob/living/simple_animal/hostile/sentinel/New()
 	. = ..()
 	sentinel_beam = new(src)
-	set_light(6)
+	set_light(8)
 
 /mob/living/simple_animal/hostile/sentinel/RangedAttack(var/atom/attacked)
 	sentinel_beam.afterattack(attacked, src)
