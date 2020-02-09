@@ -372,7 +372,7 @@
 		if(stored_targ)
 			if(stored_targ == user)
 				stored_targ = null
-				visible_message("<span class = 'notice'>[user] stops firing [src].<span>")
+				visible_message("<span class = 'notice'>[user] stops firing [src].</span>")
 				break
 			targloc = get_turf(stored_targ)
 			use_targ = stored_targ
