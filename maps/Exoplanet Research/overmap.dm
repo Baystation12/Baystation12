@@ -51,6 +51,9 @@
 	/obj/item/weapon/reagent_containers/glass/bottle/floodtox,\
 	/obj/structure/xeno_plant,\
 	/obj/structure/autoturret/ONI,\
+	/obj/item/sentinel_kit,\
+	/obj/item/weapon/gun/energy/laser/sentinel_beam/detached,\
+	/obj/item/weapon/gun/energy/laser/sentinel_beam/detached,\
 	null,null,null)
 
 /obj/effect/overmap/sector/exo_research/LateInitialize()
