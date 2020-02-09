@@ -34,7 +34,7 @@
 	contents += weapon
 	weapons_wielded += weapon
 	name += "+ [weapon.name] "
-	fire_delay = max(fire_delay,weapon.fire_delay)
+	fire_delay = max(fire_delay,weapon.fire_delay + weapon.burst * weapon.burst_delay)
 	generate_icon()
 
 /obj/item/weapon/gun/dual_wield_placeholder/proc/generate_icon()
@@ -64,6 +64,7 @@
 	return newimage
 
 /obj/item/weapon/gun/dual_wield_placeholder/afterattack(atom/target, mob/living/user, adjacent, params)
+	next_fire_time = world.time + fire_delay
 	for(var/obj/item/weapon/gun/weapon in weapons_wielded)
 		var/index = weapons_wielded.Find(weapon)
 		spawn(weapon_delay * index)

@@ -21,7 +21,7 @@
 	damage = 7.5
 	damage_type = BURN
 	check_armour = "laser"
-	armor_penetration = 10
+	armor_penetration = 15
 	tracer_delay_time = 2.5
 
 	muzzle_type = /obj/effect/projectile/laser_gold/muzzle
