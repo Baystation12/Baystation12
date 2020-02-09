@@ -29,11 +29,12 @@
 	. =..()
 	name = ""
 
-/obj/item/weapon/gun/dual_wield_placeholder/proc/add_wielding_weapon(var/obj/weapon,var/mob/user)
+/obj/item/weapon/gun/dual_wield_placeholder/proc/add_wielding_weapon(var/obj/item/weapon/gun/weapon,var/mob/user)
 	user.drop_from_inventory(weapon)
 	contents += weapon
 	weapons_wielded += weapon
 	name += "+ [weapon.name] "
+	fire_delay = max(fire_delay,weapon.fire_delay + weapon.burst * weapon.burst_delay)
 	generate_icon()
 
 /obj/item/weapon/gun/dual_wield_placeholder/proc/generate_icon()
@@ -62,11 +63,13 @@
 
 	return newimage
 
-/obj/item/weapon/gun/dual_wield_placeholder/Fire(atom/target, mob/living/user, clickparams, pointblank, reflex)
+/obj/item/weapon/gun/dual_wield_placeholder/afterattack(atom/target, mob/living/user, adjacent, params)
+	next_fire_time = world.time + fire_delay
 	for(var/obj/item/weapon/gun/weapon in weapons_wielded)
 		var/index = weapons_wielded.Find(weapon)
 		spawn(weapon_delay * index)
-			weapon.Fire(target,user,clickparams,pointblank,reflex)
+			weapon.next_fire_time = 0
+			weapon.afterattack(target, user, adjacent, params)
 
 /obj/item/weapon/gun/dual_wield_placeholder/update_twohanding() //Overriden to do nothing so the name doesn't get reset to "dual wield placeholder"
 	return

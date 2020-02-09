@@ -20,6 +20,10 @@
 	irradiate_non_cov = 5
 	advanced_covenant = 1
 
+	//Due to reverse acc. and disp. profile, this might be more powerful than the others.//
+	sustain_time = 3 SECONDS
+	sustain_delay = 1
+
 
 /obj/item/weapon/gun/energy/plasmarepeater/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)
