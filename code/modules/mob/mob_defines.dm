@@ -188,5 +188,7 @@
 
 	var/datum/skillset/skillset = /datum/skillset
 
+	//for stacking do_after bars
+	var/list/progressbars = null
 
 	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved
