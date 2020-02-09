@@ -17,12 +17,15 @@
 	caliber = "12.7mm"
 	magazine_type = /obj/item/ammo_magazine/HMG_boxmag
 
-	burst = 10
-	burst_delay = 3
+	//burst = 10
+	//burst_delay = 3
 	burst_accuracy = list(3,2,2,1,0,-1,-1,-3,-4,-5)
 	dispersion = list(0,0,0.5,0.5,1,1,1.5,2,2,2.5)
 
 	load_time = 7
+
+	sustain_time = 6 SECONDS
+	sustain_delay = 3
 
 /obj/item/weapon/gun/projectile/turret/HMG/detached
 	removed_from_turret = 1
@@ -32,3 +35,5 @@
 		)
 	burst_accuracy = list(0,-1,-1,-1,-2,-3,-3,-5,-5,-6)
 	dispersion = list(0.5,0.5,1,1,1.5,1.5,2,2.5,2.5,3)
+
+	sustain_time = 3 SECONDS

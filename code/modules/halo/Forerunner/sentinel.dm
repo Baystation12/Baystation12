@@ -18,7 +18,7 @@
 	name = "sentinel beam"
 	icon_state = "beam_blue"
 
-	damage = 10
+	damage = 2.5
 	damage_type = BURN
 	check_armour = "laser"
 	armor_penetration = 10
@@ -34,8 +34,8 @@
 	recharge_time = 0
 	max_shots = 500
 	fire_delay = 20
-	channel_time = 3 SECONDS
-	channel_delay = 2 //Make sure this aligns with the tracer delay time
+	sustain_time = 4 SECONDS
+	sustain_delay = 2 //Make sure this aligns with the tracer delay time
 
 	//fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
 	fire_sound = 'sound/weapons/pulse3.ogg'

@@ -5,8 +5,6 @@
 	If the fire mode value for a setting is null, it will be replaced with the initial value of that gun's variable when the firemode is created.
 	Obviously not compatible with variables that take a null value. If a setting is not present, then the corresponding var will not be modified.
 */
-
-#define SPECIES_LARGE list(/datum/species/sangheili,/datum/species/brutes,/datum/species/spartan,/datum/species/orion)
 #define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 0.75 SECONDS
 
 /datum/firemode
@@ -104,8 +102,9 @@
 
 	//"Channeled" weapons, aka longfire beam sustained types (sentinel beam)//
 
-	var/channel_delay = -1 //Set this to the delay between "firing" whilst channeled.Set the weapon tracer to match this value.
-	var/channel_time = -1 //How long does this sustain fire for.
+	var/sustain_delay = -1 //Set this to the delay between "firing" whilst channeled.Set the weapon tracer to match this value.
+	var/sustain_time = -1 //How long does this sustain fire for.
+	var/atom/stored_targ
 
 /obj/item/weapon/gun/New()
 	..()
@@ -334,6 +333,11 @@
 	if(!special_check(user))
 		return
 
+	if(stored_targ)
+		stored_targ = target
+		visible_message("<span class = 'notice'>[user] refocuses their aim on [target]</span>")
+		return
+
 	if(world.time < next_fire_time)
 		if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
@@ -347,7 +351,7 @@
 			return
 
 	var/shoot_time = (burst - 1)* burst_delay
-	user.setClickCooldown(shoot_time) //no clicking on things while shooting
+	//user.setClickCooldown(shoot_time) //no clicking on things while shooting
 	//user.setMoveCooldown(shoot_time) //no moving while shooting either
 	next_fire_time = world.time + shoot_time + fire_delay
 	if(istype(user,/mob/living/carbon/human))
@@ -357,11 +361,24 @@
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
-	if(channel_time > 0)
-		burst = channel_time/channel_delay
-		burst_delay = channel_delay
+	var/atom/use_targ = target
+	if(sustain_time > 0)
+		burst = sustain_time/sustain_delay
+		burst_delay = sustain_delay
+		stored_targ = target
+		use_targ = stored_targ
 	. = 1
 	for(var/i in 1 to burst)
+		if(stored_targ)
+			if(stored_targ == user)
+				stored_targ = null
+				visible_message("<span class = 'notice'>[user] stops firing [src].<span>")
+				break
+			targloc = get_turf(stored_targ)
+			use_targ = stored_targ
+		var/mob/living/carbon/human/h = user
+		if(isnull(user) || user.stat == DEAD || (istype(h) && (h.l_hand != src && h.r_hand != src)))
+			break
 		user.currently_firing = move_delay_malus
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
@@ -372,10 +389,10 @@
 			var/obj/item/projectile/proj_obj = projectile
 			proj_obj.target_elevation = last_elevation
 
-		process_accuracy(projectile, user, target, i, held_twohanded)
+		process_accuracy(projectile, user, use_targ, i, held_twohanded)
 
 		if(pointblank)
-			process_point_blank(projectile, user, target)
+			process_point_blank(projectile, user, use_targ)
 
 		var/target_zone
 		if(user && user.zone_sel)
@@ -383,18 +400,19 @@
 		else
 			target_zone = "chest"
 
-		if(process_projectile(projectile, user, target, target_zone, clickparams))
-			handle_post_fire(user, target, pointblank, reflex)
+		if(process_projectile(projectile, user, use_targ, target_zone, clickparams))
+			handle_post_fire(user, use_targ, pointblank, reflex)
 			update_icon()
 
 		if(i < burst)
 			sleep(burst_delay)
 
-		if(!(target && target.loc))
+		if(!(use_targ && use_targ.loc))
 			target = targloc
 			pointblank = 0
 
 	//update timing
+	stored_targ = null
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	spawn(BASE_MOVEDELAY_MOD_APPLYFOR_TIME)
 		user.currently_firing = 0
