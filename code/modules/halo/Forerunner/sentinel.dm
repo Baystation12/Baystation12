@@ -115,14 +115,12 @@
 	return "chassis"
 
 /mob/living/simple_animal/hostile/sentinel/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	if(istype(P, /obj/item/projectile/beam/sentinel))
-		return PROJECTILE_FORCE_MISS
-
-	if(istype(P, /obj/item/projectile/beam/monitor))
-		return PROJECTILE_FORCE_MISS
-
-	if(istype(P, /obj/item/projectile/beam/monitor_stun))
-		return PROJECTILE_FORCE_MISS
+	if(istype(P, /obj/item/projectile/beam/sentinel) || istype(P, /obj/item/projectile/beam/monitor) || istype(P, /obj/item/projectile/beam/monitor_stun) )
+		if(P.firer)
+			if(P.firer.faction == faction)
+				return PROJECTILE_FORCE_MISS
+		else
+			return PROJECTILE_FORCE_MISS
 
 	return ..()
 
