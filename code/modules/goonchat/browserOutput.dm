@@ -119,9 +119,18 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 	//do not convert to to_chat()
 	to_old_chat(owner, "<span class=\"userdanger\">Failed to load fancy chat, reverting to old chat. Certain features won't work.</span>")
 
+	pingLoop()
+
 /datum/chatOutput/proc/showChat()
 	winset(owner, "output", "is-visible=false")
 	winset(owner, "browseroutput", "is-disabled=false;is-visible=true")
+
+/datum/chatOutput/proc/pingLoop()
+	set waitfor = FALSE
+
+	while (owner)
+		ehjax_send(data = owner.is_afk(29) ? "softPang" : "pang") // SoftPang isn't handled anywhere but it'll always reset the opts.lastPang.
+		sleep(30)
 
 /proc/syncChatRegexes()
 	for (var/user in GLOB.clients)
