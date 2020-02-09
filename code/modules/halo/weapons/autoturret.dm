@@ -172,9 +172,3 @@
 	desc = "An automatic turret with integrated forerunner technology for ammunition manufacturing and long-range targeting."
 	icon = 'code/modules/halo/icons/sentry.dmi'
 	icon_state = "artifact"
-
-/obj/structure/autoturret/ONI/New()
-	. = ..()
-	fabricate_rounds(max_rounds/5)
-	anchored = 1
-	GLOB.processing_objects += src

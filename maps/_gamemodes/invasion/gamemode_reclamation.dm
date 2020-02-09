@@ -5,7 +5,7 @@
 	round_description = "The Covenant ransack the outer edges of human space for Forerunner artifacts."
 	extended_round_description = "The Covenant ransack the outer edges of human space for Forerunner artifacts."
 	required_players = 0
-	end_conditions_required = 1
+	end_conditions_required = 2
 	factions = list(/datum/faction/unsc, /datum/faction/covenant)
 	overmap_hide = list(/obj/effect/overmap/sector/exo_listen)
 	disabled_jobs_types = list(\

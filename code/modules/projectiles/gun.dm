@@ -102,6 +102,11 @@
 	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
 	var/advanced_covenant = 0
 
+	//"Channeled" weapons, aka longfire beam sustained types (sentinel beam)//
+
+	var/channel_delay = -1 //Set this to the delay between "firing" whilst channeled.Set the weapon tracer to match this value.
+	var/channel_time = -1 //How long does this sustain fire for.
+
 /obj/item/weapon/gun/New()
 	..()
 	for(var/i in 1 to firemodes.len)
@@ -352,6 +357,9 @@
 
 	//actually attempt to shoot
 	var/turf/targloc = get_turf(target) //cache this in case target gets deleted during shooting, e.g. if it was a securitron that got destroyed.
+	if(channel_time > 0)
+		burst = channel_time/channel_delay
+		burst_delay = channel_delay
 	. = 1
 	for(var/i in 1 to burst)
 		user.currently_firing = move_delay_malus
@@ -553,7 +561,7 @@
 
 	if(launched)
 		play_fire_sound(user,P)
-		if(istype(target,/atom/movable) && get_dist(target,user) <= 1)
+		if(istype(target,/atom/movable) && istype(launched) && get_dist(target,user) <= 1)
 			change_elevation(target.elevation-launched.elevation)
 
 	return launched

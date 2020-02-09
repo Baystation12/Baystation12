@@ -41,6 +41,8 @@
 
 	else if(isitem(Obj))
 		loseme = 1
+	else if(istype(Obj,/obj/vehicles))
+		loseme = 1
 
 	if(loseme)
 		for(var/obj/effect/decal/cleanable/ash/A in src)
