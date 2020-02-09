@@ -6,9 +6,17 @@ GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 //Precaching a bunch of shit
 GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of icons for the browser output
 
+//Should match the value set in the browser js
+#define MAX_COOKIE_LENGTH 5
+#define SPAM_TRIGGER_AUTOMUTE 10
+
 //On client, created on login
 /datum/chatOutput
 	var/client/owner	 //client ref
+	// How many times client data has been checked
+	var/total_checks = 0
+	// When to next clear the client data checks counter
+	var/next_time_to_clear = 0
 	var/loaded       = FALSE // Has the client loaded the browser output area?
 	var/list/messageQueue //If they haven't loaded chat, this is where messages will go until they do
 	var/cookieSent   = FALSE // Has the client sent a cookie for analysis
@@ -67,23 +75,23 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 
 	var/data // Data to be sent back to the chat.
 	switch(href_list["proc"])
-		if ("doneLoading")
+		if("doneLoading")
 			data = doneLoading(arglist(params))
 
-		if ("debug")
+		if("debug")
 			data = debug(arglist(params))
 
-		if ("ping")
+		if("ping")
 			data = ping(arglist(params))
 
-		if ("analyzeClientData")
+		if("analyzeClientData")
 			data = analyzeClientData(arglist(params))
 
-		if ("swaptodarkmode")
+		if("swaptodarkmode")
 			swaptodarkmode()
-		if ("swaptolightmode")
-			swaptolightmode()
 
+		if("swaptolightmode")
+			swaptolightmode()
 
 	if(data)
 		ehjax_send(data = data)
@@ -106,17 +114,32 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 	messageQueue = null
 	sendClientData()
 
+	syncRegex()
+
 	//do not convert to to_chat()
-	owner << "<span class=\"userdanger\">Failed to load fancy chat, reverting to old chat. Certain features won't work.</span>"
+	to_old_chat(owner, "<span class=\"userdanger\">Failed to load fancy chat, reverting to old chat. Certain features won't work.</span>")
 
 /datum/chatOutput/proc/showChat()
 	winset(owner, "output", "is-visible=false")
 	winset(owner, "browseroutput", "is-disabled=false;is-visible=true")
 
+/proc/syncChatRegexes()
+	for (var/user in GLOB.clients)
+		var/client/C = user
+		var/datum/chatOutput/Cchat = C.chatOutput
+		if (Cchat && !Cchat.broken && Cchat.loaded)
+			Cchat.syncRegex()
+
+/datum/chatOutput/proc/syncRegex()
+	var/list/regexes = list()
+
+	if (regexes.len)
+		ehjax_send(data = list("syncRegex" = regexes))
+
 /datum/chatOutput/proc/ehjax_send(client/C = owner, window = "browseroutput", data)
 	if(islist(data))
 		data = json_encode(data)
-	C << output("[data]", "[window]:ehjaxCallback")
+	send_output(C, "[data]", "[window]:ehjaxCallback")
 
 //Sends client connection details to the chat to handle and save
 /datum/chatOutput/proc/sendClientData()
@@ -130,6 +153,18 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 
 //Called by client, sent data to investigate (cookie history so far)
 /datum/chatOutput/proc/analyzeClientData(cookie = "")
+	//Spam check
+	if(world.time  >  next_time_to_clear)
+		next_time_to_clear = world.time + (3 SECONDS)
+		total_checks = 0
+
+	total_checks += 1
+
+	if(total_checks > SPAM_TRIGGER_AUTOMUTE)
+		message_admins("[key_name(owner)] kicked for goonchat topic spam")
+		qdel(owner)
+		return
+
 	if(!cookie)
 		return
 
@@ -138,13 +173,23 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 		if (connData && islist(connData) && connData.len > 0 && connData["connData"])
 			connectionHistory = connData["connData"] //lol fuck
 			var/list/found = new()
+
+			if(connectionHistory.len > MAX_COOKIE_LENGTH)
+				message_admins("[key_name(src.owner)] was kicked for an invalid ban cookie)")
+				qdel(owner)
+				return
+
 			for(var/i in connectionHistory.len to 1 step -1)
+				if(QDELETED(owner))
+					//he got cleaned up before we were done
+					return
 				var/list/row = src.connectionHistory[i]
 				if (!row || row.len < 3 || (!row["ckey"] || !row["compid"] || !row["ip"])) //Passed malformed history object
 					return
 				if (world.IsBanned(row["ckey"], row["ip"], row["compid"]))
 					found = row
 					break
+				CHECK_TICK
 
 			//Uh oh this fucker has a history of playing on a banned account!!
 			if (found.len > 0)
@@ -164,12 +209,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 	log_world("\[[time2text(world.realtime, "YYYY-MM-DD hh:mm:ss")]\] Client: [(src.owner.key ? src.owner.key : src.owner)] triggered JS error: [error]")
 
 //Global chat procs
-/proc/to_chat(target, message, handle_whitespace=TRUE)
-	if(!target)
-		return
-
-	if (isfile(target))
-		target << message
+/proc/to_chat_immediate(target, message, handle_whitespace = TRUE, trailing_newline = TRUE)
+	if(!target || !message)
 		return
 
 	if(target == world)
@@ -187,7 +228,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 	while(i.Find(message))
 		message = copytext(message,1,i.index)+icon2html(locate(i.group[1]), target, icon_state=i.group[2])+copytext(message,i.next)
 
-	//'
+	if(trailing_newline)
+		message += "<br>"
 
 	if(islist(target))
 		// Do the double-encoding outside the loop to save nanoseconds
@@ -199,7 +241,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 				continue
 
 			//Send it to the old style output window.
-			C << original_message
+			to_old_chat(C, original_message)
 
 			if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
 				continue
@@ -209,7 +251,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 				C.chatOutput.messageQueue += message
 				continue
 
-			C << output(twiceEncoded, "browseroutput:output")
+			send_output(C, twiceEncoded, "browseroutput:output")
 	else
 		var/client/C = CLIENT_FROM_VAR(target) //Grab us a client if possible
 
@@ -217,7 +259,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 			return
 
 		//Send it to the old style output window.
-		C << original_message
+		to_old_chat(C, original_message)
 
 		if(!C.chatOutput || C.chatOutput.broken) // A player who hasn't updated his skin file.
 			return
@@ -228,10 +270,18 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 			return
 
 		// url_encode it TWICE, this way any UTF-8 characters are able to be decoded by the Javascript.
-		C << output(url_encode(url_encode(message)), "browseroutput:output")
+		send_output(C, url_encode(url_encode(message)), "browseroutput:output")
+
+/proc/to_chat(target, message, handle_whitespace = TRUE, trailing_newline = TRUE)
+	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
+		to_chat_immediate(target, message, handle_whitespace, trailing_newline)
+		return
+	SSchat.queue(target, message, handle_whitespace, trailing_newline)
 
 /datum/chatOutput/proc/swaptolightmode() //Dark mode light mode stuff. Yell at KMC if this breaks! (See darkmode.dm for documentation)
 	owner.force_white_theme()
 
 /datum/chatOutput/proc/swaptodarkmode()
 	owner.force_dark_theme()
+
+#undef MAX_COOKIE_LENGTH

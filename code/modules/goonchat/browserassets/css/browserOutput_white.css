@@ -31,13 +31,13 @@ img {
 	-ms-interpolation-mode: nearest-neighbor;
 	image-rendering: pixelated;
 }
-
 img.icon {
 	height: 1em;
-	min-height: 1em;
+	min-height: 16px;
 	width: auto;
 	vertical-align: bottom;
 }
+
 
 .r:before { /* "repeated" badge class for combined messages */
 	content: 'x';
@@ -98,6 +98,22 @@ a.popt {text-decoration: none;}
 }
 #newMessages:hover {background: #ccc;}
 #newMessages i {vertical-align: middle; padding-left: 3px;}
+#ping {
+	position: fixed;
+	top: 0;
+	right: 135px;
+	width: 45px;
+	background: #ddd;
+	height: 30px;
+	padding: 8px 0 2px 0;
+}
+#ping i {display: block; text-align: center;}
+#ping .ms {
+	display: block;
+	text-align: center;
+	font-size: 8pt;
+	padding-top: 2px;
+}
 #userBar {
 	position: fixed;
 	top: 0;
@@ -357,3 +373,6 @@ h1.alert, h2.alert		{color: #000080;}
 /* HELPER CLASSES */
 .text-normal {font-weight: normal;	font-style: normal;}
 .hidden {display: none;	visibility: hidden;}
+.ml-1 {margin-left: 1em;}
+.ml-2 {margin-left: 2em;}
+.ml-3 {margin-left: 3em;}

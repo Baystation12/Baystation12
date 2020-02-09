@@ -44,6 +44,14 @@ var opts = {
 	'highlightColor': '#FFFF00', //The color of the highlighted message
 	'pingDisabled': false, //Has the user disabled the ping counter
 
+	//Ping display
+	'lastPang': 0, //Timestamp of the last response from the server.
+	'pangLimit': 35000,
+	'pingTime': 0, //Timestamp of when ping sent
+	'pongTime': 0, //Timestamp of when ping received
+	'noResponse': false, //Tracks the state of the previous ping request
+	'noResponseCount': 0, //How many failed pings?
+
 	//Clicks
 	'mouseDownX': null,
 	'mouseDownY': null,
@@ -322,6 +330,9 @@ function output(message, flag) {
 		flag = '';
 	}
 
+	if (flag !== 'internal')
+		opts.lastPang = Date.now();
+
 	message = byondDecode(message).trim();
 	message = rustoutf(message);
 
@@ -556,8 +567,8 @@ function handleClientData(ckey, ip, compid) {
 				return; //Record already exists
 			}
 		}
-
-		if (opts.clientData.length >= opts.clientDataLimit) {
+		//Lets make sure we obey our limit (can connect from server with higher limit)
+		while (opts.clientData.length >= opts.clientDataLimit) {
 			opts.clientData.shift();
 		}
 	} else {
@@ -572,7 +583,27 @@ function handleClientData(ckey, ip, compid) {
 //Server calls this on ehjax response
 //Or, y'know, whenever really
 function ehjaxCallback(data) {
-	if (data == 'roundrestart') {
+	opts.lastPang = Date.now();
+	if (data == 'softPang') {
+		return;
+	} else if (data == 'pang') {
+		opts.pingCounter = 0; //reset
+		opts.pingTime = Date.now();
+		runByond('?_src_=chat&proc=ping');
+
+	} else if (data == 'pong') {
+		if (opts.pingDisabled) {return;}
+		opts.pongTime = Date.now();
+		var pingDuration = Math.ceil((opts.pongTime - opts.pingTime) / 2);
+		$('#pingMs').text(pingDuration+'ms');
+		pingDuration = Math.min(pingDuration, 255);
+		var red = pingDuration;
+		var green = 255 - pingDuration;
+		var blue = 0;
+		var hex = rgbToHex(red, green, blue);
+		$('#pingDot').css('color', '#'+hex);
+
+	} else if (data == 'roundrestart') {
 		opts.restarting = true;
 		internalOutput('<div class="connectionClosed internal restarting">The connection has been closed because the server is restarting. Please wait while you automatically reconnect.</div>', 'internal');
 	} else {
@@ -689,6 +720,20 @@ $(function() {
 	$subFont = $('#subFont');
 	$selectedSub = $subOptions;
 
+	//Hey look it's a controller loop!
+	setInterval(function() {
+		if (opts.lastPang + opts.pangLimit < Date.now() && !opts.restarting) { //Every pingLimit
+				if (!opts.noResponse) { //Only actually append a message if the previous ping didn't also fail (to prevent spam)
+					opts.noResponse = true;
+					opts.noResponseCount++;
+					internalOutput('<div class="connectionClosed internal" data-count="'+opts.noResponseCount+'">You are either AFK, experiencing lag or the connection has closed.</div>', 'internal');
+				}
+		} else if (opts.noResponse) { //Previous ping attempt failed ohno
+				$('.connectionClosed[data-count="'+opts.noResponseCount+'"]:not(.restored)').addClass('restored').text('Your connection has been restored (probably)!');
+				opts.noResponse = false;
+		}
+	}, 2000); //2 seconds
+
 
 	/*****************************************
 	*
@@ -699,6 +744,7 @@ $(function() {
 		fontsize: getCookie('fontsize'),
 		iconsize: getCookie('iconsize'),
 		lineheight: getCookie('lineheight'),
+		'spingDisabled': getCookie('pingdisabled'),
 		'shighlightTerms': getCookie('highlightterms'),
 		'shighlightColor': getCookie('highlightcolor'),
 		'sfont': getCookie('font'),
@@ -721,6 +767,13 @@ $(function() {
 	}
 	if(savedConfig.stheme){
 		setTheme(savedConfig.stheme);
+	}
+	if (savedConfig.spingDisabled) {
+		if (savedConfig.spingDisabled == 'true') {
+			opts.pingDisabled = true;
+			$('#ping').hide();
+		}
+		internalOutput('<span class="internal boldnshit">Loaded ping display of: '+(opts.pingDisabled ? 'hidden' : 'visible')+'</span>', 'internal');
 	}
 	if (savedConfig.shighlightTerms) {
 		var savedTerms = $.parseJSON(savedConfig.shighlightTerms);
@@ -953,7 +1006,7 @@ $(function() {
 	});
 
 	$('#increaseFont').click(function(e) {
-		savedConfig.fontsize = (parseInt(savedConfig.fontsize || 12) + 1) + 'px';
+		savedConfig.fontsize = (parseInt(savedConfig.fontsize || 13) + 1) + 'px';
 		$messages.css({'font-size': savedConfig.fontsize});
 		setCookie('fontsize', savedConfig.fontsize, 365);
 		internalOutput('<span class="internal boldnshit">Font size set to '+savedConfig.fontsize+'</span>', 'internal');
@@ -987,6 +1040,17 @@ $(function() {
 		$("body").css({'line-height': savedConfig.lineheight});
 		setCookie('lineheight', savedConfig.lineheight, 365);
 		internalOutput('<span class="internal boldnshit">Line height set to '+savedConfig.lineheight+'</span>', 'internal');
+	});
+
+	$('#togglePing').click(function(e) {
+		if (opts.pingDisabled) {
+			$('#ping').slideDown('fast');
+			opts.pingDisabled = false;
+		} else {
+			$('#ping').slideUp('fast');
+			opts.pingDisabled = true;
+		}
+		setCookie('pingdisabled', (opts.pingDisabled ? 'true' : 'false'), 365);
 	});
 
 	$('#saveLog').click(function(e) {
