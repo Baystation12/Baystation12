@@ -377,8 +377,9 @@
 			targloc = get_turf(stored_targ)
 			use_targ = stored_targ
 		var/mob/living/carbon/human/h = user
-		if(isnull(user) || user.stat == DEAD || (istype(h) && (h.l_hand != src && h.r_hand != src)))
-			break
+		if(!istype(loc,/obj/item/weapon/gun/dual_wield_placeholder))
+			if(isnull(user) || user.stat == DEAD || (istype(h) && (h.l_hand != src && h.r_hand != src)))
+				break
 		user.currently_firing = move_delay_malus
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
