@@ -147,6 +147,8 @@
 	if(istype(loc, /turf))
 		var/turf/T = loc
 		. += T.movement_delay
+	. += currently_firing
+
 	if(pulling)
 		if(istype(pulling, /obj))
 			var/obj/O = pulling

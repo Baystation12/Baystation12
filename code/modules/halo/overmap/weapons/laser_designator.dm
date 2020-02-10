@@ -1,4 +1,4 @@
-#define DESIGNATOR_DELAY_TIME 3 SECONDS
+#define DESIGNATOR_DELAY_TIME 4 SECONDS
 #define BEACON_EXPIRE_TIME 15 SECONDS
 
 /obj/item/weapon/laser_designator
@@ -33,11 +33,15 @@
 		return
 
 	user.visible_message("<span class = 'danger'>[user] starts designating [target] for bombardment!</span>")
+	var/obj/effect/bombardment_beacon/beacon = new /obj/effect/bombardment_beacon (target_turf)
+	beacon.visible_message("<span class = 'danger'>[src] winks into existence!</span>")
+	beacon.loc = target_turf
 	if(do_after(user,DESIGNATOR_DELAY_TIME,,1,1,,1))
 		user.visible_message("<span class = 'danger'>[user] designates [target] for bombardment.</span>")
 		to_chat(user,"<span class = 'danger'>Target designated for manual orbital bombardment. Signal will time-out in [BEACON_EXPIRE_TIME/10] seconds.</span>")
-		var/obj/beacon = new /obj/effect/bombardment_beacon (creator)
-		beacon.loc = target_turf
+		beacon.activate_beacon(creator)
+	else
+		qdel(beacon)
 
 /obj/item/weapon/laser_designator/covenant
 	name = "Laser Designator"
@@ -57,17 +61,14 @@
 	var/created_at = 0
 	var/obj/linked_console
 
-/obj/effect/bombardment_beacon/New(var/obj/linked_to)
+/obj/effect/bombardment_beacon/proc/activate_beacon(var/obj/linked_to)
 	. = ..()
 	linked_console = linked_to
-	var/beacons_existing = 0
-	for(var/obj/effect/bombardment_beacon/b in world)
-		beacons_existing += 1
 	var/area/area_contained = loc.loc
 	if(!istype(area_contained))
-		name = "Bombardment Beacon [beacons_existing]"
+		name = "Bombardment Beacon [rand(0,999)]"
 	else
-		name = "Bombardment Beacon [beacons_existing] - [area_contained.name]"
+		name = "Bombardment Beacon [rand(0,999)] - [area_contained.name]"
 	created_at = world.time
 	GLOB.processing_objects += src
 

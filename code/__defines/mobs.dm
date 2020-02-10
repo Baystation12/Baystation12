@@ -1,3 +1,6 @@
+
+#define SPECIES_LARGE list(/datum/species/sangheili,/datum/species/brutes,/datum/species/spartan,/datum/species/orion)
+
 // /mob/var/stat things.
 #define CONSCIOUS   0
 #define UNCONSCIOUS 1

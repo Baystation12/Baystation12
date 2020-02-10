@@ -150,13 +150,16 @@
 	set category = "Object"
 	set src in view(1)
 
-	if(!istype(usr,/mob/living))
+	var/mob/living/user = usr
+	if(!istype(user) || user.incapacitated())
 		to_chat(usr,"<span class = 'notice'>You cannot do that!</span>")
 		return
 
-	/*if(!(usr.species in GLOB.turret_carry_species))
-		to_chat(usr,"<span class = 'notice'>You're not strong enough to carry the [src.name]</span>")
-		return*/
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/h = user
+		if(!(h.species.type in SPECIES_LARGE))
+			to_chat(user,"<span class = 'notice'>You're not strong enough to carry the [src.name]</span>")
+			return
 	rip_turret(usr)
 
 //Bipod Define//

@@ -25,12 +25,15 @@
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	handle_casings = CASELESS
 
-	burst = 10
-	burst_delay = 2
+	//burst = 10
+	//burst_delay = 2
 	burst_accuracy = list(1,1,1,1,0,0,-1,-1,-1,-2)
 	dispersion = list(0,0,0,0,0,1,1,1,1.5,2,2)
 
 	load_time = 5
+
+	sustain_time = 4 SECONDS
+	sustain_delay = 2
 
 /obj/item/weapon/gun/projectile/turret/plas/detached
 	removed_from_turret = 1
@@ -40,3 +43,5 @@
 		)
 	burst_accuracy = list(0,0,0,0,-1,-1,-2,-2,-2,-3)
 	dispersion = list(0.5,0.5,0.5,0.5,0.5,1.5,1.5,1.5,2,2.5,2.5)
+
+	sustain_time = 2 SECONDS
