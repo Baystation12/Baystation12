@@ -130,7 +130,3 @@
 /area/covenant_light_cruiser/droppods
 	name = "CRS Unyielding Transgression Drop Pod Bay"
 	icon_state = "shuttle"
-
-/area/covenant_light_cruiser/boardcraft
-	name = "CRS Unyielding Transgression Boarding Craft Bay"
-	icon_state = "engine_port"
