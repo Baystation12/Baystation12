@@ -2,17 +2,31 @@
 /obj/structure/bed/covenant
 	name = "Sangheili bed"
 	desc = "Not designed for comfort."
-	icon = 'bed.dmi'
+	icon = 'code/modules/halo/covenant/bed.dmi'
+	icon_state = "cbed"
+
+/obj/structure/bed/covenant/New()
+	. = ..()
+	icon_state = "cbed1"
 
 /obj/structure/bed/covenant/heirarch
 	name = "heirarch's bed"
 	desc = "Advanced technology makes this bed extremely comfortable."
-	icon = 'bed.dmi'
-	icon_state = "advancedbed"
+	icon = 'code/modules/halo/covenant/bed.dmi'
+	icon_state = "hbed"
+
+/obj/structure/bed/covenant/heirarch/New()
+	. = ..()
+	icon_state = "hbed1"
 
 /obj/structure/bed/grunt
-	icon = 'bed.dmi'
-	icon_state = "cushion1"
+	icon = 'code/modules/halo/covenant/bed.dmi'
+	icon_state = "cushion0"
+
+/obj/structure/bed/update_icon()
+	// Prep icon.
+	icon_state = ""
+	overlays.Cut()
 
 /obj/structure/bed/grunt/New()
 	. = ..()
