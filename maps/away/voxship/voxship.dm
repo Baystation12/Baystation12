@@ -4,52 +4,54 @@
 #include "voxship_jobs.dm"
 
 /datum/map_template/ruin/away_site/voxship
-	name = "Vox Base"
+	name = "Vox Ship"
 	id = "awaysite_voxship"
-	description = "Vox ship and base."
-	suffixes = list("voxship/voxship-1.dmm")
+	description = "Vox ship."
+	suffixes = list("voxship/voxship.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_shuttle)
 	area_usage_test_exempted_root_areas = list(/area/voxship)
 
-/obj/effect/overmap/visitable/sector/vox_base
-	name = "large asteroid"
-	desc = "Sensor array detects a large asteroid."
-	in_space = 1
+/obj/effect/overmap/visitable/ship/voxship
+	name = "Abnormal Asteroid"
+	desc = "Sensors detect asteroid formation, rich in minerals. Non-geological formations present.\
+	Organic signature detected."
+	vessel_mass = 15000 //Rather heavy due to all the rocks surrounding it, and the sheer size
+	fore_dir = WEST
+	burn_delay = 5 SECONDS //Not very manoeuvrable due to the large mass
 	icon_state = "meteor4"
 	hide_from_reports = TRUE
 	initial_generic_waypoints = list(
-		"nav_voxbase_1",
+		"nav_vox_northwest",
+		"nav_vox_south"
 	)
-
 	initial_restricted_waypoints = list(
-		"Vox Shuttle" = list("nav_hangar_vox"),
+		"Vox Shuttle" = list("nav_vox_dock")
 	)
 
-/obj/effect/shuttle_landmark/nav_voxbase/nav1
-	name = "Northest of Large Asteroid"
-	landmark_tag = "nav_voxbase_1"
 
 /datum/shuttle/autodock/overmap/vox_shuttle
 	name = "Vox Shuttle"
 	move_time = 10
-	shuttle_area = list(/area/voxship/ship)
+	shuttle_area = list(/area/voxship/shuttle)
 	dock_target = "vox_shuttle"
-	current_location = "nav_hangar_vox"
-	landmark_transition = "nav_transit_vox"
+	current_location = "nav_vox_dock"
+	landmark_transition = "nav_vox_transit"
 	range = 1
 	fuel_consumption = 4
 	ceiling_type = /turf/simulated/floor/shuttle_ceiling/
 	skill_needed = SKILL_NONE
 	defer_initialisation = TRUE
 
-/obj/effect/shuttle_landmark/vox_base/hangar/vox_shuttle
-	name = "Vox Ship Docked"
-	landmark_tag = "nav_hangar_vox"
+/obj/effect/shuttle_landmark/vox_ship/vox_shuttle
+	name = "Vox Ship Dock"
+	landmark_tag = "nav_vox_dock"
+	base_area = /area/voxship/dock
+	base_turf = /turf/simulated/floor/plating/vox
 
 /obj/effect/shuttle_landmark/transit/vox_base/vox_shuttle
 	name = "In transit"
-	landmark_tag = "nav_transit_vox"
+	landmark_tag = "nav_vox_transit"
 
 /obj/machinery/computer/shuttle_control/explore/vox_shuttle
 	name = "shuttle control console"
@@ -58,8 +60,16 @@
 /obj/effect/overmap/visitable/ship/landable/vox
 	name = "Unknown Signature"
 	shuttle = "Vox Shuttle"
-	fore_dir = NORTH
+	fore_dir = WEST
 	vessel_size = SHIP_SIZE_SMALL
+
+/obj/effect/shuttle_landmark/vox_ship/nav_northwest
+	name = "Northwest of Abnormal Asteroid"
+	landmark_tag = "nav_vox_northwest"
+
+/obj/effect/shuttle_landmark/vox_ship/nav_south
+	name = "South of Abnormal Asteroid"
+	landmark_tag = "nav_vox_south"
 
 /obj/effect/submap_landmark/joinable_submap/voxship
 	archetype = /decl/submap_archetype/derelict/voxship
@@ -74,7 +84,7 @@
 
 /decl/submap_archetype/derelict/voxship
 	descriptor = "Shoal forward base"
-	map = "Vox Base"
+	map = "Vox Ship"
 	crew_jobs = list(
 		/datum/job/submap/voxship_vox,
 		/datum/job/submap/voxship_vox/doc,
