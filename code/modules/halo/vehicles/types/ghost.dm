@@ -4,7 +4,7 @@
 	desc = ""
 
 	bound_height = 32
-	bound_width = 64
+	bound_width = 32
 
 	comp_prof = /datum/component_profile/ghost
 
@@ -14,6 +14,8 @@
 
 	occupants = list(0,0)
 	exposed_positions = list("driver" = 20)
+
+	pixel_x = -16
 
 	icon = 'code/modules/halo/vehicles/types/ghost.dmi'
 	icon_state = "base"

@@ -1560,6 +1560,7 @@
 #include "code\modules\halo\floorsigns\floorsigns.dm"
 #include "code\modules\halo\Forerunner\monitor.dm"
 #include "code\modules\halo\Forerunner\sentinel.dm"
+#include "code\modules\halo\Forerunner\sentinel_kit.dm"
 #include "code\modules\halo\Forerunner\sentinel_spawner.dm"
 #include "code\modules\halo\insurrection\access_ids.dm"
 #include "code\modules\halo\jobs\jobs.dm"

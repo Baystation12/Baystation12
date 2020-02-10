@@ -10,7 +10,7 @@
 
 	map_bounds = list(1,150,150,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
-	parent_area_type = /area/exo_research_facility
+	parent_area_type = /area/exo_research_facility/sublevel1/interior
 
 /obj/effect/overmap/sector/exo_research/New()
 	. = ..()
@@ -51,6 +51,9 @@
 	/obj/item/weapon/reagent_containers/glass/bottle/floodtox,\
 	/obj/structure/xeno_plant,\
 	/obj/structure/autoturret/ONI,\
+	/obj/item/sentinel_kit,\
+	/obj/item/weapon/gun/energy/laser/sentinel_beam/detached,\
+	/obj/item/weapon/gun/energy/laser/sentinel_beam/detached,\
 	null,null,null)
 
 /obj/effect/overmap/sector/exo_research/LateInitialize()
