@@ -53,7 +53,7 @@
 //Found as random loot in forerunner areas (Utilise loot distributor system)//
 /obj/item/weapon/gun/energy/laser/sentinel_beam/detached
 	sustain_time = 3 SECONDS
-	recharge_time = 2
+	recharge_time = 1
 	max_shots = 75
 
 
