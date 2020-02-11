@@ -295,9 +295,9 @@
 	if(!Proj || Proj.nodamage)
 		return
 	if(Proj.damtype == BURN)
-		adjustFireLoss(Proj.damage-resistance-Proj.armor_penetration)
+		adjustFireLoss(max(0,Proj.damage-resistance-Proj.armor_penetration))
 	else
-		adjustBruteLoss(Proj.damage-resistance-Proj.armor_penetration)
+		adjustBruteLoss(max(0,Proj.damage-resistance-Proj.armor_penetration))
 	do_pain_scream()
 	return 0
 
