@@ -129,7 +129,7 @@
 	desc = "An automated defence drone made of advanced alien technology. This one seems to posses some higher-thought functions."
 	health = 200
 	maxHealth = 200
-	resistance = 20
+	resistance = 10
 
 /mob/living/simple_animal/hostile/sentinel/player_sentinel/New()
 	sentinel_beam = new /obj/item/weapon/gun/energy/laser/sentinel_beam/detached (src)
