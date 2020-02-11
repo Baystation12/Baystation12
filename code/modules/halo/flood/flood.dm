@@ -527,7 +527,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 1
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
-	resistance = 20
+	resistance = 15
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
@@ -542,7 +542,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	move_to_delay = 1
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
-	resistance = 20
+	resistance = 15
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
@@ -560,7 +560,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	melee_damage_upper = 55
 	attacktext = "Whips"
 	mob_size = MOB_LARGE
-	resistance = 20
+	resistance = 10
 	bound_width = 96
 	bound_height = 96
 
