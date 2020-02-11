@@ -14,19 +14,20 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762_box_ap
 	allowed_magazines = list(/obj/item/ammo_magazine/a762_box_ap) //Disallows loading normal ma5b mags into the LMG.
-	//fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'			//no halo firing sfx for this one yet
+	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_New.wav'
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
 	//burst = 5
 	//burst_delay = 1
-	burst_accuracy = list(0,-1,-1,-2,-2)
-	dispersion = list(0.5, 0.7, 1.0, 1.2, 1.5)
+	burst_accuracy = list(0, 0, -1, -1, -1, -2, -2, -2, -3, -3, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3)
+	dispersion = list(0.5, 0.6, 0.6, 0.7, 0.8, 0.8, 0.8, 0.9, .9, 1.0, 1.0, 1.1, 1.1, 1.1, 1.2, 1.3, 1.4, 1.5)
 	w_class = ITEM_SIZE_HUGE
 	wielded_item_state = "SAW-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
+	move_delay_malus = 1
 
 	sustain_time = 3 SECONDS
 	sustain_delay = 1

@@ -14,11 +14,12 @@
 	max_shots =415
 	burst_delay = 1.3
 	charge_meter = 0
-	burst_accuracy = list(-2,-2,-2,-1,0,0)
-	dispersion = list(1.7, 1.5, 1.2, 0.9,0.5, 0.5)
+	burst_accuracy = list(-4, -4, -4, -4, -3, -3, -3, -3, -2, -2, -2, -2, -1, -1, -1, -1,-1, 0)
+	dispersion = list(1.7, 1.7, 1.7, 1.6, 1.6, 1.5, 1.5, 1.4, 1.3, 1.2, 1.2, 1.1, 1.0, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5)
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 5
 	advanced_covenant = 1
+	move_delay_malus = 1
 
 	//Due to reverse acc. and disp. profile, this might be more powerful than the others.//
 	sustain_time = 3 SECONDS
