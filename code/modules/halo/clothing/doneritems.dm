@@ -926,7 +926,7 @@ decl/hierarchy/outfit/Jul
 
 /obj/item/clothing/head/helmet/odst/donator/mann
 	name = "SPI-M Helmet"
-	desc = "This helmet/armor is one of the most recent advancements in the UNSC's arsenal. Currently, being field tested in various locales mostly alongside the Helljumpers. Stenciled onto both shoulderpads is that of the Helljumpers insignia, emblazoned with a black and red color scheme."
+	desc = "This is helmet is one of the sleeker designed pieces of EVA capable gear for the UNSC. Currently, in it's field testing phase it's fitted with the latest VISR HUD."
 	item_state = "mann-odst-spi-helmet_worn"
 	icon_state = "mann-odst-spi-helmet_obj"
 	item_state_novisr = "mann-odst-spi-helmet-open_worn"
@@ -934,7 +934,7 @@ decl/hierarchy/outfit/Jul
 
 /obj/item/clothing/suit/armor/special/odst/donator/mann
 	name = "SPI-M Armor"
-	desc = "This helmet/armor is one of the most recent advancements in the UNSC's arsenal. Currently, being field tested in various locales mostly alongside the Helljumpers. Stenciled onto both shoulderpads is that of the Helljumpers insignia, emblazoned with a black and red color scheme."
+	desc = "The newest breakthrough from ONI being put into field testing in limited quantities for select Helljumpers. Being called SPI-M, it sports the Helljumper insignia emblazoned on the shoulderpads in the standard gold and maroon finish."
 	icon_state = "mann-odst-spi-armor_obj"
 	item_state = "mann-odst-spi-armor_worn"
 
