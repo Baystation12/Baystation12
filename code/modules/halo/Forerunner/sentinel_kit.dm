@@ -16,6 +16,7 @@
 		player_sentinel.visible_message("<span class = 'warning'>[src] glows as it reassembles itself into a functional sentinel</span>")
 		player_sentinel.ckey = M.ckey
 		player_sentinel.faction = M.faction
+		to_chat(player_sentinel,"<span class = 'warning'>Your mind is ripped from the form it once occupied, then placed in an unfamiliar chassis. A moment of uncertainty passes, then a rush of information fills your mind. The secrets of the Forerunners revealed, the nature of the Flood... (You are expected to maintain allegiance with your previous faction, however, it is recommended that your character and personality be somewhat modified by this experience.)</span>")
 		M.drop_from_inventory(src)
 		qdel(src)
 

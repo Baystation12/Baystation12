@@ -51,6 +51,7 @@
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	icon_state = "spiker"
 	item_state = "blank"
+	slot_flags = SLOT_BACK | SLOT_BELT
 	magazine_type = /obj/item/ammo_magazine/spiker
 	allowed_magazines = /obj/item/ammo_magazine/spiker
 	caliber = "spiker"
@@ -115,6 +116,7 @@
 	icon_override = 'code/modules/halo/icons/species/jiralhanae_gear.dmi'
 	icon_state = "mauler"
 	item_state = "blank"
+	slot_flags = SLOT_BACK | SLOT_BELT
 	magazine_type = /obj/item/ammo_magazine/mauler
 	allowed_magazines = /obj/item/ammo_magazine/mauler
 	load_method = MAGAZINE
