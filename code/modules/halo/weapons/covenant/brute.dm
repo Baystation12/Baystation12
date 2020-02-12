@@ -92,7 +92,7 @@
 
 /obj/item/projectile/bullet/spiker
 	name = "Spike"
-	armor_piercing = 20
+	armor_penetration = 20
 	damage = 20
 
 /obj/item/projectile/bullet/spiker/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
