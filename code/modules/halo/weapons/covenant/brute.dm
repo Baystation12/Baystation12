@@ -80,7 +80,7 @@
 	icon_state = "spiker_mag"
 	item_state = "blank"
 	mag_type = MAGAZINE
-	ammo_type = /obj/item/ammo_casing/m5
+	ammo_type = /obj/item/ammo_casing/spiker
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	caliber = "spiker"
 	max_ammo = 30
