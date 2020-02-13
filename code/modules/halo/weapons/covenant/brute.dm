@@ -68,7 +68,7 @@
 	accuracy = -1
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
-	lunge_dist = 3
+	lunge_dist = 5
 
 /obj/item/weapon/gun/projectile/spiker/can_embed()
 	return 0
@@ -80,7 +80,7 @@
 	icon_state = "spiker_mag"
 	item_state = "blank"
 	mag_type = MAGAZINE
-	ammo_type = /obj/item/ammo_casing/m5
+	ammo_type = /obj/item/ammo_casing/spiker
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	caliber = "spiker"
 	max_ammo = 30
@@ -92,6 +92,7 @@
 
 /obj/item/projectile/bullet/spiker
 	name = "Spike"
+	armor_penetration = 20
 	damage = 20
 
 /obj/item/projectile/bullet/spiker/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
@@ -130,7 +131,7 @@
 	accuracy = -1
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
-	lunge_dist = 3
+	lunge_dist = 5
 
 /obj/item/weapon/gun/projectile/mauler/can_embed()
 	return 0
@@ -149,8 +150,9 @@
 /obj/item/ammo_casing/mauler
 	desc = "A mauler round casing."
 	caliber = "mauler"
-	projectile_type = /obj/item/projectile/bullet/mauler
+	projectile_type = /obj/item/projectile/bullet/pellet/shotgun
 
+/*
 /obj/item/projectile/bullet/mauler
 	damage = 75
 
@@ -158,7 +160,7 @@
 	. = ..()
 	if(.)
 		//reduced damage from further away
-		damage -= get_dist(starting, src) * 10
+		damage -= get_dist(starting, src) * 10*/
 
 
 
