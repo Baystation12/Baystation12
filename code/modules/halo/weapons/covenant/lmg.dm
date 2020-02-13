@@ -1,7 +1,7 @@
 
 /obj/item/weapon/gun/energy/plasmarepeater
 	name = "Type-51 Directed Energy Rifle"
-	desc = "Also known as the \"Plasma Repeater\", this weapon fires fast 6 shot bursts of superheated plasma. A unique ventilation and cooling system gives it a reversed dispersion and accuracy profile."
+	desc = "Also known as the \"Plasma Repeater\", this weapon fires long bursts of superheated plasma. A unique ventilation and cooling system gives it a reversed dispersion and accuracy profile."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "PlasmaRepeater"
 	item_state = "plasmarifle"//Need an inhand sprite. Plasrifle used as placeholder.
@@ -15,7 +15,8 @@
 	//burst_delay = 1
 	charge_meter = 0
 	burst_accuracy = list(-4, -4, -4, -4, -3, -3, -3, -3, -2, -2, -2, -2, -1, -1, -1, -1,-1, 0)
-	dispersion = list(1.7, 1.7, 1.7, 1.6, 1.6, 1.5, 1.5, 1.4, 1.3, 1.2, 1.2, 1.1, 1.0, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5)
+	dispersion = list(2.5,2.5,2.4, 2.3, 2.2, 2.1, 2.0, 1.9, 2.2, 2.1, 2.0, 1.9, 1.8, 1.7, 2.0, 1.9, 1.8, 1.7, 1.6, 1.5, 1.8, 1.7, 1.6, 1.5, 1.4, 1.3, 1.5, 1.4, 1.3, 1.2, 1.1, 1.0)
+
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 5
 	advanced_covenant = 1
