@@ -925,18 +925,18 @@ decl/hierarchy/outfit/Jul
 //ODST
 
 /obj/item/clothing/head/helmet/odst/donator/mann
-	name = "Mann's ODST Helmet"
-
-	item_state = "mann-odst-helmet_worn"
-	icon_state = "mann-odst-helmet_obj"
-	item_state_novisr = "mann-odst-helmet-open_worn"
-	icon_state_novisr = "mann-odst-helmet-open_obj"
+	name = "SPI-M Helmet"
+	desc = "This is helmet is one of the sleeker designed pieces of EVA capable gear for the UNSC. Currently, in it's field testing phase it's fitted with the latest VISR HUD."
+	item_state = "mann-odst-spi-helmet_worn"
+	icon_state = "mann-odst-spi-helmet_obj"
+	item_state_novisr = "mann-odst-spi-helmet-open_worn"
+	icon_state_novisr = "mann-odst-spi-helmet-open_obj"
 
 /obj/item/clothing/suit/armor/special/odst/donator/mann
-	name = "Mann's ODST Armour"
-
-	icon_state = "mann-odst-armor_obj"
-	item_state = "mann-odst-armor_worn"
+	name = "SPI-M Armor"
+	desc = "The newest breakthrough from ONI being put into field testing in limited quantities for select Helljumpers. Being called SPI-M, it sports the Helljumper insignia emblazoned on the shoulderpads in the standard gold and maroon finish."
+	icon_state = "mann-odst-spi-armor_obj"
+	item_state = "mann-odst-spi-armor_worn"
 
 /obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
 	name = "\improper Collectors SOCOM"
@@ -951,15 +951,24 @@ decl/hierarchy/outfit/Jul
 	else
 		icon_state = "socom-collector_unloaded"
 
+/obj/item/weapon/storage/backpack/odst/mann
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	name = "Mann's Backpack"
+	item_state = "mann-odst-spi-backpack_worn"
+	icon_state = "mann-odst-spi-backpack_obj"
+
 
 /obj/item/weapon/storage/box/large/donator/mann
 	startswith = list(/obj/item/clothing/head/helmet/odst/donator/mann,
 					/obj/item/clothing/suit/armor/special/odst/donator/mann,
-					/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
+					/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann,
+					/obj/item/weapon/storage/backpack/odst/mann
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/mann,
 					/obj/item/clothing/suit/armor/special/odst/donator/mann,
-					/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann
+					/obj/item/weapon/gun/projectile/m6c_magnum_s/donator/mann,
+					/obj/item/weapon/storage/backpack/odst/mann
 					)
 
 /decl/hierarchy/outfit/mann_odst
@@ -2045,6 +2054,54 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/storage/marine/riley
 	head = /obj/item/clothing/head/helmet/marine/riley
 
+///////Vampire132978123\\\\\\\
+
+/Skirmisher
+
+/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire
+	name = "Pirate's Hat"
+	desc = "A worn, probably stolen, pirate hat. Looks like it belongs in a theater."
+	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
+	icon_state = "piratehat_obj"
+	item_state = "piratehat"
+	species_restricted = list("Tvaoan Kig-Yar")
+
+/obj/item/clothing/suit/armor/special/skirmisher/donator/vampire
+	name = "Worn Coat"
+	desc = "A coat that is rumored to be owned by a legendary pirate, though some say it was stolen from a cargo vessel by a humanoid bird."
+	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
+	icon_state = "piratecoat_obj"
+	item_state = "piratecoat"
+	sprite_sheets = list("Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
+	species_restricted = list("Tvaoan Kig-Yar")
+	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
+	armor_thickness_modifiers = list()
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
+	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
+
+/obj/item/toy/plushie/donator/vampire
+	name = "Rafaj"
+	desc = "A pirate's best friend, and most prized possession. It looks like it's been through many adventures."
+	icon = 'code/modules/halo/icons/species/Skirmisher_inhand.dmi'
+	icon_state = "parrot_obj"
+	item_state = "parrot"
+
+/obj/item/weapon/storage/box/large/donator/vampire
+	startswith = list(/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire,
+					/obj/item/clothing/suit/armor/special/skirmisher/donator/vampire,
+					/obj/item/toy/plushie/donator/vampire
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire,
+					/obj/item/clothing/suit/armor/special/skirmisher/donator/vampire,
+					/obj/item/toy/plushie/donator/vampire
+					)
+
+/decl/hierarchy/outfit/vampire_kigyar
+	name = "vampire - kig-yar"
+	suit = /obj/item/clothing/suit/armor/special/skirmisher/donator/vampire
+	suit_store = /obj/item/toy/plushie/donator/vampire
+	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire
+
 ///////Voloxus\\\\\\\\
 
 //Sangheili (ULTRA/MAJOR)
@@ -2148,6 +2205,67 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	head = /obj/item/clothing/head/helmet/sangheili/zane
 	l_pocket = /obj/item/weapon/grenade/plasma
 
+
+///////MAGNUM\\\\\\\\
+
+//Sangheili Ultra
+
+/obj/item/clothing/under/covenant/sangheili/magnum
+	name = "Sangheili Body-suit"
+	desc = "A sealed, airtight bodysuit. Meant to be worn underneath the ornate 'Strangam Clan Ultra harness."
+	icon_state = "sangheili-magnum_suit"
+	species_restricted = list ("Sangheili")
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
+
+/obj/item/clothing/head/helmet/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_helmet_obj"
+	item_state = "Magnum_helmet"
+
+/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
+	name = "全trangam Clan - Ultra Combat Harness"
+	icon_state = "Magnum_chest_obj"
+	item_state = "Magnum_chest"
+
+/obj/item/clothing/shoes/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_boots_obj"
+	item_state = "Magnum_boots"
+
+/obj/item/clothing/gloves/thick/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_gloves_obj"
+	item_state = "Magnum_gloves"
+
+/obj/item/weapon/storage/box/large/donator/magnum_ultra
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
+					/obj/item/clothing/shoes/sangheili/ultra/magnum,
+					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
+					/obj/item/clothing/under/covenant/sangheili/magnum
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
+					/obj/item/clothing/shoes/sangheili/ultra/magnum,
+					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
+					/obj/item/clothing/under/covenant/sangheili/magnum
+					)
+
+/decl/hierarchy/outfit/magnum_sangheili
+	name = "RealMAGNUM - Sangheili Ultra"
+	uniform = /obj/item/clothing/under/covenant/sangheili/magnum
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra/magnum
+	shoes = /obj/item/clothing/shoes/sangheili/ultra/magnum
+	head = /obj/item/clothing/head/helmet/sangheili/ultra/magnum
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
