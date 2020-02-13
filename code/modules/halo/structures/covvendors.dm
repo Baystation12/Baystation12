@@ -124,7 +124,7 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/EVA = 7,/obj/item/clothing/suit/armor/jiralhanae/covenant/EVA = 7,/obj/item/weapon/tank/air/covenant = 7
-		,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/weapon/pinpointer/artifact = 1)
+		,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 1)
 
 /obj/machinery/vending/armory/covenant/jiralhanae/heavy // Equipment for Jiralhanae
 	name = "Covenant - Jiralhanae Heavy Vendor"
