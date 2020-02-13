@@ -89,7 +89,7 @@ var/list/name_to_material
 	var/list/stack_origin_tech = list(TECH_MATERIAL = 1) // Research level for stacks.
 
 	// Attributes
-	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
+	var/cut_delay = 60            // Delay in ticks when cutting through this wall.
 	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
 	var/ignition_point           // K, point at which the material catches on fire.
 	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this

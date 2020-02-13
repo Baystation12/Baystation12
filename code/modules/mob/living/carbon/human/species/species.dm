@@ -249,7 +249,9 @@
 	H.mob_size = mob_size
 	var/obj/item/organ/internal/stack/s = H.GetLace()
 	for(var/obj/item/organ/organ in H.contents)
-		if(!istype(organ,/obj/item/organ/internal/stack) && ((organ in H.organs) || (organ in H.internal_organs))) //Preserve neural laces / cortical stacl
+		if(istype(organ,/obj/item/organ/internal/stack))
+			continue
+		if((organ in H.organs) || (organ in H.internal_organs)) //Preserve neural laces / cortical stacks
 			qdel(organ)
 
 	if(H.organs)                  H.organs.Cut()
@@ -285,9 +287,6 @@
 		O.owner = H
 
 	if(s)
-		var/obj/current_lace = H.internal_organs_by_name["stack"]
-		if(current_lace)
-			qdel(current_lace)
 		H.internal_organs_by_name["stack"] = s
 		H.internal_organs += s
 		s.owner = H
