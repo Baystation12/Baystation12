@@ -10,9 +10,9 @@
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarepeater
 	slot_flags = 0	//too unwieldy to carry on your back
 	one_hand_penalty = -1
-	burst = 6
+	//burst = 6
 	max_shots =450
-	burst_delay = 1.3
+	//burst_delay = 1
 	charge_meter = 0
 	burst_accuracy = list(-4, -4, -4, -4, -3, -3, -3, -3, -2, -2, -2, -2, -1, -1, -1, -1,-1, 0)
 	dispersion = list(1.7, 1.7, 1.7, 1.6, 1.6, 1.5, 1.5, 1.4, 1.3, 1.2, 1.2, 1.1, 1.0, 1.0, 0.9, 0.8, 0.7, 0.6, 0.5)
