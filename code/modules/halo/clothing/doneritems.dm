@@ -8,7 +8,7 @@
 #define URF_OVERRIDE 'code/modules/halo/clothing/urf_commando.dmi'
 #define SPARTAN_OVERRIDE 'code/modules/halo/clothing/SpartanHussarKit.dmi'
 
-
+//temp edit
 //Obj sprites go in ITEM_INHAND or MARINE_INHAND
 //WORN sprites go in ODST_OVERRIDE or MARINE_OVERRIDE
 
