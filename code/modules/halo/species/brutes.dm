@@ -33,7 +33,6 @@
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 
 	equipment_slowdown_multiplier = 0.5
-	ignore_equipment_threshold = 3
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/brutescream1.ogg',
