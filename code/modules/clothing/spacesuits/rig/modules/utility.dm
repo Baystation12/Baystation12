@@ -25,28 +25,6 @@
 
 	var/obj/item/device
 
-obj/item/rig_module/device/Initialize()
-	. = ..()
-	if(ispath(device))
-		device = new device(src)
-		device.canremove = 0
-
-/obj/item/rig_module/device/engage(atom/target)
-	if(!..() || !device)
-		return 0
-
-	if(!target)
-		device.attack_self(holder.wearer)
-		return 1
-
-	if(!target.Adjacent(holder.wearer))
-		return 0
-
-	var/resolved = target.attackby(device,holder.wearer)
-	if(!resolved && device && target)
-		device.afterattack(target,holder.wearer,1)
-	return 1
-
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
 	desc = "A hardsuit-mounted health scanner."
@@ -129,6 +107,29 @@ obj/item/rig_module/device/Initialize()
 	origin_tech = list(TECH_MATERIAL = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 7)
 	device = /obj/item/weapon/rcd/mounted
 
+/obj/item/rig_module/device/Initialize()
+	. = ..()
+	if(ispath(device))
+		device = new device(src)
+		device.canremove = 0
+
+/obj/item/rig_module/device/engage(atom/target)
+	if(!..() || !device)
+		return 0
+
+	if(!target)
+		device.attack_self(holder.wearer)
+		return 1
+
+	if(!target.Adjacent(holder.wearer))
+		return 0
+
+	var/resolved = target.attackby(device,holder.wearer)
+	if(!resolved && device && target)
+		device.afterattack(target,holder.wearer,1)
+	return 1
+
+
 /obj/item/rig_module/chem_dispenser
 	name = "mounted chemical dispenser"
 	desc = "A complex web of tubing and needles suitable for hardsuit use."
@@ -144,13 +145,7 @@ obj/item/rig_module/device/Initialize()
 
 	interface_name = "integrated chemical dispenser"
 	interface_desc = "Dispenses loaded chemicals directly into the wearer's bloodstream."
-	var/is_rescue = 0
-	
-	var/obj/item/prybar = /obj/item/weapon/crowbar/prybar
-	var/obj/item/analyzer = /obj/item/device/scanner/health
-	var/obj/item/inflatable_dispenser = /obj/item/weapon/inflatable_dispenser/mini
-	var/list/inflatables_list = list(/obj/item/inflatable, /obj/structure/inflatable, /turf, /obj/item/inflatable)
-	
+
 	charges = list(
 		list("dexalin plus",  "dexalin plus",  /datum/reagent/dexalinp,          80),
 		list("inaprovaline",  "inaprovaline",  /datum/reagent/inaprovaline,      80),
@@ -217,80 +212,43 @@ obj/item/rig_module/device/Initialize()
 
 	if(!..())
 		return 0
-	
+
 	var/mob/living/carbon/human/H = holder.wearer
-	
-	if(!target)
-		target = H
-	
-	if(!target.Adjacent(H))
+
+	if(!charge_selected)
+		to_chat(H, "<span class='danger'>You have not selected a chemical type.</span>")
 		return 0
-		
-	var/obj/item/use_on
-	if(is_rescue)
-		
-		if(istype(target,/obj/machinery/door))
-			use_on = prybar
-			
-		else if(is_type_in_list(target, inflatables_list))
-			use_on = inflatable_dispenser
-			
-		else if (istype(target,/mob/living/carbon) && H.a_intent == I_DISARM)
-			use_on = analyzer
-			
-		if(use_on)
-			var/resolved = target.attackby(use_on,H)
-			if(!resolved && use_on && target)
-				use_on.afterattack(target,H,1)
-				return 1
 
+	var/datum/rig_charge/charge = charges[charge_selected]
 
+	if(!charge)
+		return 0
 
-	if(istype(target,/mob/living/carbon))
-		var/datum/rig_charge/charge = charges[charge_selected]
-		
-		if(!charge_selected)
-			to_chat(H, "<span class='danger'>You have not selected a chemical type.</span>")
+	var/chems_to_use = 10
+	if(charge.charges <= 0)
+		to_chat(H, "<span class='danger'>Insufficient chems!</span>")
+		return 0
+	else if(charge.charges < chems_to_use)
+		chems_to_use = charge.charges
+
+	var/mob/living/carbon/target_mob
+	if(target)
+		if(istype(target,/mob/living/carbon))
+			target_mob = target
+		else
 			return 0
+	else
+		target_mob = H
 
-		if(!charge)
-			return 0
+	if(target_mob != H)
+		to_chat(H, "<span class='danger'>You inject [target_mob] with [chems_to_use] unit\s of [charge.display_name].</span>")
+	to_chat(target_mob, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
+	target_mob.reagents.add_reagent(charge.product_type, chems_to_use)
 
-		var/chems_to_use = 10
-		if(charge.charges <= 0)
-			to_chat(H, "<span class='danger'>Insufficient chems!</span>")
-			return 0
-		else if(charge.charges < chems_to_use)
-			chems_to_use = charge.charges
+	charge.charges -= chems_to_use
+	if(charge.charges < 0) charge.charges = 0
 
-		if(target != H)
-			to_chat(H, "<span class='danger'>You inject [target] with [chems_to_use] unit\s of [charge.display_name].</span>")
-		to_chat(target, "<span class='danger'>You feel a rushing in your veins as [chems_to_use] unit\s of [charge.display_name] [chems_to_use == 1 ? "is" : "are"] injected.</span>")
-		target.reagents.add_reagent(charge.product_type, chems_to_use)
-
-		charge.charges -= chems_to_use
-		if(charge.charges < 0) charge.charges = 0
-		return 1
-	
-	return 0
-
-
-/obj/item/rig_module/chem_dispenser/Initialize()
-	. = ..()
-	
-	prybar = new prybar (src)
-	analyzer = new analyzer(src)
-	inflatable_dispenser = new inflatable_dispenser(src)
-	
-	prybar.canremove = 0
-	analyzer.canremove = 0
-	inflatable_dispenser.canremove = 0
-
-/obj/item/rig_module/chem_dispenser/Destroy()
-	QDEL_NULL(prybar)
-	QDEL_NULL(analyzer)
-	QDEL_NULL(inflatable_dispenser)
-	. = ..()
+	return 1
 
 /obj/item/rig_module/chem_dispenser/combat
 
@@ -307,6 +265,7 @@ obj/item/rig_module/device/Initialize()
 	interface_name = "combat chem dispenser"
 	interface_desc = "Dispenses loaded chemicals directly into the bloodstream."
 
+
 /obj/item/rig_module/chem_dispenser/injector
 
 	name = "mounted chemical injector"
@@ -319,17 +278,7 @@ obj/item/rig_module/device/Initialize()
 
 	interface_name = "mounted chem injector"
 	interface_desc = "Dispenses loaded chemicals via an arm-mounted injector."
-	
-/obj/item/rig_module/chem_dispenser/injector/rescue
-	name = "rescue module"
-	desc = "Ultimate rescue tool, combines prybar, health analyzer, inflatable dispenser and chemical injector in one module!."
-	interface_name = "rescue module"
-	interface_desc = "Can dispense chemicals, show health readout, pry open doors and deploy inflatable doors"
-	engage_string = "Inject/Pry open/Use"
-	
-	is_rescue = 1
-	use_power_cost = 1000
-	
+
 /obj/item/rig_module/voice
 
 	name = "hardsuit voice synthesiser"
@@ -553,4 +502,3 @@ obj/item/rig_module/device/Initialize()
 	H.bodytemperature -= temp_adj
 	active_power_cost = round((temp_adj/max_cooling)*charge_consumption)
 	return active_power_cost
-	

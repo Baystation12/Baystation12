@@ -386,15 +386,7 @@
 	stored_walls = 10
 	stored_doors = 5
 	max_walls = 10
-	max_doors = 5
-	
-/obj/item/weapon/inflatable_dispenser/mini
-	w_class = ITEM_SIZE_NORMAL
-	stored_walls = 0
-	stored_doors = 1
-	max_walls = 0
-	max_doors = 1
-	mode = 1
+	max_doors = 5	
 
 /obj/item/weapon/inflatable_dispenser/examine(mob/user)
 	. = ..()
