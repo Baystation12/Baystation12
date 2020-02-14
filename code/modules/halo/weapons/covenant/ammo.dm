@@ -32,7 +32,7 @@
 
 /obj/item/projectile/bullet/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
-	empulse(impacted.loc,1,1)
+	empulse(impacted.loc,0,1)
 
 /obj/item/projectile/bullet/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
