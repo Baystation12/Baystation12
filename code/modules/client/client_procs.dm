@@ -387,21 +387,10 @@
 		'html/images/sfplogo.png'
 		)
 
-//	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
+	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
 	spawn (10) //removing this spawn causes all clients to not get verbs.
 		//Precache the client with all other assets slowly, so as to not block other browse() calls
-		var/list/priority_assets = list()
-		var/list/other_assets = list()
-
-		for(var/asset_type in asset_datums)
-			var/datum/asset/D = asset_datums[asset_type]
-			if(D.isTrivial)
-				other_assets += D
-			else
-				priority_assets += D
-
-		for(var/datum/asset/D in (priority_assets + other_assets))
-			D.send_slow(src)
+		getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
 
 mob/proc/MayRespawn()
 	return 0
