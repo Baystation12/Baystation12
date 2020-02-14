@@ -160,6 +160,7 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 /datum/asset/New()
 	asset_datums[type] = src
+	register()
 
 /datum/asset/proc/register()
 	return

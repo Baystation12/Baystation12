@@ -2,7 +2,6 @@
 For the main html chat area
 *********************************/
 
-GLOBAL_DATUM_INIT(is_http_protocol, /regex, regex("^https?://"))
 //Precaching a bunch of shit
 GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of icons for the browser output
 
@@ -236,6 +235,21 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("tmp/iconCache.sav")) //Cache of ico
 	var/regex/i = new(@/<IMG CLASS=icon SRC=(\[[^]]+])(?: ICONSTATE='([^']+)')?>/, "g")
 	while(i.Find(message))
 		message = copytext(message,1,i.index)+icon2html(locate(i.group[1]), target, icon_state=i.group[2])+copytext(message,i.next)
+
+	/*
+	message = \
+		symbols_to_unicode(
+			cyrillic_to_unicode(
+				cp1251_to_utf8(
+					strip_improper(
+						color_macro_to_html(
+							message
+						)
+					)
+				)
+			)
+		)
+	*/
 
 	if(trailing_newline)
 		message += "<br>"
