@@ -4,14 +4,13 @@
 	desc = "An ammunition box used for quick loading."
 	icon = 'icons/obj/ammo.dmi'
 	icon_state = "666"
-	var/capacity = 20
+	var/capacity = 1
 	var/list/ammo_spawnwith = list()
 	var/load_time = 0.5 //The time it takes to load one round from the box to the weapon, in seconds
 
-/obj/item/ammo_box/New()
+/obj/item/ammo_box/Initialize()
 	.=..()
-	spawn(10)
-		create_spawnwith_ammo()
+	create_spawnwith_ammo()
 
 /obj/item/ammo_box/proc/create_spawnwith_ammo()
 	if(ammo_spawnwith.len == 0)
@@ -48,56 +47,62 @@
 		add_ammo(W,user)
 		update_icon()
 
-/obj/item/ammo_box/update_icon()
-	desc = "[initial(desc)] It has [contents.len] rounds left."
+/obj/item/ammo_box/examine(var/mob/user)
+	. = ..()
+	examine_extra(user)
+
+/obj/item/ammo_box/proc/examine_extra(var/mob/user)
+	to_chat(user,"[initial(desc)] It has [contents.len] rounds left.")
 
 /obj/item/ammo_box/shotgun
 	name = "Shotgun Shell Box"
 	desc = "A box of shells to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/pellet)
+	capacity = 24
 
-/obj/item/ammo_box/shotgun/update_icon()
-	desc = "[initial(desc)] It has [contents.len] shells left."
+/obj/item/ammo_box/shotgun/examine_extra(var/mob/user)
+	to_chat(user,"[initial(desc)] It has [contents.len] shells left.")
 
 /obj/item/ammo_box/shotgun/slug
 	name = "Shotgun Slug Box"
 	desc = "A box of slugs to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun)
 
-/obj/item/ammo_box/shotgun/slug/update_icon()
-	desc = "[initial(desc)] It has [contents.len] slugs left."
+/obj/item/ammo_box/shotgun/slug/examine_extra(var/mob/user)
+	to_chat(user,"[initial(desc)] It has [contents.len] slugs left.")
 
 /obj/item/ammo_box/shotgun/emp
 	name = "Shotgun EMP Box"
 	desc = "A box of EMP shells to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/emp)
+	capacity = 8
 
-/obj/item/ammo_box/shotgun/emp/update_icon()
-	desc = "[initial(desc)] It has [contents.len] EMP shells left."
+/obj/item/ammo_box/shotgun/emp/examine_extra(var/mob/user)
+	to_chat(user,"[initial(desc)] It has [contents.len] emp shells left.")
 
 /obj/item/ammo_box/shotgun/beanbag
 	name = "Shotgun Beanbag Box"
 	desc = "A box of beanbag shells to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/beanbag)
 
-/obj/item/ammo_box/shotgun/beanbag/update_icon()
-	desc = "[initial(desc)] It has [contents.len] beanbag shells left."
+/obj/item/ammo_box/shotgun/beanbag/examine_extra(var/mob/user)
+	to_chat(user,"[initial(desc)] It has [contents.len] beanbags left.")
 
 /obj/item/ammo_box/shotgun/flash
 	name = "Shotgun Flash Box"
 	desc = "A box of flash shells to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/flash)
 
-/obj/item/ammo_box/shotgun/flash/update_icon()
-	desc = "[initial(desc)] It has [contents.len] flash shells left."
+/obj/item/ammo_box/shotgun/flash/examine_extra(var/mob/user)
+	to_chat(user,"[initial(desc)] It has [contents.len] flash shells left.")
 
 /obj/item/ammo_box/shotgun/practice
 	name = "Shotgun Practice Box"
 	desc = "A box of practice shells to assist in loading pump-action shotguns"
 	ammo_spawnwith = list(/obj/item/ammo_casing/shotgun/practice)
 
-/obj/item/ammo_box/shotgun/flash/update_icon()
-	desc = "[initial(desc)] It has [contents.len] practice shells left."
+/obj/item/ammo_box/shotgun/flash/examine_extra(var/mob/user)
+	to_chat(user,"[initial(desc)] It has [contents.len] practice shells left.")
 
 /obj/item/ammo_box/heavysniper
 	name = "Tracerless Sniper Rounds"
