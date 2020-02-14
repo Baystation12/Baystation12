@@ -302,7 +302,7 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
-	if(target.elevation != last_elevation && istype(target,/obj/vehicles) || istype(target,/mob/living))
+	if(target.elevation != last_elevation && (istype(target,/obj/vehicles) || istype(target,/mob/living)))
 		last_elevation = target.elevation
 		visible_message("<span class = 'warning'>[user.name] changes their firing elevation to target [target.name]</span>")
 	if(istype(user.loc,/obj/vehicles))
