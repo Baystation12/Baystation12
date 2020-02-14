@@ -101,8 +101,9 @@
 	if (!chambered) return
 	if(handle_casings == EJECT_CASINGS)
 		atom_despawner.mark_for_despawn(chambered)
+		var/obj/item/ammo_casing/to_eject = chambered
 		spawn()
-			chambered.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))
+			to_eject.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))
 	if(handle_casings == CYCLE_CASINGS)
 		if(ammo_magazine)
 			ammo_magazine.stored_ammo += chambered
