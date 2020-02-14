@@ -21,6 +21,7 @@
 	irradiate_non_cov = 5
 	advanced_covenant = 1
 	move_delay_malus = 1
+	slowdown_general = 1
 
 	//Due to reverse acc. and disp. profile, this might be more powerful than the others.//
 	sustain_time = 3 SECONDS
