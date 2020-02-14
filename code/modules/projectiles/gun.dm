@@ -390,7 +390,7 @@
 			var/obj/item/projectile/proj_obj = projectile
 			proj_obj.target_elevation = last_elevation
 
-		if(!user || user.loc != targloc) //This should stop people being able to just click on someone for free autotracking.
+		if(!user.lying && user.loc != targloc) //This should stop people being able to just click on someone for free autotracking.
 			use_targ = targloc
 
 		process_accuracy(projectile, user, use_targ, i, held_twohanded)
