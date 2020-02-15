@@ -1,0 +1,7 @@
+author: "Imienny"
+delete-after: True
+changes: 
+  - maptweak: "Added detergent pods to vox scavenger base, warranty void if swallowed."
+  - rscadd: "Vox raiders now spawn with thermals and holsters."
+  - rscadd: "Bolt action rifle can now spawn in vox scavenger base, as well as in other places."
+  - bugfix: "Fixed bug with cracked mirror allowing vox to have gender."
