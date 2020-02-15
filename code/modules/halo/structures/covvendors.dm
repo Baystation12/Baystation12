@@ -131,7 +131,8 @@
 	desc = "Storage for Covenant Jiralhanae weapons and ammo"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/launcher/grenade/brute_shot = 2,/obj/item/weapon/grenade/brute_shot = 8)
+	products = list(/obj/item/weapon/gun/launcher/grenade/brute_shot = 2,/obj/item/weapon/grenade/brute_shot = 8,
+		,/obj/item/turret_deploy_kit/plasturret = 2,/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 3)
 
 /obj/machinery/vending/armory/covenant/kigyar/weapon // Both ammo, and guns!
 	name = "Covenant - Kig-Yar Weapon Vendor"
