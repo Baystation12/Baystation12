@@ -263,7 +263,7 @@
 		var/obj/item/weapon/disk/tech_disk/disk = input_device
 		if(disk.stored)
 			if(load_data(disk.stored))
-				to_chat(user, "<font color='blue'>Download successful; disk erased.</font>")
+				to_chat(user, "<span class='info'>Download successful; disk erased.</span>")
 				disk.stored = null
 			else
 				to_chat(user, "<span class='warning'>The disk is corrupt. It is useless to you.</span>")
@@ -286,7 +286,7 @@
 		else
 			// Maybe consider a way to drop all your data into a target repo in the future.
 			if(load_data(incoming_files.known_tech))
-				to_chat(user, "<font color='blue'>Download successful; local and remote repositories synchronized.</font>")
+				to_chat(user, "<span class='info'>Download successful; local and remote repositories synchronized.</span>")
 			else
 				to_chat(user, "<span class='warning'>Scan complete. There is nothing useful stored on this terminal.</span>")
 		return 1
@@ -462,9 +462,9 @@
 /obj/item/rig_module/power_sink/proc/drain_complete(var/mob/living/M)
 
 	if(!interfaced_with)
-		if(M) to_chat(M, "<font color='blue'><b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh.</font>")
+		if(M) to_chat(M, "<span class='info'><b>Total power drained:</b> [round(total_power_drained*CELLRATE)] Wh.</span>")
 	else
-		if(M) to_chat(M, "<font color='blue'><b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] Wh.</font>")
+		if(M) to_chat(M, "<span class='info'><b>Total power drained from [interfaced_with]:</b> [round(total_power_drained*CELLRATE)] Wh.</span>")
 		interfaced_with.drain_power(0,1,0) // Damage the victim.
 
 	drain_loc = null

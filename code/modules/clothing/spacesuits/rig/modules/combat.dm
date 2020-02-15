@@ -17,7 +17,7 @@
 	name = "mounted flash"
 	desc = "You are the law."
 	icon_state = "flash"
-	
+
 	selectable = 0
 	toggleable = 1
 	activates_on_touch = 1
@@ -120,7 +120,7 @@
 		to_chat(user, "<span class='danger'>Another grenade of that type will not fit into the module.</span>")
 		return 0
 
-	to_chat(user, "<font color='blue'><b>You slot \the [input_device] into the suit module.</b></font>")
+	to_chat(user, "<span class='info'><b>You slot \the [input_device] into the suit module.</b></span>")
 	qdel(input_device)
 	accepted_item.charges++
 	return 1
@@ -392,7 +392,7 @@
 		else
 			var/obj/item/new_weapon = new fabrication_type()
 			new_weapon.forceMove(H)
-			to_chat(H, "<font color='blue'><b>You quickly fabricate \a [new_weapon].</b></font>")
+			to_chat(H, "<span class='info'><b>You quickly fabricate \a [new_weapon].</b></span>")
 			H.put_in_hands(new_weapon)
 
 	return 1

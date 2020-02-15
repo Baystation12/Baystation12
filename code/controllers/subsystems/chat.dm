@@ -49,7 +49,7 @@ SUBSYSTEM_DEF(chat)
 				return
 
 			//Send it to the old style output window.
-			to_old_chat(C, original_message)
+			legacy_chat(C, original_message)
 
 			if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
 				continue
@@ -67,7 +67,7 @@ SUBSYSTEM_DEF(chat)
 			return
 
 		//Send it to the old style output window.
-		to_old_chat(C, original_message)
+		legacy_chat(C, original_message)
 
 		if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
 			return
