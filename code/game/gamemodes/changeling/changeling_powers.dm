@@ -107,7 +107,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/datum/changeling/changeling = src.mind.changeling
 	if(!changeling)
-		world.log << "[src] has the changeling_transform() verb but is not a changeling."
+		to_world_log("[src] has the changeling_transform() verb but is not a changeling.")
 		return
 
 	if(src.stat > max_stat)
