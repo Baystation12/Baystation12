@@ -138,7 +138,7 @@
 		handle_leg_damage()
 
 /mob/living/carbon/human/proc/handle_exertion()
-	if(isSynthetic() || species.name == SPECIES_DIONA || species.name == SPECIES_ADHERENT)
+	if(isSynthetic())
 		return
 	var/lac_chance =  10 * encumbrance()
 	if(lac_chance && prob(skill_fail_chance(SKILL_HAULING, lac_chance)))
