@@ -86,7 +86,7 @@ obj/item/weapon/board/attackby(obj/item/I as obj, mob/user as mob)
 
 		if(board["[i]"])
 			var/obj/item/I = board["[i]"]
-			user << browse_rsc(board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
+			send_rsc(user, board_icons["[I.icon] [I.icon_state]"],"[I.icon_state].png")
 			dat += " style='background-image:url([I.icon_state].png)'>"
 		else
 			dat+= ">"
