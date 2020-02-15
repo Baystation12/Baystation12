@@ -78,7 +78,7 @@
 
 	to_world_log("NanoMapGen: <B>sending [mapFilename] to client</B>")
 
-	usr << browse(Tile, "window=picture;file=[mapFilename];display=0")
+	show_browser(usr, Tile, "window=picture;file=[mapFilename];display=0")
 
 	to_world_log("NanoMapGen: <B>Done.</B>")
 
