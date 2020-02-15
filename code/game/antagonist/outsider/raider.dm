@@ -241,6 +241,8 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 /datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
 
 	var/uniform_type = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
+	var/new_glasses = pick(raider_glasses)
+	var/new_holster = pick(raider_holster)
 
 	player.equip_to_slot_or_del(new uniform_type(player), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
@@ -248,7 +250,16 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
 	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
-
+	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
+	
+	var/obj/item/clothing/accessory/storage/holster/holster = new new_holster
+	if(holster)
+		var/obj/item/clothing/under/uniform = player.w_uniform
+		if(istype(uniform) && uniform.can_attach_accessory(holster))
+			uniform.attackby(holster, player)
+		else
+			player.put_in_any_hand_if_possible(holster)
+	
 	player.set_internals(locate(/obj/item/weapon/tank) in player.contents)
 	return 1
 
