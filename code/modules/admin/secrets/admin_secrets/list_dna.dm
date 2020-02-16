@@ -11,4 +11,4 @@
 		if(H.dna && H.ckey)
 			dat += "<tr><td>[H]</td><td>[H.dna.unique_enzymes]</td><td>[H.b_type]</td></tr>"
 	dat += "</table>"
-	user << browse(dat, "window=DNA;size=440x410")
+	show_browser(user, dat, "window=DNA;size=440x410")

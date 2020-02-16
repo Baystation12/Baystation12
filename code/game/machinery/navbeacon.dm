@@ -101,7 +101,7 @@ Transponder Codes:<UL>"}
 		t += "<small><A href='byond://?src=\ref[src];add=1;'>(add new)</A></small><BR>"
 		t+= "<UL></TT>"
 
-	user << browse(t, "window=navbeacon")
+	show_browser(user, t, "window=navbeacon")
 	onclose(user, "navbeacon")
 	return
 
