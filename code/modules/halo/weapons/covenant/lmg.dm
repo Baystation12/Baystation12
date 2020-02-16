@@ -21,10 +21,11 @@
 	irradiate_non_cov = 5
 	advanced_covenant = 1
 	move_delay_malus = 1
+	slowdown_general = 1
 
 	//Due to reverse acc. and disp. profile, this might be more powerful than the others.//
-	sustain_time = 3 SECONDS
-	sustain_delay = 1
+	sustain_time = 4.5 SECONDS
+	sustain_delay = 1.5
 
 
 /obj/item/weapon/gun/energy/plasmarepeater/proc/cov_plasma_recharge_tick()

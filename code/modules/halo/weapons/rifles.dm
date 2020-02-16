@@ -18,7 +18,7 @@
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA5B) //Disallows loading LMG boxmags into the MA5B
 	burst = 3
-	burst_delay = 1.5
+	burst_delay = 2
 	one_hand_penalty = -1
 	dispersion = list(0.0,0.6,0.6)
 	var/on = 0
@@ -137,7 +137,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 0.5
+	burst_delay = 1.5
 	fire_delay = 7
 	accuracy = 1
 	w_class = ITEM_SIZE_LARGE
@@ -176,7 +176,7 @@
 	load_method = MAGAZINE
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 0.5
+	burst_delay = 1.5
 	fire_delay = 8
 	accuracy = 2
 	w_class = ITEM_SIZE_LARGE

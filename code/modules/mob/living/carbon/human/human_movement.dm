@@ -42,8 +42,8 @@
 				equipment_slowdown += I.slowdown_general
 				equipment_slowdown += I.slowdown_per_slot[slot]
 
-		equipment_slowdown = max(equipment_slowdown - species.ignore_equipment_threshold - src.ignore_equipment_threshold, 0)
-		equipment_slowdown *= species.equipment_slowdown_multiplier * src.equipment_slowdown_multiplier
+		equipment_slowdown = max(equipment_slowdown - src.ignore_equipment_threshold, 0)
+		equipment_slowdown *= species.equipment_slowdown_multiplier
 		tally += equipment_slowdown
 
 		for(var/organ_name in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))

@@ -195,7 +195,6 @@
 	//NOTE FOR ABOVE: Posive X moves right, positive Y moves up.
 	var/melee_force_multiplier = 1
 	var/equipment_slowdown_multiplier = 1	//for strong or weak species
-	var/ignore_equipment_threshold = 0
 	var/list/pain_scream_sounds = list()
 	var/list/scream_sounds_female = list()
 

@@ -302,7 +302,7 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
-	if(target.elevation != last_elevation && istype(target,/obj/vehicles) || istype(target,/mob/living))
+	if(target.elevation != last_elevation && (istype(target,/obj/vehicles) || istype(target,/mob/living)))
 		last_elevation = target.elevation
 		visible_message("<span class = 'warning'>[user.name] changes their firing elevation to target [target.name]</span>")
 	if(istype(user.loc,/obj/vehicles))
@@ -389,6 +389,14 @@
 		if(istype(projectile,/obj/item/projectile))
 			var/obj/item/projectile/proj_obj = projectile
 			proj_obj.target_elevation = last_elevation
+
+		if(user.loc != targloc) //This should stop people being able to just click on someone for free autotracking.
+			var/mob/living/targ_m = target
+			if(istype(targ_m))
+				if(!targ_m.lying)
+					use_targ = targloc
+			else
+				use_targ = targloc
 
 		process_accuracy(projectile, user, use_targ, i, held_twohanded)
 

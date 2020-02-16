@@ -11,7 +11,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	w_class = ITEM_SIZE_NORMAL
 	matter = list(DEFAULT_WALL_MATERIAL = 1000)
-	screen_shake = 0.5
+	screen_shake = 0.25
 
 	var/caliber = "357"		//determines which casings will fit
 	var/handle_casings = EJECT_CASINGS	//determines how spent casings should be handled
@@ -101,7 +101,9 @@
 	if (!chambered) return
 	if(handle_casings == EJECT_CASINGS)
 		atom_despawner.mark_for_despawn(chambered)
-		chambered.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))
+		var/obj/item/ammo_casing/to_eject = chambered
+		spawn()
+			to_eject.eject(get_turf(src), angle2dir(dir2angle(loc.dir)+ejection_angle))
 	if(handle_casings == CYCLE_CASINGS)
 		if(ammo_magazine)
 			ammo_magazine.stored_ammo += chambered
