@@ -19,19 +19,18 @@
 
 /obj/item/weapon/pinpointer/artifact/workdisk()
 	if(!active) return 0
-	if(!artif)
 		artif = locate()
-		if(!artif)
-			icon_state = "pinonnull"
+	if(!artif)
+		icon_state = "pinonnull"
+		return 0
+	else
+		var/turf/artif_turf = get_turf(artif)
+		var/turf/our_turf = get_turf(src)
+		var/obj/artif_om = map_sectors["[artif_turf.z]"]
+		if(artif_turf && our_turf && map_sectors["[our_turf.z]"] != artif_om)
+			visible_message("<span class = 'notice'>Artifact is not located on the current overmap object. Artifact Location:[artif_om.name].</span>")
+			artif = null
 			return 0
-		else
-			var/turf/artif_turf = get_turf(artif)
-			var/turf/our_turf = get_turf(src)
-			var/obj/artif_om = map_sectors["[artif_turf.z]"]
-			if(artif_turf && our_turf && map_sectors["[our_turf.z]"] != artif_om)
-				visible_message("<span class = 'notice'>Artifact is not located on the current overmap object. Artifact Location:[artif_om.name].</span>")
-				artif = null
-				return 0
 	. = 1
 	set_dir(get_dir(src,artif))
 	switch(get_dist(src,artif))
