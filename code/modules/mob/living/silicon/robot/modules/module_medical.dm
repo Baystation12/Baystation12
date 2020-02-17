@@ -50,7 +50,7 @@
 	emag = /obj/item/weapon/reagent_containers/spray
 	skills = list(
 		SKILL_ANATOMY     = SKILL_PROF,
-		SKILL_MEDICAL     = SKILL_ADEPT,
+		SKILL_MEDICAL     = SKILL_EXPERT,
 		SKILL_VIROLOGY    = SKILL_ADEPT,
 		SKILL_CHEMISTRY   = SKILL_ADEPT,
 		SKILL_BUREAUCRACY = SKILL_ADEPT,
