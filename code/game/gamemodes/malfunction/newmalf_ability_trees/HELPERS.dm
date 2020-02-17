@@ -70,7 +70,7 @@
 	if(!help)
 		help = "Error loading help (file /ingame_manuals/malf_ai.html is probably missing). Please report this to server administration staff."
 
-	user << browse(help, "window=malf_ai_help;size=600x500")
+	show_browser(user, help, "window=malf_ai_help;size=600x500")
 
 
 // Verb: ai_select_research()

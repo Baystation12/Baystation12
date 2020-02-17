@@ -24,7 +24,7 @@
 		var/cap = generate_image(tx ,ty ,tz ,range, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[tx]_y[ty]_z[tz]_r[range].png"
 		to_chat(usr, "Saved capture in cache as [file_name].")
-		usr << browse_rsc(cap, file_name)
+		send_rsc(usr, cap, file_name)
 	else
 		to_chat(usr, "Target coordinates are incorrect.")
 
@@ -33,7 +33,7 @@
 		var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 		var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 		to_chat(usr, "Saved capture in cache as [file_name].")
-		usr << browse_rsc(cap, file_name)
+		send_rsc(usr, cap, file_name)
 		currentx = currentx + 32
 		spawn (1)
 			.(currentz, currentx, currenty, ligths)
@@ -44,7 +44,7 @@
 			var/cap = generate_image(currentx ,currenty ,currentz ,32, CAPTURE_MODE_PARTIAL, null, ligths, 1)
 			var/file_name = "map_capture_x[currentx]_y[currenty]_z[currentz]_r32.png"
 			to_chat(usr, "Saved capture in cache as [file_name].")
-			usr << browse_rsc(cap, file_name)
+			send_rsc(usr, cap, file_name)
 			currentx = currentx + 32
 			spawn (1)
 				.(currentz, currentx, currenty, ligths)

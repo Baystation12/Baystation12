@@ -203,7 +203,7 @@
 			if("nostats")
 				option = "NOSTATS"
 			if("later")
-				usr << browse(null,"window=privacypoll")
+				show_browser(usr, null,"window=privacypoll")
 				return
 			if("abstain")
 				option = "ABSTAIN"
@@ -216,7 +216,7 @@
 			var/DBQuery/query_insert = dbcon.NewQuery(sql)
 			query_insert.Execute()
 			to_chat(usr, "<b>Thank you for your vote!</b>")
-			usr << browse(null,"window=privacypoll")
+			show_browser(usr, null,"window=privacypoll")
 
 	if(!ready && href_list["preference"])
 		if(client)
@@ -436,7 +436,7 @@
 		additional_dat += "<br>"
 		dat = additional_dat + dat
 	dat = header + dat
-	src << browse(jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
+	show_browser(src, jointext(dat, null), "window=latechoices;size=450x640;can_close=1")
 
 /mob/new_player/proc/create_character(var/turf/spawn_turf)
 	spawning = 1
@@ -510,7 +510,7 @@
 /mob/new_player/proc/ViewManifest()
 	var/dat = "<div align='center'>"
 	dat += html_crew_manifest(OOC = 1)
-	//src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	//show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
 	var/datum/browser/popup = new(src, "Crew Manifest", "Crew Manifest", 370, 420, src)
 	popup.set_content(dat)
 	popup.open()
@@ -519,7 +519,7 @@
 	return 0
 
 /mob/new_player/proc/close_spawn_windows()
-	src << browse(null, "window=latechoices") //closes late choices window
+	close_browser(src, "window=latechoices") //closes late choices window
 	panel.close()
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)

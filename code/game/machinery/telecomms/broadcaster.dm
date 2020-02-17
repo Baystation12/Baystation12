@@ -128,7 +128,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	var/channel_color
 	var/channel_name
 	var/intercept = 0 // if nonzero, broadcasts all messages to syndicate channel
-	
+
 /obj/machinery/telecomms/allinone/Initialize()
 	if(!listening_freqs)
 		listening_freqs = ANTAG_FREQS	//Covers any updates to ANTAG_FREQS
@@ -578,7 +578,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if(do_sleep)
 		sleep(rand(10,25))
 
-	//world.log << "Level: [signal.data["level"]] - Done: [signal.data["done"]]"
+	//to_world_log("Level: [signal.data["level"]] - Done: [signal.data["done"]]")
 
 	return signal
 

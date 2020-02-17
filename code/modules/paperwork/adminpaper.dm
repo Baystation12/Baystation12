@@ -71,7 +71,7 @@
 	updateDisplay()
 
 obj/item/weapon/paper/admin/proc/updateDisplay()
-	usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
+	show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[headerOn ? header : ""][info_links][stamps][footerOn ? footer : ""][interactions]</BODY></HTML>", "window=[name];can_close=0")
 
 
 
@@ -120,7 +120,7 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 				if(footerOn)
 					info += footer
 				updateinfolinks()
-				usr << browse(null, "window=[name]")
+				close_browser(usr, "window=[name]")
 				admindatum.faxCallback(src, destination)
 		return
 
@@ -131,7 +131,7 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 		return
 
 	if(href_list["cancel"])
-		usr << browse(null, "window=[name]")
+		close_browser(usr, "window=[name]")
 		qdel(src)
 		return
 

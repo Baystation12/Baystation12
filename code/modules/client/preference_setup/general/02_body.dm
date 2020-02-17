@@ -150,7 +150,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. = list()
 	if(!pref.preview_icon)
 		pref.update_preview_icon()
-	user << browse_rsc(pref.preview_icon, "previewicon.png")
+	send_rsc(user, pref.preview_icon, "previewicon.png")
 
 	var/datum/species/mob_species = all_species[pref.species]
 	var/title = "<b>Species<a href='?src=\ref[src];show_species=1'><small>?</small></a>:</b> <a href='?src=\ref[src];set_species=1'>[mob_species.name]</a>"
@@ -333,7 +333,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		var/choice = input("Which species would you like to look at?") as null|anything in playable_species
 		if(choice)
 			var/datum/species/current_species = all_species[choice]
-			user << browse(current_species.get_description(), "window=species;size=700x400")
+			show_browser(user, current_species.get_description(), "window=species;size=700x400")
 			return TOPIC_HANDLED
 
 	else if(href_list["set_species"])

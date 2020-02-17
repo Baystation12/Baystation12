@@ -2,7 +2,7 @@
 	name = "radio transmitter"
 	desc = "A radio transmitter designed for use with machines."
 	icon_state = "subspace_transmitter"
-	var/range       // If you want range-limited subtypes
+	var/range = 60  // Limits transmit range
 	var/latency = 2 // Delay between event and transmission; doesn't apply to transmit on tick
 	var/buffer
 

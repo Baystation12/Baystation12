@@ -19,7 +19,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td width = '50%'>
+			<td width = '50%' style = 'vertical-align: top;'>
 				<table width = '100%' style = 'border:1px solid #333333;'>
 					<tr>
 						<th><b>Current Build</b></th>
@@ -36,7 +36,7 @@
 			<td width = '50%'>
 				<table width = '85%' style = 'border:1px solid #333333;'>
 					<tr>
-						<th><b>Pending Build</b></th>
+						<th><b>Pending</b></th>
 						<th><b>Units</b></th>
 						<th><b>Options</b></th>
 					</tr>
@@ -53,6 +53,9 @@
 					{{/for}}
 				</table>
 			</td>
+		</tr>
+		<tr>
+			<td><b>Selected Category</b></td><td> {{:helper.link(data.category, null, {'change_category' : 1})}}</td>
 		</tr>
 		<tr>
 			<td colspan = 2>

@@ -187,7 +187,7 @@
 		set_frequency(new_frequency)
 		if(hidden_uplink)
 			if(hidden_uplink.check_trigger(usr, frequency, traitor_frequency))
-				usr << browse(null, "window=radio")
+				close_browser(usr, "window=radio")
 		. = 1
 	else if (href_list["talk"])
 		ToggleBroadcast()
