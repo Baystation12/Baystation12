@@ -360,7 +360,7 @@ meteor_act
 
 		if(momentum >= THROWNOBJ_KNOCKBACK_SPEED)
 			var/dir = TT.init_dir
-			
+
 			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
 
 			if(!src.isinspace())
