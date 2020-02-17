@@ -389,7 +389,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/UnarmedAttack(var/atom/attacked)
 	. = ..(attacked)
-	if(!.)
+	if(!. && istype(attacked,/mob/living))
 		return 0
 	var/mob/living/carbon/human/h = attacked
 	if(istype(h))
