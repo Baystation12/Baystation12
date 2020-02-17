@@ -121,8 +121,8 @@
 		/decl/emote/visible/dap,
 		/decl/emote/visible/signal,
 		/decl/emote/visible/handshake,
-		/decl/emote/audible/wort,
-		/decl/emote/audible/need_weapon
+		/decl/emote/audible/species_sound/wort,
+		/decl/emote/audible/species_sound/need_weapon
 
 	)
 

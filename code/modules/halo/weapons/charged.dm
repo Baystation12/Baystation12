@@ -37,6 +37,9 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 2000)
 	projectile_type = /obj/item/projectile/beam/spartan
 
+	sustain_time = 0.5 SECONDS
+	sustain_delay = 2.5
+
 
 /obj/item/weapon/gun/energy/charged/spartanlaser/verb/scope()
 	set category = "Weapon"

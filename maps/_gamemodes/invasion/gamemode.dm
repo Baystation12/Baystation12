@@ -8,11 +8,11 @@
 	probability = 1
 	ship_lockdown_duration = 10 MINUTES
 	var/safe_expire_warning = 0
-	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection)
+	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection,/datum/faction/human_civ)
 	var/list/overmap_hide = list()
 	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
-	var/end_conditions_required = 2
+	var/end_conditions_required = 3
 
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
@@ -83,6 +83,7 @@
 	GLOB.INSURRECTION.base_desc = "secret underground HQ"
 
 	GLOB.HUMAN_CIV.name = "Geminus City"
+	GLOB.HUMAN_CIV.has_base = 1
 	GLOB.HUMAN_CIV.base_desc = "human colony"
 
 /datum/game_mode/outer_colonies/handle_latejoin(var/mob/living/carbon/human/character)

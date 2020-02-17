@@ -6,7 +6,7 @@
 	item_state = "ionrifle"
 	digspeed = 0
 	desc = "An advanced tool for cutting through metals."
-	excavation_amount = 1
+	excavation_amount = 200
 	drill_sound = 'sound/effects/teleport.ogg'
 	drill_verb = "burning"
 	damtype = "brute"
@@ -83,13 +83,13 @@
 
 	if(active)
 		if(charge_level > 0)
-			charge_level -= charge_per_hit
-			update_icon()
 
 			if(istype(A, /turf/simulated/mineral))
 				. = ..()
 
 			else if(istype(A, /obj/machinery/door/airlock))
+				charge_level -= charge_per_hit
+				update_icon()
 				to_chat(user, "<span class='info'>Cutting door...</span>")
 				user.do_attack_animation(A)
 				A.overlays += image_overlay

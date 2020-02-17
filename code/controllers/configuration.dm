@@ -168,6 +168,9 @@ var/list/gamemode_cache = list()
 	var/comms_password = ""
 	var/ban_comms_password = null
 
+	var/minimum_byond_version
+	var/minimum_byond_build
+
 	var/login_export_addr = null
 
 	var/enter_allowed = 1
@@ -661,6 +664,12 @@ var/list/gamemode_cache = list()
 
 				if("ban_comms_password")
 					config.ban_comms_password = value
+
+				if("minimum_byond_version")
+					config.minimum_byond_version = value
+
+				if("minimum_byond_build")
+					config.minimum_byond_build = value
 
 				if("login_export_addr")
 					config.login_export_addr = value

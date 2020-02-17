@@ -295,9 +295,9 @@
 	if(!Proj || Proj.nodamage)
 		return
 	if(Proj.damtype == BURN)
-		adjustFireLoss(Proj.damage)
+		adjustFireLoss(max(0,Proj.damage-resistance-Proj.armor_penetration))
 	else
-		adjustBruteLoss(Proj.damage)
+		adjustBruteLoss(max(0,Proj.damage-resistance-Proj.armor_penetration))
 	do_pain_scream()
 	return 0
 
@@ -355,7 +355,7 @@
 
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
 
-	if(O.force <= resistance)
+	if(O.force <= resistance-O.armor_penetration)
 		to_chat(user, "<span class='danger'>This weapon is ineffective, it does no damage.</span>")
 		return 2
 

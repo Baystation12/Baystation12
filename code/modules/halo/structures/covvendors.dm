@@ -124,14 +124,15 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/EVA = 7,/obj/item/clothing/suit/armor/jiralhanae/covenant/EVA = 7,/obj/item/weapon/tank/air/covenant = 7
-		,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/weapon/pinpointer/artifact = 1)
+		,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 1)
 
 /obj/machinery/vending/armory/covenant/jiralhanae/heavy // Equipment for Jiralhanae
 	name = "Covenant - Jiralhanae Heavy Vendor"
 	desc = "Storage for Covenant Jiralhanae weapons and ammo"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/launcher/grenade/brute_shot = 2,/obj/item/weapon/grenade/brute_shot = 8)
+	products = list(/obj/item/weapon/gun/launcher/grenade/brute_shot = 2,/obj/item/weapon/grenade/brute_shot = 8,
+		,/obj/item/turret_deploy_kit/plasturret = 2,/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 3)
 
 /obj/machinery/vending/armory/covenant/kigyar/weapon // Both ammo, and guns!
 	name = "Covenant - Kig-Yar Weapon Vendor"

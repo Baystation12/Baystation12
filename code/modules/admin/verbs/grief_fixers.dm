@@ -54,7 +54,7 @@
 /client/proc/minorfixatmos()
 	set category = "Admin"
 	set name = "Fix Canister Leak"
-	if(!check_rights(R_DEBUG|R_MOD)) return
+	if(!check_rights(R_MOD)) return
 	if(alert("WARNING: Executing this command will perform a minor reset of atmosphere. All zones will be reset to contain air mix as on roundstart. Do not use unless the map is suffering minor atmospheric issues due to grief or bug. This is for clearing a phoron leak or similar gas in the air.", "Minor Atmosphere Reboot", "No", "Yes") == "No")
 		return
 	feedback_add_details("admin_verb","FAM")
