@@ -3,6 +3,8 @@
 	name = "Artifact Pinpointer"
 	desc = "Seems to point towards Forerunner Artifacts..."
 	var/obj/machinery/artifact/artif = null
+	var/list/artifs = list()
+	var/index = 0
 
 /obj/item/weapon/pinpointer/artifact/attack_self(mob/user as mob)
 	if(!active)
@@ -19,7 +21,18 @@
 
 /obj/item/weapon/pinpointer/artifact/workdisk()
 	if(!active) return 0
-		artif = locate()
+	if(artifs.len == 0)
+		for(var/obj/machinery/artifact/artifact_find in world)
+			artifs += artifact_find
+			if(isnull(artif))
+				artif = artifact_find
+	else
+		index++
+		if(index > artifs.len)
+			index = 0
+		if(world.time % 2 == 0)
+			visible_message("<span class = 'notice'>[src] switches target.</span>")
+		artif = artifs[index]
 	if(!artif)
 		icon_state = "pinonnull"
 		return 0
@@ -27,7 +40,7 @@
 		var/turf/artif_turf = get_turf(artif)
 		var/turf/our_turf = get_turf(src)
 		var/obj/artif_om = map_sectors["[artif_turf.z]"]
-		if(artif_turf && our_turf && map_sectors["[our_turf.z]"] != artif_om)
+		if(artif_turf && our_turf && map_sectors["[our_turf.z]"] != artif_om && world.time % 2 == 0)
 			visible_message("<span class = 'notice'>Artifact is not located on the current overmap object. Artifact Location:[artif_om.name].</span>")
 			artif = null
 			return 0
