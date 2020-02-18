@@ -7,20 +7,7 @@
 	var/index = 0
 
 /obj/item/weapon/pinpointer/artifact/attack_self(mob/user as mob)
-	if(!active)
-		active = 1
-		if(workdisk())
-			to_chat(user, "<span class='notice'>Artifact Locator Active.</span>")
-		else
-			active = 0
-	else
-		active = 0
-		icon_state = "pinoff"
-		to_chat(user, "<span class='notice'>You deactivate the pinpointer.</span>")
-
-
-/obj/item/weapon/pinpointer/artifact/workdisk()
-	if(!active) return 0
+	active = 1
 	if(artifs.len == 0)
 		for(var/obj/machinery/artifact/artifact_find in world)
 			artifs += artifact_find
@@ -32,6 +19,15 @@
 			index = 0
 		if(world.time % 2 == 0)
 			visible_message("<span class = 'notice'>[src] switches target.</span>")
+	if(!workdisk())
+		active = 0
+		icon_state = "pinoff"
+		to_chat(user, "<span class='notice'>You deactivate the pinpointer.</span>")
+
+
+/obj/item/weapon/pinpointer/artifact/workdisk()
+	if(!active) return 0
+	if(!artif)
 		artif = artifs[index]
 	if(!artif)
 		icon_state = "pinonnull"
@@ -43,6 +39,7 @@
 		if(artif_turf && our_turf && map_sectors["[our_turf.z]"] != artif_om && world.time % 2 == 0)
 			visible_message("<span class = 'notice'>Artifact is not located on the current overmap object. Artifact Location:[artif_om.name].</span>")
 			artif = null
+			index++
 			return 0
 	. = 1
 	set_dir(get_dir(src,artif))
