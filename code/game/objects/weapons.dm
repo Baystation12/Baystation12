@@ -28,7 +28,8 @@
 	else if (attacker)
 		visible_message("<span class = 'danger'>[user] parries [attacker]'s [damage_source.name] with their [src.name]</span>")
 		playsound(loc, hitsound, 50, 1, -1)
-		playsound(loc, damage_source.hitsound, 50, 1, -1)
+		if(istype(damage_source,/obj/item))
+			playsound(loc, damage_source.hitsound, 50, 1, -1)
 	else
 		visible_message("<span class = 'danger'>[user] deflects [damage_source] with their [src]!</span>")
 		playsound(loc, hitsound, 50, 1, -1)

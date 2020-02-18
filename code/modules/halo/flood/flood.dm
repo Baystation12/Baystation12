@@ -14,7 +14,17 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 #define ODST_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6c_magnum_s,\
 /obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg/silenced)
 
-#define FLOOD_BURNDAM_MULTIPLIER 2
+#define FLOOD_BURNDAM_MULTIPLIER 1.5
+
+#define SPECIES_INFEST_TYPE_LIST list(\
+/datum/species/sangheili = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination)
+
+#define ITEM_INFEST_TYPE_LIST list(\
+/obj/item/clothing/suit/armor/special/combatharness/minor = /mob/living/simple_animal/hostile/flood/combat_form/minor,\
+/obj/item/clothing/suit/armor/special/combatharness/major = /mob/living/simple_animal/hostile/flood/combat_form/major,\
+/obj/item/clothing/under/unsc/odst_jumpsuit = /mob/living/simple_animal/hostile/flood/combat_form/ODST,\
+/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform = /mob/living/simple_animal/hostile/flood/combat_form/oni,\
+/obj/item/clothing/under/color/orange = /mob/living/simple_animal/hostile/flood/combat_form/prisoner)
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -63,11 +73,14 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
+	if(stat != DEAD)
+		health += 1
 	if(client || ckey)
 		target_mob = null
 
 /mob/living/simple_animal/hostile/flood/adjustFireLoss(damage)
-	damage *= FLOOD_BURNDAM_MULTIPLIER
+	if(!client) //Players don't suffer this.
+		damage *= FLOOD_BURNDAM_MULTIPLIER
 	. = ..()
 
 
@@ -78,27 +91,16 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	h.Stun(999)
 	h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 	new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew
-	if(istype(h.species,/datum/species/sangheili))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
-	var/obj/item/clothing/suit/armor/special/combatharness/minor/MI = locate() in h.contents
-	if(istype(MI))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
-	var/obj/item/clothing/suit/armor/special/combatharness/major/MA = locate() in h.contents
-	if(istype(MA))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
-	var/obj/item/clothing/under/unsc/odst_jumpsuit/OD = locate() in h.contents
-	if(istype(OD))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/ODST
-	var/obj/item/clothing/under/unsc/marine_fatigues/MAR = locate() in h.contents
-	if(istype(MAR))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
-	var/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform/ONI = locate() in h.contents
-	if(istype(ONI))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/oni
-	var/obj/item/clothing/under/color/orange/PR = locate() in h.contents
-	if(istype(PR))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	var/list/species_check = SPECIES_INFEST_TYPE_LIST
+	for(var/species in species_check)
+		if(istype(h.species,species))
+			mob_type_spawn = species_check[species]
+	var/list/item_check = ITEM_INFEST_TYPE_LIST
+	for(var/item in item_check)
+		var/obj/item_find = locate(item) in h.contents
+		if(!isnull(item_find))
+			mob_type_spawn = item_check[item]
 
 	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
 	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
@@ -389,7 +391,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/UnarmedAttack(var/atom/attacked)
 	. = ..(attacked)
-	if(!.)
+	if(!. && istype(attacked,/mob/living))
 		return 0
 	var/mob/living/carbon/human/h = attacked
 	if(istype(h))
