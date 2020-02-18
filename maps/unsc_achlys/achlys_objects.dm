@@ -330,3 +330,9 @@
 	mouse_opacity = 0
 	density = 0
 	layer = 2
+
+/obj/structure/false_light
+	name = "light bulb"
+	desc = "A broken light bulb. There is no power to light it."
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "tube1"
