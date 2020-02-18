@@ -1,4 +1,4 @@
-#define FLOOD_INFECTION_MESSAGE_PROB 5
+#define FLOOD_INFECTION_MESSAGE_PROB 10
 #define FLOOD_INFECTION_MESSAGES_LOW list(\
 "Your skin becomes cold to the touch...",\
 "A spasm runs through your body...",\
@@ -22,9 +22,9 @@
 	description = "A substance with no known classification."
 	reagent_state = LIQUID
 	color = "#00BFFF"
-	metabolism = 0.1
+	metabolism = 0
 	overdose = 27 //Time (60 seconds gas exposure) / 2 (2 seconds between life ticks) * 0.9 (Chemicals lost due to metabolism).
-	scannable = 1
+	scannable = 0
 	flags = AFFECTS_DEAD
 
 /datum/reagent/floodinfectiontoxin/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
@@ -34,9 +34,9 @@
 	var/message = ""
 	if(percent_to_overdose <= 100)
 		message = pick(FLOOD_INFECTION_MESSAGES_HIGH)
-	if(percent_to_overdose < 75)
-		message = pick(FLOOD_INFECTION_MESSAGES_MEDIUM)
 	if(percent_to_overdose < 50)
+		message = pick(FLOOD_INFECTION_MESSAGES_MEDIUM)
+	if(percent_to_overdose < 25)
 		message = pick(FLOOD_INFECTION_MESSAGES_LOW)
 	to_chat(H,"<span class = 'warning'>[message]</span>")
 
