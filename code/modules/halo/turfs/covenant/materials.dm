@@ -14,7 +14,7 @@
 	icon_reinf = "reinf_over"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 
-	cut_delay = 120 SECONDS
+	cut_delay = 45 SECONDS
 
 	melting_point = 17273
 

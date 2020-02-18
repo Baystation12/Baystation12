@@ -32,10 +32,15 @@
 
 /obj/item/projectile/bullet/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
-	empulse(impacted.loc,1,1)
+	empulse(impacted.loc,0,1)
 
 /obj/item/projectile/bullet/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
+	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon_state = "Plasmarifle Shot"
+
+/obj/item/projectile/bullet/covenant/plasmarepeater
+	damage = 30 //The repeater does enough, thank you.
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 

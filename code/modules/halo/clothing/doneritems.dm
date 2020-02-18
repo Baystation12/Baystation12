@@ -919,6 +919,66 @@ decl/hierarchy/outfit/Jul
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_grenadier
 	head = /obj/item/clothing/head/helmet/spartan/mkv_grenadier
 
+///////MAGNUM\\\\\\\\
+
+//Sangheili Ultra
+
+/obj/item/clothing/under/covenant/sangheili/magnum
+	name = "Sangheili Body-suit"
+	desc = "A sealed, airtight bodysuit. Meant to be worn underneath the ornate 'Strangam Clan Ultra harness."
+	icon_state = "sangheili-magnum_suit"
+	species_restricted = list ("Sangheili")
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
+
+/obj/item/clothing/head/helmet/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_helmet_obj"
+	item_state = "Magnum_helmet"
+
+/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
+	name = "全trangam Clan - Ultra Combat Harness"
+	icon_state = "Magnum_chest_obj"
+	item_state = "Magnum_chest"
+
+/obj/item/clothing/shoes/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_boots_obj"
+	item_state = "Magnum_boots"
+
+/obj/item/clothing/gloves/thick/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_gloves_obj"
+	item_state = "Magnum_gloves"
+
+/obj/item/weapon/storage/box/large/donator/magnum_ultra
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
+					/obj/item/clothing/shoes/sangheili/ultra/magnum,
+					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
+					/obj/item/clothing/under/covenant/sangheili/magnum
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
+					/obj/item/clothing/shoes/sangheili/ultra/magnum,
+					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
+					/obj/item/clothing/under/covenant/sangheili/magnum
+					)
+
+/decl/hierarchy/outfit/magnum_sangheili
+	name = "RealMAGNUM - Sangheili Ultra"
+	uniform = /obj/item/clothing/under/covenant/sangheili/magnum
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra/magnum
+	shoes = /obj/item/clothing/shoes/sangheili/ultra/magnum
+	head = /obj/item/clothing/head/helmet/sangheili/ultra/magnum
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
 
 ////////mann\\\\\\\\\
 
@@ -926,7 +986,7 @@ decl/hierarchy/outfit/Jul
 
 /obj/item/clothing/head/helmet/odst/donator/mann
 	name = "SPI-M Helmet"
-	desc = "This helmet/armor is one of the most recent advancements in the UNSC's arsenal. Currently, being field tested in various locales mostly alongside the Helljumpers. Stenciled onto both shoulderpads is that of the Helljumpers insignia, emblazoned with a black and red color scheme."
+	desc = "This is helmet is one of the sleeker designed pieces of EVA capable gear for the UNSC. Currently, in it's field testing phase it's fitted with the latest VISR HUD."
 	item_state = "mann-odst-spi-helmet_worn"
 	icon_state = "mann-odst-spi-helmet_obj"
 	item_state_novisr = "mann-odst-spi-helmet-open_worn"
@@ -934,7 +994,7 @@ decl/hierarchy/outfit/Jul
 
 /obj/item/clothing/suit/armor/special/odst/donator/mann
 	name = "SPI-M Armor"
-	desc = "This helmet/armor is one of the most recent advancements in the UNSC's arsenal. Currently, being field tested in various locales mostly alongside the Helljumpers. Stenciled onto both shoulderpads is that of the Helljumpers insignia, emblazoned with a black and red color scheme."
+	desc = "The newest breakthrough from ONI being put into field testing in limited quantities for select Helljumpers. Being called SPI-M, it sports the Helljumper insignia emblazoned on the shoulderpads in the standard gold and maroon finish."
 	icon_state = "mann-odst-spi-armor_obj"
 	item_state = "mann-odst-spi-armor_worn"
 
@@ -2205,67 +2265,6 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	head = /obj/item/clothing/head/helmet/sangheili/zane
 	l_pocket = /obj/item/weapon/grenade/plasma
 
-
-///////MAGNUM\\\\\\\\
-
-//Sangheili Ultra
-
-/obj/item/clothing/under/covenant/sangheili/magnum
-	name = "Sangheili Body-suit"
-	desc = "A sealed, airtight bodysuit. Meant to be worn underneath the ornate 'Strangam Clan Ultra harness."
-	icon_state = "sangheili-magnum_suit"
-	species_restricted = list ("Sangheili")
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
-
-/obj/item/clothing/head/helmet/sangheili/ultra/magnum
-	name = "全trangam Clan - Ultra Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_helmet_obj"
-	item_state = "Magnum_helmet"
-
-/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
-	name = "全trangam Clan - Ultra Combat Harness"
-	icon_state = "Magnum_chest_obj"
-	item_state = "Magnum_chest"
-
-/obj/item/clothing/shoes/sangheili/ultra/magnum
-	name = "全trangam Clan - Ultra Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_boots_obj"
-	item_state = "Magnum_boots"
-
-/obj/item/clothing/gloves/thick/sangheili/ultra/magnum
-	name = "全trangam Clan - Ultra Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_gloves_obj"
-	item_state = "Magnum_gloves"
-
-/obj/item/weapon/storage/box/large/donator/magnum_ultra
-	startswith = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
-					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
-					/obj/item/clothing/shoes/sangheili/ultra/magnum,
-					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
-					/obj/item/clothing/under/covenant/sangheili/magnum
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
-					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
-					/obj/item/clothing/shoes/sangheili/ultra/magnum,
-					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
-					/obj/item/clothing/under/covenant/sangheili/magnum
-					)
-
-/decl/hierarchy/outfit/magnum_sangheili
-	name = "RealMAGNUM - Sangheili Ultra"
-	uniform = /obj/item/clothing/under/covenant/sangheili/magnum
-	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra/magnum
-	shoes = /obj/item/clothing/shoes/sangheili/ultra/magnum
-	head = /obj/item/clothing/head/helmet/sangheili/ultra/magnum
-	l_pocket = /obj/item/weapon/grenade/plasma
-	r_pocket = /obj/item/weapon/grenade/plasma
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND

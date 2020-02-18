@@ -116,7 +116,7 @@
 	icon_state = ""
 	alpha = 0
 	damage = 900
-	penetrating = 1 //1 Pen goes a longer way because we convert tiles into lava, including the one in front of us. It's essentially a penetration of 3
+	penetrating = 2
 	step_delay = 0.0 SECONDS
 	kill_count = 999 //so it doesn't despawn before cutting through the ship
 	tracer_type = /obj/effect/projectile/projector_laser_proj

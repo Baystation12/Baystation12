@@ -1,14 +1,14 @@
 /decl/hierarchy/outfit/job/geminus_x52
 	name = "X52 Researcher"
 
-	head = null
+	head = /obj/item/clothing/head/helmet/x52hood
 	glasses = null
-	mask = null
-	suit = null
-	uniform = /obj/item/clothing/under/sterile
-	shoes = /obj/item/clothing/shoes/white
+	mask = /obj/item/clothing/mask/x52/x52shemagh
+	suit = /obj/item/clothing/suit/storage/toggle/x52vest
+	uniform = /obj/item/clothing/under/x52/x52jumpsuit
+	shoes = /obj/item/clothing/shoes/x52boots
 	l_ear = /obj/item/device/radio/headset/insurrection
-	gloves = null
+	gloves = /obj/item/clothing/gloves/x52/x52gloves
 	pda_slot = null
 
 	flags = 0
@@ -21,14 +21,14 @@
 /decl/hierarchy/outfit/job/geminus_x52_rd
 	name = "X52 Research Director"
 
-	head = null
+	head = /obj/item/clothing/head/helmet/x52hood
 	glasses = null
-	mask = null
-	suit = /obj/item/clothing/suit/storage/toggle/labcoat/rd
-	uniform = /obj/item/clothing/under/rank/research_director
-	shoes = /obj/item/clothing/shoes/brown
+	mask = /obj/item/clothing/mask/x52/x52shemagh
+	suit = /obj/item/clothing/suit/storage/toggle/x52vest/jacket
+	uniform = /obj/item/clothing/under/x52/x52RDjumpsuit
+	shoes = /obj/item/clothing/shoes/x52boots
 	l_ear = /obj/item/device/radio/headset/insurrection
-	gloves = null
+	gloves = /obj/item/clothing/gloves/x52/x52gloves
 	pda_slot = null
 
 	flags = 0

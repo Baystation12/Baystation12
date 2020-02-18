@@ -1,5 +1,135 @@
 #define INNIE_OVERRIDE 'code/modules/halo/clothing/inniearmor.dmi'
 
+// x52 stuff
+
+/obj/item/clothing/under/x52/x52jumpsuit
+	name = "X-52 Researcher Uniform"
+	desc = "A classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "x52nerd obj"
+	icon_state = "x52nerd obj"
+	worn_state = "x52nerdworn"
+	armor = list(melee = 10, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	item_icons = list(
+		slot_l_hand_str = "x52nerd obj",
+		slot_r_hand_str = "x52nerd obj",
+		)
+
+/obj/item/clothing/under/x52/x52RDjumpsuit
+	name = "X-52 Researcher Director Uniform"
+	desc = "A  classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "x52headnerd obj"
+	icon_state = "x52headnerd obj"
+	worn_state = "x52headnerdworn"
+	armor = list(melee = 10, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	item_icons = list(
+		slot_l_hand_str = "x52headnerd obj",
+		slot_r_hand_str = "x52headnerd obj",
+		)
+
+/obj/item/clothing/suit/storage/toggle/x52vest
+	name = "X-52 Researcher Vest"
+	desc = "A  classy brown vest that has a x-52 patch on it with pockets"
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "vestobj"
+	icon_open = "vestworn"
+	icon_closed = "vestworn"
+	blood_overlay_type = "coat"
+	body_parts_covered = UPPER_TORSO|ARMS
+	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+
+/obj/item/clothing/suit/storage/toggle/x52vest/jacket
+	name = "X-52 Researcher Jacket"
+	desc = "A  classy brown jacket that has a x-52 patch on it with pockets"
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "jacketobj"
+	icon_open = "jacketworn"
+	icon_closed = "jacketworn"
+
+/obj/item/clothing/mask/x52/x52shemagh
+	name = "X-52 Shemagh"
+	desc = "A X-52 headdress designed to keep out dust and protect agains the sun."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	icon_state = "maskworn"
+	item_state = "mask obj"
+	body_parts_covered = FACE
+	item_flags = FLEXIBLEMATERIAL
+	w_class = ITEM_SIZE_SMALL
+	gas_transfer_coefficient = 0.90
+	item_icons = list(
+		slot_l_hand_str = null,
+		slot_r_hand_str = null,
+		)
+
+/obj/item/clothing/gloves/x52/x52gloves
+	name = "X-52 Combat Gloves"
+	desc = "These  gloves are somewhat fire and impact-resistant."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "glovesworn"
+	icon_state = "gloveobj"
+	force = 5
+	armor = list(melee = 20, bullet = 20, laser = 0,energy = 5, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/shoes/x52boots
+	name = "X-52 Jackboots"
+	desc = "A pair of steel-toed work boots designed for use in industrial settings. Safety first."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	icon_state = "bootobj"
+	item_state = "bootworn"
+	armor = list(melee = 40, bullet = 30, laser = 0, energy = 0, bomb = 15, bio = 0, rad = 0)
+	siemens_coefficient = 0.7
+	can_hold_knife = 1
+
+/obj/item/clothing/head/helmet/x52hood
+	name = "Armored X-52 Hood"
+	desc = "An  lightly armored hood cover composed of materials salvaged from a wide array of ONI equipment"
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "hoodworn"
+	icon_state = "Hoodobj"
+	item_flags = THICKMATERIAL
+	body_parts_covered = HEAD
+
+/obj/item/clothing/suit/storage/x52armor/light
+	name = "V12L Body Armor"
+	desc = "The V12L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M22L Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "armorworn-l"
+	icon_state = "amrorobj-l"
+	blood_overlay_type = "armorworn-l"
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
+	armor_thickness = 10
+	slowdown_general = -0.5
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/x52armor/medium
+	name = "V12D Body Armor"
+	desc = "The V12D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M22D  Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "armorworn-m"
+	icon_state = "armorobj-m"
+	blood_overlay_type = "armorworn-m"
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
+	armor_thickness = 15
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
 /obj/item/clothing/under/innie/jumpsuit
 	name = "Insurrectionist-modified Jumpsuit"
 	desc = "A grey jumpsuit, modified with extra padding."
