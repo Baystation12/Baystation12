@@ -40,6 +40,7 @@
 				type_to_build = builder.door_type_build
 				type_remove = /obj/machinery/door
 			if(BUILD_MARKER_WINDOW)
+				build_text = "window"
 				type_to_build = builder.window_type_build
 				type_remove = /obj/structure/window
 		attacker.visible_message("<span class = 'notice'>[attacker] builds a [build_text].</span>")
