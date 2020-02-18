@@ -179,9 +179,6 @@
 "dw" = (/obj/random/achlock,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
 "dx" = (/mob/living/simple_animal/hostile/flood/combat_form/prisoner/mutated/guard,/turf/simulated/floor/plating,/area/achlys/two/z2maintroom3)
 "dy" = (/obj/item/weapon/stool/padded,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/two/z2maintroom3)
-"dz" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 1},/turf/space,/area/space)
-"dA" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/space,/area/space)
-"dB" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/space,/area/space)
 "dC" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/freezer,/area/achlys/five/z2freezer)
 "dD" = (/obj/structure/table/standard,/obj/item/weapon/material/kitchen/utensil/fork,/turf/simulated/floor/tiled,/area/achlys/six/z2cafeterias)
 "dE" = (/obj/structure/table/standard,/obj/item/weapon/corncob,/turf/simulated/floor/tiled,/area/achlys/six/z2cafeterias)
@@ -205,11 +202,9 @@
 "dW" = (/turf/simulated/wall/strong,/area/achlys/two/z2maintroom4)
 "dX" = (/turf/simulated/open,/area/achlys/nine/z2bar)
 "dY" = (/obj/structure/table/rack,/turf/simulated/floor/plating,/area/achlys/two/z2maintroom4)
-"dZ" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 2},/turf/space,/area/space)
 "ea" = (/turf/simulated/floor/plating,/area/achlys/two/z2maintroom4)
 "eb" = (/obj/effect/decal/cleanable/dirt,/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/eight/z2cargoandhalls)
 "ec" = (/obj/structure/closet/coffin,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z2cargoandhalls)
-"ed" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/space,/area/space)
 "ee" = (/obj/item/weapon/material/kitchen/utensil/knife,/turf/simulated/floor/tiled,/area/achlys/six/z2cafeterias)
 "ef" = (/obj/machinery/door/airlock{welded = 1},/turf/simulated/floor/plating,/area/achlys/seven/z2mainthalls)
 "eg" = (/obj/machinery/vending/cigarette,/turf/simulated/floor/carpet,/area/achlys/nine/z2bar)
@@ -232,7 +227,6 @@
 "ex" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/two/z2maintroom6)
 "ey" = (/obj/effect/landmark/map_data{name = "Achlys"},/turf/space,/area/space)
 "ez" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/two/z2maintroom6)
-"eA" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/space,/area/space)
 "eB" = (/obj/effect/decal/cleanable/flour,/turf/simulated/floor/tiled,/area/achlys/six/z2cafeterias)
 "eC" = (/obj/effect/decal/cleanable/egg_smudge,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/freezer,/area/achlys/five/z2freezer)
 "eD" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/six/z2cafeterias)
@@ -245,7 +239,6 @@
 "eK" = (/obj/machinery/door/blast/regular/triple,/turf/simulated/floor/plating,/area/achlys/one/z2main1)
 "eL" = (/turf/simulated/floor/plating,/area/achlys/one/z2main1)
 "eM" = (/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/achlys/eight/z2cargoandhalls)
-"eN" = (/obj/structure/false_light,/turf/space,/area/space)
 "eO" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z2main1)
 "eP" = (/obj/effect/decal/cleanable/dirt,/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 95; spawn_spot_y = 75},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/six/z2cafeterias)
 "eQ" = (/obj/machinery/fusion_thruster{tag = "icon-nozzle0 (EAST)"; icon_state = "nozzle0"; dir = 4},/turf/simulated/floor/shuttle/white,/area/achlys/eight/z2cargoandhalls)
@@ -260,7 +253,6 @@
 "eZ" = (/obj/item/stack/cable_coil/cut{amount = 2},/turf/simulated/floor/plating,/area/achlys/one/z2main1)
 "fa" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/seven/z2mainthalls)
 "fb" = (/obj/item/stack/cable_coil/cut{amount = 2},/obj/item/weapon/airlock_electronics,/turf/simulated/floor/plating,/area/achlys/one/z2main1)
-"fc" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/space,/area/space)
 "fd" = (/obj/item/organ/internal/lungs,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/eight/z2cargoandhalls)
 "fe" = (/obj/structure/floodspawner{spawn_spot_x = 72; spawn_spot_y = 73},/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/eight/z2cargoandhalls)
 "ff" = (/obj/structure/table/standard,/obj/item/weapon/material/ashtray/plastic,/obj/item/weapon/glass_extra/stick,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/six/z2cafeterias)
@@ -557,8 +549,8 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacaMaMaMacacaqguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguadadbqbqbqadadadbqbqadadadadadadadadadbqadadadadadadadadadadadacacalacacacaqguguguguguguguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguguguguguadadbqamahahahbZahamahahahctahahahahahddahahahahbZamahamahbZadaeaeaedpacacaqguguguguguguguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadzaaaadAaaaaaaaaaaguguguguguguguguguguguguguguguguguguguguadadbqahahahajajahaHahahajahahahahahahajahahahajajamanahahahaAafaeauaeacacaqguguguguguguguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadBdZedeAeNfcaaaaaaaaguguguguguguguguguguguguguguguguguguguguadadbqahajamamfiahahahajahahahamahahahfiahahahahahahaiahahfiadaefuaeafacaqaqaqaqaqaqaqaqguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguguguguguadadbqahahahajajahaHahahajahahahahahahajahahahajajamanahahahaAafaeauaeacacaqguguguguguguguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguguguguguadadbqahajamamfiahahahajahahahamahahahfiahahahahahahaiahahfiadaefuaeafacaqaqaqaqaqaqaqaqguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguguguguguadadbqamahahbqbqadadadbqahahahadavadadbqadbqadaoapapadadbqbqasasasacalacaqaqaqaqaqaqaqaqguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguguguguguadadadfyahfObqadadadadadarararasapgqaDaLapawaxayazazaBaCaUaIasaJaKasaMaqaqaqaqaqaqaqaqaqguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaguguguguguguguguguguguguguguguguguguguguguguguguguadadadahahaiadadadadadadarararasaYaJasapapaQaUapaQapapawaRaSaTgrapasaMaqaqaqbabaaqaqaqaqguguguguguguguguguaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
