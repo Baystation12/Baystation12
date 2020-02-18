@@ -91,7 +91,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	h.Stun(999)
 	h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 	new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-	var/mob_type_spawn = null
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
 	var/list/species_check = SPECIES_INFEST_TYPE_LIST
 	for(var/species in species_check)
 		if(istype(h.species,species))
@@ -101,9 +101,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		var/obj/item_find = locate(item) in h.contents
 		if(!isnull(item_find))
 			mob_type_spawn = item_check[item]
-
-	if(isnull(mob_type_spawn))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
 
 	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
 	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
@@ -117,7 +114,6 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		new_combat_form.stop_automated_movement = 1
 	for(var/obj/i in h.contents)
 		h.drop_from_inventory(i)
-	h.loc = null
 	qdel(h)
 
 /mob/living/simple_animal/hostile/flood/infestor
