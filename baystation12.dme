@@ -1553,6 +1553,7 @@
 #include "code\modules\halo\factions\quest\~undefs.dm"
 #include "code\modules\halo\flood\flood.dm"
 #include "code\modules\halo\flood\flood_infection_chem.dm"
+#include "code\modules\halo\flood\flood_npc.dm"
 #include "code\modules\halo\flood\flood_spawn.dm"
 #include "code\modules\halo\flood\flood_spawn_bio.dm"
 #include "code\modules\halo\flood\flood_spawn_proxy.dm"
