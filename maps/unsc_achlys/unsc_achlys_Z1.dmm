@@ -6,7 +6,7 @@
 "af" = (/turf/simulated/wall/strong,/area/achlys)
 "ag" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "ah" = (/obj/structure/drop_pod_launchbay{name = "Escape Pod Launch Bay"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
-"ai" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
+"ai" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "aj" = (/turf/simulated/wall/strong,/area/achlys/nine/z1commandhallway)
 "ak" = (/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "al" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
@@ -15,17 +15,17 @@
 "ao" = (/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "ap" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "aq" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"ar" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
+"ar" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "as" = (/obj/effect/decal/cleanable/generic{icon_state = "ashtray_broken"},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "at" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/door/airlock/highsecurity{locked = 1; name = "Security Wing"},/turf/simulated/floor/tiled/dark,/area/achlys/eight/z1main)
 "au" = (/obj/effect/floor_decal/corner/black/diagonal,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
-"av" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/light{dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
+"av" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "aw" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "ax" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/vent,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "ay" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/item/ammo_casing/a127_saphe,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
-"az" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
+"az" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "aA" = (/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
-"aB" = (/obj/machinery/light{tag = "icon-bulb0 (NORTH)"; icon_state = "bulb0"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
+"aB" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
 "aC" = (/obj/machinery/shower{icon_state = "shower"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
 "aD" = (/obj/structure/vent,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "aE" = (/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
@@ -45,8 +45,8 @@
 "aS" = (/obj/structure/window/reinforced{dir = 4},/obj/item/ammo_casing/a762,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "aT" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/grille,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint2)
 "aU" = (/obj/effect/floor_decal/corner/green/three_quarters{tag = "icon-corner_white_three_quarters (WEST)"; icon_state = "corner_white_three_quarters"; dir = 8},/obj/structure/filingcabinet/chestdrawer,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint2)
-"aV" = (/obj/effect/floor_decal/corner/green/three_quarters{tag = "icon-corner_white_three_quarters (NORTH)"; icon_state = "corner_white_three_quarters"; dir = 1},/obj/effect/decal/cleanable/blood/drip,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/generic{icon_state = "ashtray_broken"},/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint2)
-"aW" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
+"aV" = (/obj/effect/floor_decal/corner/green/three_quarters{tag = "icon-corner_white_three_quarters (NORTH)"; icon_state = "corner_white_three_quarters"; dir = 1},/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/generic{icon_state = "ashtray_broken"},/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint2)
+"aW" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{dir = 8},/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
 "aX" = (/turf/simulated/open,/area/achlys/three/z1sechallway)
 "aY" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "gib5"},/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
 "aZ" = (/obj/structure/vent,/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
@@ -74,7 +74,7 @@
 "bv" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/five/z1secpoint2)
 "bw" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/item/ammo_casing/a762,/obj/item/ammo_casing/a762,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "bx" = (/obj/machinery/shower{icon_state = "shower"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
-"by" = (/obj/machinery/light{tag = "icon-bulb0"; icon_state = "bulb0"; dir = 2},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{dir = 8},/turf/simulated/floor/tiled,/area/achlys/three/z1sechallway)
+"by" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "bz" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "bA" = (/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "bB" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
@@ -87,7 +87,7 @@
 "bI" = (/turf/simulated/wall/strong,/area/achlys/eight/z1meetinghall)
 "bJ" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/blood/splatter{icon_state = "mfloor7"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "bK" = (/mob/living/simple_animal/hostile/flood/infestor,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
-"bL" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
+"bL" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "bM" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/door/airlock/glass{name = "Meeting Room"},/turf/simulated/floor/tiled/dark,/area/achlys/eight/z1meetinghall)
 "bN" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/door/airlock/glass{locked = 1; name = "Meeting Room"},/turf/simulated/floor/tiled/dark,/area/achlys/eight/z1meetinghall)
 "bO" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl3"},/turf/simulated/wall/strong,/area/achlys/eight/z1meetinghall)
@@ -105,27 +105,27 @@
 "ca" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
 "cb" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
 "cc" = (/obj/structure/closet/crate/secure/biohazard/blanks,/turf/simulated/floor/tiled/freezer,/area/achlys/two/z1freezerpod)
-"cd" = (/obj/machinery/light/spot{dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
+"cd" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "ce" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/writing,/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
 "cf" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "writing1"},/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
 "cg" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "ch" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/random/achlock,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "ci" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
 "cj" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/dirt,/obj/effect/gibspawner/human,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
-"ck" = (/obj/effect/decal/cleanable/blood/drip,/obj/machinery/light{tag = "icon-bulb0 (EAST)"; icon_state = "bulb0"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
+"ck" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
 "cl" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/three/z1sechallway)
 "cm" = (/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "cn" = (/mob/living/simple_animal/hostile/flood/carrier,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "co" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
 "cp" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/writing,/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
 "cq" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
-"cr" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
+"cr" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
 "cs" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
 "ct" = (/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
 "cu" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tiled/freezer,/area/achlys/two/z1freezerpod)
 "cv" = (/obj/structure/vent,/turf/simulated/floor/tiled/freezer,/area/achlys/two/z1freezerpod)
 "cw" = (/obj/structure/window/reinforced{dir = 8},/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/shard,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"cx" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
+"cx" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
 "cy" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/writing{tag = "icon-tracks (SOUTHWEST)"; icon_state = "u_guilty_l"; dir = 10; message = "i t wasnt œr fælt"},/turf/simulated/floor/tech/gray,/area/achlys/eight/z1meetinghall)
 "cz" = (/obj/structure/table/standard,/obj/item/weapon/towel,/obj/item/weapon/towel,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
 "cA" = (/obj/structure/table/standard,/turf/simulated/floor/plating,/area/achlys/five/z1laundry)
@@ -160,15 +160,15 @@
 "dd" = (/obj/structure/window/reinforced{dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "de" = (/obj/structure/vent,/obj/effect/decal/cleanable/blood,/obj/structure/floodspawner{spawn_spot_x = 102; spawn_spot_y = 77},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "df" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"dg" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
+"dg" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "dh" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/item/stack/rods,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "di" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_ketchup_l"},/obj/item/ammo_casing/a127_saphe,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "dj" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "dk" = (/obj/random/achlock,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dl" = (/obj/machinery/door/airlock{desc = "It opens and closes. It's probably welded for a reason."; name = "airlock"; welded = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dm" = (/obj/random/achlock,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/two/z1freezerpod)
-"dn" = (/obj/machinery/light/spot,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"do" = (/obj/machinery/light/spot,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
+"dn" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
+"do" = (/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "dp" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/structure/table/standard,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "dq" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dr" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 1},/obj/effect/decal/cleanable/dirt,/obj/item/weapon/weldingtool/mini,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
@@ -180,7 +180,7 @@
 "dx" = (/turf/simulated/open,/area/achlys/eight/z1cargohallway)
 "dy" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dz" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
-"dA" = (/obj/machinery/light{dir = 1},/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
+"dA" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dB" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dC" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/generic{icon_state = "ashtray_broken"},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dD" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/vending/cigarette{icon_state = "generic-broken"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
@@ -191,18 +191,18 @@
 "dI" = (/obj/structure/vent,/obj/effect/decal/cleanable/generic,/obj/structure/floodspawner{spawn_spot_x = 69; spawn_spot_y = 73},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dJ" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_ketchup_l"},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dK" = (/obj/effect/decal/cleanable/dirt,/obj/structure/vent,/obj/effect/decal/cleanable/generic,/obj/structure/floodspawner{spawn_spot_x = 87; spawn_spot_y = 73},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
-"dL" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
+"dL" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/five/z1ladder1)
 "dM" = (/obj/structure/sign/warning/moving_parts,/turf/simulated/wall/strong,/area/achlys/eight/z1main)
 "dN" = (/obj/machinery/door/airlock{name = "Maintenance"; welded = 0},/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "dO" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 4},/turf/simulated/floor/plating,/area/achlys/five/z1ladder1)
 "dP" = (/obj/structure/ladder,/turf/simulated/floor/plating,/area/achlys/five/z1ladder1)
-"dQ" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1ladder1)
+"dQ" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dR" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dS" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dT" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
-"dU" = (/obj/machinery/light,/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
+"dU" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "dV" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/effect/decal/cleanable/generic{icon_state = "ashtray_broken"},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
-"dW" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
+"dW" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "bulb1"; dir = 2},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "dX" = (/obj/effect/floor_decal/industrial/loading,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "dY" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys)
 "dZ" = (/obj/effect/decal/cleanable/blood/drip,/obj/structure/doorwreckage{name = "wrecked airlock"},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
@@ -229,10 +229,10 @@
 "eu" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_ketchup_l"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "ev" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/item/weapon/mop{was_bloodied = 1},/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_guilty_l"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "ew" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
-"ex" = (/obj/machinery/light/small,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
+"ex" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/beige/diagonal,/obj/item/weapon/pen/red,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "ey" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "ez" = (/obj/machinery/door/airlock{name = "Escape Pods"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
-"eA" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
+"eA" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
 "eB" = (/obj/item/organ/external/foot/right,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "eC" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/door/airlock/glass_research{name = "Office"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z1offices)
 "eD" = (/obj/structure/noticeboard,/turf/simulated/wall/strong,/area/achlys/six/z1offices)
@@ -262,10 +262,10 @@
 "fb" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "fc" = (/obj/structure/closet/crate,/obj/item/weapon/ore/silver,/obj/item/weapon/ore/silver,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "fd" = (/obj/structure/window/reinforced{dir = 4},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"fe" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/beige/diagonal,/obj/item/weapon/pen/red,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
+"fe" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/dirt,/obj/machinery/smartfridge,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
 "ff" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/structure/filingcabinet/filingcabinet,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "fg" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/structure/filingcabinet,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
-"fh" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/beige/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/item/weapon/paper/crumpled,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
+"fh" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "fi" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/writing{tag = "icon-tracks (SOUTHWEST)"; icon_state = "u_guilty_l"; dir = 10; message = "i t wasnt œr fælt"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "fj" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/window/reinforced/full,/obj/structure/grille,/turf/simulated/floor/tiled/white,/area/achlys/three/z1sechallway)
 "fk" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/random/firstaid,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
@@ -274,7 +274,7 @@
 "fn" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/firstaid/surgery,/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/paper{info = "Autopsy Report:<BR><BR><BR>Name: Simon Carter.<BR><BR>Description: Simon was a thirty four(34) year old caucasian male weighing two hundred and fifteen(215) pounds. He is registered as a maintenance technician under his occupational status and was found dead in the maintenance tunnels. Large lacerations running vertically down his back severing his spine below the eighth(8) vertebrae. All prisoners accounted for at the time. A murder investigation will commence tomorrow.<BR><BR>End Report"},/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
 "fo" = (/obj/effect/decal/cleanable/dirt,/obj/structure/vent,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint3)
 "fp" = (/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint3)
-"fq" = (/obj/machinery/light,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint3)
+"fq" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/beige/diagonal,/obj/item/weapon/pen/red,/obj/item/weapon/paper/crumpled,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "fr" = (/obj/structure/lattice,/turf/simulated/wall/strong,/area/achlys)
 "fs" = (/obj/structure/lattice,/turf/space,/area/space)
 "ft" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl3"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
@@ -303,7 +303,7 @@
 "fQ" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/closet/secure_closet/medical2,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
 "fR" = (/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
 "fS" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
-"fT" = (/obj/machinery/light/small{dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
+"fT" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/beige/diagonal,/obj/item/weapon/pen/red,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "fU" = (/obj/effect/decal/cleanable/dirt,/obj/item/ammo_casing/a127_saphe,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "fV" = (/turf/simulated/wall/strong,/area/achlys/nine/z1bridge)
 "fW" = (/obj/structure/window/reinforced/projresist,/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk4,/area/space)
@@ -318,10 +318,10 @@
 "gf" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/grille/broken,/obj/item/weapon/material/shard{icon_state = "medium"},/obj/structure/floodspawner{spawn_spot_x = 115; spawn_spot_y = 64},/turf/simulated/floor/tiled/white,/area/achlys/three/z1sechallway)
 "gg" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/writing{tag = "icon-tracks (SOUTHWEST)"; icon_state = "u_guilty_l"; dir = 10; message = "i t wasnt œr fælt"},/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_psycopath"},/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl3"},/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
 "gh" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/dirt,/obj/item/weapon/material/knife/combat_knife,/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl2"},/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
-"gi" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/decal/cleanable/dirt,/obj/machinery/smartfridge,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
+"gi" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/machinery/light/small/emergency{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
 "gj" = (/obj/structure/sign/warning/nosmoking_2,/turf/simulated/wall/strong,/area/achlys/six/z1infirmary)
 "gk" = (/obj/machinery/door/airlock/highsecurity{locked = 1; name = "Security Checkpoint"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
-"gl" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
+"gl" = (/obj/effect/decal/cleanable/dirt,/obj/structure/vent,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom1)
 "gm" = (/obj/structure/window/reinforced/projresist,/obj/structure/lattice,/turf/simulated/floor/reinforced/airless,/area/space)
 "gn" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
 "go" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/glass/black,/obj/item/weapon/paper{info = "Leaving this here for posterity but I've already raised my concerns with the captain. Seeing spooks get excited is never a good thing no matter how many credits are going into your bank account. They perked up after we picked those crash survivors up over past Tio Beta and wanted us to come to Soell for some reason. Same place the UNSC even said was a no fly zone? I'm retiring as soon as we get back into known space. God knows I can afford it now."},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
@@ -332,11 +332,11 @@
 "gt" = (/obj/structure/table/steel,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "gu" = (/obj/item/ammo_casing/a762,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "gv" = (/obj/structure/table/steel,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"gw" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/beige/diagonal,/obj/item/weapon/pen/red,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/item/weapon/paper/crumpled,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
+"gw" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "gx" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/structure/filingcabinet/chestdrawer,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "gy" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/obj/item/ammo_casing/a127_saphe,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "gz" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/structure/filingcabinet/filingcabinet{icon_state = "tallcabinet-open"},/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
-"gA" = (/obj/structure/table/glass,/obj/effect/floor_decal/corner/beige/diagonal,/obj/item/weapon/pen/red,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
+"gA" = (/obj/effect/decal/cleanable/blood/drip,/obj/structure/false_light{icon_state = "bulb1"; dir = 2},/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
 "gB" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/item/weapon/material/shard{icon_state = "small"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "gC" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/blood/writing,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "gD" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/effect/decal/cleanable/blood/writing{dir = 4; icon_state = "tracks"; message = "tell mama I didnt do it"; pixel_y = 32; tag = "icon-tracks (EAST)"},/turf/simulated/floor/tiled/white,/area/achlys/three/z1sechallway)
@@ -346,6 +346,7 @@
 "gH" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/obj/effect/decal/cleanable/dirt,/obj/structure/mirror{icon_state = "mirror_broke"; pixel_x = -32; tag = "icon-mirror_broke"},/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom1)
 "gI" = (/obj/structure/toilet{dir = 8},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom1)
 "gJ" = (/obj/effect/decal/cleanable/blood/writing{dir = 10; icon_state = "tracks"; message = "FUCK THE UNSC"; tag = "icon-tracks (SOUTHWEST)"},/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
+"gK" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "gL" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
 "gM" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_ketchup_l"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "gN" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_dangerous_l"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
@@ -353,7 +354,7 @@
 "gP" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl4"},/turf/simulated/floor/tiled/dark,/area/achlys/seven/z1bridgewalkway)
 "gQ" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/seven/z1bridgewalkway)
 "gR" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/machinery/light/small/emergency{tag = "icon-bulb1 (NORTH)"; icon_state = "bulb1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/seven/z1bridgewalkway)
-"gS" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
+"gS" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
 "gT" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
 "gU" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/glass/black,/obj/item/weapon/material/ashtray/glass,/obj/random/glasses,/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
 "gV" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk2,/area/space)
@@ -363,9 +364,10 @@
 "gZ" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "ha" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/item/weapon/paper{icon_state = "newspaper"},/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
 "hb" = (/obj/effect/floor_decal/corner/beige/diagonal,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tech/white,/area/achlys/six/z1offices)
+"hc" = (/obj/structure/closet{icon_state = "open"; opened = 1},/obj/item/weapon/handcuffs/cable/red,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/two/z1malelocker)
 "hd" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/bed/chair/office/light,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
-"he" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
-"hf" = (/obj/machinery/light/small,/obj/effect/decal/cleanable/dirt,/obj/structure/vent,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom1)
+"he" = (/obj/structure/closet,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/two/z1femlocker)
+"hf" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint4)
 "hg" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom1)
 "hh" = (/obj/machinery/door/airlock/hatch{name = "Bathroom"},/obj/structure/floodspawner{spawn_spot_x = 120; spawn_spot_y = 61},/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom1)
 "hi" = (/obj/effect/decal/cleanable/blood/splatter,/obj/effect/decal/cleanable/blood/gibs/core,/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
@@ -380,7 +382,7 @@
 "hr" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
 "hs" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk5,/area/space)
 "ht" = (/obj/structure/closet/crate,/obj/item/weapon/ore/silver,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
-"hu" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
+"hu" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/false_light,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "hv" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "hw" = (/obj/effect/decal/cleanable/dirt,/obj/item/ammo_casing/a762,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "hx" = (/obj/structure/table/steel,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/item/device/megaphone,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
@@ -392,7 +394,7 @@
 "hD" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/standard,/obj/item/weapon/pen/red,/obj/item/weapon/paper_bin,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
 "hE" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/dirt,/obj/random/firstaid,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
 "hF" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/bed/padded,/turf/simulated/floor/tiled/white,/area/achlys/six/z1infirmary)
-"hG" = (/obj/effect/decal/cleanable/blood/drip,/obj/machinery/light/small,/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
+"hG" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "hH" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mfloor4"},/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
 "hI" = (/obj/item/ammo_casing/a127_saphe,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "hJ" = (/obj/machinery/door/airlock/vault{locked = 1; name = "Bridge Access"; welded = 1},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1commandhallway)
@@ -401,7 +403,7 @@
 "hM" = (/obj/structure/window/reinforced/projresist,/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/glass/black,/obj/item/weapon/reference,/obj/item/weapon/research{tag = "retrievethis"},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1bridge)
 "hN" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk9,/area/space)
 "hO" = (/obj/structure/fireaxecabinet,/turf/simulated/wall/strong,/area/achlys/six/z1offices)
-"hP" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
+"hP" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "hQ" = (/obj/machinery/door/airlock/highsecurity{locked = 1; name = "Security Checkpoint"},/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
 "hR" = (/obj/structure/sign/directions/bridge{icon_state = "direction_bridge"; dir = 4},/turf/simulated/wall/strong,/area/achlys)
 "hS" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/lattice,/turf/simulated/floor/reinforced/airless,/area/space)
@@ -422,10 +424,10 @@
 "ih" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/achlys/two/z1femlocker)
 "ii" = (/obj/structure/closet{opened = 1},/obj/effect/decal/cleanable/cobweb2,/obj/item/weapon/tank/emergency/oxygen,/turf/simulated/floor/tiled,/area/achlys/two/z1femlocker)
 "ij" = (/turf/simulated/wall/strong,/area/achlys/two/z1femlocker)
-"ik" = (/obj/machinery/light/small{dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1bathroom1)
+"ik" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom2)
 "il" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/lattice,/turf/simulated/floor/tranquility/catwalk9,/area/space)
 "im" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/six/z1offices)
-"in" = (/obj/structure/closet{icon_state = "open"; opened = 1},/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/item/weapon/handcuffs/cable/red,/turf/simulated/floor/tiled,/area/achlys/two/z1malelocker)
+"in" = (/obj/effect/floor_decal/corner/orange/three_quarters{tag = "icon-corner_white_three_quarters (EAST)"; icon_state = "corner_white_three_quarters"; dir = 4},/obj/effect/decal/cleanable/blood/drip,/obj/structure/vent,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint1)
 "io" = (/obj/effect/floor_decal/corner/red/three_quarters{tag = "icon-corner_white_three_quarters (WEST)"; icon_state = "corner_white_three_quarters"; dir = 8},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/two/z1malelocker)
 "ip" = (/obj/effect/floor_decal/corner/red/three_quarters{tag = "icon-corner_white_three_quarters (NORTH)"; icon_state = "corner_white_three_quarters"; dir = 1},/obj/effect/decal/cleanable/blood/drip,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/tiled,/area/achlys/two/z1malelocker)
 "iq" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/two/z1malelocker)
@@ -440,9 +442,9 @@
 "iz" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/two/z1malelocker)
 "iA" = (/obj/effect/floor_decal/corner/purple/three_quarters,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/two/z1femlocker)
 "iB" = (/obj/item/weapon/stool/padded,/obj/effect/floor_decal/corner/purple/three_quarters{tag = "icon-corner_white_three_quarters (EAST)"; icon_state = "corner_white_three_quarters"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/two/z1femlocker)
-"iC" = (/obj/structure/closet,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/two/z1femlocker)
+"iC" = (/obj/structure/sofa/left{tag = "icon-sofaend_left (EAST)"; icon_state = "sofaend_left"; dir = 4},/obj/effect/decal/cleanable/blood/drip,/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "iD" = (/turf/simulated/wall/strong,/area/achlys/five/z1secpoint4)
-"iE" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint4)
+"iE" = (/obj/structure/closet/secure_closet{icon_state = "secureopen"; locked = 0; opened = 1},/obj/item/weapon/handcuffs/cable/red,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "iF" = (/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint4)
 "iG" = (/obj/structure/vent,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint4)
 "iH" = (/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
@@ -467,7 +469,7 @@
 "ja" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl4"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "jb" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "jc" = (/obj/item/ammo_casing/a127_saphe,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
-"jd" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
+"jd" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "je" = (/obj/machinery/door/airlock/command{locked = 1; name = "Command"; welded = 1},/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/door/blast/regular/open{name = "Command"},/turf/simulated/floor/tiled/dark,/area/achlys/nine/z1commandhallway)
 "jf" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "writing3"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "jg" = (/turf/simulated/floor/stairs/stairsdark,/area/achlys/eight/z1main)
@@ -477,7 +479,7 @@
 "jk" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/doorwreckage{name = "wrecked airlock"},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "jl" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/machinery/door/airlock/hatch{desc = "Bathroom"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
 "jm" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 9},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
-"jn" = (/obj/machinery/light/spot{dir = 1},/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
+"jn" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "jo" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "jp" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "jq" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 5},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
@@ -496,11 +498,12 @@
 "jD" = (/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "jE" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "jF" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
-"jG" = (/obj/machinery/light/spot{dir = 4},/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
+"jG" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "jH" = (/obj/structure/sign/warning/docking_area{pixel_x = -32},/obj/item/ammo_casing/a762,/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "jI" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl2"},/turf/simulated/floor/plating,/area/achlys/eight/z1main)
 "jJ" = (/obj/structure/table/reinforced,/obj/item/weapon/pen/red,/obj/item/weapon/paper_bin,/obj/machinery/door/blast/regular{name = "Security Checkpoint"},/obj/item/device/destTagger,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint1)
 "jK" = (/obj/effect/floor_decal/corner/orange{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/obj/structure/bed/chair/office/dark{dir = 8},/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint1)
+"jL" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "jM" = (/obj/effect/decal/cleanable/blood/splatter{dir = 8},/turf/simulated/wall/strong,/area/achlys)
 "jN" = (/obj/effect/decal/cleanable/blood/writing{dir = 10; icon_state = "tracks"; message = "i t wasnt œr fælt"; tag = "icon-tracks (SOUTHWEST)"},/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "jO" = (/obj/effect/decal/cleanable/blood/splatter,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
@@ -508,13 +511,14 @@
 "jQ" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl3"},/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "jR" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "jS" = (/obj/structure/toilet{dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom2)
-"jT" = (/obj/machinery/light/small,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/five/z1bathroom2)
+"jT" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "jU" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mfloor4"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "jV" = (/obj/structure/doorwreckage{name = "Maintenance"},/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "jW" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 4},/turf/simulated/floor/plating,/area/achlys/five/z1ladder2)
 "jX" = (/obj/structure/ladder,/turf/simulated/floor/plating,/area/achlys/five/z1ladder2)
 "jY" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1ladder2)
 "jZ" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
+"ka" = (/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "kb" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "kc" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "kd" = (/obj/effect/floor_decal/industrial/warning/dust/corner{icon_state = "warningcorner_dust"; dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
@@ -524,9 +528,9 @@
 "kh" = (/obj/effect/decal/cleanable/dirt,/obj/item/ammo_casing/a762,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "ki" = (/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (NORTH)"; icon_state = "rwindow"; dir = 1},/obj/structure/window/reinforced/projresist{tag = "icon-rwindow (EAST)"; icon_state = "rwindow"; dir = 4},/obj/structure/grille,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint1)
 "kj" = (/obj/effect/floor_decal/corner/orange/three_quarters,/obj/structure/filingcabinet,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint1)
-"kk" = (/obj/effect/floor_decal/corner/orange/three_quarters{tag = "icon-corner_white_three_quarters (EAST)"; icon_state = "corner_white_three_quarters"; dir = 4},/obj/effect/decal/cleanable/blood/drip,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/vent,/turf/simulated/floor/tiled,/area/achlys/five/z1secpoint1)
+"kk" = (/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/industrial/warning/dust,/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "kl" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl3"},/turf/simulated/wall/strong,/area/achlys)
-"km" = (/obj/structure/sofa/left{tag = "icon-sofaend_left (EAST)"; icon_state = "sofaend_left"; dir = 4},/obj/effect/decal/cleanable/blood/drip,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts/police,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
+"km" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "kn" = (/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/obj/effect/decal/cleanable/blood/splatter,/obj/item/weapon/melee/telebaton,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "ko" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "kp" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z1ladder2)
@@ -542,7 +546,7 @@
 "kz" = (/obj/structure/sofa{tag = "icon-sofamiddle (EAST)"; icon_state = "sofamiddle"; dir = 4},/obj/effect/decal/cleanable/blood/splatter,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "kA" = (/obj/effect/decal/cleanable/blood/drip,/obj/item/ammo_casing/shotgun/beanbag{icon_state = "bshell-spent"; projectile_type = null},/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "kB" = (/obj/structure/bed/chair/comfy/black{dir = 1},/turf/simulated/floor/lino,/area/achlys/two/z1hos)
-"kD" = (/obj/structure/closet/secure_closet{icon_state = "secureopen"; locked = 0; opened = 1},/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/item/weapon/handcuffs/cable/red,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
+"kC" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "kE" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "kF" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "tracks"},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "kG" = (/obj/structure/largecrate,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
@@ -571,27 +575,22 @@
 "ld" = (/obj/structure/floodspawner{spawn_spot_x = 104; spawn_spot_y = 43},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "le" = (/obj/structure/closet/coffin,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lf" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
-"lg" = (/obj/effect/decal/cleanable/blood/splatter,/obj/machinery/light,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "lh" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/lino,/area/achlys/two/z1hos)
 "li" = (/obj/effect/decal/cleanable/blood/splatter{dir = 6},/turf/simulated/wall/strong,/area/achlys)
 "lj" = (/obj/structure/m_tray,/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "lk" = (/obj/effect/decal/cleanable/blood/splatter,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "ll" = (/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
-"lm" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "ln" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/obj/effect/decal/cleanable/blood/splatter{icon_state = "writing1"},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lo" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 8},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lp" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "gibdown1"},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lq" = (/obj/structure/ore_box,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lr" = (/obj/structure/ore_box,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
-"ls" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
-"lt" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "lu" = (/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "lv" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "gibtorso_flesh"},/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "lw" = (/obj/machinery/door/morgue{name = "Morgue"},/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "lx" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_guilty_l"},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "ly" = (/obj/effect/floor_decal/industrial/warning/dust/corner{icon_state = "warningcorner_dust"; dir = 4},/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lz" = (/obj/effect/floor_decal/industrial/warning/dust/corner{icon_state = "warningcorner_dust"; dir = 1},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
-"lA" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lB" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl4"},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lC" = (/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lD" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl2"},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
@@ -599,7 +598,6 @@
 "lF" = (/obj/effect/decal/cleanable/dirt,/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 87; spawn_spot_y = 42},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lG" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lH" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mfloor4"},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
-"lI" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 4},/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lJ" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "mgibbl2"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lK" = (/obj/effect/decal/cleanable/blood/splatter,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "lL" = (/obj/effect/decal/cleanable/blood/splatter{icon_state = "u_dangerous_l"},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
@@ -609,7 +607,6 @@
 "lP" = (/obj/structure/table/reinforced,/obj/item/weapon/mop,/obj/item/weapon/staff/broom,/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "lQ" = (/obj/structure/janitorialcart,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/two/z1morgue)
 "lR" = (/obj/effect/floor_decal/industrial/warning/dust{icon_state = "warning_dust"; dir = 10},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
-"lS" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot,/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lT" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lU" = (/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
 "lV" = (/obj/effect/floor_decal/industrial/warning/dust,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/one/z1hangerhallway)
@@ -620,8 +617,6 @@
 "ma" = (/obj/structure/largecrate,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "mb" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "mc" = (/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
-"md" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
-"me" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "mf" = (/obj/structure/largecrate,/obj/effect/decal/cleanable/blood/splatter{pixel_x = 32},/turf/simulated/floor/plating,/area/achlys/four/z1hangerbay)
 "mg" = (/obj/machinery/door/blast/regular/triple,/turf/simulated/floor/plating,/area/achlys)
 "mh" = (/turf/simulated/floor/plating,/area/achlys)
@@ -739,12 +734,12 @@ abababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaoapaqaraqaoaoaoaoarasaqaoaoatauavawaxauauayauazawauamaAaBaCamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaoaDaEaFaGaEaoaqaEaEaEaqaqaoatauauauauawauauawauauawaHaIaAaJamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaoaKaLaLaLaLaMaNaLaLaLaLaqaoaOaOaPaOauawamauauamauauamaJaIaCamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaqaQaLaLaLaLaRaSaLaLaLaLaoaoaTaUaVaOauaWamaXaXamauauamaJaYaZamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaqaQaLaLaLaLaRaSaLaLaLaLaoaoaTaUaVaOauawamaXaXamauauamaJaYaZamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaoaQaLaLaLaLbaaSaLaLaLaLaobbbcbdbeaOauauamaXaXamawawambfbgbhamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 abababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafaeafafafafafafafafafaeafafafafafafafafafafafafaqaQaLaLaLaLaMbiaLaLaLaLaoaqbjbkblaObmbmbnamamboaubpambqbrbsamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafafaeafafafafafafafafafaeafafafafafafafafafafafafaoaNaLaLaLaLbtbuaLaLaLaLaoaoaObvaOaOawbwauawawauawauambxbyaCamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafafaeafafafafafafafafafaeafafafafafafafafafafafafaoaNaLaLaLaLbtbuaLaLaLaLaoaoaObvaOaOawbwauawawauawauambxaWaCamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbzbAbAbAbAafafaeafafbAbBbAbAbCafafaeafafbDbEbDbFbGafafafafafaoaQaLaLaLaLbtbtaLaLaLaLbHaobIbIbIbIauawbJauawauauawamamamamamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAbAbzbCbAafafaeafafbAbKbAbAbAafafaeafafbGbDbDbGbGafafafafafaoaQaLaLaLaLaLaLaLaLaLaLaMbLbIbIbIbIbMbNbIbIbIbOauaWambPbQbQamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAbAbzbCbAafafaeafafbAbKbAbAbAafafaeafafbGbDbDbGbGafafafafafaoaQaLaLaLaLaLaLaLaLaLaLaMbybIbIbIbIbMbNbIbIbIbOaubLambPbQbQamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAbRbAbSbAafafaeafafbAbAbSbAbAafafaeafafbDbDbGbTbDafafafafafaqaQbtbtbUaLaLaLaLaLaLbtaMaobIbIbVbWbWbWbWbWbIbIbXaubYbZcacbamamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAbAbzbAbzafafaeafafbAbCbAbKbAafafaeafafccbDbDbDbDafafafafafcdaQaLaLaLaLaLaLaLaLaLaLbHaqbIbIbWbWcecfbVbWbIbIaucgchcicjckclamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAbzcmbBbzafafaeafafbAcnbAbSbAafafaeafafbDbGbEbDbDafafafafafaoaQaLaLaLaLaLaLaLaLaLaLaMaqbIbIbWcocpcqcqcrbIbIauawbYcsctciclamajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
@@ -757,42 +752,42 @@ abababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafdkafafafafafafafafafdlafafafafafafafafafdmafafafafafafafaoaoaoaodnaqaoaoaoaqdoaoaoaobIbIbWbVbWbVbWbVbIbIawauaxbwdpajajajajafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafdqafafafafafafafafafdrafafafafafafafafafdqafafafafafafafaoaqdsdsdsdsdsdsdsdsdsdsaqaobIbIbIbIdtbMbIbIbIbIauawdudvdjajajdwajafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafdxdxdydydydydydzdydAdBdydydzdydydydydydydydydydydydydydCdydBdBdybAaodsdsdsdsdsdsdsdsdsdsaoaobIbIbIbIauaubIbIbIbIauauaudDajajdwdEakafdFdGdFafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafdHdxdxbAbzbAbAbAbzbzbAbAdIbAcLbAbAbAbzbAbAbAbzbAbAbAbAbzbAdJdKbAbAbAdLdMdsdsdsdsdsdsdsdsdsaoaqbIbIbIbIawawbIaXaXbIauauajajajajdwakaldNdOdPdQafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafdxdxdRdRdRdRdRdRdSdRdSdTdRdRdRdRdRdRdSdUdRdRdRdSdRdRdRdRdTdRdRdVbzaodsdsdsdsdsdsdsdsdsdsaoaobIbIbIbIauaubIaXaXbIawawajajajajajdWakafdGdFdFafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafdXafafafafafafafafafdXafafafafafafafafafdXafafafafafafafaqaqdsdsdsdsdsdsdsdsdsdsaoaobIbIbIbIdgaubIauaubIauaWajajdwajajakakdYafafafafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafdHdxdxbAbzbAbAbAbzbzbAbAdIbAcLbAbAbAbzbAbAbAbzbAbAbAbAbzbAdJdKbAbAbAbydMdsdsdsdsdsdsdsdsdsaoaqbIbIbIbIawawbIaXaXbIauauajajajajdwakaldNdOdPdLafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafdxdxdRdRdRdRdRdRdSdRdSdTdRdRdRdRdRdRdSdQdRdRdRdSdRdRdRdRdTdRdRdVbzaodsdsdsdsdsdsdsdsdsdsaoaobIbIbIbIauaubIaXaXbIawawajajajajajdUakafdGdFdFafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafdXafafafafafafafafafdXafafafafafafafafafdXafafafafafafafaqaqdsdsdsdsdsdsdsdsdsdsaoaobIbIbIbIdgaubIauaubIaubLajajdwajajakakdYafafafafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafdZafafafafafafafafafeaafafafafafafafafafeaafafafafafafafaoebaoaraqaoaoaqaqaraoaoaqaqecedauawauauawauaueebJbwbmawauefegakalakakakeheiejafakahagekababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaecXcXcXafafbAelemelbAafafaeafafbAbBeobAbAafafaeafafbAbSepbAbzafafafafafaoaoaEaEaGaEaoeqaEaEaGeresaoececawauauauauaueteuevbmauawauewegakalakakexalakeyezakeAajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaecXcXcXafafbAelemelbAafafaeafafbAbBeobAbAafafaeafafbAbSepbAbzafafafafafaoaoaEaEaGaEaoeqaEaEaGeresaoececawauauauauaueteuevbmauawauewegakalakakdWalakeyezakakajafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAbzfbbAelafafaeafafbzbAbAbSbAafafaeafafbzbBbAbCbzafafafafafaoaNaLaLaLaLaMaQaLaLaLaLaMaoecececeCeceDecauaweEeEeFeGeEeHeIeIeJeKeLeIeIeMakalafakahagekababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafeNbzelbzbAafafaeafafeObAbzbAbAafafaeafafbAbAbAbAbAafafafafafaoaNaLaLaLaLaMaNaLaLaLaLaMaqecePeQeReSeTecaucgeEeUeVeVeWeEeIeIeXeYeZeIeIeIdWakafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAfacmfbelafafaeafafbAbSbAbBbAafafaeafafbAbAfcbAbAafafafafafaoaQaLaLaLaLaMfdaLaLaLaLbHaoecfeffeSfgfheccgfifjfkflfmfneEeIeIfofpfqeIeIeIakakafafafaffrfsfsfsfsfsfsababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafeNbzelbzbAafafaeafafeObAbzbAbAafafaeafafbAbAbAbAbAafafafafafaoaNaLaLaLaLaMaNaLaLaLaLaMaqecePeQeReSeTecaucgeEeUeVeVeWeEeIeIeXeYeZeIeIeIdUakafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAfacmfbelafafaeafafbAbSbAbBbAafafaeafafbAbAfcbAbAafafafafafaoaQaLaLaLaLaMfdaLaLaLaLbHaoecexffeSfghBeccgfifjfkflfmfneEeIeIfofpeXeIeIeIakakafafafaffrfsfsfsfsfsfsababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafelfbfbbAfbafafaeafafbBbAbAbAbzafafaeafafbCbAcmbAbAafafafafafaoaQaLaLaLaLfuaQaLaLaLaLaMaoecePfvfwfxeTecdgenfjeVfzfAfBeEfCfCfCfDfCfCfCfCalakafafafafafafaeaefsfsfsfsfsfsfsfsfsfsfsfsfsababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbzbAbAelfbafafaeafafbAbAbAfEbzafafaeafafbzbAbSbBbAafafafafafaqaNaLaLaLaLfFaQaLaLaLaLaMaqecfGfHfIfJfKfLawfMfjfNfOfPfQeEfCfCfCfRfSfTfCfCakfUafafafafafaeaeaefsabfsfsabfsfsfVfVfVfVfVfWfWfWfXabababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAfYfbfaelafafaeafafbAbAbCbAbSafafaeafafbzbAbAbAbzafafafafafaoaQaLaLaLaLbHgaaLaLaLaLaMaoeceTgbgcgdeTfLdhgegfaaggghgigjfCfCfCfCfCgkfCfCakglafafgmgmgmgmgmgmfWfWfWfWfWfWfWfWfWfWfVfVacgogngpgqababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafgrbAeBbAbzafafaeafafbAbzbAbAbAafafaeafafbAbAbAbzbAafafafafafaoaNaLaLaLgtaogugvaLaLaLaMbLecgwgxgygzgAecgBgCgDgEeVgFgGeEfCgHgIfCgJgLgLfCgMgNgOgPgQgQgQgQgRgQgQgQgRgQgQgQgRgQgQgQgQfVgSgTgTgTgUgVabababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafaffbfbbAbAgWafafaeafafbzbzbAbAeOafafaeafafbAbBbAbAbAafafafafafaoaQbtbtbtbHgXgYaNbtbtbtbHaqeceTgZhahbeTfLawftfjhdfAeVheeEfChfhghhfShihjhkhlhmhnhohphphphphphphphphphphphphphphphphphqgTgTgTgThrhsabababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAgWbzbAbAafafaeafafbAbAbSbBbAafafaeafafbAbAhtbAbCafafafafafhuaNaLaLaLhvguhwhxaLaLaLaMaoechyfHhzhAhBfLhCaueEhDhEeVhFeEfCfCfCfChGhHgLfCalhIhJhKhKhKhKhKhLhKhKhKhLhKhKhKhLhKhKhKhKfVgSgTgTgThMhNabababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbzbzfbeleNafafaeafafbAbBbAbAbSafafaeafafbAbAbAbSbAafafafafafaoaNaLaLaLaLaMaQaLaLaLaLaMaoececechOecececauhPeEeEeEeEeEeEfCfCfCfCfChQfCfCakglhRafhShShShShShShThThThThThThThThThTfVfVadhVhUhWhXababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafafaeafafafafafafafafafaeafafafafafafafafafafafafaoaQaLaLaLaLhYhZaLaLaLaLbHiaececibicidieecauaweEifigihiiijfCfCfCikfSfRfCfCakalafafafafafaeaeaefsabfsfsabfsfsfVfVfVfVfVhThThTilabababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafaeafafafafafafafafafaeafafafafafafafafafafafafaoaQaLaLaLaLfuaNaLaLaLaLbHaqeciminioipiqchauawchirisitiuijfCfCfCivfCfCfCfCalalafafafafafafaeaefsfsfsfsfsfsfsfsfsfsfsfsfsababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaoaQaLaLaLaLfFaNaLaLaLaLaMaoececiwixiyizchcgauchiriAiBiCijiDiDiEiFiGiDiDiDakiHafafafaffrfsfsfsfsfsfsababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafiaaQaLaLaLaLaMaQaLaLaLaLaMaoecimiIiJiciKecawauijigiLihiMijiDiDiNiOiPiDiDiDdWalafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbzbAbAelfbafafaeafafbAbAbAfEbzafafaeafafbzbAbSbBbAafafafafafaqaNaLaLaLaLfFaQaLaLaLaLaMaqecfGfHfIfJfKfLawfMfjfNfOfPfQeEfCfCfCfRfSeAfCfCakfUafafafafafaeaeaefsabfsfsabfsfsfVfVfVfVfVfWfWfWfXabababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAfYfbfaelafafaeafafbAbAbCbAbSafafaeafafbzbAbAbAbzafafafafafaoaQaLaLaLaLbHgaaLaLaLaLaMaoeceTgbgcgdeTfLdhgegfaaggghfegjfCfCfCfCfCgkfCfCakfhafafgmgmgmgmgmgmfWfWfWfWfWfWfWfWfWfWfVfVacgogngpgqababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafgrbAeBbAbzafafaeafafbAbzbAbAbAafafaeafafbAbAbAbzbAafafafafafaoaNaLaLaLgtaogugvaLaLaLaMbyecfqgxgygzfTecgBgCgDgEeVgFgGeEfCgHgIfCgJgLgLfCgMgNgOgPgQgQgQgQgRgQgQgQgRgQgQgQgRgQgQgQgQfVgigTgTgTgUgVabababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafaffbfbbAbAgWafafaeafafbzbzbAbAeOafafaeafafbAbBbAbAbAafafafafafaoaQbtbtbtbHgXgYaNbtbtbtbHaqeceTgZhahbeTfLawftfjhdfAeVeVeEfCglhghhfShihjhkhlhmhnhohphphphphphphphphphphphphphphphphphqgTgTgTgThrhsabababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbAgWbzbAbAafafaeafafbAbAbSbBbAafafaeafafbAbAhtbAbCafafafafafgwaNaLaLaLhvguhwhxaLaLaLaMaoechyfHhzhAhBfLhCaueEhDhEeVhFeEfCfCfCfCgAhHgLfCalhIhJhKhKhKhKhKhLhKhKhKhLhKhKhKhLhKhKhKhKfVgTgTgTgThMhNabababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafbzbzfbeleNafafaeafafbAbBbAbAbSafafaeafafbAbAbAbSbAafafafafafaoaNaLaLaLaLaMaQaLaLaLaLaMaoececechOecececaugKeEeEeEeEeEeEfCfCfCfCfChQfCfCakfhhRafhShShShShShShThThThThThThThThThTfVfVadhVhUhWhXababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafafaeafafafafafafafafafaeafafafafafafafafafafafafaoaQaLaLaLaLhYhZaLaLaLaLbHiaececibicidieecauaweEifigihiiijfCfCfCgSfSfRfCfCakalafafafafafaeaeaefsabfsfsabfsfsfVfVfVfVfVhThThTilabababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafaeafafafafafafafafafaeafafafafafafafafafafafafaoaQaLaLaLaLfuaNaLaLaLaLbHaqecimhcioipiqchauawchirisitiuijfCfCfCivfCfCfCfCalalafafafafafafaeaefsfsfsfsfsfsfsfsfsfsfsfsfsababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafaoaQaLaLaLaLfFaNaLaLaLaLaMaoececiwixiyizchcgauchiriAiBheijiDiDhfiFiGiDiDiDakiHafafafaffrfsfsfsfsfsfsababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafiaaQaLaLaLaLaMaQaLaLaLaLaMaoecimiIiJiciKecawauijigiLihiMijiDiDiNiOiPiDiDiDdUalafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafapaQaLaLaLaLbHaQaLaLaLaLaMaqececececececiQcgawijijijijijijiDiDiRiSiTiDiDiDakalafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafaoiUdcdcdddcaoapdcdcdcddapiVatawiWiXiXiXawauaxauawazawauiYiZegjaakakakalakakakafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafaojbaqaodoaqaqaojbaodnapjcaoatauaujdawawaucgauawawauawauauawjejfalakakexakalakafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafaojbaqaodoaqaqaojbaodnapjcaoatauauhuawawaucgauawawauawauauawjejfalakakdWakalakafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafafafafafafafafafafafafafafafjgjhjhjijijjafafafafjkafafafafafjlafafafakakafafafafafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafdHafafafafjmjnjojpjojojojqafapaoaojrjsjtafafafjujvjwjxafafjyjzafafafakakafjAjAjAafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafjBjBjBafafafjCjDjDjDjEjFjFjGafjHjIbbjJjKfydYjMjNjOjPjQjRdYafjSjTafafafjUaljVjWjXjYafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafjBjBjBafafafjCjZfZkbkckdjDkeafkfkgkhkikjkkklafkmjQknkojvdYafafafafafafdWakafjAjAkpafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafjCjDkqafafafjCkrksktafkukvkwafkxkykxafafafafafkzkAkBgskDafafafafafafafakiHafafafafafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafafdHafafafafjmhGjojpjojojojqafapaoaojrjsjtafafafjujvjwjxafafjyjzafafafakakafjAjAjAafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafjBjBjBafafafjCjDjDjDjEjFjFhPafjHjIbbjJjKfydYjMjNjOjPjQjRdYafjSikafafafjUaljVjWjXjYafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafjBjBjBafafafjCjZfZkbkckdjDkeafkfkgkhkikjinklafiCjQknkojvdYafafafafafafdUakafjAjAkpafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+ababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafafafafjCjDkqafafafjCkrksktafkukvkwafkxkykxafafafafafkzkAkBgsiEafafafafafafafakiHafafafafafafafafafafafababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjCjDkEafafafjCkFkqafkGkHkIkIkJkKkIkIkLkIkHafkMkNkOkPkQkRafkSkTkSkUkSafakalafalahagafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjCjDkVafafafkWkXkqafkYkZlalblckHldkfkHlekHafafaflflglhliafljlkljkTljafakakllaklmajafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjCjFlnafafaflokXkqafkIkfkZkGlpkhlqkZkflrlsdYafafafafafafafltlulvkTkTlweiglafakahagafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjClxlyjojojolzjDkqaflAlrlBkHkIkhkHkHlCkIlDdYafafafafafafafkTkTkUkTlklEakalafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjClFjFjFlGlHjDjDlIafkHkIlJlKkhlLkGkHlMlNkHafafafafafafafaflOlPlQlOlOafalalafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafaflRlSlTlTlUlTlTlVlWaflekIkHlqkIlXkHlDkHkHkGafafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjCjDkVafafafkWkXkqafkYkZlalblckHldkfkHlekHafafaflfjdlhliafljlkljkTljafakakllakjnajafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjCjFlnafafaflokXkqafkIkfkZkGlpkhlqkZkflrjGdYafafafafafafafjLlulvkTkTlweiakafakahagafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjClxlyjojojolzjDkqafjTlrlBkHkIkhkHkHlCkIlDdYafafafafafafafkTkTkUkTlklEakalafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafjClFjFjFlGlHjDjDkaafkHkIlJlKkhlLkGkHlMlNkHafafafafafafafaflOlPlQlOlOafalalafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafaflRkklTlTlUlTlTlVlWaflekIkHlqkIlXkHlDkHkHkGafafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafafafafafafkHlCkHlYkZlZkHlelqkIkHafafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafafafafafafkHkHmambkIkIkIkHkHmcmdafafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
-abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafafafafafafmemckIkZkHkHkGkZkHkKmfdYafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafafafafafafkHkHmambkIkIkIkHkHmckmafafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
+abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafafafafafafkCmckIkZkHkHkGkZkHkKmfdYafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafafafafafafkHkHkHkHkHkHkHkHkHlKkKdYafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafmgmhmhmimgmhmhmimgmhmhafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
 abababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababafafafafafafafafafafafafafafafafafafafabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab
