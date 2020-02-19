@@ -2,42 +2,13 @@
 
 // x52 stuff
 
-/obj/item/clothing/under/x52/x52jumpsuit
-	name = "X-52 Researcher Uniform"
-	desc = "A classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
-	item_state = "x52nerd obj"
-	icon_state = "x52nerd obj"
-	worn_state = "x52nerdworn"
-	armor = list(melee = 10, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = "x52nerd obj",
-		slot_r_hand_str = "x52nerd obj",
-		)
-
-/obj/item/clothing/under/x52/x52RDjumpsuit
-	name = "X-52 Researcher Director Uniform"
-	desc = "A  classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
-	item_state = "x52headnerd obj"
-	icon_state = "x52headnerd obj"
-	worn_state = "x52headnerdworn"
-	armor = list(melee = 10, bullet = 10, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = "x52headnerd obj",
-		slot_r_hand_str = "x52headnerd obj",
-		)
-
 /obj/item/clothing/suit/storage/toggle/x52vest
 	name = "X-52 Researcher Vest"
 	desc = "A  classy brown vest that has a x-52 patch on it with pockets"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
-	item_state = "vestobj"
-	icon_open = "vestworn"
-	icon_closed = "vestworn"
+	item_state = "vestworn"
+	icon_state = "vestobj"
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
@@ -50,9 +21,8 @@
 	desc = "A  classy brown jacket that has a x-52 patch on it with pockets"
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
-	item_state = "jacketobj"
-	icon_open = "jacketworn"
-	icon_closed = "jacketworn"
+	item_state = "jacketworn"
+	icon_state = "jacketobj"
 
 /obj/item/clothing/mask/x52/x52shemagh
 	name = "X-52 Shemagh"
@@ -60,7 +30,7 @@
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	icon_state = "maskworn"
-	item_state = "mask obj"
+	item_state = "maskobj"
 	body_parts_covered = FACE
 	item_flags = FLEXIBLEMATERIAL
 	w_class = ITEM_SIZE_SMALL
@@ -143,6 +113,24 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+/obj/item/clothing/under/innie/jumpsuit/x52
+	name = "X-52 Researcher Uniform"
+	desc = "A classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "x52nerdworn"
+	icon_state = "x52nerdobj"
+	worn_state = "x52nerdworn"
+
+/obj/item/clothing/under/innie/jumpsuit/x52rd
+	name = "X-52 Researcher Director Uniform"
+	desc = "A  classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "x52headnerdworn"
+	icon_state = "x52headnerdobj"
+	worn_state = "x52headnerdworn"
 
 /obj/item/clothing/head/helmet/innie
 	name = "Armored Helmet"
