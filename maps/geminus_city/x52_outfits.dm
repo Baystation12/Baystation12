@@ -5,7 +5,7 @@
 	glasses = null
 	mask = /obj/item/clothing/mask/x52/x52shemagh
 	suit = /obj/item/clothing/suit/storage/toggle/x52vest
-	uniform = /obj/item/clothing/under/x52/x52jumpsuit
+	uniform = /obj/item/clothing/under/innie/jumpsuit/x52
 	shoes = /obj/item/clothing/shoes/x52boots
 	l_ear = /obj/item/device/radio/headset/insurrection
 	gloves = /obj/item/clothing/gloves/x52/x52gloves
@@ -25,7 +25,7 @@
 	glasses = null
 	mask = /obj/item/clothing/mask/x52/x52shemagh
 	suit = /obj/item/clothing/suit/storage/toggle/x52vest/jacket
-	uniform = /obj/item/clothing/under/x52/x52RDjumpsuit
+	uniform = /obj/item/clothing/under/innie/jumpsuit/x52rd
 	shoes = /obj/item/clothing/shoes/x52boots
 	l_ear = /obj/item/device/radio/headset/insurrection
 	gloves = /obj/item/clothing/gloves/x52/x52gloves
