@@ -1027,6 +1027,61 @@
 	glass_name = "Brown Star"
 	glass_desc = "It's not what it sounds like..."
 
+/datum/reagent/drink/orange_cola
+	name = "Fizzy Orange"
+	description = "Artificial sugars and orange essence with fizz."
+	taste_description = "orange"
+	color = "#ffa500"
+	adj_temp = -5
+
+	glass_name = "Orange Soda"
+	glass_desc = "A surprisingly tasty dye."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/rootbeer
+	name = "Root WeiBeer"
+	description = "Root beer, brewed from the rare beer root. And a lot of chemicals."
+	taste_description = "faint toothpaste(?) and fizz"
+	color = "#290e05"
+	adj_temp = -5
+
+	glass_name = "Root Beer"
+	glass_desc = "Yep that sure is some rooty beer."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/apple_cola
+	name = "Apple Soda"
+	description = "Apple soda. Using only genuine genetically engineered apples. Engineered from bananas."
+	taste_description = "fizzy apples!"
+	color = "#ffe4a2"
+	adj_temp = -5
+
+	glass_name = "Apple Soda"
+	glass_desc = "Disappointing cider."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/strawberry_soda
+	name = "Strawberry Soda"
+	description = "Soda using sweet berries."
+	taste_description = "oddly bland"
+	color = "#ff6a9b"
+	adj_temp = -5
+
+	glass_name = "Strawberry Soda"
+	glass_desc = "Attractive and alliterative."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/porksoda
+	name = "Pork Soda"
+	description = "Soda made from straight up pork."
+	taste_description = "pork"
+	color = "#ff6a9b"
+	adj_temp = -5
+
+	glass_name = "Pork Soda"
+	glass_desc = "I asked for a glass of PORT!"
+	glass_special = list(DRINK_FIZZ)
+
 /datum/reagent/drink/milkshake
 	name = "Milkshake"
 	description = "Glorious brainfreezing mixture."
