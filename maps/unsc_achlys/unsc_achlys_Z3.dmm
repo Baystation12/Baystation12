@@ -6,7 +6,8 @@
 "af" = (/obj/structure/drop_pod_launchbay{name = "Escape Pod Launch Bay"},/turf/simulated/floor/plating,/area/achlys/two/z3escape2)
 "ag" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "ah" = (/turf/simulated/floor/plating,/area/achlys/nine/z3guardhall)
-"aj" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
+"ai" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
+"aj" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "ak" = (/turf/simulated/wall/strong,/area/achlys/five/z3stairway1)
 "al" = (/turf/simulated/wall/strong,/area/achlys/seven/z3mainthalls)
 "am" = (/turf/simulated/wall/strong,/area/achlys/six/z3sciencemain)
@@ -22,10 +23,11 @@
 "aw" = (/turf/simulated/open,/area/achlys/one/z3prisonupper4)
 "ax" = (/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "ay" = (/obj/item/stack/rods,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
-"az" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
+"az" = (/obj/structure/false_light{dir = 1; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/two/z3escape2)
+"aA" = (/obj/structure/false_light{dir = 1; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "aB" = (/turf/simulated/wall/strong,/area/achlys/four/z3blockhall2)
 "aC" = (/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 83; spawn_spot_y = 90},/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
-"aD" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/two/z3escape2)
+"aD" = (/obj/structure/false_light{dir = 2; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/two/z3escape1)
 "aE" = (/turf/simulated/open,/area/achlys/one/z3prisonupper3)
 "aF" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/effect/decal/cleanable/blood/splatter,/obj/structure/window/basic{dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "aG" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
@@ -34,6 +36,7 @@
 "aJ" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/structure/window/basic{dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "aK" = (/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "aL" = (/turf/simulated/wall/strong,/area/achlys/four/z3engineeringmain)
+"aM" = (/obj/structure/false_light{dir = 4; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "aN" = (/obj/effect/floor_decal/corner/orange/diagonal,/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/achlys/five/z3secpoint)
 "aO" = (/turf/simulated/wall/strong,/area/achlys/five/z3secpoint)
 "aP" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/structure/window/basic{icon_state = "window"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
@@ -53,12 +56,14 @@
 "bd" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/wall/strong,/area/achlys/six/z3sciencemain)
 "be" = (/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "bf" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
+"bg" = (/obj/structure/false_light{dir = 8; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/two/z3escape3)
 "bh" = (/obj/structure/vent,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "bi" = (/obj/machinery/botany,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/window/basic{dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "bj" = (/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "bk" = (/turf/simulated/wall/strong,/area/achlys/five/z3lounge)
 "bl" = (/obj/effect/floor_decal/corner/red/diagonal,/turf/simulated/floor/tiled/dark,/area/achlys/five/z3secpoint)
 "bm" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/vent,/turf/simulated/floor/tiled/dark,/area/achlys/five/z3secpoint)
+"bn" = (/obj/structure/lattice,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3prisonupper4)
 "bo" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "bp" = (/turf/simulated/wall/strong,/area/achlys/nine/z3carpetdorms1)
 "bq" = (/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
@@ -98,6 +103,7 @@
 "bY" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/achlys/two/z3escape1)
 "bZ" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "ca" = (/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
+"cb" = (/obj/structure/lattice,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3prisonupper3)
 "cc" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/machinery/washing_machine,/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
 "cd" = (/obj/structure/drop_pod_launchbay{name = "Escape Pod Launch Bay"},/turf/simulated/floor/plating,/area/achlys/two/z3escape1)
 "ce" = (/obj/machinery/washing_machine,/obj/effect/floor_decal/corner/mauve/diagonal,/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
@@ -113,6 +119,8 @@
 "co" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/seven/z3mainthalls)
 "cp" = (/obj/structure/bed,/obj/item/weapon/bedsheet/brown,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
 "cq" = (/obj/structure/table/standard,/obj/random/technology_scanner,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
+"cr" = (/obj/structure/lattice,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3prisonupper4)
+"cs" = (/obj/structure/lattice,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3prisonupper3)
 "ct" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic{icon_state = "window"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "cu" = (/turf/simulated/wall/strong,/area/achlys/two/z3escape3)
 "cv" = (/obj/random/achlock,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
@@ -120,8 +128,8 @@
 "cx" = (/obj/random/achlock,/turf/simulated/floor/tiled,/area/achlys/five/z3secpoint)
 "cy" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/window/basic{icon_state = "window"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "cz" = (/turf/simulated/open,/area/achlys/one/z3upperengineeringbay)
-"cA" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
-"cB" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 2},/turf/simulated/floor/plating,/area/achlys/two/z3escape1)
+"cA" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
+"cB" = (/obj/structure/false_light{dir = 1; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/two/z3escape3)
 "cC" = (/obj/machinery/newscaster,/turf/simulated/wall/strong,/area/achlys/one/z3prisonupper4)
 "cD" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/achlys/two/z3escape3)
 "cE" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/window/basic{dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
@@ -134,15 +142,15 @@
 "cL" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/plating,/area/achlys/three/z3engineeringhall1)
 "cM" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
 "cN" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/three/z3engineeringhall1)
-"cO" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
+"cO" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper4)
 "cP" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
-"cQ" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/two/z3escape3)
+"cQ" = (/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "cR" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/three/z3dormhalls)
 "cS" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "cT" = (/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "cU" = (/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "cV" = (/obj/structure/drop_pod_launchbay{name = "Escape Pod Launch Bay"},/turf/simulated/floor/plating,/area/achlys/two/z3escape3)
-"cW" = (/obj/structure/lattice,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/open,/area/achlys/one/z3prisonupper4)
+"cW" = (/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3upperengineeringbay)
 "cX" = (/obj/structure/vent,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "cY" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "cZ" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
@@ -150,7 +158,7 @@
 "db" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/stool/padded,/obj/effect/decal/cleanable/dirt,/obj/random/drinkbottle,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "dc" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/glass,/obj/item/clothing/mask/smokable/cigarette/menthol,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "dd" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/stool/padded,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
-"de" = (/obj/structure/lattice,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/open,/area/achlys/one/z3prisonupper3)
+"de" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "df" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/glass,/obj/item/weapon/material/ashtray/plastic,/obj/item/weapon/cigbutt/cigarbutt,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "dg" = (/obj/structure/lattice,/turf/simulated/open,/area/achlys/one/z3prisonupper3)
 "dh" = (/obj/structure/bed,/obj/item/weapon/bedsheet/red,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
@@ -160,13 +168,13 @@
 "dl" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/structure/table/standard,/obj/structure/bedsheetbin,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
 "dm" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "dn" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
-"do" = (/obj/structure/lattice,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/open,/area/achlys/one/z3prisonupper4)
+"do" = (/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "dp" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "dq" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "dr" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/ash,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "ds" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "dt" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/structure/table/standard,/obj/structure/bedsheetbin,/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
-"du" = (/obj/structure/lattice,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/open,/area/achlys/one/z3prisonupper3)
+"du" = (/obj/effect/floor_decal/corner/orange/diagonal,/obj/structure/table/standard,/obj/random/snack,/obj/item/weapon/melee/baton/humbler,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/five/z3secpoint)
 "dv" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "dw" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
 "dx" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic,/obj/structure/window/basic{dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
@@ -191,21 +199,21 @@
 "dQ" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
 "dR" = (/obj/structure/vent,/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
 "dS" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper4)
-"dT" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
+"dT" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/plating,/area/achlys/nine/z3guardhall)
 "dU" = (/obj/structure/bed/chair,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "dV" = (/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 63; spawn_spot_y = 90},/obj/structure/floodspawner{spawn_spot_x = 68; spawn_spot_y = 95},/obj/structure/floodspawner{spawn_spot_x = 72; spawn_spot_y = 90},/obj/structure/floodspawner{spawn_spot_x = 79; spawn_spot_y = 95},/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "dW" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
-"dX" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/two/z3escape3)
+"dX" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "dY" = (/obj/structure/floodspawner{spawn_spot_x = 58; spawn_spot_y = 77},/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
 "dZ" = (/obj/item/metalscrap,/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "ea" = (/obj/effect/decal/cleanable/cobweb,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "eb" = (/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
 "ec" = (/obj/structure/floodspawner{spawn_spot_x = 118; spawn_spot_y = 87},/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper3)
-"ed" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper4)
+"ed" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/false_light{dir = 4; icon_state = "bulb0"},/turf/simulated/floor/tiled/dark,/area/achlys/five/z3secpoint)
 "ee" = (/turf/simulated/open,/area/achlys/five/z3stairway2)
 "ef" = (/turf/simulated/wall/strong,/area/achlys/five/z3scienceaux)
 "eg" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
-"eh" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
+"eh" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/plating,/area/achlys/nine/z3guardhall)
 "ei" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "ej" = (/turf/simulated/floor/tranquility/catwalk4,/area/achlys/one/z3prisonupper4)
 "ek" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/random/achlock,/obj/structure/floodspawner{spawn_spot_x = 74; spawn_spot_y = 76},/turf/simulated/floor/tiled,/area/achlys/three/z3dormhalls)
@@ -237,7 +245,7 @@
 "eK" = (/obj/structure/false_light,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "eL" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/nine/z3carpetdorms1)
 "eM" = (/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
-"eN" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/open,/area/achlys/one/z3upperengineeringbay)
+"eN" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "eO" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tranquility/catwalk3,/area/achlys/one/z3prisonupper3)
 "eP" = (/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper4)
 "eQ" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/machinery/disease2/diseaseanalyser,/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
@@ -252,17 +260,17 @@
 "eZ" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "fa" = (/obj/effect/floor_decal/corner/mauve/three_quarters{icon_state = "corner_white_three_quarters"; dir = 8},/obj/structure/table/rack,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "fb" = (/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
-"fc" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
+"fc" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3upperengineeringbay)
 "fd" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/bed/chair/office/dark,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
 "fe" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "ff" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
-"fg" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
-"fh" = (/obj/effect/floor_decal/corner/orange/diagonal,/obj/structure/table/standard,/obj/random/snack,/obj/item/weapon/melee/baton/humbler,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/five/z3secpoint)
+"fg" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 1; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
+"fh" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tranquility/catwalk4,/area/achlys/one/z3upperengineeringbay)
 "fi" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 107; spawn_spot_y = 91},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
 "fj" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 5},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "fk" = (/obj/effect/floor_decal/corner/mauve/three_quarters{icon_state = "corner_white_three_quarters"; dir = 1},/obj/machinery/vending/security,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "fl" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
-"fm" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/nine/z3guardhall)
+"fm" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
 "fn" = (/obj/structure/floodspawner{spawn_spot_x = 108; spawn_spot_y = 80},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "fo" = (/obj/effect/floor_decal/corner/mauve/three_quarters{icon_state = "corner_white_three_quarters"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "fp" = (/obj/structure/ladder/down,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
@@ -276,7 +284,7 @@
 "fx" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/item/stack/rods,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "fy" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/item/weapon/material/shard,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "fz" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/six/z3armory)
-"fA" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
+"fA" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "fB" = (/turf/simulated/floor/tranquility/catwalk4,/area/achlys/one/z3upperengineeringbay)
 "fC" = (/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "fD" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/table/standard,/obj/item/weapon/handcuffs,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
@@ -314,11 +322,11 @@
 "gj" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/machinery/vending/coffee,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
 "gk" = (/turf/simulated/open,/area/achlys/two/z3escape1)
 "gl" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/table/standard,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
-"gm" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/five/z3secpoint)
+"gm" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
 "gn" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/deck/cards,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "go" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/obj/structure/table/rack,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "gp" = (/obj/machinery/door/airlock/command,/obj/effect/floor_decal/corner/grey/diagonal,/turf/simulated/floor/tiled,/area/achlys/three/z3sciencehalls)
-"gq" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/nine/z3guardhall)
+"gq" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway1)
 "gr" = (/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper3)
 "gs" = (/turf/simulated/floor/tranquility/catwalk4,/area/achlys/one/z3prisonupper3)
 "gt" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 6},/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/obj/structure/vent,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
@@ -330,9 +338,9 @@
 "gz" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk4,/area/achlys/one/z3prisonupper3)
 "gA" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/structure/table/rack,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "gB" = (/obj/effect/floor_decal/corner/red/diagonal,/turf/simulated/floor/tiled,/area/achlys/two/z3tearoom)
-"gC" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
+"gC" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway1)
 "gD" = (/obj/item/stack/rods,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/three/z3engineeringhall1)
-"gE" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/open,/area/achlys/one/z3upperengineeringbay)
+"gE" = (/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/plating,/area/achlys/three/z3engineeringhall1)
 "gF" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/machinery/disease2/isolator,/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
 "gG" = (/obj/structure/vent,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
 "gH" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3upperengineeringbay)
@@ -349,7 +357,7 @@
 "gS" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk8,/area/achlys/one/z3upperengineeringbay)
 "gT" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms2)
 "gU" = (/turf/simulated/floor/plating,/area/achlys/three/z3engineeringhall2)
-"gV" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "bulb1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
+"gV" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
 "gW" = (/turf/simulated/floor/tranquility/catwalk8,/area/achlys/one/z3upperengineeringbay)
 "gX" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/machinery/dnaforensics,/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
 "gY" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/bed/roller,/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
@@ -379,8 +387,8 @@
 "hw" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 6},/obj/structure/reagent_dispensers/peppertank{pixel_x = 32},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "hx" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/structure/table/rack,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "hy" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk8,/area/achlys/one/z3upperengineeringbay)
-"hz" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tranquility/catwalk4,/area/achlys/one/z3upperengineeringbay)
-"hA" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
+"hz" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
+"hA" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 6},/obj/structure/table/reinforced,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "hB" = (/obj/effect/floor_decal/corner/mauve/three_quarters,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "hC" = (/obj/machinery/door/airlock{welded = 1},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "hD" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 10},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
@@ -393,7 +401,7 @@
 "hK" = (/obj/machinery/vending/engivend,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3engineeringstorage)
 "hL" = (/obj/structure/false_light,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
 "hM" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/flame/lighter/zippo,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
-"hN" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
+"hN" = (/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3engineeringstorage)
 "hO" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/material/shard{icon_state = "shardlarge"},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "hP" = (/obj/structure/vent,/turf/simulated/floor/lino,/area/achlys/five/z3lounge)
 "hQ" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/lino,/area/achlys/five/z3lounge)
@@ -436,7 +444,7 @@
 "iB" = (/obj/machinery/door/airlock/science{req_access = list(510)},/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "iC" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (NORTH)"; icon_state = "officechair_white_preview"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
 "iD" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
-"iE" = (/obj/effect/floor_decal/corner/mauve/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/nine/z3carpetdorms2)
+"iE" = (/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms2)
 "iF" = (/obj/item/metalscrap,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
 "iG" = (/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/nine/z3guardhall)
 "iH" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/bed/chair/wheelchair{icon_state = "wheelchair"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
@@ -448,7 +456,7 @@
 "iN" = (/obj/effect/floor_decal/corner/red/diagonal,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
 "iO" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "iP" = (/obj/structure/stairs/east,/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
-"iQ" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway1)
+"iQ" = (/obj/structure/false_light{dir = 8; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "iR" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
 "iS" = (/obj/random/achlock,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3upperengineeringbay)
 "iT" = (/obj/item/stack/rods,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
@@ -464,15 +472,15 @@
 "jd" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
 "je" = (/obj/machinery/vending/tool,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "jf" = (/obj/random/junk,/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
-"jg" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway1)
+"jg" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 4; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "jh" = (/obj/structure/floodspawner{spawn_spot_x = 67; spawn_spot_y = 74},/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
 "ji" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tranquility/catwalk8,/area/achlys/one/z3upperengineeringbay)
 "jj" = (/obj/random/achlock,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
-"jk" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/achlys/three/z3engineeringhall1)
+"jk" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
 "jl" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/stool/padded,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/random/drinkbottle,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "jm" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/glass,/obj/item/weapon/material/ashtray/plastic,/obj/item/weapon/storage/fancy/cigarettes/professionals,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "jn" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3engineeringstorage)
-"jo" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
+"jo" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 6},/obj/structure/table/reinforced,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "jp" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/table/standard,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/red,/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
 "jq" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/vent,/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
 "jr" = (/obj/machinery/vending/tool,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3engineeringstorage)
@@ -496,15 +504,15 @@
 "jJ" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/bed/chair/comfy/teal{icon_state = "comfychair_preview"; dir = 4},/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard{wander = 0},/turf/simulated/floor/tiled,/area/achlys/two/z3tearoom)
 "jK" = (/obj/structure/grille,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "jL" = (/obj/effect/decal/cleanable/generic,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
-"jM" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
+"jM" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "jN" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/table/glass/teal,/obj/item/weapon/reagent_containers/food/drinks/teapot,/obj/item/weapon/reagent_containers/food/drinks/tea,/turf/simulated/floor/tiled,/area/achlys/two/z3tearoom)
 "jO" = (/obj/random/medical,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
-"jP" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 6},/obj/structure/table/reinforced,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
+"jP" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/obj/structure/table/rack,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "jQ" = (/obj/machinery/light/small/red{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "jR" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "jS" = (/obj/machinery/light/small/red,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "jT" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
-"jU" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3engineeringstorage)
+"jU" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
 "jV" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "jW" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "jX" = (/obj/structure/bed/chair{tag = "icon-chair_preview (EAST)"; icon_state = "chair_preview"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
@@ -518,18 +526,18 @@
 "kf" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/bed/chair/office/dark{icon_state = "officechair_dark_preview"; dir = 4},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "kg" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/table/standard,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "kh" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
-"ki" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms2)
+"ki" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
 "kj" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "kk" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "kl" = (/obj/machinery/door/airlock{name = "Escape Pods"},/turf/simulated/floor/plating,/area/achlys/two/z3escape4)
 "km" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/vent,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
-"kn" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
+"kn" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tranquility/catwalk3,/area/achlys/one/z3upperengineeringbay)
 "ko" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/machinery/vending/security,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "kp" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "kq" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/machinery/vending/snack,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "kr" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "ks" = (/turf/simulated/open,/area/achlys/two/z3escape4)
-"kt" = (/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
+"kt" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/stool/padded,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "ku" = (/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper3)
 "kv" = (/turf/simulated/wall/strong,/area/achlys/one/z3prisonupper2)
 "kw" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
@@ -538,21 +546,21 @@
 "kz" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper2)
 "kA" = (/obj/structure/false_light,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3engineeringstorage)
 "kB" = (/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper2)
-"kC" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
+"kC" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/three/z3engineeringhall2)
 "kD" = (/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper2)
-"kE" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 6},/obj/structure/table/reinforced,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
+"kE" = (/obj/structure/false_light{dir = 2; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "kF" = (/turf/simulated/open,/area/achlys/one/z3prisonupper2)
 "kG" = (/obj/structure/lattice,/turf/simulated/open,/area/achlys/one/z3prisonupper2)
 "kH" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper2)
 "kI" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper2)
-"kJ" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
+"kJ" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/stool/padded,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "kK" = (/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper2)
 "kL" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper2)
 "kM" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper2)
 "kN" = (/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper2)
 "kO" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper2)
 "kP" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper2)
-"kQ" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/obj/structure/table/rack,/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
+"kQ" = (/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper2)
 "kR" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper2)
 "kS" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/material/butterfly,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "kT" = (/turf/simulated/wall/strong,/area/achlys/one/z3prisonupper1)
@@ -560,7 +568,7 @@
 "kV" = (/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper1)
 "kW" = (/turf/simulated/open,/area/achlys/one/z3prisonupper1)
 "kX" = (/obj/structure/lattice,/turf/simulated/open,/area/achlys/one/z3prisonupper1)
-"kY" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
+"kY" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "kZ" = (/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper1)
 "la" = (/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper1)
 "lb" = (/obj/structure/vent,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
@@ -570,7 +578,7 @@
 "lf" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper1)
 "lg" = (/obj/structure/floodspawner{spawn_spot_x = 67; spawn_spot_y = 62},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
 "lh" = (/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 126; spawn_spot_y = 62},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
-"li" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/five/z3stairway2)
+"li" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "lj" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper1)
 "lk" = (/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper1)
 "ll" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper1)
@@ -586,7 +594,7 @@
 "lv" = (/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/three/z3engineeringhall2)
 "lw" = (/obj/structure/closet,/obj/random/tool,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
 "lx" = (/obj/structure/table/standard,/obj/random/smokes,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
-"ly" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tranquility/catwalk3,/area/achlys/one/z3upperengineeringbay)
+"ly" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/item/flood_spore,/obj/structure/false_light{dir = 8; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "lz" = (/obj/structure/closet,/obj/item/weapon/cigbutt/menthol,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
 "lA" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms2)
 "lB" = (/obj/structure/bed,/obj/item/weapon/bedsheet/yellow,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
@@ -599,19 +607,19 @@
 "lI" = (/obj/structure/bed,/obj/item/weapon/bedsheet/blue,/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
 "lJ" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/wall/strong,/area/achlys/four/z3blockhall2)
 "lK" = (/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
-"lL" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/stool/padded,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
-"lM" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/three/z3engineeringhall2)
+"lL" = (/obj/structure/lattice,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3prisonupper2)
+"lM" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/five/z3scienceaux)
 "lN" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "lO" = (/obj/structure/vent,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "lP" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "lQ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
-"lR" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 2},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
+"lR" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
 "lS" = (/obj/item/stack/rods,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
-"lT" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/stool/padded,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
+"lT" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
 "lU" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
 "lV" = (/turf/simulated/wall/strong,/area/achlys/four/z3blockhall1)
 "lW" = (/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
-"lX" = (/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper2)
+"lX" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
 "lY" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
 "lZ" = (/obj/effect/decal/cleanable/blood/oil,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
 "ma" = (/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/four/z3blockhall1)
@@ -619,19 +627,19 @@
 "mc" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
 "md" = (/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 83; spawn_spot_y = 57},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "me" = (/obj/random/achlock,/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/four/z3blockhall1)
-"mf" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
+"mf" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
 "mg" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/closet/hydrant{pixel_y = 32},/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
-"mh" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
+"mh" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
 "mi" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
 "mj" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
-"mk" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/item/flood_spore,/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
+"mk" = (/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
 "ml" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/closet/hydrant{pixel_x = 32},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
 "mm" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
 "mn" = (/obj/structure/false_light,/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper2)
 "mo" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/vent,/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
 "mp" = (/turf/simulated/wall/strong,/area/achlys/six/z3sciencecafeteria)
 "mq" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/random/achlock,/turf/simulated/floor/tech/white,/area/achlys/six/z3sciencecafeteria)
-"mr" = (/obj/structure/lattice,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/open,/area/achlys/one/z3prisonupper2)
+"mr" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
 "ms" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/vending/sovietsoda,/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
 "mt" = (/obj/effect/floor_decal/corner/blue/diagonal,/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
 "mu" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
@@ -678,12 +686,12 @@
 "nj" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/table/standard,/obj/item/weapon/paper{info = "Office of Naval Intelligence<BR><BR>Observe the flood virus in effect on both human and sangheili species. The maximum number of test subjects used may not equal/exceed five(5) fully grown incarcerated personnel. Test will be overseen by highest ranking Officer of the crew of the UNSC Achlys. No exceptions apply. Make continued observations on subject growth. Report all findings upon mission completion."},/obj/item/weapon/storage/firstaid/surgery,/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
 "nk" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/weapon/material/shard,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
 "nl" = (/obj/item/stack/rods,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/achlys/five/z3scienceaux)
-"nm" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/five/z3scienceaux)
+"nm" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "nn" = (/obj/structure/false_light,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "no" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/vent,/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
 "np" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/item/metalscrap,/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
 "nq" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/vent,/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
-"nr" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
+"nr" = (/obj/structure/false_light{dir = 8; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/nine/z3sciencemaint)
 "ns" = (/obj/machinery/door/airlock/science{req_access = list(510)},/turf/simulated/floor/plating,/area/achlys/five/z3scienceaux)
 "nt" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/item/weapon/material/shard,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/five/z3scienceaux)
 "nu" = (/obj/machinery/door/airlock/highsecurity{welded = 1},/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
@@ -693,20 +701,20 @@
 "ny" = (/turf/simulated/floor/tiled/dark,/area/achlys/five/z3lounge)
 "nz" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/machinery/vending/coffee,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/two/z3tearoom)
 "nA" = (/obj/structure/lattice,/obj/structure/false_light,/turf/simulated/open,/area/achlys/one/z3prisonupper2)
-"nB" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
+"nB" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "nC" = (/obj/structure/floodspawner{spawn_spot_x = 70; spawn_spot_y = 53},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
-"nD" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/carpet,/area/achlys/nine/z3carpetdorms1)
-"nE" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
+"nD" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
+"nE" = (/obj/structure/false_light{dir = 4; icon_state = "bulb0"},/turf/simulated/floor/plating,/area/achlys/two/z3escape4)
 "nF" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/item/metalscrap,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
 "nG" = (/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 74; spawn_spot_y = 46},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "nH" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tranquility/catwalk1,/area/achlys/one/z3prisonupper1)
-"nI" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
-"nJ" = (/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
+"nI" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (NORTH)"; icon_state = "officechair_white_preview"; dir = 1},/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
+"nJ" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/vending/coffee,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
 "nK" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper1)
-"nL" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
-"nM" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
+"nL" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
+"nM" = (/obj/machinery/igniter,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
 "nN" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/tranquility/catwalk5,/area/achlys/one/z3prisonupper1)
-"nO" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/achlys/nine/z3sciencemaint)
+"nO" = (/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
 "nP" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 54; spawn_spot_y = 64},/turf/simulated/floor/tiled,/area/achlys/one/z3prisonupper2)
 "nQ" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/floodspawner{spawn_spot_x = 54; spawn_spot_y = 51},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "nR" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 58; spawn_spot_y = 50},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
@@ -720,30 +728,25 @@
 "nZ" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/false_light,/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
 "oa" = (/obj/random/achlock,/obj/structure/floodspawner{spawn_spot_x = 103; spawn_spot_y = 70},/turf/simulated/floor/plating,/area/achlys/five/z3stairway2)
 "ob" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
-"oc" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
+"oc" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/bed/chair/office/light,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
 "od" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms2)
-"oe" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tech/gray,/area/achlys/three/z3sciencehalls)
+"oe" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/false_light{dir = 4; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "of" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/four/z3engineeringmain)
 "og" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/structure/floodspawner{spawn_spot_x = 82; spawn_spot_y = 63},/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "oh" = (/obj/structure/stairs/north,/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "oi" = (/turf/simulated/floor/tech/white,/area/achlys/five/z3lounge)
 "oj" = (/obj/structure/floodspawner{spawn_spot_x = 74; spawn_spot_y = 60},/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms2)
 "ok" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 71; spawn_spot_y = 57},/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
-"ol" = (/obj/structure/false_light{icon_state = "bulb1"; dir = 4},/turf/simulated/floor/plating,/area/achlys/two/z3escape4)
+"ol" = (/obj/structure/lattice,/obj/structure/false_light{dir = 1; icon_state = "tube0"},/turf/simulated/open,/area/achlys/one/z3prisonupper1)
 "om" = (/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 64; spawn_spot_y = 84},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "on" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 77; spawn_spot_y = 84},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "oo" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/floodspawner{spawn_spot_x = 86; spawn_spot_y = 84},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "op" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/paper{info = "Mike, I took our toolbox to work on hydroponics. I guess their biogenerator is acting up or something. I know you're still pissed we lost the only other one but I promise this one won't go missing. I'll let you handcuff it to my wrist if you want.<BR><BR>-Steve"},/turf/simulated/floor/tiled,/area/achlys/four/z3engineeringmain)
 "oq" = (/obj/structure/floodspawner{spawn_spot_x = 67; spawn_spot_y = 78},/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms1)
-"or" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (NORTH)"; icon_state = "officechair_white_preview"; dir = 1},/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
+"or" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{dir = 8; icon_state = "tube0"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
 "os" = (/obj/structure/floodspawner{spawn_spot_x = 74; spawn_spot_y = 68},/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms2)
 "ot" = (/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 92; spawn_spot_y = 66},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
-"ou" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/machinery/vending/coffee,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
-"ov" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
-"ow" = (/obj/machinery/igniter,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
-"ox" = (/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall1)
 "oy" = (/obj/structure/floodspawner{spawn_spot_x = 106; spawn_spot_y = 87},/turf/simulated/floor/tiled,/area/achlys/four/z3blockhall2)
-"oz" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/bed/chair/office/light,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
 "oA" = (/obj/effect/floor_decal/corner/mauve{icon_state = "corner_white"; dir = 9},/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard{inventory = "/obj/item/ammo_magazine/m762_ap/MA37"; our_gun = /obj/item/weapon/gun/projectile/ma5b_ar/MA37},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "oB" = (/obj/effect/floor_decal/corner/mauve/three_quarters{icon_state = "corner_white_three_quarters"; dir = 4},/mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination{inventory = "/obj/item/weapon/storage/firstaid/unsc"},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "oC" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/bed/chair/comfy/teal{icon_state = "comfychair_preview"; dir = 8},/mob/living/simple_animal/hostile/flood/combat_form/prisoner/guard{inventory = "/obj/item/weapon/reagent_containers/food/drinks/tea"; wander = 0},/turf/simulated/floor/tiled,/area/achlys/two/z3tearoom)
@@ -754,7 +757,6 @@
 "oH" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/item/flood_spore,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "oI" = (/obj/structure/vent,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/obj/structure/floodspawner{spawn_spot_x = 112; spawn_spot_y = 64},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "oJ" = (/obj/structure/vent,/obj/structure/floodspawner{spawn_spot_x = 106; spawn_spot_y = 63},/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
-"oK" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/structure/false_light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape4)
 "oL" = (/obj/structure/floodspawner{spawn_spot_x = 106; spawn_spot_y = 73},/obj/structure/floodspawner{spawn_spot_x = 110; spawn_spot_y = 73},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3armory)
 "oM" = (/obj/structure/ladder/down,/turf/simulated/floor/plating,/area/achlys/nine/z3sciencemaint)
 "oN" = (/turf/simulated/floor/reinforced/airless,/area/space)
@@ -762,8 +764,6 @@
 "oP" = (/obj/effect/landmark/start/achlys_prison,/turf/simulated/floor/carpet/blue,/area/achlys/nine/z3carpetdorms2)
 "oQ" = (/obj/structure/doorwreckage,/turf/simulated/floor/tiled/dark,/area/achlys/three/z3dormhalls)
 "oR" = (/obj/effect/floor_decal/corner/blue/diagonal,/obj/structure/false_light,/turf/simulated/floor/tiled,/area/achlys/six/z3sciencecafeteria)
-"oS" = (/obj/structure/lattice,/obj/structure/false_light{icon_state = "tube1"; dir = 1},/turf/simulated/open,/area/achlys/one/z3prisonupper1)
-"oT" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/false_light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
 "oU" = (/obj/structure/lattice,/obj/structure/false_light,/turf/simulated/open,/area/achlys/one/z3prisonupper1)
 "oV" = (/obj/effect/decal/cleanable/blood/splatter,/obj/structure/false_light,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 
@@ -871,68 +871,68 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalalaloNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalalalalalalalalalalalalalalalalalalalalalacacacacacacacacacacalaloNoNoNoNalalalalalalalalalalaloNoNoNoNoNoNoNoNoNoNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaodadadadaacaeacaeacacaeacaeacalaloNoNoNoNalalalalalalalalalalaloNoNoNoNoNoNoNoNoNoNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaoagagajauauagaxcYcYazauauaxagajaxauauagaxagajagaydaacafaDafacacafaDafacalalalalalalalalatatatatatatatalalalalalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaoagagaiauauagaxcYcYajauauaxagaiaxauauagaxagaiagaydaacafazafacacafazafacalalalalalalalalatatatatatatatalalalalalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalaocYaFaHagaGaJaPauagaFaPcYauaFaPaxcYaJaUauagbaaUagdaacbXbXbXacacbXbXbXalalalalalalalalalatbYatbYatbYatalalalalalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalaoaubibuaxcYbwbxagbhbDbGaxaxbDbOcYcYbibGbocYbibOagdaalalaKalalalalaKalalaoaoaoaoaoaoaoaoaocdcfcdcfcdatavavavavavavavavavalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalcucucucuaoaxbQctauaubDbxagaxbDbGauaucwcyaubEbDbuaxaubDbOaCbFbjcAbjbjbjalalbjalalaoawawawawawawawaocfcfcBcfcfatavaEaEaEaEaEaEaEavalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalcucDcVexaoaxbQbxbWcYbDbGagaxbDbuauaxcEbOaxaGbQbOaxaxbDbxauaoaoaoaoalbjalalcOalalaoawawawawawawawaoateUatatatatavaEaEaEaEaEaEaEavalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalcucucQexbFaxcEbGcYbWbQbxaxaxbDbGcYaGbQbOaxbRbwbGagaubDbuauaobSbSbSaobjalalbjalalaocWbTbTbTbTbTbTaofdflfvflgjgkavdgdgdgdgdgdgdeavalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalcucDcVexaoaubQbxcYcYbDbubRaubDbGaxaGbDbOcYaxbDbxcYcYbQdiaGaocacacaaobjbjbjbjbjalaobTbTbTbTbTbTdoaoglflgwioiNgkavdudgdgdgdgdgdgavalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalcucucucuaoaxbQctauaubDbxagaxbDbGauaucwcyaubEbDbuaxaubDbOaCbFbjaAbjbjbjalalbjalalaoawawawawawawawaocfcfaDcfcfatavaEaEaEaEaEaEaEavalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalcucDcVexaoaxbQbxbWcYbDbGagaxbDbuauaxcEbOaxaGbQbOaxaxbDbxauaoaoaoaoalbjalalaMalalaoawawawawawawawaoateUatatatatavaEaEaEaEaEaEaEavalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalcucubgexbFaxcEbGcYbWbQbxaxaxbDbGcYaGbQbOaxbRbwbGagaubDbuauaobSbSbSaobjalalbjalalaobnbTbTbTbTbTbTaofdflfvflgjgkavdgdgdgdgdgdgcbavalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalcucDcVexaoaubQbxcYcYbDbubRaubDbGaxaGbDbOcYaxbDbxcYcYbQdiaGaocacacaaobjbjbjbjbjalaobTbTbTbTbTbTcraoglflgwioiNgkavcsdgdgdgdgdgdgavalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalcucucucucucucucucuexaoaxcEdicXagbibGaxaxbDbGaxbZbQbuauaxbDbOagaxbQdibhaocacacaaoalalalalbjalaoawawawawawawawaofldwjYfijZiNavaEaEaEaEaEaEaEavalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNalcucDcucDcucucucucuexaoaudxdyagagdCdDaxaxdCdDaxagdxdJaxaxdLdDaxaxdxdJaxaodTcacadadaaodaaobFaoaoawawawawawawawaoaBaBaIlJaBaBavaEaEaEaEaEaEaEavalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalcucVdXcVcucucucucuexaoaxauagagauaGaGaudNcYaxcgauaGaxaxaucYauauauaGaucYaocacacaePckckedePePePdSejeuezeAeAeAezePlKlPoylPlKehgrgsgxgxgsgxgzhpechIbjclcmalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNalcucDcucDcucucucucuexaoaudxdyagagdCdDaxaxdCdDaxagdxdJaxaxdLdDaxaxdxdJaxaocAcacadadaaodaaobFaoaoawawawawawawawaoaBaBaIlJaBaBavaEaEaEaEaEaEaEavalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalcucVcBcVcucucucucuexaoaxauagagauaGaGaudNcYaxcgauaGaxaxaucYauauauaGaucYaocacacaePckckcOePePePdSejeuezeAeAeAezePlKlPoylPlKcQgrgsgxgxgsgxgzhpechIbjclcmalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalcuexexexexexexexexexaoaxeiaxagagaxaxagchagemdVaxeociagaxauauauaubWeicYdacacacjckckePeIckePePePiginiuinivivigePeKlNlOlPlKlKgriYiZiYjaiYiZeOkuavcnclbjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUaLaLaLaLaVaLaLaYaLaoaoaoaoaoaodadadaaoaoaoaoaodacvdaaoaoaoaoaoaoaoaoaoaodadacjcacaaoaocCaoaoaoadaoawawawawawawawaoaBaBlJlPlKaBavaEaEaEaEaEaEaEavalcococOalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczeNcFcFczczczczczcFcFczczczczeNczczbUaZaZfcbebebfbybfbecacjcjcafgcjcjcjcjcacjcacPcacacjcafgcacacacjcjcacacacacacjcjdscPaoabarfhaNaOahaoawawawawawawawaoaBaBlJlKlKlJavaEaEaEaEaEaEaEavalalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUbebebebebcdPbcbebecacacacacacacacjomcacacPdpdvcjcjcjcacacacPoncjcacacacacacadsoocPaoaQaQaSaQaOfmaobTbTbTbTbTbTdoaoaBaBaBlQfAaBavdudgdgdgdgdgdgavalalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUcJcKdUbfdZcKbebfbfcjcacacacjcacacacacafCcPcacPcacjcjcacacacPcPcacacafCoOcacacPdvdvaoaQaXaQaQaOahaocWbTbTbTbTbTbTaoaBaBaBlQlPaBavdgdgdgdgdgdgdeavalcoalcncoalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUaLaLaLaLaVaLaLaYaLaoaoaoaoaoaodadadaaoaoaoaoaodacvdaaoaoaoaoaoaoaoaoaoaodadacjcacaaoaocCaoaoaoadaoawawawawawawawaoaBaBlJlPlKaBavaEaEaEaEaEaEaEavalcocoaMalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczcWcFcFczczczczczcFcFczczczczcWczczbUaZaZdebebebfbybfbecacjcjcadocjcjcjcjcacjcacPcacacjcadocacacacjcjcacacacacacjcjdscPaoabarduaNaOahaoawawawawawawawaoaBaBlJlKlKlJavaEaEaEaEaEaEaEavalalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUbebebebebcdPbcbebecacacacacacacacjomcacacPdpdvcjcjcjcacacacPoncjcacacacacacadsoocPaoaQaQaSaQaOdTaobTbTbTbTbTbTcraoaBaBaBlQdXaBavcsdgdgdgdgdgdgavalalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUcJcKdUbfdZcKbebfbfcjcacacacjcacacacacafCcPcacPcacjcjcacacacPcPcacacafCoOcacacPdvdvaoaQaXaQaQaOahaobnbTbTbTbTbTbTaoaBaBaBlQlPaBavdgdgdgdgdgdgcbavalcoalcncoalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUevbeeZfJbfbebefYbfaocjcjcjaoaoaoaoaoaoaoaoaoaoaoaodaaoaoaoaoaoaoaoaoaoaoaoaoetcacaaobbaOaObbaOahaoawawawawawawawaoaBaBlJlKlKlJavaEaEaEaEaEaEaEavcocncnbPcncnalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUcKfXgnopgPbebeaLgRaLhchfhfaLaLalcIbjbjclbjbjcGbjalalalalalalalalalalclcAclaodTcacaanblbmaObsaOahaoawawawawawawawaoaBaBaBlPlKlJavaEaEaEaEaEaEaEavalcnalcococlalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUhhcKhihjbebebfaLhJiRjdjdjdhfaLalbjalalalalalalbjbjclclbjbjbjbjclbjbVcldAbjhCcacUcaasbtgmaObvaOgqaoaoaoaoaoaoaoaoaoaBaBaBgClUaBavavavavavavavavavalbjalalcobjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUcKfXgnopgPbebeaLgRaLhchfhfaLaLalcIbjbjclbjbjcGbjalalalalalalalalalalclaAclaocAcacaanblbmaObsaOahaoawawawawawawawaoaBaBaBlPlKlJavaEaEaEaEaEaEaEavalcnalcococlalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUhhcKhihjbebebfaLhJiRjdjdjdhfaLalbjalalalalalalbjbjclclbjbjbjbjclbjbVcldAbjhCcacUcaasbtedaObvaOehaoaoaoaoaoaoaoaoaoaBaBaBeNlUaBavavavavavavavavavalbjalalcobjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUjejfbcbebfbebfaLiRhJhfhfhfhfaLalbjalbpeJeJbzalbAbHalbIbIbIbIalalalaldGclclaocacacaaRbBblaObsaOahbCjJjNoCakakakakakakaBaBfnlPlJaBaBalalalalalalalalbjalalalclalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUgEczczczczczczcFcFczczczczczcFcFczczczczczczczbUmGgQbcbcbemHmIaLhfmJmJhfjdhfaLalbjalbpbqbJoqbLbMbNbHcccccebIalalalalalbValaoetcacaaoaOaOaOcxaOahbCeweGeGakapapaTaTakeEeEeTeWeEeEeEalalalalalaleaclbjbjgVcmcmalalaloNoNoNoNoNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczeFfBfBhzbUaLaLmKmKjdmLaLaLhAmJhfmMhfdYaVbjbjalbpcpcqhLbHhNbMekcHcMiEbIalalalalalbjalaocacacaaoaoaoaWahiGahfIgBfUhkakiQdKdKjgakeEfafbgyfjfkeEalcocococoalbjalalalalalcmalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczgHgNgSgWhlaqjkaqcLcNeHaqaLhfjdhfhfhfjoaLalalalbpbpbpbpbHcScTbHcMfZeMbIalalalcoalclalaodTcjcjdaaoaoaWaWaWaWbCihjwnzakdMdMapgaakeEgofofqfrfueEalcooDcncnbjclalalalalcoclalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbhggShghlcNcNcNgDaqaqjFaLiRmJmJhfhfhfaLaLaLalbpcZdhcZbHcSgibHdldthmbIalbjcniccmcmaldacjcacjdadaaoaoaoaoaoaoaoaodaaoaoaoaoaoeEfzjMfHfKfOfPeEalcocncocoalcmalalalalalbjalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbgSgNhgbUhqhqhqhqhqhqhqaLhJhJhfjdhfmJhfhfiPalbpcZhtjhjjcSjRbHbIbIbIbIalbjcocncoalaldacacjcacjcafgcacPcPcacjcafgcacacjcacjcaeEfQfRhEfTfujPeEalcocncoalalclalbjbjbjhrbjbjbjbjbjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbhyhggWbUhFhKjUhFhVhFhWaLmJiRiRmJmJmJhfhfiPalbpkacZdFbHbMbMbHdHdIkibIknbjalbjcoalalaocjltcjcjcjcjcacPdvcPcjcjcalucjhvcjcacagbfbgtoAgAfPgJeEalcokncoalalbjaKbjmNcOalalalalalbjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbhggWgNiShFnThFjcjnhFjraLiRmOmJiRmJhfhfhfiPalbpbpbpbpbHcScSbLdIeneybIbjalalbjbjclktaocjfCcjcjcacacacacacPcacjcacacacjfCcacaeEgKgZfShsfuhweEalalclalalalalalbjclclalalalalalbjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczjsgSgNgWbUjtjujvhFhFkAjxaLmJmPmQhfhfhfaLaLaLaleLiTeJkCbHcTcSbHdIdIdIbIclalalalalalbjaoaoaoaoaoaoaoaoaodaaodadadaaoaoaoaoaoaoeEfzjbfHhxfOkEeEalalcmalalalalalalalalalalalalcobjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczjsgWjigSbUhqhqhqhnjzhqhnaLhfhfhfhfhfjoaLalalaleLjybJnUoQcTkJbHbIbIbIbIbjalalalalalcmclbjbjjAbjdGdGalalalalalalalaldOnVebdQdRdOeEkQhBhDoBfufzalalclalalalalalalalalalalalcococncoalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczjsgShggWhagUnWgUgUgUmSmSaLhAhfhfmMhfnXaVbjbjaleLjOfFfGbHcScTbHfLodfNbIclalalalalalalalalalalalalcmalalalalalalalaldOkYdWdWlidOeEhohHhDoLiafzalalcmclbjbjcnbjalalcoalbjbjbjcnoEalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUfcczczczczczczcFcFczczczczczcFcFczczczczczczczbUmGgQbcbcbemHmIaLhfmJmJhfjdhfaLalbjalbpbqbJoqbLbMbNbHcccccebIalalalalalbValaoetcacaaoaOaOaOcxaOahbCeweGeGakapapaTaTakeEeEeTeWeEeEeEalalalalalaleaclbjbjfgcmcmalalaloNoNoNoNoNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczeFfBfBfhbUaLaLmKmKjdmLaLaLfmmJhfmMhfdYaVbjbjalbpcpcqhLbHfAbMekcHcMgmbIalalalalalbjalaocacacaaoaoaoaWahiGahfIgBfUhkakgqdKdKgCakeEfafbgyfjfkeEalcocococoalbjalalalalalcmalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczgHgNgSgWhlaqgEaqcLcNeHaqaLhfjdhfhfhfgVaLalalalbpbpbpbpbHcScTbHcMfZeMbIalalalcoalclalaocAcjcjdaaoaoaWaWaWaWbCihjwnzakdMdMapgaakeEgofofqfrfueEalcooDcncnbjclalalalalcoclalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbhggShghlcNcNcNgDaqaqjFaLiRmJmJhfhfhfaLaLaLalbpcZdhcZbHcSgibHdldthmbIalbjcniccmcmaldacjcacjdadaaoaoaoaoaoaoaoaodaaoaoaoaoaoeEfzhzfHfKfOfPeEalcocncocoalcmalalalalalbjalalalalalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbgSgNhgbUhqhqhqhqhqhqhqaLhJhJhfjdhfmJhfhfiPalbpcZhtjhjjcSjRbHbIbIbIbIalbjcocncoalaldacacjcacjcadocacPcPcacjcadocacacjcacjcaeEfQfRhEfTfuhAeEalcocncoalalclalbjbjbjhrbjbjbjbjbjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbhyhggWbUhFhKhNhFhVhFhWaLmJiRiRmJmJmJhfhfiPalbpkacZdFbHbMbMbHdHdIiEbIiQbjalbjcoalalaocjltcjcjcjcjcacPdvcPcjcjcalucjhvcjcacagbfbgtoAgAfPgJeEalcoiQcoalalbjaKbjmNaMalalalalalbjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczhbhggWgNiShFnThFjcjnhFjraLiRmOmJiRmJhfhfhfiPalbpbpbpbpbHcScSbLdIeneybIbjalalbjbjcljgaocjfCcjcjcacacacacacPcacjcacacacjfCcacaeEgKgZfShsfuhweEalalclalalalalalbjclclalalalalalbjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczjsgSgNgWbUjtjujvhFhFkAjxaLmJmPmQhfhfhfaLaLaLaleLiTeJjkbHcTcSbHdIdIdIbIclalalalalalbjaoaoaoaoaoaoaoaoaodaaodadadaaoaoaoaoaoaoeEfzjbfHhxfOjoeEalalcmalalalalalalalalalalalalcobjalalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczjsgWjigSbUhqhqhqhnjzhqhnaLhfhfhfhfhfgVaLalalaleLjybJnUoQcTjMbHbIbIbIbIbjalalalalalcmclbjbjjAbjdGdGalalalalalalalaldOnVebdQdRdOeEjPhBhDoBfufzalalclalalalalalalalalalalalcococncoalaloNoNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczjsgShggWhagUnWgUgUgUmSmSaLfmhfhfmMhfnXaVbjbjaleLjOfFfGbHcScTbHfLodfNbIclalalalalalalalalalalalalcmalalalalalalalaldOjUdWdWkidOeEhohHhDoLiafzalalcmclbjbjcnbjalalcoalbjbjbjcnoEalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczjBgShygWhamTgUgUgUmSlvmSaLhfhfhfmJkwhfaLalclalbpbpbpbpbHcScSjjosfVfWbIbjbkbkbkbkbkbkbkbkbkbkalalbjalalalalbjclbjbjoaebdWeeeedOeEeEeEeEiyeEeEalalalalalalcocnbjbjcnbjbjalalalcnalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUgEczczczczczczcFcFczczczczczcFcFczczczjCjDjElybUmVmVmWmWmXmWmXaLhfjdhfmJmJiRaLalcmjGbpdBgfdBbHbMobbHlAododbIbjbkbrdbdcddlLdfdjbkbkalalbjalcocoalbjalalbjaldOdOdOdOdOalalalalbjalalalalalalalalcobjalalalalbjalalalbjalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmYlMmWmWmWmWmWaLhfhfkwofhJofaLalbjjGbpdBgGdBbLbMcSbHbIbIbIbIbjdkogdndmkSdqdrdnohbkalallRbjotcnbjbjalalcOalalalalalalalalalalcOaloFoFoFalalalalalcGalalalalcOalalalbjbjcncnbjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmVnanbkvkvkvkvkvkvkvkvkvkvkvkvalbjalbpgIdBdBbHobbMbHgLgLgMbIbIbklTdndzdEdEgcdmoibkalalalalbjcoalalalalbjalalalalalalalalalalbjaljHjIoGjGcAbjbjbjbjbjbjalalbjbjbjalalcocoalbjalalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmVnamVkxkxkykznPkBkykBkBlXkzkBkDbjalbpbpbpbpbHmfcTbLdIgThTbIbIbkgddmgeggghgOhMmhbkalalalalbjalalalalalbjalalalalalalalcococobjjGmkoIjIalbjalalalalalbjalalalhrbjcoalalalalbjalalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUfcczczczczczczcFcFczczczczczcFcFczczczjCjDjEknbUmVmVmWmWmXmWmXaLhfjdhfmJmJiRaLalcmjGbpdBgfdBbHbMobbHlAododbIbjbkbrdbdcddktdfdjbkbkalalbjalcocoalbjalalbjaldOdOdOdOdOalalalalbjalalalalalalalalcobjalalalalbjalalalbjalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmYkCmWmWmWmWmWaLhfhfkwofhJofaLalbjjGbpdBgGdBbLbMcSbHbIbIbIbIbjdkogdndmkSdqdrdnohbkalalkEbjotcnbjbjalalaMalalalalalalalalalalaMaloFoFoFalalalalalcGalalalalaMalalalbjbjcncnbjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmVnanbkvkvkvkvkvkvkvkvkvkvkvkvalbjalbpgIdBdBbHobbMbHgLgLgMbIbIbkkJdndzdEdEgcdmoibkalalalalbjcoalalalalbjalalalalalalalalalalbjaljHjIoGjGaAbjbjbjbjbjbjalalbjbjbjalalcocoalbjalalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmVnamVkxkxkykznPkBkykBkBkQkzkBkDbjalbpbpbpbpbHkYcTbLdIgThTbIbIbkgddmgeggghgOhMlibkalalalalbjalalalalalbjalalalalalalalcococobjjGlyoIjIalbjalalalalalbjalalalhrbjcoalalalalbjalalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUncmVmVmnkBkykykBkxkykykBkBkzkBkvkvkvkveJeJidbHbNbMbHijgLdIbIbIbkdjhOgehPhQhRdmhSbkalalalalbjalalalalalbjalalalalalbjbjoJcnbjbjjKjLoFoHalbjalalalalalbjalalalcocnalalalalalaKalalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmWmWmWkvkFkFkGkGkFkFkHkIkFkFkGmrkFkFkviFlblgjjobobbHbIbIbIbIbIbkhUdnhZibieifdmiibkalalalalbjalalalalalbjalalalalalbjalconYcoalalalaljKcocnalalalalalbjbjcnbjcnlhalalalalbjbjbjalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUalalalkvkFkFkGkGkFkFkKkLkFkFkGkGkFkFkvbqcpmvcRcTcTbHfMoPhGbIbIbkjljmmydmdmdmdmhSbkalalalalbjalalalalalbjalalalalalbjalalbjalalalallrcnbjcnalalalalalalalalalalbjalalalalbjfpcOalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUalalalkvkFkFkGkGkFkFkMkNkFkFkGkGkFkFkvbpbpbpbHcTcToQojfVlmbIbIbkbkbkbkbknxnybkbkbkalbjbjbjbjalalalalalcGbjbjcAbjbjbjalalbjalalalalalalalcoalalalalalalalalalalbjbjbjalalbjbjbjalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUmWmWmWkvkFkFkGkGkFkFkHkIkFkFkGlLkFkFkviFlblgjjobobbHbIbIbIbIbIbkhUdnhZibieifdmiibkalalalalbjalalalalalbjalalalalalbjalconYcoalalalaljKcocnalalalalalbjbjcnbjcnlhalalalalbjbjbjalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUalalalkvkFkFkGkGkFkFkKkLkFkFkGkGkFkFkvbqcpmvcRcTcTbHfMoPhGbIbIbkjljmmydmdmdmdmhSbkalalalalbjalalalalalbjalalalalalbjalalbjalalalallrcnbjcnalalalalalalalalalalbjalalalalbjfpaMalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczczcFcFczczczczczcFcFczczczczczczczbUalalalkvkFkFkGkGkFkFkMkNkFkFkGkGkFkFkvbpbpbpbHcTcToQojfVlmbIbIbkbkbkbkbknxnybkbkbkalbjbjbjbjalalalalalcGbjbjaAbjbjbjalalbjalalalalalalalcoalalalalalalalalalalbjbjbjalalbjbjbjalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUczczczczczczmFcFcFczczczczczcFcFczczczczmFczczbUalalalkvkFkFkGkGkFkFkHkLkFkFkGkGkFkFkvlnlodBbHcTcTbHmUfMfMbIbHbHbHbHbHbHlpcTbHalalalbjalhrcoalalalalalbjalalalalalalalalbjalefefefefefefefefefefefefefefefefalalalbjalalalaKalalalaloNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalalkvkFkFkGkGkFkFkOkLkFkFkGkGkFkFkvdBgGdBbLcTkJcRbHlqbHbHcRcRcRbHcRcRcTkJbHalalalbjbjbjcncncnbjbjbjbjalalalalalalalaljQalefegeleQmZgFefnjgXhdhuikilimipefalalalkncoalalbjalalaloNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalalkvkFkFkGkGkFkFkKkPkFkFkGkGkFkFkvkalsdBbHcSokcTcTcScTcTcSlScTcScScSmdcTbHalalalbjalalalcoalalalalalalalalalalalalaliziAefiqegegegegirisisitnknlipilnmefalalalbjbjcnbjbjalalaloNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalalkvkFkFkGkGkFkFkHkLkFkFkGkGkFkFkvbpbpbpcRcSbMbMcTcTcTnncTcTcScScScTbMbMbHalknbjcGalalalalalalalalalalalalalalalaliAiMmgefnregnoegegefnpnqnwisnsntilipefalalalalconYcoalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNalalalkvkFkFkGnAkFkFkMkRkFkFnAkGkFkFkvbpbpbpcRbLbHbHbHbLbHbHbHbLbHbHbHbLbHbHbHalbjalalalambdamamamamamamambKbKbKiAiAiAiAnBiMiAefnuefefefefefefefefefnvefefefiAiAiAalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkvkvkvkvkvkvkvmRkykvkvkvkvkvkvkvbpbpbpbqnCeJbplwdBnDbpbqbqlxbpdBdBdBbpalalbjalalalamnEepeqereseBeCameDeReRiAmiiMiMiMiMmjmiiMnIiMiMiMiMiMiMiMiMiMiMnIiMiMmliAalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkckdkekbkfkgkhlVlWnJlValalalalalalalalbpeJlbbqbplsgGlsbpnLbJlzbpdBgGnDbpalbjbjalalalameSeVeXeYfeffnMamnOoMeRfsiMiMiMiMmmiMiMiMiMiMiMiMiMiMnZiMiMiMiMiMmoiMiMizjSbjbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkekekbockjkklVlYlZmajTjTlRbjbjbjalalbplBbzhLbplClDlEbpbqbqlFbplGlHlIbpcobjalalalalamftftfwfxfyfffDameReReRiAiMiMiAiAgpiAiAmpmpmpmpmpmqmpiAiAiAiAiAiAiAiAiAalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkckdkeklkkkmkjmbmcmclValalalalcobjalalbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpcocnalalalalamgugueqgvffffgYamiAiAiAiAiMoeiAhehXhYmpmsmtmtmtmtmtmumpiAiAiAiAiAiAiAiAalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkeolkbkonQkpmbmcnRlValalalalaljTalalalalalalalalalalalalalalalalalalalcocncoalalalamepiweqffixffffiBiMiMiMiMiMmoiAiCiDormpoumtmwmxmxmxovmpiAiAiAiAiAiAiAiAalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkckdkekbkqkrkpmelYlYlValalalalalbjbjbjbjbjbjalalalalalalalalbjbjbjbjbjbjbjbjalalalalamowepeXffffffffamiMnZiMiMiMiMiAiHiIiJmpmzmumumAmAmAmtmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkbkbkbkpkkkrlVoxlYmbalalalalalalalalalalbjalalalcoalalalalbjalalalalalalalalalalalamftiKeqeriLffiOamiAiAiAiAmBmCiAoznFiUmpmDmtmtmxmxmxmtmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkbkbkskskkoKlVmclWmbalalalalalalalalalalknbjbjbjcnbjbjbjbjcOalalalalalalalalalalalamiVeqeqgveYffiWamiAiAiAiAiAiAiXjpjqndmpmEoRmtmtmtoRmtmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalalkvkFkFkGkGkFkFkOkLkFkFkGkGkFkFkvdBgGdBbLcTjMcRbHlqbHbHcRcRcRbHcRcRcTjMbHalalalbjbjbjcncncnbjbjbjbjalalalalalalalaljQalefegeleQmZgFefnjgXhdhuikilimipefalalaliQcoalalbjalalaloNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalalkvkFkFkGkGkFkFkKkPkFkFkGkGkFkFkvkalsdBbHcSokcTcTcScTcTcSlScTcScScSmdcTbHalalalbjalalalcoalalalalalalalalalalalalaliziAefiqegegegegirisisitnknlipillMefalalalbjbjcnbjbjalalaloNoNaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUbUalalalkvkFkFkGkGkFkFkHkLkFkFkGkGkFkFkvbpbpbpcRcSbMbMcTcTcTnncTcTcScScScTbMbMbHaliQbjcGalalalalalalalalalalalalalalalaliAiMmgeflRegnoegegefnpnqnwisnsntilipefalalalalconYcoalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNoNalalalkvkFkFkGnAkFkFkMkRkFkFnAkGkFkFkvbpbpbpcRbLbHbHbHbLbHbHbHbLbHbHbHbLbHbHbHalbjalalalambdamamamamamamambKbKbKiAiAiAiAlTiMiAefnuefefefefefefefefefnvefefefiAiAiAalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkvkvkvkvkvkvkvmRkykvkvkvkvkvkvkvbpbpbpbqnCeJbplwdBlXbpbqbqlxbpdBdBdBbpalalbjalalalammfepeqereseBeCameDeReRiAmiiMiMiMiMmjmiiMmhiMiMiMiMiMiMiMiMiMiMmhiMiMmliAalalbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkckdkekbkfkgkhlVlWmklValalalalalalalalbpeJlbbqbplsgGlsbpmrbJlzbpdBgGlXbpalbjbjalalalameSeVeXeYfeffnmamnroMeRfsiMiMiMiMmmiMiMiMiMiMiMiMiMiMnZiMiMiMiMiMmoiMiMizjSbjbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkekekbnBkjkklVlYlZmajTjTkEbjbjbjalalbplBbzhLbplClDlEbpbqbqlFbplGlHlIbpcobjalalalalamftftfwfxfyfffDameReReRiAiMiMiAiAgpiAiAmpmpmpmpmpmqmpiAiAiAiAiAiAiAiAiAalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkckdkeklkkkmkjmbmcmclValalalalcobjalalbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpbpcocnalalalalamgugueqgvffffgYamiAiAiAiAiMnDiAhehXhYmpmsmtmtmtmtmtmumpiAiAiAiAiAiAiAiAalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkenEkbkonQkpmbmcnRlValalalalaljTalalalalalalalalalalalalalalalalalalalcocncoalalalamepiweqffixffffiBiMiMiMiMiMmoiAiCiDnImpnJmtmwmxmxmxnLmpiAiAiAiAiAiAiAiAalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkckdkekbkqkrkpmelYlYlValalalalalbjbjbjbjbjbjalalalalalalalalbjbjbjbjbjbjbjbjalalalalamnMepeXffffffffamiMnZiMiMiMiMiAiHiIiJmpmzmumumAmAmAmtmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkbkbkbkpkkkrlVnOlYmbalalalalalalalalalalbjalalalcoalalalalbjalalalalalalalalalalalamftiKeqeriLffiOamiAiAiAiAmBmCiAocnFiUmpmDmtmtmxmxmxmtmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkbkbkskskkoelVmclWmbalalalalalalalalalaliQbjbjbjcnbjbjbjbjaMalalalalalalalalalalalamiVeqeqgveYffiWamiAiAiAiAiAiAiXjpjqndmpmEoRmtmtmtoRmtmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalkbkTkTkTkTkTkTkTkUkVkTkTkTkTkTkTkTalalalalalhralconGcoalalalalalalalalalalalalalalalamepiwneeYnfffgYamiAiAiAiAiAiAiAiXiXiXmpmpmpmpmpmpmpmpmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXoSkWkWkZlakWkWoSkXkWkWkTalalalbjjVbjbjjVcncoalalalalalalalalalalalalalalalamngnhnigvgvffnMamiAiAiAiAiAiAmpmpmpmpmpmpmpmpmpmpmpmpmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWnHlckWkWkXkXkWkWkTalalalbjalalalcocoalalalalalalalalalalalalalalalalamoTiweqerffeBeCamiAiAaaaaaaaampmpmpmpmpmpmpmpmpmpmpmpmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXolkWkWkZlakWkWolkXkWkWkTalalalbjjVbjbjjVcncoalalalalalalalalalalalalalalalamngnhnigvgvffnmamiAiAiAiAiAiAmpmpmpmpmpmpmpmpmpmpmpmpmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWnHlckWkWkXkXkWkWkTalalalbjalalalcocoalalalalalalalalalalalalalalalalamoriweqerffeBeCamiAiAaaaaaaaampmpmpmpmpmpmpmpmpmpmpmpmpmpmpaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWldlekWkWkXkXkWkWkTalalalbjalalalalalalaloNoNoNoNoNoNoNoNoNoNoNoNamamamamamamamamamamamiAiAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWlfnKkWkWkXkXkWkWkTalalalbjalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaamamamamamamamamamamamiAiAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWnHnNkWkWkXkXkWkWkTalalaljValalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaamamamamamamamamamamamiAiAaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWkZlekWkWkXkXkWkWkTbjbjbjcOalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWkZlekWkWkXkXkWkWkTbjbjbjaMalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWkXkXkWkWnHlekWkWkXkXkWkWkTbjcoalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkWkWoUkXkWkWljlekWkWkXoUkWkWkTbjalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalkTkTkTkTkTkTkTlklkkTkTkTkTkTkTkTbjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalalalalalalaljWllnSaKbjlRjVbjbjjVbjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalalalalalalaljWllnSaKbjkEjVbjbjjVbjalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaoNoNoNalalalalalalalaljXoVbjalalalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalalalalalalalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalalalalalalalalalalalalalalalaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

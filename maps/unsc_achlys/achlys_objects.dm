@@ -335,7 +335,7 @@
 	name = "light bulb"
 	desc = "A broken light bulb. There is no power to light it."
 	icon = 'icons/obj/lighting.dmi'
-	icon_state = "tube1"
+	icon_state = "tube0"
 	anchored = 1
 	density = 0
 	opacity = 0
