@@ -19,6 +19,19 @@
 	desc = "A prototype thick, layered grey undersuit lined with power cables and flexible nano composite plates."
 	species_restricted = list("Orion")
 
+/obj/item/clothing/suit/space/void/swat/urfdefector
+	name = "I25B Heavy Chest Rig"
+	desc = "A X-52 prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor."
+	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
+	species_restricted = list("Orion")
+	icon_state = "death_a_obj"
+	item_state = "death_a_worn"
+	armor_thickness = 20
+	flags_inv = 29
+	breach_threshold = 100
+	flags_inv = HIDESHOES
+
 /obj/item/clothing/suit/space/void/swat/thetar
 	name = "Red Orion Armor"
 	desc = "A prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor. This set of armor happens to be red."
@@ -57,6 +70,15 @@
 	flags_inv = 29
 	breach_threshold = 100
 	flags_inv = HIDESHOES
+
+/obj/item/clothing/head/helmet/space/deathsquad/urfdefector
+	name = "H34D Dome Protector"
+	desc = "A X-52 prototype Helmet made from flexible high grade metals meant to intimidate the wearer's foes and for use by an Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet."
+	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 35,bio = 100,rad = 25)
+	armor_thickness = 20
+	icon_state = "death_helmet"
+	item_state = "death_worn"
+	species_restricted = list("Orion")
 
 /obj/item/clothing/head/helmet/space/deathsquad/thetar
 	name = "Red Orion Helmet"

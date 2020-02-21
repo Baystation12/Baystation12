@@ -92,6 +92,7 @@
 
 /datum/job/geminus_innie/orion_defector
 	title = "Insurrectionist Orion Defector"
+	outfit_type = /decl/hierarchy/outfit/job/colonist/geminus_innie_orion_defector
 	whitelisted_species = list(/datum/species/orion)
 	total_positions = 2
 	spawn_positions = 2
