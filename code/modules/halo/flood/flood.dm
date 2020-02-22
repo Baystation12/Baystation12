@@ -20,8 +20,12 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 /datum/species/sangheili = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination)
 
 #define ITEM_INFEST_TYPE_LIST list(\
-/obj/item/clothing/suit/armor/special/combatharness/minor = /mob/living/simple_animal/hostile/flood/combat_form/minor,\
+/obj/item/clothing/suit/armor/special/combatharness/minor = /mob/living/simple_animal/hostile/flood/combat_form/minor2,\
 /obj/item/clothing/suit/armor/special/combatharness/major = /mob/living/simple_animal/hostile/flood/combat_form/major,\
+/obj/item/clothing/suit/armor/special/combatharness/zealot = /mob/living/simple_animal/hostile/flood/combat_form/zealot,\
+/obj/item/clothing/suit/armor/special/combatharness/ultra = /mob/living/simple_animal/hostile/flood/combat_form/ultra,\
+/obj/item/clothing/suit/armor/special/combatharness/specops = /mob/living/simple_animal/hostile/flood/combat_form/specops,\
+/obj/item/clothing/suit/armor/special/combatharness/ranger = /mob/living/simple_animal/hostile/flood/combat_form/ranger,\
 /obj/item/clothing/under/unsc/odst_jumpsuit = /mob/living/simple_animal/hostile/flood/combat_form/ODST,\
 /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform = /mob/living/simple_animal/hostile/flood/combat_form/oni,\
 /obj/item/clothing/under/color/orange = /mob/living/simple_animal/hostile/flood/combat_form/prisoner)
@@ -55,6 +59,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
 							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
 	assault_target_type = /obj/effect/landmark/assault_target
+
+	faction = "Flood"
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()
@@ -572,9 +578,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "Zealot 1 Dead"
 	//
 	move_to_delay = 1
-	health = 125 //Combat forms need to be hardier.
-	maxHealth = 125
-	resistance = 15
+	health = 165 //Combat forms need to be hardier.
+	maxHealth = 165
+	resistance = 20
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
@@ -587,9 +593,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "Ultra 1 Dead"
 	//
 	move_to_delay = 1
-	health = 125 //Combat forms need to be hardier.
-	maxHealth = 125
-	resistance = 15
+	health = 150 //Combat forms need to be hardier.
+	maxHealth = 150
+	resistance = 20
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
@@ -602,12 +608,13 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "SO 1 Dead"
 	//
 	move_to_delay = 1
-	health = 125 //Combat forms need to be hardier.
-	maxHealth = 125
-	resistance = 15
+	health = 150 //Combat forms need to be hardier.
+	maxHealth = 150
+	resistance = 10
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
+	alpha = 20
 
 /mob/living/simple_animal/hostile/flood/combat_form/ranger
 	name = "Flood infested Ranger"
@@ -617,9 +624,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_dead = "Ranger 1 Dead"
 	//
 	move_to_delay = 1
-	health = 125 //Combat forms need to be hardier.
-	maxHealth = 125
-	resistance = 15
+	health = 135 //Combat forms need to be hardier.
+	maxHealth = 135
+	resistance = 20
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
@@ -631,13 +638,13 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "movement state"
 	icon_dead = "death state"
 	move_to_delay = 1
-	health = 1000 //Combat forms need to be hardier.
-	maxHealth = 1000
+	health = 300 //Combat forms need to be hardier.
+	maxHealth = 300
 	melee_damage_lower = 40
 	melee_damage_upper = 55
 	attacktext = "Whips"
 	mob_size = MOB_LARGE
-	resistance = 30
+	resistance = 30 //MA5 Rounds literally can't damage this >:)
 	bound_width = 96
 	bound_height = 96
 
