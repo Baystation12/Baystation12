@@ -1,5 +1,31 @@
+/obj/structure/diona_gestalt/proc/blockMove(var/dir)
+	if (dir != UP && dir != DOWN)
+		return FALSE
+	var/turf/dest = (dir == UP) ? GetAbove(src) : GetBelow(src)
+	if (!dest)
+		return "There's nothing in that direction."
+	var/turf/from = get_turf(src)
+	if (!from.CanZPass(src, dir))
+		return "\The [from] is in the way."
+	if (!dest.CanZPass(src, dir))
+		return "You bump against \the [dest]."
+	var/area/area = get_area(src)
+	if (dir == UP && area.has_gravity())
+		return "Gravity stops you moving upward."
+	for(var/atom/A in dest)
+		if (!A.CanMoveOnto(src, from, 1.5, dir))
+			return "\The [A] blocks you."
+	if (src.can_fall(FALSE, dest))
+		return "You see nothing to hold onto."
+	return FALSE
+
 /obj/structure/diona_gestalt/relaymove(var/mob/user, var/direction)
-	if(nymphs[user]) step(src, direction) // ANARCHY! DEMOCRACY! ANARCHY! DEMOCRACY!
+	if (nymphs[user])
+		var/blockResult = blockMove(direction)
+		if (blockResult)
+			to_chat(user, SPAN_WARNING(blockResult))
+			return
+		step(src, direction)
 
 // Naaaa na na na na naa naa https://www.youtube.com/watch?v=iMH49ieL4es
 /obj/structure/diona_gestalt/Bump(var/atom/movable/AM, var/yes) // what a useful argname, thanks oldcoders
