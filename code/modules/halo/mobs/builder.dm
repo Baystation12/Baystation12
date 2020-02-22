@@ -1,9 +1,4 @@
 
-#define BUILD_MARKER_WALL 1
-#define BUILD_MARKER_FLOOR 2
-#define BUILD_MARKER_DOOR 3
-#define BUILD_MARKER_WINDOW 4
-
 /obj/effect/landmark/build_marker
 	name = "Build Marker"
 	desc = "Marks a location to have something built."
@@ -66,6 +61,9 @@
 	icon_dead = "yithian_dead"
 	ranged = 1
 	elevation = 1
+	health = 200
+	maxHealth = 200
+	resistance = 20
 	var/wall_type_build = /turf/simulated/wall
 	var/floor_type_build = /turf/simulated/floor
 	var/door_type_build = /obj/machinery/door/unpowered/simple/iron
