@@ -13,6 +13,7 @@
 	config_tag = "achlys"
 	votable = 0
 	probability = 0
+	allowed_ghost_roles = list(/datum/ghost_role/flood_prisoner)
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
 	var/list/items_to_destroy = list()
@@ -21,6 +22,11 @@
 	var/list/item_success_tag = "retrieveto"//the tag of an object that when the documents are in the contents of, counts as success
 	var/flood_spawn_event_minor
 	var/flood_spawn_event_major
+
+/datum/ghost_role/flood_prisoner
+
+	mob_to_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew
+	objects_spawn_on = list(/obj/effect/landmark/flood_spawn,/obj/structure/biomass)
 
 /datum/game_mode/achlys/proc/populate_items_destroy()
 	for(var/atom/destroy in world)
