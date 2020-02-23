@@ -395,7 +395,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return 0
 	var/mob/living/carbon/human/h = attacked
 	if(istype(h))
-		h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,melee_damage_lower/3)
+		h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,melee_damage_lower/4)
 	pickup_gun(attacked)
 
 /mob/living/simple_animal/hostile/flood/combat_form/RangedAttack(var/atom/attacked)
