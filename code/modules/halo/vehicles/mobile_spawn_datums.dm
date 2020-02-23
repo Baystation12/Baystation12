@@ -53,10 +53,6 @@
 	h.ckey = user.ckey
 	qdel(user)
 
-/datum/mobile_spawn/debug
-	spawn_faction = "oof"
-	species_outfits = list("Human" = newlist(/decl/hierarchy/outfit/job/UNSC_ship/bertelsmarine), "Sangheili" = newlist(/decl/hierarchy/outfit/sangheili/minor)) // species name = list(outfits)
-
 /datum/mobile_spawn/covenant
 	spawn_faction = "Covenant"
 	species_outfits = list("Unggoy" = newlist(/decl/hierarchy/outfit/mobilespawn_unggoy/major,/decl/hierarchy/outfit/mobilespawn_unggoy/medic,/decl/hierarchy/outfit/mobilespawn_unggoy/engineer,/decl/hierarchy/outfit/mobilespawn_unggoy_grenadier))
