@@ -463,7 +463,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "marine_infested"
 	icon_dead = "marine_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100
 	maxHealth = 100
 	resistance = 10
@@ -478,7 +478,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "odst_infested"
 	icon_dead = "odst_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -498,7 +498,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "guard_infested"
 	icon_dead = "guard_dead"
 	inventory = list(/obj/item/ammo_magazine/m762_ap/MA37)
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
 	resistance = 15
@@ -513,7 +513,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "oni_infested"
 	icon_dead = "oni_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
 	resistance = 15
@@ -528,7 +528,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Minor 1"
 	icon_dead = "Minor 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -543,7 +543,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Minor 2"
 	icon_dead = "Minor 2 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -558,7 +558,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Major 1"
 	icon_dead = "Major 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -573,7 +573,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Zealot 1"
 	icon_dead = "Zealot 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -588,7 +588,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Ultra 1"
 	icon_dead = "Ultra 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -603,7 +603,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "SO 1"
 	icon_dead = "SO 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -618,7 +618,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Ranger 1"
 	icon_dead = "Ranger 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -632,7 +632,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "movement state"
 	icon_living = "movement state"
 	icon_dead = "death state"
-	move_to_delay = 1
+	move_to_delay = 15 //why the fuck was this 1?
 	health = 1000 //Combat forms need to be hardier.
 	maxHealth = 1000
 	melee_damage_lower = 40
@@ -667,7 +667,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "prisoner_infected2"
 	icon_dead = "prisoner_infected2_dead"
 	icon_living = "prisoner_infected2"
-	move_to_delay = 4
+	move_to_delay = 8
 	health = 50 //intentionally squishy to give melee combat a chance
 	maxHealth = 50
 	melee_damage_lower = 15
@@ -680,7 +680,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "prisoner_infected1"
 	icon_living = "prisoner_infected1"
 	icon_dead = "prisoner_infected1_dead"
-	move_to_delay = 6 //slower than common counterpart to give sense of weight to it
+	move_to_delay = 10 //slower than common counterpart to give sense of weight to it
 	health = 85 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
 	maxHealth = 85
 	melee_damage_lower = 20 //as above so below
@@ -705,7 +705,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "abomination"
 	icon_living = "abomination"
 	icon_dead = "abomination_dead"
-	move_to_delay = 2 //fast enough to give a sense of danger and muscle
+	move_to_delay = 4 //fast enough to give a sense of danger and muscle
 	resistance = 5
 	health = 250
 	maxHealth = 250 //these will be specifically put in certain locations and not RNG based
