@@ -1,58 +1,68 @@
 
-/obj/machinery/door/airlock/halo_lifepod
+/obj/machinery/door/airlock/halo/lifepod
 	name = "Lifepod Airlock"
-	icon = 'code/modules/halo/doors/airlocklifepod.dmi'
-	assembly_type = /obj/structure/door_assembly/door_assembly_com
+	icon = 'code/modules/halo/doors/airlocklifepod/door.dmi'
+	welded_file = 'code/modules/halo/doors/airlocklifepod/welded.dmi'
 	opacity = 0
-	glass = 1
 
-/obj/machinery/door/airlock/halo_maint
+/obj/machinery/door/airlock/halo/maint
 	name = "Maintenance Airlock"
-	icon = 'code/modules/halo/doors/airlockmaint.dmi'
-	assembly_type = /obj/structure/door_assembly/door_assembly_com
+	icon = 'code/modules/halo/doors/airlockmaint/door.dmi'
+	welded_file = 'code/modules/halo/doors/airlockmaint/welded.dmi'
 	opacity = 0
-	glass = 1
+
 
 /obj/machinery/door/airlock/halo
 	name = "Airlock"
-	icon = 'code/modules/halo/doors/Airlocksingle.dmi'
-	assembly_type = /obj/structure/door_assembly/door_assembly_com
-	maxhealth = 1000
+	icon = 'code/modules/halo/doors/airlocksingle/door.dmi'
+	welded_file = 'code/modules/halo/doors/airlocksingle/welded.dmi'
+	lights_file = null
+	fill_file = null
+	opacity = 1
+	maxhealth = 1500
+	paintable = 0
 
 /obj/machinery/door/airlock/multi_tile/halo
 	name = "Airlock"
-	icon = 'code/modules/halo/doors/Airlockdouble.dmi'
-	assembly_type = /obj/structure/door_assembly/multi_tile
+	icon = 'code/modules/halo/doors/airlockdouble/door.dmi'
+	welded_file = 'code/modules/halo/doors/airlockdouble/welded.dmi'
+	opacity = 1
+	lights_file = null
+	fill_file = null
 	maxhealth = 1500
+	paintable = 0
 
 /obj/machinery/door/airlock/multi_tile/halo/blast
 	name = "Blast doors"
-	icon = 'code/modules/halo/doors/Airlockblastdouble.dmi'
+	icon = 'code/modules/halo/doors/airlockblastdouble/door.dmi'
+	welded_file = 'code/modules/halo/doors/airlockblastdouble/welded.dmi'
 	opacity = 0
-	glass = 1
-	assembly_type = /obj/structure/door_assembly/multi_tile
 	maxhealth = 2000
 
 obj/machinery/door/airlock/multi_tile/halo/triple
-	icon = 'code/modules/halo/doors/blastdoor.dmi'
+	icon = 'code/modules/halo/doors/blastdoor/door.dmi'
+	welded_file = 'code/modules/halo/doors/blastdoor/welded.dmi'
 	maxhealth = 2000
 	dir = NORTH
 	width = 3
 
 obj/machinery/door/airlock/multi_tile/halo/quadruple
-	icon = 'code/modules/halo/doors/Longer Blastdoor.dmi'
+	icon = 'code/modules/halo/doors/longerblastdoor/door.dmi'
+	welded_file = 'code/modules/halo/doors/longerblastdoor/welded.dmi'
 	maxhealth = 2500
 	dir = NORTH
 	width = 4
 
 obj/machinery/door/airlock/multi_tile/halo/triplens
-	icon = 'code/modules/halo/doors/3xblastdoorsns.dmi'
+	icon = 'code/modules/halo/doors/3xblastdoors/door.dmi'
+	welded_file = 'code/modules/halo/doors/3xblastdoors/welded.dmi'
 	maxhealth = 2000
 	dir = EAST
 	width = 3
 
 obj/machinery/door/airlock/multi_tile/halo/quadruplens
-	icon = 'code/modules/halo/doors/4xBlastdoorns.dmi'
+	icon = 'code/modules/halo/doors/4xblastdoors/door.dmi'
+	welded_file = 'code/modules/halo/doors/4xblastdoors/welded.dmi'
 	maxhealth = 2500
 	dir = EAST
 	width = 4
@@ -62,9 +72,11 @@ obj/machinery/door/airlock/multi_tile/halo/quadruplens
 	icon = 'code/modules/halo/doors/Secure2x1.dmi'
 	assembly_type = /obj/structure/door_assembly/multi_tile
 
-obj/machinery/door/blast/regular/triple
-	icon = 'code/modules/halo/doors/blastdoor.dmi'
+obj/machinery/door/airlock/multi_tile/halo/triple
+	icon = 'code/modules/halo/doors/blastdoor/door.dmi'
+	welded_file = 'code/modules/halo/doors/blastdoor/welded.dmi'
 	maxhealth = 2000
+	dir = NORTH
 
 obj/machinery/door/blast/regular/triple/New()
 	. = ..()

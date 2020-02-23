@@ -123,8 +123,8 @@ var/hadevent    = 0
 			for (var/obj/machinery/door/airlock/security/temp_airlock in A)
 				spawn(0) temp_airlock.prison_open()
 
-			for (var/obj/machinery/door/airlock/glass_security/temp_glassairlock in A)
-				spawn(0) temp_glassairlock.prison_open()
+			for (var/obj/machinery/door/airlock/glass/security in A)
+				spawn(0) security.prison_open()
 
 			for (var/obj/machinery/door_timer/temp_timer in A)
 				temp_timer.releasetime = 1
