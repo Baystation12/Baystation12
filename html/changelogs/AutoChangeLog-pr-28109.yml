@@ -1,0 +1,4 @@
+author: "zaredman"
+delete-after: True
+changes: 
+  - tweak: "Informal hat selection changed so all Civilians (Non-EC or Fleet) can spawn with them. Yeehaw."
