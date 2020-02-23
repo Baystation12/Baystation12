@@ -28,6 +28,7 @@
 	capacity_flag = ITEM_SIZE_VEHICLE_LARGE
 
 	light_color = "#C1CEFF"
+	spawn_datum = /datum/mobile_spawn/covenant
 
 /obj/vehicles/air/overmap/spirit_dropship/update_object_sprites()
 	. = ..()

@@ -37,8 +37,39 @@
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 	var/move_sound = null
 
+	var/datum/mobile_spawn/spawn_datum //Setting this makes this a mobile spawn point.
+
 	light_power = 4
 	light_range = 6
+
+/obj/vehicles/proc/mobile_spawn_check(var/mob/user)
+	if(spawn_datum.is_spawn_active == 0 && (guns_disabled || movement_destroyed))
+		to_chat(user,"<span class = 'notice'>[src] is too damaged to lock down.</span>")
+		return 0
+	if(block_enter_exit == 1)
+		to_chat(user,"<span class = 'notice'>Cannot deploy in this current state.</span>")
+		return 0
+	return 1
+
+/obj/vehicles/proc/toggle_mobile_spawn_deploy()
+	set name = "Toggle Mobile Spawn Status"
+	set category = "Vehicle"
+	set src in view(1)
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+	if(!mobile_spawn_check(user))
+		return
+	set_mobile_spawn_deploy(!spawn_datum.is_spawn_active)
+
+/obj/vehicles/proc/set_mobile_spawn_deploy(var/set_to)
+	spawn_datum.is_spawn_active = set_to
+	visible_message("<span class = 'notice'>[src] [spawn_datum.is_spawn_active ? "locks down" : "unlocks and readies for operation"]</span>")
+	icon_state = "[initial(icon_state)]_deployed"
+	if(spawn_datum.is_spawn_active)
+		active = 0
+	else
+		active = 1
 
 /obj/vehicles/verb/toggle_headlights()
 	set name = "Toggle Headlights"
@@ -65,6 +96,9 @@
 		verbs += /obj/vehicles/verb/toggle_headlights
 		set_light(0) //Switch off at spawn.
 	cargo_capacity = base_storage_capacity(capacity_flag)
+	if(spawn_datum)
+		spawn_datum = new spawn_datum
+		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
 
 /obj/vehicles/attack_generic(var/mob/living/simple_animal/attacker,var/damage,var/text)
 	visible_message("<span class = 'danger'>[attacker] [text] [src]</span>")
@@ -118,6 +152,8 @@
 	movement_destroyed = 1
 	guns_disabled = 1
 	icon_state = "[initial(icon_state)]_destroyed"
+	if(spawn_datum)
+		spawn_datum.is_spawn_active = 0
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
@@ -129,6 +165,8 @@
 			var/list/drivers = get_occupants_in_position("driver")
 			if(!drivers.len || isnull(drivers) || movement_destroyed)
 				inactive_pilot_effects()
+	if(spawn_datum)
+		spawn_datum.process_resource_regen()
 
 /obj/vehicles/proc/update_object_sprites() //This is modified on a vehicle-by-vehicle basis to render mobsprites etc, a basic render of playerheads in the top right is used if no overidden.
 	underlays.Cut()
@@ -226,6 +264,21 @@
 		return
 
 	comp_prof.inspect_components(user)
+
+/obj/vehicles/attack_hand(var/mob/user)
+	if(user.a_intent != "harm")
+		if(spawn_datum && spawn_datum.is_spawn_active == 1)
+			spawn_datum.handle_requisition(user,src)
+		else
+			if(!enter_as_position(user,"driver"))
+				if(!enter_as_position(user,"gunner"))
+					enter_as_position(user,"passenger")
+	else
+		. = ..()
+
+/obj/vehicles/attack_ghost(var/mob/observer/ghost/user)
+	if(spawn_datum && spawn_datum.is_spawn_active)
+		spawn_datum.handle_spawn(user,src)
 
 /obj/vehicles/attackby(var/obj/item/I,var/mob/user)
 	if(elevation > user.elevation || elevation > I.elevation)
