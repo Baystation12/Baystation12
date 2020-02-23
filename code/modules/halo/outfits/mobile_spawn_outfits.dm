@@ -10,10 +10,8 @@
 	startswith = list(\
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/nanolaminate/fifty,
-	/obj/item/stack/material/glass/reinforced/fifty,
 	/obj/item/weapon/armor_patch,
-	/obj/item/weapon/armor_patch,
-	/obj/item/weapon/armor_patch,
+	/obj/item/weapon/grenade/plasma,
 	)
 
 /decl/hierarchy/outfit/mobilespawn_unggoy //Likely won't use this, use major, grenadier and medic instead.
@@ -29,6 +27,8 @@
 	mask = /obj/item/clothing/mask/rebreather
 	r_pocket = /obj/item/weapon/grenade/plasma
 	l_pocket = /obj/item/drop_pod_beacon/covenant
+
+	flags = 0
 
 /decl/hierarchy/outfit/mobilespawn_unggoy/major
 	name = "Unggoy Soldier (Major)"
@@ -52,6 +52,8 @@
 	r_pocket = /obj/item/weapon/grenade/plasma
 	l_pocket = /obj/item/weapon/grenade/plasma
 
+	flags = 0
+
 /decl/hierarchy/outfit/mobilespawn_unggoy/medic
 	name = "Unggoy Soldier (Medic)"
 
@@ -65,7 +67,7 @@
 
 	l_hand = /obj/item/weapon/storage/backpack/sangheili/mobilespawn_engineer
 
-	r_pocket = /obj/item/weapon/grenade/smokebomb
+	r_pocket = /obj/item/weapon/armor_patch
 	l_pocket = /obj/item/weapon/grenade/smokebomb
 
 /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma5
@@ -92,15 +94,12 @@
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/glass/reinforced/fifty,
-	/obj/item/weapon/armor_patch,
-	/obj/item/weapon/armor_patch,
-	/obj/item/weapon/armor_patch,
 	/obj/item/ammo_magazine/m762_ap/MA5B,
 	/obj/item/ammo_magazine/m762_ap/MA5B,
 	/obj/item/ammo_magazine/m762_ap/MA5B
 	)
 
-/obj/item/weapon/mob/mobilespawn_janitor
+/obj/item/weapon/mop/mobilespawn_janitor
 	name = "Modified Mop"
 	desc = "This mop ssems to have been reinforced and modified to provide it with... A sharp edge?"
 	edge = 1
@@ -137,9 +136,9 @@
 	belt = /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma5
 	gloves = /obj/item/clothing/gloves/thick/unsc
 	l_pocket =/obj/item/weapon/grenade/frag/m9_hedp
-	r_pocket = /obj/item/weapon/grenade/frag/m9_hedp
+	r_pocket = /obj/item/weapon/armor_patch
 	//I'm using the L/R hands for items that are intended to go in their armour.//
-	l_hand = /obj/item/weapon/armor_patch
+	l_hand = /obj/item/weapon/grenade/frag/m9_hedp
 	r_hand = /obj/item/drop_pod_beacon
 
 	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
@@ -153,7 +152,8 @@
 	suit_store = /obj/item/weapon/gun/projectile/ma5b_ar
 	back = /obj/item/weapon/storage/backpack/marine/mobilespawn_engineer
 
-	r_pocket = /obj/item/weapon/grenade/smokebomb
+	l_pocket = /obj/item/weapon/armor_patch
+	r_pocket = /obj/item/weapon/armor_patch
 
 /decl/hierarchy/outfit/job/mobilespawn_marine/medic
 	name = "UNSC Marine (Medic)"
@@ -179,4 +179,6 @@
 	l_pocket =/obj/item/weapon/grenade/chem_grenade/cleaner
 	r_pocket = /obj/item/weapon/grenade/chem_grenade/cleaner
 
-	l_hand = /obj/item/weapon/mob/mobilespawn_janitor
+	l_hand = /obj/item/weapon/mop/mobilespawn_janitor
+
+	flags = 0

@@ -397,8 +397,6 @@
 	item_state = "marine backpack"
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	w_class = ITEM_SIZE_HUGE
-	max_w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "backpack", slot_r_hand_str = "backpack")
 
 /obj/item/weapon/storage/backpack/marine/brown
