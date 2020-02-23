@@ -60,6 +60,10 @@
 		return
 	if(!mobile_spawn_check(user))
 		return
+	visible_message("<span class = 'notice'>[user] starts preparing [src] to act as a mobile respawn point</span>")
+	if(do_after(user,10 SECONDS))
+		return
+	visible_message("<span class = 'notice'>[user] prepares [src] to act as a mobile respawn point</span>")
 	set_mobile_spawn_deploy(!spawn_datum.is_spawn_active)
 
 /obj/vehicles/proc/set_mobile_spawn_deploy(var/set_to)
