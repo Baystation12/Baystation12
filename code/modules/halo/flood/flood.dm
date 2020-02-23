@@ -135,6 +135,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/spawning = 1
 	var/swarm_size = 1
 	var/swarm_size_max = 10
+	death_sounds = list('sound/flood/infector_die1.ogg','sound/flood/infector_die2.ogg','sound/flood/infector_die3.ogg')
 
 /obj/effect/dead_infestor
 	name = "Flood infestor"
