@@ -24,6 +24,10 @@
 
 	vehicle_size = 128//Way too big
 
+/obj/vehicles/air/toggle_mobile_spawn_deploy()
+	. = ..()
+	land_vehicle(1)
+
 /obj/vehicles/air/proc/takeoff_vehicle(var/message_n_sound_override = 0)
 	active = 1
 	change_elevation(2)

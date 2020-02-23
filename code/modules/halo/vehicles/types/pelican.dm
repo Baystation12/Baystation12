@@ -43,6 +43,8 @@
 /obj/vehicles/air/pelican/unsc
 	faction = "unsc"
 
+	spawn_datum = /datum/mobile_spawn/unsc
+
 /obj/item/weapon/gun/vehicle_turret/pelican_autocannon
 	name = "M370 Autocannon"
 
@@ -91,6 +93,8 @@
 
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
+
+	spawn_datum = /datum/mobile_spawn/unsc
 
 /obj/vehicles/air/overmap/pelican/urf
 	faction = "innie"
