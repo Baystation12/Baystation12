@@ -10,7 +10,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	name = "Doisacci"
 	desc = "The language of the Jiralhanae"
 	native = 1
-	colour = "vox"
+	colour = "jiralhanae"
 	syllables = list("ung","ugh","uhh","hss","grss","grah","argh","hng","ung","uss","hoh","rog")
 	key = "D"
 	flags = RESTRICTED
