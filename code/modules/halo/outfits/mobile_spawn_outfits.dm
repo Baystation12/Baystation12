@@ -219,9 +219,9 @@
 	mask = /obj/item/clothing/mask/balaclava/tactical
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/innie/jumpsuit
-	shoes = /obj/item/clothing/shoes/innie_boots/light/brown
 	head = /obj/item/clothing/head/helmet/innie/heavy/brown
 	suit = /obj/item/clothing/suit/storage/innie/light/brown
+	shoes = /obj/item/clothing/shoes/innie_boots/light/brown
 	back = /obj/item/weapon/gun/projectile/ma5b_ar/MA3
 	suit_store = /obj/item/weapon/gun/projectile/m6d_magnum
 	belt = /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma3
@@ -270,3 +270,5 @@
 
 	l_pocket =/obj/item/weapon/grenade/smokebomb
 	r_pocket = /obj/item/weapon/grenade/smokebomb
+
+	flags = 0
