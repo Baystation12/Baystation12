@@ -100,6 +100,9 @@
 		verbs += /obj/vehicles/verb/toggle_headlights
 		set_light(0) //Switch off at spawn.
 	cargo_capacity = base_storage_capacity(capacity_flag)
+
+/obj/vehicles/Initialize()
+	. = ..()
 	if(spawn_datum)
 		spawn_datum = new spawn_datum
 		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
