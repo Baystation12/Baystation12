@@ -71,34 +71,27 @@
 	item_flags = THICKMATERIAL
 	body_parts_covered = HEAD
 
-/obj/item/clothing/suit/storage/x52armor/light
-	name = "V12L Body Armor"
-	desc = "The V12L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M22L Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
+/obj/item/clothing/suit/storage/x52armor
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
-	item_state = "armorworn-l"
-	icon_state = "amrorobj-l"
-	blood_overlay_type = "armorworn-l"
+	armor_thickness = 20
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
-	armor_thickness = 10
-	slowdown_general = -0.5
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
+
+/obj/item/clothing/suit/storage/x52armor/light //One step up but without the slowdown penalty changing
+	name = "V12L Body Armor"
+	desc = "The V12L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M22L Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
+	item_state = "x52light"
+	icon_state = "x52lightobj"
+	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	slowdown_general = -0.1
 
 /obj/item/clothing/suit/storage/x52armor/medium
 	name = "V12D Body Armor"
 	desc = "The V12D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M22D  Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
-	item_state = "armorworn-m"
-	icon_state = "armorobj-m"
-	blood_overlay_type = "armorworn-m"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
-	armor_thickness = 15
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
+	item_state = "x52medium"
+	icon_state = "x52mediumobj"
+	armor = list(melee = 55, bullet = 35, laser = 55,energy = 25, bomb = 30, bio = 5, rad = 5)
 
 /obj/item/clothing/under/innie/jumpsuit
 	name = "Insurrectionist-modified Jumpsuit"
