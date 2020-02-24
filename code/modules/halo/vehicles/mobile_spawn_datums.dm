@@ -60,3 +60,7 @@
 /datum/mobile_spawn/unsc
 	spawn_faction = "UNSC"
 	species_outfits = list("Human" = newlist(/decl/hierarchy/outfit/job/mobilespawn_marine,/decl/hierarchy/outfit/job/mobilespawn_marine/engineer,/decl/hierarchy/outfit/job/mobilespawn_marine/medic,/decl/hierarchy/outfit/job/mobilespawn_janitor))
+
+/datum/mobile_spawn/innie
+	spawn_faction = "Insurrection"
+	species_outfits = list("Human" = newlist(/decl/hierarchy/outfit/job/mobilespawn_innie,/decl/hierarchy/outfit/job/mobilespawn_innie/engineer,/decl/hierarchy/outfit/job/mobilespawn_innie/medic,/decl/hierarchy/outfit/job/mobilespawn_gladiator))

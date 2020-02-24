@@ -324,7 +324,7 @@
 "gl" = (/turf/simulated/floor,/area/urf_flagship/Armory)
 "gm" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher,/turf/simulated/floor,/area/urf_flagship/Armory)
 "gn" = (/turf/simulated/floor/carpet,/area/urf_flagship/Armory)
-"go" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/mediumurfarmor/brown,/obj/item/clothing/suit/storage/mediumurfarmor/brown,/obj/item/clothing/suit/storage/mediumurfarmor/brown,/obj/item/clothing/shoes/mediumurfboot/brown,/obj/item/clothing/shoes/mediumurfboot/brown,/obj/item/clothing/shoes/mediumurfboot/brown,/obj/item/clothing/head/helmet/mediumurf/brown,/obj/item/clothing/head/helmet/mediumurf/brown,/obj/item/clothing/head/helmet/mediumurf/brown,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
+"go" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/innie/medium/brown,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Troopbunks)
 "gp" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
 "gq" = (/obj/machinery/light{dir = 1},/obj/structure/table/rack,/obj/item/ammo_magazine/HMG_boxmag,/obj/item/ammo_magazine/HMG_boxmag,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
 "gr" = (/obj/structure/closet/walllocker/emerglocker/north,/obj/structure/table/rack,/obj/item/ammo_magazine/chaingun_boxmag,/obj/item/ammo_magazine/chaingun_boxmag,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
@@ -534,11 +534,10 @@
 "kn" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
 "ko" = (/obj/effect/landmark/dropship_land_point/innie{name = "URF hanger 1"},/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
 "kp" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/x52armor/light,/obj/item/clothing/suit/storage/x52armor/light,/turf/simulated/floor/holofloor/wood,/area/space)
-"kq" = (/obj/structure/table/rack,/obj/item/clothing/shoes/mediumurfboot/blue,/obj/item/clothing/suit/storage/heavyurfarmor/blue,/turf/simulated/floor/holofloor/wood,/area/urf_flagship/captainroom)
 "kr" = (/obj/machinery/door/airlock/hatch{name = "Captain's Quarters"; req_access = list(858)},/turf/simulated/floor/holofloor/wood,/area/urf_flagship/captainroom)
 "ks" = (/obj/machinery/light/small{tag = "icon-bulb1 (EAST)"; icon_state = "bulb1"; dir = 4},/turf/simulated/floor/holofloor/wood,/area/urf_flagship/captainroom)
 "kt" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/x52armor/medium,/obj/item/clothing/suit/storage/x52armor/medium,/turf/simulated/floor/holofloor/wood,/area/urf_flagship/captainroom)
-"ku" = (/obj/structure/table/rack,/obj/item/clothing/head/helmet/heavyurf/vblue,/turf/simulated/floor/holofloor/wood,/area/urf_flagship/captainroom)
+"ku" = (/obj/structure/table/rack,/turf/simulated/floor/holofloor/wood,/area/urf_flagship/captainroom)
 "CF" = (/obj/machinery/telecomms/relay/flagship_relay,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 
 (1,1,1) = {"
@@ -611,7 +610,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaanan
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaananananananananananananajaoamamamapamamamaoapamamamamamamaoapaqapamamaoamamamamamapaqapaoamamamamamamapaoamamamapamamamamamamaoamamamamapfvhmfvfvfvfvfvfvfvajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaanangagogOhlhogOhMgohOanajamajamajajajajajajajajajajajajajajajajajajajamajamajajajajajajajajajajajajajajajajajajajajamajajajajajajajajajamhQfvfvfvfvhZfvfvfvajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalananiqaSiraSaSaSaSaSiSanajamajaqajajajajajajarajajajajajajajajajajajajaqajaqajajajajajajajajajajajajajajajajajajajajaqajajajajajajajajajamajfvfvfvfviTfvfvfvajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalkpkqasaniXaSjWaSaSjWiraSjXanajamajauavawavavaxavavavavavavavawaxavawavavavavavavavaxavavawavavawavaxavavavavavavavaxawavayajajazaAazajajajajaqajjYfvfvfPhmfvfvdcajaBaBaBajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalkpkuasaniXaSjWaSaSjWiraSjXanajamajauavawavavaxavavavavavavavawaxavawavavavavavavavaxavavawavavawavaxavavavavavavavaxawavayajajazaAazajajajajaqajjYfvfvfPhmfvfvdcajaBaBaBajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalbMkrbMksasananananjZaSanananananajamajaEaFaGaHaHaHaHaHaHaHaHaHaHaGaIaJaGaHaHaHaHaHaHaHaHaHaHaGaIaJaGaHaHaHaHaHaHaHaHaHaHaGaIaKajajaLaMaLajajamaoamamajajajajajajajajaNaOamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalalalalalalalalalaPasksasktkuasaQaRaQanaSaSanaQaRaQanajamajaEaTaUaUaUaUaUaUaUaUaUaUaUaUaVaTaWaWaWaWaWaWaWaWaWaWaWaWaVaTaXaXaXaXaXaXaXaXaXaXaXaXaVaKajajaLaLaLajajaYCFbabbajbcbdbebfbgbhajaNbiamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalalaPaPaPaPaPaPaPaPaPaPaskrasasasasbjbjbjanbkiranbjbjbjanajamajaEaKaUblbmbnbobpbqbrbsbtbuaUaEaKaWbvbwbwbwbxbwbwbwbwbyaWaEaKaXbzbAbBbCbDbBbAbEbFbAaXaEaKajajajbGajajajamamamamajbHamamamamamajbIbibJambKaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
