@@ -66,6 +66,9 @@
 /decl/hierarchy/outfit/mobilespawn_unggoy/engineer
 	name = "Unggoy Soldier (Engineer)"
 
+	belt = /obj/item/weapon/storage/belt/covenant/full
+	r_hand = /obj/item/weapon/gun/energy/plasmapistol
+
 	l_hand = /obj/item/weapon/storage/backpack/sangheili/mobilespawn_engineer
 
 	r_pocket = /obj/item/weapon/armor_patch
