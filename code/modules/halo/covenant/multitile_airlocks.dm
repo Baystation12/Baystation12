@@ -25,13 +25,11 @@
 /obj/machinery/door/airlock/multi_tile/covenant/three
 	name = "Airlock"
 	icon = 'code/modules/halo/covenant/covenant3/door96.dmi'
-	dir = NORTH
 	width = 3
 	maxhealth = 1500
 
 /obj/machinery/door/airlock/multi_tile/covenant/four
 	name = "Vehicle Airlock"
 	icon = 'code/modules/halo/covenant/covenant4/door128.dmi'
-	dir = NORTH
 	width = 4
 	maxhealth = 2000
