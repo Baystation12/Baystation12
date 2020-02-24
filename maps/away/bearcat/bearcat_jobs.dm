@@ -2,7 +2,7 @@
 	title = "Freighter Captain"
 	total_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/bearcat/captain
-	supervisors = "your self-conscious"
+	supervisors = "your conscience"
 	info = "Your ship has suffered a catastrophic amount of damage, leaving it dark and crippled in the depths of \
 	unexplored space. Your captain is dead, leaving you, the former first mate, in charge. Organize what's left of \
 	your crew, and maybe you'll be able to survive long enough to be rescued."
