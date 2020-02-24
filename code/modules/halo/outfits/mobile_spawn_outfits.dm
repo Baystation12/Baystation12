@@ -265,7 +265,7 @@
 	uniform = /obj/item/clothing/under/gladiator/combat_ready
 
 	l_hand = /obj/item/weapon/material/sword
-	r_hand = /obj/item/weapon/material/twohanded/spear
+	r_hand = /obj/item/weapon/explosive_spear
 	back = /obj/item/weapon/material/twohanded/spear
 
 	l_pocket =/obj/item/weapon/grenade/smokebomb
