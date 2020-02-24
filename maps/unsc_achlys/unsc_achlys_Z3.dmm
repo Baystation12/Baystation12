@@ -431,7 +431,7 @@
 "io" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/vent,/turf/simulated/floor/tiled/dark,/area/achlys/two/z3escape1)
 "ip" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/five/z3scienceaux)
 "iq" = (/obj/effect/floor_decal/corner/white/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/machinery/auto_cloner,/turf/simulated/floor/tech/white,/area/achlys/five/z3scienceaux)
-"ir" = (/obj/machinery/door/airlock/glass_sol{name = "Airlock"; req_access = list(510)},/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
+"ir" = (/obj/machinery/door/airlock/glass/command{name = "Airlock"; req_access = list(510)},/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
 "is" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
 "it" = (/obj/effect/floor_decal/corner/grey/diagonal{tag = "icon-corner_white_diagonal (EAST)"; icon_state = "corner_white_diagonal"; dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/achlys/five/z3scienceaux)
 "iu" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tranquility/catwalk3,/area/achlys/one/z3prisonupper4)

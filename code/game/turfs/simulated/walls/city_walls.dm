@@ -1,7 +1,8 @@
-// Chrome walls
+// Tech walls
 
 /turf/simulated/wall/tech
 	paint_color = "#44474d"
+
 
 // Steel Walls
 
@@ -13,21 +14,20 @@
 	paint_color = "#312b38"
 	stripe_color = COLOR_PALE_GREEN_GRAY
 
-//	stripes_glow = TRUE
-
 /turf/simulated/wall/disco/blue
 	stripe_color = COLOR_BLUE_GRAY
-//	stripes_glow = TRUE
 
 /turf/simulated/wall/disco/purple
 	stripe_color = COLOR_PALE_PURPLE_GRAY
-//	stripes_glow = TRUE
+
 
 // Plastic/White walls
 
-/turf/simulated/wall/chrome
-	stripe_color = COLOR_BLUE_GRAY
+/turf/simulated/wall/plastic/hospital
 	paint_color = "#CCCCCC"
+
+/turf/simulated/wall/plastic/hospital
+	stripe_color = COLOR_BLUE_GRAY
 
 /turf/simulated/wall/plastic/viro
 	stripe_color = COLOR_PALE_GREEN_GRAY
