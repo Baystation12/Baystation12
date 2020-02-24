@@ -197,6 +197,7 @@
 	name = "Medical Supplies Storage Belt"
 	desc = "A belt with multiple hooks to hold medical kits, alongside a few small ammunition pouches"
 	icon_state = "medicalbelt"
+	w_class = ITEM_SIZE_HUGE
 	/*icon = ITEM_INHAND //Using normal medical belt sprites for now.
 	icon_override = MARINE_OVERRIDE
 	icon_state = "UNSC Marine Medical Belt item"
