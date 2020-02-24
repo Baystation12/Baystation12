@@ -276,6 +276,8 @@
 	icon_state = "h_innie_helmet_obj_white_visor"
 
 /obj/item/clothing/shoes/innie_boots
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
 	can_hold_knife = 1
