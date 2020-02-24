@@ -10,6 +10,7 @@
 	startswith = list(\
 	/obj/item/stack/material/steel/fifty,
 	/obj/item/stack/material/nanolaminate/fifty,
+	/obj/item/stack/material/glass/reinforced/fifty,
 	/obj/item/weapon/armor_patch,
 	/obj/item/weapon/grenade/plasma,
 	)
@@ -161,6 +162,7 @@
 	head = /obj/item/clothing/head/helmet/marine/medic
 	suit = /obj/item/clothing/suit/storage/marine/medic
 	suit_store = /obj/item/weapon/gun/projectile/m7_smg
+	back = null
 	belt = /obj/item/weapon/storage/belt/marine_medic/mobilespawn_medic
 	l_pocket =/obj/item/weapon/grenade/smokebomb
 	r_pocket = /obj/item/weapon/grenade/smokebomb
@@ -250,6 +252,7 @@
 	shoes = /obj/item/clothing/shoes/innie_boots/light/white
 	head = /obj/item/clothing/head/helmet/innie/heavy/white
 	suit = /obj/item/clothing/suit/storage/innie/light/white
+	back = null
 	suit_store = /obj/item/weapon/gun/projectile/m7_smg
 	belt = /obj/item/weapon/storage/belt/marine_medic/mobilespawn_medic
 	l_pocket =/obj/item/weapon/grenade/smokebomb

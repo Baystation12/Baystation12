@@ -18,6 +18,15 @@
 		var/obj/temp_item = new item
 		acquirable_items[temp_item.name] = item
 		qdel(temp_item)
+	for(var/species in species_outfits)
+		var/list/holder_list = species_outfits[species]
+		for(var/outfit in holder_list)
+			var/outfit_ref = outfits_decls_by_type_[outfit]
+			if(!outfit_ref)
+				log_debug("An outfit ([outfit]) in a mobile spawn datum ([type]) failed to obtain a reference")
+				continue
+			holder_list -= outfit
+			holder_list += outfit_ref
 
 /datum/mobile_spawn/proc/process_resource_regen(var/amt = 0.5)
 	resource_pool = min(100,resource_pool+amt)
@@ -62,14 +71,14 @@
 
 /datum/mobile_spawn/covenant
 	spawn_faction = "Covenant"
-	species_outfits = list("Unggoy" = newlist(/decl/hierarchy/outfit/mobilespawn_unggoy/major,/decl/hierarchy/outfit/mobilespawn_unggoy/medic,/decl/hierarchy/outfit/mobilespawn_unggoy/engineer,/decl/hierarchy/outfit/mobilespawn_unggoy_grenadier))
+	species_outfits = list("Unggoy" = list(/decl/hierarchy/outfit/mobilespawn_unggoy/major,/decl/hierarchy/outfit/mobilespawn_unggoy/medic,/decl/hierarchy/outfit/mobilespawn_unggoy/engineer,/decl/hierarchy/outfit/mobilespawn_unggoy_grenadier))
 
 /datum/mobile_spawn/unsc
 	spawn_faction = "UNSC"
 	access_list = list(access_unsc,144,192)
-	species_outfits = list("Human" = newlist(/decl/hierarchy/outfit/job/mobilespawn_marine,/decl/hierarchy/outfit/job/mobilespawn_marine/engineer,/decl/hierarchy/outfit/job/mobilespawn_marine/medic,/decl/hierarchy/outfit/job/mobilespawn_janitor))
+	species_outfits = list("Human" = list(/decl/hierarchy/outfit/job/mobilespawn_marine,/decl/hierarchy/outfit/job/mobilespawn_marine/engineer,/decl/hierarchy/outfit/job/mobilespawn_marine/medic,/decl/hierarchy/outfit/job/mobilespawn_janitor))
 
 /datum/mobile_spawn/innie
 	spawn_faction = "Insurrection"
 	access_list = list(access_innie)
-	species_outfits = list("Human" = newlist(/decl/hierarchy/outfit/job/mobilespawn_innie,/decl/hierarchy/outfit/job/mobilespawn_innie/engineer,/decl/hierarchy/outfit/job/mobilespawn_innie/medic,/decl/hierarchy/outfit/job/mobilespawn_gladiator))
+	species_outfits = list("Human" = list(/decl/hierarchy/outfit/job/mobilespawn_innie,/decl/hierarchy/outfit/job/mobilespawn_innie/engineer,/decl/hierarchy/outfit/job/mobilespawn_innie/medic,/decl/hierarchy/outfit/job/mobilespawn_gladiator))
