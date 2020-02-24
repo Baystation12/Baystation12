@@ -33,6 +33,7 @@
 	armor_thickness = 20
 	flags_inv = 29
 	breach_threshold = 100
+	flags_inv = 0
 
 /obj/item/clothing/suit/space/void/swat/thetar
 	name = "Red Orion Armor"
