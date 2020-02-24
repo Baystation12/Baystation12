@@ -105,8 +105,6 @@
 	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 45, laser = 40, energy = 45, bomb = 35, bio = 0, rad = 0)
-	var/slots = 4
-	var/max_w_class = ITEM_SIZE_SMALL
 	armor_thickness = 20
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
 
@@ -119,7 +117,6 @@
 	w_class = ITEM_SIZE_LARGE
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 30, bullet = 30, laser = 10, energy = 10, bomb = 45, bio = 0, rad = 0)
-	slots = 2
 	armor_thickness = 20
 
 /obj/item/clothing/suit/storage/marine/military_police
@@ -159,7 +156,6 @@
 	icon_state = "M52B Body Armor regular B_obj"
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
 /obj/item/clothing/shoes/marine
 	name = "Olive VZG7 Armored Boots"
@@ -170,7 +166,6 @@
 	icon_state = "boots"
 	force = 5
 	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
 	can_hold_knife = 1

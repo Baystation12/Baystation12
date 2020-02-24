@@ -141,7 +141,7 @@
 	l_hand = /obj/item/weapon/grenade/frag/m9_hedp
 	r_hand = /obj/item/drop_pod_beacon
 
-	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/holster/thigh, /obj/item/clothing/accessory/badge/tags)
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e2, /obj/item/clothing/accessory/badge/tags)
 
 	flags = 0
 
@@ -182,3 +182,91 @@
 	l_hand = /obj/item/weapon/mop/mobilespawn_janitor
 
 	flags = 0
+
+/obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma3
+	startswith = list(\
+	/obj/item/ammo_magazine/m762_ap/MA3,
+	/obj/item/ammo_magazine/m762_ap/MA3,
+	/obj/item/ammo_magazine/m762_ap/MA3,
+	/obj/item/ammo_magazine/m762_ap/MA3,
+	/obj/item/ammo_magazine/m127_saphe,
+	/obj/item/ammo_magazine/m127_saphe
+	)
+
+/obj/item/weapon/storage/backpack/marine/mobilespawn_engineer_innie
+	startswith = list(\
+	/obj/item/stack/material/steel/fifty,
+	/obj/item/stack/material/steel/fifty,
+	/obj/item/stack/material/glass/reinforced/fifty,
+	/obj/item/ammo_magazine/m762_ap/MA3,
+	/obj/item/ammo_magazine/m762_ap/MA3,
+	/obj/item/ammo_magazine/m762_ap/MA3
+	)
+
+/obj/item/clothing/head/helmet/gladiator/combat_ready
+	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	armor_thickness = 20
+
+/obj/item/clothing/under/gladiator/combat_ready
+	armor = list(melee = 45, bullet = 40, laser = 35, energy = 40, bomb = 30, bio = 0, rad = 0)
+	armor_thickness = 20
+
+/decl/hierarchy/outfit/job/mobilespawn_innie
+	name = "Insurrectionist (MA3)"
+
+	l_ear = /obj/item/device/radio/headset/insurrection
+	r_ear = /obj/item/weapon/reagent_containers/syringe/biofoam
+	mask = /obj/item/clothing/mask/balaclava/tactical
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	uniform = /obj/item/clothing/under/innie/jumpsuit
+	shoes = /obj/item/clothing/shoes/innie_boots/light/brown
+	head = /obj/item/clothing/head/helmet/innie/heavy/brown
+	suit = /obj/item/clothing/suit/storage/innie/light/brown
+	back = /obj/item/weapon/gun/projectile/ma5b_ar/MA3
+	suit_store = /obj/item/weapon/gun/projectile/m6d_magnum
+	belt = /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_ma3
+	gloves = /obj/item/clothing/gloves/thick/unsc
+	l_pocket =/obj/item/weapon/grenade/frag/m9_hedp
+	r_pocket = /obj/item/weapon/armor_patch
+	//I'm using the L/R hands for items that are intended to go in their armour.//
+	l_hand = /obj/item/weapon/grenade/frag/m9_hedp
+	r_hand = /obj/item/weapon/grenade/smokebomb
+
+	flags = 0
+
+/decl/hierarchy/outfit/job/mobilespawn_innie/engineer
+	name = "Insurrectionist Engineer"
+
+	belt = /obj/item/weapon/storage/belt/utility/full
+	suit_store = /obj/item/weapon/gun/projectile/ma5b_ar/MA3
+	back = /obj/item/weapon/storage/backpack/marine/mobilespawn_engineer_innie
+
+	l_pocket = /obj/item/weapon/armor_patch
+	r_pocket = /obj/item/weapon/armor_patch
+
+/decl/hierarchy/outfit/job/mobilespawn_innie/medic
+	name = "Insurrectionist Medic"
+
+	shoes = /obj/item/clothing/shoes/innie_boots/light/white
+	head = /obj/item/clothing/head/helmet/innie/heavy/white
+	suit = /obj/item/clothing/suit/storage/innie/light/white
+	suit_store = /obj/item/weapon/gun/projectile/m7_smg
+	belt = /obj/item/weapon/storage/belt/marine_medic/mobilespawn_medic
+	l_pocket =/obj/item/weapon/grenade/smokebomb
+	r_pocket = /obj/item/weapon/grenade/smokebomb
+
+/decl/hierarchy/outfit/job/mobilespawn_gladiator
+	name = "Insurrectionist Gladiator"
+
+	l_ear = /obj/item/device/radio/headset/insurrection
+	r_ear = /obj/item/weapon/reagent_containers/syringe/biofoam
+
+	head = /obj/item/clothing/head/helmet/gladiator/combat_ready
+	uniform = /obj/item/clothing/under/gladiator/combat_ready
+
+	l_hand = /obj/item/weapon/material/sword
+	r_hand = /obj/item/weapon/material/twohanded/spear
+	back = /obj/item/weapon/material/twohanded/spear
+
+	l_pocket =/obj/item/weapon/grenade/smokebomb
+	r_pocket = /obj/item/weapon/grenade/smokebomb

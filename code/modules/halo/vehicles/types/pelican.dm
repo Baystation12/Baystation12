@@ -108,6 +108,8 @@
 
 	light_color = "#FEFFE1"
 
+	spawn_datum = /datum/mobile_spawn/innie
+
 /obj/vehicles/air/pelican/innie/update_object_sprites()
 	. = ..()
 	overlays += image(icon,"innie_overlay")

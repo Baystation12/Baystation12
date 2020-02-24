@@ -43,9 +43,9 @@
 
 /decl/hierarchy/supply_pack/khoros/lightarmour
 	name = "Khoros Light Armour pack"
-	contains = list(/obj/item/clothing/shoes/lighturfboot/brown = 1,\
-		/obj/item/clothing/head/helmet/lighturf/brown = 1,\
-		/obj/item/clothing/suit/storage/lighturfarmor/brown = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/light/brown = 1,\
+		/obj/item/clothing/head/helmet/innie/light/brown = 1,\
+		/obj/item/clothing/suit/storage/innie/light/brown = 1)
 	cost = 1250
 	containername = "\improper khoros Light Armour crate"
 	containertype = /obj/structure/closet/secure_closet/cargotech
@@ -53,18 +53,18 @@
 
 /decl/hierarchy/supply_pack/khoros/mediumarmour
 	name = "Khoros Medium Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/brown = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/brown = 1,\
-		/obj/item/clothing/suit/storage/mediumurfarmor/brown = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/brown = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/brown = 1,\
+		/obj/item/clothing/suit/storage/innie/medium/brown = 1)
 	cost = 1500
 	containername = "\improper khoros Medium Armour crate"
 	containertype = /obj/structure/closet/secure_closet/cargotech
 
 /decl/hierarchy/supply_pack/khoros/heavyarmour
 	name = "Khoros Heavy Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/brown = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/brown = 1,\
-		/obj/item/clothing/suit/storage/heavyurfarmor/brown = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/brown = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/brown = 1,\
+		/obj/item/clothing/suit/storage/innie/heavy/brown = 1)
 	cost = 1500
 	containername = "\improper khoros Heavy Armour crate"
 	containertype = /obj/structure/closet/secure_closet/cargotech
