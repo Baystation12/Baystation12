@@ -9,6 +9,7 @@
 	var/list/whitelisted_species = list() //species name = whitelist name
 
 	var/resource_pool = 100 //Arbitrary resources.
+	var/access_list = list() //Our basic access list.
 	var/list/acquirable_items = list() //item name = typepath, autofilled by system.
 	var/list/item_costs = list() //item typepath = cost
 
@@ -51,6 +52,12 @@
 	h.faction = spawn_faction
 	outfit_choice.equip(h)
 	h.ckey = user.ckey
+	var/obj/item/weapon/card/id/id = h.GetIdCard()
+	var/obj/item/organ/internal/stack/lace = h.GetLace()
+	if(id)
+		id.access = access_list
+	if(lace)
+		lace.access = access_list
 	qdel(user)
 
 /datum/mobile_spawn/covenant
@@ -59,8 +66,10 @@
 
 /datum/mobile_spawn/unsc
 	spawn_faction = "UNSC"
+	access_list = list(access_unsc,144,192)
 	species_outfits = list("Human" = newlist(/decl/hierarchy/outfit/job/mobilespawn_marine,/decl/hierarchy/outfit/job/mobilespawn_marine/engineer,/decl/hierarchy/outfit/job/mobilespawn_marine/medic,/decl/hierarchy/outfit/job/mobilespawn_janitor))
 
 /datum/mobile_spawn/innie
 	spawn_faction = "Insurrection"
+	access_list = list(access_innie)
 	species_outfits = list("Human" = newlist(/decl/hierarchy/outfit/job/mobilespawn_innie,/decl/hierarchy/outfit/job/mobilespawn_innie/engineer,/decl/hierarchy/outfit/job/mobilespawn_innie/medic,/decl/hierarchy/outfit/job/mobilespawn_gladiator))
