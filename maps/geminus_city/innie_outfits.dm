@@ -2,12 +2,12 @@
 /decl/hierarchy/outfit/job/geminus_innie
 	name = "Insurrectionist"
 
-	head = /obj/item/clothing/head/helmet/mediumurf/brown
+	head = /obj/item/clothing/head/helmet/innie/medium/brown
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	mask = /obj/item/clothing/mask/balaclava/tactical
-	suit = /obj/item/clothing/suit/storage/mediumurfarmor/brown
+	suit = /obj/item/clothing/suit/storage/innie/medium/brown
 	uniform = /obj/item/clothing/under/innie/jumpsuit
-	shoes = /obj/item/clothing/shoes/mediumurfboot/brown
+	shoes = /obj/item/clothing/shoes/innie_boots/medium/brown
 	l_ear = /obj/item/device/radio/headset/insurrection
 	gloves = /obj/item/clothing/gloves/x52/x52gloves
 	pda_slot = null
@@ -26,12 +26,12 @@
 /decl/hierarchy/outfit/job/geminus_innie_leader
 	name = "Insurrectionist Captain"
 
-	head = /obj/item/clothing/head/helmet/heavyurf/vblue
+	head = /obj/item/clothing/head/helmet/innie/heavy/vblue
 	glasses =/obj/item/clothing/glasses/hud/tactical
 	mask = /obj/item/clothing/mask/balaclava/tactical
-	suit = /obj/item/clothing/suit/storage/heavyurfarmor/blue
+	suit = /obj/item/clothing/suit/storage/innie/heavy/blue
 	uniform = /obj/item/clothing/under/innie/jumpsuit
-	shoes = /obj/item/clothing/shoes/mediumurfboot/blue
+	shoes = /obj/item/clothing/shoes/innie_boots/medium/blue
 	l_ear = /obj/item/device/radio/headset/insurrection
 	gloves = /obj/item/clothing/gloves/x52/x52gloves
 	pda_slot = null
