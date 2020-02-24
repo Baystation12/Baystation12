@@ -2145,6 +2145,11 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon = 'code/modules/halo/icons/species/Skirmisher_inhand.dmi'
 	icon_state = "parrot_obj"
 	item_state = "parrot"
+	var/list/sounds = list()
+
+/obj/item/toy/plushie/donator/vampire/attack_self(var/mob/user)
+	if(sounds.len > 0)
+		playsound(loc, pick(sounds), 100)
 
 /obj/item/weapon/storage/box/large/donator/vampire
 	startswith = list(/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire,
