@@ -21,7 +21,7 @@
 	for(var/species in species_outfits)
 		var/list/holder_list = species_outfits[species]
 		for(var/outfit in holder_list)
-			var/outfit_ref = outfits_decls_by_type_[outfit]
+			var/outfit_ref = outfit_by_type(outfit)
 			if(!outfit_ref)
 				log_debug("An outfit ([outfit]) in a mobile spawn datum ([type]) failed to obtain a reference")
 				continue
