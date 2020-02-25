@@ -1,5 +1,5 @@
 
-GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
+GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_overmind/flood)
 
 #define REPORT_CONTACT 1
 #define REPORT_CONSTRUCT 2

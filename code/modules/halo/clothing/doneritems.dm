@@ -2147,11 +2147,11 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "parrot"
 	var/next_sound = 0
 	var/play_music = 0
-	var/list/sound_voice = list(\
+	var/list/sound_music = list(\
 	'code/modules/halo/sounds/rafaj_donor/music_1.ogg' = 162 SECONDS,
 	'code/modules/halo/sounds/rafaj_donor/music_2.ogg' = 127 SECONDS
 	)
-	var/list/sound_music = list(\
+	var/list/sound_voice = list(\
 	'code/modules/halo/sounds/rafaj_donor/voiceline_1.ogg',
 	'code/modules/halo/sounds/rafaj_donor/voiceline_2.ogg',
 	'code/modules/halo/sounds/rafaj_donor/voiceline_3.ogg',
@@ -2171,10 +2171,10 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	to_chat(usr,"<span class = 'notice'>You toggle [src] to [play_music ? "play music" : "play voice lines"].</span>")
 
 /obj/item/toy/plushie/donator/vampire/attack_self(var/mob/user)
-	if(sound_voice.len > 0 && world.time >= next_sound)
+	if(sound_voice.len > 0)
 		var/list/l_use = sound_voice
 		if(play_music)
-			if(sound_music.len == 0)
+			if(sound_music.len == 0 || world.time < next_sound)
 				return
 			l_use = sound_music
 		var/sfx_play = pick(l_use)
