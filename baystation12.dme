@@ -1736,6 +1736,7 @@
 #include "code\modules\halo\species_items\lekgolo_defence.dm"
 #include "code\modules\halo\species_items\lekgolo_language.dm"
 #include "code\modules\halo\species_items\lekgolo_ui.dm"
+#include "code\modules\halo\species_items\orion.dm"
 #include "code\modules\halo\species_items\sangheili.dm"
 #include "code\modules\halo\species_items\sangheili_outfits.dm"
 #include "code\modules\halo\species_items\sanshyuum.dm"
