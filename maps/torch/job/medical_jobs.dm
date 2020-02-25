@@ -207,4 +207,11 @@
 
 
 /datum/job/psychiatrist/get_description_blurb()
-	return "You are the Counselor. Your main responsibility is the mental health and wellbeing of the crew. You are subordinate to the Chief Medical Officer."
+	if(H.mind.role_alt_title == "Psionic Counselor")
+		or
+	if(H.mind.role_alt_title == "Mentalist")
+		return "You are a psionic counselor. You are psionically awakened, part of a tiny minority, and you are the first and only exposure most of the crew will have to the mentally gifted. Your main responsibility is the mental health and wellbeing of the crew. You are subordinate to the Chief Medical Officer."
+	if(H.mind.role_alt_title == "Counselor")
+		or
+	if(H.mind.role_alt_title == "Psychiatrist")
+		return "You are the Counselor. Your main responsibility is the mental health and wellbeing of the crew. You are subordinate to the Chief Medical Officer."
