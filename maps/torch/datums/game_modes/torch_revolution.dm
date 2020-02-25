@@ -1,4 +1,5 @@
 /datum/game_mode/revolution
+	name = "Mutiny"
 	round_description = "Morale is shattered, and a mutiny is brewing! Use the 'Check Round Info' verb for more information!"
 	extended_round_description = "Time in space, away from home and loved ones, takes its toll on even the most grizzled space travellers. To make matters worse, the planned return trip to Sol \
 								for refitting, repairs and relaxation has been cancelled by the brass; instead, the SEV Torch is to, for the first time, enter a hibernative state. All crew will enter cryogenic stasis, \
