@@ -59,6 +59,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
 							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
 	assault_target_type = /obj/effect/landmark/assault_target
+	see_in_dark = 6
 
 	faction = "Flood"
 
@@ -140,6 +141,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/spawning = 1
 	var/swarm_size = 1
 	var/swarm_size_max = 10
+	death_sounds = list('sound/flood/infector_die1.ogg','sound/flood/infector_die2.ogg','sound/flood/infector_die3.ogg')
 
 /obj/effect/dead_infestor
 	name = "Flood infestor"
@@ -401,7 +403,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		return 0
 	var/mob/living/carbon/human/h = attacked
 	if(istype(h))
-		h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,melee_damage_lower/3)
+		h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,melee_damage_lower/4)
 	pickup_gun(attacked)
 
 /mob/living/simple_animal/hostile/flood/combat_form/RangedAttack(var/atom/attacked)
@@ -467,7 +469,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "marine_infested"
 	icon_dead = "marine_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100
 	maxHealth = 100
 	resistance = 10
@@ -482,7 +484,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "odst_infested"
 	icon_dead = "odst_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -502,7 +504,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "guard_infested"
 	icon_dead = "guard_dead"
 	inventory = list(/obj/item/ammo_magazine/m762_ap/MA37)
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
 	resistance = 15
@@ -517,7 +519,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "oni_infested"
 	icon_dead = "oni_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
 	resistance = 15
@@ -532,7 +534,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Minor 1"
 	icon_dead = "Minor 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -547,7 +549,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Minor 2"
 	icon_dead = "Minor 2 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -562,7 +564,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "Major 1"
 	icon_dead = "Major 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -576,8 +578,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "Zealot 1"
 	icon_living = "Zealot 1"
 	icon_dead = "Zealot 1 Dead"
-	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 165 //Combat forms need to be hardier.
 	maxHealth = 165
 	resistance = 20
@@ -591,8 +592,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "Ultra 1"
 	icon_living = "Ultra 1"
 	icon_dead = "Ultra 1 Dead"
-	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 150 //Combat forms need to be hardier.
 	maxHealth = 150
 	resistance = 20
@@ -606,8 +606,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "SO 1"
 	icon_living = "SO 1"
 	icon_dead = "SO 1 Dead"
-	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 150 //Combat forms need to be hardier.
 	maxHealth = 150
 	resistance = 10
@@ -622,8 +621,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "Ranger 1"
 	icon_living = "Ranger 1"
 	icon_dead = "Ranger 1 Dead"
-	//
-	move_to_delay = 1
+	move_to_delay = 
 	health = 135 //Combat forms need to be hardier.
 	maxHealth = 135
 	resistance = 20
@@ -637,7 +635,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "movement state"
 	icon_living = "movement state"
 	icon_dead = "death state"
-	move_to_delay = 1
+	move_to_delay = 15
 	health = 300 //Combat forms need to be hardier.
 	maxHealth = 300
 	melee_damage_lower = 40
@@ -672,7 +670,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "prisoner_infected2"
 	icon_dead = "prisoner_infected2_dead"
 	icon_living = "prisoner_infected2"
-	move_to_delay = 4
+	move_to_delay = 8
 	health = 50 //intentionally squishy to give melee combat a chance
 	maxHealth = 50
 	melee_damage_lower = 15
@@ -685,7 +683,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "prisoner_infected1"
 	icon_living = "prisoner_infected1"
 	icon_dead = "prisoner_infected1_dead"
-	move_to_delay = 6 //slower than common counterpart to give sense of weight to it
+	move_to_delay = 10 //slower than common counterpart to give sense of weight to it
 	health = 85 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
 	maxHealth = 85
 	melee_damage_lower = 20 //as above so below
@@ -710,7 +708,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "abomination"
 	icon_living = "abomination"
 	icon_dead = "abomination_dead"
-	move_to_delay = 2 //fast enough to give a sense of danger and muscle
+	move_to_delay = 4 //fast enough to give a sense of danger and muscle
 	resistance = 5
 	health = 250
 	maxHealth = 250 //these will be specifically put in certain locations and not RNG based
