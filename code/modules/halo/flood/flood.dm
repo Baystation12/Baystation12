@@ -621,7 +621,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "Ranger 1"
 	icon_living = "Ranger 1"
 	icon_dead = "Ranger 1 Dead"
-	move_to_delay = 
+	move_to_delay = 4
 	health = 135 //Combat forms need to be hardier.
 	maxHealth = 135
 	resistance = 20
