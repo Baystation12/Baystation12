@@ -2145,6 +2145,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon = 'code/modules/halo/icons/species/Skirmisher_inhand.dmi'
 	icon_state = "parrot_obj"
 	item_state = "parrot"
+	slot_flags = SLOT_POCKET | SLOT_BELT | SLOT_BACK | SLOT_EARS
 	var/next_sound = 0
 	var/play_music = 0
 	var/list/sound_music = list(\
