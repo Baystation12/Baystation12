@@ -196,12 +196,10 @@
 	give_psionic_implant_on_join = FALSE
 
 /datum/job/psychiatrist/equip(var/mob/living/carbon/human/H)
-	if(H.mind.role_alt_title == "Counselor")
-		psi_faculties = list("[PSI_REDACTION]" = PSI_RANK_OPERANT)
 	if(H.mind.role_alt_title == "Mentalist")
 		psi_faculties = list("[PSI_COERCION]" = PSI_RANK_OPERANT)
 	return ..()
 
 
 /datum/job/psychiatrist/get_description_blurb()
-	return "You are the Counselor. You are psionically awakened, part of a tiny minority, and you are the first and only exposure most of the crew will have to the mentally gifted. Your main responsibility is the mental health and wellbeing of the crew. You are subordinate to the Chief Medical Officer."
+	return "You are the Counselor. Your main responsibility is the mental health and wellbeing of the crew. You are subordinate to the Chief Medical Officer."
