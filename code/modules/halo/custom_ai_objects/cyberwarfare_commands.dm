@@ -513,4 +513,4 @@
 
 /datum/cyberwarfare_command/overmind_command/flood/New()
 	. = ..()
-	our_mind = flood_overmind
+	our_mind = GLOB.flood_overmind

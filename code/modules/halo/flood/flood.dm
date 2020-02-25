@@ -71,7 +71,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/New()
-	our_overmind = flood_overmind
+	our_overmind = GLOB.flood_overmind
 	. = ..()
 	GLOB.live_flood_simplemobs.Add(src)
 	/*if(prob(50))

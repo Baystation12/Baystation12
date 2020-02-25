@@ -1,5 +1,4 @@
-
-#define MOBILE_SPAWN_RESPAWN_TIME 5 MINUTES
+GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,5 MINUTES)
 
 /datum/mobile_spawn
 	var/is_spawn_active = 0
@@ -42,7 +41,7 @@
 	resource_pool -= item_costs[item_requisition]
 
 /datum/mobile_spawn/proc/handle_spawn(var/mob/user,var/obj/vehicle_spawnfrom)
-	if(world.time - user.timeofdeath < MOBILE_SPAWN_RESPAWN_TIME)
+	if(world.time - user.timeofdeath < GLOB.MOBILE_SPAWN_RESPAWN_TIME)
 		to_chat(user,"<span class = 'notice'>You have not been dead long enough to respawn at a mobile spawn point.</span>")
 		return
 	var/species_choice = input(user,"Spawn as what species?","Species Spawn Choice","Cancel") in species_outfits + list("Cancel")

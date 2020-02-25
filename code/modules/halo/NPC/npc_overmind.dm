@@ -1,5 +1,5 @@
 
-var/global/datum/npc_overmind/flood/flood_overmind = new
+GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 
 #define REPORT_CONTACT 1
 #define REPORT_CONSTRUCT 2
@@ -264,12 +264,29 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	var/controlling_overmind = null
 
 /obj/structure/overmind_controller/Initialize()
-	controlling_overmind =  flood_overmind
-	GLOB.processing_objects |= flood_overmind
-	flood_overmind.overmind_active = 1
-	flood_overmind.reports.Cut() //We're likely activating the overmind here. Cut all previous reports out, they're likely outdated.
+	controlling_overmind =  GLOB.flood_overmind
+	GLOB.processing_objects |= GLOB.flood_overmind
+	GLOB.flood_overmind.overmind_active = 1
+	GLOB.flood_overmind.reports.Cut() //We're likely activating the overmind here. Cut all previous reports out, they're likely outdated.
 	. = ..()
 
 /obj/structure/overmind_controller/Destroy()
-	flood_overmind.overmind_active = 0
+	GLOB.flood_overmind.overmind_active = 0
 	. = ..()
+
+#undef REPORT_CONTACT
+#undef REPORT_CONSTRUCT
+#undef REPORT_RECLAIM_EQUIP
+#undef REPORT_CASUALTY
+#undef REPORT_SUPPORT_TEAM_REQ
+
+#undef SQUADFORM_SEARCHRANGE
+#undef TASKPOINT_TIMEOUT_DELAY
+#undef TASKPOINT_TIMEOUT_UPDATE_DELAY
+#undef SINGLESQUAD_MAXTARGET_HANDLE
+
+#undef COMBAT_TROOPS_REQUIRED
+#undef CONSTRUCTOR_TROOPS_REQUIRED
+#undef REINFORCEMENT_TROOPS_REQUIRED
+
+#undef RADIO_COMMS_DELAY
