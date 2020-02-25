@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - bugfix: "Revolution is now properly called Mutiny on the vote menu when we're using the Torch map."
