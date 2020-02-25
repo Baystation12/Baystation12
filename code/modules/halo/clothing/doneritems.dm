@@ -2116,7 +2116,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 ///////Vampire132978123\\\\\\\
 
-/Skirmisher
+//Skirmisher
 
 /obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire
 	name = "Pirate's Hat"
@@ -2141,15 +2141,46 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 /obj/item/toy/plushie/donator/vampire
 	name = "Rafaj"
-	desc = "A pirate's best friend, and most prized possession. It looks like it's been through many adventures."
+	desc = "A pirate's best friend, and most prized possession. It looks like it's been through many adventures. Squeeze to activate an internal speaker."
 	icon = 'code/modules/halo/icons/species/Skirmisher_inhand.dmi'
 	icon_state = "parrot_obj"
 	item_state = "parrot"
-	var/list/sounds = list()
+	var/next_sound = 0
+	var/play_music = 0
+	var/list/sound_voice = list(\
+	'code/modules/halo/sounds/rafaj_donor/music_1.ogg' = 162 SECONDS,
+	'code/modules/halo/sounds/rafaj_donor/music_2.ogg' = 127 SECONDS
+	)
+	var/list/sound_music = list(\
+	'code/modules/halo/sounds/rafaj_donor/voiceline_1.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_2.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_3.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_4.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_5.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_6.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_7.ogg'
+	)
+
+/obj/item/toy/plushie/donator/vampire/verb/toggle_soundtype()
+	set name = "Toggle Speaker Type"
+	set category = "Object"
+
+	if(!istype(usr,/mob/living))
+		return
+	play_music = !play_music
+	to_chat(usr,"<span class = 'notice'>You toggle [src] to [play_music ? "play music" : "play voice lines"].</span>")
 
 /obj/item/toy/plushie/donator/vampire/attack_self(var/mob/user)
-	if(sounds.len > 0)
-		playsound(loc, pick(sounds), 100)
+	if(sound_voice.len > 0 && world.time >= next_sound)
+		var/list/l_use = sound_voice
+		if(play_music)
+			if(sound_music.len == 0)
+				return
+			l_use = sound_music
+		var/sfx_play = pick(l_use)
+		if(play_music)
+			next_sound = world.time + l_use[sfx_play]
+		playsound(user, sfx_play , 100)
 
 /obj/item/weapon/storage/box/large/donator/vampire
 	startswith = list(/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire,
