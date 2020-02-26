@@ -23,7 +23,7 @@
 
 // Plastic/White walls
 
-/turf/simulated/wall/plastic/hospital
+/turf/simulated/wall/plastic/
 	paint_color = "#CCCCCC"
 
 /turf/simulated/wall/plastic/hospital
