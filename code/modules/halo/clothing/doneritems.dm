@@ -2134,8 +2134,6 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "piratecoat"
 	sprite_sheets = list("Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	species_restricted = list("Tvaoan Kig-Yar")
-	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
-	armor_thickness_modifiers = list()
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 

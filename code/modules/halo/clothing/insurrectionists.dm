@@ -83,7 +83,7 @@
 	desc = "The V12L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M22L Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	item_state = "x52light"
 	icon_state = "x52lightobj"
-	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 40, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
 	slowdown_general = -0.1
 
 /obj/item/clothing/suit/storage/x52armor/medium
@@ -91,7 +91,7 @@
 	desc = "The V12D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M22D  Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
 	item_state = "x52medium"
 	icon_state = "x52mediumobj"
-	armor = list(melee = 55, bullet = 35, laser = 55,energy = 25, bomb = 30, bio = 5, rad = 5)
+	armor = list(melee = 55, bullet = 45, laser = 55,energy = 25, bomb = 30, bio = 5, rad = 5)
 
 /obj/item/clothing/under/innie/jumpsuit
 	name = "Insurrectionist-modified Jumpsuit"
