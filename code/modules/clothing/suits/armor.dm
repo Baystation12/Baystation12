@@ -380,9 +380,8 @@
 	desc = "A heavy armored vest in a fetching tan. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
 	icon_state = "tacwebvest"
 	item_state = "tacwebvest"
-	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 40, bio = 20, rad = 15)
+	armor = list(melee = 40, bullet = 40, laser = 20, energy = 20, bomb = 40, bio = 20, rad = 15)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	armor_thickness = 20
 
 /obj/item/clothing/suit/storage/vest/merc
 	name = "heavy combat armor"
