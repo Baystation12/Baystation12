@@ -169,8 +169,8 @@
 	supervisors = "the Chief Medical Officer"
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/medical/counselor
 	alt_titles = list(
-		"Psychiatrist"
-		"Psionic Counselor" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist
+		"Psychiatrist",
+		"Psionic Counselor" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist,
 		"Mentalist" = /decl/hierarchy/outfit/job/torch/crew/medical/counselor/mentalist
 		
 	)
