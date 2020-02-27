@@ -12,9 +12,9 @@
 
 /decl/hierarchy/supply_pack/gao/lightarmour
 	name = "Gao Light Armour pack"
-	contains = list(/obj/item/clothing/shoes/lighturfboot/black = 1,\
-		/obj/item/clothing/head/helmet/lighturf/black = 1,\
-		/obj/item/clothing/suit/storage/lighturfarmor/black = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/light/black = 1,\
+		/obj/item/clothing/head/helmet/innie/light/black = 1,\
+		/obj/item/clothing/suit/storage/innie/light/black = 1)
 	cost = 1250
 	containername = "\improper Gao Light Armour crate"
 	containertype = /obj/structure/closet/secure_closet/counselor
@@ -22,18 +22,18 @@
 
 /decl/hierarchy/supply_pack/gao/mediumarmour
 	name = "Gao Medium Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/black = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/black = 1,\
-		/obj/item/clothing/suit/storage/mediumurfarmor/black = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/black = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/black = 1,\
+		/obj/item/clothing/suit/storage/innie/medium/black = 1)
 	cost = 1500
 	containername = "\improper Gao Medium Armour crate"
 	containertype = /obj/structure/closet/secure_closet/counselor
 
 /decl/hierarchy/supply_pack/gao/heavyarmour
 	name = "Gao Heavy Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/black = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/black = 1,\
-		/obj/item/clothing/suit/storage/heavyurfarmor/black = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/black = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/black = 1,\
+		/obj/item/clothing/suit/storage/innie/heavy/black = 1)
 	cost = 1500
 	containername = "\improper Gao Heavy Armour crate"
 	containertype = /obj/structure/closet/secure_closet/counselor

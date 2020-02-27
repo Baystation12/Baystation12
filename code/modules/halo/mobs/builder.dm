@@ -1,14 +1,10 @@
 
-#define BUILD_MARKER_WALL 1
-#define BUILD_MARKER_FLOOR 2
-#define BUILD_MARKER_DOOR 3
-#define BUILD_MARKER_WINDOW 4
-
 /obj/effect/landmark/build_marker
 	name = "Build Marker"
 	desc = "Marks a location to have something built."
 	invisibility = 26 //1 above the norm
 	var/marker_type = BUILD_MARKER_WALL
+	var/build_type_override //Setting this causes the marker type to be ignored and to build this typepath instead.
 	var/build_faction = "hostile"
 	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = POINTER_LAYER
@@ -28,21 +24,26 @@
 		var/type_to_build = null
 		var/type_remove = null //If set to something, we find it in our tile and delete it.
 		var/build_text = "error"
-		switch(marker_type)
-			if(BUILD_MARKER_WALL)
-				build_text = "wall"
-				type_to_build = builder.wall_type_build
-			if(BUILD_MARKER_FLOOR)
-				build_text = "floor"
-				type_to_build = builder.floor_type_build
-			if(BUILD_MARKER_DOOR)
-				build_text = "door"
-				type_to_build = builder.door_type_build
-				type_remove = /obj/machinery/door
-			if(BUILD_MARKER_WINDOW)
-				build_text = "window"
-				type_to_build = builder.window_type_build
-				type_remove = /obj/structure/window
+		if(build_type_override)
+			build_text = "structure"
+			type_to_build = build_type_override
+			type_remove = build_type_override
+		else
+			switch(marker_type)
+				if(BUILD_MARKER_WALL)
+					build_text = "wall"
+					type_to_build = builder.wall_type_build
+				if(BUILD_MARKER_FLOOR)
+					build_text = "floor"
+					type_to_build = builder.floor_type_build
+				if(BUILD_MARKER_DOOR)
+					build_text = "door"
+					type_to_build = builder.door_type_build
+					type_remove = /obj/machinery/door
+				if(BUILD_MARKER_WINDOW)
+					build_text = "window"
+					type_to_build = builder.window_type_build
+					type_remove = /obj/structure/window
 		attacker.visible_message("<span class = 'notice'>[attacker] builds a [build_text].</span>")
 		if(type_remove)
 			var/atom/to_remove = locate(type_remove) in loc.contents
@@ -66,6 +67,9 @@
 	icon_dead = "yithian_dead"
 	ranged = 1
 	elevation = 1
+	health = 200
+	maxHealth = 200
+	resistance = 20
 	var/wall_type_build = /turf/simulated/wall
 	var/floor_type_build = /turf/simulated/floor
 	var/door_type_build = /obj/machinery/door/unpowered/simple/iron

@@ -144,6 +144,8 @@
 	return linked.linked_devices[our_camera_index]
 
 /obj/machinery/squad_camera_console/check_eye(var/mob/user)
+	if(istype(user,/mob/living/silicon/ai))
+		return 0
 	if(get_dist(user,src) > 1)
 		user.machine = null
 		user.reset_view(null)

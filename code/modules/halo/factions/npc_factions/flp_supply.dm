@@ -20,9 +20,9 @@
 
 /decl/hierarchy/supply_pack/flp/lightarmour
 	name = "Freedom Light Armour pack"
-	contains = list(/obj/item/clothing/shoes/lighturfboot/brown = 1,\
-		/obj/item/clothing/head/helmet/lighturf/brown = 1,\
-		/obj/item/clothing/suit/storage/lighturfarmor/brown = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/light/brown = 1,\
+		/obj/item/clothing/head/helmet/innie/light/brown = 1,\
+		/obj/item/clothing/suit/storage/innie/light/brown = 1)
 	cost = 1250
 	containername = "\improper flp Light Armour crate"
 	containertype = /obj/structure/closet/secure_closet/CMO
@@ -30,18 +30,18 @@
 
 /decl/hierarchy/supply_pack/flp/mediumarmour
 	name = "Freedom Medium Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/brown = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/brown = 1,\
-		/obj/item/clothing/suit/storage/mediumurfarmor/brown = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/brown = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/brown = 1,\
+		/obj/item/clothing/suit/storage/innie/medium/brown = 1)
 	cost = 1500
 	containername = "\improper flp Medium Armour crate"
 	containertype = /obj/structure/closet/secure_closet/CMO
 
 /decl/hierarchy/supply_pack/flp/heavyarmour
 	name = "Freedom Heavy Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/brown = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/brown = 1,\
-		/obj/item/clothing/suit/storage/heavyurfarmor/brown = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/brown = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/brown = 1,\
+		/obj/item/clothing/suit/storage/innie/heavy/brown = 1)
 	cost = 1500
 	containername = "\improper flp Heavy Armour crate"
 	containertype = /obj/structure/closet/secure_closet/CMO
