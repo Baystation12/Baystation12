@@ -40,6 +40,7 @@
 
 /datum/game_mode/achlys/pre_setup()
 	..()
+	GLOB.MOBILE_SPAWN_RESPAWN_TIME = -1 //Disable mobile respawns
 	flood_spawn_event_minor = world.time + FLOOD_EVENT_MINOR_START
 	flood_spawn_event_major = world.time + FLOOD_EVENT_MAJOR_START
 	populate_items_destroy()

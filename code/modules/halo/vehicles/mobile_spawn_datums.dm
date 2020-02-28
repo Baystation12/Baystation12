@@ -41,6 +41,9 @@ GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,5 MINUTES)
 	resource_pool -= item_costs[item_requisition]
 
 /datum/mobile_spawn/proc/handle_spawn(var/mob/user,var/obj/vehicle_spawnfrom)
+	if(GLOB.MOBILE_SPAWN_RESPAWN_TIME == -1)
+		to_chat(user,"<span class = 'notice'>Mobile respawn is disabled.</span>")
+		return
 	if(world.time - user.timeofdeath < GLOB.MOBILE_SPAWN_RESPAWN_TIME)
 		to_chat(user,"<span class = 'notice'>You have not been dead long enough to respawn at a mobile spawn point.</span>")
 		return
