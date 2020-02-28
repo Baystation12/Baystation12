@@ -108,6 +108,7 @@
 
 /obj/vehicles/air/inactive_pilot_effects()
 	//Crashing this vehicle with potential casualties.
+	active = 0
 	if(elevation <= 0)//Nocrash if we're not flying
 		return
 	visible_message("<span class = 'danger'>[name] spirals towards the ground, engines uncontrolled!!</span>")
