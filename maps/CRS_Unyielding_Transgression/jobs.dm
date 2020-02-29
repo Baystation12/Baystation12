@@ -116,8 +116,8 @@
 
 /datum/job/covenant/sangheili_minor
 	title = "Sangheili Minor"
-	total_positions = 0
-	spawn_positions = 0
+	total_positions = 2
+	spawn_positions = 2
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
 	access = list(240,250)
