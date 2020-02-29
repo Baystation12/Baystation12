@@ -183,7 +183,7 @@
 "dD" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "dE" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "dF" = (/turf/simulated/floor/road/markings{tag = "icon-road_marking (EAST)"; icon_state = "road_marking"; dir = 4},/area/exo_research_facility/ground/exterior/courtyard)
-"dG" = (/obj/machinery/door/airlock/halo_lifepod{name = "Supplies Room"},/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
+"dG" = (/obj/machinery/door/airlock/halo/lifepod{name = "Supplies Room"},/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "dH" = (/obj/machinery/bodyscanner{tag = "icon-body_scanner_0 (WEST)"; icon_state = "body_scanner_0"; dir = 8},/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "dI" = (/obj/machinery/body_scanconsole{tag = "icon-body_scannerconsole (WEST)"; icon_state = "body_scannerconsole"; dir = 8},/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "dJ" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/weapon/storage/belt/medical,/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)

@@ -20,6 +20,7 @@
 /turf/simulated/wall/cult/New(var/newloc, var/reinforce = 0)
 	..(newloc,"cult",reinforce ? "cult2" : null)
 	new /obj/effect/overlay/cult/cultwall(src)
+	blend_turfs = list(/turf/simulated/wall)
 
 /turf/simulated/wall/cult/reinf/New(var/newloc)
 	..(newloc, 1)
@@ -28,6 +29,13 @@
 /turf/simulated/wall/cult/dismantle_wall()
 	cult.remove_cultiness(CULTINESS_PER_TURF)
 	..()
+
+/turf/simulated/wall/cult/can_join_with(var/turf/simulated/wall/W)
+	if(material && W.material && material.icon_base == W.material.icon_base)
+		return 1
+	else if(istype(W, /turf/simulated/wall))
+		return 1
+	return 0
 
 /turf/unsimulated/wall/cult
 	name = "cult wall"
@@ -72,6 +80,7 @@
 /turf/simulated/wall/alium
 	icon_state = "jaggy"
 	floor_type = /turf/simulated/floor/fixed/alium
+	list/blend_objects = newlist()
 
 /turf/simulated/wall/alium/New(var/newloc)
 	..(newloc,"alien alloy")

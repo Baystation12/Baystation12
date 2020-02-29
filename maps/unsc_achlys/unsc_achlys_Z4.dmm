@@ -412,7 +412,7 @@
 "hV" = (/obj/item/flood_spore,/obj/structure/floodspawner{spawn_spot_x = 37; spawn_spot_y = 81},/turf/simulated/floor/tech,/area/achlys/four/z4engineeringmain)
 "hW" = (/obj/machinery/door/window/brigdoor/northright,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/achlys/eight/z4cellblock2)
 "hX" = (/obj/machinery/door/airlock{welded = 1},/turf/simulated/floor/tiled/dark,/area/achlys/five/z4secstation2)
-"hY" = (/obj/machinery/door/airlock/glass_security{name = "Maximum Security"},/turf/simulated/floor/tiled,/area/achlys/three/z4hallways)
+"hY" = (/obj/machinery/door/airlock/glass/security{name = "Maximum Security"},/turf/simulated/floor/tiled,/area/achlys/three/z4hallways)
 "hZ" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/five/z4secstation2)
 "ia" = (/obj/effect/decal/cleanable/blood/splatter,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/achlys/seven/z4secpoint2)
 "ib" = (/turf/simulated/wall/strong,/area/achlys/eight/z4engineeringseconary)

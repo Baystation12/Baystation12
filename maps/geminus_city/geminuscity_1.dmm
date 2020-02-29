@@ -60,7 +60,7 @@
 "bh" = (/obj/effect/landmark/sewer_tunnel_thin{bumpstairs_room_type = /obj/effect/landmark/bumpstairs_room/three; dir = 2; max_length = 65; max_length_sidetunnels = 18; min_length = 65},/turf/simulated/floor/plating,/area/geminus_underground/northwest)
 "bi" = (/obj/machinery/power/apc/infinite{dir = 2; name = "south bump"; pixel_x = 0; pixel_y = -24},/turf/simulated/floor/plating,/area/geminus_underground/northwest)
 "bj" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/pavement/empty,/area/geminus_underground/southeast)
-"bk" = (/turf/simulated/wall/chrome,/area/geminus_underground/south)
+"bk" = (/turf/simulated/wall/plastic/hospital,/area/geminus_underground/south)
 "bl" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/closet/wardrobe/medic_white,/turf/simulated/floor/tiled/white,/area/geminus_underground/south)
 "bm" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tiled/white,/area/geminus_underground/south)
 "bn" = (/turf/simulated/wall,/area/geminus_underground/southeast)

@@ -218,6 +218,17 @@ var/global/list/light_type_cache = list()
 
 /obj/machinery/light/update_icon()
 
+	pixel_y = 0
+	pixel_x = 0
+	var/turf/T = get_step(get_turf(src), src.dir)
+	if(istype(T, /turf/simulated/wall))
+		if(src.dir == NORTH)
+			pixel_y = 21
+		else if(src.dir == EAST)
+			pixel_x = 10
+		else if(src.dir == WEST)
+			pixel_x = -10
+
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
 			icon_state = "[base_state][on]"

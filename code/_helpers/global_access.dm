@@ -189,6 +189,8 @@
 			return global.air_master;
 		if("air_processing_killed")
 			return global.air_processing_killed;
+		if("airlock_overlays")
+			return global.airlock_overlays;
 		if("alarm_manager")
 			return global.alarm_manager;
 		if("alien_whitelist")
@@ -1412,6 +1414,8 @@
 			global.air_master=newval;
 		if("air_processing_killed")
 			global.air_processing_killed=newval;
+		if("airlock_overlays")
+			global.airlock_overlays=newval;
 		if("alarm_manager")
 			global.alarm_manager=newval;
 		if("alien_whitelist")
@@ -2540,6 +2544,7 @@
 	"air_blocked",
 	"air_master",
 	"air_processing_killed",
+	"airlock_overlays",
 	"alarm_manager",
 	"alien_whitelist",
 	"allCasters",

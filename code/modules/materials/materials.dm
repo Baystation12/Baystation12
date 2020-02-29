@@ -13,13 +13,13 @@
 
 	VALID ICONS
 		WALLS
+			stone
+			metal
 			solid
-			simple
-			simple
 			cult
 		DOORS
-			solid
-			simple
+			stone
+			metal
 			resin
 			wood
 */
@@ -83,13 +83,13 @@ var/list/name_to_material
 
 	// Icons
 	var/icon_colour                                      // Colour applied to products of this material.
-	var/icon_base = "simple"                              // Wall and table base icon tag. See header.
-	var/door_icon_base = "simple"                         // Door base icon tag. See header.
-	var/icon_reinf = "reinf_solid"                       // Overlay used
+	var/icon_base = "metal"                              // Wall and table base icon tag. See header.
+	var/door_icon_base = "metal"                         // Door base icon tag. See header.
+	var/icon_reinf = "reinf_metal"                       // Overlay used
 	var/list/stack_origin_tech = list(TECH_MATERIAL = 1) // Research level for stacks.
 
 	// Attributes
-	var/cut_delay = 60            // Delay in ticks when cutting through this wall.
+	var/cut_delay = 0            // Delay in ticks when cutting through this wall.
 	var/radioactivity            // Radiation var. Used in wall and object processing to irradiate surroundings.
 	var/ignition_point           // K, point at which the material catches on fire.
 	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
@@ -235,12 +235,12 @@ var/list/name_to_material
 	name = "uranium"
 	stack_type = /obj/item/stack/material/uranium
 	radioactivity = 12
-	icon_base = "simple"
-	icon_reinf = "reinf_solid"
+	icon_base = "stone"
+	icon_reinf = "reinf_stone"
 	icon_colour = "#007A00"
 	weight = 22
 	stack_origin_tech = list(TECH_MATERIAL = 5)
-	door_icon_base = "solid"
+	door_icon_base = "stone"
 
 /material/diamond
 	name = "diamond"
@@ -275,7 +275,7 @@ var/list/name_to_material
 /material/silver
 	name = "silver"
 	stack_type = /obj/item/stack/material/silver
-	icon_colour = "#D1E6E3"
+	icon_colour = "#E2EFED"
 	weight = 22
 	hardness = 50
 	stack_origin_tech = list(TECH_MATERIAL = 3)
@@ -286,12 +286,12 @@ var/list/name_to_material
 	name = "phoron"
 	stack_type = /obj/item/stack/material/phoron
 	ignition_point = PHORON_MINIMUM_BURN_TEMPERATURE
-	icon_base = "simple"
+	icon_base = "stone"
 	icon_colour = "#E37108"
 	shard_type = SHARD_SHARD
 	hardness = 30
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_PHORON = 2)
-	door_icon_base = "solid"
+	door_icon_base = "stone"
 	sheet_singular_name = "crystal"
 	sheet_plural_name = "crystals"
 	is_fusion_fuel = 1
@@ -321,11 +321,11 @@ var/list/name_to_material
 	return round(totalPhoron/100)
 
 
-/material/solid
+/material/stone
 	name = "stone"
 	stack_type = /obj/item/stack/material/stone
-	icon_base = "simple"
-	icon_reinf = "reinf_solid"
+	icon_base = "stone"
+	icon_reinf = "reinf_stone"
 	icon_colour = "#D9C179"
 	shard_type = SHARD_STONE_PIECE
 	weight = 22
@@ -336,11 +336,11 @@ var/list/name_to_material
 	sheet_plural_name = "bricks"
 	conductive = 0
 
-/material/solid/sandstone
+/material/stone/sandstone
 	name = "sandstone"
 	stack_type = /obj/item/stack/material/sandstone
 
-/material/solid/marble
+/material/stone/marble
 	name = "marble"
 	icon_colour = "#AAAAAA"
 	weight = 26
@@ -355,7 +355,7 @@ var/list/name_to_material
 	integrity = 150
 	brute_armor = 5
 	icon_base = "solid"
-	icon_reinf = "reinf_solid"
+	icon_reinf = "reinf_over"
 	icon_colour = "#666666"
 	hitsound = 'sound/weapons/smash.ogg'
 
@@ -385,7 +385,7 @@ var/list/name_to_material
 	integrity = 400
 	melting_point = 6000
 	icon_base = "solid"
-	icon_reinf = "reinf_solid"
+	icon_reinf = "reinf_over"
 	icon_colour = "#777777"
 	explosion_resistance = 25
 	brute_armor = 6
@@ -402,10 +402,10 @@ var/list/name_to_material
 	integrity = 200
 	melting_point = 3000
 	stack_type = null
-	icon_base = "solid"
-	door_icon_base = "simple"
+	icon_base = "metal"
+	door_icon_base = "metal"
 	icon_colour = "#D1E6E3"
-	icon_reinf = "reinf_solid"
+	icon_reinf = "reinf_metal"
 
 /material/plasteel/ocp
 	name = "osmium-carbide plasteel"
@@ -413,7 +413,7 @@ var/list/name_to_material
 	integrity = 200
 	melting_point = 12000
 	icon_base = "solid"
-	icon_reinf = "reinf_solid"
+	icon_reinf = "reinf_over"
 	icon_colour = "#9bc6f2"
 	brute_armor = 4
 	burn_armor = 20
@@ -574,8 +574,8 @@ var/list/name_to_material
 	name = "plastic"
 	stack_type = /obj/item/stack/material/plastic
 	flags = MATERIAL_BRITTLE
-	icon_base = "simple"
-	icon_reinf = "reinf_solid"
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
 	icon_colour = "#CCCCCC"
 	hardness = 10
 	weight = 5
@@ -695,8 +695,8 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/cardboard
 	flags = MATERIAL_BRITTLE
 	integrity = 10
-	icon_base = "simple"
-	icon_reinf = "reinf_solid"
+	icon_base = "solid"
+	icon_reinf = "reinf_over"
 	icon_colour = "#AAAAAA"
 	hardness = 1
 	brute_armor = 1
@@ -720,7 +720,7 @@ var/list/name_to_material
 
 /material/cult
 	name = "cult"
-	display_name = "disturbing solid"
+	display_name = "disturbing stone"
 	icon_base = "cult"
 	icon_colour = "#402821"
 	icon_reinf = "reinf_cult"
@@ -746,8 +746,8 @@ var/list/name_to_material
 	name = "alien alloy"
 	stack_type = null
 	icon_base = "jaggy"
-	door_icon_base = "solid"
-	icon_reinf = "reinf_solid"
+	door_icon_base = "metal"
+	icon_reinf = "reinf_metal"
 	hitsound = 'sound/weapons/smash.ogg'
 	sheet_singular_name = "chunk"
 	sheet_plural_name = "chunks"
@@ -866,3 +866,6 @@ var/list/name_to_material
 	ignition_point = T0C+232
 	melting_point = T0C+300
 	conductive = 0
+
+/material/proc/get_wall_texture()
+	return

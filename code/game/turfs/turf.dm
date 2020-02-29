@@ -258,3 +258,6 @@ var/const/enterloopsanity = 100
 
 /turf/proc/get_movement_delay()
 	return movement_delay
+
+/turf/proc/is_wall()
+	return FALSE

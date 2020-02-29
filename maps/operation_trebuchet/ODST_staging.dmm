@@ -75,7 +75,7 @@
 "bw" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/carpet/blue,/area/UNSC_Staging)
 "bx" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/carpet,/area/UNSC_Staging)
 "by" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/carpet,/area/UNSC_Staging)
-"bz" = (/obj/machinery/door/airlock/halo_lifepod{name = "SOEIV Airlock"},/turf/simulated/floor/plating,/area/UNSC_Staging)
+"bz" = (/obj/machinery/door/airlock/halo/lifepod{name = "SOEIV Airlock"},/turf/simulated/floor/plating,/area/UNSC_Staging)
 "bA" = (/obj/structure/table/steel_reinforced,/obj/item/clothing/glasses/sunglasses,/turf/simulated/floor/shuttle/white,/area/UNSC_Staging)
 "bB" = (/turf/simulated/floor/shuttle/white,/area/UNSC_Staging)
 "bC" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/carpet,/area/UNSC_Staging)
