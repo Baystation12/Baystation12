@@ -66,6 +66,8 @@
 /decl/hierarchy/outfit/mobilespawn_unggoy/engineer
 	name = "Unggoy Soldier (Engineer)"
 
+	head = /obj/item/clothing/head/welding/covenant
+
 	belt = /obj/item/weapon/storage/belt/covenant/full
 	r_hand = /obj/item/weapon/gun/energy/plasmapistol
 
@@ -151,6 +153,8 @@
 
 /decl/hierarchy/outfit/job/mobilespawn_marine/engineer
 	name = "UNSC Marine (Engineer)"
+
+	head = /obj/item/clothing/head/welding
 
 	belt = /obj/item/weapon/storage/belt/utility/full
 	suit_store = /obj/item/weapon/gun/projectile/ma5b_ar
@@ -241,6 +245,8 @@
 
 /decl/hierarchy/outfit/job/mobilespawn_innie/engineer
 	name = "Insurrectionist Engineer"
+
+	head = /obj/item/clothing/head/welding
 
 	belt = /obj/item/weapon/storage/belt/utility/full
 	suit_store = /obj/item/weapon/gun/projectile/ma5b_ar/MA3
