@@ -32,7 +32,7 @@
 "aF" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/effect/decal/cleanable/blood/splatter,/obj/structure/window/basic{dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "aG" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/one/z3prisonupper4)
 "aH" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/effect/decal/cleanable/blood/splatter,/obj/structure/window/basic{icon_state = "window"; dir = 4},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
-"aI" = (/obj/random/achlock,/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled/dark,/area/achlys/four/z3blockhall2)
+"aI" = (/obj/effect/floor_decal/corner/red/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/effect/decal/cleanable/blood/splatter,/obj/structure/doorwreckage,/turf/simulated/floor/tiled/dark,/area/achlys/four/z3blockhall2)
 "aJ" = (/obj/machinery/botany,/obj/effect/decal/cleanable/dirt,/obj/structure/window/basic{icon_state = "window"; dir = 1},/obj/structure/window/basic{dir = 8},/turf/simulated/floor/plating,/area/achlys/one/z3prisonupper4)
 "aK" = (/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/seven/z3mainthalls)
 "aL" = (/turf/simulated/wall/strong,/area/achlys/four/z3engineeringmain)

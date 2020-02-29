@@ -8,7 +8,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	name = "Ruuhti"
 	desc = "The language of the Ruuhtian KigYar"
 	native = 1
-	colour = "vox"
+	colour = "ruutian"
 	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
 	key = "R"
 	flags = RESTRICTED
@@ -21,7 +21,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	name = "Tvoai"
 	desc = "The language of the Tvaoan KigYar"
 	native = 1
-	colour = "vox"
+	colour = "tvaoan"
 	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
 	key = "T"
 	flags = RESTRICTED

@@ -1,21 +1,19 @@
 
-var/global/datum/npc_overmind/flood/flood_overmind = new
+GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_overmind/flood)
 
 #define REPORT_CONTACT 1
 #define REPORT_CONSTRUCT 2
-#define REPORT_DECONSTRUCT 3
-#define REPORT_RECLAIM_EQUIP 4
-#define REPORT_CASUALTY 5
-#define REPORT_SUPPORT_TEAM_REQ 6
+#define REPORT_RECLAIM_EQUIP 3
+#define REPORT_CASUALTY 4
+#define REPORT_SUPPORT_TEAM_REQ 5
 
 #define SQUADFORM_SEARCHRANGE 7
 #define TASKPOINT_TIMEOUT_DELAY 1 MINUTE
 #define TASKPOINT_TIMEOUT_UPDATE_DELAY 2 MINUTES //The default delay to assign to a taskpoint when the timeout is updated.
 #define SINGLESQUAD_MAXTARGET_HANDLE 3 //How many people should we assume our squad can handle before starting to apply squadsize increases.
 
-#define COMBAT_TROOPS_REQUIRED list(0,2,2,1)
+#define COMBAT_TROOPS_REQUIRED list(0,2,2,1) //Constructor, Combat, Support, Other.
 #define CONSTRUCTOR_TROOPS_REQUIRED list(3,1,1,0)
-#define DECONSTRUCTOR_TROOPS_REQUIRED list(2,1,2,0)
 #define REINFORCEMENT_TROOPS_REQUIRED list(0,2,1,1) //Send at least one of everything as reinforcements, if we can.
 
 #define RADIO_COMMS_DELAY 5 SECONDS
@@ -113,16 +111,20 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 			required_troops = COMBAT_TROOPS_REQUIRED
 		if("construct")
 			required_troops = CONSTRUCTOR_TROOPS_REQUIRED
-		if("deconstruct")
-			required_troops = DECONSTRUCTOR_TROOPS_REQUIRED
 		if("reinforcement")
 			required_troops = REINFORCEMENT_TROOPS_REQUIRED
 	if(severity > 1)
 		for(var/num in required_troops)
 			num *= severity
+
+	var/turf/leader_turf
+	if(isnull(leader))
+		leader_turf = taskpoint.loc
+	else
+		leader_turf = leader.loc
 	var/list/inrange_squadmembers = list()
 	var/list/chosen_squadmembers = list(leader)
-	for(var/mob/m in range(search_range,leader))
+	for(var/mob/m in range(search_range,leader_turf))
 		if(m == leader)
 			continue
 		inrange_squadmembers += m
@@ -196,10 +198,8 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 				process_contact_report(report)
 			if(REPORT_CASUALTY)
 				process_casualty_report(report)
-			//if(REPORT_DECONSTRUCT)
-				//TODO: DECONSTRUCT DISPATCH (Door break-open, weld-smash etc.)
 			//if(REPORT_CONSTRUCT)
-				//TODO: CONSTRUCTOR DISPATCH CODE
+				//TODO: CONSTRUCTOR DISPATCH CODE. INCLUDES BUILDER MOBS.
 			//if(REPORT_RECLAIM_EQUIP)
 				//TODO: EQUIPMENT RECLAMATION.
 			//if(REPORT_SUPPORT_TEAM_REQ)
@@ -255,7 +255,7 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 
 /datum/npc_overmind/flood
 	overmind_name = "Gravemind"
-	constructor_types = list(/mob/living/simple_animal/hostile/flood/infestor)
+	constructor_types = list(/mob/living/simple_animal/hostile/builder_mob/flood)
 	combat_types = list(/mob/living/simple_animal/hostile/flood/combat_form)
 	support_types = list(/mob/living/simple_animal/hostile/flood/infestor,/mob/living/simple_animal/hostile/flood/carrier)
 
@@ -264,12 +264,29 @@ var/global/datum/npc_overmind/flood/flood_overmind = new
 	var/controlling_overmind = null
 
 /obj/structure/overmind_controller/Initialize()
-	controlling_overmind =  flood_overmind
-	GLOB.processing_objects |= flood_overmind
-	flood_overmind.overmind_active = 1
-	flood_overmind.reports.Cut() //We're likely activating the overmind here. Cut all previous reports out, they're likely outdated.
+	controlling_overmind =  GLOB.flood_overmind
+	GLOB.processing_objects |= GLOB.flood_overmind
+	GLOB.flood_overmind.overmind_active = 1
+	GLOB.flood_overmind.reports.Cut() //We're likely activating the overmind here. Cut all previous reports out, they're likely outdated.
 	. = ..()
 
 /obj/structure/overmind_controller/Destroy()
-	flood_overmind.overmind_active = 0
+	GLOB.flood_overmind.overmind_active = 0
 	. = ..()
+
+#undef REPORT_CONTACT
+#undef REPORT_CONSTRUCT
+#undef REPORT_RECLAIM_EQUIP
+#undef REPORT_CASUALTY
+#undef REPORT_SUPPORT_TEAM_REQ
+
+#undef SQUADFORM_SEARCHRANGE
+#undef TASKPOINT_TIMEOUT_DELAY
+#undef TASKPOINT_TIMEOUT_UPDATE_DELAY
+#undef SINGLESQUAD_MAXTARGET_HANDLE
+
+#undef COMBAT_TROOPS_REQUIRED
+#undef CONSTRUCTOR_TROOPS_REQUIRED
+#undef REINFORCEMENT_TROOPS_REQUIRED
+
+#undef RADIO_COMMS_DELAY

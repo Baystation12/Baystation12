@@ -72,7 +72,7 @@
 	name = "Janjur Qomi"
 	desc = "The language of the SanShyuum"
 	native = 1
-	colour = "vox"
+	colour = "sanshyuum"
 	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "P"
 	flags = RESTRICTED

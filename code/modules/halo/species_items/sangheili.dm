@@ -72,7 +72,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	specials = list(/datum/armourspecials/shields,/datum/armourspecials/shieldmonitor/sangheili)
-	armor = list(melee = 85, bullet = 65, laser = 60, energy = 60, bomb = 55, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
+	armor = list(melee = 85, bullet = 60, laser = 60, energy = 60, bomb = 55, bio = 25, rad = 25) //Close to spartan armour. Lower bullet,higher melee. Lower energy.
 	armor_thickness_modifiers = list()
 	unacidable = 1
 	max_suitstore_w_class = ITEM_SIZE_HUGE
