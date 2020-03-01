@@ -666,7 +666,7 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
 	integrity = 51
-	icon_base = "solid"
+	icon_base = "wood"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks

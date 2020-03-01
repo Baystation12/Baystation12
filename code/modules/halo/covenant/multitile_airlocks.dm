@@ -7,7 +7,7 @@
 	width = 2
 	var/covenant_secure = 0
 	maxhealth = 1200
-	opacity = 0
+	opacity = 1
 
 /obj/machinery/door/airlock/multi_tile/covenant/allowed(var/mob/m) //Covenant doors don't run on usual access cards. Internal tech scans the accesser.
 	if(covenant_secure)
