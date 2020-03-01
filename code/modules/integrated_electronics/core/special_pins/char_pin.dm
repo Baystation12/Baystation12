@@ -3,7 +3,9 @@
 	name = "char pin"
 
 /datum/integrated_io/char/ask_for_pin_data(mob/user)
-	var/new_data = input(user, "Please type in one character.", "[src] char writing]") as text
+	var/new_data = input(user, "Please type in one character.", "[src] char writing]") as text|null
+	if(!new_data)
+		return //Canceling the window should not set the pin to null
 	new_data = sanitize(new_data, 1, trim=0)
 	if(holder.check_interactivity(user) )
 		to_chat(user, "<span class='notice'>You input [new_data ? "new_data" : "NULL"] into the pin.</span>")

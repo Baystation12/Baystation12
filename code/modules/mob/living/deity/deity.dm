@@ -97,7 +97,7 @@
 	to_chat(src, "<span class='notice'>You undergo a transformation into your new form!</span>")
 	spawn(1)
 		SetName(form.name)
-		var/newname = sanitize(input(src, "Choose a name for your new form.", "Name change", form.name) as text, MAX_NAME_LEN)
+		var/newname = sanitize(input(src, "Choose a name for your new form.", "Name change", form.name) as text|null, MAX_NAME_LEN)
 		if(newname)
 			fully_replace_character_name(newname)
 	src.verbs -= /mob/living/deity/verb/choose_form

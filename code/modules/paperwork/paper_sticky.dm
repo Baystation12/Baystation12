@@ -33,7 +33,7 @@
 		if(writing_space <= 0)
 			to_chat(user, SPAN_WARNING("There is no room left on \the [src]."))
 			return
-		var/text = sanitizeSafe(input("What would you like to write?") as text, writing_space)
+		var/text = sanitizeSafe(input("What would you like to write?") as text|null, writing_space)
 		if(!text || thing.loc != user || (!Adjacent(user) && loc != user) || user.incapacitated())
 			return
 		user.visible_message(SPAN_NOTICE("\The [user] jots a note down on \the [src]."))

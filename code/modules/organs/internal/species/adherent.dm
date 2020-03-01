@@ -31,7 +31,7 @@
 			to_chat(user, "<span class='warning'>Nonstandard names are not subject to real-time modification under [PROTOCOL_ARTICLE].</span>")
 			return
 
-		var/newname = sanitizeSafe(input(user, "Enter a new ident.", "Reset Ident") as text, MAX_NAME_LEN)
+		var/newname = sanitizeSafe(input(user, "Enter a new ident.", "Reset Ident") as text|null, MAX_NAME_LEN)
 		if(newname)
 			var/confirm = input(user, "Are you sure you wish your name to become [newname] [res]?","Reset Ident") as anything in list("No", "Yes")
 			if(confirm == "Yes" && owner && user == owner && !owner.incapacitated() && world.time >= next_rename)

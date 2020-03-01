@@ -143,7 +143,7 @@
 		return
 
 	to_chat(user, "<span class='notice'>The crate is locked with a Deca-code lock.</span>")
-	var/input = input(user, "Enter [codelen] digits.", "Deca-Code Lock", "") as text
+	var/input = input(user, "Enter [codelen] digits.", "Deca-Code Lock", "") as text|null
 	if(!Adjacent(user))
 		return
 

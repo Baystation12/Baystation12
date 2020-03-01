@@ -260,13 +260,13 @@ var/list/debug_verbs = list (
 /client/proc/count_objects_on_z_level()
 	set category = "Mapping"
 	set name = "Count Objects On Level"
-	var/level = input("Which z-level?","Level?") as text
+	var/level = input("Which z-level?","Level?") as text|null
 	if(!level) return
 	var/num_level = text2num(level)
 	if(!num_level) return
 	if(!isnum(num_level)) return
 
-	var/type_text = input("Which type path?","Path?") as text
+	var/type_text = input("Which type path?","Path?") as text|null
 	if(!type_text) return
 	var/type_path = text2path(type_text)
 	if(!type_path) return
@@ -304,7 +304,7 @@ var/list/debug_verbs = list (
 	set category = "Mapping"
 	set name = "Count Objects All"
 
-	var/type_text = input("Which type path?","") as text
+	var/type_text = input("Which type path?","") as text|null
 	if(!type_text) return
 	var/type_path = text2path(type_text)
 	if(!type_path) return

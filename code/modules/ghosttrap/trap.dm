@@ -1,4 +1,4 @@
-// This system is used to grab a ghost from observers with the required preferences 
+// This system is used to grab a ghost from observers with the required preferences
 // and lack of bans set. See posibrain.dm for an example of how they are called/used.
 
 var/list/ghost_traps
@@ -121,7 +121,7 @@ var/list/ghost_traps
 	if(!can_set_own_name)
 		return
 
-	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text, MAX_NAME_LEN)
+	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change",target.real_name) as text|null, MAX_NAME_LEN)
 	if (newname && newname != "")
 		target.real_name = newname
 		target.SetName(target.real_name)

@@ -95,7 +95,7 @@
 	if((MUTATION_CLUMSY in usr.mutations) && prob(50))
 		to_chat(usr, "<span class='warning'>You cut yourself on the paper.</span>")
 		return
-	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
+	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text|null, MAX_NAME_LEN)
 
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/weapon/photo/rename()
 	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
@@ -293,7 +293,7 @@
 					return
 			else
 				return
-		
+
 		var/obj/item/weapon/pen/P = I
 		if(!P.active)
 			P.toggle()

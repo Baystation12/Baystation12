@@ -823,7 +823,7 @@ var/list/turret_icons
 				return
 
 	if(istype(I, /obj/item/weapon/pen))	//you can rename turrets like bots!
-		var/t = sanitizeSafe(input(user, "Enter new turret name", name, finish_name) as text, MAX_NAME_LEN)
+		var/t = sanitizeSafe(input(user, "Enter new turret name", name, finish_name) as text|null, MAX_NAME_LEN)
 		if(!t)
 			return
 		if(!in_range(src, usr) && loc != usr)

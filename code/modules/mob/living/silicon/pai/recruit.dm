@@ -57,19 +57,19 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 
 		switch(option)
 			if("name")
-				t = sanitizeSafe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text, MAX_NAME_LEN)
+				t = sanitizeSafe(input("Enter a name for your pAI", "pAI Name", candidate.name) as text|null, MAX_NAME_LEN)
 				if(t)
 					candidate.name = t
 			if("desc")
-				t = input("Enter a description for your pAI", "pAI Description", candidate.description) as message
+				t = input("Enter a description for your pAI", "pAI Description", candidate.description) as message|null
 				if(t)
 					candidate.description = sanitize(t)
 			if("role")
-				t = input("Enter a role for your pAI", "pAI Role", candidate.role) as text
+				t = input("Enter a role for your pAI", "pAI Role", candidate.role) as text|null
 				if(t)
 					candidate.role = sanitize(t)
 			if("ooc")
-				t = input("Enter any OOC comments", "pAI OOC Comments", candidate.comments) as message
+				t = input("Enter any OOC comments", "pAI OOC Comments", candidate.comments) as message|null
 				if(t)
 					candidate.comments = sanitize(t)
 			if("save")

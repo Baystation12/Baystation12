@@ -73,7 +73,7 @@
 				if(user.mind)
 					user.mind.transfer_to(vox)
 				spawn(1)
-					var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
+					var/newname = sanitizeSafe(input(vox,"Enter a name, or leave blank for the default name.", "Name change","") as text|null, MAX_NAME_LEN)
 					if(!newname || newname == "")
 						var/decl/cultural_info/voxculture = SSculture.get_culture(CULTURE_VOX_RAIDER)
 						newname = voxculture.get_random_name()

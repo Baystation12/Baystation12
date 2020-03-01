@@ -6,7 +6,7 @@
 	expected_type = /mob/living
 
 /datum/phenomena/communicate/activate(var/mob/living/L)
-	var/text_to_send = sanitize(input(linked, "Subjugate a member to your will", "Message a Believer") as text)
+	var/text_to_send = sanitize(input(linked, "Subjugate a member to your will", "Message a Believer") as text|null)
 	if(text_to_send)
 		var/text_size = 4
 		if(!linked.is_follower(L))

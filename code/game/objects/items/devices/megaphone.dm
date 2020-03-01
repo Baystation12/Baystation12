@@ -22,7 +22,7 @@
 		to_chat(user, "<span class='warning'>\The [src] needs to recharge!</span>")
 		return
 
-	var/message = sanitize(input(user, "Shout a message?", "Megaphone", null)  as text)
+	var/message = sanitize(input(user, "Shout a message?", "Megaphone", null)  as text|null)
 	if(!message)
 		return
 	message = capitalize(message)

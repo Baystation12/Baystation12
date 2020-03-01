@@ -46,7 +46,7 @@
 		H.attack_same = 0
 		H.friends += weakref(user)
 	L.desc += "<br><span class='notice'>It looks especially docile.</span>"
-	var/name = input(user, "Would you like to rename \the [L]?", "Dociler", L.name) as text
+	var/name = input(user, "Would you like to rename \the [L]?", "Dociler", L.name) as text|null
 	if(length(name))
 		L.real_name = name
 		L.SetName(name)

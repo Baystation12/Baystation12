@@ -150,7 +150,7 @@
 	if(!elevel)
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 	if(!phrase)
-		phrase = sanitize_phrase(input("Choose activation phrase:") as text)
+		phrase = sanitize_phrase(input("Choose activation phrase:") as text|null)
 	if(!phrase)
 		return
 
