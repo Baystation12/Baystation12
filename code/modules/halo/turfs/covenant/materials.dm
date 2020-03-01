@@ -60,10 +60,9 @@
 	display_name = "refined duridium"
 
 	shard_can_repair = 0 //I doubt you can melt nanolaminate with a hand welder.
-
-	icon_base = "duridium"
-	door_icon_base = "duridium"
-	icon_reinf = "duridium"
+	icon_base = "stone"
+	icon_reinf = "reinf_stone"
+	door_icon_base = "stone"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 
 	cut_delay = 120
@@ -86,8 +85,6 @@
 	name = "refined duridium"
 	singular_name = "refined duridium sheets"
 	icon = 'code/modules/halo/icons/materials/covenant/materials.dmi'
-	icon_state = "duridium"
-	default_type = "duridium"
 	amount = 1
 	max_amount = 50
 	material = /material/duridium
@@ -107,9 +104,11 @@
 	name = "kemocite"
 	display_name = "compressed kemocite"
 	shard_can_repair = 0 //I doubt you can melt nanolaminate with a hand welder.
-	icon_base = "kemocite"
+	icon_base = "stone"
 	stack_origin_tech = list(TECH_MATERIAL = 5)
 	stack_type = /obj/item/stack/material/kemocite
+	icon_reinf = "reinf_stone"
+	door_icon_base = "stone"
 
 /obj/item/stack/material/kemocite
 	name = "compressed kemocite"

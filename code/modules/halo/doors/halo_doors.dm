@@ -45,6 +45,7 @@ obj/machinery/door/airlock/multi_tile/halo/triple
 	maxhealth = 2000
 	dir = NORTH
 	width = 3
+	opacity = 1
 
 obj/machinery/door/airlock/multi_tile/halo/quadruple
 	icon = 'code/modules/halo/doors/longerblastdoor/door.dmi'
@@ -52,6 +53,7 @@ obj/machinery/door/airlock/multi_tile/halo/quadruple
 	maxhealth = 2500
 	dir = NORTH
 	width = 4
+	opacity = 1
 
 obj/machinery/door/airlock/multi_tile/halo/triplens
 	icon = 'code/modules/halo/doors/3xblastdoors/door.dmi'
@@ -59,6 +61,7 @@ obj/machinery/door/airlock/multi_tile/halo/triplens
 	maxhealth = 2000
 	dir = EAST
 	width = 3
+	opacity = 1
 
 obj/machinery/door/airlock/multi_tile/halo/quadruplens
 	icon = 'code/modules/halo/doors/4xblastdoors/door.dmi'
@@ -66,6 +69,7 @@ obj/machinery/door/airlock/multi_tile/halo/quadruplens
 	maxhealth = 2500
 	dir = EAST
 	width = 4
+	opacity = 1
 
 /obj/machinery/door/airlock/multi_tile/secure
 	name = "Secure Airlock"
@@ -77,6 +81,7 @@ obj/machinery/door/airlock/multi_tile/halo/triple
 	welded_file = 'code/modules/halo/doors/blastdoor/welded.dmi'
 	maxhealth = 2000
 	dir = NORTH
+	opacity = 1
 
 obj/machinery/door/blast/regular/triple/New()
 	. = ..()
