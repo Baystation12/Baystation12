@@ -2,7 +2,7 @@
 	var/name = "playing card"
 	var/card_icon = "card_back"
 	var/back_icon = "card_back"
-	var/desc = "regular old playing card."
+	var/desc = "A regular old playing card."
 
 /datum/playingcard/proc/card_image(concealed, deck_icon)
 	return image(deck_icon, concealed ? back_icon : card_icon)
