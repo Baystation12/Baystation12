@@ -60,6 +60,21 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
 
+/obj/item/weapon/reagent_containers/pill/hyronalin
+	name = "Hyronalin pill"
+	desc = "Used to remove radiation poisoning."
+	icon_state = "pill17"
+	New()
+		..()
+		reagents.add_reagent(/datum/reagent/hyronalin, 5)
+
+/obj/item/weapon/storage/pill_bottle/hyronalin
+	name = "bottle of Hyronalin pills"
+	desc = "Contains pills used to assist in radiation damage."
+
+	startswith = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
+
+
 #undef SYRINGE_DRAW
 #undef SYRINGE_INJECT
 #undef SYRINGE_BROKEN
