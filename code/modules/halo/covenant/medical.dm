@@ -13,7 +13,7 @@
 
 /obj/item/weapon/storage/firstaid/combat/unsc/cov
 	icon = 'code/modules/halo/covenant/medical.dmi'
-	icon_state = "purplefirstaid"
+	icon_state = "purplefirstaid2"
 
 
 //Sleepers & Body Scanners
