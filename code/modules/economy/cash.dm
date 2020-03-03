@@ -1,6 +1,6 @@
 /obj/item/weapon/spacecash
-	name = "0 Thaler"
-	desc = "It's worth 0 Thalers."
+	name = "0 thalers"
+	desc = "It's worth 0 thalers."
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "spacecash1"
@@ -35,7 +35,7 @@
 			var/mob/living/carbon/human/h_user = user
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
-		to_chat(user, "<span class='notice'>You add [src.worth] Thalers worth of money to the bundles.<br>It holds [bundle.worth] Thalers now.</span>")
+		to_chat(user, "<span class='notice'>You add [src.worth] [GLOB.using_map.local_currency_name] worth of money to the bundles.<br>It holds [bundle.worth] [GLOB.using_map.local_currency_name] now.</span>")
 		qdel(src)
 
 	else if(istype(W, /obj/item/weapon/gun/launcher/money))
@@ -51,6 +51,10 @@
 	icon_state = ""
 	desc = "They are worth 0 Thalers."
 	worth = 0
+
+/obj/item/weapon/spacecash/bundle/Initialize()
+	. = ..()
+	update_icon()
 
 /obj/item/weapon/spacecash/bundle/getMoneyImages()
 	if(icon_state)
@@ -78,11 +82,11 @@
 		banknote.transform = M
 		src.overlays += banknote
 
-	src.desc = "They are worth [worth] Thalers."
+	src.desc = "They are worth [worth] [GLOB.using_map.local_currency_name]."
 	if(worth in denominations)
-		src.SetName("[worth] Thaler")
+		src.SetName("[worth] [GLOB.using_map.local_currency_name]")
 	else
-		src.SetName("pile of [worth] thalers")
+		src.SetName("pile of [worth] [GLOB.using_map.local_currency_name]")
 
 	if(overlays.len <= 2)
 		w_class = ITEM_SIZE_TINY
@@ -90,7 +94,7 @@
 		w_class = ITEM_SIZE_SMALL
 
 /obj/item/weapon/spacecash/bundle/attack_self()
-	var/amount = input(usr, "How many Thalers do you want to take? (0 to [src.worth])", "Take Money", 20) as num
+	var/amount = input(usr, "How many [GLOB.using_map.local_currency_name] do you want to take? (0 to [src.worth])", "Take Money", 20) as num
 	amount = round(Clamp(amount, 0, src.worth))
 	if(amount==0) return 0
 
@@ -179,4 +183,4 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 /obj/item/weapon/spacecash/ewallet/examine(mob/user, distance)
 	. = ..(user)
 	if (distance > 2 && user != loc) return
-	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. Thalers remaining: [src.worth].</span>")
+	to_chat(user, "<span class='notice'>Charge card's owner: [src.owner_name]. [GLOB.using_map.local_currency_name] remaining: [src.worth].</span>")

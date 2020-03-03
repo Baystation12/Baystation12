@@ -25,7 +25,20 @@
 	var/sharp_tools = list(SWISSKNF_LBLADE, SWISSKNF_SBLADE, SWISSKNF_GBLADE, SWISSKNF_WBLADE)
 
 /obj/item/weapon/material/knife/folding/swiss/attack_self(mob/user)
-	var/choice = input("Select a tool to open.","Knife") as null|anything in tools|SWISSKNF_CLOSED
+	var/choice	
+	if(user.a_intent != I_HELP && ((SWISSKNF_LBLADE in tools) || (SWISSKNF_SBLADE in tools)) && active_tool == SWISSKNF_CLOSED)
+		open = TRUE
+		if(SWISSKNF_LBLADE in tools)
+			choice = SWISSKNF_LBLADE
+		else
+			choice = SWISSKNF_SBLADE
+	else
+		if(active_tool == SWISSKNF_CLOSED)
+			choice = input("Select a tool to open.","Knife") as null|anything in tools|SWISSKNF_CLOSED
+		else
+			choice = SWISSKNF_CLOSED
+			open = FALSE
+	
 	if(!choice || !CanPhysicallyInteract(user))
 		return
 	if(choice == SWISSKNF_CLOSED)
@@ -38,6 +51,7 @@
 			playsound(user, 'sound/weapons/flipblade.ogg', 15, 1)
 		else
 			user.visible_message("<span class='notice'>\The [user] opens the [lowertext(choice)].</span>")
+			
 	active_tool = choice
 	update_force()
 	update_icon()

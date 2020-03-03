@@ -12,7 +12,7 @@
 				"trade_blacklist"   = "Legally I can' do that. Morally, I refuse to do that.",
 				"trade_found_unwanted" = "I only want animals. I don't need food or shiny things. I'm looking for specific ones at that. Ones I already have the cage and food for.",
 				"trade_not_enough"   = "I'd give you the animal for free, but I need the money to feed the others. So you must pay in full.",
-				"how_much"          = "This is a fine specimen. I believe it will cost you VALUE thalers.",
+				"how_much"          = "This is a fine specimen. I believe it will cost you VALUE CURRENCY.",
 				"what_want"         = "I have the facilities, currently, to support",
 
 				"compliment_deny"   = "That was almost charming.",
@@ -80,7 +80,7 @@
 				"trade_complete" = "We thank you for purchasing something. We enjoyed the experience of you doing so and we hope to learn from it.",
 				"trade_blacklist"= "We are not allowed to do such. We are sorry.",
 				"trade_not_enough"="We have sufficiently experienced giving away goods for free. We wish to experience getting money in return.",
-				"how_much"       = "We believe that is worth VALUE thalers.",
+				"how_much"       = "We believe that is worth VALUE CURRENCY.",
 				"what_want"      = "We wish only for the experiences you give us, in all else we want",
 
 				"compliment_deny"= "You are attempting to compliment us.",
@@ -117,9 +117,9 @@
 				"hail_deny"      = "I shan't palaver with a man who thumbs his nose at the annals of history. Goodbye.",
 
 				"trade_complete" = "Thank you, mighty warrior. And remember - these may be replicas, but their edges are honed to razor sharpness!",
-				"trade_blacklist"= "Nay, we accept only the thaler. Or sovereigns of the king's mint, of course.",
+				"trade_blacklist"= "Nay, we accept only the CURRENCY_SINGULAR. Or sovereigns of the king's mint, of course.",
 				"trade_not_enough"="Alas, traveler, my fine wares cost more than that.",
-				"how_much"       = "For VALUE thalers, I can part with this finest of goods.",
+				"how_much"       = "For VALUE CURRENCY, I can part with this finest of goods.",
 				"what_want"      = "I have ever longed for",
 
 				"compliment_deny"= "Oh ho ho! Aren't you quite the jester.",

@@ -294,7 +294,7 @@
 	build_path = /obj/item/mech_component/propulsion/tracks
 	req_tech = list(TECH_MATERIAL = 4)
 
-/datum/design/item/mechfab/exosuit/powerloader_torso
+/datum/design/item/mechfab/exosuit/sphere_torso
 	name = "spherical chassis"
 	id = "sphere_body"
 	build_path = /obj/item/mech_component/chassis/pod

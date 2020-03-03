@@ -22,8 +22,8 @@
 
 /datum/seed/chili/ice
 	name = "icechili"
-	seed_name = "ice pepper"
-	display_name = "ice-pepper plants"
+	seed_name = "chilly pepper"
+	display_name = "chilly pepper plants"
 	mutants = null
 	chems = list(/datum/reagent/frostoil = list(3,5), /datum/reagent/nutriment = list(1,50))
 	kitchen_tag = "icechili"

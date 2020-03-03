@@ -272,6 +272,12 @@
 
 /mob/living/carbon/human/get_stamina_used_per_step()
 	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
+	if(species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
+		if(has_gravity(src))
+			mod *= 1.2
+		else
+			mod *= 0.8
+
 	return config.minimum_sprint_cost + (config.skill_sprint_cost_range * mod)
 
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)

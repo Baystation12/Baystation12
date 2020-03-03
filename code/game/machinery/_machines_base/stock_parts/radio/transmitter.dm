@@ -2,7 +2,7 @@
 	name = "radio transmitter"
 	desc = "A radio transmitter designed for use with machines."
 	icon_state = "subspace_transmitter"
-	var/range       // If you want range-limited subtypes
+	var/range = 60  // Limits transmit range
 	var/latency = 2 // Delay between event and transmission; doesn't apply to transmit on tick
 	var/buffer
 
@@ -77,6 +77,11 @@
 	var/decl/public_access/public_variable/event
 	var/list/transmit_on_event
 
+/obj/item/weapon/stock_parts/radio/transmitter/on_event/is_valid_event(obj/machinery/machine, decl/public_access/variable)
+	if(istype(variable, /decl/public_access/public_method))
+		return LAZYACCESS(machine.public_methods, variable.type)
+	return ..()
+
 /obj/item/weapon/stock_parts/radio/transmitter/on_event/on_install(obj/machinery/machine)
 	..()
 	sanitize_events(machine, transmit_on_event)
@@ -101,3 +106,17 @@
 		var/decl/public_access/public_variable/check_variable = transmit_on_event[thing]
 		dat[thing] = check_variable.access_var(machine)
 	queue_transmit(dat)
+
+/obj/item/weapon/stock_parts/radio/transmitter/basic/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+	name = "basic radio transmitter"
+	desc = "A stock radio transmitter machine component. Can transmit updates regularly or on change."
+	color = COLOR_RED
+	matter = list(MATERIAL_STEEL = 400)
+
+/obj/item/weapon/stock_parts/radio/transmitter/on_event/buildable
+	part_flags = PART_FLAG_HAND_REMOVE
+	name = "event radio transmitter"
+	desc = "A radio transmitter machine component which transmits when activated by an event."
+	color = COLOR_ORANGE
+	matter = list(MATERIAL_STEEL = 400)

@@ -70,7 +70,7 @@ Right Click       - List/Create Area
 	user.client.images -= vision_images
 	vision_images = list()
 
-	var/list/used_colors = 0
+	var/used_colors = 0
 	var/list/max_colors = length(distinct_colors)
 	var/list/vision_colors = list()
 	for (var/turf/T in range(user.client.view, user))

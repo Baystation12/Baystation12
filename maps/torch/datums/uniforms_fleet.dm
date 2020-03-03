@@ -40,7 +40,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
+						 /obj/item/clothing/gloves/thick/duty/solgov/eng,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet)
 
 /decl/hierarchy/mil_uniform/fleet/eng/noncom
 	name = "Fleet engineering NCO"

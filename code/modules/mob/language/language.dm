@@ -199,7 +199,7 @@
 	if (only_species_language && speaking != all_languages[species_language])
 		return 0
 
-	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || speaking in src.languages))
+	return (speaking.can_speak_special(src) && (universal_speak || (speaking && speaking.flags & INNATE) || (speaking in src.languages)))
 
 /mob/proc/get_language_prefix()
 	return get_prefix_key(/decl/prefix/language)
@@ -219,7 +219,7 @@
 		if(!(L.flags & NONGLOBAL))
 			dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
 
-	src << browse(dat, "window=checklanguage")
+	show_browser(src, dat, "window=checklanguage")
 	return
 
 /mob/living/check_languages()
@@ -237,9 +237,9 @@
 			else
 				dat += "<b>[L.name]([L.shorthand]) ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
 
-	src << browse(dat, "window=checklanguage")
+	show_browser(src, dat, "window=checklanguage")
 
-/mob/living/Topic(href, href_list)
+/mob/living/OnSelfTopic(href_list)
 	if(href_list["default_lang"])
 		if(href_list["default_lang"] == "reset")
 
@@ -253,9 +253,8 @@
 			if(L && (L in languages))
 				set_default_language(L)
 		check_languages()
-		return 1
-	else
-		return ..()
+		return TOPIC_HANDLED
+	return ..()
 
 /proc/transfer_languages(var/mob/source, var/mob/target, var/except_flags)
 	for(var/datum/language/L in source.languages)

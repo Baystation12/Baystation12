@@ -583,14 +583,6 @@
 	icon_state = "fridge_dark"
 	icon_deny = "fridge_dark-deny"
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/rocks = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/shake = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/shot = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/pint = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/mug = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/wine = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal = 8,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/gin = 5,
@@ -602,32 +594,47 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cognac = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/kahlua = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/sake = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/jagermeister = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/specialwhiskey = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/llanbrydewhiskey = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/bottleofnothing =5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/blackstrap = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/prosecco = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/herbal = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/hellshenpa = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/gingerbeer = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/speer = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/ale = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/space_mountain_wind = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/beastenergy = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/tea/black = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/orangejuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/tomatojuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/limejuice = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/tonic = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cream = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine = 5,
-					/obj/item/weapon/reagent_containers/food/condiment/mint,
+					/obj/item/weapon/reagent_containers/food/condiment/mint = 2,
 					/obj/item/weapon/reagent_containers/food/drinks/ice = 10,
 					/obj/item/weapon/glass_extra/stick = 15,
 					/obj/item/weapon/glass_extra/straw = 15)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine = 2,
-					/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka = 2)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine = 3,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka = 3,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/lordaniawine = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/brandy = 5)
 	vend_delay = 15
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	product_slogans = "I hope nobody asks me for a bloody cup o' tea...;Alcohol is humanity's friend. Would you abandon a friend?;Quite delighted to serve you!;Is nobody thirsty on this station?"
@@ -715,8 +722,6 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 2)
 
-
-
 /obj/machinery/vending/cola
 	name = "Robust Softdrinks"
 	desc = "A softdrink vendor provided by Robust Industries, LLC."
@@ -736,6 +741,27 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+
+/obj/machinery/vending/soda
+	name = "Radical Renard"
+	desc = "A softdrink vendor promoted by Radical Renard."
+	icon_state = "Soda_Machine"
+	icon_vend = "Soda_Machine-vend"
+	icon_deny = "Soda_Machine-deny"
+	vend_delay = 11
+	base_type = /obj/machinery/vending/soda
+	product_slogans = "Not applicable!"
+	product_ads = "Not applicable."
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_pork = 10)
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/fitness

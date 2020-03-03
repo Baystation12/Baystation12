@@ -58,11 +58,12 @@ var/list/limb_icon_cache = list()
 	//Head markings, duplicated (sadly) below.
 	for(var/M in markings)
 		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
-		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-		mark_s.Blend(markings[M]["color"], mark_style.blend)
-		overlays |= mark_s //So when it's not on your body, it has icons
-		mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
-		icon_cache_key += "[M][markings[M]["color"]]"
+		if (mark_style.draw_target == MARKING_TARGET_SKIN)
+			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+			mark_s.Blend(markings[M]["color"], mark_style.blend)
+			overlays |= mark_s //So when it's not on your body, it has icons
+			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
+			icon_cache_key += "[M][markings[M]["color"]]"
 
 /obj/item/organ/external/var/icon_cache_key
 /obj/item/organ/external/on_update_icon(var/regenerate = 0)
@@ -98,11 +99,12 @@ var/list/limb_icon_cache = list()
 	//Body markings, does not include head, duplicated (sadly) above.
 	for(var/M in markings)
 		var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
-		var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-		mark_s.Blend(markings[M]["color"], ICON_ADD)
-		overlays |= mark_s //So when it's not on your body, it has icons
-		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
-		icon_cache_key += "[M][markings[M]["color"]]"
+		if (mark_style.draw_target == MARKING_TARGET_SKIN)
+			var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
+			mark_s.Blend(markings[M]["color"], mark_style.blend)
+			overlays |= mark_s //So when it's not on your body, it has icons
+			mob_icon.Blend(mark_s, mark_style.layer_blend) //So when it's on your body, it has icons
+			icon_cache_key += "[M][markings[M]["color"]]"
 
 	if(body_hair && islist(h_col) && h_col.len >= 3)
 		var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"

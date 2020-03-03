@@ -9,12 +9,9 @@
 	power_rating = 30000			// 30000 W ~ 40 HP
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER //connects to regular and scrubber pipes
+	identifier = "AScr"
 
 	level = 1
-
-	var/area/initial_loc
-	var/frequency = 1439
-	var/datum/radio_frequency/radio_connection
 
 	var/hibernate = 0 //Do we even process?
 	var/scrubbing = SCRUBBER_EXCHANGE
@@ -22,13 +19,42 @@
 
 	var/panic = 0 //is this scrubber panicked?
 
-	var/area_uid
-	var/radio_filter_out
-	var/radio_filter_in
-
 	var/welded = 0
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
 	build_icon_state = "scrubber"
+
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/power/apc/buildable,
+		/obj/item/weapon/stock_parts/radio/receiver/buildable,
+		/obj/item/weapon/stock_parts/radio/transmitter/on_event/buildable,
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/input_toggle,
+		/decl/public_access/public_variable/area_uid,
+		/decl/public_access/public_variable/identifier,
+		/decl/public_access/public_variable/use_power,
+		/decl/public_access/public_variable/name,
+		/decl/public_access/public_variable/scrubbing,
+		/decl/public_access/public_variable/panic,
+		/decl/public_access/public_variable/scrubbing_gas
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_power,
+		/decl/public_access/public_method/refresh,
+		/decl/public_access/public_method/toggle_panic_siphon,
+		/decl/public_access/public_method/set_scrub_gas
+	)
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_scrubber = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_scrubber = 1
+	)
+
+	frame_type = /obj/item/pipe
+	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
+	base_type = /obj/machinery/atmospherics/unary/vent_scrubber/buildable
+
+/obj/machinery/atmospherics/unary/vent_scrubber/buildable
+	uncreated_component_parts = null
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on
 	use_power = POWER_USE_IDLE
@@ -38,13 +64,6 @@
 	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	icon = null
-
-/obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
-	unregister_radio(src, frequency)
-	if(initial_loc)
-		initial_loc.air_scrub_info -= id_tag
-		initial_loc.air_scrub_names -= id_tag
-	return ..()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on_update_icon(var/safety = 0)
 	if(!check_icon_cache())
@@ -82,59 +101,24 @@
 			else
 				add_underlay(T,, dir)
 
-/obj/machinery/atmospherics/unary/vent_scrubber/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, radio_filter_in)
-
-/obj/machinery/atmospherics/unary/vent_scrubber/proc/broadcast_status()
-	if(!radio_connection)
-		return 0
-
-	var/datum/signal/signal = new
-	signal.transmission_method = 1 //radio signal
-	signal.source = src
-	signal.data = list(
-		"area" = area_uid,
-		"tag" = id_tag,
-		"device" = "AScr",
-		"timestamp" = world.time,
-		"power" = use_power,
-		"scrubbing" = scrubbing,
-		"panic" = panic,
-		"filter_o2" = (GAS_OXYGEN in scrubbing_gas),
-		"filter_n2" = (GAS_NITROGEN in scrubbing_gas),
-		"filter_co2" = (GAS_CO2 in scrubbing_gas),
-		"filter_phoron" = (GAS_PHORON in scrubbing_gas),
-		"filter_n2o" = (GAS_N2O in scrubbing_gas),
-		"sigtype" = "status"
-	)
-	if(!initial_loc.air_scrub_names[id_tag])
-		var/new_name = "[initial_loc.name] Air Scrubber #[initial_loc.air_scrub_names.len+1]"
-		initial_loc.air_scrub_names[id_tag] = new_name
-		src.SetName(new_name)
-	initial_loc.air_scrub_info[id_tag] = signal.data
-	radio_connection.post_signal(src, signal, radio_filter_out)
-
-	return 1
-
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
-	. = ..()
-	initial_loc = get_area(loc)
-	area_uid = initial_loc.uid
 	if (!id_tag)
-		assign_uid()
-		id_tag = num2text(uid)
-	radio_filter_in = frequency==initial(frequency)?(RADIO_FROM_AIRALARM):null
-	radio_filter_out = frequency==initial(frequency)?(RADIO_TO_AIRALARM):null
-	if (frequency)
-		set_frequency(frequency)
-		src.broadcast_status()
+		id_tag = num2text(sequential_id("obj/machinery"))
 	if(!scrubbing_gas)
 		scrubbing_gas = list()
 		for(var/g in gas_data.gases)
 			if(g != GAS_OXYGEN && g != GAS_NITROGEN)
 				scrubbing_gas += g
+	var/area/A = get_area(src)
+	if(A && !A.air_scrub_names[id_tag])
+		var/new_name = "[A.name] Vent Scrubber #[A.air_scrub_names.len+1]"
+		A.air_scrub_names[id_tag] = new_name
+		SetName(new_name)
+	. = ..()
+
+/obj/machinery/atmospherics/unary/vent_scrubber/RefreshParts()
+	. = ..()
+	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Process()
 	..()
@@ -182,107 +166,29 @@
 	update_icon()
 	update_underlays()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/receive_signal(datum/signal/signal)
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(!signal.data["tag"] || (signal.data["tag"] != id_tag) || (signal.data["sigtype"]!="command"))
-		return 0
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/toggle_panic()
+	var/decl/public_access/public_variable/panic/panic = decls_repository.get_decl(/decl/public_access/public_variable/panic)
+	panic.write_var(src, !panic)
 
-	if(signal.data["power"] != null)
-		update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
-	if(signal.data["power_toggle"] != null)
-		update_use_power(!use_power)
+/obj/machinery/atmospherics/unary/vent_scrubber/proc/set_scrub_gas(var/list/gases)
+	for(var/gas_id in gases)
+		if((gas_id in scrubbing_gas) ^ gases[gas_id])
+			scrubbing_gas ^= gas_id
 
-	if(signal.data["panic_siphon"]) //must be before if("scrubbing" thing
-		panic = text2num(signal.data["panic_siphon"])
-		if(panic)
-			update_use_power(POWER_USE_IDLE)
-			scrubbing = SCRUBBER_SIPHON
-		else
-			scrubbing = SCRUBBER_EXCHANGE
-	if(signal.data["toggle_panic_siphon"] != null)
-		panic = !panic
-		if(panic)
-			update_use_power(POWER_USE_IDLE)
-			scrubbing = SCRUBBER_SIPHON
-		else
-			scrubbing = SCRUBBER_EXCHANGE
-
-	if(signal.data["scrubbing"] != null)
-		scrubbing = signal.data["scrubbing"]
-		if(scrubbing != SCRUBBER_SIPHON)
-			panic = 0
-
-	var/list/toggle = list()
-
-	if(!isnull(signal.data["o2_scrub"]) && text2num(signal.data["o2_scrub"]) != (GAS_OXYGEN in scrubbing_gas))
-		toggle += GAS_OXYGEN
-	else if(signal.data["toggle_o2_scrub"])
-		toggle += GAS_OXYGEN
-
-	if(!isnull(signal.data["n2_scrub"]) && text2num(signal.data["n2_scrub"]) != (GAS_NITROGEN in scrubbing_gas))
-		toggle += GAS_NITROGEN
-	else if(signal.data["toggle_n2_scrub"])
-		toggle += GAS_NITROGEN
-
-	if(!isnull(signal.data["co2_scrub"]) && text2num(signal.data["co2_scrub"]) != (GAS_CO2 in scrubbing_gas))
-		toggle += GAS_CO2
-	else if(signal.data["toggle_co2_scrub"])
-		toggle += GAS_CO2
-
-	if(!isnull(signal.data["tox_scrub"]) && text2num(signal.data["tox_scrub"]) != (GAS_PHORON in scrubbing_gas))
-		toggle += GAS_PHORON
-	else if(signal.data["toggle_tox_scrub"])
-		toggle += GAS_PHORON
-
-	if(!isnull(signal.data["n2o_scrub"]) && text2num(signal.data["n2o_scrub"]) != (GAS_N2O in scrubbing_gas))
-		toggle += GAS_N2O
-	else if(signal.data["toggle_n2o_scrub"])
-		toggle += GAS_N2O
-
-	scrubbing_gas ^= toggle
-
-	if(signal.data["init"] != null)
-		SetName(signal.data["init"])
-		return
-
-	if(signal.data["status"] != null)
-		spawn(2)
-			broadcast_status()
-		return //do not update_icon
-
-//			log_admin("DEBUG \[[world.timeofday]\]: vent_scrubber/receive_signal: unknown command \"[signal.data["command"]]\"\n[signal.debug_print()]")
-	spawn(2)
-		broadcast_status()
-	update_icon()
-	return
-
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(isWrench(W))
+/obj/machinery/atmospherics/unary/vent_scrubber/cannot_transition_to(state_path, mob/user)
+	if(state_path == /decl/machine_construction/default/deconstructed)
 		if (!(stat & NOPOWER) && use_power)
-			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
-			return 1
-		var/turf/T = src.loc
+			return SPAN_WARNING("You cannot take this [src] apart, turn it off first.")
+		var/turf/T = get_turf(src)
 		if (node && node.level==1 && isturf(T) && !T.is_plating())
-			to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
-			return 1
+			return SPAN_WARNING("You must remove the plating first.")
 		var/datum/gas_mixture/int_air = return_air()
 		var/datum/gas_mixture/env_air = loc.return_air()
 		if ((int_air.return_pressure()-env_air.return_pressure()) > 2*ONE_ATMOSPHERE)
-			to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-			add_fingerprint(user)
-			return 1
-		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-		if (do_after(user, 40, src))
-			user.visible_message( \
-				"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-				"<span class='notice'>You have unfastened \the [src].</span>", \
-				"You hear a ratchet.")
-			new /obj/item/pipe(loc, src)
-			qdel(src)
-		return 1
+			return SPAN_WARNING("You cannot take this [src] apart, it too exerted due to internal pressure.")
+	return ..()
 
+/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(istype(W, /obj/item/weapon/weldingtool))
 
 		var/obj/item/weapon/weldingtool/WT = W
@@ -296,7 +202,7 @@
 			return 1
 
 		to_chat(user, "<span class='notice'>Now welding \the [src].</span>")
-		playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 
 		if(!do_after(user, 20, src))
 			to_chat(user, "<span class='notice'>You must remain close to finish this task.</span>")
@@ -311,6 +217,7 @@
 
 		welded = !welded
 		update_icon()
+		playsound(src, 'sound/items/Welder2.ogg', 50, 1)
 		user.visible_message("<span class='notice'>\The [user] [welded ? "welds \the [src] shut" : "unwelds \the [src]"].</span>", \
 			"<span class='notice'>You [welded ? "weld \the [src] shut" : "unweld \the [src]"].</span>", \
 			"You hear welding.")
@@ -327,8 +234,118 @@
 	if(welded)
 		to_chat(user, "It seems welded shut.")
 
-
+/obj/machinery/atmospherics/unary/vent_scrubber/refresh()
+	..()
+	hibernate = FALSE
+	toggle_input_toggle()
 
 /obj/machinery/atmospherics/unary/vent_scrubber/on/sauna/Initialize()
 	. = ..()
 	scrubbing_gas -= GAS_STEAM
+
+/decl/public_access/public_variable/scrubbing
+	expected_type = /obj/machinery/atmospherics/unary/vent_scrubber
+	name = "scrubbing mode"
+	desc = "The scrubbing mode code, which identifies what the scrubber is doing."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_STRING
+
+/decl/public_access/public_variable/scrubbing/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
+	return machine.scrubbing
+
+/decl/public_access/public_variable/scrubbing/write_var(obj/machinery/atmospherics/unary/vent_scrubber/machine, new_value)
+	if(!(new_value in list(SCRUBBER_EXCHANGE, SCRUBBER_SCRUB, SCRUBBER_SIPHON)))
+		return FALSE
+	. = ..()
+	if(.)
+		machine.scrubbing = new_value
+		if(new_value != SCRUBBER_SIPHON)
+			machine.panic = FALSE
+
+/decl/public_access/public_variable/panic
+	expected_type = /obj/machinery/atmospherics/unary/vent_scrubber
+	name = "panic state"
+	desc = "Whether or not the scrubber is in panic mode."
+	can_write = TRUE
+	has_updates = FALSE
+	var_type = IC_FORMAT_BOOLEAN
+
+/decl/public_access/public_variable/panic/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
+	return machine.panic
+
+/decl/public_access/public_variable/panic/write_var(obj/machinery/atmospherics/unary/vent_scrubber/machine, new_value)
+	if(!(new_value in list(TRUE, FALSE)))
+		return FALSE
+	. = ..()
+	if(.)
+		machine.scrubbing = new_value
+		if(machine.panic)
+			machine.update_use_power(POWER_USE_IDLE)
+			machine.scrubbing = SCRUBBER_SIPHON
+		else
+			machine.scrubbing = SCRUBBER_EXCHANGE
+
+/decl/public_access/public_variable/scrubbing_gas
+	expected_type = /obj/machinery/atmospherics/unary/vent_scrubber
+	name = "gasses scrubbing"
+	desc = "A list of gases that this scrubber is scrubbing."
+	can_write = FALSE
+	has_updates = FALSE
+	var_type = IC_FORMAT_LIST
+
+/decl/public_access/public_variable/scrubbing_gas/access_var(obj/machinery/atmospherics/unary/vent_scrubber/machine)
+	return machine.scrubbing_gas.Copy()
+
+/decl/public_access/public_method/toggle_panic_siphon
+	name = "toggle panic siphon"
+	desc = "Toggles the panic siphon function."
+	call_proc = /obj/machinery/atmospherics/unary/vent_scrubber/proc/toggle_panic
+
+/decl/public_access/public_method/set_scrub_gas
+	name = "set filter gases"
+	desc = "Given a list of gases, sets whether the gas is being scrubbed to the value of the gas in the list."
+	forward_args = TRUE
+	call_proc = /obj/machinery/atmospherics/unary/vent_scrubber/proc/set_scrub_gas
+
+/decl/stock_part_preset/radio/event_transmitter/vent_scrubber
+	frequency = PUMP_FREQ
+	filter = RADIO_TO_AIRALARM
+	event = /decl/public_access/public_variable/input_toggle
+	transmit_on_event = list(
+		"area" = /decl/public_access/public_variable/area_uid,
+		"device" = /decl/public_access/public_variable/identifier,
+		"power" = /decl/public_access/public_variable/use_power,
+		"panic" = /decl/public_access/public_variable/panic,
+		"scrubbing" = /decl/public_access/public_variable/scrubbing,
+		"scrubbing_gas" = /decl/public_access/public_variable/scrubbing_gas
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_scrubber
+	frequency = PUMP_FREQ
+	filter = RADIO_FROM_AIRALARM
+	receive_and_call = list(
+		"power_toggle" = /decl/public_access/public_method/toggle_power,
+		"toggle_panic_siphon" = /decl/public_access/public_method/toggle_panic_siphon,
+		"set_scrub_gas" = /decl/public_access/public_method/set_scrub_gas,
+		"status" = /decl/public_access/public_method/refresh
+	)
+	receive_and_write = list(
+		"set_power" = /decl/public_access/public_variable/use_power,
+		"panic_siphon" = /decl/public_access/public_variable/panic,
+		"set_scrubbing" = /decl/public_access/public_variable/scrubbing,
+		"init" = /decl/public_access/public_variable/name
+	)
+
+/decl/stock_part_preset/radio/receiver/vent_scrubber/shuttle
+	frequency = SHUTTLE_AIR_FREQ
+
+/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/shuttle
+	frequency = SHUTTLE_AIR_FREQ
+
+// Similar to the vent of the same name, for hybrid airlock-rooms
+/obj/machinery/atmospherics/unary/vent_scrubber/on/shuttle_auxiliary
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_scrubber/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/shuttle = 1
+	)

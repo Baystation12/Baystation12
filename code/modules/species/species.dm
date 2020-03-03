@@ -54,7 +54,6 @@
 	var/mob_size	= MOB_MEDIUM
 	var/strength    = STR_MEDIUM
 	var/show_ssd = "fast asleep"
-	var/virus_immune
 	var/short_sighted                         // Permanent weldervision.
 	var/light_sensitive                       // Ditto, but requires sunglasses to fix
 	var/blood_volume = SPECIES_BLOOD_DEFAULT  // Initial blood volume.
@@ -729,7 +728,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if((!skip_photo && preview_icon) || !skip_detail)
 		dat += "<td width = 200 align='center'>"
 		if(!skip_photo && preview_icon)
-			usr << browse_rsc(icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
+			send_rsc(usr, icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
 			dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
 		if(!skip_detail)
 			dat += "<small>"

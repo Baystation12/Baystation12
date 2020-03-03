@@ -126,7 +126,7 @@
 		to_chat(user, "<span class='notice'>Attach a fuel tank first!</span>")
 		return
 	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [tank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove fuel tank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
-	user << browse(dat, "window=flamethrower;size=600x300")
+	show_browser(user, dat, "window=flamethrower;size=600x300")
 	onclose(user, "flamethrower")
 	return
 
@@ -137,7 +137,7 @@
 /obj/item/weapon/flamethrower/Topic(href,href_list[])
 	if(href_list["close"])
 		usr.unset_machine()
-		usr << browse(null, "window=flamethrower")
+		close_browser(usr, "window=flamethrower")
 		return
 	if(usr.stat || usr.restrained() || usr.lying)	return
 	usr.set_machine(src)
@@ -157,7 +157,7 @@
 		tank = null
 		lit = 0
 		usr.unset_machine()
-		usr << browse(null, "window=flamethrower")
+		close_browser(usr, "window=flamethrower")
 	for(var/mob/M in viewers(1, loc))
 		if((M.client && M.machine == src))
 			attack_self(M)

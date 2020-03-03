@@ -43,7 +43,7 @@
 	build_path = /obj/item/pipe
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "pump"
-	constructed_path = /obj/machinery/atmospherics/binary/pump
+	constructed_path = /obj/machinery/atmospherics/binary/pump/buildable
 	pipe_class = PIPE_CLASS_BINARY
 
 /datum/pipe/pipe_dispenser/device/pressureregulator
@@ -61,7 +61,7 @@
 	build_path = /obj/item/pipe
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "volumepump"
-	constructed_path = /obj/machinery/atmospherics/binary/pump/high_power
+	constructed_path = /obj/machinery/atmospherics/binary/pump/high_power/buildable
 	pipe_class = PIPE_CLASS_BINARY
 
 /datum/pipe/pipe_dispenser/device/scrubber
@@ -70,13 +70,13 @@
 	build_path = /obj/item/pipe
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
 	build_icon_state = "scrubber"
-	constructed_path = /obj/machinery/atmospherics/unary/vent_scrubber
+	constructed_path = /obj/machinery/atmospherics/unary/vent_scrubber/buildable
 	pipe_class = PIPE_CLASS_UNARY
 
 /datum/pipe/pipe_dispenser/device/meter
 	name = "meter"
 	desc = "a meter that monitors pressure and temperature on the attached pipe."
-	build_path = /obj/item/pipe_meter
+	build_path = /obj/item/machine_chassis/pipe_meter
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE
@@ -166,13 +166,13 @@
 /datum/pipe/pipe_dispenser/device/air_sensor
 	name = "gas sensor"
 	desc = "a sensor. It detects gasses."
-	build_path = /obj/item/air_sensor
+	build_path = /obj/item/machine_chassis/air_sensor
 	build_icon_state = "gsensor1"
 	build_icon = 'icons/obj/stationobjs.dmi'
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE
-	constructed_path = /obj/machinery/air_sensor
+	constructed_path = /obj/machinery/air_sensor/buildable
 	pipe_class = PIPE_CLASS_OTHER
 
 /datum/pipe/pipe_dispenser/device/outlet_injector

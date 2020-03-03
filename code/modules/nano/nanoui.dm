@@ -203,7 +203,8 @@ nanoui is used to open and update nano browser uis
 			"mapName" = GLOB.using_map.path,
 			"mapZLevel" = map_z_level,
 			"mapZLevels" = GLOB.using_map.map_levels,
-			"user" = list("name" = user.name)
+			"user" = list("name" = user.name),
+			"currency" = GLOB.using_map.local_currency_name,
 		)
 	return config_data
 
@@ -429,7 +430,7 @@ nanoui is used to open and update nano browser uis
 	if(update_status(0))
 		return // Will be closed by update_status().
 
-	user << browse(get_html(), "window=[window_id];[window_size][window_options]")
+	show_browser(user, get_html(), "window=[window_id];[window_size][window_options]")
 	winset(user, "mapwindow.map", "focus=true") // return keyboard focus to map
 	on_close_winset()
 	//onclose(user, window_id)

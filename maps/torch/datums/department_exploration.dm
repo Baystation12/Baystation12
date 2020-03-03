@@ -26,6 +26,9 @@
 		seeds = max(1, round(0.5 * total_seeds))
 	..()
 
+/datum/goal/department/plant_samples/is_valid()
+	return seeds > 0
+
 /datum/goal/department/plant_samples/update_strings()
 	description = "Scan at least [seeds] different plant\s native to exoplanets."
 	
@@ -47,6 +50,9 @@
 			total_species |= A.type
 	species = rand(length(total_species))
 	..()
+
+/datum/goal/department/fauna_samples/is_valid()
+	return species > 0
 
 /datum/goal/department/fauna_samples/update_strings()
 	description = "Scan at least [species] different creature\s native to exoplanets."

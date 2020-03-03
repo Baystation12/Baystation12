@@ -69,9 +69,6 @@ Class Procs:
 
 	  Default definition does nothing.
 
-   assign_uid()			   'game/machinery/machine.dm'
-	  Called by machine to assign a value to the uid variable.
-
    Process()				  'game/machinery/machine.dm'
 	  Called by the 'master_controller' once per game tick for each machine that is listed in the 'machines' list.
 
@@ -331,10 +328,6 @@ Class Procs:
 	var/list/missing = missing_parts()
 	set_broken(!!missing, MACHINE_BROKEN_NO_PARTS)
 
-/obj/machinery/proc/assign_uid()
-	uid = gl_uid
-	gl_uid++
-
 /obj/machinery/proc/state(var/msg)
 	for(var/mob/O in hearers(src, null))
 		O.show_message("\icon[src] <span class = 'notice'>[msg]</span>", 2)
@@ -371,7 +364,10 @@ Class Procs:
 	var/obj/item/weapon/stock_parts/circuitboard/circuit = get_component_of_type(/obj/item/weapon/stock_parts/circuitboard)
 	if(circuit)
 		circuit.deconstruct(src)
-	new frame_type(get_turf(src), dir)
+	if(ispath(frame_type, /obj/item/pipe))
+		new frame_type(get_turf(src), src)
+	else
+		new frame_type(get_turf(src), dir)
 	for(var/I in component_parts)
 		uninstall_component(I, refresh_parts = FALSE)
 	while(LAZYLEN(uncreated_component_parts))
@@ -402,7 +398,7 @@ Class Procs:
 
 /obj/machinery/proc/display_parts(mob/user)
 	to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
-	for(var/var/obj/item/C in component_parts)
+	for(var/obj/item/C in component_parts)
 		to_chat(user, "<span class='notice'>	[C.name]</span>")
 	for(var/path in uncreated_component_parts)
 		var/obj/item/thing = path

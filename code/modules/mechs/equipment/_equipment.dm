@@ -27,7 +27,7 @@
 		if(target in owner.contents)
 			return 0
 
-		if(!(owner.get_cell() && owner.get_cell().check_charge(active_power_use * CELLRATE)))
+		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
 			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
 			return 0	
 		return 1
@@ -36,7 +36,7 @@
 
 /obj/item/mech_equipment/attack_self(var/mob/user)
 	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
-		if(!(owner.get_cell() && owner.get_cell().check_charge(active_power_use * CELLRATE)))
+		if(!(owner.get_cell()?.check_charge(active_power_use * CELLRATE)))
 			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
 			return 0	
 		return 1

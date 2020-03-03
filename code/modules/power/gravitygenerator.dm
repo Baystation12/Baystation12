@@ -81,14 +81,14 @@
 	else
 		dat += "No local gravity generator detected!"
 
-	user << browse(dat, "window=gravgen")
+	show_browser(user, dat, "window=gravgen")
 	onclose(user, "gravgen")
 
 
 /obj/machinery/computer/gravity_control_computer/Topic(href, href_list)
 	set background = 1
 	if((. = ..()))
-		usr << browse(null, "window=air_alarm")
+		close_browser(usr, "window=air_alarm")
 		return
 
 	if(href_list["gentoggle"])

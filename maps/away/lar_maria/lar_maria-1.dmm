@@ -221,14 +221,9 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "az" = (
-/obj/machinery/computer/diseasesplicer,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aA" = (
-/obj/structure/reagent_dispensers/virusfood{
-	pixel_x = 0;
-	pixel_y = 32
-	},
 /obj/structure/table/glass,
 /obj/item/weapon/paper,
 /obj/item/weapon/folder/white,
@@ -251,23 +246,18 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aC" = (
-/obj/machinery/disease2/antibodyanalyser,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aD" = (
-/obj/machinery/disease2/diseaseanalyser,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aE" = (
-/obj/machinery/disease2/incubator,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aF" = (
-/obj/machinery/disease2/isolator,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aG" = (
-/obj/machinery/computer/centrifuge,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -524,7 +514,6 @@
 /area/lar_maria/vir_main)
 "bu" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/weapon/virusdish/random,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bv" = (
@@ -659,12 +648,10 @@
 /area/lar_maria/vir_main)
 "bO" = (
 /obj/structure/table/glass,
-/obj/item/device/antibody_scanner,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bP" = (
 /obj/structure/closet/crate/freezer,
-/obj/item/weapon/virusdish,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bQ" = (
@@ -865,9 +852,6 @@
 /area/lar_maria/vir_main)
 "cq" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
-/obj/item/weapon/virusdish,
-/obj/item/weapon/virusdish,
-/obj/item/weapon/virusdish/random,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cr" = (
@@ -1047,8 +1031,6 @@
 "cK" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /obj/machinery/light,
-/obj/item/weapon/virusdish,
-/obj/item/weapon/virusdish/random,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "cL" = (
@@ -1939,10 +1921,6 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
 "eW" = (
-/obj/machinery/computer/diseasesplicer{
-	icon_state = "computer";
-	dir = 1
-	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "eX" = (
@@ -2256,11 +2234,9 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fF" = (
-/obj/machinery/disease2/isolator,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fG" = (
-/obj/machinery/disease2/incubator,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fH" = (
@@ -3672,7 +3648,7 @@
 "iB" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1037;
+	frequency = 1439;
 	id_tag = "ZHPCells_airlock";
 	pixel_x = 0;
 	pixel_y = 0;
@@ -3773,7 +3749,7 @@
 /area/lar_maria/sec_wing)
 "iN" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1037;
+	frequency = 1439;
 	id_tag = "ZHPCells_airlock_inner"
 	},
 /obj/machinery/door/firedoor,
@@ -3788,14 +3764,13 @@
 "iO" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
-	frequency = 1037;
 	id_tag = "ZHPCells_airlock_pump"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
 "iP" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1037;
+	frequency = 1439;
 	id_tag = "ZHPCells_airlock_outer"
 	},
 /obj/machinery/door/firedoor,

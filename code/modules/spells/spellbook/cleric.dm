@@ -42,5 +42,5 @@
 							/obj/item/stack/medical/advanced/bruise_pack,
 							/obj/item/stack/medical/advanced/ointment,
 							/obj/item/bodybag/rescue,
-							/obj/item/weapon/defibrillator,
-							/obj/item/weapon/virusdish)
+							/obj/item/weapon/defibrillator
+							)

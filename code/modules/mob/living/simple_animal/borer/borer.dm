@@ -132,10 +132,10 @@
 		blinded = host.blinded
 		eye_blind = host.eye_blind
 		eye_blurry = host.eye_blurry
-		if(host.sdisabilities & BLIND)
-			sdisabilities |= BLIND
-		if(host.sdisabilities & DEAF)
-			sdisabilities |= DEAF
+		if(host.sdisabilities & BLINDED)
+			sdisabilities |= BLINDED
+		if(host.sdisabilities & DEAFENED)
+			sdisabilities |= DEAFENED
 	else
 		blinded =    FALSE
 		eye_blind =  0

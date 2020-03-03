@@ -10,7 +10,7 @@
 	light_strength = 2
 	slot_flags = SLOT_ID | SLOT_BELT
 	stores_pen = TRUE
-	stored_pen = /obj/item/weapon/pen
+	stored_pen = /obj/item/weapon/pen/retractable
 	interact_sounds = list('sound/machines/pda_click.ogg')
 	interact_sound_volume = 20
 

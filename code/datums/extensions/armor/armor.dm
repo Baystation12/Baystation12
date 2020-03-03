@@ -28,15 +28,14 @@
 		return args.Copy()
 
 	var/blocked = get_blocked(damage_type, damage_flags, armor_pen, damage)
+	on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
+
 	// Blocking values that mean the damage was under armor, so all dangerous flags are removed (edge/sharp)
 	var/armor_border_blocking = 1 - (under_armor_mult * 1/armor_range_mult)
 	if(blocked >= armor_border_blocking)
 		if(damage_flags & DAM_LASER)
 			damage *= FLUIDLOSS_CONC_BURN/FLUIDLOSS_WIDE_BURN
 		damage_flags &= ~(DAM_SHARP | DAM_EDGE | DAM_LASER)
-
-	on_blocking(damage, blocked)
-
 	if(damage_type == IRRADIATE)
 		damage = max(0, damage - 100 * blocked)
 		silent = TRUE
@@ -49,7 +48,7 @@
 			to_chat(victim, SPAN_NOTICE(partial_block_message))
 	return args.Copy()
 
-/datum/extension/armor/proc/on_blocking(damage, blocked)
+/datum/extension/armor/proc/on_blocking(damage, damage_type, damage_flags, armor_pen, blocked)
 
 // A simpler proc used as a helper for above but can also be used externally. Does not modify state.
 /datum/extension/armor/proc/get_blocked(damage_type, damage_flags, armor_pen = 0, damage = 5)
@@ -68,6 +67,9 @@
 	if(isnull(armor_values[key]))
 		return 0
 	return min(armor_values[key], 100)
+
+/datum/extension/armor/proc/set_value(key, newval)
+	armor_values[key] = Clamp(newval, 0, 100)
 
 // There is a disconnect between legacy damage and armor code. This here helps bridge the gap.
 /proc/get_armor_key(damage_type, damage_flags)

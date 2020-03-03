@@ -44,7 +44,7 @@
 	flora_prob = 3
 	large_flora_prob = 0
 	flora_diversity = 3
-	fauna_types = list(/mob/living/simple_animal/thinbug)
+	fauna_types = list(/mob/living/simple_animal/thinbug, /mob/living/simple_animal/hostile/retaliate/beast/shantak/lava, /mob/living/simple_animal/hostile/retaliate/beast/charbaby)
 	megafauna_types = list(/mob/living/simple_animal/hostile/drake)
 
 //Squashing most of 1 tile lava puddles
@@ -83,7 +83,7 @@
 
 /datum/random_map/automata/cave_system/mountains/volcanic/get_additional_spawns(value, var/turf/simulated/mineral/T)
 	..()
-	if(use_area)
+	if(use_area && istype(T))
 		T.mined_turf = prob(90) ? use_area.base_turf : /turf/simulated/floor/exoplanet/lava
 
 /turf/simulated/floor/exoplanet/lava

@@ -40,14 +40,14 @@
 /decl/hierarchy/outfit/death_command
 	name = "Spec Ops - Death commando"
 
-/decl/hierarchy/outfit/death_command/equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/death_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	GLOB.deathsquad.equip(H)
 	return 1
 
 /decl/hierarchy/outfit/syndicate_command
 	name = "Spec Ops - Syndicate commando"
 
-/decl/hierarchy/outfit/syndicate_command/equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/syndicate_command/equip(mob/living/carbon/human/H, rank, assignment, equip_adjustments)
 	GLOB.commandos.equip(H)
 	return 1
 
@@ -59,12 +59,13 @@
 	belt = /obj/item/weapon/storage/belt/holster/security
 	glasses = /obj/item/clothing/glasses/sunglasses
 	gloves = /obj/item/clothing/gloves/thick/swat
-
 	l_pocket = /obj/item/weapon/reagent_containers/pill/cyanide
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/weapon/card/id/syndicate
 	id_pda_assignment = "Mercenary"
+
+	backpack_contents = list(/obj/item/clothing/suit/space/void/merc/prepared = 1, /obj/item/clothing/mask/gas/syndicate = 1)
 
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_RESET_EQUIPMENT
 

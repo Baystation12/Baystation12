@@ -431,7 +431,7 @@ I said no!
 /datum/recipe/syntisteak
 	reagents = list(/datum/reagent/sodiumchloride = 1, /datum/reagent/blackpepper = 1)
 	items = list(/obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh)
-	result = /obj/item/weapon/reagent_containers/food/snacks/meatsteak
+	result = /obj/item/weapon/reagent_containers/food/snacks/meatsteak/synthetic
 
 /datum/recipe/pizzamargherita
 	fruit = list("tomato" = 1)
@@ -920,13 +920,6 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/stuffing,
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/tofurkey
-
-// Fuck Science!
-/datum/recipe/ruinedvirusdish
-	items = list(
-		/obj/item/weapon/virusdish
-	)
-	result = /obj/item/weapon/ruinedvirusdish
 
 //////////////////////////////////////////
 // bs12 food port stuff

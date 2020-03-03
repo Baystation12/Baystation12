@@ -52,6 +52,8 @@
 
 /area/map_template/syndicate_mothership/raider_base
 	name = "\improper Raider Base"
+	requires_power = 0
+	dynamic_lighting = 0
 	req_access = list(access_syndicate)
 
 // The following mirror is ~special~.
@@ -67,7 +69,6 @@
 			var/choice = input("Do you wish to become a true Vox of the Shoal? This is not reversible.") as null|anything in list("No","Yes")
 			if(choice && choice == "Yes")
 				var/mob/living/carbon/human/vox/vox = new(get_turf(src),SPECIES_VOX)
-				vox.gender = user.gender
 				GLOB.raiders.equip(vox)
 				if(user.mind)
 					user.mind.transfer_to(vox)

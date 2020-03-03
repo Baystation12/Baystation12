@@ -81,20 +81,6 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/cryo_cell
 	sort_string = "FACAF"
 
-/datum/design/circuit/centrifuge
-	name = "isolation centrifuge console"
-	id = "iso_centrifuge"
-	req_tech = list(TECH_DATA = 2, TECH_BIO = 3)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/centrifuge
-	sort_string = "FACAG"
-
-/datum/design/circuit/splicer
-	name = "disease splicer"
-	id = "isplicer"
-	req_tech = list(TECH_DATA = 5, TECH_BIO = 5)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/splicer
-	sort_string = "FACAH"
-
 /datum/design/circuit/crewconsole
 	name = "crew monitoring console"
 	id = "crewconsole"

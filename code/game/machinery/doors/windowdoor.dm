@@ -83,7 +83,7 @@
 	var/mob/M = AM // we've returned by here if M is not a mob
 	if (src.operating)
 		return
-	if (src.density && (!issmall(M) || ishuman(M)) && src.allowed(AM))
+	if (src.density && (!issmall(M) || ishuman(M) || issilicon(M)) && src.allowed(AM))
 		open()
 		if(src.check_access(null))
 			sleep(50)
@@ -95,7 +95,7 @@
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
+	if(get_dir(loc, target) & dir) //Make sure looking at appropriate border
 		if(air_group) return 0
 		return !density
 	else

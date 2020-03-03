@@ -70,7 +70,7 @@
 	var/obj/screen/movable/exosuit/toggle/hatch_open/hud_open
 	var/obj/screen/movable/exosuit/power/hud_power
 
-/mob/living/exosuit/is_flooded()
+/mob/living/exosuit/is_flooded(lying_mob, absolute)
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
 
 /mob/living/exosuit/Initialize(mapload, var/obj/structure/heavy_vehicle_frame/source_frame)

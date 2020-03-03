@@ -111,7 +111,7 @@
 	HTML += "<br>"
 	HTML += "<hr />"
 	HTML += "<tt>"
-	user << browse(HTML, "window=flavor_text;size=430x300")
+	show_browser(user, HTML, "window=flavor_text;size=430x300")
 	return
 
 /datum/category_item/player_setup_item/physical/flavor/proc/SetFlavourTextRobot(mob/user)
@@ -128,5 +128,5 @@
 		HTML += "<br>"
 	HTML += "<hr />"
 	HTML += "<tt>"
-	user << browse(HTML, "window=flavour_text_robot;size=430x300")
+	show_browser(user, HTML, "window=flavour_text_robot;size=430x300")
 	return

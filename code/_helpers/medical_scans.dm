@@ -46,8 +46,6 @@
 	scan["genetic"] = H.getCloneLoss()
 	scan["paralysis"] = H.paralysis
 	scan["immune_system"] = H.virus_immunity()
-	if (H.virus2.len)
-		scan["virus"] = TRUE
 	scan["worms"] = H.has_brain_worms()
 
 	scan["reagents"] = list()
@@ -92,7 +90,7 @@
 	for(var/organ_name in H.species.has_organ)
 		if(!locate(H.species.has_organ[organ_name]) in H.internal_organs)
 			scan["missing_organs"] += organ_name
-	if(H.sdisabilities & BLIND)
+	if(H.sdisabilities & BLINDED)
 		scan["blind"] = TRUE
 	if(H.sdisabilities & NEARSIGHTED)
 		scan["nearsight"] = TRUE
@@ -236,11 +234,6 @@
 			<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>
 		*/
 		dat += "<tr><td colspan = '2'>Antibody levels and immune system perfomance are at [scan["immune_system"]*100]% of baseline.</td></tr>"
-		if (scan["virus"])
-			if(skill_level >= SKILL_ADEPT)
-				dat += "<tr><td colspan='2'><span class='bad'><center>Viral pathogen detected in blood stream.</center></span></td></tr>"
-			else
-				dat += "<tr><td colspan='2'><center>Viral pathogen detected in blood stream.</center></td></tr>"
 
 		if(scan["worms"])
 			dat += "<tr><td colspan='2'><span class='bad'><center>Large growth detected in frontal lobe, possibly cancerous.</center></span></td></tr>"

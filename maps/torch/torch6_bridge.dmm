@@ -4185,9 +4185,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
 "hK" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 8;
-	frequency = 1379;
 	id_tag = "bridge_eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4446,9 +4445,8 @@
 	tag_exterior_door = "bridge_eva_outer";
 	tag_interior_door = "bridge_eva_inner"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bridge_eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4468,9 +4466,8 @@
 	pixel_x = 24;
 	pixel_y = 0
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 8;
-	frequency = 1379;
 	id_tag = "bridge_eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -4719,9 +4716,8 @@
 /obj/machinery/oxygen_pump{
 	pixel_x = -32
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bridge_eva_pump"
 	},
 /obj/effect/floor_decal/techfloor{
@@ -5592,9 +5588,8 @@
 	tag_exterior_door = "ai_core_outer";
 	tag_interior_door = "ai_core_inner"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 2;
-	frequency = 1379;
 	id_tag = "ai_core_pump"
 	},
 /obj/machinery/light{
@@ -5956,9 +5951,8 @@
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	frequency = 1331;
 	id_tag = "aquila_shuttle_dock_pump"
 	},
 /obj/structure/cable/green{
@@ -6866,9 +6860,8 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 1;
-	frequency = 1379;
 	id_tag = "ai_core_pump"
 	},
 /obj/effect/floor_decal/industrial/warning,
@@ -10761,9 +10754,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/foreport)
 "xg" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bridge_eva_pump"
 	},
 /obj/machinery/oxygen_pump{
@@ -12798,9 +12790,8 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/bridge/fore)
 "Fc" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 4;
-	frequency = 1331;
 	id_tag = "aquila_shuttle_pump_out_external"
 	},
 /obj/machinery/airlock_sensor{
@@ -13214,9 +13205,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Hg" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
-	frequency = 1331;
 	id_tag = "aquila_shuttle_pump_out_internal"
 	},
 /obj/structure/cable{
@@ -13915,9 +13905,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Jg" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 2;
-	frequency = 1331;
 	id_tag = "aquila_shuttle_pump"
 	},
 /obj/machinery/oxygen_pump{
@@ -14495,9 +14484,8 @@
 	req_access = list("ACCESS_TORCH_AQUILA");
 	tag_exterior_sensor = "aquila_shuttle_sensor_external"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 2;
-	frequency = 1331;
 	id_tag = "aquila_shuttle_pump"
 	},
 /obj/structure/handrai,
@@ -15188,9 +15176,8 @@
 	master_tag = "bridge_safe";
 	pixel_y = 22
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 2;
-	frequency = 1379;
 	id_tag = "bridge_safe_pump"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -15500,12 +15487,12 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/item/weapon/pen/green,
-/obj/item/weapon/pen/red{
+/obj/item/weapon/pen/retractable/green,
+/obj/item/weapon/pen/retractable/red{
 	pixel_x = -1;
 	pixel_y = 3
 	},
-/obj/item/weapon/pen/blue{
+/obj/item/weapon/pen/retractable/blue{
 	pixel_x = -5;
 	pixel_y = -1
 	},
@@ -16104,9 +16091,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 8;
-	frequency = 1379;
 	id_tag = "solar_bridge_pump"
 	},
 /obj/machinery/light/small,
@@ -16806,9 +16792,8 @@
 	icon_state = "techfloororange_edges";
 	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 1;
-	frequency = 1379;
 	id_tag = "bridge_safe_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,

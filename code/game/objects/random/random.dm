@@ -274,7 +274,8 @@
 	icon_state = "revolver"
 
 /obj/random/projectile/spawn_choices()
-	return list(/obj/item/weapon/gun/projectile/shotgun/pump = 3,
+	return list(/obj/item/weapon/gun/projectile/heavysniper/boltaction = 4,
+				/obj/item/weapon/gun/projectile/shotgun/pump = 3,
 				/obj/item/weapon/gun/projectile/automatic/merc_smg = 2,
 				/obj/item/weapon/gun/projectile/automatic/assault_rifle = 2,
 				/obj/item/weapon/gun/projectile/automatic/bullpup_rifle = 2,
@@ -1337,7 +1338,8 @@ var/list/random_useful_
 /obj/random/vendor/spawn_choices()
 	return list(/obj/machinery/vending/weeb,
 				/obj/machinery/vending/sol,
-				/obj/machinery/vending/snix
+				/obj/machinery/vending/snix,
+				/obj/machinery/vending/soda
 				)
 
 /obj/random/single/playing_cards

@@ -224,7 +224,7 @@
 /decl/surgery_step/internal/replace_organ/get_skill_reqs(mob/living/user, mob/living/carbon/human/target, obj/item/tool)
 	var/obj/item/organ/internal/O = tool
 	var/obj/item/organ/external/affected = target.get_organ(user.zone_sel.selecting)
-	if(BP_IS_ROBOTIC(O))
+	if(BP_IS_ROBOTIC(O) || istype(O, /obj/item/organ/internal/augment))
 		if(BP_IS_ROBOTIC(affected))
 			return SURGERY_SKILLS_ROBOTIC
 		else
@@ -398,7 +398,7 @@
 	if(!istype(container) || !container.reagents.has_reagent(/datum/reagent/peridaxon) || !..())
 		return FALSE
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	var/obj/item/organ/internal/list/dead_organs = list()
+	var/list/obj/item/organ/internal/dead_organs = list()
 	for(var/obj/item/organ/internal/I in target.internal_organs)
 		if(I && !(I.status & ORGAN_CUT_AWAY) && (I.status & ORGAN_DEAD) && I.parent_organ == affected.organ_tag && !BP_IS_ROBOTIC(I))
 			dead_organs |= I

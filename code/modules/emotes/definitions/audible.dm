@@ -39,6 +39,11 @@
 	emote_message_3p = "USER chirps!"
 	emote_sound = 'sound/misc/nymphchirp.ogg'
 
+/decl/emote/audible/multichirp
+	key ="mchirp"
+	emote_message_3p = "USER chirps a chorus of notes!"
+	emote_sound = 'sound/misc/multichirp.ogg'
+
 /decl/emote/audible/alarm
 	key = "alarm"
 	emote_message_1p = "You sound an alarm."

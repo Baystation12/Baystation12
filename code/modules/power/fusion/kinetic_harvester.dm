@@ -10,6 +10,9 @@
 	var/list/stored =     list()
 	var/list/harvesting = list()
 	var/obj/machinery/power/fusion_core/harvest_from
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 /obj/machinery/kinetic_harvester/Initialize()
 	set_extension(src, /datum/extension/local_network_member)

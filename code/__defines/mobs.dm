@@ -351,3 +351,6 @@
 #define RADIO_INTERRUPT_DEFAULT 30
 
 #define MOB_FLAG_HOLY_BAD                0x001  // If this mob is allergic to holiness
+
+#define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
+#define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns

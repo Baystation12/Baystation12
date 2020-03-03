@@ -6,6 +6,7 @@
 	color = "#bd6100"
 	max_speed = 1/(3 SECONDS)
 	burn_delay = 15 SECONDS
+	fore_dir = SOUTH
 
 /datum/map_template/ruin/away_site/errant_pisces
 	name = "Errant Pisces"

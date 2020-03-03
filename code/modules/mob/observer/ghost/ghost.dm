@@ -86,7 +86,7 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 		hud_images = null
 	return ..()
 
-/mob/observer/ghost/Topic(href, href_list)
+/mob/observer/ghost/OnSelfTopic(href_list)
 	if (href_list["track"])
 		if(istype(href_list["track"],/mob))
 			var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
@@ -96,6 +96,8 @@ var/global/list/image/ghost_sightless_images = list() //this is a list of images
 			var/atom/target = locate(href_list["track"])
 			if(istype(target))
 				ManualFollow(target)
+		return TOPIC_HANDLED
+	return ..()
 
 /*
 Transfer_mind is there to check if mob is being deleted/not going to have a body.
@@ -409,7 +411,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	dat += "<h4>Crew Manifest</h4>"
 	dat += html_crew_manifest()
 
-	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
 
 //This is called when a ghost is drag clicked to something.
 /mob/observer/ghost/MouseDrop(atom/over)

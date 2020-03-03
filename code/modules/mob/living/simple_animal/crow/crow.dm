@@ -59,60 +59,62 @@
 	popup.set_content(jointext(dat, "<br>"))
 	popup.open()
 
-/mob/living/simple_animal/crow/Topic(href, href_list)
-	. = ..()
-	if(!.)
-		if(!ishuman(usr) || usr.incapacitated() || !usr.Adjacent(src))
-			return .
-		if(href_list["remove_inv"])
-			var/obj/item/removed
-			switch(href_list["remove_inv"])
-				if("access cuff")
-					removed = access_card
-					access_card = null
-				if("back")
-					removed = messenger_bag
-					messenger_bag = null
-			if(removed)
-				removed.dropInto(loc)
-				usr.put_in_hands(removed)
-				visible_message("<span class='notice'>\The [usr] removes \the [removed] from \the [src]'s [href_list["remove_inv"]].</span>")
-				show_inv(usr)
-				update_icon()
-			else
-				to_chat(usr, "<span class='warning'>There is nothing to remove from \the [src]'s [href_list["remove_inv"]].</span>")
-			return 1
-		if(href_list["add_inv"])
-			var/obj/item/equipping = usr.get_active_hand()
-			if(!equipping)
-				to_chat(usr, "<span class='warning'>You have nothing in your hand to put on \the [src]'s [href_list["add_inv"]].</span>")
-				return 0
-			var/obj/item/equipped
-			var/checktype
-			switch(href_list["add_inv"])
-				if("access cuff")
-					equipped = access_card
-					checktype = /obj/item/weapon/card/id
-				if("back")
-					equipped = messenger_bag
-					checktype = /obj/item/weapon/storage/messenger
-			if(equipped)
-				to_chat(usr, "<span class='warning'>There is already something worn on \the [src]'s [href_list["add_inv"]].</span>")
-				return 0
-			if(!istype(equipping, checktype))
-				to_chat(usr, "<span class='warning'>\The [equipping] won't fit on \the [src]'s [href_list["add_inv"]].</span>")
-				return 0
-			switch(href_list["add_inv"])
-				if("access cuff")
-					access_card = equipping
-				if("back")
-					messenger_bag = equipping
-			if(!usr.unEquip(equipping, src))
-				return 0
-			visible_message("<span class='notice'>\The [usr] places \the [equipping] on to \the [src]'s [href_list["add_inv"]].</span>")
-			update_icon()
+/mob/living/simple_animal/crow/DefaultTopicState()
+	return GLOB.physical_state
+
+/mob/living/simple_animal/crow/OnTopic(mob/user, href_list)
+	if(!ishuman(user))
+		return ..()
+	if(href_list["remove_inv"])
+		var/obj/item/removed
+		switch(href_list["remove_inv"])
+			if("access cuff")
+				removed = access_card
+				access_card = null
+			if("back")
+				removed = messenger_bag
+				messenger_bag = null
+		if(removed)
+			removed.dropInto(loc)
+			usr.put_in_hands(removed)
+			visible_message("<span class='notice'>\The [usr] removes \the [removed] from \the [src]'s [href_list["remove_inv"]].</span>")
 			show_inv(usr)
-			return 1
+			update_icon()
+		else
+			to_chat(user, "<span class='warning'>There is nothing to remove from \the [src]'s [href_list["remove_inv"]].</span>")
+		return TOPIC_HANDLED
+	if(href_list["add_inv"])
+		var/obj/item/equipping = user.get_active_hand()
+		if(!equipping)
+			to_chat(user, "<span class='warning'>You have nothing in your hand to put on \the [src]'s [href_list["add_inv"]].</span>")
+			return 0
+		var/obj/item/equipped
+		var/checktype
+		switch(href_list["add_inv"])
+			if("access cuff")
+				equipped = access_card
+				checktype = /obj/item/weapon/card/id
+			if("back")
+				equipped = messenger_bag
+				checktype = /obj/item/weapon/storage/messenger
+		if(equipped)
+			to_chat(user, "<span class='warning'>There is already something worn on \the [src]'s [href_list["add_inv"]].</span>")
+			return TOPIC_HANDLED
+		if(!istype(equipping, checktype))
+			to_chat(user, "<span class='warning'>\The [equipping] won't fit on \the [src]'s [href_list["add_inv"]].</span>")
+			return TOPIC_HANDLED
+		switch(href_list["add_inv"])
+			if("access cuff")
+				access_card = equipping
+			if("back")
+				messenger_bag = equipping
+		if(!user.unEquip(equipping, src))
+			return TOPIC_HANDLED
+		visible_message("<span class='notice'>\The [user] places \the [equipping] on to \the [src]'s [href_list["add_inv"]].</span>")
+		update_icon()
+		show_inv(user)
+		return TOPIC_HANDLED
+	return ..()
 
 /mob/living/simple_animal/crow/examine(mob/user)
 	. = ..()

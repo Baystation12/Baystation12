@@ -32,6 +32,12 @@
 	cost = 10
 	containername = "blank tapes crate"
 
+/decl/hierarchy/supply_pack/supply/taperolls
+	name = "G.O.S.H - Barricade Tapes (mixed)"
+	contains = list (/obj/item/weapon/storage/box/taperolls)
+	cost = 10
+	containername = "barricade tape crate"
+
 /decl/hierarchy/supply_pack/supply/scanner_module
 	name = "Electronics - Paper scanner modules"
 	contains = list(/obj/item/weapon/stock_parts/computer/scanner/paper = 4)

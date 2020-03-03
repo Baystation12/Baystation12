@@ -424,7 +424,7 @@
 	xo = null
 	var/result = 0 //To pass the message back to the gun.
 
-/obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area)
+/obj/item/projectile/test/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == firer)
 		forceMove(A.loc)
 		return //cannot shoot yourself

@@ -68,7 +68,7 @@
 	popup.open()
 
 /obj/machinery/pipedispenser/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/pipe_meter))
+	if (istype(W, /obj/item/pipe) || istype(W, /obj/item/machine_chassis))
 		if(!user.unEquip(W))
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] back into \the [src].</span>")
@@ -90,7 +90,7 @@
 					stat |= MAINT
 					update_use_power(POWER_USE_OFF)
 					if(user.machine==src)
-						user << browse(null, "window=pipedispenser")
+						close_browser(user, "window=pipedispenser")
 			else
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You begin to fasten \the [src] to the floor...</span>")

@@ -151,7 +151,7 @@
 	var/mission_data = list()
 	mission_data["name"] = mission.name
 	mission_data["departure"] = mission.depart_time || "N/A"
-	mission_data["return"] = mission.return_time || "N/A"
+	mission_data["return_time"] = mission.return_time || "N/A"
 	switch(mission.stage)
 		if(SHUTTLE_MISSION_QUEUED)
 			mission_data["status"] = "Mission Scheduled."

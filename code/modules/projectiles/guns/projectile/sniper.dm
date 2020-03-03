@@ -27,9 +27,9 @@
 /obj/item/weapon/gun/projectile/heavysniper/on_update_icon()
 	..()
 	if(bolt_open)
-		icon_state = "heavysniper-open"
+		icon_state = "[initial(icon_state)]-open"
 	else
-		icon_state = "heavysniper"
+		icon_state = "[initial(icon_state)]"
 
 /obj/item/weapon/gun/projectile/heavysniper/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
 	..()
@@ -77,3 +77,20 @@
 		return
 	..()
 
+
+/obj/item/weapon/gun/projectile/heavysniper/boltaction
+	name = "bolt action rifle"
+	desc = "An old bolt action rifle from some forgotten war, still commonplace among farmers and colonists as an anti-varmint rifle."
+	icon = 'icons/obj/guns/boltaction.dmi'
+	icon_state = "boltaction"
+	item_state = "boltaction"
+	w_class = ITEM_SIZE_LARGE
+	origin_tech = list(TECH_COMBAT = 2)
+	caliber = CALIBER_RIFLE
+	ammo_type = /obj/item/ammo_casing/rifle
+	load_method = SINGLE_CASING|SPEEDLOADER
+	max_shells = 5
+	accuracy = 4
+	scope_zoom = 0
+	scoped_accuracy = 0
+	wielded_item_state = "boltaction-wielded"

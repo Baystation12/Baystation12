@@ -9,6 +9,7 @@
 #define SPECIES_FLAG_NO_TANGLE                  0x0080  // This species wont get tangled up in weeds
 #define SPECIES_FLAG_NO_BLOCK                   0x0100  // Unable to block or defend itself from attackers.
 #define SPECIES_FLAG_NEED_DIRECT_ABSORB         0x0200  // This species can only have their DNA taken by direct absorption.
+#define SPECIES_FLAG_LOW_GRAV_ADAPTED           0x0400  // This species is used to lower than standard gravity, affecting stamina in high-grav
 
 // unused: 0x8000 - higher than this will overflow
 

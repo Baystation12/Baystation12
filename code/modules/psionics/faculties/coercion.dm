@@ -79,10 +79,11 @@
 	to_chat(target, SPAN_NOTICE("<b>Your mind is compelled to answer: <i>[question]</i></b>"))
 
 	var/answer =  input(target, question, "Read Mind") as null|text
-	if(!answer || world.time > started_mindread + 25 SECONDS || user.stat != CONSCIOUS || target.stat == DEAD)
+	if(!answer || world.time > started_mindread + 60 SECONDS || user.stat != CONSCIOUS || target.stat == DEAD)
 		to_chat(user, SPAN_NOTICE("<b>You receive nothing useful from \the [target].</b>"))
 	else
 		to_chat(user, SPAN_NOTICE("<b>You skim thoughts from the surface of \the [target]'s mind: <i>[answer]</i></b>"))
+	msg_admin_attack("[key_name(user)] read mind of [key_name(target)] with question \"[question]\" and [answer?"got answer \"[answer]\".":"got no answer."]")
 	return TRUE
 
 /decl/psionic_power/coercion/agony

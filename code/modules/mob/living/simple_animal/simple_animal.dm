@@ -83,6 +83,10 @@
 	var/ability_cooldown
 	var/time_last_used_ability
 
+	//for simple animals that reflect damage when attacked in melee
+	var/return_damage_min
+	var/return_damage_max
+
 /mob/living/simple_animal/Initialize()
 	. = ..()
 	if(LAZYLEN(natural_armor))
@@ -220,6 +224,10 @@
 	var/damage = Proj.damage
 	if(Proj.damtype == STUN)
 		damage = Proj.damage / 6
+	if(Proj.damtype == BRUTE)
+		damage = Proj.damage / 2
+	if(Proj.damtype == BURN)
+		damage = Proj.damage / 1.5
 	if(Proj.agony)
 		damage += Proj.agony / 6
 		if(health < Proj.agony * 3)
@@ -491,3 +499,14 @@
 			return FLASH_PROTECTION_MAJOR
 		else 
 			return FLASH_PROTECTION_MAJOR
+
+/mob/living/simple_animal/proc/reflect_unarmed_damage(var/mob/living/carbon/human/attacker, var/damage_type, var/description)
+	if(attacker.a_intent == I_HURT)
+		var/hand_hurtie
+		if(attacker.hand)
+			hand_hurtie = BP_L_HAND
+		else
+			hand_hurtie = BP_R_HAND
+		attacker.apply_damage(rand(return_damage_min, return_damage_max), damage_type, hand_hurtie, used_weapon = description)
+		if(rand(25))
+			to_chat(attacker, SPAN_WARNING("Your attack has no obvious effect on \the [src]'s [description]!"))

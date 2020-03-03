@@ -287,13 +287,6 @@
 		if(chemtraces.len)
 			. += "<span class='scan_notice'>Metabolism products of [english_list(chemtraces)] found in subject's system.</span>"
 
-	if(H.virus2.len)
-		for (var/ID in H.virus2)
-			if (ID in virusDB)
-				print_reagent_default_message = FALSE
-				var/datum/computer_file/data/virus_record/V = virusDB[ID]
-				. += "<span class='scan_warning'>Warning: Pathogen [V.fields["name"]] detected in subject's blood. Known antigen : [V.fields["antigen"]]</span>"
-
 	if(print_reagent_default_message)
 		. += "No results."
 

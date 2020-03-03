@@ -71,7 +71,7 @@
 	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/informalhat
-	allowed_roles = SEMIFORMAL_ROLES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/welding
 	allowed_roles = TECHNICAL_ROLES

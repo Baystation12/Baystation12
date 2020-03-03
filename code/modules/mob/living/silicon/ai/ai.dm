@@ -322,7 +322,7 @@ var/list/ai_verbs_default = list(
 	if(message_cooldown)
 		to_chat(src, "Please allow one minute to pass between announcements.")
 		return
-	var/input = input(usr, "Please write a message to announce to the [station_name()] crew.", "A.I. Announcement")
+	var/input = input(usr, "Please write a message to announce to the [station_name()] crew.", "A.I. Announcement") as null|message
 	if(!input)
 		return
 
@@ -402,21 +402,20 @@ var/list/ai_verbs_default = list(
 		view_core()
 	..()
 
-/mob/living/silicon/ai/Topic(href, href_list)
-	if(usr != src)
-		return
-	if(..())
-		return
-	if (href_list["mach_close"])
+/mob/living/silicon/ai/OnSelfTopic(href_list)
+	if (href_list["mach_close"]) // Overrides behavior handled in the ..()
 		if (href_list["mach_close"] == "aialerts")
 			viewalerts = 0
-		var/t1 = text("window=[]", href_list["mach_close"])
-		unset_machine()
-		src << browse(null, t1)
+		return ..() // Does further work on this key
+
 	if (href_list["switchcamera"])
 		switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
+		return TOPIC_HANDLED
+
 	if (href_list["showalerts"])
 		open_subsystem(/datum/nano_module/alarm_monitor/all)
+		return TOPIC_HANDLED
+
 	//Carn: holopad requests
 	if (href_list["jumptoholopad"])
 		var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])
@@ -425,6 +424,7 @@ var/list/ai_verbs_default = list(
 				H.attack_ai(src) //may as well recycle
 			else
 				to_chat(src, "<span class='notice'>Unable to locate the holopad.</span>")
+		return TOPIC_HANDLED
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
@@ -434,9 +434,9 @@ var/list/ai_verbs_default = list(
 			ai_actual_track(target)
 		else
 			to_chat(src, "<span class='warning'>System error. Cannot locate [html_decode(href_list["trackname"])].</span>")
-		return
+		return TOPIC_HANDLED
 
-	return
+	return ..()
 
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(camera)

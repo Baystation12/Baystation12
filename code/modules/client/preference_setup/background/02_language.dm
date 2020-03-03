@@ -106,7 +106,6 @@
 		pref.alternate_languages.Cut(MAX_LANGUAGES + 1)
 
 /datum/category_item/player_setup_item/background/languages/proc/get_language_text()
-	. = ..()
 	sanitize_alt_languages()
 	if(LAZYLEN(pref.alternate_languages))
 		for(var/i = 1 to pref.alternate_languages.len)

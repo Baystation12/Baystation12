@@ -108,7 +108,7 @@
 
 /obj/item/weapon/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)
 
-	if(!in_range(user, A) || istype(A, /obj/machinery/door) || icon_state == "scrap")
+	if(!in_range(user, A) || istype(A, /obj/machinery/door) || istype(A, /obj/item/weapon/storage) || icon_state == "scrap")
 		return
 
 	var/turf/target_turf = get_turf(A)

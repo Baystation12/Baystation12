@@ -42,7 +42,7 @@
 proc/isdeaf(A)
 	if(isliving(A))
 		var/mob/living/M = A
-		return (M.sdisabilities & DEAF) || M.ear_deaf
+		return (M.sdisabilities & DEAFENED) || M.ear_deaf
 	return 0
 
 proc/hasorgans(A) // Fucking really??
@@ -404,10 +404,10 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 			else
 				hud_used.action_intent.icon_state = I_HELP
 
-proc/is_blind(A)
+/proc/is_blind(A)
 	if(istype(A, /mob/living/carbon))
 		var/mob/living/carbon/C = A
-		if(C.sdisabilities & BLIND || C.blinded)
+		if(C.sdisabilities & BLINDED|| C.blinded)
 			return 1
 	return 0
 

@@ -122,7 +122,7 @@
 	for(var/index=1, index<=construction.len, index++)
 		dat += "<A href='?src=\ref[src];activate=[index]'>\[[construction[index]]\]</a><br>"
 
-	user << browse(dat, "window=alien_replicator")
+	show_browser(user, dat, "window=alien_replicator")
 
 /obj/machinery/replicator/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 	if(!user.unEquip(W, src))

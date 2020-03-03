@@ -142,6 +142,10 @@
 				to_chat(user, "<span class='notice'>\The [src] has no more space specifically for \the [W].</span>")
 			return 0
 
+	//If attempting to lable the storage item, silently fail to allow it
+	if(istype(W, /obj/item/weapon/hand_labeler) && user.a_intent != I_HELP)
+		return FALSE
+
 	// Don't allow insertion of unsafed compressed matter implants
 	// Since they are sucking something up now, their afterattack will delete the storage
 	if(istype(W, /obj/item/weapon/implanter/compressed))
@@ -239,9 +243,13 @@
 	return 1
 
 // Only do ui functions for now; the obj is responsible for anything else.
-/obj/item/weapon/storage/proc/on_item_deletion(obj/item/W)
+/obj/item/weapon/storage/proc/on_item_pre_deletion(obj/item/W)
 	if(storage_ui)
 		storage_ui.on_pre_remove(null, W) // Supposed to be able to handle null user.
+
+// Only do ui functions for now; the obj is responsible for anything else.
+/obj/item/weapon/storage/proc/on_item_post_deletion(obj/item/W)
+	if(storage_ui)
 		update_ui_after_item_removal()
 	queue_icon_update()
 

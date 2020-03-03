@@ -10,7 +10,7 @@ Specifically made to do radiation burns.
 	if(species && !isSynthetic())
 		if(species.name == SPECIES_DIONA)
 			return FALSE
-		damage = damage * species.get_radiation_mod(src)
+		damage = 0.25 * damage * species.get_radiation_mod(src)
 		adjustFireLoss(damage)
 
 	updatehealth()

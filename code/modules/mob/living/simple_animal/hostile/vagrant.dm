@@ -27,7 +27,6 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	var/datum/disease2/disease/carried
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
 	var/blood_per_tick = 3
@@ -35,12 +34,6 @@
 	pass_flags = PASS_FLAG_TABLE
 
 	bleed_colour = "#aad9de"
-
-/mob/living/simple_animal/hostile/vagrant/Initialize()
-	. = ..()
-	if(prob(25))
-		carried = new/datum/disease2/disease()
-		carried.makerandom(rand(2, 4))
 
 /mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
 	return 1
@@ -117,8 +110,6 @@
 			H.Weaken(1)
 			H.Stun(1)
 			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
-			if(carried && length(gripping.virus2) == 0)
-				infect_virus2(gripping, carried, 1)
 			src.forceMove(gripping.loc)
 
 /mob/living/simple_animal/hostile/vagrant/swarm/Initialize()

@@ -49,13 +49,28 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	species_flags = SPECIES_FLAG_LOW_GRAV_ADAPTED
+
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE * 0.8            // Dangerously high pressure.
+	warning_high_pressure = WARNING_HIGH_PRESSURE * 0.8          // High pressure warning.
+	warning_low_pressure = WARNING_LOW_PRESSURE * 0.8            // Low pressure warning.
+	hazard_low_pressure = HAZARD_LOW_PRESSURE * 0.8              // Dangerously low pressure.
 
 /datum/species/human/vatgrown
 	name = SPECIES_VATGROWN
 	name_plural = "Vat-Grown Humans"
 	description = "With cloning on the forefront of human scientific advancement, cheap mass production \
-	of bodies is a very real and rather ethically grey industry. Vat-grown humans tend to be paler than \
-	baseline, with no appendix and fewer inherited genetic disabilities, but a weakened metabolism."
+	of bodies is a very real and rather ethically grey industry. Although slavery, indentured servitude \
+	and flash-cloning are all illegal in SCG space, there still exists a margin for those legitimate \
+	corporations able to take up contracts for growing and raising vat-grown humans to populate new \
+	colonies or installations. Many vat-grown humans come from one of these projects, making up the \
+	majority of those referred to as the nonborn - those with singular names and an identifier, such as \
+	ID-John, BQ1-Bob or Thomas-582 - while others, bearing more human-sounding names, are created for \
+	and raised as members of regular human families. Still others are the lab-created designer progeny \
+	of the SCG's rich elite.<br/><br/>Vat-grown humans tend to be paler than baseline, though those \
+	with darker skin better display the dull, greenish hue resulting from their artificial growth. \
+	Vat-grown humans have no appendix and fewer inherited genetic disabilities but have a weakened \
+	metabolism."
 	icobase =     'icons/mob/human_races/species/human/subspecies/vatgrown_body.dmi'
 	preview_icon= 'icons/mob/human_races/species/human/subspecies/vatgrown_preview.dmi'
 

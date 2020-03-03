@@ -45,13 +45,13 @@ var/global/photo_count = 0
 /obj/item/weapon/photo/on_update_icon()
 	overlays.Cut()
 	var/scale = 8/(photo_size*32)
-	var/image/small_img = image(img.icon)
+	var/image/small_img = image(img)
 	small_img.transform *= scale
 	small_img.pixel_x = -32*(photo_size-1)/2 - 3
 	small_img.pixel_y = -32*(photo_size-1)/2
 	overlays |= small_img
 
-	tiny = image(img.icon)
+	tiny = image(img)
 	tiny.transform *= 0.5*scale
 	tiny.underlays += image('icons/obj/bureaucracy.dmi',"photo")
 	tiny.pixel_x = -32*(photo_size-1)/2 - 3
@@ -75,12 +75,13 @@ var/global/photo_count = 0
 		to_chat(user, "<span class='notice'>It is too far away.</span>")
 
 /obj/item/weapon/photo/proc/show(mob/user as mob)
-	user << browse_rsc(img, "tmp_photo_[id].png")
-	user << browse("<html><head><title>[name]</title></head>" \
-		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
-		+ "<img src='tmp_photo_[id].png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
-		+ "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"\
-		+ "</body></html>", "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
+	send_rsc(user, img, "tmp_photo_[id].png")
+	var/output = "<html><head><title>[name]</title></head>"
+	output += "<body style='overflow:hidden;margin:0;text-align:center'>"
+	output += "<img src='tmp_photo_[id].png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />"
+	output += "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"
+	output += "</body></html>"
+	show_browser(user, output, "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
 	onclose(user, "[name]")
 	return
 

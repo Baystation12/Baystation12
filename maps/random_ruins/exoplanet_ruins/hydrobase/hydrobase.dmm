@@ -1877,7 +1877,7 @@
 	},
 /obj/machinery/access_button{
 	command = "cycle_interior";
-	frequency = 1392;
+	frequency = 1380;
 	master_tag = "solars_airlock";
 	name = "interior access button";
 	pixel_x = 24;
@@ -1901,7 +1901,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/door/airlock/external{
-	frequency = 1392;
+	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "solars_inner";
 	locked = 1;
@@ -1925,7 +1925,7 @@
 	dir = 8
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1392;
+	frequency = 1380;
 	id_tag = "solars_airlock";
 	name = "EVA Airlock Console";
 	pixel_y = -24;
@@ -1956,14 +1956,13 @@
 	dir = 4
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1392;
+	frequency = 1380;
 	id_tag = "solars_sensor";
 	pixel_x = 0;
 	pixel_y = 25
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1392;
 	id_tag = "solars_pump"
 	},
 /obj/structure/catwalk,
@@ -1971,7 +1970,7 @@
 /area/map_template/hydrobase/station/solarlock)
 "eH" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1392;
+	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "solars_outer";
 	locked = 1;
@@ -1987,7 +1986,7 @@
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
-	frequency = 1392;
+	frequency = 1380;
 	master_tag = "solars_airlock";
 	name = "exterior access button";
 	pixel_x = -24;
@@ -2608,7 +2607,7 @@
 /obj/structure/catwalk,
 /obj/machinery/access_button{
 	command = "cycle_interior";
-	frequency = 1391;
+	frequency = 1380;
 	master_tag = "hydrodock_airlock";
 	name = "interior access button";
 	pixel_x = -24;
@@ -2779,7 +2778,7 @@
 "go" = (
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/machinery/door/airlock/external{
-	frequency = 1391;
+	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "hydrodock_inner";
 	locked = 1;
@@ -2834,7 +2833,7 @@
 	dir = 1
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1391;
+	frequency = 1380;
 	id_tag = "hydrodock_sensor";
 	pixel_x = 0;
 	pixel_y = 25
@@ -2872,9 +2871,8 @@
 	icon_state = "warning";
 	dir = 1
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1391;
 	id_tag = "hydrodock_pump"
 	},
 /obj/structure/catwalk,
@@ -2905,9 +2903,8 @@
 /obj/machinery/oxygen_pump{
 	pixel_x = -32
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	frequency = 1391;
 	id_tag = "hydrodock_pump"
 	},
 /obj/structure/catwalk,
@@ -2918,13 +2915,12 @@
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/dockport)
 "gC" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1391;
 	id_tag = "hydrodock_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1391;
+	frequency = 1380;
 	id_tag = "hydrodock_airlock";
 	name = "Shipping Airlock Console";
 	pixel_x = 24;
@@ -2963,9 +2959,8 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
-	frequency = 1391;
 	id_tag = "hydrodock_pump"
 	},
 /obj/structure/catwalk,
@@ -2982,9 +2977,8 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
-	frequency = 1391;
 	id_tag = "hydrodock_pump"
 	},
 /obj/structure/catwalk,
@@ -3003,7 +2997,7 @@
 /area/map_template/hydrobase/station/dockport)
 "gK" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1391;
+	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "hydrodock_outer";
 	locked = 1;
@@ -3014,19 +3008,24 @@
 "gL" = (
 /obj/machinery/access_button{
 	command = "cycle_exterior";
-	frequency = 1391;
+	frequency = 1380;
 	master_tag = "hydrodock_airlock";
 	name = "exterior access button";
 	pixel_x = 24;
 	pixel_y = 24;
 	req_access = newlist()
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "NL" = (
 /mob/living/simple_animal/hostile/retaliate/goat/hydro,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/goatzone)
+"RI" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
 aa
@@ -3927,8 +3926,8 @@ gu
 gA
 gF
 gp
-aa
-aa
+RI
+RI
 "}
 (23,1,1) = {"
 aa
@@ -3969,7 +3968,7 @@ gB
 gG
 gK
 gL
-aa
+RI
 "}
 (24,1,1) = {"
 aa
@@ -4009,8 +4008,8 @@ gw
 gC
 gH
 gn
-aa
-aa
+RI
+RI
 "}
 (25,1,1) = {"
 aa

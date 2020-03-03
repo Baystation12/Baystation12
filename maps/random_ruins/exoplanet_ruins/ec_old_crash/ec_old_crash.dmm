@@ -3,14 +3,15 @@
 /turf/template_noop,
 /area/template_noop)
 "ab" = (
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/cryo)
 "ac" = (
 /turf/simulated/wall/r_wall/hull,
 /area/map_template/ecship/cockpit)
 "ad" = (
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/cockpit)
 "ae" = (
@@ -23,7 +24,7 @@
 	opacity = 0
 	},
 /obj/machinery/door/firedoor,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/simulated/floor,
 /area/map_template/ecship/cockpit)
 "af" = (
@@ -35,11 +36,6 @@
 /turf/template_noop,
 /area/template_noop)
 "ah" = (
-/obj/structure/lattice,
-/turf/template_noop,
-/area/template_noop)
-"ai" = (
-/obj/effect/scorcher,
 /obj/structure/lattice,
 /turf/template_noop,
 /area/template_noop)
@@ -115,7 +111,7 @@
 /area/map_template/ecship/cryo)
 "at" = (
 /obj/structure/lattice,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/cryo)
 "au" = (
@@ -502,7 +498,7 @@
 /area/map_template/ecship/cryo)
 "bi" = (
 /obj/structure/catwalk,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bj" = (
@@ -524,7 +520,7 @@
 	icon_state = "1-4";
 	dir = 8
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bl" = (
@@ -644,7 +640,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bx" = (
@@ -745,7 +741,7 @@
 	icon_state = "1-2";
 	dir = 4
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "bD" = (
@@ -1102,13 +1098,13 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "cj" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ck" = (
@@ -1653,7 +1649,7 @@
 "dl" = (
 /obj/structure/catwalk,
 /obj/structure/handrai,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dm" = (
@@ -1663,7 +1659,7 @@
 	icon_state = "intact";
 	dir = 6
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dn" = (
@@ -1808,7 +1804,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dw" = (
@@ -1817,13 +1813,13 @@
 	icon_state = "intact";
 	dir = 9
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dx" = (
 /obj/structure/catwalk,
-/obj/effect/scorcher,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dy" = (
@@ -1852,7 +1848,7 @@
 	d1 = 16;
 	d2 = 0
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dA" = (
@@ -1896,7 +1892,8 @@
 "dF" = (
 /obj/effect/floor_decal/corner/yellow/full,
 /obj/machinery/computer/air_control{
-	name = "O2 Sensor",sensor_tag = "sev_oxygen"
+	name = "O2 Sensor";
+	sensor_tag = "sev_oxygen"
 	},
 /turf/simulated/floor,
 /area/map_template/ecship/engineering)
@@ -1906,7 +1903,7 @@
 	icon_state = "1-2";
 	dir = 4
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dH" = (
@@ -1927,7 +1924,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "dJ" = (
@@ -1961,7 +1958,7 @@
 	icon_state = "1-4";
 	dir = 4
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dR" = (
@@ -1970,7 +1967,7 @@
 "dS" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dT" = (
@@ -2000,7 +1997,7 @@
 	icon_state = "intact";
 	dir = 5
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
 "dY" = (
@@ -2009,7 +2006,8 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "dZ" = (
@@ -2022,6 +2020,7 @@
 	max_pressure_setting = 15000;
 	regulate_mode = 2
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ea" = (
@@ -2087,6 +2086,7 @@
 	target_pressure = 2500;
 	use_power = 1
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "eh" = (
@@ -2094,7 +2094,8 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ei" = (
@@ -2107,7 +2108,8 @@
 	icon_state = "intact";
 	dir = 6
 	},
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "ek" = (
@@ -2120,6 +2122,7 @@
 	max_pressure_setting = 15000;
 	regulate_mode = 2
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/map_template/ecship/engine)
 "el" = (
@@ -2150,25 +2153,37 @@
 "eo" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "ep" = (
 /obj/structure/lattice,
 /obj/machinery/atmospherics/pipe/simple/visible/cyan,
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "mD" = (
 /obj/structure/lattice,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "qB" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"yb" = (
+/obj/structure/lattice,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"yZ" = (
 /obj/structure/grille,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "NM" = (
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/template_noop,
 /area/template_noop)
 "SX" = (
@@ -2180,6 +2195,7 @@
 /obj/machinery/atmospherics/portables_connector{
 	dir = 1
 	},
+/obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
 "Vy" = (
@@ -2187,11 +2203,21 @@
 /obj/item/weapon/circular_saw,
 /turf/simulated/floor/tiled/white/lowpressure,
 /area/map_template/ecship/science)
+"Wb" = (
+/obj/structure/lattice,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
 "YW" = (
 /obj/structure/catwalk,
-/obj/effect/scorcher,
+/obj/effect/landmark/scorcher,
 /turf/simulated/floor/airless,
 /area/map_template/ecship/engine)
+"ZF" = (
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
 
 (1,1,1) = {"
 aa
@@ -2524,8 +2550,8 @@ aa
 aa
 aa
 NM
-NM
-NM
+qB
+qB
 aK
 aA
 aA
@@ -2559,18 +2585,18 @@ aa
 aa
 aa
 NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
 aA
 bL
 cd
 cr
 aA
-NM
-NM
+ZF
+ZF
 NM
 NM
 NM
@@ -2594,20 +2620,20 @@ aa
 ac
 ac
 qB
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
 aA
 bM
 ce
 cs
 cB
-NM
-NM
-NM
+ZF
+ZF
+ZF
 NM
 NM
 NM
@@ -2630,21 +2656,21 @@ aa
 ac
 ac
 qB
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
 aA
 bN
 cf
 ct
 aA
-NM
-NM
-NM
-NM
+ZF
+ZF
+ZF
+ZF
 NM
 NM
 bw
@@ -2666,28 +2692,28 @@ aa
 aa
 ac
 qB
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
 aA
 bO
 cg
 aA
 aA
-NM
-NM
-NM
-NM
-NM
-NM
+ZF
+ZF
+ZF
+ZF
+ZF
+ZF
 bw
-NM
-NM
-aa
-aa
+ZF
+ZF
+qB
+qB
 dR
 dR
 dR
@@ -2701,28 +2727,28 @@ aa
 ac
 ac
 ac
-mD
-NM
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 aA
 ch
 aA
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+ZF
+ZF
+ZF
+ZF
+ZF
 bi
 bw
 bi
 bi
-NM
+ZF
 dR
 dR
 dV
@@ -2738,27 +2764,27 @@ ac
 ac
 ac
 qB
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-mD
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 cH
 dd
 dn
 cH
 dl
-NM
+ZF
 dR
 dT
 dV
@@ -2773,28 +2799,28 @@ aa
 aa
 ac
 ac
-mD
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-mD
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 cH
 cH
 de
 do
 cH
 dl
-NM
+ZF
 dR
 dR
 dV
@@ -2809,20 +2835,20 @@ aa
 ac
 ac
 ac
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 cH
 cH
 cH
@@ -2830,8 +2856,8 @@ df
 do
 cH
 dl
-NM
-aa
+ZF
+qB
 dR
 dW
 ee
@@ -2852,11 +2878,11 @@ aq
 aq
 aL
 aq
-ai
-ai
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
 cH
 cH
 cH
@@ -2867,13 +2893,13 @@ dn
 cH
 dl
 dx
-NM
-aa
-ah
+ZF
+qB
+Wb
 ef
-ah
-aa
-aa
+Wb
+qB
+qB
 aa
 aa
 "}
@@ -2888,11 +2914,11 @@ ax
 ay
 aM
 aQ
-ai
-ai
-ai
-NM
-NM
+qB
+qB
+qB
+qB
+qB
 cH
 cJ
 cO
@@ -2903,14 +2929,14 @@ dp
 cH
 cH
 dz
-NM
-NM
-mD
+ZF
+ZF
+yb
 eg
-ah
-aa
-aa
-aa
+Wb
+qB
+qB
+qB
 aa
 "}
 (21,1,1) = {"
@@ -2939,14 +2965,14 @@ dq
 dD
 dd
 dG
-mD
-mD
-mD
+yb
+yb
+yb
 eh
 eo
 UQ
-aa
-aa
+qB
+qB
 aa
 "}
 (22,1,1) = {"
@@ -2980,10 +3006,10 @@ dS
 dX
 YW
 ei
-ah
-ah
-aa
-aa
+Wb
+Wb
+qB
+qB
 "}
 (23,1,1) = {"
 ad
@@ -3011,15 +3037,15 @@ dq
 dF
 dd
 dI
-mD
-mD
+yb
+yb
 dY
 ej
 ep
-aa
-aa
-aa
-aa
+qB
+qB
+qB
+qB
 "}
 (24,1,1) = {"
 ac
@@ -3036,7 +3062,7 @@ bA
 bR
 bT
 aq
-NM
+qB
 cH
 cN
 cS
@@ -3047,15 +3073,15 @@ ds
 cH
 cH
 dv
-NM
-NM
+ZF
+ZF
 dY
 ek
-ah
-aa
-aa
-aa
-ah
+Wb
+qB
+qB
+qB
+Wb
 "}
 (25,1,1) = {"
 ac
@@ -3072,7 +3098,7 @@ aq
 bP
 aq
 aq
-NM
+qB
 cH
 cH
 cH
@@ -3083,14 +3109,14 @@ dt
 cH
 dm
 dw
-NM
-aa
+ZF
+qB
 dZ
 el
-ah
-aa
-aa
-aa
+Wb
+qB
+qB
+qB
 aa
 "}
 (26,1,1) = {"
@@ -3098,19 +3124,19 @@ ac
 ac
 ac
 ac
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-mD
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 cH
 cH
 cH
@@ -3118,50 +3144,50 @@ df
 du
 cH
 dv
-aa
-aa
+qB
+qB
 dR
 ea
 em
 dR
-aa
-aa
-aa
+qB
+qB
+qB
 aa
 "}
 (27,1,1) = {"
 ac
 ac
 ac
-mD
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 cH
 cH
 dk
 du
 cH
 dv
-aa
+qB
 dR
 dR
 eb
 eb
 ec
-aa
-aa
+qB
+qB
 aa
 aa
 "}
@@ -3169,28 +3195,28 @@ aa
 ac
 ac
 ac
-mD
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 cH
 dd
 dt
 cH
 dv
-aa
+qB
 dR
 dU
 ec
@@ -3206,27 +3232,27 @@ aa
 ac
 ac
 qB
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 bi
 bC
 cj
 dw
-aa
+qB
 dR
 dR
 ec
@@ -3242,22 +3268,22 @@ aa
 ac
 ac
 qB
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
 as
 aS
 as
-NM
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 NM
 bV
 aa
@@ -3278,21 +3304,21 @@ aa
 aa
 ac
 qB
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
 as
 as
 ba
 as
 as
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
 NM
 NM
 bV
@@ -3313,21 +3339,21 @@ aa
 aa
 aa
 ac
-mD
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
 as
 aR
 bc
 bg
 as
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
 NM
 NM
 aa
@@ -3350,19 +3376,19 @@ aa
 aa
 ac
 qB
-NM
-NM
-NM
-NM
-NM
-NM
-NM
+qB
+qB
+qB
+qB
+qB
+qB
+qB
 be
 bh
 as
-NM
-NM
-NM
+qB
+qB
+qB
 NM
 NM
 NM
@@ -3396,8 +3422,8 @@ as
 as
 ck
 ab
-NM
-NM
+qB
+qB
 NM
 NM
 NM
@@ -3422,7 +3448,7 @@ aa
 aa
 aa
 ag
-qB
+yZ
 ab
 as
 as

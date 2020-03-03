@@ -14,6 +14,7 @@
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = "#000000"
 	var/color_weight = 1
+	var/alpha = 255
 	var/flags = 0
 	var/hidden_from_codex
 

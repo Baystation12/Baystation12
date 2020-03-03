@@ -6,7 +6,7 @@
 
 #undef SEMIANDFORMAL_ROLES
 
-#undef RESTRICTED_ROLES
+#undef CASUAL_ROLES
 
 #undef DOCTOR_ROLES
 
