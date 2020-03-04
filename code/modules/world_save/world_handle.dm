@@ -5,8 +5,6 @@
 	var/version = 1
 
 /datum/persistence/serializer
-	// var/database/db = new("mydb.db")
-
 	var/thing_index = 1
 	var/var_index = 1
 	var/list_index = 1
@@ -19,6 +17,34 @@
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
 
+/datum/persistence/serializer/proc/FetchIndexes()
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		return
+	var/DBQuery/query = dbcon.NewQuery("SELECT MAX(`id`) FROM `thing`;")
+	query.Execute()
+	while(query.NextRow())
+		thing_index = text2num(query.item[1] + 1)
+		break
+	
+	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `thing_var`;")
+	query.Execute()
+	while(query.NextRow())
+		var_index = text2num(query.item[1]) + 1
+		break
+
+	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `list`;")
+	query.Execute()
+	while(query.NextRow())
+		list_index = text2num(query.item[1]) + 1
+		break
+
+	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `list_element`;")
+	query.Execute()
+	while(query.NextRow())
+		element_index = text2num(query.item[1]) + 1
+		break
+
 /datum/persistence/serializer/proc/SerializeList(var/_list)
 	var/l_i = list_index
 	list_index += 1
@@ -30,7 +56,16 @@
 		var/ET = "NULL"
 		var/KT = "NULL"
 		var/KV = key
-		var/EV = _list[key]
+		var/EV = null
+		try
+			EV = _list[key]
+		catch(var/exception/e)
+			EV = null // NBD... No value.
+
+		// Some guard statements of things we don't want to serialize...
+		if(isfile(KV) || isicon(KV) || isfile(EV) || isicon(EV))
+			continue
+
 		element_index += 1
 
 		if(isnum(key))
@@ -90,8 +125,14 @@
 	for(var/V in thing.vars)
 		var/VV = thing.vars[V]
 		var/VT = "VAR"
+
+		// Some guard statements of things we don't want to serialize...
+		if(isfile(VV) || isicon(VV))
+			continue
+
 		var/v_i = var_index
 		var_index += 1
+		
 
 		if(islist(VV))
 			// Complex code for serializing lists...
@@ -224,6 +265,18 @@
 
 /datum/persistence/world_handle
 	var/datum/persistence/serializer/serializer = new()
+
+/datum/persistence/world_handle/New()
+	establish_db_connection()
+	if(!dbcon.IsConnected())
+		return
+	var/DBQuery/query = dbcon.NewQuery("SELECT MAX(`version`) FROM `thing`;")
+	query.Execute()
+	while(query.NextRow())
+		SetVersion(text2num(query.item[1]) + 1)
+		break
+
+	serializer.FetchIndexes()
 
 /datum/persistence/world_handle/proc/SetVersion(var/_version)
 	version = _version

@@ -30,6 +30,17 @@ var/global/floorIsLava = 0
 			to_chat(M, message)
 ///////////////////////////////////////////////////////////////////////////////////////////////Panels
 
+/datum/admins/proc/save_server()
+	set category = "Server"
+	set desc="Forces a save of the server."
+	set name="Save Server"
+
+	if(!check_rights(R_ADMIN))
+		return
+		
+	var/datum/persistence/world_handle/handle = new()
+	handle.SaveWorld()
+
 /datum/admins/proc/show_player_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
 	set name = "Show Player Panel"
