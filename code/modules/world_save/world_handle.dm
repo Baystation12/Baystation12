@@ -77,9 +77,13 @@
 		else if (islist(key))
 			KT = "LIST"
 			KV = SerializeList(KV)
-		else
+		else if(istype(KV, /datum))
 			KT = "OBJ"
 			KV = SerializeThing(KV)
+		else
+			// Don't know what this is. Skip it.
+			element_index -= 1
+			continue
 
 		if(isnum(EV))
 			ET = "NUM"
@@ -92,9 +96,13 @@
 		else if (islist(EV))
 			ET = "LIST"
 			EV = SerializeList(EV)
-		else
+		else if (istype(EV, /datum))
 			ET = "OBJ"
 			EV = SerializeThing(EV)
+		else
+			// Don't know what this is. Skip it.
+			element_index -= 1
+			continue
 		LAZYADD(element_inserts, "([e_i],[l_i],[I],\"[KV]\",'[KT]','[EV]','[ET]',[version])")
 		I += 1
 	return l_i
@@ -132,7 +140,6 @@
 
 		var/v_i = var_index
 		var_index += 1
-		
 
 		if(islist(VV))
 			// Complex code for serializing lists...
@@ -146,10 +153,14 @@
 			VT = "NULL"
 		else if (ispath(VV))
 			VT = "PATH"
-		else
+		else if (istype(VV, /datum))
 			// Only alternative is this an object. Serialize it complex-like, baby.
 			VT = "OBJ"
 			VV = SerializeThing(VV)
+		else
+			// We don't know what this is. Skip it.
+			var_index -= 1
+			continue
 		LAZYADD(var_inserts, "([v_i],[t_i],'[V]','[VT]','[VV]',[version])")
 	return t_i
 
@@ -240,28 +251,24 @@
 	return existing
 
 /datum/persistence/serializer/proc/Commit()
-	var/thing_query = "INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES" + jointext(thing_inserts, ",")
-	var/var_query = "INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES" + jointext(var_inserts, ",")
-	var/list_query = "INSERT INTO `list`(`id`,`length`,`version`) VALUES" + jointext(list_inserts, ",")
-	var/element_query = "INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES" + jointext(element_inserts, ",")
-
 	establish_db_connection()
 	if(!dbcon.IsConnected())
 		return
 
-	var/DBQuery/query = dbcon.NewQuery(thing_query)
+	// world.log << "INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[jointext(thing_inserts, ",")]"
+	var/DBQuery/query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[jointext(thing_inserts, ",")]")
 	query.Execute()
-	query = dbcon.NewQuery(var_query)
+	query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[jointext(var_inserts, ",")]")
 	query.Execute()
-	query = dbcon.NewQuery(list_query)
+	query = dbcon.NewQuery("INSERT INTO `list`(`id`,`length`,`version`) VALUES[jointext(list_inserts, ",")]")
 	query.Execute()
-	query = dbcon.NewQuery(element_query)
+	query = dbcon.NewQuery("INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES[jointext(element_inserts, ",")]")
 	query.Execute()
 
-	thing_inserts = list()
-	var_inserts = list()
-	list_inserts = list()
-	element_inserts = list()
+	LAZYCLEARLIST(thing_inserts)
+	LAZYCLEARLIST(var_inserts)
+	LAZYCLEARLIST(list_inserts)
+	LAZYCLEARLIST(element_inserts)
 
 /datum/persistence/world_handle
 	var/datum/persistence/serializer/serializer = new()
@@ -289,7 +296,7 @@
 	for(var/z in z_levels)
 		for(var/x in 1 to world.maxx step SAVECHUNK_SIZEX)
 			for(var/y in 1 to world.maxy step SAVECHUNK_SIZEY)
-				SaveChunk(x,y,z)
+				SaveChunk(x,y,z)	
 				serializer.Commit()
 
 /datum/persistence/world_handle/proc/SaveChunk(var/xi, var/yi, var/zi)
@@ -298,11 +305,9 @@
 	yi = (yi - (yi % SAVECHUNK_SIZEY) + 1)
 	for(var/y in yi to yi + SAVECHUNK_SIZEY)
 		for(var/x in xi to xi + SAVECHUNK_SIZEX)
-			var/turf/T = locate(x,y,z)
-			// Want to serialize even if turf is just space
-			// as saves are additive changes.
-			// if(!T || ((T.type == /turf/space || T.type == /turf/simulated/open) && (!T.contents || !T.contents.len)))
-			// 	continue
+			var/turf/T = locate(x,y,z).
+			if(!T || ((T.type == /turf/space || T.type == /turf/simulated/open) && (!T.contents || !T.contents.len)))
+				continues
 			serializer.SerializeThing(T)
 
 
