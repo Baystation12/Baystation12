@@ -3,6 +3,7 @@ SUBSYSTEM_DEF(mapping)
 	init_order = SS_INIT_MAPPING
 	flags = SS_NO_FIRE
 
+	var/datum/persistence/world_handle/persistence = new()
 	var/list/map_templates = list()
 	var/list/space_ruins_templates = list()
 	var/list/exoplanet_ruins_templates = list()
@@ -16,7 +17,17 @@ SUBSYSTEM_DEF(mapping)
 	for(var/atype in subtypesof(/decl/submap_archetype))
 		submap_archetypes[atype] = new atype
 	GLOB.using_map.build_away_sites()
-	. = ..()
+
+	persistence.FetchVersion()
+#ifdef UNIT_TEST
+	report_progress("Unit testing, so not loading saved map")
+#else
+	// persistence.LoadWorld()
+#endif
+	return ..()
+
+/datum/controller/subsystem/mapping/proc/Save()
+	persistence.SaveWorld()
 
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT
