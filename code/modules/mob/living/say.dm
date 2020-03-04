@@ -1,110 +1,3 @@
-var/list/department_radio_keys = list(
-	  ":r" = "right ear",	".r" = "right ear",
-	  ":l" = "left ear",	".l" = "left ear",
-	  ":i" = "intercom",	".i" = "intercom",
-	  ":h" = "department",	".h" = "department",
-	  ":s" = "SHIPCOM",		".s" = "SHIPCOM",
-	  ":f" = "FLEETCOM",	".f" = "FLEETCOM",
-	  ":t" = "TEAMCOM",		".t" = "TEAMCOM",
-	  ":q" = "SQUADCOM",	".q" = "SQUADCOM",
-	  ":e" = "EBAND",		".e" = "EBAND",
-	  ":g" = "GCPD",		".g" = "GCPD",
-	  ":t" = "TACCOM",		".t" = "TACCOM",
-	  ":b" = "INNIECOM",	".b" = "INNIECOM",
-	  ":c" = "BattleNet",	".c" = "BattleNet",
-	  ":d" = "BoulderNet",	".d" = "BoulderNet",
-	  ":u" = "RamNet",		".u" = "RamNet",
-	  ":m" = "MEDCOM",		".m" = "MEDCOM",
-	  ":o" = "ONICOM",		".o" = "ONICOM",
-	  ":v" = "CMDOCOM",		".v" = "CMDOCOM",
-	  ":z" = "SIERRACOM",	".z" = "SIERRACOM",
-
-	  ":R" = "right ear",	".R" = "right ear",
-	  ":L" = "left ear",	".L" = "left ear",
-	  ":I" = "intercom",	".I" = "intercom",
-	  ":H" = "department",	".H" = "department",
-	  ":S" = "SHIPCOM",		".S" = "SHIPCOM",
-	  ":F" = "FLEETCOM",	".F" = "FLEETCOM",
-	  ":T" = "TEAMCOM",		".T" = "TEAMCOM",
-	  ":Q" = "SQUADCOM",	".Q" = "SQUADCOM",
-	  ":E" = "EBAND",		".E" = "EBAND",
-	  ":G" = "GCPD",		".G" = "GCPD",
-	  ":T" = "TACCOM",		".T" = "TACCOM",
-	  ":B" = "INNIECOM",	".B" = "INNIECOM",
-	  ":C" = "BattleNet",	".C" = "BattleNet",
-	  ":D" = "BoulderNet",	".D" = "BoulderNet",
-	  ":U" = "RamNet",		".U" = "RamNet",
-	  ":M" = "MEDCOM",		".M" = "MEDCOM",
-	  ":O" = "ONICOM",		".O" = "ONICOM",
-	  ":V" = "CMDOCOM",		".V" = "CMDOCOM",
-	  ":Z" = "SIERRACOM",	".Z" = "SIERRACOM",
-	/*
-	  ":r" = "right ear",	".r" = "right ear",
-	  ":l" = "left ear",	".l" = "left ear",
-	  ":i" = "intercom",	".i" = "intercom",
-	  ":h" = "department",	".h" = "department",
-	  ":+" = "special",		".+" = "special", //activate radio-specific special functions
-	  ":c" = "Command",		".c" = "Command",
-	  ":n" = "Science",		".n" = "Science",
-	  ":m" = "Medical",		".m" = "Medical",
-	  ":e" = "Engineering", ".e" = "Engineering",
-	  ":s" = "Security",	".s" = "Security",
-	  ":w" = "whisper",		".w" = "whisper",
-	  ":t" = "Mercenary",	".t" = "Mercenary",
-	  ":x" = "Raider",		".x" = "Raider",
-	  ":u" = "Supply",		".u" = "Supply",
-	  ":v" = "Service",		".v" = "Service",
-	  ":p" = "AI Private",	".p" = "AI Private",
-	  ":z" = "Entertainment",".z" = "Entertainment",
-
-	  ":R" = "right ear",	".R" = "right ear",
-	  ":L" = "left ear",	".L" = "left ear",
-	  ":I" = "intercom",	".I" = "intercom",
-	  ":H" = "department",	".H" = "department",
-	  ":C" = "Command",		".C" = "Command",
-	  ":N" = "Science",		".N" = "Science",
-	  ":M" = "Medical",		".M" = "Medical",
-	  ":E" = "Engineering",	".E" = "Engineering",
-	  ":S" = "Security",	".S" = "Security",
-	  ":W" = "whisper",		".W" = "whisper",
-	  ":T" = "Mercenary",	".T" = "Mercenary",
-	  ":X" = "Raider",		".X" = "Raider",
-	  ":U" = "Supply",		".U" = "Supply",
-	  ":V" = "Service",		".V" = "Service",
-	  ":P" = "AI Private",	".P" = "AI Private",
-	  ":Z" = "Entertainment",".Z" = "Entertainment",
-
-	  //kinda localization -- rastaf0
-	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ê" = "right ear",	".ê" = "right ear",
-	  ":ä" = "left ear",	".ä" = "left ear",
-	  ":ø" = "intercom",	".ø" = "intercom",
-	  ":ð" = "department",	".ð" = "department",
-	  ":ñ" = "Command",		".ñ" = "Command",
-	  ":ò" = "Science",		".ò" = "Science",
-	  ":ü" = "Medical",		".ü" = "Medical",
-	  ":ó" = "Engineering",	".ó" = "Engineering",
-	  ":û" = "Security",	".û" = "Security",
-	  ":ö" = "whisper",		".ö" = "whisper",
-	  ":å" = "Mercenary",	".å" = "Mercenary",
-	  ":é" = "Supply",		".é" = "Supply",*/
-)
-
-
-var/list/channel_to_radio_key = new
-proc/get_radio_key_from_channel(var/channel)
-	var/key = channel_to_radio_key[channel]
-	if(!key)
-		for(var/radio_key in department_radio_keys)
-			if(department_radio_keys[radio_key] == channel)
-				key = radio_key
-				break
-		if(!key)
-			key = ""
-		channel_to_radio_key[channel] = key
-
-	return key
-
 /mob/living/proc/binarycheck()
 
 	if (istype(src, /mob/living/silicon/pai))
@@ -155,7 +48,7 @@ proc/get_radio_key_from_channel(var/channel)
 	message_data[2] = verb
 
 /mob/living/proc/handle_message_mode(message_mode, message, verb, speaking, used_radios, alt_name)
-	if(message_mode == "intercom")
+	if(message_mode == HOTKEY_INTERCOM)
 		for(var/obj/item/device/radio/intercom/I in view(1, null))
 			I.talk_into(src, message, verb, speaking)
 			used_radios += I
@@ -185,22 +78,30 @@ proc/get_radio_key_from_channel(var/channel)
 			return say_dead(message)
 		return
 
-	var/message_mode = parse_message_mode(message, "headset")
-
+	//identify any emote hotkeys
 	switch(copytext(message,1,2))
 		if("*") return emote(copytext(message,2))
 		if("^") return custom_emote(1, copytext(message,2))
 
-	//parse the radio code and consume it
+	//cant speak if we're muzzled
+	if(is_muzzled())
+		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
+		return
+
+	//identify a radio hotkey
+	var/message_mode = parse_message_mode(message)
+
+	//remove the radio hotkey from the message
 	if (message_mode)
-		if (message_mode == "headset")
-			message = copytext(message,2)	//it would be really nice if the parse procs could do this for us.
+		if(message_mode == ";")
+			message = copytext(message,2)
 		else
 			message = copytext(message,3)
 
+	//remove any leftover whitespace
 	message = trim_left(message)
 
-	//parse the language code and consume it
+	//identify and remove a language hotkey
 	if(!speaking)
 		speaking = parse_language(message)
 		if(speaking)
@@ -215,10 +116,6 @@ proc/get_radio_key_from_channel(var/channel)
 		return 1
 
 	verb = say_quote(message, speaking)
-
-	if(is_muzzled())
-		to_chat(src, "<span class='danger'>You're muzzled and cannot speak!</span>")
-		return
 
 	message = trim_left(message)
 

@@ -162,10 +162,7 @@
 	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt_fake,/datum/npc_ship_request/halt/innie,/datum/npc_ship_request/fire_on_target/innie,/datum/npc_ship_request/control_fleet/innie,/datum/npc_ship_request/add_to_fleet/innie,/datum/npc_ship_request/give_control/innie)
-
-/obj/effect/overmap/ship/npc_ship/combat/innie/New()
-	. = ..()
-	radio_channel = halo_frequencies.innie_channel_name
+	radio_channel = RADIO_INNIE
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/generate_ship_name()
 	. = ..()

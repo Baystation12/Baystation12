@@ -313,8 +313,6 @@
 			return global.cargo_supply_packs;
 		if("changelog_hash")
 			return global.changelog_hash;
-		if("channel_to_radio_key")
-			return global.channel_to_radio_key;
 		if("chargen_robolimbs")
 			return global.chargen_robolimbs;
 		if("checked_for_inactives")
@@ -407,8 +405,6 @@
 			return global.delta_index;
 		if("department_accounts")
 			return global.department_accounts;
-		if("department_radio_keys")
-			return global.department_radio_keys;
 		if("description_icons")
 			return global.description_icons;
 		if("diary")
@@ -553,8 +549,6 @@
 			return global.hair_styles_list;
 		if("hair_styles_male_list")
 			return global.hair_styles_male_list;
-		if("halo_frequencies")
-			return global.halo_frequencies;
 		if("hazard_overlays")
 			return global.hazard_overlays;
 		if("hidden_skill_types")
@@ -1223,7 +1217,7 @@
 			return global.xenomorphs;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ALL_ANTIGENS")
@@ -1538,8 +1532,6 @@
 			global.cargo_supply_packs=newval;
 		if("changelog_hash")
 			global.changelog_hash=newval;
-		if("channel_to_radio_key")
-			global.channel_to_radio_key=newval;
 		if("chargen_robolimbs")
 			global.chargen_robolimbs=newval;
 		if("checked_for_inactives")
@@ -1632,8 +1624,6 @@
 			global.delta_index=newval;
 		if("department_accounts")
 			global.department_accounts=newval;
-		if("department_radio_keys")
-			global.department_radio_keys=newval;
 		if("description_icons")
 			global.description_icons=newval;
 		if("diary")
@@ -1778,8 +1768,6 @@
 			global.hair_styles_list=newval;
 		if("hair_styles_male_list")
 			global.hair_styles_male_list=newval;
-		if("halo_frequencies")
-			global.halo_frequencies=newval;
 		if("hazard_overlays")
 			global.hazard_overlays=newval;
 		if("hidden_skill_types")
@@ -2448,7 +2436,7 @@
 			global.xenomorphs=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ALL_ANTIGENS",
 	"ANTAG_FREQS",

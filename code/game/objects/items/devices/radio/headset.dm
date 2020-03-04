@@ -1,7 +1,6 @@
 /obj/item/device/radio/headset
 	name = "radio headset"
 	desc = "An updated, modular intercom that fits over the head. Takes encryption keys."
-	var/radio_desc = ""
 	icon_state = "headset"
 	item_state = "headset"
 	matter = list(DEFAULT_WALL_MATERIAL = 75)
@@ -11,6 +10,8 @@
 	slot_flags = SLOT_EARS
 	var/translate_binary = 0
 	var/translate_hive = 0
+
+	//obsolete but left in for backwards compatibility
 	var/obj/item/device/encryptionkey/keyslot1 = null
 	var/obj/item/device/encryptionkey/keyslot2 = null
 
@@ -19,11 +20,11 @@
 
 /obj/item/device/radio/headset/Initialize()
 	. = ..()
-	internal_channels.Cut()
-	if(ks1type)
+	//internal_channels.Cut()
+	/*if(ks1type)
 		keyslot1 = new ks1type(src)
 	if(ks2type)
-		keyslot2 = new ks2type(src)
+		keyslot2 = new ks2type(src)*/
 	recalculateChannels(1)
 
 /obj/item/device/radio/headset/Destroy()
@@ -35,34 +36,6 @@
 
 /obj/item/device/radio/headset/list_channels(var/mob/user)
 	return list_secure_channels()
-
-/obj/item/device/radio/headset/examine(mob/user)
-	if(!(..(user, 1) && radio_desc))
-		return
-
-	to_chat(user, "The following channels are available:")
-	to_chat(user, radio_desc)
-
-/obj/item/device/radio/headset/handle_message_mode(mob/living/M as mob, message, channel)
-	if (channel == "special")
-		if (translate_binary)
-			var/datum/language/binary = all_languages["Robot Talk"]
-			binary.broadcast(M, message)
-		if (translate_hive)
-			var/datum/language/hivemind = all_languages["Hivemind"]
-			hivemind.broadcast(M, message)
-		return null
-
-	return ..()
-
-/obj/item/device/radio/headset/receive_range(freq, level, aiOverride = 0)
-	if (aiOverride)
-		return ..(freq, level)
-	if(ishuman(src.loc))
-		var/mob/living/carbon/human/H = src.loc
-		if(H.l_ear == src || H.r_ear == src)
-			return ..(freq, level)
-	return -1
 
 /obj/item/device/radio/headset/syndicate
 	origin_tech = list(TECH_ILLEGAL = 3)
@@ -152,11 +125,6 @@
 	var/myAi = null    // Atlantis: Reference back to the AI which has this radio.
 	var/disabledAi = 0 // Atlantis: Used to manually disable AI's integrated radio via inteliCard menu.
 
-/obj/item/device/radio/headset/heads/ai_integrated/receive_range(freq, level)
-	if (disabledAi)
-		return -1 //Transciever Disabled.
-	return ..(freq, level, 1)
-
 /obj/item/device/radio/headset/heads/rd
 	name = "research director's headset"
 	desc = "Headset of the researching God."
@@ -241,6 +209,7 @@
 		return
 
 	if(istype(W, /obj/item/weapon/screwdriver))
+		/*
 		if(keyslot1 || keyslot2)
 
 
@@ -264,10 +233,12 @@
 					keyslot2 = null
 
 			recalculateChannels()
-			to_chat(user, "You pop out the encryption keys in the headset!")
+			*/
+		if(remove_dongles())
+			to_chat(user, "You pop out the channel dongles in the headset!")
 
 		else
-			to_chat(user, "This headset doesn't have any encryption keys!  How useless...")
+			to_chat(user, "This headset doesn't have any channel dongles!  How useless...")
 
 	if(istype(W, /obj/item/device/encryptionkey/))
 		if(keyslot1 && keyslot2)
@@ -297,42 +268,19 @@
 
 /obj/item/device/radio/headset/proc/recalculateChannels(var/setDescription = 0)
 	src.channels = list()
-	src.translate_binary = 0
-	src.translate_hive = 0
-	src.syndie = 0
-
-	if(keyslot1)
-		for(var/ch_name in keyslot1.channels)
+	//var/list/hotkeys_ciphers = list()
+	//var/list/channels_ciphers = list()
+/*
+	for(var/obj/item/device/encryptionkey/keyslot in list(keyslot1, keyslot2))
+		for(var/ch_name in keyslot.channels)
 			if(ch_name in src.channels)
 				continue
-			src.channels += ch_name
-			src.channels[ch_name] = keyslot1.channels[ch_name]
-
-		if(keyslot1.translate_binary)
-			src.translate_binary = 1
-
-		if(keyslot1.translate_hive)
-			src.translate_hive = 1
-
-		if(keyslot1.syndie)
-			src.syndie = 1
-
-	if(keyslot2)
-		for(var/ch_name in keyslot2.channels)
-			if(ch_name in src.channels)
-				continue
-			src.channels += ch_name
-			src.channels[ch_name] = keyslot2.channels[ch_name]
-
-		if(keyslot2.translate_binary)
-			src.translate_binary = 1
-
-		if(keyslot2.translate_hive)
-			src.translate_hive = 1
-
-		if(keyslot2.syndie)
-			src.syndie = 1
-
+			var/datum/encryption_cipher/cipher = GLOB.channels_ciphers[ch_name]
+			if(cipher)
+				//dont bother with any channels that dont have a cipher for now
+				src.channels[ch_name] = 1
+				channels_ciphers[ch_name] = cipher
+				hotkeys_ciphers[cipher.hotkey] = cipher
 
 	for (var/ch_name in channels)
 		if(!radio_controller)
@@ -341,20 +289,11 @@
 			src.name = "broken radio headset"
 			return
 
-		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
+		var/datum/encryption_cipher/cipher = channels_ciphers[ch_name]
+		secure_radio_connections[ch_name] = radio_controller.add_object(src, cipher.frequency,  RADIO_CHAT)
 
 	if(setDescription)
 		setupRadioDescription()
 
 	return
-
-/obj/item/device/radio/headset/proc/setupRadioDescription()
-	var/radio_text = ""
-	for(var/i = 1 to channels.len)
-		var/channel = channels[i]
-		var/key = get_radio_key_from_channel(channel)
-		radio_text += "[key] - [channel]"
-		if(i != channels.len)
-			radio_text += ", "
-
-	radio_desc = radio_text
+	*/

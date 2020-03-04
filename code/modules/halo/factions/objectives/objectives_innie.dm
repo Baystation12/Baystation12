@@ -61,10 +61,6 @@
 	radio_name = "Insurrection Overwatch"
 	win_points = 150
 
-/datum/objective/colony_capture/innie/New()
-	. = ..()
-	radio_frequency = halo_frequencies.innie_channel_name
-
 /datum/objective/assassinate/leader/innies_unsc
 	explanation_text = "Assassinate the leader of the UNSC"
 	target_faction_name = "UNSC"

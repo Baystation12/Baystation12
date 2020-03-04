@@ -108,21 +108,6 @@
 	spawn (0)
 		attack_self(user)
 
-/obj/item/device/radio/intercom/receive_range(freq, level)
-	if (!on)
-		return -1
-	if(!(0 in level))
-		var/turf/position = get_turf(src)
-		if(isnull(position) || !(position.z in level))
-			return -1
-	if (!src.listening)
-		return -1
-	if(freq in ANTAG_FREQS)
-		if(!(src.syndie))
-			return -1//Prevents broadcast of messages over devices lacking the encryption
-
-	return canhear_range
-
 /obj/item/device/radio/intercom/process()
 	if(((world.timeofday - last_tick) > 30) || ((world.timeofday - last_tick) < 0))
 		last_tick = world.timeofday
