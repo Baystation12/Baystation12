@@ -27,7 +27,7 @@
 	while(query.NextRow())
 		thing_index = text2num(query.item[1] + 1)
 		break
-	
+
 	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `thing_var`;")
 	query.Execute()
 	while(query.NextRow())
@@ -60,7 +60,7 @@
 		var/EV = null
 		try
 			EV = _list[key]
-		catch(var/exception/e)
+		catch
 			EV = null // NBD... No value.
 
 		// Some guard statements of things we don't want to serialize...
@@ -272,7 +272,7 @@
 		query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]")
 		query.Execute()
 	if(var_inserts.len > 0)
-		values = jointext(var_insers, ",")
+		values = jointext(var_inserts, ",")
 		query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]")
 		query.Execute()
 	if(list_inserts.len > 0)
@@ -315,7 +315,7 @@
 	for(var/z in z_levels)
 		for(var/x in 1 to world.maxx step SAVECHUNK_SIZEX)
 			for(var/y in 1 to world.maxy step SAVECHUNK_SIZEY)
-				SaveChunk(x,y,z)	
+				SaveChunk(x,y,z)
 
 /datum/persistence/world_handle/proc/SaveChunk(var/xi, var/yi, var/zi)
 	var/z = zi
