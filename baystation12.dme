@@ -3046,6 +3046,7 @@
 #include "code\modules\webhooks\webhook_roundend.dm"
 #include "code\modules\webhooks\webhook_roundstart.dm"
 #include "code\modules\webhooks\webhook_submap.dm"
+#include "code\modules\world_save\world_handle.dm"
 #include "code\modules\xenoarcheaology\anomaly_container.dm"
 #include "code\modules\xenoarcheaology\boulder.dm"
 #include "code\modules\xenoarcheaology\effect.dm"

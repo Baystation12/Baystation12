@@ -19,7 +19,7 @@
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
 
-/datum/persistence/serializer/SerializeList(var/_list)
+/datum/persistence/serializer/proc/SerializeList(var/_list)
 	var/l_i = list_index
 	list_index += 1
 	LAZYADD(list_inserts, "([l_i],[LAZYLEN(_list)],[version])")
@@ -27,44 +27,44 @@
 	var/I = 1
 	for(var/key in _list)
 		var/e_i = element_index
-		var/ET = 'NULL'
-		var/KT = 'NULL'
+		var/ET = "NULL"
+		var/KT = "NULL"
 		var/KV = key
 		var/EV = _list[key]
 		element_index += 1
 
 		if(isnum(key))
-			KT = 'NUM'
+			KT = "NUM"
 		else if (istext(key))
-			KT = 'TEXT'
+			KT = "TEXT"
 		else if (ispath(key))
-			KT = 'PATH'
+			KT = "PATH"
 		else if (islist(key))
-			KT = 'LIST'
+			KT = "LIST"
 			KV = SerializeList(KV)
 		else
-			KT = 'OBJ'
+			KT = "OBJ"
 			KV = SerializeThing(KV)
 
 		if(isnum(EV))
-			ET = 'NUM'
+			ET = "NUM"
 		else if (istext(EV))
-			ET = 'TEXT'
+			ET = "TEXT"
 		else if (isnull(EV))
-			ET = 'NULL'
+			ET = "NULL"
 		else if (ispath(EV))
-			ET = 'PATH'
+			ET = "PATH"
 		else if (islist(EV))
-			ET = 'LIST'
+			ET = "LIST"
 			EV = SerializeList(EV)
 		else
-			ET = 'OBJ'
+			ET = "OBJ"
 			EV = SerializeThing(EV)
-		LAZY_ADD(element_inserts, "([e_i],[l_i],[I],\"[KV]\",'[KT]','[EV]','[ET]',[version])")
+		LAZYADD(element_inserts, "([e_i],[l_i],[I],\"[KV]\",'[KT]','[EV]','[ET]',[version])")
 		I += 1
 	return l_i
 
-/datum/persistence/serializer/SerializeThing(var/thing)
+/datum/persistence/serializer/proc/SerializeThing(var/datum/thing)
 	// Check for existing references first. If we've already saved
 	// there's no reason to save again.
 	var/ref = thing_map["\ref[thing]"]
@@ -88,31 +88,31 @@
 	LAZYADD(thing_inserts, "([t_i],'[thing.type]',[x],[y],[z],[version])")
 	thing_map["\ref[thing]"] = t_i
 	for(var/V in thing.vars)
-		var/VV = things.vars[V]
-		var/VT = 'VAR'
+		var/VV = thing.vars[V]
+		var/VT = "VAR"
 		var/v_i = var_index
 		var_index += 1
 
 		if(islist(VV))
 			// Complex code for serializing lists...
-			VT = 'LIST'
+			VT = "LIST"
 			VV = SerializeList(VV)
 		else if (isnum(VV))
-			VT = 'NUM'
+			VT = "NUM"
 		else if (istext(VV))
-			VT = 'TEXT'
+			VT = "TEXT"
 		else if (isnull(VV))
-			VT = 'NULL'
+			VT = "NULL"
 		else if (ispath(VV))
-			VT = 'PATH'
+			VT = "PATH"
 		else
 			// Only alternative is this an object. Serialize it complex-like, baby.
-			VT = 'OBJ'
-			VV = SerializeThing(VV)		
+			VT = "OBJ"
+			VV = SerializeThing(VV)
 		LAZYADD(var_inserts, "([v_i],[t_i],'[V]','[VT]','[VV]',[version])")
 	return t_i
 
-/datum/persistence/serialize/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z)
+/datum/persistence/serializer/proc/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z)
 	// Will deserialize a thing by ID, including all of its
 	// child variables.
 	if(!dbcon.IsConnected())
@@ -128,24 +128,24 @@
 	else
 		// default creation
 		existing = new thing_path()
-	
+
 	var/DBQuery/query = dbcon.NewQuery("SELECT `key`,`type`,`value` FROM `thing_var` WHERE `version`=[version] AND `thing_id`=[thing_id];")
 	query.Execute()
 	while(query.NextRow())
 		// Each row is a variable on this object.
 		var/key = query.item[1]
 		var/key_type = query.item[2]
-		if (key_type == 'NUM')
+		if (key_type == "NUM")
 			existing[key] = text2num(query.item[3])
-		else if (key_type == 'TEXT')
+		else if (key_type == "TEXT")
 			existing[key] = query.item[3]
-		else if (key_type == 'PATH')
+		else if (key_type == "PATH")
 			existing[key] = text2path(query.item[3])
-		else if (key_type == 'NULL')
-			existing[key] = NULL
-		else if (key_type == 'LIST')
+		else if (key_type == "NULL")
+			existing[key] = null
+		else if (key_type == "LIST")
 			existing[key] = DeserializeList(text2num(query.item[3]))
-		else if (key_type == 'OBJ')
+		else if (key_type == "OBJ")
 			var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[query.item[3]];")
 			objQuery.Execute()
 			while(objQuery.NextRow())
@@ -153,7 +153,7 @@
 				break
 	return existing
 
-/datum/persistence/serializer/DeserializeList(var/list_id)
+/datum/persistence/serializer/proc/DeserializeList(var/list_id)
 	// Will deserialize and return a list.
 	if(!dbcon.IsConnected())
 		return
@@ -166,31 +166,31 @@
 		var/key_type = query.item[2]
 		var/key_value = key
 		var/value_type = query.item[4]
-		
-		if (key_type == 'NUM')
+
+		if (key_type == "NUM")
 			key_value = text2num(key)
-		else if (key_type == 'PATH')
+		else if (key_type == "PATH")
 			key_value = text2path(key)
-		else if (key_type == 'LIST')
+		else if (key_type == "LIST")
 			key_value = DeserializeList(text2num(key))
-		else if (key_type == 'OBJ')
+		else if (key_type == "OBJ")
 			var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[key];")
 			objQuery.Execute()
 			while(objQuery.NextRow())
 				key_value = DeserializeThing(text2num(key), text2path(objQuery.item[2]), objQuery.item[3], objQuery.item[4], objQuery.item[5])
 				break
 
-		if(value_type == 'NUM')
+		if(value_type == "NUM")
 			existing[key_value] = text2num(query.item[3])
-		else if(value_type == 'TEXT')
+		else if(value_type == "TEXT")
 			existing[key_value] = query.item[3]
-		else if(value_type == 'PATH')
+		else if(value_type == "PATH")
 			existing[key_value] = text2path(query.item[3])
-		else if(value_type == 'NULL')
+		else if(value_type == "NULL")
 			LAZYADD(existing, key_value)
-		else if(value_type == 'LIST')
+		else if(value_type == "LIST")
 			existing[key_value] = DeserializeList(text2num(query.item[3]))
-		else if(value_type == 'OBJ')
+		else if(value_type == "OBJ")
 			var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[query.item[3]];")
 			objQuery.Execute()
 			while(objQuery.NextRow())
@@ -198,7 +198,7 @@
 				break
 	return existing
 
-/datum/persistence/serializer/Commit()
+/datum/persistence/serializer/proc/Commit()
 	var/thing_query = "INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES" + jointext(thing_inserts, ",")
 	var/var_query = "INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES" + jointext(var_inserts, ",")
 	var/list_query = "INSERT INTO `list`(`id`,`length`,`version`) VALUES" + jointext(list_inserts, ",")
@@ -225,21 +225,21 @@
 /datum/persistence/world_handle
 	var/datum/persistence/serializer/serializer = new()
 
-/datum/persistence/world_handle/SetVersion(var/_version)
+/datum/persistence/world_handle/proc/SetVersion(var/_version)
 	version = _version
 	serializer.version = _version
 
-/datum/persistence/world_handle/SaveWorld()
+/datum/persistence/world_handle/proc/SaveWorld()
 	// This part of SaveWorld() manages saving turfs
 	// to the lovely database
 	z_levels = GLOB.using_map.saved_levels
 	for(var/z in z_levels)
 		for(var/x in 1 to world.maxx step SAVECHUNK_SIZEX)
 			for(var/y in 1 to world.maxy step SAVECHUNK_SIZEY)
-				Save_Chunk(x,y,z)
+				SaveChunk(x,y,z)
 				serializer.Commit()
 
-/datum/persistence/world_handle/SaveChunk(var/xi, var/yi, var/zi)
+/datum/persistence/world_handle/proc/SaveChunk(var/xi, var/yi, var/zi)
 	var/z = zi
 	xi = (xi - (xi % SAVECHUNK_SIZEX) + 1)
 	yi = (yi - (yi % SAVECHUNK_SIZEY) + 1)
@@ -253,12 +253,12 @@
 			serializer.SerializeThing(T)
 
 
-/datum/persistence/world_handle/LoadWorld()
+/datum/persistence/world_handle/proc/LoadWorld()
 	// Loads all data in as part of a version.
 	establish_db_connection()
 	if(!dbcon.IsConnected())
 		return
-	
+
 	var/DBQuery/query = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version]")
 	query.Execute()
 	while(query.NextRow())
@@ -271,7 +271,7 @@
 		serializer.DeserializeThing(thing_id, thing_path, query.item[3], query.item[4], query.item[5])
 
 
-/datum/persistence/world_handle/LoadChunk(var/x, var/y, var/z)
+// /datum/persistence/world_handle/proc/LoadChunk(var/x, var/y, var/z)
 
 #undef SAVECHUNK_SIZEX
 #undef SAVECHUNK_SIZEY
