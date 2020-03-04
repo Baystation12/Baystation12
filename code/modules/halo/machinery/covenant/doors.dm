@@ -1,7 +1,10 @@
 
 /obj/machinery/door/airlock/covenant
-	icon = 'code/modules/halo/icons/machinery/covenant/doors.dmi'
+	icon = 'code/modules/halo/covenant/covenantsingle/door.dmi'
+	welded_file = 'code/modules/halo/covenant/covenantsingle/door.dmi'
+	opacity = 0
 	var/covenant_secure = 0
+	fill_file = null
 
 /obj/machinery/door/airlock/covenant/allowed(var/mob/m) //Covenant doors don't run on usual access cards. Internal tech scans the accesser.
 	if(covenant_secure)

@@ -17,6 +17,10 @@
 */
 
 /atom/Click(var/location, var/control, var/params) // This is their reaction to being clicked on (standard proc)
+	var/list/L = params2list(params)
+	var/dragged = L["drag"]
+	if(dragged && !L[dragged])
+		return
 	var/datum/click_handler/click_handler = usr.GetClickHandler()
 	click_handler.OnClick(src, params)
 

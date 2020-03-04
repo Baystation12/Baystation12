@@ -152,7 +152,7 @@
 "cV" = (/obj/structure/table/reinforced,/obj/item/clothing/mask/gas,/obj/item/clothing/mask/gas,/obj/item/clothing/mask/gas,/obj/item/clothing/mask/gas,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "cW" = (/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/planets/Geminus/indoor/living1sw)
 "cX" = (/obj/structure/window/framed,/turf/simulated/floor/decor{color = "#cccccc"; icon_state = "square_grey"; tag = "icon-tiled1"},/area/planets/Geminus/indoor/living1sw)
-"cY" = (/obj/machinery/door/airlock/glass_research{name = "Research and Development"},/obj/effect/floor_decal/corner/purple{icon_state = "corner_white_full"},/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/labs1)
+"cY" = (/obj/machinery/door/airlock/glass/research{name = "Research and Development"},/obj/effect/floor_decal/corner/purple{icon_state = "corner_white_full"},/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/labs1)
 "cZ" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/labs1)
 "da" = (/turf/simulated/floor/plating,/area/planets/Geminus/indoor/labs1)
 "db" = (/obj/machinery/atmospherics/pipe/simple/visible,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
@@ -178,7 +178,7 @@
 "dv" = (/obj/structure/table/steel,/obj/random/projectile,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dw" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dx" = (/obj/structure/table/steel,/obj/item/weapon/gun/projectile/automatic/machine_pistol,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
-"dy" = (/obj/machinery/door/airlock/glass_research{name = "Weapons Lab"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"dy" = (/obj/machinery/door/airlock/glass/research{name = "Weapons Lab"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dz" = (/obj/effect/floor_decal/corner/purple{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dA" = (/obj/machinery/light/colored,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dB" = (/obj/machinery/power/terminal{icon_state = "term"; dir = 1},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/labs1)
@@ -189,7 +189,7 @@
 "dG" = (/obj/structure/table/steel,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dH" = (/obj/structure/table/steel,/obj/machinery/recharger,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dI" = (/obj/machinery/vending/coffee,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
-"dJ" = (/obj/machinery/door/airlock/glass_research{name = "Research and Development"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"dJ" = (/obj/machinery/door/airlock/glass/research{name = "Research and Development"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dK" = (/obj/machinery/door/airlock/engineering{name = "Science Substation"},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/labs1)
 "dL" = (/obj/structure/skele_stand,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "dM" = (/obj/skeleton,/obj/machinery/light/colored{tag = "icon-yellow1 (NORTH)"; icon_state = "yellow1"; dir = 1},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
@@ -242,7 +242,6 @@
 "eH" = (/obj/structure/table/steel,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/obj/item/weapon/pen,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "eI" = (/obj/machinery/botany/editor,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "eJ" = (/obj/structure/table/steel,/obj/item/device/flash/synthetic,/obj/item/device/flash/synthetic,/obj/item/device/flash/synthetic,/obj/item/device/flash/synthetic,/obj/item/device/flash/synthetic,/obj/item/device/flash/synthetic,/obj/structure/window/reinforced/tinted{dir = 4; icon_state = "twindow"},/obj/item/device/mmi/digital/posibrain,/obj/item/device/robotanalyzer,/obj/machinery/light/colored{tag = "icon-yellow1 (WEST)"; icon_state = "yellow1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
-"eK" = (/obj/structure/table/steel,/obj/item/stack/material/glass/fifty,/obj/item/clothing/glasses/welding,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "eL" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; pixel_x = -24},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "eM" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "eN" = (/obj/machinery/botany/extractor,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
@@ -272,7 +271,7 @@
 "fl" = (/mob/living/simple_animal/hostile/retaliate/goat{name = "Professor Goatenstein"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "fm" = (/obj/structure/table/steel,/obj/item/device/analyzer/plant_analyzer,/obj/item/weapon/storage/box/botanydisk,/obj/item/weapon/storage/box/botanydisk,/obj/item/weapon/storage/box/botanydisk,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "fn" = (/obj/structure/table/steel,/obj/random/handgun,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
-"fo" = (/obj/machinery/door/airlock/glass_research,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"fo" = (/obj/machinery/door/airlock/glass/research,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "fp" = (/obj/structure/table/steel,/obj/item/weapon/circular_saw,/obj/item/weapon/scalpel{pixel_y = 12},/obj/item/weapon/hemostat,/obj/item/weapon/retractor,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "fq" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/regular{name = "First-Aid (empty)"},/obj/item/weapon/storage/firstaid/regular{name = "First-Aid (empty)"},/obj/item/weapon/storage/firstaid/regular{name = "First-Aid (empty)"},/obj/item/device/healthanalyzer,/obj/item/device/healthanalyzer,/obj/item/device/healthanalyzer,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "fr" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/labs1)
@@ -287,7 +286,6 @@
 "fA" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/bodybags{pixel_x = -1; pixel_y = -2},/obj/item/weapon/pen,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "fB" = (/obj/structure/table/steel,/obj/item/weapon/crowbar,/obj/item/device/radio/headset/headset_sci{pixel_x = -3},/obj/item/device/multitool{pixel_x = 3},/obj/item/device/multitool{pixel_x = 3},/obj/item/clothing/glasses/welding,/obj/item/clothing/glasses/welding,/obj/item/device/assembly/prox_sensor{pixel_x = -8; pixel_y = 4},/obj/item/device/assembly/prox_sensor{pixel_x = -8; pixel_y = 4},/obj/item/device/assembly/prox_sensor{pixel_x = -8; pixel_y = 4},/obj/item/device/assembly/prox_sensor{pixel_x = -8; pixel_y = 4},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "fC" = (/obj/structure/table/steel,/obj/item/stack/cable_coil,/obj/item/stack/cable_coil{pixel_x = 3; pixel_y = 3},/obj/item/weapon/stock_parts/scanning_module{pixel_x = 2; pixel_y = 3},/obj/item/weapon/stock_parts/scanning_module,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
-"fD" = (/obj/structure/closet{name = "Mineral Closet"},/obj/machinery/light/colored{tag = "icon-yellow1 (WEST)"; icon_state = "yellow1"; dir = 8},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 "fE" = (/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "fF" = (/obj/machinery/light/colored,/obj/machinery/portable_atmospherics/hydroponics{closed_system = 1; name = "isolation tray"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/xenoflora)
 "fG" = (/obj/structure/grille,/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "scibio"; name = "Biohazard Shutter"; opacity = 0},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
@@ -368,8 +366,8 @@
 "hd" = (/obj/structure/table/steel,/turf/simulated/floor/decor{tag = "icon-tiled6"; icon_state = "tiled6"},/area/planets/Geminus/indoor/city_hall1)
 "he" = (/obj/structure/table/steel,/obj/machinery/microwave,/turf/simulated/floor/decor{tag = "icon-tiled6"; icon_state = "tiled6"},/area/planets/Geminus/indoor/city_hall1)
 "hf" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/donkpockets,/turf/simulated/floor/decor{tag = "icon-tiled6"; icon_state = "tiled6"},/area/planets/Geminus/indoor/city_hall1)
-"hg" = (/turf/simulated/wall/chrome,/area/planets/Geminus/outdoor/level1)
-"hh" = (/turf/simulated/wall/chrome,/area/planets/Geminus/indoor/hospital1)
+"hg" = (/turf/simulated/wall/plastic/hospital,/area/planets/Geminus/outdoor/level1)
+"hh" = (/turf/simulated/wall/plastic/hospital,/area/planets/Geminus/indoor/hospital1)
 "hi" = (/obj/structure/window/framed,/turf/simulated/floor/decor{tag = "icon-arrival (WEST)"; icon_state = "arrival"; dir = 8},/area/planets/Geminus/indoor/hospital1)
 "hj" = (/obj/structure/window/framed,/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/hospital1)
 "hk" = (/obj/structure/window/framed,/turf/simulated/floor/decor{tag = "icon-arrival (EAST)"; icon_state = "arrival"; dir = 4},/area/planets/Geminus/indoor/hospital1)
@@ -417,7 +415,7 @@
 "ia" = (/obj/structure/closet/secure_closet/freezer{name = "blood storage"},/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/structure/table/glass,/turf/simulated/floor/tiled/white,/area/planets/Geminus/outdoor/level1)
 "ib" = (/obj/structure/table/standard,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/hospital1)
 "ic" = (/turf/simulated/floor/tiled,/area/planets/Geminus/indoor/hospital1)
-"id" = (/obj/structure/sign/chemistry,/turf/simulated/wall/chrome,/area/planets/Geminus/indoor/hospital1)
+"id" = (/obj/structure/sign/chemistry,/turf/simulated/wall/plastic/hospital,/area/planets/Geminus/indoor/hospital1)
 "ie" = (/obj/structure/table/standard,/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/hospital1)
 "if" = (/obj/item/device/radio/intercom{dir = 0; name = "Station Intercom (General)"; pixel_x = -27},/obj/item/weapon/reagent_containers/glass/bottle/stoxin{pixel_x = -6; pixel_y = 10},/obj/item/weapon/reagent_containers/glass/bottle/antitoxin{pixel_x = 5; pixel_y = 5},/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline{pixel_x = 1},/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/table/standard,/turf/simulated/floor/tiled/white,/area/planets/Geminus/outdoor/level1)
 "ig" = (/obj/effect/landmark/start{name = "Geneticist"},/turf/simulated/floor/decor{tag = "icon-arrival (EAST)"; icon_state = "arrival"; dir = 4},/area/planets/Geminus/outdoor/level1)
@@ -437,7 +435,7 @@
 "iu" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/planets/Geminus/outdoor/level1)
 "iv" = (/obj/machinery/door/airlock/glass{name = "Medical Storage"},/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/hospital1)
 "iw" = (/turf/simulated/floor/tiled,/area/space)
-"ix" = (/turf/simulated/wall/chrome,/area/space)
+"ix" = (/turf/simulated/wall/plastic/hospital,/area/space)
 "iy" = (/obj/structure/closet/secure_closet/chemical,/obj/item/weapon/storage/box/pillbottles,/obj/item/device/radio/headset/headset_med,/obj/structure/table/standard,/turf/simulated/floor/tiled/white,/area/space)
 "iz" = (/turf/simulated/floor/decor{tag = "icon-arrival (WEST)"; icon_state = "arrival"; dir = 8},/area/space)
 "iA" = (/obj/structure/bed/chair/wheelchair,/turf/simulated/floor/decor{tag = "icon-arrival (EAST)"; icon_state = "arrival"; dir = 4},/area/space)
@@ -474,7 +472,7 @@
 "jf" = (/obj/machinery/computer/med_data,/turf/simulated/floor/decor{tag = "icon-whitebluefull"; icon_state = "whitebluefull"},/area/planets/Geminus/indoor/hospital1)
 "jg" = (/obj/structure/table/standard,/turf/simulated/floor/decor{tag = "icon-arrival (WEST)"; icon_state = "arrival"; dir = 8},/area/planets/Geminus/indoor/hospital1)
 "jh" = (/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/hospital1)
-"ji" = (/obj/structure/sign/greencross,/turf/simulated/wall/chrome,/area/planets/Geminus/indoor/hospital1)
+"ji" = (/obj/structure/sign/greencross,/turf/simulated/wall/plastic/hospital,/area/planets/Geminus/indoor/hospital1)
 "jj" = (/obj/machinery/door/airlock/medical{name = "Medical Archives"; req_access = list(5)},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/hospital1)
 "jk" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/hospital1)
 "jl" = (/obj/machinery/computer/med_data,/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/hospital1)
@@ -487,6 +485,11 @@
 "js" = (/obj/structure/filingcabinet/medical,/turf/simulated/floor/tiled/white,/area/planets/Geminus/indoor/hospital1)
 "jt" = (/obj/structure/window/framed,/turf/simulated/floor/decor{tag = "icon-cmo"; icon_state = "cmo"},/area/planets/Geminus/indoor/hospital1)
 "ju" = (/obj/effect/landmark/map_data{name = "Geminus Colony"},/turf/unsimulated/wall,/area/planets/Geminus/outdoor/level1)
+"ye" = (/obj/machinery/light/colored,/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Materials Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/plasteel/fifty,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/diamond/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/gold/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/uranium/ten,/obj/item/stack/material/silver/ten,/obj/item/stack/material/silver/ten,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"El" = (/obj/structure/table/steel,/obj/item/stack/material/glass/fifty,/obj/item/clothing/glasses/welding,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"Ub" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"Vt" = (/obj/structure/bed/chair/office/light{dir = 2; icon_state = "officechair_white_preview"; tag = "icon-officechair_white_preview (EAST)"},/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
+"YI" = (/obj/machinery/light/colored{tag = "icon-yellow1 (WEST)"; icon_state = "yellow1"; dir = 8},/obj/machinery/chem_master,/turf/simulated/floor/decor{icon_state = "tiled"},/area/planets/Geminus/indoor/labs1)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -566,11 +569,11 @@ aaaabebObPbQbkbRbkbebkbebeafafafafafafafafafafafafafafafafafafafafafafafafafafaf
 aaaabebkdXbkbkbkbkbFbkbGbeafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbodGbCbCbCbCbCbCbibibibibidYbCdZeaebecedbCbCbieeefegeheiejdVekelemeneoepeqdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaa
 aaaabebkbkbebebtbebebkbkbhafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbodRbCbCeresesetbibibibibibCbCbCbCbCeubidicmbibCbCbCevbCbCdVepewepexeyepezdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaa
 aaaabebObkbeblbkbmbebnbkbhafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbobCbCbCbibCbCbCbibibibibieAbCeBbCcheCdJdzdsbieDbCchevbCeEdVeFeGepexeHepeIdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaa
-aaaabebhbhbebebebebebhbhbeafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbobCbCbCerbCbCcmbibibibibidqbCbCbCbCeJbidleCdJdzevevbCbCeKdVeLepepeMepepeNdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaa
+aaaabebhbhbebebebebebhbhbeafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbobCbCbCerbCbCcmbibibibibidqbCbCbCbCeJbidleCdJdzevevbCbCEldVeLepepeMepepeNdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaa
 aaaaaHafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbobCbCbCbibCbCeObibibibibiePbCeQbCbCeReSbCdjeSeTbCeUbCeVbCeWeXeYeZepepepfadVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaa
 aaaaaHafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbobCbCbCerbCfbbCbibibibibifcbCbCbCbCfdfebCbCfeffbCfgbCeabCfhfifjfkepflepfmdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaa
-aaaaaHafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbifnbCbCfobCbCcmbibibibibifpbCeBbCbCfqfrfsftfrfubCbCbCbCeRdVfvepepepepepfwdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaa
-aaaaaHafafafaIaIaIaIaIaIaIafafafaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbifxfybCerfzbCfzbibibibibifAbCdtdtbCfBbibibibifCdAbCbCbCfDdVfEfEfEfEfFekdVdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaa
+aaaaaHafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbifnbCbCfobCbCcmbibibibibifpbCeBbCbCfqfrfsftfrfubCbCbCbCVtdVfvepepepepepfwdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaa
+aaaaaHafafafaIaIaIaIaIaIaIafafafaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbifxfybCerfzbCfzbibibibibifAbCdtdtbCfBbibibibifCyebCbCUbYIdVfEfEfEfEfFekdVdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaa
 aaaaaHafafafaIaIaIaIaIaIaIafafafaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIafafafafafafafafafafanananananananananananananananananananananananananananananananananananananananananananananananananananananafafafafafafafafafafafbibibibibibibibibibibibibibifGfHfIfGbibibibibibifGfJfIfGbidVfKfKfKfKfKfKdVdVaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaaaa
 aaaaaHafafafaIaIaIaIaIaIaIafafafaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafaHaaaaabaaaa
 aaaaaHafafafaIaIaIaIaIaIaIafafafaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafaHaaaaabaaaa
@@ -650,3 +653,4 @@ aaaaaHaIaIaIaIaIaIaIaIaIaIaIaIaIafafafaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIaIafaf
 aaaaaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHaHafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafabababababababababababababababaaaa
 juaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

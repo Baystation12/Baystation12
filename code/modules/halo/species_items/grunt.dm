@@ -7,7 +7,7 @@
 	name = "Balahese"
 	desc = "The language of the Unggoy"
 	native = 1
-	colour = "vox"
+	colour = "unggoy"
 	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "B"
 	flags = RESTRICTED
@@ -173,6 +173,9 @@
 	icon_state = "combatharness_major"
 	item_state = "combatharness_major"
 
+	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+
+
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
 	name = "Unggoy Combat Harness (Ultra)"
 	desc = "A combat harness with an inbuilt gas tank"
@@ -197,6 +200,9 @@
 	action_button_name = "Toggle Active Camouflage"
 	specials = list(/datum/armourspecials/cloaking)
 
+	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+
+
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
 	name = "Unggoy Combat Harness (Deacon)"
 	desc = "A combat harness with an inbuilt gas tank."
@@ -205,6 +211,9 @@
 	icon_state = "combatharness_deacon"
 	item_state = "combatharness_deacon"
 	totalshields = 50 //Pretty much just a distinguishing feature.
+
+	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+
 
 	specials = list(/datum/armourspecials/shields/unggoy)
 

@@ -281,13 +281,13 @@
 	if(isliving(AM))
 		if(istype(AM, /mob/living/simple_animal/hostile))
 			var/mob/living/simple_animal/hostile/H = AM
-			if(!H.assault_target && !H.target_mob)
+			if(!H.assault_target && !H.target_mob && !H.ckey)
 				return
 		var/turf/T = get_step(AM, AM.dir)
 		if(T.CanPass(AM, T))
 			if(ismob(AM))
 				var/mob/moving = AM
-				moving.show_message("<span class='notice'>You start maneuvring through [src]...</span>")
+				moving.show_message("<span class='notice'>You start maneuvering through [src]...</span>")
 			spawn(0)
 				if(do_after(AM, 30))
 					src.visible_message("<span class='info'>[AM] slips through [src].</span>")
@@ -330,3 +330,12 @@
 	mouse_opacity = 0
 	density = 0
 	layer = 2
+
+/obj/structure/false_light
+	name = "light bulb"
+	desc = "A broken light bulb. There is no power to light it."
+	icon = 'icons/obj/lighting.dmi'
+	icon_state = "tube0"
+	anchored = 1
+	density = 0
+	opacity = 0

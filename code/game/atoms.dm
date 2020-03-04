@@ -548,3 +548,6 @@ its easier to just keep the beam vertical.
 	var/new_alpha = alpha - (50 * amount)
 	animate(src,alpha = new_alpha,time = 2 SECONDS)
 	elevation += amount
+
+/atom/proc/get_color()
+	return color

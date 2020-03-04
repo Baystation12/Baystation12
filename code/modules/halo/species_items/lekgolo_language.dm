@@ -7,7 +7,7 @@
 	speech_verb = "emits a rumbling sound"
 	ask_verb = "emits a rumbling sound"
 	exclaim_verb = "emits a rumbling sound"
-	colour = "changeling"
+	colour = "lekgolo"
 	key = "u"
 	flags = RESTRICTED | NO_STUTTER
 	native = 1

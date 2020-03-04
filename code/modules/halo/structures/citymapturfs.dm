@@ -111,30 +111,3 @@
 	icon_state = "dirt"
 	base_desc = "Soft moist, crumbly dirt... was the word moist just used?"
 	icon = 'maps/geminus_city/citymap_icons/floors.dmi'
-
-// Walls
-/material/chrome
-	name = "chrome"
-	display_name = "Chrome"
-	icon_base = "hospital"
-	..()
-
-/material/blackchrome
-	name = "blackchrome"
-	display_name = "Black Chrome"
-	icon_base = "tech"
-	..()
-
-/turf/simulated/wall/chrome
-	icon = 'maps/geminus_city/citymap_icons/walls.dmi'
-	icon_state = "hospital"
-
-/turf/simulated/wall/chrome/New(var/newloc)
-	. = ..(newloc,"chrome")
-
-/turf/simulated/wall/tech
-	icon = 'maps/geminus_city/citymap_icons/walls.dmi'
-	icon_state = "tech"
-
-/turf/simulated/wall/tech/New(var/newloc)
-	. = ..(newloc,"blackchrome")

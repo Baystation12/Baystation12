@@ -69,46 +69,49 @@
 
 		if(A == src || A == src.loc)
 			continue
+		var/atom/valTarg = return_valid_target(A)
+		if(valTarg)
+			T = valTarg
 
 		var/atom/F = Found(A)
 		if(F)
 			T = F
 			break
-
-		if(isliving(A))
-			var/mob/living/L = A
-			if(L.faction == src.faction && !attack_same)
-				continue
-			else if(L in friends)
-				continue
-			else
-				if(!L.stat)
-					stance = HOSTILE_STANCE_ATTACK
-					T = L
-					break
-
-		else if(istype(A, /obj/mecha)) // Our line of sight stuff was already done in ListTargets().
-			var/obj/mecha/M = A
-			if (M.occupant)
-				stance = HOSTILE_STANCE_ATTACK
-				T = M
-				break
-		else if(istype(A,/obj/vehicles))
-			var/obj/vehicles/v = A
-			var/attack_vehicle = 0
-			for(var/mob/m in v.occupants)
-				if((m.stat == CONSCIOUS || istype(m,/mob/living/simple_animal/hostile)) && m.faction != src.faction)
-					attack_vehicle = 1
-					break
-			if(attack_vehicle)
-				stance = HOSTILE_STANCE_ATTACK
-				T = v
-				break
-
 	if(our_overmind && !isnull(T))
 		var/list/targlist = ListTargets(7)
 		our_overmind.create_report(1,src,null,targlist.len,assault_target,loc)
 	return T
+
+/mob/living/simple_animal/hostile/proc/return_valid_target(var/atom/A)
+	if(isliving(A))
+		var/mob/living/L = A
+		if(L.faction == src.faction && !attack_same)
+			return null
+		else if(L in friends)
+			return null
+		else
+			if(!L.stat)
+				stance = HOSTILE_STANCE_ATTACK
+				return L
+
+	else if(istype(A, /obj/mecha)) // Our line of sight stuff was already done in ListTargets().
+		var/obj/mecha/M = A
+		if (M.occupant)
+			stance = HOSTILE_STANCE_ATTACK
+			return M
+
+	else if(istype(A,/obj/vehicles))
+		var/obj/vehicles/v = A
+		var/attack_vehicle = 0
+		for(var/mob/m in v.occupants)
+			if((m.stat == CONSCIOUS || istype(m,/mob/living/simple_animal/hostile)) && m.faction != src.faction)
+				attack_vehicle = 1
+				break
+		if(attack_vehicle)
+			stance = HOSTILE_STANCE_ATTACK
+			return v
+
+	return null
 
 
 /mob/living/simple_animal/hostile/proc/Found(var/atom/A)
@@ -168,7 +171,7 @@
 		src.do_attack_animation(L)
 		spawn(1) L.updatehealth()
 		return L
-	if(istype(attacked,/obj/mecha) || istype(attacked,/obj/structure) || istype(attacked,/obj/vehicles))
+	else if(istype(attacked,/obj/mecha) || istype(attacked,/obj/effect) || istype(attacked,/obj/structure) || istype(attacked,/obj/vehicles))
 		var/obj/o = attacked
 		o.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
 		src.do_attack_animation(o)

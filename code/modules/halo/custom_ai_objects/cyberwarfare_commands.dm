@@ -1,4 +1,6 @@
 
+#define OVERMIND_INTERFACE_SQUADSEARCH_RANGE 14 //Double viewrange5
+
 //RECON//
 
 #define NET_SCAN_L2_NODESCAN_LOWER 5
@@ -246,7 +248,7 @@
 		ai.cancel_camera()
 
 	if(!hit_someone)
-		to_chat(our_ai,"<span class = 'notice'>ERROR: DISCONNECT FLOOD FEEDBACK.</span>")
+		to_chat(our_ai,"<span class = 'notice'>ERROR: DISCONNECT FLOOD FEEDBACK DETECTED. RESETTING.</span>")
 		our_ai.flash_eyes(FLASH_PROTECTION_MAJOR,1,1)
 		our_ai.cancel_camera()
 
@@ -432,3 +434,83 @@
 		return 0
 	set_expire()
 	to_chat(our_ai,"<span class = 'notice'>Disconnect bypass established. Will remain active for [lifespan/10] seconds.</span>")
+
+//Time to utilise the EWAR system for things other than actual electronic warfare//
+/datum/cyberwarfare_command/designate_build
+	name = "Designate Build Location"
+	desc = "Relays HUD markers to construction workers, providing them with direction on where to build."
+	category = "Intervention"
+	cpu_cost = 10
+	command_delay = 1.5 SECONDS
+	requires_target = 1
+	var/marker_build_type = BUILD_MARKER_FLOOR
+
+/datum/cyberwarfare_command/designate_build/is_target_valid(var/targ)
+	if(istype(targ,/obj/structure) || istype(targ,/turf/simulated))
+		return 1
+	to_chat(our_ai,"<span class = 'notice'>Invalid Target</span>")
+	return 0
+
+/datum/cyberwarfare_command/designate_build/send_command(var/atom/targ)
+	. = ..()
+	if(!.)
+		return 0
+	var/turf/targ_loc = targ
+	if(!istype(targ,/turf))
+		targ_loc = targ.loc
+	var/obj/effect/landmark/build_marker/mark = new (targ_loc)
+	mark.marker_type = marker_build_type
+	mark.build_faction = our_ai.faction
+
+/datum/cyberwarfare_command/designate_build/wall
+	name = "Designate Build Marker (Wall)"
+	marker_build_type = BUILD_MARKER_WALL
+
+/datum/cyberwarfare_command/designate_build/floor
+	name = "Designate Build Marker (Floor)"
+	marker_build_type = BUILD_MARKER_FLOOR
+
+/datum/cyberwarfare_command/designate_build/door
+	name = "Designate Build Marker (Door)"
+	marker_build_type = BUILD_MARKER_DOOR
+
+/datum/cyberwarfare_command/designate_build/window
+	name = "Designate Build Marker (Window)"
+	marker_build_type = BUILD_MARKER_WINDOW
+
+//An now, for fun, some framework for a potential flood controller using the AI mob.//
+
+/datum/cyberwarfare_command/overmind_command
+	name = "Overmind Interface (Command Squad Location)"
+	desc = "Interfaces with the relevant overmind to order a squad to a location."
+	category = "Intervention"
+	command_delay = 2 SECONDS
+	cpu_cost = 20
+
+	var/datum/npc_overmind/our_mind //YOU MUST OVERRIDE THE COMMAND'S NEW PROC TO OBTAIN THIS.
+
+/datum/cyberwarfare_command/overmind_command/is_target_valid(var/atom/targ)
+	if(istype(targ,/turf) && targ.density == 0)
+		return 1
+	to_chat(our_ai,"<span class = 'notice'>Please click a non dense turf to direct the overmind.</span>")
+	return 0
+
+/datum/cyberwarfare_command/overmind_command/send_command(var/turf/targ)
+	if(!our_mind || our_mind.overmind_active == 0)
+		to_chat(our_ai,"<span class ='notice'>No Overmind Active</span>")
+		return
+	var/report_types = list("reinforcement","construct","combat")
+	var/severities = list("1","2","3") //Specific restricted list to ensure players can't send literally every mob to one spot.
+	var/user_choice = input(our_ai,"Select Report Type","Report Type Selection","Cancel") in report_types + list("Cancel")
+	var/user_severity = input(our_ai,"Select Report Severity (Multiplier to squadsize)","Report Severity Select","1") in severities
+	if(user_choice == "Cancel")
+		return
+	var/obj/taskpoint = our_mind.create_taskpoint(targ)
+	if(!taskpoint)
+		return
+	our_mind.create_taskpoint_assign(null,taskpoint,user_choice,text2num(user_severity),OVERMIND_INTERFACE_SQUADSEARCH_RANGE)
+	to_chat(our_ai,"<span class = 'warning'>Taskpoint Assigned to squad.</span>")
+
+/datum/cyberwarfare_command/overmind_command/flood/New()
+	. = ..()
+	our_mind = GLOB.flood_overmind

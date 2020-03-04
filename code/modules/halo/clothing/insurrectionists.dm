@@ -1,5 +1,98 @@
 #define INNIE_OVERRIDE 'code/modules/halo/clothing/inniearmor.dmi'
 
+// x52 stuff
+
+/obj/item/clothing/suit/storage/toggle/x52vest
+	name = "X-52 Researcher Vest"
+	desc = "A  classy brown vest that has a x-52 patch on it with pockets"
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "vestworn"
+	icon_state = "vestobj"
+	blood_overlay_type = "coat"
+	body_parts_covered = UPPER_TORSO|ARMS
+	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	valid_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+	restricted_accessory_slots = list(ACCESSORY_SLOT_ARMBAND)
+
+/obj/item/clothing/suit/storage/toggle/x52vest/jacket
+	name = "X-52 Researcher Jacket"
+	desc = "A  classy brown jacket that has a x-52 patch on it with pockets"
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "jacketworn"
+	icon_state = "jacketobj"
+
+/obj/item/clothing/mask/x52/x52shemagh
+	name = "X-52 Shemagh"
+	desc = "A X-52 headdress designed to keep out dust and protect agains the sun."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	icon_state = "maskworn"
+	item_state = "maskobj"
+	body_parts_covered = FACE
+	item_flags = FLEXIBLEMATERIAL
+	w_class = ITEM_SIZE_SMALL
+	gas_transfer_coefficient = 0.90
+	item_icons = list(
+		slot_l_hand_str = null,
+		slot_r_hand_str = null,
+		)
+
+/obj/item/clothing/gloves/x52/x52gloves
+	name = "X-52 Combat Gloves"
+	desc = "These  gloves are somewhat fire and impact-resistant."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "glovesworn"
+	icon_state = "gloveobj"
+	force = 5
+	armor = list(melee = 20, bullet = 20, laser = 0,energy = 5, bomb = 0, bio = 0, rad = 0)
+
+/obj/item/clothing/shoes/x52boots
+	name = "X-52 Jackboots"
+	desc = "A pair of steel-toed work boots designed for use in industrial settings. Safety first."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	icon_state = "bootobj"
+	item_state = "bootworn"
+	armor = list(melee = 40, bullet = 30, laser = 0, energy = 0, bomb = 15, bio = 0, rad = 0)
+	siemens_coefficient = 0.7
+	can_hold_knife = 1
+
+/obj/item/clothing/head/helmet/x52hood
+	name = "Armored X-52 Hood"
+	desc = "An  lightly armored hood cover composed of materials salvaged from a wide array of ONI equipment"
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "hoodworn"
+	icon_state = "Hoodobj"
+	item_flags = THICKMATERIAL
+	body_parts_covered = HEAD
+
+/obj/item/clothing/suit/storage/x52armor
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	armor_thickness = 20
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+
+/obj/item/clothing/suit/storage/x52armor/light //One step up but without the slowdown penalty changing
+	name = "V12L Body Armor"
+	desc = "The V12L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M22L Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
+	item_state = "x52light"
+	icon_state = "x52lightobj"
+	armor = list(melee = 50, bullet = 40, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	slowdown_general = -0.1
+
+/obj/item/clothing/suit/storage/x52armor/medium
+	name = "V12D Body Armor"
+	desc = "The V12D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M22D  Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
+	item_state = "x52medium"
+	icon_state = "x52mediumobj"
+	armor = list(melee = 55, bullet = 45, laser = 55,energy = 25, bomb = 30, bio = 5, rad = 5)
+
 /obj/item/clothing/under/innie/jumpsuit
 	name = "Insurrectionist-modified Jumpsuit"
 	desc = "A grey jumpsuit, modified with extra padding."
@@ -14,6 +107,24 @@
 		slot_r_hand_str = null,
 		)
 
+/obj/item/clothing/under/innie/jumpsuit/x52
+	name = "X-52 Researcher Uniform"
+	desc = "A classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "x52nerdworn"
+	icon_state = "x52nerdobj"
+	worn_state = "x52nerdworn"
+
+/obj/item/clothing/under/innie/jumpsuit/x52rd
+	name = "X-52 Researcher Director Uniform"
+	desc = "A  classy brown uniform, modified with extra padding that seems to have x-52 marking on it."
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	item_state = "x52headnerdworn"
+	icon_state = "x52headnerdobj"
+	worn_state = "x52headnerdworn"
+
 /obj/item/clothing/head/helmet/innie
 	name = "Armored Helmet"
 	desc = "An armored helmet composed of materials salvaged from a wide array of UNSC equipment"
@@ -21,13 +132,21 @@
 	icon_override = INNIE_OVERRIDE
 	item_state = "helmet"
 	icon_state = "helmet"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor = list(melee = 40, bullet = 30, laser = 40,energy = 5, bomb = 15, bio = 0, rad = 0)
+	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
 	item_icons = list(
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
+
+	item_flags = THICKMATERIAL
+	body_parts_covered = HEAD
+	flags_inv = HIDEEARS|HIDEEYES
+	cold_protection = HEAD
+	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = HEAD
+	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.7
+	w_class = 3
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
@@ -35,933 +154,314 @@
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical
 
-/obj/item/clothing/head/helmet/lighturf/brown
-	name = "LV28L Armored Helmet - Brown Camo"
+/obj/item/clothing/head/helmet/innie/light
 	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
+	armor = list(melee = 50, bullet = 25, laser = 45,energy = 20, bomb = 20, bio = 0, rad = 0)
+	slowdown_general = -0.1
+
+/obj/item/clothing/head/helmet/innie/light/brown
+	name = "LV28L Armored Helmet - Brown Camo"
 	item_state = "l_innie_helmet_brown"
 	icon_state = "l_innie_helmet_obj_brown"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 5
-	armor = list(melee = 30, bullet = 25, laser = 40,energy = 10, bomb = 15, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/lighturf/blue
+/obj/item/clothing/head/helmet/innie/light/blue
 	name = "LV28L Armored Helmet - Blue Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_blue"
 	icon_state = "l_innie_helmet_obj_blue"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 5
-	armor = list(melee = 30, bullet = 25, laser = 40,energy = 10, bomb = 15, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/lighturf/green
+/obj/item/clothing/head/helmet/innie/light/green
 	name = "LV28L Armored Helmet - Green Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_green"
 	icon_state = "l_innie_helmet_obj_green"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 5
-	armor = list(melee = 30, bullet = 25, laser = 40,energy = 10, bomb = 15, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/lighturf/black
+/obj/item/clothing/head/helmet/innie/light/black
 	name = "LV28L Armored Helmet - Black Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_black"
 	icon_state = "l_innie_helmet_obj_black"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 5
-	armor = list(melee = 30, bullet = 25, laser = 40,energy = 10, bomb = 15, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/lighturf/white
+/obj/item/clothing/head/helmet/innie/light/white
 	name = "LV28L Armored Helmet - White Camo"
-	desc = "The LV28L an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a lightweight design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_helmet_white"
 	icon_state = "l_innie_helmet_obj_white"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 5
-	armor = list(melee = 30, bullet = 25, laser = 40,energy = 10, bomb = 15, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/mediumurf/brown
-	name = "LV28D Armored Helmet - Brown Camo"
+/obj/item/clothing/head/helmet/innie/medium
 	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
+	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+
+/obj/item/clothing/head/helmet/innie/medium/brown
+	name = "LV28D Armored Helmet - Brown Camo"
 	item_state = "m_innie_helmet_brown"
 	icon_state = "m_innie_helmet_obj_brown"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 10
-	armor = list(melee = 30, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/mediumurf/blue
+/obj/item/clothing/head/helmet/innie/medium/blue
 	name = "LV28D Armored Helmet - Blue Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_blue"
 	icon_state = "m_innie_helmet_obj_blue"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 10
-	armor = list(melee = 30, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/mediumurf/green
+/obj/item/clothing/head/helmet/innie/medium/green
 	name = "LV28D Armored Helmet - Green Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_green"
 	icon_state = "m_innie_helmet_obj_green"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 10
-	armor = list(melee = 30, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/mediumurf/black
+/obj/item/clothing/head/helmet/innie/medium/black
 	name = "LV28D Armored Helmet - Black Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_black"
 	icon_state = "m_innie_helmet_obj_black"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 10
-	armor = list(melee = 30, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/mediumurf/white
+/obj/item/clothing/head/helmet/innie/medium/white
 	name = "LV28D Armored Helmet - White Camo"
-	desc = "The LV28D an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a standard equal to the CH252 Helmet design crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_helmet_white"
 	icon_state = "m_innie_helmet_obj_white"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 10
-	armor = list(melee = 30, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/brown
-	name = "LV28H Armored Helmet - Brown Camo"
+/obj/item/clothing/head/helmet/innie/heavy
 	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
+	armor = list(melee = 55, bullet = 35, laser = 55,energy = 25, bomb = 30, bio = 5, rad = 5)
+	slowdown_general = 0.1
+
+/obj/item/clothing/head/helmet/innie/heavy/brown
+	name = "LV28H Armored Helmet - Brown Camo"
 	item_state = "h_innie_helmet_brown"
 	icon_state = "h_innie_helmet_obj_brown"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/vbrown
+/obj/item/clothing/head/helmet/innie/heavy/vbrown
 	name = "LV28H Armored Helmet Visor Variant - Brown Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_brown_visor"
 	icon_state = "h_innie_helmet_obj_brown_visor"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/blue
+/obj/item/clothing/head/helmet/innie/heavy/blue
 	name = "LV28H Armored Helmet - Blue Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_blue"
 	icon_state = "h_innie_helmet_obj_blue"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/vblue
+/obj/item/clothing/head/helmet/innie/heavy/vblue
 	name = "LV28H Armored Helmet Visor Variant - Blue Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_blue_visor"
 	icon_state = "h_innie_helmet_obj_blue_visor"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/green
+/obj/item/clothing/head/helmet/innie/heavy/green
 	name = "LV28H Armored Helmet - Green Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_green"
 	icon_state = "h_innie_helmet_obj_green"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/vgreen
+/obj/item/clothing/head/helmet/innie/heavy/vgreen
 	name = "LV28H Armored Helmet Visor Variant - Green Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_green_visor"
 	icon_state = "h_innie_helmet_obj_green_visor"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/black
+/obj/item/clothing/head/helmet/innie/heavy/black
 	name = "LV28H Armored Helmet - Black Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_black"
 	icon_state = "h_innie_helmet_obj_black"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/vblack
+/obj/item/clothing/head/helmet/innie/heavy/vblack
 	name = "LV28H Armored Helmet Visor Variant - Black Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_black_visor"
 	icon_state = "h_innie_helmet_obj_black_visor"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/white
+/obj/item/clothing/head/helmet/innie/heavy/white
 	name = "LV28H Armored Helmet - White Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_white"
 	icon_state = "h_innie_helmet_obj_white"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-/obj/item/clothing/head/helmet/heavyurf/vwhite
+/obj/item/clothing/head/helmet/innie/heavy/vwhite
 	name = "LV28H Armored Helmet Visor Variant - White Camo"
-	desc = "The LV28H an armored helmet composed of materials salvaged from a wide array of UNSC equipment for a heavy plated re-design of the CH252 Helmet crafted by X-52 for the new armor series being rolled out from Eridanus Secundus"
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_helmet_white_visor"
 	icon_state = "h_innie_helmet_obj_white_visor"
-	item_flags = THICKMATERIAL
-	body_parts_covered = HEAD
-	armor_thickness = 15
-	armor = list(melee = 45, bullet = 35, laser = 40,energy = 25, bomb = 25, bio = 0, rad = 0)
-	item_icons = list(
-		slot_l_hand_str = null,
-		slot_r_hand_str = null,
-		)
 
-	action_button_name = "Toggle Helmet Light"
-	light_overlay = "helmet_light"
-	brightness_on = 4
-
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
-
-
-/obj/item/clothing/shoes/lighturfboot/brown
-	name = "VZG4L Armored Boots - Brown Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots modified with less plating for light movement."
+/obj/item/clothing/shoes/innie_boots
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
+	siemens_coefficient = 0.6
+	body_parts_covered = FEET|LEGS
+	can_hold_knife = 1
+	cold_protection = FEET
+	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = FEET
+	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/shoes/innie_boots/light
+	desc = "An older standard issue combat boots model of the VZG7 Armored Boots modified with less plating for light movement."
+	armor = list(melee = 35, bullet = 35, laser = 0, energy = 15, bomb = 10, bio = 0, rad = 0)
+	slowdown_general = -0.1
+
+/obj/item/clothing/shoes/innie_boots/light/brown
+	name = "VZG4L Armored Boots - Brown Camo"
 	item_state = "l_innie_foot_brown"
 	icon_state = "l_innie_foot_obj_brown"
-	force = 2
-	armor = list(melee = 20, bullet = 20, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/lighturfboot/blue
+/obj/item/clothing/shoes/innie_boots/light/blue
 	name = "VZG4L Armored Boots - Blue Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots modified with less plating for light movement."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_foot_blue"
 	icon_state = "l_innie_foot_obj_blue"
-	force = 2
-	armor = list(melee = 20, bullet = 20, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/lighturfboot/green
+/obj/item/clothing/shoes/innie_boots/light/green
 	name = "VZG4L Armored Boots - Green Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots modified with less plating for light movement."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_foot_green"
 	icon_state = "l_innie_foot_obj_green"
-	force = 2
-	armor = list(melee = 20, bullet = 20, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/lighturfboot/black
+/obj/item/clothing/shoes/innie_boots/light/black
 	name = "VZG4L Armored Boots - Black Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots modified with less plating for light movement."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_foot_black"
 	icon_state = "l_innie_foot_obj_black"
-	force = 2
-	armor = list(melee = 20, bullet = 20, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/lighturfboot/white
+/obj/item/clothing/shoes/innie_boots/light/white
 	name = "VZG4L Armored Boots - White Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots modified with less plating for light movement."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_foot_white"
 	icon_state = "l_innie_foot_obj_white"
-	force = 2
-	armor = list(melee = 20, bullet = 20, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/mediumurfboot/blue
-	name = "VZG4D Armored Boots - Blue Camo"
+/obj/item/clothing/shoes/innie_boots/medium
 	desc = "An older standard issue combat boots model of the VZG7 Armored Boots."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
+
+/obj/item/clothing/shoes/innie_boots/medium/blue
+	name = "VZG4D Armored Boots - Blue Camo"
 	item_state = "m_innie_foot_blue"
 	icon_state = "m_innie_foot_obj_blue"
-	force = 4
-	armor = list(melee = 25, bullet = 30, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/mediumurfboot/brown
+/obj/item/clothing/shoes/innie_boots/medium/brown
 	name = "VZG4D Armored Boots - Brown Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_foot_brown"
 	icon_state = "m_innie_foot_obj_brown"
-	force = 4
-	armor = list(melee = 25, bullet = 30, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/mediumurfboot/green
+/obj/item/clothing/shoes/innie_boots/medium/green
 	name = "VZG4D Armored Boots - Green Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_foot_green"
 	icon_state = "m_innie_foot_obj_green"
-	force = 4
-	armor = list(melee = 25, bullet = 30, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/mediumurfboot/black
+/obj/item/clothing/shoes/innie_boots/medium/black
 	name = "VZG4D Armored Boots - Black Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_foot_black"
 	icon_state = "m_innie_foot_obj_black"
-	force = 4
-	armor = list(melee = 25, bullet = 30, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/shoes/mediumurfboot/white
+/obj/item/clothing/shoes/innie_boots/medium/white
 	name = "VZG4D Armored Boots - White Camo"
-	desc = "An older standard issue combat boots model of the VZG7 Armored Boots."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_foot_white"
 	icon_state = "m_innie_foot_obj_white"
-	force = 4
-	armor = list(melee = 25, bullet = 30, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
-	item_flags = NOSLIP
-	siemens_coefficient = 0.6
-	body_parts_covered = FEET|LEGS
-	can_hold_knife = 1
-	cold_protection = FEET
-	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = FEET
-	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
-/obj/item/clothing/suit/storage/lighturfarmor/
+/obj/item/clothing/suit/storage/innie
+	icon = INNIE_OVERRIDE
+	icon_override = INNIE_OVERRIDE
+	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
+	armor_thickness = 20
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
+
+
+/obj/item/clothing/suit/storage/innie/light
 	name = "M22L Body Armor"
 	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_blue"
 	icon_state = "l_innie_chest_obj_blue"
 	blood_overlay_type = "l_innie_chest_blue"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
-	var/slots = 2
-	var/max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 10
-	slowdown_general = -0.5
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
+	armor = list(melee = 45, bullet = 40, laser = 35, energy = 40, bomb = 30, bio = 0, rad = 0)
+	slowdown_general = -0.1 //full light set = -0.3, between normal human and elite.
 
-/obj/item/clothing/suit/storage/lighturfarmor/blue
+/obj/item/clothing/suit/storage/innie/light/blue
 	name = "M22L Body Armor - Blue Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_blue"
 	icon_state = "l_innie_chest_obj_blue"
 	blood_overlay_type = "l_innie_chest_blue"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 10
-	slowdown_general = -0.5
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/lighturfarmor/brown
+/obj/item/clothing/suit/storage/innie/light/brown
 	name = "M22L Body Armor - Brown Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_brown"
 	icon_state = "l_innie_chest_obj_brown"
 	blood_overlay_type = "l_innie_chest_brown"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 10
-	slowdown_general = -0.5
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/lighturfarmor/green
+/obj/item/clothing/suit/storage/innie/light/green
 	name = "M22L Body Armor - Green Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_green"
 	icon_state = "l_innie_chest_obj_green"
 	blood_overlay_type = "l_innie_chest_green"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 10
-	slowdown_general = -0.5
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/lighturfarmor/black
+/obj/item/clothing/suit/storage/innie/light/black
 	name = "M22L Body Armor - Black Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_black"
 	icon_state = "l_innie_chest_obj_black"
 	blood_overlay_type = "l_innie_chest_black"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 10
-	slowdown_general = -0.5
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/lighturfarmor/white
+/obj/item/clothing/suit/storage/innie/light/white
 	name = "M22L Body Armor - White Camo"
-	desc = "The M22L Body Armor is composed of materials salvaged from a wide array of UNSC equipment for a lightweight design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "l_innie_chest_white"
 	icon_state = "l_innie_chest_obj_white"
 	blood_overlay_type = "l_innie_chest_white"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 25, bullet = 30, laser = 30, energy = 25, bomb = 25, bio = 0, rad = 0)
-	slots = 6
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 10
-	slowdown_general = -0.5
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/mediumurfarmor/
+/obj/item/clothing/suit/storage/innie/medium
 	name = "M22D Body Armor"
 	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_blue"
 	icon_state = "m_innie_chest_obj_blue"
 	blood_overlay_type = "m_innie_chest_blue"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
-	var/slots = 4
-	var/max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 15
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
+	armor = list(melee = 50, bullet = 45, laser = 40, energy = 45, bomb = 35, bio = 0, rad = 0)
 
-
-/obj/item/clothing/suit/storage/mediumurfarmor/blue
+/obj/item/clothing/suit/storage/innie/medium/blue
 	name = "M22D Body Armor - Blue Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_blue"
 	icon_state = "m_innie_chest_obj_blue"
 	blood_overlay_type = "m_innie_chest_blue"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
-	slots = 4
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 15
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/mediumurfarmor/brown
+/obj/item/clothing/suit/storage/innie/medium/brown
 	name = "M22D Body Armor - Brown Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_brown"
 	icon_state = "m_innie_chest_obj_brown"
 	blood_overlay_type = "m_innie_chest_brown"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
-	slots = 4
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 15
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/mediumurfarmor/green
+/obj/item/clothing/suit/storage/innie/medium/green
 	name = "M22D Body Armor - Green Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_green"
 	icon_state = "m_innie_chest_obj_green"
 	blood_overlay_type = "m_innie_chest_green"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
-	slots = 4
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 15
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/mediumurfarmor/black
+/obj/item/clothing/suit/storage/innie/medium/black
 	name = "M22D Body Armor - Black Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_black"
 	icon_state = "m_innie_chest_obj_black"
 	blood_overlay_type = "m_innie_chest_black"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
-	slots = 4
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 15
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/mediumurfarmor/white
+/obj/item/clothing/suit/storage/innie/medium/white
 	name = "M22D Body Armor - White Camo"
-	desc = "The M22D Body Armor is composed of materials salvaged from a wide array of UNSC equipment as an standard design based off the M52B Body Armor crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "m_innie_chest_white"
 	icon_state = "m_innie_chest_obj_white"
 	blood_overlay_type = "m_innie_chest_white"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 45, bullet = 40, laser = 35, energy = 30, bomb = 30, bio = 0, rad = 0)
-	slots = 4
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 15
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/heavyurfarmor/blue
-	name = "M22H Body Armor - Blue Camo"
+
+/obj/item/clothing/suit/storage/innie/heavy
+	name = "M22H Body Armor"
 	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
+	item_state = "h_innie_chest_brown"
+	icon_state = "h_innie_chest_obj_brown"
+	blood_overlay_type = "h_innie_chest_brown"
+	armor = list(melee = 55, bullet = 50, laser = 45, energy = 50, bomb = 40, bio = 0, rad = 0)
+	slowdown_general = 0.2
+
+/obj/item/clothing/suit/storage/innie/heavy/blue
+	name = "M22H Body Armor - Blue Camo"
 	item_state = "h_innie_chest_blue"
 	icon_state = "h_innie_chest_obj_blue"
 	blood_overlay_type = "h_innie_chest_blue"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 55, bullet = 50, laser = 35, energy = 40, bomb = 40, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 20
-	slowdown_general = 0.5
-	siemens_coefficient = 0.3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/heavyurfarmor/
-	name = "M22H Body Armor"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
-	item_state = "h_innie_chest_brown"
-	icon_state = "h_innie_chest_obj_brown"
-	blood_overlay_type = "h_innie_chest_brown"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 55, bullet = 50, laser = 35, energy = 40, bomb = 40, bio = 0, rad = 0)
-	var/slots = 2
-	var/max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 20
-	slowdown_general = 0.5
-	siemens_coefficient = 0.3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
-
-/obj/item/clothing/suit/storage/heavyurfarmor/brown
+/obj/item/clothing/suit/storage/innie/heavy/brown
 	name = "M22H Body Armor - Brown Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_brown"
 	icon_state = "h_innie_chest_obj_brown"
 	blood_overlay_type = "h_innie_chest_brown"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 55, bullet = 50, laser = 35, energy = 40, bomb = 40, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 20
-	slowdown_general = 0.5
-	siemens_coefficient = 0.3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/heavyurfarmor/green
+/obj/item/clothing/suit/storage/innie/heavy/green
 	name = "M22H Body Armor - Green Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_green"
 	icon_state = "h_innie_chest_obj_green"
 	blood_overlay_type = "h_innie_chest_green"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 55, bullet = 50, laser = 35, energy = 40, bomb = 40, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 20
-	slowdown_general = 0.5
-	siemens_coefficient = 0.3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/heavyurfarmor/black
+/obj/item/clothing/suit/storage/innie/heavy/black
 	name = "M22H Body Armor - Black Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_black"
 	icon_state = "h_innie_chest_obj_black"
 	blood_overlay_type = "h_innie_chest_black"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 55, bullet = 50, laser = 35, energy = 40, bomb = 40, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 20
-	slowdown_general = 0.5
-	siemens_coefficient = 0.3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
-/obj/item/clothing/suit/storage/heavyurfarmor/white
+/obj/item/clothing/suit/storage/innie/heavy/white
 	name = "M22H Body Armor - White Camo"
-	desc = "The M22H Body Armor is composed of materials salvaged from a wide array of UNSC equipment based off the M52B Body Armor and re-designed with more plating with overall better defense but lacking in movement crafted by X-52 for the new armor series being rolled out from Eridanus Secundus."
-	icon = INNIE_OVERRIDE
-	icon_override = INNIE_OVERRIDE
 	item_state = "h_innie_chest_white"
 	icon_state = "h_innie_chest_obj_white"
 	blood_overlay_type = "h_innie_chest_white"
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	armor = list(melee = 55, bullet = 50, laser = 35, energy = 40, bomb = 40, bio = 0, rad = 0)
-	slots = 2
-	max_w_class = ITEM_SIZE_SMALL
-	armor_thickness = 20
-	slowdown_general = 0.5
-	siemens_coefficient = 0.3
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter)
-	starting_accessories = /obj/item/clothing/accessory/holster/hip
 
 /obj/item/clothing/suit/armor/innie
 	name = "Salvaged Armor"
@@ -970,7 +470,7 @@
 	icon_state = "armor1"
 	icon_override = INNIE_OVERRIDE
 	blood_overlay_type = "armor1"
-	armor = list(melee = 45, bullet = 40, laser = 40, energy = 40, bomb = 35, bio = 20, rad = 15)
+	armor = list(melee = 50, bullet = 45, laser = 40, energy = 45, bomb = 35, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	item_flags = THICKMATERIAL
 	flags_inv = HIDETAIL
@@ -979,7 +479,7 @@
 
 /obj/item/clothing/mask/innie/shemagh
 	name = "Shemagh"
-	desc = "A headdress designed to keep out dust and protect agains the sun."
+	desc = "A headdress designed to keep out dust and protect against the sun."
 	icon = INNIE_OVERRIDE
 	icon_override = INNIE_OVERRIDE
 	icon_state = "shemagh"
@@ -1019,7 +519,7 @@
 	item_state = "colossushelmet"
 	body_parts_covered = HEAD
 	item_flags = THICKMATERIAL
-	w_class = ITEM_SIZE_HUGE//bulky item
+	w_class = ITEM_SIZE_HUGE
 	gas_transfer_coefficient = 0.01
 	permeability_coefficient = 0.01
 	slowdown_general = 1
@@ -1057,7 +557,7 @@
 	flags_inv = 29|HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	allowed = list(/obj/item/weapon/gun)
 	slowdown_general = -3
-	armor_thickness = 15 //Should be able to take 5-6 bullets before shattering.
+	armor_thickness = 15
 	siemens_coefficient = 0.5
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 

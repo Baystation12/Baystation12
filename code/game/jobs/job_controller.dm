@@ -127,11 +127,10 @@ var/global/datum/controller/occupations/job_master
 							player_pop_faction++
 							continue
 						player_pop_nonfaction++
-					//Poplocking something means it's probably very powerful.
-					//To deal with this, we divide the non-faction aligned pop by the divisor,
-					//then subtract the product of dividing the num of faction-aligned people
-					//by the poplock divisor,plus one. (overwhelming force)
-					var/amt_job = min(round((player_pop_nonfaction/poplocked.poplock_divisor) - max(0,player_pop_faction/poplocked.poplock_divisor+1)),poplocked.poplock_max)
+					var/hostilefaction_multiplier = 1
+					if(player_pop_nonfaction > 0 && player_pop_faction > 0)
+						hostilefaction_multiplier = min(round(player_pop_nonfaction / player_pop_faction),1)
+					var/amt_job = max(round((player_pop_nonfaction * hostilefaction_multiplier)/poplocked.poplock_divisor),0)
 
 					if(amt_job > 0)
 						if(poplocked.total_positions == 0)

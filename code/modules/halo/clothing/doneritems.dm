@@ -919,6 +919,66 @@ decl/hierarchy/outfit/Jul
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_grenadier
 	head = /obj/item/clothing/head/helmet/spartan/mkv_grenadier
 
+///////MAGNUM\\\\\\\\
+
+//Sangheili Ultra
+
+/obj/item/clothing/under/covenant/sangheili/magnum
+	name = "Sangheili Body-suit"
+	desc = "A sealed, airtight bodysuit. Meant to be worn underneath the ornate 'Strangam Clan Ultra harness."
+	icon_state = "sangheili-magnum_suit"
+	species_restricted = list ("Sangheili")
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
+
+/obj/item/clothing/head/helmet/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Sangheili Helmet"
+	desc = "Head armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_helmet_obj"
+	item_state = "Magnum_helmet"
+
+/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
+	name = "全trangam Clan - Ultra Combat Harness"
+	icon_state = "Magnum_chest_obj"
+	item_state = "Magnum_chest"
+
+/obj/item/clothing/shoes/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Leg Armour"
+	desc = "Leg armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_boots_obj"
+	item_state = "Magnum_boots"
+
+/obj/item/clothing/gloves/thick/sangheili/ultra/magnum
+	name = "全trangam Clan - Ultra Gauntlets"
+	desc = "Hand armour, to be used with the Sangheili Combat Harness."
+	icon_state = "Magnum_gloves_obj"
+	item_state = "Magnum_gloves"
+
+/obj/item/weapon/storage/box/large/donator/magnum_ultra
+	startswith = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
+					/obj/item/clothing/shoes/sangheili/ultra/magnum,
+					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
+					/obj/item/clothing/under/covenant/sangheili/magnum
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
+					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
+					/obj/item/clothing/shoes/sangheili/ultra/magnum,
+					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
+					/obj/item/clothing/under/covenant/sangheili/magnum
+					)
+
+/decl/hierarchy/outfit/magnum_sangheili
+	name = "RealMAGNUM - Sangheili Ultra"
+	uniform = /obj/item/clothing/under/covenant/sangheili/magnum
+	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
+	suit_store = /obj/item/weapon/gun/energy/plasmarifle
+	back = /obj/item/weapon/gun/energy/plasmarifle
+	belt = /obj/item/weapon/gun/energy/plasmapistol
+	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra/magnum
+	shoes = /obj/item/clothing/shoes/sangheili/ultra/magnum
+	head = /obj/item/clothing/head/helmet/sangheili/ultra/magnum
+	l_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = /obj/item/weapon/grenade/plasma
 
 ////////mann\\\\\\\\\
 
@@ -2056,7 +2116,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 ///////Vampire132978123\\\\\\\
 
-/Skirmisher
+//Skirmisher
 
 /obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire
 	name = "Pirate's Hat"
@@ -2074,17 +2134,52 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	item_state = "piratecoat"
 	sprite_sheets = list("Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	species_restricted = list("Tvaoan Kig-Yar")
-	armor = list(melee = 75, bullet = 65, laser = 20, energy = 20, bomb = 40, bio = 25, rad = 20)
-	armor_thickness_modifiers = list()
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
 
 /obj/item/toy/plushie/donator/vampire
 	name = "Rafaj"
-	desc = "A pirate's best friend, and most prized possession. It looks like it's been through many adventures."
+	desc = "A pirate's best friend, and most prized possession. It looks like it's been through many adventures. Squeeze to activate an internal speaker."
 	icon = 'code/modules/halo/icons/species/Skirmisher_inhand.dmi'
 	icon_state = "parrot_obj"
 	item_state = "parrot"
+	slot_flags = SLOT_POCKET | SLOT_BELT | SLOT_BACK | SLOT_EARS
+	var/next_sound = 0
+	var/play_music = 0
+	var/list/sound_music = list(\
+	'code/modules/halo/sounds/rafaj_donor/music_1.ogg' = 162 SECONDS,
+	'code/modules/halo/sounds/rafaj_donor/music_2.ogg' = 127 SECONDS
+	)
+	var/list/sound_voice = list(\
+	'code/modules/halo/sounds/rafaj_donor/voiceline_1.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_2.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_3.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_4.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_5.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_6.ogg',
+	'code/modules/halo/sounds/rafaj_donor/voiceline_7.ogg'
+	)
+
+/obj/item/toy/plushie/donator/vampire/verb/toggle_soundtype()
+	set name = "Toggle Speaker Type"
+	set category = "Object"
+
+	if(!istype(usr,/mob/living))
+		return
+	play_music = !play_music
+	to_chat(usr,"<span class = 'notice'>You toggle [src] to [play_music ? "play music" : "play voice lines"].</span>")
+
+/obj/item/toy/plushie/donator/vampire/attack_self(var/mob/user)
+	if(sound_voice.len > 0)
+		var/list/l_use = sound_voice
+		if(play_music)
+			if(sound_music.len == 0 || world.time < next_sound)
+				return
+			l_use = sound_music
+		var/sfx_play = pick(l_use)
+		if(play_music)
+			next_sound = world.time + l_use[sfx_play]
+		playsound(user, sfx_play , 100)
 
 /obj/item/weapon/storage/box/large/donator/vampire
 	startswith = list(/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire,
@@ -2205,67 +2300,6 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	head = /obj/item/clothing/head/helmet/sangheili/zane
 	l_pocket = /obj/item/weapon/grenade/plasma
 
-
-///////MAGNUM\\\\\\\\
-
-//Sangheili Ultra
-
-/obj/item/clothing/under/covenant/sangheili/magnum
-	name = "Sangheili Body-suit"
-	desc = "A sealed, airtight bodysuit. Meant to be worn underneath the ornate 'Strangam Clan Ultra harness."
-	icon_state = "sangheili-magnum_suit"
-	species_restricted = list ("Sangheili")
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
-
-/obj/item/clothing/head/helmet/sangheili/ultra/magnum
-	name = "全trangam Clan - Ultra Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_helmet_obj"
-	item_state = "Magnum_helmet"
-
-/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
-	name = "全trangam Clan - Ultra Combat Harness"
-	icon_state = "Magnum_chest_obj"
-	item_state = "Magnum_chest"
-
-/obj/item/clothing/shoes/sangheili/ultra/magnum
-	name = "全trangam Clan - Ultra Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_boots_obj"
-	item_state = "Magnum_boots"
-
-/obj/item/clothing/gloves/thick/sangheili/ultra/magnum
-	name = "全trangam Clan - Ultra Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_gloves_obj"
-	item_state = "Magnum_gloves"
-
-/obj/item/weapon/storage/box/large/donator/magnum_ultra
-	startswith = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
-					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
-					/obj/item/clothing/shoes/sangheili/ultra/magnum,
-					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
-					/obj/item/clothing/under/covenant/sangheili/magnum
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
-					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
-					/obj/item/clothing/shoes/sangheili/ultra/magnum,
-					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
-					/obj/item/clothing/under/covenant/sangheili/magnum
-					)
-
-/decl/hierarchy/outfit/magnum_sangheili
-	name = "RealMAGNUM - Sangheili Ultra"
-	uniform = /obj/item/clothing/under/covenant/sangheili/magnum
-	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra/magnum
-	shoes = /obj/item/clothing/shoes/sangheili/ultra/magnum
-	head = /obj/item/clothing/head/helmet/sangheili/ultra/magnum
-	l_pocket = /obj/item/weapon/grenade/plasma
-	r_pocket = /obj/item/weapon/grenade/plasma
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND

@@ -14,7 +14,21 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 #define ODST_FLOOD_GUN_LIST list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/m6c_magnum_s,\
 /obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg/silenced)
 
-#define FLOOD_BURNDAM_MULTIPLIER 2
+#define FLOOD_BURNDAM_MULTIPLIER 1.5
+
+#define SPECIES_INFEST_TYPE_LIST list(\
+/datum/species/sangheili = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination)
+
+#define ITEM_INFEST_TYPE_LIST list(\
+/obj/item/clothing/suit/armor/special/combatharness/minor = /mob/living/simple_animal/hostile/flood/combat_form/minor2,\
+/obj/item/clothing/suit/armor/special/combatharness/major = /mob/living/simple_animal/hostile/flood/combat_form/major,\
+/obj/item/clothing/suit/armor/special/combatharness/zealot = /mob/living/simple_animal/hostile/flood/combat_form/zealot,\
+/obj/item/clothing/suit/armor/special/combatharness/ultra = /mob/living/simple_animal/hostile/flood/combat_form/ultra,\
+/obj/item/clothing/suit/armor/special/combatharness/specops = /mob/living/simple_animal/hostile/flood/combat_form/specops,\
+/obj/item/clothing/suit/armor/special/combatharness/ranger = /mob/living/simple_animal/hostile/flood/combat_form/ranger,\
+/obj/item/clothing/under/unsc/odst_jumpsuit = /mob/living/simple_animal/hostile/flood/combat_form/ODST,\
+/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform = /mob/living/simple_animal/hostile/flood/combat_form/oni,\
+/obj/item/clothing/under/color/orange = /mob/living/simple_animal/hostile/flood/combat_form/prisoner)
 
 /mob/living/simple_animal/hostile/flood
 	attack_sfx = list(\
@@ -45,6 +59,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
 							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
 	assault_target_type = /obj/effect/landmark/assault_target
+	see_in_dark = 6
+
+	faction = "Flood"
 
 /mob/living/simple_animal/hostile/flood/death()
 	..()
@@ -54,7 +71,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		flood_spawner = null
 
 /mob/living/simple_animal/hostile/flood/New()
-	our_overmind = flood_overmind
+	our_overmind = GLOB.flood_overmind
 	. = ..()
 	GLOB.live_flood_simplemobs.Add(src)
 	/*if(prob(50))
@@ -63,11 +80,14 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
+	if(stat != DEAD)
+		health += 1
 	if(client || ckey)
 		target_mob = null
 
 /mob/living/simple_animal/hostile/flood/adjustFireLoss(damage)
-	damage *= FLOOD_BURNDAM_MULTIPLIER
+	if(!client) //Players don't suffer this.
+		damage *= FLOOD_BURNDAM_MULTIPLIER
 	. = ..()
 
 
@@ -78,27 +98,16 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	h.Stun(999)
 	h.visible_message("<span class = 'danger'>[h.name] vomits up blood, red-feelers emerging from their chest...</span>")
 	new /obj/effect/decal/cleanable/blood/splatter(h.loc)
-	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/crew
-	if(istype(h.species,/datum/species/sangheili))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner/abomination
-	var/obj/item/clothing/suit/armor/special/combatharness/minor/MI = locate() in h.contents
-	if(istype(MI))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/minor
-	var/obj/item/clothing/suit/armor/special/combatharness/major/MA = locate() in h.contents
-	if(istype(MA))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/major
-	var/obj/item/clothing/under/unsc/odst_jumpsuit/OD = locate() in h.contents
-	if(istype(OD))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/ODST
-	var/obj/item/clothing/under/unsc/marine_fatigues/MAR = locate() in h.contents
-	if(istype(MAR))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
-	var/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform/ONI = locate() in h.contents
-	if(istype(ONI))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/oni
-	var/obj/item/clothing/under/color/orange/PR = locate() in h.contents
-	if(istype(PR))
-		mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/prisoner
+	var/mob_type_spawn = /mob/living/simple_animal/hostile/flood/combat_form/human
+	var/list/species_check = SPECIES_INFEST_TYPE_LIST
+	for(var/species in species_check)
+		if(istype(h.species,species))
+			mob_type_spawn = species_check[species]
+	var/list/item_check = ITEM_INFEST_TYPE_LIST
+	for(var/item in item_check)
+		var/obj/item_find = locate(item) in h.contents
+		if(!isnull(item_find))
+			mob_type_spawn = item_check[item]
 
 	var/mob/living/simple_animal/hostile/flood/combat_form/new_combat_form = new mob_type_spawn
 	new_combat_form.maxHealth *= PLAYER_FLOOD_HEALTH_MOD //Buff their health a bit.
@@ -132,6 +141,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	var/spawning = 1
 	var/swarm_size = 1
 	var/swarm_size_max = 10
+	death_sounds = list('sound/flood/infector_die1.ogg','sound/flood/infector_die2.ogg','sound/flood/infector_die3.ogg')
 
 /obj/effect/dead_infestor
 	name = "Flood infestor"
@@ -389,11 +399,11 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/UnarmedAttack(var/atom/attacked)
 	. = ..(attacked)
-	if(!.)
+	if(!. && istype(attacked,/mob/living))
 		return 0
 	var/mob/living/carbon/human/h = attacked
 	if(istype(h))
-		h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,melee_damage_lower/3)
+		h.bloodstr.add_reagent(/datum/reagent/floodinfectiontoxin,melee_damage_lower/4)
 	pickup_gun(attacked)
 
 /mob/living/simple_animal/hostile/flood/combat_form/RangedAttack(var/atom/attacked)
@@ -459,7 +469,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "marine_infested"
 	icon_dead = "marine_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100
 	maxHealth = 100
 	resistance = 10
@@ -474,7 +484,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "odst_infested"
 	icon_dead = "odst_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
 	resistance = 15
@@ -494,7 +504,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "guard_infested"
 	icon_dead = "guard_dead"
 	inventory = list(/obj/item/ammo_magazine/m762_ap/MA37)
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
 	resistance = 15
@@ -509,7 +519,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_living = "oni_infested"
 	icon_dead = "oni_dead"
 	//
-	move_to_delay = 2
+	move_to_delay = 6
 	health = 100 //Combat forms need to be hardier.
 	maxHealth = 100
 	resistance = 15
@@ -519,29 +529,101 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/combat_form/minor
 	name = "Flood infested Minor"
-	icon = 'code/modules/halo/flood/flood_combat_minor.dmi'
-	icon_state = "elite_m"
-	icon_living = "elite_m"
-	icon_dead = "dead"
+	icon = 'code/modules/halo/flood/sangheili_flood_uf.dmi'
+	icon_state = "Minor 1"
+	icon_living = "Minor 1"
+	icon_dead = "Minor 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
-	resistance = 20
+	resistance = 15
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	attacktext = "slash"
+
+/mob/living/simple_animal/hostile/flood/combat_form/minor2
+	name = "Flood infested Minor"
+	icon = 'code/modules/halo/flood/sangheili_flood_uf.dmi'
+	icon_state = "Minor 2"
+	icon_living = "Minor 2"
+	icon_dead = "Minor 2 Dead"
+	//
+	move_to_delay = 4
+	health = 125 //Combat forms need to be hardier.
+	maxHealth = 125
+	resistance = 15
 	melee_damage_lower = 35
 	melee_damage_upper = 40
 	attacktext = "slash"
 
 /mob/living/simple_animal/hostile/flood/combat_form/major
 	name = "Flood infested Major"
-	icon = 'code/modules/halo/flood/flood_combat_major.dmi'
-	icon_state = "elite_m"
-	icon_living = "elite_m"
-	icon_dead = "dead"
+	icon = 'code/modules/halo/flood/sangheili_flood_uf.dmi'
+	icon_state = "Major 1"
+	icon_living = "Major 1"
+	icon_dead = "Major 1 Dead"
 	//
-	move_to_delay = 1
+	move_to_delay = 4
 	health = 125 //Combat forms need to be hardier.
 	maxHealth = 125
+	resistance = 15
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	attacktext = "slash"
+
+/mob/living/simple_animal/hostile/flood/combat_form/zealot
+	name = "Flood infested Zealot"
+	icon = 'code/modules/halo/flood/sangheili_flood_uf.dmi'
+	icon_state = "Zealot 1"
+	icon_living = "Zealot 1"
+	icon_dead = "Zealot 1 Dead"
+	move_to_delay = 4
+	health = 165 //Combat forms need to be hardier.
+	maxHealth = 165
+	resistance = 20
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	attacktext = "slash"
+
+/mob/living/simple_animal/hostile/flood/combat_form/ultra
+	name = "Flood infested Ultra"
+	icon = 'code/modules/halo/flood/sangheili_flood_uf.dmi'
+	icon_state = "Ultra 1"
+	icon_living = "Ultra 1"
+	icon_dead = "Ultra 1 Dead"
+	move_to_delay = 4
+	health = 150 //Combat forms need to be hardier.
+	maxHealth = 150
+	resistance = 20
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	attacktext = "slash"
+
+/mob/living/simple_animal/hostile/flood/combat_form/specops
+	name = "Flood infested Spec Ops"
+	icon = 'code/modules/halo/flood/sangheili_flood_uf.dmi'
+	icon_state = "SO 1"
+	icon_living = "SO 1"
+	icon_dead = "SO 1 Dead"
+	move_to_delay = 4
+	health = 150 //Combat forms need to be hardier.
+	maxHealth = 150
+	resistance = 10
+	melee_damage_lower = 35
+	melee_damage_upper = 40
+	attacktext = "slash"
+	alpha = 20
+
+/mob/living/simple_animal/hostile/flood/combat_form/ranger
+	name = "Flood infested Ranger"
+	icon = 'code/modules/halo/flood/sangheili_flood_uf.dmi'
+	icon_state = "Ranger 1"
+	icon_living = "Ranger 1"
+	icon_dead = "Ranger 1 Dead"
+	move_to_delay = 4
+	health = 135 //Combat forms need to be hardier.
+	maxHealth = 135
 	resistance = 20
 	melee_damage_lower = 35
 	melee_damage_upper = 40
@@ -553,14 +635,14 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "movement state"
 	icon_living = "movement state"
 	icon_dead = "death state"
-	move_to_delay = 1
-	health = 1000 //Combat forms need to be hardier.
-	maxHealth = 1000
+	move_to_delay = 15
+	health = 300 //Combat forms need to be hardier.
+	maxHealth = 300
 	melee_damage_lower = 40
 	melee_damage_upper = 55
 	attacktext = "Whips"
 	mob_size = MOB_LARGE
-	resistance = 20
+	resistance = 30 //MA5 Rounds literally can't damage this >:)
 	bound_width = 96
 	bound_height = 96
 
@@ -588,7 +670,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "prisoner_infected2"
 	icon_dead = "prisoner_infected2_dead"
 	icon_living = "prisoner_infected2"
-	move_to_delay = 4
+	move_to_delay = 8
 	health = 50 //intentionally squishy to give melee combat a chance
 	maxHealth = 50
 	melee_damage_lower = 15
@@ -601,7 +683,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "prisoner_infected1"
 	icon_living = "prisoner_infected1"
 	icon_dead = "prisoner_infected1_dead"
-	move_to_delay = 6 //slower than common counterpart to give sense of weight to it
+	move_to_delay = 10 //slower than common counterpart to give sense of weight to it
 	health = 85 //beefier than it's common counterpart to give a better sense of danger and urgency to encounters
 	maxHealth = 85
 	melee_damage_lower = 20 //as above so below
@@ -626,7 +708,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	icon_state = "abomination"
 	icon_living = "abomination"
 	icon_dead = "abomination_dead"
-	move_to_delay = 2 //fast enough to give a sense of danger and muscle
+	move_to_delay = 4 //fast enough to give a sense of danger and muscle
 	resistance = 5
 	health = 250
 	maxHealth = 250 //these will be specifically put in certain locations and not RNG based

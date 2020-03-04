@@ -202,5 +202,5 @@
 	desc = "A 12-gauge shotgun slug fitted with a single-use ion pulse generator."
 	icon_state = "empshell"
 	spent_icon = "empshell-spent"
-	projectile_type  = /obj/item/projectile/ion
+	projectile_type  = /obj/item/projectile/ion/small
 	matter = list(DEFAULT_WALL_MATERIAL = 260, "uranium" = 200)

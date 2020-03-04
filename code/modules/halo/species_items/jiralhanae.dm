@@ -10,7 +10,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	name = "Doisacci"
 	desc = "The language of the Jiralhanae"
 	native = 1
-	colour = "vox"
+	colour = "jiralhanae"
 	syllables = list("ung","ugh","uhh","hss","grss","grah","argh","hng","ung","uss","hoh","rog")
 	key = "D"
 	flags = RESTRICTED
@@ -88,6 +88,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	desc = "The standard issue helmets of Jiralhanae soldiers within the covenant."
 	armor = list(melee = 45,bullet = 10,laser = 30,energy = 5,bomb = 30,bio = 0,rad = 0)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
+	armor_thickness = 25
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	name = "Jiralhanae Helm (Minor)"
@@ -125,6 +126,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	armor = list(melee = 30, bullet = 20, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
+	armor_thickness = 20
 	allowed = list(\
 		/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/frag/spike,/obj/item/weapon/grenade/brute_shot,/obj/item/weapon/grenade/toxic_gas,\
 		/obj/item/weapon/gun/projectile/spiker,/obj/item/weapon/gun/projectile/mauler,\
@@ -183,6 +185,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	desc = "The armour of Jiralhanae soldiers within the covenant."
 	armor = list(melee = 90, bullet = 50, laser = 45, energy = 45, bomb = 50, bio = 25, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
+	armor_thickness = 25
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit"
@@ -197,6 +200,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	armor_thickness = 20
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/minor
 	name = "Jiralhanae Armor (Minor)"

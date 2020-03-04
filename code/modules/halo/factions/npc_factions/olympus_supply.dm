@@ -12,9 +12,9 @@
 
 /decl/hierarchy/supply_pack/olympus/lightarmour
 	name = "Olympus Light Armour pack"
-	contains = list(/obj/item/clothing/shoes/lighturfboot/white = 1,\
-		/obj/item/clothing/head/helmet/lighturf/white = 1,\
-		/obj/item/clothing/suit/storage/lighturfarmor/white = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/light/white = 1,\
+		/obj/item/clothing/head/helmet/innie/light/white = 1,\
+		/obj/item/clothing/suit/storage/innie/light/white = 1)
 	cost = 1250
 	containername = "\improper Olympus Light Armour crate"
 	containertype = /obj/structure/closet/secure_closet/medical3
@@ -22,18 +22,18 @@
 
 /decl/hierarchy/supply_pack/olympus/mediumarmour
 	name = "Olympus Medium Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/white = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/white = 1,\
-		/obj/item/clothing/suit/storage/mediumurfarmor/white = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/white = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/white = 1,\
+		/obj/item/clothing/suit/storage/innie/medium/white = 1)
 	cost = 1500
 	containername = "\improper Olympus Medium Armour crate"
 	containertype = /obj/structure/closet/secure_closet/medical3
 
 /decl/hierarchy/supply_pack/olympus/heavyarmour
 	name = "Olympus Heavy Armour pack"
-	contains = list(/obj/item/clothing/shoes/mediumurfboot/white = 1,\
-		/obj/item/clothing/head/helmet/heavyurf/white = 1,\
-		/obj/item/clothing/suit/storage/heavyurfarmor/white = 1)
+	contains = list(/obj/item/clothing/shoes/innie_boots/medium/white = 1,\
+		/obj/item/clothing/head/helmet/innie/heavy/white = 1,\
+		/obj/item/clothing/suit/storage/innie/heavy/white = 1)
 	cost = 1500
 	containername = "\improper Olympus Heavy Armour crate"
 	containertype = /obj/structure/closet/secure_closet/medical3
