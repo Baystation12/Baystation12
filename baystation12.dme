@@ -1450,6 +1450,7 @@
 #include "code\modules\halo\comms\__readme_defines.dm"
 #include "code\modules\halo\comms\channel_cipher.dm"
 #include "code\modules\halo\comms\channel_dongle.dm"
+#include "code\modules\halo\comms\channel_keys.dm"
 #include "code\modules\halo\comms\channel_presets.dm"
 #include "code\modules\halo\comms\commsitems.dm"
 #include "code\modules\halo\comms\headsets.dm"
