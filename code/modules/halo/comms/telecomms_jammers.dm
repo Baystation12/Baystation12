@@ -15,6 +15,22 @@
 	var/jam_chance = 50
 	var/jam_range = 1 //The jamming range, in tiles.
 	var/jam_ignore_malfunction_chance = 0 //Chance for the jammer to jam frequencies in the ignore_freqs list.
+	var/obj/effect/overmap/jamming_sector
+
+/obj/machinery/overmap_comms/jammer/toggle_active()
+	. = ..()
+
+	to_chat(usr,"<span class = 'warning'>The [src] is now [active ? "online":"deactivated"].</span>")
+
+	if(active)
+		jamming_sector = map_sectors["[src.z]"]
+		jamming_sector.telecomms_jammers.Add(src)
+		GLOB.telecoms_jammers.Add(src)
+	else
+		if(jamming_sector)
+			jamming_sector.telecomms_jammers.Remove(src)
+			jamming_sector = null
+		GLOB.telecoms_jammers.Remove(src)
 
 
 

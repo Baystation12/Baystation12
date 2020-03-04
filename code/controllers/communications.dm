@@ -317,6 +317,12 @@ var/global/datum/controller/radio/radio_controller
 				//go to the next sector
 				break
 
+		//backwards compatibility: the old code used relays, so check if those exist and are active
+		for(var/obj/machinery/telecomms/relay/relay in nearby_sector.telecomms_receivers)
+			if(relay.on)
+				transmit_global = 1
+				broadcasting_sectors |= nearby_sector
+
 	//see which devices are in range
 	var/list/listening_sectors = list()
 	var/list/radios = list()

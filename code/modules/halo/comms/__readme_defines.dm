@@ -83,12 +83,6 @@ GLOBAL_LIST_EMPTY(telecoms_jammers)
 	var/obj/item/device/radio/headset/unsc/spartan/my_headset
 	var/list/recent_messages = list()
 	var/radio_hotkey = ";"
-/*
-/obj/item/device/radio/headset/radio_test/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
-	*/
 
 /mob/living/simple_animal/npc/colonist/radio_test/New()
 	my_headset = new(src)

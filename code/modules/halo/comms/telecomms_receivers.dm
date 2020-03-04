@@ -13,6 +13,16 @@
 	//just return 1 for now, dont do any other checks
 	return 1
 
+/obj/machinery/overmap_comms/receiver/toggle_active()
+	. = ..()
+
+	var/turf/my_turf = get_turf(src)
+	var/obj/effect/overmap/my_sector = map_sectors["[my_turf.z]"]
+	if(active)
+		my_sector.telecomms_receivers.Add(src)
+	else
+		my_sector.telecomms_receivers.Remove(src)
+
 
 
 /* OBSOLETE */
