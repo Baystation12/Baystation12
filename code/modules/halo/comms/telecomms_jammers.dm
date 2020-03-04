@@ -20,6 +20,13 @@
 
 /* OBSOLETE */
 
+/obj/machinery/telecomms_jammers
+	var/jam_power = -1 // -1 = force gibberish, -2 = force garbled, any value 0+ = force gibberish, chance for garbled.
+	var/jam_chance = 50
+	var/jam_range = 1 //The jamming range, in tiles.
+	var/jam_ignore_malfunction_chance = 0 //Chance for the jammer to jam frequencies in the ignore_freqs list.
+	var/jamming_active = 0
+
 /obj/machinery/telecomms_jammers/unsc
 	icon_state = "jammer_unsc"
 	/*
