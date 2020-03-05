@@ -1,0 +1,12 @@
+{{if !data.registered }}
+	<h2>Unregistered Registry Controller</h2>
+	<h3>No claims have been made on this area.</h3>
+	<i>Warning: Filing a claim costs 1,000 space bucks!</i>
+	{{if data.can_register}}
+		{{:helper.link('Register Station', null, { 'register_station' : 1 })}}
+	{{else}}
+		<b>Cannot confirm registry. Local disturbance detected.</b>
+	{{/if}}
+{{else}}
+	<h2>{{:data.registration_type}} Registry Control: {{:data.registration_id}}</h2>
+{{/if}}

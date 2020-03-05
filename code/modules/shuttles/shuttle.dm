@@ -4,6 +4,7 @@
 	var/name = ""
 	var/warmup_time = 0
 	var/moving_status = SHUTTLE_IDLE
+	var/stationary = FALSE // Whether this 'shuttle' is fixed/unable to move.
 
 	var/list/shuttle_area //can be both single area type or a list of areas
 	var/obj/effect/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
