@@ -65,6 +65,15 @@
 		/obj/item/device/channel_dongle/marines,\
 		/obj/item/device/channel_dongle/odst)
 
+//unsc odst officer headset
+/obj/item/device/radio/headset/unsc/odsto
+	name = "ODST officer radio headset"
+	icon_state = "cent_headset"
+	dongles = list(/obj/item/device/channel_dongle/human_civ,\
+		/obj/item/device/channel_dongle/squadcom,\
+		/obj/item/device/channel_dongle/marines,\
+		/obj/item/device/channel_dongle/odst)
+
 //unsc spartan headset
 /obj/item/device/radio/headset/unsc/spartan
 	name = "Spartan II radio headset"
