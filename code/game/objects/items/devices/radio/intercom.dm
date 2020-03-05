@@ -136,9 +136,6 @@
 	if(frequency == locked_frequency)
 		..(locked_frequency)
 
-/obj/item/device/radio/intercom/locked/list_channels()
-	return ""
-
 /obj/item/device/radio/intercom/locked/ai_private
 	name = "\improper AI intercom"
 	frequency = AI_FREQ

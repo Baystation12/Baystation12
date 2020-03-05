@@ -734,6 +734,7 @@
 #include "code\game\objects\items\devices\radio\electropack.dm"
 #include "code\game\objects\items\devices\radio\encryptionkey.dm"
 #include "code\game\objects\items\devices\radio\headset.dm"
+#include "code\game\objects\items\devices\radio\headset_types.dm"
 #include "code\game\objects\items\devices\radio\intercom.dm"
 #include "code\game\objects\items\devices\radio\radio.dm"
 #include "code\game\objects\items\devices\radio\radio_announcer.dm"

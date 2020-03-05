@@ -44,7 +44,21 @@
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
+/obj/item/device/radio/proc/create_channel_dongle(var/new_channel, var/no_redundant = 1)
+
+	if(no_redundant && channels_dongles[new_channel])
+		return 1
+
+	var/obj/item/device/channel_dongle/dongle = new (src, new_channel)
+	. = insert_dongle(null, dongle)
+	if(!.)
+		qdel(dongle)
+
 /obj/item/device/radio/proc/insert_dongle(var/mob/user, var/obj/item/device/channel_dongle/dongle, update_ui = 1)
+
+	if(!dongle.cipher)
+		to_chat(user,"<span class='warning'>[dongle] is invalid, it cannot be installed in [src].</span>")
+		return
 
 	hotkeys_dongles[dongle.cipher.hotkey] = dongle
 	ciphers_dongles[dongle.cipher] = dongle
@@ -62,6 +76,7 @@
 
 	if(update_ui)
 		update_ui_channels()
+	return 1
 
 /obj/item/device/radio/proc/remove_dongles(var/destroy_all = 0)
 	. = 0
@@ -86,8 +101,6 @@
 	GLOB.listening_objects -= src
 	if(radio_controller)
 		radio_controller.remove_object(src, frequency)
-		/*for (var/ch_name in channels)
-			radio_controller.remove_object(src, radiochannels[ch_name])*/
 
 		remove_dongles(1)
 
@@ -159,37 +172,6 @@
 
 	//return list_internal_channels(user)
 
-/obj/item/device/radio/proc/list_channels(var/mob/user)
-	return list_internal_channels(user)
-
-/obj/item/device/radio/proc/list_secure_channels(var/mob/user)
-	var/dat[0]
-
-	for(var/ch_name in channels)
-		var/chan_stat = channels[ch_name]
-		var/listening = !!(chan_stat & FREQ_LISTENING) != 0
-
-		dat.Add(list(list("chan" = ch_name, "display_name" = ch_name, "secure_channel" = 1, "sec_channel_listen" = !listening, "chan_span" = "radio")))
-
-	return dat
-
-/obj/item/device/radio/proc/list_internal_channels(var/mob/user)
-	var/dat[0]
-	for(var/internal_chan in internal_channels)
-		if(has_channel_access(user, internal_chan))
-			dat.Add(list(list("chan" = internal_chan, "display_name" = get_frequency_name(text2num(internal_chan)), "chan_span" = "radio")))
-
-	return dat
-
-/obj/item/device/radio/proc/has_channel_access(var/mob/user, var/freq)
-	if(!user)
-		return 0
-
-	if(!(freq in internal_channels))
-		return 0
-
-	return user.has_internal_radio_channel_access(internal_channels[freq])
-
 /mob/proc/has_internal_radio_channel_access(var/list/req_one_accesses)
 	var/obj/item/weapon/card/id/I = GetIdCard()
 	return has_access(list(), req_one_accesses, I ? I.GetAccess() : list())
@@ -258,10 +240,10 @@
 				radio_controller.remove_object(src, dongle.cipher.frequency,  RADIO_CHAT)
 			update_ui_channels()
 		. = 1
-	else if(href_list["spec_freq"])
+	/*else if(href_list["spec_freq"])
 		var freq = href_list["spec_freq"]
 		if(has_channel_access(usr, freq))
-			set_frequency(text2num(freq))
+			set_frequency(text2num(freq))*/
 		. = 1
 	if(href_list["nowindow"]) // here for pAIs, maybe others will want it, idk
 		return 1
@@ -456,14 +438,24 @@
 	to_chat(user, radio_desc)
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
+	. = ..()
 	user.set_machine(src)
 	if(istype(W, /obj/item/device/channel_dongle))
 		insert_dongle(user, W)
 		return
 
+	if(istype(W, /obj/item/device/encryptionkey))
+		to_chat(user, "<span class='warning'>[src] cannot accept [W] as they are obsolete with newer model radios and headsets. This device accepts channel dongles instead.</span>")
+		return
+
 	if (!( istype(W, /obj/item/weapon/screwdriver) ))
 		return
+
+	//remove any channel dongles from the radio
+	if(remove_dongles())
+		to_chat(user, "<span class='info'>You pop out the channel dongles out of the headset!</span>")
+
+	//get the radio ready to modify the wires or attach it to an assembly
 	b_stat = !( b_stat )
 	if(!istype(src, /obj/item/device/radio/beacon))
 		if (b_stat)
@@ -471,17 +463,14 @@
 		else
 			user.show_message("<span class='notice'>\The [src] can no longer be modified or attached!</span>")
 		updateDialog()
-			//Foreach goto(83)
 		add_fingerprint(user)
-		return
-	else return
 
 /obj/item/device/radio/emp_act(severity)
 	broadcasting = 0
 	listening = 0
-	for (var/ch_name in channels)
-		channels[ch_name] = 0
-	..()
+	for(var/obj/item/device/channel_dongle/dongle in dongles_connections)
+		dongle.listening = 0
+	. = ..()
 
 /obj/item/device/radio/proc/config(op)
 	if(radio_controller)

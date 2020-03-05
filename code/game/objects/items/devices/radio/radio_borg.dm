@@ -17,9 +17,6 @@
 	myborg = null
 	return ..()
 
-/obj/item/device/radio/borg/list_channels(var/mob/user)
-	return list_secure_channels(user)
-
 /obj/item/device/radio/borg/talk_into()
 	. = ..()
 	if (isrobot(src.loc))
@@ -146,10 +143,8 @@
 	data["freq"] = format_frequency(frequency)
 	data["rawfreq"] = num2text(frequency)
 
-	var/list/chanlist = list_channels(user)
-	if(islist(chanlist) && chanlist.len)
-		data["chan_list"] = chanlist
-		data["chan_list_len"] = chanlist.len
+	data["chan_list"] = ui_channels
+	data["chan_list_len"] = ui_channels.len
 
 	if(syndie)
 		data["useSyndMode"] = 1

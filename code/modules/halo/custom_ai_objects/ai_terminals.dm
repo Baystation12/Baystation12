@@ -40,11 +40,8 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/structure/ai_terminal/proc/apply_radio_channels(var/mob/living/silicon/ai/ai)
-	var/obj/item/device/radio/headset/our_radio = ai.common_radio
-	var/obj/item/device/encryptionkey/key = our_radio.keyslot2
 	for(var/channel in radio_channels_access)
-		key.channels[channel] = 1
-	our_radio.recalculateChannels()
+		ai.common_radio.create_channel_dongle(channel)
 
 /obj/structure/ai_terminal/proc/clear_old_nodes(var/mob/living/silicon/ai/ai)
 	ai.nodes_accessed.Cut()
