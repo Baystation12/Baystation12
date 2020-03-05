@@ -1,5 +1,5 @@
-#define SAVECHUNK_SIZEX 16
-#define SAVECHUNK_SIZEY 16
+#define SAVECHUNK_SIZEX 4
+#define SAVECHUNK_SIZEY 4
 
 /datum/persistence
 	var/version = 1
@@ -18,7 +18,17 @@
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
 
-	var/list/var_blacklist = list("filters", "overlays", "underlays", "appearance", "parent_type", "vis_contents", "render_source", "render_target")
+	var/list/var_blacklist = list(
+		"filters", "overlays", "underlays", "appearance", "parent_type", 
+		"vis_contents", "render_source", "render_target", "lighting_overlay",
+		"type", "light", "gc_destroyed", "tile_overlay_cache", "damage_overlays",
+		"timers", "mouse_over_pointer", "mouse_drag_pointer", "mouse_drop_pointer",
+		"mouse_drop_zone"
+	)
+
+	var/list/type_blacklist = list(
+		/datum/lighting_corner
+	)
 
 /datum/persistence/serializer/proc/FetchIndexes()
 	establish_db_connection()
@@ -51,7 +61,7 @@
 /datum/persistence/serializer/proc/SerializeList(var/_list)
 	var/l_i = list_index
 	list_index += 1
-	LAZYADD(list_inserts, "([l_i],[LAZYLEN(_list)],[version])")
+	list_inserts.Add("([l_i],[LAZYLEN(_list)],[version])")
 
 	var/I = 1
 	for(var/key in _list)
@@ -64,11 +74,21 @@
 			EV = _list[key]
 		catch
 			EV = null // NBD... No value.
-
+			
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(KV) || isicon(KV) || isfile(EV) || isicon(EV))
 			continue
 
+		// Check type blacklists.
+		var/skip = FALSE
+		for(var/blacklist in type_blacklist)
+			if(istype(KV, blacklist) || istype(EV, blacklist))
+				skip = TRUE
+				break
+		if(skip)
+			continue
+		
+		// Serialize the list.
 		element_index += 1
 
 		if(isnum(key))
@@ -106,7 +126,7 @@
 			// Don't know what this is. Skip it.
 			element_index -= 1
 			continue
-		LAZYADD(element_inserts, "([e_i],[l_i],[I],\"[KV]\",'[KT]','[EV]','[ET]',[version])")
+		element_inserts.Add("([e_i],[l_i],[I],\"[KV]\",'[KT]','[EV]','[ET]',[version])")
 		I += 1
 	return l_i
 
@@ -131,7 +151,7 @@
 		y = T.y
 		z = T.z
 
-	LAZYADD(thing_inserts, "([t_i],'[thing.type]',[x],[y],[z],[version])")
+	thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
 	thing_map["\ref[thing]"] = t_i
 	for(var/V in thing.vars)
 		var/VV = thing.vars[V]
@@ -143,6 +163,15 @@
 
 		// Blacklist check.
 		if(V in var_blacklist)
+			continue
+
+		// Check type blacklists.
+		var/skip = FALSE
+		for(var/blacklist in type_blacklist)
+			if(istype(VV, blacklist))
+				skip = TRUE
+				break
+		if(skip)
 			continue
 
 		var/v_i = var_index
@@ -168,7 +197,7 @@
 			// We don't know what this is. Skip it.
 			var_index -= 1
 			continue
-		LAZYADD(var_inserts, "([v_i],[t_i],'[V]','[VT]','[VV]',[version])")
+		var_inserts.Add("([v_i],[t_i],'[V]','[VT]','[VV]',[version])")
 	return t_i
 
 /datum/persistence/serializer/proc/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z)
@@ -273,27 +302,33 @@
 	var/values
 	var/DBQuery/query
 
-	if(LAZYLEN(thing_inserts) > 0)
-		values = jointext(thing_inserts, ",")
-		query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]")
-		query.Execute()
-	if(LAZYLEN(var_inserts) > 0)
-		values = jointext(var_inserts, ",")
-		query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]")
-		query.Execute()
-	if(LAZYLEN(list_inserts) > 0)
-		values = jointext(list_inserts, ",")
-		query = dbcon.NewQuery("INSERT INTO `list`(`id`,`length`,`version`) VALUES[values]")
-		query.Execute()
-	if(LAZYLEN(element_inserts) > 0)
-		values = jointext(element_inserts, ",")
-		query = dbcon.NewQuery("INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES[values]")
-		query.Execute()
+	try
+		if(LAZYLEN(thing_inserts) > 0)
+			values = jointext(thing_inserts, ",")
+			query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]")
+			world.log << "INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]"
+			query.Execute()
+		if(LAZYLEN(var_inserts) > 0)
+			values = jointext(var_inserts, ",")
+			query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]")
+			world.log << "INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]"
+			query.Execute()
+		if(LAZYLEN(list_inserts) > 0)
+			values = jointext(list_inserts, ",")
+			query = dbcon.NewQuery("INSERT INTO `list`(`id`,`length`,`version`) VALUES[values]")
+			query.Execute()
+		if(LAZYLEN(element_inserts) > 0)
+			values = jointext(element_inserts, ",")
+			query = dbcon.NewQuery("INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES[values]")
+			query.Execute()
+	catch (var/exception/e)
+		world.log << "World Serializer Failed"
+		world.log << e
 
-	LAZYCLEARLIST(thing_inserts)
-	LAZYCLEARLIST(var_inserts)
-	LAZYCLEARLIST(list_inserts)
-	LAZYCLEARLIST(element_inserts)
+	thing_inserts.Cut(1)
+	var_inserts.Cut(1)
+	list_inserts.Cut(1)
+	element_inserts.Cut(1)
 
 /datum/persistence/world_handle
 	var/datum/persistence/serializer/serializer = new()
