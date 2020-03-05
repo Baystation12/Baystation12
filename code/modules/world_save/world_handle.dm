@@ -19,7 +19,7 @@
 	var/list/element_inserts = list()
 
 	var/list/var_blacklist = list(
-		"filters", "overlays", "underlays", "appearance", "parent_type", 
+		"filters", "overlays", "underlays", "appearance", "parent_type",
 		"vis_contents", "render_source", "render_target", "lighting_overlay",
 		"type", "light", "gc_destroyed", "tile_overlay_cache", "damage_overlays",
 		"timers", "mouse_over_pointer", "mouse_drag_pointer", "mouse_drop_pointer",
@@ -74,7 +74,7 @@
 			EV = _list[key]
 		catch
 			EV = null // NBD... No value.
-			
+
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(KV) || isicon(KV) || isfile(EV) || isicon(EV))
 			continue
@@ -87,7 +87,7 @@
 				break
 		if(skip)
 			continue
-		
+
 		// Serialize the list.
 		element_index += 1
 
@@ -179,7 +179,7 @@
 
 		if(islist(VV))
 			// Complex code for serializing lists...
-			if(LAZLEN(VV) == 0)
+			if(LAZYLEN(VV) == 0)
 				// Another optimization. Don't need to serialize lists
 				// that have 0 elements.
 				var_index -= 1

@@ -24,7 +24,10 @@ SUBSYSTEM_DEF(mapping)
 #else
 	// If version is 0, no saves exist.
 	if (persistence.version > 0)
+		report_progress("Loading world save version [persistence.version].")
 		persistence.LoadWorld()
+	else
+		report_progress("No world save found. Skipping load step.")
 #endif
 	return ..()
 

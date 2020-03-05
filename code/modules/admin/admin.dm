@@ -36,10 +36,8 @@ var/global/floorIsLava = 0
 	set name="Save Server"
 
 	if(!check_rights(R_ADMIN))
-		return
-		
-	var/datum/persistence/world_handle/handle = new()
-	handle.SaveWorld()
+		return		
+	SSautosave.Save()
 
 /datum/admins/proc/show_player_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
