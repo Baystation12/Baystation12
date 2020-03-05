@@ -67,7 +67,7 @@
 
 	flags = 0
 
-/decl/hierarchy/outfit/job/geminus_innie_orion_defector/equip_id(mob/living/carbon/human/H, rank, assignment)
+/decl/hierarchy/outfit/job/colonist/geminus_innie_orion_defector/equip_id(mob/living/carbon/human/H, rank, assignment)
 	. = ..()
 
 	var/obj/item/weapon/card/id/W = .

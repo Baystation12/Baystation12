@@ -1,10 +1,4 @@
 
-/decl/hierarchy/outfit/job/marine/leader
-	name = "Marine - Squad Leader"
-
-	head = /obj/item/clothing/head/helmet/marine/visor
-	r_pocket = /obj/item/squad_manager
-
 /decl/hierarchy/outfit/job/colonist
 	name = "Colonist"
 
