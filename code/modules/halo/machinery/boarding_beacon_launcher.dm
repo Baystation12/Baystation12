@@ -30,7 +30,7 @@
 /obj/item/projectile/overmap/boarding_beacon/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	var/turf/beacon_on = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
 	var/obj/item/drop_pod_beacon/beacon = new /obj/item/drop_pod_beacon/invis (beacon_on)
-	beacon.faction_tag = drop_beacon_faction
+	beacon.faction_tag = console_fired_by:drop_beacon_faction
 	beacon.activate()
 
 /obj/item/projectile/boarding_beacon
