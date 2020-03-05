@@ -22,7 +22,9 @@ SUBSYSTEM_DEF(mapping)
 #ifdef UNIT_TEST
 	report_progress("Unit testing, so not loading saved map")
 #else
-	// persistence.LoadWorld()
+	// If version is 0, no saves exist.
+	if (persistence.version > 0)
+		persistence.LoadWorld()
 #endif
 	return ..()
 
