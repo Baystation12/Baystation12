@@ -128,6 +128,11 @@ var/list/_client_preferences_by_type
 	key = "LANGUAGE_DISPLAY"
 	options = list(GLOB.PREF_SHORTHAND, GLOB.PREF_FULL, GLOB.PREF_OFF)
 
+/datum/client_preference/gender_display
+	description = "Display Genders Over Radio"
+	key = "LANGUAGE_GENDER"
+	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
+	
 /datum/client_preference/ghost_follow_link_length
 	description ="Ghost Follow Links"
 	key = "CHAT_GHOSTFOLLOWLINKLENGTH"

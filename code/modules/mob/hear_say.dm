@@ -223,6 +223,19 @@
 		formatted = language.format_message_radio(message, nverb)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
+	if(speaker && istype(speaker, /mob/living) && !hard_to_hear) //Machines have no gender and you cannot discern the gender if you can't hear well
+		var/gender = speaker.get_gender()
+		var/gendertext
+		switch(gender)
+			if ("male")
+				gendertext = "M"
+			if ("female")
+				gendertext = "F"
+			if ("plural")
+				gendertext = "P"
+			if ("neuter")
+				gendertext = "N"
+		speaker_name += " \[[gendertext]\]"
 	if(sdisabilities & DEAFENED || ear_deaf)
 		var/mob/living/carbon/human/H = src
 		if(istype(H) && H.has_headset_in_ears() && prob(20))
