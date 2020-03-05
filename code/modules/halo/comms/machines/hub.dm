@@ -130,7 +130,7 @@
 		else
 			frequencies_broadcast[freq_text] = 1
 		update_ui()
-		to_chat(user,"<span class='info>You set frequency [freq_text] to [old_status ? "stop " : ""]broadcasting.</span>")
+		to_chat(user,"<span class='info'>You set frequency [freq_text] to [old_status ? "stop " : ""]broadcasting.</span>")
 		. = 1
 
 	if(href_list["set_cipher"])
@@ -143,7 +143,7 @@
 			var/freq_text = href_list["set_cipher"]
 			frequencies_ciphers[freq_text] = cipher
 			update_ui()
-			to_chat(user,"<span class='info>You set the cipher [cipher.id] to apply to frequency [freq_text].</span>")
+			to_chat(user,"<span class='info'>You set the cipher [cipher.id] to apply to frequency [freq_text].</span>")
 			. = 1
 
 	if(.)
