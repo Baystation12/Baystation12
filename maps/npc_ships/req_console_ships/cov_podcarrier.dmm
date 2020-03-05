@@ -73,6 +73,7 @@
 "bD" = (/obj/structure/closet/secure_closet/freezer/fridge{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/closet/walllocker/emerglocker/covvie/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "cO" = (/obj/machinery/vending/dinnerware{icon = 'code/modules/halo/icons/machinery/covenant/covendor.dmi'; icon_deny = "covendor-deny"; icon_vend = null},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "do" = (/obj/machinery/photocopier/faxmachine{department = "CRS Unyielding Transgression"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ec" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "eO" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/sink/kitchen{pixel_y = 22},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "hI" = (/obj/machinery/light/covenant/north,/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "im" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
@@ -80,7 +81,6 @@
 "pw" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "zw" = (/obj/vehicles/drop_pod/escape_pod/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Ch" = (/obj/structure/table/marble,/obj/machinery/microwave{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"CZ" = (/obj/machinery/overmap_weapon_console/boarding_beacon_launcher{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Hz" = (/obj/machinery/vending/armory/covenant/kigyar/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "JX" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/structure/closet/crate/covenant{name = "Supraluminal Communications Equipment"},/obj/item/weapon/pen,/obj/item/weapon/pen,/obj/item/weapon/card/id{desc = "Superluminal Communications Array Authentication Disk"; icon = 'code/modules/halo/covenant/Cards.dmi'; icon_state = "sangzealot_id"; name = "Superluminal Auth Disk."; tag = "icon-pinkGold"},/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/obj/item/weapon/paper,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Lb" = (/obj/machinery/vending/armory/covenant/sangheili/food,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -107,7 +107,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababaaaaababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaababababababadaeadababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaabafafafabCZadadadadabafafafababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaabafafafabecadadadadabafafafababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaababagafafabadadadadadabahafafababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaababababadadadaiadadadbhadaiadadadajadadababababababababadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababakakoxakakadadadakakakakoxakakMyadajadababababababzwadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -121,7 +121,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababimababababababababakcOTVLbHzakakajakakbubvas
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababakakoxakakadadadakakakakoxakakhIadajadababababababadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaababababadadadbwadadadaGadbwadadadajadadababababababababzwadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaababafafafabadadadadadabafafafababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaabagafafabCZadadadadabahafafababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaabagafafabecadadadadabahafafababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaababababababadbxadababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababaaaaababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
