@@ -4,8 +4,8 @@
 /* OBSOLETE */
 
 /obj/item/device/mobilecomms/commsbackpack
-	name = "Communications Backpack"
-	desc = "A reinforced backpack filled with an array of wires and communication equipment."
+	name = "obsolete communications backpack"
+	desc = "A reinforced backpack filled with an array of wires and communication equipment. No longer works with newer radio equipment."
 	icon = 'code/modules/halo/clothing/marine_items.dmi'
 	icon_state = "commsback"
 	item_state = "commsback"
@@ -24,10 +24,10 @@
 		)
 
 /obj/item/device/mobilecomms/commsbackpack/unsc
-	desc = "A reinforced backpack filled with an array of wires and communication equipment. The insignia of the UNSC is stitched into the back."
+	desc = "A reinforced backpack filled with an array of wires and communication equipment. The insignia of the UNSC is stitched into the back. No longer works with newer radio equipment."
 
 /obj/item/device/mobilecomms/commsbackpack/innie
-	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with."
+	desc = "A reinforced backpack filled with an array of wires and communication equipment. This one appears to have been tampered with. No longer works with newer radio equipment."
 
 
 /obj/item/device/mobilecomms/commsbackpack/unsc/permanant
@@ -41,5 +41,5 @@
 
 /obj/item/device/mobilecomms/commsbackpack/covenant
 	name = "hyperwave communicator"
-	desc = "A machine that handles the transmission of covenant hyperwave channels"
+	desc = "A machine that handles the transmission of covenant hyperwave channels. No longer works with newer radio equipment."
 	active = 1

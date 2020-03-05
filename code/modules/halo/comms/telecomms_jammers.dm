@@ -6,7 +6,9 @@
 /obj/machinery/overmap_comms/jammer
 	name = "radio jammer"
 	icon = 'code/modules/halo/comms/machines/telecomms.dmi'
-	icon_state = "relay"
+	icon_state = "relay_off"
+	icon_state_active = "relay"
+	icon_state_inactive = "relay_off"
 	desc = "Used to jam incoming radio communications."
 	w_class = ITEM_SIZE_NORMAL
 	active = 0
@@ -19,8 +21,6 @@
 
 /obj/machinery/overmap_comms/jammer/toggle_active()
 	. = ..()
-
-	to_chat(usr,"<span class = 'warning'>The [src] is now [active ? "online":"deactivated"].</span>")
 
 	if(active)
 		jamming_sector = map_sectors["[src.z]"]
@@ -37,6 +37,10 @@
 /* OBSOLETE */
 
 /obj/machinery/telecomms_jammers
+	name = "malfunctioning radio jammer"
+	desc = "This radio jammer is no longer working. You'll have to order a new one."
+	icon = 'code/modules/halo/comms/machines/telecomms.dmi'
+	icon_state = "relay_off"
 	var/jam_power = -1 // -1 = force gibberish, -2 = force garbled, any value 0+ = force gibberish, chance for garbled.
 	var/jam_chance = 50
 	var/jam_range = 1 //The jamming range, in tiles.
