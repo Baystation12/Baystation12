@@ -42,3 +42,4 @@ GLOBAL_LIST_EMPTY(freqs_ciphers)
 /hook/startup/proc/setup_preset_channels()
 	for(var/cipher_type in typesof(/datum/channel_cipher) - /datum/channel_cipher)
 		new cipher_type()
+	return 1
