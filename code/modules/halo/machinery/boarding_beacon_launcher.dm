@@ -7,6 +7,7 @@
 	density = 1
 	fired_projectile = /obj/item/projectile/overmap/boarding_beacon
 	fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
+	fire_delay = 1 SECOND
 	var/drop_beacon_faction = "UNSC" //The faction to assign to the drop pod beacon we create on hitting a planet.
 
 /obj/machinery/overmap_weapon_console/boarding_beacon_launcher/innie
