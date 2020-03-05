@@ -74,8 +74,6 @@
 	if(!active)
 		return 1
 
-	world << "/obj/machinery/overmap_comms/hub/proc/allow_broadcast(var/datum/signal/signal)"
-
 	//grab the signal frequency
 	var/datum/radio_frequency/connection = signal.data["connection"]
 
@@ -83,9 +81,6 @@
 	//1 means broadcast everything
 	//2 means broadcast known ciphers only
 	. = frequencies_broadcast["[connection.frequency]"]
-
-	world << "	connection.frequency:[connection.frequency]"
-	world << "	frequencies_broadcast\[connection.frequency\]: [.]"
 
 	/*if(. == 2)
 		return my_network.has_known_cipher(signal)*/

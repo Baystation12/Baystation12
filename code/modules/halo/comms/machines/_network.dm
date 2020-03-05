@@ -79,8 +79,6 @@
 	//0 means this network will not broadcast this signal
 	//1 means this network will broadcast this signal
 
-	world << "/datum/overmap_comms_network/proc/do_broadcast(var/datum/signal/signal)"
-
 	//check if we have an active, working broadcaster
 	. = 0
 	var/obj/machinery/overmap_comms/broadcaster/broadcaster = find_broadcaster(signal)
@@ -116,7 +114,6 @@
 	if(hubs && hubs.len)
 		for(var/obj/machinery/overmap_comms/hub/hub in hubs)
 			if(!hub.allow_broadcast(signal))
-				world << "	check2"
 				return 0
 
 /datum/overmap_comms_network/proc/can_decrypt(var/datum/signal/signal)

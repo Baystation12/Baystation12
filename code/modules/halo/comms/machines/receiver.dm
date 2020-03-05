@@ -13,11 +13,7 @@
 	if(!active)
 		return 0
 
-	world << "/obj/machinery/overmap_comms/receiver/proc/get_range_extension(var/datum/signal/signal)"
-
 	. = my_network.do_broadcast(signal)
-
-	world << "	my_network.do_broadcast(signal): [.]"
 
 
 /obj/machinery/overmap_comms/receiver/toggle_active()
