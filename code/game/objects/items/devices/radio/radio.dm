@@ -394,7 +394,7 @@
 
 
   //#### Sending the signal to all subspace receivers ####//
-	connection.post_signal(signal = signal, filter = RADIO_CHAT)
+	connection.post_signal(src, signal, RADIO_CHAT)
 
 
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)

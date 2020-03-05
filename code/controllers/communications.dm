@@ -271,18 +271,13 @@ var/global/datum/controller/radio/radio_controller
 	//send the signal to everything by default
 	if(!filter)
 		filter = RADIO_DEFAULT
-	send_to_filter(signal, filter, range)
+	send_to_filter(signal, filter, source, range)
 
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
-/datum/radio_frequency/proc/send_to_filter(datum/signal/signal, var/filter, var/transmit_global = 0)
-	/*
-	if(!signal.data["message"])
-		return
-	*/
+/datum/radio_frequency/proc/send_to_filter(datum/signal/signal, var/filter, obj/source as obj|null, var/transmit_global = 0)
 
 	//grab some useful info
-	var/obj/item/device/radio/source_radio = signal.data["radio"]
-	var/turf/source_turf = get_turf(source_radio)
+	var/turf/source_turf = get_turf(source)
 	var/obj/effect/overmap/source_sector = map_sectors["[source_turf.z]"]
 	var/list/broadcasting_sectors = list()
 
@@ -298,10 +293,14 @@ var/global/datum/controller/radio/radio_controller
 
 			//if the signal is being jammed at the source, we wont bother sending any outgoing signals at all
 			signal.data["jammed"] = 1
-			var/obj/item/device/radio/radio = signal.data["radio"]
-			var/list/jammed_mobs = get_mobs_in_radio_ranges(list(radio))
-			for(var/mob/M in jammed_mobs)
-				to_chat(M, "\icon[radio] <span class='danger'>[radio] emits a loud screeching wail!</span>")
+
+			var/image/speech_bubble = image('icons/mob/talk.dmi',source,"radio2")
+			spawn(30) qdel(speech_bubble)
+
+			//var/list/jammed_mobs = get_mobs_in_radio_ranges(list(source))
+			for(var/mob/M in hear(7,get_turf(source)))
+				show_image(M, speech_bubble)
+				to_chat(M, "\icon[source] <span class='danger'>[source] emits a loud screeching wail!</span>")
 			return
 
 		//check for receivers
