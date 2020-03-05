@@ -306,12 +306,10 @@
 		if(LAZYLEN(thing_inserts) > 0)
 			values = jointext(thing_inserts, ",")
 			query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]")
-			world.log << "INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]"
 			query.Execute()
 		if(LAZYLEN(var_inserts) > 0)
 			values = jointext(var_inserts, ",")
 			query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]")
-			world.log << "INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]"
 			query.Execute()
 		if(LAZYLEN(list_inserts) > 0)
 			values = jointext(list_inserts, ",")
