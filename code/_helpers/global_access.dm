@@ -43,6 +43,8 @@
 			return global.SSao;
 		if("SSatoms")
 			return global.SSatoms;
+		if("SSautosave")
+			return global.SSautosave;
 		if("SScharacter_setup")
 			return global.SScharacter_setup;
 		if("SSchemistry")
@@ -958,6 +960,8 @@
 			global.SSao=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
+		if("SSautosave")
+			global.SSautosave=newval;
 		if("SScharacter_setup")
 			global.SScharacter_setup=newval;
 		if("SSchemistry")
