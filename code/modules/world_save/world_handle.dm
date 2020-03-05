@@ -18,6 +18,8 @@
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
 
+	var/list/var_blacklist = list("filters", "overlays", "underlays", "appearance", "parent_type", "vis_contents", "render_source", "render_target")
+
 /datum/persistence/serializer/proc/FetchIndexes()
 	establish_db_connection()
 	if(!dbcon.IsConnected())
@@ -25,7 +27,7 @@
 	var/DBQuery/query = dbcon.NewQuery("SELECT MAX(`id`) FROM `thing`;")
 	query.Execute()
 	while(query.NextRow())
-		thing_index = text2num(query.item[1] + 1)
+		thing_index = text2num(query.item[1]) + 1
 		break
 
 	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `thing_var`;")
@@ -137,6 +139,10 @@
 
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(VV) || isicon(VV))
+			continue
+
+		// Blacklist check.
+		if(V in var_blacklist)
 			continue
 
 		var/v_i = var_index
