@@ -85,6 +85,13 @@
 		/obj/item/device/channel_dongle/oni,\
 		/obj/item/device/channel_dongle/spartan)
 
+//a stripped down headset for special missions
+/obj/item/device/radio/headset/spartan_oprf
+	name = "Spartan II radio headset"
+	icon_state = "mine_headset"
+	dongles = list(/obj/item/device/channel_dongle/human_civ,\
+		/obj/item/device/channel_dongle/spartan)
+
 //unsc officer headset
 /obj/item/device/radio/headset/unsc/officer
 	name = "UNSC officer radio headset"
