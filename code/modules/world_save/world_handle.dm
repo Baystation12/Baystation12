@@ -179,6 +179,11 @@
 
 		if(islist(VV))
 			// Complex code for serializing lists...
+			if(LAZLEN(VV) == 0)
+				// Another optimization. Don't need to serialize lists
+				// that have 0 elements.
+				var_index -= 1
+				continue
 			VT = "LIST"
 			VV = SerializeList(VV)
 		else if (isnum(VV))
@@ -186,7 +191,11 @@
 		else if (istext(VV))
 			VT = "TEXT"
 		else if (isnull(VV))
-			VT = "NULL"
+			// Optimization. Don't need to serialize the lack of a thing.
+			// usually...
+			var_index -= 1
+			continue
+			// VT = "NULL"
 		else if (ispath(VV))
 			VT = "PATH"
 		else if (istype(VV, /datum))
