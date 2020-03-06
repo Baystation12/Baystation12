@@ -164,6 +164,8 @@
 	return (round_end_reasons.len >= end_conditions_required)
 
 /datum/game_mode/outer_colonies/declare_completion()
+	if(round_end_reasons.len == 0)
+		round_end_reasons += "the round ended early"
 
 	var/announce_text = ""
 
