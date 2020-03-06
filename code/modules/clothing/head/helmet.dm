@@ -208,11 +208,6 @@
 	desc = "An in-atmosphere helmet worn by many corporate and private asset protection forces. Has red and white highlights."
 	icon_state = "erthelmet_med"
 
-/obj/item/clothing/head/helmet/tactical/mirania
-	name = "bundeforz tactical helmet"
-	desc = "A light grey helmet made from advanced ceramic. Comfortable and robust."
-	icon_state = "m_helmet"
-
 /obj/item/clothing/head/helmet/nt/pilot
 	name = "corporate pilot's helmet"
 	desc = "A corporate pilot's helmet for operating the cockpit in style for a hefty paycheck."
