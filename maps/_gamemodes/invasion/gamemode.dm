@@ -6,6 +6,7 @@
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	probability = 1
 	ship_lockdown_duration = 10 MINUTES
+	required_players = 6
 	var/safe_expire_warning = 0
 	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection,/datum/faction/human_civ)
 	var/list/overmap_hide = list()
