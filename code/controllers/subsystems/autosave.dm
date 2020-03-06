@@ -19,6 +19,7 @@ SUBSYSTEM_DEF(autosave)
 	if(saving)
 		message_admins(SPAN_DANGER("Attempted to save while already saving!"))
 	else
+		to_world("<font size=4 color='green'>Beginning save! Server will unpause when save is complete.</font>")
 		saving = 1
 		for(var/datum/controller/subsystem/S in Master.subsystems)
 			S.disable()
@@ -26,6 +27,7 @@ SUBSYSTEM_DEF(autosave)
 		for(var/datum/controller/subsystem/S in Master.subsystems)
 			S.enable()
 		saving = 0
+		to_world("<font size=4 color='green'>World save complete!</font>")
 
 
 /datum/controller/subsystem/autosave/proc/AnnounceSave()

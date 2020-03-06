@@ -30,6 +30,10 @@
 		/datum/lighting_corner
 	)
 
+/datum/persistence/serializer/proc/isproc(var/test)
+	var/ref = copytext("\ref[test]",4,6)
+	return ref == "26"
+
 /datum/persistence/serializer/proc/FetchIndexes()
 	establish_db_connection()
 	if(!dbcon.IsConnected())
@@ -95,14 +99,14 @@
 			KT = "NUM"
 		else if (istext(key))
 			KT = "TEXT"
-		else if (ispath(key))
-			KT = "PATH"
 		else if (islist(key))
 			KT = "LIST"
 			KV = SerializeList(KV)
 		else if(istype(KV, /datum))
 			KT = "OBJ"
 			KV = SerializeThing(KV)
+		else if (ispath(key) || isproc(key))
+			KT = "PATH"
 		else
 			// Don't know what this is. Skip it.
 			element_index -= 1
@@ -114,14 +118,14 @@
 			ET = "TEXT"
 		else if (isnull(EV))
 			ET = "NULL"
-		else if (ispath(EV))
-			ET = "PATH"
 		else if (islist(EV))
 			ET = "LIST"
 			EV = SerializeList(EV)
 		else if (istype(EV, /datum))
 			ET = "OBJ"
 			EV = SerializeThing(EV)
+		else if (ispath(EV) || isproc(EV))
+			ET = "PATH"
 		else
 			// Don't know what this is. Skip it.
 			element_index -= 1
@@ -196,12 +200,12 @@
 			var_index -= 1
 			continue
 			// VT = "NULL"
-		else if (ispath(VV))
-			VT = "PATH"
 		else if (istype(VV, /datum))
-			// Only alternative is this an object. Serialize it complex-like, baby.
+			// Serialize it complex-like, baby.
 			VT = "OBJ"
 			VV = SerializeThing(VV)
+		else if (ispath(VV) || isproc(VV)) // After /datum check to avoid high-number obj refs
+			VT = "PATH"
 		else
 			// We don't know what this is. Skip it.
 			var_index -= 1
@@ -390,7 +394,7 @@
 	if(!dbcon.IsConnected())
 		return
 
-	var/DBQuery/query = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version]")
+	var/DBQuery/query = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version - 1]")
 	query.Execute()
 	while(query.NextRow())
 		// Blind deserialize *everything*.
