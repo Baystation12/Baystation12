@@ -11602,9 +11602,9 @@
 /area/maintenance/seconddeck/aftport)
 "CI" = (
 /obj/structure/showcase{
-	desc = "A bewilderingly complex prototype designed to split the fabric of spacetime and allow access to Bluespace.";
-	icon = 'icons/obj/power.dmi';
-	icon_state = "tracker";
+	desc = "A bewilderingly complex prototype designed by the Skrell to split the fabric of spacetime and allow access to Bluespace.";
+	icon = 'icons/obj/bsd.dmi';
+	icon_state = "skrell_bsd";
 	name = "Bluespace Drive"
 	},
 /obj/machinery/shield{
