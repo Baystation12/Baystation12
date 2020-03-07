@@ -13,9 +13,9 @@
 	user.visible_message("[user] starts inflating \the [src].", "You start inflating \the [src].")
 	if(!do_after(user, 1 SECOND, src))
 		return
-	playsound(loc, 'sound/items/zip.ogg', 75, 1)
+	playsound(get_turf(src), 'sound/items/zip.ogg', 75, 1)
 	user.visible_message(SPAN_NOTICE("[user] inflates \the [src]."), SPAN_NOTICE("You inflate \the [src]."))
-	var/obj/structure/inflatable/R = new deploy_path(user.loc)
+	var/obj/structure/inflatable/R = new deploy_path(get_turf(src))
 	transfer_fingerprints_to(R)
 	R.add_fingerprint(user)
 	if(inflatable_health)
