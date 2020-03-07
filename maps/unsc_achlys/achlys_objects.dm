@@ -263,7 +263,7 @@
 	name = "wrecked airlock"
 	desc = "An airlock. Something strong pried it open. It could be cut apart with a welding tool."
 	icon = 'icons/obj/doors/door_assembly.dmi'
-	icon_state = "door_as_0"
+	icon_state = "door_as_mai0"
 	density = 1
 	opacity = 0
 	throwpass = 1
