@@ -20,7 +20,7 @@
 		return
 
 	var/new_message = input(usr, "Please enter new message (leave blank to reset).") as text|null
-	if(isnull(message))
+	if(isnull(new_message))
 		return
 	if(!new_message || new_message == "")
 		use_message = "Halt! Security!"
