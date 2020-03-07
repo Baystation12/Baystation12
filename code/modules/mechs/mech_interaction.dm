@@ -216,7 +216,9 @@
 	if(!check_enter(user))
 		return
 	to_chat(user, SPAN_NOTICE("You start climbing into \the [src]..."))
-	if(!do_after(user, 25))
+	if(!body || !do_after(user, body.climb_time))
+		return
+	if(!body)
 		return
 	if(!check_enter(user))
 		return
