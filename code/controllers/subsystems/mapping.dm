@@ -10,6 +10,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/away_sites_templates = list()
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
+	var/list/saved_levels = list()
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	// Load templates and build away sites.
@@ -18,6 +19,9 @@ SUBSYSTEM_DEF(mapping)
 		submap_archetypes[atype] = new atype
 	GLOB.using_map.build_away_sites()
 
+
+	// Build the list of static persisted levels from our map.
+	saved_levels = GLOB.using_map.saved_levels
 	persistence.FetchVersion()
 #ifdef UNIT_TEST
 	report_progress("Unit testing, so not loading saved map")

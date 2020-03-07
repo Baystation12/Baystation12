@@ -368,10 +368,9 @@
 	// Increment the version
 	SetVersion(version + 1)
 
-
 	// Collect the z-levels we're saving and get the turfs!
-	z_levels = GLOB.using_map.saved_levels
-	for(var/z in z_levels)
+	world.log << "Saving [LAZYLEN(SSmapping.saved_levels)] z-levels."
+	for(var/z in SSmapping.saved_levels)
 		for(var/x in 1 to world.maxx step SAVECHUNK_SIZEX)
 			for(var/y in 1 to world.maxy step SAVECHUNK_SIZEY)
 				SaveChunk(x,y,z)
