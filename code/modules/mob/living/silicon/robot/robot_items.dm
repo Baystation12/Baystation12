@@ -308,7 +308,7 @@
 	if ( !user || !paper )
 		return
 	var/n_name = sanitizeSafe(input(user, "What would you like to label the paper?", "Paper Labelling", null)  as text|null, 32)
-	if ( !user || !paper )
+	if ( !user || !paper || isnull(paper))
 		return
 
 	//n_name = copytext(n_name, 1, 32)

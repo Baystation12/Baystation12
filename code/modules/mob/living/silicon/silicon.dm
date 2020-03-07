@@ -248,7 +248,10 @@
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
 
-	pose =  sanitize(input(usr, "This is [src]. It...", "Pose", null)  as text|null)
+	var/posetext = sanitize(input(usr, "This is [src]. It...", "Pose", null)  as text|null)
+	if(isnull(posetext))
+		return
+	pose =  posetext
 
 /mob/living/silicon/verb/set_flavor()
 	set name = "Set Flavour Text"
