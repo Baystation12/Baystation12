@@ -59,6 +59,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	title = "Marine"
 	total_positions = 18
 	spawn_positions = 18
+	account_allowed = 1
 	selection_color = "#0A0A95"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/marine
 	whitelisted_species = list(/datum/species/human)
@@ -72,6 +73,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	total_positions = 6
 	spawn_positions = 6
 	selection_color = "#0A0A95"
+	account_allowed = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/operative
 	whitelisted_species = list(/datum/species/human)
 	access = list(142)
@@ -84,6 +86,7 @@ GLOBAL_LIST_EMPTY(dante_enlisted_spawns)
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#0A0A95"
+	account_allowed = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/SL
 	whitelisted_species = list(/datum/species/human)
 	access = list(142,143)
@@ -113,6 +116,7 @@ GLOBAL_LIST_EMPTY(dante_pilot_spawns)
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#0A0A95"
+	account_allowed = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/pilot
 	whitelisted_species = list(/datum/species/human)
 	access = list(144)
@@ -142,6 +146,7 @@ GLOBAL_LIST_EMPTY(dante_officer_spawns)
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#0A0A95"
+	account_allowed = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/CO
 	whitelisted_species = list(/datum/species/human)
 	access = list(142,143,144,145)
