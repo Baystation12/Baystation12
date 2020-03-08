@@ -1,6 +1,0 @@
-author: "Flying_loulou"
-delete-after: True
-changes: 
-  - rscadd: "Adds two knives to the loadout : the utility knife, and the lightweight utility knife."
-  - rscadd: "Adds two leg-strapped knife sheathes : one made of synth-leather, and one made of polymer. Both act as holsters, and are accessories going on your uniform. They are available in the tactical equipment tab of the loadout editor."
-  - tweak: "All the knives available in the loadout are now in the \"knives selection\" list, in the general tab of your loadout editor."

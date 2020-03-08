@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Exosuits now have different delays on enter based on chassis."
