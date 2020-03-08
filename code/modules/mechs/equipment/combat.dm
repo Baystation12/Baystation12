@@ -206,3 +206,21 @@
 		playsound(user,'sound/effects/basscannon.ogg',10,1)
 		return AURA_FALSE|AURA_CANCEL
 	//Too fast!
+
+/obj/item/weapon/material/hatchet/machete/mech
+	name = "mechete"
+	desc = "That thing was too big to be called a sword. Too big, too thick, too heavy, and too rough, it was more like a large hunk of iron."
+	w_class = ITEM_SIZE_GARGANTUAN
+	slot_flags = 0
+	default_material = MATERIAL_STEEL
+	base_parry_chance = 20
+	max_force = 50
+	force_divisor = 0.80 //20 with hardness 80 (titanium) or 15 with hardness 60 (steel)
+
+/obj/item/mech_equipment/mounted_system/mechete
+	name = "Mechete"
+	desc = "That thing was too big to be called a machete. Too big, too thick, too heavy, and too rough, it was more like a large hunk of iron."
+	icon_state = "mech_blade"
+	holding_type = /obj/item/weapon/material/hatchet/machete/mech
+	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
+	restricted_software = list(MECH_SOFTWARE_UTILITY)
