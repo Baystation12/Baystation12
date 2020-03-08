@@ -26,6 +26,12 @@
 	display_name = "machete sheath"
 	path = /obj/item/clothing/accessory/storage/holster/machete
 
+/datum/gear/tactical/knife_sheath
+	display_name = "knife sheath selection"
+	description = "A leg strapped knife sheath."
+	path = /obj/item/clothing/accessory/storage/holster/knife
+	flags = GEAR_HAS_TYPE_SELECTION
+
 /datum/gear/tactical/tacticool
 	display_name = "tacticool turtleneck"
 	path = /obj/item/clothing/under/syndicate/tacticool
