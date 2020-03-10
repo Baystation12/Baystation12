@@ -1,0 +1,4 @@
+author: "Deadmon"
+delete-after: True
+changes: 
+  - tweak: "Removes the mention of virology from the lab tech description."
