@@ -1,12 +1,22 @@
 /obj/machinery/overmap_weapon_console/boarding_beacon_launcher
 	name = "Boarding Beacon Launcher"
-	desc = "Launches disposable boarding-beacons at a selected target. Sensitive location data on each beacon requires that they self-destruct after 30 seconds."
+	desc = "Launches disposable boarding-beacons at a selected target. Firing at a planet will instead create drop-pod beacons. Sensitive location data on each beacon requires that they self-destruct after 30 seconds."
 	icon = 'code/modules/halo/machinery/boarding_beacon_console.dmi'
 	icon_state = "base"
 	anchored = 1
 	density = 1
 	fired_projectile = /obj/item/projectile/overmap/boarding_beacon
 	fire_sound = 'code/modules/halo/sounds/deck_gun_fire.ogg'
+	fire_delay = 1 SECOND
+	var/drop_beacon_faction = "UNSC" //The faction to assign to the drop pod beacon we create on hitting a planet.
+
+/obj/machinery/overmap_weapon_console/boarding_beacon_launcher/innie
+	drop_beacon_faction = "Insurrection"
+
+/obj/machinery/overmap_weapon_console/boarding_beacon_launcher/covenant
+	drop_beacon_faction = "Covenant"
+	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon_state = "covie_console"
 
 /obj/item/projectile/overmap/boarding_beacon
 	icon = 'code/modules/halo/machinery/boarding_beacon_proj.dmi'
@@ -17,6 +27,12 @@
 	if(istype(ship) && !istype(ship,/obj/effect/overmap/ship/npc_ship/automated_defenses) && ship.unload_at == 0)
 		ship.load_mapfile()
 	. = ..()
+
+/obj/item/projectile/overmap/boarding_beacon/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
+	var/turf/beacon_on = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
+	var/obj/item/drop_pod_beacon/beacon = new /obj/item/drop_pod_beacon/invis (beacon_on)
+	beacon.faction_tag = console_fired_by:drop_beacon_faction
+	beacon.activate()
 
 /obj/item/projectile/boarding_beacon
 	name = "boarding beacon"

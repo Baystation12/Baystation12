@@ -24,14 +24,20 @@
 		return
 
 /obj/item/drop_pod_beacon/attack_self(var/mob/user)
+	activate(user)
+
+/obj/item/drop_pod_beacon/proc/activate(var/mob/user = null)
 	if(is_active == 1)
-		to_chat(user,"<span class = 'notice'>[name] is already active!</span>")
+		if(user)
+			to_chat(user,"<span class = 'notice'>[name] is already active!</span>")
 		return
 	if(is_active == -1)
-		to_chat(user,"<span class = 'notice'>[name] has ran out of charge!</span>")
+		if(user)
+			to_chat(user,"<span class = 'notice'>[name] has ran out of charge!</span>")
 		return
 
-	user.visible_message("<span class = 'notice'>[user] primes [src], activating the tracking module!</span>")
+	if(user)
+		user.visible_message("<span class = 'notice'>[user] primes [src], activating the tracking module!</span>")
 	GLOB.processing_objects += src
 	icon_state = "[initial(icon_state)]_on"
 	is_active = 1
@@ -45,3 +51,8 @@
 	if(is_active == -1)
 		message = "burnt out!"
 	to_chat(examiner,"It is [message]")
+
+/obj/item/drop_pod_beacon/invis
+	time_to_expire = 1 MINUTE
+	invisibility = 101
+	alpha = 0

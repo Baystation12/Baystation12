@@ -4,9 +4,9 @@
 	config_tag = "outer_colonies"
 	round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
 	extended_round_description = "In an outer colony on the edge of human space, an insurrection is brewing. Meanwhile an alien threat lurks in the void."
-	required_players = 15
 	probability = 1
 	ship_lockdown_duration = 10 MINUTES
+	required_players = 6
 	var/safe_expire_warning = 0
 	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection,/datum/faction/human_civ)
 	var/list/overmap_hide = list()
@@ -164,6 +164,8 @@
 	return (round_end_reasons.len >= end_conditions_required)
 
 /datum/game_mode/outer_colonies/declare_completion()
+	if(round_end_reasons.len == 0)
+		round_end_reasons += "the round ended early"
 
 	var/announce_text = ""
 

@@ -12,6 +12,8 @@
 	var/currently_tracked_proj = null
 	var/list/loaded_ammo = list()
 	var/list/linked_devices = list() //Handled on a weapon-by-weapon basis
+	var/fire_delay = 0 //This is used if anything else isn't handling this.
+	var/next_fire_at
 	ai_access_level = 4
 
 /obj/machinery/overmap_weapon_console/attack_ai(var/mob/living/silicon/ai/ai)
@@ -94,6 +96,7 @@
 	return 0
 
 /obj/machinery/overmap_weapon_console/proc/fire_projectile(var/atom/target,var/mob/user,var/directly_above = 0)
+	next_fire_at = world.time + fire_delay
 	var/obj/om_obj = map_sectors["[z]"]
 	var/obj/item/projectile/overmap/new_projectile = new fired_projectile (om_obj.loc,src)
 	new_projectile.damage += get_linked_device_damage_mod()
@@ -133,6 +136,9 @@
 		return 0
 	if(direction_locked && (get_dir(overmap_sector,target) != overmap_sector.dir)) //Direction lock check.
 		to_chat(user,"<span class = 'warning'>Weapon is locked to direction of ship. Realign ship to fire.</span>")
+		return 0
+	if(world.time < next_fire_at)
+		to_chat(user,"<span class = 'warning'>You can't fire this again yet.</span>")
 		return 0
 	if(!consume_loaded_ammo(user))
 		return 0
