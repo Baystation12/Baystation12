@@ -241,8 +241,10 @@
 	desc = "A vendor that supplies medical equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/bodybag/cryobag/covenant = 3,/obj/item/weapon/storage/firstaid/unsc/cov = 5, /obj/item/weapon/storage/firstaid/regular/covenant = 5, /obj/item/weapon/storage/firstaid/fire/covenant = 2
-		,/obj/item/weapon/storage/firstaid/o2/covenant = 2,/obj/item/weapon/storage/firstaid/toxin/covenant = 2,/obj/item/weapon/storage/firstaid/erk/cov = 2,/obj/item/weapon/storage/firstaid/combat/unsc/cov = 2,/obj/item/weapon/storage/firstaid/adv = 2)
+	products = list(/obj/item/bodybag/cryobag/covenant = 3,/obj/item/weapon/storage/firstaid/unsc/cov = 10, /obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10, /obj/item/weapon/storage/firstaid/fire/covenant = 2
+		,/obj/item/weapon/storage/firstaid/o2/covenant = 4,/obj/item/weapon/storage/firstaid/toxin/covenant = 4,/obj/item/weapon/storage/firstaid/erk/cov = 4,/obj/item/weapon/storage/firstaid/combat/unsc/cov = 7,/obj/item/weapon/storage/firstaid/adv = 7
+		,/obj/item/weapon/storage/pill_bottle/bicaridine = 6, /obj/item/weapon/storage/pill_bottle/dermaline = 6, /obj/item/weapon/storage/pill_bottle/tramadol = 6, /obj/item/weapon/storage/pill_bottle/hyronalin = 6
+		,/obj/item/weapon/storage/pill_bottle/iron = 6, /obj/item/weapon/storage/pill_bottle/dexalin_plus = 6, /obj/item/weapon/storage/pill_bottle/inaprovaline = 6)
 
 /obj/machinery/vending/armory/covenant/general/medical/surgery
 	name = "Covenant - Surgery Vendor"
