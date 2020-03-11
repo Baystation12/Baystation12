@@ -38,7 +38,7 @@
         filter - described above.
         range - radius of regular byond's square circle on that z-level. null means everywhere, on all z-levels.
 
-  obj/proc/receive_signal(datum/signal/signal, var/receive_method as num, var/receive_param)
+  obj/proc/receive_signal(datum/signal/signal, var/receive_method as num, var/receive_param, receive_interference)
     Handler from received signals. By default does nothing. Define your own for your object.
     Avoid of sending signals directly from this proc, use spawn(-1). DO NOT use sleep() here or call procs that sleep please. If you must, use spawn()
       parameters:
@@ -46,6 +46,7 @@
         receive_method - may be TRANSMISSION_WIRE or TRANSMISSION_RADIO.
           TRANSMISSION_WIRE is currently unused.
         receive_param - for TRANSMISSION_RADIO here comes frequency.
+        receive_interference - a % value on how much interference the signal has when recieved
 
   datum/signal
     vars:
@@ -58,6 +59,8 @@
       Some number symbolizing "encryption key".
       Note that game actually do not use any cryptography here.
       If receiving object don't know right key, it must ignore encrypted signal in its receive_signal.
+
+See code/modules/overmap/comms.dm for documentation on the HS13 overmap integration. Most of the changes are in send_to_filter()
 
 */
 
@@ -206,6 +209,10 @@ var/const/RADIO_SECBOT = "radio_secbot"
 var/const/RADIO_MULEBOT = "radio_mulebot"
 var/const/RADIO_MAGNETS = "radio_magnet"
 
+//in overmap tiles
+#define OVERMAP_RADIO_CLOSE 7
+#define OVERMAP_RADIO_FAR 20
+
 var/global/datum/controller/radio/radio_controller
 
 /hook/startup/proc/createRadioController()
@@ -213,7 +220,7 @@ var/global/datum/controller/radio/radio_controller
 	return 1
 
 //callback used by objects to react to incoming radio signals
-/obj/proc/receive_signal(datum/signal/signal, receive_method, receive_param)
+/obj/proc/receive_signal(datum/signal/signal, receive_method, receive_param, receive_interference = 0)
 	return null
 
 //The global radio controller
@@ -260,80 +267,154 @@ var/global/datum/controller/radio/radio_controller
 	var/frequency as num
 	var/list/list/obj/devices = list()
 
-/datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, var/filter = null as text|null, var/range = 0 as num|null)
-	var/turf/start_point
-	start_point = get_turf(source)
-	if(!start_point)
-		qdel(signal)
-		return 0
-	if (filter)
-		send_to_filter(source, signal, filter, start_point, range)
-		//send_to_filter(source, signal, RADIO_DEFAULT, start_point, range) //Not too sure why this also sent a signal to the base radio channel, so leaving this commented just in case.
-	else
-		//Broadcast the signal to everyone!
-		for (var/next_filter in devices)
-			send_to_filter(source, signal, next_filter, start_point, range)
-
-/datum/radio_frequency/proc/is_valid_node(var/atom/A)
-	if(istype(A,/obj/machinery/telecomms/relay) || istype(A,/obj/machinery/telecomms/hub) || istype(A,/obj/machinery/telecomms/allinone) || istype(A,/obj/machinery/telecomms/receiver))
-		return 1
-	return 0
+/datum/radio_frequency/proc/post_signal(obj/source as obj|null, datum/signal/signal, var/filter = null as text|null, var/range = 0)
+	//send the signal to everything by default
+	if(!filter)
+		filter = RADIO_DEFAULT
+	send_to_filter(signal, filter, source, range)
 
 //Sends a signal to all machines belonging to a given filter. Should be called by post_signal()
-/datum/radio_frequency/proc/send_to_filter(obj/source, datum/signal/signal, var/filter, var/turf/start_point = null, var/range = 0)
-	if(!GLOB.using_map.use_overmap) //Don't need to bother with any of this if we're not using the overmap.
-		for(var/obj/device in devices[filter] + telecomms_list)
-			device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
-		return
+/datum/radio_frequency/proc/send_to_filter(datum/signal/signal, var/filter, obj/source as obj|null, var/transmit_global = 0)
 
-	var/list/devices_signalled = list()
+	//grab some useful info
+	var/turf/source_turf = get_turf(source)
+	var/obj/effect/overmap/source_sector = map_sectors["[source_turf.z]"]
+	var/list/broadcasting_sectors = list()
 
-	var/list/signal_nodes = list()
-	var/list/allowed_broadcast_zs = list()
-	//NOTES: WE WANT TO FORM A NETWORK OF NODES, STARTING WITH THE ORIGIN OF THE SIGNAL.
-	//GRAB THE FIRST STEP OF OUR SIGNAL AS OUR FIRST NODE. IF THERE IS NO FIRST NODE, NO BROADCAST OCCURS.
-	for(var/obj/machinery/telecomms/tc in telecomms_list)
-		var/obj/effect/overmap/our_om_obj = map_sectors["[start_point.z]"]
-		if(isnull(our_om_obj))
-			continue
-		if((tc.z == start_point.z) || (tc.long_range_link && tc.z in our_om_obj.map_z) && allowed_broadcast_zs.len == 0)
-			if(is_valid_node(tc) && tc.on && tc.is_freq_listening(signal))
-				signal_nodes += tc
-				if(tc.long_range_link)
-					for(var/z_level in our_om_obj.map_z)
-						allowed_broadcast_zs.Add("[z_level]")
+	//let's check for nearby telecomms machinery which will interact with the signal
+	for(var/obj/effect/overmap/nearby_sector in range(7, source_sector))
+
+		//check for jammers
+		for(var/obj/machinery/overmap_comms/jammer/tj in nearby_sector.telecomms_jammers)
+			if(!tj.active)
+				continue
+			if(frequency in tj.ignore_freqs)
+				continue
+
+			//if the signal is being jammed at the source, we wont bother sending any outgoing signals at all
+			signal.data["jammed"] = 1
+
+			var/image/speech_bubble = image('icons/mob/talk.dmi',source,"radio2")
+			spawn(30) qdel(speech_bubble)
+
+			//var/list/jammed_mobs = get_mobs_in_radio_ranges(list(source))
+			for(var/mob/M in hear(7,get_turf(source)))
+				show_image(M, speech_bubble)
+				to_chat(M, "\icon[source] <span class='danger'>[source] emits a loud screeching wail!</span>")
+			return
+
+		//check for receivers
+		for(var/obj/machinery/overmap_comms/receiver/receiver in nearby_sector.telecomms_receivers)
+
+			//will this receiever broadcast the signal globally?
+			if(receiver.get_range_extension(signal) >= 1)
+
+				//we are
+				transmit_global = 1
+				broadcasting_sectors |= nearby_sector
+
+				//go to the next sector
+				break
+
+		//backwards compatibility: the old code used relays, so check if those exist and are active
+		for(var/obj/machinery/telecomms/relay/relay in nearby_sector.telecomms_receivers)
+			if(relay.on)
+				transmit_global = 1
+				broadcasting_sectors |= nearby_sector
+
+	//see which devices are in range
+	var/list/listening_sectors = list()
+	var/list/radios = list()
+	var/list/radios_garbled = list()
+	var/list/radios_out_of_range = list()
+	var/list/radios_encrypted = list()
+
+	for(var/obj/check_obj in devices[filter])
+		var/finished = 0
+
+		//if the signal is being broadcast, then everyone will hear it globally with perfect clarity
+		var/turf/obj_turf = get_turf(check_obj)
+
+		//first do a special encryption check for radios... other devices can do their own encryption checks
+		if(istype(check_obj, /obj/item/device/radio))
+			var/obj/item/device/radio/R = check_obj
+			var/datum/channel_cipher/cipher = signal.data["cipher"]
+
+			//does this signal have an encryption cipher we dont know?
+			if(cipher && cipher.encrypted && !R.has_cipher(cipher))
+				if(transmit_global)
+					radios_encrypted.Add(check_obj)
 				else
-					allowed_broadcast_zs.Add("[tc.z]")
-				break
+					var/obj/effect/overmap/radio_sector = map_sectors["[obj_turf.z]"]
+					var/hear_dist = get_dist(radio_sector, source_sector)
+					if(hear_dist <= OVERMAP_RADIO_FAR)
+						radios_encrypted.Add(check_obj)
+				finished = 1
 
-	var/nodes_exhausted = 0
-	while(!nodes_exhausted)
-		nodes_exhausted = 1
-		for(var/obj/machinery/telecomms/tc in signal_nodes)
-			for(var/obj/machinery/telecomms/tc_2 in telecomms_list)
-				var/obj/effect/overmap/tc_2_om_obj = map_sectors["[tc_2.z]"]
-				if(is_valid_node(tc_2) && get_dist(map_sectors["[tc.z]"],tc_2_om_obj) <= tc.signal_range && !(tc_2 in signal_nodes))
-					if(tc_2.on && tc_2.is_freq_listening(signal))
-						signal_nodes += tc_2
-						nodes_exhausted = 0
-						if(tc_2.long_range_link)
-							for(var/z_level in tc_2_om_obj.map_z)
-								allowed_broadcast_zs.Add("[z_level]")
-						else
-							allowed_broadcast_zs.Add("[tc_2.z]")
+		//we can do a shortcut here to skip further processing if it's an encrypted radio signal
+		if(!finished)
+			if(transmit_global)
+				//no interference
+				finished = 1
+			else
+				//if it's in short range
+				var/obj/effect/overmap/radio_sector = map_sectors["[obj_turf.z]"]
+				var/hear_dist = get_dist(radio_sector, source_sector)
+				if(radio_sector == source_sector || hear_dist <= OVERMAP_RADIO_CLOSE)
+					//no interference
+					finished = 1
+					radios.Add(check_obj)
 
-	signal.data["level"] = allowed_broadcast_zs.Copy() //Set the signal's allowed levels to ours, mostly for use within comms-radioing.
+				else if(hear_dist <= OVERMAP_RADIO_FAR)
+					finished = 1
+					radios.Add(check_obj)
 
-	for(var/obj/device in devices[filter] + signal_nodes) //Send our signal to our nodes too, just in case.
-		if(device in devices_signalled)
-			continue
+					//interference depending on distance
+					var/dist_ratio = (hear_dist - OVERMAP_RADIO_CLOSE) / (OVERMAP_RADIO_FAR - OVERMAP_RADIO_CLOSE)
+					radios_out_of_range[check_obj] = 1 + dist_ratio * 75
 
-		for(var/z_str in allowed_broadcast_zs)
-			var/z_level = text2num(z_str)
-			if(z_level == device.z)
-				device.receive_signal(signal, TRANSMISSION_RADIO, frequency)
-				devices_signalled += device
-				break
+		if(finished)
+			//remember all the listening radios in a sector just in case (to help with jamming later)
+			var/obj/effect/overmap/radio_sector = map_sectors["[obj_turf.z]"]
+			if(!listening_sectors[radio_sector])
+				listening_sectors[radio_sector] = list()
+			listening_sectors[radio_sector].Add(check_obj)
+
+	//now check to find jammers that are blocking incoming radio signals
+	//the assumption here is that there are less jammers than radios
+	if(transmit_global)
+		for(var/obj/machinery/overmap_comms/jammer/tj in GLOB.telecoms_jammers)
+			if(!tj.active)
+				continue
+			if(frequency in tj.ignore_freqs)
+				continue
+
+			//get nearby sectors to jam incoming signals (including the sector the jammer is located in)
+			var/obj/effect/overmap/jammed_sector = map_sectors["[tj.z]"]
+			for(var/obj/effect/overmap/nearby_sector in range(tj.jam_range, jammed_sector))
+
+				//are there any radios in this sector that would hear the signal?
+				if(listening_sectors.Find(nearby_sector))
+					//whoops this sector is getting jammed,  no radios will be getting incoming signals
+					radios -= listening_sectors[nearby_sector]
+					radios_out_of_range -= listening_sectors[nearby_sector]
+					radios_garbled -= listening_sectors[nearby_sector]
+					radios_encrypted -= listening_sectors[nearby_sector]
+
+	//send the signal for the devices to do their own processing
+	//note that receive_signal() for radios above specifically does not output any chat messages to players
+	for(var/obj/check_obj in radios)
+		check_obj.receive_signal(signal, TRANSMISSION_RADIO, frequency, 0)
+	//
+	for(var/obj/check_obj in radios_out_of_range)
+		check_obj.receive_signal(signal, TRANSMISSION_RADIO, frequency, radios_out_of_range[check_obj])
+	//
+	for(var/obj/check_obj in radios_garbled)
+		check_obj.receive_signal(signal, TRANSMISSION_RADIO, frequency, radios_garbled[check_obj])
+
+	//we process radio chat here so that players wont get multiple chat messages if they are in range of multiple radios
+	if(signal.data["message"])
+		broadcast_radio_chat(signal, radios, radios_out_of_range, radios_garbled)
 
 /datum/radio_frequency/proc/add_listener(obj/device as obj, var/filter as text|null)
 	if (!filter)

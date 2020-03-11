@@ -1,6 +1,7 @@
 
 /mob/living/simple_animal/npc/colonist
 	name = "colonist"
+	npc_job_title = "NPC Colonist"
 	desc = "A human from one of Earth's diverse cultures who decided to try a future offplanet."
 	emote_hear = list("coughs","sneezes","sniffs","clears their throat","whistles tunelessly","sighs deeply","yawns","gasps loudly")
 	emote_see = list("shifts from side to side.","scratches their arm.","examines their nails.","stares at at the ground aimlessly.","looks bored.","places their hands in their pockets.","stares at you with a blank expression.")
