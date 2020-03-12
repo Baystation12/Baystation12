@@ -3,7 +3,7 @@
 	startswith = list(\
 	/obj/item/weapon/storage/firstaid/unsc/cov,
 	/obj/item/weapon/storage/firstaid/unsc/cov,
-	/obj/item/weapon/storage/firstaid/combat/unsc/cov,
+	/obj/item/weapon/storage/firstaid/combat/unsc/cov
 	)
 
 /obj/item/weapon/storage/backpack/sangheili/mobilespawn_engineer
@@ -12,7 +12,18 @@
 	/obj/item/stack/material/nanolaminate/fifty,
 	/obj/item/stack/material/glass/reinforced/fifty,
 	/obj/item/weapon/armor_patch,
-	/obj/item/weapon/grenade/plasma,
+	/obj/item/weapon/grenade/plasma
+	)
+
+/obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	startswith = list(\
+	/obj/item/ammo_magazine/needles,
+	/obj/item/ammo_magazine/needles,
+	/obj/item/ammo_magazine/needles,
+	/obj/item/ammo_magazine/needles,
+	/obj/item/ammo_magazine/needles,
+	/obj/item/ammo_magazine/needles,
+	/obj/item/ammo_magazine/needles
 	)
 
 /decl/hierarchy/outfit/mobilespawn_unggoy //Likely won't use this, use major, grenadier and medic instead.
@@ -35,6 +46,9 @@
 	name = "Unggoy Soldier (Major)"
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
+	belt = /obj/item/weapon/storage/belt/covenant_ammo/mobilespawn_unggoy
+	l_hand = /obj/item/weapon/gun/projectile/needler
+	r_hand = /obj/item/weapon/gun/energy/plasmapistol
 
 	l_pocket = /obj/item/weapon/reagent_containers/syringe/biofoam
 
