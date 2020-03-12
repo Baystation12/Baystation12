@@ -421,13 +421,13 @@
 
 		if(AALARM_MODE_PANIC, AALARM_MODE_CYCLE)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("set_power"= 1, "panic_siphon"= 1) )
+				send_signal(device_id, list("set_power"= 1, "set_scrubbing"= SCRUBBER_SIPHON, "panic_siphon"= 1) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("set_power"= 0) )
 
 		if(AALARM_MODE_REPLACEMENT)
 			for(var/device_id in alarm_area.air_scrub_names)
-				send_signal(device_id, list("set_power"= 1, "panic_siphon"= 1) )
+				send_signal(device_id, list("set_power"= 1, "set_scrubbing"= SCRUBBER_SIPHON, "panic_siphon"= 1) )
 			for(var/device_id in alarm_area.air_vent_names)
 				send_signal(device_id, list("set_power"= 1, "set_checks"= "default", "set_external_pressure"= "default") )
 
