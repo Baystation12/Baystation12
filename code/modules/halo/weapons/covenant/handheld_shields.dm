@@ -15,10 +15,10 @@
 	var/obj/item/weapon/gauntlet_shield/connected_shield = /obj/item/weapon/gauntlet_shield
 	var/mob/current_user
 
-	var/shield_max_charge = 400
-	var/shield_current_charge = 400
+	var/shield_max_charge = 500
+	var/shield_current_charge = 500
 	var/list/shield_colour_values = list("300" = "#6d63ff","200" = "#ffa76d","100" = "#ff4248")//Associative list with shield-charge as key and colour value as keyvalue. Ordered highest to lowest. EG: "200" = "#6D63FF"
-	var/shield_recharge_delay = 6 //The delay between taking damage and starting to recharge, in seconds.
+	var/shield_recharge_delay = 6 SECONDS //The delay between taking damage and starting to recharge, in ticks.
 	var/shield_next_charge
 	var/active_slowdown_amount = 5
 
@@ -50,25 +50,24 @@
 			to_chat(current_user,"<span class = 'notice'>You need one hand unobstructed to use [src.name]</span>")
 		else
 			//activate shield and we walk slower
-			slowdown_per_slot[slot_gloves] = active_slowdown_amount
+			connected_shield.slowdown_general = active_slowdown_amount
 	update_inhand_icons()
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/unequip_shield()
 	current_user.drop_from_inventory(connected_shield)
 	contents += connected_shield
 	update_inhand_icons()
-	slowdown_per_slot[slot_gloves] = 0
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/drain_shield(var/damage)
-	var/charge_after_depletion = shield_current_charge - damage
+	var/charge_after_depletion = max(0,shield_current_charge - damage)
 	if(charge_after_depletion <= 0)
 		to_chat(current_user,"<span class = 'danger'>Your shield gauntlet fails!</span>")
 		visible_message("<span class = 'warning'>[current_user.name]'s shield gauntlet fails, overloading the shield projector.</span>")
-		shield_next_charge = (world.time + (shield_recharge_delay SECONDS) * 2)
+		shield_next_charge = (world.time + (shield_recharge_delay) * 1.5)
 		. = 0
 	if(charge_after_depletion > 0)
 		shield_current_charge = charge_after_depletion
-		shield_next_charge = (world.time + shield_recharge_delay SECONDS)
+		shield_next_charge = (world.time + shield_recharge_delay)
 		. = 1
 
 	GLOB.processing_objects += src

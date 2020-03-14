@@ -7,6 +7,8 @@
 #define BASE_WEAPON_PARRYCHANCE 8 //This is multiplied by the object's w_class - 1, so tiny objects can't block.
 #define BASE_PARRY_PLASMA_DESTROY 5 //Chance that parrying a plasma weapon will destroy your held weapon.
 
+#define ARMOUR_THICKNESS_DAMAGE_CAP 2
+
 #define CANDLE_LUM 3 // For how bright candles are.
 
 // Item inventory slot bitmasks.

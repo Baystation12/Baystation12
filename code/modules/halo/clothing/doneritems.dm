@@ -1290,7 +1290,7 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	name = "Sya'tenee's Sangheili Combat Harness"
 	icon_state = "dogler_chest_obj"
 	item_state = "dogler_chest"
-	totalshields = 125
+	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/dogler
 	name = "Sya'tenee's Sanghelli Leg Armour"
@@ -1887,7 +1887,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "‘Nasan Clan - Bluekro Combat Harness"
 	icon_state = "socks_chest_obj"
 	item_state = "socks_chest"
-	totalshields = 125
+	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/socks
 	name = "‘Nasan Clan - Bluekro Leg Armour"
@@ -2212,7 +2212,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	desc = "Worn only by those within the 'Vurom Clan that have distinguished themselves among the most faithful, and zealous within the Covenant."
 	icon_state = "Leevrukah_chest_obj"
 	item_state = "Leevrukah_chest"
-	totalshields = 125
+	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/voloxus
 	name = "‘Vurom Clan Armor - Leg Armour"
@@ -2263,7 +2263,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "‘Nasan Clan - Ultra Combat Harness"
 	icon_state = "bluekro_chest_obj"
 	item_state = "bluekro_chest"
-	totalshields = 125
+	totalshields = 240
 
 /obj/item/clothing/shoes/sangheili/zane
 	name = "‘Nasan Clan - Ultra Leg Armour"

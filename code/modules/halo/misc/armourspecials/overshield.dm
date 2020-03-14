@@ -23,7 +23,7 @@
 
 	//give it double strength or 100, whichever is greater
 	if(shields)
-		shields.totalshields = max(shields.totalshields * 2, 100)
+		shields.totalshields = max(shields.totalshields * 1.5, 100)
 
 	//begin recharging
 	shields.reset_recharge()

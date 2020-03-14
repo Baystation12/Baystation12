@@ -32,7 +32,7 @@
 /obj/item/clothing/head/helmet/innie/urfdefector
 	name = "H34D Dome Protector"
 	desc = "A X-52 prototype Helmet made from flexible high grade metals meant to intimidate the wearer's foes and for use by an Orion Project subject. Any common soldier should fear the person who is seen wearing this helmet."
-	armor = list(melee = 60,bullet = 35,laser = 25,energy = 25,bomb = 35,bio = 100,rad = 25)
+	armor = list(melee = 60, bullet = 40, laser = 30,energy = 30, bomb = 25, bio = 30, rad = 30)
 	armor_thickness = 20
 	icon = 'code/modules/halo/clothing/inniearmor.dmi'
 	icon_override = 'code/modules/halo/clothing/inniearmor.dmi'
@@ -44,7 +44,7 @@
 	name = "I25B Heavy Chest Rig"
 	desc = "A X-52 prototype heavily armored suit of flexible nano composite materials. It is intended to be worn by a subject of project Orion. Any common soldier should fear the person who wears this armor."
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic)
-	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 60, bio = 100, rad = 25)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 55, bomb = 40, bio = 25, rad = 25)
 	species_restricted = list("Orion")
 	icon = 'code/modules/halo/clothing/inniearmor.dmi'
 	icon_override = 'code/modules/halo/clothing/inniearmor.dmi'

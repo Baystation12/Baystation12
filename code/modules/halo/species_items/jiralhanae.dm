@@ -86,7 +86,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 /obj/item/clothing/head/helmet/jiralhanae/covenant
 	icon_state = "helm_covenant"
 	desc = "The standard issue helmets of Jiralhanae soldiers within the covenant."
-	armor = list(melee = 45,bullet = 10,laser = 30,energy = 5,bomb = 30,bio = 0,rad = 0)
+	armor = list(melee = 55, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 25, rad = 25)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
 	armor_thickness = 25
 
@@ -183,9 +183,9 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 /obj/item/clothing/suit/armor/jiralhanae/covenant
 	icon_state = "armour_covenant"
 	desc = "The armour of Jiralhanae soldiers within the covenant."
-	armor = list(melee = 90, bullet = 50, laser = 45, energy = 45, bomb = 50, bio = 25, rad = 25)
+	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
-	armor_thickness = 25
+	armor_thickness = 30 // 9 grace shots
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit"

@@ -24,7 +24,7 @@
 	var/shieldstrength
 	var/totalshields
 	var/nextcharge
-	var/shield_recharge_delay = 40//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
+	var/shield_recharge_delay = 10 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
 	var/obj/effect/overlay/shields/shieldoverlay = new /obj/effect/overlay/shields
 	var/image/mob_overlay
 	var/obj/item/clothing/suit/armor/special/connectedarmour
@@ -184,8 +184,10 @@
 
 /datum/armourspecials/shields/spartan
 	shieldoverlay = new /obj/effect/overlay/shields/spartan
+	shield_recharge_delay = 5 SECONDS //much faster.
 
 /datum/armourspecials/shields/unggoy
+	shield_recharge_delay = 5 SECONDS //Equal to spartans because unggoy shields should be low capacity.
 	shieldoverlay = new /obj/effect/overlay/shields/unggoy
 
 #undef SHIELD_IDLE
