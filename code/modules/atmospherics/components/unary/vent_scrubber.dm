@@ -279,7 +279,7 @@
 		return FALSE
 	. = ..()
 	if(.)
-		machine.scrubbing = new_value
+		machine.panic = new_value
 		if(machine.panic)
 			machine.update_use_power(POWER_USE_IDLE)
 			machine.scrubbing = SCRUBBER_SIPHON
