@@ -106,7 +106,7 @@
 	var/mob/locked_target
 
 /obj/item/projectile/bullet/covenant/needles/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
-	if(blocked >= 100 || !istype(L))
+	if(!istype(L))
 		. = ..()
 		return
 	var/list/embedded_shards[0]
