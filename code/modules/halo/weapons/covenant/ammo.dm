@@ -101,6 +101,7 @@
 	embed = 1
 	sharp = 1
 	armor_penetration = 20
+	step_delay = 0.75 //slower than most
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
@@ -217,6 +218,7 @@
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	tracer_delay_time = 0.5 SECONDS
 	invisibility = 101
+	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle/Move()
