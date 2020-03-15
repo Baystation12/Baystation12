@@ -17,7 +17,7 @@
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
 	pain_mod = 0.6 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(1,0),null)
-	slowdown = -0.75
+	slowdown = -0.5
 	can_force_door = 1
 	additional_langs = list("Sign Language")
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)

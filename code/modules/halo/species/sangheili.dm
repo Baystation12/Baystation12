@@ -20,7 +20,7 @@
 	appearance_flags = HAS_SKIN_TONE
 	brute_mod = 0.9
 	pain_mod = 0.75 //Pain has quarter an effect on them
-	slowdown = -0.5
+	slowdown = -0.3
 	explosion_effect_mod = 0.5
 	can_force_door = 1
 	pixel_offset_x = -8
