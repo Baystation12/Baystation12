@@ -29,7 +29,7 @@
 	var/image/mob_overlay
 	var/obj/item/clothing/suit/armor/special/connectedarmour
 	var/armour_state = SHIELD_IDLE
-	var/tick_recharge = 30
+	var/tick_recharge = 40
 	var/intercept_chance = 100
 	var/eva_mode_active = 0
 
