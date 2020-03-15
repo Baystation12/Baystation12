@@ -1830,6 +1830,7 @@
 #include "code\modules\halo\vehicles\types\bull.dm"
 #include "code\modules\halo\vehicles\types\cobra.dm"
 #include "code\modules\halo\vehicles\types\drop_pod.dm"
+#include "code\modules\halo\vehicles\types\escape_pelican.dm"
 #include "code\modules\halo\vehicles\types\escape_pods.dm"
 #include "code\modules\halo\vehicles\types\ghost.dm"
 #include "code\modules\halo\vehicles\types\mongoose.dm"
