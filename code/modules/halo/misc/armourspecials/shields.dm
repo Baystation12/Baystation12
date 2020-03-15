@@ -25,6 +25,7 @@
 	var/totalshields
 	var/nextcharge
 	var/shield_recharge_delay = 10 SECONDS//The delay for the shields to start recharging from damage (Multiplied by 1.5 if shields downed entirely)
+	var/shield_recharge_ticktime = 1 SECOND //The delay between recharge ticks
 	var/obj/effect/overlay/shields/shieldoverlay = new /obj/effect/overlay/shields
 	var/image/mob_overlay
 	var/obj/item/clothing/suit/armor/special/connectedarmour
@@ -162,7 +163,7 @@
 				connectedarmour.visible_message("<span class = 'notice'>A faint hum emanates from [connectedarmour].</span>")
 			update_overlay("shield_overlay_recharge")
 			armour_state = SHIELD_RECHARGE
-		nextcharge = world.time + shield_recharge_delay
+		nextcharge = world.time + shield_recharge_ticktime
 
 	//finished recharging
 	if(shieldstrength >= totalshields)
@@ -175,7 +176,7 @@
 /datum/armourspecials/shields/tryemp(severity)
 	switch(severity)
 		if(1)
-			take_damage(totalshields)
+			take_damage(totalshields/2)
 			user.visible_message("<span class = 'warning'>[user.name]'s shields momentarily fail, the internal capacitors barely recovering.</span>")
 		if(2)
 			take_damage(totalshields)
