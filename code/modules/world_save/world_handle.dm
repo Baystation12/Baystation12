@@ -216,6 +216,12 @@
 /datum/persistence/serializer/proc/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z)
 	// Will deserialize a thing by ID, including all of its
 	// child variables.
+	// Fixing some SQL shit.
+	x = text2num(x)
+	y = text2num(y)
+	z = text2num(z)
+
+	// Checking for existing items.
 	var/existing
 	try
 		existing = reverse_map[num2text(thing_id)]
@@ -231,6 +237,9 @@
 		// turf turf turf
 		var/turf/T = locate(x, y, z)
 		T.ChangeTurf(thing_path)
+		if T == null
+			world.log << "Attempting to deserialize onto turf [x],[y],[z] failed. Could not locate turf."
+			return
 		existing = T
 	else
 		// default creation
