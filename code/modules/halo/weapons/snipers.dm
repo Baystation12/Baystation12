@@ -38,7 +38,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 2.0)
+	toggle_scope(usr, 1.75)
 
 /obj/item/weapon/gun/projectile/srs99_sniper/update_icon()
 	if(ammo_magazine)
@@ -135,4 +135,4 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.35)
+	toggle_scope(usr, 1.4)

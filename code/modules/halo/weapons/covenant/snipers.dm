@@ -34,7 +34,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.25)
+	toggle_scope(usr, 1.4)
 
 /obj/item/weapon/gun/projectile/type51carbine/load_ammo(var/item/I,var/mob/user)
 	unload_ammo(user,1)
@@ -83,7 +83,7 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.5)
+	toggle_scope(usr, 1.75)
 
 /obj/item/weapon/gun/energy/beam_rifle/proc/update_next_allowed_fire(var/seconds_increase = 1.25)
 	next_allowed_fire = world.time + seconds_increase SECONDS
@@ -138,4 +138,4 @@
 	set name = "Use Scope"
 	set popup_menu = 1
 
-	toggle_scope(usr, 1.25)
+	toggle_scope(usr, 1.4)
