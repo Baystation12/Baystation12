@@ -92,15 +92,14 @@
 
 //parses the message mode code (e.g. :h, :w) from text, such as that supplied to say.
 //returns the message mode string or null for no message mode.
-//2020 update: only returns the letter hotkey or ;
-/mob/proc/parse_message_mode(var/message)
+//standard mode is the mode returned for the special ';' radio code.
+/mob/proc/parse_message_mode(var/message, var/standard_mode="headset")
 	if(length(message) >= 1 && copytext(message,1,2) == ";")
-		return ";"
+		return standard_mode
 
-	if(length(message) >= 2 && copytext(message,1,2) == ":")
-		var/channel_prefix = copytext(message, 2 ,3)
-		//finally the channel hotkeys arent duplicated for uppercase/lowercase... goodbye 2011 hello 2020
-		return lowertext(channel_prefix)//department_radio_keys[channel_prefix]	
+	if(length(message) >= 2)
+		var/channel_prefix = copytext(message, 1 ,3)
+		return department_radio_keys[channel_prefix]
 
 	return null
 

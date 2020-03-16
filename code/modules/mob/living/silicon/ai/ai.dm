@@ -347,7 +347,15 @@ var/list/ai_verbs_default = list(
 			switch_to_net_by_name(network)
 			terminal.apply_radio_channels(src)
 
-	to_chat(src, common_radio.radio_desc)
+	var/radio_text = ""
+	for(var/i = 1 to common_radio.channels.len)
+		var/channel = common_radio.channels[i]
+		var/key = get_radio_key_from_channel(channel)
+		radio_text += "[key] - [channel]"
+		if(i != common_radio.channels.len)
+			radio_text += ", "
+
+	to_chat(src, radio_text)
 
 /mob/living/silicon/ai/Destroy()
 	ai_list -= src

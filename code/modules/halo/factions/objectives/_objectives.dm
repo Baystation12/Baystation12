@@ -34,7 +34,7 @@
 	var/is_winner
 	var/objective_faction
 	var/list/controlled_nodes = list()
-	var/radio_frequency = RADIO_HUMAN
+	var/radio_frequency = "System"
 	var/radio_language = LANGUAGE_GALCOM
 	var/radio_name = "Sovereignty Announcer"
 

@@ -1,149 +1,79 @@
 
-
-
-/* CIVILIAN */
-
 //default civilian headset
+/*
 /obj/item/device/radio/headset
-	dongles = list(/obj/item/device/channel_dongle/human_civ)
+	ks1type = /obj/item/device/encryptionkey/public
+	*/
+//Medical ship headsets
 
-//colonial police headset
-/obj/item/device/radio/headset/police
-	name = "colonial police radio headset"
-	icon_state = "sec_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/gcpd)
-
-
-
-/* INNIE */
+/obj/item/device/radio/headset/medship
+	ks1type = /obj/item/device/encryptionkey/medship
 
 //insurrectionist headset
 /obj/item/device/radio/headset/insurrection
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/innie)
+	ks1type = /obj/item/device/encryptionkey/inniecom
 
 //URF Commando headset
 /obj/item/device/radio/headset/commando
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/innie,\
-		/obj/item/device/channel_dongle/urfc)
-
-
-
-/* UNSC */
+	ks1type = /obj/item/device/encryptionkey/urfccom
 
 //unsc crew headset
 /obj/item/device/radio/headset/unsc
 	name = "UNSC radio headset"
 	icon_state = "med_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom)
+	ks1type = /obj/item/device/encryptionkey/shipcom
 
 //unsc pilot headset
 /obj/item/device/radio/headset/unsc/pilot
 	name = "UNSC pilot radio headset"
-	icon_state = "cargo_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/shipcom)
+	icon_state = "med_headset"
+	ks1type = /obj/item/device/encryptionkey/squadcom
 
 //unsc marine headset
 /obj/item/device/radio/headset/unsc/marine
 	name = "UNSC marine radio headset"
 	icon_state = "cent_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/marines)
+	ks1type = /obj/item/device/encryptionkey/teamcom
 
-//unsc odst headset
 /obj/item/device/radio/headset/unsc/odst
 	name = "ODST radio headset"
 	icon_state = "cent_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/marines,\
-		/obj/item/device/channel_dongle/odst)
+	ks1type = /obj/item/device/encryptionkey/taccom
 
-//unsc odst officer headset
 /obj/item/device/radio/headset/unsc/odsto
-	name = "ODST officer radio headset"
+	name = "ODST radio headset"
 	icon_state = "cent_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/marines,\
-		/obj/item/device/channel_dongle/odst)
+	ks1type = /obj/item/device/encryptionkey/taccomo
 
-//unsc spartan headset
 /obj/item/device/radio/headset/unsc/spartan
-	name = "Spartan II radio headset"
-	icon_state = "mine_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/marines,\
-		/obj/item/device/channel_dongle/odst,\
-		/obj/item/device/channel_dongle/oni,\
-		/obj/item/device/channel_dongle/spartan)
-
-//a stripped down headset for special missions
-/obj/item/device/radio/headset/spartan_oprf
-	name = "Spartan II radio headset"
-	icon_state = "mine_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/spartan)
+	name = "Spartan radio headset"
+	icon_state = "cent_headset"
+	ks1type = /obj/item/device/encryptionkey/spartancom
 
 //unsc officer headset
 /obj/item/device/radio/headset/unsc/officer
 	name = "UNSC officer radio headset"
-	icon_state = "med_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/marines,\
-		/obj/item/device/channel_dongle/odst,\
-		/obj/item/device/channel_dongle/fleetcom)
+	icon_state = "cargo_headset"
+	ks1type = /obj/item/device/encryptionkey/officercom
 
 //unsc senior officer headset
 /obj/item/device/radio/headset/unsc/commander
 	name = "UNSC commander radio headset"
 	icon_state = "nt_headset"
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/marines,\
-		/obj/item/device/channel_dongle/odst,\
-		/obj/item/device/channel_dongle/fleetcom)
+	ks1type = /obj/item/device/encryptionkey/fleetcom
 
-//unsc oni headset
-/obj/item/device/radio/headset/unsc/oni
-	dongles = list(/obj/item/device/channel_dongle/human_civ,\
-		/obj/item/device/channel_dongle/squadcom,\
-		/obj/item/device/channel_dongle/marines,\
-		/obj/item/device/channel_dongle/odst,\
-		/obj/item/device/channel_dongle/oni)
+//police headset
+/obj/item/device/radio/headset/police
+	name = "colonial police radio headset"
+	icon_state = "sec_headset"
+	ks1type = /obj/item/device/encryptionkey/police
 
+//Oni headset
+/obj/item/device/radio/headset/oni
+	ks1type = /obj/item/device/encryptionkey/onicom
 
-
-/* COVENANT */
-
-/obj/item/device/radio/headset/covenant
-	name = "Battlenet headset"
-	icon = 'code/modules/halo/comms/comms.dmi'
-	dongles = list(/obj/item/device/channel_dongle/battlenet)
-
-/obj/item/device/radio/headset/covenant/attackby()
-	return
-
-/obj/item/device/radio/headset/brute_ramclan
-	name = "Ram Clan headset"
-	icon = 'code/modules/halo/comms/comms.dmi'
-	dongles = list(/obj/item/device/channel_dongle/ramnet)
-
-/obj/item/device/radio/headset/brute_ramclan/attackby()
-	return
-
-/obj/item/device/radio/headset/brute_boulderclan
-	name = "Boulder Clan headset"
-	icon = 'code/modules/halo/comms/comms.dmi'
-	dongles = list(/obj/item/device/channel_dongle/bouldernet)
-
-/obj/item/device/radio/headset/brute_boulderclan/attackby()
-	return
+//spartan headset
+/obj/item/device/radio/headset/spartan_oprf
+	name = "Spartan II radio headset"
+	icon_state = "mine_headset"
+	ks1type = /obj/item/device/encryptionkey/spartan_oprf

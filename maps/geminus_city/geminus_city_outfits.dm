@@ -1,4 +1,24 @@
 
+/decl/hierarchy/outfit/job/marine
+	name = "Geminus Garrisson Marine"
+
+	uniform = /obj/item/clothing/under/unsc/marine_fatigues
+	suit = /obj/item/clothing/suit/storage/marine
+	head = /obj/item/clothing/head/helmet/marine
+	glasses = /obj/item/clothing/glasses/hud/tactical
+	shoes = /obj/item/clothing/shoes/marine
+	belt = /obj/item/weapon/storage/belt/marine_ammo
+	l_pocket = /obj/item/device/encryptionkey/shipcom
+	flags = 0
+
+/decl/hierarchy/outfit/job/marine/leader
+	name = "Marine - Squad Leader"
+
+	head = /obj/item/clothing/head/helmet/marine/visor
+	r_pocket = /obj/item/squad_manager
+
+	flags = 0
+
 /decl/hierarchy/outfit/job/colonist
 	name = "Colonist"
 
@@ -7,6 +27,8 @@
 	belt = /obj/item/weapon/storage/wallet/random
 	shoes = /obj/item/clothing/shoes/brown
 	pda_slot = null
+
+	flags = 0
 
 /decl/hierarchy/outfit/job/colonist/equip_id(mob/living/carbon/human/H)
 	var/obj/item/weapon/card/id/C = ..()

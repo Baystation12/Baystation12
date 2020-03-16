@@ -2,7 +2,7 @@
 /decl/hierarchy/outfit/job/facil_researcher
 	name = "Researcher"
 
-	l_ear = /obj/item/device/radio/headset/unsc/oni
+	l_ear = /obj/item/device/radio/headset/oni
 	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	l_pocket = /obj/item/clothing/accessory/badge/onib
@@ -14,7 +14,7 @@
 /decl/hierarchy/outfit/job/researchdirector
 	name = "Research Director"
 
-	l_ear = /obj/item/device/radio/headset/unsc/oni
+	l_ear = /obj/item/device/radio/headset/oni
 	uniform = /obj/item/clothing/under/rank/research_director/rdalt
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	l_pocket = /obj/item/clothing/accessory/badge/onib
@@ -26,7 +26,7 @@
 
 /decl/hierarchy/outfit/job/facil_COMMO
 	name = "ONI Communications Operator"
-	l_ear = /obj/item/device/radio/headset/unsc/oni
+	l_ear = /obj/item/device/radio/headset/oni
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
 	gloves = /obj/item/clothing/gloves/thick/oni_guard
@@ -40,7 +40,7 @@
 
 /decl/hierarchy/outfit/job/facil_ONIGUARD
 	name = "ONI Security Guard"
-	l_ear = /obj/item/device/radio/headset/unsc/oni
+	l_ear = /obj/item/device/radio/headset/oni
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
 	gloves = /obj/item/clothing/gloves/thick/oni_guard
@@ -55,7 +55,7 @@
 
 /decl/hierarchy/outfit/job/facil_ONIGUARDS
 	name = "ONI Security Squad Leader"
-	l_ear = /obj/item/device/radio/headset/unsc/oni
+	l_ear = /obj/item/device/radio/headset/oni
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/marine_fatigues/oni_uniform
 	gloves = /obj/item/clothing/gloves/thick/oni_guard
@@ -85,8 +85,8 @@
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /decl/hierarchy/outfit/job/facil_ODSTO
-	name = "Second Lieutenant"
-	l_ear = /obj/item/device/radio/headset/unsc/odst
+	name = "Second Lieutenantt"
+	l_ear = /obj/item/device/radio/headset/unsc/odsto
 	glasses = /obj/item/clothing/glasses/hud/tactical
 	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
 	gloves = /obj/item/clothing/gloves/thick/combat

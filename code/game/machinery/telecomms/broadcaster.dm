@@ -229,7 +229,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
   /* ###### Prepare the radio connection ###### */
 
-	/*
 	var/display_freq = freq
 
 	var/list/obj/item/device/radio/radios = list()
@@ -447,13 +446,11 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 				R.hear_radio(message, verbage, speaking, part_a, part_b, part_c, M, compression)
 
 	return 1
-	*/
 
 /proc/Broadcast_SimpleMessage(var/source, var/frequency, var/text, var/data, var/mob/M, var/compression, var/level)
 
   /* ###### Prepare the radio connection ###### */
 
-	/*
 	if(!M)
 		var/mob/living/carbon/human/H = new
 		M = H
@@ -542,7 +539,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if (length(heard_normal) || length(heard_garbled) || length(heard_gibberish))
 
 	  /* --- Some miscellaneous variables to format the string output --- */
-		var/part_a = "<span class='radio'><span class='name'>" // goes in the actual output
+		var/part_a = "<span class='[halo_frequency_span_class(display_freq)]'><span class='name'>" // goes in the actual output
 		var/freq_text = get_frequency_name(display_freq)
 
 		// --- Some more pre-message formatting ---
@@ -619,8 +616,6 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 			for (var/mob/R in heard_gibberish)
 				R.show_message(rendered, 2)
-
-	*/
 
 //Use this to test if an obj can communicate with a Telecommunications Network
 
