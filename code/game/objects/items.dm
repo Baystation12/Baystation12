@@ -108,9 +108,7 @@
 
 /obj/item/afterattack(var/atom/target,var/mob/user)
 	. = ..()
-	if(lunge_dist == 0)
-		return
-	if(user.loc.Adjacent(target))
+	if(lunge_dist == 0 || user.loc.Adjacent(target) || istype(loc,/obj/vehicles))
 		return
 	if(world.time < next_leapwhen)
 		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
