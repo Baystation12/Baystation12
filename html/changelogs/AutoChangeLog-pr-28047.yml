@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Air Sensors, Meters, Pumps, Scrubbers, Vents and subtypes no longer have normal machinery construction steps requiring components. They are built or removed in one step with a wrench."
+  - bugfix: "Pumps will now properly prevent deconstruction if their internal pressure is too different from the environment pressure."
