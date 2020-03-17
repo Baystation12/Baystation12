@@ -229,7 +229,7 @@ Buildable meters
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "gsensor1"
 	w_class = ITEM_SIZE_LARGE
-	build_type = /obj/machinery/air_sensor/buildable
+	build_type = /obj/machinery/air_sensor
 
 /obj/item/machine_chassis/pipe_meter
 	name = "meter"
@@ -238,4 +238,4 @@ Buildable meters
 	icon_state = "meter"
 	item_state = "buildpipe"
 	w_class = ITEM_SIZE_LARGE
-	build_type = /obj/machinery/meter/buildable
+	build_type = /obj/machinery/meter
