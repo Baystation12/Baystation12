@@ -149,11 +149,9 @@
 							src.say("BAWWWWWK LEAVE THE HEADSET BAWKKKKK!")
 						ears.loc = src.loc
 						ears = null
-						/*
 						for(var/possible_phrase in speak)
 							if(copytext(possible_phrase,1,3) in department_radio_keys)
 								possible_phrase = copytext(possible_phrase,3,length(possible_phrase))
-								*/
 					else
 						to_chat(usr, "<span class='warning'>There is nothing to remove from its [remove_from].</span>")
 						return
@@ -186,7 +184,6 @@
 						to_chat(usr, "You fit the headset onto [src].")
 
 						clearlist(available_channels)
-						/*
 						for(var/ch in headset_to_add.channels)
 							switch(ch)
 								if("Engineering")
@@ -203,7 +200,6 @@
 									available_channels.Add(":d")
 								if("Cargo")
 									available_channels.Add(":q")
-									*/
 		else
 			..()
 
@@ -320,7 +316,6 @@
 				if(available_channels.len && src.ears)
 					for(var/possible_phrase in speak)
 
-						/*
 						//50/50 chance to not use the radio at all
 						var/useradio = 0
 						if(prob(50))
@@ -330,16 +325,13 @@
 							possible_phrase = "[useradio?pick(available_channels):""] [copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
 						else
 							possible_phrase = "[useradio?pick(available_channels):""] [possible_phrase]"
-							*/
 
 						newspeak.Add(possible_phrase)
 
 				else //If we have no headset or channels to use, dont try to use any!
 					for(var/possible_phrase in speak)
-						/*
 						if(copytext(possible_phrase,1,3) in department_radio_keys)
 							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
-							*/
 						newspeak.Add(possible_phrase)
 				speak = newspeak
 
@@ -695,7 +687,6 @@
 	if(stat)
 		return
 
-	/*
 	var/verb = "says"
 	if(speak_emote.len)
 		verb = pick(speak_emote)
@@ -720,7 +711,6 @@
 		if(message_mode in radiochannels)
 			if(ears && istype(ears,/obj/item/device/radio))
 				ears.talk_into(src,sanitize(message), message_mode, verb, null)
-				*/
 
 
 	..(message)

@@ -90,8 +90,9 @@ distortion_speed - multiplier for the chance increase.
 distortion - starting distortion.
 english_only - whether to use traditional english letters only (for use in NanoUI)
 */
-proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_speed = 1, distortion = 1, english_only = 0, var/datum/language/language)
-	if(user && !language)
+proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_speed = 1, distortion = 1, english_only = 0)
+	var/datum/language/language
+	if(user)
 		language = user.get_default_language()
 	message = html_decode(message)
 	var/new_message = ""
@@ -106,69 +107,64 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 			length += 1
 			continue
 		if(newletter != " ")
-			switch(pickweight(list("A" = 0.5, "B" = 1, "C" = 0.5, "D" = 2, "E" = 1, "F" = 1, "G" = 2)))
-				if("A") // Major cutout
+			if(prob(0.08 * distortion)) // Major cutout
+				newletter = "*zzzt*"
+				length += rand(1, (length(message) - length)) // Skip some characters
+				distortion += 1 * distortion_speed
+			else if(prob(0.8 * distortion)) // Minor cut out
+				if(prob(25))
+					newletter = ".."
+				else if(prob(25))
+					newletter = " "
+				else
 					newletter = ""
-					var/chars_skipped = rand(1, (length(message) - length))
-					chars_skipped = min(chars_skipped, 5)
-					length += chars_skipped // Skip some characters
-					while(chars_skipped > 0)
-						newletter += "_"
-						chars_skipped--
-					distortion += 1 * distortion_speed
-				if("B") // Minor cut out
-					if(prob(25))
-						newletter = ".."
-					else if(prob(25))
-						newletter = " "
+				distortion += 0.25 * distortion_speed
+			else if(prob(2 * distortion)) // Mishearing
+				if(language && language.syllables && prob(50))
+					newletter = pick(language.syllables)
+				else
+					newletter =	pick("a","e","i","o","u")
+				distortion += 0.25 * distortion_speed
+			else if(prob(1.5 * distortion)) // Mishearing
+				if(language && prob(50))
+					if(language.syllables)
+						newletter = pick (language.syllables)
 					else
-						newletter = ""
-					distortion += 0.25 * distortion_speed
-				if("C") // Mishearing
-					if(language && language.syllables && prob(50))
-						newletter = pick(language.syllables)
+						newletter = "*"
+				else
+					if(english_only)
+						newletter += "*"
 					else
-						newletter =	pick("a","e","i","o","u")
-					distortion += 0.25 * distortion_speed
-				if("D") // Mishearing
-					if(language && prob(50))
-						if(language.syllables)
-							newletter = pick (language.syllables)
-						else
-							newletter = "*"
-					else
-						if(english_only)
-							newletter += "*"
-						else
-							newletter = pick("ø", "Ð", "%", "æ", "µ")
-					distortion += 0.5 * distortion_speed
-				if("E") // Incomprehensible
-					newletter = pick("<", ">", "!", "$", "%", "^", "&", "*", "~", "#")
-					distortion += 0.75 * distortion_speed
-				if("F") // Total cut out
-					if(!english_only)
-						newletter = "¦w¡¼b»%> -BZZT-"
-					else
-						newletter = "srgt%$hjc< -BZZT-"
-					new_message += newletter
-					break
-				else // Sound distortion. Still recognisable, mostly.
-					switch(lowertext(newletter))
-						if("s")
-							newletter = "$"
-						if("e")
-							newletter = "€"
-						if("w")
-							newletter = "ø"
-						if("y")
-							newletter = "¡"
-						if("x")
-							newletter = "æ"
-						if("u")
-							newletter = "µ"
+						newletter = pick("ø", "Ð", "%", "æ", "µ")
+				distortion += 0.5 * distortion_speed
+			else if(prob(0.75 * distortion)) // Incomprehensible
+				newletter = pick("<", ">", "!", "$", "%", "^", "&", "*", "~", "#")
+				distortion += 0.75 * distortion_speed
+			else if(prob(0.05 * distortion)) // Total cut out
+				if(!english_only)
+					newletter = "¦w¡¼b»%> -BZZT-"
+				else
+					newletter = "srgt%$hjc< -BZZT-"
+				new_message += newletter
+				break
+			else if(prob(2.5 * distortion)) // Sound distortion. Still recognisable, mostly.
+				switch(lowertext(newletter))
+					if("s")
+						newletter = "$"
+					if("e")
+						newletter = "€"
+					if("w")
+						newletter = "ø"
+					if("y")
+						newletter = "¡"
+					if("x")
+						newletter = "æ"
+					if("u")
+						newletter = "µ"
 		else
-			newletter = " *crackle* "
-			distortion += 0.25 * distortion_speed
+			if(prob(0.2 * distortion))
+				newletter = " *crackle* "
+				distortion += 0.25 * distortion_speed
 		if(prob(20))
 			capitalize(newletter)
 		new_message += newletter

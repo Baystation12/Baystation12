@@ -29,6 +29,7 @@
 	light_power = 3
 
 	cell = /obj/item/weapon/cell/infinite
+	radio_key_type = /obj/item/device/encryptionkey/covenant
 
 /mob/living/silicon/robot/huragok/emp_act()
 	return

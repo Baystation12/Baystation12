@@ -81,7 +81,7 @@
 	var/time = say_timestamp()
 	to_chat(src, "[time] [message]")
 
-/mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/rank_text, var/channel_name, var/chat_span_class = "radio", var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="", var/obj/item/device/radio/radio)
+/mob/proc/hear_radio(var/message, var/verb="says", var/datum/language/language=null, var/part_a, var/part_b, var/part_c, var/mob/speaker = null, var/hard_to_hear = 0, var/vname ="")
 
 	if(!client)
 		return
@@ -90,11 +90,7 @@
 		hear_sleep(message)
 		return
 
-	if(sdisabilities & DEAF || ear_deaf)
-		var/mob/living/carbon/human/H = src
-		if(istype(H) && H.has_headset_in_ears() && prob(20))
-			to_chat(src, "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>")
-			return
+	var/track = null
 
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.
 	if (language && (language.flags & NONVERBAL))
@@ -116,13 +112,15 @@
 					message = stars(message)
 
 		if(hard_to_hear)
-			message = RadioChat(speaker, message, hard_to_hear, 1, 0, 0, language)
+			if(hard_to_hear <= 5)
+				message = stars(message)
+			else // Used for compression
+				message = RadioChat(null, message, 80, 1+(hard_to_hear/10))
 
-	var/track = null
-	var/speaker_name = vname
-	/*
-	if(speaker)
-		speaker_name = speaker.name
+	var/speaker_name = speaker.name
+
+	if(vname)
+		speaker_name = vname
 
 	if(istype(speaker, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = speaker
@@ -181,37 +179,23 @@
 				track = "[speaker_name] ([jobname])"
 		else
 			track = "<a href='byond://?src=\ref[src];trackname=[html_encode(speaker_name)];track=\ref[speaker]'>[speaker_name] ([jobname])</a>"
-			*/
 
 	if(isghost(src))
 		if(speaker_name != speaker.real_name && !isAI(speaker)) //Announce computer and various stuff that broadcasts doesn't use it's real name but AI's can't pretend to be other mobs.
 			speaker_name = "[speaker.real_name] ([speaker_name])"
 		track = "[speaker_name] ([ghost_follow_link(speaker, src)])"
 
-	//see if our radio has a dongle to apply custom formatting
-	/*
-	var/obj/item/device/channel_dongle/dongle = radio.get_dongle(frequency)
-	if(dongle)
-		chat_span_class = dongle.chat_span_class
-		channel_name = dongle.channel_name
-		*/
-
-	var/part_a = "<span class='[chat_span_class]'><span class='prefix'>\[[channel_name]\] </span><span class='name'>" // goes in the actual output
-
-	// --- Some more pre-message formatting ---
-	var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
-	var/part_c = "</span></span>"
-
 	var/formatted
 	if(language)
 		formatted = language.format_message_radio(message, verb)
 	else
 		formatted = "[verb], <span class=\"body\">\"[message]\"</span>"
-
-	if(rank_text)
-		speaker_name += " ([rank_text])"
-
-	on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
+	if(sdisabilities & DEAF || ear_deaf)
+		var/mob/living/carbon/human/H = src
+		if(istype(H) && H.has_headset_in_ears() && prob(20))
+			to_chat(src, "<span class='warning'>You feel your headset vibrate but can hear nothing from it!</span>")
+	else
+		on_hear_radio(part_a, speaker_name, track, part_b, part_c, formatted)
 
 /proc/say_timestamp()
 	return "<span class='say_quote'>\[[stationtime2text()]\]</span>"
