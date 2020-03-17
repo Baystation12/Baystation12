@@ -1,4 +1,0 @@
-author: "mikomyazaki"
-delete-after: True
-changes: 
-  - tweak: "Can now insert organs (external and internal) into the bioprinters (robotic and organic) to recover part of their cost in materials."
