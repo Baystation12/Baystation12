@@ -156,6 +156,8 @@ var/list/slot_equipment_priority = list( \
 
 //Drops the item in our active hand. TODO: rename this to drop_active_hand or something
 /mob/proc/drop_item(var/atom/Target)
+	if(istype(loc,/obj/vehicles))
+		return
 	if(hand)	return drop_l_hand(Target)
 	else		return drop_r_hand(Target)
 

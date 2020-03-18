@@ -53,7 +53,7 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	icon_state = "minor_harness"
 	item_state = "minor_harness"
 	species_restricted = list("Yanme e")
-	armor = list(melee = 65, bullet = 50, laser = 20, energy = 20, bomb = 45, bio = 25, rad = 20)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS|HANDS|FEET|HEAD
 	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
 	canremove = 0
@@ -73,6 +73,6 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	icon_state = "leader_harness"
 	item_state = "leader_harness"
 	specials = list(/datum/armourspecials/shields)
-	totalshields = 50
+	totalshields = 60
 
 #undef YANMEE_ICON

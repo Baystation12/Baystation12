@@ -197,7 +197,7 @@ cloak disrupt override
 
 	if(effective_force > 10 || effective_force >= 5 && prob(33))
 		forcesay(GLOB.hit_appends)	//forcesay checks stat already
-	if((I.damtype == BRUTE || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
+	if((I.damtype == BRUTE || I.damtype == BURN || I.damtype == PAIN) && prob(25 + (effective_force * 2)))
 		if(!stat)
 			if(headcheck(hit_zone))
 				//Harder to score a stun but if you do it lasts a bit longer
@@ -208,7 +208,7 @@ cloak disrupt override
 				//Easier to score a stun but lasts less time
 				if(prob(effective_force + 10))
 					visible_message("<span class='danger'>[src] has been knocked down!</span>")
-					apply_effect(6, WEAKEN, blocked)
+					apply_effect(2, WEAKEN, blocked)
 
 		//Apply blood
 		attack_bloody(I, user, effective_force, hit_zone)

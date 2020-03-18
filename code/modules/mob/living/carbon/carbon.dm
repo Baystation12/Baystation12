@@ -269,7 +269,7 @@
 
 /mob/living/carbon/throw_item(atom/target)
 	src.throw_mode_off()
-	if(usr.stat || !target)
+	if(usr.stat || !target || istype(loc,/obj/vehicles))
 		return
 	if(target.type == /obj/screen) return
 

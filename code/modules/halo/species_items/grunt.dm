@@ -23,7 +23,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //Essentially, the entire body besides the head
 
 	flags_inv = HIDESUITSTORAGE|HIDEBACK
-	armor = list(melee = 45, bullet = 40, laser = 10, energy = 10, bomb = 40, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 40, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25) //worse than marine
 	armor_thickness_modifiers = list()
 	unacidable = 1
 
@@ -173,7 +173,7 @@
 	icon_state = "combatharness_major"
 	item_state = "combatharness_major"
 
-	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 45, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
 
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
@@ -184,7 +184,7 @@
 	icon_state = "combatharness_ultra"
 	item_state = "combatharness_ultra"
 
-	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 45, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
 
 	//totalshields = 100
 	//specials = list(/datum/armourspecials/shields/unggoy)
@@ -200,7 +200,7 @@
 	action_button_name = "Toggle Active Camouflage"
 	specials = list(/datum/armourspecials/cloaking)
 
-	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
+	armor = list(melee = 55, bullet = 45, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
 
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/deacon
@@ -210,10 +210,9 @@
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "combatharness_deacon"
 	item_state = "combatharness_deacon"
-	totalshields = 50 //Pretty much just a distinguishing feature.
+	totalshields = 60 //Pretty much just a distinguishing feature.
 
-	armor = list(melee = 45, bullet = 45, laser = 20, energy = 20, bomb = 60, bio = 0, rad = 0)
-
+	armor = list(melee = 55, bullet = 45, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
 
 	specials = list(/datum/armourspecials/shields/unggoy)
 
@@ -224,7 +223,7 @@
 	icon_override = GRUNT_GEAR_ICON
 	icon_state = "combatharness_honour"
 	item_state = "combatharness_honour"
-	totalshields = 100 //Pretty much just a distinguishing feature.
+	totalshields = 150 //Pretty much just a distinguishing feature.
 
 	specials = list(/datum/armourspecials/shields/unggoy)
 

@@ -77,7 +77,7 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 		"Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',\
 		"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
-	armor = list(melee = 75, bullet = 65, laser = 40, energy = 40, bomb = 45, bio = 25, rad = 20)
+	armor = list(melee = 55, bullet = 50, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25) //A bit better than odsts
 	armor_thickness_modifiers = list()
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 

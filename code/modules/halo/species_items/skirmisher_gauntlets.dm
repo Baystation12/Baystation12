@@ -21,6 +21,7 @@
 	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
 
 /datum/armourspecials/shields/tvoan
+	shield_recharge_delay = 5 SECONDS
 	shieldoverlay = new /obj/effect/overlay/shields/tvoan
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/New()
@@ -61,5 +62,5 @@
 	name = "T'Voan Champion shield gauntlets"
 	item_state = "championshield"
 	icon_state = "championglove"
-	shieldstrength = 70
-	totalshields = 70
+	shieldstrength = 90
+	totalshields = 90
