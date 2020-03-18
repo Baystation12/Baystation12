@@ -364,7 +364,7 @@ meteor_act
 			visible_message("<span class='warning'>\The [src] staggers under the impact!</span>","<span class='warning'>You stagger under the impact!</span>")
 
 			if(!src.isinspace())
-				src.throw_at(get_edge_target_turf(src,dir),1,momentum)
+				src.throw_at(get_edge_target_turf(src,dir),1,momentum - THROWNOBJ_KNOCKBACK_SPEED)
 
 			if(!O || !src) return
 
