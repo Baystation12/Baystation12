@@ -90,9 +90,9 @@
 	unarmed_types = list(/datum/unarmed_attack/bird_punch)
 	appearance_flags = HAS_SKIN_TONE | HAS_HAIR_COLOR
 
-	pain_mod = 0.8
-	brute_mod = 1.2
-	slowdown = -1.5
+	pain_mod = 0.9
+	brute_mod = 1.1
+	slowdown = -1.0
 
 	total_health = 200
 	pixel_offset_x = -4
