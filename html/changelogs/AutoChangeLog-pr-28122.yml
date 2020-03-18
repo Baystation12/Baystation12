@@ -1,5 +1,0 @@
-author: "Deadmon"
-delete-after: True
-changes: 
-  - tweak: "Changes Counselor to no longer have psionics. Mentalists still get psionics. You now have a choice whether you want psionics or not."
-  - rscadd: "Adds Psionic counselor and Psychiatrist alt titles. Psionic counselor gets the old psi abilities of the old counselor. Psychiatrist has no psi abilities."
