@@ -8,4 +8,4 @@
 	..()
 
 /datum/proc/get_saved_vars()
-	return GLOB.saved_vars[type] || []
+	return GLOB.saved_vars[type] || list()
