@@ -185,6 +185,9 @@
 			var/mob/living/L = AM
 			var/injection_status = L.can_inject(null, BP_CHEST)
 			log_world("Injection status? [injection_status]")
+			var/injection_delay = 3 SECONDS
+			if(injection_status == INJECTION_PORT)
+				injection_delay += INJECTION_PORT_DELAY
 			if(!injection_status)
 				activate_pin(3)
 				return
@@ -193,7 +196,7 @@
 			L.visible_message("<span class='danger'>\The [acting_object] is trying to inject [L]!</span>", \
 								"<span class='danger'>\The [acting_object] is trying to inject you!</span>")
 			busy = TRUE
-			addtimer(CALLBACK(src, .proc/inject_after, weakref(L)), injection_status * 3 SECONDS)
+			addtimer(CALLBACK(src, .proc/inject_after, weakref(L)), injection_delay)
 			return
 		else
 			if(!AM.is_open_container())
@@ -203,7 +206,7 @@
 
 			reagents.trans_to(AM, transfer_amount)
 
-	if(direction_mode == IC_REAGENTS_DRAW)
+	else if(direction_mode == IC_REAGENTS_DRAW)
 		if(reagents.total_volume >= reagents.maximum_volume)
 			acting_object.visible_message("\The [acting_object] tries to draw from [AM], but the injector is full.")
 			activate_pin(3)
@@ -214,13 +217,16 @@
 		if(istype(AM, /mob/living/carbon))
 			var/mob/living/carbon/C = AM
 			var/injection_status = C.can_inject(null, BP_CHEST)
+			var/injection_delay = 3 SECONDS
+			if(injection_status == INJECTION_PORT)
+				injection_delay += INJECTION_PORT_DELAY
 			if(istype(C, /mob/living/carbon/slime) || !C.dna || !injection_status)
 				activate_pin(3)
 				return
 			C.visible_message("<span class='danger'>\The [acting_object] is trying to take a blood sample from [C]!</span>", \
 								"<span class='danger'>\The [acting_object] is trying to take a blood sample from you!</span>")
 			busy = TRUE
-			addtimer(CALLBACK(src, .proc/draw_after, weakref(C), tramount), injection_status * 3 SECONDS)
+			addtimer(CALLBACK(src, .proc/draw_after, weakref(C), tramount), injection_delay)
 			return
 
 		else
@@ -382,7 +388,7 @@
 	if(!I.reagents || !I.reagents.total_volume)
 		activate_pin(3)
 		return FALSE
-	
+
 	I.reagents.trans_to(src,I.reagents.total_volume)
 	if(!I.reagents.total_volume)
 		qdel(I)
@@ -608,7 +614,7 @@
 		if(!check_power())
 			power_fail()
 			return ..()
-	
+
 		set_pin_data(IC_OUTPUT, 2, temperature - T0C)
 		push_data()
 
