@@ -92,7 +92,7 @@
 		T.test_var = S
 		serializer.SerializeThing(T)
 
-		if(serializer.var_inserts[1] != correct_sql)
+		if(serializer.var_inserts[2] != correct_sql)
 			fail("Object was not saved correctly. Got '[serializer.var_inserts[1]]' and expected '[correct_sql]'.")
 		else
 			pass("Object is serializing correctly.")
@@ -171,7 +171,7 @@
 		var/S = list("foo")
 		var/correct_sql = "(1,1,'test_var','LIST',\"1\",1)"
 		var/list_insert = "(1,1,1)"
-		var/element_insert = ""
+		var/element_insert = "(1,1,1,\"foo\",'TEXT',\"\",\"NULL\",1)"
 		var/datum/sample_obj/test_container/T = new()
 		T.test_var = S
 		serializer.SerializeThing(T)
