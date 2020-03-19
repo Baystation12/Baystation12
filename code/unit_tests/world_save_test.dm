@@ -34,7 +34,7 @@
 		else
 			pass("Text is serializing correctly.")
 	catch(var/exception/e)
-		fail("Text was not saved correctly. Caught exception '[e]'.")
+		fail("Text was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/numbers_saveable
@@ -55,7 +55,7 @@
 		else
 			pass("Number is serializing correctly.")
 	catch(var/exception/e)
-		fail("Number was not saved correctly. Caught exception '[e]'.")
+		fail("Number was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/nulls_saveable
@@ -76,7 +76,7 @@
 		else
 			pass("Null is serializing correctly.")
 	catch(var/exception/e)
-		fail("Null was not saved correctly. Caught exception '[e]'.")
+		fail("Null was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/objects_saveable
@@ -92,12 +92,17 @@
 		T.test_var = S
 		serializer.SerializeThing(T)
 
-		if(serializer.var_inserts[2] != correct_sql)
-			fail("Object was not saved correctly. Got '[serializer.var_inserts[1]]' and expected '[correct_sql]'.")
+		var/found_var = FALSE
+		for(var/insert in serializer.var_inserts)
+			if(insert == correct_sql)
+				found_var = TRUE
+				break
+		if(!found_var)
+			fail("Object was not saved correctly. Unable to find serialized object in inserts.")
 		else
 			pass("Object is serializing correctly.")
 	catch(var/exception/e)
-		fail("Object was not saved correctly. Caught exception '[e]'.")
+		fail("Object was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/recursion_saveable
@@ -116,7 +121,7 @@
 		else
 			pass("Recursive Object is serializing correctly.")
 	catch(var/exception/e)
-		fail("Recursive Object was not saved correctly. Caught exception '[e]'.")
+		fail("Recursive Object was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/paths_saveable
@@ -137,7 +142,7 @@
 		else
 			pass("Path is serializing correctly.")
 	catch(var/exception/e)
-		fail("Path was not saved correctly. Caught exception '[e]'.")
+		fail("Path was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/procs_saveable
@@ -158,7 +163,7 @@
 		else
 			pass("Proc is serializing correctly.")
 	catch(var/exception/e)
-		fail("Proc was not saved correctly. Caught exception '[e]'.")
+		fail("Proc was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/lists_saveable
@@ -185,7 +190,63 @@
 		else
 			pass("List is serializing correctly.")
 	catch(var/exception/e)
-		fail("List was not saved correctly. Caught exception '[e]'.")
+		fail("List was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
+	return 1
+
+/datum/unit_test/persistence/dicts_saveable
+	name = "PERSISTENCE: Dicts are saveable by serializer."
+
+/datum/unit_test/persistence/dicts_saveable/start_test()
+	try
+		reset_serializer()
+
+		var/S = list()
+		S["foo"] = "bar"
+		var/correct_sql = "(1,1,'test_var','LIST',\"1\",1)"
+		var/list_insert = "(1,1,1)"
+		var/element_insert = "(1,1,1,\"foo\",'TEXT',\"bar\",\"TEXT\",1)"
+		var/datum/sample_obj/test_container/T = new()
+		T.test_var = S
+		serializer.SerializeThing(T)
+
+		if(serializer.var_inserts[1] != correct_sql)
+			fail("Dict was not saved correctly. Invalid var insert. Got '[serializer.var_inserts[1]]' and expected '[correct_sql]'.")
+		else if(serializer.list_inserts[1] != list_insert)
+			fail("Dict was not saved correctly. Invalid list insert. Got '[serializer.list_inserts[1]]' and expected '[list_insert]'.")
+		else if(serializer.element_inserts[1] != element_insert)
+			fail("Dict was not saved correctly. Invalid element insert. Got '[serializer.element_inserts[1]]' and expected '[element_insert]'.")
+		else
+			pass("Dict is serializing correctly.")
+	catch(var/exception/e)
+		fail("Dict was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
+	return 1
+
+/datum/unit_test/persistence/mixed_list_saveable
+	name = "PERSISTENCE: Mixed lists are saveable by serializer."
+
+/datum/unit_test/persistence/mixed_list_saveable/start_test()
+	try
+		reset_serializer()
+
+		var/S = list("zed")
+		S["foo"] = "bar"
+		var/correct_sql = "(1,1,'test_var','LIST',\"1\",1)"
+		var/element_insert = "(1,1,1,\"zed\",'TEXT',\"\",\"NULL\",1)"
+		var/element2_insert = "(2,1,2,\"foo\",'TEXT',\"bar\",\"TEXT\",1)"
+		var/datum/sample_obj/test_container/T = new()
+		T.test_var = S
+		serializer.SerializeThing(T)
+
+		if(serializer.var_inserts[1] != correct_sql)
+			fail("Mixed list was not saved correctly. Invalid var insert. Got '[serializer.var_inserts[1]]' and expected '[correct_sql]'.")
+		else if(serializer.element_inserts[1] != element_insert)
+			fail("Mixed list was not saved correctly. Invalid element insert. Got '[serializer.element_inserts[1]]' and expected '[element_insert]'.")
+		else if(serializer.element_inserts[2] != element2_insert)
+			fail("Mixed list was not saved correctly. Invalid second element insert. Got '[serializer.element_inserts[2]]' and expected '[element2_insert]'.")
+		else
+			pass("Mixed list is serializing correctly.")
+	catch(var/exception/e)
+		fail("Mixed list was not saved correctly. Caught exception on line[e.line] at [e.file] with msg '[e]'.")
 	return 1
 
 /datum/unit_test/persistence/saved_vars_correct
@@ -193,17 +254,31 @@
 
 /datum/unit_test/persistence/saved_vars_correct/start_test()
 	var/datum/sample_obj/test_container/sample_datum = new()
-	if(sample_datum.vars != sample_datum.get_saved_vars())
-		fail("Incorrect vars returned. No whitelist was provided but saved_vars was not equal to vars.")
-	else
-		//ADD_SAVED_VAR(/datum/sample_obj/test_container, "test_var")
-		GLOB.saved_vars[/datum/sample_obj/test_container] = list()
-		GLOB.saved_vars[/datum/sample_obj/test_container].Add("test_var")
-		if("test_var_2" in sample_datum.get_saved_vars())
-			fail("Incorrect vars returned. Got 'test_var_2' despite it not being on the whitelist")
+	try
+		if(sample_datum.get_default_vars() == sample_datum.get_saved_vars())
+			fail("Incorrect vars returned. Didn't get back default list. Got back vars: [jointext(sample_datum.get_saved_vars(), ", ")].")
 		else
-			pass("Correct saved vars returned.")
-	GLOB.saved_vars.Remove(/datum/sample_obj/test_container)
+			LAZYADD(GLOB.saved_vars[/datum/sample_obj/test_container], "test_var")
+			if("test_var_2" in sample_datum.get_saved_vars())
+				fail("Incorrect vars returned. Got 'test_var_2' despite it not being on the whitelist")
+			else if(!("test_var" in sample_datum.get_saved_vars()))
+				fail("test_var was not in whitelist despite being explicitly added.")
+			else
+				pass("Correct saved vars returned.")
+		GLOB.saved_vars.Remove(/datum/sample_obj/test_container)
+	catch(var/exception/e)
+		fail("Caught exception on line[e.line] at [e.file] with msg '[e]'.")
+	return 1
+
+/datum/unit_test/persistence/vars_never_included
+	name = "PERSISTENCE: Datums never return vars as something to save."
+
+/datum/unit_test/persistence/vars_never_included/start_test()
+	var/datum/sample_obj/test_container/sample_datum = new()
+	if("vars" in sample_datum.get_saved_vars())
+		fail("Vars is being serialized! Bad!")
+	else
+		pass("Vars is not being serialized.")
 	return 1
 
 #endif

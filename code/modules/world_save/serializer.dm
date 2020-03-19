@@ -12,19 +12,6 @@
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
 
-	var/list/var_blacklist = list(
-		"is_processing", "vars", "active_timers", "weakref", "extensions",
-		"filters", "overlays", "underlays", "appearance", "parent_type",
-		"vis_contents", "render_source", "render_target", "lighting_overlay",
-		"type", "light", "gc_destroyed", "tile_overlay_cache", "damage_overlays",
-		"timers", "mouse_over_pointer", "mouse_drag_pointer", "mouse_drop_pointer",
-		"mouse_drop_zone"
-	)
-
-	var/list/type_blacklist = list(
-		/datum/lighting_corner
-	)
-
 /datum/persistence/serializer/proc/isproc(var/test)
 	var/ref = copytext("\ref[test]",4,6)
 	return ref == "26"
@@ -76,15 +63,6 @@
 
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(KV) || isicon(KV) || isfile(EV) || isicon(EV))
-			continue
-
-		// Check type blacklists.
-		var/skip = FALSE
-		for(var/blacklist in type_blacklist)
-			if(istype(KV, blacklist) || istype(EV, blacklist))
-				skip = TRUE
-				break
-		if(skip)
 			continue
 
 		// Serialize the list.
@@ -163,19 +141,6 @@
 
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(VV) || isicon(VV))
-			continue
-
-		// Blacklist check.
-		if(V in var_blacklist)
-			continue
-
-		// Check type blacklists.
-		var/skip = FALSE
-		for(var/blacklist in type_blacklist)
-			if(istype(VV, blacklist))
-				skip = TRUE
-				break
-		if(skip)
 			continue
 
 		var/v_i = var_index

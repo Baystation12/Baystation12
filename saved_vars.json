@@ -1681,6 +1681,17 @@
 	  "vars": [
 		"air"
 	  ]
+	},
+	{
+	   "path": "/obj/item/weapon/implant/sic",
+	   "vars": [
+		 "unique_id",
+		 "alias",
+		 "ignored",
+		 "max_bill",
+		 "current_bill",
+		 "free_messaging"
+	   ]
 	}
   ]
   

@@ -42,8 +42,6 @@
 	for(var/y in yi to yi + SAVECHUNK_SIZEY)
 		for(var/x in xi to xi + SAVECHUNK_SIZEX)
 			var/turf/T = locate(x,y,z)
-			if(!T || ((T.type == /turf/space || T.type == /turf/simulated/open) && (!T.contents || !T.contents.len)))
-				continue
 			serializer.SerializeThing(T)
 	serializer.Commit()
 
