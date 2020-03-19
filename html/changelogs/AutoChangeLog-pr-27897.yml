@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "Suit Sensors program will now report cell charge for synthetic crew-members."
+  - tweak: "Robot analyzers will report cell charge of the target synthetic."
