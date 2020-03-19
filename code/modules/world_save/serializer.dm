@@ -124,7 +124,8 @@
 	var/y = 0
 	var/z = 0
 
-	thing.before_save() // Before save hook.
+	if(thing) // Before save hook.
+		thing.before_save() 
 	if(ispath(thing.type, /turf))
 		var/turf/T = thing
 		x = T.x
@@ -173,7 +174,8 @@
 			continue
 		VV = sanitizeSQL("[VV]")
 		var_inserts.Add("([v_i],[t_i],'[V]','[VT]',\"[VV]\",[version])")
-	thing.after_save()// After save hook.
+	if(thing) // After save hook.
+		thing.after_save()
 	return t_i
 
 /datum/persistence/serializer/proc/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z)
