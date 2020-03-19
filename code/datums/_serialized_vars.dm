@@ -1536,7 +1536,6 @@
 	//
 	LAZYADD(.[/obj/item/weapon/key], "key_data")
 
-
 	//////////////////////////////////////////////////////////////////////////////
 	//
 	// /obj/item/weapon/material/lock_construct
@@ -3271,4 +3270,8 @@
 	LAZYADD(.[/zone], "turf_coords")
 
 
+	for(var/type in .)
+		for (var/subtype in subtypesof(type))
+			for (var/v in .[type])
+				LAZYDISTINCTADD(.[subtype], v)
 
