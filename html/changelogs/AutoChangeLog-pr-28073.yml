@@ -1,0 +1,4 @@
+author: "SomeoneStoleMyNickname"
+delete-after: True
+changes: 
+  - rscadd: "Added redacted tags to text formatting. Use adds a set of font boxes to simulate classic stencil redactions."
