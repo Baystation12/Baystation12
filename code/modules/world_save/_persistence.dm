@@ -8,6 +8,4 @@
 	..()
 
 /datum/proc/get_saved_vars()
-	if (type in GLOB.saved_vars)
-		return GLOB.saved_vars[type]
-	return vars
+	return GLOB.saved_vars[type] || []

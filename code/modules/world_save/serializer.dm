@@ -156,6 +156,8 @@
 	thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
 	thing_map["\ref[thing]"] = t_i
 	for(var/V in thing.get_saved_vars())
+		if(!issaved(thing.vars[V]))
+			continue
 		var/VV = thing.vars[V]
 		var/VT = "VAR"
 
