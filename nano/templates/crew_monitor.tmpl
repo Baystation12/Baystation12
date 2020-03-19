@@ -21,10 +21,16 @@ Used In File(s): code\modules\modular_computers\file_system\programs\medical\sui
 			<td>{{:value.name}} ({{:value.assignment}}): </td>
 
 			{{if value.sensor_type >= 2}}
-				{{if value.true_pulse == -1}}
-					<td><span class="white">Pulse</span> <span class='{{:value.pulse_span}}'>{{:value.pulse}}</span></td>
+				{{if value.pulse != "N/A"}}
+					{{if value.true_pulse == -1}}
+						<td><span class="white">Pulse</span> <span class='{{:value.pulse_span}}'>{{:value.pulse}}</span></td>
+					{{else}}
+						<td><span class="white">Pulse</span> <span class='{{:value.pulse_span}}'>{{:value.pulse}}</span> bpm</td>
+					{{/if}}
+				{{else value.charge_span != "N/A"}}
+					<td><span class="white">Charge</span> <span class='{{:value.charge_span}}'>{{:value.charge}}%</span></td>
 				{{else}}
-					<td><span class="white">Pulse</span> <span class='{{:value.pulse_span}}'>{{:value.pulse}}</span> bpm</td>
+					<td><span class="white">Pulse</span> <span class="white">N/A</span></td>
 				{{/if}}
 			{{else}}
 				{{if value.alert}}
