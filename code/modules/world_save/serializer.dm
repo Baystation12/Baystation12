@@ -238,7 +238,7 @@
 	if(!dbcon.IsConnected())
 		return
 
-	/var/list/existing = list()
+	var/list/existing = list()
 	var/DBQuery/query = dbcon.NewQuery("SELECT `key`,`key_type`,`value`,`value_type` FROM `list_element` WHERE `list_id`=[list_id] AND `version`=[version] ORDER BY `index` DESC;")
 	query.Execute()
 	while(query.NextRow())
