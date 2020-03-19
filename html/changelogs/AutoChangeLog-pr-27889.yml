@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - bugfix: "Adherent with usable levitation plates can now feather-fall, avoiding damage"
