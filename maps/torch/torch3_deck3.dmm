@@ -10636,6 +10636,9 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
+/obj/item/taperoll/bog{
+	pixel_x = -12
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head)
 "vZ" = (

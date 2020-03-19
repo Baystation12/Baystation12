@@ -7617,6 +7617,7 @@
 	dir = 4;
 	level = 2
 	},
+/obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "aAr" = (
@@ -22517,6 +22518,7 @@
 	dir = 4;
 	level = 2
 	},
+/obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "kss" = (

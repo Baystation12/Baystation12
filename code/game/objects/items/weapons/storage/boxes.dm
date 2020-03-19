@@ -547,6 +547,11 @@
 						/obj/item/taperoll/bureaucracy
 					)
 
+/obj/item/weapon/storage/box/bogrolls
+	name = "box of spare bogrolls"
+	desc = "A box full of toilet paper."
+	startswith = list(/obj/item/taperoll/bog = 6)
+
 /obj/item/weapon/storage/box/cola
 	name = "box of sodas"
 	desc = "A box full of soda cans."
