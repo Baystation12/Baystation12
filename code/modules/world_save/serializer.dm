@@ -134,8 +134,9 @@
 /datum/persistence/serializer/proc/SerializeThing(var/datum/thing)
 	// Check for existing references first. If we've already saved
 	// there's no reason to save again.
-	if ("\ref[thing]" in thing_map)
-		return thing_map["\ref[thing]"]
+	var/datum/existing = thing_map["\ref[thing]"]
+	if (existing)
+		return existing
 
 	// Thing didn't exist. Create it.
 	var/t_i = thing_index
