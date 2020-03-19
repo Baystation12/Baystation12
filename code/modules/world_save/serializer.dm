@@ -203,7 +203,7 @@
 		var/turf/T = locate(x, y, z)
 		T.ChangeTurf(thing_path)
 		if (T == null)
-			world.log << "Attempting to deserialize onto turf [x],[y],[z] failed. Could not locate turf."
+			to_world_log("Attempting to deserialize onto turf [x],[y],[z] failed. Could not locate turf.")
 			return
 		existing = T
 	else
@@ -285,7 +285,6 @@
 	if(!dbcon.IsConnected())
 		return
 
-	// world.log << "INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[jointext(thing_inserts, ",")]"
 	var/values
 	var/DBQuery/query
 
@@ -307,8 +306,8 @@
 			query = dbcon.NewQuery("INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES[values]")
 			query.Execute()
 	catch (var/exception/e)
-		world.log << "World Serializer Failed"
-		world.log << e
+		to_world_log("World Serializer Failed")
+		to_world_log(e)
 
 	thing_inserts.Cut(1)
 	var_inserts.Cut(1)
