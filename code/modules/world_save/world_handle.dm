@@ -29,7 +29,7 @@
 	SetVersion(version + 1)
 
 	// Collect the z-levels we're saving and get the turfs!
-	world.log << "Saving [LAZYLEN(SSmapping.saved_levels)] z-levels."
+	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels.")
 	for(var/z in SSmapping.saved_levels)
 		for(var/x in 1 to world.maxx step SAVECHUNK_SIZEX)
 			for(var/y in 1 to world.maxy step SAVECHUNK_SIZEY)
