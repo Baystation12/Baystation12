@@ -1,7 +1,0 @@
-author: "zkxs"
-delete-after: True
-changes: 
-  - tweak: "Injecting yourself with a syringe is no longer instant. Injection time scales down with higher medicine skill."
-  - tweak: "Using autoinjectors, hyposprays, and reagent pens on suited individuals now has a delay due to searching for an injection port. This delay scales down with higher medicine skill."
-  - tweak: "Syringe and dart guns no longer magically home on injection ports."
-  - tweak: "Autoinjector delay now scales down with higher medicine skill, taking 1 second at basic, and 0.4 seconds at master."
