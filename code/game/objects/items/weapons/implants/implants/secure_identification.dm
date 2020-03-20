@@ -4,12 +4,12 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_DATA = 3)
 	hidden = 1
 
-	unique_id = ""
-	alias = ""
-	ignored = FALSE
-	max_bill = 3000
-	current_bill = 0
-	free_messaging = FALSE
+	var/unique_id = ""
+	var/alias = ""
+	var/ignored = FALSE
+	var/max_bill = 3000
+	var/current_bill = 0
+	var/free_messaging = FALSE
 
 /obj/item/weapon/implant/sic/get_data()
 	. = {"
@@ -45,7 +45,7 @@
 	. = ..()
 
 /obj/item/weapon/implant/sic/can_implant(mob/M, mob/user, target_zone)
-	var/mob/living/carbon/human/H = M	
+	var/mob/living/carbon/human/H = M
 	if(istype(H))
 		var/obj/item/organ/internal/B = H.internal_organs_by_name[BP_BRAIN]
 		if(!B || H.isSynthetic())
