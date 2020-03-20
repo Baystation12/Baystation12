@@ -87,3 +87,9 @@
 		return
 	power_change()
 	..(severity)
+
+/obj/machinery/light_switch/before_save()
+	. = ..()
+	var/area/curarea = get_area(src)
+	if(connected_area && connected_area.name != curarea?.name && !other_area)
+		other_area = connected_area.name
