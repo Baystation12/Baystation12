@@ -1059,6 +1059,7 @@
 #include "code\game\objects\items\weapons\implants\implants\freedom.dm"
 #include "code\game\objects\items\weapons\implants\implants\imprinting.dm"
 #include "code\game\objects\items\weapons\implants\implants\loyalty.dm"
+#include "code\game\objects\items\weapons\implants\implants\secure_identification.dm"
 #include "code\game\objects\items\weapons\implants\implants\tracking.dm"
 #include "code\game\objects\items\weapons\implants\implants\translator.dm"
 #include "code\game\objects\items\weapons\implants\implants\uplink.dm"
