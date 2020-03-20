@@ -1692,6 +1692,51 @@
 		 "current_bill",
 		 "free_messaging"
 	   ]
+	},
+	{
+		"path": "/turf",
+		"vars": [
+			"level",
+			"holy",
+			"blocks_air",
+			"blessed",
+			"fluid_can_pass",
+			"flooded",
+			"footstep_type",
+			"contents"
+		]
+	},
+	{
+		"path": "/mob",
+		"vars": [
+			"real_name",
+			"mind",
+			"contents",
+			"dna",
+			"feet_blood_color",
+			"gender",
+			"languages"
+		]
+	},
+	{
+		"path": "/atom/movable",
+		"vars": [
+			"level",
+			"germ_level",
+			"blood_DNA",
+			"was_bloodied",
+			"last_bumped",
+			"climbers",
+			"contents"
+		]
+	},
+	{
+		"path": "/atom",
+		"vars": [
+			"suit_fibers",
+			"fingerprints",
+			"gunshot_residue"
+		]
 	}
   ]
   

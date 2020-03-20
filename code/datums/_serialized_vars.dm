@@ -1888,6 +1888,67 @@
 	LAZYADD(.[/zone], "air")
 
 
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/weapon/implant/sic
+	//
+	LAZYADD(.[/obj/item/weapon/implant/sic], "unique_id")
+	LAZYADD(.[/obj/item/weapon/implant/sic], "alias")
+	LAZYADD(.[/obj/item/weapon/implant/sic], "ignored")
+	LAZYADD(.[/obj/item/weapon/implant/sic], "max_bill")
+	LAZYADD(.[/obj/item/weapon/implant/sic], "current_bill")
+	LAZYADD(.[/obj/item/weapon/implant/sic], "free_messaging")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /turf
+	//
+	LAZYADD(.[/turf], "level")
+	LAZYADD(.[/turf], "holy")
+	LAZYADD(.[/turf], "blocks_air")
+	LAZYADD(.[/turf], "blessed")
+	LAZYADD(.[/turf], "fluid_can_pass")
+	LAZYADD(.[/turf], "flooded")
+	LAZYADD(.[/turf], "footstep_type")
+	LAZYADD(.[/turf], "contents")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob
+	//
+	LAZYADD(.[/mob], "real_name")
+	LAZYADD(.[/mob], "mind")
+	LAZYADD(.[/mob], "contents")
+	LAZYADD(.[/mob], "dna")
+	LAZYADD(.[/mob], "feet_blood_color")
+	LAZYADD(.[/mob], "gender")
+	LAZYADD(.[/mob], "languages")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /atom/movable
+	//
+	LAZYADD(.[/atom/movable], "level")
+	LAZYADD(.[/atom/movable], "germ_level")
+	LAZYADD(.[/atom/movable], "blood_DNA")
+	LAZYADD(.[/atom/movable], "was_bloodied")
+	LAZYADD(.[/atom/movable], "last_bumped")
+	LAZYADD(.[/atom/movable], "climbers")
+	LAZYADD(.[/atom/movable], "contents")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /atom
+	//
+	LAZYADD(.[/atom], "suit_fibers")
+	LAZYADD(.[/atom], "fingerprints")
+	LAZYADD(.[/atom], "gunshot_residue")
+
+
 	for(var/type in .)
 		for (var/subtype in subtypesof(type))
 			for (var/v in .[type])
