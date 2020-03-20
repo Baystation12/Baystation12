@@ -728,6 +728,9 @@
 			if(use_obj)
 				holder = use_obj.loc
 				if(istype(holder))
+					if (!canremove)
+						to_chat(wearer, "<span class='warning'>You cannot disengage your [use_obj.name] while your hardsuit is active.")
+						return
 					if(use_obj && check_slot == use_obj)
 						to_chat(wearer, "<font color='blue'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></font>")
 						use_obj.canremove = 1
