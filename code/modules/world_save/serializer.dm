@@ -64,6 +64,12 @@
 	list_index += 1
 	list_inserts.Add("([l_i],[LAZYLEN(_list)],[version])")
 	list_map["\ref[_list]"] = l_i
+
+#ifdef DEBUG
+	if(verbose_logging)
+		to_world_log("(SerializeList) ([l_i],[LAZYLEN(_list)],[version])")
+#endif
+
 	var/I = 1
 	for(var/key in _list)
 		var/e_i = element_index
@@ -98,6 +104,10 @@
 		else
 			// Don't know what this is. Skip it.
 			element_index -= 1
+#ifdef DEBUG
+			if(verbose_logging)
+				to_world_log("(SerializeListElem-Skip) Unknown Key")
+#endif
 			continue
 
 		if(isnum(EV))
@@ -117,9 +127,17 @@
 		else
 			// Don't know what this is. Skip it.
 			element_index -= 1
+#ifdef DEBUG
+			if(verbose_logging)
+				to_world_log("(SerializeListElem-Skip) Unknown Value")
+#endif
 			continue
 		KV = sanitizeSQL("[KV]")
 		EV = sanitizeSQL("[EV]")
+#ifdef DEBUG
+		if(verbose_logging)
+			to_world_log("(SerializeListElem-Done) ([e_i],[l_i],[I],\"[KV]\",'[KT]',\"[EV]\",\"[ET]\",[version])")
+#endif
 		element_inserts.Add("([e_i],[l_i],[I],\"[KV]\",'[KT]',\"[EV]\",\"[ET]\",[version])")
 		I += 1
 	return l_i
@@ -156,8 +174,8 @@
 #ifdef DEBUG
 	if(x == 34 && y == 106 && z == 1)
 		verbose_logging = TRUE
-	else
-		verbose_logging = FALSE
+	// else
+	// 	verbose_logging = FALSE
 
 	if(verbose_logging)
 		to_world_log("(SerializeThing) ([t_i],'[thing.type]',[x],[y],[z],[version])")
