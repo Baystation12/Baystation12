@@ -6,6 +6,7 @@
 
 	var/list/thing_map = list()
 	var/list/reverse_map = list()
+	var/list/list_map = list()
 
 	var/list/thing_inserts = list()
 	var/list/var_inserts = list()
@@ -45,10 +46,17 @@
 		break
 
 /datum/persistence/serializer/proc/SerializeList(var/_list)
+	if(isnull(_list))
+		return
+
+	var/list/existing = list_map["\ref[_list]"]
+	if(!isnull(existing))
+		return existing
+
 	var/l_i = list_index
 	list_index += 1
 	list_inserts.Add("([l_i],[LAZYLEN(_list)],[version])")
-
+	list_map["\ref[_list]"] = l_i
 	var/I = 1
 	for(var/key in _list)
 		var/e_i = element_index
@@ -112,8 +120,11 @@
 /datum/persistence/serializer/proc/SerializeThing(var/datum/thing)
 	// Check for existing references first. If we've already saved
 	// there's no reason to save again.
+	if(isnull(thing))
+		return
+
 	var/datum/existing = thing_map["\ref[thing]"]
-	if (existing)
+	if (!isnull(existing))
 		return existing
 
 	// Thing didn't exist. Create it.
@@ -124,8 +135,7 @@
 	var/y = 0
 	var/z = 0
 
-	if(thing) // Before save hook.
-		thing.before_save() 
+	thing.before_save() // Before save hook.
 	if(ispath(thing.type, /turf))
 		var/turf/T = thing
 		x = T.x
@@ -174,8 +184,7 @@
 			continue
 		VV = sanitizeSQL("[VV]")
 		var_inserts.Add("([v_i],[t_i],'[V]','[VT]',\"[VV]\",[version])")
-	if(thing) // After save hook.
-		thing.after_save()
+	thing.after_save() // After save hook.		
 	return t_i
 
 /datum/persistence/serializer/proc/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z)

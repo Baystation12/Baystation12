@@ -1,6 +1,3 @@
-#define SAVECHUNK_SIZEX 4
-#define SAVECHUNK_SIZEY 4
-
 /datum/persistence/world_handle
 	var/datum/persistence/serializer/serializer = new()
 
@@ -29,21 +26,20 @@
 	SetVersion(version + 1)
 
 	// Collect the z-levels we're saving and get the turfs!
-	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels.")
-	for(var/z in SSmapping.saved_levels)
-		for(var/x in 1 to world.maxx step SAVECHUNK_SIZEX)
-			for(var/y in 1 to world.maxy step SAVECHUNK_SIZEY)
-				SaveChunk(x,y,z)
+	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
 
-/datum/persistence/world_handle/proc/SaveChunk(var/xi, var/yi, var/zi)
-	var/z = zi
-	xi = (xi - (xi % SAVECHUNK_SIZEX) + 1)
-	yi = (yi - (yi % SAVECHUNK_SIZEY) + 1)
-	for(var/y in yi to yi + SAVECHUNK_SIZEY)
-		for(var/x in xi to xi + SAVECHUNK_SIZEX)
-			var/turf/T = locate(x,y,z)
-			serializer.SerializeThing(T)
-	serializer.Commit()
+	try
+		var/index = 1
+		for(var/z in SSmapping.saved_levels)
+			for(var/x in 1 to world.maxx)
+				for(var/y in 1 to world.maxy)
+					var/turf/T = locate(x,y,z)
+					if(!T)
+						continue
+					serializer.SerializeThing(T)
+					serializer.Commit()
+	catch (var/exception/e)
+		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
 
 /datum/persistence/world_handle/proc/LoadWorld()
 	// Loads all data in as part of a version.
@@ -64,6 +60,3 @@
 
 
 // /datum/persistence/world_handle/proc/LoadChunk(var/x, var/y, var/z)
-
-#undef SAVECHUNK_SIZEX
-#undef SAVECHUNK_SIZEY
