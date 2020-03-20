@@ -12,7 +12,7 @@
 	var/list/var_inserts = list()
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
 	var/verbose_logging = FALSE
 #endif
 
@@ -54,20 +54,21 @@
 
 	var/list/existing = list_map["\ref[_list]"]
 	if(!isnull(existing))
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
 		if(verbose_logging)
 			to_world_log("(SerializeList-Resv) \ref[_list] to [existing]")
 #endif
 		return existing
 
 	var/l_i = list_index
-	list_index += 1
-	list_inserts.Add("([l_i],[LAZYLEN(_list)],[version])")
+	list_index++
+	list_inserts.Add("([l_i],[length(_list)],[version])")
 	list_map["\ref[_list]"] = l_i
 
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
 	if(verbose_logging)
-		to_world_log("(SerializeList) ([l_i],[LAZYLEN(_list)],[version])")
+		CHECK_TICK
+		to_world_log("(SerializeList) ([l_i],[length(_list)],[version])")
 #endif
 
 	var/I = 1
@@ -87,59 +88,62 @@
 			continue
 
 		// Serialize the list.
-		element_index += 1
+		element_index++
 
-		if(isnum(key))
+		if (isnull(key))
+			KT = "NULL"
+		else if(isnum(key))
 			KT = "NUM"
 		else if (istext(key))
 			KT = "TEXT"
 		else if (islist(key))
 			KT = "LIST"
-			KV = SerializeList(KV)
-		else if(istype(KV, /datum))
+			KV = SerializeList(key)
+		else if(istype(key, /datum))
 			KT = "OBJ"
-			KV = SerializeThing(KV)
+			KV = SerializeThing(key)
 		else if (ispath(key) || isproc(key))
 			KT = "PATH"
 		else
 			// Don't know what this is. Skip it.
-			element_index -= 1
-#ifdef DEBUG
+			element_index--
+#ifdef SAVE_DEBUG
 			if(verbose_logging)
-				to_world_log("(SerializeListElem-Skip) Unknown Key")
+				to_world_log("(SerializeListElem-Skip) Unknown Key. Value: [key]")
 #endif
 			continue
 
-		if(isnum(EV))
-			ET = "NUM"
-		else if (istext(EV))
-			ET = "TEXT"
-		else if (isnull(EV))
-			ET = "NULL"
-		else if (islist(EV))
-			ET = "LIST"
-			EV = SerializeList(EV)
-		else if (istype(EV, /datum))
-			ET = "OBJ"
-			EV = SerializeThing(EV)
-		else if (ispath(EV) || isproc(EV))
-			ET = "PATH"
-		else
-			// Don't know what this is. Skip it.
-			element_index -= 1
-#ifdef DEBUG
-			if(verbose_logging)
-				to_world_log("(SerializeListElem-Skip) Unknown Value")
+		if(!isnull(key) && !isnull(EV))
+			if(isnum(EV))
+				ET = "NUM"
+			else if (istext(EV))
+				ET = "TEXT"
+			else if (isnull(EV))
+				ET = "NULL"
+			else if (islist(EV))
+				ET = "LIST"
+				EV = SerializeList(EV)
+			else if (istype(EV, /datum))
+				ET = "OBJ"
+				EV = SerializeThing(EV)
+			else if (ispath(EV) || isproc(EV))
+				ET = "PATH"
+			else
+				// Don't know what this is. Skip it.
+				element_index--
+#ifdef SAVE_DEBUG
+				if(verbose_logging)
+					to_world_log("(SerializeListElem-Skip) Unknown Value")
 #endif
-			continue
+				continue
 		KV = sanitizeSQL("[KV]")
 		EV = sanitizeSQL("[EV]")
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
 		if(verbose_logging)
 			to_world_log("(SerializeListElem-Done) ([e_i],[l_i],[I],\"[KV]\",'[KT]',\"[EV]\",\"[ET]\",[version])")
 #endif
 		element_inserts.Add("([e_i],[l_i],[I],\"[KV]\",'[KT]',\"[EV]\",\"[ET]\",[version])")
-		I += 1
+		I++
 	return l_i
 
 /datum/persistence/serializer/proc/SerializeThing(var/datum/thing)
@@ -150,7 +154,7 @@
 
 	var/datum/existing = thing_map["\ref[thing]"]
 	if (!isnull(existing))
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
 		if(verbose_logging)
 			to_world_log("(SerializeThing-Resv) \ref[thing] to [existing]")
 #endif
@@ -158,7 +162,7 @@
 
 	// Thing didn't exist. Create it.
 	var/t_i = thing_index
-	thing_index += 1
+	thing_index++
 
 	var/x = 0
 	var/y = 0
@@ -171,7 +175,8 @@
 		y = T.y
 		z = T.z
 
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
+	CHECK_TICK
 	if(x == 34 && y == 106 && z == 1)
 		verbose_logging = TRUE
 	// else
@@ -187,7 +192,7 @@
 			continue
 		var/VV = thing.vars[V]
 		var/VT = "VAR"
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
 		if(verbose_logging)
 			to_world_log("(SerializeThingVar) [V]")
 #endif
@@ -197,17 +202,17 @@
 			continue
 
 		var/v_i = var_index
-		var_index += 1
+		var_index++
 
 		if(islist(VV) && !isnull(VV))
 			// Complex code for serializing lists...
-			if(LAZYLEN(VV) == 0)
+			if(length(VV) == 0)
 				// Another optimization. Don't need to serialize lists
 				// that have 0 elements.
-				var_index -= 1
-#ifdef DEBUG
+				var_index--
+#ifdef SAVE_DEBUG
 				if(verbose_logging)
-					to_world_log("(SerializeThingVar-Skip")
+					to_world_log("(SerializeThingVar-Skip)")
 #endif
 				continue
 			VT = "LIST"
@@ -226,14 +231,14 @@
 			VT = "PATH"
 		else
 			// We don't know what this is. Skip it.
-			var_index -= 1
-#ifdef DEBUG
+			var_index--
+#ifdef SAVE_DEBUG
 			if(verbose_logging)
-				to_world_log("(SerializeThingVar-Skip")
+				to_world_log("(SerializeThingVar-Skip)")
 #endif
 			continue
 		VV = sanitizeSQL("[VV]")
-#ifdef DEBUG
+#ifdef SAVE_DEBUG
 		if(verbose_logging)
 			to_world_log("(SerializeThingVar-Done) ([v_i],[t_i],'[V]','[VT]',\"[VV]\",[version])")
 #endif
@@ -352,19 +357,19 @@
 	var/DBQuery/query
 
 	try
-		if(LAZYLEN(thing_inserts) > 0)
+		if(length(thing_inserts) > 0)
 			values = jointext(thing_inserts, ",")
 			query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]")
 			query.Execute()
-		if(LAZYLEN(var_inserts) > 0)
+		if(length(var_inserts) > 0)
 			values = jointext(var_inserts, ",")
 			query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]")
 			query.Execute()
-		if(LAZYLEN(list_inserts) > 0)
+		if(length(list_inserts) > 0)
 			values = jointext(list_inserts, ",")
 			query = dbcon.NewQuery("INSERT INTO `list`(`id`,`length`,`version`) VALUES[values]")
 			query.Execute()
-		if(LAZYLEN(element_inserts) > 0)
+		if(length(element_inserts) > 0)
 			values = jointext(element_inserts, ",")
 			query = dbcon.NewQuery("INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES[values]")
 			query.Execute()
