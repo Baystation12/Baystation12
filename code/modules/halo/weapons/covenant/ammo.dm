@@ -1,4 +1,5 @@
 #define NEEDLER_EMBED_PROB 33
+#define NEEDLER_SHARD_DET_TIME 10 SECONDS
 
  // need icons for all projectiles and magazines
 /obj/item/projectile/bullet/covenant
@@ -92,6 +93,18 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
+/obj/item/weapon/material/shard/shrapnel/needleshrap
+	var/die_at = 0
+	var/our_dam = 0
+
+/obj/item/weapon/material/shard/shrapnel/needleshrap/process()
+	if(world.time >= die_at)
+		var/mob/living/m = loc
+		if(istype(m))
+			m.apply_damage(our_dam,BURN) //The low damage done by this shard exploding is meant to bypass defences, it's embedded into you.
+		qdel(src)
+		return
+
 /obj/item/projectile/bullet/covenant/needles
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
@@ -114,16 +127,19 @@
 	for(var/obj/shard in L.contents )
 		if(!istype(shard,/obj/item/weapon/material/shard))
 			continue
-		if (shard.name == shard_name)
+		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
-			explosion(L.loc,-1,1,2,5)
+			explosion(L.loc,-1,1,2,5,alt_explosion_damage = 100,alt_explosion_range = 1)
 			for(var/I in embedded_shards)
 				qdel(I)
 	if(prob(NEEDLER_EMBED_PROB)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
-		var/obj/shard = new /obj/item/weapon/material/shard/shrapnel
+		var/obj/item/weapon/material/shard/shrapnel/needleshrap/shard = new
 		var/obj/item/organ/external/embed_organ = pick(L.organs)
 		shard.name = shard_name
+		shard.die_at = world.time + NEEDLER_SHARD_DET_TIME
+		GLOB.processing_objects += shard
+		shard.our_dam = damage / 4
 		embed_organ.embed(shard)
 	. = ..()
 
@@ -268,3 +284,4 @@
 #undef FUEL_ROD_IRRADIATE_RANGE
 #undef FUEL_ROD_IRRADIATE_AMOUNT
 #undef NEEDLER_EMBED_PROB
+#undef NEEDLER_SHARD_DET_TIME
