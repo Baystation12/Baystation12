@@ -99,9 +99,23 @@
 		else if (islist(key))
 			KT = "LIST"
 			KV = SerializeList(key)
+			if(isnull(KV))
+				element_index--
+#ifdef SAVE_DEBUG
+				if(verbose_logging)
+					to_world_log("(SerializeListElem-Skip) Key thing is null.")
+#endif
+				continue
 		else if(istype(key, /datum))
 			KT = "OBJ"
 			KV = SerializeThing(key)
+			if(isnull(KV))
+				element_index--
+#ifdef SAVE_DEBUG
+				if(verbose_logging)
+					to_world_log("(SerializeListElem-Skip) Key list is null.")
+#endif
+				continue
 		else if (ispath(key) || isproc(key))
 			KT = "PATH"
 		else
@@ -123,9 +137,23 @@
 			else if (islist(EV))
 				ET = "LIST"
 				EV = SerializeList(EV)
+				if(isnull(EV))
+					element_index--
+#ifdef SAVE_DEBUG
+					if(verbose_logging)
+						to_world_log("(SerializeListElem-Skip) Value list is null.")
+#endif
+					continue
 			else if (istype(EV, /datum))
 				ET = "OBJ"
 				EV = SerializeThing(EV)
+				if(isnull(EV))
+					element_index--
+#ifdef SAVE_DEBUG
+					if(verbose_logging)
+						to_world_log("(SerializeListElem-Skip) Value thing is null.")
+#endif
+					continue
 			else if (ispath(EV) || isproc(EV))
 				ET = "PATH"
 			else
@@ -151,6 +179,9 @@
 	// there's no reason to save again.
 	if(isnull(thing))
 		return
+
+	if(isnull(GLOB.saved_vars[thing.type]))
+		return // EXPERIMENTAL. Don't save things without a whitelist.
 
 	var/datum/existing = thing_map["\ref[thing]"]
 	if (!isnull(existing))
@@ -212,11 +243,18 @@
 				var_index--
 #ifdef SAVE_DEBUG
 				if(verbose_logging)
-					to_world_log("(SerializeThingVar-Skip)")
+					to_world_log("(SerializeThingVar-Skip) Zero Length List")
 #endif
 				continue
 			VT = "LIST"
 			VV = SerializeList(VV)
+			if(isnull(VV))
+				var_index--
+#ifdef SAVE_DEBUG
+				if(verbose_logging)
+					to_world_log("(SerializeThingVar-Skip) Null List")
+#endif
+				continue
 		else if (isnum(VV))
 			VT = "NUM"
 		else if (istext(VV))
@@ -227,6 +265,13 @@
 			// Serialize it complex-like, baby.
 			VT = "OBJ"
 			VV = SerializeThing(VV)
+			if(isnull(VV))
+				var_index--
+#ifdef SAVE_DEBUG
+				if(verbose_logging)
+					to_world_log("(SerializeThingVar-Skip) Null Thing")
+#endif
+				continue
 		else if (ispath(VV) || isproc(VV)) // After /datum check to avoid high-number obj refs
 			VT = "PATH"
 		else
@@ -234,7 +279,7 @@
 			var_index--
 #ifdef SAVE_DEBUG
 			if(verbose_logging)
-				to_world_log("(SerializeThingVar-Skip)")
+				to_world_log("(SerializeThingVar-Skip) Unknown Var")
 #endif
 			continue
 		VV = sanitizeSQL("[VV]")
