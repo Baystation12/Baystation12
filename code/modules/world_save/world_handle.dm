@@ -29,14 +29,26 @@
 	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
 
 	try
+		var/index = 1
 		for(var/z in SSmapping.saved_levels)
 			for(var/x in 1 to world.maxx)
 				for(var/y in 1 to world.maxy)
+					// Get the thing to serialize and serialize it.
 					var/turf/T = locate(x,y,z)
 					if(!T)
 						continue
 					serializer.SerializeThing(T)
-					serializer.Commit()
+
+					// Don't save every single tile.
+					// Batch them up to save time.
+					if(index / 16 == 1)
+						serializer.Commit()
+						index = 1
+					else
+						index++
+
+					// Prevent the whole game from locking up.
+					CHECK_TICK
 	catch (var/exception/e)
 		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
 
