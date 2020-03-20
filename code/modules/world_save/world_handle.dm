@@ -29,7 +29,6 @@
 	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
 
 	try
-		var/index = 1
 		for(var/z in SSmapping.saved_levels)
 			for(var/x in 1 to world.maxx)
 				for(var/y in 1 to world.maxy)

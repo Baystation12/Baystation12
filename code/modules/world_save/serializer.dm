@@ -12,6 +12,9 @@
 	var/list/var_inserts = list()
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
+#ifdef DEBUG
+	var/verbose_logging = FALSE
+#endif
 
 /datum/persistence/serializer/proc/isproc(var/test)
 	var/ref = copytext("\ref[test]",4,6)
@@ -51,6 +54,10 @@
 
 	var/list/existing = list_map["\ref[_list]"]
 	if(!isnull(existing))
+#ifdef DEBUG
+		if(verbose_logging)
+			to_world_log("(SerializeList-Resv) \ref[_list] to [existing]")
+#endif
 		return existing
 
 	var/l_i = list_index
@@ -125,6 +132,10 @@
 
 	var/datum/existing = thing_map["\ref[thing]"]
 	if (!isnull(existing))
+#ifdef DEBUG
+		if(verbose_logging)
+			to_world_log("(SerializeThing-Resv) \ref[thing] to [existing]")
+#endif
 		return existing
 
 	// Thing didn't exist. Create it.
@@ -142,6 +153,15 @@
 		y = T.y
 		z = T.z
 
+#ifdef DEBUG
+	if(x == 34 && y == 106 && z == 1)
+		verbose_logging = TRUE
+	else
+		verbose_logging = FALSE
+
+	if(verbose_logging)
+		to_world_log("(SerializeThing) ([t_i],'[thing.type]',[x],[y],[z],[version])")
+#endif
 	thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
 	thing_map["\ref[thing]"] = t_i
 	for(var/V in thing.get_saved_vars())
@@ -149,6 +169,10 @@
 			continue
 		var/VV = thing.vars[V]
 		var/VT = "VAR"
+#ifdef DEBUG
+		if(verbose_logging)
+			to_world_log("(SerializeThingVar) [V]")
+#endif
 
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(VV) || isicon(VV))
@@ -163,6 +187,10 @@
 				// Another optimization. Don't need to serialize lists
 				// that have 0 elements.
 				var_index -= 1
+#ifdef DEBUG
+				if(verbose_logging)
+					to_world_log("(SerializeThingVar-Skip")
+#endif
 				continue
 			VT = "LIST"
 			VV = SerializeList(VV)
@@ -181,8 +209,16 @@
 		else
 			// We don't know what this is. Skip it.
 			var_index -= 1
+#ifdef DEBUG
+			if(verbose_logging)
+				to_world_log("(SerializeThingVar-Skip")
+#endif
 			continue
 		VV = sanitizeSQL("[VV]")
+#ifdef DEBUG
+		if(verbose_logging)
+			to_world_log("(SerializeThingVar-Done) ([v_i],[t_i],'[V]','[VT]',\"[VV]\",[version])")
+#endif
 		var_inserts.Add("([v_i],[t_i],'[V]','[VT]',\"[VV]\",[version])")
 	thing.after_save() // After save hook.		
 	return t_i
