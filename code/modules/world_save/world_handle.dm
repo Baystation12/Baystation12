@@ -29,6 +29,7 @@
 	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
 
 	try
+		// This will save all the turfs/world.
 		var/index = 1
 		for(var/z in SSmapping.saved_levels)
 			for(var/x in 1 to world.maxx)
@@ -49,6 +50,9 @@
 
 					// Prevent the whole game from locking up.
 					CHECK_TICK
+
+		// Clear the refmaps/do other cleanup to end the save.
+		serializer.Clear()
 	catch (var/exception/e)
 		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
 

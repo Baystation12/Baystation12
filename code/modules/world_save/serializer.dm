@@ -426,3 +426,12 @@
 	var_inserts.Cut(1)
 	list_inserts.Cut(1)
 	element_inserts.Cut(1)
+
+/datum/persistence/serializer/proc/Clear()
+	thing_inserts.Cut(1)
+	var_inserts.Cut(1)
+	list_inserts.Cut(1)
+	element_inserts.Cut(1)
+	thing_map.Cut(1)
+	reverse_map.Cut(1)
+	list_map.Cut(1)
