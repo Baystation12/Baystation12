@@ -7,6 +7,8 @@
 #define URF_HAND 'code/modules/halo/clothing/head.dmi'
 #define URF_OVERRIDE 'code/modules/halo/clothing/urf_commando.dmi'
 #define SPARTAN_OVERRIDE 'code/modules/halo/clothing/SpartanHussarKit.dmi'
+#define ONI_OVERRIDE 'code/modules/halo/clothing/oni_guard.dmi'
+#define ONI_ITEM_INHAND 'code/modules/halo/clothing/item_oni.dmi'
 
 
 //Obj sprites go in ITEM_INHAND or MARINE_INHAND
@@ -874,6 +876,22 @@ decl/hierarchy/outfit/Jul
 					/obj/item/clothing/suit/armor/special/odst/donator/loafe,
 					/obj/item/weapon/storage/backpack/odst/loafe
 					)
+
+/obj/item/clothing/head/helmet/spartan/loafe
+	icon_state = "loafe-helm-worn"
+	item_state = "loafe-helm-obj"
+
+/obj/item/clothing/suit/armor/special/spartan/loafe
+	icon_state = "loafe-shell-worn"
+	item_state = "loafe-shell-obj"
+
+/obj/item/weapon/storage/box/large/donator/loafe/spartan
+	startswith = list(/obj/item/clothing/head/helmet/spartan/loafe,
+	/obj/item/clothing/suit/armor/special/spartan/loafe
+	)
+	can_hold = list(/obj/item/clothing/head/helmet/spartan/loafe,
+	/obj/item/clothing/suit/armor/special/spartan/loafe
+	)
 
 /decl/hierarchy/outfit/loafe_odst
 	name = "loafe - ODST"
@@ -2114,6 +2132,88 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/storage/marine/riley
 	head = /obj/item/clothing/head/helmet/marine/riley
 
+
+///////////CommanderXor/////////
+
+//ONI Researcher, using guard armour.
+
+/obj/item/clothing/suit/storage/oni_guard/xor
+	name = "Refitted T voan Armour"
+	desc = "Looks like someone captured and refitted the armour of a Covenant T voan."
+
+	icon = ONI_OVERRIDE
+	icon_override = ONI_ITEM_INHAND
+	icon_state = "xor_armour"
+	item_state = "armor"
+
+/obj/item/clothing/shoes/oni_guard/xor
+	name = "Refitted T voan Boots"
+	desc = "The boots of a T voan, fitted to function as footwear for humans."
+
+	icon = ONI_OVERRIDE
+	icon_override = ONI_ITEM_INHAND
+	icon_state = "xor_boots"
+	item_state = "boots_ico"
+
+/obj/item/clothing/gloves/thick/oni_guard/xor
+	name = "Refitted T voan Gloves"
+	desc = "These gloves have been refitted to allow for human usage."
+
+	icon = ONI_OVERRIDE
+	icon_override = ONI_ITEM_INHAND
+	icon_state = "xor_gloves"
+	item_state = "unsc gloves_obj"
+
+/obj/item/clothing/head/helmet/oni_guard/xor
+	name = "Refitted T voan Helmet"
+	desc = "Despite the look, this isn't actually airtight."
+
+	icon = ONI_OVERRIDE
+	icon_override = ONI_ITEM_INHAND
+	icon_state = "xor_helm"
+
+/obj/item/weapon/storage/backpack/marine/xor
+	name = "Storage Cape"
+	desc = "The bulk of this backpack is masked by a cape. Fancy ONI trickery..."
+
+	icon = ONI_OVERRIDE
+	icon_override = ONI_OVERRIDE
+	icon_state = "xor_backpack_cloak"
+	item_state = "xor_backpack_cloak"
+
+
+/obj/item/weapon/storage/box/large/donator/xor
+	startswith = list(\
+	/obj/item/clothing/suit/storage/oni_guard/xor,
+	/obj/item/clothing/shoes/oni_guard/xor,
+	/obj/item/clothing/gloves/thick/oni_guard/xor,
+	/obj/item/clothing/head/helmet/oni_guard/xor,
+	/obj/item/weapon/storage/backpack/marine/xor,
+	/obj/item/weapon/gun/projectile/br55/xor
+	)
+	can_hold = list(\
+	/obj/item/clothing/suit/storage/oni_guard/xor,
+	/obj/item/clothing/shoes/oni_guard/xor,
+	/obj/item/clothing/gloves/thick/oni_guard/xor,
+	/obj/item/clothing/head/helmet/oni_guard/xor,
+	/obj/item/weapon/storage/backpack/marine/xor,
+	/obj/item/weapon/gun/projectile/br55/xor
+	)
+
+/obj/item/weapon/gun/projectile/br55/xor
+	name = "FN-FAL"
+	desc = "A custom made recreation of an old-world weapon. with internals modelled to function as a BR55."
+
+	icon_state = "fal"
+
+	wielded_item_state = null
+
+/obj/item/weapon/gun/projectile/br55/xor/update_icon()
+	if(ammo_magazine)
+		icon_state = "fal"
+	else
+		icon_state = "fal_unloaded"
+
 ///////Vampire132978123\\\\\\\
 
 //Skirmisher
@@ -2308,3 +2408,5 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 #undef URF_OVERRIDE
 #undef URF_HAND
 #undef SPARTAN_OVERRIDE
+#undef ONI_OVERRIDE
+#undef ONI_ITEM_INHAND
