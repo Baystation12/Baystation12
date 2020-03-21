@@ -1,3 +1,5 @@
+#define IS_PROC(X) (findtext("\ref[X]", "0x26"))
+
 /datum/persistence/serializer
 	var/thing_index = 1
 	var/var_index = 1
@@ -18,37 +20,30 @@
 	var/verbose_logging = FALSE
 #endif
 
-/datum/persistence/serializer/proc/isproc(var/test)
-	var/ref = copytext("\ref[test]",4,6)
-	return ref == "26"
-
 /datum/persistence/serializer/proc/FetchIndexes()
 	establish_db_connection()
 	if(!dbcon.IsConnected())
 		return
+
 	var/DBQuery/query = dbcon.NewQuery("SELECT MAX(`id`) FROM `thing`;")
 	query.Execute()
-	while(query.NextRow())
+	if(query.NextRow())
 		thing_index = text2num(query.item[1]) + 1
-		break
 
 	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `thing_var`;")
 	query.Execute()
-	while(query.NextRow())
+	if(query.NextRow())
 		var_index = text2num(query.item[1]) + 1
-		break
 
 	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `list`;")
 	query.Execute()
-	while(query.NextRow())
+	if(query.NextRow())
 		list_index = text2num(query.item[1]) + 1
-		break
 
 	query = dbcon.NewQuery("SELECT MAX(`id`) FROM `list_element`;")
 	query.Execute()
-	while(query.NextRow())
+	if(query.NextRow())
 		element_index = text2num(query.item[1]) + 1
-		break
 
 /datum/persistence/serializer/proc/SerializeList(var/_list)
 	if(isnull(_list))
@@ -86,7 +81,7 @@
 			EV = null // NBD... No value.
 
 		// Some guard statements of things we don't want to serialize...
-		if(isfile(KV) || isicon(KV) || isfile(EV) || isicon(EV))
+		if(isfile(KV) || isfile(EV))
 			continue
 
 		// Serialize the list.
@@ -118,7 +113,7 @@
 					to_world_log("(SerializeListElem-Skip) Key list is null.")
 #endif
 				continue
-		else if (ispath(key) || isproc(key))
+		else if (ispath(key) || IS_PROC(key))
 			KT = "PATH"
 		else
 			// Don't know what this is. Skip it.
@@ -156,7 +151,7 @@
 						to_world_log("(SerializeListElem-Skip) Value thing is null.")
 #endif
 					continue
-			else if (ispath(EV) || isproc(EV))
+			else if (ispath(EV) || IS_PROC(EV))
 				ET = "PATH"
 			else
 				// Don't know what this is. Skip it.
@@ -231,7 +226,7 @@
 #endif
 
 		// Some guard statements of things we don't want to serialize...
-		if(isfile(VV) || isicon(VV))
+		if(isfile(VV))
 			continue
 
 		var/v_i = var_index
@@ -274,7 +269,7 @@
 					to_world_log("(SerializeThingVar-Skip) Null Thing")
 #endif
 				continue
-		else if (ispath(VV) || isproc(VV)) // After /datum check to avoid high-number obj refs
+		else if (ispath(VV) || IS_PROC(VV)) // After /datum check to avoid high-number obj refs
 			VT = "PATH"
 		else
 			// We don't know what this is. Skip it.
@@ -328,29 +323,28 @@
 	query.Execute()
 	while(query.NextRow())
 		// Each row is a variable on this object.
-		var/key = query.item[1]
-		var/key_type = query.item[2]
-		var/value = query.item[3]
+		var/items = query.GetRowData()
 
 		try
-			if (key_type == "NUM")
-				existing.vars[key] = text2num(value)
-			else if (key_type == "TEXT")
-				existing.vars[key] = value
-			else if (key_type == "PATH")
-				existing.vars[key] = text2path(value)
-			else if (key_type == "NULL")
-				existing.vars[key] = null
-			else if (key_type == "LIST")
-				existing.vars[key] = DeserializeList(text2num(value))
-			else if (key_type == "OBJ")
-				var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[value];")
-				objQuery.Execute()
-				while(objQuery.NextRow())
-					existing.vars[key] = DeserializeThing(text2num(value), text2path(objQuery.item[2]), objQuery.item[3], objQuery.item[4], objQuery.item[5])
-					break
+			switch(items["type"])
+				if("NUM")
+					existing.vars[items["key"]] = text2num(items["value"])
+				if("TEXT")
+					existing.vars[items["key"]] = items["value"]
+				if("PATH")
+					existing.vars[items["key"]] = text2path(items["value"])
+				if("NULL")
+					existing.vars[items["key"]] = null
+				if("LIST")
+					existing.vars[items["key"]] = DeserializeList(items["value"])
+				if("OBJ")
+					var/DBQuery/objQuery = dbcon.NewQuery("SELECT `type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[items["value"]];")
+					objQuery.Execute()
+					if(objQuery.NextRow())
+						var/objItems = objQuery.GetRowData()
+						existing.vars[items["key"]] = DeserializeThing(text2num(items["value"]), text2path(objItems["type"]), objItems["x"], objItems["y"], objItems["z"])
 		catch(var/exception/e)
-			to_world_log("Failed to deserialize '[key]' of type '[key_type]' on line [e.line] / file [e.file] for reason: '[e]'.")
+			to_world_log("Failed to deserialize '[items["key"]]' of type '[items["type"]]' on line [e.line] / file [e.file] for reason: '[e]'.")
 	return existing
 
 /datum/persistence/serializer/proc/DeserializeList(var/list_id, var/list/existing)
@@ -359,48 +353,53 @@
 		return
 
 	if(isnull(existing))
-		existing = reverse_list_map[num2text(list_id)]
+		existing = reverse_list_map["[list_id]"]
 		if(isnull(existing))
 			existing = list()
-	reverse_list_map[num2text(list_id)] = existing
+	reverse_list_map["[list_id]"] = existing
 
 	var/DBQuery/query = dbcon.NewQuery("SELECT `key`,`key_type`,`value`,`value_type` FROM `list_element` WHERE `list_id`=[list_id] AND `version`=[version] ORDER BY `index` DESC;")
 	query.Execute()
 	while(query.NextRow())
-		var/key = query.item[1]
-		var/key_type = query.item[2]
-		var/key_value = key
-		var/value_type = query.item[4]
+		var/items = query.GetRowData()
+		var/key_value
 
-		if (key_type == "NUM")
-			key_value = text2num(key)
-		else if (key_type == "PATH")
-			key_value = text2path(key)
-		else if (key_type == "LIST")
-			key_value = DeserializeList(text2num(key))
-		else if (key_type == "OBJ")
-			var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[key];")
-			objQuery.Execute()
-			while(objQuery.NextRow())
-				key_value = DeserializeThing(text2num(key), text2path(objQuery.item[2]), objQuery.item[3], objQuery.item[4], objQuery.item[5])
-				break
+		switch(items["key_type"])
+			if("NULL")
+				key_value = null
+			if("TEXT")
+				key_value = items["key"]
+			if("NUM")
+				key_value = text2num(items["key"])
+			if("PATH")
+				key_value = text2path(items["key"])
+			if("LIST")
+				key_value = DeserializeList(items["key"])
+			if("OBJ")
+				var/DBQuery/objQuery = dbcon.NewQuery("SELECT `type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[items["key"]];")
+				objQuery.Execute()
+				if(objQuery.NextRow())
+					var/objItems = objQuery.GetRowData()
+					key_value = DeserializeThing(text2num(items["key"]), text2path(objItems["type"]), objItems["x"], objItems["y"], objItems["z"])
 
-		if(value_type == "NUM")
-			existing[key_value] = text2num(query.item[3])
-		else if(value_type == "TEXT")
-			existing[key_value] = query.item[3]
-		else if(value_type == "PATH")
-			existing[key_value] = text2path(query.item[3])
-		else if(value_type == "NULL")
-			existing.Add(key_value)
-		else if(value_type == "LIST")
-			existing[key_value] = DeserializeList(text2num(query.item[3]))
-		else if(value_type == "OBJ")
-			var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[query.item[3]];")
-			objQuery.Execute()
-			while(objQuery.NextRow())
-				existing[key_value] = DeserializeThing(text2num(query.item[3]), text2path(objQuery.item[2]), objQuery.item[3], objQuery.item[4], objQuery.item[5])
-				break
+		switch(items["value_type"])
+			if("NULL")
+				// This is how lists are made. Everything else is a dict.
+				existing.Add(key_value)
+			if("TEXT")
+				existing[key_value] = items["value"]
+			if("NUM")
+				existing[key_value] = text2num(items["value"])
+			if("PATH")
+				existing[key_value] = text2path(items["value"])
+			if("LIST")
+				existing[key_value] = DeserializeList(items["value"])
+			if("OBJ")
+				var/DBQuery/objQuery = dbcon.NewQuery("SELECT `type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[items["value"]];")
+				objQuery.Execute()
+				if(objQuery.NextRow())
+					var/objItems = objQuery.GetRowData()
+					existing[key_value] = DeserializeThing(text2num(items["value"]), text2path(objItems["type"]), objItems["x"], objItems["y"], objItems["z"])
 	return existing
 
 /datum/persistence/serializer/proc/Commit()
@@ -408,25 +407,20 @@
 	if(!dbcon.IsConnected())
 		return
 
-	var/values
 	var/DBQuery/query
 
 	try
 		if(length(thing_inserts) > 0)
-			values = jointext(thing_inserts, ",")
-			query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[values]")
+			query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[jointext(thing_inserts, ",")]")
 			query.Execute()
 		if(length(var_inserts) > 0)
-			values = jointext(var_inserts, ",")
-			query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[values]")
+			query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[jointext(var_inserts, ",")]")
 			query.Execute()
 		if(length(list_inserts) > 0)
-			values = jointext(list_inserts, ",")
-			query = dbcon.NewQuery("INSERT INTO `list`(`id`,`length`,`version`) VALUES[values]")
+			query = dbcon.NewQuery("INSERT INTO `list`(`id`,`length`,`version`) VALUES[jointext(list_inserts, ",")]")
 			query.Execute()
 		if(length(element_inserts) > 0)
-			values = jointext(element_inserts, ",")
-			query = dbcon.NewQuery("INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES[values]")
+			query = dbcon.NewQuery("INSERT INTO `list_element`(`id`,`list_id`,`index`,`key`,`key_type`,`value`,`value_type`,`version`) VALUES[jointext(element_inserts, ",")]")
 			query.Execute()
 	catch (var/exception/e)
 		to_world_log("World Serializer Failed")
