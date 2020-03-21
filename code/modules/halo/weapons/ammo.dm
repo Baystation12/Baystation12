@@ -312,13 +312,13 @@
 	projectile_type = /obj/item/projectile/bullet/m5/rubber
 
 /obj/item/projectile/bullet/m5
-	damage = 25
+	damage = 20
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
 	name = "rubber bullet"
 	check_armour = "melee"
 	damage = 5
-	agony = 25
+	agony = 20
 	embed = 0
 	sharp = 0
 
