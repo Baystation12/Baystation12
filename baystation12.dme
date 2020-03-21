@@ -1695,6 +1695,7 @@
 #include "code\modules\emotes\definitions\adherent.dm"
 #include "code\modules\emotes\definitions\ascent.dm"
 #include "code\modules\emotes\definitions\audible.dm"
+#include "code\modules\emotes\definitions\exertion.dm"
 #include "code\modules\emotes\definitions\human.dm"
 #include "code\modules\emotes\definitions\slime.dm"
 #include "code\modules\emotes\definitions\synthetics.dm"

@@ -83,6 +83,13 @@
 		TAG_FACTION = FACTION_POSITRONICS
 	)
 
+	exertion_effect_chance = 10
+	exertion_charge_scale = 1
+	exertion_emotes_synthetic = list(
+		/decl/emote/exertion/synthetic,
+		/decl/emote/exertion/synthetic/creak
+	)
+
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
 	if(istype(H.wear_mask,/obj/item/clothing/mask/monitor))
