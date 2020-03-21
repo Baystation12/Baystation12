@@ -526,12 +526,14 @@
 	set category = "Object"
 	set name = "Tear Sheet"
 	set desc = "Tear a sheet of toilet paper."
+	if (usr.incapacitated())
+		return
 	if(sheets > 0)
 		visible_message("\The [usr] tears a sheet from \the [src].", "You tear a sheet from \the [src].")
 		var/obj/item/weapon/paper/crumpled/bog/C =  new(loc)
 		usr.put_in_hands(C)
 		sheets--
-	else
+	if (sheets < 1)
 		to_chat(usr, "\The [src] is depleted.")
 		qdel(src)
 
