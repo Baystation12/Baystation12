@@ -18,5 +18,8 @@
 /area/proc/get_turf_coords()
 	var/list/coord_list = list()
 	var/ind = 0
+	for(var/turf/T in contents)
+		ind++
+		coord_list += "[ind]"
 		coord_list[ind] = list(T.x, T.y, T.z)
 	return coord_list
