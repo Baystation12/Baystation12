@@ -32,7 +32,7 @@ var/list/wireColours = list("red", "blue", "green", "darkred", "orange", "brown"
 	..()
 	src.holder = holder
 	if(!istype(holder, holder_type))
-		CRASH("Our holder is null/the wrong type!")
+		// CRASH("Our holder is null/the wrong type!") PSS13 Disable. We know.
 		return
 
 	// Generate new wires

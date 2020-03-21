@@ -7,11 +7,13 @@
 	var/list/thing_map = list()
 	var/list/reverse_map = list()
 	var/list/list_map = list()
+	var/list/reverse_list_map = list()
 
 	var/list/thing_inserts = list()
 	var/list/var_inserts = list()
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
+
 #ifdef SAVE_DEBUG
 	var/verbose_logging = FALSE
 #endif
@@ -288,10 +290,13 @@
 			to_world_log("(SerializeThingVar-Done) ([v_i],[t_i],'[V]','[VT]',\"[VV]\",[version])")
 #endif
 		var_inserts.Add("([v_i],[t_i],'[V]','[VT]',\"[VV]\",[version])")
-	thing.after_save() // After save hook.		
+	thing.after_save() // After save hook.
 	return t_i
 
-/datum/persistence/serializer/proc/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z)
+/datum/persistence/serializer/proc/DeserializeThing(var/thing_id, var/thing_path, var/x, var/y, var/z, var/datum/existing)
+	if(!dbcon.IsConnected())
+		return existing
+
 	// Will deserialize a thing by ID, including all of its
 	// child variables.
 	// Fixing some SQL shit.
@@ -299,61 +304,66 @@
 	y = text2num(y)
 	z = text2num(z)
 
-	// Checking for existing items.
-	var/existing
-	try
+	if(isnull(existing))
+		// Checking for existing items.
 		existing = reverse_map[num2text(thing_id)]
 		if(!isnull(existing))
 			return existing
-	catch
 
-	if(!dbcon.IsConnected())
-		return
-
-	// Handlers for specific types would go here.
-	if (ispath(thing_path, /turf))
-		// turf turf turf
-		var/turf/T = locate(x, y, z)
-		T.ChangeTurf(thing_path)
-		if (T == null)
-			to_world_log("Attempting to deserialize onto turf [x],[y],[z] failed. Could not locate turf.")
-			return
-		existing = T
-	else
-		// default creation
-		existing = new thing_path()
-
-	reverse_map[num2text(thing_id)] = existing
+		// Handlers for specific types would go here.
+		if (ispath(thing_path, /turf))
+			// turf turf turf
+			var/turf/T = locate(x, y, z)
+			T.ChangeTurf(thing_path)
+			if (T == null)
+				to_world_log("Attempting to deserialize onto turf [x],[y],[z] failed. Could not locate turf.")
+				return
+			existing = T
+		else
+			// default creation
+			existing = new thing_path()
+		reverse_map[num2text(thing_id)] = existing
+	// Fetch all the variables for the thing.
 	var/DBQuery/query = dbcon.NewQuery("SELECT `key`,`type`,`value` FROM `thing_var` WHERE `version`=[version] AND `thing_id`=[thing_id];")
 	query.Execute()
 	while(query.NextRow())
 		// Each row is a variable on this object.
 		var/key = query.item[1]
 		var/key_type = query.item[2]
-		if (key_type == "NUM")
-			existing[key] = text2num(query.item[3])
-		else if (key_type == "TEXT")
-			existing[key] = query.item[3]
-		else if (key_type == "PATH")
-			existing[key] = text2path(query.item[3])
-		else if (key_type == "NULL")
-			existing[key] = null
-		else if (key_type == "LIST")
-			existing[key] = DeserializeList(text2num(query.item[3]))
-		else if (key_type == "OBJ")
-			var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[query.item[3]];")
-			objQuery.Execute()
-			while(objQuery.NextRow())
-				existing[key] = DeserializeThing(text2num(query.item[3]), text2path(objQuery.item[2]), objQuery.item[3], objQuery.item[4], objQuery.item[5])
-				break
+		var/value = query.item[3]
+
+		try
+			if (key_type == "NUM")
+				existing.vars[key] = text2num(value)
+			else if (key_type == "TEXT")
+				existing.vars[key] = value
+			else if (key_type == "PATH")
+				existing.vars[key] = text2path(value)
+			else if (key_type == "NULL")
+				existing.vars[key] = null
+			else if (key_type == "LIST")
+				existing.vars[key] = DeserializeList(text2num(value))
+			else if (key_type == "OBJ")
+				var/DBQuery/objQuery = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[value];")
+				objQuery.Execute()
+				while(objQuery.NextRow())
+					existing.vars[key] = DeserializeThing(text2num(value), text2path(objQuery.item[2]), objQuery.item[3], objQuery.item[4], objQuery.item[5])
+					break
+		catch(var/exception/e)
+			to_world_log("Failed to deserialize '[key]' of type '[key_type]' on line [e.line] / file [e.file] for reason: '[e]'.")
 	return existing
 
-/datum/persistence/serializer/proc/DeserializeList(var/list_id)
+/datum/persistence/serializer/proc/DeserializeList(var/list_id, var/list/existing)
 	// Will deserialize and return a list.
 	if(!dbcon.IsConnected())
 		return
 
-	var/list/existing = list()
+	if(isnull(existing))
+		existing = reverse_list_map[num2text(list_id)]
+		if(isnull(existing))
+			existing = list()
+	reverse_list_map[num2text(list_id)] = existing
+
 	var/DBQuery/query = dbcon.NewQuery("SELECT `key`,`key_type`,`value`,`value_type` FROM `list_element` WHERE `list_id`=[list_id] AND `version`=[version] ORDER BY `index` DESC;")
 	query.Execute()
 	while(query.NextRow())
@@ -435,3 +445,4 @@
 	thing_map.Cut(1)
 	reverse_map.Cut(1)
 	list_map.Cut(1)
+	reverse_list_map.Cut(1)

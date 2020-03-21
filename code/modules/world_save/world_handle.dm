@@ -10,7 +10,7 @@
 	var/DBQuery/query = dbcon.NewQuery("SELECT MAX(`version`) FROM `thing`;")
 	query.Execute()
 	while(query.NextRow())
-		SetVersion(text2num(query.item[1]) + 1)
+		SetVersion(text2num(query.item[1]))
 		break
 
 	serializer.FetchIndexes()
@@ -57,21 +57,32 @@
 		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
 
 /datum/persistence/world_handle/proc/LoadWorld()
-	// Loads all data in as part of a version.
-	establish_db_connection()
-	if(!dbcon.IsConnected())
-		return
+	try
+		// Loads all data in as part of a version.
+		establish_db_connection()
+		if(!dbcon.IsConnected())
+			return
 
-	var/DBQuery/query = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version - 1]")
-	query.Execute()
-	while(query.NextRow())
-		// Blind deserialize *everything*.
-		var/thing_id = query.item[1]
-		var/thing_type = query.item[2]
-		var/thing_path = text2path(thing_type)
+		var/DBQuery/query = dbcon.NewQuery("SELECT COUNT(*) FROM `thing` WHERE `version`=[version] AND x > 0 AND y > 0 AND z > 0;")
+		query.Execute()
+		while(query.NextRow())
+			to_world_log("Loading [query.item[1]] things from world save.")
 
-		// Then we populate the entity with this data.
-		serializer.DeserializeThing(thing_id, thing_path, query.item[3], query.item[4], query.item[5])
+		query = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND x > 0 AND y > 0 AND z > 0;")
+		query.Execute()
+		while(query.NextRow())
+			// Blind deserialize *everything*.
+			var/thing_id = query.item[1]
+			var/thing_type = query.item[2]
+			var/thing_path = text2path(thing_type)
+#ifdef SAVE_DEBUG
+			to_world_log("(DeserializeThing) [thing_id],[thing_path]-(query.item[3],query.item[4],query.item[5])")
+#endif
+			// Then we populate the entity with this data.
+			serializer.DeserializeThing(thing_id, thing_path, query.item[3], query.item[4], query.item[5])
+			CHECK_TICK
+	catch(var/exception/e)
+		to_world_log("Load failed on line [e.line], file [e.file] with message: '[e]'.")
 
 
 // /datum/persistence/world_handle/proc/LoadChunk(var/x, var/y, var/z)
