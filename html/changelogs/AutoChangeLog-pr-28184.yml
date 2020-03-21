@@ -1,0 +1,5 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - rscadd: "Add the entertainment color as a preset for telecom channels"
+  - tweak: "Sort the telecom channel color preset names"
