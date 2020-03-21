@@ -8,4 +8,4 @@
 	area_type = A.type
 	name = A.name
 	turfs = A.get_turf_coords()
-	shuttle = A.shuttle
+	//shuttle = A.shuttle

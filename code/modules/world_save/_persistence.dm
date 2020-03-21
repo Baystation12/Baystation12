@@ -14,3 +14,9 @@
 		if(issaved(vars[v]) && !(v in GLOB.blacklisted_vars))
 			LAZYADD(savedlist, v)
 	return savedlist
+
+/area/proc/get_turf_coords()
+	var/list/coord_list = list()
+	var/ind = 0
+		coord_list[ind] = list(T.x, T.y, T.z)
+	return coord_list
