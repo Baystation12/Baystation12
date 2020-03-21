@@ -29,6 +29,21 @@
 	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
 
 	try
+		//
+		// 	PREPARATION SECTIONS
+		//
+		var/list/areas_to_save = list() // TODO: Fill this with values.
+		var/reallow = 0
+		if(config.enter_allowed) reallow = 1
+		config.enter_allowed = 0
+		// Prepare atmosphere for saving.
+		for(var/datum/pipe_network/net in SSmachines.pipenets)
+			for(var/datum/pipeline/line in net.line_members)
+				line.temporarily_store_air()
+
+		//
+		// 	ACTUAL SAVING SECTION
+		//
 		// This will save all the turfs/world.
 		var/index = 1
 		for(var/z in SSmapping.saved_levels)
@@ -50,9 +65,19 @@
 
 					// Prevent the whole game from locking up.
 					CHECK_TICK
-
+		
+		// This section will save any areas in the world.
+		for(var/area/A in areas_to_save)
+			if(istype(A, /area/space)) continue
+			var/datum/wrapper/area/wrapper = new(A)
+			serializer.SerializeThing(wrapper)
+			CHECK_TICK
+		//
+		//	CLEANUP SECTION
+		//
 		// Clear the refmaps/do other cleanup to end the save.
 		serializer.Clear()
+		if(reallow) config.enter_allowed = 1
 	catch (var/exception/e)
 		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
 
