@@ -59,12 +59,11 @@
 	for(var/obj/item/organ/external/o in H.organs)
 		check_and_stop_bleeding(o)
 		if(o.brute_dam + o.burn_dam >= o.min_bruised_damage)
-			o.brute_dam -= o.min_bruised_damage
-			o.burn_dam -= o.min_bruised_damage
+			o.heal_damage(o.min_bruised_damage,o.min_bruised_damage)
 			if(prob(20))
 				to_chat(H,"<span class = 'notice'>You feel your [o.name] knitting itself back together</span>")
 		if(o.status & ORGAN_BROKEN)
-			o.status &= ~ORGAN_BROKEN
+			o.mend_fracture()
 			H.next_pain_time = world.time //Overrides the next pain timer
 			H.custom_pain("<span class = 'userdanger'>You feel the bones in your [o.name] being pushed into place.</span>",10)
 

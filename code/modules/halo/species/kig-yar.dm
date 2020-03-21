@@ -94,8 +94,9 @@
 	brute_mod = 1.1
 	slowdown = -1.0
 
-	total_health = 200
 	pixel_offset_x = -4
+
+	equipment_slowdown_multiplier = 0.3
 
 	item_icon_offsets = list(list(4,-1),list(4,-1),null,list(0,0),null,null,null,list(0,0),null)
 

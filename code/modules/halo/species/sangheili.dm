@@ -40,7 +40,7 @@
 	BP_EYES =     /obj/item/organ/internal/eyes
 	)
 
-	equipment_slowdown_multiplier = 0.5
+	equipment_slowdown_multiplier = 0.3
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/elitescream_1.ogg',

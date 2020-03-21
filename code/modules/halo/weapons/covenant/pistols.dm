@@ -24,6 +24,8 @@
 		slot_s_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
+	slowdown_general = 0.25
+
 /obj/item/weapon/gun/energy/plasmapistol/New()
 	. = ..()
 	overcharge_cost = initial(charge_cost)*4

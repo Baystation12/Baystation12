@@ -134,6 +134,8 @@
 		if(adjacent)
 			if(W)
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
+				if(istype(loc,/obj/vehicles))
+					return
 				var/resolved = W.resolve_attackby(A,src, params)
 				if(!resolved && A && W)
 					W.afterattack(A, src, 1, params) // 1: clicking something Adjacent

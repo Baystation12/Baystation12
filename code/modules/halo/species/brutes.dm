@@ -32,7 +32,7 @@
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
 
-	equipment_slowdown_multiplier = 0.5
+	equipment_slowdown_multiplier = 0.3
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/brutescream1.ogg',

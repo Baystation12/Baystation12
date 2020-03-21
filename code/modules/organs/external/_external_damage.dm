@@ -95,12 +95,22 @@
 			damage_amt /= 2
 			victim.take_damage(damage_amt)
 
-	if(status & ORGAN_BROKEN && brute)
-		jostle_bone(brute)
+	if(status & ORGAN_BROKEN)
+		if(burn)
+			jostle_bone(burn)
+		else
+			jostle_bone(brute)
 		if(can_feel_pain() && prob(40))
 			owner.emote("scream")	//getting hit on broken hand hurts
 
-	if(brute_dam > min_broken_damage && prob(brute_dam + brute * (1+blunt)) ) //blunt damage is gud at fracturing
+	var/fracture_check_dam = brute_dam
+	var/fracture_check_dam_unmod = brute
+
+	if(burn)
+		fracture_check_dam = burn_dam
+		fracture_check_dam = burn
+
+	if(fracture_check_dam > min_broken_damage && prob(fracture_check_dam + fracture_check_dam_unmod * (1+blunt)) ) //blunt damage is gud at fracturing
 		fracture()
 
 	// If the limbs can break, make sure we don't exceed the maximum damage a limb can take before breaking
