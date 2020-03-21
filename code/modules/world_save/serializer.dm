@@ -12,6 +12,7 @@
 	var/list/reverse_list_map = list()
 
 	var/list/thing_inserts = list()
+	var/list/f_thing_inserts = list()
 	var/list/var_inserts = list()
 	var/list/list_inserts = list()
 	var/list/element_inserts = list()
@@ -213,7 +214,10 @@
 	if(verbose_logging)
 		to_world_log("(SerializeThing) ([t_i],'[thing.type]',[x],[y],[z],[version])")
 #endif
-	thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
+	if(!x && !y && !z)
+		f_thing_inserts.Add("([t_i],'[thing.type]',[version])")
+	else
+		thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
 	thing_map["\ref[thing]"] = t_i
 	for(var/V in thing.get_saved_vars())
 		if(!issaved(thing.vars[V]))
@@ -408,10 +412,12 @@
 		return
 
 	var/DBQuery/query
-
 	try
 		if(length(thing_inserts) > 0)
 			query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`x`,`y`,`z`,`version`) VALUES[jointext(thing_inserts, ",")]")
+			query.Execute()
+		if(length(f_thing_inserts) > 0)
+			query = dbcon.NewQuery("INSERT INTO `thing`(`id`,`type`,`version`) VALUES[jointext(f_thing_inserts, ",")]")
 			query.Execute()
 		if(length(var_inserts) > 0)
 			query = dbcon.NewQuery("INSERT INTO `thing_var`(`id`,`thing_id`,`key`,`type`,`value`,`version`) VALUES[jointext(var_inserts, ",")]")
@@ -426,12 +432,14 @@
 		to_world_log("World Serializer Failed")
 		to_world_log(e)
 
+	f_thing_inserts.Cut(1)
 	thing_inserts.Cut(1)
 	var_inserts.Cut(1)
 	list_inserts.Cut(1)
 	element_inserts.Cut(1)
 
 /datum/persistence/serializer/proc/Clear()
+	f_thing_inserts.Cut(1)
 	thing_inserts.Cut(1)
 	var_inserts.Cut(1)
 	list_inserts.Cut(1)
