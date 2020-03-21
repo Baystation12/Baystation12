@@ -296,6 +296,10 @@
 	if(!dbcon.IsConnected())
 		return existing
 
+#ifdef SAVE_DEBUG
+	var/list/deserialized_vars = list()
+#endif
+
 	// Will deserialize a thing by ID, including all of its
 	// child variables.
 	// Fixing some SQL shit.
@@ -305,10 +309,9 @@
 
 	if(isnull(existing))
 		// Checking for existing items.
-		existing = reverse_map[num2text(thing_id)]
+		existing = reverse_map["[thing_id]"]
 		if(!isnull(existing))
 			return existing
-
 		// Handlers for specific types would go here.
 		if (ispath(thing_path, /turf))
 			// turf turf turf
@@ -328,7 +331,9 @@
 	while(query.NextRow())
 		// Each row is a variable on this object.
 		var/items = query.GetRowData()
-
+#ifdef SAVE_DEBUG
+		deserialized_vars.Add("[items["key"]]:[items["type"]]")
+#endif
 		try
 			switch(items["type"])
 				if("NUM")
@@ -342,14 +347,29 @@
 				if("LIST")
 					existing.vars[items["key"]] = DeserializeList(items["value"])
 				if("OBJ")
-					var/DBQuery/objQuery = dbcon.NewQuery("SELECT `type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[items["value"]];")
-					objQuery.Execute()
-					if(objQuery.NextRow())
-						var/objItems = objQuery.GetRowData()
-						existing.vars[items["key"]] = DeserializeThing(text2num(items["value"]), text2path(objItems["type"]), objItems["x"], objItems["y"], objItems["z"])
+					existing.vars[items["key"]] = QueryAndDeserializeThing(items["value"])
 		catch(var/exception/e)
 			to_world_log("Failed to deserialize '[items["key"]]' of type '[items["type"]]' on line [e.line] / file [e.file] for reason: '[e]'.")
+#ifdef SAVE_DEBUG
+	to_world_log("Deserialized thing of type [thing_path] ([x],[y],[z]) with vars: " + jointext(deserialized_vars, ", "))
+#endif
 	return existing
+
+/datum/persistence/serializer/proc/QueryAndDeserializeThing(var/thing_id)
+	var/datum/existing = reverse_map["[thing_id]"]
+	if(!isnull(existing))
+		return existing
+
+	var/start = world.timeofday
+	var/DBQuery/objQuery = dbcon.NewQuery("SELECT `type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[thing_id];")
+	objQuery.Execute()
+	if(objQuery.ErrorMsg())
+		to_world_log("FAILED OBJ RESOLUTION: [objQuery.ErrorMsg()]")
+		return
+	if(objQuery.NextRow())
+		var/objItems = objQuery.GetRowData()
+		to_world_log("Took [world.timeofday - start] to query for a thing.")
+		return DeserializeThing(thing_id, text2path(objItems["type"]), objItems["x"], objItems["y"], objItems["z"])
 
 /datum/persistence/serializer/proc/DeserializeList(var/list_id, var/list/existing)
 	// Will deserialize and return a list.
@@ -380,11 +400,7 @@
 			if("LIST")
 				key_value = DeserializeList(items["key"])
 			if("OBJ")
-				var/DBQuery/objQuery = dbcon.NewQuery("SELECT `type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[items["key"]];")
-				objQuery.Execute()
-				if(objQuery.NextRow())
-					var/objItems = objQuery.GetRowData()
-					key_value = DeserializeThing(text2num(items["key"]), text2path(objItems["type"]), objItems["x"], objItems["y"], objItems["z"])
+				key_value = QueryAndDeserializeThing(items["key"])
 
 		switch(items["value_type"])
 			if("NULL")
@@ -399,11 +415,7 @@
 			if("LIST")
 				existing[key_value] = DeserializeList(items["value"])
 			if("OBJ")
-				var/DBQuery/objQuery = dbcon.NewQuery("SELECT `type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND `id`=[items["value"]];")
-				objQuery.Execute()
-				if(objQuery.NextRow())
-					var/objItems = objQuery.GetRowData()
-					existing[key_value] = DeserializeThing(text2num(items["value"]), text2path(objItems["type"]), objItems["x"], objItems["y"], objItems["z"])
+				existing[key_value] = QueryAndDeserializeThing(items["value"])
 	return existing
 
 /datum/persistence/serializer/proc/Commit()
