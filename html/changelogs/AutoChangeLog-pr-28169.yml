@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Ghosts & incapacitated mobs can't use bogrolls."
+  - bugfix: "Bogrolls delete at 0 instead of having no sheets left."
