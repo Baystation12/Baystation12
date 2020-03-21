@@ -1,0 +1,4 @@
+author: "purplemontart"
+delete-after: True
+changes: 
+  - rscadd: "Species with the no pain flag (Dionaea, Adherents, Golems, Starborn) no longer get exertion messages."
