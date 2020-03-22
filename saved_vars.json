@@ -1512,11 +1512,9 @@
 		"panel_open",
 		"active_power_usage",
 		"idle_power_usage",
-		"component_parts",
 		"power_channel",
 		"id_tag",
 		"frame_type",
-		"processing_parts",
 		"processing_flags"
 	  ]
 	},
