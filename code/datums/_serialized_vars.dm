@@ -1519,11 +1519,14 @@
 	LAZYADD(.[/obj/machinery/power/apc], "coverlocked")
 	LAZYADD(.[/obj/machinery/power/apc], "aidisabled")
 	LAZYADD(.[/obj/machinery/power/apc], "lastused_light")
+	LAZYADD(.[/obj/machinery/power/apc], "lastused_equip")
+	LAZYADD(.[/obj/machinery/power/apc], "lastused_environ")
+	LAZYADD(.[/obj/machinery/power/apc], "lastused_charging")
+	LAZYADD(.[/obj/machinery/power/apc], "lastused_total")
 	LAZYADD(.[/obj/machinery/power/apc], "main_status")
 	LAZYADD(.[/obj/machinery/power/apc], "has_electronics")
 	LAZYADD(.[/obj/machinery/power/apc], "beenhit")
 	LAZYADD(.[/obj/machinery/power/apc], "is_critical")
-	LAZYADD(.[/obj/machinery/power/apc], "terminal")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1883,6 +1886,8 @@
 	LAZYADD(.[/turf/simulated/wall], "floor_type")
 	LAZYADD(.[/turf/simulated/wall], "paint_color")
 	LAZYADD(.[/turf/simulated/wall], "stripe_color")
+	LAZYADD(.[/turf/simulated/wall], "damage")
+	LAZYADD(.[/turf/simulated/wall], "opacity")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1922,6 +1927,7 @@
 	LAZYADD(.[/turf], "pixel_x")
 	LAZYADD(.[/turf], "pixel_y")
 	LAZYADD(.[/turf], "dir")
+	LAZYADD(.[/turf], "decals")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2396,6 +2402,24 @@
 	//
 	LAZYADD(.[/turf/simulated/mineral], "resources")
 	LAZYADD(.[/turf/simulated/mineral], "mineral")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /turf/simulated/floor
+	//
+	LAZYADD(.[/turf/simulated/floor], "burnt")
+	LAZYADD(.[/turf/simulated/floor], "broken")
+	LAZYADD(.[/turf/simulated/floor], "icon_state")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /image
+	//
+	LAZYADD(.[/image], "color")
+	LAZYADD(.[/image], "transform")
+	LAZYADD(.[/image], "icon")
 
 
 	for(var/type in .)

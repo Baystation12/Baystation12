@@ -1354,11 +1354,14 @@
 		"coverlocked",
 		"aidisabled",
 		"lastused_light",
+		"lastused_equip",
+		"lastused_environ",
+		"lastused_charging",
+		"lastused_total",
 		"main_status",
 		"has_electronics",
 		"beenhit",
-		"is_critical",
-		"terminal"
+		"is_critical"
 	  ]
 	},
 	{
@@ -1677,7 +1680,9 @@
 		"state",
 		"floor_type",
 		"paint_color",
-		"stripe_color"
+		"stripe_color",
+		"damage",
+		"opacity"
 	  ]
 	},
 	{
@@ -1713,7 +1718,8 @@
 			"name",
 			"pixel_x",
 			"pixel_y",
-			"dir"
+			"dir",
+			"decals"
 		]
 	},
 	{
@@ -2134,6 +2140,22 @@
 		 "vars": [
 		   "resources",
 		   "mineral"
+		 ]
+	  },
+	  {
+		 "path": "/turf/simulated/floor",
+		 "vars": [
+			"burnt",
+			"broken",
+			"icon_state"
+		 ]
+	  },
+	  {
+		 "path": "/image",
+		 "vars": [
+			 "color",
+			 "transform",
+			 "icon"
 		 ]
 	  }
   ]
