@@ -16,9 +16,15 @@
 /area
 	should_save = FALSE
 
+/mob/observer
+	should_save = FALSE
+
 /obj/after_deserialize()
 	..()
 	queue_icon_update()
+
+/obj/structure/cable/after_deserialize()
+	if(level==1 && T) hide(!T.is_plating())
 
 /turf/space/after_deserialize()
     ..()

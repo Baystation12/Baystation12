@@ -15,7 +15,8 @@
 		Beacon = new /obj/item/device/radio/beacon(T)
 		Beacon.invisibility = INVISIBILITY_MAXIMUM
 
-		hide(!T.is_plating())
+		if(T)
+			hide(!T.is_plating())
 
 	Destroy()
 		QDEL_NULL(Beacon)

@@ -365,34 +365,37 @@
 	for(var/datum/persistence/load_cache/list_element/LE in raw_list)
 		var/key_value
 		// to_world_log("deserializing list element [LE.key_type].")
-		switch(LE.key_type)
-			if("NULL")
-				key_value = null
-			if("TEXT")
-				key_value = LE.key
-			if("NUM")
-				key_value = text2num(LE.key)
-			if("PATH")
-				key_value = text2path(LE.key)
-			if("LIST")
-				key_value = DeserializeList(LE.key)
-			if("OBJ")
-				key_value = QueryAndDeserializeThing(LE.key)
+		try
+			switch(LE.key_type)
+				if("NULL")
+					key_value = null
+				if("TEXT")
+					key_value = LE.key
+				if("NUM")
+					key_value = text2num(LE.key)
+				if("PATH")
+					key_value = text2path(LE.key)
+				if("LIST")
+					key_value = DeserializeList(LE.key)
+				if("OBJ")
+					key_value = QueryAndDeserializeThing(LE.key)
 
-		switch(LE.value_type)
-			if("NULL")
-				// This is how lists are made. Everything else is a dict.
-				existing.Add(key_value)
-			if("TEXT")
-				existing[key_value] = LE.value
-			if("NUM")
-				existing[key_value] = text2num(LE.value)
-			if("PATH")
-				existing[key_value] = text2path(LE.value)
-			if("LIST")
-				existing[key_value] = DeserializeList(LE.value)
-			if("OBJ")
-				existing[key_value] = QueryAndDeserializeThing(LE.value)
+			switch(LE.value_type)
+				if("NULL")
+					// This is how lists are made. Everything else is a dict.
+					existing.Add(key_value)
+				if("TEXT")
+					existing[key_value] = LE.value
+				if("NUM")
+					existing[key_value] = text2num(LE.value)
+				if("PATH")
+					existing[key_value] = text2path(LE.value)
+				if("LIST")
+					existing[key_value] = DeserializeList(LE.value)
+				if("OBJ")
+					existing[key_value] = QueryAndDeserializeThing(LE.value)
+		catch(var/exception/e)
+			to_world_log("Failed to deserialize list [list_id] element [key_value] on line [e.line] / file [e.file] for reason: [e].")
 	return existing
 
 /datum/persistence/serializer/proc/Commit()
