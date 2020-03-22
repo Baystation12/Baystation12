@@ -1974,8 +1974,6 @@
 	LAZYADD(.[/atom], "fingerprints")
 	LAZYADD(.[/atom], "gunshot_resique")
 	LAZYADD(.[/atom], "contents")
-	LAZYADD(.[/atom], "icon")
-	LAZYADD(.[/atom], "color")
 	LAZYADD(.[/atom], "blend_mode")
 	LAZYADD(.[/atom], "density")
 	LAZYADD(.[/atom], "dir")
@@ -1996,8 +1994,6 @@
 	LAZYADD(.[/obj], "fingerprints")
 	LAZYADD(.[/obj], "gunshot_resique")
 	LAZYADD(.[/obj], "contents")
-	LAZYADD(.[/obj], "icon")
-	LAZYADD(.[/obj], "color")
 	LAZYADD(.[/obj], "density")
 	LAZYADD(.[/obj], "dir")
 	LAZYADD(.[/obj], "icon_state")
@@ -2249,6 +2245,15 @@
 	LAZYADD(.[/obj/item/weapon/tank], "wired")
 	LAZYADD(.[/obj/item/weapon/tank], "leaking")
 	LAZYADD(.[/obj/item/weapon/tank], "starting_pressure")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/button
+	//
+	LAZYADD(.[/obj/machinery/button], "anchored")
+	LAZYADD(.[/obj/machinery/button], "active")
+	LAZYADD(.[/obj/machinery/button], "operating")
 
 
 	//////////////////////////////////////////////////////////////////////////////

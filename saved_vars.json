@@ -1763,8 +1763,6 @@
 			"fingerprints",
 			"gunshot_resique",
 			"contents",
-			"icon",
-			"color",
 			"blend_mode",
 			"density",
 			"dir",
@@ -1784,8 +1782,6 @@
 			"fingerprints",
 			"gunshot_resique",
 			"contents",
-			"icon",
-			"color",
 			"density",
 			"dir",
 			"icon_state",
@@ -2006,6 +2002,14 @@
 		   "wired",
 		   "leaking",
 		   "starting_pressure"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/button",
+		 "vars": [
+			"anchored",
+			"active",
+			"operating"
 		 ]
 	  },
 	  {

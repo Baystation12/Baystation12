@@ -54,8 +54,8 @@
 	var/list/existing = list_map["\ref[_list]"]
 	if(!isnull(existing))
 #ifdef SAVE_DEBUG
-		if(verbose_logging)
-			to_world_log("(SerializeList-Resv) \ref[_list] to [existing]")
+		to_world_log("(SerializeList-Resv) \ref[_list] to [existing]")
+
 #endif
 		return existing
 
@@ -65,9 +65,7 @@
 	list_map["\ref[_list]"] = l_i
 
 #ifdef SAVE_DEBUG
-	if(verbose_logging)
-		CHECK_TICK
-		to_world_log("(SerializeList) ([l_i],[length(_list)],[version])")
+	to_world_log("(SerializeList) ([l_i],[length(_list)],[version])")
 #endif
 
 	var/I = 1
@@ -82,7 +80,7 @@
 			EV = null // NBD... No value.
 
 		// Some guard statements of things we don't want to serialize...
-		if(isfile(KV) || isfile(EV))
+		if(isfile(KV) || isfile(EV) || isicon(KV) || isicon(EV))
 			continue
 
 		if (isnull(key))
@@ -96,8 +94,7 @@
 			KV = SerializeList(key)
 			if(isnull(KV))
 #ifdef SAVE_DEBUG
-				if(verbose_logging)
-					to_world_log("(SerializeListElem-Skip) Key thing is null.")
+				to_world_log("(SerializeListElem-Skip) Key thing is null.")
 #endif
 				continue
 		else if(istype(key, /datum))
@@ -105,8 +102,7 @@
 			KV = SerializeThing(key)
 			if(isnull(KV))
 #ifdef SAVE_DEBUG
-				if(verbose_logging)
-					to_world_log("(SerializeListElem-Skip) Key list is null.")
+				to_world_log("(SerializeListElem-Skip) Key list is null.")
 #endif
 				continue
 		else if (ispath(key) || IS_PROC(key))
@@ -115,8 +111,7 @@
 			// Don't know what this is. Skip it.
 			element_index--
 #ifdef SAVE_DEBUG
-			if(verbose_logging)
-				to_world_log("(SerializeListElem-Skip) Unknown Key. Value: [key]")
+			to_world_log("(SerializeListElem-Skip) Unknown Key. Value: [key]")
 #endif
 			continue
 
@@ -132,8 +127,7 @@
 				EV = SerializeList(EV)
 				if(isnull(EV))
 #ifdef SAVE_DEBUG
-					if(verbose_logging)
-						to_world_log("(SerializeListElem-Skip) Value list is null.")
+					to_world_log("(SerializeListElem-Skip) Value list is null.")
 #endif
 					continue
 			else if (istype(EV, /datum))
@@ -141,8 +135,7 @@
 				EV = SerializeThing(EV)
 				if(isnull(EV))
 #ifdef SAVE_DEBUG
-					if(verbose_logging)
-						to_world_log("(SerializeListElem-Skip) Value thing is null.")
+					to_world_log("(SerializeListElem-Skip) Value thing is null.")
 #endif
 					continue
 			else if (ispath(EV) || IS_PROC(EV))
@@ -150,8 +143,7 @@
 			else
 				// Don't know what this is. Skip it.
 #ifdef SAVE_DEBUG
-				if(verbose_logging)
-					to_world_log("(SerializeListElem-Skip) Unknown Value")
+				to_world_log("(SerializeListElem-Skip) Unknown Value")
 #endif
 				continue
 		KV = sanitizeSQL("[KV]")
@@ -168,7 +160,7 @@
 /datum/persistence/serializer/proc/SerializeThing(var/datum/thing)
 	// Check for existing references first. If we've already saved
 	// there's no reason to save again.
-	if(isnull(thing))
+	if(isnull(thing) || !thing.should_save)
 		return
 
 	if(isnull(GLOB.saved_vars[thing.type]))
@@ -177,8 +169,7 @@
 	var/datum/existing = thing_map["\ref[thing]"]
 	if (!isnull(existing))
 #ifdef SAVE_DEBUG
-		if(verbose_logging)
-			to_world_log("(SerializeThing-Resv) \ref[thing] to [existing]")
+		to_world_log("(SerializeThing-Resv) \ref[thing] to [existing]")
 #endif
 		return existing
 
@@ -198,14 +189,7 @@
 		z = T.z
 
 #ifdef SAVE_DEBUG
-	CHECK_TICK
-	if(x == 34 && y == 106 && z == 1)
-		verbose_logging = TRUE
-	// else
-	// 	verbose_logging = FALSE
-
-	if(verbose_logging)
-		to_world_log("(SerializeThing) ([t_i],'[thing.type]',[x],[y],[z],[version])")
+	to_world_log("(SerializeThing) ([t_i],'[thing.type]',[x],[y],[z],[version])")
 #endif
 	thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
 	thing_map["\ref[thing]"] = t_i
@@ -215,12 +199,11 @@
 		var/VV = thing.vars[V]
 		var/VT = "VAR"
 #ifdef SAVE_DEBUG
-		if(verbose_logging)
-			to_world_log("(SerializeThingVar) [V]")
+		to_world_log("(SerializeThingVar) [V]")
 #endif
 
 		// Some guard statements of things we don't want to serialize...
-		if(isfile(VV))
+		if(isfile(VV) || isicon(VV))
 			continue
 		if(islist(VV) && !isnull(VV))
 			// Complex code for serializing lists...
@@ -228,16 +211,14 @@
 				// Another optimization. Don't need to serialize lists
 				// that have 0 elements.
 #ifdef SAVE_DEBUG
-				if(verbose_logging)
-					to_world_log("(SerializeThingVar-Skip) Zero Length List")
+				to_world_log("(SerializeThingVar-Skip) Zero Length List")
 #endif
 				continue
 			VT = "LIST"
 			VV = SerializeList(VV)
 			if(isnull(VV))
 #ifdef SAVE_DEBUG
-				if(verbose_logging)
-					to_world_log("(SerializeThingVar-Skip) Null List")
+				to_world_log("(SerializeThingVar-Skip) Null List")
 #endif
 				continue
 		else if (isnum(VV))
@@ -252,8 +233,7 @@
 			VV = SerializeThing(VV)
 			if(isnull(VV))
 #ifdef SAVE_DEBUG
-				if(verbose_logging)
-					to_world_log("(SerializeThingVar-Skip) Null Thing")
+				to_world_log("(SerializeThingVar-Skip) Null Thing")
 #endif
 				continue
 		else if (ispath(VV) || IS_PROC(VV)) // After /datum check to avoid high-number obj refs
@@ -261,14 +241,12 @@
 		else
 			// We don't know what this is. Skip it.
 #ifdef SAVE_DEBUG
-			if(verbose_logging)
-				to_world_log("(SerializeThingVar-Skip) Unknown Var")
+			to_world_log("(SerializeThingVar-Skip) Unknown Var")
 #endif
 			continue
 		VV = sanitizeSQL("[VV]")
 #ifdef SAVE_DEBUG
-		if(verbose_logging)
-			to_world_log("(SerializeThingVar-Done) ([var_index],[t_i],'[V]','[VT]',\"[VV]\",[version])")
+		to_world_log("(SerializeThingVar-Done) ([var_index],[t_i],'[V]','[VT]',\"[VV]\",[version])")
 #endif
 		var_inserts.Add("([var_index],[t_i],'[V]','[VT]',\"[VV]\",[version])")
 		var_index++

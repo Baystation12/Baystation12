@@ -7,6 +7,12 @@
 
 /datum/proc/after_deserialize()
 
+/datum
+	var/should_save = TRUE
+
+/atom/movable/lighting_overlay
+	should_save = FALSE
+
 /obj/after_deserialize()
 	..()
 	queue_icon_update()
