@@ -79,10 +79,11 @@
 		var/KT = "NULL"
 		var/KV = key
 		var/EV = null
-		try
-			EV = _list[key]
-		catch
-			EV = null // NBD... No value.
+		if(!isnum(key))
+			try
+				EV = _list[key]
+			catch
+				EV = null // NBD... No value.
 
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(KV) || isfile(EV) || isicon(KV) || isicon(EV))
