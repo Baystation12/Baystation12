@@ -87,7 +87,7 @@
 	while(query.NextRow())
 		var/items = query.GetRowData()
 		var/datum/persistence/load_cache/list_element/element = new(items)
-		LAZYADD(lists["items["list_id"]"], element)
+		LAZYADD(lists["[items["list_id"]]"], element)
 		lists_cached++
 		CHECK_TICK
 	to_world_log("Took [world.timeofday - start] to cache all lists")

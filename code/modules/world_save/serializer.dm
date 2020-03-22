@@ -361,9 +361,10 @@
 
 	// We gotta resolve the list.
 	var/list/raw_list = resolver.lists["[list_id]"]
+	// to_world_log("deserializing list with [length(raw_list)] elements.")
 	for(var/datum/persistence/load_cache/list_element/LE in raw_list)
 		var/key_value
-
+		// to_world_log("deserializing list element [LE.key_type].")
 		switch(LE.key_type)
 			if("NULL")
 				key_value = null
