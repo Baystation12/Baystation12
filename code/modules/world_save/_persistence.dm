@@ -24,7 +24,12 @@
 	queue_icon_update()
 
 /obj/structure/cable/after_deserialize()
-	if(level==1 && T) hide(!T.is_plating())
+	var/turf/T = src.loc			// hide if turf is not intact
+	if(level==1) hide(!T.is_plating())
+
+/obj/machinery/power/terminal/after_deserialize()
+	var/turf/T = src.loc
+	if(level==1) hide(!T.is_plating())
 
 /turf/space/after_deserialize()
     ..()

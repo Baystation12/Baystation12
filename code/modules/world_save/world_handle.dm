@@ -112,6 +112,9 @@
 		to_world_log("Load complete! Took [world.timeofday-start] to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
 
 		// Cleanup the cache. It uses a *lot* of memory.
+		for(var/id in serializer.reverse_map)
+			var/datum/T = serializer.reverse_map[id]
+			T.after_deserialize()
 		serializer.resolver.clear_cache()
 		serializer.Clear()
 	catch(var/exception/e)

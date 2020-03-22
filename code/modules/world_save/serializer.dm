@@ -339,7 +339,6 @@
 #ifdef SAVE_DEBUG
 	to_world_log("Deserialized thing of type [thing.thing_type] ([thing.x],[thing.y],[thing.z]) with vars: " + jointext(deserialized_vars, ", "))
 #endif
-	existing.after_deserialize()
 	return existing
 
 /datum/persistence/serializer/proc/QueryAndDeserializeThing(var/thing_id)
@@ -380,20 +379,36 @@
 				if("OBJ")
 					key_value = QueryAndDeserializeThing(LE.key)
 
-			switch(LE.value_type)
-				if("NULL")
-					// This is how lists are made. Everything else is a dict.
-					existing.Add(key_value)
-				if("TEXT")
-					existing[key_value] = LE.value
-				if("NUM")
-					existing[key_value] = text2num(LE.value)
-				if("PATH")
-					existing[key_value] = text2path(LE.value)
-				if("LIST")
-					existing[key_value] = DeserializeList(LE.value)
-				if("OBJ")
-					existing[key_value] = QueryAndDeserializeThing(LE.value)
+			if(LE.key_type == "NUM")
+				switch(LE.value_type)
+					if("NULL")
+						// This is how lists are made. Everything else is a dict.
+						existing.Add(key_value)
+					if("TEXT")
+						existing.Insert(key_value, LE.value)
+					if("NUM")
+						existing.Insert(key_value, text2num(LE.value))
+					if("PATH")
+						existing.Insert(key_value, text2path(LE.value))
+					if("LIST")
+						existing.Insert(key_value, DeserializeList(LE.value))
+					if("OBJ")
+						existing.Insert(key_value, QueryAndDeserializeThing(LE.value))
+			else
+				switch(LE.value_type)
+					if("NULL")
+						// This is how lists are made. Everything else is a dict.
+						existing.Add(key_value)
+					if("TEXT")
+						existing[key_value] = LE.value
+					if("NUM")
+						existing[key_value] = text2num(LE.value)
+					if("PATH")
+						existing[key_value] = text2path(LE.value)
+					if("LIST")
+						existing[key_value] = DeserializeList(LE.value)
+					if("OBJ")
+						existing[key_value] = QueryAndDeserializeThing(LE.value)
 		catch(var/exception/e)
 			to_world_log("Failed to deserialize list [list_id] element [key_value] on line [e.line] / file [e.file] for reason: [e].")
 	return existing
