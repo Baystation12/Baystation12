@@ -17,7 +17,10 @@
 	var/list/element_inserts = list()
 
 	var/datum/persistence/load_cache/resolver/resolver = new()
-	var/list/ignore_if_empty = list("pixel_x", "pixel_y", "density", "opacity", "blend_mode", "fingerprints", "climbers", "contents", "suit_fibers", "was_bloodied", "last_bumped", "blood_DNA", "id_tag")
+	var/list/ignore_if_empty = list("pixel_x", "pixel_y", "density", "opacity", "blend_mode", "fingerprints", "climbers", "contents", "suit_fibers", "was_bloodied", "last_bumped", "blood_DNA", "id_tag", "x", "y", "z", "loc")
+	var/autocommit = TRUE // whether or not to autocommit after a certain number of inserts.
+	var/inserts_since_commit = 0
+	var/autocommit_threshold = 5000
 
 #ifdef SAVE_DEBUG
 	var/verbose_logging = FALSE
@@ -49,11 +52,11 @@
 		element_index = text2num(query.item[1]) + 1
 
 /datum/persistence/serializer/proc/SerializeList(var/_list)
-	if(isnull(_list))
+	if(isnull(_list) || !islist(_list))
 		return
 
 	var/list/existing = list_map["\ref[_list]"]
-	if(!isnull(existing))
+	if(existing)
 #ifdef SAVE_DEBUG
 		to_world_log("(SerializeList-Resv) \ref[_list] to [existing]")
 		CHECK_TICK
@@ -63,6 +66,7 @@
 	var/l_i = list_index
 	list_index++
 	list_inserts.Add("([l_i],[length(_list)],[version])")
+	inserts_since_commit++
 	list_map["\ref[_list]"] = l_i
 
 #ifdef SAVE_DEBUG
@@ -154,6 +158,7 @@
 			to_world_log("(SerializeListElem-Done) ([element_index],[l_i],[I],\"[KV]\",'[KT]',\"[EV]\",\"[ET]\",[version])")
 #endif
 		element_inserts.Add("([element_index],[l_i],[I],\"[KV]\",'[KT]',\"[EV]\",\"[ET]\",[version])")
+		inserts_since_commit++
 		element_index++
 		I++
 	return l_i
@@ -168,7 +173,7 @@
 		return // EXPERIMENTAL. Don't save things without a whitelist.
 
 	var/datum/existing = thing_map["\ref[thing]"]
-	if (!isnull(existing))
+	if (existing)
 #ifdef SAVE_DEBUG
 		to_world_log("(SerializeThing-Resv) \ref[thing] to [existing]")
 		CHECK_TICK
@@ -201,6 +206,7 @@
 	to_world_log("(SerializeThing) ([t_i],'[thing.type]',[x],[y],[z],[version])")
 #endif
 	thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
+	inserts_since_commit++
 	thing_map["\ref[thing]"] = t_i
 
 	for(var/V in thing.get_saved_vars())
@@ -274,6 +280,7 @@
 		to_world_log("(SerializeThingVar-Done) ([var_index],[t_i],'[V]','[VT]',\"[VV]\",[version])")
 #endif
 		var_inserts.Add("([var_index],[t_i],'[V]','[VT]',\"[VV]\",[version])")
+		inserts_since_commit++
 		var_index++
 	// if(default_instance)
 	// 	try
@@ -281,6 +288,8 @@
 	// 	catch
 	// 		to_world_log("Instance of type [thing.type] resisted being deleted. Double check it's allowed to be QDEL'd on save.")
 	thing.after_save() // After save hook.
+	if(inserts_since_commit > autocommit_threshold)
+		Commit()
 	return t_i
 
 /datum/persistence/serializer/proc/DeserializeThing(var/datum/persistence/load_cache/thing/thing)
@@ -420,6 +429,7 @@
 	var_inserts.Cut(1)
 	list_inserts.Cut(1)
 	element_inserts.Cut(1)
+	inserts_since_commit = 0
 
 /datum/persistence/serializer/proc/Clear()
 	thing_inserts.Cut(1)

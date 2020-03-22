@@ -13,6 +13,9 @@
 /atom/movable/lighting_overlay
 	should_save = FALSE
 
+/area
+	should_save = FALSE
+
 /obj/after_deserialize()
 	..()
 	queue_icon_update()
