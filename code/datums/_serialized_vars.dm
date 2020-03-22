@@ -316,6 +316,10 @@
 	//
 	LAZYADD(.[/obj/effect/floor_decal], "supplied_dir")
 	LAZYADD(.[/obj/effect/floor_decal], "color")
+	LAZYADD(.[/obj/effect/floor_decal], "plane")
+	LAZYADD(.[/obj/effect/floor_decal], "layer")
+	LAZYADD(.[/obj/effect/floor_decal], "appearance_flags")
+	LAZYADD(.[/obj/effect/floor_decal], "alpha")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1312,6 +1316,13 @@
 	LAZYADD(.[/obj/machinery/door], "glass")
 	LAZYADD(.[/obj/machinery/door], "normalspeed")
 	LAZYADD(.[/obj/machinery/door], "health")
+	LAZYADD(.[/obj/machinery/door], "anchored")
+	LAZYADD(.[/obj/machinery/door], "heat_proof")
+	LAZYADD(.[/obj/machinery/door], "connections")
+	LAZYADD(.[/obj/machinery/door], "operating")
+	LAZYADD(.[/obj/machinery/door], "min_force")
+	LAZYADD(.[/obj/machinery/door], "repairing")
+	LAZYADD(.[/obj/machinery/door], "maxhealth")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1681,6 +1692,14 @@
 	LAZYADD(.[/obj/machinery], "component_parts")
 	LAZYADD(.[/obj/machinery], "uid")
 	LAZYADD(.[/obj/machinery], "panel_open")
+	LAZYADD(.[/obj/machinery], "active_power_usage")
+	LAZYADD(.[/obj/machinery], "idle_power_usage")
+	LAZYADD(.[/obj/machinery], "component_parts")
+	LAZYADD(.[/obj/machinery], "power_channel")
+	LAZYADD(.[/obj/machinery], "id_tag")
+	LAZYADD(.[/obj/machinery], "frame_type")
+	LAZYADD(.[/obj/machinery], "processing_parts")
+	LAZYADD(.[/obj/machinery], "processing_flags")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1944,9 +1963,56 @@
 	//
 	// /atom
 	//
+	LAZYADD(.[/atom], "x")
+	LAZYADD(.[/atom], "y")
+	LAZYADD(.[/atom], "z")
+	LAZYADD(.[/atom], "visibility")
 	LAZYADD(.[/atom], "suit_fibers")
 	LAZYADD(.[/atom], "fingerprints")
-	LAZYADD(.[/atom], "gunshot_residue")
+	LAZYADD(.[/atom], "gunshot_resique")
+	LAZYADD(.[/atom], "contents")
+	LAZYADD(.[/atom], "icon")
+	LAZYADD(.[/atom], "color")
+	LAZYADD(.[/atom], "blend_mode")
+	LAZYADD(.[/atom], "density")
+	LAZYADD(.[/atom], "dir")
+	LAZYADD(.[/atom], "icon_state")
+	LAZYADD(.[/atom], "loc")
+	LAZYADD(.[/atom], "name")
+	LAZYADD(.[/atom], "opacity")
+	LAZYADD(.[/atom], "layer")
+	LAZYADD(.[/atom], "pixel_x")
+	LAZYADD(.[/atom], "pixel_y")
+	LAZYADD(.[/atom], "pixel_w")
+	LAZYADD(.[/atom], "pixel_z")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj
+	//
+	LAZYADD(.[/obj], "x")
+	LAZYADD(.[/obj], "y")
+	LAZYADD(.[/obj], "z")
+	LAZYADD(.[/obj], "visibility")
+	LAZYADD(.[/obj], "suit_fibers")
+	LAZYADD(.[/obj], "fingerprints")
+	LAZYADD(.[/obj], "gunshot_resique")
+	LAZYADD(.[/obj], "contents")
+	LAZYADD(.[/obj], "icon")
+	LAZYADD(.[/obj], "color")
+	LAZYADD(.[/obj], "blend_mode")
+	LAZYADD(.[/obj], "density")
+	LAZYADD(.[/obj], "dir")
+	LAZYADD(.[/obj], "icon_state")
+	LAZYADD(.[/obj], "loc")
+	LAZYADD(.[/obj], "name")
+	LAZYADD(.[/obj], "opacity")
+	LAZYADD(.[/obj], "layer")
+	LAZYADD(.[/obj], "pixel_x")
+	LAZYADD(.[/obj], "pixel_y")
+	LAZYADD(.[/obj], "pixel_w")
+	LAZYADD(.[/obj], "pixel_z")
 
 
 	for(var/type in .)

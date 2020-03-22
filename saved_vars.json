@@ -283,7 +283,11 @@
 	  "path": "/obj/effect/floor_decal",
 	  "vars": [
 		"supplied_dir",
-		"color"
+		"color",
+		"plane",
+		"layer",
+		"appearance_flags",
+		"alpha"
 	  ]
 	},
 	{
@@ -1167,7 +1171,14 @@
 		"autoclose",
 		"glass",
 		"normalspeed",
-		"health"
+		"health",
+		"anchored",
+		"heat_proof",
+		"connections",
+		"operating",
+		"min_force",
+		"repairing",
+		"maxhealth"
 	  ]
 	},
 	{
@@ -1498,7 +1509,15 @@
 		"use_power",
 		"component_parts",
 		"uid",
-		"panel_open"
+		"panel_open",
+		"active_power_usage",
+		"idle_power_usage",
+		"component_parts",
+		"power_channel",
+		"id_tag",
+		"frame_type",
+		"processing_parts",
+		"processing_flags"
 	  ]
 	},
 	{
@@ -1733,9 +1752,55 @@
 	{
 		"path": "/atom",
 		"vars": [
+			"x",
+			"y",
+			"z",
+			"visibility",
 			"suit_fibers",
 			"fingerprints",
-			"gunshot_residue"
+			"gunshot_resique",
+			"contents",
+			"icon",
+			"color",
+			"blend_mode",
+			"density",
+			"dir",
+			"icon_state",
+			"loc",
+			"name",
+			"opacity",
+			"layer",
+			"pixel_x",
+			"pixel_y",
+			"pixel_w",
+			"pixel_z"
+		]
+	},
+	{
+		"path": "/obj",
+		"vars": [
+			"x",
+			"y",
+			"z",
+			"visibility",
+			"suit_fibers",
+			"fingerprints",
+			"gunshot_resique",
+			"contents",
+			"icon",
+			"color",
+			"blend_mode",
+			"density",
+			"dir",
+			"icon_state",
+			"loc",
+			"name",
+			"opacity",
+			"layer",
+			"pixel_x",
+			"pixel_y",
+			"pixel_w",
+			"pixel_z"
 		]
 	}
   ]
