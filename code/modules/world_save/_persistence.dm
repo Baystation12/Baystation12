@@ -13,9 +13,6 @@
 /atom/movable/lighting_overlay
 	should_save = FALSE
 
-/area
-	should_save = FALSE
-
 /mob/observer
 	should_save = FALSE
 
@@ -64,9 +61,6 @@
 
 /area/proc/get_turf_coords()
 	var/list/coord_list = list()
-	var/ind = 0
 	for(var/turf/T in contents)
-		ind++
-		coord_list += "[ind]"
-		coord_list[ind] = list(T.x, T.y, T.z)
+		coord_list.Add("[T.x],[T.y],[T.z]")
 	return coord_list

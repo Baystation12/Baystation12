@@ -2157,6 +2157,14 @@
 			 "transform",
 			 "icon"
 		 ]
+	  },
+	  {
+		 "path": "/datum/wrapper/area",
+		 "vars": [
+			 "area_type",
+			 "name",
+			 "turfs"
+		 ]
 	  }
   ]
   

@@ -91,6 +91,8 @@
 			KT = "NUM"
 		else if (istext(key))
 			KT = "TEXT"
+		else if (ispath(key) || IS_PROC(key))
+			KT = "PATH"		
 		else if (isfile(key))
 			KT = "FILE"
 		else if (islist(key))
@@ -101,6 +103,11 @@
 				to_world_log("(SerializeListElem-Skip) Key thing is null.")
 #endif
 				continue
+		else if(isarea(key))
+			KT = "AREA"
+			KV = SerializeArea(KV)
+			if(isnull(KV))
+				continue
 		else if(istype(key, /datum))
 			KT = "OBJ"
 			KV = SerializeThing(key)
@@ -109,8 +116,6 @@
 				to_world_log("(SerializeListElem-Skip) Key list is null.")
 #endif
 				continue
-		else if (ispath(key) || IS_PROC(key))
-			KT = "PATH"
 		else
 			// Don't know what this is. Skip it.
 			element_index--
@@ -126,6 +131,8 @@
 				ET = "TEXT"
 			else if (isnull(EV))
 				ET = "NULL"
+			else if (ispath(EV) || IS_PROC(EV))
+				ET = "PATH"
 			else if (isfile(EV))
 				ET = "FILE"
 			else if (islist(EV))
@@ -136,6 +143,11 @@
 					to_world_log("(SerializeListElem-Skip) Value list is null.")
 #endif
 					continue
+			else if(isarea(key))
+				ET = "AREA"
+				EV = SerializeArea(EV)
+				if(isnull(EV))
+					continue
 			else if (istype(EV, /datum))
 				ET = "OBJ"
 				EV = SerializeThing(EV)
@@ -144,8 +156,6 @@
 					to_world_log("(SerializeListElem-Skip) Value thing is null.")
 #endif
 					continue
-			else if (ispath(EV) || IS_PROC(EV))
-				ET = "PATH"
 			else
 				// Don't know what this is. Skip it.
 #ifdef SAVE_DEBUG
@@ -252,10 +262,17 @@
 			VT = "NUM"
 		else if (istext(VV))
 			VT = "TEXT"
+		else if (ispath(VV) || IS_PROC(VV)) // After /datum check to avoid high-number obj refs
+			VT = "PATH"
 		else if (isfile(VV))
 			VT = "FILE"
 		else if (isnull(VV))
 			VT = "NULL"
+		else if (isarea(VV))
+			VT = "AREA"
+			VV = SerializeArea(VV)
+			if(isnull(VV))
+				continue
 		else if (istype(VV, /datum))
 			// Serialize it complex-like, baby.
 			VT = "OBJ"
@@ -265,8 +282,6 @@
 				to_world_log("(SerializeThingVar-Skip) Null Thing")
 #endif
 				continue
-		else if (ispath(VV) || IS_PROC(VV)) // After /datum check to avoid high-number obj refs
-			VT = "PATH"
 		else
 			// We don't know what this is. Skip it.
 #ifdef SAVE_DEBUG
@@ -289,6 +304,16 @@
 	if(inserts_since_commit > autocommit_threshold)
 		Commit()
 	return t_i
+
+/datum/persistence/serializer/proc/SerializeArea(var/area/A)
+	var/existing = thing_map["\ref[A]"]
+	if(existing) return existing
+	if(istype(A, /area/space)) return
+	var/datum/wrapper/area/wrapper = new(A)
+
+	var/area_id = SerializeThing(wrapper)
+	thing_map["\ref[A]"] = area_id
+	return area_id
 
 /datum/persistence/serializer/proc/DeserializeThing(var/datum/persistence/load_cache/thing/thing)
 #ifdef SAVE_DEBUG
@@ -334,6 +359,8 @@
 					existing.vars[TV.key] = QueryAndDeserializeThing(TV.value)
 				if("FILE")
 					existing.vars[TV.key] = file(TV.value)
+				if("AREA")
+					existing.vars[TV.key] = DeserializeArea(TV.value)
 		catch(var/exception/e)
 			to_world_log("Failed to deserialize '[TV.key]' of type '[TV.var_type]' on line [e.line] / file [e.file] for reason: '[e]'.")
 #ifdef SAVE_DEBUG
@@ -380,6 +407,8 @@
 					key_value = QueryAndDeserializeThing(LE.key)
 				if("FILE")
 					key_value = file(LE.key)
+				if("AREA")
+					key_value = DeserializeArea(LE.key)
 
 			switch(LE.value_type)
 				if("NULL")
@@ -397,10 +426,30 @@
 					existing[key_value] = QueryAndDeserializeThing(LE.value)
 				if("FILE")
 					existing[key_value] = file(LE.value)
-				
+				if("AREA")
+					existing[key_value] = DeserializeArea(LE.value)
+
 		catch(var/exception/e)
 			to_world_log("Failed to deserialize list [list_id] element [key_value] on line [e.line] / file [e.file] for reason: [e].")
 	return existing
+
+/datum/persistence/serializer/proc/DeserializeArea(var/area_id)
+	var/existing = reverse_map["[area_id]"]
+	if(existing)
+		return existing
+		
+	var/datum/wrapper/area/area_wrapper = QueryAndDeserializeThing(area_id)
+	var/area/A = new area_wrapper.area_type()
+	A.name = area_wrapper.name
+	var/list/turfs = list()
+	for(var/index in 1 to length(area_wrapper.turfs))
+		var/list/coords = splittext(area_wrapper.turfs[index], ",")
+		var/turf/T = locate(text2num(coords[1]), text2num(coords[2]), text2num(coords[3]))
+		turfs |= T
+	A.contents.Add(turfs)
+
+	reverse_map["[area_id]"] = A
+	return A
 
 /datum/persistence/serializer/proc/Commit()
 	establish_db_connection()

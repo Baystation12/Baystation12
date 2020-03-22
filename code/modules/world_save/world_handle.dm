@@ -32,7 +32,6 @@
 		//
 		// 	PREPARATION SECTIONS
 		//
-		var/list/areas_to_save = list() // TODO: Fill this with values.
 		var/reallow = 0
 		if(config.enter_allowed) reallow = 1
 		config.enter_allowed = 0
@@ -66,13 +65,6 @@
 					// Prevent the whole game from locking up.
 					CHECK_TICK
 			serializer.Commit() // cleanup leftovers.
-
-		// This section will save any areas in the world.
-		for(var/area/A in areas_to_save)
-			if(istype(A, /area/space)) continue
-			var/datum/wrapper/area/wrapper = new(A)
-			serializer.SerializeThing(wrapper)
-			CHECK_TICK
 		//
 		//	CLEANUP SECTION
 		//

@@ -2422,6 +2422,15 @@
 	LAZYADD(.[/image], "icon")
 
 
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/wrapper/area
+	//
+	LAZYADD(.[/datum/wrapper/area], "area_type")
+	LAZYADD(.[/datum/wrapper/area], "name")
+	LAZYADD(.[/datum/wrapper/area], "turfs")
+
+
 	for(var/type in .)
 		for (var/subtype in subtypesof(type))
 			for (var/v in .[type])
