@@ -85,16 +85,14 @@
 			catch
 				EV = null // NBD... No value.
 
-		// Some guard statements of things we don't want to serialize...
-		if(isfile(KV) || isfile(EV) || isicon(KV) || isicon(EV))
-			continue
-
 		if (isnull(key))
 			KT = "NULL"
 		else if(isnum(key))
 			KT = "NUM"
 		else if (istext(key))
 			KT = "TEXT"
+		else if (isfile(key))
+			KT = "FILE"
 		else if (islist(key))
 			KT = "LIST"
 			KV = SerializeList(key)
@@ -128,6 +126,8 @@
 				ET = "TEXT"
 			else if (isnull(EV))
 				ET = "NULL"
+			else if (isfile(EV))
+				ET = "FILE"
 			else if (islist(EV))
 				ET = "LIST"
 				EV = SerializeList(EV)
@@ -218,11 +218,6 @@
 #ifdef SAVE_DEBUG
 		to_world_log("(SerializeThingVar) [V]")
 #endif
-
-		// Some guard statements of things we don't want to serialize...
-		if(isfile(VV) || isicon(VV))
-			continue
-
 		// EXPERIMENTAL SAVING OPTIMIZATION OH FUCK
 		// if(default_instance && default_instance.vars[V] == VV)
 			// continue // Don't save things that are 'default value'. doh.
@@ -257,6 +252,8 @@
 			VT = "NUM"
 		else if (istext(VV))
 			VT = "TEXT"
+		else if (isfile(VV))
+			VT = "FILE"
 		else if (isnull(VV))
 			VT = "NULL"
 		else if (istype(VV, /datum))
@@ -335,6 +332,8 @@
 					existing.vars[TV.key] = DeserializeList(TV.value)
 				if("OBJ")
 					existing.vars[TV.key] = QueryAndDeserializeThing(TV.value)
+				if("FILE")
+					existing.vars[TV.key] = file(TV.value)
 		catch(var/exception/e)
 			to_world_log("Failed to deserialize '[TV.key]' of type '[TV.var_type]' on line [e.line] / file [e.file] for reason: '[e]'.")
 #ifdef SAVE_DEBUG
@@ -379,37 +378,26 @@
 					key_value = DeserializeList(LE.key)
 				if("OBJ")
 					key_value = QueryAndDeserializeThing(LE.key)
+				if("FILE")
+					key_value = file(LE.key)
 
-			if(LE.key_type == "NUM")
-				switch(LE.value_type)
-					if("NULL")
-						// This is how lists are made. Everything else is a dict.
-						existing.Add(key_value)
-					if("TEXT")
-						existing.Insert(key_value, LE.value)
-					if("NUM")
-						existing.Insert(key_value, text2num(LE.value))
-					if("PATH")
-						existing.Insert(key_value, text2path(LE.value))
-					if("LIST")
-						existing.Insert(key_value, DeserializeList(LE.value))
-					if("OBJ")
-						existing.Insert(key_value, QueryAndDeserializeThing(LE.value))
-			else
-				switch(LE.value_type)
-					if("NULL")
-						// This is how lists are made. Everything else is a dict.
-						existing.Add(key_value)
-					if("TEXT")
-						existing[key_value] = LE.value
-					if("NUM")
-						existing[key_value] = text2num(LE.value)
-					if("PATH")
-						existing[key_value] = text2path(LE.value)
-					if("LIST")
-						existing[key_value] = DeserializeList(LE.value)
-					if("OBJ")
-						existing[key_value] = QueryAndDeserializeThing(LE.value)
+			switch(LE.value_type)
+				if("NULL")
+					// This is how lists are made. Everything else is a dict.
+					existing.Add(key_value)
+				if("TEXT")
+					existing[key_value] = LE.value
+				if("NUM")
+					existing[key_value] = text2num(LE.value)
+				if("PATH")
+					existing[key_value] = text2path(LE.value)
+				if("LIST")
+					existing[key_value] = DeserializeList(LE.value)
+				if("OBJ")
+					existing[key_value] = QueryAndDeserializeThing(LE.value)
+				if("FILE")
+					existing[key_value] = file(LE.value)
+				
 		catch(var/exception/e)
 			to_world_log("Failed to deserialize list [list_id] element [key_value] on line [e.line] / file [e.file] for reason: [e].")
 	return existing
