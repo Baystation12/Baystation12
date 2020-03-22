@@ -181,6 +181,9 @@
 /datum/gear/clothing/suspenders
 	allowed_branches = CIVILIAN_BRANCHES
 
+/datum/gear/clothing/suspenders/colorable
+	allowed_branches = CIVILIAN_BRANCHES
+
 /datum/gear/clothing/wcoat
 	allowed_roles = FORMAL_ROLES
 	allowed_branches = CIVILIAN_BRANCHES

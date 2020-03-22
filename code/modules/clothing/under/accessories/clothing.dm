@@ -12,6 +12,11 @@
 	desc = "They suspend the illusion of the mime's play."
 	icon_state = "suspenders"
 
+/obj/item/clothing/accessory/suspenders/colorable
+	name = "suspenders"
+	desc = "They suspend the illusion of the mime's play."
+	icon_state = "suspenders_color"
+
 /obj/item/clothing/accessory/tunic
 	name = "researcher's tunic"
 	desc = "A fashionable tunic that EXO provides to their lab workers."
