@@ -846,6 +846,32 @@ About the new airlock wires panel:
 		if(src.isElectrified())
 			if(src.shock(user, 100))
 				return
+	var/mob/living/carbon/human/h = user
+
+	if (istype(h) && h.species.can_force_door == 1 && h.a_intent == I_GRAB)
+		if(arePowerSystemsOn() && !locked && !brace)
+			to_chat(h,"<span class='notice'>The airlock's motors are resisting your efforts to force it, but you're strong enough to overcome them.</span>")
+			if(!do_after(h, 5 SECONDS,src))
+				to_chat(h,"<span class = 'notice'>You stop forcing the airlock.</span>")
+				return
+			if(density)
+				to_chat(h,"<span class = 'notice'>You force the airlock open.</span>")
+				open()
+			else
+				to_chat(h,"<span class = 'notice'>You force the airlock closed.</span>")
+				close()
+
+		else if (locked)
+			to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
+		else if(brace)
+			to_chat(user, "<span class='notice'>The airlock's brace holds it firmly in place.</span>")
+		else
+			if (density)
+				to_chat(h,"<span class = 'notice'>You force the airlock open.</span>")
+				open(1)
+			else
+				to_chat(h,"<span class = 'notice'>You force the airlock closed.</span>")
+				close(1)
 
 	if(src.p_open)
 		user.set_machine(src)

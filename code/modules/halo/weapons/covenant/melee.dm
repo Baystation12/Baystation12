@@ -255,7 +255,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	var/explode_at = -1
 	var/regen_delay = 2 MINUTES
 	var/regen_at = -1
-	var/explode_damage = 40
+	var/explode_damage = 60
 
 /obj/item/weapon/melee/blamite/update_icon()
 	if(regen_at != -1)
