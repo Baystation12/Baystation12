@@ -26,7 +26,7 @@
 //transfer_moles - Limits the amount of moles to transfer. The actual amount of gas moved may also be limited by available_power, if given.
 //available_power - the maximum amount of power that may be used when moving gas. If null then the transfer is not limited by power.
 /proc/pump_gas(var/obj/machinery/M, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null, var/available_power = null)
-	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
+	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we can't transfer enough gas just stop to avoid further processing
 		return -1
 
 	if (isnull(transfer_moles))
@@ -39,7 +39,7 @@
 	if (!isnull(available_power) && specific_power > 0)
 		transfer_moles = min(transfer_moles, available_power / specific_power)
 
-	if (transfer_moles < MINIMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
+	if (transfer_moles < MINIMUM_MOLES_TO_PUMP) //if we can't transfer enough gas just stop to avoid further processing
 		return -1
 
 	//Update flow rate meter
@@ -69,7 +69,7 @@
 
 //Gas 'pumping' proc for the case where the gas flow is passive and driven entirely by pressure differences (but still one-way).
 /proc/pump_gas_passive(var/obj/machinery/M, var/datum/gas_mixture/source, var/datum/gas_mixture/sink, var/transfer_moles = null)
-	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we cant transfer enough gas just stop to avoid further processing
+	if (source.total_moles < MINIMUM_MOLES_TO_PUMP) //if we can't transfer enough gas just stop to avoid further processing
 		return -1
 
 	if (isnull(transfer_moles))

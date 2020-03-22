@@ -280,7 +280,7 @@
 	else
 		return if_no_id
 
-//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
+//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a separate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
 	var/face_name = get_face_name()
 	var/id_name = get_id_name("")

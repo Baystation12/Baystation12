@@ -133,7 +133,7 @@
 		if(!findtext(input, "the", 1, 4))
 			input = "\improper [input]"
 		SetName(input)
-		to_chat(M, "Suit naming succesful!")
+		to_chat(M, "Suit naming successful!")
 		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
 		return 1
 
@@ -148,7 +148,7 @@
 	var/input = sanitizeSafe(input("Please describe your voidsuit in 128 letters or less.", "write description"), MAX_DESC_LEN)
 	if(src && input && !M.incapacitated() && in_range(M,src))
 		desc = input
-		to_chat(M, "Suit description succesful!")
+		to_chat(M, "Suit description successful!")
 		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
 		return 1
 

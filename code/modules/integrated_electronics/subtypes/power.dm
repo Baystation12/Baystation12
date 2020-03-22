@@ -8,7 +8,7 @@
 	extended_desc = "This circuit transmits 5 kJ of electricity every time the activator pin is pulsed. The input pin must be \
 	a reference to a machine to send electricity to. This can be a battery, or anything containing a battery. The machine can exist \
 	inside the assembly, or adjacent to it. The power is sourced from the assembly's power cell. If the target is outside of the assembly, \
-	some power is lost due to ineffiency."
+	some power is lost due to inefficiency."
 	w_class = ITEM_SIZE_SMALL
 	complexity = 16
 	inputs = list("target" = IC_PINTYPE_REF)
@@ -19,7 +19,7 @@
 		)
 	activators = list("transmit" = IC_PINTYPE_PULSE_IN, "on transmit" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
-	power_draw_per_use = 500 // Inefficency has to come from somewhere.
+	power_draw_per_use = 500 // Inefficiency has to come from somewhere.
 	var/amount_to_move = 5000
 
 /obj/item/integrated_circuit/power/transmitter/large
@@ -28,7 +28,7 @@
 	extended_desc = "This circuit transmits 20 kJ of electricity every time the activator pin is pulsed. The input pin must be \
 	a reference to a machine to send electricity to. This can be a battery, or anything containing a battery. The machine can exist \
 	inside the assembly, or adjacent to it. The power is sourced from the assembly's power cell. If the target is outside of the assembly, \
-	some power is lost due to ineffiency. Warning! Don't stack more than 1 power transmitter, as it becomes less efficient for every other \
+	some power is lost due to inefficiency. Warning! Don't stack more than 1 power transmitter, as it becomes less efficient for every other \
 	transmission circuit in its own assembly and other nearby ones."
 	w_class = ITEM_SIZE_LARGE
 	complexity = 32
