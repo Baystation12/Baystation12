@@ -28,6 +28,7 @@
 		/decl/emote/human/fastsway,
 		/decl/emote/human/swag,
 		/decl/emote/human/stopsway
+		/decl/emote/audible/lizard_bellow
 		)
 
 /datum/species/nabber
