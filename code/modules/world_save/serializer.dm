@@ -322,6 +322,7 @@
 #ifdef SAVE_DEBUG
 	to_world_log("Deserialized thing of type [thing.thing_type] ([thing.x],[thing.y],[thing.z]) with vars: " + jointext(deserialized_vars, ", "))
 #endif
+	existing.after_deserialize()
 	return existing
 
 /datum/persistence/serializer/proc/QueryAndDeserializeThing(var/thing_id)

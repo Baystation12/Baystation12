@@ -5,6 +5,33 @@
 
 /datum/proc/before_save()
 
+/datum/proc/after_deserialize()
+
+/obj/after_deserialize()
+	..()
+	queue_icon_update()
+
+/turf/space/after_deserialize()
+    ..()
+    for(var/atom/movable/lighting_overlay/overlay in contents)
+        overlay.loc = null
+        qdel(overlay)
+
+/turf/after_deserialize()
+	..()
+	queue_icon_update()
+	if(dynamic_lighting)
+		lighting_build_overlay()
+	else
+		lighting_clear_overlay()
+
+/atom/movable/lighting_overlay/after_deserialize()
+	loc = null
+	qdel(src)
+
+/area/after_deserialize()
+	power_change()
+
 /datum/proc/get_saved_vars()
 	return GLOB.saved_vars[type] || get_default_vars()
 

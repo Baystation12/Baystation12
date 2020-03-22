@@ -51,7 +51,7 @@
 				for(var/y in 1 to world.maxy)
 					// Get the thing to serialize and serialize it.
 					var/turf/T = locate(x,y,z)
-					if(!T)
+					if(!T || ((T.type == /turf/space) && (!T.contents || !T.contents.len))) //  || T.type == /turf/simulated/open
 						continue
 					serializer.SerializeThing(T)
 

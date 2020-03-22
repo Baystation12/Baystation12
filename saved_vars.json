@@ -1722,7 +1722,13 @@
 			"fluid_can_pass",
 			"flooded",
 			"footstep_type",
-			"contents"
+			"contents",
+			"density",
+			"icon_state",
+			"name",
+			"pixel_x",
+			"pixel_y",
+			"dir"
 		]
 	},
 	{
@@ -1752,9 +1758,6 @@
 	{
 		"path": "/atom",
 		"vars": [
-			"x",
-			"y",
-			"z",
 			"visibility",
 			"suit_fibers",
 			"fingerprints",
@@ -1766,22 +1769,16 @@
 			"density",
 			"dir",
 			"icon_state",
-			"loc",
 			"name",
 			"opacity",
 			"layer",
 			"pixel_x",
-			"pixel_y",
-			"pixel_w",
-			"pixel_z"
+			"pixel_y"
 		]
 	},
 	{
 		"path": "/obj",
 		"vars": [
-			"x",
-			"y",
-			"z",
 			"visibility",
 			"suit_fibers",
 			"fingerprints",
@@ -1789,19 +1786,366 @@
 			"contents",
 			"icon",
 			"color",
-			"blend_mode",
 			"density",
 			"dir",
 			"icon_state",
-			"loc",
 			"name",
 			"opacity",
-			"layer",
 			"pixel_x",
-			"pixel_y",
-			"pixel_w",
-			"pixel_z"
+			"pixel_y"
 		]
-	}
+	},
+	{
+		"path": "/datum/robot_component",
+		"vars": [
+		  "name",
+		  "installed",
+		  "powered",
+		  "toggled",
+		  "brute_damage",
+		  "electronics_damage",
+		  "max_damage",
+		  "external_type",
+		  "wrapped"
+		]
+	  },
+	  {
+		"path": "/mob/living/simple_animal/corgi/puppy",
+		"vars": [
+		  "max_health",
+		  "color"
+		]
+	  },
+	  {
+		 "path": "/obj/item/clothing/shoes",
+		 "vars": [
+		   "overshoes",
+		   "hidden_item",
+		   "attached_cuffs"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/clothing/suit",
+		 "vars": [
+		   "allowed"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/clothing/under/rank/psych/turtleneck/sweater",
+		 "vars": [
+		   "contents"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/clothing/under",
+		 "vars": [
+		   "sensor_mode",
+		   "rolled_down",
+		   "rolled_sleeves",
+		   "worn_state"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/device/electronic_assembly/medium",
+		 "vars": [
+		   "opened"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/device/flashlight/flare",
+		 "vars": [
+		   "fuel"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/device/tankassemblyproxy",
+		 "vars": [
+		   "tank",
+		   "assembly"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/disposal_switch_construct",
+		 "vars": [
+		   "id_tag"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/integrated_circuit/manipulation/ai",
+		 "vars": [
+		   "aicard",
+		   "controlling"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/pizzabox",
+		 "vars": [
+		   "pizza"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/robot_parts/chest",
+		 "vars": [
+		   "wires",
+		   "cell"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/robot_parts/head",
+		 "vars": [
+		   "flash1",
+		   "flash2"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/stack/material/generic",
+		 "vars": [
+		   "material"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/cell/apc",
+		 "vars": [
+		   "maxcharge"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/cell/device/variable",
+		 "vars": [
+		   "maxcharge"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/stock_parts/computer/ai_slot",
+		 "vars": [
+		   "stored_card"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/stock_parts/computer/battery_module",
+		 "vars": [
+		   "battery"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/stock_parts/computer/hard_drive",
+		 "vars": [
+		   "stored_files",
+		   "used_capacity"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/stock_parts/computer/card_slot",
+		 "vars": [
+		   "stored_card"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/stock_parts/computer/nano_printer",
+		 "vars": [
+		   "stored_paper"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/stock_parts/computer/",
+		 "vars": [
+		   "damage",
+		   "enabled"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/disk/tech_disk",
+		 "vars": [
+		   "stored"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/disk/tech_disk",
+		 "vars": [
+		   "stored"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/disk/tech_disk",
+		 "vars": [
+		   "stored"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/ducttape",
+		 "vars": [
+		   "stuck"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/flamethrower/full",
+		 "vars": [
+		   "tank"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/gun/projectile/pistol/sec/detective",
+		 "vars": [
+		   "unique_name",
+		   "unique_reskin"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/material/",
+		 "vars": [
+		   "material"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/weapon/tank",
+		 "vars": [
+		   "air_contents",
+		   "distribute_pressure",
+		   "valve_welded",
+		   "proxyassembly",
+		   "wired",
+		   "leaking",
+		   "starting_pressure"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/access_button",
+		 "vars": [
+		   "master_tag",
+		   "frequency",
+		   "command",
+		   "on"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/atmospherics/pipe",
+		 "vars": [
+		   "reagents"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/fabricator",
+		 "vars": [
+		   "stored_material",
+		   "contents"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/conveyor_switch",
+		 "vars": [
+		   "id"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/disposal_switch",
+		 "vars": [
+		   "id_tag",
+		   "on"
+		 ]
+	  },
+	  {
+		 "path": "/obj/item/device/integrated_circuit_printer",
+		 "vars": [
+		   "upgraded",
+		   "materials"
+		 ]
+	  },
+	  {
+		 "path": "/obj/structure/iv_drip",
+		 "vars": [
+		   "mode",
+		   "beaker",
+		   "attached"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/portable_atmospherics/canister/air",
+		 "vars": [
+		   "destroyed",
+		   "health",
+		   "valve_open",
+		   "release_pressure",
+		   "canister_color"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/power/port_gen/pacman",
+		 "vars": [
+		   "sheets",
+		   "sheets_left",
+		   "operating_temperature",
+		   "overheating"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/power/solar_control",
+		 "vars": [
+		   "connected_tracker",
+		   "connected_panels",
+		   "trackrate",
+		   "targetdir",
+		   "track"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/telecomms/bus",
+		 "vars": [
+		   "change_frequency"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/telecomms/processor",
+		 "vars": [
+		   "process_mode"
+		 ]
+	  },
+	  {
+		 "path": "/obj/machinery/telecomms/server",
+		 "vars": [
+		   "log_entries",
+		   "stored_names",
+		   "TrafficActions",
+		   "logs",
+		   "memory"
+		 ]
+	  },
+	  {
+		 "path": "/obj/structure/disposalpipe/diversion_junction",
+		 "vars": [
+		   "active",
+		   "active_dir",
+		   "inactive_dir",
+		   "sortdir",
+		   "id_tag",
+		   "linked"
+		 ]
+	  },
+	  {
+		 "path": "/obj/structure/disposalpipe/sortjunction",
+		 "vars": [
+		   "sortdir",
+		   "posdir",
+		   "negdir"
+		 ]
+	  },
+	  {
+		 "path": "/obj/structure/disposalpipe/tagger",
+		 "vars": [
+		   "sorttag"
+		 ]
+	  },
+	  {
+		 "path": "/obj/structure/lift/panel",
+		 "vars": [
+		   "lift"
+		 ]
+	  },
+	  {
+		 "path": "/turf/simulated/mineral",
+		 "vars": [
+		   "resources",
+		   "mineral"
+		 ]
+	  }
   ]
   
