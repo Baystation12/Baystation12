@@ -100,14 +100,20 @@
 		serializer.resolver.load_cache(version)
 
 		// Begin deserializing the world.
-		for(var/datum/persistence/load_cache/thing/thing in serializer.resolver.things)
-			if(!thing.x || !thing.y || !thing.y)
+		var/start = world.timeofday
+		var/turfs_loaded = 0
+		for(var/TKEY in serializer.resolver.things)
+			var/datum/persistence/load_cache/thing/T = serializer.resolver.things[TKEY]
+			if(!T.x || !T.y || !T.z)
 				continue // This isn't a turf. We can skip it.
-			serializer.DeserializeThing(thing)
+			serializer.DeserializeThing(T)
+			turfs_loaded++
 			CHECK_TICK
+		to_world_log("Load complete! Took [world.timeofday-start] to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
 
 		// Cleanup the cache. It uses a *lot* of memory.
 		serializer.resolver.clear_cache()
+		serializer.Clear()
 	catch(var/exception/e)
 		to_world_log("Load failed on line [e.line], file [e.file] with message: '[e]'.")
 

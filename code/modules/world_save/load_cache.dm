@@ -73,7 +73,7 @@
 		var/datum/persistence/load_cache/thing_var/V = new(items)
 		var/datum/persistence/load_cache/thing/T = things["[items["thing_id"]]"]
 		if(T)
-			LAZYADD(T.thing_vars, V)
+			T.thing_vars.Add(V)
 			vars_cached++
 		else
 			failed_vars++

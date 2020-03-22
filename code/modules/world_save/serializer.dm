@@ -276,23 +276,20 @@
 	return t_i
 
 /datum/persistence/serializer/proc/DeserializeThing(var/datum/persistence/load_cache/thing/thing)
-	if(!dbcon.IsConnected())
-		return
-
 #ifdef SAVE_DEBUG
 	var/list/deserialized_vars = list()
 #endif
 
 	// Checking for existing items.
 	var/datum/existing = reverse_map["[thing.id]"]
-	if(!isnull(existing))
+	if(existing)
 		return existing
 	// Handlers for specific types would go here.
 	if (ispath(thing.thing_type, /turf))
 		// turf turf turf
 		var/turf/T = locate(thing.x, thing.y, thing.z)
 		T.ChangeTurf(thing.thing_type)
-		if (T == null)
+		if (!T)
 			to_world_log("Attempting to deserialize onto turf [thing.x],[thing.y],[thing.z] failed. Could not locate turf.")
 			return
 		existing = T
