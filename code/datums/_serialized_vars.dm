@@ -1694,11 +1694,9 @@
 	LAZYADD(.[/obj/machinery], "panel_open")
 	LAZYADD(.[/obj/machinery], "active_power_usage")
 	LAZYADD(.[/obj/machinery], "idle_power_usage")
-	LAZYADD(.[/obj/machinery], "component_parts")
 	LAZYADD(.[/obj/machinery], "power_channel")
 	LAZYADD(.[/obj/machinery], "id_tag")
 	LAZYADD(.[/obj/machinery], "frame_type")
-	LAZYADD(.[/obj/machinery], "processing_parts")
 	LAZYADD(.[/obj/machinery], "processing_flags")
 
 

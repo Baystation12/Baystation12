@@ -17,6 +17,7 @@
 	var/list/element_inserts = list()
 
 	var/datum/persistence/load_cache/resolver/resolver = new()
+	var/list/ignore_if_empty = list("pixel_x", "pixel_y", "density", "opacity", "blend_mode", "fingerprints", "climbers", "contents", "suit_fibers", "was_bloodied", "last_bumped", "blood_DNA", "id_tag")
 
 #ifdef SAVE_DEBUG
 	var/verbose_logging = FALSE
@@ -55,7 +56,7 @@
 	if(!isnull(existing))
 #ifdef SAVE_DEBUG
 		to_world_log("(SerializeList-Resv) \ref[_list] to [existing]")
-
+		CHECK_TICK
 #endif
 		return existing
 
@@ -170,6 +171,7 @@
 	if (!isnull(existing))
 #ifdef SAVE_DEBUG
 		to_world_log("(SerializeThing-Resv) \ref[thing] to [existing]")
+		CHECK_TICK
 #endif
 		return existing
 
@@ -182,17 +184,25 @@
 	var/z = 0
 
 	thing.before_save() // Before save hook.
+	var/datum/default_instance
 	if(ispath(thing.type, /turf))
 		var/turf/T = thing
 		x = T.x
 		y = T.y
 		z = T.z
+	else
+		try
+			default_instance = new thing.type()
+		catch
+			default_instance = null // Not needed, we know it's null. Some things won't let me do this, so eh.. 
+			// Just accept we're serializing the whole thing.
 
 #ifdef SAVE_DEBUG
 	to_world_log("(SerializeThing) ([t_i],'[thing.type]',[x],[y],[z],[version])")
 #endif
 	thing_inserts.Add("([t_i],'[thing.type]',[x],[y],[z],[version])")
 	thing_map["\ref[thing]"] = t_i
+
 	for(var/V in thing.get_saved_vars())
 		if(!issaved(thing.vars[V]))
 			continue
@@ -205,6 +215,16 @@
 		// Some guard statements of things we don't want to serialize...
 		if(isfile(VV) || isicon(VV))
 			continue
+
+		// EXPERIMENTAL SAVING OPTIMIZATION OH FUCK
+		if(default_instance && default_instance.vars[V] == VV)
+			continue // Don't save things that are 'default value'. doh.
+
+		// hacking in some other optimizations
+		for(var/ignore in ignore_if_empty)
+			if(V == ignore && !VV)
+				continue
+				
 		if(islist(VV) && !isnull(VV))
 			// Complex code for serializing lists...
 			if(length(VV) == 0)
@@ -250,6 +270,11 @@
 #endif
 		var_inserts.Add("([var_index],[t_i],'[V]','[VT]',\"[VV]\",[version])")
 		var_index++
+	if(default_instance)
+		try
+			qdel(default_instance) // After we've checked out the default vars, we don't need it anymore. Off to GC you go.
+		catch
+			to_world_log("Instance of type [thing.type] resisted being deleted. Double check it's allowed to be QDEL'd on save.")
 	thing.after_save() // After save hook.
 	return t_i
 
