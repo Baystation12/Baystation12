@@ -2163,7 +2163,24 @@
 		 "vars": [
 			 "area_type",
 			 "name",
-			 "turfs"
+			 "turfs",
+			 "has_gravity",
+			 "apc",
+			 "power_light",
+			 "power_equip",
+			 "power_environ"
+		 ]
+	  },
+	  {
+		 "path": "/zone",
+		 "vars": [
+			 "name",
+			 "contents",
+			 "air",
+			 "fire_tiles",
+			 "edges",
+			 "fuel_objs",
+			 "last_air_temperature"
 		 ]
 	  }
   ]

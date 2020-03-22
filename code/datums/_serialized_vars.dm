@@ -2429,6 +2429,24 @@
 	LAZYADD(.[/datum/wrapper/area], "area_type")
 	LAZYADD(.[/datum/wrapper/area], "name")
 	LAZYADD(.[/datum/wrapper/area], "turfs")
+	LAZYADD(.[/datum/wrapper/area], "has_gravity")
+	LAZYADD(.[/datum/wrapper/area], "apc")
+	LAZYADD(.[/datum/wrapper/area], "power_light")
+	LAZYADD(.[/datum/wrapper/area], "power_equip")
+	LAZYADD(.[/datum/wrapper/area], "power_environ")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /zone
+	//
+	LAZYADD(.[/zone], "name")
+	LAZYADD(.[/zone], "contents")
+	LAZYADD(.[/zone], "air")
+	LAZYADD(.[/zone], "fire_tiles")
+	LAZYADD(.[/zone], "edges")
+	LAZYADD(.[/zone], "fuel_objs")
+	LAZYADD(.[/zone], "last_air_temperature")
 
 
 	for(var/type in .)

@@ -437,10 +437,15 @@
 	var/existing = reverse_map["[area_id]"]
 	if(existing)
 		return existing
-		
+
 	var/datum/wrapper/area/area_wrapper = QueryAndDeserializeThing(area_id)
 	var/area/A = new area_wrapper.area_type()
 	A.name = area_wrapper.name
+	A.has_gravity = area_wrapper.has_gravity
+	A.apc = area_wrapper.apc
+	A.power_light = area_wrapper.power_light
+	A.power_equip = area_wrapper.power_equip
+	A.power_environ = area_wrapper.power_environ
 	var/list/turfs = list()
 	for(var/index in 1 to length(area_wrapper.turfs))
 		var/list/coords = splittext(area_wrapper.turfs[index], ",")

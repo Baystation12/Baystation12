@@ -42,6 +42,10 @@
 	else
 		lighting_clear_overlay()
 
+/zone/after_deserialize()
+	..()
+	needs_update = TRUE
+
 /atom/movable/lighting_overlay/after_deserialize()
 	loc = null
 	qdel(src)
