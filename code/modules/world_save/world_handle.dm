@@ -57,7 +57,7 @@
 
 					// Don't save every single tile.
 					// Batch them up to save time.
-					if(index / 16 == 1)
+					if(index % 32 == 0)
 						serializer.Commit()
 						index = 1
 					else
@@ -65,7 +65,8 @@
 
 					// Prevent the whole game from locking up.
 					CHECK_TICK
-		
+			serializer.Commit() // cleanup leftovers.
+
 		// This section will save any areas in the world.
 		for(var/area/A in areas_to_save)
 			if(istype(A, /area/space)) continue
@@ -88,24 +89,25 @@
 		if(!dbcon.IsConnected())
 			return
 
-		var/DBQuery/query = dbcon.NewQuery("SELECT COUNT(*) FROM `thing` WHERE `version`=[version] AND x > 0 AND y > 0 AND z > 0;")
+		var/DBQuery/query = dbcon.NewQuery("SELECT COUNT(*) FROM `thing` WHERE `version`=[version];")
 		query.Execute()
-		while(query.NextRow())
+		if(query.NextRow())
+			// total_entries = text2num(query.item[1])
 			to_world_log("Loading [query.item[1]] things from world save.")
 
-		query = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version] AND x > 0 AND y > 0 AND z > 0;")
-		query.Execute()
-		while(query.NextRow())
-			// Blind deserialize *everything*.
-			var/thing_id = query.item[1]
-			var/thing_type = query.item[2]
-			var/thing_path = text2path(thing_type)
-#ifdef SAVE_DEBUG
-			to_world_log("(DeserializeThing) [thing_id],[thing_path]-(query.item[3],query.item[4],query.item[5])")
-#endif
-			// Then we populate the entity with this data.
-			serializer.DeserializeThing(thing_id, thing_path, query.item[3], query.item[4], query.item[5])
+		// We start by loading the cache. This will load everything from SQL into an object structure
+		// and is much faster than live-querying for information.
+		serializer.resolver.load_cache(version)
+
+		// Begin deserializing the world.
+		for(var/datum/persistence/load_cache/thing/thing in serializer.resolver.things)
+			if(!thing.x || !thing.y || !thing.y)
+				continue // This isn't a turf. We can skip it.
+			serializer.DeserializeThing(thing)
 			CHECK_TICK
+
+		// Cleanup the cache. It uses a *lot* of memory.
+		serializer.resolver.clear_cache()
 	catch(var/exception/e)
 		to_world_log("Load failed on line [e.line], file [e.file] with message: '[e]'.")
 

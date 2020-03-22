@@ -3053,6 +3053,7 @@
 #include "code\modules\webhooks\webhook_roundstart.dm"
 #include "code\modules\webhooks\webhook_submap.dm"
 #include "code\modules\world_save\_persistence.dm"
+#include "code\modules\world_save\load_cache.dm"
 #include "code\modules\world_save\serializer.dm"
 #include "code\modules\world_save\world_handle.dm"
 #include "code\modules\world_save\wrappers.dm"
