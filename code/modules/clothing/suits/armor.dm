@@ -442,8 +442,3 @@
 	desc = "Pukish armor."
 	icon_state = "tdgreen"
 	siemens_coefficient = 1
-
-/obj/item/clothing/suit/storage/vest/tactical/mirania
-	name = "bundeforz armored vest"
-	desc = "A heavy armored vest in a light grey urban camo. It is surprisingly flexible and light, even with the extra webbing and advanced ceramic plates."
-	icon_state = "m_vest"

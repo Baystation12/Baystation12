@@ -12,7 +12,6 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
 	/mob/living/silicon/ai/proc/ai_network_change,
-	/mob/living/silicon/ai/proc/ai_roster,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
 	/mob/living/silicon/ai/proc/ai_checklaws,
@@ -304,12 +303,6 @@ var/list/ai_verbs_default = list(
 
 	// Placing custom icons first to have them be at the top
 	. = LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]") | .
-
-// this verb lets the ai see the stations manifest
-/mob/living/silicon/ai/proc/ai_roster()
-	set category = "Silicon Commands"
-	set name = "Show Crew Manifest"
-	show_station_manifest()
 
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()

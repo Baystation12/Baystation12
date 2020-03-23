@@ -354,3 +354,8 @@
 
 #define MARKING_TARGET_SKIN 0 // Draw a datum/sprite_accessory/marking to the mob's body, eg. tattoos
 #define MARKING_TARGET_HAIR 1 // Draw a datum/sprite_accessory/marking to the mob's hair, eg. ears & horns
+
+// used in /mob/living/carbon/human/can_inject, and by various callers of that proc
+#define CAN_INJECT 1
+#define INJECTION_PORT 2
+#define INJECTION_PORT_DELAY 3 SECONDS // used by injectors to apply delay due to searching for a port on the injectee's suit

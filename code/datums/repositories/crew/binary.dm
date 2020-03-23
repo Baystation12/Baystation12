@@ -9,6 +9,10 @@
 				crew_data["alert"] = TRUE
 		if(H.get_blood_oxygenation() < BLOOD_VOLUME_SAFE)
 			crew_data["alert"] = TRUE
+	if(H.isSynthetic())
+		var/obj/item/organ/internal/cell/cell = H.internal_organs_by_name[BP_CELL]
+		if(!cell || cell.percent() < 10)
+			crew_data["alert"] = TRUE
 	return ..()
 
 /* Jamming */
