@@ -11,6 +11,7 @@ SUBSYSTEM_DEF(mapping)
 	var/list/submaps = list()
 	var/list/submap_archetypes = list()
 	var/list/saved_levels = list()
+	var/using_save = FALSE // Whether or not we're using a persistence save.
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
 	// Load templates and build away sites.
@@ -29,6 +30,7 @@ SUBSYSTEM_DEF(mapping)
 	// If version is 0, no saves exist.
 	if (persistence.version > 0)
 		report_progress("Loading world save version [persistence.version].")
+		using_save = TRUE
 		persistence.LoadWorld()
 	else
 		report_progress("No world save found. Skipping load step.")
