@@ -48,6 +48,6 @@
 
 /decl/Destroy()
 	if(SSautosave.saving)
-		return // Allow destruction during saving.
+		return ..() // Allow destruction during saving.
 	crash_with("Prevented attempt to delete a decl instance: [log_info_line(src)]")
 	return QDEL_HINT_LETMELIVE // Prevents Decl destruction
