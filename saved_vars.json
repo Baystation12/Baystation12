@@ -1370,7 +1370,15 @@
 	  "path": "/obj/machinery/power/emitter",
 	  "vars": [
 		"active",
-		"locked"
+		"locked",
+		"powered",
+		"burst_shots",
+		"fire_delay",
+		"last_shot",
+		"shot_number",
+		"efficiency",
+		"min_burst_delay",
+		"max_burst_delay"
 	  ]
 	},
 	{
@@ -1402,7 +1410,19 @@
 		"upkeep_power_usage",
 		"upkeep_multiplier",
 		"mode_changes_locked",
-		"mode_list"
+		"mode_list",
+		"field_segments",
+		"damaged_segments",
+		"target_radius",
+		"power_usage",
+		"overloaded",
+		"hacked",
+		"offline_for",
+		"input_cut",
+		"full_shield_strength",
+		"idle_multiplier",
+		"spinup_delay",
+		"spinup_counter"
 	  ]
 	},
 	{
@@ -1436,7 +1456,13 @@
 	  "path": "/obj/machinery/power/solar",
 	  "vars": [
 		"sunfrac",
-		"control"
+		"control",
+		"obscured",
+		"adir",
+		"ndir",
+		"turn_angle",
+		"health",
+		"id"
 	  ]
 	},
 	{
@@ -1513,7 +1539,8 @@
 		"component_parts",
 		"uid",
 		"panel_open",
-		"power_components"
+		"power_components",
+		"anchored"
 	  ]
 	},
 	{
@@ -2023,7 +2050,6 @@
 	  {
 		 "path": "/obj/machinery/button",
 		 "vars": [
-			"anchored",
 			"active",
 			"operating",
 			"in_use",
@@ -2248,6 +2274,147 @@
 			  "layer",
 			  "bound_height",
 			  "dir"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/power/supermatter",
+		  "vars": [
+			  "nitrogen_retardation_factor",
+			  "thermal_release_modifier",
+			  "phoron_release_modifier",
+			  "oxygen_release_modifier",
+			  "radiation_release_modifier",
+			  "reaction_power_modifier",
+			  "power_factor",
+			  "decay_factor",
+			  "critical_temperature",
+			  "charging_factor",
+			  "damage_rate_limit",
+			  "gasefficency",
+			  "damage",
+			  "light_color",
+			  "warning_color",
+			  "emergency_color",
+			  "grav_pulling",
+			  "pull_time",
+			  "explosion_power",
+			  "emergency_issued",
+			  "lastwarning",
+			  "exploded",
+			  "power",
+			  "oxygen",
+			  "config_bullet_energy",
+			  "config_hallucination_power",
+			  "aw_normal",
+			  "aw_notify",
+			  "aw_warning",
+			  "aw_danger",
+			  "aw_emerg",
+			  "aw_delam",
+			  "aw_EPR"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/kinetic_harvester",
+		  "vars": [
+			"stored",
+			"harvesting",
+			"harvest_from",
+			"initial_id_tag"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/power/fusion_core",
+		  "vars": [
+			  "owned_field",
+			  "field_strength",
+			  "initial_id_tag"
+		  ]
+	  },
+	  {
+		  "path": "/obj/effect/fusion_em_field",
+		  "vars": [
+			  "size",
+			  "energy",
+			  "plasma_temperature",
+			  "radiation",
+			  "field_strength",
+			  "tick_instability",
+			  "percent_unstable",
+			  "owned_core",
+			  "reactants",
+			  "particle_catchers",
+			  "light_min_range",
+			  "light_min_power",
+			  "light_max_range",
+			  "light_max_power",
+			  "last_range",
+			  "last_power"
+		  ]
+	  },
+	  {
+		  "path": "/obj/item/weapon/fuel_assembly",
+		  "vars": [
+			  "material_name",
+			  "percent_depleted",
+			  "rod_quantities",
+			  "fuel_type",
+			  "fuel_colour",
+			  "radioactivity",
+			  "initial_amount"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/fusion_fuel_injector",
+		  "vars": [
+			  "fuel_usage",
+			  "initial_id_tag",
+			  "injecting",
+			  "cur_assembly",
+			  "injection_rate"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/computer/fusion",
+		  "vars": [
+			  "ui_template",
+			  "initial_id_tag"
+		  ]
+	  },
+	  {
+		  "path": "/obj/effect/fusion_particle_catcher",
+		  "vars": [
+			  "parent",
+			  "mysize"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/compressor",
+		  "vars": [
+			  "turbine",
+			  "gas_contained",
+			  "inturf",
+			  "starter",
+			  "rpm",
+			  "rpmtarget",
+			  "capacity",
+			  "comp_id"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/power/turbine",
+		  "vars": [
+			  "compressor",
+			  "outturf",
+			  "lastgen"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/computer/turbine_computer",
+		  "vars": [
+			  "compressor",
+			  "doors",
+			  "door_status"
 		  ]
 	  }
   ]

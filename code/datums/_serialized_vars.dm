@@ -1537,6 +1537,14 @@
 	//
 	LAZYADD(.[/obj/machinery/power/emitter], "active")
 	LAZYADD(.[/obj/machinery/power/emitter], "locked")
+	LAZYADD(.[/obj/machinery/power/emitter], "powered")
+	LAZYADD(.[/obj/machinery/power/emitter], "burst_shots")
+	LAZYADD(.[/obj/machinery/power/emitter], "fire_delay")
+	LAZYADD(.[/obj/machinery/power/emitter], "last_shot")
+	LAZYADD(.[/obj/machinery/power/emitter], "shot_number")
+	LAZYADD(.[/obj/machinery/power/emitter], "efficiency")
+	LAZYADD(.[/obj/machinery/power/emitter], "min_burst_delay")
+	LAZYADD(.[/obj/machinery/power/emitter], "max_burst_delay")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1572,6 +1580,18 @@
 	LAZYADD(.[/obj/machinery/power/shield_generator], "upkeep_multiplier")
 	LAZYADD(.[/obj/machinery/power/shield_generator], "mode_changes_locked")
 	LAZYADD(.[/obj/machinery/power/shield_generator], "mode_list")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "field_segments")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "damaged_segments")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "target_radius")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "power_usage")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "overloaded")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "hacked")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "offline_for")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "input_cut")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "full_shield_strength")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "idle_multiplier")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "spinup_delay")
+	LAZYADD(.[/obj/machinery/power/shield_generator], "spinup_counter")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1609,6 +1629,12 @@
 	//
 	LAZYADD(.[/obj/machinery/power/solar], "sunfrac")
 	LAZYADD(.[/obj/machinery/power/solar], "control")
+	LAZYADD(.[/obj/machinery/power/solar], "obscured")
+	LAZYADD(.[/obj/machinery/power/solar], "adir")
+	LAZYADD(.[/obj/machinery/power/solar], "ndir")
+	LAZYADD(.[/obj/machinery/power/solar], "turn_angle")
+	LAZYADD(.[/obj/machinery/power/solar], "health")
+	LAZYADD(.[/obj/machinery/power/solar], "id")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1696,6 +1722,7 @@
 	LAZYADD(.[/obj/machinery], "uid")
 	LAZYADD(.[/obj/machinery], "panel_open")
 	LAZYADD(.[/obj/machinery], "power_components")
+	LAZYADD(.[/obj/machinery], "anchored")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2268,7 +2295,6 @@
 	//
 	// /obj/machinery/button
 	//
-	LAZYADD(.[/obj/machinery/button], "anchored")
 	LAZYADD(.[/obj/machinery/button], "active")
 	LAZYADD(.[/obj/machinery/button], "operating")
 	LAZYADD(.[/obj/machinery/button], "in_use")
@@ -2519,6 +2545,158 @@
 	LAZYADD(.[/obj/structure/stairs], "layer")
 	LAZYADD(.[/obj/structure/stairs], "bound_height")
 	LAZYADD(.[/obj/structure/stairs], "dir")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/power/supermatter
+	//
+	LAZYADD(.[/obj/machinery/power/supermatter], "nitrogen_retardation_factor")
+	LAZYADD(.[/obj/machinery/power/supermatter], "thermal_release_modifier")
+	LAZYADD(.[/obj/machinery/power/supermatter], "phoron_release_modifier")
+	LAZYADD(.[/obj/machinery/power/supermatter], "oxygen_release_modifier")
+	LAZYADD(.[/obj/machinery/power/supermatter], "radiation_release_modifier")
+	LAZYADD(.[/obj/machinery/power/supermatter], "reaction_power_modifier")
+	LAZYADD(.[/obj/machinery/power/supermatter], "power_factor")
+	LAZYADD(.[/obj/machinery/power/supermatter], "decay_factor")
+	LAZYADD(.[/obj/machinery/power/supermatter], "critical_temperature")
+	LAZYADD(.[/obj/machinery/power/supermatter], "charging_factor")
+	LAZYADD(.[/obj/machinery/power/supermatter], "damage_rate_limit")
+	LAZYADD(.[/obj/machinery/power/supermatter], "gasefficency")
+	LAZYADD(.[/obj/machinery/power/supermatter], "damage")
+	LAZYADD(.[/obj/machinery/power/supermatter], "light_color")
+	LAZYADD(.[/obj/machinery/power/supermatter], "warning_color")
+	LAZYADD(.[/obj/machinery/power/supermatter], "emergency_color")
+	LAZYADD(.[/obj/machinery/power/supermatter], "grav_pulling")
+	LAZYADD(.[/obj/machinery/power/supermatter], "pull_time")
+	LAZYADD(.[/obj/machinery/power/supermatter], "explosion_power")
+	LAZYADD(.[/obj/machinery/power/supermatter], "emergency_issued")
+	LAZYADD(.[/obj/machinery/power/supermatter], "lastwarning")
+	LAZYADD(.[/obj/machinery/power/supermatter], "exploded")
+	LAZYADD(.[/obj/machinery/power/supermatter], "power")
+	LAZYADD(.[/obj/machinery/power/supermatter], "oxygen")
+	LAZYADD(.[/obj/machinery/power/supermatter], "config_bullet_energy")
+	LAZYADD(.[/obj/machinery/power/supermatter], "config_hallucination_power")
+	LAZYADD(.[/obj/machinery/power/supermatter], "aw_normal")
+	LAZYADD(.[/obj/machinery/power/supermatter], "aw_notify")
+	LAZYADD(.[/obj/machinery/power/supermatter], "aw_warning")
+	LAZYADD(.[/obj/machinery/power/supermatter], "aw_danger")
+	LAZYADD(.[/obj/machinery/power/supermatter], "aw_emerg")
+	LAZYADD(.[/obj/machinery/power/supermatter], "aw_delam")
+	LAZYADD(.[/obj/machinery/power/supermatter], "aw_EPR")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/kinetic_harvester
+	//
+	LAZYADD(.[/obj/machinery/kinetic_harvester], "stored")
+	LAZYADD(.[/obj/machinery/kinetic_harvester], "harvesting")
+	LAZYADD(.[/obj/machinery/kinetic_harvester], "harvest_from")
+	LAZYADD(.[/obj/machinery/kinetic_harvester], "initial_id_tag")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/power/fusion_core
+	//
+	LAZYADD(.[/obj/machinery/power/fusion_core], "owned_field")
+	LAZYADD(.[/obj/machinery/power/fusion_core], "field_strength")
+	LAZYADD(.[/obj/machinery/power/fusion_core], "initial_id_tag")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/effect/fusion_em_field
+	//
+	LAZYADD(.[/obj/effect/fusion_em_field], "size")
+	LAZYADD(.[/obj/effect/fusion_em_field], "energy")
+	LAZYADD(.[/obj/effect/fusion_em_field], "plasma_temperature")
+	LAZYADD(.[/obj/effect/fusion_em_field], "radiation")
+	LAZYADD(.[/obj/effect/fusion_em_field], "field_strength")
+	LAZYADD(.[/obj/effect/fusion_em_field], "tick_instability")
+	LAZYADD(.[/obj/effect/fusion_em_field], "percent_unstable")
+	LAZYADD(.[/obj/effect/fusion_em_field], "owned_core")
+	LAZYADD(.[/obj/effect/fusion_em_field], "reactants")
+	LAZYADD(.[/obj/effect/fusion_em_field], "particle_catchers")
+	LAZYADD(.[/obj/effect/fusion_em_field], "light_min_range")
+	LAZYADD(.[/obj/effect/fusion_em_field], "light_min_power")
+	LAZYADD(.[/obj/effect/fusion_em_field], "light_max_range")
+	LAZYADD(.[/obj/effect/fusion_em_field], "light_max_power")
+	LAZYADD(.[/obj/effect/fusion_em_field], "last_range")
+	LAZYADD(.[/obj/effect/fusion_em_field], "last_power")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/weapon/fuel_assembly
+	//
+	LAZYADD(.[/obj/item/weapon/fuel_assembly], "material_name")
+	LAZYADD(.[/obj/item/weapon/fuel_assembly], "percent_depleted")
+	LAZYADD(.[/obj/item/weapon/fuel_assembly], "rod_quantities")
+	LAZYADD(.[/obj/item/weapon/fuel_assembly], "fuel_type")
+	LAZYADD(.[/obj/item/weapon/fuel_assembly], "fuel_colour")
+	LAZYADD(.[/obj/item/weapon/fuel_assembly], "radioactivity")
+	LAZYADD(.[/obj/item/weapon/fuel_assembly], "initial_amount")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/fusion_fuel_injector
+	//
+	LAZYADD(.[/obj/machinery/fusion_fuel_injector], "fuel_usage")
+	LAZYADD(.[/obj/machinery/fusion_fuel_injector], "initial_id_tag")
+	LAZYADD(.[/obj/machinery/fusion_fuel_injector], "injecting")
+	LAZYADD(.[/obj/machinery/fusion_fuel_injector], "cur_assembly")
+	LAZYADD(.[/obj/machinery/fusion_fuel_injector], "injection_rate")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/computer/fusion
+	//
+	LAZYADD(.[/obj/machinery/computer/fusion], "ui_template")
+	LAZYADD(.[/obj/machinery/computer/fusion], "initial_id_tag")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/effect/fusion_particle_catcher
+	//
+	LAZYADD(.[/obj/effect/fusion_particle_catcher], "parent")
+	LAZYADD(.[/obj/effect/fusion_particle_catcher], "mysize")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/compressor
+	//
+	LAZYADD(.[/obj/machinery/compressor], "turbine")
+	LAZYADD(.[/obj/machinery/compressor], "gas_contained")
+	LAZYADD(.[/obj/machinery/compressor], "inturf")
+	LAZYADD(.[/obj/machinery/compressor], "starter")
+	LAZYADD(.[/obj/machinery/compressor], "rpm")
+	LAZYADD(.[/obj/machinery/compressor], "rpmtarget")
+	LAZYADD(.[/obj/machinery/compressor], "capacity")
+	LAZYADD(.[/obj/machinery/compressor], "comp_id")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/power/turbine
+	//
+	LAZYADD(.[/obj/machinery/power/turbine], "compressor")
+	LAZYADD(.[/obj/machinery/power/turbine], "outturf")
+	LAZYADD(.[/obj/machinery/power/turbine], "lastgen")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/computer/turbine_computer
+	//
+	LAZYADD(.[/obj/machinery/computer/turbine_computer], "compressor")
+	LAZYADD(.[/obj/machinery/computer/turbine_computer], "doors")
+	LAZYADD(.[/obj/machinery/computer/turbine_computer], "door_status")
 
 
 	for(var/type in .)
