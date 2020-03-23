@@ -92,7 +92,7 @@
 		else if (istext(key))
 			KT = "TEXT"
 		else if (ispath(key) || IS_PROC(key))
-			KT = "PATH"		
+			KT = "PATH"
 		else if (isfile(key))
 			KT = "FILE"
 		else if (islist(key))
@@ -333,6 +333,10 @@
 			to_world_log("Attempting to deserialize onto turf [thing.x],[thing.y],[thing.z] failed. Could not locate turf.")
 			return
 		existing = T
+		// Try to QDEL contents list just to be safe.
+		try
+			QDEL_NULL_LIST(T.contents)
+		catch
 	else
 		// default creation
 		existing = new thing.thing_type()
