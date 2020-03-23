@@ -5,9 +5,10 @@
 	var/id_tag
 
 /datum/computer/file/embedded_program/New(var/obj/machinery/embedded_controller/M)
-	master = M
-	if (istype(M, /obj/machinery/embedded_controller/radio))
-		var/obj/machinery/embedded_controller/R = M
+	if(M)
+		master = M
+	if (istype(master, /obj/machinery/embedded_controller/radio))
+		var/obj/machinery/embedded_controller/R = master
 		id_tag = R.id_tag
 	..()
 

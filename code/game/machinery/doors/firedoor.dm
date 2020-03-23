@@ -63,6 +63,9 @@
 
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
+	if(SSmapping.using_save)
+		return
+		
 	for(var/obj/machinery/door/firedoor/F in loc)
 		if(F != src)
 			return INITIALIZE_HINT_QDEL

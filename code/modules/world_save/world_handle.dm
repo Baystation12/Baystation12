@@ -27,7 +27,7 @@
 
 	// Collect the z-levels we're saving and get the turfs!
 	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
-
+	var/start = world.timeofday
 	try
 		//
 		// 	PREPARATION SECTIONS
@@ -65,6 +65,12 @@
 					// Prevent the whole game from locking up.
 					CHECK_TICK
 			serializer.Commit() // cleanup leftovers.
+
+		// Save multiz levels
+		var/datum/wrapper/multiz/z = new()
+		z.get_connected_zlevels()
+		serializer.SerializeThing(z)
+		serializer.Commit()
 		//
 		//	CLEANUP SECTION
 		//
@@ -73,6 +79,7 @@
 		if(reallow) config.enter_allowed = 1
 	catch (var/exception/e)
 		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
+	to_world("Save complete! Took [(world.timeofday-start)/10]s to save world.")
 
 /datum/persistence/world_handle/proc/LoadWorld()
 	try
@@ -101,7 +108,15 @@
 			serializer.DeserializeThing(T)
 			turfs_loaded++
 			CHECK_TICK
-		to_world_log("Load complete! Took [world.timeofday-start] to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
+		to_world_log("Load complete! Took [(world.timeofday-start)/10]s to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
+
+		// now for the connected z-level hacks.
+		query = dbcon.NewQuery("SELECT `id` FROM `thing` WHERE `version`=[version] AND `type`='[/datum/wrapper/multiz]';")
+		query.Execute()
+		if(query.NextRow())
+			var/datum/wrapper/multiz/z = serializer.QueryAndDeserializeThing(query.item[1])
+			for(var/index in 1 to length(z.saved_z_levels))
+				z_levels[index] = z.saved_z_levels[index]
 
 		// Cleanup the cache. It uses a *lot* of memory.
 		for(var/id in serializer.reverse_map)

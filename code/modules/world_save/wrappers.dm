@@ -20,3 +20,13 @@
 		power_environ = A.power_environ
 		apc = A.apc
 		//shuttle = A.shuttle
+
+/datum/wrapper/multiz
+	var/list/saved_z_levels = list() // a list of booleans on which z-levels are connected....
+
+/datum/wrapper/multiz/proc/get_connected_zlevels()
+	// var/saved_zlevels = SSmapping.saved_levels
+	var/highest_zlevel = max(SSmapping.saved_levels)
+	saved_z_levels = z_levels.Cut(1, highest_zlevel)
+		
+

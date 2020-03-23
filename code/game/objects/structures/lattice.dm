@@ -16,6 +16,8 @@
 
 /obj/structure/lattice/Initialize(mapload, var/new_material)
 	. = ..()
+	if(SSmapping.using_save)
+		return
 	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
 		return INITIALIZE_HINT_QDEL
 	if(!new_material)

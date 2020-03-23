@@ -62,7 +62,7 @@
 		things[items["id"]] = T
 		things_cached++
 		CHECK_TICK
-	to_world_log("Took [world.timeofday - start] to cache all things.")
+	to_world_log("Took [(world.timeofday - start) / 10]s to cache all things.")
 
 	// Deserialize vars
 	start = world.timeofday
@@ -78,7 +78,7 @@
 		else
 			failed_vars++
 		CHECK_TICK
-	to_world_log("Took [world.timeofday - start] to cache all thing vars.")
+	to_world_log("Took [(world.timeofday - start) / 10]s to cache all thing vars.")
 
 	// Deserialized lists
 	start = world.timeofday
@@ -90,7 +90,7 @@
 		LAZYADD(lists["[items["list_id"]]"], element)
 		lists_cached++
 		CHECK_TICK
-	to_world_log("Took [world.timeofday - start] to cache all lists")
+	to_world_log("Took [(world.timeofday - start) / 10]s to cache all lists")
 
 	// Done!
 	to_world_log("Cached [things_cached] things, [vars_cached + failed_vars] vars, [lists_cached] lists. [failed_vars] failed to cache due to missing thing references.")

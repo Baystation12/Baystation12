@@ -92,7 +92,7 @@
 		else if (istext(key))
 			KT = "TEXT"
 		else if (ispath(key) || IS_PROC(key))
-			KT = "PATH"		
+			KT = "PATH"
 		else if (isfile(key))
 			KT = "FILE"
 		else if (islist(key))
@@ -328,11 +328,15 @@
 	if (ispath(thing.thing_type, /turf))
 		// turf turf turf
 		var/turf/T = locate(thing.x, thing.y, thing.z)
-		T.ChangeTurf(thing.thing_type)
 		if (!T)
 			to_world_log("Attempting to deserialize onto turf [thing.x],[thing.y],[thing.z] failed. Could not locate turf.")
 			return
+		T.ChangeTurf(thing.thing_type)
 		existing = T
+		// Try to QDEL contents list just to be safe.
+		try
+			QDEL_NULL_LIST(T.contents)
+		catch
 	else
 		// default creation
 		existing = new thing.thing_type()
