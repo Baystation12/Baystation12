@@ -1992,6 +1992,14 @@
 		 ]
 	  },
 	  {
+		  "path": "/obj/item/weapon/stock_parts",
+		  "vars": [
+			"rating",
+			"status",
+
+		  ]
+	  },
+	  {
 		 "path": "/obj/item/weapon/stock_parts/computer/ai_slot",
 		 "vars": [
 		   "stored_card"
@@ -2476,7 +2484,8 @@
 			  "id_tag",
 			  "filter",
 			  "encryption",
-			  "multitool_extension"
+			  "multitool_extension",
+			  "radio"
 		  ]
 	  },
 	  {
@@ -2499,6 +2508,23 @@
 			   "initial_id_tag",
 			   "rate",
 			   "mega_energy"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/ntnet_relay",
+		  "vars": [
+			  "enabled",
+			  "dos_failure",
+			  "dos_sources",
+			  "dos_overload",
+			  "dos_capacity",
+			  "dos_dissipate"
+		  ]
+	  },
+	  {
+		  "path": "/obj/structure/lift",
+		  "vars": [
+			  "lift"
 		  ]
 	  }
   ]

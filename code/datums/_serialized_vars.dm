@@ -2227,6 +2227,14 @@
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
+	// /obj/item/weapon/stock_parts
+	//
+	LAZYADD(.[/obj/item/weapon/stock_parts], "rating")
+	LAZYADD(.[/obj/item/weapon/stock_parts], "status")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
 	// /obj/item/weapon/stock_parts/computer/ai_slot
 	//
 	LAZYADD(.[/obj/item/weapon/stock_parts/computer/ai_slot], "stored_card")
@@ -2766,6 +2774,7 @@
 	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "filter")
 	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "encryption")
 	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "multitool_extension")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "radio")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2791,6 +2800,25 @@
 	LAZYADD(.[/obj/machinery/power/emitter/gyrotron], "initial_id_tag")
 	LAZYADD(.[/obj/machinery/power/emitter/gyrotron], "rate")
 	LAZYADD(.[/obj/machinery/power/emitter/gyrotron], "mega_energy")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/ntnet_relay
+	//
+	LAZYADD(.[/obj/machinery/ntnet_relay], "enabled")
+	LAZYADD(.[/obj/machinery/ntnet_relay], "dos_failure")
+	LAZYADD(.[/obj/machinery/ntnet_relay], "dos_sources")
+	LAZYADD(.[/obj/machinery/ntnet_relay], "dos_overload")
+	LAZYADD(.[/obj/machinery/ntnet_relay], "dos_capacity")
+	LAZYADD(.[/obj/machinery/ntnet_relay], "dos_dissipate")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/structure/lift
+	//
+	LAZYADD(.[/obj/structure/lift], "lift")
 
 
 	for(var/type in .)
