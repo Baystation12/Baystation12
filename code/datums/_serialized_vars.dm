@@ -2374,6 +2374,16 @@
 	//
 	LAZYADD(.[/obj/machinery/fabricator], "stored_material")
 	LAZYADD(.[/obj/machinery/fabricator], "contents")
+	LAZYADD(.[/obj/machinery/fabricator], "has_recycler")
+	LAZYADD(.[/obj/machinery/fabricator], "base_icon_state")
+	LAZYADD(.[/obj/machinery/fabricator], "panel_image")
+	LAZYADD(.[/obj/machinery/fabricator], "queued_orders")
+	LAZYADD(.[/obj/machinery/fabricator], "currently_building")
+	LAZYADD(.[/obj/machinery/fabricator], "storage_capacity")
+	LAZYADD(.[/obj/machinery/fabricator], "show_category")
+	LAZYADD(.[/obj/machinery/fabricator], "fab_status_flags")
+	LAZYADD(.[/obj/machinery/fabricator], "mat_efficiency")
+	LAZYADD(.[/obj/machinery/fabricator], "build_time_multiplier")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2838,6 +2848,29 @@
 	LAZYADD(.[/obj/machinery/door/blast], "block_air_zones")
 	LAZYADD(.[/obj/machinery/door/blast], "explosion_resistance")
 	LAZYADD(.[/obj/machinery/door/blast], "pry_mod")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/fabricator_build_order
+	//
+	LAZYADD(.[/datum/fabricator_build_order], "target_recipe")
+	LAZYADD(.[/datum/fabricator_build_order], "multiplier")
+	LAZYADD(.[/datum/fabricator_build_order], "remaining_time")
+	LAZYADD(.[/datum/fabricator_build_order], "earmarked_materials")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/fabricator_recipe
+	//
+	LAZYADD(.[/datum/fabricator_recipe], "name")
+	LAZYADD(.[/datum/fabricator_recipe], "path")
+	LAZYADD(.[/datum/fabricator_recipe], "hidden")
+	LAZYADD(.[/datum/fabricator_recipe], "category")
+	LAZYADD(.[/datum/fabricator_recipe], "resources")
+	LAZYADD(.[/datum/fabricator_recipe], "build_time")
+	LAZYADD(.[/datum/fabricator_recipe], "ignore_materials")
 
 
 	for(var/type in .)

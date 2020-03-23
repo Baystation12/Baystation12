@@ -20,4 +20,5 @@
 
 /obj/machinery/fabricator/micro/bartender/Initialize()
 	. = ..()
-	stored_material[/material/glass] = base_storage_capacity[/material/glass]
+	if(!SSmapping.using_save)
+		stored_material[/material/glass] = base_storage_capacity[/material/glass]

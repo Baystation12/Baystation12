@@ -2121,7 +2121,17 @@
 		 "path": "/obj/machinery/fabricator",
 		 "vars": [
 		   "stored_material",
-		   "contents"
+			 "contents",
+			 "has_recycler",
+			 "base_icon_state",
+			 "panel_image",
+			 "queued_orders",
+			 "currently_building",
+			 "storage_capacity",
+			 "show_category",
+			 "fab_status_flags",
+			 "mat_efficiency",
+			 "build_time_multiplier"
 		 ]
 	  },
 	  {
@@ -2544,6 +2554,27 @@
 			  "explosion_resistance",
 			  "pry_mod"
 		  ]
-	  }
+		},
+		{
+			"path": "/datum/fabricator_build_order",
+			"vars": [
+				"target_recipe",
+				"multiplier",
+				"remaining_time",
+				"earmarked_materials"
+			]
+		},
+		{
+			"path": "/datum/fabricator_recipe",
+			"vars": [
+				"name",
+				"path",
+				"hidden",
+				"category",
+				"resources",
+				"build_time",
+				"ignore_materials"
+			]
+		}
   ]
   
