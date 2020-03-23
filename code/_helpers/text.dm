@@ -217,21 +217,36 @@
 
 //Adds 'u' number of zeros ahead of the text 't'
 /proc/add_zero(t, u)
-	while (length(t) < u)
-		t = "0[t]"
-	return t
+	return pad_left(t, u, "0")
 
 //Adds 'u' number of spaces ahead of the text 't'
 /proc/add_lspace(t, u)
-	while(length(t) < u)
-		t = " [t]"
-	return t
+	return pad_left(t, u, " ")
 
 //Adds 'u' number of spaces behind the text 't'
 /proc/add_tspace(t, u)
-	while(length(t) < u)
-		t = "[t] "
-	return t
+	return pad_right(t, u, " ")
+
+// Adds the required amount of 'character' in front of 'text' to extend the lengh to 'desired_length', if it is shorter
+// No consideration are made for a multi-character 'character' input
+/proc/pad_left(text, desired_length, character)
+	var/padding = generate_padding(length(text), desired_length, character)
+	return length(padding) ? "[padding][text]" : text
+
+// Adds the required amount of 'character' after 'text' to extend the lengh to 'desired_length', if it is shorter
+// No consideration are made for a multi-character 'character' input
+/proc/pad_right(text, desired_length, character)
+	var/padding = generate_padding(length(text), desired_length, character)
+	return length(padding) ? "[text][padding]" : text
+
+/proc/generate_padding(current_length, desired_length, character)
+	if(current_length >= desired_length)
+		return ""
+	var/characters = list()
+	for(var/i = 1 to (desired_length - current_length))
+		characters += character
+	return JOINTEXT(characters)
+
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
@@ -429,6 +444,7 @@ proc/TextPreview(var/string,var/len=40)
 	text = replacetext(text, "\[fontblue\]", "<font color=\"blue\">")//</font> to pass travis html tag integrity check
 	text = replacetext(text, "\[fontgreen\]", "<font color=\"green\">")
 	text = replacetext(text, "\[/font\]", "</font>")
+	text = replacetext(text, "\[redacted\]", "<span class=\"redacted\">R E D A C T E D</span>")
 	return pencode2html(text)
 
 //Will kill most formatting; not recommended.
@@ -473,6 +489,7 @@ proc/TextPreview(var/string,var/len=40)
 	t = replacetext(t, "<img src = xynlogo.png>", "\[xynlogo\]")
 	t = replacetext(t, "<img src = sfplogo.png>", "\[sfplogo\]")
 	t = replacetext(t, "<span class=\"paper_field\"></span>", "\[field\]")
+	t = replacetext(t, "<span class=\"redacted\">R E D A C T E D</span>", "\[redacted\]")
 	t = strip_html_properly(t)
 	return t
 

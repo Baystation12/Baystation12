@@ -35,7 +35,7 @@ Thus, the two variables affect pump operation are set in New():
 	build_icon_state = "pump"
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/power/apc/buildable
+		/obj/item/weapon/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/input_toggle,
@@ -53,11 +53,8 @@ Thus, the two variables affect pump operation are set in New():
 	)
 
 	frame_type = /obj/item/pipe
-	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
-	base_type = /obj/machinery/atmospherics/binary/pump/buildable
-
-/obj/machinery/atmospherics/binary/pump/buildable
-	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/item_chassis
+	base_type = /obj/machinery/atmospherics/binary/pump
 
 /obj/machinery/atmospherics/binary/pump/Initialize()
 	. = ..()
@@ -116,6 +113,12 @@ Thus, the two variables affect pump operation are set in New():
 			network2.update = 1
 
 	return 1
+
+/obj/machinery/atmospherics/binary/pump/return_air()
+	if(air1.return_pressure() > air2.return_pressure())
+		return air1
+	else
+		return air2
 
 /obj/machinery/atmospherics/binary/pump/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(stat & (BROKEN|NOPOWER))

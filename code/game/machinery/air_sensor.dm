@@ -6,8 +6,8 @@
 	anchored = 1
 
 	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/radio/transmitter/basic/buildable,
-		/obj/item/weapon/stock_parts/power/apc/buildable
+		/obj/item/weapon/stock_parts/radio/transmitter/basic,
+		/obj/item/weapon/stock_parts/power/apc
 	)
 	public_variables = list(
 		/decl/public_access/public_variable/gas,
@@ -18,12 +18,8 @@
 	use_power = POWER_USE_IDLE
 
 	frame_type = /obj/item/machine_chassis/air_sensor
-	construct_state = /decl/machine_construction/default/panel_closed/item_chassis
-	base_type = /obj/machinery/air_sensor/buildable
-
-// Have to install components on your own.
-/obj/machinery/air_sensor/buildable
-	uncreated_component_parts = null
+	construct_state = /decl/machine_construction/default/item_chassis
+	base_type = /obj/machinery/air_sensor
 
 /obj/machinery/air_sensor/on_update_icon()
 	if(!powered())

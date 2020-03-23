@@ -18,6 +18,16 @@
 	desc = "A ring commemorating graduation from Mariner University."
 	icon_state = "mariner-grad"
 
+/obj/item/clothing/ring/fleet
+	name = "Fleet ring"
+	desc = "A ring commemorating honorable service with the Sol Government's Fleet."
+	icon_state = "fleet"
+
+/obj/item/clothing/ring/ec
+	name = "Expeditionary Corps ring"
+	desc = "A ring commemorating honorable service with the Sol Government's Expeditionary Corps."
+	icon_state = "ec"
+
 /////////////////////////////////////////
 //Magic Rings
 
