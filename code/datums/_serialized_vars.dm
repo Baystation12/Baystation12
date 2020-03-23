@@ -1695,6 +1695,7 @@
 	LAZYADD(.[/obj/machinery], "component_parts")
 	LAZYADD(.[/obj/machinery], "uid")
 	LAZYADD(.[/obj/machinery], "panel_open")
+	LAZYADD(.[/obj/machinery], "power_components")
 
 
 	//////////////////////////////////////////////////////////////////////////////

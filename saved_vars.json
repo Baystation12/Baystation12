@@ -1512,7 +1512,8 @@
 		"use_power",
 		"component_parts",
 		"uid",
-		"panel_open"
+		"panel_open",
+		"power_components"
 	  ]
 	},
 	{

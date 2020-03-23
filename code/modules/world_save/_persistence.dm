@@ -44,6 +44,9 @@
 	var/turf/T = src.loc
 	if(level==1) hide(!T.is_plating())
 
+/obj/machinery/after_deserialize()
+	power_change()
+
 /turf/space/after_deserialize()
 	..()
 	for(var/atom/movable/lighting_overlay/overlay in contents)
