@@ -327,7 +327,7 @@
 		if(2)
 			moving_y = 1
 	while (speed[speed_index_target] != 0)
-		sleep(max(min_speed - abs(speed[2]),max_speed))
+		sleep(max(min_speed - abs(speed[speed_index_target]),max_speed))
 		if(speed[speed_index_target] > 0)
 			switch(speed_index_target)
 				if(1)
