@@ -29,7 +29,10 @@ SUBSYSTEM_DEF(ticker)
 
 /datum/controller/subsystem/ticker/Initialize()
 	to_world("<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>")
-	to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
+	if(config.persistent)
+		to_world("Please wait while the server is loading.")
+	else
+		to_world("Please, setup your character and select ready. Game will start in [round(pregame_timeleft/10)] seconds")
 	return ..()
 
 /datum/controller/subsystem/ticker/fire(resumed = 0)
@@ -44,7 +47,7 @@ SUBSYSTEM_DEF(ticker)
 			post_game_tick()
 
 /datum/controller/subsystem/ticker/proc/pregame_tick()
-	if(start_ASAP)
+	if(config.persistent || start_ASAP)
 		start_now()
 		return
 	if(round_progressing && last_fire)
@@ -208,7 +211,9 @@ Helpers
 	var/datum/game_mode/mode_datum
 
 	//Decide on the mode to try.
-	if(!bypass_gamemode_vote && gamemode_vote_results)
+	if(config.persistent)
+		mode_to_try = "persistent"
+	else if(!bypass_gamemode_vote && gamemode_vote_results)
 		gamemode_vote_results -= bad_modes
 		if(length(gamemode_vote_results))
 			mode_to_try = gamemode_vote_results[1]
