@@ -16,7 +16,7 @@
 	var/moving_y = 0
 	var/last_moved_axis = 0 //1 = X axis, 2 = Y axis.
 	var/list/speed = list(0,0) //The delay on movement in these directions.
-	var/drag = -1 //How much do we slow down per tick if no input is applied in a direction? Autocalcs to half accel if set to -1
+	var/drag = 1 //How much do we slow down per tick if no input is applied in a direction?
 	var/min_speed = 5 //What's the highest delay we can have?
 	var/max_speed = 1//What's the lowest number we can go to in terms of delay?
 	var/acceleration = 1 //By how much does our speed change per input?
@@ -114,8 +114,6 @@
 
 /obj/vehicles/Initialize()
 	. = ..()
-	if(drag == -1)
-		drag = acceleration
 	if(spawn_datum)
 		spawn_datum = new spawn_datum
 		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
@@ -287,7 +285,7 @@
 			braking_mode = 0
 			drag = initial(drag)
 			message = "Braking system safeties enabled."
-		if(0)
+		if(1)
 			message = "Disable the brakes first."
 
 	if(toggler)
