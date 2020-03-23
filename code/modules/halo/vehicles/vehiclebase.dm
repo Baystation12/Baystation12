@@ -225,6 +225,7 @@
 
 /obj/vehicles/proc/movement_loop_x()
 	set background = 1
+	moving_x = 1
 	while (speed[1] != 0)
 		sleep(max(min_speed - abs(speed[1]),max_speed))
 		if(speed[1] > 0)
@@ -239,11 +240,13 @@
 		last_moved_axis = 0
 		if(move_sound && world.time % 2 == 0)
 			playsound(loc,move_sound,75,0,4)
-	if(!.)
-		speed[1] = 0
+		if(!.)
+			speed[1] = 0
+	moving_x = 0
 
 /obj/vehicles/proc/movement_loop_y()
 	set background = 1
+	moving_y = 1
 	while (speed[2] != 0)
 		sleep(max(min_speed - abs(speed[2]),max_speed))
 		if(speed[2] > 0)
@@ -260,6 +263,7 @@
 			playsound(loc,move_sound,75,0,4)
 		if(!.)
 			speed[2] = 0 //KILL ALL SPEED, TODO: REPLACE WITH DYNAMIC CRASH SYSTEM
+	moving_y = 0
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
@@ -305,7 +309,6 @@
 			break
 	if(!is_driver)
 		return
-	var/list/old_speed = speed.Copy()
 	switch(direction)
 		if(NORTH)
 			last_moved_axis = 2
@@ -323,10 +326,10 @@
 			last_moved_axis = 1
 			speed[1] = max(speed[1] - acceleration,-min_speed)
 
-	if(old_speed[1] == 0 && speed[1] != 0)
+	if(speed[1] != 0 && !moving_x)
 		spawn()
 			movement_loop_x()
-	else if(old_speed[2] == 0 && speed[2] != 0)
+	else if(speed[2] != 0 && !moving_y)
 		spawn()
 			movement_loop_y()
 	next_move_input_at = world.time + acceleration
