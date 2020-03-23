@@ -14,7 +14,7 @@
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_carbine_reload.ogg'
 	one_hand_penalty = -1
-	irradiate_non_cov = 10
+	irradiate_non_cov = 12
 	accuracy = 2
 	wielded_item_state = "carbine-wielded"
 	advanced_covenant = 1
@@ -59,7 +59,7 @@
 	max_shots = 10
 	projectile_type = /obj/item/projectile/bullet/covenant/beamrifle
 	one_hand_penalty = -1
-	irradiate_non_cov = 15
+	irradiate_non_cov = 17
 	wielded_item_state = "beamrifle-wielded"
 	fire_delay = 0 //Click as fast as you want. we have an overcharge system to deal with spamming
 	accuracy = -5

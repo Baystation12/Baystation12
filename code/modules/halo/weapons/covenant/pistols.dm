@@ -12,7 +12,7 @@
 	var/overcharge = 0
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmapistol
 	screen_shake = 0
-	irradiate_non_cov = 5
+	irradiate_non_cov = 10
 	var/overcharge_cost = 1
 	accuracy = 1
 	item_state = "plasmapistol"
@@ -93,7 +93,7 @@
 	load_method = MAGAZINE
 	burst = 3
 	is_heavy = 1
-	irradiate_non_cov = 2
+	irradiate_non_cov = 5
 	slowdown_general = 0
 
 	item_icons = list(
