@@ -29,7 +29,7 @@
 
 /datum/graph/Destroy()
 	if(SSautosave.saving)
-		return // Allow destruction during saving.
+		return ..() // Allow destruction during saving.
 	if(length(nodes) || LAZYLEN(pending_connections) || LAZYLEN(pending_disconnections))
 		crash_with("Prevented attempt to delete a network that still has nodes: [length(nodes)] - [LAZYLEN(pending_connections)] - [LAZYLEN(pending_disconnections)]")
 		return QDEL_HINT_LETMELIVE
