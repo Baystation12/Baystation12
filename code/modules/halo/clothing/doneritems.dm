@@ -2141,36 +2141,36 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "Refitted T voan Armour"
 	desc = "Looks like someone captured and refitted the armour of a Covenant T voan."
 
-	icon = ONI_OVERRIDE
-	icon_override = ONI_ITEM_INHAND
-	icon_state = "xor_armour"
-	item_state = "armor"
+	icon = ONI_ITEM_INHAND
+	icon_override = ONI_OVERRIDE
+	icon_state = "armor"
+	item_state = "xor_armour"
 
 /obj/item/clothing/shoes/oni_guard/xor
 	name = "Refitted T voan Boots"
 	desc = "The boots of a T voan, fitted to function as footwear for humans."
 
-	icon = ONI_OVERRIDE
-	icon_override = ONI_ITEM_INHAND
-	icon_state = "xor_boots"
-	item_state = "boots_ico"
+	icon = ONI_ITEM_INHAND
+	icon_override = ONI_OVERRIDE
+	icon_state = "boots_ico"
+	item_state = "xor_boots"
 
 /obj/item/clothing/gloves/thick/oni_guard/xor
 	name = "Refitted T voan Gloves"
 	desc = "These gloves have been refitted to allow for human usage."
 
-	icon = ONI_OVERRIDE
-	icon_override = ONI_ITEM_INHAND
-	icon_state = "xor_gloves"
-	item_state = "unsc gloves_obj"
+	icon = ONI_ITEM_INHAND
+	icon_override = ONI_OVERRIDE
+	icon_state = "unsc gloves_obj"
+	item_state = "xor_gloves"
 
 /obj/item/clothing/head/helmet/oni_guard/xor
 	name = "Refitted T voan Helmet"
 	desc = "Despite the look, this isn't actually airtight."
 
-	icon = ONI_OVERRIDE
-	icon_override = ONI_ITEM_INHAND
-	icon_state = "xor_helm"
+	icon = ONI_ITEM_INHAND
+	icon_override = ONI_OVERRIDE
+	item_state = "xor_helm"
 
 /obj/item/weapon/storage/backpack/marine/xor
 	name = "Storage Cape"
@@ -2180,7 +2180,6 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_override = ONI_OVERRIDE
 	icon_state = "xor_backpack_cloak"
 	item_state = "xor_backpack_cloak"
-
 
 /obj/item/weapon/storage/box/large/donator/xor
 	startswith = list(\
