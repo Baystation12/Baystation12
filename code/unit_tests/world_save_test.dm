@@ -1,4 +1,6 @@
-#ifdef UNIT_TEST
+#define PERSISTENT_TESTS 0
+
+#if PERSISTENT_TESTS
 /datum/sample_obj/test_container
 	var/test_var
 	var/test_var_2
@@ -282,3 +284,5 @@
 	return 1
 
 #endif
+
+#undef PERSISTENT_TESTS

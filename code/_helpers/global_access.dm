@@ -1855,6 +1855,7 @@
 	"SSantags",
 	"SSao",
 	"SSatoms",
+	"SSautosave",
 	"SScharacter_setup",
 	"SSchemistry",
 	"SScircuit",
