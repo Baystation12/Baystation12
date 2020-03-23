@@ -231,7 +231,7 @@
 			is_driver = TRUE
 			break
 	if(!is_driver)
-		to_chat(user,"<span class = notice'>You need to be the driver to do that.</span>")
+		to_chat(user,"<span class = 'notice'>You need to be the driver to do that.</span>")
 		return
 
 	toggle_brakes(user)
@@ -269,7 +269,7 @@
 			is_driver = TRUE
 			break
 	if(!is_driver)
-		to_chat(user,"<span class = notice'>You need to be the driver to do that.</span>")
+		to_chat(user,"<span class = 'notice'>You need to be the driver to do that.</span>")
 		return
 
 	toggle_brake_safeties(user)
