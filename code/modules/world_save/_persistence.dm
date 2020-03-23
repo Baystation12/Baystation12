@@ -10,7 +10,19 @@
 /datum
 	var/should_save = TRUE
 
+/obj/effect/expl_particles
+	should_save = FALSE
+
+/obj/effect/explosion
+	should_save = FALSE
+
+/datum/effect/system/explosion
+	should_save = FALSE
+
 /atom/movable/lighting_overlay
+	should_save = FALSE
+
+/obj/effect/effect/foam
 	should_save = FALSE
 
 /mob/observer

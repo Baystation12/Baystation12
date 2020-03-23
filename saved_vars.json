@@ -2575,6 +2575,39 @@
 				"build_time",
 				"ignore_materials"
 			]
+		},
+		{
+			"path": "/obj/effect/fake_fire",
+			"vars": [
+				"lifetime",
+				"firelevel",
+				"last_temperature",
+				"pressure"
+			]
+		},
+		{
+			"path": "/obj/item/razorweb",
+			"vars": [
+				"web_type"
+			]
+		},
+		{
+			"path": "/obj/effect/fluid",
+			"var": [
+				"fluid_amount",
+				"start_loc",
+				"equalizing_fluids",
+				"equalize_avg_depth",
+				"equalize_avg_temp",
+				"flow_amount"
+			]
+		},
+		{
+			"path": "/obj/effect/effect/smoke/chem",
+			"var": [
+				"splash_amount",
+				"destination"
+			]
 		}
   ]
   

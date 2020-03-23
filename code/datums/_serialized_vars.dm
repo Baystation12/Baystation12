@@ -2873,6 +2873,35 @@
 	LAZYADD(.[/datum/fabricator_recipe], "ignore_materials")
 
 
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/effect/fake_fire
+	//
+	LAZYADD(.[/obj/effect/fake_fire], "lifetime")
+	LAZYADD(.[/obj/effect/fake_fire], "firelevel")
+	LAZYADD(.[/obj/effect/fake_fire], "last_temperature")
+	LAZYADD(.[/obj/effect/fake_fire], "pressure")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/razorweb
+	//
+	LAZYADD(.[/obj/item/razorweb], "web_type")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/effect/fluid
+	//
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/effect/effect/smoke/chem
+	//
+
+
 	for(var/type in .)
 		for (var/subtype in subtypesof(type))
 			for (var/v in .[type])
