@@ -34,7 +34,6 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/species
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/icons/species/jackalclothing.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
 	armor = list(melee = 50, bullet = 55, laser = 40,energy = 40, bomb = 20, bio = 0, rad = 0)
 	species_restricted = list("Kig-Yar")
-	action_button_name = "Toggle Night Vision"
 	flags_inv = null
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
