@@ -2011,7 +2011,10 @@
 		 "vars": [
 			"anchored",
 			"active",
-			"operating"
+			"operating",
+			"in_use",
+			"public_variables",
+			"public_methods"
 		 ]
 	  },
 	  {
@@ -2214,6 +2217,23 @@
 			  "light_type",
 			  "on",
 			  "lightbulb"
+		  ]
+	  },
+	  {
+		  "path": "/obj/structure/ladder",
+		  "vars": [
+			  "allowed_directions",
+			  "target_up",
+			  "target_down",
+			  "climb_time"
+		  ]
+	  },
+	  {
+		  "path": "/obj/structure/stairs",
+		  "vars": [
+			  "layer",
+			  "bound_height",
+			  "dir"
 		  ]
 	  }
   ]

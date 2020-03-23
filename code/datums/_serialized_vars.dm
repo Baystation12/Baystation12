@@ -2256,6 +2256,9 @@
 	LAZYADD(.[/obj/machinery/button], "anchored")
 	LAZYADD(.[/obj/machinery/button], "active")
 	LAZYADD(.[/obj/machinery/button], "operating")
+	LAZYADD(.[/obj/machinery/button], "in_use")
+	LAZYADD(.[/obj/machinery/button], "public_variables")
+	LAZYADD(.[/obj/machinery/button], "public_methods")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2482,6 +2485,25 @@
 	LAZYADD(.[/obj/machinery/light], "light_type")
 	LAZYADD(.[/obj/machinery/light], "on")
 	LAZYADD(.[/obj/machinery/light], "lightbulb")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/structure/ladder
+	//
+	LAZYADD(.[/obj/structure/ladder], "allowed_directions")
+	LAZYADD(.[/obj/structure/ladder], "target_up")
+	LAZYADD(.[/obj/structure/ladder], "target_down")
+	LAZYADD(.[/obj/structure/ladder], "climb_time")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/structure/stairs
+	//
+	LAZYADD(.[/obj/structure/stairs], "layer")
+	LAZYADD(.[/obj/structure/stairs], "bound_height")
+	LAZYADD(.[/obj/structure/stairs], "dir")
 
 
 	for(var/type in .)
