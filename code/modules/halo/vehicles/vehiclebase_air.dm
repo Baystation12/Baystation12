@@ -1,5 +1,7 @@
 #define VEHICLE_CONNECT_DELAY 7.5 SECONDS
 #define VEHICLE_ITEM_LOAD 3.0 SECONDS
+#define TAKEOFF_LAND_DELAY 4 SECONDS
+#define WAYPOINT_FLIGHT_DELAY 7.5 SECONDS
 
 /obj/vehicles/air
 	name = "Dropship"
@@ -59,6 +61,9 @@
 	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
+	to_chat(usr,"<span class = 'notice'>You start prepping [src] for [active ? "takeoff" : "landing"].</span>")
+	if(!do_after(src,TAKEOFF_LAND_DELAY))
+		return
 	if(active)
 		land_vehicle()
 	else
@@ -103,6 +108,9 @@
 		return
 	if(!active)
 		to_chat(usr,"<span class = 'notice'>You need to be in the air to do that!.</span>")
+		return
+	to_chat(usr,"<span class = 'notice'>You start prepping [src] for long-range flight..</span>")
+	if(!do_after(src,WAYPOINT_FLIGHT_DELAY))
 		return
 	proc_fly_to_waypoint()
 
