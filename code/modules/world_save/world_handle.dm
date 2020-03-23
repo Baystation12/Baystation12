@@ -1,6 +1,3 @@
-#define SAVECHUNK_SIZEX 4
-#define SAVECHUNK_SIZEY 4
-
 /datum/persistence/world_handle
 	var/datum/persistence/serializer/serializer = new()
 
@@ -13,7 +10,7 @@
 	var/DBQuery/query = dbcon.NewQuery("SELECT MAX(`version`) FROM `thing`;")
 	query.Execute()
 	while(query.NextRow())
-		SetVersion(text2num(query.item[1]) + 1)
+		SetVersion(text2num(query.item[1]))
 		break
 
 	serializer.FetchIndexes()
@@ -29,41 +26,91 @@
 	SetVersion(version + 1)
 
 	// Collect the z-levels we're saving and get the turfs!
-	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels.")
-	for(var/z in SSmapping.saved_levels)
-		for(var/x in 1 to world.maxx step SAVECHUNK_SIZEX)
-			for(var/y in 1 to world.maxy step SAVECHUNK_SIZEY)
-				SaveChunk(x,y,z)
+	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
 
-/datum/persistence/world_handle/proc/SaveChunk(var/xi, var/yi, var/zi)
-	var/z = zi
-	xi = (xi - (xi % SAVECHUNK_SIZEX) + 1)
-	yi = (yi - (yi % SAVECHUNK_SIZEY) + 1)
-	for(var/y in yi to yi + SAVECHUNK_SIZEY)
-		for(var/x in xi to xi + SAVECHUNK_SIZEX)
-			var/turf/T = locate(x,y,z)
-			serializer.SerializeThing(T)
-	serializer.Commit()
+	try
+		//
+		// 	PREPARATION SECTIONS
+		//
+		var/reallow = 0
+		if(config.enter_allowed) reallow = 1
+		config.enter_allowed = 0
+		// Prepare atmosphere for saving.
+		for(var/datum/pipe_network/net in SSmachines.pipenets)
+			for(var/datum/pipeline/line in net.line_members)
+				line.temporarily_store_air()
+
+		//
+		// 	ACTUAL SAVING SECTION
+		//
+		// This will save all the turfs/world.
+		var/index = 1
+		for(var/z in SSmapping.saved_levels)
+			for(var/x in 1 to world.maxx)
+				for(var/y in 1 to world.maxy)
+					// Get the thing to serialize and serialize it.
+					var/turf/T = locate(x,y,z)
+					if(!T || ((T.type == /turf/space) && (!T.contents || !T.contents.len))) //  || T.type == /turf/simulated/open
+						continue
+					serializer.SerializeThing(T)
+
+					// Don't save every single tile.
+					// Batch them up to save time.
+					if(index % 32 == 0)
+						serializer.Commit()
+						index = 1
+					else
+						index++
+
+					// Prevent the whole game from locking up.
+					CHECK_TICK
+			serializer.Commit() // cleanup leftovers.
+		//
+		//	CLEANUP SECTION
+		//
+		// Clear the refmaps/do other cleanup to end the save.
+		serializer.Clear()
+		if(reallow) config.enter_allowed = 1
+	catch (var/exception/e)
+		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
 
 /datum/persistence/world_handle/proc/LoadWorld()
-	// Loads all data in as part of a version.
-	establish_db_connection()
-	if(!dbcon.IsConnected())
-		return
+	try
+		// Loads all data in as part of a version.
+		establish_db_connection()
+		if(!dbcon.IsConnected())
+			return
 
-	var/DBQuery/query = dbcon.NewQuery("SELECT `id`,`type`,`x`,`y`,`z` FROM `thing` WHERE `version`=[version - 1]")
-	query.Execute()
-	while(query.NextRow())
-		// Blind deserialize *everything*.
-		var/thing_id = query.item[1]
-		var/thing_type = query.item[2]
-		var/thing_path = text2path(thing_type)
+		var/DBQuery/query = dbcon.NewQuery("SELECT COUNT(*) FROM `thing` WHERE `version`=[version];")
+		query.Execute()
+		if(query.NextRow())
+			// total_entries = text2num(query.item[1])
+			to_world_log("Loading [query.item[1]] things from world save.")
 
-		// Then we populate the entity with this data.
-		serializer.DeserializeThing(thing_id, thing_path, query.item[3], query.item[4], query.item[5])
+		// We start by loading the cache. This will load everything from SQL into an object structure
+		// and is much faster than live-querying for information.
+		serializer.resolver.load_cache(version)
+
+		// Begin deserializing the world.
+		var/start = world.timeofday
+		var/turfs_loaded = 0
+		for(var/TKEY in serializer.resolver.things)
+			var/datum/persistence/load_cache/thing/T = serializer.resolver.things[TKEY]
+			if(!T.x || !T.y || !T.z)
+				continue // This isn't a turf. We can skip it.
+			serializer.DeserializeThing(T)
+			turfs_loaded++
+			CHECK_TICK
+		to_world_log("Load complete! Took [world.timeofday-start] to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
+
+		// Cleanup the cache. It uses a *lot* of memory.
+		for(var/id in serializer.reverse_map)
+			var/datum/T = serializer.reverse_map[id]
+			T.after_deserialize()
+		serializer.resolver.clear_cache()
+		serializer.Clear()
+	catch(var/exception/e)
+		to_world_log("Load failed on line [e.line], file [e.file] with message: '[e]'.")
 
 
 // /datum/persistence/world_handle/proc/LoadChunk(var/x, var/y, var/z)
-
-#undef SAVECHUNK_SIZEX
-#undef SAVECHUNK_SIZEY

@@ -249,7 +249,8 @@
 		update_icon()
 		SetName(initial(name) + " ([tmr.time] secs)")
 
-		loc.verbs += /obj/item/device/assembly_holder/timer_igniter/verb/configure
+		if(loc)
+			loc.verbs += /obj/item/device/assembly_holder/timer_igniter/verb/configure
 
 	detached()
 		loc.verbs -= /obj/item/device/assembly_holder/timer_igniter/verb/configure

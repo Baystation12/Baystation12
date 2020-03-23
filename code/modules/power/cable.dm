@@ -82,7 +82,7 @@ By design, d1 is the smallest direction and d2 is the highest
 	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
-	if(level==1) hide(!T.is_plating())
+	if(level==1 && T) hide(!T.is_plating())
 	cable_list += src //add it to the global cable list
 
 

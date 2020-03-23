@@ -52,10 +52,11 @@
 	var/scent_range = 1
 
 /datum/reagent/New(var/datum/reagents/holder)
-	if(!istype(holder))
-		CRASH("Invalid reagents holder: [log_info_line(holder)]")
-	src.holder = holder
-	..()
+	if(holder)
+		if(!istype(holder))
+			CRASH("Invalid reagents holder: [log_info_line(holder)]")
+		src.holder = holder
+		..()
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	if(QDELETED(src)) // In case we remove multiple times without being careful.
