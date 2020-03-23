@@ -20,21 +20,21 @@
 	..()
 	queue_icon_update()
 
-/obj/machinery/door/firedoor/after_deserialize()
-	for(var/obj/machinery/door/firedoor/F in loc)
-		if(F != src)
-			return INITIALIZE_HINT_QDEL
-	var/area/A = get_area(src)
-	ASSERT(istype(A))
+// /obj/machinery/door/firedoor/after_deserialize()
+// 	for(var/obj/machinery/door/firedoor/F in loc)
+// 		if(F != src)
+// 			return INITIALIZE_HINT_QDEL
+// 	var/area/A = get_area(src)
+// 	ASSERT(istype(A))
 
-	LAZYADD(A.all_doors, src)
-	areas_added = list(A)
+// 	LAZYADD(A.all_doors, src)
+// 	areas_added = list(A)
 
-	for(var/direction in GLOB.cardinal)
-		A = get_area(get_step(src,direction))
-		if(istype(A) && !(A in areas_added))
-			LAZYADD(A.all_doors, src)
-			areas_added += A
+// 	for(var/direction in GLOB.cardinal)
+// 		A = get_area(get_step(src,direction))
+// 		if(istype(A) && !(A in areas_added))
+// 			LAZYADD(A.all_doors, src)
+// 			areas_added += A
 
 /obj/structure/cable/after_deserialize()
 	var/turf/T = src.loc			// hide if turf is not intact
