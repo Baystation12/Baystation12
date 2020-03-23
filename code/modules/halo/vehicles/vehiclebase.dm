@@ -11,6 +11,16 @@
 	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
 
+	var/next_move_input_at = 0//When can we send our next movement input?
+	var/moving_x = 0
+	var/moving_y = 0
+	var/last_moved_axis = 0 //1 = X axis, 2 = Y axis.
+	var/list/speed = list(0,0) //The delay on movement in these directions.
+	var/drag = 0.5 //How much do we slow down per tick if no input is applied in a direction?
+	var/min_speed = 5 //What's the highest delay we can have?
+	var/max_speed = 1//What's the lowest number we can go to in terms of delay?
+	var/acceleration = 1 //By how much does our speed change per input?
+
 	//Advanced Damage Handling
 	var/datum/component_profile/comp_prof = /datum/component_profile
 
@@ -213,6 +223,44 @@
 		. = ..()
 	update_object_sprites()
 
+/obj/vehicles/proc/movement_loop_x()
+	set background = 1
+	while (speed[1] != 0)
+		sleep(max(min_speed - abs(speed[1]),max_speed))
+		if(speed[1] > 0)
+			. = Move(get_step(loc,EAST),EAST)
+		else
+			. = Move(get_step(loc,WEST),WEST)
+		if(last_moved_axis != 1)
+			if(speed[1] > 0)
+				speed[1] = max(speed[1] - drag,0)
+			else
+				speed[1] = min(speed[1] + drag,0)
+		last_moved_axis = 0
+		if(move_sound && world.time % 2 == 0)
+			playsound(loc,move_sound,75,0,4)
+	if(!.)
+		speed[1] = 0
+
+/obj/vehicles/proc/movement_loop_y()
+	set background = 1
+	while (speed[2] != 0)
+		sleep(max(min_speed - abs(speed[2]),max_speed))
+		if(speed[2] > 0)
+			. = Move(get_step(loc,NORTH),NORTH)
+		else
+			. = Move(get_step(loc,SOUTH),SOUTH)
+		if(last_moved_axis != 2)
+			if(speed[2] > 0)
+				speed[2] = max(speed[2] - drag,0)
+			else
+				speed[2] = min(speed[2] + drag,0)
+		last_moved_axis = 0
+		if(move_sound && world.time % 2 == 0)
+			playsound(loc,move_sound,75,0,4)
+		if(!.)
+			speed[2] = 0 //KILL ALL SPEED, TODO: REPLACE WITH DYNAMIC CRASH SYSTEM
+
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
 	var/mob/mob_to_dam
@@ -241,13 +289,14 @@
 
 //TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
+	if(world.time < next_move_input_at)
+		return
 	if(movement_destroyed)
 		to_chat(user,"<span class = 'notice'>[src] is in no state to move!</span>")
 		return
 	if(!active)
 		to_chat(user,"<span class = 'notice'>[src] needs to be active to move!</span>")
 		return
-	var/turf/new_loc = get_step(src.loc,direction)
 	var/list/driver_list = get_occupants_in_position("driver")
 	var/is_driver = FALSE
 	for(var/mob/driver in driver_list)
@@ -256,10 +305,31 @@
 			break
 	if(!is_driver)
 		return
-	. = Move(new_loc,direction)
-	if(move_sound && world.time % 2 == 0)
-		playsound(loc,move_sound,75,0,4)
-	user.client.move_delay = world.time + vehicle_move_delay
+	var/list/old_speed = speed.Copy()
+	switch(direction)
+		if(NORTH)
+			last_moved_axis = 2
+			speed[2] = min(speed[2] + acceleration,min_speed)
+
+		if(SOUTH)
+			last_moved_axis = 2
+			speed[2] = max(speed[2] - acceleration,-min_speed)
+
+		if(EAST)
+			last_moved_axis = 1
+			speed[1] = min(speed[1] + acceleration,min_speed)
+
+		if(WEST)
+			last_moved_axis = 1
+			speed[1] = max(speed[1] - acceleration,-min_speed)
+
+	if(old_speed[1] == 0 && speed[1] != 0)
+		spawn()
+			movement_loop_x()
+	else if(old_speed[2] == 0 && speed[2] != 0)
+		spawn()
+			movement_loop_y()
+	next_move_input_at = world.time + acceleration
 
 /obj/vehicles/verb/verb_inspect_components()
 	set name = "Inspect Components"

@@ -23,6 +23,11 @@
 
 	light_color = "#E1FDFF"
 
+	drag = 2
+	min_speed = 22
+	max_speed = 2
+	acceleration = 4
+
 /obj/vehicles/mongoose/update_object_sprites()
 	. = ..()
 	update_occupant_weight()
