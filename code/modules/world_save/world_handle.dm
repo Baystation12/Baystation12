@@ -27,7 +27,7 @@
 
 	// Collect the z-levels we're saving and get the turfs!
 	to_world_log("Saving [LAZYLEN(SSmapping.saved_levels)] z-levels. World size max ([world.maxx],[world.maxy])")
-
+	var/start = world.timeofday
 	try
 		//
 		// 	PREPARATION SECTIONS
@@ -79,6 +79,7 @@
 		if(reallow) config.enter_allowed = 1
 	catch (var/exception/e)
 		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
+	to_world("Save complete! Took [(world.timeofday-start)*10]s to save world.")
 
 /datum/persistence/world_handle/proc/LoadWorld()
 	try
@@ -107,7 +108,7 @@
 			serializer.DeserializeThing(T)
 			turfs_loaded++
 			CHECK_TICK
-		to_world_log("Load complete! Took [world.timeofday-start] to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
+		to_world_log("Load complete! Took [(world.timeofday-start)*10]s to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
 
 		// now for the connected z-level hacks.
 		query = dbcon.NewQuery("SELECT `id` FROM `thing` WHERE `version`=[version] AND `type`='[/datum/wrapper/multiz]';")
