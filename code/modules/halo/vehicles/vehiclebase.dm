@@ -316,7 +316,6 @@
 	. = ..()
 	collide_with_obstacle(get_speedval_for_dir(get_dir(src,obstacle)),obstacle)
 
-
 /obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
 	set background = 1
 	switch(speed_index_target)
@@ -338,7 +337,7 @@
 					. = Move(get_step(loc,WEST),WEST)
 				if(2)
 					. = Move(get_step(loc,SOUTH),SOUTH)
-		if(last_moved_axis != 2)
+		if(last_moved_axis != speed_index_target)
 			if(speed[speed_index_target] > 0)
 				speed[speed_index_target] = max(speed[speed_index_target] - drag,0)
 			else
