@@ -1332,22 +1332,6 @@
 	// /obj/machinery/embedded_controller
 	//
 	LAZYADD(.[/obj/machinery/embedded_controller], "on")
-	LAZYADD(.[/obj/machinery/embedded_controller], "program")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
-	// /datum/computer/file/embedded_program/docking
-	//
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "tag_target")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "dock_state")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "control_mode")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "response_sent")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "resend_counter")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "override_enabled")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "received_confirm")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "docking_codes")
-	LAZYADD(.[/datum/computer/file/embedded_program/docking], "display_name")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1359,47 +1343,11 @@
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
-	// /datum/computer/file/embedded_program/docking/simple
-	//
-	LAZYADD(.[/datum/computer/file/embedded_program/docking/simple], "tag_door")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
-	// /datum/computer/file/embedded_program/airlock
-	//
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_exterior_door")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_interior_door")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_airpump")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_chamber_sensor")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_exterior_sensor")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_interior_sensor")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_airlock_mech_sensor")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_shuttle_mech_sensor")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "state")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "target_state")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "cycle_to_external_air")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_pump_out_external")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_pump_out_internal")
-	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_air_alarm")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
 	// /obj/machinery/embedded_controller/radio/docking_port_multi
 	//
 	LAZYADD(.[/obj/machinery/embedded_controller/radio/docking_port_multi], "child_names")
 	LAZYADD(.[/obj/machinery/embedded_controller/radio/docking_port_multi], "child_names_txt")
 	LAZYADD(.[/obj/machinery/embedded_controller/radio/docking_port_multi], "child_tags_txt")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
-	// /datum/computer/file/embedded_program
-	//
-	LAZYADD(.[/datum/computer/file/embedded_program], "memory")
-	LAZYADD(.[/datum/computer/file/embedded_program], "master")
-	LAZYADD(.[/datum/computer/file/embedded_program], "id_tag")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1814,6 +1762,7 @@
 	LAZYADD(.[/obj/machinery], "panel_open")
 	LAZYADD(.[/obj/machinery], "power_components")
 	LAZYADD(.[/obj/machinery], "anchored")
+	LAZYADD(.[/obj/machinery], "state")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2833,6 +2782,15 @@
 	//
 	LAZYADD(.[/obj/item/weapon/stock_parts/power/terminal], "priority")
 	LAZYADD(.[/obj/item/weapon/stock_parts/power/terminal], "cached_channel")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/power/emitter/gyrotron
+	//
+	LAZYADD(.[/obj/machinery/power/emitter/gyrotron], "initial_id_tag")
+	LAZYADD(.[/obj/machinery/power/emitter/gyrotron], "rate")
+	LAZYADD(.[/obj/machinery/power/emitter/gyrotron], "mega_energy")
 
 
 	for(var/type in .)

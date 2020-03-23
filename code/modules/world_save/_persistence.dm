@@ -20,6 +20,14 @@
 	..()
 	queue_icon_update()
 
+/obj/machinery/embedded_controller
+	var/saved_memory
+/obj/machinery/embedded_controller/before_save()
+	saved_memory = program.memory
+/obj/machinery/embedded_controller/after_deserialize()
+	if(saved_memory)
+		program.memory = saved_memory
+
 // /obj/machinery/door/firedoor/after_deserialize()
 // 	for(var/obj/machinery/door/firedoor/F in loc)
 // 		if(F != src)
@@ -37,13 +45,13 @@
 // 			areas_added += A
 
 /obj/item/weapon/storage/before_save()
-	startswith = null
+	startswith = 0
 
 /obj/item/weapon/tank/before_save()
-	starting_pressure = null
+	starting_pressure = 0
 
 /obj/item/weapon/extinguisher/before_save()
-	starting_water = null
+	starting_water = 0	
 
 /obj/structure/cable/after_deserialize()
 	var/turf/T = src.loc			// hide if turf is not intact

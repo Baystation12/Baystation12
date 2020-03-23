@@ -1186,22 +1186,7 @@
 	{
 		"path": "/obj/machinery/embedded_controller",
 		"vars": [
-			"on",
-			"program"
-		]
-	},
-	{
-		"path": "/datum/computer/file/embedded_program/docking",
-		"vars": [
-			"tag_target",
-			"dock_state",
-			"control_mode",
-			"response_sent",
-			"resend_counter",
-			"override_enabled",
-			"received_confirm",
-			"docking_codes",
-			"display_name"
+			"on"
 		]
 	},
 	{
@@ -1211,44 +1196,11 @@
 		]
 	},
 	{
-		"path": "/datum/computer/file/embedded_program/docking/simple",
-		"vars": [
-			"tag_door"
-		]
-	},
-	{
-		"path": "/datum/computer/file/embedded_program/airlock",
-		"vars": [
-			"tag_exterior_door",
-			"tag_interior_door",
-			"tag_airpump",
-			"tag_chamber_sensor",
-			"tag_exterior_sensor",
-			"tag_interior_sensor",
-			"tag_airlock_mech_sensor",
-			"tag_shuttle_mech_sensor",
-			"state",
-			"target_state",
-			"cycle_to_external_air",
-			"tag_pump_out_external",
-			"tag_pump_out_internal",
-			"tag_air_alarm"
-		]
-	},
-	{
 		"path": "/obj/machinery/embedded_controller/radio/docking_port_multi",
 		"vars": [
 			"child_names",
 			"child_names_txt",
 			"child_tags_txt"
-		]
-	},
-	{
-		"path": "/datum/computer/file/embedded_program",
-		"vars": [
-			"memory",
-			"master",
-			"id_tag"
 		]
 	},
 	{
@@ -1623,7 +1575,8 @@
 		"uid",
 		"panel_open",
 		"power_components",
-		"anchored"
+		"anchored",
+		"state"
 	  ]
 	},
 	{
@@ -2538,6 +2491,14 @@
 		  "vars": [
 			  "priority",
 			  "cached_channel"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/power/emitter/gyrotron",
+		  "vars": [
+			   "initial_id_tag",
+			   "rate",
+			   "mega_energy"
 		  ]
 	  }
   ]
