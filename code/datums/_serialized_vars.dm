@@ -1962,6 +1962,7 @@
 	LAZYADD(.[/mob], "gender")
 	LAZYADD(.[/mob], "languages")
 	LAZYADD(.[/mob], "loc")
+	LAZYADD(.[/mob], "id_tag")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1996,6 +1997,7 @@
 	LAZYADD(.[/atom], "pixel_x")
 	LAZYADD(.[/atom], "pixel_y")
 	LAZYADD(.[/atom], "loc")
+	LAZYADD(.[/atom], "id_tag")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2015,6 +2017,7 @@
 	LAZYADD(.[/obj], "pixel_x")
 	LAZYADD(.[/obj], "pixel_y")
 	LAZYADD(.[/obj], "loc")
+	LAZYADD(.[/obj], "id_tag")
 
 
 	//////////////////////////////////////////////////////////////////////////////

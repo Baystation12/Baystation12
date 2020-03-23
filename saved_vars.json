@@ -1751,7 +1751,8 @@
 			"feet_blood_color",
 			"gender",
 			"languages",
-			"loc"
+			"loc",
+			"id_tag"
 		]
 	},
 	{
@@ -1783,7 +1784,8 @@
 			"layer",
 			"pixel_x",
 			"pixel_y",
-			"loc"
+			"loc",
+			"id_tag"
 		]
 	},
 	{
@@ -1801,7 +1803,8 @@
 			"opacity",
 			"pixel_x",
 			"pixel_y",
-			"loc"
+			"loc",
+			"id_tag"
 		]
 	},
 	{
