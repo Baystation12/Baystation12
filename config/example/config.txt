@@ -4,6 +4,9 @@
 ## Hub visibility: If you want to be visible on the hub, uncomment the below line and be sure that Dream Daemon is set to "Visible." This can be changed in-round as well with toggle-hub-visibility if Dream Daemon is set correctly.
 # HUB
 
+## Persitence: Unhash this if you want the game to save. Requires the SQL database to be setup.
+# PERSISTENT
+
 ## Add a # infront of this if you want to use the SQL based admin system, the legacy system uses admins.txt. You need to set up your database to use the SQL based system.
 ADMIN_LEGACY_SYSTEM
 

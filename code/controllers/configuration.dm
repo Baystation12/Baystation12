@@ -36,6 +36,7 @@ var/list/gamemode_cache = list()
 	var/vote_no_dead = 0				// dead people can't vote (tbi)
 	var/vote_no_dead_crew_transfer = 0	// dead people can't vote on crew transfer votes
 //	var/enable_authentication = 0		// goon authentication
+	var/persistent = 0
 	var/del_new_on_log = 1				// del's new players if they log before they spawn in
 	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
 	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
@@ -277,6 +278,9 @@ var/list/gamemode_cache = list()
 
 		if(type == "config")
 			switch (name)
+				if("persistent")
+					config.persistent = 1
+
 				if ("resource_urls")
 					config.resource_urls = splittext(value, " ")
 
