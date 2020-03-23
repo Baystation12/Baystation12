@@ -21,12 +21,12 @@
 
 	light_color = "#E1FDFF"
 
-	drag = 2
-	min_speed = 22
+	min_speed = 6
 	max_speed = 2
-	acceleration = 4
 
 /obj/vehicles/mongoose/update_object_sprites()
+	underlays.Cut()
+	overlays.Cut()
 	var/list/offsets_to_use = sprite_offsets["[dir]"]
 	var/list/drivers = get_occupants_in_position("driver")
 	if(!(isnull(offsets_to_use) || isnull(drivers) || drivers.len == 0))

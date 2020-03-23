@@ -4,7 +4,6 @@
 
 	icon = 'code/modules/halo/vehicles/types/spirit.dmi'
 	icon_state = "base"
-	vehicle_move_delay = 1.2
 	faction = "covenant"
 	density = 1
 
@@ -29,6 +28,11 @@
 
 	light_color = "#C1CEFF"
 	spawn_datum = /datum/mobile_spawn/covenant
+
+	min_speed = 17.25
+	max_speed = 2.25
+	acceleration = 6
+	drag = 3.5
 
 /obj/vehicles/air/overmap/spirit_dropship/update_object_sprites()
 	. = ..()

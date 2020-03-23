@@ -16,7 +16,7 @@
 	var/moving_y = 0
 	var/last_moved_axis = 0 //1 = X axis, 2 = Y axis.
 	var/list/speed = list(0,0) //The delay on movement in these directions.
-	var/drag = 0.5 //How much do we slow down per tick if no input is applied in a direction?
+	var/drag = -1 //How much do we slow down per tick if no input is applied in a direction? Autocalcs to half accel if set to -1
 	var/min_speed = 5 //What's the highest delay we can have?
 	var/max_speed = 1//What's the lowest number we can go to in terms of delay?
 	var/acceleration = 1 //By how much does our speed change per input?
@@ -113,6 +113,8 @@
 
 /obj/vehicles/Initialize()
 	. = ..()
+	if(drag == -1)
+		drag = acceleration
 	if(spawn_datum)
 		spawn_datum = new spawn_datum
 		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
@@ -237,12 +239,42 @@
 				speed[1] = max(speed[1] - drag,0)
 			else
 				speed[1] = min(speed[1] + drag,0)
-		last_moved_axis = 0
-		if(move_sound && world.time % 2 == 0)
+		if(world.time >= next_move_input_at)
+			last_moved_axis = 0
+		if(move_sound)
 			playsound(loc,move_sound,75,0,4)
 		if(!.)
 			speed[1] = 0
 	moving_x = 0
+
+/obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
+	set background = 1
+	if(speed_index_target == 1)
+		moving_x = 1
+	else
+		moving_y = 1
+	while (speed[speed_index_target] != 0)
+		sleep(max(min_speed - abs(speed[2]),max_speed))
+		if(speed[speed_index_target] > 0)
+			. = Move(get_step(loc,NORTH),NORTH)
+		else
+			. = Move(get_step(loc,SOUTH),SOUTH)
+		if(last_moved_axis != 2)
+			if(speed[speed_index_target] > 0)
+				speed[speed_index_target] = max(speed[speed_index_target] - drag,0)
+			else
+				speed[speed_index_target] = min(speed[speed_index_target] + drag,0)
+		if(world.time >= next_move_input_at)
+			last_moved_axis = 0
+		if(move_sound)
+			playsound(loc,move_sound,75,0,4)
+		if(!.)
+			collide_with_item(speed[speed_index_target])
+			speed[speed_index_target] = 0 //KILL ALL SPEED, TODO: REPLACE WITH DYNAMIC CRASH SYSTEM
+	if(speed_index_target == 1)
+		moving_x = 0
+	else
+		moving_y = 0
 
 /obj/vehicles/proc/movement_loop_y()
 	set background = 1
@@ -258,10 +290,12 @@
 				speed[2] = max(speed[2] - drag,0)
 			else
 				speed[2] = min(speed[2] + drag,0)
-		last_moved_axis = 0
-		if(move_sound && world.time % 2 == 0)
+		if(world.time >= next_move_input_at)
+			last_moved_axis = 0
+		if(move_sound)
 			playsound(loc,move_sound,75,0,4)
 		if(!.)
+			collide_with_item(speed[2]
 			speed[2] = 0 //KILL ALL SPEED, TODO: REPLACE WITH DYNAMIC CRASH SYSTEM
 	moving_y = 0
 

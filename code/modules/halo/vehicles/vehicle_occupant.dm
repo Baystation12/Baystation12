@@ -103,6 +103,7 @@
 			to_chat(user,"<span class = 'notice'>You're already a [position] of [src]</span>")
 			return 0
 		occupants[user] = position
+		visible_message("<span class = 'notice'>[user] enters [src] as [position]</span>")
 		update_object_sprites()
 		return 1
 
@@ -112,6 +113,7 @@
 	contents += user
 	update_object_sprites()
 	update_user_view(user)
+	visible_message("<span class = 'notice'>[user] enters the [position] position of [src].</span>")
 	to_chat(user,"<span class = 'info'>You are now in the [position] position of [src].</span>")
 	return 1
 
