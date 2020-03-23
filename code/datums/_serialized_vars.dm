@@ -1281,6 +1281,13 @@
 	// /obj/machinery/door/firedoor
 	//
 	LAZYADD(.[/obj/machinery/door/firedoor], "areas_added")
+	LAZYADD(.[/obj/machinery/door/firedoor], "net_id")
+	LAZYADD(.[/obj/machinery/door/firedoor], "pdiff")
+	LAZYADD(.[/obj/machinery/door/firedoor], "pdiff_alert")
+	LAZYADD(.[/obj/machinery/door/firedoor], "blocked")
+	LAZYADD(.[/obj/machinery/door/firedoor], "lockdown")
+	LAZYADD(.[/obj/machinery/door/firedoor], "hatch_open")
+	LAZYADD(.[/obj/machinery/door/firedoor], "nextstate")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2038,6 +2045,7 @@
 	LAZYADD(.[/obj], "contents")
 	LAZYADD(.[/obj], "density")
 	LAZYADD(.[/obj], "dir")
+	LAZYADD(.[/obj], "icon")
 	LAZYADD(.[/obj], "icon_state")
 	LAZYADD(.[/obj], "name")
 	LAZYADD(.[/obj], "opacity")

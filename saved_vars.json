@@ -1140,7 +1140,14 @@
 	{
 	  "path": "/obj/machinery/door/firedoor",
 	  "vars": [
-		"areas_added"
+		"areas_added",
+		"net_id",
+		"pdiff",
+		"pdiff_alert",
+		"blocked",
+		"lockdown",
+		"hatch_open",
+		"nextstate"
 	  ]
 	},
 	{
@@ -1825,6 +1832,7 @@
 			"contents",
 			"density",
 			"dir",
+			"icon",
 			"icon_state",
 			"name",
 			"opacity",
