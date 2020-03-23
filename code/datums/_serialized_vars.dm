@@ -1979,13 +1979,6 @@
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
-	// /zone
-	//
-	LAZYADD(.[/zone], "air")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
 	// /obj/item/weapon/implant/sic
 	//
 	LAZYADD(.[/obj/item/weapon/implant/sic], "unique_id")
@@ -2512,6 +2505,13 @@
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
+	// /turf/simulated
+	//
+	LAZYADD(.[/turf/simulated], "air")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
 	// /turf/simulated/mineral
 	//
 	LAZYADD(.[/turf/simulated/mineral], "resources")
@@ -2871,16 +2871,6 @@
 	LAZYADD(.[/datum/fabricator_recipe], "resources")
 	LAZYADD(.[/datum/fabricator_recipe], "build_time")
 	LAZYADD(.[/datum/fabricator_recipe], "ignore_materials")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
-	// /obj/effect/fake_fire
-	//
-	LAZYADD(.[/obj/effect/fake_fire], "lifetime")
-	LAZYADD(.[/obj/effect/fake_fire], "firelevel")
-	LAZYADD(.[/obj/effect/fake_fire], "last_temperature")
-	LAZYADD(.[/obj/effect/fake_fire], "pressure")
 
 
 	//////////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,10 @@
 
 /datum/proc/before_save()
 
+/turf/simulated/before_save()
+	if(zone)
+		c_copy_air()
+
 /datum/proc/after_deserialize()
 
 /datum
@@ -99,9 +103,9 @@
 	else
 		lighting_clear_overlay()
 
-/zone/after_deserialize()
-	..()
-	needs_update = TRUE
+// /zone/after_deserialize()
+// 	..()
+// 	needs_update = TRUE
 
 /atom/movable/lighting_overlay/after_deserialize()
 	loc = null

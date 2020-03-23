@@ -1768,12 +1768,6 @@
 	  ]
 	},
 	{
-	  "path": "/zone",
-	  "vars": [
-		"air"
-	  ]
-	},
-	{
 	   "path": "/obj/item/weapon/implant/sic",
 	   "vars": [
 		 "unique_id",
@@ -2245,6 +2239,12 @@
 		 ]
 	  },
 	  {
+		"path": "/turf/simulated",
+		"vars": [
+			"air"
+		]
+	  },
+	  {
 		 "path": "/turf/simulated/mineral",
 		 "vars": [
 		   "resources",
@@ -2574,15 +2574,6 @@
 				"resources",
 				"build_time",
 				"ignore_materials"
-			]
-		},
-		{
-			"path": "/obj/effect/fake_fire",
-			"vars": [
-				"lifetime",
-				"firelevel",
-				"last_temperature",
-				"pressure"
 			]
 		},
 		{
