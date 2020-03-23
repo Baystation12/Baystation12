@@ -1362,7 +1362,8 @@
 		"main_status",
 		"has_electronics",
 		"beenhit",
-		"is_critical"
+		"is_critical",
+		"autoflag"
 	  ]
 	},
 	{
@@ -2196,6 +2197,22 @@
 		  "path": "/datum/wrapper/multiz",
 		  "vars": [
 			  "saved_z_levels"
+		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/light",
+		  "vars": [
+			  "status",
+			  "switchcount",
+			  "rigged",
+			  "broken_chance",
+			  "b_colour",
+			  "current_mode",
+			  "icon_state",
+			  "base_state",
+			  "light_type",
+			  "on",
+			  "lightbulb"
 		  ]
 	  }
   ]

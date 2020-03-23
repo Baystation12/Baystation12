@@ -1528,6 +1528,7 @@
 	LAZYADD(.[/obj/machinery/power/apc], "has_electronics")
 	LAZYADD(.[/obj/machinery/power/apc], "beenhit")
 	LAZYADD(.[/obj/machinery/power/apc], "is_critical")
+	LAZYADD(.[/obj/machinery/power/apc], "autoflag")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2463,6 +2464,23 @@
 	// /datum/wrapper/multiz
 	//
 	LAZYADD(.[/datum/wrapper/multiz], "saved_z_levels")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/light
+	//
+	LAZYADD(.[/obj/machinery/light], "status")
+	LAZYADD(.[/obj/machinery/light], "switchcount")
+	LAZYADD(.[/obj/machinery/light], "rigged")
+	LAZYADD(.[/obj/machinery/light], "broken_chance")
+	LAZYADD(.[/obj/machinery/light], "b_colour")
+	LAZYADD(.[/obj/machinery/light], "current_mode")
+	LAZYADD(.[/obj/machinery/light], "icon_state")
+	LAZYADD(.[/obj/machinery/light], "base_state")
+	LAZYADD(.[/obj/machinery/light], "light_type")
+	LAZYADD(.[/obj/machinery/light], "on")
+	LAZYADD(.[/obj/machinery/light], "lightbulb")
 
 
 	for(var/type in .)
