@@ -1836,7 +1836,6 @@
 	// /obj/structure/table
 	//
 	LAZYADD(.[/obj/structure/table], "flipped")
-	LAZYADD(.[/obj/structure/table], "health")
 	LAZYADD(.[/obj/structure/table], "material")
 	LAZYADD(.[/obj/structure/table], "reinforced")
 	LAZYADD(.[/obj/structure/table], "carpeted")
@@ -1846,8 +1845,6 @@
 	//
 	// /obj/structure/wall_frame
 	//
-	LAZYADD(.[/obj/structure/wall_frame], "health")
-	LAZYADD(.[/obj/structure/wall_frame], "color")
 	LAZYADD(.[/obj/structure/wall_frame], "stripe_color")
 
 
@@ -1856,6 +1853,21 @@
 	// /obj/structure/window
 	//
 	LAZYADD(.[/obj/structure/window], "health")
+	LAZYADD(.[/obj/structure/window], "polarized")
+	LAZYADD(.[/obj/structure/window], "reinf_material")
+	LAZYADD(.[/obj/structure/window], "init_material")
+	LAZYADD(.[/obj/structure/window], "blend_objects")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/structure
+	//
+	LAZYADD(.[/obj/structure], "connections")
+	LAZYADD(.[/obj/structure], "health")
+	LAZYADD(.[/obj/structure], "other_connections")
+	LAZYADD(.[/obj/structure], "waterproof")
+	LAZYADD(.[/obj/structure], "color")
 
 
 	//////////////////////////////////////////////////////////////////////////////

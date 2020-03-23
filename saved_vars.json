@@ -1637,7 +1637,6 @@
 	  "path": "/obj/structure/table",
 	  "vars": [
 		"flipped",
-		"health",
 		"material",
 		"reinforced",
 		"carpeted"
@@ -1646,16 +1645,28 @@
 	{
 	  "path": "/obj/structure/wall_frame",
 	  "vars": [
-		"health",
-		"color",
 		"stripe_color"
 	  ]
 	},
 	{
 	  "path": "/obj/structure/window",
 	  "vars": [
-		"health"
+		"health",
+		"polarized",
+		"reinf_material",
+		"init_material",
+		"blend_objects"
 	  ]
+	},
+	{
+	   "path": "/obj/structure",
+	   "vars": [
+		 "connections",
+		 "health",
+		 "other_connections",
+		 "waterproof",
+		 "color"
+	   ]
 	},
 	{
 	  "path": "/obj/vehicle/train/cargo/engine",
