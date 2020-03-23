@@ -378,7 +378,7 @@
 	// Will deserialize and return a list.
 	if(!dbcon.IsConnected())
 		return
-
+		
 	if(isnull(existing))
 		existing = reverse_list_map["[list_id]"]
 		if(isnull(existing))
@@ -431,6 +431,7 @@
 
 		catch(var/exception/e)
 			to_world_log("Failed to deserialize list [list_id] element [key_value] on line [e.line] / file [e.file] for reason: [e].")
+			
 	return existing
 
 /datum/persistence/serializer/proc/DeserializeArea(var/area_id)
@@ -492,6 +493,7 @@
 	list_inserts.Cut(1)
 	element_inserts.Cut(1)
 	inserts_since_commit = 0
+
 
 /datum/persistence/serializer/proc/Clear()
 	thing_inserts.Cut(1)

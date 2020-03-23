@@ -29,10 +29,10 @@
 	if(level==1) hide(!T.is_plating())
 
 /turf/space/after_deserialize()
-    ..()
-    for(var/atom/movable/lighting_overlay/overlay in contents)
-        overlay.loc = null
-        qdel(overlay)
+	..()
+	for(var/atom/movable/lighting_overlay/overlay in contents)
+		overlay.loc = null
+		qdel(overlay)
 
 /turf/after_deserialize()
 	..()

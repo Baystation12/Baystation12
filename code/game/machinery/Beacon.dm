@@ -15,7 +15,7 @@
 		Beacon = new /obj/item/device/radio/beacon(T)
 		Beacon.invisibility = INVISIBILITY_MAXIMUM
 
-		if(T)
+		if(T)	// TODO Change to happen during initialize
 			hide(!T.is_plating())
 
 	Destroy()
