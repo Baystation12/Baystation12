@@ -1,6 +1,6 @@
 #define PERSISTENT_TESTS 0
 
-#ifdef PERSISTENT_TESTS
+#if PERSISTENT_TESTS
 /datum/sample_obj/test_container
 	var/test_var
 	var/test_var_2
