@@ -1,8 +1,0 @@
-author: "Imienny"
-delete-after: True
-changes: 
-  - bugfix: "Fixed crossbow & spike thrower wall pins."
-  - bugfix: "Probably fixed some thrown objects being able to pass through obstacles."
-  - bugfix: "Thrown objects now correctly use throw force instead of force for effect tests like embed."
-  - tweak: "Significantly reduced damage to thrown mobs from hitting walls."
-  - tweak: "Disabled thrown object knock-back in space."
