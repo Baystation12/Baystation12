@@ -65,6 +65,12 @@
 					// Prevent the whole game from locking up.
 					CHECK_TICK
 			serializer.Commit() // cleanup leftovers.
+		
+		// Save multiz levels
+		var/datum/wrapper/multiz/z = new()
+		z.get_connected_zlevels()
+		serializer.SerializeThing(z)
+		serializer.Commit()
 		//
 		//	CLEANUP SECTION
 		//
@@ -102,6 +108,14 @@
 			turfs_loaded++
 			CHECK_TICK
 		to_world_log("Load complete! Took [world.timeofday-start] to load [length(serializer.resolver.things)] things. Loaded [turfs_loaded] turfs.")
+
+		// now for the connected z-level hacks.
+		query = dbcon.NewQuery("SELECT `id` FROM `thing` WHERE `version`=[version] AND `type`='[/datum/wrapper/multiz]';")
+		query.Execute()
+		if(query.NextRow())
+			var/datum/wrapper/multiz/z = serializer.QueryAndDeserializeThing(query.items[1])
+			for(var/index in 1 to length(z.saved_z_levels))
+				z_levels[index] = z.saved_z_levels[index]
 
 		// Cleanup the cache. It uses a *lot* of memory.
 		for(var/id in serializer.reverse_map)
