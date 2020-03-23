@@ -1506,6 +1506,7 @@
 	//
 	// /obj/machinery/power/apc
 	//
+	LAZYADD(.[/obj/machinery/power/apc], "area")
 	LAZYADD(.[/obj/machinery/power/apc], "cell")
 	LAZYADD(.[/obj/machinery/power/apc], "cell_type")
 	LAZYADD(.[/obj/machinery/power/apc], "opened")
@@ -1594,6 +1595,11 @@
 	LAZYADD(.[/obj/machinery/power/smes], "output_level")
 	LAZYADD(.[/obj/machinery/power/smes], "name_tag")
 	LAZYADD(.[/obj/machinery/power/smes], "terminals")
+	LAZYADD(.[/obj/machinery/power/smes], "should_be_mapped")
+	LAZYADD(.[/obj/machinery/power/smes], "damage")
+	LAZYADD(.[/obj/machinery/power/smes], "input_cut")
+	LAZYADD(.[/obj/machinery/power/smes], "output_cut")
+	LAZYADD(.[/obj/machinery/power/smes], "failure_timer")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1941,6 +1947,7 @@
 	LAZYADD(.[/mob], "feet_blood_color")
 	LAZYADD(.[/mob], "gender")
 	LAZYADD(.[/mob], "languages")
+	LAZYADD(.[/mob], "loc")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1974,6 +1981,7 @@
 	LAZYADD(.[/atom], "layer")
 	LAZYADD(.[/atom], "pixel_x")
 	LAZYADD(.[/atom], "pixel_y")
+	LAZYADD(.[/atom], "loc")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1992,6 +2000,7 @@
 	LAZYADD(.[/obj], "opacity")
 	LAZYADD(.[/obj], "pixel_x")
 	LAZYADD(.[/obj], "pixel_y")
+	LAZYADD(.[/obj], "loc")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2447,6 +2456,13 @@
 	LAZYADD(.[/zone], "edges")
 	LAZYADD(.[/zone], "fuel_objs")
 	LAZYADD(.[/zone], "last_air_temperature")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/wrapper/multiz
+	//
+	LAZYADD(.[/datum/wrapper/multiz], "saved_z_levels")
 
 
 	for(var/type in .)

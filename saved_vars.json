@@ -1341,6 +1341,7 @@
 	{
 	  "path": "/obj/machinery/power/apc",
 	  "vars": [
+		"area",
 		"cell",
 		"cell_type",
 		"opened",
@@ -1422,7 +1423,12 @@
 		"output_attempt",
 		"output_level",
 		"name_tag",
-		"terminals"
+		"terminals",
+		"should_be_mapped",
+		"damage",
+		"input_cut",
+		"output_cut",
+		"failure_timer"
 	  ]
 	},
 	{
@@ -1731,7 +1737,8 @@
 			"dna",
 			"feet_blood_color",
 			"gender",
-			"languages"
+			"languages",
+			"loc"
 		]
 	},
 	{
@@ -1762,7 +1769,8 @@
 			"opacity",
 			"layer",
 			"pixel_x",
-			"pixel_y"
+			"pixel_y",
+			"loc"
 		]
 	},
 	{
@@ -1779,7 +1787,8 @@
 			"name",
 			"opacity",
 			"pixel_x",
-			"pixel_y"
+			"pixel_y",
+			"loc"
 		]
 	},
 	{
@@ -2182,6 +2191,12 @@
 			 "fuel_objs",
 			 "last_air_temperature"
 		 ]
+	  },
+	  {
+		  "path": "/datum/wrapper/multiz",
+		  "vars": [
+			  "saved_z_levels"
+		  ]
 	  }
   ]
   
