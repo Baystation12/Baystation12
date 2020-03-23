@@ -45,7 +45,7 @@
 	description = "A regenerative foaming agent which is capable of fixing bones and stopping bleeding"
 	reagent_state = LIQUID
 	color = "#edd9c0"
-	metabolism = 0 //Biofoam is used very quickly
+	metabolism = 1 //Biofoam is used quickly, and it uses more the more it does.
 	overdose = 10 //Very careful with biofoam, don't want expansion into your lungs, do we now?
 	scannable = 1
 	flags = AFFECTS_DEAD
@@ -65,6 +65,7 @@
 		o.clamp_organ()
 		o.update_damages()
 		to_chat(o.owner,"<span class = 'notice'>You feel the biofoam stop the bleeding in your [o.name]</span>")
+		did_work = 1
 
 /datum/reagent/biofoam/proc/mend_external(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/external/o in H.organs)
@@ -72,10 +73,12 @@
 		if(o.brute_dam + o.burn_dam >= o.min_bruised_damage && check_and_consume_cost(BIOFOAM_COST_MENDEXTERNAL))
 			o.heal_damage(o.min_bruised_damage,o.min_bruised_damage)
 			to_chat(H,"<span class = 'notice'>You feel your [o.name] knitting itself back together</span>")
+			did_work = 1
 		if(o.status & ORGAN_BROKEN && check_and_consume_cost(BIOFOAM_COST_MENDBONE))
 			o.mend_fracture()
 			H.next_pain_time = world.time //Overrides the next pain timer
 			H.custom_pain("<span class = 'userdanger'>You feel the bones in your [o.name] being pushed into place.</span>",10)
+			did_work = 1
 
 /datum/reagent/biofoam/proc/mend_internal(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/I in H.internal_organs)
@@ -83,6 +86,7 @@
 		if(I.damage >= I.min_bruised_damage && check_and_consume_cost(BIOFOAM_COST_MENDINTERNAL))
 			I.damage -= I.min_bruised_damage
 			to_chat(H,"<span class = 'notice'>You feel your [I.name] knitting itself back together</span>")
+			did_work = 1
 
 /datum/reagent/biofoam/proc/fix_wounds(var/mob/living/carbon/human/H)
 	for(var/obj/item/organ/external/o in H.organs)
@@ -94,6 +98,7 @@
 				W.bandaged = 1
 				W.salved = 1
 				o.update_damages()
+				did_work = 1
 
 /datum/reagent/biofoam/proc/remove_embedded(var/mob/living/carbon/human/M)
 	for(var/obj/item/organ/external/o in M.bad_external_organs)
@@ -109,8 +114,7 @@
 				M.contents -= embedded
 				embedded.loc = M.loc //And placing it on the ground below
 				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")
-
-
+				did_work = 1
 
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.
 	if(istype(M,/mob/living/carbon/human))
@@ -123,6 +127,7 @@
 			M.add_chemical_effect(CE_PAINKILLER, 5)
 	if(!did_work)
 		holder.remove_reagent("biofoam",volume)
+		did_work = 0
 
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))
