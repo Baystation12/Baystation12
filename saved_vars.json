@@ -385,7 +385,6 @@
 		"delay",
 		"airlock_wire",
 		"connected",
-		"radio_connection",
 		"deadman"
 	  ]
 	},
@@ -1134,7 +1133,10 @@
 		"airlock_type",
 		"door_color",
 		"stripe_color",
-		"symbol_color"
+		"symbol_color",
+		"frequency",
+		"shockedby",
+		"cur_command"
 	  ]
 	},
 	{
@@ -1180,6 +1182,80 @@
 		"normalspeed",
 		"health"
 	  ]
+	},
+	{
+		"path": "/obj/machinery/embedded_controller",
+		"vars": [
+			"on",
+			"program"
+		]
+	},
+	{
+		"path": "/datum/computer/file/embedded_program/docking",
+		"vars": [
+			"tag_target",
+			"dock_state",
+			"control_mode",
+			"response_sent",
+			"resend_counter",
+			"override_enabled",
+			"received_confirm",
+			"docking_codes",
+			"display_name"
+		]
+	},
+	{
+		"path": "/obj/machinery/embedded_controller/radio/simple_docking_controller",
+		"vars": [
+			"tag_door"
+		]
+	},
+	{
+		"path": "/datum/computer/file/embedded_program/docking/simple",
+		"vars": [
+			"tag_door"
+		]
+	},
+	{
+		"path": "/datum/computer/file/embedded_program/airlock",
+		"vars": [
+			"tag_exterior_door",
+			"tag_interior_door",
+			"tag_airpump",
+			"tag_chamber_sensor",
+			"tag_exterior_sensor",
+			"tag_interior_sensor",
+			"tag_airlock_mech_sensor",
+			"tag_shuttle_mech_sensor",
+			"state",
+			"target_state",
+			"cycle_to_external_air",
+			"tag_pump_out_external",
+			"tag_pump_out_internal",
+			"tag_air_alarm"
+		]
+	},
+	{
+		"path": "/obj/machinery/embedded_controller/radio/docking_port_multi",
+		"vars": [
+			"child_names",
+			"child_names_txt",
+			"child_tags_txt"
+		]
+	},
+	{
+		"path": "/datum/computer/file/embedded_program",
+		"vars": [
+			"memory",
+			"master",
+			"id_tag"
+		]
+	},
+	{
+		"path": "/obj/machinery/embedded_controller/radio/airlock/docking_port",
+		"vars": [
+			"display_name"
+		]
 	},
 	{
 	  "path": "/obj/machinery/embedded_controller/radio/airlock",
@@ -2423,6 +2499,45 @@
 			  "compressor",
 			  "doors",
 			  "door_status"
+		  ]
+	  },
+	  {
+		  "path": "/obj/item/weapon/stock_parts/radio/receiver",
+		  "vars": [
+			  "receive_and_write",
+			  "receive_and_call"
+		  ]
+	  },
+	  {
+		  "path": "/obj/item/weapon/stock_parts/radio/transmitter",
+		  "vars": [
+			  "range",
+			  "latency",
+			  "buffer"
+		  ]
+	  },
+	  {
+		  "path": "/obj/item/weapon/stock_parts/radio",
+		  "vars": [
+			  "frequency",
+			  "id_tag",
+			  "filter",
+			  "encryption",
+			  "multitool_extension"
+		  ]
+	  },
+	  {
+		  "path": "/obj/item/weapon/stock_parts/power/terminal",
+		  "vars": [
+			  "terminal_dir",
+			  "terminal"
+		  ]
+	  },
+	  {
+		  "path": "/obj/item/weapon/stock_parts/power/terminal",
+		  "vars": [
+			  "priority",
+			  "cached_channel"
 		  ]
 	  }
   ]

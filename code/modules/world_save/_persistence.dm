@@ -36,6 +36,15 @@
 // 			LAZYADD(A.all_doors, src)
 // 			areas_added += A
 
+/obj/item/weapon/storage/before_save()
+	startswith = null
+
+/obj/item/weapon/tank/before_save()
+	starting_pressure = null
+
+/obj/item/weapon/extinguisher/before_save()
+	starting_water = null
+
 /obj/structure/cable/after_deserialize()
 	var/turf/T = src.loc			// hide if turf is not intact
 	if(level==1) hide(!T.is_plating())

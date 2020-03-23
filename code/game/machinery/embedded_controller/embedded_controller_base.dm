@@ -6,7 +6,7 @@
 	var/on = 1
 
 /obj/machinery/embedded_controller/Initialize()
-	if(program)
+	if(!SSmapping.using_save && program)
 		program = new program(src)
 	return ..()
 

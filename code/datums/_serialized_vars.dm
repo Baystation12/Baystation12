@@ -431,7 +431,6 @@
 	LAZYADD(.[/obj/item/device/assembly/signaler], "delay")
 	LAZYADD(.[/obj/item/device/assembly/signaler], "airlock_wire")
 	LAZYADD(.[/obj/item/device/assembly/signaler], "connected")
-	LAZYADD(.[/obj/item/device/assembly/signaler], "radio_connection")
 	LAZYADD(.[/obj/item/device/assembly/signaler], "deadman")
 
 
@@ -1274,6 +1273,9 @@
 	LAZYADD(.[/obj/machinery/door/airlock], "door_color")
 	LAZYADD(.[/obj/machinery/door/airlock], "stripe_color")
 	LAZYADD(.[/obj/machinery/door/airlock], "symbol_color")
+	LAZYADD(.[/obj/machinery/door/airlock], "frequency")
+	LAZYADD(.[/obj/machinery/door/airlock], "shockedby")
+	LAZYADD(.[/obj/machinery/door/airlock], "cur_command")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -1323,6 +1325,88 @@
 	LAZYADD(.[/obj/machinery/door], "glass")
 	LAZYADD(.[/obj/machinery/door], "normalspeed")
 	LAZYADD(.[/obj/machinery/door], "health")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/embedded_controller
+	//
+	LAZYADD(.[/obj/machinery/embedded_controller], "on")
+	LAZYADD(.[/obj/machinery/embedded_controller], "program")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/computer/file/embedded_program/docking
+	//
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "tag_target")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "dock_state")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "control_mode")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "response_sent")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "resend_counter")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "override_enabled")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "received_confirm")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "docking_codes")
+	LAZYADD(.[/datum/computer/file/embedded_program/docking], "display_name")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/embedded_controller/radio/simple_docking_controller
+	//
+	LAZYADD(.[/obj/machinery/embedded_controller/radio/simple_docking_controller], "tag_door")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/computer/file/embedded_program/docking/simple
+	//
+	LAZYADD(.[/datum/computer/file/embedded_program/docking/simple], "tag_door")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/computer/file/embedded_program/airlock
+	//
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_exterior_door")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_interior_door")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_airpump")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_chamber_sensor")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_exterior_sensor")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_interior_sensor")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_airlock_mech_sensor")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_shuttle_mech_sensor")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "state")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "target_state")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "cycle_to_external_air")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_pump_out_external")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_pump_out_internal")
+	LAZYADD(.[/datum/computer/file/embedded_program/airlock], "tag_air_alarm")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/embedded_controller/radio/docking_port_multi
+	//
+	LAZYADD(.[/obj/machinery/embedded_controller/radio/docking_port_multi], "child_names")
+	LAZYADD(.[/obj/machinery/embedded_controller/radio/docking_port_multi], "child_names_txt")
+	LAZYADD(.[/obj/machinery/embedded_controller/radio/docking_port_multi], "child_tags_txt")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/computer/file/embedded_program
+	//
+	LAZYADD(.[/datum/computer/file/embedded_program], "memory")
+	LAZYADD(.[/datum/computer/file/embedded_program], "master")
+	LAZYADD(.[/datum/computer/file/embedded_program], "id_tag")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/embedded_controller/radio/airlock/docking_port
+	//
+	LAZYADD(.[/obj/machinery/embedded_controller/radio/airlock/docking_port], "display_name")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2705,6 +2789,50 @@
 	LAZYADD(.[/obj/machinery/computer/turbine_computer], "compressor")
 	LAZYADD(.[/obj/machinery/computer/turbine_computer], "doors")
 	LAZYADD(.[/obj/machinery/computer/turbine_computer], "door_status")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/weapon/stock_parts/radio/receiver
+	//
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio/receiver], "receive_and_write")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio/receiver], "receive_and_call")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/weapon/stock_parts/radio/transmitter
+	//
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio/transmitter], "range")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio/transmitter], "latency")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio/transmitter], "buffer")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/weapon/stock_parts/radio
+	//
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "frequency")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "id_tag")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "filter")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "encryption")
+	LAZYADD(.[/obj/item/weapon/stock_parts/radio], "multitool_extension")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/weapon/stock_parts/power/terminal
+	//
+	LAZYADD(.[/obj/item/weapon/stock_parts/power/terminal], "terminal_dir")
+	LAZYADD(.[/obj/item/weapon/stock_parts/power/terminal], "terminal")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/item/weapon/stock_parts/power/terminal
+	//
+	LAZYADD(.[/obj/item/weapon/stock_parts/power/terminal], "priority")
+	LAZYADD(.[/obj/item/weapon/stock_parts/power/terminal], "cached_channel")
 
 
 	for(var/type in .)
