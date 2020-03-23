@@ -28,7 +28,7 @@
 		list(mode_name="semi-auto", 	burst=1, fire_delay=null, move_delay=6,    burst_accuracy=list(0.4), dispersion=list(0.0)),
 		)
 
-	irradiate_non_cov = 7
+	irradiate_non_cov = 10
 
 /obj/item/weapon/gun/energy/plasmarifle/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)

@@ -26,7 +26,7 @@
 	else
 		visible_message("\icon[src] <span class='warning'>[src] drops into a combat crouch.</span>")
 
-	if(do_after(src, 10))
+	if(do_after(src, 5))
 		crouched = !crouched
 		icon_state = "hunter[crouched]"
 		if(crouched)
@@ -59,7 +59,7 @@
 	set name = "Turn Clockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the right.</span>")
-	if(do_after(src, 20))
+	if(do_after(src, 7))
 		facedir(GLOB.cw_dir[dir], 1)
 
 /obj/item/hunter_action/turn_ccw
@@ -75,7 +75,7 @@
 	set name = "Turn Counterclockwise"
 
 	visible_message("\icon[src] <span class='notice'>[src] shuffles to face the left.</span>")
-	if(do_after(src, 20))
+	if(do_after(src, 7))
 		facedir(GLOB.cww_dir[dir], 1)
 
 //see code\modules\mob\mob.dm
