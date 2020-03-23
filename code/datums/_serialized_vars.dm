@@ -2821,6 +2821,25 @@
 	LAZYADD(.[/obj/structure/lift], "lift")
 
 
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /obj/machinery/door/blast
+	//
+	LAZYADD(.[/obj/machinery/door/blast], "icon_state_open")
+	LAZYADD(.[/obj/machinery/door/blast], "icon_state_opening")
+	LAZYADD(.[/obj/machinery/door/blast], "icon_state_closed")
+	LAZYADD(.[/obj/machinery/door/blast], "icon_state_closing")
+	LAZYADD(.[/obj/machinery/door/blast], "icon_state_open_broken")
+	LAZYADD(.[/obj/machinery/door/blast], "icon_state_closed_broken")
+	LAZYADD(.[/obj/machinery/door/blast], "begins_closed")
+	LAZYADD(.[/obj/machinery/door/blast], "implicit_material")
+	LAZYADD(.[/obj/machinery/door/blast], "min_force")
+	LAZYADD(.[/obj/machinery/door/blast], "maxhealth")
+	LAZYADD(.[/obj/machinery/door/blast], "block_air_zones")
+	LAZYADD(.[/obj/machinery/door/blast], "explosion_resistance")
+	LAZYADD(.[/obj/machinery/door/blast], "pry_mod")
+
+
 	for(var/type in .)
 		for (var/subtype in subtypesof(type))
 			for (var/v in .[type])

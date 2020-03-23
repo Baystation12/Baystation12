@@ -2526,6 +2526,24 @@
 		  "vars": [
 			  "lift"
 		  ]
+	  },
+	  {
+		  "path": "/obj/machinery/door/blast",
+		  "vars": [
+			  "icon_state_open",
+			  "icon_state_opening",
+			  "icon_state_closed",
+			  "icon_state_closing",
+			  "icon_state_open_broken",
+			  "icon_state_closed_broken",
+			  "begins_closed",
+			  "implicit_material",
+			  "min_force",
+			  "maxhealth",
+			  "block_air_zones",
+			  "explosion_resistance",
+			  "pry_mod"
+		  ]
 	  }
   ]
   
