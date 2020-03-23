@@ -20,6 +20,7 @@
 	var/min_speed = 5 //What's the highest delay we can have?
 	var/max_speed = 1//What's the lowest number we can go to in terms of delay?
 	var/acceleration = 1 //By how much does our speed change per input?
+	var/braking_mode = 0 //1 = brakes active, -1 = purposefully reducing drag to slide.
 
 	//Advanced Damage Handling
 	var/datum/component_profile/comp_prof = /datum/component_profile
@@ -216,6 +217,82 @@
 		overlays += head_bg
 		overlays += mob_head
 
+/obj/vehicles/verb/verb_toggle_brakes()
+	set name = "Toggle Brakes"
+	set category = "Vehicle"
+	set src in view(1)
+
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+
+	var/list/driver_list = get_occupants_in_position("driver")
+	var/is_driver = FALSE
+	for(var/mob/driver in driver_list)
+		if(user == driver)
+			is_driver = TRUE
+			break
+	if(!is_driver)
+		to_chat(user,"<span class = notice'>You need to be the driver to do that.</span>")
+		return
+
+	toggle_brakes(user)
+
+/obj/vehicles/proc/toggle_brakes(var/mob/toggler)
+	var/message = ""
+	switch(braking_mode)
+		if(0)
+			braking_mode = 1
+			drag *= 3
+			message = "Braking system enabled."
+		if(1)
+			braking_mode = 0
+			drag = initial(drag)
+			message = "Braking system disabled."
+		if(-1)
+			message = "Enable brake safeties first."
+
+	if(toggler)
+		to_chat(toggler,"<span class = 'notice'>[message]</span>")
+
+/obj/vehicles/verb/verb_toggle_brake_safeties()
+	set name = "Toggle Brake Safeties"
+	set category = "Vehicle"
+	set src in view(1)
+
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+
+	var/list/driver_list = get_occupants_in_position("driver")
+	var/is_driver = FALSE
+	for(var/mob/driver in driver_list)
+		if(user == driver)
+			is_driver = TRUE
+			break
+	if(!is_driver)
+		to_chat(user,"<span class = notice'>You need to be the driver to do that.</span>")
+		return
+
+	toggle_brake_safeties(user)
+
+/obj/vehicles/proc/toggle_brake_safeties(var/mob/toggler)
+	var/message = ""
+	switch(braking_mode)
+		if(0)
+			braking_mode = -1
+			drag /= 2
+			message = "Braking system safeties disabled."
+		if(-1)
+			braking_mode = 0
+			drag = initial(drag)
+			message = "Braking system safeties enabled."
+		if(0)
+			message = "Disable the brakes first."
+
+	if(toggler)
+		to_chat(toggler,"<span class = 'notice'>[message]</span>")
+
 /obj/vehicles/Move()
 	if(anchored)
 		anchored = 0
@@ -225,40 +302,44 @@
 		. = ..()
 	update_object_sprites()
 
-/obj/vehicles/proc/movement_loop_x()
-	set background = 1
-	moving_x = 1
-	while (speed[1] != 0)
-		sleep(max(min_speed - abs(speed[1]),max_speed))
-		if(speed[1] > 0)
-			. = Move(get_step(loc,EAST),EAST)
-		else
-			. = Move(get_step(loc,WEST),WEST)
-		if(last_moved_axis != 1)
-			if(speed[1] > 0)
-				speed[1] = max(speed[1] - drag,0)
-			else
-				speed[1] = min(speed[1] + drag,0)
-		if(world.time >= next_move_input_at)
-			last_moved_axis = 0
-		if(move_sound)
-			playsound(loc,move_sound,75,0,4)
-		if(!.)
-			speed[1] = 0
-	moving_x = 0
+/obj/vehicles/proc/get_speedval_for_dir(var/dir_to_obj)
+	switch(dir_to_obj)
+		if(1 || 2)
+			return speed[2]
+		if(4 || 8)
+			return speed[1]
+
+/obj/vehicles/proc/collide_with_obstacle(var/speedval,var/atom/obstacle)
+	speedval = 0
+	if(prob(33))
+		visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")
+
+/obj/vehicles/Bump(var/atom/obstacle)
+	. = ..()
+	collide_with_obstacle(get_speedval_for_dir(get_dir(src,obstacle)),obstacle)
+
 
 /obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
 	set background = 1
-	if(speed_index_target == 1)
-		moving_x = 1
-	else
-		moving_y = 1
+	switch(speed_index_target)
+		if(1)
+			moving_x = 1
+		if(2)
+			moving_y = 1
 	while (speed[speed_index_target] != 0)
 		sleep(max(min_speed - abs(speed[2]),max_speed))
 		if(speed[speed_index_target] > 0)
-			. = Move(get_step(loc,NORTH),NORTH)
+			switch(speed_index_target)
+				if(1)
+					. = Move(get_step(loc,EAST),EAST)
+				if(2)
+					. = Move(get_step(loc,NORTH),NORTH)
 		else
-			. = Move(get_step(loc,SOUTH),SOUTH)
+			switch(speed_index_target)
+				if(1)
+					. = Move(get_step(loc,WEST),WEST)
+				if(2)
+					. = Move(get_step(loc,SOUTH),SOUTH)
 		if(last_moved_axis != 2)
 			if(speed[speed_index_target] > 0)
 				speed[speed_index_target] = max(speed[speed_index_target] - drag,0)
@@ -268,36 +349,10 @@
 			last_moved_axis = 0
 		if(move_sound)
 			playsound(loc,move_sound,75,0,4)
-		if(!.)
-			collide_with_item(speed[speed_index_target])
-			speed[speed_index_target] = 0 //KILL ALL SPEED, TODO: REPLACE WITH DYNAMIC CRASH SYSTEM
 	if(speed_index_target == 1)
 		moving_x = 0
 	else
 		moving_y = 0
-
-/obj/vehicles/proc/movement_loop_y()
-	set background = 1
-	moving_y = 1
-	while (speed[2] != 0)
-		sleep(max(min_speed - abs(speed[2]),max_speed))
-		if(speed[2] > 0)
-			. = Move(get_step(loc,NORTH),NORTH)
-		else
-			. = Move(get_step(loc,SOUTH),SOUTH)
-		if(last_moved_axis != 2)
-			if(speed[2] > 0)
-				speed[2] = max(speed[2] - drag,0)
-			else
-				speed[2] = min(speed[2] + drag,0)
-		if(world.time >= next_move_input_at)
-			last_moved_axis = 0
-		if(move_sound)
-			playsound(loc,move_sound,75,0,4)
-		if(!.)
-			collide_with_item(speed[2]
-			speed[2] = 0 //KILL ALL SPEED, TODO: REPLACE WITH DYNAMIC CRASH SYSTEM
-	moving_y = 0
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
@@ -362,10 +417,10 @@
 
 	if(speed[1] != 0 && !moving_x)
 		spawn()
-			movement_loop_x()
+			movement_loop(1)
 	else if(speed[2] != 0 && !moving_y)
 		spawn()
-			movement_loop_y()
+			movement_loop(2)
 	next_move_input_at = world.time + acceleration
 
 /obj/vehicles/verb/verb_inspect_components()

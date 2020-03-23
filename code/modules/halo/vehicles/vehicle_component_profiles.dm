@@ -203,7 +203,7 @@
 		return
 	else if(new_integ > initial(integrity))
 		integrity = initial(integrity)
-	else if(new_integ < 0)
+	else if(new_integ <= 0)
 		integrity = 0
 		full_integ_loss()
 	else
