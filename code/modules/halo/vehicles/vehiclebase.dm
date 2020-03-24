@@ -411,6 +411,9 @@
 		if(WEST)
 			last_moved_axis = 1
 			speed[1] = max(speed[1] - acceleration,-min_speed)
+	if(braking_mode == 1) //If we're braking, we don't get the leeway in movement.
+		last_moved_axis = 0
+
 
 	if(speed[1] != 0 && !moving_x)
 		spawn()
