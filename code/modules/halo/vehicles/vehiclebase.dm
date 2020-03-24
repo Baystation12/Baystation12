@@ -10,6 +10,7 @@
 	var/guns_disabled = 0
 	var/movement_destroyed = 0
 	var/block_enter_exit //Set this to block entering/exiting.
+	var/can_traverse_zs = 0
 
 	var/next_move_input_at = 0//When can we send our next movement input?
 	var/moving_x = 0

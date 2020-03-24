@@ -15,37 +15,52 @@
 /mob/proc/zMove(direction)
 	if(eyeobj)
 		return eyeobj.zMove(direction)
-	if(!can_ztravel())
-		to_chat(src, "<span class='warning'>You lack means of travel in that direction.</span>")
-		return
-
 	var/turf/start = loc
-	if(!istype(start))
-		to_chat(src, "<span class='notice'>You are unable to move from here.</span>")
-		return 0
-		
-	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
+	var/atom/movable/to_move = src
+	if(!istype(loc,/obj/vehicles))
+		if(!can_ztravel())
+			to_chat(src, "<span class='warning'>You lack means of travel in that direction.</span>")
+			return
+
+		if(!istype(start))
+			to_chat(src, "<span class='notice'>You are unable to move from here.</span>")
+			return 0
+	else
+		var/obj/vehicles/v = loc
+		if(!v.can_traverse_zs)
+			to_chat(src,"<span class = 'notice'>Your vehicle can't traverse z-levels</span>")
+			return
+		if(!v.active)
+			to_chat(src,"<span class = 'notice'>Your vehicle needs to be active to move z-levels.</span>")
+			return
+		if(v.movement_destroyed)
+			to_chat(src,"<span class = 'notice'>You need functioning movement to change z-levels.</span>")
+			return
+		start = v.loc
+
+	var/turf/destination = (direction == UP) ? GetAbove(to_move) : GetBelow(to_move)
 	if(!destination)
 		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
 		return 0
-	
-	if(!start.CanZPass(src, direction))
+
+	if(!start.CanZPass(to_move, direction))
 		to_chat(src, "<span class='warning'>\The [start] is in the way.</span>")
 		return 0
-	if(!destination.CanZPass(src, direction))
+	if(!destination.CanZPass(to_move, direction))
 		to_chat(src, "<span class='warning'>You bump against \the [destination].</span>")
 		return 0
 
-	var/area/area = get_area(src)
-	if(direction == UP && area.has_gravity() && !can_overcome_gravity())
-		to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
-		return 0
+	if(to_move == src)
+		var/area/area = get_area(to_move)
+		if(direction == UP && area.has_gravity() && !can_overcome_gravity())
+			to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
+			return 0
 
 	for(var/atom/A in destination)
-		if(!A.CanPass(src, start, 1.5, 0))
+		if(!A.CanPass(to_move, start, 1.5, 0))
 			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
 			return 0
-	Move(destination)
+	to_move.Move(destination)
 	return 1
 
 /mob/proc/can_overcome_gravity()
