@@ -36,6 +36,7 @@
 		if(v.movement_destroyed)
 			to_chat(src,"<span class = 'notice'>You need functioning movement to change z-levels.</span>")
 			return
+		to_move = v
 		start = v.loc
 
 	var/turf/destination = (direction == UP) ? GetAbove(to_move) : GetBelow(to_move)

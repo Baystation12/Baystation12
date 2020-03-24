@@ -301,6 +301,11 @@
 		. = ..()
 	update_object_sprites()
 
+/obj/vehicles/fall()
+	if(can_traverse_zs && active)
+		return
+	. = ..()
+
 /obj/vehicles/proc/collide_with_obstacle(var/atom/obstacle)
 	speed[1] = 0
 	speed[2] = 0
