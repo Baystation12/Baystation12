@@ -61,7 +61,7 @@
 	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
-	to_chat(usr,"<span class = 'notice'>You start prepping [src] for [active ? "takeoff" : "landing"].</span>")
+	to_chat(usr,"<span class = 'notice'>You start prepping [src] for [active ? "landing" : "takeoff"].</span>")
 	if(!do_after(usr,TAKEOFF_LAND_DELAY,src))
 		return
 	if(active)
