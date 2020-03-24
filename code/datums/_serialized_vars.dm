@@ -2009,6 +2009,7 @@
 	LAZYADD(.[/turf], "dir")
 	LAZYADD(.[/turf], "decals")
 	LAZYADD(.[/turf], "air")
+	LAZYADD(.[/turf], "is_on_fire")
 
 
 	//////////////////////////////////////////////////////////////////////////////

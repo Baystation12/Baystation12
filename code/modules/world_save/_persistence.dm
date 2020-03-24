@@ -9,6 +9,10 @@
 
 /turf/simulated/before_save()
 	..()
+	if(fire && fire.firelevel > 0)
+		is_on_fire = fire.firelevel
+	else
+		is_on_fire = 0
 	if(zone)
 		c_copy_air()
 
@@ -17,6 +21,9 @@
 
 /datum
 	var/should_save = TRUE
+
+/turf
+	var/is_on_fire = FALSE
 
 /obj/fire
 	should_save = FALSE
@@ -45,10 +52,6 @@
 /obj/after_deserialize()
 	..()
 	queue_icon_update()
-
-/turf/after_deserialize()
-	. = ..()
-	needs_air_update = TRUE
 
 /obj/machinery/embedded_controller
 	var/saved_memory
@@ -111,6 +114,10 @@
 
 /turf/after_deserialize()
 	..()
+	if(is_on_fire)
+		hotspot_expose(700, 2)
+	is_on_fire = FALSE
+	needs_air_update = TRUE
 	queue_icon_update()
 	if(dynamic_lighting)
 		lighting_build_overlay()

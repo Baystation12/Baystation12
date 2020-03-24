@@ -37,9 +37,9 @@
 		config.enter_allowed = 0
 		// Prepare atmosphere for saving.
 		SSair.can_fire = FALSE
-		if (state != SS_IDLE)
-		report_progress("ZAS Rebuild initiated. Waiting for current air tick to complete before continuing.")
-		while (state != SS_IDLE)
+		if (SSair.state != SS_IDLE)
+			report_progress("ZAS Rebuild initiated. Waiting for current air tick to complete before continuing.")
+		while (SSair.state != SS_IDLE)
 			stoplag()
 
 		// Prepare all atmospheres to save.
@@ -49,7 +49,7 @@
 		while (SSair.zones.len)
 			var/zone/zone = SSair.zones[SSair.zones.len]
 			SSair.zones.len--
-			SSair.zone.c_invalidate()
+			zone.c_invalidate()
 
 		//
 		// 	ACTUAL SAVING SECTION

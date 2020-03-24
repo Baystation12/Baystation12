@@ -1796,7 +1796,8 @@
 			"pixel_y",
 			"dir",
 			"decals",
-			"air"
+			"air",
+			"is_on_fire"
 		]
 	},
 	{
