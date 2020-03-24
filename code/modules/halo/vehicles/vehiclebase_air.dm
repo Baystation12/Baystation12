@@ -62,7 +62,7 @@
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
 	to_chat(usr,"<span class = 'notice'>You start prepping [src] for [active ? "takeoff" : "landing"].</span>")
-	if(!do_after(src,TAKEOFF_LAND_DELAY))
+	if(!do_after(usr,TAKEOFF_LAND_DELAY,src))
 		return
 	if(active)
 		land_vehicle()
@@ -110,7 +110,7 @@
 		to_chat(usr,"<span class = 'notice'>You need to be in the air to do that!.</span>")
 		return
 	to_chat(usr,"<span class = 'notice'>You start prepping [src] for long-range flight..</span>")
-	if(!do_after(src,WAYPOINT_FLIGHT_DELAY))
+	if(!do_after(usr,WAYPOINT_FLIGHT_DELAY,src))
 		return
 	proc_fly_to_waypoint()
 
