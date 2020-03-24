@@ -1,0 +1,7 @@
+author: "WezYo"
+delete-after: True
+changes: 
+  - rscadd: "Added UI buttons for pAI"
+  - rscadd: "Added a pAI preview in the character setup screen"
+  - rscadd: "Added a flashlight to pAI"
+  - rscdel: "Removed several now redundant verbs from pAI"
