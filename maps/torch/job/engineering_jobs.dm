@@ -63,6 +63,7 @@
 		"Damage Control Technician",
 		"Electrician",
 		"Atmospheric Technician",
+		"IT Technician",
 		)
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer
 	allowed_branches = list(
