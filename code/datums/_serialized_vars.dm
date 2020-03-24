@@ -2008,6 +2008,7 @@
 	LAZYADD(.[/turf], "pixel_y")
 	LAZYADD(.[/turf], "dir")
 	LAZYADD(.[/turf], "decals")
+	LAZYADD(.[/turf], "air")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2505,13 +2506,6 @@
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
-	// /turf/simulated
-	//
-	LAZYADD(.[/turf/simulated], "air")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
 	// /turf/simulated/mineral
 	//
 	LAZYADD(.[/turf/simulated/mineral], "resources")
@@ -2548,19 +2542,6 @@
 	LAZYADD(.[/datum/wrapper/area], "power_light")
 	LAZYADD(.[/datum/wrapper/area], "power_equip")
 	LAZYADD(.[/datum/wrapper/area], "power_environ")
-
-
-	//////////////////////////////////////////////////////////////////////////////
-	//
-	// /zone
-	//
-	LAZYADD(.[/zone], "name")
-	LAZYADD(.[/zone], "contents")
-	LAZYADD(.[/zone], "air")
-	LAZYADD(.[/zone], "fire_tiles")
-	LAZYADD(.[/zone], "edges")
-	LAZYADD(.[/zone], "fuel_objs")
-	LAZYADD(.[/zone], "last_air_temperature")
 
 
 	//////////////////////////////////////////////////////////////////////////////

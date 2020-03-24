@@ -1795,7 +1795,8 @@
 			"pixel_x",
 			"pixel_y",
 			"dir",
-			"decals"
+			"decals",
+			"air"
 		]
 	},
 	{
@@ -2239,12 +2240,6 @@
 		 ]
 	  },
 	  {
-		"path": "/turf/simulated",
-		"vars": [
-			"air"
-		]
-	  },
-	  {
 		 "path": "/turf/simulated/mineral",
 		 "vars": [
 		   "resources",
@@ -2278,18 +2273,6 @@
 			 "power_light",
 			 "power_equip",
 			 "power_environ"
-		 ]
-	  },
-	  {
-		 "path": "/zone",
-		 "vars": [
-			 "name",
-			 "contents",
-			 "air",
-			 "fire_tiles",
-			 "edges",
-			 "fuel_objs",
-			 "last_air_temperature"
 		 ]
 	  },
 	  {

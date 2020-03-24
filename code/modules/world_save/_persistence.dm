@@ -2,17 +2,27 @@
 	var/version = 1
 
 /datum/proc/after_save()
+	..()
 
 /datum/proc/before_save()
+	..()
 
 /turf/simulated/before_save()
+	..()
 	if(zone)
 		c_copy_air()
 
 /datum/proc/after_deserialize()
+	..()
 
 /datum
 	var/should_save = TRUE
+
+/obj/fire
+	should_save = FALSE
+
+/obj/effect/fake_fire
+	should_save = FALSE
 
 /obj/effect/expl_particles
 	should_save = FALSE
@@ -35,6 +45,10 @@
 /obj/after_deserialize()
 	..()
 	queue_icon_update()
+
+/turf/after_deserialize()
+	. = ..()
+	needs_air_update = TRUE
 
 /obj/machinery/embedded_controller
 	var/saved_memory
@@ -108,10 +122,12 @@
 // 	needs_update = TRUE
 
 /atom/movable/lighting_overlay/after_deserialize()
+	..()
 	loc = null
 	qdel(src)
 
 /area/after_deserialize()
+	..()
 	power_change()
 
 /datum/proc/get_saved_vars()

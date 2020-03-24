@@ -36,9 +36,20 @@
 		if(config.enter_allowed) reallow = 1
 		config.enter_allowed = 0
 		// Prepare atmosphere for saving.
+		SSair.can_fire = FALSE
+		if (state != SS_IDLE)
+		report_progress("ZAS Rebuild initiated. Waiting for current air tick to complete before continuing.")
+		while (state != SS_IDLE)
+			stoplag()
+
+		// Prepare all atmospheres to save.
 		for(var/datum/pipe_network/net in SSmachines.pipenets)
 			for(var/datum/pipeline/line in net.line_members)
 				line.temporarily_store_air()
+		while (SSair.zones.len)
+			var/zone/zone = SSair.zones[SSair.zones.len]
+			SSair.zones.len--
+			SSair.zone.c_invalidate()
 
 		//
 		// 	ACTUAL SAVING SECTION
@@ -76,6 +87,9 @@
 		//
 		// Clear the refmaps/do other cleanup to end the save.
 		serializer.Clear()
+		// Reboot air subsystem.
+		SSair.reboot()
+		// Let people back in
 		if(reallow) config.enter_allowed = 1
 	catch (var/exception/e)
 		to_world_log("Save failed on line [e.line], file [e.file] with message: '[e]'.")
