@@ -300,21 +300,14 @@
 		. = ..()
 	update_object_sprites()
 
-/obj/vehicles/proc/get_speedval_for_dir(var/dir_to_obj)
-	switch(dir_to_obj)
-		if(1 || 2)
-			return speed[2]
-		if(4 || 8)
-			return speed[1]
-
-/obj/vehicles/proc/collide_with_obstacle(var/speedval,var/atom/obstacle)
-	speedval = 0
-	if(prob(33))
-		visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")
+/obj/vehicles/proc/collide_with_obstacle(var/atom/obstacle)
+	speed[1] = 0
+	speed[2] = 0
+	visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")
 
 /obj/vehicles/Bump(var/atom/obstacle)
 	. = ..()
-	collide_with_obstacle(get_speedval_for_dir(get_dir(src,obstacle)),obstacle)
+	collide_with_obstacle(obstacle)
 
 /obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
 	set background = 1
