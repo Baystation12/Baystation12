@@ -45,11 +45,10 @@
 	description = "A regenerative foaming agent which is capable of fixing bones and stopping bleeding"
 	reagent_state = LIQUID
 	color = "#edd9c0"
-	metabolism = 0 //Biofoam is used very quickly
+	metabolism = 1 //Biofoam is used quickly, and it uses more the more it does.
 	overdose = 10 //Very careful with biofoam, don't want expansion into your lungs, do we now?
 	scannable = 1
 	flags = AFFECTS_DEAD
-	var/did_work = 0 //Did we do any work this processing tick
 
 /datum/reagent/biofoam/proc/check_and_consume_cost(var/cost)
 	if(volume >= cost)
@@ -110,8 +109,6 @@
 				embedded.loc = M.loc //And placing it on the ground below
 				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")
 
-
-
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.
 	if(istype(M,/mob/living/carbon/human))
 		M.custom_pain("You feel a searing pain in your veins",3)
@@ -121,8 +118,6 @@
 		mend_internal(M)
 		spawn(5)
 			M.add_chemical_effect(CE_PAINKILLER, 5)
-	if(!did_work)
-		holder.remove_reagent("biofoam",volume)
 
 /datum/reagent/biofoam/overdose(var/mob/living/carbon/M)
 	if(istype(M,/mob/living/carbon/human))
