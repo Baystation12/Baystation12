@@ -307,7 +307,7 @@
 
 /obj/vehicles/Bump(var/atom/obstacle)
 	. = ..()
-	collide_with_obstacle(get_speedval_index_for_dir(obstacle)
+	collide_with_obstacle(obstacle)
 
 /obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
 	set background = 1
