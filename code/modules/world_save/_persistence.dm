@@ -2,10 +2,8 @@
 	var/version = 1
 
 /datum/proc/after_save()
-	..()
 
 /datum/proc/before_save()
-	..()
 
 /turf/simulated/before_save()
 	..()
@@ -17,7 +15,6 @@
 		c_copy_air()
 
 /datum/proc/after_deserialize()
-	..()
 
 /datum
 	var/should_save = TRUE
@@ -89,7 +86,7 @@
 
 /obj/item/weapon/extinguisher/after_deserialize()
 	..()
-	starting_water = 0	
+	starting_water = 0
 
 /obj/structure/cable/after_deserialize()
 	..()
