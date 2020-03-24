@@ -21,13 +21,18 @@
 
 	occupants = list(13,1)
 
-	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
+	exposed_positions = list("driver" = 10)//Passengers could technically be hit by bullets through the troop bay.
 
 	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
 	vehicle_carry_size = ITEM_SIZE_VEHICLE
 	capacity_flag = ITEM_SIZE_VEHICLE_LARGE
 
 	light_color = "#E1FDFF"
+
+	min_speed = 17.25
+	max_speed = 2.25
+	acceleration = 6
+	drag = 3.5
 
 /obj/vehicles/air/pelican/update_object_sprites()
 
@@ -87,9 +92,14 @@
 
 	occupants = list(13,1)
 
-	exposed_positions = list("driver" = 20,"passengers" = 15)//Passengers could technically be hit by bullets through the troop bay.
+	exposed_positions = list("driver" = 10)//Passengers could technically be hit by bullets through the troop bay.
 
 	light_color = "#E1FDFF"
+
+	min_speed = 17.25
+	max_speed = 2.25
+	acceleration = 6
+	drag = 3.5
 
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"
@@ -102,7 +112,6 @@
 	icon_state = "inni-base"
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. This one has a red fist painted onto the armor. A 40mm Chain-Gun is mounted on the nose."
 	faction = "innie"
-	occupants = list(13,1)
 
 	comp_prof = /datum/component_profile/pelican/urf
 

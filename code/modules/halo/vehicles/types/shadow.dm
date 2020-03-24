@@ -12,7 +12,6 @@
 
 	comp_prof = /datum/component_profile/shadow
 
-	vehicle_move_delay = 2
 	exposed_positions = list("passenger" = 15,"driver" = 10,"gunner" = 20)
 
 	occupants = list(4,1)
@@ -23,6 +22,9 @@
 	move_sound = 'code/modules/halo/sounds/ghost_move.ogg'
 
 	light_color = "#C1CEFF"
+
+	min_speed = 8
+	max_speed = 3
 
 /obj/vehicles/shadow/update_object_sprites()
 	. = ..()

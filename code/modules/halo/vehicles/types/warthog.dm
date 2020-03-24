@@ -24,6 +24,9 @@
 
 	light_color = "#E1FDFF"
 
+	min_speed = 8.5
+	max_speed = 2.5
+
 /obj/vehicles/warthog/on_death()
 	. = ..()
 	guns_disabled = 0

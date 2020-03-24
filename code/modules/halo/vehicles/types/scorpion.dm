@@ -25,6 +25,10 @@
 
 	light_color = "#E1FDFF"
 
+	min_speed = 14
+	max_speed = 6
+	drag = 2
+
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
 	resistances = list("brute"=65,"burn"=50,"emp"=40,"bomb"=65)

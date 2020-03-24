@@ -26,6 +26,10 @@
 
 	light_color = "#C1CEFF"
 
+	min_speed = 6.25
+	max_speed = 2.25
+	drag = 1.25
+
 /obj/vehicles/ghost/update_object_sprites()
 	. = ..()
 	var/list/offsets_to_use = sprite_offsets["[dir]"]

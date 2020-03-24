@@ -24,6 +24,9 @@
 
 	light_color = "#FEFFE1"
 
+	min_speed = 8.75
+	max_speed = 2.75
+
 /obj/vehicles/bull/update_object_sprites()
 	. = ..()
 	pixel_x = 0

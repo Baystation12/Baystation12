@@ -25,6 +25,10 @@
 
 	light_color = "#C1CEFF"
 
+	min_speed = 13.75
+	max_speed = 5.75
+	drag = 2
+
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()
 	if(dir == EAST || dir == WEST)
