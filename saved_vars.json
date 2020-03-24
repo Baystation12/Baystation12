@@ -239,13 +239,161 @@
 	  ]
 	},
 	{
+		"path": "/mob/living",
+		"vars": [
+			"maxHealth",
+			"health",
+			"last_special",
+			"t_phoron",
+			"t_oxygen",
+			"t_sl_gas",
+			"t_n2",
+			"now_pushing",
+			"mob_bump_flag",
+			"mob_swap_flags",
+			"mob_push_flags",
+			"mob_always_swap",
+			"silent",
+			"update_slimes",
+			"on_fire",
+			"fire_stacks",
+			"failed_last_breath",
+			"possession_candidate",
+			"eye_blind",
+			"eye_blurry",
+			"ear_damage",
+			"stuttering",
+			"slurring",
+			"last_resist",
+			"auras",
+			"job"
+		]
+	},
+	{
 	  "path": "/mob/living/bot",
 	  "vars": [
 		"on",
 		"open",
 		"locked",
-		"will_patrol"
+		"emagged",
+		"light_strength",
+		"busy",
+		"target",
+		"obstacle",
+		"ignore_list",
+		"patrol_path",
+		"target_path",
+		"wait_if_pulled",
+		"will_patrol",
+		"patrol_speed",
+		"target_speed",
+		"min_target_dist",
+		"max_target_dist",
+		"max_patrol_dist",
+		"RequiresAccessToToggle",
+		"target_patience",
+		"frustration",
+		"max_frustration"
 	  ]
+	},
+	{
+		"path": "/mob/living/bot/secbot/ed209",
+		"vars": [
+			"shot_delay",
+			"last_shot"
+		]
+	},
+	{
+		"path": "/mob/living/bot/cleanbot",
+		"vars": [
+			"cleaning",
+			"screwloose",
+			"oddbutton",
+			"blood",
+			"target_types"
+		]
+	},
+	{
+		"path": "/mob/living/bot/floorbot",
+		"vars": [
+			"amount",
+			"maxAmount",
+			"tilemake",
+			"improvefloors",
+			"eattiles",
+			"maketiles",
+			"boxtype",
+			"floor_build_type"
+		]
+	},
+	{
+		"path": "/mob/living/bot/medbot",
+		"vars": [
+			"skin",
+			"last_newpatient_speak",
+			"vocal",
+			"reagent_glass",
+			"injection_amount",
+			"heal_threshold",
+			"use_beaker",
+			"declare_treatment"
+		]
+	},
+	{
+		"path": "/mob/living/bot/mulebot",
+		"vars": [
+			"load",
+			"paused",
+			"crates_only",
+			"auto_return",
+			"safety",
+			"targetName",
+			"home",
+			"homeName",
+			"amount"
+		]
+	},
+	{
+		"path": "/mob/living/bot/farmbot",
+		"vars": [
+			"action",
+			"waters_trays",
+			"refills_water",
+			"uproots_weeds",
+			"replaces_nutriment",
+			"collects_produce",
+			"removes_dead",
+			"tank"
+		]
+	},
+	{
+		"path": "/mob/living/carbon",
+		"vars": [
+			"life_tick",
+			"handcuffed",
+			"surgeries_in_progress",
+			"pose",
+			"chem_effects",
+			"chem_doses",
+			"bloodstr",
+			"touching",
+			"losebreath",
+			"coughedtime",
+			"cpr_time",
+			"lastpuke",
+			"nutrition",
+			"hydration",
+			"internal",
+			"last_taste_time",
+			"last_taste_text",
+			"internal_organs",
+			"organs",
+			"organs_by_name",
+			"internal_organs_by_name",
+			"stasis_sources",
+			"stasis_value",
+			"player_triggered_sleeping"
+		]
 	},
 	{
 	  "path": "/mob/living/carbon/slime",
@@ -254,17 +402,108 @@
 	  ]
 	},
 	{
+		"path": "/mob/living/silicon",
+		"vars": [
+			"syndicate",
+			"speech_synthesizer_langs",
+			"speak_statement",
+			"speak_exclamation",
+			"speak_query",
+			"pose",
+			"local_transmit",
+			"sensor_mode",
+			"next_alarm_notice",
+			"queued_alarms",
+			"access_rights",
+			"idcard"
+		]
+	},
+	{
 	  "path": "/mob/living/silicon/robot",
 	  "vars": [
-		"name",
+		"lights_on",
+		"power_efficiency",
+		"sight_mode",
+		"custom_name",
+		"custom_sprite",
+		"crisis",
+		"crisis_override",
+		"module_category",
 		"module",
-		"stat",
+		"module_active",
 		"module_state_1",
 		"module_state_2",
+		"module_state_3",
 		"cell",
 		"components",
-		"mmi"
+		"mmi",
+		"storage",
+		"opened",
+		"emagged",
+		"wiresexposed",
+		"locked",
+		"has_power",
+		"spawn_module",
+		"ident",
+		"viewalerts",
+		"modtype",
+		"lower_mod",
+		"jetpack",
+		"jeton",
+		"killswitch",
+		"killswitch_time",
+		"weapon_lock",
+		"weaponlock_time",
+		"lawupdate",
+		"lockcharge",
+		"speed",
+		"scrambledcodes",
+		"tracking_entities",
+		"braintype",
+		"intenselight",
+		"vtec",
+		"camera"
 	  ]
+	},
+	{
+		"path": "/mob/living/silicon/robot/drone",
+		"vars": [
+			"mail_destination",
+			"hat",
+			"hat_x_offset",
+			"hat_y_offset"
+		]
+	},
+	{
+		"path": "/mob/living/silicon/pai",
+		"vars": [
+			"network",
+			"camera",
+			"ram",
+			"software",
+			"userDNA",
+			"card",
+			"chassis",
+			"master",
+			"master_dna",
+			"pai_law0",
+			"pai_laws",
+			"silence_time",
+			"screen",
+			"subscreen",
+			"secHUD",
+			"medHUD",
+			"medical_cannotfind",
+			"medicalActive1",
+			"medicalActive2",
+			"security_cannotfind",
+			"securityActive1",
+			"securityActive2",
+			"hackdoor",
+			"hackprogress",
+			"hack_aborted",
+			"translator_on"
+		]
 	},
 	{
 	  "path": "/mob/living/simple_animal/cat",
@@ -1803,14 +2042,81 @@
 	{
 		"path": "/mob",
 		"vars": [
-			"real_name",
+			"mob_flags",
+			"last_quick_move_time",
 			"mind",
+			"lastKnownIP",
+			"computer_id",
+			"last_ckey",
 			"contents",
+			"stat",
+			"damageoverlaytemp",
+			"machine",
+			"sdisabilities",
+			"disabilities",
+			"pulling",
+			"other_mobs",
+			"next_move",
+			"hand",
+			"real_name",
+			"bhunger",
+			"druggy",
+			"confused",
+			"sleeping",
+			"resting",
+			"lying",
+			"lying_prev",
+			"radio_interrupt_cooldown",
+			"unacidable",
+			"pinned",
+			"embedded",
+			"languages",
+			"species_language",
+			"only_species_language",
+			"speak_emote",
+			"emote_type",
+			"facing_dir",
+			"timeofdeath",
+			"bodytemperature",
+			"a_intent",
+			"move_intent",
+			"buckled",
+			"l_hand",
+			"r_hand",
+			"back",
+			"s_active",
+			"wear_mask",
+			"grabbed_by",
+			"in_throw_mode",
+			"inertia_dir",
+			"can_pull_size",
+			"can_pull_mobs",
 			"dna",
+			"active_genes",
+			"mutations",
+			"radiation",
+			"voice_name",
+			"faction",
+			"blinded",
+			"ear_deaf",
+			"LAssailant",
+			"status_flagS",
+			"lastarea",
+			"digitalcamo",
+			"control_object",
+			"universal_speak",
+			"universal_understand",
+			"shouldnt_see",
+			"mob_size",
+			"paralysis",
+			"stunned",
+			"weakness",
+			"drowsyness",
+			"flavor_text",
+			"skillset",
+			"additional_vision_handlers",
 			"feet_blood_color",
 			"gender",
-			"languages",
-			"loc",
 			"id_tag"
 		]
 	},
@@ -2568,7 +2874,7 @@
 		},
 		{
 			"path": "/obj/effect/fluid",
-			"var": [
+			"vars": [
 				"fluid_amount",
 				"start_loc",
 				"equalizing_fluids",
@@ -2579,9 +2885,17 @@
 		},
 		{
 			"path": "/obj/effect/effect/smoke/chem",
-			"var": [
+			"vars": [
 				"splash_amount",
 				"destination"
+			]
+		},
+		{
+			"path": "/datum/skillset",
+			"vars": [
+				"skill_list",
+				"owner",
+				"skill_buffs"
 			]
 		}
   ]

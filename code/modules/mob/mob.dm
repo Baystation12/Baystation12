@@ -47,7 +47,8 @@
 
 /mob/Initialize()
 	. = ..()
-	skillset = new skillset(src)
+	if(!SSmapping.using_save)
+		skillset = new skillset(src)
 	if(!move_intent)
 		move_intent = move_intents[1]
 	if(ispath(move_intent))

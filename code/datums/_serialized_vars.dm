@@ -266,12 +266,168 @@
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
+	// /mob/living
+	//
+	LAZYADD(.[/mob/living], "maxHealth")
+	LAZYADD(.[/mob/living], "health")
+	LAZYADD(.[/mob/living], "last_special")
+	LAZYADD(.[/mob/living], "t_phoron")
+	LAZYADD(.[/mob/living], "t_oxygen")
+	LAZYADD(.[/mob/living], "t_sl_gas")
+	LAZYADD(.[/mob/living], "t_n2")
+	LAZYADD(.[/mob/living], "now_pushing")
+	LAZYADD(.[/mob/living], "mob_bump_flag")
+	LAZYADD(.[/mob/living], "mob_swap_flags")
+	LAZYADD(.[/mob/living], "mob_push_flags")
+	LAZYADD(.[/mob/living], "mob_always_swap")
+	LAZYADD(.[/mob/living], "silent")
+	LAZYADD(.[/mob/living], "update_slimes")
+	LAZYADD(.[/mob/living], "on_fire")
+	LAZYADD(.[/mob/living], "fire_stacks")
+	LAZYADD(.[/mob/living], "failed_last_breath")
+	LAZYADD(.[/mob/living], "possession_candidate")
+	LAZYADD(.[/mob/living], "eye_blind")
+	LAZYADD(.[/mob/living], "eye_blurry")
+	LAZYADD(.[/mob/living], "ear_damage")
+	LAZYADD(.[/mob/living], "stuttering")
+	LAZYADD(.[/mob/living], "slurring")
+	LAZYADD(.[/mob/living], "last_resist")
+	LAZYADD(.[/mob/living], "auras")
+	LAZYADD(.[/mob/living], "job")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
 	// /mob/living/bot
 	//
 	LAZYADD(.[/mob/living/bot], "on")
 	LAZYADD(.[/mob/living/bot], "open")
 	LAZYADD(.[/mob/living/bot], "locked")
+	LAZYADD(.[/mob/living/bot], "emagged")
+	LAZYADD(.[/mob/living/bot], "light_strength")
+	LAZYADD(.[/mob/living/bot], "busy")
+	LAZYADD(.[/mob/living/bot], "target")
+	LAZYADD(.[/mob/living/bot], "obstacle")
+	LAZYADD(.[/mob/living/bot], "ignore_list")
+	LAZYADD(.[/mob/living/bot], "patrol_path")
+	LAZYADD(.[/mob/living/bot], "target_path")
+	LAZYADD(.[/mob/living/bot], "wait_if_pulled")
 	LAZYADD(.[/mob/living/bot], "will_patrol")
+	LAZYADD(.[/mob/living/bot], "patrol_speed")
+	LAZYADD(.[/mob/living/bot], "target_speed")
+	LAZYADD(.[/mob/living/bot], "min_target_dist")
+	LAZYADD(.[/mob/living/bot], "max_target_dist")
+	LAZYADD(.[/mob/living/bot], "max_patrol_dist")
+	LAZYADD(.[/mob/living/bot], "RequiresAccessToToggle")
+	LAZYADD(.[/mob/living/bot], "target_patience")
+	LAZYADD(.[/mob/living/bot], "frustration")
+	LAZYADD(.[/mob/living/bot], "max_frustration")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/bot/secbot/ed209
+	//
+	LAZYADD(.[/mob/living/bot/secbot/ed209], "shot_delay")
+	LAZYADD(.[/mob/living/bot/secbot/ed209], "last_shot")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/bot/cleanbot
+	//
+	LAZYADD(.[/mob/living/bot/cleanbot], "cleaning")
+	LAZYADD(.[/mob/living/bot/cleanbot], "screwloose")
+	LAZYADD(.[/mob/living/bot/cleanbot], "oddbutton")
+	LAZYADD(.[/mob/living/bot/cleanbot], "blood")
+	LAZYADD(.[/mob/living/bot/cleanbot], "target_types")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/bot/floorbot
+	//
+	LAZYADD(.[/mob/living/bot/floorbot], "amount")
+	LAZYADD(.[/mob/living/bot/floorbot], "maxAmount")
+	LAZYADD(.[/mob/living/bot/floorbot], "tilemake")
+	LAZYADD(.[/mob/living/bot/floorbot], "improvefloors")
+	LAZYADD(.[/mob/living/bot/floorbot], "eattiles")
+	LAZYADD(.[/mob/living/bot/floorbot], "maketiles")
+	LAZYADD(.[/mob/living/bot/floorbot], "boxtype")
+	LAZYADD(.[/mob/living/bot/floorbot], "floor_build_type")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/bot/medbot
+	//
+	LAZYADD(.[/mob/living/bot/medbot], "skin")
+	LAZYADD(.[/mob/living/bot/medbot], "last_newpatient_speak")
+	LAZYADD(.[/mob/living/bot/medbot], "vocal")
+	LAZYADD(.[/mob/living/bot/medbot], "reagent_glass")
+	LAZYADD(.[/mob/living/bot/medbot], "injection_amount")
+	LAZYADD(.[/mob/living/bot/medbot], "heal_threshold")
+	LAZYADD(.[/mob/living/bot/medbot], "use_beaker")
+	LAZYADD(.[/mob/living/bot/medbot], "declare_treatment")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/bot/mulebot
+	//
+	LAZYADD(.[/mob/living/bot/mulebot], "load")
+	LAZYADD(.[/mob/living/bot/mulebot], "paused")
+	LAZYADD(.[/mob/living/bot/mulebot], "crates_only")
+	LAZYADD(.[/mob/living/bot/mulebot], "auto_return")
+	LAZYADD(.[/mob/living/bot/mulebot], "safety")
+	LAZYADD(.[/mob/living/bot/mulebot], "targetName")
+	LAZYADD(.[/mob/living/bot/mulebot], "home")
+	LAZYADD(.[/mob/living/bot/mulebot], "homeName")
+	LAZYADD(.[/mob/living/bot/mulebot], "amount")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/bot/farmbot
+	//
+	LAZYADD(.[/mob/living/bot/farmbot], "action")
+	LAZYADD(.[/mob/living/bot/farmbot], "waters_trays")
+	LAZYADD(.[/mob/living/bot/farmbot], "refills_water")
+	LAZYADD(.[/mob/living/bot/farmbot], "uproots_weeds")
+	LAZYADD(.[/mob/living/bot/farmbot], "replaces_nutriment")
+	LAZYADD(.[/mob/living/bot/farmbot], "collects_produce")
+	LAZYADD(.[/mob/living/bot/farmbot], "removes_dead")
+	LAZYADD(.[/mob/living/bot/farmbot], "tank")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/carbon
+	//
+	LAZYADD(.[/mob/living/carbon], "life_tick")
+	LAZYADD(.[/mob/living/carbon], "handcuffed")
+	LAZYADD(.[/mob/living/carbon], "surgeries_in_progress")
+	LAZYADD(.[/mob/living/carbon], "pose")
+	LAZYADD(.[/mob/living/carbon], "chem_effects")
+	LAZYADD(.[/mob/living/carbon], "chem_doses")
+	LAZYADD(.[/mob/living/carbon], "bloodstr")
+	LAZYADD(.[/mob/living/carbon], "touching")
+	LAZYADD(.[/mob/living/carbon], "losebreath")
+	LAZYADD(.[/mob/living/carbon], "coughedtime")
+	LAZYADD(.[/mob/living/carbon], "cpr_time")
+	LAZYADD(.[/mob/living/carbon], "lastpuke")
+	LAZYADD(.[/mob/living/carbon], "nutrition")
+	LAZYADD(.[/mob/living/carbon], "hydration")
+	LAZYADD(.[/mob/living/carbon], "internal")
+	LAZYADD(.[/mob/living/carbon], "last_taste_time")
+	LAZYADD(.[/mob/living/carbon], "last_taste_text")
+	LAZYADD(.[/mob/living/carbon], "internal_organs")
+	LAZYADD(.[/mob/living/carbon], "organs")
+	LAZYADD(.[/mob/living/carbon], "organs_by_name")
+	LAZYADD(.[/mob/living/carbon], "internal_organs_by_name")
+	LAZYADD(.[/mob/living/carbon], "stasis_sources")
+	LAZYADD(.[/mob/living/carbon], "stasis_value")
+	LAZYADD(.[/mob/living/carbon], "player_triggered_sleeping")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -283,16 +439,110 @@
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
+	// /mob/living/silicon
+	//
+	LAZYADD(.[/mob/living/silicon], "syndicate")
+	LAZYADD(.[/mob/living/silicon], "speech_synthesizer_langs")
+	LAZYADD(.[/mob/living/silicon], "speak_statement")
+	LAZYADD(.[/mob/living/silicon], "speak_exclamation")
+	LAZYADD(.[/mob/living/silicon], "speak_query")
+	LAZYADD(.[/mob/living/silicon], "pose")
+	LAZYADD(.[/mob/living/silicon], "local_transmit")
+	LAZYADD(.[/mob/living/silicon], "sensor_mode")
+	LAZYADD(.[/mob/living/silicon], "next_alarm_notice")
+	LAZYADD(.[/mob/living/silicon], "queued_alarms")
+	LAZYADD(.[/mob/living/silicon], "access_rights")
+	LAZYADD(.[/mob/living/silicon], "idcard")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
 	// /mob/living/silicon/robot
 	//
-	LAZYADD(.[/mob/living/silicon/robot], "name")
+	LAZYADD(.[/mob/living/silicon/robot], "lights_on")
+	LAZYADD(.[/mob/living/silicon/robot], "power_efficiency")
+	LAZYADD(.[/mob/living/silicon/robot], "sight_mode")
+	LAZYADD(.[/mob/living/silicon/robot], "custom_name")
+	LAZYADD(.[/mob/living/silicon/robot], "custom_sprite")
+	LAZYADD(.[/mob/living/silicon/robot], "crisis")
+	LAZYADD(.[/mob/living/silicon/robot], "crisis_override")
+	LAZYADD(.[/mob/living/silicon/robot], "module_category")
 	LAZYADD(.[/mob/living/silicon/robot], "module")
-	LAZYADD(.[/mob/living/silicon/robot], "stat")
+	LAZYADD(.[/mob/living/silicon/robot], "module_active")
 	LAZYADD(.[/mob/living/silicon/robot], "module_state_1")
 	LAZYADD(.[/mob/living/silicon/robot], "module_state_2")
+	LAZYADD(.[/mob/living/silicon/robot], "module_state_3")
 	LAZYADD(.[/mob/living/silicon/robot], "cell")
 	LAZYADD(.[/mob/living/silicon/robot], "components")
 	LAZYADD(.[/mob/living/silicon/robot], "mmi")
+	LAZYADD(.[/mob/living/silicon/robot], "storage")
+	LAZYADD(.[/mob/living/silicon/robot], "opened")
+	LAZYADD(.[/mob/living/silicon/robot], "emagged")
+	LAZYADD(.[/mob/living/silicon/robot], "wiresexposed")
+	LAZYADD(.[/mob/living/silicon/robot], "locked")
+	LAZYADD(.[/mob/living/silicon/robot], "has_power")
+	LAZYADD(.[/mob/living/silicon/robot], "spawn_module")
+	LAZYADD(.[/mob/living/silicon/robot], "ident")
+	LAZYADD(.[/mob/living/silicon/robot], "viewalerts")
+	LAZYADD(.[/mob/living/silicon/robot], "modtype")
+	LAZYADD(.[/mob/living/silicon/robot], "lower_mod")
+	LAZYADD(.[/mob/living/silicon/robot], "jetpack")
+	LAZYADD(.[/mob/living/silicon/robot], "jeton")
+	LAZYADD(.[/mob/living/silicon/robot], "killswitch")
+	LAZYADD(.[/mob/living/silicon/robot], "killswitch_time")
+	LAZYADD(.[/mob/living/silicon/robot], "weapon_lock")
+	LAZYADD(.[/mob/living/silicon/robot], "weaponlock_time")
+	LAZYADD(.[/mob/living/silicon/robot], "lawupdate")
+	LAZYADD(.[/mob/living/silicon/robot], "lockcharge")
+	LAZYADD(.[/mob/living/silicon/robot], "speed")
+	LAZYADD(.[/mob/living/silicon/robot], "scrambledcodes")
+	LAZYADD(.[/mob/living/silicon/robot], "tracking_entities")
+	LAZYADD(.[/mob/living/silicon/robot], "braintype")
+	LAZYADD(.[/mob/living/silicon/robot], "intenselight")
+	LAZYADD(.[/mob/living/silicon/robot], "vtec")
+	LAZYADD(.[/mob/living/silicon/robot], "camera")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/silicon/robot/drone
+	//
+	LAZYADD(.[/mob/living/silicon/robot/drone], "mail_destination")
+	LAZYADD(.[/mob/living/silicon/robot/drone], "hat")
+	LAZYADD(.[/mob/living/silicon/robot/drone], "hat_x_offset")
+	LAZYADD(.[/mob/living/silicon/robot/drone], "hat_y_offset")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /mob/living/silicon/pai
+	//
+	LAZYADD(.[/mob/living/silicon/pai], "network")
+	LAZYADD(.[/mob/living/silicon/pai], "camera")
+	LAZYADD(.[/mob/living/silicon/pai], "ram")
+	LAZYADD(.[/mob/living/silicon/pai], "software")
+	LAZYADD(.[/mob/living/silicon/pai], "userDNA")
+	LAZYADD(.[/mob/living/silicon/pai], "card")
+	LAZYADD(.[/mob/living/silicon/pai], "chassis")
+	LAZYADD(.[/mob/living/silicon/pai], "master")
+	LAZYADD(.[/mob/living/silicon/pai], "master_dna")
+	LAZYADD(.[/mob/living/silicon/pai], "pai_law0")
+	LAZYADD(.[/mob/living/silicon/pai], "pai_laws")
+	LAZYADD(.[/mob/living/silicon/pai], "silence_time")
+	LAZYADD(.[/mob/living/silicon/pai], "screen")
+	LAZYADD(.[/mob/living/silicon/pai], "subscreen")
+	LAZYADD(.[/mob/living/silicon/pai], "secHUD")
+	LAZYADD(.[/mob/living/silicon/pai], "medHUD")
+	LAZYADD(.[/mob/living/silicon/pai], "medical_cannotfind")
+	LAZYADD(.[/mob/living/silicon/pai], "medicalActive1")
+	LAZYADD(.[/mob/living/silicon/pai], "medicalActive2")
+	LAZYADD(.[/mob/living/silicon/pai], "security_cannotfind")
+	LAZYADD(.[/mob/living/silicon/pai], "securityActive1")
+	LAZYADD(.[/mob/living/silicon/pai], "securityActive2")
+	LAZYADD(.[/mob/living/silicon/pai], "hackdoor")
+	LAZYADD(.[/mob/living/silicon/pai], "hackprogress")
+	LAZYADD(.[/mob/living/silicon/pai], "hack_aborted")
+	LAZYADD(.[/mob/living/silicon/pai], "translator_on")
 
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -2016,14 +2266,81 @@
 	//
 	// /mob
 	//
-	LAZYADD(.[/mob], "real_name")
+	LAZYADD(.[/mob], "mob_flags")
+	LAZYADD(.[/mob], "last_quick_move_time")
 	LAZYADD(.[/mob], "mind")
+	LAZYADD(.[/mob], "lastKnownIP")
+	LAZYADD(.[/mob], "computer_id")
+	LAZYADD(.[/mob], "last_ckey")
 	LAZYADD(.[/mob], "contents")
+	LAZYADD(.[/mob], "stat")
+	LAZYADD(.[/mob], "damageoverlaytemp")
+	LAZYADD(.[/mob], "machine")
+	LAZYADD(.[/mob], "sdisabilities")
+	LAZYADD(.[/mob], "disabilities")
+	LAZYADD(.[/mob], "pulling")
+	LAZYADD(.[/mob], "other_mobs")
+	LAZYADD(.[/mob], "next_move")
+	LAZYADD(.[/mob], "hand")
+	LAZYADD(.[/mob], "real_name")
+	LAZYADD(.[/mob], "bhunger")
+	LAZYADD(.[/mob], "druggy")
+	LAZYADD(.[/mob], "confused")
+	LAZYADD(.[/mob], "sleeping")
+	LAZYADD(.[/mob], "resting")
+	LAZYADD(.[/mob], "lying")
+	LAZYADD(.[/mob], "lying_prev")
+	LAZYADD(.[/mob], "radio_interrupt_cooldown")
+	LAZYADD(.[/mob], "unacidable")
+	LAZYADD(.[/mob], "pinned")
+	LAZYADD(.[/mob], "embedded")
+	LAZYADD(.[/mob], "languages")
+	LAZYADD(.[/mob], "species_language")
+	LAZYADD(.[/mob], "only_species_language")
+	LAZYADD(.[/mob], "speak_emote")
+	LAZYADD(.[/mob], "emote_type")
+	LAZYADD(.[/mob], "facing_dir")
+	LAZYADD(.[/mob], "timeofdeath")
+	LAZYADD(.[/mob], "bodytemperature")
+	LAZYADD(.[/mob], "a_intent")
+	LAZYADD(.[/mob], "move_intent")
+	LAZYADD(.[/mob], "buckled")
+	LAZYADD(.[/mob], "l_hand")
+	LAZYADD(.[/mob], "r_hand")
+	LAZYADD(.[/mob], "back")
+	LAZYADD(.[/mob], "s_active")
+	LAZYADD(.[/mob], "wear_mask")
+	LAZYADD(.[/mob], "grabbed_by")
+	LAZYADD(.[/mob], "in_throw_mode")
+	LAZYADD(.[/mob], "inertia_dir")
+	LAZYADD(.[/mob], "can_pull_size")
+	LAZYADD(.[/mob], "can_pull_mobs")
 	LAZYADD(.[/mob], "dna")
+	LAZYADD(.[/mob], "active_genes")
+	LAZYADD(.[/mob], "mutations")
+	LAZYADD(.[/mob], "radiation")
+	LAZYADD(.[/mob], "voice_name")
+	LAZYADD(.[/mob], "faction")
+	LAZYADD(.[/mob], "blinded")
+	LAZYADD(.[/mob], "ear_deaf")
+	LAZYADD(.[/mob], "LAssailant")
+	LAZYADD(.[/mob], "status_flagS")
+	LAZYADD(.[/mob], "lastarea")
+	LAZYADD(.[/mob], "digitalcamo")
+	LAZYADD(.[/mob], "control_object")
+	LAZYADD(.[/mob], "universal_speak")
+	LAZYADD(.[/mob], "universal_understand")
+	LAZYADD(.[/mob], "shouldnt_see")
+	LAZYADD(.[/mob], "mob_size")
+	LAZYADD(.[/mob], "paralysis")
+	LAZYADD(.[/mob], "stunned")
+	LAZYADD(.[/mob], "weakness")
+	LAZYADD(.[/mob], "drowsyness")
+	LAZYADD(.[/mob], "flavor_text")
+	LAZYADD(.[/mob], "skillset")
+	LAZYADD(.[/mob], "additional_vision_handlers")
 	LAZYADD(.[/mob], "feet_blood_color")
 	LAZYADD(.[/mob], "gender")
-	LAZYADD(.[/mob], "languages")
-	LAZYADD(.[/mob], "loc")
 	LAZYADD(.[/mob], "id_tag")
 
 
@@ -2866,12 +3183,29 @@
 	//
 	// /obj/effect/fluid
 	//
+	LAZYADD(.[/obj/effect/fluid], "fluid_amount")
+	LAZYADD(.[/obj/effect/fluid], "start_loc")
+	LAZYADD(.[/obj/effect/fluid], "equalizing_fluids")
+	LAZYADD(.[/obj/effect/fluid], "equalize_avg_depth")
+	LAZYADD(.[/obj/effect/fluid], "equalize_avg_temp")
+	LAZYADD(.[/obj/effect/fluid], "flow_amount")
 
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
 	// /obj/effect/effect/smoke/chem
 	//
+	LAZYADD(.[/obj/effect/effect/smoke/chem], "splash_amount")
+	LAZYADD(.[/obj/effect/effect/smoke/chem], "destination")
+
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
+	// /datum/skillset
+	//
+	LAZYADD(.[/datum/skillset], "skill_list")
+	LAZYADD(.[/datum/skillset], "owner")
+	LAZYADD(.[/datum/skillset], "skill_buffs")
 
 
 	for(var/type in .)

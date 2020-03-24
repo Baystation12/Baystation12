@@ -24,10 +24,11 @@
 
 /mob/living/bot/farmbot/New(var/newloc, var/newTank)
 	..(newloc)
-	if(!newTank)
-		newTank = new /obj/structure/reagent_dispensers/watertank(src)
-	tank = newTank
-	tank.forceMove(src)
+	if(!tank)
+		if(!newTank)
+			newTank = new /obj/structure/reagent_dispensers/watertank(src)
+		tank = newTank
+		tank.forceMove(src)
 
 /mob/living/bot/farmbot/premade
 	name = "Old Ben"

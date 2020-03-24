@@ -12,6 +12,8 @@
 	var/list/nm_viewing
 
 /datum/skillset/New(mob/mob)
+	if(!mob && SSmapping.using_save)
+		..()
 	owner = mob
 	for(var/datum/skill_verb/SV in GLOB.skill_verbs)
 		if(SV.should_have_verb(src))
