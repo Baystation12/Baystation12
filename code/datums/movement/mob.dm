@@ -237,10 +237,6 @@
 	direction = mob.AdjustMovementDirection(direction)
 	var/turf/old_turf = get_turf(mob)
 
-	// Something with pulling things
-	var/extra_delay = HandleGrabs(direction, old_turf)
-	mob.ExtraMoveCooldown(extra_delay)
-
 	if(direction & (UP|DOWN))
 		var/txt_dir = direction & UP ? "upwards" : "downwards"
 		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
@@ -248,6 +244,10 @@
 			mob.zPull(direction)
 
 	step(mob, direction)
+
+	// Something with pulling things
+	var/extra_delay = HandleGrabs(direction, old_turf)
+	mob.ExtraMoveCooldown(extra_delay)
 
 	for (var/obj/item/grab/G in mob)
 		if (G.assailant_reverse_facing())
