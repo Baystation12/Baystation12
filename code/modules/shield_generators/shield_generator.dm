@@ -21,6 +21,7 @@
 	var/field_radius = 1				// Current field radius.
 	var/target_radius = 1               // Desired field radius.
 	var/running = SHIELD_OFF			// Whether the generator is enabled or not.
+	var/hard_input_cap = 5 MEGAWATTS    // Hard input limit. The shield cannot consume more power per tick than this.
 	var/input_cap = 1 MEGAWATTS			// Currently set input limit. Set to 0 to disable limits altogether. The shield will try to input this value per tick at most
 	var/upkeep_power_usage = 0			// Upkeep power usage last tick.
 	var/upkeep_multiplier = 1			// Multiplier of upkeep values.
@@ -160,18 +161,15 @@
 
 	if(powernet && (running >= SHIELD_RUNNING) && !input_cut)
 		var/energy_buffer = 0
-		energy_buffer = draw_power(min(upkeep_power_usage, input_cap))
+		var/effective_input_cap = min(input_cap, hard_input_cap)
+		energy_buffer = draw_power(min(upkeep_power_usage, effective_input_cap))
 		power_usage += round(energy_buffer)
 
 		if(energy_buffer < upkeep_power_usage)
 			current_energy -= round(upkeep_power_usage - energy_buffer)	// If we don't have enough energy from the grid, take it from the internal battery instead.
 
 		// Now try to recharge our internal energy.
-		var/energy_to_demand
-		if(input_cap)
-			energy_to_demand = between(0, max_energy - current_energy, input_cap - energy_buffer)
-		else
-			energy_to_demand = max(0, max_energy - current_energy)
+		var/energy_to_demand = between(0, max_energy - current_energy, effective_input_cap - energy_buffer)
 		energy_buffer = draw_power(energy_to_demand)
 		power_usage += energy_buffer
 		current_energy += round(energy_buffer)
@@ -308,7 +306,7 @@
 		var/old_energy = current_energy
 		shutdown_field()
 		log_and_message_admins("has triggered \the [src]'s emergency shutdown!", user)
-		spawn()	
+		spawn()
 			empulse(src, old_energy / 60000000, old_energy / 32000000, 1) // If shields are charged at 450 MJ, the EMP will be 7.5, 14.0625. 90 MJ, 1.5, 2.8125
 		old_energy = 0
 
