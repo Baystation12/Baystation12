@@ -30,18 +30,17 @@
 	icon = 'icons/mob/screen/pai.dmi'
 
 /obj/screen/pai/Click()
-	if(isobserver(usr) || usr.incapacitated())
-		return FALSE
-	return TRUE
+	if(!isobserver(usr) && (!usr.incapacitated() || usr.resting))
+		OnClick()
+	
+/obj/screen/pai/proc/OnClick()
 
 /obj/screen/pai/software
 	name = "Software Interface"
 	icon_state = "pai"
 	screen_loc = ui_pai_software
 
-/obj/screen/pai/software/Click()
-	if(!..())
-		return
+/obj/screen/pai/software/OnClick()
 	var/mob/living/silicon/pai/pAI = usr
 	pAI.paiInterface()
 
@@ -50,9 +49,7 @@
 	icon_state = "pai_holoform"
 	screen_loc = ui_pai_shell
 
-/obj/screen/pai/shell/Click()
-	if(!..())
-		return
+/obj/screen/pai/shell/OnClick()
 	var/mob/living/silicon/pai/pAI = usr
 	if(pAI.is_in_card)
 		pAI.unfold()
@@ -68,7 +65,7 @@
 	icon_state = "pai_rest"
 	screen_loc = ui_pai_rest
 
-/obj/screen/pai/rest/Click()
+/obj/screen/pai/rest/OnClick()
 	var/mob/living/silicon/pai/pAI = usr
 	pAI.lay_down()
 
@@ -77,9 +74,7 @@
 	icon_state = "light"
 	screen_loc = ui_pai_light
 
-/obj/screen/pai/light/Click()
-	if(!..())
-		return
+/obj/screen/pai/light/OnClick()
 	var/mob/living/silicon/pai/pAI = usr
 	pAI.toggle_integrated_light()
 
@@ -87,9 +82,7 @@
 	name = "pull"
 	icon_state = "pull1"
 
-/obj/screen/pai/pull/Click()
-	if(!..())
-		return
+/obj/screen/pai/pull/OnClick()
 	var/mob/living/silicon/pai/pAI = usr
 	pAI.stop_pulling()
 	pAI.pullin.screen_loc = null
@@ -100,9 +93,7 @@
 	icon_state = "subsystems"
 	screen_loc = ui_pai_subsystems
 
-/obj/screen/pai/subsystems/Click()
-	if(!..())
-		return
+/obj/screen/pai/subsystems/OnClick()
 	var/mob/living/silicon/pai/pAI = usr
 	var/ss_name = input(usr, "Activates the given subsystem", "Subsystems", "") in pAI.silicon_subsystems_by_name
 	if (!ss_name)

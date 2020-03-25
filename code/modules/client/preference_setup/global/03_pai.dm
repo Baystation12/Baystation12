@@ -15,7 +15,6 @@
 		return
 
 	candidate.savefile_load(preference_mob())
-	update_pai_preview()
 
 /datum/category_item/player_setup_item/player_global/pai/save_preferences(var/savefile/S)
 	if(!candidate)
@@ -29,7 +28,9 @@
 /datum/category_item/player_setup_item/player_global/pai/content(var/mob/user)
 	if(!candidate)
 		candidate = new()
-	update_pai_preview()
+	if (!pai_preview)
+		update_pai_preview(user)
+
 	. += "<b>pAI:</b><br>"
 	if(!candidate)
 		log_debug("[user] pAI prefs have a null candidate var.")
@@ -64,19 +65,19 @@
 				if(!isnull(t) && CanUseTopic(user))
 					candidate.comments = sanitize(t)
 			if("chassis")
-				candidate.chassis = input(usr,"What would you like to use for your mobile chassis icon?") as null|anything in GLOB.possible_chassis
-				update_pai_preview()
+				candidate.chassis = input(user,"What would you like to use for your mobile chassis icon?") as null|anything in GLOB.possible_chassis
+				update_pai_preview(user)
 			if("say")
-				candidate.say_verb = input(usr,"What theme would you like to use for your speech verbs?") as null|anything in GLOB.possible_say_verbs
+				candidate.say_verb = input(user,"What theme would you like to use for your speech verbs?") as null|anything in GLOB.possible_say_verbs
 			if("cyclebg")
 				bgstate = next_in_list(bgstate, bgstate_options)
-				update_pai_preview()
+				update_pai_preview(user)
 
 		return TOPIC_REFRESH
 
 	return ..()
 
-/datum/category_item/player_setup_item/player_global/pai/proc/update_pai_preview()
+/datum/category_item/player_setup_item/player_global/pai/proc/update_pai_preview(var/mob/user)
 	pai_preview = icon('icons/effects/128x48.dmi', bgstate)
 	var/icon/pai = icon('icons/mob/pai.dmi', GLOB.possible_chassis[candidate.chassis], NORTH)
 	pai_preview.Scale(48+32, 16+32)
@@ -89,4 +90,4 @@
 
 	pai_preview.Scale(pai_preview.Width() * 2, pai_preview.Height() * 2)
 
-	send_rsc(usr, pai_preview, "pai_preview.png")
+	send_rsc(user, pai_preview, "pai_preview.png")
