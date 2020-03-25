@@ -2117,7 +2117,8 @@
 			"additional_vision_handlers",
 			"feet_blood_color",
 			"gender",
-			"id_tag"
+			"id_tag",
+			"saved_ckey"
 		]
 	},
 	{
@@ -2895,7 +2896,9 @@
 			"vars": [
 				"skill_list",
 				"owner",
-				"skill_buffs"
+				"skill_buffs",
+				"points_remaining",
+				"time_skills_set"
 			]
 		}
   ]

@@ -171,7 +171,7 @@
 		return											//Checks if the new value is actually allowed.
 														//None of this should happen normally, but this avoids client attacks.
 	pref.points_by_job[job] += (current_value - new_value)
-	T[S] = new_level - min								//skills_allocated stores the difference from job minimum
+	T[S] = new_level - min							//skills_allocated stores the difference from job minimum
 	pref.purge_skills_missing_prerequisites(job)
 
 /datum/category_item/player_setup_item/occupation/proc/generate_skill_content(datum/job/job)

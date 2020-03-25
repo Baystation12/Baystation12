@@ -3,61 +3,94 @@
 
 var/const/CHARACTER_PREFERENCE_INPUT_TITLE = "Character Preference"
 
-/datum/category_group/player_setup_category/physical_preferences
+// Persistence categories
+/datum/category_group/player_setup_category/persistence_category/physical_preferences
 	name = "Physical"
 	sort_order = 1
 	category_item_type = /datum/category_item/player_setup_item/physical
 
-/datum/category_group/player_setup_category/background_preferences
+/datum/category_group/player_setup_category/persistence_category/background_preferences
 	name = "Background"
 	sort_order = 2
 	category_item_type = /datum/category_item/player_setup_item/background
 
-/datum/category_group/player_setup_category/background_preferences/content(var/mob/user)
+/datum/category_group/player_setup_category/persistence_category/background_preferences/content(var/mob/user)
 	. = ""
 	for(var/datum/category_item/player_setup_item/PI in items)
 		. += "[PI.content(user)]<br>"
 
-/datum/category_group/player_setup_category/occupation_preferences
+/datum/category_group/player_setup_category/persistence_category/loadout_preferences
+	name = "Loadout"
+	sort_order = 3
+	category_item_type = /datum/category_item/player_setup_item/loadout
+
+/datum/category_group/player_setup_category/persistence_category/global_preferences
+	name = "Global"
+	sort_order = 4
+	category_item_type = /datum/category_item/player_setup_item/player_global
+
+/datum/category_group/player_setup_category/persistence_category/law_pref
+	name = "Laws"
+	sort_order = 5
+	category_item_type = /datum/category_item/player_setup_item/law_pref
+
+// Round categories
+/datum/category_group/player_setup_category/round_category/physical_preferences
+	name = "Physical"
+	sort_order = 1
+	category_item_type = /datum/category_item/player_setup_item/physical
+
+/datum/category_group/player_setup_category/round_category/background_preferences
+	name = "Background"
+	sort_order = 2
+	category_item_type = /datum/category_item/player_setup_item/background
+
+/datum/category_group/player_setup_category/round_category/background_preferences/content(var/mob/user)
+	. = ""
+	for(var/datum/category_item/player_setup_item/PI in items)
+		. += "[PI.content(user)]<br>"
+
+/datum/category_group/player_setup_category/round_category/occupation_preferences
 	name = "Occupation"
 	sort_order = 3
 	category_item_type = /datum/category_item/player_setup_item/occupation
 
-/datum/category_group/player_setup_category/appearance_preferences
+/datum/category_group/player_setup_category/round_category/appearance_preferences
 	name = "Roles"
 	sort_order = 4
 	category_item_type = /datum/category_item/player_setup_item/antagonism
 
-/datum/category_group/player_setup_category/relations_preferences
+/datum/category_group/player_setup_category/round_category/relations_preferences
 	name = "Matchmaking"
 	sort_order = 5
 	category_item_type = /datum/category_item/player_setup_item/relations
 
-/datum/category_group/player_setup_category/loadout_preferences
+/datum/category_group/player_setup_category/round_category/loadout_preferences
 	name = "Loadout"
 	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/loadout
 
-/datum/category_group/player_setup_category/global_preferences
+/datum/category_group/player_setup_category/round_category/global_preferences
 	name = "Global"
 	sort_order = 7
 	category_item_type = /datum/category_item/player_setup_item/player_global
 
-/datum/category_group/player_setup_category/law_pref
+/datum/category_group/player_setup_category/round_category/law_pref
 	name = "Laws"
 	sort_order = 8
 	category_item_type = /datum/category_item/player_setup_item/law_pref
-
-
 /****************************
 * Category Collection Setup *
 ****************************/
 /datum/category_collection/player_setup_collection
-	category_group_type = /datum/category_group/player_setup_category
 	var/datum/preferences/preferences
 	var/datum/category_group/player_setup_category/selected_category = null
 
 /datum/category_collection/player_setup_collection/New(var/datum/preferences/preferences)
+	if(config.persistent)		// Removing jobs, roles, etc. from character creation.
+		category_group_type = /datum/category_group/player_setup_category/persistence_category
+	else
+		category_group_type = /datum/category_group/player_setup_category/round_category
 	src.preferences = preferences
 	..()
 	selected_category = categories[1]
