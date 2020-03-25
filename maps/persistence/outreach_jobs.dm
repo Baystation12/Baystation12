@@ -1,4 +1,4 @@
-/datum/map/outreach
+/datum/map/persistence
 	allowed_jobs = list(/datum/job/assistant)
 
 /datum/job/assistant
