@@ -1,0 +1,5 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - rscdel: "Virology prison break event is removed."
+  - rscadd: "Adds prison break events for the Warehouse, Engineering Hard Storage and the Emergency Armoury (but not the room with weaponry)."
