@@ -41,7 +41,7 @@
 "aO" = (/obj/effect/catwalk_plated,/obj/structure/cable/green{icon_state = "4-8"; d1 = 1; d2 = 4},/turf/simulated/floor,/area/outreach/outpost/hallway)
 "aP" = (/obj/machinery/atmospherics/unary/vent_pump{icon_state = "map_vent"; dir = 4},/turf/simulated/floor/tiled/white,/area/outreach/outpost/sleeproom)
 "aQ" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 8},/turf/simulated/floor/tiled/white,/area/outreach/outpost/sleeproom)
-"aR" = (/obj/effect/catwalk_plated,/obj/structure/cable/green{icon_state = "1-2"; d1 = 1; d2 = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 10},/turf/simulated/floor/plating,/area/outreach/outpost/sleeproom)
+"aR" = (/obj/effect/catwalk_plated,/obj/structure/cable/green{icon_state = "1-2"; d1 = 1; d2 = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 10},/obj/effect/landmark{name = "Observer-Start"},/turf/simulated/floor/plating,/area/outreach/outpost/sleeproom)
 "aS" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{icon_state = "intact-scrubbers"; dir = 8},/turf/simulated/floor/tiled/white,/area/outreach/outpost/sleeproom)
 "aT" = (/obj/machinery/atmospherics/unary/vent_scrubber{icon_state = "map_scrubber_off"; dir = 8},/turf/simulated/floor/tiled/white,/area/outreach/outpost/sleeproom)
 "aU" = (/turf/simulated/floor/tiled,/area/outreach/outpost)

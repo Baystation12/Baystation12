@@ -7,6 +7,7 @@
 	contact_levels = list(1, 2, 3, 4)
 	player_levels = list(1, 2, 3, 4)
 	saved_levels = list(1, 2, 3, 4)
+	mining_areas = list(1, 2)
 
 	overmap_size = 35
 	overmap_event_areas = 34

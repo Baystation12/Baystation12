@@ -195,6 +195,7 @@
 #include "code\controllers\subsystems\lighting.dm"
 #include "code\controllers\subsystems\machines.dm"
 #include "code\controllers\subsystems\mapping.dm"
+#include "code\controllers\subsystems\mining.dm"
 #include "code\controllers\subsystems\misc_late.dm"
 #include "code\controllers\subsystems\plants.dm"
 #include "code\controllers\subsystems\radiation.dm"

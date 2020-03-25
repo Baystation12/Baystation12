@@ -3,7 +3,7 @@
 	icon_state = "maintcentral"
 
 /area/outreach/outpost/sleeproom
-	name = "\improper Cyrogenic Storage"
+	name = "Cyrogenic Storage"
 
 /area/outreach/outpost/medical
 	name = "\improper Medical Wing"
@@ -29,7 +29,7 @@
 	name = "\improper Storage"
 
 /area/outreach/mines
-	name = "\improper Deep Underground"
+	name = "Deep Underground"
 	var/do_autogenerate = FALSE
 	var/depth = 0
 	icon_state = "M"
