@@ -17,8 +17,13 @@
 	desc = "Sensor array detects a large asteroid."
 	in_space = 1
 	icon_state = "meteor4"
+	hide_from_reports = TRUE
 	initial_generic_waypoints = list(
 		"nav_voxbase_1",
+	)
+
+	initial_restricted_waypoints = list(
+		"Vox Shuttle" = list("nav_hangar_vox"),
 	)
 
 /obj/effect/shuttle_landmark/nav_voxbase/nav1
@@ -71,7 +76,10 @@
 	descriptor = "Shoal forward base"
 	map = "Vox Base"
 	crew_jobs = list(
-		/datum/job/submap/voxship_vox
+		/datum/job/submap/voxship_vox,
+		/datum/job/submap/voxship_vox/doc,
+		/datum/job/submap/voxship_vox/engineer,
+		/datum/job/submap/voxship_vox/quill
 	)
 	whitelisted_species = list(SPECIES_VOX)
 	blacklisted_species = null

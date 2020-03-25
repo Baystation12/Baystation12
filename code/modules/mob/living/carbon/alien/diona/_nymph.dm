@@ -13,6 +13,7 @@
 	health = 60
 	maxHealth = 60
 	available_maneuvers = list(/decl/maneuver/leap)
+	status_flags = NO_ANTAG
 
 	language = LANGUAGE_ROOTLOCAL
 	species_language = LANGUAGE_ROOTLOCAL

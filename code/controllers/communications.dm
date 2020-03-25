@@ -127,10 +127,17 @@ var/const/MED_I_FREQ = 1485
 var/const/SEC_I_FREQ = 1475
 
 // Device signal frequencies
+var/const/ATMOS_ENGINE_FREQ = 1438 // Used by atmos monitoring in the engine.
+var/const/PUMP_FREQ         = 1439 // Used by air alarms and their progeny.
 var/const/FUEL_FREQ         = 1447 // Used by fuel atmos stuff, and currently default for digital valves
+var/const/ATMOS_TANK_FREQ   = 1441 // Used for gas tank sensors and monitoring.
+var/const/ATMOS_DIST_FREQ   = 1443 // Alternative atmos frequency.
 var/const/BUTTON_FREQ       = 1301 // Used by generic buttons controlling stuff
 var/const/BLAST_DOORS_FREQ  = 1303 // Used by blast doors, buttons controlling them, and mass drivers.
 var/const/AIRLOCK_FREQ      = 1305 // Used by airlocks and buttons controlling them.
+var/const/SHUTTLE_AIR_FREQ  = 1331 // Used by shuttles and shuttle-related atmos systems.
+var/const/AIRLOCK_AIR_FREQ  = 1379 // Used by some airlocks for atmos devices.
+var/const/EXTERNAL_AIR_FREQ = 1380 // Used by some external airlocks.
 
 var/list/radiochannels = list(
 	"Common"		= PUB_FREQ,
@@ -154,19 +161,20 @@ var/list/radiochannels = list(
 )
 
 var/list/channel_color_presets = list(
-	"Global Green" = COMMS_COLOR_COMMON,
-	"Phenomenal Purple" = COMMS_COLOR_SCIENCE,
-	"Bitchin' Blue" = COMMS_COLOR_COMMAND,
-	"Menacing Maroon" = COMMS_COLOR_SYNDICATE,
-	"Pretty Periwinkle" = COMMS_COLOR_CENTCOMM,
-	"Painful Pink" = COMMS_COLOR_AI,
-	"Raging Red" = COMMS_COLOR_SECURITY,
-	"Operational Orange" = COMMS_COLOR_ENGINEER,
-	"Tantalizing Turquoise" = COMMS_COLOR_MEDICAL,
 	"Bemoaning Brown" = COMMS_COLOR_SUPPLY,
-	"Gastric Green" = COMMS_COLOR_SERVICE,
+	"Bitchin' Blue" = COMMS_COLOR_COMMAND,
 	"Bold Brass" = COMMS_COLOR_EXPLORER,
-	"Viewable Violet" = COMMS_COLOR_SKRELL	
+	"Gastric Green" = COMMS_COLOR_SERVICE,
+	"Global Green" = COMMS_COLOR_COMMON,
+	"Menacing Maroon" = COMMS_COLOR_SYNDICATE,
+	"Operational Orange" = COMMS_COLOR_ENGINEER,
+	"Painful Pink" = COMMS_COLOR_AI,
+	"Phenomenal Purple" = COMMS_COLOR_SCIENCE,
+	"Pretty Periwinkle" = COMMS_COLOR_CENTCOMM,
+	"Raging Red" = COMMS_COLOR_SECURITY,
+	"Spectacular Silver" = COMMS_COLOR_ENTERTAIN,
+	"Tantalizing Turquoise" = COMMS_COLOR_MEDICAL,
+	"Viewable Violet" = COMMS_COLOR_SKRELL
 )
 
 // central command channels, i.e deathsquid & response teams

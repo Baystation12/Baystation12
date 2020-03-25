@@ -6,8 +6,7 @@
 SUBSYSTEM_DEF(throwing)
 	name = "Throwing"
 	wait = 1
-	flags = SS_NO_INIT|SS_KEEP_TIMING|SS_TICKER
-	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	flags = SS_NO_INIT|SS_KEEP_TIMING
 
 	var/list/currentrun
 	var/list/processing = list()
@@ -67,7 +66,7 @@ SUBSYSTEM_DEF(throwing)
 	src.thrownthing = thrownthing
 	src.target = target
 	src.target_turf = get_turf(target)
-	src.init_dir = get_dir(src, target)
+	src.init_dir = get_dir(thrownthing, target)
 	src.maxrange = range
 	src.speed = speed
 	src.thrower = thrower
@@ -114,7 +113,7 @@ SUBSYSTEM_DEF(throwing)
 		delayed_time += world.time - last_move
 		return
 
-	if (dist_travelled && hitcheck()) //to catch sneaky things moving on our tile while we slept
+	if (dist_travelled && hitcheck(get_turf(thrownthing))) //to catch sneaky things moving on our tile while we slept
 		finalize()
 		return
 
@@ -141,6 +140,10 @@ SUBSYSTEM_DEF(throwing)
 			diagonal_error += (diagonal_error < 0) ? dist_x/2 : -dist_y
 
 		if (!step) // going off the edge of the map makes get_step return null, don't let things go off the edge
+			finalize()
+			return
+
+		if (hitcheck(step))
 			finalize()
 			return
 
@@ -179,7 +182,7 @@ SUBSYSTEM_DEF(throwing)
 		M.inertia_dir = init_dir
 
 	if(t_target)
-		thrownthing.throw_impact(target, src)
+		thrownthing.throw_impact(t_target, src)
 
 	if (callback)
 		callback.Invoke()
@@ -191,11 +194,17 @@ SUBSYSTEM_DEF(throwing)
 /datum/thrownthing/proc/hit_atom(atom/A)
 	finalize(hit=TRUE, t_target=A)
 
-/datum/thrownthing/proc/hitcheck()
-	for (var/thing in get_turf(thrownthing))
+/datum/thrownthing/proc/hitcheck(var/turf/T)
+	var/atom/movable/hit_thing
+	for (var/thing in T)
 		var/atom/movable/AM = thing
 		if (AM == thrownthing || (AM == thrower && !ismob(thrownthing)))
 			continue
-		if (AM.density && !(AM.throwpass))//check if ATOM_FLAG_CHECKS_BORDER as an atom_flag is needed
-			finalize(hit=TRUE, t_target=AM)
-			return TRUE
+		if (!AM.density || AM.throwpass)//check if ATOM_FLAG_CHECKS_BORDER as an atom_flag is needed
+			continue
+		if (!hit_thing || AM.layer > hit_thing.layer)
+			hit_thing = AM
+
+	if(hit_thing)
+		finalize(hit=TRUE, t_target=hit_thing)
+		return TRUE

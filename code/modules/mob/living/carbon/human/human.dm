@@ -239,7 +239,7 @@
 	dat += "<BR><A href='?src=\ref[src];refresh=1'>Refresh</A>"
 	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
 
-	user << browse(dat, text("window=mob[name];size=340x540"))
+	show_browser(user, dat, text("window=mob[name];size=340x540"))
 	onclose(user, "mob[name]")
 	return
 
@@ -335,7 +335,7 @@
 	var/obj/item/organ/external/floor_organ
 
 	if(!lying)
-		var/obj/item/organ/external/list/standing = list()
+		var/list/obj/item/organ/external/standing = list()
 		for(var/limb_tag in list(BP_L_FOOT, BP_R_FOOT))
 			var/obj/item/organ/external/E = organs_by_name[limb_tag]
 			if(E && E.is_usable())
@@ -350,7 +350,7 @@
 	if(!floor_organ)
 		floor_organ = pick(organs)
 
-	var/obj/item/organ/external/list/to_shock = trace_shock(initial_organ, floor_organ)
+	var/list/obj/item/organ/external/to_shock = trace_shock(initial_organ, floor_organ)
 
 	if(to_shock && to_shock.len)
 		shock_damage /= to_shock.len
@@ -369,7 +369,7 @@
 	return total_damage
 
 /mob/living/carbon/human/proc/trace_shock(var/obj/item/organ/external/init, var/obj/item/organ/external/floor)
-	var/obj/item/organ/external/list/traced_organs = list(floor)
+	var/list/obj/item/organ/external/traced_organs = list(floor)
 
 	if(!init)
 		return
@@ -1317,17 +1317,15 @@
 		W.message = message
 		W.add_fingerprint(src)
 
-#define CAN_INJECT 1
-#define INJECTION_PORT 2
 /mob/living/carbon/human/can_inject(var/mob/user, var/target_zone)
 	var/obj/item/organ/external/affecting = get_organ(target_zone)
 
 	if(!affecting)
-		to_chat(user, "<span class='warning'>They are missing that limb.</span>")
+		to_chat(user, SPAN_WARNING("\The [src] is missing that limb."))
 		return 0
 
 	if(BP_IS_ROBOTIC(affecting))
-		to_chat(user, "<span class='warning'>That limb is robotic.</span>")
+		to_chat(user, SPAN_WARNING("You cannot inject a robotic limb."))
 		return 0
 
 	. = CAN_INJECT

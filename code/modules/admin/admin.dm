@@ -244,7 +244,7 @@ var/global/floorIsLava = 0
 		</body></html>
 	"}
 
-	usr << browse(body, "window=adminplayeropts;size=550x515")
+	show_browser(usr, body, "window=adminplayeropts;size=550x515")
 	SSstatistics.add_field_details("admin_verb","SPP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -490,7 +490,7 @@ var/global/floorIsLava = 0
 						i++
 						dat+="-[MESSAGE.body] <BR>"
 						if(MESSAGE.img)
-							usr << browse_rsc(MESSAGE.img, "tmp_photo[i].png")
+							send_rsc(usr, MESSAGE.img, "tmp_photo[i].png")
 							dat+="<img src='tmp_photo[i].png' width = '180'><BR><BR>"
 						dat+="<FONT SIZE=1>\[Story by <FONT COLOR='maroon'>[MESSAGE.author]</FONT>\]</FONT><BR>"
 			dat+={"
@@ -603,7 +603,7 @@ var/global/floorIsLava = 0
 				<B>Photo:</B>:
 			"}
 			if(news_network.wanted_issue.img)
-				usr << browse_rsc(news_network.wanted_issue.img, "tmp_photow.png")
+				send_rsc(usr, news_network.wanted_issue.img, "tmp_photow.png")
 				dat+="<BR><img src='tmp_photow.png' width = '180'>"
 			else
 				dat+="None"
@@ -619,7 +619,7 @@ var/global/floorIsLava = 0
 //	log_debug("Channelname: [src.admincaster_feed_channel.channel_name] [src.admincaster_feed_channel.author]")
 //	log_debug("Msg: [src.admincaster_feed_message.author] [src.admincaster_feed_message.body]")
 
-	usr << browse(dat, "window=admincaster_main;size=400x600")
+	show_browser(usr, dat, "window=admincaster_main;size=400x600")
 	onclose(usr, "admincaster_main")
 
 
@@ -634,7 +634,7 @@ var/global/floorIsLava = 0
 			r = copytext( r, 1, findtext(r,"##") )//removes the description
 		dat += text("<tr><td>[t] (<A href='?src=\ref[src];removejobban=[r]'>unban</A>)</td></tr>")
 	dat += "</table>"
-	usr << browse(dat, "window=ban;size=400x400")
+	show_browser(usr, dat, "window=ban;size=400x400")
 
 /datum/admins/proc/Game()
 	if(!check_rights(0))	return
@@ -657,7 +657,7 @@ var/global/floorIsLava = 0
 		<A href='?src=\ref[src];vsc=default'>Choose a default ZAS setting</A><br>
 		"}
 
-	usr << browse(dat, "window=admin2;size=210x280")
+	show_browser(usr, dat, "window=admin2;size=210x280")
 	return
 
 /datum/admins/proc/Secrets(var/datum/admin_secret_category/active_category = null)
@@ -1222,7 +1222,7 @@ var/global/floorIsLava = 0
 		out += " None."
 	out += " <a href='?src=\ref[SSticker.mode];add_antag_type=1'>\[+\]</a><br/>"
 
-	usr << browse(out, "window=edit_mode[src]")
+	show_browser(usr, out, "window=edit_mode[src]")
 	SSstatistics.add_field_details("admin_verb","SGM")
 
 
@@ -1326,11 +1326,11 @@ var/global/floorIsLava = 0
 
 		if(2)	//Admins
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special, ticket)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;narrateto=[ref_mob]'>DN</A>) ([admin_jump_link(M, src)]) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
+			return "<b>[key_name(C, link, name, highlight_special, ticket)](<A HREF='?_src_=holder;adminmoreinfo=[ref_mob]'>?</A>) (<A HREF='?_src_=holder;adminplayeropts=[ref_mob]'>PP</A>) (<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>) (<A HREF='?_src_=holder;narrateto=[ref_mob]'>DN</A>) ([admin_jump_link(M)]) (<A HREF='?_src_=holder;check_antagonist=1'>CA</A>)</b>"
 
 		if(3)	//Devs
 			var/ref_mob = "\ref[M]"
-			return "<b>[key_name(C, link, name, highlight_special, ticket)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)([admin_jump_link(M, src)])</b>"
+			return "<b>[key_name(C, link, name, highlight_special, ticket)](<A HREF='?_src_=vars;Vars=[ref_mob]'>VV</A>)([admin_jump_link(M)])</b>"
 
 /proc/ishost(var/client/C)
 	return check_rights(R_HOST, 0, C)

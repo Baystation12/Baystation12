@@ -227,8 +227,7 @@
 	var/list/base_auras
 
 	var/sexybits_location	//organ tag where they are located if they can be kicked for increased pain
-
-	var/list/prone_overlay_offset = list(0, 0) // amount to shift overlays when lying
+	
 	var/job_skill_buffs = list()				// A list containing jobs (/datum/job), with values the extra points that job recieves.
 
 	var/list/descriptors = list(
@@ -728,7 +727,7 @@ The slots that you can use are found in items_clothing.dm and are the inventory 
 	if((!skip_photo && preview_icon) || !skip_detail)
 		dat += "<td width = 200 align='center'>"
 		if(!skip_photo && preview_icon)
-			usr << browse_rsc(icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
+			send_rsc(usr, icon(icon = preview_icon, icon_state = ""), "species_preview_[name].png")
 			dat += "<img src='species_preview_[name].png' width='64px' height='64px'><br/><br/>"
 		if(!skip_detail)
 			dat += "<small>"

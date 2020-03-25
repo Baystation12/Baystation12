@@ -22,6 +22,7 @@
 								/obj/item/weapon/gun/projectile/pistol/military/alt    = TRADER_ALL,
 								/obj/item/weapon/gun/projectile/pistol/magnum_pistol= TRADER_ALL,
 								/obj/item/weapon/gun/projectile/pistol/sec         = TRADER_ALL,
+								/obj/item/weapon/gun/projectile/heavysniper/boltaction	= TRADER_ALL,
 								/obj/item/weapon/gun/projectile/pistol/sec/MK      = TRADER_BLACKLIST,
 								/obj/item/weapon/gun/projectile/shotgun/pump= TRADER_SUBTYPES_ONLY,
 								/obj/item/ammo_magazine                     = TRADER_SUBTYPES_ONLY,

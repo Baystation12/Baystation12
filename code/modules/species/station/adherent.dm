@@ -135,12 +135,19 @@
 	return slowdown
 
 /datum/species/adherent/handle_fall_special(var/mob/living/carbon/human/H, var/turf/landing)
-
-	if(can_overcome_gravity(H))
+	var/float_is_usable = FALSE
+	if(H && H.stat == CONSCIOUS)
+		for(var/obj/item/organ/internal/powered/float/float in H.internal_organs)
+			if(float.is_usable())
+				float_is_usable = TRUE
+				break
+	if(float_is_usable)
 		if(istype(landing, /turf/simulated/open))
 			H.visible_message("\The [H] descends from \the [landing].", "You descend regally.")
 		else
 			H.visible_message("\The [H] floats gracefully down from \the [landing].", "You land gently on \the [landing].")
+		return TRUE
+	return FALSE
 
 /datum/species/adherent/get_blood_name()
 	return "coolant"

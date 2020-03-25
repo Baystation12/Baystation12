@@ -49,7 +49,7 @@
 	dat += "<br>"
 	dat += "<hr>"
 	dat += "<a href='?src=\ref[src]'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
-	user << browse(dat, "window=artanalyser;size=450x500")
+	show_browser(user, dat, "window=artanalyser;size=450x500")
 	user.set_machine(src)
 	onclose(user, "artanalyser")
 

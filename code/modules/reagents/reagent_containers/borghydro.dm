@@ -61,17 +61,12 @@
 		to_chat(user, "<span class='warning'>The injector is empty.</span>")
 		return
 
-	var/mob/living/carbon/human/H = M
-	if(istype(H))
-		var/obj/item/organ/external/affected = H.get_organ(target_zone)
-		if(!affected)
-			to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
-			return
-		else if(BP_IS_ROBOTIC(affected))
-			to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
-			return
-
-	if (M.can_inject(user, target_zone))
+	var/allow = M.can_inject(user, target_zone)
+	if (allow)
+		if (allow == INJECTION_PORT)
+			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
+			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
+				return
 		to_chat(user, "<span class='notice'>You inject [M] with the injector.</span>")
 		to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
 

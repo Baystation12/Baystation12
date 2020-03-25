@@ -227,10 +227,10 @@
 	return restrained() ? FULLY_BUCKLED : PARTIALLY_BUCKLED
 
 /mob/proc/is_blind()
-	return ((sdisabilities & BLIND) || blinded || incapacitated(INCAPACITATION_KNOCKOUT))
+	return ((sdisabilities & BLINDED) || blinded || incapacitated(INCAPACITATION_KNOCKOUT))
 
 /mob/proc/is_deaf()
-	return ((sdisabilities & DEAF) || ear_deaf || incapacitated(INCAPACITATION_KNOCKOUT))
+	return ((sdisabilities & DEAFENED) || ear_deaf || incapacitated(INCAPACITATION_KNOCKOUT))
 
 /mob/proc/is_physically_disabled()
 	return incapacitated(INCAPACITATION_DISABLED)
@@ -422,7 +422,7 @@
 		'html/changelog.css',
 		'html/changelog.html'
 		)
-	src << browse('html/changelog.html', "window=changes;size=675x650")
+	show_browser(src, 'html/changelog.html', "window=changes;size=675x650")
 	if(prefs.lastchangelog != changelog_hash)
 		prefs.lastchangelog = changelog_hash
 		SScharacter_setup.queue_preferences_save(prefs)

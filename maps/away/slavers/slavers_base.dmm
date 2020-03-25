@@ -4301,9 +4301,8 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kU" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 1;
-	frequency = 1379;
 	id_tag = "solar_port_pump"
 	},
 /turf/simulated/floor/airless/ceiling,

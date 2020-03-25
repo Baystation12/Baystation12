@@ -134,6 +134,7 @@
 	edge = 1
 	base_parry_chance = 50
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	hitsound = 'sound/weapons/blade1.ogg'
 	var/blade_color
 
 /obj/item/weapon/melee/energy/sword/Initialize()
@@ -202,6 +203,7 @@
 	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_BLOOD
 	active_attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	hitsound = 'sound/weapons/blade1.ogg'
 	var/mob/living/creator
 	var/datum/effect/effect/system/spark_spread/spark_system
 
@@ -257,3 +259,4 @@
 	w_class = ITEM_SIZE_SMALL
 	origin_tech = list(TECH_MAGNET = 3)
 	active_attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
+	hitsound = 'sound/weapons/blade1.ogg'

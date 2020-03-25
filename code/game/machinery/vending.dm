@@ -583,14 +583,6 @@
 	icon_state = "fridge_dark"
 	icon_deny = "fridge_dark-deny"
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/glass2/square = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/rocks = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/shake = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/cocktail = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/shot = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/pint = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/mug = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/wine = 10,
-					/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal = 8,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/barflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/flask/vacuumflask = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/gin = 5,
@@ -730,8 +722,6 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 2)
 
-
-
 /obj/machinery/vending/cola
 	name = "Robust Softdrinks"
 	desc = "A softdrink vendor provided by Robust Industries, LLC."
@@ -751,6 +741,27 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 1)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+
+/obj/machinery/vending/soda
+	name = "Radical Renard"
+	desc = "A softdrink vendor promoted by Radical Renard."
+	icon_state = "Soda_Machine"
+	icon_vend = "Soda_Machine-vend"
+	icon_deny = "Soda_Machine-deny"
+	vend_delay = 11
+	base_type = /obj/machinery/vending/soda
+	product_slogans = "Not applicable!"
+	product_ads = "Not applicable."
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry = 10)
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_pork = 10)
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/fitness

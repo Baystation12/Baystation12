@@ -236,6 +236,13 @@
 
 	direction = mob.AdjustMovementDirection(direction)
 	var/turf/old_turf = get_turf(mob)
+
+	if(direction & (UP|DOWN))
+		var/txt_dir = direction & UP ? "upwards" : "downwards"
+		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
+		if(mob.pulling)
+			mob.zPull(direction)
+
 	step(mob, direction)
 
 	// Something with pulling things
@@ -248,12 +255,6 @@
 		G.assailant_moved()
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
-
-	if(direction & (UP|DOWN))
-		var/txt_dir = direction & UP ? "upwards" : "downwards"
-		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		if(mob.pulling)
-			mob.zPull(direction)
 
 	//Moving with objects stuck in you can cause bad times.
 	if(get_turf(mob) != old_turf)
@@ -272,6 +273,12 @@
 
 /mob/living/carbon/human/get_stamina_used_per_step()
 	var/mod = (1-((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN)))
+	if(species && (species.species_flags & SPECIES_FLAG_LOW_GRAV_ADAPTED))
+		if(has_gravity(src))
+			mod *= 1.2
+		else
+			mod *= 0.8
+
 	return config.minimum_sprint_cost + (config.skill_sprint_cost_range * mod)
 
 /datum/movement_handler/mob/movement/proc/HandleGrabs(var/direction, var/old_turf)

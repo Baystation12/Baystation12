@@ -10,9 +10,8 @@
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
-	var/turf/simulated/open/T = GetAbove(src)
-	if(istype(T))
-		T.update_icon()
+	if (above)
+		above.update_mimic()
 
 //Creates a new turf
 /turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)

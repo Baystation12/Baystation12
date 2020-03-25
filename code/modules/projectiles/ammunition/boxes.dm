@@ -29,6 +29,16 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/speedloader/clip
+	name = "stripper clip"
+	desc = "A stripper clip for bolt action rifles."
+	icon_state = "clip"
+	caliber = CALIBER_RIFLE
+	ammo_type = /obj/item/ammo_casing/rifle
+	matter = list(MATERIAL_STEEL = 1800)
+	max_ammo = 5
+	multiple_sprites = 1
+
 /obj/item/ammo_magazine/shotholder
 	name = "shotgun slug holder"
 	desc = "A convenient pouch that holds 12 gauge shells."

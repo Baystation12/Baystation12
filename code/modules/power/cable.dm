@@ -596,7 +596,6 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
 	else
 		to_chat(usr, "<span class='notice'>You cannot do that.</span>")
-	..()
 
 /obj/item/stack/cable_coil/cyborg/verb/set_colour()
 	set name = "Change Colour"

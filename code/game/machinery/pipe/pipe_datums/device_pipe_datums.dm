@@ -76,7 +76,7 @@
 /datum/pipe/pipe_dispenser/device/meter
 	name = "meter"
 	desc = "a meter that monitors pressure and temperature on the attached pipe."
-	build_path = /obj/item/pipe_meter
+	build_path = /obj/item/machine_chassis/pipe_meter
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE
@@ -166,7 +166,7 @@
 /datum/pipe/pipe_dispenser/device/air_sensor
 	name = "gas sensor"
 	desc = "a sensor. It detects gasses."
-	build_path = /obj/item/air_sensor
+	build_path = /obj/item/machine_chassis/air_sensor
 	build_icon_state = "gsensor1"
 	build_icon = 'icons/obj/stationobjs.dmi'
 	pipe_color = null

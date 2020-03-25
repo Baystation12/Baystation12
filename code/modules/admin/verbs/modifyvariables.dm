@@ -103,7 +103,7 @@
 			L[var_value] = mod_list_add_ass() //haha
 		if("No")
 			L += var_value
-	world.log << "### ListVarEdit by [src]: [O.type] [objectvar]: ADDED=[var_value]"
+	to_world_log("### ListVarEdit by [src]: [O.type] [objectvar]: ADDED=[var_value]")
 	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: ADDED=[var_value]")
 	message_admins("[key_name_admin(src)] modified [original_name]'s [objectvar]: ADDED=[var_value]")
 
@@ -254,7 +254,7 @@
 			modify_variables(variable)
 
 		if("DELETE FROM LIST")
-			world.log << "### ListVarEdit by [src]: [O.type] [objectvar]: REMOVED=[html_encode("[variable]")]"
+			to_world_log("### ListVarEdit by [src]: [O.type] [objectvar]: REMOVED=[html_encode("[variable]")]")
 			log_admin("[key_name(src)] modified [original_name]'s [objectvar]: REMOVED=[variable]")
 			message_admins("[key_name_admin(src)] modified [original_name]'s [objectvar]: REMOVED=[variable]")
 			L -= variable
@@ -318,7 +318,7 @@
 			else
 				L[L.Find(variable)] = new_var
 
-	world.log << "### ListVarEdit by [src]: [O.type] [objectvar]: [original_var]=[new_var]"
+	to_world_log("### ListVarEdit by [src]: [O.type] [objectvar]: [original_var]=[new_var]")
 	log_admin("[key_name(src)] modified [original_name]'s [objectvar]: [original_var]=[new_var]")
 	message_admins("[key_name_admin(src)] modified [original_name]'s varlist [objectvar]: [original_var]=[new_var]")
 
@@ -563,7 +563,7 @@
 	if(old_value == new_value)
 		return
 
-	world.log << "### VarEdit by [src]: [O.type] [variable]=[html_encode("[new_value]")]"
+	to_world_log("### VarEdit by [src]: [O.type] [variable]=[html_encode("[new_value]")]")
 	log_and_message_admins("modified [original_name]'s [variable] from '[old_value]' to '[new_value]'")
 
 /client

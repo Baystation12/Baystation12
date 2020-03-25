@@ -43,7 +43,7 @@
 	title = "Scientist"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Chief Science Officer and the Workplace Liaison"
+	supervisors = "the Chief Science Officer"
 	economic_power = 10
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 45
@@ -78,7 +78,7 @@
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov, access_petrov_helm,
 						access_mining_office, access_mining_station, access_xenobiology, access_guppy_helm,
-						access_xenoarch, access_nanotrasen, access_expedition_shuttle, access_guppy, access_hangar,
+						access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
 						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry)
 	minimal_access = list()
 	skill_points = 20
@@ -89,7 +89,7 @@
 	department_flag = SCI
 	total_positions = 4
 	spawn_positions = 4
-	supervisors = "the Chief Science Officer, the Workplace Liaison and science personnel"
+	supervisors = "the Chief Science Officer and science personnel"
 	selection_color = "#633d63"
 	economic_power = 3
 	minimum_character_age = list(SPECIES_HUMAN = 18)
@@ -119,5 +119,5 @@
 
 	access = list(access_tox, access_tox_storage, access_research, access_petrov,
 						access_mining_office, access_mining_station, access_xenobiology,
-						access_xenoarch, access_nanotrasen, access_expedition_shuttle, access_guppy, access_hangar,
+						access_xenoarch, access_nanotrasen, access_solgov_crew, access_expedition_shuttle, access_guppy, access_hangar,
 						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry)

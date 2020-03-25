@@ -49,6 +49,12 @@
 		)
 
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_TONE_SPCR | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	species_flags = SPECIES_FLAG_LOW_GRAV_ADAPTED
+
+	hazard_high_pressure = HAZARD_HIGH_PRESSURE * 0.8            // Dangerously high pressure.
+	warning_high_pressure = WARNING_HIGH_PRESSURE * 0.8          // High pressure warning.
+	warning_low_pressure = WARNING_LOW_PRESSURE * 0.8            // Low pressure warning.
+	hazard_low_pressure = HAZARD_LOW_PRESSURE * 0.8              // Dangerously low pressure.
 
 /datum/species/human/vatgrown
 	name = SPECIES_VATGROWN

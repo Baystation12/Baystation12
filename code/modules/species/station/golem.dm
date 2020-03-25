@@ -49,6 +49,7 @@
 		H.mind.special_role = "Golem"
 	H.real_name = "golem ([rand(1, 1000)])"
 	H.SetName(H.real_name)
+	H.status_flags |= NO_ANTAG
 	..()
 
 /datum/species/golem/post_organ_rejuvenate(var/obj/item/organ/org, var/mob/living/carbon/human/H)

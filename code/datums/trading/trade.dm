@@ -102,13 +102,14 @@
 		return picked
 
 /datum/trader/proc/get_response(var/key, var/default)
-	var/text
 	if(speech && speech[key])
-		text = speech[key]
+		. = speech[key]
 	else
-		text = default
-	text = replacetext(text, "MERCHANT", name)
-	return replacetext(text, "ORIGIN", origin)
+		. = default
+	. = replacetext(., "MERCHANT", name)
+	. = replacetext(., "ORIGIN", origin)
+	. = replacetext(.,"CURRENCY_SINGULAR", GLOB.using_map.local_currency_name_singular)
+	. = replacetext(.,"CURRENCY", GLOB.using_map.local_currency_name)
 
 /datum/trader/proc/print_trading_items(var/num)
 	num = Clamp(num,1,trading_items.len)
@@ -239,7 +240,7 @@
 
 /datum/trader/proc/how_much_do_you_want(var/num, skill = SKILL_MAX)
 	var/atom/movable/M = trading_items[num]
-	. = get_response("how_much", "Hmm.... how about VALUE thalers?")
+	. = get_response("how_much", "Hmm.... how about VALUE CURRENCY?")
 	. = replacetext(.,"VALUE",get_item_value(num, skill))
 	. = replacetext(.,"ITEM", initial(M.name))
 

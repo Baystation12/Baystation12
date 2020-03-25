@@ -36,7 +36,7 @@
 		var/total_item_slowdown = -1
 		for(var/slot = slot_first to slot_last)
 			var/obj/item/I = get_equipped_item(slot)
-			if(I)
+			if(istype(I))
 				var/item_slowdown = 0
 				item_slowdown += I.slowdown_general
 				item_slowdown += I.slowdown_per_slot[slot]
@@ -138,8 +138,9 @@
 		handle_leg_damage()
 
 /mob/living/carbon/human/proc/handle_exertion()
-	if(isSynthetic())
+	if(isSynthetic() || (species.species_flags & (SPECIES_FLAG_IS_PLANT|SPECIES_FLAG_NO_PAIN)))
 		return
+	
 	var/lac_chance =  10 * encumbrance()
 	if(lac_chance && prob(skill_fail_chance(SKILL_HAULING, lac_chance)))
 		make_reagent(1, /datum/reagent/lactate)

@@ -38,6 +38,11 @@ MANTIDIFY(/obj/machinery/door/airlock/external/bolted, "mantid airlock", "door")
 	. = ..()
 	scrubbing_gas -= GAS_METHYL_BROMIDE
 
+/obj/machinery/atmospherics/unary/vent_scrubber/on/ascent/shuttle
+	stock_part_presets = list(
+		/decl/stock_part_preset/radio/receiver/vent_scrubber/shuttle = 1,
+		/decl/stock_part_preset/radio/event_transmitter/vent_scrubber/shuttle = 1
+	)
 /obj/machinery/recharge_station/ascent
 	name = "mantid recharging dock"
 	desc = "An oddly organic aperture stuffed with power connectors."

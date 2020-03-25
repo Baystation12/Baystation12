@@ -41,8 +41,6 @@ var/intercom_range_display_status = 0
 	set category = "Mapping"
 	set name = "-None of these are for ingame use!!"
 
-	..()
-
 /client/proc/camera_view()
 	set category = "Mapping"
 	set name = "Camera Range Display"
@@ -90,14 +88,14 @@ var/intercom_range_display_status = 0
 			if(!(locate(/obj/structure/grille,T)))
 				var/window_check = 0
 				for(var/obj/structure/window/W in T)
-					if (W.dir == turn(C1.dir,180) || W.dir in list(5,6,9,10) )
+					if (W.dir == turn(C1.dir,180) || (W.dir in list(NORTHEAST,SOUTHEAST,SOUTHWEST,NORTHWEST)) )
 						window_check = 1
 						break
 				if(!window_check)
 					output += "<li><font color='red'>Camera not connected to wall at \[[C1.x], [C1.y], [C1.z]\] ([C1.loc.loc]) Network: [C1.network]</color></li>"
 
 	output += "</ul>"
-	usr << browse(output,"window=airreport;size=1000x500")
+	show_browser(usr, output,"window=airreport;size=1000x500")
 	SSstatistics.add_field_details("admin_verb","mCRP") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/intercom_view()

@@ -13,7 +13,15 @@
 
 	. = ..()
 
-	if(M.can_inject(user, target_zone))
+	var/allow = M.can_inject(user, target_zone)
+	if(allow)
+		if (allow == INJECTION_PORT)
+			if(M != user)
+				to_chat(user, SPAN_WARNING("You begin hunting for an injection port on \the [M]'s suit!"))
+			else
+				to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
+				return
 		if(reagents.total_volume)
 			if(M.reagents)
 				var/contained_reagents = reagents.get_reagents()

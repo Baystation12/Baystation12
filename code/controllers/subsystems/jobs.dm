@@ -29,7 +29,7 @@ SUBSYSTEM_DEF(jobs)
 
 	// Create main map jobs.
 	primary_job_datums.Cut()
-	for(var/jobtype in (list(/datum/job/assistant) | GLOB.using_map.allowed_jobs))
+	for(var/jobtype in (list(DEFAULT_JOB_TYPE) | GLOB.using_map.allowed_jobs))
 		var/datum/job/job = get_by_path(jobtype)
 		if(!job)
 			job = new jobtype
@@ -141,6 +141,7 @@ SUBSYSTEM_DEF(jobs)
 	return titles_to_datums[rank]
 
 /datum/controller/subsystem/jobs/proc/get_by_path(var/path)
+	RETURN_TYPE(/datum/job)
 	return types_to_datums[path]
 
 /datum/controller/subsystem/jobs/proc/check_general_join_blockers(var/mob/new_player/joining, var/datum/job/job)
@@ -363,7 +364,7 @@ SUBSYSTEM_DEF(jobs)
 	// For those who wanted to be assistant if their preferences were filled, here you go.
 	for(var/mob/new_player/player in unassigned_roundstart)
 		if(player.client.prefs.alternate_option == BE_ASSISTANT)
-			var/datum/job/ass = /datum/job/assistant
+			var/datum/job/ass = DEFAULT_JOB_TYPE
 			if((GLOB.using_map.flags & MAP_HAS_BRANCH) && player.client.prefs.branches[initial(ass.title)])
 				var/datum/mil_branch/branch = mil_branches.get_branch(player.client.prefs.branches[initial(ass.title)])
 				ass = branch.assistant_job
@@ -399,7 +400,7 @@ SUBSYSTEM_DEF(jobs)
 			if(G)
 				var/permitted = 0
 				if(G.allowed_branches)
-					if(H.char_branch && H.char_branch.type in G.allowed_branches)
+					if(H.char_branch && (H.char_branch.type in G.allowed_branches))
 						permitted = 1
 				else
 					permitted = 1
@@ -509,7 +510,7 @@ SUBSYSTEM_DEF(jobs)
 		if(department_account)
 			remembered_info += "<b>Your department's account number is:</b> #[department_account.account_number]<br>"
 			remembered_info += "<b>Your department's account pin is:</b> [department_account.remote_access_pin]<br>"
-			remembered_info += "<b>Your department's account funds are:</b> T[department_account.money]<br>"
+			remembered_info += "<b>Your department's account funds are:</b> [GLOB.using_map.local_currency_name_short][department_account.money]<br>"
 
 		H.StoreMemory(remembered_info, /decl/memory_options/system)
 

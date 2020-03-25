@@ -16,9 +16,10 @@
 	if(.) update_w_class()
 
 /obj/item/weapon/storage/bag/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
-	if(istype(src.loc, /obj/item/weapon/storage))
+	var/mob/living/carbon/human/H = ishuman(user) ? user : null // if we're human, then we need to check if bag in a pocket
+	if(istype(src.loc, /obj/item/weapon/storage) || H?.is_in_pocket(src))
 		if(!stop_messages)
-			to_chat(user, "<span class='notice'>Take [src] out of [src.loc] first.</span>")
+			to_chat(user, SPAN_NOTICE("Take \the [src] out of [istype(src.loc, /obj) ? "\the [src.loc]" : "the pocket"] first."))
 		return 0 //causes problems if the bag expands and becomes larger than src.loc can hold, so disallow it
 	. = ..()
 

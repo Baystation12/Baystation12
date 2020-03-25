@@ -411,7 +411,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	dat += "<h4>Crew Manifest</h4>"
 	dat += html_crew_manifest()
 
-	src << browse(dat, "window=manifest;size=370x420;can_close=1")
+	show_browser(src, dat, "window=manifest;size=370x420;can_close=1")
 
 //This is called when a ghost is drag clicked to something.
 /mob/observer/ghost/MouseDrop(atom/over)

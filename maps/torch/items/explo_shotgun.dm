@@ -27,11 +27,11 @@
 		icon_state = "expshotgun[!!chambered]"
 	else
 		icon_state = "ghettexpshotgun[!!chambered]"
-	
+
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/Destroy()
 	QDEL_NULL(reinforced)
 	. = ..()
-	
+
 /obj/item/weapon/gun/projectile/shotgun/pump/exploration/free_fire()
 	var/my_z = get_z(src)
 	if(!GLOB.using_map.station_levels.Find(my_z))
@@ -102,7 +102,7 @@
 
 /obj/item/projectile/bullet/shotgun/beanbag/net/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
 	var/obj/item/weapon/energy_net/safari/net = new(loc)
-	net.throw_impact(target)
+	net.try_capture_mob(target)
 	return TRUE
 
 /obj/item/weapon/storage/box/ammo/explo_shells

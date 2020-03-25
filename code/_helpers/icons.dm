@@ -767,7 +767,7 @@ proc // Creates a single icon from a given /atom or /image.  Only the first argu
 						// Pull the default direction.
 						add = icon(I:icon, I:icon_state)
 			else // 'I' is an appearance object.
-				if(istype(A,/obj/machinery/atmospherics) && I in A.underlays)
+				if(istype(A,/obj/machinery/atmospherics) && (I in A.underlays))
 					var/image/Im = I
 					add = getFlatIcon(new/image(I), Im.dir, curicon, curstate, curblend, 1)
 				else

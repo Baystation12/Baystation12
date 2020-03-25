@@ -354,8 +354,8 @@
 	value = 0.2
 
 /datum/reagent/frostoil
-	name = "Frost Oil"
-	description = "A special oil that noticably chills the body. Extracted from Ice Peppers."
+	name = "Chilly Oil"
+	description = "An oil harvested from a mutant form of chili peppers, it has a chilling effect on the body."
 	taste_description = "arctic mint"
 	taste_mult = 1.5
 	reagent_state = LIQUID
@@ -1027,6 +1027,61 @@
 	glass_name = "Brown Star"
 	glass_desc = "It's not what it sounds like..."
 
+/datum/reagent/drink/orange_cola
+	name = "Fizzy Orange"
+	description = "Artificial sugars and orange essence with fizz."
+	taste_description = "orange"
+	color = "#ffa500"
+	adj_temp = -5
+
+	glass_name = "Orange Soda"
+	glass_desc = "A surprisingly tasty dye."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/rootbeer
+	name = "Root WeiBeer"
+	description = "Root beer, brewed from the rare beer root. And a lot of chemicals."
+	taste_description = "faint toothpaste(?) and fizz"
+	color = "#290e05"
+	adj_temp = -5
+
+	glass_name = "Root Beer"
+	glass_desc = "Yep that sure is some rooty beer."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/apple_cola
+	name = "Apple Soda"
+	description = "Apple soda. Using only genuine genetically engineered apples. Engineered from bananas."
+	taste_description = "fizzy apples!"
+	color = "#ffe4a2"
+	adj_temp = -5
+
+	glass_name = "Apple Soda"
+	glass_desc = "Disappointing cider."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/strawberry_soda
+	name = "Strawberry Soda"
+	description = "Soda using sweet berries."
+	taste_description = "oddly bland"
+	color = "#ff6a9b"
+	adj_temp = -5
+
+	glass_name = "Strawberry Soda"
+	glass_desc = "Attractive and alliterative."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/porksoda
+	name = "Pork Soda"
+	description = "Soda made from straight up pork."
+	taste_description = "pork"
+	color = "#ff6a9b"
+	adj_temp = -5
+
+	glass_name = "Pork Soda"
+	glass_desc = "I asked for a glass of PORT!"
+	glass_special = list(DRINK_FIZZ)
+
 /datum/reagent/drink/milkshake
 	name = "Milkshake"
 	description = "Glorious brainfreezing mixture."
@@ -1296,8 +1351,9 @@
 	name = "Gin"
 	description = "It's gin. In space. I say, good sir."
 	taste_description = "an alcoholic christmas tree"
-	color = "#0064c6"
+	color = "#bcf5ff"
 	strength = 15
+	alpha = 120
 
 	glass_name = "gin"
 	glass_desc = "A crystal clear glass of Griffeater gin."
@@ -1369,6 +1425,7 @@
 	taste_description = "paint stripper"
 	color = "#ffff91"
 	strength = 25
+	alpha = 120
 
 	glass_name = "Tequilla"
 	glass_desc = "Now all that's missing is the weird colored shades!"
@@ -1409,8 +1466,9 @@
 	name = "Vodka"
 	description = "Number one drink AND fueling choice for Independents around the galaxy."
 	taste_description = "grain alcohol"
-	color = "#0064c8" // rgb: 0, 100, 200
+	color = "#d5eaff" // rgb: 0, 100, 200
 	strength = 15
+	alpha = 120
 
 	glass_name = "vodka"
 	glass_desc = "The glass contain wodka. Xynta."
@@ -1660,7 +1718,7 @@
 	name = "Classic Martini"
 	description = "Vermouth with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "dry class"
-	color = "#0064c8"
+	color = "#bff5ee"
 	strength = 25
 
 	glass_name = "classic martini"
@@ -1755,7 +1813,7 @@
 	name = "Gin and Tonic"
 	description = "An all time classic, mild cocktail."
 	taste_description = "mild tartness" //???
-	color = "#0064c8"
+	color = "#bef3f3"
 	strength = 50
 
 	glass_name = "gin and tonic"
@@ -1832,7 +1890,7 @@
 	name = "Irish Cream"
 	description = "Whiskey-imbued cream, what else would you expect from the Irish."
 	taste_description = "creamy alcohol"
-	color = "#dddd9a3"
+	color = "#dddd9a"
 	strength = 25
 
 	glass_name = "Irish cream"
@@ -2137,7 +2195,7 @@
 	name = "Vodka Martini"
 	description = "Vodka with Gin. Not quite how 007 enjoyed it, but still delicious."
 	taste_description = "shaken, not stirred"
-	color = "#0064c8"
+	color = "#b8e3e7"
 	strength = 12
 
 	glass_name = "vodka martini"
@@ -2148,7 +2206,7 @@
 	name = "Vodka and Tonic"
 	description = "For when a gin and tonic isn't russian enough."
 	taste_description = "tart bitterness"
-	color = "#0064c8" // rgb: 0, 100, 200
+	color = "#c1dcf7" // rgb: 0, 100, 200
 	strength = 15
 
 	glass_name = "vodka and tonic"
@@ -2159,7 +2217,7 @@
 	name = "White Russian"
 	description = "That's just, like, your opinion, man..."
 	taste_description = "bitter cream"
-	color = "#a68340"
+	color = "#aa976e"
 	strength = 15
 
 	glass_name = "White Russian"

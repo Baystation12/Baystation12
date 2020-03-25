@@ -11,6 +11,9 @@
 		"rad" = "radiation"
 		)
 
+/obj/item/clothing/get_lore_info()
+	return desc
+
 /obj/item/clothing/get_mechanics_info()
 	var/list/armor_strings = list()
 	for(var/armor_type in armour_to_descriptive_term)

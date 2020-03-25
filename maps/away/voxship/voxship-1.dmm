@@ -151,6 +151,7 @@
 /obj/random/medical,
 /obj/random/medical,
 /obj/item/weapon/storage/firstaid/combat,
+/obj/item/weapon/storage/box/detergent,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -217,7 +218,7 @@
 /area/voxship/base)
 "aM" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 2002;
+	frequency = 1439;
 	id_tag = "vox_ship_in";
 	injecting = 1;
 	use_power = 1
@@ -230,7 +231,7 @@
 /area/voxship/ship)
 "aN" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 2002;
+	frequency = 1439;
 	id_tag = "vox_ship_in";
 	injecting = 1;
 	use_power = 1
@@ -312,7 +313,7 @@
 "aZ" = (
 /obj/machinery/computer/air_control{
 	dir = 4;
-	frequency = 2002;
+	frequency = 1439;
 	input_tag = "vox_ship_in";
 	name = "Ship Juice Control";
 	output_tag = "vox_ship_out";
@@ -383,6 +384,13 @@
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /turf/simulated/wall/ocp_wall,
 /area/voxship/ship)
+"bi" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/doc,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/base)
 "bj" = (
 /obj/effect/floor_decal/industrial/warning/fulltile,
 /obj/effect/floor_decal/steeldecal/steel_decals_central2{
@@ -455,7 +463,6 @@
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 2002;
 	icon_state = "map_vent_in";
 	id_tag = "vox_ship_out";
 	initialize_directions = 1;
@@ -479,6 +486,12 @@
 /obj/structure/girder,
 /turf/simulated/floor/asteroid,
 /area/space)
+"bt" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/catwalk,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/engineer,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
 "bu" = (
 /obj/machinery/atmospherics/binary/circulator{
 	anchored = 1;
@@ -540,7 +553,7 @@
 "bB" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 4;
-	frequency = 2002;
+	frequency = 1439;
 	icon_state = "map_injector";
 	id = "vox_ship_in";
 	use_power = 1
@@ -1313,6 +1326,17 @@
 	},
 /turf/simulated/wall/iron,
 /area/voxship/base)
+"dD" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/base)
 "dE" = (
 /obj/effect/shuttle_landmark/vox_base/hangar/vox_shuttle,
 /obj/effect/floor_decal/borderfloor/full,
@@ -1559,16 +1583,9 @@
 /turf/space,
 /area/space)
 "ej" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/effect/submap_landmark/spawnpoint/voxship_crew,
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/machinery/portable_atmospherics/canister/oxygen,
-/obj/structure/catwalk,
-/turf/simulated/floor/plating/vox,
+/obj/effect/floor_decal/steeldecal/steel_decals_central1,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/quill,
+/turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/base)
 "ek" = (
 /obj/machinery/space_heater,
@@ -1626,7 +1643,6 @@
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 2002;
 	icon_state = "map_vent_in";
 	id_tag = "vox_base_out";
 	initialize_directions = 1;
@@ -1817,7 +1833,6 @@
 /area/voxship/ship)
 "eU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/submap_landmark/spawnpoint/voxship_crew,
 /obj/item/weapon/tank/oxygen,
 /obj/item/weapon/tank/oxygen,
 /obj/item/weapon/tank/oxygen,
@@ -1878,7 +1893,7 @@
 /obj/item/weapon/storage/toolbox/syndicate,
 /obj/machinery/computer/air_control{
 	dir = 4;
-	frequency = 2002;
+	frequency = 1439;
 	input_tag = "vox_base_in";
 	name = "Base Breath Control";
 	output_tag = "vox_base_out"
@@ -2014,10 +2029,6 @@
 	},
 /turf/simulated/floor/plating/vox,
 /area/voxship/ship)
-"fx" = (
-/obj/effect/floor_decal/steeldecal/steel_decals_central1,
-/turf/simulated/floor/tiled/techmaint/vox,
-/area/voxship/base)
 "fy" = (
 /obj/machinery/light/small{
 	dir = 8
@@ -6844,7 +6855,7 @@ ec
 bz
 eA
 aV
-fx
+ej
 aV
 aQ
 fk
@@ -6944,7 +6955,7 @@ aQ
 dT
 aV
 eh
-eE
+bi
 eE
 eE
 aV
@@ -7047,7 +7058,7 @@ dU
 ed
 em
 ce
-bG
+bt
 eG
 aV
 aQ
@@ -7149,7 +7160,7 @@ dT
 bU
 cP
 dw
-ej
+dD
 eU
 ey
 aQ

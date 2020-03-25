@@ -132,7 +132,7 @@ obj/machinery/atmospherics/proc/check_connect_types(obj/machinery/atmospherics/a
 /obj/machinery/atmospherics/proc/reassign_network(datum/pipe_network/old_network, datum/pipe_network/new_network)
 	// Used when two pipe_networks are combining
 
-/obj/machinery/atmospherics/proc/return_network_air(datum/network/reference)
+/obj/machinery/atmospherics/proc/return_network_air(datum/pipe_network/reference)
 	// Return a list of gas_mixture(s) in the object
 	//		associated with reference pipe_network for use in rebuilding the networks gases list
 	// Is permitted to return null

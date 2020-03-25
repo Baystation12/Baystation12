@@ -96,9 +96,9 @@ SUBSYSTEM_DEF(zcopy)
 	while (qt_idex <= curr_turfs.len)
 		var/turf/T = curr_turfs[qt_idex]
 		curr_turfs[qt_idex] = null
-		qt_idex++
+		qt_idex += 1
 
-		if (!istype(T) || !T.below)
+		if (!isturf(T) || !T.below || !(T.z_flags & ZM_MIMIC_BELOW))
 			if (no_mc_tick)
 				CHECK_TICK
 			else if (MC_TICK_CHECK)
@@ -125,9 +125,7 @@ SUBSYSTEM_DEF(zcopy)
 		// Handle space parallax.
 		if (T.below.z_eventually_space)
 			T.z_eventually_space = TRUE
-
-			if (istype(T.below, /turf/space))
-				t_target = SPACE_PLANE
+			t_target = SPACE_PLANE
 
 		if (!(T.z_flags & ZM_MIMIC_OVERWRITE))
 			// Some openturfs have icons, so we can't overwrite their appearance.
@@ -197,7 +195,7 @@ SUBSYSTEM_DEF(zcopy)
 		else if (MC_TICK_CHECK)
 			break
 
-	if (qt_idex > 1 && qt_idex <= curr_turfs.len)
+	if (qt_idex > 1)
 		curr_turfs.Cut(1, qt_idex)
 		qt_idex = 1
 
@@ -207,7 +205,7 @@ SUBSYSTEM_DEF(zcopy)
 	while (qo_idex <= curr_ov.len)
 		var/atom/movable/openspace/overlay/OO = curr_ov[qo_idex]
 		curr_ov[qo_idex] = null
-		qo_idex++
+		qo_idex += 1
 
 		if (QDELETED(OO))
 			if (no_mc_tick)
@@ -241,9 +239,9 @@ SUBSYSTEM_DEF(zcopy)
 		else if (MC_TICK_CHECK)
 			break
 
-		if (qo_idex > 1 && qo_idex <= curr_ov.len)
-			curr_ov.Cut(1, qo_idex)
-			qo_idex = 1
+	if (qo_idex > 1)
+		curr_ov.Cut(1, qo_idex)
+		qo_idex = 1
 
 /client/proc/analyze_openturf(turf/T)
 	set name = "Analyze Openturf"

@@ -672,7 +672,7 @@ BLIND     // can't see anything
 	if (I.w_class > hidden_item_max_w_class)
 		to_chat(user, SPAN_WARNING("\The [I] is too large to fit in the [src]."))
 		return
-	if (do_after(user, 2 SECONDS))
+	if (do_after(user, 1 SECONDS))
 		if(!user.unEquip(I, src))
 			return
 		user.visible_message(SPAN_ITALIC("\The [user] shoves \the [I] into \the [src]."), range = 1)
@@ -984,7 +984,6 @@ BLIND     // can't see anything
 	set category = "Object"
 	set src in usr
 	set_sensors(usr)
-	..()
 
 /obj/item/clothing/under/verb/rollsuit()
 	set name = "Roll Down Jumpsuit"

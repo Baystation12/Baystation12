@@ -7,7 +7,7 @@
 		return
 	if(!evacuation_controller || !evacuation_controller.should_call_autotransfer_vote())
 		return FALSE
-	if(!automatic && (!config.allow_vote_restart || !is_admin(creator)))
+	if(!automatic && !config.allow_vote_restart && !is_admin(creator))
 		return FALSE // Admins and autovotes bypass the config setting.
 	if(check_rights(R_INVESTIGATE, 0, creator))
 		return //Mods bypass further checks.
@@ -16,7 +16,7 @@
 		to_chat(creator, "The current alert status is too high to call for a crew transfer!")
 		return FALSE
 	if(GAME_STATE <= RUNLEVEL_SETUP)
-		to_chat(creator, "The crew transfer button has been disabled!")	
+		to_chat(creator, "The crew transfer button has been disabled!")
 		return FALSE
 
 /datum/vote/transfer/setup_vote(mob/creator, automatic)

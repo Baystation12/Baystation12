@@ -7,6 +7,8 @@
 var/global/list/human_icon_cache = list()
 var/global/list/tail_icon_cache = list() //key is [species.race_key][r_skin][g_skin][b_skin]
 var/global/list/light_overlay_cache = list()
+GLOBAL_LIST_EMPTY(overlay_icon_cache)
+GLOBAL_LIST_EMPTY(species_icon_template_cache)
 
 /proc/overlay_image(icon,icon_state,color,flags)
 	var/image/ret = image(icon,icon_state)
@@ -164,21 +166,17 @@ Please contact me on #coderbus IRC. ~Carn x
 			icon_state = null
 			visible_overlays = overlays_standing
 
-		var/matrix/M = matrix()
-		if(lying && (species.prone_overlay_offset[1] || species.prone_overlay_offset[2]))
-			M.Translate(species.prone_overlay_offset[1], species.prone_overlay_offset[2])
-
 		for(var/i = 1 to LAZYLEN(visible_overlays))
 			var/entry = visible_overlays[i]
 			if(istype(entry, /image))
 				var/image/overlay = entry
 				if(i != HO_DAMAGE_LAYER)
-					overlay.transform = M
+					overlay.transform = get_lying_offset(overlay)
 				overlays_to_apply += overlay
 			else if(istype(entry, /list))
 				for(var/image/overlay in entry)
 					if(i != HO_DAMAGE_LAYER)
-						overlay.transform = M
+						overlay.transform = get_lying_offset(overlay)
 					overlays_to_apply += overlay
 
 		var/obj/item/organ/external/head/head = organs_by_name[BP_HEAD]
@@ -202,6 +200,32 @@ Please contact me on #coderbus IRC. ~Carn x
 	animate(src, transform = M, time = ANIM_LYING_TIME)
 
 var/global/list/damage_icon_parts = list()
+
+/mob/living/carbon/human/proc/get_lying_offset(var/image/I)
+	var/matrix/M = matrix()
+	if(!lying)
+		return M
+
+	var/overlay_key = "[I.icon][I.icon_state]"
+	if(!GLOB.overlay_icon_cache[overlay_key])
+		GLOB.overlay_icon_cache[overlay_key] = new/icon(icon = I.icon, icon_state = I.icon_state)
+
+	var/icon/species_key = "[species.get_race_key(src)]"
+	if(species.icon_template)
+		if(!GLOB.species_icon_template_cache[species_key])
+			GLOB.species_icon_template_cache[species_key] = new/icon(icon = species.icon_template, icon_state = "")
+	else
+		species_key = "icons/mob/human.dmiblank"
+		if(!GLOB.species_icon_template_cache[species_key])
+			GLOB.species_icon_template_cache[species_key] = new/icon(icon = 'icons/mob/human.dmi', icon_state = "blank")
+
+	var/icon/icon_template = GLOB.species_icon_template_cache[species_key]
+	var/icon/overlay = GLOB.overlay_icon_cache[overlay_key]
+
+	var/x_offset = Ceiling(0.5*(icon_template.Width() - overlay.Width()))
+	var/y_offset = Ceiling(0.5*(icon_template.Height() - overlay.Height()))
+
+	return M.Translate(x_offset-y_offset, -(x_offset+y_offset))
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists

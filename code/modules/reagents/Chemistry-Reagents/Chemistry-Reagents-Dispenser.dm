@@ -105,6 +105,7 @@
 	taste_description = "pure alcohol"
 	reagent_state = LIQUID
 	color = "#404030"
+	alpha = 180
 	touch_met = 5
 	var/nutriment_factor = 0
 	var/hydration_factor = 0
@@ -295,7 +296,7 @@
 			return
 
 /datum/reagent/acid
-	name = "Sulphuric acid"
+	name = "Sulphuric Acid"
 	description = "A very corrosive mineral acid with the molecular formula H2SO4."
 	taste_description = "acid"
 	reagent_state = LIQUID

@@ -88,7 +88,7 @@
 		apply_effect(agony_amount/10, STUTTER)
 		apply_effect(agony_amount/10, EYE_BLUR)
 
-/mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0)
+/mob/living/proc/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, def_zone = null)
 	  return 0 //only carbon liveforms have this proc
 
 /mob/living/emp_act(severity)
@@ -194,7 +194,7 @@
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
 	visible_message("<span class='danger'>[src] slams into \the [T]!</span>")
 	playsound(T, 'sound/effects/bangtaper.ogg', 50, 1, 1)//so it plays sounds on the turf instead, makes for awesome carps to hull collision and such
-	apply_damage(speed*5, BRUTE)
+	apply_damage(speed*2, BRUTE)
 
 /mob/living/proc/near_wall(var/direction,var/distance=1)
 	var/turf/T = get_step(get_turf(src),direction)

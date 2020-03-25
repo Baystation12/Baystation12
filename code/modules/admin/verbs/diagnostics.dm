@@ -17,7 +17,7 @@
 	var/inactive_on_main_station = 0
 	for(var/zone/zone in SSair.zones)
 		var/turf/simulated/turf = locate() in zone.contents
-		if(turf && turf.z in GLOB.using_map.station_levels)
+		if(turf && (turf.z in GLOB.using_map.station_levels))
 			if(zone.needs_update)
 				active_on_main_station++
 			else
@@ -39,7 +39,7 @@
 	Tile Update: [SSair.tiles_to_update.len]<BR>
 "}
 
-	usr << browse(output,"window=airreport")
+	show_browser(usr, output,"window=airreport")
 
 /client/proc/fix_next_move()
 	set category = "Debug"
@@ -79,7 +79,7 @@
 	var/output = "<b>Radio Report</b><hr>"
 	for (var/fq in radio_controller.frequencies)
 		output += "<b>Freq: [fq]</b><br>"
-		var/list/datum/radio_frequency/fqs = radio_controller.frequencies[fq]
+		var/datum/radio_frequency/fqs = radio_controller.frequencies[fq]
 		if (!fqs)
 			output += "&nbsp;&nbsp;<b>ERROR</b><br>"
 			continue
@@ -95,7 +95,7 @@
 				else
 					output += "&nbsp;&nbsp;&nbsp;&nbsp;[device]<br>"
 
-	usr << browse(output,"window=radioreport")
+	show_browser(usr, output,"window=radioreport")
 	SSstatistics.add_field_details("admin_verb","RR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/reload_admins()

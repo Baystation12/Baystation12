@@ -36,6 +36,9 @@ SUBSYSTEM_DEF(event)
 			)
 	if(GLOB.using_map.use_overmap)
 		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
+	GLOB.using_map.setup_events()
+	for(var/event_level in GLOB.using_map.map_event_container)
+		event_containers[text2num(event_level)].available_events += GLOB.using_map.map_event_container[event_level].available_events
 	. = ..()
 
 /datum/controller/subsystem/event/Recover()
@@ -59,8 +62,7 @@ SUBSYSTEM_DEF(event)
 			return
 
 	while (pos <= EVENT_LEVEL_MAJOR)
-		var/list/datum/event_container/EC = event_containers[pos]
-		EC.process()
+		event_containers[pos].process()
 		pos++
 		
 		if (MC_TICK_CHECK)
@@ -87,7 +89,7 @@ SUBSYSTEM_DEF(event)
 	log_debug("Event '[EM.name]' has completed at [worldtime2stationtime(world.time)].")
 
 /datum/controller/subsystem/event/proc/delay_events(var/severity, var/delay)
-	var/list/datum/event_container/EC = event_containers[severity]
+	var/datum/event_container/EC = event_containers[severity]
 	EC.next_event_time += delay
 
 /datum/controller/subsystem/event/proc/Interact(var/mob/living/user)

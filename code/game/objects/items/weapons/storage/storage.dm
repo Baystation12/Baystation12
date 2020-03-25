@@ -243,9 +243,13 @@
 	return 1
 
 // Only do ui functions for now; the obj is responsible for anything else.
-/obj/item/weapon/storage/proc/on_item_deletion(obj/item/W)
+/obj/item/weapon/storage/proc/on_item_pre_deletion(obj/item/W)
 	if(storage_ui)
 		storage_ui.on_pre_remove(null, W) // Supposed to be able to handle null user.
+
+// Only do ui functions for now; the obj is responsible for anything else.
+/obj/item/weapon/storage/proc/on_item_post_deletion(obj/item/W)
+	if(storage_ui)
 		update_ui_after_item_removal()
 	queue_icon_update()
 

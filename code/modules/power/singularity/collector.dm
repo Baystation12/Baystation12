@@ -214,7 +214,7 @@ var/global/list/rad_collectors = list()
 		overlays += image(icon, "rads_[rad_power]")
 		overlays += image(icon, "on")
 
-/obj/machinery/power/rad_collector/proc/toggle_power()
+/obj/machinery/power/rad_collector/toggle_power()
 	active = !active
 	if(active)
 		flick("ca_active", src)

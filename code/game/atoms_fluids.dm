@@ -46,5 +46,5 @@
 		T.fluid_update()
 
 /atom/movable/update_nearby_tiles(var/need_rebuild)
-	. = ..(need_rebuild)
+	UNLINT(. = ..(need_rebuild))
 	fluid_update()

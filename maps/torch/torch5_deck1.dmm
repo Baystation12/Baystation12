@@ -1287,9 +1287,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1starboard)
 "adf" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bridgestarboard_pump"
 	},
 /obj/machinery/oxygen_pump{
@@ -4287,8 +4286,7 @@
 /area/crew_quarters/head/aux)
 "amj" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 1;
-	frequency = 1331
+	dir = 1
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
@@ -7089,6 +7087,7 @@
 	dir = 4;
 	level = 2
 	},
+/obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "aAr" = (
@@ -11921,9 +11920,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
 "aST" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bridgeport_pump"
 	},
 /obj/machinery/oxygen_pump{
@@ -13460,7 +13458,6 @@
 /area/security/processing)
 "bdz" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1po2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -14947,7 +14944,6 @@
 /area/security/bo)
 "cHm" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1sh_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
@@ -18173,7 +18169,6 @@
 /area/security/oldopscheck)
 "hml" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1so2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -19890,11 +19885,10 @@
 /turf/simulated/wall/r_wall/hull,
 /area/thruster/d1port)
 "jbR" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d1po2_out";
 	initialize_directions = 1;
@@ -21259,6 +21253,7 @@
 	dir = 4;
 	level = 2
 	},
+/obj/item/taperoll/bog,
 /turf/simulated/floor/tiled/freezer,
 /area/crew_quarters/head/aux)
 "kss" = (
@@ -22041,7 +22036,6 @@
 /area/security/opscheck)
 "lom" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d1ph_sensor"
 	},
 /turf/simulated/floor/reinforced/hydrogen,
@@ -26247,7 +26241,6 @@
 /area/rnd/xenobiology/xenoflora)
 "qbb" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "xenobot_sensor"
 	},
 /turf/simulated/floor/reinforced,
@@ -27074,7 +27067,6 @@
 /area/rnd/xenobiology/xenoflora)
 "rab" = (
 /obj/machinery/computer/air_control{
-	frequency = 1441;
 	name = "Xenoflora Gas Monitor";
 	sensor_tag = "xenobot_sensor";
 	sensor_name = "Xenoflora Environment"
@@ -27651,11 +27643,10 @@
 /area/rnd/xenobiology/xenoflora)
 "rEz" = (
 /obj/structure/lattice,
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d1sh_out";
 	initialize_directions = 1;
@@ -27953,11 +27944,10 @@
 "rUh" = (
 /obj/structure/lattice,
 /obj/structure/lattice,
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 2;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d1ph_out";
 	initialize_directions = 1;
@@ -28039,11 +28029,10 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/thruster/d1port)
 "rZb" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 1;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "test_out";
 	initialize_directions = 1;
@@ -28459,7 +28448,6 @@
 /area/thruster/d1port)
 "sqb" = (
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "testchamber_sensor"
 	},
 /obj/effect/landmark{
@@ -30529,11 +30517,10 @@
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "vBa" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d1so2_out";
 	initialize_directions = 1;

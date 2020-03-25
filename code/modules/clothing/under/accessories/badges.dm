@@ -14,6 +14,10 @@
 	var/badge_string = "Detective"
 	var/stored_name
 
+/obj/item/clothing/accessory/badge/get_lore_info()
+	. = ..()
+	. += "<br>Denotes affiliation to <l>[badge_string]</l>."
+
 /obj/item/clothing/accessory/badge/proc/set_name(var/new_name)
 	stored_name = new_name
 
@@ -174,9 +178,9 @@
 	name = "\improper SFP Agent's badge"
 	desc = "A leather-backed gold badge displaying the crest of the Sol Federal Police."
 	icon_state = "agentbadge"
-	slot_flags = SLOT_BELT | SLOT_TIE
+	slot_flags = SLOT_BELT | SLOT_TIE | SLOT_MASK
 	slot = ACCESSORY_SLOT_INSIGNIA
-	badge_string = "Sol Federal Police"
+	badge_string = FACTION_SPACECOPS
 
 /obj/item/clothing/accessory/badge/tracker
 	name = "\improper Tracker's badge"
@@ -184,7 +188,7 @@
 	icon_state = "trackerbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
 	slot = ACCESSORY_SLOT_INSIGNIA
-	badge_string = "Sol Federal Police"
+	badge_string = FACTION_SPACECOPS
 
 /obj/item/clothing/accessory/badge/press
 	name = "press badge"

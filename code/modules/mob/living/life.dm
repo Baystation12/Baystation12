@@ -134,7 +134,7 @@
 
 /mob/living/proc/handle_impaired_vision()
 	//Eyes
-	if(sdisabilities & BLIND || stat)	//blindness from disability or unconsciousness doesn't get better on its own
+	if(sdisabilities & BLINDED || stat)	//blindness from disability or unconsciousness doesn't get better on its own
 		eye_blind = max(eye_blind, 1)
 	else if(eye_blind)			//blindness, heals slowly over time
 		eye_blind = max(eye_blind-1,0)
@@ -143,7 +143,7 @@
 
 /mob/living/proc/handle_impaired_hearing()
 	//Ears
-	if(sdisabilities & DEAF)	//disabled-deaf, doesn't get better on its own
+	if(sdisabilities & DEAFENED)	//disabled-deaf, doesn't get better on its own
 		setEarDamage(null, max(ear_deaf, 1))
 	else if(ear_damage < 25)
 		adjustEarDamage(-0.05, -1)	// having ear damage impairs the recovery of ear_deaf
@@ -201,7 +201,13 @@
 	set_see_invisible(max(vision[2], see_invisible))
 
 /mob/living/proc/update_living_sight()
-	set_sight(sight&(~(SEE_TURFS|SEE_MOBS|SEE_OBJS)))
+	var/set_sight_flags = sight & ~(SEE_TURFS|SEE_MOBS|SEE_OBJS)
+	if(stat & UNCONSCIOUS)
+		set_sight_flags |= BLIND
+	else
+		set_sight_flags &= ~BLIND
+
+	set_sight(set_sight_flags)
 	set_see_in_dark(initial(see_in_dark))
 	set_see_invisible(initial(see_invisible))
 

@@ -7,7 +7,7 @@
 		create_object_html = file2text('html/create_object.html')
 		create_object_html = replacetext(create_object_html, "null /* object types */", "\"[objectjs]\"")
 
-	user << browse(replacetext(create_object_html, "/* ref src */", "\ref[src]"), "window=create_object;size=425x475")
+	show_browser(user, replacetext(create_object_html, "/* ref src */", "\ref[src]"), "window=create_object;size=425x475")
 
 
 /datum/admins/proc/quick_create_object(var/mob/user)
@@ -23,4 +23,4 @@
 		quick_create_object_html = file2text('html/create_object.html')
 		quick_create_object_html = replacetext(quick_create_object_html, "null /* object types */", "\"[objectjs]\"")
 
-	user << browse(replacetext(quick_create_object_html, "/* ref src */", "\ref[src]"), "window=quick_create_object;size=425x475")
+	show_browser(user, replacetext(quick_create_object_html, "/* ref src */", "\ref[src]"), "window=quick_create_object;size=425x475")

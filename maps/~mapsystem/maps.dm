@@ -110,6 +110,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 
 	var/supply_currency_name = "Credits"
 	var/supply_currency_name_short = "Cr."
+	var/local_currency_name = "thalers"
+	var/local_currency_name_singular = "thaler"
+	var/local_currency_name_short = "T"
 
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
@@ -203,6 +206,9 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	// List of /datum/department types to instantiate at roundstart.
 	var/list/departments
 
+	// List of events specific to a map
+	var/list/map_event_container = list()
+
 /datum/map/New()
 	if(!map_levels)
 		map_levels = station_levels.Copy()
@@ -219,7 +225,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(lobby_tracks.len)
-		lobby_track_type = pick(lobby_tracks - exclude)
+		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
 		lobby_track_type = pick(subtypesof(/music_track) - exclude)
 	return decls_repository.get_decl(lobby_track_type)
@@ -227,6 +233,10 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()
 	world.update_status()
+	setup_events()
+
+/datum/map/proc/setup_events()
+	return
 
 /datum/map/proc/setup_job_lists()
 	return

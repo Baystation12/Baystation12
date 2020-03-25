@@ -53,7 +53,7 @@
 		dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
 		dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
 
-	user << browse(dat, "window=cryopod_console")
+	show_browser(user, dat, "window=cryopod_console")
 	onclose(user, "cryopod_console")
 
 /obj/machinery/computer/cryopod/OnTopic(user, href_list, state)

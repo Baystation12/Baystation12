@@ -873,7 +873,6 @@
 	dir = 10
 	},
 /obj/machinery/air_sensor{
-	frequency = 7664;
 	id_tag = "c1"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -940,7 +939,6 @@
 	dir = 10
 	},
 /obj/machinery/air_sensor{
-	frequency = 7663;
 	id_tag = "c2"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -964,7 +962,6 @@
 	dir = 10
 	},
 /obj/machinery/air_sensor{
-	frequency = 7662;
 	id_tag = "c3"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -1020,7 +1017,7 @@
 "ce" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging,
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7664;
+	frequency = 1441;
 	id = "cn2n"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -1051,8 +1048,7 @@
 	icon_state = "intact";
 	dir = 9
 	},
-/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
-	frequency = 7664;
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank{
 	id_tag = "cn2o"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -1229,8 +1225,7 @@
 	dir = 5;
 	icon_state = "intact"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
-	frequency = 7663;
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank{
 	id_tag = "co2o"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -1285,7 +1280,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7663;
+	frequency = 1441;
 	id = "co2n"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -1302,7 +1297,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7662;
+	frequency = 1441;
 	id = "cco2n"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -1457,8 +1452,7 @@
 	icon_state = "intact";
 	dir = 9
 	},
-/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos{
-	frequency = 7662;
+/obj/machinery/atmospherics/unary/vent_pump/siphon/on/atmos/tank{
 	id_tag = "cco2o"
 	},
 /turf/simulated/floor/reinforced/carbon_dioxide,
@@ -1898,7 +1892,6 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 7664;
 	input_tag = "cn2n";
 	name = "Nitrogen Supply Control";
 	output_tag = "cn2o";
@@ -2722,7 +2715,6 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 7663;
 	input_tag = "co2n";
 	name = "Oxygen Supply Control";
 	output_tag = "co2o";
@@ -2816,7 +2808,6 @@
 	dir = 1
 	},
 /obj/machinery/computer/air_control{
-	frequency = 7662;
 	input_tag = "cco2n";
 	name = "Carbon Dioxide Tank Control";
 	output_tag = "cco2o";
@@ -3813,7 +3804,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 2;
-	frequency = 2222;
 	id_tag = "playablecolonymain_pump_out_external";
 	tag = "playablecolonymain_pump"
 	},
@@ -6385,7 +6375,7 @@
 	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/unary/outlet_injector{
-	frequency = 7664;
+	frequency = 1441;
 	id = "cn2n"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -6424,7 +6414,7 @@
 /area/map_template/colony/mineralprocessing)
 "lh" = (
 /obj/machinery/door/airlock/external{
-	frequency = 2222;
+	frequency = 1439;
 	id_tag = "playablecolonymain_exterior_door";
 	locked = 1
 	},
@@ -6701,7 +6691,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	cycle_to_external_air = 1;
-	frequency = 2222;
+	frequency = 1439;
 	id_tag = "playablecolonymain";
 	pixel_y = 28;
 	tag = "playablecolonymain";
@@ -6714,7 +6704,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 2;
-	frequency = 2222;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
 	tag = "playablecolonymain_pump"
@@ -6739,7 +6728,7 @@
 /area/map_template/colony/atmospherics)
 "lM" = (
 /obj/machinery/airlock_sensor{
-	frequency = 2222;
+	frequency = 1439;
 	id_tag = "playablecolonymain_sensor_chamber";
 	pixel_x = 22
 	},
@@ -6749,7 +6738,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 2;
-	frequency = 2222;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
 	tag = "playablecolonymain_pump"
@@ -6794,7 +6782,7 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/access_button/airlock_interior{
-	frequency = 2222;
+	frequency = 1439;
 	master_tag = "playablecolonymain";
 	pixel_x = -22;
 	pixel_y = 5
@@ -6804,7 +6792,7 @@
 	dir = 5
 	},
 /obj/machinery/airlock_sensor/airlock_interior{
-	frequency = 2222;
+	frequency = 1439;
 	id_tag = "playablecolonymain_sensor_interior";
 	pixel_x = -22
 	},
@@ -6929,12 +6917,12 @@
 /area/map_template/colony/mineralprocessing)
 "ma" = (
 /obj/machinery/airlock_sensor/airlock_exterior{
-	frequency = 2222;
+	frequency = 1439;
 	id_tag = "playablecolonymain_sensor_external";
 	pixel_x = 22
 	},
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 2222;
+	frequency = 1439;
 	master_tag = "playablecolonymain";
 	pixel_x = 19;
 	pixel_y = 5
@@ -7029,7 +7017,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
-	frequency = 2222;
+	frequency = 1439;
 	id_tag = "playablecolonymain_interior_door"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -8028,7 +8016,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 2222;
 	id_tag = "playablecolonymain_pump_out_internal";
 	power_rating = 25000;
 	tag = "playablecolonymain_pump"
@@ -8096,7 +8083,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
-	frequency = 2222;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
 	tag = "playablecolonymain_pump"
@@ -8123,7 +8109,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
-	frequency = 2222;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
 	tag = "playablecolonymain_pump"
@@ -8535,7 +8520,6 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 2222;
 	id_tag = "playablecolonymain_pump_out_internal";
 	power_rating = 25000;
 	tag = "playablecolonymain_pump"

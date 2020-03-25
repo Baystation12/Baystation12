@@ -1899,11 +1899,10 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1013;
 	id_tag = "xyn_solar_port_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1013;
+	frequency = 1439;
 	id_tag = "xyn_solar_port_airlock";
 	pixel_x = -25;
 	tag_airpump = "xyn_solar_port_pump";
@@ -1912,7 +1911,7 @@
 	tag_interior_door = "xyn_solar_port_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1013;
+	frequency = 1439;
 	id_tag = "xyn_solar_port_sensor";
 	pixel_y = 25
 	},
@@ -1921,7 +1920,7 @@
 /area/errant_pisces/solar_port)
 "eC" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1013;
+	frequency = 1439;
 	id_tag = "xyn_solar_port_outer"
 	},
 /obj/structure/cable/yellow{
@@ -1944,7 +1943,7 @@
 	id_tag = "xynergy_perimeter_blast"
 	},
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1013;
+	frequency = 1439;
 	master_tag = "xyn_solar_port_airlock";
 	pixel_y = 20
 	},
@@ -2147,7 +2146,7 @@
 /area/errant_pisces/head_m)
 "eV" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1013;
+	frequency = 1439;
 	id_tag = "xyn_solar_port_inner"
 	},
 /obj/structure/cable/yellow{
@@ -2320,7 +2319,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1013;
+	frequency = 1439;
 	master_tag = "xyn_solar_port_airlock";
 	pixel_x = 25;
 	pixel_y = 25
@@ -3944,7 +3943,7 @@
 /area/errant_pisces/live_storage)
 "jy" = (
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1021;
+	frequency = 1439;
 	master_tag = "xyn_ls_airlock";
 	pixel_x = -25;
 	pixel_y = 0
@@ -4072,7 +4071,7 @@
 /area/errant_pisces/dorms)
 "jQ" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1021;
+	frequency = 1439;
 	id_tag = "xyn_ls_outer"
 	},
 /obj/machinery/door/firedoor,
@@ -4141,14 +4140,13 @@
 /area/errant_pisces/cryo)
 "ka" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1021;
 	id_tag = "xyn_ls_pump"
 	},
 /obj/machinery/light/small{
 	dir = 4
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1019;
+	frequency = 1439;
 	id_tag = "xyn_ls_sensor";
 	pixel_x = -25;
 	pixel_y = 0
@@ -4298,7 +4296,7 @@
 /area/errant_pisces/prod_storage)
 "ku" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1021;
+	frequency = 1439;
 	id_tag = "xyn_ls_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -4523,7 +4521,7 @@
 "lc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1021;
+	frequency = 1439;
 	id_tag = "xyn_ls_airlock";
 	pixel_x = 25;
 	pixel_y = 0;
@@ -4842,7 +4840,7 @@
 "mb" = (
 /obj/structure/lattice,
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1015;
+	frequency = 1439;
 	master_tag = "xyn_sci_airlock";
 	pixel_y = -20
 	},
@@ -4850,7 +4848,7 @@
 /area/errant_pisces/science_wing)
 "mc" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1015;
+	frequency = 1439;
 	id_tag = "xyn_sci_outer"
 	},
 /turf/simulated/floor/plating,
@@ -4861,11 +4859,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
-	frequency = 1015;
 	id_tag = "xyn_sci_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1015;
+	frequency = 1439;
 	id_tag = "xyn_sci_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -4875,7 +4872,7 @@
 	tag_interior_door = "xyn_sci_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1015;
+	frequency = 1439;
 	id_tag = "xyn_sci_sensor";
 	pixel_y = 25
 	},
@@ -4883,7 +4880,7 @@
 /area/errant_pisces/science_wing)
 "me" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1015;
+	frequency = 1439;
 	id_tag = "xyn_sci_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -4896,7 +4893,7 @@
 	dir = 9
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1015;
+	frequency = 1439;
 	master_tag = "xyn_sci_airlock";
 	pixel_x = -25;
 	pixel_y = -25
@@ -5298,7 +5295,7 @@
 	dir = 1
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1017;
+	frequency = 1439;
 	master_tag = "xyn_dock1_airlock";
 	pixel_x = 0;
 	pixel_y = 25
@@ -5307,7 +5304,7 @@
 /area/errant_pisces/aft_hallway)
 "nf" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1017;
+	frequency = 1439;
 	id_tag = "xyn_dock1_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5322,11 +5319,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 1017;
 	id_tag = "xyn_dock1_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1017;
+	frequency = 1439;
 	id_tag = "xyn_dock1_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -5336,7 +5332,7 @@
 	tag_interior_door = "xyn_dock1_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1017;
+	frequency = 1439;
 	id_tag = "xyn_dock1_sensor";
 	pixel_y = 25
 	},
@@ -5344,7 +5340,7 @@
 /area/errant_pisces/aft_hallway)
 "nh" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1017;
+	frequency = 1439;
 	id_tag = "xyn_dock1_outer"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -5357,7 +5353,7 @@
 /area/errant_pisces/aft_hallway)
 "ni" = (
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1017;
+	frequency = 1439;
 	master_tag = "xyn_dock1_airlock";
 	pixel_x = -25;
 	pixel_y = -25
@@ -5934,7 +5930,7 @@
 	dir = 5
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1019;
+	frequency = 1439;
 	master_tag = "xyn_dock2_airlock";
 	pixel_x = 0;
 	pixel_y = -25
@@ -5943,7 +5939,7 @@
 /area/errant_pisces/aft_hallway)
 "ol" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1019;
+	frequency = 1439;
 	id_tag = "xyn_dock2_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5958,11 +5954,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 1019;
 	id_tag = "xyn_dock2_airlock"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1019;
+	frequency = 1439;
 	id_tag = "xyn_dock2_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -5972,7 +5967,7 @@
 	tag_interior_door = "xyn_dock2_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1019;
+	frequency = 1439;
 	id_tag = "xyn_dock2_sensor";
 	pixel_y = 25
 	},
@@ -5980,7 +5975,7 @@
 /area/errant_pisces/aft_hallway)
 "on" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1019;
+	frequency = 1439;
 	id_tag = "xyn_dock2_outer"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -5993,7 +5988,7 @@
 /area/errant_pisces/aft_hallway)
 "oo" = (
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1019;
+	frequency = 1439;
 	master_tag = "xyn_dock2_airlock";
 	pixel_x = -25;
 	pixel_y = -25
@@ -6854,7 +6849,7 @@
 "qP" = (
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1023;
+	frequency = 1439;
 	master_tag = "xyn_fish_airlock";
 	pixel_x = 25;
 	pixel_y = -25
@@ -6866,7 +6861,7 @@
 /area/errant_pisces/fishing_wing)
 "qQ" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1023;
+	frequency = 1439;
 	id_tag = "xyn_fish_inner"
 	},
 /obj/machinery/door/firedoor,
@@ -6882,7 +6877,7 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1023;
+	frequency = 1439;
 	id_tag = "xyn_fish_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
@@ -6892,20 +6887,19 @@
 	tag_interior_door = "xyn_fish_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1023;
+	frequency = 1439;
 	id_tag = "xyn_fish_sensor";
 	pixel_y = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 1023;
 	id_tag = "xyn_fish_pump"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/fishing_wing)
 "qS" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1023;
+	frequency = 1439;
 	id_tag = "xyn_fish_outer"
 	},
 /obj/machinery/door/blast/regular/open{
@@ -6919,7 +6913,7 @@
 "qT" = (
 /obj/structure/net,
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1019;
+	frequency = 1439;
 	master_tag = "xyn_dock2_airlock";
 	pixel_x = -25;
 	pixel_y = -25

@@ -25,7 +25,8 @@
 		var/turf/heat_turf = get_turf(src)
 		loc_temp = heat_turf.temperature
 	else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-		loc_temp = loc:air_contents.temperature
+		var/obj/machinery/atmospherics/unary/cryo_cell/cryo
+		loc_temp = cryo.air_contents.temperature
 	else
 		loc_temp = environment.temperature
 
@@ -124,9 +125,9 @@
 
 	src.set_density(!src.lying)
 
-	if (src.sdisabilities & BLIND)
+	if (src.sdisabilities & BLINDED)
 		src.blinded = 1
-	if (src.sdisabilities & DEAF)
+	if (src.sdisabilities & DEAFENED)
 		src.ear_deaf = 1
 
 	if (src.eye_blurry > 0)
