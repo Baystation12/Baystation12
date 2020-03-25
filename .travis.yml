@@ -30,6 +30,8 @@ matrix:
       env: TEST=MAP MAP_PATH=bearcat
     - name: "Map - Away Sites"
       env: TEST=MAP MAP_PATH=away_sites_testing
+    - name: "Map - Outreach"
+      env: TEST=MAP MAP_PATH=away_sites_testing
 
 cache:
   directories:
