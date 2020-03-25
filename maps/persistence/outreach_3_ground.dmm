@@ -55,7 +55,7 @@
 "bc" = (/obj/machinery/door/airlock/maintenance,/turf/simulated/floor/plating,/area/outreach/outpost/hallway)
 "bd" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 10},/turf/simulated/floor/tiled/techfloor/grid,/area/outreach/outpost/hallway)
 "be" = (/turf/simulated/floor/tiled/techfloor/grid,/area/outreach/outpost/hallway)
-"bf" = (/obj/machinery/alarm{dir = 4; pixel_x = -24; step_x = 0},/turf/simulated/floor/tiled/techfloor/grid,/area/outreach/outpost/hallway)
+"bf" = (/obj/machinery/alarm{dir = 4; pixel_x = -24},/turf/simulated/floor/tiled/techfloor/grid,/area/outreach/outpost/hallway)
 "bg" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 1},/turf/simulated/floor/tiled/techfloor/grid,/area/outreach/outpost/hallway)
 "bh" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/tiled,/area/outreach/outpost)
 "bi" = (/turf/simulated/floor/tiled,/area/outreach/outpost/solar_array)

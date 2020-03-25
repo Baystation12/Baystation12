@@ -7,7 +7,10 @@
 	var/min_rare_ratio = MIN_RARE_COUNT_PER_CHUNK
 	var/min_deep_ratio = MIN_DEEP_COUNT_PER_CHUNK
 
-/datum/random_map/noise/ore/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0)
+	var/list/exclude_areas = list()
+
+/datum/random_map/noise/ore/New(var/seed, var/tx, var/ty, var/tz, var/tlx, var/tly, var/do_not_apply, var/do_not_announce, var/never_be_priority = 0, var/list/_exclude_areas)
+	exclude_areas = SANITIZE_LIST(_exclude_areas)
 	rare_val = cell_range * rare_val
 	deep_val = cell_range * deep_val
 	..(seed, tx, ty, tz, (tlx / chunk_size), (tly / chunk_size), do_not_apply, do_not_announce, never_be_priority)
@@ -50,7 +53,8 @@
 	for(var/i=0,i<chunk_size,i++)
 		for(var/j=0,j<chunk_size,j++)
 			var/turf/simulated/T = locate(tx+j, ty+i, origin_z)
-			if(!istype(T) || !T.has_resources)
+			var/area/A = get_area(T)
+			if(!istype(T) || !T.has_resources || (A.name in exclude_areas))
 				continue
 			if(!priority_process)
 				CHECK_TICK
