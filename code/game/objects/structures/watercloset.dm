@@ -514,14 +514,6 @@
 	detail_overlay = "stripes"
 	detail_color = COLOR_WHITE
 
-/obj/item/tape/bog
-	name = "toilet paper"
-	desc = "A length of toilet paper. Seems like custodia is marking their territory again."
-	icon_base = "stripetape"
-	color = COLOR_WHITE
-	detail_overlay = "stripes"
-	detail_color = COLOR_WHITE
-
 /obj/item/taperoll/bog/verb/tear_sheet()
 	set category = "Object"
 	set name = "Tear Sheet"
