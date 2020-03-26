@@ -38,7 +38,9 @@ SUBSYSTEM_DEF(event)
 		overmap_event_handler.create_events(GLOB.using_map.overmap_z, GLOB.using_map.overmap_size, GLOB.using_map.overmap_event_areas)
 	GLOB.using_map.setup_events()
 	for(var/event_level in GLOB.using_map.map_event_container)
-		event_containers[text2num(event_level)].available_events += GLOB.using_map.map_event_container[event_level].available_events
+		var/datum/event_container/receiver = event_containers[text2num(event_level)]
+		var/datum/event_container/donor = GLOB.using_map.map_event_container[event_level]
+		receiver.available_events += donor.available_events
 	. = ..()
 
 /datum/controller/subsystem/event/Recover()
