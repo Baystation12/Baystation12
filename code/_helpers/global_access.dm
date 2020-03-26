@@ -97,6 +97,8 @@
 			return global.SSmapping;
 		if("SSmaterials")
 			return global.SSmaterials;
+		if("SSmining")
+			return global.SSmining;
 		if("SSmisc")
 			return global.SSmisc;
 		if("SSmisc_late")
@@ -1014,6 +1016,8 @@
 			global.SSmapping=newval;
 		if("SSmaterials")
 			global.SSmaterials=newval;
+		if("SSmining")
+			global.SSmining=newval;
 		if("SSmisc")
 			global.SSmisc=newval;
 		if("SSmisc_late")
@@ -1882,6 +1886,7 @@
 	"SSmachines",
 	"SSmapping",
 	"SSmaterials",
+	"SSmining",
 	"SSmisc",
 	"SSmisc_late",
 	"SSmobs",
