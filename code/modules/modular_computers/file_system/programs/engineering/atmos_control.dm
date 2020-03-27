@@ -51,11 +51,22 @@
 /datum/nano_module/atmos_control/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/master_ui = null, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/alarms[0]
+	var/alarmsAlert[0]
+	var/alarmsDanger[0]
 
 	// TODO: Move these to a cache, similar to cameras
 	for(var/obj/machinery/alarm/alarm in (monitored_alarms.len ? monitored_alarms : SSmachines.machinery))
-		alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = max(alarm.danger_level, alarm.alarm_area.atmosalm))
+		var/danger_level = max(alarm.danger_level, alarm.alarm_area.atmosalm)
+		if(danger_level == 2)
+			alarmsAlert[++alarmsAlert.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
+		else if(danger_level == 1)
+			alarmsDanger[++alarmsDanger.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
+		else
+			alarms[++alarms.len] = list("name" = sanitize(alarm.name), "ref"= "\ref[alarm]", "danger" = danger_level)
+	
 	data["alarms"] = alarms
+	data["alarmsAlert"] = alarmsAlert
+	data["alarmsDanger"] = alarmsDanger
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)

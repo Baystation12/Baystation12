@@ -236,6 +236,13 @@
 
 	direction = mob.AdjustMovementDirection(direction)
 	var/turf/old_turf = get_turf(mob)
+
+	if(direction & (UP|DOWN))
+		var/txt_dir = direction & UP ? "upwards" : "downwards"
+		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
+		if(mob.pulling)
+			mob.zPull(direction)
+
 	step(mob, direction)
 
 	// Something with pulling things
@@ -248,12 +255,6 @@
 		G.assailant_moved()
 	for (var/obj/item/grab/G in mob.grabbed_by)
 		G.adjust_position()
-
-	if(direction & (UP|DOWN))
-		var/txt_dir = direction & UP ? "upwards" : "downwards"
-		old_turf.visible_message(SPAN_NOTICE("[mob] moves [txt_dir]."))
-		if(mob.pulling)
-			mob.zPull(direction)
 
 	//Moving with objects stuck in you can cause bad times.
 	if(get_turf(mob) != old_turf)

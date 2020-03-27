@@ -36,6 +36,11 @@
 	display_name = "suspenders"
 	path = /obj/item/clothing/accessory/suspenders
 
+/datum/gear/clothing/suspenders/colorable
+	display_name = "suspenders, colour select"
+	path = /obj/item/clothing/accessory/suspenders/colorable
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/clothing/wcoat
 	display_name = "waistcoat, colour select"
 	path = /obj/item/clothing/accessory/wcoat

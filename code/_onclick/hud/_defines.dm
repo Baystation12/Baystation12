@@ -124,3 +124,11 @@
 
 #define ui_spell_master "EAST-1:16,NORTH-1:16"
 #define ui_genetic_master "EAST-1:16,NORTH-3:16"
+
+//pai
+#define ui_pai_software "NORTH,WEST:6"
+#define ui_pai_subsystems "NORTH,WEST+1:6"
+#define ui_pai_shell "NORTH,WEST+2:6"
+#define ui_pai_light "NORTH,WEST+3:6"
+#define ui_pai_rest "NORTH,WEST+4:6"
+

@@ -96,3 +96,18 @@
 	icon_state = "render"
 	applies_material_colour = FALSE
 	applies_material_name = FALSE
+
+//Utility knives
+/obj/item/weapon/material/knife/utility
+	name = "utility knife"
+	desc = "An utility knife with a polymer handle, commonly used through human space."
+	icon_state = "utility"
+	max_force = 10
+	force_divisor = 0.2
+	w_class = ITEM_SIZE_SMALL
+
+/obj/item/weapon/material/knife/utility/lightweight
+	name = "lightweight utility knife"
+	desc = "A lightweight utility knife made out of a titanium alloy."
+	icon_state = "titanium"
+	matter = list(MATERIAL_TITANIUM = 12000)

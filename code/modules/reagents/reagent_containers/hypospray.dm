@@ -16,6 +16,17 @@
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	slot_flags = SLOT_BELT
 
+	// autoinjectors takes less time than a normal syringe (overriden for hypospray).
+	// This delay is only applied when injecting concious mobs, and is not applied for self-injection
+	// The 1.9 factor scales it so it takes the following number of seconds:
+	// NONE   1.47
+	// BASIC  1.00
+	// ADEPT  0.68
+	// EXPERT 0.53
+	// PROF   0.39
+	var/time = (1 SECONDS) / 1.9
+	var/single_use = TRUE // autoinjectors are not refillable (overriden for hypospray)
+
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M, mob/user)
 	if(!reagents.total_volume)
 		to_chat(user, "<span class='warning'>[src] is empty.</span>")
@@ -23,18 +34,29 @@
 	if (!istype(M))
 		return
 
-	var/mob/living/carbon/human/H = M
-	if(istype(H))
-		var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
-		if(!affected)
-			to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
-			return
-		else if(BP_IS_ROBOTIC(affected))
-			to_chat(user, "<span class='danger'>You cannot inject a robotic limb.</span>")
+	var/allow = M.can_inject(user, check_zone(user.zone_sel.selecting))
+	if(!allow)
+		return
+
+	if (allow == INJECTION_PORT)
+		if(M != user)
+			user.visible_message(SPAN_WARNING("\The [user] begins hunting for an injection port on \the [M]'s suit!"))
+		else
+			to_chat(user, SPAN_NOTICE("You begin hunting for an injection port on your suit."))
+		if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
 			return
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)
+
+	if(user != M && !M.incapacitated() && time) // you're injecting someone else who is concious, so apply the device's intrisic delay
+		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
+		if(!user.do_skilled(time, SKILL_MEDICAL, M))
+			return
+
+	if(single_use && reagents.total_volume <= 0) // currently only applies to autoinjectors
+		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER // Prevents autoinjectors to be refilled.
+
 	to_chat(user, "<span class='notice'>You inject [M] with [src].</span>")
 	to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
 	playsound(src, 'sound/effects/hypospray.ogg',25)
@@ -56,6 +78,8 @@
 	possible_transfer_amounts = "1;2;5;10;15;20;30"
 	amount_per_transfer_from_this = 5
 	volume = 0
+	time = 0 // hyposprays are instant for conscious people
+	single_use = FALSE
 
 /obj/item/weapon/reagent_containers/hypospray/vial/New()
 	..()
@@ -126,7 +150,6 @@
 	w_class = ITEM_SIZE_TINY
 	var/list/starts_with = list(/datum/reagent/inaprovaline = 5)
 	var/band_color = COLOR_CYAN
-	var/time = 1 SECONDS // takes less time than a normal syringe
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/New()
 	..()
@@ -136,15 +159,8 @@
 	return
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/attack(mob/M as mob, mob/user as mob)
-	if(user != M && !M.incapacitated())
-		to_chat(user, SPAN_WARNING("\The [user] is trying to inject \the [M] with \the [name]."))
-		if(!do_mob(user, M, time))
-			return
 	..()
-	if(reagents.total_volume <= 0) //Prevents autoinjectors to be refilled.
-		atom_flags &= ~ATOM_FLAG_OPEN_CONTAINER
 	update_icon()
-	return
 
 /obj/item/weapon/reagent_containers/hypospray/autoinjector/on_update_icon()
 	overlays.Cut()

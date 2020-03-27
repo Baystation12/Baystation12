@@ -38,8 +38,9 @@
 
 /proc/group_areas_by_z_level(var/list/predicates)
 	. = list()
+	var/enough_digits_to_contain_all_zlevels = 3
 	for(var/area/A in get_filtered_areas(predicates))
-		group_by(., num2text(A.z), A)
+		group_by(., add_zero(num2text(A.z), enough_digits_to_contain_all_zlevels), A)
 
 /*
 	Pick helpers

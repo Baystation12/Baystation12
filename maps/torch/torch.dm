@@ -4,6 +4,7 @@
 	#include "torch_antagonism.dm"
 	#include "torch_areas.dm"
 	#include "torch_elevator.dm"
+	#include "torch_events.dm"
 	#include "torch_holodecks.dm"
 	#include "torch_lobby.dm"
 	#include "torch_machinery.dm"
@@ -25,7 +26,9 @@
 	#include "datums/uniforms_fleet.dm"
 	#include "datums/game_modes/torch_traitor.dm"
 	#include "datums/game_modes/torch_revolution.dm"
+	#include "datums/game_modes/torch_siege.dm"
 	#include "datums/game_modes/torch_meteor.dm"
+	#include "datums/game_modes/torch_uprising.dm"
 	#include "datums/reports/command.dm"
 	#include "datums/reports/corporate.dm"
 	#include "datums/reports/exploration.dm"
@@ -164,6 +167,7 @@
 	#include "../away/unishi/unishi.dm"
 	#include "../away/voxship/voxship.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
+	#include "../away/meatstation/meatstation.dm"
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 

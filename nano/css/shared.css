@@ -705,3 +705,8 @@ th.bot {
 .candystripe:nth-child(odd) {
 	background-color: rgba(0, 0, 0, 0.16);
 }
+
+.redacted {
+	background-color: black;
+	color: black;
+}

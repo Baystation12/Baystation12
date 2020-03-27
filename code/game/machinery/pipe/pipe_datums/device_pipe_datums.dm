@@ -43,7 +43,7 @@
 	build_path = /obj/item/pipe
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "pump"
-	constructed_path = /obj/machinery/atmospherics/binary/pump/buildable
+	constructed_path = /obj/machinery/atmospherics/binary/pump
 	pipe_class = PIPE_CLASS_BINARY
 
 /datum/pipe/pipe_dispenser/device/pressureregulator
@@ -61,7 +61,7 @@
 	build_path = /obj/item/pipe
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_FUEL
 	build_icon_state = "volumepump"
-	constructed_path = /obj/machinery/atmospherics/binary/pump/high_power/buildable
+	constructed_path = /obj/machinery/atmospherics/binary/pump/high_power
 	pipe_class = PIPE_CLASS_BINARY
 
 /datum/pipe/pipe_dispenser/device/scrubber
@@ -70,7 +70,7 @@
 	build_path = /obj/item/pipe
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SCRUBBER
 	build_icon_state = "scrubber"
-	constructed_path = /obj/machinery/atmospherics/unary/vent_scrubber/buildable
+	constructed_path = /obj/machinery/atmospherics/unary/vent_scrubber
 	pipe_class = PIPE_CLASS_UNARY
 
 /datum/pipe/pipe_dispenser/device/meter
@@ -172,7 +172,7 @@
 	pipe_color = null
 	connect_types = null
 	colorable = FALSE
-	constructed_path = /obj/machinery/air_sensor/buildable
+	constructed_path = /obj/machinery/air_sensor
 	pipe_class = PIPE_CLASS_OTHER
 
 /datum/pipe/pipe_dispenser/device/outlet_injector

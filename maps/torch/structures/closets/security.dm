@@ -150,6 +150,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/device/tape/random = 3,
 		/obj/item/clothing/glasses/sunglasses/sechud/toggle,
+		/obj/item/clothing/glasses/sunglasses/sechud/goggles,
 		/obj/item/device/holowarrant,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/weapon/storage/belt/holster/forensic,

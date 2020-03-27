@@ -36,4 +36,5 @@
 \[pre\] - \[/pre\] : Adds preformatted text, forcing the text to be fixed width.<br>
 \[fontred\] - \[/font\] : Makes the text red.<br>
 \[fontblue\] - \[/font\] : Makes the text blue.<br>
-\[fontgreen\] - \[/font\] : Makes the text green.<br><br>"}
+\[fontgreen\] - \[/font\] : Makes the text green.<br>
+\[redacted\] : Adds R E D A C T E D in black font on a black background.<br><br>"}
