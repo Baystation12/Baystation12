@@ -14,9 +14,9 @@
 	use_power = POWER_USE_OFF
 
 	//better laser, increased brightness & power consumption
-	var/l_max_bright = 0.8 //brightness of light when on, can be negative
-	var/l_inner_range = 0 //inner range of light when on, can be negative
-	var/l_outer_range = 4.5 //outer range of light when on, can be negative
+	var/l_max_bright = 0.99 //brightness of light when on, can be negative
+	var/l_inner_range = 5 //inner range of light when on, can be negative
+	var/l_outer_range = 10 //outer range of light when on, can be negative
 
 /obj/machinery/floodlight/on_update_icon()
 	icon_state = "flood[panel_open ? "o" : ""][panel_open && get_cell() ? "b" : ""]0[use_power == POWER_USE_ACTIVE]"
