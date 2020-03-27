@@ -114,6 +114,9 @@
 	if(H.stat == DEAD || (H.status_flags & FAKEDEATH))
 		dat += "<span class='scan_warning'>[b]Time of Death:[endb] [time2text(worldtime2stationtime(H.timeofdeath), "hh:mm")]</span>"
 
+	if (H.internal_organs_by_name[BP_STACK])
+		dat += "<span class='scan_notice'>Subject has a neural lace implant.</span>"
+
 	// Pulse rate.
 	var/pulse_result = "normal"
 	if(H.should_have_organ(BP_HEART))
