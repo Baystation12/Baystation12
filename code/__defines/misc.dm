@@ -124,6 +124,12 @@
 #define NTNETSPEED_ETHERNET 2		// GQ/s transfer speed when the device is using wired connection
 #define NTNETSPEED_DOS_AMPLIFICATION 5	// Multiplier for Denial of Service program. Resulting load on NTNet relay is this multiplied by NTNETSPEED of the device
 
+// EXONET transfer speeds
+#define NETWORKSPEED_LOWSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
+#define NETWORKSPEED_HIGHSIGNAL 1	// GQ/s transfer speed when the device is wirelessly connected and on High signal
+#define NETWORKSPEED_ETHERNET 2		// GQ/s transfer speed when the device is using wired connection
+#define NETWORKSPEED_DOS_AMPLIFICATION 5	// Multiplier for Denial of Service program. Resulting load on NTNet relay is this multiplied by NTNETSPEED of the device
+
 // Program bitflags
 #define PROGRAM_ALL 		0x1F
 #define PROGRAM_CONSOLE 	0x1
