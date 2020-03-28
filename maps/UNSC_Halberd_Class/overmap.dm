@@ -2,7 +2,7 @@
 	name = "UNSC Light Brigade"
 	desc = "Halberd Class Destroyer."
 
-	icon = 'Halberdclass.dmi'
+	icon = 'halberdclass_new.dmi'
 	icon_state = "ship"
 	fore_dir = WEST
 	vessel_mass = 4
