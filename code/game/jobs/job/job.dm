@@ -67,7 +67,7 @@
 		return FALSE
 	. = outfit.equip(H, title, alt_title)
 
-	if(spawn_faction)
+	if(H && spawn_faction)
 		H.faction = spawn_faction
 		if(ticker.mode)
 			var/datum/faction/F = GLOB.factions_by_name[spawn_faction]
