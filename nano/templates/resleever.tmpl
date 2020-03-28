@@ -1,0 +1,31 @@
+<div class='item'>
+	<div class='itemLabel'>
+		Occupant:
+	</div>
+	<div class='itemContent'>
+		{{:data.name}}
+	</div>
+</div>
+<div class='item'>
+	<div class='itemLabel'>
+		Cortical Stack backup:
+	</div>
+	<div class='itemContent'>
+		{{:data.lace}}
+	</div>
+</div>
+<div class='item'>
+	<div class='itemLabel'>
+		Procedure Progress:
+	</div>
+	<div class='itemContent'>
+		{{:helper.displayBar(data.remaining, 0, data.timetosleeve, 'average')}}
+	</div>
+</div>
+<div class='item'>
+	{{:helper.link("Start Procedure", null, {"action" : "begin"}, data.ready ? null : 'disabled')}}
+</div>
+<div class='item'>
+	{{:helper.link('Eject Occupant', null,  {"action" : "eject"}, data.isOccupiedEjectable ? null : "disabled")}}
+	{{:helper.link('Eject Cortical Stack', null,  {"action" : "ejectlace"}, data.isLaceEjectable ? null : "disabled")}}
+</div>

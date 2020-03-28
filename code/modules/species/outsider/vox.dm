@@ -74,7 +74,7 @@
 		BP_KIDNEYS =    /obj/item/organ/internal/kidneys/vox,
 		BP_BRAIN =      /obj/item/organ/internal/brain,
 		BP_EYES =       /obj/item/organ/internal/eyes/vox,
-		BP_STACK =      /obj/item/organ/internal/voxstack,
+		BP_STACK =      /obj/item/organ/internal/stack/vox,
 		BP_HINDTONGUE = /obj/item/organ/internal/hindtongue
 		)
 

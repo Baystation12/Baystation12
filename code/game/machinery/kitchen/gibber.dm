@@ -165,7 +165,8 @@
 	update_icon()
 
 	admin_attack_log(user, occupant, "Gibbed the victim", "Was gibbed", "gibbed")
-	src.occupant.ghostize()
+	if(!config.persistent)
+		src.occupant.ghostize()
 	addtimer(CALLBACK(src, .proc/finish_gibbing), gib_time)
 
 	var/list/gib_products = shuffle(occupant.harvest_meat() | occupant.harvest_skin() | occupant.harvest_bones())

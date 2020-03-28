@@ -70,12 +70,17 @@
 		brainmob.real_name = H.real_name
 		brainmob.dna = H.dna.Clone()
 		brainmob.timeofhostdeath = H.timeofdeath
-
+		
 	if(H.mind)
 		H.mind.transfer_to(brainmob)
 
 	to_chat(brainmob, "<span class='notice'>You feel slightly disoriented. That's normal when you're just \a [initial(src.name)].</span>")
 	callHook("debrain", list(brainmob))
+
+	if(config.persistent)
+		if(!switchToStack(brainmob.ckey))
+			crash_with("TODO: Switch to backup or destroy.")
+
 
 /obj/item/organ/internal/brain/examine(mob/user)
 	. = ..()
