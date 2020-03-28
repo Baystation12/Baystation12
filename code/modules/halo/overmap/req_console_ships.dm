@@ -8,7 +8,7 @@
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_unsc_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/cheap_unsc_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/prowler.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_combat.dmi')
 
 /datum/spawner_choice/cheap_unsc_combat
 	choice_name = "UNSC Combat Scout Ship"
@@ -25,7 +25,7 @@
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_unsc_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/heavyarmed_unsc_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/Heavycorvette.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_heavyarmed.dmi')
 
 /datum/spawner_choice/heavyarmed_unsc_combat
 	choice_name = "UNSC Combat MAC Ship"
@@ -42,7 +42,7 @@
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_unsc_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/experimental_unsc_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/Cruiser.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_macplatform.dmi')
 
 /datum/spawner_choice/experimental_unsc_combat
 	choice_name = "UNSC Experimental Combat MAC Ship"
@@ -60,7 +60,7 @@
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/unsc_slipspace_tender)
 	ship_max_speed = 3.5//Non combat ships are provided with a speed boost to allow them to dodge combat ships more effectively.
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/Halberdclass.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_tender.dmi')
 
 /datum/spawner_choice/unsc_slipspace_tender
 	choice_name = "UNSC Slipspace Support Ship"
@@ -80,7 +80,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/unsc_podcarrier)
 	ship_max_speed = 3.5
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/prowler.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_podcarrier.dmi')
 
 /datum/spawner_choice/unsc_podcarrier
 	choice_name = "UNSC Podcarrier Transport Ship"
@@ -99,7 +99,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/unsc_trooptransport)
 	ship_max_speed = 3.5
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/prowler.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_trooptransport.dmi')
 
 /datum/spawner_choice/unsc_trooptransport
 	choice_name = "UNSC Troop Transport Ship"
@@ -118,7 +118,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_cov_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/cheap_cov_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi') //Until we get specially made ones, use the same sprite for all
 
 /datum/spawner_choice/cheap_cov_combat
 	choice_name = "Covenant Combat Scout Ship"
@@ -135,7 +135,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_cov_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/heavyarmed_cov_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/SDV.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
 
 /datum/spawner_choice/heavyarmed_cov_combat
 	choice_name = "Combat Energy Projector Ship"
@@ -152,7 +152,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_cov_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/experimental_cov_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/Corvette2.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
 
 /datum/spawner_choice/experimental_cov_combat
 	choice_name = "Experimental Combat Energy Projector Ship"
@@ -170,7 +170,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with dec
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/cov_slipspace_tender)
 	ship_max_speed = 3.5//Non combat ships are provided with a speed boost to allow them to dodge combat ships more effectively.
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/CRSlightcruiser.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
 
 /datum/spawner_choice/cov_slipspace_tender
 	choice_name = "Covenant Slipspace Support Ship"
@@ -190,7 +190,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/cov_podcarrier)
 	ship_max_speed = 3.5
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
 
 /datum/spawner_choice/cov_podcarrier
 	choice_name = "Covenant Podcarrier Transport Ship"
@@ -209,7 +209,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/cov_trooptransport)
 	ship_max_speed = 3.5
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
 
 /datum/spawner_choice/cov_trooptransport
 	choice_name = "Covenant Troop Transport Ship"
@@ -228,7 +228,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/cheap_urf_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/cheap_urf_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/innie_prowler.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_combat.dmi')
 
 /datum/spawner_choice/cheap_urf_combat
 	choice_name = "URF Combat Scout Ship"
@@ -245,7 +245,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/heavyarmed_urf_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/heavyarmed_urf_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/urfcorvette.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_heavyarmed.dmi')
 
 /datum/spawner_choice/heavyarmed_urf_combat
 	choice_name = "URF Combat MAC Ship"
@@ -262,7 +262,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/experimental_urf_combat
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/experimental_urf_combat)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/urf_cargo.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_macplatform.dmi')
 
 /datum/spawner_choice/experimental_urf_combat
 	choice_name = "URF Experimental Combat MAC Ship"
@@ -279,7 +279,7 @@ A lightly armored vessel fitted for troop and vehicle deployment. Armed with pul
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/urf_slipspace_tender
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/urf_slipspace_tender)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/medical_ship.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_tender.dmi')
 	ship_max_speed = 3.5//Non combat ships are provided with a speed boost to allow them to dodge combat ships more effectively.
 
 /datum/spawner_choice/urf_slipspace_tender
@@ -299,7 +299,7 @@ alongside an improved assortment of engineering supplies. Lacks weapons and has 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/urf_podcarrier
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/urf_podcarrier)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/heavy_freighter.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_podcarrier.dmi')
 	ship_max_speed = 3.5
 
 /datum/spawner_choice/urf_podcarrier
@@ -318,7 +318,7 @@ A lightly armored vessel fitted for orbital troop deployment, boarding and orbit
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/urf_trooptransport
 	name = "Ship"
 	ship_datums = list(/datum/npc_ship/urf_trooptransport)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/heavy_freighter.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/req_trooptransport.dmi')
 	ship_max_speed = 3.5
 
 /datum/spawner_choice/urf_trooptransport
