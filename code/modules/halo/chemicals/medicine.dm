@@ -100,13 +100,15 @@
 			for(var/obj/embedded in w.embedded_objects)
 				if(!check_and_consume_cost(BIOFOAM_COST_REMOVESHRAP))
 					continue
+				o.implants -= selection
+
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
 				M.embedded -= embedded
 				M.pinned -= embedded
 				if(M.pinned.len == 0)
 					M.anchored = 0
 				M.contents -= embedded
-				embedded.loc = M.loc //And placing it on the ground below
+				embedded.forceMove(get_turf(M))//And placing it on the ground below
 				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")
 
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.

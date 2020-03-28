@@ -102,6 +102,12 @@
 		var/mob/living/m = loc
 		if(istype(m))
 			m.apply_damage(our_dam,BURN) //The low damage done by this shard exploding is meant to bypass defences, it's embedded into you.
+			m.embedded -= embedded
+			m.pinned -= embedded
+			if(m.pinned.len == 0)
+				m.anchored = 0
+			m.contents -= embedded
+			embedded.forceMove(get_turf(m))//And placing it on the ground below
 		qdel(src)
 		return
 
@@ -123,15 +129,19 @@
 	if(!istype(L))
 		. = ..()
 		return
-	var/list/embedded_shards[0]
-	for(var/obj/shard in L.contents )
-		if(!istype(shard,/obj/item/weapon/material/shard))
-			continue
+	var/list/embedded_shards = list()
+	for(var/obj/item/weapon/material/shard in L.contents )
 		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
 			explosion(L.loc,-1,1,2,5,alt_explosion_damage = 100,alt_explosion_range = 1)
-			for(var/I in embedded_shards)
+			for(var/obj/I in embedded_shards)
+				L.embedded -= I
+				L.pinned -= I
+				if(L.pinned.len == 0)
+					L.anchored = 0
+				L.contents -= I
+				I.forceMove(get_turf(L))//And placing it on the ground below
 				qdel(I)
 	if(prob(NEEDLER_EMBED_PROB)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
 		var/obj/item/weapon/material/shard/shrapnel/needleshrap/shard = new
