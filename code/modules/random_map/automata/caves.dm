@@ -106,6 +106,9 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	game_log("ASGEN", "Set [empty_count] turfs to high-chance random minerals.")
 	return 1
 
+/datum/random_map/automata/cave_system/proc/is_valid_turf(var/turf/T)
+	return T && target_turf_type && istype(T, target_turf_type)
+
 /datum/random_map/automata/cave_system/apply_to_map()
 	if(!origin_x) origin_x = 1
 	if(!origin_y) origin_y = 1
@@ -117,7 +120,7 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 	for (var/thing in block(locate(origin_x, origin_y, origin_z), locate(limit_x, limit_y, origin_z)))
 		var/turf/T = thing
 		new_path = null
-		if (!T || (target_turf_type && !istype(T, target_turf_type)))
+		if (!is_valid_turf(T))
 			continue
 
 		tmp_cell = TRANSLATE_COORD(T.x, T.y)
@@ -141,6 +144,9 @@ GLOBAL_LIST_INIT(weighted_minerals_rich, \
 		num_applied += 1
 		T.ChangeTurf(new_path, minerals)
 		get_additional_spawns(map[tmp_cell], T)
+		after_assign_turf(T)
 		CHECK_TICK
 
 	game_log("ASGEN", "Applied [num_applied] turfs.")
+
+/datum/random_map/automata/cave_system/proc/after_assign_turf(var/turf/T)

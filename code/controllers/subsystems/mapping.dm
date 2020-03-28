@@ -90,3 +90,6 @@ SUBSYSTEM_DEF(mapping)
 			space_ruins_templates[MT.name] = MT
 		else if(istype(MT, /datum/map_template/ruin/away_site))
 			away_sites_templates[MT.name] = MT
+
+/datum/controller/subsystem/mapping/proc/RegisterSavedLevel(var/z)
+	LAZYDISTINCTADD(saved_levels, z)

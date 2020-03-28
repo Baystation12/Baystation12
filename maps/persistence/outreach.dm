@@ -3,6 +3,7 @@
 	#include "outreach_areas.dm"
 	#include "outreach_jobs.dm"
 	#include "outreach_lobby.dm"
+	#include "outreach_exoplanet.dm"
 	#include "../../code/datums/music_tracks/businessend.dm"
 	#include "../../code/datums/music_tracks/salutjohn.dm"
 	// #include "example_unit_testing.dm"

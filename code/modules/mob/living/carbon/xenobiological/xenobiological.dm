@@ -79,11 +79,12 @@
 	ingested = new(240, src, CHEM_INGEST)
 	verbs += /mob/living/proc/ventcrawl
 
-	src.colour = colour
-	number = random_id(/mob/living/carbon/slime, 1, 1000)
-	name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
-	real_name = name
-	mutation_chance = rand(25, 35)
+	if(colour)
+		src.colour = colour
+		number = random_id(/mob/living/carbon/slime, 1, 1000)
+		name = "[colour] [is_adult ? "adult" : "baby"] slime ([number])"
+		real_name = name
+		mutation_chance = rand(25, 35)
 	regenerate_icons()
 	..(location)
 

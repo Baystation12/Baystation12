@@ -24,8 +24,6 @@ matrix:
       env: TEST=CODE
     - name: "Map - Example"
       env: TEST=MAP MAP_PATH=example
-    - name: "Map - Torch"
-      env: TEST=MAP MAP_PATH=torch
     - name: "Map - Bearcat"
       env: TEST=MAP MAP_PATH=bearcat
     - name: "Map - Away Sites"

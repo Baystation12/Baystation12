@@ -31,22 +31,22 @@
 	. = ..()
 	icon_state = "base"
 
-	ports = new()
-	for(var/d in GLOB.cardinal)
-		var/datum/omni_port/new_port = new(src, d)
-		switch(d)
-			if(NORTH)
-				new_port.mode = tag_north
-			if(SOUTH)
-				new_port.mode = tag_south
-			if(EAST)
-				new_port.mode = tag_east
-			if(WEST)
-				new_port.mode = tag_west
-		if(new_port.mode > 0)
-			initialize_directions |= d
-		ports += new_port
-
+	if(!ports || !length(ports)) // PS13 edit. We don't need to assign ports if they're already built.
+		ports = new()
+		for(var/d in GLOB.cardinal)
+			var/datum/omni_port/new_port = new(src, d)
+			switch(d)
+				if(NORTH)
+					new_port.mode = tag_north
+				if(SOUTH)
+					new_port.mode = tag_south
+				if(EAST)
+					new_port.mode = tag_east
+				if(WEST)
+					new_port.mode = tag_west
+			if(new_port.mode > 0)
+				initialize_directions |= d
+			ports += new_port
 	build_icons()
 
 /obj/machinery/atmospherics/omni/on_update_icon()

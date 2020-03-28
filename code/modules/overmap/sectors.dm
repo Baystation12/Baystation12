@@ -29,7 +29,8 @@
 	if(. == INITIALIZE_HINT_QDEL)
 		return
 
-	find_z_levels()     // This populates map_z and assigns z levels to the ship.
+	if(!map_z || length(map_z) == 0)
+		find_z_levels()     // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
 
 	if(!GLOB.using_map.overmap_z)

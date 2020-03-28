@@ -46,6 +46,7 @@
 	var/list/spawned_features
 
 	var/habitability_class
+	var/generation_complete
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_habitability()
 	var/roll = rand(1,100)
@@ -58,7 +59,8 @@
 			habitability_class = HABITABILITY_BAD
 
 /obj/effect/overmap/visitable/sector/exoplanet/New(nloc, max_x, max_y)
-	if(!GLOB.using_map.use_overmap)
+	if(!GLOB.using_map.use_overmap || generation_complete)
+		START_PROCESSING(SSobj, src)
 		return
 
 	maxx = max_x ? max_x : world.maxx
@@ -83,7 +85,7 @@
 		possible_features += new ruin
 	..()
 
-/obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()
+/obj/effect/overmap/visitable/sector/exoplanet/proc/build_level()	
 	generate_habitability()
 	generate_atmosphere()
 	generate_map()
@@ -93,6 +95,7 @@
 	generate_daycycle()
 	generate_planet_image()
 	START_PROCESSING(SSobj, src)
+	generation_complete = TRUE
 
 //attempt at more consistent history generation for xenoarch finds.
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_engravings()

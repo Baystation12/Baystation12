@@ -1,2905 +1,3369 @@
 [
-	{
-	  "path": "/datum/computer_file/data",
-	  "vars": [
-		"stored_data",
-		"size",
-		"block_size"
-	  ]
-	},
-	{
-	  "path": "/datum/computer_file/program",
-	  "vars": [
-		"program_state",
-		"computer"
-	  ]
-	},
-	{
-	  "path": "/datum/dna",
-	  "vars": [
-		"uni_identity",
-		"struc_enzymes",
-		"unique_enzymes",
-		"UI",
-		"SE",
-		"b_type",
-		"real_name",
-		"species"
-	  ]
-	},
-	{
-	  "path": "/datum/extension/holster",
-	  "vars": [
-		"holder",
-		"atom_holder",
-		"storage",
-		"can_holster",
-		"holstered"
-	  ]
-	},
-	{
-	  "path": "/datum/fluidtrack",
-	  "vars": [
-		"direction",
-		"basecolor",
-		"crusty"
-	  ]
-	},
-	{
-	  "path": "/datum/gas_mixture",
-	  "vars": [
-		"gas",
-		"temperature",
-		"total_moles",
-		"volume",
-		"group_multiplier"
-	  ]
-	},
-	{
-	  "path": "/datum/integrated_io",
-	  "vars": [
-		"holder",
-		"linked",
-		"io_type",
-		"pin_type",
-		"ord"
-	  ]
-	},
-	{
-	  "path": "/datum/mind",
-	  "vars": [
-		"memory"
-	  ]
-	},
-	{
-	  "path": "/datum/money_account",
-	  "vars": [
-		"owner_name",
-		"account_number",
-		"remote_access_pin",
-		"money",
-		"transaction_log",
-		"suspended",
-		"security_level",
-		"account_type"
-	  ]
-	},
-	{
-	  "path": "/datum/omni_port",
-	  "vars": [
-		"master",
-		"dir",
-		"mode",
-		"concentration",
-		"con_lock",
-		"transfer_moles",
-		"air",
-		"node",
-		"network"
-	  ]
-	},
-	{
-	  "path": "/datum/pipeline",
-	  "vars": [
-		"air",
-		"edges"
-	  ]
-	},
-	{
-	  "path": "/datum/reagent",
-	  "vars": [
-		"holder",
-		"data",
-		"volume",
-		"ingest_met",
-		"touch_met"
-	  ]
-	},
-	{
-	  "path": "/datum/reagents/metabolism",
-	  "vars": [
-		"metabolism_class",
-		"parent"
-	  ]
-	},
-	{
-	  "path": "/datum/reagents",
-	  "vars": [
-		"reagent_list",
-		"total_volume",
-		"maximum_volume",
-		"my_atom"
-	  ]
-	},
-	{
-	  "path": "/datum/robot_component/cell",
-	  "vars": [
-		"stored_cell"
-	  ]
-	},
-	{
-	  "path": "/datum/seed",
-	  "vars": [
-		"name",
-		"seed_name",
-		"seed_noun",
-		"display_name",
-		"can_self_harvest",
-		"growth_stages",
-		"traits",
-		"mutants",
-		"chems",
-		"consume_gasses",
-		"exude_gasses",
-		"kitchen_tag",
-		"trash_type",
-		"splat_type",
-		"has_mob_product",
-		"force_layer"
-	  ]
-	},
-	{
-	  "path": "/datum/shuttle",
-	  "vars": [
-		"name"
-	  ]
-	},
-	{
-	  "path": "/datum/stored_items",
-	  "vars": [
-		"item_name",
-		"item_path",
-		"amount",
-		"instances",
-		"storing_object"
-	  ]
-	},
-	{
-	  "path": "/datum/tech/materials",
-	  "vars": [
-		"level"
-	  ]
-	},
-	{
-	  "path": "/datum/transaction",
-	  "vars": [
-		"purpose",
-		"amount",
-		"date",
-		"time"
-	  ]
-	},
-	{
-	  "path": "/datum/turbolift",
-	  "vars": [
-		"current_floor",
-		"doors",
-		"floors",
-		"control_panel_interior"
-	  ]
-	},
-	{
-	  "path": "/datum/turbolift_floor",
-	  "vars": [
-		"label",
-		"name",
-		"announce_str",
-		"arrival_sound",
-		"doors",
-		"ext_panel"
-	  ]
-	},
-	{
-	  "path": "/datum/wires",
-	  "vars": [
-		"wire_count",
-		"wires_status",
-		"wires",
-		"signallers"
-	  ]
-	},
-	{
-	  "path": "/datum/wound",
-	  "vars": [
-		"current_stage",
-		"damage",
-		"bleed_timer",
-		"bleed_threshold",
-		"min_damage",
-		"bandaged",
-		"clamped",
-		"salved",
-		"disinfected",
-		"created",
-		"amount",
-		"germ_level",
-		"embedded_objects",
-		"desc_list",
-		"damage_list"
-	  ]
-	},
-	{
-		"path": "/mob/living",
-		"vars": [
-			"maxHealth",
-			"health",
-			"last_special",
-			"t_phoron",
-			"t_oxygen",
-			"t_sl_gas",
-			"t_n2",
-			"now_pushing",
-			"mob_bump_flag",
-			"mob_swap_flags",
-			"mob_push_flags",
-			"mob_always_swap",
-			"silent",
-			"update_slimes",
-			"on_fire",
-			"fire_stacks",
-			"failed_last_breath",
-			"possession_candidate",
-			"eye_blind",
-			"eye_blurry",
-			"ear_damage",
-			"stuttering",
-			"slurring",
-			"last_resist",
-			"auras",
-			"job"
-		]
-	},
-	{
-	  "path": "/mob/living/bot",
-	  "vars": [
-		"on",
-		"open",
-		"locked",
-		"emagged",
-		"light_strength",
-		"busy",
-		"target",
-		"obstacle",
-		"ignore_list",
-		"patrol_path",
-		"target_path",
-		"wait_if_pulled",
-		"will_patrol",
-		"patrol_speed",
-		"target_speed",
-		"min_target_dist",
-		"max_target_dist",
-		"max_patrol_dist",
-		"RequiresAccessToToggle",
-		"target_patience",
-		"frustration",
-		"max_frustration"
-	  ]
-	},
-	{
-		"path": "/mob/living/bot/secbot/ed209",
-		"vars": [
-			"shot_delay",
-			"last_shot"
-		]
-	},
-	{
-		"path": "/mob/living/bot/cleanbot",
-		"vars": [
-			"cleaning",
-			"screwloose",
-			"oddbutton",
-			"blood",
-			"target_types"
-		]
-	},
-	{
-		"path": "/mob/living/bot/floorbot",
-		"vars": [
-			"amount",
-			"maxAmount",
-			"tilemake",
-			"improvefloors",
-			"eattiles",
-			"maketiles",
-			"boxtype",
-			"floor_build_type"
-		]
-	},
-	{
-		"path": "/mob/living/bot/medbot",
-		"vars": [
-			"skin",
-			"last_newpatient_speak",
-			"vocal",
-			"reagent_glass",
-			"injection_amount",
-			"heal_threshold",
-			"use_beaker",
-			"declare_treatment"
-		]
-	},
-	{
-		"path": "/mob/living/bot/mulebot",
-		"vars": [
-			"load",
-			"paused",
-			"crates_only",
-			"auto_return",
-			"safety",
-			"targetName",
-			"home",
-			"homeName",
-			"amount"
-		]
-	},
-	{
-		"path": "/mob/living/bot/farmbot",
-		"vars": [
-			"action",
-			"waters_trays",
-			"refills_water",
-			"uproots_weeds",
-			"replaces_nutriment",
-			"collects_produce",
-			"removes_dead",
-			"tank"
-		]
-	},
-	{
-		"path": "/mob/living/carbon",
-		"vars": [
-			"life_tick",
-			"handcuffed",
-			"surgeries_in_progress",
-			"pose",
-			"chem_effects",
-			"chem_doses",
-			"bloodstr",
-			"touching",
-			"losebreath",
-			"coughedtime",
-			"cpr_time",
-			"lastpuke",
-			"nutrition",
-			"hydration",
-			"internal",
-			"last_taste_time",
-			"last_taste_text",
-			"internal_organs",
-			"organs",
-			"organs_by_name",
-			"internal_organs_by_name",
-			"stasis_sources",
-			"stasis_value",
-			"player_triggered_sleeping"
-		]
-	},
-	{
-	  "path": "/mob/living/carbon/slime",
-	  "vars": [
-		"colour"
-	  ]
-	},
-	{
-		"path": "/mob/living/silicon",
-		"vars": [
-			"syndicate",
-			"speech_synthesizer_langs",
-			"speak_statement",
-			"speak_exclamation",
-			"speak_query",
-			"pose",
-			"local_transmit",
-			"sensor_mode",
-			"next_alarm_notice",
-			"queued_alarms",
-			"access_rights",
-			"idcard"
-		]
-	},
-	{
-	  "path": "/mob/living/silicon/robot",
-	  "vars": [
-		"lights_on",
-		"power_efficiency",
-		"sight_mode",
-		"custom_name",
-		"custom_sprite",
-		"crisis",
-		"crisis_override",
-		"module_category",
-		"module",
-		"module_active",
-		"module_state_1",
-		"module_state_2",
-		"module_state_3",
-		"cell",
-		"components",
-		"mmi",
-		"storage",
-		"opened",
-		"emagged",
-		"wiresexposed",
-		"locked",
-		"has_power",
-		"spawn_module",
-		"ident",
-		"viewalerts",
-		"modtype",
-		"lower_mod",
-		"jetpack",
-		"jeton",
-		"killswitch",
-		"killswitch_time",
-		"weapon_lock",
-		"weaponlock_time",
-		"lawupdate",
-		"lockcharge",
-		"speed",
-		"scrambledcodes",
-		"tracking_entities",
-		"braintype",
-		"intenselight",
-		"vtec",
-		"camera"
-	  ]
-	},
-	{
-		"path": "/mob/living/silicon/robot/drone",
-		"vars": [
-			"mail_destination",
-			"hat",
-			"hat_x_offset",
-			"hat_y_offset"
-		]
-	},
-	{
-		"path": "/mob/living/silicon/pai",
-		"vars": [
-			"network",
-			"camera",
-			"ram",
-			"software",
-			"userDNA",
-			"card",
-			"chassis",
-			"master",
-			"master_dna",
-			"pai_law0",
-			"pai_laws",
-			"silence_time",
-			"screen",
-			"subscreen",
-			"secHUD",
-			"medHUD",
-			"medical_cannotfind",
-			"medicalActive1",
-			"medicalActive2",
-			"security_cannotfind",
-			"securityActive1",
-			"securityActive2",
-			"hackdoor",
-			"hackprogress",
-			"hack_aborted",
-			"translator_on"
-		]
-	},
-	{
-	  "path": "/mob/living/simple_animal/cat",
-	  "vars": [
-		"name"
-	  ]
-	},
-	{
-	  "path": "/mob/living/simple_animal/hostile",
-	  "vars": [
-		"attack_same",
-		"desc"
-	  ]
-	},
-	{
-	  "path": "/obj/effect/floor_decal",
-	  "vars": [
-		"supplied_dir",
-		"color",
-		"plane",
-		"layer",
-		"appearance_flags",
-		"alpha"
-	  ]
-	},
-	{
-	  "path": "/obj/item/ammo_casing",
-	  "vars": [
-		"BB"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/accessory/storage",
-	  "vars": [
-		"slots",
-		"hold"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/accessory",
-	  "vars": [
-		"has_suit"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/head/welding",
-	  "vars": [
-		"up"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/mask/smokable/cigarette",
-	  "vars": [
-		"reagents"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/ring/material",
-	  "vars": [
-		"material"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/shoes/magboots",
-	  "vars": [
-		"shoes",
-		"wearer"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/suit/space/void",
-	  "vars": [
-		"boots",
-		"helmet",
-		"tank"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing/suit/storage",
-	  "vars": [
-		"pockets"
-	  ]
-	},
-	{
-	  "path": "/obj/item/clothing",
-	  "vars": [
-		"species_restricted",
-		"accessories"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly/infra",
-	  "vars": [
-		"on",
-		"visible"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly/mousetrap",
-	  "vars": [
-		"armed"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly/prox_sensor",
-	  "vars": [
-		"scanning",
-		"timing",
-		"time",
-		"range"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly/signaler",
-	  "vars": [
-		"code",
-		"frequency",
-		"delay",
-		"airlock_wire",
-		"connected",
-		"deadman"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly/timer",
-	  "vars": [
-		"timing",
-		"time"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly/voice",
-	  "vars": [
-		"listening",
-		"recorded"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly",
-	  "vars": [
-		"secured",
-		"attached_overlays",
-		"holder",
-		"cooldown",
-		"wires"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/assembly_holder",
-	  "vars": [
-		"secured",
-		"a_left",
-		"a_right",
-		"special_assembly"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/electronic_assembly",
-	  "vars": [
-		"assembly_components",
-		"opened",
-		"battery"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/flashlight",
-	  "vars": [
-		"on"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/integrated_circuit_printer",
-	  "vars": [
-		"metal"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/lightreplacer",
-	  "vars": [
-		"uses"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/radio/headset",
-	  "vars": [
-		"ks1type",
-		"ks2type"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/radio",
-	  "vars": [
-		"frequency",
-		"wires",
-		"b_stat",
-		"broadcasting",
-		"listening"
-	  ]
-	},
-	{
-	  "path": "/obj/item/device/taperecorder",
-	  "vars": [
-		"mytape"
-	  ]
-	},
-	{
-	  "path": "/obj/item/glass_jar",
-	  "vars": [
-		"contains"
-	  ]
-	},
-	{
-	  "path": "/obj/item/integrated_circuit/filter/ref",
-	  "vars": [
-		"filter_type"
-	  ]
-	},
-	{
-	  "path": "/obj/item/integrated_circuit/manipulation/grenade",
-	  "vars": [
-		"attached_grenade",
-		"pre_attached_grenade_type"
-	  ]
-	},
-	{
-	  "path": "/obj/item/integrated_circuit/time/delay/custom",
-	  "vars": [
-		"delay"
-	  ]
-	},
-	{
-	  "path": "/obj/item/integrated_circuit",
-	  "vars": [
-		"inputs",
-		"outputs",
-		"activators"
-	  ]
-	},
-	{
-	  "path": "/obj/item/modular_computer",
-	  "vars": [
-		"hardware_flag",
-		"computer_emagged",
-		"bsod",
-		"damage",
-		"processor_unit",
-		"network_card",
-		"hard_drive",
-		"battery_module",
-		"card_slot",
-		"nano_printer",
-		"portable_drive",
-		"ai_slot",
-		"tesla_link"
-	  ]
-	},
-	{
-	  "path": "/obj/item/organ/external",
-	  "vars": [
-		"pain",
-		"model",
-		"s_tone",
-		"s_col",
-		"s_col_blend",
-		"wounds",
-		"number_wounds",
-		"parent",
-		"children",
-		"internal_organs",
-		"implants",
-		"genetic_degradation",
-		"autopsy_data",
-		"dislocated",
-		"encased",
-		"cavity",
-		"stage",
-		"applied_pressure",
-		"splinted"
-	  ]
-	},
-	{
-	  "path": "/obj/item/organ",
-	  "vars": [
-		"status",
-		"owner",
-		"dna",
-		"species",
-		"damage"
-	  ]
-	},
-	{
-	  "path": "/obj/item/pipe",
-	  "vars": [
-		"connect_types"
-	  ]
-	},
-	{
-	  "path": "/obj/item/rig_module",
-	  "vars": [
-		"holder",
-		"charges",
-		"active",
-		"charge_selected"
-	  ]
-	},
-	{
-	  "path": "/obj/item/robot_parts/robot_suit",
-	  "vars": [
-		"parts",
-		"created_name"
-	  ]
-	},
-	{
-	  "path": "/obj/item/robot_parts",
-	  "vars": [
-		"part",
-		"sabotaged",
-		"model_info",
-		"bp_tag"
-	  ]
-	},
-	{
-	  "path": "/obj/item/seeds",
-	  "vars": [
-		"seed",
-		"seed_type"
-	  ]
-	},
-	{
-	  "path": "/obj/item/stack/material/wood/mahogany",
-	  "vars": [
-		"material"
-	  ]
-	},
-	{
-	  "path": "/obj/item/stack",
-	  "vars": [
-		"amount"
-	  ]
-	},
-	{
-	  "path": "/obj/item/underwear",
-	  "vars": [
-		"gender"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/airlock_brace",
-	  "vars": [
-		"cur_health",
-		"airlock",
-		"electronics"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/airlock_electronics",
-	  "vars": [
-		"conf_access"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/beartrap",
-	  "vars": [
-		"deployed"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/book",
-	  "vars": [
-		"dat",
-		"author",
-		"unique",
-		"title",
-		"carved",
-		"store"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/card/id",
-	  "vars": [
-		"age",
-		"access",
-		"registered_name",
-		"associated_account_number",
-		"blood_type",
-		"dna_hash",
-		"fingerprint_hash",
-		"sex",
-		"assignment",
-		"rank",
-		"job_access_type"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/cell",
-	  "vars": [
-		"charge"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/disk/botany",
-	  "vars": [
-		"genes",
-		"genesource"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/flamethrower",
-	  "vars": [
-		"weldtool",
-		"igniter"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/grenade/chem_grenade",
-	  "vars": [
-		"stage",
-		"path",
-		"detonator",
-		"beakers"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/grenade",
-	  "vars": [
-		"det_time"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/gun/energy",
-	  "vars": [
-		"power_supply",
-		"cell_type",
-		"charge_meter"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/gun/launcher/pneumatic",
-	  "vars": [
-		"tank",
-		"item_storage",
-		"pressure_setting"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/gun/magnetic",
-	  "vars": [
-		"cell",
-		"capacitor",
-		"loaded",
-		"load_type"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/implant/freedom",
-	  "vars": [
-		"activation_emote"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/key",
-	  "vars": [
-		"key_data"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/material/lock_construct",
-	  "vars": [
-		"lock_data"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/material",
-	  "vars": [
-		"material"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/melee/baton",
-	  "vars": [
-		"bcell"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/melee/energy/axe",
-	  "vars": [
-		"color"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/ore",
-	  "vars": [
-		"geologic_data"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/paper",
-	  "vars": [
-		"info",
-		"info_links",
-		"stamps",
-		"stamped",
-		"ico"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/paper_bundle",
-	  "vars": [
-		"page",
-		"pages"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/photo",
-	  "vars": [
-		"icon",
-		"scribble",
-		"tiny",
-		"photo_size"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/rcd",
-	  "vars": [
-		"stored_matter"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/reagent_containers/food/snacks/grown",
-	  "vars": [
-		"plantname",
-		"name",
-		"seed",
-		"potency",
-		"reagents"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/rig",
-	  "vars": [
-		"hides_uniform",
-		"wearer",
-		"chest",
-		"cell",
-		"air_supply",
-		"boots",
-		"helmet",
-		"gloves",
-		"selected_module",
-		"visor",
-		"speech",
-		"installed_modules",
-		"open",
-		"locked",
-		"subverted",
-		"interface_locked",
-		"control_overridden",
-		"ai_override_enabled",
-		"security_check_enabled",
-		"malfunctioning",
-		"electrified",
-		"locked_down",
-		"offline",
-		"airtight"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/spacecash",
-	  "vars": [
-		"access",
-		"worth"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/stock_parts/capacitor/super",
-	  "vars": [
-		"charge"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/stool",
-	  "vars": [
-		"material"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/storage/internal",
-	  "vars": [
-		"master_item"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/storage/secure/safe",
-	  "vars": [
-		"l_code"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/storage/wallet/leather",
-	  "vars": [
-		"front_id"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/storage",
-	  "vars": [
-		"max_storage_space"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/tank",
-	  "vars": [
-		"air_contents",
-		"distribute_pressure",
-		"integrity",
-		"valve_welded",
-		"proxyassembly",
-		"volume",
-		"manipulated_by",
-		"leaking",
-		"wired",
-		"starting_pressure"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/weldingtool",
-	  "vars": [
-		"tank"
-	  ]
-	},
-	{
-	  "path": "/obj/item/weapon/weldpack",
-	  "vars": [
-		"welder"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/airlock_sensor",
-	  "vars": [
-		"master_tag",
-		"frequency",
-		"command",
-		"on",
-		"alert",
-		"previousPressure"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/alarm",
-	  "vars": [
-		"rcon_setting",
-		"locked",
-		"wiresexposed",
-		"aidisabled",
-		"mode",
-		"target_temperature",
-		"regulating_temperature",
-		"TLV",
-		"oxygen_dangerlevel",
-		"co2_dangerlevel",
-		"report_danger_level"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/binary/passive_gate",
-	  "vars": [
-		"unlocked",
-		"target_pressure",
-		"regulate_mode"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/binary/pump",
-	  "vars": [
-		"target_pressure"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/omni/filter",
-	  "vars": [
-		"filters",
-		"gas_filters",
-		"input",
-		"output",
-		"set_flow_rate",
-		"filtering_outputs",
-		"ports"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/omni",
-	  "vars": [
-		"overlays_on",
-		"overlays_off"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/pipeturbine",
-	  "vars": [
-		"network1",
-		"network2",
-		"node2",
-		"node1"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/portables_connector",
-	  "vars": [
-		"connected_device"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/tvalve",
-	  "vars": [
-		"state"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/unary/freezer",
-	  "vars": [
-		"set_temperature"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/unary/outlet_injector",
-	  "vars": [
-		"injecting",
-		"volume_rate",
-		"frequency",
-		"id"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/unary/vent_pump",
-	  "vars": [
-		"pump_direction",
-		"external_pressure_bound",
-		"internal_pressure_bound",
-		"pressure_checks",
-		"welded"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/unary/vent_scrubber",
-	  "vars": [
-		"scrubbing",
-		"welded"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics/valve",
-	  "vars": [
-		"open"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/atmospherics",
-	  "vars": [
-		"initialize_directions",
-		"pipe_color"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/beehive",
-	  "vars": [
-		"bee_count",
-		"frames"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/biogenerator",
-	  "vars": [
-		"points"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/bodyscanner",
-	  "vars": [
-		"occupant"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/cell_charger",
-	  "vars": [
-		"charging",
-		"chargelevel"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/chemical_dispenser",
-	  "vars": [
-		"cartridges",
-		"container"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/computer/operating",
-	  "vars": [
-		"table"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/computer/rdconsole/core",
-	  "vars": [
-		"files"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/computer/telecomms/monitor",
-	  "vars": [
-		"network"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/computer/telecomms/server",
-	  "vars": [
-		"network"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/conveyor",
-	  "vars": [
-		"forwards",
-		"backwards",
-		"id"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/cryopod",
-	  "vars": [
-		"applies_stasis"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/deployable/barrier",
-	  "vars": [
-		"locked"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/disposal",
-	  "vars": [
-		"air_contents",
-		"mode",
-		"trunk"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/door/airlock/lift",
-	  "vars": [
-		"lift",
-		"floor"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/door/airlock",
-	  "vars": [
-		"welded",
-		"locked",
-		"lock_cut_state",
-		"closeOther",
-		"closeOtherId",
-		"safe",
-		"secured_wires",
-		"brace",
-		"airlock_type",
-		"door_color",
-		"stripe_color",
-		"symbol_color",
-		"frequency",
-		"shockedby",
-		"cur_command"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/door/firedoor",
-	  "vars": [
-		"areas_added",
-		"net_id",
-		"pdiff",
-		"pdiff_alert",
-		"blocked",
-		"lockdown",
-		"hatch_open",
-		"nextstate"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/door/unpowered/simple",
-	  "vars": [
-		"material",
-		"lock"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/door/unpowered",
-	  "vars": [
-		"locked"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/door/window",
-	  "vars": [
-		"base_state"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/door",
-	  "vars": [
-		"layer",
-		"visible",
-		"p_open",
-		"autoclose",
-		"glass",
-		"normalspeed",
-		"health"
-	  ]
-	},
-	{
-		"path": "/obj/machinery/embedded_controller",
-		"vars": [
-			"on"
-		]
-	},
-	{
-		"path": "/obj/machinery/embedded_controller/radio/simple_docking_controller",
-		"vars": [
-			"tag_door"
-		]
-	},
-	{
-		"path": "/obj/machinery/embedded_controller/radio/docking_port_multi",
-		"vars": [
-			"child_names",
-			"child_names_txt",
-			"child_tags_txt"
-		]
-	},
-	{
-		"path": "/obj/machinery/embedded_controller/radio/airlock/docking_port",
-		"vars": [
-			"display_name"
-		]
-	},
-	{
-	  "path": "/obj/machinery/embedded_controller/radio/airlock",
-	  "vars": [
-		"tag_exterior_door",
-		"tag_interior_door",
-		"tag_airpump",
-		"tag_chamber_sensor",
-		"tag_exterior_sensor",
-		"tag_interior_sensor",
-		"tag_airlock_mech_sensor",
-		"tag_shuttle_mech_sensor",
-		"tag_secure",
-		"cycle_to_external_air"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/floorlayer",
-	  "vars": [
-		"old_turf",
-		"on",
-		"T",
-		"mode"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/floor_light",
-	  "vars": [
-		"on"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/light",
-	  "vars": [
-		"lightbulb"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/light_switch",
-	  "vars": [
-		"on"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/message_server",
-	  "vars": [
-		"decryptkey"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/microwave",
-	  "vars": [
-		"dirty",
-		"broken"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/mineral/processing_unit",
-	  "vars": [
-		"ores_processing",
-		"ores_stored"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/mineral",
-	  "vars": [
-		"input_turf",
-		"output_turf"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/navbeacon",
-	  "vars": [
-		"locked",
-		"location",
-		"codes"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/organ_printer",
-	  "vars": [
-		"stored_matter"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/papershredder",
-	  "vars": [
-		"paperamount",
-		"shred_amounts"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/photocopier/faxmachine",
-	  "vars": [
-		"department"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/photocopier",
-	  "vars": [
-		"copyitem",
-		"copies",
-		"toner"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/portable_atmospherics/canister",
-	  "vars": [
-		"health",
-		"valve_open",
-		"release_pressure",
-		"canister_color"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/portable_atmospherics/hydroponics",
-	  "vars": [
-		"base_name",
-		"dead",
-		"harvest",
-		"age",
-		"health",
-		"lastproduce",
-		"lastcycle",
-		"seed",
-		"toxic_reagents",
-		"nutrient_reagents",
-		"weedkiller_reagents",
-		"pestkiller_reagents",
-		"water_reagents",
-		"beneficial_reagents",
-		"mutagenic_reagents"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/portable_atmospherics/powered/pump",
-	  "vars": [
-		"cell"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/portable_atmospherics/powered/scrubber",
-	  "vars": [
-		"cell"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/portable_atmospherics",
-	  "vars": [
-		"air_contents",
-		"connected_port",
-		"holding"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/porta_turret",
-	  "vars": [
-		"health",
-		"locked",
-		"installation",
-		"check_access",
-		"enabled",
-		"lethal"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/apc",
-	  "vars": [
-		"area",
-		"cell",
-		"cell_type",
-		"opened",
-		"shorted",
-		"lighting",
-		"equipment",
-		"environ",
-		"operating",
-		"chargemode",
-		"locked",
-		"coverlocked",
-		"aidisabled",
-		"lastused_light",
-		"lastused_equip",
-		"lastused_environ",
-		"lastused_charging",
-		"lastused_total",
-		"main_status",
-		"has_electronics",
-		"beenhit",
-		"is_critical",
-		"autoflag"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/emitter",
-	  "vars": [
-		"active",
-		"locked",
-		"powered",
-		"burst_shots",
-		"fire_delay",
-		"last_shot",
-		"shot_number",
-		"efficiency",
-		"min_burst_delay",
-		"max_burst_delay"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/port_gen",
-	  "vars": [
-		"active",
-		"open"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/sensor",
-	  "vars": [
-		"name_tag"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/shield_generator",
-	  "vars": [
-		"shield_modes",
-		"mitigation_em",
-		"mitigation_physical",
-		"mitigation_heat",
-		"mitigation_max",
-		"max_energy",
-		"current_energy",
-		"field_radius",
-		"running",
-		"input_cap",
-		"upkeep_power_usage",
-		"upkeep_multiplier",
-		"mode_changes_locked",
-		"mode_list",
-		"field_segments",
-		"damaged_segments",
-		"target_radius",
-		"power_usage",
-		"overloaded",
-		"hacked",
-		"offline_for",
-		"input_cut",
-		"full_shield_strength",
-		"idle_multiplier",
-		"spinup_delay",
-		"spinup_counter"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/smes/batteryrack",
-	  "vars": [
-		"max_transfer_rate",
-		"mode",
-		"internal_cells",
-		"max_cells"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/smes",
-	  "vars": [
-		"capacity",
-		"charge",
-		"input_attempt",
-		"input_level",
-		"output_attempt",
-		"output_level",
-		"name_tag",
-		"terminals",
-		"should_be_mapped",
-		"damage",
-		"input_cut",
-		"output_cut",
-		"failure_timer"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/solar",
-	  "vars": [
-		"sunfrac",
-		"control",
-		"obscured",
-		"adir",
-		"ndir",
-		"turn_angle",
-		"health",
-		"id"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/terminal",
-	  "vars": [
-		"master"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/power/tracker",
-	  "vars": [
-		"control"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/reagentgrinder",
-	  "vars": [
-		"beaker",
-		"contents"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/recharger",
-	  "vars": [
-		"charging"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/sleeper",
-	  "vars": [
-		"occupant",
-		"beaker",
-		"filtering",
-		"pump",
-		"stasis"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/smartfridge",
-	  "vars": [
-		"item_records"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/suit_cycler",
-	  "vars": [
-		"locked",
-		"target_species",
-		"suit",
-		"helmet"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/telecomms/receiver",
-	  "vars": [
-		"links",
-		"listening_levels"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery/telecomms",
-	  "vars": [
-		"on",
-		"id"
-	  ]
-	},
-	{
-	  "path": "/obj/machinery",
-	  "vars": [
-		"stat",
-		"emagged",
-		"malf_upgraded",
-		"use_power",
-		"component_parts",
-		"uid",
-		"panel_open",
-		"power_components",
-		"anchored",
-		"state"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/barricade",
-	  "vars": [
-		"material"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/bed",
-	  "vars": [
-		"material"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/bigDelivery",
-	  "vars": [
-		"wrapped",
-		"sortTag",
-		"examtext",
-		"nameset",
-		"label_y",
-		"label_x",
-		"tag_x"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/cable",
-	  "vars": [
-		"d1",
-		"d2",
-		"color"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/closet/secure_closet/personal",
-	  "vars": [
-		"registered_name"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/closet",
-	  "vars": [
-		"broken",
-		"opened",
-		"locked"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/c_tray",
-	  "vars": [
-		"connected"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/dispenser",
-	  "vars": [
-		"oxygentanks",
-		"phorontanks"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/disposalconstruct",
-	  "vars": [
-		"dpdir"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/disposalpipe",
-	  "vars": [
-		"dpdir",
-		"health",
-		"base_icon_state"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/door_assembly",
-	  "vars": [
-		"panel_icon",
-		"fill_icon",
-		"glass_icon"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/girder",
-	  "vars": [
-		"state",
-		"material"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/janitorialcart",
-	  "vars": [
-		"mybag",
-		"mymop",
-		"myspray",
-		"myreplacer",
-		"signs"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/lift/button",
-	  "vars": [
-		"lift",
-		"floor"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/ore_box",
-	  "vars": [
-		"stored_ore"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/sign/poster",
-	  "vars": [
-		"desc"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/table",
-	  "vars": [
-		"flipped",
-		"material",
-		"reinforced",
-		"carpeted"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/wall_frame",
-	  "vars": [
-		"stripe_color"
-	  ]
-	},
-	{
-	  "path": "/obj/structure/window",
-	  "vars": [
-		"health",
-		"polarized",
-		"reinf_material",
-		"init_material",
-		"blend_objects"
-	  ]
-	},
-	{
-	   "path": "/obj/structure",
-	   "vars": [
-		 "connections",
+   {
+      "path":"/datum/computer_file/data",
+      "vars":[
+         "stored_data",
+         "size",
+         "block_size"
+      ]
+   },
+   {
+      "path":"/datum/computer_file/program",
+      "vars":[
+         "program_state",
+         "computer"
+      ]
+   },
+   {
+      "path":"/datum/dna",
+      "vars":[
+         "uni_identity",
+         "struc_enzymes",
+         "unique_enzymes",
+         "UI",
+         "SE",
+         "b_type",
+         "real_name",
+         "species"
+      ]
+   },
+   {
+      "path":"/datum/extension/holster",
+      "vars":[
+         "holder",
+         "atom_holder",
+         "storage",
+         "can_holster",
+         "holstered"
+      ]
+   },
+   {
+      "path":"/datum/fluidtrack",
+      "vars":[
+         "direction",
+         "basecolor",
+         "crusty"
+      ]
+   },
+   {
+      "path":"/datum/gas_mixture",
+      "vars":[
+         "gas",
+         "temperature",
+         "total_moles",
+         "volume",
+         "group_multiplier"
+      ]
+   },
+   {
+      "path":"/datum/integrated_io",
+      "vars":[
+         "holder",
+         "linked",
+         "io_type",
+         "pin_type",
+         "ord"
+      ]
+   },
+   {
+      "path":"/datum/mind",
+      "vars":[
+         "memory"
+      ]
+   },
+   {
+      "path":"/datum/money_account",
+      "vars":[
+         "owner_name",
+         "account_number",
+         "remote_access_pin",
+         "money",
+         "transaction_log",
+         "suspended",
+         "security_level",
+         "account_type"
+      ]
+   },
+   {
+      "path":"/datum/omni_port",
+      "vars":[
+         "master",
+         "dir",
+         "update",
+         "mode",
+         "concentration",
+         "con_lock",
+         "transfer_moles",
+         "air",
+         "node",
+         "network"
+      ]
+   },
+   {
+      "path":"/datum/pipeline",
+      "vars":[
+         "air",
+         "edges"
+      ]
+   },
+   {
+      "path":"/datum/reagent",
+      "vars":[
+         "holder",
+         "data",
+         "volume",
+         "ingest_met",
+         "touch_met"
+      ]
+   },
+   {
+      "path":"/datum/reagents/metabolism",
+      "vars":[
+         "metabolism_class",
+         "parent"
+      ]
+   },
+   {
+      "path":"/datum/reagents",
+      "vars":[
+         "reagent_list",
+         "total_volume",
+         "maximum_volume",
+         "my_atom"
+      ]
+   },
+   {
+      "path":"/datum/robot_component/cell",
+      "vars":[
+         "stored_cell"
+      ]
+   },
+   {
+      "path":"/datum/seed",
+      "vars":[
+         "name",
+         "seed_name",
+         "seed_noun",
+         "display_name",
+         "can_self_harvest",
+         "growth_stages",
+         "traits",
+         "mutants",
+         "chems",
+         "consume_gasses",
+         "exude_gasses",
+         "kitchen_tag",
+         "trash_type",
+         "splat_type",
+         "has_mob_product",
+         "force_layer"
+      ]
+   },
+   {
+      "path":"/datum/shuttle",
+      "vars":[
+         "name"
+      ]
+   },
+   {
+      "path":"/datum/stored_items",
+      "vars":[
+         "item_name",
+         "item_path",
+         "amount",
+         "instances",
+         "storing_object"
+      ]
+   },
+   {
+      "path":"/datum/tech/materials",
+      "vars":[
+         "level"
+      ]
+   },
+   {
+      "path":"/datum/transaction",
+      "vars":[
+         "purpose",
+         "amount",
+         "date",
+         "time"
+      ]
+   },
+   {
+      "path":"/datum/turbolift",
+      "vars":[
+         "current_floor",
+         "doors",
+         "floors",
+         "control_panel_interior"
+      ]
+   },
+   {
+      "path":"/datum/turbolift_floor",
+      "vars":[
+         "label",
+         "name",
+         "announce_str",
+         "arrival_sound",
+         "doors",
+         "ext_panel"
+      ]
+   },
+   {
+      "path":"/datum/wires",
+      "vars":[
+         "wire_count",
+         "wires_status",
+         "wires",
+         "signallers"
+      ]
+   },
+   {
+      "path":"/datum/wound",
+      "vars":[
+         "current_stage",
+         "damage",
+         "bleed_timer",
+         "bleed_threshold",
+         "min_damage",
+         "bandaged",
+         "clamped",
+         "salved",
+         "disinfected",
+         "created",
+         "amount",
+         "germ_level",
+         "embedded_objects",
+         "desc_list",
+         "damage_list"
+      ]
+   },
+   {
+      "path":"/mob/living",
+      "vars":[
+         "maxHealth",
+         "health",
+         "last_special",
+         "t_phoron",
+         "t_oxygen",
+         "t_sl_gas",
+         "t_n2",
+         "now_pushing",
+         "mob_bump_flag",
+         "mob_swap_flags",
+         "mob_push_flags",
+         "mob_always_swap",
+         "silent",
+         "update_slimes",
+         "on_fire",
+         "fire_stacks",
+         "failed_last_breath",
+         "possession_candidate",
+         "eye_blind",
+         "eye_blurry",
+         "ear_damage",
+         "stuttering",
+         "slurring",
+         "last_resist",
+         "auras",
+		 "job",
+		 "maxHealth",
 		 "health",
-		 "other_connections",
-		 "waterproof",
-		 "color"
-	   ]
+		 "last_special"
+      ]
+   },
+   {
+      "path":"/mob/living/bot",
+      "vars":[
+         "on",
+         "open",
+         "locked",
+         "emagged",
+         "light_strength",
+         "busy",
+         "target",
+         "obstacle",
+         "ignore_list",
+         "patrol_path",
+         "target_path",
+         "wait_if_pulled",
+         "will_patrol",
+         "patrol_speed",
+         "target_speed",
+         "min_target_dist",
+         "max_target_dist",
+         "max_patrol_dist",
+         "RequiresAccessToToggle",
+         "target_patience",
+         "frustration",
+         "max_frustration"
+      ]
+   },
+   {
+      "path":"/mob/living/bot/secbot/ed209",
+      "vars":[
+         "shot_delay",
+         "last_shot"
+      ]
+   },
+   {
+      "path":"/mob/living/bot/cleanbot",
+      "vars":[
+         "cleaning",
+         "screwloose",
+         "oddbutton",
+         "blood",
+         "target_types"
+      ]
+   },
+   {
+      "path":"/mob/living/bot/floorbot",
+      "vars":[
+         "amount",
+         "maxAmount",
+         "tilemake",
+         "improvefloors",
+         "eattiles",
+         "maketiles",
+         "boxtype",
+         "floor_build_type"
+      ]
+   },
+   {
+      "path":"/mob/living/bot/medbot",
+      "vars":[
+         "skin",
+         "last_newpatient_speak",
+         "vocal",
+         "reagent_glass",
+         "injection_amount",
+         "heal_threshold",
+         "use_beaker",
+         "declare_treatment"
+      ]
+   },
+   {
+      "path":"/mob/living/bot/mulebot",
+      "vars":[
+         "load",
+         "paused",
+         "crates_only",
+         "auto_return",
+         "safety",
+         "targetName",
+         "home",
+         "homeName",
+         "amount"
+      ]
+   },
+   {
+      "path":"/mob/living/bot/farmbot",
+      "vars":[
+         "action",
+         "waters_trays",
+         "refills_water",
+         "uproots_weeds",
+         "replaces_nutriment",
+         "collects_produce",
+         "removes_dead",
+         "tank"
+      ]
+   },
+   {
+      "path":"/mob/living/carbon",
+      "vars":[
+         "life_tick",
+         "handcuffed",
+         "surgeries_in_progress",
+         "pose",
+         "chem_effects",
+         "chem_doses",
+         "bloodstr",
+         "touching",
+         "losebreath",
+         "coughedtime",
+         "cpr_time",
+         "lastpuke",
+         "nutrition",
+         "hydration",
+         "internal",
+         "last_taste_time",
+         "last_taste_text",
+         "internal_organs",
+         "organs",
+         "organs_by_name",
+         "internal_organs_by_name",
+         "stasis_sources",
+         "stasis_value",
+         "player_triggered_sleeping"
+      ]
+   },
+   {
+      "path":"/mob/living/silicon",
+      "vars":[
+         "syndicate",
+         "speech_synthesizer_langs",
+         "speak_statement",
+         "speak_exclamation",
+         "speak_query",
+         "pose",
+         "local_transmit",
+         "sensor_mode",
+         "next_alarm_notice",
+         "queued_alarms",
+         "access_rights",
+         "idcard"
+      ]
+   },
+   {
+      "path":"/mob/living/silicon/robot",
+      "vars":[
+         "lights_on",
+         "power_efficiency",
+         "sight_mode",
+         "custom_name",
+         "custom_sprite",
+         "crisis",
+         "crisis_override",
+         "module_category",
+         "module",
+         "module_active",
+         "module_state_1",
+         "module_state_2",
+         "module_state_3",
+         "cell",
+         "components",
+         "mmi",
+         "storage",
+         "opened",
+         "emagged",
+         "wiresexposed",
+         "locked",
+         "has_power",
+         "spawn_module",
+         "ident",
+         "viewalerts",
+         "modtype",
+         "lower_mod",
+         "jetpack",
+         "jeton",
+         "killswitch",
+         "killswitch_time",
+         "weapon_lock",
+         "weaponlock_time",
+         "lawupdate",
+         "lockcharge",
+         "speed",
+         "scrambledcodes",
+         "tracking_entities",
+         "braintype",
+         "intenselight",
+         "vtec",
+         "camera"
+      ]
+   },
+   {
+      "path":"/mob/living/silicon/robot/drone",
+      "vars":[
+         "mail_destination",
+         "hat",
+         "hat_x_offset",
+         "hat_y_offset"
+      ]
+   },
+   {
+      "path":"/mob/living/silicon/pai",
+      "vars":[
+         "network",
+         "camera",
+         "ram",
+         "software",
+         "userDNA",
+         "card",
+         "chassis",
+         "master",
+         "master_dna",
+         "pai_law0",
+         "pai_laws",
+         "silence_time",
+         "screen",
+         "subscreen",
+         "secHUD",
+         "medHUD",
+         "medical_cannotfind",
+         "medicalActive1",
+         "medicalActive2",
+         "security_cannotfind",
+         "securityActive1",
+         "securityActive2",
+         "hackdoor",
+         "hackprogress",
+         "hack_aborted",
+         "translator_on"
+      ]
+   },
+   {
+      "path":"/mob/living/simple_animal/hostile",
+      "vars":[
+		 "show_stat_health",
+		 "icon_living",
+		 "icon_dead",
+		 "icon_gib",
+		 "speak",
+		 "speak_chance",
+		 "emote_hear",
+		 "emote_see",
+		 "turns_per_move",
+		 "turns_since_move",
+		 "stop_automated_move",
+		 "wander",
+		 "stop_automated_movement_when_pulled",
+		 "response_help",
+		 "response_disarm",
+		 "response_harm",
+		 "harm_intent_damage",
+		 "can_escape",
+		 "minbodytemp",
+		 "maxbodytemp",
+		 "heat_damage_per_tick",
+		 "cold_damage_per_tick",
+		 "fire_alert",
+		 "min_gas",
+		 "max_gas",
+		 "unsuitable_atmos_damage",
+		 "speed",
+		 "melee_damage_lower",
+		 "melee_damage_upper",
+		 "attacktext",
+		 "friendly",
+		 "environment_smash",
+		 "resistance",
+		 "damtype",
+		 "defense",
+		 "armor_type",
+		 "natural_armor",
+		 "flash_vulnerability",
+		 "supernatural",
+		 "purge",
+		 "bleed_ticks",
+		 "bleed_color",
+		 "can_bleed",
+		 "in_stasis",
+		 "ability_cooldown",
+		 "time_last_used_ability",
+		 "return_damage_min",
+		 "return_damage_max"
+      ]
+   },
+   {
+      "path":"/obj/effect/floor_decal",
+      "vars":[
+         "supplied_dir",
+         "color",
+         "plane",
+         "layer",
+         "appearance_flags",
+         "alpha"
+      ]
+   },
+   {
+      "path":"/obj/item/ammo_casing",
+      "vars":[
+         "BB"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/accessory/storage",
+      "vars":[
+         "slots",
+         "hold"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/accessory",
+      "vars":[
+         "has_suit"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/head/welding",
+      "vars":[
+         "up"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/mask/smokable/cigarette",
+      "vars":[
+         "reagents"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/ring/material",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/shoes/magboots",
+      "vars":[
+         "shoes",
+         "wearer"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/suit/space/void",
+      "vars":[
+         "boots",
+         "helmet",
+         "tank"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/suit/storage",
+      "vars":[
+         "pockets"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing",
+      "vars":[
+		  "flash_protection",
+		  "tint",
+		  "accessories",
+		  "species_restricted",
+		  "valid_accessory_slots",
+		  "restricted_accessory_slots",
+		  "starting_accessories",
+		  "visible_name",
+		  "ironed_state",
+		  "smell_state",
+		  "move_trail"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly/infra",
+      "vars":[
+         "on",
+         "visible"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly/mousetrap",
+      "vars":[
+         "armed"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly/prox_sensor",
+      "vars":[
+         "scanning",
+         "timing",
+         "time",
+         "range"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly/signaler",
+      "vars":[
+         "code",
+         "frequency",
+         "delay",
+         "airlock_wire",
+         "connected",
+         "deadman"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly/timer",
+      "vars":[
+         "timing",
+         "time"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly/voice",
+      "vars":[
+         "listening",
+         "recorded"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly",
+      "vars":[
+         "secured",
+         "attached_overlays",
+         "holder",
+         "cooldown",
+         "wires"
+      ]
+   },
+   {
+      "path":"/obj/item/device/assembly_holder",
+      "vars":[
+         "secured",
+         "a_left",
+         "a_right",
+         "special_assembly"
+      ]
+   },
+   {
+      "path":"/obj/item/device/electronic_assembly",
+      "vars":[
+         "assembly_components",
+         "opened",
+         "battery"
+      ]
+   },
+   {
+      "path":"/obj/item/device/flashlight",
+      "vars":[
+         "on"
+      ]
+   },
+   {
+      "path":"/obj/item/device/integrated_circuit_printer",
+      "vars":[
+         "metal"
+      ]
+   },
+   {
+      "path":"/obj/item/device/lightreplacer",
+      "vars":[
+         "uses"
+      ]
+   },
+   {
+      "path":"/obj/item/device/radio/headset",
+      "vars":[
+         "ks1type",
+         "ks2type"
+      ]
+   },
+   {
+      "path":"/obj/item/device/radio",
+      "vars":[
+         "frequency",
+         "wires",
+         "b_stat",
+         "broadcasting",
+         "listening"
+      ]
+   },
+   {
+      "path":"/obj/item/device/taperecorder",
+      "vars":[
+         "mytape"
+      ]
+   },
+   {
+      "path":"/obj/item/glass_jar",
+      "vars":[
+         "contains"
+      ]
+   },
+   {
+      "path":"/obj/item/integrated_circuit/filter/ref",
+      "vars":[
+         "filter_type"
+      ]
+   },
+   {
+      "path":"/obj/item/integrated_circuit/manipulation/grenade",
+      "vars":[
+         "attached_grenade",
+         "pre_attached_grenade_type"
+      ]
+   },
+   {
+      "path":"/obj/item/integrated_circuit/time/delay/custom",
+      "vars":[
+         "delay"
+      ]
+   },
+   {
+      "path":"/obj/item/integrated_circuit",
+      "vars":[
+         "inputs",
+         "outputs",
+         "activators"
+      ]
+   },
+   {
+      "path":"/obj/item/modular_computer",
+      "vars":[
+         "hardware_flag",
+         "computer_emagged",
+         "bsod",
+         "damage",
+         "processor_unit",
+         "network_card",
+         "hard_drive",
+         "battery_module",
+         "card_slot",
+         "nano_printer",
+         "portable_drive",
+         "ai_slot",
+         "tesla_link"
+      ]
+   },
+   {
+      "path":"/obj/item/organ/external",
+      "vars":[
+         "pain",
+         "model",
+         "s_tone",
+         "s_col",
+         "s_col_blend",
+         "wounds",
+         "number_wounds",
+         "parent",
+         "children",
+         "internal_organs",
+         "implants",
+         "genetic_degradation",
+         "autopsy_data",
+         "dislocated",
+         "encased",
+         "cavity",
+         "stage",
+         "applied_pressure",
+         "splinted"
+      ]
+   },
+   {
+      "path":"/obj/item/organ",
+      "vars":[
+         "status",
+         "owner",
+         "dna",
+         "species",
+         "damage"
+      ]
+   },
+   {
+      "path":"/obj/item/pipe",
+      "vars":[
+         "connect_types"
+      ]
+   },
+   {
+      "path":"/obj/item/rig_module",
+      "vars":[
+         "holder",
+         "charges",
+         "active",
+         "charge_selected"
+      ]
+   },
+   {
+      "path":"/obj/item/robot_parts/robot_suit",
+      "vars":[
+         "parts",
+         "created_name"
+      ]
+   },
+   {
+      "path":"/obj/item/robot_parts",
+      "vars":[
+         "part",
+         "sabotaged",
+         "model_info",
+         "bp_tag"
+      ]
+   },
+   {
+      "path":"/obj/item/seeds",
+      "vars":[
+         "seed",
+         "seed_type"
+      ]
+   },
+   {
+      "path":"/obj/item/stack/material/wood/mahogany",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/item/stack",
+      "vars":[
+         "amount"
+      ]
+   },
+   {
+      "path":"/obj/item/underwear",
+      "vars":[
+         "gender"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/airlock_brace",
+      "vars":[
+         "cur_health",
+         "airlock",
+         "electronics"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/airlock_electronics",
+      "vars":[
+         "conf_access"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/beartrap",
+      "vars":[
+         "deployed"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/book",
+      "vars":[
+         "dat",
+         "author",
+         "unique",
+         "title",
+         "carved",
+         "store"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/card/id",
+      "vars":[
+         "age",
+         "access",
+         "registered_name",
+         "associated_account_number",
+         "blood_type",
+         "dna_hash",
+         "fingerprint_hash",
+         "sex",
+         "assignment",
+         "rank",
+         "job_access_type"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/cell",
+      "vars":[
+         "charge"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/disk/botany",
+      "vars":[
+         "genes",
+         "genesource"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/flamethrower",
+      "vars":[
+         "weldtool",
+         "igniter"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/grenade/chem_grenade",
+      "vars":[
+         "stage",
+         "path",
+         "detonator",
+         "beakers"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/grenade",
+      "vars":[
+         "det_time"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/gun/energy",
+      "vars":[
+         "power_supply",
+         "cell_type",
+         "charge_meter"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/gun/launcher/pneumatic",
+      "vars":[
+         "tank",
+         "item_storage",
+         "pressure_setting"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/gun/magnetic",
+      "vars":[
+         "cell",
+         "capacitor",
+         "loaded",
+         "load_type"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/implant/freedom",
+      "vars":[
+         "activation_emote"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/key",
+      "vars":[
+         "key_data"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/material/lock_construct",
+      "vars":[
+         "lock_data"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/material",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/melee/baton",
+      "vars":[
+         "bcell"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/melee/energy/axe",
+      "vars":[
+         "color"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/ore",
+      "vars":[
+         "geologic_data"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/paper",
+      "vars":[
+         "info",
+         "info_links",
+         "stamps",
+         "stamped",
+         "ico"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/paper_bundle",
+      "vars":[
+         "page",
+         "pages"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/photo",
+      "vars":[
+         "icon",
+         "scribble",
+         "tiny",
+         "photo_size"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/rcd",
+      "vars":[
+         "stored_matter"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/reagent_containers/food/snacks/grown",
+      "vars":[
+         "plantname",
+         "name",
+         "seed",
+         "potency",
+         "reagents"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/rig",
+      "vars":[
+         "hides_uniform",
+         "wearer",
+         "chest",
+         "cell",
+         "air_supply",
+         "boots",
+         "helmet",
+         "gloves",
+         "selected_module",
+         "visor",
+         "speech",
+         "installed_modules",
+         "open",
+         "locked",
+         "subverted",
+         "interface_locked",
+         "control_overridden",
+         "ai_override_enabled",
+         "security_check_enabled",
+         "malfunctioning",
+         "electrified",
+         "locked_down",
+         "offline",
+         "airtight"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/spacecash",
+      "vars":[
+         "access",
+         "worth"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/capacitor/super",
+      "vars":[
+         "charge"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stool",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/storage/internal",
+      "vars":[
+         "master_item"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/storage/secure/safe",
+      "vars":[
+         "l_code"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/storage/wallet/leather",
+      "vars":[
+         "front_id"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/storage",
+      "vars":[
+         "max_storage_space"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/tank",
+      "vars":[
+         "air_contents",
+         "distribute_pressure",
+         "integrity",
+         "valve_welded",
+         "proxyassembly",
+         "volume",
+         "manipulated_by",
+         "leaking",
+         "wired",
+         "starting_pressure"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/weldingtool",
+      "vars":[
+         "tank"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/weldpack",
+      "vars":[
+         "welder"
+      ]
+   },
+   {
+      "path":"/obj/machinery/airlock_sensor",
+      "vars":[
+         "master_tag",
+         "frequency",
+         "command",
+         "on",
+         "alert",
+         "previousPressure"
+      ]
+   },
+   {
+      "path":"/obj/machinery/alarm",
+      "vars":[
+         "rcon_setting",
+         "locked",
+         "wiresexposed",
+         "aidisabled",
+         "mode",
+         "target_temperature",
+         "regulating_temperature",
+         "TLV",
+         "oxygen_dangerlevel",
+         "co2_dangerlevel",
+         "report_danger_level"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/binary/passive_gate",
+      "vars":[
+         "unlocked",
+         "target_pressure",
+         "regulate_mode"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/binary/pump",
+      "vars":[
+         "target_pressure"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/omni/filter",
+      "vars":[
+         "filters",
+         "gas_filters",
+         "input",
+         "output",
+         "set_flow_rate",
+         "filtering_outputs"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/omni",
+      "vars":[
+         "configuring",
+         "overlays_on",
+         "overlays_off",
+         "ports"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/pipeturbine",
+      "vars":[
+         "network1",
+         "network2",
+         "node2",
+         "node1"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/portables_connector",
+      "vars":[
+         "connected_device"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/tvalve",
+      "vars":[
+         "state"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/unary/freezer",
+      "vars":[
+         "set_temperature"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/unary/outlet_injector",
+      "vars":[
+         "injecting",
+         "volume_rate",
+         "frequency",
+         "id"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/unary/vent_pump",
+      "vars":[
+         "pump_direction",
+         "external_pressure_bound",
+         "internal_pressure_bound",
+         "pressure_checks",
+         "welded"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/unary/vent_scrubber",
+      "vars":[
+         "scrubbing",
+         "welded"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/valve",
+      "vars":[
+         "open"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics",
+      "vars":[
+         "initialize_directions",
+         "pipe_color"
+      ]
+   },
+   {
+      "path":"/obj/machinery/beehive",
+      "vars":[
+         "bee_count",
+         "frames"
+      ]
+   },
+   {
+      "path":"/obj/machinery/biogenerator",
+      "vars":[
+         "points"
+      ]
+   },
+   {
+      "path":"/obj/machinery/bodyscanner",
+      "vars":[
+         "occupant"
+      ]
+   },
+   {
+      "path":"/obj/machinery/cell_charger",
+      "vars":[
+         "charging",
+         "chargelevel"
+      ]
+   },
+   {
+      "path":"/obj/machinery/chemical_dispenser",
+      "vars":[
+         "cartridges",
+         "container"
+      ]
+   },
+   {
+      "path":"/obj/machinery/computer/operating",
+      "vars":[
+         "table"
+      ]
+   },
+   {
+      "path":"/obj/machinery/computer/rdconsole/core",
+      "vars":[
+         "files"
+      ]
+   },
+   {
+      "path":"/obj/machinery/computer/telecomms/monitor",
+      "vars":[
+         "network"
+      ]
+   },
+   {
+      "path":"/obj/machinery/computer/telecomms/server",
+      "vars":[
+         "network"
+      ]
+   },
+   {
+      "path":"/obj/machinery/conveyor",
+      "vars":[
+         "forwards",
+         "backwards",
+         "id"
+      ]
+   },
+   {
+      "path":"/obj/machinery/cryopod",
+      "vars":[
+         "applies_stasis"
+      ]
+   },
+   {
+      "path":"/obj/machinery/deployable/barrier",
+      "vars":[
+         "locked"
+      ]
+   },
+   {
+      "path":"/obj/machinery/disposal",
+      "vars":[
+         "air_contents",
+         "mode",
+         "trunk"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door/airlock/lift",
+      "vars":[
+         "lift",
+         "floor"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door/airlock",
+      "vars":[
+         "welded",
+         "locked",
+         "lock_cut_state",
+         "closeOther",
+         "closeOtherId",
+         "safe",
+         "secured_wires",
+         "brace",
+         "airlock_type",
+         "door_color",
+         "stripe_color",
+         "symbol_color",
+         "frequency",
+         "shockedby",
+         "cur_command"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door/firedoor",
+      "vars":[
+         "areas_added",
+         "net_id",
+         "pdiff",
+         "pdiff_alert",
+         "blocked",
+         "lockdown",
+         "hatch_open",
+         "nextstate"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door/unpowered/simple",
+      "vars":[
+         "material",
+         "lock"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door/unpowered",
+      "vars":[
+         "locked"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door/window",
+      "vars":[
+         "base_state"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door",
+      "vars":[
+         "layer",
+         "visible",
+         "p_open",
+         "autoclose",
+         "glass",
+         "normalspeed",
+         "health"
+      ]
+   },
+   {
+      "path":"/obj/machinery/embedded_controller",
+      "vars":[
+         "on"
+      ]
+   },
+   {
+      "path":"/obj/machinery/embedded_controller/radio/simple_docking_controller",
+      "vars":[
+         "tag_door"
+      ]
+   },
+   {
+      "path":"/obj/machinery/embedded_controller/radio/docking_port_multi",
+      "vars":[
+         "child_names",
+         "child_names_txt",
+         "child_tags_txt"
+      ]
+   },
+   {
+      "path":"/obj/machinery/embedded_controller/radio/airlock/docking_port",
+      "vars":[
+         "display_name"
+      ]
+   },
+   {
+      "path":"/obj/machinery/embedded_controller/radio/airlock",
+      "vars":[
+         "tag_exterior_door",
+         "tag_interior_door",
+         "tag_airpump",
+         "tag_chamber_sensor",
+         "tag_exterior_sensor",
+         "tag_interior_sensor",
+         "tag_airlock_mech_sensor",
+         "tag_shuttle_mech_sensor",
+         "tag_secure",
+         "cycle_to_external_air"
+      ]
+   },
+   {
+      "path":"/obj/machinery/floorlayer",
+      "vars":[
+         "old_turf",
+         "on",
+         "T",
+         "mode"
+      ]
+   },
+   {
+      "path":"/obj/machinery/floor_light",
+      "vars":[
+         "on"
+      ]
+   },
+   {
+      "path":"/obj/machinery/light",
+      "vars":[
+         "lightbulb"
+      ]
+   },
+   {
+      "path":"/obj/machinery/light_switch",
+      "vars":[
+         "on"
+      ]
+   },
+   {
+      "path":"/obj/machinery/message_server",
+      "vars":[
+         "decryptkey"
+      ]
+   },
+   {
+      "path":"/obj/machinery/microwave",
+      "vars":[
+         "dirty",
+         "broken"
+      ]
+   },
+   {
+      "path":"/obj/machinery/mineral/processing_unit",
+      "vars":[
+         "ores_processing",
+         "ores_stored"
+      ]
+   },
+   {
+      "path":"/obj/machinery/mineral",
+      "vars":[
+         "input_turf",
+         "output_turf"
+      ]
+   },
+   {
+      "path":"/obj/machinery/navbeacon",
+      "vars":[
+         "locked",
+         "location",
+         "codes"
+      ]
+   },
+   {
+      "path":"/obj/machinery/organ_printer",
+      "vars":[
+         "stored_matter"
+      ]
+   },
+   {
+      "path":"/obj/machinery/papershredder",
+      "vars":[
+         "paperamount",
+         "shred_amounts"
+      ]
+   },
+   {
+      "path":"/obj/machinery/photocopier/faxmachine",
+      "vars":[
+         "department"
+      ]
+   },
+   {
+      "path":"/obj/machinery/photocopier",
+      "vars":[
+         "copyitem",
+         "copies",
+         "toner"
+      ]
+   },
+   {
+      "path":"/obj/machinery/portable_atmospherics/canister",
+      "vars":[
+         "health",
+         "valve_open",
+         "release_pressure",
+         "canister_color"
+      ]
+   },
+   {
+      "path":"/obj/machinery/portable_atmospherics/hydroponics",
+      "vars":[
+         "base_name",
+         "dead",
+         "harvest",
+         "age",
+         "health",
+         "lastproduce",
+         "lastcycle",
+         "seed",
+         "toxic_reagents",
+         "nutrient_reagents",
+         "weedkiller_reagents",
+         "pestkiller_reagents",
+         "water_reagents",
+         "beneficial_reagents",
+         "mutagenic_reagents"
+      ]
+   },
+   {
+      "path":"/obj/machinery/portable_atmospherics/powered/pump",
+      "vars":[
+         "cell"
+      ]
+   },
+   {
+      "path":"/obj/machinery/portable_atmospherics/powered/scrubber",
+      "vars":[
+         "cell"
+      ]
+   },
+   {
+      "path":"/obj/machinery/portable_atmospherics",
+      "vars":[
+         "air_contents",
+         "connected_port",
+         "holding"
+      ]
+   },
+   {
+      "path":"/obj/machinery/porta_turret",
+      "vars":[
+         "health",
+         "locked",
+         "installation",
+         "check_access",
+         "enabled",
+         "lethal"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/apc",
+      "vars":[
+         "area",
+         "cell",
+         "cell_type",
+         "opened",
+         "shorted",
+         "lighting",
+         "equipment",
+         "environ",
+         "operating",
+         "chargemode",
+         "locked",
+         "coverlocked",
+         "aidisabled",
+         "lastused_light",
+         "lastused_equip",
+         "lastused_environ",
+         "lastused_charging",
+         "lastused_total",
+         "main_status",
+         "has_electronics",
+         "beenhit",
+         "is_critical",
+         "autoflag"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/emitter",
+      "vars":[
+         "active",
+         "locked",
+         "powered",
+         "burst_shots",
+         "fire_delay",
+         "last_shot",
+         "shot_number",
+         "efficiency",
+         "min_burst_delay",
+         "max_burst_delay"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/port_gen",
+      "vars":[
+         "active",
+         "open"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/sensor",
+      "vars":[
+         "name_tag"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/shield_generator",
+      "vars":[
+         "shield_modes",
+         "mitigation_em",
+         "mitigation_physical",
+         "mitigation_heat",
+         "mitigation_max",
+         "max_energy",
+         "current_energy",
+         "field_radius",
+         "running",
+         "input_cap",
+         "upkeep_power_usage",
+         "upkeep_multiplier",
+         "mode_changes_locked",
+         "mode_list",
+         "field_segments",
+         "damaged_segments",
+         "target_radius",
+         "power_usage",
+         "overloaded",
+         "hacked",
+         "offline_for",
+         "input_cut",
+         "full_shield_strength",
+         "idle_multiplier",
+         "spinup_delay",
+         "spinup_counter"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/smes/batteryrack",
+      "vars":[
+         "max_transfer_rate",
+         "mode",
+         "internal_cells",
+         "max_cells"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/smes",
+      "vars":[
+         "capacity",
+         "charge",
+         "input_attempt",
+         "input_level",
+         "output_attempt",
+         "output_level",
+         "name_tag",
+         "terminals",
+         "should_be_mapped",
+         "damage",
+         "input_cut",
+         "output_cut",
+         "failure_timer"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/solar",
+      "vars":[
+         "sunfrac",
+         "control",
+         "obscured",
+         "adir",
+         "ndir",
+         "turn_angle",
+         "health",
+         "id"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/terminal",
+      "vars":[
+         "master"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/tracker",
+      "vars":[
+         "control"
+      ]
+   },
+   {
+      "path":"/obj/machinery/reagentgrinder",
+      "vars":[
+         "beaker",
+         "contents"
+      ]
+   },
+   {
+      "path":"/obj/machinery/recharger",
+      "vars":[
+         "charging"
+      ]
+   },
+   {
+      "path":"/obj/machinery/sleeper",
+      "vars":[
+         "occupant",
+         "beaker",
+         "filtering",
+         "pump",
+         "stasis"
+      ]
+   },
+   {
+      "path":"/obj/machinery/smartfridge",
+      "vars":[
+         "item_records"
+      ]
+   },
+   {
+      "path":"/obj/machinery/suit_cycler",
+      "vars":[
+         "locked",
+         "target_species",
+         "suit",
+         "helmet"
+      ]
+   },
+   {
+      "path":"/obj/machinery/telecomms/receiver",
+      "vars":[
+         "links",
+         "listening_levels"
+      ]
+   },
+   {
+      "path":"/obj/machinery/telecomms",
+      "vars":[
+         "on",
+         "id"
+      ]
+   },
+   {
+      "path":"/obj/machinery",
+      "vars":[
+         "stat",
+         "emagged",
+         "malf_upgraded",
+         "use_power",
+         "component_parts",
+         "uid",
+         "panel_open",
+         "power_components",
+         "anchored",
+         "state"
+      ]
+   },
+   {
+      "path":"/obj/structure/barricade",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/structure/bed",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/structure/bigDelivery",
+      "vars":[
+         "wrapped",
+         "sortTag",
+         "examtext",
+         "nameset",
+         "label_y",
+         "label_x",
+         "tag_x"
+      ]
+   },
+   {
+      "path":"/obj/structure/cable",
+      "vars":[
+         "d1",
+         "d2",
+         "color"
+      ]
+   },
+   {
+      "path":"/obj/structure/closet/secure_closet/personal",
+      "vars":[
+         "registered_name"
+      ]
+   },
+   {
+      "path":"/obj/structure/closet",
+      "vars":[
+         "broken",
+         "opened",
+         "locked"
+      ]
+   },
+   {
+      "path":"/obj/structure/c_tray",
+      "vars":[
+         "connected"
+      ]
+   },
+   {
+      "path":"/obj/structure/dispenser",
+      "vars":[
+         "oxygentanks",
+         "phorontanks"
+      ]
+   },
+   {
+      "path":"/obj/structure/disposalconstruct",
+      "vars":[
+         "dpdir"
+      ]
+   },
+   {
+      "path":"/obj/structure/disposalpipe",
+      "vars":[
+         "dpdir",
+         "health",
+         "base_icon_state"
+      ]
+   },
+   {
+      "path":"/obj/structure/door_assembly",
+      "vars":[
+         "panel_icon",
+         "fill_icon",
+         "glass_icon"
+      ]
+   },
+   {
+      "path":"/obj/structure/girder",
+      "vars":[
+         "state",
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/structure/janitorialcart",
+      "vars":[
+         "mybag",
+         "mymop",
+         "myspray",
+         "myreplacer",
+         "signs"
+      ]
+   },
+   {
+      "path":"/obj/structure/lift/button",
+      "vars":[
+         "lift",
+         "floor"
+      ]
+   },
+   {
+      "path":"/obj/structure/ore_box",
+      "vars":[
+         "stored_ore"
+      ]
+   },
+   {
+      "path":"/obj/structure/sign/poster",
+      "vars":[
+         "desc"
+      ]
+   },
+   {
+      "path":"/obj/structure/table",
+      "vars":[
+         "flipped",
+         "material",
+         "reinforced",
+         "carpeted"
+      ]
+   },
+   {
+      "path":"/obj/structure/wall_frame",
+      "vars":[
+         "stripe_color"
+      ]
+   },
+   {
+      "path":"/obj/structure/window",
+      "vars":[
+         "health",
+         "polarized",
+         "reinf_material",
+         "init_material",
+         "blend_objects"
+      ]
+   },
+   {
+      "path":"/obj/structure",
+      "vars":[
+         "connections",
+         "health",
+         "other_connections",
+         "waterproof",
+		 "color",
+		 "breakable",
+		 "parts",
+		 "blend_objects",
+		 "noblend_objects",
+		 "material",
+		 "footstep_type",
+		 "mob_offset"
+      ]
+   },
+   {
+      "path":"/obj/vehicle/train/cargo/engine",
+      "vars":[
+         "key"
+      ]
+   },
+   {
+      "path":"/obj/vehicle/train",
+      "vars":[
+         "passenger_allowed"
+      ]
+   },
+   {
+      "path":"/obj/vehicle",
+      "vars":[
+         "on",
+         "health",
+         "open",
+         "locked",
+         "stat",
+         "cell",
+         "load"
+      ]
+   },
+   {
+      "path":"/turf/simulated/wall",
+      "vars":[
+         "material",
+         "state",
+         "floor_type",
+         "paint_color",
+         "stripe_color",
+         "damage",
+         "opacity"
+      ]
+   },
+   {
+      "path":"/zone",
+      "vars":[
+         "air"
+      ]
+   },
+   {
+      "path":"/turf",
+      "vars":[
+         "level",
+         "holy",
+         "blocks_air",
+         "blessed",
+         "fluid_can_pass",
+         "flooded",
+         "footstep_type",
+         "contents",
+         "density",
+         "icon_state",
+         "name",
+         "pixel_x",
+         "pixel_y",
+         "dir",
+         "decals",
+         "air",
+         "is_on_fire"
+      ]
+   },
+   {
+      "path":"/mob",
+      "vars":[
+         "mob_flags",
+         "last_quick_move_time",
+         "mind",
+         "lastKnownIP",
+         "computer_id",
+         "last_ckey",
+         "contents",
+         "stat",
+         "damageoverlaytemp",
+         "machine",
+         "sdisabilities",
+         "disabilities",
+         "pulling",
+         "other_mobs",
+         "next_move",
+         "hand",
+         "real_name",
+         "bhunger",
+         "druggy",
+         "confused",
+         "sleeping",
+         "resting",
+         "lying",
+         "lying_prev",
+         "radio_interrupt_cooldown",
+         "unacidable",
+         "pinned",
+         "embedded",
+         "languages",
+         "species_language",
+         "only_species_language",
+         "speak_emote",
+         "emote_type",
+         "facing_dir",
+         "timeofdeath",
+         "bodytemperature",
+         "a_intent",
+         "move_intent",
+         "buckled",
+         "l_hand",
+         "r_hand",
+         "back",
+         "s_active",
+         "wear_mask",
+         "grabbed_by",
+         "in_throw_mode",
+         "inertia_dir",
+         "can_pull_size",
+         "can_pull_mobs",
+         "dna",
+         "active_genes",
+         "mutations",
+         "radiation",
+         "voice_name",
+         "faction",
+         "blinded",
+         "ear_deaf",
+         "LAssailant",
+         "status_flagS",
+         "lastarea",
+         "digitalcamo",
+         "control_object",
+         "universal_speak",
+         "universal_understand",
+         "shouldnt_see",
+         "mob_size",
+         "paralysis",
+         "stunned",
+         "weakness",
+         "drowsyness",
+         "flavor_text",
+         "skillset",
+         "additional_vision_handlers",
+         "feet_blood_color",
+         "gender",
+         "id_tag"
+      ]
+   },
+   {
+      "path":"/atom/movable",
+      "vars":[
+         "level",
+         "germ_level",
+         "blood_DNA",
+         "was_bloodied",
+         "last_bumped",
+         "climbers",
+         "contents"
+      ]
+   },
+   {
+      "path":"/atom",
+      "vars":[
+         "visibility",
+         "suit_fibers",
+         "fingerprints",
+         "gunshot_resique",
+         "contents",
+         "blend_mode",
+         "density",
+         "dir",
+         "icon_state",
+         "name",
+         "opacity",
+         "layer",
+         "pixel_x",
+         "pixel_y",
+         "loc",
+         "id_tag"
+      ]
+   },
+   {
+      "path":"/obj",
+      "vars":[
+         "visibility",
+         "suit_fibers",
+         "fingerprints",
+         "gunshot_resique",
+         "contents",
+         "density",
+         "dir",
+         "icon",
+         "icon_state",
+         "name",
+         "opacity",
+         "pixel_x",
+         "pixel_y",
+         "loc",
+		 "id_tag",
+		 "matter",
+		 "w_class",
+		 "unacidable",
+		 "throwforce",
+		 "sharp",
+		 "edge",
+		 "in_use",
+		 "damtype",
+		 "armor_penetration",
+		 "anchor_fall",
+		 "holographic"
+      ]
+   },
+   {
+      "path":"/datum/robot_component",
+      "vars":[
+         "name",
+         "installed",
+         "powered",
+         "toggled",
+         "brute_damage",
+         "electronics_damage",
+         "max_damage",
+         "external_type",
+         "wrapped"
+      ]
+   },
+   {
+      "path":"/mob/living/simple_animal/corgi/puppy",
+      "vars":[
+         "max_health",
+         "color"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/shoes",
+      "vars":[
+         "overshoes",
+         "hidden_item",
+         "attached_cuffs"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/suit",
+      "vars":[
+         "allowed"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/under/rank/psych/turtleneck/sweater",
+      "vars":[
+         "contents"
+      ]
+   },
+   {
+      "path":"/obj/item/clothing/under",
+      "vars":[
+         "sensor_mode",
+         "rolled_down",
+         "rolled_sleeves",
+         "worn_state"
+      ]
+   },
+   {
+      "path":"/obj/item/device/electronic_assembly/medium",
+      "vars":[
+         "opened"
+      ]
+   },
+   {
+      "path":"/obj/item/device/flashlight/flare",
+      "vars":[
+         "fuel"
+      ]
+   },
+   {
+      "path":"/obj/item/device/tankassemblyproxy",
+      "vars":[
+         "tank",
+         "assembly"
+      ]
+   },
+   {
+      "path":"/obj/item/disposal_switch_construct",
+      "vars":[
+         "id_tag"
+      ]
+   },
+   {
+      "path":"/obj/item/integrated_circuit/manipulation/ai",
+      "vars":[
+         "aicard",
+         "controlling"
+      ]
+   },
+   {
+      "path":"/obj/item/pizzabox",
+      "vars":[
+         "pizza"
+      ]
+   },
+   {
+      "path":"/obj/item/robot_parts/chest",
+      "vars":[
+         "wires",
+         "cell"
+      ]
+   },
+   {
+      "path":"/obj/item/robot_parts/head",
+      "vars":[
+         "flash1",
+         "flash2"
+      ]
+   },
+   {
+      "path":"/obj/item/stack/material/generic",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/cell/apc",
+      "vars":[
+         "maxcharge"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/cell/device/variable",
+      "vars":[
+         "maxcharge"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts",
+      "vars":[
+         "rating",
+         "status"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/computer/ai_slot",
+      "vars":[
+         "stored_card"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/computer/battery_module",
+      "vars":[
+         "battery"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/computer/hard_drive",
+      "vars":[
+         "stored_files",
+         "used_capacity"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/computer/card_slot",
+      "vars":[
+         "stored_card"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/computer/nano_printer",
+      "vars":[
+         "stored_paper"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/computer/",
+      "vars":[
+         "damage",
+         "enabled"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/disk/tech_disk",
+      "vars":[
+         "stored"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/disk/tech_disk",
+      "vars":[
+         "stored"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/disk/tech_disk",
+      "vars":[
+         "stored"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/ducttape",
+      "vars":[
+         "stuck"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/flamethrower/full",
+      "vars":[
+         "tank"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/gun/projectile/pistol/sec/detective",
+      "vars":[
+         "unique_name",
+         "unique_reskin"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/material/",
+      "vars":[
+         "material"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/tank",
+      "vars":[
+         "air_contents",
+         "distribute_pressure",
+         "valve_welded",
+         "proxyassembly",
+         "wired",
+         "leaking",
+         "starting_pressure"
+      ]
+   },
+   {
+      "path":"/obj/machinery/button",
+      "vars":[
+         "active",
+         "operating",
+         "in_use",
+         "public_variables",
+         "public_methods"
+      ]
+   },
+   {
+      "path":"/obj/machinery/access_button",
+      "vars":[
+         "master_tag",
+         "frequency",
+         "command",
+         "on"
+      ]
+   },
+   {
+      "path":"/obj/machinery/atmospherics/pipe",
+      "vars":[
+         "reagents"
+      ]
+   },
+   {
+      "path":"/obj/machinery/fabricator",
+      "vars":[
+         "stored_material",
+         "contents",
+         "has_recycler",
+         "base_icon_state",
+         "panel_image",
+         "queued_orders",
+         "currently_building",
+         "storage_capacity",
+         "show_category",
+         "fab_status_flags",
+         "mat_efficiency",
+         "build_time_multiplier"
+      ]
+   },
+   {
+      "path":"/obj/machinery/conveyor_switch",
+      "vars":[
+         "id"
+      ]
+   },
+   {
+      "path":"/obj/machinery/disposal_switch",
+      "vars":[
+         "id_tag",
+         "on"
+      ]
+   },
+   {
+      "path":"/obj/item/device/integrated_circuit_printer",
+      "vars":[
+         "upgraded",
+         "materials"
+      ]
+   },
+   {
+      "path":"/obj/structure/iv_drip",
+      "vars":[
+         "mode",
+         "beaker",
+         "attached"
+      ]
+   },
+   {
+      "path":"/obj/machinery/portable_atmospherics/canister/air",
+      "vars":[
+         "destroyed",
+         "health",
+         "valve_open",
+         "release_pressure",
+         "canister_color"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/port_gen/pacman",
+      "vars":[
+         "sheets",
+         "sheets_left",
+         "operating_temperature",
+         "overheating"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/solar_control",
+      "vars":[
+		  "id",
+		  "cdir",
+		  "gen",
+		  "lastgen",
+         "connected_tracker",
+         "connected_panels",
+         "trackrate",
+         "targetdir",
+         "track"
+      ]
+   },
+   {
+	"path": "/obj/item/solar_assembly",
+	"vars": [
+		"tracker",
+		"glass_type"
+	]
+   },
+   {
+      "path":"/obj/machinery/telecomms/bus",
+      "vars":[
+         "change_frequency"
+      ]
+   },
+   {
+      "path":"/obj/machinery/telecomms/processor",
+      "vars":[
+         "process_mode"
+      ]
+   },
+   {
+      "path":"/obj/machinery/telecomms/server",
+      "vars":[
+         "log_entries",
+         "stored_names",
+         "TrafficActions",
+         "logs",
+         "memory"
+      ]
+   },
+   {
+      "path":"/obj/structure/disposalpipe/diversion_junction",
+      "vars":[
+         "active",
+         "active_dir",
+         "inactive_dir",
+         "sortdir",
+         "id_tag",
+         "linked"
+      ]
+   },
+   {
+      "path":"/obj/structure/disposalpipe/sortjunction",
+      "vars":[
+         "sortdir",
+         "posdir",
+         "negdir"
+      ]
+   },
+   {
+      "path":"/obj/structure/disposalpipe/tagger",
+      "vars":[
+         "sorttag"
+      ]
+   },
+   {
+      "path":"/obj/structure/lift/panel",
+      "vars":[
+         "lift"
+      ]
+   },
+   {
+      "path":"/turf/simulated/mineral",
+      "vars":[
+         "resources",
+         "mineral"
+      ]
+   },
+   {
+      "path":"/turf/simulated/floor",
+      "vars":[
+         "burnt",
+         "broken",
+         "icon_state"
+      ]
+   },
+   {
+      "path":"/image",
+      "vars":[
+         "color",
+         "transform",
+         "icon"
+      ]
+   },
+   {
+      "path":"/datum/wrapper/area",
+      "vars":[
+         "area_type",
+         "name",
+         "turfs",
+         "has_gravity",
+         "apc",
+         "power_light",
+         "power_equip",
+         "power_environ"
+      ]
+   },
+   {
+      "path":"/datum/wrapper/multiz",
+      "vars":[
+         "saved_z_levels"
+      ]
+   },
+   {
+      "path":"/obj/machinery/light",
+      "vars":[
+         "status",
+         "switchcount",
+         "rigged",
+         "broken_chance",
+         "b_colour",
+         "current_mode",
+         "icon_state",
+         "base_state",
+         "light_type",
+         "on",
+         "lightbulb"
+      ]
+   },
+   {
+      "path":"/obj/structure/ladder",
+      "vars":[
+         "allowed_directions",
+         "target_up",
+         "target_down",
+         "climb_time"
+      ]
+   },
+   {
+      "path":"/obj/structure/stairs",
+      "vars":[
+         "layer",
+         "bound_height",
+         "dir"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/supermatter",
+      "vars":[
+         "nitrogen_retardation_factor",
+         "thermal_release_modifier",
+         "phoron_release_modifier",
+         "oxygen_release_modifier",
+         "radiation_release_modifier",
+         "reaction_power_modifier",
+         "power_factor",
+         "decay_factor",
+         "critical_temperature",
+         "charging_factor",
+         "damage_rate_limit",
+         "gasefficency",
+         "damage",
+         "light_color",
+         "warning_color",
+         "emergency_color",
+         "grav_pulling",
+         "pull_time",
+         "explosion_power",
+         "emergency_issued",
+         "lastwarning",
+         "exploded",
+         "power",
+         "oxygen",
+         "config_bullet_energy",
+         "config_hallucination_power",
+         "aw_normal",
+         "aw_notify",
+         "aw_warning",
+         "aw_danger",
+         "aw_emerg",
+         "aw_delam",
+         "aw_EPR"
+      ]
+   },
+   {
+      "path":"/obj/machinery/kinetic_harvester",
+      "vars":[
+         "stored",
+         "harvesting",
+         "harvest_from",
+         "initial_id_tag"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/fusion_core",
+      "vars":[
+         "owned_field",
+         "field_strength",
+         "initial_id_tag"
+      ]
+   },
+   {
+      "path":"/obj/effect/fusion_em_field",
+      "vars":[
+         "size",
+         "energy",
+         "plasma_temperature",
+         "radiation",
+         "field_strength",
+         "tick_instability",
+         "percent_unstable",
+         "owned_core",
+         "reactants",
+         "particle_catchers",
+         "light_min_range",
+         "light_min_power",
+         "light_max_range",
+         "light_max_power",
+         "last_range",
+         "last_power"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/fuel_assembly",
+      "vars":[
+         "material_name",
+         "percent_depleted",
+         "rod_quantities",
+         "fuel_type",
+         "fuel_colour",
+         "radioactivity",
+         "initial_amount"
+      ]
+   },
+   {
+      "path":"/obj/machinery/fusion_fuel_injector",
+      "vars":[
+         "fuel_usage",
+         "initial_id_tag",
+         "injecting",
+         "cur_assembly",
+         "injection_rate"
+      ]
+   },
+   {
+      "path":"/obj/machinery/computer/fusion",
+      "vars":[
+         "ui_template",
+         "initial_id_tag"
+      ]
+   },
+   {
+      "path":"/obj/effect/fusion_particle_catcher",
+      "vars":[
+         "parent",
+         "mysize"
+      ]
+   },
+   {
+      "path":"/obj/machinery/compressor",
+      "vars":[
+         "turbine",
+         "gas_contained",
+         "inturf",
+         "starter",
+         "rpm",
+         "rpmtarget",
+         "capacity",
+         "comp_id"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/turbine",
+      "vars":[
+         "compressor",
+         "outturf",
+         "lastgen"
+      ]
+   },
+   {
+      "path":"/obj/machinery/computer/turbine_computer",
+      "vars":[
+         "compressor",
+         "doors",
+         "door_status"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/radio/receiver",
+      "vars":[
+         "receive_and_write",
+         "receive_and_call"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/radio/transmitter",
+      "vars":[
+         "range",
+         "latency",
+         "buffer"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/radio",
+      "vars":[
+         "frequency",
+         "id_tag",
+         "filter",
+         "encryption",
+         "multitool_extension",
+         "radio"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/power/terminal",
+      "vars":[
+         "terminal_dir",
+         "terminal"
+      ]
+   },
+   {
+      "path":"/obj/item/weapon/stock_parts/power/terminal",
+      "vars":[
+         "priority",
+         "cached_channel"
+      ]
+   },
+   {
+      "path":"/obj/machinery/power/emitter/gyrotron",
+      "vars":[
+         "initial_id_tag",
+         "rate",
+         "mega_energy"
+      ]
+   },
+   {
+      "path":"/obj/machinery/ntnet_relay",
+      "vars":[
+         "enabled",
+         "dos_failure",
+         "dos_sources",
+         "dos_overload",
+         "dos_capacity",
+         "dos_dissipate"
+      ]
+   },
+   {
+      "path":"/obj/structure/lift",
+      "vars":[
+         "lift"
+      ]
+   },
+   {
+      "path":"/obj/machinery/door/blast",
+      "vars":[
+         "icon_state_open",
+         "icon_state_opening",
+         "icon_state_closed",
+         "icon_state_closing",
+         "icon_state_open_broken",
+         "icon_state_closed_broken",
+         "begins_closed",
+         "implicit_material",
+         "min_force",
+         "maxhealth",
+         "block_air_zones",
+         "explosion_resistance",
+         "pry_mod"
+      ]
+   },
+   {
+      "path":"/datum/fabricator_build_order",
+      "vars":[
+         "target_recipe",
+         "multiplier",
+         "remaining_time",
+         "earmarked_materials"
+      ]
+   },
+   {
+      "path":"/datum/fabricator_recipe",
+      "vars":[
+         "name",
+         "path",
+         "hidden",
+         "category",
+         "resources",
+         "build_time",
+         "ignore_materials"
+      ]
+   },
+   {
+      "path":"/obj/item/razorweb",
+      "vars":[
+         "web_type"
+      ]
+   },
+   {
+      "path":"/obj/effect/fluid",
+      "vars":[
+         "fluid_amount",
+         "start_loc",
+         "equalizing_fluids",
+         "equalize_avg_depth",
+         "equalize_avg_temp",
+         "flow_amount"
+      ]
+   },
+   {
+      "path":"/obj/effect/effect/smoke/chem",
+      "vars":[
+         "splash_amount",
+         "destination"
+      ]
+   },
+   {
+      "path":"/datum/skillset",
+      "vars":[
+         "skill_list",
+         "owner",
+         "skill_buffs",
+		 "points_remaining",
+		 "time_skills_set"
+      ]
 	},
 	{
-	  "path": "/obj/vehicle/train/cargo/engine",
-	  "vars": [
-		"key"
-	  ]
-	},
-	{
-	  "path": "/obj/vehicle/train",
-	  "vars": [
-		"passenger_allowed"
-	  ]
-	},
-	{
-	  "path": "/obj/vehicle",
-	  "vars": [
-		"on",
-		"health",
-		"open",
-		"locked",
-		"stat",
-		"cell",
-		"load"
-	  ]
-	},
-	{
-	  "path": "/turf/simulated/wall",
-	  "vars": [
-		"material",
-		"state",
-		"floor_type",
-		"paint_color",
-		"stripe_color",
-		"damage",
-		"opacity"
-	  ]
-	},
-	{
-	   "path": "/obj/item/weapon/implant/sic",
-	   "vars": [
-		 "unique_id",
-		 "alias",
-		 "ignored",
-		 "max_bill",
-		 "current_bill",
-		 "free_messaging"
-	   ]
-	},
-	{
-		"path": "/turf",
-		"vars": [
-			"level",
-			"holy",
-			"blocks_air",
-			"blessed",
-			"fluid_can_pass",
-			"flooded",
-			"footstep_type",
-			"contents",
-			"density",
-			"icon_state",
-			"name",
-			"pixel_x",
-			"pixel_y",
-			"dir",
-			"decals",
-			"air",
-			"is_on_fire"
+		"path": "/obj/effect/overmap/visitable/sector/exoplanet",
+		"vars":[
+			"planetary_area",
+			"seeds",
+			"animals",
+			"max_animal_count",
+			"atmosphere",
+			"breathgas",
+			"badgas",
+			"lightlevel",
+			"intenselight",
+			"daycycle",
+			"daycolumn",
+			"daycycle_column_delay",
+			"maxx",
+			"maxy",
+			"rock_colors",
+			"plant_colors",
+			"grass_color",
+			"surface_color",
+			"water_color",
+			"skybox_image",
+			"actors",
+			"species",
+			"repopulating",
+			"repopulate_types",
+			"themes",
+			"ruin_tags_whitelist",
+			"ruin_tags_blacklist",
+			"features_budget",
+			"spawned_features",
+			"habitability_class",
+			"generation_complete"
 		]
 	},
 	{
-		"path": "/mob",
-		"vars": [
-			"mob_flags",
-			"last_quick_move_time",
-			"mind",
-			"lastKnownIP",
-			"computer_id",
-			"last_ckey",
-			"contents",
-			"stat",
-			"damageoverlaytemp",
-			"machine",
-			"sdisabilities",
-			"disabilities",
-			"pulling",
-			"other_mobs",
-			"next_move",
-			"hand",
-			"real_name",
-			"bhunger",
-			"druggy",
-			"confused",
-			"sleeping",
-			"resting",
-			"lying",
-			"lying_prev",
-			"radio_interrupt_cooldown",
-			"unacidable",
-			"pinned",
-			"embedded",
-			"languages",
-			"species_language",
-			"only_species_language",
-			"speak_emote",
-			"emote_type",
-			"facing_dir",
-			"timeofdeath",
-			"bodytemperature",
-			"a_intent",
-			"move_intent",
-			"buckled",
-			"l_hand",
-			"r_hand",
-			"back",
-			"s_active",
-			"wear_mask",
-			"grabbed_by",
-			"in_throw_mode",
-			"inertia_dir",
-			"can_pull_size",
-			"can_pull_mobs",
-			"dna",
-			"active_genes",
-			"mutations",
-			"radiation",
-			"voice_name",
-			"faction",
-			"blinded",
-			"ear_deaf",
-			"LAssailant",
-			"status_flagS",
-			"lastarea",
-			"digitalcamo",
-			"control_object",
-			"universal_speak",
-			"universal_understand",
-			"shouldnt_see",
-			"mob_size",
-			"paralysis",
-			"stunned",
-			"weakness",
-			"drowsyness",
-			"flavor_text",
-			"skillset",
-			"additional_vision_handlers",
-			"feet_blood_color",
-			"gender",
-			"id_tag",
+		"path": "/datum/exoplanet_theme/mountains",
+		"vars":[
+			"rock_color"
+		]
+	},
+	{
+		"path": "/datum/random_map/automata/cave_system/mountains",
+		"vars":[
+			"rock_color"
+		]
+	},
+	{
+		"path": "/turf/simulated/floor/exoplanet",
+		"vars":[
+			"diggable",
+			"dirt_color"
+		]
+	},
+	{
+		"path": "/obj/effect/overmap/visitable/ship",
+		"vars":[
+			"moving_state",
+			"vessel_mass",
+			"vessel_size",
+			"min_speed",
+			"max_speed",
+			"speed",
+			"last_burn",
+			"burn_delay",
+			"last_movement",
+			"fore_dir",
+			"engines",
+			"engines_state",
+			"thrust_limit",
+			"heal_threshold",
+			"skill_needed",
+			"operator_skill"
+		]
+	},
+	{
+		"path": "/obj/effect/overmap/visitable/ship/landable",
+		"vars":[
+			"tag_shuttle_mech_sensor",
+			"landmark",
+			"multiz",
+			"status"
+		]
+	},
+	{
+		"path": "/obj/effect/shuttle_landmark/ship",
+		"vars":[
+			"shuttle_name",
+			"visitors"
+		]
+	},
+	{
+		"path": "/datum/ship_engine",
+		"vars":[
+			"name",
+			"holder"
+		]
+	},
+	{
+		"path": "/datum/ship_engine/gas_thruster",
+		"vars":[
+			"nozzle"
+		]
+	},
+	{
+		"path": "/datum/ship_engine/ion",
+		"vars":[
+			"thruster"
+		]
+	},
+	{
+		"path": "/obj/machinery/computer/ship/engines",
+		"vars":[
+			"display_state"
+		]
+	},
+	{
+		"path": "/obj/machinery/computer/ship/helm",
+		"vars":[
+			"autopilot",
+			"dx",
+			"dy",
+			"speedlimit",
+			"accellimit"
+		]
+	},
+	{
+		"path": "/obj/machinery/computer/ship/sensors",
+		"vars":[
+			"sensors"
+		]
+	},
+	{
+		"path": "/obj/machinery/computer/ship",
+		"vars":[
+			"viewers",
+			"extra_view",
+			"linked"
+		]
+	},
+	{
+		"path": "/datum/shuttle/autodock/overmap",
+		"vars":[
+			"range",
+			"fuel_consumption",
+			"fuel_ports",
+			"skill_needed",
+			"operator_skill"
+		]
+	},
+	{
+		"path": "/obj/effect/overmap",
+		"vars":[
+			"known",
+			"scannable"
+		]
+	},
+	{
+		"path": "/obj/effect/overmap/visitable",
+		"vars":[
+			"map_z",
+			"generic_waypoints",
+			"restricted_waypoints",
+			"docking_codes",
+			"start_x",
+			"start_y",
+			"base",
+			"in_space",
+			"hide_from_reports",
+			"has_distress_beacon"
+		]
+	},
+	{
+		"path": "/obj/machinery/atmospherics/omni/mixer",
+		"vars":[
+			"max_flow_rate",
+			"set_flow_rate",
+			"max_output_pressure"
+		]
+	},
+	{
+		"path": "/mob/living/carbon/human",
+		"vars":[
+			"oxygen_alert",
+			"phoron_alert",
+			"co2_alert",
+			"fire_alert",
+			"pressure_alert",
+			"temperature_alert",
+			"heartbeat",
+			"stamina",
+			"r_hair",
+			"g_hair",
+			"b_hair",
+			"h_style",
+			"r_facial",
+			"g_facial",
+			"b_facial",
+			"f_style",
+			"r_eyes",
+			"g_eyes",
+			"b_eyes",
+			"s_tone",
+			"s_base",
+			"r_skin",
+			"g_skin",
+			"b_skin",
+			"size_multiplier",
+			"damage_multiplier",
+			"icon_update",
+			"lip_style",
+			"age",
+			"b_type",
+			"worn_underwear",
+			"backpack_setup",
+			"cultural_info",
+			"wear_suit",
+			"w_uniform",
+			"shoes",
+			"belt",
+			"gloves",
+			"glasses",
+			"head",
+			"l_ear",
+			"r_ear",
+			"wear_id",
+			"r_store",
+			"l_store",
+			"s_store",
+			"voice",
+			"last_dam",
+			"bad_external_organs",
+			"xylophone",
+			"remoteview_target",
+			"hand_blood_color",
+			"flavor_texts",
+			"pulling_punches",
+			"full_prosthetic",
+			"robolimb_count",
+			"last_attack",
+			"flash_protection",
+			"equipment_tint_total",
+			"equipment_darkness_modifier",
+			"equipment_vision_flags",
+			"equipment_see_invis",
+			"equipment_prescription",
+			"equipment_light_protection",
+			"equipment_overlays",
+			"public_record",
+			"med_record",
+			"sec_record",
+			"gen_record",
+			"exploit_record",
+			"stance_damage",
+			"shock_stage",
+			"current_grab_type",
+			"became_older",
+			"became_younger",
+			"descriptors",
+			"last_smelt",
 			"saved_ckey"
 		]
 	},
 	{
-		"path": "/atom/movable",
-		"vars": [
-			"level",
-			"germ_level",
-			"blood_DNA",
-			"was_bloodied",
-			"last_bumped",
-			"climbers",
-			"contents"
-		]
-	},
-	{
-		"path": "/atom",
-		"vars": [
-			"visibility",
-			"suit_fibers",
-			"fingerprints",
-			"gunshot_resique",
-			"contents",
-			"blend_mode",
-			"density",
-			"dir",
-			"icon_state",
+		"path": "/datum/mob_descriptor",
+		"vars":[
 			"name",
-			"opacity",
-			"layer",
-			"pixel_x",
-			"pixel_y",
-			"loc",
-			"id_tag"
+			"chargen_label",
+			"default_value",
+			"comparison_offset",
+			"comparative_value_descriptor_equivalent",
+			"standalone_value_descriptors",
+			"comparative_value_descriptors_smaller",
+			"comparative_value_descriptors_larger",
+			"skip_species_mention"
 		]
 	},
 	{
-		"path": "/obj",
-		"vars": [
-			"visibility",
-			"suit_fibers",
-			"fingerprints",
-			"gunshot_resique",
-			"contents",
-			"density",
-			"dir",
-			"icon",
-			"icon_state",
+		"path": "/mob/living/carbon/slime",
+		"vars":[
+			"toxloss",
+			"is_adult",
+			"number_wounds",
+			"cores",
+			"mutation_chance",
+			"powerlevel",
+			"amount_grown",
+			"Victim",
+			"Target",
+			"Leader",
+			"attacked",
+			"rabid",
+			"holding_still",
+			"target_patience",
+			"Friends",
+			"speech_buffer",
+			"mood",
+			"AIproc",
+			"hurt_temperature",
+			"die_temperature",
+			"colour",
+			"core_removal_stage",
+			"ingested"
+		]
+	},
+	{
+		"path": "/mob/living/carbon/alien",
+		"vars":[
+			"dead_icon",
+			"language",
+			"death_msg",
+			"instance_num"
+		]
+	},
+	{
+		"path": "/obj/item",
+		"vars":[
+			"blood_overlay",
+			"randpixel",
+			"r_speed",
+			"health",
+			"burn_point",
+			"burning",
+			"slot_flags",
+			"no_attack_log",
+			"master",
+			"origin_tech",
+			"attack_verb",
+			"lock_picking_level",
+			"force",
+			"attack_cooldown",
+			"melee_accuracy_bonus",
+			"heat_protection",
+			"cold_protection",
+			"max_heat_protection_temperature",
+			"min_cold_protection_temperature",
+			"min_pressure_protection",
+			"max_pressure_protection",
+			"action",
+			"action_button_name",
+			"default_action_type",
+			"flags_inv",
+			"body_parts_covered",
+			"item_flags",
+			"gas_transform_coefficient",
+			"permeability_coefficient",
+			"siemens_coefficient",
+			"slowdown_general",
+			"slowdown_accessory",
+			"canremove",
+			"armor_type",
+			"armor_type",
+			"armor_degradation_speed",
+			"allowed",
+			"hidden_uplink",
+			"zoomdevicename",
+			"zoom",
+			"base_parry_chance",
+			"icon_override",
+			"use_alt_layer",
+			"item_state_slots",
+			"item_icons",
+			"sprite_sheets",
+			"sprite_sheets_obj"
+		]
+	},
+	{
+		"path": "/mob/living/carbon/brain",
+		"vars":[
+			"container",
+			"timeofhostdeath",
+			"emp_damage",
+			"alert"
+		]
+	},
+	{
+		"path": "/obj/machinery/computer/air_control",
+		"vars":[
+			"frequency",
+			"pressure_setting",
+			"input_flow_setting",
+			"input_info",
+			"output_info",
+			"sensor_info",
+			"input_tag",
+			"output_tag",
+			"sensor_tag",
+			"sensor_name",
 			"name",
-			"opacity",
-			"pixel_x",
-			"pixel_y",
-			"loc",
-			"id_tag"
+			"out_pressure_mode",
+			"automation",
+			"data"
 		]
-	},
-	{
-		"path": "/datum/robot_component",
-		"vars": [
-		  "name",
-		  "installed",
-		  "powered",
-		  "toggled",
-		  "brute_damage",
-		  "electronics_damage",
-		  "max_damage",
-		  "external_type",
-		  "wrapped"
-		]
-	  },
-	  {
-		"path": "/mob/living/simple_animal/corgi/puppy",
-		"vars": [
-		  "max_health",
-		  "color"
-		]
-	  },
-	  {
-		 "path": "/obj/item/clothing/shoes",
-		 "vars": [
-		   "overshoes",
-		   "hidden_item",
-		   "attached_cuffs"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/clothing/suit",
-		 "vars": [
-		   "allowed"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/clothing/under/rank/psych/turtleneck/sweater",
-		 "vars": [
-		   "contents"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/clothing/under",
-		 "vars": [
-		   "sensor_mode",
-		   "rolled_down",
-		   "rolled_sleeves",
-		   "worn_state"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/device/electronic_assembly/medium",
-		 "vars": [
-		   "opened"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/device/flashlight/flare",
-		 "vars": [
-		   "fuel"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/device/tankassemblyproxy",
-		 "vars": [
-		   "tank",
-		   "assembly"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/disposal_switch_construct",
-		 "vars": [
-		   "id_tag"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/integrated_circuit/manipulation/ai",
-		 "vars": [
-		   "aicard",
-		   "controlling"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/pizzabox",
-		 "vars": [
-		   "pizza"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/robot_parts/chest",
-		 "vars": [
-		   "wires",
-		   "cell"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/robot_parts/head",
-		 "vars": [
-		   "flash1",
-		   "flash2"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/stack/material/generic",
-		 "vars": [
-		   "material"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/cell/apc",
-		 "vars": [
-		   "maxcharge"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/cell/device/variable",
-		 "vars": [
-		   "maxcharge"
-		 ]
-	  },
-	  {
-		  "path": "/obj/item/weapon/stock_parts",
-		  "vars": [
-			"rating",
-			"status",
-
-		  ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/stock_parts/computer/ai_slot",
-		 "vars": [
-		   "stored_card"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/stock_parts/computer/battery_module",
-		 "vars": [
-		   "battery"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/stock_parts/computer/hard_drive",
-		 "vars": [
-		   "stored_files",
-		   "used_capacity"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/stock_parts/computer/card_slot",
-		 "vars": [
-		   "stored_card"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/stock_parts/computer/nano_printer",
-		 "vars": [
-		   "stored_paper"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/stock_parts/computer/",
-		 "vars": [
-		   "damage",
-		   "enabled"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/disk/tech_disk",
-		 "vars": [
-		   "stored"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/disk/tech_disk",
-		 "vars": [
-		   "stored"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/disk/tech_disk",
-		 "vars": [
-		   "stored"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/ducttape",
-		 "vars": [
-		   "stuck"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/flamethrower/full",
-		 "vars": [
-		   "tank"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/gun/projectile/pistol/sec/detective",
-		 "vars": [
-		   "unique_name",
-		   "unique_reskin"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/material/",
-		 "vars": [
-		   "material"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/weapon/tank",
-		 "vars": [
-		   "air_contents",
-		   "distribute_pressure",
-		   "valve_welded",
-		   "proxyassembly",
-		   "wired",
-		   "leaking",
-		   "starting_pressure"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/button",
-		 "vars": [
-			"active",
-			"operating",
-			"in_use",
-			"public_variables",
-			"public_methods"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/access_button",
-		 "vars": [
-		   "master_tag",
-		   "frequency",
-		   "command",
-		   "on"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/atmospherics/pipe",
-		 "vars": [
-		   "reagents"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/fabricator",
-		 "vars": [
-		   "stored_material",
-			 "contents",
-			 "has_recycler",
-			 "base_icon_state",
-			 "panel_image",
-			 "queued_orders",
-			 "currently_building",
-			 "storage_capacity",
-			 "show_category",
-			 "fab_status_flags",
-			 "mat_efficiency",
-			 "build_time_multiplier"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/conveyor_switch",
-		 "vars": [
-		   "id"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/disposal_switch",
-		 "vars": [
-		   "id_tag",
-		   "on"
-		 ]
-	  },
-	  {
-		 "path": "/obj/item/device/integrated_circuit_printer",
-		 "vars": [
-		   "upgraded",
-		   "materials"
-		 ]
-	  },
-	  {
-		 "path": "/obj/structure/iv_drip",
-		 "vars": [
-		   "mode",
-		   "beaker",
-		   "attached"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/portable_atmospherics/canister/air",
-		 "vars": [
-		   "destroyed",
-		   "health",
-		   "valve_open",
-		   "release_pressure",
-		   "canister_color"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/power/port_gen/pacman",
-		 "vars": [
-		   "sheets",
-		   "sheets_left",
-		   "operating_temperature",
-		   "overheating"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/power/solar_control",
-		 "vars": [
-		   "connected_tracker",
-		   "connected_panels",
-		   "trackrate",
-		   "targetdir",
-		   "track"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/telecomms/bus",
-		 "vars": [
-		   "change_frequency"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/telecomms/processor",
-		 "vars": [
-		   "process_mode"
-		 ]
-	  },
-	  {
-		 "path": "/obj/machinery/telecomms/server",
-		 "vars": [
-		   "log_entries",
-		   "stored_names",
-		   "TrafficActions",
-		   "logs",
-		   "memory"
-		 ]
-	  },
-	  {
-		 "path": "/obj/structure/disposalpipe/diversion_junction",
-		 "vars": [
-		   "active",
-		   "active_dir",
-		   "inactive_dir",
-		   "sortdir",
-		   "id_tag",
-		   "linked"
-		 ]
-	  },
-	  {
-		 "path": "/obj/structure/disposalpipe/sortjunction",
-		 "vars": [
-		   "sortdir",
-		   "posdir",
-		   "negdir"
-		 ]
-	  },
-	  {
-		 "path": "/obj/structure/disposalpipe/tagger",
-		 "vars": [
-		   "sorttag"
-		 ]
-	  },
-	  {
-		 "path": "/obj/structure/lift/panel",
-		 "vars": [
-		   "lift"
-		 ]
-	  },
-	  {
-		 "path": "/turf/simulated/mineral",
-		 "vars": [
-		   "resources",
-		   "mineral"
-		 ]
-	  },
-	  {
-		 "path": "/turf/simulated/floor",
-		 "vars": [
-			"burnt",
-			"broken",
-			"icon_state"
-		 ]
-	  },
-	  {
-		 "path": "/image",
-		 "vars": [
-			 "color",
-			 "transform",
-			 "icon"
-		 ]
-	  },
-	  {
-		 "path": "/datum/wrapper/area",
-		 "vars": [
-			 "area_type",
-			 "name",
-			 "turfs",
-			 "has_gravity",
-			 "apc",
-			 "power_light",
-			 "power_equip",
-			 "power_environ"
-		 ]
-	  },
-	  {
-		  "path": "/datum/wrapper/multiz",
-		  "vars": [
-			  "saved_z_levels"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/light",
-		  "vars": [
-			  "status",
-			  "switchcount",
-			  "rigged",
-			  "broken_chance",
-			  "b_colour",
-			  "current_mode",
-			  "icon_state",
-			  "base_state",
-			  "light_type",
-			  "on",
-			  "lightbulb"
-		  ]
-	  },
-	  {
-		  "path": "/obj/structure/ladder",
-		  "vars": [
-			  "allowed_directions",
-			  "target_up",
-			  "target_down",
-			  "climb_time"
-		  ]
-	  },
-	  {
-		  "path": "/obj/structure/stairs",
-		  "vars": [
-			  "layer",
-			  "bound_height",
-			  "dir"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/power/supermatter",
-		  "vars": [
-			  "nitrogen_retardation_factor",
-			  "thermal_release_modifier",
-			  "phoron_release_modifier",
-			  "oxygen_release_modifier",
-			  "radiation_release_modifier",
-			  "reaction_power_modifier",
-			  "power_factor",
-			  "decay_factor",
-			  "critical_temperature",
-			  "charging_factor",
-			  "damage_rate_limit",
-			  "gasefficency",
-			  "damage",
-			  "light_color",
-			  "warning_color",
-			  "emergency_color",
-			  "grav_pulling",
-			  "pull_time",
-			  "explosion_power",
-			  "emergency_issued",
-			  "lastwarning",
-			  "exploded",
-			  "power",
-			  "oxygen",
-			  "config_bullet_energy",
-			  "config_hallucination_power",
-			  "aw_normal",
-			  "aw_notify",
-			  "aw_warning",
-			  "aw_danger",
-			  "aw_emerg",
-			  "aw_delam",
-			  "aw_EPR"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/kinetic_harvester",
-		  "vars": [
-			"stored",
-			"harvesting",
-			"harvest_from",
-			"initial_id_tag"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/power/fusion_core",
-		  "vars": [
-			  "owned_field",
-			  "field_strength",
-			  "initial_id_tag"
-		  ]
-	  },
-	  {
-		  "path": "/obj/effect/fusion_em_field",
-		  "vars": [
-			  "size",
-			  "energy",
-			  "plasma_temperature",
-			  "radiation",
-			  "field_strength",
-			  "tick_instability",
-			  "percent_unstable",
-			  "owned_core",
-			  "reactants",
-			  "particle_catchers",
-			  "light_min_range",
-			  "light_min_power",
-			  "light_max_range",
-			  "light_max_power",
-			  "last_range",
-			  "last_power"
-		  ]
-	  },
-	  {
-		  "path": "/obj/item/weapon/fuel_assembly",
-		  "vars": [
-			  "material_name",
-			  "percent_depleted",
-			  "rod_quantities",
-			  "fuel_type",
-			  "fuel_colour",
-			  "radioactivity",
-			  "initial_amount"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/fusion_fuel_injector",
-		  "vars": [
-			  "fuel_usage",
-			  "initial_id_tag",
-			  "injecting",
-			  "cur_assembly",
-			  "injection_rate"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/computer/fusion",
-		  "vars": [
-			  "ui_template",
-			  "initial_id_tag"
-		  ]
-	  },
-	  {
-		  "path": "/obj/effect/fusion_particle_catcher",
-		  "vars": [
-			  "parent",
-			  "mysize"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/compressor",
-		  "vars": [
-			  "turbine",
-			  "gas_contained",
-			  "inturf",
-			  "starter",
-			  "rpm",
-			  "rpmtarget",
-			  "capacity",
-			  "comp_id"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/power/turbine",
-		  "vars": [
-			  "compressor",
-			  "outturf",
-			  "lastgen"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/computer/turbine_computer",
-		  "vars": [
-			  "compressor",
-			  "doors",
-			  "door_status"
-		  ]
-	  },
-	  {
-		  "path": "/obj/item/weapon/stock_parts/radio/receiver",
-		  "vars": [
-			  "receive_and_write",
-			  "receive_and_call"
-		  ]
-	  },
-	  {
-		  "path": "/obj/item/weapon/stock_parts/radio/transmitter",
-		  "vars": [
-			  "range",
-			  "latency",
-			  "buffer"
-		  ]
-	  },
-	  {
-		  "path": "/obj/item/weapon/stock_parts/radio",
-		  "vars": [
-			  "frequency",
-			  "id_tag",
-			  "filter",
-			  "encryption",
-			  "multitool_extension",
-			  "radio"
-		  ]
-	  },
-	  {
-		  "path": "/obj/item/weapon/stock_parts/power/terminal",
-		  "vars": [
-			  "terminal_dir",
-			  "terminal"
-		  ]
-	  },
-	  {
-		  "path": "/obj/item/weapon/stock_parts/power/terminal",
-		  "vars": [
-			  "priority",
-			  "cached_channel"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/power/emitter/gyrotron",
-		  "vars": [
-			   "initial_id_tag",
-			   "rate",
-			   "mega_energy"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/ntnet_relay",
-		  "vars": [
-			  "enabled",
-			  "dos_failure",
-			  "dos_sources",
-			  "dos_overload",
-			  "dos_capacity",
-			  "dos_dissipate"
-		  ]
-	  },
-	  {
-		  "path": "/obj/structure/lift",
-		  "vars": [
-			  "lift"
-		  ]
-	  },
-	  {
-		  "path": "/obj/machinery/door/blast",
-		  "vars": [
-			  "icon_state_open",
-			  "icon_state_opening",
-			  "icon_state_closed",
-			  "icon_state_closing",
-			  "icon_state_open_broken",
-			  "icon_state_closed_broken",
-			  "begins_closed",
-			  "implicit_material",
-			  "min_force",
-			  "maxhealth",
-			  "block_air_zones",
-			  "explosion_resistance",
-			  "pry_mod"
-		  ]
-		},
-		{
-			"path": "/datum/fabricator_build_order",
-			"vars": [
-				"target_recipe",
-				"multiplier",
-				"remaining_time",
-				"earmarked_materials"
-			]
-		},
-		{
-			"path": "/datum/fabricator_recipe",
-			"vars": [
-				"name",
-				"path",
-				"hidden",
-				"category",
-				"resources",
-				"build_time",
-				"ignore_materials"
-			]
-		},
-		{
-			"path": "/obj/item/razorweb",
-			"vars": [
-				"web_type"
-			]
-		},
-		{
-			"path": "/obj/effect/fluid",
-			"vars": [
-				"fluid_amount",
-				"start_loc",
-				"equalizing_fluids",
-				"equalize_avg_depth",
-				"equalize_avg_temp",
-				"flow_amount"
-			]
-		},
-		{
-			"path": "/obj/effect/effect/smoke/chem",
-			"vars": [
-				"splash_amount",
-				"destination"
-			]
-		},
-		{
-			"path": "/datum/skillset",
-			"vars": [
-				"skill_list",
-				"owner",
-				"skill_buffs",
-				"points_remaining",
-				"time_skills_set"
-			]
-		}
-  ]
-  
+	}
+]

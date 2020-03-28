@@ -6,7 +6,7 @@
 	station_levels = list(1, 2, 3, 4)
 	contact_levels = list(1, 2, 3, 4)
 	player_levels = list(1, 2, 3, 4)
-	saved_levels = list(1, 2, 3, 4)
+	saved_levels = list(3, 4)
 	mining_areas = list(1, 2)
 
 	overmap_size = 35
@@ -27,3 +27,5 @@
 	starting_money = 5000
 	department_money = 0
 	salary_modifier = 0.2
+
+	use_overmap = TRUE

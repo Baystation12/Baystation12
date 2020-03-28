@@ -43,12 +43,22 @@
 /obj/effect/effect/foam
 	should_save = FALSE
 
+/obj/effect/floor_decal
+	should_save = TRUE
+
 /mob/observer
 	should_save = FALSE
 
 /obj/after_deserialize()
 	..()
 	queue_icon_update()
+
+/obj/machinery/atmospherics/omni/mixer/after_deserialize()
+	..()
+	tag_north_con = null
+	tag_south_con = null
+	tag_east_con = null
+	tag_west_con = null
 
 /obj/machinery/embedded_controller
 	var/saved_memory
@@ -59,6 +69,20 @@
 	..()
 	if(saved_memory)
 		program.memory = saved_memory
+
+/turf/unsimulated/map
+	should_save = FALSE
+/obj/effect/overmap/
+	should_save = FALSE
+
+/obj/effect/overmap/visitable/before_save()
+	should_save = FALSE
+	for(var/z in map_z)
+		if(z in SSmapping.saved_levels)
+			should_save = TRUE
+	start_x = x
+	start_y = x
+	..()
 
 // /obj/machinery/door/firedoor/after_deserialize()
 // 	for(var/obj/machinery/door/firedoor/F in loc)
@@ -103,14 +127,9 @@
 	uncreated_component_parts = list() // We don't want to create more parts.
 	power_change()
 
-/turf/space/after_deserialize()
-	..()
-	for(var/atom/movable/lighting_overlay/overlay in contents)
-		overlay.loc = null
-		qdel(overlay)
-
 /turf/after_deserialize()
 	..()
+	initial_gas = null
 	if(is_on_fire)
 		hotspot_expose(700, 2)
 	is_on_fire = FALSE

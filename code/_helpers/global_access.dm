@@ -41,6 +41,8 @@
 			return global.SSantags;
 		if("SSao")
 			return global.SSao;
+		if("SSmining")
+			return global.SSmining
 		if("SSatoms")
 			return global.SSatoms;
 		if("SSautosave")
@@ -998,6 +1000,8 @@
 			global.SSghost_images=newval;
 		if("SSgoals")
 			global.SSgoals=newval;
+		if("SSmining")
+			global.SSmining=newval;
 		if("SSgraphs_process")
 			global.SSgraphs_process=newval;
 		if("SSgraphs_update")

@@ -1,7 +1,7 @@
 "a" = (/turf/simulated/mineral,/area/outreach/mines/depth_2)
 "b" = (/turf/simulated/floor/exoplanet/barren,/area/outreach/mines)
 "c" = (/turf/simulated/floor/exoplanet/concrete,/area/outreach/mines)
-"d" = (/obj/structure/ladder,/turf/simulated/floor/plating,/area/outreach/mines)
+"d" = (/obj/structure/ladder/up,/turf/simulated/floor/plating,/area/outreach/mines)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -36,8 +36,17 @@ var/global/floorIsLava = 0
 	set name="Save Server"
 
 	if(!check_rights(R_ADMIN))
-		return		
+		return
 	SSautosave.Save()
+
+/datum/admins/proc/regenerate_mine()
+	set category = "Admin"
+	set desc="Forces a regeneration of all mines."
+	set name="Regenerate Mine"
+
+	if(!check_rights(R_ADMIN))
+		return
+	SSmining.Regenerate()
 
 /datum/admins/proc/show_player_panel(var/mob/M in SSmobs.mob_list)
 	set category = "Admin"
@@ -1029,7 +1038,7 @@ var/global/floorIsLava = 0
 	set desc = "Spawn every possible custom closet. Do not do this on live."
 	set category = "Debug"
 
-	if(!check_rights(R_SPAWN))	
+	if(!check_rights(R_SPAWN))
 		return
 
 	if((input(usr, "Are you sure you want to spawn all these closets?", "So Many Closets") as null|anything in list("No", "Yes")) == "Yes")

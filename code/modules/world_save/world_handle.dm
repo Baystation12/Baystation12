@@ -78,10 +78,23 @@
 			serializer.Commit() // cleanup leftovers.
 
 		// Save multiz levels
-		var/datum/wrapper/multiz/z = new()
-		z.get_connected_zlevels()
-		serializer.SerializeThing(z)
+		var/datum/wrapper/multiz/multiz = new()
+		multiz.get_connected_zlevels()
+		serializer.SerializeThing(multiz)
 		serializer.Commit()
+
+		// Save overmap data.
+		if(GLOB.using_map.use_overmap)
+			var/z = GLOB.using_map.overmap_z
+			for(var/x in 1 to GLOB.using_map.overmap_size)
+				for(var/y in 1 to GLOB.using_map.overmap_size)
+					var/turf/T = locate(x,y,z)
+					if(!T)
+						continue
+					serializer.SerializeThing()
+					CHECK_TICK
+			serializer.Commit()
+
 		//
 		//	CLEANUP SECTION
 		//

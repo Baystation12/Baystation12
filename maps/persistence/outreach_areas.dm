@@ -30,16 +30,13 @@
 
 /area/outreach/mines
 	name = "Deep Underground"
-	var/do_autogenerate = FALSE
-	var/depth = 0
 	icon_state = "M"
+	var/do_autogenerate = FALSE
 
 /area/outreach/mines/depth_1
 	do_autogenerate = TRUE
-	depth = 1
 	icon_state = "MD1"
 
 /area/outreach/mines/depth_2
 	do_autogenerate = TRUE
-	depth = 2
 	icon_state = "MD2"
