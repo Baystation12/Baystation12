@@ -66,11 +66,9 @@
 	next_fire_time = world.time + fire_delay
 	for(var/obj/item/weapon/gun/weapon in weapons_wielded)
 		var/index = weapons_wielded.Find(weapon)
-			var/base_sleep_delay = weapon.fire_delay/2
-			sleep(base_sleep_delay * index)
-			weapon.next_fire_time = 0
-			weapon.afterattack(target, user, pointblank, clickparams)
-
+		sleep((weapon.fire_delay) * index)
+		weapon.next_fire_time = 0
+		weapon.afterattack(target, user, pointblank, clickparams)
 
 /obj/item/weapon/gun/dual_wield_placeholder/update_twohanding() //Overriden to do nothing so the name doesn't get reset to "dual wield placeholder"
 	return
