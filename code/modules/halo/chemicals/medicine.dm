@@ -142,7 +142,7 @@
 	reagent_state = LIQUID
 	color = "#FF3300"
 	metabolism = REM * 0.15
-	overdose = REAGENTS_OVERDOSE * 0.5
+	overdose = 5 //Should be administered in low doses at the time it's needed, not held in system
 
 /datum/reagent/hyperzine_concentrated/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
 	if(H.internal_organs_by_name[BP_LIVER])
@@ -154,6 +154,10 @@
 	H.add_chemical_effect(CE_SPEEDBOOST, 1)
 	H.add_chemical_effect(CE_PULSE, 2)
 
+/datum/reagent/hyperzine_concentrated/affect_blood/overdose(var/mob/living/carbon/human/H)
+	holder.remove_reagent("hyperzine_concentrated",volume)
+	H.adjustToxLoss(50)
+	. = ..()
 /datum/reagent/cryoprethaline
 	name = "Cryoprethaline"
 	description = "A cellular ice crystal formation inhibitor. Protects from the extreme cold of cryostasis"
