@@ -1,3 +1,5 @@
+#define FLEET_BASE_AMOUNT 3
+#define FLEET_SCALING_AMOUNT 1
 
 /datum/game_mode/outer_colonies
 	name = "Outer Colonies"
@@ -13,6 +15,12 @@
 	var/list/objectives_slipspace_affected = list()
 	var/list/round_end_reasons = list()
 	var/end_conditions_required = 3
+	var/list/fleet_list = list() //Format: Faction Name, list of active npc ships
+	var/fleets_arrive_at = 0
+	var/fleets_arrive_delay_max = 50 MINUTES
+	var/fleets_arrive_delay_min = 30 MINUTES
+	var/fleet_wave_delay = 5 MINUTES
+	var/fleet_wave_num = 0
 
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
@@ -29,6 +37,7 @@
 	setup_objectives()
 
 	shipmap_handler.spawn_ship("Human Colony", 3)
+	fleets_arrive_at = world.time + rand(fleets_arrive_delay_min,fleets_arrive_delay_max)
 
 	for(var/faction_type in factions)
 		factions.Remove(faction_type)
@@ -100,6 +109,88 @@
 		for(var/datum/objective/objective in F.objectives_without_targets)
 			if(objective.find_target())
 				F.objectives_without_targets -= objective
+
+/datum/game_mode/outer_colonies/process()
+	. = ..()
+	if(world.time >= fleets_arrive_at)
+		fleets_arrive_at = world.time + fleet_wave_delay
+		playsound(map_sectors["[map_sectors[1]]"], 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
+		for(var/f in factions)
+			var/datum/faction/F = f
+			var/list/faction_fleet = fleet_list[F.name]
+			if(faction_fleet == null)
+				fleet_list[F.name] = list()
+				faction_fleet = fleet_list[F.name]
+			var/num_spawn = FLEET_BASE_AMOUNT + (FLEET_SCALING_AMOUNT * fleet_wave_num)
+			var/list/spawned_ships = shipmap_handler.spawn_ship(F.name,num_spawn)
+			if(isnull(spawned_ships) || spawned_ships.len == 0)
+				continue
+			var/fleet_size = FLEET_BASE_AMOUNT
+			faction_fleet += spawned_ships
+			for(var/s in spawned_ships) //Reset our spawned ships to nullspace, so they don't immediately just jump there.
+				var/obj/ship = s
+				ship.forceMove(null)
+			if(faction_fleet.len > FLEET_BASE_AMOUNT)
+				fleet_size = faction_fleet.len/2
+			var/datum/npc_fleet/new_fleet = new
+			for(var/s in faction_fleet)
+				var/obj/effect/overmap/ship/npc_ship/combat/ship = s
+				if(ship.our_fleet)
+					var/obj/effect/overmap/ship/lead = ship.our_fleet.leader_ship
+					var/obj/effect/overmap/ship/npc_ship/lead_npc = lead
+					if((istype(lead) && (lead.flagship || lead.base)) || (lead_npc && lead_npc.is_player_controlled()))
+						continue
+
+				if(ship.hull <= initial(ship.hull)/4)
+					ship.lose_to_space()
+					faction_fleet -= ship
+					continue
+
+				if(ship.loc != null)
+					ship.radio_message("I'm pulling out to regroup.")
+					ship.last_radio_time = 0
+					ship.slipspace_to_nullspace(1)
+					var/datum/npc_fleet/curr_fleet = ship.our_fleet
+					if(curr_fleet.leader_ship == ship)
+						if(curr_fleet.ships_infleet.len > 1)
+							curr_fleet.ships_infleet -= ship
+					sleep(10) //wait a little here, so there's less radio spam from all ships pulling out at the same time.
+				//Ones that jumped to slipspace will now be nullspace'd, so we need to do this to include them.
+				if(ship.loc == null)
+					if(new_fleet.ships_infleet.len >= fleet_size)
+						new_fleet = new
+
+					if(isnull(new_fleet.leader_ship))
+						new_fleet.assign_leader(ship)
+					else
+						new_fleet.add_tofleet(ship)
+
+					if(new_fleet.leader_ship == ship)
+						var/list/targets = list()
+						for(var/enemy in F.enemy_factions)
+							var/datum/faction/f_enemy = GLOB.factions_by_name[enemy]
+							if(f_enemy && f_enemy in factions)
+								targets += f_enemy.npc_ships
+								if(f_enemy.flagship)
+									targets += f_enemy.flagship
+								if(f_enemy.base)
+									targets += f_enemy.base
+							ship.slipspace_to_location(pick(view(pick(targets),7)))
+							ship.radio_message("Slipspace manouver complete. Fleet leader reporting at [ship.loc.x],[ship.loc.y].")
+
+						if(targets.len == 0)
+							message_admins("An NPC ship tried to spawn without hostile factions, causing it to have no place to spawn, Report this.")
+							break
+
+					else
+						var/obj/effect/overmap/ship/npc_ship/leader_ship = new_fleet.leader_ship
+						ship.target_loc = leader_ship.target_loc
+						ship.slipspace_to_location(leader_ship.loc)
+						ship.radio_message("Slipspace manouver successful. Redevouz'd with leader at [ship.loc.x],[ship.loc.y].")
+
+					playsound(ship.loc, 'code/modules/halo/sounds/slip_rupture_detected.ogg', 50, 0,0,0,1)
+
+					sleep(15)
 
 /datum/game_mode/outer_colonies/check_finished()
 
