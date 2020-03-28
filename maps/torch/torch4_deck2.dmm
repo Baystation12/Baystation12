@@ -10615,6 +10615,15 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
+"Ad" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/machinery/atmospherics/binary/pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/dark,
+/area/engineering/storage)
 "Ae" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -15865,15 +15874,6 @@
 	},
 /turf/simulated/wall/r_wall/prepainted,
 /area/engineering/bluespace)
-"PG" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark,
-/area/engineering/storage)
 "PI" = (
 /obj/machinery/power/shield_generator,
 /obj/structure/cable/white{
@@ -38968,7 +38968,7 @@ nv
 qe
 uY
 mq
-Mx
+Ad
 ZB
 hr
 yv
@@ -39170,7 +39170,7 @@ pB
 Hi
 rl
 mq
-PG
+Mx
 kF
 Lu
 mC
