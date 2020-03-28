@@ -878,12 +878,12 @@ decl/hierarchy/outfit/Jul
 					)
 
 /obj/item/clothing/head/helmet/spartan/loafe
-	icon_state = "loafe-helm-worn"
-	item_state = "loafe-helm-obj"
+	icon_state = "loafe-helm-obj"
+	item_state = "loafe-helm-worn"
 
 /obj/item/clothing/suit/armor/special/spartan/loafe
-	icon_state = "loafe-shell-worn"
-	item_state = "loafe-shell-obj"
+	icon_state = "loafe-shell-obj"
+	item_state = "loafe-shell-worn"
 
 /obj/item/weapon/storage/box/large/donator/loafe/spartan
 	startswith = list(/obj/item/clothing/head/helmet/spartan/loafe,
