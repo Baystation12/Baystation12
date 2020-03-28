@@ -102,12 +102,12 @@
 		var/mob/living/m = loc
 		if(istype(m))
 			m.apply_damage(our_dam,BURN) //The low damage done by this shard exploding is meant to bypass defences, it's embedded into you.
-			m.embedded -= embedded
-			m.pinned -= embedded
+			m.embedded -= src
+			m.pinned -= src
 			if(m.pinned.len == 0)
 				m.anchored = 0
-			m.contents -= embedded
-			embedded.forceMove(get_turf(m))//And placing it on the ground below
+			m.contents -= src
+			forceMove(get_turf(m))//And placing it on the ground below
 		qdel(src)
 		return
 

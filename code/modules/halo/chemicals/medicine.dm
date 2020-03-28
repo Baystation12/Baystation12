@@ -100,7 +100,7 @@
 			for(var/obj/embedded in w.embedded_objects)
 				if(!check_and_consume_cost(BIOFOAM_COST_REMOVESHRAP))
 					continue
-				o.implants -= selection
+				o.implants -= embedded
 
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
 				M.embedded -= embedded
@@ -154,7 +154,7 @@
 	H.add_chemical_effect(CE_SPEEDBOOST, 1)
 	H.add_chemical_effect(CE_PULSE, 2)
 
-/datum/reagent/hyperzine_concentrated/affect_blood/overdose(var/mob/living/carbon/human/H)
+/datum/reagent/hyperzine_concentrated/overdose(var/mob/living/carbon/human/H)
 	holder.remove_reagent("hyperzine_concentrated",volume)
 	H.adjustToxLoss(50)
 	. = ..()
