@@ -5,11 +5,15 @@
 	var/decl/backpack_outfit/backpack
 	var/list/backpack_metadata
 
+	var/sensor_setting
+	var/sensors_locked
+
 /datum/category_item/player_setup_item/physical/equipment
 	name = "Clothing"
 	sort_order = 3
 
 	var/static/list/backpacks_by_name
+	var/list/sensorModes = list("Off", "Binary sensors", "Vitals tracker", "Tracking beacon")
 
 /datum/category_item/player_setup_item/physical/equipment/New()
 	..()
@@ -27,6 +31,8 @@
 	from_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
 	from_file(S["backpack"], load_backbag)
 	from_file(S["backpack_metadata"], pref.backpack_metadata)
+	from_file(S["sensor_setting"], pref.sensor_setting)
+	from_file(S["sensors_locked"], pref.sensors_locked)
 
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
@@ -35,6 +41,8 @@
 	to_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
 	to_file(S["backpack"], pref.backpack.name)
 	to_file(S["backpack_metadata"], pref.backpack_metadata)
+	to_file(S["sensor_setting"], pref.sensor_setting)
+	to_file(S["sensors_locked"], pref.sensors_locked)
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
@@ -85,6 +93,11 @@
 				var/list/metadata = tweak_metadata["[tweak]"]
 				tweak_metadata["[tweak]"] = tweak.validate_metadata(metadata)
 
+	if(isnull(pref.sensor_setting))
+		pref.sensor_setting = SUIT_SENSOR_OFF
+
+	if(isnull(pref.sensors_locked))
+		pref.sensors_locked = FALSE
 
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
@@ -103,6 +116,8 @@
 	for(var/datum/backpack_tweak/bt in pref.backpack.tweaks)
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
+	. += "Default Suit Sensor Setting: <a href='?src=\ref[src];change_sensor_setting=1'>[sensorModes[pref.sensor_setting + 1]]</a><br />"
+	. += "Suit Sensors Locked: <a href='?src=\ref[src];toggle_sensors_locked=1'>[pref.sensors_locked ? "Locked" : "Unlocked"]</a><br />"
 	return jointext(.,null)
 
 /datum/category_item/player_setup_item/physical/equipment/proc/get_underwear_metadata(var/underwear_category, var/datum/gear_tweak/gt)
@@ -174,6 +189,13 @@
 		if(new_metadata)
 			set_backpack_metadata(bo, bt, new_metadata)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
+	else if(href_list["change_sensor_setting"])
+		var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", sensorModes[pref.sensor_setting + 1]) in sensorModes
+		pref.sensor_setting = sensorModes.Find(switchMode) - 1
+		return TOPIC_REFRESH
+	else if(href_list["toggle_sensors_locked"])
+		pref.sensors_locked = !pref.sensors_locked
+		return TOPIC_REFRESH
 
 	return ..()
 

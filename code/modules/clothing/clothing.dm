@@ -781,7 +781,7 @@ BLIND     // can't see anything
 	w_class = ITEM_SIZE_NORMAL
 	force = 0
 	var/has_sensor = SUIT_HAS_SENSORS //For the crew computer 2 = unable to change mode
-	var/sensor_mode = 0
+	var/sensor_mode = SUIT_SENSOR_OFF
 		/*
 		1 = Report living/dead
 		2 = Report detailed damages
@@ -920,13 +920,13 @@ BLIND     // can't see anything
 /obj/item/clothing/under/examine(mob/user)
 	. = ..()
 	switch(src.sensor_mode)
-		if(0)
+		if(SUIT_SENSOR_OFF)
 			to_chat(user, "Its sensors appear to be disabled.")
-		if(1)
+		if(SUIT_SENSOR_BINARY)
 			to_chat(user, "Its binary life sensors appear to be enabled.")
-		if(2)
+		if(SUIT_SENSOR_VITAL)
 			to_chat(user, "Its vital tracker appears to be enabled.")
-		if(3)
+		if(SUIT_SENSOR_TRACKING)
 			to_chat(user, "Its vital tracker and tracking beacon appear to be enabled.")
 
 /obj/item/clothing/under/proc/set_sensors(mob/user as mob)
@@ -949,17 +949,17 @@ BLIND     // can't see anything
 
 	if (src.loc == user)
 		switch(sensor_mode)
-			if(0)
+			if(SUIT_SENSOR_OFF)
 				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "You disable your suit's remote sensing equipment.")
-			if(1)
+			if(SUIT_SENSOR_BINARY)
 				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report whether you are live or dead.")
-			if(2)
+			if(SUIT_SENSOR_VITAL)
 				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns.")
-			if(3)
+			if(SUIT_SENSOR_TRACKING)
 				user.visible_message("[user] adjusts the tracking sensor on \his [src.name].", "Your suit will now report your vital lifesigns as well as your coordinate position.")
 
 	else if (ismob(src.loc))
-		if(sensor_mode == 0)
+		if(sensor_mode == SUIT_SENSOR_OFF)
 			user.visible_message("<span class='warning'>[user] disables [src.loc]'s remote sensing equipment.</span>", "You disable [src.loc]'s remote sensing equipment.")
 		else
 			user.visible_message("[user] adjusts the tracking sensor on [src.loc]'s [src.name].", "You adjust [src.loc]'s sensors.")
