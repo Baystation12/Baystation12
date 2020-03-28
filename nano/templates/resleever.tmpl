@@ -1,4 +1,3 @@
-
 <div class='item'>
 	<div class='itemLabel'>
 		Occupant:
@@ -9,7 +8,7 @@
 </div>
 <div class='item'>
 	<div class='itemLabel'>
-		Neural Lace backup:
+		Cortical Stack backup:
 	</div>
 	<div class='itemContent'>
 		{{:data.lace}}
@@ -24,9 +23,9 @@
 	</div>
 </div>
 <div class='item'>
-	{{:helper.link("Start Procedure", null, {'begin' : 1}, data.ready ? null : 'disabled', null)}}
+	{{:helper.link("Start Procedure", null, {"action" : "begin"}, data.ready ? null : 'disabled')}}
 </div>
 <div class='item'>
-	{{:helper.link("Eject Occupan", null,  {'eject' : 1}, data.isOccupiedEjectable ? null : 'disabled', null)}}
-	{{:helper.link("Eject Neural Lace", null,  {'ejectlace' : 1}, data.isLaceEjectable ? null : 'disabled', null)}}
+	{{:helper.link('Eject Occupant', null,  {"action" : "eject"}, data.isOccupiedEjectable ? null : "disabled")}}
+	{{:helper.link('Eject Cortical Stack', null,  {"action" : "ejectlace"}, data.isLaceEjectable ? null : "disabled")}}
 </div>

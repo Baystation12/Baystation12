@@ -116,7 +116,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		pref.species = SPECIES_HUMAN
 
 	var/datum/species/mob_species = all_species[pref.species]
-	if(mob_species && mob_species.spawn_flags & SPECIES_NO_LACE)
+	if(mob_species && mob_species.spawn_flags & SPECIES_NO_STACK)
 		pref.has_cortical_stack = FALSE
 
 	var/low_skin_tone = mob_species ? (35 - mob_species.max_skin_tone()) : -185
@@ -168,8 +168,8 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "<br>"
 
 	if(config.use_cortical_stacks)
-		. += "Neural lace: "
-		if(mob_species.spawn_flags & SPECIES_NO_LACE)
+		. += "Cortical Stack: "
+		if(mob_species.spawn_flags & SPECIES_NO_STACK)
 			. += "incompatible."
 		else
 			. += pref.has_cortical_stack ? "present." : "<b>not present.</b>"

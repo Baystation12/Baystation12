@@ -1,9 +1,9 @@
 /mob/living/carbon/human/proc/create_stack()
 	internal_organs_by_name[BP_STACK] = new /obj/item/organ/internal/stack(src,1)
-	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your neural lace boots.</span>")
+	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your cortical stack boots.</span>")
 
 /obj/item/organ/internal/stack
-	name = "neural lace"
+	name = "cortical stack"
 	parent_organ = BP_HEAD
 	icon_state = "cortical-stack"
 	organ_tag = BP_STACK
