@@ -1,5 +1,3 @@
-var/global/ntnet_card_uid = 1
-
 /obj/item/weapon/stock_parts/computer/network_card/
 	name = "basic NTNet network card"
 	desc = "A basic network card for usage with standard NTNet frequencies."
@@ -13,12 +11,15 @@ var/global/ntnet_card_uid = 1
 	var/long_range = 0
 	var/ethernet = 0 // Hard-wired, therefore always on, ignores NTNet wireless checks.
 	var/proxy_id     // If set, uses the value to funnel connections through another network card.
+	var/ennid		// Associated EXONET ENNID.
+	var/keydata		// encryption key to access ennid.
 	malfunction_probability = 1
 
 /obj/item/weapon/stock_parts/computer/network_card/diagnostics()
 	. = ..()
 	. += "NIX Unique ID: [identification_id]"
 	. += "NIX User Tag: [identification_string]"
+	. += "EXONET ennid: [ennid]"
 	. += "Supported protocols:"
 	. += "511.m SFS (Subspace) - Standard Frequency Spread"
 	if(long_range)
@@ -28,8 +29,10 @@ var/global/ntnet_card_uid = 1
 
 /obj/item/weapon/stock_parts/computer/network_card/New(var/l)
 	..(l)
-	identification_id = ntnet_card_uid
-	ntnet_card_uid++
+	if(ennid)
+		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+		exonet.set_tag(null, ennid, get_netspeed(), keydata)
+		identification_id = exonet.get_mac_address()
 
 /obj/item/weapon/stock_parts/computer/network_card/advanced
 	name = "advanced NTNet network card"
@@ -67,33 +70,34 @@ var/global/ntnet_card_uid = 1
 /obj/item/weapon/stock_parts/computer/network_card/proc/is_banned()
 	return ntnet_global.check_banned(identification_id)
 
+/obj/item/weapon/stock_parts/computer/network_card/proc/get_netspeed()
+	var/strength = 1
+	if(ethernet)
+		strength = 3
+	else if(long_range)
+		strength = 2
+	return strength
+
 // 0 - No signal, 1 - Low signal, 2 - High signal. 3 - Wired Connection
 /obj/item/weapon/stock_parts/computer/network_card/proc/get_signal(var/specific_action = 0, list/routed_through)
 	. = 0
-	if(!enabled)
+	if(!enabled || !check_functionality())
 		return
 
-	if(!check_functionality() || !ntnet_global || is_banned())
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
+
+	if(!network || is_banned())
 		return
 
 	if(!ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
 		if(!ethernet || specific_action) // Wired connection ensures a basic connection to NTNet, however no usage of disabled network services.
 			return
 
-	var/strength = 1
-	if(ethernet)
-		strength = 3
-	else if(long_range)
-		strength = 2
-
+	var/strength = get_netspeed()
 	var/turf/T = get_turf(src)
 	if(!istype(T)) //no reception in nullspace
 		return
-	if(T.z in GLOB.using_map.station_levels)
-		// Computer is on station. Low/High signal depending on what type of network card you have
-		. = strength
-	else if(T.z in GLOB.using_map.contact_levels) //not on station, but close enough for radio signal to travel
-		. = strength - 1
 
 	if(proxy_id)
 		var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
@@ -105,6 +109,8 @@ var/global/ntnet_card_uid = 1
 		var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
 		if(network_card)
 			. = min(., network_card.get_signal(specific_action, routed_through))
+	else
+		return strength
 
 /obj/item/weapon/stock_parts/computer/network_card/on_disable()
 	ntnet_global.unregister(identification_id)

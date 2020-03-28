@@ -35,6 +35,24 @@
 		data["battery_rating"] = battery_module.battery.maxcharge
 		data["battery_percent"] = round(battery_module.battery.percent())
 
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = program.computer.get_component(PART_NETWORK)
+	data["nic_exists"] = !!network_card
+	if(network_card)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		var/datum/exonet/network = exonet.get_local_network()
+		if(!network)		
+			data["signal_strength"] = "Not Connected"
+		else
+			var/signal_strength = network.get_signal_strength(network_card, network_card.get_netspeed())
+			if(signal_strength <= 0)
+				data["signal_strength"] = "Not Connected"
+			else if(signal_strength <= 1)
+				data["signal_strength"] = "Low Signal"
+			else
+				data["signal_strength"] = "High Signal"
+		data["ennid"] = network_card.ennid
+		data["key"] = network_card.keydata
+
 	var/list/all_entries[0]
 	var/list/hardware = program.computer.get_all_components()
 	for(var/obj/item/weapon/stock_parts/computer/H in hardware)

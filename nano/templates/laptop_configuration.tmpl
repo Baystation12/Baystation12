@@ -26,6 +26,36 @@
 	</div>
 {{/if}}
 <div class="itemLabel">
+	Network Status:
+</div>
+{{if data.nic_exists}}
+	<div class="itemContent">
+		Active
+	</div>
+	<div class="itemLabel">
+		Signal Strength:
+	</div>
+	<div class="itemContent">
+		{{:data.signal_strength}}
+	</div>
+	<div class="itemLabel">
+		Network ENNID:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.ennid)}}
+	</div>
+	<div class="itemLabel">
+		Network KEY:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.key)}}
+	</div>
+{{else}}
+	<div class="itemContent">
+		Not Available
+	</div>
+{{/if}}
+<div class="itemLabel">
 	Power Usage: 
 </div>
 <div class="itemContent">

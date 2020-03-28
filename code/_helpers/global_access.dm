@@ -633,8 +633,6 @@
 			return global.next_station_date_change;
 		if("ninjastart")
 			return global.ninjastart;
-		if("ntnet_card_uid")
-			return global.ntnet_card_uid;
 		if("ntnet_global")
 			return global.ntnet_global;
 		if("ntnrc_uid")
@@ -919,7 +917,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-		
+
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ANTAG_FREQS")
@@ -1554,8 +1552,6 @@
 			global.next_station_date_change=newval;
 		if("ninjastart")
 			global.ninjastart=newval;
-		if("ntnet_card_uid")
-			global.ntnet_card_uid=newval;
 		if("ntnet_global")
 			global.ntnet_global=newval;
 		if("ntnrc_uid")
@@ -1840,7 +1836,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-		
+
 /var/list/_all_globals=list(
 	"ANTAG_FREQS",
 	"BSACooldown",

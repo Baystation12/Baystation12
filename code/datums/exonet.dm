@@ -10,6 +10,8 @@ GLOBAL_LIST_INIT(exonets, new)
 	var/obj/machinery/exonet/mainframe/log_server	// A mainframe that's the chosen main-log server.
 	var/obj/machinery/exonet/broadcaster/router/router // The router that hosts the network. There can be only ONE!
 
+	var/device_unique_index = 1
+
 /datum/exonet/proc/add_device(var/device, var/keydata)
 	if(!router)
 		return 0 // Uh?? No router? Guess the network is busted.

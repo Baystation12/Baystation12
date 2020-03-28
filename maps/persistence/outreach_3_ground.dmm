@@ -246,7 +246,7 @@
 "eL" = (/obj/structure/table/reinforced,/obj/machinery/door/window{icon_state = "left"; dir = 4},/turf/simulated/floor/tiled/white,/area/outreach/outpost/medical)
 "eM" = (/obj/machinery/atmospherics/unary/vent_pump/on{icon_state = "map_vent_out"; dir = 4},/turf/simulated/floor/tiled/white,/area/outreach/outpost/medical)
 "eN" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 9},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,/turf/simulated/floor/tiled/white,/area/outreach/outpost/medical)
-"eO" = (/obj/structure/window/reinforced{icon_state = "rwindow"; dir = 4},/obj/machinery/computer/modular/preset/medical{icon_state = "computer"; dir = 8},/turf/simulated/floor/tiled/white,/area/outreach/outpost/medical)
+"eO" = (/obj/structure/window/reinforced{icon_state = "rwindow"; dir = 4},/obj/machinery/computer/modular/preset/medical{dir = 8; icon_state = "computer"; initial_ennid = "exonet"},/turf/simulated/floor/tiled/white,/area/outreach/outpost/medical)
 "eP" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled/white,/area/outreach/outpost/medical)
 "eQ" = (/turf/simulated/wall/prepainted,/area/outreach/outpost/hallway)
 "eR" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 4},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{icon_state = "intact-scrubbers"; dir = 8},/obj/machinery/power/apc/critical{pixel_y = -24},/obj/structure/cable/green{icon_state = "0-2"; dir = 8},/turf/simulated/floor/tiled/white,/area/outreach/outpost/medical)
