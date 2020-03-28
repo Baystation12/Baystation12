@@ -3,6 +3,9 @@
 	var/initial_ennid			// Optional variable for setting the device up with an ennid right on initialize.
 	var/initial_keydata			// The keydata for the ennid in order to validate/authenticate with the network.
 
+/obj/machinery/exonet/New()
+	set_extension(src, /datum/extension/exonet_device)
+
 /obj/machinery/exonet/Initialize()
 	if(initial_ennid)
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)

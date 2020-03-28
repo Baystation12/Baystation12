@@ -29,10 +29,6 @@
 
 /obj/item/weapon/stock_parts/computer/network_card/New(var/l)
 	..(l)
-	if(ennid)
-		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		exonet.set_tag(null, ennid, get_netspeed(), keydata)
-		identification_id = exonet.get_mac_address()
 
 /obj/item/weapon/stock_parts/computer/network_card/advanced
 	name = "advanced NTNet network card"
@@ -127,3 +123,14 @@
 /obj/item/weapon/stock_parts/computer/network_card/on_uninstall(var/obj/machinery/machine, var/temporary = FALSE)
 	..()
 	on_disable()
+
+/obj/item/weapon/stock_parts/computer/network_card/Initialize()
+	..()
+	set_extension(src, /datum/extension/exonet_device)
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/weapon/stock_parts/computer/network_card/LateInitialize()
+	if(ennid)
+		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+		exonet.set_tag(null, ennid, get_netspeed(), keydata)
+		identification_id = exonet.get_mac_address()

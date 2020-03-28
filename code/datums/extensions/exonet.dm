@@ -21,6 +21,7 @@
 	else
 		exonet.add_device(holder)
 		ennid = new_ennid
+		netspeed = nic_netspeed
 	return FALSE // This is a success.
 
 /datum/extension/exonet_device/proc/broadcast_network(var/b_ennid)
@@ -43,11 +44,13 @@
 
 /datum/extension/exonet_device/proc/get_local_network()
 	var/datum/exonet/network = GLOB.exonets[ennid]
+	if(!network)
+		return
 	if(network.get_signal_strength(holder, netspeed) > 0)
 		return network
 
 /datum/extension/exonet_device/proc/get_mac_address()
 	var/datum/exonet/network = get_local_network()
-	if(!network)
+	if(network)
 		return network.network_devices.Find(holder)
 	

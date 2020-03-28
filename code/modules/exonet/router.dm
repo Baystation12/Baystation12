@@ -21,6 +21,7 @@
 	var/dos_dissipate = 1		// Amount of DoS "packets" dissipated over time.
 
 /obj/machinery/exonet/broadcaster/router/New()
+	..()
 	// This has to happen pretty early on object construction.
 	if(!broadcasting_ennid)
 		broadcasting_ennid = initial_ennid

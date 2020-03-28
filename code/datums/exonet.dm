@@ -10,7 +10,8 @@ GLOBAL_LIST_INIT(exonets, new)
 	var/obj/machinery/exonet/mainframe/log_server	// A mainframe that's the chosen main-log server.
 	var/obj/machinery/exonet/broadcaster/router/router // The router that hosts the network. There can be only ONE!
 
-	var/device_unique_index = 1
+/datum/exonet/New(var/new_ennid)
+	ennid = new_ennid
 
 /datum/exonet/proc/add_device(var/device, var/keydata)
 	if(!router)

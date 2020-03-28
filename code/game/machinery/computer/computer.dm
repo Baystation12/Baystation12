@@ -32,6 +32,10 @@
 /obj/machinery/computer/Initialize()
 	. = ..()
 	update_icon()
+	set_extension(src, /datum/extension/exonet_device)
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/computer/LateInitialize()
 	if(initial_ennid)
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 		exonet.set_tag(null, initial_ennid, NETWORKSPEED_ETHERNET, initial_keydata)
