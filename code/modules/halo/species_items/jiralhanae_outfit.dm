@@ -54,18 +54,21 @@
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/minor
+	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/minor
 
 /decl/hierarchy/outfit/jiralhanae/covenant/major
 	name = "Covenant Jiralhanae Major"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/major
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/major
+	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/major
 
 /decl/hierarchy/outfit/jiralhanae/covenant/captain
 	name = "Covenant Jiralhanae Captain"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
+	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/captain
 	back = /obj/item/clothing/jiralhanae_flag_random
 	l_hand = /obj/item/language_learner/unggoy_to_common
 
