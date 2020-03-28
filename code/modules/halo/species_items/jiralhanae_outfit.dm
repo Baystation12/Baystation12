@@ -67,6 +67,7 @@
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
 	back = /obj/item/clothing/jiralhanae_flag_random
+	l_hand = /obj/item/language_learner/unggoy_to_common
 
 /* Ram Clan Jiralhanae */
 
