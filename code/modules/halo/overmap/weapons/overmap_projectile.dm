@@ -123,8 +123,9 @@
 		var/obj/effect/overmap/ship/npc_ship/ship = impacted
 		if(ship.unload_at)
 			ship.take_projectiles(src,0)
-			chosen_impact_z = pick(overmap_object.map_z)
-			do_z_level_proj_spawn(chosen_impact_z,overmap_object)
+			if(overmap_object.map_z.len > 0)
+				chosen_impact_z = pick(overmap_object.map_z)
+				do_z_level_proj_spawn(chosen_impact_z,overmap_object)
 			qdel(src)
 		else
 			ship.take_projectiles(src)

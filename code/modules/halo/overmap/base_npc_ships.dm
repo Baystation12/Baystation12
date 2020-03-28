@@ -157,7 +157,7 @@
 	walk(src,0)
 	if(isnull(loc))
 		return
-	if(our_fleet && our_fleet.leader_ship != src)
+	if(our_fleet && our_fleet.leader_ship != src && our_fleet.leader_ship.loc != null)
 		target_loc = pick(range(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
 		return
 	var/list/sectors_onmap = list()

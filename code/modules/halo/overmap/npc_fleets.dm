@@ -7,7 +7,8 @@
 
 /datum/npc_fleet/New(var/creator)
 	. = ..()
-	assign_leader(creator)
+	if(creator)
+		assign_leader(creator)
 	GLOB.processing_objects += src
 
 /datum/npc_fleet/Destroy()
