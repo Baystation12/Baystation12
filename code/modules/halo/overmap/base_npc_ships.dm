@@ -116,7 +116,7 @@
 		return 1
 	if(hull < initial(hull)/4)
 		return 1
-	if(isnull(target_loc) || target_loc = loc)
+	if(isnull(target_loc) || target_loc == loc)
 		return 1
 	return 0
 
