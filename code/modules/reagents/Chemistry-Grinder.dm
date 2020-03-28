@@ -208,9 +208,7 @@
 	update_icon()
 
 	// Reset the machine.
-	spawn(60)
-		inuse = 0
-		interact(user)
+	addtimer(CALLBACK(src, .proc/reset_machine, user), 60)
 
 	var/skill_factor = CLAMP01(1 + 0.3*(user.get_skill_value(skill_to_check) - SKILL_EXPERT)/(SKILL_EXPERT - SKILL_MIN))
 	// Process.
@@ -247,6 +245,11 @@
 				qdel(O)
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
+
+/obj/machinery/reagentgrinder/proc/reset_machine(mob/user)
+	inuse = 0
+	interact(user)
+
 
 /obj/machinery/reagentgrinder/proc/attempt_skill_effect(mob/living/carbon/human/user)
 	if(!istype(user) || !prob(user.skill_fail_chance(skill_to_check, 50, SKILL_BASIC)))
