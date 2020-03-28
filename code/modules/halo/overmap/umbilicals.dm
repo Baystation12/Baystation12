@@ -162,7 +162,7 @@
 			return
 	if(umbi)
 		if(umbi.our_ship.superstructure_failing)
-			to_chat(user,"<span class = 'danger'>Superstructure of vessel is failing. Ensure caution when boarding.</span>")
+			visible_message(user,"<span class = 'danger'>ALERT: Superstructure of vessel is failing. Ensure caution when boarding.</span>")
 		current_connected = umbi
 		visual_umbi_change()
 		umbi.current_connected = src
