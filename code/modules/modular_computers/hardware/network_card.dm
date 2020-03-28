@@ -131,6 +131,17 @@
 
 /obj/item/weapon/stock_parts/computer/network_card/LateInitialize()
 	if(ennid)
-		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		exonet.set_tag(null, ennid, get_netspeed(), keydata)
-		identification_id = exonet.get_mac_address()
+		set_ennid(ennid)
+
+/obj/item/weapon/stock_parts/computer/network_card/proc/set_ennid(var/new_ennid)
+	ennid = new_ennid
+	refresh_network()
+
+/obj/item/weapon/stock_parts/computer/network_card/proc/set_keydata(var/new_keydata)
+	keydata = new_keydata
+	refresh_network()
+
+/obj/item/weapon/stock_parts/computer/network_card/proc/refresh_network()
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	exonet.set_tag(null, ennid, get_netspeed(), keydata)
+	identification_id = exonet.get_mac_address()

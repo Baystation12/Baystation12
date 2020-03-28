@@ -42,13 +42,13 @@
 		Network ENNID:
 	</div>
 	<div class="itemContent">
-		{{:helper.link(data.ennid)}}
+		{{:helper.link(data.ennid, null, { "PRG_newennid" : data.ennid })}}
 	</div>
 	<div class="itemLabel">
 		Network KEY:
 	</div>
 	<div class="itemContent">
-		{{:helper.link(data.key)}}
+		{{:helper.link(data.key, null, { "PRG_newkey" : data.key })}}
 	</div>
 {{else}}
 	<div class="itemContent">
