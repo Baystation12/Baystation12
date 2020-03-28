@@ -72,7 +72,7 @@
 	name = "bottle of Hyronalin pills"
 	desc = "Contains pills used to assist in radiation damage."
 
-	startswith = list(/obj/item/weapon/reagent_containers/pill/iron = 7)
+	startswith = list(/obj/item/weapon/reagent_containers/pill/hyronalin = 7)
 
 
 #undef SYRINGE_DRAW
