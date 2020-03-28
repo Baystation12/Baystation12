@@ -35,7 +35,8 @@
 	if(GAME_STATE > RUNLEVEL_LOBBY)
 		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
 
-	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
+	if(!config.persistent || is_admin(src))
+		output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
 
 	if(!IsGuestKey(src.key))
 		establish_db_connection()

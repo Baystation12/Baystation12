@@ -1,6 +1,30 @@
+GLOBAL_LIST_EMPTY(corticalStacks)
+
+/proc/switchToStack(var/ckey)
+	for(var/obj/item/organ/internal/stack/S in GLOB.corticalStacks)
+		if(S.ownerckey == ckey)
+			var/mob/stack/stackmob = new()
+			S.stackmob = stackmob
+			stackmob.forceMove(S)
+			stackmob.ckey = ckey
+			stackmob.mind = S.backup
+			return 1
+	return 0
+
 /mob/living/carbon/human/proc/create_stack()
 	internal_organs_by_name[BP_STACK] = new /obj/item/organ/internal/stack(src,1)
 	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your cortical stack boots.</span>")
+
+/mob/stack
+	var/obj/item/container = null
+	use_me = 0
+	icon = 'icons/obj/surgery.dmi'
+	icon_state = "cortical-stack"
+
+/mob/stack/Destroy()
+	if(key)
+		crash_with("TODO: Switch to backup or destroy.")
+	. = ..()
 
 /obj/item/organ/internal/stack
 	name = "cortical stack"
@@ -17,7 +41,13 @@
 	var/default_language
 	var/list/languages = list()
 	var/datum/mind/backup
+	var/mob
 	var/prompting = FALSE // Are we waiting for a user prompt?
+	var/mob/stack/stackmob = null
+
+/obj/item/organ/internal/stack/Destroy()
+	QDEL_NULL(stackmob)
+	. = ..()
 
 /obj/item/organ/internal/stack/examine(var/mob/user)
 	. = ..(user)
@@ -39,23 +69,35 @@
 	return 0
 
 /obj/item/organ/internal/stack/proc/do_backup()
-	if(owner && owner.stat != DEAD && !is_broken() && owner.mind)
+	if(owner && owner.stat != DEAD && !is_broken())
+		for(var/obj/item/organ/internal/stack/S in GLOB.corticalStacks)
+			if(S.ownerckey == owner.ckey && S != src)
+				qdel(S)
 		languages = owner.languages.Copy()
+		if(!owner.mind)
+			owner.mind = new(owner.ckey)
 		backup = owner.mind
 		default_language = owner.default_language
 		if(owner.ckey)
 			ownerckey = owner.ckey
 
-/obj/item/organ/internal/stack/New()
+/obj/item/organ/internal/stack/New(var/mob/living/carbon/holder)
 	..()
-	do_backup()
+	LAZYDISTINCTADD(GLOB.corticalStacks, src)
 	robotize()
+	spawn(1)
+		do_backup()
 
 /obj/item/organ/internal/stack/proc/backup_inviable()
 	return 	(!istype(backup) || backup == owner.mind || (backup.current && backup.current.stat != DEAD))
 
-/obj/item/organ/internal/stack/replaced()
+/obj/item/organ/internal/stack/replaced(var/mob/living/carbon/human/target, var/obj/item/organ/external/affected)
 	if(!..()) return 0
+	// Prevent overwriting
+	if(config.persistent)
+		if(target.mind && target.ckey && (target.ckey != owner.ckey || target.mind != owner.mind))
+			do_backup()
+			return 0
 	if(prompting) // Don't spam the player with twenty dialogs because someone doesn't know what they're doing or panicking.
 		return 0
 	if(owner && !backup_inviable())

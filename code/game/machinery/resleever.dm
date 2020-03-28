@@ -147,6 +147,9 @@ obj/machinery/resleever/Process()
 /obj/machinery/resleever/OnTopic(var/mob/user, var/list/href_list)
 	switch(href_list["action"])
 		if("begin")
+			if(occupant.ckey)
+				to_chat(user, "Occupant already has a mind.")
+				return TOPIC_REFRESH
 			if(sleeve())
 				remaining = timetosleeve
 			return TOPIC_REFRESH
