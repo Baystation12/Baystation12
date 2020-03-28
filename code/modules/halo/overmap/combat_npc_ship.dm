@@ -108,15 +108,13 @@
 			//open fire
 			fire_at_target()
 
-			if(!target_loc || is_still())
-				//Let's emulate a "circling" behaviour.
-				var/list/target_locs = list()
-				for(var/turf/unsimulated/map/m in view(target_range_from,target))
-					if(istype(m,/turf/unsimulated/map/edge))
-						continue
-					target_locs += m
-				if(target_locs.len > 0)
-					target_loc = pick(target_locs)
+			var/list/target_locs = list()
+			for(var/turf/unsimulated/map/m in view(target_range_from,target))
+				if(istype(m,/turf/unsimulated/map/edge))
+					continue
+				target_locs += m
+			if(target_locs.len > 0)
+				target_loc = pick(target_locs)
 	else
 		find_target()
 
