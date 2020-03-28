@@ -16,7 +16,6 @@ GLOBAL_LIST_EMPTY(corticalStacks)
 	to_chat(src, "<span class='notice'>You feel a faint sense of vertigo as your cortical stack boots.</span>")
 
 /mob/stack
-	var/obj/item/container = null
 	use_me = 0
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cortical-stack"
@@ -41,7 +40,6 @@ GLOBAL_LIST_EMPTY(corticalStacks)
 	var/default_language
 	var/list/languages = list()
 	var/datum/mind/backup
-	var/mob
 	var/prompting = FALSE // Are we waiting for a user prompt?
 	var/mob/stack/stackmob = null
 
@@ -71,7 +69,7 @@ GLOBAL_LIST_EMPTY(corticalStacks)
 /obj/item/organ/internal/stack/proc/do_backup()
 	if(owner && owner.stat != DEAD && !is_broken())
 		for(var/obj/item/organ/internal/stack/S in GLOB.corticalStacks)
-			if(S.ownerckey == owner.ckey && S != src)
+			if(S.ownerckey && S.ownerckey == owner.ckey && S != src)
 				qdel(S)
 		languages = owner.languages.Copy()
 		if(!owner.mind)
