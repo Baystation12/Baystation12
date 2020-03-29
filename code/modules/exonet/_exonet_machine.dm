@@ -1,4 +1,12 @@
 /obj/machinery/exonet
+	idle_power_usage = 100
+	icon_state = "bus"
+	anchored = 1
+	density = 1
+	construct_state = /decl/machine_construction/default/panel_closed
+	stat_immune = 0
+	use_power = POWER_USE_ACTIVE
+	
 	var/enabled = 1				// Set to 0 if the device was turned off
 	var/initial_ennid			// Optional variable for setting the device up with an ennid right on initialize.
 	var/initial_keydata			// The keydata for the ennid in order to validate/authenticate with the network.
@@ -56,3 +64,8 @@
 	data["net_tag"] = net_tag
 
 	. = data
+
+/obj/machinery/exonet/Destroy()
+	..()
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	exonet.disconnect_network()

@@ -2,29 +2,20 @@
 /obj/machinery/exonet/mainframe
 	name = "EXONET Mainframe"
 	desc = "A very complex mainframe capable of storing massive amounts of data. Looks fragile."
-	use_power = POWER_USE_ACTIVE
 	active_power_usage = 20000 //20kW
-	idle_power_usage = 100
-	icon_state = "bus"
-	anchored = 1
-	density = 1
-	construct_state = /decl/machine_construction/default/panel_closed
-	uncreated_component_parts = list(
-		/obj/item/weapon/stock_parts/computer/hard_drive/small,
-		/obj/item/weapon/stock_parts/computer/hard_drive/small,
-		/obj/item/weapon/stock_parts/computer/hard_drive/small,
-		/obj/item/weapon/stock_parts/computer/hard_drive/small
-	)
 	var/list/initial_programs		// Optional variable for starting a mainframe with some programs in it.
-	stat_immune = 0
-
 	var/setting_max_log_count = 100
 
 	var/max_capacity = 0
 	var/used_capacity = 0
-	var/list/stored_files = list()		// List of stored files on this mainframe. DO NOT MODIFY DIRECTLY!
+	var/list/stored_files = list(
+		/datum/computer_file/program/email_client,
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/game
+	)		// List of stored files on this mainframe. DO NOT MODIFY DIRECTLY!
 
 /obj/machinery/exonet/mainframe/Initialize()
+	..()
 	if(initial_programs)
 		for(var/initial_program in initial_programs)
 			var/datum/computer_file/program/prog = new initial_program

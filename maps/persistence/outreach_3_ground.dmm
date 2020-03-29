@@ -373,7 +373,7 @@
 "hi" = (/obj/machinery/light,/obj/structure/cable/green{icon_state = "4-8"},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "hj" = (/obj/structure/cable/green{icon_state = "1-2"; d1 = 1; d2 = 4},/obj/structure/cable/green{icon_state = "2-8"; dir = 8},/obj/structure/cable/green{icon_state = "1-4"},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "hk" = (/obj/structure/cable/green{icon_state = "2-8"; d1 = 1; d2 = 4},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
-"hl" = (/obj/structure/cable/green,/obj/machinery/exonet/mainframe/stocked,/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
+"hl" = (/obj/structure/cable/green,/obj/machinery/exonet/mainframe{ennid = "outreach"},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "hm" = (/obj/machinery/exonet/modem{initial_ennid = "outreach"},/obj/structure/cable/green,/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "hn" = (/obj/machinery/exonet/broadcaster/router{initial_ennid = "outreach"},/obj/structure/cable/green,/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "ho" = (/obj/structure/cable/green{icon_state = "1-2"; d1 = 1; d2 = 4},/turf/simulated/floor/tiled/techfloor/grid,/area/outreach/outpost/it)

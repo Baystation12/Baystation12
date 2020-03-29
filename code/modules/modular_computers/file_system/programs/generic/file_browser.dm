@@ -7,7 +7,6 @@
 	program_menu_icon = "folder-collapsed"
 	size = 8
 	requires_ntnet = 0
-	available_on_ntnet = 0
 	undeletable = 1
 	nanomodule_path = /datum/nano_module/program/computer_filemanager/
 	var/open_file
@@ -24,10 +23,12 @@
 		. = 1
 		var/list/file_servers = list("local")
 		var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+		if(!network_card)
+			return 1
 		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
 		for(var/obj/machinery/exonet/mainframe/mainframe in exonet.get_mainframes())
 			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
-		file_server = input("Choose a fileserver to view files on.", "Select File Server", file_server) in file_servers
+		file_server = sanitize(input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers)
 	if(href_list["PRG_openfile"])
 		. = 1
 		open_file = href_list["PRG_openfile"]
@@ -141,10 +142,10 @@
 
 	if(PRG.open_file)
 		var/datum/computer_file/data/F
-		if(!mainframe)
-			F = PRG.computer.get_file(PRG.open_file)
-		else
+		if(mainframe)
 			F = mainframe.find_file_by_name(PRG.open_file)
+		else
+			F = PRG.computer.get_file(PRG.open_file)
 		if(!istype(F))
 			data["error"] = "I/O ERROR: Unable to open file."
 		else
@@ -176,7 +177,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "file_manager.tmpl", "EXONET File Manager", 600, 700, state = state)
+		ui = new(user, src, ui_key, "file_manager.tmpl", "NTOS File Manager", 600, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
