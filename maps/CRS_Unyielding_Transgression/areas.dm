@@ -35,7 +35,6 @@
 /area/covenant_light_cruiser/plasmaprojector
 	name = "CRS Unyielding Transgression Plasma Projector"
 	icon_state = "green"
-	requires_power = 1
 
 /area/covenant_light_cruiser/emergencyo2
 	name = "CRS Unyielding Transgression Emergency O2 Storage"
@@ -77,9 +76,9 @@
 	name = "CRS Unyielding Transgression Docking Umbilical Starboard"
 	icon_state = "shuttlered"
 
-/area/covenant_light_cruiser/auxmedical
-	name = "CRS Unyielding Transgression Auxiliary Medical Bay"
-	icon_state = "surgery"
+/area/covenant_light_cruiser/portsidestorage
+	name = "CRS Unyielding Transgression Portside Storage"
+	icon_state = "maint_cargo"
 
 /area/covenant_light_cruiser/portholdingcell
 	name = "CRS Unyielding Transgression Port Holding Cells"
