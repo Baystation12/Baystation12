@@ -197,7 +197,8 @@
 						var/obj/effect/overmap/ship/npc_ship/leader_ship = new_fleet.leader_ship
 						ship.target_loc = leader_ship.target_loc
 						ship.slipspace_to_location(leader_ship.loc)
-						ship.radio_message("Slipspace manouver successful. Redevouz'd with leader at [ship.loc.x],[ship.loc.y].")
+						if(!isnull(ship.loc))
+							ship.radio_message("Slipspace manouver successful. Redevouz'd with leader at [ship.loc.x],[ship.loc.y].")
 					for(var/z = 1,z<=world.maxz,z++)
 						playsound(locate(1,1,z), 'code/modules/halo/sounds/slip_rupture_detected.ogg', 50, 0,0,0,1)
 
