@@ -2,7 +2,7 @@
  * Contains
  * 		Defines
  *		Inventory (headset stuff)
- *		Attack responces
+ *		Attack responses
  *		AI
  *		Procs / Verbs (usable by players)
  *		Poly
@@ -57,7 +57,7 @@
 	skin_material = MATERIAL_SKIN_FEATHERS
 
 	var/parrot_state = PARROT_WANDER //Hunt for a perch when created
-	var/parrot_sleep_max = 25 //The time the parrot sits while perched before looking around. Mosly a way to avoid the parrot's AI in life() being run every single tick.
+	var/parrot_sleep_max = 25 //The time the parrot sits while perched before looking around. Mostly a way to avoid the parrot's AI in life() being run every single tick.
 	var/parrot_sleep_dur = 25 //Same as above, this is the var that physically counts down
 	var/parrot_dam_zone = list(BP_CHEST, BP_HEAD, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG) //For humans, select a bodypart to attack
 
@@ -74,8 +74,8 @@
 	//mobs it wants to attack or mobs that have attacked it
 	var/atom/movable/parrot_interest = null
 
-	//Parrots will generally sit on their pertch unless something catches their eye.
-	//These vars store their preffered perch and if they dont have one, what they can use as a perch
+	//Parrots will generally sit on their perch unless something catches their eye.
+	//These vars store their preferred perch and if they don't have one, what they can use as a perch
 	var/obj/parrot_perch = null
 	var/obj/desired_perches = list(/obj/machinery/constructable_frame/computerframe, 		/obj/structure/displaycase, \
 									/obj/structure/filingcabinet,		/obj/machinery/teleport, \
@@ -310,7 +310,7 @@
 	/* Parrot speech mimickry!
 	   Phrases that the parrot hears in mob/living/say() get added to speach_buffer.
 	   Every once in a while, the parrot picks one of the lines from the buffer and replaces an element of the 'speech' list.
-	   Then it clears the buffer to make sure they dont magically remember something from hours ago. */
+	   Then it clears the buffer to make sure they don't magically remember something from hours ago. */
 	if(speech_buffer.len && prob(10))
 		if(speak.len)
 			speak.Remove(pick(speak))
@@ -357,7 +357,7 @@
 
 						newspeak.Add(possible_phrase)
 
-				else //If we have no headset or channels to use, dont try to use any!
+				else //If we have no headset or channels to use, don't try to use any!
 					for(var/possible_phrase in speak)
 						if(copytext(possible_phrase,1,3) in department_radio_keys)
 							possible_phrase = "[copytext(possible_phrase,3,length(possible_phrase)+1)]" //crop out the channel prefix
@@ -372,7 +372,7 @@
 				icon_state = "[icon_set]_fly"
 			return
 
-//-----WANDERING - This is basically a 'I dont know what to do yet' state
+//-----WANDERING - This is basically a 'I don't know what to do yet' state
 	else if(parrot_state == PARROT_WANDER)
 		//Stop movement, we'll set it later
 		walk(src, 0)

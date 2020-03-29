@@ -78,7 +78,7 @@
 	// Time in 1/10th of seconds since the last sent warning
 	var/lastwarning = 0
 
-	// This stops spawning redundand explosions. Also incidentally makes supermatter unexplodable if set to 1.
+	// This stops spawning redundant explosions. Also incidentally makes supermatter unexplodable if set to 1.
 	var/exploded = 0
 
 	var/power = 0
@@ -337,7 +337,7 @@
 	var/datum/gas_mixture/removed = null
 	var/datum/gas_mixture/env = null
 
-	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We dont want the SM exploding before anyone can react.
+	//ensure that damage doesn't increase too quickly due to super high temperatures resulting from no coolant, for example. We don't want the SM exploding before anyone can react.
 	//We want the cap to scale linearly with power (and explosion_point). Let's aim for a cap of 5 at power = 300 (based on testing, equals roughly 5% per SM alert announcement).
 	var/damage_inc_limit = (power/300)*(explosion_point/1000)*damage_rate_limit
 
@@ -440,7 +440,7 @@
 /obj/machinery/power/supermatter/attack_hand(mob/user as mob)
 	user.visible_message("<span class=\"warning\">\The [user] reaches out and touches \the [src], inducing a resonance... \his body starts to glow and bursts into flames before flashing into ash.</span>",\
 		"<span class=\"danger\">You reach out and touch \the [src]. Everything starts burning and all you can hear is ringing. Your last thought is \"That was not a wise decision.\"</span>",\
-		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+		"<span class=\"warning\">You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 
 	Consume(user)
 
@@ -493,7 +493,7 @@
 	if(istype(AM, /mob/living))
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... \his body starts to glow and catch flame before flashing into ash.</span>",\
 		"<span class=\"danger\">You slam into \the [src] as your ears are filled with unearthly ringing. Your last thought is \"Oh, fuck.\"</span>",\
-		"<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+		"<span class=\"warning\">You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 	else if(!grav_pulling) //To prevent spam, detonating supermatter does not indicate non-mobs being destroyed
 		AM.visible_message("<span class=\"warning\">\The [AM] smacks into \the [src] and rapidly flashes to ash.</span>",\
 		"<span class=\"warning\">You hear a loud crack as you are washed with a wave of heat.</span>")
@@ -516,7 +516,7 @@
 			l.show_message("<span class=\"warning\">As \the [src] slowly stops resonating, you find your skin covered in new radiation burns.</span>", 1,\
 				"<span class=\"warning\">The unearthly ringing subsides and you notice you have new radiation burns.</span>", 2)
 		else
-			l.show_message("<span class=\"warning\">You hear an uneartly ringing and notice your skin is covered in fresh radiation burns.</span>", 2)
+			l.show_message("<span class=\"warning\">You hear an unearthly ringing and notice your skin is covered in fresh radiation burns.</span>", 2)
 	var/rads = 500
 	SSradiation.radiate(src, rads)
 

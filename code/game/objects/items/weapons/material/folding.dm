@@ -24,7 +24,7 @@
 	var/hardware_open = "basic_hardware"
 	var/handle_icon = "basic_handle"
 
-	var/closed_attack_verbs = list("prodded", "tapped") //initial doesnt work with lists, rip
+	var/closed_attack_verbs = list("prodded", "tapped") //initial doesn't work with lists, rip
 	var/valid_colors = list(COLOR_DARK_GRAY, COLOR_RED_GRAY, COLOR_BLUE_GRAY, COLOR_DARK_BLUE_GRAY, COLOR_GREEN_GRAY, COLOR_DARK_GREEN_GRAY)
 
 /obj/item/weapon/material/knife/folding/Initialize()

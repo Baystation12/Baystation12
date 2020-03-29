@@ -85,7 +85,7 @@
 		if(findtext(text,command))
 			switch(command)
 				if("stay")
-					if(stay_command(speaker,text)) //find a valid command? Stop. Dont try and find more.
+					if(stay_command(speaker,text)) //find a valid command? Stop. Don't try and find more.
 						break
 				if("stop")
 					if(stop_command(speaker,text))
