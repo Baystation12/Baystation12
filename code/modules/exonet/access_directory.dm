@@ -9,12 +9,33 @@
 	var/editing_user			// If we're editing a user, it's assigned here.
 	var/awaiting_cortical_scan	// If this is true, we're waiting for someone to touch the stupid interface so that'll add a new user record.
 	var/last_scan				// The UID of the person last scanned by this machine. Do not deserialize this. It's worthless.
+	var/list/initial_grants		// List of initial grants the machine can try to make on first loadup.
 
 /obj/machinery/exonet/access_directory/on_update_icon()
 	if(operable())
 		icon_state = "bus"
 	else
 		icon_state = "bus_off"
+
+/obj/machinery/exonet/access_directory/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+	
+/obj/machinery/exonet/access_directory/LateInitialize()
+	if(initial_grants)
+		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+		if(!file_server)
+			var/list/mainframes = exonet.get_mainframes()
+			if(mainframes.len <= 0)
+				.["error"] = "NETWORK ERROR: No mainframes are available for storing security records."
+				return .
+			var/obj/machinery/exonet/mainframe/MF = mainframes[1]
+			file_server = exonet.get_network_tag(MF)
+			for(var/initial_grant in initial_grants)
+				var/datum/computer_file/data/grant_record/GR = new()
+				GR.set_value(initial_grant)
+				MF.store_file(GR)
+		initial_grants = null
 
 /obj/machinery/exonet/access_directory/proc/do_cortical_scan(var/mob/M)
 	// Do a scan on the mob. Pick up their cortical stack.
