@@ -117,6 +117,7 @@
 		fleets_arrive_at = world.time + rand(fleet_wave_delay_min,fleet_wave_delay_max)
 		for(var/z = 1,z<=world.maxz,z++)
 			playsound(locate(1,1,z), 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
+		fleet_wave_num++
 		for(var/f in factions)
 			var/datum/faction/F = f
 			if(!F.name in fleet_list)
