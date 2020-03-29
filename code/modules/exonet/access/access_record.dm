@@ -33,3 +33,4 @@
 	
 /datum/computer_file/data/grant_record/proc/set_value(var/value)
 	stored_data = replacetext(sanitize(uppertext(value)), " ", "_")
+	filename = stored_data
