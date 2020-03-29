@@ -9,7 +9,7 @@
 	huragok.ckey = H.ckey
 	huragok.Login()
 	qdel(H)
-	return 1
+	return huragok
 
 /decl/hierarchy/outfit/kigyarcorvette
 	name = "Kig-Yar Corvette Crew"
