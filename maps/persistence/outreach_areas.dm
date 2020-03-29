@@ -17,6 +17,10 @@
 	icon_state = "engine_smes"
 	name = "\improper Engineering"
 
+/area/outreach/outpost/it
+	icon_state = "telecomms"
+	name = "\improper Server Room"
+
 /area/outreach/outpost/solar_array
 	name = "\improper Solar Maintenance"
 	icon_state = "SolarcontrolS"

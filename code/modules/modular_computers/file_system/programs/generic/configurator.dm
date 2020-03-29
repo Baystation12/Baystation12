@@ -18,6 +18,28 @@
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
 
+/datum/computer_file/program/computerconfig/Topic(href, href_list)
+	if(..())
+		return 1
+	if(href_list["PRG_newennid"])
+		. = 1
+		var/new_ennid = sanitize(input(usr, "Enter exonet ennid or leave blank to cancel:", "Change ENNID"))
+		if(!new_ennid)
+			return 1
+		var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+		network_card.set_ennid(new_ennid)
+		return 1
+	else if(href_list["PRG_newkey"])
+		. = 1
+		var/new_key = sanitize(input(usr, "Enter exonet keypass or leave blank to cancel:", "Change key"))
+		if(!new_key)
+			return 1
+		var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+		network_card.set_keydata(new_key)
+		return 1
+	if(.)
+		SSnano.update_uis(NM)
+
 /datum/nano_module/program/computer_configurator
 	name = "NTOS Computer Configuration Tool"
 
@@ -34,6 +56,30 @@
 	if(battery_module)
 		data["battery_rating"] = battery_module.battery.maxcharge
 		data["battery_percent"] = round(battery_module.battery.percent())
+
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = program.computer.get_component(PART_NETWORK)
+	data["nic_exists"] = !!network_card
+	if(network_card)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		var/datum/exonet/network = exonet.get_local_network()
+		if(!network)
+			data["signal_strength"] = "Not Connected"
+		else
+			var/signal_strength = network.get_signal_strength(network_card, network_card.get_netspeed())
+			if(signal_strength <= 0)
+				data["signal_strength"] = "Not Connected"
+			else if(signal_strength <= 6)
+				data["signal_strength"] = "Low Signal"
+			else
+				data["signal_strength"] = "High Signal"
+		if(network_card.ennid)
+			data["ennid"] = network_card.ennid
+		else
+			data["ennid"] = "Not Set"
+		if(network_card.keydata)
+			data["key"] = network_card.keydata
+		else
+			data["key"] = "Not Set"
 
 	var/list/all_entries[0]
 	var/list/hardware = program.computer.get_all_components()

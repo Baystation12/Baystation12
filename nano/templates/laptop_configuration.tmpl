@@ -20,17 +20,48 @@
 		{{:helper.displayBar(data.battery_percent, 0, 100, (data.battery_percent <= 25) ? 'bad' : (data.battery_percent <= 50) ? 'average' : 'good')}}
 		<b>{{:data.battery_percent}} %</b>
 	</div>
+	<div class="itemLabel">
+		Power Usage: 
+	</div>
+	<div class="itemContent">
+		{{:data.power_usage}}W
+	</div>
 {{else}}
 	<div class="itemContent">
 		Not Available
 	</div>
 {{/if}}
+<h2>Network</h2>
 <div class="itemLabel">
-	Power Usage: 
+	Network Status:
 </div>
-<div class="itemContent">
-	{{:data.power_usage}}W
-</div>
+{{if data.nic_exists}}
+	<div class="itemContent">
+		Active
+	</div>
+	<div class="itemLabel">
+		Signal Strength:
+	</div>
+	<div class="itemContent">
+		{{:data.signal_strength}}
+	</div>
+	<div class="itemLabel">
+		Network ENNID:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.ennid, null, { "PRG_newennid" : data.ennid })}}
+	</div>
+	<div class="itemLabel">
+		Network KEY:
+	</div>
+	<div class="itemContent">
+		{{:helper.link(data.key, null, { "PRG_newkey" : data.key })}}
+	</div>
+{{else}}
+	<div class="itemContent">
+		Not Available
+	</div>
+{{/if}}
 <h2>File System</h2>	
 <div class="itemLabel">
 	Used Capacity:

@@ -41,8 +41,6 @@
 			return global.SSantags;
 		if("SSao")
 			return global.SSao;
-		if("SSmining")
-			return global.SSmining
 		if("SSatoms")
 			return global.SSatoms;
 		if("SSautosave")
@@ -633,8 +631,6 @@
 			return global.next_station_date_change;
 		if("ninjastart")
 			return global.ninjastart;
-		if("ntnet_card_uid")
-			return global.ntnet_card_uid;
 		if("ntnet_global")
 			return global.ntnet_global;
 		if("ntnrc_uid")
@@ -1000,8 +996,6 @@
 			global.SSghost_images=newval;
 		if("SSgoals")
 			global.SSgoals=newval;
-		if("SSmining")
-			global.SSmining=newval;
 		if("SSgraphs_process")
 			global.SSgraphs_process=newval;
 		if("SSgraphs_update")
@@ -1554,8 +1548,6 @@
 			global.next_station_date_change=newval;
 		if("ninjastart")
 			global.ninjastart=newval;
-		if("ntnet_card_uid")
-			global.ntnet_card_uid=newval;
 		if("ntnet_global")
 			global.ntnet_global=newval;
 		if("ntnrc_uid")
@@ -2157,7 +2149,6 @@
 	"next_duration_update",
 	"next_station_date_change",
 	"ninjastart",
-	"ntnet_card_uid",
 	"ntnet_global",
 	"ntnrc_uid",
 	"nttransfer_uid",

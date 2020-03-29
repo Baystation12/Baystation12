@@ -4,6 +4,10 @@
 	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
 	{{:helper.link('Back to menu', null, { "PRG_closefile" : 1 })}}
 {{else}}
+	<h2>Viewing File System:</h2>
+	<div class='item'>
+		{{:helper.link(data.file_server, null, { "PRG_changefileserver" : data.file_server }, null)}}
+	</div><h2>
 	{{if data.filename}}
 		<h2>Viewing file {{:data.filename}}</h2>
 		<div class='item'>
@@ -13,7 +17,7 @@
 		</div><hr>
 		{{:data.filedata}}
 	{{else}}
-		<h2>Available files (local):</h2>
+		<h2>Available files ({{:data.file_server}}):</h2>
 		<table>
 			<tr><th>File name
 			<th>File type

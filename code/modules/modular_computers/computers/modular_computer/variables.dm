@@ -55,3 +55,6 @@
 
 	var/interact_sounds
 	var/interact_sound_volume = 40
+
+	var/initial_ennid										// For auto-configurating a modular computer with a specific exonetwork
+	var/initial_keydata										// For auto-configuration a modular computer to a specific exonetwork that's encrypted.

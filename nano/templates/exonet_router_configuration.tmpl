@@ -1,0 +1,34 @@
+<i>Welcome to the EXONET Router configuration utility. Please consult your system administrator if you have any questions about your device.</i><hr>
+<h2>Power Supply</h2>
+<div class="itemLabel">
+	Power Usage: 
+</div>
+<div class="itemContent">
+	{{:data.power_usage}}
+</div>
+<h2>Network Configuration</h2>
+<div class="itemLabel">
+	Network Status:
+</div>
+<div class="itemContent">
+	{{:data.broadcasting_status}}
+</div>
+<div class="itemLabel">
+	Signal Strength:
+</div>
+<div class="itemContent">
+	{{:data.signal_strength}}
+</div>
+<div class="itemLabel">
+	Broadcasting Network ENNID:
+</div>
+<div class="itemContent">
+	{{:helper.link(data.ennid, null, { "PRG_newennid" : data.ennid })}}
+</div>
+<div class="itemLabel">
+	Broadcasting Network KEY:
+</div>
+<div class="itemContent">
+	{{:helper.link(data.key, null, { "PRG_newkey" : data.key })}}
+</div>
+<i>EXONET Firmware v110.04.4h Copyright EXONETWORKS INC</i>

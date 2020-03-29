@@ -16,7 +16,9 @@
 	var/program_key_state = "standby_key"			// Program-specific keyboard icon state
 	var/program_menu_icon = "newwin"				// Icon to use for program's link in main menu
 	var/requires_ntnet = 0							// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
+	var/requires_exonet = 0							// Set to 1 for program to require nonstop EXONET connection to run. If EXONET connection is lost, program crashes.
 	var/requires_ntnet_feature = 0					// Optional, if above is set to 1 checks for specific function of NTNet (currently NTNET_SOFTWAREDOWNLOAD, NTNET_PEERTOPEER, NTNET_SYSTEMCONTROL and NTNET_COMMUNICATION)
+	var/requires_exonet_feature = 0					// Optional, if above is set to 1 checks for specific function of EXONET (currently NETWORK_SOFTWAREDOWNLOAD, NETWORK_PEERTOPEER, NETWORK_SYSTEMCONTROL and NETWORK_COMMUNICATION)
 	var/ntnet_status = 1							// NTNet status, updated every tick by computer running this program. Don't use this for checks if NTNet works, computers do that. Use this for calculations, etc.
 	var/usage_flags = PROGRAM_ALL & ~PROGRAM_PDA	// Bitflags (PROGRAM_CONSOLE, PROGRAM_LAPTOP, PROGRAM_TABLET, PROGRAM_PDA combination) or PROGRAM_ALL
 	var/network_destination = null					// Optional string that describes what NTNet server/system this program connects to. Used in default logging.
@@ -75,7 +77,7 @@
 
 /datum/computer_file/program/proc/get_signal(var/specific_action = 0)
 	if(computer)
-		return computer.get_ntnet_status(specific_action)
+		return computer.get_exonet_status(specific_action)
 	return 0
 
 // Called by Process() on device that runs us, once every tick.
@@ -139,7 +141,7 @@
 		NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
 		if(user)
 			NM.using_access = user.GetAccess()
-	if(requires_ntnet && network_destination)
+	if(requires_exonet && network_destination)
 		generate_network_log("Connection opened to [network_destination].")
 	return 1
 
