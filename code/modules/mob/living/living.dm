@@ -595,9 +595,6 @@ default behaviour is:
 	if(pulling)
 		if(isobj(pulling))
 			var/obj/O = pulling
-			// Hacky check to know if you can pass through the closet
-			if(istype(O, /obj/structure/closet) && !O.density)
-				return set_dir(get_dir(src, pulling))
 			if(O.w_class >= ITEM_SIZE_HUGE || O.density)
 				return set_dir(get_dir(src, pulling))
 		if(isliving(pulling))
