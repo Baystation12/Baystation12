@@ -13,10 +13,6 @@
 		/datum/computer_file/program/wordprocessor,
 		/datum/computer_file/program/game
 	)		// List of stored files on this mainframe. DO NOT MODIFY DIRECTLY!
-	req_components = list(
-		/obj/item/weapon/stock_parts/power/apc = 1,
-		/obj/item/weapon/stock_parts/computer/hard_drive/ = 2
-	)
 
 /obj/machinery/exonet/mainframe/Initialize()
 	..()

@@ -12,9 +12,6 @@
 	var/ennid					// The ennid in use.
 	var/keydata					// The security passphrase for the network
 	var/net_tag					// A user-friendly unique name for this device on the network.
-	req_components = list(
-		/obj/item/weapon/stock_parts/power/apc
-	)
 
 /obj/machinery/exonet/New()
 	set_extension(src, /datum/extension/exonet_device)
