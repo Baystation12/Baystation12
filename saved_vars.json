@@ -2238,7 +2238,8 @@
 			"damtype",
 			"armor_penetration",
 			"anchor_fall",
-			"holographic"
+			"holographic",
+			"req_access"
 		]
 	},
 	{
@@ -3411,6 +3412,23 @@
 			"max_capacity",
 			"used_capacity",
 			"stored_files"
+		]
+	},
+	{
+		"path":"/datum/computer_file/data/access_record",
+		"vars":[
+			"uid",
+			"ennid",
+			"grants",
+			"size"
+		]
+	},
+	{
+		"path":"/obj/item/weapon/card/id/exonet",
+		"vars":[
+			"uid",
+			"ennid",
+			"broken"
 		]
 	}
 ]

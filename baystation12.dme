@@ -1755,6 +1755,8 @@
 #include "code\modules\exonet\modem.dm"
 #include "code\modules\exonet\relay.dm"
 #include "code\modules\exonet\router.dm"
+#include "code\modules\exonet\access\access_record.dm"
+#include "code\modules\exonet\access\id_card.dm"
 #include "code\modules\exonet\emails\email_account.dm"
 #include "code\modules\exonet\emails\email_message.dm"
 #include "code\modules\ext_scripts\irc.dm"

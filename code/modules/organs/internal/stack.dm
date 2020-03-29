@@ -36,6 +36,7 @@ GLOBAL_LIST_EMPTY(corticalStacks)
 	relative_size = 10
 
 	var/ownerckey
+	var/uid						// This is a unique UID that will forever identify the person this stack belongs to. Equivalent to a SS-NUMBER in America. It should transfer stacks if the mind is the same.
 	var/invasive
 	var/default_language
 	var/list/languages = list()
@@ -81,6 +82,8 @@ GLOBAL_LIST_EMPTY(corticalStacks)
 
 /obj/item/organ/internal/stack/New(var/mob/living/carbon/holder)
 	..()
+	if(!uid)
+		uid = new_guid()
 	LAZYDISTINCTADD(GLOB.corticalStacks, src)
 	robotize()
 	spawn(1)
