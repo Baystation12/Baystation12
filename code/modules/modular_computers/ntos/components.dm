@@ -18,20 +18,13 @@
 	var/obj/item/weapon/stock_parts/computer/nano_printer/printer = get_component(PART_PRINTER)
 	if(printer)
 		return printer.print_text(content, title)
-		
+
 /datum/extension/interactive/ntos/proc/get_network_tag()
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
 		return network_card.get_network_tag()
 	else
 		return "N/A"
-
-/datum/extension/interactive/ntos/proc/get_exonet_status(var/specific_action = 0)
-	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
-	if(network_card)
-		return network_card.get_signal(specific_action)
-	else
-		return 0
 
 /datum/extension/interactive/ntos/proc/get_exonet_status(var/specific_action = 0)
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
