@@ -1,0 +1,60 @@
+{{if data.error}}
+	<h2>An error has occured:</h2>
+	Additional information: {{:data.error}}<br>
+	<i>Please try again. If the problem persists contact your system administrator for assistance.</i>
+	{{:helper.link('Back to menu', null, { "PRG_back" : 1 })}}
+{{else}}
+	<h2>Viewing File System:</h2>
+	<div class='item'>
+		{{:helper.link(data.file_server, null, { "PRG_changefileserver" : data.file_server }, null)}}
+	</div><hr>
+	{{if data.editing_user}}
+		<h2>Viewing User Record {{:data.desired_name}}</h2>
+		<div class='item'>
+			<div class='itemLabel'>NAME:</div>
+			<div class='itemBody'>{{:data.desired_name}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>USER ID:</div>
+			<div class='itemBody'>{{:data.user_id}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>GRANT COUNT:</div>
+			<div class='itemBody'>{{:data.grant_count}}</div>
+		</div>
+		<div class='item'>
+			<div class='itemLabel'>RECORD SIZE:</div>
+			<div class='itemBody'>{{:data.size}}GQ</div>
+		</div>
+		{{:helper.link('ASSIGN GRANT', null, { "PRG_assigngrant" : data.user_id })}}
+		{{:helper.link('CREATE GRANT', null, { "PRG_creategrant" : data.user_id })}}
+		<hr>
+		<table>
+			<tr><th>Grant
+			<th>Operations
+			{{for data.grants}}
+				<tr><td>{{value.name}}
+				<td>
+					{{:helper.link('DELETE', null, { "PRG_deletegrant" : value.name }, value.undeletable ? 'disabled' : null)}}
+			{{/for}}
+		</table>
+	{{else}}
+		<h2>Available Users ({{:data.file_server}}):</h2>
+		{{:helper.link('ADD USER', null, { "PRG_adduser" : 1 })}}
+		<table>
+			<tr><th>User ID
+			<th>Grants
+			<th>File size (GQ)
+			<th>Operations
+			{{for data.users}}
+				<tr><td>{{:value.desired_name}}
+				<td>{{:value.grant_count}}
+				<td>{{:value.size}}GQ
+				<td>
+					{{:helper.link('VIEW', null, { "PRG_viewuser" : value.user_id })}}
+					{{:helper.link('DELETE', null, { "PRG_deleteuser" : value.user_id }, value.undeletable ? 'disabled' : null)}}
+					{{:helper.link('RENAME', null, { "PRG_rename" : value.user_id }, value.undeletable ? 'disabled' : null)}}
+			{{/for}}
+		</table>
+	{{/if}}
+{{/if}}
