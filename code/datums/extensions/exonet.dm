@@ -3,25 +3,34 @@
 	var/ennid 		// Exonet network id. This is the name of the network we're connected to.
 	var/netspeed	// How this device has connected to the network.
 
-/datum/extension/exonet_device/proc/set_tag(var/mob/user, var/new_ennid, var/nic_netspeed, var/key_data)
+/datum/extension/exonet_device/proc/connect_network(var/mob/user, var/new_ennid, var/nic_netspeed, var/key_data)
 	if(ennid == new_ennid)
 		return "\The [holder] is already part of the '[ennid]' network."
 
 	if(ennid)
-		var/datum/exonet/old_exonet = GLOB.exonets[ennid]
-		if(old_exonet)
-			var/removed_device = old_exonet.remove_device(holder)
-			if(!removed_device)
-				return "Error encountered when trying to unregister \the [holder] from the '[ennid]' network."
+		var/disconnect_result = disconnect_network(user)
+		if(disconnect_result)
+			return disconnect_result // There was a problem.
 
 
 	var/datum/exonet/exonet = GLOB.exonets[new_ennid]
 	if(!exonet)
 		return "Error encountered when trying to register \the [holder] to the '[new_ennid]' network."
 	else
-		exonet.add_device(holder)
+		exonet.add_device(holder, key_data)
 		ennid = new_ennid
 		netspeed = nic_netspeed
+	return FALSE // This is a success.
+
+/datum/extension/exonet_device/proc/disconnect_network(var/mob/user)
+	if(!ennid)
+		return
+
+	var/datum/exonet/old_exonet = GLOB.exonets[ennid]
+	if(old_exonet)
+		var/removed_device = old_exonet.remove_device(holder)
+		if(!removed_device)
+			return "Error encountered when trying to unregister \the [holder] from the '[ennid]' network."
 	return FALSE // This is a success.
 
 /datum/extension/exonet_device/proc/broadcast_network(var/b_ennid)
@@ -31,7 +40,9 @@
 	if(!exonet)
 		exonet = new(b_ennid)
 		GLOB.exonets[b_ennid] = exonet
-	exonet.add_device(holder)
+		exonet.set_router(holder)
+	else
+		exonet.add_device(holder)
 	ennid = b_ennid
 	netspeed = NETWORKSPEED_ETHERNET
 
@@ -53,4 +64,6 @@
 	var/datum/exonet/network = get_local_network()
 	if(network)
 		return network.network_devices.Find(holder)
-	
+
+/datum/extention/exonet_device/proc/get_all_networks()
+	return GLOB.exonets

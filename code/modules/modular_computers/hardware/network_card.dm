@@ -49,7 +49,8 @@
 	hardware_size = 3
 
 /obj/item/weapon/stock_parts/computer/network_card/Destroy()
-	ntnet_global.unregister(identification_id)
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	exonet.disconnect_network()
 	return ..()
 
 // Returns a string identifier of this network card
@@ -109,10 +110,12 @@
 		return strength
 
 /obj/item/weapon/stock_parts/computer/network_card/on_disable()
-	ntnet_global.unregister(identification_id)
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	exonet.connect_network(null, ennid, get_netspeed(), keydata)
 
 /obj/item/weapon/stock_parts/computer/network_card/on_enable(var/datum/extension/interactive/ntos/os)
-	ntnet_global.register(identification_id, os)
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	exonet.disconnect_network()
 
 /obj/item/weapon/stock_parts/computer/network_card/on_install(var/obj/machinery/machine)
 	..()
@@ -135,13 +138,16 @@
 
 /obj/item/weapon/stock_parts/computer/network_card/proc/set_ennid(var/new_ennid)
 	ennid = new_ennid
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	exonet.connect_network(null, ennid, get_netspeed(), keydata)
 	refresh_network()
 
 /obj/item/weapon/stock_parts/computer/network_card/proc/set_keydata(var/new_keydata)
 	keydata = new_keydata
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	exonet.connect_network(null, ennid, get_netspeed(), keydata)
 	refresh_network()
 
 /obj/item/weapon/stock_parts/computer/network_card/proc/refresh_network()
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	exonet.set_tag(null, ennid, get_netspeed(), keydata)
 	identification_id = exonet.get_mac_address()

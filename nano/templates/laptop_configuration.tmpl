@@ -20,6 +20,12 @@
 		{{:helper.displayBar(data.battery_percent, 0, 100, (data.battery_percent <= 25) ? 'bad' : (data.battery_percent <= 50) ? 'average' : 'good')}}
 		<b>{{:data.battery_percent}} %</b>
 	</div>
+	<div class="itemLabel">
+		Power Usage: 
+	</div>
+	<div class="itemContent">
+		{{:data.power_usage}}W
+	</div>
 {{else}}
 	<div class="itemContent">
 		Not Available
@@ -56,12 +62,6 @@
 		Not Available
 	</div>
 {{/if}}
-<div class="itemLabel">
-	Power Usage: 
-</div>
-<div class="itemContent">
-	{{:data.power_usage}}W
-</div>
 <h2>File System</h2>	
 <div class="itemLabel">
 	Used Capacity:

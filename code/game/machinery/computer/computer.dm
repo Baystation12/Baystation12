@@ -38,7 +38,7 @@
 /obj/machinery/computer/LateInitialize()
 	if(initial_ennid)
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		exonet.set_tag(null, initial_ennid, NETWORKSPEED_ETHERNET, initial_keydata)
+		exonet.connect_network(null, initial_ennid, NETWORKSPEED_ETHERNET, initial_keydata)
 		identification_id = exonet.get_mac_address()
 
 /obj/machinery/computer/emp_act(severity)

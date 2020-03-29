@@ -11,6 +11,7 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
+	ui_template = "exonet_router_configuration.tmpl"
 	var/lockdata				// Network security. This key is required to join a network device to the network.
 	var/dos_failure = 0			// Set to 1 if the router failed due to (D)DoS attack
 	var/list/dos_sources = list()	// Backwards reference for qdel() stuff
@@ -70,76 +71,59 @@
 		var/datum/exonet/network = exonet.get_local_network()
 		network.add_log("EXONET router switched from overload recovery mode to normal operation mode.")
 
-/obj/machinery/exonet/broadcaster/router/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
-	var/list/data = list()
-	data["enabled"] = enabled
-	data["dos_capacity"] = dos_capacity
-	data["dos_overload"] = dos_overload
-	data["dos_crashed"] = dos_failure
-	data["portable_drive"] = !!get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
+// /obj/machinery/exonet/broadcaster/router/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+// 	var/list/data = list()
+// 	data["enabled"] = enabled
+// 	data["dos_capacity"] = dos_capacity
+// 	data["dos_overload"] = dos_overload
+// 	data["dos_crashed"] = dos_failure
+// 	data["portable_drive"] = !!get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
 
-	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
-	if (!ui)
-		ui = new(user, src, ui_key, "ntnet_relay.tmpl", "NTNet Quantum Relay", 500, 300, state = state)
-		ui.set_initial_data(data)
-		ui.open()
-		ui.set_auto_update(1)
+// 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+// 	if (!ui)
+// 		ui = new(user, src, ui_key, "ntnet_relay.tmpl", "NTNet Quantum Relay", 500, 300, state = state)
+// 		ui.set_initial_data(data)
+// 		ui.open()
+// 		ui.set_auto_update(1)
 
-/obj/machinery/exonet/broadcaster/router/interface_interact(var/mob/living/user)
-	ui_interact(user)
-	return TRUE
+// /obj/machinery/exonet/broadcaster/router/interface_interact(var/mob/living/user)
+// 	ui_interact(user)
+// 	return TRUE
 
-/obj/machinery/exonet/broadcaster/router/Topic(href, href_list)
-	if(..())
-		return 1
-	if(href_list["restart"])
-		dos_overload = 0
-		dos_failure = 0
-		update_icon()
-		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		var/datum/exonet/network = exonet.get_local_network()
-		network.add_log("EXONET router manually restarted from overload recovery mode to normal operation mode.")
-		return 1
-	else if(href_list["toggle"])
-		enabled = !enabled
-		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		var/datum/exonet/network = exonet.get_local_network()
-		network.add_log("EXONET router manually [enabled ? "enabled" : "disabled"].")
-		update_icon()
-		return 1
-	else if(href_list["purge"])
-		// ntnet_global.banned_nids.Cut()
-		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		var/datum/exonet/network = exonet.get_local_network()
-		network.add_log("Manual override: Network blacklist cleared.")
-		return 1
-	else if(href_list["eject_drive"] && uninstall_component(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
-		visible_message("\icon[src] [src] beeps and ejects its portable disk.")
+// /obj/machinery/exonet/broadcaster/router/Topic(href, href_list)
+// 	if(..())
+// 		return 1
+// 	if(href_list["restart"])
+// 		dos_overload = 0
+// 		dos_failure = 0
+// 		update_icon()
+// 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+// 		var/datum/exonet/network = exonet.get_local_network()
+// 		network.add_log("EXONET router manually restarted from overload recovery mode to normal operation mode.")
+// 		return 1
+// 	else if(href_list["toggle"])
+// 		enabled = !enabled
+// 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+// 		var/datum/exonet/network = exonet.get_local_network()
+// 		network.add_log("EXONET router manually [enabled ? "enabled" : "disabled"].")
+// 		update_icon()
+// 		return 1
+// 	else if(href_list["purge"])
+// 		// ntnet_global.banned_nids.Cut()
+// 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+// 		var/datum/exonet/network = exonet.get_local_network()
+// 		network.add_log("Manual override: Network blacklist cleared.")
+// 		return 1
+// 	else if(href_list["eject_drive"] && uninstall_component(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+// 		visible_message("\icon[src] [src] beeps and ejects its portable disk.")
 
-// /obj/machinery/exonet/broadcaster/router/New()
-// 	uid = gl_uid
-// 	gl_uid++
-// 	if(ntnet_global)
-// 		ntnet_global.relays.Add(src)
-// 		NTNet = ntnet_global
-// 		ntnet_global.add_log("New quantum relay activated. Current amount of linked relays: [NTNet.relays.len]")
-// 	..()
+// /obj/machinery/exonet/broadcaster/router/attackby(obj/item/P, mob/user)
+// 	if (!istype(P,/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+// 		return
+// 	else if (get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+// 		to_chat(user, "This relay's portable drive slot is already occupied.")
+// 	else if(user.unEquip(P,src))
+// 		install_component(P)
+// 		to_chat(user, "You install \the [P] into \the [src]")
 
-// /obj/machinery/ntnet_relay/Destroy()
-// 	if(ntnet_global)
-// 		ntnet_global.relays.Remove(src)
-// 		ntnet_global.add_log("Quantum relay connection severed. Current amount of linked relays: [NTNet.relays.len]")
-// 		NTNet = null
-// 	for(var/datum/computer_file/program/ntnet_dos/D in dos_sources)
-// 		D.target = null
-// 		D.error = "Connection to quantum relay severed"
-// 	..()
-
-/obj/machinery/exonet/broadcaster/router/attackby(obj/item/P, mob/user)
-	if (!istype(P,/obj/item/weapon/stock_parts/computer/hard_drive/portable))
-		return
-	else if (get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
-		to_chat(user, "This relay's portable drive slot is already occupied.")
-	else if(user.unEquip(P,src))
-		install_component(P)
-		to_chat(user, "You install \the [P] into \the [src]")
+// /obj/machinery/exonet/broadcaster/router/OnTopic(var/mob/user, var/href_list, var/datum/topic_state/state)
