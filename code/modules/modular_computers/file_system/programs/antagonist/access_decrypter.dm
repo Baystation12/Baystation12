@@ -6,8 +6,7 @@
 	program_menu_icon = "unlocked"
 	extended_desc = "This highly advanced script can very slowly decrypt operational codes used in almost any network. These codes can be downloaded to an ID card to expand the available access. The system administrator will probably notice this."
 	size = 34
-	requires_ntnet = 1
-	available_on_ntnet = 0
+	requires_exonet = 1
 	available_on_syndinet = 1
 	nanomodule_path = /datum/nano_module/program/access_decrypter/
 	var/message = ""

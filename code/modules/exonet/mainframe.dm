@@ -54,6 +54,11 @@
 	recalculate_size()
 	return 1
 
+/obj/machinery/exonet/mainframe/proc/delete_file_by_name(var/filename)
+	var/file = find_file_by_name(filename)
+	if(file)
+		remove_file(file)
+
 // Use this proc to remove file from the drive. Returns 1 on success and 0 on failure. Contains necessary sanity checks.
 /obj/machinery/exonet/mainframe/proc/remove_file(var/datum/computer_file/F)
 	if(!F || !istype(F))

@@ -57,6 +57,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/company_name  = "BadMan"
 	var/company_short = "BM"
 	var/system_name = "Uncharted System"
+	var/station_ennid				// When this is specified, there is one exonet that's considered the primary exonet for the map. All characters will be given emails on this exonet.
 
 	var/map_admin_faxes = list()
 

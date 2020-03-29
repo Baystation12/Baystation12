@@ -475,8 +475,8 @@ SUBSYSTEM_DEF(jobs)
 					domain = H.char_branch.email_domain
 			else
 				domain = "freemail.net"
-			if(domain)
-				ntnet_global.create_email(H, H.real_name, domain, rank)
+			if(domain && GLOB.using_map.station_ennid)
+				GLOB.exonets[GLOB.using_map.station_ennid].create_email(H, H.real_name, domain, rank)
 		// END EMAIL GENERATION
 
 		job.equip(H, H.mind ? H.mind.role_alt_title : "", H.char_branch, H.char_rank)

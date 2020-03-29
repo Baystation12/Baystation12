@@ -7,11 +7,54 @@ GLOBAL_LIST_EMPTY(exonets)
 	var/list/modems				= list()			// Modems capable of connecting to PLEXUS, the space internet.
 	var/list/broadcasters		= list()			// A list of anything broadcasting the good signal. Only one will be the /router.
 
+	var/obj/machinery/exonet/mainframe/email_server	// A mainframe that's configured to be the email server. This doesn't take a special mainframe.
 	var/obj/machinery/exonet/mainframe/log_server	// A mainframe that's the chosen main-log server.
 	var/obj/machinery/exonet/broadcaster/router/router // The router that hosts the network. There can be only ONE!
 
+	var/default_domain								// OPTIONAL: If this is set, this is the default email domain for the exonet, allowing emails to be setup.
+	var/list/email_accounts 	= list()			// A list of emails configured for this exonet.
+
+
 /datum/exonet/New(var/new_ennid)
-	ennid = new_ennid
+	if(new_ennid)
+		ennid = new_ennid
+		GLOB.exonets[new_ennid] = src
+
+/datum/exonet/proc/create_email(var/mob/user, /var/desired_name, var/domain_override, var/assignment)
+	desired_name = sanitize_for_email(desired_name)
+	var/domain
+	if(domain_override)
+		domain = domain_override
+	else
+		domain = default_domain
+	var/login = "[desired_name]@[domain]"
+	// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
+	// If such conflict is encountered, a random number will be appended to the email address. If this fails too, no email account will be created.
+	if(find_email_by_name(login))
+		login = "[desired_name][random_id(/datum/computer_file/data/email_account/, 100, 999)]@[domain]"
+	// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
+	if(find_email_by_name(login))
+		to_chat(user, "You were not assigned an email address.")
+		user.StoreMemory("You were not assigned an email address.", /decl/memory_options/system)
+	else
+		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account(login, user.real_name, assignment)
+		EA.password = GenerateKey()
+		if(user.mind)
+			user.mind.initial_email_login["login"] = EA.login
+			user.mind.initial_email_login["password"] = EA.password
+			user.StoreMemory("Your email account address is [EA.login] and the password is [EA.password].", /decl/memory_options/system)
+		if(issilicon(user))
+			var/mob/living/silicon/S = user
+			var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
+			if(my_client)
+				my_client.stored_login = EA.login
+				my_client.stored_password = EA.password
+
+/datum/exonet/proc/find_email_by_name(var/login)
+	for(var/datum/computer_file/data/email_account/A in email_accounts)
+		if(A.login == login)
+			return A
+	return 0
 
 /datum/exonet/proc/add_device(var/device, var/keydata)
 	if(!router)

@@ -6,7 +6,7 @@
 	program_key_state = "id_key"
 	program_menu_icon = "key"
 	extended_desc = "Program for programming crew ID cards."
-	requires_ntnet = 0
+	requires_exonet = 0
 	size = 8
 	category = PROG_COMMAND
 

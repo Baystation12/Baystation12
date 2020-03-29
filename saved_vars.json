@@ -3401,7 +3401,8 @@
 			"dos_failure",
 			"dos_overload",
 			"dos_capacity",
-			"dos_dissipate"
+			"dos_dissipate",
+			"network"
 		]
 	},
 	{
@@ -3411,6 +3412,18 @@
 			"max_capacity",
 			"used_capacity",
 			"stored_files"
+		]
+	},
+	{
+		"path": "/datum/exonet",
+		"vars":[
+			"default_domain",
+			"emails",
+			"email_server",
+			"log_server",
+			"router",
+			"lockdata",
+			"ennid"
 		]
 	}
 ]

@@ -49,6 +49,10 @@
 /mob/observer
 	should_save = FALSE
 
+/datum/exonet/after_deserialize()
+	GLOB.exonets[src.ennid] = src
+	..()
+
 /obj/after_deserialize()
 	..()
 	queue_icon_update()

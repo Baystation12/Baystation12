@@ -39,7 +39,6 @@
 	var/datum/exonet/exonet = GLOB.exonets[b_ennid]
 	if(!exonet)
 		exonet = new(b_ennid)
-		GLOB.exonets[b_ennid] = exonet
 		exonet.set_router(holder)
 	else
 		exonet.add_device(holder)

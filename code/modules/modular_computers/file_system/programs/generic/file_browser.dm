@@ -19,13 +19,18 @@
 	if(..())
 		return 1
 
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+	if(file_server != "local" && !network_card)
+		error = "Hardware error. No connection to network found."
+		return 1
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+
 	if(href_list["PRG_changefileserver"])
 		. = 1
 		var/list/file_servers = list("local")
-		var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+
 		if(!network_card)
 			return 1
-		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
 		for(var/obj/machinery/exonet/mainframe/mainframe in exonet.get_mainframes())
 			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
 		file_server = sanitize(input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers)
@@ -39,11 +44,24 @@
 		var/newname = sanitize(input(usr, "Enter file name or leave blank to cancel:", "File rename"))
 		if(!newname)
 			return 1
-		if(computer.create_file(newname, file_type = /datum/computer_file/data/text))
-			return 1
+		if(file_server == "local")
+			if(computer.create_file(newname, file_type = /datum/computer_file/data/text))
+				return 1
+		else
+			var/obj/machinery/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
+			if(!mainframe)
+				var/datum/computer_file/data/text/new_file = new()
+				new_file.filename = newname
+				mainframe.store_file(new_file)
+				return 1
 	if(href_list["PRG_deletefile"])
 		. = 1
-		computer.delete_file(href_list["PRG_deletefile"])
+		if(file_server == "local")
+			computer.delete_file(href_list["PRG_deletefile"])
+		else
+			var/obj/machinery/exonet/mainframe/mainframe = exonet.get_device_by_tag(file_server)
+			if(!mainframe)
+				mainframe.delete_file_by_name(href_list["PRG_deletefile"])
 	if(href_list["PRG_usbdeletefile"])
 		. = 1
 		var/obj/item/weapon/stock_parts/computer/hard_drive/RHDD = computer.get_component(PART_DRIVE)

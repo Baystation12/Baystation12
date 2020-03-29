@@ -5,8 +5,7 @@
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	size = 14
-	requires_ntnet = 1
-	available_on_ntnet = 1
+	requires_exonet = 1
 	nanomodule_path = /datum/nano_module/records
 	usage_flags = PROGRAM_ALL
 	category = PROG_OFFICE

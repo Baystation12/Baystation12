@@ -6,8 +6,7 @@
 	program_menu_icon = "arrow-4-diag"
 	extended_desc = "This advanced script can perform denial of service attacks against NTNet quantum relays. The system administrator will probably notice this. Multiple devices can run this program together against same relay for increased effect"
 	size = 20
-	requires_ntnet = 1
-	available_on_ntnet = 0
+	requires_exonet = 1
 	available_on_syndinet = 1
 	nanomodule_path = /datum/nano_module/program/computer_dos/
 	var/obj/machinery/ntnet_relay/target = null

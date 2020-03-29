@@ -13,6 +13,8 @@
 	var/dos_capacity = 500		// Amount of DoS "packets" in buffer required to crash the relay
 	var/dos_dissipate = 1		// Amount of DoS "packets" dissipated over time.
 
+	var/datum/exonet/network	// This is a hard reference back to the attached network. Primarily for serialization purposes on persistence.
+
 /obj/machinery/exonet/broadcaster/router/New()
 	..()
 	// This has to happen pretty early on object construction.
@@ -22,6 +24,11 @@
 		// Sets up the network before anything else can. go go go go
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 		exonet.broadcast_network(broadcasting_ennid)
+
+/obj/machinery/exonet/broadcaster/router/Initialize()
+	..()
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	network = exonet.get_local_network()
 
 // TODO: Implement more logic here. For now it's only a placeholder.
 /obj/machinery/exonet/broadcaster/router/operable()
