@@ -369,7 +369,7 @@
 "he" = (/obj/machinery/atmospherics/unary/vent_pump/on{icon_state = "map_vent_out"; dir = 8},/turf/simulated/floor/tiled/techfloor,/area/outreach/outpost/it)
 "hf" = (/obj/machinery/light{icon_state = "tube_map"; dir = 4},/turf/simulated/floor/tiled/techfloor,/area/outreach/outpost/it)
 "hg" = (/turf/simulated/floor/tiled/techfloor/grid,/area/outreach/outpost/it)
-"hh" = (/obj/machinery/exonet/access_directory{ennid = "outreach"},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
+"hh" = (/obj/machinery/exonet/access_directory{ennid = "outreach"; initial_grants = list("MAINTENANCE","OVERSEER")},/obj/structure/cable/green{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "hi" = (/obj/machinery/light,/obj/structure/cable/green{icon_state = "4-8"},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "hj" = (/obj/structure/cable/green{icon_state = "1-2"; d1 = 1; d2 = 4},/obj/structure/cable/green{icon_state = "2-8"; dir = 8},/obj/structure/cable/green{icon_state = "1-4"},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
 "hk" = (/obj/structure/cable/green{icon_state = "2-8"; d1 = 1; d2 = 4},/turf/simulated/floor/bluegrid,/area/outreach/outpost/it)
