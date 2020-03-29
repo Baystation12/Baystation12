@@ -59,6 +59,10 @@
 
 	. = data
 
+/obj/machinery/exonet/interface_interact(mob/user)
+	ui_interact(user)
+	return TRUE
+
 /obj/machinery/exonet/Destroy()
 	..()
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
