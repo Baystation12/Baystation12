@@ -2,8 +2,8 @@
 	filetype = "ACR"
 	size = 2
 	var/list/grants = list()
-	var/uid								// A unique identifier linking a mob/player/user to this access record and their grants.
-	var/read_only 	= 1
+	var/user_id							// A unique identifier linking a mob/player/user to this access record and their grants.
+	read_only 	= 1
 	var/ennid							// The exonet network ID this access record is associated with.
 
 /datum/computer_file/data/access_record/proc/add_grant(var/datum/computer_file/data/grant_record/grant)
@@ -22,4 +22,4 @@
 /datum/computer_file/data/grant_record
 	filetype = "GRT"
 	size = 2
-	var/do_not_edit = 1					// Whether the user will be reminded that the file probably shouldn't be edited.
+	do_not_edit = 1					// Whether the user will be reminded that the file probably shouldn't be edited.
