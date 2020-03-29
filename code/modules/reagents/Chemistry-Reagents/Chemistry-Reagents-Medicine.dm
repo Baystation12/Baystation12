@@ -370,6 +370,7 @@
 	overdose = REAGENTS_OVERDOSE * 0.5
 
 /datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.adjustToxLoss(1)
 	M.add_chemical_effect(CE_SLOWREMOVE, 1)
 	M.add_chemical_effect(CE_PULSE, 2)
 

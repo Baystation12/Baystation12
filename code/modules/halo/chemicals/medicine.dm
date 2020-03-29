@@ -100,13 +100,15 @@
 			for(var/obj/embedded in w.embedded_objects)
 				if(!check_and_consume_cost(BIOFOAM_COST_REMOVESHRAP))
 					continue
+				o.implants -= embedded
+
 				w.embedded_objects -= embedded //Removing the embedded item from the wound
 				M.embedded -= embedded
 				M.pinned -= embedded
 				if(M.pinned.len == 0)
 					M.anchored = 0
 				M.contents -= embedded
-				embedded.loc = M.loc //And placing it on the ground below
+				embedded.forceMove(get_turf(M))//And placing it on the ground below
 				to_chat(M,"<span class = 'notice'>The [embedded.name] is pushed out of the [w.desc] in your [o.name].</span>")
 
 /datum/reagent/biofoam/affect_blood(var/mob/living/carbon/M,var/alien,var/removed) //Biofoam stops internal and external bleeding, heals organs and fixes bones.
@@ -140,7 +142,7 @@
 	reagent_state = LIQUID
 	color = "#FF3300"
 	metabolism = REM * 0.15
-	overdose = REAGENTS_OVERDOSE * 0.5
+	overdose = 5 //Should be administered in low doses at the time it's needed, not held in system
 
 /datum/reagent/hyperzine_concentrated/affect_blood(var/mob/living/carbon/human/H, var/alien, var/removed)
 	if(H.internal_organs_by_name[BP_LIVER])
@@ -152,6 +154,10 @@
 	H.add_chemical_effect(CE_SPEEDBOOST, 1)
 	H.add_chemical_effect(CE_PULSE, 2)
 
+/datum/reagent/hyperzine_concentrated/overdose(var/mob/living/carbon/human/H)
+	holder.remove_reagent("hyperzine_concentrated",volume)
+	H.adjustToxLoss(50)
+	. = ..()
 /datum/reagent/cryoprethaline
 	name = "Cryoprethaline"
 	description = "A cellular ice crystal formation inhibitor. Protects from the extreme cold of cryostasis"

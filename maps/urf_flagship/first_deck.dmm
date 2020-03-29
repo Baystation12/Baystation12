@@ -68,6 +68,7 @@
 "bp" = (/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/structure/closet/crate/medical,/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "bq" = (/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/structure/closet/crate/medical,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "br" = (/obj/structure/table/standard,/obj/item/weapon/autopsy_scanner,/obj/item/weapon/defibrillator/loaded,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
+"bs" = (/turf/simulated/floor/tiled,/area/shuttle/innie_shuttle_transport)
 "bt" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "bu" = (/obj/machinery/chem_master,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "bv" = (/obj/structure/cable/blue{icon_state = "2-4"},/obj/machinery/camera/autoname/invis/innie_base,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom)
@@ -95,6 +96,7 @@
 "bR" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "bS" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/walllocker/emerglocker/west,/obj/effect/landmark/start/x52_rd,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "bT" = (/obj/effect/landmark/start/x52,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
+"bU" = (/obj/effect/shuttle_landmark/innie_base_transport,/turf/simulated/floor/tiled,/area/shuttle/innie_shuttle_transport)
 "bV" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "bW" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom)
 "bX" = (/turf/simulated/wall/plastic/hospital{name = "Cargo Supply Ship"},/area/shuttle/innie_shuttle_supply)
@@ -317,7 +319,6 @@
 "gz" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/biogenerator,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gA" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/seed_extractor,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gB" = (/obj/item/modular_computer/console/preset/innie_comms,/obj/machinery/camera/autoname/invis/innie_base,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
-"gC" = (/turf/simulated/floor,/area/shuttle/innie_shuttle_transport)
 "gD" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/nw,/area/shuttle/innie_shuttle_transport)
 "gE" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/shuttle/innie_shuttle_transport)
 "gF" = (/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
@@ -427,7 +428,6 @@
 "iJ" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "iK" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/portable_atmospherics/hydroponics,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "iL" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
-"iM" = (/obj/effect/shuttle_landmark/innie_base_transport,/turf/simulated/floor,/area/shuttle/innie_shuttle_transport)
 "iN" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "iO" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/item/stack/material/steel/fifty,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
 "iP" = (/obj/structure/table/standard,/obj/item/device/assembly/mousetrap,/obj/item/device/assembly/infra,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom4)
@@ -607,11 +607,11 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeOcTcTcTePcieQcTcTeRaPasaseSasasasan
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfddBcTcTcTfecieQcTcTfffgfhfifjfkfkfkflfkfkfifmfkfifkfkfkfkfnfofhfpfqfravavavavaxavavavavavfrfsfqftavavavavavavaxavavavfrfufqfravaxavavavavavavavaxfrfuaKfvfvfwfvfwfvamamamfxeXeXeXfyamfzfAamfBajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfCdBcTfDfEfFcieQcTcTcTfGfHaGaHaHaHfIaHaHaHaGfJaHaGaHaHaHaHfKfLfMfNaFaGaHaHaHaHaHaHaHaHaHQFaGaIaJaGaHaHaHaHaHaHaHaHaHaHaGaIaJaGQFaHaHaHaHaHaHaHaHaHaGaIaKfOfvfPfQfPfvfRamamfScLcLcLcMamfzfAfTfBajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPfUcTcTcTfVcieQcTcTfWaPfXfYfZfYfXfXfXfXfXfXkcgbfXfXfXfXfXajgcajgdaTgegegegegegegegegegegegeaVaTgfgfgfgfgfgfgfgfgfgfgfgfgtaTggggggggggggggggggggggggaVaKajajajbGajajajghcLdtamamamdrcLgjfcajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeidBcTcTejekgkcTfEemaPglglglglgmfXkdgngnkegpgbgqgrgshcfXajfzajLwaKgegugvgwgxAOJlgxgygzgAgeWnaKgfgBgCgDgEgEgEgEgEgEgFgfWnaKgggGgGgHgIgJgKgJgLgMgNggWnbZajkffvfvkgfvajamamamamamamamameKeLeMajajeNajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeidBcTcTejekgkcTfEemaPglglglglgmfXkdgngnkegpgbgqgrgshcfXajfzajLwaKgegugvgwgxAOJlgxgygzgAgeWnaKgfgBbsgDgEgEgEgEgEgEgFgfWnaKgggGgGgHgIgJgKgJgLgMgNggWnbZajkffvfvkgfvajamamamamamamamameKeLeMajajeNajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPdAdBcTcTcTcTcTcTdCaPaPglglglglgRfXgngnkdgSgpgbgbgbgbgTfXajfzajgdaKgegUgVgygxgygygxgygVgWgeaEaKgfgXgDgEgYgZhahbhHhdhegfaEbZgghfgGhghhhihjhhhggMhkggaEaKajfvhmhnfvfvajamamamamamamWhithpamefajhqamehajajajaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPhrcScThscTcThscTaPaPhthtglhthtfXgngngngSgphukhhwhugbfXajfzajhxcvhyhyhyhyhyhyhyhyhyhyhzhycucvhAhBhChDhDhEhFhGimhdhIhAcucvhJhJhKhJhJhKhJhJhJhKhLhjaEaKajkihNhPhPdcajcIfaeXZNeYamamameKamdxajamhTcPdzajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPhUhVhUhWchhUaPaPhthtglhthtfXhXkjhYkkgphuhviahugbfXajibajaEaKicididididieifididididicaEaKigihiigEijikilikhHhdihigaEaKinhjhjhggLioiphjhjhjhjinaEaKajklfvfvhPfvajcIkmisitiuiviviviwitixajamiycPcQajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPizhtiAiBhtfXiCiDiEiEiFhukhhwhugbfXajfzajiGaKgeiHidididiIiIiIiJiIiKgeaEaKgfiLiMiigEgEgEgEgEgEiNgfaEaKggiOgGhgiPhjhiiQhggMiRggaEaKajhmfvfvfvfvajajajiUajajamamamamamamcdamceamamajcfaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPizhtiAiBhtfXiCiDiEiEiFhukhhwhugbfXajfzajiGaKgeiHidididiIiIiIiJiIiKgeaEaKgfiLbUiigEgEgEgEgEgEiNgfaEaKggiOgGhgiPhjhiiQhggMiRggaEaKajhmfvfvfvfvajajajiUajajamamamamamamcdamceamamajcfaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXiVgpiWgbgbgTgbgbgbiYfXajfzajaEaKgeiZjaBagujcjdjejfjgjhgeaEaKgfjihAhAhAjjhAhAhAhAjkgfaEaKgggGgGjljmjnjojmjlgNgNggaEaKfvfvfvfvfvfvajjpjqjramajamamamamamamajbIbiamambKaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXjsgpgbgbgngngngngnjtfXajjuajaEaTgegegegegegegegegegegegeaVaTgfgfgfgfgfgfgfgfgfgfgfgfaVaTggggggggggggggggggggggggaVaKhQfvfvfvfvfvajfzisjvbbajbcbdjwbfbgbhajaNbibJamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXfXjxjyjzgnjAgnjAgngnfXajfzajaEjBfravavavavaxavavavavavfrjCfqfravavavavavavavavavavfrjCfqfravavavavavavavavavavfrjCbZajknfvfvfvdcajjDjEjFjpajajajajajajajajaNjGamamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -676,4 +676,3 @@ jUaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 jVaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

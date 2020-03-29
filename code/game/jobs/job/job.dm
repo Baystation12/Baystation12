@@ -66,7 +66,8 @@
 	if(!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title)
-
+	if(ismob(.))
+		H = .
 	if(spawn_faction)
 		H.faction = spawn_faction
 		if(ticker.mode)

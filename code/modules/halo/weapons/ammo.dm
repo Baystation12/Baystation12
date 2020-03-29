@@ -381,13 +381,13 @@
 
 /obj/item/weapon/storage/box/spnkr
 	name = "102mm HEAT SPNKr crate"
-	desc = "UNSC certified crate containing two tubes of SPNKr rockets for a total of four rockets to be loaded in the M41 SSR."
+	desc = "UNSC certified crate containing four tubes of SPNKr rockets for a total of eight rockets to be loaded in the M41 SSR."
 	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
 	icon_state = "ssrcrate"
-	max_storage_space = base_storage_capacity(6)
-	startswith = list(/obj/item/ammo_magazine/spnkr = 2)
+	max_storage_space = base_storage_capacity(12)
+	startswith = list(/obj/item/ammo_magazine/spnkr = 4)
 	can_hold = list(/obj/item/ammo_magazine/spnkr)
-	slot_flags = SLOT_BACK
+	slot_flags = SLOT_BACK | SLOT_BELT
 	max_w_class = ITEM_SIZE_HUGE
 
 //ACL-55 rocket launcher

@@ -92,16 +92,16 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	name = "Jiralhanae Helm (Minor)"
-	icon_state = "helm_minor"
+	icon_state = "minorhelm"
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/major
 	name = "Jiralhanae Helm (Major)"
-	icon_state = "helm_major"
+	icon_state = "majorhelm"
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
 	name = "Jiralhanae Helm (Captain)"
 	desc = "This modified helmet is of some significance to Jiralhanae clans. It is a mark of importance, however now diminished by the covenant hierarchy."
-	icon_state = "helm_captain"
+	icon_state = "captainhelm"
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit Helmet"
@@ -204,16 +204,16 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/minor
 	name = "Jiralhanae Armor (Minor)"
-	icon_state = "armour_minor"
+	icon_state = "minorchest"
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/major
 	name = "Jiralhanae Armor (Major)"
-	icon_state = "armour_major"
+	icon_state = "majorchest"
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
 	name = "Jiralhanae Armor (Captain)"
 	desc = "This modified armor used to be a mark of importance to a Jiralhanae clan. The Covenant hierarchy has diminished it's power."
-	icon_state = "armour_captain"
+	icon_state = "captainchest"
 
 /* SHOES */
 
@@ -233,12 +233,20 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/spec
 	name = "Jiralhanae Greaves"
 	desc = "The footwear of Jiralhanae soldiers within the covenant."
 	icon_state = "greaves"
-	item_flags = NOSLIP
 	armor = list(melee = 50, bullet = 40, laser = 5, energy = 5, bomb = 40, bio = 0, rad = 0)
 
 
+/obj/item/clothing/shoes/jiralhanae/covenant/minor
+	name = "Jiralhanae Greaves (Minor)"
+	icon_state = "minorfeet"
 
+/obj/item/clothing/shoes/jiralhanae/covenant/major
+	name = "Jiralhanae Greaves (Major)"
+	icon_state = "majorfeet"
 
+/obj/item/clothing/shoes/jiralhanae/covenant/captain
+	name = "Jiralhanae Greaves (Captain)"
+	icon_state = "captainfeet"
 
 
 /* FLAGS */

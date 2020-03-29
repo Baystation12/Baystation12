@@ -42,6 +42,7 @@
 				on_call = 1
 			else
 				ship_source.target_loc = null
+
 			if(time_leave_at != 0 && !already_warned && world.time > time_leave_at-warn_depart_time)
 				ship_source.radio_message("I'll be leaving in [warn_depart_time/600] minutes. Better pack your stuff up.")
 				already_warned = 1

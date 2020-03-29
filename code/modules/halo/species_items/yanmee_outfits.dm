@@ -32,3 +32,4 @@
 	name = "Yanmee Leader"
 
 	suit = /obj/item/clothing/suit/armor/special/yanmee/leader
+	l_hand = /obj/item/language_learner/unggoy_to_common

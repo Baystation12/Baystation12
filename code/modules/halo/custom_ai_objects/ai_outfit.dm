@@ -13,4 +13,4 @@
 		new_ai.faction = terminal.spawn_faction
 	new_ai.Login()
 	qdel(H)
-	return 1
+	return new_ai
