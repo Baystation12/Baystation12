@@ -41,8 +41,6 @@
 			return global.SSantags;
 		if("SSao")
 			return global.SSao;
-		if("SSmining")
-			return global.SSmining
 		if("SSatoms")
 			return global.SSatoms;
 		if("SSautosave")
@@ -917,7 +915,7 @@
 			return global.z_levels;
 		if("zone_blocked")
 			return global.zone_blocked;
-
+		
 /proc/writeglobal(which, newval)
 	switch(which)
 		if("ANTAG_FREQS")
@@ -998,8 +996,6 @@
 			global.SSghost_images=newval;
 		if("SSgoals")
 			global.SSgoals=newval;
-		if("SSmining")
-			global.SSmining=newval;
 		if("SSgraphs_process")
 			global.SSgraphs_process=newval;
 		if("SSgraphs_update")
@@ -1836,7 +1832,7 @@
 			global.z_levels=newval;
 		if("zone_blocked")
 			global.zone_blocked=newval;
-
+		
 /var/list/_all_globals=list(
 	"ANTAG_FREQS",
 	"BSACooldown",
@@ -2153,7 +2149,6 @@
 	"next_duration_update",
 	"next_station_date_change",
 	"ninjastart",
-	"ntnet_card_uid",
 	"ntnet_global",
 	"ntnrc_uid",
 	"nttransfer_uid",
