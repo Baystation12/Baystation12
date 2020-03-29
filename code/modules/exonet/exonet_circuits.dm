@@ -32,7 +32,7 @@
 	req_components = list(
 		/obj/item/weapon/stock_parts/console_screen = 1,
 		/obj/item/stack/cable_coil = 5,
-		/obj/item/weapon/stock_parts/computer/hard_drive/ = 2
+		/obj/item/weapon/stock_parts/computer/hard_drive = 2
 	)
 
 /obj/item/weapon/stock_parts/circuitboard/exonet/relay

@@ -140,14 +140,6 @@
 	else
 		return 1
 
-/obj/machinery/exonet/mainframe/install_component(var/obj/item/weapon/stock_parts/part, force = FALSE, refresh_parts = TRUE)
-	..(part, force, refresh_parts)
-	recalculate_size()
-
-/obj/machinery/exonet/mainframe/uninstall_component(var/obj/item/weapon/stock_parts/part, refresh_parts = TRUE)
-	..(part, refresh_parts)
-	recalculate_size()
-
 /obj/machinery/exonet/mainframe/Destroy()
 	stored_files = null
 	return ..()
