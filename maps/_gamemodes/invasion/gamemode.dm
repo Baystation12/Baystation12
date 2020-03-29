@@ -19,7 +19,8 @@
 	var/fleets_arrive_at = 0
 	var/fleets_arrive_delay_max = 50 MINUTES
 	var/fleets_arrive_delay_min = 30 MINUTES
-	var/fleet_wave_delay = 5 MINUTES
+	var/fleet_wave_delay_max = 7.5 MINUTES
+	var/fleet_wave_delay_min = 2.5 MINUTES
 	var/fleet_wave_num = 0
 
 /datum/game_mode/outer_colonies/pre_setup()
@@ -113,7 +114,7 @@
 /datum/game_mode/outer_colonies/process()
 	. = ..()
 	if(world.time >= fleets_arrive_at)
-		fleets_arrive_at = world.time + fleet_wave_delay
+		fleets_arrive_at = world.time + rand(fleet_wave_delay_min,fleet_wave_delay_max)
 		playsound(map_sectors["[map_sectors[1]]"], 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
 		for(var/f in factions)
 			var/datum/faction/F = f
@@ -175,6 +176,9 @@
 									targets += f_enemy.flagship
 								if(f_enemy.base)
 									targets += f_enemy.base
+							if(targets.len == 0) //Fallback, go on the defensive.
+								targets += F,flagship
+								targets += F.base
 							ship.slipspace_to_location(pick(view(pick(targets),7)))
 							ship.radio_message("Slipspace manouver complete. Fleet leader reporting at [ship.loc.x],[ship.loc.y].")
 
