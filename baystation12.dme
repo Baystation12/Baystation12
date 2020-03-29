@@ -1755,6 +1755,8 @@
 #include "code\modules\exonet\modem.dm"
 #include "code\modules\exonet\relay.dm"
 #include "code\modules\exonet\router.dm"
+#include "code\modules\exonet\emails\email_account.dm"
+#include "code\modules\exonet\emails\email_message.dm"
 #include "code\modules\ext_scripts\irc.dm"
 #include "code\modules\fabrication\__fabricator_defines.dm"
 #include "code\modules\fabrication\_fabricator.dm"
