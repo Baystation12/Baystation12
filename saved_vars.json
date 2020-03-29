@@ -3365,5 +3365,44 @@
 			"automation",
 			"data"
 		]
+	},
+	{
+		"path": "/obj/item/weapon/stock_parts/computer/network_card",
+		"vars":[
+			"long_range",
+			"ethernet",
+			"proxy_id",
+			"ennid",
+			"keydata"
+		]
+	},
+	{
+		"path": "/obj/machinery/exonet",
+		"vars":[
+			"enabled",
+			"initial_ennid",
+			"initial_keydata",
+			"ennid",
+			"keydata"
+		]
+	},
+	{
+		"path": "/obj/machinery/exonet/broadcaster/router",
+		"vars":[
+			"lockdata",
+			"dos_failure",
+			"dos_overload",
+			"dos_capacity",
+			"dos_dissipate"
+		]
+	},
+	{
+		"path": "/obj/machinery/exonet/mainframe",
+		"vars":[
+			"setting_max_log_count",
+			"max_capacity",
+			"used_capacity",
+			"stored_files"
+		]
 	}
 ]
