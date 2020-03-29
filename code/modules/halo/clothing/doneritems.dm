@@ -2167,6 +2167,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 /obj/item/clothing/head/helmet/oni_guard/xor
 	name = "Refitted T voan Helmet"
 	desc = "Despite the look, this isn't actually airtight."
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR|BLOCKHEADHAIR
 
 	icon = ONI_ITEM_INHAND
 	icon_override = ONI_OVERRIDE
@@ -2196,6 +2197,37 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	/obj/item/clothing/gloves/thick/oni_guard/xor,
 	/obj/item/clothing/head/helmet/oni_guard/xor,
 	/obj/item/weapon/storage/backpack/marine/xor,
+	/obj/item/weapon/gun/projectile/br55/xor
+	)
+
+/obj/item/clothing/head/helmet/odst/commanderxor
+	name = "Harridan Battle Armour Helmet"
+	desc = "Looks like a heavily modified ODST helmet."
+	item_state = "sapphireodsthelmet"
+	item_state_novisr = "sapphireodsthelmet"
+
+/obj/item/clothing/suit/armor/special/odst/commanderxor
+	name = "Harridan Battle Armour"
+	desc = "Seems to be a heavy modification of ODST armour."
+	item_state = "sapphireodstarmor"
+	flags_inv = HIDETAIL
+
+/obj/item/weapon/storage/backpack/odst/donator/general/commanderxor
+	name = "Harridan Battle Armour Jetpack"
+	desc = "Sadly, this no longer functions as a jetpack. It makes for a nice storage item, though."
+	item_state = "sapphireodstbackpack"
+
+/obj/item/weapon/storage/box/large/donator/xor_odst
+	startswith = list(\
+	/obj/item/clothing/head/helmet/odst/commanderxor,
+	/obj/item/clothing/suit/armor/special/odst/commanderxor,
+	/obj/item/weapon/storage/backpack/odst/donator/general/commanderxor,
+	/obj/item/weapon/gun/projectile/br55/xor
+	)
+	can_hold = list(\
+	/obj/item/clothing/head/helmet/odst/commanderxor,
+	/obj/item/clothing/suit/armor/special/odst/commanderxor,
+	/obj/item/weapon/storage/backpack/odst/donator/general/commanderxor,
 	/obj/item/weapon/gun/projectile/br55/xor
 	)
 
