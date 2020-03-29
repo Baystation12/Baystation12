@@ -3,16 +3,16 @@
 	name = "EXONET Mainframe"
 	desc = "A very complex mainframe capable of storing massive amounts of data. Looks fragile."
 	active_power_usage = 20 KILOWATTS
-	var/list/initial_programs		// Optional variable for starting a mainframe with some programs in it.
+	var/list/initial_programs = list(
+		/datum/computer_file/program/email_client,
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/game
+	)		// Optional variable for starting a mainframe with some programs in it.
 	var/setting_max_log_count = 100
 
 	var/max_capacity = 0
 	var/used_capacity = 0
-	var/list/stored_files = list(
-		/datum/computer_file/program/email_client,
-		/datum/computer_file/program/wordprocessor,
-		/datum/computer_file/program/game
-	)		// List of stored files on this mainframe. DO NOT MODIFY DIRECTLY!
+	var/list/stored_files = list()		// List of stored files on this mainframe. DO NOT MODIFY DIRECTLY!
 
 /obj/machinery/exonet/mainframe/Initialize()
 	..()
@@ -79,7 +79,10 @@
 	var/drives = 0
 	for(var/obj/item/weapon/stock_parts/computer/hard_drive/hdd in component_parts)
 		drives++
-		smin = min(smin, hdd.max_capacity)
+		if(!smin)
+			smin = hdd.max_capacity
+		else
+			smin = min(smin, hdd.max_capacity)
 	max_capacity = (drives - 1) * smin
 
 	var/total_size = 0
@@ -144,3 +147,6 @@
 	stored_files = null
 	return ..()
 
+/obj/machinery/exonet/mainframe/RefreshParts()
+	recalculate_size()
+	..()
