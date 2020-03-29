@@ -115,7 +115,8 @@
 	. = ..()
 	if(world.time >= fleets_arrive_at)
 		fleets_arrive_at = world.time + rand(fleet_wave_delay_min,fleet_wave_delay_max)
-		playsound(map_sectors["[map_sectors[1]]"], 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
+		for(var/z = 1,z<=world.maxz,z++)
+			playsound(locate(1,1,z), 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
 		for(var/f in factions)
 			var/datum/faction/F = f
 			if(!F.name in fleet_list)
@@ -197,8 +198,8 @@
 						ship.target_loc = leader_ship.target_loc
 						ship.slipspace_to_location(leader_ship.loc)
 						ship.radio_message("Slipspace manouver successful. Redevouz'd with leader at [ship.loc.x],[ship.loc.y].")
-
-					playsound(ship.loc, 'code/modules/halo/sounds/slip_rupture_detected.ogg', 50, 0,0,0,1)
+					for(var/z = 1,z<=world.maxz,z++)
+						playsound(locate(1,1,z), 'code/modules/halo/sounds/slip_rupture_detected.ogg', 50, 0,0,0,1)
 
 					sleep(15)
 
