@@ -114,7 +114,7 @@
 /obj/item/projectile/bullet/covenant/needles
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
-	damage = 20 // Low damage, special effect would do the most damage.
+	damage = 10 // Low damage, special effect would do the most damage.
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
@@ -130,7 +130,7 @@
 		. = ..()
 		return
 	var/list/embedded_shards = list()
-	for(var/obj/item/weapon/material/shard in L.contents )
+	for(var/obj/shard in L.embedded)
 		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
