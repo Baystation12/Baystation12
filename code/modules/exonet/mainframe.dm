@@ -13,6 +13,10 @@
 		/datum/computer_file/program/wordprocessor,
 		/datum/computer_file/program/game
 	)		// List of stored files on this mainframe. DO NOT MODIFY DIRECTLY!
+	req_components = list(
+		/obj/item/weapon/stock_parts/power/apc = 1,
+		/obj/item/weapon/stock_parts/computer/hard_drive/ = 2
+	)
 
 /obj/machinery/exonet/mainframe/Initialize()
 	..()
@@ -23,6 +27,7 @@
 				continue
 			LAZYDISTINCTADD(stored_files, prog)
 		initial_programs = null
+	recalculate_size()
 
 /obj/machinery/exonet/mainframe/on_update_icon()
 	if(operable())
@@ -139,6 +144,15 @@
 	else
 		return 1
 
+/obj/machinery/exonet/mainframe/install_component(var/obj/item/weapon/stock_parts/part, force = FALSE, refresh_parts = TRUE)
+	..(part, force, refresh_parts)
+	recalculate_size()
+
+/obj/machinery/exonet/mainframe/uninstall_component(var/obj/item/weapon/stock_parts/part, refresh_parts = TRUE)
+	..(part, refresh_parts)
+	recalculate_size()
+
 /obj/machinery/exonet/mainframe/Destroy()
 	stored_files = null
 	return ..()
+

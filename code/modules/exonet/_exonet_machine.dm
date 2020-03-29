@@ -6,15 +6,13 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	stat_immune = 0
 	use_power = POWER_USE_ACTIVE
-	
+
 	var/enabled = 1				// Set to 0 if the device was turned off
-	var/initial_ennid			// Optional variable for setting the device up with an ennid right on initialize.
-	var/initial_keydata			// The keydata for the ennid in order to validate/authenticate with the network.
 	var/ui_template				// If interacted with by a multitool, what UI (if any) to display.
 	var/ennid					// The ennid in use.
 	var/keydata					// The security passphrase for the network
 	var/net_tag					// A user-friendly unique name for this device on the network.
-	uncreated_component_parts = list(
+	req_components = list(
 		/obj/item/weapon/stock_parts/power/apc
 	)
 
@@ -23,10 +21,9 @@
 	..()
 
 /obj/machinery/exonet/Initialize()
-	if(initial_ennid)
+	if(ennid)
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-		exonet.connect_network(null, initial_ennid, NETWORKSPEED_ETHERNET, initial_keydata)
-		ennid = initial_ennid
+		exonet.connect_network(null, ennid, NETWORKSPEED_ETHERNET, keydata)
 	..()
 
 // TODO: Implement more logic here. For now it's only a placeholder.

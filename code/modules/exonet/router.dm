@@ -17,7 +17,7 @@
 	..()
 	// This has to happen pretty early on object construction.
 	if(!broadcasting_ennid)
-		broadcasting_ennid = initial_ennid
+		broadcasting_ennid = ennid
 	if(broadcasting_ennid)
 		// Sets up the network before anything else can. go go go go
 		var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)

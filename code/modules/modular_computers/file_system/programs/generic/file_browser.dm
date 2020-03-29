@@ -29,6 +29,8 @@
 		for(var/obj/machinery/exonet/mainframe/mainframe in exonet.get_mainframes())
 			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
 		file_server = sanitize(input(usr, "Choose a fileserver to view files on:", "Select File Server") as null|anything in file_servers)
+		if(!file_server)
+			file_server = "local" // Safety check.
 	if(href_list["PRG_openfile"])
 		. = 1
 		open_file = href_list["PRG_openfile"]
