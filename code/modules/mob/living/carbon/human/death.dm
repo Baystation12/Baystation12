@@ -30,7 +30,12 @@
 	BITSET(hud_updateflag, HEALTH_HUD)
 	BITSET(hud_updateflag, STATUS_HUD)
 	BITSET(hud_updateflag, LIFE_HUD)
-	
+
+	//backs up lace if available.
+	var/obj/item/organ/internal/stack/s = get_organ(BP_STACK)
+	if(s)
+		s.do_backup()
+
 	//Handle species-specific deaths.
 	species.handle_death(src)
 

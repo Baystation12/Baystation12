@@ -2889,6 +2889,17 @@
 		]
 	},
 	{
+		"path":"/obj/machinery/ntnet_relay",
+		"vars":[
+			"enabled",
+			"dos_failure",
+			"dos_sources",
+			"dos_overload",
+			"dos_capacity",
+			"dos_dissipate"
+		]
+	},
+	{
 		"path":"/obj/structure/lift",
 		"vars":[
 			"lift"
@@ -3390,8 +3401,7 @@
 			"dos_failure",
 			"dos_overload",
 			"dos_capacity",
-			"dos_dissipate",
-			"network"
+			"dos_dissipate"
 		]
 	},
 	{
@@ -3401,18 +3411,6 @@
 			"max_capacity",
 			"used_capacity",
 			"stored_files"
-		]
-	},
-	{
-		"path":"/datum/exonet",
-		"vars":[
-			"default_domain",
-			"emails",
-			"email_server",
-			"log_server",
-			"router",
-			"lockdata",
-			"ennid"
 		]
 	}
 ]
