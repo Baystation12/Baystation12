@@ -1,4 +1,4 @@
-GLOBAL_LIST_INIT(exonets, new)
+GLOBAL_LIST_EMPTY(exonets)
 
 /datum/exonet
 	var/ennid										// This is the name of the network. Its unique ID.

@@ -2,7 +2,7 @@
 /obj/machinery/exonet/mainframe
 	name = "EXONET Mainframe"
 	desc = "A very complex mainframe capable of storing massive amounts of data. Looks fragile."
-	active_power_usage = 20000 //20kW
+	active_power_usage = 20 KILOWATTS
 	var/list/initial_programs		// Optional variable for starting a mainframe with some programs in it.
 	var/setting_max_log_count = 100
 

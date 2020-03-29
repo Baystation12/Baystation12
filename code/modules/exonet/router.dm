@@ -2,7 +2,7 @@
 /obj/machinery/exonet/broadcaster/router
 	name = "EXONET Router"
 	desc = "A very complex router and transmitter capable of connecting electronic devices together. Looks fragile."
-	active_power_usage = 8000 //8kW
+	active_power_usage = 8 KILOWATTS
 	ui_template = "exonet_router_configuration.tmpl"
 	var/lockdata				// Network security. This key is required to join a network device to the network.
 	var/dos_failure = 0			// Set to 1 if the router failed due to (D)DoS attack
