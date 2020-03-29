@@ -75,7 +75,12 @@
 		/obj/item/clothing/glasses/sunglasses/big,
 		/obj/item/clothing/accessory/badge/nanotrasen,
 		/obj/item/device/radio/headset/heads/torchcorp,
-		/obj/item/device/radio/headset/heads/torchcorp/alt
+		/obj/item/device/radio/headset/heads/torchcorp/alt,
+		/obj/item/clothing/accessory/storage/black_vest,
+		/obj/item/weapon/storage/belt/holster/general,
+		/obj/item/device/flashlight/maglight,
+		/obj/item/device/radio,
+		/obj/item/weapon/crowbar/prybar
 	)
 
 /obj/structure/closet/secure_closet/representative
