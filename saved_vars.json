@@ -3390,7 +3390,8 @@
 			"initial_ennid",
 			"initial_keydata",
 			"ennid",
-			"keydata"
+			"keydata",
+			"net_tag"
 		]
 	},
 	{

@@ -13,7 +13,13 @@
 		</div><hr>
 		{{:data.filedata}}
 	{{else}}
-		<h2>Available files (local):</h2>
+		<div class="itemLabel">
+			File Server: 
+		</div>
+		<div class="itemContent">
+			{{:helper.link(data.file_server, null, { "PRG_changefileserver" : data.file_server })}}
+		</div>
+		<h2>Available files ({{data.file_server}}):</h2>
 		<table>
 			<tr><th>File name
 			<th>File type

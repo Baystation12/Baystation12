@@ -90,6 +90,6 @@ GLOBAL_LIST_INIT(exonets, new)
 
 /datum/exonet/proc/find_exonet_file_by_name(var/filename)
 	for(var/obj/machinery/exonet/mainframe/mainframe in mainframes)
-		for(var/datum/computer_file/program/P in mainframe.stored_files)
-			if(filename == P.filename)
-				return P
+		var/find_file = mainframe.find_file_by_name(filename)
+		if(find_file)
+			return find_file

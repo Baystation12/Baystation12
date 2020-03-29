@@ -5,6 +5,7 @@
 	var/ui_template				// If interacted with by a multitool, what UI (if any) to display.
 	var/ennid					// The ennid in use.
 	var/keydata					// The security passphrase for the network
+	var/net_tag					// A user-friendly unique name for this device on the network.
 	uncreated_component_parts = list(
 		/obj/item/weapon/stock_parts/power/apc
 	)
@@ -52,5 +53,6 @@
 	data["name"] = name
 	data["ennid"] = ennid
 	data["keydata"] = keydata
+	data["net_tag"] = net_tag
 
 	. = data

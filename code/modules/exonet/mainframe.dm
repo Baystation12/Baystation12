@@ -15,6 +15,7 @@
 		/obj/item/weapon/stock_parts/computer/hard_drive/small,
 		/obj/item/weapon/stock_parts/computer/hard_drive/small
 	)
+	var/list/initial_programs		// Optional variable for starting a mainframe with some programs in it.
 	stat_immune = 0
 
 	var/setting_max_log_count = 100
@@ -22,6 +23,15 @@
 	var/max_capacity = 0
 	var/used_capacity = 0
 	var/list/stored_files = list()		// List of stored files on this mainframe. DO NOT MODIFY DIRECTLY!
+
+/obj/machinery/exonet/mainframe/Initialize()
+	if(initial_programs)
+		for(var/initial_program in initial_programs)
+			var/datum/computer_file/program/prog = new initial_program
+			if(!prog || !istype(prog) || prog.filename == "UnknownProgram" || prog.filetype != "PRG")
+				continue
+			LAZYDISTINCTADD(stored_files, prog)
+		initial_programs = null
 
 /obj/machinery/exonet/mainframe/on_update_icon()
 	if(operable())

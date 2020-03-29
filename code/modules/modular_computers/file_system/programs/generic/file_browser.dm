@@ -12,6 +12,7 @@
 	nanomodule_path = /datum/nano_module/program/computer_filemanager/
 	var/open_file
 	var/error
+	var/file_server = "local"
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
 
@@ -19,6 +20,14 @@
 	if(..())
 		return 1
 
+	if(href_list["PRG_changefileserver"])
+		. = 1
+		var/list/file_servers = list("local")
+		var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		for(var/obj/machinery/exonet/mainframe/mainframe in exonet.get_mainframes())
+			LAZYDISTINCTADD(file_servers, exonet.get_network_tag(mainframe))
+		file_server = input("Choose a fileserver to view files on.", "Select File Server", file_server) in file_servers
 	if(href_list["PRG_openfile"])
 		. = 1
 		open_file = href_list["PRG_openfile"]
@@ -96,6 +105,14 @@
 /datum/nano_module/program/computer_filemanager
 	name = "NTOS File Manager"
 
+/datum/nano_module/program/computer_filemanager/proc/get_functional_network_card()
+	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = os && os.get_component(/obj/item/weapon/stock_parts/computer/network_card)
+	if(!network_card || !network_card.check_functionality())
+		// error = "Error establishing connection. Are you using a functional and NTOSv2-compliant device?"
+		return
+	return network_card
+
 /datum/nano_module/program/computer_filemanager/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 	var/datum/computer_file/program/filemanager/PRG
@@ -103,47 +120,63 @@
 
 	if(PRG.error)
 		data["error"] = PRG.error
+
+	data["file_server"] = PRG.file_server
+	var/list/stored_files = list()
+	var/obj/machinery/exonet/mainframe/mainframe
+	if(PRG.file_server == "local")
+		// using local file system
+		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
+			data["error"] = "I/O ERROR: Unable to access hard drive."
+		else
+			stored_files = PRG.computer.get_all_files()
+	else
+		var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_functional_network_card()
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		mainframe = exonet.get_device_by_tag(PRG.file_server)
+		if(!mainframe)
+			data["error"] = "NETWORK ERROR: Remote device is not available."
+		else
+			stored_files = mainframe.stored_files
+
 	if(PRG.open_file)
 		var/datum/computer_file/data/F
-
-		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
-			data["error"] = "I/O ERROR: Unable to access hard drive."
-		else
+		if(!mainframe)
 			F = PRG.computer.get_file(PRG.open_file)
-			if(!istype(F))
-				data["error"] = "I/O ERROR: Unable to open file."
-			else
-				data["filedata"] = F.generate_file_data(user)
-				data["filename"] = "[F.filename].[F.filetype]"
-	else
-		if(!PRG.computer || !PRG.computer.has_component(PART_HDD))
-			data["error"] = "I/O ERROR: Unable to access hard drive."
 		else
-			var/list/files[0]
-			for(var/datum/computer_file/F in PRG.computer.get_all_files())
-				files.Add(list(list(
+			F = mainframe.find_file_by_name(PRG.open_file)
+		if(!istype(F))
+			data["error"] = "I/O ERROR: Unable to open file."
+		else
+			data["filedata"] = F.generate_file_data(user)
+			data["filename"] = "[F.filename].[F.filetype]"
+	else
+		var/list/files[0]
+		for(var/datum/computer_file/F in stored_files)
+			files.Add(list(list(
+				"name" = F.filename,
+				"type" = F.filetype,
+				"size" = F.size,
+				"undeletable" = F.undeletable
+			)))
+		data["files"] = files
+		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
+		if(RHDD)
+			data["usbconnected"] = 1
+			var/list/usbfiles[0]
+			for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
+				usbfiles.Add(list(list(
 					"name" = F.filename,
 					"type" = F.filetype,
 					"size" = F.size,
 					"undeletable" = F.undeletable
 				)))
-			data["files"] = files
-			var/obj/item/weapon/stock_parts/computer/hard_drive/portable/RHDD = PRG.computer.get_component(PART_DRIVE)
-			if(RHDD)
-				data["usbconnected"] = 1
-				var/list/usbfiles[0]
-				for(var/datum/computer_file/F in PRG.computer.get_all_files(RHDD))
-					usbfiles.Add(list(list(
-						"name" = F.filename,
-						"type" = F.filetype,
-						"size" = F.size,
-						"undeletable" = F.undeletable
-					)))
-				data["usbfiles"] = usbfiles
+			data["usbfiles"] = usbfiles
+
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "file_manager.tmpl", "NTOS File Manager", 600, 700, state = state)
+		ui = new(user, src, ui_key, "file_manager.tmpl", "EXONET File Manager", 600, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
