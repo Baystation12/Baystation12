@@ -1348,6 +1348,13 @@
       ]
    },
    {
+		"path": "/obj/machinery/computer",
+		"vars":[
+			"initial_ennid",
+			"initial_keydata"
+		]
+   },
+   {
       "path":"/obj/machinery/computer/operating",
       "vars":[
          "table"
