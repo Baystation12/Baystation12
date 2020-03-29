@@ -6,7 +6,7 @@
 {{else}}
 	<h2>Viewing File System:</h2>
 	<div class='item'>
-		{{:helper.link(data.file_server, null, { "PRG_changefileserver" : data.file_server }, null)}}
+		{{:helper.link(data.file_server, null, { "PRG_changefileserver" : data.file_server })}}
 	</div><hr>
 	{{if data.editing_user}}
 		<h2>Viewing User Record {{:data.desired_name}}</h2>
@@ -26,8 +26,8 @@
 			<div class='itemLabel'>RECORD SIZE:</div>
 			<div class='itemBody'>{{:data.size}}GQ</div>
 		</div>
-		{{:helper.link('ASSIGN GRANT', null, { "PRG_assigngrant" : data.user_id })}}
-		{{:helper.link('CREATE GRANT', null, { "PRG_creategrant" : data.user_id })}}
+		{{:helper.link('ASSIGN GRANT', null, { "PRG_assigngrant" : data.user_id })}}<br>
+		{{:helper.link('CREATE GRANT', null, { "PRG_creategrant" : data.user_id })}}<br>
 		<hr>
 		<table>
 			<tr><th>Grant
@@ -40,7 +40,7 @@
 		</table>
 	{{else}}
 		<h2>Available Users ({{:data.file_server}}):</h2>
-		{{:helper.link('ADD USER', null, { "PRG_adduser" : 1 })}}
+		{{:helper.link('ADD USER', null, { "PRG_adduser" : 1 })}}<br>
 		<table>
 			<tr><th>User ID
 			<th>Grants
