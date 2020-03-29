@@ -1,6 +1,0 @@
-author: "Flying_loulou"
-delete-after: True
-changes: 
-  - bugfix: "The CE can now select the fleet alternative utility uniform, just as the SE and the engineers."
-  - tweak: "The fleet utility jacket can now hold whatever other uniform jackets can hold on their suit storage slot."
-  - rscadd: "Generalizes the Fleet alternative utility uniform for all departments."
