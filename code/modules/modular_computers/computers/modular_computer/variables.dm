@@ -36,7 +36,7 @@
 
 	// Important hardware (must be installed for computer to work)
 	var/obj/item/weapon/stock_parts/computer/processor_unit/processor_unit				// CPU. Without it the computer won't run. Better CPUs can run more programs at once.
-	var/obj/item/weapon/stock_parts/computer/network_card/network_card					// Network Card component of this computer. Allows connection to NTNet
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card					// Network Card component of this computer. Allows connection to EXONET
 	var/obj/item/weapon/stock_parts/computer/hard_drive/hard_drive						// Hard Drive component of this computer. Stores programs and files.
 
 	// Optional hardware (improves functionality, but is not critical for computer to work in most cases)

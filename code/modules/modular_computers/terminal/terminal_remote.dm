@@ -22,7 +22,7 @@
 	if(!CanInteractWith(user, origin_computer, GLOB.default_state))
 		return FALSE
 
-	if(!origin_computer.get_ntnet_status() || !computer.get_ntnet_status())
+	if(!origin_computer.get_exonet_status() || !computer.get_exonet_status())
 		return FALSE
 
 	return TRUE

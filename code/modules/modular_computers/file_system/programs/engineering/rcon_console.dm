@@ -7,9 +7,9 @@
 	program_menu_icon = "power"
 	extended_desc = "This program allows remote control of power distribution systems. This program can not be run on tablet computers."
 	required_access = access_engine
-	requires_ntnet = 1
+	requires_exonet = 1
 	network_destination = "RCON remote control system"
-	requires_ntnet_feature = NTNET_SYSTEMCONTROL
+	requires_exonet_feature = NETWORK_SYSTEMCONTROL
 	usage_flags = PROGRAM_LAPTOP | PROGRAM_CONSOLE
 	size = 19
 	category = PROG_ENG

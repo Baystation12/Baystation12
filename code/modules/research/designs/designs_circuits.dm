@@ -703,13 +703,6 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/pointdefense_control
 	sort_string = "VAAAD"
 
-/datum/design/circuit/ntnet_relay
-	name = "NTNet Quantum Relay"
-	id = "ntnet_relay"
-	req_tech = list(TECH_DATA = 4)
-	build_path = /obj/item/weapon/stock_parts/circuitboard/ntnet_relay
-	sort_string = "WAAAA"
-
 /datum/design/circuit/washer
 	name = "washing machine"
 	id = "washer"

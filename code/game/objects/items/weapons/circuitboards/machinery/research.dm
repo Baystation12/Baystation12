@@ -100,18 +100,6 @@
 		/obj/item/weapon/stock_parts/power/apc/buildable = 1
 	)
 
-/obj/item/weapon/stock_parts/circuitboard/ntnet_relay
-	name = "Circuit board (NTNet Quantum Relay)"
-	build_path = /obj/machinery/ntnet_relay
-	board_type = "machine"
-	origin_tech = list(TECH_DATA = 4)
-	req_components = list(/obj/item/stack/cable_coil = 15)
-	additional_spawn_components = list(
-		/obj/item/weapon/stock_parts/console_screen = 1,
-		/obj/item/weapon/stock_parts/keyboard = 1,
-		/obj/item/weapon/stock_parts/power/apc/buildable = 1,
-		/obj/item/weapon/stock_parts/computer/hard_drive/portable = 1
-	)
 
 /obj/item/weapon/stock_parts/circuitboard/suspension_gen
 	name = T_BOARD("suspension generator")

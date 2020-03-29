@@ -631,12 +631,6 @@
 			return global.next_station_date_change;
 		if("ninjastart")
 			return global.ninjastart;
-		if("ntnet_global")
-			return global.ntnet_global;
-		if("ntnrc_uid")
-			return global.ntnrc_uid;
-		if("nttransfer_uid")
-			return global.nttransfer_uid;
 		if("nuke_disks")
 			return global.nuke_disks;
 		if("num_financial_terminals")
@@ -1548,12 +1542,6 @@
 			global.next_station_date_change=newval;
 		if("ninjastart")
 			global.ninjastart=newval;
-		if("ntnet_global")
-			global.ntnet_global=newval;
-		if("ntnrc_uid")
-			global.ntnrc_uid=newval;
-		if("nttransfer_uid")
-			global.nttransfer_uid=newval;
 		if("nuke_disks")
 			global.nuke_disks=newval;
 		if("num_financial_terminals")
@@ -2149,9 +2137,6 @@
 	"next_duration_update",
 	"next_station_date_change",
 	"ninjastart",
-	"ntnet_global",
-	"ntnrc_uid",
-	"nttransfer_uid",
 	"nuke_disks",
 	"num_financial_terminals",
 	"organ_cache",

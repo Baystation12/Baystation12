@@ -1,4 +1,3 @@
-// Relays don't handle any actual communication. Global NTNet datum does that, relays only tell the datum if it should or shouldn't work.
 /obj/machinery/exonet/broadcaster/router
 	name = "EXONET Router"
 	desc = "A very complex router and transmitter capable of connecting electronic devices together. Looks fragile."

@@ -188,7 +188,7 @@
 	if(network_card && network_card.is_banned())
 		data["PC_ntneticon"] = "sig_warning.gif"
 	else
-		switch(get_ntnet_status())
+		switch(get_exonet_status())
 			if(0)
 				data["PC_ntneticon"] = "sig_none.gif"
 			if(1)

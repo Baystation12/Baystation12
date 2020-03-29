@@ -1,4 +1,3 @@
-// Relays don't handle any actual communication. Global NTNet datum does that, relays only tell the datum if it should or shouldn't work.
 /obj/machinery/exonet/mainframe
 	name = "EXONET Mainframe"
 	desc = "A very complex mainframe capable of storing massive amounts of data. Looks fragile."

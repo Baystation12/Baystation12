@@ -11,7 +11,7 @@
 	var/screensaver_icon = "standby"
 
 	// Used for deciding if various tray icons need to be updated
-	var/last_battery_percent							
+	var/last_battery_percent
 	var/last_world_time
 	var/list/last_header_icons
 
@@ -37,7 +37,7 @@
 		process_updates()
 		return
 	for(var/datum/computer_file/program/P in running_programs)
-		if(P.requires_ntnet && !get_ntnet_status(P.requires_ntnet_feature))
+		if(P.requires_exonet && !get_exonet_status(P.requires_exonet_feature))
 			P.event_networkfailure(P != active_program)
 		else
 			P.process_tick()
@@ -50,10 +50,11 @@
 	on = FALSE
 	for(var/datum/computer_file/program/P in running_programs)
 		kill_program(P, 1)
-	
+
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
-		ntnet_global.unregister(network_card.identification_id)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		exonet.disconnect_network()
 
 	if(updating)
 		updating = FALSE
@@ -76,7 +77,8 @@
 		run_program(autorun.stored_data)
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_component(PART_NETWORK)
 	if(network_card)
-		ntnet_global.register(network_card.identification_id, src)
+		var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+		exonet.connect_network(null, network_card.ennid, network_card.get_netspeed(), network_card.keydata)
 	update_host_icon()
 
 /datum/extension/interactive/ntos/proc/kill_program(var/datum/computer_file/program/P, var/forced = 0)

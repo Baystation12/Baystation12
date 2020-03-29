@@ -29,6 +29,8 @@
 
 /obj/item/weapon/stock_parts/computer/network_card/New(var/l)
 	..(l)
+	if(!identification_id)
+		identification_id = new_guid()
 
 /obj/item/weapon/stock_parts/computer/network_card/advanced
 	name = "advanced EXONET network card"
@@ -55,17 +57,20 @@
 
 // Returns a string identifier of this network card
 /obj/item/weapon/stock_parts/computer/network_card/proc/get_network_tag(list/routed_through) // Argument is a safety parameter for internal calls. Don't use manually.
-	if(proxy_id && !(src in routed_through))
-		var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
-		if(comp) // If not we default to exposing ourselves, but it means there was likely a logic error elsewhere.
-			LAZYADD(routed_through, src)
-			var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
-			if(network_card)
-				return network_card.get_network_tag(routed_through)
+	// if(proxy_id && !(src in routed_through))
+	// 	var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
+	// 	if(comp) // If not we default to exposing ourselves, but it means there was likely a logic error elsewhere.
+	// 		LAZYADD(routed_through, src)
+	// 		var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
+	// 		if(network_card)
+	// 			return network_card.get_network_tag(routed_through)
 	return "[identification_string] (NID [identification_id])"
 
 /obj/item/weapon/stock_parts/computer/network_card/proc/is_banned()
-	return ntnet_global.check_banned(identification_id)
+	var/datum/exonet/network = get_network()
+	if(!network)
+		return
+	return network.check_banned(identification_id)
 
 /obj/item/weapon/stock_parts/computer/network_card/proc/get_netspeed()
 	var/strength = 1
@@ -81,14 +86,12 @@
 	if(!enabled || !check_functionality())
 		return
 
-	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
-	var/datum/exonet/network = exonet.get_local_network()
-
+	var/datum/exonet/network = get_network()
 	if(!network || is_banned())
 		return
 
-	if(!network.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
-		if(!ethernet || specific_action) // Wired connection ensures a basic connection to NTNet, however no usage of disabled network services.
+	if(!network.check_function(specific_action)) // EXONET is down and we are not connected via wired connection. No signal.
+		if(!ethernet || specific_action) // Wired connection ensures a basic connection to EXONET, however no usage of disabled network services.
 			return
 
 	var/turf/T = get_turf(src)
@@ -145,3 +148,7 @@
 /obj/item/weapon/stock_parts/computer/network_card/proc/refresh_network()
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
 	identification_id = exonet.get_mac_address()
+
+/obj/item/weapon/stock_parts/computer/network_card/proc/get_network()
+	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)
+	return exonet.get_local_network()

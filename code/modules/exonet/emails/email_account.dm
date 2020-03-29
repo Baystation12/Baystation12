@@ -25,11 +25,11 @@
 		fullname = _fullname
 	if(_assignment)
 		assignment = _assignment
-	ADD_SORTED(ntnet_global.email_accounts, src, /proc/cmp_emails_asc)
+	//ADD_SORTED(ntnet_global.email_accounts, src, /proc/cmp_emails_asc)
 	..()
 
 /datum/computer_file/data/email_account/Destroy()
-	ntnet_global.email_accounts.Remove(src)
+	//ntnet_global.email_accounts.Remove(src)
 	. = ..()
 
 /datum/computer_file/data/email_account/proc/all_emails()
@@ -37,7 +37,7 @@
 
 /datum/computer_file/data/email_account/proc/send_mail(var/recipient_address, var/datum/computer_file/data/email_message/message, var/relayed = 0)
 	var/datum/computer_file/data/email_account/recipient
-	for(var/datum/computer_file/data/email_account/account in ntnet_global.email_accounts)
+	for(var/datum/computer_file/data/email_account/account in list()) // julie pls fix ntnet_global.email_accounts
 		if(account.login == recipient_address)
 			recipient = account
 			break
@@ -49,14 +49,14 @@
 		return
 
 	outbox.Add(message)
-	ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
+	//ntnet_global.add_log_with_ids_check("EMAIL LOG: [login] -> [recipient.login] title: [message.title].")
 	return 1
 
 /datum/computer_file/data/email_account/proc/receive_mail(var/datum/computer_file/data/email_message/received_message, var/relayed)
 	received_message.set_timestamp()
-	if(!ntnet_global.intrusion_detection_enabled)
-		inbox.Add(received_message)
-		return 1
+	//if(!ntnet_global.intrusion_detection_enabled)
+	inbox.Add(received_message)
+	return 1
 	// Spam filters may occassionally let something through, or mark something as spam that isn't spam.
 	var/mark_spam = FALSE
 	if(received_message.spam)
@@ -90,7 +90,7 @@
 		log_and_message_admins("Broadcast email address used by [usr]. Message title: [received_message.title].")
 
 	spawn(0)
-		for(var/datum/computer_file/data/email_account/email_account in ntnet_global.email_accounts)
+		for(var/datum/computer_file/data/email_account/email_account in list()) // julie pls fix  ntnet_global.email_accounts
 			var/datum/computer_file/data/email_message/new_message = received_message.clone()
 			send_mail(email_account.login, new_message, 1)
 			sleep(2)

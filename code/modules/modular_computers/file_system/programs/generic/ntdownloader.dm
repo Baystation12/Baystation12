@@ -1,4 +1,4 @@
-/datum/computer_file/program/ntnetdownload
+/datum/computer_file/program/exonetdownload
 	filename = "ntndownloader"
 	filedesc = "EXONET Software Download Tool"
 	program_icon_state = "generic"
@@ -10,7 +10,7 @@
 	size = 4
 	requires_exonet = 1
 	requires_exonet_feature = NETWORK_SOFTWAREDOWNLOAD
-	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload/
+	nanomodule_path = /datum/nano_module/program/computer_exonetdownload/
 	ui_header = "downloader_finished.gif"
 	var/datum/computer_file/program/downloaded_file = null
 	var/hacked_download = 0
@@ -23,7 +23,7 @@
 	usage_flags = PROGRAM_ALL
 	category = PROG_UTIL
 
-/datum/computer_file/program/ntnetdownload/on_shutdown()
+/datum/computer_file/program/exonetdownload/on_shutdown()
 	..()
 	downloaded_file = null
 	download_completion = 0
@@ -31,7 +31,7 @@
 	downloaderror = ""
 	ui_header = "downloader_finished.gif"
 
-/datum/computer_file/program/ntnetdownload/proc/begin_file_download(var/filename, skill)
+/datum/computer_file/program/exonetdownload/proc/begin_file_download(var/filename, skill)
 	if(downloaded_file)
 		return 0
 
@@ -49,7 +49,7 @@
 	generate_network_log("Began downloading file [file_info] from [server].")
 	downloaded_file = PRG.clone()
 
-/datum/computer_file/program/ntnetdownload/proc/check_file_download(var/filename)
+/datum/computer_file/program/exonetdownload/proc/check_file_download(var/filename)
 	//returns 1 if file can be downloaded, returns 0 if download prohibited
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
 	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
@@ -68,18 +68,18 @@
 
 	return 1
 
-/datum/computer_file/program/ntnetdownload/proc/hide_file_info(datum/computer_file/file, skill)
-	server = (file in ntnet_global.available_station_software) ? "NTNet Software Repository" : "unspecified server"
+/datum/computer_file/program/exonetdownload/proc/hide_file_info(datum/computer_file/file, skill)
+	//server = (file in ntnet_global.available_station_software) ? "NTNet Software Repository" : "unspecified server"
 	if(!hacked_download)
 		return "[file.filename].[file.filetype]"
 	var/stealth_chance = max(skill - SKILL_BASIC, 0) * 30
 	if(!prob(stealth_chance))
 		return "**ENCRYPTED**.[file.filetype]"
-	var/datum/computer_file/fake_file = pick(ntnet_global.available_station_software)
-	server = "NTNet Software Repository"
-	return "[fake_file.filename].[fake_file.filetype]"
+	//var/datum/computer_file/fake_file = pick(ntnet_global.available_station_software)julie pls fix
+	//server = "NTNet Software Repository"
+	//return "[fake_file.filename].[fake_file.filetype]"
 
-/datum/computer_file/program/ntnetdownload/proc/abort_file_download()
+/datum/computer_file/program/exonetdownload/proc/abort_file_download()
 	if(!downloaded_file)
 		return
 	generate_network_log("Aborted download of file [file_info].")
@@ -87,7 +87,7 @@
 	download_completion = 0
 	ui_header = "downloader_finished.gif"
 
-/datum/computer_file/program/ntnetdownload/proc/complete_file_download()
+/datum/computer_file/program/exonetdownload/proc/complete_file_download()
 	if(!downloaded_file)
 		return
 	generate_network_log("Completed download of file [file_info].")
@@ -98,7 +98,7 @@
 	download_completion = 0
 	ui_header = "downloader_finished.gif"
 
-/datum/computer_file/program/ntnetdownload/process_tick()
+/datum/computer_file/program/exonetdownload/process_tick()
 	if(!downloaded_file)
 		return
 	if(download_completion >= downloaded_file.size)
@@ -110,16 +110,16 @@
 	// Download speed according to connectivity state. NTNet server is assumed to be on unlimited speed so we're limited by our local connectivity
 	download_netspeed = 0
 	// Speed defines are found in misc.dm
-	switch(computer.get_exonet_status(NTNET_SOFTWAREDOWNLOAD))
+	switch(computer.get_exonet_status(NETWORK_SOFTWAREDOWNLOAD))
 		if(1)
-			download_netspeed = NTNETSPEED_LOWSIGNAL
+			download_netspeed = NETWORKSPEED_LOWSIGNAL
 		if(2)
-			download_netspeed = NTNETSPEED_HIGHSIGNAL
+			download_netspeed = NETWORKSPEED_HIGHSIGNAL
 		if(3)
-			download_netspeed = NTNETSPEED_ETHERNET
+			download_netspeed = NETWORKSPEED_ETHERNET
 	download_completion += download_netspeed
 
-/datum/computer_file/program/ntnetdownload/Topic(href, href_list)
+/datum/computer_file/program/exonetdownload/Topic(href, href_list)
 	if(..())
 		return 1
 	if(href_list["PRG_downloadfile"])
@@ -140,10 +140,10 @@
 		return 1
 	return 0
 
-/datum/nano_module/program/computer_ntnetdownload
+/datum/nano_module/program/computer_exonetdownload
 	name = "Network Downloader"
 
-/datum/nano_module/program/computer_ntnetdownload/proc/get_functional_network_card()
+/datum/nano_module/program/computer_exonetdownload/proc/get_functional_network_card()
 	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
 	var/obj/item/weapon/stock_parts/computer/network_card/network_card = os && os.get_component(/obj/item/weapon/stock_parts/computer/network_card)
 	if(!network_card || !network_card.check_functionality())
@@ -151,9 +151,9 @@
 		return
 	return network_card
 
-/datum/nano_module/program/computer_ntnetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/computer_exonetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
-	var/datum/computer_file/program/ntnetdownload/prog = program
+	var/datum/computer_file/program/exonetdownload/prog = program
 	// For now limited to execution by the downloader program
 	if(!prog || !istype(prog))
 		return

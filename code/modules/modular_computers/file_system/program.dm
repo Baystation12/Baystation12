@@ -1,7 +1,7 @@
 // /program/ files are executable programs that do things.
 /datum/computer_file/program
 	filetype = "PRG"
-	filename = "UnknownProgram"						// File name. FILE NAME MUST BE UNIQUE IF YOU WANT THE PROGRAM TO BE DOWNLOADABLE FROM NTNET!
+	filename = "UnknownProgram"						// File name. FILE NAME MUST BE UNIQUE IF YOU WANT THE PROGRAM TO BE DOWNLOADABLE FROM EXONET!
 	var/required_access = null						// List of required accesses to run/download the program.
 	var/requires_access_to_run = 1					// Whether the program checks for required_access when run.
 	var/requires_access_to_download = 1				// Whether the program checks for required_access when downloading.
@@ -15,18 +15,15 @@
 	var/program_icon_state = null					// Program-specific screen icon state
 	var/program_key_state = "standby_key"			// Program-specific keyboard icon state
 	var/program_menu_icon = "newwin"				// Icon to use for program's link in main menu
-	var/requires_ntnet = 0							// Set to 1 for program to require nonstop NTNet connection to run. If NTNet connection is lost program crashes.
 	var/requires_exonet = 0							// Set to 1 for program to require nonstop EXONET connection to run. If EXONET connection is lost, program crashes.
-	var/requires_ntnet_feature = 0					// Optional, if above is set to 1 checks for specific function of NTNet (currently NTNET_SOFTWAREDOWNLOAD, NTNET_PEERTOPEER, NTNET_SYSTEMCONTROL and NTNET_COMMUNICATION)
 	var/requires_exonet_feature = 0					// Optional, if above is set to 1 checks for specific function of EXONET (currently NETWORK_SOFTWAREDOWNLOAD, NETWORK_PEERTOPEER, NETWORK_SYSTEMCONTROL and NETWORK_COMMUNICATION)
-	var/ntnet_status = 1							// NTNet status, updated every tick by computer running this program. Don't use this for checks if NTNet works, computers do that. Use this for calculations, etc.
+	var/exonet_status = 1							// EXONET status, updated every tick by computer running this program. Don't use this for checks if EXONET works, computers do that. Use this for calculations, etc.
 	var/usage_flags = PROGRAM_ALL & ~PROGRAM_PDA	// Bitflags (PROGRAM_CONSOLE, PROGRAM_LAPTOP, PROGRAM_TABLET, PROGRAM_PDA combination) or PROGRAM_ALL
-	var/network_destination = null					// Optional string that describes what NTNet server/system this program connects to. Used in default logging.
-	var/available_on_ntnet = 1						// Whether the program can be downloaded from NTNet. Set to 0 to disable.
+	var/network_destination = null					// Optional string that describes what EXONET server/system this program connects to. Used in default logging.
 	var/available_on_syndinet = 0					// Whether the program can be downloaded from SyndiNet (accessible via emagging the computer). Set to 1 to enable.
 	var/computer_emagged = 0						// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null							// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
-	var/ntnet_speed = 0								// GQ/s - current network connectivity transfer rate
+	var/net_speed = 0								// GQ/s - current network connectivity transfer rate
 	var/operator_skill = SKILL_MIN                  // Holder for skill value of current/recent operator for programs that tick.
 
 /datum/computer_file/program/Destroy()
@@ -44,8 +41,8 @@
 	temp.nanomodule_path = nanomodule_path
 	temp.filedesc = filedesc
 	temp.program_icon_state = program_icon_state
-	temp.requires_ntnet = requires_ntnet
-	temp.requires_ntnet_feature = requires_ntnet_feature
+	temp.requires_exonet = requires_exonet
+	temp.requires_exonet_feature = requires_exonet_feature
 	temp.usage_flags = usage_flags
 	return temp
 
@@ -62,7 +59,7 @@
 		computer.update_host_icon()
 		return
 
-// Attempts to create a log in global ntnet datum. Returns 1 on success, 0 on fail.
+// Attempts to create a log in exonet datum. Returns 1 on success, 0 on fail.
 /datum/computer_file/program/proc/generate_network_log(var/text)
 	if(computer)
 		return computer.add_log(text)
@@ -86,14 +83,14 @@
 	return 1
 
 /datum/computer_file/program/proc/update_netspeed()
-	ntnet_speed = 0
-	switch(ntnet_status)
+	net_speed = 0
+	switch(exonet_status)
 		if(1)
-			ntnet_speed = NTNETSPEED_LOWSIGNAL
+			net_speed = NETWORKSPEED_LOWSIGNAL
 		if(2)
-			ntnet_speed = NTNETSPEED_HIGHSIGNAL
+			net_speed = NETWORKSPEED_HIGHSIGNAL
 		if(3)
-			ntnet_speed = NTNETSPEED_ETHERNET
+			net_speed = NETWORKSPEED_ETHERNET
 
 // Check if the user can run program. Only humans can operate computer. Automatically called in run_program()
 // User has to wear their ID or have it inhand for ID Scan to work.

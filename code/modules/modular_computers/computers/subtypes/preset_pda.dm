@@ -14,7 +14,7 @@
 	..()
 
 	hard_drive.store_file(new /datum/computer_file/program/email_client())
-	hard_drive.store_file(new /datum/computer_file/program/crew_manifest())
+//	hard_drive.store_file(new /datum/computer_file/program/crew_manifest())
 	hard_drive.store_file(new /datum/computer_file/program/wordprocessor())
 	hard_drive.store_file(new /datum/computer_file/program/records())
 	if(prob(50)) //harmless tax software

@@ -46,8 +46,8 @@
 	var/list/data = host.initial_data()
 
 	if(program)
-		data["net_comms"] = !!program.get_signal(NTNET_COMMUNICATION) //Double !! is needed to get 1 or 0 answer
-		data["net_syscont"] = !!program.get_signal(NTNET_SYSTEMCONTROL)
+		data["net_comms"] = !!program.get_signal(NETWORK_COMMUNICATION) //Double !! is needed to get 1 or 0 answer
+		data["net_syscont"] = !!program.get_signal(NETWORK_SYSTEMCONTROL)
 		if(program.computer)
 			data["emagged"] = program.computer.emagged()
 			data["have_printer"] =  program.computer.has_component(PART_PRINTER)
@@ -122,8 +122,8 @@
 	if(..())
 		return 1
 	var/mob/user = usr
-	var/ntn_comm = program ? !!program.get_signal(NTNET_COMMUNICATION) : 1
-	var/ntn_cont = program ? !!program.get_signal(NTNET_SYSTEMCONTROL) : 1
+	var/ntn_comm = program ? !!program.get_signal(NETWORK_COMMUNICATION) : 1
+	var/ntn_cont = program ? !!program.get_signal(NETWORK_SYSTEMCONTROL) : 1
 	var/datum/comm_message_listener/l = obtain_message_listener()
 	switch(href_list["action"])
 		if("sw_menu")
