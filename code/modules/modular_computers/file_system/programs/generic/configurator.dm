@@ -68,7 +68,7 @@
 			var/signal_strength = network.get_signal_strength(network_card, network_card.get_netspeed())
 			if(signal_strength <= 0)
 				data["signal_strength"] = "Not Connected"
-			else if(signal_strength <= 1)
+			else if(signal_strength <= 6)
 				data["signal_strength"] = "Low Signal"
 			else
 				data["signal_strength"] = "High Signal"

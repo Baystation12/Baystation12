@@ -29,6 +29,12 @@
 	else
 		icon_state = "bus_off"
 
+/obj/machinery/exonet/mainframe/proc/get_available_software()
+	var/list/programs = list()
+	for(var/datum/computer_file/program/prog in stored_files)
+		LAZYDISTINCTADD(programs, prog)
+	return programs
+
 /obj/machinery/exonet/mainframe/proc/get_log_file()
 	var/datum/computer_file/data/logfile/file = find_file_by_name("network_log")
 	if(!file)

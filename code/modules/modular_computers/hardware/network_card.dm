@@ -87,27 +87,21 @@
 	if(!network || is_banned())
 		return
 
-	if(!ntnet_global.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
+	if(!network.check_function(specific_action)) // NTNet is down and we are not connected via wired connection. No signal.
 		if(!ethernet || specific_action) // Wired connection ensures a basic connection to NTNet, however no usage of disabled network services.
 			return
 
-	var/strength = get_netspeed()
 	var/turf/T = get_turf(src)
 	if(!istype(T)) //no reception in nullspace
 		return
 
-	if(proxy_id)
-		var/datum/extension/interactive/ntos/comp = ntnet_global.get_os_by_nid(proxy_id)
-		if(!comp || !comp.on)
-			return 0
-		if(src in routed_through) // circular proxy chain
-			return 0
-		LAZYADD(routed_through, src)
-		var/obj/item/weapon/stock_parts/computer/network_card/network_card = comp.get_component(PART_NETWORK)
-		if(network_card)
-			. = min(., network_card.get_signal(specific_action, routed_through))
+	var/strength = network.get_signal_strength(src, get_netspeed())
+	if(strength <= 0)
+		return 0
+	else if(strength <= 6)
+		return 1
 	else
-		return strength
+		return 2
 
 /obj/item/weapon/stock_parts/computer/network_card/on_disable()
 	var/datum/extension/exonet_device/exonet = get_extension(src, /datum/extension/exonet_device)

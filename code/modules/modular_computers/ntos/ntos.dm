@@ -132,9 +132,13 @@
 		create_file("autorun", "[program]")
 
 /datum/extension/interactive/ntos/proc/add_log(var/text)
-	if(!get_ntnet_status())
+	if(!get_exonet_status())
 		return 0
-	return ntnet_global.add_log(text, get_component(PART_NETWORK))
+	var/network_card = get_component(PART_NETWORK)
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
+	if(network)
+		return network.add_log(text, network_card)
 
 /datum/extension/interactive/ntos/proc/get_physical_host()
 	var/atom/A = holder

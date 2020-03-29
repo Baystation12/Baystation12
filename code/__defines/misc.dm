@@ -118,6 +118,11 @@
 #define NTNET_COMMUNICATION 3		// Communication (messaging)
 #define NTNET_SYSTEMCONTROL 4		// Control of various systems, RCon, air alarm control, etc.
 
+#define	NETWORK_SOFTWAREDOWNLOAD 	1 // Downloads of software from EXONET
+#define NETWORK_PEERTOPEER 			2 // P2P transfers of files between devices
+#define NETWORK_COMMUNICATION 		3 // Communication (messaging)
+#define NETWORK_SYSTEMCONTROL 		4 // Control of various systems, RCon, air alarm control, etc.
+
 // NTNet transfer speeds, used when downloading/uploading a file/program.
 #define NTNETSPEED_LOWSIGNAL 0.5	// GQ/s transfer speed when the device is wirelessly connected and on Low signal
 #define NTNETSPEED_HIGHSIGNAL 1	// GQ/s transfer speed when the device is wirelessly connected and on High signal

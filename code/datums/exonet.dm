@@ -76,3 +76,20 @@ GLOBAL_LIST_INIT(exonets, new)
 			continue
 		best_signal = max(strength, best_signal)
 	return best_signal
+
+// Whether or not a specific function is capable on this network.
+/datum/exonet/proc/check_function(var/specific_action = 0)
+	return TRUE
+
+/datum/exonet/proc/get_available_software_by_category()
+	var/list/results = list()
+	for(var/obj/machinery/exonet/mainframe/mainframe in mainframes)
+		for(var/datum/computer_file/program/prog in mainframe.get_available_software())
+			LAZYDISTINCTADD(results[prog.category], prog)
+	return results
+
+/datum/exonet/proc/find_exonet_file_by_name(var/filename)
+	for(var/obj/machinery/exonet/mainframe/mainframe in mainframes)
+		for(var/datum/computer_file/program/P in mainframe.stored_files)
+			if(filename == P.filename)
+				return P

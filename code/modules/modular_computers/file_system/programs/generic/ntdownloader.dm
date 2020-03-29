@@ -1,6 +1,6 @@
 /datum/computer_file/program/ntnetdownload
 	filename = "ntndownloader"
-	filedesc = "NTNet Software Download Tool"
+	filedesc = "EXONET Software Download Tool"
 	program_icon_state = "generic"
 	program_key_state = "generic_key"
 	program_menu_icon = "arrowthickstop-1-s"
@@ -8,9 +8,8 @@
 	unsendable = 1
 	undeletable = 1
 	size = 4
-	requires_ntnet = 1
-	requires_ntnet_feature = NTNET_SOFTWAREDOWNLOAD
-	available_on_ntnet = 0
+	requires_exonet = 1
+	requires_exonet_feature = NETWORK_SOFTWAREDOWNLOAD
 	nanomodule_path = /datum/nano_module/program/computer_ntnetdownload/
 	ui_header = "downloader_finished.gif"
 	var/datum/computer_file/program/downloaded_file = null
@@ -36,21 +35,26 @@
 	if(downloaded_file)
 		return 0
 
-	var/datum/computer_file/program/PRG = ntnet_global.find_ntnet_file_by_name(filename)
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
+	var/datum/computer_file/program/PRG = network.find_exonet_file_by_name(filename)
 
 	if(!check_file_download(filename))
 		return 0
 
 	ui_header = "downloader_running.gif"
 
-	hacked_download = (PRG in ntnet_global.available_antag_software)
 	file_info = hide_file_info(PRG)
 	generate_network_log("Began downloading file [file_info] from [server].")
 	downloaded_file = PRG.clone()
 
 /datum/computer_file/program/ntnetdownload/proc/check_file_download(var/filename)
 	//returns 1 if file can be downloaded, returns 0 if download prohibited
-	var/datum/computer_file/program/PRG = ntnet_global.find_ntnet_file_by_name(filename)
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = computer.get_component(PART_NETWORK)
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
+	var/datum/computer_file/program/PRG = network.find_exonet_file_by_name(filename)
 
 	if(!PRG || !istype(PRG))
 		return 0
@@ -106,7 +110,7 @@
 	// Download speed according to connectivity state. NTNet server is assumed to be on unlimited speed so we're limited by our local connectivity
 	download_netspeed = 0
 	// Speed defines are found in misc.dm
-	switch(computer.get_ntnet_status(NTNET_SOFTWAREDOWNLOAD))
+	switch(computer.get_exonet_status(NTNET_SOFTWAREDOWNLOAD))
 		if(1)
 			download_netspeed = NTNETSPEED_LOWSIGNAL
 		if(2)
@@ -139,6 +143,14 @@
 /datum/nano_module/program/computer_ntnetdownload
 	name = "Network Downloader"
 
+/datum/nano_module/program/computer_ntnetdownload/proc/get_functional_network_card()
+	var/datum/extension/interactive/ntos/os = get_extension(nano_host(), /datum/extension/interactive/ntos)
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = os && os.get_component(/obj/item/weapon/stock_parts/computer/network_card)
+	if(!network_card || !network_card.check_functionality())
+		// error = "Error establishing connection. Are you using a functional and NTOSv2-compliant device?"
+		return
+	return network_card
+
 /datum/nano_module/program/computer_ntnetdownload/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
 	var/datum/computer_file/program/ntnetdownload/prog = program
@@ -148,6 +160,7 @@
 	if(program)
 		data = program.get_header_data()
 
+	data["network_unavailable"] = FALSE
 	// This IF cuts on data transferred to client, so i guess it's worth it.
 	if(prog.downloaderror) // Download errored. Wait until user resets the program.
 		data["error"] = prog.downloaderror
@@ -161,38 +174,32 @@
 	data["disk_size"] = program.computer.max_disk_capacity()
 	data["disk_used"] = program.computer.used_disk_capacity()
 	var/list/all_entries[0]
-	for(var/category in ntnet_global.available_software_by_category)
-		var/list/category_list[0]
-		for(var/datum/computer_file/program/P in ntnet_global.available_software_by_category[category])
-			// Only those programs our user can run will show in the list
-			if(!P.can_run(user) && P.requires_access_to_download)
-				continue
-			if(!P.is_supported_by_hardware(program.computer.get_hardware_flag(), user, TRUE))
-				continue
-			category_list.Add(list(list(
-			"filename" = P.filename,
-			"filedesc" = P.filedesc,
-			"fileinfo" = P.extended_desc,
-			"size" = P.size,
-			"icon" = P.program_menu_icon
-			)))
-		if(category_list.len)
-			all_entries.Add(list(list("category"=category, "programs"=category_list)))
+	var/obj/item/weapon/stock_parts/computer/network_card/network_card = get_functional_network_card()
+	var/datum/extension/exonet_device/exonet = get_extension(network_card, /datum/extension/exonet_device)
+	var/datum/exonet/network = exonet.get_local_network()
+	if(!network)
+		data["network_unavailable"] = TRUE
+	else
+		var/list/available_software_by_category = network.get_available_software_by_category()
+		for(var/category in available_software_by_category)
+			var/list/category_list[0]
+			for(var/datum/computer_file/program/P in available_software_by_category[category])
+				// Only those programs our user can run will show in the list
+				if(!P.can_run(user) && P.requires_access_to_download)
+					continue
+				if(!P.is_supported_by_hardware(program.computer.get_hardware_flag(), user, TRUE))
+					continue
+				category_list.Add(list(list(
+				"filename" = P.filename,
+				"filedesc" = P.filedesc,
+				"fileinfo" = P.extended_desc,
+				"size" = P.size,
+				"icon" = P.program_menu_icon
+				)))
+			if(category_list.len)
+				all_entries.Add(list(list("category"=category, "programs"=category_list)))
 
 	data["hackedavailable"] = 0
-	if(prog.computer.emagged()) // If we are running on emagged computer we have access to some "bonus" software
-		var/list/hacked_programs[0]
-		for(var/datum/computer_file/program/P in ntnet_global.available_antag_software)
-			data["hackedavailable"] = 1
-			hacked_programs.Add(list(list(
-			"filename" = P.filename,
-			"filedesc" = P.filedesc,
-			"fileinfo" = P.extended_desc,
-			"size" = P.size,
-			"icon" = P.program_menu_icon
-			)))
-		data["hacked_programs"] = hacked_programs
-
 	data["downloadable_programs"] = all_entries
 
 	if(prog.downloads_queue.len > 0)
@@ -203,7 +210,7 @@
 
 	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "ntnet_downloader.tmpl", "NTNet Download Program", 575, 700, state = state)
+		ui = new(user, src, ui_key, "ntnet_downloader.tmpl", "EXONET Download Program", 575, 700, state = state)
 		ui.auto_update_layout = 1
 		ui.set_initial_data(data)
 		ui.open()
