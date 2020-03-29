@@ -118,6 +118,8 @@
 		playsound(map_sectors["[map_sectors[1]]"], 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
 		for(var/f in factions)
 			var/datum/faction/F = f
+			if(!F.name in fleet_list)
+				fleet_list[F.name] = list()
 			var/list/faction_fleet = fleet_list[F.name]
 			if(faction_fleet == null)
 				fleet_list[F.name] = list()
