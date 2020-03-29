@@ -82,7 +82,9 @@
 	active = 1
 	playsound(loc, arm_sound, 75, 0, -3)
 
-	spawn(det_time)
+	spawn()
+		for(var/i=0, i<det_time, i++)
+			sleep(1-clamp(max(0,world.tick_usage-100)*0.01,0,0.5))
 		detonate()
 		return
 
