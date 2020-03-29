@@ -135,6 +135,9 @@
 				fleet_size = faction_fleet.len/2
 			var/datum/npc_fleet/new_fleet = new
 			for(var/s in faction_fleet)
+				if(isnull(s))
+					faction_fleet -= s
+					continue
 				var/obj/effect/overmap/ship/npc_ship/combat/ship = s
 				if(ship.our_fleet)
 					var/obj/effect/overmap/ship/lead = ship.our_fleet.leader_ship
@@ -147,6 +150,7 @@
 					faction_fleet -= ship
 					continue
 
+				ship.last_radio_time = 0
 				if(ship.loc != null)
 					ship.radio_message("I'm pulling out to regroup.")
 					ship.last_radio_time = 0
