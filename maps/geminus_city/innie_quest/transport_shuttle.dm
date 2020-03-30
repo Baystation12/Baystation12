@@ -7,8 +7,11 @@
 	location = 0
 	flags = SHUTTLE_FLAGS_PROCESS
 
+	/*
 	var/fuel_left = 100
 	var/fuel_max = 100
+	*/
+	var/obj/item/fusion_fuel/held_fuel
 	var/fuel_efficiency = 1000
 	var/atmos_speed = 120000
 	var/fake_launch = 0
@@ -85,3 +88,39 @@
 		next_distance =  0
 	else
 		next_name = "Rabbit Hole Base"
+
+/obj/machinery/shuttle_fuel
+	name = "thruster fuel loader"
+	desc = "An automated loading device for a fusion thruster to insert and remove deuterium fuel packets."
+	icon = 'code/modules/halo/overmap/fusion_thruster.dmi'
+	icon_state = "loader"
+	anchored = 1
+	var/obj/item/fusion_fuel/held_fuel
+	var/datum/shuttle/autodock/ferry/geminus_innie_transport/my_shuttle
+
+/obj/machinery/shuttle_fuel/New()
+	. = ..()
+	held_fuel = new(src)
+
+/obj/machinery/shuttle_fuel/attack_hand(var/mob/user)
+	if(isliving(user))
+		if(held_fuel)
+			src.visible_message("<span class='info'>[src] ejects it's spent [held_fuel].</span>")
+			held_fuel.loc = src.loc
+			held_fuel = null
+			//icon_state = "nozzle0"
+			if(my_shuttle)
+				my_shuttle.held_fuel = null
+		else
+			to_chat(user, "<span class='notice'>[src] does not contain a deuterium fuel packet!</span>")
+
+/obj/machinery/shuttle_fuel/attackby(var/obj/I, var/mob/user)
+	if(isliving(user))
+		if(istype(I, /obj/item/fusion_fuel))
+			user.drop_item()
+			I.loc = src
+			held_fuel = I
+			if(my_shuttle)
+				my_shuttle.held_fuel = held_fuel
+			//icon_state = "nozzle1"
+			to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
