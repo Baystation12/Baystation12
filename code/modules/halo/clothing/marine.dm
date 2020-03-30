@@ -334,7 +334,7 @@
 	icon_override = MARINE_OVERRIDE
 	item_state = "evalegs"
 	icon_state = "evalegs"
-	item_flags = NOSLIP|STOPPRESSUREDAMAGE|AIRTIGHT
+	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
 	can_hold_knife = 1
 	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 30, bio = 100, rad = 50)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
