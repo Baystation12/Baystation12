@@ -11,6 +11,7 @@
 	reload_sound = 'code/modules/halo/sounds/Shotgun_Reload_New.wav'
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	max_shells = 8
+	fire_delay = 8
 	one_hand_penalty = -1
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
