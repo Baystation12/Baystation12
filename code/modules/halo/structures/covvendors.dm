@@ -89,8 +89,8 @@
 	desc = "Storage for Covenant Sangheili weapons and ammo"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/energy/plasmapistol = 15,/obj/item/weapon/gun/energy/plasmarifle = 5,/obj/item/weapon/gun/projectile/type31needlerifle = 3
-		,/obj/item/weapon/gun/projectile/type51carbine = 3,/obj/item/ammo_magazine/rifleneedlepack = 24,/obj/item/ammo_magazine/type51mag = 24,/obj/item/weapon/grenade/plasma = 12)
+	products = list(/obj/item/weapon/gun/energy/plasmapistol = 15,/obj/item/weapon/gun/energy/plasmarifle = 5,/obj/item/weapon/gun/projectile/type31needlerifle = 3,/obj/item/weapon/gun/projectile/needler = 3,
+	/obj/item/ammo_magazine/needles = 32,,/obj/item/weapon/gun/projectile/type51carbine = 3,/obj/item/ammo_magazine/rifleneedlepack = 30,/obj/item/ammo_magazine/type51mag = 30,/obj/item/weapon/grenade/plasma = 12)
 
 /obj/machinery/vending/armory/covenant/sangheili/equipment // Equipment for Sangheili
 	name = "Covenant - Sangheili Equipment Vendor"
@@ -139,9 +139,9 @@
 	desc = "Storage for Covenant Kig-Yar weapons and ammo"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/energy/plasmapistol = 15,/obj/item/weapon/gun/projectile/needler = 1,/obj/item/weapon/gun/projectile/type51carbine = 6
-		,/obj/item/ammo_magazine/needles = 6,/obj/item/ammo_magazine/type51mag = 24,/obj/item/weapon/gun/projectile/type31needlerifle = 2,/obj/item/ammo_magazine/rifleneedlepack = 24,/obj/item/weapon/grenade/plasma = 6,/obj/item/weapon/melee/blamite/cutlass = 1
-		,/obj/item/weapon/melee/energy/elite_sword/dagger = 4)
+	products = list(/obj/item/weapon/gun/energy/plasmapistol = 15,/obj/item/weapon/gun/projectile/needler = 2,/obj/item/weapon/gun/projectile/type51carbine = 6
+		,/obj/item/ammo_magazine/needles = 24,/obj/item/ammo_magazine/type51mag = 24,/obj/item/weapon/gun/projectile/type31needlerifle = 2,/obj/item/ammo_magazine/rifleneedlepack = 24,/obj/item/weapon/grenade/plasma = 8,/obj/item/weapon/melee/blamite/cutlass = 3
+		,/obj/item/weapon/melee/energy/elite_sword/dagger = 8)
 
 /obj/machinery/vending/armory/covenant/kigyar/equipment // Equipment for Kig-Yar
 	name = "Covenant - Kig-Yar Equipment Vendor"
@@ -190,7 +190,7 @@
 	desc = "Storage for Covenant Kig-Yar equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 2,/obj/item/turret_deploy_kit/plasturret = 2)
+	products = list(/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 3,/obj/item/turret_deploy_kit/plasturret = 2)
 
 /obj/machinery/vending/armory/covenant/sangheili/food
 	name = "Covenant - Sangheili Food Vendor"
