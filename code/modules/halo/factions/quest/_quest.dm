@@ -84,10 +84,10 @@
 	accepted_quests.Remove(Q)
 	if(Q.quest_status == STATUS_PROGRESS)
 		//lose the reputation
-		var/favour_multiplier = -1.5
+		var/favour_multiplier = -0.5//-1.5
 		if(abandoned)
 			Q.quest_status = STATUS_ABANDON
-			favour_multiplier = -2
+			favour_multiplier = -0.1
 		add_faction_reputation(attempting_faction.name, Q.favour_reward * favour_multiplier)
 		completed_quests.Add(Q)
 	else
