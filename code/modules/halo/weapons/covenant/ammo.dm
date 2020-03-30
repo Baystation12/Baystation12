@@ -114,7 +114,7 @@
 /obj/item/projectile/bullet/covenant/needles
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
-	damage = 10 // Low damage, special effect would do the most damage.
+	damage = 20 // Low damage, special effect would do the most damage.
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
@@ -145,12 +145,13 @@
 				qdel(I)
 	if(prob(NEEDLER_EMBED_PROB)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
 		var/obj/item/weapon/material/shard/shrapnel/needleshrap/shard = new
-		var/obj/item/organ/external/embed_organ = pick(L.organs)
 		shard.name = shard_name
 		shard.die_at = world.time + NEEDLER_SHARD_DET_TIME
 		GLOB.processing_objects += shard
 		shard.our_dam = damage / 4
-		embed_organ.embed(shard)
+		//We're doing some speshul things here with out embed, so let's not do the usual damage.
+		L.contents += shard
+		L.embedded += shard
 	. = ..()
 
 /obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
