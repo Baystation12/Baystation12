@@ -8,10 +8,12 @@
 	check_armour = "energy"
 	embed = 0
 	sharp = 0
+	var/use_covenant_burndam_override = 1
 
 /obj/item/projectile/bullet/covenant/attack_mob()
-	damage_type = BURN
-	damtype = BURN
+	if(use_covenant_burndam_override)
+		damage_type = BURN
+		damtype = BURN
 	return ..()
 
 /obj/item/projectile/bullet/covenant/trainingpistol
@@ -124,6 +126,7 @@
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
+	use_covenant_burndam_override = 0
 
 /obj/item/projectile/bullet/covenant/needles/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
 	if(!istype(L))
@@ -134,7 +137,7 @@
 		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
-			explosion(L.loc,-1,1,2,5,alt_explosion_damage = 100,alt_explosion_range = 1)
+			explosion(L.loc,-1,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
 			for(var/obj/I in embedded_shards)
 				L.embedded -= I
 				L.pinned -= I
@@ -152,6 +155,7 @@
 		//We're doing some speshul things here with out embed, so let's not do the usual damage.
 		L.contents += shard
 		L.embedded += shard
+		visible_message("<span class = 'warning'>[src] embeds into [L]</span>")
 	. = ..()
 
 /obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
@@ -205,6 +209,7 @@
 	invisibility = 101
 	embed = 1
 	sharp = 1
+	use_covenant_burndam_override = 0
 
 /obj/item/projectile/bullet/covenant/type51carbine/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
