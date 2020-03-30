@@ -10,7 +10,7 @@
 	icon_state = "M739"
 	item_state = "SAW"
 	caliber = "a762"
-	slot_flags = 0	//too unwieldy to carry on your back
+	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762_box_ap
 	allowed_magazines = list(/obj/item/ammo_magazine/a762_box_ap) //Disallows loading normal ma5b mags into the LMG.
