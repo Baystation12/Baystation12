@@ -189,6 +189,8 @@
 #define SUIT_SENSOR_VITAL    2
 #define SUIT_SENSOR_TRACKING 3
 
+#define SUIT_SENSOR_MODES list("Off" = SUIT_SENSOR_OFF, "Binary sensors" = SUIT_SENSOR_BINARY, "Vitals tracker" = SUIT_SENSOR_VITAL, "Tracking beacon" = SUIT_SENSOR_TRACKING)
+
 #define SUIT_NO_SENSORS 0
 #define SUIT_HAS_SENSORS 1
 #define SUIT_LOCKED_SENSORS 2
