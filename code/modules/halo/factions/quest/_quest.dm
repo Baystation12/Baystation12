@@ -33,6 +33,12 @@
 	var/time_failed = 0
 	var/area/instance_area
 
+	var/static/list/map_references = list(\
+	'maps/submaps/civilian/factory1.dmm' = "Factory",\
+	'maps/submaps/civilian/drugalug1.dmm' = "Slums",\
+	'maps/submaps/civilian/bank1.dmm' = "Bank vault"\
+	)
+
 /datum/npc_quest/proc/get_status_text()
 	switch(quest_status)
 		if(STATUS_AVAIL)

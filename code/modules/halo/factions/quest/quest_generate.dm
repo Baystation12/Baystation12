@@ -25,7 +25,7 @@
 
 	//quest type
 	new_quest.quest_type = pick(OBJ_KILL, OBJ_ASSASSINATE, OBJ_STEAL)
-	new_quest.map_path = pick('maps/submaps/civilian/factory1.dmm','maps/submaps/civilian/bank1.dmm','maps/submaps/civilian/drugalug1.dmm')
+	new_quest.map_path = pick(new_quest.map_references)
 	switch(new_quest.quest_type)
 		if(OBJ_KILL)
 			//kill simple mobs
