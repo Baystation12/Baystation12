@@ -430,3 +430,9 @@ RADIATION_LOWER_LIMIT 0.15
 ## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
 ## Spaces are prohibited in each URL by spec, you must use encoded spaces.
 #RESOURCE_URLS URL URL2 URL3
+
+## Fluentd server to send log messages to.
+## Server must be compiled with USE_STRUCTURED_LOGGING defined.
+#FORWARD_LOGS_HOST some.fluentd.host:24224
+## Tag to use for fluentd log messages.
+#FORWARD_LOGS_TAG ss13.game

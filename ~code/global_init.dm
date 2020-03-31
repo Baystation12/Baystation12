@@ -14,6 +14,9 @@ var/global/datum/global_init/init = new ()
 */
 /datum/global_init/New()
 	load_configuration()
+	#ifdef USE_STRUCTURED_LOGGING
+	call(LOG_DLL_LOCATION, "fluey_start")(config.forward_logs_host, config.forward_logs_tag)
+	#endif
 	callHook("global_init")
 	qdel(src) //we're done
 

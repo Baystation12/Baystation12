@@ -34,6 +34,9 @@
 	to_world_log("## TESTING: [msg][log_end]")
 
 /proc/game_log(category, text)
+	#ifdef USE_STRUCTURED_LOGGING
+	call(LOG_DLL_LOCATION, "fluey_log")("game_time", time_stamp(), "game_id", game_id, "message_category", category, "message", text)
+	#endif
 	diary << "\[[time_stamp()]] [game_id] [category]: [text][log_end]"
 
 /proc/log_admin(text)

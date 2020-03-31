@@ -13,23 +13,31 @@ RUN apt-get update && apt-get install -y curl git gcc-multilib;\
 	rustup default stable;\
 	rustup target add i686-unknown-linux-gnu
 
-RUN git clone https://github.com/Lohikar/byhttp.git || true
+RUN git clone https://github.com/Lohikar/byhttp.git /byhttp || true
 WORKDIR /byhttp
 RUN mkdir to_copy;\
 	cargo build --release --target i686-unknown-linux-gnu;\
 	mv -t to_copy target/i686-unknown-linux-gnu/release/libbyhttp.so || true
+
+RUN git clone https://github.com/mloc/fluey.git /fluey || true
+WORKDIR /fluey
+RUN mkdir to_copy;\
+	cargo build --release --target i686-unknown-linux-gnu;\
+	mv -t to_copy target/i686-unknown-linux-gnu/release/libfluey.so || true
 
 FROM xales/byond:512-latest
 
 ARG BUILD_ARGS
 ENV RUNAS=root
 
-COPY . /bs12
+RUN apt-get update && apt-get install -y gosu
+
 COPY --from=0 /byhttp/to_copy /bs12/lib
+COPY --from=0 /fluey/to_copy /bs12/lib
+COPY . /bs12
 
 WORKDIR /bs12
-RUN apt-get update && apt-get install -y gosu
-RUN scripts/dm.sh $BUILD_ARGS baystation12.dme
+RUN scripts/dm.sh $BUILD_ARGS -DUSE_STRUCTURED_LOGGING baystation12.dme
 
 EXPOSE 8000
 VOLUME /bs12/data

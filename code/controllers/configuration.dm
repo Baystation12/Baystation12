@@ -233,6 +233,9 @@ var/list/gamemode_cache = list()
 	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
 	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
 
+	var/forward_logs_host = "" // Fluentd host to send log messages to
+	var/forward_logs_tag = "ss13.game" // Tag to use for fluentd logs
+
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
@@ -758,6 +761,11 @@ var/list/gamemode_cache = list()
 					config.max_acts_per_interval = text2num(value)
 				if ("act_interval")
 					config.act_interval = text2num(value) SECONDS
+
+				if ("forward_logs_host")
+					config.forward_logs_host = value
+				if ("forward_logs_tag")
+					config.forward_logs_tag = value
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
