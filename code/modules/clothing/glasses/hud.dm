@@ -37,6 +37,7 @@
 	desc = "A medical HUD integrated with a wide visor."
 	icon_state = "medhud_visor"
 	item_state = "medhud_visor"
+	body_parts_covered = EYES
 
 /obj/item/clothing/glasses/hud/security
 	name = "security HUD"
