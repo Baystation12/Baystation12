@@ -4139,6 +4139,7 @@
 "jM" = (
 /obj/machinery/access_button/airlock_interior{
 	command = "cycle_exterior";
+	frequency = 1331;
 	master_tag = "ascent_port_shuttle_dock";
 	pixel_x = 24
 	},
