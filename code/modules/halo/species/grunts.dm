@@ -23,6 +23,8 @@
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/grunt_punch)
 	can_operate_advanced_covenant = 0
+	can_force_door = 1
+
 
 	breath_type = "methane"
 	exhale_type = "carbon_dioxide"
