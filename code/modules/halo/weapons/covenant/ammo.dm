@@ -183,7 +183,7 @@
 	if(locked_target)
 		redirect(locked_target, loc)
 		dir = get_dir(loc,locked_target)
-	if(initial(kill_count) - kill_count >= mass_track_steps * 2)
+	if(initial(kill_count) - kill_count >= max_track_steps)
 		locked_target = null
 
 /obj/item/ammo_magazine/type51mag
