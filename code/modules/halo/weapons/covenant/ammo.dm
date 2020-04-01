@@ -123,10 +123,15 @@
 	sharp = 1
 	armor_penetration = 20
 	step_delay = 0.75 //slower than most
+	var/max_track_steps = 6
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
 	use_covenant_burndam_override = 0
+
+/obj/item/projectile/bullet/covenant/needles/New()
+	. = ..()
+	max_track_steps *= 2//We only track every other kill-count decrement.
 
 /obj/item/projectile/bullet/covenant/needles/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
 	if(!istype(L))
@@ -178,6 +183,8 @@
 	if(locked_target)
 		redirect(locked_target, loc)
 		dir = get_dir(loc,locked_target)
+	if(initial(kill_count) - kill_count >= mass_track_steps * 2)
+		locked_target = null
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"
@@ -240,8 +247,6 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
-#define RIFLENEEDLE_TRACK_DIST 2
-
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
 	damage = 30
@@ -252,11 +257,7 @@
 	invisibility = 101
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
-
-/obj/item/projectile/bullet/covenant/needles/rifleneedle/Move()
-	if(kill_count - initial(kill_count) > RIFLENEEDLE_TRACK_DIST)
-		locked_target = null
-	. = ..()
+	max_track_steps = 3
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
