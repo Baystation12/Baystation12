@@ -33,6 +33,12 @@
 	var/time_failed = 0
 	var/area/instance_area
 
+	var/static/list/map_references = list(\
+	'maps/submaps/civilian/factory1.dmm' = "Factory",\
+	'maps/submaps/civilian/drugalug1.dmm' = "Slums",\
+	'maps/submaps/civilian/bank1.dmm' = "Bank vault"\
+	)
+
 /datum/npc_quest/proc/get_status_text()
 	switch(quest_status)
 		if(STATUS_AVAIL)
@@ -78,10 +84,10 @@
 	accepted_quests.Remove(Q)
 	if(Q.quest_status == STATUS_PROGRESS)
 		//lose the reputation
-		var/favour_multiplier = -1.5
+		var/favour_multiplier = -0.5//-1.5
 		if(abandoned)
 			Q.quest_status = STATUS_ABANDON
-			favour_multiplier = -2
+			favour_multiplier = -0.1
 		add_faction_reputation(attempting_faction.name, Q.favour_reward * favour_multiplier)
 		completed_quests.Add(Q)
 	else

@@ -91,7 +91,7 @@
 				"favour_reward" = Q.favour_reward,\
 				"credit_reward" = Q.credit_reward,\
 				"difficulty_desc" = Q.get_difficulty_text(),\
-				"location_name" = Q.location_name,\
+				"location_name" = Q.location_name + " ([Q.map_references[Q.map_path]])",\
 				"status_desc" = Q.get_status_text(),\
 				"target" = Q.enemy_faction,\
 				"time_left" = Q.get_time_left(),\

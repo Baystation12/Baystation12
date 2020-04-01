@@ -40,8 +40,8 @@
 	data["shuttle_connected"] = my_shuttle ? 1 : 0
 	if(my_shuttle)
 		data["atmos_speed"] = my_shuttle.atmos_speed
-		data["fuel_left"] = my_shuttle.fuel_left
-		data["fuel_max"] = my_shuttle.fuel_max
+		data["fuel_left"] = my_shuttle.held_fuel ? my_shuttle.held_fuel.fuel_left : 0
+		data["fuel_max"] = my_shuttle.held_fuel ? my_shuttle.held_fuel.max_fuel : 0
 		data["fuel_efficiency"] = my_shuttle.fuel_efficiency
 		//
 		data["shuttle_status"] = get_shuttle_status()
@@ -116,8 +116,9 @@
 
 		var/obj/item/modular_computer/MC = nano_host()
 		var/fuel_needed = my_shuttle.next_distance / my_shuttle.fuel_efficiency
-		if(my_shuttle.fuel_left >= fuel_needed)
-			if(my_shuttle.fuel_left < 20 && alert("You are critically low on fuel. Launch anyway?","Low fuel","Continue","Abort") == "Abort")
+		var/fuel_left = my_shuttle.held_fuel ? my_shuttle.held_fuel.max_fuel : 0
+		if(fuel_left >= fuel_needed)
+			if(fuel_left < 20 && alert("You are critically low on fuel. Launch anyway?","Low fuel","Continue","Abort") == "Abort")
 				return
 
 			to_chat(user, "\icon[MC] <span class='notice'>Shuttle launching...</span>")
