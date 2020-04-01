@@ -431,7 +431,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/specie
 	icon = SANGHEILI_ARMOUR_ICON
 	icon_state = "ranger_legs_obj"
 	item_state = "ranger_legs"
-	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT|NOSLIP
+	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
 	body_parts_covered = LEGS|FEET
 	cold_protection = LEGS|FEET
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE

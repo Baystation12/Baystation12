@@ -8,7 +8,7 @@
 	w_class = ITEM_SIZE_HUGE
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarepeater
-	slot_flags = 0	//too unwieldy to carry on your back
+	slot_flags = SLOT_BACK
 	one_hand_penalty = -1
 	//burst = 6
 	max_shots =450

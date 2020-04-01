@@ -44,7 +44,7 @@
 
 /obj/item/projectile/overmap/ship_scanner/scanner_projectile/on_impact(var/atom/impacted)
 	var/obj/effect/overmap/om_obj = impacted
-	if(isnull(om_obj) || isnull(console_fired_by))
+	if(!istype(om_obj) || isnull(console_fired_by))
 		return
 	var/obj/effect/overmap/ship/npc_ship/npc = om_obj
 	if(om_obj.hull_segments.len == 0 && !istype(npc))

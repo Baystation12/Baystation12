@@ -113,15 +113,16 @@
 /area/exo_research_facility/roof/exterior/northeastr
 	name = "VT9-042 Rooftop Exterior"
 
-/area/exo_research_facility/sublevel1/exterior/Caves
-	name = "VT9 Lower Caves"
-	dynamic_lighting = 1
-	luminosity = 0
-
 /area/exo_research_facility/sublevel1/interior
 	dynamic_lighting = 0
 	luminosity = 1
 	requires_power = 0
+
+/area/exo_research_facility/sublevel1/exterior/Caves
+	name = "VT9 Lower Caves"
+	dynamic_lighting = 1
+	luminosity = 0
+	base_turf = /turf/simulated/floor/asteroid/planet
 
 /area/exo_research_facility/sublevel1/interior/xenoresearch
 	name = "Crescent Base Xeno-Research"

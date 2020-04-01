@@ -94,7 +94,6 @@
 	siemens_coefficient = 0.7
 	can_hold_knife = 1
 	body_parts_covered = FEET|LEGS
-	item_flags = NOSLIP
 
 /obj/item/clothing/head/helmet/swat/police//light
 	icon = 'code/modules/halo/clothing/gcpd.dmi'

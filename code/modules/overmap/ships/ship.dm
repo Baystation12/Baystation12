@@ -224,6 +224,9 @@
 
 /obj/effect/overmap/ship/proc/break_umbilicals(var/force_break = 0)
 	for(var/obj/docking_umbilical/umbi in connectors)
+		if(isnull(umbi))
+			connectors -= umbi
+			continue
 		if(force_break || (umbi.current_connected && get_dist(umbi.our_ship,umbi.current_connected.our_ship) > 1))
 			umbi.current_connected.umbi_rip()
 			umbi.umbi_rip()

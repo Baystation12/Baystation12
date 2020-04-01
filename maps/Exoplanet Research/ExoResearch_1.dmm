@@ -58,6 +58,7 @@
 "bf" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/sciencecrew)
 "bg" = (/obj/machinery/button/remote/blast_door{_wifi_id = "Security Checkpoint 1111"; id = "Security Checkpoint 1111"; name = "Decontamination Containment Control"; pixel_x = 32; pixel_y = 0},/turf/simulated/floor/tiled/dark,/area/exo_research_facility/ground/interior/sciencecrew)
 "bh" = (/mob/living/simple_animal/thinbug,/turf/simulated/mineral/random,/area/exo_research_facility/ground/exterior/umbilical)
+"bi" = (/obj/machinery/vending/armory/medical,/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "bj" = (/obj/effect/dummy/spell_jaunt,/turf/simulated/mineral/random,/area/exo_research_facility/ground/exterior/Caves)
 "bk" = (/obj/structure/table/steel_reinforced,/obj/machinery/light/spot{dir = 8},/obj/item/weapon/pickaxe/jackhammer,/obj/item/weapon/pickaxe/jackhammer,/obj/item/weapon/pickaxe/jackhammer,/obj/item/weapon/pickaxe/jackhammer,/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/sciencecrew)
 "bl" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/storage/excavation,/obj/item/weapon/storage/excavation,/obj/item/weapon/storage/excavation,/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/sciencecrew)
@@ -164,7 +165,6 @@
 "dk" = (/obj/machinery/chemical_dispenser/full,/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "dl" = (/obj/machinery/sleeper{tag = "icon-sleeper_0 (EAST)"; icon_state = "sleeper_0"; dir = 4},/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "dm" = (/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
-"dn" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/exo_research_facility/ground/interior/medicalb)
 "do" = (/obj/structure/flora/ausbushes/fullgrass,/turf/simulated/floor/exoplanet/desert,/area/exo_research_facility/ground/exterior/perimeter)
 "dp" = (/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/exo_research_facility/ground/exterior/courtyard)
 "dq" = (/obj/vehicles/warthog,/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/exo_research_facility/ground/exterior/courtyard)
@@ -555,7 +555,7 @@ HnacacacacacacacacacacbzbAaeaeaCfTahcfcgcgcgaqaqakcharbScicicibmbmakarararararak
 HnacacacacacaMacacacacacadaeaeaeagbPcucgcgcgaqaqakararcvcwcwcwcxbmakaQarararcFakbmbmbmbmbmakaqaqaqaqaqaqaqaqaqaqaqalcyauauauauczcAalalalalalalbMaucBcCauauaIaqaqcgcgcgamanagacacacacacacacaMacacacacacacacaMacacacacacacacacacacacacacacacacacacppacHYppppacSpSpSpacacHYacacacacacacacacacacacacacacacacaaHn
 HnacacacacacacacacacacacadaeaeaeagahcucgcgcDaqaqakararakakakakakakakarararararakcGcHcHcHcIakaqaqaqaqaqaqaqaqaqaqaqalcJcKcLcJcJcMcNcNcNcOalalalcPaucQcRcSauaIaqaqcDcgcgcTanagacacacacacacacaMaMacacacacacacaMaMacacacacacacacacacbbbbbbbbbbacacacacacHYppppacacacSpppacacacacacacacacacacacppacacacacaaaaaaHn
 HnacacacacacacacacacacacbzbAaeaeagahcucgcgcgaqaqakaSarakakakakakakakakakakakakakakakakakakakaqaqcWcXcXcXcYcYcZaqaqalalaldadbdaalalalaldcalalalalalalalalalalaqaqcgcgcgamanagacacacacacacacacaMaMacacacacacacaMaMacacacacacacacacacacacacacacacacacppHYppppppacacSpppHYacacacXiacacacacacppppacacacaaaaaaaaHn
-HnacacacacacacacacacacacacadaeaeagahcucgcgcgaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqdddedfdfdgdfdfdhaqaqdididididididididjdkdkdidldmdndndididididiaqaqcgcgcgamanagacacacacacacacacacaMaMaMacacacacacaMacacaaaaacacacacacacacacacacacacacppHYppppppppacppppHYHYppSpacacacppppHYppppacacacaaaaaaaaHn
+HnacacacacacacacacacacacacadaeaeagahcucgcgcgaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqdddedfdfdgdfdfdhaqaqdididididididididjdkdkdidldmbibidididididiaqaqcgcgcgamanagacacacacacacacacacaMaMaMacacacacacaMacacaaaaacacacacacacacacacacacacacppHYppppppppacppppHYHYppSpacacacppppHYppppacacacaaaaaaaaHn
 HnacacacacaMacacacacacacacadaeaeagahcudocgcDaqaqddaqaqaqaqaqaqaqaqaqaqaqaqaqaqaqddaqaqaqaqaqaqaqdedqdpdgdqdpdhaqaqaqaqaqaqaqaqaqdidrdmdsdidtdmdmdsdididididiaqaqcDdocgamanagacacacacacacacacacacacaMacacacacacaMacacaaaaaaaaacacaoacacacacacacacppppHYppFPFPppppppppHYHYppSpSpacacppppHYacacacacacacaaaaaaHn
 HnacacacacacacacacaMacacacbzbAaeagahcucgcgcgaqdxcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYcYdydpdpdgdpdpdhddaqaqaqaqaqaqaqaqdidzdAdmdidldmdmdmdBdCdDdEdiaqaqcgcgcgamanagacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaacacacacacacacacacppppHYppFPFPppacppppHYHYppppSpacacppppacacppacacacacaaaaaaHn
 HnacacacacacacacacacacacacacadaeagbPcucgcgcgaqdedfdfdfdfdpdpdpdpdpdpdpdFdFdpdpdpdpdpdpdpdpdpdpdpdpdpdpdpdpdpdhaqaqaqaqaqaqaqaqaqdidididGdidHdIdmdmdBdJdmdKdiaqaqcgcgcgamanagacacacacacacacacacacacacacacacacacacacaaaaaaaaaaaaacacacacacacacacacppppHYppppppppacppppHYHYppppSpacacppacacppppacacacacacaaaaHn
@@ -670,4 +670,3 @@ Hnaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacacaaacaaaaaaaaaaaaaaaaaaacac
 HnaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeafacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacachfhfhfhfhfhfhfhfaVhfhfhfhfhfhfhfaVaVaVaVhfhfhfhfhfhfhfhfhfhfhfhfhfhfhfaVaVaVaVaVaVaVaVaVaVaVaVhfiHhfaVaVaVaVaVhfaVaVctctctiwiwctiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwiwctiwaVaVaVaVaVaVaVaVaVlU
 ypHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnHnlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUQSlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlUCfCfCfCfCfCfCfCfCfCfCfKQCfCfCfCfCfCfCfCfCfCfCfCfCfCfCflUlUlUlUlUlUlUlUlUlUlUlUlUlUlUlU
 "}
-

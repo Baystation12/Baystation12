@@ -158,7 +158,7 @@
 	if(isnull(loc))
 		return
 	if(our_fleet && our_fleet.leader_ship != src && our_fleet.leader_ship.loc != null)
-		target_loc = pick(range(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
+		target_loc = pick(trange(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
 		return
 	var/list/sectors_onmap = list()
 	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
@@ -169,11 +169,10 @@
 		target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 	else
 		var/obj/chosen = pick(sectors_onmap)
-		var/list/turfs_nearobj = list()
-		for(var/turf/unsimulated/map/t in range(7,chosen))
+		var/list/turfs_nearobj = trange(7,chosen)
+		for(var/t in turfs_nearobj)
 			if(istype(t,/turf/unsimulated/map/edge))
-				continue
-			turfs_nearobj += t
+				turfs_nearobj -= t
 		if(turfs_nearobj.len > 0)
 			target_loc = pick(turfs_nearobj)
 		else

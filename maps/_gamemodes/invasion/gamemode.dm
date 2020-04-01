@@ -115,9 +115,13 @@
 	. = ..()
 	if(world.time >= fleets_arrive_at)
 		fleets_arrive_at = world.time + rand(fleet_wave_delay_min,fleet_wave_delay_max)
-		playsound(map_sectors["[map_sectors[1]]"], 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
+		for(var/z = 1,z<=world.maxz,z++)
+			playsound(locate(1,1,z), 'code/modules/halo/sounds/OneProblemAtATime.ogg', 50, 0,0,0,1)
+		fleet_wave_num++
 		for(var/f in factions)
 			var/datum/faction/F = f
+			if(!F.name in fleet_list)
+				fleet_list[F.name] = list()
 			var/list/faction_fleet = fleet_list[F.name]
 			if(faction_fleet == null)
 				fleet_list[F.name] = list()
@@ -135,6 +139,9 @@
 				fleet_size = faction_fleet.len/2
 			var/datum/npc_fleet/new_fleet = new
 			for(var/s in faction_fleet)
+				if(isnull(s))
+					faction_fleet -= s
+					continue
 				var/obj/effect/overmap/ship/npc_ship/combat/ship = s
 				if(ship.our_fleet)
 					var/obj/effect/overmap/ship/lead = ship.our_fleet.leader_ship
@@ -147,6 +154,7 @@
 					faction_fleet -= ship
 					continue
 
+				ship.last_radio_time = 0
 				if(ship.loc != null)
 					ship.radio_message("I'm pulling out to regroup.")
 					ship.last_radio_time = 0
@@ -190,9 +198,10 @@
 						var/obj/effect/overmap/ship/npc_ship/leader_ship = new_fleet.leader_ship
 						ship.target_loc = leader_ship.target_loc
 						ship.slipspace_to_location(leader_ship.loc)
-						ship.radio_message("Slipspace manouver successful. Redevouz'd with leader at [ship.loc.x],[ship.loc.y].")
-
-					playsound(ship.loc, 'code/modules/halo/sounds/slip_rupture_detected.ogg', 50, 0,0,0,1)
+						if(!isnull(ship.loc))
+							ship.radio_message("Slipspace manouver successful. Redevouz'd with leader at [ship.loc.x],[ship.loc.y].")
+					for(var/z = 1,z<=world.maxz,z++)
+						playsound(locate(1,1,z), 'code/modules/halo/sounds/slip_rupture_detected.ogg', 50, 0,0,0,1)
 
 					sleep(15)
 

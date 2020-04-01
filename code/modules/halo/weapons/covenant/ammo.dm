@@ -8,10 +8,12 @@
 	check_armour = "energy"
 	embed = 0
 	sharp = 0
+	var/use_covenant_burndam_override = 1
 
 /obj/item/projectile/bullet/covenant/attack_mob()
-	damage_type = BURN
-	damtype = BURN
+	if(use_covenant_burndam_override)
+		damage_type = BURN
+		damtype = BURN
 	return ..()
 
 /obj/item/projectile/bullet/covenant/trainingpistol
@@ -121,20 +123,26 @@
 	sharp = 1
 	armor_penetration = 20
 	step_delay = 0.75 //slower than most
+	var/max_track_steps = 6
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
+	use_covenant_burndam_override = 0
+
+/obj/item/projectile/bullet/covenant/needles/New()
+	. = ..()
+	max_track_steps *= 2//We only track every other kill-count decrement.
 
 /obj/item/projectile/bullet/covenant/needles/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
 	if(!istype(L))
 		. = ..()
 		return
 	var/list/embedded_shards = list()
-	for(var/obj/item/weapon/material/shard in L.contents )
+	for(var/obj/shard in L.embedded)
 		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
-			explosion(L.loc,-1,1,2,5,alt_explosion_damage = 100,alt_explosion_range = 1)
+			explosion(L.loc,-1,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
 			for(var/obj/I in embedded_shards)
 				L.embedded -= I
 				L.pinned -= I
@@ -145,12 +153,14 @@
 				qdel(I)
 	if(prob(NEEDLER_EMBED_PROB)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
 		var/obj/item/weapon/material/shard/shrapnel/needleshrap/shard = new
-		var/obj/item/organ/external/embed_organ = pick(L.organs)
 		shard.name = shard_name
 		shard.die_at = world.time + NEEDLER_SHARD_DET_TIME
 		GLOB.processing_objects += shard
 		shard.our_dam = damage / 4
-		embed_organ.embed(shard)
+		//We're doing some speshul things here with out embed, so let's not do the usual damage.
+		L.contents += shard
+		L.embedded += shard
+		visible_message("<span class = 'warning'>[src] embeds into [L]</span>")
 	. = ..()
 
 /obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
@@ -173,6 +183,8 @@
 	if(locked_target)
 		redirect(locked_target, loc)
 		dir = get_dir(loc,locked_target)
+	if(initial(kill_count) - kill_count >= max_track_steps)
+		locked_target = null
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"
@@ -204,6 +216,7 @@
 	invisibility = 101
 	embed = 1
 	sharp = 1
+	use_covenant_burndam_override = 0
 
 /obj/item/projectile/bullet/covenant/type51carbine/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
@@ -234,8 +247,6 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
-#define RIFLENEEDLE_TRACK_DIST 2
-
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
 	damage = 30
@@ -246,11 +257,7 @@
 	invisibility = 101
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
-
-/obj/item/projectile/bullet/covenant/needles/rifleneedle/Move()
-	if(kill_count - initial(kill_count) > RIFLENEEDLE_TRACK_DIST)
-		locked_target = null
-	. = ..()
+	max_track_steps = 3
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'

@@ -102,17 +102,16 @@
 
 	if(target)
 		//check if they're in range
-		if(get_dist(src, target) > 14)//Two screen range because it's so easy to run from ships now.
+		if(get_dist(src, target) > 10)//Slightly higher than view range for the sake of pursuit
 			target = null
 		else
 			//open fire
 			fire_at_target()
 
-			var/list/target_locs = list()
-			for(var/turf/unsimulated/map/m in view(target_range_from,target))
+			var/list/target_locs = trange(target_range_from,target)
+			for(var/m in target_locs)
 				if(istype(m,/turf/unsimulated/map/edge))
-					continue
-				target_locs += m
+					target_locs -= m
 			if(target_locs.len > 0)
 				target_loc = pick(target_locs)
 	else

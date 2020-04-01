@@ -127,9 +127,12 @@
 				chosen_impact_z = pick(overmap_object.map_z)
 				do_z_level_proj_spawn(chosen_impact_z,overmap_object)
 			qdel(src)
+			return
 		else
 			ship.take_projectiles(src)
 			return 0
+	if(overmap_object.map_z.len == 0)
+		return
 	chosen_impact_z = pick(overmap_object.map_z)
 	if(istype(impacted,/obj/effect/overmap/sector))
 		do_sector_hit(overmap_object.map_z[1],impacted) //this is so it only hits the upper z-levels in planets
