@@ -5222,9 +5222,6 @@
 /obj/effect/catwalk_plated/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_port)
-"Xt" = (
-/turf/space,
-/area/ship/ascent/shuttle_port)
 "XG" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /turf/simulated/floor/ascent,
@@ -12080,7 +12077,7 @@ iS
 gT
 cN
 cN
-Xt
+aa
 aa
 aa
 aa
@@ -13422,7 +13419,7 @@ jc
 jl
 cN
 cN
-Xt
+aa
 aa
 aa
 aa
