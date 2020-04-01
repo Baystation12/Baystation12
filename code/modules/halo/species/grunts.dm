@@ -10,6 +10,7 @@
 	flesh_color = "#4F4F7F"
 	blood_color = "#00F7FF" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_unggoy.dmi'
+	icon_template ='code/modules/halo/icons/species/unggoy_template.dmi'
 	deform = 'code/modules/halo/icons/species/r_unggoy.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet
 	language = "Sangheili"
