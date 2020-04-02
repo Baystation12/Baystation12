@@ -196,7 +196,7 @@ var/list/_client_preferences_by_type
 	key = "SHOW_CREDITS"
 
 /datum/client_preference/show_ckey_credits
-	description = "Show Ckey in End Credits"
+	description = "Show Ckey in End Credits/Special Role List"
 	key = "SHOW_CKEY_CREDITS"
 	options = list(GLOB.PREF_HIDE, GLOB.PREF_SHOW)
 
