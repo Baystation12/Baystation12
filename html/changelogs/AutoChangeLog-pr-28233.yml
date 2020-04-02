@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "The 'Show Ckey in End Credits' preference now applies to the special role list for antagonists synthetics."
