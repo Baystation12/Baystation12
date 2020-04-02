@@ -67,7 +67,7 @@
 
 /datum/design/item/medical/cryobag
 	desc = "A folded, reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
-	a hostile enviroment."
+	a hostile environment."
 	id = "cryobag"
 	req_tech = list(TECH_MATERIAL = 6, TECH_BIO = 6)
 	materials = list(MATERIAL_PLASTIC = 15000, MATERIAL_GLASS = 15000, MATERIAL_SILVER = 5000, MATERIAL_GOLD = 1000)

@@ -8,7 +8,7 @@
 
  *THINGS TO KNOW
  *ARTIFACT_TURF_CHAR is used for room walls, used primarily for code used for corridors.
- *ARTIFACT_TURF is used to mark gaps in walls for rooms - this is checked so that we dont have three corridors in a row. This isn't done for corridors so that we can have branching paths.
+ *ARTIFACT_TURF is used to mark gaps in walls for rooms - this is checked so that we don't have three corridors in a row. This isn't done for corridors so that we can have branching paths.
  *Rooms will generate a room_theme, a datum that points to a few different types to generate the room with.
  *room_themes will also generate stuff inside. This is a random_room datum.
 

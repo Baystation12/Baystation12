@@ -114,7 +114,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 				info = "<font color='#ff33cc'>[initial(S.max_uses)] Spell Slots</font>"
 			else if(ispath(spellbook.spells[i],/obj))
 				var/obj/O = spellbook.spells[i]
-				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects dont have capitals in them and it makes it look weird.
+				name = "Artefact: [capitalize(initial(O.name))]" //because 99.99% of objects don't have capitals in them and it makes it look weird.
 				desc = initial(O.desc)
 			else if(ispath(spellbook.spells[i],/spell))
 				var/spell/S = spellbook.spells[i]
@@ -240,7 +240,7 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 	uses--
 	START_PROCESSING(SSobj, src)
 	investing_time = world.time + (15 MINUTES)
-	return "You invest a spellslot and will recieve two in return in 15 minutes."
+	return "You invest a spellslot and will receive two in return in 15 minutes."
 
 /obj/item/weapon/spellbook/Process()
 	if(investing_time && investing_time <= world.time)

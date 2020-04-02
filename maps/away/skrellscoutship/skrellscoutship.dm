@@ -3,6 +3,10 @@
 #include "skrellscoutship_areas.dm"
 #include "skrellscoutship_shuttles.dm"
 
+/obj/machinery/power/apc/debug/skrell
+	cell_type = /obj/item/weapon/cell/infinite
+	req_access = list(access_skrellscoutship)
+
 /datum/map_template/ruin/away_site/skrellscoutship
 	name = "Skrellian Scout Ship"
 	id = "awaysite_skrell_scout"

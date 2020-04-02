@@ -140,7 +140,7 @@
 	receiver_message += "</span></span>"
 	to_chat(C, receiver_message)
 
-	//play the recieving admin the adminhelp sound (if they have them enabled)
+	//play the receiving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
 		sound_to(C, 'sound/effects/adminhelp.ogg')
@@ -170,7 +170,7 @@
 		return
 
 	// Handled on Bot32's end, unsure about other bots
-//	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
+//	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into separate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
 //		to_chat(src, "<span class='warning'>Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting</span>")
 //		to_chat(src, "<span class='notice'>[msg]</span>")
 //		return

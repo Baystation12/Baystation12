@@ -54,6 +54,7 @@
 	name = "Rec - Musical Instruments"
 	contains = list(/obj/item/device/synthesized_instrument/synthesizer,
 					/obj/item/device/synthesized_instrument/guitar/multi,
+					/obj/item/device/synthesized_instrument/guitar,
 					/obj/item/device/synthesized_instrument/trumpet)
 	cost = 40
 	containername = "musical instrument crate"

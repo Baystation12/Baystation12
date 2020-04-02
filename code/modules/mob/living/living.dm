@@ -131,6 +131,7 @@ default behaviour is:
 		now_pushing = 0
 		spawn(0)
 			..()
+			var/saved_dir = AM.dir
 			if (!istype(AM, /atom/movable) || AM.anchored)
 				if(confused && prob(50) && !MOVING_DELIBERATELY(src))
 					Weaken(2)
@@ -157,6 +158,8 @@ default behaviour is:
 					for(var/obj/item/grab/G in M.grabbed_by)
 						step(G.assailant, get_dir(G.assailant, AM))
 						G.adjust_position()
+				if(saved_dir)
+					AM.set_dir(saved_dir)
 				now_pushing = 0
 
 /proc/swap_density_check(var/mob/swapper, var/mob/swapee)
@@ -170,7 +173,8 @@ default behaviour is:
 			return 1
 
 /mob/living/proc/can_swap_with(var/mob/living/tmob)
-	if(tmob.buckled || buckled)
+	if(!tmob) return
+	if(tmob.buckled || buckled || tmob.anchored)
 		return 0
 	//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
 	if(!(tmob.mob_always_swap || (tmob.a_intent == I_HELP || tmob.restrained()) && (a_intent == I_HELP || src.restrained())))
@@ -562,7 +566,10 @@ default behaviour is:
 	if(!can_pull())
 		stop_pulling()
 		return
-	
+
+	if(pulling.loc == loc || pulling.loc == old_loc)
+		return
+
 	if (!isliving(pulling))
 		step(pulling, get_dir(pulling.loc, old_loc))
 	else
@@ -582,6 +589,23 @@ default behaviour is:
 			if(t)
 				M.start_pulling(t)
 
+	handle_dir_after_pull()
+
+/mob/living/proc/handle_dir_after_pull()
+	if(pulling)
+		if(isobj(pulling))
+			var/obj/O = pulling
+			// Hacky check to know if you can pass through the closet
+			if(istype(O, /obj/structure/closet) && !O.density)
+				return set_dir(get_dir(src, pulling))
+			if(O.w_class >= ITEM_SIZE_HUGE || O.density)
+				return set_dir(get_dir(src, pulling))
+		if(isliving(pulling))
+			var/mob/living/L = pulling
+			// If pulled mob was bigger than us, we morelike will turn
+			// I made additional check in case if someone want a hand walk
+			if(L.mob_size > mob_size || L.lying || a_intent != I_HELP)
+				return set_dir(get_dir(src, pulling))
 
 /mob/living/proc/handle_pull_damage(mob/living/puller)
 	var/area/A = get_area(src)
