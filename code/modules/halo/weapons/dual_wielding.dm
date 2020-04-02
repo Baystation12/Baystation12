@@ -63,6 +63,11 @@
 	return newimage
 
 /obj/item/weapon/gun/dual_wield_placeholder/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
+	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
+	if(one_hand_penalty == -1)
+		if(!held_twohanded)
+			to_chat(user,"<span class = 'notice'>You can't fire dual-wielded weapons with an occupied offhand!</span>")
+			return
 	next_fire_time = world.time + fire_delay
 	for(var/obj/item/weapon/gun/weapon in weapons_wielded)
 		var/index = weapons_wielded.Find(weapon)
