@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "AI now have a `Reset Radio Encryption Keys` verb under `Silicon Commands` - Use this if a departmental channel breaks and you can't access it anymore."

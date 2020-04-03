@@ -1,4 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - bugfix: "Fixed the pitcher's visible fullness sprite disappearing when it went above 80 units."

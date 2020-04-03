@@ -1,8 +1,0 @@
-author: "Alex6511"
-delete-after: True
-changes: 
-  - tweak: "fire doors can no longer close on people, they will still close on all other objects"
-  - tweak: "Inflatables are now deployed by clicking on your desired tile instead of with a self-attack/activate"
-  - tweak: "Inflatable doors can no longer close on any object that prevents a standard powered airlock to close"
-  - tweak: "Inflatables can no longer be deployed on any object that prevents a standard powered airlock to close"
-  - tweak: "Unpowered doors can no longer close on any object that would prevent a standard powered airlock from closing."
