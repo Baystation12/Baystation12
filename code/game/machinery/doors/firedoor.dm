@@ -148,13 +148,16 @@
 	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
 	if(answer == "No")
 		return
+	var/mob/living/carbon/human/H = locate() in get_turf(src)
+	if(H)
+		user.visible_message("Someone is blocking the [src]")
+		return
 	if(user.incapacitated() || (get_dist(src, user) > 1  && !issilicon(user)))
 		to_chat(user, "Sorry, you must remain able bodied and close to \the [src] in order to use it.")
 		return
 	if(density && (stat & (BROKEN|NOPOWER))) //can still close without power
 		to_chat(user, "\The [src] is not functioning, you'll have to force it open manually.")
 		return
-
 	if(alarmed && density && lockdown && !allowed(user))
 		to_chat(user, "<span class='warning'>Access denied. Please wait for authorities to arrive, or for the alert to clear.</span>")
 		return
@@ -345,6 +348,11 @@
 	return
 
 /obj/machinery/door/firedoor/close()
+	// if there are humans on the tile, don't close
+	var/mob/living/carbon/human/H = locate() in get_turf(src)
+	if(H)
+		return
+
 	latetoggle()
 	return ..()
 

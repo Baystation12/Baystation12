@@ -402,9 +402,13 @@
 	if(!user)
 		return
 	if(!user.Adjacent(A))
-		to_chat(user, "You can't reach!")
 		return
-	if(istype(A, /turf))
+	if (isturf(A))
+		var/turf/T = A
+		var/obstruction = T.get_obstruction()
+		if (obstruction)
+			to_chat(user, "\The [english_list(obstruction)] is blocking that spot.")
+			return
 		try_deploy_inflatable(A, user)
 	if(istype(A, /obj/item/inflatable) || istype(A, /obj/structure/inflatable))
 		pick_up(A, user)
