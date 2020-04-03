@@ -177,7 +177,7 @@
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 1 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed
-	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 0.5 SECONDS, /obj/item/projectile/overmap/mac/npc = 20 SECONDS)
+	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.2 SECONDS,/obj/item/projectile/overmap/missile = 0.5 SECONDS, /obj/item/projectile/overmap/mac/npc = 20 SECONDS)
 
 //COVENANT//
 /obj/effect/overmap/ship/npc_ship/combat/covenant
@@ -221,7 +221,7 @@
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed
-	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 25 SECONDS)
+	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.1 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 20 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")

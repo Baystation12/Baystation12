@@ -1,5 +1,6 @@
 #define FLEET_BASE_AMOUNT 3
 #define FLEET_SCALING_AMOUNT 1
+#define FLEET_PERFACTION_MAXSIZE 30
 
 /datum/game_mode/outer_colonies
 	name = "Outer Colonies"
@@ -17,10 +18,10 @@
 	var/end_conditions_required = 3
 	var/list/fleet_list = list() //Format: Faction Name, list of active npc ships
 	var/fleets_arrive_at = 0
-	var/fleets_arrive_delay_max = 50 MINUTES
-	var/fleets_arrive_delay_min = 30 MINUTES
-	var/fleet_wave_delay_max = 7.5 MINUTES
-	var/fleet_wave_delay_min = 2.5 MINUTES
+	var/fleets_arrive_delay_max = 90 MINUTES
+	var/fleets_arrive_delay_min = 45 MINUTES
+	var/fleet_wave_delay_max = 15 MINUTES
+	var/fleet_wave_delay_min = 10 MINUTES
 	var/fleet_wave_num = 0
 
 /datum/game_mode/outer_colonies/pre_setup()
@@ -127,9 +128,9 @@
 				fleet_list[F.name] = list()
 				faction_fleet = fleet_list[F.name]
 			var/num_spawn = FLEET_BASE_AMOUNT + (FLEET_SCALING_AMOUNT * fleet_wave_num)
+			if(num_spawn + faction_fleet.len > FLEET_PERFACTION_MAXSIZE)
+				num_spawn = max(0,FLEET_PERFACTION_MAXSIZE - faction_fleet.len)
 			var/list/spawned_ships = shipmap_handler.spawn_ship(F.name,num_spawn)
-			if(isnull(spawned_ships) || spawned_ships.len == 0)
-				continue
 			var/fleet_size = FLEET_BASE_AMOUNT
 			faction_fleet += spawned_ships
 			for(var/s in spawned_ships) //Reset our spawned ships to nullspace, so they don't immediately just jump there.
@@ -153,17 +154,20 @@
 					ship.lose_to_space()
 					faction_fleet -= ship
 					continue
+				if(ship.hull == initial(ship.hull))
+					continue
 
 				ship.last_radio_time = 0
 				if(ship.loc != null)
 					ship.radio_message("I'm pulling out to regroup.")
 					ship.last_radio_time = 0
 					ship.slipspace_to_nullspace(1)
+					ship.hull = initial(ship.hull)
 					var/datum/npc_fleet/curr_fleet = ship.our_fleet
 					if(curr_fleet.leader_ship == ship)
 						if(curr_fleet.ships_infleet.len > 1)
 							curr_fleet.ships_infleet -= ship
-					sleep(10) //wait a little here, so there's less radio spam from all ships pulling out at the same time.
+					sleep(2) //wait a little here, so there's less radio spam from all ships pulling out at the same time.
 				//Ones that jumped to slipspace will now be nullspace'd, so we need to do this to include them.
 				if(ship.loc == null)
 					if(new_fleet.ships_infleet.len >= fleet_size)
@@ -203,7 +207,7 @@
 					for(var/z = 1,z<=world.maxz,z++)
 						playsound(locate(1,1,z), 'code/modules/halo/sounds/slip_rupture_detected.ogg', 50, 0,0,0,1)
 
-					sleep(15)
+					sleep(5)
 
 /datum/game_mode/outer_colonies/check_finished()
 
@@ -434,3 +438,5 @@
 
 		check_finished()
 
+#undef FLEET_PERFACTION_MAXSIZE
+#undef FLEET_SCALING_AMOUNT
