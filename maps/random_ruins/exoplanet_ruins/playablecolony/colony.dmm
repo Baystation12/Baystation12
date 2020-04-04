@@ -3802,7 +3802,7 @@
 /area/map_template/colony/airlock)
 "gR" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "playablecolonymain_pump_out_external";
 	tag = "playablecolonymain_pump"
@@ -6414,7 +6414,7 @@
 /area/map_template/colony/mineralprocessing)
 "lh" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
+	frequency = 1380;
 	id_tag = "playablecolonymain_exterior_door";
 	locked = 1
 	},
@@ -6691,7 +6691,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	cycle_to_external_air = 1;
-	frequency = 1439;
+	frequency = 1380;
 	id_tag = "playablecolonymain";
 	pixel_y = 28;
 	tag = "playablecolonymain";
@@ -6702,7 +6702,7 @@
 	tag_interior_door = "playablecolonymain_interior_door";
 	tag_interior_sensor = "playablecolonymain_sensor_interior"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
@@ -6728,7 +6728,7 @@
 /area/map_template/colony/atmospherics)
 "lM" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1439;
+	frequency = 1380;
 	id_tag = "playablecolonymain_sensor_chamber";
 	pixel_x = 22
 	},
@@ -6736,7 +6736,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
@@ -6782,7 +6782,7 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1439;
+	frequency = 1380;
 	master_tag = "playablecolonymain";
 	pixel_x = -22;
 	pixel_y = 5
@@ -6792,7 +6792,7 @@
 	dir = 5
 	},
 /obj/machinery/airlock_sensor/airlock_interior{
-	frequency = 1439;
+	frequency = 1380;
 	id_tag = "playablecolonymain_sensor_interior";
 	pixel_x = -22
 	},
@@ -6917,12 +6917,12 @@
 /area/map_template/colony/mineralprocessing)
 "ma" = (
 /obj/machinery/airlock_sensor/airlock_exterior{
-	frequency = 1439;
+	frequency = 1380;
 	id_tag = "playablecolonymain_sensor_external";
 	pixel_x = 22
 	},
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1439;
+	frequency = 1380;
 	master_tag = "playablecolonymain";
 	pixel_x = 19;
 	pixel_y = 5
@@ -7017,7 +7017,7 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/external{
-	frequency = 1439;
+	frequency = 1380;
 	id_tag = "playablecolonymain_interior_door"
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -8014,7 +8014,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "playablecolonymain_pump_out_internal";
 	power_rating = 25000;
@@ -8081,7 +8081,7 @@
 /obj/machinery/light,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
@@ -8107,7 +8107,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "playablecolonymain_pump";
 	power_rating = 25000;
@@ -8518,7 +8518,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "playablecolonymain_pump_out_internal";
 	power_rating = 25000;
