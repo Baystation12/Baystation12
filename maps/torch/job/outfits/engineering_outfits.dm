@@ -15,6 +15,11 @@
 	id_type = /obj/item/weapon/card/id/torch/crew/engineering/senior
 	pda_type = /obj/item/modular_computer/pda/heads/ce
 
+/decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/marine
+	name = OUTFIT_JOB_NAME("Senior Engineer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/engineering
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/engineering/senior_engineer/fleet
 	name = OUTFIT_JOB_NAME("Senior Engineer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
@@ -26,6 +31,11 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/engineering
 	pda_type = /obj/item/modular_computer/pda/engineering
+
+/decl/hierarchy/outfit/job/torch/crew/engineering/engineer/marine
+	name = OUTFIT_JOB_NAME("Engineer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/engineering
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet
 	name = OUTFIT_JOB_NAME("Engineer - Fleet")

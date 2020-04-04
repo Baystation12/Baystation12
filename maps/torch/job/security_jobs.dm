@@ -10,13 +10,17 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/brig_chief
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_chief/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/brig_chief/fleet,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/brig_chief/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e7,
+		/datum/mil_rank/marine/e6,
 		/datum/mil_rank/fleet/e6,
+		/datum/mil_rank/marine/e7,
 		/datum/mil_rank/fleet/e7,
-		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/marine/e8,
+		/datum/mil_rank/fleet/e8
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_EVA         = SKILL_BASIC,
@@ -55,14 +59,18 @@
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet,
-		/datum/mil_branch/solgov = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent
+		/datum/mil_branch/solgov = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/agent,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/fleet/e3,
 		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/marine/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/marine/e4,
 		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/marine/e5,
 		/datum/mil_rank/civ/contractor,
 		/datum/mil_rank/sol/agent
 	)
@@ -95,17 +103,21 @@
 	minimal_player_age = 7
 	minimum_character_age = list(SPECIES_HUMAN = 18)
 	ideal_character_age = 25
-	alt_titles = list() // This is a hack. Overriding a list var with null does not actually override it due to the particulars of dm list init. Do not "clean up" without testing.
+	alt_titles = list("Military Police")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/security/maa
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/security/maa/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/marine/e2,
 		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/marine/e3,
 		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/marine/e4
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_EVA         = SKILL_BASIC,

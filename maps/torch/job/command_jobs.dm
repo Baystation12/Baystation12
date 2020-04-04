@@ -248,12 +248,16 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/cos
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/cos/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o3,
+		/datum/mil_rank/fleet/o3,
+		/datum/mil_rank/marine/o3,
 		/datum/mil_rank/fleet/o2,
-		/datum/mil_rank/fleet/o3
+		/datum/mil_rank/marine/o2,
+		/datum/mil_rank/fleet/o2
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_ADEPT,
 	                    SKILL_EVA         = SKILL_BASIC,
@@ -319,14 +323,18 @@
 	economic_power = 8
 	minimum_character_age = list(SPECIES_HUMAN = 35)
 	ideal_character_age = 45
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/sea
 	allowed_branches = list(
-		/datum/mil_branch/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/sea/marine
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/fleet/e9,
+		/datum/mil_rank/marine/e9,
 		/datum/mil_rank/fleet/e9_alt1,
-		/datum/mil_rank/fleet/e9
+		/datum/mil_rank/marine/e9_alt1,
+		/datum/mil_rank/fleet/e8,
+		/datum/mil_rank/marine/e8_alt
 	)
 	min_skill = list(   SKILL_EVA        = SKILL_BASIC,
 	                    SKILL_COMBAT     = SKILL_BASIC,
@@ -368,11 +376,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
-		/datum/mil_rank/fleet/o1
+		/datum/mil_rank/fleet/o1,
+		/datum/mil_rank/marine/o1
 	)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_PILOT       = SKILL_ADEPT)

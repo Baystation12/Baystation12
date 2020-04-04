@@ -14,6 +14,11 @@
 	id_type = /obj/item/weapon/card/id/torch/crew/security/brigchief
 	pda_type = /obj/item/modular_computer/pda/security
 
+/decl/hierarchy/outfit/job/torch/crew/security/brig_chief/marine
+	name = OUTFIT_JOB_NAME("Brig Officer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/security
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/security/brig_chief/fleet
 	name = OUTFIT_JOB_NAME("Brig Chief - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
@@ -34,6 +39,11 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	backpack_contents = list(/obj/item/clothing/accessory/badge/PI = 1)
 
+/decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/marine
+	name = OUTFIT_JOB_NAME("Forensic Technician - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/security
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/fleet
 	name = OUTFIT_JOB_NAME("Forensic Technician - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat/security
@@ -51,6 +61,11 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/security
 	pda_type = /obj/item/modular_computer/pda/security
+
+/decl/hierarchy/outfit/job/torch/crew/security/maa/marine
+	name = OUTFIT_JOB_NAME("Master at Arms - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/security
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/security/maa/fleet
 	name = OUTFIT_JOB_NAME("Master at Arms - Fleet")

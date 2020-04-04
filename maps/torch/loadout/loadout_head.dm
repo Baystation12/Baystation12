@@ -39,6 +39,12 @@
 	cost = 0
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
 
+/datum/gear/head/marinehat
+	display_name = "marine cap"
+	path = /obj/item/clothing/head/solgov/utility/marine
+	cost = 0
+	allowed_roles = list(/datum/mil_branch/marine_corps)
+
 /datum/gear/head/surgical
 	allowed_roles = STERILE_ROLES
 

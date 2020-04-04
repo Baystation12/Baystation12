@@ -16,6 +16,11 @@
 	id_type = /obj/item/weapon/card/id/torch/crew/service/janitor
 	pda_type = /obj/item/modular_computer/pda
 
+/decl/hierarchy/outfit/job/torch/crew/service/janitor/marine
+	name = OUTFIT_JOB_NAME("Sanitation Technician - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/service
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/service/janitor/fleet
 	name = OUTFIT_JOB_NAME("Sanitation Technician - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
@@ -35,6 +40,11 @@
 	id_type = /obj/item/weapon/card/id/torch/crew/service/chef
 	pda_type = /obj/item/modular_computer/pda
 
+/decl/hierarchy/outfit/job/torch/crew/service/cook/marine
+	name = OUTFIT_JOB_NAME("Cook - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/service
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/service/cook/fleet
 	name = OUTFIT_JOB_NAME("Cook - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/service
@@ -53,6 +63,11 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew
 	pda_type = /obj/item/modular_computer/pda
+
+/decl/hierarchy/outfit/job/torch/crew/service/crewman/marine
+	name = OUTFIT_JOB_NAME("Crewman - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
 	name = OUTFIT_JOB_NAME("Crewman - Fleet")

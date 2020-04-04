@@ -27,6 +27,11 @@
 	id_type = /obj/item/weapon/card/id/torch/silver
 	pda_type = /obj/item/modular_computer/pda/heads/hop
 
+/decl/hierarchy/outfit/job/torch/crew/command/XO/marine
+	name = OUTFIT_JOB_NAME("Executive Officer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/command
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/XO/fleet
 	name = OUTFIT_JOB_NAME("Executive Officer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
@@ -64,6 +69,11 @@
 	..()
 	BACKPACK_OVERRIDE_ENGINEERING
 
+/decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/marine
+	name = OUTFIT_JOB_NAME("Chief Engineer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/engineering
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/chief_engineer/fleet
 	name = OUTFIT_JOB_NAME("Chief Engineer - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/engineering
@@ -80,6 +90,11 @@
 /decl/hierarchy/outfit/job/torch/crew/command/cos/New()
 	..()
 	BACKPACK_OVERRIDE_SECURITY
+
+/decl/hierarchy/outfit/job/torch/crew/command/cos/marine
+	name = OUTFIT_JOB_NAME("Chief of Security - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/security
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/cos/fleet
 	name = OUTFIT_JOB_NAME("Chief of Security - Fleet")
@@ -122,13 +137,23 @@
 	id_type = /obj/item/weapon/card/id/torch/crew/representative
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
+/decl/hierarchy/outfit/job/torch/crew/command/sea
+	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/command
+	l_ear = /obj/item/device/radio/headset/heads/torchexec
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/sea
+	pda_type = /obj/item/modular_computer/pda/heads
+
+/decl/hierarchy/outfit/job/torch/crew/command/sea/marine
+	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/command
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/command/sea/fleet
 	name = OUTFIT_JOB_NAME("Senior Enlisted Advisor - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/command
 	shoes = /obj/item/clothing/shoes/dutyboots
-	l_ear = /obj/item/device/radio/headset/sea
-	id_type = /obj/item/weapon/card/id/torch/crew/sea
-	pda_type = /obj/item/modular_computer/pda/heads
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer
 	name = OUTFIT_JOB_NAME("Bridge Officer")
@@ -137,6 +162,11 @@
 	id_type = /obj/item/weapon/card/id/torch/crew/bridgeofficer
 	pda_type = /obj/item/modular_computer/pda/heads
 	l_ear = /obj/item/device/radio/headset/bridgeofficer
+
+/decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/marine
+	name = OUTFIT_JOB_NAME("Bridge Officer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/command
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/command/bridgeofficer/fleet
 	name = OUTFIT_JOB_NAME("Bridge Officer - Fleet")

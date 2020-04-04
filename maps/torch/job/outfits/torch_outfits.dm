@@ -23,3 +23,9 @@
 	name = OUTFIT_JOB_NAME("Torch Passenger")
 	hierarchy_type = /decl/hierarchy/outfit/job/torch/passenger
 	uniform = /obj/item/clothing/under/solgov/utility
+
+/decl/hierarchy/outfit/job/torch/crew/marine
+	name = OUTFIT_JOB_NAME("Torch Marine Outfit")
+	hierarchy_type = /decl/hierarchy/outfit/job/torch/crew/marine
+	uniform = /obj/item/clothing/under/solgov/utility/marine
+	shoes = /obj/item/clothing/shoes/jungleboots

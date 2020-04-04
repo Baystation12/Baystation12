@@ -14,6 +14,11 @@
 	id_type = /obj/item/weapon/card/id/torch/crew/supply/deckofficer
 	pda_type = /obj/item/modular_computer/pda/cargo
 
+/decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/marine
+	name = OUTFIT_JOB_NAME("Deck Officer - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/supply
+	shoes = /obj/item/clothing/shoes/jungleboots
+
 /decl/hierarchy/outfit/job/torch/crew/supply/deckofficer/fleet
 	name = OUTFIT_JOB_NAME("Deck Chief - Fleet")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/supply
@@ -25,6 +30,11 @@
 	shoes = /obj/item/clothing/shoes/dutyboots
 	id_type = /obj/item/weapon/card/id/torch/crew/supply
 	pda_type = /obj/item/modular_computer/pda/cargo
+
+/decl/hierarchy/outfit/job/torch/crew/supply/tech/marine
+	name = OUTFIT_JOB_NAME("Deck Technician - Marine")
+	uniform = /obj/item/clothing/under/solgov/utility/marine/supply
+	shoes = /obj/item/clothing/shoes/jungleboots
 
 /decl/hierarchy/outfit/job/torch/crew/supply/tech/fleet
 	name = OUTFIT_JOB_NAME("Deck Technician - Fleet")

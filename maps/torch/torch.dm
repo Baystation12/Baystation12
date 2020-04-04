@@ -24,6 +24,7 @@
 	#include "datums/uniforms.dm"
 	#include "datums/uniforms_expedition.dm"
 	#include "datums/uniforms_fleet.dm"
+	#include "datums/uniforms_marine.dm"
 	#include "datums/game_modes/torch_traitor.dm"
 	#include "datums/game_modes/torch_revolution.dm"
 	#include "datums/game_modes/torch_siege.dm"

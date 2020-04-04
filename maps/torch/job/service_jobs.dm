@@ -111,12 +111,16 @@
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/service/crewman
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps,
-		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/service/crewman/fleet,
+		/datum/mil_branch/marine_corps = /decl/hierarchy/outfit/job/torch/crew/service/crewman/marine
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/marine/e2,
 		/datum/mil_rank/fleet/e2,
+		/datum/mil_rank/marine/e3,
 		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/marine/e4,
 		/datum/mil_rank/fleet/e4
 	)
 

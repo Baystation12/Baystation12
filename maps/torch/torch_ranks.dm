@@ -12,12 +12,14 @@
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
 		/datum/mil_branch/alien,
-		/datum/mil_branch/skrell_fleet
+		/datum/mil_branch/skrell_fleet,
+		/datum/mil_branch/marine_corps
 	)
 
 	spawn_branch_types = list(
 		/datum/mil_branch/expeditionary_corps,
 		/datum/mil_branch/fleet,
+		/datum/mil_branch/marine_corps,
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov,
 		/datum/mil_branch/alien,
@@ -32,7 +34,8 @@
 			/datum/mil_branch/fleet,
 			/datum/mil_branch/civilian,
 			/datum/mil_branch/solgov,
-			/datum/mil_branch/skrell_fleet
+			/datum/mil_branch/skrell_fleet,
+			/datum/mil_branch/marine_corps
 		)
 	)
 
@@ -51,6 +54,10 @@
 				/datum/mil_rank/sol/agent
 			)
 		)
+	)
+
+	species_to_branch_blacklist = list(
+		/datum/species/machine = list(/datum/mil_branch/marine_corps)
 	)
 
 	species_to_rank_whitelist = list(
@@ -180,6 +187,65 @@
 	assistant_job = /datum/job/crew
 	min_skill = list(	SKILL_WEAPONS = SKILL_BASIC,
 						SKILL_EVA     = SKILL_BASIC)
+
+/datum/mil_branch/marine_corps
+	name = "Marine Corps"
+	name_short = "SCGMC"
+	email_domain = "torch.marine.mil"
+
+	rank_types = list(
+		/datum/mil_rank/marine/e1,
+		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/marine/e3,
+		/datum/mil_rank/marine/e4,
+		/datum/mil_rank/marine/e5,
+		/datum/mil_rank/marine/e6,
+		/datum/mil_rank/marine/e7,
+		/datum/mil_rank/marine/e8,
+		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e9,
+		/datum/mil_rank/marine/e9_alt1,
+		/datum/mil_rank/marine/e9_alt2,
+		/datum/mil_rank/marine/w1,
+		/datum/mil_rank/marine/w2,
+		/datum/mil_rank/marine/w3,
+		/datum/mil_rank/marine/w4,
+		/datum/mil_rank/marine/w5,
+		/datum/mil_rank/marine/o1,
+		/datum/mil_rank/marine/o2,
+		/datum/mil_rank/marine/o3,
+		/datum/mil_rank/marine/o4,
+		/datum/mil_rank/marine/o5,
+		/datum/mil_rank/marine/o6,
+		/datum/mil_rank/marine/o7,
+		/datum/mil_rank/marine/o8,
+		/datum/mil_rank/marine/o9,
+		/datum/mil_rank/marine/o10,
+		/datum/mil_rank/marine/o10_alt,
+	)
+
+	spawn_rank_types = list(
+		/datum/mil_rank/marine/e2,
+		/datum/mil_rank/marine/e3,
+		/datum/mil_rank/marine/e4,
+		/datum/mil_rank/marine/e5,
+		/datum/mil_rank/marine/e6,
+		/datum/mil_rank/marine/e7,
+		/datum/mil_rank/marine/e8,
+		/datum/mil_rank/marine/e8_alt,
+		/datum/mil_rank/marine/e9,
+		/datum/mil_rank/marine/e9_alt1,
+		/datum/mil_rank/marine/o1,
+		/datum/mil_rank/marine/o2,
+		/datum/mil_rank/marine/o3,
+		/datum/mil_rank/marine/o4,
+		/datum/mil_rank/marine/o5
+	)
+
+	assistant_job = /datum/job/crew
+	min_skill = list(	SKILL_HAULING = SKILL_ADEPT,
+					SKILL_WEAPONS = SKILL_BASIC,
+					SKILL_COMBAT  = SKILL_BASIC)
 
 /datum/mil_branch/civilian
 	name = "Civilian"
@@ -457,6 +523,174 @@
 	name_short = "ADM"
 	accessory = list(/obj/item/clothing/accessory/solgov/rank/ec/officer/o8)
 	sort_order = 18
+
+/*
+ *  Marines
+ *  =======
+ */
+
+/datum/mil_rank/marine/e1
+	name = "Private"
+	name_short = "Pvt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted)
+	sort_order = 1
+
+/datum/mil_rank/marine/e2
+	name = "Private First Class"
+	name_short = "PFC"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e2)
+	sort_order = 2
+
+/datum/mil_rank/marine/e3
+	name = "Lance Corporal"
+	name_short = "LCpl"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e3)
+	sort_order = 3
+
+/datum/mil_rank/marine/e4
+	name = "Corporal"
+	name_short = "Cpl"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e4)
+	sort_order = 4
+
+/datum/mil_rank/marine/e5
+	name = "Sergeant"
+	name_short = "Sgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e5)
+	sort_order = 5
+
+/datum/mil_rank/marine/e6
+	name = "Staff Sergeant"
+	name_short = "SSgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e6)
+	sort_order = 6
+
+/datum/mil_rank/marine/e7
+	name = "Gunnery Sergeant"
+	name_short = "GySgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e7)
+	sort_order = 7
+
+/datum/mil_rank/marine/e8
+	name = "Master Sergeant"
+	name_short = "MSgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e8)
+
+/datum/mil_rank/marine/e8_alt
+	name = "First Sergeant"
+	name_short = "1st Sgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e8_alt)
+	sort_order = 8
+
+/datum/mil_rank/marine/e9
+	name = "Master Gunnery Sergeant"
+	name_short = "MGySgt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e9)
+	sort_order = 8
+
+/datum/mil_rank/marine/e9_alt1
+	name = "Sergeant Major"
+	name_short = "SgtMaj"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e9_alt1)
+	sort_order = 9
+
+/datum/mil_rank/marine/e9_alt2
+	name = "Sergeant Major of the Marine Corps"
+	name_short = "SMMC"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/enlisted/e9_alt2)
+	sort_order = 9
+
+/datum/mil_rank/marine/w1
+	name = "Warrant Officer 1"
+	name_short = "WO"
+	sort_order = -1
+
+/datum/mil_rank/marine/w2
+	name = "Chief Warrant Officer 2"
+	name_short = "CWO2"
+	sort_order = -2
+
+/datum/mil_rank/marine/w3
+	name = "Chief Warrant Officer 3"
+	name_short = "CWO3"
+	sort_order = -3
+
+/datum/mil_rank/marine/w4
+	name = "Chief Warrant Officer 4"
+	name_short = "CWO4"
+	sort_order = -4
+
+/datum/mil_rank/marine/w5
+	name = "Chief Warrant Officer 5"
+	name_short = "CWO5"
+	sort_order = -5
+
+/datum/mil_rank/marine/o1
+	name = "Second Lieutenant"
+	name_short = "2Lt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer)
+	sort_order = 11
+
+/datum/mil_rank/marine/o2
+	name = "First Lieutenant"
+	name_short = "1Lt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer/o2)
+	sort_order = 12
+
+/datum/mil_rank/marine/o3
+	name = "Captain"
+	name_short = "Cpt"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer/o3)
+	sort_order = 13
+
+/datum/mil_rank/marine/o4
+	name = "Major"
+	name_short = "Maj"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer/o4)
+	sort_order = 14
+
+/datum/mil_rank/marine/o5
+	name = "Lieutenant Colonel"
+	name_short = "LtCol"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer/o5)
+	sort_order = 15
+
+/datum/mil_rank/marine/o6
+	name = "Colonel"
+	name_short = "Col"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/officer/o6)
+	sort_order = 16
+
+/datum/mil_rank/marine/o7
+	name = "Brigadier General"
+	name_short = "BGen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/flag)
+	sort_order = 17
+
+/datum/mil_rank/marine/o8
+	name = "Major General"
+	name_short = "MajGen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/flag/o8)
+	sort_order = 18
+
+/datum/mil_rank/marine/o9
+	name = "Lieutenant General"
+	name_short = "LtGen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/flag/o9)
+	sort_order = 19
+
+/datum/mil_rank/marine/o10
+	name = "General"
+	name_short = "Gen"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/flag/o10)
+	sort_order = 20
+
+/datum/mil_rank/marine/o10_alt
+	name = "Commandant of the Marine Corps"
+	name_short = "CMC"
+	accessory = list(/obj/item/clothing/accessory/solgov/rank/marine/flag/o10_alt)
+	sort_order = 20
+
 
 /*
  *  Civilians
