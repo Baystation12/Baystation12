@@ -1,0 +1,4 @@
+author: "Ava"
+delete-after: True
+changes: 
+  - tweak: "The chemistry subsystem now processes every 5 deciseconds instead of 20 deciseconds, meaning that reagents in containers will mix together more quickly. This doesn't affect mob metabolization - it only affects the delay when mixing stuff."
