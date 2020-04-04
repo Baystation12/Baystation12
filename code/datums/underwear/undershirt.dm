@@ -81,9 +81,9 @@
 	name = "Shirt, Fleet"
 	icon_state = "fleet"
 
-/datum/category_item/underwear/undershirt/shirt_army
-	name = "Shirt, Army"
-	icon_state = "army"
+/datum/category_item/underwear/undershirt/shirt_marine
+	name = "Shirt, Marine Corps"
+	icon_state = "marine"
 
 /datum/category_item/underwear/undershirt/shirt_nt
 	name = "Shirt, NT"
@@ -187,9 +187,9 @@
 	name = "Shirt, Fleet, Female"
 	icon_state = "fleet_female"
 
-/datum/category_item/underwear/undershirt/army_female
-	name = "Shirt, Army, Female"
-	icon_state = "army_female"
+/datum/category_item/underwear/undershirt/marine_female
+	name = "Shirt, Marine Corps, Female"
+	icon_state = "marine_female"
 
 /datum/category_item/underwear/undershirt/expedition_female
 	name = "Shirt, Expeditionary Corps, Female"
