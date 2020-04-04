@@ -1,5 +1,0 @@
-author: "Imienny"
-delete-after: True
-changes: 
-  - tweak: "Inflamed appendix is now harder to miss on medical scan"
-  - bugfix: "Fixed riots helmets not uncovering face after raising visor"
