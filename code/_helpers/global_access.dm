@@ -851,6 +851,10 @@
 			return global.ticket_panels;
 		if("tickets")
 			return global.tickets;
+		if("topic_antispam_remote")
+			return global.topic_antispam_remote;
+		if("topic_antispam_time")
+			return global.topic_antispam_time;
 		if("total_lighting_corners")
 			return global.total_lighting_corners;
 		if("total_lighting_overlays")
@@ -899,10 +903,6 @@
 			return global.whitelist;
 		if("wireColours")
 			return global.wireColours;
-		if("world_topic_spam_protect_ip")
-			return global.world_topic_spam_protect_ip;
-		if("world_topic_spam_protect_time")
-			return global.world_topic_spam_protect_time;
 		if("world_uplinks")
 			return global.world_uplinks;
 		if("worths")
@@ -1766,6 +1766,10 @@
 			global.ticket_panels=newval;
 		if("tickets")
 			global.tickets=newval;
+		if("topic_antispam_remote")
+			global.topic_antispam_remote=newval;
+		if("topic_antispam_time")
+			global.topic_antispam_time=newval;
 		if("total_lighting_corners")
 			global.total_lighting_corners=newval;
 		if("total_lighting_overlays")
@@ -1814,10 +1818,6 @@
 			global.whitelist=newval;
 		if("wireColours")
 			global.wireColours=newval;
-		if("world_topic_spam_protect_ip")
-			global.world_topic_spam_protect_ip=newval;
-		if("world_topic_spam_protect_time")
-			global.world_topic_spam_protect_time=newval;
 		if("world_uplinks")
 			global.world_uplinks=newval;
 		if("worths")
@@ -2255,6 +2255,8 @@
 	"telecomms_list",
 	"ticket_panels",
 	"tickets",
+	"topic_antispam_remote",
+	"topic_antispam_time",
 	"total_lighting_corners",
 	"total_lighting_overlays",
 	"total_lighting_sources",
@@ -2279,8 +2281,6 @@
 	"weighted_randomevent_locations",
 	"whitelist",
 	"wireColours",
-	"world_topic_spam_protect_ip",
-	"world_topic_spam_protect_time",
 	"world_uplinks",
 	"worths",
 	"wrapped_species_by_ref",

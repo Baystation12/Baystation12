@@ -165,6 +165,10 @@
 
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
+#define SPAN_STAFF_PM(X) "<span class='pm'><span class='in'>[X]</span></span>"
+
+#define ANCHOR(H, X) "<a href='[H]'>[X]</a>"
+
 #define FONT_SMALL(X) "<font size='1'>[X]</font>"
 
 #define FONT_NORMAL(X) "<font size='2'>[X]</font>"
