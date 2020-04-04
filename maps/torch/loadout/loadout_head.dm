@@ -27,9 +27,15 @@
 	path = /obj/item/clothing/head/soft/solgov
 	allowed_branches = SOLGOV_BRANCHES
 
-/datum/gear/head/fleethat
-	display_name = "fleet cap"
+/datum/gear/head/fleetcover
+	display_name = "fleet utilty cover"
 	path = /obj/item/clothing/head/solgov/utility/fleet
+	cost = 0
+	allowed_branches = list(/datum/mil_branch/fleet)
+
+/datum/gear/head/fleetcap
+	display_name = "fleet cap"
+	path = /obj/item/clothing/head/soft/solgov/fleet
 	cost = 0
 	allowed_branches = list(/datum/mil_branch/fleet)
 
