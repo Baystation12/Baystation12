@@ -1,0 +1,5 @@
+author: "Alex6511"
+delete-after: True
+changes: 
+  - maptweak: "The survival pod has been replaced with a pod that has an airlock"
+  - bugfix: "fixes the colony airlock."
