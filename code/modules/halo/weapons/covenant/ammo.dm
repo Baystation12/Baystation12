@@ -144,13 +144,19 @@
 		if(embedded_shards.len >=shards_to_explode)
 			explosion(L.loc,-1,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
 			for(var/obj/I in embedded_shards)
-				L.embedded -= I
-				L.pinned -= I
-				if(L.pinned.len == 0)
-					L.anchored = 0
-				L.contents -= I
-				I.forceMove(get_turf(L))//And placing it on the ground below
-				qdel(I)
+				var/obj/item/weapon/material/shard/shrapnel/needleshrap/needle = I
+				if(istype(needle))
+					needle.our_dam *= 1.5
+					needle.die_at = 0
+					needle.process()
+				else
+					L.embedded -= I
+					L.pinned -= I
+					if(L.pinned.len == 0)
+						L.anchored = 0
+					L.contents -= I
+					I.forceMove(get_turf(L))//And placing it on the ground below
+					qdel(I)
 	if(prob(NEEDLER_EMBED_PROB)) //Most of the weapon's damage comes from embedding. This is here to make it more common.
 		var/obj/item/weapon/material/shard/shrapnel/needleshrap/shard = new
 		shard.name = shard_name
