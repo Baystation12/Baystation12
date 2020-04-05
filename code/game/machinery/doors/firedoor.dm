@@ -3,6 +3,8 @@
 #define FIREDOOR_MAX_TEMP 50 // °C
 #define FIREDOOR_MIN_TEMP 0
 
+#define FIREDOOR_CRUSH_DAMAGE 50 //Slightly higher than airlocks since the firedoor is designed to just slam down instead of slowly closing
+
 // Bitflags
 #define FIREDOOR_ALERT_HOT      1
 #define FIREDOOR_ALERT_COLD     2
@@ -346,6 +348,10 @@
 
 /obj/machinery/door/firedoor/close()
 	latetoggle()
+	for(var/turf/turf in locs)
+		for(var/atom/movable/AM in turf)
+			if(AM.airlock_crush(FIREDOOR_CRUSH_DAMAGE))
+				take_damage(FIREDOOR_CRUSH_DAMAGE)
 	return ..()
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
