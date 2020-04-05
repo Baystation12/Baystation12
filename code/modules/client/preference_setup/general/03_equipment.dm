@@ -13,7 +13,6 @@
 	sort_order = 3
 
 	var/static/list/backpacks_by_name
-	var/list/sensorModes = list("Off", "Binary sensors", "Vitals tracker", "Tracking beacon")
 
 /datum/category_item/player_setup_item/physical/equipment/New()
 	..()
@@ -93,11 +92,8 @@
 				var/list/metadata = tweak_metadata["[tweak]"]
 				tweak_metadata["[tweak]"] = tweak.validate_metadata(metadata)
 
-	if(isnull(pref.sensor_setting))
-		pref.sensor_setting = SUIT_SENSOR_OFF
-
-	if(isnull(pref.sensors_locked))
-		pref.sensors_locked = FALSE
+	pref.sensor_setting = sanitize_inlist(pref.sensor_setting, SUIT_SENSOR_MODES, get_key_by_index(SUIT_SENSOR_MODES, 0))
+	pref.sensors_locked = sanitize_bool(pref.sensors_locked, FALSE)
 
 /datum/category_item/player_setup_item/physical/equipment/content()
 	. = list()
@@ -116,7 +112,7 @@
 	for(var/datum/backpack_tweak/bt in pref.backpack.tweaks)
 		. += " <a href='?src=\ref[src];backpack=[pref.backpack.name];tweak=\ref[bt]'>[bt.get_ui_content(get_backpack_metadata(pref.backpack, bt))]</a>"
 	. += "<br>"
-	. += "Default Suit Sensor Setting: <a href='?src=\ref[src];change_sensor_setting=1'>[sensorModes[pref.sensor_setting + 1]]</a><br />"
+	. += "Default Suit Sensor Setting: <a href='?src=\ref[src];change_sensor_setting=1'>[pref.sensor_setting]</a><br />"
 	. += "Suit Sensors Locked: <a href='?src=\ref[src];toggle_sensors_locked=1'>[pref.sensors_locked ? "Locked" : "Unlocked"]</a><br />"
 	return jointext(.,null)
 
@@ -190,8 +186,10 @@
 			set_backpack_metadata(bo, bt, new_metadata)
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 	else if(href_list["change_sensor_setting"])
-		var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", sensorModes[pref.sensor_setting + 1]) in sensorModes
-		pref.sensor_setting = sensorModes.Find(switchMode) - 1
+		var/switchMode = input("Select a sensor mode:", "Suit Sensor Mode", pref.sensor_setting) as null | anything in SUIT_SENSOR_MODES
+		if(!switchMode || !CanUseTopic(user))
+			return TOPIC_NOACTION
+		pref.sensor_setting = switchMode
 		return TOPIC_REFRESH
 	else if(href_list["toggle_sensors_locked"])
 		pref.sensors_locked = !pref.sensors_locked

@@ -15,7 +15,7 @@
 	worn_state = "orange"
 	gender_icons = 1
 	has_sensor = 2
-	sensor_mode = 3
+	sensor_mode = SUIT_SENSOR_TRACKING
 
 /obj/item/clothing/under/color/blackjumpshorts
 	name = "black jumpsuit shorts"
