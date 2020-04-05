@@ -10,7 +10,6 @@
 	flesh_color = "#4F4F7F"
 	blood_color = "#00F7FF" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/icons/species/r_unggoy.dmi'
-	icon_template ='code/modules/halo/icons/species/r_unggoy_template.dmi'
 	deform = 'code/modules/halo/icons/species/r_unggoy.dmi'
 	default_language = "Sangheili" //Just for now, no special language just yet
 	language = "Sangheili"
@@ -23,8 +22,6 @@
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/grunt_punch)
 	can_operate_advanced_covenant = 0
-	can_force_door = 1
-
 
 	breath_type = "methane"
 	exhale_type = "carbon_dioxide"
