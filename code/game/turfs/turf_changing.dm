@@ -1,6 +1,9 @@
 /turf/proc/ReplaceWithLattice(var/material)
-	src.ChangeTurf(get_base_turf_by_area(src))
-	new /obj/structure/lattice( locate(src.x, src.y, src.z), material )
+	var base_turf = get_base_turf_by_area(src);
+	if(type != base_turf)
+		src.ChangeTurf(get_base_turf_by_area(src))
+	if(!locate(/obj/structure/lattice) in src)
+		new /obj/structure/lattice(src, material)
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()

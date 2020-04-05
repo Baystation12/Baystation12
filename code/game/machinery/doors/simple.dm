@@ -80,6 +80,14 @@
 /obj/machinery/door/unpowered/simple/close(var/forced = 0)
 	if(!can_close(forced))
 		return
+	
+	// If the door is blocked, don't close
+	for(var/turf/A in locs)
+		var/turf/T = A
+		var/obstruction = T.get_obstruction()
+		if (obstruction)
+			return
+	
 	playsound(src.loc, material.dooropen_noise, 100, 1)
 	..()
 
