@@ -513,7 +513,7 @@
 /datum/reagent/dye
 	name = "Dye"
 	description = "Non-toxic artificial coloration used for food and drinks. When mixed with reagents, the compound will take on the dye's coloration."
-	color = "#FFFFFF"
+	color = "#ffffff"
 	color_weight = 40
 	color_transfer = TRUE
 	color_foods = TRUE
