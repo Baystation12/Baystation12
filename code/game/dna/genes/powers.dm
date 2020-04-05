@@ -164,7 +164,6 @@
 			return "hulk_[fat]_s"
 		else
 			return "hulk_[g]_s"
-		return 0
 
 	OnMobLife(var/mob/living/carbon/human/M)
 		if(!istype(M)) return

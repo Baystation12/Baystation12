@@ -10,7 +10,7 @@
 	icon_state = "radio"
 
 /obj/screen/movable/exosuit/radio/Click()
-	if(..()) 
+	if(..())
 		if(owner.radio)
 			owner.radio.attack_self(usr)
 		else
@@ -112,7 +112,7 @@
 				else
 					bar.color = "#ff0000"
 				GLOB.hardpoint_bar_cache += bar
-		for(var/i=i;i<=value;i++)
+		for(var/i=1;i<=value;i++)
 			new_overlays += GLOB.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
@@ -248,6 +248,6 @@
 		return
 	owner.head.active_sensors = ..()
 	to_chat(usr, SPAN_NOTICE("[owner.head.name] advanced sensor mode is [owner.head.active_sensors ? "now" : "no longer" ] active."))
-	
+
 
 #undef BAR_CAP
