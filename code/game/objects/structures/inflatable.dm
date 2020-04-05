@@ -7,24 +7,15 @@
 
 	atmos_canpass = CANPASS_DENSITY
 
-/obj/item/inflatable/afterattack(var/atom/A, var/mob/user)
-	..(A, user)
+/obj/item/inflatable/attack_self(mob/user)
 	if(!deploy_path)
 		return
-	if(!user.Adjacent(A))
-		return
-	if (isturf(A))
-		var/turf/T = A
-		var/obstruction = T.get_obstruction()
-		if (obstruction)
-			to_chat(user, "\The [english_list(obstruction)] is blocking that spot.")
-			return
 	user.visible_message("[user] starts inflating \the [src].", "You start inflating \the [src].")
-	if(!do_after(user, 1 SECOND))
+	if(!do_after(user, 1 SECOND, src))
 		return
 	playsound(loc, 'sound/items/zip.ogg', 75, 1)
 	user.visible_message(SPAN_NOTICE("[user] inflates \the [src]."), SPAN_NOTICE("You inflate \the [src]."))
-	var/obj/structure/inflatable/R = new deploy_path(get_turf(A))
+	var/obj/structure/inflatable/R = new deploy_path(get_turf(src))
 	transfer_fingerprints_to(R)
 	R.add_fingerprint(user)
 	if(inflatable_health)
@@ -269,13 +260,6 @@
 	isSwitchingStates = 0
 
 /obj/structure/inflatable/door/proc/Close()
-	// If the inflatable is blocked, don't close
-	for(var/turf/A in locs)
-		var/turf/T = A
-		var/obstruction = T.get_obstruction()
-		if (obstruction)
-			return
-
 	isSwitchingStates = 1
 	flick("door_closing",src)
 	sleep(10)

@@ -360,13 +360,3 @@ var/const/enterloopsanity = 100
 
 /turf/proc/is_floor()
 	return FALSE
-
-/turf/proc/get_obstruction()
-	if (density)
-		LAZYADD(., src)
-	if (contents.len > 100 || contents.len <= !!lighting_overlay)
-		return    // fuck it, too/not-enough much shit here
-	for (var/thing in src)
-		var/atom/movable/AM = thing
-		if (AM.simulated && AM.blocks_airlock())
-			LAZYADD(., AM)
