@@ -66,7 +66,7 @@ SUBSYSTEM_DEF(throwing)
 	src.thrownthing = thrownthing
 	src.target = target
 	src.target_turf = get_turf(target)
-	src.init_dir = get_dir(src, target)
+	src.init_dir = get_dir(thrownthing, target)
 	src.maxrange = range
 	src.speed = speed
 	src.thrower = thrower

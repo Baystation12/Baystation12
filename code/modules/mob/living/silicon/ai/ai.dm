@@ -25,7 +25,8 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/multitool_mode,
 	/mob/living/silicon/ai/proc/toggle_hologram_movement,
 	/mob/living/silicon/ai/proc/ai_power_override,
-	/mob/living/silicon/ai/proc/ai_shutdown
+	/mob/living/silicon/ai/proc/ai_shutdown,
+	/mob/living/silicon/ai/proc/ai_reset_radio_keys
 )
 
 //Not sure why this is necessary...
@@ -684,6 +685,13 @@ var/list/ai_verbs_default = list(
 
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
+
+/mob/living/silicon/ai/proc/ai_reset_radio_keys()
+	set name = "Reset Radio Encryption Keys"
+	set category = "Silicon Commands"
+
+	silicon_radio.recalculateChannels()
+	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
 
 /mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))

@@ -145,7 +145,7 @@ no_html will strip any html, possibly killing useful formatting in the process.
 	if(no_html)
 		. = html2pencode(.)
 
-//recipient reports have a designated recipients field, for recieving submitted reports.
+//recipient reports have a designated recipients field, for receiving submitted reports.
 /datum/computer_file/report/recipient
 	var/datum/report_field/people/list_from_manifest/recipients
 

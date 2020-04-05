@@ -8,7 +8,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/cmd)
+						 /obj/item/clothing/gloves/thick/duty/solgov/cmd,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/command,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/command)
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
@@ -72,7 +74,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/eng)
+						 /obj/item/clothing/gloves/thick/duty/solgov/eng,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet)
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 
@@ -107,7 +111,9 @@
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
 						 /obj/item/clothing/gloves/thick/duty/solgov/sec,
-						 /obj/item/clothing/under/solgov/utility/fleet/security)
+						 /obj/item/clothing/under/solgov/utility/fleet/security,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/security,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/security)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/combat/security
 
 /decl/hierarchy/mil_uniform/fleet/sec/noncom
@@ -138,7 +144,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/sec)
+						 /obj/item/clothing/gloves/thick/duty/solgov/sec,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/security,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/security)
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 
@@ -173,7 +181,9 @@
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
 						 /obj/item/clothing/under/solgov/utility/fleet/combat/medical,
-						 /obj/item/clothing/gloves/thick/duty/solgov/med)
+						 /obj/item/clothing/gloves/thick/duty/solgov/med,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/medical,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/medical)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/medical
 
 /decl/hierarchy/mil_uniform/fleet/med/noncom
@@ -204,7 +214,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/med)
+						 /obj/item/clothing/gloves/thick/duty/solgov/med,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/medical,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/medical)
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 
@@ -239,7 +251,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/sup)
+						 /obj/item/clothing/gloves/thick/duty/solgov/sup,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/supply,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/supply)
 
 /decl/hierarchy/mil_uniform/fleet/sup/noncom
 	name = "Fleet supply NCO"
@@ -269,7 +283,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/sup)
+						 /obj/item/clothing/gloves/thick/duty/solgov/sup,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/supply,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/supply)
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 
@@ -315,7 +331,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/svc)
+						 /obj/item/clothing/gloves/thick/duty/solgov/svc,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/service,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/service)
 
 /decl/hierarchy/mil_uniform/fleet/srv/noncom
 	name = "Fleet service NCO"
@@ -345,7 +363,9 @@
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
 						 /obj/item/clothing/head/soft/solgov/fleet,
-						 /obj/item/clothing/gloves/thick/duty/solgov/svc)
+						 /obj/item/clothing/gloves/thick/duty/solgov/svc,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/service,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/service)
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/officer
 
@@ -420,6 +440,7 @@
 	name = "Fleet support SNCO"
 	min_rank = 7
 
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/polopants/command,/obj/item/clothing/suit/storage/jacket/solgov/fleet/command)
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet
 	service_over = /obj/item/clothing/suit/storage/solgov/service/fleet/snco
 
@@ -430,7 +451,7 @@
 	name = "Fleet command support CO"
 	min_rank = 11
 
-	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command, /obj/item/clothing/head/beret/solgov/fleet/command, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet)
+	utility_extra = list(/obj/item/clothing/under/solgov/utility/fleet/officer/command, /obj/item/clothing/head/beret/solgov/fleet/command, /obj/item/clothing/head/ushanka/solgov/fleet, /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet, /obj/item/clothing/head/soft/solgov/fleet, /obj/item/clothing/under/solgov/utility/fleet/polopants/command,/obj/item/clothing/suit/storage/jacket/solgov/fleet/command)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
@@ -448,7 +469,9 @@
 						 /obj/item/clothing/head/beret/solgov/fleet/command,
 						 /obj/item/clothing/head/ushanka/solgov/fleet,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/fleet,
-						 /obj/item/clothing/head/soft/solgov/fleet)
+						 /obj/item/clothing/head/soft/solgov/fleet,
+						 /obj/item/clothing/under/solgov/utility/fleet/polopants/command,
+						 /obj/item/clothing/suit/storage/jacket/solgov/fleet/command)
 	utility_under = /obj/item/clothing/under/solgov/utility/fleet/command
 
 	service_hat = /obj/item/clothing/head/solgov/dress/fleet/command
