@@ -133,6 +133,14 @@
 	economic_power = 1.1
 	subversive_potential = 15
 
+/decl/cultural_info/faction/eom
+	name = FACTION_EOM
+	description = "The Empire of Mohranda was established in the Luggust system in 2208. It is a clan-based empire with a structure placing emphasis on a warrior-like culture, \
+	stressing on honour and dignity. Its leader, the Mohrandalor, and his government are established on Mohranda. With two occupied planet, an established military and a rather \
+	stable economy, the Empire of Mohranda is a second rank power within human space. Its relations to the SCG and the ICCG are neutral."
+	economic_power = 1.1
+	subversive_potential = 15
+
 /decl/cultural_info/faction/other
 	name = FACTION_OTHER
 	description = "You belong to one of the many other factions that operate in the galaxy. Numerous, too numerous to list, these factions represent a variety of interests, purposes, intents and goals."

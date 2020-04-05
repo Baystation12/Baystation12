@@ -243,3 +243,57 @@
 	capital = "Labortown"
 	economic_power = 0.8
 	ruling_body = "Magnitka"
+
+/decl/cultural_info/location/human/mohranda
+	name = HOME_SYSTEM_MOHRANDA
+	distance = "23.4 light years"
+	description = "Mohranda, ruled by the Empire of Mohranda, is an earth-sized planet in the Luggust system. \
+	The ground of the planet is mainly a gradient of beige and gray, coated by a short and tough, pale grass, as well as some low to medium sized vegetation. \
+	While huge seas and oceans are very rare on the planet, the vast, savanna-like lands are crossed by many rivers and lakes. \
+	These allow, despite a rather dry and rigorous climate, a sustainable natural irrigation of the planet's flora. \
+	Urban hubs are generally constitute of massive, dome-shaped arcologies, holding thousands of individuals, around which most factories and mines can be found."
+	capital = "Fraternity"
+	economic_power = 1.2
+
+/decl/cultural_info/location/human/lohrene
+	name = HOME_SYSTEM_LOHRENE
+	distance = "23.4 light years"
+	description = "Lohrene, ruled by the Empire of Mohranda, is a small planet in the Luggust system. \
+	Smaller than it's sister planet (Mohranda), Lohrene is also further from it's star, Luggust. Lohrene is a more natural world crossed by many mountains \
+	on its northern hemisphere, while its southern hemisphere is mostly constituted of vast seas, half of which are frozen, mainly closer to the southern pole. \
+	Most habitats are domes, similar to Mohranda’s, which are generally found close to the equator, to protect their inhabitants of the lower temperature \
+	found across most of the planet because of its distance to the Luggust star."
+	capital = "Bichetz"
+	economic_power = 1
+
+/decl/cultural_info/location/human/saveel
+	name = HOME_SYSTEM_SAVEEL
+	distance = "29 light years"
+	description = "Saveel, in the Wythe system, is an isolationist independent planet. The Colony of Saveel itself is located in a wooded valley \
+	on the larger of two southern continents, largely sheltered from winter windstorms, and has grown to cross a river that runs through the valley. \
+	The valley itself has been largely converted into farmland, growing a variety of tundra crops and feeding the local livestock. \
+	Hunting parties can range hundreds of miles in search of prey, including to the southern pole, and further north into warmer climates."
+	capital = "Colony of Saveel"
+	economic_power = 0.8
+
+
+
+/decl/cultural_info/location/human/tiamat
+	name = HOME_SYSTEM_TIAMAT
+	distance = "4 light years"
+	description = "Tiamat, a waterworld with an inhospitable atmosphere within Alpha Centauri, is essentially the Bread and Water basket of the SCG. \
+	A huge ocean world, Tiamat primarily exports huge quantities of food and water to colonies all over SCG space. The planet sports a rich underwater \
+	plant and animal life, along with a primitive fauna and flora on its surface. The planet's inhabitants are generally housed in central arcologies, \
+	or in smaller offshore facilities and settlements. Politically, Tiamat is plotted by many city-states. While each of these city-states hold their own laws and defense forces, \
+	the system is under the heavy protection of the SCG's second fleet."
+	capital = "Depends of the city state"
+	economic_power = 1.2
+
+/decl/cultural_info/location/human/phobos
+	name = HOME_SYSTEM_PHOBOS
+	distance = "1.5AU"
+	description = "Phobos, located in the Sol system, is one of the moons of Mars and was originally home to a penal colony when it was originally exploited for its valuable mineral wealth. \
+	Today it is home to a thriving, if small SCG administered colony, with a focus on government shipbuilding and logistics for the inner sol system. \
+	Outside of its relatively stable, well protected capital of Esteredge there exist numerous criminal 'free colonies' that make up a minority criminal element on the moon. "
+	capital = "Esteredge"
+	economic_power = 1.1
