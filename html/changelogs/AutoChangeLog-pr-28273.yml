@@ -1,0 +1,4 @@
+author: "lorwp"
+delete-after: True
+changes: 
+  - tweak: "Mercenary now requires at least 3 mercs in the merc team. no more solo merc"
