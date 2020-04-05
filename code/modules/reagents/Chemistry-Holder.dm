@@ -325,9 +325,8 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 			if (added)
 				added.color = current.color
 				if (target.my_atom)
+					target.my_atom.on_color_transfer_reagent_change()
 					target.my_atom.update_icon()
-		if (target.my_atom)
-			target.my_atom.on_reagent_change()
 
 	if(!copy)
 		HANDLE_REACTIONS(src)
