@@ -36,14 +36,13 @@
 	. = ..()
 
 /datum/click_handler/build_mode/proc/StartTimer()
-	timer_handle = addtimer(CALLBACK(src, .proc/TimerEvent), 1 SECOND, TIMER_UNIQUE | TIMER_STOPPABLE)
+	timer_handle = addtimer(CALLBACK(src, .proc/TimerEvent), 1 SECOND, TIMER_UNIQUE | TIMER_STOPPABLE | TIMER_LOOP)
 
 /datum/click_handler/build_mode/proc/StopTimer()
 	deltimer(timer_handle)
 
 /datum/click_handler/build_mode/proc/TimerEvent()
 	current_build_mode.TimerEvent()
-	StartTimer()
 
 /datum/click_handler/build_mode/Enter()
 	user.client.show_popup_menus = FALSE
