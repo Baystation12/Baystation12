@@ -259,10 +259,12 @@
 	icon_state = "bottle-1"
 	amount_per_transfer_from_this = 1
 	possible_transfer_amounts = "1;2;5;10;15;25;30;60"
+	var/datum/reagent/starting_reagent = /datum/reagent/dye
+	var/starting_vol = 60
 
 /obj/item/weapon/reagent_containers/glass/bottle/dye/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/dye, 60)
+	reagents.add_reagent(starting_reagent, starting_vol)
 	update_icon()
 
 
@@ -272,13 +274,18 @@
 			Outfitted with a tiny mechanism that can change the color of its contained dye, opening up infinite possibilities."
 
 /obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic/attack_self(mob/living/user)
-	var/datum/reagent/dye/heldDye = reagents.get_reagent(/datum/reagent/dye)
+	var/datum/reagent/heldDye = reagents.get_reagent(starting_reagent)
 	if (!heldDye)
 		to_chat(user, "<span class='warning'>\The [src] isn't holding any dye!</span>")
 		return
 	var/new_color = input(user, "Choose the dye's new color.", "[name]") as color|null
 	if (!new_color || !Adjacent(user))
 		return
-	to_chat(user, "<span class='notice'>The dye in \the [src] swirls and takes on a new color.</span>")
+	to_chat(user, SPAN_NOTICE("The dye in \the [src] swirls and takes on a new color."))
 	heldDye.color = new_color
 	update_icon()
+
+/obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic/strong
+	desc = "A bottle filled with extra-strength polychromic dye, for making bottles of \"tramadol\" using horrible poisons. Activate it in-hand to choose its color freely."
+	starting_reagent = /datum/reagent/dye/strong
+	starting_vol = 15
