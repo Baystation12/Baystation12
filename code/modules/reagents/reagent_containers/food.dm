@@ -8,3 +8,9 @@
 	volume = 50 //Sets the default container amount for all food items.
 	var/filling_color = "#ffffff" //Used by sandwiches.
 	var/trash = null
+
+/obj/item/weapon/reagent_containers/food/on_reagent_change()
+	for(var/datum/reagent/R in reagents.reagent_list)
+		if (!R.color_foods)
+			continue
+		color = R.color //Possible todo: Mixing of food-coloring reagents for final result?

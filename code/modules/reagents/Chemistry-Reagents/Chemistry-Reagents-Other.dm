@@ -509,3 +509,12 @@
 	description = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
 	color = "#ffe8e8"
 	boompower = 2
+
+/datum/reagent/dye
+	name = "Dye"
+	description = "Non-toxic artificial coloration used for food and drinks. When mixed with reagents, the compound will take on the dye's coloration."
+	color = "#FFFFFF"
+	color_weight = 150
+	color_transfer = TRUE
+	color_foods = TRUE
+	taste_mult = 0

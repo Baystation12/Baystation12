@@ -161,3 +161,11 @@
 	path = /obj/effect/spawner/newbomb/traitor
 	desc = "A remote-activated phoron-oxygen bomb assembly with an included signaler. \
 			A flashing disclaimer begins with the warning 'SOME DISASSEMBLY/REASSEMBLY REQUIRED.'"
+
+/datum/uplink_item/item/tools/polychromic_dye_bottle
+	name = "Polychromic Dye Bottle"
+	item_cost = 10
+	path = /obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic
+	desc = "A small bottle containing tasteless coloring that causes any chemical mix or food it's added to take on the color of the dye itself. \
+			Very useful for disguising poisons to the untrained eye; even large amounts of reagents will be completely recolored by only a drop or two of dye. \
+			Comes with the ability to freely choose the dye's coloration by using the bottle while it's in your hand."
