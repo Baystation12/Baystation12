@@ -174,9 +174,20 @@
 	economic_power = 6
 	alt_titles = list(
 		"Mechsuit Technician")
-	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
-	allowed_branches = list(/datum/mil_branch/civilian)
-	allowed_ranks = list(/datum/mil_rank/civ/contractor)
+	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist	
+	allowed_branches = list(
+		/datum/mil_branch/expeditionary_corps,
+		/datum/mil_branch/fleet = /decl/hierarchy/outfit/job/torch/crew/engineering/engineer/fleet,
+		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
+	)
+	allowed_ranks = list(
+		/datum/mil_rank/fleet/e3,
+		/datum/mil_rank/fleet/e4,
+		/datum/mil_rank/fleet/e5,
+		/datum/mil_rank/ec/e3,
+		/datum/mil_rank/ec/e5,
+		/datum/mil_rank/civ/contractor
+	)
 	min_skill = list(   SKILL_COMPUTER		= SKILL_ADEPT,
 	                    SKILL_DEVICES		= SKILL_ADEPT,
 	                    SKILL_EVA           = SKILL_ADEPT,
