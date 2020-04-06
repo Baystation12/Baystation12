@@ -1,0 +1,5 @@
+author: "Alex6511"
+delete-after: True
+changes: 
+  - tweak: "The Xenoarch coolant tank is now bigger"
+  - rscdel: "Suspension field generator doesn't have access requirements anymore."
