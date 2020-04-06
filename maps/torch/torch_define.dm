@@ -7,8 +7,8 @@
 	admin_levels = list(7,8)
 	empty_levels = list(9)
 	accessible_z_levels = list("1"=1,"2"=3,"3"=1,"4"=1,"5"=1,"6"=1,"9"=30)
-	overmap_size = 35
-	overmap_event_areas = 34
+	overmap_size = 50
+	overmap_event_areas = 49
 	usable_email_tlds = list("torch.ec.scg", "torch.fleet.mil", "freemail.net", "torch.scg")
 
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
@@ -34,7 +34,7 @@
 
 	default_law_type = /datum/ai_laws/solgov
 	use_overmap = 1
-	num_exoplanets = 1
+	num_exoplanets = 2
 
-	away_site_budget = 3
+	away_site_budget = 6
 	id_hud_icons = 'maps/torch/icons/assignment_hud.dmi'
