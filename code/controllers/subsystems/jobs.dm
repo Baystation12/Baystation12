@@ -342,9 +342,7 @@ SUBSYSTEM_DEF(jobs)
 			// Loop through all jobs
 			for(var/datum/job/job in shuffledoccupations) // SHUFFLE ME BABY
 				if(job && !mode.disabled_jobs.Find(job.title) )
-					if(job.defer_roundstart_spawn)
-						deferred_jobs[job] = TRUE
-					else if(attempt_role_assignment(player, job, level, mode))
+					if(attempt_role_assignment(player, job, level, mode))
 						unassigned_roundstart -= player
 						break
 

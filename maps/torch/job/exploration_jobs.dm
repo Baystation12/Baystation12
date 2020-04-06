@@ -88,6 +88,7 @@
 	ideal_character_age = 20
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/exploration/explorer
 	allowed_branches = list(/datum/mil_branch/expeditionary_corps)
+	requires_supervisor = "Pathfinder"
 
 	allowed_ranks = list(
 		/datum/mil_rank/ec/e3,

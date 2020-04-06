@@ -47,7 +47,7 @@
 	var/min_goals = 1
 	var/max_goals = 3
 
-	var/defer_roundstart_spawn = FALSE // If true, the job will be put off until all other jobs have been populated.
+	var/requires_supervisor = FALSE
 	var/list/species_branch_rank_cache_ = list()
 	var/list/psi_faculties                // Starting psi faculties, if any.
 	var/psi_latency_chance = 0            // Chance of an additional psi latency, if any.
@@ -188,6 +188,11 @@
 			apply_fingerprints_to_item(holder, sub_item)
 
 /datum/job/proc/is_position_available()
+	if (((current_positions < total_positions) || (total_positions == -1)) && requires_supervisor)
+		for(var/mob/M in GLOB.player_list)
+			if(M.client && M.mind && M.mind.assigned_job && M.mind.assigned_job.title == requires_supervisor)
+				return TRUE
+		return FALSE // The job requires supervisors but supervisors were not found
 	return (current_positions < total_positions) || (total_positions == -1)
 
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
