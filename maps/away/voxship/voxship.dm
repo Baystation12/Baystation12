@@ -4,36 +4,47 @@
 #include "voxship_jobs.dm"
 
 /datum/map_template/ruin/away_site/voxship
-	name = "Vox Base"
+	name = "Vox Ship"
 	id = "awaysite_voxship"
-	description = "Vox ship and base."
+	description = "Vox ship and shuttle."
 	suffixes = list("voxship/voxship-1.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_shuttle)
 	area_usage_test_exempted_root_areas = list(/area/voxship)
-
-/obj/effect/overmap/visitable/sector/vox_base
-	name = "large asteroid"
-	desc = "Sensor array detects a large asteroid."
-	in_space = 1
-	icon_state = "meteor4"
+/obj/effect/overmap/visitable/ship/vox_ship
+	name = "alien vessel"
+	desc = "Sensor array detects a medium-sized vessel of irregular shape. Unknown origin."
+	color = "#233012"
+	fore_dir = WEST
+	vessel_mass = 7500
+	in_space = TRUE
 	hide_from_reports = TRUE
 	initial_generic_waypoints = list(
-		"nav_voxbase_1",
+		"nav_voxbase_ne",
+		"nav_voxbase_w",
+		"nav_voxbase_se"
 	)
 
 	initial_restricted_waypoints = list(
 		"Vox Shuttle" = list("nav_hangar_vox"),
 	)
 
-/obj/effect/shuttle_landmark/nav_voxbase/nav1
-	name = "Northest of Large Asteroid"
-	landmark_tag = "nav_voxbase_1"
+/obj/effect/shuttle_landmark/nav_voxbase/northeast
+	name = "Northeast of Alien Vessel"
+	landmark_tag = "nav_voxbase_ne"
+
+/obj/effect/shuttle_landmark/nav_voxbase/west
+	name = "West of Alien Vessel"
+	landmark_tag = "nav_voxbase_w"
+
+/obj/effect/shuttle_landmark/nav_voxbase/southeast
+	name = "Southeast of Alien Vessel"
+	landmark_tag = "nav_voxbase_se"
 
 /datum/shuttle/autodock/overmap/vox_shuttle
 	name = "Vox Shuttle"
 	move_time = 10
-	shuttle_area = list(/area/voxship/ship)
+	shuttle_area = list(/area/voxship/shuttle)
 	dock_target = "vox_shuttle"
 	current_location = "nav_hangar_vox"
 	landmark_transition = "nav_transit_vox"
@@ -55,10 +66,10 @@
 	name = "shuttle control console"
 	shuttle_tag = "Vox Shuttle"
 
-/obj/effect/overmap/visitable/ship/landable/vox
+/obj/effect/overmap/visitable/ship/landable/vox_shuttle
 	name = "Unknown Signature"
 	shuttle = "Vox Shuttle"
-	fore_dir = NORTH
+	fore_dir = WEST
 	vessel_size = SHIP_SIZE_SMALL
 
 /obj/effect/submap_landmark/joinable_submap/voxship
@@ -74,7 +85,7 @@
 
 /decl/submap_archetype/derelict/voxship
 	descriptor = "Shoal forward base"
-	map = "Vox Base"
+	map = "Vox Ship"
 	crew_jobs = list(
 		/datum/job/submap/voxship_vox,
 		/datum/job/submap/voxship_vox/doc,
