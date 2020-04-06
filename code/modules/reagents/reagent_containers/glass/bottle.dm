@@ -286,6 +286,5 @@
 	update_icon()
 
 /obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic/strong
-	desc = "A bottle filled with extra-strength polychromic dye, for making bottles of \"tramadol\" using horrible poisons. Activate it in-hand to choose its color freely."
 	starting_reagent = /datum/reagent/dye/strong
 	starting_vol = 15
