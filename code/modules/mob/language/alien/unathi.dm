@@ -8,6 +8,9 @@
 	key = "o"
 	flags = WHITELISTED
 	space_chance = 40
+	partial_understanding = list(
+		LANGUAGE_UNATHI_YEOSA = 20
+	)
 	syllables = list(
 		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",
 		"ha", "ah", "he", "eh", "hi", "ih", "ho", "oh", "hu", "uh", "hs", "sh",
@@ -29,6 +32,9 @@
 	key = "h"
 	flags = WHITELISTED
 	space_chance = 40
+	partial_understanding = list(
+		LANGUAGE_UNATHI_SINTA = 20
+	)
 	syllables = list(
 		"azs","zis","zau","azua","skiu","zuakz","izo","aei","ki","kut","zo",
 		"za", "az", "ze", "ez", "zi", "iz", "zo", "oz", "zu", "uz", "zs", "sz",
