@@ -2,7 +2,7 @@
 	display_name = "SolGov beret selection"
 	description = "A beret denoting service in an organization within SolGov."
 	path = /obj/item/clothing/head/beret/solgov
-	allowed_branches = SOLGOV_BRANCHES
+	allowed_branches = CIVILIAN_BRANCHES
 
 /datum/gear/head/solberet/New()
 	..()
