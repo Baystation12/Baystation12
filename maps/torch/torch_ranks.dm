@@ -60,7 +60,8 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
 				/datum/mil_rank/ec/e7,
-				/datum/mil_rank/ec/o1
+				/datum/mil_rank/ec/o1,
+				/datum/mil_rank/ec/o3
 			),
 			/datum/mil_branch/fleet = list(
 				/datum/mil_rank/fleet/e1,
@@ -70,7 +71,9 @@
 				/datum/mil_rank/fleet/e5,
 				/datum/mil_rank/fleet/e6,
 				/datum/mil_rank/fleet/e7,
-				/datum/mil_rank/fleet/o1
+				/datum/mil_rank/fleet/o1,
+				/datum/mil_rank/fleet/o2,
+				/datum/mil_rank/fleet/o3
 			)
 		),
 		/datum/species/skrell = list(
@@ -78,13 +81,15 @@
 				/datum/mil_rank/ec/e3,
 				/datum/mil_rank/ec/e5,
 				/datum/mil_rank/ec/e7,
-				/datum/mil_rank/ec/o1
+				/datum/mil_rank/ec/o1,
+				/datum/mil_rank/ec/o3
 			)
 		),
 		/datum/species/unathi = list(
 			/datum/mil_branch/expeditionary_corps = list(
 				/datum/mil_rank/ec/e3,
-				/datum/mil_rank/ec/e5
+				/datum/mil_rank/ec/e5,
+				/datum/mil_rank/ec/e7
 			)
 		),
 		/datum/species/vox = list(
