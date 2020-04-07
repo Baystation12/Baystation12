@@ -1,0 +1,4 @@
+author: "lorwp"
+delete-after: True
+changes: 
+  - tweak: "In loadout hats 'Fleet Cap' is now 'fleet utility cover' and is still the utility cover, 'fleet cap' is now the fleet ballcap."
