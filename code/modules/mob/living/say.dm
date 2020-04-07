@@ -241,7 +241,6 @@ proc/get_radio_key_from_channel(var/channel)
 		message_range = 1
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
-		var/msg
 		if(!speaking || !(speaking.flags & NO_TALK_MSG))
 			src.visible_message("<span class='notice'>\The [src] talks into \the [used_radios[1]].</span>", null, "<span class='notice'>You hear someone talk into their headset.</span>", 5)
 			if (speech_sound)
