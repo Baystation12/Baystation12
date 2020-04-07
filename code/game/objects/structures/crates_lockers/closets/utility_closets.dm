@@ -24,7 +24,7 @@
 	. = list(/obj/item/weapon/tank/emergency/oxygen = 2,
 			/obj/item/clothing/mask/breath = 2)
 
-	. += new/datum/atom_creator/simple(list(/obj/item/weapon/storage/toolbox/emergency, /obj/item/inflatable/wall = 2), 75)
+	. += new/datum/atom_creator/simple(list(/obj/item/weapon/storage/toolbox/emergency, /obj/item/weapon/storage/briefcase/inflatable,), 75)
 	. += new/datum/atom_creator/simple(list(/obj/item/weapon/tank/emergency/oxygen/engi, /obj/item/clothing/mask/gas/half), 10)
 	. += new/datum/atom_creator/simple(/obj/item/device/oxycandle, 15)
 	. += new/datum/atom_creator/simple(/obj/item/weapon/storage/firstaid/o2, 25)
@@ -44,7 +44,8 @@
 		/obj/item/weapon/storage/med_pouch/burn,
 		/obj/item/weapon/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight
+		/obj/item/device/flashlight,
+		/obj/item/weapon/storage/briefcase/inflatable,
 		)
 
 /obj/structure/closet/firecloset/chief
@@ -161,7 +162,7 @@
 
 /obj/structure/closet/hydrant/WillContain()
 	return list(
-		/obj/item/inflatable/door = 2,
+		/obj/item/weapon/storage/briefcase/inflatable,
 		/obj/item/weapon/storage/med_pouch/burn = 2,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/weapon/storage/backpack/dufflebag/firefighter
