@@ -181,10 +181,7 @@
 		/datum/mil_branch/civilian = /decl/hierarchy/outfit/job/torch/crew/engineering/contractor
 	)
 	allowed_ranks = list(
-		/datum/mil_rank/fleet/e3,
-		/datum/mil_rank/fleet/e4,
 		/datum/mil_rank/fleet/e5,
-		/datum/mil_rank/ec/e3,
 		/datum/mil_rank/ec/e5,
 		/datum/mil_rank/civ/contractor
 	)
