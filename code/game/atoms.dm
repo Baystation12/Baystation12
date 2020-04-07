@@ -99,6 +99,9 @@
 /atom/proc/on_reagent_change()
 	return
 
+/atom/proc/on_color_transfer_reagent_change()
+	return
+
 /atom/proc/Bumped(AM as mob|obj)
 	return
 

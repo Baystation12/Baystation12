@@ -14,6 +14,14 @@
 	var/scannable = 0 // Shows up on health analyzers.
 	var/color = "#000000"
 	var/color_weight = 1
+	var/color_foods = FALSE // If TRUE, this reagent affects the color of food items it's added to
+
+	// If TRUE, this reagent transfers changes to its 'color' var when moving to other containers
+	// Of note: Mixing two reagents of the same type with this var that have different colors
+	// will cause them both to take on the color of the form being added into the holder.
+	// i.e. if you add red to blue, all of the reagent turns red and vice-versa.
+	var/color_transfer = FALSE
+
 	var/alpha = 255
 	var/flags = 0
 	var/hidden_from_codex
