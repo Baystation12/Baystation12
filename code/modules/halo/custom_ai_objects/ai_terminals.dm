@@ -40,11 +40,8 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/structure/ai_terminal/proc/apply_radio_channels(var/mob/living/silicon/ai/ai)
-	var/obj/item/device/radio/headset/our_radio = ai.common_radio
-	var/obj/item/device/encryptionkey/key = our_radio.keyslot2
 	for(var/channel in radio_channels_access)
-		key.channels[channel] = 1
-	our_radio.recalculateChannels()
+		ai.common_radio.create_channel_dongle(channel)
 
 /obj/structure/ai_terminal/proc/clear_old_nodes(var/mob/living/silicon/ai/ai)
 	ai.nodes_accessed.Cut()
@@ -147,25 +144,21 @@
 /obj/structure/ai_terminal/spawn_terminal/unsc
 	icon_state = "unscspawn"
 	spawn_faction = "UNSC"
-	radio_channels_access = list("SHIPCOM","TEAMCOM","SQUADCOM","FLEETCOM","EBAND","TACCOM","ONICOM","SIERRACOM")
+	radio_channels_access = list(RADIO_HUMAN, RADIO_ODST, RADIO_MARINE, RADIO_ONI, RADIO_SPARTAN, RADIO_SQUAD, RADIO_SHIP, RADIO_FLEET)
 
 /obj/structure/ai_terminal/spawn_terminal/city
 	icon_state = "unscspawn"
-	radio_channels_access = list("GCPD","MEDCOM","EBAND")
+	radio_channels_access = list(RADIO_HUMAN, RADIO_SEC)
 
 /obj/structure/ai_terminal/spawn_terminal/covenant
 	icon_state = "covspawn"
 	spawn_faction = "Covenant"
-	radio_channels_access = list("BattleNet","EBAND")
+	radio_channels_access = list(RADIO_HUMAN, RADIO_COV)
 
 /obj/structure/ai_terminal/spawn_terminal/innie
 	icon_state = "urfspawn"
 	spawn_faction = "Insurrectionist"
-	radio_channels_access = list("CMDOCOM","EBAND")
-
-/obj/structure/ai_terminal/spawn_terminal/innie/Initialize()
-	. = ..()
-	radio_channels_access += halo_frequencies.innie_channel_name
+	radio_channels_access = list(RADIO_HUMAN, RADIO_INNIE, RADIO_URFC)
 
 /obj/structure/ai_terminal/spawn_terminal/unsc/unsc_debug
 	inherent_network = "unsc debug"
