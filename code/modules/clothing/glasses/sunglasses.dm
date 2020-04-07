@@ -5,6 +5,7 @@
 	item_state = "sunglasses"
 	darkness_view = -1
 	flash_protection = FLASH_PROTECTION_MINOR
+	tint = TINT_MODERATE
 
 /obj/item/clothing/glasses/sunglasses/prescription
 	name = "prescription sunglasses"
@@ -55,12 +56,14 @@
 /obj/item/clothing/glasses/sunglasses/sechud/toggle/attack_self(mob/user)
 	if(toggleable && !user.incapacitated())
 		on = !on
-		if(on)
+		if(!on)
 			flash_protection = FLASH_PROTECTION_NONE
+			tint = TINT_NONE
 			src.hud = hud_holder
 			to_chat(user, "You switch \the [src] to HUD mode.")
 		else
 			flash_protection = initial(flash_protection)
+			tint = initial(tint)
 			src.hud = null
 			to_chat(user, "You toggle \the [src]'s darkened mode on.")
 		update_icon()
