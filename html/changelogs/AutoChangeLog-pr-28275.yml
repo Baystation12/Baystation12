@@ -1,0 +1,4 @@
+author: "Ilysen"
+delete-after: True
+changes: 
+  - rscadd: "Added polychromic dye, which can be used to change the appearance of food and drinks! Find bottles in the galley backroom and from kitchen supply crates. You can also buy a small bottle of extra-strength dye with a greater color-changing effect using an uplink."
