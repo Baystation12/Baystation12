@@ -14,7 +14,7 @@
 		)
 	permeability_coefficient = 0
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED,
+		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SMALL
 		)
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
@@ -78,12 +78,10 @@
 		icon_state = "[initial(icon_state)]_dark"
 		flash_protection = FLASH_PROTECTION_MAJOR
 		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-		tint = TINT_HEAVY
 	else
 		icon_state = initial(icon_state)
 		flash_protection = FLASH_PROTECTION_NONE
 		flags_inv = HIDEEARS|BLOCKHAIR
-		tint = TINT_NONE
 	update_icon()
 	update_clothing_icon()
 
@@ -119,7 +117,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/device/suit_cooling_unit)
 	armor = list(
-		bio = ARMOR_BIO_SHIELDED,
+		bio = ARMOR_BIO_SHIELDED, 
 		rad = ARMOR_RAD_SMALL
 		)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
