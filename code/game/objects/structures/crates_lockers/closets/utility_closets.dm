@@ -44,7 +44,7 @@
 		/obj/item/weapon/storage/med_pouch/burn,
 		/obj/item/weapon/storage/backpack/dufflebag/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight
+		/obj/item/device/flashlight,
 		/obj/item/weapon/storage/briefcase/inflatable,
 		)
 
