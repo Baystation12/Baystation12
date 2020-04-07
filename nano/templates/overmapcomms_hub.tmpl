@@ -1,0 +1,22 @@
+<h1>Telecommunications Hub</h1>
+{{:helper.link(data.active ? 'Deactivate' : 'Activate', 'arrowrefresh-1-s', {'toggle_active' : 1, 'user' : data.user}, null)}}
+<br>
+{{if data.active}}
+	<div class='block'>
+		<div class="itemLabelNarrow" style="width:20%">Frequency</div>
+		<div class="itemLabelNarrow" style="width:20%">Channel</div>
+		<div class="itemLabelNarrow" style="width:20%">Cipher</div>
+		<div class="itemLabelNarrow" style="width:20%">Status</div>
+		{{for data.frequencies_broadcast}}
+			<div class="item">
+				<div class="itemContentNarrow" style="width:20%">{{:value.freq_text}}</div>
+				<div class="itemContentNarrow" style="width:20%">{{:value.channel}}</div>
+				<div class="itemContentNarrow" style="width:20%">{{:helper.link(value.cipher ? value.cipher : 'Unknown/NA', 'key', {'set_cipher' : value.freq_text, 'user' : data.user}, null)}}</div>
+				<div class="itemContentNarrow" style="width:20%">{{:helper.link('Ignore', 'cancel', {'set_freq' : value.freq_text, 'user' : data.user}, !value.status ? 'selected' : null)}}</div>
+				<div class="itemContentNarrow" style="width:20%">{{:helper.link('Broadcast', 'arrow-4-diag', {'set_freq' : value.freq_text, 'user' : data.user}, value.status ? 'selected' : null)}}</div>
+			</div>
+		{{empty}}
+			<div class="notice">No known frequencies in the telecommunications network.</div>
+		{{/for}}
+	</div>
+{{/if}}
