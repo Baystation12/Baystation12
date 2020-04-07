@@ -542,9 +542,11 @@
 
 /decl/stock_part_preset/radio/receiver/vent_pump/engine
 	frequency = ATMOS_ENGINE_FREQ
+	filter = RADIO_ATMOSIA
 
 /decl/stock_part_preset/radio/event_transmitter/vent_pump/engine
 	frequency = ATMOS_ENGINE_FREQ
+	filter = RADIO_ATMOSIA
 
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
