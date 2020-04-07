@@ -1,0 +1,4 @@
+author: "Lorwp"
+delete-after: True
+changes: 
+  - rscadd: "IPC Monitors can now have what they display changed on a alt-click"
