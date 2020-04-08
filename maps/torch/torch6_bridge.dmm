@@ -6404,7 +6404,7 @@
 	dir = 1
 	},
 /obj/machinery/camera/network/command{
-	c_tag = "Head of Security - Office";
+	c_tag = "Chief of Security - Office";
 	network = list("Command","Security")
 	},
 /obj/machinery/button/alternate/door{
