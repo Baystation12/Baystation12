@@ -11,7 +11,6 @@
 	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
 	icon_state = "radio"
 	canhear_range = 0
-	subspace_transmission = 1
 
 /obj/item/device/radio/borg/Destroy()
 	myborg = null
@@ -23,7 +22,7 @@
 		var/mob/living/silicon/robot/R = src.loc
 		var/datum/robot_component/C = R.components["radio"]
 		R.cell_use_power(C.active_usage)
-
+/*
 /obj/item/device/radio/borg/attackby(obj/item/weapon/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
@@ -64,7 +63,8 @@
 		recalculateChannels()
 
 	return
-
+	*/
+/*
 /obj/item/device/radio/borg/proc/recalculateChannels()
 	src.channels = list()
 	src.syndie = 0
@@ -96,12 +96,13 @@
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 
 	return
+	*/
 
 /obj/item/device/radio/borg/Topic(href, href_list)
 	if(..())
 		return 1
 	if (href_list["mode"])
-		var/enable_subspace_transmission = text2num(href_list["mode"])
+		/*var/enable_subspace_transmission = text2num(href_list["mode"])
 		if(enable_subspace_transmission != subspace_transmission)
 			subspace_transmission = !subspace_transmission
 			if(subspace_transmission)
@@ -112,7 +113,7 @@
 			if(subspace_transmission == 0)//Simple as fuck, clears the channel list to prevent talking/listening over them if subspace transmission is disabled
 				channels = list()
 			else
-				recalculateChannels()
+				recalculateChannels()*/
 		. = 1
 	if (href_list["shutup"]) // Toggle loudspeaker mode, AKA everyone around you hearing your radio.
 		var/do_shut_up = text2num(href_list["shutup"])
@@ -152,7 +153,6 @@
 	data["has_loudspeaker"] = 1
 	data["loudspeaker"] = !shut_up
 	data["has_subspace"] = 1
-	data["subspace"] = subspace_transmission
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)

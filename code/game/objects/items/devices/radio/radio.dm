@@ -6,7 +6,7 @@
 	item_state = "walkietalkie"
 
 	var/on = 1 // 0 for off
-	var/last_transmission
+	//var/last_transmission
 	var/frequency = PUB_FREQ //common chat
 	var/traitor_frequency = 0 //tune to frequency to unlock traitor supplies
 	var/canhear_range = 3 // the range which mobs can hear this radio from
@@ -14,8 +14,8 @@
 	var/b_stat = 0
 	var/broadcasting = 0
 	var/listening = 1
-	var/list/channels = list() //see communications.dm for full list. First channel is a "default" for :h
-	var/subspace_transmission = 0
+	//var/list/channels = list() //see communications.dm for full list. First channel is a "default" for :h
+	//var/subspace_transmission = 0
 	var/syndie = 0//Holder to see if it's a syndicate encrypted radio
 	var/radio_desc = ""
 	flags = CONDUCT
@@ -25,11 +25,11 @@
 	w_class = ITEM_SIZE_SMALL
 
 	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
-	var/const/FREQ_LISTENING = 1
-	var/list/internal_channels
+	//var/const/FREQ_LISTENING = 1
+	//var/list/internal_channels
 
 	var/datum/radio_frequency/radio_connection
-	var/list/datum/radio_frequency/secure_radio_connections = new
+	//var/list/datum/radio_frequency/secure_radio_connections = new
 
 	var/list/ciphers_dongles = list()
 	var/list/dongles_connections = list()
@@ -38,6 +38,8 @@
 	var/list/dongles = list()
 
 	var/list/ui_channels = list()
+
+	var/long_range = 0
 
 /obj/item/device/radio/proc/set_frequency(new_frequency)
 	radio_controller.remove_object(src, frequency)
@@ -113,7 +115,6 @@
 /obj/item/device/radio/LateInitialize()
 	. = ..()
 	wires = new(src)
-	internal_channels = GLOB.default_internal_channels.Copy()
 	GLOB.listening_objects += src
 
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
@@ -184,13 +185,14 @@
 		return wires.GetInteractWindow()
 	return
 
-
+/*
 /obj/item/device/radio/proc/text_sec_channel(var/chan_name, var/chan_stat)
 	var/list = !!(chan_stat&FREQ_LISTENING)!=0
 	return {"
 			<B>[chan_name]</B><br>
 			Speaker: <A href='byond://?src=\ref[src];ch_name=[chan_name];listen=[!list]'>[list ? "Engaged" : "Disengaged"]</A><BR>
 			"}
+			*/
 
 /obj/item/device/radio/proc/ToggleBroadcast()
 	broadcasting = !broadcasting && !(wires.IsIndexCut(WIRE_TRANSMIT) || wires.IsIndexCut(WIRE_SIGNAL))
@@ -253,23 +255,27 @@
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/language_name)
 
-	var/datum/channel_cipher/cipher = GLOB.channels_ciphers[channel]
+	/*var/datum/channel_cipher/cipher = GLOB.channels_ciphers[channel]
 	if(!cipher)
-		return
+		return*/
 
-	var/datum/radio_frequency/connection = radio_controller.add_object(src, cipher.frequency,  RADIO_CHAT)
-	if (!istype(connection))
-		return
+	var/obj/item/device/channel_dongle/dongle = channels_dongles[channel]
+	if(!dongle)
+		return 0
+
+	var/datum/radio_frequency/connection = dongles_connections[dongle]
+
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
 	A.fully_replace_character_name(from)
-	talk_into(A, message, cipher.hotkey, "states", all_languages[language_name])
+	post_signal(A, message, connection, "states", all_languages[language_name], dongle.cipher)
 	A.loc = null
 	qdel(A)
-	radio_controller.remove_object(src, cipher.frequency)
+
 	return 1
 
 /obj/item/device/radio/talk_into(mob/living/M as mob, message, var/hotkey, var/speaking_verb = "says", var/datum/language/speaking = null)
-	if(!on) return 0 // the device has to be on
+	if(!on)
+		return 0 // the device has to be on
 
 	if(!M || !message)
 		return 0
@@ -324,7 +330,9 @@
 	if (!istype(connection))
 		return 0
 
+	post_signal(M, message, connection, speaking_verb, speaking, active_dongle ? active_dongle.cipher : null)
 
+/obj/item/device/radio/proc/post_signal(mob/living/M as mob, message, var/datum/radio_frequency/connection, var/speaking_verb = "says", var/datum/language/speaking = null, var/datum/channel_cipher/cipher)
 	//#### Tagging the signal with all appropriate identity values ####//
 
 	// ||-- The mob's name identity --||
@@ -386,12 +394,11 @@
 		"speaking_verb" = speaking_verb,
 		"long_range" = 0	//broadcast over a powerful system
 	)
-	if(active_dongle)
-		signal.data["cipher"] = active_dongle.cipher
+	signal.data["cipher"] = cipher
 	signal.frequency = connection.frequency // Quick frequency set
 
 	//#### Sending the signal to all subspace receivers ####//
-	connection.post_signal(src, signal, RADIO_CHAT)
+	connection.post_signal(src, signal, RADIO_CHAT, long_range)
 
 /obj/item/device/radio/hear_talk(mob/M as mob, msg, var/verb = "says", var/datum/language/speaking = null)
 
@@ -467,7 +474,7 @@
 	for(var/obj/item/device/channel_dongle/dongle in dongles_connections)
 		dongle.listening = 0
 	. = ..()
-
+/*
 /obj/item/device/radio/proc/config(op)
 	if(radio_controller)
 		for (var/ch_name in channels)
@@ -478,6 +485,7 @@
 		for (var/ch_name in op)
 			secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
 	return
+	*/
 
 /obj/item/device/radio/off
 	listening = 0
@@ -492,10 +500,6 @@
 
 /obj/item/device/radio/phone/medbay
 	frequency = MED_I_FREQ
-
-/obj/item/device/radio/phone/medbay/New()
-	..()
-	internal_channels = GLOB.default_medbay_channels.Copy()
 
 /obj/item/device/radio/CouldUseTopic(var/mob/user)
 	..()

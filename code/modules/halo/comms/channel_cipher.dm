@@ -12,7 +12,7 @@ GLOBAL_LIST_EMPTY(freqs_ciphers)
 	//var/freq_text
 	var/encrypted = 1
 
-/datum/channel_cipher/New(var/new_freq = 0, var/new_channel_name)
+/datum/channel_cipher/New(var/new_freq = 0)
 	. = ..()
 
 	//a unique 7 character key
@@ -33,9 +33,6 @@ GLOBAL_LIST_EMPTY(freqs_ciphers)
 		frequency = new_freq
 	GLOB.freqs_ciphers["[frequency]"] = src
 
-	//assign our channel name
-	if(new_channel_name)
-		channel_name = new_channel_name
 	GLOB.channels_ciphers[channel_name] = src
 
 //generate the preset channel ciphers at server startup

@@ -104,10 +104,10 @@
 
 /mob/living/silicon/proc/law_channels()
 	var/list/channels = new()
-	channels += MAIN_CHANNEL
+	/*channels += MAIN_CHANNEL
 	channels += common_radio.channels
 	channels += additional_law_channels
-	channels += "Binary"
+	channels += "Binary"*/
 	return channels
 
 /mob/living/silicon/proc/lawsync()

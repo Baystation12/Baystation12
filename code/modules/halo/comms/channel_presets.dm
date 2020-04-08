@@ -157,15 +157,21 @@ GLOBAL_LIST_INIT(random_channels, list(\
 /obj/item/device/channel_dongle/innie
 	channel_preset = RADIO_INNIE
 
+/obj/item/device/channel_dongle/innie/New()
+
+	//this channel has a random channel name
+	channel_preset = GLOB.INSURRECTION.get_innie_channel_name()
+
+	. = ..()
+
 /datum/channel_cipher/innie
 	channel_name = RADIO_INNIE
 	chat_span_class = "syndradio"
 	hotkey = "b"
 
 /datum/channel_cipher/innie/New()
-	. = ..()
 
 	//this channel has a random channel name
-	channel_name = pick(GLOB.random_channels)
-	GLOB.random_channels -= channel_name
-	GLOB.innie_channel = channel_name
+	channel_name = GLOB.INSURRECTION.get_innie_channel_name()
+
+	. = ..()

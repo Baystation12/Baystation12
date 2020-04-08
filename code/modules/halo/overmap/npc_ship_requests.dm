@@ -284,7 +284,7 @@
 		if(repairs_until_loc_transmit > 0)
 			repairs_until_loc_transmit--
 		else
-			GLOB.global_headset.autosay("Previously unlogged object located at [ship_source.x],[ship_source.y]", "System Scan", "EBAND", transmit_lang)
+			GLOB.global_announcer.autosay("Previously unlogged object located at [ship_source.x],[ship_source.y]", "System Scan", "EBAND", transmit_lang)
 
 /datum/npc_ship_request/shipyard_repair/insecure/cov
 	request_auth_levels = list(AUTHORITY_LEVEL_COV)

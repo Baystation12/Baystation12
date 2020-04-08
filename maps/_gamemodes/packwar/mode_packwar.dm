@@ -141,7 +141,7 @@
 		if("Ram Clan")
 			radio_channel = "RamNet"
 	if(radio_channel)
-		GLOB.global_headset.autosay(\
+		GLOB.global_announcer.autosay(\
 			"[character.name], [job] has returned from wandering in the wilderness to fight for the clan.", \
 			"Clan Barracks", radio_channel, "Sangheili")
 

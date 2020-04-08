@@ -39,6 +39,7 @@
 	var/quest_interval_min = 1 SECONDS
 	var/quest_interval_max = 5 MINUTES
 	var/gear_supply_type
+	var/default_radio_channel = RADIO_HUMAN
 
 /datum/faction/New()
 	. = ..()

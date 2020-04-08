@@ -14,7 +14,7 @@
 
 /obj/item/device/radio/intercom/get_storage_cost()
 	return ITEM_SIZE_NO_CONTAINER
-
+/*
 /obj/item/device/radio/intercom/custom
 	name = "intercom (Custom)"
 	broadcasting = 0
@@ -145,3 +145,4 @@
 /obj/item/device/radio/intercom/locked/confessional
 	name = "confessional intercom"
 	frequency = 1480
+	*/

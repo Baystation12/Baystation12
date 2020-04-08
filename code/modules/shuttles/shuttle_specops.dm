@@ -20,7 +20,7 @@
 /datum/shuttle/autodock/ferry/specops/New()
 	..()
 	announcer = new /obj/item/device/radio/intercom(null)//We need a fake AI to announce some stuff below. Otherwise it will be wonky.
-	announcer.config(list("Response Team" = 0))
+	//announcer.config(list("Response Team" = 0))
 
 /datum/shuttle/autodock/ferry/specops/proc/radio_announce(var/message)
 	if(announcer)

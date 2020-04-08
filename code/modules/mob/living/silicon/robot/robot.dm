@@ -174,10 +174,10 @@
 	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
 	if(ispath(module))
 		new module(src)
-	if(radio_key_type)
+	/*if(radio_key_type)
 		qdel(radio.keyslot)
 		radio.keyslot = new radio_key_type(radio)
-		radio.recalculateChannels()
+		radio.recalculateChannels()*/
 	if(lawupdate)
 		var/new_ai = select_active_ai_with_fewest_borgs()
 		if(new_ai)
