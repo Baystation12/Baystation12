@@ -64,7 +64,7 @@
 
 /obj/item/mech_component/chassis/combat/prebuild()
 	. = ..()
-	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
 
 /obj/item/mech_component/chassis/combat/Initialize()
 	pilot_positions = list(

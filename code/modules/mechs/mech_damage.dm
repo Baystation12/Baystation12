@@ -29,8 +29,8 @@
 
 /mob/living/exosuit/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
-	if(body && body.armor)
-		var/body_armor = get_extension(body.armor, /datum/extension/armor)
+	if(body && body.m_armour)
+		var/body_armor = get_extension(body.m_armour, /datum/extension/armor)
 		if(body_armor)
 			. += body_armor
 
