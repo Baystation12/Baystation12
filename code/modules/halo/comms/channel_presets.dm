@@ -57,7 +57,7 @@ GLOBAL_LIST_INIT(random_channels, list(\
 //
 /datum/channel_cipher/squadcom
 	channel_name = RADIO_SQUAD
-	chat_span_class = "entradio"
+	chat_span_class = "comradio"
 	hotkey = "q"
 
 /obj/item/device/channel_dongle/marines
