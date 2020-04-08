@@ -139,7 +139,8 @@ var/list/artefact_feedback = list(/obj/structure/closet/wizard/armor = 		"HS",
 			dat += " ([spellbook.spells[spellbook.spells[i]]] spell slot[spellbook.spells[spellbook.spells[i]] > 1 ? "s" : "" ])"
 			if(spellbook.book_flags & CAN_MAKE_CONTRACTS)
 				dat += " <A href='byond://?src=\ref[src];path=\ref[spellbook.spells[i]];contract=1;'>Make Contract</a>"
-			dat += "<br><i>[desc]</i><br>"
+			dat += "<br><i>[desc]</i><br><br>"
+		dat += "<br>"
 		dat += "<center><A href='byond://?src=\ref[src];reset=1'>Re-memorize your spellbook.</a></center>"
 		if(spellbook.book_flags & INVESTABLE)
 			if(investing_time)

@@ -3,7 +3,7 @@
 	desc = "This spell teleports you to a type of area of your selection."
 	feedback = "TP"
 	school = "conjuration"
-	charge_max = 600
+	charge_max = 60 SECONDS
 	spell_flags = NEEDSCLOTHES
 	invocation = "Scyar Nila!"
 	invocation_type = SpI_SHOUT
@@ -26,7 +26,8 @@
 	var/area/thearea
 	if(!randomise_selection)
 		thearea = input("Area to teleport to", "Teleport") as null|anything in wizteleportlocs
-		if(!thearea) return
+		if(!thearea)
+			return
 	else
 		thearea = pick(wizteleportlocs)
 	return list(wizteleportlocs[thearea])
