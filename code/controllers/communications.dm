@@ -286,7 +286,6 @@ var/global/datum/controller/radio/radio_controller
 	for(var/obj/effect/overmap/nearby_sector in range(7, source_sector))
 
 		//check for jammers
-		//disabled for testing
 		for(var/obj/machinery/overmap_comms/jammer/tj in nearby_sector.telecomms_jammers)
 			if(!tj.active)
 				continue
@@ -330,6 +329,7 @@ var/global/datum/controller/radio/radio_controller
 				broadcasting_sectors |= nearby_sector
 
 				//dont need to scan this sector any further
+				sector_finished = 1
 				break
 
 	//see which devices are in range
