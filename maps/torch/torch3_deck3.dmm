@@ -9816,7 +9816,7 @@
 /area/thruster/d3port)
 "tL" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Third Deck Hallway - Officer's Mess Hall Entrance";
+	c_tag = "Third Deck Hallway - Center";
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/green{
@@ -11908,7 +11908,7 @@
 /area/command/disperser)
 "zn" = (
 /obj/machinery/camera/network/third_deck{
-	c_tag = "Vacant Offices";
+	c_tag = "Computer Lab";
 	dir = 4
 	},
 /obj/machinery/power/apc{
