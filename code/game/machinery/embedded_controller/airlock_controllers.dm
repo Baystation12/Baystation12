@@ -15,6 +15,7 @@
 	var/tag_air_alarm
 	var/list/dummy_terminals = list()
 	var/cycle_to_external_air = 0
+	var/scrubber_assist = 0
 
 /obj/machinery/embedded_controller/radio/airlock/Destroy()
 	for(var/thing in dummy_terminals)
