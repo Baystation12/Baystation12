@@ -21,7 +21,7 @@
 	effect_state = "green_sparkles"
 	effect_duration = 5
 
-	message = "You feel a pleasant rush of heat move through your body."
+	message = SPAN_NOTICE("<b>You feel a pleasant rush of heat move through your body.</b>")
 
 /spell/targeted/heal_target/empower_spell()
 	if(!..())
@@ -64,7 +64,7 @@
 	amt_dam_robo = -10
 	amt_blood  = 28
 
-	message = "Your body feels like a furnace."
+	message = SPAN_NOTICE("<b>Your body feels like a warm, cozy fire.</b>")
 
 /spell/targeted/heal_target/major/empower_spell()
 	if(!..())

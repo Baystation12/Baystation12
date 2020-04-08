@@ -40,6 +40,11 @@
 		return
 	return
 
+/spell/area_teleport/check_valid_targets(list/targets)
+	// Teleport should function across z's, so we make sure that happens
+	// without this check, it only works for teleporting to areas you can see
+	return targets && islist(targets) && targets.len > 0
+
 /spell/area_teleport/after_cast()
 	return
 

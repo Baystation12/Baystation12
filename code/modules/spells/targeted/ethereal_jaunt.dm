@@ -7,7 +7,7 @@
 	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
 	invocation = "none"
 	invocation_type = SpI_NONE
-	range = -1
+	range = 0
 	max_targets = 1
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 3)
 	cooldown_min = 100 //50 deciseconds reduction per rank

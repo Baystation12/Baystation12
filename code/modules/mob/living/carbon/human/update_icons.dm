@@ -420,6 +420,8 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_UNDERWEAR_LAYER] = list()
 	for(var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
+		if (!UW.icon) // Avoid runtimes for nude underwear types
+			continue
 
 		var/image/I = image(icon = UW.icon, icon_state = UW.icon_state)
 		I.appearance_flags = RESET_COLOR
