@@ -109,9 +109,10 @@ Quick adjacency (to turf):
 		if(O.atom_flags & ATOM_FLAG_CHECKS_BORDER) // windows have throwpass but are on border, check them first
 			if( O.dir & target_dir || O.dir&(O.dir-1) ) // full tile windows are just diagonals mechanically
 				var/obj/structure/window/W = target_atom
-				if(istype(W))
-					if(!W.is_fulltile())	//exception for breaking full tile windows on top of single pane windows
-						return 0
+				if(istype(W) && W.is_fulltile()) //exception for breaking full tile windows on top of single pane windows
+					return 1
+				if(istype(target_atom, /obj/structure/wall_frame)) // exception for low walls beneath windows
+					return 1
 				else
 					return 0
 
