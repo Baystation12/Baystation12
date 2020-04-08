@@ -10,6 +10,8 @@
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	mask = /obj/item/clothing/mask/rebreather
 	r_pocket = /obj/item/weapon/grenade/plasma
+	//
+	id_type = /obj/item/weapon/card/id/grunt_minor
 
 /decl/hierarchy/outfit/unggoy/post_equip(mob/living/carbon/human/H)
 	. = ..()
@@ -40,6 +42,8 @@
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/major
 	back = /obj/item/weapon/tank/methane/unggoy_internal/red
+	//
+	id_type = /obj/item/weapon/card/id/grunt_major
 
 /decl/hierarchy/outfit/unggoy/ultra
 	name = "Unggoy (Ultra)"
@@ -47,6 +51,8 @@
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
 	l_hand = /obj/item/language_learner/unggoy_to_common
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
+	//
+	id_type = /obj/item/weapon/card/id/grunt_ultra
 
 /decl/hierarchy/outfit/unggoy/specops
 	name = "Unggoy (Spec-Ops)"
@@ -54,6 +60,8 @@
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/specops
 	mask = /obj/item/clothing/mask/rebreather/unggoy_spec_ops
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
+	//
+	id_type = /obj/item/weapon/card/id/grunt_specops
 
 /decl/hierarchy/outfit/unggoy/deacon
 	name = "Unggoy (Deacon)"
@@ -62,3 +70,5 @@
 	mask = /obj/item/clothing/mask/rebreather/unggoy_deacon
 	l_hand = /obj/item/language_learner/unggoy_to_common
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
+	//
+	id_type = /obj/item/weapon/card/id/grunt_deacon

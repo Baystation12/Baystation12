@@ -12,6 +12,8 @@
 	head = /obj/item/clothing/head/helmet/kigyar
 	l_pocket = null
 	r_pocket = null
+	//
+	id_type = /obj/item/weapon/card/id/jackal_minor
 
 /decl/hierarchy/outfit/kigyar/marksman
 	name = "Kig-Yar (Marksman)"
@@ -21,9 +23,13 @@
 	gloves = null
 	l_pocket = /obj/item/ammo_magazine/type51mag
 	r_pocket = /obj/item/ammo_magazine/type51mag
+	//
+	id_type = /obj/item/weapon/card/id/jackal_minor
 
 /decl/hierarchy/outfit/kigyar/marksman_beamrifle
 	name = "Kig-Yar (Marksman - Beam)"
 	gloves = null
 
 	back = /obj/item/weapon/gun/energy/beam_rifle
+	//
+	id_type = /obj/item/weapon/card/id/jackal_minor
