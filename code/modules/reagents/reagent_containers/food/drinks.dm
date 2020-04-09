@@ -17,6 +17,9 @@
 	update_icon()
 	return
 
+/obj/item/weapon/reagent_containers/food/drinks/on_color_transfer_reagent_change()
+	return
+
 /obj/item/weapon/reagent_containers/food/drinks/attack_self(mob/user as mob)
 	if(!is_open_container())
 		open(user)

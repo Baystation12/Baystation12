@@ -6,7 +6,8 @@
 	return list(
 		/obj/item/weapon/reagent_containers/food/condiment/salt = 1,
 		/obj/item/weapon/reagent_containers/food/condiment/flour = 7,
-		/obj/item/weapon/reagent_containers/food/condiment/sugar = 2
+		/obj/item/weapon/reagent_containers/food/condiment/sugar = 2,
+		/obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic = 2
 	)
 
 /obj/structure/closet/secure_closet/freezer/kitchen/mining

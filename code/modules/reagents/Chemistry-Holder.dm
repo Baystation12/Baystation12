@@ -248,6 +248,12 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		del_reagent(current.type)
 	return
 
+/datum/reagents/proc/get_reagent(var/reagent_type)
+	for(var/datum/reagent/current in reagent_list)
+		if(current.type == reagent_type)
+			return current
+	return
+
 /datum/reagents/proc/get_reagent_amount(var/reagent_type)
 	for(var/datum/reagent/current in reagent_list)
 		if(current.type == reagent_type)
@@ -314,6 +320,13 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 		target.add_reagent(current.type, amount_to_transfer * multiplier, current.get_data(), safety = 1) // We don't react until everything is in place
 		if(!copy)
 			remove_reagent(current.type, amount_to_transfer, 1)
+		if (current.color_transfer)
+			var/datum/reagent/added = target.get_reagent(current.type)
+			if (added)
+				added.color = current.color
+				if (target.my_atom)
+					target.my_atom.on_color_transfer_reagent_change()
+					target.my_atom.update_icon()
 
 	if(!copy)
 		HANDLE_REACTIONS(src)
