@@ -81,3 +81,5 @@
 	name = "Lesser Prophet"
 	suit = /obj/item/clothing/suit/armor/special/shielded_prophet_robe
 	l_ear = /obj/item/device/radio/headset/covenant
+	//
+	id_type = /obj/item/weapon/card/id/prophet
