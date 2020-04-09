@@ -32,33 +32,35 @@
 	var/score_per_tick = 1
 	var/capture_score = 0
 	var/is_winner
-	var/objective_faction
 	var/list/controlled_nodes = list()
-	var/radio_frequency = "System"
 	var/radio_language = LANGUAGE_GALCOM
 	var/radio_name = "Sovereignty Announcer"
 
+//obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/language_name)
+
 /datum/objective/colony_capture/proc/node_contested(var/obj/machinery/computer/capture_node/C, var/old_faction, var/trigger_faction)
-	if(old_faction == objective_faction)
-		GLOB.global_headset.autosay("We are losing control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+
+	if(old_faction == my_faction.name)
+		GLOB.global_announcer.autosay("We are losing control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, my_faction.default_radio_channel, radio_language)
+		//obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/language_name)
 
 /datum/objective/colony_capture/proc/node_captured(var/obj/machinery/computer/capture_node/C, var/old_faction, var/trigger_faction)
 
-	if(C.control_faction == objective_faction)
+	if(trigger_faction == my_faction.name)
 		controlled_nodes |= C
 		GLOB.processing_objects |= src
-		GLOB.global_headset.autosay("We have captured [C][old_faction ? " from the [old_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+		GLOB.global_announcer.autosay("We have captured [C][old_faction ? " from the [old_faction]" : ""]!", radio_name, my_faction.default_radio_channel, radio_language)
 
-	else if(old_faction == objective_faction)
-		GLOB.global_headset.autosay("We have lost control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+	else if(old_faction == my_faction.name)
+		GLOB.global_announcer.autosay("We have lost control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, my_faction.default_radio_channel, radio_language)
 
 /datum/objective/colony_capture/proc/node_reset(var/obj/machinery/computer/capture_node/C, var/old_faction, var/trigger_faction)
 
-	if(old_faction == objective_faction)
+	if(old_faction == my_faction.name)
 		controlled_nodes -= C
 		if(!controlled_nodes.len)
 			GLOB.processing_objects -= src
-		GLOB.global_headset.autosay("We have lost control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, radio_frequency, radio_language)
+		GLOB.global_announcer.autosay("We have lost control of [C][trigger_faction ? " to the [trigger_faction]" : ""]!", radio_name, my_faction.default_radio_channel, radio_language)
 
 /datum/objective/colony_capture/proc/process()
 	capture_score += score_per_tick * controlled_nodes.len

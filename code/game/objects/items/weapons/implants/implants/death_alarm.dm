@@ -43,7 +43,7 @@
 	GLOB.processing_objects.Remove(src)
 
 	for(var/channel in list("Security", "Medical", "Command"))
-		GLOB.global_headset.autosay(death_message, "[mobname]'s Death Alarm", channel)
+		GLOB.global_announcer.autosay(death_message, "[mobname]'s Death Alarm", channel)
 
 /obj/item/weapon/implant/death_alarm/emp_act(severity)			//for some reason alarms stop going off in case they are emp'd, even without this
 	if (malfunction)		//so I'm just going to add a meltdown chance here

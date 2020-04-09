@@ -49,7 +49,6 @@
 	loot_distributor.loot_list["gauntletLoot"] = list(\
 	/obj/item/weapon/reagent_containers/glass/bottle/floodtox,\
 	/obj/item/weapon/reagent_containers/glass/bottle/floodtox,\
-	/obj/structure/xeno_plant,\
 	/obj/structure/autoturret/ONI,\
 	/obj/item/sentinel_kit,\
 	/obj/item/weapon/gun/energy/laser/sentinel_beam/detached,\

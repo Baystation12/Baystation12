@@ -97,8 +97,6 @@
 /datum/objective/colony_capture/cov
 	short_text = "Capture the human colony"
 	explanation_text = "Holding the human colony will give us time to search it for artifacts."
-	objective_faction = "Covenant"
-	radio_frequency = "BattleNet"
 	radio_language = "Sangheili"
 	radio_name = "Ministry of Fervent Intercession"
 

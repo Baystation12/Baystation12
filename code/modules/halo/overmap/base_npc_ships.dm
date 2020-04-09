@@ -39,7 +39,7 @@
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
 	var/radio_language = "Galactic Common"
-	var/radio_channel = "System"
+	var/radio_channel = RADIO_HUMAN
 
 	var/hull = 1000 //Essentially used to tell the ship when to "stop" trying to move towards it's area.
 
@@ -124,7 +124,7 @@
 	//check if we're still on cooldown from last radio message
 	if(world.time >= last_radio_time + radio_cooldown || ignore_cooldown)
 		last_radio_time = world.time
-		GLOB.global_headset.autosay(message, src.name, radio_channel, radio_language)
+		GLOB.global_announcer.autosay(message, src.name, radio_channel, radio_language)
 	else
 		//otherwise queue it up
 		//note: if there is lots of radio spam some messages will be lost so only send the latest message
