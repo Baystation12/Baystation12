@@ -1,0 +1,5 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "The \"Third Deck Hallway - Officer's Mess Hall Entrance\" camera is now known as the \"Third Deck Hallway - Center\" camera."
+  - tweak: "The \"Vacant Offices\" camera is now known as the \"Computer Lab\" camera."
