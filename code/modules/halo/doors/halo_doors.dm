@@ -32,12 +32,18 @@
 	maxhealth = 1500
 	paintable = 0
 
+/obj/machinery/door/airlock/multi_tile/halo/ns
+	dir = 4
+
 /obj/machinery/door/airlock/multi_tile/halo/blast
 	name = "Blast doors"
 	icon = 'code/modules/halo/doors/airlockblastdouble/door.dmi'
 	welded_file = 'code/modules/halo/doors/airlockblastdouble/welded.dmi'
 	opacity = 0
 	maxhealth = 2000
+
+/obj/machinery/door/airlock/multi_tile/halo/blast/ns
+	dir = 4
 
 obj/machinery/door/airlock/multi_tile/halo/triple
 	icon = 'code/modules/halo/doors/blastdoor/door.dmi'
