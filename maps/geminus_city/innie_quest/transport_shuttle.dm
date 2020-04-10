@@ -11,8 +11,7 @@
 	var/fuel_left = 100
 	var/fuel_max = 100
 	*/
-	var/obj/item/fusion_fuel/held_fuel
-	var/fuel_efficiency = 1000
+	var/fuel_efficiency = 10
 	var/atmos_speed = 120000
 	var/fake_launch = 0
 
@@ -20,8 +19,8 @@
 	var/next_name = ""
 	var/current_name = ""
 
-	waypoint_station = "geminus_innie_transport"
-	waypoint_offsite = "offsite_innie_transport"
+	waypoint_station = "innie_berth_transport"
+	waypoint_offsite = "offsite_berth_transport"
 	var/obj/effect/shuttle_instance/shuttle_instance
 	var/datum/npc_quest/instance_quest
 
@@ -40,11 +39,13 @@
 
 /datum/shuttle/autodock/ferry/geminus_innie_transport/attempt_move(var/obj/effect/shuttle_landmark/destination)
 
-	shuttle_instance = locate() in world
-	shuttle_instance.load_instance(instance_quest)
+	//load the quest instance... if we arent in it
+	if(get_location_waypoint(location) != waypoint_offsite)
+		shuttle_instance = locate() in world
+		shuttle_instance.load_instance(instance_quest)
 
 	//relocate the instance
-	waypoint_offsite = locate("offsite_innie_transport")
+	waypoint_offsite = locate(initial(waypoint_offsite))
 	next_location = get_location_waypoint(!location)
 	destination = next_location
 
@@ -89,38 +90,12 @@
 	else
 		next_name = "Rabbit Hole Base"
 
-/obj/machinery/shuttle_fuel
-	name = "thruster fuel loader"
-	desc = "An automated loading device for a fusion thruster to insert and remove deuterium fuel packets."
-	icon = 'code/modules/halo/overmap/fusion_thruster.dmi'
-	icon_state = "loader"
-	anchored = 1
-	var/obj/item/fusion_fuel/held_fuel
-	var/datum/shuttle/autodock/ferry/geminus_innie_transport/my_shuttle
+/datum/shuttle/autodock/ferry/geminus_innie_transport/proc/get_fuel()
+	if(held_fuel)
+		return held_fuel.fuel_left
+	return 0
 
-/obj/machinery/shuttle_fuel/New()
-	. = ..()
-	held_fuel = new(src)
-
-/obj/machinery/shuttle_fuel/attack_hand(var/mob/user)
-	if(isliving(user))
-		if(held_fuel)
-			src.visible_message("<span class='info'>[src] ejects it's spent [held_fuel].</span>")
-			held_fuel.loc = src.loc
-			held_fuel = null
-			//icon_state = "nozzle0"
-			if(my_shuttle)
-				my_shuttle.held_fuel = null
-		else
-			to_chat(user, "<span class='notice'>[src] does not contain a deuterium fuel packet!</span>")
-
-/obj/machinery/shuttle_fuel/attackby(var/obj/I, var/mob/user)
-	if(isliving(user))
-		if(istype(I, /obj/item/fusion_fuel))
-			user.drop_item()
-			I.loc = src
-			held_fuel = I
-			if(my_shuttle)
-				my_shuttle.held_fuel = held_fuel
-			//icon_state = "nozzle1"
-			to_chat(user, "<span class='info'>You insert [I] into [src].</span>")
+/datum/shuttle/autodock/ferry/geminus_innie_transport/proc/use_fuel(var/fuel_used)
+	if(held_fuel)
+		held_fuel.fuel_left -= fuel_used
+		held_fuel.fuel_left = max(held_fuel.fuel_left, 0)

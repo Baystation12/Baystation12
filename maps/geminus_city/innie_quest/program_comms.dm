@@ -28,15 +28,27 @@
 	var/idle_interval_min = 6 SECONDS
 	var/idle_interval_current = 8 SECONDS
 	var/idle_interval_max = 14 SECONDS
+	var/timer_update_next = 0
 
 /datum/nano_module/program/innie_comms/New()
 	. = ..()
 	reload_contacts()
 
 /datum/nano_module/program/innie_comms/proc/process_tick()
+	//random dialogue by the NPC while a hail is open
 	if(selected_faction && world.time > time_last_msg + idle_interval_current)
 		say_message(selected_faction.leader_name, selected_faction.hail_idle())
 		idle_interval_current = rand(idle_interval_min, idle_interval_max)
+
+	//update the quest timers... a 1 minute interval will reduce processing
+	if(world.time > timer_update_next)
+		timer_update_next = world.time + 1 MINUTE
+
+		//the quest time left is rounded to the nearest minute
+		for(var/list/cur_quest in faction_quests)
+			var/datum/npc_quest/Q = locate(cur_quest["quest_ref"])
+			//cur_faction["reputation"] = F.get_faction_reputation("Insurrection")
+			cur_quest["time_left"] = Q.get_time_left()
 
 /datum/nano_module/program/innie_comms/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
@@ -67,36 +79,76 @@
 
 		if(3)// Quests
 			data["selected_faction"] = selected_faction.name
-			for(var/list/cur_quest in faction_quests)
-				var/datum/npc_quest/Q = locate(cur_quest["quest_ref"])
-				//cur_faction["reputation"] = F.get_faction_reputation("Insurrection")
-				cur_quest["time_left"] = Q.get_time_left()
 			data["faction_quests"] = faction_quests
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "comms_innie.tmpl", name, 1100, 800, state = state)
+		ui = new(user, src, ui_key, "comms_innie.tmpl", name, 950, 600, state = state)
 		ui.set_auto_update(1)
 		ui.set_initial_data(data)
 		ui.open()
+
+/datum/nano_module/program/innie_comms/proc/quest_generated(var/datum/faction/source_faction)
+	if(source_faction != selected_faction || gc_destroyed)
+		source_faction.listening_programs.Remove(src)
+		return
+
+	say_message(selected_faction.leader_name, selected_faction.hail_quest_generated())
+	if(screen == 3)
+		reload_faction_quests(1)
+
+/datum/nano_module/program/innie_comms/proc/quest_win(var/datum/faction/source_faction, var/datum/npc_quest/Q)
+	if(source_faction != selected_faction || gc_destroyed)
+		source_faction.listening_programs.Remove(src)
+		return
+
+	say_message(selected_faction.leader_name, "[selected_faction.hail_quest_win()] (+[Q.get_win_favour()] rep)")
+	if(screen == 2)
+		reload_faction_quests(0)
+	else if(screen == 3)
+		reload_faction_quests(1)
+
+/datum/nano_module/program/innie_comms/proc/quest_lose(var/datum/faction/source_faction, var/datum/npc_quest/Q)
+	if(source_faction != selected_faction || gc_destroyed)
+		source_faction.listening_programs.Remove(src)
+		return
+
+	say_message(selected_faction.leader_name, "[selected_faction.hail_disappointed()]  ([Q.get_fail_favour()] rep")
+	if(screen == 2)
+		reload_faction_quests(0)
+	else if(screen == 3)
+		reload_faction_quests(1)
+
+/datum/nano_module/program/innie_comms/proc/quest_attempted(var/datum/faction/source_faction)
+	if(source_faction != selected_faction || gc_destroyed)
+		source_faction.listening_programs.Remove(src)
+		return
+
+	for(var/list/cur_quest in faction_quests)
+		var/datum/npc_quest/Q = locate(cur_quest["quest_ref"])
+		cur_quest["attempts_left"] = Q.get_attempts_left()
 
 /datum/nano_module/program/innie_comms/proc/reload_faction_quests(var/active = 1)
 	faction_quests = list()
 
 	if(selected_faction)
-		for(var/datum/npc_quest/Q in active ? selected_faction.active_quests : selected_faction.completed_quests)
+		for(var/datum/npc_quest/Q in selected_faction.all_quests)//active ? selected_faction.active_quests : selected_faction.completed_quests)
 
-			faction_quests.Add(list(list(\
-				"desc_text" = Q.desc_text,\
-				"favour_reward" = Q.favour_reward,\
-				"credit_reward" = Q.credit_reward,\
-				"difficulty_desc" = Q.get_difficulty_text(),\
-				"location_name" = Q.location_name + " ([Q.map_references[Q.map_path]])",\
-				"status_desc" = Q.get_status_text(),\
-				"target" = Q.enemy_faction,\
-				"time_left" = Q.get_time_left(),\
-				"quest_ref" = "\ref[Q]"\
-			)))
+			if(Q.is_quest_active() == active)
+
+				faction_quests.Add(list(list(\
+					"desc_text" = Q.desc_text,\
+					"favour_reward" = Q.favour_reward,\
+					"credit_reward" = Q.credit_reward,\
+					"difficulty_desc" = Q.get_difficulty_text(),\
+					"difficulty_stars" = Q.get_difficulty_stars(),\
+					"location_name" = Q.location_name + " ([Q.map_references[Q.map_path]])",\
+					"status_desc" = Q.get_status_text(),\
+					"target" = Q.enemy_faction,\
+					"time_left" = Q.get_time_left(),\
+					"attempts_left" = Q.get_attempts_left(),\
+					"quest_ref" = "\ref[Q]"\
+				)))
 
 /datum/nano_module/program/innie_comms/proc/reload_contacts()
 	/*
@@ -177,7 +229,7 @@
 	if(href_list["set_screen"])
 		screen = text2num(href_list["set_screen"])
 		if(screen == 3)
-			say_message(selected_faction.leader_name, selected_faction.hail_quest_new())
+			say_message(selected_faction.leader_name, selected_faction.hail_quest_display())
 			reload_faction_quests(1)
 		else if(screen == 2)
 			reload_faction_quests(0)
@@ -225,49 +277,55 @@
 		var/datum/npc_quest/Q = locate(href_list["reject_quest"])
 		var/obj/item/modular_computer/MC = nano_host()
 
-		selected_faction.reject_quest("Insurrection", Q, 1)
+		selected_faction.reject_quest(Q, "Insurrection")
 		var/new_rep = selected_faction.get_faction_reputation("Insurrection")
 		var/reply_message
 		var/reply_name = selected_faction.leader_name
 		if(new_rep < 0)
 			reply_message = "[selected_faction.hail_angry()]"
-			selected_faction = null
+			terminate_hail()
 			playsound(MC.loc, 'sound/machines/buttonbeep.ogg', 25, 5)
-			screen = 1
 		else
 			reload_faction_quests(1)
 			reply_message = "[selected_faction.hail_disappointed()]"
-		say_message(reply_name, reply_message + " (-[Q.favour_reward * 2] rep)")
+		say_message(reply_name, reply_message + " ([Q.get_fail_favour()] rep)")
 		reload_contacts()
 		return 1
 
 	if(href_list["select_faction"])
 		var/datum/faction/old_faction = selected_faction
-		selected_faction = GLOB.innie_factions_by_name[href_list["select_faction"]]
+		var/datum/faction/new_faction = GLOB.innie_factions_by_name[href_list["select_faction"]]
 		var/obj/item/modular_computer/MC = nano_host()
 
-		if(selected_faction)
-			if(selected_faction.is_angry_at_faction("Insurrection"))
-				say_message(selected_faction.leader_name, selected_faction.hail_angry())
+		if(new_faction)
+			if(new_faction.is_angry_at_faction("Insurrection"))
+				//the faction rejects the hail
+				say_message(new_faction.leader_name, new_faction.hail_angry())
 				playsound(MC.loc, 'sound/machines/buzz-sigh.ogg', 25, 5)
-				selected_faction = null
-				screen = 1
 			else
+				//successful hail
+				selected_faction = new_faction
 				say_message(selected_faction.leader_name, selected_faction.hail_open(selected_faction.name))
 				reload_faction_quests(0)
 				playsound(MC.loc, 'sound/machines/triple_beep.ogg', 25, 5)
 				screen = 2
+				selected_faction.listening_programs |= src
 
 		else if(old_faction)
 			say_message(old_faction.leader_name, old_faction.hail_end())
 			playsound(MC.loc, 'sound/machines/buttonbeep.ogg', 25, 5)
-			screen = 1
+			terminate_hail()
 
 	if(href_list["activate_ability"])
 		var/ability_name = href_list["activate_ability"]
 		to_world("ACTIVATING: [ability_name]")
 
 		return 1
+
+/datum/nano_module/program/innie_comms/proc/terminate_hail()
+	selected_faction.listening_programs.Remove(src)
+	selected_faction = null
+	screen = 1
 
 /datum/nano_module/program/innie_comms/proc/can_print()
 	var/obj/item/modular_computer/MC = nano_host()

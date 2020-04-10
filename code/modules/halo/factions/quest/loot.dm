@@ -45,9 +45,9 @@
 				/obj/item/clothing/suit/armor/vest,\
 				/obj/item/clothing/suit/armor/vest/press))
 
-	var/loot_amount = round(loot_turfs.len * difficulty)
+	var/loot_amount = max(round(loot_turfs.len * difficulty), 1)
 	for(var/i=0,i<loot_amount,i++)
 		var/turf/T = pick(loot_turfs)
 		loot_turfs -= T
 		var/spawn_type = pick(spawn_types)
-		new spawn_type(T)
+		target_items.Add(new spawn_type(T))

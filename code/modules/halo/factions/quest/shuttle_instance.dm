@@ -2,7 +2,7 @@
 /obj/effect/shuttle_instance/proc/clear_instance()
 	GLOB.factions_controller.loaded_quest_instance = null
 	var/area/instance_area = get_area(src)
-	var/area/shuttle_area = locate(/area/shuttle/innie_offsite_transport) in world
+	var/area/shuttle_area = locate(/area/shuttle/offsite_berth_transport) in world
 	for(var/area/cur_area in list(instance_area, shuttle_area))
 		for(var/atom/movable/A in cur_area)
 			if(istype(A, /obj/effect/shuttle_instance))
@@ -12,7 +12,7 @@
 /obj/effect/shuttle_instance/proc/load_instance(var/datum/npc_quest/quest)
 	clear_instance()
 	if(quest && quest.map_path)
-		maploader.load_map(quest.map_path, src.z, src.x, src.y)
+		maploader.load_map(quest.map_path, src.z, src.x - 1, src.y - 1)
 
 		var/area/instance_area = get_area(src)
 		//

@@ -11,7 +11,8 @@
 	if(!spawn_turf)
 		spawn_turf = pick(spawn_turfs)
 	var/mob/living/M = new defender_type(spawn_turf)
-	M.name = "[enemy_faction] Operator"
+	M.name = "[enemy_faction] operative"
+	M.faction = enemy_faction
 	living_defenders += M
 	return M
 
@@ -30,6 +31,7 @@
 		var/obj/effect/landmark/instance_boss/B = locate() in world
 		vip_mob = spawn_defender(/mob/living/simple_animal/hostile/syndicate/ranged/instance_boss, B.loc)
 		vip_mob.name = "[enemy_faction] Commander"
+		vip_mob.faction = enemy_faction
 
 /mob/living/simple_animal/hostile/syndicate/ranged/instance_boss
 	name = "Boss"
