@@ -12,7 +12,7 @@
 /obj/effect/shuttle_instance/proc/load_instance(var/datum/npc_quest/quest)
 	clear_instance()
 	if(quest && quest.map_path)
-		maploader.load_map(quest.map_path, src.z, src.x, src.y)
+		maploader.load_map(quest.map_path, src.z, src.x - 1, src.y - 1)
 
 		var/area/instance_area = get_area(src)
 		//
