@@ -1,6 +1,3 @@
-GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)
-
-#define CARGO_CRATE_COST_MULTI 10
 
 /datum/controller/process/factions
 	name = "Factions Controller"
@@ -53,5 +50,3 @@ GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)
 	for(var/datum/faction/F in processing_factions)
 		F.process()
 
-	if(loaded_quest_instance)
-		loaded_quest_instance.process()

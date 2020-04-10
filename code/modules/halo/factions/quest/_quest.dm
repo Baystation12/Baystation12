@@ -1,18 +1,4 @@
 
-#define REWARD_FAVOUR 100
-#define REWARD_CREDITS 10000
-//
-#define OBJ_KILL 1
-#define OBJ_ASSASSINATE 2
-#define OBJ_STEAL 3
-//
-#define STATUS_AVAIL 0
-#define STATUS_PROGRESS 1
-#define STATUS_FAIL 2
-#define STATUS_WON 3
-#define STATUS_ABANDON 4
-#define STATUS_TIMEOUT 5
-
 /datum/npc_quest
 	var/desc_text
 	var/list/gear_rewards = list()
@@ -32,6 +18,8 @@
 	var/instance_loaded = 0
 	var/time_failed = 0
 	var/area/instance_area
+	var/number_of_attempts = 0
+	var/attempts_allowed = 3
 
 	var/static/list/map_references = list(\
 	'maps/submaps/civilian/factory1.dmm' = "Factory",\
@@ -60,6 +48,25 @@
 /datum/npc_quest/proc/is_expired()
 	return quest_status > 1
 
+/datum/npc_quest/proc/is_quest_active()
+	return (quest_status == STATUS_AVAIL || quest_status == STATUS_PROGRESS)
+
+/datum/npc_quest/proc/get_attempts_left()
+	if(attempts_allowed < 1)
+		return "unlimited"
+
+	return "[attempts_allowed - number_of_attempts]"
+
+/datum/npc_quest/proc/get_difficulty_stars()
+	var/stars_left = difficulty * 5
+	var/nanoui_string = ""
+	do
+		nanoui_string += "<div class='uiIcon16 icon-star'></div>"
+		stars_left -= 1
+	while(stars_left > 0)
+
+	return nanoui_string
+
 /datum/npc_quest/proc/get_difficulty_text()
 	if(difficulty > 0.8)
 		return "very hard"
@@ -72,57 +79,39 @@
 	else
 		return "very easy"
 
+/datum/npc_quest/proc/get_fail_favour()
+	return favour_reward * -0.1
+
+/datum/npc_quest/proc/get_win_favour()
+	return favour_reward
+
 /datum/npc_quest/proc/accept_quest(var/datum/faction/attempt_faction)
-	quest_status = 1
+	//let's begin
+	quest_status = STATUS_PROGRESS
 	time_failed = world.time + 20 MINUTES
 	attempting_faction = attempt_faction
-	faction.accepted_quests.Add(src)
+
+	//tell our parent faction we have begun
+	faction.available_quests.Remove(src)
+	faction.processing_quests.Add(src)
 	faction.start_processing()
 
-/datum/faction/proc/reject_quest(var/datum/faction/attempting_faction, var/datum/npc_quest/Q, var/abandoned = 0)
-	active_quests.Remove(Q)
-	accepted_quests.Remove(Q)
-	if(Q.quest_status == STATUS_PROGRESS)
-		//lose the reputation
-		var/favour_multiplier = -0.5//-1.5
-		if(abandoned)
-			Q.quest_status = STATUS_ABANDON
-			favour_multiplier = -0.1
-		add_faction_reputation(attempting_faction.name, Q.favour_reward * favour_multiplier)
-		completed_quests.Add(Q)
-	else
-		add_faction_reputation(attempting_faction.name, -Q.favour_reward)
-		qdel(Q)
-	attempting_faction.update_reputation_gear(src)
-	generate_rep_rewards(get_faction_reputation(attempting_faction.name))
+/datum/npc_quest/proc/shuttle_returned()
+	number_of_attempts++
 
-/datum/faction/proc/complete_quest(var/datum/npc_quest/Q)
-	active_quests.Remove(Q)
-	completed_quests.Add(Q)
+	//update any comms programs that need updating
+	for(var/datum/nano_module/program/innie_comms/listening_program in faction.listening_programs)
+		listening_program.quest_attempted(faction)
 
-	//deposit the favour
-	if(Q.quest_status == STATUS_FAIL)
-		//mission failed... lose a bit of reputation
-		add_faction_reputation(Q.attempting_faction.name, -Q.favour_reward / 2)
+	//quests have a limited number of attempts
+	if(attempts_allowed > 0 && number_of_attempts >= attempts_allowed)
+		faction.finalise_quest(src, STATUS_FAIL)
+		faction.processing_quests.Remove(src)
+		return 1
 
-	else if(Q.quest_status == STATUS_WON)
-		//mission success
-		add_faction_reputation(Q.attempting_faction.name, Q.favour_reward)
+	//check if an objective was completed
+	if(check_quest_objective())
+		faction.processing_quests.Remove(src)
+		return 1
 
-		//deposit the credits
-		if(Q.credit_reward)
-			var/transaction_desc = "[pick("Mission to", "Sent to","Job at","Dispatched to","Requested at")] [Q.location_name] on behalf of [src.name] to [pick(\
-				"take out the trash",\
-				"do some babysitting",\
-				"drop off a parcel",\
-				"discipline the kids",\
-				"drop the kids off",\
-				"deliver a pizza",\
-				"do some cleaning",\
-				"handle a problem",\
-				"sit in on a meeting",\
-				"investigate a noise complaint"\
-				)]."
-			var/datum/transaction/T = new(src.name, transaction_desc, Q.credit_reward, "UEG Terminal #[rand(100000,999999)]")
-			Q.attempting_faction.money_account.transaction_log.Add(T)
-			Q.attempting_faction.money_account.money += Q.credit_reward
+	return 0

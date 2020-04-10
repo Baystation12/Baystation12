@@ -1,38 +1,30 @@
 
-/datum/npc_quest/proc/finish_quest()
-
-	if(quest_status == STATUS_PROGRESS)
-		quest_status = STATUS_FAIL
-		switch(quest_type)
-			if(OBJ_KILL)
-				//kill simple mobs
+/datum/npc_quest/proc/check_quest_objective()
+	//check if any victory conditions are filled
+	switch(quest_type)
+		if(OBJ_KILL)
+			//kill simple mobs
+			if(instance_area)
 				if(!living_defenders.len && !num_respawns)
-					quest_status = STATUS_WON
+					faction.finalise_quest(src, STATUS_WON)
+					return 1
 
-			if(OBJ_ASSASSINATE)
-				//kill VIP simple mob
+		if(OBJ_ASSASSINATE)
+			//kill VIP simple mob
+			if(instance_area)
 				if(!vip_mob || vip_mob.stat == DEAD)
-					quest_status = STATUS_WON
+					faction.finalise_quest(src, STATUS_WON)
+					return 1
 
-			if(OBJ_STEAL)
-				//retrieve item
-				if(instance_area)
-					var/all_items_retrieved = 1
-					for(var/atom/movable/AM in target_items)
-						if(get_area(AM) == instance_area)
-							all_items_retrieved = 0
-							break
+		if(OBJ_STEAL)
+			//retrieve item
+			if(instance_area)
+				var/all_items_retrieved = 1
+				for(var/atom/movable/AM in target_items)
+					if(get_area(AM) == instance_area)
+						all_items_retrieved = 0
+						break
 
-					if(all_items_retrieved)
-						quest_status = STATUS_WON
-
-		if(quest_status == STATUS_FAIL && world.time > time_failed)
-			quest_status = STATUS_TIMEOUT
-
-		GLOB.factions_controller.active_quest_coords.Remove(coords)
-		qdel(coords)
-
-	if(faction)
-		faction.complete_quest(src)
-		attempting_faction.update_reputation_gear(faction)
-		faction.generate_rep_rewards(faction.get_faction_reputation(attempting_faction.name))
+				if(all_items_retrieved)
+					faction.finalise_quest(src, STATUS_WON)
+					return 1

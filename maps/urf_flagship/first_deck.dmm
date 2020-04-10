@@ -2,9 +2,9 @@
 "ab" = (/turf/unsimulated/wall,/area/space)
 "ac" = (/turf/unsimulated/wall,/area/planets/Geminus/indoor/quest_instance)
 "ad" = (/turf/simulated/floor,/area/planets/Geminus/indoor/quest_instance)
-"ae" = (/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
+"ae" = (/turf/simulated/floor,/area/shuttle/offsite_berth_transport)
 "af" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/shuttle/innie_offsite_supply)
-"ag" = (/obj/effect/shuttle_landmark/innie_offsite_transport,/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
+"ag" = (/obj/effect/shuttle_landmark/offsite_berth_transport,/turf/simulated/floor,/area/shuttle/offsite_berth_transport)
 "ah" = (/obj/effect/shuttle_landmark/innie_offsite_supply,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/shuttle/innie_offsite_supply)
 "ai" = (/obj/effect/shuttle_instance,/turf/simulated/floor,/area/planets/Geminus/indoor/quest_instance)
 "aj" = (/turf/simulated/wall/r_wall,/area/urf_flagship/powercore)
@@ -96,7 +96,7 @@
 "bR" = (/obj/machinery/light/small{icon_state = "bulb1"; dir = 8},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "bS" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/walllocker/emerglocker/west,/obj/effect/landmark/start/x52_rd,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "bT" = (/obj/effect/landmark/start/x52,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
-"bU" = (/obj/effect/shuttle_landmark/innie_base_transport,/turf/simulated/floor/tiled,/area/shuttle/innie_shuttle_transport)
+"bU" = (/obj/effect/shuttle_landmark/innie_berth_transport,/turf/simulated/floor/tiled,/area/shuttle/innie_shuttle_transport)
 "bV" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "bW" = (/obj/structure/cable/blue{icon_state = "1-2"},/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom)
 "bX" = (/turf/simulated/wall/plastic/hospital{name = "Cargo Supply Ship"},/area/shuttle/innie_shuttle_supply)
@@ -158,6 +158,7 @@
 "db" = (/obj/structure/ai_routing_node/innie,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
 "dc" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
 "dd" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/pillbottles,/obj/item/weapon/storage/box/pillbottles,/turf/simulated/floor/tiled,/area/urf_flagship/medicalbay)
+"de" = (/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_x = 0; pixel_y = -24},/obj/machinery/shuttle_fuel,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "df" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom)
 "dg" = (/turf/simulated/floor/tiled,/area/urf_flagship/storageroom)
 "dh" = (/obj/machinery/door/airlock/halo{name = "Cargo Supply Ship"; req_access = list(251)},/turf/simulated/floor/shuttle/yellow,/area/shuttle/innie_shuttle_supply)
@@ -171,7 +172,11 @@
 "dp" = (/obj/structure/ai_routing_node/innie,/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/greengrid,/area/urf_flagship/powercore)
 "dq" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/greengrid,/area/urf_flagship/powercore)
 "dr" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 10},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
+"ds" = (/obj/machinery/camera/autoname/invis/innie_base,/obj/structure/cable/blue{icon_state = "0-2"},/obj/machinery/power/shuttle_charger,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "dt" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 6},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
+"du" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
+"dv" = (/obj/item/modular_computer/console/preset/innie_comms{name = "Mission Comms Computer"},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
+"dw" = (/obj/structure/cable/blue{icon_state = "2-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "dx" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "dy" = (/obj/machinery/atmospherics/pipe/simple/visible{icon_state = "intact"; dir = 5},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "dz" = (/obj/machinery/atmospherics/pipe/tank/air{icon_state = "air_map"; dir = 8},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
@@ -318,7 +323,6 @@
 "gy" = (/obj/item/weapon/stool/padded,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gz" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/biogenerator,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gA" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/seed_extractor,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
-"gB" = (/obj/item/modular_computer/console/preset/innie_comms,/obj/machinery/camera/autoname/invis/innie_base,/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "gD" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/nw,/area/shuttle/innie_shuttle_transport)
 "gE" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/shuttle/innie_shuttle_transport)
 "gF" = (/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
@@ -337,9 +341,7 @@
 "gU" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/walllocker/emerglocker/west,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gV" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "gW" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/structure/closet/crate,/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-2"},/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
-"gX" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "gY" = (/obj/item/modular_computer/console/preset/innie_shuttle,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
-"gZ" = (/obj/item/modular_computer/console/preset/innie_comms,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "ha" = (/obj/structure/bed/chair,/obj/machinery/light/colored/red{icon_state = "red1"; dir = 1},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "hb" = (/obj/structure/bed/chair,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "hc" = (/obj/structure/table/rack,/obj/item/weapon/gun/energy/SDSR_10,/obj/item/weapon/gun/launcher/grenade,/turf/simulated/floor/tiled/dark,/area/urf_flagship/Armory)
@@ -367,7 +369,6 @@
 "hy" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "hz" = (/obj/structure/cable/blue{icon_state = "4-8"},/obj/structure/cable/blue{icon_state = "1-8"},/turf/simulated/floor/tiled,/area/urf_flagship/Messhall)
 "hA" = (/obj/structure/cable/blue{icon_state = "4-8"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
-"hB" = (/obj/structure/cable/blue{icon_state = "2-8"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "hC" = (/obj/machinery/door/airlock/external/glass,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "hD" = (/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "hE" = (/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 8},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
@@ -399,7 +400,6 @@
 "ig" = (/obj/machinery/door/airlock/multi_tile/halo/blast,/obj/machinery/door/firedoor/multi_tile{tag = "icon-door_open (NORTH)"; icon_state = "door_open"; dir = 1},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "ih" = (/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/tiled,/area/urf_flagship/storageroom3)
 "ii" = (/turf/simulated/floor,/turf/simulated/shuttle/wall/corner/dark/sw,/area/shuttle/innie_shuttle_transport)
-"ij" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/power/apc{dir = 2; name = "south bump"; pixel_x = 0; pixel_y = -24},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "ik" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "il" = (/obj/structure/bed/chair{dir = 1},/obj/machinery/light/colored/red,/obj/machinery/camera/autoname/invis/innie_base{icon_state = "camera"; dir = 1},/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
 "im" = (/obj/structure/window/reinforced/treated{icon_state = "rwindow"; dir = 4},/obj/structure/table/rack,/obj/item/clothing/suit/armor/bulletproof,/obj/item/clothing/suit/armor/bulletproof,/obj/item/clothing/suit/armor/bulletproof,/obj/item/clothing/head/helmet/ballistic,/obj/item/clothing/head/helmet/ballistic,/turf/simulated/floor/shuttle/red,/area/shuttle/innie_shuttle_transport)
@@ -607,10 +607,10 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeOcTcTcTePcieQcTcTeRaPasaseSasasasan
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfddBcTcTcTfecieQcTcTfffgfhfifjfkfkfkflfkfkfifmfkfifkfkfkfkfnfofhfpfqfravavavavaxavavavavavfrfsfqftavavavavavavaxavavavfrfufqfravaxavavavavavavavaxfrfuaKfvfvfwfvfwfvamamamfxeXeXeXfyamfzfAamfBajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPfCdBcTfDfEfFcieQcTcTcTfGfHaGaHaHaHfIaHaHaHaGfJaHaGaHaHaHaHfKfLfMfNaFaGaHaHaHaHaHaHaHaHaHQFaGaIaJaGaHaHaHaHaHaHaHaHaHaHaGaIaJaGQFaHaHaHaHaHaHaHaHaHaGaIaKfOfvfPfQfPfvfRamamfScLcLcLcMamfzfAfTfBajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPfUcTcTcTfVcieQcTcTfWaPfXfYfZfYfXfXfXfXfXfXkcgbfXfXfXfXfXajgcajgdaTgegegegegegegegegegegegeaVaTgfgfgfgfgfgfgfgfgfgfgfgfgtaTggggggggggggggggggggggggaVaKajajajbGajajajghcLdtamamamdrcLgjfcajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeidBcTcTejekgkcTfEemaPglglglglgmfXkdgngnkegpgbgqgrgshcfXajfzajLwaKgegugvgwgxAOJlgxgygzgAgeWnaKgfgBbsgDgEgEgEgEgEgEgFgfWnaKgggGgGgHgIgJgKgJgLgMgNggWnbZajkffvfvkgfvajamamamamamamamameKeLeMajajeNajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPdAdBcTcTcTcTcTcTdCaPaPglglglglgRfXgngnkdgSgpgbgbgbgbgTfXajfzajgdaKgegUgVgygxgygygxgygVgWgeaEaKgfgXgDgEgYgZhahbhHhdhegfaEbZgghfgGhghhhihjhhhggMhkggaEaKajfvhmhnfvfvajamamamamamamWhithpamefajhqamehajajajaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPhrcScThscTcThscTaPaPhthtglhthtfXgngngngSgphukhhwhugbfXajfzajhxcvhyhyhyhyhyhyhyhyhyhyhzhycucvhAhBhChDhDhEhFhGimhdhIhAcucvhJhJhKhJhJhKhJhJhJhKhLhjaEaKajkihNhPhPdcajcIfaeXZNeYamamameKamdxajamhTcPdzajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPhUhVhUhWchhUaPaPhthtglhthtfXhXkjhYkkgphuhviahugbfXajibajaEaKicididididieifididididicaEaKigihiigEijikilikhHhdihigaEaKinhjhjhggLioiphjhjhjhjinaEaKajklfvfvhPfvajcIkmisitiuiviviviwitixajamiycPcQajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPeidBcTcTejekgkcTfEemaPglglglglgmfXkdgngnkegpgbgqgrgshcfXajfzajLwaKgegugvgwgxAOJlgxgygzgAgeWnaKgfdsbsgDgEgEgEgEgEgEgFgfWnaKgggGgGgHgIgJgKgJgLgMgNggWnbZajkffvfvkgfvajamamamamamamamameKeLeMajajeNajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPdAdBcTcTcTcTcTcTdCaPaPglglglglgRfXgngnkdgSgpgbgbgbgbgTfXajfzajgdaKgegUgVgygxgygygxgygVgWgeaEaKgfdugDgEgYdvhahbhHhdhegfaEbZgghfgGhghhhihjhhhggMhkggaEaKajfvhmhnfvfvajamamamamamamWhithpamefajhqamehajajajaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPhrcScThscTcThscTaPaPhthtglhthtfXgngngngSgphukhhwhugbfXajfzajhxcvhyhyhyhyhyhyhyhyhyhyhzhycucvhAdwhChDhDhEhFhGimhdhIhAcucvhJhJhKhJhJhKhJhJhJhKhLhjaEaKajkihNhPhPdcajcIfaeXZNeYamamameKamdxajamhTcPdzajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPhUhVhUhWchhUaPaPhthtglhthtfXhXkjhYkkgphuhviahugbfXajibajaEaKicididididieifididididicaEaKigihiigEdeikilikhHhdihigaEaKinhjhjhggLioiphjhjhjhjinaEaKajklfvfvhPfvajcIkmisitiuiviviviwitixajamiycPcQajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPizhtiAiBhtfXiCiDiEiEiFhukhhwhugbfXajfzajiGaKgeiHidididiIiIiIiJiIiKgeaEaKgfiLbUiigEgEgEgEgEgEiNgfaEaKggiOgGhgiPhjhiiQhggMiRggaEaKajhmfvfvfvfvajajajiUajajamamamamamamcdamceamamajcfaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXiVgpiWgbgbgTgbgbgbiYfXajfzajaEaKgeiZjaBagujcjdjejfjgjhgeaEaKgfjihAhAhAjjhAhAhAhAjkgfaEaKgggGgGjljmjnjojmjlgNgNggaEaKfvfvfvfvfvfvajjpjqjramajamamamamamamajbIbiamambKaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPaPfXfXfXfXfXfXjsgpgbgbgngngngngnjtfXajjuajaEaTgegegegegegegegegegegegeaVaTgfgfgfgfgfgfgfgfgfgfgfgfaVaTggggggggggggggggggggggggaVaKhQfvfvfvfvfvajfzisjvbbajbcbdjwbfbgbhajaNbibJamajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
