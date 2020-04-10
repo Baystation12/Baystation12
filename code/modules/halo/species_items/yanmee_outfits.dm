@@ -27,6 +27,7 @@
 	name = "Yanmee Ultra"
 
 	suit = /obj/item/clothing/suit/armor/special/yanmee/ultra
+	l_hand = /obj/item/language_learner/unggoy_to_common
 
 /decl/hierarchy/outfit/yanmee/leader
 	name = "Yanmee Leader"
