@@ -1334,6 +1334,44 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 					/obj/item/clothing/gloves/thick/sangheili/dogler
 					)
 
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler
+
+	name = "Sya'tenee's Energy Dagger"
+	icon_state = "dogler_dag_handle"
+	icon_state_deployed = "dogler_dag_deploy"
+
+/obj/item/weapon/melee/energy/elite_sword/dagger/dogler/change_misc_variables(var/deactivate = 0)
+	if(deactivate)
+		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
+		item_state_slots = null
+		hitsound = "swing_hit"
+	else
+		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
+		item_state_slots = list(
+		slot_l_hand_str = "dogler_dag_l_hand",
+		slot_r_hand_str = "dogler_dag_r_hand" )
+		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
+
+//Axe
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe
+	name = "Sya'tenee's Energy Axe"
+	desc = "A huge, scary-looking energy axe, which looks too heavy to be wielded by humans..."
+	icon = 'code/modules/halo/icons/dogler_weapon_sprites.dmi'
+	force = 65
+	armor_penetration = 35
+	icon_state = "dogler_axe"
+	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
+	item_state_slots = list(
+	slot_l_hand_str = "dogler_axe_l1",
+	slot_r_hand_str = "dogler_axe_r1")
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe/activate(mob/living/user)
+	return
+
+/obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
+	return
+
 /decl/hierarchy/outfit/dogler_sangheili
 	name = "dogler/m.green - sangheili"
 	suit = /obj/item/clothing/suit/armor/special/combatharness/dogler
@@ -2369,7 +2407,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 					/obj/item/clothing/gloves/thick/sangheili/voloxus
 					)
 
-/decl/hierarchy/outfit/zane_sangheili
+/decl/hierarchy/outfit/voloxus_sangheili
 	name = "voloxus - Ultra/Major"
 	suit = /obj/item/clothing/suit/armor/special/combatharness/voloxus
 	suit_store = /obj/item/weapon/gun/energy/plasmarifle
@@ -2408,16 +2446,23 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	icon_state = "bluekro_gloves_obj"
 	item_state = "bluekro_gloves"
 
+/obj/item/weapon/melee/energy/elite_sword/zane
+	icon_state = "zaneSword-handle"
+	icon_state_deployed = "zaneSword-deployed"
+	inhand_icon_state = "zaneSword"
+
 /obj/item/weapon/storage/box/large/donator/zane_ultra
 	startswith = list(/obj/item/clothing/head/helmet/sangheili/zane,
 					/obj/item/clothing/suit/armor/special/combatharness/zane,
 					/obj/item/clothing/shoes/sangheili/zane,
-					/obj/item/clothing/gloves/thick/sangheili/zane
+					/obj/item/clothing/gloves/thick/sangheili/zane,
+					/obj/item/weapon/melee/energy/elite_sword/zane
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/sangheili/zane,
 					/obj/item/clothing/suit/armor/special/combatharness/zane,
 					/obj/item/clothing/shoes/sangheili/zane,
-					/obj/item/clothing/gloves/thick/sangheili/zane
+					/obj/item/clothing/gloves/thick/sangheili/zane,
+					/obj/item/weapon/melee/energy/elite_sword/zane
 					)
 
 /decl/hierarchy/outfit/zane_sangheili
@@ -2430,6 +2475,15 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	shoes = /obj/item/clothing/shoes/sangheili/zane
 	head = /obj/item/clothing/head/helmet/sangheili/zane
 	l_pocket = /obj/item/weapon/grenade/plasma
+
+//GhostDex
+/obj/item/clothing/head/helmet/odst/ghostdex
+	item_state = "ghostdexodsthelmet"
+	item_state_novisr = "ghostdexodsthelmet"
+
+/obj/item/clothing/suit/armor/special/odst/ghostdex
+	item_state = "ghostdexodstarmor"
+	flags_inv = HIDETAIL
 
 
 #undef ODST_OVERRIDE
