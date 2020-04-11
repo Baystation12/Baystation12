@@ -118,7 +118,7 @@ GLOBAL_LIST_EMPTY(capture_nodes)
 
 	if(control_faction)
 		minor_announcement.Announce("[control_faction] has captured the [src]!",comms_from)
-	spawn_defenders()
+		spawn_defenders()
 
 /obj/machinery/computer/capture_node/proc/reset_markers()
 	var/area/A = get_area(src)

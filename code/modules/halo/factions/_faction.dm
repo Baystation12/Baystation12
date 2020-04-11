@@ -17,9 +17,11 @@
 	var/archived_flagship_name = "NA_FLAGSHIP_NAME"
 	var/list/enemy_factions = list()
 	var/list/angry_factions = list()
-	var/list/active_quests = list()
-	var/list/accepted_quests = list()
-	var/list/completed_quests = list()
+
+	var/list/all_quests = list()
+	var/list/available_quests = list()
+	var/list/processing_quests = list()
+
 	var/datum/job/commander_job		//this needs to be set in the gamemode code
 	var/commander_titles = list()	//checks in order of priority for objective purposes
 	var/has_flagship = 0
@@ -39,6 +41,9 @@
 	var/quest_interval_min = 1 SECONDS
 	var/quest_interval_max = 5 MINUTES
 	var/gear_supply_type
+	var/default_radio_channel = RADIO_HUMAN
+
+	var/list/listening_programs = list()
 
 /datum/faction/New()
 	. = ..()

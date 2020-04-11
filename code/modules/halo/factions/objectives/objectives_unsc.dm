@@ -76,8 +76,6 @@
 /datum/objective/colony_capture/unsc
 	short_text = "Hold the UEG colony"
 	explanation_text = "We draw the line here. Do not allow rebels or aliens to capture our world."
-	objective_faction = "UNSC"
-	radio_frequency = "SHIPCOM"
 	radio_name = "UNSC Overwatch"
 
 /datum/objective/overmap/unsc_innie_base

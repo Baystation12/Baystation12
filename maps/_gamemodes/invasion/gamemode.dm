@@ -93,6 +93,8 @@
 	GLOB.INSURRECTION.has_flagship = 1
 	GLOB.INSURRECTION.base_desc = "secret underground HQ"
 
+	//todo: remove the hardcoded Geminus colony name here
+
 	GLOB.HUMAN_CIV.name = "Geminus City"
 	GLOB.HUMAN_CIV.has_base = 1
 	GLOB.HUMAN_CIV.base_desc = "human colony"

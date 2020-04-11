@@ -112,7 +112,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	return ticker.mode.AnnounceLateArrival(character, job, join_message)
 
 /proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency, var/language_name)
-	GLOB.global_headset.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
+	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	if(job.faction_flag & UNSC)

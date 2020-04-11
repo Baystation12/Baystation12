@@ -16,6 +16,8 @@
 	mask = null
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = null
+	//
+	id_type = /obj/item/weapon/card/id/elite_minor
 
 /decl/hierarchy/outfit/sangheili/major
 	name = "Sangheili (Major)"
@@ -28,6 +30,8 @@
 	shoes = /obj/item/clothing/shoes/sangheili/major
 	head = /obj/item/clothing/head/helmet/sangheili/major
 	l_pocket = /obj/item/weapon/grenade/plasma
+	//
+	id_type = /obj/item/weapon/card/id/elite_major
 
 /decl/hierarchy/outfit/sangheili/honour_guard
 	name = "Sangheili (Honour Guard)"
@@ -42,6 +46,8 @@
 	head = /obj/item/clothing/head/helmet/sangheili/honour_guard
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/gun/energy/plasmapistol
+	//
+	id_type = /obj/item/weapon/card/id/elite_guard
 
 /decl/hierarchy/outfit/sangheili/ultra
 	name = "Sangheili (Ultra)"
@@ -57,6 +63,8 @@
 	head = /obj/item/clothing/head/helmet/sangheili/ultra
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
+	//
+	id_type = /obj/item/weapon/card/id/elite_ultra
 
 /decl/hierarchy/outfit/sangheili/zealot
 	name = "Sangheili (Zealot)"
@@ -72,6 +80,8 @@
 	head = /obj/item/clothing/head/helmet/sangheili/zealot
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword
 	r_pocket = /obj/item/weapon/grenade/plasma
+	//
+	id_type = /obj/item/weapon/card/id/elite_zealot
 
 /decl/hierarchy/outfit/sangheili/shipmaster
 	name = "Sangheili (Shipmaster)"
@@ -87,6 +97,8 @@
 	head = /obj/item/clothing/head/helmet/sangheili/shipmaster
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
+	//
+	id_type = /obj/item/weapon/card/id/elite_zealot
 
 /decl/hierarchy/outfit/sangheili/specops
 	name = "Sangheili (Spec-Ops)"
@@ -100,6 +112,8 @@
 	head = /obj/item/clothing/head/helmet/sangheili/specops
 	l_pocket = /obj/item/ammo_magazine/type51mag
 	r_pocket = /obj/item/ammo_magazine/type51mag
+	//
+	id_type = /obj/item/weapon/card/id/elite_specops
 
 /decl/hierarchy/outfit/sangheili/eva
 	name = "Sangheili (Ranger)"
@@ -113,3 +127,5 @@
 	head = /obj/item/clothing/head/helmet/sangheili/ranger
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
+	//
+	id_type = /obj/item/weapon/card/id/elite_minor

@@ -96,15 +96,11 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	<div class="item">
 	{{for data.chan_list}}
 		<div class="itemLabelWide">
-			<span class='{{:value.chan_span}}'>&#9724</span>{{:value.display_name}}
+			<span class='{{:value.chan_span}}'>&#9724</span> {{:value.channel_freq}} {{:value.channel_name}}
 		</div>
 		<div class="itemContentMedium">
-			{{if value.secure_channel}}
-				{{:helper.link('On', null, {'ch_name' : value.chan, 'listen' : value.sec_channel_listen}, value.sec_channel_listen ? null : 'selected')}}
-				{{:helper.link('Off', null, {'ch_name' : value.chan, 'listen' : value.sec_channel_listen}, value.sec_channel_listen ? 'selected' : null)}}
-			{{else}}
-				{{:helper.link('Switch', null, {'spec_freq' : value.chan}, data.rawfreq == value.chan ? 'selected' : null)}}
-			{{/if}}
+			{{:helper.link('On', null, {'toggle_channel' : value.channel_name}, value.listening ? 'selected' : null)}}
+			{{:helper.link('Off', null, {'toggle_channel' : value.channel_name}, value.listening ? null : 'selected')}}
 		</div>
 	{{/for}}
 {{/if}}

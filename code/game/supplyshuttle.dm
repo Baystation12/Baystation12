@@ -83,14 +83,14 @@ var/list/mechtoys = list(
 		var/turf/T = get_turf(loc)
 		if(T)
 			T.blocks_air = 1
-		..()
+		. = ..()
 
 	Destroy() //lazy hack to set the turf to allow air to pass if it's a simulated floor
 		var/turf/T = get_turf(loc)
 		if(T)
 			if(istype(T, /turf/simulated/floor))
 				T.blocks_air = 0
-		..()
+		. = ..()
 
 /*
 /obj/effect/marker/supplymarker

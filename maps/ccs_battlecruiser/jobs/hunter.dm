@@ -38,4 +38,4 @@
 /datum/antagonist/opredflag_cov/hunter/create_antagonist(var/datum/mind/target, var/move, var/gag_announcement, var/preserve_appearance)
 	. = ..()
 	var/mob/living/simple_animal/mgalekgolo/new_hunter = target.current
-	GLOB.global_headset.autosay("A new mgalekgolo, [new_hunter], has been outfitted for battle.", "Arrivals Announcement Computer", "Battlenet", "Sangheili")
+	GLOB.global_announcer.autosay("A new mgalekgolo, [new_hunter], has been outfitted for battle.", "Arrivals Announcement Computer", "Battlenet", "Sangheili")

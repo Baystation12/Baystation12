@@ -18,6 +18,8 @@
 	var/sound_takeoff = 'sound/effects/shuttle_takeoff.ogg'
 	var/sound_landing = 'sound/effects/shuttle_landing.ogg'
 
+	var/obj/machinery/power/shuttle_charger/connected_charger
+
 /datum/shuttle/New(_name, var/obj/effect/shuttle_landmark/initial_location)
 	..()
 	if(_name)
@@ -109,10 +111,10 @@
 
 	if(!destination.is_valid(src))
 		return FALSE
-	testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
+	//testing("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
 	for(var/area/A in shuttle_area)
-		testing("Moving [A]")
+		//testing("Moving [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
 	shuttle_moved(destination, translation)
 	return TRUE
@@ -172,6 +174,10 @@
 				var/turf/TA = GetAbove(TD)
 				if(istype(TA, get_base_turf_by_area(TA)) || istype(TA, /turf/simulated/open))
 					TA.ChangeTurf(ceiling_type, 1, 1)
+
+	//disconnect any shuttle chargers
+	if(connected_charger)
+		connected_charger.shuttle_disconnect()
 
 	// Remove all powernets that were affected, and rebuild them.
 	var/list/cables = list()

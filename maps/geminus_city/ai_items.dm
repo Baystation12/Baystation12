@@ -19,3 +19,6 @@
 /obj/structure/ai_terminal/spawn_terminal/innie/innie_base
 	inherent_network = "InnieBase"
 	area_nodescan = /area/geminus_underground
+
+//this is dumb i have to do this why are mappers allowed
+/obj/item/device/radio/intercom/locked/confessional

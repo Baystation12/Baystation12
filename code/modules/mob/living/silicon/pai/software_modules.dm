@@ -20,7 +20,7 @@
 
 	proc/is_active(mob/living/silicon/pai/user)
 		return 0
-	
+
 	proc/on_purchase(mob/living/silicon/pai/user)
 		return
 
@@ -93,6 +93,7 @@
 		data["listening"] = user.radio.broadcasting
 		data["frequency"] = format_frequency(user.radio.frequency)
 
+		/*
 		var/channels[0]
 		for(var/ch_name in user.radio.channels)
 			var/ch_stat = user.radio.channels[ch_name]
@@ -103,6 +104,7 @@
 			channels[++channels.len] = ch_dat
 
 		data["channels"] = channels
+			*/
 
 		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
@@ -143,7 +145,7 @@
 	ram_cost = 5
 	id = "messenger"
 	toggle = 0
-	
+
 	on_ui_interact(mob/living/silicon/pai/user, datum/nanoui/ui=null, force_open=1)
 		var/data[0]
 
@@ -221,7 +223,7 @@
 	if(user && !user.pda)
 		user.pda = new(user)
 		user.pda.set_owner_rank_job(text("[]", user), "Personal Assistant")
-				
+
 /datum/pai_software/med_records
 	name = "Medical Records"
 	ram_cost = 15

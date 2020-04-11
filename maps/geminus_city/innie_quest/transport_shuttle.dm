@@ -7,9 +7,11 @@
 	location = 0
 	flags = SHUTTLE_FLAGS_PROCESS
 
+	/*
 	var/fuel_left = 100
 	var/fuel_max = 100
-	var/fuel_efficiency = 1000
+	*/
+	var/fuel_efficiency = 10
 	var/atmos_speed = 120000
 	var/fake_launch = 0
 
@@ -17,8 +19,8 @@
 	var/next_name = ""
 	var/current_name = ""
 
-	waypoint_station = "geminus_innie_transport"
-	waypoint_offsite = "offsite_innie_transport"
+	waypoint_station = "innie_berth_transport"
+	waypoint_offsite = "offsite_berth_transport"
 	var/obj/effect/shuttle_instance/shuttle_instance
 	var/datum/npc_quest/instance_quest
 
@@ -37,11 +39,13 @@
 
 /datum/shuttle/autodock/ferry/geminus_innie_transport/attempt_move(var/obj/effect/shuttle_landmark/destination)
 
-	shuttle_instance = locate() in world
-	shuttle_instance.load_instance(instance_quest)
+	//load the quest instance... if we arent in it
+	if(get_location_waypoint(location) != waypoint_offsite)
+		shuttle_instance = locate() in world
+		shuttle_instance.load_instance(instance_quest)
 
 	//relocate the instance
-	waypoint_offsite = locate("offsite_innie_transport")
+	waypoint_offsite = locate(initial(waypoint_offsite))
 	next_location = get_location_waypoint(!location)
 	destination = next_location
 
@@ -85,3 +89,13 @@
 		next_distance =  0
 	else
 		next_name = "Rabbit Hole Base"
+
+/datum/shuttle/autodock/ferry/geminus_innie_transport/proc/get_fuel()
+	if(held_fuel)
+		return held_fuel.fuel_left
+	return 0
+
+/datum/shuttle/autodock/ferry/geminus_innie_transport/proc/use_fuel(var/fuel_used)
+	if(held_fuel)
+		held_fuel.fuel_left -= fuel_used
+		held_fuel.fuel_left = max(held_fuel.fuel_left, 0)

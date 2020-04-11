@@ -87,7 +87,7 @@
 					{{:value.status_desc}}
 				</div>
 				<div class='itemContent'>
-					Mission ({{:value.difficulty_desc}} difficulty): {{:value.desc_text}}<br>
+					Mission ({{:value.difficulty_desc}} difficulty, {{:value.attempts_left}} attempts): {{:value.desc_text}}<br>
 					Target: <b>{{:value.target}}</b><br>
 					Location: {{:value.location_name}}<br>
 					{{if value.credit_reward > 0}}
@@ -111,9 +111,11 @@
 					{{if value.status_desc == 'In progress'}}
 						({{:value.time_left}})
 					{{/if}}
+					<br>
+					{{:value.difficulty_stars}} 
 				</div>
 				<div class='itemContent'>
-					Mission ({{:value.difficulty_desc}} difficulty): {{:value.desc_text}}<br>
+					Mission ({{:value.difficulty_desc}} difficulty, {{:value.attempts_left}} attempts left): {{:value.desc_text}}<br>
 					Target: <b>{{:value.target}}</b><br>
 					Location: {{:value.location_name}}<br>
 					{{if value.credit_reward > 0}}

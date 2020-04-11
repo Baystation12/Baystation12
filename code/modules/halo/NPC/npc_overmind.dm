@@ -62,7 +62,7 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 
 	var/form_squad_searchrange = SQUADFORM_SEARCHRANGE
 
-	var/comms_channel = null
+	var/comms_channel = RADIO_HUMAN
 	var/comms_language = "Galactic Common"
 	var/next_comms_at = 0
 
@@ -71,7 +71,7 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 		return
 	if(!override && world.time < next_comms_at)
 		return
-	GLOB.global_headset.autosay(message, overmind_name, comms_channel, comms_language)
+	GLOB.global_announcer.autosay(message, overmind_name, comms_channel, comms_language)
 	next_comms_at = world.time + RADIO_COMMS_DELAY
 
 /datum/npc_overmind/proc/create_report(var/report_type,var/mob/reporter,var/target_num = null,var/report_targ = null,var/reporter_assault_point = null,var/reporter_loc)

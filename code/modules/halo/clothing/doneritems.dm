@@ -236,7 +236,7 @@
 	name = "BurnedSweetPotato - Spartan II"
 	suit = /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
 	head = /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
-	l_ear = /obj/item/device/radio/headset/unsc/odsto
+	l_ear = /obj/item/device/radio/headset/unsc/spartan
 
 ////////bobatnight\\\\\\\
 

@@ -13,3 +13,5 @@ GLOBAL_DATUM_INIT(COVENANT, /datum/faction/covenant, new /datum/faction/covenant
 GLOBAL_DATUM_INIT(INSURRECTION, /datum/faction/insurrection, new /datum/faction/insurrection())
 GLOBAL_DATUM_INIT(HUMAN_CIV, /datum/faction/human_civ, new /datum/faction/human_civ())
 GLOBAL_DATUM_INIT(FLOOD, /datum/faction/flood, new /datum/faction/flood())
+
+GLOBAL_DATUM(factions_controller, /datum/controller/process/factions)

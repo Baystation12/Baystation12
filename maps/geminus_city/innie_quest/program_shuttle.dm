@@ -40,13 +40,21 @@
 	data["shuttle_connected"] = my_shuttle ? 1 : 0
 	if(my_shuttle)
 		data["atmos_speed"] = my_shuttle.atmos_speed
-		data["fuel_left"] = my_shuttle.fuel_left
-		data["fuel_max"] = my_shuttle.fuel_max
+		data["fuel_left"] = my_shuttle.held_fuel ? my_shuttle.held_fuel.fuel_left : 0
+		data["fuel_max"] = my_shuttle.held_fuel ? my_shuttle.held_fuel.max_fuel : 0
 		data["fuel_efficiency"] = my_shuttle.fuel_efficiency
 		//
 		data["shuttle_status"] = get_shuttle_status()
 		data["location"] = my_shuttle.current_name
 		data["on_quest"] = my_shuttle.location
+		var/area/cur_area = get_area(nano_host())
+		var/obj/machinery/power/apc/apc = cur_area.get_apc()
+		if(apc && apc.cell)
+			data["power"] = apc.cell.charge
+			data["powermax"] = apc.cell.maxcharge
+		else
+			data["power"] = 0
+			data["powermax"] = 0
 		//
 		data["target_coords"] = my_shuttle.next_name
 		data["target_dist"] = my_shuttle.next_distance
@@ -57,7 +65,7 @@
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "shuttle_innie.tmpl", name, 1050, 800, state = state)
+		ui = new(user, src, ui_key, "shuttle_innie.tmpl", name, 950, 600, state = state)
 		ui.set_auto_update(1)
 		ui.set_initial_data(data)
 		ui.open()
@@ -111,24 +119,23 @@
 	if(href_list["embark"])
 
 		if(my_shuttle.location && \
-			alert("You will not be able to return. Ensure you are fully loaded before departure.","Departing","Continue","Abort") == "Abort")
+			alert("You may not be able to return. Ensure you are fully loaded before departure.","Departing","Continue","Abort") == "Abort")
 			return
 
 		var/obj/item/modular_computer/MC = nano_host()
-		var/fuel_needed = my_shuttle.next_distance / my_shuttle.fuel_efficiency
-		if(my_shuttle.fuel_left >= fuel_needed)
-			if(my_shuttle.fuel_left < 20 && alert("You are critically low on fuel. Launch anyway?","Low fuel","Continue","Abort") == "Abort")
+		var/fuel_needed = 0
+		if(!my_shuttle.location)
+			//flights home are free
+			fuel_needed = my_shuttle.next_distance / my_shuttle.fuel_efficiency
+
+		var/fuel_left = my_shuttle.held_fuel ? my_shuttle.held_fuel.max_fuel : 0
+		if(fuel_left >= fuel_needed)
+			if(fuel_needed && fuel_left < 20 && alert("You are critically low on fuel. Launch anyway?","Low fuel","Continue","Abort") == "Abort")
 				return
 
 			to_chat(user, "\icon[MC] <span class='notice'>Shuttle launching...</span>")
 			//playsound(MC.loc, 'sound/effects/start.ogg', 25, 5)
-			//my_shuttle.fuel_left -= fuel_needed //CURRENTLY LACKING REFUELLING.
-
-			//quests are one shot only - finish our current quest if we are here
-			if(my_shuttle.current_name == my_shuttle.instance_quest.location_name)
-				my_shuttle.instance_quest.finish_quest()
-				my_shuttle.instance_quest = null
-				reload_coords()
+			my_shuttle.use_fuel(fuel_needed)
 
 			//todo:ghost any players left here
 			//
@@ -151,6 +158,14 @@
 				*/
 
 			my_shuttle.launch(user)
+
+			//some quests have a limited number of attempts
+			if(my_shuttle.current_name == my_shuttle.instance_quest.location_name)
+				//if we are embarking from the quest location, that may trigger a quest failure
+				if(my_shuttle.instance_quest.shuttle_returned())
+					//this quest is finished, so its coordinates are disabled
+					//the coordinates list needs to be reloaded
+					reload_coords()
 
 		else
 			to_chat(user, "\icon[MC] <span class='warning'>Shuttle is out of fuel!</span>")

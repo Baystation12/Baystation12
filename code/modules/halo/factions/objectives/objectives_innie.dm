@@ -57,13 +57,8 @@
 /datum/objective/colony_capture/innie
 	short_text = "Colonial revolt"
 	explanation_text = "Raise the colony in revolt! We must remove the UNSC from our world."
-	objective_faction = "Insurrection"
 	radio_name = "Insurrection Overwatch"
 	win_points = 150
-
-/datum/objective/colony_capture/innie/New()
-	. = ..()
-	radio_frequency = halo_frequencies.innie_channel_name
 
 /datum/objective/assassinate/leader/innies_unsc
 	explanation_text = "Assassinate the leader of the UNSC"

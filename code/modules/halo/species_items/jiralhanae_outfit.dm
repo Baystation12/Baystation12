@@ -27,18 +27,24 @@
 	suit = /obj/item/clothing/suit/armor/jiralhanae
 	head = /obj/item/clothing/head/helmet/jiralhanae
 	shoes = /obj/item/clothing/shoes/jiralhanae
+	//
+	id_type = /obj/item/weapon/card/id/brute_minor
 
 /decl/hierarchy/outfit/jiralhanae/major
 	name = "Jiralhanae Major"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/major
 	suit = /obj/item/clothing/suit/armor/jiralhanae/major
+	//
+	id_type = /obj/item/weapon/card/id/brute_major
 
 /decl/hierarchy/outfit/jiralhanae/captain
 	name = "Jiralhanae Captain"
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/captain
 	suit = /obj/item/clothing/suit/armor/jiralhanae/captain
+	//
+	id_type = /obj/item/weapon/card/id/brute_captain
 
 /decl/hierarchy/outfit/jiralhanae/covenant
 	name = "Covenant Jiralhanae Soldier"
@@ -48,6 +54,8 @@
 	r_hand = /obj/item/weapon/grenade/frag/spike
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant
+	//
+	id_type = /obj/item/weapon/card/id/brute_minor
 
 /decl/hierarchy/outfit/jiralhanae/covenant/minor
 	name = "Covenant Jiralhanae Minor"
@@ -55,6 +63,8 @@
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/minor
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/minor
+	//
+	id_type = /obj/item/weapon/card/id/brute_minor
 
 /decl/hierarchy/outfit/jiralhanae/covenant/major
 	name = "Covenant Jiralhanae Major"
@@ -71,6 +81,8 @@
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/captain
 	back = /obj/item/clothing/jiralhanae_flag_random
 	l_hand = /obj/item/language_learner/unggoy_to_common
+	//
+	id_type = /obj/item/weapon/card/id/brute_captain
 
 /* Ram Clan Jiralhanae */
 

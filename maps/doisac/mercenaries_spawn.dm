@@ -44,7 +44,7 @@
 			console.update_merc_listing_all()
 
 	//announce over radio
-	GLOB.global_headset.autosay("I've just arrived in the system. My crew is available for hire as mercenaries.", \
+	GLOB.global_announcer.autosay("I've just arrived in the system. My crew is available for hire as mercenaries.", \
 		"Kig\'Yar Pirate", "System", "Sangheili")
 
 /obj/structure/merc_dropship
@@ -106,7 +106,7 @@
 	if(!time_merc_dropoff)
 		time_merc_dropoff = world.time + merc_respawn_wave
 		spawn(10)
-			GLOB.global_headset.autosay(\
+			GLOB.global_announcer.autosay(\
 				"I've dispatched some of the mercenaries you hired and they will arrive in [merc_respawn_wave] seconds. \
 				Good hunting, [pick("[clan_name] clan","apes","hair balls","brutes")].", \
 				"Kig\'Yar Pirate", radio_channel, "Sangheili")
