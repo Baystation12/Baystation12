@@ -55,7 +55,7 @@
 //Mongoose component profile define//
 /obj/item/vehicle_component/health_manager/mongoose
 	integrity = 250
-	resistances = list("brute"=30,"burn"=25,"emp"=15)
+	resistances = list("brute"=30,"burn"=30,"emp"=15,"bomb" = 0)
 
 /datum/component_profile/mongoose
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/mongoose)
