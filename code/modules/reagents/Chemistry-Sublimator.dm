@@ -126,7 +126,7 @@
 		return
 
 	if(use_power >= POWER_USE_ACTIVE && container && container.reagents)
-		if(reagent_whitelist)
+		if(reagent_whitelist && reagent_whitelist.len)
 			for(var/datum/reagent/R in container.reagents.reagent_list)
 				if(!is_type_in_list(R, reagent_whitelist))
 					audible_message(SPAN_NOTICE("\The [src] pings rapidly and powers down, refusing to process the contents of \the [container]."))
