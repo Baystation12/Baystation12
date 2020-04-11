@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Scanning a planet's atmosphere from the sensor suite now only requires TRAINED science skill. Down from EXPERIENCED."
