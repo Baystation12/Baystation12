@@ -1,0 +1,4 @@
+author: "Deadmon"
+delete-after: True
+changes: 
+  - tweak: "Fixes EC, Contractor, and Fleet Roboticists so they have their proper permissions and uniforms."
