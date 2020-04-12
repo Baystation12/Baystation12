@@ -1,31 +1,10 @@
-//I'm putting, or have put all donator items here to make it x1000 easier to manage and implement. Please put all new donator items here according to the format.
-
 #define ODST_OVERRIDE 'code/modules/halo/clothing/odst.dmi'
 #define ITEM_INHAND 'code/modules/halo/clothing/odst_items.dmi'
 #define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
 #define MARINE_INHAND 'code/modules/halo/clothing/marine_items.dmi'
-#define URF_HAND 'code/modules/halo/clothing/head.dmi'
-#define URF_OVERRIDE 'code/modules/halo/clothing/urf_commando.dmi'
 #define SPARTAN_OVERRIDE 'code/modules/halo/clothing/SpartanHussarKit.dmi'
 #define ONI_OVERRIDE 'code/modules/halo/clothing/oni_guard.dmi'
 #define ONI_ITEM_INHAND 'code/modules/halo/clothing/item_oni.dmi'
-
-
-//Obj sprites go in ITEM_INHAND or MARINE_INHAND
-//WORN sprites go in ODST_OVERRIDE or MARINE_OVERRIDE
-
-///////Donor Box\\\\\\
-
-//Parent Box - Do not remove!
-
-/obj/item/weapon/storage/box/large/donator
-	name = "Snowflake Crate"
-	desc = "Contains gear for those special snowflakes."
-	w_class = ITEM_SIZE_GARGANTUAN
-	max_storage_space = 50
-	max_w_class = ITEM_SIZE_GARGANTUAN
-	startswith = list()
-	can_hold = list()
 
 ////////ashvor\\\\\\\\
 
@@ -279,39 +258,6 @@
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/bobatnight
 	back = /obj/item/weapon/storage/backpack/odst/bobatnight
 
-////////Boltersam\\\\\\\\
-
-//JIRALHANAE
-
-/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam
-	icon_state = "bolter_helm"
-/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam
-	icon_state = "bolter_armour"
-
-/obj/item/clothing/shoes/jiralhanae/covenant/boltersam
-	icon_state = "bolter_greaves"
-
-/obj/item/weapon/grav_hammer/boltersam
-	icon_state = "goremaul"
-	item_state_slots = list(slot_l_hand_str = "goremaul", slot_r_hand_str = "goremaul", slot_back_str = "back_maul")
-
-/obj/item/weapon/storage/box/large/donator/boltersam
-	startswith = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
-					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
-					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
-					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
-					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
-					)
-
-/decl/hierarchy/outfit/boltersam_jiralhanae
-	name = "boltersam - jiralhanae"
-	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam
-	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam
-	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/boltersam
-	back = /obj/item/weapon/grav_hammer/boltersam
-
 ////////eonoc\\\\\\\\
 
 //ODST
@@ -351,82 +297,6 @@
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/eonoc
 	back = /obj/item/weapon/storage/backpack/odst/eonoc
 
-////////eluxor\\\\\\\\
-
-//URFC
-
-/obj/item/clothing/under/urfc_jumpsuit/eluxor
-	name = "SOE Commando uniform"
-	desc = "Standard issue SOE Commando uniform, more badass than that, you die."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_state = "harun_clothes"
-	item_state = "harun_clothes"
-	worn_state = "harun_clothes"
-
-/obj/item/clothing/head/helmet/urfccommander/eluxor
-	name = "Harun's Turban"
-	desc = "A turban made of some kind of resistant material, it has an emblem with an Eagle and a fist on the front."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "harun_turban"
-	icon_state = "harun_turban_obj"
-
-/obj/item/clothing/suit/armor/special/urfc/eluxor
-	name = "Harun's Custom Armor"
-	desc = "A custom made armorset with a cape included, clearly made by an armorsmisth in a very rough and old fashioned way. Clearly made by the Khoros Raiders."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "harun_armor"
-	icon_state = "harun_armor_obj"
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-
-/obj/item/clothing/shoes/magboots/urfc/eluxor
-	name = "SOE Magboots"
-	desc = "Experimental black magnetic boots, used to ensure the user is safely attached to any surfaces during extra-vehicular operations. They're large enough to be worn over other footwear."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_state = "harun_boots_obj0"
-	icon_base = "harun_boots_obj"
-	item_state = "harun_boots"
-
-/obj/item/clothing/gloves/soegloves/urfc/eluxor
-	name = "SOE Gloves"
-	desc = "These  gloves are somewhat fire and impact-resistant."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "harun_gloves"
-	icon_state = "harun_gloves_obj"
-
-/obj/item/clothing/mask/gas/soebalaclava/eluxor
-	name = "SOE Balaclava"
-	desc = "Designed to both hide identities and keep your face comfy and warm, a mask that can be connected to an air supply. Filters harmful gases from the air."
-	icon_state = "harun_balaclava"
-	item_state = "harun_balaclava"
-
-/obj/item/weapon/storage/box/large/donator/eluxor
-	startswith = list(/obj/item/clothing/under/urfc_jumpsuit/eluxor,
-					/obj/item/clothing/head/helmet/urfccommander/eluxor,
-					/obj/item/clothing/suit/armor/special/urfc/eluxor,
-					/obj/item/clothing/shoes/magboots/urfc/eluxor,
-					/obj/item/clothing/gloves/soegloves/urfc/eluxor,
-					/obj/item/clothing/mask/gas/soebalaclava/eluxor,
-					)
-	can_hold = list(/obj/item/clothing/under/urfc_jumpsuit/eluxor,
-					/obj/item/clothing/head/helmet/urfccommander/eluxor,
-					/obj/item/clothing/suit/armor/special/urfc/eluxor,
-					/obj/item/clothing/shoes/magboots/urfc/eluxor,
-					/obj/item/clothing/gloves/soegloves/urfc/eluxor,
-					/obj/item/clothing/mask/gas/soebalaclava/eluxor,
-					)
-
-/decl/hierarchy/outfit/eluxor
-	name = "eluxor - urfc"
-	uniform = /obj/item/clothing/under/urfc_jumpsuit/eluxor
-	head = /obj/item/clothing/head/helmet/urfccommander/eluxor
-	suit = /obj/item/clothing/suit/armor/special/urfc/eluxor
-	gloves = /obj/item/clothing/gloves/soegloves/urfc/eluxor
-	shoes = /obj/item/clothing/shoes/magboots/urfc/eluxor
-	mask = /obj/item/clothing/mask/gas/soebalaclava/eluxor
 
 ////////flaksim\\\\\\\\
 
@@ -937,66 +807,6 @@ decl/hierarchy/outfit/Jul
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkv_grenadier
 	head = /obj/item/clothing/head/helmet/spartan/mkv_grenadier
 
-///////MAGNUM\\\\\\\\
-
-//Sangheili Ultra
-
-/obj/item/clothing/under/covenant/sangheili/magnum
-	name = "Sangheili Body-suit"
-	desc = "A sealed, airtight bodysuit. Meant to be worn underneath the ornate 'Strangam Clan Ultra harness."
-	icon_state = "sangheili-magnum_suit"
-	species_restricted = list ("Sangheili")
-	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
-
-/obj/item/clothing/head/helmet/sangheili/ultra/magnum
-	name = "‘Strangam Clan - Ultra Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_helmet_obj"
-	item_state = "Magnum_helmet"
-
-/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
-	name = "‘Strangam Clan - Ultra Combat Harness"
-	icon_state = "Magnum_chest_obj"
-	item_state = "Magnum_chest"
-
-/obj/item/clothing/shoes/sangheili/ultra/magnum
-	name = "‘Strangam Clan - Ultra Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_boots_obj"
-	item_state = "Magnum_boots"
-
-/obj/item/clothing/gloves/thick/sangheili/ultra/magnum
-	name = "‘Strangam Clan - Ultra Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Magnum_gloves_obj"
-	item_state = "Magnum_gloves"
-
-/obj/item/weapon/storage/box/large/donator/magnum_ultra
-	startswith = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
-					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
-					/obj/item/clothing/shoes/sangheili/ultra/magnum,
-					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
-					/obj/item/clothing/under/covenant/sangheili/magnum
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/sangheili/ultra/magnum,
-					/obj/item/clothing/suit/armor/special/combatharness/ultra/magnum,
-					/obj/item/clothing/shoes/sangheili/ultra/magnum,
-					/obj/item/clothing/gloves/thick/sangheili/ultra/magnum,
-					/obj/item/clothing/under/covenant/sangheili/magnum
-					)
-
-/decl/hierarchy/outfit/magnum_sangheili
-	name = "RealMAGNUM - Sangheili Ultra"
-	uniform = /obj/item/clothing/under/covenant/sangheili/magnum
-	suit = /obj/item/clothing/suit/armor/special/combatharness/ultra/magnum
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/ultra/magnum
-	shoes = /obj/item/clothing/shoes/sangheili/ultra/magnum
-	head = /obj/item/clothing/head/helmet/sangheili/ultra/magnum
-	l_pocket = /obj/item/weapon/grenade/plasma
-	r_pocket = /obj/item/weapon/grenade/plasma
 
 ////////mann\\\\\\\\\
 
@@ -1148,122 +958,6 @@ obj/item/clothing/head/helmet/odst/donator/maxattackeralt
 	head = /obj/item/clothing/head/helmet/spartan/mkv_gungnir_navy
 	suit_store = /obj/item/weapon/tank/emergency/oxygen/double
 
-////////MCLOVIN\\\\\\\\
-
-//URFC
-
-
-/obj/item/clothing/head/helmet/urfc/mclovin
-	name = "Jaguar Helmet"
-
-	item_state = "mclovin-jaguar_worn"
-	icon_state = "mclovin-jaguar_helmet"
-
-/obj/item/clothing/suit/armor/special/urfc/mclovin
-	name = "Jaguar Armour"
-
-	item_state = "mclovin-jaguar_armour_worn"
-	icon_state = "mclovin-jaguar_armour_obj"
-
-/obj/item/clothing/head/helmet/zeal/mclovin
-	name = "Eagle Helmet"
-	desc = "A heavily modified helmet resembling an Eagle"
-
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "mclovin-eagle_worn"
-	icon_state = "mclovin-eagle_helmet"
-
-/obj/item/clothing/suit/justice/zeal/mclovin/New()
-	. = ..()
-	slowdown_per_slot[slot_wear_suit] = 1
-
-/obj/item/clothing/suit/justice/zeal/mclovin
-	name = "Eagle Armour"
-	desc = "A heavily modified piece of armour resembling an Eagle"
-
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "mclovin-eagle_armour_worn"
-	icon_state = "mclovin-eagle_armour_obj"
-
-/obj/item/weapon/material/machete/mclovin
-	name = "Aztec Sword"
-	desc = "An Aztec sword used to spill the blood of a warrior's enemy."
-	icon_state = "mclovin-machete_obj"
-	item_state = "mclovin-machete"
-	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
-		)
-
-/obj/item/clothing/suit/armor/special/urfc/aztec
-	name = "Aztec Armour"
-
-	item_state = "aztecpack_worn"
-	icon_state = "aztecpack_obj"
-
-/obj/item/clothing/shoes/magboots/urfc/aztec
-	name = "Aztec Boots"
-
-	item_state = "aztecboots_worn"
-	icon_state = "scpboots_obj"
-
-/obj/item/clothing/gloves/soegloves/urfc/aztec
-	name = "Aztec Gloves"
-
-	item_state = "aztecgloves_worn"
-	icon_state = "scpgloves_obj"
-
-/decl/hierarchy/outfit/mclovin_urfc
-	name = "mclovin - urfc"
-	head = /obj/item/clothing/head/helmet/urfc/mclovin
-	suit = /obj/item/clothing/suit/armor/special/urfc/mclovin
-	l_hand = /obj/item/weapon/material/machete/mclovin
-
-/obj/item/weapon/storage/box/large/donator/mclovin_urfc
-	startswith = list(/obj/item/clothing/head/helmet/urfc/mclovin,
-					/obj/item/clothing/suit/armor/special/urfc/mclovin,
-					/obj/item/weapon/material/machete/mclovin
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/urfc/mclovin,
-					/obj/item/clothing/suit/armor/special/urfc/mclovin,
-					/obj/item/weapon/material/machete/mclovin
-					)
-
-/decl/hierarchy/outfit/mclovin_zeal
-	name = "mclovin - zeal"
-	head = /obj/item/clothing/head/helmet/zeal/mclovin
-	suit = /obj/item/clothing/suit/justice/zeal/mclovin
-	l_hand = /obj/item/weapon/material/machete/mclovin
-
-/obj/item/weapon/storage/box/large/donator/mclovin_zeal
-	startswith = list(/obj/item/clothing/head/helmet/zeal/mclovin,
-					/obj/item/clothing/suit/justice/zeal/mclovin,
-					/obj/item/weapon/material/machete/mclovin
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/zeal/mclovin,
-					/obj/item/clothing/suit/justice/zeal/mclovin,
-					/obj/item/weapon/material/machete/mclovin
-					)
-
-/decl/hierarchy/outfit/mclovin_aztec
-	name = "mclovin - aztec"
-	head = /obj/item/clothing/head/helmet/zeal/mclovin
-	suit = /obj/item/clothing/suit/justice/zeal/mclovin
-	l_hand = /obj/item/weapon/material/machete/mclovin
-
-/obj/item/weapon/storage/box/large/donator/aztec
-	startswith = list(/obj/item/clothing/suit/armor/special/urfc/aztec,
-					/obj/item/clothing/shoes/magboots/urfc/aztec,
-					/obj/item/clothing/gloves/soegloves/urfc/aztec
-					)
-	can_hold = list(/obj/item/clothing/suit/armor/special/urfc/aztec,
-					/obj/item/clothing/shoes/magboots/urfc/aztec,
-					/obj/item/clothing/gloves/soegloves/urfc/aztec
-					)
-
-
 ////////Moerk\\\\\\\\
 
 //ODST
@@ -1294,94 +988,6 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	head = /obj/item/clothing/head/helmet/odst/donator/moerk
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/moerk
 
-////////M.Green/Dogler\\\\\\\\
-
-//Sangheili
-
-/obj/item/clothing/head/helmet/sangheili/dogler
-	name = "Sya'tenee's Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon_state = "dogler_helm_obj"
-	item_state = "dogler_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/dogler
-	name = "Sya'tenee's Sangheili Combat Harness"
-	icon_state = "dogler_chest_obj"
-	item_state = "dogler_chest"
-	totalshields = 240
-
-/obj/item/clothing/shoes/sangheili/dogler
-	name = "Sya'tenee's Sanghelli Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "dogler_legs_obj"
-	item_state = "dogler_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/dogler
-	name = "Sya'tenee's Sanghelli Combat Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "dogler_gloves_obj"
-	item_state = "dogler_gloves"
-
-/obj/item/weapon/storage/box/large/donator/dogler
-	startswith = list(/obj/item/clothing/head/helmet/sangheili/dogler,
-					/obj/item/clothing/suit/armor/special/combatharness/dogler,
-					/obj/item/clothing/shoes/sangheili/dogler,
-					/obj/item/clothing/gloves/thick/sangheili/dogler
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/sangheili/dogler,
-					/obj/item/clothing/suit/armor/special/combatharness/dogler,
-					/obj/item/clothing/shoes/sangheili/dogler,
-					/obj/item/clothing/gloves/thick/sangheili/dogler
-					)
-
-/obj/item/weapon/melee/energy/elite_sword/dagger/dogler
-
-	name = "Sya'tenee's Energy Dagger"
-	icon_state = "dogler_dag_handle"
-	icon_state_deployed = "dogler_dag_deploy"
-
-/obj/item/weapon/melee/energy/elite_sword/dagger/dogler/change_misc_variables(var/deactivate = 0)
-	if(deactivate)
-		item_icons = list(slot_l_hand_str = null,slot_r_hand_str = null)
-		item_state_slots = null
-		hitsound = "swing_hit"
-	else
-		item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
-		item_state_slots = list(
-		slot_l_hand_str = "dogler_dag_l_hand",
-		slot_r_hand_str = "dogler_dag_r_hand" )
-		hitsound = 'code/modules/halo/sounds/Energyswordhit.ogg'
-
-//Axe
-
-/obj/item/weapon/melee/energy/elite_sword/dogleraxe
-	name = "Sya'tenee's Energy Axe"
-	desc = "A huge, scary-looking energy axe, which looks too heavy to be wielded by humans..."
-	icon = 'code/modules/halo/icons/dogler_weapon_sprites.dmi'
-	force = 65
-	armor_penetration = 35
-	icon_state = "dogler_axe"
-	item_icons = list(slot_l_hand_str ='code/modules/halo/icons/dogler_weapon_sprites.dmi',slot_r_hand_str = 'code/modules/halo/icons/dogler_weapon_sprites.dmi')
-	item_state_slots = list(
-	slot_l_hand_str = "dogler_axe_l1",
-	slot_r_hand_str = "dogler_axe_r1")
-
-/obj/item/weapon/melee/energy/elite_sword/dogleraxe/activate(mob/living/user)
-	return
-
-/obj/item/weapon/melee/energy/elite_sword/dogleraxe/deactivate(mob/living/user)
-	return
-
-/decl/hierarchy/outfit/dogler_sangheili
-	name = "dogler/m.green - sangheili"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/dogler
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/dogler
-	shoes = /obj/item/clothing/shoes/sangheili/dogler
-	head = /obj/item/clothing/head/helmet/sangheili/dogler
-	l_pocket = /obj/item/weapon/grenade/plasma
 
 ////////NANU\\\\\\\\\
 
@@ -1425,203 +1031,6 @@ obj/item/clothing/head/helmet/odst/donator/moerk
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/nanu
 	back = /obj/item/weapon/storage/backpack/odst/nanu
 
-////////PANTAS\\\\\\\\
-
-//URFC
-
-
-/obj/item/clothing/head/helmet/urfc/pantas
-	name = "Darko's SoE Combat Engineer Helmet"
-	desc = "A simple helmet. Despite the old age, a lot of work has been put into adding additional armor and refining the base processes. It's quite heavy, but a lot of soft material has been added to the inside to make the metal more comfy. Outdated, but can be expected in combat engagements to perform on par with modern equipment, due to the extensive modifications."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "pantas_soe_helmet_worn"
-	icon_state = "pantas_soe_helmet_obj"
-	item_state_slots = list(slot_l_hand_str = "pantas_soe_helmet_worn", slot_r_hand_str = "pantas_soe_helmet_worn")
-
-/obj/item/clothing/suit/armor/special/urfc/pantas
-	name = "Darko's SoE Combat Engineer Armor"
-	desc = "A bulletproof vest. Filled with pouches and storage compartments, while still keeping a scary amount of both mobility and protection. An ideal collage of the strengths of the URF, but with the added protection found only in high tier UNSC equipment. It's quite comfy, probably won't last long in space."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "pantas_soe_armor_worn"
-	icon_state = "pantas_soe_armor_obj"
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state_slots = list(slot_l_hand_str = "pantas_soe_armor_worn", slot_r_hand_str = "pantas_soe_armor_worn")
-
-/obj/item/clothing/head/helmet/soe/pantas
-	name = "SOE Venerator Helmet"
-	desc = "Non-Standard issue short-EVA capable helmet issued to commandos."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "pantas_soe_space_helmet_worn"
-	icon_state = "pantas_soe_space_helmet_obj"
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state_slots = list(slot_l_hand_str = "pantas_soe_space_helmet_worn", slot_r_hand_str = "pantas_soe_space_helmet_worn")
-
-obj/item/clothing/suit/armor/special/soe/pantas
-	name = "SOE Venerator Armor"
-	desc = "Heavyweight, somewhat durable armour issued to commandos for increased survivability in space."
-	icon = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state = "pantas_soe_spacesuit_worn"
-	icon_state = "pantas_soe_spacesuit_obj"
-	icon_override = 'code/modules/halo/clothing/urf_commando.dmi'
-	item_state_slots = list(slot_l_hand_str = "pantas_soe_spacesuit_worn", slot_r_hand_str = "pantas_soe_spacesuit_worn")
-
-/obj/item/weapon/material/machete/pantascmdo
-	name = "Judgement of Eridanus"
-	desc = "A Holy-Looking sword used to Judge the enemies of Eridanus"
-	icon_state = "pantascmdo-machete_obj"
-	item_state = "pantascmdo-machete"
-	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
-		)
-
-/obj/item/weapon/gun/projectile/br85/pantasma3
-	name = "Ancient AK-47"
-	desc = "An ancient weapon used in forgettable times. How does it even still work?"
-	icon_state = "pantasAK47"
-	item_state = "pantasAK47"
-	item_icons = list(
-		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
-		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
-		)
-
-/obj/item/weapon/gun/projectile/br85/pantasma3/update_icon()
-	. = ..()
-	if(ammo_magazine)
-		icon_state = "pantasAK47"
-	else
-		icon_state = "pantasAK47_unloaded"
-
-/obj/item/weapon/tank/jetpack/void/urfc/pantas
-	icon_state = "pantas_soe_airtank_obj"
-	item_state = "pantas_soe_airtank_worn"
-
-/obj/item/weapon/storage/box/large/donator/pantas_urfc
-	startswith = list(/obj/item/clothing/head/helmet/urfc/pantas,
-					/obj/item/clothing/suit/armor/special/urfc/pantas,
-					/obj/item/clothing/head/helmet/soe/pantas,
-					/obj/item/clothing/suit/armor/special/soe/pantas,
-					/obj/item/weapon/material/machete/pantascmdo,
-					/obj/item/weapon/gun/projectile/br85/pantasma3,
-					/obj/item/weapon/tank/jetpack/void/urfc/pantas
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/urfc/pantas,
-					/obj/item/clothing/suit/armor/special/urfc/pantas,
-					/obj/item/clothing/head/helmet/soe/pantas,
-					/obj/item/clothing/suit/armor/special/soe/pantas,
-					/obj/item/weapon/material/machete/pantascmdo,
-					/obj/item/weapon/gun/projectile/br85/pantasma3,
-					/obj/item/weapon/tank/jetpack/void/urfc/pantas
-					)
-
-/decl/hierarchy/outfit/pantas_urfc
-	name = "pantas - urfc"
-	head = /obj/item/clothing/head/helmet/urfc/pantas
-	suit = /obj/item/clothing/suit/armor/special/urfc/pantas
-	l_hand = /obj/item/weapon/material/machete/pantascmdo
-	r_hand = /obj/item/weapon/gun/projectile/br85/pantasma3
-
-/decl/hierarchy/outfit/pantas_soe
-	name = "pantas - soe"
-	head = /obj/item/clothing/head/helmet/soe/pantas
-	suit = /obj/item/clothing/suit/armor/special/urfc/pantas
-	l_hand = /obj/item/weapon/material/machete/pantascmdo
-	r_hand = /obj/item/weapon/gun/projectile/br85/pantasma3
-	back = /obj/item/weapon/tank/jetpack/void/urfc/pantas
-
-//SANGHEILI (MINOR)
-
-// Scribe Minor
-
-/obj/item/clothing/head/helmet/sangheili/minor/pantas
-	name = "Sangheili Helmet (Scribe Minor)"
-	icon_state = "pantas2_helm_obj"
-	item_state = "pantas2_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/minor/pantas
-	name = "Sangheili Combat Harness (Scribe Minor)"
-	icon_state = "pantas2_chest_obj"
-	item_state = "pantas2_chest"
-
-/obj/item/clothing/shoes/sangheili/minor/pantas
-	name = "Sanghelli Leg Armour (Scribe Minor)"
-	icon_state = "pantas2_legs_obj"
-	item_state = "pantas2_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/minor/pantas
-	name = "Sanghelli Combat Gauntlets (Scribe Minor)"
-	icon_state = "pantas2_gloves_obj"
-	item_state = "pantas2_gloves"
-
-/obj/item/weapon/storage/box/large/donator/pantas_minor
-	startswith = list(/obj/item/clothing/suit/armor/special/combatharness/minor/pantas,
-					/obj/item/clothing/shoes/sangheili/minor/pantas,
-					/obj/item/clothing/gloves/thick/sangheili/minor/pantas,
-					/obj/item/clothing/head/helmet/sangheili/minor/pantas
-					)
-	can_hold = list(/obj/item/clothing/suit/armor/special/combatharness/minor/pantas,
-					/obj/item/clothing/shoes/sangheili/minor/pantas,
-					/obj/item/clothing/gloves/thick/sangheili/minor/pantas,
-					/obj/item/clothing/head/helmet/sangheili/minor/pantas
-					)
-
-/decl/hierarchy/outfit/pantas_sangheili_minor
-	name = "pantas - sangheili minor"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/minor/pantas
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/minor/pantas
-	shoes = /obj/item/clothing/shoes/sangheili/minor/pantas
-	head = /obj/item/clothing/head/helmet/sangheili/minor/pantas
-	mask = null
-	l_pocket = /obj/item/weapon/grenade/plasma
-	r_pocket = null
-
-//SANGHEILI (MAJOR)
-
-/obj/item/clothing/head/helmet/sangheili/major/pantas
-	name = "Sangheili Helmet (Berserker Major)"
-	icon_state = "pantas_helm_obj"
-	item_state = "pantas_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/major/pantas
-	name = "Sangheili Combat Harness (Berserker Major)"
-	icon_state = "pantas_chest_obj"
-	item_state = "pantas_chest"
-
-/obj/item/clothing/shoes/sangheili/major/pantas
-	name = "Sanghelli Leg Armour (Berserker Major)"
-	icon_state = "pantas_legs_obj"
-	item_state = "pantas_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/major/pantas
-	name = "Sanghelli Combat Gauntlets (Berserker Major)"
-	icon_state = "pantas_gloves_obj"
-	item_state = "pantas_gloves"
-
-/obj/item/weapon/storage/box/large/donator/pantas_major
-	startswith = list(/obj/item/clothing/suit/armor/special/combatharness/major/pantas,
-					/obj/item/clothing/gloves/thick/sangheili/major/pantas,
-					/obj/item/clothing/shoes/sangheili/major/pantas,
-					/obj/item/clothing/head/helmet/sangheili/major/pantas
-					)
-	can_hold = list(/obj/item/clothing/suit/armor/special/combatharness/major/pantas,
-					/obj/item/clothing/gloves/thick/sangheili/major/pantas,
-					/obj/item/clothing/shoes/sangheili/major/pantas,
-					/obj/item/clothing/head/helmet/sangheili/major/pantas
-					)
-
-/decl/hierarchy/outfit/pantas_sangheili_major
-	name = "pantas - sangheili major"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/major/pantas
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/major/pantas
-	shoes = /obj/item/clothing/shoes/sangheili/major/pantas
-	head = /obj/item/clothing/head/helmet/sangheili/major/pantas
-	l_pocket = /obj/item/weapon/grenade/plasma
 
 ////////Pinstripe\\\\\\\\
 
@@ -1867,54 +1276,8 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/armor/special/spartan
 	head = /obj/item/clothing/head/helmet/spartan
 
-////////Socks\\\\\\\\
 
-//URFC
-
-/obj/item/clothing/head/helmet/urfc/socks
-	name = "H34D Dome Protector (TEXUS)"
-
-	item_state = "socks-helmet_worn"
-	icon_state = "socks-helmet_obj"
-
-/obj/item/clothing/suit/armor/special/urfc/socks
-	name = "I25B Heavy Chest Rig (TEXUS)"
-
-	item_state = "socks-armor_worn"
-	icon_state = "socks-armor_obj"
-
-/obj/item/clothing/under/urfc_jumpsuit/socks
-	name = "Eridanus Uniform (TEXUS)"
-
-	item_state = "socks-jumpsuit_worn"
-	icon_state = "socks-jumpsuit_obj"
-
-/obj/item/clothing/shoes/magboots/urfc/socks
-	name = "F76F Mag Boots (TEXUS)"
-
-	item_state = "socks-boots_worn"
-	icon_state = "socks-boots_obj"
-
-/obj/item/weapon/storage/box/large/donator/socks
-	startswith = list(/obj/item/clothing/head/helmet/urfc/socks,
-					/obj/item/clothing/suit/armor/special/urfc/socks,
-					/obj/item/clothing/under/urfc_jumpsuit/socks,
-					/obj/item/clothing/shoes/magboots/urfc/socks
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/urfc/socks,
-					/obj/item/clothing/suit/armor/special/urfc/socks,
-					/obj/item/clothing/under/urfc_jumpsuit/socks,
-					/obj/item/clothing/shoes/magboots/urfc/socks
-					)
-
-/decl/hierarchy/outfit/socks_urfc
-	name = "socks - URFC"
-	uniform = /obj/item/clothing/under/urfc_jumpsuit/socks
-	shoes = /obj/item/clothing/shoes/magboots/urfc/socks
-	head = /obj/item/clothing/head/helmet/urfc/socks
-	suit = /obj/item/clothing/suit/armor/special/urfc/socks
-
-//Spartan
+//Socks Spartan
 
 /obj/item/clothing/head/helmet/spartan/mkiv_domeprotector
 	name = "MJOLNIR Powered Assault Armor Helmet Mark IV Special Issue Dome Protector"
@@ -1931,54 +1294,6 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	suit = /obj/item/clothing/suit/armor/special/spartan/mkiv_domeprotector
 	head = /obj/item/clothing/head/helmet/spartan/mkiv_domeprotector
 
-//Sangheili (MAJOR)
-
-/obj/item/clothing/head/helmet/sangheili/socks
-	name = "‘Nasan Clan - Bluekro Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon_state = "socks_helm_obj"
-	item_state = "socks_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/socks
-	name = "‘Nasan Clan - Bluekro Combat Harness"
-	icon_state = "socks_chest_obj"
-	item_state = "socks_chest"
-	totalshields = 240
-
-/obj/item/clothing/shoes/sangheili/socks
-	name = "‘Nasan Clan - Bluekro Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "socks_legs_obj"
-	item_state = "socks_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/socks
-	name = "‘Nasan Clan - Bluekro Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "socks_gloves_obj"
-	item_state = "socks_gloves"
-
-/obj/item/weapon/storage/box/large/donator/socks_major
-	startswith = list(/obj/item/clothing/head/helmet/sangheili/socks,
-					/obj/item/clothing/suit/armor/special/combatharness/socks,
-					/obj/item/clothing/shoes/sangheili/socks,
-					/obj/item/clothing/gloves/thick/sangheili/socks
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/sangheili/socks,
-					/obj/item/clothing/suit/armor/special/combatharness/socks,
-					/obj/item/clothing/shoes/sangheili/socks,
-					/obj/item/clothing/gloves/thick/sangheili/socks
-					)
-
-/decl/hierarchy/outfit/socks_sangheili
-	name = "socks - sangheili"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/socks
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/socks
-	shoes = /obj/item/clothing/shoes/sangheili/socks
-	head = /obj/item/clothing/head/helmet/sangheili/socks
-	l_pocket = /obj/item/weapon/grenade/plasma
 
 ////////Stingray\\\\\\\\
 
@@ -2046,6 +1361,7 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	name = "wehraboo - spartan"
 	suit = /obj/item/clothing/suit/armor/special/spartan/markvi_wehraboo
 	head = /obj/item/clothing/head/helmet/spartan/markvi_wehraboo
+
 
 ////////winterume\\\\\\\\
 
@@ -2175,6 +1491,14 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 
 //ONI Researcher, using guard armour.
 
+/obj/item/weapon/gun/projectile/br55/xor
+	name = "FN-FAL"
+	desc = "A custom made recreation of an old-world weapon. with internals modelled to function as a BR55."
+
+	icon_state = "fal"
+
+	wielded_item_state = null
+
 /obj/item/clothing/suit/storage/oni_guard/xor
 	name = "Refitted T voan Armour"
 	desc = "Looks like someone captured and refitted the armour of a Covenant T voan."
@@ -2269,229 +1593,36 @@ obj/item/clothing/head/helmet/odst/donator/pinstripe
 	/obj/item/weapon/gun/projectile/br55/xor
 	)
 
-/obj/item/weapon/gun/projectile/br55/xor
-	name = "FN-FAL"
-	desc = "A custom made recreation of an old-world weapon. with internals modelled to function as a BR55."
-
-	icon_state = "fal"
-
-	wielded_item_state = null
-
 /obj/item/weapon/gun/projectile/br55/xor/update_icon()
 	if(ammo_magazine)
 		icon_state = "fal"
 	else
 		icon_state = "fal_unloaded"
 
-///////Vampire132978123\\\\\\\
-
-//Skirmisher
-
-/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire
-	name = "Pirate's Hat"
-	desc = "A worn, probably stolen, pirate hat. Looks like it belongs in a theater."
-	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
-	icon_state = "piratehat_obj"
-	item_state = "piratehat"
-	species_restricted = list("Tvaoan Kig-Yar")
-
-/obj/item/clothing/suit/armor/special/skirmisher/donator/vampire
-	name = "Worn Coat"
-	desc = "A coat that is rumored to be owned by a legendary pirate, though some say it was stolen from a cargo vessel by a humanoid bird."
-	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
-	icon_state = "piratecoat_obj"
-	item_state = "piratecoat"
-	sprite_sheets = list("Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
-	species_restricted = list("Tvaoan Kig-Yar")
-	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
-	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
-
-/obj/item/toy/plushie/donator/vampire
-	name = "Rafaj"
-	desc = "A pirate's best friend, and most prized possession. It looks like it's been through many adventures. Squeeze to activate an internal speaker."
-	icon = 'code/modules/halo/icons/species/Skirmisher_inhand.dmi'
-	icon_state = "parrot_obj"
-	item_state = "parrot"
-	slot_flags = SLOT_POCKET | SLOT_BELT | SLOT_BACK | SLOT_EARS
-	var/next_sound = 0
-	var/play_music = 0
-	var/list/sound_music = list(\
-	'code/modules/halo/sounds/rafaj_donor/music_1.ogg' = 162 SECONDS,
-	'code/modules/halo/sounds/rafaj_donor/music_2.ogg' = 127 SECONDS
-	)
-	var/list/sound_voice = list(\
-	'code/modules/halo/sounds/rafaj_donor/voiceline_1.ogg',
-	'code/modules/halo/sounds/rafaj_donor/voiceline_2.ogg',
-	'code/modules/halo/sounds/rafaj_donor/voiceline_3.ogg',
-	'code/modules/halo/sounds/rafaj_donor/voiceline_4.ogg',
-	'code/modules/halo/sounds/rafaj_donor/voiceline_5.ogg',
-	'code/modules/halo/sounds/rafaj_donor/voiceline_6.ogg',
-	'code/modules/halo/sounds/rafaj_donor/voiceline_7.ogg'
-	)
-
-/obj/item/toy/plushie/donator/vampire/verb/toggle_soundtype()
-	set name = "Toggle Speaker Type"
-	set category = "Object"
-
-	if(!istype(usr,/mob/living))
-		return
-	play_music = !play_music
-	to_chat(usr,"<span class = 'notice'>You toggle [src] to [play_music ? "play music" : "play voice lines"].</span>")
-
-/obj/item/toy/plushie/donator/vampire/attack_self(var/mob/user)
-	if(sound_voice.len > 0)
-		var/list/l_use = sound_voice
-		if(play_music)
-			if(sound_music.len == 0 || world.time < next_sound)
-				return
-			l_use = sound_music
-		var/sfx_play = pick(l_use)
-		if(play_music)
-			next_sound = world.time + l_use[sfx_play]
-		playsound(user, sfx_play , 100)
-
-/obj/item/weapon/storage/box/large/donator/vampire
-	startswith = list(/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire,
-					/obj/item/clothing/suit/armor/special/skirmisher/donator/vampire,
-					/obj/item/toy/plushie/donator/vampire
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire,
-					/obj/item/clothing/suit/armor/special/skirmisher/donator/vampire,
-					/obj/item/toy/plushie/donator/vampire
-					)
-
-/decl/hierarchy/outfit/vampire_kigyar
-	name = "vampire - kig-yar"
-	suit = /obj/item/clothing/suit/armor/special/skirmisher/donator/vampire
-	suit_store = /obj/item/toy/plushie/donator/vampire
-	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire
-
-///////Voloxus\\\\\\\\
-
-//Sangheili (ULTRA/MAJOR)
-
-/obj/item/clothing/head/helmet/sangheili/voloxus
-	name = "‘Vurom Clan Armor - Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Leevrukah_helmet_obj"
-	item_state = "Leevrukah_helmet"
-
-/obj/item/clothing/suit/armor/special/combatharness/voloxus
-	name = "‘Vurom Clan Armor - Combat Harness"
-	desc = "Worn only by those within the 'Vurom Clan that have distinguished themselves among the most faithful, and zealous within the Covenant."
-	icon_state = "Leevrukah_chest_obj"
-	item_state = "Leevrukah_chest"
-	totalshields = 240
-
-/obj/item/clothing/shoes/sangheili/voloxus
-	name = "‘Vurom Clan Armor - Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Leevrukah_legs_obj"
-	item_state = "Leevrukah_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/voloxus
-	name = "‘Vurom Clan Armor - Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "Leevrukah_gloves_obj"
-	item_state = "Leevrukah_gloves"
-
-/obj/item/weapon/storage/box/large/donator/voloxus_sangheili
-	startswith = list(/obj/item/clothing/head/helmet/sangheili/voloxus,
-					/obj/item/clothing/suit/armor/special/combatharness/voloxus,
-					/obj/item/clothing/shoes/sangheili/voloxus,
-					/obj/item/clothing/gloves/thick/sangheili/voloxus
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/sangheili/voloxus,
-					/obj/item/clothing/suit/armor/special/combatharness/voloxus,
-					/obj/item/clothing/shoes/sangheili/voloxus,
-					/obj/item/clothing/gloves/thick/sangheili/voloxus
-					)
-
-/decl/hierarchy/outfit/voloxus_sangheili
-	name = "voloxus - Ultra/Major"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/voloxus
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/voloxus
-	shoes = /obj/item/clothing/shoes/sangheili/voloxus
-	head = /obj/item/clothing/head/helmet/sangheili/voloxus
-	l_pocket = /obj/item/weapon/grenade/plasma
-
-///////Zane\\\\\\\\
-
-//Sangheili (ULTRA)
-
-/obj/item/clothing/head/helmet/sangheili/zane
-	name = "‘Nasan Clan - Ultra Sangheili Helmet"
-	desc = "Head armour, to be used with the Sangheili Combat Harness."
-	icon_state = "bluekro_helm_obj"
-	item_state = "bluekro_helm"
-
-/obj/item/clothing/suit/armor/special/combatharness/zane
-	name = "‘Nasan Clan - Ultra Combat Harness"
-	icon_state = "bluekro_chest_obj"
-	item_state = "bluekro_chest"
-	totalshields = 240
-
-/obj/item/clothing/shoes/sangheili/zane
-	name = "‘Nasan Clan - Ultra Leg Armour"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "bluekro_legs_obj"
-	item_state = "bluekro_legs"
-
-/obj/item/clothing/gloves/thick/sangheili/zane
-	name = "‘Nasan Clan - Ultra Gauntlets"
-	desc = "Hand armour, to be used with the Sangheili Combat Harness."
-	icon_state = "bluekro_gloves_obj"
-	item_state = "bluekro_gloves"
-
-/obj/item/weapon/melee/energy/elite_sword/zane
-	icon_state = "zaneSword-handle"
-	icon_state_deployed = "zaneSword-deployed"
-	inhand_icon_state = "zaneSword"
-
-/obj/item/weapon/storage/box/large/donator/zane_ultra
-	startswith = list(/obj/item/clothing/head/helmet/sangheili/zane,
-					/obj/item/clothing/suit/armor/special/combatharness/zane,
-					/obj/item/clothing/shoes/sangheili/zane,
-					/obj/item/clothing/gloves/thick/sangheili/zane,
-					/obj/item/weapon/melee/energy/elite_sword/zane
-					)
-	can_hold = list(/obj/item/clothing/head/helmet/sangheili/zane,
-					/obj/item/clothing/suit/armor/special/combatharness/zane,
-					/obj/item/clothing/shoes/sangheili/zane,
-					/obj/item/clothing/gloves/thick/sangheili/zane,
-					/obj/item/weapon/melee/energy/elite_sword/zane
-					)
-
-/decl/hierarchy/outfit/zane_sangheili
-	name = "zane - Ultra"
-	suit = /obj/item/clothing/suit/armor/special/combatharness/zane
-	suit_store = /obj/item/weapon/gun/energy/plasmarifle
-	back = /obj/item/weapon/gun/energy/plasmarifle
-	belt = /obj/item/weapon/gun/energy/plasmapistol
-	gloves = /obj/item/clothing/gloves/thick/sangheili/zane
-	shoes = /obj/item/clothing/shoes/sangheili/zane
-	head = /obj/item/clothing/head/helmet/sangheili/zane
-	l_pocket = /obj/item/weapon/grenade/plasma
-
 //GhostDex
-/obj/item/clothing/head/helmet/odst/ghostdex
-	item_state = "ghostdexodsthelmet"
-	item_state_novisr = "ghostdexodsthelmet"
+/obj/item/clothing/head/helmet/spartan/ghostdex
+	icon_state = "ghostdex-helm-obj"
+	item_state = "ghostdex-helm-worn"
 
-/obj/item/clothing/suit/armor/special/odst/ghostdex
-	item_state = "ghostdexodstarmor"
+/obj/item/clothing/suit/armor/special/spartan/ghostdex
+	icon_state = "ghostdex-obj"
+	item_state = "ghostdex-worn"
 	flags_inv = HIDETAIL
 
+/obj/item/weapon/storage/box/large/donator/ghostdex_spartan
+	startswith = list(\
+	/obj/item/clothing/head/helmet/spartan/ghostdex,
+	/obj/item/clothing/suit/armor/special/spartan/ghostdex
+	)
+	can_hold = list(\
+	/obj/item/clothing/head/helmet/spartan/ghostdex,
+	/obj/item/clothing/suit/armor/special/spartan/ghostdex
+	)
 
 #undef ODST_OVERRIDE
 #undef ITEM_INHAND
 #undef MARINE_OVERRIDE
 #undef MARINE_INHAND
-#undef URF_OVERRIDE
-#undef URF_HAND
 #undef SPARTAN_OVERRIDE
 #undef ONI_OVERRIDE
 #undef ONI_ITEM_INHAND
