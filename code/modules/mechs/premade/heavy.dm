@@ -71,7 +71,7 @@
 
 /obj/item/mech_component/chassis/heavy/prebuild()
 	. = ..()
-	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
 
 /mob/living/exosuit/premade/heavy/merc/Initialize()
 	. = ..()

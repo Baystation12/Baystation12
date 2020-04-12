@@ -31,3 +31,7 @@
 	power_use = 5
 	has_hardpoints = list(HARDPOINT_BACK)
 	desc = "The NanoTrasen Katamari series cockpits have won a massive tender by SCG few years back. No one is sure why, but these terrible things keep popping up on every government facility."
+
+/obj/item/mech_component/chassis/pod/prebuild()
+	. = ..()
+	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
