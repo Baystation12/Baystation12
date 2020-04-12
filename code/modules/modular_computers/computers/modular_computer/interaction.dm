@@ -5,9 +5,9 @@
 		verbs -= /obj/item/modular_computer/proc/eject_usb
 
 	if(stores_pen && istype(stored_pen))
-		verbs |= /obj/item/modular_computer/proc/remove_pen
+		verbs |= /obj/item/modular_computer/proc/remove_pen_verb
 	else
-		verbs -= /obj/item/modular_computer/proc/remove_pen
+		verbs -= /obj/item/modular_computer/proc/remove_pen_verb
 
 	if(card_slot)
 		verbs |= /obj/item/weapon/stock_parts/computer/card_slot/proc/verb_eject_id
@@ -54,22 +54,26 @@
 	proc_eject_usb(usr)
 	update_verbs()
 
-/obj/item/modular_computer/proc/remove_pen()
+/obj/item/modular_computer/proc/remove_pen_verb()
 	set name = "Remove Pen"
 	set category = "Object"
 	set src in view(1)
 
-	if(usr.incapacitated() || !istype(usr, /mob/living))
-		to_chat(usr, "<span class='warning'>You can't do that.</span>")
+	remove_pen(usr)
+
+/obj/item/modular_computer/proc/remove_pen(mob/user)
+
+	if(user.incapacitated() || !istype(user, /mob/living))
+		to_chat(user, "<span class='warning'>You can't do that.</span>")
 		return
 
-	if(!Adjacent(usr))
-		to_chat(usr, "<span class='warning'>You can't reach it.</span>")
+	if(!Adjacent(user))
+		to_chat(user, "<span class='warning'>You can't reach it.</span>")
 		return
 
 	if(istype(stored_pen))
-		to_chat(usr, "<span class='notice'>You remove [stored_pen] from [src].</span>")
-		usr.put_in_hands(stored_pen) // Silicons will drop it anyway.
+		to_chat(user, "<span class='notice'>You remove [stored_pen] from [src].</span>")
+		user.put_in_hands(stored_pen) // Silicons will drop it anyway.
 		stored_pen = null
 		update_verbs()
 
