@@ -13,9 +13,7 @@
 
 /obj/structure/catwalk/Initialize()
 	. = ..()
-	for(var/obj/structure/catwalk/C in get_turf(src))
-		if(C != src)
-			qdel(C)
+	DELETE_IF_DUPLICATE_OF(/obj/structure/catwalk)
 	update_connections(1)
 	update_icon()
 
