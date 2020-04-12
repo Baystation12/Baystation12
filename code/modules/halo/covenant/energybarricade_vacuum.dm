@@ -21,7 +21,7 @@
 
 /obj/structure/energybarricade/vacuum_shield/update_icon()
 	if(shield_health > 0)
-		icon_state = "shield-old"
+		icon_state = initial(icon_state)
 	else
 		icon_state = fail_state
 

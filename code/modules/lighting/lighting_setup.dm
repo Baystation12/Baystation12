@@ -12,5 +12,7 @@
 		var/area/A = T.loc
 		if(!A.dynamic_lighting)
 			continue
+		if(locate(/atom/movable/lighting_overlay) in T) //If one already exists, don't try to create one.
+			continue
 
 		new /atom/movable/lighting_overlay(T, TRUE)

@@ -15,5 +15,5 @@
 
 	ship_max_speed = 2
 
-/obj/machinery/button/toggle/alarm_button/destroyer
+/obj/machinery/button/toggle/alarm_button/light_brigade
 	area_base = /area/destroyer/unsclightbrigade

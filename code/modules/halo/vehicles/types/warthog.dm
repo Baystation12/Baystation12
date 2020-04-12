@@ -33,7 +33,7 @@
 
 /obj/item/vehicle_component/health_manager/warthog
 	integrity = 500
-	resistances = list("brute"=40,"burn"=35,"emp"=25,"bomb"=25)
+	resistances = list("brute"=40,"burn"=40,"emp"=25,"bomb"=25)
 
 /datum/component_profile/warthog
 	pos_to_check = "gunner"
@@ -59,7 +59,7 @@
 	icon = 'code/modules/halo/vehicles/types/finalwarthog-turretless.dmi'
 	icon_state = "warthog-turretless"
 
-	vehicle_move_delay = 1.6
+	max_speed = 2.3
 	capacity_flag = ITEM_SIZE_LARGE
 
 	occupants = list(2,0)
@@ -72,10 +72,9 @@
 	icon = 'code/modules/halo/vehicles/types/finalwarthog.dmi'
 	icon_state = "Warthog"
 
-	vehicle_move_delay = 1.4
-	capacity_flag = ITEM_SIZE_HUGE
+	max_speed = 2.4
 
-	occupants = list(4,0)
+	occupants = list(6,0)
 	exposed_positions = list("driver" = 15,"passenger" = 30)
 
 /obj/vehicles/warthog/troop/police
