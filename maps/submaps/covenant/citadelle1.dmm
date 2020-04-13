@@ -1,105 +1,134 @@
-"aa" = (/turf/unsimulated/floor/rock4,/area/space)
-"ab" = (/turf/simulated/wall/covenant,/area/space)
-"ac" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Citadelle"},/turf/simulated/floor/covenant,/area/space)
-"ad" = (/turf/simulated/floor/covenant,/area/space)
-"ae" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/space)
-"af" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant,/area/space)
-"ag" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant,/area/space)
-"ah" = (/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant,/area/space)
-"ai" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant,/area/space)
-"aj" = (/obj/machinery/door/airlock/covenant{name = "Hall"},/turf/simulated/floor/covenant,/area/space)
-"ak" = (/obj/machinery/door/airlock/covenant{name = "Temple"},/turf/simulated/floor/covenant,/area/space)
-"al" = (/obj/structure/closet/covenant,/turf/simulated/floor/covenant,/area/space)
-"am" = (/obj/structure/closet/crate/covenant,/turf/simulated/floor/covenant,/area/space)
-"an" = (/obj/machinery/door/airlock/multi_tile/covenant/eastwest{name = "Citadelle"},/turf/simulated/floor/covenant,/area/space)
-"ao" = (/obj/machinery/chemical_dispenser/full/covenant,/turf/simulated/floor/covenant,/area/space)
-"ap" = (/obj/vehicles/ghost{icon_state = "base"; dir = 1},/turf/simulated/floor/covenant,/area/space)
-"aq" = (/obj/machinery/door/airlock/covenant{name = "Warehouse"},/turf/simulated/floor/covenant,/area/space)
-"ar" = (/obj/machinery/door/airlock/covenant{name = "Factory"},/turf/simulated/floor/covenant,/area/space)
-"as" = (/obj/structure/table/marble,/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/wrench/covenant,/obj/item/weapon/screwdriver/covenant,/obj/item/device/multitool/covenant,/obj/item/weapon/crowbar/covenant,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/space)
-"at" = (/obj/structure/table/marble,/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/turf/simulated/floor/covenant,/area/space)
-"au" = (/obj/structure/table/marble,/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/wrench/covenant,/obj/item/weapon/screwdriver/covenant,/obj/item/device/multitool/covenant,/obj/item/weapon/crowbar/covenant,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant,/area/space)
-"av" = (/obj/machinery/door/airlock/multi_tile/covenant/three/eastwest,/turf/simulated/floor/covenant,/area/space)
-"aw" = (/obj/vehicles/wraith{icon_state = "wraith"; dir = 1},/turf/simulated/floor/covenant,/area/space)
-"ax" = (/obj/structure/energybarricade{icon_state = "3"; dir = 1},/turf/simulated/floor/covenant,/area/space)
-"ay" = (/obj/structure/weapon_rack,/turf/simulated/floor/covenant,/area/space)
-"az" = (/obj/structure/energybarricade{icon_state = "3"; dir = 8},/turf/simulated/floor/covenant,/area/space)
-"aA" = (/obj/machinery/squad_camera_console/covenant,/turf/simulated/floor/covenant,/area/space)
-"aB" = (/obj/structure/energybarricade{icon_state = "3"; dir = 4},/turf/simulated/floor/covenant,/area/space)
-"aC" = (/obj/structure/energybarricade,/turf/simulated/floor/covenant,/area/space)
-"aD" = (/obj/machinery/light/covenant/west,/obj/structure/closet/covenant,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/covenant,/area/space)
-"aE" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/pickaxe/plasma_drill,/turf/simulated/floor/covenant,/area/space)
-"aF" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant,/area/space)
-"aG" = (/obj/structure/closet/covenant,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/covenant,/area/space)
-"aH" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/plasturret_boxmag,/turf/simulated/floor/covenant,/area/space)
-"aI" = (/obj/machinery/portable_atmospherics/canister/oxygen/prechilled{icon_state = "black"; name = "\improper Covenant Canister: \[O2 (Cryo)]"},/turf/simulated/floor/covenant,/area/space)
-"aJ" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/oxygen/prechilled{icon_state = "black"; name = "\improper Covenant Canister: \[O2 (Cryo)]"},/turf/simulated/floor/covenant,/area/space)
-"aK" = (/obj/machinery/atmospherics/unary/cryo_cell/covenant,/turf/simulated/floor/covenant,/area/space)
-"aL" = (/obj/structure/bed/covenant,/turf/simulated/floor/covenant,/area/space)
-"aM" = (/obj/machinery/light/covenant/east,/obj/structure/closet/crate/covenant,/obj/item/clothing/gloves/thick/sangheili/arbiter,/obj/item/clothing/head/helmet/sangheili/arbiter,/obj/item/clothing/mask/sangheili/arbiter,/obj/item/clothing/shoes/sangheili/arbiter,/obj/item/clothing/suit/armor/special/combatharness/arbiter,/obj/item/clothing/under/covenant/sangheili,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/turf/simulated/floor/covenant,/area/space)
-"aN" = (/obj/machinery/light/covenant/north,/obj/structure/closet/covenant,/turf/simulated/floor/covenant,/area/space)
-"aO" = (/obj/structure/closet/covenant,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/covenant,/area/space)
-"aP" = (/obj/structure/closet/crate/covenant,/obj/item/stack/material/nanolaminate/ten,/turf/simulated/floor/covenant,/area/space)
-"aQ" = (/obj/machinery/atmospherics/pipe/simple/hidden{icon_state = "intact"; dir = 5},/turf/simulated/floor/covenant,/area/space)
-"aR" = (/obj/machinery/atmospherics/pipe/manifold/hidden,/turf/simulated/floor/covenant,/area/space)
-"aS" = (/obj/machinery/atmospherics/pipe/simple/hidden{icon_state = "intact"; dir = 9},/turf/simulated/floor/covenant,/area/space)
-"aT" = (/mob/living/bot/cleanbot/covenant,/turf/simulated/wall/covenant,/area/space)
-"aU" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/turf/simulated/floor/covenant,/area/space)
-"aV" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/turf/simulated/floor/covenant,/area/space)
-"aW" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant,/area/space)
-"aX" = (/obj/structure/closet/covenant,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/turf/simulated/floor/covenant,/area/space)
-"aY" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant,/area/space)
-"aZ" = (/obj/structure/covenant_comms_tower,/turf/simulated/floor/covenant,/area/space)
-"ba" = (/obj/structure/table/marble,/obj/item/squad_manager/covenant,/turf/simulated/floor/covenant,/area/space)
-"bb" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
-"bc" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
-"bd" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant,/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
-"be" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
-"bf" = (/obj/structure/closet/crate/covenant,/obj/item/clothing/head/helmet/kigyar/skirmisher/commando,/obj/item/clothing/under/kigyar,/obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando,/obj/item/clothing/shoes/skirmisher/commando,/obj/item/clothing/suit/armor/special/skirmisher/commando,/turf/simulated/floor/covenant,/area/space)
-"bg" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
-"bh" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
-"bi" = (/obj/structure/repair_bench/cov,/obj/item/weapon/melee/energy/elite_sword/dagger,/turf/simulated/floor/covenant,/area/space)
-"bj" = (/obj/structure/repair_bench/cov,/turf/simulated/floor/covenant,/area/space)
-"bk" = (/obj/structure/repair_bench/cov,/obj/item/clothing/head/helmet/kigyar/skirmisher/commando,/turf/simulated/floor/covenant,/area/space)
-"bl" = (/obj/machinery/light/covenant/south,/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant,/turf/simulated/floor/covenant,/area/space)
-"bm" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
-"bn" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
-"bo" = (/obj/machinery/light/covenant/west,/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/turf/simulated/floor/covenant,/area/space)
-"bp" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/beam_rifle,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type31needlerifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/turf/simulated/floor/covenant,/area/space)
-"bq" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/turf/simulated/floor/covenant,/area/space)
-"br" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/beam_rifle,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type31needlerifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/turf/simulated/floor/covenant,/area/space)
-"bs" = (/obj/structure/table/marble,/turf/simulated/floor/covenant,/area/space)
-"bt" = (/obj/structure/table/marble,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/covenant,/area/space)
+"aa" = (/turf/unsimulated/wall,/area/space)
+"ab" = (/turf/unsimulated/floor/snow3,/area/space)
+"ac" = (/obj/structure/tree/snow_dead,/turf/unsimulated/floor/snow3,/area/space)
+"ad" = (/obj/effect/rocks/small,/turf/unsimulated/floor/snow3,/area/space)
+"ae" = (/obj/effect/flora/snow/snowygrass,/turf/unsimulated/floor/snow3,/area/space)
+"af" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 9},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ag" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ah" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ai" = (/obj/effect/flora/snow,/turf/unsimulated/floor/snow3,/area/space)
+"aj" = (/obj/effect/flora/snow/snowbush,/turf/unsimulated/floor/snow3,/area/space)
+"ak" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"al" = (/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"am" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 4},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"an" = (/obj/structure/tree/snow_pine,/turf/unsimulated/floor/snow3,/area/space)
+"ao" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 10},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ap" = (/obj/effect/floor_decal/industrial/warning,/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"aq" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 6},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ar" = (/turf/simulated/wall/covenant,/area/space)
+"as" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Citadelle"},/turf/simulated/floor/covenant,/area/space)
+"at" = (/turf/simulated/floor/covenant,/area/space)
+"au" = (/obj/structure/closet/crate/covenant,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/space)
+"av" = (/obj/structure/closet/crate/covenant,/turf/simulated/floor/covenant,/area/space)
+"aw" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/oxygen/prechilled{icon_state = "black"; name = "\improper Covenant Canister: \[O2 (Cryo)]"},/turf/simulated/floor/covenant,/area/space)
+"ax" = (/obj/machinery/atmospherics/unary/cryo_cell/covenant,/turf/simulated/floor/covenant,/area/space)
+"ay" = (/obj/structure/bed/covenant,/turf/simulated/floor/covenant,/area/space)
+"az" = (/obj/structure/closet/crate/covenant,/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant,/area/space)
+"aA" = (/obj/structure/closet/crate/covenant,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant,/area/space)
+"aB" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant,/area/space)
+"aC" = (/obj/machinery/atmospherics/pipe/simple/hidden{icon_state = "intact"; dir = 5},/turf/simulated/floor/covenant,/area/space)
+"aD" = (/obj/machinery/atmospherics/pipe/manifold/hidden,/turf/simulated/floor/covenant,/area/space)
+"aE" = (/obj/machinery/atmospherics/pipe/simple/hidden{icon_state = "intact"; dir = 9},/turf/simulated/floor/covenant,/area/space)
+"aF" = (/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant,/area/space)
+"aG" = (/obj/structure/energybarricade{icon_state = "3"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"aH" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/plasmapistol,/turf/simulated/floor/covenant,/area/space)
+"aI" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/turf/simulated/floor/covenant,/area/space)
+"aJ" = (/obj/machinery/door/airlock/covenant{name = "Temple"},/turf/simulated/floor/covenant,/area/space)
+"aK" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant,/area/space)
+"aL" = (/obj/machinery/door/airlock/covenant{name = "Warehouse"},/turf/simulated/floor/covenant,/area/space)
+"aM" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/space)
+"aN" = (/obj/structure/closet/covenant,/turf/simulated/floor/covenant,/area/space)
+"aO" = (/obj/machinery/chemical_dispenser/full/covenant,/turf/simulated/floor/covenant,/area/space)
+"aP" = (/obj/structure/table/marble,/turf/simulated/floor/covenant,/area/space)
+"aQ" = (/obj/item/weapon/storage/box/beakers,/obj/structure/table/marble,/turf/simulated/floor/covenant,/area/space)
+"aR" = (/obj/structure/covenant_comms_tower,/turf/simulated/floor/covenant,/area/space)
+"aS" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant,/area/space)
+"aT" = (/obj/structure/weapon_rack,/turf/simulated/floor/covenant,/area/space)
+"aU" = (/obj/structure/energybarricade{icon_state = "3"; dir = 8},/turf/simulated/floor/covenant,/area/space)
+"aV" = (/obj/structure/table/marble,/obj/item/squad_manager/covenant,/turf/simulated/floor/covenant,/area/space)
+"aW" = (/obj/machinery/squad_camera_console/covenant,/turf/simulated/floor/covenant,/area/space)
+"aX" = (/obj/structure/energybarricade{icon_state = "3"; dir = 4},/turf/simulated/floor/covenant,/area/space)
+"aY" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"aZ" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"ba" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Citadelle"; icon_state = "closed"; dir = 8},/turf/simulated/floor/covenant,/area/space)
+"bb" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant,/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"bc" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"bd" = (/obj/effect/rocks,/turf/unsimulated/floor/snow3,/area/space)
+"be" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bf" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bg" = (/obj/machinery/door/airlock/covenant{name = "Hall"},/turf/simulated/floor/covenant,/area/space)
+"bh" = (/obj/structure/energybarricade,/turf/simulated/floor/covenant,/area/space)
+"bi" = (/obj/machinery/door/airlock/covenant{name = "Factory"},/turf/simulated/floor/covenant,/area/space)
+"bj" = (/obj/structure/repair_bench/cov,/obj/item/weapon/melee/energy/elite_sword/dagger,/obj/item/plasma_core,/turf/simulated/floor/covenant,/area/space)
+"bk" = (/obj/structure/table/marble,/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/wrench/covenant,/obj/item/weapon/screwdriver/covenant,/obj/item/device/multitool/covenant,/obj/item/weapon/crowbar/covenant,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/space)
+"bl" = (/obj/structure/repair_bench/cov,/obj/item/weapon/gun/energy/plasmarepeater{fire_delay = 300; name = "Faulty Type-51 Directed Energy Rifle"; screen_shake = 1},/turf/simulated/floor/covenant,/area/space)
+"bm" = (/obj/structure/table/marble,/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/turf/simulated/floor/covenant,/area/space)
+"bn" = (/obj/structure/repair_bench/cov,/obj/item/clothing/head/helmet/kigyar/skirmisher/commando,/turf/simulated/floor/covenant,/area/space)
+"bo" = (/obj/structure/repair_bench/cov,/turf/simulated/floor/covenant,/area/space)
+"bp" = (/obj/structure/table/marble,/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/wrench/covenant,/obj/item/weapon/screwdriver/covenant,/obj/item/device/multitool/covenant,/obj/item/weapon/crowbar/covenant,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant,/area/space)
+"bq" = (/obj/machinery/door/airlock/multi_tile/covenant/three{icon_state = "closed"; dir = 8},/turf/simulated/floor/covenant,/area/space)
+"br" = (/obj/machinery/light/covenant/south,/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant,/turf/simulated/floor/covenant,/area/space)
+"bs" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bt" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bu" = (/obj/vehicles/wraith{dir = 1; icon_state = "wraith_destroyed_north"},/turf/simulated/floor/covenant,/area/space)
+"bv" = (/obj/machinery/light/covenant/west,/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/turf/simulated/floor/covenant,/area/space)
+"bw" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/turf/simulated/floor/covenant,/area/space)
 
 (1,1,1) = {"
-aaababababababababababaaaaabacadabaaaaababababababababababaa
-ababaDaEaEaFalamaGaHabaaababadadababaaabaIaJaKaJaIabaLaMabab
-abaNaOamaPaGaHaEamaGabaaabagadadagabaaabadaQaRaSadabadadagab
-abaOamahadadadadadadabaaabadaxaxadabaaabadadadadadabaTadadab
-abaUaPadadadadadadadabaaabadadadadabaaabaVadadadadadababakab
-abaOaWadadadadaiadababaaabadadadadabaaababadaiadadadadadadab
-abaPaPadadadababaqabaaaaabaxadadaxabaaaaabakababadadadadadab
-abaEaGadadafabadadababababadadadadababababadadabaeadadadadab
-abaXaYadadadaqadadadabalaladaxaxadamalabadadadakadadadadadab
-abaOaYadadabababadadagadadadadadadadadagadadabababaobsadbtab
-ababababababaaababaeadadadadaZadadadadadafababaaabababababab
-aaaaaaaaaaaaaaabamadadayadadadadadadayadadamabaaaaaaaaaaaaaa
-aaabababababababamadadadadaiadadaiadadadadamabababababababaa
-ababaeadadadazadadadadadafabbaaAabaeadadadadadaBadadadafabab
-adadadazadadadadazadadadadaAbbbcbaadadadadaBadadadadaBadadad
-anadadazadadadadazadadadadbabdbeaAadadadadaBadadadadaBadadan
-ababaeadadadazadadadadadafabaAbaabaeadadadadadaBadadadafabab
-aaabababababababaladadadadagadadagadadadadalabababababababaa
-aaaaaaaaaaaaaaabaladadayadadadadadadayadadamabaaaaaaaaaaaaaa
-ababababababaaababaeadadadadaZadadadadadafababaaabababababab
-abbfadadadabababadadaiadadadadadadadadaiadadabababapadapadab
-abbgbhadadadajadadadabamaladaCaCadamamabadadadaradadadadadab
-abbfadadadbiabadadababababadadadadababababadadabasadadadadad
-abbgbhadadbjababajabaaaaabaCadadaCabaaaaabarababatadadadadad
-abbfadadadadbkbjadababaaabadadadadabaaababadauatahadadadadav
-abbgbhadadadadadadadabaaabadadadadabaaabadadadadadadadadadab
-abbfadadadadadadadadabaaabadaCaCadabaaabadadadadadadadadadab
-abblbmadbnadbnadbnadabaaabaiadadaiabaaabadadadadadadadadaiab
-ababbobpbqbrbqbpbqbpabaaababadadababaaabawadadapadawadafabab
-aaababababababababababaaaaabacadabaaaaababababababababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabababababababababababababababacabababababababababababadaeaeababababababababababababababababababababababababaa
+aaabafagagagagagagagagagagahabababaeababababababababababababaeabababababaiabababababababababababadababaeababajaa
+aaabakalalalalalalalalalalamabababababababaeababababababababadababababababababaeabababababababababababababababaa
+aaabakalalalalalalalalalalamaeabababaiabababababadababababababajabaeababababacabababababajabaeababababababababaa
+aaabakalalalalalalalalalalamabababababababaeabacabababaeababababababababababababababababadababababababababababaa
+aaabakalalalalalalalalalalamababadababaeabababababababababababanababababababadababababababababababababababababaa
+aaabaoapapapapapapapapapapaqabababababababababababababababababaiababababababaeababababaeabababababababababababaa
+aaababababababaiababababababababababaeabababababababababababababababaeabababababababababababababababajababababaa
+aaabababaeabababababababababacabababababababababababaeabababababababababababajabababababababacabaeabadababababaa
+aaababababababababaeababababababababababababababababababababababadabababacababababababababababababababababababaa
+aaabababaiabababababababababajarararararararararabababarasatarabababarararararararararabababababababababaeababaa
+aaababababababaeababababaeabararauavavavavavavaHarabararatatararaiararawaxawatarayazararabababababababaiabababaa
+aaababaeabacababababababababaraAavavavavavavavavarabaraBatataBarabarataCaDaEataratataBarabaeabababababababababaa
+aaabababababababababababababaravavaFatatatatatatarajarataGaGatarabaratatatatatararatatarababaiababababababababaa
+aaababababababaeababadabababaravavatatatatatatatarabaratatatatarabaraIatatatataFararaJarabababababababababababaa
+aaabababajabababababababaiabaravavatatatataKatararabaratatatatarabararataKatatatatatatarababababaeabababacababaa
+aaababababababababababaeababaravavatatatararaLarababaraGatataGarabajaraJararatatatatatarabababababababanababaiaa
+aaabababababaeabababababababaravavatatataratatararararatatatatararararatataraMatatatatarababajababababababababaa
+aaabacabababababababababababaravavatatataLatatataraNaNataGaGatavaNaratatataJatatatatatarabababadabababababababaa
+aaabababababababababababacabararavatatarararatataBatatatatatatatataBatatarararaOaPaQararabababababababaiabababaa
+aaababababababaiabababajabababarararararaiararaMatatatataRatatatatataSararabarararararababababababababababababaa
+aaabababababaeababababababababababababaiabaravatataTatatatatatataTatatavarababababababababadabacabaeabababababaa
+aaabababababababababaeababababarararararararavatatatataKatataKatatatatavarararararararababababababababababababaa
+aaabababababababababababababararaMatatataUatatatatataSaraVaWaraMatatatatataXatatataSararababababababababajababaa
+aaabababababababababababababatatataUatatatataUatatatataWaYaZaVatatatataXatatatataXatatatabababababababababababaa
+aaababaiabababababaeababababbaatataUatatatataUatatatataVbbbcaWatatatataXatatatataXatatbaabababababababababababaa
+aaabababababababbdabababababararaMatatataUatatatatataSaraWaVaraMatatatatataXatatataSararabababaiabababababababaa
+aaababababaeabababacabaeabababarararararararaNatatatataBatataBatatatataNarararararararababababaeababababaeababaa
+aaababababaeabababababababababaiaiababababaraNatataTatatatatatataTatatavarababababababajabababababababadabababaa
+aaababanabababababababababababarararararabararaMatatatataRatatatatataSararabarararararababababababababababababaa
+aaabababababajabababababababararavatatarararatataKatatatatatatatataKatatarararatatatararababajabanababacabababaa
+aaabababababababababadabababarbebfatatatbgatatataravaNatbhbhatavavaratatatbiatatatatatarabababababababababababaa
+aaabacabababababababababababaravatatatbjaratatararararatatatatararararatatarbkatatatatatabababababaiabababababaa
+aaabababababaeabaiabababababarbebfatatblararbgarababarbhatatbharababarbiararbmatatatatatababababababababaeababaa
+aaabababababaeababaeababababaravatatatatbnboatararabaratatatatarabararatbpbmaFatatatatbqababadababababababababaa
+aaabababababababababababababarbebfatatatatatatatarabaratatatatarabaratatatatatatatatatarababaeababababababajabaa
+aaabababababababababababababaravatatatatatatatatarabaratbhbhatarabaratatatatatatatatatarabababacabababababababaa
+aaababaiababababababababababarbrbsatbtatbtatbtavarabaraKatataKaradaratatatbuatatatataKarabababababababababababaa
+aaabababababababababaeabababararbvavbwavbwavbwararabararatatararabararatatatatatataSararabababababababababababaa
+aaabababababaeababababababababarararararararararabababarasatarabababarararararararararabababababababadababaiabaa
+aaabababababadabacababajababababababababababababababadababababacabababababababababababababababababaeabababababaa
+aaababababababababababababababababababababababaiabababababababababababababababababababababajabababababababababaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaabababababababababababababadababaeababababajabababababaeabababababababababaeababababababababababababababababaa
+aaababababaeabababababaeabababababababacabababababababababababababaeabababababababababacababababaiabacababababaa
+aaabababababababababababababababababababababababababaiababababababababaiabababababababababababaeabababababababaa
+aaababababajababaiababababababababababababaeababababababababajabababababacababababababababababababababababababaa
+aaabababababababababababababanababababababababababababababababababababababababababababadabababababababababababaa
+aaababababaeababababababababababababaiabababababababababacababababababadabababaeabababababababababababababababaa
+aaabababababababababababaeababababababababababababababababababaeabababababanababaiabababababababaiabadababababaa
+aaabababababacabababababababababababababababababaeabababababadabaiababababababababababababababababajababaeababaa
+aaabababababababababababaiabababababababajababababababababababababababababajabababababaiaeababababababababababaa
+aaabababababababababababababacababababababababababababababababababababababababababababababababababababababaiabaa
+aaababababababababababababababababababababababababababababababababababababababababababababababababababababababaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

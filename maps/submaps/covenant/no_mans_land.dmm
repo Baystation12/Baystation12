@@ -1,0 +1,227 @@
+"aa" = (/turf/unsimulated/wall,/area/space)
+"ab" = (/turf/simulated/floor/snow,/area/space)
+"ac" = (/turf/simulated/wall/covenant,/area/space)
+"ad" = (/turf/unsimulated/floor/covenant,/area/space)
+"ae" = (/obj/structure/grille,/turf/simulated/wall/covenant,/area/space)
+"af" = (/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/unsimulated/floor/covenant,/area/space)
+"ag" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 9},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ah" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ai" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"aj" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ak" = (/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"al" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 4},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"am" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 10},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"an" = (/obj/effect/floor_decal/industrial/warning,/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ao" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 6},/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"ap" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Citadelle"; icon_state = "closed"; dir = 8},/turf/unsimulated/floor/covenant,/area/space)
+"aq" = (/obj/structure/energybarricade{icon_state = "3"; dir = 8},/turf/simulated/floor/snow,/area/space)
+"ar" = (/turf/unsimulated/floor/snow5,/area/space)
+"as" = (/turf/simulated/floor/plating,/area/space)
+"at" = (/obj/machinery/deck_gun/chaingun{icon_state = "deck_gatling3"; dir = 4},/turf/simulated/floor/plating,/area/space)
+"au" = (/obj/structure/tanktrap,/turf/simulated/floor/snow,/area/space)
+"av" = (/obj/item/modular_computer/laptop/preset/custom_loadout/advanced,/turf/simulated/floor/plating,/area/space)
+"aw" = (/obj/structure/cable,/turf/simulated/floor/plating,/area/space)
+"ax" = (/obj/structure/bardbedwire,/turf/simulated/floor/snow,/area/space)
+"ay" = (/obj/structure/tanktrap_dead,/turf/simulated/floor/snow,/area/space)
+"az" = (/obj/machinery/deck_gun/missile_pod,/turf/simulated/floor/plating,/area/space)
+"aA" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 9},/turf/simulated/floor/snow,/area/space)
+"aB" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 1},/turf/simulated/floor/snow,/area/space)
+"aC" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 1},/obj/structure/turret/chaingun{icon_state = "chaingunturret"; dir = 1},/turf/unsimulated/floor/snow5,/area/space)
+"aD" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 1},/turf/unsimulated/floor/snow5,/area/space)
+"aE" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 5},/turf/unsimulated/floor/snow5,/area/space)
+"aF" = (/obj/structure/bardbedwire,/turf/unsimulated/floor/snow5,/area/space)
+"aG" = (/obj/structure/girder/displaced,/turf/unsimulated/floor/snow5,/area/space)
+"aH" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 8},/turf/unsimulated/floor/snow5,/area/space)
+"aI" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 4},/turf/unsimulated/floor/snow5,/area/space)
+"aJ" = (/obj/structure/energybarricade{icon_state = "3"; dir = 8},/turf/unsimulated/floor/snow5,/area/space)
+"aK" = (/obj/structure/girder/displaced,/turf/simulated/floor/snow,/area/space)
+"aL" = (/obj/item/metalscrap,/turf/unsimulated/floor/snow5,/area/space)
+"aM" = (/turf/simulated/shuttle/wall{icon_state = "wall3"},/area/space)
+"aN" = (/obj/structure/girder,/turf/unsimulated/floor/snow5,/area/space)
+"aO" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 4},/obj/structure/turret/chaingun{icon_state = "chaingunturret"; dir = 4},/turf/unsimulated/floor/snow5,/area/space)
+"aP" = (/obj/structure/tanktrap,/turf/unsimulated/floor/snow5,/area/space)
+"aQ" = (/obj/structure/tanktrap_dead,/turf/unsimulated/floor/snow5,/area/space)
+"aR" = (/obj/structure/boulder,/turf/unsimulated/floor/snow5,/area/space)
+"aS" = (/obj/structure/boulder,/turf/simulated/floor/snow,/area/space)
+"aT" = (/obj/item/stack/material/steel/ten,/turf/unsimulated/floor/snow5,/area/space)
+"aU" = (/obj/structure/shuttle/engine/heater{icon_state = "heater"; dir = 4},/turf/simulated/floor/plating,/area/space)
+"aV" = (/obj/structure/shuttle/engine/propulsion/burst/right{icon_state = "burst_r"; dir = 4},/turf/simulated/floor/plating,/area/space)
+"aW" = (/obj/structure/girder,/turf/simulated/floor/snow,/area/space)
+"aX" = (/obj/structure/shuttle/engine/propulsion/burst{icon_state = "propulsion"; dir = 4},/turf/simulated/floor/plating,/area/space)
+"aY" = (/obj/structure/sandbag{icon_state = "sandbag"; dir = 6},/turf/unsimulated/floor/snow5,/area/space)
+"aZ" = (/obj/item/weapon/material/shard,/turf/simulated/floor/plating,/area/space)
+"ba" = (/turf/simulated/wall,/area/space)
+"bb" = (/obj/structure/computerframe,/turf/simulated/floor/plating,/area/space)
+"bc" = (/obj/item/stack/material/steel,/turf/simulated/floor/plating,/area/space)
+"bd" = (/obj/item/stack/material/steel,/turf/unsimulated/floor/snow5,/area/space)
+"be" = (/obj/structure/shuttle/engine/propulsion/burst{icon_state = "propulsion"; dir = 1},/turf/unsimulated/floor/snow5,/area/space)
+"bf" = (/obj/item/stack/cable_coil,/turf/simulated/floor/plating,/area/space)
+"bg" = (/obj/machinery/sleeper{icon_state = "sleeper_0"; dir = 8},/turf/unsimulated/floor/snow5,/area/space)
+"bh" = (/obj/effect/floor_decal/snow,/obj/structure/computerframe,/turf/simulated/floor/plating,/area/space)
+"bi" = (/obj/structure/girder,/turf/simulated/floor/plating,/area/space)
+"bj" = (/obj/item/stack/cable_coil,/turf/simulated/floor/snow,/area/space)
+"bk" = (/obj/structure/shuttle/engine/propulsion/burst{icon_state = "propulsion"; dir = 8},/turf/unsimulated/floor/snow5,/area/space)
+"bl" = (/obj/structure/barricadeunsc{icon_state = "barricade"; dir = 4},/turf/unsimulated/floor/snow5,/area/space)
+"bm" = (/obj/structure/computerframe,/turf/unsimulated/floor/snow5,/area/space)
+"bn" = (/obj/structure/turret/chaingun{icon_state = "chaingunturret"; dir = 4},/turf/unsimulated/floor/snow5,/area/space)
+"bo" = (/obj/structure/shuttle/engine/heater{icon_state = "heater"; dir = 8},/turf/unsimulated/floor/snow5,/area/space)
+"bp" = (/obj/structure/shuttle/engine/heater{icon_state = "heater"; dir = 4},/turf/unsimulated/floor/snow5,/area/space)
+"bq" = (/obj/structure/girder,/obj/effect/floor_decal/snow,/turf/unsimulated/floor/snow5,/area/space)
+"br" = (/obj/machinery/sleeper{icon_state = "sleeper_0"; dir = 1},/turf/unsimulated/floor/snow5,/area/space)
+"bs" = (/obj/structure/boulder,/obj/effect/floor_decal/snow,/turf/unsimulated/floor/snow5,/area/space)
+"bt" = (/obj/effect/floor_decal/snow,/turf/unsimulated/floor/snow5,/area/space)
+"bu" = (/obj/item/stack/cable_coil,/obj/effect/floor_decal/snow,/turf/simulated/floor/plating,/area/space)
+"bv" = (/obj/structure/barricadeunsc,/turf/unsimulated/floor/snow5,/area/space)
+"bw" = (/obj/structure/barricadeunsc{icon_state = "barricade"; dir = 4},/obj/structure/barricadeunsc,/turf/unsimulated/floor/snow5,/area/space)
+"bx" = (/obj/structure/computerframe,/obj/item/weapon/material/shard,/obj/effect/floor_decal/snow,/turf/unsimulated/floor/snow5,/area/space)
+"by" = (/obj/structure/shuttle/engine/propulsion/burst/left{icon_state = "burst_l"; dir = 4},/turf/simulated/floor/plating,/area/space)
+"bz" = (/obj/effect/floor_decal/snow,/obj/item/weapon/material/shard/shrapnel/blamite,/turf/simulated/floor/plating,/area/space)
+"bA" = (/obj/structure/shuttle/engine/heater,/turf/simulated/floor/snow,/area/space)
+"bB" = (/obj/item/stack/material/steel/ten,/turf/simulated/floor/snow,/area/space)
+"bC" = (/obj/structure/shuttle/engine/propulsion/burst,/turf/simulated/floor/snow,/area/space)
+"bD" = (/obj/item/stack/material/steel,/turf/simulated/floor/snow,/area/space)
+"bE" = (/obj/structure/barricadeunsc{icon_state = "barricade"; dir = 4},/turf/simulated/floor/snow,/area/space)
+"bF" = (/obj/structure/barricadeunsc{icon_state = "barricade"; dir = 8},/turf/simulated/floor/snow,/area/space)
+"bG" = (/obj/structure/sandbag,/turf/simulated/floor/snow,/area/space)
+"bH" = (/obj/structure/barricadeunsc,/obj/structure/barricadeunsc{icon_state = "barricade"; dir = 8},/turf/simulated/floor/snow,/area/space)
+"bI" = (/obj/structure/barricadeunsc,/turf/simulated/floor/snow,/area/space)
+"bJ" = (/obj/structure/barricadeunsc,/obj/structure/barricadeunsc{icon_state = "barricade"; dir = 4},/turf/simulated/floor/snow,/area/space)
+"bK" = (/obj/machinery/door/airlock/multi_tile/covenant,/turf/unsimulated/floor/covenant,/area/space)
+"bL" = (/obj/structure/closet/crate/covenant,/turf/unsimulated/floor/covenant,/area/space)
+"bM" = (/obj/structure/energybarricade{icon_state = "3"; dir = 1},/turf/simulated/floor/snow,/area/space)
+"bN" = (/obj/structure/closet/covenant,/turf/unsimulated/floor/covenant,/area/space)
+"bO" = (/obj/structure/banshee{icon_state = "banshee"; dir = 8},/turf/simulated/floor/snow,/area/space)
+"bP" = (/obj/structure/bed/chair/covenant,/turf/unsimulated/floor/covenant,/area/space)
+"bQ" = (/obj/structure/table/marble,/obj/item/squad_manager/covenant,/turf/unsimulated/floor/covenant,/area/space)
+"bR" = (/obj/structure/table/marble,/turf/unsimulated/floor/covenant,/area/space)
+"bS" = (/obj/machinery/squad_camera_console/covenant,/turf/unsimulated/floor/covenant,/area/space)
+"bT" = (/obj/structure/bed/chair/covenant{icon_state = "coviechair_preview"; dir = 8},/turf/unsimulated/floor/covenant,/area/space)
+"bU" = (/obj/structure/bed/chair/covenant{icon_state = "coviechair_preview"; dir = 1},/turf/unsimulated/floor/covenant,/area/space)
+"bV" = (/obj/effect/rocks/small,/turf/simulated/floor/snow,/area/space)
+"bW" = (/obj/effect/flora/snow/snowygrass,/turf/simulated/floor/snow,/area/space)
+"bX" = (/obj/effect/flora/snow,/turf/simulated/floor/snow,/area/space)
+"bY" = (/obj/effect/flora/snow/snowbush,/turf/simulated/floor/snow,/area/space)
+"bZ" = (/obj/machinery/item_manufacturer/component,/turf/unsimulated/floor/covenant,/area/space)
+"ca" = (/obj/structure/table/marble,/obj/item/weapon/storage/toolbox/covenant_mech,/turf/unsimulated/floor/covenant,/area/space)
+"cb" = (/obj/structure/table/marble,/obj/item/stack/material/nanolaminate/fifty,/turf/unsimulated/floor/covenant,/area/space)
+"cc" = (/obj/structure/tree/snow_dead,/turf/simulated/floor/snow,/area/space)
+"cd" = (/obj/structure/table/marble,/obj/item/weapon/storage/toolbox/covenant_elec,/turf/unsimulated/floor/covenant,/area/space)
+"ce" = (/obj/machinery/shieldwall,/turf/unsimulated/floor/covenant,/area/space)
+"cf" = (/obj/vehicles/wraith{dir = 1; icon_state = "wraith_destroyed_north"},/turf/unsimulated/floor/covenant,/area/space)
+"cg" = (/obj/machinery/item_manufacturer/tools,/turf/unsimulated/floor/covenant,/area/space)
+"ch" = (/obj/vehicles/wraith{icon_state = "wraith"; dir = 4},/turf/unsimulated/floor/covenant,/area/space)
+"ci" = (/obj/structure/table/marble,/obj/item/stack/material/kemocite/ten,/turf/unsimulated/floor/covenant,/area/space)
+"cj" = (/obj/machinery/door/airlock/multi_tile/covenant{icon_state = "closed"; dir = 4},/turf/unsimulated/floor/covenant,/area/space)
+"ck" = (/obj/machinery/shieldwall{icon_state = "shieldwall"; dir = 8},/turf/unsimulated/floor/covenant,/area/space)
+"cl" = (/obj/effect/rocks,/turf/simulated/floor/snow,/area/space)
+"cm" = (/mob/living/simple_animal/hostile/defender_mob/unsc/marine,/turf/simulated/floor/plating,/area/space)
+"cn" = (/obj/item/stack/cable_coil,/obj/effect/flora/snow/snowbush,/turf/simulated/floor/snow,/area/space)
+"co" = (/mob/living/simple_animal/hostile/defender_mob/unsc/marine,/turf/unsimulated/floor/snow5,/area/space)
+"cp" = (/mob/living/simple_animal/hostile/defender_mob/unsc/marine,/turf/simulated/floor/snow,/area/space)
+"cq" = (/obj/machinery/telecomms_jammers/covenant,/turf/unsimulated/floor/covenant,/area/space)
+"cr" = (/obj/effect/floor_decal/snow,/obj/item/weapon/material/shard/shrapnel{icon_state = "shrapnellarge"},/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/space)
+"cs" = (/obj/item/weapon/material/shard/shrapnel{icon_state = "shrapnellarge"},/turf/simulated/floor/snow,/area/space)
+"ct" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/snow,/area/space)
+"cu" = (/obj/item/weapon/material/shard/shrapnel{icon_state = "splinterslarge"},/turf/simulated/floor/snow,/area/space)
+"cv" = (/obj/effect/decal/cleanable/blood/splatter,/turf/unsimulated/floor/snow5,/area/space)
+"cw" = (/obj/structure/tree/snow_dead,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/snow,/area/space)
+"cx" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/snow,/area/space)
+"cy" = (/obj/effect/decal/cleanable/blood/drip,/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/snow,/area/space)
+"cz" = (/obj/machinery/deck_gun/missile_pod/plasma_torpedo{dir = 4; icon_state = "plasma_pod"; name = "anti air plasma pod launcher"},/turf/simulated/wall/covenant,/area/space)
+"cA" = (/obj/effect/decal/cleanable/blood/drip,/turf/unsimulated/floor/snow5,/area/space)
+"cB" = (/obj/structure/inflatable/wall,/turf/simulated/floor/snow,/area/space)
+"cC" = (/obj/structure/inflatable/wall,/turf/unsimulated/floor/snow5,/area/space)
+"cD" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/plating,/area/space)
+"cE" = (/obj/structure/inflatable/door,/turf/unsimulated/floor/snow5,/area/space)
+"cF" = (/obj/structure/door_assembly/door_assembly_ext,/turf/unsimulated/floor/snow5,/area/space)
+"cG" = (/obj/effect/decal/cleanable/greenglow,/turf/simulated/floor/plating,/area/space)
+"cH" = (/obj/effect/decal/cleanable/greenglow,/turf/unsimulated/floor/snow5,/area/space)
+"cI" = (/obj/item/metalscraps,/obj/effect/decal/cleanable/liquid_fuel,/turf/unsimulated/floor/snow5,/area/space)
+"cJ" = (/obj/effect/decal/cleanable/liquid_fuel,/turf/unsimulated/floor/snow5,/area/space)
+"cK" = (/obj/structure/inflatable/wall,/turf/simulated/floor/plating,/area/space)
+"cL" = (/obj/structure/inflatable/door,/turf/simulated/floor/plating,/area/space)
+"cM" = (/obj/effect/floor_decal/snow,/obj/item/stack/material/steel,/obj/structure/inflatable/wall,/turf/simulated/floor/plating,/area/space)
+"cN" = (/obj/effect/floor_decal/snow,/obj/structure/inflatable/wall,/turf/simulated/floor/plating,/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaababbVababababababababababababababababababababababababababababababababababababacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
+aaababababababababababbWabababababababbXabababbWababababababababbWabababababababacadadadacadadadadadadadadadadadadadadadadadadadadadadadadadadadacacacacacacacaa
+aaababababababababababbXabababbXababababababbYabababababbXababababababababbXababaeadadadafadadadadadadadadadadadadadadadadadadadadadadadadadadadacacacacacacacaa
+aaababababbXababababababababababababababababababababababababababababababababababaeadadadacadadadadadadadadadadadadadadadadadadadadadadadadadadadacacacacacacacaa
+aaabababababababbVabababababbWababababababbWababababababababababbXabababababababaeadadadacacacacacafacacacacacacacacacacacacacacacacacacacacacacacacacacacacacaa
+aaabababababababababababababababbWabababababababababababababababababababababababaeadadadacbZcacbadadadadadadadadadadadadadadadadadadadadadadadacadadadadadadacaa
+aaabababababbWababababababbXababababababababababababababababccababababbWababababaeadadadaccdadadadadadadadadadadadadadadadadadadadadadadadadadceadadcfadadadacaa
+aaabbVababababababababababababbYababababbXababababbXabbWababababababababababababaeadadadaccdadadadadadadadadadadadadadadadadadadadadadadadadadceadadadadadadacaa
+aaabababababababagahahahahahahahahahahaiababbVababababababababbYbWabababababababaeadadadaccgadadadchadadadadchadadadchadadadchadadadadadadadadceadadadadadadacaa
+aaabababababbWabajakakakakakakakakakakalababababababababababababababababbXabababaeadadadacciadadadadadadadadadadadadadadadadadadadadadadadadadceadadadadadadacaa
+aaabababababababajakakakakakakakakakakalababababababababababababababababababababaeadadadaccaadadadadadadadadadadadadadadadadadadadadadadadadadceadadadadadadacaa
+aaababbXabbYababajakakakakakakakakakakalababbWabababababbWabababababababababababaeadadadaccbbRcaadadadadadadadadadadadadadadadadadadadadadadadacadadadadadadacaa
+aaabababababababajakakakakakakakakakakalabababababababababababababababababbVababaeadadadacacacacacafacacacacacacacacacacacacacacacacacacacacacacacadadadadadacaa
+aaababababbVababamananananananananananaoababababababababababababbXabababababababaeadadadacadadadadadadadadadadadadadadadadadadadadadadadadadadadacadadadadadacaa
+aaabababababababababakbhakabababababababababababababbXababbVababababbWabababababaeadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadadacadadadadadacaa
+aaabababababababbVabbzakcrcsabababababbYababbXabababababababababababababababababaeadadadcjadadadadadadadadadadadadadadadadadadadadadadadadadadadacadadadadadacaa
+aaabababababababababababctctabbWabababababababababababababababababababbYabccababacadadadacadadadadadadadadadadadadadadadadadadadadadadadadadadadacadadadadadacaa
+aaababbWabbXabababababbXctcucvabababababababababbWababababccababababababababababacacacacacacacbKadacacacacacacacacacacacacacacacacacacacacacacacacacckckckacacaa
+aaabababababababababbWababctabababababababababababababababababbXababababababababaqabababacacacadadacacacacacacacacacacacacacacacacacacacacacacababababababababaa
+aaabababababababababababababababababarababababababababababababababababbXabbWababababababacacacadadacacacabacacacacacacacacacacacacacacacacacacababababababababaa
+aaababababababababababababababcwabababababababbWabababbXababababababababababababababababacacacadadacacabababacacacacacacacacacacacabababacacacababababababababaa
+aaababababababababbYabababababcxabababababbXababababababababababababababababababababababacacacadadacacacabacacacacacacacacacacacabababababacacabababbXababababaa
+aaabababababbXababbWabababbYabarabbWababababababababababababababbWabababclabababaqabababacacacadadacacacacacacacacacacacacacacacacabababacacacababababababbXabaa
+aaabababababababababababababababctababababababababababababababababababbVababababababababacacacadadacacacacacacacabababacacacacacacacacacacacacababababababababaa
+aaabababababababababababababababbVabarababababababbWabababababababababaqabababccabababababacacadadadadadadadadadabababacacacacacacacacacacacacababababbVabababaa
+aaabababababababababababababababctabbYababababababababababababbXababababababbXababababababacacadadadadadadadadcjabbXabacacacacacacacacacacacabababababababababaa
+aaababababababababababababababababcxabababarabababababbXababccabababababababababaqababababacacacacacacacacacacacabbVabacacacabababababababababababbXabababababaa
+aaabababbYababababbWababababbWabababcyababbXababababababababababababababbWabababaqababababacacacacacacacacacacacabababacacababababbXccabababbVababababababababaa
+aaababababccabababababbXabbVabababababababababababababababababababbYababababababababababababababababababababbXabababababababababclababababababababababababababaa
+aaababababababclababababababababababababarababababababababababababababababbXababababababababababababbVababababababababbYababababababababababababababbXababababaa
+aaababababababababababababababababababcxabababababababababababababababaqababababababbXababaqababababababbWababababababababababababacacadabababababababababababaa
+aaabababbXababababababababababababababababababbWarabababababbWabababababababababbVababababaqabababbXabababababababbXccabababbXababacczadabbXabababababababababaa
+aaabbWababababararararararararararararasatabctabababababababababauababababababababababbWababababccabababababababababababababababababababbVababccabababababababaa
+aaabababararararararararararararararcAavawabarababababababababababababababababaqabababababababababababababababararabababararabababbXabababababababababababababaa
+aaababarararararabababababababarbYabararbXctaxaxabababaxaxaxabababababauabababaqababayababababarababararababararababarararababababababababababababbXabababababaa
+aaarararararababazasabbXababababababababababaAaBaBaBaCaDaDaEaFarararararararabararararararabarararararbVabararababababbWabababababababababababababababababababaa
+aaararararabababababababababararararcAararaGaHararasarararaIaFararararararaFararabarararararbYaraJarararararararararararararararararararararararababbWababbXabaa
+aaararabababbXabbVabaKabarararararararararcAcAcAascmarasaraIarararaLararararararararararaJarararaJarararararararararabarararararararararabababababababababbXabaa
+aaaMaMabababababbWaMcBaKaMaMaMaNaNaMaMaMaMcCaMarcDasascmaraOarararaPararaPararararararaQaJarararararararararararararararararararabararararararararababababababaa
+aaaraRaMcEcFaMaMaMaSarcCaTararcCcCararararcGaUaVaTasasasaraIaFararararararaFarararararararararararararararararararararararararararararararababbVabababababababaa
+aaasawasasasasabakakaWaWakakararakakakakararaUaXarasasasaraYaFararararaQaraFaraPararararararararararararararararararararararararararararararababarararababababaa
+aaasaZasasaWasabaWclaNaMaMaMakakakakararararaMararasasaraTbaarararararararararararararararaQarararaJarararararararararararararararararararararararararababbWabaa
+aaasbbbcasasabasakakakakakakakarbdaRakakaTaraUaXarasasasarbaarararbeararaPaFararararaJararararararaJarararararararararararararararararararabarababababbVabababaa
+aaasasasasbfbXasasakakaSaRbgaGasasasakakcHakcIcJarararasarbiarararararararararararararararararaJarararararararararararararabararararararararararararabbVabbXabaa
+aaasasaKasasaSasasasasaGaGaGcnasasasaMakakakaMcJcJarascmarbaararaTarcoarararararararararaQararaJararararararararararararararararabararararararararababababababaa
+aaasasaMaGasasaraZasasasasawaraNaNararakakaNaMcJasarasasasbkararararararblaraPararararaJararararararararararararararararararabararararararararararabbWababababaa
+aaasasaRaGbcakakbmaNaMakasasasasasaNaNaRaRcGaMcJcJasasasasbiararararararbnararararararaJarararararararararararararararararararararabarabarararababarararabababaa
+aaasarabakakakakakaMakakakasaMaMakakasaTaRaGaUaXcJasarasaraLarbobparcoarblaFararaParararararararararararararararararararararararararabararararabararararabababaa
+aaaRasakakaSabbqbqbrakakakakbsbtakbuakaRaGaGaUaXasascmasaPbaarararbvbvbvbwaFararararaJararararararaJarararararararabararararararararararararararababababccabbWaa
+aaaMakakakbxaSbdabbjakakakakakakakaRaNakakaGaMbyararasasasbaarararararaPaFarararararaJararararararaJarararararararararararararararararabarabararararababababbWaa
+aaabaMaMaMaMaMcBaMaMaMaMaMcKcLcMcNaMaMaMcNcCarbabibibababiararararararararararararararararararararararararararararararararararararararararararabababbVababababaa
+aabXababababababaKababababababababababbWabbYababararaParababbAbBabababababababarararaQararararararaJabarbVararararararararararararararararabababarararababababaa
+aaabababababcpabababbWabbXbYababcpababababababbXababababababbCababababababababababababaraJararararararararararararararabababarabararararararararababababbXababaa
+aaabababababababbDabababababababababababababcpabbBbWabcpabbEabababbWbYccababababababababaqababarararababababarabarararararararababarararararararararararabababaa
+aaabcpabbWababababababcpabababababcpbXababababababababbXabbEaxabababababababababababababababababababarararababababababarararararararabararararababababababbXabaa
+aaabababababbFabbXabbEababbWabbFabababbEabbXabbWabbFabbXabbEaxabababababababbVababaqabababababababababababararararbWbWababababaracacafacacababababababbWabababaa
+aabGbGbGbGbGbHbIbIbIbJbGbGbGbGbHbIbIbIbJbGbGbGbGbGbHbIbIbIbJaxababababababbWababababababababaqabababababababccabararabbVababababacadadadacabbVacacadabababababaa
+aaabaxabaxaxaxabaxabababaxabaxaxabaxababaxaxaxabababaxaxaxabababababababababababababababababaqababbWababababababababababababbWabacadadadacabbWacczadbXababababaa
+aaabababababababababababababababababababababababababababababababababababababababaqababbWabababababababababacacbKadacacacacacacacacadadadacababababababababababaa
+aaababababababababababababababbXababababababababababababababababababbWabababababaqababababababababbXabababacadadadadadadadadadadacacafacacacacacacacacacacacacaa
+aaababbWababababababababbYabababababababababababbWababababababababababababababababbVababababbYababababababadadadadadadadadadadadadadadadadadadadadadadadadbLacaa
+aaababababababababababababababababababababclababababababababbXababababababababababababababababababababababapadadadadadadadadadadadadadadadadadadadadadadadbLacaa
+aaabababbXababbMbMbMbWababababababbWababababababababbMbMabababababababbMbMababababababaqabbXabababababababacadadadacacacacacacacacacafacacacacacacacacacacacacaa
+aaababababababababababababababababababababababababababababababababababababababababababaqabababababababababacadadadacacacacacacacacadadadacadadadadadadadadadacaa
+aaababababababababababababababbMbMabababababababababababababbMbMbYabababababababbWababababababababababababacadadadacacacacacacacacadadadacadbNbLbNadbNbNbLadacaa
+aaababababababababbXbXabababababababbXabababababababababababababababababbVabccabababababababbWabbOababababacadadadacacacacacacacacadadadacadbNbNbLcqbNbNbLadacaa
+aaababababababababababababababababababababababbMabababababababababababababababababababababababababababababacadadadacacacacacacacacadadadacadbNbLbLadbLbLbNadacaa
+aaababbMbMababccababababababbWabababababababababababababababababababbXabababababbXababababababababababababacadadadacacacacacacacacadadadacadadadadadadadadadacaa
+aaabababababababababbWababababbYababababbVabababababbWabababababababababababababababababababababababacacacacacadadacacacacacacacacadadadacadadadadadadadadadacaa
+aaabababababababababababababababababbMbMababababababababccabababababababababababababababababababababacadadadacadadacadadadadadadadadadadadadadadadadadadadadacaa
+aaababababababababbMbMabbVababababababababababababbYababababababababbWabababababababababababababababafadadadafadadafadadadadadadadadadadapadadadadadadadadadacaa
+aaabababababbWabababababababababababababababababababababababababababababababclabababababbOabababababacadadadacadadacadadadadadadadadadadacadadadadadadadadadacaa
+aaababababababababababababbXabbWabababababbWababababababbXababababababababababababbWababababababababacacacacacadadacacacacacacacacbKadacacadadbPadbPadbPadadacaa
+aaabababababababbVabababababababccababababababababababababababbVababababababababababababababababababababababacadadacacacacacacacbQadadadadadadbRbRbRbRbRadadacaa
+aaababbXbVabababababababababababababababababababababababbWababababababababbWabababababababbWbVabababababababacadadacacacacacacacbSbTadadadadadbRbRbRbRbRadadacaa
+aaabababbVababababababababababababababababbXababbVababababababababababababababccabbXababababababababababababacadadacacacacacacacbSbTadadadadadbUadbUadbUadadacaa
+aaabababababababababbWababababababababababababababababababababababababbXabababababbYababababababababababababacbLbLacacacacacacacbQadadadadadadadadadadadadadacaa
+aaabababababababababababababababababababababababababababababababababababababababababababababababbOabababababacacacacacacacacacacacacacacacacacacacacacacacacacaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
