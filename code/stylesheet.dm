@@ -58,6 +58,8 @@ em						{font-style: normal;font-weight: bold;}
 .supradio				{color: #7f6539;}
 .srvradio				{color: #709b00;}
 .expradio				{color: #929820;}
+.seciradio				{color: #935050;}
+.mediradio				{color: #509190;}
 
 /* Miscellaneous */
 .name					{font-weight: bold;}
