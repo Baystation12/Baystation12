@@ -12,6 +12,9 @@
 		and fully functional machines of war were created, and without any legal barriers, they quickly overwhelmed the \
 		criminal underworld with their influence, many desperate to get into their illusive black market. There is nothing \
 		the council won't do to maintain their secrecy and profits. Once you enter their factory, the council will decide your fate... "
+	defender_mob_types = list(/mob/living/simple_animal/hostile/innie/white = 1,\
+		/mob/living/simple_animal/hostile/innie/medium/white = 2,\
+		/mob/living/simple_animal/hostile/innie/heavy/white = 1)
 
 /datum/faction/npc/olympus_council/New()
 	. = ..()

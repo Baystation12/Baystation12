@@ -7,7 +7,8 @@
 	enemy_factions = list("UNSC","Insurrection", "Human Colony","Flood")
 	commander_titles = list("Sangheili Shipmaster")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/cov/grunt = 3, /mob/living/simple_animal/hostile/defender_mob/cov/kig)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/covenant/grunt = 3,\
+		/mob/living/simple_animal/hostile/covenant/jackal_sniper = 1)
 	default_radio_channel = RADIO_COV
 
 /datum/faction/covenant/New()
@@ -31,7 +32,7 @@
 	enemy_factions = list("Covenant","Insurrection","Flood")
 	commander_titles = list("UNSC Bertels Commanding Officer")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/unsc/marine)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/marine = 1)
 	default_radio_channel = RADIO_SQUAD
 
 /datum/faction/unsc/Initialize()
@@ -50,7 +51,7 @@
 	name = "ONI"
 	contraband_gear = "UNSC"
 	enemy_factions = list("Covenant","Insurrection","Flood")
-	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/unsc/odst)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/odst = 1)
 	default_radio_channel = RADIO_ONI
 
 
@@ -63,7 +64,9 @@
 	enemy_factions = list("UNSC","Covenant","Flood")
 	commander_titles = list("Insurrectionist Commander")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/innie/medium = 3, /mob/living/simple_animal/hostile/defender_mob/innie/heavy)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/innie = 1,\
+		/mob/living/simple_animal/hostile/innie/medium = 2,\
+		/mob/living/simple_animal/hostile/innie/heavy = 1)
 	default_radio_channel = null
 
 /datum/faction/insurrection/Initialize()

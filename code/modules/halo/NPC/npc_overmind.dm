@@ -258,6 +258,7 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 	constructor_types = list(/mob/living/simple_animal/hostile/builder_mob/flood)
 	combat_types = list(/mob/living/simple_animal/hostile/flood/combat_form)
 	support_types = list(/mob/living/simple_animal/hostile/flood/infestor,/mob/living/simple_animal/hostile/flood/carrier)
+	comms_channel = null
 
 /obj/structure/overmind_controller
 	name = "overmind controller"

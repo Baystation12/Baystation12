@@ -1,0 +1,46 @@
+
+/obj/effect/armoursets/Initialize()
+	..()
+	return INITIALIZE_HINT_QDEL
+
+/obj/effect/armoursets/SangheiliMinorSet/New()
+	new /obj/item/clothing/under/covenant/sangheili (src.loc)
+	new /obj/item/clothing/suit/armor/special/combatharness/minor (src.loc)
+	new /obj/item/clothing/shoes/sangheili/minor (src.loc)
+	new /obj/item/clothing/head/helmet/sangheili/minor (src.loc)
+	new /obj/item/clothing/gloves/thick/sangheili/minor (src.loc)
+
+/obj/effect/armoursets/SangheiliMajorSet/New()
+	new /obj/item/clothing/under/covenant/sangheili (src.loc)
+	new /obj/item/clothing/suit/armor/special/combatharness/major (src.loc)
+	new /obj/item/clothing/shoes/sangheili/major (src.loc)
+	new /obj/item/clothing/head/helmet/sangheili/major (src.loc)
+	new /obj/item/clothing/gloves/thick/sangheili/major (src.loc)
+
+/obj/effect/armoursets/SangheiliZealotSet/New()
+	new /obj/item/clothing/under/covenant/sangheili (src.loc)
+	new /obj/item/clothing/suit/armor/special/combatharness/zealot (src.loc)
+	new /obj/item/clothing/shoes/sangheili/zealot (src.loc)
+	new /obj/item/clothing/head/helmet/sangheili/zealot (src.loc)
+	new /obj/item/clothing/gloves/thick/sangheili/zealot (src.loc)
+
+/obj/effect/armoursets/SangheiliUltraSet/New()
+	new /obj/item/clothing/under/covenant/sangheili (src.loc)
+	new /obj/item/clothing/suit/armor/special/combatharness/ultra (src.loc)
+	new /obj/item/clothing/shoes/sangheili/ultra (src.loc)
+	new /obj/item/clothing/head/helmet/sangheili/ultra (src.loc)
+	new /obj/item/clothing/gloves/thick/sangheili/ultra (src.loc)
+
+/obj/effect/armoursets/SangheiliSpecops/New()
+	new /obj/item/clothing/under/covenant/sangheili (src.loc)
+	new /obj/item/clothing/suit/armor/special/combatharness/specops (src.loc)
+	new /obj/item/clothing/shoes/sangheili/specops (src.loc)
+	new /obj/item/clothing/head/helmet/sangheili/specops (src.loc)
+	new /obj/item/clothing/gloves/thick/sangheili/specops (src.loc)
+
+/obj/effect/armoursets/SangheiliRanger/New()
+	new /obj/item/clothing/under/covenant/sangheili (src.loc)
+	new /obj/item/clothing/suit/armor/special/combatharness/ranger (src.loc)
+	new /obj/item/clothing/shoes/sangheili/ranger (src.loc)
+	new /obj/item/clothing/head/helmet/sangheili/ranger (src.loc)
+	new /obj/item/clothing/gloves/thick/sangheili/ranger (src.loc)

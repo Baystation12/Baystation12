@@ -47,6 +47,13 @@
 		if(!sorted)
 			our_overmind.other_troops += src
 
+/mob/living/simple_animal/hostile/proc/set_faction(var/datum/faction/F)
+	faction = F.name
+
+/mob/living/simple_animal/hostile/Initialize()
+	. = ..()
+	spawn_weapon()
+
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc

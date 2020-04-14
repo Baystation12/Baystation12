@@ -1,6 +1,6 @@
 /obj/machinery/overmap_weapon_console/deck_gun_control/cov_pulse_turret
 	name = "Pulse Turret Control"
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon = 'code/modules/halo/overmap/weapons/covenant_consoles.dmi'
 	icon_state = "covie_console"
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/cov_pulse_turret/New()
@@ -10,7 +10,7 @@
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret
 	name = "Pulse Turret Local Control"
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon = 'code/modules/halo/overmap/weapons/covenant_consoles.dmi'
 	icon_state = "covie_console"
 	fire_sound = 'code/modules/halo/sounds/pulse_turret_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/pulse_laser

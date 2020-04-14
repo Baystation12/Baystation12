@@ -2,7 +2,7 @@
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/plastorp_control
 	name = "Plasma Torpedo Control Console"
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon = 'code/modules/halo/overmap/weapons/covenant_consoles.dmi'
 	icon_state = "covie_console"
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/plastorp_control/New()
@@ -12,7 +12,7 @@
 
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control
 	name = "Local Plasma Torpedo Control Console"
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
+	icon = 'code/modules/halo/overmap/weapons/covenant_consoles.dmi'
 	icon_state = "covie_console"
 	fire_sound = 'code/modules/halo/sounds/plasma_torpedoes_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/missile/plas_torp
