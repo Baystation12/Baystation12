@@ -12,6 +12,8 @@
 
 	comp_prof = /datum/component_profile/wraith
 
+	ammo_containers = newlist(/obj/item/ammo_magazine/wraith_coax,/obj/item/ammo_magazine/wraith_cannon)
+
 	vehicle_move_delay = 4.75
 	exposed_positions = list("gunner" = 5)
 
@@ -39,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/wraith
 	integrity = 700
-	resistances = list("brute"=75,"burn"=70,"emp"=40,"bomb"=65)
+	resistances = list("brute"=90,"burn"=90,"emp"=40,"bomb"=65)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/wraith
@@ -51,44 +53,65 @@
 	name = "Wraith Cannon"
 	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."
 
-	projectile_fired = /obj/item/projectile/bullet/covenant/wraith_cannon
-
-	fire_delay = 4.5 SECONDS
+	fire_delay = 40
 	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
 
 	guns_switchto = newlist(/datum/vehicle_gun/wraith_cannon,/datum/vehicle_gun/wraith_machinegun)
-
+	magazine_type = /obj/item/ammo_magazine/wraith_cannon
 	irradiate_non_cov = 15
 
 /datum/vehicle_gun/wraith_cannon
 	name = "Wraith Cannon"
 	desc = "A arcing-projecile firing cannon capable of inflicting heavy damage on both infantry and vehicles."
 	burst_size = 1
-	burst_delay = 1
-	fire_delay = 4.5 SECONDS
+	fire_delay = 40
 	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
-	proj_fired = /obj/item/projectile/bullet/covenant/wraith_cannon
+	mag_used = /obj/item/ammo_magazine/wraith_cannon
 
 /datum/vehicle_gun/wraith_machinegun
 	name = "Wraith Medium Plasma Cannons"
 	desc = "A short burst, mounted Plasma Rifle, used for anti-infantry purposes."
 	burst_size = 3
-	burst_delay = 0.15 SECONDS
-	fire_delay = 0.6 SECONDS
+	burst_delay = 1
+	fire_delay = 10
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
-	proj_fired = /obj/item/projectile/bullet/covenant/plasmarifle
+	mag_used = /obj/item/ammo_magazine/wraith_coax
+
+/obj/item/ammo_magazine/wraith_coax
+	name = "Internal Ammunition Storage"
+	caliber = "wraithPlas"
+	max_ammo = 300
+	ammo_type = /obj/item/ammo_casing/wraith_coax
+
+/obj/item/ammo_casing/wraith_coax
+	name = "plasma capsule"
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
+
+/obj/item/ammo_magazine/wraith_cannon
+	name = "Internal Ammunition Storage"
+	caliber = "wraithCannon"
+	max_ammo = 30
+	ammo_type = /obj/item/ammo_casing/wraith_cannon
+
+/obj/item/ammo_casing/wraith_cannon
+	name = "wraith plasma capsule"
+	caliber = "wraithCannon"
+	projectile_type = /obj/item/projectile/bullet/covenant/wraith_cannon
 
 /obj/item/projectile/bullet/covenant/wraith_cannon
+	name = "wraith capsule"
 	damage = 100
 	icon = 'code/modules/halo/vehicles/types/Wraith.dmi'
 	icon_state = "Mortar_Projectile"
 	damage_type = "bomb"
+	damtype = "bomb"
 	step_delay = 1.5
-	armor_penetration = 25
+	armor_penetration = 50
+	shield_damage = 240
 
-/obj/item/projectile/bullet/covenant/needles/launch_from_gun(var/atom/target)
+/obj/item/projectile/bullet/covenant/wraith_cannon/launch_from_gun(var/atom/target)
 	. = ..()
-	kill_count = get_dist(starting,original) + rand(-2,2) //Sometimes it can fly a bit over or under the target
+	kill_count = get_dist(loc,target) + rand(-2,2) //Sometimes it can fly a bit over or under the target
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
@@ -96,6 +119,11 @@
 	else
 		change_elevation(-1)
 	. = ..()
+
+/obj/item/projectile/bullet/covenant/wraith_cannon/attack_mob()
+	damage_type = BRUTE
+	damtype = BRUTE
+	return ..()
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/on_impact(var/atom/impacted)
 	explosion(impacted,0,2,3,5,guaranteed_damage = 100,guaranteed_damage_range = 3)

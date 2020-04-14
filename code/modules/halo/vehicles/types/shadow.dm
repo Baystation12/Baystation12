@@ -12,7 +12,9 @@
 
 	comp_prof = /datum/component_profile/shadow
 
-	exposed_positions = list("passenger" = 15,"driver" = 10,"gunner" = 20)
+	ammo_containers = newlist(/obj/item/ammo_magazine/shadow_cannon)
+
+	exposed_positions = list("passenger" = 15,"driver" = 5,"gunner" = 10)
 
 	occupants = list(4,1)
 
@@ -39,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/shadow
 	integrity = 650
-	resistances = list("brute"=40,"burn"=40,"emp"=20,"bomb"=30)
+	resistances = list("brute"=80,"burn"=80,"emp"=20,"bomb"=50)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/shadow
@@ -51,18 +53,29 @@
 	name = "Shadow Cannon"
 	desc = "A fast firing plasma weapon capable of inflicting heavy damage."
 
-	projectile_fired = /obj/item/projectile/bullet/covenant/shadow_cannon
-
 	fire_delay = 1 SECOND
 	fire_sound = 'code/modules/halo/sounds/shadow_cannon_fire.ogg'
 
-	burst_delay = 0.15 SECONDS
-	burst = 5
+	dispersion = list(0,0,0,0,0,1)
+	burst_accuracy = list(0,0,0,0,0.-1)
+
+	sustain_time = 6 SECONDS
+	sustain_delay = 2
 
 	irradiate_non_cov = 10
+	magazine_type = /obj/item/ammo_magazine/shadow_cannon
+
+/obj/item/ammo_magazine/shadow_cannon
+	max_ammo = 400
+	caliber = "shadowPlas"
+	ammo_type = /obj/item/ammo_casing/shadow_cannon
+
+/obj/item/ammo_casing/shadow_cannon
+	caliber = "shadowPlas"
+	projectile_type = /obj/item/projectile/bullet/covenant/shadow_cannon
 
 /obj/item/projectile/bullet/covenant/shadow_cannon
-	damage = 15
+	damage = 40
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 

@@ -21,7 +21,7 @@
 	projectile_type = /obj/item/projectile/bullet/hmg127_he
 
 /obj/item/projectile/bullet/hmg127_he
-	damage = 70
+	damage = 50
 
 //CHAINGUN AMMO DEFINES//
 /obj/item/ammo_magazine/chaingun_boxmag

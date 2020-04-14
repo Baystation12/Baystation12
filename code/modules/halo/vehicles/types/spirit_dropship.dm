@@ -57,13 +57,23 @@
 	desc = "A cannon that fires large bolts of plasma"
 
 	fire_sound = 'code/modules/halo/sounds/spirit_firesound.ogg'
-	projectile_fired = /obj/item/projectile/bullet/covenant/spirit_cannon
 
 	fire_delay = 2 SECONDS
 
 	burst = 3
 
 	irradiate_non_cov = 12
+
+	magazine_type = /obj/item/ammo_magazine/spirit_cannon
+
+/obj/item/ammo_magazine/spirit_cannon
+	max_ammo = 100
+	caliber = "spiritPlas"
+	ammo_type = /obj/item/ammo_casing/spirit_cannon
+
+/obj/item/ammo_casing/spirit_cannon
+	caliber = "spiritPlas"
+	projectile_type = /obj/item/projectile/bullet/covenant/spirit_cannon
 
 /obj/item/projectile/bullet/covenant/spirit_cannon
 	damage = 50

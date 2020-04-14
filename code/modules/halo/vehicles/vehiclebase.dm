@@ -40,6 +40,7 @@
 	var/cargo_capacity = 0
 	var/capacity_flag = ITEM_SIZE_SMALL
 	var/list/cargo_contents = list()
+	var/list/ammo_containers = list() //Ammunition containers in the form of ammo magazines.
 
 	//Vehicle ferrying//
 	var/vehicle_size = ITEM_SIZE_VEHICLE//The size of the vehicle, used by vehicle cargo ferrying to determine allowed amount and allowed size.

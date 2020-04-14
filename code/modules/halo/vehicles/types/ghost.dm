@@ -1,19 +1,21 @@
 
 /obj/vehicles/ghost
 	name = "Type-32 \"Ghost\" Rapid Assault Vehicle"
-	desc = ""
+	desc = "A lightly armoured but fast vehicle capable of chasing fleeing targets and acting as a force multiplier."
 
 	bound_height = 32
 	bound_width = 32
 
 	comp_prof = /datum/component_profile/ghost
 
+	ammo_containers = newlist(/obj/item/ammo_magazine/ghost_internal)
+
 	sprite_offsets = list("1" = list(16,2),"2" = list(16,2),"4" = list(10,2),"8" = list(22,2))
 
 	vehicle_move_delay = 1.5
 
 	occupants = list(0,0)
-	exposed_positions = list("driver" = 20)
+	exposed_positions = list("driver" = 10)
 
 	pixel_x = -16
 
@@ -46,7 +48,7 @@
 
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 350
-	resistances = list("brute"=35,"burn"=35,"emp"=15)
+	resistances = list("brute"=85,"burn"=85,"emp"=15,"bomb" = 0)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/ghost
@@ -61,17 +63,22 @@
 	icon_state = "chaingun_obj"
 	item_state = ""
 
-	projectile_fired = /obj/item/projectile/bullet/covenant/plasmarifle
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
-	burst_delay = 0.3 SECONDS
-	fire_delay = 1.5 SECONDS
+	burst_delay = 2
+	fire_delay = 15
 
 	burst = 4
 
 	irradiate_non_cov = 10
 
-/obj/item/weapon/gun/vehicle_turret/covenant/ghost/relay_fire_action()
-	. = ..()
-	linked_vehicle.vehicle_move_delay = 2.5
-	spawn(burst_delay*burst)
-		linked_vehicle.vehicle_move_delay = initial(linked_vehicle.vehicle_move_delay)
+	magazine_type = /obj/item/ammo_magazine/ghost_internal
+
+/obj/item/ammo_magazine/ghost_internal
+	name = "Internal Ammunition Storage"
+
+	max_ammo = 200
+	ammo_type = /obj/item/ammo_casing/ghost_round
+
+/obj/item/ammo_casing/ghost_round
+	name = "ghost casing"
+	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle

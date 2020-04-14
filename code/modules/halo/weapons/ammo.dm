@@ -265,6 +265,7 @@
 	armor_penetration = 65
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
+	shield_damage = 210
 
 /obj/item/projectile/bullet/a145_ap/tracerless //Modified slightly to provide a downside for using the innie-heavy-sniper-rounds over normal rounds.
 	damage = 50
@@ -273,6 +274,7 @@
 	tracer_delay_time = null
 	pin_range = 3
 	pin_chance = 70
+	shield_damage = 150
 
 /obj/effect/projectile/srs99
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
@@ -374,6 +376,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	check_armour = "bomb"
 	step_delay = 1.2
+	shield_damage = 200 //just below elite minor shields, meaning subsequent explosion and guaranteed damage will collapse it.
 
 /obj/item/projectile/bullet/ssr/on_impact(var/atom/target)
 	explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
@@ -412,6 +415,7 @@
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	check_armour = "bomb"
 	step_delay = 1.2
+	shield_damage = 200
 
 /obj/item/projectile/bullet/m26/on_impact(var/atom/target)
 	explosion(target, 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
