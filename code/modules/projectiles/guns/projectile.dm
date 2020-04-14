@@ -227,6 +227,10 @@
 	if(firemodes.len > 1)
 		..()
 	else
+		if(stored_targ)
+			to_chat(user,"<span class = 'notice>You stop your sustained burst from [src]</span>")
+			stored_targ = null
+			return
 		unload_ammo(user)
 
 /obj/item/weapon/gun/projectile/attack_hand(mob/user as mob)
