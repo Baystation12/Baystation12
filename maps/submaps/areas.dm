@@ -36,3 +36,15 @@
 	dynamic_lighting = 1
 	luminosity = 1
 	requires_power = 0
+
+/area/submaps/covenant/cov_citadelle
+	name = "Covenant Citadelle"
+	dynamic_lighting = 1
+	luminosity = 1
+	requires_power = 0
+
+/area/submaps/covenant/cov_base
+	name = "Covenant Facility"
+	dynamic_lighting = 1
+	luminosity = 1
+	requires_power = 0
