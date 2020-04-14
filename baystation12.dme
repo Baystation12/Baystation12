@@ -1516,6 +1516,7 @@
 #include "code\modules\halo\covenant\medical\rollerbed.dm"
 #include "code\modules\halo\covenant\simple_mobs\_covenant.dm"
 #include "code\modules\halo\covenant\simple_mobs\cleaning_drone.dm"
+#include "code\modules\halo\covenant\simple_mobs\elite.dm"
 #include "code\modules\halo\covenant\simple_mobs\grunt.dm"
 #include "code\modules\halo\covenant\simple_mobs\huragok.dm"
 #include "code\modules\halo\covenant\simple_mobs\jackal.dm"

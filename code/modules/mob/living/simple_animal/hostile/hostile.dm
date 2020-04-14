@@ -202,6 +202,7 @@
 		return
 	var/target = attacked
 	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>")
+	src.dir = get_dir(src, attacked)
 	var/casingtype_use = casingtype
 	var/burstsize_use = burst_size
 	var/burstdelay_use = burst_delay
