@@ -8,7 +8,12 @@
 	commander_titles = list("Sangheili Shipmaster")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
 	defender_mob_types = list(/mob/living/simple_animal/hostile/covenant/grunt = 3,\
-		/mob/living/simple_animal/hostile/covenant/jackal_sniper = 1)
+		/mob/living/simple_animal/hostile/covenant/drone = 2,\
+		/mob/living/simple_animal/hostile/covenant/drone/ranged = 2,\
+		/mob/living/simple_animal/hostile/covenant/jackal = 1,\
+		/mob/living/simple_animal/hostile/covenant/jackal/shield = 2,\
+		/mob/living/simple_animal/hostile/covenant/elite = 2,\
+		/mob/living/simple_animal/hostile/covenant/elite/major = 1)
 	default_radio_channel = RADIO_COV
 
 /datum/faction/covenant/New()
