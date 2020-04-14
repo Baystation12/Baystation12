@@ -101,7 +101,7 @@
 "bW" = (/obj/machinery/light/street,/turf/simulated/floor/pavement,/area/planets/Geminus/indoor/quest_instance)
 "bX" = (/turf/simulated/floor/road{icon_state = "road"; dir = 1},/area/planets/Geminus/indoor/quest_instance)
 "bY" = (/turf/simulated/floor/road/empty,/area/planets/Geminus/indoor/quest_instance)
-"bZ" = (/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
+"bZ" = (/turf/simulated/floor,/area/shuttle/offsite_berth_transport)
 "ca" = (/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
 "cb" = (/obj/structure/table/woodentable,/obj/effect/landmark/instance_loot,/turf/simulated/floor/decor{icon_state = "wood14"},/area/planets/Geminus/indoor/quest_instance)
 "cc" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 4},/area/planets/Geminus/indoor/quest_instance)
@@ -112,7 +112,7 @@
 "ch" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/planets/Geminus/indoor/quest_instance)
 "ci" = (/obj/effect/landmark/instance_boss,/turf/simulated/floor/decor{icon_state = "grooved2"},/area/planets/Geminus/indoor/quest_instance)
 "cp" = (/turf/simulated/floor/road,/area/planets/Geminus/indoor/quest_instance)
-"cq" = (/obj/effect/shuttle_landmark/innie_offsite_transport,/turf/simulated/floor,/area/shuttle/innie_offsite_transport)
+"cq" = (/obj/effect/shuttle_landmark/offsite_berth_transport,/turf/simulated/floor,/area/shuttle/offsite_berth_transport)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

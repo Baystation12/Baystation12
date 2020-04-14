@@ -6,6 +6,18 @@
 	var/time_next_respawn = 0
 
 /datum/npc_quest/proc/process()
+	if(quest_status != STATUS_PROGRESS)
+		//future todo: sometimes quests might have ticking effects as long as they are available
+		//for now, just tell the faction we dont need to process any more
+		to_debug_listeners("QUEST WARNING: \ref[src] is attempting to process with quest status [get_status_text(quest_status)]")
+
+		return PROCESS_KILL
+
+	//quests have a limited time
+	if(world.time > time_failed)
+		faction.finalise_quest(src, STATUS_TIMEOUT)
+		return PROCESS_KILL
+
 	process_defenders()
 
 /datum/npc_quest/proc/process_defenders()
@@ -40,7 +52,3 @@
 				spawn_defender()
 				time_next_respawn = world.time + respawn_interval
 				num_respawns--
-
-		//see if we've run out of time
-		if(!instance_loaded && world.time > time_failed)
-			finish_quest()

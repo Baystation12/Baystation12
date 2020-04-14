@@ -57,14 +57,14 @@
 		"Goodbye.",\
 		"Bye for now.")
 
-/datum/faction/proc/hail_quest_new()
+/datum/faction/proc/hail_quest_display()
 	return pick(\
-		"I need your help with something.",\
-		"We need your help with something.",\
-		"[name] needs your help with something.",\
-		"I've got a job for you.",\
-		"We've got a job for you.",\
-		"[name] has got a job for you.")
+		"[pick("I","We",name)] need your help with something.",\
+		"[pick("I've","We've",name)] got a job for you.")
+
+/datum/faction/proc/hail_quest_generated()
+	return pick(\
+		"[pick("I","We", name)] have a new [pick("mission","job","task")] for you to review.")
 
 /datum/faction/proc/hail_quest_accept()
 	return pick(\
@@ -73,14 +73,14 @@
 		"[pick("I","We","[name] ")] expect you to deliver.",\
 		"[pick("I'm","We're","[name] are")] glad to be working with you.")
 
-/datum/faction/proc/hail_quest_complete()
+/datum/faction/proc/hail_quest_win()
 	return pick(\
 		"Glad to do business with you.",\
 		"It sounded rough out there. I'm glad you came through.",\
 		"Good job. Hope this makes up for it.",\
 		"[pick("I'm","We're","[name] are")] won't forget this.",\
 		"[pick("I","We","[name]")] couldn't have done it without you.",\
-		"You have [pick("my","our","[name]\'s")]thanks.")
+		"You have [pick("my","our","[name]\'s")] thanks.")
 
 /datum/faction/proc/hail_idle()
 	return pick(\

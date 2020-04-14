@@ -7,6 +7,7 @@
 #undef OBJ_STEAL
 //
 #undef STATUS_AVAIL
+#undef STATUS_REJECT
 #undef STATUS_PROGRESS
 #undef STATUS_FAIL
 #undef STATUS_WON

@@ -54,7 +54,7 @@
 	var/obj/O = A
 	return (istype(O) && O.hides_under_flooring()) || ..()
 
-/turf/simulated/wall/process(wait, times_fired)
+/turf/simulated/wall/process(wait = 1, times_fired = 0)
 	var/how_often = max(round(2 SECONDS/wait), 1)
 	if(times_fired % how_often)
 		return //We only work about every 2 seconds

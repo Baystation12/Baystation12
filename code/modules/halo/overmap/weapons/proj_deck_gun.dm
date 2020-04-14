@@ -189,7 +189,7 @@
 	name = "deck gun round"
 	desc = "thanks for examining this"
 	damage = 20
-	step_delay = 0.3 SECONDS
+	step_delay = 0.1
 	accuracy = 50 //miss chance of impacted overmap objects halved.
 	ship_damage_projectile = /obj/item/projectile/deck_gun_damage_proj
 	ship_hit_sound = 'code/modules/halo/sounds/om_proj_hitsounds/deck_gun_impact.wav'

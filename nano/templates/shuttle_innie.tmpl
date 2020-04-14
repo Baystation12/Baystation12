@@ -53,13 +53,31 @@
 				Fuel stock:
 			</div>
 			<div class="itemContent">
-				{{:data.fuel_left}} / {{:data.fuel_max}} blocks
+				{{if data.fuel_left / data.fuel_max > 0.66}}
+					{{:helper.displayBar(data.fuel_left, 0, data.fuel_max, 'good', data.fuel_left + '/' + data.fuel_max)}}<br>
+				{{else data.fuel_left / data.fuel_max > 0.33}}
+					{{:helper.displayBar(data.fuel_left, 0, data.fuel_max, 'average', data.fuel_left + '/' + data.fuel_max)}}<br>
+				{{else}}
+					{{:helper.displayBar(data.fuel_left, 0, data.fuel_max, 'bad', data.fuel_left + '/' + data.fuel_max)}}<br>
+				{{/if}}
 			</div>
 			<div class="itemLabel">
-				Fuel efficiency (per block):
+				Fuel efficiency (per unit):
 			</div>
 			<div class="itemContent">
 				{{:data.fuel_efficiency}} km
+			</div>
+			<div class="itemLabel">
+				Power charge (Wh):
+			</div>
+			<div class="itemContent">
+				{{if data.power / data.powermax > 0.66}}
+					{{:helper.displayBar(data.power, 0, data.powermax, 'good', data.power + '/' + data.powermax + ' Wh')}}<br>
+				{{else data.power / data.powermax > 0.33}}
+					{{:helper.displayBar(data.power, 0, data.powermax, 'average', data.power + '/' + data.powermax + ' Wh')}}<br>
+				{{else}}
+					{{:helper.displayBar(data.power, 0, data.powermax, 'bad', data.power + '/' + data.powermax + ' Wh')}}<br>
+				{{/if}}
 			</div>
 		</div>
 	</div>
