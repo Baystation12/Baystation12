@@ -25,7 +25,7 @@
 						access_mining_station, access_xenobiology, access_xenoarch, access_nanotrasen, access_solgov_crew,
 						access_expedition_shuttle, access_guppy, access_hangar, access_petrov, access_petrov_helm, access_guppy_helm,
 						access_petrov_analysis, access_petrov_phoron, access_petrov_toxins, access_petrov_chemistry, access_petrov_security,
-						access_petrov_maint)
+						access_petrov_maint, access_senior_researcher)
 	min_skill = list(   SKILL_BUREAUCRACY = SKILL_BASIC,
 	                    SKILL_COMPUTER    = SKILL_BASIC,
 	                    SKILL_FINANCE     = SKILL_BASIC,
@@ -43,7 +43,7 @@
 	title = "Scientist"
 	total_positions = 6
 	spawn_positions = 6
-	supervisors = "the Chief Science Officer"
+	supervisors = "the Chief Science Officer and the Senior Researcher"
 	economic_power = 10
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	ideal_character_age = 45

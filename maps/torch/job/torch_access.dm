@@ -135,6 +135,12 @@
 	desc = "Commissary"
 	region = ACCESS_REGION_GENERAL
 
+/var/const/access_senior_researcher = "ACCESS_SENIOR_RESEARCHER" //97
+/datum/access/senior_researcher
+	id = access_senior_researcher
+	desc = "Senior Researcher"
+	region = ACCESS_REGION_RESEARCH
+
 /datum/access/psychiatrist
 	desc = "Mental Health"
 
