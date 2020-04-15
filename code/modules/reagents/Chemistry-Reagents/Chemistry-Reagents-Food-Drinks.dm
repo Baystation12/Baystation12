@@ -2813,3 +2813,149 @@
 	color = "#ece4e3"
 	glass_name = "Kefir"
 	glass_desc = "Fermented milk, looks a lot like yougurt."
+
+// fruit expansion
+
+/datum/reagent/drink/juice/melon
+	name = "Melon Juice"
+	description = "Juice from a freshly squeezed melon."
+	taste_description = "tangy, sweet melon"
+	color = "#e9ba33"
+	glass_name = "Melon juice"
+	glass_desc = "A glass of tasty melon juice."
+
+/datum/reagent/drink/juice/grape/green
+	name = "Green Grape Juice"
+	description = "Grape juice from green grapes."
+	taste_description = "green grapes"
+	color = "#42ed2f"
+
+	glass_name = "green grape juice"
+	glass_desc = "Grape juice from green grapes."
+
+/datum/reagent/drink/juice/grape/white
+	name = "White Grape Juice"
+	description = "Grape juice from white grapes."
+	taste_description = "white grapes"
+	color = "#42ed2f"
+
+	glass_name = "white grape juice"
+	glass_desc = "Grape juice from white grapes."
+
+/datum/reagent/drink/juice/pineapple
+	name = "Pineapple Juice"
+	description = "Juice from a pineapple."
+	taste_description = "delicious pineapple juice"
+	color = "#f6e12d"
+
+	glass_name = "pineapple juice"
+	glass_desc = "Juice from a pineapple."
+
+/datum/reagent/drink/coconut
+	name = "Coconut Water"
+	description = "Unfiltered water from a coconut."
+	taste_description = "coconut water"
+	color = "#619494"
+
+	glass_name = "coconut water"
+	glass_desc = "Unfiltered water from a coconut."
+
+/datum/reagent/drink/coconut/milk
+	name = "Coconut Milk"
+	description = "Delicious milk from a coconut."
+	taste_description = "cool coconut milk"
+	color = "#619494"
+
+	glass_name = "coconut milk"
+	glass_desc = "Delicious milk from a coconut."
+
+/datum/reagent/drink/alien/qokkloa
+	name = "Qokk'loa"
+	description = "An unrefined hallucigenic substance, potent to humans and harmless to Skrell."
+	taste_description = "cold, slimey mushroom"
+	color = "#e700e7"
+
+/datum/reagent/drink/alien/qokkloa/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_SKRELL)
+		return
+
+	M.druggy = max(M.druggy, 30)
+
+	if(M.chem_doses[type] < 1)
+		M.apply_effect(3, STUTTER)
+		M.make_dizzy(5)
+		if(prob(5))
+			M.emote(pick("twitch", "giggle"))
+	else if(M.chem_doses[type] < 2)
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(5)
+		M.make_dizzy(5)
+		M.druggy = max(M.druggy, 35)
+		if(prob(10))
+			M.emote(pick("twitch", "giggle"))
+	else
+		M.add_chemical_effect(CE_MIND, -1)
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(10)
+		M.make_dizzy(10)
+		M.druggy = max(M.druggy, 40)
+		if(prob(15))
+			M.emote(pick("twitch", "giggle"))
+
+/datum/reagent/ethanol/pinacolada
+	name = "Pina Colada"
+	description = "A sweet cocktail of rum and pineapple."
+	taste_description = "refreshing tropical fruit"
+	color = "#619494"
+	strength = 15
+
+	glass_name = "pina colada"
+	glass_desc = "A sweet cocktail of rum and pineapple."
+
+/datum/reagent/ethanol/alien/qokkhrona
+	name = "Qokk'hrona"
+	description = "Delicious Skrellian wine from refined qokk'loa."
+	taste_description = "a thick potion of mushroom, slime, and hard alcohol"
+	color = "#c76c4d"
+	strength = 1
+	glass_name = "qokk'hrona"
+	glass_desc = "Delicious Skrellian wine from refined qokk'loa."
+
+/datum/reagent/cinnamon
+	name = "Cinnamon"
+	description = "Delicious ground cinnamon spice. "
+	taste_description = "cinnamon"
+	reagent_state = SOLID
+	color = "#cd6139"
+	value = 0.1
+
+/datum/reagent/ethanol/horchata
+	name = "Horchata"
+	description = "A delightful horchata de chufa."
+	taste_description = "creamy, mediterranean alcohol"
+	color = "#f5ecb8"
+	strength = 40
+
+/datum/reagent/oliveoil
+	name = "Olive Oil"
+	description = "Olive oil, an essential part of cooking."
+	taste_description = "grease"
+	color = "#cacf70"
+
+/datum/reagent/drink/affelerin
+	name = "Affelerin Nectar"
+	description = "A thick syrup-like nectar from the Affelerin, common across many desert worlds."
+	taste_description = "sweet, thick syrup"
+	color = "#44371f"
+	glass_name = "affelerin nectar"
+	glass_desc = "A thick syrup-like nectar from the Affelerin, common across many desert worlds."
+
+/datum/reagent/ethanol/iridast
+	name = "Iridast Berry Juice"
+	description = "A intoxicating juice made from the Iridast Berry, common across human worlds."
+	taste_description = "incredible sweetness"
+	color = "#44371f"
+	strength = 50
+
+	glass_name = "iridast berry juice"
+	glass_desc = "A intoxicating juice made from the Iridast Berry, common across human worlds."
