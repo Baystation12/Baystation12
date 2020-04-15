@@ -318,6 +318,9 @@
 	. = ..()
 
 /obj/vehicles/proc/collide_with_obstacle(var/atom/obstacle)
+	if(istype(obstacle,/mob/living))
+		var/mob/living/hit_mob = obstacle
+		hit_mob.weaken(2) //No damage for now, let's just knock them over.
 	speed[1] = 0
 	speed[2] = 0
 	visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")
