@@ -320,15 +320,15 @@
 /obj/vehicles/proc/collide_with_obstacle(var/atom/obstacle)
 	if(istype(obstacle,/mob/living))
 		var/mob/living/hit_mob = obstacle
-		hit_mob.Weaken(2) //No damage for now, let's just knock them over.
+		hit_mob.Weaken(0) //No damage for now, let's just knock them over.
 	else
 		speed[1] = 0
 		speed[2] = 0
 	visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")
 
 /obj/vehicles/Bump(var/atom/obstacle)
-	. = ..()
-	collide_with_obstacle(obstacle)
+	..()
+	. = collide_with_obstacle(obstacle)
 
 /obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
 	set background = 1
