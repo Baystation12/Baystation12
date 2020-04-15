@@ -77,9 +77,11 @@
 	move_delay = 2
 	projectile_type=/obj/item/projectile/beam/pulse/skrell/single
 	charge_cost=120
+	one_hand_penalty = 3
 	burst=1
 	burst_delay=null
 	wielded_item_state = "skrell_carbine-wielded"
+	accuracy = 1
 	
 	firemodes = list(
 		list(mode_name="single", projectile_type=/obj/item/projectile/beam/pulse/skrell/single, charge_cost=120, burst=1, burst_delay=null),
