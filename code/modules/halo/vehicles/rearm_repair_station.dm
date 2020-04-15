@@ -1,12 +1,15 @@
 #define REARM_RESOURCE_DRAIN 20 //Cost to reload 20% of the max rounds in a magazine
 #define REPAIR_RESOURCE_DRAIN  30 //Full repair of 1 component
 #define REARM_REPAIR_DELAY 10 SECONDS
+#define REARM_REPAIR_RANGE 4
 
 /obj/structure/rearm_repair_station
 	name = "Rearm / Repair Station"
 	desc = "A station to allow for the rearming and repairing of vehicles. Ammunition refill takes time."
-	//icon = ''
-	//icon_state = ""
+	icon = 'code/modules/halo/icons/machinery/rearm_repair_station.dmi'
+	icon_state = "human"
+	anchored = 1
+	density = 1
 
 	var/list/sheets_to_materials = list("steel" = 10,"nanolaminate" = 10)
 	var/max_material = 100
@@ -27,7 +30,7 @@
 		return
 
 	var/list/vics_in_view = list()
-	for(var/obj/vehicles/vic in view(attacker,world.view))
+	for(var/obj/vehicles/vic in view(attacker,REARM_REPAIR_RANGE))
 		vics_in_view += vic
 	var/repair_target = input(attacker,"Select a vehicle to rearm/repair","Rearm/Repair selection","Cancel") in vics_in_view + list("Cancel")
 	if(repair_target == "Cancel")
@@ -51,7 +54,9 @@
 	if(material_stored == max_material)
 		to_chat(user,"<span class = 'notice'>[src] is full on material.</span>")
 		return
-	if(I.get_material_name() in sheets_to_materials && I.use(1) == 1)
+	if(I.get_material_name() in sheets_to_materials)
+		if(!I.use(1))
+			return
 		var/to_add = sheets_to_materials[I.get_material_name()]
 		consume_material(-to_add)
 		to_chat(user,"<span class = 'notice'>[src] processes [I] into [to_add] units of fabricator materials.</span>")
@@ -60,14 +65,16 @@
 	if(world.time < next_rearm_repair_tick)
 		return
 	if(target_vic)
-		if(get_dist(src,target_vic) > world.view)
+		if(get_dist(src,target_vic) > REARM_REPAIR_RANGE)
 			target_vic = null
 			GLOB.processing_objects -= src
 			return
 		var/did_something = 0
 		for(var/m in target_vic.ammo_containers)
 			var/obj/item/ammo_magazine/mag = m
-			var/create_amt = min(mag.max_ammo,mag.max_ammo/5)
+			if(mag.stored_ammo.len >= mag.max_ammo)
+				continue
+			var/create_amt = min(mag.max_ammo-mag.stored_ammo.len,mag.max_ammo/5)
 			if(!consume_material(REARM_RESOURCE_DRAIN))
 				break
 			for(var/i = 0,i<=create_amt,i++)
@@ -80,8 +87,9 @@
 				continue
 			if(!consume_material(REPAIR_RESOURCE_DRAIN))
 				break
-			comp.integrity = initial(comp.integrity)
-			visible_message("<span class = 'notice'>[src] hisses as it repairs [src]'s [comp] integrity.</span>")
+			comp.integrity_to_restore = initial(comp.integrity)
+			comp.finalise_repair()
+			visible_message("<span class = 'notice'>[src] hisses as it repairs [target_vic]'s [comp] integrity.</span>")
 			did_something = 1
 		if(!did_something)
 			visible_message("<span class = 'notice'>[src] sounds a time-out warning, citing lack of action and de-targeting [target_vic]</span>")
@@ -93,5 +101,6 @@
 	//take material (steel?), allow selection of vehicle to resupply, take time to resupply / repair
 
 /obj/structure/rearm_repair_station/human
+	icon_state = "human"
 
 /obj/structure/rearm_repair_station/covenant
