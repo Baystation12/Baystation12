@@ -17483,7 +17483,7 @@
 	},
 /obj/machinery/vitals_monitor,
 /obj/machinery/light{
-	dir = 8
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
