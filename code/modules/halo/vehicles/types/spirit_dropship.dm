@@ -72,6 +72,7 @@
 	ammo_type = /obj/item/ammo_casing/spirit_cannon
 
 /obj/item/ammo_casing/spirit_cannon
+	name = "Internal Plasma Storage"
 	caliber = "spiritPlas"
 	projectile_type = /obj/item/projectile/bullet/covenant/spirit_cannon
 

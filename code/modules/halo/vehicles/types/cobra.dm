@@ -157,7 +157,7 @@
 	armor_penetration = 50
 
 /obj/item/ammo_magazine/cobra_sniper
-	name = "Internal Railgun Ammunition"
+	name = "Internal Sniper Railgun Ammunition"
 	max_ammo = 40
 	caliber = "railgun sniper"
 	ammo_type = /obj/item/ammo_casing/cobra_sniper

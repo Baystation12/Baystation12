@@ -74,7 +74,7 @@
 	magazine_type = /obj/item/ammo_magazine/ghost_internal
 
 /obj/item/ammo_magazine/ghost_internal
-	name = "Internal Ammunition Storage"
+	name = "Internal Plasma Storage"
 
 	max_ammo = 200
 	ammo_type = /obj/item/ammo_casing/ghost_round

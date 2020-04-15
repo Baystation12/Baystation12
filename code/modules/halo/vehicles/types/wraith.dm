@@ -78,7 +78,7 @@
 	mag_used = /obj/item/ammo_magazine/wraith_coax
 
 /obj/item/ammo_magazine/wraith_coax
-	name = "Internal Ammunition Storage"
+	name = "Internal Co-Axial Plasma Storage"
 	caliber = "wraithPlas"
 	max_ammo = 300
 	ammo_type = /obj/item/ammo_casing/wraith_coax
@@ -88,7 +88,7 @@
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
 
 /obj/item/ammo_magazine/wraith_cannon
-	name = "Internal Ammunition Storage"
+	name = "Internal Cannon Plasma Storage"
 	caliber = "wraithCannon"
 	max_ammo = 30
 	ammo_type = /obj/item/ammo_casing/wraith_cannon
@@ -126,5 +126,5 @@
 	return ..()
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,0,2,3,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
+	explosion(impacted,0,2,2,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
 	. = ..()

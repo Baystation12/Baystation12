@@ -71,6 +71,7 @@
 	ammo_type = /obj/item/ammo_casing/shadow_cannon
 
 /obj/item/ammo_casing/shadow_cannon
+	name = "Internal Plasma Storage"
 	caliber = "shadowPlas"
 	projectile_type = /obj/item/projectile/bullet/covenant/shadow_cannon
 
