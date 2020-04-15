@@ -293,7 +293,17 @@
 	if(toggler)
 		to_chat(toggler,"<span class = 'notice'>[message]</span>")
 
-/obj/vehicles/Move()
+/obj/vehicles/Move(var/newloc,var/newdir)
+	if(abs(speed[1]) > abs(speed[2]))
+		if(speed[1] > 0)
+			newdir = EAST
+		else
+			newdir = WEST
+	else
+		if(speed[2] > 0)
+			newdir = NORTH
+		else
+			newdir = SOUTH
 	if(anchored)
 		anchored = 0
 		. = ..()
@@ -324,7 +334,7 @@
 		if(2)
 			moving_y = 1
 	while (speed[speed_index_target] != 0)
-		sleep(max(min_speed - abs(speed[speed_index_target]),max_speed))
+		sleep(max(min_speed - ((abs(speed[1]) + abs(speed[2])/2)),max_speed)) //Our delay is the average of both.
 		if(speed[speed_index_target] > 0)
 			switch(speed_index_target)
 				if(1)
