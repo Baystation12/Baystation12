@@ -300,6 +300,9 @@
 	if(target.z != user.z) return 0
 	return 1
 
+/obj/item/weapon/gun/proc/pershot_check(var/mob/user) //Placeholder for any checks that must be performed per-shot. Used for vehicles.
+	return 1
+
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
 	if(target.elevation != last_elevation && (istype(target,/obj/vehicles) || istype(target,/mob/living)))
@@ -372,6 +375,8 @@
 		use_targ = stored_targ
 	. = 1
 	for(var/i in 1 to burst)
+		if(!pershot_check(user))
+			break
 		if(stored_targ)
 			if(stored_targ == user)
 				stored_targ = null

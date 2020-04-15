@@ -25,6 +25,11 @@
 	loc = null
 	qdel(src)
 
+/obj/item/weapon/gun/vehicle_turret/pershot_check(var/mob/user)
+	if(user.loc != linked_vehicle)
+		return 0
+	return 1
+
 /obj/item/weapon/gun/vehicle_turret/afterattack(atom/attacked, mob/user, proximity)
 	if(attacked == linked_vehicle)
 		to_chat(user,"<span class = 'notice'>You can't fire at yourself.</span>")
