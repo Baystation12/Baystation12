@@ -59,9 +59,6 @@
 	name = "Nitrous Oxide"
 	specific_heat = 40	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol. N2O
-
-	tile_overlay = "sleeping_agent"
-	overlay_limit = 1
 	flags = XGM_GAS_OXIDIZER //N2O is a powerful oxidizer
 	breathed_product = /datum/reagent/nitrous_oxide
 	symbol_html = "N<sub>2</sub>O"
