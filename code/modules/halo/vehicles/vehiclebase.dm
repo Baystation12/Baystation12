@@ -49,6 +49,7 @@
 
 	var/vehicle_view_modifier = 1 //The view-size modifier to apply to the occupants of the vehicle.
 	var/move_sound = null
+	var/collision_sound = 'sound/effects/clang.ogg'
 
 	var/datum/mobile_spawn/spawn_datum //Setting this makes this a mobile spawn point.
 

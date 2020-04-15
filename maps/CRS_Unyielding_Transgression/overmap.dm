@@ -17,3 +17,8 @@
 	parent_area_type = /area/covenant_light_cruiser
 
 	ship_max_speed = 2
+
+/obj/machinery/button/toggle/alarm_button/crs_alarm
+	alarm_color_string = "#31005c"
+	area_base =/area/covenant_light_cruiser
+
