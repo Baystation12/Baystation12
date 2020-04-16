@@ -47,12 +47,10 @@
 		for(var/direction in GLOB.cardinal)
 			neighbour = get_step(T, direction)
 			SHOULD_CHECK_TURF(neighbour)
-#ifdef MULTIZAS
 		neighbour = GetAbove(T)
 		SHOULD_CHECK_TURF(neighbour)
 		neighbour = GetBelow(T)
 		SHOULD_CHECK_TURF(neighbour)
-#endif
 
 #undef SHOULD_CHECK_TURF
 

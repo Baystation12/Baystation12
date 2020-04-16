@@ -1,5 +1,4 @@
 //#define ZASDBG
-#define MULTIZAS
 
 #define AIR_BLOCKED 1
 #define ZONE_BLOCKED 2
@@ -22,8 +21,6 @@
 #define WESTDOWN (WEST|DOWN)
 
 #define TURF_HAS_VALID_ZONE(T) (istype(T, /turf/simulated) && T:zone && !T:zone:invalid)
-
-#ifdef MULTIZAS
 
 var/list/csrfz_check = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, NORTHUP, EASTUP, WESTUP, SOUTHUP, NORTHDOWN, EASTDOWN, WESTDOWN, SOUTHDOWN)
 var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
@@ -70,44 +67,3 @@ var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
 	} else { \
 		ret = 0; \
 	}
-#else
-
-var/list/csrfz_check = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST)
-
-#define ATMOS_CANPASS_TURF(ret,A,B) \
-	if (A.blocks_air & AIR_BLOCKED || B.blocks_air & AIR_BLOCKED) { \
-		ret = BLOCKED; \
-	} \
-	else if (A.blocks_air & ZONE_BLOCKED || B.blocks_air & ZONE_BLOCKED) { \
-		ret = ZONE_BLOCKED; \
-	} \
-	else if (!TURF_IS_EMPTY(A)) { \
-		ret = 0;\
-		for (var/thing in A) { \
-			var/atom/movable/AM = thing; \
-			switch (AM.atmos_canpass) { \
-				if (CANPASS_ALWAYS) { \
-					continue; \
-				} \
-				if (CANPASS_DENSITY) { \
-					if (AM.density) { \
-						ret |= AIR_BLOCKED; \
-					} \
-				} \
-				if (CANPASS_PROC) { \
-					ret |= AM.c_airblock(B); \
-				} \
-				if (CANPASS_NEVER) { \
-					ret = BLOCKED; \
-				} \
-			} \
-			if (ret == BLOCKED) { \
-				break;\
-			}\
-		}\
-	} else { \
-		ret = 0; \
-	}
-
-#endif

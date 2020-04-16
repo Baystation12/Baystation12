@@ -16,12 +16,7 @@
 		//dbg(blocked)
 		return 1
 
-	#ifdef MULTIZAS
 	for(var/d = 1, d < 64, d *= 2)
-	#else
-	for(var/d = 1, d < 16, d *= 2)
-	#endif
-
 		var/turf/unsim = get_step(src, d)
 
 		if(!unsim)
@@ -56,13 +51,7 @@
 	var/check_dirs = get_zone_neighbours(src)
 	var/unconnected_dirs = check_dirs
 
-	#ifdef MULTIZAS
-	var/to_check = GLOB.cornerdirsz
-	#else
-	var/to_check = GLOB.cornerdirs
-	#endif
-
-	for(var/dir in to_check)
+	for(var/dir in GLOB.cornerdirsz)
 
 		//for each pair of "adjacent" cardinals (e.g. NORTH and WEST, but not NORTH and SOUTH)
 		if((dir & check_dirs) == dir)
@@ -78,11 +67,7 @@
 /turf/simulated/proc/get_zone_neighbours(turf/simulated/T)
 	. = 0
 	if(istype(T) && T.zone)
-		#ifdef MULTIZAS
 		var/to_check = GLOB.cardinalz
-		#else
-		var/to_check = GLOB.cardinal
-		#endif
 		for(var/dir in to_check)
 			var/turf/simulated/other = get_step(T, dir)
 			if(istype(other) && other.zone == T.zone && !(other.c_airblock(T) & AIR_BLOCKED) && get_dist(src, other) <= 1)
@@ -115,12 +100,7 @@
 	open_directions = 0
 
 	var/list/postponed
-	#ifdef MULTIZAS
 	for(var/d = 1, d < 64, d *= 2)
-	#else
-	for(var/d = 1, d < 16, d *= 2)
-	#endif
-
 		var/turf/unsim = get_step(src, d)
 
 		if(!unsim) //edge of map
