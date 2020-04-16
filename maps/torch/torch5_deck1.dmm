@@ -15554,8 +15554,8 @@
 	pixel_z = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
-	dir = 5
+	dir = 5;
+	icon_state = "intact"
 	},
 /obj/structure/closet/crate/freezer,
 /obj/item/weapon/reagent_containers/ivbag/nanoblood,
@@ -17482,6 +17482,9 @@
 	network = list("Medical, Engineering")
 	},
 /obj/machinery/vitals_monitor,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eOb" = (
@@ -17534,7 +17537,6 @@
 	pixel_x = -2;
 	pixel_y = 24
 	},
-/obj/item/weapon/storage/firstaid/adv,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/item/weapon/reagent_containers/spray/cleaner/drone,
 /turf/simulated/floor/tiled/dark,
@@ -18197,6 +18199,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/table/standard,
+/obj/item/weapon/storage/firstaid/adv,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "fDJ" = (
