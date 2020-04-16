@@ -20,7 +20,7 @@
 
 
 /datum/event/solar_storm/start()
-	command_announcement.Announce("The solar storm has reached the [location_name()]. Please refain from EVA and remain inside until it has passed.", "[location_name()] Sensor Array", zlevels = affecting_z)
+	command_announcement.Announce("The solar storm has reached the [location_name()]. Please refrain from EVA and remain inside until it has passed.", "[location_name()] Sensor Array", zlevels = affecting_z)
 	adjust_solar_output(5)
 
 
