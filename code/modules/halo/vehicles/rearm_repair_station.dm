@@ -104,3 +104,4 @@
 	icon_state = "human"
 
 /obj/structure/rearm_repair_station/covenant
+	icon_state = "covenant"

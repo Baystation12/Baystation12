@@ -744,7 +744,7 @@
 
 /obj/item/weapon/gun/attack_self(mob/user)
 	if(stored_targ)
-		to_chat(user,"<span class = 'notice>You stop your sustained burst from [src]</span>")
+		to_chat(user,"<span class = 'notice'>You stop your sustained burst from [src]</span>")
 		stored_targ = null
 		return
 	var/datum/firemode/new_mode = switch_firemodes(user)
