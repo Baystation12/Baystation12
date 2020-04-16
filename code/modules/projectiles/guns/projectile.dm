@@ -228,7 +228,7 @@
 		..()
 	else
 		if(stored_targ)
-			to_chat(user,"<span class = 'notice>You stop your sustained burst from [src]</span>")
+			to_chat(user,"<span class = 'notice'>You stop your sustained burst from [src]</span>")
 			stored_targ = null
 			return
 		unload_ammo(user)
