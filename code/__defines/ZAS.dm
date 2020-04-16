@@ -41,9 +41,9 @@ var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
 		} \
 	} \
 	else if (A.blocks_air & ZONE_BLOCKED || B.blocks_air & ZONE_BLOCKED) { \
-		ret = (A.z == B.z) ? ZONE_BLOCKED : AIR_BLOCKED; \
+		ret = ZONE_BLOCKED; \
 	} \
-	else if (A.contents.len) { \
+	else if (!TURF_IS_EMPTY(A)) { \
 		ret = 0;\
 		for (var/thing in A) { \
 			var/atom/movable/AM = thing; \
@@ -67,6 +67,8 @@ var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
 				break;\
 			}\
 		}\
+	} else { \
+		ret = 0; \
 	}
 #else
 
@@ -80,7 +82,7 @@ var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST)
 	else if (A.blocks_air & ZONE_BLOCKED || B.blocks_air & ZONE_BLOCKED) { \
 		ret = ZONE_BLOCKED; \
 	} \
-	else if (A.contents.len) { \
+	else if (!TURF_IS_EMPTY(A)) { \
 		ret = 0;\
 		for (var/thing in A) { \
 			var/atom/movable/AM = thing; \
@@ -104,6 +106,8 @@ var/list/gzn_check = list(NORTH, SOUTH, EAST, WEST)
 				break;\
 			}\
 		}\
+	} else { \
+		ret = 0; \
 	}
 
 #endif
