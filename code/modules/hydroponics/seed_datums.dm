@@ -1296,7 +1296,6 @@
 	display_name = "coffee plant"
 	chems = list(/datum/reagent/nutriment/coffee = list(10,10))
 
-
 /datum/seed/coffee/New()
 	..()
 	set_trait(TRAIT_MATURATION,4)
@@ -1314,7 +1313,6 @@
 	display_name = "white grapevines"
 	mutants = list("grapes","greengrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape/white = list(10,10))
-
 
 /datum/seed/grapes/white/New()
 	..()
