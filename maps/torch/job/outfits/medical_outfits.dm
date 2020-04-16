@@ -23,6 +23,21 @@
 	name = OUTFIT_JOB_NAME("Physician - Contractor")
 	id_type = /obj/item/weapon/card/id/torch/contractor/medical/senior
 
+/decl/hierarchy/outfit/job/torch/crew/medical/junior
+	name = OUTFIT_JOB_NAME("Medical Resident")
+	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+	id_type = /obj/item/weapon/card/id/torch/crew/medical/senior
+
+/decl/hierarchy/outfit/job/torch/crew/medical/junior/fleet
+	name = OUTFIT_JOB_NAME("Medical Resident - Fleet")
+	uniform = /obj/item/clothing/under/solgov/utility/fleet/medical
+	shoes = /obj/item/clothing/shoes/dutyboots
+
+/decl/hierarchy/outfit/job/torch/crew/medical/contractor/junior
+	name = OUTFIT_JOB_NAME("Medical Resident - Contractor")
+	id_type = /obj/item/weapon/card/id/torch/contractor/medical/senior
+
 /decl/hierarchy/outfit/job/torch/crew/medical/doctor
 	name = OUTFIT_JOB_NAME("Medical Technician")
 	uniform = /obj/item/clothing/under/solgov/utility/expeditionary/medical
