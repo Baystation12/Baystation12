@@ -1295,7 +1295,7 @@
 	seed_name = "coffee bean"
 	display_name = "coffee plant"
 	chems = list(/datum/reagent/nutriment/coffee = list(10,10))
-	kitchen_tag = "coffee"
+
 
 /datum/seed/coffee/New()
 	..()
@@ -1314,7 +1314,8 @@
 	display_name = "white grapevines"
 	mutants = list("grapes","greengrapes")
 	chems = list(/datum/reagent/nutriment = list(1,10), /datum/reagent/sugar = list(1,5), /datum/reagent/drink/juice/grape/white = list(10,10))
-	kitchen_tag = "coffee"
+
+
 /datum/seed/grapes/white/New()
 	..()
 	set_trait(TRAIT_PRODUCT_ICON,"grapes")
@@ -1357,6 +1358,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"pineapple")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#f6e12d")
 	set_trait(TRAIT_PLANT_ICON,"tree4")
+	set_trait(TRAIT_FLESH_COLOUR,"#f6ce79")
 	set_trait(TRAIT_IDEAL_LIGHT, 7)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
@@ -1397,7 +1399,6 @@
 	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#a36b09")
 	set_trait(TRAIT_PLANT_ICON,"tree4")
-	set_trait(TRAIT_FLESH_COLOUR,"#3af026")
 	set_trait(TRAIT_PHOTOSYNTHESIS, 1)
 
 /datum/seed/cinnamon
@@ -1414,7 +1415,6 @@
 	set_trait(TRAIT_PRODUCT_ICON,"stalk")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#cd6139")
 	set_trait(TRAIT_PLANT_ICON,"tree2")
-	set_trait(TRAIT_FLESH_COLOUR,"#e8e39b")
 	set_trait(TRAIT_IDEAL_LIGHT, 7)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.05)
 	set_trait(TRAIT_WATER_CONSUMPTION, 0.5)
@@ -1562,7 +1562,6 @@
 	set_trait(TRAIT_PRODUCT_ICON,"treefruit")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#866523")
 	set_trait(TRAIT_PLANT_ICON,"tree")
-	set_trait(TRAIT_FLESH_COLOUR,"#3af026")
 	set_trait(TRAIT_PHOTOSYNTHESIS, 1)
 
 /datum/seed/gummen
@@ -1597,6 +1596,7 @@
 	set_trait(TRAIT_PRODUCT_ICON,"flower3")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#31d496")
 	set_trait(TRAIT_PLANT_ICON,"flower3")
+	set_trait(TRAIT_FLESH_COLOUR,"#ac43e0")
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 0.5)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.15)
