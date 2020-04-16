@@ -322,7 +322,7 @@
 	if(istype(obstacle,/mob/living))
 		var/mob/living/hit_mob = obstacle
 		playsound(loc,collision_sound,100,0,4)
-		hit_mob.Weaken(0) //No damage for now, let's just knock them over.
+		hit_mob.Weaken(1) //No damage for now, let's just knock them over.
 	else
 		speed[1] = 0
 		speed[2] = 0
