@@ -2871,12 +2871,14 @@
 
 /datum/reagent/drink/alien/qokkloa
 	name = "Qokk'loa"
-	description = "An unrefined hallucigenic substance, potent to humans and harmless to Skrell."
+	description = "An unrefined hallucinogenic substance, potent to humans and harmless to Skrell."
 	taste_description = "cold, slimey mushroom"
 	color = "#e700e7"
 
 /datum/reagent/drink/alien/qokkloa/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_SKRELL)
+		return
+	if(alien == IS_DIONA)
 		return
 
 	M.druggy = max(M.druggy, 30)
