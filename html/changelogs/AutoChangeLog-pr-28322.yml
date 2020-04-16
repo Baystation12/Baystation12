@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Windoors no longer block fluids when they shouldn't."

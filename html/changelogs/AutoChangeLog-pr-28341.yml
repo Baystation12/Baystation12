@@ -1,5 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - maptweak: "Removes a dark spot in Operating Room 2, and moved the advanced first aid kit onto the empty table instead of sharing a tile with the cleaning sprays."
-  - maptweak: "Fixed Operating Room 2 using a cyborg space cleaner bottle instead of a normal one."
