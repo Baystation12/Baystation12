@@ -8,10 +8,8 @@
 	emergency_controller = evacuation_controller
 	if(!istype(emergency_controller))
 		CRASH("Escape shuttle created without the appropriate controller type.")
-		return
 	if(emergency_controller.shuttle)
 		CRASH("An emergency shuttle has already been created.")
-		return
 	emergency_controller.shuttle = src
 
 /datum/shuttle/autodock/ferry/emergency/arrived()

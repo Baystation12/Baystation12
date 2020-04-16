@@ -90,7 +90,6 @@
 		return 1
 	else
 		return 0
-	update_icon()
 
 //Helper procs for cyborg modules on the UI.
 //These are hackish but they help clean up code elsewhere.
