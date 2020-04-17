@@ -38,17 +38,16 @@
 /datum/shuttle/autodock/overmap/skrellscoutship
 	name = "Skrellian Scout"
 	warmup_time = 5
-	multiz = 1
 	range = 1
 	current_location = "nav_skrellscout_start"
-	current_dock_target = "xil_dock"
 	shuttle_area = list(
-		/area/ship/skrellscoutship/solars, /area/ship/skrellscoutship/crew/quarters, /area/ship/skrellscoutship/crew/hallway/d1,
-		/area/ship/skrellscoutship/crew/hallway/d2, /area/ship/skrellscoutship/crew/kitchen, /area/ship/skrellscoutship/crew/toilets,
-		/area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/dock/alt,
-		/area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/robotics, /area/ship/skrellscoutship/maintenance/atmos,
-		/area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/command/bridge, /area/ship/skrellscoutship/crew/fit,
-		/area/ship/skrellscoutship/command/armory, /area/ship/skrellscoutship/crew/rec
+		/area/ship/skrellscoutship/command/bridge, /area/ship/skrellscoutship/wings/port, /area/ship/skrellscoutship/wings/starboard,
+		/area/ship/skrellscoutship/brig, /area/ship/skrellscoutship/portcheckpoint, /area/ship/skrellscoutship/forestorage,
+		/area/ship/skrellscoutship/externalwing/port, /area/ship/skrellscoutship/externalwing/starboard, /area/ship/skrellscoutship/corridor,
+		/area/ship/skrellscoutship/crew/quarters, /area/ship/skrellscoutship/crew/medbay, /area/ship/skrellscoutship/crew/kitchen,
+		/area/ship/skrellscoutship/maintenance/power, /area/ship/skrellscoutship/hangar, /area/ship/skrellscoutship/command/armory,
+		/area/ship/skrellscoutship/dock, /area/ship/skrellscoutship/maintenance/atmos, /area/ship/skrellscoutship/robotics, 
+		/area/ship/skrellscoutship/crew/rec 
 		)
 	defer_initialisation = TRUE
 	knockdown = FALSE
@@ -65,7 +64,6 @@
 	warmup_time = 5
 	current_location = "nav_skrellscoutsh_dock"
 	range = 2
-	dock_target = "xil_shuttle"
 	shuttle_area = /area/ship/skrellscoutshuttle
 	defer_initialisation = TRUE
 	flags = SHUTTLE_FLAGS_PROCESS
@@ -78,7 +76,6 @@
 	landmark_tag = "nav_skrellscoutsh_dock"
 	base_area = /area/ship/skrellscoutship/hangar
 	base_turf = /turf/simulated/floor/tiled/skrell
-	docking_controller = "xil_shuttle_dock"
 	movable_flags = MOVABLE_FLAG_EFFECTMOVE
 
 /obj/effect/shuttle_landmark/skrellscoutshuttle/altdock

@@ -7,14 +7,12 @@
 	name = "Skrellian Scout Ship"
 	id = "awaysite_skrell_scout"
 	description = "A Skrellian SDTF scouting vessel."
-	suffixes = list("skrellscoutship/skrellscoutship-1.dmm", "skrellscoutship/skrellscoutship-2.dmm")
+	suffixes = list("skrellscoutship/skrellscoutship_revamp.dmm")
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/skrellscoutship, /datum/shuttle/autodock/overmap/skrellscoutshuttle)
 	apc_test_exempt_areas = list(
-		/area/ship/skrellscoutshuttle =                NO_SCRUBBER,
-		/area/ship/skrellscoutship/crew/toilets =      NO_SCRUBBER|NO_VENT,
-		/area/ship/skrellscoutship/maintenance/power = NO_SCRUBBER,
-		/area/ship/skrellscoutship/solars =            NO_SCRUBBER|NO_VENT|NO_APC
+		/area/ship/skrellscoutship/externalwing/port = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/ship/skrellscoutship/externalwing/starboard = NO_SCRUBBER|NO_VENT|NO_APC
 	)
 
 /obj/effect/overmap/visitable/sector/skrellscoutspace
@@ -61,6 +59,20 @@
 	detail_color = "#7331c4"
 	access = list(access_skrellscoutship)
 
+/datum/job/submap/skrellscoutship_crew/leader
+	title = "Qrri-Vuxix"
+	supervisors = "your SDTF"
+	total_positions = 1
+	outfit_type = /decl/hierarchy/outfit/job/skrellscoutship
+	info = "Your vessel is scouting through unknown space, working to map out any potential dangers, as well as potential allies."
+	is_semi_antagonist = TRUE
+	min_skill = list(SKILL_EVA = SKILL_ADEPT,
+					SKILL_PILOT = SKILL_ADEPT,
+					SKILL_HAULING = SKILL_ADEPT,
+					SKILL_COMBAT = SKILL_ADEPT,
+					SKILL_WEAPONS = SKILL_ADEPT,
+					SKILL_MEDICAL = SKILL_BASIC)
+
 /datum/job/submap/skrellscoutship_crew
 	title = "Qrri-Zuumqix"
 	supervisors = "your Qrri-Vuxix"
@@ -75,20 +87,6 @@
 	skill_points = 30
 	is_semi_antagonist = TRUE
 	min_skill = list(SKILL_EVA = SKILL_ADEPT,
-					SKILL_HAULING = SKILL_ADEPT,
-					SKILL_COMBAT = SKILL_ADEPT,
-					SKILL_WEAPONS = SKILL_ADEPT,
-					SKILL_MEDICAL = SKILL_BASIC)
-
-/datum/job/submap/skrellscoutship_crew/leader
-	title = "Qrri-Vuxix"
-	supervisors = "your SDTF"
-	total_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/skrellscoutship
-	info = "Your vessel is scouting through unknown space, working to map out any potential dangers, as well as potential allies."
-	is_semi_antagonist = TRUE
-	min_skill = list(SKILL_EVA = SKILL_ADEPT,
-					SKILL_PILOT = SKILL_ADEPT,
 					SKILL_HAULING = SKILL_ADEPT,
 					SKILL_COMBAT = SKILL_ADEPT,
 					SKILL_WEAPONS = SKILL_ADEPT,
@@ -217,4 +215,104 @@
 /obj/machinery/vending/medical/skrell
 	req_access = list(access_skrellscoutship)
 
+/obj/machinery/power/apc/debug/skrell
+	cell_type = /obj/item/weapon/cell/infinite
+	req_access = list(access_skrellscoutship)
+
 #undef WEBHOOK_SUBMAP_LOADED_SKRELL
+
+//Skrell Security Belt
+/obj/item/weapon/storage/belt/holster/skrell
+	name = "skrellian holster belt"
+	desc = "Can hold security gear like handcuffs and flashes. This one has a convenient holster."
+	icon_state = "securitybelt"
+	item_state = "security"
+	storage_slots = 8
+	overlay_flags = BELT_OVERLAY_ITEMS|BELT_OVERLAY_HOLSTER
+	can_hold = list(
+		/obj/item/weapon/crowbar,
+		/obj/item/weapon/grenade,
+		/obj/item/weapon/reagent_containers/spray/pepper,
+		/obj/item/weapon/handcuffs,
+		/obj/item/device/flash,
+		/obj/item/clothing/glasses,
+		/obj/item/ammo_casing/shotgun,
+		/obj/item/ammo_magazine,
+		/obj/item/weapon/reagent_containers/food/snacks/donut/,
+		/obj/item/weapon/melee/baton,
+		/obj/item/weapon/melee/telebaton,
+		/obj/item/weapon/flame/lighter,
+		/obj/item/device/flashlight,
+		/obj/item/modular_computer/pda,
+		/obj/item/device/radio/headset,
+		/obj/item/device/hailer,
+		/obj/item/device/megaphone,
+		/obj/item/weapon/melee,
+		/obj/item/taperoll,
+		/obj/item/device/holowarrant,
+		/obj/item/weapon/magnetic_ammo,
+		/obj/item/device/binoculars,
+		/obj/item/clothing/gloves,
+		/obj/item/weapon/gun/energy/gun/skrell
+		)
+
+//Skell Lights
+
+/obj/machinery/light/skrell
+	name = "skrellian light"
+	light_type = /obj/item/weapon/light/tube/skrell
+	desc = "Some kind of strange alien lighting technology"
+
+
+/obj/item/weapon/light/tube/skrell
+	name = "skrellian light filament"
+	color = COLOR_LIGHT_CYAN
+	b_colour = COLOR_LIGHT_CYAN
+	desc = "Some kind of strange alien lightbulb technology."
+
+/obj/item/weapon/light/tube/large/skrell
+	name = "skrellian light filament"
+	color = COLOR_LIGHT_CYAN
+	b_colour = COLOR_LIGHT_CYAN
+	desc = "Some kind of strange alien lightbulb technology."
+
+
+/obj/item/weapon/storage/box/lights/tubes/skrell
+	name = "box of replacement tubes"
+	icon_state = "lighttube"
+	startswith = list(/obj/item/weapon/light/tube/skrell = 17,
+					/obj/item/weapon/light/tube/large/skrell = 4)
+
+//Skrell Suit Dispensers
+/obj/machinery/suit_storage_unit/skrell
+	boots = /obj/item/clothing/shoes/magboots;
+	color = "#00e1ff";
+	helmet = /obj/item/clothing/head/helmet/space/void/skrell/white;
+	islocked = 1;
+	name = "Skrell Suit Storage Unit (White)";
+	req_access = list("ACCESS_SKRELLSCOUT");
+	suit = /obj/item/clothing/suit/space/void/skrell/white
+
+/obj/machinery/suit_storage_unit/skrell/black
+	boots = /obj/item/clothing/shoes/magboots;
+	color = "#00e1ff";
+	helmet = /obj/item/clothing/head/helmet/space/void/skrell/black;
+	islocked = 1;
+	name = "Skrell Suit Storage Unit (Black)";
+	req_access = list("ACCESS_SKRELLSCOUT");
+	suit = /obj/item/clothing/suit/space/void/skrell/black
+
+//Skrell Devices
+
+/obj/item/weapon/tape_roll/skrell
+	name = "modular adhesive dispenser"
+	desc = "A roll of sticky tape. Possibly for taping ducks... or was that ducts?"
+	icon = 'icons/obj/bureaucracy.dmi'
+	icon_state = "taperoll"
+	color = "#40e0d0"
+	w_class = ITEM_SIZE_SMALL
+
+/obj/machinery/space_heater/skrell
+	color = "#40e0d0"
+	name = "thermal induction generator"
+	desc = "Made by Krri'gli Corp using thermal induction technology, this heater is guaranteed not to set anything, or anyone, on fire."
