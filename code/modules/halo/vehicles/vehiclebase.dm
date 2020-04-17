@@ -134,6 +134,18 @@
 		attacker.UnarmedAttack(mob_to_hit)
 	comp_prof.take_component_damage(damage,"brute")
 
+/obj/vehicles/proc/display_ammo_status(var/mob/user)
+	for(var/m in ammo_containers)
+		var/obj/item/ammo_magazine/mag = m
+		var/msg = "is full!"
+		if(mag.stored_ammo.len >= mag.initial_ammo * 0.75)
+			msg = "is about 3 quarters full."
+		else if(mag.stored_ammo.len > mag.initial_ammo * 0.5)
+			msg = "is about half full."
+		else if(mag.stored_ammo.len > mag.initial_ammo * 0.25)
+			msg = "is about a quarter full."
+		to_chat(user,"<span class = 'notice'>[src]'s [mag] [msg]</span>")
+
 /obj/vehicles/examine(var/mob/user)
 	. = ..()
 	if(!active)
@@ -152,6 +164,8 @@
 		to_chat(user,"<span>It has a [carried_vehicle] mounted on it.</span>")
 
 	show_occupants_contained(user)
+
+	display_ammo_status(user)
 
 /obj/vehicles/proc/pick_valid_exit_loc()
 	var/list/valid_exit_locs = list()
