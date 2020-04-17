@@ -1,8 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - rscadd: "Added beeping to microwaves!"
-  - rscadd: "You can now use botanical satchels on microwaves to empty out any valid ingredients it has into the microwave."
-  - tweak: "Microwaves are now speedier, more efficient, and less likely to break when upgraded with better parts."
-  - tweak: "You can use anything with space cleaner contained in it to clean microwaves, instead of just spray bottles."
-  - tweak: "Adjusted messages and feedback for microwaves for clarity and consistency."
