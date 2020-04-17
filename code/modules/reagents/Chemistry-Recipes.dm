@@ -2742,7 +2742,7 @@
 /datum/chemical_reaction/qokkhrona
 	name = "Qokk'Hrona"
 	result = /datum/reagent/ethanol/alien/qokkhrona
-	required_reagents = list(/datum/reagent/drink/alien/qokkloa = 2, /datum/reagent/ethanol/wine = 1)
+	required_reagents = list(/datum/reagent/drink/ethanol/alien/qokkloa = 2, /datum/reagent/ethanol/wine = 1)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 3
 	mix_message = "The mixture turns a soft red, bubbling faintly"
@@ -2762,10 +2762,11 @@
 	result = /datum/reagent/ethanol/pinacolada
 	required_reagents = list(/datum/reagent/drink/coconut/milk = 1, /datum/reagent/ethanol/rum = 2, /datum/reagent/drink/juice/pineapple = 1)
 	result_amount = 4
+	mix_message = "The cocktail turns a vibrant orange"
 
 /datum/chemical_reaction/horchata
 	name = "Horchata"
 	result = /datum/reagent/ethanol/horchata
 	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/milk/cream = 1, /datum/reagent/cinnamon = 1, /datum/reagent/drink/syrup_vanilla = 1)
 	result_amount = 5
-	mix_message = "The mixture froths up into a rich, cool mixture"
+	mix_message = "The liquid froths up into a rich, cool mixture"
