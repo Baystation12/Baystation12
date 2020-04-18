@@ -1463,6 +1463,7 @@
 #include "code\modules\halo\comms\machines\_overmap_comms.dm"
 #include "code\modules\halo\covenant\_language.dm"
 #include "code\modules\halo\covenant\_species.dm"
+#include "code\modules\halo\covenant\access.dm"
 #include "code\modules\halo\covenant\admin_covenant_strike_team.dm"
 #include "code\modules\halo\covenant\cycling_trader.dm"
 #include "code\modules\halo\covenant\heresy_waiver.dm"

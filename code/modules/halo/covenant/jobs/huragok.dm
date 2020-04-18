@@ -6,3 +6,4 @@
 	selection_color = "#800080"
 	faction_whitelist = "Covenant"
 	outfit_type = /decl/hierarchy/outfit/huragok_cov
+	access = list(access_covenant, access_covenant_command)

@@ -10,6 +10,7 @@
 	access = list(240,250)
 	is_whitelisted = 1
 	whitelisted_species = list(/datum/species/sangheili)
+	access = list(access_covenant, access_covenant_command)
 
 /datum/job/covenant/sangheili_ultra
 	title = "Sangheili Ultra"
@@ -21,6 +22,7 @@
 	access = list(240,250)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
+	access = list(access_covenant, access_covenant_command)
 
 /datum/job/covenant/sangheili_honour_guard
 	title = "Sangheili Honour Guard"
@@ -41,6 +43,7 @@
 	access = list(240,250)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
+	access = list(access_covenant, access_covenant_command)
 
 /datum/job/covenant/sangheili_minor
 	title = "Sangheili Minor"

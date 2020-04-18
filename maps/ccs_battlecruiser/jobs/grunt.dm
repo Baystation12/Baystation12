@@ -1,14 +1,8 @@
 
 /datum/job/opredflag_cov/grunt
 	title = "Unggoy Minor"
-	faction_flag = COVENANT
 	supervisors = "the Grunt Majors, Grunt Ultras and the Elites"
 	selection_color = "#ff00ff"
-	account_allowed = 0               // Does this job type come with a station account?
-	outfit_type = /decl/hierarchy/outfit/unggoy
-	loadout_allowed = FALSE            // Whether or not loadout equipment is allowed and to be created when joining.
-	announced = TRUE                  //If their arrival is announced on radio
-	generate_email = 0
 	whitelisted_species = list(/datum/species/unggoy)
 	spawn_positions = -1
 	total_positions = -1
