@@ -108,3 +108,17 @@
 	name = "Flood"
 	enemy_factions = list("Covenant","Insurrection","Human Colony","UNSC")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/flood)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/flood/infestor = 3,\
+	/mob/living/simple_animal/hostile/flood/carrier = 2,\
+	/mob/living/simple_animal/hostile/flood/combat_form/human = 3,\
+	/mob/living/simple_animal/hostile/flood/combat_form/ODST = 3,\
+	/mob/living/simple_animal/hostile/flood/combat_form/guard = 3,\
+	/mob/living/simple_animal/hostile/flood/combat_form/oni = 3,\
+	/mob/living/simple_animal/hostile/flood/combat_form/minor = 3,\
+	/mob/living/simple_animal/hostile/flood/combat_form/minor2 = 3,\
+	/mob/living/simple_animal/hostile/flood/combat_form/major = 2,\
+	/mob/living/simple_animal/hostile/flood/combat_form/zealot = 2,\
+	/mob/living/simple_animal/hostile/flood/combat_form/ultra = 2,\
+	/mob/living/simple_animal/hostile/flood/combat_form/specops = 2,\
+	/mob/living/simple_animal/hostile/flood/combat_form/ranger = 2,\
+	/mob/living/simple_animal/hostile/flood/combat_form/juggernaut = 1)
