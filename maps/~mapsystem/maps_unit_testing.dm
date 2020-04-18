@@ -66,12 +66,5 @@
 		/area/planets/Geminus/indoor/npc_factory,
 		/area/planets/Geminus/indoor,
 		/area/planets/Geminus,
-		/area/planets,
-		/area/submaps,
-		/area/submaps/civilian/drugden,
-		/area/submaps/civilian/orbital_factory,
-		/area/submaps/civilian/civilian_bank,
-		/area/submaps/covenant/hidden_mine,
-		/area/submaps/covenant/cov_citadelle,
-		/area/submaps/covenant/cov_base
+		/area/planets
 	)

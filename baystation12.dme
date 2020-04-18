@@ -2948,7 +2948,6 @@
 #include "maps\geminus_city\innie_quest\shuttle_fuel.dm"
 #include "maps\geminus_city\innie_quest\shuttle_power.dm"
 #include "maps\geminus_city\innie_quest\transport_area.dm"
-#include "maps\submaps\areas.dm"
 #include "maps\~mapsystem\map_preferences.dm"
 #include "maps\~mapsystem\map_ranks.dm"
 #include "maps\~mapsystem\maps.dm"
