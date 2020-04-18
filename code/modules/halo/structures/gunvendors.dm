@@ -25,7 +25,7 @@
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
 	req_access = list(308,311)
-	products = list(/obj/item/ammo_magazine/m145_ap = 4,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 2
+	products = list(/obj/item/ammo_magazine/m145_ap = 4,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 1
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/projectile/m41 = 1, /obj/item/weapon/storage/box/spnkr = 2,/obj/item/weapon/plastique = 2,/obj/item/weapon/armor_patch = 2)
 
 /obj/machinery/vending/armory/police
@@ -200,7 +200,6 @@
 	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
 	/obj/item/weapon/gun/projectile/m392_dmr = 2,
 	/obj/item/weapon/gun/projectile/br55 = 2,
-	/obj/item/weapon/gun/projectile/srs99_sniper = 1,
 	/obj/item/weapon/plastique = 9,
 	/obj/item/weapon/storage/firstaid/unsc = 6,
 	/obj/item/device/binoculars = 4,
@@ -210,7 +209,6 @@
 	/obj/item/ammo_magazine/m5 = 24,
 	/obj/item/ammo_magazine/m95_sap/br55 = 10,
 	/obj/item/ammo_magazine/m762_ap/M392 = 16,
-	/obj/item/ammo_magazine/m145_ap = 4,
 	/obj/item/ammo_box/shotgun = 10,
 	/obj/item/ammo_box/shotgun/slug = 10,
 	/obj/item/weapon/grenade/smokebomb = 8,

@@ -1823,6 +1823,7 @@
 #include "code\modules\halo\vehicles\__defs.dm"
 #include "code\modules\halo\vehicles\fuel.dm"
 #include "code\modules\halo\vehicles\mobile_spawn_datums.dm"
+#include "code\modules\halo\vehicles\rearm_repair_station.dm"
 #include "code\modules\halo\vehicles\supply_pods.dm"
 #include "code\modules\halo\vehicles\track_bound.dm"
 #include "code\modules\halo\vehicles\vehicle_cargo.dm"

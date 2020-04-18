@@ -17,3 +17,11 @@
 	parent_area_type = /area/covenant_light_cruiser
 
 	ship_max_speed = 2
+
+/obj/machinery/button/toggle/alarm_button/crs_alarm
+	alert_message = "Alert! Warriors of the Great Journey and crew of this holy vessel, prepare for combat action!"
+	un_alert_message = "Red Alert lifted."
+	alarm_color_string = "#31005c"
+	alarm_sound = 'code/modules/halo/sounds/r_alert_alarm_loop_j2.ogg'
+	area_base =/area/covenant_light_cruiser
+

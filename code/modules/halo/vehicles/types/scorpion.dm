@@ -12,8 +12,10 @@
 
 	comp_prof = /datum/component_profile/scorpion
 
+	ammo_containers = newlist(/obj/item/ammo_magazine/scorp_coax,/obj/item/ammo_magazine/scorp_shell)
+
 	vehicle_move_delay = 5
-	exposed_positions = list("passenger" = 40,"gunner" = 5)
+	exposed_positions = list("passenger" = 30)
 
 	occupants = list(4,1)
 
@@ -31,7 +33,7 @@
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("brute"=75,"burn"=70,"emp"=40,"bomb"=65)
+	resistances = list("brute"=90,"burn"=90,"emp"=40,"bomb"=65)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/scorpion
@@ -43,40 +45,59 @@
 	name = "Scorpion Cannon"
 	desc = "A slow firing but devastatingly damaging cannon."
 
-	projectile_fired = /obj/item/projectile/bullet/scorp_cannon
-
-	fire_delay = 5 SECONDS
+	fire_delay = 40
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 
 	burst = 1
 
 	guns_switchto = newlist(/datum/vehicle_gun/scorp_cannon,/datum/vehicle_gun/scorp_machinegun)
+	magazine_type = /obj/item/ammo_magazine/scorp_shell
 
 /datum/vehicle_gun/scorp_cannon
 	name = "Scorpion Cannon"
 	desc = "A slow firing but devastatinly damaging cannon."
 	burst_size = 1
 	burst_delay = 1
-	fire_delay = 5 SECONDS
+	fire_delay = 40
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
-	proj_fired = /obj/item/projectile/bullet/scorp_cannon
+	mag_used = /obj/item/ammo_magazine/scorp_shell
 
 /datum/vehicle_gun/scorp_machinegun
 	name = "Scorpion Machinegun"
 	desc = "A short burst machinegun, used for anti-infantry purposes."
 	burst_size = 3
-	burst_delay = 0.1 SECONDS
-	fire_delay = 0.5 SECONDS
+	burst_delay = 1
+	fire_delay = 10
 	fire_sound = 'code/modules/halo/sounds/scorp_machinegun_fire.ogg'
-	proj_fired = /obj/item/projectile/bullet/a762_ap
+	mag_used = /obj/item/ammo_magazine/scorp_coax
+
+/obj/item/ammo_magazine/scorp_coax
+	name = "Internal Co-axial Ammunition Storage"
+	caliber = "a762"
+	max_ammo = 300
+	ammo_type = /obj/item/ammo_casing/a762_ap
+
+/obj/item/ammo_magazine/scorp_shell
+	name = "Internal Scorpion Shell Rack"
+	caliber = "90mm Shell"
+	max_ammo = 30
+	ammo_type = /obj/item/ammo_casing/scorp_round
+
+/obj/item/ammo_casing/scorp_round
+	name = "90mm Shell"
+	caliber = "90mm Shell"
+	projectile_type = /obj/item/projectile/bullet/scorp_cannon
 
 /obj/item/projectile/bullet/scorp_cannon
-	damage = 50
+	name = "90mm Shell"
+	damage = 100
 	damage_type = "bomb"
-	armor_penetration = 25
+	damtype = "bomb"
+	armor_penetration = 50
+	shield_damage = 240
 
 /obj/item/projectile/bullet/scorp_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,0,1,4,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
+	explosion(impacted,0,1,3,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	. = ..()
 
 /obj/item/projectile/bullet/scorp_cannon/attack_mob()
