@@ -1709,6 +1709,7 @@
 #include "code\modules\halo\misc\payload.dm"
 #include "code\modules\halo\misc\scrap.dm"
 #include "code\modules\halo\misc\ship_cap_ghost_role.dm"
+#include "code\modules\halo\misc\simple_mob_spawn.dm"
 #include "code\modules\halo\misc\tools_items_gear.dm"
 #include "code\modules\halo\misc\xeno_plant.dm"
 #include "code\modules\halo\misc\animals\alligator.dm"
