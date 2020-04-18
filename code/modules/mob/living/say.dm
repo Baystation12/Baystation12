@@ -147,7 +147,7 @@ proc/get_radio_key_from_channel(var/channel)
 
 	message = html_decode(message)
 
-	var/end_char = copytext(message, lentext(message), lentext(message) + 1)
+	var/end_char = copytext(message, length(message), length(message) + 1)
 	if(!(end_char in list(".", "?", "!", "-", "~")))
 		message += "."
 
