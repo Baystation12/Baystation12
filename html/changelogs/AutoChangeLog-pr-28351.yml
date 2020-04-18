@@ -1,0 +1,4 @@
+author: "lorwp"
+delete-after: True
+changes: 
+  - bugfix: "mutiny is no longer listed as 'revolution' when staff change the gamemode manually. be afraid"
