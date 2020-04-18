@@ -2869,7 +2869,7 @@
 	glass_name = "coconut milk"
 	glass_desc = "Delicious milk from a coconut."
 
-/datum/reagent/drink/alien/qokkloa
+/datum/reagent/ethanol/alien/qokkloa
 	name = "Qokk'loa"
 	description = "An unrefined hallucinogenic substance, potent to humans and harmless to Skrell."
 	taste_description = "cold, slimey mushroom"
