@@ -1,6 +1,6 @@
 
 /datum/job/covenant/unggoy_minor
-	title = "Unggoy"
+	title = "Unggoy Minor"
 	total_positions = -1
 	spawn_positions = -1
 	selection_color = "#800080"

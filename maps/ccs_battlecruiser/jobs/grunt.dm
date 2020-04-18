@@ -2,6 +2,7 @@
 /datum/job/opredflag_cov/grunt
 	title = "Unggoy Minor"
 	supervisors = "the Grunt Majors, Grunt Ultras and the Elites"
+	outfit_type = /decl/hierarchy/outfit/unggoy
 	selection_color = "#ff00ff"
 	whitelisted_species = list(/datum/species/unggoy)
 	spawn_positions = -1
