@@ -24,6 +24,10 @@
 	if(stat != DEAD)
 		aura_check(AURA_TYPE_LIFE)
 
+		if(!InStasis())
+			//Mutations and radiation
+			handle_mutations_and_radiation()
+
 	//Check if we're on fire
 	handle_fire()
 

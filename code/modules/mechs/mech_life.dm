@@ -26,8 +26,6 @@
 
 	..() //Handles stuff like environment
 
-	handle_mutations_and_radiation()
-
 	handle_hud_icons()
 
 	lying = FALSE // Fuck off, carp.
