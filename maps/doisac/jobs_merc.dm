@@ -6,7 +6,7 @@ Clanless runt
 */
 /datum/job/packwar_runt
 	title = "clanless Jiralhanae"
-	faction_flag = COVENANT
+	spawn_faction = "Covenant"
 	supervisors = "whoever is strongest, or whoever feeds and pays you"
 	selection_color = "#888888"
 	account_allowed = 0
@@ -52,7 +52,7 @@ Skirmisher Mercenaries
 	selection_color = "#993300"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo/merc_boulder
 
-	faction_flag = COVENANT
+	spawn_faction = "Covenant"
 	account_allowed = 0
 	loadout_allowed = FALSE
 	announced = FALSE
@@ -98,7 +98,7 @@ Jackal Mercenaries
 	selection_color = "#993300"
 	outfit_type = /decl/hierarchy/outfit/kigyar/merc_boulder
 
-	faction_flag = COVENANT
+	spawn_faction = "Covenant"
 	account_allowed = 0
 	loadout_allowed = FALSE
 	announced = FALSE
