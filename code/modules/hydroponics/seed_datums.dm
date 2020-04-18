@@ -1528,7 +1528,7 @@
 	name = "qokkloa"
 	seed_name = "qokk'loa moss"
 	display_name = "qokk'loa moss"
-	chems = list(/datum/reagent/space_drugs = list(1,25), /datum/reagent/drink/ethanol/alien/qokkloa = list(10,10) )
+	chems = list(/datum/reagent/space_drugs = list(1,25), /datum/reagent/ethanol/alien/qokkloa = list(10,10) )
 
 /datum/seed/qokkloa/New()
 	..()

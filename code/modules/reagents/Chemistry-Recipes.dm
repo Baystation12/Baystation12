@@ -2742,7 +2742,7 @@
 /datum/chemical_reaction/qokkhrona
 	name = "Qokk'Hrona"
 	result = /datum/reagent/ethanol/alien/qokkhrona
-	required_reagents = list(/datum/reagent/drink/ethanol/alien/qokkloa = 2, /datum/reagent/ethanol/wine = 1)
+	required_reagents = list(/datum/reagent/ethanol/alien/qokkloa = 2, /datum/reagent/ethanol/wine = 1)
 	catalysts = list(/datum/reagent/enzyme = 5)
 	result_amount = 3
 	mix_message = "The mixture turns a soft red, bubbling faintly"
