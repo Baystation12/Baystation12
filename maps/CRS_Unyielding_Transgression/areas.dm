@@ -90,9 +90,11 @@
 
 /area/covenant_light_cruiser/portgarage
 	name = "CRS Unyielding Transgression Port Vehicle Garage"
+	icon_state = "shuttle3"
 
 /area/covenant_light_cruiser/starboardgarage
 	name = "CRS Unyielding Transgression Starboard Vehicle Garage"
+	icon_state = "shuttle3"
 
 /area/covenant_light_cruiser/shieldgen
 	name = "CRS Unyielding Transgression Shield Generator"
