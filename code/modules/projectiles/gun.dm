@@ -300,21 +300,27 @@
 	if(target.z != user.z) return 0
 	return 1
 
+/obj/item/weapon/gun/proc/pershot_check(var/mob/user) //Placeholder for any checks that must be performed per-shot. Used for vehicles.
+	return 1
+
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
 	if(target.elevation != last_elevation && (istype(target,/obj/vehicles) || istype(target,/mob/living)))
 		last_elevation = target.elevation
 		visible_message("<span class = 'warning'>[user.name] changes their firing elevation to target [target.name]</span>")
+	var/list/rounds_nosuppress = list()
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
-		var/user_position = V.occupants[user]
-		if(isnull(user_position)) return
-		if(user_position == "driver")
-			to_chat(user,"<span class = 'warning'>You can't fire from the driver's position!</span>")
-			return
-		if(!(user_position in V.exposed_positions))
-			to_chat(user,"<span class = 'warning'>You can't fire [src.name] from this position in [V.name].</span>")
-			return
+		rounds_nosuppress += V.occupants
+		if(!istype(src,/obj/item/weapon/gun/vehicle_turret))
+			var/user_position = V.occupants[user]
+			if(isnull(user_position)) return
+			if(user_position == "driver")
+				to_chat(user,"<span class = 'warning'>You can't fire from the driver's position!</span>")
+				return
+			if(!(user_position in V.exposed_positions))
+				to_chat(user,"<span class = 'warning'>You can't fire [src.name] from this position in [V.name].</span>")
+				return
 		if(target.z != V.z) return
 	else
 		if(!check_z_compatible(target,user)) return
@@ -369,6 +375,8 @@
 		use_targ = stored_targ
 	. = 1
 	for(var/i in 1 to burst)
+		if(!pershot_check(user))
+			break
 		if(stored_targ)
 			if(stored_targ == user)
 				stored_targ = null
@@ -389,6 +397,7 @@
 		if(istype(projectile,/obj/item/projectile))
 			var/obj/item/projectile/proj_obj = projectile
 			proj_obj.target_elevation = last_elevation
+			proj_obj.permutated += rounds_nosuppress //Stops people in a vehicle from being suppressed by their own vehicle's shots.
 
 		if(user.loc != targloc) //This should stop people being able to just click on someone for free autotracking.
 			var/mob/living/targ_m = target
@@ -734,6 +743,10 @@
 	return new_mode
 
 /obj/item/weapon/gun/attack_self(mob/user)
+	if(stored_targ)
+		to_chat(user,"<span class = 'notice'>You stop your sustained burst from [src]</span>")
+		stored_targ = null
+		return
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(new_mode)
 		to_chat(user, "<span class='notice'>\The [src] is now set to [new_mode.name].</span>")

@@ -19,9 +19,9 @@
 
 	comp_prof = /datum/component_profile/pelican
 
-	occupants = list(13,1)
+	ammo_containers = newlist(/obj/item/ammo_magazine/pelican_hmg)
 
-	exposed_positions = list("driver" = 10)//Passengers could technically be hit by bullets through the troop bay.
+	occupants = list(13,1)
 
 	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
 	vehicle_carry_size = ITEM_SIZE_VEHICLE
@@ -57,11 +57,20 @@
 	icon_state = "chaingun_obj"
 	item_state = "chaingun_obj"
 
-	projectile_fired = /obj/item/projectile/bullet/hmg127_he
-
 	fire_delay = 1.5 SECONDS
 
 	burst = 5
+
+	magazine_type = /obj/item/ammo_magazine/pelican_hmg
+
+/obj/item/ammo_magazine/pelican_hmg
+	name = "Internal Ammunition Storage"
+	max_ammo = 100
+	caliber = "12.7mm"
+	ammo_type = /obj/item/ammo_casing/pelican_hmg
+
+/obj/item/ammo_casing/pelican_hmg
+	projectile_type = /obj/item/projectile/bullet/hmg127_he
 
 /obj/vehicles/air/overmap/pelican
 	name = "D77-TC Pelican"
@@ -85,6 +94,8 @@
 	takeoff_sound = 'code/modules/halo/shuttles/pelican_takeoff.ogg'
 
 	comp_prof = /datum/component_profile/pelican
+
+	ammo_containers = newlist(/obj/item/ammo_magazine/pelican_hmg)
 
 	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
 	vehicle_carry_size = ITEM_SIZE_VEHICLE
@@ -115,6 +126,8 @@
 
 	comp_prof = /datum/component_profile/pelican/urf
 
+	ammo_containers = newlist(/obj/item/ammo_magazine/pelican_chaingun)
+
 	light_color = "#FEFFE1"
 
 	spawn_datum = /datum/mobile_spawn/innie
@@ -128,7 +141,7 @@
 
 /datum/component_profile/pelican/urf
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)
-	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/innie)
+	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/urf)
 
 /obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie
 	name = "40mm Chain-Gun"
@@ -137,12 +150,16 @@
 	icon_state = "chaingun_obj"
 	item_state = "chaingun_obj"
 
-	projectile_fired = /obj/item/projectile/bullet/a762_ap
+	magazine_type = /obj/item/ammo_magazine/pelican_chaingun
 
 	fire_delay = 5.5 SECONDS
 
 	burst = 3
 
+/obj/item/ammo_magazine/pelican_chaingun
+	max_ammo = 150
+	caliber = "a762"
+	ammo_type = /obj/item/ammo_casing/a762_ap
 
 /obj/vehicles/air/pelican/civ
 	desc = "A civilian pelican lacking in both weapons and armor."
@@ -169,30 +186,10 @@
 	faction = "innie"
 	occupants = list(13,1)
 
-	comp_prof = /datum/component_profile/pelican/innie
+	comp_prof = /datum/component_profile/pelican/urf
 
 	light_color = "#FEFFE1"
 
 /obj/vehicles/air/pelican/innie/update_object_sprites()
 	. = ..()
 	overlays += image(icon,"innie_overlay")
-
-/obj/item/vehicle_component/health_manager/pelican/innie
-	resistances = list("brute"=25,"burn"=20,"emp"=35)
-
-/datum/component_profile/pelican/innie
-	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)
-	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/innie)
-
-/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie
-	name = "40mm Chain-Gun"
-
-	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
-	icon_state = "chaingun_obj"
-	item_state = "chaingun_obj"
-
-	projectile_fired = /obj/item/projectile/bullet/a762_ap
-
-	fire_delay = 2.5 SECONDS
-
-	burst = 7

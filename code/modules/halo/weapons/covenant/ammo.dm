@@ -60,9 +60,10 @@
 	icon_state = "carbine_casing"
 	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
-	tracer_delay_time = 1.25 SECONDS
+	tracer_delay_time = 1.5 SECONDS
 	penetrating = 2
 	invisibility = 101
+	shield_damage = 210
 
 /obj/item/projectile/bullet/covenant/beamrifle/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
@@ -264,6 +265,7 @@
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
 	max_track_steps = 3
+	shield_damage = 50
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
@@ -297,6 +299,7 @@
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
 	embed = 1
+	shield_damage = 200
 
 /obj/item/projectile/bullet/fuel_rod/on_impact(var/atom/A)
 	. = ..()

@@ -3,6 +3,7 @@
 	name = "Fuel Rod Bolt"
 
 	damage = 50
+	shield_damage = 200
 
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"

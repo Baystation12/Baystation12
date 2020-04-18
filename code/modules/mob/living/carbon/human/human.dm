@@ -162,6 +162,8 @@
 		else
 			loss_val = 0.05
 		temp.take_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
+		degrade_affected_armor(b_loss*loss_val,BRUTE,temp)
+		degrade_affected_armor(f_loss*loss_val,BURN,temp)
 
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.

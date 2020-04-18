@@ -359,8 +359,10 @@
 	var/projtype_use = projectiletype
 	var/projsound_use = projectilesound
 	if(using_vehicle_gun && !v.guns_disabled)
-		projtype_use = using_vehicle_gun.projectile_fired
-		projsound_use = using_vehicle_gun.fire_sound
+		var/obj/item/ammo_casing/casing = using_vehicle_gun.mag_use.stored_ammo[1]
+		if(casing)
+			projtype_use = casing.projectile_type
+			projsound_use = using_vehicle_gun.fire_sound
 
 	var/obj/item/projectile/A = new projtype_use(user:loc)
 	A.permutated += user:loc

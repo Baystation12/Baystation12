@@ -19,7 +19,7 @@
 	scoped_accuracy = 7
 	accuracy = -5
 	screen_shake = 0
-	fire_delay = 10
+	fire_delay = 15
 	burst = 1
 	wielded_item_state = "SRS99-wielded"
 	w_class = ITEM_SIZE_HUGE

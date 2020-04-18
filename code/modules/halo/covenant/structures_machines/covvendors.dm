@@ -184,12 +184,13 @@
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6
 		,/obj/item/weapon/pickaxe/plasma_drill = 1,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 12,/obj/item/weapon/pinpointer/artifact = 1)
+
 /obj/machinery/vending/armory/covenant/unggoy/heavy // Equipment for Unggoy
 	name = "Covenant - Unggoy Heavy Vendor"
 	desc = "Storage for Covenant Kig-Yar equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 3,/obj/item/turret_deploy_kit/plasturret = 2)
+	products = list(/obj/item/weapon/gun/energy/plasmarepeater = 1,/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 3,/obj/item/turret_deploy_kit/plasturret = 2)
 
 /obj/machinery/vending/armory/covenant/sangheili/food
 	name = "Covenant - Sangheili Food Vendor"
