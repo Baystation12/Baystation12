@@ -2886,16 +2886,18 @@
 	if(alien == IS_DIONA)
 		return
 
-	if(M.chem_doses[type] > 1)
-		M.adjustToxLoss(10 * removed)
-	if(M.chem_doses[type] > 10 && ishuman(M))
+	if(M.chem_doses[type] < 5)
+		M.adjustToxLoss(5 * removed)
+	if(M.chem_doses[type] > 5 && ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
-		if (L && istype(L))
-			if(M.chem_doses[type] < 5)
-				L.take_internal_damage(10 * removed, 0)
+		if (istype(L))
+			if(M.chem_doses[type] < 10)
+				L.take_internal_damage(2 * removed, 0)
+				M.adjustToxLoss(5 * removed)
 			else
-				L.take_internal_damage(100, 0)
+				L.take_internal_damage(5 * removed, 0)
+				M.adjustToxLoss(10 * removed)
 
 /datum/reagent/ethanol/pinacolada
 	name = "Pina Colada"
