@@ -36,7 +36,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		var/list/archivedwarrants = list()
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			var/charges = W.fields["charges"]
-			if(lentext(charges) > 50)
+			if(length(charges) > 50)
 				charges = copytext(charges, 1, 50) + "..."
 			var/warrant = list(
 			"warrantname" = W.fields["namewarrant"],

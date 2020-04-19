@@ -91,9 +91,9 @@
 			var/spawn_type = pop(spawning_types)
 			var/obj/spawned_obj = new spawn_type(src.loc)
 			if(source_material)
-				if(lentext(source_material.name) < MAX_MESSAGE_LEN)
+				if(length(source_material.name) < MAX_MESSAGE_LEN)
 					spawned_obj.SetName("[source_material] " +  spawned_obj.name)
-				if(lentext(source_material.desc) < MAX_MESSAGE_LEN * 2)
+				if(length(source_material.desc) < MAX_MESSAGE_LEN * 2)
 					if(spawned_obj.desc)
 						spawned_obj.desc += " It is made of [source_material]."
 					else

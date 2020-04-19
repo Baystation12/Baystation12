@@ -28,7 +28,7 @@ var/global/list/cached_icons = list()
 
 /obj/item/weapon/reagent_containers/glass/paint/Initialize()
 	. = ..()
-	if(paint_hex && lentext(paint_hex) > 0)
+	if(paint_hex && length(paint_hex) > 0)
 		reagents.add_reagent(/datum/reagent/paint, volume, paint_hex)
 		update_icon()
 
