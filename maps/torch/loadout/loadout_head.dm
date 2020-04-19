@@ -17,6 +17,12 @@
 	berets["border security beret"] = /obj/item/clothing/head/beret/solgov/borderguard
 	gear_tweaks += new/datum/gear_tweak/path(berets)
 
+/datum/gear/head/emb
+	display_name = "Emergency Management Bureau hat"
+	description = "A cap denoting service in the Emergency Management Bureau."
+	path = /obj/item/clothing/head/soft/solgov/emb
+	allowed_branches = SOLGOV_BRANCHES
+
 /datum/gear/head/veteranhat
 	display_name = "veteran hat"
 	path = /obj/item/clothing/head/soft/solgov/veteranhat

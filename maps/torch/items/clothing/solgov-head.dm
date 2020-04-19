@@ -347,6 +347,15 @@
 	desc = "An SCG Fleet beret carrying insignia of Fifth Fleet, the Quick Reaction Force, recently formed and outfited with last tech. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_navy_fifth"
 
+//misc
+
+/obj/item/clothing/head/soft/solgov/emb
+	name = "\improper EMB hat"
+	desc = "It's a head cover denoting service in the Emergency Management Bureau."
+	icon_state = "emb_cap"
+	icon = 'maps/torch/icons/obj/obj_head_solgov.dmi'
+	item_icons = list(slot_head_str = 'maps/torch/icons/mob/onmob_head_solgov.dmi')
+
 //ushanka
 
 /obj/item/clothing/head/ushanka/solgov
