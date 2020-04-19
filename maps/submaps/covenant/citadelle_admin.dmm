@@ -1,0 +1,103 @@
+"aa" = (/turf/unsimulated/floor/rock4,/area/space)
+"ab" = (/turf/simulated/wall/covenant,/area/space)
+"ac" = (/obj/machinery/door/airlock/multi_tile/covenant{name = "Citadelle"},/turf/simulated/floor/covenant,/area/space)
+"ae" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/space)
+"af" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant,/area/space)
+"ag" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant,/area/space)
+"ah" = (/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant,/area/space)
+"ai" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant,/area/space)
+"aj" = (/obj/machinery/door/airlock/covenant{name = "Hall"},/turf/simulated/floor/covenant,/area/space)
+"ak" = (/obj/machinery/door/airlock/covenant{name = "Temple"},/turf/simulated/floor/covenant,/area/space)
+"al" = (/obj/structure/closet/covenant,/turf/simulated/floor/covenant,/area/space)
+"am" = (/obj/structure/closet/crate/covenant,/turf/simulated/floor/covenant,/area/space)
+"ao" = (/obj/machinery/chemical_dispenser/full/covenant,/turf/simulated/floor/covenant,/area/space)
+"ap" = (/obj/vehicles/ghost{icon_state = "base"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"aq" = (/obj/machinery/door/airlock/covenant{name = "Warehouse"},/turf/simulated/floor/covenant,/area/space)
+"ar" = (/obj/machinery/door/airlock/covenant{name = "Factory"},/turf/simulated/floor/covenant,/area/space)
+"as" = (/obj/structure/table/marble,/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/wrench/covenant,/obj/item/weapon/screwdriver/covenant,/obj/item/device/multitool/covenant,/obj/item/weapon/crowbar/covenant,/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant,/area/space)
+"at" = (/obj/structure/table/marble,/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/obj/item/stack/material/nanolaminate/fifty,/turf/simulated/floor/covenant,/area/space)
+"au" = (/obj/structure/table/marble,/obj/item/weapon/wirecutters/covenant,/obj/item/weapon/weldingtool/covenant,/obj/item/weapon/wrench/covenant,/obj/item/weapon/screwdriver/covenant,/obj/item/device/multitool/covenant,/obj/item/weapon/crowbar/covenant,/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant,/area/space)
+"av" = (/turf/simulated/floor/covenant,/area/space)
+"aw" = (/obj/vehicles/wraith{icon_state = "wraith"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"ax" = (/obj/structure/energybarricade{icon_state = "3"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"ay" = (/obj/structure/weapon_rack,/turf/simulated/floor/covenant,/area/space)
+"az" = (/obj/structure/energybarricade{icon_state = "3"; dir = 8},/turf/simulated/floor/covenant,/area/space)
+"aA" = (/obj/machinery/squad_camera_console/covenant,/turf/simulated/floor/covenant,/area/space)
+"aB" = (/obj/structure/energybarricade{icon_state = "3"; dir = 4},/turf/simulated/floor/covenant,/area/space)
+"aC" = (/obj/structure/energybarricade,/turf/simulated/floor/covenant,/area/space)
+"aD" = (/obj/machinery/light/covenant/west,/obj/structure/closet/covenant,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/covenant,/area/space)
+"aE" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/pickaxe/plasma_drill,/turf/simulated/floor/covenant,/area/space)
+"aF" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant,/area/space)
+"aG" = (/obj/structure/closet/covenant,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/covenant,/area/space)
+"aH" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/plasturret_boxmag,/turf/simulated/floor/covenant,/area/space)
+"aI" = (/obj/machinery/portable_atmospherics/canister/oxygen/prechilled{icon_state = "black"; name = "\improper Covenant Canister: \[O2 (Cryo)]"},/turf/simulated/floor/covenant,/area/space)
+"aJ" = (/obj/machinery/atmospherics/portables_connector,/obj/machinery/portable_atmospherics/canister/oxygen/prechilled{icon_state = "black"; name = "\improper Covenant Canister: \[O2 (Cryo)]"},/turf/simulated/floor/covenant,/area/space)
+"aK" = (/obj/machinery/atmospherics/unary/cryo_cell/covenant,/turf/simulated/floor/covenant,/area/space)
+"aL" = (/obj/structure/bed/covenant,/turf/simulated/floor/covenant,/area/space)
+"aM" = (/obj/machinery/light/covenant/east,/obj/structure/closet/crate/covenant,/obj/item/clothing/gloves/thick/sangheili/arbiter,/obj/item/clothing/head/helmet/sangheili/arbiter,/obj/item/clothing/mask/sangheili/arbiter,/obj/item/clothing/shoes/sangheili/arbiter,/obj/item/clothing/suit/armor/special/combatharness/arbiter,/obj/item/clothing/under/covenant/sangheili,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/turf/simulated/floor/covenant,/area/space)
+"aN" = (/obj/machinery/light/covenant/north,/obj/structure/closet/covenant,/turf/simulated/floor/covenant,/area/space)
+"aO" = (/obj/structure/closet/covenant,/obj/item/stack/material/glass/fifty,/turf/simulated/floor/covenant,/area/space)
+"aP" = (/obj/structure/closet/crate/covenant,/obj/item/stack/material/nanolaminate/ten,/turf/simulated/floor/covenant,/area/space)
+"aQ" = (/obj/machinery/atmospherics/pipe/simple/hidden{icon_state = "intact"; dir = 5},/turf/simulated/floor/covenant,/area/space)
+"aR" = (/obj/machinery/atmospherics/pipe/manifold/hidden,/turf/simulated/floor/covenant,/area/space)
+"aS" = (/obj/machinery/atmospherics/pipe/simple/hidden{icon_state = "intact"; dir = 9},/turf/simulated/floor/covenant,/area/space)
+"aT" = (/mob/living/bot/cleanbot/covenant,/turf/simulated/wall/covenant,/area/space)
+"aU" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/obj/item/ammo_magazine/needles,/turf/simulated/floor/covenant,/area/space)
+"aV" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,/turf/simulated/floor/covenant,/area/space)
+"aW" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant,/area/space)
+"aX" = (/obj/structure/closet/covenant,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/obj/item/ammo_magazine/rifleneedlepack,/turf/simulated/floor/covenant,/area/space)
+"aY" = (/obj/structure/closet/crate/covenant,/obj/item/ammo_magazine/type51mag,/turf/simulated/floor/covenant,/area/space)
+"aZ" = (/obj/structure/covenant_comms_tower,/turf/simulated/floor/covenant,/area/space)
+"ba" = (/obj/structure/table/marble,/obj/item/squad_manager/covenant,/turf/simulated/floor/covenant,/area/space)
+"bb" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"bc" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"bd" = (/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant,/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"be" = (/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant,/area/space)
+"bf" = (/obj/structure/closet/crate/covenant,/obj/item/clothing/head/helmet/kigyar/skirmisher/commando,/obj/item/clothing/under/kigyar,/obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando,/obj/item/clothing/shoes/skirmisher/commando,/obj/item/clothing/suit/armor/special/skirmisher/commando,/turf/simulated/floor/covenant,/area/space)
+"bg" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bh" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bi" = (/obj/structure/repair_bench/cov,/obj/item/weapon/melee/energy/elite_sword/dagger,/turf/simulated/floor/covenant,/area/space)
+"bj" = (/obj/structure/repair_bench/cov,/turf/simulated/floor/covenant,/area/space)
+"bk" = (/obj/structure/repair_bench/cov,/obj/item/clothing/head/helmet/kigyar/skirmisher/commando,/turf/simulated/floor/covenant,/area/space)
+"bl" = (/obj/machinery/light/covenant/south,/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant,/turf/simulated/floor/covenant,/area/space)
+"bm" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bn" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 1},/turf/simulated/floor/covenant,/area/space)
+"bo" = (/obj/machinery/light/covenant/west,/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/turf/simulated/floor/covenant,/area/space)
+"bp" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/beam_rifle,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type31needlerifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/turf/simulated/floor/covenant,/area/space)
+"bq" = (/obj/structure/grille,/obj/structure/window/reinforced/projresist/covenant,/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 8},/obj/structure/window/reinforced/projresist/covenant{icon_state = "window"; dir = 4},/turf/simulated/floor/covenant,/area/space)
+"br" = (/obj/structure/closet/crate/covenant,/obj/item/weapon/gun/energy/beam_rifle,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/energy/plasmapistol,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/needler,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type51carbine,/obj/item/weapon/gun/projectile/type31needlerifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/gun/energy/plasmarifle,/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/plasma,/turf/simulated/floor/covenant,/area/space)
+"bs" = (/obj/structure/table/marble,/turf/simulated/floor/covenant,/area/space)
+"bt" = (/obj/structure/table/marble,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/covenant,/area/space)
+
+(1,1,1) = {"
+aaababababababababababaaaaabacavabaaaaababababababababababaa
+ababaDaEaEaFalamaGaHabaaababavavababaaabaIaJaKaJaIabaLaMabab
+abaNaOamaPaGaHaEamaGabaaabagavavagabaaabavaQaRaSavabavavagab
+abaOamahavavavavavavabaaabavaxaxavabaaabavavavavavabaTavavab
+abaUaPavavavavavavavabaaabavavavavabaaabaVavavavavavababakab
+abaOaWavavavavaiavababaaabavavavavabaaababavaiavavavavavavab
+abaPaPavavavababaqabaaaaabaxavavaxabaaaaabakababavavavavavab
+abaEaGavavafabavavababababavavavavababababavavabaeavavavavab
+abaXaYavavavaqavavavabalalavaxaxavamalabavavavakavavavavavab
+abaOaYavavabababavavagavavavavavavavavagavavabababaobsavbtab
+ababababababaaababaeavavavavaZavavavavavafababaaabababababab
+aaaaaaaaaaaaaaabamavavayavavavavavavayavavamabaaaaaaaaaaaaaa
+aaabababababababamavavavavaiavavaiavavavavamabababababababaa
+ababaeavavavazavavavavavafabbaaAabaeavavavavavaBavavavafabab
+avavavazavavavavazavavavavaAbbbcbaavavavavaBavavavavaBavavav
+avavavazavavavavazavavavavbabdbeaAavavavavaBavavavavaBavavav
+ababaeavavavazavavavavavafabaAbaabaeavavavavavaBavavavafabab
+aaabababababababalavavavavagavavagavavavavalabababababababaa
+aaaaaaaaaaaaaaabalavavayavavavavavavayavavamabaaaaaaaaaaaaaa
+ababababababaaababaeavavavavaZavavavavavafababaaabababababab
+abbfavavavabababavavaiavavavavavavavavaiavavabababapavapavab
+abbgbhavavavajavavavabamalavaCaCavamamabavavavaravavavavavab
+abbfavavavbiabavavababababavavavavababababavavabasavavavavav
+abbgbhavavbjababajabaaaaabaCavavaCabaaaaabarababatavavavavav
+abbfavavavavbkbjavababaaabavavavavabaaababavauatahavavavavav
+abbgbhavavavavavavavabaaabavavavavabaaabavavavavavavavavavab
+abbfavavavavavavavavabaaabavaCaCavabaaabavavavavavavavavavab
+abblbmavbnavbnavbnavabaaabaiavavaiabaaabavavavavavavavavaiab
+ababbobpbqbrbqbpbqbpabaaababavavababaaabawavavapavawavafabab
+aaababababababababababaaaaabacavabaaaaababababababababababaa
+"}

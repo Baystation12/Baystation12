@@ -1,0 +1,61 @@
+"a" = (/turf/unsimulated/wall,/area/submaps/covenant/hidden_mine)
+"b" = (/turf/simulated/mineral/random,/area/submaps/covenant/hidden_mine)
+"c" = (/obj/structure/boulder,/turf/simulated/floor/planet/dirt,/area/submaps/covenant/hidden_mine)
+"d" = (/turf/simulated/floor/planet/dirt,/area/submaps/covenant/hidden_mine)
+"e" = (/turf/simulated/floor/exoplanet/grass,/area/submaps/covenant/hidden_mine)
+"f" = (/obj/item/remains/xeno,/turf/simulated/floor/planet/dirt,/area/submaps/covenant/hidden_mine)
+"g" = (/obj/item/weapon/pickaxe/plasma_drill,/turf/simulated/floor/planet/dirt,/area/submaps/covenant/hidden_mine)
+"h" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 9},/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"i" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 1},/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"j" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 5},/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"k" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 8},/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"l" = (/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"m" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 4},/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"n" = (/obj/structure/ore_box/covenant,/turf/simulated/floor/exoplanet/grass,/area/submaps/covenant/hidden_mine)
+"o" = (/obj/structure/ore_box/covenant,/turf/simulated/floor/planet/dirt,/area/submaps/covenant/hidden_mine)
+"p" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 10},/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"q" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"r" = (/obj/effect/floor_decal/industrial/warning{icon_state = "warning"; dir = 6},/turf/simulated/floor/plating,/area/submaps/covenant/hidden_mine)
+"s" = (/obj/machinery/telecomms_jammers/covenant,/turf/simulated/floor/exoplanet/grass,/area/submaps/covenant/hidden_mine)
+"t" = (/obj/structure/closet/crate/covenant,/turf/simulated/floor/exoplanet/grass,/area/submaps/covenant/hidden_mine)
+"u" = (/turf/simulated/wall/covenant,/area/submaps/covenant/hidden_mine)
+"v" = (/turf/unsimulated/floor/covenant,/area/submaps/covenant/hidden_mine)
+"w" = (/obj/item/device/multitool/covenant,/turf/unsimulated/floor/covenant,/area/submaps/covenant/hidden_mine)
+"x" = (/obj/item/clothing/head/welding/covenant,/obj/structure/table/marble,/turf/unsimulated/floor/covenant,/area/submaps/covenant/hidden_mine)
+"y" = (/obj/structure/table/marble,/turf/unsimulated/floor/covenant,/area/submaps/covenant/hidden_mine)
+"z" = (/obj/item/weapon/cell/covenant,/obj/effect/decal/cleanable/blood/gibs/robot,/turf/simulated/floor/planet/dirt,/area/submaps/covenant/hidden_mine)
+"A" = (/obj/structure/table/marble,/turf/simulated/floor/exoplanet/grass,/area/submaps/covenant/hidden_mine)
+"B" = (/obj/item/remains/human,/obj/item/clothing/suit/armor/special/unggoy_combat_harness/boulderclan,/turf/simulated/floor/planet/dirt,/area/submaps/covenant/hidden_mine)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbcccccdbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccddba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddbbbbbbbbbbbbbbbbdddbbbbbbbbbccccccccccdddbba
+abbbbbbbbebeeebbbbbeebbbbbbbbbdddddddbbbbbbbbbbbbbbbddfdbbbbdddccddccddddddddbba
+abbbbbbbbeeeeeeeeeeeebbbbbbbbbdddddfddddddbbbbbbbbbbdgddddddddddddddddcbddbbbbba
+abbbbbeeeeeeeeeeeeeeeebbbbbbbddddbbdddddddddddbbbbbbbdddddddddddddbdbbbbbbbbbbba
+abbbbeeeeeeeeeeeeeeeeebbbbbbbdddddbddddddddddddbbbbbdddddddddddddbbbbbbbbbbbbbba
+abbbbeeehiiiiiiiiiijeeebbbbbbbddddddddddbbdddddddbbdddddddbddbbbbbbbbbbbbbbbbbba
+abbbbeeekllllllllllmeeenbbbbbbbddddddddbbbbddddddddddddcbbbbbbbbbbbbbbbbbbbbbbba
+abbeeeeekllllllllllmeeeebbbbbbbbbdddbbbbbbbbddddddddddccbbbbbbbbbbbbbbbbbbbbbbba
+abbeeeeekllllllllllmeeeeobbbbbbbbbbbbbbbbbbbbddddddddcccbbbbbbbbbbbbbbbbbbbbbbba
+abbbeeeekllllllllllmeeeeddddddbbbbbbbbbbbbbbbbbbodddccbbbbbbbbbbbbbbbbbbbbbbbbba
+abbbeeeepqqqqqqqqqqreeeddddddddddbbbbbbbbbbbbbbbbdddcccbbbbbbbbbbbbbbbbbbbbbbbba
+abbbbbeeeeeeeeeeeeeeeeedddddddddddddddddddgbbbbbddddcbbbbbbbbbbbbbbbbbbbccbbbbba
+abbbbeeeeeeeeeeeeeeeeeeddddddddddddddddddddddddddddbbbbbbbbbbbbbbbbbbbddccbbbbba
+abbbeeeeeeeeeeeeeeeebbbbbbbdddddddddddddddddddddddddbbbbbbbbbbbbbbbbccdddccbbbba
+abbbeeeeeeseeeeeeebbbbbbbbbbbbddddddddddddddddddddddbbbbbbbbbbbbbbcccccddccbbbba
+abbbeeeeeeeeeeetbbbbbbbbbbbbbbbbbbbbbbdddddddddddddddbbbbbbbbbbbbccccdddddcbbbba
+abbbbbeeeeeeeeetbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbddddddbbbbbbbbcccccdddddddddbbba
+abbbbbuvvvvvwvubbbbbbbbbbbbddbbbbbbbbbbbbbbbbbbbbbbdddbbbbbbdccccdcdddbbbdddbbba
+abbbbbbvxvvyyybbbbbbbbbbbbbbdzddddbbbbbbbbbbbbbbbbbbdddbbbdddddccdddbbbbbdddbbba
+abbbbbbbbAbbbbbbbbbbbbbbbbbdddddddddcccbbbbbbbbbddddddddddddddddddbbbbbbbddddbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbdddddcccccccccccbgdddddddddddddddbbbbbbbbbbbddddbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbdddcccccccccBcccddodddddddddbbbbbbbbbbbbbbbdddbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccccccccccccdddddddddbbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbccbbbbbbbbbbbbdbbbbbbbbbbbbbbbbbbbbbbbba
+abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbba
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

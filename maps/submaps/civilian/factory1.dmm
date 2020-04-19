@@ -1,69 +1,69 @@
-"a" = (/turf/space,/area/planets/Geminus/indoor/quest_instance)
-"b" = (/turf/unsimulated/wall,/area/planets/Geminus/indoor/quest_instance)
-"c" = (/obj/machinery/conveyor_switch/oneway{id = "instance_factory_conveyor"; name = "mining conveyor"},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"d" = (/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"e" = (/obj/machinery/status_display{pixel_y = 32},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"f" = (/turf/simulated/wall,/area/planets/Geminus/indoor/quest_instance)
-"g" = (/obj/machinery/conveyor{dir = 2; id = "instance_factory_conveyor"},/obj/structure/plasticflaps/mining,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"h" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"i" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"j" = (/obj/machinery/status_display{pixel_x = 32},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"k" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
-"l" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
-"m" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"n" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"o" = (/obj/machinery/status_display{pixel_x = -32},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"p" = (/obj/machinery/pipedispenser/disposal,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"q" = (/obj/machinery/status_display{layer = 4; pixel_x = 0; pixel_y = 32},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"r" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
-"s" = (/obj/vehicle/train/cargo/engine,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
-"t" = (/obj/vehicle/train/cargo/trolley,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light{dir = 4},/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
-"u" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"v" = (/obj/machinery/mineral/unloading_machine,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"w" = (/obj/vehicle/train/cargo/trolley,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
-"x" = (/obj/machinery/status_display{pixel_y = -32},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"y" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"z" = (/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
+"a" = (/turf/space,/area/space)
+"b" = (/turf/unsimulated/wall,/area/submaps/civilian/orbital_factory)
+"c" = (/obj/machinery/conveyor{dir = 2; id = "instance_factory_conveyor"},/obj/effect/landmark/instance_loot,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"d" = (/obj/machinery/conveyor{dir = 2; id = "instance_factory_conveyor"},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"e" = (/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"f" = (/obj/machinery/status_display{pixel_y = 32},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"g" = (/turf/simulated/wall,/area/submaps/civilian/orbital_factory)
+"h" = (/obj/machinery/conveyor{dir = 2; id = "instance_factory_conveyor"},/obj/structure/plasticflaps/mining,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"i" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"j" = (/obj/effect/landmark/instance_boss,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"k" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"l" = (/obj/machinery/status_display{pixel_x = 32},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"m" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
+"n" = (/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
+"o" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"p" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"q" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"r" = (/obj/machinery/status_display{pixel_x = -32},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"s" = (/obj/machinery/pipedispenser/disposal,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"t" = (/obj/machinery/conveyor_switch/oneway{id = "instance_factory_conveyor"; name = "mining conveyor"},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"u" = (/obj/machinery/status_display{layer = 4; pixel_x = 0; pixel_y = 32},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"v" = (/obj/effect/floor_decal/industrial/outline/yellow,/obj/structure/closet/crate,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
+"w" = (/obj/vehicle/train/cargo/engine,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
+"x" = (/obj/vehicle/train/cargo/trolley,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light{dir = 4},/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
+"y" = (/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"z" = (/obj/machinery/mineral/unloading_machine,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
 "A" = (/turf/simulated/floor/plating,/area/shuttle/offsite_berth_transport)
-"B" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/dark,/area/planets/Geminus/indoor/quest_instance)
-"C" = (/obj/structure/closet/crate/trashcart,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
-"D" = (/obj/structure/closet/crate/trashcart,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/planets/Geminus/indoor/quest_instance)
+"B" = (/obj/vehicle/train/cargo/trolley,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
+"C" = (/obj/machinery/status_display{pixel_y = -32},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"D" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
 "E" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor,/area/shuttle/offsite_berth_transport)
 "F" = (/obj/effect/shuttle_landmark/offsite_berth_transport,/turf/simulated/floor,/area/shuttle/offsite_berth_transport)
-"G" = (/obj/machinery/conveyor{dir = 2; id = "instance_factory_conveyor"},/obj/effect/landmark/instance_loot,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"H" = (/obj/effect/landmark/instance_boss,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"I" = (/obj/effect/landmark/instance_defender,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
-"J" = (/obj/machinery/conveyor{dir = 2; id = "instance_factory_conveyor"},/turf/simulated/floor/plating,/area/planets/Geminus/indoor/quest_instance)
+"G" = (/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/turf/simulated/floor/plating,/area/submaps/civilian/orbital_factory)
+"H" = (/obj/machinery/door/airlock/halo,/turf/simulated/floor/tiled/dark,/area/submaps/civilian/orbital_factory)
+"I" = (/obj/structure/closet/crate/trashcart,/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
+"J" = (/obj/structure/closet/crate/trashcart,/obj/effect/floor_decal/industrial/outline/yellow,/obj/machinery/light,/turf/simulated/floor/decor{tag = "icon-old_tile_black_dirt"; icon_state = "old_tile_black_dirt"},/area/submaps/civilian/orbital_factory)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaabbbaaaaaaaaaaaaaaaaaaa
-aaaaaaaabGbaaaaaaaaaaaaaaaaaaa
-aaaaaaaabJbaaaaaaaaaaaaaaaaaaa
-bbbbbbbbbJbbbbbbbbbaaaaaaaaaaa
-bddddedffgffdeddddbaaaaaaaaaaa
-bddddddddJhfddddddbaaaaaaaaaaa
-bddHdddidJjfkldIddbaaaaaaaaaaa
-bmddIddidGdfkldddnbaaaaaaaaaaa
-bddddddfdJddddddddbaaaaaaaaaaa
-bdddddnffgffddddddbaaaaaaaaaaa
-bddddddddJhfmdddddbaaaaaaaaaaa
-bddddddfdGdiddddddbaaaaaaaaaaa
-bddddddfoJdiddddddbaaaaaaaaaaa
-bddddlkfdJddddIddpbaaaaaaaaaaa
-bddddlkffgfffdddbbbaaaaaaaaaaa
-bddddddcqGhrfddsbaaaaaaaaaaaaa
-bmdddddddJdrfddtbaaaaaaaaaaaaa
-bdddIddduvdrfddwbaaaaaaaaaaaaa
-bddddddddddddddwbaaaaaaaaaaaaa
-bdddddddxydddddzbaaaaaaaaaaaaa
-bddddddbbbbbbbbbbaaaaaaaaaaaaa
-bddddddbAEEEEEEEbaaaaaaaaaaaaa
-bddddddbEEEEEEEEbaaaaaaaaaaaaa
-bddddddBEEEEEEEEbaaaaaaaaaaaaa
-bddddddbEEEEEEEEbaaaaaaaaaaaaa
-bCCDsddbFEEEEEEEbaaaaaaaaaaaaa
+aaaaaaaabcbaaaaaaaaaaaaaaaaaaa
+aaaaaaaabdbaaaaaaaaaaaaaaaaaaa
+bbbbbbbbbdbbbbbbbbbaaaaaaaaaaa
+beeeefegghggefeeeebaaaaaaaaaaa
+beeeeeeeedigeeeeeebaaaaaaaaaaa
+beejeeekedlgmneoeebaaaaaaaaaaa
+bpeeoeekecegmneeeqbaaaaaaaaaaa
+beeeeeegedeeeeeeeebaaaaaaaaaaa
+beeeeeqgghggeeeeeebaaaaaaaaaaa
+beeeeeeeedigpeeeeebaaaaaaaaaaa
+beeeeeegecekeeeeeebaaaaaaaaaaa
+beeeeeegrdekeeeeeebaaaaaaaaaaa
+beeeenmgedeeeeoeesbaaaaaaaaaaa
+beeeenmgghgggeeebbbaaaaaaaaaaa
+beeeeeetucivgeewbaaaaaaaaaaaaa
+bpeeeeeeedevgeexbaaaaaaaaaaaaa
+beeeoeeeyzevgeeBbaaaaaaaaaaaaa
+beeeeeeeeeeeeeeBbaaaaaaaaaaaaa
+beeeeeeeCDeeeeeGbaaaaaaaaaaaaa
+beeeeeebbbbbbbbbbaaaaaaaaaaaaa
+beeeeeebAEEEEEEEbaaaaaaaaaaaaa
+beeeeeebEEEEEEEEbaaaaaaaaaaaaa
+beeeeeeHEEEEEEEEbaaaaaaaaaaaaa
+beeeeeebEEEEEEEEbaaaaaaaaaaaaa
+bIIJweebFEEEEEEEbaaaaaaaaaaaaa
 bbbbbbbbbbbbbbbbbaaaaaaaaaaaaa
 "}
