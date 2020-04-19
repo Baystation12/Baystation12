@@ -2869,46 +2869,41 @@
 	glass_name = "coconut milk"
 	glass_desc = "Delicious milk from a coconut."
 
-/datum/reagent/drink/alien/qokkloa
+/datum/reagent/ethanol/alien/qokkloa
 	name = "Qokk'loa"
 	description = "An unrefined hallucinogenic substance, potent to humans and harmless to Skrell."
 	taste_description = "cold, slimey mushroom"
 	color = "#e700e7"
+	strength = 50
 
-/datum/reagent/drink/alien/qokkloa/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	glass_name = "qokk'loa"
+	glass_desc = "An unrefined hallucigenic substance, potent to humans and harmless to Skrell."
+
+/datum/reagent/ethanol/alien/qokkloa/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
 	if(alien == IS_SKRELL)
 		return
 	if(alien == IS_DIONA)
 		return
 
-	M.druggy = max(M.druggy, 30)
-
-	if(M.chem_doses[type] < 1)
-		M.apply_effect(3, STUTTER)
-		M.make_dizzy(5)
-		if(prob(5))
-			M.emote(pick("twitch", "giggle"))
-	else if(M.chem_doses[type] < 2)
-		M.apply_effect(3, STUTTER)
-		M.make_jittery(5)
-		M.make_dizzy(5)
-		M.druggy = max(M.druggy, 35)
-		if(prob(10))
-			M.emote(pick("twitch", "giggle"))
-	else
-		M.add_chemical_effect(CE_MIND, -1)
-		M.apply_effect(3, STUTTER)
-		M.make_jittery(10)
-		M.make_dizzy(10)
-		M.druggy = max(M.druggy, 40)
-		if(prob(15))
-			M.emote(pick("twitch", "giggle"))
+	if(M.chem_doses[type] < 5)
+		M.adjustToxLoss(5 * removed)
+	if(M.chem_doses[type] > 5 && ishuman(M))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[BP_HEART]
+		if (istype(L))
+			if(M.chem_doses[type] < 10)
+				L.take_internal_damage(2 * removed, 0)
+				M.adjustToxLoss(5 * removed)
+			else
+				L.take_internal_damage(5 * removed, 0)
+				M.adjustToxLoss(10 * removed)
 
 /datum/reagent/ethanol/pinacolada
 	name = "Pina Colada"
 	description = "A sweet cocktail of rum and pineapple."
 	taste_description = "refreshing tropical fruit"
-	color = "#619494"
+	color = "#f1fa56"
 	strength = 15
 
 	glass_name = "pina colada"
@@ -2919,7 +2914,9 @@
 	description = "Delicious Skrellian wine from refined qokk'loa."
 	taste_description = "a thick potion of mushroom, slime, and hard alcohol"
 	color = "#c76c4d"
-	strength = 1
+	strength = 100
+	druggy = 5
+
 	glass_name = "qokk'hrona"
 	glass_desc = "Delicious Skrellian wine from refined qokk'loa."
 
@@ -2931,6 +2928,9 @@
 	color = "#cd6139"
 	value = 0.1
 
+	glass_name = "cinnamon"
+	glass_desc = "Delicious ground cinnamon spice, why would you drink this?"
+
 /datum/reagent/ethanol/horchata
 	name = "Horchata"
 	description = "A delightful horchata de chufa."
@@ -2938,26 +2938,32 @@
 	color = "#f5ecb8"
 	strength = 40
 
+	glass_name = "horchata"
+	glass_desc = "A lovely looking horchata del chufa."
+
 /datum/reagent/oliveoil
 	name = "Olive Oil"
 	description = "Olive oil, an essential part of cooking."
 	taste_description = "grease"
 	color = "#cacf70"
 
+	glass_name = "olive oil"
+	glass_desc = "Oily."
+
 /datum/reagent/drink/affelerin
 	name = "Affelerin Nectar"
 	description = "A thick syrup-like nectar from the Affelerin, common across many desert worlds."
 	taste_description = "sweet, thick syrup"
-	color = "#44371f"
+	color = "#ac43e0"
 	glass_name = "affelerin nectar"
 	glass_desc = "A thick syrup-like nectar from the Affelerin, common across many desert worlds."
 
 /datum/reagent/ethanol/iridast
 	name = "Iridast Berry Juice"
-	description = "A intoxicating juice made from the Iridast Berry, common across human worlds."
+	description = "An intoxicating juice made from the Iridast Berry, common across human worlds."
 	taste_description = "incredible sweetness"
-	color = "#44371f"
+	color = "#fa68ff"
 	strength = 50
 
 	glass_name = "iridast berry juice"
-	glass_desc = "A intoxicating juice made from the Iridast Berry, common across human worlds."
+	glass_desc = "An intoxicating juice made from the Iridast Berry, common across human worlds."
