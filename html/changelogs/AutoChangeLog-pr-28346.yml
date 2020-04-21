@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "AI Upload has been updated to face EVA Storage instead of the main stairwell."
+  - maptweak: "Robotics control console has been moved from bridge storage to the AI Upload foyer."
