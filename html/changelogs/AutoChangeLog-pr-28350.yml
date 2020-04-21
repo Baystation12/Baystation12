@@ -1,0 +1,4 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - tweak: "Exosuit clamps now hold up to 5 items. Added shortcut to unload items by pressing Ctrl and then clicking on the clamp."
