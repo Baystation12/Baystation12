@@ -4,8 +4,9 @@
 	icon_state = "mech_clamp"
 	restricted_hardpoints = list(HARDPOINT_LEFT_HAND, HARDPOINT_RIGHT_HAND)
 	restricted_software = list(MECH_SOFTWARE_UTILITY)
-	var/obj/carrying
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
+	var/carrying_capacity = 5
+	var/list/obj/carrying = list()
 
 /obj/item/mech_equipment/clamp/resolve_attackby(atom/A, mob/user, click_params)
 	if(istype(A, /obj/structure/closet) && owner)
@@ -14,37 +15,46 @@
 
 /obj/item/mech_equipment/clamp/attack_hand(mob/user)
 	if(owner && LAZYISIN(owner.pilots, user))
-		if(!owner.hatch_closed && carrying)
+		if(!owner.hatch_closed && length(carrying))
+			var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
+			if(!chosen_obj)
+				return
 			if(!do_after(user, 20, owner)) return
-			if(user.put_in_active_hand(carrying))
-				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [carrying] from \the [src]."))
+			if(owner.hatch_closed || !chosen_obj) return
+			if(user.put_in_active_hand(chosen_obj))
+				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
 				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
-				carrying = null
+				carrying -= chosen_obj
 	. = ..()
 
 /obj/item/mech_equipment/clamp/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	. = ..()
 
-	if(. && !carrying)
+	if(.)
+		if(length(carrying) >= carrying_capacity)
+			to_chat(user, SPAN_WARNING("\The [src] is fully loaded!"))
+			return
 		if(istype(target, /obj))
-
-
 			var/obj/O = target
 			if(O.buckled_mob)
 				return
 			if(locate(/mob/living) in O)
-				to_chat(user,"<span class='warning'>You can't load living things into the cargo compartment.</span>")
+				to_chat(user, SPAN_WARNING("You can't load living things into the cargo compartment."))
 				return
 
 			if(O.anchored)
-				to_chat(user, "<span class='warning'>[target] is firmly secured.</span>")
+				to_chat(user, SPAN_WARNING("\The [target] is firmly secured."))
 				return
-
 
 			owner.visible_message(SPAN_NOTICE("\The [owner] begins loading \the [O]."))
 			if(do_after(owner, 20, O, 0, 1))
+				if(O in carrying || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
+					return
+				if(length(carrying) >= carrying_capacity)
+					to_chat(user, SPAN_WARNING("\The [src] is fully loaded!"))
+					return
 				O.forceMove(src)
-				carrying = O
+				carrying += O
 				owner.visible_message(SPAN_NOTICE("\The [owner] loads \the [O] into its cargo compartment."))
 				playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
 
@@ -69,23 +79,62 @@
 /obj/item/mech_equipment/clamp/attack_self(var/mob/user)
 	. = ..()
 	if(.)
-		if(!carrying)
-			to_chat(user, SPAN_WARNING("You are not carrying anything in \the [src]."))
-		else
-			owner.visible_message(SPAN_NOTICE("\The [owner] unloads \the [carrying]."))
-			playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
-			carrying.forceMove(get_turf(src))
-			carrying = null
+		drop_carrying(user, TRUE)
+
+/obj/item/mech_equipment/clamp/CtrlClick(mob/user)
+	if(owner)
+		drop_carrying(user, FALSE)
+	else
+		..()
+
+/obj/item/mech_equipment/clamp/proc/drop_carrying(var/mob/user, var/choose_object)
+	if(!length(carrying))
+		to_chat(user, SPAN_WARNING("You are not carrying anything in \the [src]."))
+		return
+	var/obj/chosen_obj = carrying[1]
+	if(choose_object)
+		chosen_obj = input(user, "Choose an object to set down.", "Clamp Claw") as null|anything in carrying
+	if(!chosen_obj)
+		return
+	if(chosen_obj.density)
+		for(var/atom/A in get_turf(src))
+			if(A != owner && A.density && !(A.atom_flags & ATOM_FLAG_CHECKS_BORDER))
+				to_chat(user, SPAN_WARNING("\The [A] blocks you from putting down \the [chosen_obj]."))
+				return
+
+	owner.visible_message(SPAN_NOTICE("\The [owner] unloads \the [chosen_obj]."))
+	playsound(src, 'sound/mecha/hydraulic.ogg', 50, 1)
+	chosen_obj.forceMove(get_turf(src))
+	carrying -= chosen_obj
+
+/obj/item/mech_equipment/clamp/get_hardpoint_status_value()
+	if(length(carrying) > 1)
+		return length(carrying)/carrying_capacity
+	return null
 
 /obj/item/mech_equipment/clamp/get_hardpoint_maptext()
-	if(carrying)
-		return carrying.name
+	if(length(carrying) == 1)
+		return carrying[1].name
+	else if(length(carrying) > 1)
+		return "Multiple"
 	. = ..()
 
 /obj/item/mech_equipment/clamp/uninstalled()
-	if(carrying)
-		carrying.dropInto(loc)
-		carrying = null
+	if(length(carrying))
+		for(var/obj/load in carrying)
+			var/turf/location = get_turf(src)
+			var/list/turfs = location.AdjacentTurfsSpace()
+			if(load.density)
+				if(turfs.len > 0)
+					location = pick(turfs)
+					turfs -= location
+				else
+					load.dropInto(location)
+					load.throw_at_random(FALSE, rand(2,4), 4)
+					location = null
+			if(location)
+				load.dropInto(location)
+			carrying -= load
 	. = ..()
 
 // A lot of this is copied from floodlights.
