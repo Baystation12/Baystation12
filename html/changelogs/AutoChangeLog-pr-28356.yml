@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "There is a now cancel button when you use the say/me verbs to close out of the window quickly."
