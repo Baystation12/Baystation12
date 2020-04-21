@@ -331,7 +331,11 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 	var/space = !istype(B)
 
 	if(!space)
-		if(min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || (direct && (equivalent_pressure(A.zone,B.zone) || times_fired == 0)))
+		// the ZONE_MIN_SIZE check here is a tradeoff to ensure that zones don't get too
+		// fragmented, causing airflow to slow to a crawl. this is far from ideal, and can in some
+		// cases cause large pressure differentials to instantly equalize with no airflow effects.
+		// this is the least bad of the options, for now.
+		if(direct && (min(A.zone.contents.len, B.zone.contents.len) < ZONE_MIN_SIZE || equivalent_pressure(A.zone,B.zone) || times_fired == 0))
 			merge(A.zone,B.zone)
 			return
 

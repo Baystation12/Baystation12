@@ -4,7 +4,7 @@
 #define ZONE_BLOCKED 2
 #define BLOCKED 3
 
-#define ZONE_MIN_SIZE 14 //zones with less than this many turfs will always merge, even if the connection is not direct
+#define ZONE_MIN_SIZE 14 //zones with less than this many turfs will always merge, even if their gas contents aren't equivalent
 
 #define CANPASS_ALWAYS 1
 #define CANPASS_DENSITY 2
