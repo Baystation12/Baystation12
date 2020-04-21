@@ -5,8 +5,6 @@
 	var/deploy_path = null
 	var/inflatable_health
 
-	atmos_canpass = CANPASS_DENSITY
-
 /obj/item/inflatable/afterattack(var/atom/A, var/mob/user)
 	..(A, user)
 	if(!deploy_path)
@@ -51,6 +49,7 @@
 	density = 1
 	anchored = 1
 	opacity = 0
+	atmos_canpass = CANPASS_DENSITY
 	icon = 'icons/obj/inflatable.dmi'
 	icon_state = "wall"
 
