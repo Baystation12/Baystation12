@@ -1,7 +1,7 @@
 /obj/effect/overmap/visitable/sector/exoplanet/shrouded
 	name = "shrouded exoplanet"
 	desc = "An exoplanet shrouded in a perpetual storm of bizzare, light absorbing particles."
-	color = "#3e3960"
+	color = "#783ca4"
 	planetary_area = /area/exoplanet/shrouded
 	rock_colors = list(COLOR_INDIGO, COLOR_DARK_BLUE_GRAY, COLOR_NAVY_BLUE)
 	plant_colors = list("#3c5434", "#2f6655", "#0e703f", "#495139", "#394c66", "#1a3b77", "#3e3166", "#52457c", "#402d56", "#580d6d")
