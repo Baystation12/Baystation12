@@ -40,7 +40,6 @@
 	slowdown =               -1
 	rarity_value =            3
 	gluttonous =              2
-	siemens_coefficient =     0
 	body_temperature =        null
 
 	breath_type =             GAS_METHYL_BROMIDE
