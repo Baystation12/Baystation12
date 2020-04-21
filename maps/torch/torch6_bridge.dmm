@@ -13166,7 +13166,7 @@
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/machinery/computer/robotics,
+/obj/machinery/computer/modular/preset/aislot/sysadmin,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "Hc" = (
