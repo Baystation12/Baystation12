@@ -1,0 +1,6 @@
+author: "Karlias"
+delete-after: True
+changes: 
+  - maptweak: "Fixed up the Skrell Shuttle walls."
+  - maptweak: "Added Autopsy Scanner, GPS and Gas Analysers to the Skrell Scout Ship."
+  - maptweak: "Added Emergency Oxygen Tanks and Gas Masks to the Skrell Scout Ship."
