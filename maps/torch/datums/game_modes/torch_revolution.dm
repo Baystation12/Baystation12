@@ -7,6 +7,8 @@
 								on Mars, Luna and other various worlds has spawned primetime scandals that dominate the 24/7 news cycle. Videolink interviews with Torch crew reveal morale is at an \
 								all time low. Rumors are spreading of an impending mutiny."
 	config_tag = "mutiny"
+	required_enemies = 4
+	required_players = 10
 
 /datum/antagonist/revolutionary
 	role_text = "Head Mutineer"
