@@ -182,7 +182,8 @@
 					S.SetName("dried [S.name]")
 					S.color = "#a38463"
 					stock_item(S)
-					remove_thing = TRUE
+					I.instances -= thing
+					I.amount--
 				else
 					var/D = S.dried_type
 					new D(get_turf(src))
