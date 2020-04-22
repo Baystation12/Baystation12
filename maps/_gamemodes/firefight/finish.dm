@@ -8,19 +8,15 @@
 	//check if the evac ship was destroyed
 	if(evac_stage > 1)
 		var/obj/structure/evac_ship/evac_ship = locate() in world
-		world << "/datum/game_mode/firefight/check_finished() 1"
 		if(!evac_ship || evac_ship.health <= 0)
-			world << "/datum/game_mode/firefight/check_finished() 2"
 			return 1
 
 		//evac has left! the round is over
 		if(world.time > time_evac_leave)
-			world << "/datum/game_mode/firefight/check_finished() 3"
 			return 1
 
 	//if the players are all dead
 	if(!player_faction.players_alive())
-		world << "/datum/game_mode/firefight/check_finished() 6"
 		return 1
 
 	//don't finish if there are still enemies left
