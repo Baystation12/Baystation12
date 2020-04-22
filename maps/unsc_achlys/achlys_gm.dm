@@ -46,7 +46,6 @@
 	populate_items_destroy()
 	populate_items_retrieve()
 	special_event_starttime = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
-	GLOB.flood_overmind = new /datum/npc_overmind/flood()
 
 /datum/game_mode/achlys/check_finished()
 	. = 0

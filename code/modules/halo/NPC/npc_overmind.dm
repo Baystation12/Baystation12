@@ -273,6 +273,7 @@ GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 	var/controlling_overmind = null
 
 /obj/structure/overmind_controller/Initialize()
+	GLOB.flood_overmind = new()
 	controlling_overmind =  GLOB.flood_overmind
 	GLOB.processing_objects |= GLOB.flood_overmind
 	GLOB.flood_overmind.overmind_active = 1
