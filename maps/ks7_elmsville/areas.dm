@@ -12,7 +12,9 @@
 		for(var/t in trange(1,create_at))
 			var/turf/adj_turf = t
 			if(adj_turf.loc != src)
-				new light_type (create_at)
+				var/obj/machinery/light/l = new light_type (create_at)
+				l.process()
+				GLOB.processing_objects -= l
 				break
 	return INITIALIZE_HINT_QDEL
 
