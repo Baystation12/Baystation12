@@ -90,18 +90,22 @@
 	title = "Kig-Yar"
 	total_positions = 11
 	outfit_type = /decl/hierarchy/outfit //nekked
+	whitelisted_species = list(/datum/species/kig_yar)
 
 /datum/job/first_contact_unggoy
 	title = "Unggoy"
 	total_positions = 7
 	outfit_type = /decl/hierarchy/outfit/fc_unggoy
+	whitelisted_species = list(/datum/species/unggoy)
 
 /datum/job/first_contact_innie
 	title = "Insurrectionist"
 	total_positions = 18
 	outfit_type = /decl/hierarchy/outfit/job/ks7_colonist/innie
+	whitelisted_species = list(/datum/species/human)
 
 /datum/job/first_contact_unsc
 	title = "UNSC Crewman"
 	total_positions = 18
 	outfit_type = /decl/hierarchy/outfit/job/ks7_unsc
+	whitelisted_species = list(/datum/species/human)
