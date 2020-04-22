@@ -1,4 +1,10 @@
 
+//any of these placed on the map will automatically be replaced with the right assault_target to attract enemy mobs
+/obj/effect/landmark/assault_target_firefight
+	name = "assault target marker"
+	icon = 'code/modules/halo/misc/ai_tokens.dmi'
+	invisibility = INVISIBILITY_SYSTEM
+
 /datum/game_mode/firefight/pre_setup()
 	..()
 
@@ -25,6 +31,7 @@
 				var/obj/effect/landmark/scavenge_spawn/S = new(T)
 				available_resupply_points.Add(S)
 
+	//loop over the map and setup spawn landmarks
 	spawn(-1)
 
 		for(var/obj/effect/landmark/firefight_spawn_easy/F in world)
@@ -35,6 +42,12 @@
 
 		for(var/obj/effect/landmark/firefight_spawn_hard/F in world)
 			spawn_landmarks.Add(F)
+
+	//loop over the map and setup assault targets
+	spawn(-1)
+		for(var/obj/effect/landmark/assault_target_firefight/A in world)
+			new assault_landmark_type(A.loc)
+			qdel(A)
 
 	//planet_area = locate() in world
 
