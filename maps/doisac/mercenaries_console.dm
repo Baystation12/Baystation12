@@ -3,7 +3,7 @@
 
 /obj/structure/kigyar_merc_console
 	name = "Ram Clan Mercenary Console"
-	icon = 'code/modules/halo/icons/machinery/Covenant/Covie_Obj_Stuff.dmi'
+	icon = 'maps/doisac/mercenaries_console.dmi'
 	icon_state = "Large Covie Holo"
 	desc = "A console for contacting mercenaries"
 	density = 1

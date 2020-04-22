@@ -14,6 +14,9 @@
 		in proving their strength and satisfying their desire for war. Despite the might of the UNSC, they dare not step \
 		under the shadow of the mountains or head out to rescue a dammed trading convoy. After all, only the strong can rule \
 		over the weak. "
+	defender_mob_types = list(/mob/living/simple_animal/hostile/innie/green = 1,\
+		/mob/living/simple_animal/hostile/innie/medium/green = 2,\
+		/mob/living/simple_animal/hostile/innie/heavy/green = 1)
 
 /datum/faction/npc/khoros_desert_raiders/New()
 	. = ..()

@@ -13,11 +13,6 @@
 /obj/machinery/overmap_weapon_console/boarding_beacon_launcher/innie
 	drop_beacon_faction = "Insurrection"
 
-/obj/machinery/overmap_weapon_console/boarding_beacon_launcher/covenant
-	drop_beacon_faction = "Covenant"
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
-	icon_state = "covie_console"
-
 /obj/item/projectile/overmap/boarding_beacon
 	icon = 'code/modules/halo/machinery/boarding_beacon_proj.dmi'
 	icon_state = "beacon"

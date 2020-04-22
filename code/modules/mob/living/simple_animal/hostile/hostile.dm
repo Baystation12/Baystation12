@@ -47,6 +47,13 @@
 		if(!sorted)
 			our_overmind.other_troops += src
 
+/mob/living/simple_animal/hostile/proc/set_faction(var/datum/faction/F)
+	faction = F.name
+
+/mob/living/simple_animal/hostile/Initialize()
+	. = ..()
+	spawn_weapon()
+
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
@@ -195,6 +202,7 @@
 		return
 	var/target = attacked
 	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>")
+	src.dir = get_dir(src, attacked)
 	var/casingtype_use = casingtype
 	var/burstsize_use = burst_size
 	var/burstdelay_use = burst_delay

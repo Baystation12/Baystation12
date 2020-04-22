@@ -1,7 +1,7 @@
 
 /datum/job/opredflag_spartan
 	title = "Spartan II"
-	faction_flag = UNSC
+	spawn_faction = "UNSC"
 	supervisors = "the mission commander"
 	selection_color = "#33ff00"
 	account_allowed = 0               // Does this job type come with a station account?

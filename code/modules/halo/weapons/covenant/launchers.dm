@@ -2,7 +2,7 @@
 /obj/item/weapon/gun/projectile/fuel_rod_launcher
 	name = "Type-33 Light Anti-Armor Weapon"
 	desc = "A man-portable weapon capable of inflicting heavy damage on both vehicles and infantry."
-	icon = 'code/modules/halo/icons/fuel_rod_cannon.dmi'
+	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
 	icon_state = "fuel_rod"
 	item_state = "fuelrod"
 	fire_sound = 'code/modules/halo/sounds/fuel_rod_fire.ogg'

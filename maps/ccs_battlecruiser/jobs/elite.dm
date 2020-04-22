@@ -1,14 +1,9 @@
 
 /datum/job/opredflag_cov/elite
 	title = "Sangheili Minor"
-	faction_flag = COVENANT
 	supervisors = "the Sangheili Majors"
 	selection_color = "#9900ff"
-	account_allowed = 0               // Does this job type come with a station account?
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
-	loadout_allowed = FALSE            // Whether or not loadout equipment is allowed and to be created when joining.
-	announced = TRUE                  //If their arrival is announced on radio
-	generate_email = 0
 	whitelisted_species = list(/datum/species/sangheili)
 	total_positions = 10
 	spawn_positions = 10
@@ -21,6 +16,7 @@
 	open_slot_on_death = 1
 	total_positions = 4
 	spawn_positions = 4
+	access = list(access_covenant, access_covenant_command)
 
 /datum/job/opredflag_cov/elite/ultra
 	title = "Sangheili Ultra"
@@ -29,6 +25,7 @@
 	open_slot_on_death = 1
 	total_positions = 2
 	spawn_positions = 2
+	access = list(access_covenant, access_covenant_command)
 
 /datum/job/opredflag_cov/elite/honourguard
 	title = "Sangheili Honour Guard"
@@ -45,6 +42,7 @@
 	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
 	total_positions = 1
 	spawn_positions = 1
+	access = list(access_covenant, access_covenant_command)
 
 /datum/job/opredflag_cov/elite/zealot
 	title = "Sangheili Zealot"
@@ -53,6 +51,7 @@
 	open_slot_on_death = 1
 	total_positions = 2
 	spawn_positions = 2
+	access = list(access_covenant, access_covenant_command)
 
 /datum/job/opredflag_cov/elite/ranger
 	title = "Sangheili Ranger"

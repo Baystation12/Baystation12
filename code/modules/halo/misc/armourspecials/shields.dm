@@ -9,7 +9,7 @@
 	var/mob/living/carbon/human/user
 
 /obj/effect/overlay/shields
-	icon = 'code/modules/halo/icons/species/Sangheili_Combat_Harness.dmi'
+	icon = 'code/modules/halo/covenant/species/sangheili/Sangheili_Combat_Harness.dmi'
 	icon_state = "shield_overlay"
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
@@ -18,7 +18,7 @@
 	icon = 'code/modules/halo/clothing/spartan_armour.dmi'
 
 /obj/effect/overlay/shields/unggoy
-	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
+	icon = 'code/modules/halo/covenant/species/unggoy/grunt_gear.dmi'
 
 /datum/armourspecials/shields
 	var/shieldstrength

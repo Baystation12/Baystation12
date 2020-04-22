@@ -2,6 +2,7 @@
 
 	#include "../../code/modules/halo/lobby_music/covenant_music.dm"
 
+	#include "jobs/_job.dm"
 	#include "jobs/elite.dm"
 	#include "jobs/grunt.dm"
 	#include "jobs/jackal.dm"

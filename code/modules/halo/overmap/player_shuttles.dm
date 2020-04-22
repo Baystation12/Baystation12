@@ -115,7 +115,6 @@
 	ship_datums = list(/datum/npc_ship/innie_shuttle)
 
 /obj/machinery/shuttle_spawner/cov
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
 	icon_state = "covie_console"
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cov
 
