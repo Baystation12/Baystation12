@@ -5,7 +5,7 @@
 	#include "../desert_outpost/desert_outpost_spawns.dm"
 	#include "../desert_outpost/turfs_areas.dm"
 
-	#include "../_gamemodes/stranded/_all_includes.dm"
+	#include "../_gamemodes/firefight/_all_includes.dm"
 
 	#include "crashsite_zeta_map.dm"
 	#include "crashsite-zeta.dmm"
