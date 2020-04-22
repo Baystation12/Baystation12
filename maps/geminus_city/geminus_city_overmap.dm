@@ -18,8 +18,3 @@
 /obj/effect/overmap/sector/geminus_city/LateInitialize()
 	. = ..()
 	GLOB.overmap_tiles_uncontrolled -= range(28,src)
-
-/obj/structure/co_ord_console/vt9_gc
-	icon = 'code/modules/halo/icons/machinery/computer.dmi'
-	icon_state = "comm"
-	known_locations = list(/obj/effect/overmap/sector/geminus_city = "Geminus City Colony")

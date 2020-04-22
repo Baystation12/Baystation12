@@ -51,6 +51,13 @@
 		if(!sorted)
 			our_overmind.other_troops += src
 
+/mob/living/simple_animal/hostile/proc/set_faction(var/datum/faction/F)
+	faction = F.name
+
+/mob/living/simple_animal/hostile/Initialize()
+	. = ..()
+	spawn_weapon()
+
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
@@ -205,6 +212,7 @@
 		return
 	var/target = attacked
 	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>")
+	src.dir = get_dir(src, attacked)
 	var/casingtype_use = casingtype
 	var/burstsize_use = burst_size
 	var/burstdelay_use = burst_delay
@@ -406,8 +414,10 @@
 	var/projtype_use = projectiletype
 	var/projsound_use = projectilesound
 	if(using_vehicle_gun && !v.guns_disabled)
-		projtype_use = using_vehicle_gun.projectile_fired
-		projsound_use = using_vehicle_gun.fire_sound
+		var/obj/item/ammo_casing/casing = using_vehicle_gun.mag_use.stored_ammo[1]
+		if(casing)
+			projtype_use = casing.projectile_type
+			projsound_use = using_vehicle_gun.fire_sound
 
 	var/obj/item/projectile/A = new projtype_use(user:loc)
 	A.permutated += user:loc

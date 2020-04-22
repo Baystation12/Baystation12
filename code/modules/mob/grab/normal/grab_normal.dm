@@ -249,7 +249,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || (W.damtype != BRUTE || W.damtype != BURN))
+	if(!W.edge || !W.force || (W.damtype != BRUTE && W.damtype != BURN))
 		return 0 //unsuitable weapon
 	user.visible_message("<span class='danger'>\The [user] begins to slit [affecting]'s throat with \the [W]!</span>")
 
@@ -275,7 +275,7 @@
 
 
 	if(total_damage)
-		user.visible_message("<span class='danger'>\The [user] slit [src]'s throat open with \the [W]!</span>")
+		user.visible_message("<span class='danger'>\The [user] slit [affecting]'s throat open with \the [W]!</span>")
 
 		if(W.hitsound)
 			playsound(affecting.loc, W.hitsound, 50, 1, -1)
@@ -291,7 +291,7 @@
 	if(user.a_intent != I_HURT)
 		return 0 // Not trying to hurt them.
 
-	if(!W.edge || !W.force || W.damtype != BRUTE)
+	if(!W.edge || !W.force || (W.damtype != BRUTE && W.damtype != BURN))
 		return 0 //unsuitable weapon
 
 	var/obj/item/organ/external/O = affecting.get_organ(target_zone)
@@ -308,7 +308,7 @@
 	if(!O || O.is_stump() || !O.sever_tendon())
 		return 0
 
-	user.visible_message("<span class='danger'>\The [user] cut \the [src]'s [O.tendon_name] with \the [W]!</span>")
+	user.visible_message("<span class='danger'>\The [user] cut \the [affecting]'s [O.tendon_name] with \the [W]!</span>")
 	if(W.hitsound) playsound(affecting.loc, W.hitsound, 50, 1, -1)
 	G.last_action = world.time
 	admin_attack_log(user, affecting, "hamstrung their victim", "was hamstrung", "hamstrung")

@@ -13,7 +13,7 @@
 	comp_prof = /datum/component_profile/mongoose
 
 	occupants = list(1,0)
-	exposed_positions = list("driver" = 10,"passenger" = 25)
+	exposed_positions = list("driver" = 40,"passenger" = 40)
 
 	sprite_offsets = list("1" = list(0,3),"2" = list(0,3),"4" = list(0,3),"8" = list(0,3))
 
@@ -54,8 +54,8 @@
 #undef MONGOOSE_BASE_PASSENGER_OFFSETS
 //Mongoose component profile define//
 /obj/item/vehicle_component/health_manager/mongoose
-	integrity = 250
-	resistances = list("brute"=30,"burn"=30,"emp"=15,"bomb" = 0)
+	integrity = 300
+	resistances = list("brute"=85,"burn"=85,"emp"=15,"bomb" = 0)
 
 /datum/component_profile/mongoose
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/mongoose)

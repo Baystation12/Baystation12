@@ -43,8 +43,6 @@
 #define LANGUAGE_SIGN "Sign Language"
 #define LANGUAGE_INDEPENDENT "Independent"
 #define LANGUAGE_NABBER "Serpentid"
-#define LANGUAGE_SANGHEILI "Sangheili"
-#define LANGUAGE_LEKGOLO "Lekgolo"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.

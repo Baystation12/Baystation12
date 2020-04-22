@@ -4,7 +4,7 @@
 	total_positions = -1
 	spawn_positions = -1
 	selection_color = "#000000"
-	faction_flag = INNIE
+	spawn_faction = "Insurrection"
 	supervisors = " the Insurrectionist Leader"
 	announced = FALSE
 	create_record = 0
@@ -23,7 +23,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#000000"
-	faction_flag = INNIE
+	spawn_faction = "Insurrection"
 	supervisors = " the Insurrection"
 	announced = FALSE
 	create_record = 0

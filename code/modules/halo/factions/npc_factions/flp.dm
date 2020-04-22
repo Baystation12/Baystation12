@@ -10,6 +10,9 @@
 	that is the UEG. the UEG don't deserve the worlds they subjugate, and the FLP would rather see their homeworld in a blazing \
 	inferno rather then owned by the \"Cancer of the Colonies\". If the people don't own it, no one should. They will stop at nothing \
 	to achieve their goals. After all, a million deaths is just a statistic. "
+	defender_mob_types = list(/mob/living/simple_animal/hostile/innie/blue = 1,\
+		/mob/living/simple_animal/hostile/innie/medium/blue = 2,\
+		/mob/living/simple_animal/hostile/innie/heavy/blue = 1)
 
 /datum/faction/npc/freedom_liberation_party/New()
 	. = ..()

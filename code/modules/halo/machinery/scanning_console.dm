@@ -59,5 +59,4 @@
 	qdel(src)
 
 /obj/machinery/overmap_weapon_console/ship_scanning_console/cov
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
 	icon_state = "covie_console"

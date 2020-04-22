@@ -2,8 +2,8 @@
 /obj/structure/supply_pod_dispenser
 	name = "Supply Pod Dispenser"
 	desc = "Dispenses supply pods."
-	icon = 'code/modules/halo/overmap/weapons/mac_cannon.dmi'
-	icon_state = "mac_ammo_loader"
+	icon = 'code/modules/halo/vehicles/supply_unsc.dmi'
+	icon_state = "mac_bombard_control"
 
 	density = 1
 
@@ -23,8 +23,8 @@
 	new pod_to_spawn (spawnloc)
 
 /obj/structure/supply_pod_dispenser/covenant
-	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
-	icon_state = "covie_console"
+	icon = 'code/modules/halo/vehicles/supply_cov.dmi'
+	icon_state = "Covie Monitor"
 	pod_to_spawn = /obj/vehicles/drop_pod/overmap/supply_pod/covenant
 
 //leave this as a placeholder for now 20/1/20 -C
@@ -33,7 +33,7 @@
 /obj/vehicles/drop_pod/overmap/supply_pod
 	name = "Resupply Canister, Capsule Type-B"
 	desc = "Used to drop supplies to groundside troops. Should only be used in conjunction with drop-pod beacons."
-	icon = 'code/modules/halo/structures/supply_pods.dmi'
+	icon = 'code/modules/halo/vehicles/supply_unsc.dmi'
 	icon_state = "UNSC_Supply"
 
 	comp_prof = /datum/component_profile/drop_pod/supply_pod
@@ -60,4 +60,5 @@
 
 /obj/vehicles/drop_pod/overmap/supply_pod/covenant
 	name = "Resupply Case"
+	icon = 'code/modules/halo/vehicles/supply_cov.dmi'
 	icon_state = "Covenant_Supply"

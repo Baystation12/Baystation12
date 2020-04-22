@@ -115,16 +115,7 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
 
 /proc/get_announcement_frequency(var/datum/job/job)
-	if(job.faction_flag & UNSC)
-		return "SHIPCOM"
-	if(job.faction_flag & ODST)
-		return "TACCOM"
-	if(job.faction_flag & INNIE)
-		return "INNIECOM"
-	if(job.faction_flag & COLONY)
-		return "System"
-	if(job.faction_flag & COVENANT)
-		return "Battlenet"
+	return job.get_arrivals_channel()
 	/*
 	if(job.department_flag & (COM | CIV | MSC))
 		return "Common"
@@ -141,5 +132,6 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if(job.department_flag & SCI)
 		return "Science"
 	if(job.department_flag & SRV)
-		return "Service"*/
+		return "Service"
 	return "System"
+	*/

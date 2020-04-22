@@ -32,6 +32,7 @@
 	var/check_armour = "bullet" //Defines what armor to use when it hits things.  Must be set to bullet, laser, energy,or bomb	//Cael - bio and rad are also valid
 	var/projectile_type = /obj/item/projectile
 	var/penetrating = 0 //If greater than zero, the projectile will pass through dense objects as specified by on_penetrate(). If 999, always penetrates.
+	var/shield_damage = 0 //Damage applied soley to shields. If this damage alone breaks a shield, the projectile will not encounter the usual shield gating.
 	var/kill_count = 50 //This will de-increment every process(). When 0, it will delete the projectile.
 		//Effects
 	var/stun = 0

@@ -85,7 +85,7 @@
 
 	toggle_scope(usr, 1.75)
 
-/obj/item/weapon/gun/energy/beam_rifle/proc/update_next_allowed_fire(var/seconds_increase = 1.25)
+/obj/item/weapon/gun/energy/beam_rifle/proc/update_next_allowed_fire(var/seconds_increase = 1.5)
 	next_allowed_fire = world.time + seconds_increase SECONDS
 
 /obj/item/weapon/gun/energy/beam_rifle/Fire(atom/target,var/mob/living/user)

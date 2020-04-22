@@ -12,8 +12,10 @@
 
 	comp_prof = /datum/component_profile/cobra
 
+	ammo_containers = newlist(/obj/item/ammo_magazine/cobra_cannon,/obj/item/ammo_magazine/cobra_sniper)
+
 	vehicle_move_delay = 4.5
-	exposed_positions = list("passenger"=10)
+	exposed_positions = list("passenger"=5)
 
 	occupants = list(2,1)
 
@@ -109,7 +111,7 @@
 
 /obj/item/vehicle_component/health_manager/cobra
 	integrity = 500
-	resistances = list("brute"=35,"burn"=35,"emp"=25,"bomb"=25)
+	resistances = list("brute"=75,"burn"=75,"emp"=25,"bomb"=65)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/cobra
@@ -121,33 +123,57 @@
 	name = "Cobra Cannon"
 	desc = "Twin linked railguns."
 
-	projectile_fired = /obj/item/projectile/bullet/cobra_cannon
-
 	fire_delay = 2 SECONDS
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 
 	burst = 2
 	burst_delay = 0.5 SECONDS
+	magazine_type = /obj/item/ammo_magazine/cobra_cannon
 
 /obj/item/weapon/gun/vehicle_turret/cobra_sniper
 	name = "Cobra Sniper Cannon"
 	desc = "Railgun single fire mode, heavy anti armour."
 
-	projectile_fired = /obj/item/projectile/bullet/cobra_sniper
-
-	fire_delay = 4 SECONDS
+	fire_delay = 35
 	fire_sound = 'code/modules/halo/sounds/scorp_cannon_fire.ogg'
 
 	burst = 1
+	magazine_type = /obj/item/ammo_magazine/cobra_sniper
+
+/obj/item/ammo_magazine/cobra_cannon
+	name = "Internal Railgun Ammunition"
+	max_ammo = 100
+	caliber = "railgun"
+	ammo_type = /obj/item/ammo_casing/cobra_cannon
+
+/obj/item/ammo_casing/cobra_cannon
+	name = "railgun round"
+	caliber = "railgun"
+	projectile_type = /obj/item/projectile/bullet/cobra_cannon
 
 /obj/item/projectile/bullet/cobra_cannon
+	name = "railgun round"
 	damage = 40
 	armor_penetration = 50
 
+/obj/item/ammo_magazine/cobra_sniper
+	name = "Internal Sniper Railgun Ammunition"
+	max_ammo = 40
+	caliber = "railgun sniper"
+	ammo_type = /obj/item/ammo_casing/cobra_sniper
+
+/obj/item/ammo_casing/cobra_sniper
+	name = "railgun round"
+	caliber = "railgun sniper"
+	projectile_type = /obj/item/projectile/bullet/cobra_sniper
+
 /obj/item/projectile/bullet/cobra_sniper
-	damage = 100
+	name = "railgun round"
+	damage = 150
 	damage_type = "bomb"
-	armor_penetration = 100
+	damtype = "bomb"
+	armor_penetration = 200
+	shield_damage = 240
 
 /obj/item/projectile/bullet/cobra_sniper/get_structure_damage()
 	return damage * 5

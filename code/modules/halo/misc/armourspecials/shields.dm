@@ -9,7 +9,7 @@
 	var/mob/living/carbon/human/user
 
 /obj/effect/overlay/shields
-	icon = 'code/modules/halo/icons/species/Sangheili_Combat_Harness.dmi'
+	icon = 'code/modules/halo/covenant/species/sangheili/Sangheili_Combat_Harness.dmi'
 	icon_state = "shield_overlay"
 	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
@@ -18,7 +18,7 @@
 	icon = 'code/modules/halo/clothing/spartan_armour.dmi'
 
 /obj/effect/overlay/shields/unggoy
-	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
+	icon = 'code/modules/halo/covenant/species/unggoy/grunt_gear.dmi'
 
 /datum/armourspecials/shields
 	var/shieldstrength
@@ -73,14 +73,18 @@
 	var/mob/living/attacker = damage_source
 	if(istype(attacker) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)
 		return 0
+	var/obj/item/projectile/dam_proj = damage_source
+	if(istype(dam_proj) && dam_proj.shield_damage >0 && !take_damage(dam_proj.shield_damage,0))
+		return 0
 	if(take_damage(damage))
 		//Melee damage through shields is reduced
 		var/obj/item/dam_source = damage_source
-		if(istype(dam_source) &&!istype(dam_source,/obj/item/projectile) && dam_source.loc.Adjacent(connectedarmour.loc))
+		if(istype(dam_source) &&!istype(dam_proj) && dam_source.loc.Adjacent(connectedarmour.loc))
+			var/original_dam = dam_source.force
 			dam_source.force *= SHIELD_MELEE_BYPASS_DAM_MOD
 			user.visible_message("<span class = 'warning'>[user]'s shields fail to fully absorb the melee attack!</span>")
 			spawn(2)
-				dam_source.force /= SHIELD_MELEE_BYPASS_DAM_MOD//Revert the damage reduction.
+				dam_source.force = original_dam
 			return 0
 		return 1
 	else
@@ -92,7 +96,7 @@
 		shieldoverlay.icon_state = new_icon_state
 		mob_overlay.overlays += shieldoverlay
 
-/datum/armourspecials/shields/proc/take_damage(var/damage)
+/datum/armourspecials/shields/proc/take_damage(var/damage,var/shield_gate = 1)
 	. = 0
 
 	//some shields dont have full coverage
@@ -117,6 +121,8 @@
 				shieldstrength = 0
 				playsound(user, 'code/modules/halo/sounds/Shields_Gone.ogg',100,0)
 				user.visible_message("<span class ='warning'>[user]'s [connectedarmour] shield collapses!</span>","<span class ='userdanger'>Your [connectedarmour] shields fizzle and spark, losing their protective ability!</span>")
+				if(!shield_gate)
+					. = 0
 			else
 				user.visible_message("<span class='warning'>[user]'s [connectedarmour] shields absorbs the force of the impact</span>","<span class = 'notice'>Your [connectedarmour] shields absorbs the force of the impact</span>")
 

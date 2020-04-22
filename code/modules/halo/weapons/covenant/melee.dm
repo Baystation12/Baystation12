@@ -207,6 +207,8 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	item_icons = list(slot_l_hand_str ='code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi')
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK | SLOT_BELT | SLOT_POCKET
+	edge = 1
+	sharp = 1
 	armor_penetration = 35
 	var/explode_delay = 10 SECONDS
 	var/explode_at = -1
