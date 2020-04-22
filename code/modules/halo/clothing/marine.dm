@@ -165,7 +165,7 @@
 	item_state = "boots"
 	icon_state = "boots"
 	force = 5
-	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 30, bomb = 15, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
 	can_hold_knife = 1
@@ -367,7 +367,7 @@
 	item_state = "unsc gloves"
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	siemens_coefficient = 0
+	siemens_coefficient = 0.5
 	permeability_coefficient = 0.05
 	item_state_slots = list(slot_l_hand_str = "gloves", slot_r_hand_str = "gloves")
 	body_parts_covered = HANDS

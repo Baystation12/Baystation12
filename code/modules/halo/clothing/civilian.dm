@@ -157,11 +157,59 @@
 	icon_state = "gcpd-gloves"
 	item_state = "gcpd-gloves"
 
+//Emsville
+
 /obj/item/clothing/under/marshall
 	name = "Marshall's uniform"
-	desc = "A black uniform worn by the Emsville Marshalls."
-	icon_state = "blackutility_com"
-	worn_state = "blackutility_com"
+	desc = "A tan uniform worn by the Emsville Marshalls."
+	icon_state = "tanutility"
+	worn_state = "tanutility"
 	starting_accessories = list(/obj/item/clothing/accessory/holster/thigh)
 	armor = list(melee = 20, bullet = 5, laser = 0, energy = 0, bomb = 5, bio = 0, rad = 0)
 
+/obj/item/clothing/head/soft/emsville_marshall
+	name = "Marshall's Hat"
+	desc = "A hat worn by Marshalls, to signify their status. Reinforced a little with internal armour."
+	armor = list(melee = 10,bullet = 20, laser = 20, energy = 20, bomb = 0, bio = 10, rad = 0)
+
+/obj/item/clothing/head/helmet/emsville_marshall
+	name = "Marshall's Helmet"
+	desc = "A helmet worn by Marshalls, to signify their status."
+	armor = list(melee = 30, bullet = 30, laser = 30,energy = 20, bomb = 25, bio = 0, rad = 0)
+	icon = 'icons/obj/clothing/hats.dmi'
+	icon_state = "helmet"
+	item_icons = list("slot_l_hand"='icons/mob/items/lefthand_hats.dmi',"slot_r_hand"='icons/mob/items/righthand_hats.dmi')
+	item_state_slots = list("slot_l_hand" = "helmet","slot_r_hand" = "helmet")
+
+/obj/item/clothing/suit/storage/marine/emsville_marshall
+	name = "Marshall's Armour"
+	desc = "Armour worn by Marshalls, so signify their status."
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 40, bullet = 55, laser = 45, energy = 45, bomb = 40, bio = 25, rad = 25) //Somewhat boosted because it doesn't cover the arms.
+	armor_thickness = 20
+	icon = 'icons/obj/clothing/suits.dmi'
+	icon_state = "bulletproofvest"
+	item_state = null
+	icon_override = null
+
+/obj/item/clothing/suit/storage/marine/emsville_marshall/civ
+	name = "Civiliain Armour"
+	desc = "Armour worn by Civilians, for safety against various hazards"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	armor = list(melee = 35, bullet = 45, laser = 40, energy = 40, bomb = 40, bio = 25, rad = 25)
+
+/obj/item/clothing/shoes/marine/emsville_marshall
+	name = "Marshall's Shoes"
+	desc = "Shoes worn by Marshalls, to signify their status. Has inlays for to provide extra leg-armour."
+	body_parts_covered = FEET | LEGS
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 30, bomb = 15, bio = 0, rad = 0)
+	armor_thickness = 20
+	icon = 'icons/obj/clothing/shoes.dmi'
+	icon_state = "jackboots"
+	item_state = "jackboots"
+	icon_override = null
+
+/obj/item/clothing/gloves/thick/unsc/emsville_marshall //Covers the arms, but weaker.
+	name = "Marshall's Gloves and Armguards"
+	desc = "Gloves and jumpsuit inlays designed to reinforce the arms and hands of Marshalls."
+	body_parts_covered = HANDS | ARMS
