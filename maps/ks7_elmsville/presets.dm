@@ -1,8 +1,9 @@
 //This file contains map-specific item presets such as doors and other similar items.//
 
-/mob/living/simple_animal/hostile/defender_mob/pirate_defender
+/mob/living/simple_animal/hostile/pirate_defender
 	name = "Pirate Recruit"
 	desc = "An unaffiliated human pirate, looking for scrap and treasure."
+	icon = 'code/modules/halo/icons/mobs/ks7_pirate.dmi'
 	icon_state = "pirate_recruit"
 	icon_living  = "pirate_recruit"
 	icon_dead = "pirate_recruit_dead"
@@ -15,9 +16,10 @@
 	/obj/item/weapon/gun/energy/plasmapistol,
 	)
 
-/mob/living/simple_animal/hostile/defender_mob/pirate_defender/civ
+/mob/living/simple_animal/hostile/pirate_defender/civ
 	name = "Civillian Pirate"
 	desc = "Not all men are destined for the fighting life, although this one still carries a sidearm."
+	icon = 'code/modules/halo/icons/mobs/ks7_pirate.dmi'
 	icon_state = "pirate_civ"
 	icon_living  = "pirate_civ"
 	icon_dead = "pirate_civ_dead"
@@ -28,9 +30,10 @@
 	/obj/item/weapon/gun/energy/plasmapistol
 	)
 
-/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium
+/mob/living/simple_animal/hostile/pirate_defender/medium
 	name = "Pirate Mercenary"
 	desc = "A survivor of rigorous initiation, looking for treasure and scrap."
+	icon = 'code/modules/halo/icons/mobs/ks7_pirate.dmi'
 	icon_state = "pirate_merc"
 	icon_living  = "pirate_merc"
 	icon_dead = "pirate_merc_dead"
@@ -43,9 +46,10 @@
 	/obj/item/weapon/gun/projectile/m392_dmr
 	)
 
-/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy
+/mob/living/simple_animal/hostile/pirate_defender/heavy
 	name = "Heavily-Armed Pirate"
 	desc = "Some men are better suited for a fighting life. This is one of them."
+	icon = 'code/modules/halo/icons/mobs/ks7_pirate.dmi'
 	icon_state = "pirate_heavy"
 	icon_living  = "pirate_heavy"
 	icon_dead = "pirate_heavy_dead"
@@ -59,6 +63,7 @@
 	/obj/item/weapon/gun/projectile/type31needlerifle,
 	/obj/item/weapon/gun/energy/plasmarifle
 	)
+	wander = 0
 
 /obj/item/weapon/card/id/building_key
 	name = "Key"

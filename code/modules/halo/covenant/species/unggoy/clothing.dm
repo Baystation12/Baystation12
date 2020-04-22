@@ -239,7 +239,7 @@
 /obj/item/clothing/gloves/grunt_gloves
 	name = "Natural Armor"
 	desc = "The natural armor on your arms provides a small amount of protection against the elements."
-	icon = 'code/modules/halo/icons/species/grunt_gear.dmi'
+	icon = 'code/modules/halo/covenant/species/unggoy/grunt_gear.dmi'
 	icon_state = "naturalhandarmor"
 	item_state = "blank"
 	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)

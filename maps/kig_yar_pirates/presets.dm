@@ -12,7 +12,7 @@
 /obj/structure/closet/secure_closet/ks7_cov
 	name = "Covenant Supply Crate"
 	desc = "Contains supplies for armoring and arming yourself. Looks like this one is missing a lot of items."
-	icon = 'code/modules/halo/covenant/crate.dmi'
+	icon = 'code/modules/halo/covenant/structures_machines/crate_tall.dmi'
 	icon_state = "closed"
 	icon_opened = "open"
 	icon_closed = "closed"

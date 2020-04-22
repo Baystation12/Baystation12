@@ -54,28 +54,28 @@
 	null,null,null,null,null,null,null,null
 	)//10
 	loot_distributor.loot_list["salvageDefenders"] = list(\
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/civ,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/civ,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/civ,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,
+	/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,
+	/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,
+	/mob/living/simple_animal/hostile/pirate_defender/civ,/mob/living/simple_animal/hostile/pirate_defender/civ,/mob/living/simple_animal/hostile/pirate_defender/civ,
+	/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,
+	/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,
+	/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,
+	/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,
+	/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,
+	/mob/living/simple_animal/hostile/pirate_defender/heavy,
 	null,null,null,null,null,null,null,null,null,null,null,null
 	)
 
 	loot_distributor.loot_list["piratePostDefenders"] = list(\
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/heavy,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/medium,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,/mob/living/simple_animal/hostile/defender_mob/pirate_defender,
-	/mob/living/simple_animal/hostile/defender_mob/pirate_defender/civ,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/civ,/mob/living/simple_animal/hostile/defender_mob/pirate_defender/civ,
+	/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,
+	/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,
+	/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,/mob/living/simple_animal/hostile/pirate_defender/heavy,
+	/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,
+	/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,
+	/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,/mob/living/simple_animal/hostile/pirate_defender/medium,
+	/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,
+	/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,/mob/living/simple_animal/hostile/pirate_defender,
+	/mob/living/simple_animal/hostile/pirate_defender/civ,/mob/living/simple_animal/hostile/pirate_defender/civ,/mob/living/simple_animal/hostile/pirate_defender/civ,
 	null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
 	)
 
@@ -83,10 +83,9 @@
 /obj/effect/overmap/sector/exo_research
 
 /obj/effect/overmap/sector/geminus_city
-
+/*
 /obj/structure/co_ord_console/ks7
 	known_locations = list(/obj/effect/overmap/sector/exo_research = "VT9-042",/obj/effect/overmap/sector/geminus_city = "Geminus City Colony")
-/*
 /obj/effect/loot_marker/ks7unique
 	loot_type = "ks7unique"
 */

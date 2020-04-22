@@ -1,7 +1,7 @@
 
 /obj/structure/bed/covenant
 	name = "Sangheili bed"
-	desc = "Not designed for comfort."'
+	desc = "Not designed for comfort."
 	icon = 'code/modules/halo/covenant/structures_machines/bed.dmi'
 	icon_state = "cbed1"
 
