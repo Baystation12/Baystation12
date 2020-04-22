@@ -5,6 +5,7 @@
 	health = 100
 	maxHealth = 100
 	resistance = 10
+	wander = 0 //Stop lagging us by wandering damn it, you're meant to be defending a point.
 	var/list/possible_weapons = list()
 	var/icon/gun_overlay
 
@@ -79,7 +80,8 @@
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m392_dmr)
 
 /mob/living/simple_animal/hostile/defender_mob/unsc/odst
-	health = 125
+	health = 100
+	resistance = 20
 	name = "UNSC Defender (ODST)"
 	icon_state = "odst"
 	icon_living  = "odst"
@@ -98,7 +100,8 @@
 
 /mob/living/simple_animal/hostile/defender_mob/innie/heavy
 	name = "Insurrection Defender (Heavy Armoured)"
-	health = 125
+	health = 100
+	resistance = 20
 	icon_state = "heavy_innie_brown"
 	icon_living  = "heavy_innie_brown"
 	icon_dead = "dead_heavy_innie_brown"
@@ -117,7 +120,8 @@
 
 /mob/living/simple_animal/hostile/defender_mob/cov/kig
 	name = "Covenant Defender (Kig Yar)"
-	health = 125
+	health = 100
+	resistance = 20
 	icon_state = "kigyar"
 	icon_living = "kigyar"
 	icon_dead = "dead_kigyar"
