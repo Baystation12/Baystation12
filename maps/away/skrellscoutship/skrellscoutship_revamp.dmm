@@ -746,10 +746,10 @@
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "cN" = (
-/obj/structure/window/basic{
+/obj/machinery/chem_master,
+/obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/machinery/chem_master,
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "cO" = (
@@ -928,9 +928,6 @@
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "do" = (
-/obj/structure/window/basic{
-	dir = 4
-	},
 /obj/structure/table/glass,
 /obj/item/bodybag/cryobag{
 	pixel_y = -1;
@@ -946,6 +943,9 @@
 	},
 /obj/item/weapon/storage/box/bodybags{
 	pixel_y = 13
+	},
+/obj/structure/window/reinforced{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
@@ -1117,45 +1117,17 @@
 /area/ship/skrellscoutship/forestorage)
 "dQ" = (
 /obj/structure/table/glass,
-/obj/item/weapon/storage/firstaid/adv{
-	pixel_x = 9;
-	pixel_y = 10
-	},
-/obj/item/weapon/storage/firstaid/adv{
-	pixel_x = -9;
-	pixel_y = 10
-	},
-/obj/item/weapon/storage/firstaid{
-	pixel_x = 9
-	},
-/obj/item/weapon/storage/firstaid{
-	pixel_x = -9
+/obj/machinery/reagent_temperature,
+/obj/machinery/light/skrell{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "dS" = (
-/obj/structure/window/basic{
-	dir = 4
-	},
 /obj/structure/table/glass,
-/obj/item/weapon/reagent_containers/ivbag/nanoblood{
-	pixel_x = -9
-	},
-/obj/item/weapon/reagent_containers/ivbag/nanoblood{
-	pixel_x = -9
-	},
-/obj/item/weapon/reagent_containers/ivbag/nanoblood{
-	pixel_x = -9
-	},
-/obj/item/weapon/reagent_containers/ivbag/nanoblood{
-	pixel_x = -10
-	},
-/obj/item/weapon/storage/firstaid/combat{
-	pixel_y = 8;
-	pixel_x = 1
-	},
-/obj/item/weapon/storage/firstaid/combat{
-	pixel_x = 2
+/obj/machinery/reagent_temperature/cooler,
+/obj/structure/window/reinforced{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
@@ -3215,6 +3187,22 @@
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/skrell/green,
 /area/ship/skrellscoutship/robotics)
+"kc" = (
+/obj/structure/table/glass,
+/obj/item/weapon/storage/firstaid/adv{
+	pixel_x = 9;
+	pixel_y = 10
+	},
+/obj/item/weapon/storage/firstaid/adv{
+	pixel_y = -2;
+	pixel_x = -9
+	},
+/obj/item/weapon/storage/firstaid/adv{
+	pixel_x = -9;
+	pixel_y = 10
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/ship/skrellscoutship/crew/medbay)
 "kd" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/magnetic/railgun/flechette/skrell,
@@ -4561,6 +4549,9 @@
 	pixel_y = 4
 	},
 /obj/machinery/light/skrell,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
+/obj/item/clothing/glasses/hud/health,
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "Dy" = (
@@ -4950,7 +4941,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/machinery/light/skrell,
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
 "KN" = (
@@ -4991,6 +4981,10 @@
 /obj/structure/flora/pottedplant/mysterious,
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutship/wings/starboard)
+"Lv" = (
+/obj/machinery/light/skrell,
+/turf/simulated/floor/tiled/skrell/white,
+/area/ship/skrellscoutship/crew/medbay)
 "Lz" = (
 /obj/machinery/light/skrell{
 	dir = 1
@@ -5110,6 +5104,29 @@
 	},
 /turf/simulated/floor/tiled/skrell/orange,
 /area/ship/skrellscoutship/maintenance/power)
+"NR" = (
+/obj/structure/table/glass,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood{
+	pixel_x = -9
+	},
+/obj/item/weapon/reagent_containers/ivbag/nanoblood{
+	pixel_x = -9
+	},
+/obj/item/weapon/reagent_containers/ivbag/nanoblood{
+	pixel_x = -9
+	},
+/obj/item/weapon/reagent_containers/ivbag/nanoblood{
+	pixel_x = -10
+	},
+/obj/item/weapon/storage/firstaid/combat{
+	pixel_y = 8;
+	pixel_x = 1
+	},
+/obj/item/weapon/storage/firstaid/combat{
+	pixel_x = 2
+	},
+/turf/simulated/floor/tiled/skrell/white,
+/area/ship/skrellscoutship/crew/medbay)
 "NY" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -5777,6 +5794,20 @@
 /obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled/skrell,
 /area/ship/skrellscoutshuttle)
+"Wu" = (
+/obj/structure/table/rack,
+/obj/item/stack/flag/blue{
+	pixel_x = 5
+	},
+/obj/item/stack/flag/blue{
+	pixel_x = 10
+	},
+/obj/item/stack/flag/teal{
+	pixel_x = -6
+	},
+/obj/item/stack/flag/teal,
+/turf/simulated/floor/tiled/skrell/green,
+/area/ship/skrellscoutship/robotics)
 "WQ" = (
 /obj/structure/flora/pottedplant/aquatic,
 /obj/machinery/light/skrell{
@@ -9202,8 +9233,8 @@ qT
 dm
 dD
 dQ
-uk
-UM
+kc
+NR
 UM
 kE
 UM
@@ -9304,8 +9335,8 @@ cM
 dn
 dF
 KD
-uk
-UM
+ds
+Lv
 UM
 kE
 kE
@@ -12580,7 +12611,7 @@ fx
 fy
 fM
 Cd
-bC
+Wu
 bC
 yc
 PT
