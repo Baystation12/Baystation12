@@ -99,7 +99,8 @@
 	playsound(src.loc, 'sound/weapons/bite.ogg', 50, 0, 0)
 	if (src.health <= 0)
 		new/obj/item/weapon/ore/glass(src)
-		new/obj/structure/sandbag_dead(src.loc, dir = src.dir)
+		var/obj/structure/sandbag_dead/S = new(src.loc)
+		S.dir = src.dir
 		qdel(src)
 
 /obj/structure/sandbag/bullet_act(var/obj/item/projectile/Proj)
