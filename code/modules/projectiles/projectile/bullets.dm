@@ -141,14 +141,15 @@
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 55
-	armor_penetration = 20
+	damage = 60
+	armor_penetration = 10
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
 	check_armour = "melee"
 	damage = 20
 	agony = 60
+	armor_penetration = 0
 	embed = 0
 	sharp = 0
 
