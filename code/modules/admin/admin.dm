@@ -848,7 +848,7 @@ var/global/floorIsLava = 0
 /datum/admins/proc/toggleaban()
 	set category = "Server"
 	set desc="Respawn basically"
-	set name="Toggle Respawn"
+	set name="Toggle Serverwide Respawns"
 	config.abandon_allowed = !(config.abandon_allowed)
 	if(config.abandon_allowed)
 		to_world("<B>You may now respawn.</B>")
