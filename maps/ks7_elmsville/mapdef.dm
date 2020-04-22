@@ -9,7 +9,7 @@
 	accessible_z_levels = list()
 	//lobby_icon = 'maps/example/example_lobby.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title6.jpg'
-	id_hud_icons = 'maps/UNSC_Heaven_Above/frigate_hud_icons.dmi'
+	id_hud_icons = 'maps/ks7_elmsville/hud_icons.dmi'
 	station_networks = list("Exodus")
 	station_name  = "111 Tauri \"Emsville\""
 	station_short = "111 Tauri"
