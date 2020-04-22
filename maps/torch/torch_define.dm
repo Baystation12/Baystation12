@@ -3,6 +3,7 @@
 	full_name = "SEV Torch"
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
+	config_path = "config/torch_config.txt"
 
 	admin_levels = list(7,8)
 	empty_levels = list(9)

@@ -826,6 +826,12 @@ var/list/gamemode_cache = list()
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
+		else if(type == "using_map")
+			if(!value)
+				log_misc("Unknown value for setting [name] in [filename].")
+			else
+				GLOB.using_map.setup_config(name, value, filename)
+
 	fps = round(fps)
 	if(fps <= 0)
 		fps = initial(fps)

@@ -528,6 +528,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
+	if (GLOB.using_map?.config_path)
+		config.load(GLOB.using_map.config_path, "using_map")
 	config.loadsql("config/dbconfig.txt")
 	config.load_event("config/custom_event.txt")
 
