@@ -30,6 +30,7 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	icon_state = "exoskeleton_leg"
 	item_state = "blank"
 	species_restricted = list("Yanme e")
+	armor = list(melee = 35, bullet = 35, laser = 5, energy = 25, bomb = 15, bio = 0, rad = 0)
 	canremove = 0
 	unacidable = 1
 
@@ -41,6 +42,7 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	icon_state = "exoskeleton_hands"
 	item_state = "blank"
 	species_restricted = list("Yanme e")
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)
 	siemens_coefficient = 0
 	canremove = 0
 	unacidable = 1
@@ -54,7 +56,7 @@ GLOBAL_LIST_INIT(yanmee_nicknames, world.file2list('code/modules/halo/species_it
 	item_state = "minor_harness"
 	species_restricted = list("Yanme e")
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25)
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS|HANDS|FEET|HEAD
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS|HEAD
 	item_flags = AIRTIGHT|FLEXIBLEMATERIAL
 	canremove = 0
 	unacidable = 1
