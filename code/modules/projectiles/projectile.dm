@@ -196,6 +196,9 @@
 		return 0
 
 	//hit messages
+	if(isnull(target_mob))
+		return 0
+
 	var/mob_target_zone = target_mob.get_equivalent_body_part(def_zone)
 	mob_target_zone = parse_zone(mob_target_zone)
 	if(silenced)
