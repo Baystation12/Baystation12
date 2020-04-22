@@ -114,6 +114,16 @@
 	faction = "Insurrection"
 	ship_datums = list(/datum/npc_ship/innie_shuttle)
 
+/datum/npc_ship/civ_shuttle
+	mapfile_links = list('maps/faction_bases/civ_shuttle.dmm')
+	fore_dir = WEST
+	map_bounds = list(1,29,48,5)
+
+/obj/effect/overmap/ship/npc_ship/shuttlecraft/civ
+	icon = 'code/modules/halo/icons/overmap/darter.dmi'
+	faction = "Insurrection"
+	ship_datums = list(/datum/npc_ship/civ_shuttle)
+
 /obj/machinery/shuttle_spawner/cov
 	icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'
 	icon_state = "covie_console"
@@ -124,6 +134,9 @@
 
 /obj/machinery/shuttle_spawner/innie
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/innie
+
+/obj/machinery/shuttle_spawner/civ
+	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/civ
 
 /obj/machinery/shuttle_spawner/multi_choice
 	name = "Long Range Requisition Console"
