@@ -15,6 +15,7 @@ GLOBAL_LIST_EMPTY(assault_targets)
 	name = "assault target marker"
 	icon = 'code/modules/halo/misc/ai_tokens.dmi'
 	invisibility = INVISIBILITY_SYSTEM
+	var/tracking_level
 
 /obj/effect/landmark/assault_target/covenant
 	name = "covenant assault target"
@@ -31,7 +32,7 @@ GLOBAL_LIST_EMPTY(assault_targets)
 
 	//note this isn't true multiz support, it just allows mob tracking
 	//tracked mobs moving to a different zlevel will just confuse simple mobs for a while before another one will be chosen
-	var/tracking_level = src.z
+	tracking_level = src.z
 	if(src.z == 0)
 		tracking_level = src.loc.z
 	var/list/zlevel_landmarks = targets_list["[tracking_level]"]
@@ -42,7 +43,7 @@ GLOBAL_LIST_EMPTY(assault_targets)
 	zlevel_landmarks.Add(src)
 
 /obj/effect/landmark/assault_target/Destroy()
-	var/list/zlevel_landmarks = GLOB.assault_targets[src.type]["[src.z]"]
+	var/list/zlevel_landmarks = GLOB.assault_targets[src.type]["[tracking_level]"]
 	zlevel_landmarks.Remove(src)
 	. = ..()
 
