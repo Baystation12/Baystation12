@@ -134,7 +134,7 @@
 			if(get_dist(loc,target_mob) > world.view/2) //Don't let them flee!
 				var/do_chase = 1
 				if(istype(target_mob,/mob/living/carbon/human))
-					if(locate(/obj/item/weapon/gun/shotgun in target_mob)) //Okay wait they have a shotty.
+					if(locate(/obj/item/weapon/gun/projectile/shotgun in target_mob)) //Okay wait they have a shotty.
 						do_chase = 0
 				if(do_chase)
 					walk_to(src, target_mob, 1, move_to_delay)
@@ -351,13 +351,22 @@
 		stance = HOSTILE_STANCE_ATTACK
 		Life()
 
-/mob/living/simple_animal/hostile/proc/EvasiveMove(var/atom/movable/attacker)
+/mob/living/simple_animal/hostile/proc/EvasiveMove(var/atom/movable/attacker,var/do_move = 0)
 	if(isnull(attacker) || stat == DEAD)
 		return 0
 	var/dir_attack = get_dir(loc,attacker.loc)
 	var/list/dirlist = list(NORTH,SOUTH,EAST,WEST) - dir_attack //If it's a diagonal attack vector, we won't try to move directly towards them anyway.
 	var/randDir = pick(dirlist)
 	rollDir(randDir)
+	if(do_move)
+		var/targ_loc = loc
+		for(var/i = 1 to rand(world.view/2,world.view))
+			var/turf/tmp_step = get_step(targ_loc,pick(dirlist))
+			if(tmp_step.density == 1)
+				break
+			targ_loc = tmp_step
+			walk_to(src, target_mob, 1, move_to_delay)
+
 	return 1
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
@@ -370,11 +379,13 @@
 			stance = HOSTILE_STANCE_ATTACK
 			tick_life = 1
 		if(target_mob && target_mob.loc)
-			if(get_dist(loc,target_mob) > world.view/2) //If they're further than half a screen away, make chase
+			var/chasing = 0
+			if(get_dist(loc,target_mob) > world.view*0.75) //make chase
 				walk_to(src, target_mob, 1, move_to_delay)
+				chasing = 1
 			else
 				walk(src,0)
-			EvasiveMove(target_mob)
+			EvasiveMove(target_mob,!chasing)
 		if(tick_life)
 			Life()
 
