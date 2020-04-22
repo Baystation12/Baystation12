@@ -3,7 +3,7 @@
 	name = "Kig-Yar Raider"
 	desc = "A few references to this vessel's ship-signature are present within outer-colony trading databases."
 
-	icon = 'maps/first_contact/maps/kig_yar_pirates/pirate.dmi'
+	icon = 'maps/kig_yar_pirates/pirate.dmi'
 	icon_state = "ship"
 	fore_dir = EAST
 	vessel_mass = 3
@@ -21,7 +21,7 @@
 	name = "Kig-Yar Missionary Vessel"
 	desc = "A few references to this vessel's ship-signature are present within outer-colony trading databases."
 
-	icon = 'maps/first_contact/maps/kig_yar_pirates/missionary.dmi'
+	icon = 'maps/kig_yar_pirates/missionary.dmi'
 	icon_state = "ship"
 	fore_dir = EAST
 	vessel_mass = 3
