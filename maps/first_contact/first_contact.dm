@@ -3,6 +3,7 @@
 #include "presets.dm"
 #include "jobs.dm"
 #include "outfits.dm"
+#include "../faction_bases/civ_shuttle.dm"
 #include "../UNSC_With_Noble_Cause/includes_singledeck.dm"
 #include "../kig_yar_pirates/includes.dm"
 #include "../Exoplanet Mining/includes.dm"
