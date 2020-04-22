@@ -62,7 +62,10 @@ var/global/datum/controller/gameticker/ticker
 				pregame_timeleft--
 			if(pregame_timeleft <= config.vote_autogamemode_timeleft && !gamemode_voted)
 				gamemode_voted = 1
-				if(!vote.delay_round_start())
+				if(GLOB.using_map.force_gamemode)
+					master_mode = GLOB.using_map.force_gamemode
+
+				else if(!vote.delay_round_start())
 					vote.autogamemode()	//Quit calling this over and over and over and over.
 					while(vote.delay_round_start())
 						for(var/i=0, i<10, i++)

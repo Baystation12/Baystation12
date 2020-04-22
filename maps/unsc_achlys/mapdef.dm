@@ -20,3 +20,4 @@
 	overmap_size= 2
 
 	use_overmap = 1
+	force_gamemode = "achlys"
