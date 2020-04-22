@@ -295,10 +295,13 @@
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
 		return 0
+	var/oldhealth = health
 	if(Proj.damtype == BURN)
 		adjustFireLoss(max(0,Proj.damage-max(0,resistance-Proj.armor_penetration)))
 	else
 		adjustBruteLoss(max(0,Proj.damage-max(0,resistance-Proj.armor_penetration)))
+	if(oldhealth == health)
+		visible_message("<span class = 'notice'>[src] shrugs off \the [Proj]'s impact.</span>")
 	do_pain_scream()
 	return 1
 

@@ -132,7 +132,12 @@
 				//walk(src, 0) //The players can shoot-move, so can we!
 				OpenFire(target_mob)
 			if(get_dist(loc,target_mob) > world.view/2) //Don't let them flee!
-				walk_to(src, target_mob, 1, move_to_delay)
+				var/do_chase = 1
+				if(istype(target_mob,/mob/living/carbon/human))
+					if(locate(/obj/item/weapon/gun/shotgun in target_mob)) //Okay wait they have a shotty.
+						do_chase = 0
+				if(do_chase)
+					walk_to(src, target_mob, 1, move_to_delay)
 		else
 			stance = HOSTILE_STANCE_ATTACKING
 			walk_to(src, target_mob, 1, move_to_delay)
