@@ -107,13 +107,15 @@ var/list/points_of_interest = list()
 
 	if(flagship && faction)
 		var/datum/faction/F = GLOB.factions_by_name[faction]
-		F.flagship = src
-		F.get_flagship_name()	//update the archived name
+		if(F)
+			F.flagship = src
+			F.get_flagship_name()	//update the archived name
 
 	if(base && faction)
 		var/datum/faction/F = GLOB.factions_by_name[faction]
-		F.base = src
-		F.get_base_name()		//update the archived name
+		if(F)
+			F.base = src
+			F.get_base_name()		//update the archived name
 
 	my_faction = GLOB.factions_by_name[faction]
 

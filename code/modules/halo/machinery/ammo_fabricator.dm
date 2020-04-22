@@ -12,7 +12,6 @@
 	/datum/autolathe/recipe/m118_ma37,
 	/datum/autolathe/recipe/m634_sap,
 	/datum/autolathe/recipe/a762_ap,
-	///datum/autolathe/recipe/m112_ap_fs_ds, //Power weapons should not have replenishable ammo from most fabricators.
 	/datum/autolathe/recipe/m443_fmj,
 	/datum/autolathe/recipe/m762ma3,
 	/datum/autolathe/recipe/mc9mm,
