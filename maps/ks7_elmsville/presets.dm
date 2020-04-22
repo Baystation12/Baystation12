@@ -416,7 +416,8 @@
 	/obj/item/weapon/gun/projectile/ma5b_ar/MA37,
 	/obj/item/weapon/gun/projectile/m6d_magnum,
 	/obj/item/weapon/storage/backpack/marine,
-	/obj/item/weapon/melee/baton/humbler
+	/obj/item/weapon/melee/baton/humbler,
+	/obj/item/weapon/storage/box/handcuffs
 	)
 
 /obj/structure/closet/secure_closet/ks7_police/ammo
