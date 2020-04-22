@@ -45,7 +45,7 @@
 	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. Negative values speeds you up. This is an associative list: item slot - slowdown
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
 	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) //This is the lower bound for armor values. Take this and multiply by (armor thickness /10)+1 for effective max values.
-	var/armor_thickness //The thickness of the armor, in mm. Keep null to opt-out usage of system for item. This value, set at compile time is the maximum value of thickness for this item. Armor can only lose 10% of this value per-hit.
+	var/armor_thickness = 20 //The thickness of the armor, in mm. Keep null to opt-out usage of system for item. This value, set at compile time is the maximum value of thickness for this item. Armor can only lose 10% of this value per-hit.
 	var/list/armor_thickness_modifiers = list()//A list containing the weaknesses of the armor, used when performing armor-thickness depletion. Format: damage_type - multiplier
 	var/list/allowed = null //suit storage stuff.
 	var/max_suitstore_w_class = ITEM_SIZE_LARGE //suitstore stuff
