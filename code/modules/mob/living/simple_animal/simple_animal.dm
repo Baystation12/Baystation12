@@ -135,29 +135,30 @@
 		visible_message("<span class = 'notice'>[src.name] seems to become more docile.</span>")
 
 /mob/living/simple_animal/proc/handle_leader_pathing()
-	if(leader_follow && get_dist(loc,leader_follow.loc) < 14 && loc != leader_follow.loc)//A bit higher than a single screen
-		if(istype(loc,/obj/vehicles))
-			var/obj/vehicles/v = loc
-			v.exit_vehicle(src,1)
-		walk_to(src,pick(orange(2,leader_follow.loc)),0,move_to_delay)
-		if(istype(leader_follow.loc,/obj/vehicles))
-			var/obj/vehicles/v = leader_follow.loc
-			if(v.Adjacent(src))
-				if(!v.enter_as_position(src,"gunner"))
-					v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s gunner seat.</span>")
-					if(!v.enter_as_position(src,"passenger"))
-						v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s passenger seat.</span>")
-						set_leader(null)
+	if(leader_follow)
+		if(get_dist(loc,leader_follow.loc) < 14 && loc != leader_follow.loc)//A bit higher than a single screen
+			if(istype(loc,/obj/vehicles))
+				var/obj/vehicles/v = loc
+				v.exit_vehicle(src,1)
+			walk_to(src,pick(orange(2,leader_follow.loc)),0,move_to_delay)
+			if(istype(leader_follow.loc,/obj/vehicles))
+				var/obj/vehicles/v = leader_follow.loc
+				if(v.Adjacent(src))
+					if(!v.enter_as_position(src,"gunner"))
+						v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s gunner seat.</span>")
+						if(!v.enter_as_position(src,"passenger"))
+							v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s passenger seat.</span>")
+							set_leader(null)
+						else
+							v.visible_message("<span class = 'notice'>[name] enters [v.name]'s passenger seat.</span>")
+							return 1
 					else
-						v.visible_message("<span class = 'notice'>[name] enters [v.name]'s passenger seat.</span>")
+						v.visible_message("<span class = 'notice'>[name] enters [v.name]'s gunner seat.</span>")
 						return 1
-				else
-					v.visible_message("<span class = 'notice'>[name] enters [v.name]'s gunner seat.</span>")
-					return 1
-	else
-		if(leader_follow && loc != leader_follow.loc)
-			set_leader(null)
-		walk(src,0)
+		else
+			if(leader_follow && loc != leader_follow.loc)
+				set_leader(null)
+			walk(src,0)
 		return 0
 
 /mob/living/simple_animal/Life()
@@ -207,7 +208,7 @@
 								allow_move = 1
 								break
 							moving_to = pick(dirs_pickfrom)
-							if(!istype(get_step(src,moving_to),/turf/simulated/open))
+							if(!istype(get_step(src,moving_to),/turf/simulated/open) && isnull(locate(/obj/structure/bardbedwire) in moving_to))
 								allow_move = 1
 							dirs_pickfrom -= moving_to
 						set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
@@ -293,13 +294,13 @@
 
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
-		return
+		return 0
 	if(Proj.damtype == BURN)
 		adjustFireLoss(max(0,Proj.damage-max(0,resistance-Proj.armor_penetration)))
 	else
 		adjustBruteLoss(max(0,Proj.damage-max(0,resistance-Proj.armor_penetration)))
 	do_pain_scream()
-	return 0
+	return 1
 
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
 	..()
@@ -341,7 +342,7 @@
 							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
-		return
+		return 0
 	if((meat_type || harvest_products.len) && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
@@ -350,7 +351,7 @@
 			visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
 		else
 			O.attack(src, user, user.zone_sel.selecting)
-
+			return 1
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")
