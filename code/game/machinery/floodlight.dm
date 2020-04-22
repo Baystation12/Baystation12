@@ -13,7 +13,8 @@
 	var/brightness_on = 8		//can't remember what the maxed out value is
 
 /obj/machinery/floodlight/New()
-	cell = new/obj/item/weapon/cell/crap(src)
+	if(!cell)
+		cell = new/obj/item/weapon/cell/crap(src)
 	..()
 
 	if(on)
@@ -132,3 +133,14 @@
 				cell = W
 				to_chat(user, "You insert the power cell.")
 	update_icon()
+
+/obj/machinery/floodlight/active
+	on = 1
+
+/obj/machinery/floodlight/active/standard_cell/Initialize()
+	cell = new/obj/item/weapon/cell/standard (src)
+	. = ..()
+
+/obj/machinery/floodlight/active/hi_cap/Initialize()
+	cell = new/obj/item/weapon/cell/high (src)
+	. = ..()
