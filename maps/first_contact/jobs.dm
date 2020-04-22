@@ -39,7 +39,7 @@
 /datum/job/colonist/mayor
 	title = "KS7 Mayor"
 	total_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/ks7_colonist/mayor
+	outfit_type = /decl/hierarchy/outfit/job/ks7_mayor
 
 /datum/job/colonist/aerodrome
 	title = "KS7 Aerodrome Technician"

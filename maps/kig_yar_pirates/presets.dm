@@ -33,6 +33,7 @@
 	/obj/item/weapon/storage/belt/covenant_ammo,
 	/obj/item/device/radio/headset/covenant,
 	/obj/item/weapon/storage/wallet/random,
+	/obj/item/language_learner/kigyar_to_common,
 	/obj/item/weapon/melee/baton/humbler/covenant
 	)
 
@@ -42,5 +43,6 @@
 	/obj/item/weapon/gun/energy/plasmapistol/fastfire,
 	/obj/item/weapon/storage/backpack/sangheili,
 	/obj/item/weapon/storage/belt/covenant_ammo,
+	/obj/item/language_learner/kigyar_to_common,
 	/obj/item/weapon/melee/baton/humbler
 	)

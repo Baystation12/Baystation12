@@ -28,9 +28,22 @@
 
 	. = ..()
 
-/decl/hierarchy/outfit/job/ks7_colonist/mayor
+/decl/hierarchy/outfit/job/ks7_mayor
 	name = "KS7 Mayor"
+	uniform = /obj/item/clothing/under/suit_jacket/charcoal
+	l_ear = /obj/item/device/radio/headset
+	belt = /obj/item/weapon/gun/projectile/m6d_magnum
+	shoes = /obj/item/clothing/shoes/brown
+	r_pocket = /obj/item/ammo_magazine/m127_saphe
+	l_pocket = /obj/item/weapon/storage/wallet/random
+	pda_slot = null
+
 	l_hand = /obj/item/weapon/card/id/building_key/mayor_master
+
+/decl/hierarchy/outfit/job/ks7_mayor/equip_id(mob/living/carbon/human/H)
+	var/obj/item/weapon/card/id/C = ..()
+	C.assignment = "New Pompeii Mayor"
+	H.set_id_info(C)
 
 /decl/hierarchy/outfit/job/ks7_colonist/aerodrome
 	name = "KS7 Aerodrome Technician"
