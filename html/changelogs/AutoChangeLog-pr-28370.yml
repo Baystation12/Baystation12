@@ -1,0 +1,4 @@
+author: "Qlonever"
+delete-after: True
+changes: 
+  - bugfix: "fixes surgery overlays floating next to the patient"
