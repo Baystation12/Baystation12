@@ -5,10 +5,9 @@
 
 /area/mining_colony/interior
 	name = "Mining Colony Interior"
-	dynamic_lighting = 0
+	dynamic_lighting = 1
 	requires_power= 0
 	has_gravity = 1
-	luminosity = 1
 
 /area/mining_colony/interior/docking
 	name = "Mining Colony Docking Umbilicals"
@@ -46,9 +45,6 @@
 /area/mining_colony/interior/visitor
 	name = "Mining Colony Visitor Quarters"
 
-/area/mining_colony/interior/medical
-	name = "Mining Colony Medical Bay"
-
 /area/mining_colony/interior/comms
 	name = "Mining Colony Communications Shack"
 
@@ -57,4 +53,3 @@
 	dynamic_lighting = 1
 	requires_power= 0
 	has_gravity = 1
-	luminosity = 0
