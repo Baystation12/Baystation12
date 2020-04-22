@@ -1,5 +1,5 @@
 
-/obj/effect/evac_pelican/
+/obj/effect/evac_ship/
 	name = "Evac Pelican Spawn"
 	desc = "You shouldn't see this."
 	invisibility = 101
@@ -9,14 +9,14 @@
 	icon_state = "x3"
 	var/spawned = 0
 
-/obj/effect/evac_pelican/proc/spawn_pelican()
+/obj/effect/evac_ship/proc/spawn_pelican()
 
 	if(!spawned)
 		spawned = 1
-		. = new /obj/structure/evac_pelican(src.loc)
+		. = new /obj/structure/evac_ship(src.loc)
 		qdel(src)
 
-/obj/structure/evac_pelican/
+/obj/structure/evac_ship/
 	name = "D77-TC Pelican"
 	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. Tt can also be used as a support gunship."
 	anchored = 1
@@ -29,7 +29,7 @@
 	bound_width = 96
 	bound_height = 192
 
-/obj/structure/evac_pelican/New()
+/obj/structure/evac_ship/New()
 	..()
 	layer = MOB_LAYER + 1
 	var/matrix/M = src.transform
@@ -39,7 +39,7 @@
 	spawn(50)
 		set_thrust(0)
 
-/obj/structure/evac_pelican/proc/set_thrust(var/thrusting = 1)
+/obj/structure/evac_ship/proc/set_thrust(var/thrusting = 1)
 	var/old_thrust = is_thrusting
 	is_thrusting = thrusting
 	if(old_thrust != is_thrusting)
@@ -48,7 +48,9 @@
 		else
 			overlays -= "thrust"
 
-/obj/structure/evac_pelican/attack_generic(var/atom/movable/attacker, var/amount, var/attacktext)
+/obj/structure/evac_ship/attack_generic(var/atom/movable/attacker, var/amount, var/attacktext)
+	//disable destroyable evac ship for now
+	/*
 	//..()
 	var/old_icon_state = icon_state
 	var/pilot_message = pick("They're tearing into the armour plating!","Don't let them near me!","They're destroying the engine housing!","I'm taking damage!")
@@ -81,8 +83,9 @@
 		'sound/effects/blobattack.ogg'\
 		)
 		*/
+		*/
 
-/obj/structure/evac_pelican/proc/world_say_pilot_message(var/pilot_message)
+/obj/structure/evac_ship/proc/world_say_pilot_message(var/pilot_message)
 	//var/image/I = image(icon = 'pilot_head.dmi', icon_state = "head")
 	to_world("\
 		<span class='radio'>\
@@ -93,10 +96,10 @@
 		</span>")
 	//qdel(I)
 
-/obj/structure/evac_pelican/attack_hand(var/mob/M)
+/obj/structure/evac_ship/attack_hand(var/mob/M)
 	attempt_enter(M)
 
-/obj/structure/evac_pelican/proc/attempt_enter(var/mob/L)
+/obj/structure/evac_ship/proc/attempt_enter(var/mob/L)
 	if(isliving(usr))
 		var/mob/living/M = usr
 		if(!M.incapacitated())
@@ -112,7 +115,7 @@
 		else
 			to_chat(M, "<span class='warning'>You are unable to do that.</span>")
 
-/obj/structure/evac_pelican/verb/enter_pelican()
+/obj/structure/evac_ship/verb/enter_pelican()
 	set name = "Enter the Evac Pelican"
 	set src in view()
 	set category = "IC"

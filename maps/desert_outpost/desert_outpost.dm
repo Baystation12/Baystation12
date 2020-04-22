@@ -7,7 +7,7 @@
 	#include "desert_outpost_map.dm"
 	#include "desert_outpost.dmm"
 
-	#include "../_gamemodes/stranded/_all_includes.dm"
+	#include "../_gamemodes/firefight/_all_includes.dm"
 
 	#define using_map_DATUM /datum/map/desert_outpost
 
