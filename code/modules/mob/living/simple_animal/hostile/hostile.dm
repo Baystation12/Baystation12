@@ -233,7 +233,7 @@
 
 	var/turf/loc_infront = get_step(src,dir) //This is used when in complete darkenss, seeing only what's directly in front of them.
 
-	for(var/A in view(dist,src.loc) | loc_infront.contents)
+	for(var/A in view(dist,src.loc) | (loc_infront ? loc_infront.contents : list()))
 		if(istype(A,/mob/living))
 			L += A
 			continue
@@ -250,6 +250,7 @@
 	if(our_overmind)
 		var/list/targlist = ListTargets(7)
 		our_overmind.create_report(5,src,null,targlist.len,assault_target,loc)
+		our_overmind.combat_troops -= src
 	..(gibbed, deathmessage, show_dead_message)
 	stop_automated_movement = 0
 	walk(src, 0)

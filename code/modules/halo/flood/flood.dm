@@ -58,7 +58,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	pain_scream_sounds = list('sound/flood/pain.pain1.ogg','sound/flood/pain.pain15.ogg',\
 							'sound/flood/pain.pain2.ogg','sound/flood/pain.pain3.ogg',\
 							'sound/flood/pain.pain5.ogg','sound/flood/pain.pain6.ogg')
-	assault_target_type = /obj/effect/landmark/assault_target
+	assault_target_type = /obj/effect/landmark/assault_target/flood
 	see_in_dark = 6
 
 	faction = "Flood"
@@ -210,7 +210,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		visible_message("<span class = 'notice'>[src] leaps at [floodform]'s chest cavity and burrows in.</span>")
 		visible_message("<span class = 'danger'>[floodform] lurches back to life, the new infection form twitching in place...</span>")
 		qdel(floodform)
-		adjustBruteLoss(1)
+		qdel(src)
 		return 1 //One at a time.
 	return 0
 
@@ -264,9 +264,9 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 		//
 		GLOB.mob_list -= AM
 		GLOB.live_flood_simplemobs -= AM
+		if(AM:our_overmind)
+			AM:our_overmind.combat_troops -= AM
 		qdel(AM)
-		//AM.loc = null
-		//AM:spawning = 1
 
 		return
 	return ..()
@@ -327,6 +327,8 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 			var/mob/living/simple_animal/hostile/flood/infestor/S = new(spawn_turf)
 			sporesleft -= 1
 			walk_towards(S, pick(range(7, spawn_turf)), 0, 1)
+			if(our_overmind)
+				our_overmind.combat_troops.Add(S)
 			spawn(30)
 				if(S)
 					walk(S, 0)
