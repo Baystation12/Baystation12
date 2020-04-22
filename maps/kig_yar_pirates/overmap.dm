@@ -14,8 +14,10 @@
 	map_bounds = list(27,68,79,32) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
 //overmap weapons//
+/*
 /obj/machinery/overmap_weapon_console/deck_gun_control/local/cov_pulse_turret/kig_yar_pirate
 	deck_gun_area = /area/kigyar_pirate/pulse_lasers
+*/
 
 /obj/effect/overmap/ship/kigyar_missionary
 	name = "Kig-Yar Missionary Vessel"
