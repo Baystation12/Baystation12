@@ -1,5 +1,10 @@
 //#define ZASDBG
 
+#ifdef ZASDBG
+GLOBAL_VAR_INIT(zas_debug_verbose, FALSE)
+GLOBAL_VAR_INIT(zas_debug_overlays, FALSE)
+#endif
+
 #define AIR_BLOCKED 1
 #define ZONE_BLOCKED 2
 #define BLOCKED 3

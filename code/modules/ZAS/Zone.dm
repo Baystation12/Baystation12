@@ -63,7 +63,7 @@ Class Procs:
 #ifdef ZASDBG
 	ASSERT(!invalid)
 	ASSERT(istype(T))
-	ASSERT(!SSair.has_valid_zone(T))
+	ASSERT(!TURF_HAS_VALID_ZONE(T))
 #endif
 
 	var/datum/gas_mixture/turf_air = T.return_air()
@@ -82,7 +82,7 @@ Class Procs:
 	ASSERT(!invalid)
 	ASSERT(istype(T))
 	ASSERT(T.zone == src)
-	soft_assert(T in contents, "Lists are weird broseph")
+	zas_soft_assert(T in contents, "Lists are weird broseph")
 #endif
 	contents.Remove(T)
 	fire_tiles.Remove(T)
@@ -103,6 +103,13 @@ Class Procs:
 	ASSERT(into != src)
 	ASSERT(!into.invalid)
 #endif
+	//rebuild the old zone's edges so that they will be possessed by the new zone
+	for(var/connection_edge/E in edges)
+		if(E.contains_zone(into))
+			continue //don't need to rebuild this edge
+		for(var/turf/T in E.connecting_turfs)
+			SSair.mark_for_update(T)
+
 	c_invalidate()
 	for(var/turf/simulated/T in contents)
 		into.add(T)
@@ -111,16 +118,11 @@ Class Procs:
 		T.dbg(merged)
 		#endif
 
-	//rebuild the old zone's edges so that they will be possessed by the new zone
-	for(var/connection_edge/E in edges)
-		if(E.contains_zone(into))
-			continue //don't need to rebuild this edge
-		for(var/turf/T in E.connecting_turfs)
-			SSair.mark_for_update(T)
-
 /zone/proc/c_invalidate()
 	invalid = 1
 	SSair.remove_zone(src)
+	for(var/connection_edge/E in edges)
+		E.erase()
 	#ifdef ZASDBG
 	for(var/turf/simulated/T in contents)
 		T.dbg(invalid_zone)
@@ -133,7 +135,7 @@ Class Procs:
 		T.update_graphic(graphic_remove = air.graphic) //we need to remove the overlays so they're not doubled when the zone is rebuilt
 		//T.dbg(invalid_zone)
 		T.needs_air_update = 0 //Reset the marker so that it will be added to the list.
-		SSair.mark_for_update(T)
+		SSair.mark_for_update(T, FALSE)
 
 /zone/proc/add_tile_air(datum/gas_mixture/tile_air)
 	//air.volume += CELL_VOLUME

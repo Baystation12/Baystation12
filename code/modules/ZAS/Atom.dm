@@ -54,13 +54,6 @@ turf/c_airblock(turf/other)
 	if(((blocks_air & AIR_BLOCKED) || (other.blocks_air & AIR_BLOCKED)))
 		return BLOCKED
 	
-	//Z-level handling code. Always block if there isn't an open space.
-	if(other.z != src.z)
-		if(other.z < src.z)
-			if(!istype(src, /turf/simulated/open)) return BLOCKED
-		else
-			if(!istype(other, /turf/simulated/open)) return BLOCKED
-
 	if(((blocks_air & ZONE_BLOCKED) || (other.blocks_air & ZONE_BLOCKED)))
 		if(z == other.z)
 			return ZONE_BLOCKED

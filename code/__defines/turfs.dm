@@ -19,4 +19,7 @@
 #define SMOOTH_BLACKLIST 3 //Smooth with all but a blacklist of subtypes
 
 #define RANGE_TURFS(CENTER, RADIUS) block(locate(max(CENTER.x-(RADIUS), 1), max(CENTER.y-(RADIUS),1), CENTER.z), locate(min(CENTER.x+(RADIUS), world.maxx), min(CENTER.y+(RADIUS), world.maxy), CENTER.z))
-#define TURF_IS_EMPTY(T) (!isturf(T) || T:contents.len <= !!T:lighting_overlay)
+#define TURF_IS_EMPTY(T) (!isturf(T) || T:contents:len <= !!T:lighting_overlay)
+
+#define GET_ZSTEP(A, D) ((D & UP) ? get_step(GetAbove(A), D & ~UP) : (D & DOWN) ? get_step(GetBelow(A), D & ~DOWN) : get_step(A, D))
+#define GET_DIR_MZ(A, B) ((A.z > B.z) ? DOWN : (A.z < B.z) ? UP : get_dir(A, B))

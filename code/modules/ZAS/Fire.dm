@@ -162,7 +162,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		var/turf/simulated/enemy_tile = get_step(my_tile, direction)
 
 		if(istype(enemy_tile))
-			if(my_tile.open_directions & direction) //Grab all valid bordering tiles
+			if(my_tile.open_directions_air & direction) //Grab all valid bordering tiles
 				if(!enemy_tile.zone || enemy_tile.fire)
 					continue
 
