@@ -29,6 +29,7 @@
 		/obj/item/weapon/pen,
 		/obj/item/weapon/photo,
 		/obj/item/weapon/reagent_containers/dropper,
+		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
 		/obj/item/weapon/reagent_containers/glass/beaker/vial,
 		/obj/item/device/radio/headset,
 		/obj/item/device/paicard,

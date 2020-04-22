@@ -339,6 +339,13 @@
 /obj/structure/closet/secure_closet/ks7_unsc
 	name = "Crewman - Envoy Armour"
 	desc = "Armour worn by personnel acting as diplomatic envoys to far-flung colonies. Often, no other armour is present on these vessels to reduce insurrectionist ability to frame the unsc."
+	icon = 'icons/obj/guncabinet.dmi'
+	icon_broken = "base"
+	icon_closed = "base"
+	icon_locked = "base"
+	icon_off = "base"
+	icon_opened = "base"
+	icon_state = "base"
 
 /obj/structure/closet/secure_closet/ks7_unsc/WillContain()
 	return list(\
@@ -355,6 +362,13 @@
 /obj/structure/closet/secure_closet/ks7_unsc/ammo
 	name = "Crewman - Ammunition"
 	desc = "Ammunition for weapons provided as part of a crewman's self-defense kit"
+	icon = 'icons/obj/closet.dmi'
+	icon_broken = "hossecurebroken"
+	icon_closed = "hossecure"
+	icon_locked = "hossecure1"
+	icon_off = "hossecureoff"
+	icon_opened = "hossecureopen"
+	icon_state = "hossecure1"
 
 /obj/structure/closet/secure_closet/ks7_unsc/ammo/WillContain()
 	return list(\
@@ -371,6 +385,13 @@
 /obj/structure/closet/secure_closet/ks7_innie
 	name = "Insurrectionist Salvaged Gear"
 	desc = "Gear salvaged from a lightly-armed unsc wreck. Looks like it was for unsc crewmen."
+	icon = 'icons/obj/guncabinet.dmi'
+	icon_broken = "base"
+	icon_closed = "base"
+	icon_locked = "base"
+	icon_off = "base"
+	icon_opened = "base"
+	icon_state = "base"
 
 /obj/structure/closet/secure_closet/ks7_innie/WillContain()
 	return list(\
@@ -387,6 +408,13 @@
 /obj/structure/closet/secure_closet/ks7_innie/ammo
 	name = "Insurrectionist Salvaged Ammunition"
 	desc = "Ammo salvaged from a lightly-armed unsc wreck."
+	icon = 'icons/obj/closet.dmi'
+	icon_broken = "hossecurebroken"
+	icon_closed = "hossecure"
+	icon_locked = "hossecure1"
+	icon_off = "hossecureoff"
+	icon_opened = "hossecureopen"
+	icon_state = "hossecure1"
 
 /obj/structure/closet/secure_closet/ks7_innie/ammo/WillContain()
 	return list(\
@@ -403,6 +431,13 @@
 /obj/structure/closet/secure_closet/ks7_police
 	name = "Police Patrol Gear Locker"
 	desc = "Use this to protect the citizens of your planet from hostile wildlife and people."
+	icon = 'icons/obj/guncabinet.dmi'
+	icon_broken = "base"
+	icon_closed = "base"
+	icon_locked = "base"
+	icon_off = "base"
+	icon_opened = "base"
+	icon_state = "base"
 
 /obj/structure/closet/secure_closet/ks7_police/WillContain()
 	return list(\
@@ -422,6 +457,13 @@
 
 /obj/structure/closet/secure_closet/ks7_police/ammo
 	name = "Police Patrol Ammunition Locker"
+	icon = 'icons/obj/closet.dmi'
+	icon_broken = "hossecurebroken"
+	icon_closed = "hossecure"
+	icon_locked = "hossecure1"
+	icon_off = "hossecureoff"
+	icon_opened = "hossecureopen"
+	icon_state = "hossecure1"
 
 /obj/structure/closet/secure_closet/ks7_police/ammo/WillContain()
 	return list(\
@@ -437,6 +479,13 @@
 
 /obj/structure/closet/secure_closet/ks7_civ
 	name = "Civilian Self-Defense Storage Locker"
+	icon_state = "cabinetdetective"
+	icon_broken = "cabinetdetective_broken"
+	icon_closed = "cabinetdetective"
+	icon_locked = "cabinetdetective_locked"
+	icon_off = "cabinetdetective_broken"
+	icon_opened = "cabinetdetective_open"
+	icon_state = "cabinetdetective_locked"
 
 /obj/structure/closet/secure_closet/ks7_civ/WillContain()
 	return list(\
