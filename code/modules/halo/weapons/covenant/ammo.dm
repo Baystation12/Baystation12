@@ -29,6 +29,9 @@
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 
+/obj/item/projectile/bullet/covenant/plasmapistol/fastfire
+	damage = 20
+
 /obj/item/projectile/bullet/covenant/plasmapistol/overcharge
 	damage = 60
 	icon_state = "Overcharged_Plasmapistol shot"
@@ -36,6 +39,9 @@
 /obj/item/projectile/bullet/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
 	empulse(impacted.loc,0,1)
+
+/obj/item/projectile/bullet/covenant/plasmapistol/overcharge/fastfire
+	damage = 30
 
 /obj/item/projectile/bullet/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
