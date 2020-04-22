@@ -20,7 +20,7 @@
 	handle_casings = CASELESS
 	burst = 4
 	burst_delay = 1.4
-	burst_accuracy = list(0,-1,-1,-2)
+	burst_accuracy = list(0,0,0,-1)
 	dispersion = list(0.0, 0.4, 0.8, 1.0)
 	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5/rubber)
 	w_class = ITEM_SIZE_NORMAL
