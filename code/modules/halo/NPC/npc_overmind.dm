@@ -1,5 +1,5 @@
 
-GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_overmind/flood)
+GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 
 #define REPORT_CONTACT 1
 #define REPORT_CONSTRUCT 2
@@ -148,7 +148,6 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 			required_troops[4]--
 		if(is_chosen)
 			chosen_squadmembers += m
-			m.target_margin = 2
 			m.assault_target_type = null //Assume control over tasked members, just in case they were spawned before the overmind activated.
 
 	assign_taskpoint(taskpoint,chosen_squadmembers)
@@ -177,6 +176,12 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 			create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
 
 /datum/npc_overmind/proc/process_casualty_report(var/datum/npc_report/report)
+
+	constructor_troops -= report.reporter_mob
+	combat_troops -= report.reporter_mob
+	support_troops -= report.reporter_mob
+	other_troops -= report.reporter_mob
+
 	var/list/squad_assigned = assigned_taskpoints[report.reporter_assault_point]
 	if(isnull(squad_assigned))
 		return
@@ -207,17 +212,22 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 		reports -= report
 		qdel(report)
 
+/datum/npc_overmind
+	var/prune_index = 1
+
 /datum/npc_overmind/proc/prune_trooplists()
-	var/list/lists_prune = list(constructor_troops,combat_troops,support_troops,other_troops)
-	for(var/list/list_prune in lists_prune)
-		for(var/entry in list_prune)
-			var/mob/living/simple_animal/hostile/entry_mob = entry
-			if(isnull(entry))
-				list_prune -= entry
-				continue
-			if(entry_mob.health <= 0)
-				list_prune -= entry
-				continue
+	var/list/list_prune = combat_troops
+	var/checks = 0
+	var/checks_max = min(list_prune.len, 6)
+	while(checks < checks_max && list_prune.len)
+		checks++
+		if(prune_index > list_prune.len)
+			prune_index = 1
+		var/mob/living/simple_animal/hostile/entry_mob = list_prune[prune_index]
+		if(entry_mob && entry_mob.health > 0)
+			prune_index++
+			continue
+		list_prune.Cut(prune_index, prune_index + 1)
 
 /datum/npc_overmind/proc/unassign_taskpoint(var/obj/taskpoint)
 	var/squad_assigned = assigned_taskpoints[taskpoint]
@@ -225,7 +235,6 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 	for(var/mob/living/simple_animal/hostile/m in squad_assigned)
 		m.last_assault_target = m.assault_target
 		m.assault_target = null
-		m.target_margin = initial(m.target_margin)
 	return squad_assigned
 
 /datum/npc_overmind/proc/assign_taskpoint(var/taskpoint,var/list/squad)
@@ -236,7 +245,6 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 		assigned_taskpoints[taskpoint] = squad
 	for(var/mob/living/simple_animal/hostile/m in squad)
 		m.assault_target = taskpoint
-		m.target_margin = 2
 
 /datum/npc_overmind/proc/prune_taskpoints()
 	for(var/taskpoint in taskpoints)
@@ -256,8 +264,9 @@ GLOBAL_DATUM_INIT(flood_overmind, /datum/npc_overmind/flood, new /datum/npc_over
 /datum/npc_overmind/flood
 	overmind_name = "Gravemind"
 	constructor_types = list(/mob/living/simple_animal/hostile/builder_mob/flood)
-	combat_types = list(/mob/living/simple_animal/hostile/flood/combat_form)
-	support_types = list(/mob/living/simple_animal/hostile/flood/infestor,/mob/living/simple_animal/hostile/flood/carrier)
+	combat_types = list(/mob/living/simple_animal/hostile/flood/combat_form,\
+		/mob/living/simple_animal/hostile/flood/infestor,\
+		/mob/living/simple_animal/hostile/flood/carrier)
 
 /obj/structure/overmind_controller
 	name = "overmind controller"
