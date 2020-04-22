@@ -1,0 +1,5 @@
+author: "Deadmon"
+delete-after: True
+changes: 
+  - rscadd: "Adds Medical Resident title, sort of like a physician lite role. Mostly identical in mechanics to Physician, with the exception of a slightly lower minimum age requirement and less overall points."
+  - rscdel: "Removes Resident alt-title from Physician."
