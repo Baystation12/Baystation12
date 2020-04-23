@@ -25,8 +25,10 @@
 	var/target_state = TARGET_NONE
 
 	var/cycle_to_external_air = 0
+	var/scrubber_assist = 0
 	var/tag_pump_out_external
 	var/tag_pump_out_internal
+	var/tag_pump_out_scrubber
 
 	var/tag_air_alarm
 
@@ -46,9 +48,12 @@
 	if (istype(M, /obj/machinery/embedded_controller/radio/airlock))	//if our controller is an airlock controller than we can auto-init our tags
 		var/obj/machinery/embedded_controller/radio/airlock/controller = M
 		cycle_to_external_air = controller.cycle_to_external_air
+		scrubber_assist = controller.scrubber_assist
 		if(cycle_to_external_air)
 			tag_pump_out_external = "[id_tag]_pump_out_external"
 			tag_pump_out_internal = "[id_tag]_pump_out_internal"
+		if(scrubber_assist)
+			tag_pump_out_scrubber = "[id_tag]_pump_out_scrubber"
 		tag_exterior_door = controller.tag_exterior_door? controller.tag_exterior_door : "[id_tag]_outer"
 		tag_interior_door = controller.tag_interior_door? controller.tag_interior_door : "[id_tag]_inner"
 		tag_airpump = controller.tag_airpump? controller.tag_airpump : "[id_tag]_pump"
