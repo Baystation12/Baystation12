@@ -130,7 +130,7 @@
 	sharp = 1
 	armor_penetration = 20
 	step_delay = 0.75 //slower than most
-	var/max_track_steps = 6
+	var/max_track_steps = 3
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
@@ -270,7 +270,7 @@
 	invisibility = 101
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
-	max_track_steps = 3
+	max_track_steps = 2
 	shield_damage = 50
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
