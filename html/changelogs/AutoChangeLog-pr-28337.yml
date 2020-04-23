@@ -1,0 +1,5 @@
+author: "Blue Bit"
+delete-after: True
+changes: 
+  - maptweak: "Fixed floating lights on the meatstation away site."
+  - maptweak: "Adjusted meatstation away site spawns. Mobs spawns have been reduced and moved a bit. Some more clutter was added. Some loot was moved."
