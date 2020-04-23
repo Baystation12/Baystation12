@@ -1,8 +1,0 @@
-author: "ghostsheet"
-delete-after: True
-changes: 
-  - bugfix: "Made atmospheric pressure account for clothing accessory; fire overpants works again"
-  - tweak: "Firefighting tank is now a double extended oxygen tank, to fit on the firesuit's equipment slot,"
-  - tweak: "Firesuit can now carry it's helmet on the equipment slot"
-  - tweak: "Made the emergency forcing tool deal extra dmg against glass"
-  - tweak: "Re balance slowdown and item sizes and dmg of firefighting equipment"

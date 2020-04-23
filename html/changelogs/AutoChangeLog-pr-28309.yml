@@ -1,6 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - bugfix: "The Teleport, Ethereal Jaunt, and Summon Holy Relic wizard spells now work properly!"
-  - tweak: "If a spell fails to cast, it now displays a message."
-  - tweak: "Improved the spellbook's formatting."

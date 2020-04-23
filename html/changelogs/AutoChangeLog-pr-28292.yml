@@ -1,8 +1,0 @@
-author: "Ilysen"
-delete-after: True
-changes: 
-  - tweak: "Changed the functionality of food trays to be much more flexible than before!"
-  - tweak: "While on Grab intent, use a food tray on a tile or an item to scoop up what items you can."
-  - tweak: "Also while on Grab intent, hit a table with a food tray to dump out the tray's contents onto the table, or a fridge to dump in what you can from the tray."
-  - tweak: "Use any other intent to put the tray down without dumping out its contents."
-  - tweak: "Borgs can use Help intent in place of Grab intent!"

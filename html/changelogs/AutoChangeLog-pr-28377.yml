@@ -1,6 +1,0 @@
-author: "Karlias"
-delete-after: True
-changes: 
-  - maptweak: "Adds missing Cooler and heater to Skrellship Chem Lab"
-  - maptweak: "Adds health HUDs to Medical for Skrellship"
-  - maptweak: "Adds Flags to plant on exoplanets to Skrellship Cargo Bay"
