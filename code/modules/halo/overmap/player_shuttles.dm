@@ -36,8 +36,8 @@
 	ship.loc = null
 	ship.make_player_controlled()
 	ship.slipspace_to_location(om_loc.loc,0)
-	if(ship.loc = null)
-		ship.loc = on_loc.loc
+	if(ship.loc == null)
+		ship.loc = om_loc.loc
 	return ship
 
 /obj/machinery/shuttle_spawner/proc/check_requisition_allowed()

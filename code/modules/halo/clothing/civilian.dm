@@ -193,7 +193,7 @@
 	icon_override = null
 
 /obj/item/clothing/suit/storage/marine/emsville_marshall/civ
-	name = "Civiliain Armour"
+	name = "Civilian Armour"
 	desc = "Armour worn by Civilians, for safety against various hazards"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 35, bullet = 45, laser = 40, energy = 40, bomb = 40, bio = 25, rad = 25)
