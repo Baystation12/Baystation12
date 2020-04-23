@@ -26609,7 +26609,8 @@
 	pixel_y = -28
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
+	dir = 1;
+	id_tag = null
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/tiled/white,
@@ -27229,7 +27230,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
 "qab" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume,
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 2;
+	frequency = 1441;
+	icon_state = "map_injector";
+	id = "xenobot_in";
+	use_power = 1
+	},
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -27264,7 +27271,20 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
 "qcb" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/atmospherics/unary/vent_pump/tank{
+	dir = 2;
+	external_pressure_bound = 0;
+	external_pressure_bound_default = 0;
+	icon_state = "map_vent_in";
+	id_tag = "xenobot_out";
+	initialize_directions = 2;
+	internal_pressure_bound = 2000;
+	internal_pressure_bound_default = 2000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 0
+	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
 "qdb" = (
@@ -28019,9 +28039,11 @@
 /area/rnd/xenobiology/xenoflora)
 "rab" = (
 /obj/machinery/computer/air_control{
+	input_tag = "xenobot_in";
 	name = "Xenoflora Gas Monitor";
-	sensor_tag = "xenobot_sensor";
-	sensor_name = "Xenoflora Environment"
+	output_tag = "xenobot_out";
+	sensor_name = "Xenoflora Environment";
+	sensor_tag = "xenobot_sensor"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
