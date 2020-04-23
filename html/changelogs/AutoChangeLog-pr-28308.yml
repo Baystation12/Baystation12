@@ -1,0 +1,5 @@
+author: "Alex6511"
+delete-after: True
+changes: 
+  - tweak: "The GUP airlock has been overhauled, again. The buttons now function as follows: Purge Air, removes the air and puts it outside the GUP. Equalize With Exterior, which uses exterior air to fill the GUP to the pressure found outside the GUP. Hold, which turns off all vents/scrubbers to save power."
+  - tweak: "The GUP airlock now functions with a combination of scrubbers and vents, this may improve performance under some situations."
