@@ -1,0 +1,5 @@
+author: "Flying_loulou"
+delete-after: True
+changes: 
+  - rscadd: "Adds pencil cases to the loadout (utility tab)."
+  - rscadd: "Adds light first-aid kits to the exploration department's lockers."
