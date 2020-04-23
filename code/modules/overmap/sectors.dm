@@ -159,7 +159,7 @@ var/list/points_of_interest = list()
 	loc = T
 	walk_to(src,exit_loc,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
-		walk_to(src,null)
+		walk(src,0)
 
 /obj/effect/overmap/proc/do_slipspace_enter_effects(var/sound)
 	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS, MODIFIED.//
