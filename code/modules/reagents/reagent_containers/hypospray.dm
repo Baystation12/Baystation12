@@ -4,10 +4,11 @@
 
 /obj/item/weapon/reagent_containers/hypospray
 	name = "hypospray"
-	desc = "The DeForest Medical Corporation hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
+	desc = "The Medican hypospray is a sterile, air-needle autoinjector for rapid administration of drugs to patients."
 	icon = 'icons/obj/syringe.dmi'
 	item_state = "hypo"
 	icon_state = "hypo"
+	w_class = ITEM_SIZE_LARGE
 	amount_per_transfer_from_this = 5
 	unacidable = 1
 	volume = 30

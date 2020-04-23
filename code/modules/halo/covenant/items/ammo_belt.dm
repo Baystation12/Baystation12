@@ -35,7 +35,23 @@
 	can_hold = list(/obj/item/weapon/storage/firstaid/unsc,\
 	/obj/item/weapon/storage/firstaid/erk,\
 	/obj/item/weapon/storage/firstaid/combat/unsc,\
-	/obj/item/projectile/bullet/covenant/needles)
+	/obj/item/projectile/bullet/covenant/needles,
+	/obj/item/device/healthanalyzer,
+	/obj/item/weapon/reagent_containers/dropper,
+	/obj/item/weapon/reagent_containers/glass/beaker,
+	/obj/item/weapon/reagent_containers/glass/bottle,
+	/obj/item/weapon/reagent_containers/syringe,
+	/obj/item/weapon/flame/lighter/zippo,
+	/obj/item/weapon/storage/fancy/cigarettes,
+	/obj/item/weapon/storage/pill_bottle,
+	/obj/item/stack/medical,
+	/obj/item/device/flashlight/pen,
+	/obj/item/clothing/mask/surgical,
+	/obj/item/clothing/head/surgery,
+	/obj/item/clothing/gloves/latex,
+	/obj/item/weapon/reagent_containers/hypospray,
+	/obj/item/clothing/glasses/hud/health
+	)
 
 /obj/item/clothing/accessory/storage/bandolier/covenant
 	name = "Covenant Bandolier"
