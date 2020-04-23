@@ -1052,3 +1052,9 @@ BLIND     // can't see anything
 	gender = NEUTER
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	var/undergloves = 1
+
+
+/obj/item/clothing/get_pressure_weakness(pressure,zone)
+	. = ..()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		. = min(., A.get_pressure_weakness(pressure,zone))

@@ -826,7 +826,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/has_embedded()
 	return
 
-/obj/item/proc/get_pressure_weakness(pressure)
+/obj/item/proc/get_pressure_weakness(pressure,zone)
 	. = 1
 	if(pressure > ONE_ATMOSPHERE)
 		if(max_pressure_protection != null)

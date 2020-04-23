@@ -18,20 +18,23 @@
 		slot_r_hand_str = "fire_suit",
 	)
 	w_class = ITEM_SIZE_LARGE//large item
+	flags_inv = HIDETAIL
+
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO| ARMS
+	armor = list(laser = ARMOR_LASER_MINOR, energy = ARMOR_ENERGY_MINOR, bomb = ARMOR_BOMB_MINOR)
+	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/weapon/extinguisher,/obj/item/weapon/crowbar/emergency_forcing_tool,/obj/item/clothing/head)	
+
 	gas_transfer_coefficient = 0.90
 	permeability_coefficient = 0.50
-	armor = list(melee = 0, bullet = 0, laser = 10, energy = 10, bomb = 15, bio = 0, rad = 0)
-	body_parts_covered = UPPER_TORSO | ARMS
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency,/obj/item/weapon/extinguisher,/obj/item/weapon/crowbar/emergency_forcing_tool)
-	flags_inv = HIDETAIL
-	max_pressure_protection = FIRESUIT_MAX_PRESSURE
 	heat_protection = UPPER_TORSO | LOWER_TORSO | ARMS
-	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | ARMS
 
-/obj/item/clothing/suit/fire/New()
-	..()
-	slowdown_per_slot[slot_wear_suit] = 0.4
+	max_pressure_protection = FIRESUIT_MAX_PRESSURE
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+
+/obj/item/clothing/suit/fire/Initialize()
+	. = ..()
+	slowdown_per_slot[slot_wear_suit] = 0.5
 
 /obj/item/clothing/suit/fire/firefighter
 	icon_state = "firesuit"
@@ -51,9 +54,9 @@
 	)
 	w_class = ITEM_SIZE_HUGE//bulky item
 
-/obj/item/clothing/suit/fire/heavy/New()
+/obj/item/clothing/suit/fire/heavy/Initialize()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 0.6
+	slowdown_per_slot[slot_wear_suit] = 0.5
 
 /*
  * Bomb protection
