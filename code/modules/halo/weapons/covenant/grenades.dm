@@ -4,12 +4,12 @@
 	desc = "When activated, the coating of this grenade becomes a powerful adhesive, sticking to anyone it is thrown at."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
-	throw_speed = 0.2
+	throw_speed = 0 //sleep each tick
 	det_time = 50
 	can_adjust_timer = 0
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 	alt_explosion_range = 1
-	alt_explosion_damage_max = 70
+	alt_explosion_damage_max = 80
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
 	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))
