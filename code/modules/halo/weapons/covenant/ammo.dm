@@ -191,7 +191,7 @@
 
 /obj/item/projectile/bullet/covenant/needles/Move()
 	. = ..()
-	if(kill_count % 2 == 0)
+	if(kill_count % 3 == 0)
 		return
 	if(locked_target)
 		if(get_dir(loc,locked_target) in list(dir,turn(dir,45),turn(dir,-45)))
