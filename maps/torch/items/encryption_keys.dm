@@ -16,12 +16,12 @@
 /obj/item/device/encryptionkey/headset_torchcorp
 	name = "corporate radio encryption key"
 	icon_state = "nt_cypherkey"
-	channels = list("Science" = 1, "Service" = 1)
+	channels = list("Service" = 1)
 
 /obj/item/device/encryptionkey/headset_torchcl
 	name = "corporate liaison radio encryption key"
 	icon_state = "nt_cypherkey"
-	channels = list("Science" = 1, "Service" = 1, "Command" = 1)
+	channels = list("Service" = 1, "Command" = 1)
 
 /obj/item/device/encryptionkey/headset_deckofficer
 	name = "deck chief's encryption key"
