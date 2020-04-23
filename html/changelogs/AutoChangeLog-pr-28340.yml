@@ -1,0 +1,4 @@
+author: "Flying_loulou"
+delete-after: True
+changes: 
+  - tweak: "Fires now stop burning under 220K"
