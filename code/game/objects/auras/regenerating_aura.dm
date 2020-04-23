@@ -73,7 +73,7 @@
 	if(prob(grow_chance))
 		for(var/limb_type in H.species.has_limbs)
 			var/obj/item/organ/external/E = H.organs_by_name[limb_type]
-			if(E && E.organ_tag != BP_HEAD && !E.vital && !E.is_usable())	//Skips heads and vital bits...
+			if(E && E.organ_tag != BP_HEAD && !E.vital && (E.is_stump() || E.status & ORGAN_DEAD))	//Skips heads and vital bits...
 				if (H.nutrition > grow_threshold)
 					E.removed()			//...because no one wants their head to explode to make way for a new one.
 					qdel(E)
