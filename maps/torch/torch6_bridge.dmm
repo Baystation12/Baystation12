@@ -6183,16 +6183,18 @@
 	pixel_x = -32;
 	pixel_y = 32
 	},
-/obj/item/device/radio/intercom/locked/ai_private{
+/obj/item/device/radio/intercom{
 	dir = 1;
-	pixel_y = -22
+	pixel_y = -22;
+	frequency = 1475
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
 	},
-/obj/item/device/radio/intercom/custom{
-	pixel_y = 22
+/obj/item/device/radio/intercom{
+	pixel_y = 22;
+	frequency = 1485
 	},
 /obj/structure/cable/cyan{
 	d2 = 4;
