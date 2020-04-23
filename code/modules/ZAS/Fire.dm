@@ -320,6 +320,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		log_debug("new temperature = [temperature]; new pressure = [return_pressure()]")
 		#endif
 
+		if (temperature<220)
+			firelevel = 0
+
 		return firelevel
 
 datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
