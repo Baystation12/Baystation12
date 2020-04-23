@@ -1,0 +1,4 @@
+author: "YodaDoge"
+delete-after: True
+changes: 
+  - tweak: "Shieldgenerator shields now have a chance breach while the shield integrity is below 100% - up from 35%."
