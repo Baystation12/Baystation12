@@ -27,7 +27,8 @@
 		/datum/reagent/nutriment/cornoil = /obj/item/weapon/reagent_containers/food/condiment/cornoil,
 		/datum/reagent/sugar = /obj/item/weapon/reagent_containers/food/condiment/sugar,
 		/datum/reagent/nutriment/mayo = /obj/item/weapon/reagent_containers/food/condiment/mayo,
-		/datum/reagent/nutriment/vinegar = /obj/item/weapon/reagent_containers/food/condiment/vinegar
+		/datum/reagent/nutriment/vinegar = /obj/item/weapon/reagent_containers/food/condiment/vinegar,
+		/datum/reagent/oliveoil = /obj/item/weapon/reagent_containers/food/condiment/small/oliveoil
 		)
 
 /obj/item/weapon/reagent_containers/food/condiment/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
@@ -362,3 +363,10 @@
 	amount_per_transfer_from_this = 1
 	volume = 20
 	starting_reagents = list(/datum/reagent/nutriment/soysauce = 20)
+
+/obj/item/weapon/reagent_containers/food/condiment/small/oliveoil
+	name = "olive oil"
+	desc = "Used in food preparation and flavoring."
+	icon_state = "oliveoilsmall"
+	center_of_mass = "x=16;y=8"
+	starting_reagents = list(/datum/reagent/oliveoil = 20)
