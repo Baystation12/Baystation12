@@ -238,7 +238,7 @@
 
 /obj/docking_umbilical/east
 	dir = EAST
-	pixel_x = 32
+	pixel_x = 0
 
 /obj/docking_umbilical/west
 	dir = WEST
@@ -256,7 +256,7 @@
 
 /obj/docking_umbilical/covenant/east
 	dir = EAST
-	pixel_x = 32
+	pixel_x = 0
 
 /obj/docking_umbilical/covenant/west
 	dir = WEST
@@ -279,7 +279,7 @@
 
 /obj/docking_umbilical/one_way/east
 	dir = EAST
-	pixel_x = 32
+	pixel_x = 0
 
 /obj/docking_umbilical/one_way/west
 	dir = WEST

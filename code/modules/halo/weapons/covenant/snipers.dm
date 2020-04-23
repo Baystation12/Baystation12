@@ -90,7 +90,7 @@
 
 /obj/item/weapon/gun/energy/beam_rifle/Fire(atom/target,var/mob/living/user)
 	if(world.time < next_allowed_fire)
-		update_next_allowed_fire(3)
+		update_next_allowed_fire()
 		playsound(user,'code/modules/halo/sounds/beam_rifle_overheat.ogg',100,1)
 		to_chat(user,"<span class = 'warning'>[src.name]'s automatic cooling system activates, halting the firing process!</span>")
 	else

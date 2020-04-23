@@ -61,7 +61,7 @@
 	name = "energy beam"
 	desc = ""
 	damage = 55
-	armor_penetration = 65
+	armor_penetration = 60
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	step_delay = 0
@@ -130,7 +130,7 @@
 	sharp = 1
 	armor_penetration = 20
 	step_delay = 0.75 //slower than most
-	var/max_track_steps = 3
+	var/max_track_steps = 4
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
@@ -194,8 +194,11 @@
 	if(kill_count % 2 == 0)
 		return
 	if(locked_target)
-		redirect(locked_target, loc)
-		dir = get_dir(loc,locked_target)
+		if(get_dir(loc,locked_target) in list(dir,turn(dir,45),turn(dir,-45)))
+			redirect(locked_target, starting)
+			dir = get_dir(loc,locked_target)
+		else
+			locked_target = null
 	if(initial(kill_count) - kill_count >= max_track_steps)
 		locked_target = null
 
