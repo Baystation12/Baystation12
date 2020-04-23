@@ -384,11 +384,12 @@
 		energy_failure()
 		return SHIELD_BREACHED_FAILURE
 
-	if(prob(10 - field_integrity()))
+	var/breachChance = rand(field_integrity(), field_integrity() + 100)
+	if(breachChance <= CRITICAL_BREACH_THRESHOLD)
 		return SHIELD_BREACHED_CRITICAL
-	if(prob(20 - field_integrity()))
+	else if(breachChance <= MAJOR_BREACH_THRESHOLD)
 		return SHIELD_BREACHED_MAJOR
-	if(prob(35 - field_integrity()))
+	else if(breachChance <= MINOR_BREACH_THRESHOLD)
 		return SHIELD_BREACHED_MINOR
 	return SHIELD_ABSORBED
 
