@@ -30,7 +30,7 @@
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(3 * removed, 0)
+		M.heal_organ_damage(6 * removed, 0)
 
 /datum/reagent/kelotane
 	name = "Kelotane"
@@ -44,7 +44,7 @@
 
 /datum/reagent/kelotane/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, 3 * removed)
+		M.heal_organ_damage(0, 6 * removed)
 
 /datum/reagent/dermaline
 	name = "Dermaline"
@@ -59,7 +59,7 @@
 
 /datum/reagent/dermaline/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, 6 * removed)
+		M.heal_organ_damage(0, 12 * removed)
 
 /datum/reagent/dylovene
 	name = "Dylovene"
