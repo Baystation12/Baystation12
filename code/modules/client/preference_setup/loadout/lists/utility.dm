@@ -97,3 +97,12 @@ modular computers
 	display_name = "laptop computer, advanced"
 	path = /obj/item/modular_computer/laptop/preset/custom_loadout/advanced
 	cost = 6
+
+/****************
+Pouches and kits
+****************/
+
+/datum/gear/utility/pencilcase
+	display_name = "Pencil case"
+	path = /obj/item/weapon/storage/fancy/pencilcase
+	cost = 2

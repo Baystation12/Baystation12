@@ -100,6 +100,28 @@
 	for(var/obj/item/weapon/pen/crayon/crayon in contents)
 		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
 
+/*
+ * Pencil Case
+ */
+
+/obj/item/weapon/storage/fancy/pencilcase
+	name = "pencil case"
+	desc = "A pencil case for all those schoolboys to carry."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "pencil_case"
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
+	max_storage_space = 6 * ITEM_SIZE_TINY
+	key_type = /obj/item/weapon/pen
+	startswith = list(
+		/obj/item/weapon/pen,
+		/obj/item/weapon/pen/blue,
+		/obj/item/weapon/pen/red,
+		/obj/item/weapon/pen/green,
+		/obj/item/weapon/pen/crayon/yellow,
+		/obj/item/weapon/pen/crayon/purple,
+		)
+
 ////////////
 //CIG PACK//
 ////////////
