@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Security and Medical intercom frequencies now have proper telecoms handling and unique radio colors."
+  - maptweak: "The AI core now has 3 standard intercoms instead of two special intercoms and a standard one. The intercoms are configured for Common, Medical (I), and Security (I) by default."
