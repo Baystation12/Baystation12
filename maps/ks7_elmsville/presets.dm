@@ -7,6 +7,8 @@
 	icon_state = "pirate_recruit"
 	icon_living  = "pirate_recruit"
 	icon_dead = "pirate_recruit_dead"
+	health = 100
+	maxHealth = 100
 	resistance = 5
 	possible_weapons = list(\
 	/obj/item/weapon/gun/projectile/m6d_magnum,
@@ -23,6 +25,8 @@
 	icon_state = "pirate_civ"
 	icon_living  = "pirate_civ"
 	icon_dead = "pirate_civ_dead"
+	health = 100
+	maxHealth = 100
 	resistance = 0
 	possible_weapons = list(\
 	/obj/item/weapon/gun/projectile/m7_smg,
@@ -37,6 +41,8 @@
 	icon_state = "pirate_merc"
 	icon_living  = "pirate_merc"
 	icon_dead = "pirate_merc_dead"
+	health = 100
+	maxHealth = 100
 	resistance = 10
 	possible_weapons = list(\
 	/obj/item/weapon/gun/projectile/ma5b_ar,
@@ -53,6 +59,8 @@
 	icon_state = "pirate_heavy"
 	icon_living  = "pirate_heavy"
 	icon_dead = "pirate_heavy_dead"
+	health = 100
+	maxHealth = 100
 	resistance = 15
 	possible_weapons = list(\
 	/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts,
