@@ -33,7 +33,7 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 	var/message = ""				//whatever it says to the guy affected by it
 	var/selection_type = "view"		//can be "range" or "view"
 	var/atom/movable/holder			//where the spell is. Normally the user, can be an item
-	var/duration = 0 //how long the spell lasts
+	var/duration = 0 				//how long the spell lasts
 
 	var/list/spell_levels = list(Sp_SPEED = 0, Sp_POWER = 0) //the current spell levels - total spell levels can be obtained by just adding the two values
 	var/list/level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 0) //maximum possible levels in each category. Total does cover both.
@@ -106,10 +106,12 @@ var/list/spells = typesof(/spell) //needed for the badmin verb for now
 		holder = user //just in case
 	if(!cast_check(skipcharge, user))
 		return
+	to_chat(user, SPAN_NOTICE("You start casting [name]..."))
 	if(cast_delay && !spell_do_after(user, cast_delay))
 		return
 	var/list/targets = choose_targets(user)
 	if(!check_valid_targets(targets))
+		to_chat(user, SPAN_WARNING("[name] fizzles. There are no valid targets nearby."))
 		return
 	var/time = 0
 	admin_attacker_log(user, "attempted to cast the spell [name]")
