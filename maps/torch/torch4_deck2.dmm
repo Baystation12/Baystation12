@@ -2841,7 +2841,7 @@
 	icon_state = "warning";
 	dir = 8
 	},
-/obj/machinery/light/small,
+/obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
 "fX" = (
@@ -3657,7 +3657,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/light/small,
+/obj/machinery/light,
 /turf/simulated/floor/tiled,
 /area/engineering/engineering_bay)
 "hV" = (
@@ -6349,6 +6349,9 @@
 	icon_state = "bordercolorhalf";
 	dir = 1
 	},
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_monitoring)
 "ot" = (
@@ -8002,7 +8005,7 @@
 	icon_state = "bordercolorhalf";
 	dir = 8
 	},
-/obj/machinery/light/small{
+/obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -8263,7 +8266,7 @@
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 1
 	},
-/obj/machinery/light/small,
+/obj/machinery/light,
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_monitoring)
 "sZ" = (
@@ -13172,7 +13175,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/foreport)
 "GJ" = (
-/obj/machinery/light/small{
+/obj/machinery/light{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -13563,7 +13566,7 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk,
-/obj/machinery/light/small{
+/obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
