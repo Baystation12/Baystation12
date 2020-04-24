@@ -235,6 +235,11 @@
 	break_umbilicals(1)
 	. = ..()
 
+/obj/effect/overmap/ship/Crossed(var/obj/item/projectile/crosser)
+	if(istype(crosser))
+		crosser.Bump(src)
+	. = ..()
+
 /*
 /obj/effect/overmap/ship/update_icon()
 	if(!is_still())
