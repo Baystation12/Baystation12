@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - admin: "Added a reload savefile button to PP. Hopefully this will be temporary. (Ha ha)."
