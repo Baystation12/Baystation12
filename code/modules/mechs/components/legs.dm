@@ -41,3 +41,8 @@
 	if(!istype(target_loc))
 		return 0 // What are you even doing.
 	return 1
+
+/obj/item/mech_component/propulsion/get_damage_string()
+	if(!motivator || !motivator.is_functional())
+		return SPAN_DANGER("disabled")
+	return ..()
