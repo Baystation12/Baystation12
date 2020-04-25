@@ -352,7 +352,7 @@ var/list/name_to_material
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
-	integrity = 150
+	integrity = 250
 	brute_armor = 5
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -399,7 +399,7 @@ var/list/name_to_material
 	name = "titanium"
 	brute_armor = 10
 	burn_armor = 8
-	integrity = 200
+	integrity = 300
 	melting_point = 3000
 	stack_type = null
 	icon_base = "metal"
@@ -410,7 +410,7 @@ var/list/name_to_material
 /material/plasteel/ocp
 	name = "osmium-carbide plasteel"
 	stack_type = /obj/item/stack/material/ocp
-	integrity = 200
+	integrity = 300
 	melting_point = 12000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -666,7 +666,7 @@ var/list/name_to_material
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
 	integrity = 51
-	icon_base = "wood"
+	icon_base = "solid"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
 	shard_can_repair = 0 // you can't weld splinters back into planks

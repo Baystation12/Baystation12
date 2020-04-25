@@ -73,8 +73,10 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenan
 	icon = KIGYAR_CLOTHING_PATH
 	icon_state = "naturallegarmor"
 	item_state = " "
+	armor = list(melee = 35, bullet = 35, laser = 5, energy = 25, bomb = 15, bio = 0, rad = 0)
 
 	canremove = 0
+	unacidable = 1
 
 /datum/species/kig_yar/get_random_name(var/gender)
 	return pick(GLOB.first_names_kig_yar)

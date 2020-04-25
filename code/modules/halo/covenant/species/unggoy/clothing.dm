@@ -8,7 +8,7 @@
 	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	icon_state = "combatharness_minor"
 
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS //Essentially, the entire body besides the head
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS //Essentially, the entire body besides the head,feet,hands
 
 	flags_inv = HIDESUITSTORAGE|HIDEBACK
 	armor = list(melee = 55, bullet = 40, laser = 55, energy = 45, bomb = 40, bio = 25, rad = 25) //worse than marine
@@ -229,5 +229,29 @@
 
 	rebreath_efficiency = 65
 
+	siemens_coefficient = 0.5
+	permeability_coefficient = 0.05
+	armor = list(melee = 35, bullet = 35, laser = 5, energy = 25, bomb = 15, bio = 0, rad = 0)
+
+	canremove = 0
+	unacidable = 1
+
+/obj/item/clothing/gloves/grunt_gloves
+	name = "Natural Armor"
+	desc = "The natural armor on your arms provides a small amount of protection against the elements."
+	icon = 'code/modules/halo/covenant/species/unggoy/grunt_gear.dmi'
+	icon_state = "naturalhandarmor"
+	item_state = "blank"
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)
+
+	canremove = 0
+	unacidable = 1
+
+//First Contact Variants//
+
+/obj/item/clothing/suit/armor/special/unggoy_combat_harness/first_contact
+	name = "Unggoy Combat Harness, Modified"
+	desc = "An unggoy combat harness, with plating stripped and assumadly sold off for Gekz."
+	armor = list(melee = 30, bullet = 40, laser = 40, energy = 40, bomb = 40, bio = 20, rad = 20)
 
 #undef GRUNT_GEAR_ICON

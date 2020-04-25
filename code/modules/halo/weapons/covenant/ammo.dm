@@ -29,6 +29,9 @@
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
 
+/obj/item/projectile/bullet/covenant/plasmapistol/fastfire
+	damage = 20
+
 /obj/item/projectile/bullet/covenant/plasmapistol/overcharge
 	damage = 60
 	icon_state = "Overcharged_Plasmapistol shot"
@@ -36,6 +39,9 @@
 /obj/item/projectile/bullet/covenant/plasmapistol/overcharge/on_impact(var/atom/impacted)
 	..()
 	empulse(impacted.loc,0,1)
+
+/obj/item/projectile/bullet/covenant/plasmapistol/overcharge/fastfire
+	damage = 30
 
 /obj/item/projectile/bullet/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
@@ -55,7 +61,7 @@
 	name = "energy beam"
 	desc = ""
 	damage = 55
-	armor_penetration = 65
+	armor_penetration = 60
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	step_delay = 0
@@ -124,7 +130,7 @@
 	sharp = 1
 	armor_penetration = 20
 	step_delay = 0.75 //slower than most
-	var/max_track_steps = 6
+	var/max_track_steps = 4
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
@@ -185,11 +191,14 @@
 
 /obj/item/projectile/bullet/covenant/needles/Move()
 	. = ..()
-	if(kill_count % 2 == 0)
+	if(kill_count % 3 == 0)
 		return
 	if(locked_target)
-		redirect(locked_target, loc)
-		dir = get_dir(loc,locked_target)
+		if(get_dir(loc,locked_target) in list(dir,turn(dir,45),turn(dir,-45)))
+			redirect(locked_target, starting)
+			dir = get_dir(loc,locked_target)
+		else
+			locked_target = null
 	if(initial(kill_count) - kill_count >= max_track_steps)
 		locked_target = null
 
@@ -264,7 +273,7 @@
 	invisibility = 101
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
-	max_track_steps = 3
+	max_track_steps = 2
 	shield_damage = 50
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle

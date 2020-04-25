@@ -59,6 +59,21 @@
 	name = "sand"
 	has_resources = 1
 
+/turf/simulated/floor/exoplanet/scorched_rock
+	name = "scorched rock"
+	icon = 'code/modules/halo/icons/turfs/natureicons.dmi'
+	icon_state = "marbleblack"
+
+/turf/simulated/floor/exoplanet/scorched
+	name = "scorched rock"
+	icon = 'icons/turf/jungle.dmi'
+	icon_state = "scorched"
+
+/turf/simulated/floor/exoplanet/rockfloor
+	name = "rock"
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "asteroidplating"
+
 /turf/simulated/floor/exoplanet/desert/New()
 	icon_state = "desert[rand(0,5)]"
 	..()

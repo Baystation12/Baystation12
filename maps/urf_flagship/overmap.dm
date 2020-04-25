@@ -11,6 +11,7 @@
 
 	map_bounds = list(4,99,142,52)
 
+	ship_max_speed = 2
 	parent_area_type = /area/urf_flagship
 
 /obj/machinery/button/toggle/alarm_button/urf_flagship_alarm

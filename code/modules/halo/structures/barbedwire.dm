@@ -25,7 +25,7 @@
 	if(isliving(AM))
 		var/mob/living/L = AM
 		L.adjustBruteLoss(damage)
-		if(prob(25))
+		if(L && prob(25))
 			L.Weaken(2)
 		if(ismob(AM))
 			to_chat(AM,"<span class='warning'>You are caught in [src]!</span>")
