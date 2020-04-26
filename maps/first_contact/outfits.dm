@@ -31,7 +31,7 @@
 /decl/hierarchy/outfit/job/ks7_mayor
 	name = "KS7 Mayor"
 	uniform = /obj/item/clothing/under/suit_jacket/charcoal
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/device/radio/headset/police
 	belt = /obj/item/weapon/gun/projectile/m6d_magnum
 	shoes = /obj/item/clothing/shoes/brown
 	r_pocket = /obj/item/ammo_magazine/m127_saphe
