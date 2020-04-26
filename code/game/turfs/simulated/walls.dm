@@ -236,14 +236,16 @@
 	O.plane = LIGHTING_PLANE
 	O.layer = FIRE_LAYER
 
-	src.ChangeTurf(/turf/simulated/floor/plating)
+	src.ChangeTurf(floor_type)
 
 	var/turf/simulated/floor/F = src
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
 	to_chat(user, "<span class='warning'>The thermite starts melting through the wall.</span>")
 
-	spawn(100)
+	var/material/wallmat = get_material_by_name(DEFAULT_WALL_MATERIAL)
+
+	spawn(100 * (max_health/wallmat.integrity))
 		if(O)
 			qdel(O)
 //	F.sd_LumReset()		//TODO: ~Carn
