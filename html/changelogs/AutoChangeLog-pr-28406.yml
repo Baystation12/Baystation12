@@ -1,0 +1,5 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscdel: "Removed unsued advanced weapons boards for exosuits."
+  - bugfix: "Fixes a case with some UI interactions from cockpit of exosuit not working correctly."
