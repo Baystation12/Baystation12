@@ -245,7 +245,7 @@
 
 	var/material/wallmat = get_material_by_name(DEFAULT_WALL_MATERIAL)
 
-	spawn(100 * (max_health/wallmat.integrity))
+	spawn(100 * (max_health()/wallmat.integrity))
 		if(O)
 			qdel(O)
 //	F.sd_LumReset()		//TODO: ~Carn
