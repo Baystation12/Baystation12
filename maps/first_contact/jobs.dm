@@ -114,3 +114,4 @@
 	outfit_type = /decl/hierarchy/outfit/job/ks7_unsc
 	whitelisted_species = list(/datum/species/human)
 	intro_blurb = "You have been tasked to act as diplomatic personnel with the goal of establishing and maintaining a line of contact to the independent colony on KS7, New Pompeii."
+	access = list(786676)

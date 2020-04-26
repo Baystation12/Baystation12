@@ -39,7 +39,7 @@
 "aM" = (/obj/structure/lattice,/turf/space,/area/space)
 "aN" = (/obj/machinery/door/airlock/multi_tile{icon_state = "closed"; dir = 8},/turf/simulated/floor/tiled,/area/civ_shuttle)
 "aO" = (/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/tiled,/area/civ_shuttle)
-"aP" = (/obj/structure/table/steel,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aP" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/civ_shuttle)
 "aQ" = (/obj/structure/table/steel,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/civ_shuttle)
 "aR" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled,/area/civ_shuttle)
 "aS" = (/obj/machinery/vending/wallmed1{pixel_x = 25},/turf/simulated/floor/tiled,/area/civ_shuttle)
@@ -55,9 +55,11 @@
 "bc" = (/obj/structure/bed/chair/wood{icon_state = "wooden_chair_preview"; dir = 1},/turf/simulated/floor/wood,/area/civ_shuttle)
 "bd" = (/obj/machinery/chemical_dispenser/bar_alc,/turf/simulated/floor/wood,/area/civ_shuttle)
 "be" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/obj/machinery/chemical_dispenser/bar_soft,/turf/simulated/floor/wood,/area/civ_shuttle)
-"bf" = (/obj/machinery/door/airlock/external{frequency = 1379; icon_state = "door_locked"; id_tag = "solar_xeno_inner"; locked = 1; name = "Port Cargo Airlock"; req_access = list(11,13)},/obj/machinery/door/airlock,/turf/simulated/floor/plating,/area/civ_shuttle)
 "bg" = (/obj/docking_umbilical/south{name = "Starboard Cargo Umbilical"},/turf/simulated/floor/plating,/area/civ_shuttle)
 "bh" = (/obj/structure/lattice,/turf/simulated/wall/r_wall,/area/civ_shuttle)
+"bi" = (/obj/structure/table/steel,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"bj" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor,/area/civ_shuttle)
+"bk" = (/obj/machinery/light/small,/turf/simulated/floor,/area/civ_shuttle)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -72,18 +74,18 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaMaaaaacagagagagagahamajanahaoahahaoah
 aaaaaaaaaaaaaaaaaaaaaaaMaMababaMaMaMaMaMaMaMaMaMacagagagagagahajajapahajajahajajahajajacaaaaaaaaaaaa
 aaaaaaaaaaaaaMaMacaqacacaaaaaMaaaaaaaaaaaaaMaaaaacagagaragagahajajasahatauahatauahatauacaaaaaaaaaaaa
 aaaaaaaaaaaaaMacacavavacaaaaaMaaaaaaaaaaaaaMaaaaacahahahafahahafahahahahahahahahahahahacaaaaaaaaaaaa
-aaaaaaaaaaaaacacawaxayacaaaaaMaaaaaaaaaaaaaMaaaaacazazaAayayayayayayayaAayazazahaBayayacaaaaaaaaaaaa
-aaaaaaaaaaaaaCaDaEayayacacacacacacacacacacacacacacazazayayayayayayayayayayazazahayayayaFaaaaaaaaaaaa
-aaaaaaaaaaaaaGaDayayayaHaHaHaHaHaHaHaHaHaHaHaHaHaHayayayayayayayayayayayayayayayayayayaIaaaaaaaaaaaa
-aaaaaaaaaaaaaCaJaKayayaLaHaHaHaHaHaHaHaHaHaHaHaHaLayayayayayayayayayayayayayayaNayayayaIaaaaaaaaaaaa
-aaaaaaaaaaaaaCaDayayayacacacacacacacacacacacacacacaOaOayayayayayayayayayayaOaOahaPayayaIaaaaaaaaaaaa
-aaaaaaaaaaaaacacaQaRaSacaaaaaMaaaaaaaaaaaaaMaaaaacaOaOaTayayayayayayayaTayaOaOahaUayayacaaaaaaaaaaaa
+aaaaaaaaaaaaacacawaxayacaaaaaMaaaaaaaaaaaaaMaaaaacazazaAayayayayaAayayaAayazazahaBayayacaaaaaaaaaaaa
+aaaaaaaaaaaaaCaDaEayayacacacacacacacacacacacacacacazazayayayayayayayayayayazazahaPayayaFaaaaaaaaaaaa
+aaaaaaaaaaaaaGaDayayayaHaHaHaHaHaHaHaHaHaHbjaHaHaHayayayayayayayayayayayayayayayayayayaIaaaaaaaaaaaa
+aaaaaaaaaaaaaCaJaKayayaLaHaHbkaHaHaHaHaHaHaHaHaHaLayayayayayayayayayayayayayayaNayayayaIaaaaaaaaaaaa
+aaaaaaaaaaaaaCaDayayayacacacacacacacacacacacacacacaOaOayayayayayayayayayayaOaOahbiayayaIaaaaaaaaaaaa
+aaaaaaaaaaaaacacaQaRaSacaaaaaMaaaaaaaaaaaaaMaaaaacaOaOaTayayayayaTayayaTayaOaOahaUayayacaaaaaaaaaaaa
 aaaaaaaaaaaaaMacacaDaDacaaaaaMaaaaaaaaaaaaaMaaaaacahahahafahahafahahahahahahahahahahahacaaaaaaaaaaaa
-aaaaaaaaaaaaaMaMacaVacacaaaaaMaaaaaaaaaaaaaMaaaaacagagaWagagahajajajajakajajajaXaYajaZacaaaaaaaaaaaa
+aaaaaaaaaaaaaMaMacaVacacaaaaaMaaaaaaaaaaaaaMaaaaacagagaWagagahajakajajakajajajaXaYajaZacaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaMaMababaMaMaMaMaMaMaMaMaMacagagagagagahajajajajajaiaYajaXaYajbaacaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaMaaaaacagagagagagahajajbbbbajajbcajaXaYajbdacaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaMaaaaacagagagagagahaiaYaYaYajajajajajajajbeacaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaMacacacacbfacacacacacacacacacacacacacacacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaMaaaaacagagagagagahaiaYaYaYajajatajajajajbeacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaMacacacacafacacacacacacacacacacacacacacacaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMacaeacaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMacbgacaMaMaMaMaMaMaMaMaMaMaMaMaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMbhbhbhaMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
