@@ -231,7 +231,7 @@
 
 /obj/structure/hygiene/shower/proc/update_sound(var/playing)
 	if(playing && !sound_token)
-		sound_token = GLOB.sound_player.PlayLoopingSound(src, 'sound/machines/shower_mid.ogg', 'sound/machines/shower_mid.ogg', 50, 3)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, "\ref[src]", 'sound/machines/shower_mid.ogg', 50, 3)
 	else if(!playing && sound_token)
 		QDEL_NULL(sound_token)
 
