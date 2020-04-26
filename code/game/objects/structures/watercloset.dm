@@ -213,6 +213,7 @@
 	var/watertemp = "normal"	//freezing, normal, or boiling
 	var/is_washing = 0
 	var/list/temperature_settings = list("normal" = 310, "boiling" = T0C+100, "freezing" = T0C)
+	var/datum/sound_token/sound_token
 
 /obj/structure/hygiene/shower/New()
 	..()
@@ -228,15 +229,26 @@
 	anchored = 1
 	mouse_opacity = 0
 
+/obj/structure/hygiene/shower/proc/update_sound(var/playing)
+	if(playing && !sound_token)
+		sound_token = GLOB.sound_player.PlayLoopingSound(src, 'sound/machines/shower_mid.ogg', 'sound/machines/shower_mid.ogg', 50, 3)
+	else if(!playing && sound_token)
+		QDEL_NULL(sound_token)
+
 /obj/structure/hygiene/shower/attack_hand(var/mob/M)
 	on = !on
 	update_icon()
 	if(on)
+		playsound(src, 'sound/machines/shower_start.ogg', 50, 3)
+		update_sound(1)
 		if (M.loc == loc)
 			wash(M)
 			process_heat(M)
 		for (var/atom/movable/G in src.loc)
 			G.clean_blood()
+	else
+		update_sound(0)
+		playsound(src, 'sound/machines/shower_end.ogg', 50, 3)
 
 /obj/structure/hygiene/shower/attackby(obj/item/I as obj, var/mob/user)
 	if(istype(I, /obj/item/device/scanner/gas))
