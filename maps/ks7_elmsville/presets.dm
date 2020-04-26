@@ -342,6 +342,13 @@
 	id = "casinoShutter"
 	req_access = list(6766)
 
+/obj/machinery/button/remote/blast_door/bar_shutter
+	name = "Shutter Control"
+	_wifi_id = "barShutter"
+	id = "barShutter"
+	req_access = list(6766)
+
+
 /obj/machinery/autolathe/ammo_fabricator/police_station
 	machine_recipes = newlist(\
 	/datum/autolathe/recipe/m255_sap_he,

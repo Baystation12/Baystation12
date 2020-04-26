@@ -359,7 +359,7 @@
 "gU" = (/obj/structure/closet/crate,/obj/random/projectile,/turf/simulated/floor/plating,/area/exo_ice_facility/exterior/autolight)
 "gV" = (/obj/structure/reagent_dispensers/beerkeg,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gW" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
-"gX" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/glass/rag,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"gX" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/glass/rag,/obj/machinery/button/remote/blast_door/bar_shutter,/obj/item/weapon/reagent_containers/food/drinks/shaker,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "gY" = (/obj/structure/lattice,/turf/simulated/open,/area/exo_ice_facility/exterior/caves/volcano)
 "gZ" = (/obj/item/weapon/stool/bar/padded,/obj/effect/landmark/start/bartender,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "ha" = (/obj/structure/bardbedwire,/turf/simulated/mineral,/area/exo_ice_facility/exterior/caves)
@@ -378,13 +378,13 @@
 "hn" = (/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "ho" = (/mob/living/simple_animal/npc/colonist/organlegger,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "hp" = (/obj/machinery/light{dir = 1},/mob/living/simple_animal/npc/colonist/mineral_trader,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/bar)
-"hq" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/donkpockets,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
-"hr" = (/obj/structure/table/standard,/obj/item/weapon/spacecash/bundle/credits1,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"hq" = (/obj/structure/table/standard,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"hr" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/donkpockets,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "hs" = (/obj/structure/table/woodentable,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/machinery/button/windowtint/casino_window,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/casino)
 "ht" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "hu" = (/obj/machinery/atmospherics/pipe/tank/nitrous_oxide,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "hv" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/steroid,/obj/item/weapon/reagent_containers/syringe/steroid,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
-"hw" = (/obj/structure/table/standard,/obj/random/smokes,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"hw" = (/obj/structure/table/standard,/obj/item/weapon/spacecash/bundle/credits1,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "hx" = (/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/bar)
 "hy" = (/obj/effect/loot_marker/pirateDefenders,/turf/simulated/floor/exoplanet/rockfloor,/area/exo_ice_facility/exterior/caves)
 "hz" = (/obj/effect/loot_marker/pirateDefenders,/turf/simulated/floor/asteroid/planet,/area/exo_ice_facility/exterior/autolight)
@@ -488,10 +488,10 @@
 "jt" = (/obj/structure/bed/chair/wood,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "ju" = (/obj/machinery/cooker/oven,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/pirate_camp/right)
 "jv" = (/obj/structure/bardbedwire,/turf/simulated/floor/planet/dirt,/area/exo_ice_facility/exterior/autolight)
-"jw" = (/obj/structure/table/woodentable,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Sushi Bar Shutters"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
-"jx" = (/obj/structure/table/woodentable,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Sushi Bar Shutters"},/obj/random/smokes,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
+"jw" = (/obj/structure/table/woodentable,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Kitchen Shutter"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
+"jx" = (/obj/structure/table/woodentable,/obj/random/smokes,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Kitchen Shutter"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
 "jy" = (/obj/machinery/cooker/cereal,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/pirate_camp/right)
-"jz" = (/obj/structure/table/woodentable,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Sushi Bar Shutters"},/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
+"jz" = (/obj/structure/table/woodentable,/obj/item/weapon/reagent_containers/food/snacks/fortunecookie,/obj/machinery/door/blast/shutters{dir = 2; id = "sushi"; layer = 3.1; name = "Kitchen Shutter"},/turf/simulated/floor/tiled{tag = "icon-steel_dirty"; icon_state = "steel_dirty"},/area/exo_ice_facility/interior/bar)
 "jA" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/bar)
 "jB" = (/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/bar)
 "jC" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (EAST)"; icon_state = "wooden_chair_preview"; dir = 4},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
@@ -743,7 +743,7 @@
 "oo" = (/obj/machinery/light/invis,/turf/simulated/floor/carpet,/area/exo_ice_facility/interior/casino)
 "op" = (/obj/machinery/door/airlock/house_4,/turf/simulated/floor/tiled/freezer,/area/exo_ice_facility/interior/housing)
 "oq" = (/obj/machinery/door/airlock/house_5,/turf/simulated/floor/tiled/freezer,/area/exo_ice_facility/interior/housing)
-"or" = (/obj/structure/table/standard,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"or" = (/obj/structure/table/standard,/obj/random/smokes,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "os" = (/obj/machinery/chemical_dispenser/bar_soft/full,/obj/structure/table/woodentable,/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/casino)
 "ot" = (/obj/machinery/door/airlock/pirate_vault,/turf/simulated/floor/reinforced,/area/exo_ice_facility/interior/pirate_camp/armory)
 "ou" = (/obj/structure/window/framed,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/pirate_camp/left)
@@ -870,6 +870,7 @@
 "qL" = (/obj/machinery/light/small{dir = 4},/obj/structure/table/standard,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/obj/item/clothing/mask/gas/half,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "qM" = (/obj/item/weapon/wirecutters,/turf/simulated/floor/plating,/area/exo_ice_facility/exterior/autolight)
 "qN" = (/turf/simulated/wall/strong,/area/exo_ice_facility/interior/organlegger_den)
+"qO" = (/obj/machinery/vending/boozeomat,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 
 (1,1,1) = {"
 qtaZaZdxaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZaZ
@@ -923,12 +924,12 @@ aZdxaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadaabgaaaaaaaaaaaaaaeFaaaaaaaaaaaaaaaaaafyaaaa
 aZdxdxaaaaaaaaaaaaaaaaaaaaaaaaaaaaadeFadaaaaaaapaabgbgaaaaaaaaaabgaafyaaaafyaaaaaaaaaaaaababbibifCfCbibiababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbcbcdAdAdAdAdAfjfjfjfjfjfjfjfjfjfjfjdAdAdAdAgIgIgIgIbcbcbcaaaaaaaaaaadbcaaaaaaaaaaaaaaadadadaaaaaaaaaaaaaaaaaaaaadadadaaaaadadaaaaaaaaaaaaaaaaaaaaaaaaaadxdxaZ
 aZdxdxaaaaaaaaaaaaaaaaaafEaaaaaaaaadeFadaaaaaaaaaaaaaaaaaaaaaaaaaafyfyaafyfyaapNaaaaaaababbibifFacacfGbibiabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbcdAdAdAdAdAdAfjfjfvfvfvfvfvfvfjfjfjfjfjdAdAdAdAdAfjbcbcbcbcbcaaaaaaaabcadadaaaaadadadadaaaaaaaaaaaaaaaaaaaaaaaaaaaaadadadadadaaaaaaaaaaaaaaaaaaaaaaaadxdxdxaZ
 aZdxdxaaaaaaapaaaaaaaaaaaaaaaaaaaaaaeFadeSeSaaaaaaaaaaaaaaaaaafHaaaaaaaaaafyaaaaaafyaaabbibifFacfIacfKacbiababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadbcdAdAdAdAdAdAfjfjfvfvfvfvfvfvfvfvfvfjfjfjfjdAdAdAfjfjdAdAbcadadaaaaaabcadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaapaaaaaaaaaaaaadadaaaaaaaaaaaaaaaaaaaaaaaadxdxdxaZ
-aZdxaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaafyaaaaaafyaaaaaaaaaaabbifLacacacacfMacbibiabaaaabcbcaaaabcaaaaaaaaaaaaaabcadbcdAdAdAdAdAdAfjfjfvfvfvfvfvfvfvfvfvfvfvfjfjfjfjfjfjfjdAdAdAbcadadaaaabcadaaaaaaapaaaakIkIkIkIkIkIaaaaaaaaaaaaaaaaaaaaaaaaaabcbcaaaaaaaaaaaaaaaaaaaadxdxdxdxaZ
-aZdxdxaaaaaaaaaaaaaaaabgbgbgbgbgeFaaaaaaaaaaaaaafNaaaaaaaaaaaacmaaaaaaaafyfyaaaaaaaaaaabbiacacfOfIfCbcbcacbiabaaaaaabcaabcbcaaaaaaaaaaaaaaaaadaddAdAdAdAfjfjfjfjfvfvfvfvfJfvfvfvfvfvfvfvfvfjfjfjfjfjfjdAdAbcbcbcaaaaaaadaaaaaaaaaaaakIgLgMgNgOkIkIkIkIaaaaaaaaaaaaaaaaaaaabcbcaaaaaaaaaaaaaaaaaaaadxdxdxdxaZ
-aZdxdxdxaaaaaaaaaaaacmaaaaaaaaaaaaaaaaaaaafTahfHaaaaaaaaaaaaaacmaaaaapaafyaaaafBaaaaaaaaaaacbcbcacfUfUbcbcfxfVaaaaaabcbcbcfWaaaaaaaaaaaaaabcadbcdAdAfjfjfjfjfjfvfvfvdAnCnDfJfvnCfvfvfvfvfvfvfvfvfvfjfjdAdAbcbcbcaaaaaaaaaaaaaaaaaaaakIgPgPgPgPgQgRgSkIgKgKgTgTgKgKgTgTgKaaaabcadaaaaaaaaaaaaaaaaaaaadxdxdxaZ
-aZdxdxdxdxdxaaaaaaaaaaaafTaaaaaaaaadadaaaaaaaaaaaaaaaaaaaaaaaaaaaafyaaaafyaaaagagaaaaaaafzbcbcbcbcfUbcbcfxfxfVaaaaaabcaafBbcaaaaaaaaaaaaaabcbcaddAdAfjfjfjfjfvfvfvdAdAnCnCnEnCnCnCdAdAfvfvfvfvfvfvfvfjfjdAdAbcbcaaaaadadaaaaaaaaaaaakIgVgPgZgXkIpQpRkIgKgKhehlhphehlhlgTaaaaaaadaaaaaaaaaaaaaaaadxdxdxdxdxaZ
-aZdxdxdxdxaaaaaaaaaaaaaaahaaaaaaaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafyaaaagagggagagagggaaagaacacfKacbcacabbighgibcaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbcdAfjfjfjfjfvfvfvfvdAnCnCgHgYgYgHnCnCdAdAfvfvfvfvfvfvfjfjdAdAbcbcaaaaadadaagKgKgKgKgKkIhqhrorhwkIgQkIkIgKhxhehlpThxhehegTaaaaaaadaaaaaaaaaaaaaadxdxdxdxdxdxaZ
-aZdxdxaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFaaaaaaaaaaaaaaaaaaaaaaaaaaaagagggagagagggggagagagngagagaacfGacfUfCabbiaaaaaabcaaaaaabcaaaaaaaaaaaaaaaaaabcbcfjfjfjfjfjfvfvfvfvfvnCgHgHgHgYgHgHnCnCdAdAfvfvfvfvfvfjfjdAdAbcbcaaaaaabcadgKhBgPjfjhjipUgWgWgWjjgPgPgPjkhxhxhxhxhxhxhxgKaaaaaaadadaaaaaaaaaaaaaadxdxdxdxdxaZ
+aZdxaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaafyaaaaaafyaaaaaaaaaaabbifLacacacacfMacbibiabaaaabcbcaaaabcaaaaaaaaaaaaaabcadbcdAdAdAdAdAdAfjfjfvfvfvfvfvfvfvfvfvfvfvfjfjfjfjfjfjfjdAdAdAbcadadaaaabcadaaaaaaapaakIkIkIkIkIkIkIaaaaaaaaaaaaaaaaaaaaaaaaaabcbcaaaaaaaaaaaaaaaaaaaadxdxdxdxaZ
+aZdxdxaaaaaaaaaaaaaaaabgbgbgbgbgeFaaaaaaaaaaaaaafNaaaaaaaaaaaacmaaaaaaaafyfyaaaaaaaaaaabbiacacfOfIfCbcbcacbiabaaaaaabcaabcbcaaaaaaaaaaaaaaaaadaddAdAdAdAfjfjfjfjfvfvfvfvfJfvfvfvfvfvfvfvfvfjfjfjfjfjfjdAdAbcbcbcaaaaaaadaaaaaaaaaakIqOgLgMgNgOkIkIkIkIaaaaaaaaaaaaaaaaaaaabcbcaaaaaaaaaaaaaaaaaaaadxdxdxdxaZ
+aZdxdxdxaaaaaaaaaaaacmaaaaaaaaaaaaaaaaaaaafTahfHaaaaaaaaaaaaaacmaaaaapaafyaaaafBaaaaaaaaaaacbcbcacfUfUbcbcfxfVaaaaaabcbcbcfWaaaaaaaaaaaaaabcadbcdAdAfjfjfjfjfjfvfvfvdAnCnDfJfvnCfvfvfvfvfvfvfvfvfvfjfjdAdAbcbcbcaaaaaaaaaaaaaaaaaakIgPgPgPgPgPgQgRgSkIgKgKgTgTgKgKgTgTgKaaaabcadaaaaaaaaaaaaaaaaaaaadxdxdxaZ
+aZdxdxdxdxdxaaaaaaaaaaaafTaaaaaaaaadadaaaaaaaaaaaaaaaaaaaaaaaaaaaafyaaaafyaaaagagaaaaaaafzbcbcbcbcfUbcbcfxfxfVaaaaaabcaafBbcaaaaaaaaaaaaaabcbcaddAdAfjfjfjfjfvfvfvdAdAnCnCnEnCnCnCdAdAfvfvfvfvfvfvfvfjfjdAdAbcbcaaaaadadaaaaaaaaaakIgVgPgPgZgXkIpQpRkIgKgKhehlhphehlhlgTaaaaaaadaaaaaaaaaaaaaaaadxdxdxdxdxaZ
+aZdxdxdxdxaaaaaaaaaaaaaaahaaaaaaaaadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafyaaaagagggagagagggaaagaacacfKacbcacabbighgibcaaaaaaaaaaaaaaaaaaaaaaaaaabcbcbcdAfjfjfjfjfvfvfvfvdAnCnCgHgYgYgHnCnCdAdAfvfvfvfvfvfvfjfjdAdAbcbcaaaaadadaagKgKgKgKkIhqhrhwhqorkIgQkIkIgKhxhehlpThxhehegTaaaaaaadaaaaaaaaaaaaaadxdxdxdxdxdxaZ
+aZdxdxaaaaaaaaaaaaaaaaaaaaaaaaaaaaeFaaaaaaaaaaaaaaaaaaaaaaaaaaaagagggagagagggggagagagngagagaacfGacfUfCabbiaaaaaabcaaaaaabcaaaaaaaaaaaaaaaaaabcbcfjfjfjfjfjfvfvfvfvfvnCgHgHgHgYgHgHnCnCdAdAfvfvfvfvfvfjfjdAdAbcbcaaaaaabcadgKhBjfjhjigWpUgWgWgWjjgPgPgPjkhxhxhxhxhxhxhxgKaaaaaaadadaaaaaaaaaaaaaadxdxdxdxdxaZ
 aZdxaaaaaaaaaaaaaaaabgbgaaaaaaaaeFbgaaaaaaaaaaaaaaaaaaaaaaaagagagafygagagagagggagagagagabiabacacacfOacababbifHaaaabcbcbcaaaaaaaaaaaaaaaaaaaabcbcbcdAfjfjfjfjfvfvfvfvnFnEgYgHgYgYgHgHnCnEdAfvfvfvfvfvfjfjdAdAbcbcaaaaaabcbcgKgPgPjlgPgPgPgPgPgPgPgPgPgPgKgKjojojojrgKgKkIkIkIaabcbcaaapaaaaaaaaaaaadxdxdxdxaZ
 aZaaaaaaaaaaaaaaaaaaaaaaaaaaaaadeFaaaaaaaaaaaaaaaaaaaaaagagagagagagagagagagagggagagagggabiababacfIbcgwbcabbibiaaaaaaaabcaaaaaaaabgbgaaaaaaaaaabcbcdAdAfjfjfvfvfvfvfvfvnEgYgYgYgYgYgYgYnEnEfvfvfvfvfvfjfjdAdAdAbcbcaaaaadbcjkgPgPgPgPgPjsgPgPqygPjtgPgPgKgKjwjxjzgKgKgKjAjBkIaaadbcaaaaaaaaaaaaaaaaaaaadxdxaZ
 aZaaaaaaaaeSeSaaaaaaaaaaaaaaaaadeFaaaaaaaaaaaaaaahaaaaaagaaagagagagggagagagagggagagggggabibiababacacbcbcabbibiaaaaaaaaaaaagCaaaaaaaaaaaaaaaaaabcbcdAdAdAfvfvfvfvfvfvfvnFnEgHgHgYgYgHgHgYnEfvfvfvfvfvfjfjdAdAbcbcbcaaaaaaaagKgPgPjCjDgPgPpSjDgPjCjDgPgPgKgKjEjFjFjGjHgKjOjBkIaaadbcaaaaaaaaaaaaaaaaaaaadxdxaZ
