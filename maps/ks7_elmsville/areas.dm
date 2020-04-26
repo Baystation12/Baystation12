@@ -103,6 +103,9 @@
 /area/exo_ice_facility/interior/salvage_unsc
 	name = "KS7 - UNSC Salvage"
 
+/area/exo_ice_facility/interior/organlegger_den
+	name = "KS7 - Organlegger's Den"
+
 /area/exo_ice_facility/interior/umbi_west
 	name = "KS7 - West Umbilical"
 
