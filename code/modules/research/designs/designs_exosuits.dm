@@ -30,10 +30,3 @@
 	req_tech = list(TECH_DATA = 4)
 	build_path = /obj/item/weapon/circuitboard/exosystem/weapons
 	sort_string = "NAACA"
-
-/datum/design/circuit/exosuit/advweapons
-	name = "advanced weapon control"
-	id = "mech_software_advweapons"
-	req_tech = list(TECH_DATA = 4)
-	build_path = /obj/item/weapon/circuitboard/exosystem/advweapons
-	sort_string = "NAACB"
