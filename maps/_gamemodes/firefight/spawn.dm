@@ -16,31 +16,20 @@
 
 /datum/game_mode/firefight/proc/spawn_attackers_tick()
 	set background = 1
-	if(allowed_ghost_roles.len == 0 || isnull(allowed_ghost_roles))
-		allowed_ghost_roles += list(/datum/ghost_role/flood_combat_form)
 	var/amount = min(max_spawns_tick, enemy_strength_left)
 	enemy_strength_left -= amount
 
 	//pick a hostile mob to spawn
-	//todo: replace this with faction specific mob list
 	while(amount >= 1)
-		var/number_to_spawn
-		var/spawn_type
-		if(prob(33))
-			number_to_spawn = 1
-			spawn_type = pick(typesof(/mob/living/simple_animal/hostile/flood/combat_form) - list(/mob/living/simple_animal/hostile/flood/combat_form,/mob/living/simple_animal/hostile/flood/combat_form/juggernaut))
-		else if(prob(50))
-			number_to_spawn = 1
-			spawn_type = /mob/living/simple_animal/hostile/flood/carrier
-		else
-			number_to_spawn = rand(4,6)
-			spawn_type = /mob/living/simple_animal/hostile/flood/infestor
-		spawn_attackers(spawn_type, number_to_spawn)
+		//using the weighting here is a bit of a hack...
+		//a higher weighting should correspond with a weak, common enemy
+		//therefore a higher weighted mob type we will spawn more of
+		var/spawn_type = pickweight(enemy_faction.defender_mob_types)
+		var/weighting = enemy_faction.defender_mob_types[spawn_type]
+		spawn_attackers(spawn_type, weighting)
 		amount -= 1
 
 /datum/game_mode/firefight/proc/spawn_attackers(var/spawntype, var/amount)
-	if(GLOB.live_flood_simplemobs.len >= GLOB.max_flood_simplemobs)
-		return
 	if(spawn_landmarks.len)
 		for(var/i = 0, i < amount, i++)
 			var/obj/spawn_landmark = pick(spawn_landmarks)

@@ -10,7 +10,6 @@
 
 	GLOB.hostile_attackables += /obj/structure/evac_ship
 	GLOB.hostile_attackables += /obj/structure/tanktrap
-	GLOB.max_flood_simplemobs = 100
 
 	overmind = new()
 

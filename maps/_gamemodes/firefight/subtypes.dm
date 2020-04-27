@@ -11,3 +11,7 @@
 	wave_message = "Flood spawns have started! Get back to your base and dig in..."
 	rest_message = "Flood have been destroyed! Get back to your base and repair your defences..."
 	evac_message = "The pelican has arrived! Protect it until it is ready to liftoff!"
+
+/datum/game_mode/firefight/stranded/pre_setup()
+	. = ..()
+	allowed_ghost_roles += list(/datum/ghost_role/flood_combat_form)

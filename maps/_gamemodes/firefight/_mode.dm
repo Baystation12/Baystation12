@@ -5,7 +5,6 @@
 	required_players = 0
 	required_enemies = 0
 	end_on_antag_death = 0
-	votable = 0
 	round_description = "Survive against waves of enemies"
 	extended_round_description = "Waves of enemies are coming in, can you survive?"
 	//hub_descriptions = list("desperately struggling to survive against waves of parasitic aliens on a distant world...")
