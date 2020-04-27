@@ -577,3 +577,7 @@ proc/TextPreview(var/string,var/len=40)
 	text = replacetext(text, ";", "")
 	text = replacetext(text, "&", "")
 	return text
+
+/proc/text2num_or_default(text, default)
+	var/result = text2num(text)
+	return "[result]" == text ? result : default
