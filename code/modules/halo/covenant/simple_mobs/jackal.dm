@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/hostile/covenant/jackal
-	name = "Covenant Defender (Kig Yar)"
+	name = "Jackal (NPC)"
 	icon_state = "kigyar"
 	icon_living = "kigyar"
 	icon_dead = "dead_kigyar"

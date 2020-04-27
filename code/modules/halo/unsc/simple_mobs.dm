@@ -9,7 +9,7 @@
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum)
 
 /mob/living/simple_animal/hostile/unsc/marine
-	name = "UNSC Defender (Marine)"
+	name = "UNSC Marine (NPC)"
 	icon_state = "marine"
 	icon_living  = "marine"
 	icon_dead = "dead_marine"
@@ -18,7 +18,7 @@
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/ma5b_ar)
 
 /mob/living/simple_animal/hostile/unsc/odst
-	name = "UNSC Defender (ODST)"
+	name = "ODST (NPC)"
 	icon_state = "odst"
 	icon_living  = "odst"
 	icon_dead = "dead_odst"

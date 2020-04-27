@@ -18,82 +18,82 @@
 
 
 
-/* Light Defenders */
+/* Light Troopers */
 
 /mob/living/simple_animal/hostile/innie
-	name = "Insurrection Defender (Light)"
+	name = "Insurrection Trooper (Light)"
 	armour_tier = "light"
 	combat_tier = 1
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum)
 
 /mob/living/simple_animal/hostile/innie/black
-	name = "Gao Defender (Light)"
+	name = "Gao Trooper (Light)"
 	armour_colour = "black"
 
 /mob/living/simple_animal/hostile/innie/green
-	name = "Khoros Defender (Light)"
+	name = "Khoros Trooper (Light)"
 	armour_colour = "green"
 
 /mob/living/simple_animal/hostile/innie/blue
-	name = "Freedom Defender (Light)"
+	name = "Freedom Trooper (Light)"
 	armour_colour = "blue"
 
 /mob/living/simple_animal/hostile/innie/white
-	name = "Olympus Defender (Light)"
+	name = "Olympus Trooper (Light)"
 	armour_colour = "white"
 
 
 
-/* Medium Defenders */
+/* Medium Troopers */
 
 /mob/living/simple_animal/hostile/innie/medium
-	name = "Insurrection Defender (Medium Armoured)"
+	name = "Insurrection Trooper (Medium Armoured)"
 	armour_tier = "medium"
 	resistance = 5
 	combat_tier = 2
 	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA37,/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie)
 
 /mob/living/simple_animal/hostile/innie/medium/black
-	name = "Gao Defender (Medium Armoured)"
+	name = "Gao Trooper (Medium Armoured)"
 	armour_colour = "black"
 
 /mob/living/simple_animal/hostile/innie/medium/green
-	name = "Khoros Defender (Medium Armoured)"
+	name = "Khoros Trooper (Medium Armoured)"
 	armour_colour = "green"
 
 /mob/living/simple_animal/hostile/innie/medium/blue
-	name = "Freedom Defender (Medium Armoured)"
+	name = "Freedom Trooper (Medium Armoured)"
 	armour_colour = "blue"
 
 /mob/living/simple_animal/hostile/innie/medium/white
-	name = "Olympus Defender (Medium Armoured)"
+	name = "Olympus Trooper (Medium Armoured)"
 	armour_colour = "white"
 
 
 
-/* Heavy Defenders */
+/* Heavy Troopers */
 
 /mob/living/simple_animal/hostile/innie/heavy
-	name = "Insurrection Defender (Heavy Armoured)"
+	name = "Insurrection Trooper (Heavy Armoured)"
 	armour_tier = "heavy"
 	resistance = 10
 	combat_tier = 3
 	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar/MA3,/obj/item/weapon/gun/projectile/m392_dmr/innie,/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts)
 
 /mob/living/simple_animal/hostile/innie/heavy/black
-	name = "Gao Defender (Heavy Armoured)"
+	name = "Gao Trooper (Heavy Armoured)"
 	armour_colour = "black"
 
 /mob/living/simple_animal/hostile/innie/heavy/green
-	name = "Khoros Defender (Heavy Armoured)"
+	name = "Khoros Trooper (Heavy Armoured)"
 	armour_colour = "green"
 
 /mob/living/simple_animal/hostile/innie/heavy/blue
-	name = "Freedom Defender (Heavy Armoured)"
+	name = "Freedom Trooper (Heavy Armoured)"
 	armour_colour = "blue"
 
 /mob/living/simple_animal/hostile/innie/heavy/white
-	name = "Olympus Defender (Heavy Armoured)"
+	name = "Olympus Trooper (Heavy Armoured)"
 	armour_colour = "white"
 
 /* Builder Mob */

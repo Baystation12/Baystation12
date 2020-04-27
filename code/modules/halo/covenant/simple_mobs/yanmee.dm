@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/hostile/covenant/drone
-	name = "Covenant Defender (Yanme'e)"
+	name = "Drone (NPC)"
 	desc = "A flying insect like creature covered in hard chitin."
 	icon = 'code/modules/halo/covenant/simple_mobs/yanmee.dmi'
 	icon_state = "drone_flying"
