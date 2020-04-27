@@ -20,7 +20,6 @@
 
 /datum/job/colonist_mayor
 	title = "Mayor"
-	department_flag = COM
 	total_positions = 1
 	head_position = 1
 	spawnpoint_override = "Colony Arrival Shuttle"
@@ -66,9 +65,7 @@
 
 /datum/job/police_chief
 	title = "Chief of Police"
-	department_flag = COM
 	department = "Security"
-	department_flag = SEC|COM
 	total_positions = 1
 	spawn_faction = "Human Colony"
 	head_position = 1
@@ -92,7 +89,6 @@
 
 /datum/job/colony_ai
 	title = "UEG Colonial AI"
-	department_flag = SHIPAI
 	spawn_faction = "Human Colony"
 	spawn_positions = 1
 	is_whitelisted = 1

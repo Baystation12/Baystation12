@@ -107,13 +107,15 @@ var/list/points_of_interest = list()
 
 	if(flagship && faction)
 		var/datum/faction/F = GLOB.factions_by_name[faction]
-		F.flagship = src
-		F.get_flagship_name()	//update the archived name
+		if(F)
+			F.flagship = src
+			F.get_flagship_name()	//update the archived name
 
 	if(base && faction)
 		var/datum/faction/F = GLOB.factions_by_name[faction]
-		F.base = src
-		F.get_base_name()		//update the archived name
+		if(F)
+			F.base = src
+			F.get_base_name()		//update the archived name
 
 	my_faction = GLOB.factions_by_name[faction]
 
@@ -157,7 +159,7 @@ var/list/points_of_interest = list()
 	loc = T
 	walk_to(src,exit_loc,0,1,0)
 	spawn(SLIPSPACE_PORTAL_DIST)
-		walk_to(src,null)
+		walk(src,0)
 
 /obj/effect/overmap/proc/do_slipspace_enter_effects(var/sound)
 	//BELOW CODE STOLEN FROM CAEL'S IMPLEMENTATION OF THE SLIPSPACE EFFECTS, MODIFIED.//

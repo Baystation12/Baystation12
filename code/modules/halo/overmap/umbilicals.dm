@@ -238,6 +238,7 @@
 
 /obj/docking_umbilical/east
 	dir = EAST
+	pixel_x = 0
 
 /obj/docking_umbilical/west
 	dir = WEST
@@ -255,8 +256,32 @@
 
 /obj/docking_umbilical/covenant/east
 	dir = EAST
+	pixel_x = 0
 
 /obj/docking_umbilical/covenant/west
+	dir = WEST
+	pixel_x = -96
+
+/obj/docking_umbilical/one_way
+	desc = "This umbilical permits extension and docking, but does not allow objects to dock at it."
+
+/obj/docking_umbilical/one_way/ship_setup()
+	. = ..()
+	if(our_ship)
+		our_ship.connectors -= src
+
+/obj/docking_umbilical/one_way/north
+	dir = NORTH
+
+/obj/docking_umbilical/one_way/south
+	dir = SOUTH
+	pixel_y = -96
+
+/obj/docking_umbilical/one_way/east
+	dir = EAST
+	pixel_x = 0
+
+/obj/docking_umbilical/one_way/west
 	dir = WEST
 	pixel_x = -96
 

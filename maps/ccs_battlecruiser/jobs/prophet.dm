@@ -57,3 +57,7 @@
 	. = ..()
 	player.equip_to_slot_or_del(new /obj/item/clothing/suit/prophet_robe(player), slot_wear_suit)
 	player.equip_to_slot_or_del(new /obj/item/device/radio/headset/covenant(player), slot_l_ear)
+
+	var/obj/item/weapon/card/id/prophet/id_card = new(player)
+	id_card.access |= list(access_covenant, access_covenant_command)
+	player.equip_to_slot_or_del(id_card, slot_wear_id)

@@ -1,7 +1,6 @@
 
 /datum/faction/npc
 	max_npc_quests = 4
-	defender_mob_types = list(/mob/living/simple_animal/hostile/defender_mob/innie/medium = 3, /mob/living/simple_animal/hostile/defender_mob/innie/heavy)
 
 /datum/faction/npc/New()
 	. = ..()

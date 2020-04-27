@@ -267,6 +267,7 @@ GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 	combat_types = list(/mob/living/simple_animal/hostile/flood/combat_form,\
 		/mob/living/simple_animal/hostile/flood/infestor,\
 		/mob/living/simple_animal/hostile/flood/carrier)
+	comms_channel = null
 
 /obj/structure/overmind_controller
 	name = "overmind controller"

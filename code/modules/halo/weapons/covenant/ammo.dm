@@ -26,8 +26,11 @@
 
 /obj/item/projectile/bullet/covenant/plasmapistol
 	damage = 45
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
+
+/obj/item/projectile/bullet/covenant/plasmapistol/fastfire
+	damage = 20
 
 /obj/item/projectile/bullet/covenant/plasmapistol/overcharge
 	damage = 60
@@ -37,14 +40,17 @@
 	..()
 	empulse(impacted.loc,0,1)
 
+/obj/item/projectile/bullet/covenant/plasmapistol/overcharge/fastfire
+	damage = 30
+
 /obj/item/projectile/bullet/covenant/plasmarifle
 	damage = 35 // more damage than MA5B.
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/bullet/covenant/plasmarepeater
 	damage = 30 //The repeater does enough, thank you.
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/bullet/covenant/plasmarifle/brute
@@ -55,8 +61,8 @@
 	name = "energy beam"
 	desc = ""
 	damage = 55
-	armor_penetration = 65
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	armor_penetration = 60
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
@@ -73,7 +79,7 @@
 	. = ..()
 
 /obj/effect/projectile/beam_rifle
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "beam_rifle_trail"
 
 //Covenant Magazine-Fed defines//
@@ -81,7 +87,7 @@
 /obj/item/ammo_magazine/needles
 	name = "Needles"
 	desc = "A small pack of crystalline needles."
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "needlerpack"
 	max_ammo = 30
 	ammo_type = /obj/item/ammo_casing/needles
@@ -93,7 +99,7 @@
 	desc = "A small crystalline needle"
 	caliber = "needler"
 	projectile_type = /obj/item/projectile/bullet/covenant/needles
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
 /obj/item/weapon/material/shard/shrapnel/needleshrap
@@ -118,13 +124,13 @@
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
 	damage = 20 // Low damage, special effect would do the most damage.
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
 	armor_penetration = 20
 	step_delay = 0.75 //slower than most
-	var/max_track_steps = 6
+	var/max_track_steps = 4
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
@@ -185,18 +191,21 @@
 
 /obj/item/projectile/bullet/covenant/needles/Move()
 	. = ..()
-	if(kill_count % 2 == 0)
+	if(kill_count % 3 == 0)
 		return
 	if(locked_target)
-		redirect(locked_target, loc)
-		dir = get_dir(loc,locked_target)
+		if(get_dir(loc,locked_target) in list(dir,turn(dir,45),turn(dir,-45)))
+			redirect(locked_target, starting)
+			dir = get_dir(loc,locked_target)
+		else
+			locked_target = null
 	if(initial(kill_count) - kill_count >= max_track_steps)
 		locked_target = null
 
 /obj/item/ammo_magazine/type51mag
 	name = "Type-51 Carbine magazine"
 	desc = "A magazine containing 18 rounds for the Type-51 Carbine."
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_magazine"
 	max_ammo = 18
 	ammo_type = /obj/item/ammo_casing/type51carbine
@@ -208,14 +217,14 @@
 	desc = "A faintly glowing round that leaves a green trail in its wake."
 	caliber = "cov_carbine"
 	projectile_type = /obj/item/projectile/bullet/covenant/type51carbine
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
 	damage = 40
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
 	tracer_type = /obj/effect/projectile/type51carbine
@@ -233,13 +242,13 @@
 	. = ..()
 
 /obj/effect/projectile/type51carbine
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_trail"
 
 /obj/item/ammo_magazine/rifleneedlepack
 	name = "Rifle Needles"
 	desc = "A pack of fewer, larger crystalline needles. For T-31 rifle."
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "needlerpack"
 	max_ammo = 21
 	ammo_type = /obj/item/ammo_casing/rifleneedle
@@ -251,7 +260,7 @@
 	desc = "A large crystalline needle"
 	caliber = "needle_rifle"
 	projectile_type = /obj/item/projectile/bullet/covenant/needles/rifleneedle
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "needle"
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
@@ -264,11 +273,11 @@
 	invisibility = 101
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
-	max_track_steps = 3
+	max_track_steps = 2
 	shield_damage = 50
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "needlerifle_trail"
 
 #undef RIFLENEEDLE_TRACK_DIST
@@ -278,7 +287,7 @@
 /obj/item/ammo_magazine/fuel_rod
 	name = "Type-33 Light Anti-Armor Weapon Magazine"
 	desc = "Contains a maximum of 5 fuel rods."
-	icon = 'code/modules/halo/icons/fuel_rod_cannon.dmi'
+	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
 	icon_state = "fuel_rod_magazine"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/fuel_rod
@@ -287,7 +296,7 @@
 	w_class = ITEM_SIZE_NORMAL
 
 /obj/item/ammo_casing/fuel_rod
-	icon = 'code/modules/halo/icons/fuel_rod_cannon.dmi'
+	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
 	icon_state = "fuel_rod_casing"
 	caliber = "fuel rod"
 	projectile_type = /obj/item/projectile/bullet/fuel_rod
@@ -296,7 +305,7 @@
 	name = "fuel rod"
 	check_armour = "bomb"
 	step_delay = 1.2
-	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
 	embed = 1
 	shield_damage = 200

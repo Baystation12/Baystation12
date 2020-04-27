@@ -1,9 +1,7 @@
 
 /datum/job/packwar_chieftain_boulder
 	title = "Boulder Clan Chieftain"
-	faction_flag = COVENANT
-	department_flag = COM
-	department = "Boulder Clan"
+	spawn_faction = "Covenant"
 	supervisors = "the Gods themselves"
 	selection_color = "#993300"
 	account_allowed = 0
@@ -25,9 +23,7 @@
 
 /datum/job/packwar_captain_boulder
 	title = "Boulder Clan Captain"
-	faction_flag = COVENANT
-	department_flag = COM
-	department = "Boulder Clan"
+	spawn_faction = "Covenant"
 	supervisors = "the Boulder Clan chieftain"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -43,8 +39,7 @@
 
 /datum/job/packwar_major_boulder
 	title = "Boulder Clan Major"
-	faction_flag = COVENANT
-	department = "Boulder Clan"
+	spawn_faction = "Covenant"
 	supervisors = "the Boulder Clan captains and chieftain"
 	selection_color = "#993300"
 	account_allowed = 0
@@ -60,8 +55,7 @@
 
 /datum/job/packwar_minor_boulder
 	title = "Boulder Clan Warrior"
-	faction_flag = COVENANT
-	department = "Boulder Clan"
+	spawn_faction = "Covenant"
 	supervisors = "the Boulder Clan majors, captains and chieftain"
 	selection_color = "#993300"
 	account_allowed = 0
@@ -77,8 +71,7 @@
 
 /datum/job/packwar_thrall_boulder
 	title = "Boulder Clan Unggoy Thrall"
-	faction_flag = COVENANT
-	department = "Boulder Clan"
+	spawn_faction = "Covenant"
 	supervisors = "everyone"
 	selection_color = "#993300"
 	account_allowed = 0               // Does this job type come with a station account?

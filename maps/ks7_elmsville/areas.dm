@@ -1,7 +1,115 @@
-/area/exo_Ice_facility
-	name = "KS7-535 Facility"
-	base_turf = /turf/simulated/floor/exoplanet/snow
+/obj/autolight_init
+	var/targ_area = /area/exo_ice_facility/exterior/autolight
+	var/light_type = /obj/machinery/light/invis
 
+/obj/autolight_init/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/autolight_init/LateInitialize()
+	var/area/found = locate(targ_area)
+	for(var/turf/create_at in found.contents)
+		for(var/t in trange(1,create_at))
+			var/turf/adj_turf = t
+			if(adj_turf.loc != src)
+				var/obj/machinery/light/l = new light_type (create_at)
+				l.process()
+				GLOB.processing_objects -= l
+				break
+	return INITIALIZE_HINT_QDEL
+
+/area/exo_ice_facility
+	name =  "KS7-535 \"New Pompeii\""
+	base_turf = /turf/simulated/floor/exoplanet/snow
+	has_gravity = 1
+	dynamic_lighting = 0
+
+/area/exo_ice_facility/interior
+	name = "KS7-535 Interiors"
+	requires_power = 0
+	dynamic_lighting = 1
+
+/area/exo_ice_facility/exterior
+	dynamic_lighting = 0
+
+/area/exo_ice_facility/exterior/autolight
+
+/area/exo_ice_facility/exterior/caves
+	dynamic_lighting = 1
+
+/area/exo_ice_facility/exterior/caves/underground
+	name = "KS7 - Underground"
+
+/area/exo_ice_facility/exterior/caves/volcano
+	name = "Volcano"
+
+/area/exo_ice_facility/interior/bar
+	name = "KS7 - Shatter Point Bar"
+
+/area/exo_ice_facility/interior/museum_library
+	name = "KS7 - Museum / Library"
+
+/area/exo_ice_facility/interior/biodome/left
+	name = "KS7 - Left Biodome"
+
+/area/exo_ice_facility/interior/biodome/right
+	name = "KS7 - Right Biodome"
+
+/area/exo_ice_facility/interior/biodome/professional
+	name = "KS7 - Hydroponics Biodome"
+
+/area/exo_ice_facility/interior/biodome/worker_station
+	name = "KS7 - Biodome Technicians"
+
+/area/exo_ice_facility/interior/aerodrome
+	name = "KS7 - Aerodrome"
+
+/area/exo_ice_facility/interior/housing
+	name = "KS7 - Housing Block 1"
+
+/area/exo_ice_facility/interior/housing/biodome
+	name = "KS7 - Housing Block 2"
+
+/area/exo_ice_facility/interior/housing/lake
+	name = "KS7 - Lake House"
+
+/area/exo_ice_facility/interior/police
+	name = "KS7 - Police Station"
+
+/area/exo_ice_facility/interior/hospital
+	name = "KS7 - Hospital"
+
+/area/exo_ice_facility/interior/pharmacy
+	name = "KS7 - Pharmacy"
+
+/area/exo_ice_facility/interior/casino
+	name = "KS7 - Casino"
+
+/area/exo_ice_facility/interior/pirate_camp/left
+	name = "KS7 - Pirate Camp Aux Armory"
+
+/area/exo_ice_facility/interior/pirate_camp/right
+	name = "KS7 - Pirate Camp"
+
+/area/exo_ice_facility/interior/pirate_camp/armory
+	name = "KS7 - Pirate Camp Vault"
+
+/area/exo_ice_facility/interior/salvage_cov
+	name = "KS7 - Covenant Salvage, Left"
+
+/area/exo_ice_facility/interior/salvage_cov2
+	name = "KS7 - Covenant Salvage, Middle"
+
+/area/exo_ice_facility/interior/salvage_unsc
+	name = "KS7 - UNSC Salvage"
+
+/area/exo_ice_facility/interior/umbi_west
+	name = "KS7 - West Umbilical"
+
+/area/exo_ice_facility/interior/umbi_east
+	name = "KS7 - East Umbilical"
+
+/*
 /area/exo_Ice_facility/ground/interior
 	name = "KS7-535 Facility Interior"
 	requires_power= 0
@@ -34,10 +142,10 @@
 /area/exo_Ice_facility/ground/interior/sushiems
 	name = "Sushi Stall"
 	icon_state = "cafeteria"
-/*
+
 /area/exo_Ice_facility/ground/interior/mech
 	name = "Emsville Base Mech Lab"
-*/
+
 /area/exo_Ice_facility/ground/interior/livingtop
 	name = "Emsville Topside Living Quarters"
 	icon_state = "crew_quarters"
@@ -156,3 +264,4 @@
 	requires_power= 0
 	has_gravity = 1
 	icon_state = "cave"
+*/

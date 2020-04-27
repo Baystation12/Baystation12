@@ -19,6 +19,8 @@ var/global/datum/loot_distributor/loot_distributor = new
 /obj/effect/loot_marker
 	opacity = 0
 	invisibility = 101
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x"
 
 	var/loot_type = "generic"
 

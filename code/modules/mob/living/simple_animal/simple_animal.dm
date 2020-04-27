@@ -179,7 +179,7 @@
 								allow_move = 1
 								break
 							moving_to = pick(dirs_pickfrom)
-							if(!istype(get_step(src,moving_to),/turf/simulated/open))
+							if(!istype(get_step(src,moving_to),/turf/simulated/open) && isnull(locate(/obj/structure/bardbedwire) in moving_to))
 								allow_move = 1
 							dirs_pickfrom -= moving_to
 						set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
@@ -265,13 +265,16 @@
 
 /mob/living/simple_animal/bullet_act(var/obj/item/projectile/Proj)
 	if(!Proj || Proj.nodamage)
-		return
+		return 0
+	var/oldhealth = health
 	if(Proj.damtype == BURN)
 		adjustFireLoss(max(0,Proj.damage-max(0,resistance-Proj.armor_penetration)))
 	else
 		adjustBruteLoss(max(0,Proj.damage-max(0,resistance-Proj.armor_penetration)))
+	if(oldhealth == health)
+		visible_message("<span class = 'notice'>[src] shrugs off \the [Proj]'s impact.</span>")
 	do_pain_scream()
-	return 0
+	return 1
 
 /mob/living/simple_animal/attack_hand(mob/living/carbon/human/M as mob)
 	..()
@@ -313,7 +316,7 @@
 							M.show_message("<span class='notice'>[user] applies the [MED] on [src].</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring \him back to life.</span>")
-		return
+		return 0
 	if((meat_type || harvest_products.len) && (stat == DEAD))	//if the animal has a meat, and if it is dead.
 		if(istype(O, /obj/item/weapon/material/knife) || istype(O, /obj/item/weapon/material/knife/butch))
 			harvest(user)
@@ -322,7 +325,7 @@
 			visible_message("<span class='notice'>[user] gently taps [src] with \the [O].</span>")
 		else
 			O.attack(src, user, user.zone_sel.selecting)
-
+			return 1
 /mob/living/simple_animal/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 
 	visible_message("<span class='danger'>\The [src] has been attacked with \the [O] by [user].</span>")

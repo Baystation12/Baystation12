@@ -197,7 +197,7 @@
 /obj/machinery/slipspace_engine/covenant
 	name = "\improper Slipspace Traversal Drive"
 	desc = "A self-contained device allowing for traversal of slipspace, providing methods of quick travel across large distances without sacrificing accuracy. Can perform slipspace jumps within the gravity wells of large objects."
-	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
+	icon = 'code/modules/halo/overmap/icons/slipspace_drive_cov.dmi'
 	icon_state = "slipspace"
 	bounds = "64,64"
 	core_to_spawn = /obj/payload/slipspace_core/cov
@@ -216,7 +216,7 @@
 /obj/machinery/slipspace_engine/human
 	name = "\improper Shaw-Fujikawa Translight Engine"
 	desc = "A self-contained device allowing for traversal of slipspace, providing methods of quick travel across large distances. Calculation inaccuracies lead to endpoints being offset from the targeted position. Gravity wells of large objects halt the drive's ability to function."
-	icon = 'code/modules/halo/icons/machinery/slipspace_drive.dmi'
+	icon = 'code/modules/halo/overmap/icons/slipspace_drive_human.dmi'
 	icon_state = "slipspace"
 	bounds = "64,64"
 	core_to_spawn = /obj/payload/slipspace_core/human
@@ -246,17 +246,17 @@
 	om.pre_superstructure_failing()
 
 /obj/payload/slipspace_core/cov
-	icon = 'code/modules/halo/icons/machinery/covenant/slipspace_drive.dmi'
+	icon = 'code/modules/halo/overmap/icons/slipspace_drive_cov.dmi'
 	icon_state = "core"
 
 /obj/payload/slipspace_core/human
-	icon = 'code/modules/halo/icons/machinery/slipspace_drive.dmi'
+	icon = 'code/modules/halo/overmap/icons/slipspace_drive_human.dmi'
 	icon_state = "core"
 
 //SLIPSPACE RUPTURE EFFECT//
 /obj/effect/slipspace_rupture
 	name = "slipspace rupture"
-	icon = 'code/modules/halo/icons/machinery/slipspace_jump_effects.dmi'
+	icon = 'code/modules/halo/overmap/icons/slipspace_jump_effects.dmi'
 	icon_state = "slipspace_effect"
 	pixel_x = -16
 	pixel_y = -16

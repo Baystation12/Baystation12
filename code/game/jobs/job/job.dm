@@ -40,7 +40,6 @@
 	var/generate_email = 0
 	var/track_players = 0
 	var/list/assigned_players = list()
-	var/spawn_faction
 	var/is_whitelisted = 0
 	var/spawnpoint_override = null //If set: This will override player-chosen spawnpoints. Text string of spawnpoint's display name.
 	var/list/blacklisted_species = list()		//job cannot be filled by these species

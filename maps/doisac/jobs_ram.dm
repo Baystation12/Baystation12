@@ -1,9 +1,7 @@
 
 /datum/job/packwar_chieftain_ram
 	title = "Ram Clan Chieftain"
-	faction_flag = COVENANT
-	department_flag = COM
-	department = "Ram Clan"
+	spawn_faction = "Covenant"
 	supervisors = "the Gods themselves"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -25,9 +23,7 @@
 
 /datum/job/packwar_captain_ram
 	title = "Ram Clan Captain"
-	faction_flag = COVENANT
-	department = "Ram Clan"
-	department_flag = COM
+	spawn_faction = "Covenant"
 	supervisors = "the Ram Clan chieftain"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -43,8 +39,7 @@
 
 /datum/job/packwar_major_ram
 	title = "Ram Clan Major"
-	faction_flag = COVENANT
-	department = "Ram Clan"
+	spawn_faction = "Covenant"
 	supervisors = "the Ram Clan captains and chieftain"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -60,8 +55,7 @@
 
 /datum/job/packwar_minor_ram
 	title = "Ram Clan Warrior"
-	faction_flag = COVENANT
-	department = "Ram Clan"
+	spawn_faction = "Covenant"
 	supervisors = "the Ram Clan majors, captains and chieftain"
 	selection_color = "#337700"
 	account_allowed = 0
@@ -77,8 +71,7 @@
 
 /datum/job/packwar_thrall_ram
 	title = "Ram Clan Unggoy Thrall"
-	faction_flag = COVENANT
-	department = "Ram Clan"
+	spawn_faction = "Covenant"
 	supervisors = "everyone"
 	selection_color = "#337700"
 	account_allowed = 0               // Does this job type come with a station account?
