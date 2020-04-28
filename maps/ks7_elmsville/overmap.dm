@@ -79,6 +79,10 @@
 	null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
 	)
 
+/obj/effect/overmap/sector/exo_depot/LateInitialize()
+	. = ..()
+	GLOB.overmap_tiles_uncontrolled -= range(28,src)
+
 //dummy path so this compiles
 /obj/effect/overmap/sector/exo_research
 
