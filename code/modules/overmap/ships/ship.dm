@@ -1,5 +1,3 @@
-#define SHIP_DEFAULT_PIXEL_SPEED 4
-#define SHIP_DEFAULT_PIXEL_ACCEL 1
 
 /obj/effect/overmap/ship
 	name = "generic ship"
