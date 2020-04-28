@@ -23,6 +23,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/name = "Unnamed Map"
 	var/full_name = "Unnamed Map"
 	var/path
+	var/config_path = null
 
 	var/list/station_levels = list() // Z-levels the station exists on
 	var/list/admin_levels = list()   // Z-levels for admin functionality (Centcom, shuttle transit, etc)
@@ -229,6 +230,38 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	else
 		lobby_track_type = pick(subtypesof(/music_track) - exclude)
 	return decls_repository.get_decl(lobby_track_type)
+
+/datum/map/proc/setup_config(name, value, filename)
+	switch (name)
+		if ("use_overmap") use_overmap = text2num_or_default(value, use_overmap)
+		if ("overmap_z") overmap_z = text2num_or_default(value, overmap_z)
+		if ("overmap_size") overmap_size = text2num_or_default(value, overmap_size)
+		if ("overmap_event_areas") overmap_event_areas = text2num_or_default(value, overmap_event_areas)
+		if ("num_exoplanets") num_exoplanets = text2num_or_default(value, num_exoplanets)
+		if ("away_site_budget") away_site_budget = text2num_or_default(value, away_site_budget)
+		if ("station_name") station_name = value
+		if ("station_short") station_short = value
+		if ("dock_name") dock_name = value
+		if ("boss_name") boss_name = value
+		if ("boss_short") boss_short = value
+		if ("company_name") company_name = value
+		if ("company_short") company_short = value
+		if ("shuttle_docked_message") shuttle_docked_message = value
+		if ("shuttle_leaving_dock") shuttle_leaving_dock = value
+		if ("shuttle_called_message") shuttle_called_message = value
+		if ("shuttle_recall_message") shuttle_recall_message = value
+		if ("emergency_shuttle_docked_message") emergency_shuttle_docked_message = value
+		if ("emergency_shuttle_leaving_dock") emergency_shuttle_leaving_dock = value
+		if ("emergency_shuttle_recall_message") emergency_shuttle_recall_message = value
+		if ("starting_money") starting_money = text2num_or_default(value, starting_money)
+		if ("department_money") department_money = text2num_or_default(value, department_money)
+		if ("salary_modifier") salary_modifier = text2num_or_default(value, salary_modifier)
+		if ("supply_currency_name") supply_currency_name = value
+		if ("supply_currency_name_short") supply_currency_name_short = value
+		if ("local_currency_name") local_currency_name = value
+		if ("local_currency_name_singular") local_currency_name_singular = value
+		if ("local_currency_name_short") local_currency_name_short = value
+		else log_misc("Unknown setting [name] in [filename].")
 
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()

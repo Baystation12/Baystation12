@@ -50,6 +50,13 @@
 	if(LAZYISIN(pilots, user) && !hatch_closed)
 		return TRUE
 	. = ..()
+
+//UI distance checks
+/mob/living/exosuit/contents_nano_distance(src_object, mob/living/user)
+	. = ..()
+	if(!hatch_closed)
+		return max(shared_living_nano_distance(src_object), .) //Either visible to mech(outside) or visible to user (inside)
+	
 	
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
