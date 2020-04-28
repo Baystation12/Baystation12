@@ -158,7 +158,6 @@ var/list/ai_verbs_default = list(
 	add_language(LANGUAGE_HUMAN_SELENIAN, 1)
 	add_language(LANGUAGE_UNATHI_SINTA, 1)
 	add_language(LANGUAGE_SKRELLIAN, 1)
-	add_language(LANGUAGE_GUTTER, 1)
 	add_language(LANGUAGE_SPACER, 1)
 	add_language(LANGUAGE_SIGN, 0)
 

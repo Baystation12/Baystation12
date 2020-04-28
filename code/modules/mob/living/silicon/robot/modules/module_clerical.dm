@@ -12,7 +12,6 @@
 		LANGUAGE_HUMAN_SELENIAN   = TRUE,
 		LANGUAGE_UNATHI_SINTA     = TRUE,
 		LANGUAGE_SKRELLIAN        = TRUE,
-		LANGUAGE_GUTTER           = TRUE,
 		LANGUAGE_SPACER           = TRUE
 		)
 	skills = list(

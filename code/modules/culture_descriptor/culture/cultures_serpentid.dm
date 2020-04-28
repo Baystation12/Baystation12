@@ -7,7 +7,6 @@
 	secondary_langs = list(
 		LANGUAGE_HUMAN_EURO,
 		LANGUAGE_SPACER,
-		LANGUAGE_GUTTER
 	)
 	var/list/valid_jobs = list()
 	var/list/hidden_valid_jobs = list(/datum/job/ai, /datum/job/cyborg)
