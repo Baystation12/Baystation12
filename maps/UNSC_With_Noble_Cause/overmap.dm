@@ -12,4 +12,4 @@
 
 	parent_area_type = /area/unsc_ship
 
-	ship_max_speed = 2
+	ship_max_speed = SHIP_DEFAULT_PIXEL_SPEED - 1
