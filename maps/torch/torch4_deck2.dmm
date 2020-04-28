@@ -5667,6 +5667,10 @@
 	pixel_y = -32
 	},
 /obj/effect/floor_decal/corner/yellow/half,
+/obj/machinery/camera/network/engineering{
+	c_tag = "Engineering Storage";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/storage)
 "mD" = (
@@ -6075,6 +6079,10 @@
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
+	},
+/obj/machinery/camera/network/second_deck{
+	c_tag = "Second Deck Teleporter";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/teleporter/seconddeck)
@@ -8618,7 +8626,7 @@
 	use_power = 1
 	},
 /obj/machinery/camera/network/engineering{
-	c_tag = "Atmospherics - North"
+	c_tag = "Atmospherics - Starboard"
 	},
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 32
@@ -12638,17 +12646,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/locker_room)
-"Fd" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/camera/network/engineering{
-	c_tag = "Atmospherics - West";
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/atmos)
 "Ff" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 6
@@ -13930,6 +13927,17 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftport)
+"IY" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/camera/network/engineering{
+	c_tag = "Atmospherics - Fore";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/atmos)
 "Jd" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -14332,7 +14340,7 @@
 	},
 /obj/machinery/portable_atmospherics/canister/sleeping_agent,
 /obj/machinery/camera/network/engineering{
-	c_tag = "Atmospherics - South";
+	c_tag = "Atmospherics - Aft";
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/white{
@@ -18214,6 +18222,27 @@
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/atmos)
+"Xq" = (
+/obj/machinery/atmospherics/pipe/simple/visible/green{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/obj/machinery/camera/network/engineering{
+	c_tag = "Atmospherics - Port";
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
@@ -41034,7 +41063,7 @@ WI
 wc
 yB
 WI
-Fd
+IY
 wM
 GC
 yt
@@ -42046,7 +42075,7 @@ yG
 ES
 DI
 Za
-BE
+Xq
 Qu
 Ec
 Fp

@@ -220,18 +220,6 @@
 /area/maintenance/fourthdeck/starboard)
 "aJ" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	dir = 4;
-	display_name = "Starboard Dock C";
-	frequency = 1380;
-	id_tag = "admin_shuttle_dock_airlock";
-	pixel_x = -24;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	tag_airpump = "admin_shuttle_dock_pump";
-	tag_chamber_sensor = "admin_shuttle_dock_sensor";
-	tag_exterior_door = "admin_shuttle_dock_outer";
-	tag_interior_door = "admin_shuttle_dock_inner"
-	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "aK" = (
@@ -331,6 +319,19 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 4;
+	display_name = "Starboard Dock C";
+	frequency = 1380;
+	id_tag = "admin_shuttle_dock_airlock";
+	pixel_x = -24;
+	pixel_y = 24;
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
+	tag_airpump = "admin_shuttle_dock_pump";
+	tag_chamber_sensor = "admin_shuttle_dock_sensor";
+	tag_exterior_door = "admin_shuttle_dock_outer";
+	tag_interior_door = "admin_shuttle_dock_inner"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/aft)
@@ -3491,22 +3492,6 @@
 /obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
-"lQ" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	dir = 4;
-	display_name = "Port Dock C";
-	frequency = 1331;
-	id_tag = "rescue_shuttle_dock_airlock";
-	pixel_x = -24;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	tag_airpump = "rescue_shuttle_dock_pump";
-	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
-	tag_exterior_door = "rescue_shuttle_dock_outer";
-	tag_interior_door = "rescue_shuttle_dock_inner"
-	},
-/turf/simulated/floor/plating,
-/area/hallway/primary/fourthdeck/aft)
 "lX" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -6547,6 +6532,10 @@
 	icon_state = "warningcorner";
 	dir = 1
 	},
+/obj/machinery/camera/network/supply{
+	c_tag = "Supply Office - Lockers";
+	dir = 2
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/quartermaster/storage/upper)
 "uK" = (
@@ -8163,10 +8152,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
-/obj/machinery/camera/network/fourth_deck{
-	c_tag = "Fourth Deck Hallway - Port";
-	dir = 4
-	},
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21
@@ -8625,6 +8610,18 @@
 	},
 /turf/simulated/floor/shuttle_ceiling/torch/air,
 /area/quartermaster/hangar/top)
+"Cj" = (
+/obj/effect/floor_decal/spline/fancy/wood{
+	icon_state = "spline_fancy";
+	dir = 1
+	},
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck - Lounge Window";
+	dir = 4;
+	name = "security camera"
+	},
+/turf/simulated/floor/carpet,
+/area/crew_quarters/lounge)
 "Cr" = (
 /obj/machinery/door/blast/shutters{
 	dir = 2;
@@ -8862,6 +8859,10 @@
 	},
 /obj/machinery/oxygen_pump{
 	pixel_x = -32
+	},
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck Hallway - Port";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/fourthdeck/aft)
@@ -10543,6 +10544,19 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 4;
+	display_name = "Port Dock C";
+	frequency = 1331;
+	id_tag = "rescue_shuttle_dock_airlock";
+	pixel_x = -24;
+	pixel_y = -24;
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
+	tag_airpump = "rescue_shuttle_dock_pump";
+	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
+	tag_exterior_door = "rescue_shuttle_dock_outer";
+	tag_interior_door = "rescue_shuttle_dock_inner"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/aft)
@@ -12509,6 +12523,10 @@
 	dir = 4;
 	id_tag = "rescue_shuttle_dock_pump"
 	},
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck - Aft Port Docking Port";
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "Pz" = (
@@ -13395,6 +13413,10 @@
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
+	},
+/obj/machinery/camera/network/fourth_deck{
+	c_tag = "Fourth Deck - Aft-Starboard Docking Port";
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
@@ -33938,7 +33960,7 @@ Hv
 PO
 jr
 OO
-Jo
+Cj
 Nw
 pG
 sJ
@@ -40808,7 +40830,7 @@ uj
 uj
 Jx
 JP
-lQ
+aJ
 Px
 Ms
 Yj

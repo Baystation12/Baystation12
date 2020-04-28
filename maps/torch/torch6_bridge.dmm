@@ -4724,6 +4724,10 @@
 	icon_state = "techfloor_edges";
 	dir = 8
 	},
+/obj/machinery/camera/network/bridge{
+	c_tag = "Bridge Airlock";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
 "jc" = (
@@ -10768,6 +10772,9 @@
 	icon_state = "techfloor_edges";
 	dir = 8
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
 "xh" = (
@@ -13113,6 +13120,18 @@
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
+"GS" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 8;
+	id_tag = "bridge_eva_pump"
+	},
+/obj/effect/floor_decal/techfloor{
+	icon_state = "techfloor_edges";
+	dir = 4
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/hallway/primary/bridge/aft)
 "GU" = (
 /obj/structure/displaycase,
 /obj/item/weapon/gun/projectile/revolver/medium/captain{
@@ -17155,6 +17174,10 @@
 "Xz" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/secure_closet/guncabinet/PPE,
+/obj/machinery/camera/network/command{
+	c_tag = "Bridge Storage";
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
 "XB" = (
@@ -34186,7 +34209,7 @@ ad
 gX
 hK
 is
-hK
+GS
 DN
 kT
 lO

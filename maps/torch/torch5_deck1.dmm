@@ -6295,10 +6295,6 @@
 	pixel_x = -24
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel,
-/obj/machinery/camera/network/first_deck{
-	c_tag = "First Deck Hallway - Emergency Armory Entrance";
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/firstdeck/aft)
@@ -11861,16 +11857,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/thruster/d1port)
-"aRm" = (
-/obj/machinery/deployable/barrier,
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/camera/network/command{
-	c_tag = "Bridge - Emergency Armory - Port";
-	dir = 1;
-	icon_state = "camera"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/command/armoury)
 "aRo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -20304,6 +20290,10 @@
 /obj/structure/bed/chair{
 	dir = 4
 	},
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck Hallway - Mech Bay";
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/assembly/chargebay)
 "hPN" = (
@@ -26409,6 +26399,22 @@
 "pbb" = (
 /turf/simulated/floor/tiled/dark,
 /area/rnd/misc_lab)
+"pbT" = (
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 4;
+	icon_state = "shutter0";
+	id_tag = "operation_hallway_shutters";
+	name = "Operation Checkpoint Shutters";
+	opacity = 0
+	},
+/obj/effect/floor_decal/corner/red/mono,
+/obj/machinery/camera/network/first_deck{
+	c_tag = "First Deck Hallway - Emergency Armory Entrance";
+	dir = 0
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/hallway/primary/firstdeck/aft)
 "pcb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -57980,7 +57986,7 @@ scr
 scr
 scr
 awF
-jqn
+pbT
 ayF
 jqn
 hPN
@@ -59604,7 +59610,7 @@ aHT
 uZO
 xzj
 aQr
-aRm
+aQr
 eRU
 eRU
 acd
