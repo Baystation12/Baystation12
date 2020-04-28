@@ -56,9 +56,6 @@
 		"Listening Post Spawn",\
 		"Colony Arrival Shuttle",\
 		"UNSC Base Spawns",\
-		"Research Facility Spawn",\
-		"Research Facility Director Spawn",\
-		"Research Facility Security Spawn",\
 		"X52 Researcher",\
 		"X52 RD",\
 		)
