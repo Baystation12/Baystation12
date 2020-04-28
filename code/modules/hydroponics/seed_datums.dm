@@ -1344,6 +1344,7 @@
 	seed_name = "pineapple"
 	display_name = "pineapple plant"
 	chems = list(/datum/reagent/drink/juice/pineapple = list(10,10), /datum/reagent/enzyme = list(1,5),/datum/reagent/nutriment = list(1,10))
+	trash_type = /obj/item/weapon/hollowpineapple
 
 /datum/seed/pineapple/New()
 	..()
@@ -1386,6 +1387,7 @@
 	seed_name = "coconut"
 	display_name = "coconut trees"
 	chems = list(/datum/reagent/nutriment = list(1,20), /datum/reagent/drink/coconut = list(10,20))
+	trash_type = /obj/item/weapon/hollowcoconut
 
 /datum/seed/coconut/New()
 	..()

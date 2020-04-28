@@ -61,3 +61,41 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
+
+/obj/item/weapon/hollowpineapple
+	name = "hollow pineapple"
+	desc = "A reminder of meals gone by."
+	icon = 'icons/obj/trash.dmi'
+	icon_state = "hollowpineapple"
+	item_state = "hollowpineapple"
+	w_class = ITEM_SIZE_SMALL
+	throwforce = 0
+	throw_speed = 4
+	throw_range = 20
+
+/obj/item/weapon/hollowpineapple/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/circular_saw) || isHatchet(W) || istype(W, /obj/item/weapon/material/knife))
+		to_chat(user, "<span class='notice'>You use [W] to fashion a mug out of the pineapple!</span>")
+		new /obj/item/weapon/reagent_containers/food/drinks/glass2/pineapple (user.loc)
+		qdel(src)
+		return
+
+/obj/item/weapon/hollowcoconut
+	name = "hollow coconut"
+	desc = "A reminder of meals gone by."
+	icon = 'icons/obj/trash.dmi'
+	icon_state = "hollowcoconut"
+	item_state = "hollowcoconut"
+	w_class = ITEM_SIZE_SMALL
+	throwforce = 0
+	throw_speed = 4
+	throw_range = 20
+
+/obj/item/weapon/hollowcoconut/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	..()
+	if(istype(W, /obj/item/weapon/circular_saw) || isHatchet(W) || istype(W, /obj/item/weapon/material/knife))
+		to_chat(user, "<span class='notice'>You use [W] to fashion a cup out of the coconut!</span>")
+		new /obj/item/weapon/reagent_containers/food/drinks/glass2/coconut (user.loc)
+		qdel(src)
+		return
