@@ -3145,6 +3145,7 @@
 #include "code\unit_tests\music_test.dm"
 #include "code\unit_tests\observation_tests.dm"
 #include "code\unit_tests\organ_tests.dm"
+#include "code\unit_tests\overmap_tests.dm"
 #include "code\unit_tests\power_tests.dm"
 #include "code\unit_tests\reagent_color_test.dm"
 #include "code\unit_tests\seed_tests.dm"
