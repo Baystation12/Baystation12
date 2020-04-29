@@ -55,7 +55,7 @@
 	speech_verb = "flashes"
 	ask_verb = "gleams"
 	exclaim_verb = "flares"
-	flags = RESTRICTED | NO_STUTTER | NONVERBAL
+	flags = RESTRICTED | NO_STUTTER | SIGNLANG
 	shorthand = "KNV"
 
 #define MANTID_SCRAMBLE_CACHE_LEN 20
