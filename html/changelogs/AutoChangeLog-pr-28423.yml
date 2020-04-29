@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Corporate Liaison and Liaison Protection Agent no longer have access to research, medbay, security, or supply"
+  - tweak: "Liaison Protection Agent can no longer set intercoms and handheld radios to the security channel"
