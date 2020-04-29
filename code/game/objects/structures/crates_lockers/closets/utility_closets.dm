@@ -111,7 +111,7 @@
 
 /obj/structure/closet/radiation/WillContain()
 	return list(
-		/obj/item/weapon/storage/med_pouch/toxin = 2,
+		/obj/item/weapon/storage/med_pouch/radiation = 2,
 		/obj/item/clothing/suit/radiation,
 		/obj/item/clothing/head/radiation,
 		/obj/item/clothing/suit/radiation,
