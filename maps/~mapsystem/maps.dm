@@ -280,33 +280,84 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/perform_map_generation()
 	return
 
+
+/* It is perfectly possible to create loops with TEMPLATE_FLAG_ALLOW_DUPLICATES and force/allow. Don't. */
+/proc/resolve_site_selection(datum/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
+	var/cost = 0
+	if (site in selected)
+		if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+			return cost
+	if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+		available -= site
+	cost += site.cost
+	selected += site
+
+	for (var/forced_type in site.force_ruins)
+		cost += resolve_site_selection(by_type[forced_type], selected, available, unavailable, by_type)
+
+	for (var/banned_type in site.ban_ruins)
+		var/datum/map_template/ruin/away_site/banned = by_type[banned_type]
+		if (banned in unavailable)
+			continue
+		unavailable += banned
+		available -= banned
+
+	for (var/allowed_type in site.allow_ruins)
+		var/datum/map_template/ruin/away_site/allowed = by_type[allowed_type]
+		if (allowed in available)
+			continue
+		if (allowed in unavailable)
+			continue
+		if (allowed in selected)
+			if (!(allowed.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+				continue
+		available[allowed] = allowed.spawn_weight
+
+	return cost
+
+
 /datum/map/proc/build_away_sites()
 #ifdef UNIT_TEST
 	report_progress("Unit testing, so not loading away sites")
 	return // don't build away sites during unit testing
 #else
 	report_progress("Loading away sites...")
-	var/list/sites_by_spawn_weight = list()
+
+	var/list/guaranteed = list()
+	var/list/selected = list()
+	var/list/available = list()
+	var/list/unavailable = list()
+	var/list/by_type = list()
+
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+		if (site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED)
+			guaranteed += site
+			if ((site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && !(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
+				available[site] = site.spawn_weight
+		else if (!(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
+			available[site] = site.spawn_weight
+		by_type[site.type] = site
 
-		if((site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
-			report_progress("Loaded guaranteed away site [site]!")
-			away_site_budget -= site.cost
-			continue
+	var/budget = away_site_budget
+	for (var/datum/map_template/ruin/away_site/site in guaranteed)
+		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
 
-		sites_by_spawn_weight[site] = site.spawn_weight
-	while (away_site_budget > 0 && sites_by_spawn_weight.len)
-		var/datum/map_template/ruin/away_site/selected_site = pickweight(sites_by_spawn_weight)
-		if (!selected_site)
-			break
-		sites_by_spawn_weight -= selected_site
-		if(selected_site.cost > away_site_budget)
+	while (budget > 0 && length(available))
+		var/datum/map_template/ruin/away_site/site = pickweight(available)
+		if (site.cost > budget)
+			unavailable += site
+			available -= site
 			continue
-		if (selected_site.load_new_z())
-			report_progress("Loaded away site [selected_site]!")
-			away_site_budget -= selected_site.cost
-	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
+		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
+
+	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - budget] cost of [away_site_budget] budget.")
+
+	for (var/datum/map_template/template in selected)
+		if (template.load_new_z())
+			report_progress("Loaded away site [template]!")
+		else
+			report_progress("Failed loading away site [template]!")
 #endif
 
 /datum/map/proc/build_exoplanets()
