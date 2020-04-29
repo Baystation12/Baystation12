@@ -241,11 +241,11 @@
 	var/turf/simulated/floor/F = src
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	to_chat(user, "<span class='warning'>The thermite starts melting through the wall.</span>")
-
 	var/material/wallmat = get_material_by_name(DEFAULT_WALL_MATERIAL)
+	var/burn_time = 100 * (max_health()/wallmat.integrity)
+	to_chat(user, "<span class='warning'>The thermite starts melting through the wall. You estimate it'll take [round(burn_time/60)] minutes.</span>")
 
-	spawn(100 * (max_health()/wallmat.integrity))
+	spawn(burn_time)
 		if(O)
 			qdel(O)
 //	F.sd_LumReset()		//TODO: ~Carn
