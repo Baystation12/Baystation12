@@ -173,7 +173,9 @@
 	else
 		dat += "<td>[scan["pulse"]]bpm</td></tr>"
 	if(skill_level >= SKILL_ADEPT)
-		if((scan["pulse"] >= 140) || (scan["pulse"] == -3))
+		if(scan["pulse"] >= PULSE_MAX_BPM || scan["pulse"] == -3)
+			dat+= "<tr><td colspan='2'><span class='bad'>Patient's heart is fibrillating.</span></td></tr>"
+		else if((scan["pulse"] >= 140))
 			dat+= "<tr><td colspan='2'><span class='bad'>Patient is tachycardic.</span></td></tr>"
 		else if(scan["pulse"] >= 120)
 			dat += "<tr><td colspan='2'><span class='average'>Patient is tachycardic.</span></td></tr>"

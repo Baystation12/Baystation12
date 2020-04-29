@@ -1658,7 +1658,7 @@
 		if((MUTATION_SKELETON in mutations) && (!w_uniform) && (!wear_suit))
 			play_xylophone()
 
-/mob/living/carbon/human/proc/resuscitate()
+/mob/living/carbon/human/proc/resuscitate(var/method) //0 for CPR, 1 for defibrillator
 	if(!is_asystole() || !should_have_organ(BP_HEART))
 		return
 	var/obj/item/organ/internal/heart/heart = internal_organs_by_name[BP_HEART]
@@ -1669,14 +1669,22 @@
 			var/obj/item/organ/internal/lungs/L = internal_organs_by_name[species_organ]
 			if(L)
 				active_breaths = L.active_breathing
-		if(!nervous_system_failure() && active_breaths)
-			visible_message("\The [src] jerks and gasps for breath!")
-		else
-			visible_message("\The [src] twitches a bit as \his heart restarts!")
+		if(method && heart.pulse == PULSE_THREADY)
+			if(!nervous_system_failure() && active_breaths)
+				visible_message("\The [src] jerks and gasps for breath!")
+			else
+				visible_message("\The [src] twitches a bit!")
+		else 
+			visible_message("\The [src] twitches very slightly.")
 		shock_stage = min(shock_stage, 100) // 120 is the point at which the heart stops.
 		if(getOxyLoss() >= 75)
 			setOxyLoss(75)
-		heart.pulse = PULSE_NORM
+		if(method && heart.pulse == PULSE_THREADY)
+			heart.pulse = PULSE_NORM
+		else if (method)
+			return FALSE
+		else
+			heart.pulse = PULSE_THREADY
 		heart.handle_pulse()
 		return TRUE
 

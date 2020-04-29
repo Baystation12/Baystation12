@@ -101,7 +101,7 @@
 						heart.external_pump = list(world.time, 0.4 + 0.1*pumping_skill + rand(-0.1,0.1))
 
 					if(stat != DEAD && prob(10 + 5 * pumping_skill))
-						resuscitate()
+						resuscitate(0)
 
 				if(!H.check_has_mouth())
 					to_chat(H, "<span class='warning'>You don't have a mouth, you cannot do mouth-to-mouth resuscitation!</span>")

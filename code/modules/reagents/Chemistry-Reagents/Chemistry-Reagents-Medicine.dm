@@ -915,7 +915,7 @@
 		M.make_jittery(5)
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
-		if(M.resuscitate())
+		if(M.resuscitate(0))
 			var/obj/item/organ/internal/heart = M.internal_organs_by_name[BP_HEART]
 			heart.take_internal_damage(heart.max_damage * 0.15)
 

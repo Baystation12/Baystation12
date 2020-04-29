@@ -168,7 +168,7 @@
 
 			// Fix our heart if we're paramount.
 			if(heal_general && H.is_asystole() && H.should_have_organ(BP_HEART) && spend_power(heal_rate))
-				H.resuscitate()
+				H.resuscitate(1)
 
 			// Heal organ damage.
 			if(heal_internal)

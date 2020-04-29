@@ -89,8 +89,8 @@
 	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
 		pulse = PULSE_THREADY
 
-	// Stablising chemicals pull the heartbeat towards the center
-	if(pulse != PULSE_NORM && is_stable)
+	// Stablising chemicals pull the heartbeat towards the center. If we are in ventricular fibrillation this will not work
+	if(pulse != PULSE_NORM && pulse != PULSE_THREADY && is_stable)
 		if(pulse > PULSE_NORM)
 			pulse--
 		else
@@ -120,7 +120,8 @@
 	if(!owner || owner.InStasis() || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
-	if(pulse != PULSE_NONE || BP_IS_ROBOTIC(src))
+	//Fibrillating or stopped hearts do not pump the blood.
+	if((pulse != PULSE_NONE && pulse != PULSE_THREADY ) || BP_IS_ROBOTIC(src))
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
@@ -193,7 +194,7 @@
 	if(!is_usable())
 		return FALSE
 
-	return pulse > PULSE_NONE || BP_IS_ROBOTIC(src) || (owner.status_flags & FAKEDEATH)
+	return (pulse > PULSE_NONE && pulse < PULSE_THREADY) || BP_IS_ROBOTIC(src) || (owner.status_flags & FAKEDEATH)
 
 /obj/item/organ/internal/heart/listen()
 	if(BP_IS_ROBOTIC(src) && is_working())

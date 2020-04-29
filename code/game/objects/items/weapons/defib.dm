@@ -273,6 +273,10 @@
 /obj/item/weapon/shockpaddles/proc/can_revive(mob/living/carbon/human/H) //This is checked right before attempting to revive
 	if(H.stat == DEAD)
 		return "buzzes, \"Resuscitation failed - Severe neurological decay makes recovery of patient impossible. Further attempts futile.\""
+	
+	var/obj/item/organ/internal/heart/O = H.internal_organs_by_name[BP_HEART]
+	if(O.pulse == PULSE_NONE) //Requires heart to be in VFib (PULSE_THREADY)
+		return "buzzes, \"Resuscitation failed - Patient's heart is not in a shockable rhythm. Administer CPR to bring heart into a shockable rhythm.\""
 
 /obj/item/weapon/shockpaddles/proc/check_contact(mob/living/carbon/human/H)
 	if(!combat)
@@ -374,7 +378,7 @@
 	//set oxyloss so that the patient is just barely in crit, if possible
 	make_announcement("pings, \"Resuscitation successful.\"", "notice")
 	playsound(get_turf(src), 'sound/machines/defib_success.ogg', 50, 0)
-	H.resuscitate()
+	H.resuscitate(1)
 	var/obj/item/organ/internal/cell/potato = H.internal_organs_by_name[BP_CELL]
 	if(istype(potato) && potato.cell)
 		var/obj/item/weapon/cell/C = potato.cell
