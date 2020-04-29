@@ -3,7 +3,6 @@
 #include "../area_holders/overmap_ship_area_holder.dmm"
 
 #include "co_ord_console.dm"
-#include "../Exoplanet Research/includes.dm"
 
 #include "../Admin Planet/includes.dm"
 
