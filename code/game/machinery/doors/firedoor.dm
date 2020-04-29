@@ -3,6 +3,8 @@
 #define FIREDOOR_MAX_TEMP 50 // °C
 #define FIREDOOR_MIN_TEMP 0
 
+#define FIREDOOR_CRUSH_DAMAGE 50 //Slightly higher than airlocks since the firedoor is designed to just slam down instead of slowly closing
+
 // Bitflags
 #define FIREDOOR_ALERT_HOT      1
 #define FIREDOOR_ALERT_COLD     2
@@ -147,10 +149,6 @@
 	var/answer = alert(user, "Would you like to [density ? "open" : "close"] this [src.name]?[ alarmed && density ? "\nNote that by doing so, you acknowledge any damages from opening this\n[src.name] as being your own fault, and you will be held accountable under the law." : ""]",\
 	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
 	if(answer == "No")
-		return
-	var/mob/living/carbon/human/H = locate() in get_turf(src)
-	if(H)
-		user.visible_message("Someone is blocking the [src]")
 		return
 	if(user.incapacitated() || (get_dist(src, user) > 1  && !issilicon(user)))
 		to_chat(user, "Sorry, you must remain able bodied and close to \the [src] in order to use it.")
@@ -348,12 +346,13 @@
 	return
 
 /obj/machinery/door/firedoor/close()
-	// if there are humans on the tile, don't close
-	var/mob/living/carbon/human/H = locate() in get_turf(src)
-	if(H)
-		return
-
 	latetoggle()
+	visible_message(SPAN_DANGER("The firedoor beeps ominously, get out of the way!"), SPAN_DANGER("You hear some beeping coming from the ceiling."), 3)
+	sleep(2 SECONDS)
+	for(var/turf/turf in locs)
+		for(var/mob/living/M in turf)
+			if(M.airlock_crush(FIREDOOR_CRUSH_DAMAGE))
+				take_damage(FIREDOOR_CRUSH_DAMAGE)
 	return ..()
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
