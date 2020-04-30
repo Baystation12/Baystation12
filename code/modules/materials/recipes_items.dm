@@ -111,6 +111,12 @@
 	result_type = /obj/item/frame/light/small
 	difficulty = 2
 
+/datum/stack_recipe/light_large
+	title = "large light fixture frame"
+	result_type = /obj/item/frame/light/spot
+	req_amount = 3
+	difficulty = 3
+
 /datum/stack_recipe/light_switch
 	title = "light switch"
 	result_type = /obj/item/frame/light_switch

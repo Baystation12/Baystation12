@@ -79,3 +79,8 @@
 	icon_state = "bulb-construct-item"
 	refund_amt = 1
 	build_machine_type = /obj/machinery/light_construct/small
+
+/obj/item/frame/light/spot
+	name = "large light fixture frame"
+	build_machine_type = /obj/machinery/light_construct/spot
+	refund_amt = 3
