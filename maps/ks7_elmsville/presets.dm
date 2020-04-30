@@ -342,6 +342,13 @@
 	id = "casinoShutter"
 	req_access = list(6766)
 
+/obj/machinery/button/remote/blast_door/bar_shutter
+	name = "Shutter Control"
+	_wifi_id = "barShutter"
+	id = "barShutter"
+	req_access = list(6766)
+
+
 /obj/machinery/autolathe/ammo_fabricator/police_station
 	machine_recipes = newlist(\
 	/datum/autolathe/recipe/m255_sap_he,
@@ -353,12 +360,12 @@
 	name = "Crewman - Envoy Armour"
 	desc = "Armour worn by personnel acting as diplomatic envoys to far-flung colonies. Often, no other armour is present on these vessels to reduce insurrectionist ability to frame the unsc."
 	icon = 'icons/obj/guncabinet.dmi'
-	icon_broken = "base"
-	icon_closed = "base"
-	icon_locked = "base"
-	icon_off = "base"
-	icon_opened = "base"
-	icon_state = "base"
+	icon_broken = "closed_full"
+	icon_closed = "closed_full"
+	icon_locked = "closed_full"
+	icon_off = "closed_full"
+	icon_opened = "open_full"
+	icon_state = "closed_full"
 
 /obj/structure/closet/secure_closet/ks7_unsc/WillContain()
 	return list(\
@@ -399,12 +406,12 @@
 	name = "Insurrectionist Salvaged Gear"
 	desc = "Gear salvaged from a lightly-armed unsc wreck. Looks like it was for unsc crewmen."
 	icon = 'icons/obj/guncabinet.dmi'
-	icon_broken = "base"
-	icon_closed = "base"
-	icon_locked = "base"
-	icon_off = "base"
-	icon_opened = "base"
-	icon_state = "base"
+	icon_broken = "closed_full"
+	icon_closed = "closed_full"
+	icon_locked = "closed_full"
+	icon_off = "closed_full"
+	icon_opened = "open_full"
+	icon_state = "closed_full"
 
 /obj/structure/closet/secure_closet/ks7_innie/WillContain()
 	return list(\
@@ -445,12 +452,12 @@
 	name = "Police Patrol Gear Locker"
 	desc = "Use this to protect the citizens of your planet from hostile wildlife and people."
 	icon = 'icons/obj/guncabinet.dmi'
-	icon_broken = "base"
-	icon_closed = "base"
-	icon_locked = "base"
-	icon_off = "base"
-	icon_opened = "base"
-	icon_state = "base"
+	icon_broken = "closed_full"
+	icon_closed = "closed_full"
+	icon_locked = "closed_full"
+	icon_off = "closed_full"
+	icon_opened = "open_full"
+	icon_state = "closed_full"
 
 /obj/structure/closet/secure_closet/ks7_police/WillContain()
 	return list(\
