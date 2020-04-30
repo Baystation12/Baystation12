@@ -136,7 +136,7 @@
 
 /datum/gear/suit/medcoat/New()
 	..()
-	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/surgicalapron)
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_args(/obj/item/clothing/suit/storage/toggle/fr_jacket, /obj/item/clothing/suit/storage/toggle/fr_jacket/ems, /obj/item/clothing/suit/surgicalapron, /obj/item/clothing/suit/storage/toggle/fr_jacket/emrs)
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"
