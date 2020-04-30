@@ -7,7 +7,7 @@
 	matter = list(MATERIAL_STEEL = 10000, MATERIAL_PLASTIC = 5000, MATERIAL_OSMIUM = 500)
 	force = 10
 
-	var/restricted_hardpoints
+	var/list/restricted_hardpoints
 	var/mob/living/exosuit/owner
 	var/list/restricted_software
 	var/equipment_delay = 0
@@ -42,6 +42,14 @@
 		return 1
 	else 
 		return 0
+
+/obj/item/mech_equipment/examine(mob/user, distance)
+	. = ..()
+	if(user.skill_check(SKILL_DEVICES, SKILL_BASIC))
+		if(restricted_software.len)
+			to_chat(user, SPAN_SUBTLE("It seems it would require [english_list(restricted_software)] to be used."))
+		if(restricted_hardpoints.len)
+			to_chat(user, SPAN_SUBTLE("You figure it could be mounted in the [english_list(restricted_hardpoints)]."))
 
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)
 	owner = _owner

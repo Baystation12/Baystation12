@@ -165,6 +165,8 @@
 
 #define SPAN_INFO(X) "<span class='info'>[X]</span>"
 
+#define FONT_COLORED(color, text) "<font color='[color]'>[text]</font>"
+
 #define FONT_SMALL(X) "<font size='1'>[X]</font>"
 
 #define FONT_NORMAL(X) "<font size='2'>[X]</font>"
