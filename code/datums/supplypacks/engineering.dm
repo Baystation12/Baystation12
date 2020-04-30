@@ -73,22 +73,6 @@
 	containername = "emitter crate"
 	access = access_engine_equip
 
-/decl/hierarchy/supply_pack/engineering/field_gen
-	name = "Equipment - Field generator"
-	contains = list(/obj/machinery/field_generator = 2)
-	containertype = /obj/structure/closet/crate/large
-	cost = 10
-	containername = "field generator crate"
-	access = access_ce
-
-/decl/hierarchy/supply_pack/engineering/sing_gen
-	name = "Equipment - Singularity generator"
-	contains = list(/obj/machinery/the_singularitygen)
-	cost = 10
-	containertype = /obj/structure/closet/crate/secure/large
-	containername = "singularity generator crate"
-	access = access_ce
-
 /decl/hierarchy/supply_pack/engineering/collector
 	name = "Power - Collector"
 	contains = list(/obj/machinery/power/rad_collector = 2)
@@ -96,20 +80,6 @@
 	containertype = /obj/structure/closet/crate/secure/large
 	containername = "collector crate"
 	access = access_engine_equip
-
-/decl/hierarchy/supply_pack/engineering/PA
-	name = "Equipment - Particle accelerator"
-	contains = list(/obj/structure/particle_accelerator/fuel_chamber,
-					/obj/machinery/particle_accelerator/control_box,
-					/obj/structure/particle_accelerator/particle_emitter/center,
-					/obj/structure/particle_accelerator/particle_emitter/left,
-					/obj/structure/particle_accelerator/particle_emitter/right,
-					/obj/structure/particle_accelerator/power_box,
-					/obj/structure/particle_accelerator/end_cap)
-	cost = 40
-	containertype = /obj/structure/largecrate
-	containername = "particle accelerator crate"
-	access = access_ce
 
 /decl/hierarchy/supply_pack/engineering/pacman_parts
 	name = "Power - P.A.C.M.A.N. portable generator parts"
