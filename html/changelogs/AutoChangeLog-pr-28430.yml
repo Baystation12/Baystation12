@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Ascent-Glow is visible instead of audible, making it work in space."
