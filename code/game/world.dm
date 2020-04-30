@@ -191,7 +191,9 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/list/L = list()
 		L["gameid"] = game_id
 		L["dm_version"] = DM_VERSION // DreamMaker version compiled in
+		L["dm_build"] = DM_BUILD // DreamMaker build compiled in
 		L["dd_version"] = world.byond_version // DreamDaemon version running on
+		L["dd_build"] = world.byond_build // DreamDaemon build running on
 
 		if(revdata.revision)
 			L["revision"] = revdata.revision
