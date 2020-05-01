@@ -31,7 +31,7 @@
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/innie
 
 /obj/item/clothing/head/helmet/urfccommander
 	name = "SOE Commander Hat"
@@ -46,7 +46,7 @@
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
 	brightness_on = 4
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/innie
 
 /obj/item/clothing/head/helmet/soe
 	name = "SOE Space Helmet"
@@ -71,7 +71,7 @@
 	on = 0
 	armor_thickness = 20
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical/odst_hud
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/innie
 
 
 //ARMOR

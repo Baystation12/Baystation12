@@ -12,16 +12,6 @@
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
 
-/obj/item/clothing/glasses/hud/tactical/kigyar_nv
-	name = "Kig-Yar Scout Helmet Night Vision"
-	desc = "Scout Helmet night vision active."
-	icon = KIGYAR_CLOTHING_PATH
-	icon_state = "inbuilt_nv"
-	icon_override = ""//So nothing appears on the glasses layer.
-	darkness_view = 7
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	canremove = 0
-
 /obj/item/clothing/under/kigyar
 	name = "Kig-Yar Body-Suit"
 	desc = "A Kig-Yar body suit for Ruuhtians and T-Voans. Meant to be worn underneath a combat harness"
@@ -60,7 +50,7 @@
 	desc = "A Kig-Yar scout helmet. Usually these come with night vision, however, this one seems to have had that removed."
 	armor = list(melee = 30, bullet = 30, laser = 30,energy = 20, bomb = 25, bio = 0, rad = 0)
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant/sangheili
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
 
 /obj/item/clothing/suit/armor/kigyar/first_contact
 	name = "Kig-Yar Combat Harness"

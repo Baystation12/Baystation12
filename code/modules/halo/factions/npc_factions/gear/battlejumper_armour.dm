@@ -20,7 +20,7 @@
 	body_parts_covered = HEAD|FACE
 	flags_inv = BLOCKHAIR
 	armor = list(melee = 60, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 50, rad = 25)
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/innie
 
 /obj/item/clothing/suit/armor/special/gao_battlejumper
 	name = "Gao Battlejumper Armour"

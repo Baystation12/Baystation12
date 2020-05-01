@@ -579,7 +579,7 @@
 	armor = list(melee = 25, bullet = 30, laser = 20, energy = 20, bomb = 20, bio = 10, rad = 15)
 	gas_transfer_coefficient = 0.90
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/innie
 
 
 #undef INNIE_OVERRIDE
