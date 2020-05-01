@@ -1,15 +1,15 @@
 
-/obj/effect/landmark/firefight_spawn_easy
+/obj/effect/landmark/spawn_easy
 	name = "spawn marker easy"
 	icon = 'spawn.dmi'
 	icon_state = "easy"
 
-/obj/effect/landmark/firefight_spawn_medium
+/obj/effect/landmark/spawn_medium
 	name = "spawn marker medium"
 	icon = 'spawn.dmi'
 	icon_state = "medium"
 
-/obj/effect/landmark/firefight_spawn_hard
+/obj/effect/landmark/spawn_hard
 	name = "spawn marker hard"
 	icon = 'spawn.dmi'
 	icon_state = "hard"
@@ -30,9 +30,18 @@
 		amount -= 1
 
 /datum/game_mode/firefight/proc/spawn_attackers(var/spawntype, var/amount)
-	if(spawn_landmarks.len)
+
+	//spawn_landmarks
+	var/list/available_spawns = list()
+	for(var/previous_wave = 1, previous_wave <= current_wave, previous_wave++)
+		if(previous_wave > spawn_landmarks.len)
+			break
+		var/list/spawn_tier = spawn_landmarks[previous_wave]
+		available_spawns.Add(spawn_tier)
+
+	if(available_spawns.len)
 		for(var/i = 0, i < amount, i++)
-			var/obj/spawn_landmark = pick(spawn_landmarks)
+			var/obj/spawn_landmark = pick(available_spawns)
 			var/atom/spawnloc = spawn_landmark.loc		//could be inside a vehicle etc
 			var/mob/living/simple_animal/hostile/H = new spawntype(spawnloc)
 			H.our_overmind = overmind

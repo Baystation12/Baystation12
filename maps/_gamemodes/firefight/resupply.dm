@@ -1,23 +1,21 @@
 
-/obj/effect/landmark/scavenge_spawn
-	name = "resupply spawn marker"
-	icon_state = "x3"
-
-/obj/effect/landmark/scavenge_spawn_skip
-	icon_state = "x"
-
 /datum/game_mode/firefight
 	var/sound/sound_crash = sound('sound/effects/crash.ogg')
 	var/sound/sound_flyby = sound('sound/effects/start.ogg')
+	var/list/resupply_procs = list(/datum/game_mode/firefight/proc/spawn_resupply)
+
 	var/list/supply_crate_procs = list(\
 		/datum/game_mode/firefight/proc/spawn_gun_crate,\
 		/datum/game_mode/firefight/proc/spawn_heavygun_crate,\
 		/datum/game_mode/firefight/proc/spawn_sniper_crate,\
+		/datum/game_mode/firefight/proc/spawn_landmine_crate,\
 		/datum/game_mode/firefight/proc/spawn_armour_crate,\
-		/datum/game_mode/firefight/proc/spawn_medic_crate,\
 		/datum/game_mode/firefight/proc/spawn_turret_crate,\
+		/datum/game_mode/firefight/proc/spawn_medic_crate,\
 		/datum/game_mode/firefight/proc/spawn_misc_crate,\
-		/datum/game_mode/firefight/proc/spawn_material_crate)
+		/datum/game_mode/firefight/proc/spawn_tool_crate,\
+		/datum/game_mode/firefight/proc/spawn_material_crate\
+		)
 
 	var/debris_structures = list(\
 		/obj/structure/grille/broken=5,\
@@ -38,47 +36,43 @@
 /datum/game_mode/firefight/proc/process_resupply()
 	if(world.time > time_next_resupply)
 		time_next_resupply = world.time + interval_resupply
-		if(!available_resupply_points.len)
-			log_admin("Warning: Unable to locate marker to spawn resupply")
-			return
+		do_resupply()
 
-		var/turf/center_turf = locate(world.maxx/2, world.maxy/2, 1)
-		var/obj/effect/landmark/scavenge_spawn/S = pick(available_resupply_points)
-		available_resupply_points -= S
-		var/turf/drop_turf = get_turf(S)
-		var/dir_text = "<span class='em'>[dir2text(get_dir(center_turf, S))]</span> of your base"
+/datum/game_mode/firefight/proc/do_resupply()
+	if(!GLOB.available_resupply_points.len)
+		//log_and_message_admins("Warning: No resupply points available")
+		return
 
-		//work out what message
-		var/pilot_message
-		var/impact_text
-		var/resupply_type = pick(1,2)
-		switch(resupply_type)
-			if(1)
-				pilot_message = "A clump of debris from your ship has crashed down to the [dir_text]. See if you can salvage it for resources."
-				impact_text = "a massive impact"
-				spawn(0)
-					spawn_ship_debris(drop_turf)
-			if(2)
-				pilot_message = "Supply run completed, I've dropped off my cargo to the [dir_text]. [pick("Good luck!","Hang in there!","Evacuation is coming!")]"
-				impact_text = "multiple thudding impacts"
-				spawn(0)
-					spawn_resupply(drop_turf)
+	var/turf/center_turf = locate(world.maxx/2, world.maxy/2, 1)
+	var/obj/effect/landmark/S = pick(GLOB.available_resupply_points)
+	GLOB.available_resupply_points -= S
+	var/turf/drop_turf = get_turf(S)
+	var/dir_text = "<span class='em'>[dir2text(get_dir(center_turf, S))]</span> of you"
 
-		playsound(drop_turf, "explosion", 100, 1)
-		for(var/mob/M in range(21, drop_turf))
-			to_chat(M, "<span class='warning'>You hear [impact_text] to the [dir2text(get_dir(M, S))].</span>")
+	//random form of resupply
+	var/chosen_proc = pickweight(resupply_procs)
+	var/pilot_message = call(src, chosen_proc)(drop_turf)
 
-		//tell the players
-		to_world("\
-			<span class='radio'>\
-				<span class='name'>GA-TL1 Longsword Pilot</span> \
-				<b>\[UNSC Emergency Freq\]</b> \
-				<span class='message'>\"[pilot_message]\"</span>\
-			</span>")
+	//work out the message
+	pilot_message = replacetext(pilot_message, "%DIRTEXT%", dir_text)
 
-		qdel(S)
+	playsound(drop_turf, "explosion", 100, 1)
+	for(var/mob/M in range(21, drop_turf))
+		to_chat(M, "<span class='warning'>You hear multiple thudding impacts to the [dir2text(get_dir(M, S))].</span>")
+
+	//tell the players
+	to_world("\
+		<span class='radio'>\
+			<span class='name'>[pilot_name]</span> \
+			<b>\[Resupply Freq\]</b> \
+			<span class='message'>\"[pilot_message]\"</span>\
+		</span>")
+
+	qdel(S)
 
 /datum/game_mode/firefight/proc/spawn_ship_debris(var/turf/epicentre)
+	. = "A clump of debris from your ship has crashed down to the %DIRTEXT%. See if you can salvage it for resources."
+
 	var/max_dist = 10
 	for(var/turf/spawn_turf in range(max_dist, epicentre))
 		//closer to the center has more goodies
@@ -88,7 +82,7 @@
 		if(prob(spawn_chance))
 			//low chance to spawn a useful supply crate
 			if(prob(2))
-				var/chosen_proc = pick(supply_crate_procs)
+				var/chosen_proc = pickweight(supply_crate_procs)
 				call(src, chosen_proc)(spawn_turf)
 			else
 				//spawn some random crap
@@ -103,6 +97,9 @@
 		sound_to(M, sound_crash)
 
 /datum/game_mode/firefight/proc/spawn_resupply(var/turf/epicentre)
+	. = "Supply run completed, I've dropped off my cargo to the %DIRTEXT%. \
+		[pick("Good luck!","Hang in there!","Evacuation is coming!")]"
+
 	var/num_crates = rand(3,5)
 	var/failed_attempts = 0
 	spawn_gun_crate(epicentre)
@@ -117,7 +114,7 @@
 			continue
 
 		//spawn a crate
-		var/chosen_proc = pick(supply_crate_procs)
+		var/chosen_proc = pickweight(supply_crate_procs)
 		call(src, chosen_proc)(spawn_turf)
 
 		num_crates -= 1
@@ -127,6 +124,7 @@
 		sound_to(M, sound_flyby)
 
 /datum/game_mode/firefight/proc/spawn_gun_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "weapons crate"
 	C.icon_state = "weaponcrate"
@@ -146,6 +144,7 @@
 		new picked_ammo(C)
 
 /datum/game_mode/firefight/proc/spawn_heavygun_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "heavy weapons crate"
 	C.icon_state = "weaponcrate"
@@ -165,6 +164,7 @@
 		new picked_ammo(C)
 
 /datum/game_mode/firefight/proc/spawn_sniper_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "marksman crate"
 	C.icon_state = "weaponcrate"
@@ -186,6 +186,7 @@
 		new /obj/item/device/landmine(C)
 
 /datum/game_mode/firefight/proc/spawn_armour_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "armour crate"
 	C.icon_state = "hydrocrate"
@@ -209,6 +210,7 @@
 		new /obj/item/weapon/storage/firstaid/unsc(B)
 
 /datum/game_mode/firefight/proc/spawn_turret_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "turret crate"
 	C.icon_state = "secgearcrate"
@@ -221,6 +223,7 @@
 		new /obj/item/turret_deploy_kit/chaingun(C)
 
 /datum/game_mode/firefight/proc/spawn_medic_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "medical crate"
 	C.icon_state = "medicalcrate"
@@ -236,6 +239,7 @@
 	new /obj/item/weapon/storage/firstaid/surgery(C)
 
 /datum/game_mode/firefight/proc/spawn_misc_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	new /obj/item/weapon/material/knife/combat_knife(C)
 	new /obj/item/weapon/material/knife/combat_knife(C)
@@ -248,6 +252,7 @@
 	new /obj/item/weapon/storage/box/m9_frag(C)
 
 /datum/game_mode/firefight/proc/spawn_tool_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "tool crate"
 	C.icon_state = "phoroncrate"
@@ -262,6 +267,7 @@
 	new /obj/item/weapon/storage/belt/utility/full(C)
 
 /datum/game_mode/firefight/proc/spawn_material_crate(var/turf/spawn_turf)
+
 	var/obj/structure/closet/crate/C = new(spawn_turf)
 	C.name = "sheet materials crate"
 	C.icon_state = "largemetal"

@@ -9,7 +9,6 @@
 	..()
 
 	GLOB.hostile_attackables += /obj/structure/evac_ship
-	GLOB.hostile_attackables += /obj/structure/tanktrap
 
 	overmind = new()
 
@@ -17,30 +16,24 @@
 	player_faction = GLOB.factions_by_name[player_faction_name]
 	overmind.comms_channel = enemy_faction.default_radio_channel
 
-	//loop over the map creating resupply spawn points
-	spawn(-1)
-		var/resup_dist = 20
-		for(var/curx = 1, curx < world.maxx, curx += resup_dist + pick(-7,0,7))
-			for(var/cury = 1, cury < world.maxy, cury += resup_dist)
-				var/turf/T = locate(curx, cury, 1)
-				//if there is a scavenge_spawn_skip landmark, skip this spot (place one eg near the player base)
-				var/obj/effect/landmark/scavenge_spawn_skip/N = locate() in range(resup_dist, T)
-				if(N)
-					continue
-				var/obj/effect/landmark/scavenge_spawn/S = new(T)
-				available_resupply_points.Add(S)
-
 	//loop over the map and setup spawn landmarks
 	spawn(-1)
 
-		for(var/obj/effect/landmark/firefight_spawn_easy/F in world)
-			spawn_landmarks.Add(F)
+		var/list/easy_spawns = list()
+		for(var/obj/effect/landmark/spawn_easy/F in world)
+			easy_spawns.Add(F)
 
-		for(var/obj/effect/landmark/firefight_spawn_medium/F in world)
-			spawn_landmarks.Add(F)
+		var/list/medium_spawns = list()
+		for(var/obj/effect/landmark/spawn_medium/F in world)
+			medium_spawns.Add(F)
 
-		for(var/obj/effect/landmark/firefight_spawn_hard/F in world)
-			spawn_landmarks.Add(F)
+		var/list/hard_spawns = list()
+		for(var/obj/effect/landmark/spawn_hard/F in world)
+			hard_spawns.Add(F)
+
+		spawn_landmarks[1] = easy_spawns
+		spawn_landmarks[2] = medium_spawns
+		spawn_landmarks[3] = hard_spawns
 
 	//loop over the map and setup assault targets
 	spawn(-1)

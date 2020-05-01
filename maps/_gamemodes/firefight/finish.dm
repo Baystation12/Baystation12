@@ -33,17 +33,17 @@
 		evac_ship = null
 	var/announcement_text = ""
 	if(evac_ship)
-		announcement_text = "<span class='good'>The pelican takes off! The survivors were:</span><br>"
+		announcement_text = win_message
 		var/no_survivors = 1
 		for(var/mob/living/M in GLOB.player_list)
 			if(M.stat != DEAD && M.loc == evac_ship)
 				announcement_text += "<span class='emote'><span class='prefix'>[M]</span>, [M.job]</span> (played by <span class='info'>[M.ckey]</span>)<br>"
 				no_survivors = 0
 		if(no_survivors)
-			announcement_text = "<span class='bad'>Defeat: The evac ship left with no-one on it!</span>"
+			announcement_text = empty_message
 	else if(world.time > time_evac_leave)
-		announcement_text = "<span class='bad'>Defeat: The pelican has been destroyed! Any survivors are doomed to die alone in the wastes...</span><br>"
+		announcement_text = destroyed_message
 	else if(!player_faction.players_alive())
-		announcement_text = "<span class='bad'>Defeat: The survivors have been overrun. The pelican did not arrive in time.</span>"
+		announcement_text = overrun_message
 
 	to_world(announcement_text)

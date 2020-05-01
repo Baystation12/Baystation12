@@ -16,9 +16,9 @@
 		. = new /obj/structure/evac_ship(src.loc)
 		qdel(src)
 
-/obj/structure/evac_ship/
+/obj/structure/evac_ship
 	name = "D77-TC Pelican"
-	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. Tt can also be used as a support gunship."
+	desc = "A versatile aircraft used by the UNSC for medium-lift operations of personnel, vehicles and equipment. It can also be used as a support gunship."
 	anchored = 1
 	density = 1
 	icon = 'evac_pelican.dmi'
@@ -26,6 +26,7 @@
 	var/health = 600
 	var/healthmax = 600
 	var/is_thrusting = 0
+	var/pilot_name = "D77-TC Pelican Pilot"
 	bound_width = 96
 	bound_height = 192
 
@@ -91,7 +92,7 @@
 		<span class='radio'>\
 			<span class='name'>D77-TC Pelican Pilot</span> \
 			\icon[src] \
-			<b>\[UNSC Emergency Freq\]</b> \
+			<b>\[Emergency Freq\]</b> \
 			<span class='message'>\"[pilot_message]\"</span>\
 		</span>")
 	//qdel(I)
@@ -115,9 +116,15 @@
 		else
 			to_chat(M, "<span class='warning'>You are unable to do that.</span>")
 
-/obj/structure/evac_ship/verb/enter_pelican()
-	set name = "Enter the Evac Pelican"
+/obj/structure/evac_ship/verb/enter_ship()
+	set name = "Enter the evac ship"
 	set src in view()
 	set category = "IC"
 
 	attempt_enter(usr)
+
+/obj/structure/evac_ship/spirit
+	name = "Spirit Dropship"
+	pilot_name = "Spirit Dropship Pilot"
+	icon = 'code/modules/halo/vehicles/types/spirit.dmi'
+	icon_state = "base"

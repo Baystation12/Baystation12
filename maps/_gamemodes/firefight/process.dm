@@ -11,6 +11,9 @@
 			to_world("<span class='danger'>[rest_message]</span> \
 				<span class='notice'>You now have a [round(rest_time / (1 MINUTE),1)] minute rest. There is [max_waves - current_wave] waves left until evacuation.</span>")
 
+			spawn(30)
+				do_resupply()
+
 		else
 			spawn(0)
 				spawn_attackers_tick()
@@ -33,5 +36,5 @@
 
 	if(evac_stage)
 		process_evac()
-	else
-		process_resupply()
+	/*else
+		process_resupply()*/
