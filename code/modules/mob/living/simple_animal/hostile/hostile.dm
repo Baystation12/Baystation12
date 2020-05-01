@@ -136,9 +136,10 @@
 	if(target_mob in targlist)
 		if(ranged || istype(loc,/obj/vehicles))
 			if(target_mob in targlist)
-				//walk(src, 0) //The players can shoot-move, so can we!
+				walk(src, 0)
 				OpenFire(target_mob)
-			if(get_dist(loc,target_mob) > world.view/2) //Don't let them flee!
+				return
+			if(get_dist(loc,target_mob) > world.view) //Don't let them flee!
 				var/do_chase = 1
 				if(istype(target_mob,/mob/living/carbon/human))
 					if(locate(/obj/item/weapon/gun/projectile/shotgun in target_mob)) //Okay wait they have a shotty.
@@ -317,6 +318,8 @@
 		return 0
 	if(isturf(src.loc) || istype(src.loc,/obj/vehicles))
 		if(!stat)
+			if(destroy_surroundings)
+				DestroySurroundings()
 			switch(stance)
 				if(HOSTILE_STANCE_IDLE)
 					target_mob = FindTarget()
@@ -326,14 +329,11 @@
 						handle_leader_pathing()
 
 				if(HOSTILE_STANCE_ATTACK)
-					if(destroy_surroundings)
-						DestroySurroundings()
 					MoveToTarget()
 
 				if(HOSTILE_STANCE_ATTACKING)
-					if(destroy_surroundings)
-						DestroySurroundings()
 					AttackTarget()
+
 				if(HOSTILE_STANCE_INSIDE) //we aren't inside something so just switch
 					stance = HOSTILE_STANCE_IDLE
 	else
@@ -348,7 +348,6 @@
 	. = ..()
 	if(health < oldhealth && user.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = user
-		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
 		Life()
 
@@ -356,7 +355,6 @@
 	. = ..()
 	if(M.a_intent == I_HURT && M.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
 		target_mob = M
-		//MoveToTarget()
 		stance = HOSTILE_STANCE_ATTACK
 		Life()
 
@@ -374,7 +372,7 @@
 			if(tmp_step.density == 1)
 				break
 			targ_loc = tmp_step
-			walk_to(src, target_mob, 1, move_to_delay)
+			//walk_to(src, target_mob, 1, move_to_delay)
 
 	return 1
 
@@ -408,7 +406,7 @@
 	target_mob = null
 	min_nextfire = world.time + ranged_fire_delay
 
-/mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
+/mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/mob/user, var/bullet = 0)
 	var/obj/vehicles/v = loc
 	if(target == start)
 		return
@@ -422,6 +420,7 @@
 
 	var/obj/item/projectile/A = new projtype_use(user:loc)
 	A.permutated += user:loc
+	A.firer = src
 	playsound(user, projsound_use, 100, 1)
 	if(!A)	return
 	var/def_zone = get_exposed_defense_zone(target)
@@ -434,10 +433,10 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 	/obj/structure/table,\
 	/obj/structure/grille,\
 	/obj/structure/girder,\
-	/obj/structure/tanktrap,\
-	/obj/structure/barricade,\
-	/obj/structure/barricadeunsc,\
-	/obj/structure/sandbag
+	/obj/structure/destructible/tanktrap,\
+	/obj/structure/destructible/steel_barricade,\
+	/obj/structure/destructible/plasteel_barricade,\
+	/obj/structure/destructible/sandbag
 ))
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()

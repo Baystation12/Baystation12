@@ -21,6 +21,10 @@ GLOBAL_LIST_EMPTY(assault_targets)
 	name = "covenant assault target"
 	icon_state = "covenant"
 
+/obj/effect/landmark/assault_target/unsc
+	name = "unsc assault target"
+	icon_state = "unsc"
+
 /obj/effect/landmark/assault_target/New()
 	. = ..()
 
@@ -64,16 +68,16 @@ also using astar would have a performance impact due to eg hordes
 
 /mob/living/simple_animal/hostile
 	var/path_recheck_time
-	var/turf/path_start
+	var/turf/previous_turf
+	var/timeout_check = 0
 
 /mob/living/simple_animal/hostile/proc/handle_assault_pathing()
 
 	//check if we are stuck
-	if(world.time >= path_timeout)
-		if(path_start == src.loc)
+	if(src.loc == previous_turf)
+		timeout_check++
+		if(timeout_check > 2)
 			stop_pathing(1 MINUTE)
-		else
-			path_start = null
 
 	//do we have a valid assault target?
 	var/turf/assault_turf
@@ -84,7 +88,7 @@ also using astar would have a performance impact due to eg hordes
 	if(assault_turf && assault_turf.z == src.z)
 
 		//are we already there?
-		if(get_dist(assault_turf, src) < 3)
+		if(get_dist(assault_turf, src) < 7)
 			//hang around here for a minute before moving
 			stop_pathing(1 MINUTE)
 		else
@@ -117,9 +121,7 @@ also using astar would have a performance impact due to eg hordes
 				//it will be safer this way though given the crude pathfinding algorithm
 				dir = get_dir(src.loc, target_turf)
 				walk_to(src,target_turf,0,move_to_delay)
-				if(!path_start)
-					path_start = src.loc
-					path_timeout = world.time + move_to_delay
+				path_timeout = world.time + move_to_delay
 			else
 				//we couldn't path to our current assault target, try to find a new one next tick
 				stop_pathing(0)
@@ -132,10 +134,14 @@ also using astar would have a performance impact due to eg hordes
 		var/list/possible_targets = GLOB.assault_targets[assault_target_type]
 		if(possible_targets)
 			var/list/zlevel_targets  = possible_targets["[src.z]"]
-			if(zlevel_targets && zlevel_targets.len)
-				var/obj/effect/landmark/assault_target/A = pick(zlevel_targets)
-				if(A != last_assault_target || zlevel_targets.len == 1)
+			if(zlevel_targets)
+				if(zlevel_targets.len > 1)
+					var/obj/effect/landmark/assault_target/A = pick(zlevel_targets - last_assault_target)
 					set_assault_target(A)
+				else if(zlevel_targets.len == 1)
+					set_assault_target(zlevel_targets[1])
+
+	previous_turf = src.loc
 
 /mob/living/simple_animal/hostile/proc/stop_pathing(var/timeout = 10 SECONDS)
 	set_assault_target()
