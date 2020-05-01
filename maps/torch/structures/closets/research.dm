@@ -105,45 +105,6 @@
 		new /datum/atom_creator/simple(/obj/item/weapon/storage/backpack/messenger/tox, 50)
 	)
 
-/obj/structure/closet/secure_closet/guard
-	name = "security guard's locker"
-	req_access = list(access_sec_guard)
-	closet_appearance = /decl/closet_appearance/secure_closet/torch/science
-
-/obj/structure/closet/secure_closet/guard/WillContain()
-	return list(
-		/obj/item/clothing/under/rank/guard,
-		/obj/item/clothing/suit/armor/pcarrier/medium/nt,
-		/obj/item/clothing/head/helmet/nt/guard,
-		/obj/item/clothing/head/soft/sec/corp/guard,
-		/obj/item/clothing/head/beret/guard,
-		/obj/item/clothing/accessory/armband/whitered,
-		/obj/item/device/radio/headset/torchnanotrasen,
-		/obj/item/clothing/mask/gas/half,
-		/obj/item/weapon/material/clipboard,
-		/obj/item/weapon/folder,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape/random = 3,
-		/obj/item/weapon/storage/belt/holster/security,
-		/obj/item/device/flash,
-		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/melee/baton/loaded,
-		/obj/item/weapon/handcuffs = 2,
-		/obj/item/device/flashlight/maglight,
-		/obj/item/clothing/glasses/sunglasses,
-		/obj/item/clothing/glasses/tacgoggles,
-		/obj/item/clothing/mask/balaclava,
-		/obj/item/taperoll/research,
-		/obj/item/device/hailer,
-		/obj/item/clothing/accessory/storage/black_vest,
-		/obj/item/clothing/accessory/badge/holo/NT,
-		/obj/item/device/megaphone,
-		/obj/item/weapon/gun/energy/stunrevolver/secure/nanotrasen,
-		/obj/item/clothing/shoes/jackboots,
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security/exo, /obj/item/weapon/storage/backpack/satchel/sec/exo)),
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec/exo))
-	)
-
 /obj/structure/closet/secure_closet/ec_scientist
 	name = "scientist locker"
 	req_access = list(access_research)

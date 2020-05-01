@@ -17,41 +17,12 @@
 	icon_state = "com_headset_alt"
 	item_state = "com_headset_alt"
 
-/obj/item/device/radio/headset/heads/torchcorp
-	name = "corporate headset"
-	desc = "Headset of the servants to the corporate overlords."
-	icon_state = "nt_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchcorp
-
-/obj/item/device/radio/headset/heads/torchcorp/alt
-	name = "corporate bowman headset"
-	icon_state = "nt_headset_alt"
-	item_state = "nt_headset_alt"
-
-/obj/item/device/radio/headset/heads/torchntcommand
-	name = "corporate command headset"
-	desc = "Headset of the corporate overlords."
-	icon_state = "nt_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/headset_torchcl
-
-/obj/item/device/radio/headset/heads/torchntcommand/alt
-	name = "corporate command bowman headset"
-	icon_state = "nt_headset_alt"
-	item_state = "nt_headset_alt"
-
 /obj/item/device/radio/headset/heads/torchntdirector
 	name = "chief science officer headset"
 	desc = "Headset of the masters of the universe."
 	icon_state = "sci_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchrd
-
-/obj/item/device/radio/headset/heads/torchntcommand/alt
-	name = "corporate command bowman headset"
-	icon_state = "nt_headset_alt"
-	item_state = "nt_headset_alt"
 
 /obj/item/device/radio/headset/heads/cos
 	name = "chief of security's headset"

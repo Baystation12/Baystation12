@@ -23,7 +23,7 @@
 	add_field(/datum/report_field/pencode_text, "Special Characteristic(s)")
 	add_field(/datum/report_field/pencode_text, "Classification")
 
-	add_field(/datum/report_field/text_label/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
+	add_field(/datum/report_field/text_label/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
 
 /datum/computer_file/report/recipient/exp/planet
 	form_name = "SCG-EXP-17"
@@ -45,7 +45,7 @@
 	add_field(/datum/report_field/pencode_text, "Points of Interest")
 	add_field(/datum/report_field/pencode_text, "Observations")
 
-	add_field(/datum/report_field/text_label/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to both the Corporate Liaison and the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
+	add_field(/datum/report_field/text_label/instruction, "On completion of this form and form approval, the Chief Science Officer should fax the form to the Commanding Officer, as well as keep a copy on file in their Office alongside other mission reports.")
 
 /datum/computer_file/report/recipient/shuttle/post_flight
 	logo = "\[eclogo\]"

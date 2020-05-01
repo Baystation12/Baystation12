@@ -50,7 +50,7 @@
 /obj/structure/disposalpipe/trunk,
 /obj/machinery/disposal,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "aj" = (
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
@@ -70,7 +70,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "al" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/bridge/forestarboard)
@@ -250,15 +250,15 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/research{
-	id_tag = "liaisondoor";
-	name = "Corporate Liaison";
+	id_tag = "auxofficedoorback";
+	name = "Auxiliary Office";
 	secured_wires = 1
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "aD" = (
 /obj/structure/catwalk,
 /obj/structure/cable/green{
@@ -336,17 +336,12 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 8;
 	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "aK" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/cobed)
@@ -538,7 +533,7 @@
 	},
 /obj/machinery/photocopier,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bd" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/bed/chair/comfy/blue{
@@ -638,7 +633,7 @@
 /obj/item/sticky_pad/random,
 /obj/item/weapon/book/manual/nt_regs,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bm" = (
 /obj/random/closet,
 /obj/effect/floor_decal/industrial/outline/grey,
@@ -647,7 +642,7 @@
 "bn" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 10;
@@ -677,23 +672,12 @@
 /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/corp,
 /obj/item/weapon/storage/box/large/union_cards,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "bq" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/co)
 "br" = (
 /obj/structure/table/woodentable/walnut,
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
-/obj/structure/cable/green{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/item/documents/nanotrasen,
 /obj/item/weapon/storage/briefcase{
 	pixel_x = 3;
 	pixel_y = 0
@@ -703,7 +687,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "bs" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -733,18 +717,12 @@
 /area/maintenance/bridge/forestarboard)
 "bu" = (
 /obj/machinery/door/firedoor,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /obj/machinery/door/airlock/research{
-	id_tag = "liaisondoor3";
-	name = "Corporate Liaison";
+	name = "Auxiliary Office";
 	secured_wires = 1
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bv" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -794,7 +772,7 @@
 "by" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bz" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -802,7 +780,7 @@
 /obj/random/smokes,
 /obj/item/weapon/flame/lighter/random,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bA" = (
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/machinery/alarm{
@@ -811,13 +789,13 @@
 	pixel_x = 24
 	},
 /obj/machinery/camera/network/command{
-	c_tag = "Corporate Liaison - Office";
+	c_tag = "Auxiliary Office - Office";
 	dir = 8;
 	network = list("Command")
 	},
 /obj/item/weapon/storage/box/donut,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bB" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -878,7 +856,7 @@
 	},
 /obj/structure/flora/pottedplant/large,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bH" = (
 /obj/structure/hygiene/toilet{
 	dir = 4
@@ -928,8 +906,8 @@
 /area/hallway/primary/bridge/fore)
 "bL" = (
 /obj/machinery/door/airlock/research{
-	id_tag = "liaisondoor";
-	name = "Corporate Liaison";
+	id_tag = "auxofficedoorfront";
+	name = "Auxiliary Office";
 	secured_wires = 1
 	},
 /obj/machinery/door/firedoor,
@@ -941,7 +919,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bM" = (
 /obj/structure/disposalpipe/trunk,
 /obj/machinery/disposal,
@@ -1041,11 +1019,11 @@
 /area/hallway/primary/bridge/fore)
 "bV" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "cl_windows"
+	id = "auxofficewindows"
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "bX" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -2003,9 +1981,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/disciplinary_board_room)
-"dk" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/crew_quarters/heads/office/cl/backroom)
 "dl" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
@@ -2020,9 +1995,6 @@
 "dm" = (
 /turf/simulated/wall/r_wall/hull,
 /area/turret_protected/ai_foyer)
-"dn" = (
-/turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
 "do" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -2699,7 +2671,7 @@
 	dir = 5
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "ez" = (
 /obj/structure/bed/chair/padded/green{
 	icon_state = "chair_preview";
@@ -2710,7 +2682,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "eA" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
@@ -2719,7 +2691,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "eB" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -3010,13 +2982,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "eZ" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "fa" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -3034,12 +3006,8 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/obj/machinery/recharger/wallcharger{
-	dir = 1;
-	pixel_y = -24
-	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "fc" = (
 /obj/structure/disposalpipe/junction{
 	dir = 1;
@@ -3636,7 +3604,7 @@
 	icon_state = "1-8"
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "gd" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -7025,7 +6993,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "nU" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -8168,7 +8136,7 @@
 	pixel_x = 20
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "qY" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -8893,7 +8861,7 @@
 /area/crew_quarters/heads/office/sgr)
 "sJ" = (
 /turf/simulated/wall/r_wall/prepainted,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "sL" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/heads/office/sgr)
@@ -10196,7 +10164,7 @@
 	},
 /obj/item/weapon/pen,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "wf" = (
 /obj/item/weapon/paper_bin{
 	pixel_x = -3;
@@ -11470,7 +11438,7 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "zq" = (
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -11598,7 +11566,7 @@
 	pixel_x = 20
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "zT" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 6
@@ -11998,20 +11966,12 @@
 /area/hallway/primary/bridge/fore)
 "BB" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/machinery/button/alternate/door/bolts{
-	name = "CL's Backroom Door Bolt Control";
-	desc = "A remote control-switch for the office door.";
-	pixel_x = -26;
-	pixel_y = -7;
-	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id_tag = "liaisondoor3"
-	},
 /obj/machinery/light_switch{
 	pixel_x = -24;
 	pixel_y = 6
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "BE" = (
 /obj/structure/table/glass,
 /obj/effect/floor_decal/corner/blue/mono,
@@ -12140,17 +12100,12 @@
 /area/aquila/maintenance)
 "Cd" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Ce" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -12407,7 +12362,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "CZ" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -12448,14 +12403,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/aquila/maintenance)
-"Dd" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
 "De" = (
 /obj/structure/disposalpipe/segment,
 /obj/structure/cable/green{
@@ -12466,13 +12413,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Dg" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Dq" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack{
@@ -12624,13 +12566,8 @@
 /area/space)
 "Ed" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "El" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -12994,7 +12931,7 @@
 	pixel_y = -24
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "Gf" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -13078,10 +13015,10 @@
 	icon_state = "0-8"
 	},
 /obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "cl_windows"
+	id = "auxofficewindows"
 	},
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "GD" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -13190,10 +13127,10 @@
 	},
 /obj/structure/cable/green,
 /obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "cl_windows"
+	id = "auxofficewindows"
 	},
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Hf" = (
 /obj/structure/filingcabinet/chestdrawer{
 	dir = 1
@@ -13419,12 +13356,11 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/research{
-	id_tag = "liaisondoor3";
-	name = "Corporate Liaison";
+	name = "Auxiliary Office";
 	secured_wires = 1
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "HH" = (
 /obj/effect/floor_decal/scglogo{
 	tag = "icon-top-left";
@@ -13825,7 +13761,7 @@
 "IO" = (
 /obj/structure/bed/chair/comfy/green,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "IT" = (
 /obj/structure/table/glass,
 /obj/machinery/keycard_auth/torch{
@@ -14011,10 +13947,10 @@
 "Ka" = (
 /obj/structure/cable/green,
 /obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "cl_windows"
+	id = "auxofficewindows"
 	},
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Kb" = (
 /obj/structure/sign/warning/high_voltage{
 	pixel_y = -6
@@ -14026,14 +13962,6 @@
 /obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/aquila/airlock)
-"Kd" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
 "Ke" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/dark,
@@ -14250,17 +14178,12 @@
 /area/bridge/disciplinary_board_room)
 "Ld" = (
 /obj/item/weapon/stool/padded,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "Le" = (
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall/r_wall/prepainted,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Lf" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14651,10 +14574,10 @@
 	icon_state = "0-2"
 	},
 /obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "cl_windows"
+	id = "auxofficewindows"
 	},
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Ne" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -14785,7 +14708,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "ND" = (
 /obj/structure/table/woodentable/walnut,
 /obj/machinery/alarm{
@@ -15023,10 +14946,10 @@
 	icon_state = "0-4"
 	},
 /obj/effect/wallframe_spawn/reinforced/polarized{
-	id = "cl_windows"
+	id = "auxofficewindows"
 	},
 /turf/simulated/floor/plating,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "OK" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/bridge/aftport)
@@ -15566,7 +15489,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Re" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -15860,7 +15783,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Se" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -16199,9 +16122,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/storage)
 "Tm" = (
-/obj/structure/closet/secure_closet/bodyguard,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "Tn" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -16309,14 +16231,13 @@
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
 "TV" = (
-/obj/structure/closet/secure_closet/liaison,
 /obj/machinery/camera/network/command{
-	c_tag = "Corporate Liaison - Backroom";
+	c_tag = "Auxiliary Office - Backroom";
 	dir = 8;
 	network = list("Command")
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "TX" = (
 /turf/simulated/wall/prepainted,
 /area/bridge/disciplinary_board_room)
@@ -16337,39 +16258,31 @@
 "Uc" = (
 /obj/machinery/photocopier/faxmachine{
 	anchored = 1;
-	department = "Corporate Liasion"
+	department = "Auxiliary Office"
 	},
 /obj/structure/table/woodentable_reinforced/walnut,
 /obj/structure/noticeboard{
 	pixel_x = 32
 	},
-/obj/machinery/button/alternate/door/bolts{
-	name = "CL's Rear Office Door Bolt Control";
-	desc = "A remote control-switch for the office door.";
-	pixel_x = 6;
-	pixel_y = 26;
-	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id_tag = "liaisondoor2"
-	},
 /obj/machinery/button/alternate/door{
-	name = "CL's Rear Office Door Control";
 	desc = "A remote control-switch for the office door.";
+	id_tag = "auxofficedoorback";
+	name = "Auxiliary Office Rear Door Control";
 	pixel_x = -5;
 	pixel_y = 26;
-	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id_tag = "liaisondoor2"
+	req_access = list("ACCESS_BRIDGE")
 	},
 /obj/machinery/light_switch{
 	pixel_x = 1;
 	pixel_y = 37
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Ud" = (
 /obj/structure/bed/chair/office/comfy/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Uf" = (
 /obj/structure/bed/chair/padded/beige,
 /obj/effect/floor_decal/corner/blue/mono,
@@ -16458,7 +16371,7 @@
 "Uo" = (
 /obj/structure/bed/chair/padded/green,
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "Uu" = (
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -16575,7 +16488,7 @@
 	},
 /obj/item/weapon/hand_labeler,
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl/backroom)
+/area/crew_quarters/heads/office/aux)
 "Vf" = (
 /obj/effect/floor_decal/scglogo{
 	tag = "icon-center-left";
@@ -16846,20 +16759,20 @@
 	},
 /obj/item/modular_computer/tablet/lease/preset/command,
 /obj/machinery/button/alternate/door{
-	name = "CL's Front Office Door Control";
 	desc = "A remote control-switch for the office door.";
+	id_tag = "auxofficedoorfront";
+	name = "Auxiliary Office Front Door Control";
 	pixel_x = 27;
 	pixel_y = -7;
-	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id_tag = "liaisondoor"
+	req_access = list("ACCESS_BRIDGE")
 	},
 /obj/machinery/button/windowtint{
 	pixel_x = 25;
 	pixel_y = 7;
-	id = "cl_windows"
+	id = "auxofficewindows"
 	},
 /turf/simulated/floor/carpet,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "We" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -17685,7 +17598,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/wood/walnut,
-/area/crew_quarters/heads/office/cl)
+/area/crew_quarters/heads/office/aux)
 "ZM" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -29530,7 +29443,7 @@ sJ
 ak
 gc
 bl
-Dd
+Tm
 Sd
 we
 Nw
@@ -29934,7 +29847,7 @@ sJ
 sJ
 sJ
 Uc
-Dd
+Tm
 Wd
 bA
 ZJ
@@ -30336,14 +30249,14 @@ af
 aF
 aP
 bg
-dk
+sJ
 bp
-Kd
-dn
+Tm
+Tm
 BB
 eA
 fb
-dk
+sJ
 xW
 Rp
 fD
@@ -30538,14 +30451,14 @@ af
 af
 aj
 bh
-dk
+sJ
 br
 Ld
-dn
+Tm
 Ve
 IO
 Ge
-dk
+sJ
 gf
 gM
 fD
@@ -30740,14 +30653,14 @@ af
 af
 al
 bi
-dk
+sJ
 zp
 Tm
 TV
 nN
 zS
 CX
-dk
+sJ
 Re
 Bw
 CH

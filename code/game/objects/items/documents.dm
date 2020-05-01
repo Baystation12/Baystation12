@@ -14,12 +14,6 @@
 	if(description_antag)
 		to_chat(user, description_antag)
 
-/obj/item/documents/nanotrasen
-	name = "secret corporate documents"
-	desc = "\"Top Secret\" corporate documents, filled with complex diagrams, research procedures, and details on cloning or breeding rights to non-sapient species the Torch encounters. It seems like they will be auctioning them off to the highest private bidder."
-	description_antag = "A conglomerate of powerful corporations seems to be wanting to create weaponized xenobiological species. Probably as a form of WMD, by your best guess."
-	icon_state = "docs_verified"
-
 /obj/item/documents/scg/verified
 	name = "secret government documents"
 	desc = "\"Top Secret\" documents detailing SCG IFF codes, granting the Torch access into restricted sectors. The majority of them are coordinates, codes for fellow ships, and clearance lists."

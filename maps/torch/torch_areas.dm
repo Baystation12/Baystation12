@@ -669,15 +669,10 @@
 	name = "\improper Command - CoS' Office"
 	req_access = list(access_hos)
 
-/area/crew_quarters/heads/office/cl
-	icon_state = "heads_cl"
-	name = "\improper Command - CL's Office"
-	req_access = list(access_liaison)
-
-/area/crew_quarters/heads/office/cl/backroom
-	icon_state = "heads_cl"
-	name = "\improper Command - CL's Backroom"
-	req_access = list(access_liaison)
+/area/crew_quarters/heads/office/aux
+	icon_state = "heads_aux"
+	name = "\improper Command - Auxiliary Office"
+	req_access = list(access_bridge)
 
 /area/crew_quarters/heads/office/sgr
 	icon_state = "heads_sr"
