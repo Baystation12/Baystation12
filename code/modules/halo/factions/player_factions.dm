@@ -37,8 +37,7 @@
 	enemy_factions = list("Covenant","Insurrection","Flood")
 	commander_titles = list("UNSC Bertels Commanding Officer")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/marine = 3,\
-		/mob/living/simple_animal/hostile/unsc/odst = 1)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/marine = 3)
 	default_radio_channel = RADIO_SQUAD
 
 /datum/faction/unsc/Initialize()
@@ -57,8 +56,7 @@
 	name = "ONI"
 	contraband_gear = "UNSC"
 	enemy_factions = list("Covenant","Insurrection","Flood")
-	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/odst = 3,\
-		/mob/living/simple_animal/hostile/unsc/marine = 1)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/odst = 1)
 	default_radio_channel = RADIO_ONI
 
 
