@@ -1,18 +1,47 @@
 
-/obj/structure/barricade/attack_generic(var/mob/user, var/damage, var/attacktext)
-	src.health -= damage
-	//user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
-	playsound(src.loc, 'sound/weapons/bite.ogg', 50, 0, 0)
-	if(src.health <= 0)
-		visible_message("<span class='danger'>[src] is smashed apart by [user]!</span>")
-		dismantle()
-		qdel(src)
-	else
-		visible_message("<span class='danger'>[user] [attacktext] the [src]!</span>")
+/obj/structure/destructible/steel_barricade
+	name = "steel barricade"
+	icon = 'code/modules/halo/structures/structures.dmi'
+	icon_state = "barricade2"
+	flags = ON_BORDER
+	cover_rating = 50
+	loot_type = /obj/item/stack/material/steel
 
-/obj/structure/barricade/bullet_act(var/obj/item/projectile/Proj)
-	health -= Proj.damage/10
-	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
-	if (src.health <= 0)
-		dismantle()
-		qdel(src)
+/obj/structure/destructible/steel_barricade/verb/verb_climb()
+	set name = "Climb over barricade"
+	set category = "Object"
+	set src = view(1)
+
+	structure_climb(usr)
+
+/obj/structure/destructible/plasteel_barricade
+	name = "plasteel barricade"
+	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon_state = "barricade"
+	flags = ON_BORDER
+	cover_rating = 50
+	loot_type = /obj/item/stack/material/plasteel
+
+/obj/structure/destructible/plasteel_barricade/update_icon()
+	if(health > maxHealth * 0.66)
+		icon_state = "barricade"
+	else if(health > maxHealth * 0.33)
+		icon_state = "barricade_dmg1"
+	else
+		icon_state = "barricade_dmg2"
+
+/obj/structure/destructible/plasteel_barricade/verb/verb_climb()
+	set name = "Climb over barricade"
+	set category = "Object"
+	set src = view(1)
+
+	structure_climb(usr)
+
+/obj/structure/destructible/marine_barricade
+	name = "marine barricade"
+	icon = 'code/modules/halo/structures/Marine_Barricade.dmi'
+	icon_state = "marine barricade"
+	flags = ON_BORDER
+	cover_rating = 95
+	maxHealth = 1000
+	loot_type = /obj/item/stack/material/plasteel
