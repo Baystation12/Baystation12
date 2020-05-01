@@ -52,6 +52,8 @@
 /datum/vote/gamemode/proc/InitGamemodes()
 
 	for (var/F in config.votable_modes)
+		if(GLOB.using_map.allowed_gamemodes.len && !F in GLOB.using_map.allowed_gamemodes)
+			continue
 		var/datum/game_mode/M = gamemode_cache[F]
 		if(!M)
 			continue
@@ -60,6 +62,9 @@
 		gamemode_names[M.config_tag] = capitalize(M.name) //It's ugly to put this here but it works
 		additional_text.Add("<td align = 'center'>[M.required_players]</td>")
 		choices.Add(F)
+
+	if(!choices.len)
+		return
 
 	//gamemode_names["secret"] = "Secret"
 	//gamemode_names["random"] = "Random"
