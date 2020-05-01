@@ -14,6 +14,7 @@
 	title = "Jiralhanae Major"
 	total_positions = 1
 	spawn_positions = 1
+	open_slot_on_death = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/jiralhanae/covenant/major
 	access = list(240,250)

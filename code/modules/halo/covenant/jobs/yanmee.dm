@@ -13,6 +13,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#800080"
+	open_slot_on_death = 1
 	outfit_type = /decl/hierarchy/outfit/yanmee/major
 	access = list(230,250)
 	whitelisted_species = list(/datum/species/yanmee)

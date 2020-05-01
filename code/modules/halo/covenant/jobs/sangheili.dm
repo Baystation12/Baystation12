@@ -1,7 +1,6 @@
 
 /datum/job/covenant/sangheili_shipmaster
 	title = "Sangheili Shipmaster"
-	department_flag = COM
 	total_positions = 1
 	spawn_positions = 1
 	track_players = 1
@@ -17,6 +16,7 @@
 	department_flag = COM
 	total_positions = 1
 	spawn_positions = 1
+	is_whitelisted = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/ultra
 	access = list(240,250)
@@ -38,6 +38,8 @@
 	title = "Sangheili Major"
 	total_positions = 2
 	spawn_positions = 2
+	open_slot_on_death = 1
+	is_whitelisted = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/major
 	access = list(240,250)
@@ -54,3 +56,37 @@
 	access = list(240,250)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
+
+
+
+/* Not available during standard play */
+
+/datum/job/covenant/sangheili_ranger
+	title = "Sangheili Ranger"
+	supervisors = "the Majors"
+	outfit_type = /decl/hierarchy/outfit/sangheili/eva
+	access = list(access_covenant)
+	is_whitelisted = 1
+	total_positions = 1
+	spawn_positions = 1
+	whitelisted_species = list(/datum/species/sangheili)
+
+/datum/job/covenant/sangheili_specops
+	title = "Special Operations Sangheili"
+	supervisors = "the Shipmaster"
+	outfit_type = /decl/hierarchy/outfit/sangheili/specops
+	access = list(access_covenant)
+	is_whitelisted = 1
+	spawn_positions = 0
+	total_positions = 0
+	whitelisted_species = list(/datum/species/sangheili)
+
+/datum/job/covenant/sangheili_zealot
+	title = "Sangheili Zealot"
+	total_positions = 0
+	spawn_positions = 0
+	is_whitelisted = 1
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/sangheili/zealot
+	whitelisted_species = list(/datum/species/sangheili)
+	access = list(access_covenant, access_covenant_command)

@@ -15,6 +15,7 @@
 	spawn_positions = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_major
+	is_whitelisted = 1
 	access = list(240,250)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
@@ -25,6 +26,7 @@
 	spawn_positions = 2
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo
+	is_whitelisted = 1
 	access = list(240,250)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
@@ -35,6 +37,18 @@
 	spawn_positions = 1
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_commando
+	is_whitelisted = 1
+	access = list(240,250)
+	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
+
+/datum/job/covenant/skirmchampion
+	title = "T-Voan Champion"
+	total_positions = 0
+	spawn_positions = 0
+	selection_color = "#800080"
+	outfit_type = /decl/hierarchy/outfit/skirmisher_champion
+	is_whitelisted = 1
 	access = list(240,250)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
