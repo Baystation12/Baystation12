@@ -123,8 +123,8 @@
 	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
-/obj/machinery/door/airlock/multi_tile/civilian
-	stripe_color = COLOR_CIVIE_GREEN
+/obj/machinery/door/airlock/multi_tile/entrancezone
+	stripe_color = COLOR_ORANGE
 
 /obj/machinery/door/airlock/multi_tile/freezer
 	name = "Freezer Airlock"
@@ -181,5 +181,5 @@
 	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
-/obj/machinery/door/airlock/multi_tile/glass/civilian
-	stripe_color = COLOR_CIVIE_GREEN
+/obj/machinery/door/airlock/multi_tile/glass/entrancezone
+	stripe_color = COLOR_ORANGE
