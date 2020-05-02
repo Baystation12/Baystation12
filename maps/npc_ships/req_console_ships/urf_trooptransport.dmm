@@ -6,7 +6,6 @@
 "ah" = (/obj/machinery/door/airlock/halo/innie_ship_preset,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "ai" = (/obj/effect/landmark/dropship_land_point/innie{name = "Transport Shuttle Port Hangar"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "aN" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
-"bh" = (/obj/structure/lattice,/obj/structure/lattice,/turf/space,/area/space)
 "cJ" = (/obj/effect/floor_decal/industrial/warning/dust/corner,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "cN" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "dr" = (/obj/machinery/light/spot{dir = 2},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -136,7 +135,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEPkSISIqXqXTlqXChSISITlqXqXFcFcFcvdFcFcFcqXSIZgZg
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDivoSISICkqXSISISISISISIqXFcFccJojojojojTYaeSISISISISISISISIypqkqkqkqXSIZXSIqXqXEvqXZaAwFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaGuSIIPSIUzSISISISISISIUzFcFcAEFcFcFcFcIDlsOLLjhcWdeKHEFZEVqXqXLcqXqXChSISISISISISIEvFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXZaqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXZaqXqXqXoaicLfCkSISISIqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslsadFcAEFcaiFcFcIDlsrubhaaaaaaaaaaaaruruqXqXqXqXqXqXqXqXqXacqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslsadFcAEFcaiFcFcIDlsruruaaaaaaaaaaaaruruqXqXqXqXqXqXqXqXqXacqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslsFcAEFcFcFcFcIDlsruaaaaaaaaaaaaaaaaruruaaaaaaaaqXFcFclqFcqXaaruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMolslslslsaNFcFcFcFcIDlslslslslslsrulslslslslslslslslsqXFcFcFcFcqXqXlslsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMolslstlMyMyMyAWuPlslslslsaaaaaaaaaalslslslslslslslsnyFcFcFclslslslsaaaaaaaaaaaaaaaaaaaaaaaaaaaa

@@ -5,3 +5,6 @@
 	available_ship_requests.Cut()
 	available_ship_requests = list(new /datum/npc_ship_request/player_controlled)
 	load_mapfile()
+	if(my_faction)
+		my_faction.player_ships += src
+		my_faction.npc_ships -= src

@@ -1,7 +1,6 @@
 "aa" = (/turf/space,/area/space)
 "ab" = (/obj/structure/rearm_repair_station/human,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "aN" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
-"bh" = (/obj/structure/lattice,/obj/structure/lattice,/turf/space,/area/space)
 "ce" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cy" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cJ" = (/obj/effect/floor_decal/industrial/warning/dust/corner,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -136,7 +135,7 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEzZEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcvdFcFcFcqXhdHzHz
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDivoEdEdtDqXEdEdEdEdEdEdqXFcFccJojojojojTYWthdhdhdhdhdhdhdhdtshdhdhdqXhdVwhdqXqXMTqXZaolFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaGuEdIXEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsViUxlHkzRycysrceqXhdlbhdqXXihdhdhdhdhdhdMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXZaqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXZaqXqXqXWFMIZFKGhdhdhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslsabFcAEFcXfFcFcIDlsrubhaaaaaaaaaaaaruruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslsabFcAEFcXfFcFcIDlsruruaaaaaaaaaaaaruruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslsFcAEFcFcFcFcIDlsruaaaaaaaaaaaaaaaaruruaaaaaaaaqXFcFclqFcqXaaruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMolslslslsaNFcFcFcFcIDlslslslslslsrulslslslslslslslslsqXFcFcFcFcqXqXlslsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMolslstlMyMyMyAWuPlslslslsaaaaaaaaaalslslslslslslslsnyFcFcFclslslslsaaaaaaaaaaaaaaaaaaaaaaaaaaaa
