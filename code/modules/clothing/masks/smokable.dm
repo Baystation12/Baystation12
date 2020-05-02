@@ -57,7 +57,7 @@
 
 /obj/item/clothing/mask/smokable/Process()
 	var/turf/location = get_turf(src)
-	if(submerged() || smoketime < 1 || is_wet())
+	if(submerged() || smoketime < 1)
 		extinguish()
 		return
 	smoke(1)
