@@ -145,7 +145,7 @@ var/const/NETWORK_NANOTRASEN  = "Petrov"
 
 // Substation SMES (charged and with full I/O setting)
 /obj/machinery/power/smes/buildable/preset/torch/substation_full
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1)
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil = 1, /obj/item/weapon/stock_parts/smes_coil/super_io = 2)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
