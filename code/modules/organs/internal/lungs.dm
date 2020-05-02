@@ -27,6 +27,7 @@
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
 	var/breathing = 0
+	var/holding_breath = 0
 	var/last_successful_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
 
@@ -78,7 +79,7 @@
 
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
 		if(prob(5))
-			owner.emote("cough")		//respitory tract infection
+			owner.emote("cough")		//respitory tract infection, holding breath will not stop you from coughing
 
 	if(is_bruised() && !owner.is_asystole())
 		if(prob(2))
@@ -96,13 +97,13 @@
 
 			owner.drip(1)
 		if(prob(4))
-			if(active_breathing)
+			if(active_breathing && !holding_breath) //If we are intentionally not breathing we will not gasp or be alarmed
 				owner.visible_message(
 					"<B>\The [owner]</B> gasps for air!",
 					"<span class='danger'>You can't breathe!</span>",
 					"You hear someone gasp for air!",
 				)
-			else
+			else if (!holding_breath)
 				to_chat(owner, "<span class='danger'>You're having trouble getting enough [breath_type]!</span>")
 
 			owner.losebreath += round(damage/2)
@@ -132,7 +133,7 @@
 	if(!owner)
 		return 1
 
-	if(!breath || (max_damage <= 0))
+	if(!breath || (max_damage <= 0) || holding_breath)
 		breath_fail_ratio = 1
 		handle_failed_breath()
 		return 1
@@ -226,16 +227,35 @@
 		owner.oxygen_alert = 0
 	return failed_breath
 
+/obj/item/organ/internal/lungs/verb/hold_breath()
+	set name = "Hold Breath"
+	set desc = "Start holding your breath. You will do this until you use this verb again or pass out (or almost pass out)."
+	set category = "IC"
+	set src in usr
+
+	holding_breath = !holding_breath
+	if(holding_breath)
+		owner.visible_message(SPAN_NOTICE("[owner.name] takes a large breath and stops breathing."), SPAN_NOTICE("You take a large breath and then stop breathing."))
+	else
+		owner.visible_message(SPAN_NOTICE("[owner.name] exhales and starts breathing again."), SPAN_NOTICE("You exhale and start breathing again."))
+
 /obj/item/organ/internal/lungs/proc/handle_failed_breath()
-	if(prob(15) && !owner.nervous_system_failure())
+	if(prob(15) && !owner.nervous_system_failure() && !holding_breath)
 		if(!owner.is_asystole())
 			if(active_breathing)
 				owner.emote("gasp")
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_successful_breath + 2 MINUTES)
+	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_successful_breath + 2 MINUTES || holding_breath)
 		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
+
+	if(owner.stat == UNCONSCIOUS)
+		holding_breath = 0 //If you pass out you'll start breathing normally again
+	
+	if(owner.health <= 10) //If we are on the verge of passing out
+		holding_breath = 0
+		owner.visible_message(SPAN_NOTICE("[owner.name] gasps and breathes air again!"), SPAN_WARNING("You involuntarily gasp and start breathing again!"))
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)
 	last_int_pressure = 0
