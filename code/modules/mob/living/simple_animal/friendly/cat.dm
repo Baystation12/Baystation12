@@ -253,7 +253,7 @@
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
 	var/friend_name = "Erstatz Vryroxes"
 
-/mob/living/simple_animal/cat/fluff/urfcat
+/mob/living/simple_animal/cat/fluff/reno
 	name = "Reno"
 	desc = "That's Reno the URF Cat! Or is it a raccoon?"
 	gender = MALE
@@ -261,6 +261,17 @@
 	item_state = "reno"
 	icon_living = "reno"
 	icon_dead = "reno-dead"
+	var/friend_name = "Erstatz Vryroxes"
+
+
+/mob/living/simple_animal/cat/fluff/walaski
+	name = "Walaski"
+	desc = "That's Walaski the SoE mascot! They call it a cat. Or is it a raccoon?"
+	gender = MALE
+	icon_state = "walaski"
+	item_state = "walaski"
+	icon_living = "walaski"
+	icon_dead = "walaski-dead"
 	var/friend_name = "Erstatz Vryroxes"
 
 /mob/living/simple_animal/cat/kitten/New()
