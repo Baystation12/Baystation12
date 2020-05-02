@@ -45,6 +45,9 @@
 /obj/effect/paint/red
 	color = COLOR_RED
 
+/obj/effect/paint/red/paintstripeapp
+	color = COLOR_RED_GRAY
+
 /obj/effect/paint/silver
 	color = COLOR_SILVER
 
@@ -56,6 +59,18 @@
 
 /obj/effect/paint/blue
 	color = COLOR_NAVY_BLUE
+
+/obj/effect/paint/blue/paintstripeapp
+	color = COLOR_BLUE_GRAY
+
+/obj/effect/paint/brown
+	color = COLOR_DARK_BROWN
+
+/obj/effect/paint/orange
+	color = COLOR_ORANGE
+
+/obj/effect/paint/yellow
+	color = COLOR_BROWN
 
 //Stripes the wall it spawns on, then dies
 /obj/effect/paint_stripe
@@ -104,8 +119,8 @@
 /obj/effect/paint_stripe/white
 	color = COLOR_SILVER
 
-/obj/effect/paint/brown
-	color = COLOR_DARK_BROWN
+/obj/effect/paint_stripe/orange
+	color = COLOR_ORANGE
 
 /obj/effect/gas_setup	//cryogenic
 	icon = 'icons/mob/screen1.dmi'
