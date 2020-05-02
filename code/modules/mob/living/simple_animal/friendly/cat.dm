@@ -253,6 +253,17 @@
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
 	var/friend_name = "Erstatz Vryroxes"
 
+/mob/living/simple_animal/cat/fluff/urfcat
+	name = "Reno"
+	desc = "That's Reno the URF Cat! Or is it a raccoon?"
+	gender = MALE
+	icon_state = "urfcat"
+	item_state = "urfcat"
+	icon_living = "urfcat"
+	icon_dead = "urfcat-dead"
+	var/friend_name = "Erstatz Vryroxes"
+
 /mob/living/simple_animal/cat/kitten/New()
 	gender = pick(MALE, FEMALE)
 	..()
+
