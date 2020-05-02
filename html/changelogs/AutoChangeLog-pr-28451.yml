@@ -1,0 +1,4 @@
+author: "Karlious"
+delete-after: True
+changes: 
+  - rscdel: "Removes AEG from the list of weapons Research can print"
