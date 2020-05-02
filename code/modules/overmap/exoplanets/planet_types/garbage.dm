@@ -218,6 +218,7 @@
 //Artifact containment lab
 /turf/simulated/wall/containment
 	paint_color = COLOR_GRAY20
+	icon_state = "concrein"
 
 /turf/simulated/wall/containment/New(var/newloc)
 	..(newloc,MATERIAL_CONCRETE, MATERIAL_ALIENALLOY)
@@ -284,6 +285,6 @@
 			new/obj/structure/rubble/lab(T)
 		if(prob(20))
 			new/obj/item/remains/xeno/charred(T)
-	
+
 
 #undef TRANSLATE_COORD
