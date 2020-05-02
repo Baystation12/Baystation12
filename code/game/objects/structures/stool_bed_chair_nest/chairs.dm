@@ -403,3 +403,11 @@
 /obj/structure/bed/chair/pew/left/mahogany
 	color = WOOD_COLOR_RICH
 	pew_material = MATERIAL_MAHOGANY
+
+/obj/structure/bed/chair/pew/plastic
+	color = COLOR_OFF_WHITE
+	pew_material = MATERIAL_PLASTIC
+
+/obj/structure/bed/chair/pew/left/plastic
+	color = COLOR_OFF_WHITE
+	pew_material = MATERIAL_PLASTIC
