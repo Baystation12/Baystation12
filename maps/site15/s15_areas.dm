@@ -1732,9 +1732,17 @@
 	name = "\improper EZ ML - Conference Room B"
 	icon_state = "adminmeeting"
 
-/area/site15/entrance_zone/main/southhallways
-	name = "\improper EZ ML - Southern Hallways"
-	icon_state = "tbm"
+/area/site15/entrance_zone/main/centralconcourse
+	name = "\improper EZ ML - Central Concourse"
+	icon_state = "centrconc"
+
+/area/site15/entrance_zone/main/sehallways
+	name = "\improper EZ ML - South Eastern Hallways"
+	icon_state = "halls-e"
+
+/area/site15/entrance_zone/main/ehallways
+	name = "\improper EZ ML - Eastern Hallways"
+	icon_state = "halle"
 
 
 // Entrance Zone - 2nd Level
