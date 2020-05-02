@@ -117,8 +117,13 @@
 	name = "box of sterile gloves"
 	desc = "Contains sterile gloves."
 	icon_state = "latex"
-	startswith = list(/obj/item/clothing/gloves/latex = 5,
-					/obj/item/clothing/gloves/latex/nitrile = 2)
+	startswith = list(/obj/item/clothing/gloves/latex = 7)
+
+/obj/item/weapon/storage/box/gloves/nitrile
+	name = "box of sterile nitrile gloves"
+	desc = "Contains sterile gloves. Often used as an alternative to Latex gloves for those combating allergies or chronic eczema."
+	icon_state = "nitrile"
+	startswith = list(/obj/item/clothing/gloves/latex/nitrile = 7)
 
 /obj/item/weapon/storage/box/masks
 	name = "box of sterile masks"
