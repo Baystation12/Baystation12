@@ -77,6 +77,21 @@ GLOBAL_VAR(spawntypes)
 			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis aboard [GLOB.using_map.full_name]. It might take a few seconds."))
 			return
 
+/datum/spawnpoint/site15cryo
+	display_name = "EZ ML - Cryogenics Facility"
+	msg = "has completed cryogenic revival"
+
+/datum/spawnpoint/site15cryo/after_join(mob/living/carbon/human/victim)
+	if(!istype(victim))
+		return
+	var/area/A = get_area(victim)
+	for(var/obj/machinery/cryopod/C in A)
+		if(!C.occupant)
+			C.set_occupant(victim, 1)
+			victim.Sleeping(rand(1,3))
+			to_chat(victim,SPAN_NOTICE("You are slowly waking up from the cryostasis in [GLOB.using_map.full_name]. It might take a few seconds."))
+			return
+
 /datum/spawnpoint/cyborg
 	display_name = "Cyborg Storage"
 	msg = "has been activated from storage"
