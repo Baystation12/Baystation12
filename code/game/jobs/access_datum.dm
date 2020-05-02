@@ -147,13 +147,13 @@
 	id = access_atmospherics
 	desc = "Atmospherics"
 	region = ACCESS_REGION_ENGINEERING
-
+/*
 /var/const/access_bar = "ACCESS_BAR" //25
 /datum/access/bar
 	id = access_bar
 	desc = "Bar"
 	region = ACCESS_REGION_GENERAL
-
+*/
 /var/const/access_janitor = "ACCESS_JANITOR" //26
 /datum/access/janitor
 	id = access_janitor
@@ -165,13 +165,13 @@
 	id = access_crematorium
 	desc = "Crematorium"
 	region = ACCESS_REGION_GENERAL
-
+/*
 /var/const/access_kitchen = "ACCESS_KITCHEN" //28
 /datum/access/kitchen
 	id = access_kitchen
 	desc = "Kitchen"
 	region = ACCESS_REGION_GENERAL
-
+*/
 /var/const/access_robotics = "ACCESS_ROBOTICS" //29
 /datum/access/robotics
 	id = access_robotics
