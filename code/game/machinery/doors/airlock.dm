@@ -159,8 +159,8 @@ var/list/airlock_overlays = list()
 /obj/machinery/door/airlock/sol
 	door_color = COLOR_BLUE_GRAY
 
-/obj/machinery/door/airlock/civilian
-	stripe_color = COLOR_CIVIE_GREEN
+/obj/machinery/door/airlock/entrancezone
+	stripe_color = COLOR_ORANGE
 
 /obj/machinery/door/airlock/chaplain
 	stripe_color = COLOR_GRAY20
@@ -231,8 +231,8 @@ var/list/airlock_overlays = list()
 	name = "Maintenance Access"
 	stripe_color = COLOR_AMBER
 
-/obj/machinery/door/airlock/glass/civilian
-	stripe_color = COLOR_CIVIE_GREEN
+/obj/machinery/door/airlock/glass/entrancezone
+	stripe_color = COLOR_ORANGE
 
 /obj/machinery/door/airlock/external
 	airlock_type = "External"
