@@ -57,7 +57,7 @@
 
 /obj/item/clothing/mask/smokable/Process()
 	var/turf/location = get_turf(src)
-	if(submerged() || smoketime < 1)
+	if(submerged() || smoketime < 1 || is_wet())
 		extinguish()
 		return
 	smoke(1)
@@ -83,10 +83,18 @@
 		if(submerged(depth))
 			extinguish(no_message = TRUE)
 
+/obj/item/clothing/mask/smokable/proc/is_wet()
+	if(ishuman(loc))
+		var/mob/living/carbon/human/C = loc
+		return locate(/datum/reagent/water) in C.touching.reagent_list
+
 /obj/item/clothing/mask/smokable/proc/light(var/flavor_text = "[usr] lights the [name].")
 	if(QDELETED(src))
 		return
 	if(!lit)
+		if(is_wet())
+			to_chat(usr, "<span class='warning'>You are too wet to light \the [src].</span>")
+			return
 		if(submerged())
 			to_chat(usr, "<span class='warning'>You cannot light \the [src] underwater.</span>")
 			return
