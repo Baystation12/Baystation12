@@ -1766,6 +1766,16 @@
 
 // Entrance Zone - Security
 
+/area/site15/entrance_zone/security/main/ma
+	name = "\improper EZ ML - Main Armory"
+	icon_state = "ma"
+	req_access = list(access_ma)
+
+/area/site15/entrance_zone/security/main/maa
+	name = "\improper EZ ML - Master at Arms Office"
+	icon_state = "maa"
+	req_access = list(access_maa)
+
 /area/site15/entrance_zone/security/second/station
 	name = "\improper EZ SL -  Admin Guard Station"
 	icon_state = "adminsec"
