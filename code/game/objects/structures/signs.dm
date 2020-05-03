@@ -363,6 +363,14 @@
 	name = "\improper Security Wing"
 	icon_state = "direction_sec"
 
+/obj/structure/sign/directions/security/armory
+	name = "\improper Armory"
+	icon_state = "direction_arm"
+
+/obj/structure/sign/directions/security/maa
+	name = "\improper Master At Arms - Primary Armory"
+	icon_state = "direction_maa"
+
 /obj/structure/sign/directions/medical
 	name = "\improper Medical Bay"
 	icon_state = "direction_med"
