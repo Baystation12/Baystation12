@@ -25,7 +25,7 @@
 /var/const/access_armory = "ACCESS_ARMORY" //3
 /datum/access/armory
 	id = access_armory
-	desc = "Armory"
+	desc = "Force Authorization Clearance"
 	region = ACCESS_REGION_SECURITY
 
 /var/const/access_forensics_lockers = "ACCESS_FORENSICS" //4
