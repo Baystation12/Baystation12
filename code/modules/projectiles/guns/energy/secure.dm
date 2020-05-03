@@ -31,7 +31,7 @@
 		slot_r_hand_str = 'icons/mob/onmob/items/righthand_guns_secure.dmi',
 		)
 	item_state = null	//so the human update icon uses the icon_state instead.
-	req_access = list(list(access_brig, access_bridge))
+	req_access = list(list(access_security))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
 /obj/item/weapon/gun/energy/revolver/secure
