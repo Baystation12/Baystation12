@@ -256,6 +256,20 @@ ACCESS_TYPE_NONE - USE THIS ONLY TO HIDE ACCESS FROM THE ID CARD PROGRAM!!!!!
 	desc = "Checkpoints"
 	region = ACCESS_REGION_SECURITY
 
+/var/const/access_ma = "ACCESS_MA" // MAIN armory. Does not count the regular armories.
+/datum/access/ma
+	id = access_ma
+	desc = "Main Armory"
+	region = ACCESS_REGION_SECURITY
+
+/var/const/access_maa = "ACCESS_MAA" // Office, not armory.
+/datum/access/maa
+	id = access_maa
+	desc = "Master At Arms' Office"
+	region = ACCESS_REGION_COMMAND
+
+
+
 // Engineering Access //
 
 /var/const/access_substations = "ACCESS_SUBSTATIONS" // Substations differ from regular maint access due to the possibility of cutting power inadvertently or grief.
