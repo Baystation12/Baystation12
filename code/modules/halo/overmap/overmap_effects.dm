@@ -102,10 +102,17 @@
 	effect_name = "Gas Cloud"
 	announcement_text = "We have entered a vision-obscuring gas cloud. Hostiles will have a harder time hitting us. Brace for periodic EMP effects."
 	lifetime = 2 MINUTES
+	var/olddodge = 0
+
+/datum/overmap_effect/gas_cloud/effect_created()
+	olddodge = target.weapon_miss_chance
+	target.weapon_miss_chance = max(25,target.weapon_miss_chance * 1.5)
+	return 1
 
 /datum/overmap_effect/gas_cloud/process_effect()
 	. = ..()
 	if(!.)
+		target.weapon_miss_chance = olddodge
 		return
 	if(prob(GAS_CLOUD_EMP_CHANCE))
 		var/turf/emp_center = locate(rand(target.map_bounds[1],target.map_bounds[3]),rand(target.map_bounds[2],target.map_bounds[4]),pick(target.map_z))
