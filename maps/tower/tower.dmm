@@ -1,0 +1,174 @@
+"aa" = (/turf/unsimulated/wall,/area/planets/colony)
+"ab" = (/turf/simulated/floor/plating,/area/planets/colony)
+"ac" = (/turf/simulated/wall/r_wall,/area/planets/colony)
+"ad" = (/obj/effect/landmark/spawn_medium,/turf/unsimulated/wall{icon = 'icons/obj/doors/Doorele.dmi'; icon_state = "door_closed"; name = "door"},/area/planets/colony)
+"ae" = (/obj/effect/landmark/spawn_hard,/turf/unsimulated/wall{icon = 'icons/obj/doors/Doorele.dmi'; icon_state = "door_closed"; name = "door"},/area/planets/colony)
+"af" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"ag" = (/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"ah" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 9},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"ai" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 5},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"aj" = (/obj/effect/landmark/spawn_easy,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"ak" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 8},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"al" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 4},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"am" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/pavement,/area/planets/colony)
+"an" = (/turf/simulated/floor/pavement,/area/planets/colony)
+"ao" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 10},/turf/simulated/floor/pavement,/area/planets/colony)
+"ap" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 6},/turf/simulated/floor/pavement,/area/planets/colony)
+"aq" = (/obj/effect/landmark/spawn_easy,/turf/simulated/floor/road{icon_state = "road"; dir = 1},/area/planets/colony)
+"ar" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/road{icon_state = "road"; dir = 1},/area/planets/colony)
+"as" = (/turf/simulated/floor/road{icon_state = "road"; dir = 1},/area/planets/colony)
+"at" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/road/empty,/area/planets/colony)
+"au" = (/turf/simulated/floor/road/empty,/area/planets/colony)
+"av" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 4},/area/planets/colony)
+"aw" = (/obj/effect/landmark/spawn_easy,/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/planets/colony)
+"ax" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/planets/colony)
+"ay" = (/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/planets/colony)
+"az" = (/obj/effect/landmark/resupply,/turf/simulated/floor/road/empty,/area/planets/colony)
+"aA" = (/obj/effect/landmark/resupply,/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 4},/area/planets/colony)
+"aB" = (/obj/effect/landmark/resupply,/turf/simulated/floor/road/markings{icon_state = "road_marking"; dir = 8},/area/planets/colony)
+"aC" = (/obj/effect/landmark/spawn_easy,/turf/simulated/floor/road,/area/planets/colony)
+"aD" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/road,/area/planets/colony)
+"aE" = (/turf/simulated/floor/road,/area/planets/colony)
+"aF" = (/obj/structure/destructible/tanktrap,/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/planets/colony)
+"aG" = (/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/planets/colony)
+"aH" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 9},/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/planets/colony)
+"aI" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 5},/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/planets/colony)
+"aJ" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 10},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"aK" = (/obj/structure/destructible/sandbag{icon_state = "sandbag"; dir = 6},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"aL" = (/turf/simulated/floor/decor{icon_state = "tiles2"},/area/planets/colony)
+"aM" = (/obj/effect/landmark/resupply,/turf/simulated/floor/decor{icon_state = "tiles2"},/area/planets/colony)
+"aN" = (/turf/simulated/floor/stairs/west,/area/planets/colony)
+"aO" = (/turf/simulated/floor/stairs/east,/area/planets/colony)
+"aP" = (/obj/effect/landmark/resupply,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"aQ" = (/obj/effect/landmark/start/joinlate,/turf/simulated/floor/plating,/area/planets/colony)
+"aR" = (/obj/structure/shuttle/window{name = "civilian-grade window"},/obj/structure/grille,/turf/simulated/floor/plating,/area/planets/colony)
+"aS" = (/turf/simulated/floor/exoplanet/water/shallow,/area/planets/colony)
+"aT" = (/obj/machinery/door/airlock,/turf/simulated/floor/plating,/area/planets/colony)
+"aU" = (/obj/decal/halo/district{icon_state = "district_53"; dir = 1},/turf/simulated/wall/r_wall,/area/planets/colony)
+"aV" = (/obj/decal/halo/district{icon_state = "district_53"; dir = 4},/turf/simulated/wall/r_wall,/area/planets/colony)
+"aW" = (/obj/structure/flora/pottedplant/orientaltree,/turf/simulated/floor/decor{icon_state = "outertile1"},/area/planets/colony)
+"aX" = (/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 9},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"aY" = (/obj/effect/flora/grassybush,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 1},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"aZ" = (/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 5},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"ba" = (/obj/structure/grille,/obj/structure/shuttle/window{name = "civilian-grade window"},/turf/simulated/floor/plating,/area/planets/colony)
+"bb" = (/obj/structure/tree/two,/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 9},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bc" = (/obj/effect/flora/fullgrass,/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bd" = (/obj/structure/tree/two,/obj/effect/flora/fullgrass,/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"be" = (/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bf" = (/obj/effect/flora/grassybush,/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bg" = (/obj/structure/tree/two,/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 8},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bh" = (/obj/structure/tree/two,/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bi" = (/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 4},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bj" = (/obj/effect/flora/grassybush,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 10},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bk" = (/obj/effect/flora/grassybush,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 6},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bl" = (/obj/structure/tree/two,/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 10},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bm" = (/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 6},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bn" = (/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood{icon_state = "spline_fancy"; dir = 10},/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bo" = (/obj/effect/flora/fullgrass,/obj/effect/floor_decal/spline/fancy/wood,/turf/simulated/floor/decor{icon_state = "grassy"},/area/planets/colony)
+"bp" = (/obj/decal/halo/district{icon_state = "district_53"; dir = 8},/turf/simulated/wall/r_wall,/area/planets/colony)
+"bq" = (/obj/decal/halo/district,/turf/simulated/wall/r_wall,/area/planets/colony)
+"br" = (/obj/effect/landmark/resupply,/turf/simulated/floor/stairs/west,/area/planets/colony)
+"bs" = (/obj/effect/landmark/resupply,/turf/simulated/floor/stairs/east,/area/planets/colony)
+"bt" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/planets/colony)
+"bu" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/planets/colony)
+"bv" = (/obj/machinery/light{icon_state = "tube1"; dir = 1},/turf/simulated/floor/plating,/area/planets/colony)
+"bw" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/planets/colony)
+"bx" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"by" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"bz" = (/obj/machinery/floodlight,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"bA" = (/obj/item/stack/barbedwire,/obj/structure/table/rack,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"bB" = (/obj/item/stack/material/plasteel/fifty,/obj/structure/table/rack,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"bC" = (/obj/item/stack/material/steel/fifty,/obj/structure/table/rack,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"bD" = (/obj/structure/destructible/marine_barricade{icon_state = "marine barricade"; dir = 8},/turf/simulated/floor/pavement,/area/planets/colony)
+"bE" = (/obj/structure/destructible/marine_barricade{icon_state = "marine barricade"; dir = 4},/turf/simulated/floor/pavement,/area/planets/colony)
+"bF" = (/obj/structure/destructible/marine_barricade{icon_state = "marine barricade"; dir = 8},/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/planets/colony)
+"bG" = (/obj/structure/destructible/marine_barricade{icon_state = "marine barricade"; dir = 4},/turf/simulated/floor/pavement{icon_state = "pavement"; dir = 1},/area/planets/colony)
+"bH" = (/obj/structure/destructible/marine_barricade{icon_state = "marine barricade"; dir = 1},/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"bI" = (/obj/structure/destructible/marine_barricade,/turf/simulated/floor/pavement/empty,/area/planets/colony)
+"bJ" = (/turf/space,/area/planets/colony)
+"bK" = (/turf/simulated/floor/tiled,/area/planets/colony)
+"bL" = (/obj/effect/landmark/test/space_turf,/turf/space,/area/planets/colony)
+"bM" = (/obj/effect/landmark/test/safe_turf,/turf/simulated/floor/tiled,/area/planets/colony)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aabKbKbKaabJbJbJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aabKbMbKaabJbLbJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aabKbKbKaabJbJbJaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaaaaaabaaaaaaaaaaaaaaaaabaaabaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaabaaabaaaaaaaaaaaaaaaaabaaaaaaaaaa
+acacacacacadacacacacacacacacaeacaeacacacacacacacacaeacacacacacacacacaeacaeacacacacacacacacadacacacacac
+afagahagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagaiagaf
+ajafakagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagalafaj
+amanaoanananananananananananananananananbDanananananananananbEanananananananananananananananananapanam
+aqarasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasaraq
+atauauauauauauauauauauauauauauauauauauauauauauauavavavauauauauauauauauauauauauauauauauauauauauauauauat
+awaxauauayayayauazayayayauauayayayauazayayayauauavavaAauauayayayauauayayaBauauayayayauazayayayauauaxaw
+atauauauauauauauauauauauauauauauauauauauauauauauavavavauauauauauauauauauauauauauauauauauauauauauauauat
+aCaDaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaDaC
+aFaGaHaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGbFaGaGaGaGaGaGaGaGaGbGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaIaGaF
+ajafakagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagalafaj
+afagaJagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagaKagaf
+acacacacacacacacacacacacacacacacacacacacacacacaLaLaLaLaLacacacacacacacacacacacacacacacacacacacacacacac
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaLaLaLaLaLacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacaLaLaMaLaLacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacagagagaNaNaNaNaNaNaLaLaLaLaLaOaOaOaOaOaOagagagacaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagaPaNaNaNaNaNaNaLaLaLaLaLaOaOaOaOaOaOaPagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagagaNaNaNaNaNaNaLaLaLaLaLaOaOaOaOaOaOagagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabtabaQabbuaaacagagagaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRagagagacaabtabaQabbuaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagagaRaSaSaSaSaSaSaSaSaSaSaSaSaSaSaSaRagagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagagaRaSaSaSaSaSaSaSaSaSaSaSaSaSaSaSaRagagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabaaaaaaacagagagaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRagagagacaaaaaaabaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacacaTacacacaUagbHagagagagagagagagagagagagagagagagagagagbHagaVacacacaTacacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacaWagagagagagagagagagagagaPagagagagagagagagagaPagagagagagagagagagagagaWacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacbxagagacacacagagagaWagagagagagagaXaYaZagagagagagagaWagagagacacacagagbyacaaaaaaaaaaaaaa
+aaababbvababaaacagagagacacacagagagbaagagagagagbbbcbcbdaZagagagagagbaagagagacacacagagagacaaababbvababaa
+aaabababababaaacagagagagagagagagbAbaagagagagaXbebfbcbcbeaZagagagagbabAagagagagagagagagacaaabababababaa
+aaababaQabababaTagagagagagagagagbBbaagbzagagbgbebcbcbcbhbiagagbzagbabBagagagagagagagagaTabababaQababaa
+aaabababababaaacagagagagagagagagbCbaagagagagbjbebebcbebebkagagagagbabCagagagagagagagagacaaabababababaa
+aaababbwababaaacagagagacacacagagagbaagagagagagblbcbfbdbmagagagagagbaagagagacacacagagagacaaababbwababaa
+aaaaaaaaaaaaaaacbxagagacacacagagagaWagagagagagagbnbobmagagagagagagaWagagagacacacagagbyacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacaWagagagagagagagagagagagaPagagagagagagagagagaPagagagagagagagagagagagaWacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaacacaTacacacbpagbIagagagagagagagagagagagagagagagagagagagbIagbqacacacaTacacaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaabaaaaaaacagagagaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRagagagacaaaaaaabaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagagaRaSaSaSaSaSaSaSaSaSaSaSaSaSaSaSaRagagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagagaRaSaSaSaSaSaSaSaSaSaSaSaSaSaSaSaRagagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaabtabaQabbuaaacagagagaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRagagagacaabtabaQabbuaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagagaNaNaNaNaNaNaLaLaLaLaLaOaOaOaOaOaOagagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaabababababaaacagagagbraNaNaNaNaNaLaLaLaLaLaOaOaOaOaObsagagagacaaabababababaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacagagagaNaNaNaNaNaNaLaLaLaLaLaOaOaOaOaOaOagagagacaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacagagagaNaNaNaNaNaNaLaLaMaLaLaOaOaOaOaOaOagagagacaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacacacaLaLaLaLaLacacacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaLaLaLaLaLacaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+acacacacacacacacacacacacacacacacacacacacacacacaLaLaLaLaLacacacacacacacacacacacacacacacacacacacacacacac
+afagahagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagaiagaf
+ajafakagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagalafaj
+amanaoanananananananananananananananananbDanananananananananbEanananananananananananananananananapanam
+aqarasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasasaraq
+atauauauauauauauauauauauauauauauauauauauauauauauavavavauauauauauauauauauauauauauauauauauauauauauauauat
+awaxauauayayayauazayayayauauayayaBauauayayayauauavaAavauauayayayauauaBayayauauayayayauazayayayauauaxaw
+atauauauauauauauauauauauauauauauauauauauauauauauavavavauauauauauauauauauauauauauauauauauauauauauauauat
+aCaDaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaEaDaC
+aFaGaHaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGbFaGaGaGaGaGaGaGaGaGbGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaGaIaGaF
+ajafakagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagalafaj
+afagaJagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagagaKagaf
+acacacacacadacacacacacacacacaeacaeacacacacacacacacaeacacacacacacacacaeacaeacacacacacacacacadacacacacac
+aaaaaaaaaaabaaaaaaaaaaaaaaaaabaaabaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaabaaabaaaaaaaaaaaaaaaaabaaaaaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaaabababababababababaaaaaaabababababaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
