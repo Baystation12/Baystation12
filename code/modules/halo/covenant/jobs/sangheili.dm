@@ -4,7 +4,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	track_players = 1
-	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
 	access = list(240,250)
 	is_whitelisted = 1
@@ -17,7 +16,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	is_whitelisted = 1
-	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/ultra
 	access = list(240,250)
 	faction_whitelist = "Covenant"
@@ -28,7 +26,6 @@
 	title = "Sangheili Honour Guard"
 	total_positions = 0
 	spawn_positions = 1
-	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/honour_guard
 	access = list(240,250)
 	is_whitelisted = 1
@@ -40,7 +37,6 @@
 	spawn_positions = 2
 	open_slot_on_death = 1
 	is_whitelisted = 1
-	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/major
 	access = list(240,250)
 	faction_whitelist = "Covenant"
@@ -51,7 +47,6 @@
 	title = "Sangheili Minor"
 	total_positions = 4
 	spawn_positions = 4
-	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
 	access = list(240,250)
 	faction_whitelist = "Covenant"
@@ -86,7 +81,6 @@
 	total_positions = 0
 	spawn_positions = 0
 	is_whitelisted = 1
-	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/sangheili/zealot
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command)

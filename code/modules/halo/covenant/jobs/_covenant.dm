@@ -9,4 +9,5 @@
 	generate_email = FALSE
 	latejoin_at_spawnpoints = TRUE
 	access = list(access_covenant)
+	selection_color = "#800080"
 	//spawnpoint_override = "Covenant Base Spawns"

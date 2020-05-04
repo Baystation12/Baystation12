@@ -20,7 +20,6 @@
 	title = "Unggoy Major"
 	total_positions = 4
 	spawn_positions = 4
-	selection_color = "#800080"
 	open_slot_on_death = 1
 	is_whitelisted = 1
 	outfit_type = /decl/hierarchy/outfit/unggoy/major
@@ -31,7 +30,6 @@
 	title = "Unggoy Ultra"
 	total_positions = 2
 	spawn_positions = 2
-	selection_color = "#800080"
 	is_whitelisted = 1
 	outfit_type = /decl/hierarchy/outfit/unggoy/ultra
 	access = list(230,250)
@@ -42,7 +40,6 @@
 	title = "Unggoy Deacon"
 	total_positions = 1
 	spawn_positions = 1
-	selection_color = "#800080"
 	is_whitelisted = 1
 	outfit_type = /decl/hierarchy/outfit/unggoy/deacon
 	access = list(230,250)
