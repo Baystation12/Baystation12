@@ -14,6 +14,8 @@
 
 	parent_area_type = /area/exo_research_facility/sublevel1/interior
 
+	occupy_range = 28
+
 /obj/effect/overmap/sector/exo_research/New()
 	. = ..()
 	loot_distributor.loot_list["artifactRandom"] = list(/obj/machinery/artifact/forerunner_artifact,null,null,null)
@@ -56,10 +58,6 @@
 	/obj/item/weapon/gun/energy/laser/sentinel_beam/detached,\
 	/obj/item/weapon/gun/energy/laser/sentinel_beam/detached,\
 	null,null,null)
-
-/obj/effect/overmap/sector/exo_research/LateInitialize()
-	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(28,src)
 
 /obj/effect/loot_marker/gauntlet_loot
 	loot_type = "gauntletLoot"

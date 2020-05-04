@@ -17,6 +17,7 @@ var/list/points_of_interest = list()
 	var/list/map_z = list()
 	var/list/map_z_data = list()
 	var/list/targeting_locations = list() // Format: "location" = list(TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
+	var/list/active_effects = list()
 	var/weapon_miss_chance = 0
 
 	//This is a list used by overmap projectiles to ensure they actually hit somewhere on the ship. This should be set so projectiles can narrowly miss, but not miss by much.
@@ -33,6 +34,7 @@ var/list/points_of_interest = list()
 	var/known = 1		//shows up on nav computers automatically
 	var/in_space = 1	//can be accessed via lucky EVA
 	var/block_slipspace = 0		//for planets with gravity wells etc
+	var/occupy_range = 0
 
 	var/list/hull_segments = list()
 	var/superstructure_failing = 0
@@ -87,7 +89,9 @@ var/list/points_of_interest = list()
 	generate_targetable_areas()
 
 	if(flagship)
-		GLOB.overmap_tiles_uncontrolled -= range(28,src)
+		GLOB.overmap_tiles_uncontrolled -= trange(28,src)
+	if(occupy_range)
+		GLOB.overmap_tiles_uncontrolled -= trange(occupy_range,src)
 
 	return INITIALIZE_HINT_LATELOAD
 
@@ -353,6 +357,11 @@ var/list/points_of_interest = list()
 		do_superstructure_fail()
 
 /obj/effect/overmap/process()
+	for(var/e in active_effects)
+		var/datum/overmap_effect/effect = e
+		if(!effect.process_effect())
+			active_effects -= src
+			qdel(effect)
 	if(!isnull(targeting_datum.current_target) && !(targeting_datum.current_target in range(src,7)))
 		targeting_datum.current_target = null
 		targeting_datum.targeted_location = "target lost"
@@ -362,7 +371,7 @@ var/list/points_of_interest = list()
 		if(hull_segments.len == 0)
 			return
 		var/obj/explode_at = pick(hull_segments)
-		explosion(explode_at.loc,0,1,3,5, adminlog = 0)
+		explosion(explode_at.loc,1,2,3,5, adminlog = 0)
 		return
 	var/list/superstructure_strength = get_superstructure_strength()
 	if(isnull(superstructure_strength))
@@ -413,6 +422,9 @@ var/list/points_of_interest = list()
 	A.contents.Add(turfs)
 
 	GLOB.using_map.sealed_levels |= GLOB.using_map.overmap_z
+	if(GLOB.using_map.overmap_event_tokens > 0)
+		for(var/i = 0 to GLOB.using_map.overmap_event_tokens)
+			new /obj/effect/overmap/hazard/random
 
 	report_progress("Overmap build complete.")
 	shipmap_handler.max_z_cached = world.maxz

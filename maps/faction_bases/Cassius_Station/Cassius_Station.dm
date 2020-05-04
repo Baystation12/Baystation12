@@ -20,10 +20,7 @@
 
 	map_bounds = list(37,117,114,68) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
-/obj/effect/overmap/ship/unsc_cassius/Initialize()
-	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(7,src)
-
+	occupy_range = 7
 
 /area/faction_base/unsc/upperlevel
 	name = "UNSC Cassius Station (Upper)"

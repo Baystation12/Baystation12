@@ -116,7 +116,7 @@
 
 	if(!istype(overmap_object))
 		return 0
-	if(!(starting in range(1,impacted)) && prob(overmap_object.weapon_miss_chance * (1- accuracy/100))) //accuracy = 1 means miss chance is multiplied by 0.99
+	if(!(starting in trange(1,impacted)) && prob(overmap_object.weapon_miss_chance * (1- accuracy/100))) //accuracy = 1 means miss chance is multiplied by 0.99
 		visible_message("<span class = 'warning'>[src] flies past [impacted].</span>")
 		return 0
 	if(istype(impacted,/obj/effect/overmap/ship/npc_ship))

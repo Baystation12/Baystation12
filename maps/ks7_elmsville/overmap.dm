@@ -9,6 +9,8 @@
 
 	map_bounds = list(1,150,150,1) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
+	occupy_range = 28
+
 /obj/effect/overmap/sector/exo_depot/New()
 	. = ..()
 	/*loot_distributor.loot_list += list(\
@@ -78,10 +80,6 @@
 	/mob/living/simple_animal/hostile/pirate_defender/civ,/mob/living/simple_animal/hostile/pirate_defender/civ,/mob/living/simple_animal/hostile/pirate_defender/civ,
 	null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null
 	)
-
-/obj/effect/overmap/sector/exo_depot/LateInitialize()
-	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(28,src)
 
 //dummy path so this compiles
 /obj/effect/overmap/sector/exo_research

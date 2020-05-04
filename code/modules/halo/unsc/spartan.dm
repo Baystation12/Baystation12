@@ -20,7 +20,7 @@
 	slowdown = -0.5
 	can_force_door = 1
 	additional_langs = list("Sign Language")
-	inherent_verbs = list(/mob/living/carbon/human/proc/dual_wield_weapons)
+	inherent_verbs = list()
 	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
 
 	metabolism_mod = 1.25 //Faster metabolism
