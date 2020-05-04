@@ -5,6 +5,7 @@
 "ae" = (/obj/machinery/light/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "af" = (/obj/machinery/light/covenant/west,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ag" = (/obj/structure/rearm_repair_station/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"ah" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ai" = (/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
 "aj" = (/obj/machinery/light/covenant/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ak" = (/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -18,7 +19,7 @@
 "as" = (/obj/item/weapon/wrench/covenant,/obj/item/weapon/wrench/covenant,/obj/structure/table/rack,/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "at" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "au" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/structure/grille,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"av" = (/obj/machinery/telecomms/allinone{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Battlenet Server Hub"; tag = "icon-covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"av" = (/obj/machinery/telecomms/allinone{icon = 'code/modules/halo/covenant/structures_machines/consoles.dmi'; icon_state = "covie_console"; name = "Battlenet Server Hub"; tag = "icon-covie_console_off"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aw" = (/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/item/weapon/storage/firstaid/unsc/cov,/obj/structure/table/marble,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ax" = (/obj/structure/table/marble,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/obj/item/bodybag/cryobag/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "ay" = (/obj/structure/reagent_dispensers/fueltank{color = "#ff99ff"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -33,16 +34,15 @@
 "aH" = (/obj/structure/window/reinforced/projresist/covenant{dir = 2},/obj/structure/stairs_decorative{dir = 4; icon_state = "stairs"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aI" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aJ" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"aK" = (/obj/structure/window/reinforced/projresist/covenant{dir = 1},/obj/structure/window/reinforced/projresist/covenant{dir = 4},/obj/machinery/overmap_weapon_console/deck_gun_control/local/plastorp_control,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aL" = (/obj/structure/bed/chair/covenant_stool,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aM" = (/obj/structure/table/rack,/obj/item/clothing/head/welding/covenant,/obj/item/clothing/head/welding/covenant,/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aN" = (/obj/machinery/light/covenant/south,/mob/living/bot/cleanbot/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aO" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/steel/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aP" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/glass/phoronrglass/ten,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aQ" = (/obj/structure/closet/crate/covenant{name = "Building Supplies"},/obj/item/stack/material/nanolaminate/fifty,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"aR" = (/obj/machinery/computer/helm{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_nav"; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aR" = (/obj/machinery/computer/helm{icon = 'code/modules/halo/covenant/structures_machines/consoles.dmi'; icon_state = "covie_nav"; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aS" = (/obj/structure/bed/chair/covenant_stool{dir = 8; icon_state = "coviechair2"; name = "Shipmaster's anti-grav chair"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"aT" = (/obj/machinery/computer/helm{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_nav"; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"aT" = (/obj/machinery/computer/helm{icon = 'code/modules/halo/covenant/structures_machines/consoles.dmi'; icon_state = "covie_nav"; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/obj/structure/window/reinforced/projresist/covenant{dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aU" = (/obj/structure/stairs_decorative{icon_state = "stairs"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aV" = (/obj/structure/table/marble,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "aW" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
@@ -74,12 +74,12 @@
 "yj" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "yC" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant/reinforced,/area/om_ships/req_console_ship)
 "yW" = (/turf/space,/area/om_ships/req_console_ship)
-"BE" = (/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"BE" = (/obj/machinery/telecomms/relay/ship_relay{icon = 'code/modules/halo/covenant/structures_machines/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "EN" = (/obj/vehicles/drop_pod/escape_pod/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Fe" = (/obj/structure/closet/walllocker/emerglocker/covvie/north,/obj/machinery/door/airlock/covenant/cov_ship_preset,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"JR" = (/obj/machinery/photocopier/faxmachine{department = "CRS Unyielding Transgression"; icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"JR" = (/obj/machinery/photocopier/faxmachine{department = "CRS Unyielding Transgression"; icon = 'code/modules/halo/covenant/structures_machines/consoles.dmi'; icon_state = "covie_console"; name = "Superluminal Communications Array"; tag = "icon-covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "Lo" = (/obj/structure/closet/secure_closet/freezer/meat{icon = 'code/modules/halo/icons/storage/covenant/crate.dmi'; icon_broken = "Covie Crate Closed"; icon_closed = "Covie Crate Closed"; icon_locked = "Covie Crate Closed"; icon_off = "Covie Crate Closed"; icon_opened = "Covie Crate Open"; icon_state = "Covie Crate Closed"},/obj/structure/sink/kitchen{pixel_y = 22},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
-"MZ" = (/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/icons/machinery/covenant/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
+"MZ" = (/obj/machinery/telecomms/relay/long_range_emergency{icon = 'code/modules/halo/covenant/structures_machines/consoles.dmi'; icon_state = "covie_console"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/om_ships/req_console_ship)
 "PX" = (/obj/effect/hull_segment,/turf/simulated/wall/covenant,/area/om_ships/req_console_ship)
 
 (1,1,1) = {"
@@ -95,33 +95,33 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababaaababababadadadadaeadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaababadadadadadadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadadadadadadadadadababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadjVadadadadadadadadabababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaababababaiadadajadadadadadadadadadadadBEababababababababadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaababababadadadadaeadadadadabababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaabababadadadadadadadadadadadadababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaabababababadadadadadadadadadadadadabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababafadadadjVadadadadadadadadabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaiadadajadadadadadadadadadadadBEababababababababadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababaiaiPXaiaiagadadadadajadbaadadajadakadababababababENadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaabaiaiaiPXaiaiaiaiaiaiababaialamanaoaiaiaiakaiaiaiaiPXaiaiaiaiaiadapaqarasababadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaatauaiavaiaiadadadaeadadawaiLoadadadadvjaiaxadayaiaiadazadaiaiaAaBadadadadadadFeadajaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaEaFaeadaGaiadaHaIaJaKadadaiafaLaLaLaLadakadadaMaiafadadadadakadadadaNadaOaPaQPXakaiaiaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaEaFaeadaGaiadaHaIaJahadadaiafaLaLaLaLadakadadaMaiafadadadadakadadadaNadaOaPaQPXakaiaiaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaEaRaSadadakadaTaSadadaUadakadbLaVaVaVaWaiaXadadakadadadadaWaiaiaiakaiakaiaiaiaiafaYyWyWaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaEaZajadbaaiadbbbcbdbeadadaiafaLaLaLaLadakadadbfaiafadadadadakadadadbgadaOaPaQPXakaiaiaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaabhbiaibjaiaiadadadajadadbkaiJRadadadadehaiaxadblaiaiadbmadaiaiaAaBadadadadadadyjadaeaCaDaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababyCababababababababaiwXmCfhrFaiaiaiakaiaiaiaiPXaiaiaiaiaiadapaqarasababadadadababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababaiaiPXaiaiagadadadadaeadaGadadaeadakadababababababadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaababababaiadadaeadadadadadadadadadadadMZababababababababENadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaabababafadadadadadadadadadadadadabababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaababadadadadadadadadadadadadababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaababadadadszadadadadadadadadabababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababaaababababadadadadajadadadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaiadadaeadadadadadadadadadadadMZababababababababENadadababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababafadadadadadadadadadadadadabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaabababaaaaaaaaaaaaaaaaabababababadadadadadadadadadadadadabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaaaaaaaaaaaaaaabababadadadszadadadadadadadadababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaaaaaaaababababadadadadajadadadadabababababaaaaaaaaabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababababaaaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacaaabababaaabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
