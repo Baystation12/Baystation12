@@ -347,7 +347,8 @@
 		var/mob/living/silicon/ai/A = character
 		A.on_mob_init()
 
-		AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
+		if(job.announced)
+			AnnounceCyborg(character, job.title, "has been downloaded to the empty core in \the [character.loc.loc]")
 		ticker.mode.handle_latejoin(character)
 
 		qdel(C)
@@ -360,11 +361,12 @@
 		if(character.mind.assigned_role != "Cyborg")
 			GLOB.data_core.manifest_inject(character)
 			ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
-		else
+		else if(job.announced)
 			AnnounceCyborg(character, job, spawnpoint.msg)
 		matchmaker.do_matchmaking()
-	AnnounceArrival(character, job, spawnpoint.msg)
-	log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
+	if(job.announced)
+		AnnounceArrival(character, job, spawnpoint.msg)
+	log_admin("has joined the round as [character.mind.assigned_role].", character)
 	qdel(src)
 
 
@@ -374,7 +376,7 @@
 			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
 		GLOB.global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived"].", "Arrivals Announcement Computer")
-		log_and_message_admins("has joined the round as [character.mind.assigned_role].", character)
+		log_admin("has joined the round as [character.mind.assigned_role].", character)
 
 /mob/new_player/proc/LateChoices()
 	var/name = client.prefs.be_random_name ? "friend" : client.prefs.real_name

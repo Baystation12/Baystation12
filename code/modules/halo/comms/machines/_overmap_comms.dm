@@ -11,6 +11,8 @@
 	//var/datum/overmap_comms_network/my_network
 	var/active = 1
 	var/machine_type
+	var/failure_timer = 0
+	var/failure_reactivate = 0
 
 /obj/machinery/overmap_comms/Initialize()
 	if(!machine_type)
@@ -39,6 +41,34 @@
 		/*if(my_network)
 			my_network.remove_machine(src)*/
 	to_chat(user,"<span class='info'>You [active ? "" : "de"]activate [src]</span>")
+
+/obj/machinery/overmap_comms/emp_act(var/severity = 1)
+	. = ..()
+	failure_timer = severity * 10
+	if(active)
+		toggle_active()
+		failure_reactivate = 1
+
+/obj/machinery/overmap_comms/proc/energy_failure(var/duration)
+	emp_act()
+	failure_timer = duration
+
+/obj/machinery/overmap_comms/process()
+	. = ..()
+
+	//slowly recover from EMP
+	if(failure_timer)
+		failure_timer = max(0, failure_timer - 1)
+		if(!failure_timer && failure_reactivate)
+			failure_reactivate = 0
+			toggle_active()
+			src.visible_message("\icon[src] <span class='info'>[src] finishes rebooting!</span>")
+
+/obj/machinery/overmap_comms/examine(var/mob/user)
+	. = ..()
+	if(failure_timer)
+		to_chat(user,"<span class='notice'>Something has temporarily overloaded its circuits!</span>")
+
 /*
 /obj/machinery/overmap_comms/proc/connect_to_network()
 	if(!my_network)

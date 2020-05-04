@@ -6,12 +6,14 @@
 /obj/machinery/overmap_comms/receiver
 	name = "radio receiver dish"
 	icon_state = "broadcast receiver"
+	icon_state_active = "broadcast receiver"
+	icon_state_inactive = "broadcast receiver_off"
 	icon = 'code/modules/halo/comms/machines/telecomms.dmi'
 	desc = "This machine has a dish-like shape and green lights. It is designed to detect and recieve radio signals."
 
 /obj/machinery/overmap_comms/receiver/proc/get_range_extension()
 	//just return 1 for now, dont do any other checks
-	return 1
+	return !failure_timer
 
 /obj/machinery/overmap_comms/receiver/toggle_active()
 	. = ..()
@@ -20,7 +22,7 @@
 	var/obj/effect/overmap/my_sector = map_sectors["[my_turf.z]"]
 	if(active)
 		my_sector.telecomms_receivers.Add(src)
-	else
+	else if(!failure_timer)
 		my_sector.telecomms_receivers.Remove(src)
 
 

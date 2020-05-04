@@ -3,7 +3,7 @@ GLOBAL_DATUM_INIT(event_manager, /datum/event_manager, new)
 /datum/event_manager
 	var/window_x = 700
 	var/window_y = 600
-	var/report_at_round_end = 0
+	var/report_at_round_end = 1
 	var/table_options = " align='center'"
 	var/row_options1 = " width='85px'"
 	var/row_options2 = " width='260px'"

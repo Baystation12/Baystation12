@@ -83,9 +83,27 @@ GLOBAL_VAR(spawntypes)
 
 	return 0
 
+/datum/spawnpoint/proc/get_job_landmark(var/rank)
+	var/list/loc_list = list()
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != rank)	continue
+		if(locate(/mob/living) in sloc.loc)	continue
+		loc_list += sloc
+	if(loc_list.len)
+		return pick(loc_list)
+	else
+		return locate("start*[rank]") // use old stype
+
 /datum/spawnpoint/proc/get_spawn_turf(var/rank)
 	if(turfs && turfs.len)
 		return pick(turfs)
+
+	var/obj/S = get_job_landmark(rank)
+	if(S)
+		return S.loc
+
+	var/error_message = "SPAWN ERROR: unable to find spawn turf for [rank]"
+	log_and_message_admins(error_message)
 
 #ifdef UNIT_TEST
 /datum/spawnpoint/Del()
@@ -146,14 +164,3 @@ GLOBAL_VAR(spawntypes)
 		return S.loc
 	else
 		return ..()
-
-/datum/spawnpoint/default/proc/get_job_landmark(var/rank)
-	var/list/loc_list = list()
-	for(var/obj/effect/landmark/start/sloc in landmarks_list)
-		if(sloc.name != rank)	continue
-		if(locate(/mob/living) in sloc.loc)	continue
-		loc_list += sloc
-	if(loc_list.len)
-		return pick(loc_list)
-	else
-		return locate("start*[rank]") // use old stype

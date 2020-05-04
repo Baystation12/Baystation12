@@ -126,27 +126,43 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 	severity = EVENT_LEVEL_MUNDANE
 	available_events = list(
 		// Severity level, event name, even type, base weight, role weights, one shot, min weight, max weight. Last two only used if set and non-zero
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Nothing",			/datum/event/nothing,			100),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "APC Damage",		/datum/event/apc_damage,		20, 	list(ASSIGNMENT_ENGINEER = 10)),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Money Lotto",		/datum/event/money_lotto, 		0, 		list(ASSIGNMENT_ANY = 1), 1, 5, 15),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Mundane News", 		/datum/event/mundane_news, 		300),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Sensor Suit Jamming",/datum/event/sensor_suit_jamming,50,	list(ASSIGNMENT_MEDICAL = 20, ASSIGNMENT_AI = 20), 1),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE, "Electrical Storm",	/datum/event/electrical_storm, 	20,		list(ASSIGNMENT_ENGINEER = 20, ASSIGNMENT_JANITOR = 100))
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Nothing",				/datum/event/nothing,					1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Grid Check",			/datum/event/ship/grid_check,			1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Brand Intelligence",	/datum/event/brand_intelligence,		1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Wallrot",				/datum/event/ship/wallrot,				1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"APC Damage",			/datum/event/apc_damage,				1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Camera Damage",		/datum/event/camera_damage,				1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Money Lotto",			/datum/event/money_lotto, 				1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Mundane News", 		/datum/event/mundane_news, 				1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Vermin Infestation", 	/datum/event/infestation, 				1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Space Cold",		 	/datum/event/space_cold, 				1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Gravity Failure",		/datum/event/ship/gravity_failure,		1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Electrical Storm",		/datum/event/electrical_storm, 			1)
 	)
 
 /datum/event_container/moderate
 	severity = EVENT_LEVEL_MODERATE
 	available_events = list(
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Nothing",					/datum/event/nothing,					1230),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE, "Sensor Suit Jamming",		/datum/event/sensor_suit_jamming,		10,		list(ASSIGNMENT_MEDICAL = 20, ASSIGNMENT_AI = 20))
-
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Nothing",				/datum/event/nothing,					1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Grid Check",			/datum/event/ship/grid_check,			1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Space Vines",			/datum/event/ship/spacevines,			1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Wallrot",				/datum/event/ship/wallrot,				1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Power Failure",		/datum/event/ship/power_failure,		1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Radiation Storm",		/datum/event/radiation_storm,			1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Appendicitis",			/datum/event/spontaneous_appendicitis,	1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Gravity Failure",		/datum/event/ship/gravity_failure,		1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Electrical Storm",		/datum/event/electrical_storm, 			1)
 	)
 
 /datum/event_container/major
 	severity = EVENT_LEVEL_MAJOR
 	available_events = list(
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Nothing",				/datum/event/nothing,			1320),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR, "Electrical Storm",	/datum/event/electrical_storm, 	0,	list(ASSIGNMENT_ENGINEER = 10, ASSIGNMENT_JANITOR = 5))
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Nothing",				/datum/event/nothing,					1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Power Failure",		/datum/event/ship/power_failure,		1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Space Vines",			/datum/event/ship/spacevines,			1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Magnetic Storm",		/datum/event/magnetic_storm,			1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Ion Storm",			/datum/event/ion_storm,					1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Electrical Storm",		/datum/event/electrical_storm, 			1)
 	)
 
 

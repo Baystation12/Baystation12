@@ -62,6 +62,8 @@
 	faction_contact_data = new()
 	faction_contact_data.generate_data(src)
 
+	setup_announcement()
+
 	//leader name
 	if(prob(50))
 		leader_name = capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))

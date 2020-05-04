@@ -17,20 +17,26 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	var/obj/item/weapon/card/id/scan = null // identification
 	var/authenticated = 0
 	var/sendcooldown = 0 // to avoid spamming fax messages
-	var/department = "Unknown" // our department
+	var/department// = "Unknown" // our department
 	var/destination = null // the department we're sending to
+	var/network_name
 
-	var/static/list/admin_departments
+	var/list/available_departments = list()
+	var/list/admin_departments = list()
 
 /obj/machinery/photocopier/faxmachine/Initialize()
 	. = ..()
 
+	/*
 	if(!admin_departments)
 		admin_departments = list("[GLOB.using_map.boss_name]", "Colonial Marshal Service", "[GLOB.using_map.boss_short] Supply") + GLOB.using_map.map_admin_faxes
+		*/
 	GLOB.allfaxes += src
-	if(!destination) destination = "[GLOB.using_map.boss_name]"
+	//if(!destination) destination = "[GLOB.using_map.boss_name]"
+	/*
 	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
 		GLOB.alldepartments |= department
+		*/
 
 /obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
 	user.set_machine(src)
@@ -53,7 +59,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	dat += "<hr>"
 
 	if(authenticated)
-		dat += "<b>Logged in to:</b> [GLOB.using_map.boss_name] Quantum Entanglement Network<br><br>"
+		dat += "<b>Logged in to:</b> [network_name ? network_name : "communication network"]<br><br>"
 
 		if(copyitem)
 			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
@@ -123,7 +129,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	if(href_list["dept"])
 		var/lastdestination = destination
-		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
+		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in (available_departments + admin_departments)
 		if(!destination) destination = lastdestination
 
 	if(href_list["auth"])
@@ -138,6 +144,10 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination)
 	if(stat & (BROKEN|NOPOWER))
+		return
+
+	if(!destination)
+		visible_message("[src] beeps, \"Please choose a destination.\"")
 		return
 
 	use_power(200)

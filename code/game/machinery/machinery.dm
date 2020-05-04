@@ -127,8 +127,11 @@ Class Procs:
 		GLOB.machines += src
 		machinery_sort_required = 1
 
+	GLOB.emp_candidates.Add(src)
+
 /obj/machinery/Destroy()
 	GLOB.machines -= src
+	GLOB.emp_candidates.Remove(src)
 	if(component_parts)
 		for(var/atom/A in component_parts)
 			if(A.loc == src) // If the components are inside the machine, delete them.

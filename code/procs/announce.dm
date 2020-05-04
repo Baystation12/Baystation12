@@ -10,6 +10,9 @@
 	var/newscast = 0
 	var/channel_name = "Announcements"
 	var/announcement_type = "Announcement"
+	var/list/faction_restrict
+	var/fax_department
+	var/species_restrict
 
 /datum/announcement/priority
 	title = "Priority Announcement"
@@ -40,11 +43,11 @@
 	message_title = sanitizeSafe(message_title)
 
 	var/msg = FormMessage(message, message_title)
-	for(var/mob/M in GLOB.player_list)
-		if(!istype(M,/mob/new_player) && !isdeaf(M))
-			to_chat(M, msg)
-			if(message_sound)
-				sound_to(M, message_sound)
+	var/list/announce_mobs = get_announcement_mobs()
+	for(var/mob/M in announce_mobs)
+		to_chat(M, msg)
+		if(message_sound)
+			sound_to(M, message_sound)
 
 	if(do_newscast)
 		NewsCast(message, message_title)
@@ -52,6 +55,22 @@
 	if(log)
 		log_say("[key_name(usr)] has made \a [announcement_type]: [message_title] - [message] - [announcer]")
 		message_admins("[key_name_admin(usr)] has made \a [announcement_type].", 1)
+
+/datum/announcement/proc/get_announcement_mobs()
+	var/list/announce_mobs = list()
+	. = announce_mobs
+	for(var/mob/M in GLOB.player_list)
+		//ghosts can always hear
+		if(isghost(M))
+			announce_mobs.Add(M)
+		else if(!istype(M,/mob/new_player))
+			if(faction_restrict && M.faction != faction_restrict)
+				continue
+			if(species_restrict)
+				var/mob/living/carbon/human/H = M
+				if(!istype(H) || !H.species || (H.species.name != species_restrict))
+					continue
+			announce_mobs.Add(M)
 
 datum/announcement/proc/FormMessage(message as text, message_title as text)
 	. = "<h2 class='alert'>[message_title]</h2>"
@@ -109,10 +128,12 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if (ticker.current_state != GAME_STATE_PLAYING)
 		return
 
+	//call the gamemode version here in case they want to override it
+	//by default, the gamemode calls AnnounceArrivalSimple()
 	return ticker.mode.AnnounceLateArrival(character, job, join_message)
 
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/frequency, var/language_name)
-	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", frequency)
+/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "has arrived on the [station_name()]", var/channel_name, var/language_name)
+	GLOB.global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Computer", channel_name, language_name)
 
 /proc/get_announcement_frequency(var/datum/job/job)
 	return job.get_arrivals_channel()

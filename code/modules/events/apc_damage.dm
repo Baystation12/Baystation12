@@ -22,9 +22,13 @@
 	var/list/possibleEpicentres = list()
 	var/list/apcs = list()
 
-	for(var/obj/effect/landmark/newEpicentre in landmarks_list)
+	//dont search for landmarks, just loop over all APCs
+	for(var/obj/machinery/power/apc/apc in world)
+		possibleEpicentres += apc
+
+	/*for(var/obj/effect/landmark/newEpicentre in landmarks_list)
 		if(newEpicentre.name == "lightsout")
-			possibleEpicentres += newEpicentre
+			possibleEpicentres += newEpicentre*/
 
 	if(!possibleEpicentres.len)
 		return

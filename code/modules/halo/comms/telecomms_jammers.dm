@@ -26,7 +26,7 @@
 		jamming_sector = map_sectors["[src.z]"]
 		jamming_sector.telecomms_jammers.Add(src)
 		GLOB.telecoms_jammers.Add(src)
-	else
+	else if(!failure_timer)
 		if(jamming_sector)
 			jamming_sector.telecomms_jammers.Remove(src)
 			jamming_sector = null

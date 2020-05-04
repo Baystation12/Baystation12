@@ -10,9 +10,11 @@
 	bound_height = 64
 
 /obj/machinery/overmap_comms/receiver/battlenet
-	name = "Disabled Battlenet transmitter"
+	name = "Battlenet transmitter"
 	icon = 'comms.dmi'
 	icon_state = "comms"
+	icon_state_active = "comms"
+	icon_state_inactive = "comms"
 	desc = "A portable machine for providing Covenant battlenet communications over an area."
 	anchored = 1
 	density = 1
