@@ -233,6 +233,9 @@
 	set category = "IC"
 	set src in usr
 
+	if(owner.failed_last_breath)
+		to_chat(owner, SPAN_WARNING("You already can't breathe!"))
+		return
 	holding_breath = !holding_breath
 	if(holding_breath)
 		owner.visible_message(SPAN_NOTICE("[owner.name] takes a large breath and stops breathing."), SPAN_NOTICE("You take a large breath and then stop breathing."))
