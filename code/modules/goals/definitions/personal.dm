@@ -19,8 +19,8 @@
 		if(cleaned >= need_cleaned)
 			on_completion()
 
-/datum/goal/clean/walk/get_summary_value()
-	return " ([cleaned]/[need_cleaned]so far)"
+/datum/goal/clean/get_summary_value()
+	return " ([cleaned]/[need_cleaned] so far)"
 
 /datum/goal/money
 	var/target_amount
@@ -40,3 +40,54 @@
 		if(acct.owner_name == mind.current.real_name)
 			return acct.get_balance() > target_amount
 	return FALSE
+
+//Fitness Personal Goal
+//Weights
+/datum/goal/weights
+	completion_message = "Yeah! Get Swole!"
+	var/reps = 0
+	var/need_reps
+
+/datum/goal/weights/New()
+	need_reps = rand(10,80)
+	..()
+
+/datum/goal/weights/update_strings()
+	description = "Head to the gym and lift some weights on the weightlifting machine."
+
+/datum/goal/weights/check_success()
+	return (reps >= need_reps)
+
+/datum/goal/weights/update_progress(var/progress)
+	if(reps < need_reps)
+		reps += progress
+		if(reps >= need_reps)
+			on_completion()
+
+/datum/goal/weights/get_summary_value()
+	return " ([reps]/[need_reps] reps so far)"
+
+//PunchingBag
+/datum/goal/punchingbag
+	completion_message = "Finally let all that anger out? Good."
+	var/hits = 0
+	var/need_hits
+
+/datum/goal/punchingbag/New()
+	need_hits = rand(30,120)
+	..()
+
+/datum/goal/punchingbag/update_strings()
+	description = "Need to hit something really bad? Maybe you shoud hit the punching bag in the gym."
+
+/datum/goal/punchingbag/check_success()
+	return (hits >= need_hits)
+
+/datum/goal/punchingbag/update_progress(var/progress)
+	if(hits < need_hits)
+		hits += progress
+		if(hits >= need_hits)
+			on_completion()
+
+/datum/goal/punchingbag/get_summary_value()
+	return " ([hits]/[need_hits] hits so far)"
