@@ -19,7 +19,7 @@
 
 /obj/structure/tanktrap_dead
 	name = "destroyed tanktrap"
-	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "tanktrap_dead"
 	density = 0
 

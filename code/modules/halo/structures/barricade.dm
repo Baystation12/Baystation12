@@ -16,7 +16,7 @@
 
 /obj/structure/destructible/plasteel_barricade
 	name = "plasteel barricade"
-	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "barricade"
 	flags = ON_BORDER
 	cover_rating = 50

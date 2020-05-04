@@ -1,7 +1,7 @@
 
 /obj/structure/bardbedwire
 	name = "barbed wire coil"
-	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "barbedwire"
 	density = 0
 	anchored = 1

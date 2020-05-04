@@ -1,7 +1,7 @@
 
 /obj/structure/destructible/sandbag
 	name = "sandbag"
-	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "sandbag"
 	density = 1
 	anchored = 1
@@ -31,7 +31,7 @@
 
 /obj/structure/sandbag_dead
 	name = "sandbag"
-	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "sandbag_dead"
 	anchored = 1
 	flags = ON_BORDER
