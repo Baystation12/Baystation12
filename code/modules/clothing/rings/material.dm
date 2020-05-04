@@ -52,6 +52,9 @@
 /obj/item/clothing/ring/material/steel/New(var/newloc)
 	..(newloc, MATERIAL_STEEL)
 
+/obj/item/clothing/ring/material/plasteel/New(var/newloc)
+	..(newloc, MATERIAL_PLASTEEL)
+
 /obj/item/clothing/ring/material/silver/New(var/newloc)
 	..(newloc, MATERIAL_SILVER)
 
