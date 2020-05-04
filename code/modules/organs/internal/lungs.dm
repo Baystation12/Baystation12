@@ -77,6 +77,8 @@
 	if(!owner)
 		return
 
+	update_verbs()
+	
 	if (germ_level > INFECTION_LEVEL_ONE && active_breathing)
 		if(prob(5))
 			owner.emote("cough")		//respitory tract infection, holding breath will not stop you from coughing
@@ -127,6 +129,12 @@
 		var/lung_rupture_prob = BP_IS_ROBOTIC(src) ? prob(30) : prob(60) //Robotic lungs are less likely to rupture.
 		if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 			rupture()
+
+/obj/item/organ/internal/lungs/proc/update_verbs()
+	if(active_breathing)
+		verbs |= /obj/item/organ/internal/lungs/verb/hold_breath
+	else
+		verbs -= /obj/item/organ/internal/lungs/verb/hold_breath
 
 /obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
 
