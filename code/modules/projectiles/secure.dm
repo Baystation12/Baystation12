@@ -1,11 +1,13 @@
+GLOBAL_LIST_INIT(secure_weapons, list())
+
 /obj/item/weapon/gun
 	var/list/authorized_modes = list(ALWAYS_AUTHORIZED) // index of this list should line up with firemodes, unincluded firemodes at the end will use default
 	var/default_mode_authorization = UNAUTHORIZED
 	var/registered_owner
-	var/standby
 
 /obj/item/weapon/gun/Initialize()
 	if(is_secure_gun())
+		GLOB.secure_weapons |= src
 		if(!authorized_modes)
 			authorized_modes = list()
 
@@ -15,7 +17,7 @@
 	. = ..()
 
 /obj/item/weapon/gun/Destroy()
-	GLOB.registered_weapons -= src
+	GLOB.secure_weapons -= src
 	. = ..()
 
 /obj/item/weapon/gun/examine(mob/user, distance)
@@ -28,7 +30,6 @@
 		user.visible_message("[user] swipes an ID through \the [src].", range = 3)
 		if(!registered_owner)
 			var/obj/item/weapon/card/id/id = W
-			GLOB.registered_weapons += src
 			verbs += /obj/item/weapon/gun/proc/reset_registration
 			registered_owner = id.registered_name
 			to_chat(user, SPAN_NOTICE("\The [src] chimes quietly as it registers to \"[registered_owner]\"."))
@@ -43,9 +44,9 @@
 
 	if(is_secure_gun())
 		registered_owner = null
-		GLOB.registered_weapons -= src
 		verbs -= /obj/item/weapon/gun/proc/reset_registration
 		req_access.Cut()
+		GLOB.secure_weapons -= src
 		to_chat(user, SPAN_NOTICE("\The [src]'s authorization chip fries, giving you full access."))
 		return 1
 
@@ -68,7 +69,6 @@
 
 	to_chat(usr, SPAN_NOTICE("\The [src] chimes quietly as its registration resets."))
 	registered_owner = null
-	GLOB.registered_weapons -= src
 	verbs -= /obj/item/weapon/gun/proc/reset_registration
 
 

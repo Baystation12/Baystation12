@@ -14542,7 +14542,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
 "Mn" = (
-/obj/machinery/computer/modular/preset/cardslot/command{
+/obj/machinery/computer/modular/preset/cardslot/command_sec{
 	icon_state = "console";
 	dir = 8
 	},
