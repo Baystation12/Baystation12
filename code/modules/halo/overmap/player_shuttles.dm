@@ -9,9 +9,12 @@
 	anchored = 1
 	var/obj/effect/overmap/ship/npc_ship/ship_to_spawn
 	var/ship_type_name = "shuttlecraft"
+	var/req_timeframe_message = "Undergoing refit, currently unavailable."//The message used when requesitioning fails due to a timeframe issue
 	var/shuttle_refresh_time = 5 MINUTES
 	var/next_shuttle_at = 0
 	var/allow_rename = 0
+	var/pop_divisor = 0 //How many ships are we actually allowed to have spawned? population (overall) / pop_divisor. 0 = infinite
+	var/our_faction = "Human Colony"
 
 /obj/machinery/shuttle_spawner/examine(var/mob/examiner)
 	. = ..()
@@ -32,8 +35,12 @@
 	if(!ship_to_spawn)
 		log_error("[src] tried to spawn a [ship_type_name] at [om_loc.name]'s location, but it doesn't have a ship_to_spawn set!")
 		return
+	if(!check_requisition_allowed())
+		return
 	var/obj/effect/overmap/ship/npc_ship/ship = new ship_to_spawn (om_loc.loc)
 	ship.loc = null
+	ship.faction = our_faction
+	ship.my_faction = GLOB.factions_by_name[our_faction]
 	ship.make_player_controlled()
 	ship.slipspace_to_location(om_loc.loc,0)
 	if(ship.loc == null)
@@ -42,8 +49,18 @@
 
 /obj/machinery/shuttle_spawner/proc/check_requisition_allowed()
 	if(world.time < next_shuttle_at)
-		visible_message("<span class = 'notice'>Undergoing refit, currently unavailable.</span>")
+		visible_message("<span class = 'notice'>[req_timeframe_message]</span>")
 		return 0
+	if(pop_divisor)
+		var/datum/faction/F = GLOB.factions_by_name[our_faction]
+		var/pop_overall = 0
+		for(var/client/C in GLOB.clients)
+			if(!C.mob || !istype(C.mob,/mob/living))
+				continue
+			pop_overall++
+		if(F.player_ships.len >= 1 + round(pop_overall/pop_divisor))
+			visible_message("<span class = 'notice'>Requisition cannot be performed. Designated resources have been fully allocated.</span>")
+			return 0
 	return 1
 
 /obj/machinery/shuttle_spawner/ex_act(var/severity)
@@ -78,7 +95,7 @@
 	name = "Shuttle Craft"
 	icons_pickfrom_list = list()
 	vessel_mass = 1
-	default_delay = 3 SECONDS //double the speed of a normal ship.
+	ship_max_speed = SHIP_DEFAULT_PIXEL_SPEED * 2
 
 /obj/effect/overmap/ship/npc_ship/shuttlecraft/generate_ship_name()
 	return initial(name)
@@ -127,13 +144,16 @@
 	ship_datums = list(/datum/npc_ship/civ_shuttle)
 
 /obj/machinery/shuttle_spawner/cov
+	our_faction = "Covenant"
 	icon_state = "covie_console"
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/cov
 
 /obj/machinery/shuttle_spawner/unsc
+	our_faction = "UNSC"
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/unsc
 
 /obj/machinery/shuttle_spawner/innie
+	our_faction = "Insurrectionist"
 	ship_to_spawn = /obj/effect/overmap/ship/npc_ship/shuttlecraft/innie
 
 /obj/machinery/shuttle_spawner/civ
@@ -146,13 +166,9 @@ This console identifies and maintains vulnerabilities in sector wide jamming sof
 allowing periodic long range transmission."
 	ship_type_name = "Ship"
 	allow_rename = 1
+	req_timeframe_message = "Unable to connect to external requisition node due to timed lockout, Examine console for more information. Attempting Reconnection...."
 	var/list/choices = newlist()
-
-/obj/machinery/shuttle_spawner/multi_choice/check_requisition_allowed()
-	if(world.time < next_shuttle_at)
-		visible_message("<span class = 'notice'>Unable to connect to external requisition node due to timed lockout, Examine console for more information. Attempting Reconnection....</span>")
-		return 0
-	return 1
+	pop_divisor = 3
 
 /obj/machinery/shuttle_spawner/multi_choice/proc/get_spawner_choice(var/mob/user)
 	var/list/categories = list()
@@ -228,6 +244,7 @@ allowing periodic long range transmission."
 )
 
 /obj/machinery/shuttle_spawner/multi_choice/unsc
+	our_faction = "UNSC"
 	choices = newlist(\
 /datum/spawner_choice/cheap_unsc_combat,\
 /datum/spawner_choice/heavyarmed_unsc_combat,\
@@ -238,6 +255,7 @@ allowing periodic long range transmission."
 )
 
 /obj/machinery/shuttle_spawner/multi_choice/urf
+	our_faction = "Insurrectionist"
 	choices = newlist(\
 /datum/spawner_choice/cheap_urf_combat,\
 /datum/spawner_choice/heavyarmed_urf_combat,\
@@ -248,6 +266,7 @@ allowing periodic long range transmission."
 )
 
 /obj/machinery/shuttle_spawner/multi_choice/cov
+	our_faction = "Covenant"
 	icon = 'code/modules/halo/overmap/nav_computer.dmi'
 	icon_state = "cov_nav"
 	choices = newlist(\
