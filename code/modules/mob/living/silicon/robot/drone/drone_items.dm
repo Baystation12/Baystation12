@@ -128,9 +128,23 @@
 	desc = "A simple grasping tool for holding and manipulating organic and mechanical organs, both internal and external."
 
 	can_hold = list(
-	/obj/item/organ,
-	/obj/item/robot_parts,
-	/obj/item/weapon/reagent_containers/ivbag
+		/obj/item/organ,
+		/obj/item/robot_parts,
+		/obj/item/weapon/reagent_containers/ivbag
+	)
+
+/obj/item/weapon/gripper/forensics// Used to handle forensics equipment.
+	name = "forensics gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool for holding forensics evidence and paper."
+
+	can_hold = list(
+		/obj/item/weapon/sample,
+		/obj/item/weapon/evidencebag,
+		/obj/item/weapon/forensics,
+		/obj/item/weapon/photo,
+		/obj/item/weapon/paper,
+		/obj/item/weapon/paper_bundle
 	)
 
 /obj/item/weapon/gripper/no_use //Used when you want to hold and put items in other things, but not able to 'use' the item
