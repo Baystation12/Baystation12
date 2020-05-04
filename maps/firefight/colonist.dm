@@ -1,15 +1,15 @@
 
 /datum/job/firefight_colonist
 	title = "Colonist"
-	total_positions = -1
-	selection_color = "#000000"
-	spawn_faction = "UNSC"
-	supervisors = " the Colony Mayor"
-	loadout_allowed = TRUE
 	outfit_type = /decl/hierarchy/outfit/job/firefight_colonist
+	selection_color = "#000000"
+	total_positions = -1
+	spawn_positions = -1
+	track_players = 1
+	spawn_faction = "UNSC"
 	whitelisted_species = list(/datum/species/human)
+	loadout_allowed = TRUE
 	access = list(access_unsc)
-	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
 
 /decl/hierarchy/outfit/job/firefight_colonist
 	name = "Firefight Colonist"

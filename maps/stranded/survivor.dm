@@ -3,10 +3,10 @@
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1
-	latejoin_at_spawnpoints = 0
 	spawn_faction = "UNSC"
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
+	access = list(access_unsc)
 
 /datum/job/stranded/unsc_marine
 	title = "UNSC marine survivor"

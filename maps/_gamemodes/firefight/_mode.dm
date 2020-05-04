@@ -54,64 +54,11 @@
 	var/destroyed_message = "<span class='bad'>Defeat: The evac ship has been destroyed! Any survivors are doomed to die alone in the wastes...</span><br>"
 	var/overrun_message = "<span class='bad'>Defeat: The survivors have been overrun. The evac ship did not arrive in time.</span>"
 
-	disabled_jobs_types = list(\
-		//Covenant jobs
-		/datum/job/covenant/brute_captain,\
-		/datum/job/covenant/brute_major,\
-		/datum/job/covenant/brute_minor,\
-		//
-		/datum/job/covenant/kigyarminor,\
-		/datum/job/covenant/kigyar_marksman,\
-		/datum/job/covenant/kigyar_sniper,\
-		//
-		/datum/job/covenant/sangheili_shipmaster,\
-		/datum/job/covenant/sangheili_ultra,\
-		/datum/job/covenant/sangheili_honour_guard,\
-		/datum/job/covenant/sangheili_major,\
-		/datum/job/covenant/sangheili_minor,\
-		/datum/job/covenant/sangheili_ranger,\
-		/datum/job/covenant/sangheili_specops,\
-		/datum/job/covenant/sangheili_zealot,\
-		//
-		/datum/job/covenant/skirmminor,\
-		/datum/job/covenant/skirmmajor,\
-		/datum/job/covenant/skirmmurmillo,\
-		/datum/job/covenant/skirmcommando,\
-		//
-		/datum/job/covenant/unggoy_minor,\
-		/datum/job/covenant/unggoy_major,\
-		/datum/job/covenant/unggoy_ultra,\
-		/datum/job/covenant/unggoy_deacon,\
-		//
-		/datum/job/covenant/yanmee_minor,\
-		/datum/job/covenant/yanmee_major,\
-		/datum/job/covenant/yanmee_ultra,\
-		/datum/job/covenant/yanmee_leader,\
-
-		//UNSC jobs
-		/*
-		/datum/job/firefight_unsc_marine,\
-		/datum/job/firefight_colonist,\
-		*/
-
-		//UNSC survivor jobs
-		/datum/job/stranded/unsc_marine,\
-		/datum/job/stranded/unsc_tech,\
-		/datum/job/stranded/unsc_medic,\
-		/datum/job/stranded/unsc_crew,\
-		/datum/job/stranded/unsc_civ\
-		)
-
 /datum/game_mode/firefight/proc/get_num_survivors()
 	. = 0
 	for(var/mob/M in GLOB.player_list)
 		if(M.client && M.stat == CONSCIOUS && M.faction == src.player_faction)
 			.++
-
-/*
-/datum/game_mode/firefight/proc/survive_duration()
-	return round((duration_wave_base + duration_rest_base) * max_waves)
-	*/
 
 /datum/game_mode/firefight/handle_mob_death(var/mob/M, var/list/args = list())
 	//stop having the AI chase this player
@@ -121,6 +68,11 @@
 
 	. = ..()
 
+/datum/game_mode/firefight/handle_latejoin(var/mob/living/carbon/human/character)
+	. = ..()
+	if(character.faction == player_faction_name)
+		new assault_landmark_type(character)
+
 /datum/game_mode/firefight/pre_setup()
 	. = ..()
 	modify_job_slots()
@@ -128,6 +80,15 @@
 /datum/game_mode/firefight/proc/modify_job_slots()
 	//this seems like hacky way of doing things
 	//but i cant think of a better way to handle per-gamemode job customisations as long as we use standardised job definitions
+	//go to child subtype to see more
+
+	//this doesnt work but im leaving it here in case i think of a different way to do it
+	/*
+	for(var/job_type in disabled_jobs_types)
+		var/datum/job/J = job_master.occupations_by_type[job_type]
+		J.total_positions = 0
+		J.spawn_positions = 0
+		*/
 
 /datum/game_mode/firefight/get_respawn_time()
 	return 1 MINUTE
