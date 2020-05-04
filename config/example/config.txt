@@ -221,8 +221,8 @@ GUEST_BAN
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
 
-##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.7
+##Defines the ticklag for the world. 0.5 is smooth, 0.7 is less smooth.
+TICKLAG 0.5
 
 ##Defines world FPS. Defaults to 20.
 # FPS 20
