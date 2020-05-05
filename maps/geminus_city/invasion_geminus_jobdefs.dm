@@ -12,17 +12,12 @@
 		/datum/job/soe_commando_captain,\
 		/datum/job/geminus_x52/researcher,\
 		/datum/job/geminus_x52/research_director,\
-		/datum/job/unsc_ship_ai,\
-		/datum/job/unscbertels_co,\
-		/datum/job/unscbertels_xo,\
-		/datum/job/bertelsunsc_ship_marine,\
-		/datum/job/unsc_ship_marinesquad,\
-		/datum/job/unscbertels_ship_crew,\
-		/datum/job/unsc_ship_iwo,\
-		/datum/job/unsc_ship_marinesergeant,\
-		/datum/job/unsc_ship_marineplatoon,\
-		/datum/job/bertelsODST,\
-		/datum/job/bertelsODSTO,\
+		/datum/job/cassius_job/unsc_marine,
+		/datum/job/cassius_job/unsc_marine_specialist,
+		/datum/job/cassius_job/unsc_squad_lead,
+		/datum/job/cassius_job/unsc_co,
+		/datum/job/cassius_job/odst,
+		/datum/job/cassius_job/oni_researcher,
 		/datum/job/colonist,\
 		/datum/job/colonist_mayor,\
 		/datum/job/police,\
@@ -56,6 +51,7 @@
 		"Listening Post Spawn",\
 		"Colony Arrival Shuttle",\
 		"UNSC Base Spawns",\
+		"UNSC Base Fallback Spawns",\
 		"X52 Researcher",\
 		"X52 RD",\
 		)

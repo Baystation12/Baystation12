@@ -13,7 +13,7 @@
 	desc = "Storage for basic weapons and ammunition"
 	icon_state ="ironhammer" // SPRITES
 	icon_deny = "ironhammer-deny"
-	req_access = list(308)
+	req_access = list(access_unsc_armoury)
 	products = list(/obj/item/ammo_magazine/m127_saphe =20,/obj/item/ammo_magazine/m127_saphp =20,/obj/item/ammo_magazine/m762_ap/MA5B = 40,/obj/item/ammo_magazine/m762_ap/MA5B/TTR = 15,/obj/item/ammo_magazine/m762_ap/M392 = 30
 					,/obj/item/ammo_magazine/m95_sap/br55 = 20,/obj/item/ammo_magazine/m5 = 20,/obj/item/ammo_magazine/m5/rubber = 10,/obj/item/ammo_box/shotgun = 10,/obj/item/ammo_box/shotgun/slug = 10,/obj/item/ammo_box/shotgun/beanbag = 10,/obj/item/weapon/material/knife/combat_knife =15,/obj/item/weapon/material/machete = 2
 					,/obj/item/weapon/gun/projectile/m6d_magnum = 15,/obj/item/weapon/gun/projectile/ma5b_ar = 15,/obj/item/weapon/gun/projectile/br55 = 2
@@ -24,7 +24,7 @@
 	desc = "Storage for advanced weapons and ammunition"
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
-	req_access = list(308,311)
+	req_access = list(access_unsc_specialist)
 	products = list(/obj/item/ammo_magazine/m145_ap = 4,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 1
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/projectile/m41 = 1, /obj/item/weapon/storage/box/spnkr = 2,/obj/item/weapon/plastique = 2,/obj/item/weapon/armor_patch = 2)
 
@@ -85,7 +85,7 @@
 	desc = "A vendor full of attachments for the MA5B."
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
-	req_access = list(308,311)
+	req_access = list(access_unsc_armoury,access_unsc_specialist)
 	products = list(\
 	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
 	/obj/item/weapon_attachment/ma5_upper_railed =5,
@@ -121,7 +121,7 @@
 	icon_state = "ironhammer"
 	icon_deny = "ironhammer-deny"
 	color = COLOR_DARK_GRAY
-	req_access = list(309)
+	req_access = list(access_unsc_odst)
 	products = list(
 	/obj/item/clothing/head/helmet/odst/rifleman = 4,
 	/obj/item/clothing/suit/armor/special/odst = 4,

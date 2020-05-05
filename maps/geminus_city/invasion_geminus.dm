@@ -6,7 +6,7 @@
 
 #include "../Admin Planet/includes.dm"
 
-#include "../UNSC_Halberd_Class/includes.dm"
+#include "../faction_bases/ODP_Cassius/ODP_Cassius.dm"
 
 #include "../ONI_Prowler/outfits.dm"
 
