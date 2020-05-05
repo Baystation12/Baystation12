@@ -25,9 +25,10 @@
 
 	var/is_spawning = 0	//0 = rest, 1 = spawning
 	var/max_spawns_tick = 20		//keep this the same for performance reasons
-	var/enemy_strength_base = 1//10		//the total value of all spawned enemy strength ratings
-	var/enemy_strength_left = 1//10		//the total strength to spawn this round
-	var/wave_strength_multiplier = 0//0.1	//increase in strength each round
+	var/enemy_strength_base = 10		//the total value of all spawned enemy strength ratings
+	var/enemy_strength_left = 10		//the total strength to spawn this round
+	var/wave_strength_multiplier = 0.5	//increase in strength each round
+	var/player_strength_multiplier = 0.1
 
 	var/time_rest_end = 0
 	var/interval_resupply = 4 MINUTES
@@ -54,11 +55,8 @@
 	var/destroyed_message = "<span class='bad'>Defeat: The evac ship has been destroyed! Any survivors are doomed to die alone in the wastes...</span><br>"
 	var/overrun_message = "<span class='bad'>Defeat: The survivors have been overrun. The evac ship did not arrive in time.</span>"
 
-/datum/game_mode/firefight/proc/get_num_survivors()
-	. = 0
-	for(var/mob/M in GLOB.player_list)
-		if(M.client && M.stat == CONSCIOUS && M.faction == src.player_faction)
-			.++
+	//this should not ever be seen by players, but its here just in case
+	var/stuck_message = "<span class='mixed'>Defeat: The evac ship suffered an engine problem. Any survivors are doomed to die alone in the wastes...</span>"
 
 /datum/game_mode/firefight/handle_mob_death(var/mob/M, var/list/args = list())
 	//stop having the AI chase this player

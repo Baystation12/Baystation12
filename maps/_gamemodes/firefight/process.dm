@@ -11,6 +11,7 @@
 			to_world("<span class='danger'>[rest_message]</span> \
 				<span class='notice'>You now have a [round(rest_time / (1 MINUTE),1)] minute rest. There is [max_waves - current_wave] waves left until evacuation.</span>")
 
+			//give the players a resupply
 			spawn(30)
 				do_resupply()
 
@@ -24,7 +25,13 @@
 			is_spawning = 1
 
 			//enemies get stronger each wave
-			enemy_strength_left = enemy_strength_base + enemy_strength_base * current_wave * wave_strength_multiplier
+			var/total_multiplier = current_wave * wave_strength_multiplier
+
+			//more players means stronger enemies
+			total_multiplier += player_strength_multiplier * player_faction.players_alive()
+
+			//calculate the enemy strength for this wave
+			enemy_strength_left = enemy_strength_base + enemy_strength_base * total_multiplier
 
 			//is this the final wave?
 			current_wave++
