@@ -1,6 +1,6 @@
 /obj/effect/overmap/visitable/ship/torch
 	name = "SEV Torch"
-	desc = "A bluespace-capable corvette bearing markings of the SCG Expeditionary Corps."
+	desc = "A frankensteined HNS Mako-class corvette, broadcasting SCGEC codes and the designation \"SEV Torch, HSC-4-13-X\"."
 	fore_dir = WEST
 	vessel_mass = 100000
 	burn_delay = 2 SECONDS
@@ -70,7 +70,7 @@
 
 /obj/effect/overmap/visitable/ship/landable/exploration_shuttle
 	name = "Charon"
-	desc = "A medium-sized long-range shuttle. It bears markings of the SCG Expeditionary Corps."
+	desc = "An SSE-U11 long range shuttle, broadcasting SCGEC codes and the callsign \"Torch-2 Charon\"."
 	shuttle = "Charon"
 	max_speed = 1/(2 SECONDS)
 	burn_delay = 1 SECONDS
@@ -81,7 +81,7 @@
 
 /obj/effect/overmap/visitable/ship/landable/aquila
 	name = "Aquila"
-	desc = "A vessel escort gunship. It bears markings of the SCG Fleet."
+	desc = "A PM-24 modular transport, broadcasting SCGEC codes and the callsign \"Torch-1 Aquila\"."
 	shuttle = "Aquila"
 	vessel_mass = 20000
 	max_speed = 1/(1 SECONDS)
@@ -91,7 +91,7 @@
 
 /obj/effect/overmap/visitable/ship/landable/guppy
 	name = "Guppy"
-	desc = "A small general utility pod. It's capable of limited independant space travel. It's marked as TORCH GUP #1"
+	desc = "An SSE-U3 utility pod, broadcasting SCGEC codes and the callsign \"Torch-3 Guppy\"."
 	shuttle = "Guppy"
 	max_speed = 1/(3 SECONDS)
 	burn_delay = 2 SECONDS
