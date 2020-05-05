@@ -64,9 +64,33 @@
 		bomb = ARMOR_BOMB_MINOR
 		)
 	slot = ACCESSORY_SLOT_ARMOR_C
+	flags_inv = CLOTHING_BULKY
 
 /obj/item/clothing/accessory/armorplate/get_fibers()
 	return null	//plates do not shed
+
+/obj/item/clothing/accessory/armorplate/sneaky
+	name = "low-profile armor vest"
+	desc = "An armor vest made of layered polymer fibers. Can attach to your slacks and office shirt."
+	item_icons = list(slot_wear_suit_str = 'icons/mob/onmob/onmob_accessories.dmi')
+	item_flags = ITEM_FLAG_THICKMATERIAL
+	slot_flags = SLOT_OCLOTHING //can wear in suit slot as well
+	slot = ACCESSORY_SLOT_UTILITY
+	w_class = ITEM_SIZE_NORMAL
+	blood_overlay_type = "armor"
+	icon_state = "undervest"
+
+/obj/item/clothing/accessory/armorplate/sneaky/tactical
+	name = "low-profile tactical armor vest"
+	desc = "An armor vest made of layered smart polymers. Can attach to your slacks and office shirt."
+	slowdown = 0.5
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_SMALL,
+		energy = ARMOR_ENERGY_SMALL,
+		bomb = ARMOR_BOMB_PADDED
+	)
 
 /obj/item/clothing/accessory/armorplate/medium
 	name = "medium armor plate"
@@ -124,6 +148,8 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_A
+	body_location = ARMS
+	flags_inv = CLOTHING_BULKY
 
 /obj/item/clothing/accessory/armguards/blue
 	desc = "A pair of blue arm pads reinforced with armor plating. Attaches to a plate carrier."
@@ -210,6 +236,8 @@
 		bomb = ARMOR_BOMB_PADDED
 		)
 	slot = ACCESSORY_SLOT_ARMOR_L
+	body_location = LEGS
+	flags_inv = CLOTHING_BULKY
 
 /obj/item/clothing/accessory/legguards/blue
 	desc = "A pair of armored leg pads in blue. Attaches to a plate carrier."
@@ -362,6 +390,7 @@
 	accessory_icons = list(slot_tie_str = 'icons/mob/onmob/onmob_modular_armor.dmi', slot_head_str = 'icons/mob/onmob/onmob_modular_armor.dmi')
 	icon_state = "null"
 	slot = ACCESSORY_SLOT_HELM_C
+	body_location = HEAD
 
 /obj/item/clothing/accessory/armor/helmcover/blue
 	name = "blue helmet cover"

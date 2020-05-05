@@ -67,6 +67,7 @@
 	name = "hip holster"
 	desc = "A handgun holster slung low on the hip, draw pardner!"
 	icon_state = "holster_hip"
+	body_location = LOWER_TORSO
 
 /obj/item/clothing/accessory/storage/holster/thigh
 	name = "thigh holster"
@@ -74,6 +75,7 @@
 	icon_state = "holster_thigh"
 	sound_in = 'sound/effects/holster/tactiholsterin.ogg'
 	sound_out = 'sound/effects/holster/tactiholsterout.ogg'
+	body_location = LEGS
 
 /obj/item/clothing/accessory/storage/holster/machete
 	name = "machete sheath"
@@ -82,6 +84,7 @@
 	can_holster = list(/obj/item/weapon/material/hatchet/machete)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
+	body_location = LEGS
 
 /obj/item/clothing/accessory/storage/holster/knife
 	name = "leather knife sheath"
@@ -90,8 +93,10 @@
 	can_holster = list(/obj/item/weapon/material/knife)
 	sound_in = 'sound/effects/holster/sheathin.ogg'
 	sound_out = 'sound/effects/holster/sheathout.ogg'
+	body_location = LEGS
 
 /obj/item/clothing/accessory/storage/holster/knife/polymer
 	name = "polymer knife sheath"
 	desc = "A rigid polymer sheath which you can strap on your leg."
 	icon_state = "sheath_polymer"
+	body_location = LEGS
