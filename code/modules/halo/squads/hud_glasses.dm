@@ -92,16 +92,17 @@
 	set src in usr.contents
 	set category = "Object"
 
-	var/mob/living/user = usr
+	var/mob/living/carbon/human/user = usr
 
 	//swap the setting
 	nv_enabled = !nv_enabled
 
-	//update the visual effect
-	reset_effect(user)
-
 	//tell the user
-	to_chat(user,"\icon[src] <span class='info'>You [nv_enabled ? "en" : "dis"]able night vision setting on [src].</span>")
+	to_chat(user,"\icon[src] <span class='[nv_enabled ? "notice" : "info"]'>You [nv_enabled ? "en" : "dis"]able night vision setting on [src].</span>")
+
+	//update the visual effect
+	if(user.glasses == src)
+		reset_effect(user)
 
 /obj/item/clothing/glasses/hud/tactical/proc/reset_effect(var/mob/living/user)
 	if(nv_enabled)
@@ -130,17 +131,18 @@
 
 	update_vision()
 
-/obj/item/clothing/glasses/hud/tactical/proc/disable_effect(var/mob/living/user)
+/obj/item/clothing/glasses/hud/tactical/proc/disable_effect(var/mob/user)
 	user.clear_fullscreen("nv_colour", 0)
 	user.clear_fullscreen("nv_noise", 0)
 	user.clear_fullscreen("nv_visioncone", 0)
 
 	update_vision()
 
-/obj/item/clothing/glasses/hud/tactical/equipped(var/mob/user)
+/obj/item/clothing/glasses/hud/tactical/equipped(var/mob/living/carbon/human/user)
 	. = ..()
-	//when we put the hud on
-	enable_effect(user)
+	if(nv_enabled && user.glasses == src)
+		//when we put the hud on
+		enable_effect(user)
 
 /obj/item/clothing/glasses/hud/tactical/dropped(mob/user as mob)
 	. = ..()
@@ -169,6 +171,7 @@
 	desc = "Scout Helmet night vision active."
 	icon = KIGYAR_CLOTHING_PATH
 	icon_state = "inbuilt_nv"
+	nv_screen_colour = /obj/screen/fullscreen/night_vision/cyan
 
 
 /obj/item/clothing/glasses/hud/tactical/covenant
