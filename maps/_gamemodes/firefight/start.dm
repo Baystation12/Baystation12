@@ -12,6 +12,10 @@
 
 	overmind = new()
 
+	//covenant radio channel
+	overmind.comms_channel = RADIO_COV
+
+
 	enemy_faction = GLOB.factions_by_name[enemy_faction_name]
 	player_faction = GLOB.factions_by_name[player_faction_name]
 	overmind.comms_channel = enemy_faction.default_radio_channel

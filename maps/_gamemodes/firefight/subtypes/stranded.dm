@@ -19,3 +19,6 @@
 /datum/game_mode/firefight/stranded/pre_setup()
 	. = ..()
 	allowed_ghost_roles += list(/datum/ghost_role/flood_combat_form)
+
+	//flood dont use radio to communicate with each other
+	overmind.comms_channel = null

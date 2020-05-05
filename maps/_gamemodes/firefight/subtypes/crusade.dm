@@ -14,6 +14,12 @@
 	rest_message = "The humans have been destroyed for now. But they will return."
 	evac_message = "The spirit has arrived. Protect it until we can depart this place."
 
+/datum/game_mode/firefight/crusade/pre_setup()
+	. = ..()
+
+	//human radio channel
+	overmind.comms_channel = RADIO_SQUAD
+
 /datum/game_mode/firefight/crusade/modify_job_slots()
 	. = ..()
 
