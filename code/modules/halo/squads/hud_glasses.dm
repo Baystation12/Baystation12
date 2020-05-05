@@ -219,7 +219,7 @@
 	icon_state = "0-0-0"
 	screen_loc = ui_entire_screen
 	plane = LIGHTING_PLANE
-	layer = ABOVE_LIGHTING_LAYER
+	layer = 11
 
 /obj/screen/fullscreen/night_vision/noise
 	icon = 'icons/effects/static.dmi'
@@ -237,4 +237,4 @@
 	icon_state = "impairedoverlay2"//"visioncone90-7"
 	screen_loc = "CENTER-7,CENTER-7"
 	plane = LIGHTING_PLANE
-	layer = ABOVE_LIGHTING_LAYER
+	layer = 11
