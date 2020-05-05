@@ -210,16 +210,16 @@
 	. = ..()
 	var/out_text = ""
 	if(flags & ON_BORDER)
-		out_text += "It is oriented [src.dir]. "
+		out_text += "It is oriented [dir2text(src.dir)]. "
 
 	if(health >= maxHealth)
-		out_text += "<span class='info'>It is at maximum repair./</span>"
+		out_text += "<span class='info'>It is at maximum repair.</span>"
 	else if(health > maxHealth * 0.66)
-		out_text += "<span class='info'>It is slightly damaged./</span>"
+		out_text += "<span class='info'>It is slightly damaged.</span>"
 	else if(health > maxHealth * 0.33)
-		out_text += "<span class='notice'>It is moderately damaged./</span>"
+		out_text += "<span class='notice'>It is moderately damaged.</span>"
 	else
-		out_text += "<span class='danger'>It is heavily damaged./</span>"
+		out_text += "<span class='danger'>It is heavily damaged.</span>"
 
 	if(length(out_text))
 		to_chat(user,out_text)
