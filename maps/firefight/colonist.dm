@@ -2,7 +2,7 @@
 /datum/job/firefight_colonist
 	title = "Colonist"
 	outfit_type = /decl/hierarchy/outfit/job/firefight_colonist
-	selection_color = "#000000"
+	selection_color = "#0A0A95"
 	total_positions = -1
 	spawn_positions = -1
 	track_players = 1

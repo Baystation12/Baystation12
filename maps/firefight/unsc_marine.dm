@@ -5,7 +5,7 @@
 	total_positions = -1
 	spawn_positions = -1
 	outfit_type = /decl/hierarchy/outfit/job/firefight_unsc_marine
-	selection_color = "#0A0A95"
+	selection_color = "#008000"
 	access = list(access_unsc)
 	whitelisted_species = list(/datum/species/human)
 	loadout_allowed = TRUE
