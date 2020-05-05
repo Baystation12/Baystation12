@@ -399,6 +399,7 @@
 	else
 		icon_state = icon_opened
 
+/*
 /obj/structure/closet/attack_generic(var/mob/user, var/damage, var/attack_message = "destroys", var/wallbreaker)
 	if(!damage || !wallbreaker)
 		return
@@ -407,6 +408,7 @@
 	dump_contents()
 	spawn(1) qdel(src)
 	return 1
+	*/
 
 /obj/structure/closet/proc/req_breakout()
 	if(opened)

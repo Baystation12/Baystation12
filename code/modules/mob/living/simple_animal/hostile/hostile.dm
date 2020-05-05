@@ -191,7 +191,7 @@
 		return L
 	else if(istype(attacked,/obj/mecha) || istype(attacked,/obj/effect) || istype(attacked,/obj/structure) || istype(attacked,/obj/vehicles))
 		var/obj/o = attacked
-		o.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+		o.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext, 1)
 		src.do_attack_animation(o)
 		if(istype(attacked,/obj/vehicles))
 			var/obj/vehicles/v = attacked
@@ -447,15 +447,16 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 		for(var/checkdir in GLOB.cardinal) // North, South, East, West
 			var/obj/effect/shield/S = locate(/obj/effect/shield, get_step(src, checkdir))
 			if(S && S.gen && S.gen.check_flag(MODEFLAG_NONHUMANS))
-				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+				S.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext, 1)
 				return
 			for(var/obj/structure/window/obstacle in get_step(src, checkdir))
 				if(obstacle.dir == GLOB.reverse_dir[checkdir]) // So that windows get smashed in the right order
-					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+					obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext, 1)
 					return
 			var/obj/structure/obstacle = locate(/obj/structure, get_step(src, checkdir))
 			if(obstacle && CheckDestroyAllowed(obstacle))
-				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext)
+				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext, 1)
+				do_attack_animation(obstacle)
 
 /mob/living/simple_animal/hostile/proc/CheckDestroyAllowed(var/obj/to_destroy)
 	. = 0
