@@ -450,8 +450,8 @@ its easier to just keep the beam vertical.
 
 	do_climb(usr)
 
-/atom/proc/can_climb(var/mob/living/user, post_climb_check=0)
-	if (!(atom_flags & ATOM_FLAG_CLIMBABLE) || !can_touch(user) || (!post_climb_check && climbers && (user in climbers)))
+/atom/proc/can_climb(var/mob/living/user, post_climb_check=FALSE, check_silicon=TRUE)
+	if (!(atom_flags & ATOM_FLAG_CLIMBABLE) || !can_touch(user, check_silicon) || (!post_climb_check && climbers && (user in climbers)))
 		return 0
 
 	if (!user.Adjacent(src))
@@ -464,7 +464,7 @@ its easier to just keep the beam vertical.
 		return 0
 	return 1
 
-/atom/proc/can_touch(var/mob/user)
+/atom/proc/can_touch(var/mob/user, check_silicon=TRUE)
 	if (!user)
 		return 0
 	if(!Adjacent(user))
@@ -474,7 +474,7 @@ its easier to just keep the beam vertical.
 		return 0
 	if (user.incapacitated())
 		return 0
-	if (issilicon(user))
+	if (check_silicon && issilicon(user))
 		to_chat(user, "<span class='notice'>You need hands for this.</span>")
 		return 0
 	return 1
@@ -492,8 +492,8 @@ its easier to just keep the beam vertical.
 			return A
 	return 0
 
-/atom/proc/do_climb(var/mob/living/user)
-	if (!can_climb(user))
+/atom/proc/do_climb(var/mob/living/user, check_silicon=TRUE)
+	if (!can_climb(user, check_silicon=check_silicon))
 		return 0
 
 	add_fingerprint(user)
@@ -504,7 +504,7 @@ its easier to just keep the beam vertical.
 		LAZYREMOVE(climbers,user)
 		return 0
 
-	if(!can_climb(user, post_climb_check=1))
+	if(!can_climb(user, post_climb_check=1, check_silicon=check_silicon))
 		LAZYREMOVE(climbers,user)
 		return 0
 

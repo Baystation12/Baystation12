@@ -174,3 +174,6 @@
 		playsound(loc, 'sound/effects/spray.ogg', 10, 1, -3)
 		loc.assume_air(air_contents)
 	. = ..()
+
+/obj/machinery/portable_atmospherics/MouseDrop_T(mob/living/M, mob/living/user)
+	do_climb(user, FALSE)

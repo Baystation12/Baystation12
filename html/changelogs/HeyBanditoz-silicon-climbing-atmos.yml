@@ -1,0 +1,4 @@
+author: Banditoz
+delete-after: True
+changes: 
+  - tweak: "Borgs can now climb over portable atmospherics equipment."

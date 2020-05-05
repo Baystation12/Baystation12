@@ -281,7 +281,7 @@
 /obj/structure/railing/ex_act(severity)
 	qdel(src)
 
-/obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=0)
+/obj/structure/railing/can_climb(var/mob/living/user, post_climb_check=FALSE, check_silicon=TRUE)
 	. = ..()
 	if(. && get_turf(user) == get_turf(src))
 		var/turf/T = get_step(src, src.dir)
