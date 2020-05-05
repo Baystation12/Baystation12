@@ -327,79 +327,89 @@
 	mode = !mode
 	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
 
-/obj/item/weapon/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
-	..(A, user)
-	if(!user)
+/obj/item/weapon/inflatable_dispenser/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if (!user)
 		return
-	if(!user.Adjacent(A))
+	if (loc != user)
 		return
-	if (isturf(A))
-		var/turf/T = A
+	var/turf/T = get_turf(target)
+	if (!user.TurfAdjacent(T))
+		return
+
+	if (istype(target, /obj/structure/inflatable))
+		if (!do_after(user, 0.5 SECONDS, target))
+			return
+		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
+		var/obj/item/inflatable/I
+		if (istype(target, /obj/structure/inflatable/door))
+			if (stored_doors < max_doors)
+				++stored_doors
+			else
+				I = new /obj/item/inflatable/door(T)
+		else
+			if (stored_walls < max_walls)
+				++stored_walls
+			else
+				I = new /obj/item/inflatable/wall(T)
+		user.visible_message(
+			SPAN_ITALIC("\The [user] picks up \an [target] with \an [src]."),
+			SPAN_NOTICE("You deflate \the [target] with \the [src]."),
+			SPAN_ITALIC("You can hear rushing air."),
+			range = 5
+		)
+		if (I)
+			var/obj/structure/inflatable/S = target
+			I.health = S.health
+		qdel(target)
+
+	else if (istype(target, /obj/item/inflatable))
+		var/collected = FALSE
+		if (istype(target, /obj/item/inflatable/door))
+			if (stored_doors < max_doors)
+				++stored_doors
+				collected = TRUE
+		else
+			if (stored_walls < max_walls)
+				++stored_walls
+				collected = TRUE
+		if (collected)
+			user.visible_message(
+				SPAN_ITALIC("\The [user] picks up \an [target] with \an [src]."),
+				SPAN_ITALIC("You pick up \the [target] with \the [src]."),
+				range = 3
+			)
+			qdel(target)
+		else
+			to_chat(user, SPAN_WARNING("\The [src] is already full of those."))
+
+	else
+		var/active_mode = mode
+		if (active_mode ? (!stored_doors) : (!stored_walls))
+			to_chat(user, SPAN_WARNING("\The [src] is out of [active_mode ? "doors" : "walls"]."))
+			return
 		var/obstruction = T.get_obstruction()
 		if (obstruction)
-			to_chat(user, "\The [english_list(obstruction)] is blocking that spot.")
+			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
 			return
-		try_deploy_inflatable(A, user)
-	if(istype(A, /obj/item/inflatable) || istype(A, /obj/structure/inflatable))
-		pick_up(A, user)
-
-/obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(var/turf/T, var/mob/living/user)
-	if(mode) // Door deployment
-		if(!stored_doors)
-			to_chat(user, "\The [src] is out of doors!")
+		if (!do_after(user, 0.5 SECONDS))
 			return
-
-		if(T && istype(T))
-			new /obj/structure/inflatable/door(T)
-			stored_doors--
-
-	else // Wall deployment
-		if(!stored_walls)
-			to_chat(user, "\The [src] is out of walls!")
+		obstruction = T.get_obstruction()
+		if (obstruction)
+			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
 			return
-
-		if(T && istype(T))
-			new /obj/structure/inflatable/wall(T)
-			stored_walls--
-
-	playsound(T, 'sound/items/zip.ogg', 75, 1)
-	to_chat(user, "You deploy the inflatable [mode ? "door" : "wall"]!")
-
-/obj/item/weapon/inflatable_dispenser/proc/pick_up(var/obj/A, var/mob/living/user)
-	if(istype(A, /obj/structure/inflatable))
-		if(istype(A, /obj/structure/inflatable/wall))
-			if(stored_walls >= max_walls)
-				to_chat(user, "\The [src] is full.")
-				return
-			stored_walls++
-			qdel(A)
+		var/placed
+		if (active_mode)
+			placed = new /obj/structure/inflatable/door(T)
+			--stored_doors
 		else
-			if(stored_doors >= max_doors)
-				to_chat(user, "\The [src] is full.")
-				return
-			stored_doors++
-			qdel(A)
-		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-		visible_message("\The [user] deflates \the [A] with \the [src]!")
-		return
-	if(istype(A, /obj/item/inflatable))
-		if(istype(A, /obj/item/inflatable/wall))
-			if(stored_walls >= max_walls)
-				to_chat(user, "\The [src] is full.")
-				return
-			stored_walls++
-			qdel(A)
-		else
-			if(stored_doors >= max_doors)
-				to_chat(usr, "\The [src] is full!")
-				return
-			stored_doors++
-			qdel(A)
-		visible_message("\The [user] picks up \the [A] with \the [src]!")
-		return
-
-	to_chat(user, "You fail to pick up \the [A] with \the [src]")
-	return
+			placed = new /obj/structure/inflatable/wall(T)
+			--stored_walls
+		user.visible_message(
+			SPAN_ITALIC("\The [user] inflates \an [placed]."),
+			SPAN_NOTICE("You inflate \an [placed]."),
+			range = 5
+		)
+		playsound(loc, 'sound/items/zip.ogg', 75, 1)
 
 /obj/item/weapon/reagent_containers/spray/cleaner/drone
 	name = "space cleaner"
