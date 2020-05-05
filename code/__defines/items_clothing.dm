@@ -47,6 +47,9 @@
 #define	NOREACT            0x40  // Reagents don't react inside this container.
 #define PROXMOVE           0x80  // Does this object require proximity checking in Enter()?
 
+#define OBJ_ANCHORABLE 0x100
+#define OBJ_CLIMBABLE 0x200
+
 //Flags for items (equipment)
 #define THICKMATERIAL          0x1  // Prevents syringes, parapens and hyposprays if equiped to slot_suit or slot_head.
 #define STOPPRESSUREDAMAGE     0x2  // Counts towards pressure protection. Note that like temperature protection, body_parts_covered is considered here as well.
