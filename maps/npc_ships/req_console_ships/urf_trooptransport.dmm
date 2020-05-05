@@ -32,7 +32,7 @@
 "aF" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "aG" = (/obj/machinery/computer/helm{tag = "icon-nav (WEST)"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; dir = 8; icon_keyboard = ""; icon_screen = "covie_console_overlay"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aH" = (/obj/structure/bed/chair/comfy/black{dir = 8},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
-"aI" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
+"aI" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aJ" = (/obj/structure/bed/chair{dir = 4},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aK" = (/obj/machinery/overmap_weapon_console/deck_gun_control/local{dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "engine"},/obj/structure/computerframe{anchored = 1; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aL" = (/obj/machinery/nav_computer/unsc,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)

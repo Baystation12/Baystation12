@@ -23,7 +23,7 @@
 "aw" = (/obj/machinery/door/airlock/halo/innie_ship_preset,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "ax" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "ay" = (/obj/machinery/overmap_weapon_console/npc_comms_console/unsc{dir = 8; germ_level = 110; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; tag = "icon-comm (NORTH)"},/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
-"az" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
+"az" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aA" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aB" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aC" = (/obj/structure/drop_pod_launchbay,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)

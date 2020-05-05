@@ -39,7 +39,7 @@
 "aM" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "aN" = (/obj/structure/closet/crate,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "aO" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
-"aP" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
+"aP" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aQ" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "aR" = (/obj/machinery/light,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aS" = (/obj/machinery/vending/props,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)

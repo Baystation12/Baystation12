@@ -28,7 +28,7 @@
 "aB" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{density = 0; department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "aC" = (/obj/structure/closet/crate,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/item/fusion_fuel,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "aD" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
-"aE" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
+"aE" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aF" = (/obj/structure/computerframe{anchored = 1; dir = 1; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/shuttle/darkred,/area/om_ships/req_console_ship)
 "aG" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)
 "aH" = (/obj/structure/closet/crate/trashcart,/obj/machinery/light,/turf/simulated/floor/shuttle/black,/area/om_ships/req_console_ship)

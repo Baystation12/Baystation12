@@ -16,7 +16,7 @@
 "ap" = (/obj/structure/window/reinforced/treated{tag = "icon-fwindow (SOUTHWEST)"; icon_state = "fwindow"; dir = 10},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/hum_ert)
 "aq" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/tiled,/area/om_ships/hum_ert)
 "ar" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/tiled,/area/om_ships/hum_ert)
-"as" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/tiled,/area/om_ships/hum_ert)
+"as" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/tiled,/area/om_ships/hum_ert)
 "at" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/tiled,/area/om_ships/hum_ert)
 "au" = (/obj/structure/sign/warning/fall,/turf/simulated/wall/r_wall,/area/om_ships/hum_ert)
 "av" = (/obj/structure/window/reinforced/projresist{dir = 1; icon_state = "rwindow"; tag = "icon-rwindow (WEST)"},/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled/dark,/area/om_ships/hum_ert)

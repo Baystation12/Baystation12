@@ -605,7 +605,7 @@
 "lG" = (/obj/machinery/power/apc{dir = 4; name = "APC"; pixel_x = 24; pixel_y = 0},/obj/structure/cable/blue{icon_state = "0-8"},/turf/simulated/floor/tiled,/area/destroyer/unsclightbrigade/canteen)
 "lH" = (/obj/machinery/pipedispenser,/turf/simulated/floor/tiled,/area/destroyer/unsclightbrigade/forehangar)
 "lI" = (/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/destroyer/unsclightbrigade/foreaiandnavcomstorage)
-"lJ" = (/obj/machinery/telecomms/allinone,/obj/machinery/light/colored/blue,/turf/simulated/floor/reinforced,/area/destroyer/unsclightbrigade/foreaiandnavcomstorage)
+"lJ" = (/obj/machinery/overmap_comms/receiver,/obj/machinery/light/colored/blue,/turf/simulated/floor/reinforced,/area/destroyer/unsclightbrigade/foreaiandnavcomstorage)
 "lK" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/reinforced,/area/destroyer/unsclightbrigade/foreaiandnavcomstorage)
 "lL" = (/obj/machinery/light/colored/blue,/turf/simulated/floor/reinforced,/area/destroyer/unsclightbrigade/foreaiandnavcomstorage)
 "lM" = (/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{icon_state = "intact-scrubbers"; dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/supply{icon_state = "intact-supply"; dir = 6},/obj/structure/cable/blue{icon_state = "1-2"},/turf/simulated/floor/reinforced,/area/destroyer/unsclightbrigade/foreaiandnavcomstorage)
