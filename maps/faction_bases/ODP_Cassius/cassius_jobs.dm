@@ -1,6 +1,8 @@
 /decl/hierarchy/outfit/job/cassius_job
 	name = "UNSC"
 	hierarchy_type = /decl/hierarchy/outfit/job/cassius_job
+	pda_slot = null
+	flags = 0
 
 /decl/hierarchy/outfit/job/cassius_job/marine
 	name = "UNSC Marine"
@@ -29,8 +31,6 @@
 	uniform = /obj/item/clothing/under/color/black
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	l_pocket = /obj/item/clothing/accessory/badge/onib
-	pda_slot = null
-	flags = 0
 	hierarchy_type = /decl/hierarchy/outfit/job
 
 /datum/job/cassius_job
