@@ -375,7 +375,7 @@ its easier to just keep the beam vertical.
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/atom/proc/visible_message(var/message, var/blind_message, var/range = world.view, var/checkghosts = null)
+/atom/proc/visible_message(message, blind_message, range = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -383,10 +383,16 @@ its easier to just keep the beam vertical.
 
 	for(var/o in objs)
 		var/obj/O = o
+		if (exclude_objs?.len && (O in exclude_objs))
+			exclude_objs -= O
+			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
 	for(var/m in mobs)
 		var/mob/M = m
+		if (exclude_mobs?.len && (M in exclude_mobs))
+			exclude_mobs -= M
+			continue
 		if(M.see_invisible >= invisibility)
 			M.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 		else if(blind_message)
@@ -397,7 +403,7 @@ its easier to just keep the beam vertical.
 // message is the message output to anyone who can hear.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/atom/proc/audible_message(var/message, var/deaf_message, var/hearing_distance = world.view, var/checkghosts = null)
+/atom/proc/audible_message(message, deaf_message, hearing_distance = world.view, checkghosts = null, list/exclude_objs = null, list/exclude_mobs = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -405,9 +411,16 @@ its easier to just keep the beam vertical.
 
 	for(var/m in mobs)
 		var/mob/M = m
+		if (exclude_mobs?.len && (M in exclude_mobs))
+			exclude_mobs -= M
+			continue
 		M.show_message(message,2,deaf_message,1)
+
 	for(var/o in objs)
 		var/obj/O = o
+		if (exclude_objs?.len && (O in exclude_objs))
+			exclude_objs -= O
+			continue
 		O.show_message(message,2,deaf_message,1)
 
 /atom/movable/proc/dropInto(var/atom/destination)
