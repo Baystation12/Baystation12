@@ -15,7 +15,7 @@
 "ao" = (/obj/structure/destructible/sandbag,/obj/structure/destructible/sandbag{dir = 4},/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
 "ap" = (/obj/structure/barricade,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
 "aq" = (/obj/structure/bed,/obj/item/weapon/storage/backpack,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
-"ar" = (/obj/effect/landmark/start,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
+"ar" = (/obj/effect/landmark/start/joinlate,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
 "as" = (/obj/machinery/floodlight,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
 "at" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/gun/projectile/m7_smg,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/obj/item/weapon/storage/box/m5,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
 "au" = (/obj/structure/table/rack,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/gun/projectile/ma5b_ar,/obj/item/weapon/storage/box/m762_ap,/obj/item/weapon/storage/box/m762_ap,/obj/item/weapon/storage/box/m762_ap,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
