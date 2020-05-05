@@ -4,7 +4,7 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 	name = "resupply marker"
 	icon = 'resupply.dmi'
 	icon_state = "resupply"
-	invisibility = 0
+	invisibility = 101
 
 /obj/effect/landmark/resupply/New()
 	. = ..()
@@ -14,13 +14,13 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 	name = "resupply skip marker"
 	icon = 'resupply.dmi'
 	icon_state = "resupply_skip"
-	invisibility = 0
+	invisibility = 101
 
 /obj/effect/landmark/resupply_openworld
 	name = "resupply open world marker"
 	icon = 'resupply.dmi'
 	icon_state = "resupply_open"
-	invisibility = 0
+	invisibility = 101
 
 /obj/effect/landmark/resupply_openworld/Initialize()
 	..()
