@@ -1,0 +1,5 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Inflatables & dispensers no longer inflate on the user tile if whacked against something worn."
+  - bugfix: "Inflatables & dispensers no longer inflate if dropped onto a structure."
