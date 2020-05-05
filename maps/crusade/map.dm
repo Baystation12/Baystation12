@@ -7,6 +7,7 @@
 	id_hud_icons = 'crusade_hud_icons.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/covenant.jpg'
 
+	allowed_gamemodes = list("crusade")
 	allowed_jobs = list(\
 		/datum/job/covenant/brute_captain,\
 		/datum/job/covenant/brute_major,\
@@ -23,6 +24,7 @@
 		/datum/job/covenant/skirmmajor,\
 		/datum/job/covenant/skirmmurmillo,\
 		/datum/job/covenant/skirmcommando,\
+		/datum/job/covenant/skirmchampion,\
 		/datum/job/covenant/unggoy_minor,\
 		/datum/job/covenant/unggoy_major,\
 		/datum/job/covenant/unggoy_ultra,\

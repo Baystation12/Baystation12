@@ -7,6 +7,7 @@
 	id_hud_icons = 'stranded_hud_icons.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title4.jpg'
 
+	allowed_gamemodes = list("stranded")
 	allowed_jobs = list(\
 		/datum/job/stranded/unsc_marine,\
 		/datum/job/stranded/unsc_tech,\
