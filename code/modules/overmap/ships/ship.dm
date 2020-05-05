@@ -1,5 +1,3 @@
-#define SHIP_DEFAULT_PIXEL_SPEED 3
-#define SHIP_DEFAULT_PIXEL_ACCEL 1
 
 /obj/effect/overmap/ship
 	name = "generic ship"
@@ -233,6 +231,11 @@
 
 /obj/effect/overmap/ship/do_superstructure_fail()
 	break_umbilicals(1)
+	. = ..()
+
+/obj/effect/overmap/ship/Crossed(var/obj/item/projectile/crosser)
+	if(istype(crosser))
+		crosser.Bump(src)
 	. = ..()
 
 /*

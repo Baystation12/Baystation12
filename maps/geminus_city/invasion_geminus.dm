@@ -2,7 +2,7 @@
 #include "../npc_ships/om_ship_areas.dm"
 #include "../area_holders/overmap_ship_area_holder.dmm"
 
-#include "../Exoplanet Research/includes.dm"
+#include "co_ord_console.dm"
 
 #include "../Admin Planet/includes.dm"
 

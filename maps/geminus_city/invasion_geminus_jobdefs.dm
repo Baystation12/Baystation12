@@ -1,10 +1,6 @@
 
 /datum/map/geminus_city
 	allowed_jobs = list(\
-		/datum/job/researchdirector,\
-		/datum/job/ONIGUARDS,\
-		/datum/job/researcher,\
-		/datum/job/ONIGUARD,\
 		/datum/job/insurrectionist_ai,\
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
@@ -60,9 +56,6 @@
 		"Listening Post Spawn",\
 		"Colony Arrival Shuttle",\
 		"UNSC Base Spawns",\
-		"Research Facility Spawn",\
-		"Research Facility Director Spawn",\
-		"Research Facility Security Spawn",\
 		"X52 Researcher",\
 		"X52 RD",\
 		)

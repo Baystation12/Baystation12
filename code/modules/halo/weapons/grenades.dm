@@ -8,7 +8,7 @@
 	can_adjust_timer = 0
 	det_time = 50
 	alt_explosion_range = 1 //Low alt-explosion range due to the shrapnel.
-	alt_explosion_damage_max = 70
+	alt_explosion_damage_max = 40
 
 /obj/item/weapon/grenade/frag/m9_hedp/on_explosion(var/turf/O)
 	if(explosion_size)

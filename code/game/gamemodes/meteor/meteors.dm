@@ -258,7 +258,7 @@
 /obj/effect/meteor/big
 	name = "large meteor"
 	icon_state = "large"
-	hits = 6
+	hits = 3
 	heavy = 1
 	dropamt = 3
 
@@ -270,7 +270,7 @@
 /obj/effect/meteor/flaming
 	name = "flaming meteor"
 	icon_state = "flaming"
-	hits = 5
+	hits = 2
 	heavy = 1
 	meteordrop = /obj/item/weapon/ore/phoron
 
@@ -324,7 +324,7 @@
 	name = "tunguska meteor"
 	icon_state = "flaming"
 	desc = "Your life briefly passes before your eyes the moment you lay them on this monstrosity."
-	hits = 10
+	hits = 5
 	hitpwr = 1
 	heavy = 1
 	meteordrop = /obj/item/weapon/ore/diamond	// Probably means why it penetrates the hull so easily before exploding.

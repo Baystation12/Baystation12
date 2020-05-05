@@ -63,3 +63,19 @@
 	name = "magazine (7.62mm) M392-M"
 	path = /obj/item/ammo_magazine/m762_ap/M392/innie
 	category = "Arms and Ammunition"
+
+//Cov//
+/datum/autolathe/recipe/blamite_needles
+	name = "Type-33 Cartridge"
+	path = /obj/item/ammo_magazine/needles
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/cov_carbine_mag
+	name = "Type-51 Magazine"
+	path = /obj/item/ammo_magazine/type51mag
+	category = "Arms and Ammunition"
+
+/datum/autolathe/recipe/needlerifle_mag
+	name = "Type-31 Magazine"
+	path = /obj/item/ammo_magazine/rifleneedlepack
+	category = "Arms and Ammunition"

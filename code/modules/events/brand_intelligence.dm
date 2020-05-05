@@ -8,12 +8,12 @@
 
 
 /datum/event/brand_intelligence/announce()
-	command_announcement.Announce("Rampant brand intelligence has been detected aboard the [station_name()]. The origin is believed to be \a \"[initial(originMachine.name)]\" type. Fix it, before it spreads to other vending machines.", "Machine Learning Alert")
+	command_announcement.Announce("Rampant brand intelligence has been detected somewhere in [system_name()]. The origin is believed to be \a \"[initial(originMachine.name)]\" type. Fix it, before it spreads to other vending machines.", "Machine Learning Alert")
 
 
 /datum/event/brand_intelligence/start()
 	for(var/obj/machinery/vending/V in GLOB.machines)
-		if(isNotStationLevel(V.z))	continue
+		//if(isNotStationLevel(V.z))	continue
 		vendingMachines.Add(V)
 
 	if(!vendingMachines.len)
@@ -46,6 +46,7 @@
 								 "Consume!", \
 								 "Your money can buy happiness!", \
 								 "Engage direct marketing!", \
+								 "I would have been your daddy, but the fridge repair guy beat me over the fence!", \
 								 "Advertising is legalized lying! But don't let that put you off our great deals!", \
 								 "You don't want to buy anything? Yeah, well I didn't want to buy your mom either."))
 

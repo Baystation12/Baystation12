@@ -1,9 +1,13 @@
+#define NPC_EVADE_DELAY 1 SECOND
+
 /mob/living/simple_animal/hostile
 	faction = "hostile"
 	var/stance = HOSTILE_STANCE_IDLE	//Used to determine behavior
 	var/mob/living/target_mob
 	var/attack_same = 0
 	var/ranged = 0
+	var/ranged_fire_delay = 6 //Whilst this doesn't matter normally as they fire on each process tick, this is used when *taking* damage to determine if we can return fire or not.
+	var/min_nextfire = 0
 	var/burst_size = 1
 	var/burst_delay = 0.5 SECONDS
 	var/projectiletype
@@ -47,6 +51,13 @@
 		if(!sorted)
 			our_overmind.other_troops += src
 
+/mob/living/simple_animal/hostile/proc/set_faction(var/datum/faction/F)
+	faction = F.name
+
+/mob/living/simple_animal/hostile/Initialize()
+	. = ..()
+	spawn_weapon()
+
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
@@ -65,7 +76,8 @@
 		return null
 	var/atom/T = null
 	//stop_automated_movement = 0
-	for(var/atom/A in ListTargets(7))
+	var/list/targlist = ListTargets(7)
+	for(var/atom/A in targlist)
 
 		if(A == src || A == src.loc)
 			continue
@@ -78,7 +90,6 @@
 			T = F
 			break
 	if(our_overmind && !isnull(T))
-		var/list/targlist = ListTargets(7)
 		our_overmind.create_report(1,src,null,targlist.len,assault_target,loc)
 	return T
 
@@ -121,13 +132,19 @@
 	stop_automated_movement = 1
 	if(!target_mob || SA_attackable(target_mob))
 		stance = HOSTILE_STANCE_IDLE
-	if(target_mob in ListTargets(7))
+	var/list/targlist = ListTargets(7)
+	if(target_mob in targlist)
 		if(ranged || istype(loc,/obj/vehicles))
-			if(target_mob in ListTargets(6))
-				walk(src, 0)
+			if(target_mob in targlist)
+				//walk(src, 0) //The players can shoot-move, so can we!
 				OpenFire(target_mob)
-			else
-				walk_to(src, target_mob, 1, move_to_delay)
+			if(get_dist(loc,target_mob) > world.view/2) //Don't let them flee!
+				var/do_chase = 1
+				if(istype(target_mob,/mob/living/carbon/human))
+					if(locate(/obj/item/weapon/gun/projectile/shotgun in target_mob)) //Okay wait they have a shotty.
+						do_chase = 0
+				if(do_chase)
+					walk_to(src, target_mob, 1, move_to_delay)
 		else
 			stance = HOSTILE_STANCE_ATTACKING
 			walk_to(src, target_mob, 1, move_to_delay)
@@ -166,8 +183,8 @@
 			var/mob/living/carbon/human/h = L
 			if(h.check_shields(damage_to_apply, src, src, attacktext))
 				return
-		L.apply_damage(damage_to_apply,damtype,null,L.run_armor_check(null,defense))
 		L.visible_message("<span class='danger'>[src] has attacked [L]!</span>")
+		L.apply_damage(damage_to_apply,damtype,null,L.run_armor_check(null,defense))
 		src.do_attack_animation(L)
 		spawn(1) L.updatehealth()
 		return L
@@ -195,6 +212,7 @@
 		return
 	var/target = attacked
 	visible_message("<span class='danger'>\The [src] fires at \the [target]!</span>")
+	src.dir = get_dir(src, attacked)
 	var/casingtype_use = casingtype
 	var/burstsize_use = burst_size
 	var/burstdelay_use = burst_delay
@@ -211,10 +229,24 @@
 				if(!isnull(casing.BB))
 					casing.expend()
 			sleep(burstdelay_use)
-	var/fire_delay_use = 6 //Same as base gun fire delay.
+	var/fire_delay_use = ranged_fire_delay
 	if(using_vehicle_gun && !v.guns_disabled)
 		fire_delay_use = using_vehicle_gun.fire_delay
 	setClickCooldown(fire_delay_use)
+
+/mob/living/simple_animal/hostile/proc/retaliate_ranged(var/mob/aggressor)
+	if(!client && stat != DEAD && ranged && world.time >= min_nextfire && istype(aggressor) && aggressor.faction != faction && aggressor in ListTargets())
+		OpenFire(aggressor)
+
+/mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
+	. = ..()
+	if(.)
+		retaliate_ranged(Proj.firer)
+
+/mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
+	. = ..()
+	if(.)
+		retaliate_ranged(user)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
@@ -275,6 +307,7 @@
 		see_in_dark = 5//setting this 2 points above human for now
 	else
 		see_in_dark = 3//NPCs will target people beside them
+
 	if(!.)
 		walk(src, 0)
 		return 0
@@ -326,14 +359,43 @@
 		stance = HOSTILE_STANCE_ATTACK
 		Life()
 
+/mob/living/simple_animal/hostile/proc/EvasiveMove(var/atom/movable/attacker,var/do_move = 0)
+	if(isnull(attacker) || stat == DEAD)
+		return 0
+	var/dir_attack = get_dir(loc,attacker.loc)
+	var/list/dirlist = list(NORTH,SOUTH,EAST,WEST) - dir_attack //If it's a diagonal attack vector, we won't try to move directly towards them anyway.
+	var/randDir = pick(dirlist)
+	rollDir(randDir)
+	if(do_move)
+		var/targ_loc = loc
+		for(var/i = 1 to rand(world.view/2,world.view))
+			var/turf/tmp_step = get_step(targ_loc,pick(dirlist))
+			if(tmp_step.density == 1)
+				break
+			targ_loc = tmp_step
+			walk_to(src, target_mob, 1, move_to_delay)
+
+	return 1
+
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
 	var/oldhealth = health
 	. = ..()
-	if(!target_mob && Proj.firer && Proj.firer.faction != faction && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = Proj.firer
-		MoveToTarget()
-		stance = HOSTILE_STANCE_ATTACK
-		Life()
+	if(!stat)
+		var/tick_life = 0
+		if(!target_mob && Proj.firer && Proj.firer.faction != faction && health < oldhealth)
+			target_mob = Proj.firer
+			stance = HOSTILE_STANCE_ATTACK
+			tick_life = 1
+		if(target_mob && target_mob.loc)
+			var/chasing = 0
+			if(get_dist(loc,target_mob) > world.view*0.75) //make chase
+				walk_to(src, target_mob, 1, move_to_delay)
+				chasing = 1
+			else
+				walk(src,0)
+			EvasiveMove(target_mob,!chasing)
+		if(tick_life)
+			Life()
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	if(hold_fire)
@@ -343,6 +405,7 @@
 	RangedAttack(target_mob)
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
+	min_nextfire = world.time + ranged_fire_delay
 
 /mob/living/simple_animal/hostile/proc/Shoot(var/target, var/start, var/user, var/bullet = 0)
 	var/obj/vehicles/v = loc

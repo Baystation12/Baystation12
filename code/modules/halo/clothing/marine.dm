@@ -165,7 +165,7 @@
 	item_state = "boots"
 	icon_state = "boots"
 	force = 5
-	armor = list(melee = 40, bullet = 40, laser = 5, energy = 20, bomb = 15, bio = 0, rad = 0)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 30, bomb = 15, bio = 0, rad = 0)
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
 	can_hold_knife = 1
@@ -204,7 +204,29 @@
 	item_state = "UNSC Marine Medical Belt"*/
 	storage_slots = 5
 
-	can_hold = list(/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m127_saphp,/obj/item/ammo_magazine/m127_saphe,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/erk,/obj/item/weapon/storage/firstaid/combat/unsc)
+	can_hold = list(\
+	/obj/item/ammo_magazine/m5,
+	/obj/item/ammo_magazine/m127_saphp,
+	/obj/item/ammo_magazine/m127_saphe,
+	/obj/item/weapon/storage/firstaid/unsc,
+	/obj/item/weapon/storage/firstaid/erk,
+	/obj/item/weapon/storage/firstaid/combat/unsc,
+	/obj/item/device/healthanalyzer,
+	/obj/item/weapon/reagent_containers/dropper,
+	/obj/item/weapon/reagent_containers/glass/beaker,
+	/obj/item/weapon/reagent_containers/glass/bottle,
+	/obj/item/weapon/reagent_containers/syringe,
+	/obj/item/weapon/flame/lighter/zippo,
+	/obj/item/weapon/storage/fancy/cigarettes,
+	/obj/item/weapon/storage/pill_bottle,
+	/obj/item/stack/medical,
+	/obj/item/device/flashlight/pen,
+	/obj/item/clothing/mask/surgical,
+	/obj/item/clothing/head/surgery,
+	/obj/item/clothing/gloves/latex,
+	/obj/item/weapon/reagent_containers/hypospray,
+	/obj/item/clothing/glasses/hud/health
+	)
 
 /obj/item/clothing/mask/marine
 	name = "Marine Mask"
@@ -367,7 +389,7 @@
 	item_state = "unsc gloves"
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	siemens_coefficient = 0
+	siemens_coefficient = 0.5
 	permeability_coefficient = 0.05
 	item_state_slots = list(slot_l_hand_str = "gloves", slot_r_hand_str = "gloves")
 	body_parts_covered = HANDS

@@ -7,9 +7,20 @@
 	var/list/defender_types = list()
 	var/list/spawn_turfs = list()
 
-/datum/npc_quest/proc/spawn_defender(var/defender_type = pickweight(defender_types), var/turf/spawn_turf)
+/datum/npc_quest/proc/spawn_defender(var/defender_type, var/turf/spawn_turf)
+	if(!defender_types.len)
+		var/error_msg = "QUEST ERROR: Attempted to spawn defenders for [faction.name] against [enemy_faction] on [map_path] but there are no valid types!"
+		message_admins(error_msg)
+		return
+	defender_type = pickweight(defender_types)
+
 	if(!spawn_turf)
+		if(!spawn_turfs.len)
+			var/error_msg = "QUEST ERROR: Attempted to spawn defenders for [faction.name] against [enemy_faction] on [map_path] but there are no valid spawnpoints!"
+			message_admins(error_msg)
+			return
 		spawn_turf = pick(spawn_turfs)
+
 	var/mob/living/M = new defender_type(spawn_turf)
 	M.name = "[enemy_faction] operative"
 	M.faction = enemy_faction

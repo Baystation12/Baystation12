@@ -109,15 +109,6 @@
 	brightness_range = 8
 	brightness_power = 10
 
-/obj/machinery/light/powered()
-	return 1
-
-/obj/machinery/light/invis/emp_act()
-	return
-
-/obj/machinery/light/invis/ex_act()
-	return
-
 /obj/structure/grille/smallfence/
 	icon = 'maps/geminus_city/citymap_icons/structures.dmi'
 	name = "small fence"

@@ -22,6 +22,4 @@
 
 	map_bounds = list(23,106,140,32) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
-/obj/effect/overmap/ship/unsc_odp_cassius/Initialize()
-	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(7,src)
+	occupy_range = 7

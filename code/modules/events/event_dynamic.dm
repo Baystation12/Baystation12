@@ -186,6 +186,10 @@ var/list/event_last_fired = list()
 	active_with_role["Janitor"] = 0
 	active_with_role["Gardener"] = 0
 
+	to_debug_listeners("number_active_with_role() has force returned early for optimisation. \
+		See code\\modules\\events\\event_dynamic.dm")
+	return
+
 	for(var/mob/M in GLOB.player_list)
 		if(!M.mind || !M.client || M.client.is_afk(10 MINUTES)) // longer than 10 minutes AFK counts them as inactive
 			continue

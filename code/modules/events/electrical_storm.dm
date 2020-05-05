@@ -8,11 +8,11 @@
 	..()
 	switch(severity)
 		if(EVENT_LEVEL_MUNDANE)
-			command_announcement.Announce("A minor electrical storm has been detected near the [system_name()]. Please watch out for possible electrical discharges.", "[system_name()] Sensor Array")
+			command_announcement.Announce("A minor electrical storm has been detected near the [system_name()]. Please watch out for possible electrical discharges.", "Minor Electrical Storm", new_sound = GLOB.using_map.electrical_storm_moderate_sound)
 		if(EVENT_LEVEL_MODERATE)
-			command_announcement.Announce("The [station_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "[system_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_moderate_sound)
+			command_announcement.Announce("The [system_name()] is about to pass through an electrical storm. Please secure sensitive electrical equipment until the storm passes.", "Electrical Storm", new_sound = GLOB.using_map.electrical_storm_moderate_sound)
 		if(EVENT_LEVEL_MAJOR)
-			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [system_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "[system_name()] Sensor Array", new_sound = GLOB.using_map.electrical_storm_major_sound)
+			command_announcement.Announce("Alert. A strong electrical storm has been detected in proximity of the [system_name()]. It is recommended to immediately secure sensitive electrical equipment until the storm passes.", "Strong Electrical Storm", new_sound = GLOB.using_map.electrical_storm_major_sound)
 
 /datum/event/electrical_storm/start()
 	..()
@@ -59,4 +59,4 @@
 
 /datum/event/electrical_storm/end()
 	..()
-	command_announcement.Announce("The [station_name()] has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert")
+	command_announcement.Announce("[system_name()] has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert")

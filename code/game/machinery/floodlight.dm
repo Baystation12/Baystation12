@@ -6,6 +6,7 @@
 	icon_state = "flood00"
 	density = 1
 	var/on = 0
+	var/cell_type = /obj/item/weapon/cell/crap
 	var/obj/item/weapon/cell/cell = null
 	var/use = 200 // 200W light
 	var/unlocked = 0
@@ -13,7 +14,7 @@
 	var/brightness_on = 8		//can't remember what the maxed out value is
 
 /obj/machinery/floodlight/New()
-	cell = new/obj/item/weapon/cell/crap(src)
+	cell = new cell_type(src)
 	..()
 
 	if(on)
@@ -132,3 +133,13 @@
 				cell = W
 				to_chat(user, "You insert the power cell.")
 	update_icon()
+
+/obj/machinery/floodlight/active
+	on = 1
+
+
+/obj/machinery/floodlight/active/standard_cell
+	cell_type = /obj/item/weapon/cell/standard
+
+/obj/machinery/floodlight/active/hi_cap
+	cell_type = /obj/item/weapon/cell/high

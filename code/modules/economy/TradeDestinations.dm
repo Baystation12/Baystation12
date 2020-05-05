@@ -15,7 +15,7 @@ var/list/weighted_mundaneevent_locations = list()
 
 /datum/trade_destination/proc/get_custom_eventstring(var/event_type)
 	return null
-
+/*
 //distance is measured in AU and co-relates to travel time
 /datum/trade_destination/centcomm
 	name = "CentComm"
@@ -108,3 +108,4 @@ var/list/weighted_mundaneevent_locations = list()
 	willing_to_sell = list()
 	viable_random_events = list(WILD_ANIMAL_ATTACK, CULT_CELL_REVEALED, FESTIVAL, MOURNING, ANIMAL_RIGHTS_RAID, ALIEN_RAIDERS)
 	viable_mundane_events = list(ELECTION, TOURISM, BIG_GAME_HUNTERS, RESIGNATION)
+*/

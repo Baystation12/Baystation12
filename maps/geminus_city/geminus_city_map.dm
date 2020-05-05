@@ -21,6 +21,7 @@
 	company_name  = "United Nations Space Command"
 	company_short = "UNSC"
 	overmap_size= 125
+	overmap_event_tokens = 50
 
 	use_overmap = 1
 

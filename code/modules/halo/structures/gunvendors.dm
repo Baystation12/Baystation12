@@ -345,4 +345,4 @@
 	products = list(/obj/item/bodybag/cryobag = 3,/obj/item/weapon/storage/firstaid/unsc = 10, /obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10, /obj/item/weapon/storage/firstaid/fire = 2
 		,/obj/item/weapon/storage/firstaid/o2 = 4,/obj/item/weapon/storage/firstaid/toxin = 4,/obj/item/weapon/storage/firstaid/erk = 4,/obj/item/weapon/storage/firstaid/combat/unsc = 7,/obj/item/weapon/storage/firstaid/adv = 7
 		,/obj/item/weapon/storage/pill_bottle/bicaridine = 6, /obj/item/weapon/storage/pill_bottle/dermaline = 6, /obj/item/weapon/storage/pill_bottle/tramadol = 6, /obj/item/weapon/storage/pill_bottle/hyronalin = 6
-		,/obj/item/weapon/storage/pill_bottle/iron = 6, /obj/item/weapon/storage/pill_bottle/dexalin_plus = 6, /obj/item/weapon/storage/pill_bottle/inaprovaline = 6)
+		,/obj/item/weapon/storage/pill_bottle/iron = 6, /obj/item/weapon/storage/pill_bottle/dexalin_plus = 6, /obj/item/weapon/storage/pill_bottle/inaprovaline = 6,/obj/item/weapon/reagent_containers/hypospray = 3)

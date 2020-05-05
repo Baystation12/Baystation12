@@ -15,11 +15,11 @@
 
 	parent_area_type = /area/planets/Geminus
 
-/obj/effect/overmap/sector/geminus_city/LateInitialize()
-	. = ..()
-	GLOB.overmap_tiles_uncontrolled -= range(28,src)
+	occupy_range = 28
 
-/obj/structure/co_ord_console/vt9_gc
-	icon = 'code/modules/halo/icons/machinery/computer.dmi'
-	icon_state = "comm"
-	known_locations = list(/obj/effect/overmap/sector/geminus_city = "Geminus City Colony")
+/obj/effect/overmap/sector/geminus_city/New()
+	. = ..()
+	loot_distributor.loot_list["artifactRandom"] = list(/obj/machinery/artifact/forerunner_artifact,null,null,null,null,null,null,null,null,null)
+
+/obj/effect/loot_marker/artifact_spawn
+	loot_type = "artifactRandom"

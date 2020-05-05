@@ -1,0 +1,95 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/simulated/wall/r_wall,/area/space)
+"ac" = (/turf/simulated/wall/r_wall,/area/civ_shuttle)
+"ad" = (/obj/docking_umbilical/north{name = "Port Cargo Umbilical"},/turf/simulated/floor/plating,/area/civ_shuttle)
+"ae" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/plating,/area/civ_shuttle)
+"af" = (/obj/machinery/door/airlock,/turf/simulated/floor/plating,/area/civ_shuttle)
+"ag" = (/turf/simulated/floor/plating,/area/civ_shuttle)
+"ah" = (/turf/simulated/wall,/area/civ_shuttle)
+"ai" = (/obj/structure/bed/chair/wood{tag = "icon-wooden_chair_preview (EAST)"; icon_state = "wooden_chair_preview"; dir = 4},/turf/simulated/floor/wood,/area/civ_shuttle)
+"aj" = (/turf/simulated/floor/wood,/area/civ_shuttle)
+"ak" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/wood,/area/civ_shuttle)
+"al" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/turf/simulated/floor/wood,/area/civ_shuttle)
+"am" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/civ_shuttle)
+"an" = (/obj/structure/table/standard,/turf/simulated/floor/wood,/area/civ_shuttle)
+"ao" = (/obj/machinery/door/unpowered/simple/wood,/turf/simulated/floor/wood,/area/civ_shuttle)
+"ap" = (/obj/structure/bedsheetbin,/obj/structure/table/standard,/turf/simulated/floor/wood,/area/civ_shuttle)
+"aq" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 1},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"ar" = (/obj/machinery/light/small,/turf/simulated/floor/plating,/area/civ_shuttle)
+"as" = (/obj/machinery/light/small,/obj/structure/table/standard,/turf/simulated/floor/wood,/area/civ_shuttle)
+"at" = (/obj/machinery/light/small,/turf/simulated/floor/wood,/area/civ_shuttle)
+"au" = (/obj/structure/bed,/turf/simulated/floor/wood,/area/civ_shuttle)
+"av" = (/obj/item/modular_computer/console,/turf/simulated/floor,/area/civ_shuttle)
+"aw" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/food/snacks/cracker,/obj/machinery/light{dir = 1},/obj/item/weapon/reagent_containers/food/snacks/cracker,/turf/simulated/floor,/area/civ_shuttle)
+"ax" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"ay" = (/turf/simulated/floor/tiled,/area/civ_shuttle)
+"az" = (/obj/machinery/portable_atmospherics/canister/empty/carbon_dioxide,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aA" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aB" = (/obj/machinery/computer/engines,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aC" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/turf/simulated/floor,/area/civ_shuttle)
+"aD" = (/obj/item/modular_computer/console,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aE" = (/obj/item/weapon/cigbutt/cigarbutt,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aF" = (/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/turf/simulated/floor/airless,/area/civ_shuttle)
+"aG" = (/obj/structure/window/reinforced/full,/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/structure/grille,/turf/simulated/floor,/area/civ_shuttle)
+"aH" = (/turf/simulated/floor,/area/civ_shuttle)
+"aI" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/machinery/fusion_thruster/fueled{tag = "icon-nozzle1 (WEST)"; icon_state = "nozzle1"; dir = 8},/turf/simulated/floor/airless,/area/civ_shuttle)
+"aJ" = (/obj/machinery/computer/helm,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aK" = (/obj/structure/bed/chair{dir = 8},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aL" = (/obj/machinery/door/airlock/multi_tile{icon_state = "closed"; dir = 8},/turf/simulated/floor,/area/civ_shuttle)
+"aM" = (/obj/structure/lattice,/turf/space,/area/space)
+"aN" = (/obj/machinery/door/airlock/multi_tile{icon_state = "closed"; dir = 8},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aO" = (/obj/machinery/portable_atmospherics/canister/air,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aP" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aQ" = (/obj/structure/table/steel,/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/civ_shuttle)
+"aR" = (/obj/structure/bed/chair,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aS" = (/obj/machinery/vending/wallmed1{pixel_x = 25},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aT" = (/obj/machinery/light/small,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aU" = (/obj/structure/table/steel,/obj/random/tool,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aV" = (/obj/structure/window/reinforced/full,/obj/structure/grille,/obj/structure/window/reinforced/projresist,/turf/simulated/floor/tiled,/area/civ_shuttle)
+"aW" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor/plating,/area/civ_shuttle)
+"aX" = (/obj/item/weapon/stool/bar/padded,/turf/simulated/floor/wood,/area/civ_shuttle)
+"aY" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/civ_shuttle)
+"aZ" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/wood,/area/civ_shuttle)
+"ba" = (/obj/machinery/smartfridge/drinks,/turf/simulated/floor/wood,/area/civ_shuttle)
+"bb" = (/obj/structure/bed/chair/wood,/turf/simulated/floor/wood,/area/civ_shuttle)
+"bc" = (/obj/structure/bed/chair/wood{icon_state = "wooden_chair_preview"; dir = 1},/turf/simulated/floor/wood,/area/civ_shuttle)
+"bd" = (/obj/machinery/chemical_dispenser/bar_alc,/turf/simulated/floor/wood,/area/civ_shuttle)
+"be" = (/obj/machinery/light/small{dir = 4; pixel_y = 8},/obj/machinery/chemical_dispenser/bar_soft,/turf/simulated/floor/wood,/area/civ_shuttle)
+"bg" = (/obj/docking_umbilical/south{name = "Starboard Cargo Umbilical"},/turf/simulated/floor/plating,/area/civ_shuttle)
+"bh" = (/obj/structure/lattice,/turf/simulated/wall/r_wall,/area/civ_shuttle)
+"bi" = (/obj/structure/table/steel,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled,/area/civ_shuttle)
+"bj" = (/obj/machinery/light/small{dir = 1},/turf/simulated/floor,/area/civ_shuttle)
+"bk" = (/obj/machinery/light/small,/turf/simulated/floor,/area/civ_shuttle)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMacacacaMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMacadacaMaMaMaMaMaMaMaMaMaMaMaMaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMacaeacaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaMacacacacafacacacacacacacacacacacacacacacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaMaaaaacagagagagagahaiajajajakajajakajajajalacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaMaaaaacagagagagagahamajanahaoahahaoahahaoahacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaMaMababaMaMaMaMaMaMaMaMaMacagagagagagahajajapahajajahajajahajajacaaaaaaaaaaaa
+aaaaaaaaaaaaaMaMacaqacacaaaaaMaaaaaaaaaaaaaMaaaaacagagaragagahajajasahatauahatauahatauacaaaaaaaaaaaa
+aaaaaaaaaaaaaMacacavavacaaaaaMaaaaaaaaaaaaaMaaaaacahahahafahahafahahahahahahahahahahahacaaaaaaaaaaaa
+aaaaaaaaaaaaacacawaxayacaaaaaMaaaaaaaaaaaaaMaaaaacazazaAayayayayaAayayaAayazazahaBayayacaaaaaaaaaaaa
+aaaaaaaaaaaaaCaDaEayayacacacacacacacacacacacacacacazazayayayayayayayayayayazazahaPayayaFaaaaaaaaaaaa
+aaaaaaaaaaaaaGaDayayayaHaHaHaHaHaHaHaHaHaHbjaHaHaHayayayayayayayayayayayayayayayayayayaIaaaaaaaaaaaa
+aaaaaaaaaaaaaCaJaKayayaLaHaHbkaHaHaHaHaHaHaHaHaHaLayayayayayayayayayayayayayayaNayayayaIaaaaaaaaaaaa
+aaaaaaaaaaaaaCaDayayayacacacacacacacacacacacacacacaOaOayayayayayayayayayayaOaOahbiayayaIaaaaaaaaaaaa
+aaaaaaaaaaaaacacaQaRaSacaaaaaMaaaaaaaaaaaaaMaaaaacaOaOaTayayayayaTayayaTayaOaOahaUayayacaaaaaaaaaaaa
+aaaaaaaaaaaaaMacacaDaDacaaaaaMaaaaaaaaaaaaaMaaaaacahahahafahahafahahahahahahahahahahahacaaaaaaaaaaaa
+aaaaaaaaaaaaaMaMacaVacacaaaaaMaaaaaaaaaaaaaMaaaaacagagaWagagahajakajajakajajajaXaYajaZacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaMaMababaMaMaMaMaMaMaMaMaMacagagagagagahajajajajajaiaYajaXaYajbaacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaMaaaaacagagagagagahajajbbbbajajbcajaXaYajbdacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaMaaaaacagagagagagahaiaYaYaYajajatajajajajbeacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababaMacacacacafacacacacacacacacacacacacacacacaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMaMacaeacaaaaaaaaaaaaaaaaaaaaababaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMaMacbgacaMaMaMaMaMaMaMaMaMaMaMaMaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaMbhbhbhaMaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}

@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(all_radios)
+
 /obj/item/device/radio
 	icon = 'icons/obj/radio.dmi'
 	name = "shortwave radio"
@@ -101,6 +103,8 @@
 /obj/item/device/radio/Destroy()
 	QDEL_NULL(wires)
 	GLOB.listening_objects -= src
+	GLOB.all_radios -= src
+	GLOB.emp_candidates -= src
 	if(radio_controller)
 		radio_controller.remove_object(src, frequency)
 
@@ -116,6 +120,8 @@
 	. = ..()
 	wires = new(src)
 	GLOB.listening_objects += src
+	GLOB.all_radios.Add(src)
+	GLOB.emp_candidates.Add(src)
 
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
 		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
@@ -469,6 +475,14 @@
 		add_fingerprint(user)
 
 /obj/item/device/radio/emp_act(severity)
+
+	var/image/I = image('icons/effects/effects.dmi', src, "empdisable")
+	overlays += I
+	show_image(src.loc, I)
+	spawn(10)
+		overlays -= I
+		qdel(I)
+
 	broadcasting = 0
 	listening = 0
 	for(var/obj/item/device/channel_dongle/dongle in dongles_connections)

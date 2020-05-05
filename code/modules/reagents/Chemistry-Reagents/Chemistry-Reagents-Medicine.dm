@@ -136,7 +136,7 @@
 
 /datum/reagent/tricordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(3 * removed, 3 * removed)
+		M.heal_organ_damage(1 * removed, 1 * removed)
 
 /datum/reagent/cryoxadone
 	name = "Cryoxadone"
@@ -188,7 +188,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/paracetamol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 25)
+	M.add_chemical_effect(CE_PAINKILLER, 30)
 
 /datum/reagent/paracetamol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -206,7 +206,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/tramadol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 80)
+	M.add_chemical_effect(CE_PAINKILLER, 100)
 
 /datum/reagent/tramadol/overdose(var/mob/living/carbon/M, var/alien)
 	..()
@@ -223,7 +223,7 @@
 	flags = IGNORE_MOB_SIZE
 
 /datum/reagent/oxycodone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.add_chemical_effect(CE_PAINKILLER, 200)
+	M.add_chemical_effect(CE_PAINKILLER, 225)
 
 /datum/reagent/oxycodone/overdose(var/mob/living/carbon/M, var/alien)
 	..()

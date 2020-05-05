@@ -31,6 +31,7 @@
 	var/destroyed_reason = null
 	var/list/ship_types = list()
 	var/list/npc_ships = list()
+	var/list/player_ships = list()
 	var/list/faction_reputation = list()
 	var/leader_name
 	var/datum/computer_file/data/com/faction_contact_data
@@ -60,6 +61,8 @@
 	//generate some stuff for radio contacts
 	faction_contact_data = new()
 	faction_contact_data.generate_data(src)
+
+	setup_announcement()
 
 	//leader name
 	if(prob(50))

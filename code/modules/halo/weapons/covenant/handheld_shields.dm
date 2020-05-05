@@ -200,3 +200,5 @@
 	name = "Kig-Yar Point Defense Gauntlet"
 	desc = "A wrist-worn gauntlet that contains a directional shield generator, allowing it to provide protection from gunfire in the direction the user is facing."
 	species_restricted = list("Kig-Yar")
+	body_parts_covered = HANDS
+	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)

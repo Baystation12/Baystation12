@@ -1,9 +1,11 @@
 #define DEFAULT_SEED "glowshroom"
 #define VINE_GROWTH_STAGES 5
 
-/proc/spacevine_infestation(var/potency_min=70, var/potency_max=100, var/maturation_min=5, var/maturation_max=15)
+/proc/spacevine_infestation(var/turf/spawn_loc, var/potency_min=70, var/potency_max=100, var/maturation_min=5, var/maturation_max=15,var/spreading=2)
 	spawn() //to stop the secrets panel hanging
-		var/turf/T = pick_subarea_turf(/area/hallway , list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
+		if(!spawn_loc)
+			spawn_loc = pick_subarea_turf(/area/hallway , list(/proc/is_station_turf, /proc/not_turf_contains_dense_objects))
+		var/turf/T = spawn_loc
 		if(T)
 			var/datum/seed/seed = plant_controller.create_random_seed(1)
 			seed.set_trait(TRAIT_SPREAD,2)             // So it will function properly as vines.
@@ -12,11 +14,11 @@
 			seed.display_name = "strange plants" //more thematic for the vine infestation event
 
 			//make vine zero start off fully matured
-			new /obj/effect/plant(T,seed, start_matured = 1)
+			plant_controller.add_plant(new /obj/effect/plant(T, seed, start_matured = 1))
 
 			log_and_message_admins("Spacevines spawned in \the [get_area(T)]", location = T)
 			return
-		log_and_message_admins("<span class='notice'>Event: Spacevines failed to find a viable turf.</span>")
+		log_and_message_admins("<span class='notice'>ERROR: Spacevines failed to find a viable turf.</span>")
 
 /obj/effect/dead_plant
 	anchored = 1
@@ -66,8 +68,6 @@
 	spread_chance = 0
 
 /obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent, var/start_matured = 0)
-	..()
-	
 	if(!newparent)
 		parent = src
 	else
@@ -76,6 +76,8 @@
 	if(start_matured)
 		mature_time = 0
 		health = max_health
+
+	..()
 
 /obj/effect/plant/Initialize()
 	. = ..()
@@ -114,7 +116,7 @@
 	spread_chance = seed.get_trait(TRAIT_POTENCY)
 	spread_distance = ((growth_type>0) ? round(spread_chance*0.6) : round(spread_chance*0.3))
 	update_icon()
-	
+
 /obj/effect/plant/Destroy()
 	if(plant_controller)
 		plant_controller.remove_plant(src)
@@ -125,6 +127,8 @@
 // Plants will sometimes be spawned in the turf adjacent to the one they need to end up in, for the sake of correct dir/etc being set.
 /obj/effect/plant/proc/finish_spreading()
 	set_dir(calc_dir())
+	src.pixel_x += 8 - rand(0,16)	//random offset
+	src.pixel_y += 8 - rand(0,16)
 	update_icon()
 	plant_controller.add_plant(src)
 	// Some plants eat through plating.

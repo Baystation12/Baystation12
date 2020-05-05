@@ -334,7 +334,7 @@
 /obj/item/clothing/head/helmet/kigyar/skirmisher/donator/vampire
 	name = "Pirate's Hat"
 	desc = "A worn, probably stolen, pirate hat. Looks like it belongs in a theater."
-	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
+	icon = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi'
 	icon_state = "piratehat_obj"
 	item_state = "piratehat"
 	species_restricted = list("Tvaoan Kig-Yar")
@@ -342,10 +342,10 @@
 /obj/item/clothing/suit/armor/special/skirmisher/donator/vampire
 	name = "Worn Coat"
 	desc = "A coat that is rumored to be owned by a legendary pirate, though some say it was stolen from a cargo vessel by a humanoid bird."
-	icon = 'code/modules/halo/icons/species/skirm_clothing.dmi'
+	icon = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi'
 	icon_state = "piratecoat_obj"
 	item_state = "piratecoat"
-	sprite_sheets = list("Tvaoan Kig-Yar" = 'code/modules/halo/icons/species/skirm_clothing.dmi')
+	sprite_sheets = list("Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi')
 	species_restricted = list("Tvaoan Kig-Yar")
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL
@@ -353,7 +353,7 @@
 /obj/item/toy/plushie/donator/vampire
 	name = "Rafaj"
 	desc = "A pirate's best friend, and most prized possession. It looks like it's been through many adventures. Squeeze to activate an internal speaker."
-	icon = 'code/modules/halo/icons/species/Skirmisher_inhand.dmi'
+	icon = 'code/modules/halo/covenant/species/tvoan/Skirmisher_inhand.dmi'
 	icon_state = "parrot_obj"
 	item_state = "parrot"
 	slot_flags = SLOT_POCKET | SLOT_BELT | SLOT_BACK | SLOT_EARS

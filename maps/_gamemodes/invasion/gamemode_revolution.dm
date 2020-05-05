@@ -7,12 +7,8 @@
 	required_players = 0
 	end_conditions_required = 1
 	factions = list(/datum/faction/unsc, /datum/faction/insurrection,/datum/faction/human_civ)
-	overmap_hide = list(/obj/effect/overmap/sector/exo_research, /obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/covenant_light_cruiser)
+	overmap_hide = list(/obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/covenant_light_cruiser)
 	disabled_jobs_types = list(\
-		/datum/job/researchdirector,\
-		/datum/job/researcher,\
-		/datum/job/ONIGUARD,\
-		/datum/job/ONIGUARDS,\
 		/datum/job/covenant/huragok,\
 		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
