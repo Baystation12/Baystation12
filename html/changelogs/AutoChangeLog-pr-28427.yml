@@ -1,0 +1,4 @@
+author: "cdbrunow"
+delete-after: True
+changes: 
+  - bugfix: "The forensics DNA scanner is no longer invisible while closed."
