@@ -7,4 +7,5 @@
 	id_hud_icons = 'firefight_hud_icons.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/title3.jpg'
 
-	allowed_jobs = list(/datum/job/firefight_unsc_marine)
+	allowed_jobs = list(/datum/job/firefight_unsc_marine,
+		/datum/job/firefight_colonist)
