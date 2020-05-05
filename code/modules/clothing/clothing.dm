@@ -149,14 +149,35 @@
 
 /obj/item/clothing/get_examine_line()
 	. = ..()
-	var/list/ties = list()
-	for(var/obj/item/clothing/accessory/accessory in accessories)
-		if(accessory.high_visibility)
-			ties += "\a [accessory.get_examine_line()]"
-	if(ties.len)
-		.+= " with [english_list(ties)] attached"
-	if(accessories.len > ties.len)
-		.+= ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
+	var/list/visible = get_visible_accessories()
+	if (length(visible))
+		var/list/display = list()
+		for (var/obj/item/clothing/accessory/A in visible)
+			if (A.high_visibility)
+				display += "\icon[A] \a [A]"
+		if (length(display))
+			. += " with [english_list(display)] attached"
+		if (length(visible) > length(display))
+			. += ". <a href='?src=\ref[src];list_ungabunga=1'>\[See accessories\]</a>"
+
+/obj/item/clothing/proc/get_visible_accessories()
+	var/list/result = list()
+	if (length(accessories))
+		var/covered = 0
+		if (ishuman(loc))
+			var/mob/living/carbon/human/H = loc
+			if (src == H.w_uniform)
+				if (H.wear_suit)
+					covered |= H.wear_suit.body_parts_covered
+		for (var/obj/item/clothing/accessory/A in accessories)
+			if (!(covered & A.body_location))
+				result += A
+	return result
+
+/obj/item/clothing/proc/get_bulky_coverage()
+	. = HAS_FLAGS(flags_inv, CLOTHING_BULKY) ? body_parts_covered : 0
+	for (var/obj/item/clothing/accessory/A in accessories)
+		. |= HAS_FLAGS(A.flags_inv, CLOTHING_BULKY) ? A.body_parts_covered : 0
 
 /obj/item/clothing/examine(mob/user)
 	. = ..()
@@ -170,11 +191,12 @@
 
 /obj/item/clothing/OnTopic(var/user, var/list/href_list, var/datum/topic_state/state)
 	if(href_list["list_ungabunga"])
-		if(accessories.len)
-			var/list/ties = list()
-			for(var/accessory in accessories)
-				ties += "[icon2html(accessory, user)] \a [accessory]"
-			to_chat(user, "Attached to \the [src] are [english_list(ties)].")
+		var/list/visible = get_visible_accessories()
+		if (length(visible))
+			var/list/display = list()
+			for (var/obj/item/clothing/accessory/A in visible)
+				display += "[icon2html(A, user)] \a [A]"
+			to_chat(user, "Attached to \the [src] are [english_list(display)].")
 		return TOPIC_HANDLED
 	if(href_list["list_armor_damage"])
 		var/datum/extension/armor/ablative/armor_datum = get_extension(src, /datum/extension/armor/ablative)

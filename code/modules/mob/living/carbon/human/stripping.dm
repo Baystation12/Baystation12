@@ -104,7 +104,7 @@
 			admin_attack_log(user, src, "Attempted to strip \a [target_slot]", "Target of a failed strip of \a [target_slot].", "attempted to strip \a [target_slot] from")
 	else if(user.unEquip(held))
 		var/obj/item/clothing/C = get_equipped_item(text2num(slot_to_strip_text))
-		if(istype(C) && C.can_attach_accessory(held))
+		if(istype(C) && C.can_attach_accessory(held, user))
 			C.attach_accessory(user, held)
 		else if(!equip_to_slot_if_possible(held, text2num(slot_to_strip_text), del_on_fail=0, disable_warning=1, redraw_mob=1))
 			user.put_in_active_hand(held)

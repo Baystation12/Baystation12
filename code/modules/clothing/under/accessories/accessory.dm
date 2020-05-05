@@ -7,6 +7,7 @@
 	slot_flags = SLOT_TIE
 	w_class = ITEM_SIZE_SMALL
 	var/slot = ACCESSORY_SLOT_DECOR
+	var/body_location = UPPER_TORSO //most accessories are here
 	var/obj/item/clothing/has_suit = null		//the suit the tie may be attached to
 	var/image/inv_overlay = null	//overlay used when attached to clothing.
 	var/list/mob_overlay = list()
@@ -114,6 +115,7 @@
 	name = "kneepads"
 	desc = "A pair of synthetic kneepads. Doesn't provide protection from more than arthritis."
 	icon_state = "kneepads"
+	body_location = LEGS
 
 //Scarves
 /obj/item/clothing/accessory/scarf
@@ -126,3 +128,4 @@
 	name = "bracelet"
 	desc = "A simple bracelet with a clasp."
 	icon_state = "bracelet"
+	body_location = HANDS
