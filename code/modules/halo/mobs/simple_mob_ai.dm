@@ -65,6 +65,7 @@ also using astar would have a performance impact due to eg hordes
 /mob/living/simple_animal/hostile/proc/set_assault_target(var/obj/effect/landmark/assault_target/new_assault_target)
 	last_assault_target = assault_target
 	assault_target = new_assault_target
+	walk(src, 0)
 
 /mob/living/simple_animal/hostile
 	var/path_recheck_time
@@ -77,7 +78,7 @@ also using astar would have a performance impact due to eg hordes
 	if(src.loc == previous_turf)
 		timeout_check++
 		if(timeout_check > 2)
-			stop_pathing(1 MINUTE)
+			stop_pathing()
 
 	//do we have a valid assault target?
 	var/turf/assault_turf
@@ -184,3 +185,12 @@ also using astar would have a performance impact due to eg hordes
 				set_leader(null)
 			walk(src,0)
 		return 0
+
+/mob/living/simple_animal/can_swap_with(var/mob/living/tmob)
+	//just in case
+	. = ..()
+
+	//allow swapping between friendly faction members heading in different directions
+	//this should prevent them getting "stuck" on each other when pathing together as a group
+	if(tmob.faction == src.faction && src.dir != tmob.dir)
+		return 1
