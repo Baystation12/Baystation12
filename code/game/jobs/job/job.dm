@@ -46,6 +46,8 @@
 	var/list/whitelisted_species = list()		//job can only be filled by these species
 	var/open_slot_on_death = 0
 
+	var/fallback_spawnpoint //If set, this will, on failure to find any spawnpoints, permemnantly switch the spawn_override to this.
+
 	var/poplock_divisor = 1
 	var/poplock_max = 1
 

@@ -73,3 +73,8 @@
 /datum/access/unsc_ids
 	id = access_unsc_ids
 	desc = "ID Machine" //ID Computer -> ID Machine so Travis doesn't flag duplicate description
+
+/var/const/access_unsc_odst = 311
+/datum/access/unsc_odst
+	id = access_unsc_odst
+	desc = "ODST Access"
