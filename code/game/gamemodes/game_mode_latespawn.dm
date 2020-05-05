@@ -22,11 +22,15 @@
 
 //This can be overriden in case a game mode needs to do stuff when a player latejoins but just remember to do . = ..()
 /datum/game_mode/proc/handle_latejoin(var/mob/living/carbon/human/character)
+	//job equip code already handles faction assigning
+	//see code\game\jobs\job\job.dm
+	/*
 	var/datum/faction/F = GLOB.factions_by_name[character.faction]
 	if(F)
 		F.assigned_minds.Add(character.mind)
 		F.living_minds.Add(character.mind)
 		return 1
+		*/
 
 /datum/game_mode/proc/process_autoantag()
 	message_admins("[uppertext(name)]: Attempting autospawn.")
