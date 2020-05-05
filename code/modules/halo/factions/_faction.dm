@@ -96,6 +96,17 @@
 	return 0
 
 /datum/faction/proc/players_alive()
+	//loop over and check if our playerlist is up to date
+	for(var/index=1, index <= living_minds.len, index++)
+		var/datum/mind/M = living_minds[index]
+
+		if(!M || !M.current || !isliving(M.current) || M.current.stat == DEAD)
+			//remove this entry
+			living_minds.Cut(index, index + 1)
+
+			//the order has shifted so make sure we test every entry
+			index -= 1
+
 	return living_minds.len
 
 /datum/faction/proc/get_flagship()
