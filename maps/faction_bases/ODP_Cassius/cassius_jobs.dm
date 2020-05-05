@@ -24,6 +24,20 @@
 
 	belt = /obj/item/weapon/storage/belt/marine_ammo
 
+/decl/hierarchy/outfit/job/cassius_job/odst
+	name = "ODST Rifleman"
+	l_ear = /obj/item/device/radio/headset/unsc/odst
+	uniform = /obj/item/clothing/under/unsc/odst_jumpsuit
+	gloves = /obj/item/clothing/gloves/tactical
+	shoes = /obj/item/clothing/shoes/jungleboots
+	gloves = /obj/item/clothing/gloves/thick/combat
+	id_type = /obj/item/weapon/card/id/odst
+	starting_accessories = list (/obj/item/clothing/accessory/rank/marine/enlisted/e4, /obj/item/clothing/accessory/badge/tags)
+
+	flags = 0
+
+	hierarchy_type = /decl/hierarchy/outfit/job
+
 /decl/hierarchy/outfit/job/cassius_job/oni_researcher
 	name = "ONI Researcher"
 
@@ -66,18 +80,21 @@
 	total_positions = 2
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/job/cassius_job/marine
+	access = list(access_unsc,access_unsc_armoury,access_unsc_specialist)
 
 /datum/job/cassius_job/unsc_co
 	title = "UNSC Commanding Officer"
 	total_positions = 1
 	spawn_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/cassius_job/marine
+	outfit_type = /decl/hierarchy/outfit/job/cassius_job/marine/co
+	access = list(access_unsc,access_unsc_armoury,access_unsc_specialist,access_unsc_odst,access_unsc_oni)
 
 /datum/job/cassius_job/odst
 	title = "UNSC ODST"
 	total_positions = 8
 	spawn_positions = 8
 	access = list(access_unsc,access_unsc_armoury,access_unsc_odst,access_unsc_specialist)
+	outfit_type = /decl/hierarchy/outfit/job/cassius_job/odst
 
 /datum/job/cassius_job/oni_researcher
 	title = "ONI Researcher"
