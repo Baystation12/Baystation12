@@ -8,26 +8,9 @@
 	flags = ON_BORDER
 	cover_rating = 50
 	deconstruct_tools = list(/obj/item/weapon/shovel, /obj/item/weapon/pickaxe)
-	loot_type = /obj/item/empty_sandbags
-
-/obj/structure/destructible/sandbag/verb/climb()
-	set name = "Climb over sandbag"
-	set category = "Object"
-	set src = view(1)
-
-	climb(usr)
-
-/obj/structure/destructible/sandbag/place_scraps()
-	var/list/scraplist = list()
-	if(prob(50))
-		scraplist.Add(/obj/item/stack/material/cloth)
-	if(prob(50))
-		scraplist.Add(/obj/item/weapon/ore/glass)
-
-	for(var/scraptype in scraplist)
-		new scraptype(src.loc)
-
-	new /obj/structure/sandbag_dead(src.loc)
+	loot_types = list(/obj/item/empty_sandbags)
+	scrap_types = list(/obj/item/stack/material/cloth, /obj/item/weapon/ore/glass)
+	dead_type = /obj/structure/sandbag_dead
 
 /obj/structure/sandbag_dead
 	name = "sandbag"

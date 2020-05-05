@@ -4,13 +4,16 @@
 	icon = 'code/modules/halo/structures/structures.dmi'
 	anchored = 1
 	density = 1
-	var/health = 500
-	var/maxHealth = 500
+	var/health = 200
+	var/maxHealth = 200
 	var/list/maneuvring_mobs = list()
 	var/repair_material
 	var/cover_rating = 10
 	var/deconstruct_tools = list(/obj/item/weapon/weldingtool)
-	var/loot_type
+	var/list/loot_types = list(/obj/item/stack/material/steel)
+	var/list/scrap_types = list()
+	var/dead_type
+	var/climbable = 1
 
 /obj/structure/destructible/New()
 	. = ..()
@@ -19,9 +22,12 @@
 
 	if(flags & ON_BORDER)
 		throwpass = 1
-		if(dir == 2)
-			//might regret this but it looks cool
-			layer = 5
+		if(dir == SOUTH)
+			plane = ABOVE_HUMAN_PLANE
+			layer = ABOVE_HUMAN_LAYER
+
+	if(climbable)
+		verbs += /obj/structure/destructible/proc/verb_climb
 
 /obj/structure/destructible/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/stack))
@@ -78,19 +84,20 @@
 	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
 
 /obj/structure/destructible/proc/dismantle()
-	if(loot_type)
-		new loot_type(src.loc)
+	for(var/spawn_type in loot_types)
+		new spawn_type(src.loc)
 	for(var/obj/I in parts)
 		I.loc = src
 	qdel(src)
 	return
 
-/obj/structure/destructible/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)//So bullets will fly over and stuff.
+/obj/structure/destructible/CanPass(atom/movable/mover, turf/start, height=0, air_group=0)//So bullets will fly over and stuff.
 
-	//default return value in case of runtimes
+	//this proc is called when something is trying to enter our turf
+	//set a return value now in case of runtimes (this is the default result for full tile things)
 	. = !density
 
-	//air and tiny little things
+	//air and virtual entities
 	if(air_group || height==0)
 		return 1
 
@@ -99,66 +106,128 @@
 		return 1
 
 	//we're not blocking anything so skip the processing later
-	//all the later processing assumes density = 1
 	if(!density)
 		return 1
 
-	//we are a structure on the edge of the tile
+	//by default, assume we will bump
+	var/is_bumping = 1
+
+	//are we only blocking the edge of the tile?
 	if(src.flags & ON_BORDER)
-		if(mover.checkpass(PASSTABLE) || mover.throwing)
-			//PASSTABLE is for low flying things like projectiles, bullets, meteors etc which move over low structures
+		//check if we are trying to cross that edge
+		is_bumping = edge_bump_check(mover, get_turf(src))
 
-			//check if we're coming from behind the structure
-			var/list/block_dirs = list(src.dir)
-			block_dirs.Add(turn(src.dir, 45))
-			block_dirs.Add(turn(src.dir, -45))
+	if(is_bumping)
 
-			var/incoming_dir = get_dir(src, mover)
+		//bullets have special handling
+		if(istype(mover, /obj/item/projectile))
+			if(projectile_block_check(mover))
+				return 0
+			return 1
 
-			if(incoming_dir in block_dirs)
-				//provide physical cover based on how effective we are
-				return !prob(cover_rating)
-			else
-				return 1
+		//let thrown objects enter our turf if we arent entirely blocked off
+		//eg grenades, supplies
+		if(mover.throwing)
+			return climbable
 
-		else if(get_dir(src, mover) == src.dir)
-			//mobs, vehicles etc
-			return 0
+		//we are something small enough to slip around obstacles, but not a bullet
+		if(mover.checkpass(PASSTABLE))
+			return 1
 
-	//we are a full tile structure
-	if(mover.checkpass(PASSTABLE) || mover.throwing)
-		return !prob(cover_rating)
+		return 0
+
+	else
+		//something is trying to enter the turf via a different edge to us
+		return 1
 
 /obj/structure/destructible/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-	//by default, always able to leave despite density
+
+	//something is trying to leave our turf
+	//by default, always allow it to leave regardless of density
 	. = 1
 
-	//directional blocking can sometimes prevent leaving this tile
+	//flying
+	if(mover.elevation != elevation)
+		return 1
+
+	//we're not blocking anything so skip the processing later
+	if(!density)
+		return 1
+
+	var/is_bumping = 0
+
+	//are we only blocking the edge of the tile?
 	if(src.flags & ON_BORDER)
+		//check if we are trying to cross that edge
+		is_bumping = edge_bump_check(mover, target)
 
-		//check if we're coming from behind the structure
-		var/list/block_dirs = list(src.dir)
-		block_dirs.Add(turn(src.dir, 45))
-		block_dirs.Add(turn(src.dir, -45))
+	if(is_bumping)
 
-		var/exit_dir = get_dir(src, target)
+		//bullets have special handling
+		if(istype(mover, /obj/item/projectile))
+			if(projectile_block_check(mover))
+				return 0
+			return 1
 
-		//there is a chance we could block exit here
-		if(exit_dir in block_dirs)
-			if(mover.throwing)
-				//thrown things can always leave
-				return 1
+		//let thrown objects exit our turf if we arent entirely blocked off
+		//eg grenades, supplies
+		if(mover.throwing)
+			return climbable
 
-			if(mover.checkpass(PASSTABLE))
-				//fired projectiles from the barricade can always leave
-				var/obj/item/projectile/P = mover
-				if(istype(P) && mover.checkpass(PASSTABLE))
-					//but only if they were fired from this turf
-					if(P.starting == src.loc)
-						return 1
-					else
-						//standard % block chance
-						return !prob(cover_rating)
+		return 0
+
+	return 1
+
+/obj/structure/destructible/proc/edge_bump_check(var/atom/movable/mover, var/turf/target_turf)
+	//this proc assumes that src is on a tile edge. return 1 if the mover will bump with that edge
+
+	var/turf/start_turf = get_turf(mover)
+	var/turf/our_turf = get_turf(src)
+	var/move_dir = get_dir(start_turf, target_turf)
+
+	//trying to exit our turf
+	if(start_turf == our_turf)
+
+		//trying to exit our turf via the edge we cover
+		if(move_dir & src.dir)
+			return 1
+
+	//sanity check: are we trying to enter the turf?
+	if(target_turf != our_turf)
+		//then we arent going to bump
+		return 0
+
+	//mover must be trying to enter our turf
+	var/check_dir = get_dir(our_turf, start_turf)
+
+	//it's a little easier to work in reverse here
+	var/list/block_dirs = list(src.dir)
+	block_dirs.Add(turn(src.dir, 45))
+	block_dirs.Add(turn(src.dir, -45))
+
+	//mover is trying to cross our tile edge
+	if(check_dir in block_dirs)
+		return 1
+
+/obj/structure/destructible/proc/projectile_block_check(var/obj/item/projectile/P)
+	var/modified_cover_rating = cover_rating
+	if(P.starting)
+		//get_dist() will return 0 for on top of, 1 for adjacent and surrounds
+		var/dist = get_dist(get_turf(src), P.starting)
+
+		if(dist <= 1)
+			//never block bullets fired from an adjacent turf
+			modified_cover_rating = 0
+
+		else if(dist < 4)
+			//reduced block chance
+			modified_cover_rating *= 0.5
+
+	//percent chance to block the bullet
+	var/blocked = prob(modified_cover_rating)
+	return blocked
+
+
 /*
 /obj/structure/destructible/Bumped(atom/movable/AM)
 	if(isliving(AM) && AM:a_intent == I_HELP)
@@ -199,12 +268,17 @@
 	update_icon()
 
 /obj/structure/destructible/proc/place_scraps()
-	if(prob(33))
-		new /obj/item/metalscraps(src.loc)
-	else if(prob(50))
-		new loot_type (src.loc)
+	if(scrap_types.len && prob(33))
+		var/spawn_type = pick(scrap_types)
+		new spawn_type(src.loc)
+	else if(loot_types.len && prob(50))
+		var/spawn_type = pick(loot_types)
+		new spawn_type (src.loc)
 		for(var/obj/I in parts)
 			I.Move(src.loc)
+	if(dead_type)
+		var/atom/movable/A = new dead_type(src.loc)
+		A.dir = src.dir
 
 /obj/structure/destructible/examine(var/mob/user)
 	. = ..()
@@ -230,13 +304,61 @@
 		var/climb_dir = get_dir(user, src)
 		if(user.loc == src.loc)
 			climb_dir = src.dir
-		var/turf/T = get_step(src, climb_dir)
+		var/turf/T = get_step(user, climb_dir)
 		if(T.CanPass(user, T))
 			user.dir = climb_dir
 			to_chat(user, "<span class='notice'>You start climbing over [src]...</span>")
-			spawn(0)
-				if(do_after(user, 30))
-					src.visible_message("<span class='info'>[user] climbs over [src].</span>")
-					user.loc = T
+			if(do_after(user, 30))
+				src.visible_message("<span class='info'>[user] climbs over [src].</span>")
+				user.loc = T
 		else
 			to_chat(user,"<span class='warning'>You cannot climb over [src] as it is being blocked.</span>")
+
+/obj/structure/destructible/proc/verb_climb()
+	set name = "Climb over structure"
+	set category = "Object"
+	set src = view(1)
+
+	structure_climb(usr)
+
+/obj/structure/destructible/MouseDrop_T(atom/movable/target, mob/user)
+	if(climbable && istype(target))
+		if(target == user)
+			structure_climb(user)
+		else
+			var/target_turf
+			if(get_turf(target) != src.loc)
+				var/target_dir = get_dir(get_turf(target), src)
+				target_turf = get_step(get_turf(target), target_dir)
+			else
+				target_turf = get_step(get_turf(target), user.dir)
+			if(do_after(user, 30))
+				src.visible_message("<span class='info'>[user] moves the [target] past [src].</span>")
+				target.loc = target_turf
+	else
+		to_chat(user,"<span class='notice'>You cannot fit that past [src]!</span>")
+
+
+/obj/structure/barricade/attack_generic(var/mob/living/attacker, var/damage, var/attacktext)
+	src.visible_message("<span class='danger'>[attacker] has [attacktext] [src]!</span>")
+	health -= damage
+	if (src.health <= 0)
+		visible_message("<span class='danger'>[src] is smashed apart!</span>")
+		dismantle()
+		qdel(src)
+
+/obj/structure/table/attack_generic(var/mob/living/attacker, var/damage, var/attacktext)
+	src.visible_message("<span class='danger'>[attacker] has [attacktext] [src]!</span>")
+	health -= damage
+	if (src.health <= 0)
+		visible_message("<span class='danger'>[src] is smashed apart!</span>")
+		break_to_parts()
+		qdel(src)
+
+/obj/structure/closet/attack_generic(var/mob/living/attacker, var/damage, var/attacktext)
+	src.visible_message("<span class='danger'>[attacker] has [attacktext] [src]!</span>")
+	health -= damage
+	if (src.health <= 0)
+		visible_message("<span class='danger'>[src] is smashed apart!</span>")
+		dump_contents()
+		qdel(src)
