@@ -433,9 +433,12 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 	/obj/structure/table,\
 	/obj/structure/grille,\
 	/obj/structure/girder,\
+	/obj/structure/barricade,\
+	/obj/machinery/door/unpowered,\
 	/obj/structure/destructible/tanktrap,\
 	/obj/structure/destructible/steel_barricade,\
 	/obj/structure/destructible/plasteel_barricade,\
+	/obj/structure/destructible/marine_barricade,\
 	/obj/structure/destructible/sandbag
 ))
 
