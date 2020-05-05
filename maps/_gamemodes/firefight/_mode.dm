@@ -47,6 +47,8 @@
 	//var/obj/effect/landmark/day_night_zcontroller/daynight_controller
 	var/datum/npc_overmind/firefight/overmind
 
+	var/finish_reason = 0
+
 	var/wave_message = "Enemy spawns have started! Here they come..."
 	var/rest_message = "The wave of enemies have been defeated! Better heal up and restock your ammo..."
 	var/evac_message = "The evac ship has arrived! Get to da choppa!"
