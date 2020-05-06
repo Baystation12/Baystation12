@@ -4,6 +4,7 @@
 #include "areas.dm"
 #include "ai_items.dm"
 #include "presets.dm"
+#include "spawnpoint.dm"
 #include "ODP_Cassius_1.dmm"
 #include "ODP_Cassius_2.dmm"
 
