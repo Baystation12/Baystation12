@@ -1,4 +1,5 @@
 "aa" = (/turf/simulated/floor/holofloor/space,/area/space)
+"ab" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
 "ac" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/asteroid_listening/dark)
 "ad" = (/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
 "af" = (/turf/simulated/wall{icon = 'code/modules/halo/icons/turfs/walls.dmi'; icon_state = "riveted"; tag = "icon-cult"},/area/asteroid_listening/dark)
@@ -14,7 +15,6 @@
 "ap" = (/obj/machinery/telecomms/broadcaster,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
 "aq" = (/obj/effect/floor_decal/asteroid,/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
 "ar" = (/obj/machinery/telecomms/hub,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
-"as" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/asteroid_listening/dark)
 "at" = (/turf/unsimulated/floor/rock2{density = 1; opacity = 1},/area/space)
 "au" = (/obj/effect/floor_decal/asteroid{tag = "icon-asteroid7"; icon_state = "asteroid7"},/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
 "av" = (/obj/machinery/telecomms/relay/long_range_planetary,/turf/simulated/floor/asteroid/planet,/area/asteroid_listening/dark)
@@ -167,7 +167,7 @@ aaaaaaaaaaaaadadadaaaaaaaaaaaaaaaaaaaaaaacacacacacacacacaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaadadadadadaaaaaaaaaaaaaaaaaaaaaaacafafafafafacaaadadaaaaaaaaaaaaaaadadagadadadadaaaaaaaaaa
 aaaaaaaaadadadadadadaaaaadadadaaaaaaaaaaaaacafahaiajafacaaakadadaaaaaaaaaaadadadadadakadadalaaaaaaaa
 aaaaadadadadadadadadadaaadadaaaaaaaaadadacacafamananaoadaaaddbaaaaaaaaaaaaadadadadadadadadadaaaaaaaa
-aaaaakacacacadadadadadadaqadadadadadadadacacafaparasafadadadadadaaaaaaaaaaadadadadaladadadadaaaaaaaa
+aaaaakacacacadadadadadadaqadadadadadadadacacafaparabafadadadadadaaaaaaaaaaadadadadaladadadadaaaaaaaa
 aaaaadacacacacacadacadadadadadadakadadacacacafafafafafadauadadadaaaaaaadadadadadadadadadadadadaaaaaa
 aaadadacacacacacacacacacacacacadadadadacacacacacacacacadadavadadaaaaadadadadadadadadadadadaaadaaaaaa
 aaadadacacacacacacacacacacacacadadadaladadadadacacacadadadakadadadadadacacacacadadadadaaaaaaaaaaaaaa

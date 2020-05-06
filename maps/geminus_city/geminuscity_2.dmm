@@ -17,7 +17,7 @@
 "aaq" = (/turf/simulated/floor/asteroid/planet,/area/planets/Geminus/indoor/backroom)
 "aar" = (/turf/simulated/wall/tech,/area/planets/Geminus/indoor/backroom)
 "aas" = (/turf/simulated/wall/tech,/area/planets/Geminus/indoor/cargo)
-"aat" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)
+"aat" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)
 "aau" = (/obj/machinery/telecomms/receiver,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)
 "aav" = (/obj/machinery/telecomms/bus,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)
 "aaw" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/plating,/area/planets/Geminus/indoor/backroom)

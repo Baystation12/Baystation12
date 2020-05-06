@@ -50,7 +50,7 @@
 "aX" = (/turf/simulated/wall/r_wall,/area/urf_flagship/janitorial)
 "aY" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "aZ" = (/obj/machinery/telecomms_jammers/insurrectionist,/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/urf_flagship/powercore)
-"ba" = (/obj/machinery/telecomms/allinone,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
+"ba" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "bb" = (/obj/machinery/light{dir = 4},/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "bc" = (/obj/structure/table/standard,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/obj/item/weapon/airlock_brace,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
 "bd" = (/obj/structure/table/standard,/obj/item/clothing/gloves/insulated,/obj/item/clothing/gloves/insulated,/obj/item/device/multitool,/obj/item/device/multitool,/turf/simulated/floor/plating,/area/urf_flagship/powercore)
