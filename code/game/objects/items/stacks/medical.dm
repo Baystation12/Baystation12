@@ -207,7 +207,7 @@
 				W.heal_damage(heal_brute)
 				used++
 				playsound(src, pick(apply_sounds), 25)
-				update_icon() // Support for stack icons
+				on_update_icon() // Support for stack icons
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -252,7 +252,7 @@
 			affecting.salve()
 			affecting.disinfect()
 			playsound(src, pick(apply_sounds), 25)
-			update_icon() // Support for stack icons
+			on_update_icon() // Support for stack icons
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -369,7 +369,7 @@
 // Support for stack icons
 /obj/item/stack/medical/ointment/Initialize()
 	. = ..()
-	update_icon()
+	on_update_icon()
 
 /obj/item/stack/medical/ointment/on_update_icon()
 	switch(amount)
@@ -386,9 +386,9 @@
 
 /obj/item/stack/medical/bruise_pack/Initialize()
 	. = ..()
-	update_icon()
+	on_update_icon()
 
-/obj/item/stack/medical/bruise_pack/on_update_icon()
+/obj/item/stack/medical/bruise_pack/update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
@@ -413,9 +413,9 @@
 
 /obj/item/stack/medical/advanced/ointment/Initialize()
 	. = ..()
-	update_icon()
+	on_update_icon()
 
-/obj/item/stack/medical/advanced/ointment/on_update_icon()
+/obj/item/stack/medical/advanced/ointment/update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
@@ -430,9 +430,9 @@
 
 /obj/item/stack/medical/advanced/bruise_pack/Initialize()
 	. = ..()
-	update_icon()
+	on_update_icon()
 
-/obj/item/stack/medical/advanced/bruise_pack/on_update_icon()
+/obj/item/stack/medical/advanced/bruise_pack/update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
