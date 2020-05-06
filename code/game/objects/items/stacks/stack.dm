@@ -32,13 +32,13 @@
 		stacktype = type
 	if (amount >= 1)
 		src.amount = amount
-		update_icon() // Donnarex Edit - Support for stack icons
 	..()
 
 /obj/item/stack/Initialize()
 	. = ..()
 	if(!plural_name)
 		plural_name = "[singular_name]s"
+		on_update_icon() // Support for stack icons
 
 /obj/item/stack/Destroy()
 	if(uses_charge)
@@ -47,7 +47,7 @@
 		close_browser(usr, "window=stack")
 	return ..()
 
-/obj/item/stack/on_update_icon()
+/obj/item/stack/on_update_icon() //Support for stack icons
 	if(no_variants)
 		icon_state = initial(icon_state)
 	else
