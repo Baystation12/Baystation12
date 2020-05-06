@@ -371,7 +371,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/medical/ointment/update_icon()
+/obj/item/stack/medical/ointment/on_update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
