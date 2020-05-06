@@ -371,7 +371,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/medical/ointment/update_icon()
+/obj/item/stack/medical/ointment/on_update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
@@ -388,7 +388,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/medical/bruise_pack/update_icon()
+/obj/item/stack/medical/bruise_pack/on_update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
@@ -415,7 +415,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/medical/advanced/ointment/update_icon()
+/obj/item/stack/medical/advanced/ointment/on_update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
@@ -432,7 +432,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/stack/medical/advanced/bruise_pack/update_icon()
+/obj/item/stack/medical/advanced/bruise_pack/on_update_icon()
 	switch(amount)
 		if(1)
 			icon_state = initial(icon_state)
