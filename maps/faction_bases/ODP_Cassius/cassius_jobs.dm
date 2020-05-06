@@ -118,7 +118,14 @@ GLOBAL_LIST_EMPTY(unsc_base_fallback_spawns)
 
 /datum/spawnpoint/unsc_base_fallback
 	display_name = "UNSC Base Fallback Spawns"
-	restrict_job_type = list()
+	restrict_job_type = list(\
+	/datum/job/cassius_job/unsc_marine,
+	/datum/job/cassius_job/unsc_marine_specialist,
+	/datum/job/cassius_job/unsc_squad_lead,
+	/datum/job/cassius_job/unsc_co,
+	/datum/job/cassius_job/odst,
+	/datum/job/cassius_job/oni_researcher
+	)
 
 /datum/spawnpoint/unsc_base_fallback/New()
 	..()
