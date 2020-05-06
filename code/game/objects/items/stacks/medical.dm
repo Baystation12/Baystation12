@@ -73,7 +73,7 @@
 	icon_state = "brutepack"
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 5
-	no_variants = FALSE // Donnarex Edit - Support for stack icons
+	no_variants = FALSE // Support for stack icons
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	amount = 10
 
@@ -132,7 +132,7 @@
 	heal_burn = 1
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 4
-	no_variants = FALSE // Donnarex Edit - Support for stack icons
+	no_variants = FALSE // Support for stack icons
 	apply_sounds = list('sound/effects/ointment.ogg')
 
 /obj/item/stack/medical/ointment/attack(var/mob/living/carbon/M, var/mob/user)
@@ -167,7 +167,7 @@
 	heal_brute = 0
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 12
-	no_variants = FALSE // Donnarex Edit - Support for stack icons
+	no_variants = FALSE // Support for stack icons
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg','sound/effects/tape.ogg')
 	amount = 10
 
@@ -207,7 +207,7 @@
 				W.heal_damage(heal_brute)
 				used++
 				playsound(src, pick(apply_sounds), 25)
-				update_icon() // Donnarex Edit - Support for stack icons
+				update_icon() // Support for stack icons
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -225,7 +225,7 @@
 	heal_burn = 5
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 7
-	no_variants = FALSE // Donnarex Edit - Support for stack icons
+	no_variants = FALSE // Support for stack icons
 	apply_sounds = list('sound/effects/ointment.ogg')
 
 /obj/item/stack/medical/advanced/ointment/attack(var/mob/living/carbon/M, var/mob/user)
@@ -252,7 +252,7 @@
 			affecting.salve()
 			affecting.disinfect()
 			playsound(src, pick(apply_sounds), 25)
-			update_icon() // Donnarex Edit - Support for stack icons
+			update_icon() // Support for stack icons
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -366,7 +366,7 @@
 		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
 		use(1)
 
-// Donnarex Edit - Support for stack icons
+// Support for stack icons
 /obj/item/stack/medical/ointment/Initialize()
 	. = ..()
 	update_icon()
@@ -450,4 +450,4 @@
 			icon_state = "[initial(icon_state)]_7"
 		else
 			icon_state = "[initial(icon_state)]_10"
-// Donnarex Edit - Support for stack icons [END]
+// Support for stack icons [END]
