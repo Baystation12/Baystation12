@@ -234,9 +234,23 @@
 			else
 				src.bodytemp.icon_state = "temp-2"
 
-//Oxygen and fire does nothing yet!!
-//	if (src.oxygen) src.oxygen.icon_state = "oxy[src.oxygen_alert ? 1 : 0]"
-//	if (src.fire) src.fire.icon_state = "fire[src.fire_alert ? 1 : 0]"
+	var/datum/gas_mixture/environment = loc?.return_air()
+	if(fire && environment)
+		switch(environment.temperature)
+			if(-INFINITY to T100C)
+				src.fire.icon_state = "fire0"
+			else
+				src.fire.icon_state = "fire1"
+	if(oxygen && environment)
+		var/datum/species/species = all_species[SPECIES_HUMAN]
+		if(environment.gas[species.breath_type] >= species.breath_pressure)
+			src.oxygen.icon_state = "oxy0"
+			for(var/gas in species.poison_types)
+				if(environment.gas[gas])
+					src.oxygen.icon_state = "oxy1"
+					break
+		else
+			src.oxygen.icon_state = "oxy1"
 
 	if(stat != DEAD)
 		if(blinded)
