@@ -80,8 +80,19 @@
 		/datum/computer_file/program/email_client,
 		/datum/computer_file/program/records,
 		/datum/computer_file/program/docking,
-		/datum/computer_file/program/records,
 		/datum/computer_file/program/wordprocessor
+	)
+
+/obj/machinery/computer/modular/preset/cardslot/command_sec
+	default_software = list(
+		/datum/computer_file/program/comm,
+		/datum/computer_file/program/camera_monitor,
+		/datum/computer_file/program/email_client,
+		/datum/computer_file/program/records,
+		/datum/computer_file/program/docking,
+		/datum/computer_file/program/wordprocessor,
+		/datum/computer_file/program/digitalwarrant,
+		/datum/computer_file/program/forceauthorization
 	)
 
 /obj/machinery/computer/modular/preset/security

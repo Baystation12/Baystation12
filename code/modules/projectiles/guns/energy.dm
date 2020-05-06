@@ -1,6 +1,3 @@
-GLOBAL_LIST_INIT(registered_weapons, list())
-GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
-
 /obj/item/weapon/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
