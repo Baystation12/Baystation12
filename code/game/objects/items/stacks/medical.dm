@@ -65,6 +65,7 @@
 		use(1)
 
 	M.updatehealth()
+
 /obj/item/stack/medical/bruise_pack
 	name = "roll of gauze"
 	singular_name = "gauze length"
@@ -72,6 +73,7 @@
 	icon_state = "brutepack"
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 5
+	no_variants = FALSE // Donnarex Edit - Support for stack icons
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	amount = 10
 
@@ -130,6 +132,7 @@
 	heal_burn = 1
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 4
+	no_variants = FALSE // Donnarex Edit - Support for stack icons
 	apply_sounds = list('sound/effects/ointment.ogg')
 
 /obj/item/stack/medical/ointment/attack(var/mob/living/carbon/M, var/mob/user)
@@ -146,12 +149,12 @@
 		else
 			user.visible_message(SPAN_NOTICE("\The [user] starts salving wounds on [M]'s [affecting.name]."), \
 					             SPAN_NOTICE("You start salving the wounds on [M]'s [affecting.name].") )
-			playsound(src, pick(apply_sounds), 25)
 			if(!do_mob(user, M, 10))
 				to_chat(user, SPAN_NOTICE("You must stand still to salve wounds."))
 				return 1
 			user.visible_message(SPAN_NOTICE("[user] salved wounds on [M]'s [affecting.name]."), \
 			                         SPAN_NOTICE("You salved wounds on [M]'s [affecting.name].") )
+			playsound(src, pick(apply_sounds), 25)
 			use(1)
 			affecting.salve()
 			affecting.disinfect()
@@ -164,6 +167,7 @@
 	heal_brute = 0
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 12
+	no_variants = FALSE // Donnarex Edit - Support for stack icons
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg','sound/effects/tape.ogg')
 	amount = 10
 
@@ -198,11 +202,12 @@
 				else
 					user.visible_message(SPAN_NOTICE("\The [user] smears some bioglue over \a [W.desc] on [M]'s [affecting.name]."), \
 					                              SPAN_NOTICE("You smear some bioglue over \a [W.desc] on [M]'s [affecting.name].") )
-				playsound(src, pick(apply_sounds), 25)
 				W.bandage()
 				W.disinfect()
 				W.heal_damage(heal_brute)
 				used++
+				playsound(src, pick(apply_sounds), 25)
+				update_icon() // Donnarex Edit - Support for stack icons
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -220,8 +225,8 @@
 	heal_burn = 5
 	origin_tech = list(TECH_BIO = 1)
 	animal_heal = 7
+	no_variants = FALSE // Donnarex Edit - Support for stack icons
 	apply_sounds = list('sound/effects/ointment.ogg')
-
 
 /obj/item/stack/medical/advanced/ointment/attack(var/mob/living/carbon/M, var/mob/user)
 	if(..())
@@ -237,7 +242,6 @@
 		else
 			user.visible_message(SPAN_NOTICE("\The [user] starts salving wounds on [M]'s [affecting.name]."), \
 					             SPAN_NOTICE("You start salving the wounds on [M]'s [affecting.name].") )
-			playsound(src, pick(apply_sounds), 25)
 			if(!do_mob(user, M, 10))
 				to_chat(user, SPAN_NOTICE("You must stand still to salve wounds."))
 				return 1
@@ -247,6 +251,8 @@
 			use(1)
 			affecting.salve()
 			affecting.disinfect()
+			playsound(src, pick(apply_sounds), 25)
+			update_icon() // Donnarex Edit - Support for stack icons
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -350,12 +356,98 @@
 		user.visible_message(
 			SPAN_NOTICE("\The [user] starts patching fractures on \the [M]'s [affecting.name]."), \
 			SPAN_NOTICE("You start patching fractures on \the [M]'s [affecting.name].") )
-		playsound(src, pick(apply_sounds), 25)
 		if(!do_mob(user, M, 10))
 			to_chat(user, SPAN_NOTICE("You must stand still to patch fractures."))
 			return 1
 		user.visible_message( \
 			SPAN_NOTICE("\The [user] patches the fractures on \the [M]'s [affecting.name] with resin."), \
 			SPAN_NOTICE("You patch fractures on \the [M]'s [affecting.name] with resin."))
+		playsound(src, pick(apply_sounds), 25)
 		affecting.heal_damage(heal_brute, heal_burn, robo_repair = TRUE)
 		use(1)
+
+// Donnarex Edit - Support for stack icons
+/obj/item/stack/medical/ointment/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/stack/medical/ointment/update_icon()
+	switch(amount)
+		if(1)
+			icon_state = initial(icon_state)
+		if(2)
+			icon_state = "[initial(icon_state)]_4"
+		if(3)
+			icon_state = "[initial(icon_state)]_6"
+		if(4)
+			icon_state = "[initial(icon_state)]_8"
+		else
+			icon_state = "[initial(icon_state)]_10"
+
+/obj/item/stack/medical/bruise_pack/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/stack/medical/bruise_pack/update_icon()
+	switch(amount)
+		if(1)
+			icon_state = initial(icon_state)
+		if(2)
+			icon_state = "[initial(icon_state)]_2"
+		if(3)
+			icon_state = "[initial(icon_state)]_3"
+		if(4)
+			icon_state = "[initial(icon_state)]_4"
+		if(5)
+			icon_state = "[initial(icon_state)]_5"
+		if(6)
+			icon_state = "[initial(icon_state)]_6"
+		if(7)
+			icon_state = "[initial(icon_state)]_7"
+		if(8)
+			icon_state = "[initial(icon_state)]_8"
+		if(9)
+			icon_state = "[initial(icon_state)]_9"
+		else
+			icon_state = "[initial(icon_state)]_10"
+
+/obj/item/stack/medical/advanced/ointment/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/stack/medical/advanced/ointment/update_icon()
+	switch(amount)
+		if(1)
+			icon_state = initial(icon_state)
+		if(2)
+			icon_state = "[initial(icon_state)]_2"
+		if(3)
+			icon_state = "[initial(icon_state)]_4"
+		if(4)
+			icon_state = "[initial(icon_state)]_6"
+		else
+			icon_state = "[initial(icon_state)]_10"
+
+/obj/item/stack/medical/advanced/bruise_pack/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/item/stack/medical/advanced/bruise_pack/update_icon()
+	switch(amount)
+		if(1)
+			icon_state = initial(icon_state)
+		if(2)
+			icon_state = "[initial(icon_state)]_2"
+		if(3)
+			icon_state = "[initial(icon_state)]_3"
+		if(4)
+			icon_state = "[initial(icon_state)]_4"
+		if(5)
+			icon_state = "[initial(icon_state)]_5"
+		if(6)
+			icon_state = "[initial(icon_state)]_6"
+		if(7)
+			icon_state = "[initial(icon_state)]_7"
+		else
+			icon_state = "[initial(icon_state)]_10"
+// Donnarex Edit - Support for stack icons [END]

@@ -25,12 +25,14 @@
 	var/uses_charge = 0
 	var/list/charge_costs = null
 	var/list/datum/matter_synth/synths = null
+	var/no_variants = TRUE // Determines whether the item should update it's sprites based on amount.
 
 /obj/item/stack/New(var/loc, var/amount=null)
 	if (!stacktype)
 		stacktype = type
 	if (amount >= 1)
 		src.amount = amount
+		update_icon() // Donnarex Edit - Support for stack icons
 	..()
 
 /obj/item/stack/Initialize()
@@ -44,6 +46,18 @@
 	if (src && usr && usr.machine == src)
 		close_browser(usr, "window=stack")
 	return ..()
+
+/obj/item/stack/update_icon() // Donnarex Edit - Support for stack icons
+	if(no_variants)
+		icon_state = initial(icon_state)
+	else
+		if(amount <= (max_amount * (1/3)))
+			icon_state = initial(icon_state)
+		else if (amount <= (max_amount * (2/3)))
+			icon_state = "[initial(icon_state)]_2"
+		else
+			icon_state = "[initial(icon_state)]_3"
+		item_state = initial(icon_state)
 
 /obj/item/stack/examine(mob/user, distance)
 	. = ..()
