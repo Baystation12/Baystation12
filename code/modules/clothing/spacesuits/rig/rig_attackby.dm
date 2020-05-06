@@ -61,6 +61,9 @@
 			if(air_supply)
 				to_chat(user, "\The [src] already has a tank installed.")
 				return
+			if (istype(W, /obj/item/weapon/tank/scrubber))
+				to_chat(user, SPAN_WARNING("\The [W] is far too large to attach to \the [src]."))
+				return
 
 			if(!user.unEquip(W)) return
 			air_supply = W

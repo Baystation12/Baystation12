@@ -141,5 +141,7 @@
 		/obj/item/weapon/tank/emergency/oxygen/double,
 		/obj/item/clothing/mask/gas,
 		/obj/item/taperoll/atmos,
-		/obj/item/device/scanner/gas
+		/obj/item/device/scanner/gas,
+		/obj/item/weapon/scrubpack/standard = 2,
+		/obj/item/weapon/tank/scrubber = 4
 	)

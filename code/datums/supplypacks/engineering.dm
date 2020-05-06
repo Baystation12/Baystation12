@@ -224,7 +224,9 @@
 			/obj/item/clothing/mask/gas,
 			/obj/item/weapon/tank/emergency/oxygen/double/red,
 			/obj/item/weapon/extinguisher,
-			/obj/item/clothing/head/hardhat/red)
+			/obj/item/clothing/head/hardhat/red,
+			/obj/item/weapon/scrubpack/standard,
+			/obj/item/weapon/tank/scrubber)
 	cost = 20
 	containertype = /obj/structure/closet/firecloset
 	containername = "fire-safety closet"

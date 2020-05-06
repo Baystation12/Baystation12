@@ -11,13 +11,16 @@
 
 /decl/hierarchy/supply_pack/atmospherics/evacuation
 	name = "Emergency equipment"
+	containertype = /obj/structure/closet/crate/large
 	contains = list(/obj/item/weapon/storage/toolbox/emergency = 2,
 					/obj/item/clothing/suit/storage/hazardvest = 2,
 					/obj/item/weapon/tank/emergency/oxygen/engi = 4,
 			 		/obj/item/clothing/suit/space/emergency = 4,
 					/obj/item/clothing/head/helmet/space/emergency = 4,
 					/obj/item/clothing/mask/gas = 4,
-					/obj/item/device/flashlight/flare/glowstick = 5)
+					/obj/item/device/flashlight/flare/glowstick = 5,
+					/obj/item/weapon/scrubpack/standard = 2,
+					/obj/item/weapon/tank/scrubber = 4)
 	cost = 25
 
 	containername = "emergency crate"
