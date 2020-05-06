@@ -1,0 +1,5 @@
+author: "AshtonFox"
+delete-after: True
+changes: 
+  - tweak: "Stun rifle's sprite now actully displays charge level."
+  - bugfix: "Fixed missing discharged icon state for pulse carbine."
