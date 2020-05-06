@@ -1,0 +1,9 @@
+author: "mkalash"
+delete-after: True
+changes: 
+  - tweak: "The COS and the BC now have lethal authorization by default, because they can just give it to themselves, anyway."
+  - tweak: "The console in the COS office is now a variant with command and security programs on it."
+  - tweak: "The UOF program now tracks all registered and unregistered guns, split into two lists. Guns that leave connected Zs still display, but show \"out of range\" instead of a location, and their authorization can not be changed."
+  - tweak: "The UOF program now shows the area name instead of coordinates."
+  - tweak: "Cyborg guns are no longer tracked separately for some reason."
+  - tweak: "The UOF program is marginally better formatted."
