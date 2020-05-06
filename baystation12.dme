@@ -2191,7 +2191,6 @@
 #include "code\modules\mob\living\silicon\robot\drone\drone_damage.dm"
 #include "code\modules\mob\living\silicon\robot\drone\drone_items.dm"
 #include "code\modules\mob\living\silicon\robot\drone\drone_manufacturer.dm"
-#include "code\modules\mob\living\silicon\robot\drone\drone_remote_control.dm"
 #include "code\modules\mob\living\silicon\robot\drone\drone_say.dm"
 #include "code\modules\mob\living\silicon\robot\flying\flying.dm"
 #include "code\modules\mob\living\silicon\robot\flying\module_flying.dm"
