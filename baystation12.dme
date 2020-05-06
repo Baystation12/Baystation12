@@ -1826,6 +1826,7 @@
 #include "code\modules\halo\structures\electric_fence.dm"
 #include "code\modules\halo\structures\gunvendors.dm"
 #include "code\modules\halo\structures\misc_structures.dm"
+#include "code\modules\halo\structures\repairable_component.dm"
 #include "code\modules\halo\structures\sandbag.dm"
 #include "code\modules\halo\structures\sofa.dm"
 #include "code\modules\halo\structures\stairs_decorative.dm"

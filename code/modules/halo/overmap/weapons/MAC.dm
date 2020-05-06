@@ -2,6 +2,7 @@
 #define CAPACITOR_MAX_STORED_CHARGE 50000
 #define BASE_AMMO_LIMIT 3
 #define LOAD_AMMO_DELAY 70
+#define CONSOLE_REBOOT_TIME 30 MINUTES
 
 /obj/machinery/mac_cannon
 	name = "MAC Component"
@@ -264,6 +265,40 @@
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]
 		S.adminwarn_attack()
+
+//BROKEN COMPONENTS//
+/obj/structure/repair_component/mac_console
+	name = "Broken MAC Fire Control"
+	icon = 'code/modules/halo/overmap/weapons/mac_cannon.dmi'
+	icon_state = "mac_fire_control_dam"
+	repair_into = /obj/machinery/overmap_weapon_console/mac
+	repair_tools = list(/obj/item/weapon/screwdriver)
+	repair_materials = list("glass" = 5,"steel" = 5) //material name = amount needed
+
+	var/reboot_at
+
+/obj/structure/repair_component/mac_console/examine(var/mob/examiner)
+	. = ..()
+	if(reboot_at)
+		to_chat(examiner,"<span class = 'notice'>[src] is rebooting, this can take up to 30 minutes from the moment of repair. [round((reboot_at - world.time) / 600)] minutes remain.</span>")
+
+/obj/structure/repair_component/mac_console/finalise_repair()
+	reboot_at = world.time + CONSOLE_REBOOT_TIME
+	GLOB.processing_objects += src
+	name = "Rebooting MAC Fire Control"
+
+/obj/structure/repair_component/mac_console/process()
+	if(world.time > reboot_at)
+		new repair_into (loc)
+		qdel(src)
+
+/obj/structure/repair_component/mac_capacitor
+	name = "Broken MAC Capacitor"
+	icon = 'code/modules/halo/overmap/weapons/mac_cannon.dmi'
+	icon_state = "mac_capacitor_dam"
+	repair_into = /obj/machinery/mac_cannon/capacitor
+	repair_tools = list(/obj/item/weapon/wirecutters,/obj/item/stack/cable_coil)
+	repair_materials = list("plasteel" = 2) //material name = amount needed
 
 #undef AMMO_LIMIT
 #undef ACCELERATOR_OVERLAY_ICON_STATE

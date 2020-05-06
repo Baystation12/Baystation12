@@ -226,7 +226,8 @@
 			connectors -= umbi
 			continue
 		if(force_break || (umbi.current_connected && get_dist(umbi.our_ship,umbi.current_connected.our_ship) > 1))
-			umbi.current_connected.umbi_rip()
+			if(umbi.current_connected)
+				umbi.current_connected.umbi_rip()
 			umbi.umbi_rip()
 
 /obj/effect/overmap/ship/do_superstructure_fail()
