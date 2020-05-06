@@ -12,12 +12,12 @@
 		/datum/job/soe_commando_captain,\
 		/datum/job/geminus_x52/researcher,\
 		/datum/job/geminus_x52/research_director,\
-		/datum/job/cassius_job/unsc_marine,
-		/datum/job/cassius_job/unsc_marine_specialist,
-		/datum/job/cassius_job/unsc_squad_lead,
-		/datum/job/cassius_job/unsc_co,
-		/datum/job/cassius_job/odst,
-		/datum/job/cassius_job/oni_researcher,
+		/datum/job/unsc_job/unsc_marine,
+		/datum/job/unsc_job/unsc_marine_specialist,
+		/datum/job/unsc_job/unsc_squad_lead,
+		/datum/job/unsc_job/unsc_co,
+		/datum/job/unsc_job/odst,
+		/datum/job/unsc_job/oni_researcher,
 		/datum/job/colonist,\
 		/datum/job/colonist_mayor,\
 		/datum/job/police,\

@@ -1863,6 +1863,7 @@
 #include "code\modules\halo\turfs\forerunner\walls.dm"
 #include "code\modules\halo\unsc\access.dm"
 #include "code\modules\halo\unsc\faxmachine.dm"
+#include "code\modules\halo\unsc\jobs.dm"
 #include "code\modules\halo\unsc\ranks.dm"
 #include "code\modules\halo\unsc\simple_mobs.dm"
 #include "code\modules\halo\unsc\spartan.dm"
