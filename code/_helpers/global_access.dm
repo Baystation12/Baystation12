@@ -551,8 +551,6 @@
 			return global.maploader;
 		if("mark")
 			return global.mark;
-		if("matchmaker")
-			return global.matchmaker;
 		if("maze_cell_count")
 			return global.maze_cell_count;
 		if("mechas_list")
@@ -1462,8 +1460,6 @@
 			global.maploader=newval;
 		if("mark")
 			global.mark=newval;
-		if("matchmaker")
-			global.matchmaker=newval;
 		if("maze_cell_count")
 			global.maze_cell_count=newval;
 		if("mechas_list")
@@ -2097,7 +2093,6 @@
 	"map_sectors",
 	"maploader",
 	"mark",
-	"matchmaker",
 	"maze_cell_count",
 	"mechas_list",
 	"merged",
