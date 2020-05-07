@@ -33,10 +33,8 @@
 					armor_strings += "It is very strong against [armour_to_descriptive_term[armor_type]]."
 				if(71 to 80)
 					armor_strings += "This gives a very robust defense against [armour_to_descriptive_term[armor_type]]."
-				if(81 to 99)
+				if(81 to 100)
 					armor_strings += "Wearing this would make you nigh-invulerable against [armour_to_descriptive_term[armor_type]]."
-				if(100)
-					armor_strings += "You would be immune to [armour_to_descriptive_term[armor_type]] if you wore this."
 
 	if(item_flags & ITEM_FLAG_AIRTIGHT)
 		armor_strings += "It is airtight."
@@ -76,7 +74,7 @@
 		armor_strings += "It can be worn on your [english_list(slots)]."
 
 	return jointext(armor_strings, "<br>")
-	
+
 /obj/item/clothing/suit/armor/pcarrier/get_mechanics_info()
 	. = ..()
 	. += "<br>Its protection is provided by the plate inside, examine it for details on armor.<br>"
