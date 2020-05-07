@@ -1,5 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - rscadd: "You can force gas tanks' release valves open and closed with a screwdriver, taking 5/4/4/3/3 seconds by atmospherics skill level."
-  - tweak: "You can see gas tank attachments at 5 steps, whether they are welded or forced open at 3, and check their temperature on the same tile."
