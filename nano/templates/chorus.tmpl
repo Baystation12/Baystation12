@@ -1,0 +1,70 @@
+<!--
+Chorus mode, two panels side by side. The left shows all buildings possible and the right shows information about the current stuff
+-->
+<style>
+	.linkbig {
+		height:32px;
+	}
+</style>
+<div align="center" style="display:table; width:100%">
+{{for data.resources}}
+	<div style="display:table-cell">
+		{{:value.print}} {{:value.amount}}
+	</div>
+{{empty}}
+	You appear not to have any resource datums. Contact an administrator or TheWelp on discord
+{{/for}}
+</div>
+<div>
+	<div style="width:50%; float:left">
+		<div><b>Buildings</b></div>
+		<div>
+			{{for data.buildings}}
+				<div>
+					{{for value :buildingValue:buildingKey}}
+						{{:helper.link(buildingValue.image, null, {'selected' : buildingValue.state}, null, "linkbig link")}}
+					{{/for}}
+				</div>
+				<br><br><br>
+			{{empty}}
+				No buildings! Something went wrong.... contact administation or TheWelp on discord
+			{{/for}}
+		</div>
+	</div>
+	<div style="width:50%; float:right">
+		{{if data.has_selected}}
+			<center>
+				{{:data.selected.name}}
+				<br>
+				{{:data.selected.icon}}
+				<br>
+				{{:data.selected.desc}}
+				<br><b>Costs</b><br>
+				<div style="display:table; width:100%">
+					{{for data.selected.cost}}
+						<div style="display:table-cell">
+							{{:value.print}} {{:value.amount}}
+						</div>
+					{{empty}}
+						N/A
+					{{/for}}
+				</div>
+				<br><b>Requirements</b><br>
+				<div>
+					{{for data.selected.requirements}}
+						<div>
+							{{:value.amount}}x{{:value.name}}
+						</div>
+					{{empty}}
+						N/A
+					{{/for}}
+				</div>
+				{{if data.selected.activation_res}}
+				<div>
+					<b>Activation Cost: </b>{{:data.selected.activation_amt}} {{:data.selected.activation_res}}
+				</div>
+				{{/if}}
+			</center>
+		{{/if}}
+	</div>
+</div>

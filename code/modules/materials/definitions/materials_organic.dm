@@ -293,3 +293,19 @@
 	hardness = MATERIAL_HARD
 	weight = 18
 	brute_armor = 2
+
+/material/growth
+	name = MATERIAL_GROWTH
+	display_name = "organic material"
+	icon_base = "cult"
+	door_icon_base = "cult"
+	table_icon_base = "cult"
+	icon_reinf = "reinf_cult"
+	icon_colour = "#281744"
+	hardness = 80
+	brute_armor = 4
+	burn_armor = 3
+	stack_type = null
+	conductive = 0
+	construction_difficulty = 10
+	hidden_from_codex = TRUE

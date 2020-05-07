@@ -1,0 +1,2 @@
+#define CHORUS_PHASE_OBSERVE 1
+#define CHORUS_PHASE_EGG 2

@@ -104,7 +104,7 @@
 	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
-	O.ManualFollow(H)
+	O.start_following(H)
 	if(is_listening_to_movement(H, O))
 		pass("The observer is now following the mob.")
 	else
@@ -122,7 +122,7 @@
 	var/mob/living/carbon/human/H = get_named_instance(/mob/living/carbon/human, T, SPECIES_HUMAN)
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
-	O.ManualFollow(H)
+	O.start_following(H)
 	O.stop_following()
 	if(!is_listening_to_movement(H, O))
 		pass("The observer is no longer following the mob.")
@@ -164,7 +164,7 @@
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
 	H.forceMove(C)
-	O.ManualFollow(H)
+	O.start_following(H)
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
 	if(listening_to_closet && listening_to_human)
@@ -186,7 +186,7 @@
 	var/obj/structure/closet/C = get_named_instance(/obj/structure/closet, T, "Closet")
 	var/mob/observer/ghost/O = get_named_instance(/mob/observer/ghost, T, "Ghost")
 
-	O.ManualFollow(H)
+	O.start_following(H)
 	H.forceMove(C)
 	var/listening_to_closet = is_listening_to_movement(C, H)
 	var/listening_to_human = is_listening_to_movement(H, O)
@@ -254,8 +254,8 @@
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
 
-	two.ManualFollow(one)
-	three.ManualFollow(two)
+	two.start_following(one)
+	three.start_following(two)
 
 	two.stop_following()
 	if(is_listening_to_movement(two, three))
@@ -278,8 +278,8 @@
 	var/mob/observer/ghost/two = get_named_instance(/mob/observer/ghost, T, "Ghost Two")
 	var/mob/observer/ghost/three = get_named_instance(/mob/observer/ghost, T, "Ghost Three")
 
-	two.ManualFollow(one)
-	three.ManualFollow(two)
+	two.start_following(one)
+	three.start_following(two)
 
 	three.stop_following()
 	if(is_listening_to_movement(one, two))
