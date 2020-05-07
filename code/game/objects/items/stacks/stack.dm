@@ -38,7 +38,7 @@
 	. = ..()
 	if(!plural_name)
 		plural_name = "[singular_name]s"
-		on_update_icon() // Support for stack icons
+		update_icon() // Support for stack icons
 
 /obj/item/stack/Destroy()
 	if(uses_charge)
