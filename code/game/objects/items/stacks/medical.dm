@@ -252,7 +252,7 @@
 			affecting.salve()
 			affecting.disinfect()
 			playsound(src, pick(apply_sounds), 25)
-			on_update_icon() // Support for stack icons
+			update_icon() // Support for stack icons
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -369,7 +369,7 @@
 // Support for stack icons
 /obj/item/stack/medical/ointment/Initialize()
 	. = ..()
-	on_update_icon()
+	update_icon()
 
 /obj/item/stack/medical/ointment/on_update_icon()
 	switch(amount)
