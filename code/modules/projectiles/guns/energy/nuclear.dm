@@ -66,14 +66,14 @@
 	desc = "An energy gun with an experimental miniaturized reactor."
 	icon = 'icons/obj/guns/adv_egun.dmi'
 	icon_state = "nucgun"
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 3)
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_LARGE
 	force = 8 //looks heavier than a pistol
 	self_recharge = 1
 	modifystate = null
 	one_hand_penalty = 1 //bulkier than an e-gun, but not quite the size of a carbine
-
+	max_shots = 5
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun),
 		list(mode_name="shock", projectile_type=/obj/item/projectile/beam/stun/shock),
