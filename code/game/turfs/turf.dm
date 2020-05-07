@@ -286,7 +286,7 @@ var/const/enterloopsanity = 100
 
 /turf/proc/remove_cleanables()
 	for(var/obj/effect/O in src)
-		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
+		if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable))
 			qdel(O)
 
 /turf/proc/update_blood_overlays()
