@@ -7,7 +7,7 @@
 
 	map_bounds = list(1,160,175,1)
 
-	overmap_spawn_in_me = list()
+	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius)
 
 	faction = "Human Colony"
 	base = 1

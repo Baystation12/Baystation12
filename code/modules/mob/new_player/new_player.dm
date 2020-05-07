@@ -289,7 +289,14 @@
 	if(!job.player_old_enough(src.client))	return 0
 	if(ticker.mode.disabled_jobs.Find(job.title))	return 0
 	if(ticker.mode.disabled_jobs_types.Find(job.type))	return 0
-	if(!job_master.get_spawnpoint_for(src.client, job, 1))	return 0
+	if(!job_master.get_spawnpoint_for(src.client, job, 1))
+		if(job.fallback_spawnpoint)
+			job.spawnpoint_override = job.fallback_spawnpoint
+			job.fallback_spawnpoint = null //Set the fallback to null because we don't want it to start falling back to itself, if the fallback also fails.
+			to_chat(src,"<span class = 'notice'>Job spawning failed due to unavailable spawnpoints for selected job. Now using defined fallback spawnpoint.</span>")
+			if(job_master.get_spawnpoint_for(src.client, job, 1))
+				return 1
+		return 0
 
 	return 1
 

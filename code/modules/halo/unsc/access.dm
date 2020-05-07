@@ -73,3 +73,18 @@
 /datum/access/unsc_ids
 	id = access_unsc_ids
 	desc = "ID Machine" //ID Computer -> ID Machine so Travis doesn't flag duplicate description
+
+/var/const/access_unsc_odst = 314
+/datum/access/unsc_odst
+	id = access_unsc_odst
+	desc = "ODST Access"
+
+/var/const/access_unsc_oni = 315
+/datum/access/unsc_oni
+	id = access_unsc_oni
+	desc = "ONI Access"
+
+/var/const/access_unsc_specialist = 316 //used for heavy weapons vendors
+/datum/access/unsc_specialist
+	id = access_unsc_specialist
+	desc = "Specialist Access"

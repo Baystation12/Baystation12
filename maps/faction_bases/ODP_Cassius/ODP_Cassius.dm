@@ -3,6 +3,8 @@
 
 #include "areas.dm"
 #include "ai_items.dm"
+#include "presets.dm"
+#include "spawnpoint.dm"
 #include "ODP_Cassius_1.dmm"
 #include "ODP_Cassius_2.dmm"
 
@@ -12,7 +14,7 @@
 	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
 	icon_state = "SMAC"
 	faction = "UNSC"
-	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsclightbrigade)
+	overmap_spawn_near_me = list(/obj/effect/overmap/sector/geminus_city)
 	base = 1
 	block_slipspace = 1
 	fore_dir = WEST
