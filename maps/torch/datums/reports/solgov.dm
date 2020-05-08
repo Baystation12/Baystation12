@@ -17,7 +17,8 @@
 	add_field(/datum/report_field/pencode_text, "Other Notes")
 	add_field(/datum/report_field/signature, "Signature")
 	add_field(/datum/report_field/options/yes_no, "Approved")
-	set_access(access_edit = access_representative)
+	set_access(access_edit = access_representative, override = 0)
+	set_access(access_edit = access_nanotrasen, override = 0)
 
 /datum/computer_file/report/recipient/sol/crewman_incident
 	form_name = "SCG-REP-4"

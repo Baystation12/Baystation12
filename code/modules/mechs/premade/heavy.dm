@@ -55,7 +55,7 @@
 /obj/item/mech_component/sensors/heavy/prebuild()
 	..()
 	software = new(src)
-	software.installed_software = list(MECH_SOFTWARE_WEAPONS, MECH_SOFTWARE_ADVWEAPONS)
+	software.installed_software = list(MECH_SOFTWARE_WEAPONS)
 
 /obj/item/mech_component/chassis/heavy
 	name = "reinforced exosuit chassis"
@@ -71,7 +71,7 @@
 
 /obj/item/mech_component/chassis/heavy/prebuild()
 	. = ..()
-	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
 
 /mob/living/exosuit/premade/heavy/merc/Initialize()
 	. = ..()

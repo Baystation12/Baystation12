@@ -21,7 +21,8 @@
 	effect_state = "green_sparkles"
 	effect_duration = 5
 
-	message = "You feel a pleasant rush of heat move through your body."
+	// Vars expect a constant at compile time, so we can't use macros for spans here
+	message = "<span class='notice'><b>You feel a pleasant rush of heat move through your body.</b></span>"
 
 /spell/targeted/heal_target/empower_spell()
 	if(!..())
@@ -64,7 +65,7 @@
 	amt_dam_robo = -10
 	amt_blood  = 28
 
-	message = "Your body feels like a furnace."
+	message = "<span class='notice'><b>Your body feels like a warm, cozy fire.</b></span>"
 
 /spell/targeted/heal_target/major/empower_spell()
 	if(!..())
@@ -152,7 +153,7 @@
 
 
 /spell/targeted/heal_target/trance
-	name = "trance"
+	name = "Trance"
 	desc = "A mighty spell of restoration that briefly forces its target into a deep, dreamless sleep, rapidly repairing their body and soul as their senses are dulled. The users of this mighty art are known for being short lived, slowly devolving into raving madness as the power they once relied on fails them with excessive use."
 	feedback = "TC"
 	spell_flags = SELECTABLE
@@ -176,7 +177,7 @@
 		L.forceMove(effect)
 		var/time = (L.getBruteLoss() + L.getFireLoss()) * 20
 		L.status_flags &= GODMODE
-		to_chat(L,"<span class='notice'>You will be in stasis for [time/10] second\s</span>")
+		to_chat(L,"<span class='notice'>You will be in stasis for [time/10] second\s.</span>")
 		addtimer(CALLBACK(src,.proc/cancel_rift),time)
 
 /spell/targeted/heal_target/trance/Destroy()

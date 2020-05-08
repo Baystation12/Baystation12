@@ -239,7 +239,6 @@ BLIND     // can't see anything
 		return item_state_slots[slot]
 	else
 		return icon_state
-	return ..()
 
 /obj/item/clothing/glasses/update_clothing_icon()
 	if (ismob(src.loc))
@@ -619,7 +618,6 @@ BLIND     // can't see anything
 	else
 		add_hidden(I, user)
 		return
-	..()
 
 /obj/item/clothing/shoes/proc/add_cuffs(var/obj/item/weapon/handcuffs/cuffs, var/mob/user)
 	if (!can_add_cuffs)
@@ -1054,3 +1052,9 @@ BLIND     // can't see anything
 	gender = NEUTER
 	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_DIONA)
 	var/undergloves = 1
+
+
+/obj/item/clothing/get_pressure_weakness(pressure,zone)
+	. = ..()
+	for(var/obj/item/clothing/accessory/A in accessories)
+		. = min(., A.get_pressure_weakness(pressure,zone))

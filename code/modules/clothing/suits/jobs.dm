@@ -197,6 +197,13 @@
 	icon_open = "ems_jacket_open"
 	icon_closed = "ems_jacket_closed"
 
+/obj/item/clothing/suit/storage/toggle/fr_jacket/emrs
+	name = "medical jacket"
+	desc = "A white jacket often worn in emergency medical and reanimation services across human space."
+	icon_state = "medical_jacket_closed"
+	icon_open = "medical_jacket_open"
+	icon_closed = "medical_jacket_closed"
+
 /obj/item/clothing/suit/storage/medical_chest_rig
 	name = "\improper MT chest-rig"
 	desc = "A black chest-rig with blue pouches worn by medical first responders, meant to carry their equipment. It has a blue 'Medic' tag on its chest."

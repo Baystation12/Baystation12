@@ -55,7 +55,7 @@
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/weapon/tank/emergency/oxygen/double/red,
 		/obj/item/weapon/extinguisher,
 		/obj/item/clothing/head/hardhat/firefighter/Chief)
 
@@ -111,7 +111,7 @@
 
 /obj/structure/closet/radiation/WillContain()
 	return list(
-		/obj/item/weapon/storage/med_pouch/toxin = 2,
+		/obj/item/weapon/storage/med_pouch/radiation = 2,
 		/obj/item/clothing/suit/radiation,
 		/obj/item/clothing/head/radiation,
 		/obj/item/clothing/suit/radiation,

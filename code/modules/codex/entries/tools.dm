@@ -91,3 +91,11 @@
 	mechanics_text = "The toolbox is a general-purpose storage item with lots of space. With an item in your hand, click on it to store it inside."
 	lore_text = "No one remembers which company designed this particular toolbox. It's been mass-produced, retired, brought out of retirement, and counterfeited for decades."
 	antag_text = "Carrying one of these and being bald tends to instill a certain primal fear in most people."
+
+/datum/codex_entry/tray
+	associated_paths = list(/obj/item/weapon/tray)
+	mechanics_text = "A storage item for food; foodstuffs on the tray take up half as much space as they normally would, letting you carry ingredients or food easily.\
+	<br><br>Switch to Grab intent to scoop up items by hitting them, or add them to the tray directly. Hit a table with Grab intent active to unload the tray's contents onto it. \
+	You can also activate the tray in-hand to dump its contents onto whatever's beneath you.\
+	<br><br>Non-Grab intents can be used to put the tray down onto surfaces without dumping it out, or Harm intent can be used to hit people with the tray itself. \
+	If you're a cyborg, robot, or other non-human, Help intent replaces Grab intent for interactions that use it."

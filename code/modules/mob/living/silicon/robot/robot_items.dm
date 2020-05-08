@@ -195,78 +195,8 @@
 	name = "RoboTray"
 	desc = "An autoloading tray specialized for carrying refreshments."
 
-/obj/item/weapon/tray/robotray/afterattack(atom/target, mob/user as mob, proximity)
-	if(!proximity)
-		return
-	if ( !target )
-		return
-	// pick up items, mostly copied from base tray pickup proc
-	// see code/game/objects/items/weapons/kitchen.dm line 241
-	if ( istype(target,/obj/item))
-		if ( !isturf(target.loc) ) // Don't load up stuff if it's inside a container or mob!
-			return
-		var turf/pickup = target.loc
-
-		var addedSomething = 0
-
-		for(var/obj/item/weapon/reagent_containers/food/I in pickup)
-
-
-			if( I != src && !I.anchored && !istype(I, /obj/item/clothing/under) && !istype(I, /obj/item/clothing/suit) && !istype(I, /obj/item/projectile) )
-				var/add = I.get_storage_cost()
-				if(calc_carry() + add >= max_carry)
-					break
-
-				I.forceMove(src)
-				carrying.Add(I)
-				overlays += image("icon" = I.icon, "icon_state" = I.icon_state, "layer" = 30 + I.layer)
-				addedSomething = 1
-		if ( addedSomething )
-			user.visible_message("<span class='notice'>\The [user] load some items onto their service tray.</span>")
-
-		return
-
-	// Unloads the tray, copied from base item's proc dropped() and altered
-	// see code/game/objects/items/weapons/kitchen.dm line 263
-
-	if ( isturf(target) || istype(target,/obj/structure/table) )
-		var foundtable = istype(target,/obj/structure/table/)
-		if ( !foundtable ) //it must be a turf!
-			for(var/obj/structure/table/T in target)
-				foundtable = 1
-				break
-
-		var turf/dropspot
-		if ( !foundtable ) // don't unload things onto walls or other silly places.
-			dropspot = user.loc
-		else if ( isturf(target) ) // they clicked on a turf with a table in it
-			dropspot = target
-		else					// they clicked on a table
-			dropspot = target.loc
-
-
-		overlays.Cut()
-
-		var droppedSomething = 0
-
-		for(var/obj/item/I in carrying)
-			I.forceMove(dropspot)
-			carrying.Remove(I)
-			droppedSomething = 1
-			if(!foundtable && isturf(dropspot))
-				// if no table, presume that the person just shittily dropped the tray on the ground and made a mess everywhere!
-				spawn()
-					for(var/i = 1, i <= rand(1,2), i++)
-						if(I)
-							step(I, pick(NORTH,SOUTH,EAST,WEST))
-							sleep(rand(2,4))
-		if ( droppedSomething )
-			if ( foundtable )
-				user.visible_message("<span class='notice'>[user] unloads their service tray.</span>")
-			else
-				user.visible_message("<span class='notice'>[user] drops all the items on their tray.</span>")
-
-	return ..()
+/obj/item/weapon/tray/robotray/can_add_item(obj/item/I)
+	return ..() && istype(I, /obj/item/weapon/reagent_containers)
 
 
 
@@ -397,75 +327,74 @@
 	mode = !mode
 	to_chat(usr, "You set \the [src] to deploy [mode ? "doors" : "walls"].")
 
-/obj/item/weapon/inflatable_dispenser/afterattack(var/atom/A, var/mob/user)
-	..(A, user)
-	if(!user)
+/obj/item/weapon/inflatable_dispenser/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if (!user)
 		return
-	if(!user.Adjacent(A))
-		to_chat(user, "You can't reach!")
-		return
-	if(istype(A, /turf))
-		try_deploy_inflatable(A, user)
-	if(istype(A, /obj/item/inflatable) || istype(A, /obj/structure/inflatable))
-		pick_up(A, user)
 
-/obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(var/turf/T, var/mob/living/user)
+	if (loc != user)
+		return
+
+	var/turf/T = get_turf(target)
+	if(!user.TurfAdjacent(T))
+		return
+
+	if(istype(target, /turf))
+		try_deploy_inflatable(target, user)
+	else if(istype(target, /obj/item/inflatable) || istype(target, /obj/structure/inflatable))
+		pick_up(target, user)
+
+/obj/item/weapon/inflatable_dispenser/proc/try_deploy_inflatable(turf/T, mob/living/user)
+	if(mode ? (!stored_doors) : (!stored_walls))
+		to_chat(user, SPAN_WARNING("\The [src] is out of [mode ? "doors" : "walls"]."))
+		return
+
+	var/placed
 	if(mode) // Door deployment
-		if(!stored_doors)
-			to_chat(user, "\The [src] is out of doors!")
-			return
-
-		if(T && istype(T))
-			new /obj/structure/inflatable/door(T)
-			stored_doors--
-
-	else // Wall deployment
-		if(!stored_walls)
-			to_chat(user, "\The [src] is out of walls!")
-			return
-
-		if(T && istype(T))
-			new /obj/structure/inflatable/wall(T)
-			stored_walls--
+		placed = new /obj/structure/inflatable/wall(T)
+		stored_walls--
+	else
+		placed = new /obj/structure/inflatable/door(T)
+		stored_doors--
 
 	playsound(T, 'sound/items/zip.ogg', 75, 1)
-	to_chat(user, "You deploy the inflatable [mode ? "door" : "wall"]!")
+	user.visible_message(
+		SPAN_ITALIC("\The [user] inflates \an [placed] with \an [src]."),
+		SPAN_NOTICE("You inflate \an [placed] with \the [src]."),
+		range = 5
+	)
 
-/obj/item/weapon/inflatable_dispenser/proc/pick_up(var/obj/A, var/mob/living/user)
-	if(istype(A, /obj/structure/inflatable))
-		if(istype(A, /obj/structure/inflatable/wall))
-			if(stored_walls >= max_walls)
-				to_chat(user, "\The [src] is full.")
-				return
-			stored_walls++
-			qdel(A)
-		else
-			if(stored_doors >= max_doors)
-				to_chat(user, "\The [src] is full.")
-				return
+/obj/item/weapon/inflatable_dispenser/proc/pick_up(obj/target, mob/living/user)
+	var/target_is_inflated = istype(target, /obj/structure/inflatable)
+	var/target_is_door = istype(target, /obj/structure/inflatable/door) || istype(target, /obj/item/inflatable/door)
+
+	var/collected = FALSE
+	if(target_is_door)
+		if(stored_doors < max_doors)
 			stored_doors++
-			qdel(A)
+			collected = TRUE
+	else
+		if(stored_walls < max_walls)
+			stored_walls++
+			collected = TRUE
+
+	if(target_is_inflated)
 		playsound(loc, 'sound/machines/hiss.ogg', 75, 1)
-		visible_message("\The [user] deflates \the [A] with \the [src]!")
-		return
-	if(istype(A, /obj/item/inflatable))
-		if(istype(A, /obj/item/inflatable/wall))
-			if(stored_walls >= max_walls)
-				to_chat(user, "\The [src] is full.")
-				return
-			stored_walls++
-			qdel(A)
-		else
-			if(stored_doors >= max_doors)
-				to_chat(usr, "\The [src] is full!")
-				return
-			stored_doors++
-			qdel(A)
-		visible_message("\The [user] picks up \the [A] with \the [src]!")
-		return
 
-	to_chat(user, "You fail to pick up \the [A] with \the [src]")
-	return
+	if(collected)
+		user.visible_message(
+			SPAN_ITALIC("\The [user] picks up \an [target] with \an [src]."),
+			SPAN_NOTICE("You pick up \the [target] with \the [src]."),
+			target_is_inflated ? SPAN_ITALIC("You can hear rushing air.") : null,
+			range = 5
+		)
+
+		qdel(target)
+	else
+		if(target_is_inflated)
+			var/obj/structure/inflatable/I = target
+			I.deflate()
+
+		to_chat(user, SPAN_WARNING("\The [src] is already full of those."))
 
 /obj/item/weapon/reagent_containers/spray/cleaner/drone
 	name = "space cleaner"

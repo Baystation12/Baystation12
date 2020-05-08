@@ -1,6 +1,4 @@
-var/datum/controller/subsystem/fluids/SSfluids
-
-/datum/controller/subsystem/fluids
+SUBSYSTEM_DEF(fluids)
 	name = "Fluids"
 	wait = 10
 	flags = SS_NO_INIT
@@ -28,9 +26,6 @@ var/datum/controller/subsystem/fluids/SSfluids
 		'sound/effects/gurgle3.ogg',
 		'sound/effects/gurgle4.ogg'
 		)
-
-/datum/controller/subsystem/fluids/New()
-	NEW_SS_GLOBAL(SSfluids)
 
 /datum/controller/subsystem/fluids/stat_entry()
 	..("A:[active_fluids.len] S:[water_sources.len]")

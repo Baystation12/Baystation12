@@ -87,6 +87,9 @@
 #define TEMPLATE_FLAG_NO_RUINS         8 // if it should forbid ruins from spawning on top of it
 #define TEMPLATE_FLAG_NO_RADS          16// Removes all radiation from the template after spawning.
 
+//Ruin map template flags
+#define TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED 32 // Ruin is not available during spawning unless another ruin permits it.
+
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
 #ifndef CUSTOM_ITEM_CONFIG

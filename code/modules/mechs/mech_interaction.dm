@@ -50,6 +50,13 @@
 	if(LAZYISIN(pilots, user) && !hatch_closed)
 		return TRUE
 	. = ..()
+
+//UI distance checks
+/mob/living/exosuit/contents_nano_distance(src_object, mob/living/user)
+	. = ..()
+	if(!hatch_closed)
+		return max(shared_living_nano_distance(src_object), .) //Either visible to mech(outside) or visible to user (inside)
+	
 	
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
 
@@ -63,15 +70,22 @@
 	if(modifiers["shift"])
 		user.examinate(A)
 		return
+		
+	if(modifiers["ctrl"])
+		if(selected_system)
+			if(selected_system == A)
+				selected_system.CtrlClick(user)
+				setClickCooldown(3)
+			return	
 
 	if(!(user in pilots) && user != src)
 		return
 
+	if(!canClick())
+		return
+	
 	// Are we facing the target?
 	if(A.loc != src && !(get_dir(src, A) & dir))
-		return
-
-	if(!canClick())
 		return
 
 	if(!arms)

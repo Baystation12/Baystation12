@@ -21,10 +21,8 @@
 	min_skill = list(   SKILL_BUREAUCRACY	= SKILL_EXPERT,
 	                    SKILL_FINANCE		= SKILL_BASIC)
 	skill_points = 20
-	access = list(access_liaison, access_security, access_medical,
-						access_engine, access_research, access_bridge,
-						access_cargo, access_solgov_crew, access_hangar,
-						access_nanotrasen, access_commissary, access_petrov)
+	access = list(access_liaison, access_bridge, access_solgov_crew,
+						access_nanotrasen, access_commissary)
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()
@@ -66,10 +64,8 @@
 		"Asset Protection Agent"
 	)
 	skill_points = 20
-	access = list(access_liaison, access_security, access_medical,
-						access_engine, access_research, access_bridge,
-						access_cargo, access_solgov_crew, access_hangar,
-						access_nanotrasen, access_commissary, access_petrov,
+	access = list(access_liaison, access_bridge, access_solgov_crew,
+						access_nanotrasen, access_commissary,
 						access_sec_guard)
 	defer_roundstart_spawn = TRUE
 

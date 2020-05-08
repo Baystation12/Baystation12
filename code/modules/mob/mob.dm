@@ -82,7 +82,7 @@
 // message is the message output to anyone who can see e.g. "[src] does something!"
 // self_message (optional) is what the src mob sees  e.g. "You do something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/mob/visible_message(var/message, var/self_message, var/blind_message, var/range = world.view, var/checkghosts = null, var/narrate = FALSE)
+/mob/visible_message(message, self_message, blind_message, range = world.view, checkghosts = null, narrate = FALSE, list/exclude_objs = null, list/exclude_mobs = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -90,10 +90,16 @@
 
 	for(var/o in objs)
 		var/obj/O = o
+		if (exclude_objs?.len && (O in exclude_objs))
+			exclude_objs -= O
+			continue
 		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 
 	for(var/m in mobs)
 		var/mob/M = m
+		if (exclude_mobs?.len && (M in exclude_mobs))
+			exclude_mobs -= M
+			continue
 		var/mob_message = message
 
 		if(isghost(M))
@@ -122,7 +128,7 @@
 // self_message (optional) is what the src mob hears.
 // deaf_message (optional) is what deaf people will see.
 // hearing_distance (optional) is the range, how many tiles away the message can be heard.
-/mob/audible_message(var/message, var/self_message, var/deaf_message, var/hearing_distance = world.view, var/checkghosts = null, var/narrate = FALSE)
+/mob/audible_message(message, self_message, deaf_message, hearing_distance = world.view, checkghosts = null, narrate = FALSE, list/exclude_objs = null, list/exclude_mobs = null)
 	var/turf/T = get_turf(src)
 	var/list/mobs = list()
 	var/list/objs = list()
@@ -130,6 +136,9 @@
 
 	for(var/m in mobs)
 		var/mob/M = m
+		if (exclude_mobs?.len && (M in exclude_mobs))
+			exclude_mobs -= M
+			continue
 		var/mob_message = message
 
 		if(isghost(M))
@@ -146,6 +155,9 @@
 
 	for(var/o in objs)
 		var/obj/O = o
+		if (exclude_objs?.len && (O in exclude_objs))
+			exclude_objs -= O
+			continue
 		O.show_message(message, AUDIBLE_MESSAGE, deaf_message, VISIBLE_MESSAGE)
 
 /mob/proc/add_ghost_track(var/message, var/mob/observer/ghost/M)
@@ -394,7 +406,7 @@
 /mob/proc/print_flavor_text()
 	if (flavor_text && flavor_text != "")
 		var/msg = replacetext(flavor_text, "\n", " ")
-		if(lentext(msg) <= 40)
+		if(length(msg) <= 40)
 			return "<span class='notice'>[msg]</span>"
 		else
 			return "<span class='notice'>[copytext_preserve_html(msg, 1, 37)]... <a href='byond://?src=\ref[src];flavor_more=1'>More...</a></span>"

@@ -1,7 +1,7 @@
 /obj/effect/overmap/visitable/sector/exoplanet/volcanic
 	name = "volcanic exoplanet"
 	desc = "A tectonically unstable planet, extremely rich in minerals."
-	color = "#8e3900"
+	color = "#9c2020"
 	planetary_area = /area/exoplanet/volcanic
 	rock_colors = list(COLOR_DARK_GRAY)
 	plant_colors = list("#a23c05","#3f1f0d","#662929","#ba6222","#7a5b3a","#120309")

@@ -48,8 +48,10 @@ SUBSYSTEM_DEF(radiation)
 		listeners.len--
 
 		if(!QDELETED(A))
-			var/turf/T = get_turf(A)
-			var/rads = get_rads_at_turf(T)
+			var/atom/location = A.loc
+			var/rads = 0
+			if(istype(location))
+				rads = location.get_rads()
 			if(rads)
 				A.rad_act(rads)
 		if (MC_TICK_CHECK)

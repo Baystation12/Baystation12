@@ -3,10 +3,10 @@
 /turf/space,
 /area/space)
 "ab" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/shuttle_starboard)
 "ac" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "ad" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
@@ -32,13 +32,13 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "aj" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/wing_starboard)
 "ak" = (
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_starboard)
 "al" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/fore_starboard_spike)
 "am" = (
 /obj/effect/catwalk_plated/ascent,
@@ -71,7 +71,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "av" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/hydroponics_starboard)
 "aw" = (
 /obj/machinery/atmospherics/portables_connector,
@@ -233,7 +233,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "aS" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/fore_port_prow)
 "aT" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
@@ -368,7 +368,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
 "bn" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/engineering)
 "bo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -481,11 +481,11 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/wing_starboard)
 "bz" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/habitation)
 "bA" = (
 /obj/effect/submap_landmark/joinable_submap/ascent_seedship,
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/habitation)
 "bD" = (
 /obj/machinery/light/ascent{
@@ -695,7 +695,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_starboard_prow)
 "bW" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/wing_port)
 "bX" = (
 /obj/machinery/atmospherics/unary/vent_pump/on/ascent{
@@ -965,7 +965,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/habitation)
 "cA" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/hydroponics_port)
 "cB" = (
 /obj/structure/cable/cyan{
@@ -2500,7 +2500,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_port_prow)
 "fQ" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/fore_port_spike)
 "fR" = (
 /turf/simulated/floor/tiled/ascent,
@@ -2693,7 +2693,7 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/shuttle_starboard)
 "gr" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
@@ -4255,7 +4255,7 @@
 /turf/simulated/floor/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "lW" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "md" = (
 /obj/structure/window/phoronreinforced{
@@ -4309,7 +4309,7 @@
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/aft_starboard_jut)
 "mY" = (
-/turf/simulated/wall/ascent,
+/turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/fore_starboard_jut)
 "na" = (
 /obj/effect/catwalk_plated/ascent,

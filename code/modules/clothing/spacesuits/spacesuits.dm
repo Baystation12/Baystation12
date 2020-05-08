@@ -78,7 +78,7 @@
 		icon_state = "[initial(icon_state)]_dark"
 		flash_protection = FLASH_PROTECTION_MAJOR
 		flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-		tint = TINT_HEAVY
+		tint = TINT_MODERATE
 	else
 		icon_state = initial(icon_state)
 		flash_protection = FLASH_PROTECTION_NONE

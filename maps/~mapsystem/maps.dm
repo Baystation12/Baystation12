@@ -23,6 +23,7 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 	var/name = "Unnamed Map"
 	var/full_name = "Unnamed Map"
 	var/path
+	var/config_path = null
 
 	var/list/station_levels = list() // Z-levels the station exists on
 	var/list/admin_levels = list()   // Z-levels for admin functionality (Centcom, shuttle transit, etc)
@@ -230,6 +231,38 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 		lobby_track_type = pick(subtypesof(/music_track) - exclude)
 	return decls_repository.get_decl(lobby_track_type)
 
+/datum/map/proc/setup_config(name, value, filename)
+	switch (name)
+		if ("use_overmap") use_overmap = text2num_or_default(value, use_overmap)
+		if ("overmap_z") overmap_z = text2num_or_default(value, overmap_z)
+		if ("overmap_size") overmap_size = text2num_or_default(value, overmap_size)
+		if ("overmap_event_areas") overmap_event_areas = text2num_or_default(value, overmap_event_areas)
+		if ("num_exoplanets") num_exoplanets = text2num_or_default(value, num_exoplanets)
+		if ("away_site_budget") away_site_budget = text2num_or_default(value, away_site_budget)
+		if ("station_name") station_name = value
+		if ("station_short") station_short = value
+		if ("dock_name") dock_name = value
+		if ("boss_name") boss_name = value
+		if ("boss_short") boss_short = value
+		if ("company_name") company_name = value
+		if ("company_short") company_short = value
+		if ("shuttle_docked_message") shuttle_docked_message = value
+		if ("shuttle_leaving_dock") shuttle_leaving_dock = value
+		if ("shuttle_called_message") shuttle_called_message = value
+		if ("shuttle_recall_message") shuttle_recall_message = value
+		if ("emergency_shuttle_docked_message") emergency_shuttle_docked_message = value
+		if ("emergency_shuttle_leaving_dock") emergency_shuttle_leaving_dock = value
+		if ("emergency_shuttle_recall_message") emergency_shuttle_recall_message = value
+		if ("starting_money") starting_money = text2num_or_default(value, starting_money)
+		if ("department_money") department_money = text2num_or_default(value, department_money)
+		if ("salary_modifier") salary_modifier = text2num_or_default(value, salary_modifier)
+		if ("supply_currency_name") supply_currency_name = value
+		if ("supply_currency_name_short") supply_currency_name_short = value
+		if ("local_currency_name") local_currency_name = value
+		if ("local_currency_name_singular") local_currency_name_singular = value
+		if ("local_currency_name_short") local_currency_name_short = value
+		else log_misc("Unknown setting [name] in [filename].")
+
 /datum/map/proc/setup_map()
 	lobby_track = get_lobby_track()
 	world.update_status()
@@ -247,33 +280,84 @@ var/const/MAP_HAS_RANK = 2		//Rank system, also togglable
 /datum/map/proc/perform_map_generation()
 	return
 
+
+/* It is perfectly possible to create loops with TEMPLATE_FLAG_ALLOW_DUPLICATES and force/allow. Don't. */
+/proc/resolve_site_selection(datum/map_template/ruin/away_site/site, list/selected, list/available, list/unavailable, list/by_type)
+	var/cost = 0
+	if (site in selected)
+		if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+			return cost
+	if (!(site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+		available -= site
+	cost += site.cost
+	selected += site
+
+	for (var/forced_type in site.force_ruins)
+		cost += resolve_site_selection(by_type[forced_type], selected, available, unavailable, by_type)
+
+	for (var/banned_type in site.ban_ruins)
+		var/datum/map_template/ruin/away_site/banned = by_type[banned_type]
+		if (banned in unavailable)
+			continue
+		unavailable += banned
+		available -= banned
+
+	for (var/allowed_type in site.allow_ruins)
+		var/datum/map_template/ruin/away_site/allowed = by_type[allowed_type]
+		if (allowed in available)
+			continue
+		if (allowed in unavailable)
+			continue
+		if (allowed in selected)
+			if (!(allowed.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES))
+				continue
+		available[allowed] = allowed.spawn_weight
+
+	return cost
+
+
 /datum/map/proc/build_away_sites()
 #ifdef UNIT_TEST
 	report_progress("Unit testing, so not loading away sites")
 	return // don't build away sites during unit testing
 #else
 	report_progress("Loading away sites...")
-	var/list/sites_by_spawn_weight = list()
+
+	var/list/guaranteed = list()
+	var/list/selected = list()
+	var/list/available = list()
+	var/list/unavailable = list()
+	var/list/by_type = list()
+
 	for (var/site_name in SSmapping.away_sites_templates)
 		var/datum/map_template/ruin/away_site/site = SSmapping.away_sites_templates[site_name]
+		if (site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED)
+			guaranteed += site
+			if ((site.template_flags & TEMPLATE_FLAG_ALLOW_DUPLICATES) && !(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
+				available[site] = site.spawn_weight
+		else if (!(site.template_flags & TEMPLATE_FLAG_RUIN_STARTS_DISALLOWED))
+			available[site] = site.spawn_weight
+		by_type[site.type] = site
 
-		if((site.template_flags & TEMPLATE_FLAG_SPAWN_GUARANTEED) && site.load_new_z()) // no check for budget, but guaranteed means guaranteed
-			report_progress("Loaded guaranteed away site [site]!")
-			away_site_budget -= site.cost
-			continue
+	var/budget = away_site_budget
+	for (var/datum/map_template/ruin/away_site/site in guaranteed)
+		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
 
-		sites_by_spawn_weight[site] = site.spawn_weight
-	while (away_site_budget > 0 && sites_by_spawn_weight.len)
-		var/datum/map_template/ruin/away_site/selected_site = pickweight(sites_by_spawn_weight)
-		if (!selected_site)
-			break
-		sites_by_spawn_weight -= selected_site
-		if(selected_site.cost > away_site_budget)
+	while (budget > 0 && length(available))
+		var/datum/map_template/ruin/away_site/site = pickweight(available)
+		if (site.cost > budget)
+			unavailable += site
+			available -= site
 			continue
-		if (selected_site.load_new_z())
-			report_progress("Loaded away site [selected_site]!")
-			away_site_budget -= selected_site.cost
-	report_progress("Finished loading away sites, remaining budget [away_site_budget], remaining sites [sites_by_spawn_weight.len]")
+		budget -= resolve_site_selection(site, selected, available, unavailable, by_type)
+
+	report_progress("Finished selecting away sites ([english_list(selected)]) for [away_site_budget - budget] cost of [away_site_budget] budget.")
+
+	for (var/datum/map_template/template in selected)
+		if (template.load_new_z())
+			report_progress("Loaded away site [template]!")
+		else
+			report_progress("Failed loading away site [template]!")
 #endif
 
 /datum/map/proc/build_exoplanets()

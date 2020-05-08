@@ -731,11 +731,9 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/guppy{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 4;
-	id_tag = "guppy_shuttle_pump_out_internal";
-	power_rating = 15000;
-	scrubbing = "siphon"
+	id_tag = "guppy_shuttle_pump_out_external"
 	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
@@ -753,9 +751,8 @@
 	req_access = list()
 	},
 /obj/machinery/shield_diffuser,
-/obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
-	dir = 4
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -799,8 +796,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_internal";
-	use_power = 1
+	id_tag = "guppy_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1008,10 +1004,6 @@
 /turf/simulated/wall/prepainted,
 /area/quartermaster/expedition/storage)
 "cf" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
-	dir = 4
-	},
 /obj/machinery/door/airlock/external{
 	autoset_access = 0;
 	frequency = 1431;
@@ -1020,6 +1012,7 @@
 	req_access = list()
 	},
 /obj/machinery/shield_diffuser,
+/obj/machinery/atmospherics/pipe/manifold/visible,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
 "cg" = (
@@ -1055,11 +1048,9 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/techfloor,
-/obj/machinery/atmospherics/unary/vent_scrubber/guppy{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_external";
-	power_rating = 15000;
-	scrubbing = "siphon"
+	id_tag = "guppy_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1303,7 +1294,7 @@
 "cH" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/guppy{
 	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_external";
+	id_tag = "guppy_shuttle_pump_out_scrubber";
 	power_rating = 15000;
 	scrubbing = "siphon"
 	},
@@ -4758,7 +4749,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/guppy{
 	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_external";
+	id_tag = "guppy_shuttle_pump_out_scrubber";
 	power_rating = 15000;
 	scrubbing = "siphon"
 	},
@@ -11654,9 +11645,9 @@
 /turf/simulated/floor/reinforced/airless,
 /area/shuttle/petrov/toxins)
 "Cm" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
-	dir = 4
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
+	dir = 4;
+	id_tag = "guppy_shuttle_pump_out_external"
 	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
@@ -12376,9 +12367,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/quartermaster/hangar)
 "Ex" = (
@@ -15980,16 +15969,6 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
-"RW" = (
-/obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
-	},
-/obj/machinery/atmospherics/valve/shutoff{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/quartermaster/hangar)
 "RX" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/reinforced,
@@ -37230,7 +37209,7 @@ cy
 Ho
 Ho
 iq
-RW
+Ho
 Ho
 Ho
 Ho

@@ -50,6 +50,14 @@
 /obj
 	var/rad_resistance_modifier = 1  // Allow overriding rad resistance
 
+/atom/proc/get_rads()
+	if(loc)
+		return loc.get_rads()
+	return 0
+
+/turf/get_rads()
+	return SSradiation.get_rads_at_turf(src)
+
 // If people expand the system, this may be useful. Here as a placeholder until then
 /atom/proc/rad_act(var/severity)
 	return 1

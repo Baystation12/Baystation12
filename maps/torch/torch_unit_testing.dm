@@ -12,7 +12,6 @@
 		/area/engineering/engine_smes = NO_SCRUBBER|NO_VENT,
 		/area/engineering/fuelbay = NO_SCRUBBER|NO_VENT,
 		/area/engineering/wastetank = NO_SCRUBBER|NO_VENT,
-		/area/engineering/shieldbay = NO_SCRUBBER|NO_VENT,
 		/area/hallway/primary/seconddeck/center = NO_SCRUBBER|NO_VENT,
 		/area/holodeck = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/maintenance = NO_SCRUBBER|NO_VENT,

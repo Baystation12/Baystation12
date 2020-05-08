@@ -6,7 +6,7 @@
 	density = TRUE
 	opacity = FALSE
 	anchored = FALSE
-	movement_handlers = list(/datum/movement_handler/delay = list(5))
+	movement_handlers = list(/datum/movement_handler/deny_multiz, /datum/movement_handler/delay = list(5))
 	appearance_flags = PIXEL_SCALE
 
 	var/list/nymphs                  = list()

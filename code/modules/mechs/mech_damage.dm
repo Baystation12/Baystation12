@@ -14,23 +14,37 @@
 		user.visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly with \the [I]."))
 		return
 
-	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
-		var/mob/living/pilot = pick(pilots)
-		return pilot.resolve_item_attack(I, user, def_zone)
+	switch(def_zone)
+		if(BP_HEAD , BP_CHEST, BP_MOUTH, BP_EYES)
+			if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+				var/mob/living/pilot = pick(pilots)
+				var/zone = pilot.resolve_item_attack(I, user, def_zone)
+				if(zone)
+					var/datum/attack_result/AR = new()
+					AR.hit_zone = zone
+					AR.attackee = pilot
+					return AR
 
 	return def_zone //Careful with effects, mechs shouldn't be stunned
-
+	
 /mob/living/exosuit/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
 		var/mob/living/pilot = pick(pilots)
 		return pilot.hitby(AM, TT)
 	. = ..()
 
+/mob/living/exosuit/bullet_act(obj/item/projectile/P, def_zone, used_weapon)
+	switch(def_zone)
+		if(BP_HEAD , BP_CHEST, BP_MOUTH, BP_EYES)
+			if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
+				var/mob/living/pilot = pick(pilots)
+				return pilot.bullet_act(P, def_zone, used_weapon)
+	..()
 
 /mob/living/exosuit/get_armors_by_zone(def_zone, damage_type, damage_flags)
 	. = ..()
-	if(body && body.armor)
-		var/body_armor = get_extension(body.armor, /datum/extension/armor)
+	if(body && body.m_armour)
+		var/body_armor = get_extension(body.m_armour, /datum/extension/armor)
 		if(body_armor)
 			. += body_armor
 
@@ -67,7 +81,7 @@
 	var/list/after_armor = modify_damage_by_armor(def_zone, damage, damagetype, damage_flags, src, armor_pen, TRUE)
 	damage = after_armor[1]
 	damagetype = after_armor[2]
-
+	
 	if(!damage)
 		return 0
 
@@ -88,7 +102,14 @@
 
 	return 1
 
+/mob/living/exosuit/rad_act(var/severity)
+	if(severity)
+		apply_damage(severity, IRRADIATE, damage_flags = DAM_DISPERSED)
 
+/mob/living/exosuit/get_rads()
+	if(!hatch_closed || (body.pilot_coverage < 100)) //Open, environment is the source
+		return ..()
+	return radiation //Closed, what made it through our armour?
 
 /mob/living/exosuit/getFireLoss()
 	var/total = 0

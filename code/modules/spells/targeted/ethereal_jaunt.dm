@@ -3,15 +3,15 @@
 	desc = "This spell creates your ethereal form, temporarily making you invisible and able to pass through walls."
 	feedback = "EJ"
 	school = "transmutation"
-	charge_max = 300
+	charge_max = 30 SECONDS
 	spell_flags = Z2NOCAST | NEEDSCLOTHES | INCLUDEUSER
 	invocation = "none"
 	invocation_type = SpI_NONE
-	range = -1
+	range = 0
 	max_targets = 1
 	level_max = list(Sp_TOTAL = 4, Sp_SPEED = 4, Sp_POWER = 3)
-	cooldown_min = 100 //50 deciseconds reduction per rank
-	duration = 50 //in deciseconds
+	cooldown_min = 10 SECONDS //50 deciseconds reduction per rank
+	duration = 5 SECONDS
 
 	hud_state = "wiz_jaunt"
 
@@ -58,7 +58,7 @@
 /spell/targeted/ethereal_jaunt/empower_spell()
 	if(!..())
 		return 0
-	duration += 20
+	duration += 2 SECONDS
 
 	return "[src] now lasts longer."
 

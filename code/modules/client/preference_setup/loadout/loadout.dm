@@ -353,7 +353,7 @@ var/list/gear_datums = list()
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
 /datum/gear/New()
-	if(FLAGS_EQUALS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
+	if(HAS_FLAGS(flags, GEAR_HAS_TYPE_SELECTION|GEAR_HAS_SUBTYPE_SELECTION))
 		CRASH("May not have both type and subtype selection tweaks")
 	if(!description)
 		var/obj/O = path

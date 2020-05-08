@@ -747,6 +747,13 @@
 		bio = ARMOR_BIO_SMALL
 		)
 
+/obj/item/clothing/under/sterile/emrs
+	name = "medical uniform"
+	desc = "An uniform worn in emergency medical and reanimation services across human space."
+	icon_state = "medical_Uniform"
+	item_state = "medical_Uniform"
+	worn_state = "medical_Uniform"
+
 /obj/item/clothing/under/kimono
 	desc = "A traditional robe with remarkably long sleeves, mostly worn by women. <i>Sugoi.</i>"
 	name = "kimono"

@@ -8483,9 +8483,11 @@
 	icon_state = "alarm0";
 	pixel_x = 24
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/security/wing)
 "aDE" = (
@@ -8695,7 +8697,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/monotile,
+/obj/effect/catwalk_plated,
+/turf/simulated/floor/plating,
 /area/security/wing)
 "aEI" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
@@ -9034,19 +9037,6 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftport)
-"aFP" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/structure/disposalpipe/segment,
-/turf/simulated/floor/tiled/monotile,
-/area/security/wing)
 "aFQ" = (
 /obj/effect/wallframe_spawn/reinforced/polarized{
 	id = "bo_windows"
@@ -9266,11 +9256,11 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+/obj/structure/disposalpipe/segment,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/security/wing)
 "aGM" = (
@@ -10089,6 +10079,7 @@
 /obj/machinery/door/airlock/multi_tile/glass/security{
 	name = "Brig Wing"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/wing)
 "aKB" = (
@@ -10100,6 +10091,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/security/wing)
 "aKE" = (
@@ -15562,8 +15554,8 @@
 	pixel_z = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	icon_state = "intact";
-	dir = 5
+	dir = 5;
+	icon_state = "intact"
 	},
 /obj/structure/closet/crate/freezer,
 /obj/item/weapon/reagent_containers/ivbag/nanoblood,
@@ -17490,6 +17482,9 @@
 	network = list("Medical, Engineering")
 	},
 /obj/machinery/vitals_monitor,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "eOb" = (
@@ -17542,7 +17537,6 @@
 	pixel_x = -2;
 	pixel_y = 24
 	},
-/obj/item/weapon/storage/firstaid/adv,
 /obj/item/weapon/reagent_containers/spray/sterilizine,
 /obj/item/weapon/reagent_containers/spray/cleaner/drone,
 /turf/simulated/floor/tiled/dark,
@@ -18205,6 +18199,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/table/standard,
+/obj/item/weapon/storage/firstaid/adv,
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
 "fDJ" = (
@@ -22497,11 +22492,11 @@
 	pixel_x = -24;
 	pixel_y = 0
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/machinery/camera/network/security{
 	c_tag = "Security Hallway - Center";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -26614,7 +26609,8 @@
 	pixel_y = -28
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 1
+	dir = 1;
+	id_tag = null
 	},
 /obj/structure/cable/green,
 /turf/simulated/floor/tiled/white,
@@ -27234,7 +27230,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
 "qab" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume,
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 2;
+	frequency = 1441;
+	icon_state = "map_injector";
+	id = "xenobot_in";
+	use_power = 1
+	},
 /obj/machinery/light/small{
 	dir = 8
 	},
@@ -27269,7 +27271,20 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/command/armoury)
 "qcb" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/atmospherics/unary/vent_pump/tank{
+	dir = 2;
+	external_pressure_bound = 0;
+	external_pressure_bound_default = 0;
+	icon_state = "map_vent_in";
+	id_tag = "xenobot_out";
+	initialize_directions = 2;
+	internal_pressure_bound = 2000;
+	internal_pressure_bound_default = 2000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 0
+	},
 /turf/simulated/floor/reinforced,
 /area/rnd/xenobiology/xenoflora)
 "qdb" = (
@@ -27993,6 +28008,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/research)
+"qYy" = (
+/obj/effect/floor_decal/corner/red{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/security/wing)
 "qZb" = (
 /obj/machinery/atmospherics/pipe/manifold/visible{
 	dir = 8
@@ -28014,9 +28039,11 @@
 /area/rnd/xenobiology/xenoflora)
 "rab" = (
 /obj/machinery/computer/air_control{
+	input_tag = "xenobot_in";
 	name = "Xenoflora Gas Monitor";
-	sensor_tag = "xenobot_sensor";
-	sensor_name = "Xenoflora Environment"
+	output_tag = "xenobot_out";
+	sensor_name = "Xenoflora Environment";
+	sensor_tag = "xenobot_sensor"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -30736,7 +30763,7 @@
 	icon_state = "bordercolorhalf";
 	dir = 8
 	},
-/turf/simulated/floor/tiled/monotile,
+/turf/simulated/floor/tiled,
 /area/security/wing)
 "uJn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -30748,11 +30775,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
-"uKb" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/monotile,
-/area/security/wing)
 "uLB" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	icon_state = "map-scrubbers";
@@ -41198,9 +41220,9 @@ htq
 nlb
 cix
 rOE
-rOE
+qYy
 uJd
-uKb
+uJd
 krc
 rOE
 aJn
@@ -41402,7 +41424,7 @@ nDB
 aCx
 aDD
 aEH
-aFP
+aEH
 aGL
 aHX
 jON

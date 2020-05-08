@@ -19,7 +19,6 @@ GLOBAL_LIST_INIT(mech_weapon_overlays, icon_states('icons/mecha/mech_weapon_over
 #define MECH_SOFTWARE_UTILITY "utility equipment"                // Plasma torch, clamp, drill.
 #define MECH_SOFTWARE_MEDICAL "medical support systems"          // Sleeper.
 #define MECH_SOFTWARE_WEAPONS "standard weapon systems"          // Ballistics and energy weapons.
-#define MECH_SOFTWARE_ADVWEAPONS "advanced weapon systems"       // Railguns, missile launcher.
 #define MECH_SOFTWARE_ENGINEERING "advanced engineering systems" // RCD.
 
 // EMP damage points before various effects occur.

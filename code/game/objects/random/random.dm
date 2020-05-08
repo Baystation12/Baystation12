@@ -524,7 +524,7 @@ obj/random/closet //A couple of random closets to spice up maint
 /obj/random/tank/spawn_choices()
 	return list(/obj/item/weapon/tank/oxygen = 5,
 				/obj/item/weapon/tank/oxygen/yellow = 4,
-				/obj/item/weapon/tank/oxygen/red = 4,
+				/obj/item/weapon/tank/emergency/oxygen/double/red = 4,
 				/obj/item/weapon/tank/air = 3,
 				/obj/item/weapon/tank/emergency/oxygen = 4,
 				/obj/item/weapon/tank/emergency/oxygen/engi = 3,

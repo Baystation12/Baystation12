@@ -157,7 +157,7 @@ var/list/gamemode_cache = list()
 	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
 	var/ghost_interaction = 0
 
-	var/comms_password = ""
+	var/comms_password = null
 	var/ban_comms_password = null
 	var/list/forbidden_versions = list() // Clients with these byond versions will be autobanned. Format: string "byond_version.byond_build"; separate with ; in config, e.g. 512.1234;512.1235
 	var/minimum_byond_version = 0
@@ -825,6 +825,12 @@ var/list/gamemode_cache = list()
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
+
+		else if(type == "using_map")
+			if(!value)
+				log_misc("Unknown value for setting [name] in [filename].")
+			else
+				GLOB.using_map.setup_config(name, value, filename)
 
 	fps = round(fps)
 	if(fps <= 0)

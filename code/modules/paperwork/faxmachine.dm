@@ -37,7 +37,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 			return
 		scan = O
 		to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
-	else 
+	else
 		..()
 
 /obj/machinery/photocopier/faxmachine/interface_interact(mob/user)
@@ -96,52 +96,52 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	onclose(user, "copier")
 	return
 
-/obj/machinery/photocopier/faxmachine/Topic(href, href_list)
+/obj/machinery/photocopier/faxmachine/OnTopic(mob/user, href_list, state)
 	if(href_list["send"])
 		if(copyitem)
 			if (destination in admin_departments)
-				send_admin_fax(usr, destination)
+				send_admin_fax(user, destination)
 			else
 				sendfax(destination)
 
 			if (sendcooldown)
 				spawn(sendcooldown) // cooldown time
 					sendcooldown = 0
+		return TOPIC_REFRESH
 
-	else if(href_list["remove"])
-		if(copyitem)
-			usr.put_in_hands(copyitem)
-			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
-			copyitem = null
-			updateUsrDialog()
+	if(href_list["remove"])
+		OnRemove(user)
+		return TOPIC_REFRESH
 
 	if(href_list["scan"])
 		if (scan)
-			if(ishuman(usr))
-				usr.put_in_hands(scan)
+			if(ishuman(user))
+				user.put_in_hands(scan)
 			else
 				scan.dropInto(loc)
 			scan = null
 		else
-			var/obj/item/I = usr.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I, src))
+			var/obj/item/I = user.get_active_hand()
+			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I, src))
 				scan = I
 		authenticated = 0
+		return TOPIC_REFRESH
 
 	if(href_list["dept"])
-		var/lastdestination = destination
-		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
-		if(!destination) destination = lastdestination
+		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
+		if(desired_destination && CanInteract(user, state))
+			destination = desired_destination
+		return TOPIC_REFRESH
 
 	if(href_list["auth"])
 		if ( (!( authenticated ) && (scan)) )
 			if (has_access(send_access, scan.GetAccess()))
 				authenticated = 1
+		return TOPIC_REFRESH
 
 	if(href_list["logout"])
 		authenticated = 0
-
-	updateUsrDialog()
+		return TOPIC_REFRESH
 
 /obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination)
 	if(stat & (BROKEN|NOPOWER))

@@ -1,5 +1,6 @@
 /mob/living/exosuit
 	movement_handlers = list(
+		/datum/movement_handler/deny_multiz,
 		/datum/movement_handler/mob/space/exosuit,
 		/datum/movement_handler/mob/exosuit
 	)

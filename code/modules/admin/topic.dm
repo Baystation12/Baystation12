@@ -1049,6 +1049,23 @@
 		speech = sanitize(speech) // Nah, we don't trust them
 		log_and_message_admins("forced [key_name_admin(M)] to say: [speech]")
 
+	else if (href_list["reloadsave"])
+		if(!check_rights(R_DEBUG))	return
+		var/mob/M = locate(href_list["reloadsave"])
+		if (!ismob(M))
+			return
+		if (!M.client)
+			return
+		var/client/C = M.client
+		to_chat(usr, SPAN_NOTICE("Attempting to reload save for [C.key] <A HREF='?src=\ref[src];reloadsaveshow=\ref[C.prefs]'>View Prefs Datum</A>"))
+		C.prefs.setup()
+
+	else if (href_list["reloadsaveshow"])
+		if(!check_rights(R_DEBUG))	return
+		var/datum/preferences/prefs = locate(href_list["reloadsaveshow"])
+		if (prefs)
+			usr.client.debug_variables(prefs)
+
 	else if(href_list["sendtoprison"])
 		if(!check_rights(R_ADMIN))	return
 

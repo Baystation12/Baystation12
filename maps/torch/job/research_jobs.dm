@@ -70,7 +70,7 @@
 		/datum/mil_branch/civilian,
 		/datum/mil_branch/solgov
 	)
-	allowed_ranks = list(,
+	allowed_ranks = list(
 		/datum/mil_rank/ec/o1,
 		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/scientist,
 		/datum/mil_rank/sol/scientist = /decl/hierarchy/outfit/job/torch/passenger/research/scientist/solgov

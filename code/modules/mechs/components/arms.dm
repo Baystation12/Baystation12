@@ -34,3 +34,8 @@
 
 /obj/item/mech_component/manipulators/update_components()
 	motivator = locate() in src
+
+/obj/item/mech_component/manipulators/get_damage_string()
+	if(!motivator || !motivator.is_functional())
+		return SPAN_DANGER("disabled")
+	return ..()

@@ -59,6 +59,10 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
+/datum/attack_result
+	var/hit_zone = 0
+	var/mob/living/attackee = null
+
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
 /obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone)
 	if(!force || (item_flags & ITEM_FLAG_NO_BLUDGEON))
@@ -77,6 +81,12 @@ avoid code duplication. This includes items that may sometimes act as a standard
 		return 0
 
 	var/hit_zone = M.resolve_item_attack(src, user, target_zone)
+
+	var/datum/attack_result/AR = hit_zone
+	if(istype(AR))
+		if(AR.hit_zone)
+			apply_hit_effect(AR.attackee ? AR.attackee : M, user, AR.hit_zone)
+		return 1
 	if(hit_zone)
 		apply_hit_effect(M, user, hit_zone)
 

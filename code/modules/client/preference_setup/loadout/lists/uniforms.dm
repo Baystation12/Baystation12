@@ -194,6 +194,7 @@
 /datum/gear/uniform/sterile
 	display_name = "sterile jumpsuit"
 	path = /obj/item/clothing/under/sterile
+	flags = GEAR_HAS_TYPE_SELECTION
 
 /datum/gear/uniform/hazard
 	display_name = "hazard jumpsuit"

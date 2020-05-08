@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - bugfix: "You can no longer hear \"X talks into the Y headset\" if you are blind; it is replaced with a generic phrase."

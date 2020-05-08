@@ -222,8 +222,8 @@ var/global/list/damage_icon_parts = list()
 	var/icon/icon_template = GLOB.species_icon_template_cache[species_key]
 	var/icon/overlay = GLOB.overlay_icon_cache[overlay_key]
 
-	var/x_offset = Ceiling(0.5*(icon_template.Width() - overlay.Width()))
-	var/y_offset = Ceiling(0.5*(icon_template.Height() - overlay.Height()))
+	var/x_offset = Ceiling(0.5*(icon_template.Width() - (overlay.Width() || 32)))
+	var/y_offset = Ceiling(0.5*(icon_template.Height() - (overlay.Height() || 32)))
 
 	return M.Translate(x_offset-y_offset, -(x_offset+y_offset))
 
@@ -420,6 +420,8 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[HO_UNDERWEAR_LAYER] = list()
 	for(var/entry in worn_underwear)
 		var/obj/item/underwear/UW = entry
+		if (!UW || !UW.icon) // Avoid runtimes for nude underwear types
+			continue
 
 		var/image/I = image(icon = UW.icon, icon_state = UW.icon_state)
 		I.appearance_flags = RESET_COLOR

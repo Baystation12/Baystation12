@@ -47,9 +47,26 @@
 	desc = "This is an emergency forcing tool, made of steel bar with a wedge on one end, and a hatchet on the other end. It has a blue plastic grip"
 	icon_state = "emergency_forcing_tool"
 	item_state = "emergency_forcing_tool"
-	force = 10
+	force = 12
+	sharp = 1
+	edge = 1
 	throwforce = 6
 	throw_range = 5
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
 	matter = list(MATERIAL_STEEL = 150)
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked", "attacked", "slashed", "torn", "ripped", "cut")
+
+/obj/item/weapon/crowbar/emergency_forcing_tool/resolve_attackby(atom/A)//extra dmg against glass, it's an emergency forcing tool, it's gotta be good at something
+	if(istype(A, /obj/structure/window))
+		force = initial(force) * 2
+	else
+		force = initial(force)
+	. = ..()
+
+/obj/item/weapon/crowbar/emergency_forcing_tool/iscrowbar()//go ham
+	if(ismob(loc))
+		var/mob/M = loc
+		if(M.a_intent && M.a_intent == I_HURT)
+			return FALSE
+
+	return TRUE

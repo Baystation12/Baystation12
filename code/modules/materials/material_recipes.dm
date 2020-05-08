@@ -83,6 +83,7 @@
 	. += new/datum/stack_recipe/grenade(src)
 	. += new/datum/stack_recipe/light(src)
 	. += new/datum/stack_recipe/light_small(src)
+	. += new/datum/stack_recipe/light_large(src)
 	. += new/datum/stack_recipe/light_switch(src)
 	. += new/datum/stack_recipe/light_switch/windowtint(src)
 	. += new/datum/stack_recipe/apc(src)

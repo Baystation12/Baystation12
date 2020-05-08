@@ -146,3 +146,15 @@
 		to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]'s wiring."))
 		playsound(user.loc, 'sound/items/Deconstruct.ogg', 25, 1)
 	return
+
+/obj/item/mech_component/proc/get_damage_string()
+	switch(damage_state)
+		if(MECH_COMPONENT_DAMAGE_UNDAMAGED)
+			return FONT_COLORED(COLOR_GREEN, "undamaged")
+		if(MECH_COMPONENT_DAMAGE_DAMAGED)
+			return FONT_COLORED(COLOR_YELLOW, "damaged")
+		if(MECH_COMPONENT_DAMAGE_DAMAGED_BAD)
+			return FONT_COLORED(COLOR_ORANGE, "badly damaged")
+		if(MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
+			return FONT_COLORED(COLOR_RED, "almost destroyed")
+	return FONT_COLORED(COLOR_RED, "destroyed")

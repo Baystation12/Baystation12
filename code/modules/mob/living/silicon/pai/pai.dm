@@ -265,18 +265,18 @@ GLOBAL_LIST_INIT(possible_say_verbs, list(
 		to_chat(src, SPAN_NOTICE("Your access has been updated!"))
 		return FALSE // don't continue processing click callstack.
 	if(W.force)
-		visible_message(SPAN_DANGER("[user.name] attacks [src] with [W]!"))
+		visible_message(SPAN_DANGER("[user] attacks [src] with [W]!"))
 		adjustBruteLoss(W.force)
 		updatehealth()
 	else
-		visible_message(SPAN_WARNING("[user.name] bonks [src] harmlessly with [W]."))
+		visible_message(SPAN_WARNING("[user] bonks [src] harmlessly with [W]."))
 
 	spawn(1)
 		if(stat != 2) fold()
 	return
 
 /mob/living/silicon/pai/attack_hand(mob/user as mob)
-	visible_message(SPAN_DANGER("[user.name] boops [src] on the head."))
+	visible_message(SPAN_DANGER("[user] boops [src] on the head."))
 	fold()
 
 // No binary for pAIs.

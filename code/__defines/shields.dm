@@ -6,6 +6,10 @@
 #define ENERGY_UPKEEP_PER_TILE (3 KILOWATTS)	// Base upkeep per tile protected. Multiplied by various enabled shield modes. Without them the field does literally nothing.
 #define ENERGY_UPKEEP_IDLE 40                  // Base upkeep when idle; modified by other factors.
 
+#define MINOR_BREACH_THRESHOLD 99
+#define MAJOR_BREACH_THRESHOLD 50
+#define CRITICAL_BREACH_THRESHOLD 25
+
 // This shield model is slightly inspired by Sins of a Solar Empire series. In short, shields are designed to analyze what hits them, and adapt themselves against that type of damage.
 // This means shields will become increasingly effective against things like emitters - as they will adapt to heat damage, however they will be vulnerable to brute and EM damage.
 // In a theoretical assault scenario, it is best to combine all damage types, so mitigation can't build up. The value is capped to prevent full scale invulnerability.

@@ -21,7 +21,7 @@
 	name = "skrellian handgun"
 	desc = "A common Skrellian side-arm, the Xuxquu*'Voom-5, or XV-5, is a more traditional energy weapon, tuned to dispense beams in three different wavelengths."
 	w_class = ITEM_SIZE_NORMAL
-	slot_flags = SLOT_BELT
+	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	icon = 'icons/obj/guns/skrell_pistol.dmi'
 	icon_state = "skrell_pistol_stun_100"
 	max_shots = 10

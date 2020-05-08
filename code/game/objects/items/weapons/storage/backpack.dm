@@ -243,7 +243,7 @@
 		/obj/item/weapon/extinguisher,
 		/obj/item/clothing/gloves/fire,
 		/obj/item/clothing/accessory/fire_overpants,
-		/obj/item/weapon/tank/oxygen/red,
+		/obj/item/weapon/tank/emergency/oxygen/double/red,
 		/obj/item/clothing/head/hardhat/firefighter,
 		/obj/item/weapon/extinguisher
 	)

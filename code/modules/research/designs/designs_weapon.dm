@@ -81,13 +81,6 @@
 	build_path = /obj/item/weapon/gun/energy/confuseray
 	sort_string = "TADAD"
 
-/datum/design/item/weapon/nuclear_gun
-	id = "nuclear_gun"
-	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
-	materials = list(MATERIAL_STEEL = 5000, MATERIAL_GLASS = 1000, MATERIAL_URANIUM = 500)
-	build_path = /obj/item/weapon/gun/energy/gun/nuclear
-	sort_string = "TAEAA"
-
 /datum/design/item/weapon/lasercannon
 	desc = "The lasing medium of this prototype is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core."
 	id = "lasercannon"

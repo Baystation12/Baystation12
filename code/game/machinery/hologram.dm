@@ -264,9 +264,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, mob/living/carbon/caller_id, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
 	if(caller_id)
-		var/datum/computer_file/report/crew_record/R = get_crewmember_record(caller_id.name)
-		if(R)
-			hologram.overlays += getHologramIcon(icon(R.photo_front), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
+		hologram.overlays += getHologramIcon(getFlatIcon(caller_id), hologram_color = holopadType) // Add the callers image as an overlay to keep coloration!
 	else if(A)
 		if(holopadType == HOLOPAD_LONG_RANGE)
 			hologram.overlays += A.holo_icon_longrange

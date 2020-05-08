@@ -51,7 +51,7 @@
 /obj/item/mech_component/sensors/combat/prebuild()
 	..()
 	software = new(src)
-	software.installed_software = list(MECH_SOFTWARE_WEAPONS, MECH_SOFTWARE_ADVWEAPONS)
+	software.installed_software = list(MECH_SOFTWARE_WEAPONS)
 
 /obj/item/mech_component/chassis/combat
 	name = "sealed exosuit chassis"
@@ -64,7 +64,7 @@
 
 /obj/item/mech_component/chassis/combat/prebuild()
 	. = ..()
-	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
 
 /obj/item/mech_component/chassis/combat/Initialize()
 	pilot_positions = list(
