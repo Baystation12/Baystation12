@@ -482,14 +482,12 @@
 	name = "Engineering toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/engineer
 	materials = list(DEFAULT_WALL_MATERIAL = 3000, "glass" = 1000)
-	req_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 4, TECH_BIO = 2)
 	id = "augment_toolset_engineering"
 
 /datum/design/item/mechfab/augment/surgery
 	name = "Surgical toolset"
 	build_path = /obj/item/organ/internal/augment/active/polytool/surgical
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 2000)
-	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 4)
 	id = "augment_toolset_surgery"
 
 /datum/design/item/mechfab/augment/reflex
@@ -510,14 +508,12 @@
 	name = "Mechanical muscles"
 	build_path = /obj/item/organ/internal/augment/boost/muscle
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000)
-	req_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
 	id = "augment_booster_muscles"
 
 /datum/design/item/mechfab/augment/armor
 	name = "Subdermal armor"
 	build_path = /obj/item/organ/internal/augment/armor
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 750)
-	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 4, TECH_BIO = 4)
 	id = "augment_armor"
 
 /datum/design/item/mechfab/augment/nanounit
