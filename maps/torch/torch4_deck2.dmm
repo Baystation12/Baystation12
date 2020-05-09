@@ -240,6 +240,19 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
+"au" = (
+/obj/structure/table/rack{
+	dir = 8
+	},
+/obj/item/weapon/storage/box/lights/mixed,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/weapon/storage/box/lights/mixed,
+/obj/item/device/lightreplacer,
+/obj/item/device/lightreplacer,
+/obj/item/clothing/gloves/thick,
+/obj/item/clothing/gloves/thick,
+/turf/simulated/floor/tiled,
+/area/engineering/engineering_bay)
 "av" = (
 /turf/simulated/floor/airless,
 /area/space)
@@ -563,8 +576,8 @@
 	pixel_y = 5
 	},
 /obj/random/powercell,
-/obj/item/weapon/cell/high,
-/obj/item/weapon/cell/high,
+/obj/random/powercell,
+/obj/random/powercell,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
 "bb" = (
@@ -2557,6 +2570,22 @@
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"eW" = (
+/obj/structure/disposalpipe/segment,
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/aluminium/fifty,
+/obj/item/stack/material/ocp/fifty,
+/obj/machinery/alarm{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -22;
+	pixel_y = 0
+	},
+/obj/item/stack/material/plastic/fifty,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/engineering/locker_room)
 "eX" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -2585,11 +2614,36 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/seconddeck/aftstarboard)
+"fa" = (
+/obj/structure/sign/warning/nosmoking_1{
+	dir = 8;
+	icon_state = "nosmoking";
+	pixel_x = 32
+	},
+/obj/structure/table/steel,
+/obj/machinery/cell_charger,
+/obj/random/powercell,
+/obj/random/powercell,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/random/powercell,
+/turf/simulated/floor/tiled/steel_grid,
+/area/engineering/engineering_bay)
 "fb" = (
 /obj/machinery/door/firedoor,
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
 /area/maintenance/disposal)
+"fc" = (
+/obj/structure/table/steel,
+/obj/machinery/cell_charger,
+/obj/random/powercell,
+/obj/random/powercell,
+/obj/effect/floor_decal/corner/yellow/half,
+/obj/random/powercell,
+/turf/simulated/floor/tiled/monotile,
+/area/engineering/storage)
 "fd" = (
 /obj/machinery/alarm{
 	pixel_y = 24
@@ -3702,22 +3756,6 @@
 "hX" = (
 /obj/structure/closet/secure_closet/engineering_electrical,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/steel_grid,
-/area/engineering/engineering_bay)
-"hZ" = (
-/obj/structure/sign/warning/nosmoking_1{
-	dir = 8;
-	icon_state = "nosmoking";
-	pixel_x = 32
-	},
-/obj/structure/table/steel,
-/obj/machinery/cell_charger,
-/obj/random/powercell,
-/obj/random/powercell,
-/obj/item/weapon/cell/high,
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/engineering_bay)
 "ia" = (
@@ -6277,15 +6315,6 @@
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/engine_room)
-"oj" = (
-/obj/structure/table/steel,
-/obj/machinery/cell_charger,
-/obj/random/powercell,
-/obj/random/powercell,
-/obj/item/weapon/cell/high,
-/obj/effect/floor_decal/corner/yellow/half,
-/turf/simulated/floor/tiled/monotile,
-/area/engineering/storage)
 "ok" = (
 /obj/machinery/light{
 	icon_state = "tube1";
@@ -6313,21 +6342,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/shuttle/escape_pod10/station)
-"om" = (
-/obj/structure/disposalpipe/segment,
-/obj/structure/table/rack,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/ocp/fifty,
-/obj/machinery/alarm{
-	dir = 4;
-	icon_state = "alarm0";
-	pixel_x = -22;
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/locker_room)
 "on" = (
 /obj/structure/catwalk,
 /turf/simulated/open,
@@ -18505,18 +18519,6 @@
 /obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall/prepainted,
 /area/teleporter/seconddeck)
-"YC" = (
-/obj/structure/table/rack{
-	dir = 8
-	},
-/obj/item/weapon/storage/box/lights/mixed,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/weapon/storage/box/lights/mixed,
-/obj/item/device/lightreplacer,
-/obj/item/clothing/gloves/thick,
-/obj/item/clothing/gloves/thick,
-/turf/simulated/floor/tiled,
-/area/engineering/engineering_bay)
 "YG" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -38806,7 +38808,7 @@ mq
 Sv
 Ol
 hr
-oj
+fc
 fp
 jX
 kk
@@ -39202,7 +39204,7 @@ jY
 iE
 mF
 mt
-om
+eW
 pB
 Hi
 rl
@@ -40411,7 +40413,7 @@ gF
 iN
 jz
 Iq
-YC
+au
 vN
 IW
 uh
@@ -42029,7 +42031,7 @@ hp
 hp
 hQ
 tg
-hZ
+fa
 RR
 or
 pO
