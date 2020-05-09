@@ -368,7 +368,7 @@
 	. = ..()
 	var/list/extra_data = list("<hr>")
 	if(atmosphere)
-		if(user.skill_check(SKILL_SCIENCE, SKILL_ADEPT))
+		if(user.skill_check(SKILL_ATMOS, SKILL_ADEPT))
 			var/list/gases = list()
 			for(var/g in atmosphere.gas)
 				if(atmosphere.gas[g] > atmosphere.total_moles * 0.05)
@@ -376,7 +376,7 @@
 			extra_data += "Atmosphere composition: [english_list(gases)]"
 			var/inaccuracy = rand(8,12)/10
 			extra_data += "Atmosphere pressure [atmosphere.return_pressure()*inaccuracy] kPa, temperature [atmosphere.temperature*inaccuracy] K"
-		else if(user.skill_check(SKILL_SCIENCE, SKILL_BASIC))
+		else if(user.skill_check(SKILL_ATMOS, SKILL_BASIC))
 			extra_data += "Atmosphere present"
 		extra_data += "<hr>"
 
