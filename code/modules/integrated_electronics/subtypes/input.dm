@@ -887,7 +887,7 @@
 
 	push_data()
 	activate_pin(1)
-	if(translated && !(speaking.name == LANGUAGE_HUMAN_EURO))
+	if(speaking && translated && !(speaking.name == LANGUAGE_HUMAN_EURO))
 		activate_pin(2)
 
 /obj/item/integrated_circuit/input/sensor

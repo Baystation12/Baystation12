@@ -17,6 +17,8 @@
 	GLOB.listening_objects += src
 
 /obj/item/weapon/implant/translator/hear_talk(mob/M, msg, verb, datum/language/speaking)
+	if(!speaking)
+		return
 	if(!imp_in)
 		return
 	if (languages.len == max_languages)
