@@ -536,57 +536,7 @@
 	// If the item came from a grabber now we can update the outputs since we've thrown it.
 	if(istype(G))
 		G.update_outputs()
-
-/obj/item/integrated_circuit/manipulation/bluespace_rift
-	name = "bluespace rift generator"
-	desc = "This powerful circuit can open rifts to another realspace location through bluespace."
-	extended_desc = "If a valid teleporter console is supplied as input then its selected teleporter beacon will be used as destination point, \
-					and if not an undefined destination point is selected. \
-					Rift direction is a cardinal value determening in which direction the rift will be opened, relative the local north. \
-					A direction value of 0 will open the rift on top of the assembly, and any other non-cardinal values will open the rift in the assembly's current facing."
-	icon_state = "bluespace"
-	complexity = 100
-	size = 3
-	cooldown_per_use = 10 SECONDS
-	power_draw_per_use = 300
-	inputs = list("teleporter", "rift direction")
-	outputs = list()
-	activators = list("open rift" = IC_PINTYPE_PULSE_IN)
-	spawn_flags = IC_SPAWN_RESEARCH
-	action_flags = IC_ACTION_LONG_RANGE
-
-	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
-	matter = list(MATERIAL_STEEL = 10000, MATERIAL_SILVER = 2000, MATERIAL_GOLD = 200)
-
-/obj/item/integrated_circuit/manipulation/bluespace_rift/do_work()
-	var/obj/machinery/computer/teleporter/tporter = get_pin_data_as_type(IC_INPUT, 1, /obj/machinery/computer/teleporter)
-	var/step_dir = get_pin_data(IC_INPUT, 2)
-
-	if(!AreConnectedZLevels(get_z(src), get_z(tporter)))
-		tporter = null
-
-	var/turf/rift_location = get_turf(src)
-	if(!rift_location || !isPlayerLevel(rift_location.z))
-		playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
-		return
-
-	if(isnum(step_dir) && (!step_dir || (step_dir in GLOB.cardinal)))
-		rift_location = get_step(rift_location, step_dir) || rift_location
-	else
-		var/obj/item/device/electronic_assembly/assembly = get_object()
-		if(assembly)
-			rift_location = get_step(rift_location, assembly.dir) || rift_location
-
-	if(tporter && tporter.locked && !tporter.one_time_use && tporter.operable())
-		new /obj/effect/portal(rift_location, get_turf(tporter.locked))
-	else
-		var/turf/destination = get_random_turf_in_range(src, 10)
-		if(destination)
-			new /obj/effect/portal(rift_location, destination, 30 SECONDS, 33)
-		else
-			playsound(src, 'sound/effects/sparks2.ogg', 50, 1)
-
-
+		
 /obj/item/integrated_circuit/manipulation/ai
 	name = "integrated intelligence control circuit"
 	desc = "Similar in structure to a intellicard, this circuit allows the AI to pulse four different activators for control of a circuit."
