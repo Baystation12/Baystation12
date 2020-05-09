@@ -19,3 +19,20 @@
 	desc = "A service uniform cover, worn by high-ranking crew within the Independent Navy."
 	icon_state = "terranservice_comm"
 	item_state = "terranservice_comm"
+
+/obj/item/clothing/head/terran/beret
+	name = "Red ICCG Beret"
+	desc = "A red ICCGN Beret. It bears the crest of the ICCG on the front."
+	icon_state = "terranberet-red"
+	item_state = "terranberet-red"
+	item_state_slots = list(
+		slot_l_hand_str = "helmet",
+		slot_r_hand_str = "helmet")
+	body_parts_covered = 0
+
+
+/obj/item/clothing/head/terran/beret/grey
+	name = "Grey ICCG Beret"
+	desc = "A grey ICCGN Beret. It bears the crest of the ICCG on the front."
+	icon_state = "terranberet-grey"
+	item_state = "terranberet-grey"
