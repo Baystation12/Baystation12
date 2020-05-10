@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/hostile/covenant/elite
-	name = "Covenant Defender (Elite Minor)"
+	name = "Elite Minor (NPC)"
 	icon = 'code/modules/halo/covenant/simple_mobs/simple_mobs48.dmi'
 	health = 125
 	maxHealth = 125
@@ -18,7 +18,7 @@
 	var/recharging = 0
 
 /mob/living/simple_animal/hostile/covenant/elite/major
-	name = "Covenant Defender (Elite Major)"
+	name = "Elite Major (NCP)"
 	icon_state = "major"
 	icon_living = "major"
 	icon_dead = "dead_major"

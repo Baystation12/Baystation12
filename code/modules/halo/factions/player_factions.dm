@@ -7,11 +7,11 @@
 	enemy_factions = list("UNSC","Insurrection", "Human Colony","Flood")
 	commander_titles = list("Sangheili Shipmaster")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/covenant/grunt = 3,\
-		/mob/living/simple_animal/hostile/covenant/drone = 2,\
-		/mob/living/simple_animal/hostile/covenant/drone/ranged = 2,\
-		/mob/living/simple_animal/hostile/covenant/jackal = 1,\
-		/mob/living/simple_animal/hostile/covenant/jackal/shield = 2,\
+	defender_mob_types = list(/mob/living/simple_animal/hostile/covenant/grunt = 6,\
+		/mob/living/simple_animal/hostile/covenant/drone = 3,\
+		/mob/living/simple_animal/hostile/covenant/drone/ranged = 3,\
+		/mob/living/simple_animal/hostile/covenant/jackal = 2,\
+		/mob/living/simple_animal/hostile/covenant/jackal/shield = 4,\
 		/mob/living/simple_animal/hostile/covenant/elite = 2,\
 		/mob/living/simple_animal/hostile/covenant/elite/major = 1)
 	default_radio_channel = RADIO_COV
@@ -37,7 +37,7 @@
 	enemy_factions = list("Covenant","Insurrection","Flood")
 	commander_titles = list("UNSC Bertels Commanding Officer")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/marine = 1)
+	defender_mob_types = list(/mob/living/simple_animal/hostile/unsc/marine = 3)
 	default_radio_channel = RADIO_SQUAD
 
 /datum/faction/unsc/Initialize()
@@ -108,14 +108,14 @@
 	name = "Flood"
 	enemy_factions = list("Covenant","Insurrection","Human Colony","UNSC")
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/flood)
-	defender_mob_types = list(/mob/living/simple_animal/hostile/flood/infestor = 3,\
-	/mob/living/simple_animal/hostile/flood/carrier = 2,\
-	/mob/living/simple_animal/hostile/flood/combat_form/human = 3,\
+	defender_mob_types = list(/mob/living/simple_animal/hostile/flood/infestor = 8,\
+	/mob/living/simple_animal/hostile/flood/combat_form/human = 6,\
 	/mob/living/simple_animal/hostile/flood/combat_form/ODST = 3,\
 	/mob/living/simple_animal/hostile/flood/combat_form/guard = 3,\
 	/mob/living/simple_animal/hostile/flood/combat_form/oni = 3,\
 	/mob/living/simple_animal/hostile/flood/combat_form/minor = 3,\
 	/mob/living/simple_animal/hostile/flood/combat_form/minor2 = 3,\
+	/mob/living/simple_animal/hostile/flood/carrier = 2,\
 	/mob/living/simple_animal/hostile/flood/combat_form/major = 2,\
 	/mob/living/simple_animal/hostile/flood/combat_form/zealot = 2,\
 	/mob/living/simple_animal/hostile/flood/combat_form/ultra = 2,\

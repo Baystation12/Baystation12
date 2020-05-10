@@ -74,9 +74,7 @@
 	var/respawn_timer = 3 MINUTES
 	var/turf/spawn_turf
 
-	//Simple Command Stuff//
-	var/mob/leader_follow
-	var/hold_fire = FALSE
+	var/parry_slice_objects = 0
 
 /mob/living/simple_animal/New()
 	. = ..()
@@ -133,33 +131,6 @@
 		visible_message("<span class = 'danger'>[src.name] seems to become more aggressive.</span>")
 	else
 		visible_message("<span class = 'notice'>[src.name] seems to become more docile.</span>")
-
-/mob/living/simple_animal/proc/handle_leader_pathing()
-	if(leader_follow)
-		if(get_dist(loc,leader_follow.loc) < 14 && loc != leader_follow.loc)//A bit higher than a single screen
-			if(istype(loc,/obj/vehicles))
-				var/obj/vehicles/v = loc
-				v.exit_vehicle(src,1)
-			walk_to(src,pick(orange(2,leader_follow.loc)),0,move_to_delay)
-			if(istype(leader_follow.loc,/obj/vehicles))
-				var/obj/vehicles/v = leader_follow.loc
-				if(v.Adjacent(src))
-					if(!v.enter_as_position(src,"gunner"))
-						v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s gunner seat.</span>")
-						if(!v.enter_as_position(src,"passenger"))
-							v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s passenger seat.</span>")
-							set_leader(null)
-						else
-							v.visible_message("<span class = 'notice'>[name] enters [v.name]'s passenger seat.</span>")
-							return 1
-					else
-						v.visible_message("<span class = 'notice'>[name] enters [v.name]'s gunner seat.</span>")
-						return 1
-		else
-			if(leader_follow && loc != leader_follow.loc)
-				set_leader(null)
-			walk(src,0)
-		return 0
 
 /mob/living/simple_animal/Life()
 	..()

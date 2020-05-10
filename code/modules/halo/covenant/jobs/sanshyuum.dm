@@ -4,7 +4,6 @@
 	department_flag = COM
 	total_positions = 1
 	spawn_positions = 1
-	selection_color = "#80080"
 	outfit_type = /decl/hierarchy/outfit/lesser_prophet
 	access = list(240,250)
 	faction_whitelist = "Covenant"

@@ -1,6 +1,6 @@
 
 /mob/living/simple_animal/hostile/covenant/grunt
-	name = "Covenant Defender (Grunt)"
+	name = "Grunt (NPC)"
 	icon_state = "grunt"
 	icon_living = "grunt"
 	icon_dead = "dead_grunt"

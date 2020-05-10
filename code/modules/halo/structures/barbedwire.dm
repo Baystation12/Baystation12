@@ -1,7 +1,7 @@
 
 /obj/structure/bardbedwire
 	name = "barbed wire coil"
-	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "barbedwire"
 	density = 0
 	anchored = 1
@@ -54,7 +54,7 @@
 /obj/item/stack/barbedwire
 	name = "barbed wire coil"
 	desc = "A coil of wire covered in wickedly sharp barbs."
-	icon = 'code/modules/halo/icons/machinery/structures.dmi'
+	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "barbedwire_obj"
 	flags = CONDUCT
 	w_class = ITEM_SIZE_LARGE
@@ -68,6 +68,9 @@
 	attack_verb = list("hit", "bludgeoned", "whacked")
 	lock_picking_level = 3
 	var/is_spooling = 0
+
+/obj/item/stack/barbedwire/ten
+	amount = 10
 
 /obj/item/stack/barbedwire/attack_self(var/mob/user)
 	for(var/obj/structure/bardbedwire/D in user.loc)

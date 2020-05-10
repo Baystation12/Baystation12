@@ -49,7 +49,7 @@
 	item_flags = THICKMATERIAL
 	unacidable = 1
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant/sangheili
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
 
 /obj/item/weapon/storage/backpack/sangheili/santa
 	name = "Cheerful Bag"

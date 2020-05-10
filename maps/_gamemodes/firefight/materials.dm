@@ -22,7 +22,15 @@
 	recipes += new/datum/stack_recipe("metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/barrel, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
-	recipes += new/datum/stack_recipe("tank trap", /obj/structure/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("tank trap", /obj/structure/destructible/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("barricade", /obj/structure/destructible/steel_barricade, 4, one_per_turf = 1, on_floor = 1, time = 50)
+
+
+/material/plasteel/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("barricade", /obj/structure/destructible/plasteel_barricade, 4, one_per_turf = 1, on_floor = 1, time = 50)
+
 
 
 /material/stone/generate_recipes()
@@ -57,6 +65,6 @@
 
 #else
 
-	#warn Recipes conflict, unable to use stranded gamemode recipes
+	#warn Recipes conflict, unable to use Firefight gamemode recipes
 
 #endif

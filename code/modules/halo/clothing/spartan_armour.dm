@@ -1,8 +1,4 @@
 
-/obj/item/clothing/glasses/hud/tactical/spartan_hud
-	darkness_view = 7
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-
 /obj/item/clothing/head/helmet/spartan
 	name = "MJOLNIR Powered Assault Armor Helmet Mark IV"
 	desc = "Ave, Imperator, morituri te salutant."

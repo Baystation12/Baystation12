@@ -2,10 +2,6 @@
 #define SANGHEILI_ARMOUR_ICON 'code/modules/halo/covenant/species/sangheili/Sangheili_Combat_Harness.dmi'
 #define SANGHEILI_BLEEDBLOCK_CHANCE 50
 
-/obj/item/clothing/glasses/hud/tactical/covenant/sangheili
-	darkness_view = 5
-	see_invisible = SEE_INVISIBLE_NOLIGHTING
-
 /obj/item/weapon/storage/backpack/sangheili
 	name = "Covenant Battle Pack"
 	desc = "An airtight storage compartment sometimes used by Sangheili to carry supplies into combat."
@@ -34,7 +30,7 @@
 	unacidable = 1
 	armor = list(melee = 60, bullet = 40, laser = 30,energy = 30, bomb = 25, bio = 30, rad = 30) //Spartan tier helms.
 
-	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant/sangheili
+	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
 
 /obj/item/clothing/suit/armor/special/combatharness
 	name = "Sangheili Combat Harness"
