@@ -1927,6 +1927,7 @@
 #include "code\modules\halo\weapons\covenant\launchers.dm"
 #include "code\modules\halo\weapons\covenant\lmg.dm"
 #include "code\modules\halo\weapons\covenant\melee.dm"
+#include "code\modules\halo\weapons\covenant\muzzle_effects.dm"
 #include "code\modules\halo\weapons\covenant\pistols.dm"
 #include "code\modules\halo\weapons\covenant\rifles.dm"
 #include "code\modules\halo\weapons\covenant\snipers.dm"
