@@ -4855,8 +4855,8 @@
 /area/turret_protected/ai)
 "js" = (
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai_foyer)
@@ -5246,8 +5246,8 @@
 	dir = 8
 	},
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark,
 /area/turret_protected/ai)
@@ -16180,8 +16180,8 @@
 /obj/item/weapon/storage/briefcase/inflatable,
 /obj/item/weapon/storage/briefcase/inflatable,
 /obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
+	icon_state = "tube1";
+	dir = 4
 	},
 /obj/machinery/camera/network/command{
 	c_tag = "EVA - Command";
@@ -16190,9 +16190,9 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/aux_eva)
 "Ti" = (
-/obj/structure/closet/secure_closet/RD,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/effect/floor_decal/corner/research/mono,
+/obj/structure/closet/secure_closet/RD_torch,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/rd)
 "Tl" = (
