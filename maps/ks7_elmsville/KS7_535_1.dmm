@@ -158,7 +158,7 @@
 "db" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/item/weapon/storage/firstaid/adv,/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (NORTHWEST)"; icon_state = "corner_white"; dir = 9},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "dc" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/beakers,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/pharmacy)
 "dd" = (/obj/item/weapon/storage/box/beakers,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/pharmacy)
-"de" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
+"de" = (/obj/effect/floor_decal/corner/lime{tag = "icon-corner_white (SOUTHEAST)"; icon_state = "corner_white"; dir = 6},/obj/machinery/reagentgrinder,/obj/structure/table/standard,/turf/simulated/floor/tiled/white,/area/exo_ice_facility/interior/pharmacy)
 "df" = (/obj/structure/bed/chair/wood{icon_state = "wooden_chair_preview"; dir = 1},/turf/simulated/floor/carpet,/area/exo_ice_facility/interior/casino)
 "dg" = (/obj/machinery/door/airlock/biodome,/turf/simulated/floor/reinforced,/area/exo_ice_facility/interior/biodome/left)
 "dh" = (/obj/machinery/door/airlock/biodome/public,/turf/simulated/floor/reinforced,/area/exo_ice_facility/interior/biodome/right)
