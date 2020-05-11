@@ -44,9 +44,14 @@
 /obj/item/device/radio/headset/heads/torchntdirector
 	name = "chief science officer headset"
 	desc = "Headset of the masters of the universe."
-	icon_state = "sci_headset"
+	icon_state = "com_headset"
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_torchrd
+
+/obj/item/device/radio/headset/heads/torchntdirector/alt
+	name = "chief science officer's bowman headset"
+	icon_state = "com_headset_alt"
+	item_state = "com_headset_alt"
 
 /obj/item/device/radio/headset/heads/torchntcommand/alt
 	name = "corporate command bowman headset"
