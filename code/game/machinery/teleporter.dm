@@ -201,7 +201,7 @@
 	icon_state = "tele0"
 	dir = 4
 	idle_power_usage = 10
-	active_power_usage = 2000
+	active_power_usage = 100000
 	var/obj/machinery/computer/teleporter/com
 
 /obj/machinery/teleport/hub/New()
@@ -213,7 +213,7 @@
 	spawn()
 		if (src.icon_state == "tele1")
 			teleport(M)
-			use_power_oneoff(5000)
+			use_power_oneoff(100000)
 
 /obj/machinery/teleport/hub/proc/teleport(atom/movable/M as mob|obj)
 	do_teleport(M, com.locked)
@@ -233,7 +233,7 @@
 	dir = 4
 	var/engaged = 0
 	idle_power_usage = 10
-	active_power_usage = 2000
+	active_power_usage = 100000
 	var/obj/machinery/computer/teleporter/com
 	var/obj/machinery/teleport/hub/hub
 
@@ -270,7 +270,7 @@
 
 	if (hub)
 		hub.icon_state = "tele1"
-		use_power_oneoff(5000)
+		use_power_oneoff(200000)
 		update_use_power(POWER_USE_ACTIVE)
 		hub.update_use_power(POWER_USE_ACTIVE)
 		audible_message("<span class='notice'>Teleporter engaged!</span>")
