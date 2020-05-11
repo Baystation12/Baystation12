@@ -86,11 +86,7 @@
 /obj/item/weapon/robot_module/clerical/general
 	name = "clerical robot module"
 	display_name = "Clerical"
-	channels = list(
-		"Service" = TRUE,
-		"Supply" =  TRUE,
-		"Command" = TRUE
-	)
+	channels = list("Command" = 1, "Supply" = 1, "Service" = 1)
 	sprites = list(
 		"Waitress" = "Service",
 		"Kent" =     "toiletbot",
