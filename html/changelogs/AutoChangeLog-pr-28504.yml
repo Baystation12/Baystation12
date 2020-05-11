@@ -1,0 +1,5 @@
+author: "Detritus-Ha"
+delete-after: True
+changes: 
+  - maptweak: "Added a stack of plastic sheets and a second light replacer to the racks at engineering"
+  - maptweak: "Replaced all advanced power cells in engineering with random power cells"
