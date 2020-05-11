@@ -2,8 +2,9 @@
 	name = "filing drone module"
 	display_name = "Filing"
 	channels = list(
-		"Service" = TRUE, 
-		"Supply" = TRUE
+		"Service" = TRUE,
+		"Supply" = TRUE,
+		"Command" = TRUE
 		)
 	languages = list(
 		LANGUAGE_HUMAN_EURO     = TRUE,

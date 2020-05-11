@@ -1,6 +1,6 @@
 /obj/item/weapon/robot_module/clerical
 	channels = list(
-		"Service" = TRUE
+		"Service" = TRUE,
 	)
 	languages = list(
 		LANGUAGE_HUMAN_EURO       = TRUE,
@@ -88,7 +88,8 @@
 	display_name = "Clerical"
 	channels = list(
 		"Service" = TRUE,
-		"Supply" =  TRUE
+		"Supply" =  TRUE,
+		"Command" = TRUE
 	)
 	sprites = list(
 		"Waitress" = "Service",
@@ -107,6 +108,7 @@
 		/obj/item/weapon/stamp/denied,
 		/obj/item/device/destTagger,
 		/obj/item/weapon/crowbar,
+		/obj/item/device/megaphone,
 		/obj/item/stack/package_wrap/cyborg
 	)
 	emag = /obj/item/weapon/stamp/chameleon
