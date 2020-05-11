@@ -1,6 +1,6 @@
 /datum/job/captain
 	title = "Commanding Officer"
-	supervisors = "the Sol Central Government and the Sol Code of Military Justice"
+	supervisors = "the Sol Central Government and the Sol Code of Uniform Justice"
 	minimal_player_age = 14
 	economic_power = 15
 	minimum_character_age = list(SPECIES_HUMAN = 40)
