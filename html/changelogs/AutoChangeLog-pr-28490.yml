@@ -1,0 +1,4 @@
+author: "radagast-the-red"
+delete-after: True
+changes: 
+  - tweak: "Corrected the CO's SCMJ reference to SCUJ."
