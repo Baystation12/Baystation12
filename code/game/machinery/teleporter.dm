@@ -236,6 +236,21 @@
 	active_power_usage = 100000
 	var/obj/machinery/computer/teleporter/com
 	var/obj/machinery/teleport/hub/hub
+	var/autodisengage = 20
+	
+/obj/machinery/teleport/station/verb/setdelay()
+	set name = "Set automatic shutdown timer"
+	set category = "Object"
+	set src in view(1)
+
+	if(usr.incapacitated())
+		return
+	if(ishuman(usr) || istype(usr, /mob/living/silicon/robot))
+		var/new_autodisengage = input("Set automatic shutdown timer") as null|anything in list(5, 10, 15, 20, 25, 30)
+		if(new_autodisengage)
+			autodisengage = new_autodisengage
+			to_chat(usr, "You set the automatic teleporter shutdown timer to [new_autodisengage] seconds.")
+	return
 
 /obj/machinery/teleport/station/New()
 	..()
@@ -275,6 +290,13 @@
 		hub.update_use_power(POWER_USE_ACTIVE)
 		audible_message("<span class='notice'>Teleporter engaged!</span>")
 	src.engaged = 1
+	autodisengage()
+	return
+	
+/obj/machinery/teleport/station/proc/autodisengage() //could have definitely done auto-shutdown better but this works
+	sleep(src.autodisengage SECONDS)
+	if(engaged)
+		disengage()
 	return
 
 /obj/machinery/teleport/station/proc/disengage()
