@@ -1,7 +1,0 @@
-author: "lorwp"
-delete-after: True
-changes: 
-  - tweak: "the CSO's locker is now a pimped out Gold, Purple and EXO Green. Bling"
-  - tweak: "the CSO now as the same equipment as other Line officers in their locker, namely, warrant projector, disorienter, plate carrier and helmet, and combi-knife, also their clipboard is now steel, because bling bling"
-  - bugfix: "the CSO's spare headset is now the torch variant, not the old exodus variant"
-  - rscadd: "the CSO now has a spare bowman variant of their headset. bling bling bling"
