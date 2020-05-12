@@ -344,6 +344,75 @@
 	allowed = list (/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll
 	)
 
+/obj/item/clothing/suit/storage/jacket/solgov/ec
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has orange stripes, and a wrench on the back."
+	icon_state = "ecengjacket"
+	icon = 'maps/torch/icons/obj/obj_suit_solgov.dmi'
+	item_icons = list(slot_wear_suit_str = 'maps/torch/icons/mob/onmob_suit_solgov.dmi')
+	armor = list(
+		melee = ARMOR_MELEE_SMALL,
+		bullet = ARMOR_BALLISTIC_MINOR,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_MINOR,
+		rad = ARMOR_RAD_MINOR
+		)
+	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
+	allowed = list (/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/device/scanner/gas, /obj/item/device/flashlight, /obj/item/device/multitool, /obj/item/device/pipe_painter, /obj/item/device/radio, /obj/item/device/t_scanner, \
+	/obj/item/weapon/crowbar, /obj/item/weapon/screwdriver, /obj/item/weapon/weldingtool, /obj/item/weapon/wirecutters, /obj/item/weapon/wrench, /obj/item/weapon/tank/emergency, \
+	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering,/obj/item/clothing/head/hardhat)
+
+/obj/item/clothing/suit/storage/jacket/solgov/ec/medical
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has cyan stripes, and a medical cross on the back."
+	icon_state = "ecmedjacket"
+	allowed = list (/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
+	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/clothing/head/hardhat, /obj/item/weapon/tank/emergency, /obj/item/weapon/reagent_containers/ivbag
+	)
+
+/obj/item/clothing/suit/storage/jacket/solgov/ec/security
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has red stripes, and an electrolaser on the back."
+	icon_state = "ecsecjacket"
+	allowed = list (/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic,/obj/item/clothing/head/helmet
+	)
+
+/obj/item/clothing/suit/storage/jacket/solgov/ec/service
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has green stripes, and a fork and knife on the back."
+	icon_state = "ecsrvjacket"
+	allowed = list (/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic,/obj/item/clothing/head/helmet
+	)
+
+/obj/item/clothing/suit/storage/jacket/solgov/ec/supply
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has brown stripes, and a box on the back."
+	icon_state = "ecsupjacket"
+	allowed = list (/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic,/obj/item/clothing/head/helmet
+	)
+
+/obj/item/clothing/suit/storage/jacket/solgov/ec/command
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has gold stripes, and a star on the back."
+	icon_state = "eccomjacket"
+	allowed = list (/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic,/obj/item/clothing/head/helmet
+	)
+
+/obj/item/clothing/suit/storage/jacket/solgov/ec/exploration
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has purple stripes, and a flag on the back."
+	icon_state = "ecexpjacket"
+	allowed = list (/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/stack/medical, /obj/item/weapon/reagent_containers/dropper, /obj/item/weapon/reagent_containers/hypospray, /obj/item/weapon/reagent_containers/syringe, \
+	/obj/item/device/scanner/health, /obj/item/device/flashlight, /obj/item/device/radio, /obj/item/clothing/head/hardhat, /obj/item/weapon/tank/emergency, /obj/item/weapon/reagent_containers/ivbag
+	)
+
+/obj/item/clothing/suit/storage/jacket/solgov/ec/science
+	name = "expeditionary field jacket"
+	desc = "A field jacket issued to the EC to protect against the elements. This one has light purple stripes, and a flask on the back."
+	icon_state = "ecscijacket"
+	allowed = list (/obj/item/weapon/tank/emergency,/obj/item/device/flashlight,/obj/item/weapon/pen,/obj/item/clothing/head/soft,/obj/item/clothing/head/beret,/obj/item/weapon/storage/fancy/cigarettes,/obj/item/weapon/flame/lighter,/obj/item/device/taperecorder,/obj/item/device/scanner/gas,/obj/item/device/radio,/obj/item/taperoll,/obj/item/weapon/gun/energy,/obj/item/device/radio,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/gun/magnetic,/obj/item/clothing/head/helmet
+	)
+
 //SolGov Hardsuits
 
 /obj/item/clothing/suit/space/void/engineering/alt/sol
