@@ -127,6 +127,16 @@ obj/structure/disposalpipe/Destroy()
 					if(AM)
 						AM.throw_at(target, 100, 1)
 			H.vent_gas(T)
+
+			// throw out vomit
+			if(H.reagents.total_volume)
+				visible_message(SPAN_DANGER("Vomit spews out of the disposal pipe!"))
+				playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+				if(istype(src.loc, /turf/simulated))
+					var/obj/effect/decal/cleanable/vomit/splat = new /obj/effect/decal/cleanable/vomit(src.loc)
+					H.reagents.trans_to_obj(splat, min(15, H.reagents.total_volume))
+					splat.update_icon()
+
 			qdel(H)
 
 	else	// no specified direction, so throw in random direction
