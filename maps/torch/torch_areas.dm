@@ -905,6 +905,11 @@
 	name = "\improper Research Locker Room"
 	icon_state = "locker"
 
+/area/rnd/senioroffice
+	name = "\improper Senior Researcher's Office"
+	icon_state = "research_senior"
+	req_access = list(access_senior_researcher)
+
 /area/rnd/xenobiology/entry
 	name = "\improper Xenobiology Access"
 	icon_state = "xeno_lab"
@@ -1056,9 +1061,6 @@
 	name = "\improper Fourth Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
-/area/security/oldopscheck
-	name = "\improper Deactivated Security Checkpoint"
-	icon_state = "checkpoint"
 
 // AI
 /area/turret_protected/ai_foyer
