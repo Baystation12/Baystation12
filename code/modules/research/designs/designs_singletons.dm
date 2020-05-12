@@ -35,7 +35,7 @@
 /datum/design/item/weapon/storage/box/freezer
 	name = "Portable Freezer"
 	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
-	id= "freezer"
+	id = "freezer"
 	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2)
 	materials = list(MATERIAL_PLASTIC = 350)
 	build_path = /obj/item/weapon/storage/box/freezer
