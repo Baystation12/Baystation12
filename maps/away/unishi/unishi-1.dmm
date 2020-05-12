@@ -487,7 +487,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/unishi/engineroom)
 "bq" = (
-/obj/machinery/suit_storage_unit/engineering,
+/obj/machinery/suit_storage_unit/engineering/unishi,
 /obj/structure/sign/warning/fire{
 	dir = 4;
 	pixel_x = -32
@@ -525,7 +525,7 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bv" = (
-/obj/machinery/suit_storage_unit/engineering,
+/obj/machinery/suit_storage_unit/engineering/unishi,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bw" = (
@@ -561,7 +561,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/suit_storage_unit/engineering,
+/obj/machinery/suit_storage_unit/engineering/unishi,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bA" = (
