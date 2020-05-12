@@ -14,6 +14,7 @@
 	equipment = list(
 		/obj/item/swabber,
 		/obj/item/weapon/storage/evidence,
+
 		/obj/item/weapon/forensics/sample_kit,
 		/obj/item/weapon/forensics/sample_kit/powder,
 		/obj/item/weapon/gripper/forensics,
@@ -22,6 +23,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/weapon/scalpel/laser1,
 		/obj/item/weapon/autopsy_scanner,
+		/obj/item/device/scanner/reagent,
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/device/uv_light,
 		/obj/item/weapon/crowbar
