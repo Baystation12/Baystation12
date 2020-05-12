@@ -31,6 +31,14 @@
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 4, TECH_POWER = 3)
 	materials = list(MATERIAL_ALUMINIUM = 2500, MATERIAL_STEEL = 500, MATERIAL_PLASTIC = 200)
 	build_path = /obj/item/weapon/mop/advanced
+	
+/datum/design/item/weapon/storage/box/freezer
+	name = "Portable Freezer"
+	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
+	id= "freezer"
+	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2)
+	materials = list(MATERIAL_PLASTIC = 350)
+	build_path = /obj/item/weapon/storage/box/freezer
 
 /datum/design/blutrash
 	name = "Trashbag of Holding"
