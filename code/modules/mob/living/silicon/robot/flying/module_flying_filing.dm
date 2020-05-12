@@ -1,7 +1,11 @@
 /obj/item/weapon/robot_module/flying/filing
 	name = "filing drone module"
 	display_name = "Filing"
-	channels = list("Command" = 1, "Supply" = 1, "Service" = 1)
+	channels = list(
+		"Command" = 1,
+		"Supply" = 1,
+		"Service" = 1
+	)
 	languages = list(
 		LANGUAGE_HUMAN_EURO     = TRUE,
 		LANGUAGE_HUMAN_ARABIC   = TRUE,
