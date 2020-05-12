@@ -1,0 +1,4 @@
+author: "Kroto"
+delete-after: True
+changes: 
+  - tweak: "Ping, Proxy, and Relays commands have NTnet required access removed."
