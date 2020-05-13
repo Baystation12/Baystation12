@@ -179,7 +179,6 @@ Any-Mode: (hotkey doesn't need to be on)
 \tCtrl + Click = drag or bolt doors
 \tShift + Click = examine or open doors
 \tAlt + Click = show entities on turf
-\tCtrl + Alt + Click = electrify doors
 </font>"}
 
 	if(isrobot(src.mob))

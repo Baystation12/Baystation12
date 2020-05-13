@@ -41,17 +41,6 @@
 	</div>
 </div>	
 
-<div class="item">
-	<div class="itemLabelWidest">
-		Electrified Status:
-	</div>
-    <div class="itemContentWidest">
-		{{:helper.link('Offline'  , null, {'command' : 'electrify_permanently', 'activate' : "0" }, data.electrified == 0 ? 'selected' : null)}}
-        {{:helper.link(data.electrified <= 0 ? 'Temporary (30s)' : 'Temporary (' + data.electrified +'s)', null, {'command' : 'electrify_temporary',   'activate' : "1"}, data.electrified > 0 ? 'redButton' : null)}}
-        {{:helper.link('Permanent', null, {'command' : 'electrify_permanently', 'activate' : "1"}, data.electrified == -1 ? 'redButton' : null)}}
-	</div>
-</div>	
-
 <br>
 
 <table>

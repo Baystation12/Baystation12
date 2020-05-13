@@ -126,17 +126,6 @@
 
 /atom/proc/AICtrlAltClick()
 
-/obj/machinery/door/airlock/AICtrlAltClick() // Electrifies doors.
-	if(usr.incapacitated())
-		return
-	if(!electrified_until)
-		// permanent shock
-		Topic(src, list("command"="electrify_permanently", "activate" = "1"))
-	else
-		// disable/6 is not in Topic; disable/5 disables both temporary and permanent shock
-		Topic(src, list("command"="electrify_permanently", "activate" = "0"))
-	return 1
-
 /atom/proc/AICtrlShiftClick()
 	return
 

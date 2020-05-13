@@ -7,7 +7,7 @@
 
 /datum/wires/airlock
 	holder_type = /obj/machinery/door/airlock
-	wire_count = 12
+	wire_count = 11
 	window_y = 570
 	descriptions = list(
 		new /datum/wire_description(AIRLOCK_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT),
@@ -18,7 +18,6 @@
 		new /datum/wire_description(AIRLOCK_WIRE_BACKUP_POWER2, "This wire seems to be carrying a heavy current."),
 		new /datum/wire_description(AIRLOCK_WIRE_OPEN_DOOR, "This wire connects to the door motors."),
 		new /datum/wire_description(AIRLOCK_WIRE_AI_CONTROL, "This wire connects to automated control systems."),
-		new /datum/wire_description(AIRLOCK_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
 		new /datum/wire_description(AIRLOCK_WIRE_SAFETY, "This wire connects to a safety override."),
 		new /datum/wire_description(AIRLOCK_WIRE_SPEED, "This wire appears to connect to the airlock's proximity detector modules."),
 		new /datum/wire_description(AIRLOCK_WIRE_LIGHT, "This wire powers the airlock's built-in lighting.", SKILL_EXPERT)
@@ -32,17 +31,12 @@ var/const/AIRLOCK_WIRE_BACKUP_POWER1 = 16
 var/const/AIRLOCK_WIRE_BACKUP_POWER2 = 32
 var/const/AIRLOCK_WIRE_OPEN_DOOR = 64
 var/const/AIRLOCK_WIRE_AI_CONTROL = 128
-var/const/AIRLOCK_WIRE_ELECTRIFY = 256
-var/const/AIRLOCK_WIRE_SAFETY = 512
-var/const/AIRLOCK_WIRE_SPEED = 1024
-var/const/AIRLOCK_WIRE_LIGHT = 2048
+var/const/AIRLOCK_WIRE_SAFETY = 256
+var/const/AIRLOCK_WIRE_SPEED = 512
+var/const/AIRLOCK_WIRE_LIGHT = 1024
 
 /datum/wires/airlock/CanUse(var/mob/living/L)
 	var/obj/machinery/door/airlock/A = holder
-	if(!istype(L, /mob/living/silicon))
-		if(A.isElectrified())
-			if(A.shock(L, 100))
-				return 0
 	if(A.p_open)
 		return 1
 	return 0
@@ -110,14 +104,6 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 				else if(A.aiControlDisabled == 2)
 					A.aiControlDisabled = -1
 
-		if(AIRLOCK_WIRE_ELECTRIFY)
-			if(!mended)
-				//Cutting this wire electrifies the door, so that the next person to touch the door without insulated gloves gets electrocuted.
-				A.electrify(-1)
-			else
-				A.electrify(0)
-			return // Don't update the dialog.
-
 		if (AIRLOCK_WIRE_SAFETY)
 			A.safe = mended
 
@@ -167,9 +153,6 @@ var/const/AIRLOCK_WIRE_LIGHT = 2048
 					else if(A.aiControlDisabled == 2)
 						A.aiControlDisabled = -1
 
-		if(AIRLOCK_WIRE_ELECTRIFY)
-			//one wire for electrifying the door. Sending a pulse through this electrifies the door for 30 seconds.
-			A.electrify(30)
 		if(AIRLOCK_WIRE_OPEN_DOOR)
 			//tries to open the door without ID
 			//will succeed only if the ID wire is cut or the door requires no access and it's not emagged
