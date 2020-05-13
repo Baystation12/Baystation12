@@ -8,6 +8,7 @@
 	check_armour = "energy"
 	embed = 0
 	sharp = 0
+	muzzle_type = /obj/effect/projectile/muzzle/cov_blue
 	var/use_covenant_burndam_override = 1
 
 /obj/item/projectile/bullet/covenant/attack_mob()
@@ -23,11 +24,13 @@
 	damage_type = PAIN
 	penetrating = 0
 	icon_state = "Trainingpistol Shot"
+	muzzle_type = /obj/effect/projectile/muzzle/cov_green
 
 /obj/item/projectile/bullet/covenant/plasmapistol
 	damage = 45
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmapistol Shot"
+	muzzle_type = /obj/effect/projectile/muzzle/cov_green
 
 /obj/item/projectile/bullet/covenant/plasmapistol/fastfire
 	damage = 20
@@ -52,10 +55,12 @@
 	damage = 30 //The repeater does enough, thank you.
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
+	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
 
 /obj/item/projectile/bullet/covenant/plasmarifle/brute
 	damage = 30
 	icon_state = "heavy_plas_cannon"
+	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
 /obj/item/projectile/bullet/covenant/beamrifle
 	name = "energy beam"
@@ -70,6 +75,7 @@
 	penetrating = 2
 	invisibility = 101
 	shield_damage = 210
+	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
 
 /obj/item/projectile/bullet/covenant/beamrifle/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
@@ -135,6 +141,7 @@
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
 	use_covenant_burndam_override = 0
+	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
 /obj/item/projectile/bullet/covenant/needles/New()
 	. = ..()
@@ -233,6 +240,7 @@
 	embed = 1
 	sharp = 1
 	use_covenant_burndam_override = 0
+	muzzle_type = /obj/effect/projectile/muzzle/cov_green
 
 /obj/item/projectile/bullet/covenant/type51carbine/attack_mob(var/mob/living/carbon/human/L)
 	if(!istype(L))
@@ -275,6 +283,7 @@
 	armor_penetration = 20
 	max_track_steps = 2
 	shield_damage = 50
+	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
@@ -309,6 +318,7 @@
 	icon_state = "Overcharged_Plasmapistol shot"
 	embed = 1
 	shield_damage = 200
+	muzzle_type = /obj/effect/projectile/muzzle/cov_green
 
 /obj/item/projectile/bullet/fuel_rod/on_impact(var/atom/A)
 	. = ..()
