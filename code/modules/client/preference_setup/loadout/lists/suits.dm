@@ -55,6 +55,10 @@
 	path = /obj/item/clothing/suit/storage/hazardvest
 	flags = GEAR_HAS_TYPE_SELECTION
 
+/datum/gear/suit/highvis
+	display_name = "high-visibility jacket"
+	path = /obj/item/clothing/suit/storage/toggle/highvis
+
 /datum/gear/suit/hoodie
 	display_name = "hoodie, colour select"
 	path = /obj/item/clothing/suit/storage/hooded/hoodie
