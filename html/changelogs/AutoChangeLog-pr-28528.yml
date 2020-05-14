@@ -1,0 +1,4 @@
+author: "Karlias"
+delete-after: True
+changes: 
+  - bugfix: "The Trichoptera can now properly dock with the Torch"
