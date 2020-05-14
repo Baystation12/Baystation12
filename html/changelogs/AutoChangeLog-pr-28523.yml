@@ -1,0 +1,4 @@
+author: "ozwell"
+delete-after: True
+changes: 
+  - rscdel: "Removes the ability to construct tele-circuits"
