@@ -37,6 +37,7 @@
 /obj/machinery/atmospherics/unary/outlet_injector/Initialize()
 	. = ..()
 	set_frequency(frequency)
+	broadcast_status()
 
 /obj/machinery/atmospherics/unary/outlet_injector/Destroy()
 	unregister_radio(src, frequency)
