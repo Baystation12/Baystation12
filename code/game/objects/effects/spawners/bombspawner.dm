@@ -175,14 +175,14 @@
 	PT.master = V
 	OT.master = V
 
-	PT.valve_welded = 1
+	SET_FLAGS(PT.tank_flags, TANK_FLAG_WELDED)
 	PT.air_contents.gas[GAS_PHORON] = phoron_amt
 	PT.air_contents.gas[GAS_CO2] = carbon_amt
 	PT.air_contents.total_moles = phoron_amt + carbon_amt
 	PT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1
 	PT.air_contents.update_values()
 
-	OT.valve_welded = 1
+	SET_FLAGS(OT.tank_flags, TANK_FLAG_WELDED)
 	OT.air_contents.gas[GAS_OXYGEN] = oxygen_amt
 	OT.air_contents.total_moles = oxygen_amt
 	OT.air_contents.temperature = PHORON_MINIMUM_BURN_TEMPERATURE+1

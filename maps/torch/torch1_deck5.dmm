@@ -733,8 +733,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 4;
-	id_tag = "guppy_shuttle_pump_out_external";
-	
+	id_tag = "guppy_shuttle_pump_out_external"
 	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
@@ -797,8 +796,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_internal";
-	
+	id_tag = "guppy_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -1052,8 +1050,7 @@
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 8;
-	id_tag = "guppy_shuttle_pump_out_internal";
-	
+	id_tag = "guppy_shuttle_pump_out_internal"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/guppy_hangar/start)
@@ -11650,8 +11647,7 @@
 "Cm" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/guppy{
 	dir = 4;
-	id_tag = "guppy_shuttle_pump_out_external";
-	
+	id_tag = "guppy_shuttle_pump_out_external"
 	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)

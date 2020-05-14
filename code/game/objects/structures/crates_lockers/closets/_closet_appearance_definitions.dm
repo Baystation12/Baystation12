@@ -451,11 +451,15 @@
 	)
 
 /decl/closet_appearance/secure_closet/rd
+	color = COLOR_BOTTLE_GREEN
+	decals = list(
+		"lower_holes"
+	)
 	extra_decals = list(
-		"stripe_vertical_mid_full" = COLOR_CLOSET_GOLD,
+		"stripe_vertical_mid_full" = COLOR_GOLD,
 		"stripe_vertical_left_full" = COLOR_PURPLE,
 		"stripe_vertical_right_full" = COLOR_PURPLE,
-		"research" = COLOR_CLOSET_GOLD
+		"research" = COLOR_GOLD
 	)
 
 /decl/closet_appearance/secure_closet/corporate
