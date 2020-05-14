@@ -115,6 +115,7 @@
 	if (!src.operating) //in case of emag
 		src.operating = 1
 
+	icon_state = "[src.base_state]open";
 	flick("[src.base_state]opening", src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	sleep(10)
@@ -247,7 +248,7 @@
 
 /obj/machinery/door/window/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
 	electronics = ..()
-	return electronics	
+	return electronics
 
 /obj/machinery/door/window/brigdoor
 	name = "secure door"
