@@ -12,6 +12,7 @@
 	distance = "1.5AU"
 	capital = "Olympus"
 	economic_power = 1.1
+	
 
 /decl/cultural_info/location/human/earth
 	name = HOME_SYSTEM_EARTH
@@ -87,6 +88,7 @@
 	manage to escape rarely wish to return, though often possess a looser set of morales as a result of their time on the planet."
 	capital = "New Santa Domingo"
 	economic_power = 0.8
+	secondary_langs = list(LANGUAGE_GUTTER)
 
 /decl/cultural_info/location/human/cetiepsilon
 	name = HOME_SYSTEM_TAU_CETI

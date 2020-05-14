@@ -9,7 +9,6 @@
 	language = LANGUAGE_ADHERENT
 	secondary_langs = list(
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
