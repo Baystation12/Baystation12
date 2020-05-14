@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Codex will no longer call things 'immune' to any damage sources since recent armor updates mean immunity is technically impossible now."
