@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "The aft-port and aft-starboard deck 4 airlock controllers are now accessible from inside the ship. To keep in line with how the other deck 4 airlocks work, they are still not accessible from space or inside the airlock itself."
