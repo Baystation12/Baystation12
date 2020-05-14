@@ -200,12 +200,12 @@
 	rejects prosthetics and synthetic organs, and their lifespans are short, but their raw psionic potential is unmatched."
 
 	spawn_flags =   SPECIES_CAN_JOIN | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN | SPECIES_NO_ROBOTIC_INTERNAL_ORGANS
-	brute_mod =     1.25
+	brute_mod =     1.35
 	burn_mod =      1.25
 	oxy_mod =       1.25
-	toxins_mod =    1.25
-	radiation_mod = 1.25
+	radiation_mod = 1.30
 	flash_mod =     1.25
+	slowdown =      0.5
 	blood_volume =  SPECIES_BLOOD_DEFAULT * 0.85
 	min_age =       18
 	max_age =       45
