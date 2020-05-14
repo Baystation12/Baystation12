@@ -552,7 +552,6 @@
 	inputs = list("teleporter", "rift direction")
 	outputs = list()
 	activators = list("open rift" = IC_PINTYPE_PULSE_IN)
-	spawn_flags = IC_SPAWN_RESEARCH
 	action_flags = IC_ACTION_LONG_RANGE
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_BLUESPACE = 3)
