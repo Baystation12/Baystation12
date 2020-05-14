@@ -1,4 +1,0 @@
-author: "YodaDoge"
-delete-after: True
-changes: 
-  - bugfix: "Atmospheric Injector status is now displayed correctly on all tank consoles at round start"
