@@ -2570,7 +2570,8 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "fD" = (
-/turf/space,
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/airless,
 /area/voxship/scavship)
 "fE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black,
@@ -2824,7 +2825,17 @@
 	},
 /area/voxship/engineering)
 "gn" = (
-/turf/space,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_bridge";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/airless,
 /area/voxship/engineering)
 "go" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -2833,21 +2844,9 @@
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
-"gp" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/turf/space,
-/area/voxship/scavship)
 "gq" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume,
 /turf/simulated/floor/airless,
-/area/voxship/engineering)
-"gr" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
 /area/voxship/engineering)
 "gs" = (
 /obj/random/loot,
@@ -2858,27 +2857,6 @@
 /obj/random/loot,
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/fore)
-"gu" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	icon_state = "rwindow";
-	dir = 8
-	},
-/turf/simulated/floor/airless,
-/area/voxship/scavship)
-"gv" = (
-/obj/structure/window/reinforced{
-	icon_state = "rwindow";
-	dir = 8
-	},
-/turf/space,
-/area/voxship/scavship)
-"gw" = (
-/turf/space,
-/area/voxship/thrusters)
 "gx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	icon_state = "map_universal";
@@ -8061,7 +8039,7 @@ dx
 eU
 fp
 aa
-fD
+fX
 fX
 gg
 gz
@@ -8469,8 +8447,8 @@ ew
 eX
 aa
 aa
-gp
-gp
+fD
+fD
 gz
 gE
 gO
@@ -8673,8 +8651,8 @@ ey
 aM
 aa
 aa
-gu
-gv
+fD
+fD
 gz
 gG
 gQ
@@ -8761,7 +8739,7 @@ fX
 fX
 fX
 gq
-gr
+gn
 bs
 ay
 bQ
@@ -9797,7 +9775,7 @@ cg
 cg
 cg
 ac
-gn
+fX
 fX
 fX
 fX
@@ -9899,7 +9877,7 @@ fv
 fL
 ga
 ab
-gw
+fX
 fX
 fX
 fX
