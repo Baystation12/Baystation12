@@ -2844,6 +2844,14 @@
 	},
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
+"gp" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/voxship/scavship)
 "gq" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume,
 /turf/simulated/floor/airless,
@@ -8651,7 +8659,7 @@ ey
 aM
 aa
 aa
-fD
+gp
 fD
 gz
 gG
