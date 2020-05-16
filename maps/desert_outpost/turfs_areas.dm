@@ -1,5 +1,5 @@
 
-/area/planets/daynight
+/area/planet/daynight
 	name = "\improper Planet"
 	icon_state = "away"
 	ambience = list(\
