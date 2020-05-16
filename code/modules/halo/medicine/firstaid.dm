@@ -39,8 +39,6 @@
 /obj/item/weapon/storage/firstaid/combat/unsc
 	name = "field trauma kit"
 	desc = "Contains emergency medicine for use in the field"
-	icon_state = "bezerk"
-	item_state = "firstaid-advanced"
 
 	max_storage_space = 2 * DEFAULT_BOX_STORAGE
 
