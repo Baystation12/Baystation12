@@ -14,7 +14,7 @@
 
 	supply_always_spawn = list(\
 		/obj/structure/weapon_rack,\
-		/obj/structure/closet/crate/covenant/energy_barricades,\
+		/obj/structure/closet/crate/random/covenant/energy_barricades,\
 		/obj/structure/closet/crate/random/covenant/construction)
 
 /datum/game_mode/firefight/crusade/spawn_resupply(var/turf/epicentre)
