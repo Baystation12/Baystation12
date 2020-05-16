@@ -2,8 +2,8 @@
 /mob/living/simple_animal/hostile/covenant/elite
 	name = "Elite Minor (NPC)"
 	icon = 'code/modules/halo/covenant/simple_mobs/simple_mobs48.dmi'
-	health = 125
-	maxHealth = 125
+	health = 150
+	maxHealth = 150
 	combat_tier = 3
 	resistance = 10
 	icon_state = "minor"
@@ -18,12 +18,13 @@
 	var/recharging = 0
 
 /mob/living/simple_animal/hostile/covenant/elite/major
-	name = "Elite Major (NCP)"
+	name = "Elite Major (NPC)"
 	icon_state = "major"
 	icon_living = "major"
 	icon_dead = "dead_major"
 	shield_left = 100
 	shield_max = 100
+	recharge_rate = 20
 	combat_tier = 4
 	possible_weapons = list(/obj/item/weapon/gun/energy/plasmarepeater)
 
@@ -45,7 +46,7 @@
 /mob/living/simple_animal/hostile/covenant/elite/Life()
 	. = ..()
 
-	//dont need to display damage anny more
+	//dont need to display damage any more
 	overlays -= "shield_flicker"
 
 	if(stat == DEAD)

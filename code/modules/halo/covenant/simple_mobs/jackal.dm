@@ -9,14 +9,25 @@
 
 /mob/living/simple_animal/hostile/covenant/jackal/shield
 	possible_weapons = list(/obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/projectile/needler)
-	var/shield_max = 300
-	var/shield_left = 300
+	var/shield_max = 400
+	var/shield_left = 400
 	var/recharge_delay = 5 SECONDS
-	var/recharge_rate = 50
+	var/recharge_rate = 75
 	var/last_damage = 0
 	var/recharging = 0
 	var/shield_state = "shield"
 	var/damage_state_multiplier = 0.5
+
+mob/living/simple_animal/hostile/covenant/jackal/shield/apply_difficulty_setting()
+	//apply difficulty
+	switch(GLOB.difficulty_level)
+		if(DIFFICULTY_HEROIC)
+			if(shield_max)
+				shield_max += 200
+		if(DIFFICULTY_LEGENDARY)
+			if(shield_max)
+				shield_max += 400
+				recharge_rate *= 2
 
 /mob/living/simple_animal/hostile/covenant/jackal/shield/New()
 	. = ..()
@@ -75,7 +86,7 @@
 			if(shield_left < shield_max * damage_state_multiplier)
 				//visually show our shield is damaged
 				overlays -= shield_state
-				shield_state = "shield_damage"
+				shield_state = "shield_low"
 				overlays += shield_state
 
 		return 1

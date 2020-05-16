@@ -308,7 +308,7 @@
 	if(client)
 		see_in_dark = 5//setting this 2 points above human for now
 	else
-		see_in_dark = 3//NPCs will target people beside them
+		see_in_dark = 4//NPCs will target people beside them
 
 	if(!.)
 		walk(src, 0)
