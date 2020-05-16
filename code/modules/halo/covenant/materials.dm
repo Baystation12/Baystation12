@@ -33,6 +33,7 @@
 /material/nanolaminate/generate_recipes()
 	..()
 	recipes += new/datum/stack_recipe("nanolaminate floor tile", /obj/item/stack/tile/covenant, 1, 4, 20)
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/covenant_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
 
 /obj/item/stack/material/nanolaminate
 	name = "nanolaminate"
