@@ -18,7 +18,7 @@
 	cover = 25
 
 /obj/structure/girder/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes apart", var/wallbreaker)
-	if(!damage || !wallbreaker)
+	if(!damage)
 		return 0
 	attack_animation(user)
 	visible_message("<span class='danger'>[user] [attack_message] the [src]!</span>")
