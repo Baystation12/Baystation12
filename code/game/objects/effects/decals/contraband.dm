@@ -37,6 +37,9 @@
 
 	//must place on a wall and user must not be inside a closet/exosuit/whatever
 	var/turf/W = A
+	if(!isturf(W))
+		return
+
 	if (!W.is_wall() || !isturf(user.loc))
 		to_chat(user, "<span class='warning'>You can't place this here!</span>")
 		return

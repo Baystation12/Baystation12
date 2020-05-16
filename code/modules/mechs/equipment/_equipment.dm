@@ -46,9 +46,9 @@
 /obj/item/mech_equipment/examine(mob/user, distance)
 	. = ..()
 	if(user.skill_check(SKILL_DEVICES, SKILL_BASIC))
-		if(restricted_software.len)
+		if(length(restricted_software))
 			to_chat(user, SPAN_SUBTLE("It seems it would require [english_list(restricted_software)] to be used."))
-		if(restricted_hardpoints.len)
+		if(length(restricted_hardpoints))
 			to_chat(user, SPAN_SUBTLE("You figure it could be mounted in the [english_list(restricted_hardpoints)]."))
 
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)

@@ -183,7 +183,7 @@ obj/machinery/computer/air_control/Destroy()
 		refreshing_output = TRUE
 		pressure_setting = input("How much pressure would you like to output?", "Set Pressure", pressure_setting) as num|null
 		pressure_setting = between(0, pressure_setting, MAX_PUMP_PRESSURE)
-		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]", "status" = 1)
+		signal.data = list ("tag" = output_tag, "set_internal_pressure" = pressure_setting, "status" = 1)
 		. = 1
 	
 	if(href_list["s_out_set_pressure"])
@@ -191,20 +191,20 @@ obj/machinery/computer/air_control/Destroy()
 		refreshing_output = TRUE
 		pressure_setting = input("How much pressure would you like to maintain inside the core?", "Set Core Pressure", pressure_setting) as num|null
 		pressure_setting = between(0, pressure_setting, MAX_PUMP_PRESSURE)
-		signal.data = list ("tag" = output_tag, "set_external_pressure" = "[pressure_setting]", "checks" = 1, "status" = 1)
+		signal.data = list ("tag" = output_tag, "set_external_pressure" = pressure_setting, "checks" = 1, "status" = 1)
 		. = 1
 
 	if(href_list["s_set_default"])
 		output_info = null
 		refreshing_output = TRUE
-		signal.data = list("tag" = output_tag, "set_external_pressure" = "[pressure_setting]", "checks" = 1, "status" = 1)
+		signal.data = list("tag" = output_tag, "set_external_pressure" = pressure_setting, "checks" = 1, "status" = 1)
 		. = 1
 
 	if(href_list["out_set_max"])
 		output_info = null
 		refreshing_output = TRUE
 		pressure_setting = MAX_PUMP_PRESSURE
-		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]", "status" = 1)
+		signal.data = list ("tag" = output_tag, "set_internal_pressure" = pressure_setting, "status" = 1)
 		. = 1
 
 	if(href_list["set_frequency"])
