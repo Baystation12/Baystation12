@@ -322,6 +322,7 @@
 
 /obj/item/projectile/bullet/fuel_rod/on_impact(var/atom/A)
 	. = ..()
+	new /obj/effect/plasma_explosion/green(get_turf(src))
 	explosion(A,-1,1,2,4,guaranteed_damage = 30, guaranteed_damage_range = 2)
 	for(var/mob/living/l in range(FUEL_ROD_IRRADIATE_RANGE,loc))
 		l.rad_act(FUEL_ROD_IRRADIATE_AMOUNT)

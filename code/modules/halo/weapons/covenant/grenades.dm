@@ -29,6 +29,12 @@
 
 /obj/item/weapon/grenade/plasma/detonate()
 	var/turf/epicenter = get_turf(src)
+
+	//visual effect
+	var/obj/effect/plasma_explosion/P = new(epicenter)
+	P.pixel_x += src.pixel_x
+	P.pixel_y += src.pixel_y
+
 	//the custom sfx itself
 	for(var/mob/M in GLOB.player_list)
 		if(M.z == epicenter.z)
@@ -43,3 +49,21 @@
 		mob_containing.contents -= src
 	loc = null
 	qdel(src)
+
+/obj/effect/plasma_explosion
+	name = "plasma blast"
+	icon = 'code/modules/halo/weapons/covenant/plasma_explosion.dmi'
+	icon_state = "plasma_explosion"
+
+/obj/effect/plasma_explosion/ex_act()
+	//nothing
+
+/obj/effect/plasma_explosion/New()
+	. = ..()
+	pixel_x -= 32
+	pixel_y -= 32
+	spawn(7)
+		qdel(src)
+
+/obj/effect/plasma_explosion/green
+	icon_state = "green"
