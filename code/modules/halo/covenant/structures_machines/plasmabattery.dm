@@ -32,3 +32,10 @@
 	..()
 
 	to_chat(user, "<span class='info'>There is [charge]% charge left.</span>")
+
+//doodad
+/obj/structure/destructible/explosive/plasma_battery
+	name = "plasma battery"
+	icon = 'plasma_battery.dmi'
+	icon_state = "in_use"
+	desc = "A portable power cell for plasma powered machinery and devices used by the Covenant."

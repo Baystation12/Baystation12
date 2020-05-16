@@ -31,7 +31,7 @@
 			to_chat(AM,"<span class='warning'>You are caught in [src]!</span>")
 		health -= 1
 		if(health <= 0)
-			new /obj/item/metalscraps(src.loc)
+			new /obj/item/salvage/metal
 			qdel(src)
 
 /obj/structure/bardbedwire/attackby(obj/item/I as obj, mob/user as mob)

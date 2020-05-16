@@ -142,6 +142,8 @@
 			S.amount = produced
 			S.add_to_stacks(user, recipe.goes_in_hands)
 
+		O.update_icon()
+
 /obj/item/stack/Topic(href, href_list)
 	..()
 	if ((usr.restrained() || usr.stat || usr.get_active_hand() != src))

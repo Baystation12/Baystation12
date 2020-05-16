@@ -1,4 +1,6 @@
 
+#define REPAIR_AMOUNT 100
+
 /obj/structure/destructible
 	name = "destructible"
 	icon = 'code/modules/halo/structures/structures.dmi'
@@ -7,11 +9,11 @@
 	var/health = 200
 	var/maxHealth = 200
 	var/list/maneuvring_mobs = list()
-	var/repair_material
+	var/repair_material_name
 	var/cover_rating = 10
 	var/deconstruct_tools = list(/obj/item/weapon/weldingtool)
 	var/list/loot_types = list(/obj/item/stack/material/steel)
-	var/list/scrap_types = list()
+	var/list/scrap_types = list(/obj/item/salvage/metal)
 	var/dead_type
 	var/climbable = 1
 
@@ -20,34 +22,39 @@
 	if(health != maxHealth)
 		health = maxHealth
 
+	if(climbable)
+		verbs += /obj/structure/destructible/proc/verb_climb
+
+/obj/structure/destructible/update_icon()
+	. = ..()
 	if(flags & ON_BORDER)
 		throwpass = 1
 		if(dir == SOUTH)
 			plane = ABOVE_HUMAN_PLANE
 			layer = ABOVE_HUMAN_LAYER
 
-	if(climbable)
-		verbs += /obj/structure/destructible/proc/verb_climb
-
 /obj/structure/destructible/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/stack))
-		var/obj/item/stack/D = W
-		if(D.get_material_name() != repair_material)
-			to_chat(user, "<span class='warning'>You need [repair_material] to repair \the [src].</span>")
-			return
-		if (health < maxHealth)
-			if (D.get_amount() < 1)
-				to_chat(user, "<span class='warning'>You need one sheet of [repair_material] to repair \the [src].</span>")
-				return
-			visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
-			if(do_after(user,20,src) && health < maxHealth)
-				if (D.use(1))
-					repair_damage(maxHealth/3)
-					visible_message("<span class='notice'>[user] repairs \the [src]. It is now [round(100*health/maxHealth)]% repaired.</span>")
-				return
+	if(istype(W, /obj/item/stack))
+		if(repair_material_name)
+			if(W.get_material_name() == repair_material_name && istype(W, /obj/item/stack))
+				var/obj/item/stack/D = W
+				if (D.get_amount() > 0)
+					if (health < maxHealth - REPAIR_AMOUNT)
+						visible_message("<span class='notice'>[user] begins to repair \the [src].</span>")
+						if(do_after(user,20,src) && D.use(1))
+							repair_damage(REPAIR_AMOUNT)
+							to_chat(user, "\icon[src] <span class='info'>You repair \the [src]. It is now \
+								[round(100*health/maxHealth)]% repaired (+[round(100*REPAIR_AMOUNT/maxHealth)]%).</span>")
+					else
+						to_chat(user, "<span class='notice'>You cannot repair [src] any more.</span>")
+				else
+					to_chat(user, "<span class='warning'>You need at least 1 sheet of [D] \
+						to repair \the [src] (+[round(100*REPAIR_AMOUNT/maxHealth)]%).</span>")
+			else
+				to_chat(user, "<span class='warning'>You need a stack of [repair_material_name] to repair \the [src] \
+					(+[round(100*REPAIR_AMOUNT/maxHealth)]%).</span>")
 		else
-			to_chat(user, "<span class='info'>[src] is already at maximum repair.</span>")
-		return
+			to_chat(user, "<span class='warning'>[src] cannot be repaired.</span>")
 
 	else if(attempt_deconstruct(W, user))
 		if(do_after(user,20,src))
@@ -284,16 +291,19 @@
 	. = ..()
 	var/out_text = ""
 	if(flags & ON_BORDER)
-		out_text += "It is oriented [dir2text(src.dir)]. "
+		out_text += "It is oriented [dir2text(src.dir)]."
 
 	if(health >= maxHealth)
-		out_text += "<span class='info'>It is at maximum repair.</span>"
+		out_text += " <span class='info'>It is at maximum repair.</span>"
 	else if(health > maxHealth * 0.66)
-		out_text += "<span class='info'>It is slightly damaged.</span>"
+		out_text += " <span class='info'>It is slightly damaged.</span>"
 	else if(health > maxHealth * 0.33)
-		out_text += "<span class='notice'>It is moderately damaged.</span>"
+		out_text += " <span class='notice'>It is moderately damaged.</span>"
 	else
-		out_text += "<span class='danger'>It is heavily damaged.</span>"
+		out_text += " <span class='danger'>It is heavily damaged.</span>"
+
+	if(repair_material_name)
+		out_text += " It can be repaired with [repair_material_name]."
 
 	if(length(out_text))
 		to_chat(user,out_text)
@@ -339,6 +349,12 @@
 		to_chat(user,"<span class='notice'>You cannot fit that past [src]!</span>")
 
 
+
+/* SS13 STRUCTURE PROCS */
+/*
+	These proc overrides are to enable simple mobs to destroy them, necessary for Firefight gamemodes.
+*/
+
 /obj/structure/barricade/attack_generic(var/mob/living/attacker, var/damage, var/attacktext)
 	src.visible_message("<span class='danger'>[attacker] has [attacktext] [src]!</span>")
 	health -= damage
@@ -362,3 +378,9 @@
 		visible_message("<span class='danger'>[src] is smashed apart!</span>")
 		dump_contents()
 		qdel(src)
+
+/obj/structure/tree/attack_generic(var/mob/living/attacker, var/damage, var/attacktext)
+	visible_message("<span class='danger'>[src] is smashed apart!</span>")
+	if(prob(50))
+		new /obj/item/stack/material/wood(src.loc)
+	qdel(src)
