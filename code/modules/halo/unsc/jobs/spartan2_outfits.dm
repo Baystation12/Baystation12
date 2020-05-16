@@ -1,6 +1,6 @@
 
 /decl/hierarchy/outfit/job/unsc/spartan2
-	title = "Spartan II"
+	name = "Spartan II"
 	uniform = /obj/item/clothing/under/spartan_internal
 	suit = /obj/item/clothing/suit/armor/special/spartan
 	gloves = /obj/item/clothing/gloves/spartan
