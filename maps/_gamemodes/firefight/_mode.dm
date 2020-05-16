@@ -25,10 +25,10 @@
 
 	var/is_spawning = 0	//0 = rest, 1 = spawning
 	var/max_spawns_tick = 20		//keep this the same for performance reasons
-	var/enemy_strength_base = 10		//the total value of all spawned enemy strength ratings
-	var/enemy_strength_left = 10		//the total strength to spawn this round
-	var/wave_strength_multiplier = 0.5	//increase in strength each round
-	var/player_strength_multiplier = 0.1
+	var/enemy_numbers_base = 10		//the total number of enemies
+	var/enemy_numbers_left = 10
+	var/wave_bonus_enemies = list(2, 4, 7, 10)
+	var/player_bonus_enemies = list(1, 1, 1, 1)
 
 	var/time_rest_end = 0
 	var/interval_resupply = 4 MINUTES
@@ -89,6 +89,26 @@
 		J.total_positions = 0
 		J.spawn_positions = 0
 		*/
+
+/datum/game_mode/firefight
+	var/list/special_job_titles = list("Spartan II")
+
+/datum/game_mode/firefight/proc/unlock_special_job()
+	while(special_job_titles.len)
+		var/chosen_title = pick(special_job_titles)
+		var/datum/job/special_job = job_master.occupations_by_title[chosen_title]
+		if(special_job)
+			to_world("\
+			<span class='radio'>\
+			<span class='name'>[pilot_name]</span> \
+			<b>\[Emergency Freq\]</b> \
+			<span class='message'>\"I've located a [special_job.title] fighting nearby, I'm dropping them off to you!\"</span>\
+			</span>")
+			minor_announcement.Announce("[uppertext(special_job.title)] SLOT UNLOCKED")
+			break
+		else
+			log_and_message_admins("ERROR: Attempted to unlock job slot for [chosen_title] but it didn't exist!")
+			special_job_titles -= chosen_title
 
 /datum/game_mode/firefight/get_respawn_time()
 	return 1 MINUTE

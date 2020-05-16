@@ -4,7 +4,7 @@
 
 	if(is_spawning)
 		//don't end the wave if there are still enemy troops
-		if(enemy_strength_left <= 0 && !overmind.combat_troops.len)
+		if(enemy_numbers_left <= 0 && !overmind.combat_troops.len)
 			//end the wave and start the rest period
 			is_spawning = 0
 			time_rest_end = world.time + rest_time
@@ -12,8 +12,12 @@
 				<span class='notice'>You now have a [round(rest_time / (1 MINUTE),1)] minute rest. There is [max_waves - current_wave] waves left until evacuation.</span>")
 
 			//give the players a resupply
-			spawn(30)
+			spawn(20)
 				do_resupply()
+
+			//unlock something special
+			spawn(60)
+				unlock_special_job()
 
 		else
 			spawn(0)
@@ -25,13 +29,14 @@
 			is_spawning = 1
 
 			//enemies get stronger each wave
-			var/total_multiplier = current_wave * wave_strength_multiplier
+			var/wave_bonus = wave_bonus_enemies[GLOB.difficulty_level] * current_wave
 
 			//more players means stronger enemies
-			total_multiplier += player_strength_multiplier * player_faction.players_alive()
+			var/players_alive = max(player_faction.players_alive() - 1, 0)
+			var/player_bonus = player_bonus_enemies[GLOB.difficulty_level] * players_alive
 
 			//calculate the enemy strength for this wave
-			enemy_strength_left = enemy_strength_base + enemy_strength_base * total_multiplier
+			enemy_numbers_left = enemy_numbers_base + wave_bonus + player_bonus
 
 			//is this the final wave?
 			current_wave++
@@ -40,6 +45,10 @@
 				to_world("<span class='danger'>[evac_message]</span>")
 			else
 				to_world("<span class='danger'>[wave_message]</span>")
+
+				//give the players a resupply
+				spawn(20)
+					do_resupply()
 
 	if(evac_stage)
 		process_evac()

@@ -4,29 +4,33 @@
 	var/sound/sound_flyby = sound('sound/effects/start.ogg')
 	var/list/resupply_procs = list(/datum/game_mode/firefight/proc/spawn_resupply)
 
-	var/list/supply_crate_procs = list(\
-		/datum/game_mode/firefight/proc/spawn_gun_crate,\
-		/datum/game_mode/firefight/proc/spawn_heavygun_crate,\
-		/datum/game_mode/firefight/proc/spawn_sniper_crate,\
-		/datum/game_mode/firefight/proc/spawn_landmine_crate,\
-		/datum/game_mode/firefight/proc/spawn_armour_crate,\
-		/datum/game_mode/firefight/proc/spawn_turret_crate,\
-		/datum/game_mode/firefight/proc/spawn_medic_crate,\
-		/datum/game_mode/firefight/proc/spawn_misc_crate,\
-		/datum/game_mode/firefight/proc/spawn_tool_crate,\
-		/datum/game_mode/firefight/proc/spawn_material_crate\
-		)
+	var/list/supply_obj_types = list(\
+		/obj/structure/closet/crate/random/unsc_guns,\
+		/obj/structure/closet/crate/random/unsc_advguns,\
+		/obj/structure/closet/crate/random/unsc_sniper,\
+		/obj/structure/closet/crate/random/unsc_landmine,\
+		/obj/structure/closet/crate/random/unsc_armour,\
+		/obj/structure/closet/crate/random/unsc_turret,\
+		/obj/structure/closet/crate/random/unsc_medic,\
+		/obj/structure/closet/crate/random/unsc_misc,\
+		/obj/structure/closet/crate/random/unsc_tools,\
+		/obj/structure/repair_bench,\
+		/obj/machinery/floodlight,\
+		/obj/structure/reagent_dispensers/fueltank)
 
-	var/debris_structures = list(\
+	var/list/supply_always_spawn = list(/obj/structure/closet/crate/random/unsc_mats)
+
+	var/list/debris_structures = list(\
 		/obj/structure/grille/broken=5,\
 		/obj/structure/grille=4,\
 		/obj/structure/lattice=3,\
-		/obj/structure/barrel=2,\
+		/obj/structure/destructible/barrel=2,\
+		/obj/structure/destructible/explosive=2,\
 		/obj/structure/girder=1,\
 		/obj/structure/foamedmetal=1)
 
-	var/debris_objs = list(\
-		/obj/item/metalscrap=5,
+	var/list/debris_objs = list(\
+		/obj/item/salvage/metal=5,
 		/obj/item/stack/rods/ten=3,\
 		/obj/item/stack/material/steel/ten=2,\
 		/obj/item/stack/cable_coil/random=1,\
@@ -64,7 +68,7 @@
 	to_world("\
 		<span class='radio'>\
 			<span class='name'>[pilot_name]</span> \
-			<b>\[Resupply Freq\]</b> \
+			<b>\[Emergency Freq\]</b> \
 			<span class='message'>\"[pilot_message]\"</span>\
 		</span>")
 
@@ -82,8 +86,8 @@
 		if(prob(spawn_chance))
 			//low chance to spawn a useful supply crate
 			if(prob(2))
-				var/chosen_proc = pickweight(supply_crate_procs)
-				call(src, chosen_proc)(spawn_turf)
+				var/spawn_type = pickweight(supply_obj_types)
+				new spawn_type(spawn_turf)
 			else
 				//spawn some random crap
 				var/spawn_type = pickweight(debris_structures + debris_objs)
@@ -100,183 +104,39 @@
 	. = "Supply run completed, I've dropped off my cargo to the %DIRTEXT%. \
 		[pick("Good luck!","Hang in there!","Evacuation is coming!")]"
 
-	var/num_crates = rand(3,5)
+	var/num_crates = rand(1,3)
 	var/failed_attempts = 0
-	spawn_gun_crate(epicentre)
+	var/list/must_spawn = supply_always_spawn.Copy()
+	num_crates += must_spawn.len
+
+	//always spawn the first crate crate on the landmark
+	var/turf/spawn_turf = epicentre
 	while(num_crates > 0)
-		var/turf/spawn_turf = pick(range(5, epicentre))
+
+		if(!spawn_turf)
+			//pick a random turf nearby
+			spawn_turf = locate(epicentre.x - 3 + rand(0,6), epicentre.y - 3 + rand(0,6), epicentre.z)
 
 		//make sure we dont double up turfs
-		if(locate(/obj/structure/closet/crate) in spawn_turf)
+		if(turf_contains_dense_objects(spawn_turf))
 			failed_attempts++
 			if(failed_attempts > 10)
 				break
 			continue
 
 		//spawn a crate
-		var/chosen_proc = pickweight(supply_crate_procs)
-		call(src, chosen_proc)(spawn_turf)
+		var/spawn_type
+		if(must_spawn.len)
+			spawn_type = pick(must_spawn)
+			must_spawn -= spawn_type
+		else
+			spawn_type = pick(supply_obj_types)
+		new spawn_type(spawn_turf)
+		spawn_turf = null
 
+		//this crate is finished
 		num_crates -= 1
 
 	//play a cool sound to everyone
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_flyby)
-
-/datum/game_mode/firefight/proc/spawn_gun_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "weapons crate"
-	C.icon_state = "weaponcrate"
-	C.icon_opened = "weaponcrateopen"
-	C.icon_closed = "weaponcrate"
-
-	var/list/random_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum = /obj/item/ammo_magazine/m127_saphe,\
-		/obj/item/weapon/gun/projectile/ma5b_ar = /obj/item/ammo_magazine/m762_ap,\
-		/obj/item/weapon/gun/projectile/m7_smg = /obj/item/ammo_magazine/m5,\
-		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = /obj/item/weapon/storage/box/shotgunshells)
-
-	for(var/i=0,i<3,i++)
-		var/picked_weapon = pick(random_weapons)
-		new picked_weapon(C)
-		var/picked_ammo = random_weapons[picked_weapon]
-		new picked_ammo(C)
-		new picked_ammo(C)
-
-/datum/game_mode/firefight/proc/spawn_heavygun_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "heavy weapons crate"
-	C.icon_state = "weaponcrate"
-	C.icon_opened = "weaponcrateopen"
-	C.icon_closed = "weaponcrate"
-
-	var/list/random_weapons = list(
-		/obj/item/weapon/gun/projectile/br85 = /obj/item/ammo_magazine/m95_sap,\
-		/obj/item/weapon/gun/projectile/m392_dmr = /obj/item/ammo_magazine/m762_ap,\
-		/obj/item/weapon/gun/projectile/m739_lmg = /obj/item/ammo_magazine/a762_box_ap)
-
-	for(var/i=0,i<2,i++)
-		var/picked_weapon = pick(random_weapons)
-		new picked_weapon(C)
-		var/picked_ammo = random_weapons[picked_weapon]
-		new picked_ammo(C)
-		new picked_ammo(C)
-
-/datum/game_mode/firefight/proc/spawn_sniper_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "marksman crate"
-	C.icon_state = "weaponcrate"
-	C.icon_opened = "weaponcrateopen"
-	C.icon_closed = "weaponcrate"
-
-	new /obj/item/weapon/gun/projectile/srs99_sniper(C)
-	new /obj/item/ammo_magazine/m145_ap(C)
-	new /obj/item/ammo_magazine/m145_ap(C)
-
-/datum/game_mode/firefight/proc/spawn_landmine_crate(var/turf/spawn_turf)
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "landmine crate"
-	C.icon_state = "secgearcrate"
-	C.icon_opened = "secgearcrateopen"
-	C.icon_closed = "secgearcrate"
-
-	for(var/i=0,i<6,i++)
-		new /obj/item/device/landmine(C)
-
-/datum/game_mode/firefight/proc/spawn_armour_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "armour crate"
-	C.icon_state = "hydrocrate"
-	C.icon_opened = "hydrocrateopen"
-	C.icon_closed = "hydrocrate"
-
-	if(prob(50))
-		new /obj/item/clothing/head/helmet/marine(C)
-	else
-		new /obj/item/clothing/head/helmet/marine/visor(C)
-
-	new /obj/item/clothing/suit/storage/marine(C)
-
-	if(prob(50))
-		var/obj/item/weapon/storage/belt/B = new /obj/item/weapon/storage/belt/marine_ammo(C)
-		new /obj/item/weapon/gun/projectile/m6d_magnum(B)
-		new /obj/item/ammo_magazine/m127_saphe(B)
-		new /obj/item/ammo_magazine/m127_saphe(B)
-	else
-		var/obj/item/weapon/storage/belt/B = new /obj/item/weapon/storage/belt/marine_medic(C)
-		new /obj/item/weapon/storage/firstaid/unsc(B)
-
-/datum/game_mode/firefight/proc/spawn_turret_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "turret crate"
-	C.icon_state = "secgearcrate"
-	C.icon_opened = "secgearcrateopen"
-	C.icon_closed = "secgearcrate"
-
-	if(prob(50))
-		new /obj/item/turret_deploy_kit/HMG(C)
-	else
-		new /obj/item/turret_deploy_kit/chaingun(C)
-
-/datum/game_mode/firefight/proc/spawn_medic_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "medical crate"
-	C.icon_state = "medicalcrate"
-	C.icon_opened = "medicalcrateopen"
-	C.icon_closed = "medicalcrate"
-
-	new /obj/item/weapon/storage/firstaid/unsc(C)
-	new /obj/item/weapon/storage/firstaid/unsc(C)
-	new /obj/item/weapon/storage/firstaid/unsc(C)
-	new /obj/item/weapon/storage/firstaid/unsc(C)
-
-	new /obj/item/weapon/storage/firstaid/surgery(C)
-	new /obj/item/weapon/storage/firstaid/surgery(C)
-
-/datum/game_mode/firefight/proc/spawn_misc_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	new /obj/item/weapon/material/knife/combat_knife(C)
-	new /obj/item/weapon/material/knife/combat_knife(C)
-
-	new /obj/item/device/flashlight/flare(C)
-	new /obj/item/device/flashlight/flare(C)
-	new /obj/item/device/flashlight/flare(C)
-	new /obj/item/device/flashlight(C)
-
-	new /obj/item/weapon/storage/box/m9_frag(C)
-
-/datum/game_mode/firefight/proc/spawn_tool_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "tool crate"
-	C.icon_state = "phoroncrate"
-	C.icon_opened = "phoroncrateopen"
-	C.icon_closed = "phoroncrate"
-
-	new /obj/item/weapon/storage/toolbox/mechanical(C)
-	new /obj/item/weapon/storage/toolbox/mechanical(C)
-	new /obj/item/weapon/material/hatchet(C)
-	new /obj/item/weapon/shovel(C)
-	new /obj/item/weapon/storage/belt/utility/full(C)
-	new /obj/item/weapon/storage/belt/utility/full(C)
-
-/datum/game_mode/firefight/proc/spawn_material_crate(var/turf/spawn_turf)
-
-	var/obj/structure/closet/crate/C = new(spawn_turf)
-	C.name = "sheet materials crate"
-	C.icon_state = "largemetal"
-	C.icon_opened = "largemetalopen"
-	C.icon_closed = "largemetal"
-
-	new /obj/item/stack/material/cloth(C, 50)
-	new /obj/item/stack/material/cloth(C, 50)
-	new /obj/item/stack/material/wood(C, 50)
-	new /obj/item/stack/material/steel(C, 50)
-	new /obj/item/stack/material/steel(C, 50)
-	new /obj/item/stack/material/steel(C, 50)
