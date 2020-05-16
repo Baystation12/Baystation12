@@ -14,6 +14,9 @@
 		/obj/structure/closet/crate/random/unsc_medic,\
 		/obj/structure/closet/crate/random/unsc_misc,\
 		/obj/structure/closet/crate/random/unsc_tools,\
+		/obj/structure/closet/crate/random/unsc_food,\
+		/obj/structure/closet/crate/random/unsc_missile,\
+		/obj/structure/closet/crate/random/unsc_splaser,\
 		/obj/structure/repair_bench,\
 		/obj/machinery/floodlight,\
 		/obj/structure/reagent_dispensers/fueltank)

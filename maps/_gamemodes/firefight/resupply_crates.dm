@@ -48,6 +48,20 @@
 		/obj/item/weapon/gun/projectile/m392_dmr = /obj/item/ammo_magazine/m762_ap,\
 		/obj/item/weapon/gun/projectile/m739_lmg = /obj/item/ammo_magazine/a762_box_ap)
 
+/obj/structure/closet/crate/random/unsc_missile
+	name = "SPNKr Capsule"
+
+/obj/structure/closet/crate/random/unsc_missile/WillContain()
+	return list(/obj/item/weapon/gun/projectile/m41,\
+		/obj/item/ammo_magazine/spnkr,\
+		/obj/item/ammo_magazine/spnkr)
+
+/obj/structure/closet/crate/random/unsc_splaser
+	name = "M6 Nonlinear Rifle Capsule"
+
+/obj/structure/closet/crate/random/unsc_splaser/WillContain()
+	return list(/obj/item/weapon/gun/energy/charged/spartanlaser)
+
 /obj/structure/closet/crate/random/unsc_sniper
 	name = "Marksman Capsule"
 	num_contents = 1
@@ -94,7 +108,7 @@
 
 /obj/structure/closet/crate/random/unsc_medic
 	name = "Medical Capsule"
-	num_contents = 2
+	num_contents = 3
 	no_doubleups = 1
 	possible_spawns =  list(\
 		/obj/item/weapon/storage/firstaid/fire,\
@@ -112,9 +126,10 @@
 	num_contents = 4
 	possible_spawns =  list(\
 		/obj/item/weapon/material/knife/combat_knife,\
+		/obj/item/weapon/material/machete,\
 		/obj/item/device/flashlight/flare,\
 		/obj/item/device/flashlight,\
-		/obj/item/weapon/armor_patch)
+		/obj/item/weapon/melee/baton/humbler)
 
 /obj/structure/closet/crate/random/unsc_misc/WillContain()
 	return list(\
@@ -140,7 +155,7 @@
 	amount = 50
 
 /obj/structure/closet/crate/random/unsc_mats
-	name = "Materials Capsule"
+	name = "Construction Materials Capsule"
 	num_contents = 4
 	possible_spawns =  list(\
 		/obj/item/stack/material/cloth/fifty,\
@@ -151,3 +166,12 @@
 /obj/structure/closet/crate/random/unsc_mats/WillContain()
 	return list(/obj/item/stack/material/plasteel/fifty,\
 		/obj/item/stack/material/steel/fifty)
+
+/obj/structure/closet/crate/random/unsc_food
+	name = "Food Capsule"
+	num_contents = 6
+	possible_spawns =  list(\
+		/obj/item/weapon/storage/box/MRE/Chicken,\
+		/obj/item/weapon/storage/box/MRE/Pizza,\
+		/obj/item/weapon/storage/box/MRE/Spaghetti
+	)
