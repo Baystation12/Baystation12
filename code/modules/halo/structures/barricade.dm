@@ -60,6 +60,6 @@
 	if(health > maxHealth * 0.66)
 		icon_state = "covenant_barricade"
 	else if(health > maxHealth * 0.33)
-		icon_state = "covenant_barricade_dmg1"
+		icon_state = "covenant_dmg1"
 	else
-		icon_state = "covenant_barricade_dmg2"
+		icon_state = "covenant_dmg2"
