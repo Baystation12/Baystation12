@@ -81,9 +81,7 @@
 		new/datum/stack_recipe("modular laptop frame", /obj/item/modular_computer/laptop, 10),\
 		new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5),\
 	))
-	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/destructible/barrel, 10, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
-	recipes += new/datum/stack_recipe("tank trap", /obj/structure/destructible/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
+
 /material/plasteel/generate_recipes()
 	..()
 	//recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)
@@ -139,8 +137,3 @@
 		new/datum/stack_recipe("white folder", /obj/item/weapon/folder/white), \
 		new/datum/stack_recipe("yellow folder", /obj/item/weapon/folder/yellow), \
 		))
-
-/material/cloth/generate_recipes()
-	recipes = list()
-
-	recipes += new/datum/stack_recipe("empty sandbags", /obj/item/empty_sandbags, 1, time = 30)
