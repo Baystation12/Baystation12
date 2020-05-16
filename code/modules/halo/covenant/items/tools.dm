@@ -64,6 +64,7 @@
 	icon = 'tools.dmi'
 	item_state = "securitybelt"
 	//species_restricted = list("Unggoy","Jiralhanae","San-Shyuum","Sangheili","Kig-Yar","Tvaoan Kig-Yar")
+	storage_slots = 8		//1 more slot than the human version
 	can_hold = list(
 		///obj/item/weapon/combitool,
 		/obj/item/weapon/crowbar,
@@ -94,6 +95,7 @@
 	new /obj/item/weapon/screwdriver/covenant(src)
 	new /obj/item/weapon/wrench/covenant(src)
 	new /obj/item/weapon/weldingtool/covenant(src)
+	new /obj/item/clothing/head/welding/covenant(src)
 	new /obj/item/weapon/crowbar/covenant(src)
 	new /obj/item/weapon/wirecutters/covenant(src)
 	new /obj/item/device/multitool/covenant(src)
@@ -115,6 +117,14 @@
 	name = "luminator"
 	icon = 'code/modules/halo/covenant/items/tools.dmi'
 	icon_state = "luminator"
+
+/obj/item/device/flashlight/glowstick/purple
+	name = "purple glowstick"
+	color = "#800080"
+
+/obj/item/device/flashlight/glowstick/cyan
+	name = "cyan glowstick"
+	color = "#00FFFF"
 
 
 
