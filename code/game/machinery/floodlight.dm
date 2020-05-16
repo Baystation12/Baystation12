@@ -136,6 +136,7 @@
 
 /obj/machinery/floodlight/active
 	on = 1
+	icon_state = "flood01"
 
 
 /obj/machinery/floodlight/active/standard_cell

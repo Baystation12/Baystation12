@@ -1573,6 +1573,7 @@
 #include "code\modules\halo\covenant\structures_machines\energybarricade.dm"
 #include "code\modules\halo\covenant\structures_machines\energybarricade_vacuum.dm"
 #include "code\modules\halo\covenant\structures_machines\faxmachine.dm"
+#include "code\modules\halo\covenant\structures_machines\floodlight.dm"
 #include "code\modules\halo\covenant\structures_machines\food_nipple.dm"
 #include "code\modules\halo\covenant\structures_machines\grav.dm"
 #include "code\modules\halo\covenant\structures_machines\helm.dm"
