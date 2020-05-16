@@ -1,11 +1,14 @@
 
-/datum/map/crusade_crashsite_zeta
-	name = "Crusade: Crashsite Zeta"
-	full_name = "Crusade gamemode on Crashsite Zeta map"
-	path = "crusade_crashsite_zeta"
+/datum/map/crusade_octanus_landing
+	name = "Crusade: Octanus Landing"
+	full_name = "Crusade gamemode on Octanus Landing map"
+	path = "crusade_octanus_landing"
 	allowed_gamemodes = list("crusade")
 	id_hud_icons = 'crusade_hud_icons.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/covenant.jpg'
+	system_name = "Sigma Octanus"
+	station_name  = "Sigma Octanus IV"
+	station_short = "Sigma Octanus IV"
 
 	allowed_gamemodes = list("crusade")
 	allowed_jobs = list(\
