@@ -17,12 +17,12 @@
 		else if(F.current_wave < F.max_waves)
 			F.current_wave = F.max_waves + 1
 			message_admins("[key_name_admin(src)] has activated Endless Wave Spawns. By the rings, this is too much...")
-			priority_announcement.Announce("Objective: Survive","Evacuation has been disabled")
+			command_announcement.Announce("Objective: Survive","Evacuation has been disabled")
 
 		else
 			F.current_wave = F.max_waves - 1
 			message_admins("[key_name_admin(src)] has deactivated Endless Wave Spawns. The game will end next wave.")
-			priority_announcement.Announce("Survive for one more wave...","Evacuation on its way")
+			command_announcement.Announce("Survive for one more wave...","Evacuation is coming")
 	else
 		to_chat(usr,"<span class='warning'>Error: the current gamemode is [F.name] | [F.type] but \
 			Endless Wave Spawns can only be used on Firefight, Stranded or Crusade gamemode.</span>")

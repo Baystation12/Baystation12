@@ -1707,6 +1707,7 @@
 #include "code\modules\halo\machinery\medical\thermopod.dm"
 #include "code\modules\halo\medicine\combat.dm"
 #include "code\modules\halo\medicine\firstaid.dm"
+#include "code\modules\halo\misc\admin_difficulty.dm"
 #include "code\modules\halo\misc\admin_ert_ship_spawn.dm"
 #include "code\modules\halo\misc\admin_fleet_spawn.dm"
 #include "code\modules\halo\misc\admin_spawn_conversion.dm"
