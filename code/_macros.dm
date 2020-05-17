@@ -47,6 +47,8 @@
 
 #define ishuman(A) istype(A, /mob/living/carbon/human)
 
+#define isid(A) istype(A, /obj/item/weapon/card/id)
+
 #define isitem(A) istype(A, /obj/item)
 
 #define isliving(A) istype(A, /mob/living)

@@ -24354,10 +24354,6 @@
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
-"mIb" = (
-/obj/structure/closet/secure_closet/nuke_wall,
-/turf/simulated/wall/r_wall/prepainted,
-/area/security/nuke_storage)
 "mJb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -24584,6 +24580,9 @@
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
+	},
+/obj/machinery/nuke_cylinder_dispenser{
+	pixel_x = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/nuke_storage)
@@ -44243,11 +44242,11 @@ mkb
 axR
 axR
 axR
-mIb
+axR
 axR
 aDL
 axR
-mIb
+axR
 axR
 axR
 axR
