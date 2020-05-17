@@ -93,6 +93,26 @@
 	temperature_coefficient = 4 / max(1, reagents.total_volume)
 	update_icon()
 
+/obj/item/weapon/reagent_containers/food/drinks/glass2/throw_impact(atom/hit_atom)
+	if(QDELETED(src))
+		return
+	if(prob(80))
+		if(reagents.reagent_list.len > 0)
+			visible_message(SPAN_DANGER("\The [src] shatters from the impact and spills all its contents!"), SPAN_DANGER("You hear the sound of glass shattering!"))
+			reagents.splash(hit_atom, reagents.total_volume)
+		else 
+			visible_message(SPAN_DANGER("\The [src] shatters from the impact!"), SPAN_DANGER("You hear the sound of glass shattering!"))
+		playsound(src.loc, pick(GLOB.shatter_sound), 100)
+		new /obj/item/weapon/material/shard(src.loc)
+		qdel(src)
+	else
+		if (reagents.reagent_list.len > 0)
+			visible_message(SPAN_DANGER("\The [src] bounces and spills all its contents!"), SPAN_WARNING("You hear the sound of glass hitting something."))
+			reagents.splash(hit_atom, reagents.total_volume)
+		else
+			visible_message(SPAN_WARNING("\The [src] bounces dangerously. Luckily it didn't break."), SPAN_WARNING("You hear the sound of glass hitting something."))
+		playsound(src.loc, "sound/effects/Glasshit.ogg", 50)
+
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/can_add_extra(obj/item/weapon/glass_extra/GE)
 	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
 		return 0
