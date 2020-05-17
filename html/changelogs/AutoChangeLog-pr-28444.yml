@@ -1,0 +1,4 @@
+author: "orelbon"
+delete-after: True
+changes: 
+  - rscadd: "Changes nuke cylinder container from cabinet to floor embedded machine."
