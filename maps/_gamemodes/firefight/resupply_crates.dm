@@ -13,7 +13,7 @@
 	. = ..()
 
 	for(var/i=0,i<num_contents,i++)
-		if(!possible_spawns)
+		if(!possible_spawns.len)
 			break
 		var/spawn_type = pick(possible_spawns)
 		new spawn_type(src)
