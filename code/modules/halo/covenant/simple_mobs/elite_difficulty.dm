@@ -1,5 +1,6 @@
 
 /mob/living/simple_animal/hostile/covenant/elite/getRollDist()
+	. = ..()
 	switch(GLOB.difficulty_level)
 		if(DIFFICULTY_EASY)
 			return 2
@@ -11,6 +12,7 @@
 			return 4
 
 mob/living/simple_animal/hostile/covenant/elite/getPerRollDelay()
+	. = ..()
 	switch(GLOB.difficulty_level)
 		if(DIFFICULTY_EASY)
 			return 2
@@ -22,6 +24,7 @@ mob/living/simple_animal/hostile/covenant/elite/getPerRollDelay()
 			return -1
 
 mob/living/simple_animal/hostile/covenant/elite/apply_difficulty_setting()
+	. = ..()
 	//apply difficulty
 	switch(GLOB.difficulty_level)
 		if(DIFFICULTY_HEROIC)
