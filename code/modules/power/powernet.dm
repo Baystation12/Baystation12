@@ -170,6 +170,20 @@
 		else
 			return 0
 
+// Proc: apcs_overload()
+// Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
+// Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
+/datum/powernet/proc/apcs_overload(var/failure_chance, var/overload_chance, var/reboot_chance)
+	for(var/obj/machinery/power/terminal/T in nodes)
+		var/obj/machinery/power/apc/A = T.master_machine()
+		if(istype(A))
+			if (prob(failure_chance))
+				A.set_broken(TRUE)
+			if (prob(overload_chance))
+				A.overload_lighting()
+			if(prob(reboot_chance))
+				A.energy_fail(rand(30,60))
+
 ////////////////////////////////////////////////
 // Misc.
 ///////////////////////////////////////////////
