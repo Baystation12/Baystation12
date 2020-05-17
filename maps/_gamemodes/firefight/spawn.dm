@@ -19,30 +19,46 @@
 		list(\
 			/mob/living/simple_animal/hostile/covenant/grunt = 2,\
 			/mob/living/simple_animal/hostile/covenant/drone/ranged = 1,\
-			/mob/living/simple_animal/hostile/covenant/jackal/shield = 1\
-			),\
-		list(\
-			/mob/living/simple_animal/hostile/covenant/grunt = 1,\
-			/mob/living/simple_animal/hostile/covenant/drone/ranged = 1,\
-			/mob/living/simple_animal/hostile/covenant/jackal/shield = 2,\
-			/mob/living/simple_animal/hostile/covenant/drone = 1,\
-			/mob/living/simple_animal/hostile/covenant/jackal = 2,\
+			/mob/living/simple_animal/hostile/covenant/jackal/shield = 1,\
 			/mob/living/simple_animal/hostile/covenant/elite = 1\
 			),\
 		list(\
-			/mob/living/simple_animal/hostile/covenant/grunt = 1,\
+			/mob/living/simple_animal/hostile/covenant/grunt/major = 2,\
 			/mob/living/simple_animal/hostile/covenant/drone/ranged = 1,\
+			/mob/living/simple_animal/hostile/covenant/drone = 1,\
 			/mob/living/simple_animal/hostile/covenant/jackal/shield = 2,\
-			/mob/living/simple_animal/hostile/covenant/drone = 2,\
 			/mob/living/simple_animal/hostile/covenant/jackal = 1,\
 			/mob/living/simple_animal/hostile/covenant/elite = 1,\
 			/mob/living/simple_animal/hostile/covenant/elite/major = 1\
 			),\
 		list(\
-			/mob/living/simple_animal/hostile/covenant/grunt = 1,\
+			/mob/living/simple_animal/hostile/covenant/grunt/ultra = 1,\
+			/mob/living/simple_animal/hostile/covenant/grunt/heavy = 1,\
 			/mob/living/simple_animal/hostile/covenant/jackal/shield = 1,\
+			/mob/living/simple_animal/hostile/covenant/drone = 1,\
+			/mob/living/simple_animal/hostile/covenant/jackal/sniper = 1,\
+			/mob/living/simple_animal/hostile/covenant/elite/major = 2,\
+			/mob/living/simple_animal/hostile/covenant/elite/ultra = 1\
+			),\
+		list(\
+			/mob/living/simple_animal/hostile/covenant/grunt/heavy = 1,\
+			/mob/living/simple_animal/hostile/covenant/jackal/sniper = 1,\
+			/mob/living/simple_animal/hostile/covenant/elite/zealot = 1\
+			),\
+		list(\
+			/mob/living/simple_animal/hostile/covenant/grunt = 1,\
+			/mob/living/simple_animal/hostile/covenant/grunt/major = 1,\
+			/mob/living/simple_animal/hostile/covenant/grunt/ultra = 1,\
+			/mob/living/simple_animal/hostile/covenant/grunt/heavy = 1,\
+			/mob/living/simple_animal/hostile/covenant/drone/ranged = 1,\
+			/mob/living/simple_animal/hostile/covenant/drone = 1,\
 			/mob/living/simple_animal/hostile/covenant/jackal = 1,\
-			/mob/living/simple_animal/hostile/covenant/elite/major = 1\
+			/mob/living/simple_animal/hostile/covenant/jackal/shield = 1,\
+			/mob/living/simple_animal/hostile/covenant/jackal/sniper = 1,\
+			/mob/living/simple_animal/hostile/covenant/elite = 1,\
+			/mob/living/simple_animal/hostile/covenant/elite/major = 1,\
+			/mob/living/simple_animal/hostile/covenant/elite/ultra = 1\
+			/mob/living/simple_animal/hostile/covenant/elite/zealot = 1\
 			)\
 		)
 
