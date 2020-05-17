@@ -40,7 +40,7 @@
 	landmark_transition = "nav_transit_vox"
 	range = 1
 	fuel_consumption = 4
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling/
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	skill_needed = SKILL_NONE
 	defer_initialisation = TRUE
 
@@ -125,7 +125,7 @@
 	landmark_transition = "nav_transit_voxship"
 	range = 1
 	fuel_consumption = 4
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling/
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	defer_initialisation = TRUE
 
 /obj/effect/shuttle_landmark/vox_base/hangar/vox_ship
@@ -157,7 +157,7 @@
 	landmark_transition = "nav_transit_scavshuttle"
 	range = 1
 	fuel_consumption = 4
-	ceiling_type = /turf/simulated/floor/shuttle_ceiling/
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 	defer_initialisation = TRUE
 	mothershuttle = "Vox Scavenger Ship"
 
