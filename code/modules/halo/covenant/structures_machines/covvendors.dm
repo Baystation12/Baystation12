@@ -107,7 +107,7 @@
 	desc = "Storage for Covenant Sangheili equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/energy/plasmarepeater = 3,/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/weapon/gun/energy/beam_rifle = 1
+	products = list(/obj/item/weapon/gun/energy/plasmarepeater = 3,/obj/item/weapon/gun/projectile/fuel_rod = 1,/obj/item/weapon/gun/energy/beam_rifle = 1
 		,/obj/item/turret_deploy_kit/plasturret = 2,/obj/item/ammo_magazine/fuel_rod = 3)
 
 /obj/machinery/vending/armory/covenant/jiralhanae/weapon // Both ammo, and guns!
@@ -132,7 +132,7 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/gun/launcher/grenade/brute_shot = 2,/obj/item/weapon/grenade/brute_shot = 8,
-		,/obj/item/turret_deploy_kit/plasturret = 2,/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 3)
+		,/obj/item/turret_deploy_kit/plasturret = 2,/obj/item/weapon/gun/projectile/fuel_rod = 1,/obj/item/ammo_magazine/fuel_rod = 3)
 
 /obj/machinery/vending/armory/covenant/kigyar/weapon // Both ammo, and guns!
 	name = "Covenant - Kig-Yar Weapon Vendor"
@@ -190,7 +190,7 @@
 	desc = "Storage for Covenant Kig-Yar equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/energy/plasmarepeater = 1,/obj/item/weapon/gun/projectile/fuel_rod_launcher = 1,/obj/item/ammo_magazine/fuel_rod = 3,/obj/item/turret_deploy_kit/plasturret = 2)
+	products = list(/obj/item/weapon/gun/energy/plasmarepeater = 1,/obj/item/weapon/gun/projectile/fuel_rod = 1,/obj/item/ammo_magazine/fuel_rod = 3,/obj/item/turret_deploy_kit/plasturret = 2)
 
 /obj/machinery/vending/armory/covenant/sangheili/food
 	name = "Covenant - Sangheili Food Vendor"

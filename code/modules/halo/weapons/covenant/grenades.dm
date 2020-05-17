@@ -50,20 +50,21 @@
 	loc = null
 	qdel(src)
 
+//plasma grenade visual effect
 /obj/effect/plasma_explosion
 	name = "plasma blast"
 	icon = 'code/modules/halo/weapons/covenant/plasma_explosion.dmi'
 	icon_state = "plasma_explosion"
-
-/obj/effect/plasma_explosion/ex_act()
-	//nothing
+	var/lifetime = 7
 
 /obj/effect/plasma_explosion/New()
 	. = ..()
 	pixel_x -= 32
 	pixel_y -= 32
-	spawn(7)
+	spawn(lifetime)
 		qdel(src)
 
+//fuel rod visual effect
 /obj/effect/plasma_explosion/green
+	lifetime = 4
 	icon_state = "green"

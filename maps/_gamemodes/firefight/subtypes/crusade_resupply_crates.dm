@@ -78,7 +78,7 @@
 	name = "Fuel rod supply capsule"
 
 /obj/structure/closet/crate/random/covenant/fuel_rod/WillContain()
-	return list(/obj/item/weapon/gun/projectile/fuel_rod_launcher)
+	return list(/obj/item/weapon/gun/projectile/fuel_rod)
 
 /obj/structure/closet/crate/random/covenant/energy_barricades
 	name = "Energy barricades supply capsule"
