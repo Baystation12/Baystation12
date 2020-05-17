@@ -221,7 +221,7 @@
 	initial_gas = list(GAS_NITROGEN = MOLES_N2STANDARD*1.25)
 
 /obj/machinery/alarm/vox
-	req_access = newlist()
+	req_access = list()
 
 /obj/machinery/alarm/vox/Initialize()
 	.=..()
