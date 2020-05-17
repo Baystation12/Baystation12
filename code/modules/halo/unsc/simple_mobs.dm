@@ -41,7 +41,10 @@
 	icon_state = "mjolnir_mk4"
 	icon_living  = "mjolnir_mk4"
 	icon_dead = "mjolnir_mk4_dead"
-	possible_weapons = list(/obj/item/weapon/gun/projectile/ma5b_ar, /obj/item/weapon/gun/projectile/br55, /obj/item/weapon/gun/projectile/m392_dmr)
+	possible_weapons = list(
+		/obj/item/weapon/gun/energy/charged/spartanlaser,\
+		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,\
+		/obj/item/weapon/gun/projectile/m739_lmg)
 	health = 150
 	maxHealth = 150
 	resistance = 15
