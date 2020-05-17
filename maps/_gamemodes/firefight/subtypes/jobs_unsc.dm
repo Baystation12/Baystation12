@@ -16,32 +16,42 @@ Cael May 2020
 	alt_titles = list()		//some alt titles have custom outfits, do this just to make sure they are disabled
 	spawnpoint_override = null
 	fallback_spawnpoint = null
+	account_allowed = FALSE
+	generate_email = FALSE
 
 /datum/job/unsc/marine/squad_leader/firefight
 	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/e5/firefight
 	alt_titles = list()
 	spawnpoint_override = null
 	fallback_spawnpoint = null
+	account_allowed = FALSE
+	generate_email = FALSE
 
 /datum/job/unsc/odst/firefight
 	outfit_type = /decl/hierarchy/outfit/job/unsc/odst/firefight
 	alt_titles = list()
 	spawnpoint_override = null
 	fallback_spawnpoint = null
+	account_allowed = FALSE
+	generate_email = FALSE
 
 /datum/job/unsc/odst/squad_leader/firefight
 	outfit_type = /decl/hierarchy/outfit/job/unsc/odst/e5/firefight
 	alt_titles = list()
 	spawnpoint_override = null
 	fallback_spawnpoint = null
+	account_allowed = FALSE
+	generate_email = FALSE
 
-/datum/job/unsc/spartan2/firefight
+/datum/job/unsc/spartan_two/firefight
 	total_positions = 1
 	spawn_positions = 1
-	outfit_type = /decl/hierarchy/outfit/job/unsc/spartan2/firefight
+	outfit_type = /decl/hierarchy/outfit/spartan_two/firefight
 	alt_titles = list()
 	spawnpoint_override = null
 	fallback_spawnpoint = null
+	account_allowed = FALSE
+	generate_email = FALSE
 
 /* The actual changes */
 
@@ -102,7 +112,7 @@ Cael May 2020
 	belt = /obj/item/weapon/gun/projectile/m7_smg/silenced
 	l_pocket = /obj/item/ammo_magazine/m5
 
-/decl/hierarchy/outfit/job/unsc/spartan2/firefight
+/decl/hierarchy/outfit/spartan_two/firefight
 	name = "Spartan II (firefight)"
 
 	//a starting weapon

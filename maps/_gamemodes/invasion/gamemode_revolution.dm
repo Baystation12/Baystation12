@@ -29,7 +29,7 @@
 		/datum/job/covenant/yanmee_major,\
 		/datum/job/covenant/yanmee_ultra,\
 		/datum/job/covenant/yanmee_leader,\
-		/datum/job/unsc/spartan2)
+		/datum/job/unsc/spartan_two)
 
 /datum/game_mode/outer_colonies/revolution/setup_objectives()
 	. = ..()

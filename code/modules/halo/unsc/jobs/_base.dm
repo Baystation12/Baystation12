@@ -11,6 +11,8 @@
 	lace_access = TRUE
 	total_positions = -1
 	spawn_positions = -1
+	account_allowed = TRUE
+	generate_email = TRUE
 
 /decl/hierarchy/outfit/job/unsc
 	name = "UNSC Ship Crew"
@@ -20,4 +22,5 @@
 	uniform = /obj/item/clothing/under/unsc/red
 	id_type = /obj/item/weapon/card/id/unsc
 	pda_slot = null
+	pda_type = null
 	flags = 0

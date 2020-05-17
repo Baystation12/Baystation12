@@ -5,8 +5,8 @@
 
 	//subtype
 	#include "../_gamemodes/firefight/subtypes/stranded.dm"
-	#include "../_gamemodes/firefight/subtypes/firefight_colonist.dm"
-	#include "../_gamemodes/firefight/subtypes/firefight_unsc.dm"
+	#include "../_gamemodes/firefight/subtypes/jobs_colonist.dm"
+	#include "../_gamemodes/firefight/subtypes/jobs_unsc.dm"
 
 	//map def
 	#include "map.dm"

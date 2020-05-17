@@ -1,6 +1,6 @@
-/datum/job/unsc/spartan2
+/datum/job/unsc/spartan_two
 	title = "Spartan II"
-	outfit_type = /decl/hierarchy/outfit/job/unsc/spartan2
+	outfit_type = /decl/hierarchy/outfit/spartan_two
 	total_positions = 0
 	spawn_positions = 0
 	account_allowed = 0

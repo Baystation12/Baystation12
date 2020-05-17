@@ -1,10 +1,10 @@
 
 /datum/job/unsc/firefight_colonist
-	title = "Colonist"
 	outfit_type = /decl/hierarchy/outfit/job/unsc/firefight_colonist
-	track_players = 1
 	spawnpoint_override = null
 	fallback_spawnpoint = null
+	account_allowed = FALSE
+	generate_email = FALSE
 
 /decl/hierarchy/outfit/job/unsc/firefight_colonist
 	name = "Firefight Colonist"
