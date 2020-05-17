@@ -51,6 +51,7 @@
 	melee_damage_lower = 45
 	melee_damage_upper = 55
 	possible_weapons = list()
+	damtype = BURN
 
 /mob/living/simple_animal/hostile/covenant/elite/zealot/New()
 	. = ..()
