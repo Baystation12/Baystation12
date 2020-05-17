@@ -57,7 +57,7 @@
 			/mob/living/simple_animal/hostile/covenant/jackal/sniper = 1,\
 			/mob/living/simple_animal/hostile/covenant/elite = 1,\
 			/mob/living/simple_animal/hostile/covenant/elite/major = 1,\
-			/mob/living/simple_animal/hostile/covenant/elite/ultra = 1\
+			/mob/living/simple_animal/hostile/covenant/elite/ultra = 1,\
 			/mob/living/simple_animal/hostile/covenant/elite/zealot = 1\
 			)\
 		)
