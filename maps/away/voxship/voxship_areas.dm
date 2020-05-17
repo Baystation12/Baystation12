@@ -1,4 +1,4 @@
-/area/voxship/
+/area/voxship
 	icon = 'voxship.dmi'
 
 /area/voxship/base
