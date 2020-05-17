@@ -40,7 +40,7 @@
 
 			//is this the final wave?
 			current_wave++
-			if(current_wave >= max_waves)
+			if(current_wave == max_waves)
 				evac_stage = 1
 				to_world("<span class='danger'>[evac_message]</span>")
 			else
