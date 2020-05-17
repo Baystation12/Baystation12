@@ -7833,9 +7833,8 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/structure/bed/chair/comfy/blue{
-	icon_state = "comfychair_preview";
-	dir = 8
+/obj/structure/bed/chair/office/comfy/blue{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -7874,7 +7873,7 @@
 	d2 = 4;
 	icon_state = "1-4"
 	},
-/obj/structure/bed/chair/comfy/blue,
+/obj/structure/bed/chair/office/comfy/blue,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "qi" = (
@@ -11420,8 +11419,8 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/structure/bed/chair/comfy/blue{
-	icon_state = "comfychair_preview";
+/obj/structure/bed/chair/office/comfy/blue{
+	icon_state = "comfyofficechair_preview";
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -13562,9 +13561,8 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/structure/bed/chair/comfy/blue{
-	icon_state = "comfychair_preview";
-	dir = 8
+/obj/structure/bed/chair/office/comfy/blue{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
@@ -16273,7 +16271,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/structure/bed/chair/comfy/blue,
+/obj/structure/bed/chair/office/comfy/blue,
 /turf/simulated/floor/tiled/dark,
 /area/bridge)
 "TM" = (
