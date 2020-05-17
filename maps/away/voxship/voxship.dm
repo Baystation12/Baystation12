@@ -88,7 +88,7 @@
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~This is where the second site's code starts ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-/datum/map_template/ruin/away_site/scavship/
+/datum/map_template/ruin/away_site/scavship
 	name = "Vox Scavenger Ship"
 	id = "awaysite_voxship2"
 	description = "Vox Scavenger Ship."
