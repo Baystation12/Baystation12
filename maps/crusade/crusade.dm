@@ -8,6 +8,7 @@
 	#include "../_gamemodes/firefight/subtypes/crusade_resupply.dm"
 	#include "../_gamemodes/firefight/subtypes/crusade_resupply_crates.dm"
 	#include "../_gamemodes/firefight/subtypes/crusade_evac.dm"
+	#include "../_gamemodes/firefight/subtypes/jobs_covenant.dm"
 
 	//map def
 	#include "map.dm"

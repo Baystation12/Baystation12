@@ -15,11 +15,9 @@
 	evac_message = "The spirit has arrived. Protect it until we can depart this place."
 
 	special_job_titles = list(\
-		"Sangheili Ultra",\
 		"Special Operations Sangheili",
 		"Sangheili Zealot",\
 		"T-Voan Champion",\
-		"Unggoy Deacon",\
 		"Special Operations Unggoy",\
 		"Unggoy Ultra")
 
@@ -51,103 +49,3 @@
 
 	//human radio channel
 	overmind.comms_channel = RADIO_SQUAD
-
-/datum/game_mode/firefight/crusade/modify_job_slots()
-	. = ..()
-
-	//a whole bunch of slot tweaks
-	var/datum/job/current_job
-
-	// JIRALHANAE
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/brute_minor]
-	current_job.spawn_positions = -1
-	current_job.total_positions = -1
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/brute_major]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 1
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/brute_captain]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	// KIGYAR
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/kigyar_marksman]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 1
-	current_job.open_slot_on_death = 1
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/kigyar_sniper]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 1
-
-	// SANGHEILI
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/sangheili_ultra]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/sangheili_major]
-	current_job.spawn_positions = 2
-	current_job.total_positions = 2
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/sangheili_specops]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/sangheili_zealot]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	// TVOAN
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/skirmminor]
-	current_job.spawn_positions = -1
-	current_job.total_positions = -1
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/skirmmajor]
-	current_job.spawn_positions = 2
-	current_job.total_positions = 2
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/skirmmurmillo]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 1
-	current_job.open_slot_on_death = 1
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/skirmcommando]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 1
-	current_job.open_slot_on_death = 1
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/skirmchampion]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	// UNGGOY
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/unggoy_major]
-	current_job.spawn_positions = 2
-	current_job.total_positions = 2
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/unggoy_ultra]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/unggoy_deacon]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/unggoy_specops]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-	// YANMEE
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/yanmee_ultra]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0
-
-	current_job = job_master.occupations_by_type[/datum/job/covenant/yanmee_leader]
-	current_job.spawn_positions = 1
-	current_job.total_positions = 0

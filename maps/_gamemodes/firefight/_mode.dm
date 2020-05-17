@@ -73,23 +73,6 @@
 	if(character.faction == player_faction_name)
 		new assault_landmark_type(character)
 
-/datum/game_mode/firefight/pre_setup()
-	. = ..()
-	modify_job_slots()
-
-/datum/game_mode/firefight/proc/modify_job_slots()
-	//this seems like hacky way of doing things
-	//but i cant think of a better way to handle per-gamemode job customisations as long as we use standardised job definitions
-	//go to child subtype to see more
-
-	//this doesnt work but im leaving it here in case i think of a different way to do it
-	/*
-	for(var/job_type in disabled_jobs_types)
-		var/datum/job/J = job_master.occupations_by_type[job_type]
-		J.total_positions = 0
-		J.spawn_positions = 0
-		*/
-
 /datum/game_mode/firefight
 	var/list/special_job_titles = list("Spartan II")
 
