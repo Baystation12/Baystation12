@@ -13,7 +13,7 @@
 
 /obj/item/weapon/melee/energy/can_embed()
 	return FALSE
-	
+
 /obj/item/weapon/melee/energy/Initialize()
 	. = ..()
 	if(active)
@@ -22,7 +22,7 @@
 	else
 		active = TRUE
 		deactivate()
-		
+
 /obj/item/weapon/melee/energy/on_update_icon()
 	. = ..()
 	if(active)
@@ -45,7 +45,7 @@
 		playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
 		to_chat(user, "<span class='notice'>\The [src] is now energised.</span>")
 	set_light(0.8, 1, 2, 4, lighting_color)
-	
+
 /obj/item/weapon/melee/energy/proc/deactivate(mob/living/user)
 	if(!active)
 		return
@@ -140,11 +140,11 @@
 /obj/item/weapon/melee/energy/sword/Initialize()
 	if(!blade_color)
 		blade_color = pick("red","blue","green","purple")
-	
+
 	active_icon = "sword[blade_color]"
 	var/color_hex = list("red" = COLOR_SABER_RED,  "blue" = COLOR_SABER_BLUE, "green" = COLOR_SABER_GREEN, "purple" = COLOR_SABER_PURPLE)
 	lighting_color = color_hex[blade_color]
-	
+
 	. = ..()
 
 /obj/item/weapon/melee/energy/sword/green
@@ -191,13 +191,13 @@
 	icon_state = "blade"
 	active_icon = "blade"	//It's all energy, so it should always be visible.
 	lighting_color = COLOR_SABER_GREEN
-	force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
+	active_force = 40 //Normal attacks deal very high damage - about the same as wielded fire axe
 	active = 1
 	armor_penetration = 100
 	sharp = 1
 	edge = 1
 	anchored = 1    // Never spawned outside of inventory, should be fine.
-	throwforce = 1  //Throwing or dropping the item deletes it.
+	active_throwforce = 1  //Throwing or dropping the item deletes it.
 	throw_speed = 1
 	throw_range = 1
 	w_class = ITEM_SIZE_TINY //technically it's just energy or something, I dunno
@@ -245,7 +245,7 @@
 			host.embedded -= src
 			host.drop_from_inventory(src)
 		QDEL_IN(src, 0)
-		
+
 /obj/item/weapon/melee/energy/machete
 	name = "energy machete"
 	desc = "A machete handle that extends out into a long, purple machete blade. It appears to be Skrellian in origin."
