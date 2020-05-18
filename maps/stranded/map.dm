@@ -5,6 +5,7 @@
 	path = "stranded_desert_outpost"
 	allowed_gamemodes = list("stranded")
 	lobby_icon = 'code/modules/halo/splashworks/title4.jpg'
+	boss_name = "UNSC"
 
 	allowed_gamemodes = list("stranded")
 	allowed_jobs = list(\

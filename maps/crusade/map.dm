@@ -8,6 +8,7 @@
 	system_name = "Sigma Octanus"
 	station_name  = "Sigma Octanus IV"
 	station_short = "Sigma Octanus IV"
+	boss_name = "Covenant"
 
 	allowed_gamemodes = list("crusade")
 	allowed_jobs = list(\
