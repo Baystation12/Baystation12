@@ -25,13 +25,18 @@
 	if(climbable)
 		verbs += /obj/structure/destructible/proc/verb_climb
 
+	update_icon()
+
 /obj/structure/destructible/update_icon()
 	. = ..()
 	if(flags & ON_BORDER)
 		throwpass = 1
-		if(dir == SOUTH)
+		if(dir & SOUTH)
 			plane = ABOVE_HUMAN_PLANE
 			layer = ABOVE_HUMAN_LAYER
+		else
+			plane = OBJ_PLANE
+			layer = BELOW_TABLE_LAYER
 
 /obj/structure/destructible/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/stack))

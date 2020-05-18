@@ -65,6 +65,7 @@ for reference:
 	var/maxhealth = 100
 	var/material/material
 	flags = OBJ_CLIMBABLE
+	layer = TABLE_LAYER
 
 /obj/structure/barricade/New(var/newloc, var/material_name)
 	..(newloc)
