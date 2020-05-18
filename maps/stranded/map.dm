@@ -14,4 +14,4 @@
 		/datum/job/unsc/odst/firefight,\
 		/datum/job/unsc/odst/squad_leader/firefight,\
 		/datum/job/unsc/spartan_two/firefight,\
-		/datum/job/unsc/firefight_colonist)
+		/datum/job/colonist/firefight)
