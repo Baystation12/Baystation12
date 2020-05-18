@@ -104,18 +104,19 @@
 
 /obj/structure/closet/crate/random/covenant/construction
 	name = "Construction supply capsule"
-	num_contents = 3
+	num_contents = 4
 	possible_spawns = list(\
 		/obj/item/device/flashlight/glowstick/purple,\
 		/obj/item/device/flashlight/glowstick/cyan,\
 		/obj/item/device/flashlight/glowstick/blue,\
 		/obj/item/weapon/cell/covenant,\
+		/obj/item/clothing/head/welding/covenant,\
+		/obj/item/device/flashlight/covenant,\
 		/obj/item/stack/material/nanolaminate/fifty)
 
 /obj/structure/closet/crate/random/covenant/construction/WillContain()
 	return list(\
 		/obj/item/weapon/storage/belt/covenant/full,\
-		/obj/item/device/flashlight/covenant,\
 		/obj/item/stack/material/nanolaminate/fifty)
 
 /obj/structure/closet/crate/random/covenant/medical
