@@ -106,9 +106,7 @@
 	name = "Construction supply capsule"
 	num_contents = 4
 	possible_spawns = list(\
-		/obj/item/device/flashlight/glowstick/purple,\
-		/obj/item/device/flashlight/glowstick/cyan,\
-		/obj/item/device/flashlight/glowstick/blue,\
+		/obj/item/device/flashlight/glowstick/covenant,\
 		/obj/item/weapon/cell/covenant,\
 		/obj/item/clothing/head/welding/covenant,\
 		/obj/item/device/flashlight/covenant,\
