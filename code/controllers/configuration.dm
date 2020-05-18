@@ -156,6 +156,7 @@ var/list/gamemode_cache = list()
 	var/ban_legacy_system = 0	//Defines whether the server uses the legacy banning system with the files in /data or the SQL system. Config option in config.txt
 	var/use_age_restriction_for_jobs = 0   //Do jobs use account age restrictions?   --requires database
 	var/use_age_restriction_for_antags = 0 //Do antags use account age restrictions? --requires database
+	var/panic_bunker = 0 //Panic bunker - disallows new connections. Requires database
 
 	var/simultaneous_pm_warning_timeout = 100
 
@@ -301,6 +302,9 @@ var/list/gamemode_cache = list()
 
 				if ("use_age_restriction_for_antags")
 					config.use_age_restriction_for_antags = 1
+
+				if ("panic_bunker")
+					config.panic_bunker = 1
 
 				if ("jobs_have_minimal_access")
 					config.jobs_have_minimal_access = 1
