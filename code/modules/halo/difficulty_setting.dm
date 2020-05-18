@@ -7,24 +7,37 @@
 GLOBAL_VAR_INIT(difficulty_level, DIFFICULTY_NORMAL)
 
 mob/living/simple_animal/proc/apply_difficulty_setting()
-	//apply difficulty
+
+mob/living/simple_animal/hostile/apply_difficulty_setting()
+	. = ..()
 	switch(GLOB.difficulty_level)
 		if(DIFFICULTY_EASY)
 			//make enemies weaker
 			health -= 25
 			maxHealth -= 25
 			resistance = max(resistance - 5, 0)
+			if(burst_size > 1)
+				burst_size -= 1
 		if(DIFFICULTY_NORMAL)
 			//no change
 		if(DIFFICULTY_HEROIC)
 			//make enemies stronger
 			health += 50
 			maxHealth += 50
+			resistance = max(resistance - 5, 0)
+			melee_damage_lower += 10
+			melee_damage_upper += 10
+			if(burst_size > 1)
+				burst_size += 1
 		if(DIFFICULTY_LEGENDARY)
 			//make enemies much stronger
 			health += 100
 			maxHealth += 100
-			resistance += 5
+			melee_damage_lower += 20
+			melee_damage_upper += 20
+			resistance = min(resistance + 5, 25)
+			if(burst_size > 1)
+				burst_size += 2
 
 /mob/living/simple_animal/getRollDist()
 	switch(GLOB.difficulty_level)
