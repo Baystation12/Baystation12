@@ -1,0 +1,5 @@
+author: "ben10083"
+delete-after: True
+changes: 
+  - rscadd: "Gave forensics module a reagent scanner"
+  - rscadd: "Gave forensics module crew records subsystem"
