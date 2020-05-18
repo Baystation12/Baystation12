@@ -1955,7 +1955,6 @@
 #include "code\modules\halo\weapons\covenant\pistols.dm"
 #include "code\modules\halo\weapons\covenant\rifles.dm"
 #include "code\modules\halo\weapons\covenant\snipers.dm"
-#include "code\modules\halo\weapons\projectiles\beams.dm"
 #include "code\modules\halo\weapons\turrets\ammo.dm"
 #include "code\modules\halo\weapons\turrets\chaingun.dm"
 #include "code\modules\halo\weapons\turrets\deploy_kits.dm"
