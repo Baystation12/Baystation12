@@ -179,6 +179,12 @@
 
 	log_client_to_db()
 
+	if(isnum(player_age) && player_age == 0 && config.panic_bunker && !holder)
+		to_chat(src, "<span class='info'>We are currently not accepting new players</span>")
+		log_and_message_admins("Newly seen account [key] attempted to join during a panic bunker!")
+		qdel(src)
+		return
+
 	send_resources()
 
 	if(prefs.lastchangelog != changelog_hash) //bolds the changelog button on the interface so we know there are updates.
