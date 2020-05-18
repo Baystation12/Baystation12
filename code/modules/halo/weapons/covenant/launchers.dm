@@ -31,7 +31,7 @@
 
 #define FUEL_ROD_IRRADIATE_RANGE 2
 #define FUEL_ROD_IRRADIATE_AMOUNT 15
-#define FUEL_ROD_MAX_OVERSHOOT 4
+#define FUEL_ROD_MAX_OVERSHOOT 3
 
 /obj/item/ammo_magazine/fuel_rod
 	name = "Type-33 Light Anti-Armor Weapon Magazine"
@@ -55,7 +55,7 @@
 	name = "fuel rod"
 	check_armour = "bomb"
 	step_delay = 1.2
-	dispersion = 0.5	//random offset of 4.5 tiles
+	dispersion = 5	//random offset of 4.5 tiles
 	kill_count = 15
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
