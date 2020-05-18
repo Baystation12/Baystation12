@@ -331,8 +331,7 @@
 	target_mob = aggressor
 	stance = HOSTILE_STANCE_ATTACK
 
-	if(ranged)
-		EvasiveMove(aggressor)
+	EvasiveMove(aggressor)
 
 	return 1
 
