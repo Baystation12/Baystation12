@@ -1,5 +1,5 @@
 
-/mob/living/simple_animal/hostile/covenant/grunt/major/apply_difficulty_setting()
+/mob/living/simple_animal/hostile/covenant/grunt/apply_difficulty_setting()
 	. = ..()
 	//apply difficulty
 	switch(GLOB.difficulty_level)

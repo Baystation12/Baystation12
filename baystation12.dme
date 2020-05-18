@@ -1526,6 +1526,7 @@
 #include "code\modules\halo\covenant\simple_mobs\elite_shield.dm"
 #include "code\modules\halo\covenant\simple_mobs\grunt.dm"
 #include "code\modules\halo\covenant\simple_mobs\grunt_difficulty.dm"
+#include "code\modules\halo\covenant\simple_mobs\grunt_shield.dm"
 #include "code\modules\halo\covenant\simple_mobs\huragok.dm"
 #include "code\modules\halo\covenant\simple_mobs\jackal.dm"
 #include "code\modules\halo\covenant\simple_mobs\jackal_difficulty.dm"
