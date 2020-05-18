@@ -129,6 +129,7 @@
 		/obj/item/weapon/material/machete,\
 		/obj/item/device/flashlight/flare,\
 		/obj/item/device/flashlight,\
+		/obj/item/weapon/cell/high,\
 		/obj/item/weapon/melee/baton/humbler)
 
 /obj/structure/closet/crate/random/unsc_misc/WillContain()
@@ -145,6 +146,7 @@
 		/obj/item/weapon/storage/toolbox/mechanical,\
 		/obj/item/weapon/material/hatchet,\
 		/obj/item/weapon/shovel,\
+		/obj/item/weapon/cell/high,\
 		/obj/item/weapon/storage/belt/utility/full)
 
 /obj/structure/closet/crate/random/unsc_tools/WillContain()
