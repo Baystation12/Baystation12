@@ -11,6 +11,7 @@
 	speak_chance = 1
 	combat_tier = 1
 	speed = 5
+	species_name = "Yanme e"
 
 /mob/living/simple_animal/hostile/covenant/drone/ranged
 	possible_weapons = list(/obj/item/weapon/gun/energy/plasmapistol/npc, /obj/item/weapon/gun/projectile/needler/npc)

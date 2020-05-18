@@ -10,6 +10,7 @@
 	icon_living = "minor"
 	icon_dead = "dead_minor"
 	possible_weapons = list(/obj/item/weapon/gun/energy/plasmarifle)
+	species_name = "Sangheili"
 	var/shield_left = 50
 	var/shield_max = 50
 	var/recharge_delay = 5 SECONDS

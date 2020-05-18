@@ -8,6 +8,7 @@
 	combat_tier = 1
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum/npc)
 	var/obj/item/device/flashlight/held_light
+	species_name = "Human"
 
 /mob/living/simple_animal/hostile/unsc/New()
 	. = ..()

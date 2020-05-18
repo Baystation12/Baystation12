@@ -1,4 +1,12 @@
 
+/mob/living/simple_animal
+	var/species_name
+
+/mob/living/simple_animal/proc/create_pain_screams()
+	if(species_name)
+		var/datum/species/S = all_species[species_name]
+		pain_scream_sounds = S.pain_scream_sounds
+
 /mob/living/simple_animal/hostile
 	var/list/possible_weapons = list()
 	var/icon/gun_overlay

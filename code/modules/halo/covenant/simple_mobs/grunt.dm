@@ -21,6 +21,7 @@
 	icon_dead = "grunt_minor_dead"
 	possible_weapons = list(/obj/item/weapon/gun/energy/plasmapistol/npc, /obj/item/weapon/gun/projectile/needler/npc)
 	combat_tier = 1
+	species_name = "Unggoy"
 
 /mob/living/simple_animal/hostile/covenant/grunt/major
 	name = "Grunt Major (NPC)"
