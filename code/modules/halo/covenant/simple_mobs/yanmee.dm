@@ -13,4 +13,4 @@
 	speed = 5
 
 /mob/living/simple_animal/hostile/covenant/drone/ranged
-	possible_weapons = list(/obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/projectile/needler)
+	possible_weapons = list(/obj/item/weapon/gun/energy/plasmapistol/npc, /obj/item/weapon/gun/projectile/needler/npc)

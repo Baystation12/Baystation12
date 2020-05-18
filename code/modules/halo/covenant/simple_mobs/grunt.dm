@@ -8,12 +8,18 @@
 	icon_dead = "grunt_dead"
 	faction = "Covenant"
 
+/obj/item/weapon/gun/energy/plasmapistol/npc
+	burst = 2
+
+/obj/item/weapon/gun/projectile/needler/npc
+	burst = 2
+
 /mob/living/simple_animal/hostile/covenant/grunt
 	name = "Grunt (NPC)"
 	icon_state = "grunt_minor"
 	icon_living = "grunt_minor"
 	icon_dead = "grunt_minor_dead"
-	possible_weapons = list(/obj/item/weapon/gun/energy/plasmapistol, /obj/item/weapon/gun/projectile/needler)
+	possible_weapons = list(/obj/item/weapon/gun/energy/plasmapistol/npc, /obj/item/weapon/gun/projectile/needler/npc)
 	combat_tier = 1
 
 /mob/living/simple_animal/hostile/covenant/grunt/major
