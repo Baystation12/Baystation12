@@ -6,7 +6,24 @@
 	maxHealth = 100
 	icon = 'code/modules/halo/unsc/simple_mobs.dmi'
 	combat_tier = 1
-	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum)
+	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum/npc)
+	var/obj/item/device/flashlight/held_light
+
+/mob/living/simple_animal/hostile/unsc/New()
+	. = ..()
+	if(see_in_dark < 5)
+		held_light = new /obj/item/device/flashlight(src)
+		held_light.on = 1
+		held_light.update_icon()
+
+/mob/living/simple_animal/hostile/unsc/death(gibbed, deathmessage = "dies!", show_dead_message = 1)
+	. = ..()
+	if(held_light)
+		held_light.on = 0
+		held_light.update_icon()
+
+/obj/item/weapon/gun/projectile/m6d_magnum/npc
+	burst = 2
 
 /mob/living/simple_animal/hostile/unsc/marine
 	name = "UNSC Marine (NPC)"
@@ -25,6 +42,7 @@
 	resistance = 10
 	combat_tier = 3
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m7_smg, /obj/item/weapon/gun/projectile/br55, /obj/item/weapon/gun/projectile/m392_dmr)
+	see_in_dark = 7
 
 /mob/living/simple_animal/hostile/builder_mob/unsc
 	name = "UNSC Marine Combat Engineer"
@@ -42,19 +60,23 @@
 	icon_living  = "mjolnir_mk4"
 	icon_dead = "mjolnir_mk4_dead"
 	possible_weapons = list(
-		/obj/item/weapon/gun/energy/charged/spartanlaser,\
+		/obj/item/weapon/gun/energy/charged/spartanlaser/npc,\
 		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,\
 		/obj/item/weapon/gun/projectile/m739_lmg)
 	health = 150
 	maxHealth = 150
 	resistance = 15
 	combat_tier = 4
+	see_in_dark = 7
 	var/shield_left = 150
 	var/shield_max = 150
 	var/recharge_delay = 5 SECONDS
 	var/recharge_rate = 30
 	var/last_damage = 0
 	var/recharging = 0
+
+/obj/item/weapon/gun/energy/charged/spartanlaser/npc
+	fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
 
 /mob/living/simple_animal/hostile/unsc/spartan_two/adjustBruteLoss(damage)
 	last_damage = world.time
