@@ -3,6 +3,7 @@
 /obj/machinery/floodlight
 	name = "Emergency Floodlight"
 	icon = 'icons/obj/machines/floodlight.dmi'
+	desc = "Portable and bright."
 	icon_state = "flood00"
 	density = 1
 	var/on = 0
@@ -12,7 +13,8 @@
 	var/unlocked = 0
 	var/open = 0
 	var/brightness_on = 8		//can't remember what the maxed out value is
-	var/health = 100
+	var/health = 200
+	var/maxHealth = 200
 
 /obj/machinery/floodlight/New()
 	cell = new cell_type(src)
@@ -25,6 +27,15 @@
 	overlays.Cut()
 	icon_state = "flood[open ? "o" : ""][open && cell ? "b" : ""]0[on]"
 
+	if(health < maxHealth / 2)
+		overlays += "damage2"
+		desc += " It is heavily damaged, repair it with a welder."
+	else if(health < maxHealth)
+		overlays += "damage1"
+		desc += " It is lightly damaged, repair it with a welder."
+	else
+		desc = initial(desc)
+
 /obj/machinery/floodlight/process()
 	if(!on)
 		return
@@ -34,7 +45,8 @@
 		return
 
 	// If the cell is almost empty rarely "flicker" the light. Aesthetic only.
-	if((cell.percent() < 10) && prob(5))
+	// also flicker if there is damage
+	if((cell.percent() < 10 || health < maxHealth * 0.66) && prob(10))
 		set_light(brightness_on/2, brightness_on/4)
 		spawn(20)
 			if(on)
@@ -133,11 +145,29 @@
 				W.loc = src
 				cell = W
 				to_chat(user, "You insert the power cell.")
+
+	else if(istype(W, /obj/item/weapon/weldingtool))
+		if(health < maxHealth)
+			var/obj/item/weapon/weldingtool/WT = W
+			if(!WT.remove_fuel(0, user))
+				to_chat(user, "<span class='warning'>\The [src] must be on to complete this task.</span>")
+				return
+			playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+			if(!do_after(user, 20, src))
+				return
+			if(!src || !WT.isOn())
+				return
+			health = maxHealth
+			visible_message("<span class='notice'>\The [user] has repaired \the [src].</span>")
+			update_icon()
+		else
+			to_chat(user, "\icon[src] <span class='info'>\The [src] does not need repairs.</span>")
 	else
 		. = ..()
+		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+		user.do_attack_animation(src)
 		take_damage(W.force)
 
-	update_icon()
 
 /obj/machinery/floodlight/bullet_act(obj/item/projectile/Proj)
 	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
@@ -147,10 +177,10 @@
 	if(damage > 0)
 		src.visible_message("<span class='danger'>[attacker] bashes the [src]!</span>")
 		playsound(src.loc, 'sound/weapons/bite.ogg', 50, 0, 0)
-		take_damage(health/2)
+		take_damage(maxHealth / 2)
 
 /obj/machinery/floodlight/ex_act(var/severity)
-	take_damage(severity * health / 3)
+	take_damage(severity * maxHealth / 3)
 
 /obj/machinery/floodlight/proc/take_damage(var/amount)
 	health -= amount
@@ -165,12 +195,13 @@
 			/obj/item/stack/material/plastic,\
 			/obj/item/stack/material/steel)
 		var/spawn_type = pick(loot_types)
+		new spawn_type(src.loc)
 		if(prob(50))
-			new spawn_type(src.loc)
-		spawn_type = pick(loot_types)
-		if(prob(50))
+			spawn_type = pick(loot_types)
 			new spawn_type(src.loc)
 		qdel(src)
+	else
+		update_icon()
 
 /obj/machinery/floodlight/active
 	on = 1
