@@ -51,7 +51,7 @@
 
 	appearance_flags =        0
 	species_flags =           SPECIES_FLAG_NO_SCAN  | SPECIES_FLAG_NO_SLIP        | SPECIES_FLAG_NO_MINOR_CUT
-	spawn_flags =             SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+	spawn_flags =             SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 
 	heat_discomfort_strings = list(
 		"You feel brittle and overheated.",
@@ -151,6 +151,8 @@
 	push_flags =              ALLMOBS
 	swap_flags =              ALLMOBS
 
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+
 	override_limb_types = list(
 		BP_HEAD = /obj/item/organ/external/head/insectoid/mantid,
 		BP_GROIN = /obj/item/organ/external/groin/insectoid/mantid/gyne
@@ -209,7 +211,7 @@
 /datum/species/nabber/monarch
 	name = SPECIES_MONARCH_WORKER
 	name_plural = "Monarch Serpentid Workers"
-	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
 	has_organ = list(
 		BP_BRAIN =             /obj/item/organ/internal/brain/insectoid/nabber,
 		BP_EYES =              /obj/item/organ/internal/eyes/insectoid/nabber,
@@ -233,3 +235,4 @@
 /datum/species/nabber/monarch/queen
 	name = SPECIES_MONARCH_QUEEN
 	name_plural = "Monarch Serpentid Queens"
+	spawn_flags = SPECIES_IS_RESTRICTED | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
