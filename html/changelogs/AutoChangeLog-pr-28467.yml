@@ -1,0 +1,4 @@
+author: "Karlious"
+delete-after: True
+changes: 
+  - rscdel: "Removes the ability for the AI to enter maintenance drones"
