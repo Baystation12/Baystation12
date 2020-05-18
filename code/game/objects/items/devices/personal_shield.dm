@@ -7,7 +7,7 @@
 	var/obj/aura/personal_shield/device/shield
 
 /obj/item/device/personal_shield/attack_self(var/mob/living/user)
-	if(uses)
+	if(uses && !shield)
 		shield = new(user,src)
 	else
 		QDEL_NULL(shield)
@@ -27,7 +27,7 @@
 		update_icon()
 		return
 
-/obj/item/device/personal_shield/update_icon()
+/obj/item/device/personal_shield/on_update_icon()
 	if(uses)
 		icon_state = "batterer"
 	else

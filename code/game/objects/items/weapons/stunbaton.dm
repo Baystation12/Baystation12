@@ -12,6 +12,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 2)
 	attack_verb = list("beaten")
+	base_parry_chance = 30
 	var/stunforce = 0
 	var/agonyforce = 30
 	var/status = 0		//whether the thing is on or not
@@ -33,9 +34,18 @@
 		bcell = null
 	return ..()
 
+/obj/item/weapon/melee/baton/get_cell()
+	return bcell
+
+/obj/item/weapon/melee/baton/proc/update_status()
+	if(bcell.charge < hitcost)
+		status = 0
+		update_icon()
+
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
 	if(bcell)
 		if(bcell.checked_use(chrgdeductamt))
+			update_status()
 			return 1
 		else
 			status = 0
@@ -43,7 +53,7 @@
 			return 0
 	return null
 
-/obj/item/weapon/melee/baton/update_icon()
+/obj/item/weapon/melee/baton/on_update_icon()
 	if(status)
 		icon_state = "[initial(name)]_active"
 	else if(!bcell)
@@ -56,11 +66,10 @@
 	else
 		set_light(0)
 
-/obj/item/weapon/melee/baton/examine(mob/user)
-	if(!..(user, 1))
-		return 0
-	examine_cell(user)
-	return 1
+/obj/item/weapon/melee/baton/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
+		examine_cell(user)
 
 // Addition made by Techhead0, thanks for fullfilling the todo!
 /obj/item/weapon/melee/baton/proc/examine_cell(mob/user)
@@ -93,14 +102,14 @@
 	set_status(!status, user)
 	add_fingerprint(user)
 
-/obj/item/weapon/melee/baton/throw_impact(atom/hit_atom, var/speed)
+/obj/item/weapon/melee/baton/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	if(istype(hit_atom,/mob/living))
-		apply_hit_effect(hit_atom, hit_zone = pick(BP_HEAD, BP_CHEST, BP_CHEST, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM))
+		apply_hit_effect(hit_atom, hit_zone = ran_zone(TT.target_zone, 30))//more likely to hit the zone you target!
 	else
 		..()
 
 /obj/item/weapon/melee/baton/proc/set_status(var/newstatus, mob/user)
-	if(bcell && bcell.charge > hitcost)
+	if(bcell && bcell.charge >= hitcost)
 		if(status != newstatus)
 			change_status(newstatus)
 			to_chat(user, "<span class='notice'>[src] is now [status ? "on" : "off"].</span>")
@@ -121,7 +130,7 @@
 		update_icon()
 
 /obj/item/weapon/melee/baton/attack(mob/M, mob/user)
-	if(status && (CLUMSY in user.mutations) && prob(50))
+	if(status && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='danger'>You accidentally hit yourself with the [src]!</span>")
 		user.Weaken(30)
 		deductcharge(hitcost)
@@ -141,8 +150,8 @@
 	var/abuser =  user ? "" : "by [user]"
 	if(user && user.a_intent == I_HURT)
 		. = ..()
-		if (!.)	//item/attack() does it's own messaging and logs
-			return 0	// item/attack() will return 1 if they hit, 0 if they missed.
+		if(.)
+			return
 
 		//whacking someone causes a much poorer electrical contact than deliberately prodding them.
 		stun *= 0.5
@@ -167,14 +176,13 @@
 	if(status)
 		target.stun_effect_act(stun, agony, hit_zone, src)
 		msg_admin_attack("[key_name(user)] stunned [key_name(target)] with the [src].")
-
 		deductcharge(hitcost)
 
 		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			H.forcesay(GLOB.hit_appends)
 
-	return 0
+	return 1
 
 /obj/item/weapon/melee/baton/emp_act(severity)
 	if(bcell)
@@ -226,7 +234,7 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "electrified_arm"
 
-/obj/item/weapon/melee/baton/robot/electrified_arm/update_icon()
+/obj/item/weapon/melee/baton/robot/electrified_arm/on_update_icon()
 	if(status)
 		icon_state = "electrified_arm_active"
 		set_light(0.4, 0.1, 1, 2, "#006aff")

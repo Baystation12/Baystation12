@@ -48,7 +48,7 @@
 		{{if value.used}}
 			<td>{{:helper.displayBar(value.percentage, 0, 100, 'good')}}
 			<td>{{:value.percentage}} %
-			<td>{{:helper.link('E', null, { "ejectcell" : value.id })}}
+			<td>{{:helper.link('E', null, { "ejectcell" : value.slot })}}
 		{{else}}
 			<td>{{:helper.displayBar(100, 0, 100, 'bad')}}
 			<td>N/C

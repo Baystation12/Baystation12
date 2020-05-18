@@ -7,12 +7,11 @@ LINEN BINS
 /obj/item/weapon/bedsheet
 	name = "bedsheet"
 	desc = "A surprisingly soft linen bedsheet."
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/bedsheet.dmi'
 	icon_state = "sheet"
 	item_state = "bedsheet"
 	randpixel = 0
 	slot_flags = SLOT_BACK
-	plane = ABOVE_OBJ_PLANE
 	layer = BASE_ABOVE_OBJ_LAYER
 	throwforce = 1
 	throw_speed = 1
@@ -107,7 +106,7 @@ LINEN BINS
 
 
 /obj/structure/bedsheetbin/examine(mob/user)
-	. = ..(user)
+	. = ..()
 
 	if(amount < 1)
 		to_chat(user, "There are no bed sheets in the bin.")
@@ -118,7 +117,7 @@ LINEN BINS
 	to_chat(user, "There are [amount] bed sheets in the bin.")
 
 
-/obj/structure/bedsheetbin/update_icon()
+/obj/structure/bedsheetbin/on_update_icon()
 	switch(amount)
 		if(0)				icon_state = "linenbin-empty"
 		if(1 to amount / 2)	icon_state = "linenbin-half"
@@ -127,60 +126,44 @@ LINEN BINS
 
 /obj/structure/bedsheetbin/attackby(obj/item/I as obj, mob/user as mob)
 	if(istype(I, /obj/item/weapon/bedsheet))
-		user.drop_item()
-		I.loc = src
+		if(!user.unEquip(I, src))
+			return
 		sheets.Add(I)
 		amount++
 		to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
 	else if(amount && !hidden && I.w_class < ITEM_SIZE_HUGE)	//make sure there's sheets to hide it among, make sure nothing else is hidden in there.
-		user.drop_item()
-		I.loc = src
+		if(!user.unEquip(I, src))
+			return
 		hidden = I
 		to_chat(user, "<span class='notice'>You hide [I] among the sheets.</span>")
 
-/obj/structure/bedsheetbin/attack_hand(mob/user as mob)
-	if(amount >= 1)
-		amount--
-
-		var/obj/item/weapon/bedsheet/B
-		if(sheets.len > 0)
-			B = sheets[sheets.len]
-			sheets.Remove(B)
-
-		else
-			B = new /obj/item/weapon/bedsheet(loc)
-
-		B.loc = user.loc
+/obj/structure/bedsheetbin/attack_hand(var/mob/user)
+	var/obj/item/weapon/bedsheet/B = remove_sheet()
+	if(B)
 		user.put_in_hands(B)
-		to_chat(user, "<span class='notice'>You take [B] out of [src].</span>")
+		to_chat(user, SPAN_NOTICE("You take \a [B] out of \the [src]."))
+		add_fingerprint(user)
 
-		if(hidden)
-			hidden.loc = user.loc
-			to_chat(user, "<span class='notice'>[hidden] falls out of [B]!</span>")
-			hidden = null
+/obj/structure/bedsheetbin/do_simple_ranged_interaction(var/mob/user)
+	remove_sheet()
+	return TRUE
 
-
-	add_fingerprint(user)
-
-/obj/structure/bedsheetbin/attack_tk(mob/user as mob)
-	if(amount >= 1)
-		amount--
-
-		var/obj/item/weapon/bedsheet/B
-		if(sheets.len > 0)
-			B = sheets[sheets.len]
-			sheets.Remove(B)
-
-		else
-			B = new /obj/item/weapon/bedsheet(loc)
-
-		B.loc = loc
-		to_chat(user, "<span class='notice'>You telekinetically remove [B] from [src].</span>")
-		update_icon()
-
-		if(hidden)
-			hidden.loc = loc
-			hidden = null
-
-
-	add_fingerprint(user)
+/obj/structure/bedsheetbin/proc/remove_sheet()
+	set waitfor = 0
+	if(amount <= 0)
+		return
+	amount--
+	var/obj/item/weapon/bedsheet/B
+	if(sheets.len > 0)
+		B = sheets[sheets.len]
+		sheets.Remove(B)
+	else
+		B = new /obj/item/weapon/bedsheet(loc)
+	B.dropInto(loc)
+	update_icon()
+	. = B
+	sleep(-1)
+	if(hidden)
+		hidden.dropInto(loc)
+		visible_message(SPAN_NOTICE("\The [hidden] falls out!"))
+		hidden = null

@@ -57,6 +57,8 @@
 	if(parameters["left"])
 		var/datum/build_mode/build_mode = input("Select build mode", "Select build mode", host.current_build_mode) as null|anything in host.build_modes
 		if(build_mode && host && (build_mode in host.build_modes))
+			host.current_build_mode.Unselected()
+			build_mode.Selected()
 			host.current_build_mode = build_mode
 			icon_state = build_mode.icon_state
 			to_chat(usr, "<span class='notice'>Build mode '[host.current_build_mode]' selected.</span>")
@@ -68,6 +70,4 @@
 	screen_loc = "NORTH,WEST+3"
 
 /obj/effect/bmode/quit/OnClick()
-	var/datum/click_handler/handler = usr.GetClickHandler()
-	if(handler.type == /datum/click_handler/build_mode)
-		usr.PopClickHandler()
+	usr.RemoveClickHandler(/datum/click_handler/build_mode)

@@ -9,7 +9,7 @@
 	w_class = ITEM_SIZE_SMALL
 	var/obj/item/weapon/implant/imp
 
-/obj/item/weapon/implantpad/update_icon()
+/obj/item/weapon/implantpad/on_update_icon()
 	if (imp)
 		icon_state = "implantpad-1"
 	else
@@ -50,9 +50,8 @@
 			C.imp = imp
 			imp = null
 		C.update_icon()
-	else if(istype(I, /obj/item/weapon/implant))
+	else if(istype(I, /obj/item/weapon/implant) && user.unEquip(I, src))
 		imp = I
-		user.drop_from_inventory(I,src)
 	update_icon()
 
 /obj/item/weapon/implantpad/attack_self(mob/user)

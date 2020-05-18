@@ -24,9 +24,10 @@ var/datum/mil_branches/mil_branches = new()
  *  Retrieve branch object by branch name
  */
 /datum/mil_branches/proc/get_branch(var/branch_name)
-	if(branch_name == "None" || !(branch_name in branches))
-		return null
-	else
+	if(ispath(branch_name))
+		var/datum/mil_branch/branch = branch_name
+		branch_name = initial(branch.name)
+	if(branch_name && branch_name != "None")
 		return branches[branch_name]
 
 /**
@@ -41,16 +42,13 @@ var/datum/mil_branches/mil_branches = new()
  *  Retrieve a rank object from given branch by name
  */
 /datum/mil_branches/proc/get_rank(var/branch_name, var/rank_name)
-	if(rank_name == "None")
-		return null
-
-	var/datum/mil_branch/branch = get_branch(branch_name)
-
-	if(!branch || !(rank_name in branch.ranks))
-		return null
-
-	var/datum/mil_rank/rank = branch.ranks[rank_name]
-	return rank
+	if(ispath(rank_name))
+		var/datum/mil_rank/rank = rank_name
+		rank_name = initial(rank.name)
+	if(rank_name && rank_name != "None")
+		var/datum/mil_branch/branch = get_branch(branch_name)
+		if(branch)
+			return branch.ranks[rank_name]
 
 /**
  *  Return all spawn branches for the given input
@@ -58,10 +56,10 @@ var/datum/mil_branches/mil_branches = new()
 /datum/mil_branches/proc/spawn_branches(var/datum/species/S)
 	if(!S)
 		return spawn_branches_.Copy()
-	. = spawn_branches_by_species_[S]
+	. = LAZYACCESS(spawn_branches_by_species_, S)
 	if(!.)
 		. = list()
-		spawn_branches_by_species_[S] = .
+		LAZYSET(spawn_branches_by_species_, S, .)
 		for(var/spawn_branch in spawn_branches_)
 			if(!GLOB.using_map.is_species_branch_restricted(S, spawn_branches_[spawn_branch]))
 				. += spawn_branch
@@ -85,7 +83,6 @@ var/datum/mil_branches/mil_branches = new()
  */
 /datum/mil_branches/proc/is_spawn_rank(var/branch_name, var/rank_name, var/datum/species/S)
 	var/datum/mil_branch/branch = get_branch(branch_name)
-
 	if(branch && (rank_name in branch.spawn_ranks(S)))
 		return TRUE
 	else
@@ -109,10 +106,10 @@ var/datum/mil_branches/mil_branches = new()
 	var/list/rank_types       // list of paths used to init the ranks list
 	var/list/spawn_rank_types // list of paths used to init the spawn_ranks list. Subset of rank_types
 
-	var/assistant_job //what people who have the BE_ASSISTANT pref set will attempt to join as
+	var/assistant_job = DEFAULT_JOB_TYPE
 
 	// Email addresses will be created under this domain name. Mostly for the looks.
-	var/email_domain = "freemail.nt"
+	var/email_domain = "freemail.net"
 
 	var/list/min_skill
 

@@ -154,13 +154,21 @@
 	name = "heavy asset protection beret"
 	desc = "An armored red beret adorned with the crest of corporate asset protection. Doesn't sacrifice style or safety."
 	icon_state = "beret_red"
-	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
+	armor = list(
+		melee = ARMOR_MELEE_VERY_HIGH, 
+		bullet = ARMOR_BALLISTIC_RIFLE, 
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_SMALL, 
+		bomb = ARMOR_BOMB_PADDED, 
+		bio = ARMOR_BIO_RESISTANT, 
+		rad = ARMOR_RAD_MINOR
+	)
 	siemens_coefficient = 0.9
 
 /obj/item/clothing/head/beret/guard
 	name = "corporate security beret"
-	desc = "A white beret adorned with the crest of NanoTrasen. For security guards that are more inclined towards style than safety."
-	icon_state = "beret_corporate_whitered"
+	desc = "A white beret adorned with a corporate logo. For security guards that are more inclined towards style than safety."
+	icon_state = "corpsec_beret"
 
 /obj/item/clothing/head/beret/plaincolor
 	name = "beret"

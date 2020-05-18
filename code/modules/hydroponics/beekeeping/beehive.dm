@@ -1,9 +1,11 @@
 /obj/machinery/beehive
-	name = "beehive"
+	name = "apiary"
 	icon = 'icons/obj/beekeeping.dmi'
-	icon_state = "beehive"
+	icon_state = "beehive-0"
+	desc = "A wooden box designed specifically to house our buzzling buddies. Far more efficient than traditional hives. Just insert a frame and a queen, close it up, and you're good to go!"
 	density = 1
 	anchored = 1
+	layer = BELOW_OBJ_LAYER
 
 	var/closed = 0
 	var/bee_count = 0 // Percent
@@ -12,9 +14,13 @@
 	var/frames = 0
 	var/maxFrames = 5
 
-/obj/machinery/beehive/update_icon()
+/obj/machinery/beehive/Initialize()
+	. = ..()
+	update_icon()
+
+/obj/machinery/beehive/on_update_icon()
 	overlays.Cut()
-	icon_state = "beehive"
+	icon_state = "beehive-[closed]"
 	if(closed)
 		overlays += "lid"
 	if(frames)
@@ -23,14 +29,18 @@
 		overlays += "full[round(honeycombs / 100)]"
 	if(!smoked)
 		switch(bee_count)
-			if(1 to 40)
+			if(1 to 20)
 				overlays += "bees1"
-			if(41 to 80)
+			if(21 to 40)
 				overlays += "bees2"
-			if(81 to 100)
+			if(41 to 60)
 				overlays += "bees3"
+			if(61 to 80)
+				overlays += "bees4"
+			if(81 to 100)
+				overlays += "bees5"
 
-/obj/machinery/beehive/examine(var/mob/user)
+/obj/machinery/beehive/examine(mob/user)
 	. = ..()
 	if(!closed)
 		to_chat(user, "The lid is open.")
@@ -67,7 +77,6 @@
 		++frames
 		user.visible_message("<span class='notice'>\The [user] loads \the [I] into \the [src].</span>", "<span class='notice'>You load \the [I] into \the [src].</span>")
 		update_icon()
-		user.drop_from_inventory(I)
 		qdel(I)
 		return
 	else if(istype(I, /obj/item/bee_pack))
@@ -94,7 +103,7 @@
 			B.fill()
 		update_icon()
 		return
-	else if(istype(I, /obj/item/device/analyzer/plant_analyzer))
+	else if(istype(I, /obj/item/device/scanner/plant))
 		to_chat(user, "<span class='notice'>Scan result of \the [src]...</span>")
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
 		if(frames)
@@ -118,8 +127,9 @@
 			qdel(src)
 		return
 
-/obj/machinery/beehive/attack_hand(var/mob/user)
+/obj/machinery/beehive/physical_attack_hand(var/mob/user)
 	if(!closed)
+		. = TRUE
 		if(honeycombs < 100)
 			to_chat(user, "<span class='notice'>There are no filled honeycombs.</span>")
 			return
@@ -131,10 +141,9 @@
 			new /obj/item/honey_frame/filled(loc)
 			honeycombs -= 100
 			--frames
-			update_icon()
+		update_icon()
 		if(honeycombs < 100)
 			to_chat(user, "<span class='notice'>You take all filled honeycombs out.</span>")
-		return
 
 /obj/machinery/beehive/Process()
 	if(closed && !smoked && bee_count)
@@ -161,15 +170,28 @@
 	icon_state = "centrifuge"
 	anchored = 1
 	density = 1
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/processing = 0
 	var/honey = 0
+
+/obj/machinery/honey_extractor/components_are_accessible(path)
+	return !processing && ..()
+
+/obj/machinery/honey_extractor/cannot_transition_to(state_path, mob/user)
+	if(processing)
+		return SPAN_NOTICE("You must wait for \the [src] to finish first!")
+	return ..()	
 
 /obj/machinery/honey_extractor/attackby(var/obj/item/I, var/mob/user)
 	if(processing)
 		to_chat(user, "<span class='notice'>\The [src] is currently spinning, wait until it's finished.</span>")
 		return
-	else if(istype(I, /obj/item/honey_frame))
+	if((. = component_attackby(I, user)))
+		return
+	if(istype(I, /obj/item/honey_frame))
 		var/obj/item/honey_frame/H = I
 		if(!H.honey)
 			to_chat(user, "<span class='notice'>\The [H] is empty, put it into a beehive.</span>")
@@ -231,9 +253,7 @@
 	if(do_after(user, 30, src))
 		user.visible_message("<span class='notice'>\The [user] constructs a beehive.</span>", "<span class='notice'>You construct a beehive.</span>")
 		new /obj/machinery/beehive(get_turf(user))
-		user.drop_from_inventory(src)
 		qdel(src)
-	return
 
 /obj/item/stack/wax
 	name = "wax"
@@ -246,8 +266,8 @@
 	..()
 	recipes = wax_recipes
 
-var/global/list/datum/stack_recipe/wax_recipes = list( \
-	new/datum/stack_recipe("candle", /obj/item/weapon/flame/candle) \
+var/global/list/datum/stack_recipe/wax_recipes = list(
+	new/datum/stack_recipe/candle
 )
 
 /obj/item/bee_pack

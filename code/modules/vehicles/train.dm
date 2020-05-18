@@ -53,7 +53,7 @@
 			visible_message("<span class='warning'>[src] knocks over [M]!</span>")
 			var/def_zone = ran_zone()
 			M.apply_effects(5, 5)				//knock people down if you hit them
-			M.apply_damage(22 / move_delay, BRUTE, def_zone, M.run_armor_check(def_zone, "melee"))	// and do damage according to how fast the train is going
+			M.apply_damage(22 / move_delay, BRUTE, def_zone)	// and do damage according to how fast the train is going
 			if(istype(load, /mob/living/carbon/human))
 				var/mob/living/D = load
 				to_chat(D, "<span class='warning'>You hit [M]!</span>")
@@ -95,7 +95,7 @@
 	return 1
 
 /obj/vehicle/train/MouseDrop_T(var/atom/movable/C, mob/user as mob)
-	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))
+	if(!CanPhysicallyInteract(user) || !user.Adjacent(C) || !istype(C) || (user == C))
 		return
 	if(istype(C,/obj/vehicle/train))
 		latch(C, user)
@@ -125,7 +125,7 @@
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
-	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr))
+	if(!CanPhysicallyInteract(usr))
 		return
 
 	unattach(usr)

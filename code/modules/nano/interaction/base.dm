@@ -8,6 +8,12 @@
 	var/datum/src_object = nano_host()
 	return state.can_use_topic(src_object, user)
 
+/datum/proc/CanUseTopicPhysical(mob/user)
+	return CanUseTopic(user, GLOB.physical_state)
+
+/datum/topic_state
+	var/check_access = TRUE // Whether this topic state should bypass access checks or not.
+
 /datum/topic_state/proc/href_list(var/mob/user)
 	return list()
 

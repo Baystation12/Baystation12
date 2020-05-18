@@ -5,7 +5,7 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	role_text = "Head Loyalist"
 	role_text_plural = "Loyalists"
 	feedback_tag = "loyalist_objective"
-	antag_indicator = "hudheadloyalist"
+	antag_indicator = "hud_loyal_head"
 	victory_text = "The heads of staff remained at their posts! The loyalists win!"
 	loss_text = "The heads of staff did not stop the revolution!"
 	victory_feedback_tag = "win - rev heads killed"
@@ -22,9 +22,10 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 	faction_role_text = "Loyalist"
 	faction_descriptor = "COMPANY"
 	faction_verb = /mob/living/proc/convert_to_loyalist
-	faction_indicator = "hudloyalist"
+	faction_indicator = "hud_loyal"
 	faction_invisible = 1
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/submap)
+	skill_setter = /datum/antag_skill_setter/station
 
 	faction = "loyalist"
 
@@ -39,7 +40,7 @@ GLOBAL_DATUM_INIT(loyalists, /datum/antagonist/loyalists, new)
 		return
 	global_objectives = list()
 	for(var/mob/living/carbon/human/player in SSmobs.mob_list)
-		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in GLOB.command_positions))
+		if(!player.mind || player.stat==2 || !(player.mind.assigned_role in SSjobs.titles_by_department(COM)))
 			continue
 		var/datum/objective/protect/loyal_obj = new
 		loyal_obj.target = player.mind

@@ -12,11 +12,9 @@
 
 	if (!( istext(HTMLstring) ))
 		CRASH("Given non-text argument!")
-		return
 	else
 		if (length(HTMLstring) != 7)
 			CRASH("Given non-HTML argument!")
-			return
 	var/textr = copytext(HTMLstring, 2, 4)
 	var/textg = copytext(HTMLstring, 4, 6)
 	var/textb = copytext(HTMLstring, 6, 8)
@@ -33,7 +31,6 @@
 	if (length(textb) < 2)
 		textr = text("0[]", textb)
 	return text("#[][][]", textr, textg, textb)
-	return
 
 //Returns the middle-most value
 /proc/dd_range(var/low, var/high, var/num)
@@ -317,11 +314,13 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return "[pick("1","2","3","4","5","6","7","8","9","0")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")][pick("!","@","#","$","%","^","&","*")]"
 
 //When an AI is activated, it can choose from a list of non-slaved borgs to have as a slave.
-/proc/freeborg()
+/proc/freeborg(z)
+	var/list/zs = get_valid_silicon_zs(z)
+
 	var/select = null
 	var/list/borgs = list()
 	for (var/mob/living/silicon/robot/A in GLOB.player_list)
-		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone))
+		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone) || !(get_z(A) in zs))
 			continue
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
 		borgs[name] = A
@@ -331,32 +330,38 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		return borgs[select]
 
 //When a borg is activated, it can choose which AI it wants to be slaved to
-/proc/active_ais()
+/proc/active_ais(z)
+	var/list/zs = get_valid_silicon_zs(z)
+
 	. = list()
 	for(var/mob/living/silicon/ai/A in GLOB.living_mob_list_)
-		if(A.stat == DEAD)
-			continue
-		if(A.control_disabled == 1)
+		if(A.stat == DEAD || A.control_disabled || !(get_z(A) in zs))
 			continue
 		. += A
 	return .
 
 //Find an active ai with the least borgs. VERBOSE PROCNAME HUH!
-/proc/select_active_ai_with_fewest_borgs()
+/proc/select_active_ai_with_fewest_borgs(z)
 	var/mob/living/silicon/ai/selected
-	var/list/active = active_ais()
+	var/list/active = active_ais(z)
 	for(var/mob/living/silicon/ai/A in active)
 		if(!selected || (selected.connected_robots.len > A.connected_robots.len))
 			selected = A
 
 	return selected
 
-/proc/select_active_ai(var/mob/user)
-	var/list/ais = active_ais()
+/proc/select_active_ai(mob/user, z)
+	var/list/ais = active_ais(z)
 	if(ais.len)
-		if(user)	. = input(usr,"AI signals detected:", "AI selection") in ais
-		else		. = pick(ais)
-	return .
+		if(user)
+			. = input(user,"AI signals detected:", "AI selection") in ais
+		else
+			. = pick(ais)
+
+/proc/get_valid_silicon_zs(z)
+	if(z)
+		return GetConnectedZlevels(z)
+	return list() //We return an empty list, because we are apparently in nullspace
 
 /proc/get_sorted_mobs()
 	var/list/old_list = getmobs()
@@ -509,9 +514,11 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/between(var/low, var/middle, var/high)
 	return max(min(middle, high), low)
 
-proc/arctan(x)
+#if DM_VERSION < 513
+/proc/arctan(x)
 	var/y=arcsin(x/sqrt(1+x*x))
 	return y
+#endif
 
 //returns random gauss number
 proc/GaussRand(var/sigma)
@@ -907,10 +914,13 @@ var/global/list/common_tools = list(
 			return 3800
 		if(/obj/item/weapon/melee/energy)
 			return 3500
+		if(/obj/item/weapon/blob_tendril)
+			if(W.damtype == BURN)
+				return 1000
+			else
+				return 0
 		else
 			return 0
-
-	return 0
 
 //Whether or not the given item counts as sharp in terms of dealing damage
 /proc/is_sharp(obj/O as obj)
@@ -1096,8 +1106,20 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	STOP_PROCESSING(SSmobs, src)
 
 // call to generate a stack trace and print to runtime logs
-/proc/crash_with(msg)
-	CRASH(msg)
+/proc/crash_at(msg, file, line)
+	CRASH("%% [file],[line] %% [msg]")
 
 /proc/pass()
 	return
+
+//clicking to move pulled objects onto assignee's turf/loc
+/proc/do_pull_click(mob/user, atom/A)
+	if(ismob(user.pulling))
+		var/mob/M = user.pulling
+		var/atom/movable/t = M.pulling
+		M.stop_pulling()
+		step(user.pulling, get_dir(user.pulling.loc, A))
+		M.start_pulling(t)
+	else
+		step(user.pulling, get_dir(user.pulling.loc, A))
+

@@ -11,21 +11,15 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEM_SIZE_NORMAL
-	var/c_uid
 	var/charge			                // Current charge
 	var/maxcharge = 1000 // Capacity in Wh
 	var/overlay_state
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
-
-
-/obj/item/weapon/cell/New()
-	if(isnull(charge))
-		charge = maxcharge
-	c_uid = sequential_id(/obj/item/weapon/cell)
-	..()
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50, MATERIAL_PLASTIC = 20)
 
 /obj/item/weapon/cell/Initialize()
 	. = ..()
+	if(isnull(charge))
+		charge = maxcharge
 	update_icon()
 
 /obj/item/weapon/cell/drain_power(var/drain_check, var/surge, var/power = 0)
@@ -40,13 +34,16 @@
 
 	return use(cell_amt) / CELLRATE
 
-/obj/item/weapon/cell/update_icon()
+/obj/item/weapon/cell/on_update_icon()
 
 	var/new_overlay_state = null
-	if(percent() >= 95)
-		new_overlay_state = "cell-o2"
-	else if(charge >= 0.05)
-		new_overlay_state = "cell-o1"
+	switch(percent())
+		if(95 to 100)
+			new_overlay_state = "cell-o2"
+		if(25 to 95)
+			new_overlay_state = "cell-o1"
+		if(0.05 to 25)
+			new_overlay_state = "cell-o0"
 
 	if(new_overlay_state != overlay_state)
 		overlay_state = new_overlay_state
@@ -80,7 +77,6 @@
 	return 1
 
 /obj/item/weapon/cell/proc/give(var/amount)
-	if(maxcharge < amount)	return 0
 	var/amount_used = min(maxcharge-charge,amount)
 	charge += amount_used
 	update_icon()
@@ -119,6 +115,8 @@
 		else
 			return 0
 
+/obj/item/weapon/cell/get_cell()
+	return src //no shit Sherlock
 
 // SUBTYPES BELOW
 
@@ -132,11 +130,11 @@
 	throw_speed = 5
 	throw_range = 7
 	maxcharge = 100
-	matter = list("metal" = 70, "glass" = 5)
+	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 5)
 
-/obj/item/weapon/cell/device/variable/New(newloc, charge_amount)
+/obj/item/weapon/cell/device/variable/Initialize(mapload, charge_amount)
 	maxcharge = charge_amount
-	..(newloc)
+	return ..(mapload)
 
 /obj/item/weapon/cell/device/standard
 	name = "standard device power cell"
@@ -147,14 +145,14 @@
 	desc = "A small power cell designed to power more energy-demanding devices."
 	icon_state = "hdevice"
 	maxcharge = 100
-	matter = list("metal" = 70, "glass" = 6)
+	matter = list(MATERIAL_STEEL = 70, MATERIAL_GLASS = 6)
 
 /obj/item/weapon/cell/crap
 	name = "old power cell"
 	desc = "A cheap old power cell. It's probably been in use for quite some time now."
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 100
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 40, MATERIAL_PLASTIC = 20)
 
 /obj/item/weapon/cell/crap/empty
 	charge = 0
@@ -164,19 +162,14 @@
 	desc = "A standard and relatively cheap power cell, commonly used."
 	origin_tech = list(TECH_POWER = 0)
 	maxcharge = 250
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 40)
-
-/obj/item/weapon/cell/crap/empty/New()
-	..()
-	charge = 0
-
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 40, MATERIAL_PLASTIC = 20)
 
 /obj/item/weapon/cell/apc
 	name = "APC power cell"
 	desc = "A special power cell designed for heavy-duty use in area power controllers."
 	origin_tech = list(TECH_POWER = 1)
 	maxcharge = 500
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 50)
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 50, MATERIAL_PLASTIC = 20)
 
 
 /obj/item/weapon/cell/high
@@ -185,20 +178,18 @@
 	origin_tech = list(TECH_POWER = 2)
 	icon_state = "hcell"
 	maxcharge = 1000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 60)
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 60, MATERIAL_PLASTIC = 20)
 
-/obj/item/weapon/cell/high/empty/New()
-	..()
+/obj/item/weapon/cell/high/empty
 	charge = 0
 
-
-/obj/item/weapon/cell/mecha
+/obj/item/weapon/cell/exosuit
 	name = "exosuit power cell"
 	desc = "A special power cell designed for heavy-duty use in industrial exosuits."
 	origin_tech = list(TECH_POWER = 3)
 	icon_state = "hcell"
 	maxcharge = 1500
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 70, MATERIAL_ALUMINIUM = 20)
 
 
 /obj/item/weapon/cell/super
@@ -207,12 +198,10 @@
 	origin_tech = list(TECH_POWER = 5)
 	icon_state = "scell"
 	maxcharge = 2000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 70)
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 70, MATERIAL_ALUMINIUM = 20)
 
-/obj/item/weapon/cell/super/empty/New()
-	..()
+/obj/item/weapon/cell/super/empty
 	charge = 0
-
 
 /obj/item/weapon/cell/hyper
 	name = "superior power cell"
@@ -220,12 +209,10 @@
 	origin_tech = list(TECH_POWER = 6)
 	icon_state = "hpcell"
 	maxcharge = 3000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 80, MATERIAL_ALUMINIUM = 20)
 
-/obj/item/weapon/cell/hyper/empty/New()
-	..()
+/obj/item/weapon/cell/hyper/empty
 	charge = 0
-
 
 /obj/item/weapon/cell/infinite
 	name = "experimental power cell"
@@ -233,7 +220,7 @@
 	icon_state = "icell"
 	origin_tech =  null
 	maxcharge = 3000
-	matter = list(DEFAULT_WALL_MATERIAL = 700, "glass" = 80)
+	matter = list(MATERIAL_STEEL = 700, MATERIAL_GLASS = 80, MATERIAL_ALUMINIUM = 20)
 
 /obj/item/weapon/cell/infinite/check_charge()
 	return 1
@@ -255,7 +242,29 @@
 	name = "charged slime core"
 	desc = "A yellow slime core infused with phoron, it crackles with power."
 	origin_tech = list(TECH_POWER = 2, TECH_BIO = 4)
-	icon = 'icons/mob/slimes.dmi' //'icons/obj/harvest.dmi'
+	icon = 'icons/mob/simple_animal/slimes.dmi' //'icons/obj/harvest.dmi'
 	icon_state = "yellow slime extract" //"potato_battery"
 	maxcharge = 200
 	matter = null
+
+// Self-charging power cell.
+/obj/item/weapon/cell/mantid
+	name = "mantid microfusion plant"
+	desc = "An impossibly tiny fusion reactor of mantid design."
+	icon = 'icons/obj/ascent.dmi'
+	icon_state = "plant"
+	maxcharge = 1500
+	w_class = ITEM_SIZE_NORMAL
+	var/recharge_amount = 12
+
+/obj/item/weapon/cell/mantid/Initialize()
+	START_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/weapon/cell/mantid/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/weapon/cell/mantid/Process()
+	if(charge < maxcharge)
+		give(recharge_amount)

@@ -10,8 +10,10 @@
 	icon = 'icons/obj/cooking_machines.dmi'
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 5
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/on_icon						// Icon state used when cooking.
 	var/off_icon					// Icon state used when not cooking.
@@ -35,20 +37,33 @@
 		cooking_obj = null
 	return ..()
 
-/obj/machinery/cooker/examine()
+/obj/machinery/cooker/examine(mob/user)
 	. = ..()
-	if(cooking_obj && Adjacent(usr))
-		to_chat(usr, "You can see \a [cooking_obj] inside.")
+	if(cooking_obj)
+		to_chat(user, "You can see \a [cooking_obj] inside.")
+	if(panel_open)
+		to_chat(user, "The panel is open")
+
+/obj/machinery/cooker/components_are_accessible(path)
+	return !cooking && ..()
+
+/obj/machinery/cooker/cannot_transition_to(state_path, mob/user)
+	if(cooking)
+		return SPAN_NOTICE("Wait for \the [src] to finish first!")
+	return ..()
 
 /obj/machinery/cooker/attackby(var/obj/item/I, var/mob/user)
 	set waitfor = 0  //So that any remaining parts of calling proc don't have to wait for the long cooking time ahead.
 
-	if(!cook_type || (stat & (NOPOWER|BROKEN)))
-		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
-		return
-
 	if(cooking)
 		to_chat(user, "<span class='warning'>\The [src] is running!</span>")
+		return
+
+	if((. = component_attackby(I, user)))
+		return
+
+	if(!cook_type || (stat & (NOPOWER|BROKEN)))
+		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
 		return
 
 	// We are trying to cook a grabbed mob.
@@ -101,12 +116,14 @@
 	sleep(cook_time)
 
 	// Sanity checks.
-	check_cooking_obj()
+	if(check_cooking_obj())
+		return // Cooking failed/was terminated.
 
 	// RIP slow-moving held mobs.
 	if(istype(cooking_obj, /obj/item/weapon/holder))
 		for(var/mob/living/M in cooking_obj.contents)
 			M.death()
+			qdel(M)
 
 	// Cook the food.
 	var/cook_path
@@ -142,7 +159,7 @@
 	if(!can_burn_food)
 		icon_state = off_icon
 		cooking = 0
-		result.forceMove(get_turf(src))
+		result.dropInto(loc)
 		cooking_obj = null
 	else
 		var/failed
@@ -174,35 +191,32 @@
 		cooking_obj = null
 		icon_state = off_icon
 		cooking = 0
-		return
+		return TRUE
 
-/obj/machinery/cooker/attack_hand(var/mob/user)
-
+/obj/machinery/cooker/physical_attack_hand(var/mob/user)
 	if(cooking_obj)
 		to_chat(user, "<span class='notice'>You grab \the [cooking_obj] from \the [src].</span>")
 		user.put_in_hands(cooking_obj)
 		cooking = 0
 		cooking_obj = null
 		icon_state = off_icon
-		return
+		return TRUE
 
 	if(output_options.len)
-
 		if(cooking)
 			to_chat(user, "<span class='warning'>\The [src] is in use!</span>")
-			return
+			return TRUE
 
 		var/choice = input("What specific food do you wish to make with \the [src]?") as null|anything in output_options+"Default"
 		if(!choice)
-			return
+			return TRUE
 		if(choice == "Default")
 			selected_option = null
 			to_chat(user, "<span class='notice'>You decide not to make anything specific with \the [src].</span>")
 		else
 			selected_option = choice
 			to_chat(user, "<span class='notice'>You prepare \the [src] to make \a [selected_option].</span>")
-
-	..()
+	return TRUE
 
 /obj/machinery/cooker/proc/cook_mob(var/mob/living/victim, var/mob/user)
 	return

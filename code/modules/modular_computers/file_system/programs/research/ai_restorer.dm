@@ -7,20 +7,25 @@
 	extended_desc = "This program is capable of reconstructing damaged AI systems. It can also be used to upload basic laws to the AI. Requires direct AI connection via inteliCard slot."
 	size = 12
 	requires_ntnet = 0
-	required_access = access_heads
+	required_access = access_bridge
 	requires_access_to_run = 0
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/computer_aidiag/
 	var/restoring = 0
 
 /datum/computer_file/program/aidiag/proc/get_ai()
-	if(computer && computer.ai_slot && computer.ai_slot.check_functionality() && computer.ai_slot.enabled && computer.ai_slot.stored_card && computer.ai_slot.stored_card.carded_ai)
-		return computer.ai_slot.stored_card.carded_ai
-	return null
+	var/obj/item/weapon/stock_parts/computer/ai_slot/ai_slot = computer.get_component(PART_AI)
+
+	if(ai_slot && ai_slot.check_functionality() && ai_slot.enabled && ai_slot.stored_card)
+		return ai_slot.stored_card.carded_ai
 
 /datum/computer_file/program/aidiag/Topic(href, href_list)
 	if(..())
 		return 1
+
+	if(!usr.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
+		return 1
+
 	var/mob/living/silicon/ai/A = get_ai()
 	if(!A)
 		return 0
@@ -85,6 +90,13 @@
 
 /datum/nano_module/program/computer_aidiag/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
+
+	data += "skill_fail"
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_ADEPT))
+		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, 25)
+		data["skill_fail"] = fake_data.update_and_return_data()
+	data["terminal"] = !!program
+
 	var/mob/living/silicon/ai/A
 	// A shortcut for getting the AI stored inside the computer. The program already does necessary checks.
 	if(program && istype(program, /datum/computer_file/program/aidiag))
@@ -109,7 +121,7 @@
 
 		data["ai_laws"] = all_laws
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "aidiag.tmpl", "AI Maintenance Utility", 600, 400, state = state)
 		if(host.update_layout())

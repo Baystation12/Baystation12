@@ -1,3 +1,6 @@
+// large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
+#define MAX_FIELDS 50
+
 /*
  * Paper
  * also scraps of paper
@@ -30,15 +33,21 @@
 	var/list/offset_y[0] //usage by the photocopier
 	var/rigged = 0
 	var/spam_flag = 0
+	var/last_modified_ckey
+	var/age = 0
+	var/list/metadata
 
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
 	var/const/crayonfont = "Comic Sans MS"
 	var/const/fancyfont = "Segoe Script"
 
-/obj/item/weapon/paper/New(loc, text,title)
+	var/scan_file_type = /datum/computer_file/data/text
+
+/obj/item/weapon/paper/New(loc, text, title, list/md = null)
 	..(loc)
 	set_content(text ? text : info, title)
+	metadata = md
 
 /obj/item/weapon/paper/proc/set_content(text,title)
 	if(title)
@@ -49,7 +58,7 @@
 	update_space(info)
 	updateinfolinks()
 
-/obj/item/weapon/paper/update_icon()
+/obj/item/weapon/paper/on_update_icon()
 	if(icon_state == "paper_talisman")
 		return
 	else if(info)
@@ -61,11 +70,11 @@
 	if(new_text)
 		free_space -= length(strip_html_properly(new_text))
 
-/obj/item/weapon/paper/examine(mob/user)
+/obj/item/weapon/paper/examine(mob/user, distance)
 	. = ..()
 	if(name != "sheet of paper")
 		to_chat(user, "It's titled '[name]'.")
-	if(in_range(user, src) || isghost(user))
+	if(distance <= 1)
 		show_content(usr)
 	else
 		to_chat(user, "<span class='notice'>You have to go closer if you want to read it.</span>")
@@ -75,7 +84,7 @@
 	if(!forceshow && istype(user,/mob/living/silicon/ai))
 		var/mob/living/silicon/ai/AI = user
 		can_read = get_dist(src, AI.camera) < 2
-	user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
+	show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[can_read ? info : stars(info)][stamps]</BODY></HTML>", "window=[name]")
 	onclose(user, "[name]")
 
 /obj/item/weapon/paper/verb/rename()
@@ -83,15 +92,16 @@
 	set category = "Object"
 	set src in usr
 
-	if((CLUMSY in usr.mutations) && prob(50))
+	if((MUTATION_CLUMSY in usr.mutations) && prob(50))
 		to_chat(usr, "<span class='warning'>You cut yourself on the paper.</span>")
 		return
 	var/n_name = sanitizeSafe(input(usr, "What would you like to label the paper?", "Paper Labelling", null)  as text, MAX_NAME_LEN)
 
 	// We check loc one level up, so we can rename in clipboards and such. See also: /obj/item/weapon/photo/rename()
-	if((loc == usr || loc.loc && loc.loc == usr) && usr.stat == 0 && n_name)
-		SetName(n_name)
-		add_fingerprint(usr)
+	if(!n_name || !CanInteract(usr, GLOB.deep_inventory_state))
+		return
+	SetName(n_name)
+	add_fingerprint(usr)
 
 /obj/item/weapon/paper/attack_self(mob/living/user as mob)
 	if(user.a_intent == I_HURT)
@@ -140,7 +150,7 @@
 	var/locid = 0
 	var/laststart = 1
 	var/textindex = 1
-	while(1) // I know this can cause infinite loops and fuck up the whole server, but the if(istart==0) should be safe as fuck
+	while(locid < MAX_FIELDS)
 		var/istart = 0
 		if(links)
 			istart = findtext(info_links, "<span class=\"paper_field\">", laststart)
@@ -225,7 +235,7 @@
 
 	//Count the fields
 	var/laststart = 1
-	while(1)
+	while(fields < MAX_FIELDS)
 		var/i = findtext(t, "<span class=\"paper_field\">", laststart)	//</span>
 		if(i==0)
 			break
@@ -250,10 +260,7 @@
 				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
 				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
 
-				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
-
-				new /obj/effect/decal/cleanable/ash(src.loc)
+				new /obj/effect/decal/cleanable/ash(get_turf(src))
 				qdel(src)
 
 			else
@@ -273,42 +280,45 @@
 			to_chat(usr, "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>")
 			return
 
+		var/obj/item/I = usr.get_active_hand() // Check to see if he still got that darn pen, also check what type of pen
+		var/iscrayon = 0
+		var/isfancy = 0
+		if(!istype(I, /obj/item/weapon/pen))
+			if(usr.back && istype(usr.back,/obj/item/weapon/rig))
+				var/obj/item/weapon/rig/r = usr.back
+				var/obj/item/rig_module/device/pen/m = locate(/obj/item/rig_module/device/pen) in r.installed_modules
+				if(!r.offline && m)
+					I = m.device
+				else
+					return
+			else
+				return
+		
+		var/obj/item/weapon/pen/P = I
+		if(!P.active)
+			P.toggle()
+
+		if(P.iscrayon)
+			iscrayon = TRUE
+
+		if(P.isfancy)
+			isfancy = TRUE
+
 		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0, trim = 0)
 
 		if(!t)
 			return
 
-		var/obj/item/i = usr.get_active_hand() // Check to see if he still got that darn pen, also check what type of pen
-		var/iscrayon = 0
-		var/isfancy = 0
-		if(!istype(i, /obj/item/weapon/pen))
-			if(usr.back && istype(usr.back,/obj/item/weapon/rig))
-				var/obj/item/weapon/rig/r = usr.back
-				var/obj/item/rig_module/device/pen/m = locate(/obj/item/rig_module/device/pen) in r.installed_modules
-				if(!r.offline && m)
-					i = m.device
-				else
-					return
-			else
-				return
-
-		if(istype(i, /obj/item/weapon/pen/crayon))
-			iscrayon = 1
-
-		if(istype(i, /obj/item/weapon/pen/fancy))
-			isfancy = 1
-
-
 		// if paper is not in usr, then it must be near them, or in a clipboard or folder, which must be in or near usr
-		if(src.loc != usr && !src.Adjacent(usr) && !((istype(src.loc, /obj/item/weapon/clipboard) || istype(src.loc, /obj/item/weapon/folder)) && (src.loc.loc == usr || src.loc.Adjacent(usr)) ) )
+		if(src.loc != usr && !src.Adjacent(usr) && !((istype(src.loc, /obj/item/weapon/material/clipboard) || istype(src.loc, /obj/item/weapon/folder)) && (src.loc.loc == usr || src.loc.Adjacent(usr)) ) )
 			return
 
 		var/last_fields_value = fields
 
-		t = parsepencode(t, i, usr, iscrayon, isfancy) // Encode everything from pencode to html
+		t = parsepencode(t, I, usr, iscrayon, isfancy) // Encode everything from pencode to html
 
 
-		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
+		if(fields > MAX_FIELDS)
 			to_chat(usr, "<span class='warning'>Too many fields. Sorry, you can't do this.</span>")
 			fields = last_fields_value
 			return
@@ -319,9 +329,11 @@
 			info += t // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
 
+		last_modified_ckey = usr.ckey
+
 		update_space(t)
 
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
+		show_browser(usr, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
 
 		playsound(src, pick('sound/effects/pen1.ogg','sound/effects/pen2.ogg'), 10)
 		update_icon()
@@ -339,6 +351,11 @@
 		return
 
 	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
+		if(!can_bundle())
+			return
+		var/obj/item/weapon/paper/other = P
+		if(istype(other) && !other.can_bundle())
+			return
 		if (istype(P, /obj/item/weapon/paper/carbon))
 			var/obj/item/weapon/paper/carbon/C = P
 			if (!C.iscopy && !C.copied)
@@ -351,11 +368,9 @@
 		else if (P.name != "paper" && P.name != "photo")
 			B.SetName(P.name)
 
-		user.drop_from_inventory(P)
-		user.drop_from_inventory(src)
+		if(!user.unEquip(P, B) || !user.unEquip(src, B))
+			return
 		user.put_in_hands(B)
-		src.forceMove(B)
-		P.forceMove(B)
 
 		to_chat(user, "<span class='notice'>You clip the [P.name] to [(src.name == "paper") ? "the paper" : src.name].</span>")
 
@@ -372,18 +387,19 @@
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]")
+			show_browser(user, "<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY bgcolor='[color]'>[info_links][stamps]</BODY></HTML>", "window=[name]")
 		return
 
 	else if(istype(P, /obj/item/weapon/stamp) || istype(P, /obj/item/clothing/ring/seal))
-		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/weapon/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
+		if((!in_range(src, usr) && loc != user && !( istype(loc, /obj/item/weapon/material/clipboard) ) && loc.loc != user && user.get_active_hand() != P))
 			return
 
 		stamps += (stamps=="" ? "<HR>" : "<BR>") + "<i>This paper has been stamped with the [P.name].</i>"
 
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		var/{x; y;}
-		if(istype(P, /obj/item/weapon/stamp/captain) || istype(P, /obj/item/weapon/stamp/centcomm))
+		var/x
+		var/y
+		if(istype(P, /obj/item/weapon/stamp/captain) || istype(P, /obj/item/weapon/stamp/boss))
 			x = rand(-2, 0)
 			y = rand(-1, 2)
 		else
@@ -416,13 +432,24 @@
 		burnpaper(P, user)
 
 	else if(istype(P, /obj/item/weapon/paper_bundle))
+		if(!can_bundle())
+			return
 		var/obj/item/weapon/paper_bundle/attacking_bundle = P
 		attacking_bundle.insert_sheet_at(user, (attacking_bundle.pages.len)+1, src)
 		attacking_bundle.update_icon()
 
 	add_fingerprint(user)
-	return
 
+/obj/item/weapon/paper/proc/can_bundle()
+	return TRUE
+
+/obj/item/weapon/paper/proc/show_info(var/mob/user)
+	return info
+
+//For supply.
+/obj/item/weapon/paper/manifest
+	name = "supply manifest"
+	var/is_copy = 1
 /*
  * Premade paper
  */
@@ -434,7 +461,7 @@
 	name = "paper scrap"
 	icon_state = "scrap"
 
-/obj/item/weapon/paper/crumpled/update_icon()
+/obj/item/weapon/paper/crumpled/on_update_icon()
 	return
 
 /obj/item/weapon/paper/crumpled/bloody
@@ -442,7 +469,7 @@
 
 /obj/item/weapon/paper/exodus_armory
 	name = "armory inventory"
-	info = "<center>\[logo]<BR><b><large>NSS Exodus</large></b><BR><i><date></i><BR><i>Armoury Inventory - Revision <field></i></center><hr><center>Armoury</center><list>\[*]<b>Deployable barriers</b>: 4\[*]<b>Biohazard suit(s)</b>: 1\[*]<b>Biohazard hood(s)</b>: 1\[*]<b>Face Mask(s)</b>: 1\[*]<b>Extended-capacity emergency oxygen tank(s)</b>: 1\[*]<b>Bomb suit(s)</b>: 1\[*]<b>Bomb hood(s)</b>: 1\[*]<b>Security officer's jumpsuit(s)</b>: 1\[*]<b>Brown shoes</b>: 1\[*]<b>Handcuff(s)</b>: 14\[*]<b>R.O.B.U.S.T. cartridges</b>: 7\[*]<b>Flash(s)</b>: 4\[*]<b>Can(s) of pepperspray</b>: 4\[*]<b>Gas mask(s)</b>: 6<field></list><hr><center>Secure Armoury</center><list>\[*]<b>LAEP90 Perun energy guns</b>: 4\[*]<b>Stun Revolver(s)</b>: 1\[*]<b>Taser Gun(s)</b>: 4\[*]<b>Stun baton(s)</b>: 4\[*]<b>Airlock Brace</b>: 3\[*]<b>Maintenance Jack</b>: 1\[*]<b>Stab Vest(s)</b>: 3\[*]<b>Riot helmet(s)</b>: 3\[*]<b>Riot shield(s)</b>: 3\[*]<b>Corporate security heavy armoured vest(s)</b>: 4\[*]<b>NanoTrasen helmet(s)</b>: 4\[*]<b>Portable flasher(s)</b>: 3\[*]<b>Tracking implant(s)</b>: 4\[*]<b>Chemical implant(s)</b>: 5\[*]<b>Implanter(s)</b>: 2\[*]<b>Implant pad(s)</b>: 2\[*]<b>Locator(s)</b>: 1<field></list><hr><center>Tactical Equipment</center><list>\[*]<b>Implanter</b>: 1\[*]<b>Death Alarm implant(s)</b>: 7\[*]<b>Security radio headset(s)</b>: 4\[*]<b>Ablative vest(s)</b>: 2\[*]<b>Ablative helmet(s)</b>: 2\[*]<b>Ballistic vest(s)</b>: 2\[*]<b>Ballistic helmet(s)</b>: 2\[*]<b>Tear Gas Grenade(s)</b>: 7\[*]<b>Flashbang(s)</b>: 7\[*]<b>Beanbag Shell(s)</b>: 7\[*]<b>Stun Shell(s)</b>: 7\[*]<b>Illumination Shell(s)</b>: 7\[*]<b>W-T Remmington 29x shotgun(s)</b>: 2\[*]<b>NT Mk60 EW Halicon ion rifle(s)</b>: 2\[*]<b>Hephaestus Industries G40E laser carbine(s)</b>: 4\[*]<b>Flare(s)</b>: 4<field></list><hr><b>Warden (print)</b>:<field><b>Signature</b>:<br>"
+	info = "<center>\[logo]<BR><b><large>NSS Exodus</large></b><BR><i><date></i><BR><i>Armoury Inventory - Revision <field></i></center><hr><center>Armoury</center><list>\[*]<b>Deployable barriers</b>: 4\[*]<b>Biohazard suit(s)</b>: 1\[*]<b>Biohazard hood(s)</b>: 1\[*]<b>Face Mask(s)</b>: 1\[*]<b>Extended-capacity emergency oxygen tank(s)</b>: 1\[*]<b>Bomb suit(s)</b>: 1\[*]<b>Bomb hood(s)</b>: 1\[*]<b>Security officer's jumpsuit(s)</b>: 1\[*]<b>Brown shoes</b>: 1\[*]<b>Handcuff(s)</b>: 14\[*]<b>R.O.B.U.S.T. cartridges</b>: 7\[*]<b>Flash(s)</b>: 4\[*]<b>Can(s) of pepperspray</b>: 4\[*]<b>Gas mask(s)</b>: 6<field></list><hr><center>Secure Armoury</center><list>\[*]<b>LAEP90 Perun energy guns</b>: 4\[*]<b>Stun Revolver(s)</b>: 1\[*]<b>Electrolaser(s)</b>: 4\[*]<b>Stun baton(s)</b>: 4\[*]<b>Airlock Brace</b>: 3\[*]<b>Maintenance Jack</b>: 1\[*]<b>Stab Vest(s)</b>: 3\[*]<b>Riot helmet(s)</b>: 3\[*]<b>Riot shield(s)</b>: 3\[*]<b>Corporate security heavy armoured vest(s)</b>: 4\[*]<b>NanoTrasen helmet(s)</b>: 4\[*]<b>Portable flasher(s)</b>: 3\[*]<b>Tracking implant(s)</b>: 4\[*]<b>Chemical implant(s)</b>: 5\[*]<b>Implanter(s)</b>: 2\[*]<b>Implant pad(s)</b>: 2\[*]<b>Locator(s)</b>: 1<field></list><hr><center>Tactical Equipment</center><list>\[*]<b>Implanter</b>: 1\[*]<b>Death Alarm implant(s)</b>: 7\[*]<b>Security radio headset(s)</b>: 4\[*]<b>Ablative vest(s)</b>: 2\[*]<b>Ablative helmet(s)</b>: 2\[*]<b>Ballistic vest(s)</b>: 2\[*]<b>Ballistic helmet(s)</b>: 2\[*]<b>Tear Gas Grenade(s)</b>: 7\[*]<b>Flashbang(s)</b>: 7\[*]<b>Beanbag Shell(s)</b>: 7\[*]<b>Stun Shell(s)</b>: 7\[*]<b>Illumination Shell(s)</b>: 7\[*]<b>W-T Remmington 29x shotgun(s)</b>: 2\[*]<b>NT Mk60 EW Halicon ion rifle(s)</b>: 2\[*]<b>Hephaestus Industries G40E laser carbine(s)</b>: 4\[*]<b>Flare(s)</b>: 4<field></list><hr><b>Warden (print)</b>:<field><b>Signature</b>:<br>"
 
 /obj/item/weapon/paper/exodus_cmo
 	name = "outgoing CMO's notes"
@@ -473,3 +500,7 @@
 /obj/item/weapon/paper/travelvisa/New()
 	..()
 	icon_state = "travelvisa"
+
+/obj/item/weapon/paper/aromatherapy_disclaimer
+	name = "aromatherapy disclaimer"
+	info = "<I>The manufacturer and the retailer make no claims of the contained products' effacy.</I> <BR><BR><B>Use at your own risk.</B>"

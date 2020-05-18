@@ -11,10 +11,10 @@
 	relative_size = 60
 
 	var/active_breathing = 1
-
+	var/has_gills = FALSE
 	var/breath_type
-	var/poison_type
 	var/exhale_type
+	var/list/poison_types
 
 	var/min_breath_pressure
 	var/last_int_pressure
@@ -27,8 +27,11 @@
 	var/SA_para_min = 1
 	var/SA_sleep_min = 5
 	var/breathing = 0
-	var/last_failed_breath
+	var/last_successful_breath
 	var/breath_fail_ratio // How badly they failed a breath. Higher is worse.
+
+/obj/item/organ/internal/lungs/proc/can_drown()
+	return (is_broken() || !has_gills)
 
 /obj/item/organ/internal/lungs/proc/remove_oxygen_deprivation(var/amount)
 	var/last_suffocation = oxygen_deprivation
@@ -64,9 +67,9 @@
  */
 /obj/item/organ/internal/lungs/proc/sync_breath_types()
 	min_breath_pressure = species.breath_pressure
-	breath_type = species.breath_type ? species.breath_type : "oxygen"
-	poison_type = species.poison_type ? species.poison_type : "phoron"
-	exhale_type = species.exhale_type ? species.exhale_type : "carbon_dioxide"
+	breath_type = species.breath_type ? species.breath_type : GAS_OXYGEN
+	poison_types = species.poison_types ? species.poison_types : list(GAS_PHORON = TRUE)
+	exhale_type = species.exhale_type ? species.exhale_type : GAS_CO2
 
 /obj/item/organ/internal/lungs/Process()
 	..()
@@ -116,24 +119,29 @@
 		last_int_pressure = breath_pressure
 		return
 	var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
+	var/ext_pressure = environment && environment.return_pressure() // May be null if, say, our owner is in nullspace
 	var/int_pressure_diff = abs(last_int_pressure - breath_pressure)
-	var/ext_pressure_diff = abs(last_ext_pressure - environment.return_pressure()) * owner.get_pressure_weakness()
+	var/ext_pressure_diff = abs(last_ext_pressure - ext_pressure) * owner.get_pressure_weakness(ext_pressure)
 	if(int_pressure_diff > max_pressure_diff && ext_pressure_diff > max_pressure_diff)
-		var/lung_rupture_prob = isrobotic() ? prob(30) : prob(60) //Robotic lungs are less likely to rupture.
+		var/lung_rupture_prob = BP_IS_ROBOTIC(src) ? prob(30) : prob(60) //Robotic lungs are less likely to rupture.
 		if(!is_bruised() && lung_rupture_prob) //only rupture if NOT already ruptured
 			rupture()
 
 /obj/item/organ/internal/lungs/proc/handle_breath(datum/gas_mixture/breath, var/forced)
+
 	if(!owner)
 		return 1
-	if(!breath)
+
+	if(!breath || (max_damage <= 0))
 		breath_fail_ratio = 1
 		handle_failed_breath()
 		return 1
+
 	var/breath_pressure = breath.return_pressure()
 	check_rupturing(breath_pressure)
+
 	var/datum/gas_mixture/environment = loc.return_air_for_internal_lifeform()
-	last_ext_pressure = environment.return_pressure()
+	last_ext_pressure = environment && environment.return_pressure()
 	last_int_pressure = breath_pressure
 	if(breath.total_moles == 0)
 		breath_fail_ratio = 1
@@ -151,19 +159,15 @@
 	var/failed_exhale = 0
 
 	var/inhaling = breath.gas[breath_type]
-	var/poison = breath.gas[poison_type]
-	var/exhaling = exhale_type ? breath.gas[exhale_type] : 0
+	var/inhale_efficiency = min(round(((inhaling/breath.total_moles)*breath_pressure)/safe_pressure_min, 0.001), 3)
 
-	var/inhale_pp = (inhaling/breath.total_moles)*breath_pressure
-	var/toxins_pp = (poison/breath.total_moles)*breath_pressure
-	var/exhaled_pp = (exhaling/breath.total_moles)*breath_pressure
-
-	var/inhale_efficiency = min(round(inhale_pp/safe_pressure_min, 0.001), 3)
 	// Not enough to breathe
 	if(inhale_efficiency < 1)
 		if(prob(20) && active_breathing)
-			owner.emote("gasp")
-
+			if(inhale_efficiency < 0.8)
+				owner.emote("gasp")
+			else if(prob(20))
+				to_chat(owner, SPAN_WARNING("It's hard to breathe..."))
 		breath_fail_ratio = 1 - inhale_efficiency
 		failed_inhale = 1
 	else
@@ -174,75 +178,39 @@
 	var/inhaled_gas_used = inhaling / 4
 	breath.adjust_gas(breath_type, -inhaled_gas_used, update = 0) //update afterwards
 
-	if(exhale_type)
+	owner.phoron_alert = 0 // Reset our toxins alert for now.
+	if(!failed_inhale) // Enough gas to tell we're being poisoned via chemical burns or whatever.
+		var/poison_total = 0
+		if(poison_types)
+			for(var/gname in breath.gas)
+				if(poison_types[gname])
+					poison_total += breath.gas[gname]
+		if(((poison_total/breath.total_moles)*breath_pressure) > safe_toxins_max)
+			owner.phoron_alert = 1
+
+	// Pass reagents from the gas into our body.
+	// Presumably if you breathe it you have a specialized metabolism for it, so we drop/ignore breath_type. Also avoids
+	// humans processing thousands of units of oxygen over the course of a round for the sole purpose of poisoning vox.
+	var/ratio = BP_IS_ROBOTIC(src)? 0.66 : 1
+	for(var/gasname in breath.gas - breath_type)
+		var/breathed_product = gas_data.breathed_product[gasname]
+		if(breathed_product)
+			var/reagent_amount = breath.gas[gasname] * REAGENT_GAS_EXCHANGE_FACTOR * ratio
+			 // Little bit of sanity so we aren't trying to add 0.0000000001 units of CO2, and so we don't end up with 99999 units of CO2.
+			if(reagent_amount >= 0.05)
+				owner.reagents.add_reagent(breathed_product, reagent_amount)
+				breath.adjust_gas(gasname, -breath.gas[gasname], update = 0) //update after
+
+	// Moved after reagent injection so we don't instantly poison ourselves with CO2 or whatever.
+	if(exhale_type && (!istype(owner.wear_mask) || !(exhale_type in owner.wear_mask.filtered_gases)))
 		breath.adjust_gas_temp(exhale_type, inhaled_gas_used, owner.bodytemperature, update = 0) //update afterwards
-		// Too much exhaled gas in the air
-		var/word
-		var/warn_prob
-		var/oxyloss
-		var/alert
-
-		if(exhaled_pp > safe_exhaled_max)
-			word = pick("extremely dizzy","short of breath","faint","confused")
-			warn_prob = 15
-			oxyloss = HUMAN_MAX_OXYLOSS
-			alert = 1
-			failed_exhale = 1
-		else if(exhaled_pp > safe_exhaled_max * 0.7)
-			word = pick("dizzy","short of breath","faint","momentarily confused")
-			warn_prob = 10
-			alert = 1
-			failed_exhale = 1
-			var/ratio = 1.0 - (safe_exhaled_max - exhaled_pp)/(safe_exhaled_max*0.3)
-			if (owner.getOxyLoss() < 50*ratio)
-				oxyloss = HUMAN_MAX_OXYLOSS
-		else if(exhaled_pp > safe_exhaled_max * 0.4)
-			word = pick("a little dizzy","short of breath")
-			warn_prob = 10
-		else
-			owner.co2_alert = 0
-
-		if(word)
-			if(!owner.co2_alert)
-				owner.co2_alert = alert
-			if(prob(warn_prob))
-				to_chat(owner, "<span class='warning'>You feel [word].</span>")
-
-		owner.adjustOxyLoss(oxyloss)
-
-	// Too much poison in the air.
-	if(toxins_pp > safe_toxins_max)
-		var/ratio = (poison/safe_toxins_max) * 10
-		if(robotic >= ORGAN_ROBOT)
-			ratio /= 2 //Robolungs filter out some of the inhaled toxic air.
-		owner.reagents.add_reagent(/datum/reagent/toxin, Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
-		breath.adjust_gas(poison_type, -poison, update = 0) //update after
-		owner.phoron_alert = 1
-	else
-		owner.phoron_alert = 0
-
-	// If there's some other shit in the air lets deal with it here.
-	if(breath.gas["sleeping_agent"])
-		var/SA_pp = (breath.gas["sleeping_agent"] / breath.total_moles) * breath_pressure
-		if(SA_pp > SA_para_min)		// Enough to make us paralysed for a bit
-			owner.Paralyse(3)	// 3 gives them one second to wake up and run away a bit!
-			if(SA_pp > SA_sleep_min)	// Enough to make us sleep as well
-				owner.Sleeping(5)
-		else if(SA_pp > 0.15)	// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
-			if(prob(20))
-				owner.emote(pick("giggle", "laugh"))
-
-		breath.adjust_gas("sleeping_agent", -breath.gas["sleeping_agent"], update = 0) //update after
 
 	// Were we able to breathe?
 	var/failed_breath = failed_inhale || failed_exhale
-	if(failed_breath)
-		if(isnull(last_failed_breath))
-			last_failed_breath = world.time
-	else
-		last_failed_breath = null
+	if(!failed_breath)
+		last_successful_breath = world.time
 		owner.adjustOxyLoss(-5 * inhale_efficiency)
-		if(robotic < ORGAN_ROBOT && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
+		if(!BP_IS_ROBOTIC(src) && species.breathing_sound && is_below_sound_pressure(get_turf(owner)))
 			if(breathing || owner.shock_stage >= 10)
 				sound_to(owner, sound(species.breathing_sound,0,0,0,5))
 				breathing = 0
@@ -266,7 +234,7 @@
 		else
 			owner.emote(pick("shiver","twitch"))
 
-	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_failed_breath + 2 MINUTES)
+	if(damage || owner.chem_effects[CE_BREATHLOSS] || world.time > last_successful_breath + 2 MINUTES)
 		owner.adjustOxyLoss(HUMAN_MAX_OXYLOSS*breath_fail_ratio)
 
 	owner.oxygen_alert = max(owner.oxygen_alert, 2)
@@ -274,7 +242,7 @@
 
 /obj/item/organ/internal/lungs/proc/handle_temperature_effects(datum/gas_mixture/breath)
 	// Hot air hurts :(
-	if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in owner.mutations))
+	if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(MUTATION_COLD_RESISTANCE in owner.mutations))
 		var/damage = 0
 		if(breath.temperature <= species.cold_level_1)
 			if(prob(20))
@@ -334,7 +302,7 @@
 	if(owner.failed_last_breath || !active_breathing)
 		return "no respiration"
 
-	if(robotic == ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(src))
 		if(is_bruised())
 			return "malfunctioning fans"
 		else

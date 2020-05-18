@@ -10,14 +10,22 @@
 	var/suspended = FALSE	// Whether the account is banned by the SA.
 	var/connected_clients = list()
 
+	var/fullname	= "N/A"
+	var/assignment	= "N/A"
+
 /datum/computer_file/data/email_account/calculate_size()
 	size = 1
 	for(var/datum/computer_file/data/email_message/stored_message in all_emails())
 		stored_message.calculate_size()
 		size += stored_message.size
 
-/datum/computer_file/data/email_account/New()
-	ntnet_global.email_accounts.Add(src)
+/datum/computer_file/data/email_account/New(_login, _fullname, _assignment)
+	login = _login
+	if(_fullname)
+		fullname = _fullname
+	if(_assignment)
+		assignment = _assignment
+	ADD_SORTED(ntnet_global.email_accounts, src, /proc/cmp_emails_asc)
 	..()
 
 /datum/computer_file/data/email_account/Destroy()
@@ -67,7 +75,7 @@
 
 	return 1
 
-// Address namespace (@internal-services.nt) for email addresses with special purpose only!.
+// Address namespace (@internal-services.net) for email addresses with special purpose only!.
 /datum/computer_file/data/email_account/service/
 	can_login = FALSE
 
@@ -91,3 +99,6 @@
 
 /datum/computer_file/data/email_account/service/document
 	login = EMAIL_DOCUMENTS
+
+/datum/computer_file/data/email_account/service/sysadmin
+	login = EMAIL_SYSADMIN

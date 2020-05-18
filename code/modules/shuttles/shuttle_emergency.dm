@@ -8,10 +8,8 @@
 	emergency_controller = evacuation_controller
 	if(!istype(emergency_controller))
 		CRASH("Escape shuttle created without the appropriate controller type.")
-		return
 	if(emergency_controller.shuttle)
 		CRASH("An emergency shuttle has already been created.")
-		return
 	emergency_controller.shuttle = src
 
 /datum/shuttle/autodock/ferry/emergency/arrived()
@@ -70,8 +68,7 @@
 			to_world("<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Launch sequence initiated!</b></span>")
 
 	if(usr)
-		log_admin("[key_name(usr)] has overridden the shuttle autopilot and activated launch sequence")
-		message_admins("[key_name_admin(usr)] has overridden the shuttle autopilot and activated launch sequence")
+		log_and_message_admins("has overridden the shuttle autopilot and activated launch sequence")
 
 	..(user)
 
@@ -84,8 +81,7 @@
 			to_world("<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Bluespace drive engaged!</b></span>")
 
 	if(usr)
-		log_admin("[key_name(usr)] has overridden the shuttle autopilot and forced immediate launch")
-		message_admins("[key_name_admin(usr)] has overridden the shuttle autopilot and forced immediate launch")
+		log_and_message_admins("has overridden the shuttle autopilot and forced immediate launch")
 
 	..(user)
 
@@ -101,8 +97,7 @@
 				to_world("<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Launch sequence aborted!</b></span>")
 
 		if(usr)
-			log_admin("[key_name(usr)] has overridden the shuttle autopilot and cancelled launch sequence")
-			message_admins("[key_name_admin(usr)] has overridden the shuttle autopilot and cancelled launch sequence")
+			log_and_message_admins("has overridden the shuttle autopilot and cancelled launch sequence")
 
 	..(user)
 
@@ -151,7 +146,7 @@
 		src.visible_message("\The [src] buzzes. That ID has already been scanned.")
 		return 0
 
-	if (!(access_heads in access))
+	if (!(access_bridge in access))
 		src.visible_message("\The [src] buzzes, rejecting [ident].")
 		return 0
 
@@ -161,8 +156,7 @@
 		to_world("<span class='notice'><b>Alert: [req_authorizations - authorized.len] authorization\s needed to override the shuttle autopilot.</b></span>")
 
 	if(usr)
-		log_admin("[key_name(usr)] has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
-		message_admins("[key_name_admin(usr)] has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
+		log_and_message_admins("has inserted [ID] into the shuttle control computer - [req_authorizations - authorized.len] authorisation\s needed")
 
 	return 1
 
@@ -178,7 +172,7 @@
 
 /obj/machinery/computer/shuttle_control/emergency/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
-	var/datum/shuttle/autodock/ferry/emergency/shuttle = shuttle_controller.shuttles[shuttle_tag]
+	var/datum/shuttle/autodock/ferry/emergency/shuttle = SSshuttle.shuttles[shuttle_tag]
 	if (!istype(shuttle))
 		return
 
@@ -198,7 +192,7 @@
 			else
 				shuttle_status = "Standing-by at [GLOB.using_map.dock_name]."
 		if(WAIT_LAUNCH, FORCE_LAUNCH)
-			shuttle_status = "Shuttle has recieved command and will depart shortly."
+			shuttle_status = "Shuttle has received command and will depart shortly."
 		if(WAIT_ARRIVE)
 			shuttle_status = "Proceeding to destination."
 		if(WAIT_FINISH)
@@ -234,7 +228,7 @@
 		"user" = debug? user : null,
 	)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 
 	if (!ui)
 		ui = new(user, src, ui_key, "escape_shuttle_control_console.tmpl", "Shuttle Control", 470, 420)

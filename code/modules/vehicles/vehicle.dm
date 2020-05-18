@@ -7,7 +7,6 @@
 /obj/vehicle
 	name = "vehicle"
 	icon = 'icons/obj/vehicles.dmi'
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	anchored = 1
@@ -172,7 +171,7 @@
 	if(powered && cell.charge < (charge_use * CELLRATE))
 		return 0
 	on = 1
-	set_light(initial(light_max_bright), 1, 5)
+	set_light(0.8, 1, 5)
 	update_icon()
 	return 1
 
@@ -193,8 +192,8 @@
 	src.visible_message("<span class='danger'>\The [src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/stack/rods(Tsec)
-	new /obj/item/stack/rods(Tsec)
+	new /obj/item/stack/material/rods(Tsec)
+	new /obj/item/stack/material/rods(Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 
 	if(cell)
@@ -239,9 +238,8 @@
 		return
 	if(!istype(C))
 		return
-
-	H.drop_from_inventory(C)
-	C.forceMove(src)
+	if(!H.unEquip(C, src))
+		return
 	cell = C
 	powercheck()
 	to_chat(usr, "<span class='notice'>You install [C] in [src].</span>")
@@ -251,7 +249,6 @@
 		return
 
 	to_chat(usr, "<span class='notice'>You remove [cell] from [src].</span>")
-	cell.forceMove(get_turf(H))
 	H.put_in_hands(cell)
 	cell = null
 	powercheck()

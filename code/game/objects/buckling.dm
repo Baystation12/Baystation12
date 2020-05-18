@@ -3,7 +3,7 @@
 	var/buckle_movable = 0
 	var/buckle_dir = 0
 	var/buckle_lying = -1 //bed-like behavior, forces mob.lying = buckle_lying if != -1
-	var/buckle_pixel_shift = "x=0;y=0" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
+	var/buckle_pixel_shift = "x=0;y=0;z=0" //where the buckled mob should be pixel shifted to, or null for no pixel shift control
 	var/buckle_require_restraints = 0 //require people to be handcuffed before being able to buckle. eg: pipes
 	var/mob/living/buckled_mob = null
 
@@ -35,7 +35,7 @@
 	M.buckled = src
 	M.facing_dir = null
 	M.set_dir(buckle_dir ? buckle_dir : dir)
-	M.update_canmove()
+	M.UpdateLyingBuckledAndVerbStatus()
 	M.update_floating()
 	buckled_mob = M
 
@@ -47,7 +47,7 @@
 		. = buckled_mob
 		buckled_mob.buckled = null
 		buckled_mob.anchored = initial(buckled_mob.anchored)
-		buckled_mob.update_canmove()
+		buckled_mob.UpdateLyingBuckledAndVerbStatus()
 		buckled_mob.update_floating()
 		buckled_mob = null
 
@@ -57,15 +57,12 @@
 	if(buckle_pixel_shift)
 		if(M == buckled_mob)
 			var/list/pixel_shift = cached_key_number_decode(buckle_pixel_shift)
-			animate(M, pixel_x = M.default_pixel_x + pixel_shift["x"], pixel_y = M.default_pixel_y + pixel_shift["y"], 4, 1, LINEAR_EASING)
+			animate(M, pixel_x = M.default_pixel_x + pixel_shift["x"], pixel_y = M.default_pixel_y + pixel_shift["y"], pixel_z = M.default_pixel_z + pixel_shift["z"], 4, 1, LINEAR_EASING)
 		else
-			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, 4, 1, LINEAR_EASING)
+			animate(M, pixel_x = M.default_pixel_x, pixel_y = M.default_pixel_y, pixel_z = M.default_pixel_z, 4, 1, LINEAR_EASING)
 
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
-	if(!ticker) //why do we need to check this?
-		to_chat(user, "<span class='warning'>You can't buckle anyone in before the game starts.</span>")
-		return 0
-	if(!user.Adjacent(M) || user.restrained() || user.stat || istype(user, /mob/living/silicon/pai))
+	if(!user.Adjacent(M) || istype(user, /mob/living/silicon/pai) || (M != user && user.incapacitated()))
 		return 0
 	if(M == buckled_mob)
 		return 0

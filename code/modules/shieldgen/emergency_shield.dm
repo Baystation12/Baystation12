@@ -89,16 +89,19 @@
 				qdel(src)
 
 
-/obj/machinery/shield/hitby(AM as mob|obj)
+/obj/machinery/shield/hitby(AM as mob|obj, var/datum/thrownthing/TT)
 	//Let everyone know we've been hit!
 	visible_message("<span class='notice'><B>\[src] was hit by [AM].</B></span>")
 
 	//Super realistic, resource-intensive, real-time damage calculations.
 	var/tforce = 0
-	if(ismob(AM))
-		tforce = 40
+
+	if(ismob(AM)) // All mobs have a multiplier and a size according to mob_defines.dm
+		var/mob/I = AM
+		tforce = I.mob_size * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 	else
-		tforce = AM:throwforce
+		var/obj/O = AM
+		tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
 
 	src.health -= tforce
 
@@ -130,7 +133,7 @@
 	var/is_open = 0 //Whether or not the wires are exposed
 	var/locked = 0
 	var/check_delay = 60	//periodically recheck if we need to rebuild a shield
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 0
 
 /obj/machinery/shieldgen/Destroy()
@@ -145,10 +148,11 @@
 
 	create_shields()
 
-	idle_power_usage = 0
+	var/new_idle_power_usage = 0
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
-		idle_power_usage += shield_tile.shield_idle_power
-	update_use_power(1)
+		new_idle_power_usage += shield_tile.shield_idle_power
+	change_power_consumption(new_idle_power_usage, POWER_USE_IDLE)
+	update_use_power(POWER_USE_IDLE)
 
 /obj/machinery/shieldgen/proc/shields_down()
 	if(!active) return 0 //If it's already off, how did this get called?
@@ -158,7 +162,7 @@
 
 	collapse_shields()
 
-	update_use_power(0)
+	update_use_power(POWER_USE_OFF)
 
 /obj/machinery/shieldgen/proc/create_shields()
 	for(var/turf/target_tile in range(8, src))
@@ -166,14 +170,14 @@
 			if (malfunction && prob(33) || !malfunction)
 				var/obj/machinery/shield/S = new/obj/machinery/shield(target_tile)
 				deployed_shields += S
-				use_power(S.shield_generate_power)
+				use_power_oneoff(S.shield_generate_power)
 
 	for(var/turf/above in range(8, GetAbove(src)))//Probably a better way to do this.
 		if ((istype(above,/turf/space)|| istype(above, /turf/simulated/open)) && !(locate(/obj/machinery/shield) in above))
 			if (malfunction && prob(33) || !malfunction)
 				var/obj/machinery/shield/A = new/obj/machinery/shield(above)
 				deployed_shields += A
-				use_power(A.shield_generate_power)
+				use_power_oneoff(A.shield_generate_power)
 
 /obj/machinery/shieldgen/proc/collapse_shields()
 	for(var/obj/machinery/shield/shield_tile in deployed_shields)
@@ -203,8 +207,7 @@
 				new_power_usage += shield_tile.shield_idle_power
 
 			if (new_power_usage != idle_power_usage)
-				idle_power_usage = new_power_usage
-				use_power(0)
+				change_power_consumption(new_power_usage, POWER_USE_IDLE)
 
 			check_delay = 60
 		else
@@ -247,13 +250,15 @@
 				malfunction = 1
 	checkhp()
 
-/obj/machinery/shieldgen/attack_hand(mob/user as mob)
+/obj/machinery/shieldgen/interface_interact(mob/user as mob)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	if(locked)
 		to_chat(user, "The machine is locked, you are unable to use it.")
-		return
+		return TRUE
 	if(is_open)
 		to_chat(user, "The panel must be closed before operating this machine.")
-		return
+		return TRUE
 
 	if (src.active)
 		user.visible_message("<span class='notice'>\icon[src] [user] deactivated the shield generator.</span>", \
@@ -268,7 +273,7 @@
 			src.shields_up()
 		else
 			to_chat(user, "The device must first be secured to the floor.")
-	return
+	return TRUE
 
 /obj/machinery/shieldgen/emag_act(var/remaining_charges, var/mob/user)
 	if(!malfunction)
@@ -325,7 +330,7 @@
 		..()
 
 
-/obj/machinery/shieldgen/update_icon()
+/obj/machinery/shieldgen/on_update_icon()
 	if(active && !(stat & NOPOWER))
 		src.icon_state = malfunction ? "shieldonbr":"shieldon"
 	else

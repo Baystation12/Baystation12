@@ -4,7 +4,7 @@
 	var/cost = 0
 	var/mob/living/deity/linked
 	var/flags = 0
-	var/cooldown = 0
+	var/cooldown = 10
 	var/refresh_time = 0
 	var/expected_type
 
@@ -64,6 +64,7 @@
 
 /datum/phenomena/proc/activate(var/target)
 	to_chat(linked, "<span class='notice'>You use the phenomena [name] on \the [target]</span>")
+	log_and_message_admins("uses the phenomena [name] on \the [target]", linked, get_turf(target))
 	return
 
 /datum/phenomena/proc/get_desc()

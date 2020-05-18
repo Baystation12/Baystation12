@@ -13,22 +13,26 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
-	var/turns_since_scan = 0
-	var/mob/living/simple_animal/mouse/movement_target
-	var/mob/flee_target
-	minbodytemp = 223		//Below -50 Degrees Celcius
-	maxbodytemp = 323	//Above 50 Degrees Celcius
+	minbodytemp = 223		//Below -50 Degrees Celsius
+	maxbodytemp = 323	//Above 50 Degrees Celsius
 	holder_type = /obj/item/weapon/holder/cat
 	mob_size = MOB_SMALL
 	possession_candidate = 1
+	pass_flags = PASS_FLAG_TABLE
+
+	skin_material = MATERIAL_SKIN_FUR_ORANGE
+
+	var/turns_since_scan = 0
+	var/mob/living/simple_animal/mouse/movement_target
+	var/mob/flee_target
 
 /mob/living/simple_animal/cat/Life()
-	if(!..() || incapacitated() || client)
-		return
+	. = ..()
+	if(!.)
+		return FALSE
 	//MICE!
 	if((src.loc) && isturf(src.loc))
 		if(!resting && !buckled)
@@ -123,9 +127,9 @@
 	. = ..()
 	set_flee_target(proj.firer? proj.firer : src.loc)
 
-/mob/living/simple_animal/cat/hitby(atom/movable/AM)
+/mob/living/simple_animal/cat/hitby(atom/movable/AM, var/datum/thrownthing/TT)
 	. = ..()
-	set_flee_target(AM.thrower? AM.thrower : src.loc)
+	set_flee_target(TT.thrower? TT.thrower : src.loc)
 
 //Basic friend AI
 /mob/living/simple_animal/cat/fluff
@@ -165,7 +169,9 @@
 		..()
 
 /mob/living/simple_animal/cat/fluff/Life()
-	..()
+	. = ..()
+	if(!.)
+		return FALSE 
 	if (stat || !friend)
 		return
 	if (get_dist(src, friend) <= 1)
@@ -216,6 +222,7 @@
 	item_state = "cat"
 	icon_living = "cat"
 	icon_dead = "cat_dead"
+	skin_material = MATERIAL_SKIN_FUR_BLACK
 
 /mob/living/simple_animal/cat/kitten
 	name = "kitten"
@@ -225,6 +232,9 @@
 	icon_living = "kitten"
 	icon_dead = "kitten_dead"
 	gender = NEUTER
+	meat_amount = 1
+	bone_amount = 3
+	skin_amount = 3
 
 // Leaving this here for now.
 /obj/item/weapon/holder/cat/fluff/bones

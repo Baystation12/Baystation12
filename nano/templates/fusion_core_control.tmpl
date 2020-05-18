@@ -1,0 +1,81 @@
+<h2>Fusion plant: {{:data.id}}</h2>
+{{for data.cores}}
+	<h3>{{:value.id}}</h3>
+	{{if value.field}}
+		<div class="item">
+			<div class="itemLabel">
+				Field generator
+			</div>
+			<div class="itemContent">
+				 Online.<br/>{{:helper.link('Shut down.', null, {'machine': value.ref, 'toggle_active': 1})}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Power status
+			</div>
+			<div class="itemContent">
+				{{:value.powerstatus}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Field strength
+			</div>
+			<div class="itemContent">
+				{{:value.power}}<br/>{{:helper.link('-10', null, {'machine': value.ref, 'str': -100})}}{{:helper.link('-1', null, {'machine': value.ref, 'str': -10})}}{{:helper.link('-0.1', null, {'machine': value.ref, 'str': -1})}}{{:helper.link('+0.1', null, {'machine': value.ref, 'str': 1})}}{{:helper.link('+1', null, {'machine': value.ref, 'str': 10})}}{{:helper.link('+10', null, {'machine': value.ref, 'str': 100})}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Size
+			</div>
+			<div class="itemContent">
+				{{:value.size}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Instability
+			</div>
+			<div class="itemContent">
+				{{:value.instability}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Plasma temperature
+			</div>
+			<div class="itemContent">
+				{{:value.temperature}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Reactants
+			</div>
+			<div class="itemContent">
+				{{:value.fuel}}
+			</div>
+		</div>
+	{{else}}
+		<div class="item">
+			<div class="itemLabel">
+				Field generator
+			</div>
+			<div class="itemContent">
+				Offline.<br/>{{:helper.link('Start up.', null, {'machine': value.ref, 'toggle_active': 1})}}
+			</div>
+		</div>
+	{{/if}}
+{{empty}}
+	<div class="item">
+		<div class="itemLabel">
+			Error:
+		</div>
+		<div class="itemContent">
+			No electromagnetic field generators connected.
+		</div>
+	</div>
+<hr/>
+{{/for}}

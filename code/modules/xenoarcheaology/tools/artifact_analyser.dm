@@ -1,8 +1,8 @@
 /obj/machinery/artifact_analyser
 	name = "Anomaly Analyser"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
-	icon = 'icons/obj/virology.dmi'
-	icon_state = "isolator"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "xenoarch_console"
 	anchored = 1
 	density = 1
 	var/scan_in_progress = 0
@@ -24,15 +24,14 @@
 	if(!owned_scanner)
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 
-/obj/machinery/artifact_analyser/attack_hand(var/mob/user as mob)
-	src.add_fingerprint(user)
+/obj/machinery/artifact_analyser/DefaultTopicState()
+	return GLOB.physical_state
+
+/obj/machinery/artifact_analyser/interface_interact(var/mob/user)
 	interact(user)
+	return TRUE
 
 /obj/machinery/artifact_analyser/interact(mob/user)
-	if(stat & (NOPOWER|BROKEN) || get_dist(src, user) > 1)
-		user.unset_machine(src)
-		return
-
 	var/dat = "<B>Anomalous material analyser</B><BR>"
 	dat += "<HR>"
 	if(!owned_scanner)
@@ -50,7 +49,7 @@
 	dat += "<br>"
 	dat += "<hr>"
 	dat += "<a href='?src=\ref[src]'>Refresh</a> <a href='?src=\ref[src];close=1'>Close</a>"
-	user << browse(dat, "window=artanalyser;size=450x500")
+	show_browser(user, dat, "window=artanalyser;size=450x500")
 	user.set_machine(src)
 	onclose(user, "artanalyser")
 
@@ -76,7 +75,7 @@
 		P.info += "<br>"
 		P.info += "\icon[scanned_object] [results]"
 		P.stamped = list(/obj/item/weapon/stamp)
-		P.overlays = list("paper_stamped")
+		P.queue_icon_update()
 
 		if(scanned_object && istype(scanned_object, /obj/machinery/artifact))
 			var/obj/machinery/artifact/A = scanned_object

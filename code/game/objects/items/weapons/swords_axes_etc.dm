@@ -17,7 +17,7 @@
 	force = 10
 
 /obj/item/weapon/melee/classic_baton/attack(mob/M as mob, mob/living/user as mob)
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
 		user.Weaken(3 * force)
 		if(ishuman(user))
@@ -47,8 +47,6 @@
 		user.visible_message("<span class='warning'>With a flick of their wrist, [user] extends their telescopic baton.</span>",\
 		"<span class='warning'>You extend the baton.</span>",\
 		"You hear an ominous click.")
-		icon_state = "telebaton_1"
-		item_state = "telebaton_1"
 		w_class = ITEM_SIZE_NORMAL
 		force = 15//quite robust
 		attack_verb = list("smacked", "struck", "slapped")
@@ -56,32 +54,30 @@
 		user.visible_message("<span class='notice'>\The [user] collapses their telescopic baton.</span>",\
 		"<span class='notice'>You collapse the baton.</span>",\
 		"You hear a click.")
-		icon_state = "telebaton_0"
-		item_state = "telebaton_0"
 		w_class = ITEM_SIZE_SMALL
 		force = 3//not so robust now
 		attack_verb = list("hit", "punched")
 
-	update_held_icon()
-
 	playsound(src.loc, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
+	update_icon()
+	update_held_icon()
 
-	if(blood_overlay && blood_DNA && (blood_DNA.len >= 1)) //updates blood overlay, if any
-		overlays.Cut()//this might delete other item overlays as well but eeeeeeeh
-
-		var/icon/I = new /icon(src.icon, src.icon_state)
-		I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD)
-		I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY)
-		blood_overlay = I
-
+/obj/item/weapon/melee/telebaton/on_update_icon()
+	if(on)
+		icon_state = "telebaton_1"
+		item_state = "telebaton_1"
+	else
+		icon_state = "telebaton_0"
+		item_state = "telebaton_0"
+	if(length(blood_DNA))
+		generate_blood_overlay(TRUE) // Force recheck.
+		overlays.Cut()
 		overlays += blood_overlay
-
-	return
 
 /obj/item/weapon/melee/telebaton/attack(mob/target as mob, mob/living/user as mob)
 	if(on)
-		if ((CLUMSY in user.mutations) && prob(50))
+		if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 			to_chat(user, "<span class='warning'>You club yourself over the head.</span>")
 			user.Weaken(3 * force)
 			if(ishuman(user))

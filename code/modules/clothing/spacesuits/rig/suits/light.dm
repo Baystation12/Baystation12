@@ -5,13 +5,21 @@
 	icon_state = "ninja_rig"
 	suit_type = "light suit"
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/cell)
-	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED
+		)
 	siemens_coefficient = 0.4
 	emp_protection = 10
 	online_slowdown = 0
-	item_flags = ITEM_FLAG_STOPPRESSUREDAMAGE | ITEM_FLAG_THICKMATERIAL
+	item_flags = ITEM_FLAG_THICKMATERIAL
 	offline_slowdown = TINT_NONE
 	offline_vision_restriction = TINT_NONE
+	max_pressure_protection = LIGHT_RIG_MAX_PRESSURE
+	min_pressure_protection = 0
 
 	chest_type = /obj/item/clothing/suit/space/rig/light
 	helm_type =  /obj/item/clothing/head/helmet/space/rig/light
@@ -71,13 +79,22 @@
 
 /obj/item/clothing/gloves/lightrig/hacker
 	siemens_coefficient = 0
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
+
 
 /obj/item/weapon/rig/light/ninja
 	name = "ominous suit control module"
 	desc = "A unique, vaccum-proof suit of nano-enhanced armor designed specifically for assassins."
 	suit_type = "ominous"
 	icon_state = "ninja_rig"
-	armor = list(melee = 50, bullet = 15, laser = 30, energy = 10, bomb = 25, bio = 100, rad = 30)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES,
+		bullet = ARMOR_BALLISTIC_PISTOL,
+		laser = ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED
+		)
 	siemens_coefficient = 0.2 //heavy hardsuit level shock protection
 	emp_protection = 40 //change this to 30 if too high.
 	online_slowdown = 0
@@ -95,7 +112,7 @@
 		/obj/item/rig_module/vision,
 		/obj/item/rig_module/voice,
 		/obj/item/rig_module/fabricator/energy_net,
-		/obj/item/rig_module/chem_dispenser,
+		/obj/item/rig_module/chem_dispenser/combat,
 		/obj/item/rig_module/grenade_launcher/ninja,
 		/obj/item/rig_module/ai_container,
 		/obj/item/rig_module/power_sink,
@@ -116,7 +133,7 @@
 		if(!findtext(input, "the", 1, 4))
 			input = "\improper [input]"
 		SetName(input)
-		to_chat(M, "Suit naming succesful!")
+		to_chat(M, "Suit naming successful!")
 		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
 		return 1
 
@@ -131,13 +148,14 @@
 	var/input = sanitizeSafe(input("Please describe your voidsuit in 128 letters or less.", "write description"), MAX_DESC_LEN)
 	if(src && input && !M.incapacitated() && in_range(M,src))
 		desc = input
-		to_chat(M, "Suit description succesful!")
+		to_chat(M, "Suit description successful!")
 		verbs -= /obj/item/weapon/rig/light/ninja/verb/rename_suit
 		return 1
 
 /obj/item/clothing/gloves/rig/light/ninja
 	name = "insulated gloves"
 	siemens_coefficient = 0
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_NOCUFFS
 
 /obj/item/clothing/suit/space/rig/light/ninja
 	breach_threshold = 38 //comparable to regular hardsuits

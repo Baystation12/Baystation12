@@ -85,7 +85,7 @@
 /obj/machinery/camera/proc/upgradeMotion()
 	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
 	setPowerUsage()
-	START_PROCESSING(SSmachines, src)
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_SELF)
 	update_coverage()
 
 /obj/machinery/camera/proc/setPowerUsage()
@@ -94,4 +94,4 @@
 		mult++
 	if (isMotion())
 		mult++
-	active_power_usage = mult*initial(active_power_usage)
+	change_power_consumption(mult*initial(active_power_usage), POWER_USE_ACTIVE)

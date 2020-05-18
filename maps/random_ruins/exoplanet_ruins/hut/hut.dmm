@@ -1,0 +1,170 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/simulated/wall/silver,
+/area/template_noop)
+"c" = (
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"d" = (
+/obj/random/trash,
+/obj/structure/inflatable/door,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"e" = (
+/obj/machinery/artifact_scanpad,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"f" = (
+/obj/machinery/r_n_d/server,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"g" = (
+/obj/structure/curtain/black,
+/turf/simulated/floor/carpet,
+/area/template_noop)
+"h" = (
+/obj/structure/inflatable/door,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"i" = (
+/obj/structure/filingcabinet,
+/obj/effect/decal/cleanable/cobweb,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"j" = (
+/obj/structure/closet/crate/freezer/rations,
+/obj/effect/decal/cleanable/cobweb2,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"k" = (
+/obj/structure/bed/chair/wheelchair,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"l" = (
+/obj/structure/table/marble,
+/obj/item/device/flashlight/lamp,
+/obj/structure/sign/monkey_painting{
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"m" = (
+/obj/structure/table/marble,
+/obj/item/weapon/paper_bin,
+/obj/random/voidhelmet,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"n" = (
+/obj/structure/gravemarker/random,
+/turf/template_noop,
+/area/template_noop)
+"o" = (
+/obj/structure/bookcase/manuals/xenoarchaeology,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"p" = (
+/obj/random/junk,
+/obj/random/loot,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"q" = (
+/obj/item/weapon/pen/multi,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"r" = (
+/mob/living/bot/medbot,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"t" = (
+/obj/structure/bed,
+/obj/item/weapon/bedsheet/rainbow,
+/obj/random/drinkbottle,
+/obj/random/trash,
+/turf/simulated/floor/carpet,
+/area/template_noop)
+"u" = (
+/obj/structure/table/rack,
+/obj/item/clothing/glasses/eyepatch/hud/medical,
+/obj/random/loot,
+/obj/random/loot,
+/obj/random/hat,
+/obj/random/voidsuit,
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"G" = (
+/obj/structure/sign/science_1{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/dark,
+/area/template_noop)
+"K" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/template_noop)
+
+(1,1,1) = {"
+b
+b
+b
+K
+b
+b
+b
+"}
+(2,1,1) = {"
+b
+i
+p
+u
+e
+f
+b
+"}
+(3,1,1) = {"
+b
+o
+c
+c
+q
+l
+b
+"}
+(4,1,1) = {"
+b
+j
+c
+r
+k
+m
+b
+"}
+(5,1,1) = {"
+b
+b
+b
+G
+b
+b
+b
+"}
+(6,1,1) = {"
+a
+d
+h
+c
+g
+t
+b
+"}
+(7,1,1) = {"
+n
+b
+b
+b
+b
+b
+b
+"}

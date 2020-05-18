@@ -13,7 +13,7 @@
 /turf/space,
 /area/space)
 "ae" = (
-/obj/effect/overmap/sector/smugglers,
+/obj/effect/overmap/visitable/sector/smugglers,
 /turf/space,
 /area/space)
 "af" = (
@@ -21,7 +21,7 @@
 /area/smugglers/base)
 "ag" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1503;
+	frequency = 1439;
 	icon_state = "door_closed";
 	locked = 0
 	},
@@ -31,11 +31,11 @@
 /turf/simulated/floor/asteroid,
 /area/space)
 "aj" = (
-/obj/item/ammo_casing/a50{
+/obj/item/ammo_casing/pistol/magnum{
 	pixel_x = 5;
 	pixel_y = 5
 	},
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /obj/item/weapon/shovel{
 	pixel_x = 10;
 	pixel_y = -5
@@ -48,28 +48,17 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "al" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/wall/r_wall,
 /area/smugglers/base)
 "am" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1503;
+	frequency = 1439;
 	master_tag = "asteroid_base_dock_airlock";
 	pixel_x = 25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 2;
-	frequency = 1503;
 	id_tag = "asteroid_base_dock_pump"
 	},
 /obj/effect/floor_decal/industrial/warning/full,
@@ -95,7 +84,7 @@
 /area/space)
 "aq" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1503;
+	frequency = 1439;
 	icon_state = "door_closed";
 	locked = 0;
 	name = "Internal Airlock"
@@ -103,43 +92,7 @@
 /turf/simulated/floor,
 /area/smugglers/base)
 "ar" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/machinery/door/blast/regular,
-/obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
-	},
-/turf/simulated/floor/airless,
-/area/smugglers/base)
-"as" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/machinery/door/blast/regular,
-/obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
-	},
-/turf/simulated/floor/airless,
-/area/smugglers/base)
-"at" = (
-/obj/structure/window/reinforced,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular,
 /obj/structure/cable{
 	icon_state = "0-2";
@@ -158,7 +111,7 @@
 "av" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1503;
+	frequency = 1439;
 	id_tag = "asteroid_base_dock_airlock";
 	name = "Dock Airlock Controller";
 	pixel_x = -25;
@@ -168,12 +121,12 @@
 	},
 /obj/machinery/access_button{
 	command = "cycle_interior";
-	frequency = 1503;
+	frequency = 1439;
 	master_tag = "asteroid_base_dock_airlock";
 	name = "interior access button";
 	pixel_x = 28;
 	pixel_y = 24;
-	req_one_access = list(13)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 5
@@ -305,7 +258,7 @@
 /area/smugglers/base)
 "aH" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1501;
+	frequency = 1439;
 	id_tag = "asteroid_base_east_airlock";
 	pixel_y = 25;
 	tag_airpump = "asteroid_base_east_pump";
@@ -316,12 +269,12 @@
 	},
 /obj/machinery/access_button{
 	command = "cycle_interior";
-	frequency = 1501;
+	frequency = 1439;
 	master_tag = "asteroid_base_east_airlock";
 	name = "interior access button";
 	pixel_x = -28;
 	pixel_y = 24;
-	req_one_access = list(13)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -330,7 +283,7 @@
 /area/smugglers/base)
 "aI" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1501;
+	frequency = 1439;
 	icon_state = "door_locked";
 	id_tag = "asteroid_base_east_inner";
 	locked = 1;
@@ -348,13 +301,12 @@
 	icon_state = "beartrap1"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1501;
+	frequency = 1439;
 	master_tag = "asteroid_base_east_airlock";
 	pixel_y = -25
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 1501;
 	id_tag = "asteroid_base_east_pump"
 	},
 /obj/effect/floor_decal/industrial/warning/full,
@@ -362,7 +314,7 @@
 /area/smugglers/base)
 "aK" = (
 /obj/machinery/door/airlock/external{
-	frequency = 1501;
+	frequency = 1439;
 	icon_state = "door_locked";
 	id_tag = "asteroid_base_east_outer";
 	locked = 1
@@ -371,7 +323,7 @@
 /area/smugglers/base)
 "aL" = (
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1501;
+	frequency = 1439;
 	master_tag = "asteroid_base_east_airlock";
 	name = "exterior access button";
 	pixel_x = -25;
@@ -493,7 +445,7 @@
 "aX" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
+	
 	},
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor,
@@ -546,7 +498,7 @@
 "bf" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
+	
 	},
 /obj/item/weapon/tank/air{
 	pixel_x = 5
@@ -595,7 +547,7 @@
 "bm" = (
 /obj/structure/table/rack{
 	dir = 8;
-	layer = 2.9
+	
 	},
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
@@ -1002,7 +954,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/smugglers/dorms)
 "cq" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -1019,7 +971,7 @@
 /obj/structure/table/standard,
 /obj/effect/decal/cleanable/dirt,
 /obj/item/weapon/paper/smug_3,
-/obj/item/weapon/flame/lighter/random,
+/obj/item/weapon/flame/lighter,
 /obj/random/coin,
 /turf/simulated/floor/tiled,
 /area/smugglers/dorms)
@@ -1084,13 +1036,6 @@
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav2,
 /turf/space,
 /area/space)
-"cD" = (
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 50;
-	generation_width = 50
-	},
-/turf/space,
-/area/space)
 "cE" = (
 /obj/effect/shuttle_landmark/nav_asteroid_base/nav1,
 /turf/space,
@@ -1104,7 +1049,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 15
 	},
 /obj/item/weapon/storage/mirror{
@@ -3328,7 +3273,7 @@ aa
 aa
 aa
 aa
-cD
+aa
 aa
 aa
 aa
@@ -4918,7 +4863,7 @@ aa
 aa
 aa
 aa
-as
+ar
 aC
 aS
 aZ
@@ -5020,7 +4965,7 @@ aa
 aa
 aa
 aa
-at
+ar
 aD
 aT
 be

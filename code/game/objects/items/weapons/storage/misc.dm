@@ -25,9 +25,6 @@
 	new /obj/item/weapon/dice/d20( src )
 	new /obj/item/weapon/dice/d100( src )
 
-/*
- * Donut Box
- */
 
 /obj/item/weapon/storage/box/donut
 	icon = 'icons/obj/food.dmi'
@@ -38,7 +35,7 @@
 
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 6)
 
-/obj/item/weapon/storage/box/donut/update_icon()
+/obj/item/weapon/storage/box/donut/on_update_icon()
 	overlays.Cut()
 	var/i = 0
 	for(var/obj/item/weapon/reagent_containers/food/snacks/donut/D in contents)
@@ -48,8 +45,7 @@
 /obj/item/weapon/storage/box/donut/empty
 	startswith = null
 
-//putting this here instead of in fancy because these are not fancy. This may change in future updates if I feel like it. But until then, simple storage for simple devices.
-
+//misc tobacco nonsense
 /obj/item/weapon/storage/cigpaper
 	name = "\improper Gen. Eric cigarette paper"
 	desc = "A ubiquitous brand of cigarette paper, allegedly endorsed by 24th century war hero General Eric Osmundsun for rolling your own cigarettes. Osmundsun died in a freak kayak accident. As it ate him alive during his last campaign. It was pretty freaky."
@@ -61,7 +57,6 @@
 	max_storage_space = 10
 	throwforce = 2
 	slot_flags = SLOT_BELT
-
 	startswith = list(/obj/item/paper/cig = 10)
 
 /obj/item/weapon/storage/cigpaper/fancy
@@ -69,16 +64,13 @@
 	desc = "A fancy brand of Trident cigarette paper, for rolling your own cigarettes. Like a person who appreciates the finer things in life."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "fancycigpaperbook"
-
 	startswith = list(/obj/item/paper/cig/fancy = 10)
-
 
 /obj/item/weapon/storage/cigpaper/filters
 	name = "box of cigarette filters"
 	desc = "A box of generic cigarette filters for those who rolls their own but prefers others to inhale the fumes. Not endorsed by Late General Osmundsun."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "filterbin"
-
 	startswith = list(/obj/item/paper/cig/filter = 10)
 
 /obj/item/weapon/storage/chewables
@@ -95,82 +87,85 @@
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco = 6)
 	make_exact_fit()
 
-
-
-//tobacco for rolling cigs, stored seperately.
-
+//loose leaf
 /obj/item/weapon/storage/chewables/rollable
 	name = "bag of tobacco"
 	max_storage_space = 8
 
 /obj/item/weapon/storage/chewables/rollable/bad
-	name = "\improper MenAtArms"
-	desc = "A bag of coarse gritty tobacco marketed towards leather-necks, "
-	startswith = list(/obj/item/weapon/reagent_containers/terrbacco/bad = 8)
+	name = "bag of Men at Arms tobacco"
+	desc = "A bag of coarse gritty tobacco marketed towards leather-necks."
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco/bad = 8)
 	icon_state = "rollcoarse"
 
 /obj/item/weapon/storage/chewables/rollable/generic
-	name = "\improper BlueSpess"
+	name = "bag of BluSpace tobacco"
 	desc = "Decent quality tobacco for mid-income earners and long haul space sailors."
-	startswith = list(/obj/item/weapon/reagent_containers/terrbacco = 8)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco = 8)
 	icon_state = "rollgeneric"
 
 /obj/item/weapon/storage/chewables/rollable/fine
-	name = "\improper Golden Sol"
+	name = "bag of Golden Sol tobacco"
 	desc = "A exclusive brand of overpriced tobacco, allegedly grown at a lagrange point station in Sol system."
-	startswith = list(/obj/item/weapon/reagent_containers/terrbacco/fine = 8)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/grown/dried_tobacco/fine = 8)
 	icon_state = "rollfine"
 
-//chewing tobacco storage units and nicotine gum
+//chewing tobacco
 /obj/item/weapon/storage/chewables/tobacco
-	name = "\improper Lenny's chewing tobacco"
+	name = "tin of Lenny's brand chewing tobacco"
 	desc = "A generic brand of chewing tobacco, for when you can't even be assed to light up."
 	icon_state = "chew_levi"
 	item_state = "Dpacket"
-
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco/lenni = 6)
 
 /obj/item/weapon/storage/chewables/tobacco2
-	name = "\improper RougeLady chewing tobacco"
-	desc = "A finer grade of chewing tobacco, fit for a woman. Whom chews tobacco."
+	name = "tin of Red Lady chewing tobacco"
+	desc = "A finer grade of chewing tobacco."
 	icon_state = "chew_redman"
 	item_state = "redlady"
-
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco/redlady = 6)
 
 /obj/item/weapon/storage/chewables/tobacco3
-	name = "\improper Nico Tine Gum"
-	desc = "Cut out the middleman for your addiction fix."
+	name = "box of Nico-Tine gum"
+	desc = "A Sol-approved brand of nicotine gum. Cut out the middleman for your addiction fix."
 	icon_state = "chew_nico"
-
 	startswith = list(/obj/item/clothing/mask/chewable/tobacco/nico = 6)
 
-/obj/item/weapon/storage/chewables/candy
-	name = "master candy box, courtesy of candy cadet"
-	desc = "a master type so I don't have to define where to derive the icons every time//that conked out, boxes are now in cigarette.dmi"
-
+//non-tobacco
 /obj/item/weapon/storage/chewables/candy/cookies
-	name = "\improper Getmore Cookies"
+	name = "pack of Getmore Cookies"
 	desc = "A pack of delicious cookies, and possibly the only product in Getmores Chocolate Corp lineup that has any trace of chocolate in it."
 	icon_state = "cookiebag"
 	max_storage_space = 6
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/cookie = 6)
 	make_exact_fit()
 
-
 /obj/item/weapon/storage/chewables/candy/gum
-	name = "\improper Rainbo-Gums"
-	desc = "A mixed pack of delicious fruit (and trace amounts of fuel) flavored bubble-gums!"
+	name = "pack of Rainbo-Gums"
+	desc = "A mixed pack of delicious fruit flavored bubble-gums!"
 	icon_state = "gumpack"
 	max_storage_space = 8
 	startswith = list(/obj/item/clothing/mask/chewable/candy/gum = 8)
 	make_exact_fit()
 
-
 /obj/item/weapon/storage/chewables/candy/medicallollis
-	name = "\improper Medibay-lols"
+	name = "pack of medicinal lollipops"
 	desc = "A mixed pack of medicinal flavored lollipops. These have no business being on store shelves."
 	icon_state = "lollipack"
 	max_storage_space = 20
 	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 20)
 	make_exact_fit()
+
+/obj/item/weapon/storage/medical_lolli_jar
+	name = "lollipops jar"
+	desc = "A mixed pack of flavored medicinal lollipops. Perfect for small boo-boos."
+	icon_state = "lollijar"
+	max_storage_space = 20
+	startswith = list(/obj/item/clothing/mask/chewable/candy/lolli/weak_meds = 15)
+
+/obj/item/weapon/storage/medical_lolli_jar/on_update_icon()
+	. = ..()
+	if(contents.len)
+		icon_state = "lollijar"
+	else
+		icon_state = "lollijar_empty"

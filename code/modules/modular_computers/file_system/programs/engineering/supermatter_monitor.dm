@@ -11,6 +11,7 @@
 	requires_ntnet = 1
 	network_destination = "supermatter monitoring system"
 	size = 5
+	category = PROG_ENG
 	var/last_status = 0
 
 /datum/computer_file/program/supermatter_monitor/process_tick()
@@ -21,8 +22,7 @@
 		last_status = new_status
 		ui_header = "smmon_[last_status].gif"
 		program_icon_state = "smmon_[last_status]"
-		if(istype(computer))
-			computer.update_icon()
+		update_computer_icon()
 
 /datum/nano_module/supermatter_monitor
 	name = "Supermatter monitor"
@@ -41,10 +41,7 @@
 // Refreshes list of active supermatter crystals
 /datum/nano_module/supermatter_monitor/proc/refresh()
 	supermatters = list()
-	var/turf/T = get_turf(nano_host())
-	if(!T)
-		return
-	var/valid_z_levels = (GetConnectedZlevels(T.z) & GLOB.using_map.station_levels)
+	var/valid_z_levels = GetConnectedZlevels(get_host_z())
 	for(var/obj/machinery/power/supermatter/S in SSmachines.machinery)
 		// Delaminating, not within coverage, not on a tile.
 		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !istype(S.loc, /turf/))
@@ -59,8 +56,20 @@
 	for(var/obj/machinery/power/supermatter/S in supermatters)
 		. = max(., S.get_status())
 
+/datum/nano_module/supermatter_monitor/proc/process_data_output(skill, value)
+	switch(skill)
+		if(SKILL_NONE)
+			return (0.6 + 0.8 * rand()) * value
+		if(SKILL_BASIC)
+			return (0.8 + 0.4 * rand()) * value
+		if(SKILL_ADEPT)
+			return (0.95 + 0.1 * rand()) * value
+		else
+			return value
+
 /datum/nano_module/supermatter_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
+	var/engine_skill = user.get_skill_value(SKILL_ENGINES)
 
 	if(istype(active))
 		var/turf/T = get_turf(active)
@@ -73,18 +82,18 @@
 			return
 
 		data["active"] = 1
-		data["SM_integrity"] = active.get_integrity()
-		data["SM_power"] = active.power
-		data["SM_ambienttemp"] = air.temperature
-		data["SM_ambientpressure"] = air.return_pressure()
-		data["SM_EPR"] = active.get_epr()
+		data["SM_integrity"] = min(process_data_output(engine_skill, active.get_integrity()), 100)
+		data["SM_power"] = process_data_output(engine_skill, active.power)
+		data["SM_ambienttemp"] = process_data_output(engine_skill, air.temperature)
+		data["SM_ambientpressure"] = process_data_output(engine_skill, air.return_pressure())
+		data["SM_EPR"] = process_data_output(engine_skill, active.get_epr())
 		if(air.total_moles)
-			data["SM_gas_O2"] = round(100*air.gas["oxygen"]/air.total_moles,0.01)
-			data["SM_gas_CO2"] = round(100*air.gas["carbon_dioxide"]/air.total_moles,0.01)
-			data["SM_gas_N2"] = round(100*air.gas["nitrogen"]/air.total_moles,0.01)
-			data["SM_gas_PH"] = round(100*air.gas["phoron"]/air.total_moles,0.01)
-			data["SM_gas_N2O"] = round(100*air.gas["sleeping_agent"]/air.total_moles,0.01)
-			data["SM_gas_H2"] = round(100*air.gas["hydrogen"]/air.total_moles,0.01)
+			data["SM_gas_O2"] = round(100*air.gas[GAS_OXYGEN]/air.total_moles,0.01)
+			data["SM_gas_CO2"] = round(100*air.gas[GAS_CO2]/air.total_moles,0.01)
+			data["SM_gas_N2"] = round(100*air.gas[GAS_NITROGEN]/air.total_moles,0.01)
+			data["SM_gas_PH"] = round(100*air.gas[GAS_PHORON]/air.total_moles,0.01)
+			data["SM_gas_N2O"] = round(100*air.gas[GAS_N2O]/air.total_moles,0.01)
+			data["SM_gas_H2"] = round(100*air.gas[GAS_HYDROGEN]/air.total_moles,0.01)
 		else
 			data["SM_gas_O2"] = 0
 			data["SM_gas_CO2"] = 0
@@ -101,14 +110,14 @@
 
 			SMS.Add(list(list(
 			"area_name" = A.name,
-			"integrity" = S.get_integrity(),
+			"integrity" = process_data_output(engine_skill, S.get_integrity()),
 			"uid" = S.uid
 			)))
 
 		data["active"] = 0
 		data["supermatters"] = SMS
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "supermatter_monitor.tmpl", "Supermatter Monitoring", 600, 400, state = state)
 		if(host.update_layout())

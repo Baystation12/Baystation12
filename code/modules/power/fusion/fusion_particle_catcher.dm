@@ -3,10 +3,9 @@
 	density = 1
 	anchored = 1
 	invisibility = 101
+	light_color = COLOR_BLUE
 	var/obj/effect/fusion_em_field/parent
 	var/mysize = 0
-
-	light_color = COLOR_BLUE
 
 /obj/effect/fusion_particle_catcher/Destroy()
 	. =..()

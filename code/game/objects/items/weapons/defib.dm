@@ -18,8 +18,8 @@
 	var/obj/item/weapon/shockpaddles/linked/paddles
 	var/obj/item/weapon/cell/bcell = null
 
-/obj/item/weapon/defibrillator/New() //starts without a cell for rnd
-	..()
+/obj/item/weapon/defibrillator/Initialize() //starts without a cell for rnd
+	. = ..()
 	if(ispath(paddles))
 		paddles = new paddles(src, src)
 	else
@@ -37,7 +37,7 @@
 /obj/item/weapon/defibrillator/loaded //starts with regular power cell for R&D to replace later in the round.
 	bcell = /obj/item/weapon/cell/apc
 
-/obj/item/weapon/defibrillator/update_icon()
+/obj/item/weapon/defibrillator/on_update_icon()
 	var/list/new_overlays = list()
 
 	if(paddles) //in case paddles got destroyed somehow.
@@ -56,6 +56,13 @@
 		new_overlays += "[initial(icon_state)]-nocell"
 
 	overlays = new_overlays
+
+/obj/item/weapon/defibrillator/examine(mob/user)
+	. = ..()
+	if(bcell)
+		to_chat(user, "The charge meter is showing [bcell.percent()]% charge left.")
+	else
+		to_chat(user, "There is no cell inside.")
 
 /obj/item/weapon/defibrillator/ui_action_click()
 	toggle_paddles()
@@ -94,7 +101,7 @@
 	else if(isScrewdriver(W))
 		if(bcell)
 			bcell.update_icon()
-			bcell.forceMove(get_turf(src.loc))
+			bcell.dropInto(loc)
 			bcell = null
 			to_chat(user, "<span class='notice'>You remove the cell from \the [src].</span>")
 			update_icon()
@@ -235,7 +242,7 @@
 	update_icon()
 	..()
 
-/obj/item/weapon/shockpaddles/update_icon()
+/obj/item/weapon/shockpaddles/on_update_icon()
 	icon_state = "defibpaddles[wielded]"
 	item_state = "defibpaddles[wielded]"
 	if(cooldown)
@@ -372,12 +379,13 @@
 	if(istype(potato) && potato.cell)
 		var/obj/item/weapon/cell/C = potato.cell
 		C.give(chargecost)
+	H.AdjustSleeping(-60)
 	log_and_message_admins("used \a [src] to revive [key_name(H)].")
 
 /obj/item/weapon/shockpaddles/proc/lowskill_revive(mob/living/carbon/human/H, mob/living/user)
 	if(prob(60))
 		playsound(get_turf(src), 'sound/machines/defib_zap.ogg', 100, 1, -1)
-		H.electrocute_act(burn_damage_amt*4, src, def_zone = BP_CHEST)	
+		H.electrocute_act(burn_damage_amt*4, src, def_zone = BP_CHEST)
 		user.visible_message("<span class='warning'><i>The paddles were misaligned! \The [user] shocks [H] with \the [src]!</i></span>", "<span class='warning'>The paddles were misaligned! You shock [H] with \the [src]!</span>")
 		return 0
 	if(prob(50))
@@ -423,6 +431,10 @@
 	var/burn_damage = H.electrocute_act(burn_damage_amt*2, src, def_zone = target_zone)
 	if(burn_damage > 15 && H.can_feel_pain())
 		H.emote("scream")
+	var/obj/item/organ/internal/heart/doki = LAZYACCESS(affecting.internal_organs, BP_HEART)
+	if(istype(doki) && doki.pulse && !doki.open && prob(10))
+		to_chat(doki, "<span class='danger'>Your [doki] has stopped!</span>")
+		doki.pulse = PULSE_NONE
 
 	admin_attack_log(user, H, "Electrocuted using \a [src]", "Was electrocuted with \a [src]", "used \a [src] to electrocute")
 
@@ -507,6 +519,30 @@
 		var/mob/living/silicon/robot/R = src.loc
 		return (R.cell && R.cell.checked_use(charge_amt))
 
+/obj/item/weapon/shockpaddles/rig
+	name = "mounted defibrillator"
+	desc = "If you can see this something is very wrong, report this bug."
+	cooldowntime = (4 SECONDS)
+	chargetime = (1 SECOND)
+	chargecost = 150
+	safety = 0
+	wielded = 1
+
+/obj/item/weapon/shockpaddles/rig/check_charge(var/charge_amt)
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		return (module.holder && module.holder.cell && module.holder.cell.check_charge(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/checked_use(var/charge_amt)
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		return (module.holder && module.holder.cell && module.holder.cell.checked_use(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/set_cooldown(var/delay)
+	..()
+	if(istype(src.loc, /obj/item/rig_module/device/defib))
+		var/obj/item/rig_module/device/defib/module = src.loc
+		module.next_use = world.time + delay
 /*
 	Shockpaddles that are linked to a base unit
 */
@@ -557,12 +593,13 @@
 	return 1
 
 /obj/item/weapon/shockpaddles/standalone/checked_use(var/charge_amt)
-	radiation_repository.radiate(src, charge_amt/12) //just a little bit of radiation. It's the price you pay for being powered by magic I guess
+	SSradiation.radiate(src, charge_amt/12) //just a little bit of radiation. It's the price you pay for being powered by magic I guess
 	return 1
 
 /obj/item/weapon/shockpaddles/standalone/Process()
 	if(fail_counter > 0)
-		radiation_repository.radiate(src, fail_counter--)
+		SSradiation.radiate(src, (fail_counter * 2))
+		fail_counter--
 	else
 		STOP_PROCESSING(SSobj, src)
 

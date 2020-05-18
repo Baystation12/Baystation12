@@ -13,8 +13,8 @@
 	a_intent = I_HURT
 	stop_automated_movement = 1
 	status_flags = CANPUSH
-	universal_speak = 0
-	universal_understand = 1
+	universal_speak = FALSE
+	universal_understand = TRUE
 	attack_sound = 'sound/weapons/spiderlunge.ogg'
 	min_gas = null
 	max_gas = null
@@ -24,11 +24,18 @@
 	supernatural = 1
 	see_in_dark = 8
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
-	var/nullblock = 0
-
 	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
 	mob_push_flags = ALLMOBS
+	bleed_colour = "#331111"
 
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
+	var/nullblock = 0
 	var/list/construct_spells = list()
 
 /mob/living/simple_animal/construct/cultify()
@@ -38,8 +45,8 @@
 	..()
 	name = text("[initial(name)] ([random_id(/mob/living/simple_animal/construct, 1000, 9999)])")
 	real_name = name
-	add_language("Cult")
-	add_language("Occult")
+	add_language(LANGUAGE_CULT)
+	add_language(LANGUAGE_CULT_GLOBAL)
 	for(var/spell in construct_spells)
 		src.add_spell(new spell, "const_spell_ready")
 	update_icon()
@@ -50,7 +57,7 @@
 	ghostize()
 	qdel(src)
 
-/mob/living/simple_animal/construct/update_icon()
+/mob/living/simple_animal/construct/on_update_icon()
 	overlays.Cut()
 	..()
 	add_glow()
@@ -112,11 +119,12 @@
 	status_flags = 0
 	resistance = 10
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	can_escape = 1
+	can_escape = TRUE
 
 /mob/living/simple_animal/construct/armoured/Life()
 	weakened = 0
-	..()
+	if ((. = ..()))
+		return 
 
 /mob/living/simple_animal/construct/armoured/bullet_act(var/obj/item/projectile/P)
 	if(istype(P, /obj/item/projectile/energy) || istype(P, /obj/item/projectile/beam))
@@ -219,7 +227,7 @@
 	var/energy = 0
 	var/max_energy = 1000
 	construct_spells = list(/spell/aoe_turf/conjure/forcewall/lesser)
-	can_escape = 1
+	can_escape = TRUE
 
 ////////////////////////Harvester////////////////////////////////
 
@@ -253,7 +261,7 @@
 	eye_glow.plane = EFFECTS_ABOVE_LIGHTING_PLANE
 	eye_glow.layer = EYE_GLOW_LAYER
 	overlays += eye_glow
-	set_light(-10, 0.1, 3, l_color = "#ffffff")
+	set_light(-2, 0.1, 1.5, l_color = "#ffffff")
 
 ////////////////HUD//////////////////////
 
@@ -274,7 +282,7 @@
 		silence_spells(purge)
 
 /mob/living/simple_animal/construct/armoured/Life()
-	..()
+	. = ..()
 	if(healths)
 		switch(health)
 			if(250 to INFINITY)		healths.icon_state = "juggernaut_health0"
@@ -288,7 +296,7 @@
 
 
 /mob/living/simple_animal/construct/behemoth/Life()
-	..()
+	. = ..()
 	if(healths)
 		switch(health)
 			if(750 to INFINITY)		healths.icon_state = "juggernaut_health0"
@@ -301,7 +309,7 @@
 			else					healths.icon_state = "juggernaut_health7"
 
 /mob/living/simple_animal/construct/builder/Life()
-	..()
+	. = ..()
 	if(healths)
 		switch(health)
 			if(50 to INFINITY)		healths.icon_state = "artificer_health0"
@@ -316,7 +324,7 @@
 
 
 /mob/living/simple_animal/construct/wraith/Life()
-	..()
+	. = ..()
 	if(healths)
 		switch(health)
 			if(75 to INFINITY)		healths.icon_state = "wraith_health0"
@@ -330,7 +338,7 @@
 
 
 /mob/living/simple_animal/construct/harvester/Life()
-	..()
+	. = ..()
 	if(healths)
 		switch(health)
 			if(150 to INFINITY)		healths.icon_state = "harvester_health0"

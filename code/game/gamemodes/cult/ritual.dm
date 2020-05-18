@@ -14,7 +14,7 @@
 	else
 		to_chat(user, "Hold \the [src] in your hand while drawing a rune to use it.")
 
-/obj/item/weapon/book/tome/examine(var/mob/user)
+/obj/item/weapon/book/tome/examine(mob/user)
 	. = ..()
 	if(!iscultist(user))
 		to_chat(user, "An old, dusty tome with frayed edges and a sinister looking cover.")
@@ -89,12 +89,12 @@
 			damage = 2
 	visible_message("<span class='warning'>\The [src] slices open a finger and begins to chant and paint symbols on the floor.</span>", "<span class='notice'>[self]</span>", "You hear chanting.")
 	if(do_after(src, timer))
-		pay_for_rune(cost * damage)
+		remove_blood_simple(cost * damage)
 		if(locate(/obj/effect/rune) in T)
 			return
 		var/obj/effect/rune/R = new rune(T, get_rune_color(), get_blood_name())
 		var/area/A = get_area(R)
-		log_and_message_admins("created \an [R.cultname] rune at \the [A.name] - [loc.x]-[loc.y]-[loc.z].")
+		log_and_message_admins("created \an [R.cultname] rune at \the [A.name].")
 		R.add_fingerprint(src)
 		return 1
 	return 0
@@ -105,10 +105,10 @@
 		return
 	..()
 
-/mob/proc/pay_for_rune(var/blood)
+/mob/proc/remove_blood_simple(var/blood)
 	return
 
-/mob/living/carbon/human/pay_for_rune(var/blood)
+/mob/living/carbon/human/remove_blood_simple(var/blood)
 	if(should_have_organ(BP_HEART))
 		vessel.remove_reagent(/datum/reagent/blood, blood)
 
@@ -145,8 +145,11 @@ var/list/Tier1Runes = list(
 	/mob/proc/wall_rune,
 	/mob/proc/ajorney_rune,
 	/mob/proc/defile_rune,
+	/mob/proc/stun_imbue,
 	/mob/proc/emp_imbue,
-	/mob/proc/cult_communicate
+	/mob/proc/cult_communicate,
+	/mob/proc/obscure,
+	/mob/proc/reveal
 	)
 
 var/list/Tier2Runes = list(
@@ -273,6 +276,12 @@ var/list/Tier4Runes = list(
 
 	make_rune(/obj/effect/rune/tearreality, cost = 50, tome_required = 1)
 
+/mob/proc/stun_imbue()
+	set category = "Cult Magic"
+	set name = "Imbue: Stun"
+
+	make_rune(/obj/effect/rune/imbue/stun, cost = 20, tome_required = 1)
+
 /mob/proc/emp_imbue()
 	set category = "Cult Magic"
 	set name = "Imbue: EMP"
@@ -288,7 +297,7 @@ var/list/Tier4Runes = list(
 		return
 
 	message_cult_communicate()
-	pay_for_rune(3)
+	remove_blood_simple(3)
 
 	var/input = input(src, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "")
 	if(!input)
@@ -313,3 +322,15 @@ var/list/Tier4Runes = list(
 
 /mob/living/carbon/human/message_cult_communicate()
 	visible_message("<span class='warning'>\The [src] cuts \his finger and starts drawing on the back of \his hand.</span>")
+
+/mob/proc/obscure()
+	set category = "Cult Magic"
+	set name = "Rune: Obscure"
+
+	make_rune(/obj/effect/rune/obscure)
+
+/mob/proc/reveal()
+	set category = "Cult Magic"
+	set name = "Rune: Reveal"
+
+	make_rune(/obj/effect/rune/reveal)

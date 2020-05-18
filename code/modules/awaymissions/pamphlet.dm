@@ -34,5 +34,5 @@
 			environs."
 
 //we don't want the silly text overlay!
-/obj/item/weapon/paper/pamphlet/update_icon()
+/obj/item/weapon/paper/pamphlet/on_update_icon()
 	return

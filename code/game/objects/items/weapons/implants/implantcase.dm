@@ -26,7 +26,7 @@
 		desc = "A case for implants."
 		origin_tech.Cut()
 
-/obj/item/weapon/implantcase/update_icon()
+/obj/item/weapon/implantcase/on_update_icon()
 	if (imp)
 		icon_state = "implantcase-[imp.implant_color]"
 	else
@@ -63,9 +63,8 @@
 		update_description()
 		update_icon()
 		M.update_icon()
-	else if (istype(I, /obj/item/weapon/implant))
+	else if (istype(I, /obj/item/weapon/implant) && user.unEquip(I, src))
 		to_chat(usr, "<span class='notice'>You slide \the [I] into \the [src].</span>")
-		user.drop_from_inventory(I,src)
 		imp = I
 		update_description()
 		update_icon()

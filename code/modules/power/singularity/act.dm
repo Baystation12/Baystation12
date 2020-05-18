@@ -13,7 +13,7 @@
 
 /mob/living/singularity_pull(S, current_size)
 	step_towards(src, S)
-	apply_effect(current_size * 3, IRRADIATE, blocked = getarmor(null, "rad"))
+	apply_damage(current_size * 3, IRRADIATE, damage_flags = DAM_DISPERSED)
 
 /mob/living/carbon/human/singularity_pull(S, current_size)
 	if(current_size >= STAGE_THREE)
@@ -22,7 +22,7 @@
 			if(prob(current_size*5) && hand.w_class >= ((11-current_size)/2) && unEquip(hand))
 				step_towards(hand, S)
 				to_chat(src, "<span class = 'warning'>\The [S] pulls \the [hand] from your grip!</span>")
-		if(!lying && (!shoes || !(shoes.item_flags & ITEM_FLAG_NOSLIP)) && (!species || !(species.species_flags & SPECIES_FLAG_NO_SLIP)) && prob(current_size*5))
+		if(!lying && (!shoes || !(shoes.item_flags & ITEM_FLAG_NOSLIP)) && (!species || !(species.check_no_slip(src))) && prob(current_size*5))
 			to_chat(src, "<span class='danger'>A strong gravitational force slams you to the ground!</span>")
 			Weaken(current_size)
 	..()
@@ -75,8 +75,7 @@
 		prints = ", all touchers : " + src.fingerprintshidden
 
 	SetUniversalState(/datum/universal_state/supermatter_cascade)
-	log_admin("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
-	message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
+	log_and_message_admins("New super singularity made by eating a SM crystal [prints]. Last touched by [src.fingerprintslast].")
 	src.forceMove(null)
 	qdel(src)
 	return 50000

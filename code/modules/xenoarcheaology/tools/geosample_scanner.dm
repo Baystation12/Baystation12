@@ -7,7 +7,6 @@
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "analyser"
 
-	use_power = 1			//1 = idle, 2 = active
 	idle_power_usage = 20
 	active_power_usage = 300
 
@@ -60,8 +59,9 @@
 	coolant_reagents_purity[/datum/reagent/coolant] = 1
 	coolant_reagents_purity[/datum/reagent/adminordrazine] = 2
 
-/obj/machinery/radiocarbon_spectrometer/attack_hand(var/mob/user as mob)
+/obj/machinery/radiocarbon_spectrometer/interface_interact(var/mob/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/radiocarbon_spectrometer/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(scanning)
@@ -94,8 +94,8 @@
 		if(scanned_item)
 			to_chat(user, "<span class=warning>\The [src] already has \a [scanned_item] inside!</span>")
 			return
-		user.drop_item()
-		I.loc = src
+		if(!user.unEquip(I, src))
+			return
 		scanned_item = I
 		to_chat(user, "<span class=notice>You put \the [I] into \the [src].</span>")
 
@@ -150,7 +150,7 @@
 	data["rad_shield_on"] = rad_shield
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -198,7 +198,7 @@
 					radiation = rand() * 15 + 85
 					if(!rad_shield)
 						//irradiate nearby mobs
-						radiation_repository.radiate(src, radiation / 25)
+						SSradiation.radiate(src, radiation / 12.5)
 				else
 					t_left_radspike = pick(10,15,25)
 
@@ -268,7 +268,7 @@
 		var/obj/item/weapon/paper/P = new(src)
 		P.SetName("[src] report #[++report_num]: [scanned_item.name]")
 		P.stamped = list(/obj/item/weapon/stamp)
-		P.overlays = list("paper_stamped")
+		P.queue_icon_update()
 
 		//work out data
 		var/data = " - Mundane object: [scanned_item.desc ? scanned_item.desc : "No information on record."]<br>"
@@ -318,9 +318,9 @@
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
 		P.info += "<b>Scanned item:</b> [scanned_item.name]<br><br>" + data
 		last_scan_data = P.info
-		P.loc = src.loc
+		P.dropInto(loc)
 
-		scanned_item.loc = src.loc
+		scanned_item.dropInto(loc)
 		scanned_item = null
 
 /obj/machinery/radiocarbon_spectrometer/OnTopic(user, href_list)
@@ -357,6 +357,6 @@
 
 	else if(href_list["ejectItem"])
 		if(scanned_item)
-			scanned_item.loc = src.loc
+			scanned_item.dropInto(loc)
 			scanned_item = null
 		. = TOPIC_REFRESH

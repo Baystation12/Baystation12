@@ -76,7 +76,7 @@
 			return !(/datum/dna/gene/basic/cold_resist in M.active_genes)
 		// Probability check
 		var/_prob = 15
-		if(COLD_RESISTANCE in M.mutations)
+		if(MUTATION_COLD_RESISTANCE in M.mutations)
 			_prob=5
 		if(probinj(_prob,(flags&MUTCHK_FORCED)))
 			return 1
@@ -88,7 +88,7 @@
 /datum/dna/gene/basic/cold_resist
 	name="Cold Resistance"
 	activation_messages=list("Your body is filled with warmth.")
-	mutation=COLD_RESISTANCE
+	mutation=MUTATION_COLD_RESISTANCE
 
 	New()
 		block=GLOB.FIREBLOCK
@@ -133,7 +133,7 @@
 
 	can_activate(var/mob/M,var/flags)
 		// Can't be big and small.
-		if(HULK in M.mutations)
+		if(MUTATION_HULK in M.mutations)
 			return 0
 		return ..(M,flags)
 
@@ -143,12 +143,12 @@
 
 	deactivate(var/mob/M, var/connected, var/flags)
 		..(M,connected,flags)
-		M.pass_flags &= ~1 //This may cause issues down the track, but offhand I can't think of any other way for humans to get passtable short of varediting so it should be fine. ~Z
+		M.pass_flags &= ~PASS_FLAG_TABLE
 
 /datum/dna/gene/basic/hulk
 	name="Hulk"
 	activation_messages=list("Your muscles hurt.")
-	mutation=HULK
+	mutation=MUTATION_HULK
 
 	New()
 		block=GLOB.HULKBLOCK
@@ -164,12 +164,11 @@
 			return "hulk_[fat]_s"
 		else
 			return "hulk_[g]_s"
-		return 0
 
 	OnMobLife(var/mob/living/carbon/human/M)
 		if(!istype(M)) return
 		if(M.health <= 25)
-			M.mutations.Remove(HULK)
+			M.mutations.Remove(MUTATION_HULK)
 			M.update_mutations()		//update our mutation overlays
 			to_chat(M, "<span class='warning'>You suddenly feel very weak.</span>")
 			M.Weaken(3)
@@ -178,18 +177,7 @@
 /datum/dna/gene/basic/xray
 	name="X-Ray Vision"
 	activation_messages=list("The walls suddenly disappear.")
-	mutation=XRAY
+	mutation=MUTATION_XRAY
 
 	New()
 		block=GLOB.XRAYBLOCK
-
-/datum/dna/gene/basic/tk
-	name="Telekenesis"
-	activation_messages=list("You feel smarter.")
-	mutation=TK
-	activation_prob=15
-
-	New()
-		block=GLOB.TELEBLOCK
-	OnDrawUnderlays(var/mob/M,var/g,var/fat)
-		return "telekinesishead[fat]_s"

@@ -7,7 +7,7 @@
 	item_state = "plasticx"
 	item_flags = ITEM_FLAG_NO_BLUDGEON
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_ESOTERIC = 2)
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
 	var/atom/target = null
@@ -49,7 +49,8 @@
 	user.do_attack_animation(target)
 
 	if(do_after(user, 50, target) && in_range(user, target))
-		user.drop_item()
+		if(!user.unequip_item())
+			return
 		src.target = target
 		forceMove(null)
 

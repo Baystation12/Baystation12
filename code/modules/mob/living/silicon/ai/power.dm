@@ -73,7 +73,8 @@
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
 				// APC's cell is removed and/or below 1% charge. This prevents the AI from briefly regaining power as we force the APC on, only to lose it again next tick due to 0% cell charge.
-				if(theAPC.cell && theAPC.cell.percent() < 1)
+				var/obj/item/weapon/cell/cell = theAPC.get_cell()
+				if(cell && cell.percent() < 1)
 					to_chat(src, "<span class='danger'>APC internal power reserves are critical. Unable to restore main power.</span>")
 					aiRestorePowerRoutine = AI_RESTOREPOWER_FAILED
 					continue
@@ -132,7 +133,7 @@
 	var/newusage = calculate_power_usage()
 	newusage *= AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER
 	if(psupply)
-		psupply.active_power_usage = newusage
+		psupply.change_power_consumption(newusage, POWER_USE_ACTIVE)
 		psupply.update_power_state()
 
 /mob/living/silicon/ai/proc/handle_power_oxyloss()
@@ -191,7 +192,7 @@
 /obj/machinery/ai_powersupply
 	name="Power Supply"
 	active_power_usage = AI_POWERUSAGE_NORMAL * AI_POWERUSAGE_OXYLOSS_TO_WATTS_MULTIPLIER
-	use_power = 2
+	use_power = POWER_USE_ACTIVE
 	power_channel = EQUIP
 	var/mob/living/silicon/ai/powered_ai = null
 	invisibility = 100
@@ -199,7 +200,6 @@
 /obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
 	powered_ai = ai
 	powered_ai.psupply = src
-	forceMove(powered_ai)
 	..()
 
 /obj/machinery/ai_powersupply/Destroy()
@@ -207,7 +207,7 @@
 	powered_ai = null
 
 /obj/machinery/ai_powersupply/proc/update_power_state()
-	use_power = get_power_state()
+	update_use_power(get_power_state())
 
 /obj/machinery/ai_powersupply/proc/get_power_state()
 	// Dead, powered by APU, admin power, or inside an item (inteliCard/IIS). No power usage.

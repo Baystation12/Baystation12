@@ -27,6 +27,13 @@
 	faction = "faithless"
 	supernatural = 1
 
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
 /mob/living/simple_animal/hostile/faithless/Allow_Spacemove(var/check_drift = 0)
 	return 1
 

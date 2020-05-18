@@ -1,0 +1,31 @@
+<center><h2>Skills for {{:data.name}}, {{:data.job}}</h2></center>
+{{:helper.link(data.hide_unskilled == 1 ? 'Show All' : 'Hide Unskilled', null, {'toggle_hide_unskilled' : 1})}}
+<table style="width:100%">
+{{for data.skills_by_cat}}
+	<tr>
+	<th colspan="6">
+		<div class="average">
+		{{:value.name}}
+		</div>
+	</th>
+	</tr>
+	{{for value.skills :skill_value:skill_key}}
+		<tr class="candystripe">
+		<td style="width:30%">
+		<div class="itemLabelWidest">
+			{{:skill_value.name}}:
+		</div>
+		</td>
+		{{for skill_value.levels :level_value:level_key}}
+			<td style={{if level_value.selected}}'width:14%; border: 2px solid #c2bc68;'{{else}}'width:14%'{{/if}}>
+			{{if !level_value.blank}}
+				<div style={{if level_value.selected}}'color: #e9c183;font-weight: bold;'{{else}}'color: #777777;'{{/if}}>
+					<center>{{:level_value.name}}</center>
+				</div>
+			{{/if}}
+			</td>
+		{{/for}}
+		</tr>
+	{{/for}}
+{{/for}}
+</table>

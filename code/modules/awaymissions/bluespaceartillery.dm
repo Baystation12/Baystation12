@@ -21,16 +21,19 @@
 /obj/structure/artilleryplaceholder/decorative
 	density = 0
 
-/obj/machinery/artillerycontrol/attack_hand(mob/user as mob)
+/obj/machinery/artillerycontrol/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/artillerycontrol/interact(mob/user)
 	user.set_machine(src)
 	var/dat = "<B>Bluespace Artillery Control:</B><BR>"
 	dat += "Locked on<BR>"
 	dat += "<B>Charge progress: [reload]/180:</B><BR>"
 	dat += "<A href='byond://?src=\ref[src];fire=1'>Open Fire</A><BR>"
 	dat += "Deployment of weapon authorized by <br>[GLOB.using_map.company_name] Naval Command<br><br>Remember, friendly fire is grounds for termination of your contract and life.<HR>"
-	user << browse(dat, "window=scroll")
+	show_browser(user, dat, "window=scroll")
 	onclose(user, "scroll")
-	return
 
 /obj/machinery/artillerycontrol/Topic(href, href_list, state = GLOB.physical_state)
 	if(..())
@@ -45,7 +48,7 @@
 			return
 		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
 			command_announcement.Announce("Bluespace artillery fire detected. Brace for impact.")
-			message_admins("[key_name_admin(usr)] has launched an artillery strike.", 1)
+			log_and_message_admins("has launched an artillery strike.", 1)
 			var/list/L = list()
 			for(var/turf/T in get_area_turfs(thearea))
 				L+=T

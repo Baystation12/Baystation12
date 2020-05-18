@@ -12,7 +12,6 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/ai_remove_location,
 	/mob/living/silicon/ai/proc/ai_hologram_change,
 	/mob/living/silicon/ai/proc/ai_network_change,
-	/mob/living/silicon/ai/proc/ai_roster,
 	/mob/living/silicon/ai/proc/ai_statuschange,
 	/mob/living/silicon/ai/proc/ai_store_location,
 	/mob/living/silicon/ai/proc/ai_checklaws,
@@ -26,7 +25,8 @@ var/list/ai_verbs_default = list(
 	/mob/living/silicon/ai/proc/multitool_mode,
 	/mob/living/silicon/ai/proc/toggle_hologram_movement,
 	/mob/living/silicon/ai/proc/ai_power_override,
-	/mob/living/silicon/ai/proc/ai_shutdown
+	/mob/living/silicon/ai/proc/ai_shutdown,
+	/mob/living/silicon/ai/proc/ai_reset_radio_keys
 )
 
 //Not sure why this is necessary...
@@ -131,7 +131,6 @@ var/list/ai_verbs_default = list(
 
 	fully_replace_character_name(pickedName)
 	anchored = 1
-	canmove = 0
 	set_density(1)
 
 	holo_icon = getHologramIcon(icon('icons/mob/hologram.dmi',"Face"))
@@ -148,18 +147,19 @@ var/list/ai_verbs_default = list(
 		add_ai_verbs(src)
 
 	//Languages
-	add_language("Robot Talk", 1)
-	add_language(LANGUAGE_GALCOM, 1)
+	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
 	add_language(LANGUAGE_EAL, 1)
-	add_language(LANGUAGE_SOL_COMMON, 1)
-	add_language(LANGUAGE_UNATHI, 1)
-	add_language(LANGUAGE_SIIK_MAAS, 1)
+	add_language(LANGUAGE_HUMAN_EURO, 1)
+	add_language(LANGUAGE_HUMAN_ARABIC, 1)
+	add_language(LANGUAGE_HUMAN_CHINESE, 1)
+	add_language(LANGUAGE_HUMAN_IBERIAN, 1)
+	add_language(LANGUAGE_HUMAN_INDIAN, 1)
+	add_language(LANGUAGE_HUMAN_RUSSIAN, 1)
+	add_language(LANGUAGE_HUMAN_SELENIAN, 1)
+	add_language(LANGUAGE_UNATHI_SINTA, 1)
 	add_language(LANGUAGE_SKRELLIAN, 1)
-	add_language(LANGUAGE_LUNAR, 1)
-	add_language(LANGUAGE_GUTTER, 1)
-	add_language(LANGUAGE_SIGN, 0)
-	add_language(LANGUAGE_INDEPENDENT, 1)
 	add_language(LANGUAGE_SPACER, 1)
+	add_language(LANGUAGE_SIGN, 0)
 
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
@@ -207,7 +207,7 @@ var/list/ai_verbs_default = list(
 
 	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
 		show_laws()
-		to_chat(src, "<b>These laws may be changed by other players, or by you being the traitor.</b>")
+		to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
 
 	job = "AI"
 	setup_icon()
@@ -236,7 +236,7 @@ var/list/ai_verbs_default = list(
 	var/list/custom_icons = list()
 	LAZYSET(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]", custom_icons)
 
-	var/file = file2text("config/custom_sprites.txt")
+	var/file = file2text(CUSTOM_ITEM_SYNTH_CONFIG)
 	var/lines = splittext(file, "\n")
 
 	var/custom_index = 1
@@ -304,12 +304,6 @@ var/list/ai_verbs_default = list(
 	// Placing custom icons first to have them be at the top
 	. = LAZYACCESS(custom_ai_icons_by_ckey_and_name, "[ckey][real_name]") | .
 
-// this verb lets the ai see the stations manifest
-/mob/living/silicon/ai/proc/ai_roster()
-	set category = "Silicon Commands"
-	set name = "Show Crew Manifest"
-	show_station_manifest()
-
 /mob/living/silicon/ai/var/message_cooldown = 0
 /mob/living/silicon/ai/proc/ai_announcement()
 	set category = "Silicon Commands"
@@ -321,7 +315,7 @@ var/list/ai_verbs_default = list(
 	if(message_cooldown)
 		to_chat(src, "Please allow one minute to pass between announcements.")
 		return
-	var/input = input(usr, "Please write a message to announce to the [station_name()] crew.", "A.I. Announcement")
+	var/input = input(usr, "Please write a message to announce to the [station_name()] crew.", "A.I. Announcement") as null|message
 	if(!input)
 		return
 
@@ -401,21 +395,20 @@ var/list/ai_verbs_default = list(
 		view_core()
 	..()
 
-/mob/living/silicon/ai/Topic(href, href_list)
-	if(usr != src)
-		return
-	if(..())
-		return
-	if (href_list["mach_close"])
+/mob/living/silicon/ai/OnSelfTopic(href_list)
+	if (href_list["mach_close"]) // Overrides behavior handled in the ..()
 		if (href_list["mach_close"] == "aialerts")
 			viewalerts = 0
-		var/t1 = text("window=[]", href_list["mach_close"])
-		unset_machine()
-		src << browse(null, t1)
+		return ..() // Does further work on this key
+
 	if (href_list["switchcamera"])
 		switchCamera(locate(href_list["switchcamera"])) in cameranet.cameras
+		return TOPIC_HANDLED
+
 	if (href_list["showalerts"])
 		open_subsystem(/datum/nano_module/alarm_monitor/all)
+		return TOPIC_HANDLED
+
 	//Carn: holopad requests
 	if (href_list["jumptoholopad"])
 		var/obj/machinery/hologram/holopad/H = locate(href_list["jumptoholopad"])
@@ -424,6 +417,7 @@ var/list/ai_verbs_default = list(
 				H.attack_ai(src) //may as well recycle
 			else
 				to_chat(src, "<span class='notice'>Unable to locate the holopad.</span>")
+		return TOPIC_HANDLED
 
 	if (href_list["track"])
 		var/mob/target = locate(href_list["track"]) in SSmobs.mob_list
@@ -433,9 +427,9 @@ var/list/ai_verbs_default = list(
 			ai_actual_track(target)
 		else
 			to_chat(src, "<span class='warning'>System error. Cannot locate [html_decode(href_list["trackname"])].</span>")
-		return
+		return TOPIC_HANDLED
 
-	return
+	return ..()
 
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(camera)
@@ -558,8 +552,8 @@ var/list/ai_verbs_default = list(
 		if(choice)
 			qdel(holo_icon)
 			qdel(holo_icon_longrange)
-			holo_icon = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.icon_colorize)
-			holo_icon_longrange = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.icon_colorize, hologram_color = HOLOPAD_LONG_RANGE)
+			holo_icon = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.bypass_colorize)
+			holo_icon_longrange = getHologramIcon(icon(choice.icon, choice.icon_state), noDecolor=choice.bypass_colorize, hologram_color = HOLOPAD_LONG_RANGE)
 			holo_icon_malf = choice.requires_malf
 	return
 
@@ -691,7 +685,14 @@ var/list/ai_verbs_default = list(
 	multitool_mode = !multitool_mode
 	to_chat(src, "<span class='notice'>Multitool mode: [multitool_mode ? "E" : "Dise"]ngaged</span>")
 
-/mob/living/silicon/ai/update_icon()
+/mob/living/silicon/ai/proc/ai_reset_radio_keys()
+	set name = "Reset Radio Encryption Keys"
+	set category = "Silicon Commands"
+
+	silicon_radio.recalculateChannels()
+	to_chat(src, SPAN_NOTICE("Integrated radio encryption keys have been reset."))
+
+/mob/living/silicon/ai/on_update_icon()
 	if(!selected_sprite || !(selected_sprite in available_icons()))
 		selected_sprite = decls_repository.get_decl(default_ai_icon)
 

@@ -6,7 +6,7 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ammonia,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/acetone,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sodium,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminum,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/aluminium,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/silicon,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/phosphorus,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/sulfur,
@@ -62,15 +62,20 @@
 	icon_state = "soda_dispenser"
 	ui_title = "Soda Dispenser"
 	accept_drinking = 1
+	core_skill = SKILL_COOKING
+	can_contaminate = FALSE //It's not a complex panel, and I'm fairly sure that most people don't haymaker the control panel on a soft drinks machine. -- Chaoko99
 
 /obj/machinery/chemical_dispenser/bar_soft/full
 	spawn_cartridges = list(
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/water,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ice,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/coffee,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/hot_coco,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cream,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tea,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/icetea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/green_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chai_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/red_tea,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cola,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/smw,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/dr_gibb,
@@ -90,6 +95,8 @@
 	icon_state = "booze_dispenser"
 	ui_title = "Booze Dispenser"
 	accept_drinking = 1
+	core_skill = SKILL_COOKING
+	can_contaminate = FALSE //See above.
 
 /obj/machinery/chemical_dispenser/bar_alc/full
 	spawn_cartridges = list(
@@ -119,6 +126,8 @@
 	icon_state = "coffee_dispenser"
 	ui_title = "Coffee Dispenser"
 	accept_drinking = 1
+	core_skill = SKILL_COOKING
+	can_contaminate = FALSE //See above.
 
 /obj/machinery/chemical_dispenser/bar_coffee/full
 	spawn_cartridges = list(
@@ -129,5 +138,12 @@
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/milk,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/cream,
 			/obj/item/weapon/reagent_containers/chem_disp_cartridge/tea,
-			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ice
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/green_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/chai_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/red_tea,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/ice,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_chocolate,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_caramel,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_vanilla,
+			/obj/item/weapon/reagent_containers/chem_disp_cartridge/syrup_pumpkin
 		)

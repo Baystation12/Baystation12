@@ -1,12 +1,11 @@
-GLOBAL_LIST_INIT(registered_weapons, list())
-GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
-
 /obj/item/weapon/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
+	icon = 'icons/obj/guns/basic_energy.dmi'
 	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 	fire_sound_text = "laser blast"
+	accuracy = 1
 
 	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 20 //How much energy is needed to fire.
@@ -31,8 +30,8 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	..()
 	update_icon()
 
-/obj/item/weapon/gun/energy/New()
-	..()
+/obj/item/weapon/gun/energy/Initialize()
+	. = ..()
 	if(cell_type)
 		power_supply = new cell_type(src)
 	else
@@ -45,6 +44,9 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	if(self_recharge)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
+
+/obj/item/weapon/gun/energy/get_cell()
+	return power_supply
 
 /obj/item/weapon/gun/energy/Process()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
@@ -71,38 +73,31 @@ GLOBAL_LIST_INIT(registered_cyborg_weapons, list())
 	return new projectile_type(src)
 
 /obj/item/weapon/gun/energy/proc/get_external_power_supply()
-	if(isrobot(src.loc))
-		var/mob/living/silicon/robot/R = src.loc
-		return R.cell
-	if(istype(src.loc, /obj/item/rig_module))
-		var/obj/item/rig_module/module = src.loc
-		if(module.holder && module.holder.wearer)
-			var/mob/living/carbon/human/H = module.holder.wearer
-			if(istype(H) && H.back)
-				var/obj/item/weapon/rig/suit = H.back
-				if(istype(suit))
-					return suit.cell
-	return null
+	if(isrobot(loc) || istype(loc, /obj/item/rig_module) || istype(loc, /obj/item/mech_equipment))
+		return loc.get_cell()
 
 /obj/item/weapon/gun/energy/examine(mob/user)
 	. = ..(user)
 	if(!power_supply)
 		to_chat(user, "Seems like it's dead.")
 		return
-	var/shots_remaining = round(power_supply.charge / charge_cost)
-	to_chat(user, "Has [shots_remaining] shot\s remaining.")
-	return
+	if (charge_cost == 0)
+		to_chat(user, "This gun seems to have an unlimited number of shots.")
+	else
+		var/shots_remaining = round(power_supply.charge / charge_cost)
+		to_chat(user, "Has [shots_remaining] shot\s remaining.")
 
-/obj/item/weapon/gun/energy/update_icon()
+/obj/item/weapon/gun/energy/on_update_icon()
 	..()
 	if(charge_meter && power_supply)
 		var/ratio = power_supply.percent()
 
 		//make sure that rounding down will not give us the empty state even if we have charge for a shot left.
+		// Also make sure cells adminbussed with higher-than-max charge don't break sprites
 		if(power_supply.charge < charge_cost)
 			ratio = 0
 		else
-			ratio = max(round(ratio, 25), 25)
+			ratio = Clamp(round(ratio, 25), 25, 100)
 
 		if(modifystate)
 			icon_state = "[modifystate][ratio]"

@@ -9,6 +9,7 @@
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/crew_manifest
 	usage_flags = PROGRAM_ALL
+	category = PROG_OFFICE
 
 /datum/nano_module/crew_manifest
 	name = "Crew Manifest"
@@ -18,9 +19,10 @@
 
 	data["crew_manifest"] = html_crew_manifest(TRUE)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "crew_manifest.tmpl", name, 450, 600, state = state)
 		ui.auto_update_layout = 1
+		ui.set_auto_update(1)
 		ui.set_initial_data(data)
 		ui.open()

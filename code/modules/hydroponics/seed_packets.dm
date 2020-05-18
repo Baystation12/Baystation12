@@ -17,8 +17,8 @@ var/global/list/plant_seed_sprites = list()
 
 //Grabs the appropriate seed datum from the global list.
 /obj/item/seeds/proc/update_seed()
-	if(!seed && seed_type && !isnull(plant_controller.seeds) && plant_controller.seeds[seed_type])
-		seed = plant_controller.seeds[seed_type]
+	if(!seed && seed_type && !isnull(SSplants.seeds) && SSplants.seeds[seed_type])
+		seed = SSplants.seeds[seed_type]
 	update_appearance()
 
 //Updates strings and icon appropriately based on seed datum.
@@ -58,7 +58,7 @@ var/global/list/plant_seed_sprites = list()
 		src.desc = "It's labelled as coming from [seed.display_name]."
 
 /obj/item/seeds/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(seed && !seed.roundstart)
 		to_chat(user, "It's tagged as variety #[seed.uid].")
 
@@ -74,7 +74,7 @@ var/global/list/plant_seed_sprites = list()
 	seed_type = null
 
 /obj/item/seeds/random/Initialize()
-	seed = plant_controller.create_random_seed()
+	seed = SSplants.create_random_seed()
 	seed_type = seed.name
 	. = ..()
 
@@ -281,3 +281,62 @@ var/global/list/plant_seed_sprites = list()
 
 /obj/item/seeds/algaeseed
 	seed_type = "algae"
+
+/obj/item/seeds/bamboo
+	seed_type = "bamboo"
+
+// fruit expansion
+
+/obj/item/seeds/melonseed
+	seed_type = "melon"
+
+/obj/item/seeds/coffeeseed
+	seed_type = "coffee"
+
+/obj/item/seeds/whitegrapeseed
+	seed_type = "whitegrapes"
+
+/obj/item/seeds/vanillaseed
+	seed_type = "vanilla"
+
+/obj/item/seeds/pineappleseed
+	seed_type = "pineapples"
+
+/obj/item/seeds/gukhe
+	seed_type = "gukhe"
+
+/obj/item/seeds/hrukhza
+	seed_type = "hrukhza"
+
+/obj/item/seeds/okrri
+	seed_type = "okrri"
+
+/obj/item/seeds/ximikoa
+	seed_type = "ximikoa"
+
+/obj/item/seeds/pearseed
+	seed_type = "pears"
+
+/obj/item/seeds/coconutseed
+	seed_type = "coconuts"
+
+/obj/item/seeds/qokkloa
+	seed_type = "qokkloa"
+
+/obj/item/seeds/aghrassh
+	seed_type = "aghrassh"
+
+/obj/item/seeds/cinnamon
+	seed_type = "cinnamon"
+
+/obj/item/seeds/olives
+	seed_type = "olives"
+
+/obj/item/seeds/gummen
+	seed_type = "gummen"
+
+/obj/item/seeds/iridast
+	seed_type = "iridast"
+
+/obj/item/seeds/affelerin
+	seed_type = "affelerin"

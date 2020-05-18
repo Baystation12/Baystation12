@@ -1,27 +1,27 @@
 #include "icarus_areas.dm"
 
-/obj/effect/overmap/sector/icarus
+/obj/effect/overmap/visitable/sector/icarus
 	name = "forest planetoid"
 	desc = "Sensors detect anomalous radiation area with the presence of artificial structures."
 	icon_state = "globe"
 	known = 0
 	in_space = 0
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_icarus_1",
 		"nav_icarus_2",
 		"nav_icarus_antag"
 	)
 
-/obj/effect/overmap/sector/icarus/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/sector/icarus/New(nloc, max_x, max_y)
 	name = "[generate_planet_name()], \a [name]"
 	..()
 
-obj/effect/icarus/irradiate
+/obj/effect/icarus/irradiate
 	var/radiation_power = 20//20 Bq. Dangerous but survivable for 10-15 minutes if crew is too lazy to read away map description
 	var/datum/radiation_source/S
 	var/req_range = 100//to cover whole level
 
-obj/effect/icarus/irradiate/Initialize()
+/obj/effect/icarus/irradiate/Initialize()
 	. = ..()
 	S = new()
 	S.flat = TRUE
@@ -30,9 +30,9 @@ obj/effect/icarus/irradiate/Initialize()
 	S.decay = FALSE
 	S.source_turf = get_turf(src)
 	S.update_rad_power(radiation_power)
-	radiation_repository.add_source(S)
+	SSradiation.add_source(S)
 
-obj/effect/icarus/irradiate/Destroy()
+/obj/effect/icarus/irradiate/Destroy()
 	. = ..()
 	QDEL_NULL(S)
 
@@ -42,56 +42,31 @@ obj/effect/icarus/irradiate/Destroy()
 	description = "The crashlanding site of the SEV Icarus."
 	suffixes = list("icarus/icarus-1.dmm", "icarus/icarus-2.dmm")
 	cost = 2
+	generate_mining_by_z = list(1, 2)
+	area_usage_test_exempted_root_areas = list(/area/icarus)
+	area_coherency_test_exempt_areas = list(/area/icarus/vessel, /area/icarus/open)
+	apc_test_exempt_areas = list(
+		/area/icarus/vessel = NO_APC,
+		/area/icarus/open = NO_SCRUBBER|NO_VENT|NO_APC
+	)
 
 /obj/effect/shuttle_landmark/nav_icarus/nav1
 	name = "Planetary Navpoint #1"
 	landmark_tag = "nav_icarus_1"
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/nav_icarus/nav2
 	name = "Planetary Navpoint #2"
 	landmark_tag = "nav_icarus_2"
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/nav_icarus/nav3
 	name = "Planetary Navpoint #3"
 	landmark_tag = "nav_icarus_antag"
+	flags = SLANDMARK_FLAG_AUTOSET
 
-obj/structure/icarus/broken_cryo
-	name = "destroyed cryo sleeper"
-	desc = "A mangled cryo sleeper with evidence that someone was inside when it was crushed. It looks like you could pry it open with a crowbar."
-	icon = 'maps/away/icarus/icarus_sprites.dmi'
-	icon_state = "broken_cryo"
-	anchored = 1
-	density = 1
-	var/closed = 1
-	var/busy = 0
-
-obj/structure/icarus/broken_cryo/attack_hand(mob/user)
-	..()
-	if (closed)
-		to_chat(user, "<span class='notice'>You tug at the glass but can't open it with your hands alone.</span>")
-	else
-		to_chat(user, "<span class='notice'>The glass is already open.</span>")
-
-
-/obj/structure/icarus/broken_cryo/attackby(obj/item/W as obj, mob/user as mob)
-	if (busy)
-		to_chat(user, "<span class='notice'>Someone else is attempting to open this.</span>")
-		return
-	if (closed)
-		if (isCrowbar(W))
-			busy = 1
-			visible_message("[user] starts to pry the glass cover off of \the [src].")
-			if (!do_after(user, 50, src))
-				visible_message("[user] stops trying to pry the glass off of \the [src].")
-				busy = 0
-				return
-			closed = 0
-			busy = 0
-			icon_state = "broken_cryo_open"
-			var/obj/dead = new /obj/item/icarus/dead_personnel(loc)
-			dead.dir = src.dir//skeleton is oriented as cryo
-	else
-		to_chat(user, "<span class='notice'>The glass cover is already open.</span>")
+/obj/structure/broken_cryo/icarus
+	remains_type = /obj/item/icarus/dead_personnel
 
 /obj/item/icarus/dead_personnel
 	name = "partial skeleton remains"

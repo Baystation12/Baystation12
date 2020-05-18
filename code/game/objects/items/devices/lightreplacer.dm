@@ -39,13 +39,8 @@
 
 
 /obj/item/device/lightreplacer
-
 	name = "light replacer"
 	desc = "A lightweight automated device, capable of interfacing with and rapidly replacing standard light installations."
-	description_info = "Examine or use this item to see how many lights are remaining. You can feed it lightbulbs or sheets of glass to refill it."
-	description_fluff = "Can you believe they used to have to screw lightbulbs in by hand?"
-	description_antag = "Using a cryptographic sequencer on this device will cause it to overload each light it replaces; when turned on, the new lights will explode!"
-
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
 	item_state = "electronic"
@@ -57,19 +52,44 @@
 	var/max_uses = 32
 	var/uses = 32
 	var/emagged = 0
-	var/failmsg = ""
 	var/charge = 0
 
-/obj/item/device/lightreplacer/New()
-	failmsg = "The [name]'s refill light blinks red."
-	..()
-
-/obj/item/device/lightreplacer/examine(mob/user)
-	if(..(user, 2))
+/obj/item/device/lightreplacer/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 2)
 		to_chat(user, "It has [uses] light\s remaining.")
 
+/obj/item/device/lightreplacer/resolve_attackby(var/atom/A, mob/user)
+
+	//Check for lights in a container, refilling our charges.
+	if(istype(A, /obj/item/weapon/storage/))
+		var/obj/item/weapon/storage/S = A
+		var/amt_inserted = 0
+		var/turf/T = get_turf(user)
+		for(var/obj/item/weapon/light/L in S.contents)
+			if(!user.stat && src.uses < src.max_uses && L.status == 0)
+				src.AddUses(1)
+				amt_inserted++
+				S.remove_from_storage(L, T, 1)
+				qdel(L)
+		S.finish_bulk_removal()
+		if(amt_inserted)
+			to_chat(user, "You insert [amt_inserted] light\s into \The [src]. It has [uses] light\s remaining.")
+			add_fingerprint(user)
+			return
+
+	//Actually replace the light.
+	if(istype(A, /obj/machinery/light/))
+		var/obj/machinery/light/L = A
+		if(isliving(user))
+			var/mob/living/U = user
+			ReplaceLight(L, U)
+			add_fingerprint(user)
+			return
+	. = ..()
+
 /obj/item/device/lightreplacer/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == "glass")
+	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 		var/obj/item/stack/G = W
 		if(uses >= max_uses)
 			to_chat(user, "<span class='warning'>[src.name] is full.</span>")
@@ -85,9 +105,10 @@
 		var/obj/item/weapon/light/L = W
 		if(L.status == 0) // LIGHT OKAY
 			if(uses < max_uses)
+				if(!user.unEquip(L))
+					return
 				AddUses(1)
 				to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
-				user.drop_item()
 				qdel(L)
 				return
 		else
@@ -105,7 +126,7 @@
 	*/
 	to_chat(usr, "It has [uses] lights remaining.")
 
-/obj/item/device/lightreplacer/update_icon()
+/obj/item/device/lightreplacer/on_update_icon()
 	icon_state = "lightreplacer[emagged]"
 
 
@@ -130,15 +151,21 @@
 	if(target.get_status() == LIGHT_OK)
 		to_chat(U, "There is a working [target.get_fitting_name()] already inserted.")
 	else if(!CanUse(U))
-		to_chat(U, failmsg)
+		to_chat(U, "\The [src]'s refill light blinks red.")
 	else if(Use(U))
 		to_chat(U, "<span class='notice'>You replace the [target.get_fitting_name()] with the [src].</span>")
 
 		if(target.lightbulb)
+			var/obj/item/bulb = target.lightbulb
 			target.remove_bulb()
+			if (isrobot(U))
+				qdel(bulb)
 
 		var/obj/item/weapon/light/L = new target.light_type()
-		L.rigged = emagged
+		if (emagged)
+			log_and_message_admins("used an emagged light replacer.", U)
+			L.create_reagents(5)
+			L.reagents.add_reagent(/datum/reagent/toxin/phoron, 5)
 		target.insert_bulb(L)
 
 

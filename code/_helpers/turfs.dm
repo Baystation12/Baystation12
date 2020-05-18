@@ -6,12 +6,6 @@
 		mloc = mloc.loc
 	return mloc
 
-/proc/iswall(turf/T)
-	return (istype(T, /turf/simulated/wall) || istype(T, /turf/unsimulated/wall) || istype(T, /turf/simulated/shuttle/wall))
-
-/proc/isfloor(turf/T)
-	return (istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
-
 /proc/turf_clear(turf/T)
 	for(var/atom/A in T)
 		if(A.simulated)
@@ -63,6 +57,12 @@
 /*
 	Predicate helpers
 */
+
+/proc/is_space_turf(var/turf/T)
+	return istype(T, /turf/space)
+
+/proc/is_not_space_turf(var/turf/T)
+	return !is_space_turf(T)
 
 /proc/is_holy_turf(var/turf/T)
 	return T && T.holy
@@ -127,10 +127,9 @@
 		var/turf/target = translation[source]
 
 		if(target)
-			//update area first so that area/Entered() will be called with the correct area when atoms are moved
 			if(base_area)
-				source.loc.contents.Add(target)
-				base_area.contents.Add(source)
+				ChangeArea(target, get_area(source))
+				ChangeArea(source, base_area)
 			transport_turf_contents(source, target)
 
 	//change the old turfs
@@ -146,6 +145,10 @@
 	for(var/obj/O in source)
 		if(O.simulated)
 			O.forceMove(new_turf)
+		else if(istype(O,/obj/effect))
+			var/obj/effect/E = O
+			if(E.movable_flags & MOVABLE_FLAG_EFFECTMOVE)
+				E.forceMove(new_turf)
 
 	for(var/mob/M in source)
 		if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable

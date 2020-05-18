@@ -57,6 +57,7 @@
 			use_1p = get_emote_message_1p(user, target, extra_params)
 			use_1p = replacetext(use_1p, "TARGET_THEM", target_gender.him)
 			use_1p = replacetext(use_1p, "TARGET_THEIR", target_gender.his)
+			use_1p = replacetext(use_1p, "TARGET_SELF", target_gender.self)
 			use_1p = replacetext(use_1p, "TARGET", "<b>\the [target]</b>")
 		else
 			use_1p = get_emote_message_1p(user, null, extra_params)
@@ -67,18 +68,22 @@
 			use_3p = get_emote_message_3p(user, target, extra_params)
 			use_3p = replacetext(use_3p, "TARGET_THEM", target_gender.him)
 			use_3p = replacetext(use_3p, "TARGET_THEIR", target_gender.his)
+			use_3p = replacetext(use_3p, "TARGET_SELF", target_gender.self)
 			use_3p = replacetext(use_3p, "TARGET", "<b>\the [target]</b>")
 		else
 			use_3p = get_emote_message_3p(user, null, extra_params)
 		use_3p = replacetext(use_3p, "USER_THEM", user_gender.him)
 		use_3p = replacetext(use_3p, "USER_THEIR", user_gender.his)
+		use_3p = replacetext(use_3p, "USER_SELF", user_gender.self)
 		use_3p = replacetext(use_3p, "USER", "<b>\the [user]</b>")
 		use_3p = capitalize(use_3p)
 
-	if(message_type == AUDIBLE_MESSAGE)
-		user.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
-	else
-		user.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
+	if(ismob(user))
+		var/mob/M = user
+		if(message_type == AUDIBLE_MESSAGE)
+			M.audible_message(message = use_3p, self_message = use_1p, deaf_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
+		else
+			M.visible_message(message = use_3p, self_message = use_1p, blind_message = emote_message_impaired, checkghosts = /datum/client_preference/ghost_sight)
 
 	do_extra(user, target)
 

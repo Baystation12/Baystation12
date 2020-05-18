@@ -13,7 +13,6 @@
 	speak_chance = 1
 	turns_per_move = 5
 	see_in_dark = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
@@ -22,17 +21,24 @@
 	health = 60
 	melee_damage_lower = 20
 	melee_damage_upper = 30
-	can_escape = 1
+	melee_damage_flags = DAM_SHARP
+	can_escape = TRUE
+	faction = "russian"
 
 	//Space bears aren't affected by atmos.
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
+
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
+	meat_amount = 10
+	bone_amount = 20
+	skin_amount = 20
+	skin_material = MATERIAL_SKIN_FUR_HEAVY
+
 	var/stance_step = 0
 
-	faction = "russian"
-
-//SPACE BEARS! SQUEEEEEEEE~     OW! FUCK! IT BIT MY HAND OFF!!
+//SPACE BEARS! SQUEEEEEEEE~	 OW! FUCK! IT BIT MY HAND OFF!!
 /mob/living/simple_animal/hostile/bear/Hudson
 	name = "Hudson"
 	desc = ""
@@ -41,9 +47,9 @@
 	response_harm   = "pokes"
 
 /mob/living/simple_animal/hostile/bear/Life()
-	. =..()
+	. = ..()
 	if(!.)
-		return
+		return FALSE
 
 	if(loc && istype(loc,/turf/space))
 		icon_state = "bear"
@@ -56,7 +62,7 @@
 			stop_automated_movement = 1
 			stance_step++
 			if(stance_step >= 10) //rests for 10 ticks
-				if(target_mob && target_mob in ListTargets(10))
+				if(target_mob && (target_mob in ListTargets(10)))
 					stance = HOSTILE_STANCE_ATTACK //If the mob he was chasing is still nearby, resume the attack, otherwise go idle.
 				else
 					stance = HOSTILE_STANCE_IDLE
@@ -64,7 +70,7 @@
 		if(HOSTILE_STANCE_ALERT)
 			stop_automated_movement = 1
 			var/found_mob = 0
-			if(target_mob && target_mob in ListTargets(10))
+			if(target_mob && (target_mob in ListTargets(10)))
 				if(!(SA_attackable(target_mob)))
 					stance_step = max(0, stance_step) //If we have not seen a mob in a while, the stance_step will be negative, we need to reset it to 0 as soon as we see a mob again.
 					stance_step++
@@ -127,38 +133,9 @@
 		var/mob/living/carbon/human/H = target_mob
 		var/dam_zone = pick(BP_CHEST, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG)
 		var/obj/item/organ/external/affecting = H.get_organ(ran_zone(dam_zone))
-		H.apply_damage(damage, BRUTE, affecting, H.run_armor_check(affecting, "melee"), DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
+		H.apply_damage(damage, BRUTE, affecting, DAM_SHARP|DAM_EDGE) //TODO damage_flags var on simple_animals, maybe?
 		return H
 	else if(isliving(target_mob))
 		var/mob/living/L = target_mob
 		L.adjustBruteLoss(damage)
 		return L
-	//else if(istype(target_mob,/obj/mecha))
-		//var/obj/mecha/M = target_mob
-		//M.attack_animal(src)
-		//return M
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

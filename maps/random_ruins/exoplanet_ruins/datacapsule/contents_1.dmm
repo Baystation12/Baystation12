@@ -1,0 +1,54 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/table/steel,
+/obj/item/weapon/reagent_containers/glass/beaker/vial/random_podchem,
+/obj/item/weapon/reagent_containers/glass/beaker/vial/random_podchem,
+/obj/structure/window/basic/full,
+/turf/template_noop,
+/area/template_noop)
+"b" = (
+/turf/template_noop,
+/area/template_noop)
+"c" = (
+/obj/structure/foamedmetal,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/machinery/constructable_frame/machine_frame,
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/obj/machinery/computer/modular/preset/library{
+	icon_state = "console";
+	dir = 8
+	},
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/obj/structure/table,
+/turf/template_noop,
+/area/template_noop)
+"g" = (
+/obj/item/stack/material/steel,
+/obj/structure/foamedmetal,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+c
+d
+f
+a
+"}
+(2,1,1) = {"
+c
+b
+b
+c
+"}
+(3,1,1) = {"
+c
+e
+c
+g
+"}

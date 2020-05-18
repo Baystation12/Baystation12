@@ -1,0 +1,502 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
+/turf/simulated/wall/r_wall/prepainted{
+	paint_color = "#556769"
+	},
+/area/template_noop)
+"ac" = (
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"ad" = (
+/obj/random/loot,
+/obj/effect/decal/cleanable/cobweb,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/mucus,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"ae" = (
+/obj/random/loot,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"af" = (
+/obj/structure/anomaly_container,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"ag" = (
+/obj/structure/sign/warning/secure_area{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"ah" = (
+/obj/structure/mattress/dirty,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"ai" = (
+/obj/machinery/floodlight,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aj" = (
+/obj/structure/sign/warning/science/anomalous_materials{
+	pixel_y = 32
+	},
+/obj/effect/decal/cleanable/spiderling_remains,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"ak" = (
+/obj/machinery/artifact,
+/obj/effect/decal/cleanable/cobweb2,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"al" = (
+/obj/random/loot,
+/obj/effect/decal/cleanable/mucus,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"am" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
+/area/template_noop)
+"ao" = (
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"ap" = (
+/obj/structure/closet/crate,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aq" = (
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"ar" = (
+/obj/structure/closet/crate/trashcart,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"as" = (
+/obj/structure/closet/crate/freezer/rations,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"at" = (
+/obj/random/loot,
+/mob/living/simple_animal/hostile/voxslug,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"au" = (
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"av" = (
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/random/contraband,
+/obj/random/masks,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"aw" = (
+/obj/effect/decal/cleanable/mucus,
+/mob/living/simple_animal/hostile/creature,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"ax" = (
+/obj/structure/bed/chair/office/light,
+/obj/structure/closet/walllocker/emerglocker/east,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"ay" = (
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"az" = (
+/obj/machinery/door/unpowered/simple/wood,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aA" = (
+/obj/structure/sign/monkey_painting{
+	pixel_y = -32
+	},
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"aB" = (
+/obj/item/clothing/head/bio_hood/anomaly,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aC" = (
+/obj/random/closet,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aE" = (
+/obj/structure/bookcase/manuals/xenoarchaeology,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aF" = (
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aG" = (
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aH" = (
+/obj/random/trash,
+/obj/random/trash,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aI" = (
+/obj/machinery/door/airlock/vault{
+	name = "Door"
+	},
+/obj/item/weapon/beartrap{
+	deployed = 1;
+	icon_state = "beartrap1"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aJ" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"aK" = (
+/obj/effect/decal/cleanable/spiderling_remains,
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/machinery/reagentgrinder,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aL" = (
+/obj/structure/table/rack,
+/obj/random/firstaid,
+/obj/random/advdevice,
+/obj/random/advdevice,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"aM" = (
+/obj/effect/decal/cleanable/vomit,
+/obj/item/weapon/reagent_containers/glass/paint/random,
+/obj/structure/closet/medical_wall/filled{
+	pixel_y = 32
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aN" = (
+/obj/effect/decal/cleanable/mucus,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"aO" = (
+/obj/machinery/door/airlock/vault{
+	name = "Door";
+	welded = null
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aP" = (
+/obj/machinery/door/airlock/external/bolted,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aQ" = (
+/obj/effect/decal/cleanable/cobweb2,
+/obj/structure/closet/cabinet,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aR" = (
+/obj/structure/extinguisher_cabinet{
+	pixel_x = -32
+	},
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aS" = (
+/obj/random/junk,
+/obj/random/junk,
+/turf/template_noop,
+/area/template_noop)
+"aT" = (
+/obj/machinery/door/airlock/vault{
+	name = "Door"
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aU" = (
+/obj/random/junk,
+/obj/structure/bed/chair/office/light,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aV" = (
+/obj/item/weapon/material/harpoon,
+/obj/effect/landmark/corpse/scientist,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"aW" = (
+/obj/item/weapon/beartrap,
+/obj/structure/sign/warning/science/anomalous_materials{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"aX" = (
+/obj/random/trash,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aY" = (
+/obj/structure/bed/padded,
+/obj/item/weapon/bedsheet/purple,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"aZ" = (
+/obj/structure/railing/mapped,
+/obj/machinery/replicator,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"ba" = (
+/obj/random/snack,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"bb" = (
+/obj/structure/table/rack,
+/obj/random/powercell,
+/obj/random/voidsuit,
+/obj/random/voidhelmet,
+/obj/random/toolbox,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"bc" = (
+/obj/structure/bed/padded,
+/obj/item/weapon/bedsheet/mime,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"bd" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"be" = (
+/obj/effect/decal/cleanable/mucus,
+/turf/simulated/floor/carpet/blue2,
+/area/template_noop)
+"bf" = (
+/obj/random/trash,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/mucus,
+/mob/living/simple_animal/hostile/creature,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/template_noop)
+"bg" = (
+/obj/random/trash,
+/obj/structure/filingcabinet/wallcabinet{
+	pixel_y = -32
+	},
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/white,
+/area/template_noop)
+"za" = (
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+za
+aa
+aa
+"}
+(2,1,1) = {"
+ao
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aP
+ab
+aa
+"}
+(3,1,1) = {"
+aa
+ab
+ad
+aw
+aI
+ac
+aV
+aL
+ab
+aB
+au
+ab
+ao
+"}
+(4,1,1) = {"
+aa
+ab
+al
+bf
+am
+aq
+aJ
+ac
+aP
+au
+aW
+ab
+aa
+"}
+(5,1,1) = {"
+aa
+ab
+ab
+ab
+ab
+ag
+ac
+ab
+ab
+ab
+ab
+ab
+aS
+"}
+(6,1,1) = {"
+aa
+ab
+ah
+aF
+aO
+aN
+aA
+ab
+aZ
+aR
+aC
+ab
+aa
+"}
+(7,1,1) = {"
+aa
+ab
+ak
+aH
+am
+ac
+bg
+ab
+aE
+aU
+aK
+am
+aa
+"}
+(8,1,1) = {"
+aa
+ab
+ab
+ab
+ab
+aj
+bd
+az
+ba
+aX
+bb
+am
+aa
+"}
+(9,1,1) = {"
+aa
+ab
+at
+au
+aT
+bd
+av
+ab
+aM
+be
+aG
+am
+aa
+"}
+(10,1,1) = {"
+aa
+ab
+au
+ae
+am
+ax
+ay
+ab
+aQ
+aY
+bc
+ab
+aa
+"}
+(11,1,1) = {"
+aa
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+ab
+aa
+"}
+(12,1,1) = {"
+aa
+ab
+za
+af
+ab
+ai
+ai
+ab
+ap
+ar
+as
+ab
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+za
+za
+za
+za
+za
+za
+za
+za
+za
+aa
+aa
+"}

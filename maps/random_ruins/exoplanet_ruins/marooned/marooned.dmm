@@ -1,0 +1,1358 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/template_noop,
+/area/template_noop)
+"ab" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/template_noop,
+/area/template_noop)
+"ac" = (
+/obj/item/stack/material/rods,
+/turf/template_noop,
+/area/template_noop)
+"ad" = (
+/obj/item/stack/material/rods,
+/obj/item/stack/material/ocp,
+/turf/template_noop,
+/area/template_noop)
+"ae" = (
+/obj/item/stack/material/ocp,
+/turf/template_noop,
+/area/template_noop)
+"af" = (
+/obj/structure/lattice,
+/obj/item/stack/material/ocp,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"ag" = (
+/turf/simulated/wall/ocp_wall,
+/area/map_template/marooned)
+"ah" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/ocp_wall,
+/area/map_template/marooned)
+"ai" = (
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"aj" = (
+/obj/item/stack/material/ocp,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"ak" = (
+/obj/machinery/computer/dummy,
+/obj/effect/floor_decal/corner/red/full,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"al" = (
+/obj/effect/floor_decal/corner/red{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/obj/machinery/atmospherics/binary/oxyregenerator,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"am" = (
+/obj/effect/landmark/corpse/marooned_officer,
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood,
+/obj/item/weapon/gun/projectile/revolver/medium,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"an" = (
+/obj/item/clothing/accessory/medal/silver/marooned_medal{
+	desc = "A heart-shaped bronze medal. Has Magnitka flag at top part and engraved name - H. Warda.";
+	name = "\improper Magnitka medal"
+	},
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/corner/red{
+	icon_state = "corner_white";
+	dir = 6
+	},
+/obj/item/weapon/paper/marooned/note09,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"ao" = (
+/obj/structure/lattice,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"ap" = (
+/obj/item/weapon/paper/marooned/note02{
+	pixel_x = -3;
+	pixel_y = -5
+	},
+/obj/item/weapon/paper/marooned/note01{
+	pixel_x = 2;
+	pixel_y = -1
+	},
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/corner/red{
+	icon_state = "corner_white";
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"aq" = (
+/obj/machinery/space_heater,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/floor_decal/steeldecal/steel_decals_central7,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"ar" = (
+/obj/item/weapon/paper/marooned/note03{
+	pixel_x = 2;
+	pixel_y = 2
+	},
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/corner/red{
+	icon_state = "corner_white";
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"as" = (
+/obj/machinery/door/airlock/centcom,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/marooned)
+"at" = (
+/obj/structure/closet/crate/freezer,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"au" = (
+/obj/structure/closet/crate/freezer,
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"av" = (
+/obj/item/weapon/paper/marooned/note06,
+/obj/random/trash,
+/obj/item/weapon/paper/marooned/note08,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aw" = (
+/obj/machinery/space_heater,
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"ax" = (
+/obj/machinery/suit_storage_unit/standard_unit,
+/obj/effect/floor_decal/industrial/outline,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"ay" = (
+/obj/structure/closet/crate/freezer,
+/obj/item/weapon/paper/marooned/note04,
+/obj/item/weapon/paper/marooned/note05{
+	pixel_x = -3;
+	pixel_y = 1
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"az" = (
+/obj/item/trash/liquidfood,
+/obj/item/trash/liquidfood,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aA" = (
+/obj/random/trash,
+/obj/effect/floor_decal/steeldecal/steel_decals_central7,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aB" = (
+/obj/item/weapon/paper/marooned/note07{
+	pixel_x = 6
+	},
+/obj/random/trash,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/structure/bed,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aC" = (
+/obj/structure/shuttle/engine/propulsion,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aD" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/structure/bed/chair{
+	icon_state = "chair_preview";
+	dir = 4
+	},
+/obj/item/trash/liquidfood,
+/obj/item/trash/liquidfood,
+/obj/effect/floor_decal/industrial/outline,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"aE" = (
+/obj/item/trash/liquidfood,
+/obj/item/trash/liquidfood,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aF" = (
+/obj/effect/floor_decal/steeldecal/steel_decals_central6,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aG" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aH" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/structure/bed/chair{
+	icon_state = "chair_preview";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/marooned)
+"aI" = (
+/obj/item/weapon/wirecutters,
+/obj/item/stack/cable_coil,
+/obj/machinery/power/port_gen/pacman/super,
+/obj/structure/cable{
+	icon_state = "0-5";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aJ" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aL" = (
+/obj/structure/inflatable/wall,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/dark,
+/area/map_template/marooned)
+"aM" = (
+/obj/structure/inflatable/door,
+/obj/structure/cable{
+	icon_state = "1-6";
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aN" = (
+/obj/structure/inflatable/wall,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/marooned)
+"aO" = (
+/obj/structure/inflatable/door,
+/obj/structure/cable{
+	icon_state = "2-5";
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/door/airlock/centcom,
+/turf/simulated/floor/tiled/steel_ridged,
+/area/map_template/marooned)
+"aP" = (
+/obj/structure/fuel_port,
+/obj/effect/paint/black,
+/turf/simulated/wall/ocp_wall,
+/area/map_template/marooned)
+"aQ" = (
+/obj/structure/inflatable/wall,
+/obj/structure/cable{
+	icon_state = "2-5";
+	dir = 2
+	},
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aR" = (
+/obj/structure/inflatable/door,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aS" = (
+/obj/structure/inflatable/wall,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aT" = (
+/obj/structure/cable{
+	icon_state = "2-5";
+	dir = 1
+	},
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aU" = (
+/turf/simulated/wall/ocp_wall,
+/area/template_noop)
+"aV" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/ocp_wall,
+/area/template_noop)
+"aW" = (
+/obj/item/weapon/stock_parts/computer/battery_module{
+	pixel_x = -7;
+	pixel_y = 0
+	},
+/obj/item/weapon/melee/baton/cattleprod{
+	desc = "Metal rod with wire attached to it.";
+	name = "jury-rigged antenna";
+	pixel_x = 5;
+	pixel_y = 3
+	},
+/obj/item/device/radio,
+/obj/item/stack/cable_coil,
+/obj/structure/cable{
+	icon_state = "0-6";
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aX" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aY" = (
+/obj/item/weapon/melee/baton/cattleprod{
+	desc = "Metal rod with wire attached to it.";
+	name = "jury-rigged antenna";
+	pixel_x = 5;
+	pixel_y = 3
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"aZ" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"hi" = (
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/turf/template_noop,
+/area/template_noop)
+"tb" = (
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+"Wb" = (
+/obj/structure/shuttle/engine/propulsion,
+/obj/effect/landmark/scorcher,
+/obj/effect/landmark/clear,
+/obj/effect/landmark/scorcher,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+aa
+ac
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(3,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ah
+ah
+aC
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ai
+ah
+ah
+aC
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(5,1,1) = {"
+aa
+aa
+aa
+aa
+ae
+aj
+ag
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+hi
+hi
+hi
+hi
+hi
+hi
+hi
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(6,1,1) = {"
+aa
+aa
+aa
+aa
+af
+ag
+ah
+ah
+ah
+at
+ay
+aD
+aH
+ah
+ah
+hi
+hi
+aW
+hi
+hi
+hi
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+ag
+ah
+al
+ap
+ah
+au
+az
+aE
+aI
+aL
+ah
+aQ
+aT
+aX
+hi
+hi
+hi
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(8,1,1) = {"
+aa
+aa
+aa
+aa
+ah
+ak
+am
+aq
+as
+av
+aA
+aF
+aJ
+aM
+aO
+aR
+hi
+aX
+hi
+hi
+hi
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(9,1,1) = {"
+aa
+aa
+aa
+aa
+ah
+ah
+an
+ar
+ah
+aw
+aB
+aG
+aG
+aN
+ah
+aS
+hi
+aX
+hi
+hi
+hi
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(10,1,1) = {"
+aa
+aa
+aa
+aa
+ag
+ah
+ah
+ah
+ah
+ax
+ax
+ax
+ax
+ah
+aP
+hi
+hi
+aX
+hi
+hi
+hi
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(11,1,1) = {"
+aa
+aa
+aa
+aa
+ai
+ai
+ao
+ah
+ah
+ah
+ah
+ah
+ah
+ah
+hi
+hi
+hi
+aX
+aZ
+hi
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(12,1,1) = {"
+aa
+aa
+aa
+aa
+ai
+ai
+ai
+ai
+ai
+ao
+ao
+ai
+ai
+aj
+hi
+hi
+hi
+aY
+ai
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+ai
+ai
+ai
+ai
+aj
+ai
+ai
+ai
+ai
+ai
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(14,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ai
+ai
+ai
+ai
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+aa
+aa
+"}
+(15,1,1) = {"
+aa
+aa
+aa
+ad
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(16,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(17,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+ac
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(18,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(19,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(20,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(21,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+aa
+aa
+"}
+(23,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(24,1,1) = {"
+aa
+ab
+aa
+aa
+aa
+aa
+aa
+ac
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(26,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ai
+ai
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(27,1,1) = {"
+aa
+aa
+aa
+ac
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ai
+aU
+aV
+Wb
+tb
+tb
+tb
+tb
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(28,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ai
+aV
+aV
+Wb
+tb
+tb
+tb
+tb
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(29,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ai
+ai
+ai
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ac
+aa
+aa
+aa
+"}
+(30,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}

@@ -5,7 +5,6 @@
 
 /obj/item/weapon/storage/internal/New(obj/item/MI)
 	master_item = MI
-	loc = master_item
 	name = master_item.name
 	verbs -= /obj/item/verb/verb_pickup	//make sure this is never picked up.
 	..()
@@ -31,9 +30,6 @@
 //doing it without the ability to call another proc's parent, really.
 /obj/item/weapon/storage/internal/proc/handle_mousedrop(mob/user as mob, obj/over_object as obj)
 	if (ishuman(user) || issmall(user)) //so monkeys can take off their backpacks -- Urist
-
-		if (istype(user.loc,/obj/mecha)) // stops inventory actions in a mech
-			return 0
 
 		if(over_object == user && Adjacent(user)) // this must come before the screen objects only block
 			src.open(user)

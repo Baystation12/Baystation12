@@ -39,7 +39,7 @@ var/list/doppler_arrays = list()
 	for(var/mob/O in hearers(src, null))
 		O.show_message("<span class='game say'><span class='name'>[src]</span> states coldly, \"[message]\"</span>",2)
 
-/obj/machinery/doppler_array/update_icon()
+/obj/machinery/doppler_array/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
 	else if( !(stat & NOPOWER) )

@@ -6,7 +6,7 @@
 	icon_state = "Shield_Gen"
 	anchored = 0
 	density = 1
-	req_one_access = list(access_engine_equip,access_research)
+	req_access = list(list(access_engine_equip,access_research))
 	var/active = 0
 	var/power = 0
 	var/locked = 1
@@ -16,7 +16,7 @@
 	//There have to be at least two posts, so these are effectively doubled
 	var/power_draw = 30 KILOWATTS //30 kW. How much power is drawn from powernet. Increase this to allow the generator to sustain longer shields, at the cost of more power draw.
 	var/max_stored_power = 50 KILOWATTS //50 kW
-	use_power = 0	//Draws directly from power net. Does not use APC power.
+	use_power = POWER_USE_OFF	//Draws directly from power net. Does not use APC power.
 	active_power_usage = 1200
 
 /obj/machinery/shieldwallgen/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
@@ -27,14 +27,14 @@
 	data["current_draw"] = ((between(500, max_stored_power - storedpower, power_draw)) + power ? active_power_usage : 0)
 	data["online"] = active == 2 ? 1 : 0
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "shield.tmpl", "Shielding", 800, 500, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/shieldwallgen/update_icon()
+/obj/machinery/shieldwallgen/on_update_icon()
 //	if(stat & BROKEN) -TODO: Broken icon
 	if(!active)
 		icon_state = "Shield_Gen"
@@ -79,19 +79,21 @@
 			storedpower -= rand(storedpower/4, storedpower/2)
 	..()
 
-/obj/machinery/shieldwallgen/attack_hand(mob/user as mob)
-	if(anchored != 1)
+/obj/machinery/shieldwallgen/CanUseTopic(mob/user)
+	if(!anchored)
 		to_chat(user, "<span class='warning'>The shield generator needs to be firmly secured to the floor first.</span>")
-		return 1
+		return STATUS_CLOSE
 	if(src.locked && !istype(user, /mob/living/silicon))
 		to_chat(user, "<span class='warning'>The controls are locked!</span>")
-		return 1
+		return STATUS_CLOSE
 	if(power != 1)
 		to_chat(user, "<span class='warning'>The shield generator needs to be powered by wire underneath.</span>")
-		return 1
+		return STATUS_CLOSE
+	return ..()
 
-	src.ui_interact(user)
-	src.add_fingerprint(user)
+/obj/machinery/shieldwallgen/interface_interact(mob/user)
+	ui_interact(user)
+	return TRUE
 
 /obj/machinery/shieldwallgen/proc/power()
 	if(!anchored)
@@ -117,6 +119,7 @@
 	return 1
 
 /obj/machinery/shieldwallgen/Process()
+	..()
 	power = 0
 	if(!(stat & BROKEN))
 		power()
@@ -190,8 +193,7 @@
 		var/field_dir = get_dir(T2,get_step(T2, NSEW))
 		T = get_step(T2, NSEW)
 		T2 = T
-		var/obj/machinery/shieldwall/CF = new/obj/machinery/shieldwall/(src, G) //(ref to this gen, ref to connected gen)
-		CF.loc = T
+		var/obj/machinery/shieldwall/CF = new(T, src, G) //(ref to this gen, ref to connected gen)
 		CF.set_dir(field_dir)
 
 
@@ -272,11 +274,11 @@
 	var/power_usage = 800	//how much power it takes to sustain the shield
 	var/generate_power_usage = 5000	//how much power it takes to start up the shield
 
-/obj/machinery/shieldwall/New(var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
-	..()
+/obj/machinery/shieldwall/Initialize(mapload, obj/machinery/shieldwallgen/A, obj/machinery/shieldwallgen/B)
+	. = ..()
 	update_nearby_tiles()
-	src.gen_primary = A
-	src.gen_secondary = B
+	gen_primary = A
+	gen_secondary = B
 	if(A && B && A.active && B.active)
 		needs_power = 1
 		if(prob(50))
@@ -284,14 +286,11 @@
 		else
 			B.storedpower -= generate_power_usage
 	else
-		qdel(src) //need at least two generator posts
+		return INITIALIZE_HINT_QDEL
 
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()
 	..()
-
-/obj/machinery/shieldwall/attack_hand(mob/user as mob)
-	return
 
 /obj/machinery/shieldwall/attackby(var/obj/item/I, var/mob/user)
 	var/obj/machinery/shieldwallgen/G = prob(50) ? gen_primary : gen_secondary

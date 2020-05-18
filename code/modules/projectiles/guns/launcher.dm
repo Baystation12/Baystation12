@@ -1,6 +1,8 @@
 /obj/item/weapon/gun/launcher
 	name = "launcher"
 	desc = "A device that launches things."
+	icon = 'icons/obj/guns/launchers.dmi'
+	icon_state = "riotgun"
 	w_class = ITEM_SIZE_HUGE
 	obj_flags =  OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BACK
@@ -23,7 +25,7 @@
 
 /obj/item/weapon/gun/launcher/process_projectile(obj/item/projectile, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
 	update_release_force(projectile)
-	projectile.loc = get_turf(user)
+	projectile.dropInto(user.loc)
 	projectile.throw_at(target, throw_distance, release_force, user)
 	play_fire_sound(user,projectile)
 	return 1

@@ -2,7 +2,7 @@
 	name = "Move a Shuttle"
 
 /datum/admin_secret_item/admin_secret/move_shuttle/can_execute(var/mob/user)
-	if(!shuttle_controller) return 0
+	if(!SSshuttle) return 0
 	return ..()
 
 /datum/admin_secret_item/admin_secret/move_shuttle/execute(var/mob/user)
@@ -13,10 +13,10 @@
 	if (confirm == "Cancel")
 		return
 
-	var/shuttle_tag = input(user, "Which shuttle do you want to move?") as null|anything in shuttle_controller.shuttles
+	var/shuttle_tag = input(user, "Which shuttle do you want to move?") as null|anything in SSshuttle.shuttles
 	if (!shuttle_tag) return
 
-	var/datum/shuttle/S = shuttle_controller.shuttles[shuttle_tag]
+	var/datum/shuttle/S = SSshuttle.shuttles[shuttle_tag]
 
 	var/list/destinations = list()
 	for(var/obj/effect/shuttle_landmark/WP in world)

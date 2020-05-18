@@ -31,7 +31,7 @@
 
 /obj/item/weapon/shield
 	name = "shield"
-	var/base_block_chance = 50
+	var/base_block_chance = 60
 
 /obj/item/weapon/shield/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(user.incapacitated())
@@ -61,10 +61,10 @@
 	throw_range = 4
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_MATERIAL = 2)
-	matter = list("glass" = 7500, DEFAULT_WALL_MATERIAL = 1000)
+	matter = list(MATERIAL_GLASS = 7500, MATERIAL_STEEL = 1000)
 	attack_verb = list("shoved", "bashed")
 	var/cooldown = 0 //shield bash cooldown. based on world.time
-	var/max_block = 10
+	var/max_block = 15
 	var/can_block_lasers = FALSE
 
 /obj/item/weapon/shield/riot/handle_shield(mob/user)
@@ -99,8 +99,8 @@
 	throwforce = 7.0
 	throw_range = 3
 	w_class = ITEM_SIZE_HUGE
-	matter = list("plasteel" = 8500)
-	max_block = 35
+	matter = list(MATERIAL_PLASTEEL = 8500)
+	max_block = 50
 	can_block_lasers = TRUE
 	slowdown_general = 1.5
 
@@ -117,7 +117,7 @@
 	throw_range = 20
 	w_class = ITEM_SIZE_HUGE
 	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 1000, "Wood" = 1000)
+	matter = list(MATERIAL_STEEL = 1000, MATERIAL_WOOD = 1000)
 	attack_verb = list("shoved", "bashed")
 
 /obj/item/weapon/shield/buckler/handle_shield(mob/user)
@@ -125,7 +125,7 @@
 	if(.) playsound(user.loc, 'sound/weapons/Genhit.ogg', 50, 1)
 
 /obj/item/weapon/shield/buckler/get_block_chance(mob/user, var/damage, atom/damage_source = null, mob/attacker = null)
-	if(istype(damage_source, /obj/item/projectile))
+	if(istype(damage_source, /obj/item/projectile/bullet))
 		return 0 //No blocking bullets, I'm afraid.
 	return base_block_chance
 
@@ -144,7 +144,7 @@
 	throw_speed = 1
 	throw_range = 4
 	w_class = ITEM_SIZE_SMALL
-	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_MATERIAL = 4, TECH_MAGNET = 3, TECH_ESOTERIC = 4)
 	attack_verb = list("shoved", "bashed")
 	var/active = 0
 
@@ -163,11 +163,11 @@
 	if(istype(damage_source, /obj/item/projectile))
 		var/obj/item/projectile/P = damage_source
 		if((is_sharp(P) && damage > 10) || istype(P, /obj/item/projectile/beam))
-			return (base_block_chance - round(damage / 3)) //block bullets and beams using the old block chance
+			return (base_block_chance - round(damage / 2.5)) //block bullets and beams using the old block chance
 	return base_block_chance
 
 /obj/item/weapon/shield/energy/attack_self(mob/living/user as mob)
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>You beat yourself in the head with [src].</span>")
 		user.take_organ_damage(5)
 	active = !active
@@ -193,10 +193,9 @@
 	add_fingerprint(user)
 	return
 
-/obj/item/weapon/shield/energy/update_icon()
+/obj/item/weapon/shield/energy/on_update_icon()
 	icon_state = "eshield[active]"
 	if(active)
 		set_light(0.4, 0.1, 1, 2, "#006aff")
 	else
 		set_light(0)
-

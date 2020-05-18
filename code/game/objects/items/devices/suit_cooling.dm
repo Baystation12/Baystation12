@@ -1,11 +1,6 @@
 /obj/item/device/suit_cooling_unit
 	name = "portable cooling unit"
 	desc = "A large portable heat sink with liquid cooled radiator packaged into a modified backpack."
-	description_info = "You may wear this instead of your packpack to cool yourself down. It is commonly used by IPCs, \
-	as it allows them to go into low pressure environments for more than few seconds without overheating. It runs off energy provided by an internal power cell. \
-	Remember to turn it on by clicking it when it's your in your hand before you put it on."
-	description_fluff = "Before the advent of ultra-heat-resistant fibers and flexible alloyed shielding, portable coolers were most commonly used to keep technicians from roasting alive in their suits. Nowadays they have been repurposed to keep IPCs from overheating in vacuum environments."
-
 	w_class = ITEM_SIZE_LARGE
 	icon = 'icons/obj/suitcooler.dmi'
 	icon_state = "suitcooler0"
@@ -20,7 +15,7 @@
 	throw_range = 4
 	action_button_name = "Toggle Heatsink"
 
-	matter = list("steel" = 15000, "glass" = 3500)
+	matter = list(MATERIAL_ALUMINIUM = 15000, MATERIAL_GLASS = 3500)
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2)
 
 	var/on = 0								//is it turned on?
@@ -95,7 +90,7 @@
 		if(ishuman(user))
 			user.put_in_hands(cell)
 		else
-			cell.forceMove(get_turf(src))
+			cell.dropInto(loc)
 
 		cell.add_fingerprint(user)
 		cell.update_icon()
@@ -130,8 +125,8 @@
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")
 			else
-				user.drop_item()
-				W.forceMove(src)
+				if(!user.unEquip(W, src))
+					return
 				cell = W
 				to_chat(user, "You insert the [cell].")
 		update_icon()
@@ -139,7 +134,7 @@
 
 	return ..()
 
-/obj/item/device/suit_cooling_unit/update_icon()
+/obj/item/device/suit_cooling_unit/on_update_icon()
 	overlays.Cut()
 	if (cover_open)
 		if (cell)
@@ -168,8 +163,9 @@
 			overlays.Add("battery-5")
 
 
-/obj/item/device/suit_cooling_unit/examine(mob/user)
-	if(!..(user, 1))
+/obj/item/device/suit_cooling_unit/examine(mob/user, distance)
+	. = ..()
+	if(distance >= 1)
 		return
 
 	if (on)

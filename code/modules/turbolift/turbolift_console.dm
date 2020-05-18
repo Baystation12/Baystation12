@@ -4,7 +4,6 @@
 	icon = 'icons/obj/turbolift.dmi'
 	anchored = 1
 	density = 0
-	plane = OBJ_PLANE
 	layer = ABOVE_OBJ_LAYER
 
 	var/datum/turbolift/lift
@@ -56,6 +55,7 @@
 	icon_state = "button"
 	var/light_up = FALSE
 	var/datum/turbolift_floor/floor
+	mouse_opacity = 2 //No more eyestrain aiming at tiny pixels
 
 /obj/structure/lift/button/Destroy()
 	if(floor && floor.ext_panel == src)
@@ -83,7 +83,7 @@
 	light_up = TRUE
 	update_icon()
 
-/obj/structure/lift/button/update_icon()
+/obj/structure/lift/button/on_update_icon()
 	if(light_up)
 		icon_state = "button_lit"
 	else
@@ -95,6 +95,7 @@
 /obj/structure/lift/panel
 	name = "elevator control panel"
 	icon_state = "panel"
+	mouse_opacity = 2 //No more eyestrain aiming at tiny pixels
 
 
 /obj/structure/lift/panel/attack_ghost(var/mob/user)

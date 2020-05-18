@@ -4,7 +4,7 @@
 /obj/item/weapon/material/knife/ritual/sacrifice
 	name = "sacrificial dagger"
 	desc = "This knife is dull but well used."
-	default_material = "cult"
+	default_material = MATERIAL_CULT
 
 /obj/item/weapon/material/knife/ritual/sacrifice/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
 	var/turf/T = get_turf(a)
@@ -42,9 +42,9 @@
 	base_icon = "bone_axe"
 	var/stored_power = 0
 
-/obj/item/weapon/material/twohanded/fireaxe/cult/examine(var/mob/user)
+/obj/item/weapon/material/twohanded/fireaxe/cult/examine(mob/user)
 	. = ..()
-	if(. && stored_power)
+	if(stored_power)
 		to_chat(user, "<span class='notice'>It exudes a death-like smell.</span>")
 
 /obj/item/weapon/material/twohanded/fireaxe/cult/resolve_attackby(var/atom/a, var/mob/user, var/click_params)
@@ -71,9 +71,9 @@
 	desc = "Said to bring those who drink it back to life, no matter the price."
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "urn"
-	volume = 120
-	amount_per_transfer_from_this = 30
+	volume = 10
+	amount_per_transfer_from_this = 10
 
 /obj/item/weapon/reagent_containers/food/drinks/zombiedrink/New()
 	..()
-	reagents.add_reagent(/datum/reagent/toxin/corrupting,120)
+	reagents.add_reagent(/datum/reagent/toxin/zombie, 10)

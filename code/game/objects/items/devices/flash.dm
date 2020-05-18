@@ -17,9 +17,9 @@
 	var/str_max = 7 //how powerful the effect COULD be
 
 /obj/item/device/flash/proc/clown_check(var/mob/user)
-	if(user && (CLUMSY in user.mutations) && prob(50))
+	if(user && (MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>\The [src] slips out of your hand.</span>")
-		user.drop_item()
+		user.unequip_item()
 		return 0
 	return 1
 
@@ -35,13 +35,13 @@
 
 //attack_as_weapon
 /obj/item/device/flash/attack(mob/living/M, mob/living/user, var/target_zone)
-	if(!user || !M)	return	//sanity
+	if(!user || !M)	return 0 //sanity
 	admin_attack_log(user, M, "flashed their victim using \a [src].", "Was flashed by \a [src].", "used \a [src] to flash")
 
-	if(!clown_check(user))	return
+	if(!clown_check(user))	return 0
 	if(broken)
 		to_chat(user, "<span class='warning'>\The [src] is broken.</span>")
-		return
+		return 0
 
 	flash_recharge()
 
@@ -54,27 +54,29 @@
 				broken = 1
 				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
 				icon_state = "[initial(icon_state)]_burnt"
-				return
+				return 0
 			times_used++
 		else	//can only use it 5 times a minute
 			to_chat(user, "<span class='warning'>*click* *click*</span>")
-			return
+			return 0
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(M)
 
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	var/flashfail = 0
+	var/flash_strength = (rand(str_min,str_max))
 
 	if(iscarbon(M))
 		if(M.stat!=DEAD)
 			var/mob/living/carbon/C = M
 			var/safety = C.eyecheck()
 			if(safety < FLASH_PROTECTION_MODERATE)
-				var/flash_strength = (rand(str_min,str_max))
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					flash_strength = round(H.species.flash_mod * flash_strength)
+					flash_strength = round(H.getFlashMod() * flash_strength)
+					if(safety > FLASH_PROTECTION_NONE)
+						flash_strength = (flash_strength / 2)
 				if(flash_strength > 0)
 					M.flash_eyes(FLASH_PROTECTION_MODERATE - safety)
 					M.Stun(flash_strength / 2)
@@ -88,19 +90,32 @@
 			else
 				flashfail = 1
 
+	else if(isanimal(M))
+		var/mob/living/simple_animal/SA = M
+		var/safety = SA.eyecheck()
+		if(safety < FLASH_PROTECTION_MAJOR)
+			SA.Weaken(2)
+			if(safety < FLASH_PROTECTION_MODERATE)
+				SA.Stun(flash_strength - 2)
+				SA.flash_eyes(2)
+				SA.eye_blurry += flash_strength
+				SA.confused += flash_strength
+		else 
+			flashfail = 1
+
 	else if(issilicon(M))
 		M.Weaken(rand(str_min,6))
+
 	else
 		flashfail = 1
 
 	if(isrobot(user))
 		spawn(0)
-			var/atom/movable/overlay/animation = new(user.loc)
+			var/atom/movable/overlay/animation = new(user)
 			animation.plane = user.plane
 			animation.layer = user.layer + 0.01
 			animation.icon_state = "blank"
 			animation.icon = 'icons/mob/mob.dmi'
-			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
 			qdel(animation)
@@ -113,17 +128,17 @@
 			user.visible_message("<span class='notice'>[user] overloads [M]'s sensors with \the [src]!</span>")
 	else
 		user.visible_message("<span class='notice'>[user] fails to blind [M] with \the [src]!</span>")
-	return
+	return 1
 
 
 
 
 /obj/item/device/flash/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
-	if(!user || !clown_check(user)) 	return
+	if(!user || !clown_check(user)) 	return 0
 
 	if(broken)
 		user.show_message("<span class='warning'>The [src.name] is broken</span>", 2)
-		return
+		return 0
 
 	flash_recharge()
 
@@ -135,11 +150,11 @@
 				broken = 1
 				to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
 				icon_state = "[initial(icon_state)]_burnt"
-				return
+				return 0
 			times_used++
 		else	//can only use it  5 times a minute
 			user.show_message("<span class='warning'>*click* *click*</span>", 2)
-			return
+			return 0
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	flick("[initial(icon_state)]_on", src)
@@ -162,7 +177,7 @@
 				M.flash_eyes()
 				M.eye_blurry += 2
 
-	return
+	return 1
 
 /obj/item/device/flash/emp_act(severity)
 	if(broken)	return

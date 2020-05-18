@@ -33,7 +33,7 @@
 	if(disability)
 		M.disabilities|=disability
 	if(sdisability)
-		M.sdisabilities|=sdisability
+		M.set_sdisability(sdisability)
 	if(activation_message)
 		to_chat(M, "<span class='warning'>[activation_message]</span>")
 	else
@@ -45,7 +45,7 @@
 	if(disability)
 		M.disabilities &= (~disability)
 	if(sdisability)
-		M.sdisabilities &= (~sdisability)
+		M.unset_sdisability(sdisability)
 	if(deactivation_message)
 		to_chat(M, "<span class='warning'>[deactivation_message]</span>")
 	else
@@ -79,7 +79,7 @@
 /datum/dna/gene/disability/clumsy
 	name="Clumsiness"
 	activation_message="You feel lightheaded."
-	mutation=CLUMSY
+	mutation=MUTATION_CLUMSY
 
 /datum/dna/gene/disability/clumsy/New()
 	block=GLOB.CLUMSYBLOCK
@@ -103,7 +103,7 @@
 /datum/dna/gene/disability/blindness
 	name="Blindness"
 	activation_message="You can't seem to see anything."
-	sdisability=BLIND
+	sdisability=BLINDED
 
 /datum/dna/gene/disability/blindness/New()
 	block=GLOB.BLINDBLOCK
@@ -111,7 +111,7 @@
 /datum/dna/gene/disability/deaf
 	name="Deafness"
 	activation_message="It's kinda quiet."
-	sdisability=DEAF
+	sdisability=DEAFENED
 
 /datum/dna/gene/disability/deaf/New()
 	block=GLOB.DEAFBLOCK

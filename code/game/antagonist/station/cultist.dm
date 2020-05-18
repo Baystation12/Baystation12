@@ -26,7 +26,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	role_text_plural = "Cultists"
 	restricted_jobs = list(/datum/job/lawyer, /datum/job/captain, /datum/job/hos)
 	protected_jobs = list(/datum/job/officer, /datum/job/warden, /datum/job/detective)
-	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain, /datum/job/psychiatrist)
+	blacklisted_jobs = list(/datum/job/ai, /datum/job/cyborg, /datum/job/chaplain, /datum/job/psychiatrist, /datum/job/submap)
 	feedback_tag = "cult_objective"
 	antag_indicator = "hudcultist"
 	welcome_text = "You have a tome in your possession; one that will help you start the cult. Use it well and remember - there are others."
@@ -40,6 +40,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	initial_spawn_req = 4
 	initial_spawn_target = 6
 	antaghud_indicator = "hudcultist"
+	skill_setter = /datum/antag_skill_setter/station
 
 	var/allow_narsie = 1
 	var/powerless = 0
@@ -95,7 +96,7 @@ GLOBAL_DATUM_INIT(cult, /datum/antagonist/cultist, new)
 	if(!..())
 		return 0
 	to_chat(player.current, "<span class='danger'>An unfamiliar white light flashes through your mind, cleansing the taint of the dark-one and the memories of your time as his servant with it.</span>")
-	player.memory = ""
+	player.ClearMemories(type)
 	if(show_message)
 		player.current.visible_message("<span class='notice'>[player.current] looks like they just reverted to their old faith!</span>")
 	remove_cult_magic(player.current)

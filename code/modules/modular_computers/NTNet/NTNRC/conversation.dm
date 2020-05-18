@@ -7,8 +7,10 @@ var/global/ntnrc_uid = 0
 	var/list/messages = list()
 	var/list/clients = list()
 	var/password
+	var/source_z
 
-/datum/ntnet_conversation/New()
+/datum/ntnet_conversation/New(var/_z)
+	source_z = _z
 	id = ntnrc_uid
 	ntnrc_uid++
 	if(ntnet_global)

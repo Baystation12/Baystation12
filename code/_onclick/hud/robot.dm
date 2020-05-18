@@ -10,7 +10,7 @@ var/obj/screen/robot_inventory
 
 	var/obj/screen/using
 
-//Radio
+	//Radio
 	using = new /obj/screen()
 	using.SetName("radio")
 	using.set_dir(SOUTHWEST)
@@ -19,7 +19,7 @@ var/obj/screen/robot_inventory
 	using.screen_loc = ui_movi
 	src.adding += using
 
-//Module select
+	//Module select
 
 	using = new /obj/screen()
 	using.SetName("module1")
@@ -48,9 +48,9 @@ var/obj/screen/robot_inventory
 	src.adding += using
 	mymob:inv3 = using
 
-//End of module select
+	//End of module select
 
-//Intent
+	//Intent
 	using = new /obj/screen()
 	using.SetName("act_intent")
 	using.set_dir(SOUTHWEST)
@@ -60,28 +60,28 @@ var/obj/screen/robot_inventory
 	src.adding += using
 	action_intent = using
 
-//Cell
-	mymob:cells = new /obj/screen()
-	mymob:cells.icon = 'icons/mob/screen1_robot.dmi'
-	mymob:cells.icon_state = "charge-empty"
-	mymob:cells.SetName("cell")
-	mymob:cells.screen_loc = ui_toxin
+	//Cell
+	mymob.cells = new /obj/screen()
+	mymob.cells.icon = 'icons/mob/screen1_robot.dmi'
+	mymob.cells.icon_state = "charge-empty"
+	mymob.cells.SetName("cell")
+	mymob.cells.screen_loc = ui_toxin
 
-//Health
+	//Health
 	mymob.healths = new /obj/screen()
 	mymob.healths.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.healths.icon_state = "health0"
 	mymob.healths.SetName("health")
 	mymob.healths.screen_loc = ui_borg_health
 
-//Installed Module
+	//Installed Module
 	mymob.hands = new /obj/screen()
 	mymob.hands.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.hands.icon_state = "nomod"
 	mymob.hands.SetName("module")
 	mymob.hands.screen_loc = ui_borg_module
 
-//Module Panel
+	//Module Panel
 	using = new /obj/screen()
 	using.SetName("panel")
 	using.icon = 'icons/mob/screen1_robot.dmi'
@@ -89,22 +89,23 @@ var/obj/screen/robot_inventory
 	using.screen_loc = ui_borg_panel
 	src.adding += using
 
-//Store
+	//Store
 	mymob.throw_icon = new /obj/screen()
 	mymob.throw_icon.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.throw_icon.icon_state = "store"
 	mymob.throw_icon.SetName("store")
 	mymob.throw_icon.screen_loc = ui_borg_store
 
-//Inventory
+	//Inventory
 	robot_inventory = new /obj/screen()
 	robot_inventory.SetName("inventory")
 	robot_inventory.icon = 'icons/mob/screen1_robot.dmi'
 	robot_inventory.icon_state = "inventory"
 	robot_inventory.screen_loc = ui_borg_inventory
 
-//Temp
+	//Temp
 	mymob.bodytemp = new /obj/screen()
+	mymob.bodytemp.icon = 'icons/mob/status_indicators.dmi'
 	mymob.bodytemp.icon_state = "temp0"
 	mymob.bodytemp.SetName("body temperature")
 	mymob.bodytemp.screen_loc = ui_temp
@@ -116,17 +117,17 @@ var/obj/screen/robot_inventory
 	mymob.oxygen.SetName("oxygen")
 	mymob.oxygen.screen_loc = ui_oxygen
 
-	mymob.fire = new /obj/screen()
-	mymob.fire.icon = 'icons/mob/screen1_robot.dmi'
-	mymob.fire.icon_state = "fire0"
-	mymob.fire.SetName("fire")
-	mymob.fire.screen_loc = ui_fire
-
 	mymob.pullin = new /obj/screen()
 	mymob.pullin.icon = 'icons/mob/screen1_robot.dmi'
 	mymob.pullin.icon_state = "pull0"
 	mymob.pullin.SetName("pull")
 	mymob.pullin.screen_loc = ui_borg_pull
+
+	mymob.fire = new /obj/screen()
+	mymob.fire.icon = 'icons/mob/screen1_robot.dmi'
+	mymob.fire.icon_state = "fire0"
+	mymob.fire.SetName("fire")
+	mymob.fire.screen_loc = ui_fire
 
 	mymob.zone_sel = new /obj/screen/zone_sel()
 	mymob.zone_sel.icon = 'icons/mob/screen1_robot.dmi'
@@ -154,12 +155,14 @@ var/obj/screen/robot_inventory
 
 
 /datum/hud/proc/update_robot_modules_display()
-	if(!isrobot(mymob))
+	if(!isrobot(mymob) || !mymob.client)
 		return
 
 	var/mob/living/silicon/robot/r = mymob
 
 	if(r.shown_robot_modules)
+		if(r.s_active)
+			r.s_active.close(r) //Closes the inventory ui.
 		//Modules display is shown
 		//r.client.screen += robot_inventory	//"store" icon
 
@@ -167,14 +170,14 @@ var/obj/screen/robot_inventory
 			to_chat(usr, "<span class='danger'>No module selected</span>")
 			return
 
-		if(!r.module.modules)
+		if(!r.module.equipment)
 			to_chat(usr, "<span class='danger'>Selected module has no modules to select</span>")
 			return
 
 		if(!r.robot_modules_background)
 			return
 
-		var/display_rows = -round(-(r.module.modules.len) / 8)
+		var/display_rows = -round(-(r.module.equipment.len) / 8)
 		r.robot_modules_background.screen_loc = "CENTER-4:16,SOUTH+1:7 to CENTER+3:16,SOUTH+[display_rows]:7"
 		r.client.screen += r.robot_modules_background
 
@@ -185,13 +188,13 @@ var/obj/screen/robot_inventory
 		//be emagged before they actually select a module. - or some situation can cause them to get a new module
 		// - or some situation might cause them to get de-emagged or something.
 		if(r.emagged)
-			if(!(r.module.emag in r.module.modules))
-				r.module.modules.Add(r.module.emag)
+			if(!(r.module.emag in r.module.equipment))
+				r.module.equipment.Add(r.module.emag)
 		else
-			if(r.module.emag in r.module.modules)
-				r.module.modules.Remove(r.module.emag)
+			if(r.module.emag in r.module.equipment)
+				r.module.equipment.Remove(r.module.emag)
 
-		for(var/atom/movable/A in r.module.modules)
+		for(var/atom/movable/A in r.module.equipment)
 			if( (A != r.module_state_1) && (A != r.module_state_2) && (A != r.module_state_3) )
 				//Module is not currently active
 				r.client.screen += A
@@ -209,7 +212,7 @@ var/obj/screen/robot_inventory
 	else
 		//Modules display is hidden
 		//r.client.screen -= robot_inventory	//"store" icon
-		for(var/atom/A in r.module.modules)
+		for(var/atom/A in r.module.equipment)
 			if( (A != r.module_state_1) && (A != r.module_state_2) && (A != r.module_state_3) )
 				//Module is not currently active
 				r.client.screen -= A

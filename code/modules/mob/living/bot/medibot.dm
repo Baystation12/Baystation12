@@ -3,8 +3,8 @@
 	desc = "A little medical robot. He looks somewhat underwhelmed."
 	icon = 'icons/mob/bot/medibot.dmi'
 	icon_state = "medibot0"
-	req_one_access = list(access_medical, access_robotics)
-	botcard_access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
+	req_access = list(list(access_medical, access_robotics))
+	botcard_access = list(access_medical, access_morgue, access_surgery, access_chemistry, access_virology)
 	var/skin = null //Set to "tox", "ointment" or "o2" for the other two firstaid kits.
 
 	//AI vars
@@ -20,7 +20,6 @@
 	var/treatment_oxy = /datum/reagent/tricordrazine
 	var/treatment_fire = /datum/reagent/tricordrazine
 	var/treatment_tox = /datum/reagent/tricordrazine
-	var/treatment_virus = /datum/reagent/spaceacillin
 	var/treatment_emag = /datum/reagent/toxin
 	var/declare_treatment = 0 //When attempting to treat a patient, should it notify everyone wearing medhuds?
 
@@ -103,8 +102,8 @@
 			to_chat(user, "<span class='notice'>There is already a beaker loaded.</span>")
 			return
 
-		user.drop_item()
-		O.loc = src
+		if(!user.unEquip(O, src))
+			return
 		reagent_glass = O
 		to_chat(user, "<span class='notice'>You insert [O].</span>")
 		return
@@ -207,12 +206,12 @@
 
 	new /obj/item/weapon/storage/firstaid(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/device/healthanalyzer(Tsec)
+	new /obj/item/device/scanner/health(Tsec)
 	if (prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
 	if(reagent_glass)
-		reagent_glass.loc = Tsec
+		reagent_glass.forceMove(Tsec)
 		reagent_glass = null
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
@@ -249,71 +248,3 @@
 
 	if((H.getToxLoss() >= heal_threshold) && (!H.reagents.has_reagent(treatment_tox)))
 		return treatment_tox
-
-/* Construction */
-
-/obj/item/weapon/storage/firstaid/attackby(var/obj/item/robot_parts/S, mob/user as mob)
-	if ((!istype(S, /obj/item/robot_parts/l_arm)) && (!istype(S, /obj/item/robot_parts/r_arm)))
-		..()
-		return
-
-	if(contents.len >= 1)
-		to_chat(user, "<span class='notice'>You need to empty [src] out first.</span>")
-		return
-
-	var/obj/item/weapon/firstaid_arm_assembly/A = new /obj/item/weapon/firstaid_arm_assembly
-
-	A.skin = icon_state
-	qdel(S)
-	user.put_in_hands(A)
-	to_chat(user, "<span class='notice'>You add the robot arm to the first aid kit.</span>")
-	user.drop_from_inventory(src)
-	qdel(src)
-
-/obj/item/weapon/firstaid_arm_assembly
-	name = "first aid/robot arm assembly"
-	desc = "A first aid kit with a robot arm permanently grafted to it."
-	icon = 'icons/mob/bot/medibot.dmi'
-	icon_state = "firstaid_arm"
-	var/build_step = 0
-	var/created_name = "Medibot" //To preserve the name if it's a unique medbot I guess
-	var/skin = null //Same as medbot, set to tox or ointment for the respective kits.
-	w_class = ITEM_SIZE_NORMAL
-
-/obj/item/weapon/firstaid_arm_assembly/Initialize()
-	. = ..()
-	if(skin != "firstaid")//Let's not add any unnecessary overlays.
-		overlays += image('icons/mob/bot/medibot_skins.dmi', "kit_skin_[src.skin]")
-
-/obj/item/weapon/firstaid_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/weapon/pen))
-		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, usr) && loc != usr)
-			return
-		created_name = t
-	else
-		switch(build_step)
-			if(0)
-				if(istype(W, /obj/item/device/healthanalyzer))
-					user.drop_item()
-					qdel(W)
-					build_step++
-					to_chat(user, "<span class='notice'>You add the health sensor to [src].</span>")
-					SetName("First aid/robot arm/health analyzer assembly")
-					overlays += image('icons/mob/bot/medibot.dmi', "na_scanner")
-
-			if(1)
-				if(isprox(W))
-					user.drop_item()
-					qdel(W)
-					to_chat(user, "<span class='notice'>You complete the Medibot! Beep boop.</span>")
-					var/turf/T = get_turf(src)
-					var/mob/living/bot/medbot/S = new /mob/living/bot/medbot(T)
-					S.skin = skin
-					S.SetName(created_name)
-					S.update_icons() // apply the skin
-					user.drop_from_inventory(src)
-					qdel(src)

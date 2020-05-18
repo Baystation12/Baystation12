@@ -5,9 +5,8 @@
 	var/dead_icon // Icon to use when the organ has died.
 	var/surface_accessible = FALSE
 	var/relative_size = 25   // Relative size of the organ. Roughly % of space they take in the target projection :D
-	var/list/will_assist_languages = list()
-	var/list/datum/language/assists_languages = list()
 	var/min_bruised_damage = 10       // Damage before considered bruised
+	var/damage_reduction = 0.5     //modifier for internal organ injury
 
 /obj/item/organ/internal/New(var/mob/living/carbon/holder)
 	if(max_damage)
@@ -22,7 +21,6 @@
 			if(!E)
 				CRASH("[src] spawned in [holder] without a parent organ: [parent_organ].")
 			E.internal_organs |= src
-			E.cavity_max_w_class = max(E.cavity_max_w_class, w_class)
 
 /obj/item/organ/internal/Destroy()
 	if(owner)
@@ -71,7 +69,7 @@
 		return 0 //organs don't work very well in the body when they aren't properly attached
 
 	// robotic organs emulate behavior of the equivalent flesh organ of the species
-	if(robotic >= ORGAN_ROBOT || !species)
+	if(BP_IS_ROBOTIC(src) || !species)
 		species = target.species
 
 	..()
@@ -107,7 +105,7 @@
 	min_broken_damage += 10
 
 /obj/item/organ/internal/proc/getToxLoss()
-	if(isrobotic())
+	if(BP_IS_ROBOTIC(src))
 		return damage * 0.5
 	return damage
 
@@ -120,8 +118,16 @@
 /obj/item/organ/internal/proc/is_bruised()
 	return damage >= min_bruised_damage
 
-/obj/item/organ/internal/take_damage(amount, var/silent=0)
-	if(isrobotic())
+/obj/item/organ/internal/proc/set_max_damage(var/ndamage)
+	max_damage = Floor(ndamage)
+	min_broken_damage = Floor(0.75 * max_damage)
+	min_bruised_damage = Floor(0.25 * max_damage)
+
+obj/item/organ/internal/take_general_damage(var/amount, var/silent = FALSE)
+	take_internal_damage(amount, silent)
+
+/obj/item/organ/internal/proc/take_internal_damage(amount, var/silent=0)
+	if(BP_IS_ROBOTIC(src))
 		damage = between(0, src.damage + (amount * 0.8), max_damage)
 	else
 		damage = between(0, src.damage + amount, max_damage)
@@ -158,7 +164,37 @@
 	handle_regeneration()
 
 /obj/item/organ/internal/proc/handle_regeneration()
-	if(!damage || isrobotic() || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
+	if(!damage || BP_IS_ROBOTIC(src) || !owner || owner.chem_effects[CE_TOXIN] || owner.is_asystole())
 		return
 	if(damage < 0.1*max_damage)
 		heal_damage(0.1)
+
+/obj/item/organ/internal/proc/surgical_fix(mob/user)
+	if(damage > min_broken_damage)
+		var/scarring = damage/max_damage
+		scarring = 1 - 0.3 * scarring ** 2 // Between ~15 and 30 percent loss
+		var/new_max_dam = Floor(scarring * max_damage)
+		if(new_max_dam < max_damage)
+			to_chat(user, "<span class='warning'>Not every part of [src] could be saved, some dead tissue had to be removed, making it more suspectable to damage in the future.</span>")
+			set_max_damage(new_max_dam)
+	heal_damage(damage)
+
+/obj/item/organ/internal/proc/get_scarring_level()
+	. = (initial(max_damage) - max_damage)/initial(max_damage)
+
+/obj/item/organ/internal/get_scan_results()
+	. = ..()
+	var/scar_level = get_scarring_level()
+	if(scar_level > 0.01)
+		. += "[get_wound_severity(get_scarring_level())] scarring"
+
+/obj/item/organ/internal/emp_act(severity)
+	if(!BP_IS_ROBOTIC(src))
+		return
+	switch (severity)
+		if (1)
+			take_internal_damage(16)
+		if (2)
+			take_internal_damage(9)
+		if (3)
+			take_internal_damage(6.5)

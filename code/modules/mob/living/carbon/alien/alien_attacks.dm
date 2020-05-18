@@ -1,4 +1,3 @@
-//There has to be a better way to define this shit. ~ Z
 //can't equip anything
 /mob/living/carbon/alien/attack_ui(slot_id)
 	return
@@ -15,7 +14,7 @@
 		else
 			var/damage = rand(1, 9)
 			if (prob(90))
-				if (HULK in M.mutations)
+				if (MUTATION_HULK in M.mutations)
 					damage += 5
 					spawn(0)
 						Paralyse(1)

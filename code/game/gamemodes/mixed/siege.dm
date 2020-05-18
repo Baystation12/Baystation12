@@ -5,8 +5,8 @@
 	extended_round_description = "GENERAL QUARTERS! OH GOD WE GAVE THE REVOLUTIONARIES GUNS!"
 	required_players = 20
 	required_enemies = 5
-	end_on_antag_death = 0
-	auto_recall_shuttle = 0
+	end_on_antag_death = FALSE
+	auto_recall_shuttle = FALSE
 	shuttle_delay = 2
 	antag_tags = list(MODE_REVOLUTIONARY, MODE_LOYALIST, MODE_MERCENARY)
-	require_all_templates = 1
+	require_all_templates = TRUE

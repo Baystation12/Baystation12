@@ -45,9 +45,13 @@ REVIVAL_BRAIN_LIFE -1
 
 
 ## These modify the run/walk speed of all mobs before the mob-specific modifiers are applied. 
-RUN_SPEED 2
-WALK_SPEED 1
-
+RUN_DELAY 2
+WALK_DELAY 4
+CREEP_DELAY 6
+MINIMUM_SPRINT_COST 0.8
+SKILL_SPRINT_COST_RANGE 0.8
+MINIMUM_STAMINA_RECOVERY 5
+MAXIMUM_STAMINA_RECOVERY 5
 
 ## The variables below affect the movement of specific mob types.
 HUMAN_DELAY 0

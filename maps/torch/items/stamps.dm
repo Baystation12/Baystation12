@@ -4,31 +4,31 @@
 
 /obj/item/weapon/stamp/xo
 	name = "executive officer's rubber stamp"
-	icon_state = "stamp-hop"
+	icon_state = "stamp-xo"
 
 /obj/item/weapon/stamp/sea
 	name = "senior enlisted advisor's rubber stamp"
-	icon_state = "stamp-hop"
+	icon_state = "stamp-xo"
 
 /obj/item/weapon/stamp/cos
 	name = "chief of security's rubber stamp"
-	icon_state = "stamp-hos"
+	icon_state = "stamp-cos"
 
 /obj/item/weapon/stamp/brig
-	name = "brig officer's rubber stamp"
-	icon_state = "stamp-ward"
+	name = "brig chief's rubber stamp"
+	icon_state = "stamp-brig"
 
 /obj/item/weapon/stamp/solgov
 	name = "\improper Sol Central Government rubber stamp"
-	icon_state = "stamp-intaff"
+	icon_state = "stamp-solgov"
 
 /obj/item/weapon/stamp/nt
-	name = "\improper NanoTrasen rubber stamp"
-	icon_state = "stamp-intaff"
+	name = "\improper corporate rubber stamp"
+	icon_state = "stamp-corp"
 
 /obj/item/weapon/stamp/deckoff
-	name = "deck officer's rubber stamp"
-	icon_state = "stamp-qm"
+	name = "deck chief's rubber stamp"
+	icon_state = "stamp-deckchief"
 
 /obj/item/weapon/stamp/supply
 	name = "supply rubber stamp"

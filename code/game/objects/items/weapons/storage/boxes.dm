@@ -35,6 +35,16 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 
+/obj/item/weapon/storage/box/union_cards
+	name = "box of union cards"
+	desc = "A box of spare unsigned union membership cards."
+	startswith = list(/obj/item/weapon/card/union = 7)
+
+/obj/item/weapon/storage/box/large/union_cards
+	name = "large box of union cards"
+	desc = "A large box of spare unsigned union membership cards."
+	startswith = list(/obj/item/weapon/card/union = 14)
+
 // BubbleWrap - A box can be folded up to make card
 /obj/item/weapon/storage/box/attack_self(mob/user as mob)
 	if(..()) return
@@ -85,6 +95,7 @@
 	icon_state = "survivalvox"
 	startswith = list(/obj/item/clothing/mask/breath = 1,
 					/obj/item/weapon/tank/emergency/nitrogen = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1)
@@ -93,10 +104,10 @@
 	name = "engineer survival kit"
 	desc = "A box decorated in warning colors that contains a limited supply of survival tools. The panel and orange stripe indicate this one as the engineering variant."
 	icon_state = "survivaleng"
-	startswith = list(/obj/item/clothing/mask/breath = 1,
+	startswith = list(/obj/item/clothing/mask/breath/scba = 1,
 					/obj/item/weapon/tank/emergency/oxygen/engi = 1,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector = 1,
-					/obj/item/weapon/reagent_containers/hypospray/autoinjector/detox = 1,
+					/obj/item/weapon/reagent_containers/hypospray/autoinjector/antirad = 1,
 					/obj/item/stack/medical/bruise_pack = 1,
 					/obj/item/device/flashlight/flare/glowstick = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 1,
@@ -134,49 +145,52 @@
 	icon_state = "beaker"
 	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker = 7)
 
-/obj/item/weapon/storage/box/blanks
+/obj/item/weapon/storage/box/beakers/insulated
+	name = "box of insulated beakers"
+	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker/insulated = 7)
+
+/obj/item/weapon/storage/box/ammo
+	name = "ammo box"
+	icon_state = "ammo"
+	desc = "A sturdy metal box with several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
+	use_sound = 'sound/effects/closet_open.ogg'
+
+/obj/item/weapon/storage/box/ammo/blanks
 	name = "box of blank shells"
 	desc = "It has a picture of a gun and several warning symbols on the front."
-	startswith = list(/obj/item/ammo_casing/shotgun/blank = 7)
+	startswith = list(/obj/item/ammo_casing/shotgun/blank = 8)
 
-/obj/item/weapon/storage/box/beanbags
-	name = "box of beanbag shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/beanbag = 7)
-
-/obj/item/weapon/storage/box/shotgunammo
-	name = "box of shotgun slugs"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun = 7)
-
-/obj/item/weapon/storage/box/shotgunshells
-	name = "box of shotgun shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/pellet = 7)
-
-/obj/item/weapon/storage/box/flashshells
-	name = "box of illumination shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/flash = 7)
-
-/obj/item/weapon/storage/box/stunshells
-	name = "box of stun shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/stunshell = 7)
-
-/obj/item/weapon/storage/box/practiceshells
+/obj/item/weapon/storage/box/ammo/practiceshells
 	name = "box of practice shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/shotgun/practice = 7)
+	startswith = list(/obj/item/ammo_casing/shotgun/practice = 8)
 
-/obj/item/weapon/storage/box/sniperammo
-	name = "box of 14.5mm shells"
-	desc = "It has a picture of a gun and several warning symbols on the front.<br>WARNING: Live ammunition. Misuse may result in serious injury or death."
-	startswith = list(/obj/item/ammo_casing/a145 = 7)
+/obj/item/weapon/storage/box/ammo/beanbags
+	name = "box of beanbag shells"
+	startswith = list(/obj/item/ammo_magazine/shotholder/beanbag = 2)
 
-/obj/item/weapon/storage/box/sniperammo/apds
-	name = "box of 14.5mm APDS shells"
-	startswith = list(/obj/item/ammo_casing/a145/apds = 3)
+/obj/item/weapon/storage/box/ammo/shotgunammo
+	name = "box of shotgun slugs"
+	startswith = list(/obj/item/ammo_magazine/shotholder = 2)
+
+/obj/item/weapon/storage/box/ammo/shotgunshells
+	name = "box of shotgun shells"
+	startswith = list(/obj/item/ammo_magazine/shotholder/shell = 2)
+
+/obj/item/weapon/storage/box/ammo/flashshells
+	name = "box of illumination shells"
+	startswith = list(/obj/item/ammo_magazine/shotholder/flash = 2)
+
+/obj/item/weapon/storage/box/ammo/stunshells
+	name = "box of stun shells"
+	startswith = list(/obj/item/ammo_magazine/shotholder/stun = 2)
+
+/obj/item/weapon/storage/box/ammo/sniperammo
+	name = "box of sniper shells"
+	startswith = list(/obj/item/ammo_casing/shell = 7)
+
+/obj/item/weapon/storage/box/ammo/sniperammo/apds
+	name = "box of sniper APDS shells"
+	startswith = list(/obj/item/ammo_casing/shell/apds = 3)
 
 /obj/item/weapon/storage/box/flashbangs
 	name = "box of flashbangs"
@@ -247,7 +261,7 @@
 	name = "box of prescription glasses"
 	desc = "This box contains nerd glasses."
 	icon_state = "glasses"
-	startswith = list(/obj/item/clothing/glasses/regular = 7)
+	startswith = list(/obj/item/clothing/glasses/prescription = 7)
 
 /obj/item/weapon/storage/box/cdeathalarm_kit
 	name = "death alarm kit"
@@ -279,6 +293,8 @@
 	icon_state = "donk_kit"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket = 6)
 
+//cubed animals
+
 /obj/item/weapon/storage/box/monkeycubes
 	name = "monkey cube box"
 	desc = "Drymate brand monkey cubes. Just add water!"
@@ -289,7 +305,7 @@
 
 /obj/item/weapon/storage/box/monkeycubes/farwacubes
 	name = "farwa cube box"
-	desc = "Drymate brand farwa cubes, shipped from Ahdomai. Just add water!"
+	desc = "Drymate brand farwa cubes, shipped from Nyx. Just add water!"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube = 5)
 
 /obj/item/weapon/storage/box/monkeycubes/stokcubes
@@ -301,6 +317,11 @@
 	name = "neaera cube box"
 	desc = "Drymate brand neaera cubes, shipped from Jargon 4. Just add water!"
 	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube = 5)
+
+/obj/item/weapon/storage/box/monkeycubes/spidercubes
+	name = "spiderling cube box"
+	desc = "Drymate brand Instant spiders. WHY WOULD YOU ORDER THIS!?"
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/spidercube = 5)
 
 /obj/item/weapon/storage/box/ids
 	name = "box of spare IDs"
@@ -353,16 +374,16 @@
 	can_hold = list(/obj/item/weapon/flame/match)
 	startswith = list(/obj/item/weapon/flame/match = 10)
 
-	attackby(obj/item/weapon/flame/match/W as obj, mob/user as mob)
-		if(istype(W) && !W.lit && !W.burnt)
-			W.lit = 1
-			W.damtype = "burn"
-			W.icon_state = "match_lit"
-			START_PROCESSING(SSobj, W)
-			playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
-			user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
-		W.update_icon()
-		return
+/obj/item/weapon/storage/box/matches/attackby(obj/item/weapon/flame/match/W as obj, mob/user as mob)
+	if(istype(W) && !W.lit && !W.burnt)
+		W.lit = 1
+		W.damtype = "burn"
+		W.icon_state = "match_lit"
+		START_PROCESSING(SSobj, W)
+		playsound(src.loc, 'sound/items/match.ogg', 60, 1, -4)
+		user.visible_message("<span class='notice'>[user] strikes the match on the matchbox.</span>")
+	W.update_icon()
+	return
 
 /obj/item/weapon/storage/box/autoinjectors
 	name = "box of injectors"
@@ -434,10 +455,14 @@
 	item_state = "medicalpack"
 	foldable = null
 	max_w_class = ITEM_SIZE_NORMAL
-	w_class = ITEM_SIZE_HUGE
+	w_class = ITEM_SIZE_LARGE
 	can_hold = list(/obj/item/organ, /obj/item/weapon/reagent_containers/food, /obj/item/weapon/reagent_containers/glass)
-	max_storage_space = DEFAULT_BACKPACK_STORAGE
+	max_storage_space = DEFAULT_LARGEBOX_STORAGE
 	use_to_pickup = 1 // for picking up broken bulbs, not that most people will try
+	temperature = -16 CELSIUS
+
+/obj/item/weapon/storage/box/freezer/ProcessAtomTemperature()
+	return PROCESS_KILL
 
 /obj/item/weapon/storage/box/checkers
 	name = "checkers box"
@@ -503,3 +528,98 @@
 	desc = "A bag full of juicy, yummy detergent pods. This bag has been labeled: Tod Pods, a Waffle Co. product."
 	icon_state = "detergent"
 	startswith = list(/obj/item/weapon/reagent_containers/pill/detergent = 10)
+
+//cargosia supply boxes - Primarily for restocking
+
+/obj/item/weapon/storage/box/tapes
+	name = "box of spare tapes"
+	desc = "A box full of blank tapes."
+	startswith = list(/obj/item/device/tape/random = 14)
+
+/obj/item/weapon/storage/box/taperolls
+	name = "box of spare taperolls"
+	desc = "A box full of mixed barricade tapes."
+	startswith = list(/obj/item/taperoll/police,
+						/obj/item/taperoll/engineering,
+						/obj/item/taperoll/atmos,
+						/obj/item/taperoll/research,
+						/obj/item/taperoll/medical,
+						/obj/item/taperoll/bureaucracy
+					)
+
+/obj/item/weapon/storage/box/bogrolls
+	name = "box of spare bogrolls"
+	desc = "A box full of toilet paper."
+	startswith = list(/obj/item/taperoll/bog = 6)
+
+/obj/item/weapon/storage/box/cola
+	name = "box of sodas"
+	desc = "A box full of soda cans."
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 7)
+
+/obj/item/weapon/storage/box/water
+	name = "box of water bottles"
+	desc = "A box full of bottled water."
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 7)
+
+/obj/item/weapon/storage/box/cola/spacewind
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 7)
+
+/obj/item/weapon/storage/box/cola/drgibb
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 7)
+
+/obj/item/weapon/storage/box/cola/starkist
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 7)
+
+/obj/item/weapon/storage/box/cola/spaceup
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 7)
+
+/obj/item/weapon/storage/box/cola/lemonlime
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime = 7)
+
+/obj/item/weapon/storage/box/cola/icedtea
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 7)
+
+/obj/item/weapon/storage/box/cola/grapejuice
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 7)
+
+/obj/item/weapon/storage/box/cola/sodawater
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater = 7)
+
+/obj/item/weapon/storage/box/snack
+	name = "box of snack food"
+	desc = "A box full of snack foods."
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 7)
+
+/obj/item/weapon/storage/box/snack/jerky
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 7)
+
+/obj/item/weapon/storage/box/snack/noraisin
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 7)
+
+/obj/item/weapon/storage/box/snack/cheesehonks
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 7)
+
+/obj/item/weapon/storage/box/snack/tastybread
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/tastybread = 7)
+
+/obj/item/weapon/storage/box/snack/candy
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/candy = 7)
+
+/obj/item/weapon/storage/box/snack/chips
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/chips = 7)
+
+//canned goods in cardboard
+/obj/item/weapon/storage/box/canned
+	name = "box of canned food"
+	desc = "A box full of canned foods."
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/spinach = 1)
+
+/obj/item/weapon/storage/box/canned/beef
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/beef = 6)
+
+/obj/item/weapon/storage/box/canned/beans
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/beans = 6)
+
+/obj/item/weapon/storage/box/canned/tomato
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/canned/tomato = 6)

@@ -17,19 +17,19 @@
 /obj/item/device/encryptionkey/syndicate
 	icon_state = "cypherkey"
 	channels = list("Mercenary" = 1)
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	syndie = 1//Signifies that it de-crypts Syndicate transmissions
 
 /obj/item/device/encryptionkey/raider
 	icon_state = "cypherkey"
 	channels = list("Raider" = 1)
-	origin_tech = list(TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_ESOTERIC = 2)
 	syndie = 1
 
 /obj/item/device/encryptionkey/binary
 	icon_state = "cypherkey"
 	translate_binary = 1
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 
 /obj/item/device/encryptionkey/headset_sec
 	name = "security radio encryption key"
@@ -78,7 +78,7 @@
 	channels = list("Command" = 1, "Security" = 1, "Engineering" = 1, "Science" = 1, "Medical" = 1, "Supply" = 1, "Service" = 1, "AI Private" = 1)
 
 /obj/item/device/encryptionkey/heads/rd
-	name = "research director's encryption key"
+	name = "chief science officer's encryption key"
 	icon_state = "rd_cypherkey"
 	channels = list("Science" = 1, "Command" = 1)
 
@@ -120,8 +120,13 @@
 	name = "special operations radio encryption key"
 	icon_state = "bin_cypherkey"
 	channels = list("Special Ops" = 1)
-	origin_tech = list(TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_ESOTERIC = 2)
 
 /obj/item/device/encryptionkey/entertainment
 	name = "entertainment radio key"
 	channels = list("Entertainment" = 1)
+
+/obj/item/device/encryptionkey/headset_mining
+	name = "prospector radio encryption key"
+	icon_state = "srv_cypherkey"
+	channels = list("Supply" = 1)

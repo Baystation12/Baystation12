@@ -5,8 +5,9 @@
 	w_class = ITEM_SIZE_NORMAL
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "maintenance_jack"
-	force = 8 //It has a hammer head, should probably do some more damage. - Cirra
-	throwforce = 10
+	force = 17.5 //It has a hammer head, should probably do some more damage. - Cirra
+	attack_cooldown = 2.5*DEFAULT_WEAPON_COOLDOWN
+	melee_accuracy_bonus = -25
 
 
 
@@ -24,7 +25,7 @@
 	var/obj/item/weapon/airlock_electronics/brace/electronics
 
 
-/obj/item/weapon/airlock_brace/examine(var/mob/user)
+/obj/item/weapon/airlock_brace/examine(mob/user)
 	. = ..()
 	to_chat(user, examine_health())
 
@@ -44,7 +45,7 @@
 			return "\The [src] is in excellent condition."
 
 
-/obj/item/weapon/airlock_brace/update_icon()
+/obj/item/weapon/airlock_brace/on_update_icon()
 	if(airlock)
 		icon_state = "brace_closed"
 	else
@@ -129,7 +130,7 @@
 		user.put_in_hands(src)
 		airlock.visible_message("\The [user] removes \the [src] from \the [airlock]!")
 	else
-		forceMove(get_turf(src))
+		dropInto(loc)
 	airlock.brace = null
 	airlock.update_icon()
 	airlock = null
@@ -144,9 +145,6 @@
 /obj/item/weapon/airlock_brace/proc/update_access()
 	if(!electronics)
 		return
+	req_access = electronics.conf_access
 	if(electronics.one_access)
-		req_access = list()
-		req_one_access = electronics.conf_access
-	else
-		req_access = electronics.conf_access
-		req_one_access = list()
+		req_access = list(req_access)

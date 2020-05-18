@@ -10,17 +10,21 @@ var/list/solars_list = list()
 	icon_state = "sp_base"
 	anchored = 1
 	density = 1
-	use_power = 0
 	idle_power_usage = 0
 	active_power_usage = 0
 	var/id = 0
 	var/health = 10
 	var/obscured = 0
 	var/sunfrac = 0
+	var/efficiency = 1
 	var/adir = SOUTH // actual dir
 	var/ndir = SOUTH // target dir
 	var/turn_angle = 0
 	var/obj/machinery/power/solar_control/control = null
+
+/obj/machinery/power/solar/improved
+	name = "improved solar panel"
+	efficiency = 2
 
 /obj/machinery/power/solar/drain_power()
 	return -1
@@ -52,7 +56,7 @@ var/list/solars_list = list()
 		S = new /obj/item/solar_assembly(src)
 		S.glass_type = /obj/item/stack/material/glass
 		S.anchored = 1
-	S.loc = src
+	S.forceMove(src)
 	if(S.glass_type == /obj/item/stack/material/glass/reinforced) //if the panel is in reinforced glass
 		health *= 2 								 //this need to be placed here, because panels already on the map don't have an assembly linked to
 	update_icon()
@@ -67,7 +71,7 @@ var/list/solars_list = list()
 		if(do_after(user, 50,src))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
-				S.loc = src.loc
+				S.dropInto(loc)
 				S.give_glass()
 			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='notice'>[user] takes the glass off the solar panel.</span>")
@@ -79,25 +83,22 @@ var/list/solars_list = list()
 		src.healthcheck()
 	..()
 
-
 /obj/machinery/power/solar/proc/healthcheck()
 	if (src.health <= 0)
 		if(!(stat & BROKEN))
-			broken()
+			set_broken(TRUE)
 
-
-
-/obj/machinery/power/solar/update_icon()
+/obj/machinery/power/solar/on_update_icon()
 	..()
 	overlays.Cut()
 	if(stat & BROKEN)
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = FLY_LAYER)
+		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel-b", layer = ABOVE_HUMAN_LAYER)
 	else
-		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = FLY_LAYER)
+		overlays += image('icons/obj/power.dmi', icon_state = "solar_panel", layer = ABOVE_HUMAN_LAYER)
 		src.set_dir(angle2dir(adir))
 	return
 
-//calculates the fraction of the sunlight that the panel recieves
+//calculates the fraction of the sunlight that the panel receives
 /obj/machinery/power/solar/proc/update_solar_exposure()
 	if(!GLOB.sun)
 		return
@@ -113,9 +114,9 @@ var/list/solars_list = list()
 		return
 
 	sunfrac = cos(p_angle) ** 2
-	//isn't the power recieved from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
+	//isn't the power received from the incoming light proportional to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
-/obj/machinery/power/solar/Process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
+/obj/machinery/power/solar/Process()
 	if(stat & BROKEN)
 		return
 	if(!GLOB.sun || !control) //if there's no sun or the panel is not linked to a solar control computer, no need to proceed
@@ -125,22 +126,21 @@ var/list/solars_list = list()
 		if(powernet == control.powernet)//check if the panel is still connected to the computer
 			if(obscured) //get no light from the sun, so don't generate power
 				return
-			var/sgen = solar_gen_rate * sunfrac
+			var/sgen = solar_gen_rate * sunfrac * efficiency
 			add_avail(sgen)
 			control.gen += sgen
 		else //if we're no longer on the same powernet, remove from control computer
 			unset_control()
 
-/obj/machinery/power/solar/proc/broken()
-	stat |= BROKEN
-	health = 0
-	new /obj/item/weapon/material/shard(src.loc)
-	new /obj/item/weapon/material/shard(src.loc)
-	var/obj/item/solar_assembly/S = locate() in src
-	S.glass_type = null
-	unset_control()
-	update_icon()
-
+/obj/machinery/power/solar/set_broken(new_state)
+	. = ..()
+	if(. && new_state)
+		health = 0
+		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/weapon/material/shard(src.loc)
+		var/obj/item/solar_assembly/S = locate() in src
+		S.glass_type = null
+		unset_control()
 
 /obj/machinery/power/solar/ex_act(severity)
 	switch(severity)
@@ -157,11 +157,11 @@ var/list/solars_list = list()
 				return
 
 			if (prob(50))
-				broken()
+				set_broken(TRUE)
 
 		if(3.0)
 			if (prob(25))
-				broken()
+				set_broken(TRUE)
 	return
 
 
@@ -169,18 +169,25 @@ var/list/solars_list = list()
 	..(loc, S, 0)
 
 /obj/machinery/power/solar/fake/Process()
-	. = PROCESS_KILL
-	return
+	return PROCESS_KILL
 
 //trace towards sun to see if we're in shadow
 /obj/machinery/power/solar/proc/occlusion()
 
+	var/steps = 20	// 20 steps is enough
 	var/ax = x		// start at the solar panel
 	var/ay = y
 	var/turf/T = null
 
-	for(var/i = 1 to 20)		// 20 steps is enough
-		ax += GLOB.sun.dx	// do step
+	// On planets, we take fewer steps because the light is mostly up
+	// Also, many planets barely have any spots with enough clear space around
+	if(GLOB.using_map.use_overmap)
+		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+		if(istype(E))
+			steps = 5
+
+	for(var/i = 1 to steps)
+		ax += GLOB.sun.dx
 		ay += GLOB.sun.dy
 
 		T = locate( round(ax,0.5),round(ay,0.5),z)
@@ -192,7 +199,7 @@ var/list/solars_list = list()
 			obscured = 1
 			return
 
-	obscured = 0		// if hit the edge or stepped 20 times, not obscured
+	obscured = 0		// if hit the edge or stepped max times, not obscured
 	update_solar_exposure()
 
 
@@ -241,7 +248,7 @@ var/list/solars_list = list()
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
 			return 1
 
-		if(istype(W, /obj/item/stack/material) && (W.get_material_name() == "glass" || W.get_material_name() == "rglass"))
+		if(istype(W, /obj/item/stack/material) && W.get_material_name() == MATERIAL_GLASS)
 			var/obj/item/stack/material/S = W
 			if(S.use(2))
 				glass_type = W.type
@@ -259,7 +266,6 @@ var/list/solars_list = list()
 	if(!tracker)
 		if(istype(W, /obj/item/weapon/tracker_electronics))
 			tracker = 1
-			user.drop_item()
 			qdel(W)
 			user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>")
 			return 1
@@ -282,8 +288,11 @@ var/list/solars_list = list()
 	icon_state = "solar"
 	anchored = 1
 	density = 1
-	use_power = 1
+	use_power = POWER_USE_IDLE
 	idle_power_usage = 250
+	construct_state = /decl/machine_construction/default/panel_closed/computer
+	base_type = /obj/machinery/power/solar_control
+	frame_type = /obj/machinery/constructable_frame/computerframe
 	var/id = 0
 	var/cdir = 0
 	var/targetdir = 0		// target angle in manual tracking (since it updates every game minute)
@@ -322,14 +331,14 @@ var/list/solars_list = list()
 			if(istype(M, /obj/machinery/power/solar))
 				var/obj/machinery/power/solar/S = M
 				if(!S.control) //i.e unconnected
-					S.set_control(src)
-					connected_panels |= S
+					if(S.set_control(src))
+						connected_panels |= S
 			else if(istype(M, /obj/machinery/power/tracker))
 				if(!connected_tracker) //if there's already a tracker connected to the computer don't add another
 					var/obj/machinery/power/tracker/T = M
 					if(!T.control) //i.e unconnected
-						connected_tracker = T
-						T.set_control(src)
+						if(T.set_control(src))
+							connected_tracker = T
 
 //called by the sun controller, update the facing angle (either manually or via tracking) and rotates the panels accordingly
 /obj/machinery/power/solar_control/proc/update()
@@ -347,13 +356,12 @@ var/list/solars_list = list()
 	set_panels(cdir)
 	updateDialog()
 
-
 /obj/machinery/power/solar_control/Initialize()
 	. = ..()
 	if(!connect_to_network()) return
 	set_panels(cdir)
 
-/obj/machinery/power/solar_control/update_icon()
+/obj/machinery/power/solar_control/on_update_icon()
 	if(stat & BROKEN)
 		icon_state = "broken"
 		overlays.Cut()
@@ -365,12 +373,12 @@ var/list/solars_list = list()
 	icon_state = "solar"
 	overlays.Cut()
 	if(cdir > -1)
-		overlays += image('icons/obj/computer.dmi', "solcon-o", FLY_LAYER, angle2dir(cdir))
+		overlays += image('icons/obj/computer.dmi', "solcon-o", ABOVE_OBJ_LAYER, angle2dir(cdir))
 	return
 
-/obj/machinery/power/solar_control/attack_hand(mob/user)
-	if(!..())
-		interact(user)
+/obj/machinery/power/solar_control/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
 /obj/machinery/power/solar_control/interact(mob/user)
 
@@ -400,39 +408,6 @@ var/list/solars_list = list()
 	popup.set_content(t)
 	popup.open()
 
-	return
-
-/obj/machinery/power/solar_control/attackby(I as obj, user as mob)
-	if(isScrewdriver(I))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20,src))
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/material/shard( src.loc )
-				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				qdel(src)
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/solar_control/M = new /obj/item/weapon/circuitboard/solar_control( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				qdel(src)
-	else
-		src.attack_hand(user)
-	return
-
 /obj/machinery/power/solar_control/Process()
 	lastgen = gen
 	gen = 0
@@ -453,11 +428,11 @@ var/list/solars_list = list()
 
 /obj/machinery/power/solar_control/Topic(href, href_list)
 	if(..())
-		usr << browse(null, "window=solcon")
+		close_browser(usr, "window=solcon")
 		usr.unset_machine()
 		return 0
 	if(href_list["close"] )
-		usr << browse(null, "window=solcon")
+		close_browser(usr, "window=solcon")
 		usr.unset_machine()
 		return 0
 
@@ -495,19 +470,11 @@ var/list/solars_list = list()
 
 //rotates the panel to the passed angle
 /obj/machinery/power/solar_control/proc/set_panels(var/cdir)
-
 	for(var/obj/machinery/power/solar/S in connected_panels)
 		S.adir = cdir //instantly rotates the panel
 		S.occlusion()//and
 		S.update_icon() //update it
-
 	update_icon()
-
-
-/obj/machinery/power/solar_control/proc/broken()
-	stat |= BROKEN
-	update_icon()
-
 
 /obj/machinery/power/solar_control/ex_act(severity)
 	switch(severity)
@@ -517,11 +484,10 @@ var/list/solars_list = list()
 			return
 		if(2.0)
 			if (prob(50))
-				broken()
+				set_broken(TRUE)
 		if(3.0)
 			if (prob(25))
-				broken()
-	return
+				set_broken(TRUE)
 
 // Used for mapping in solar array which automatically starts itself (telecomms, for example)
 /obj/machinery/power/solar_control/autostart

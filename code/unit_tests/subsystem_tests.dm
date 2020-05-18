@@ -26,3 +26,19 @@
 		pass("All susbsystems have initialized properly")
 
 	return 1
+
+/datum/unit_test/all_atoms_shall_be_initialized
+	name = "SUBSYSTEM - ATOMS: All atoms shall be initialized."
+
+/datum/unit_test/all_atoms_shall_be_initialized/start_test()
+	set background = TRUE // avoid infinite loop warning; SS will still wait for us.
+	var/fail = FALSE
+	for(var/atom/atom in world)
+		if(!(atom.atom_flags & ATOM_FLAG_INITIALIZED))
+			log_bad("Uninitialized atom: [log_info_line(atom)]")
+			fail = TRUE
+	if(fail)
+		fail("There were uninitialized atoms.")
+	else
+		pass("All atoms were initialized")
+	return 1

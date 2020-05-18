@@ -3,8 +3,7 @@
 	desc = "A status indicator for a combustion chamber, based on temperature."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "doortimer-p"
-	var/frequency = 1439
-	var/id_tag
+	var/frequency = 1441
 	var/alert_temperature = 10000
 	var/alert = 1
 	var/datum/radio_frequency/radio_connection
@@ -15,7 +14,7 @@
 	radio_connection = register_radio(src, frequency, frequency, RADIO_ATMOSIA)
 
 
-/obj/machinery/status_light/update_icon()
+/obj/machinery/status_light/on_update_icon()
 	if(stat & (NOPOWER|BROKEN))
 		icon_state = "doortimer-b"
 		return

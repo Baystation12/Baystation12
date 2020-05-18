@@ -103,11 +103,6 @@
 	if (config.log_pda)
 		game_log("PDA", text)
 
-/proc/log_to_dd(text)
-	to_world_log(text) //this comes before the config check because it can't possibly runtime
-	if(config.log_world_output)
-		game_log("DD_OUTPUT", text)
-
 /proc/log_misc(text)
 	game_log("MISC", text)
 
@@ -120,11 +115,9 @@
 
 //This replaces world.log so it displays both in DD and the file
 /proc/log_world(text)
-	if(config && config.log_runtime)
-		to_world_log(runtime_diary)
-		to_world_log(text)
-	to_world_log(null)
-	to_world_log(text)
+	to_world_log(text) //this comes before the config check because it can't possibly runtime
+	if(config.log_world_output)
+		game_log("DD_OUTPUT", text)
 
 //pretty print a direction bitflag, can be useful for debugging.
 /proc/dir_text(var/dir)
@@ -152,7 +145,7 @@
 	else if(ismob(whom))
 		M = whom
 		C = M.client
-		key = M.key
+		key = LAST_KEY(M)
 	else if(istype(whom, /datum/mind))
 		var/datum/mind/D = whom
 		key = D.key
@@ -221,8 +214,14 @@
 	if(islist(d))
 		var/list/L = list()
 		for(var/e in d)
-			L += log_info_line(e)
+			// Indexing on numbers just gives us the same number again in the best case and causes an index out of bounds runtime in the worst
+			var/v = isnum(e) ? null : d[e]
+			L += "[log_info_line(e)][v ? " - [log_info_line(v)]" : ""]"
 		return "\[[jointext(L, ", ")]\]" // We format the string ourselves, rather than use json_encode(), because it becomes difficult to read recursively escaped "
 	if(!istype(d))
 		return json_encode(d)
 	return d.get_log_info_line()
+
+/proc/report_progress(var/progress_message)
+	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)
+	to_world_log(progress_message)

@@ -1,10 +1,3 @@
-// Used by robots and robot preferences.
-GLOBAL_LIST_INIT(robot_module_types, list(
-	"Standard", "Engineering", "Surgeon",  "Crisis",
-	"Miner",    "Janitor",     "Service",  "Clerical", "Security",
-	"Research"
-)) // This shouldn't be a static list. Am I the only one who cares about extendability around here?
-
 // Noises made when hit while typing.
 GLOBAL_LIST_INIT(hit_appends, list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF"))
 
@@ -101,7 +94,17 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"THUNDERDOME" = /music_track/thunderdome,
 	"Torch: A Light in the Darkness" = /music_track/torch,
 	"Treacherous Voyage" = /music_track/treacherous_voyage,
-	"Wake" = /music_track/wake
+	"Wake" = /music_track/wake,
+	"phoron will make us rich" = /music_track/pwmur,
+	"every light is blinking at once" = /music_track/elibao,
+	"In Orbit" = /music_track/inorbit,
+	"Martian Cowboy" = /music_track/martiancowboy,
+	"Monument" = /music_track/monument,
+	"As Far As It Gets" = /music_track/asfarasitgets,
+	"80s All Over Again" = /music_track/eighties,
+	"Wild Encounters" = /music_track/wildencounters,
+	"Torn" = /music_track/torn,
+	"Nebula" = /music_track/nebula
 ))
 
 /proc/setup_music_tracks(var/list/tracks)
@@ -110,3 +113,27 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	for(var/track_name in track_list)
 		var/track_path = track_list[track_name]
 		. += new/datum/track(track_name, track_path)
+
+GLOBAL_LIST_INIT(possible_cable_colours, SetupCableColors())
+
+/proc/SetupCableColors()
+	. = list()
+
+	var/invalid_cable_coils = list(
+		/obj/item/stack/cable_coil/single,
+		/obj/item/stack/cable_coil/cut,
+		/obj/item/stack/cable_coil/cyborg,
+		/obj/item/stack/cable_coil/fabricator,
+		/obj/item/stack/cable_coil/random
+	)
+
+	var/special_name_mappings = list(/obj/item/stack/cable_coil = "Red")
+
+	for(var/coil_type in (typesof(/obj/item/stack/cable_coil) - invalid_cable_coils))
+		var/name = special_name_mappings[coil_type] || capitalize(copytext_after_last("[coil_type]", "/"))
+
+		var/obj/item/stack/cable_coil/C = coil_type
+		var/color = initial(C.color)
+
+		.[name] = color
+	. = sortAssoc(.)

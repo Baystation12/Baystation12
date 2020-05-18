@@ -4,13 +4,16 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "syndbeacon"
 
-	use_power = 0
+	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
+	interact_offline = TRUE
 	anchored = 1
 	density = 1
 
 	var/charges = 1
 	var/insisting = 0
 
+// Just override; we're special.
 /obj/machinery/wish_granter/attack_hand(var/mob/user as mob)
 	usr.set_machine(src)
 
@@ -35,34 +38,25 @@
 		charges--
 		insisting = 0
 
-		if (!(HULK in user.mutations))
-			user.mutations.Add(HULK)
+		if (!(MUTATION_HULK in user.mutations))
+			user.mutations.Add(MUTATION_HULK)
 
-		if (!(LASER in user.mutations))
-			user.mutations.Add(LASER)
+		if (!(MUTATION_LASER in user.mutations))
+			user.mutations.Add(MUTATION_LASER)
 
-		if (!(XRAY in user.mutations))
-			user.mutations.Add(XRAY)
+		if (!(MUTATION_XRAY in user.mutations))
+			user.mutations.Add(MUTATION_XRAY)
 			user.set_sight(user.sight|SEE_MOBS|SEE_OBJS|SEE_TURFS)
 			user.set_see_in_dark(8)
 			user.set_see_invisible(SEE_INVISIBLE_LEVEL_TWO)
 
-		if (!(COLD_RESISTANCE in user.mutations))
-			user.mutations.Add(COLD_RESISTANCE)
+		if (!(MUTATION_COLD_RESISTANCE in user.mutations))
+			user.mutations.Add(MUTATION_COLD_RESISTANCE)
 
-		if (!(TK in user.mutations))
-			user.mutations.Add(TK)
-
-		if(!(HEAL in user.mutations))
-			user.mutations.Add(HEAL)
+		if(!(MUTATION_HEAL in user.mutations))
+			user.mutations.Add(MUTATION_HEAL)
 
 		user.update_mutations()
 		user.mind.special_role = "Avatar of the Wish Granter"
-
-		var/datum/objective/silence/silence = new
-		silence.owner = user.mind
-		user.mind.objectives += silence
-
-		show_objectives(user.mind)
 		to_chat(user, "You have a very bad feeling about this.")
 	return

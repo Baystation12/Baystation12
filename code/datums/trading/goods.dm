@@ -56,7 +56,7 @@
 				"trade_blacklist"   = "Sir, this is a /electronics/ store.",
 				"trade_no_goods"    = "As much as I'd love to buy that from you, I can't.",
 				"trade_not_enough"  = "Your offer isn't adequate, sir.",
-				"how_much"          = "Your total comes out to VALUE thalers.",
+				"how_much"          = "Your total comes out to VALUE CURRENCY.",
 
 				"compliment_deny"   = "Hahaha! Yeah... funny...",
 				"compliment_accept" = "That's very nice of you!",
@@ -67,18 +67,12 @@
 				"bribe_accept"      = "Why not! Glad to be here for a few more minutes.",
 				)
 
-	possible_trading_items = list(/obj/item/weapon/computer_hardware/battery_module      = TRADER_SUBTYPES_ONLY,
-								/obj/item/weapon/circuitboard                            = TRADER_SUBTYPES_ONLY,
-								/obj/item/weapon/circuitboard/telecomms                  = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/unary_atmos                = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/arcade                     = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha                      = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/odysseus             = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/honker               = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/durand               = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/gygax                = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/mecha/ripley               = TRADER_BLACKLIST,
-								/obj/item/weapon/circuitboard/broken                     = TRADER_BLACKLIST,
+	possible_trading_items = list(/obj/item/weapon/stock_parts/computer/battery_module      = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/stock_parts/circuitboard                            = TRADER_SUBTYPES_ONLY,
+								/obj/item/weapon/stock_parts/circuitboard/telecomms                  = TRADER_BLACKLIST,
+								/obj/item/weapon/stock_parts/circuitboard/unary_atmos                = TRADER_BLACKLIST,
+								/obj/item/weapon/stock_parts/circuitboard/arcade                     = TRADER_BLACKLIST,
+								/obj/item/weapon/stock_parts/circuitboard/broken                     = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil                               = TRADER_SUBTYPES_ONLY,
 								/obj/item/stack/cable_coil/cyborg                        = TRADER_BLACKLIST,
 								/obj/item/stack/cable_coil/random                        = TRADER_BLACKLIST,
@@ -109,7 +103,7 @@
 				"trade_blacklist"   = "Hm, how about no?",
 				"trade_no_goods"    = "We don't buy, sir. Only sell.",
 				"trade_not_enough"  = "Sorry, ORIGIN policy to not accept trades below our marked prices.",
-				"how_much"          = "Your total comes out to VALUE thalers.",
+				"how_much"          = "Your total comes out to VALUE CURRENCY.",
 
 				"compliment_deny"   = "Excuse me?",
 				"compliment_accept" = "Aw, you're so nice!",
@@ -157,7 +151,7 @@
 	possible_origins = list("Baldie's Hats and Accessories", "The Right Fit", "Like a Glove", "Space Fashion")
 	possible_trading_items = list(/obj/item/clothing/accessory            = TRADER_ALL,
 								/obj/item/clothing/accessory/badge        = TRADER_BLACKLIST_ALL,
-								/obj/item/clothing/accessory/holster      = TRADER_BLACKLIST_ALL,
+								/obj/item/clothing/accessory/storage/holster      = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/accessory/medal        = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/accessory/storage      = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/gloves                 = TRADER_SUBTYPES_ONLY,
@@ -178,7 +172,6 @@
 								/obj/item/clothing/head/helmet            = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/lightrig          = TRADER_BLACKLIST_ALL,
 								/obj/item/clothing/head/radiation         = TRADER_BLACKLIST,
-								/obj/item/clothing/head/tajaran           = TRADER_BLACKLIST,
 								/obj/item/clothing/head/warden            = TRADER_BLACKLIST,
 								/obj/item/clothing/head/welding           = TRADER_BLACKLIST)
 
@@ -204,16 +197,16 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/megaphone                 = TRADER_THIS_TYPE,
 								/obj/item/device/paicard                   = TRADER_THIS_TYPE,
 								/obj/item/device/pipe_painter              = TRADER_THIS_TYPE,
-								/obj/item/device/healthanalyzer            = TRADER_THIS_TYPE,
-								/obj/item/device/analyzer                  = TRADER_ALL,
-								/obj/item/device/mass_spectrometer         = TRADER_ALL,
-								/obj/item/device/reagent_scanner           = TRADER_ALL,
-								/obj/item/device/slime_scanner             = TRADER_THIS_TYPE,
+								/obj/item/device/scanner/health            = TRADER_THIS_TYPE,
+								/obj/item/device/scanner/gas                  = TRADER_ALL,
+								/obj/item/device/scanner/spectrometer         = TRADER_ALL,
+								/obj/item/device/scanner/reagent           = TRADER_ALL,
+								/obj/item/device/scanner/xenobio             = TRADER_THIS_TYPE,
 								/obj/item/device/suit_cooling_unit         = TRADER_THIS_TYPE,
 								/obj/item/device/t_scanner                 = TRADER_THIS_TYPE,
 								/obj/item/device/taperecorder              = TRADER_THIS_TYPE,
 								/obj/item/device/batterer                  = TRADER_THIS_TYPE,
-								/obj/item/device/violin                    = TRADER_THIS_TYPE,
+								/obj/item/device/synthesized_instrument/violin                    = TRADER_THIS_TYPE,
 								/obj/item/device/hailer                    = TRADER_THIS_TYPE,
 								/obj/item/device/uv_light                  = TRADER_THIS_TYPE,
 								/obj/item/device/mmi                       = TRADER_ALL,
@@ -228,7 +221,6 @@ Sells devices, odds and ends, and medical stuff
 								/obj/item/device/core_sampler              = TRADER_THIS_TYPE,
 								/obj/item/device/depth_scanner             = TRADER_THIS_TYPE,
 								/obj/item/weapon/pinpointer/radio            = TRADER_THIS_TYPE,
-								/obj/item/device/antibody_scanner          = TRADER_THIS_TYPE,
 								/obj/item/stack/medical/advanced           = TRADER_BLACKLIST)
 	speech = list("hail_generic"    = "Hello, hello! Bits and bobs and everything in between, I hope you find what you're looking for!",
 				"hail_silicon"      = "Ah! Hello, robot. We only sell things that, ah.... people can hold in their hands, unfortunately. You are still allowed to buy, though!",
@@ -253,13 +245,7 @@ Sells devices, odds and ends, and medical stuff
 	name_language = TRADER_DEFAULT_NAME
 	origin = "Robot Store"
 	possible_origins = list("AI for the Straight Guy", "Mechanical Buddies", "Bot Chop Shop", "Omni Consumer Projects")
-	possible_trading_items = list(/obj/item/weapon/secbot_assembly/ed209_assembly = TRADER_THIS_TYPE,
-								/obj/item/weapon/toolbox_tiles                    = TRADER_THIS_TYPE,
-								/obj/item/weapon/toolbox_tiles_sensor             = TRADER_THIS_TYPE,
-								/obj/item/weapon/secbot_assembly                  = TRADER_ALL,
-								/obj/item/weapon/farmbot_arm_assembly             = TRADER_THIS_TYPE,
-								/obj/item/weapon/firstaid_arm_assembly            = TRADER_THIS_TYPE,
-								/obj/item/weapon/bucket_sensor                    = TRADER_THIS_TYPE,
+	possible_trading_items = list(
 								/obj/item/device/bot_kit                          = TRADER_THIS_TYPE,
 								/obj/item/device/paicard                          = TRADER_THIS_TYPE,
 								/obj/item/weapon/aicard                           = TRADER_THIS_TYPE,
@@ -287,7 +273,7 @@ Sells devices, odds and ends, and medical stuff
 	name = "Xenolife Collector"
 	origin = "CSV Not a Poacher"
 	trade_flags = TRADER_GOODS|TRADER_MONEY|TRADER_WANTED_ONLY|TRADER_WANTED_ALL
-	possible_origins = list("XenoHugs","NT Specimen Acquisition","Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
+	possible_origins = list("XenoHugs", "Xynergy Specimen Acquisition", "Skinner Catering Reseller", "NanoTrasen Companionship Division", "Lonely Pete's Exotic Companionship","Space Wei's Exotic Cuisine")
 	speech = list("hail_generic"    = "Welcome! We are always looking to acquire more exotic life forms.",
 				"hail_deny"         = "We no longer wish to speak to you. Please contact our legal representative if you wish to rectify this.",
 
@@ -295,7 +281,7 @@ Sells devices, odds and ends, and medical stuff
 				"trade_blacklist"   = "Legally I can't do that. Morally... well, I refuse to do that.",
 				"trade_found_unwanted" = "I only want animals. I don't need food or shiny things. I'm looking for specific ones, at that. Ones I already have the cage and food for.",
 				"trade_not_enough"   = "I'd give you this for free, but I need the money to feed the specimens. So you must pay in full.",
-				"how_much"          = "This is a good choice. I believe it will cost you VALUE thalers.",
+				"how_much"          = "This is a good choice. I believe it will cost you VALUE CURRENCY.",
 				"what_want"         = "I have the facilities, currently, to support",
 
 				"compliment_deny"   = "According to customs on 34 planets I traded with, this constitutes sexual harrasment.",
@@ -315,7 +301,7 @@ Sells devices, odds and ends, and medical stuff
 	possible_trading_items = list(/mob/living/simple_animal/hostile/carp= TRADER_THIS_TYPE,
 								/obj/item/device/dociler              = TRADER_THIS_TYPE,
 								/obj/item/weapon/beartrap			  = TRADER_THIS_TYPE,
-								/obj/item/device/slime_scanner = TRADER_THIS_TYPE)
+								/obj/item/device/scanner/xenobio = TRADER_THIS_TYPE)
 
 /datum/trader/medical
 	name = "Medical Supplier"
@@ -331,7 +317,7 @@ Sells devices, odds and ends, and medical stuff
 				"trade_blacklist"   = "Whoa whoa, I don't want this shit, put it away.",
 				"trade_found_unwanted" = "What the hell do you expect me to do with this junk?",
 				"trade_not_enough"   = "Sorry, pal, full payment upfront, I don't write the rules. Well, I do, but that's beside the point.",
-				"how_much"          = "Hmm, this is one damn fine item, but I'll part with it for VALUE thalers.",
+				"how_much"          = "Hmm, this is one damn fine item, but I'll part with it for VALUE CURRENCY.",
 				"what_want"         = "I could always use some fucking",
 
 				"compliment_deny"   = "Haha, how nice of you. Why don't you go fall in an elevator shaft.",
@@ -386,7 +372,7 @@ Sells devices, odds and ends, and medical stuff
 				"trade_blacklist"   = "Whoa whoa, I don't want this shit, put it away.",
 				"trade_found_unwanted" = "Sorry, we are currently not looking to purchase these items.",
 				"trade_not_enough"   = "Sorry, this is an insufficient sum for this purchase.",
-				"how_much"          = "For ONE entry of ITEM the price would be VALUE thalers.",
+				"how_much"          = "For ONE entry of ITEM the price would be VALUE CURRENCY.",
 				"what_want"         = "We are currently looking to procure",
 
 				"compliment_deny"   = "I am afraid this is beyond my competency.",

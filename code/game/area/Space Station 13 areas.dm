@@ -24,7 +24,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Unknown"
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
-	plane = BASE_PLANE
+	plane = DEFAULT_PLANE
 	layer = BASE_AREA_LAYER
 	luminosity = 0
 	mouse_opacity = 0
@@ -36,12 +36,15 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/requires_power = 1
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
 
-	var/power_equip = 1
+	var/power_equip = 1 // Status
 	var/power_light = 1
 	var/power_environ = 1
-	var/used_equip = 0
+	var/used_equip = 0  // Continuous drain; don't mess with these directly.
 	var/used_light = 0
 	var/used_environ = 0
+	var/oneoff_equip   = 0 //Used once and cleared each tick.
+	var/oneoff_light   = 0
+	var/oneoff_environ = 0
 
 	var/has_gravity = 1
 	var/obj/machinery/power/apc/apc = null
@@ -70,11 +73,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_equip = 0
 	power_environ = 0
 	has_gravity = 0
-	area_flags = AREA_FLAG_EXTERNAL
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
-
-/area/space/update_icon()
-	return
+	area_flags = AREA_FLAG_EXTERNAL | AREA_FLAG_IS_NOT_PERSISTENT
+	ambience = list('sound/ambience/ambispace1.ogg','sound/ambience/ambispace2.ogg','sound/ambience/ambispace3.ogg','sound/ambience/ambispace4.ogg','sound/ambience/ambispace5.ogg')
+	secure = FALSE
 
 area/space/atmosalert()
 	return
@@ -99,6 +100,7 @@ area/space/atmosalert()
 	icon_state = "centcom"
 	requires_power = 0
 	dynamic_lighting = 0
+	req_access = list(access_cent_general)
 
 /area/centcom/holding
 	name = "\improper Holding Facility"
@@ -109,35 +111,51 @@ area/space/atmosalert()
 
 /area/centcom/specops
 	name = "\improper Centcom Special Ops"
+	req_access = list(access_cent_specops)
 
 /area/hallway
 	name = "hallway"
 
+/area/medical
+	req_access = list(access_medical)
+
 /area/medical/virology
 	name = "\improper Virology"
 	icon_state = "virology"
+	req_access = list(access_virology)
 
 /area/medical/virologyaccess
 	name = "\improper Virology Access"
 	icon_state = "virology"
+	req_access = list() // This is like the lobby, needs low access to allow passing through in a different direction.
+
+/area/security
+	req_access = list(access_sec_doors)
 
 /area/security/brig
 	name = "\improper Security - Brig"
 	icon_state = "brig"
+	req_access = list(access_brig)
 
 /area/security/prison
 	name = "\improper Security - Prison Wing"
 	icon_state = "sec_prison"
+	req_access = list(access_brig)
 
 /area/maintenance
 	area_flags = AREA_FLAG_RAD_SHIELDED
 	sound_env = TUNNEL_ENCLOSED
 	turf_initializer = /decl/turf_initializer/maintenance
 	forced_ambience = list('sound/ambience/maintambience.ogg')
+	req_access = list(access_maint_tunnels)
+
+/area/rnd
+	req_access = list(access_research)
 
 /area/rnd/xenobiology
 	name = "\improper Xenobiology Lab"
 	icon_state = "xeno_lab"
+	req_access = list(access_xenobiology, access_research)
 
 /area/rnd/xenobiology/xenoflora
 	name = "\improper Xenoflora Lab"
@@ -150,27 +168,30 @@ area/space/atmosalert()
 /area/shuttle/escape/centcom
 	name = "\improper Emergency Shuttle Centcom"
 	icon_state = "shuttle"
+	req_access = list(access_cent_general)
 
 /area/shuttle/specops/centcom
 	icon_state = "shuttlered"
+	req_access = list(access_cent_specops)
+	area_flags = AREA_FLAG_RAD_SHIELDED | AREA_FLAG_ION_SHIELDED
 
 /area/shuttle/syndicate_elite/mothership
 	icon_state = "shuttlered"
+	req_access = list(access_syndicate)
 
 /area/shuttle/syndicate_elite/station
 	icon_state = "shuttlered2"
-
-/area/skipjack_station/start
-	name = "\improper Skipjack"
-	icon_state = "yellow"
+	req_access = list(access_syndicate)
 
 /area/supply
 	name = "Supply Shuttle"
 	icon_state = "shuttle3"
+	req_access = list(access_cargo)
 
-/area/syndicate_mothership/elite_squad
+/area/syndicate_elite_squad
 	name = "\improper Elite Mercenary Squad"
 	icon_state = "syndie-elite"
+	req_access = list(access_syndicate)
 
 ////////////
 //SHUTTLES//
@@ -186,12 +207,6 @@ area/space/atmosalert()
 /*
 * Special Areas
 */
-/area/wizard_station
-	name = "\improper Wizard's Den"
-	icon_state = "yellow"
-	requires_power = 0
-	dynamic_lighting = 0
-
 /area/beach
 	name = "Keelin's private beach"
 	icon_state = "null"
@@ -207,13 +222,14 @@ area/space/atmosalert()
 	S.file = 'sound/ambience/shore.ogg'
 	S.repeat = 1
 	S.wait = 0
-	S.channel = 123
+	S.channel = GLOB.sound_channels.RequestChannel(/area/beach)
 	S.volume = 100
 	S.priority = 255
 	S.status = SOUND_UPDATE
 	process()
 
 /area/beach/Entered(atom/movable/Obj,atom/OldLoc)
+	. = ..()
 	if(ismob(Obj))
 		var/mob/M = Obj
 		if(M.client)

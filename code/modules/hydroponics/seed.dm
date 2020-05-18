@@ -11,6 +11,7 @@
 	var/display_name               // Prettier name.
 	var/roundstart                 // If set, seed will not display variety number.
 	var/mysterious                 // Only used for the random seed packets.
+	var/scanned                    // If it was scanned with a plant analyzer.
 	var/can_self_harvest = 0       // Mostly used for living mobs.
 	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
 	var/list/traits = list()       // Initialized in New()
@@ -23,6 +24,7 @@
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
 	var/has_mob_product
 	var/force_layer
+	var/req_CO2_moles    = 1.0// Moles of CO2 required for photosynthesis.
 
 /datum/seed/New()
 
@@ -61,12 +63,11 @@
 	set_trait(TRAIT_IDEAL_HEAT,           293)          // Preferred temperature in Kelvin.
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.25)         // Plant eats this much per tick.
 	set_trait(TRAIT_PLANT_COLOUR,         "#46b543")    // Colour of the plant icon.
+	set_trait(TRAIT_PHOTOSYNTHESIS,       1)            // If it turns CO2 into oxygen
 
-	spawn(5)
-		sleep(-1)
-		update_growth_stages()
+	update_growth_stages()
 
-	uid = plant_controller.seeds.len + 1
+	uid = sequential_id(/datum/seed/)
 
 /datum/seed/proc/get_trait(var/trait)
 	return traits["[trait]"]
@@ -79,6 +80,9 @@
 	if(!isnull(ubound))  nval = min(nval,ubound)
 	if(!isnull(lbound))  nval = max(nval,lbound)
 	traits["[trait]"] =  nval
+
+	if(trait == TRAIT_PLANT_ICON)
+		update_growth_stages()
 
 /datum/seed/proc/create_spores(var/turf/T)
 	if(!T)
@@ -117,10 +121,9 @@
 
 
 	if(!target_limb) target_limb = pick(BP_ALL_LIMBS)
-	var/blocked = target.run_armor_check(target_limb, "melee")
 	var/obj/item/organ/external/affecting = target.get_organ(target_limb)
 
-	if(blocked >= 100 || (target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))
+	if((target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))
 		to_chat(target, "<span class='danger'>\The [fruit]'s thorns scratch against the armour on your [affecting.name]!</span>")
 		return
 
@@ -142,19 +145,19 @@
 		has_edge = prob(get_trait(TRAIT_POTENCY)/5)
 
 	var/damage_flags = DAM_SHARP|(has_edge? DAM_EDGE : 0)
-	target.apply_damage(damage, BRUTE, target_limb, blocked, damage_flags, "Thorns")
+	target.apply_damage(damage, BRUTE, target_limb, damage_flags, used_weapon = "Thorns")
 
 // Adds reagents to a target.
 /datum/seed/proc/do_sting(var/mob/living/carbon/human/target, var/obj/item/fruit)
 	if(!get_trait(TRAIT_STINGS))
 		return
 
-	if(chems && chems.len && target.reagents)
+	if(chems && chems.len && target.reagents && length(target.organs))
 
 		var/obj/item/organ/external/affecting = pick(target.organs)
 
 		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
-			if(C && (C.body_parts_covered & affecting) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
+			if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 
 		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))	affecting = null
@@ -166,6 +169,22 @@
 				target.reagents.add_reagent(rid,injecting)
 		else
 			to_chat(target, "<span class='danger'>Sharp spines scrape against your armour!</span>")
+
+/datum/seed/proc/do_photosynthesis(var/turf/current_turf, var/datum/gas_mixture/environment, var/light_supplied)
+	// Photosynthesis - *very* simplified process.
+	// For now, only light-dependent reactions are available (no Calvin cycle).
+	// It's active only for those plants which doesn't consume nor exude gasses.
+	if(!get_trait(TRAIT_PHOTOSYNTHESIS))
+		return
+	if(!(environment) || !(environment.gas))
+		return
+	if(LAZYLEN(exude_gasses) || LAZYLEN(consume_gasses ))
+		return
+	if(!(light_supplied) || !(get_trait(TRAIT_REQUIRES_WATER)))
+		return
+	if(environment.get_gas(GAS_CO2) >= req_CO2_moles)
+		environment.adjust_gas(GAS_CO2, -req_CO2_moles, 1)
+		environment.adjust_gas(GAS_OXYGEN, req_CO2_moles, 1)
 
 //Splatter a turf.
 /datum/seed/proc/splatter(var/turf/T,var/obj/item/thrown)
@@ -316,6 +335,16 @@
 		if(abs(light_supplied - get_trait(TRAIT_IDEAL_LIGHT)) > get_trait(TRAIT_LIGHT_TOLERANCE))
 			health_change += rand(1,3) * HYDRO_SPEED_MULTIPLIER
 
+	for(var/obj/effect/effect/smoke/chem/smoke in range(1, current_turf))
+		if(smoke.reagents.has_reagent(/datum/reagent/toxin/plantbgone))
+			return 100
+
+	// Pressure and temperature are needed as much as water and light.
+	// If any of the previous environment checks has failed
+	// the photosynthesis cannot be triggered.
+	if(health_change == 0)
+		do_photosynthesis(current_turf, environment, light_supplied)
+
 	return health_change
 
 /datum/seed/proc/apply_special_effect(var/mob/living/target,var/obj/item/thrown)
@@ -390,8 +419,8 @@
 	seed_noun = pick(SEED_NOUN_SEEDS, SEED_NOUN_PITS, SEED_NOUN_NODES, SEED_NOUN_CUTTINGS)
 
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
-	set_trait(TRAIT_PRODUCT_ICON,pick(plant_controller.plant_product_sprites))
-	set_trait(TRAIT_PLANT_ICON,pick(plant_controller.plant_sprites))
+	set_trait(TRAIT_PRODUCT_ICON,pick(SSplants.plant_product_sprites))
+	set_trait(TRAIT_PLANT_ICON,pick(SSplants.plant_sprites))
 	set_trait(TRAIT_PLANT_COLOUR,get_random_colour(0,75,190))
 	set_trait(TRAIT_PRODUCT_COLOUR,get_random_colour(0,75,190))
 	update_growth_stages()
@@ -418,12 +447,12 @@
 
 	if(prob(5))
 		consume_gasses = list()
-		var/gas = pick("oxygen","nitrogen","phoron","carbon_dioxide")
+		var/gas = pick(GAS_OXYGEN,GAS_NITROGEN,GAS_PHORON,GAS_CO2)
 		consume_gasses[gas] = rand(3,9)
 
 	if(prob(5))
 		exude_gasses = list()
-		var/gas = pick("oxygen","nitrogen","phoron","carbon_dioxide")
+		var/gas = pick(GAS_OXYGEN,GAS_NITROGEN,GAS_PHORON,GAS_CO2)
 		exude_gasses[gas] = rand(3,9)
 
 	chems = list()
@@ -696,10 +725,10 @@
 	else
 		if(istype(user)) to_chat(user, "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name].")
 		//This may be a new line. Update the global if it is.
-		if(name == "new line" || !(name in plant_controller.seeds))
-			uid = plant_controller.seeds.len + 1
+		if(name == "new line" || !(name in SSplants.seeds))
+			uid = SSplants.seeds.len + 1
 			name = "[uid]"
-			plant_controller.seeds[name] = src
+			SSplants.seeds[name] = src
 
 		if(harvest_sample)
 			var/obj/item/seeds/seeds = new(get_turf(user))
@@ -784,7 +813,7 @@
 
 /datum/seed/proc/update_growth_stages()
 	if(get_trait(TRAIT_PLANT_ICON))
-		growth_stages = plant_controller.plant_sprites[get_trait(TRAIT_PLANT_ICON)]
+		growth_stages = SSplants.plant_sprites[get_trait(TRAIT_PLANT_ICON)]
 	else
 		growth_stages = 0
 

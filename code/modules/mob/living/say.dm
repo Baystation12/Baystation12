@@ -17,6 +17,7 @@ var/list/department_radio_keys = list(
 	  ":p" = "AI Private",	".p" = "AI Private",
 	  ":z" = "Entertainment",".z" = "Entertainment",
 	  ":y" = "Exploration",		".y" = "Exploration",
+	  ":k" = "Recon",		".k" = "Recon",	//Skrell Recon ship
 
 	  ":R" = "right ear",	".R" = "right ear",
 	  ":L" = "left ear",	".L" = "left ear",
@@ -99,18 +100,22 @@ proc/get_radio_key_from_channel(var/channel)
 
 	. = 0
 
-	if((HULK in mutations) && health >= 25 && length(message))
+	if((MUTATION_HULK in mutations) && health >= 25 && length(message))
 		message = "[uppertext(message)]!!!"
 		verb = pick("yells","roars","hollers")
 		message_data[3] = 0
 		. = 1
-	if(slurring)
+	else if(slurring)
 		message = slur(message)
 		verb = pick("slobbers","slurs")
 		. = 1
-	if(stuttering)
+	else if(stuttering)
 		message = NewStutter(message)
 		verb = pick("stammers","stutters")
+		. = 1
+	else if(has_chem_effect(CE_SQUEAKY, 1))
+		message = "<font face = 'Comic Sans MS'>[message]</font>"
+		verb = "squeaks"
 		. = 1
 
 	message_data[1] = message
@@ -135,6 +140,18 @@ proc/get_radio_key_from_channel(var/channel)
 	if(ending=="?")
 		return "asks"
 	return verb
+
+/mob/living/proc/format_say_message(var/message = null)
+	if(!message)
+		return
+
+	message = html_decode(message)
+
+	var/end_char = copytext(message, length(message), length(message) + 1)
+	if(!(end_char in list(".", "?", "!", "-", "~")))
+		message += "."
+
+	return html_encode(message)
 
 /mob/living/say(var/message, var/datum/language/speaking = null, var/verb="says", var/alt_name="", whispering)
 	if(client)
@@ -188,8 +205,11 @@ proc/get_radio_key_from_channel(var/channel)
 			verb = say_quote(message, speaking)
 
 	message = trim_left(message)
-
 	message = handle_autohiss(message, speaking)
+	message = format_say_message(message)
+
+	if(speaking && !speaking.can_be_spoken_properly_by(src))
+		message = speaking.muddle(message)
 
 	if(!(speaking && (speaking.flags & NO_STUTTER)))
 		var/list/message_data = list(message, verb, 0)
@@ -221,12 +241,8 @@ proc/get_radio_key_from_channel(var/channel)
 		message_range = 1
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
-		var/msg
 		if(!speaking || !(speaking.flags & NO_TALK_MSG))
-			msg = "<span class='notice'>\The [src] talks into \the [used_radios[1]]</span>"
-		for(var/mob/living/M in hearers(5, src))
-			if((M != src) && msg)
-				M.show_message(msg)
+			src.visible_message(SPAN_NOTICE("\The [src] talks into \the [used_radios[1]]."), SPAN_NOTICE("You hear someone talk into their headset."), 5, exclude_mobs = list(src))
 			if (speech_sound)
 				sound_vol *= 0.5
 
@@ -260,17 +276,15 @@ proc/get_radio_key_from_channel(var/channel)
 
 	var/speech_bubble_test = say_test(message)
 	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"h[speech_bubble_test]")
-
+	speech_bubble.layer = layer
+	speech_bubble.plane = plane
 	// VOREStation Port - Attempt Multi-Z Talking
-	var/mob/above = src.shadow
-	while(!QDELETED(above))
-		var/turf/ST = get_turf(above)
-		if(ST)
-
-			get_mobs_and_objs_in_view_fast(ST, world.view, listening, listening_obj, /datum/client_preference/ghost_ears)
-			var/image/z_speech_bubble = image('icons/mob/talk.dmi', above, "h[speech_bubble_test]")
-			spawn(30) qdel(z_speech_bubble)
-		above = above.shadow
+	// for (var/atom/movable/AM in get_above_oo())
+	// 	var/turf/ST = get_turf(AM)
+	// 	if(ST)
+	// 		get_mobs_and_objs_in_view_fast(ST, world.view, listening, listening_obj, /datum/client_preference/ghost_ears)
+	// 		var/image/z_speech_bubble = image('icons/mob/talk.dmi', AM, "h[speech_bubble_test]")
+	// 		QDEL_IN(z_speech_bubble, 30)
 
 	// VOREStation Port End
 
@@ -281,7 +295,6 @@ proc/get_radio_key_from_channel(var/channel)
 			if(M.client)
 				speech_bubble_recipients += M.client
 
-	flick_overlay(speech_bubble, speech_bubble_recipients, 30)
 
 	for(var/obj/O in listening_obj)
 		spawn(0)
@@ -297,14 +310,16 @@ proc/get_radio_key_from_channel(var/channel)
 		eavesdroping_obj -= listening_obj
 		for(var/mob/M in eavesdroping)
 			if(M)
-				show_image(M, speech_bubble)
 				M.hear_say(stars(message), verb, speaking, alt_name, italics, src, speech_sound, sound_vol)
+				if(M.client)
+					speech_bubble_recipients |= M.client
 
 		for(var/obj/O in eavesdroping)
 			spawn(0)
 				if(O) //It's possible that it could be deleted in the meantime.
 					O.hear_talk(src, stars(message), verb, speaking)
 
+	flick_overlay(speech_bubble, speech_bubble_recipients, 30)
 
 	if(whispering)
 		log_whisper("[name]/[key] : [message]")

@@ -25,6 +25,29 @@
 
 
 // -----------------------------
+//          Evidence bag
+// -----------------------------
+/obj/item/weapon/storage/evidence
+	name = "evidence case"
+	desc = "A heavy steel case for storing evidence."
+	icon = 'icons/obj/forensics.dmi'
+	icon_state = "case"
+	max_storage_space = 100
+	max_w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_NORMAL
+	can_hold = list(
+		/obj/item/weapon/sample,
+		/obj/item/weapon/evidencebag,
+		/obj/item/weapon/forensics,
+		/obj/item/weapon/photo,
+		/obj/item/weapon/paper,
+		/obj/item/weapon/paper_bundle
+	)
+	allow_quick_gather = 1
+	allow_quick_empty = 1
+	use_to_pickup = 1
+
+// -----------------------------
 //          Plant bag
 // -----------------------------
 
@@ -110,7 +133,6 @@
 			usr.drop_from_inventory(S, src)
 			if(!S.amount)
 				qdel(S)
-			usr.update_icons()	//update our overlays
 
 		prepare_ui(usr)
 		update_icon()
@@ -138,7 +160,7 @@
 		if(!istype(S)) return 0
 
 		//I would prefer to drop a new stack, but the item/attack_hand code
-		// that calls this can't recieve a different object than you clicked on.
+		// that calls this can't receive a different object than you clicked on.
 		//Therefore, make a new stack internally that has the remainder.
 		// -Sayu
 

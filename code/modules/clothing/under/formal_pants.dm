@@ -6,9 +6,9 @@
 	icon_state = "pants"
 	gender = PLURAL
 	body_parts_covered = LOWER_TORSO|LEGS
-	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/pants.dmi')
+	item_icons = list(slot_w_uniform_str = 'icons/mob/onmob/onmob_under_pants.dmi')
 	sprite_sheets = list(
-		SPECIES_UNATHI = 'icons/mob/onmob/Unathi/pants.dmi',
+		SPECIES_UNATHI = 'icons/mob/species/unathi/generated/onmob_under_pants_unathi.dmi',
 		)
 
 /obj/item/clothing/under/formal_pants/red

@@ -3,20 +3,7 @@
 	icon_state ="bookEngineering2"
 	author = "Engineering Encyclopedia"
 	title = "Engineering Textbook"
-
-/obj/item/weapon/book/manual/engineering_guide/New()
-	..()
-	dat = {"
-
-		<html><head>
-		</head>
-
-		<body>
-		<iframe width='100%' height='100%' src="[config.wikiurl]Guide_to_Engineering&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>		</body>
-
-		</html>
-
-		"}
+	url = "Engineering"
 
 /obj/item/weapon/book/manual/robotics_cyborgs
 	name = "Cyborgs for Dummies"
@@ -65,15 +52,34 @@
 
 
 				<h2><a name="Modules">Cyborg Modules</h2>
-				When a cyborg is created it picks out of an array of modules to designate its purpose. There are 6 different cyborg modules.
+				When a cyborg is created it picks out of an array of modules to designate its purpose. There are 11 different cyborg modules.<br>
+				All cyborg modules carry a flash.
 
 				<h3>Standard Cyborg</h3>
 				The standard cyborg module is a multi-purpose cyborg. It is equipped with various modules, allowing it to do basic tasks.<br>A Standard Cyborg comes with:
 				<ul>
 				  <li>Crowbar</li>
+				  <li>Wrench</li>
 				  <li>Stun Baton</li>
 				  <li>Health Analyzer</li>
 				  <li>Fire Extinguisher</li>
+				</ul>
+
+				<h3>Research Cyborg</h3>
+				The research cyborg module is an effective researching machine. It is equipped with tools to effectively run RnD.<be>A Research Cyborg comes with:
+				<ul>
+				  <li>Portable Destructive Analyzer</li>
+				  <li>Research Gripper</li>
+				  <li>Sheet Loader</li>
+				  <li>Robot Analyzer</li>
+				  <li>Robot Card</li>
+				  <li>Set of Engineering Tools</li>
+				  <li>Laser Scalpel</li>
+				  <li>Circular Saw</li>
+				  <li>Fire Extinguisher</li>
+				  <li>Syringe</li>
+				  <li>Chemistry Gripper</li>
+				  <li>Nanopaste</li>
 				</ul>
 
 				<h3>Engineering Cyborg</h3>
@@ -81,28 +87,34 @@
 				<ul>
 				  <li>A basic set of engineering tools</li>
 				  <li>Metal Synthesizer</li>
+				  <li>Plasteel Synthesizer</li>
 				  <li>Reinforced Glass Synthesizer</li>
-				  <li>An RCD</li>
 				  <li>Wire Synthesizer</li>
 				  <li>Fire Extinguisher</li>
+				  <li>Roll of Tape</li>
 				  <li>Built-in Optical Meson Scanners</li>
 				</ul>
 
 				<h3>Mining Cyborg</h3>
 				The Mining Cyborg module comes equipped with the latest in mining equipment. They are efficient at mining due to no need for oxygen, but their power cells limit their time in the mines.<br>A Mining Cyborg comes with:
 				<ul>
-				  <li>Jackhammer</li>
-				  <li>Shovel</li>
-				  <li>Mining Satchel</li>
-				  <li>Built-in Optical Meson Scanners</li>
+				  <li>Wrench</li>
+				  <li>Scredriver</li>
+				  <li>Crowbar</li>
+				  <li>Ore Satchel</li>
+				  <li>Borg Drill</li>
+				  <li>Mining Gripper</li>
+				  <li>Ore Scanner</li>
 				</ul>
 
 				<h3>Security Cyborg</h3>
-				The Security Cyborg module is equipped with effective security measures used to apprehend and arrest criminals without harming them a bit.<br>A Security Cyborg comes with:
+				The Security Cyborg module is equipped with effective security measures used to apprehend and arrest criminals.<br>A Security Cyborg comes with:
 				<ul>
 				  <li>Stun Baton</li>
 				  <li>Handcuffs</li>
-				  <li>Taser</li>
+				  <li>Energy Gun</li>
+				  <li>Megaphone</li>
+				  <li>Roll of Tape</li>
 				</ul>
 
 				<h3>Janitor Cyborg</h3>
@@ -111,18 +123,71 @@
 				  <li>Mop</li>
 				  <li>Hand Bucket</li>
 				  <li>Cleaning Spray Synthesizer and Spray Nozzle</li>
+				  <li>Light Replacer</li>
+				  <li>Trash Bag</li>
 				</ul>
 
 				<h3>Service Cyborg</h3>
 				The service cyborg module comes ready to serve your human needs. It includes various entertainment and refreshment devices. Occasionally some service cyborgs may have been referred to as "Bros."<br>A Service Cyborg comes with:
 				<ul>
-				  <li>Shaker</li>
-				  <li>Industrial Dropper</li>
-				  <li>Platter</li>
-				  <li>Beer Synthesizer</li>
+				  <li>Service Gripper</li>
+				  <li>Bucket</li>
+				  <li>Hoe</li>
+				  <li>Hatchet</li>
 				  <li>Zippo Lighter</li>
 				  <li>Rapid-Service-Fabricator (Produces various entertainment and refreshment objects)</li>
+				  <li>Plant Analyzer</li>
+				  <li>Robot Harvester</li>
+				  <li>Rolling Pin</li>
+				  <li>Knife</li>
+				</ul>
+
+				<h3>Clerical Cyborg</h3>
+				The clerical cyborg module is prepared to run the supply department, including a vareity of stamps.<br>A clerical cyborg comes with:
+				<ul>
 				  <li>Pen</li>
+				  <li>Paper Dispenser</li>
+				  <li>Clerical Gripper</li>
+				  <li>Hand Labeler</li>
+				  <li>Generic Stamp</li>
+				  <li>Denied Stamp</li>
+				  <li>Package Wrapper</li>
+				  <li>Destination Tagger</li>
+				</ul>
+
+				<h3>Crisis Cyborg</h3>
+				The crisis cyborg module is prepared to handle a variety of non-surgical medical emergencies.<br>A medical cyborg comes with:
+				<ul>
+				  <li>Crowbar</li>
+				  <li>Health Analyzer</li>
+				  <li>Reagent Scanner</li>
+				  <li>Roller Bed Rack</li>
+				  <li>Body Bag Rack</li>
+				  <li>Hypospray</li>
+				  <li>Automatic Defibrillator</li>
+				  <li>Industrial Dropper</li>
+				  <li>Syringe</li>
+				  <li>Chemistry Gripper</li>
+				  <li>Fire Extinguisher</li>
+				  <li>Inflatables Dispenser</li>
+				  <li>Roll of Tape</li>
+				</ul>
+
+				<h3>Surgeon Cyborg</h3>
+				The surgeon cyborg modules is prepared to handle a variety of surgical medical emergencies.<br>A medical cyborg comes with:
+				<ul>
+				  <li>Set of Surgery Tools</li>
+				  <li>Health Analyzer</li>
+				  <li>Roller Bed Rack</li>
+				  <li>Body Bag Rack</li>
+				  <li>Hypospray</li>
+				  <li>Automatic Defibrillator</li>
+				  <li>Industrial Dropper</li>
+				  <li>Syringe</li>
+				  <li>Chemistry Gripper</li>
+				  <li>Fire Extinguisher</li>
+				  <li>Inflatables Dispenser</li>
+				  <li>Roll of Tape</li>
 				</ul>
 
 				<h2><a name="Construction">Cyborg Construction</h2>
@@ -227,21 +292,7 @@
 	icon_state ="bookEngineering"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Repairs and Construction"
-
-/obj/item/weapon/book/manual/engineering_construction/New()
-	..()
-	dat = {"
-
-		<html><head>
-		</head>
-
-		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]Guide_to_construction&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
-		</body>
-
-		</html>
-
-		"}
+	url = "Guide_to_Construction"
 
 /obj/item/weapon/book/manual/engineering_particle_accelerator
 	name = "Particle Accelerator User's Guide"
@@ -295,151 +346,21 @@
 	icon_state = "bookSupermatter"
 	author = "Central Engineering Division"
 	title = "Supermatter Engine Operating Manual"
-
-/obj/item/weapon/book/manual/supermatter_engine/New()
-	..()
-	dat = {"<html>
-				<head>
-				<style>
-				h1 {font-size: 18px; margin: 15px 0px 5px;}
-				h2 {font-size: 15px; margin: 15px 0px 5px;}
-				li {margin: 2px 0px 2px 15px;}
-				ul {margin: 5px; padding: 0px;}
-				ol {margin: 5px; padding: 0px 15px;}
-				body {font-size: 13px; font-family: Verdana;}
-				</style>
-				</head>
-				<body>
-				<h1>OPERATING MANUAL FOR MK 1 PROTOTYPE THERMOELECTRIC SUPERMATTER ENGINE 'TOMBOLA'</h1>
-				<br>
-				<h2>OPERATING PRINCIPLES</h2>
-				<br>
-				<li>The supermatter crystal serves as the fundamental power source of the engine. Upon being charged, it begins to emit large amounts of heat and radiation, as well and oxygen and phoron gas. As oxygen accelerates the reaction, and phoron carries the risk of fire, these must be filtered out. NOTE: Supermatter radiation will not charge radiation collectors.</li>
-				<br>
-				<li>Air in the reactor chamber housing the supermatter is circulated through the reactor loop, which passes through the filters and thermoelectric generators. The thermoelectric generators transfer heat from the reactor loop to the colder radiator loop, thereby generating power. Additional power is generated from internal turbines in the circulators.</li>
-				<br>
-				<li>Air in the radiator loop is circulated through the radiator bank, located in space. This rapidly cools the air, preserving the temperature differential needed for power generation.</li>
-				<br>
-				<li>The MK 1 Prototype Thermoelectric Supermatter Engine is designed to operate at reactor temperatures of 3000K to 4000K and generate up to 1MW of power. Beyond 1MW, the thermoelectric generators will begin to lose power through electrical discharge, reducing efficiency, but additional power generation remains feasible.</li>
-				<br>
-				<li>The crystal structure of the supermatter will begin to liquefy if its temperature exceeds 5000K. This eventually results in a massive release of light, heat and radiation, disintegration of both the supermatter crystal and most of the surrounding area, and as as-of-yet poorly documented psychological effects on all animals within a 2km radius. Appropriate action should be taken to stabilize or eject the supermatter before such occurs.</li>
-				<br>
-				<h2>SUPERMATTER HANDLING</h2>
-				<li>Do not expose supermatter to oxygen.</li>
-				<li>Do not <del>touch supermatter</del> <del>without gloves</del> <del>without exosuit protection</del> allow supermatter to contact any solid object apart from specially-designed supporting pallet.</li>
-				<li>Do not directly view supermatter without meson goggles.</li>
-				<li>While handles on pallet allow moving the supermatter via pulling, pushing should not be attempted.</li>
-				<br>
-				<h2>STARTUP PROCEDURE</h2>
-				<ol>
-				<li>Fill reactor loop and radiator loop with two (2) standard canisters of nitrogen gas each.</li>
-				<li>Ensure that pumps and filters are on and operating at maximum power.</li>
-				<li>Fire <del>5</del> <del>15</del> <del>2</del> <del>UNKNOWN</del> 8-12 pulses from emitter at supermatter crystal. Reactor blast doors must be open for this procedure.</li>
-				</ol>
-				<br>
-				<h2>OPERATION AND MAINTENANCE</h2>
-				<ol>
-				<li>Ensure that radiation protection and meson goggles are worn at all times while working in the engine room.</li>
-				<li>Ensure that reactor and radiator loops are undamaged and unobstructed.</li>
-				<li>Ensure that phoron and oxygen gas exhaust from filters is properly contained or disposed. Do not allow exhaust pressure to exceed 4500 kPa.</li>
-				<li>Ensure that engine room Area Power Controller (APC) and engine Superconducting Magnetic Energy Storage unit (SMES) are properly charged.</li>
-				<li>Ensure that reactor temperature does not exceed 5000K. In event of reactor temperature exceeding 5000K, see EMERGENCY COOLING PROCEDURE.</li>
-				<li>In event of imminent and/or unavoidable delamination, see EJECTION PROCEDURE.</li>
-				</ol>
-				<br>
-				<h2>EMERGENCY COOLING PROCEDURE</h2>
-				<ol>
-				<li>Open Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>
-				<li>When reactor temperature returns to safe operating levels, close Emergency Cooling Valve 1 and Emergency Cooling Valve 2.</li>
-				<li>If reactor temperature does not return to safe operating levels, see EJECTION PROCEDURE.</li>
-				</ol>
-				<br>
-				<h2>EJECTION PROCEDURE</h2>
-				<ol>
-				<li>Press Engine Ventilatory Control button to open engine core vent to space.</li>
-				<li>Press Emergency Core Eject button to eject supermatter crystal. NOTE: Attempting crystal ejection while engine core vent is closed will result in ejection failure.</li>
-				<li>In event of ejection failure, <i>pending</i></li>
-				</ol>
-				</body>
-			</html>"}
-
-
+	url = "Supermatter_Engine"
 
 /obj/item/weapon/book/manual/rust_engine
-	name = "R-UST Operating Manual 2553"
+	name = "R-UST Operating Manual"
 	icon_state = "bookMagazine"
 	author = "Cindy Crawfish"
 	title = "R-UST Operating Manual"
-
-/obj/item/weapon/book/manual/rust_engine/New()
-	..()
-	dat = {"<html>
-				<head>
-				<style>
-				h1 {font-size: 18px; margin: 15px 0px 5px;}
-				h2 {font-size: 15px; margin: 15px 0px 5px;}
-				li {margin: 2px 0px 2px 15px;}
-				ul {margin: 5px; padding: 0px;}
-				ol {margin: 5px; padding: 0px 15px;}
-				body {font-size: 13px; font-family: Verdana;}
-				</style>
-				</head>
-				<body>
-				So you're the poor fucker who has to try and set this piece of shit up this shift. Congratulations! Here's what you need to know: this is a tokamak fusion reactor that uses a high energy plasma stream in a magnetic field enclosure to achieve fusion. It gets extremely hot extremely quickly, and the field is tempramental. The main principle of operation: maximize plasma temperature while minimizing field instability.
-				<br><br>
-				Deuterium and tritium are generally the most available fuel for the beast. If you're cautious, deut-deut reactions are capable of producing power without being unstable. Deut-trit is the bread and butter of the R-UST. You can keep field instability down by using the gyrotron near the core and not sticking your dick into the fusion torus.
-				<br><br>
-				Here's the idiot's guide to setting up a functional fusion cycle:
-				<ol>
-				<li>Put fuel (uranium, tritium) in the portable generator near the gyrotron and turn it to full. This is to provide initial power to the core. If the gen is fucked, hook it into the main grid.</li>
-				<li>Enable and max output on the SMES in the engine room. This is to power the gyrotron.</li>
-				<li>Go into the control room, interact with the fusion core control console. Turn the field on and raise size to 200. Any bigger and it will start EMP the machinery. Any smaller and the fuel pellets might miss.</li>
-				<li>Interact with the gyrotron control computer, set power as high as the SMES can support, usually around 3-5, and turn it on. This will start increasing the plasma temperature to the point where reactions can occur.</li>
-				<li>Go into the engine room and insert a deuterium fuel assembly and a tritium fuel assembly into two of the fuel injectors. You can make deuterium rods in the fuel compressor if you want to play it safe.</li>
-				<li>Go back to the control room and turn the fuel injectors on. This will start firing pellets into the field.</li>
-				<li>Wait for reactions to start (plasma temperature will spike and fuel amounts will drop, forming helium if you're using deut-trit). Adjust the gyrotron power and delay around until it's keeping up with field instability. This will prevent cumulative instability from the deuterium-tritium reaction fucking up the field. If you're using straight deuterium and NOTHING ELSE, instability isn't a problem and you can turn the gyrotron off.</li>
-				<li>Configure the SMES, turn the PACMAN off before it explodes.</li>
-				</ol>
-				<br>
-				<b>NOTES FOR NEWBIES</b>
-				<br>
-				Anything touching the field will mess with its stability and eventually cause it to rupture. Rupturing is bad. Use the gyrotron to keep instability down if you're running the engine on unstable fuel.
-				<br><br>
-				The more fuel in the field, the more fuel will react. Obvious, right? Don't load the field up with the ingredients for an unstable reaction (tritium and deuterium) before it has reached the point of fusion, or you will be trying to deal with a massive instability burst all at once.
-				<br><br>
-				Likewise, no matter how sad the core seems, don't fucking hug it, you'll blow the field out and set the engine room on fire.
-				<br><br>
-				IN CASE OF EMERGENCY:
-				<ol>
-				<li>Turn off the fuel injectors.</li>
-				<li>Maximize the gyrotron fire rate and shot power.</li>
-				<li>Open the main core chamber to vaccuum if you can.</li>
-				<li>Prep for irradiated crewmembers, a large EMP, and broken glass.</li>
-				<ol>
-				</body>
-			</html>"}
+	url = "R-UST"
 
 /obj/item/weapon/book/manual/engineering_hacking
 	name = "Hacking"
 	icon_state ="bookHacking"
 	author = "Engineering Encyclopedia"		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
 	title = "Hacking"
-
-/obj/item/weapon/book/manual/engineering_hacking/New()
-	..()
-	dat = {"
-
-		<html><head>
-		</head>
-
-		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]Hacking&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
-		</body>
-
-		</html>
-
-		"}
-
+	url = "Hacking"
 
 /obj/item/weapon/book/manual/engineering_singularity_safety
 	name = "Singularity Safety in Special Circumstances"
@@ -561,7 +482,7 @@
 					<li>A firesuit must be connected to the firefighter chassis for heat shielding.</li>
 					<li>Internal armor is plasteel for additional strength.</li>
 					<li>External armor must be installed in 2 parts, totalling 10 sheets.</li>
-					<li>Completed mech is more resilient against fire, and is a bit more durable overall.</li>
+					<li>Completed exosuit is more resilient against fire, and is a bit more durable overall.</li>
 					<li>The Company is determined to ensure the safety of its <s>investments</s> employees.</li>
 				</ul>
 				</body>
@@ -735,7 +656,7 @@
 				and then is screwed in for one and a quarter full rotations clockwise, leaving the faceplate directly in front of you. There is a small button on the right side of the helmet that activates the helmet light.
 				The tanks that fasten onto the side slot are emergency tanks, as well as full-sized oxygen tanks, leaving your back free for a backpack or satchel.<BR><BR>
 
-				These suits generally only fit one species. NanoTrasen's are usually human-fitting by default, but there's equipment that can make modifications to the hardsuits to fit them to other species.<BR><BR>
+				These suits generally only fit one species. Standard-issue suits are usually human-fitting by default, but there's equipment that can make modifications to the hardsuits to fit them to other species.<BR><BR>
 
 				<h2><a name="Equipment">Modification Equipment</a></h2>
 				<I>How to actually make hardsuits fit you.</I><BR>

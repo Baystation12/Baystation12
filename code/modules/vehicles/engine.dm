@@ -44,7 +44,7 @@
 	else if(isCrowbar(I))
 		if(cell)
 			to_chat(user, "You pry out \the [cell].")
-			cell.forceMove(get_turf(src))
+			cell.dropInto(loc)
 			cell = null
 			return 1
 	..()

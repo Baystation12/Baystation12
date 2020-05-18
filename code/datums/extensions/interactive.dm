@@ -1,5 +1,6 @@
 //Extensions that can be interacted with via Topic
 /datum/extension/interactive
+	base_type = /datum/extension/interactive
 	var/list/host_predicates
 	var/list/user_predicates
 

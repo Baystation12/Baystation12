@@ -9,9 +9,7 @@
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-	
-	if(typing_indicator)
-		qdel(typing_indicator)
+	remove_typing_indicator()
 	usr.say(message)
 
 /mob/verb/me_verb(message as text)
@@ -20,8 +18,7 @@
 
 	message = sanitize(message)
 
-	if(typing_indicator)
-		qdel(typing_indicator)
+	remove_typing_indicator()
 	if(use_me)
 		usr.emote("me",usr.emote_type,message)
 	else

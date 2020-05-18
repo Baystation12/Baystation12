@@ -17,7 +17,8 @@
 
 		var/obj/item/clothing/accessory/A = I
 		if(can_attach_accessory(A))
-			user.drop_item()
+			if(!user.unEquip(A))
+				return
 			attach_accessory(user, A)
 			return
 		else
@@ -60,8 +61,8 @@
 			usr.put_in_l_hand(src)
 	src.add_fingerprint(usr)
 
-/obj/item/clothing/examine(var/mob/user)
-	. = ..(user)
+/obj/item/clothing/examine(mob/user)
+	. = ..()
 	for(var/obj/item/clothing/accessory/A in accessories)
 		to_chat(user, "\icon[A] \A [A] is attached to it.")
 	switch(ironed_state)
@@ -69,6 +70,12 @@
 			to_chat(user, "<span class='bad'>It's wrinkly.</span>")
 		if(WRINKLES_NONE)
 			to_chat(user, "<span class='notice'>It's completely wrinkle-free!</span>")
+	switch(smell_state)
+		if(SMELL_CLEAN)
+			to_chat(user, "<span class='notice'>It smells clean!</span>")
+		if(SMELL_STINKY)
+			to_chat(user, "<span class='bad'>It's quite stinky!</span>")
+	
 
 /obj/item/clothing/proc/update_accessory_slowdown()
 	slowdown_accessory = 0

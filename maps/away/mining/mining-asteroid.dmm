@@ -20,7 +20,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "am" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/airless,
 /area/djstation)
 "an" = (
@@ -66,7 +66,7 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "ay" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled/airless,
 /area/djstation)
 "az" = (
@@ -207,7 +207,7 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "bf" = (
-/obj/effect/overmap/sector/cluster,
+/obj/effect/overmap/visitable/sector/cluster,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "cb" = (
@@ -249,7 +249,7 @@
 "kb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_north_outer";
 	locked = 1
 	},
@@ -267,8 +267,7 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "mb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1379;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	id_tag = "lp_north_pump"
 	},
 /turf/simulated/floor/airless,
@@ -284,7 +283,7 @@
 "ob" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_north_inner";
 	locked = 1
 	},
@@ -294,7 +293,7 @@
 "pb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_north_inner";
 	locked = 1
 	},
@@ -357,7 +356,7 @@
 "wb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_east_inner";
 	locked = 1
 	},
@@ -389,7 +388,7 @@
 "zb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_east_outer";
 	locked = 1
 	},
@@ -405,7 +404,7 @@
 "Bb" = (
 /obj/machinery/door/airlock/external{
 	frequency = 1379;
-	icon_state = "door_locked";
+	icon_state = "closed";
 	id_tag = "lp_east_inner";
 	locked = 1
 	},
@@ -416,9 +415,8 @@
 /turf/simulated/floor/airless,
 /area/djstation)
 "Cb" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 8;
-	frequency = 1379;
 	id_tag = "lp_east_pump"
 	},
 /turf/simulated/floor/airless,
@@ -433,13 +431,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/djstation)
-"Fb" = (
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 200;
-	generation_width = 200
-	},
-/turf/space,
-/area/space)
 
 (1,1,1) = {"
 aa
@@ -641,7 +632,7 @@ aa
 aa
 aa
 aa
-Fb
+aa
 "}
 (2,1,1) = {"
 aa

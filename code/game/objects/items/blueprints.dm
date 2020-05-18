@@ -19,8 +19,8 @@
 	var/const/ROOM_ERR_SPACE = -1
 	var/const/ROOM_ERR_TOOLARGE = -2
 
-/obj/item/blueprints/New()
-	..()
+/obj/item/blueprints/Initialize()
+	. = ..()
 	desc = "Blueprints of the [station_name()]. There is a \"Classified\" stamp and several coffee stains on it."
 
 /obj/item/blueprints/attack_self(mob/M as mob)
@@ -29,14 +29,11 @@
 
 		return
 	interact()
-	return
 
-/obj/item/blueprints/Topic(href, href_list)
-	..()
-	if ((usr.restrained() || usr.stat || usr.get_active_hand() != src))
-		return
-	if (!href_list["action"])
-		return
+/obj/item/blueprints/DefaultTopicState()
+	return GLOB.physical_state
+
+/obj/item/blueprints/OnTopic(user, href_list)
 	switch(href_list["action"])
 		if ("create_area")
 			if (get_area_type()!=AREA_SPACE)
@@ -52,58 +49,33 @@
 			//skip the sanity checking, delete_area() does it anyway
 			delete_area()
 
+/obj/item/blueprints/proc/get_header()
+	return "<h2>[station_name()] blueprints</h2><small>Property of [GLOB.using_map.company_name]. For heads of staff only. Store in high-secure storage.</small><hr>"
+
 /obj/item/blueprints/interact()
-	var/area/A = get_area()
-	var/text = {"<HTML><head><title>[src]</title></head><BODY>
-<h2>[station_name()] blueprints</h2>
-<small>Property of [GLOB.using_map.company_name]. For heads of staff only. Store in high-secure storage.</small><hr>
-"}
-	switch (get_area_type())
+	var/area/A = get_area(src)
+	var/list/dat =  list(get_header())
+
+	switch (get_area_type(A))
 		if (AREA_SPACE)
-			text += {"
-<p>According the blueprints, you are now in <b>outer space</b>.  Hold your breath.</p>
-<p><a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a></p>
-"}
+			dat += "According \the [src], you are now <b>outside the facility</b>."
+			dat += "<a href='?src=\ref[src];action=create_area'>Mark this place as new area.</a>"
 		if (AREA_STATION)
+			dat += "According \the [src], you are now in <b>\"[A.name]\"</b>."
+			dat += "You may <a href='?src=\ref[src];action=edit_area'> move an amendment</a> to the drawing."
 			if (A.apc)
-				text += {"
-<p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
-<p>You may <a href='?src=\ref[src];action=edit_area'>
-move an amendment</a> to the drawing.</p>
-<p>You can't erase this area, because it has an APC.</p>
-"}
+				dat += "You can't erase this area, because it has an APC.</p>"
 			else
-				text += {"
-<p>According the blueprints, you are now in <b>\"[A.name]\"</b>.</p>
-<p>You may <a href='?src=\ref[src];action=edit_area'>
-move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_area'>erase part of it</a>.</p>
-"}
-		if (AREA_SPECIAL)
-			text += {"
-<p>This place isn't noted on the blueprint.</p>
-"}
+				dat += "You <a href='?src=\ref[src];action=delete_area'>erase a part of it</a>.</p>"
 		else
-			return
-	text += "</BODY></HTML>"
-	usr << browse(text, "window=blueprints")
-	onclose(usr, "blueprints")
+			dat += "This place isn't noted on \the [src]."
+	var/datum/browser/popup = new(usr, "blueprints", name, 290, 300)
+	popup.set_content(jointext(dat, "<br>"))
+	popup.open()
 
-
-/obj/item/blueprints/proc/get_area()
-	var/turf/T = get_turf(usr)
-	var/area/A = T.loc
-	return A
-
-/obj/item/blueprints/proc/get_area_type(var/area/A = get_area())
+/obj/item/blueprints/proc/get_area_type(var/area/A = get_area(src))
 	if(istype(A, /area/space))
 		return AREA_SPACE
-
-	var/list/SPECIALS = list(
-		/area/shuttle
-	)
-
-	if(is_type_in_list(A, SPECIALS))
-		return AREA_SPECIAL
 
 	if(A.z in GLOB.using_map.station_levels)
 		return AREA_STATION
@@ -134,37 +106,19 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 		return
 	var/area/A = new
 	A.SetName(str)
-	//var/ma
-	//ma = A.master ? "[A.master]" : "(null)"
-//	log_debug(create_area: <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]")
-
 	A.power_equip = 0
 	A.power_light = 0
 	A.power_environ = 0
 	A.always_unpowered = 0
-	move_turfs_to_area(turfs, A)
-
+	for(var/T in turfs)
+		ChangeArea(T, A)
 	A.always_unpowered = 0
-
-	spawn(5)
-		//ma = A.master ? "[A.master]" : "(null)"
-//		log_debug)create_area(5): <br>A.name=[A.name]<br>A.tag=[A.tag]<br>A.master=[ma]")
-
-		interact()
-	return
-
-
-/obj/item/blueprints/proc/move_turfs_to_area(var/list/turf/turfs, var/area/A)
-	A.contents.Add(turfs)
-		//oldarea.contents.Remove(usr.loc) // not needed
-		//T.loc = A //error: cannot change constant value
-
+	interact()
 
 /obj/item/blueprints/proc/edit_area()
-	var/area/A = get_area()
-//	log_debug(edit_area")
+	var/area/A = get_area(src)
 
-	var/prevname = "[A.name]"
+	var/prevname = A.name
 	var/str = sanitizeSafe(input("New area name:","Blueprint Editing", prevname), MAX_NAME_LEN)
 	if(!str || !length(str) || str==prevname) //cancel
 		return
@@ -175,11 +129,9 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 	A.SetName(str)
 	to_chat(usr, "<span class='notice'>You set the area '[prevname]' title to '[str]'.</span>")
 	interact()
-	return
-
 
 /obj/item/blueprints/proc/delete_area()
-	var/area/A = get_area()
+	var/area/A = get_area(src)
 	if (get_area_type(A)!=AREA_STATION || A.apc) //let's just check this one last time, just in case
 		interact()
 		return
@@ -187,8 +139,6 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 	log_and_message_admins("deleted area [A.name] via station blueprints.")
 	qdel(A)
 	interact()
-
-
 
 /obj/item/blueprints/proc/set_area_machinery_title(var/area/A,var/title,var/oldtitle)
 	if (!oldtitle) // or replacetext goes to infinite loop
@@ -265,3 +215,28 @@ move an amendment</a> to the drawing, or <a href='?src=\ref[src];action=delete_a
 					return ROOM_ERR_SPACE
 		found+=T
 	return found
+
+//For use on exoplanets
+/obj/item/blueprints/outpost
+	name = "outpost blueprints"
+	icon_state = "blueprints2"
+
+/obj/item/blueprints/outpost/Initialize()
+	. = ..()
+	desc = "Blueprints for the daring souls wanting to establish a planetary outpost. Has some sketchy looking stains and what appears to be bite holes."
+
+/obj/item/blueprints/outpost/get_header()
+	return "<h2>Exoplanetary outpost blueprints</h2><small>Property of [GLOB.using_map.company_name].</small><hr>"
+
+/obj/item/blueprints/outpost/check_tile_is_border(var/turf/T2,var/dir)
+	if (istype(T2, /turf/simulated/floor/exoplanet/))
+		return BORDER_SPACE
+	. = ..()
+
+/obj/item/blueprints/outpost/get_area_type(var/area/A = get_area(src))
+	if(istype(A, /area/exoplanet))
+		return AREA_SPACE
+	var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
+	if(istype(E))
+		return AREA_STATION
+	return AREA_SPECIAL

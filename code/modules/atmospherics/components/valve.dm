@@ -16,11 +16,16 @@
 	var/datum/pipe_network/network_node1
 	var/datum/pipe_network/network_node2
 
+	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY|CONNECT_TYPE_SCRUBBER|CONNECT_TYPE_FUEL
+	connect_dir_type = SOUTH | NORTH
+	rotate_class = PIPE_ROTATE_TWODIR
+	build_icon_state = "mvalve"
+
 /obj/machinery/atmospherics/valve/open
 	open = 1
 	icon_state = "map_valve1"
 
-/obj/machinery/atmospherics/valve/update_icon(animation)
+/obj/machinery/atmospherics/valve/on_update_icon(animation)
 	if(animation)
 		flick("valve[src.open][!src.open]",src)
 	else
@@ -37,14 +42,6 @@
 
 /obj/machinery/atmospherics/valve/hide(var/i)
 	update_underlays()
-
-/obj/machinery/atmospherics/valve/Initialize()
-	switch(dir)
-		if(NORTH, SOUTH)
-			initialize_directions = NORTH|SOUTH
-		if(EAST, WEST)
-			initialize_directions = EAST|WEST
-	. = ..()
 
 /obj/machinery/atmospherics/valve/network_expand(datum/pipe_network/new_network, obj/machinery/atmospherics/pipe/reference)
 	if(reference == node1)
@@ -72,8 +69,6 @@
 	return null
 
 /obj/machinery/atmospherics/valve/Destroy()
-	loc = null
-
 	if(node1)
 		node1.disconnect(src)
 		qdel(network_node1)
@@ -119,23 +114,17 @@
 
 	return 1
 
-/obj/machinery/atmospherics/valve/proc/normalize_dir()
-	if(dir==3)
-		set_dir(1)
-	else if(dir==12)
-		set_dir(4)
+/obj/machinery/atmospherics/valve/proc/toggle()
+	return open ? close() : open()
 
-/obj/machinery/atmospherics/valve/attack_ai(mob/user as mob)
-	return
+/obj/machinery/atmospherics/valve/physical_attack_hand(mob/user)
+	user_toggle()
+	return TRUE
 
-/obj/machinery/atmospherics/valve/attack_hand(mob/user as mob)
-	src.add_fingerprint(usr)
+/obj/machinery/atmospherics/valve/proc/user_toggle()
 	update_icon(1)
 	sleep(10)
-	if (src.open)
-		src.close()
-	else
-		src.open()
+	toggle()
 
 /obj/machinery/atmospherics/valve/Process()
 	..()
@@ -143,8 +132,6 @@
 
 /obj/machinery/atmospherics/valve/atmos_init()
 	..()
-	normalize_dir()
-
 	var/node1_dir
 	var/node2_dir
 
@@ -165,8 +152,6 @@
 			if (check_connect_types(target,src))
 				node2 = target
 				break
-
-	build_network()
 
 	update_icon()
 	update_underlays()
@@ -206,7 +191,7 @@
 
 	return 1
 
-/obj/machinery/atmospherics/valve/return_network_air(datum/network/reference)
+/obj/machinery/atmospherics/valve/return_network_air(datum/pipe_network/reference)
 	return null
 
 /obj/machinery/atmospherics/valve/disconnect(obj/machinery/atmospherics/reference)
@@ -221,66 +206,6 @@
 	update_underlays()
 
 	return null
-
-/obj/machinery/atmospherics/valve/digital		// can be controlled by AI
-	name = "digital valve"
-	desc = "A digitally controlled valve."
-	icon = 'icons/atmos/digital_valve.dmi'
-
-	var/frequency = 0
-	var/id = null
-	var/datum/radio_frequency/radio_connection
-
-/obj/machinery/atmospherics/valve/digital/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/atmospherics/valve/digital/attack_hand(mob/user as mob)
-	if(!powered())
-		return
-	if(!src.allowed(user))
-		to_chat(user, "<span class='warning'>Access denied.</span>")
-		return
-	..()
-
-/obj/machinery/atmospherics/valve/digital/open
-	open = 1
-	icon_state = "map_valve1"
-
-/obj/machinery/atmospherics/valve/digital/update_icon()
-	..()
-	if(!powered())
-		icon_state = "valve[open]nopower"
-
-/obj/machinery/atmospherics/valve/digital/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	if(frequency)
-		radio_connection = radio_controller.add_object(src, frequency, RADIO_ATMOSIA)
-
-/obj/machinery/atmospherics/valve/digital/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
-
-/obj/machinery/atmospherics/valve/digital/receive_signal(datum/signal/signal)
-	if(!signal.data["tag"] || (signal.data["tag"] != id))
-		return 0
-
-	switch(signal.data["command"])
-		if("valve_open")
-			if(!open)
-				open()
-
-		if("valve_close")
-			if(open)
-				close()
-
-		if("valve_toggle")
-			if(open)
-				close()
-			else
-				open()
-
 
 /obj/machinery/atmospherics/valve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!istype(W, /obj/item/weapon/wrench))
@@ -298,9 +223,79 @@
 			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
 			"<span class='notice'>You have unfastened \the [src].</span>", \
 			"You hear a ratchet.")
-		new /obj/item/pipe(loc, make_from=src)
+		new /obj/item/pipe(loc, src)
 		qdel(src)
 
 /obj/machinery/atmospherics/valve/examine(mob/user)
 	. = ..()
 	to_chat(user, "It is [open ? "open" : "closed"].")
+
+/decl/public_access/public_variable/valve_open
+	expected_type = /obj/machinery/atmospherics/valve
+	name = "valve open"
+	desc = "Whether or not the valve is open."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/valve_open/access_var(obj/machinery/atmospherics/valve/valve)
+	return valve.open
+
+/decl/public_access/public_method/open_valve
+	name = "open valve"
+	desc = "Sets the valve to open."
+	call_proc = /obj/machinery/atmospherics/valve/proc/open
+
+/decl/public_access/public_method/close_valve
+	name = "open valve"
+	desc = "Sets the valve to open."
+	call_proc = /obj/machinery/atmospherics/valve/proc/close
+
+/decl/public_access/public_method/toggle_valve
+	name = "toggle valve"
+	desc = "Toggles whether the valve is open or closed."
+	call_proc = /obj/machinery/atmospherics/valve/proc/toggle
+
+/obj/machinery/atmospherics/valve/digital		// can be controlled by AI
+	name = "digital valve"
+	desc = "A digitally controlled valve."
+	icon = 'icons/atmos/digital_valve.dmi'
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	public_variables = list(/decl/public_access/public_variable/valve_open)
+	public_methods = list(
+		/decl/public_access/public_method/open_valve,
+		/decl/public_access/public_method/close_valve,
+		/decl/public_access/public_method/toggle_valve
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/valve = 1)
+
+	build_icon_state = "dvalve"
+
+/obj/machinery/atmospherics/valve/digital/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
+	user_toggle()
+	return TRUE
+
+/obj/machinery/atmospherics/valve/digital/physical_attack_hand(mob/user)
+	return FALSE
+
+/obj/machinery/atmospherics/valve/digital/open
+	open = 1
+	icon_state = "map_valve1"
+
+/obj/machinery/atmospherics/valve/digital/on_update_icon()
+	..()
+	if(!powered())
+		icon_state = "valve[open]nopower"
+
+/decl/stock_part_preset/radio/receiver/valve
+	frequency = FUEL_FREQ
+	filter = RADIO_ATMOSIA
+	receive_and_call = list(
+		"valve_open" = /decl/public_access/public_method/open_valve,
+		"valve_close" = /decl/public_access/public_method/close_valve,
+		"valve_toggle" = /decl/public_access/public_method/toggle_valve
+	)

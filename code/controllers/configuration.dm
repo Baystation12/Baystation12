@@ -20,7 +20,6 @@ var/list/gamemode_cache = list()
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
 	var/log_world_output = 0			// log world.log << messages
-	var/sql_enabled = 1					// for sql switching
 	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
 	var/allow_vote_restart = 0 			// allow votes to restart
 	var/ert_admin_call_only = 0
@@ -68,7 +67,6 @@ var/list/gamemode_cache = list()
 	var/mod_job_tempban_max = 1440
 	var/load_jobs_from_txt = 0
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
-	var/use_cortical_stacks = 0
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -97,6 +95,7 @@ var/list/gamemode_cache = list()
 	var/wikiurl
 	var/forumurl
 	var/githuburl
+	var/issuereporturl
 
 	var/forbid_singulo_possession = 0
 
@@ -127,8 +126,13 @@ var/list/gamemode_cache = list()
 
 	//Used for modifying movement speed for mobs.
 	//Unversal modifiers
-	var/run_speed = 2
-	var/walk_speed = 1
+	var/run_delay = 2
+	var/walk_delay = 4
+	var/creep_delay = 6
+	var/minimum_sprint_cost = 0.8
+	var/skill_sprint_cost_range = 0.8
+	var/minimum_stamina_recovery = 1
+	var/maximum_stamina_recovery = 3
 
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
@@ -153,8 +157,11 @@ var/list/gamemode_cache = list()
 	var/gateway_delay = 18000 //How long the gateway takes before it activates. Default is half an hour.
 	var/ghost_interaction = 0
 
-	var/comms_password = ""
+	var/comms_password = null
 	var/ban_comms_password = null
+	var/list/forbidden_versions = list() // Clients with these byond versions will be autobanned. Format: string "byond_version.byond_build"; separate with ; in config, e.g. 512.1234;512.1235
+	var/minimum_byond_version = 0
+	var/minimum_byond_build = 0
 
 	var/login_export_addr = null
 
@@ -217,6 +224,14 @@ var/list/gamemode_cache = list()
 	var/error_msg_delay = 50 // How long to wait between messaging admins about occurrences of a unique error
 
 	var/max_gear_cost = 10 // Used in chargen for accessory loadout limit. 0 disables loadout, negative allows infinite points.
+
+	var/allow_ic_printing = TRUE //Whether players should be allowed to print IC circuits from scripts.
+
+	var/allow_unsafe_narrates = FALSE //Whether admins can use unsanitized narration; when true, allows HTML etc.
+
+	var/do_not_prevent_spam = FALSE //If this is true, skips spam prevention for user actions; inputs, verbs, macros, etc.
+	var/max_acts_per_interval = 140 //Number of actions per interval permitted for spam protection.
+	var/act_interval = 0.1 SECONDS //Interval for spam prevention.
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -289,9 +304,6 @@ var/list/gamemode_cache = list()
 				if ("log_access")
 					config.log_access = 1
 
-				if ("sql_enabled")
-					config.sql_enabled = text2num(value)
-
 				if ("log_say")
 					config.log_say = 1
 
@@ -336,10 +348,6 @@ var/list/gamemode_cache = list()
 
 				if ("log_runtime")
 					config.log_runtime = 1
-					var/newlog = file("data/logs/runtimes/runtime-[time2text(world.realtime, "YYYY-MM-DD")].log")
-					if(runtime_diary != newlog)
-						to_world_log("Now logging runtimes to data/logs/runtimes/runtime-[time2text(world.realtime, "YYYY-MM-DD")].log")
-						runtime_diary = newlog
 
 				if ("generate_asteroid")
 					config.generate_map = 1
@@ -429,6 +437,9 @@ var/list/gamemode_cache = list()
 				if ("githuburl")
 					config.githuburl = value
 
+				if ("issuereporturl")
+					config.issuereporturl = value
+
 				if ("ghosts_can_possess_animals")
 					config.ghosts_can_possess_animals = value
 
@@ -440,6 +451,8 @@ var/list/gamemode_cache = list()
 
 				if ("disable_ooc")
 					config.ooc_allowed = 0
+
+				if ("disable_looc")
 					config.looc_allowed = 0
 
 				if ("disable_aooc")
@@ -495,9 +508,6 @@ var/list/gamemode_cache = list()
 								config.objectives_disabled = CONFIG_OBJECTIVE_NONE
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
-
-				if("use_cortical_stacks")
-					config.use_cortical_stacks = 1
 
 				if ("probability")
 					var/prob_pos = findtext(value, " ")
@@ -598,6 +608,15 @@ var/list/gamemode_cache = list()
 				if("ban_comms_password")
 					config.ban_comms_password = value
 
+				if("forbidden_versions")
+					config.forbidden_versions = splittext(value, ";")
+
+				if("minimum_byond_version")
+					config.minimum_byond_version = text2num(value)
+
+				if("minimum_byond_build")
+					config.minimum_byond_build = text2num(value)
+
 				if("login_export_addr")
 					config.login_export_addr = value
 
@@ -639,6 +658,9 @@ var/list/gamemode_cache = list()
 
 				if("disable_welder_vision")
 					config.welder_vision = 0
+
+				if("disable_circuit_printing")
+					config.allow_ic_printing = FALSE
 
 				if("allow_extra_antags")
 					config.allow_extra_antags = 1
@@ -727,6 +749,16 @@ var/list/gamemode_cache = list()
 				if("hub")
 					world.update_hub_visibility()
 
+				if ("allow_unsafe_narrates")
+					config.allow_unsafe_narrates = TRUE
+
+				if ("do_not_prevent_spam")
+					config.do_not_prevent_spam = TRUE
+				if ("max_acts_per_interval")
+					config.max_acts_per_interval = text2num(value)
+				if ("act_interval")
+					config.act_interval = text2num(value) SECONDS
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -757,10 +789,20 @@ var/list/gamemode_cache = list()
 				if("limbs_can_break")
 					config.limbs_can_break = value
 
-				if("run_speed")
-					config.run_speed = value
-				if("walk_speed")
-					config.walk_speed = value
+				if("run_delay")
+					config.run_delay = value
+				if("walk_delay")
+					config.walk_delay = value
+				if("creep_delay")
+					config.creep_delay = value
+				if("minimum_sprint_cost")
+					config.minimum_sprint_cost = value
+				if("skill_sprint_cost_range")
+					config.skill_sprint_cost_range = value
+				if("minimum_stamina_recovery")
+					config.minimum_stamina_recovery = value
+				if("maximum_stamina_recovery")
+					config.maximum_stamina_recovery = value
 
 				if("human_delay")
 					config.human_delay = value
@@ -783,6 +825,12 @@ var/list/gamemode_cache = list()
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
+
+		else if(type == "using_map")
+			if(!value)
+				log_misc("Unknown value for setting [name] in [filename].")
+			else
+				GLOB.using_map.setup_config(name, value, filename)
 
 	fps = round(fps)
 	if(fps <= 0)
@@ -813,6 +861,8 @@ var/list/gamemode_cache = list()
 			continue
 
 		switch (name)
+			if ("enabled")
+				sqlenabled = TRUE
 			if ("address")
 				sqladdress = value
 			if ("port")
@@ -829,8 +879,6 @@ var/list/gamemode_cache = list()
 				sqlfdbklogin = value
 			if ("feedback_password")
 				sqlfdbkpass = value
-			if ("enable_stat_tracking")
-				sqllogging = 1
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 
@@ -841,14 +889,13 @@ var/list/gamemode_cache = list()
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if (M.config_tag && M.config_tag == mode_name)
 			return M
-	return gamemode_cache["extended"]
 
 /datum/configuration/proc/get_runnable_modes()
 	var/list/runnable_modes = list()
 	for(var/game_mode in gamemode_cache)
 		var/datum/game_mode/M = gamemode_cache[game_mode]
 		if(M && !M.startRequirements() && !isnull(config.probabilities[M.config_tag]) && config.probabilities[M.config_tag] > 0)
-			runnable_modes |= M
+			runnable_modes[M.config_tag] = config.probabilities[M.config_tag]
 	return runnable_modes
 
 /datum/configuration/proc/load_event(filename)

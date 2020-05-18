@@ -35,6 +35,7 @@ if(Datum.is_processing) {\
 SUBSYSTEM_DEF(machines)
 	name = "Machines"
 	init_order = SS_INIT_MACHINES
+	priority = SS_PRIORITY_MACHINERY
 	flags = SS_KEEP_TIMING
 	runlevels = RUNLEVEL_GAME|RUNLEVEL_POSTGAME
 
@@ -46,15 +47,12 @@ SUBSYSTEM_DEF(machines)
 	var/cost_power_objects = 0
 
 	var/list/pipenets      = list()
-	var/list/machinery     = list()
+	var/list/machinery     = list() // These are all machines.
 	var/list/powernets     = list()
 	var/list/power_objects = list()
 
-	var/list/processing
+	var/list/processing  = list() // These are the machines which are processing.
 	var/list/current_run = list()
-
-/datum/controller/subsystem/machines/PreInit()
-	 processing = machinery
 
 /datum/controller/subsystem/machines/Initialize(timeofday)
 	makepowernets()
@@ -99,21 +97,12 @@ if(current_step == this_step || (check_resumed && !resumed)) {\
 			NewPN.add_cable(PC)
 			propagate_network(PC,PC.powernet)
 
-datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
+/datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	set background=1
 
 	report_progress("Initializing atmos machinery")
 	for(var/obj/machinery/atmospherics/A in machines)
 		A.atmos_init()
-		CHECK_TICK
-
-	for(var/obj/machinery/atmospherics/unary/U in machines)
-		if(istype(U, /obj/machinery/atmospherics/unary/vent_pump))
-			var/obj/machinery/atmospherics/unary/vent_pump/T = U
-			T.broadcast_status()
-		else if(istype(U, /obj/machinery/atmospherics/unary/vent_scrubber))
-			var/obj/machinery/atmospherics/unary/vent_scrubber/T = U
-			T.broadcast_status()
 		CHECK_TICK
 
 	report_progress("Initializing pipe networks")
@@ -130,10 +119,10 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 	msg += "PO:[round(cost_power_objects,1)]"
 	msg += "} "
 	msg += "PI:[pipenets.len]|"
-	msg += "MC:[machinery.len]|"
+	msg += "MC:[processing.len]|"
 	msg += "PN:[powernets.len]|"
 	msg += "PO:[power_objects.len]|"
-	msg += "MC/MS:[round((cost ? machinery.len/cost : 0),0.1)]"
+	msg += "MC/MS:[round((cost ? processing.len/cost : 0),0.1)]"
 	..(jointext(msg, null))
 
 /datum/controller/subsystem/machines/proc/process_pipenets(resumed = 0)
@@ -154,17 +143,32 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 
 /datum/controller/subsystem/machines/proc/process_machinery(resumed = 0)
 	if (!resumed)
-		src.current_run = machinery.Copy()
+		src.current_run = processing.Copy()
 
 	var/list/current_run = src.current_run
 	while(current_run.len)
 		var/obj/machinery/M = current_run[current_run.len]
 		current_run.len--
-		if(istype(M) && !QDELETED(M) && !(M.Process(wait) == PROCESS_KILL))
-			if(M.use_power)
-				M.auto_use_power()
-		else
-			machinery.Remove(M)
+
+		if(!istype(M)) // Below is a debugging and recovery effort. This should never happen, but has been observed recently.
+			if(!M)
+				continue // Hard delete; unlikely but possible. Soft deletes are handled below and expected.
+			if(M in processing)
+				processing.Remove(M)
+				M.is_processing = null
+				crash_with("[log_info_line(M)] was found illegally queued on SSmachines.")
+				continue
+			else if(resumed)
+				current_run.Cut() // Abandon current run; assuming that we were improperly resumed with the wrong process queue.
+				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on a resumed fire.")
+				process_machinery(0)
+				return
+			else // ??? possibly dequeued by another machine or something ???
+				crash_with("[log_info_line(M)] was in the wrong subqueue on SSmachines on an unresumed fire.")
+				continue
+
+		if(!QDELETED(M) && (M.ProcessAll(wait) == PROCESS_KILL))
+			processing.Remove(M)
 			M.is_processing = null
 		if(MC_TICK_CHECK)
 			return
@@ -204,6 +208,8 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 		pipenets = SSmachines.pipenets
 	if (istype(SSmachines.machinery))
 		machinery = SSmachines.machinery
+	if (istype(SSmachines.processing))
+		processing = SSmachines.processing
 	if (istype(SSmachines.powernets))
 		powernets = SSmachines.powernets
 	if (istype(SSmachines.power_objects))
@@ -211,5 +217,5 @@ datum/controller/subsystem/machines/proc/setup_atmos_machinery(list/machines)
 
 #undef SSMACHINES_PIPENETS
 #undef SSMACHINES_MACHINERY
-#undef SSMACHINES_POWER
-#undef SSMACHINES_power_objects
+#undef SSMACHINES_POWERNETS
+#undef SSMACHINES_POWER_OBJECTS

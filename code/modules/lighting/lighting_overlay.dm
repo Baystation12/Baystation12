@@ -114,6 +114,8 @@
 		)
 
 	luminosity = set_luminosity
+	// if (T.above && T.above.shadower)
+	// 	T.above.shadower.copy_lighting(src)
 
 // Variety of overrides so the overlays don't get affected by weird things.
 /atom/movable/lighting_overlay/ex_act()
@@ -133,7 +135,11 @@
 	. = ..()
 
 /atom/movable/lighting_overlay/forceMove()
-	return 0 //should never move
+	//should never move
+	//In theory... except when getting deleted :C
+	if(QDELING(src))
+		return ..()
+	return 0
 
 /atom/movable/lighting_overlay/Move()
 	return 0

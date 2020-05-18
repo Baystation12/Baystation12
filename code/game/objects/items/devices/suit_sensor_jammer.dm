@@ -38,7 +38,10 @@
 	disable()
 
 /obj/item/device/suit_sensor_jammer/attack_self(var/mob/user)
-	tg_ui_interact(user)
+	ui_interact(user)
+
+/obj/item/device/suit_sensor_jammer/get_cell()
+	return bcell
 
 /obj/item/device/suit_sensor_jammer/attackby(obj/item/I as obj, mob/user as mob)
 	if(isCrowbar(I))
@@ -59,7 +62,7 @@
 		else
 			to_chat(user, "<span class='warning'>You're unable to insert the battery.</span>")
 
-/obj/item/device/suit_sensor_jammer/update_icon()
+/obj/item/device/suit_sensor_jammer/on_update_icon()
 	overlays.Cut()
 	if(bcell)
 		var/percent = bcell.percent()
@@ -99,9 +102,9 @@
 	var/new_range = range + (rand(0,6) / severity) - (rand(0,3) / severity)
 	set_range(new_range)
 
-obj/item/device/suit_sensor_jammer/examine(var/user)
-	. = ..(user, 3)
-	if(.)
+obj/item/device/suit_sensor_jammer/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 3)
 		var/list/message = list()
 		message += "This device appears to be [active ? "" : "in"]active and "
 		if(bcell)
@@ -110,18 +113,12 @@ obj/item/device/suit_sensor_jammer/examine(var/user)
 			message += "is lacking a cell."
 		to_chat(user, jointext(message,.))
 
-obj/item/device/suit_sensor_jammer/ui_status(mob/user, datum/ui_state/state)
+obj/item/device/suit_sensor_jammer/CanUseTopic(user, state)
 	if(!bcell || bcell.charge <= 0)
-		return UI_CLOSE
+		return STATUS_CLOSE
 	return ..()
 
-obj/item/device/suit_sensor_jammer/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = tg_default_state)
-	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
-	if(!ui)
-		ui = new(user, src, ui_key, "suit_sensor_jammer", "Sensor Jammer", 350, 610, master_ui, state)
-		ui.open()
-
-obj/item/device/suit_sensor_jammer/ui_data()
+obj/item/device/suit_sensor_jammer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/methods = new
 	for(var/suit_sensor_jammer_method/ssjm in suit_sensor_jammer_methods)
 		methods[++methods.len] = list("name" = ssjm.name, "cost" = ssjm.energy_cost, "ref" = "\ref[ssjm]")
@@ -138,29 +135,33 @@ obj/item/device/suit_sensor_jammer/ui_data()
 		"total_cost" = "[ceil(JAMMER_POWER_CONSUMPTION(10))]"
 	)
 
-	return data
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "suit_sensor_jammer.tmpl", "Sensor Jammer", 300, 640)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
 
-obj/item/device/suit_sensor_jammer/ui_act(action, params)
-	if(..())
-		return TRUE
-	switch(action)
-		if("enable_jammer")
-			enable()
-			. TRUE
-		if("disable_jammer")
-			disable()
-			. FALSE
-		if("increase_range")
-			set_range(range + 1)
-			. = 1
-		if("decrease_range")
-			set_range(range - 1)
-			. = 1
-		if("select_method")
-			var/method = locate(params["method"]) in suit_sensor_jammer_methods
-			if(method)
-				set_method(method)
-				. = TRUE
+obj/item/device/suit_sensor_jammer/OnTopic(var/mob/user, var/list/href_list, state)
+	if (href_list["enable_jammer"])
+		enable()
+		return TOPIC_REFRESH
+	if (href_list["disable_jammer"])
+		disable()
+		return TOPIC_REFRESH
+
+	if (href_list["increase_range"])
+		set_range(range + 1)
+		return TOPIC_REFRESH
+	if (href_list["decrease_range"])
+		set_range(range - 1)
+		return TOPIC_REFRESH
+
+	if (href_list["select_method"])
+		var/method = locate(href_list["select_method"]) in suit_sensor_jammer_methods
+		if(method)
+			set_method(method)
+			return TOPIC_REFRESH
 
 /obj/item/device/suit_sensor_jammer/Process(var/wait)
 	if(bcell)

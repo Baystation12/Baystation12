@@ -11,7 +11,6 @@
 	origin_tech = list(TECH_COMBAT = 4)
 	attack_verb = list("flicked", "whipped", "lashed")
 
-
 /obj/item/weapon/melee/whip/abyssal
 	name = "abyssal whip"
 	desc = "A weapon from the abyss. Requires 70 attack to wield."
@@ -24,6 +23,16 @@
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 4)
 	attack_verb = list("flicked", "whipped", "lashed")
+
+/obj/item/weapon/melee/whip/tail
+	name = "drake's tail"
+	desc = "The tail of a large scaled creature, obviously evolved as some kind of whipping weapon. It's razor sharp and incredibly tough, though relatively lightweight."
+	icon_state = "tailwhip"
+	item_state = "whip"
+	obj_flags = null
+	force = 19
+	edge = TRUE
+	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5)
 
 /obj/item/weapon/melee/whip/chainofcommand
 	name = "chain of command"
@@ -40,16 +49,16 @@
 	slot_flags = SLOT_BELT
 	applies_material_colour = FALSE
 
-/obj/item/weapon/material/sword/replica/officersword/marine
-	name = "marine NCO's sword"
-	desc = "A polished sword issued to SCG Marine NCOs."
-	icon_state = "marinesword"
+/obj/item/weapon/material/sword/replica/officersword/army
+	name = "army NCO's sword"
+	desc = "A polished sword issued to SCG Army NCOs."
+	icon_state = "armysword"
 
-/obj/item/weapon/material/sword/replica/officersword/marineofficer
-	name = "marine officer's sword"
-	desc = "A curved sword issued to SCG Marine officers."
-	icon_state = "marineofficersword"
-	item_state = "marineofficersword"
+/obj/item/weapon/material/sword/replica/officersword/armyofficer
+	name = "army officer's sword"
+	desc = "A curved sword issued to SCG Army officers."
+	icon_state = "armyofficersword"
+	item_state = "armyofficersword"
 
 /obj/item/weapon/material/sword/replica/officersword/pettyofficer
 	name = "chief petty officer's cutlass"

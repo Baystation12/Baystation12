@@ -22,10 +22,14 @@
 					{{if data.overloaded}}
 						Recovering
 					{{else}}
-						Online
+						Active
 					{{/if}}
 				{{else data.running == 1}}
 					Shutting Down
+				{{else data.running == 3}}
+					Inactive
+				{{else data.running == 4}}
+					Spinning Up
 				{{else}}
 					Offline
 				{{/if}}
@@ -36,7 +40,7 @@
 				Shield Capacity:
 			</div>
 			<div class="itemContent">
-				{{:data.current_energy}}/{{:data.max_energy}} MJ
+				{{:data.current_energy}}/{{:data.max_energy}} MJ ({{:data.percentage_energy}}%)
 			</div>
 		</div>
 		<div class="item">
@@ -75,7 +79,7 @@
 				{{:data.functional_segments}} / {{:data.total_segments}} m2 (Radius {{:data.field_radius}})
 			</div>
 		</div>
-		
+
 		<h2>FIELD SETTINGS</h2>
 		{{for data.modes}}
 			<div class="item">
@@ -85,7 +89,7 @@
 				<div class="itemContent">
 					{{:value.name}}
 				</div>
-			</div>	
+			</div>
 			<div class="item">
 				<div class="itemLabel">
 					Status:
@@ -115,9 +119,20 @@
 				Status:
 			</div>
 			<div class="itemContent">
-				{{if value.shield_status == 0}} <span style="color: red">INACTIVE</span>
-				{{else value.shield_status == 1}} <span style="color: orange">SHUTTING DOWN</span>
-				{{else}} <span style="color: green">ACTIVE</span>
+				{{if value.shield_status == 2}}
+					{{if data.overloaded}}
+						<span style="color: yellow">RECOVERING</span>
+					{{else}}
+						<span style="color: green">ACTIVE</span>
+					{{/if}}
+				{{else value.shield_status == 1}}
+					<span style="color: orange">SHUTTING DOWN</span>
+				{{else value.shield_status == 3}}
+					<span style="color: cyan">IDLE</span>
+				{{else value.shield_status == 4}}
+					<span style="color: yellow">SPINNING UP</span>
+				{{else}}
+					<span style="color: red">OFFLINE</span>
 				{{/if}}
 			</div>
 			<div class="itemLabel">
@@ -125,7 +140,7 @@
 			</div>
 			<div class="itemContent">
 				{{:helper.link('View Details', null, {'ref' : value.shield_ref})}}
-			</div>			
-		</div>	
+			</div>
+		</div>
 	{{/for}}
 {{/if}}

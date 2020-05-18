@@ -1,6 +1,7 @@
 /mob
 	density = 1
-	plane = MOB_PLANE
+	plane = DEFAULT_PLANE
+	layer = MOB_LAYER
 
 	appearance_flags = PIXEL_SCALE
 	animate_movement = 2
@@ -8,17 +9,34 @@
 
 	virtual_mob = /mob/observer/virtual/mob
 
-	movement_handlers = list(/datum/movement_handler/mob/eye)
+	movement_handlers = list(
+		/datum/movement_handler/mob/relayed_movement,
+		/datum/movement_handler/mob/death,
+		/datum/movement_handler/mob/conscious,
+		/datum/movement_handler/mob/eye,
+		/datum/movement_handler/move_relay,
+		/datum/movement_handler/mob/buckle_relay,
+		/datum/movement_handler/mob/delay,
+		/datum/movement_handler/mob/stop_effect,
+		/datum/movement_handler/mob/physically_capable,
+		/datum/movement_handler/mob/physically_restrained,
+		/datum/movement_handler/mob/space,
+		/datum/movement_handler/mob/multiz,
+		/datum/movement_handler/mob/movement
+	)
 
 	var/mob_flags
-
+	var/last_quick_move_time = 0
 	var/list/client_images = list() // List of images applied to/removed from the client on login/logout
 	var/datum/mind/mind
 
 	var/lastKnownIP = null
 	var/computer_id = null
+	var/last_ckey
 
-	var/stat = 0 //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+	var/stat = CONSCIOUS //Whether a mob is alive or dead. TODO: Move this to living - Nodrak
+
+	var/obj/screen/cells = null
 
 	var/obj/screen/hands = null
 	var/obj/screen/pullin = null
@@ -33,6 +51,7 @@
 	var/obj/screen/healths = null
 	var/obj/screen/throw_icon = null
 	var/obj/screen/nutrition_icon = null
+	var/obj/screen/hydration_icon = null
 	var/obj/screen/pressure = null
 	var/obj/screen/pain = null
 	var/obj/screen/gun/item/item_use_icon = null
@@ -61,7 +80,6 @@
 	var/atom/movable/pulling = null
 	var/other_mobs = null
 	var/next_move = null
-	var/transforming = null	//Carbon
 	var/hand = null
 	var/real_name = null
 
@@ -73,7 +91,8 @@
 	var/resting = 0			//Carbon
 	var/lying = 0
 	var/lying_prev = 0
-	var/canmove = 1
+
+	var/radio_interrupt_cooldown = 0
 
 	var/unacidable = 0
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
@@ -92,10 +111,17 @@
 	var/bodytemperature = 310.055	//98.7 F
 	var/default_pixel_x = 0
 	var/default_pixel_y = 0
+	var/default_pixel_z = 0
 
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
-	var/m_intent = M_RUN//Living
+
+	var/decl/move_intent/move_intent = /decl/move_intent/walk
+	var/list/move_intents = list(/decl/move_intent/walk)
+
+	var/decl/move_intent/default_walk_intent
+	var/decl/move_intent/default_run_intent
+
 	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
@@ -103,7 +129,7 @@
 	var/obj/item/weapon/storage/s_active = null//Carbon
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
 
-	var/list/grabbed_by = list(  )
+	var/list/grabbed_by = list()
 
 	var/in_throw_mode = 0
 
@@ -123,7 +149,7 @@
 
 	var/voice_name = "unidentifiable voice"
 
-	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
+	var/faction = MOB_FACTION_NEUTRAL //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 	var/blinded = null
 	var/ear_deaf = null		//Carbon
 
@@ -143,8 +169,8 @@
 	var/obj/control_object //Used by admins to possess objects. All mobs should have this var
 
 	//Whether or not mobs can understand other mobtypes. These stay in /mob so that ghosts can hear everything.
-	var/universal_speak = 0 // Set to 1 to enable the mob to speak to everyone -- TLE
-	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
+	var/universal_speak = FALSE // Set to TRUE to enable the mob to speak to everyone -- TLE
+	var/universal_understand = FALSE // Set to TRUE to enable the mob to understand everyone, not necessarily speak
 
 	//If set, indicates that the client "belonging" to this (clientless) mob is currently controlling some other mob
 	//so don't treat them as being SSD even though their client var is null.
@@ -154,16 +180,15 @@
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/mob_size = MOB_MEDIUM
-	var/throw_multiplier = 1
 
 	var/paralysis = 0
 	var/stunned = 0
 	var/weakened = 0
 	var/drowsyness = 0.0//Carbon
 
-	var/memory = ""
 	var/flavor_text = ""
 
-	var/nabbing = 0  // Whether a creature with a CAN_NAB tag is grabbing normally or in nab mode.
-
 	var/datum/skillset/skillset = /datum/skillset
+
+
+	var/list/additional_vision_handlers = list() //Basically a list of atoms from which additional vision data is retrieved

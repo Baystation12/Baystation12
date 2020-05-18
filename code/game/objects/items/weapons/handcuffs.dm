@@ -4,6 +4,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "handcuff"
+	health = 0
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
 	throwforce = 5
@@ -11,14 +12,20 @@
 	throw_speed = 2
 	throw_range = 5
 	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	matter = list(MATERIAL_STEEL = 500)
 	var/elastic
 	var/dispenser = 0
 	var/breakouttime = 1200 //Deciseconds = 120s = 2 minutes
 	var/cuff_sound = 'sound/weapons/handcuffs.ogg'
 	var/cuff_type = "handcuffs"
 
-
+/obj/item/weapon/handcuffs/examine(mob/user)
+	. = ..()
+	if (health)
+		var display = health / initial(health) * 100
+		if (display > 66)
+			return
+		to_chat(user, SPAN_WARNING("They look [display < 33 ? "badly ": ""]damaged."))
 
 /obj/item/weapon/handcuffs/get_icon_state(mob/user_mob, slot)
 	if(slot == slot_handcuffed_str)
@@ -32,7 +39,7 @@
 	if(!user.IsAdvancedToolUser())
 		return
 
-	if ((CLUMSY in user.mutations) && prob(50))
+	if ((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<span class='warning'>Uh ... how do those things work?!</span>")
 		place_handcuffs(user, user)
 		return
@@ -74,7 +81,7 @@
 		to_chat(user, "<span class='danger'>\The [H] needs at least two wrists before you can cuff them together!</span>")
 		return 0
 
-	if(istype(H.gloves,/obj/item/clothing/gloves/rig) && !elastic) // Can't cuff someone who's in a deployed hardsuit.
+	if((H.gloves && H.gloves.item_flags & ITEM_FLAG_NOCUFFS) && !elastic)
 		to_chat(user, "<span class='danger'>\The [src] won't fit around \the [H.gloves]!</span>")
 		return 0
 
@@ -86,8 +93,14 @@
 	if(!can_place(target, user)) // victim may have resisted out of the grab in the meantime
 		return 0
 
+	var/obj/item/weapon/handcuffs/cuffs = src
+	if(dispenser)
+		cuffs = new(get_turf(user))
+	else if(!user.unEquip(cuffs))
+		return 0
+
 	admin_attack_log(user, H, "Attempted to handcuff the victim", "Was target of an attempted handcuff", "attempted to handcuff")
-	feedback_add_details("handcuffs","H")
+	SSstatistics.add_field_details("handcuffs","H")
 
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	user.do_attack_animation(H)
@@ -95,11 +108,6 @@
 	user.visible_message("<span class='danger'>\The [user] has put [cuff_type] on \the [H]!</span>")
 
 	// Apply cuffs.
-	var/obj/item/weapon/handcuffs/cuffs = src
-	if(dispenser)
-		cuffs = new(get_turf(user))
-	else
-		user.drop_from_inventory(cuffs)
 	target.equip_to_slot(cuffs,slot_handcuffed)
 	return 1
 
@@ -121,7 +129,7 @@ var/last_chew = 0
 	H.visible_message("<span class='warning'>\The [H] chews on \his [O.name]!</span>", "<span class='warning'>You chew on your [O.name]!</span>")
 	admin_attacker_log(H, "chewed on their [O.name]!")
 
-	O.take_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
+	O.take_external_damage(3,0, DAM_SHARP|DAM_EDGE ,"teeth marks")
 
 	last_chew = world.time
 
@@ -133,41 +141,31 @@ var/last_chew = 0
 	cuff_sound = 'sound/weapons/cablecuff.ogg'
 	cuff_type = "cable restraints"
 	elastic = 1
+	health = 75
 
 /obj/item/weapon/handcuffs/cable/red
-	color = "#dd0000"
+	color = COLOR_MAROON
 
 /obj/item/weapon/handcuffs/cable/yellow
-	color = "#dddd00"
+	color = COLOR_AMBER
 
 /obj/item/weapon/handcuffs/cable/blue
-	color = "#0000dd"
+	color = COLOR_CYAN_BLUE
 
 /obj/item/weapon/handcuffs/cable/green
-	color = "#00dd00"
+	color = COLOR_GREEN
 
 /obj/item/weapon/handcuffs/cable/pink
-	color = "#dd00dd"
+	color = COLOR_PURPLE
 
 /obj/item/weapon/handcuffs/cable/orange
-	color = "#dd8800"
+	color = COLOR_ORANGE
 
 /obj/item/weapon/handcuffs/cable/cyan
-	color = "#00dddd"
+	color = COLOR_SKY_BLUE
 
 /obj/item/weapon/handcuffs/cable/white
-	color = "#ffffff"
-
-/obj/item/weapon/handcuffs/cable/attackby(var/obj/item/I, mob/user as mob)
-	..()
-	if(istype(I, /obj/item/stack/rods))
-		var/obj/item/stack/rods/R = I
-		if (R.use(1))
-			var/obj/item/weapon/material/wirerod/W = new(get_turf(user))
-			user.put_in_hands(W)
-			to_chat(user, "<span class='notice'>You wrap the cable restraint around the top of the rod.</span>")
-			qdel(src)
-			update_icon(user)
+	color = COLOR_SILVER
 
 /obj/item/weapon/handcuffs/cyborg
 	dispenser = 1
@@ -180,3 +178,4 @@ var/last_chew = 0
 	icon = 'icons/obj/bureaucracy.dmi'
 	breakouttime = 200
 	cuff_type = "duct tape"
+	health = 50

@@ -1,5 +1,5 @@
-/mob/living/silicon/pai/examine(mob/user)
-	. = ..(user, infix = ", personal AI")
+/mob/living/silicon/pai/examine(mob/user, distance)
+	. = ..(user, distance, infix = ", personal AI")
 
 	var/msg = ""
 	switch(src.stat)
@@ -12,7 +12,7 @@
 	if(print_flavor_text()) msg += "\n[print_flavor_text()]\n"
 
 	if (pose)
-		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
+		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		msg += "\nIt is [pose]"
 

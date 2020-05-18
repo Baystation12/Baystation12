@@ -20,7 +20,7 @@
 
 	hud_state = "wiz_swap"
 
-	cast_sound = 'sound/effects/bamf.ogg'
+	cast_sound = 'sound/magic/mandswap.ogg'
 
 /spell/targeted/swap/cast(var/list/targets, mob/user)
 	for(var/mob/T in targets)

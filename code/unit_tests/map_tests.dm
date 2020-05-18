@@ -35,17 +35,17 @@
 			log_bad("[bad_msg] is not supposed to have an APC.")
 			area_good = 0
 
-		if(!A.air_scrub_info.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
+		if(!A.air_scrub_names.len && !(exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] lacks an air scrubber.")
 			area_good = 0
-		else if(A.air_scrub_info.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
+		else if(A.air_scrub_names.len && (exemptions & GLOB.using_map.NO_SCRUBBER))
 			log_bad("[bad_msg] is not supposed to have an air scrubber.")
 			area_good = 0
 
-		if(!A.air_vent_info.len && !(exemptions & GLOB.using_map.NO_VENT))
+		if(!A.air_vent_names.len && !(exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] lacks an air vent.[ascii_reset]")
 			area_good = 0
-		else if(A.air_vent_info.len && (exemptions & GLOB.using_map.NO_VENT))
+		else if(A.air_vent_names.len && (exemptions & GLOB.using_map.NO_VENT))
 			log_bad("[bad_msg] is not supposed to have an air vent.")
 			area_good = 0
 
@@ -66,6 +66,44 @@
 		if(istype(area, exempt_type))
 			return GLOB.using_map.apc_test_exempt_areas[exempt_type]
 
+/datum/unit_test/air_alarm_connectivity
+	name = "MAP: Air alarms shall receive updates."
+	async = TRUE // Waits for SStimers to finish one full run before testing
+
+/datum/unit_test/air_alarm_connectivity/start_test()
+	return 1
+
+/datum/unit_test/air_alarm_connectivity/subsystems_to_await()
+	return list(SStimer)
+
+/datum/unit_test/air_alarm_connectivity/check_result()
+	var/failed = FALSE
+	for(var/area/A in world)
+		if(!A.z)
+			continue
+		if(!isPlayerLevel(A.z))
+			continue
+		var/obj/machinery/alarm/alarm = locate() in A // Only test areas with functional alarms
+		if(!alarm)
+			continue
+		if(alarm.stat & (NOPOWER | BROKEN))
+			continue
+
+		for(var/tag in A.air_vent_names) // The point of this test is that while the names list is registered at init, the info is transmitted by radio.
+			if(!A.air_vent_info[tag])
+				log_bad("Vent [A.air_vent_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				failed = TRUE
+		for(var/tag in A.air_scrub_names)
+			if(!A.air_scrub_info[tag])
+				log_bad("Scrubber [A.air_scrub_names[tag]] with id_tag [tag] did not update the air alarm in area [A].")
+				failed = TRUE
+
+	if(failed)
+		fail("Some areas did not receive updates from all of their atmos devices.")
+	else
+		pass("All atmos devices updated their area's air alarms successfully.")
+
+	return 1
 //=======================================================================================
 
 /datum/unit_test/wire_test
@@ -271,6 +309,7 @@ datum/unit_test/ladder_check/start_test()
 			succeeded = check_direction(L, GetAbove(L), UP, DOWN) && succeeded
 		if(L.allowed_directions & DOWN)
 			succeeded = check_direction(L, GetBelow(L), DOWN, UP) && succeeded
+			succeeded = check_open_space(L) && succeeded
 	if(succeeded)
 		pass("All ladders are correctly setup.")
 	else
@@ -290,6 +329,13 @@ datum/unit_test/ladder_check/start_test()
 		log_bad("The ladder in the direction [dir2text(check_direction)] is not allowed to connect to [log_info_line(L)]")
 		return FALSE
 	return TRUE
+
+/datum/unit_test/ladder_check/proc/check_open_space(var/obj/structure/ladder/L)
+	if(!istype(get_turf(L), /turf/simulated/open))
+		log_bad("There is a non-open turf blocking the way for [log_info_line(L)]")
+		return FALSE
+	return TRUE
+
 
 //=======================================================================================
 
@@ -466,7 +512,7 @@ datum/unit_test/ladder_check/start_test()
 
 /datum/unit_test/simple_pipes_shall_not_face_north_or_west/start_test()
 	var/failures = 0
-	for(var/obj/machinery/atmospherics/pipe/simple/pipe in SSmachines.machinery)
+	for(var/obj/machinery/atmospherics/pipe/simple/pipe in world) // Pipes are removed from the SSmachines list during init.
 		if(!istype(pipe, /obj/machinery/atmospherics/pipe/simple/hidden) && !istype(pipe, /obj/machinery/atmospherics/pipe/simple/visible))
 			continue
 		if(pipe.dir == NORTH || pipe.dir == WEST)
@@ -499,6 +545,286 @@ datum/unit_test/ladder_check/start_test()
 		pass("All shutoff valves connect to two different pipe networks.")
 	return 1
 
+//=======================================================================================
+
+/datum/unit_test/station_pipes_shall_not_leak
+	name = "MAP: Station pipes shall not leak"
+
+/datum/unit_test/station_pipes_shall_not_leak/start_test()
+	var/failures = 0
+	for(var/obj/machinery/atmospherics/pipe/P in world)
+		if(P.leaking && isStationLevel(P.z))
+			failures++
+			log_bad("Following pipe is leaking: [log_info_line(P)]")
+
+	if(failures)
+		fail("[failures] station pipe\s leak.")
+	else
+		pass("No station pipes are leaking")
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/station_power_terminals_shall_be_wired
+	name = "MAP: Station power terminals shall be wired"
+
+/datum/unit_test/station_power_terminals_shall_be_wired/start_test()
+	var/failures = 0
+	for(var/obj/machinery/power/terminal/term in SSmachines.machinery)
+		var/turf/T = get_turf(term)
+		if(!T)
+			failures++
+			log_bad("Nullspace terminal : [log_info_line(term)]")
+			continue
+
+		if(!isStationLevel(T.z))
+			continue
+
+		var/found_cable = FALSE
+		for(var/obj/structure/cable/C in T)
+			if(C.d2 > 0 && C.d1 == 0)
+				found_cable = TRUE
+				break
+		if(!found_cable)
+			failures++
+			log_bad("Unwired terminal : [log_info_line(term)]")
+
+	if(failures)
+		fail("[failures] unwired power terminal\s.")
+	else
+		pass("All station power terminals are wired.")
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/station_wires_shall_be_connected
+	name = "MAP: Station wires shall be connected"
+	var/list/exceptions
+
+/datum/unit_test/station_wires_shall_be_connected/start_test()
+	var/failures = 0
+
+	var/exceptions_by_turf = list()
+	for(var/exception in exceptions)
+		var/turf/T = locate(exception[1], exception[2], exception[3])
+		if(!T)
+			CRASH("Invalid exception: [exception[1]] - [exception[2]] - [exception[3]]")
+		if(!(T in exceptions_by_turf))
+			exceptions_by_turf[T] = list()
+		exceptions_by_turf[T] += exception[4]
+	exceptions = exceptions_by_turf
+
+	for(var/obj/structure/cable/C in world)
+		if(!all_ends_connected(C))
+			failures++
+
+	if(failures)
+		fail("Found [failures] cable\s without connections.")
+	else if(exceptions.len)
+		for(var/entry in exceptions)
+			log_bad("[log_info_line(entry)] - [english_list(exceptions[entry])] ")
+		fail("Unnecessary exceptions need to be cleaned up.")
+	else
+		pass("All station wires are properly connected.")
+
+	return 1
+
+// We work on the assumption that another test ensures we only have valid directions
+/datum/unit_test/station_wires_shall_be_connected/proc/all_ends_connected(var/obj/structure/cable/C)
+	. = TRUE
+
+	var/turf/source_turf = get_turf(C)
+	if(!source_turf)
+		log_bad("Nullspace wire: [log_info_line(C)]")
+		return FALSE
+
+	// We don't care about non-station wires
+	if(!isStationLevel(source_turf.z))
+		return TRUE
+
+	for(var/dir in list(C.d1, C.d2))
+		if(!dir) // Don't care about knots
+			continue
+		var/rev_dir = GLOB.reverse_dir[dir]
+
+		var/list/exception = exceptions[source_turf]
+		if(exception && (dir in exception))
+			exception -= dir
+			if(!exception.len)
+				exceptions -= source_turf
+			continue
+
+		var/turf/target_turf
+		if(dir == UP)
+			target_turf = GetAbove(C)
+		if(dir == DOWN)
+			target_turf = GetBelow(C)
+		else
+			target_turf = get_step(C, dir)
+
+		var/connected = FALSE
+		for(var/obj/structure/cable/revC in target_turf)
+			if(revC.d1 == rev_dir || revC.d2 == rev_dir)
+				connected = TRUE
+				break
+
+		if(!connected)
+			log_bad("Disconnected wire: [dir2text(dir)] - [log_info_line(C)]")
+			. = FALSE
+
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages
+	name = "MAP: Networked disposals shall deliver tagged packages"
+	async = 1
+
+	var/extra_spawns = 1
+
+	var/list/packages_awaiting_delivery = list()
+	var/list/all_tagged_bins = list()
+	var/list/all_tagged_destinations = list()
+
+	var/failed = FALSE
+	var/list/exempt_junctions = list(
+		/obj/structure/disposalpipe/sortjunction/untagged
+	)
+
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/start_test()
+	. = 1
+	var/fail = FALSE
+	for(var/obj/structure/disposalpipe/sortjunction/sort in world)
+		if(is_type_in_list(sort, exempt_junctions))
+			continue
+		var/obj/machinery/disposal/bin = get_bin_from_junction(sort)
+		if(!bin)
+			log_bad("Junction with tag [sort.sort_type] at ([sort.x], [sort.y], [sort.z]) could not find disposal.")
+			fail = TRUE
+			continue
+		all_tagged_destinations[sort.sort_type] = bin
+		if(!istype(bin)) // Can also be an outlet.
+			continue
+		all_tagged_bins[sort.sort_type] = bin
+	if(fail)
+		fail("Improperly connected junction detected.")
+		return
+	for(var/target_tag in all_tagged_destinations)
+		var/start_tag = all_tagged_bins[target_tag] ? target_tag : pick(all_tagged_bins)
+		spawn_package(start_tag, target_tag)
+		for(var/i in 1 to extra_spawns)
+			spawn_package(pick(all_tagged_bins), target_tag) // This potentially helps catch errors in junction logic.
+
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/spawn_package(start_tag, target_tag)
+	var/obj/structure/disposalholder/unit_test/package = new()
+	package.tomail = 1
+	package.destinationTag = target_tag
+	package.start(all_tagged_bins[start_tag])
+	package.test = src
+	packages_awaiting_delivery[package] = start_tag
+
+/obj/structure/disposalholder/unit_test
+	var/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/test
+	speed = 100
+
+/obj/structure/disposalholder/unit_test/Destroy()
+	test.package_delivered(src)
+	. = ..()
+
+/obj/structure/disposalholder/unit_test/Process()
+	for(var/i in 1 to speed) // Go faster, as it takes a while and we don't want to wait forever.
+		. = ..()
+		if(. == PROCESS_KILL)
+			if(QDELETED(src) || !test.packages_awaiting_delivery[src])
+				return
+			log_and_fail()
+			return
+
+/obj/structure/disposalholder/unit_test/proc/log_and_fail()
+	var/location = log_info_line(get_turf(src))
+	var/expected_loc = log_info_line(get_turf(test.all_tagged_destinations[destinationTag]))
+	test.log_bad("A package routed from [test.packages_awaiting_delivery[src]] to [destinationTag] was misrouted to [location]; expected location was [expected_loc].")
+	test.failed = TRUE
+	test.packages_awaiting_delivery -= src
+
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/check_result()
+	. = 1
+	if(failed)
+		fail("A package has been delivered to an incorrect location.")
+		return
+	if(!packages_awaiting_delivery.len)
+		pass("All packages delivered.")
+		return
+	return 0
+
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/package_delivered(var/obj/structure/disposalholder/unit_test/package)
+	if(!packages_awaiting_delivery[package])
+		return
+	var/obj/structure/disposalpipe/trunk/trunk = package.loc
+
+	if(!istype(trunk))
+		package.log_and_fail()
+		return
+	var/obj/linked = trunk.linked
+	if(all_tagged_destinations[package.destinationTag] != linked)
+		package.log_and_fail()
+		return
+	packages_awaiting_delivery -= package
+
+/datum/unit_test/networked_disposals_shall_deliver_tagged_packages/proc/get_bin_from_junction(var/obj/structure/disposalpipe/sortjunction/sort)
+	var/list/traversed = list(sort) // Avoid self-looping, infinite loops.
+	var/obj/structure/disposalpipe/our_pipe = sort
+	var/current_dir = sort.sortdir
+	while(1)
+		if(istype(our_pipe, /obj/structure/disposalpipe/trunk))
+			var/obj/structure/disposalpipe/trunk/trunk = our_pipe
+			return trunk.linked
+		var/obj/structure/disposalpipe/next_pipe
+		for(var/obj/structure/disposalpipe/P in get_step(our_pipe, current_dir))
+			if(turn(current_dir, 180) & P.dpdir)
+				next_pipe = P
+				break
+		if(!istype(next_pipe))
+			return
+		if(next_pipe in traversed)
+			return
+		traversed += next_pipe
+		current_dir = next_pipe.nextdir(current_dir, sort.sort_type)
+		our_pipe = next_pipe
+
+/datum/unit_test/req_access_shall_have_valid_strings
+	name = "MAP: every obj shall have valid access strings in req_access"
+	var/list/accesses
+
+/datum/unit_test/req_access_shall_have_valid_strings/start_test()
+	if(!accesses)
+		accesses = get_all_access_datums()
+
+	var/list/obj_access_pairs = list()
+	for(var/obj/O in world)
+		if(O.req_access)
+			for(var/req in O.req_access)
+				if(islist(req))
+					for(var/req_one in req)
+						if(is_invalid(req_one))
+							obj_access_pairs += list(list(O, req_one))
+				else if(is_invalid(req))
+					obj_access_pairs += list(list(O, req))
+
+	if(obj_access_pairs.len)
+		for(var/entry in obj_access_pairs)
+			log_bad("[log_info_line(entry[1])] has an invalid value ([entry[2]]) in req_access.")
+		fail("Mapped objs with req_access must be set up to use existing access strings.")
+	else
+		pass("All mapped objs have correctly set req_access.")
+
+	return 1
+
+/datum/unit_test/req_access_shall_have_valid_strings/proc/is_invalid(var/value)
+	if(!istext(value))
+		return TRUE //Someone tried to use a non-string as an access. There is no case where this is allowed.
+
+	for(var/datum/access/A in accesses)
+		if(value == A.id)
+			return FALSE
+
+	return TRUE
 
 #undef SUCCESS
 #undef FAILURE

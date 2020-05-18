@@ -1,5 +1,16 @@
 {{if data.error}}
 	<b>ERROR: {{:data.error}}</b>
+{{else data.skill_fail}}
+	{{for data.skill_fail}}
+	<div class="item">
+		<div class="itemLabelWide">
+    		{{:value.key}}
+		</div>
+		<div class="itemContentNarrow">
+			{{:value.value}}
+		</div>
+	</div>
+	{{/for}}
 {{else}}
 	<h2>System Status</h2>
 	<div class="item">
@@ -59,4 +70,8 @@
 			<td>{{:helper.link('Purge', null, {'PRG_purgeAiLaws' : '1'}, null, 'redButton')}}
 		</table>
 	</div>
+{{/if}}
+{{if data.terminal}}
+<h1>MANUAL SYSTEM ACCESS</h1>
+{{:helper.link('ACTIVATE TERMINAL', null, {'PC_terminal' : 1})}}
 {{/if}}

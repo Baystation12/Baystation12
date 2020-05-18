@@ -10,7 +10,7 @@
 	throwforce = 0
 	w_class = ITEM_SIZE_NORMAL
 	origin_tech = list(TECH_MATERIAL = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 18750)
+	matter = list(MATERIAL_STEEL = 18750)
 	can_buckle = 0 //disallow manual un/buckling
 	var/deployed = 0
 
@@ -38,7 +38,7 @@
 			"You hear the slow creaking of a spring."
 			)
 
-		if (do_after(user, 60, src))
+		if (do_after(user, 60, src) && user.unEquip(src))
 			user.visible_message(
 				"<span class='danger'>\The [user] has deployed \the [src].</span>",
 				"<span class='danger'>You have deployed \the [src]!</span>",
@@ -46,7 +46,6 @@
 				)
 
 			deployed = 1
-			user.drop_from_inventory(src)
 			update_icon()
 			anchored = 1
 
@@ -78,13 +77,7 @@
 	else
 		target_zone = pick(BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG)
 
-	//armour
-	var/blocked = L.run_armor_check(target_zone, "melee")
-
-	if(blocked >= 100)
-		return
-
-	if(!L.apply_damage(30, BRUTE, target_zone, blocked, used_weapon=src))
+	if(!L.apply_damage(30, BRUTE, target_zone, used_weapon=src))
 		return 0
 
 	//trap the victim in place
@@ -96,7 +89,7 @@
 /obj/item/weapon/beartrap/Crossed(AM as mob|obj)
 	if(deployed && isliving(AM))
 		var/mob/living/L = AM
-		if(L.m_intent == M_RUN)
+		if(!MOVING_DELIBERATELY(L))
 			L.visible_message(
 				"<span class='danger'>[L] steps on \the [src].</span>",
 				"<span class='danger'>You step on \the [src]!</span>",
@@ -109,7 +102,7 @@
 			update_icon()
 	..()
 
-/obj/item/weapon/beartrap/update_icon()
+/obj/item/weapon/beartrap/on_update_icon()
 	..()
 
 	if(!deployed)

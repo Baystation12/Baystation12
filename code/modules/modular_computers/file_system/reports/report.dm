@@ -127,17 +127,7 @@ If the override option is set to 0, the access supplied will instead be added as
 		.["access"] = verify_access(given_access)
 		.["access_edit"] = verify_access_edit(given_access)
 	for(var/datum/report_field/field in fields)
-		var/dat = list()
-		if(given_access)
-			dat["access"] = field.verify_access(given_access)
-			dat["access_edit"] = field.verify_access_edit(given_access)
-		dat["name"] = field.display_name()
-		dat["value"] = field.get_value()
-		dat["can_edit"] = field.can_edit
-		dat["needs_big_box"] = field.needs_big_box
-		dat["ignore_value"] = field.ignore_value
-		dat["ID"] = field.ID
-		.["fields"] += list(dat)
+		.["fields"] += list(field.generate_nano_data(given_access))
 /*
 This formats the report into pencode for use with paper and printing. Setting access to null will bypass access checks.
 with_fields will include a field link after the field value (useful to print fillable forms).
@@ -149,21 +139,13 @@ no_html will strip any html, possibly killing useful formatting in the process.
 	. += "\[center\]\[h2\][display_name()]\[/h2\]\[/center\]"
 	. += "\[grid\]"
 	for(var/datum/report_field/F in fields)
-		if(!F.ignore_value)
-			. += "\[row\]\[cell\]\[b\][F.display_name()]:\[/b\]"
-			var/field = ((with_fields && F.can_edit) ? "\[field\]" : "" )
-			if(!access || F.verify_access(access))
-				. += (F.needs_big_box ? "\[/grid\][F.get_value()][field]\[grid\]" : "\[cell\][F.get_value()][field]")
-			else
-				. += "\[cell\]\[REDACTED\][field]"
-		else
-			. += "\[/grid\]\[h3\][F.display_name()]\[/h3\]\[grid\]"
+		. += F.generate_row_pencode(access, with_fields)
 	. += "\[/grid\]"
 	. = JOINTEXT(.)
 	if(no_html)
 		. = html2pencode(.)
 
-//recipient reports have a designated recipients field, for recieving submitted reports.
+//recipient reports have a designated recipients field, for receiving submitted reports.
 /datum/computer_file/report/recipient
 	var/datum/report_field/people/list_from_manifest/recipients
 
@@ -172,7 +154,7 @@ no_html will strip any html, possibly killing useful formatting in the process.
 	return ..()
 
 /datum/computer_file/report/recipient/generate_fields()
-	recipients = add_field(/datum/report_field/people/list_from_manifest/, "Send Copies To")
+	recipients = add_field(/datum/report_field/people/list_from_manifest, "Send Copies To")
 
 /datum/computer_file/report/recipient/submit(mob/user)
 	if((. = ..()))

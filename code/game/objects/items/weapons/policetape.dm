@@ -37,19 +37,28 @@ var/list/tape_roll_applications = list()
 	var/crumpled = 0
 	var/tape_dir = 0
 	var/icon_base = "tape"
+	var/detail_overlay
+	var/detail_color
 
-/obj/item/tape/update_icon()
+/obj/item/tape/on_update_icon()
 	//Possible directional bitflags: 0 (AIRLOCK), 1 (NORTH), 2 (SOUTH), 4 (EAST), 8 (WEST), 3 (VERTICAL), 12 (HORIZONTAL)
+	overlays.Cut()
+	var/new_state
 	switch (tape_dir)
 		if(0)  // AIRLOCK
-			icon_state = "[icon_base]_door_[crumpled]"
+			new_state = "[icon_base]_door"
 		if(3)  // VERTICAL
-			icon_state = "[icon_base]_v_[crumpled]"
+			new_state = "[icon_base]_v"
 		if(12) // HORIZONTAL
-			icon_state = "[icon_base]_h_[crumpled]"
+			new_state = "[icon_base]_h"
 		else   // END POINT (1|2|4|8)
-			icon_state = "[icon_base]_dir_[crumpled]"
+			new_state = "[icon_base]_dir"
 			dir = tape_dir
+	icon_state = "[new_state]_[crumpled]"
+	if(detail_overlay)
+		var/image/I = overlay_image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
+		I.color = detail_color
+		overlays |= I
 
 /obj/item/tape/New()
 	..()
@@ -84,7 +93,7 @@ var/list/tape_roll_applications = list()
 /obj/item/tape/engineering
 	name = "engineering tape"
 	desc = "A length of engineering tape. Better not cross it."
-	req_one_access = list(access_engine,access_atmospherics)
+	req_access = list(list(access_engine,access_atmospherics))
 	color = COLOR_ORANGE
 
 /obj/item/taperoll/atmos
@@ -96,8 +105,11 @@ var/list/tape_roll_applications = list()
 /obj/item/tape/atmos
 	name = "atmospherics tape"
 	desc = "A length of atmospherics tape. Better not cross it."
-	req_one_access = list(access_engine,access_atmospherics)
+	req_access = list(list(access_engine,access_atmospherics))
 	color = COLOR_BLUE_LIGHT
+	icon_base = "stripetape"
+	detail_overlay = "stripes"
+	detail_color = COLOR_YELLOW
 
 /obj/item/taperoll/research
 	name = "research tape"
@@ -108,22 +120,38 @@ var/list/tape_roll_applications = list()
 /obj/item/tape/research
 	name = "research tape"
 	desc = "A length of research tape. Better not cross it."
-	req_one_access = list(access_research)
+	req_access = list(access_research)
 	color = COLOR_WHITE
 
 /obj/item/taperoll/medical
 	name = "medical tape"
 	desc = "A roll of medical tape used to block off working areas from the public."
 	tape_type = /obj/item/tape/medical
-	color = COLOR_GREEN
+	color = COLOR_PALE_BLUE_GRAY
 
 /obj/item/tape/medical
 	name = "medical tape"
 	desc = "A length of medical tape. Better not cross it."
-	req_one_access = list(access_medical)
-	color = COLOR_GREEN
+	req_access = list(access_medical)
+	icon_base = "stripetape"
+	detail_overlay = "stripes"
+	detail_color = COLOR_PALE_BLUE_GRAY
 
-/obj/item/taperoll/update_icon()
+/obj/item/taperoll/bureaucracy
+	name = "red tape"
+	desc = "A roll of bureaucratic red tape used to block any meaningful work from being done."
+	tape_type = /obj/item/tape/bureaucracy
+	color = COLOR_RED
+
+/obj/item/tape/bureaucracy
+	name = "red tape"
+	desc = "A length of bureaucratic red tape. Safely ignored, but darn obstructive sometimes."
+	icon_base = "stripetape"
+	color = COLOR_RED
+	detail_overlay = "stripes"
+	detail_color = COLOR_RED
+
+/obj/item/taperoll/on_update_icon()
 	overlays.Cut()
 	var/image/overlay = image(icon = src.icon)
 	overlay.appearance_flags = RESET_COLOR
@@ -316,7 +344,6 @@ var/list/tape_roll_applications = list()
 
 /obj/item/tape/proc/lift(time)
 	lifted = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	spawn(time)
 		lifted = 0

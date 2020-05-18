@@ -8,26 +8,31 @@
 	size = 12
 	requires_ntnet = 1
 	available_on_ntnet = 1
-	nanomodule_path = /datum/nano_module/email_administration
+	nanomodule_path = /datum/nano_module/program/email_administration
 	required_access = access_network
+	category = PROG_ADMIN
 
-
-
-
-/datum/nano_module/email_administration/
+/datum/nano_module/program/email_administration
 	name = "Email Administration"
+	available_to_ai = TRUE
 	var/datum/computer_file/data/email_account/current_account = null
 	var/datum/computer_file/data/email_message/current_message = null
 	var/error = ""
 
-/datum/nano_module/email_administration/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/email_administration/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
+
+	data += "skill_fail"
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
+		var/datum/extension/fake_data/fake_data = get_or_create_extension(src, /datum/extension/fake_data, 15)
+		data["skill_fail"] = fake_data.update_and_return_data()
+	data["terminal"] = !!program
 
 	if(error)
 		data["error"] = error
 	else if(istype(current_message))
 		data["msg_title"] = current_message.title
-		data["msg_body"] = pencode2html(current_message.stored_data)
+		data["msg_body"] = digitalPencode2html(current_message.stored_data)
 		data["msg_timestamp"] = current_message.timestamp
 		data["msg_source"] = current_message.source
 	else if(istype(current_account))
@@ -55,7 +60,7 @@
 		data["accounts"] = all_accounts
 		data["accountcount"] = all_accounts.len
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "email_administration.tmpl", "Email Administration Utility", 600, 450, state = state)
 		if(host.update_layout())
@@ -65,12 +70,15 @@
 		ui.open()
 
 
-/datum/nano_module/email_administration/Topic(href, href_list)
+/datum/nano_module/program/email_administration/Topic(href, href_list)
 	if(..())
 		return 1
 
 	var/mob/user = usr
 	if(!istype(user))
+		return 1
+
+	if(!user.skill_check(SKILL_COMPUTER, SKILL_BASIC))
 		return 1
 
 	// High security - can only be operated when the user has an ID with access on them.

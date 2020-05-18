@@ -2,7 +2,7 @@
 	name = "frame"
 	desc = "Used for building machines."
 	icon = 'icons/obj/monitors.dmi'
-	icon_state = "fire_bitem"
+	icon_state = "alarm_bitem"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	var/build_machine_type
 	var/refund_amt = 2
@@ -37,7 +37,7 @@
 	if (!istype(loc, /turf/simulated/floor))
 		to_chat(usr, "<span class='danger'>\The [src] cannot be placed on this spot.</span>")
 		return
-	if (A.requires_power == 0 || A.name == "Space")
+	if ((A.requires_power == 0 || A.name == "Space") && !isLightFrame())
 		to_chat(usr, "<span class='danger'>\The [src] cannot be placed in this area.</span>")
 		return
 
@@ -48,14 +48,18 @@
 	new build_machine_type(loc, ndir, src)
 	qdel(src)
 
+/obj/item/frame/proc/isLightFrame()
+	return FALSE
+
 /obj/item/frame/fire_alarm
 	name = "fire alarm frame"
 	desc = "Used for building fire alarms."
+	icon = 'icons/obj/firealarm.dmi'
+	icon_state = "casing"
 	build_machine_type = /obj/machinery/firealarm
 
 /obj/item/frame/air_alarm
 	name = "air alarm frame"
-	icon_state = "alarm_bitem"
 	desc = "Used for building air alarms."
 	build_machine_type = /obj/machinery/alarm
 
@@ -67,8 +71,16 @@
 	build_machine_type = /obj/machinery/light_construct
 	reverse = 1
 
+/obj/item/frame/light/isLightFrame()
+	return TRUE
+
 /obj/item/frame/light/small
 	name = "small light fixture frame"
 	icon_state = "bulb-construct-item"
 	refund_amt = 1
 	build_machine_type = /obj/machinery/light_construct/small
+
+/obj/item/frame/light/spot
+	name = "large light fixture frame"
+	build_machine_type = /obj/machinery/light_construct/spot
+	refund_amt = 3

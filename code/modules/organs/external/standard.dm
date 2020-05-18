@@ -11,18 +11,21 @@
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_HUGE //Used for dismembering thresholds, in addition to storage. Humans are w_class 6, so it makes sense that chest is w_class 5.
+	cavity_max_w_class = ITEM_SIZE_NORMAL
 	body_part = UPPER_TORSO
 	vital = 1
-	can_heal_overkill = 1
 	amputation_point = "spine"
 	joint = "neck"
 	dislocated = -1
-	gendered_icon = 1
-	cannot_amputate = 1
 	parent_organ = null
 	encased = "ribcage"
 	artery_name = "aorta"
 	cavity_name = "thoracic"
+	limb_flags = ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_HEALS_OVERKILL | ORGAN_FLAG_CAN_BREAK
+	can_be_printed = FALSE
+
+/obj/item/organ/external/chest/proc/get_current_skin()
+	return
 
 /obj/item/organ/external/chest/robotize()
 	if(..())
@@ -44,14 +47,15 @@
 	max_damage = 100
 	min_broken_damage = 35
 	w_class = ITEM_SIZE_LARGE
+	cavity_max_w_class = ITEM_SIZE_SMALL
 	body_part = LOWER_TORSO
 	parent_organ = BP_CHEST
 	amputation_point = "lumbar"
 	joint = "hip"
 	dislocated = -1
-	gendered_icon = 1
 	artery_name = "iliac artery"
 	cavity_name = "abdominal"
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_GENDERED_ICON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm
 	organ_tag = BP_L_ARM
@@ -64,17 +68,10 @@
 	parent_organ = BP_CHEST
 	joint = "left elbow"
 	amputation_point = "left shoulder"
-	can_grasp = 1
-	has_tendon = TRUE
 	tendon_name = "palmaris longus tendon"
 	artery_name = "basilic vein"
 	arterial_bleed_severity = 0.75
-
-/obj/item/organ/external/arm/stun_act(var/stun_amount, var/agony_amount)
-	if(!owner || (agony_amount < 5))
-		return
-	if(prob(25))
-		owner.grasp_damage_disarm(src)
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/arm/right
 	organ_tag = BP_R_ARM
@@ -96,18 +93,10 @@
 	parent_organ = BP_GROIN
 	joint = "left knee"
 	amputation_point = "left hip"
-	can_stand = 1
-	has_tendon = TRUE
 	tendon_name = "cruciate ligament"
 	artery_name = "femoral artery"
 	arterial_bleed_severity = 0.75
-
-/obj/item/organ/external/leg/stun_act(var/stun_amount, var/agony_amount)
-	if(!owner || agony_amount < 5)
-		return
-	if(prob(min(agony_amount*2,50)))
-		to_chat(owner, "<span class='warning'>Your [src] buckles from the shock!</span>")
-		owner.Weaken(5)
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/leg/right
 	organ_tag = BP_R_LEG
@@ -130,21 +119,9 @@
 	parent_organ = BP_L_LEG
 	joint = "left ankle"
 	amputation_point = "left ankle"
-	can_stand = 1
-	has_tendon = TRUE
 	tendon_name = "Achilles tendon"
 	arterial_bleed_severity = 0.5
-
-/obj/item/organ/external/foot/stun_act(var/stun_amount, var/agony_amount)
-	if(!owner || agony_amount < 5)
-		return
-	if(prob(min(agony_amount*4,70)))
-		to_chat(owner, "<span class='warning'>You lose your footing as your [src] spasms!</span>")
-		owner.Weaken(5)
-
-/obj/item/organ/external/foot/removed()
-	if(owner) owner.drop_from_inventory(owner.shoes)
-	..()
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_STAND | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/foot/right
 	organ_tag = BP_R_FOOT
@@ -167,19 +144,9 @@
 	parent_organ = BP_L_ARM
 	joint = "left wrist"
 	amputation_point = "left wrist"
-	can_grasp = 1
-	has_tendon = TRUE
 	tendon_name = "carpal ligament"
 	arterial_bleed_severity = 0.5
-
-/obj/item/organ/external/hand/stun_act(var/stun_amount, var/agony_amount)
-	if(!owner || (agony_amount < 5))
-		return
-	owner.grasp_damage_disarm(src)
-
-/obj/item/organ/external/hand/removed()
-	owner.drop_from_inventory(owner.gloves)
-	..()
+	limb_flags = ORGAN_FLAG_CAN_AMPUTATE | ORGAN_FLAG_CAN_GRASP | ORGAN_FLAG_FINGERPRINT | ORGAN_FLAG_HAS_TENDON | ORGAN_FLAG_CAN_BREAK
 
 /obj/item/organ/external/hand/right
 	organ_tag = BP_R_HAND

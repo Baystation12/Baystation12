@@ -18,13 +18,20 @@ var/global/list/sparring_attack_cache = list()
 	var/eye_attack_text
 	var/eye_attack_text_victim
 
+	var/attack_name = "fist"
+
+/datum/unarmed_attack/proc/get_damage_type()
+	if(deal_halloss)
+		return PAIN
+	return BRUTE
+
 /datum/unarmed_attack/proc/get_sparring_variant()
 	if(sparring_variant_type)
 		if(!sparring_attack_cache[sparring_variant_type])
 			sparring_attack_cache[sparring_variant_type] = new sparring_variant_type()
 		return sparring_attack_cache[sparring_variant_type]
 
-/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
+/datum/unarmed_attack/proc/is_usable(var/mob/living/carbon/human/user, var/mob/target, var/zone)
 	if(user.restrained())
 		return 0
 
@@ -42,14 +49,15 @@ var/global/list/sparring_attack_cache = list()
 /datum/unarmed_attack/proc/get_unarmed_damage()
 	return damage
 
-/datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/armour,var/attack_damage,var/zone)
+/datum/unarmed_attack/proc/apply_effects(var/mob/living/carbon/human/user,var/mob/living/carbon/human/target,var/attack_damage,var/zone)
 
 	if(target.stat == DEAD)
 		return
 
 	var/stun_chance = rand(0, 100)
+	var/armour = target.get_blocked_ratio(zone, BRUTE, damage = attack_damage)
 
-	if(attack_damage >= 5 && armour < 100 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
+	if(attack_damage >= 5 && armour < 1 && !(target == user) && stun_chance <= attack_damage * 5) // 25% standard chance
 		switch(zone) // strong punches can have effects depending on where they hit
 			if(BP_HEAD, BP_EYES, BP_MOUTH)
 				// Induce blurriness
@@ -82,12 +90,16 @@ var/global/list/sparring_attack_cache = list()
 				if(!target.lying)
 					target.visible_message("<span class='warning'>[target] gives way slightly.</span>")
 					target.apply_effect(attack_damage*3, PAIN, armour)
-	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 100) // Chance to get the usual throwdown as well (25% standard chance)
+	else if(attack_damage >= 5 && !(target == user) && (stun_chance + attack_damage * 5 >= 100) && armour < 1) // Chance to get the usual throwdown as well (25% standard chance)
 		if(!target.lying)
 			target.visible_message("<span class='danger'>[target] [pick("slumps", "falls", "drops")] down to the ground!</span>")
 		else
 			target.visible_message("<span class='danger'>[target] has been weakened!</span>")
-		target.apply_effect(3, WEAKEN, armour)
+		target.apply_effect(3, WEAKEN, armour * 100)
+
+	var/obj/item/clothing/C = target.get_covering_equipped_item_by_zone(zone)
+	if(istype(C) && prob(10))
+		C.leave_evidence(user)
 
 /datum/unarmed_attack/proc/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
@@ -97,7 +109,7 @@ var/global/list/sparring_attack_cache = list()
 /datum/unarmed_attack/proc/handle_eye_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target)
 	var/obj/item/organ/internal/eyes/eyes = target.internal_organs_by_name[BP_EYES]
 	if(eyes)
-		eyes.take_damage(rand(3,4), 1)
+		eyes.take_internal_damage(rand(3,4), 1)
 		user.visible_message("<span class='danger'>[user] presses \his [eye_attack_text] into [target]'s [eyes.name]!</span>")
 		var/eye_pain = eyes.can_feel_pain()
 		to_chat(target, "<span class='danger'>You experience[(eye_pain) ? "" : " immense pain as you feel" ] [eye_attack_text_victim] being pressed into your [eyes.name][(eye_pain)? "." : "!"]</span>")
@@ -114,6 +126,12 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	sharp = 0
 	edge = 0
+	attack_name = "bite"
+
+/datum/unarmed_attack/bite/sharp
+	attack_verb = list("bit", "chomped")
+	sharp = 1
+	edge = 1
 
 /datum/unarmed_attack/bite/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 
@@ -132,6 +150,7 @@ var/global/list/sparring_attack_cache = list()
 	eye_attack_text = "fingers"
 	eye_attack_text_victim = "digits"
 	damage = 0
+	attack_name = "punch"
 
 /datum/unarmed_attack/punch/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
@@ -142,6 +161,9 @@ var/global/list/sparring_attack_cache = list()
 	if(target == user)
 		user.visible_message("<span class='danger'>[user] [pick(attack_verb)] \himself in the [organ]!</span>")
 		return 0
+
+	target.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
+	user.update_personal_goal(/datum/goal/achievement/fistfight, TRUE)
 
 	if(!target.lying)
 		switch(zone)
@@ -175,6 +197,7 @@ var/global/list/sparring_attack_cache = list()
 	attack_noun = list("kick", "kick", "kick", "knee strike")
 	attack_sound = "swing_hit"
 	damage = 0
+	attack_name = "kick"
 
 /datum/unarmed_attack/kick/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!(zone in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT, BP_GROIN)))
@@ -212,6 +235,7 @@ var/global/list/sparring_attack_cache = list()
 	attack_noun = list("stomp")
 	attack_sound = "swing_hit"
 	damage = 0
+	attack_name = "stomp"
 
 /datum/unarmed_attack/stomp/is_usable(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone)
 	if(!istype(target))
@@ -261,3 +285,4 @@ var/global/list/sparring_attack_cache = list()
 	damage = 0
 	sharp = 0
 	edge = 0
+	attack_name = "light hit"

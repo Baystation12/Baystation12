@@ -7,7 +7,7 @@
 	can_reinforce = 0
 	flipped = -1
 
-	material = DEFAULT_TABLE_MATERIAL
+	material = DEFAULT_FURNITURE_MATERIAL
 
 /obj/structure/table/rack/New()
 	..()
@@ -24,7 +24,7 @@
 /obj/structure/table/rack/update_desc()
 	return
 
-/obj/structure/table/rack/update_icon()
+/obj/structure/table/rack/on_update_icon()
 	return
 
 /obj/structure/table/rack/can_connect()

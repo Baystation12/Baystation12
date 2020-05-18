@@ -1,11 +1,17 @@
 /obj/machinery/door/airlock/lift
 	name = "Elevator Door"
 	desc = "Ding."
-	req_access = list(access_maint_tunnels)
 	opacity = 0
 	autoclose = 0
 	glass = 1
-	icon = 'icons/obj/doors/doorlift.dmi'
+	icon = 'icons/obj/doors/elevator/door.dmi'
+	fill_file = 'icons/obj/doors/elevator/fill_steel.dmi'
+	glass_file = 'icons/obj/doors/elevator/fill_glass.dmi'
+	bolts_file = 'icons/obj/doors/elevator/lights_bolts.dmi'
+	deny_file = 'icons/obj/doors/elevator/lights_deny.dmi'
+	lights_file = 'icons/obj/doors/elevator/lights_green.dmi'
+
+	paintable = 0
 
 	var/datum/turbolift/lift
 	var/datum/turbolift_floor/floor

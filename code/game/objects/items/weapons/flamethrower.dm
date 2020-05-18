@@ -11,7 +11,7 @@
 	throw_range = 5
 	w_class = ITEM_SIZE_LARGE
 	origin_tech = list(TECH_COMBAT = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 500)
+	matter = list(MATERIAL_STEEL = 500)
 	var/status = 0
 	var/throw_amount = 100
 	var/lit = 0	//on or off
@@ -19,13 +19,13 @@
 	var/turf/previousturf = null
 	var/obj/item/weapon/weldingtool/weldtool = null
 	var/obj/item/device/assembly/igniter/igniter = null
-	var/obj/item/weapon/tank/hydrogen/ptank = null
+	var/obj/item/weapon/tank/tank = null
 
 
 /obj/item/weapon/flamethrower/Destroy()
 	QDEL_NULL(weldtool)
 	QDEL_NULL(igniter)
-	QDEL_NULL(ptank)
+	QDEL_NULL(tank)
 	. = ..()
 
 /obj/item/weapon/flamethrower/Process()
@@ -42,12 +42,15 @@
 	return
 
 
-/obj/item/weapon/flamethrower/update_icon()
+/obj/item/weapon/flamethrower/on_update_icon()
 	overlays.Cut()
 	if(igniter)
 		overlays += "+igniter[status]"
-	if(ptank)
-		overlays += "+ptank"
+	if(tank)
+		if(istype(tank, /obj/item/weapon/tank/hydrogen))
+			overlays += "+htank"
+		else
+			overlays += "+ptank"
 	if(lit)
 		overlays += "+lit"
 		item_state = "flamethrower_1"
@@ -69,17 +72,16 @@
 /obj/item/weapon/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
 	if(isWrench(W) && !status)//Taking this apart
-		var/turf/T = get_turf(src)
 		if(weldtool)
-			weldtool.loc = T
+			weldtool.dropInto(loc)
 			weldtool = null
 		if(igniter)
-			igniter.loc = T
+			igniter.dropInto(loc)
 			igniter = null
-		if(ptank)
-			ptank.loc = T
-			ptank = null
-		new /obj/item/stack/rods(T)
+		if(tank)
+			tank.dropInto(loc)
+			tank = null
+		new /obj/item/stack/material/rods(get_turf(src))
 		qdel(src)
 		return
 
@@ -93,24 +95,24 @@
 		var/obj/item/device/assembly/igniter/I = W
 		if(I.secured)	return
 		if(igniter)		return
-		user.drop_item()
-		I.loc = src
+		if(!user.unEquip(I, src))
+			return
 		igniter = I
 		update_icon()
 		return
 
-	if(istype(W,/obj/item/weapon/tank/hydrogen))
-		if(ptank)
-			to_chat(user, "<span class='notice'>There appears to already be a hydrogen tank loaded in [src]!</span>")
+	if(istype(W,/obj/item/weapon/tank))
+		if(tank)
+			to_chat(user, "<span class='notice'>There appears to already be a fuel tank loaded in [src]!</span>")
 			return
-		user.drop_item()
-		ptank = W
-		W.loc = src
+		if(!user.unEquip(W, src))
+			return
+		tank = W
 		update_icon()
 		return
 
-	if(istype(W, /obj/item/device/analyzer))
-		var/obj/item/device/analyzer/A = W
+	if(istype(W, /obj/item/device/scanner/gas))
+		var/obj/item/device/scanner/gas/A = W
 		A.analyze_gases(src, user)
 		return
 	..()
@@ -120,28 +122,28 @@
 /obj/item/weapon/flamethrower/attack_self(mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
 	user.set_machine(src)
-	if(!ptank)
-		to_chat(user, "<span class='notice'>Attach a hydrogen tank first!</span>")
+	if(!tank)
+		to_chat(user, "<span class='notice'>Attach a fuel tank first!</span>")
 		return
-	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [ptank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove hydrogen tank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
-	user << browse(dat, "window=flamethrower;size=600x300")
+	var/dat = text("<TT><B>Flamethrower (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [tank.air_contents.return_pressure()]<BR>\nAmount to throw: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [throw_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove fuel tank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
+	show_browser(user, dat, "window=flamethrower;size=600x300")
 	onclose(user, "flamethrower")
 	return
 
 /obj/item/weapon/flamethrower/return_air()
-	if(ptank)
-		return ptank.return_air()
+	if(tank)
+		return tank.return_air()
 
 /obj/item/weapon/flamethrower/Topic(href,href_list[])
 	if(href_list["close"])
 		usr.unset_machine()
-		usr << browse(null, "window=flamethrower")
+		close_browser(usr, "window=flamethrower")
 		return
 	if(usr.stat || usr.restrained() || usr.lying)	return
 	usr.set_machine(src)
 	if(href_list["light"])
-		if(!ptank)	return
-		if(ptank.air_contents.gas["hydrogen"] < 1)	return
+		if(!tank)	return
+		if(tank.air_contents.get_by_flag(XGM_GAS_FUEL) <  1)	return
 		if(!status)	return
 		lit = !lit
 		if(lit)
@@ -150,12 +152,12 @@
 		throw_amount = throw_amount + text2num(href_list["amount"])
 		throw_amount = max(50, min(5000, throw_amount))
 	if(href_list["remove"])
-		if(!ptank)	return
-		usr.put_in_hands(ptank)
-		ptank = null
+		if(!tank)	return
+		usr.put_in_hands(tank)
+		tank = null
 		lit = 0
 		usr.unset_machine()
-		usr << browse(null, "window=flamethrower")
+		close_browser(usr, "window=flamethrower")
 	for(var/mob/M in viewers(1, loc))
 		if((M.client && M.machine == src))
 			attack_self(M)
@@ -182,22 +184,19 @@
 	for(var/mob/M in viewers(1, loc))
 		if((M.client && M.machine == src))
 			attack_self(M)
-	return
-
 
 /obj/item/weapon/flamethrower/proc/ignite_turf(turf/target)
 	//TODO: DEFERRED Consider checking to make sure tank pressure is high enough before doing this...
 	//Transfer 5% of current tank air contents to turf
-	var/datum/gas_mixture/air_transfer = ptank.air_contents.remove_ratio(0.02*(throw_amount/100))
+	var/datum/gas_mixture/air_transfer = tank.remove_air_ratio(0.02*(throw_amount/100))
 	//air_transfer.toxins = air_transfer.toxins * 5 // This is me not comprehending the air system. I realize this is retarded and I could probably make it work without fucking it up like this, but there you have it. -- TLE
-	new/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(target,air_transfer.gas["hydrogen"],get_dir(loc,target))
-	air_transfer.gas["hydrogen"] = 0
+	new/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel(target,air_transfer.get_by_flag(XGM_GAS_FUEL),get_dir(loc,target))
+	air_transfer.remove_by_flag(XGM_GAS_FUEL, 0)
 	target.assume_air(air_transfer)
 	//Burn it based on transfered gas
 	//target.hotspot_expose(part4.air_contents.temperature*2,300)
-	target.hotspot_expose((ptank.air_contents.temperature*2) + 380,500) // -- More of my "how do I shot fire?" dickery. -- TLE
+	target.hotspot_expose((tank.air_contents.temperature*2) + 380,500) // -- More of my "how do I shot fire?" dickery. -- TLE
 	//location.hotspot_expose(1000,500,1)
-	return
 
 /obj/item/weapon/flamethrower/full/New(var/loc)
 	..()
@@ -207,4 +206,3 @@
 	igniter.secured = 0
 	status = 1
 	update_icon()
-	return

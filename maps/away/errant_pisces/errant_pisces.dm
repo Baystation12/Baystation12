@@ -1,13 +1,12 @@
 #include "errant_pisces_areas.dm"
 
-/obj/effect/overmap/ship/errant_pisces
+/obj/effect/overmap/visitable/ship/errant_pisces
 	name = "XCV Ahab's Harpoon"
 	desc = "Sensors detect civilian vessel with unusual signs of life aboard."
 	color = "#bd6100"
-	vessel_mass = 150
-	default_delay = 20 SECONDS
-	speed_mod = 10 SECONDS
+	max_speed = 1/(3 SECONDS)
 	burn_delay = 15 SECONDS
+	fore_dir = SOUTH
 
 /datum/map_template/ruin/away_site/errant_pisces
 	name = "Errant Pisces"
@@ -15,6 +14,7 @@
 	description = "Xynergy carp trawler"
 	suffixes = list("errant_pisces/errant_pisces.dmm")
 	cost = 1
+	area_usage_test_exempted_root_areas = list(/area/errant_pisces)
 
 /mob/living/simple_animal/hostile/carp/shark // generally stronger version of a carp that doesn't die from a mean look. Fance new sprites included, credits to F-Tang Steve
 	name = "cosmoshark"
@@ -24,23 +24,29 @@
 	icon_living = "shark"
 	icon_dead = "shark_dead"
 	icon_gib = "shark_dead"
-	turns_per_move = 8
+	turns_per_move = 5
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/sharkmeat
-	speed = 8
-	maxHealth = 75
-	health = 75
-	harm_intent_damage = 20
-	melee_damage_lower = 20
-	melee_damage_upper = 20
-	break_stuff_probability = 25
+	speed = 2
+	maxHealth = 100
+	health = 100
+	harm_intent_damage = 5
+	melee_damage_lower = 15
+	melee_damage_upper = 25
+	break_stuff_probability = 35
 	faction = "shark"
+
+/mob/living/simple_animal/hostile/carp/shark/carp_randomify()
+	return
+
+/mob/living/simple_animal/hostile/carp/shark/on_update_icon()
+	return
 
 /mob/living/simple_animal/hostile/carp/shark/death()
 	..()
 	var/datum/gas_mixture/environment = loc.return_air()
 	if (environment)
 		var/datum/gas_mixture/sharkmaw_phoron = new
-		sharkmaw_phoron.adjust_gas("phoron",  10)
+		sharkmaw_phoron.adjust_gas(GAS_PHORON,  10)
 		environment.merge(sharkmaw_phoron)
 		visible_message("<span class='warning'>\The [src]'s body releases some gas from the gills with a quiet fizz!</span>")
 
@@ -82,7 +88,6 @@
 	icon = 'maps/away/errant_pisces/errant_pisces_sprites.dmi'
 	icon_state = "net_f"
 	anchored = 1
-	plane = ABOVE_TURF_PLANE//on the floor
 	layer = CATWALK_LAYER//probably? Should cover cables, pipes and the rest of objects that are secured on the floor
 	var/health = 100
 
@@ -97,14 +102,14 @@ obj/structure/net/Initialize(var/mapload)
 					continue
 				N.update_connections()
 
-/obj/structure/net/examine()
-	..()
+/obj/structure/net/examine(mob/user)
+	. = ..()
 	if (health < 20)
-		to_chat(usr, "\The [src] is barely hanging on a few last threads.")
+		to_chat(user, "\The [src] is barely hanging on a few last threads.")
 	else if (health < 50)
-		to_chat(usr, "Many ribbons of \the [src] are cut away.")
+		to_chat(user, "Many ribbons of \the [src] are cut away.")
 	else if (health < 90)
-		to_chat(usr, "Few ribbons of \the [src] are cut away.")
+		to_chat(user, "Few ribbons of \the [src] are cut away.")
 
 /obj/structure/net/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/material)) //sharp objects can cut thorugh
@@ -132,7 +137,7 @@ obj/structure/net/Initialize(var/mapload)
 		visible_message("<span class='warning'>\The [src] is torn apart!</span>")
 		qdel(src)
 
-/obj/structure/net/proc/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
+/obj/structure/net/update_connections()//maybe this should also be called when any of the walls nearby is removed but no idea how I can make it happen
 	overlays.Cut()
 	var/turf/T = get_turf(src)
 	for (var/turf/AT in T.CardinalTurfs(FALSE))
@@ -143,7 +148,6 @@ obj/structure/net/Initialize(var/mapload)
 /obj/structure/net/net_wall
 	icon_state = "net_w"
 	density = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/structure/net/net_wall/Initialize(var/mapload)
@@ -188,7 +192,7 @@ obj/structure/net/Initialize(var/mapload)
 /obj/item/stack/net/thirty
 	amount = 30
 
-/obj/item/stack/net/update_icon()
+/obj/item/stack/net/on_update_icon()
 	if(amount == 1)
 		icon_state = "net"
 	else
@@ -239,6 +243,6 @@ obj/structure/net/Initialize(var/mapload)
 	name = "Dead carp fisher"
 	uniform = /obj/item/clothing/under/color/green
 	suit = /obj/item/clothing/suit/apron/overalls
-	belt = /obj/item/weapon/material/hatchet/tacknife
+	belt = /obj/item/weapon/material/knife/combat
 	shoes = /obj/item/clothing/shoes/jackboots
 	head = /obj/item/clothing/head/hardhat/dblue

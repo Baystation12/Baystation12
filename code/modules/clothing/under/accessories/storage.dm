@@ -8,6 +8,7 @@
 	var/obj/item/weapon/storage/internal/pockets/hold
 	w_class = ITEM_SIZE_NORMAL
 	high_visibility = 1
+	on_rolled = list("down" = "none")
 
 /obj/item/clothing/accessory/storage/Initialize()
 	. = ..()
@@ -44,9 +45,9 @@
 	to_chat(user, "<span class='notice'>You empty [src].</span>")
 	var/turf/T = get_turf(src)
 	hold.hide_from(usr)
-	for(var/obj/item/I in hold.contents)
-		if(hold)
-			hold.remove_from_storage(I, T)
+	for(var/obj/item/I in hold)
+		hold.remove_from_storage(I, T, 1)
+	hold.finish_bulk_removal()
 	src.add_fingerprint(user)
 
 /obj/item/clothing/accessory/storage/webbing
@@ -82,7 +83,7 @@
 	slots = 4 //to accomodate it being slotless
 
 /obj/item/clothing/accessory/storage/drop_pouches/create_storage()
-	hold = new/obj/item/weapon/storage/internal/pouch(src, slots*base_storage_cost(max_w_class))
+	hold = new/obj/item/weapon/storage/internal/pouch(src, slots*BASE_STORAGE_COST(max_w_class))
 
 /obj/item/clothing/accessory/storage/drop_pouches/black
 	name = "black drop pouches"
@@ -101,7 +102,7 @@
 
 /obj/item/clothing/accessory/storage/knifeharness
 	name = "decorated harness"
-	desc = "A heavily decorated harness of sinew and leather with two knife-loops."
+	desc = "A heavily decorated harness of sinew and leather with two knife loops."
 	icon_state = "unathiharness2"
 	slots = 2
 	max_w_class = ITEM_SIZE_NORMAL //for knives
@@ -110,13 +111,11 @@
 	. = ..()
 	hold.can_hold = list(
 		/obj/item/weapon/material/hatchet,
-		/obj/item/weapon/material/kitchen/utensil/knife,
 		/obj/item/weapon/material/knife,
-		/obj/item/weapon/material/butterfly,
 	)
 
-	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
-	new /obj/item/weapon/material/kitchen/utensil/knife/unathiknife(hold)
+	new /obj/item/weapon/material/knife/table/unathi(hold)
+	new /obj/item/weapon/material/knife/table/unathi(hold)
 
 /obj/item/clothing/accessory/storage/bandolier
 	name = "bandolier"
@@ -130,8 +129,6 @@
 	hold.can_hold = list(
 		/obj/item/ammo_casing,
 		/obj/item/weapon/grenade,
-		/obj/item/weapon/material/hatchet/tacknife,
-		/obj/item/weapon/material/kitchen/utensil/knife,
 		/obj/item/weapon/material/knife,
 		/obj/item/weapon/material/star,
 		/obj/item/weapon/rcd_ammo,
@@ -157,6 +154,6 @@
 
 /obj/item/clothing/accessory/storage/bandolier/safari/Initialize()
 	. = ..()
-	
+
 	for(var/i = 0, i < slots, i++)
 		new /obj/item/weapon/net_shell(hold)

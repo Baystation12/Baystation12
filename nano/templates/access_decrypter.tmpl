@@ -15,7 +15,7 @@
 				<div class='average'><b>{{:value.name}}</b></div>
 				{{for value.accesses :accessValue:accessKey}}
 					<div class='itemContentWide'>
-						{{:helper.link(accessValue.desc, '', {'PRG_execute' : accessValue.ref, 'allowed' : accessValue.allowed}, accessValue.blocked ? 'disabled' : null, accessValue.allowed ? 'selected' : null)}}
+						{{:helper.link(accessValue.desc, '', {'PRG_execute' : accessValue.ref}, accessValue.blocked ? 'disabled' : null, accessValue.allowed ? 'selected' : null)}}
 					</div>
 				{{/for}}
 			</div>

@@ -1,9 +1,10 @@
 /obj/item/weapon/card/id/syndicate
-	icon_state = "syndicate"
 	assignment = "Agent"
-	origin_tech = list(TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_ESOTERIC = 3)
 	var/electronic_warfare = 1
 	var/mob/registered_user = null
+	color = COLOR_GRAY40
+	detail_color = COLOR_NT_RED
 
 /obj/item/weapon/card/id/syndicate/New(mob/user as mob)
 	..()
@@ -45,6 +46,8 @@
 	var/data[0]
 	var/entries[0]
 	entries[++entries.len] = list("name" = "Age", 				"value" = age)
+	entries[++entries.len] = list("name" = "Prefix", 			"value" = formal_name_prefix)
+	entries[++entries.len] = list("name" = "Suffix", 			"value" = formal_name_suffix)
 	entries[++entries.len] = list("name" = "Appearance",		"value" = "Set")
 	entries[++entries.len] = list("name" = "Assignment",		"value" = assignment)
 	if(GLOB.using_map.flags & MAP_HAS_BRANCH)
@@ -61,7 +64,7 @@
 	data["electronic_warfare"] = electronic_warfare
 	data["entries"] = entries
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "agent_id_card.tmpl", "Agent id", 600, 400)
 		ui.set_initial_data(data)
@@ -82,8 +85,8 @@
 	GLOB.destroyed_event.unregister(registered_user, src)
 	registered_user = null
 
-/obj/item/weapon/card/id/syndicate/CanUseTopic(mob/user)
-	if(user != registered_user)
+/obj/item/weapon/card/id/syndicate/CanUseTopic(var/mob/user, var/datum/topic_state/state, var/href_list)
+	if(!(href_list && href_list["look_at_id"]) && (user != registered_user))
 		return STATUS_CLOSE
 	return ..()
 
@@ -106,11 +109,27 @@
 						age = new_age
 					to_chat(user, "<span class='notice'>Age has been set to '[age]'.</span>")
 					. = 1
+			if("Prefix")
+				var/new_prefix = sanitizeSafe(input(user,"What title prefix would you like to put on this card?","Agent Card Prefix", age) as text, MAX_NAME_LEN)
+				if(!isnull(new_prefix) && CanUseTopic(user, state))
+					formal_name_prefix = new_prefix
+					to_chat(user, "<span class='notice'>Title prefix has been set to '[formal_name_prefix]'.</span>")
+					. = 1
+			if("Suffix")
+				var/new_suffix = sanitizeSafe(input(user,"What title suffix would you like to put on this card?","Agent Card Suffix", age) as text, MAX_NAME_LEN)
+				if(!isnull(new_suffix) && CanUseTopic(user, state))
+					formal_name_suffix = new_suffix
+					to_chat(user, "<span class='notice'>Title suffix has been set to '[formal_name_suffix]'.</span>")
+					. = 1
 			if("Appearance")
 				var/datum/card_state/choice = input(user, "Select the appearance for this card.", "Agent Card Appearance") as null|anything in id_card_states()
 				if(choice && CanUseTopic(user, state))
 					src.icon_state = choice.icon_state
 					src.item_state = choice.item_state
+					src.color = choice.color
+					src.detail_color = choice.detail_color
+					src.extra_details = choice.extra_details
+					update_icon()
 					to_chat(usr, "<span class='notice'>Appearance changed to [choice].</span>")
 					. = 1
 			if("Assignment")
@@ -171,6 +190,8 @@
 			if("Factory Reset")
 				if(alert("This will factory reset the card, including access and owner. Continue?", "Factory Reset", "No", "Yes") == "Yes" && CanUseTopic(user, state))
 					age = initial(age)
+					formal_name_prefix = initial(formal_name_prefix)
+					formal_name_suffix = initial(formal_name_suffix)
 					access = syndicate_access.Copy()
 					assignment = initial(assignment)
 					blood_type = initial(blood_type)
@@ -178,6 +199,9 @@
 					electronic_warfare = initial(electronic_warfare)
 					fingerprint_hash = initial(fingerprint_hash)
 					icon_state = initial(icon_state)
+					color = initial(color)
+					detail_color = initial(detail_color)
+					extra_details = initial(extra_details)
 					SetName(initial(name))
 					registered_name = initial(registered_name)
 					unset_registered_user()
@@ -200,7 +224,7 @@
 					. = 1
 
 	// Always update the UI, or buttons will spin indefinitely
-	GLOB.nanomanager.update_uis(src)
+	SSnano.update_uis(src)
 
 /var/global/list/id_card_states
 /proc/id_card_states()
@@ -211,7 +235,17 @@
 			var/datum/card_state/CS = new()
 			CS.icon_state = initial(ID.icon_state)
 			CS.item_state = initial(ID.item_state)
+			CS.color = initial(ID.color)
+			CS.detail_color = initial(ID.detail_color)
+			CS.extra_details = initial(ID.extra_details)
 			CS.name = initial(ID.name) + " - " + initial(ID.icon_state)
+			var/color_pair = ""
+			if(CS.color)
+				color_pair += CS.color
+			if(CS.detail_color)
+				color_pair += "/[CS.detail_color]"
+			if(color_pair)
+				CS.name += " - [color_pair]"
 			id_card_states += CS
 		id_card_states = dd_sortedObjectList(id_card_states)
 
@@ -221,6 +255,10 @@
 	var/name
 	var/icon_state
 	var/item_state
+	var/color
+	var/detail_color
+	var/details
+	var/extra_details
 
 /datum/card_state/dd_SortValue()
 	return name

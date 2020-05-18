@@ -45,7 +45,7 @@ var/list/uplink_random_selections_
 /datum/uplink_random_selection/default/New()
 	..()
 
-	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/g9mm)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/silenced)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/revolver)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/visible_weapons/heavysniper, 15, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/grenades/emp, 50)
@@ -75,6 +75,7 @@ var/list/uplink_random_selections_
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/powersink, 10, 10)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/ai_module, 25, 0)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/teleporter, 10, 0)
+	items += new/datum/uplink_random_item(/datum/uplink_item/item/tools/polychromic_dye_bottle)
 
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_freedom)
 	items += new/datum/uplink_random_item(/datum/uplink_item/item/implants/imp_compress)

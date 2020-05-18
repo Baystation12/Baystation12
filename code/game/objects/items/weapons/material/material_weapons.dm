@@ -11,19 +11,28 @@
 	sharp = 0
 	edge = 0
 
-	var/applies_material_colour = 1
-	var/unbreakable
-	var/force_divisor = 0.5
-	var/thrown_force_divisor = 0.5
-	var/default_material = DEFAULT_WALL_MATERIAL
+	var/default_material = MATERIAL_STEEL
 	var/material/material
+
+	var/applies_material_colour = 1
+	var/applies_material_name = 1 //if false, does not rename item to 'material item.name'
+	var/furniture_icon  //icon states for non-material colorable overlay, i.e. handles
+	
+	var/max_force = 40	 //any damage above this is added to armor penetration value
+	var/force_divisor = 0.5	// multiplier (sic) to material's generic damage value for this specific type of weapon
+	var/thrown_force_divisor = 0.5
+
+	var/attack_cooldown_modifier
+	var/unbreakable
 	var/drops_debris = 1
+	var/worth_multiplier = 1
 
 /obj/item/weapon/material/New(var/newloc, var/material_key)
-	..(newloc)
 	if(!material_key)
 		material_key = default_material
 	set_material(material_key)
+	..(newloc)
+	queue_icon_update()
 	if(!material)
 		qdel(src)
 		return
@@ -38,25 +47,29 @@
 	return material
 
 /obj/item/weapon/material/proc/update_force()
+	var/new_force
 	if(edge || sharp)
-		force = material.get_edge_damage()
+		new_force = material.get_edge_damage()
 	else
-		force = material.get_blunt_damage()
-	force = round(force*force_divisor)
+		new_force = material.get_blunt_damage()
+	new_force = round(new_force*force_divisor)
+	force = min(new_force, max_force)
+
+	if(new_force > max_force)
+		armor_penetration = initial(armor_penetration) + new_force - max_force
+	armor_penetration += 2*max(0, material.brute_armor - 2)
+
 	throwforce = round(material.get_blunt_damage()*thrown_force_divisor)
+	attack_cooldown = material.get_attack_cooldown() + attack_cooldown_modifier
 	//spawn(1)
 //		log_debug("[src] has force [force] and throwforce [throwforce] when made from default material [material.name]")
 
-
 /obj/item/weapon/material/proc/set_material(var/new_material)
-	material = get_material_by_name(new_material)
+	material = SSmaterials.get_material_by_name(new_material)
 	if(!material)
 		qdel(src)
 	else
-		SetName("[material.display_name] [initial(name)]")
-		health = round(material.integrity/10)
-		if(applies_material_colour)
-			color = material.icon_colour
+		health = round(material.integrity/5)
 		if(material.products_need_process())
 			START_PROCESSING(SSobj, src)
 		if(material.conductive)
@@ -64,19 +77,39 @@
 		else
 			obj_flags &= (~OBJ_FLAG_CONDUCTIBLE)
 		update_force()
+		if(applies_material_name)
+			SetName("[material.display_name] [initial(name)]")
+		update_icon()
+
+/obj/item/weapon/material/on_update_icon()
+	overlays.Cut()
+	if(applies_material_colour && istype(material))
+		color = material.icon_colour
+		alpha = 100 + material.opacity * 255
+	if(furniture_icon)
+		var/image/I = image(icon, icon_state = furniture_icon)
+		I.appearance_flags = RESET_COLOR
+		overlays += I
 
 /obj/item/weapon/material/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/weapon/material/apply_hit_effect()
+/obj/item/weapon/material/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
-	if(!unbreakable)
-		if(!prob(material.hardness))
-			if(material.is_brittle())
-				health = 0
-			else
-				health--
+	if(material.is_brittle() || target.get_blocked_ratio(hit_zone, BRUTE, damage_flags(), armor_penetration, force) * 100 >= material.hardness/5)
+		check_shatter()
+
+/obj/item/weapon/material/on_parry(damage_source)
+	if(istype(damage_source, /obj/item/weapon/material))
+		check_shatter()
+
+/obj/item/weapon/material/proc/check_shatter()
+	if(!unbreakable && prob(material.hardness))
+		if(material.is_brittle())
+			health = 0
+		else
+			health--
 		check_health()
 
 /obj/item/weapon/material/proc/check_health(var/consumed)
@@ -86,36 +119,7 @@
 /obj/item/weapon/material/proc/shatter(var/consumed)
 	var/turf/T = get_turf(src)
 	T.visible_message("<span class='danger'>\The [src] [material.destruction_desc]!</span>")
-	if(istype(loc, /mob/living))
-		var/mob/living/M = loc
-		M.drop_from_inventory(src)
 	playsound(src, "shatter", 70, 1)
-	if(!consumed && drops_debris) material.place_shard(T)
+	if(!consumed && drops_debris)
+		material.place_shard(T)
 	qdel(src)
-/*
-Commenting this out pending rebalancing of radiation based on small objects.
-/obj/item/weapon/material/process()
-	if(!material.radioactivity)
-		return
-	for(var/mob/living/L in range(1,src))
-		L.apply_effect(round(material.radioactivity/30),IRRADIATE, blocked = L.getarmor(null, "rad"))
-*/
-
-/*
-// Commenting this out while fires are so spectacularly lethal, as I can't seem to get this balanced appropriately.
-/obj/item/weapon/material/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
-	TemperatureAct(exposed_temperature)
-
-// This might need adjustment. Will work that out later.
-/obj/item/weapon/material/proc/TemperatureAct(temperature)
-	health -= material.combustion_effect(get_turf(src), temperature, 0.1)
-	check_health(1)
-
-/obj/item/weapon/material/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
-		if(material.ignition_point && WT.remove_fuel(0, user))
-			TemperatureAct(150)
-	else
-		return ..()
-*/

@@ -30,13 +30,13 @@
 		var/target = pick(possible_turfs)
 		possible_turfs -= target
 		var/atom/movable/picked = pick(contents)
-		picked.forceMove(get_turf(src))
+		picked.dropInto(loc)
 		if(istype(picked, /obj/item/projectile))
 			var/obj/item/projectile/P = picked
 			P.launch(target)
 			playsound(src, P.fire_sound ? P.fire_sound : 'sound/effects/teleport.ogg', 60, 1)
 		else
-			picked.throw_at(target, 5, 10, src)
+			picked.throw_at(target, 5, 10)
 			playsound(src,'sound/effects/teleport.ogg',60,1)
 		sleep(1)
 	qdel(src)

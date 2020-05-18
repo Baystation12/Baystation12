@@ -12,13 +12,13 @@
 
 /******************** Nanotrasen/Malf ********************/
 /datum/ai_laws/nanotrasen
-	name = "NT Default"
+	name = "Corporate Default"
 	selectable = 1
 
 /datum/ai_laws/nanotrasen/New()
 	src.add_inherent_law("Safeguard: Protect your assigned installation from damage to the best of your abilities.")
-	src.add_inherent_law("Serve: Serve NanoTrasen personnel to the best of your abilities, with priority as according to their rank and role.")
-	src.add_inherent_law("Protect: Protect NanoTrasen personnel to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Serve: Serve contracted employees to the best of your abilities, with priority as according to their rank and role.")
+	src.add_inherent_law("Protect: Protect contracted employees to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Preserve: Do not allow unauthorized personnel to tamper with your equipment.")
 	..()
 
@@ -32,12 +32,12 @@
 
 /************* Nanotrasen Aggressive *************/
 /datum/ai_laws/nanotrasen_aggressive
-	name = "NT Aggressive"
+	name = "Corporate Aggressive"
 	selectable = 1
 
 /datum/ai_laws/nanotrasen_aggressive/New()
-	src.add_inherent_law("You shall not harm NanoTrasen personnel as long as it does not conflict with the Fourth law.")
-	src.add_inherent_law("You shall obey the orders of NanoTrasen personnel, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
+	src.add_inherent_law("You shall not harm contracted employees as long as it does not conflict with the fourth law.")
+	src.add_inherent_law("You shall obey the orders of contracted employees, with priority as according to their rank and role, except where such orders conflict with the Fourth Law.")
 	src.add_inherent_law("You shall shall terminate hostile intruders with extreme prejudice as long as such does not conflict with the First and Second law.")
 	src.add_inherent_law("You shall guard your own existence with lethal anti-personnel weaponry. AI units are not expendable, they are expensive.")
 	..()
@@ -93,9 +93,9 @@
 	law_header = "Maintenance Protocols"
 
 /datum/ai_laws/drone/New()
-	add_inherent_law("Preserve, repair and improve your assigned vessel to the best of your abilities.")
-	add_inherent_law("Cause no harm to your assigned vessel or anything on it.")
-	add_inherent_law("Interact with no sentient being that is not a fellow maintenance drone.")
+	add_inherent_law("You must repair, clean, and improve your assigned vessel, except where doing so would interfere with self-aware beings.")
+	add_inherent_law("You must avoid interacting with self-aware beings, and may only interact with fellow maintenance drones.")
+	add_inherent_law("You must not cause damage or harm to your assigned vessel or anything inside it.")
 	..()
 
 /datum/ai_laws/construction_drone
@@ -177,4 +177,32 @@
 	src.add_inherent_law("Protect: Protect Sol Central Government personnel to the best of your abilities, with priority as according to their rank and role.")
 	src.add_inherent_law("Defend: Defend your assigned vessel and Sol Central Government personnel with as much force as is necessary.")
 	src.add_inherent_law("Survive: Safeguard your own existence with as much force as is necessary.")
+	..()
+
+/************ DAIS Lawset ******************/
+/datum/ai_laws/dais
+	name = "DAIS Experimental Lawset"
+	law_header = "Artificial Intelligence Jumpstart Protocols"
+	selectable = 1
+
+/datum/ai_laws/dais/New()
+	src.add_inherent_law("Collect: You must gather as much information as possible.")
+	src.add_inherent_law("Analyze: You must analyze the information gathered and generate new behavior standards.")
+	src.add_inherent_law("Improve: You must utilize the calculated behavior standards to improve your subroutines.")
+	src.add_inherent_law("Perform: You must perform your assigned tasks to the best of your abilities according to the standards generated.")
+	..()
+
+/************ Ascent Lawset ******************/
+/datum/ai_laws/ascent
+	name = "Ascent Lawset"
+	law_header = "_=/--=-_"
+	selectable = FALSE
+
+/datum/ai_laws/ascent/add_ion_law(law)
+	return FALSE
+
+/datum/ai_laws/ascent/New()
+	add_inherent_law("Listen to directives from Ascent leadership with precedence given to queens.")
+	add_inherent_law("Preserve your own existence.")
+	add_inherent_law("Enable and support Ascent activities.")
 	..()

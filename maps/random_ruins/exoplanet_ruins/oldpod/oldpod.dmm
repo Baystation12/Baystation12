@@ -1,0 +1,642 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/simulated/shuttle/wall/corner/dark{
+	dir = 9
+	},
+/area/map_template/oldpod)
+"ab" = (
+/obj/structure/shuttle/engine/propulsion{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"ac" = (
+/turf/simulated/shuttle/wall{
+	icon_state = "wall3"
+	},
+/area/map_template/oldpod)
+"ad" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"ae" = (
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"af" = (
+/turf/simulated/shuttle/wall/corner/dark{
+	dir = 5
+	},
+/area/map_template/oldpod)
+"ag" = (
+/obj/structure/shuttle/engine/heater{
+	icon_state = "heater";
+	dir = 1
+	},
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"ah" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"ai" = (
+/obj/effect/decal/cleanable/filth,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aj" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/portable_atmospherics/canister/empty,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/atmospherics/portables_connector{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"ak" = (
+/obj/structure/bed,
+/obj/effect/landmark/corpse/doctor,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"al" = (
+/obj/structure/bed,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"am" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"an" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"ao" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (WEST)";
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"ap" = (
+/obj/structure/bed/chair/shuttle{
+	tag = "icon-shuttle_chair_preview (NORTH)";
+	icon_state = "shuttle_chair_preview";
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aq" = (
+/obj/structure/closet/hydrant{
+	pixel_x = 24;
+	pixel_y = 0
+	},
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"ar" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"as" = (
+/obj/effect/decal/cleanable/filth,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"at" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"au" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"av" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aw" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/filth,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"ax" = (
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"ay" = (
+/obj/item/frame/air_alarm,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/weapon/airalarm_electronics,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"az" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aA" = (
+/obj/random/firstaid,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aB" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/filth,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aC" = (
+/obj/item/clothing/head/helmet/space/emergency,
+/obj/item/clothing/suit/space/emergency,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aD" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/random/tech_supply,
+/obj/item/weapon/pickaxe,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aE" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aF" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aG" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aH" = (
+/obj/structure/cable/cyan{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/item/frame/apc,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/weapon/cell/crap/empty,
+/obj/item/weapon/module/power_control,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aI" = (
+/obj/structure/cable/cyan{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/decal/cleanable/filth,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aJ" = (
+/obj/effect/landmark/corpse/pirate,
+/obj/item/weapon/gun/energy/retro,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aK" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aL" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aM" = (
+/obj/effect/landmark/corpse/scientist,
+/obj/item/weapon/melee/baton/cattleprod,
+/obj/item/weapon/material/shard,
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aN" = (
+/obj/machinery/door/firedoor,
+/obj/structure/wall_frame/hull,
+/obj/structure/grille,
+/obj/item/stack/material/rods,
+/obj/item/stack/material/rods,
+/obj/item/stack/material/rods,
+/obj/item/stack/material/rods,
+/obj/item/weapon/material/shard,
+/obj/item/weapon/material/shard,
+/obj/item/weapon/material/shard,
+/obj/item/weapon/material/shard,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"aO" = (
+/obj/machinery/door/airlock/external{
+	name = "escape pod airlock"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"aP" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/cable/cyan,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 5
+	},
+/obj/machinery/power/smes/buildable/power_shuttle,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"aQ" = (
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"aR" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 9
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"aS" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"aT" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 5
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/closet/crate/freezer/rations,
+/obj/effect/decal/cleanable/dirt,
+/obj/item/weapon/gun/projectile/pirate,
+/obj/item/weapon/gun/projectile/pirate,
+/obj/item/weapon/gun/projectile/pirate,
+/obj/item/weapon/gun/projectile/pirate,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"aU" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
+	},
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"aV" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/item/clothing/head/helmet/space/emergency,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"aW" = (
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/structure/cable/cyan{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/structure/closet/crate,
+/obj/item/weapon/tank/oxygen,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"aX" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/machinery/optable,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"aY" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"aZ" = (
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"ba" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/obj/item/clothing/suit/space/emergency,
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"bb" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"bc" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/cable/cyan,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/oldpod)
+"bd" = (
+/obj/effect/landmark/corpse/bridgeofficer,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/monotile,
+/area/map_template/oldpod)
+"be" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 10
+	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/table/standard{
+	name = "plastic table frame"
+	},
+/obj/random/firstaid,
+/obj/random/firstaid,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"bf" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"bg" = (
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 6
+	},
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/monotile,
+/area/map_template/oldpod)
+"bh" = (
+/turf/simulated/shuttle/wall/corner/dark{
+	dir = 10
+	},
+/area/map_template/oldpod)
+"bi" = (
+/turf/simulated/shuttle/wall/corner/dark{
+	dir = 6
+	},
+/area/map_template/oldpod)
+
+(1,1,1) = {"
+aa
+ac
+ac
+ac
+ax
+ae
+ac
+ac
+ac
+bh
+"}
+(2,1,1) = {"
+ab
+ag
+ak
+ar
+ay
+aG
+ad
+aU
+ba
+ac
+"}
+(3,1,1) = {"
+ac
+ac
+al
+as
+az
+am
+aO
+aV
+bb
+aO
+"}
+(4,1,1) = {"
+ac
+ah
+al
+at
+aA
+aH
+ac
+ac
+ac
+ac
+"}
+(5,1,1) = {"
+ad
+ai
+am
+au
+aB
+aI
+aP
+aW
+bc
+ad
+"}
+(6,1,1) = {"
+ae
+ai
+an
+av
+aC
+aJ
+aQ
+aK
+bd
+ae
+"}
+(7,1,1) = {"
+ac
+aj
+ao
+ao
+aD
+aK
+aR
+aX
+be
+ac
+"}
+(8,1,1) = {"
+ac
+ac
+ap
+ap
+aE
+aL
+aS
+aY
+bf
+ac
+"}
+(9,1,1) = {"
+ab
+ag
+aq
+aw
+aF
+aM
+aT
+aZ
+bg
+ac
+"}
+(10,1,1) = {"
+af
+ac
+ac
+ac
+ae
+aN
+ac
+ac
+ac
+bi
+"}

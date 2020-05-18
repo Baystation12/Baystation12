@@ -7,7 +7,7 @@
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "soulstone"
 	item_state = "electronic"
-	desc = "A fragment of the legendary treasure known simply as the 'Soul Stone'."
+	desc = "A strange, ridged chunk of some glassy red material. Achingly cold to the touch."
 	w_class = ITEM_SIZE_SMALL
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_BLUESPACE = 4, TECH_MATERIAL = 4)
@@ -18,13 +18,28 @@
 	var/smashing = 0
 	var/soulstatus = null
 
+/obj/item/device/soulstone/Initialize(var/mapload)
+	shade = new /mob/living/simple_animal/shade(src)
+	. = ..(mapload)
+
+/obj/item/device/soulstone/disrupts_psionics()
+	return (full == SOULSTONE_EMPTY) ? src : FALSE
+
+/obj/item/device/soulstone/proc/shatter()
+	playsound(loc, "shatter", 70, 1)
+	for(var/i=1 to rand(2,5))
+		new /obj/item/weapon/material/shard(get_turf(src), MATERIAL_NULLGLASS)
+	qdel(src)
+
+/obj/item/device/soulstone/withstand_psi_stress(var/stress, var/atom/source)
+	. = ..(stress, source)
+	if(. > 0)
+		. = max(0, . - rand(2,5))
+		shatter()
+
 /obj/item/device/soulstone/full
 	full = SOULSTONE_ESSENCE
 	icon_state = "soulstone2"
-
-/obj/item/device/soulstone/New()
-	..()
-	shade = new /mob/living/simple_animal/shade(src)
 
 /obj/item/device/soulstone/Destroy()
 	QDEL_NULL(shade)
@@ -39,7 +54,7 @@
 	if(full == SOULSTONE_CRACKED)
 		to_chat(user, "This one is cracked and useless.")
 
-/obj/item/device/soulstone/update_icon()
+/obj/item/device/soulstone/on_update_icon()
 	if(full == SOULSTONE_EMPTY)
 		icon_state = "soulstone"
 	if(full == SOULSTONE_ESSENCE)
@@ -54,15 +69,14 @@
 		to_chat(user, "<span class='notice'>You cleanse \the [src] of taint, purging its shackles to its creator..</span>")
 		is_evil = 0
 		return
-	if(I.force > 10)
-		if(!smashing)
-			to_chat(user, "<span class='notice'>\The [src] looks fragile. Are you sure you want to smash it? If so, hit it again.</span>")
-			smashing = 1
-			spawn(20)
-				smashing = 0
-			return
-		user.visible_message("<span class='warning'>\The [user] hits \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]</span>", "<span class='warning'>You hit \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]</span>", shade.client ? "You hear a scream." : null)
-		set_full(SOULSTONE_CRACKED)
+	if(I.force >= 5)
+		if(full != SOULSTONE_CRACKED)
+			user.visible_message("<span class='warning'>\The [user] hits \the [src] with \the [I], and it breaks.[shade.client ? " You hear a terrible scream!" : ""]</span>", "<span class='warning'>You hit \the [src] with \the [I], and it cracks.[shade.client ? " You hear a terrible scream!" : ""]</span>", shade.client ? "You hear a scream." : null)
+			playsound(loc, 'sound/effects/Glasshit.ogg', 75)
+			set_full(SOULSTONE_CRACKED)
+		else
+			user.visible_message("<span class='danger'>\The [user] shatters \the [src] with \the [I]!</span>")
+			shatter()
 
 /obj/item/device/soulstone/attack(var/mob/living/simple_animal/M, var/mob/user)
 	if(M == shade)
@@ -87,7 +101,7 @@
 
 	if(!shade.key) // No key = hasn't been used
 		to_chat(user, "<span class='notice'>You cut your finger and let the blood drip on \the [src].</span>")
-		user.pay_for_rune(1)
+		user.remove_blood_simple(1)
 		var/datum/ghosttrap/cult/shade/S = get_ghost_trap("soul stone")
 		S.request_player(shade, "The soul stone shade summon ritual has been performed. ")
 	else if(!shade.client) // Has a key but no client - shade logged out
@@ -96,7 +110,7 @@
 	else if(shade.loc == src)
 		var/choice = alert("Would you like to invoke the spirit within?",,"Yes","No")
 		if(choice == "Yes")
-			shade.forceMove(get_turf(src))
+			shade.dropInto(loc)
 			to_chat(user, "<span class='notice'>You summon \the [shade].</span>")
 		if(choice == "No")
 			return

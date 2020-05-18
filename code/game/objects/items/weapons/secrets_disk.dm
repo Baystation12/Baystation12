@@ -11,7 +11,7 @@
 
 /obj/item/weapon/disk/secret_project/science
 	desc = "A special disk for storing massive amounts of data. It is marked as classified, and has an ID card slot on top. \
-	This one has a NanoTrasen label on it."
+	This one has a lengthy legal label on it denoting it the private, copyrighted property of the Expeditionary Corps Organisation."
 	req_access = access_rd
 
 /obj/item/weapon/disk/secret_project/Initialize()
@@ -28,7 +28,7 @@
 	subject += " " + pick("that is extremely powerful", "which is highly efficient", "which is incredibly compact",\
 	"that runs off of phoron", "that runs off of hydrogen gas", "created by the Skrell", "that just looks really cool")
 
-/obj/item/weapon/disk/secret_project/examine(var/user)
+/obj/item/weapon/disk/secret_project/examine(mob/user)
 	..()
 	if(!locked)
 		to_chat(user, "With the disk's classified contents unlocked, \

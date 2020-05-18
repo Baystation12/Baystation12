@@ -4,9 +4,10 @@
 
 /obj/structure/closet/secure_closet/freezer/kitchen/WillContain()
 	return list(
+		/obj/item/weapon/reagent_containers/food/condiment/salt = 1,
 		/obj/item/weapon/reagent_containers/food/condiment/flour = 7,
 		/obj/item/weapon/reagent_containers/food/condiment/sugar = 2,
-		/obj/item/weapon/reagent_containers/food/condiment/salt = 1
+		/obj/item/weapon/reagent_containers/glass/bottle/dye/polychromic = 2
 	)
 
 /obj/structure/closet/secure_closet/freezer/kitchen/mining
@@ -14,25 +15,19 @@
 
 /obj/structure/closet/secure_closet/freezer/meat
 	name = "meat fridge"
-	icon_state = "fridge1"
-	icon_closed = "fridge"
-	icon_locked = "fridge1"
-	icon_opened = "fridgeopen"
-	icon_off = "fridgebroken"
+	icon = 'icons/obj/closets/fridge.dmi'
+	closet_appearance = null
 
 /obj/structure/closet/secure_closet/freezer/meat/WillContain()
 	return list(
 		/obj/item/weapon/reagent_containers/food/snacks/meat/beef = 8,
-		/obj/item/weapon/reagent_containers/food/snacks/carpmeat/safe = 4
+		/obj/item/weapon/reagent_containers/food/snacks/fish = 4
 	)
 
 /obj/structure/closet/secure_closet/freezer/fridge
 	name = "refrigerator"
-	icon_state = "fridge1"
-	icon_closed = "fridge"
-	icon_locked = "fridge1"
-	icon_opened = "fridgeopen"
-	icon_off = "fridgebroken"
+	icon = 'icons/obj/closets/fridge.dmi'
+	closet_appearance = null
 
 /obj/structure/closet/secure_closet/freezer/fridge/WillContain()
 	return list(
@@ -43,11 +38,8 @@
 
 /obj/structure/closet/secure_closet/freezer/money
 	name = "secure locker"
-	icon_state = "fridge1"
-	icon_closed = "fridge"
-	icon_locked = "fridge1"
-	icon_opened = "fridgeopen"
-	icon_off = "fridgebroken"
+	icon = 'icons/obj/closets/fridge.dmi'
+	closet_appearance = null
 	req_access = list(access_heads_vault)
 
 /obj/structure/closet/secure_closet/freezer/money/Initialize()

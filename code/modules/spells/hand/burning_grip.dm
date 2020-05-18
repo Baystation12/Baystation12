@@ -9,6 +9,7 @@
 	show_message = " throws sparks from their hands"
 	spell_delay = 120
 	hud_state = "wiz_burn"
+	cast_sound = 'sound/magic/fireball.ogg'
 	compatible_targets = list(/mob/living/carbon/human)
 
 /spell/hand/burning_grip/valid_target(var/mob/living/L, var/mob/user)
@@ -30,9 +31,12 @@
 
 	for(var/organ in targets)
 		var/obj/item/organ/external/E = H.get_organ(organ)
-		E.take_damage(burn=10, used_weapon = "hot iron")
+		E.take_external_damage(burn=10, used_weapon = "hot iron")
 		if(E.can_feel_pain())
 			H.grasp_damage_disarm(E)
 		else
-			E.take_damage(burn=6, used_weapon = "hot iron")
+			E.take_external_damage(burn=6, used_weapon = "hot iron")
 			to_chat(H, "<span class='warning'>You look down to notice that your [E] is burned.</span>")
+
+/spell/hand/burning_grip/tower
+	charge_max = 3

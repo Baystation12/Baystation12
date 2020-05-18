@@ -21,15 +21,6 @@ FLOOR SAFES
 	var/space = 0		//the combined w_class of everything in the safe
 	var/maxspace = 24	//the maximum combined w_class of stuff in the safe
 
-
-/obj/structure/safe/New()
-	tumbler_1_pos = rand(0, 72)
-	tumbler_1_open = rand(0, 72)
-
-	tumbler_2_pos = rand(0, 72)
-	tumbler_2_open = rand(0, 72)
-
-
 /obj/structure/safe/Initialize()
 	for(var/obj/item/I in loc)
 		if(space >= maxspace)
@@ -38,6 +29,11 @@ FLOOR SAFES
 			space += I.w_class
 			I.forceMove(src)
 	. = ..()
+	tumbler_1_pos = rand(0, 72)
+	tumbler_1_open = rand(0, 72)
+
+	tumbler_2_pos = rand(0, 72)
+	tumbler_2_open = rand(0, 72)
 
 /obj/structure/safe/proc/check_unlocked(mob/user as mob, canhear)
 	if(user && canhear)
@@ -65,7 +61,7 @@ FLOOR SAFES
 	return num
 
 
-/obj/structure/safe/update_icon()
+/obj/structure/safe/on_update_icon()
 	if(open)
 		icon_state = "[initial(icon_state)]-open"
 	else
@@ -82,7 +78,7 @@ FLOOR SAFES
 			var/obj/item/P = contents[i]
 			dat += "<tr><td><a href='?src=\ref[src];retrieve=\ref[P]'>[P.name]</a></td></tr>"
 		dat += "</table></center>"
-	user << browse("<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=safe;size=350x300")
+	show_browser(user, "<html><head><title>[name]</title></head><body>[dat]</body></html>", "window=safe;size=350x300")
 
 
 /obj/structure/safe/Topic(href, href_list)
@@ -133,7 +129,7 @@ FLOOR SAFES
 		return
 
 	if(href_list["retrieve"])
-		user << browse("", "window=safe") // Close the menu
+		show_browser(user, "", "window=safe") // Close the menu
 
 		var/obj/item/P = locate(href_list["retrieve"]) in src
 		if(open)
@@ -145,9 +141,9 @@ FLOOR SAFES
 /obj/structure/safe/attackby(obj/item/I as obj, mob/user as mob)
 	if(open)
 		if(I.w_class + space <= maxspace)
+			if(!user.unEquip(I, src))
+				return
 			space += I.w_class
-			user.drop_item()
-			I.loc = src
 			to_chat(user, "<span class='notice'>You put [I] in [src].</span>")
 			updateUsrDialog()
 			return

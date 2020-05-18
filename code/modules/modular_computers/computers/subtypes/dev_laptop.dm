@@ -1,11 +1,12 @@
 /obj/item/modular_computer/laptop
 	anchored = TRUE
 	name = "laptop computer"
-	desc = "A portable computer."
+	desc = "A portable clamshell computer."
 	hardware_flag = PROGRAM_LAPTOP
 	icon_state_unpowered = "laptop-open"
 	icon = 'icons/obj/modular_laptop.dmi'
 	icon_state = "laptop-open"
+	w_class = ITEM_SIZE_NORMAL
 	base_idle_power_usage = 25
 	base_active_power_usage = 200
 	max_hardware_size = 2
@@ -14,6 +15,12 @@
 	broken_damage = 100
 	w_class = ITEM_SIZE_NORMAL
 	var/icon_state_closed = "laptop-closed"
+	interact_sounds = list("keyboard", "keystroke")
+	interact_sound_volume = 20
+	
+/obj/item/modular_computer/laptop/Initialize()
+	. = ..()
+	screen_on = anchored
 
 /obj/item/modular_computer/laptop/AltClick(var/mob/user)
 // Prevents carrying of open laptops inhand.
@@ -27,7 +34,7 @@
 	screen_on = anchored
 	update_icon()
 
-/obj/item/modular_computer/laptop/update_icon()
+/obj/item/modular_computer/laptop/on_update_icon()
 	if(anchored)
 		..()
 	else

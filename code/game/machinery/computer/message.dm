@@ -6,7 +6,6 @@
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
 	var/hack_icon = "error"
-	circuit = /obj/item/weapon/circuitboard/message_monitor
 	//Server linked to.
 	var/obj/machinery/message_server/linkedServer = null
 	//Sparks effect - For emag
@@ -57,7 +56,7 @@
 		else
 			to_chat(user, "<span class='notice'>A no server error appears on the screen.</span>")
 
-/obj/machinery/computer/message_monitor/update_icon()
+/obj/machinery/computer/message_monitor/on_update_icon()
 	if(emag || hacking)
 		icon_screen = hack_icon
 	else
@@ -71,15 +70,16 @@
 			linkedServer = message_servers[1]
 	return ..()
 
-/obj/machinery/computer/message_monitor/attack_hand(var/mob/living/user as mob)
-	if(stat & (NOPOWER|BROKEN))
-		return
-	if(!istype(user))
-		return
+/obj/machinery/computer/message_monitor/interface_interact(user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/computer/message_monitor/interact(var/mob/living/user)
 	//If the computer is being hacked or is emagged, display the reboot message.
 	if(hacking || emag)
 		message = rebootmsg
-	var/dat = "<head><title>Message Monitor Console</title></head><body>"
+	var/list/dat = list()
+	dat += "<head><title>Message Monitor Console</title></head><body>"
 	dat += "<center><h2>Message Monitor Console</h2></center><hr>"
 	dat += "<center><h4><font color='blue'[message]</h5></center>"
 
@@ -186,12 +186,10 @@
 
 	dat += "</body>"
 	message = defaultmsg
-	user << browse(dat, "window=message;size=700x700")
-	onclose(user, "message")
+	var/datum/browser/popup = new(user, "message", "Message Monitoring Console", 700, 700)
+	popup.set_content(JOINTEXT(dat))
+	popup.open()
 	return
-
-/obj/machinery/computer/message_monitor/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
 
 /obj/machinery/computer/message_monitor/proc/BruteForce(mob/user as mob)
 	if(isnull(linkedServer))
@@ -298,7 +296,7 @@
 	if (href_list["back"])
 		src.screen = 0
 
-	return src.attack_hand(usr)
+	return interact(usr)
 
 
 /obj/item/weapon/paper/monitorkey

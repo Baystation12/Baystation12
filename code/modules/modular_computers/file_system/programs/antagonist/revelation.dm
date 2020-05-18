@@ -12,7 +12,7 @@
 	nanomodule_path = /datum/nano_module/program/revelation/
 	var/armed = 0
 
-/datum/computer_file/program/revelation/run_program(var/mob/living/user)
+/datum/computer_file/program/revelation/on_startup(var/mob/living/user)
 	. = ..(user)
 	if(armed)
 		activate()
@@ -21,21 +21,9 @@
 	if(!computer)
 		return
 
-	computer.visible_message("<span class='notice'>\The [computer]'s screen brightly flashes and loud electrical buzzing is heard.</span>")
-	computer.enabled = 0
-	computer.update_icon()
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-	s.set_up(10, 1, computer.loc)
-	s.start()
-
-	if(computer.hard_drive)
-		qdel(computer.hard_drive)
-
-	if(computer.battery_module && prob(25))
-		qdel(computer.battery_module)
-
-	if(computer.tesla_link && prob(50))
-		qdel(computer.tesla_link)
+	computer.visible_error("Hardware error: Voltage reaching unsafe leve-")
+	computer.system_shutdown()
+	computer.voltage_overload()
 
 /datum/computer_file/program/revelation/Topic(href, href_list)
 	if(..())
@@ -74,7 +62,7 @@
 
 	data["armed"] = PRG.armed
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "revelation.tmpl", "Revelation Virus", 400, 250, state = state)
 		ui.auto_update_layout = 1

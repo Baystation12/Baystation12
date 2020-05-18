@@ -9,22 +9,36 @@
 	maxhealth = 150 //If you change this, consiter changing ../door/window/brigdoor/ health at the bottom of this .dm file
 	health = 150
 	visible = 0.0
-	use_power = 0
-	atom_flags = ATOM_FLAG_CHECKS_BORDER
+	use_power = POWER_USE_OFF
+	uncreated_component_parts = null
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CHECKS_BORDER
 	opacity = 0
 	var/obj/item/weapon/airlock_electronics/electronics = null
 	explosion_resistance = 5
 	air_properties_vary_with_direction = 1
+	pry_mod = 0.5
 
 /obj/machinery/door/window/New()
 	..()
 	update_nearby_tiles()
-	if (src.req_access && src.req_access.len)
-		src.icon_state = "[src.icon_state]"
-		src.base_state = src.icon_state
-	return
 
-/obj/machinery/door/window/update_icon()
+/obj/machinery/door/window/Initialize(mapload, obj/structure/windoor_assembly/assembly)
+	if(assembly)
+		set_dir(assembly.dir)
+		set_density(0)
+		if(assembly.electronics)
+			if(assembly.electronics.autoset)
+				autoset_access = TRUE // Being careful in case of subtypes or something.
+			else
+				req_access = assembly.electronics.conf_access
+				if(assembly.electronics.one_access)
+					req_access = list(req_access)
+				autoset_access = FALSE
+			electronics = assembly.electronics
+			electronics.forceMove(src)
+	. = ..()
+
+/obj/machinery/door/window/on_update_icon()
 	if(density)
 		icon_state = base_state
 	else
@@ -36,18 +50,10 @@
 	CC.amount = 2
 	var/obj/item/weapon/airlock_electronics/ae
 	if(!electronics)
-		ae = new/obj/item/weapon/airlock_electronics( src.loc )
-		if(!src.req_access)
-			src.check_access()
-		if(src.req_access.len)
-			ae.conf_access = src.req_access
-		else if (src.req_one_access.len)
-			ae.conf_access = src.req_one_access
-			ae.one_access = 1
-	else
-		ae = electronics
-		electronics = null
-		ae.loc = src.loc
+		create_electronics()
+	ae = electronics
+	electronics = null
+	ae.dropInto(loc)
 	if(operating == -1)
 		ae.icon_state = "door_electronics_smoked"
 		operating = 0
@@ -73,20 +79,11 @@
 				open()
 				sleep(50)
 				close()
-		else if(istype(AM, /obj/mecha))
-			var/obj/mecha/mecha = AM
-			if(density)
-				if(mecha.occupant && src.allowed(mecha.occupant))
-					open()
-					sleep(50)
-					close()
 		return
 	var/mob/M = AM // we've returned by here if M is not a mob
-	if (!( ticker ))
-		return
 	if (src.operating)
 		return
-	if (src.density && (!issmall(M) || ishuman(M)) && src.allowed(AM))
+	if (src.density && (!issmall(M) || ishuman(M) || issilicon(M)) && src.allowed(AM))
 		open()
 		if(src.check_access(null))
 			sleep(50)
@@ -98,7 +95,7 @@
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
 		return 1
-	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
+	if(get_dir(loc, target) & dir) //Make sure looking at appropriate border
 		if(air_group) return 0
 		return !density
 	else
@@ -115,11 +112,10 @@
 /obj/machinery/door/window/open()
 	if (operating == 1) //doors can still open when emag-disabled
 		return 0
-	if (!ticker)
-		return 0
 	if (!src.operating) //in case of emag
 		src.operating = 1
 
+	icon_state = "[src.base_state]open";
 	flick("[src.base_state]opening", src)
 	playsound(src.loc, 'sound/machines/windowdoor.ogg', 100, 1)
 	sleep(10)
@@ -154,19 +150,14 @@
 		shatter()
 		return
 
-/obj/machinery/door/window/attack_ai(mob/user as mob)
-	return src.attack_hand(user)
-
-/obj/machinery/door/window/attack_hand(mob/user as mob)
-
+/obj/machinery/door/window/physical_attack_hand(mob/user)
 	if(istype(user,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
 			visible_message("<span class='danger'>[user] smashes against the [src.name].</span>", 1)
 			take_damage(25)
-			return
-	return src.attackby(user, user)
+			return TRUE
 
 /obj/machinery/door/window/emag_act(var/remaining_charges, var/mob/user)
 	if (density && operable())
@@ -181,6 +172,9 @@
 		spawn(0)
 			open()
 	..()
+
+/obj/machinery/door/window/CanFluidPass(var/coming_from)
+	return !density || ((dir in GLOB.cardinal) && coming_from != dir)
 
 /obj/machinery/door/window/attackby(obj/item/weapon/I as obj, mob/user as mob)
 
@@ -220,18 +214,10 @@
 
 			var/obj/item/weapon/airlock_electronics/ae
 			if(!electronics)
-				ae = new/obj/item/weapon/airlock_electronics( src.loc )
-				if(!src.req_access)
-					src.check_access()
-				if(src.req_access.len)
-					ae.conf_access = src.req_access
-				else if (src.req_one_access.len)
-					ae.conf_access = src.req_one_access
-					ae.one_access = 1
-			else
-				ae = electronics
-				electronics = null
-				ae.loc = src.loc
+				create_electronics()
+			ae = electronics
+			electronics = null
+			ae.dropInto(loc)
 			ae.icon_state = "door_electronics_smoked"
 
 			operating = 0
@@ -260,19 +246,19 @@
 	else if (src.density)
 		flick(text("[]deny", src.base_state), src)
 
-	return
-
-
+/obj/machinery/door/window/create_electronics(var/electronics_type = /obj/item/weapon/airlock_electronics)
+	electronics = ..()
+	return electronics
 
 /obj/machinery/door/window/brigdoor
 	name = "secure door"
 	icon = 'icons/obj/doors/windoor.dmi'
 	icon_state = "leftsecure"
 	base_state = "leftsecure"
-	req_access = list(access_security)
 	var/id = null
 	maxhealth = 300
 	health = 300.0 //Stronger doors for prison (regular window door health is 150)
+	pry_mod = 0.65
 
 
 /obj/machinery/door/window/northleft

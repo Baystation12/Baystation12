@@ -35,12 +35,10 @@
 
 /mob/living/silicon/say_quote(var/text)
 	var/ending = copytext(text, length(text))
-
 	if (ending == "?")
 		return speak_query
 	else if (ending == "!")
 		return speak_exclamation
-
 	return speak_statement
 
 #define IS_AI 1

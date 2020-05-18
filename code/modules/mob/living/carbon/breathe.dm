@@ -14,7 +14,7 @@
 	var/datum/gas_mixture/breath = null
 
 	//First, check if we can breathe at all
-	if(is_asystole() && !(CE_STABLE in chem_effects) && active_breathe) //crit aka circulatory shock
+	if(handle_drowning() || (is_asystole() && !(CE_STABLE in chem_effects) && active_breathe)) //crit aka circulatory shock
 		losebreath = max(2, losebreath + 1)
 
 	if(losebreath>0) //Suffocating so do not take a breath
@@ -39,9 +39,9 @@
 /mob/living/carbon/proc/get_breath_from_internal(var/volume_needed=STD_BREATH_VOLUME) //hopefully this will allow overrides to specify a different default volume without breaking any cases where volume is passed in.
 	if(internal)
 		if (!contents.Find(internal))
-			internal = null
+			set_internals(null)
 		if (!(wear_mask && (wear_mask.item_flags & ITEM_FLAG_AIRTIGHT)))
-			internal = null
+			set_internals(null)
 		if(internal)
 			if (internals)
 				internals.icon_state = "internal1"
@@ -52,6 +52,8 @@
 	return null
 
 /mob/living/carbon/proc/get_breath_from_environment(var/volume_needed=STD_BREATH_VOLUME)
+	if(volume_needed <= 0)
+		return
 	var/datum/gas_mixture/breath = null
 
 	var/datum/gas_mixture/environment

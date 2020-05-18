@@ -38,19 +38,17 @@
 	if(is_broken())
 		filter_effect -= 2
 	// Robotic organs filter better but don't get benefits from dylovene for filtering.
-	if(robotic >= ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(src))
 		filter_effect += 1
 	else if(owner.chem_effects[CE_ANTITOX])
 		filter_effect += 1
 	// If you're not filtering well, you're in trouble. Ammonia buildup to toxic levels and damage from alcohol
 	if(filter_effect < 2)
-		if(owner.reagents.get_reagent_amount(/datum/reagent/ammonia) < 6)
-			owner.reagents.add_reagent(/datum/reagent/ammonia, REM)
 		if(owner.chem_effects[CE_ALCOHOL])
 			owner.adjustToxLoss(0.5 * max(2 - filter_effect, 0) * (owner.chem_effects[CE_ALCOHOL_TOXIC] + 0.5 * owner.chem_effects[CE_ALCOHOL]))
 
 	if(owner.chem_effects[CE_ALCOHOL_TOXIC])
-		take_damage(owner.chem_effects[CE_ALCOHOL_TOXIC], prob(90)) // Chance to warn them
+		take_internal_damage(owner.chem_effects[CE_ALCOHOL_TOXIC], prob(90)) // Chance to warn them
 
 	// Heal a bit if needed and we're not busy. This allows recovery from low amounts of toxloss.
 	if(!owner.chem_effects[CE_ALCOHOL] && !owner.chem_effects[CE_TOXIN] && !owner.radiation && damage > 0)
@@ -66,9 +64,9 @@
 	var/blood_volume = owner.get_blood_volume()
 	if(blood_volume < BLOOD_VOLUME_SAFE || is_bruised())
 		if(owner.nutrition >= 300)
-			owner.nutrition -= 10
+			owner.adjust_nutrition(-10)
 		else if(owner.nutrition >= 200)
-			owner.nutrition -= 3
+			owner.adjust_nutrition(-3)
 
 //We got it covered in Process with more detailed thing
 /obj/item/organ/internal/liver/handle_regeneration()

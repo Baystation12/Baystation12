@@ -3,7 +3,6 @@
 /datum/map_template/ruin/space
 	prefix = "maps/random_ruins/space_ruins/"
 	cost = 1
-	allow_duplicates = FALSE
 
 /datum/map_template/ruin/space/multi_zas_test
 	name = "Multi-ZAS Test"

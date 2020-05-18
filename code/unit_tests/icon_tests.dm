@@ -1,18 +1,17 @@
 /datum/unit_test/icon_test
 	name = "ICON STATE template"
+	template = /datum/unit_test/icon_test
 
 /datum/unit_test/icon_test/robots_shall_have_eyes_for_each_state
 	name = "ICON STATE - Robot shall have eyes for each icon state"
 	var/list/excepted_icon_states_ = list(
-		"b1","b1+o","b2","b2+o","b3","b3+o","d1","d1+o","d2","d2+o","d3","d3+o",
-		"floor1","floor2","floor3","floor4","floor5","floor6","floor7",
-		"gib1","gib2","gib3","gib4","gib5","gib6","gib7","gibdown","gibup","gibbl1","gibarm","gibleg",
-		"streak1","streak2","streak3","streak4","streak5",
-		"droid-combat-roll","droid-combat-shield","emag","remainsrobot", "robot+o+c","robot+o-c","robot+we")
+		"droid-combat-roll",
+		"droid-combat-shield"
+	)
 
 /datum/unit_test/icon_test/robots_shall_have_eyes_for_each_state/start_test()
 	var/missing_states = 0
-	var/list/valid_states = icon_states('icons/mob/robots.dmi')
+	var/list/valid_states = icon_states('icons/mob/robots.dmi') + icon_states('icons/mob/robots_drones.dmi') + icon_states('icons/mob/robots_flying.dmi')
 
 	var/list/original_valid_states = valid_states.Copy()
 	for(var/icon_state in valid_states)
@@ -98,7 +97,7 @@
 	return 1
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states
-	name = "ICON STATE template"
+	name = "ICON STATE - Posters Shall Have Icon States"
 
 /datum/unit_test/icon_test/posters_shall_have_icon_states/start_test()
 	var/contraband_icons = icon_states('icons/obj/contraband.dmi')
@@ -113,4 +112,57 @@
 		fail("/decl/poster with missing icon states: [english_list(invalid_posters)]")
 	else
 		pass("All /decl/poster subtypes have valid icon states.")
+	return 1
+
+/datum/unit_test/icon_test/item_modifiers_shall_have_icon_states
+	name = "ICON STATE - Item Modifiers Shall Have Icon Sates"
+	var/list/icon_states_by_type
+
+/datum/unit_test/icon_test/item_modifiers_shall_have_icon_states/start_test()
+	var/list/bad_modifiers = list()
+	var/item_modifiers = list_values(decls_repository.get_decls(/decl/item_modifier))
+
+	for(var/im in item_modifiers)
+		var/decl/item_modifier/item_modifier = im
+		for(var/type_setup_type in item_modifier.type_setups)
+			var/list/type_setup = item_modifier.type_setups[type_setup_type]
+			var/list/icon_states = icon_states_by_type[type_setup_type]
+
+			if(!icon_states)
+				var/obj/item/I = type_setup_type
+				icon_states = icon_states(initial(I.icon))
+				LAZYSET(icon_states_by_type, type_setup_type, icon_states)
+
+			if(!(type_setup["icon_state"] in icon_states))
+				bad_modifiers += type_setup_type
+
+	if(bad_modifiers.len)
+		fail("Item modifiers with missing icon states: [english_list(bad_modifiers)]")
+	else
+		pass("All item modifiers have valid icon states.")
+	return 1
+
+/datum/unit_test/icon_test/random_spawners_shall_have_icon_states
+	name = "ICON STATE - Random Spawners Shall Have Icon States"
+
+/datum/unit_test/icon_test/random_spawners_shall_have_icon_states/start_test()
+	var/states_per_icon = list()
+	var/list/invalid_spawners = list()
+	for(var/random_type in typesof(/obj/random))
+		var/obj/random/R = random_type
+		var/icon = initial(R.icon)
+		var/icon_state = initial(R.icon_state) || ""
+
+		var/icon_states = states_per_icon[icon]
+		if(!icon_states)
+			icon_states = icon_states(icon)
+			states_per_icon[icon] = icon_states
+
+		if(!(icon_state in icon_states))
+			invalid_spawners += random_type
+
+	if(invalid_spawners.len)
+		fail("[invalid_spawners.len] /obj/random type\s with missing icon states: [json_encode(invalid_spawners)]")
+	else
+		pass("All /obj/random types have valid icon states.")
 	return 1

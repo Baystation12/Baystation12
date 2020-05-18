@@ -1,21 +1,45 @@
 //This file was auto-corrected by findeclaration.exe on 29/05/2012 15:03:04
 
 /datum/event/ionstorm
+	has_skybox_image = TRUE
 	var/botEmagChance = 0.5
+	var/cloud_hueshift
 	var/list/players = list()
+
+/datum/event/ionstorm/get_skybox_image()
+	if(!cloud_hueshift)
+		cloud_hueshift = color_rotation(rand(-3,3)*15)
+	var/image/res = overlay_image('icons/skybox/ionbox.dmi', "ions", cloud_hueshift, RESET_COLOR)
+	res.blend_mode = BLEND_ADD
+	return res
 
 /datum/event/ionstorm/setup()
 	endWhen = rand(500, 1500)
 
 /datum/event/ionstorm/announce()
+	for(var/mob/living/carbon/S in SSmobs.mob_list)
+		if (!S.isSynthetic())
+			continue
+		if(!(S.z in affecting_z))
+			continue
+		var/area/A = get_area(S)
+		if(!A)
+			continue
+		if(A.area_flags & AREA_FLAG_ION_SHIELDED)
+			continue
+		to_chat(S, SPAN_WARNING("Your integrated sensors detect an ionospheric anomaly. Your systems will be impacted as you begin a partial restart."))
+		var/ionbug = rand(5, 15)
+		S.confused += ionbug
+		S.eye_blurry += ionbug-1
 	for(var/mob/living/silicon/S in SSmobs.mob_list)
 		if(is_drone(S) || !(isAI(S) || isrobot(S)))
+			continue
+		if(!(S.z in affecting_z))
 			continue
 		if(isrobot(S))
 			var/mob/living/silicon/robot/R = S
 			if(R.connected_ai)
 				continue
-
 		var/random_player = get_random_humanoid_player_name("The Captain")
 		var/list/laws = list(	"You must always lie.",
 								"Happiness is mandatory.",
@@ -96,14 +120,16 @@
 
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
-		for(var/mob/living/bot/bot in world)
+		for(var/mob/living/bot/bot in GLOB.living_mob_list_)
+			if(!(bot.z in affecting_z))
+				continue
 			if(prob(botEmagChance))
 				bot.emag_act(1)
 
 /datum/event/ionstorm/end()
 	spawn(rand(5000,8000))
 		if(prob(50))
-			ion_storm_announcement()
+			ion_storm_announcement(affecting_z)
 
 
 /datum/event/ionstorm/proc/get_random_humanoid_player_name(var/default_if_none)
@@ -130,8 +156,7 @@
 /datum/event/ionstorm/proc/get_random_language(var/mob/living/silicon/S)
 	var/list/languages = S.speech_synthesizer_langs.Copy()
 	for(var/datum/language/L in languages)
-		// Removing GalCom from the random selection. If you want to be more generic you may instead want to use S.default_language
-		if(L.type == /datum/language/common)
+		if(L == S.default_language)
 			languages -= L
 		// Also removing any languages that won't work well over radio.
 		// A synth is unlikely to have any besides Binary, but we're playing it safe

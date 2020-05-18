@@ -1,35 +1,32 @@
-/obj/machinery/computer/sensors
+/obj/machinery/computer/ship/sensors
 	name = "sensors console"
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
-	//circuit = /obj/item/weapon/circuitboard/sensors
-	var/obj/effect/overmap/ship/linked
+	extra_view = 4
 	var/obj/machinery/shipsensors/sensors
-	var/viewing = 0
 
-/obj/machinery/computer/sensors/Initialize()
-	. = ..()
-	linked = map_sectors["[z]"]
+/obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
+	if(!(. = ..()))
+		return
 	find_sensors()
 
-/obj/machinery/computer/sensors/Destroy()
-	sensors = null
-	. = ..()
-
-/obj/machinery/computer/sensors/proc/find_sensors()
+/obj/machinery/computer/ship/sensors/proc/find_sensors()
+	if(!linked)
+		return
 	for(var/obj/machinery/shipsensors/S in SSmachines.machinery)
-		if (S.z in GetConnectedZlevels(z))
+		if(linked.check_ownership(S))
 			sensors = S
 			break
 
-/obj/machinery/computer/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/machinery/computer/ship/sensors/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
+		display_reconnect_dialog(user, "sensors")
 		return
 
 	var/data[0]
 
-	data["viewing"] = viewing
+	data["viewing"] = viewing_overmap(user)
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
@@ -45,73 +42,72 @@
 			data["status"] = "VACUUM SEAL BROKEN"
 		else
 			data["status"] = "OK"
+		var/list/contacts = list()
+		for(var/obj/effect/overmap/O in view(7,linked))
+			if(linked == O)
+				continue
+			if(!O.scannable)
+				continue
+			var/bearing = round(90 - Atan2(O.x - linked.x, O.y - linked.y),5)
+			if(bearing < 0)
+				bearing += 360
+			contacts.Add(list(list("name"=O.name, "ref"="\ref[O]", "bearing"=bearing)))
+		if(contacts.len)
+			data["contacts"] = contacts
 	else
 		data["status"] = "MISSING"
 		data["range"] = "N/A"
 		data["on"] = 0
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "shipsensors.tmpl", "[linked.name] Sensors Control", 420, 530)
+		ui = new(user, src, ui_key, "shipsensors.tmpl", "[linked.name] Sensors Control", 420, 530, src)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/computer/sensors/check_eye(var/mob/user as mob)
-	if (!viewing)
-		return -1
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
-		viewing = 0
-		return -1
-	return 0
-
-/obj/machinery/computer/sensors/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/ship/sensors/OnTopic(var/mob/user, var/list/href_list, state)
 	if(..())
-		user.unset_machine()
-		viewing = 0
-		return
-
-	if(!isAI(user))
-		user.set_machine(src)
-		if(linked)
-			user.reset_view(linked)
-	ui_interact(user)
-
-/obj/machinery/computer/sensors/Topic(href, href_list, state)
-	if(..())
-		return 1
+		return TOPIC_HANDLED
 
 	if (!linked)
-		return
+		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
-		viewing = !viewing
-		if(viewing && usr && !isAI(usr))
-			usr.reset_view(linked)
-		return 1
+		if(user && !isAI(user))
+			viewing_overmap(user) ? unlook(user) : look(user)
+		return TOPIC_REFRESH
 
 	if (href_list["link"])
 		find_sensors()
-		return 1
+		return TOPIC_REFRESH
 
 	if(sensors)
 		if (href_list["range"])
 			var/nrange = input("Set new sensors range", "Sensor range", sensors.range) as num|null
-			if(!CanInteract(usr,state))
-				return
+			if(!CanInteract(user,state))
+				return TOPIC_NOACTION
 			if (nrange)
 				sensors.set_range(Clamp(nrange, 1, world.view))
-			return 1
+			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
-			return 1
+			return TOPIC_REFRESH
 
-/obj/machinery/computer/sensors/Process()
+	if (href_list["scan"])
+		var/obj/effect/overmap/O = locate(href_list["scan"])
+		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
+			playsound(loc, "sound/machines/dotprinter.ogg", 30, 1)
+			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
+		return TOPIC_HANDLED
+
+/obj/machinery/computer/ship/sensors/Process()
 	..()
 	if(!linked)
 		return
 	if(sensors && sensors.use_power && sensors.powered())
-		linked.set_light(1, sensors.range, sensors.range+1)
+		var/sensor_range = round(sensors.range*1.5) + 1
+		linked.set_light(1, sensor_range, sensor_range+1)
 	else
 		linked.set_light(0)
 
@@ -120,6 +116,7 @@
 	desc = "Long range gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "sensors"
+	anchored = 1
 	var/max_health = 200
 	var/health = 200
 	var/critical_heat = 50 // sparks and takes damage when active & above this heat
@@ -157,7 +154,7 @@
 			return 0
 	return 1
 
-/obj/machinery/shipsensors/update_icon()
+/obj/machinery/shipsensors/on_update_icon()
 	if(use_power)
 		icon_state = "sensors"
 	else
@@ -179,15 +176,14 @@
 	..()
 
 /obj/machinery/shipsensors/proc/toggle()
-	if(!use_power && health == 0)
-		return
+	if(!use_power && (health == 0 || !in_vacuum()))
+		return // No turning on if broken or misplaced.
 	if(!use_power) //need some juice to kickstart
-		use_power(idle_power_usage*5)
-	use_power = !use_power
-	update_icon()
+		use_power_oneoff(idle_power_usage*5)
+	update_use_power(!use_power)
+	queue_icon_update()
 
 /obj/machinery/shipsensors/Process()
-	..()
 	if(use_power) //can't run in non-vacuum
 		if(!in_vacuum())
 			toggle()
@@ -205,12 +201,13 @@
 		heat = max(0, heat - heat_reduction)
 
 /obj/machinery/shipsensors/power_change()
+	. = ..()
 	if(use_power && !powered())
 		toggle()
 
 /obj/machinery/shipsensors/proc/set_range(nrange)
 	range = nrange
-	idle_power_usage = 1500 * (range**2) // Exponential increase, also affects speed of overheating
+	change_power_consumption(1500 * (range**2), POWER_USE_IDLE) //Exponential increase, also affects speed of overheating
 
 /obj/machinery/shipsensors/emp_act(severity)
 	if(!use_power)
@@ -222,3 +219,7 @@
 	health = min(max(health - value, 0),max_health)
 	if(use_power && health == 0)
 		toggle()
+
+/obj/machinery/shipsensors/weak
+	heat_reduction = 0.2
+	desc = "Miniturized gravity scanner with various other sensors, used to detect irregularities in surrounding space. Can only run in vacuum to protect delicate quantum BS elements."

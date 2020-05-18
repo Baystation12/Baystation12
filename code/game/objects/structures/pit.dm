@@ -35,13 +35,12 @@
 		return
 	..()
 
-/obj/structure/pit/update_icon()
+/obj/structure/pit/on_update_icon()
 	icon_state = "pit[open]"
 	if(istype(loc,/turf/simulated/floor/exoplanet))
 		var/turf/simulated/floor/exoplanet/E = loc
-		if(E.mudpit)
-			icon_state="pit[open]mud"
-			blend_mode = BLEND_OVERLAY
+		if(E.dirt_color)
+			color = E.dirt_color
 
 /obj/structure/pit/proc/open()
 	name = "pit"
@@ -61,7 +60,10 @@
 	update_icon()
 
 /obj/structure/pit/return_air()
-	return open
+	if(open && loc)
+		return loc.return_air()
+	else
+		return null
 
 /obj/structure/pit/proc/digout(mob/escapee)
 	var/breakout_time = 1 //2 minutes by default
@@ -118,7 +120,6 @@
 /obj/structure/pit/closed/grave/Initialize()
 	var/obj/structure/closet/coffin/C = new(src.loc)
 	var/obj/item/remains/human/bones = new(C)
-	bones.plane = LYING_MOB_PLANE
 	bones.layer = LYING_MOB_LAYER
 	var/obj/structure/gravemarker/random/R = new(src.loc)
 	R.generate()
@@ -137,9 +138,9 @@
 /obj/structure/gravemarker/cross
 	icon_state = "cross"
 
-/obj/structure/gravemarker/examine()
-	..()
-	to_chat(usr,"It says: '[message]'")
+/obj/structure/gravemarker/examine(mob/user)
+	. = ..()
+	to_chat(user, "It says: '[message]'")
 
 /obj/structure/gravemarker/random/Initialize()
 	generate()
@@ -148,9 +149,9 @@
 /obj/structure/gravemarker/random/proc/generate()
 	icon_state = pick("wood","cross")
 
-	var/datum/species/S = all_species["Human"]
+	var/decl/cultural_info/S = SSculture.get_culture(CULTURE_HUMAN)
 	var/nam = S.get_random_name(pick(MALE,FEMALE))
-	var/cur_year = text2num(time2text(world.timeofday, "YYYY"))+544
+	var/cur_year = game_year
 	var/born = cur_year - rand(5,150)
 	var/died = max(cur_year - rand(0,70),born)
 

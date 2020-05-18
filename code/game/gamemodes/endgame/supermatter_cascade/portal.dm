@@ -18,8 +18,8 @@
 	. = ..()
 	START_PROCESSING(SSobj, src)
 
-/obj/singularity/narsie/large/exit/update_icon()
-	overlays = 0
+/obj/singularity/narsie/large/exit/on_update_icon()
+	overlays.Cut()
 
 /obj/singularity/narsie/large/exit/Process()
 	for(var/mob/M in GLOB.player_list)
@@ -42,9 +42,6 @@
 			L.forceMove(O.loc)
 		else
 			do_teleport(L, pick(endgame_safespawns)) //dead-on precision
-
-	else if (istype(A, /obj/mecha/))
-		do_teleport(A, pick(endgame_safespawns)) //dead-on precision
 
 	else if (isturf(A))
 		var/turf/T = A
@@ -77,7 +74,7 @@
 
 /mob/proc/see_rift(var/obj/singularity/narsie/large/exit/R)
 	var/turf/T_mob = get_turf(src)
-	if((R.z == T_mob.z) && (get_dist(R,T_mob) <= (R.consume_range+10)) && !(R in view(T_mob)))
+	if((R.z == get_z(T_mob)) && (get_dist(R,T_mob) <= (R.consume_range+10)) && !(R in view(T_mob)))
 		if(!riftimage)
 			riftimage = image('icons/obj/rift.dmi',T_mob,"rift",LIGHTING_LAYER+2,1)
 			riftimage.mouse_opacity = 0

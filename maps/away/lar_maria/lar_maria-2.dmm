@@ -21,7 +21,7 @@
 /turf/simulated/floor/reinforced,
 /area/space)
 "af" = (
-/obj/effect/overmap/sector/lar_maria,
+/obj/effect/overmap/visitable/sector/lar_maria,
 /turf/simulated/floor/reinforced,
 /area/space)
 "ag" = (
@@ -260,7 +260,7 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1031;
+	frequency = 1439;
 	master_tag = "ZHPWestSolar";
 	pixel_x = 25;
 	pixel_y = 25
@@ -270,7 +270,7 @@
 "aF" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1031;
+	frequency = 1439;
 	id_tag = "ZHPWestSolar_outer"
 	},
 /obj/structure/cable/yellow{
@@ -288,17 +288,16 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 4;
-	frequency = 1031;
 	id_tag = "ZHPWestSolar_pump"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1031;
+	frequency = 1439;
 	id_tag = "ZHPWestSolar_sensor";
 	master_tag = "ZHPWestSolar";
 	pixel_y = 25
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1031;
+	frequency = 1439;
 	id_tag = "ZHPWestSolar";
 	pixel_y = -25;
 	tag_airpump = "ZHPWestSolar_pump";
@@ -311,7 +310,7 @@
 "aH" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1031;
+	frequency = 1439;
 	id_tag = "ZHPWestSolar_inner"
 	},
 /obj/structure/cable/yellow{
@@ -337,7 +336,7 @@
 	dir = 8
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1031;
+	frequency = 1439;
 	master_tag = "ZHPWestSolar";
 	pixel_x = -25;
 	pixel_y = 25
@@ -373,7 +372,7 @@
 "aL" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1033;
+	frequency = 1439;
 	id_tag = "ZHPEastSolar_inner"
 	},
 /obj/structure/cable/yellow{
@@ -392,12 +391,11 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 8;
-	frequency = 1033;
 	id_tag = "ZHPEastSolar_pump"
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1033;
+	frequency = 1439;
 	id_tag = "ZHPEastSolar";
 	pixel_y = -25;
 	tag_airpump = "ZHPEastSolar_pump";
@@ -406,7 +404,7 @@
 	tag_interior_door = "ZHPEastSolar_inner"
 	},
 /obj/machinery/airlock_sensor{
-	frequency = 1033;
+	frequency = 1439;
 	id_tag = "ZHPEastSolar_sensor";
 	master_tag = "ZHPWestSolar";
 	pixel_y = 25
@@ -416,7 +414,7 @@
 "aN" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1033;
+	frequency = 1439;
 	id_tag = "ZHPEastSolar_outer"
 	},
 /obj/structure/cable/yellow{
@@ -445,7 +443,7 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/access_button/airlock_exterior{
-	frequency = 1033;
+	frequency = 1439;
 	master_tag = "ZHPEastSolar";
 	pixel_x = -25;
 	pixel_y = 25
@@ -718,7 +716,6 @@
 "by" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/alarm{
@@ -813,7 +810,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "bJ" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen{
+/obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1093,7 +1090,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "cI" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/wood,
@@ -1163,7 +1160,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -1181,7 +1178,6 @@
 "cS" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/plating,
@@ -1223,7 +1219,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "cY" = (
-/obj/structure/bed/chair/comfy/purp{
+/obj/structure/bed/chair/comfy/purple{
 	dir = 1
 	},
 /turf/simulated/floor/wood,
@@ -1272,7 +1268,7 @@
 /area/lar_maria/dorms)
 "dh" = (
 /obj/structure/window/basic,
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1295,13 +1291,13 @@
 	icon_state = "tube1";
 	dir = 4
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dl" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen{
+/obj/machinery/atmospherics/unary/tank/oxygen{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1316,7 +1312,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dn" = (
-/obj/machinery/atmospherics/trinary/mixer/m_mixer{
+/obj/machinery/atmospherics/omni/mixer{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -1328,13 +1324,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "dp" = (
-/obj/machinery/atmospherics/trinary/filter{
-	dir = 4
-	},
-/turf/simulated/floor/plating,
-/area/lar_maria/atmos)
-"dq" = (
-/obj/machinery/atmospherics/trinary/filter/m_filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -1443,7 +1433,7 @@
 /obj/structure/window/basic{
 	dir = 1
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1466,7 +1456,7 @@
 	dir = 8;
 	pixel_x = 25;
 	pixel_y = 0;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -1757,7 +1747,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "eI" = (
-/obj/structure/toilet,
+/obj/structure/hygiene/toilet,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -1766,7 +1756,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "eJ" = (
-/obj/structure/toilet,
+/obj/structure/hygiene/toilet,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -1774,7 +1764,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "eK" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_x = -30
 	},
 /turf/simulated/floor/tiled/white,
@@ -1843,7 +1833,7 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eW" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "eX" = (
@@ -1851,7 +1841,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "eY" = (
-/obj/structure/urinal{
+/obj/structure/hygiene/urinal{
 	pixel_x = -30
 	},
 /obj/random/trash,
@@ -2166,7 +2156,9 @@
 /turf/simulated/floor/tiled,
 /area/lar_maria/office)
 "fU" = (
-/obj/machinery/vending/engivend,
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fV" = (
@@ -2188,7 +2180,7 @@
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
 "fZ" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -2213,7 +2205,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "gd" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -2384,7 +2376,6 @@
 "gE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/structure/window/basic{
@@ -2417,7 +2408,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -2503,7 +2494,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
 "gW" = (
-/obj/structure/sink/kitchen{
+/obj/structure/hygiene/sink/kitchen{
 	pixel_y = 25
 	},
 /turf/simulated/floor/tiled/white,
@@ -2512,7 +2503,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/mess_hall)
@@ -2637,7 +2628,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
@@ -2839,7 +2830,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "hN" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -2968,7 +2959,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/lar_maria/mess_hall)
 "ij" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -3050,7 +3041,7 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/hallway)
@@ -3275,7 +3266,6 @@
 /obj/machinery/vending/snack,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -3363,7 +3353,7 @@
 	dir = 10
 	},
 /obj/machinery/access_button/airlock_interior{
-	frequency = 1035;
+	frequency = 1439;
 	master_tag = "ZHPDock_airlock";
 	pixel_x = 25;
 	pixel_y = -25
@@ -3372,7 +3362,7 @@
 /area/lar_maria/hallway)
 "ji" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1035;
+	frequency = 1439;
 	id_tag = "ZHPDock_airlock_inner"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3380,7 +3370,7 @@
 /area/lar_maria/hallway)
 "jj" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1035;
+	frequency = 1439;
 	id_tag = "ZHPDock_airlock_inner"
 	},
 /obj/machinery/door/firedoor,
@@ -3394,7 +3384,6 @@
 "jl" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
-	frequency = 1035;
 	id_tag = "ZHPDock_airlock_pump"
 	},
 /turf/simulated/floor/plating,
@@ -3402,7 +3391,6 @@
 "jm" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume{
 	dir = 1;
-	frequency = 1035;
 	id_tag = "ZHPDock_airlock_pump"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
@@ -3419,7 +3407,7 @@
 /area/lar_maria/hallway)
 "jn" = (
 /obj/machinery/airlock_sensor{
-	frequency = 1035;
+	frequency = 1439;
 	id_tag = "ZHPDock_airlock_sensor";
 	master_tag = "ZHPWestSolar";
 	pixel_x = 25;
@@ -3429,7 +3417,7 @@
 /area/lar_maria/hallway)
 "jo" = (
 /obj/machinery/door/airlock/external/bolted{
-	frequency = 1035;
+	frequency = 1439;
 	id_tag = "ZHPDock_airlock_outer"
 	},
 /turf/simulated/floor/plating,
@@ -3520,7 +3508,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "rb" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen{
+/obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -3559,7 +3547,7 @@
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "vb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -3571,12 +3559,12 @@
 /obj/machinery/alarm{
 	frequency = 1439;
 	pixel_y = 23;
-	req_one_access = list(201)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "wb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -3589,7 +3577,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_m)
 "xb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -3601,7 +3589,7 @@
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/head_f)
 "DG" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -24503,7 +24491,7 @@ qb
 cl
 cB
 cB
-dq
+dp
 dF
 ub
 bx

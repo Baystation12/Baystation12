@@ -21,10 +21,10 @@
 
 /obj/item/weapon/reagent_containers/spray/New()
 	..()
-	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
+	src.verbs -= /obj/item/weapon/reagent_containers/verb/set_amount_per_transfer_from_this
 
 /obj/item/weapon/reagent_containers/spray/afterattack(atom/A as mob|obj, mob/user as mob, proximity)
-	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart))
+	if(istype(A, /obj/item/weapon/storage) || istype(A, /obj/structure/table) || istype(A, /obj/structure/closet) || istype(A, /obj/item/weapon/reagent_containers) || istype(A, /obj/structure/hygiene/sink) || istype(A, /obj/structure/janitorialcart))
 		return
 
 	if(istype(A, /spell))
@@ -43,14 +43,11 @@
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 
 	if(reagents.has_reagent(/datum/reagent/acid))
-		message_admins("[key_name_admin(user)] fired sulphuric acid from \a [src].")
-		log_game("[key_name(user)] fired sulphuric acid from \a [src].")
+		log_and_message_admins("fired sulphuric acid from \a [src].", user)
 	if(reagents.has_reagent(/datum/reagent/acid/polyacid))
-		message_admins("[key_name_admin(user)] fired Polyacid from \a [src].")
-		log_game("[key_name(user)] fired Polyacid from \a [src].")
+		log_and_message_admins("fired Polyacid from \a [src].", user)
 	if(reagents.has_reagent(/datum/reagent/lube))
-		message_admins("[key_name_admin(user)] fired Space lube from \a [src].")
-		log_game("[key_name(user)] fired Space lube from \a [src].")
+		log_and_message_admins("fired Space lube from \a [src].", user)
 	return
 
 /obj/item/weapon/reagent_containers/spray/proc/Spray_at(atom/A as mob|obj, mob/user as mob, proximity)
@@ -80,10 +77,10 @@
 	spray_size = next_in_list(spray_size, spray_sizes)
 	to_chat(user, "<span class='notice'>You adjusted the pressure nozzle. You'll now use [amount_per_transfer_from_this] units per spray.</span>")
 
-/obj/item/weapon/reagent_containers/spray/examine(mob/user)
-	if(..(user, 0) && loc == user)
+/obj/item/weapon/reagent_containers/spray/examine(mob/user, distance)
+	. = ..()
+	if(distance == 0 && loc == user)
 		to_chat(user, "[round(reagents.total_volume)] unit\s left.")
-	return
 
 /obj/item/weapon/reagent_containers/spray/verb/empty()
 
@@ -138,8 +135,9 @@
 	..()
 	reagents.add_reagent(/datum/reagent/capsaicin/condensed, 60)
 
-/obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user)
-	if(..(user, 1))
+/obj/item/weapon/reagent_containers/spray/pepper/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, "The safety is [safety ? "on" : "off"].")
 
 /obj/item/weapon/reagent_containers/spray/pepper/attack_self(var/mob/user)
@@ -169,7 +167,7 @@
 /obj/item/weapon/reagent_containers/spray/chemsprayer
 	name = "chem sprayer"
 	desc = "A utility used to spray large amounts of reagent in a given area."
-	icon = 'icons/obj/gun.dmi'
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "chemsprayer"
 	item_state = "chemsprayer"
 	throwforce = 3

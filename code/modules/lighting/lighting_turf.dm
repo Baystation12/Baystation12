@@ -9,10 +9,6 @@
 	var/tmp/list/datum/lighting_corner/corners
 	var/opaque_counter
 
-/turf/New()
-	opaque_counter = opacity
-	..()
-	
 /turf/set_opacity()
 	. = ..()
 	handle_opacity_change(src)
@@ -35,7 +31,7 @@
 		return
 
 	var/area/A = loc
-	if(A.dynamic_lighting)
+	if(A.dynamic_lighting && dynamic_lighting)
 		if(!lighting_corners_initialised)
 			generate_missing_corners()
 
@@ -53,7 +49,7 @@
 /turf/proc/get_lumcount(var/minlum = 0, var/maxlum = 1)
 	if(!lighting_overlay)
 		var/area/A = loc
-		if(A.dynamic_lighting)
+		if(A.dynamic_lighting && dynamic_lighting)
 			var/atom/movable/lighting_overlay/O = new /atom/movable/lighting_overlay(src)
 			lighting_overlay = O
 
@@ -73,7 +69,6 @@
 	if(Obj && Obj.opacity)
 		if(!opaque_counter++)
 			reconsider_lights()
-		
 
 /turf/Exited(var/atom/movable/Obj, var/atom/newloc)
 	. = ..()
@@ -109,5 +104,3 @@
 			opaque_counter--
 			if(old_counter && !opaque_counter)
 				reconsider_lights()
-	
-	

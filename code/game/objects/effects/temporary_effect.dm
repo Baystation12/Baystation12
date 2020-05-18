@@ -4,7 +4,6 @@
 	unacidable = 1
 	mouse_opacity = 0
 	density = 0
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 
 /obj/effect/temporary/Initialize(var/mapload, var/duration = 30, var/_icon = 'icons/effects/effects.dmi', var/_state)

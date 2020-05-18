@@ -12,6 +12,6 @@
 	throw_range = 20
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 
-	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
-		user.drop_item()
+/obj/item/weapon/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
+	if(user.unequip_item())
 		src.throw_at(target, throw_range, throw_speed, user)

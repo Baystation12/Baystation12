@@ -72,8 +72,8 @@
 				"You hear someone scribbling a note.")
 	return
 
-/obj/structure/bigDelivery/update_icon()
-	overlays = new()
+/obj/structure/bigDelivery/on_update_icon()
+	overlays.Cut()
 	if(nameset || examtext)
 		var/image/I = new/image('icons/obj/storage.dmi',"delivery_label")
 		if(icon_state == "deliverycloset")
@@ -101,17 +101,17 @@
 			I.pixel_y = -3
 		overlays += I
 
-/obj/structure/bigDelivery/examine(mob/user)
-	if(..(user, 4))
+/obj/structure/bigDelivery/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 4)
 		if(sortTag)
 			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
-	return
 
 /obj/structure/bigDelivery/Destroy()
 	if(wrapped) //sometimes items can disappear. For example, bombs. --rastaf0
-		wrapped.forceMove(get_turf(src))
+		wrapped.dropInto(loc)
 		if(istype(wrapped, /obj/structure/closet))
 			var/obj/structure/closet/O = wrapped
 			O.welded = 0
@@ -133,14 +133,14 @@
 	var/tag_x
 
 /obj/item/smallDelivery/proc/unwrap(var/mob/user)
-	if (!wrapped || !Adjacent(user))
+	if (!contents.len || !Adjacent(user))
 		return
-	wrapped.forceMove(user.loc)
-	user.drop_item()
-	if(ishuman(user))
-		user.put_in_hands(wrapped)
-	else
-		wrapped.forceMove(get_turf(src))
+
+	user.put_in_hands(wrapped)
+	// Take out any other items that might be in the package
+	for(var/obj/item/I in src)
+		user.put_in_hands(I)
+
 	qdel(src)
 
 /obj/item/smallDelivery/attack_robot(mob/user as mob)
@@ -198,8 +198,8 @@
 				"You hear someone scribbling a note.")
 	return
 
-/obj/item/smallDelivery/update_icon()
-	overlays = new()
+/obj/item/smallDelivery/on_update_icon()
+	overlays.Cut()
 	if((nameset || examtext) && icon_state != "deliverycrate1")
 		var/image/I = new/image('icons/obj/storage.dmi',"delivery_label")
 		if(icon_state == "deliverycrate5")
@@ -223,13 +223,13 @@
 				I.pixel_y = -3
 		overlays += I
 
-/obj/item/smallDelivery/examine(mob/user)
-	if(..(user, 4))
+/obj/item/smallDelivery/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 4)
 		if(sortTag)
 			to_chat(user, "<span class='notice'>It is labeled \"[sortTag]\"</span>")
 		if(examtext)
 			to_chat(user, "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>")
-	return
 
 /obj/item/stack/package_wrap
 	name = "package wrapper"
@@ -342,7 +342,7 @@
 	item_state = "electronic"
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	slot_flags = SLOT_BELT
-	matter = list(DEFAULT_WALL_MATERIAL = 100, "glass" = 34)
+	matter = list(MATERIAL_STEEL = 100, MATERIAL_GLASS = 34)
 
 /obj/item/device/destTagger/proc/openwindow(mob/user as mob)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
@@ -356,14 +356,14 @@
 
 	dat += "</tr></table><br>Current Selection: [currTag ? currTag : "None"]</tt>"
 	dat += "<br><a href='?src=\ref[src];nextTag=CUSTOM'>Enter custom location.</a>"
-	user << browse(dat, "window=destTagScreen;size=450x375")
+	show_browser(user, dat, "window=destTagScreen;size=450x375")
 	onclose(user, "destTagScreen")
 
 /obj/item/device/destTagger/attack_self(mob/user as mob)
 	openwindow(user)
 
 /obj/item/device/destTagger/OnTopic(user, href_list, state)
-	if(href_list["nextTag"] && href_list["nextTag"] in GLOB.tagger_locations)
+	if(href_list["nextTag"] && (href_list["nextTag"] in GLOB.tagger_locations))
 		src.currTag = href_list["nextTag"]
 		to_chat(user, "<span class='notice'>You set [src] to <b>[src.currTag]</b>.</span>")
 		playsound(src.loc, 'sound/machines/chime.ogg', 50, 1)
@@ -404,12 +404,11 @@
 /obj/machinery/disposal/deliveryChute/interact()
 	return
 
-/obj/machinery/disposal/deliveryChute/update_icon()
+/obj/machinery/disposal/deliveryChute/on_update_icon()
 	return
 
 /obj/machinery/disposal/deliveryChute/Bumped(var/atom/movable/AM) //Go straight into the chute
 	if(istype(AM, /obj/item/projectile) || istype(AM, /obj/effect))	return
-	if(istype(AM, /obj/mecha))	return
 	switch(dir)
 		if(NORTH)
 			if(AM.loc.y != src.loc.y+1) return
@@ -419,7 +418,10 @@
 			if(AM.loc.y != src.loc.y-1) return
 		if(WEST)
 			if(AM.loc.x != src.loc.x-1) return
-
+			
+	var/mob/living/L = AM
+	if (istype(L) && L.ckey)
+		log_and_message_admins("has flushed themselves down \the [src].", L)
 	if(istype(AM, /obj))
 		var/obj/O = AM
 		O.forceMove(src)
@@ -447,7 +449,7 @@
 
 			var/obj/item/organ/external/E = pick(crush)
 
-			E.take_damage(45, used_weapon = "Blunt Trauma")
+			E.take_external_damage(45, used_weapon = "Blunt Trauma")
 			to_chat(L, "\The [src]'s mechanisms crush your [E.name]!")
 
 	H.init(src)	// copy the contents of disposer to holder
@@ -484,11 +486,8 @@
 				playsound(src.loc, 'sound/items/Welder2.ogg', 100, 1)
 				if(!src || !W.isOn()) return
 				to_chat(user, "You sliced the floorweld off the delivery chute.")
-				var/obj/structure/disposalconstruct/C = new (src.loc)
-				C.ptype = 8 // 8 =  Delivery chute
+				var/obj/structure/disposalconstruct/C = new (loc, src)
 				C.update()
-				C.anchored = 1
-				C.set_density(1)
 				qdel(src)
 			return
 		else

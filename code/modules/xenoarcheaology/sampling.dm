@@ -90,8 +90,9 @@
 	var/num_stored_bags = 10
 	var/obj/item/weapon/evidencebag/filled_bag
 
-/obj/item/device/core_sampler/examine(var/mob/user)
-	if(..(user, 2))
+/obj/item/device/core_sampler/examine(mob/user, distance)
+	. = ..(user)
+	if(distance <= 2)
 		to_chat(user, "<span class='notice'>Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining.</span>")
 
 /obj/item/device/core_sampler/attackby(var/obj/item/I, var/mob/living/user)
@@ -143,6 +144,7 @@
 			filled_bag.overlays += I
 			filled_bag.overlays += "evidence"
 			filled_bag.w_class = ITEM_SIZE_TINY
+			filled_bag.stored_item = R
 
 			to_chat(user, "<span class='notice'>You take a core sample of the [item_to_sample].</span>")
 	else
@@ -156,7 +158,7 @@
 			var/mob/M = src.loc
 			success = M.put_in_inactive_hand(filled_bag)
 		if(!success)
-			filled_bag.forceMove(get_turf(src))
+			filled_bag.dropInto(loc)
 		filled_bag = null
 		icon_state = "sampler0"
 	else

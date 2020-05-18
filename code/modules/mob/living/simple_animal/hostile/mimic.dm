@@ -2,7 +2,19 @@
 // Abstract Class
 //
 
-var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/cable, /obj/structure/window, /obj/item/projectile/animate)
+var/global/list/protected_objects = list(/obj/machinery,
+										 /obj/structure/table,
+										 /obj/structure/cable,
+										 /obj/structure/window,
+										 /obj/structure/wall_frame,
+										 /obj/structure/grille,
+										 /obj/structure/catwalk,
+										 /obj/structure/ladder,
+										 /obj/structure/stairs,
+										 /obj/structure/sign,
+										 /obj/structure/railing,
+										 /obj/item/modular_computer,
+										 /obj/item/projectile/animate)
 
 /mob/living/simple_animal/hostile/mimic
 	name = "crate"
@@ -11,7 +23,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	icon_state = "crate"
 	icon_living = "crate"
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/fish
 	response_help = "touches"
 	response_disarm = "pushes"
 	response_harm = "hits"
@@ -36,6 +48,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 	var/weakref/creator // the creator
 	var/destroy_objects = 0
 	var/knockdown_people = 0
+	pass_flags = PASS_FLAG_TABLE
 
 /mob/living/simple_animal/hostile/mimic/New(newloc, var/obj/o, var/mob/living/creator)
 	..()
@@ -105,7 +118,7 @@ var/global/list/protected_objects = list(/obj/structure/table, /obj/structure/ca
 					M.forceMove(src.loc)
 
 		for(var/atom/movable/M in src)
-			M.forceMove(get_turf(src))
+			M.dropInto(loc)
 		qdel(src)
 
 

@@ -3,7 +3,6 @@
 	icon = 'icons/obj/device.dmi'
 	icon_state = "motion0"
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 10
 	var/uses = 20
 	var/disabled = 1
@@ -19,7 +18,7 @@
 	..()
 	update_icon()
 
-/obj/machinery/ai_slipper/update_icon()
+/obj/machinery/ai_slipper/on_update_icon()
 	if (stat & NOPOWER || stat & BROKEN)
 		icon_state = "motion0"
 	else
@@ -34,44 +33,29 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if (istype(user, /mob/living/silicon))
-		return src.attack_hand(user)
+		return attack_ai(user)
 	else // trying to unlock the interface
-		if (src.allowed(usr))
+		if(allowed(user))
 			locked = !locked
 			to_chat(user, "You [ locked ? "lock" : "unlock"] the device.")
 			if (locked)
 				if (user.machine==src)
 					user.unset_machine()
-					user << browse(null, "window=ai_slipper")
+					close_browser(user, "window=ai_slipper")
 			else
 				if (user.machine==src)
-					src.attack_hand(usr)
+					interact(user)
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
-			return
-	return
 
-/obj/machinery/ai_slipper/attack_ai(mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/ai_slipper/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/ai_slipper/attack_hand(mob/user as mob)
-	if(stat & (NOPOWER|BROKEN))
+/obj/machinery/ai_slipper/interact(mob/user)
+	var/area/area = get_area(src)
+	if(!area || isturf(loc))
 		return
-	if ( (get_dist(src, user) > 1 ))
-		if (!istype(user, /mob/living/silicon))
-			to_chat(user, text("Too far away."))
-			user.unset_machine()
-			user << browse(null, "window=ai_slipper")
-			return
-
-	user.set_machine(src)
-	var/loc = src.loc
-	if (istype(loc, /turf))
-		loc = loc:loc
-	if (!istype(loc, /area))
-		to_chat(user, text("Turret badly positioned - loc.loc is [].", loc))
-		return
-	var/area/area = loc
 	var/t = "<TT><B>AI Liquid Dispenser</B> ([area.name])<HR>"
 
 	if(src.locked && (!istype(user, /mob/living/silicon)))
@@ -80,9 +64,8 @@
 		t += text("Dispenser [] - <A href='?src=\ref[];toggleOn=1'>[]?</a><br>\n", src.disabled?"deactivated":"activated", src, src.disabled?"Enable":"Disable")
 		t += text("Uses Left: [uses]. <A href='?src=\ref[src];toggleUse=1'>Activate the dispenser?</A><br>\n")
 
-	user << browse(t, "window=computer;size=575x450")
+	show_browser(user, t, "window=computer;size=575x450")
 	onclose(user, "computer")
-	return
 
 /obj/machinery/ai_slipper/CanUseTopic(user)
 	if(locked && !issilicon(user))

@@ -7,7 +7,15 @@
 	pixel_y = -128
 	health = 100
 	maxHealth = 100 //I dunno what to do with health at this point.
-	universal_understand = 1
+	universal_understand = TRUE
+
+	meat_type = null
+	meat_amount = 0
+	skin_material = null
+	skin_amount = 0
+	bone_material = null
+	bone_amount = 0
+
 	var/eye_type = /mob/observer/eye/cult
 	var/list/minions = list() //Minds of those who follow him
 	var/list/structures = list() //The objs that this dude controls.
@@ -18,10 +26,10 @@
 
 /mob/living/deity/New()
 	..()
-	if(eye_type)
-		eyeobj = new eye_type(src)
-		eyeobj.possess(src)
-		eyeobj.visualnet.add_source(src)
+	var/visualnet = new /datum/visualnet/cultnet()
+	eyeobj = new /mob/observer/eye/cult(get_turf(src), visualnet)
+	eyeobj.possess(src)
+	eyeobj.visualnet.add_source(src)
 
 /mob/living/deity/death()
 	. = ..()
@@ -44,8 +52,9 @@
 /mob/living/deity/Destroy()
 	death(0)
 	minions.Cut()
-	eyeobj.release()
 	structures.Cut()
+	eyeobj.release()
+	QDEL_NULL(eyeobj.visualnet) //We do it here as some mobs have eyes that have access to the visualnet and we only want to destroy it when the deity is destroyed
 	QDEL_NULL(eyeobj)
 	QDEL_NULL(form)
 	return ..()

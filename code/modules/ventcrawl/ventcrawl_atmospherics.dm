@@ -3,7 +3,7 @@
 /obj/machinery/atmospherics/Destroy()
 	for(var/mob/living/M in src) //ventcrawling is serious business
 		M.remove_ventcrawl()
-		M.forceMove(get_turf(src))
+		M.dropInto(loc)
 	if(pipe_image)
 		for(var/mob/living/M in GLOB.player_list)
 			if(M.client)
@@ -42,9 +42,7 @@
 			user.remove_ventcrawl()
 			user.forceMove(src.loc)
 			user.visible_message("You hear something squeezing through the pipes.", "You climb out the ventilation system.")
-	user.canmove = 0
-	spawn(1)
-		user.canmove = 1
+	user.SetMoveCooldown(user.movement_delay())
 
 /obj/machinery/atmospherics/proc/can_crawl_through()
 	return 1

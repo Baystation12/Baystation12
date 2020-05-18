@@ -22,12 +22,18 @@ var/global/datum/matchmaker/matchmaker = new()
 		if(R.other && !R.finalized)
 			to_warn |= R.holder.current
 	for(var/mob/M in to_warn)
-		to_chat(M,"<span class='warning'>You have new connections. Use \"See Relationship Info\" to view and finalize them.</span>")
+		to_chat(M,"<span class='warning'>You have new connections. Use \"<a href='byond://?src=\ref[M];show_relations=1'>See Relationship Info</a>\" to view and finalize them.</span>")
 
-/datum/matchmaker/proc/get_relationships(datum/mind/M)
+/datum/matchmaker/proc/get_relationships(datum/mind/M, finalized_only)
 	. = list()
 	for(var/datum/relation/R in relations)
-		if(R.holder == M && R.other)
+		if(R.holder == M && R.other && (R.finalized || !finalized_only))
+			. += R
+
+/datum/matchmaker/proc/get_relationships_between(datum/mind/holder, datum/mind/target, finalized_only)
+	. = list()
+	for(var/datum/relation/R in relations)
+		if(R.holder == holder && R.other && R.other.holder == target && (R.finalized || !finalized_only))
 			. += R
 
 //Types of relations
@@ -46,7 +52,7 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/relation/New()
 	..()
 	if(!can_connect_to)
-		can_connect_to = list(name)
+		can_connect_to = list(type)
 	matchmaker.relations += src
 
 /datum/relation/proc/get_candidates()
@@ -72,9 +78,9 @@ var/global/datum/matchmaker/matchmaker = new()
 /datum/relation/proc/can_connect(var/datum/relation/R)
 	for(var/datum/relation/D in matchmaker.relations) //have to check all connections between us and them
 		if(D.holder == R.holder && D.other && D.other.holder == holder)
-			if(D.name in incompatible)
+			if(D.type in incompatible)
 				return 0
-	return (R.name in can_connect_to) && !(R.name in incompatible) && R.open
+	return (R.type in can_connect_to) && !(R.type in incompatible) && R.open
 
 /datum/relation/proc/get_copy()
 	var/datum/relation/R = new type
@@ -120,7 +126,7 @@ var/global/datum/matchmaker/matchmaker = new()
 			if(!M.mind || M.stat == DEAD || !valid_candidate(M.mind))
 				candidates -= M
 				continue
-			var/datum/job/coworker = job_master.GetJob(M.job)
+			var/datum/job/coworker = SSjobs.get_by_title(M.job)
 			if(coworker && holder.assigned_job && other.holder.assigned_job)
 				if((coworker.department_flag & holder.assigned_job.department_flag) || (coworker.department_flag & other.holder.assigned_job.department_flag))
 					candidates[M] = 5	//coworkers are 5 times as likely to know about your relations
@@ -176,15 +182,40 @@ var/global/datum/matchmaker/matchmaker = new()
 	popup.set_content(jointext(dat,null))
 	popup.open()
 
-/mob/living/Topic(href, href_list)
-	if(..())
-		return 1
+/mob/living/proc/see_relationship_info_with(var/mob/living/other)
+	if(!other.mind)
+		return
+	var/list/relations = matchmaker.get_relationships(mind,other.mind,TRUE)
+	var/list/dat = list("<h2>[other]</h2>")
+	if(mind.gen_relations_info)
+		dat += "<b>Things they know about you:</b><br>[mind.gen_relations_info]<hr>"
+		dat += "<br>"
+	for(var/datum/relation/R in relations)
+		dat += "<br>[R.desc]"
+		dat += "<br>"
+		dat += "<b>Things they know about you:</b><br>[R.info ? "[R.info]" : " Nothing specific."]"
+		if(R.other.info)
+			dat += "<br><b>Things you know about them:</b><br>[R.other.info]<br>[R.other.holder.gen_relations_info]"
+		dat += "<hr>"
+
+	var/datum/browser/popup = new(usr, "relations", "Relationship Info")
+	popup.set_content(jointext(dat,null))
+	popup.open()
+
+/mob/living/OnTopic(mob/living/user, href_list)
+	if(href_list["show_relations"])
+		if(istype(user))
+			user.see_relationship_info_with(src)
+			return TOPIC_HANDLED
+	return ..()
+
+/mob/living/OnSelfTopic(href_list)
 	if(href_list["del_relation"])
 		var/datum/relation/R = locate(href_list["del_relation"])
 		if(istype(R))
 			R.sever()
 			see_relationship_info()
-			return 1
+			return TOPIC_HANDLED
 	if(href_list["info_relation"])
 		var/datum/relation/R = locate(href_list["info_relation"])
 		if(istype(R))
@@ -192,7 +223,7 @@ var/global/datum/matchmaker/matchmaker = new()
 			if(info)
 				R.info = info
 				see_relationship_info()
-				return 1
+				return TOPIC_HANDLED
 	if(href_list["relations_close"])
 		var/ok = "Close anyway"
 		ok = alert("HEY! You have some non-finalized relationships. You can terminate them if they do not fit your character, or edit the info tidbit that the other party is given. THIS IS YOUR ONLY CHANCE to do so - after you close the window, they won't be editable.","Finalize relationships","Return to edit", "Close anyway")
@@ -203,4 +234,5 @@ var/global/datum/matchmaker/matchmaker = new()
 			show_browser(usr,null, "window=relations")
 		else
 			show_browser(usr,null, "window=relations")
-		return 1
+		return TOPIC_HANDLED
+	return ..()

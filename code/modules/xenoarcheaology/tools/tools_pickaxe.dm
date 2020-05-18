@@ -6,16 +6,16 @@
 	force = 3
 	throwforce = 0
 	attack_verb = list("stabbed", "jabbed", "spiked", "attacked")
-	matter = list(DEFAULT_WALL_MATERIAL = 75)
+	matter = list(MATERIAL_STEEL = 75)
 	w_class = ITEM_SIZE_SMALL
 	drill_verb = "delicately picking"
 	digspeed = 20
 	excavation_amount = 0
 	sharp = 1
 
-/obj/item/weapon/pickaxe/xeno/examine()
-	..()
-	to_chat(usr, "This tool has a [excavation_amount] centimetre excavation depth.")
+/obj/item/weapon/pickaxe/xeno/examine(mob/user)
+	. = ..()
+	to_chat(user, "This tool has a [excavation_amount] centimetre excavation depth.")
 
 /obj/item/weapon/pickaxe/xeno/brush
 	name = "wire brush"
@@ -73,7 +73,7 @@
 	excavation_amount = 30
 	drill_sound = 'sound/items/Crowbar.ogg'
 	drill_verb = "clearing"
-	matter = list(DEFAULT_WALL_MATERIAL = 150)
+	matter = list(MATERIAL_STEEL = 150)
 	w_class = ITEM_SIZE_NORMAL
 	force = 6
 	throwforce = 3

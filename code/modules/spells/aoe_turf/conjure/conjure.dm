@@ -22,7 +22,7 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 	var/list/newVars = list() //vars of the summoned objects will be replaced with those where they meet
 	//should have format of list("emagged" = 1,"name" = "Wizard's Justicebot"), for example
 
-	cast_sound = 'sound/items/welder.ogg'
+	cast_sound = 'sound/magic/castsummon.ogg'
 
 /spell/aoe_turf/conjure/cast(list/targets, mob/user)
 
@@ -50,14 +50,12 @@ How they spawn stuff is decided by behaviour vars, which are explained below
 			summoned_object = spawn_place
 		else
 			summoned_object = new summoned_object_type(spawn_place)
-		var/atom/movable/overlay/animation = new /atom/movable/overlay(spawn_place)
+		var/atom/movable/overlay/animation = new /atom/movable/overlay(summoned_object)
 		animation.SetName("conjure")
 		animation.set_density(0)
 		animation.anchored = 1
 		animation.icon = 'icons/effects/effects.dmi'
-		animation.plane = HUMAN_PLANE
-		animation.layer = MOB_LAYER
-		animation.master = summoned_object
+		animation.layer = BASE_HUMAN_LAYER
 		if(istype(summoned_object,/mob)) //we want them to NOT attack us.
 			var/mob/M = summoned_object
 			M.faction = user.faction

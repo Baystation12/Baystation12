@@ -3,15 +3,15 @@
 	icon_state = "ice_1"
 	damage = 0
 	damage_type = BURN
+	damage_flags = 0
 	nodamage = 1
-	check_armour = "energy"
 
 /obj/item/projectile/change/on_hit(var/atom/change)
 	wabbajack(change)
 
 /obj/item/projectile/change/proc/wabbajack(var/mob/M)
 	if(istype(M, /mob/living) && M.stat != DEAD)
-		if(M.transforming)
+		if(HAS_TRANSFORMATION_MOVEMENT_HANDLER(M))
 			return
 		if(M.has_brain_worms())
 			return //Borer stuff - RR
@@ -32,9 +32,6 @@
 		var/options = list("robot", "slime")
 		for(var/t in all_species)
 			options += t
-		options -= "Xenophage Queen"
-		options -= "Xenophage Drone"
-		options -= "Xenophage"
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(H.species)
@@ -56,7 +53,7 @@
 				Robot.mmi.transfer_identity(M)	//Does not transfer key/client.
 			if("slime")
 				new_mob = new /mob/living/carbon/slime(M.loc)
-				new_mob.universal_speak = 1
+				new_mob.universal_speak = TRUE
 			else
 				var/mob/living/carbon/human/H
 				if(ishuman(M))
@@ -79,7 +76,7 @@
 				H.real_name = H.name
 
 				H.set_species(randomize)
-				H.universal_speak = 1
+				H.universal_speak = TRUE
 				var/datum/preferences/A = new() //Randomize appearance for the human
 				A.randomize_appearance_and_body_for(H)
 

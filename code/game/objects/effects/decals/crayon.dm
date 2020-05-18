@@ -2,11 +2,9 @@
 	name = "rune"
 	desc = "A rune drawn in crayon."
 	icon = 'icons/obj/rune.dmi'
-	anchored = 1
 
 	New(location,main = "#ffffff",shade = "#000000",var/type = "rune")
 		..()
-		loc = location
 
 		name = type
 		desc = "A [type] drawn in crayon."

@@ -25,7 +25,7 @@
 	var/autoheal_cutoff = 15   // the maximum amount of damage that this wound can have and still autoheal
 
 	// helper lists
-	var/tmp/list/embedded_objects = list()
+	var/tmp/list/embedded_objects
 	var/tmp/list/desc_list = list()
 	var/tmp/list/damage_list = list()
 
@@ -50,7 +50,10 @@
 		parent_organ = organ
 
 /datum/wound/Destroy()
-	parent_organ = null
+	if(parent_organ)
+		LAZYREMOVE(parent_organ.wounds, src)
+		parent_organ = null
+	LAZYCLEARLIST(embedded_objects)
 	. = ..()
 
 // returns 1 if there's a next stage, 0 otherwise
@@ -68,13 +71,13 @@
 	return src.damage / src.amount
 
 /datum/wound/proc/can_autoheal()
-	if(embedded_objects.len)
+	if(LAZYLEN(embedded_objects))
 		return 0
 	return (wound_damage() <= autoheal_cutoff) ? 1 : is_treated()
 
 // checks whether the wound has been appropriately treated
 /datum/wound/proc/is_treated()
-	if(!embedded_objects.len)
+	if(!LAZYLEN(embedded_objects))
 		switch(damage_type)
 			if(BRUISE, CUT, PIERCE)
 				return bandaged
@@ -92,16 +95,18 @@
 	if (!(other.clamped) != !(src.clamped)) return 0
 	if (!(other.salved) != !(src.salved)) return 0
 	if (!(other.disinfected) != !(src.disinfected)) return 0
-	if (!(other.parent_organ) != parent_organ) return 0
+	if (other.parent_organ != parent_organ) return 0
 	return 1
 
 /datum/wound/proc/merge_wound(var/datum/wound/other)
-	src.embedded_objects |= other.embedded_objects
+	if(LAZYLEN(other.embedded_objects))
+		LAZYDISTINCTADD(src.embedded_objects, other.embedded_objects)
 	src.damage += other.damage
 	src.amount += other.amount
 	src.bleed_timer += other.bleed_timer
 	src.germ_level = max(src.germ_level, other.germ_level)
 	src.created = max(src.created, other.created)	//take the newer created time
+	qdel(other)
 
 // checks if wound is considered open for external infections
 // untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if wound is bigger
@@ -122,9 +127,9 @@
 		if (BRUISE)
 			return prob(dam_coef*5)
 		if (BURN)
-			return prob(dam_coef*30)
+			return prob(dam_coef*25)
 		if (CUT)
-			return prob(dam_coef*20)
+			return prob(dam_coef*10)
 
 	return 0
 
@@ -140,12 +145,12 @@
 // heal the given amount of damage, and if the given amount of damage was more
 // than what needed to be healed, return how much heal was left
 /datum/wound/proc/heal_damage(amount)
-	if(embedded_objects.len)
+	if(LAZYLEN(embedded_objects))
 		return amount // heal nothing
 	if(parent_organ)
-		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || parent_organ.can_heal_overkill))
+		if(damage_type == BURN && !(parent_organ.burn_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount	//We don't want to heal wounds on irreparable organs.
-		else if(!(parent_organ.brute_ratio < 1 || parent_organ.can_heal_overkill))
+		else if(!(parent_organ.brute_ratio < 1 || (parent_organ.limb_flags & ORGAN_FLAG_HEALS_OVERKILL)))
 			return amount
 
 	var/healed_damage = min(src.damage, amount)

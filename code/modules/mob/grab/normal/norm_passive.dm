@@ -10,7 +10,7 @@
 	reverse_facing = 0
 	can_absorb = 0
 	shield_assailant = 0
-	point_blank_mult = 1
+	point_blank_mult = 1.1
 	same_tile = 0
 
 	icon_state = "reinforce"

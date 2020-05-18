@@ -1,0 +1,13386 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/space,
+/area/space)
+"ab" = (
+/obj/structure/catwalk,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ac" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ad" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ae" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"af" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/effect/paint/red,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ag" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/paint/red,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ah" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/shipsensors,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ai" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"aj" = (
+/obj/machinery/computer/ship/helm{
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ak" = (
+/obj/machinery/computer/shuttle_control/explore/merc_shuttle{
+	req_access = list("ACCESS_SYNDICATE");
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"al" = (
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals_central6,
+/obj/machinery/telecomms/allinone{
+	intercept = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_spawn)
+"am" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"an" = (
+/obj/machinery/door/blast/regular{
+	id_tag = "merc_bsa"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/merc_shuttle)
+"ao" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"ap" = (
+/obj/structure/table/steel_reinforced,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "merc_external";
+	name = "Protective Shutters Control";
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aq" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ar" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/computer/ship/engines{
+	dir = 8;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
+/obj/machinery/turretid/lethal{
+	ailock = 1;
+	check_arrest = 0;
+	check_records = 0;
+	pixel_y = 32;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"as" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"at" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"au" = (
+/obj/machinery/disperser/front{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/merc_shuttle)
+"av" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_bsa_shutters"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"aw" = (
+/obj/machinery/computer/ship/disperser,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ax" = (
+/obj/machinery/computer/ship/sensors,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"ay" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"az" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aA" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"aB" = (
+/obj/machinery/disperser/middle{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/merc_shuttle)
+"aC" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 1
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aD" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/button/blast_door{
+	id_tag = "merc_bsa_shutters";
+	name = "OFD Viewing Shutters";
+	pixel_x = -5;
+	pixel_y = -3;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "merc_bsa";
+	name = "OFD Firing Blast Doors";
+	pixel_x = -5;
+	pixel_y = 6;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/recharger{
+	pixel_x = 6
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aF" = (
+/obj/machinery/disperser/back{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/ship_munition/disperser_charge/emp,
+/turf/simulated/floor/reinforced,
+/area/map_template/merc_shuttle)
+"aG" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/effect/floor_decal/industrial/loading{
+	icon_state = "loadingarea";
+	dir = 8
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "merc_bsa"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/merc_shuttle)
+"aH" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aI" = (
+/obj/machinery/pointdefense_control{
+	initial_id_tag = "merc_pd";
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/hologram/holopad/longrange/remoteship,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aK" = (
+/obj/structure/catwalk,
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"aL" = (
+/obj/effect/paint/black,
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle)
+"aM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/power/apc/hyper{
+	dir = 8;
+	pixel_x = -21;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning/corner,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aO" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aP" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/computer/ship/navigation/telescreen{
+	pixel_y = -32
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aQ" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"aR" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle)
+"aS" = (
+/obj/machinery/atmospherics/unary/cryo_cell,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"aT" = (
+/obj/machinery/atmospherics/unary/freezer,
+/obj/item/weapon/reagent_containers/glass/beaker/cryoxadone,
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"aU" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aV" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"aW" = (
+/obj/machinery/power/smes/buildable/preset{
+	_fully_charged = 1;
+	_input_on = 1;
+	_output_maxed = 1;
+	_output_on = 1;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/super_io = 1, /obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+	},
+/obj/structure/cable,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"aZ" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"ba" = (
+/obj/effect/paint/red,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle)
+"bb" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 5
+	},
+/obj/structure/closet/medical_wall/filled{
+	pixel_x = -32
+	},
+/obj/item/weapon/reagent_containers/spray/cleaner,
+/obj/item/weapon/reagent_containers/spray/sterilizine,
+/obj/item/weapon/defibrillator/loaded,
+/obj/item/weapon/storage/firstaid/combat,
+/obj/item/clothing/gloves/latex,
+/obj/item/clothing/mask/surgical,
+/obj/item/bodybag/cryobag,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/item/weapon/storage/firstaid/adv,
+/obj/effect/gas_setup,
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bc" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 9
+	},
+/obj/structure/iv_drip,
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/obj/effect/gas_setup,
+/obj/machinery/door/window{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bd" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"be" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bf" = (
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bg" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/red,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_airlock"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 6
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"bh" = (
+/obj/structure/handrai,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "merc_shuttle_pump"
+	},
+/obj/machinery/airlock_sensor{
+	frequency = 1380;
+	id_tag = "merc_shuttle_sensor";
+	pixel_x = 0;
+	pixel_y = 25
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bi" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4;
+	icon_state = "map"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"bj" = (
+/obj/machinery/bodyscanner{
+	icon_state = "body_scanner_0";
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bk" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	frequency = 1331
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bl" = (
+/obj/machinery/door/window{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bm" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bn" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bo" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bp" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1380;
+	id_tag = "merc_shuttle_inner";
+	name = "Ship External Access"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bq" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 10;
+	icon_state = "intact"
+	},
+/turf/simulated/wall/r_titanium,
+/area/map_template/merc_shuttle)
+"bs" = (
+/obj/machinery/shield_diffuser,
+/obj/machinery/door/airlock/external{
+	density = 1;
+	dir = 2;
+	frequency = 1380;
+	id_tag = "merc_shuttle_outer";
+	name = "Ship External Access"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden{
+	dir = 4;
+	icon_state = "map"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bt" = (
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/structure/table/standard,
+/obj/item/stack/nanopaste,
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1";
+	pixel_y = 0
+	},
+/obj/item/weapon/storage/box/freezer,
+/obj/machinery/body_scanconsole,
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bu" = (
+/obj/machinery/optable,
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bv" = (
+/obj/machinery/sleeper{
+	dir = 1
+	},
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/merc_shuttle)
+"bw" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bx" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -24;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/effect/shuttle_landmark/merc/start,
+/obj/effect/overmap/visitable/ship/landable/merc,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"by" = (
+/obj/structure/table/steel,
+/obj/machinery/dummy_airlock_controller{
+	dir = 1;
+	id_tag = "merc_shuttle";
+	pixel_x = 0
+	},
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/machinery/button/blast_door{
+	id_tag = "merc_airlock";
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
+/obj/item/device/binoculars,
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"bz" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_airlock"
+	},
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"bA" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "merc_shuttle_pump_out_internal"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bB" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "merc_shuttle_pump"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bC" = (
+/obj/machinery/shield_diffuser,
+/obj/machinery/door/airlock/external{
+	density = 1;
+	dir = 4;
+	frequency = 1380;
+	id_tag = "merc_shuttle_outer";
+	name = "Ship External Access"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bD" = (
+/obj/machinery/door/airlock,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bE" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/ocp_wall,
+/area/map_template/merc_shuttle)
+"bF" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle/rear)
+"bG" = (
+/obj/machinery/atmospherics/unary/tank/air{
+	start_pressure = 8000
+	},
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"bH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"bI" = (
+/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 8;
+	icon_state = "pdoor0";
+	id_tag = "merc_fuel"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"bJ" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	cycle_to_external_air = 1;
+	dir = 1;
+	frequency = 1380;
+	id_tag = "merc_shuttle";
+	pixel_x = 0;
+	pixel_y = -25;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "merc_shuttle_pump_out_internal"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"bK" = (
+/obj/machinery/atmospherics/unary/vent_pump/tank{
+	icon_state = "map_vent_in";
+	id_tag = "fuel_out";
+	internal_pressure_bound = 15000;
+	internal_pressure_bound_default = 15000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 1
+	},
+/obj/machinery/air_sensor{
+	id_tag = "fuel_sensor"
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/carbon_dioxide,
+/area/map_template/merc_shuttle/rear)
+"bL" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "merc_fuel_vent"
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/merc_shuttle/rear)
+"bN" = (
+/obj/machinery/atmospherics/unary/outlet_injector{
+	frequency = 1441;
+	id = "fuel_in";
+	id_tag = null;
+	use_power = 0
+	},
+/obj/machinery/sparker{
+	id_tag = "merc_igniter";
+	pixel_y = 26
+	},
+/turf/simulated/floor/reinforced/carbon_dioxide,
+/area/map_template/merc_shuttle/rear)
+"bO" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible/cyan{
+	icon_state = "map";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/pipedispenser,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"bP" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/cyan{
+	icon_state = "intact";
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 8
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"bQ" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 6
+	},
+/obj/effect/paint/black,
+/turf/simulated/wall/ocp_wall,
+/area/map_template/merc_shuttle/rear)
+"bR" = (
+/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "merc_fuel"
+	},
+/obj/effect/paint/black,
+/obj/machinery/meter,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"bS" = (
+/obj/effect/wallframe_spawn/reinforced_phoron,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	icon_state = "pdoor0";
+	id_tag = "merc_fuel"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"bT" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/ocp_wall,
+/area/map_template/merc_shuttle/rear)
+"bU" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
+	dir = 2;
+	icon_state = "map_vent_in";
+	initialize_directions = 2;
+	internal_pressure_bound = 0;
+	internal_pressure_bound_default = 0;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 1;
+	use_power = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"bV" = (
+/obj/effect/paint/red,
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle/rear)
+"bW" = (
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/portable_atmospherics/canister/air,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"bX" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/binary/passive_gate{
+	unlocked = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"bY" = (
+/obj/machinery/atmospherics/portables_connector{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "merc_fuel_vent";
+	name = "EMERGENCY VENT";
+	pixel_x = 8;
+	pixel_y = 32;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/button/blast_door{
+	id_tag = "merc_fuel";
+	name = "Fuel Storage Shutters";
+	pixel_x = -6;
+	pixel_y = 36;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/button/ignition{
+	id_tag = "merc_igniter";
+	pixel_x = -6;
+	pixel_y = 26
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"bZ" = (
+/obj/machinery/atmospherics/valve/open,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"ca" = (
+/obj/machinery/fabricator/hacked,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/glass/ten,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cb" = (
+/obj/effect/paint/black,
+/obj/machinery/atmospherics/binary/pump/high_power{
+	dir = 8;
+	name = "External to Fuel Storage"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/map_template/merc_shuttle/rear)
+"cc" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cd" = (
+/obj/machinery/computer/air_control{
+	input_tag = "fuel_in";
+	name = "Fuel Supply Control";
+	output_tag = "fuel_out";
+	sensor_name = "Fuel Supply";
+	sensor_tag = "fuel_sensor"
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 5
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_shuttle/rear)
+"ce" = (
+/obj/structure/catwalk,
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 4
+	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cf" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/red{
+	icon_state = "intact";
+	dir = 5
+	},
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle/rear)
+"cg" = (
+/obj/effect/paint/red,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	dir = 4
+	},
+/turf/simulated/wall/titanium,
+/area/map_template/merc_shuttle/rear)
+"ch" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	frequency = 1331
+	},
+/obj/machinery/power/apc/hyper{
+	dir = 8;
+	pixel_x = -21;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/alarm{
+	pixel_y = 24;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"ci" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cj" = (
+/obj/machinery/atmospherics/valve/shutoff,
+/obj/effect/floor_decal/industrial/shutoff,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"ck" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cl" = (
+/obj/machinery/atmospherics/pipe/manifold4w/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/closet/crate{
+	dir = 1
+	},
+/obj/item/weapon/tank/hydrogen,
+/obj/item/weapon/tank/hydrogen,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/item/stack/material/plasteel/ten,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/rods/fifty,
+/obj/item/stack/material/glass/reinforced/fifty,
+/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/weapon/inflatable_dispenser,
+/obj/item/device/spaceflare,
+/obj/item/device/spaceflare,
+/obj/item/device/spaceflare,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cm" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cn" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/handrai,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"co" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cp" = (
+/obj/structure/catwalk,
+/obj/machinery/power/terminal,
+/obj/structure/cable{
+	icon_state = "0-2";
+	d2 = 2
+	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cq" = (
+/obj/machinery/computer/ship/engines,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cr" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cs" = (
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/structure/cable,
+/obj/machinery/atmospherics/unary/engine/terminal{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"ct" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cv" = (
+/obj/machinery/atmospherics/valve/shutoff{
+	level = 2
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 8
+	},
+/obj/effect/floor_decal/industrial/shutoff,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cw" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/red,
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cx" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cy" = (
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/power/smes/buildable/preset{
+	_fully_charged = 1;
+	_input_maxed = 1;
+	_input_on = 1;
+	_output_maxed = 1;
+	_output_on = 1;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/super_io = 1, /obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cA" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cB" = (
+/obj/machinery/atmospherics/valve/shutoff{
+	level = 2
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/shutoff,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cC" = (
+/obj/effect/floor_decal/industrial/outline/orange,
+/obj/machinery/atmospherics/portables_connector,
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide{
+	start_pressure = 15000
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cD" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_x = 0
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cE" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/ship_munition/disperser_charge/explosive,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9;
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cF" = (
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals_central6,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cG" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/obj/effect/floor_decal/industrial/outline/orange,
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide{
+	start_pressure = 15000
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cH" = (
+/obj/structure/fuel_port{
+	pixel_x = -32
+	},
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cI" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	dir = 4;
+	target_pressure = 15000
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cJ" = (
+/obj/structure/fuel_port{
+	pixel_x = 32
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/obj/machinery/meter,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cK" = (
+/obj/machinery/atmospherics/binary/pump/high_power/on{
+	target_pressure = 15000
+	},
+/obj/machinery/mech_recharger,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cL" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cM" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+	controlled = 0;
+	dir = 8;
+	icon_state = "map_vent_in";
+	initialize_directions = 8;
+	internal_pressure_bound = 8000;
+	internal_pressure_bound_default = 8000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cN" = (
+/obj/machinery/teleport/hub,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 6
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cO" = (
+/obj/machinery/teleport/station,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cP" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/constructable_frame/computerframe/deconstruct{
+	icon_state = "unwired";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cQ" = (
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 8
+	},
+/obj/machinery/recharge_station,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cR" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/cell_charger,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/item/weapon/storage/toolbox/syndicate,
+/obj/item/stack/material/phoron/fifty,
+/obj/item/weapon/storage/backpack/dufflebag/syndie/ammo,
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cS" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/atmospherics/pipe/manifold/visible/fuel{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cT" = (
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle/rear)
+"cU" = (
+/obj/vehicle/bike/electric,
+/turf/simulated/floor/airless,
+/area/space)
+"cW" = (
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	icon_state = "intact-supply";
+	dir = 5
+	},
+/obj/effect/landmark{
+	name = "Nuclear-Bomb"
+	},
+/obj/structure/railing/mapped{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"cX" = (
+/obj/structure/handrai{
+	icon_state = "handrail";
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 8;
+	id_tag = "merc_shuttle_pump"
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"cY" = (
+/turf/simulated/wall/titanium,
+/area/space)
+"dh" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/turf/space,
+/area/space)
+"di" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/space,
+/area/space)
+"dj" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"dk" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"eb" = (
+/obj/effect/landmark{
+	name = "Syndicate-Spawn"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 1
+	},
+/obj/structure/bed/chair/office,
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"ec" = (
+/obj/structure/bed/chair/office{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"ex" = (
+/obj/effect/floor_decal/industrial/outline,
+/obj/machinery/suit_cycler/syndicate{
+	locked = 0
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle/rear)
+"eA" = (
+/obj/structure/railing,
+/turf/simulated/floor/airless,
+/area/space)
+"eP" = (
+/obj/structure/closet/crate/uranium,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"fq" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/airless,
+/area/space)
+"ft" = (
+/obj/structure/railing{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"fx" = (
+/obj/machinery/computer/ship/engines{
+	dir = 8;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
+/turf/simulated/floor/tiled/airless,
+/area/space)
+"fC" = (
+/obj/structure/ore_box,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"fV" = (
+/obj/machinery/mining/drill,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"gc" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "merc_shuttle_pump_out_external"
+	},
+/obj/machinery/airlock_sensor/airlock_exterior{
+	frequency = 1380;
+	id_tag = "merc_shuttle_exterior_sensor";
+	pixel_x = 0;
+	pixel_y = -28
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/pointdefense{
+	initial_id_tag = "merc_pd"
+	},
+/obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "merc_shuttle";
+	pixel_x = 37;
+	pixel_y = -32;
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"gk" = (
+/obj/random/medical,
+/turf/space,
+/area/space)
+"gy" = (
+/obj/machinery/vitals_monitor,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"gI" = (
+/obj/structure/railing{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"gW" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"gZ" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"ha" = (
+/obj/structure/railing{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/space,
+/area/space)
+"hk" = (
+/obj/structure/table/rack,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/oxygen,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/item/weapon/tank/jetpack/carbondioxide,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"hG" = (
+/obj/machinery/computer/ship/sensors{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/airless,
+/area/space)
+"hV" = (
+/obj/structure/railing{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"hX" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/projectile/revolver/medium,
+/obj/item/weapon/gun/projectile/revolver/medium,
+/obj/item/ammo_magazine/speedloader,
+/obj/item/ammo_magazine/speedloader,
+/obj/item/ammo_magazine/speedloader,
+/obj/item/ammo_magazine/speedloader,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"iv" = (
+/obj/structure/closet/crate/secure/phoron,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"iB" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/projectile/pistol/throwback,
+/obj/item/weapon/gun/projectile/pistol/throwback,
+/obj/item/ammo_magazine/pistol/throwback,
+/obj/item/ammo_magazine/pistol/throwback,
+/obj/item/ammo_magazine/pistol/throwback,
+/obj/item/ammo_magazine/pistol/throwback,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"iN" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 2
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"js" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/brown_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/white_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/item/clothing/accessory/storage/black_vest,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"jE" = (
+/obj/structure/bed/chair/shuttle/blue{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/obj/machinery/recharger/wallcharger{
+	dir = 8;
+	icon_state = "wrecharger0";
+	pixel_x = 23;
+	pixel_y = -3
+	},
+/turf/simulated/floor/shuttle/darkred,
+/area/map_template/merc_shuttle)
+"jF" = (
+/obj/effect/shuttle_landmark/merc/nav1,
+/turf/space,
+/area/space)
+"jJ" = (
+/obj/structure/railing,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"jP" = (
+/obj/machinery/acting/changer,
+/obj/machinery/light/spot,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"kc" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"kf" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/energy/gun,
+/obj/item/weapon/gun/energy/gun,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"km" = (
+/obj/structure/table/rack,
+/obj/item/weapon/pickaxe/diamonddrill,
+/obj/item/weapon/pickaxe/diamonddrill,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"ks" = (
+/obj/effect/landmark{
+	name = "Syndicate-Spawn"
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 8
+	},
+/obj/structure/bed/chair/office{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"kI" = (
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"kQ" = (
+/obj/structure/closet/crate/med_crate/toxin,
+/obj/item/weapon/storage/box/bodybags,
+/obj/item/weapon/storage/box/gloves,
+/obj/item/weapon/storage/box/masks,
+/obj/item/weapon/storage/belt/medical/emt,
+/obj/item/weapon/storage/belt/medical/emt,
+/obj/item/weapon/storage/belt/medical,
+/obj/item/weapon/storage/belt/medical,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"kS" = (
+/obj/structure/railing,
+/turf/space,
+/area/space)
+"lh" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/energy/gun/small,
+/obj/item/weapon/gun/energy/gun/small,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"lq" = (
+/obj/structure/railing{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"ls" = (
+/obj/machinery/mining/drill,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"lQ" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/drop_pouches/white,
+/obj/item/clothing/accessory/storage/drop_pouches/white,
+/obj/item/clothing/accessory/storage/drop_pouches/black,
+/obj/item/clothing/accessory/storage/drop_pouches/black,
+/obj/item/clothing/accessory/storage/drop_pouches/brown,
+/obj/item/clothing/accessory/storage/drop_pouches/brown,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"mi" = (
+/obj/structure/catwalk,
+/obj/machinery/porta_turret{
+	req_access = list("ACCESS_SYNDICATE")
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"mm" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/weapon/wrench,
+/obj/item/weapon/cell/hyper,
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"mR" = (
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"nd" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"nk" = (
+/obj/random/medical,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"nE" = (
+/obj/machinery/pipedispenser/disposal,
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"nN" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"nQ" = (
+/obj/machinery/pipedispenser,
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"nR" = (
+/obj/structure/dispenser/oxygen,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"oW" = (
+/obj/structure/inflatable/door,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"oY" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_spawn)
+"ph" = (
+/obj/structure/inflatable/door,
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"pj" = (
+/obj/machinery/vending/cola{
+	dir = 1;
+	name = "hacked Robust Softdrinks";
+	prices = list()
+	},
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"qa" = (
+/obj/effect/landmark{
+	name = "Syndicate-Uplink"
+	},
+/obj/effect/overmap/visitable/merc_base{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"qq" = (
+/obj/machinery/mining/brace,
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"qA" = (
+/obj/machinery/constructable_frame/computerframe/deconstruct{
+	icon_state = "unwired";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/airless,
+/area/space)
+"qX" = (
+/obj/structure/undies_wardrobe,
+/obj/machinery/light/spot,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"rf" = (
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"rB" = (
+/obj/structure/inflatable/wall,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"rR" = (
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"sf" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"sl" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"sC" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	dir = 4;
+	id_tag = "merc_shuttle_pump_out_internal"
+	},
+/obj/structure/handrai,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_shuttle)
+"tW" = (
+/obj/structure/closet/wardrobe/suit,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"uv" = (
+/obj/machinery/computer/ship/helm{
+	dir = 1;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/power/battery/buildable/responsive = 1, /obj/item/weapon/cell/high = 1)
+	},
+/turf/simulated/floor/tiled/airless,
+/area/space)
+"uG" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"uV" = (
+/obj/structure/table/standard,
+/obj/effect/landmark{
+	name = "Nuclear-Code"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"va" = (
+/obj/structure/table/standard,
+/obj/item/modular_computer/pda/syndicate,
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"vg" = (
+/obj/structure/table/standard,
+/obj/item/weapon/storage/backpack/dufflebag/syndie/ammo,
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"vM" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rcd,
+/obj/item/weapon/rcd,
+/obj/item/weapon/rcd_ammo/large,
+/obj/item/weapon/rcd_ammo/large,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"vO" = (
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/smes/buildable/preset{
+	_fully_charged = 1;
+	_input_on = 1;
+	_output_maxed = 1;
+	_output_on = 1;
+	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/super_io = 1, /obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_spawn)
+"vU" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/airless,
+/area/map_template/merc_spawn)
+"wG" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 1
+	},
+/obj/structure/railing{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"xb" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "stripecorner";
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"xi" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rig/merc/empty,
+/obj/item/weapon/rig/merc/empty,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"xw" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/airless,
+/area/map_template/merc_spawn)
+"yz" = (
+/obj/effect/shuttle_landmark/merc/nav3,
+/turf/space,
+/area/space)
+"zg" = (
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"zo" = (
+/obj/item/weapon/storage/box/smokes,
+/obj/item/weapon/storage/box/teargas,
+/obj/item/weapon/storage/box/flashbangs,
+/obj/structure/table/rack,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/grenade/anti_photon,
+/obj/item/weapon/storage/box/frags,
+/turf/unsimulated/floor{
+	icon_state = "vault";
+	dir = 8
+	},
+/area/map_template/merc_spawn)
+"zC" = (
+/obj/machinery/vending/cigarette{
+	dir = 8;
+	name = "hacked cigarette machine";
+	prices = list();
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Ak" = (
+/turf/simulated/floor/tiled/airless,
+/area/space)
+"CL" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "warningcorner";
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"Fm" = (
+/obj/structure/table/rack,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
+/obj/item/clothing/gloves/insulated,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Fy" = (
+/obj/structure/closet/crate/secure/phoron,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/item/stack/material/phoron/ten,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"FD" = (
+/obj/structure/railing,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"FG" = (
+/obj/machinery/vending/coffee{
+	dir = 8;
+	prices = list()
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"FH" = (
+/obj/structure/railing{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"FO" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"Ge" = (
+/obj/structure/closet/crate/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/random/medical/lite,
+/obj/item/bodybag/rescue,
+/obj/item/bodybag/rescue,
+/obj/item/weapon/defibrillator/compact,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Hg" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/energy/plasmacutter,
+/obj/item/weapon/gun/energy/plasmacutter,
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Hz" = (
+/turf/simulated/floor/tiled/airless,
+/area/map_template/merc_spawn)
+"HU" = (
+/obj/structure/closet/crate/uranium,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/obj/item/stack/material/uranium/ten,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"HV" = (
+/obj/machinery/power/apc/high{
+	pixel_y = -26
+	},
+/obj/structure/cable,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/merc_spawn)
+"HZ" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/regular/open{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "merc_external"
+	},
+/obj/effect/paint/red,
+/obj/structure/cable,
+/turf/simulated/floor/plating,
+/area/map_template/merc_shuttle)
+"Im" = (
+/obj/structure/window/reinforced/crescent{
+	dir = 4
+	},
+/obj/random/medical/lite,
+/turf/space,
+/area/space)
+"Ip" = (
+/obj/structure/inflatable/wall,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"IB" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/energy/ionrifle/small,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Jc" = (
+/obj/effect/shuttle_landmark/merc/nav4,
+/turf/space,
+/area/space)
+"Kk" = (
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Kl" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"Ko" = (
+/obj/machinery/mech_recharger,
+/obj/structure/mech_wreckage,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"Kz" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rpd,
+/obj/item/weapon/rpd,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"KP" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"LD" = (
+/obj/structure/table/rack,
+/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/storage/bandolier,
+/obj/item/clothing/accessory/storage/pouches/large,
+/obj/item/clothing/accessory/storage/pouches/large,
+/obj/item/clothing/accessory/storage/pouches,
+/obj/item/clothing/accessory/storage/pouches,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/obj/item/clothing/accessory/storage/holster/thigh,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"LI" = (
+/obj/machinery/mining/brace,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"LY" = (
+/obj/structure/closet/crate,
+/obj/item/stack/material/ocp/ten,
+/obj/item/stack/material/ocp/ten,
+/obj/item/stack/material/ocp/ten,
+/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/item/stack/material/glass/phoronrglass/ten,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Mj" = (
+/obj/structure/inflatable/wall,
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"MD" = (
+/obj/structure/closet/wardrobe/red,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"MO" = (
+/obj/structure/table/rack,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/suit/armor/pcarrier/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/obj/item/clothing/head/helmet/merc,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"MZ" = (
+/obj/effect/spawner/newbomb/timer/syndicate,
+/obj/structure/table/rack,
+/obj/effect/spawner/newbomb/timer/syndicate,
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/item/device/assembly/signaler{
+	pixel_y = 2
+	},
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Nd" = (
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Nm" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/mech_component/manipulators/powerloader,
+/obj/item/mech_equipment/drill,
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "stripe";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"NX" = (
+/obj/item/weapon/reagent_containers/ivbag/nanoblood,
+/turf/space,
+/area/space)
+"NZ" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/airless,
+/area/space)
+"Ok" = (
+/obj/machinery/mining/brace,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Or" = (
+/obj/machinery/vending/medical/torch,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"OB" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/obj/random/medical/lite,
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"Pb" = (
+/turf/simulated/floor/airless,
+/area/space)
+"PE" = (
+/obj/structure/table/rack,
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/night,
+/obj/item/weapon/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/handcuffs{
+	pixel_x = 4;
+	pixel_y = 2
+	},
+/obj/item/clothing/glasses/night,
+/obj/item/clothing/glasses/night,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"PH" = (
+/obj/machinery/floodlight,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"PK" = (
+/obj/machinery/power/port_gen/pacman/super,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"PZ" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled/airless,
+/area/space)
+"Qa" = (
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Qb" = (
+/obj/machinery/vending/engineering{
+	req_access = list()
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"QF" = (
+/obj/structure/table/rack,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
+/obj/item/device/suit_cooling_unit,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"QJ" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/weapon/storage/belt/utility/full,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"QW" = (
+/obj/item/weapon/storage/backpack/dufflebag/syndie/ammo,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"QX" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rig/merc/heavy/empty,
+/obj/item/weapon/rig/merc/heavy/empty,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Rh" = (
+/obj/structure/closet/wardrobe/medic_white,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"RT" = (
+/obj/effect/landmark{
+	name = "Syndicate-Spawn"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 2;
+	icon_state = "warning"
+	},
+/obj/structure/bed/chair/office{
+	dir = 1
+	},
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"Sd" = (
+/obj/effect/floor_decal/industrial/warning{
+	icon_state = "warning";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Tf" = (
+/obj/structure/table/rack,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/item/weapon/shield/energy,
+/obj/machinery/light/spot{
+	icon_state = "tube_map";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Tu" = (
+/obj/machinery/power/port_gen/pacman/super,
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Ua" = (
+/obj/machinery/mech_recharger,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/mob/living/exosuit/premade/heavy/merc,
+/turf/simulated/floor/tiled/techfloor,
+/area/map_template/merc_spawn)
+"UP" = (
+/obj/machinery/vending/tool,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"UT" = (
+/obj/effect/landmark{
+	name = "Syndicate-Spawn"
+	},
+/obj/effect/floor_decal/industrial/warning/corner{
+	icon_state = "stripecorner";
+	dir = 1
+	},
+/obj/structure/bed/chair/office,
+/turf/simulated/floor/tiled,
+/area/map_template/merc_spawn)
+"Vw" = (
+/obj/structure/inflatable/wall,
+/turf/space,
+/area/space)
+"Xn" = (
+/obj/effect/shuttle_landmark/merc/nav2,
+/turf/space,
+/area/space)
+"Xy" = (
+/obj/machinery/vending/fitness{
+	dir = 1;
+	prices = list()
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Xz" = (
+/obj/structure/closet/wardrobe/mixed,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 1
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"XD" = (
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"XS" = (
+/turf/simulated/wall/titanium,
+/area/map_template/merc_spawn)
+"Ya" = (
+/obj/structure/table/rack,
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 1
+	},
+/obj/item/weapon/rig/medical/equipped,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"YT" = (
+/obj/structure/closet/crate,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/rods/ten,
+/obj/item/stack/material/rods/ten,
+/obj/item/stack/material/rods/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/glass/ten,
+/obj/item/stack/material/glass/ten,
+/obj/structure/railing/mapped/no_density{
+	icon_state = "railing0-1";
+	dir = 8
+	},
+/obj/structure/railing/mapped/no_density,
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+"Zl" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/projectile/pistol/military,
+/obj/item/weapon/gun/projectile/pistol/military/alt,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/item/ammo_magazine/pistol/double,
+/obj/effect/landmark/delete_on_shuttle{
+	shuttle_name = "Desperado"
+	},
+/turf/simulated/floor/plating,
+/area/map_template/merc_spawn)
+
+(1,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(2,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(3,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(4,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(5,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(6,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(7,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(8,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(9,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(10,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(11,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(12,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(13,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(14,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(15,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(16,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(17,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(18,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(19,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(20,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cY
+cY
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(21,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+Pb
+Pb
+Pb
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(22,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ak
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(23,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(24,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cY
+aa
+cY
+cY
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(25,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+Pb
+Pb
+Pb
+Pb
+Pb
+aa
+aa
+aa
+aa
+Pb
+Pb
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(26,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ak
+Ak
+Ak
+Ak
+Ak
+Ak
+aa
+Ak
+Ak
+Ak
+hG
+qA
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(27,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ak
+Ak
+Ak
+Ak
+Ak
+Ak
+Ak
+Ak
+Ak
+Ak
+qA
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(28,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ak
+aa
+Ak
+Ak
+Ak
+Ak
+Ak
+Ak
+uv
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(29,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ak
+Ak
+Ak
+Ak
+Ak
+qA
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(30,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+Pb
+aa
+aa
+aa
+aa
+Ak
+Ak
+Ak
+Ak
+fx
+qA
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(31,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Jc
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+aa
+aa
+aa
+Pb
+aa
+aa
+Pb
+Pb
+Pb
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(32,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cY
+aa
+aa
+cY
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(33,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(34,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(35,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(36,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(37,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aK
+bV
+bV
+bF
+bF
+bF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(38,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aK
+ab
+ba
+ao
+aR
+aR
+aa
+aa
+bU
+cf
+bV
+ex
+cG
+cN
+cT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(39,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+am
+at
+aA
+am
+aL
+aR
+aR
+bj
+bt
+aR
+aa
+ce
+bV
+cg
+cq
+cA
+cI
+cO
+bF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(40,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+an
+au
+aB
+aF
+aL
+aS
+bb
+bk
+bu
+aR
+bF
+cD
+bF
+ch
+cr
+cv
+cJ
+cP
+cT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+jF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(41,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ab
+ac
+ad
+ah
+am
+av
+av
+aG
+aL
+aT
+bc
+bl
+bv
+aR
+bG
+bO
+bW
+ci
+cW
+bF
+bF
+bF
+bF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(42,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+ai
+ao
+aw
+aC
+aH
+aM
+aU
+bd
+bm
+bw
+bD
+bH
+bP
+bX
+cj
+cE
+cs
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(43,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+af
+aj
+ap
+ax
+aD
+aI
+aN
+aV
+be
+bn
+bx
+bE
+bI
+bQ
+bY
+ck
+ca
+bF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(44,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ag
+ak
+aq
+ay
+aE
+aJ
+aO
+aW
+bf
+bo
+by
+bE
+bK
+bR
+bZ
+ct
+cl
+cs
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(45,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+ae
+ar
+az
+jE
+jE
+aP
+ae
+bg
+bp
+bz
+bE
+bN
+bS
+cd
+cm
+cw
+bF
+bF
+bF
+bF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(46,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ae
+as
+HZ
+ae
+ae
+aQ
+ae
+bh
+bB
+cX
+bE
+bL
+bT
+cb
+cn
+cx
+cB
+cH
+cQ
+cT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(47,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+mi
+gc
+aZ
+sC
+bA
+bJ
+ae
+OB
+cp
+cc
+co
+cy
+cF
+cL
+cR
+bF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(48,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+bq
+bi
+bs
+bC
+ae
+gI
+Qa
+cM
+bV
+bV
+cC
+cK
+cS
+cT
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(49,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+QF
+ft
+gW
+qa
+nk
+jJ
+gy
+mi
+bV
+bV
+bF
+bF
+bF
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(50,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+XS
+XS
+XS
+aa
+aa
+aa
+XS
+hk
+Qa
+gW
+rR
+Kl
+Nd
+jP
+XS
+aa
+gk
+aa
+Vw
+Vw
+Vw
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(51,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+xi
+QX
+XS
+aa
+aa
+aa
+XS
+FD
+Qa
+eb
+uV
+RT
+Ge
+Ya
+XS
+aa
+aa
+NX
+XS
+kf
+Vw
+Vw
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(52,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+MO
+Qa
+XS
+di
+di
+di
+XS
+nR
+rf
+eb
+va
+RT
+kQ
+Or
+XS
+Im
+di
+di
+XS
+Qa
+lh
+Vw
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(53,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+Tf
+Qa
+sf
+dj
+dj
+dj
+rR
+FO
+FO
+UT
+vg
+ks
+FO
+FO
+rR
+dj
+dj
+dj
+Sd
+Qa
+QW
+Vw
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(54,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+PE
+Qa
+sf
+dk
+dk
+dk
+rR
+gZ
+gZ
+kc
+ec
+iN
+gZ
+gZ
+rR
+dk
+dk
+dk
+Sd
+Qa
+IB
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(55,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+zo
+Qa
+XS
+dh
+dh
+dh
+XS
+Qb
+UP
+gW
+rR
+Kl
+Xz
+Rh
+XS
+dh
+dh
+dh
+XS
+Kk
+Zl
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(56,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+MZ
+MZ
+XS
+aa
+aa
+aa
+XS
+XD
+nQ
+gW
+rR
+Kl
+MD
+tW
+XS
+aa
+aa
+aa
+XS
+hX
+iB
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(57,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+XS
+XS
+XS
+aa
+aa
+aa
+XS
+Fm
+nE
+gW
+rR
+Kl
+Nd
+qX
+XS
+aa
+aa
+aa
+XS
+XS
+XS
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(58,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+QJ
+kI
+gW
+rR
+Kl
+Nd
+LD
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(59,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+vM
+Kz
+gW
+rR
+Kl
+js
+lQ
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(60,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+LY
+YT
+gW
+rR
+Kl
+fV
+ls
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(61,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+HU
+eP
+gW
+rR
+Kl
+Ok
+LI
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(62,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+Fy
+iv
+gW
+rR
+Kl
+Ok
+qq
+XS
+aa
+aa
+aa
+XS
+XS
+XS
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(63,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cY
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+XS
+PK
+Tu
+gW
+rR
+Kl
+PH
+Hg
+XS
+aa
+aa
+aa
+XS
+Ko
+Ua
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(64,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cU
+Pb
+cY
+aa
+aa
+aa
+aa
+di
+di
+XS
+uG
+nN
+gW
+rR
+Kl
+fC
+km
+XS
+di
+di
+di
+XS
+zg
+zg
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(65,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cU
+Pb
+cY
+aa
+aa
+aa
+aa
+xw
+Hz
+Mj
+FO
+FO
+xb
+rR
+CL
+FO
+FO
+rR
+dj
+dj
+dj
+KP
+zg
+mm
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(66,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cU
+Pb
+NZ
+dh
+aa
+aa
+Hz
+vU
+vU
+Mj
+gZ
+gZ
+kc
+rR
+iN
+gZ
+gZ
+rR
+dk
+dk
+dk
+nd
+sl
+Nm
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(67,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cU
+Pb
+aa
+aa
+di
+aa
+dh
+aa
+dh
+XS
+Ip
+mR
+gW
+rR
+Kl
+zC
+FG
+XS
+dh
+dh
+dh
+XS
+oY
+HV
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(68,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cU
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ip
+Ip
+oW
+ph
+Kl
+Nd
+Xy
+XS
+aa
+aa
+aa
+XS
+vO
+al
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(69,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cU
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Ip
+oW
+ph
+rB
+Nd
+pj
+XS
+aa
+aa
+aa
+XS
+XS
+XS
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(70,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+aa
+aa
+Hz
+Mj
+Ip
+Ip
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(71,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+aa
+aa
+aa
+aa
+Pb
+Pb
+aa
+XS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(72,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+yz
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+Pb
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(73,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+Pb
+Pb
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(74,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(75,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+kS
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(76,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+kS
+aa
+aa
+aa
+aa
+wG
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(77,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Pb
+eA
+aa
+Ak
+Ak
+aa
+aa
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(78,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+eA
+fq
+aa
+Ak
+aa
+aa
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(79,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+Ak
+aa
+PZ
+eA
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(80,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+fq
+Ak
+PZ
+Pb
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(81,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+eA
+Pb
+fq
+aa
+Ak
+hV
+Pb
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(82,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+fq
+Ak
+PZ
+Pb
+Pb
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(83,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+fq
+Ak
+Ak
+Pb
+FH
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(84,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Ak
+PZ
+lq
+Pb
+cY
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(85,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+fq
+aa
+aa
+aa
+aa
+Pb
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(86,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+FH
+fq
+Ak
+PZ
+Pb
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+Xn
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(87,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+FH
+Pb
+fq
+Ak
+PZ
+lq
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(88,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+fq
+Ak
+PZ
+lq
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(89,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+eA
+fq
+Ak
+Ak
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(90,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+fq
+Ak
+Ak
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(91,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+cY
+Pb
+Pb
+fq
+Ak
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(92,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(93,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(94,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+ha
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(95,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(96,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(97,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(98,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(99,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}
+(100,1,1) = {"
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+"}

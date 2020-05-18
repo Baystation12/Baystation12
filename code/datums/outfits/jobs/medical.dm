@@ -84,7 +84,7 @@
 /decl/hierarchy/outfit/job/medical/geneticist/New()
 	..()
 	backpack_overrides[/decl/backpack_outfit/backpack] = /obj/item/weapon/storage/backpack/genetics
-	backpack_overrides[/decl/backpack_outfit/satchel]  = /obj/item/weapon/storage/backpack/satchel_gen
+	backpack_overrides[/decl/backpack_outfit/satchel]  = /obj/item/weapon/storage/backpack/satchel/gen
 
 /decl/hierarchy/outfit/job/medical/psychiatrist
 	name = OUTFIT_JOB_NAME("Psychiatrist")
@@ -92,10 +92,6 @@
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/laceup
 	id_type = /obj/item/weapon/card/id/medical/psychiatrist
-
-/decl/hierarchy/outfit/job/medical/psychiatrist/psychologist
-	name = OUTFIT_JOB_NAME("Psychologist")
-	uniform = /obj/item/clothing/under/rank/psych/turtleneck
 
 /decl/hierarchy/outfit/job/medical/paramedic
 	name = OUTFIT_JOB_NAME("Paramedic")

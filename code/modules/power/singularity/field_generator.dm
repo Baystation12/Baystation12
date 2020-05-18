@@ -20,7 +20,7 @@ field_generator power level display
 	icon_state = "Field_Gen"
 	anchored = 0
 	density = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	var/const/num_power_levels = 6	// Total number of power level icon has
 	var/Varedit_start = 0
 	var/Varpower = 0
@@ -37,7 +37,7 @@ field_generator power level display
 	var/field_power_draw = 2000	//power needed per field object
 
 
-/obj/machinery/field_generator/update_icon()
+/obj/machinery/field_generator/on_update_icon()
 	overlays.Cut()
 	if(!active)
 		if(warming_up)
@@ -77,12 +77,12 @@ field_generator power level display
 		update_icon()
 
 
-/obj/machinery/field_generator/attack_hand(mob/user as mob)
+/obj/machinery/field_generator/physical_attack_hand(mob/user)
 	if(state == 2)
 		if(get_dist(src, user) <= 1)//Need to actually touch the thing to turn it on
 			if(src.active >= 1)
 				to_chat(user, "You are unable to turn off the [src.name] once it is online.")
-				return 1
+				return TRUE
 			else
 				user.visible_message("[user.name] turns on the [src.name]", \
 					"You turn on the [src.name].", \
@@ -91,10 +91,10 @@ field_generator power level display
 				investigate_log("<font color='green'>activated</font> by [user.key].","singulo")
 
 				src.add_fingerprint(user)
+				return TRUE
 	else
 		to_chat(user, "The [src] needs to be firmly secured to the floor first.")
-		return
-
+		return TRUE
 
 /obj/machinery/field_generator/attackby(obj/item/W, mob/user)
 	if(active)
@@ -259,7 +259,7 @@ field_generator power level display
 		return
 	for(var/dist = 0, dist <= 9, dist += 1) // checks out to 8 tiles away for another generator
 		T = get_step(T, NSEW)
-		if(T.density)//We cant shoot a field though this
+		if(T.density)//We can't shoot a field though this
 			return 0
 		for(var/atom/A in T.contents)
 			if(ismob(A))
@@ -276,7 +276,7 @@ field_generator power level display
 			break
 	if(isnull(G))
 		return
-	T = src.loc
+	T = get_turf(src)
 	for(var/dist = 0, dist < steps, dist += 1) // creates each field tile
 		var/field_dir = get_dir(T,get_step(G.loc, NSEW))
 		T = get_step(T, NSEW)
@@ -285,7 +285,7 @@ field_generator power level display
 			CF.set_master(src,G)
 			fields += CF
 			G.fields += CF
-			CF.loc = T
+			CF.forceMove(T)
 			CF.set_dir(field_dir)
 	var/listcheck = 0
 	for(var/obj/machinery/field_generator/FG in connected_gens)

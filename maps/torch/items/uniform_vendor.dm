@@ -2,13 +2,10 @@
 	name = "uniform vendor"
 	desc= "A uniform vendor for utility, service, and dress uniforms."
 	icon = 'icons/obj/vending.dmi'
-	icon_state = "robotics"
+	icon_state = "uniform"
 	layer = BELOW_OBJ_LAYER
 	anchored = 1
 	density = 1
-
-	var/icon_deny = "robotics-deny"
-	var/icon_off = "robotics-off"
 
 	// Power
 	use_power = 1
@@ -18,20 +15,28 @@
 	var/obj/item/weapon/card/id/ID
 	var/list/uniforms = list()
 	var/list/selected_outfit = list()
-	var/static/decl/hierarchy/mil_uniform/mil_uniforms
 	var/global/list/issued_items = list()
 
-/obj/machinery/uniform_vendor/attack_hand(mob/user)
-	if(..())
-		return
+/obj/machinery/uniform_vendor/on_update_icon()
+	if(stat & BROKEN)
+		icon_state = "[initial(icon_state)]-broken"
+	else if(!(stat & NOPOWER))
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-off"
 
+/obj/machinery/uniform_vendor/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/uniform_vendor/interact(mob/user)
 	var/dat = list()
 	dat += "User ID: <a href='byond://?src=\ref[src];ID=1'>[ID ? "[ID.registered_name], [ID.military_rank], [ID.military_branch]" : "--------"]</a>"
 	dat += "<hr>"
 	if(!ID)
 		dat += "Insert your ID card to proceed."
 	else
-		var/datum/job/job = job_master.GetJobByType(ID.job_access_type)
+		var/datum/job/job = SSjobs.get_by_path(ID.job_access_type)
 		if(job)
 			uniforms = find_uniforms(ID.military_rank, ID.military_branch, job.department_flag)
 		for(var/T in uniforms)
@@ -64,7 +69,7 @@
 			selected_outfit.Cut()
 		else
 			var/obj/item/weapon/card/id/I = user.get_active_hand()
-			if(I && user.unEquip(I, FALSE, src))
+			if(istype(I) && user.unEquip(I, src))
 				ID = I
 		. = TOPIC_REFRESH
 	if(href_list["get_all"])
@@ -86,6 +91,7 @@
 		selected_outfit -= locate(href_list["rem"])
 		. = TOPIC_REFRESH
 	if(href_list["vend"])
+		flick("uniform-vend", src)
 		spawn_uniform(selected_outfit)
 		selected_outfit.Cut()
 		. = TOPIC_REFRESH
@@ -99,10 +105,9 @@
 			return
 		to_chat(user, "<span class='notice'>You put \the [W] into \the [src]'s recycling slot.</span>")
 		qdel(W)
-	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, FALSE, src))
+	else if(istype(W, /obj/item/weapon/card/id) && !ID && user.unEquip(W, src))
 		to_chat(user, "<span class='notice'>You slide \the [W] into \the [src]!</span>")
 		ID = W
-		user.drop_from_inventory(W, src)
 		attack_hand(user)
 	else
 		..()
@@ -117,14 +122,11 @@
 	be in command, and there are no variants as a result. Also no special CO uniform :(
 */
 /obj/machinery/uniform_vendor/proc/find_uniforms(var/datum/mil_rank/user_rank, var/datum/mil_branch/user_branch, var/department) //returns 1 if found branch and thus has a base uniform, 2, branch and department, 0 if failed.
-	if(!mil_uniforms)
-		mil_uniforms = new()
-
-	var/decl/hierarchy/mil_uniform/user_outfit = mil_uniforms
+	var/decl/hierarchy/mil_uniform/user_outfit = decls_repository.get_decl(/decl/hierarchy/mil_uniform)
+	var/mil_uniforms = user_outfit
 	for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
-		if(istype(user_branch,child.branch))
+		if(is_type_in_list(user_branch, child.branches))
 			user_outfit = child
-
 	if(user_outfit == mil_uniforms) //We haven't found a branch
 		return null //Return no uniforms, which will cause the machine to spit out an error.
 
@@ -133,22 +135,26 @@
 		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
 			if(child.departments & COM)
 				user_outfit = child
+				for(var/decl/hierarchy/mil_uniform/seniorchild in user_outfit.children) //Check for variants of command outfits
+					if(user_rank.sort_order >= seniorchild.min_rank && user_outfit.min_rank < seniorchild.min_rank)
+						user_outfit = seniorchild
 	else
 		var/tmp_department = department
 		tmp_department &= ~COM //Parse departments, with complete disconsideration to the command flag (so we don't flag 2 outfit trees)
 
-		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children)
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children) //find base department outfit
 			if(child.departments & tmp_department)
 				user_outfit = child
 				break
-
-		if(user_rank.sort_order >= 11) //user is an officer
-			if(user_outfit.children[1]) // officer outfit exists
+		for(var/decl/hierarchy/mil_uniform/child in user_outfit.children) //find highest applicable ranking department outfit
+			if(user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
+				user_outfit = child
+		if(department & COM) //user is in command of their department
+			if(user_outfit.children[1])// Command outfit exists
 				user_outfit = user_outfit.children[1]
-
-				if(department & COM) //user is in command of their department
-					if(user_outfit.children[1])// Command outfit exists
-						user_outfit = user_outfit.children[1]
+				for(var/decl/hierarchy/mil_uniform/child in user_outfit.children) //Check for variants of command outfits
+					if(user_rank.sort_order >= child.min_rank && user_outfit.min_rank < child.min_rank)
+						user_outfit = child
 
 	return populate_uniforms(user_outfit) //Generate uniform lists.
 
@@ -201,7 +207,7 @@
 		for(var/item in selected_outfit)
 			new item(bag)
 			checkedout += item
-		bag.forceMove(get_turf(src))
+		bag.dropInto(loc)
 	else if (selected_outfit.len)
 		var/obj/item/clothing/C = selected_outfit[1]
 		new C(get_turf(src))

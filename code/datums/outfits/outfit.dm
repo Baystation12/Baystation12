@@ -17,7 +17,7 @@ var/list/outfits_decls_by_type_
 		return
 	outfits_decls_ = list()
 	outfits_decls_by_type_ = list()
-	outfits_decls_root_ = new/decl/hierarchy/outfit()
+	outfits_decls_root_ = decls_repository.get_decl(/decl/hierarchy/outfit)
 
 /decl/hierarchy/outfit
 	name = "Naked"
@@ -39,6 +39,7 @@ var/list/outfits_decls_by_type_
 	var/suit_store = null
 	var/r_hand = null
 	var/l_hand = null
+	var/holster = null
 	var/list/backpack_contents = list() // In the list(path=count,otherpath=count) format
 
 	var/id_type
@@ -74,7 +75,7 @@ var/list/outfits_decls_by_type_
 		J.toggle()
 		J.toggle_valve()
 
-// A proc for non-human species, specially Unathi and Tajara, since they e.g.
+// A proc for non-human species, specially Unathi, since they e.g.
 // can't normally wear gloves as humans. Correct this issue by trying again, but
 // apply some changes to the said item.
 //
@@ -130,6 +131,11 @@ var/list/outfits_decls_by_type_
 	//Start with uniform,suit,backpack for additional slots
 	if(uniform)
 		H.equip_to_slot_or_del(new uniform(H),slot_w_uniform)
+	if(holster && H.w_uniform)
+		var/obj/item/clothing/accessory/equip_holster = new holster
+		H.w_uniform.attackby(H, equip_holster)
+		if(equip_holster.loc != H.w_uniform)
+			qdel(equip_holster)
 	if(suit)
 		H.equip_to_slot_or_del(new suit(H),slot_wear_suit)
 	if(back)

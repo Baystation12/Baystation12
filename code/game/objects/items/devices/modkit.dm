@@ -23,7 +23,6 @@
 
 	if(!parts)
 		to_chat(user, "<span class='warning'>This kit has no parts for this modification left.</span>")
-		user.drop_from_inventory(src)
 		qdel(src)
 		return
 
@@ -59,14 +58,8 @@
 		parts &= ~MODKIT_SUIT
 
 	if(!parts)
-		user.drop_from_inventory(src)
 		qdel(src)
 
 /obj/item/device/modkit/examine(mob/user)
 	. = ..(user)
 	to_chat(user, "It looks as though it modifies hardsuits to fit [target_species] users.")
-
-/obj/item/device/modkit/tajaran
-	name = "tajaran hardsuit modification kit"
-	desc = "A kit containing all the needed tools and parts to modify a hardsuit for another user. This one looks like it's meant for Tajaran."
-	target_species = SPECIES_TAJARA

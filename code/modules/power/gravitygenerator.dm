@@ -16,7 +16,6 @@
 	icon_state = "TheSingGen"
 	anchored = 1
 	density = 1
-	use_power = 1
 	idle_power_usage = 200
 	active_power_usage = 1000
 	var/on = 1
@@ -44,15 +43,12 @@
 			continue // No (de)gravitizing space.
 		localareas |= A
 
-/obj/machinery/computer/gravity_control_computer/attack_ai(mob/user as mob)
-	return attack_hand(user)
+/obj/machinery/computer/gravity_control_computer/interface_interact(mob/user)
+	interact(user)
+	return TRUE
 
-/obj/machinery/computer/gravity_control_computer/attack_hand(mob/user as mob)
+/obj/machinery/computer/gravity_control_computer/interact(mob/user)
 	user.set_machine(src)
-	add_fingerprint(user)
-
-	if(stat & (BROKEN|NOPOWER))
-		return
 
 	updatemodules()
 
@@ -85,14 +81,14 @@
 	else
 		dat += "No local gravity generator detected!"
 
-	user << browse(dat, "window=gravgen")
+	show_browser(user, dat, "window=gravgen")
 	onclose(user, "gravgen")
 
 
 /obj/machinery/computer/gravity_control_computer/Topic(href, href_list)
 	set background = 1
 	if((. = ..()))
-		usr << browse(null, "window=air_alarm")
+		close_browser(usr, "window=air_alarm")
 		return
 
 	if(href_list["gentoggle"])

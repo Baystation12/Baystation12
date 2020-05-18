@@ -26,11 +26,6 @@
 			return 0
 		else
 			return 1
-	if (istype(other, /mob/living/silicon/decoy))
-		if(!(container && istype(container, /obj/item/device/mmi)))
-			return 0
-		else
-			return 1
 	if (istype(other, /mob/living/silicon/pai))
 		if(!(container && istype(container, /obj/item/device/mmi)))
 			return 0
@@ -47,13 +42,9 @@
 		return 1
 	return ..()
 
-/mob/living/carbon/brain/update_canmove()
-	if(in_contents_of(/obj/mecha) || istype(loc, /obj/item/device/mmi))
-		canmove = 1
+/mob/living/carbon/brain/UpdateLyingBuckledAndVerbStatus()
+	if(istype(loc, /obj/item/device/mmi))
 		use_me = 1
-	else
-		canmove = 0
-	return canmove
 
 /mob/living/carbon/brain/isSynthetic()
 	return istype(loc, /obj/item/device/mmi/digital)

@@ -1,29 +1,39 @@
 language: generic
-sudo: false
-dist: trusty
+os: linux
+dist: xenial
+jdk: openjdk8
 
 env:
   global:
-    BYOND_MAJOR="511"
-    BYOND_MINOR="1385"
+    BYOND_MAJOR="512"
+    BYOND_MINOR="1485"
 
 # ALL MAPS MUST BE PRESENT HERE
 # IF THEY ARE NOT, YOUR BUILD WILL FAIL
-  matrix:
-    - TEST=CODE
-    - TEST=WEB
-    - TEST=MAP MAP_PATH=example
-    - TEST=MAP MAP_PATH=torch
-    - TEST=MAP MAP_PATH=overmap_example
-    - TEST=MAP MAP_PATH=away_sites_testing
+jobs:
+    include:
+    - name: "DreamChecker"
+      env: SPACEMAN_DMM_VERSION=suite-1.4
+      cache:
+        directories: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
+      install:
+        - ./scripts/install-spaceman-dmm.sh dreamchecker
+      script:
+        - ~/dreamchecker
+    - name: "Code"
+      env: TEST=CODE
+    - name: "Map - Example"
+      env: TEST=MAP MAP_PATH=example
+    - name: "Map - Torch"
+      env: TEST=MAP MAP_PATH=torch
+    - name: "Map - Bearcat"
+      env: TEST=MAP MAP_PATH=bearcat
+    - name: "Map - Away Sites"
+      env: TEST=MAP MAP_PATH=away_sites_testing
 
 cache:
   directories:
-    - tgui/node_modules
     - $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}
-
-before_install:
-  - unset _JAVA_OPTIONS
 
 addons:
   apt:
@@ -31,9 +41,14 @@ addons:
       - libc6-i386
       - libgcc1:i386
       - libstdc++6:i386
-      - oracle-java8-set-default
       - python
       - python-pip
+      - uchardet
 
 script:
   - test/run-test.sh
+
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL

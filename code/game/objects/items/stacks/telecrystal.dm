@@ -1,7 +1,6 @@
 /obj/item/stack/telecrystal
 	name = "telecrystal"
 	desc = "It seems to be pulsing with suspiciously enticing energies."
-	description_antag = "Telecrystals can be activated by utilizing them on devices with an actively running uplink. They will not activate on unactivated uplinks."
 	singular_name = "telecrystal"
 	icon = 'icons/obj/telescience.dmi'
 	icon_state = "telecrystal"
@@ -17,7 +16,7 @@
 		if(I.hidden_uplink && I.hidden_uplink.active) //No metagaming by using this on every PDA around just to see if it gets used up.
 			I.hidden_uplink.uses += amount
 			I.hidden_uplink.update_nano_data()
-			GLOB.nanomanager.update_uis(I.hidden_uplink)
+			SSnano.update_uis(I.hidden_uplink)
 			use(amount)
 			to_chat(user, "<span class='notice'>You slot \the [src] into \the [I] and charge its internal uplink.</span>")
 

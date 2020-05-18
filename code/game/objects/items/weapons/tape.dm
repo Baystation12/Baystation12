@@ -32,7 +32,7 @@
 
 			playsound(src, 'sound/effects/tape.ogg',25)
 			user.visible_message("<span class='danger'>\The [user] has taped up \the [H]'s eyes!</span>")
-			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/blindfold/tape(H), slot_glasses)
+			H.equip_to_slot_or_del(new /obj/item/clothing/glasses/blindfold/tape(H), slot_glasses)
 
 		else if(user.zone_sel.selecting == BP_MOUTH || user.zone_sel.selecting == BP_HEAD)
 			if(!H.organs_by_name[BP_HEAD])
@@ -64,14 +64,11 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			var/obj/item/weapon/handcuffs/cable/tape/T = new(user)
 			if(!T.place_handcuffs(H, user))
-				user.unEquip(T)
 				qdel(T)
 
 		else if(user.zone_sel.selecting == BP_CHEST)
 			if(H.wear_suit && istype(H.wear_suit, /obj/item/clothing/suit/space))
-				if(H == user || do_mob(user, H, 10))	//Skip the time-check if patching your own suit, that's handled in attackby()
-					playsound(src, 'sound/effects/tape.ogg',25)
-					H.wear_suit.attackby(src, user)
+				H.wear_suit.attackby(src, user)//everything is handled by attackby
 			else
 				to_chat(user, "<span class='warning'>\The [H] isn't wearing a spacesuit for you to reseal.</span>")
 
@@ -80,9 +77,8 @@
 		return 1
 
 /obj/item/weapon/tape_roll/proc/stick(var/obj/item/weapon/W, mob/user)
-	if(!istype(W, /obj/item/weapon/paper))
+	if(!istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/paper/sticky) || !user.unEquip(W))
 		return
-	user.drop_from_inventory(W)
 	var/obj/item/weapon/ducttape/tape = new(get_turf(src))
 	tape.attach(W)
 	user.put_in_hands(tape)
@@ -105,8 +101,8 @@
 	. = ..()
 	item_flags |= ITEM_FLAG_NO_BLUDGEON
 
-/obj/item/weapon/ducttape/examine(mob/user)
-	return stuck ? stuck.examine(user) : ..()
+/obj/item/weapon/ducttape/examine()
+	return stuck ? stuck.examine(arglist(args)) : ..()
 
 /obj/item/weapon/ducttape/proc/attach(var/obj/item/weapon/W)
 	stuck = W
@@ -121,11 +117,8 @@
 		return
 
 	to_chat(user, "You remove \the [initial(name)] from [stuck].")
-	user.drop_from_inventory(src)
-	stuck.forceMove(get_turf(src))
 	user.put_in_hands(stuck)
 	stuck = null
-	overlays = null
 	qdel(src)
 
 /obj/item/weapon/ducttape/afterattack(var/A, mob/user, flag, params)
@@ -143,10 +136,12 @@
 			to_chat(user, "You cannot reach that from here.")// can only place stuck papers in cardinal directions, to
 			return											// reduce papers around corners issue.
 
-	user.drop_from_inventory(src)
+	if(!user.unEquip(src, source_turf))
+		return
 	playsound(src, 'sound/effects/tape.ogg',25)
-	forceMove(source_turf)
 
+	layer = ABOVE_WINDOW_LAYER
+	
 	if(params)
 		var/list/mouse_control = params2list(params)
 		if(mouse_control["icon-x"])

@@ -8,4 +8,4 @@
 		return
 	
 	sanitize_and_communicate(/decl/communication_channel/dsay, src, msg, /decl/dsay_communication/admin)
-	feedback_add_details("admin_verb","D") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","D") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!

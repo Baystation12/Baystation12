@@ -69,7 +69,7 @@
 /area/icarus/vessel)
 "au" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/flame/lighter/zippo,
+/obj/item/weapon/flame/lighter/zippo/random,
 /obj/random/smokes,
 /turf/simulated/floor/wood,
 /area/icarus/vessel)
@@ -134,7 +134,6 @@
 "aI" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/wood,
@@ -306,7 +305,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -358,7 +356,7 @@
 /turf/simulated/floor/tiled/freezer,
 /area/icarus/vessel)
 "bx" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "by" = (
@@ -390,7 +388,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bC" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/machinery/light/small{
@@ -407,7 +405,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bF" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/machinery/light/small{
@@ -417,7 +415,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bH" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0
@@ -426,7 +424,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bI" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -469,7 +467,7 @@
 /obj/effect/floor_decal/corner/grey/diagonal{
 	dir = 4
 	},
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bO" = (
@@ -503,9 +501,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bT" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -537,7 +534,7 @@
 /turf/simulated/floor/tiled/white,
 /area/icarus/vessel)
 "bZ" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0
@@ -577,8 +574,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ce" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
@@ -590,7 +586,6 @@
 /obj/random/firstaid,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -617,9 +612,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ck" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
@@ -683,15 +677,13 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cu" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cv" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -750,7 +742,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cE" = (
-/obj/structure/icarus/broken_cryo{
+/obj/structure/broken_cryo/icarus{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -767,7 +759,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cH" = (
-/obj/structure/icarus/broken_cryo{
+/obj/structure/broken_cryo/icarus{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -819,7 +811,6 @@
 /obj/item/weapon/reagent_containers/pill/dexalin,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -873,7 +864,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cW" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cX" = (
@@ -903,7 +894,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dc" = (
-/obj/structure/icarus/broken_cryo{
+/obj/structure/broken_cryo/icarus{
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
@@ -995,7 +986,7 @@
 /area/icarus/vessel)
 "dq" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dr" = (
@@ -1088,7 +1079,6 @@
 "dG" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -1420,7 +1410,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eK" = (
@@ -1477,7 +1467,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eR" = (
@@ -1527,7 +1517,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "eW" = (
@@ -1553,7 +1543,7 @@
 /area/icarus/open)
 "eZ" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fa" = (
@@ -1624,7 +1614,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fh" = (
@@ -1639,13 +1629,13 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fj" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fk" = (
@@ -1704,7 +1694,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/stack/rods,
+/obj/item/stack/material/rods,
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "fq" = (
@@ -2004,7 +1994,7 @@
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
 	icon_state = "pdoor0";
-	id = "prototype_chamber_blast"
+	id_tag = "prototype_chamber_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -2137,14 +2127,14 @@
 /turf/simulated/floor/plating,
 /area/icarus/open)
 "gS" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen,
+/obj/machinery/atmospherics/unary/tank/oxygen,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/icarus/open)
 "gT" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen,
+/obj/machinery/atmospherics/unary/tank/oxygen,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2158,7 +2148,7 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "gV" = (
-/obj/machinery/atmospherics/pipe/tank/nitrogen,
+/obj/machinery/atmospherics/unary/tank/nitrogen,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -2193,11 +2183,11 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hb" = (
-/obj/machinery/atmospherics/pipe/tank/oxygen,
+/obj/machinery/atmospherics/unary/tank/oxygen,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hc" = (
-/obj/machinery/atmospherics/pipe/tank/hydrogen,
+/obj/machinery/atmospherics/unary/tank/hydrogen,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "hd" = (
@@ -2266,7 +2256,7 @@
 	},
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "d1starboardnacelle"
+	id_tag = "d1starboardnacelle"
 	},
 /obj/structure/window/phoronreinforced{
 	icon_state = "phoronrwindow";
@@ -2314,8 +2304,17 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ht" = (
-/obj/machinery/atmospherics/trinary/mixer/m_mixer{
-	dir = 4
+/obj/machinery/atmospherics/omni/mixer{
+	active_power_usage = 7500;
+	tag_east = 2;
+	tag_east_con = null;
+	tag_north = 1;
+	tag_north_con = 0.79;
+	tag_south = 0;
+	tag_south_con = null;
+	tag_west = 1;
+	tag_west_con = 0.21;
+	use_power = 1
 	},
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
@@ -2370,7 +2369,7 @@
 /obj/structure/grille,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "d1starboardnacelle"
+	id_tag = "d1starboardnacelle"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
@@ -2418,14 +2417,13 @@
 /obj/structure/grille,
 /obj/machinery/door/blast/regular{
 	dir = 4;
-	id = "d1starboardnacelle"
+	id_tag = "d1starboardnacelle"
 	},
 /turf/simulated/floor/reinforced,
 /area/icarus/vessel)
 "hH" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	frequency = 1331;
 	id_tag = "vox_west_vent"
 	},
 /turf/simulated/floor/reinforced,
@@ -2655,30 +2653,20 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
-"iq" = (
-/obj/effect/landmark/random_gen/asteroid,
-/turf/unsimulated/mineral,
-/area/space)
 "jb" = (
-/obj/effect/shuttle_landmark/nav_icarus/nav1{
-	autoset = 1
-	},
+/obj/effect/shuttle_landmark/nav_icarus/nav1,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "kb" = (
-/obj/effect/shuttle_landmark/nav_icarus/nav2{
-	autoset = 1
-	},
+/obj/effect/shuttle_landmark/nav_icarus/nav2,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "lb" = (
-/obj/effect/shuttle_landmark/nav_icarus/nav3{
-	autoset = 1
-	},
+/obj/effect/shuttle_landmark/nav_icarus/nav3,
 /turf/simulated/floor/exoplanet/grass,
 /area/icarus/open)
 "mb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 1;
 	pixel_y = 16
 	},
@@ -2692,7 +2680,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_x = 30
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	dir = 4;
 	icon_state = "sink";
 	pixel_x = 11;
@@ -2704,7 +2692,7 @@
 /obj/item/weapon/storage/mirror{
 	pixel_x = -30
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	icon_state = "sink";
 	dir = 8;
 	pixel_x = -12;
@@ -2915,7 +2903,7 @@ aa
 aa
 aa
 aa
-iq
+aa
 "}
 (2,1,1) = {"
 aa

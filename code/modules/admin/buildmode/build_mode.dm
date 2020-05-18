@@ -23,18 +23,27 @@
 /datum/build_mode/proc/Help()
 	return
 
+/datum/build_mode/proc/Selected()
+	return
+
+/datum/build_mode/proc/Unselected()
+	return
+
+/datum/build_mode/proc/TimerEvent()
+	return
+
 /datum/build_mode/proc/Log(message)
 	log_admin("BUILD MODE - [name] - [key_name(usr)] - [message]")
 
 /datum/build_mode/proc/Warn(message)
 	to_chat(user, "BUILD MODE - [name] - [message])")
 
-/datum/build_mode/proc/select_subpath(given_path)
+/datum/build_mode/proc/select_subpath(given_path, within_scope = /atom)
 	var/desired_path = input("Enter full or partial typepath.","Typepath","[given_path]") as text|null
 	if(!desired_path)
 		return
 
-	var/list/types = typesof(/atom)
+	var/list/types = typesof(within_scope)
 	var/list/matches = list()
 
 	for(var/path in types)
@@ -48,4 +57,4 @@
 	if(matches.len==1)
 		return matches[1]
 	else
-		return (input("Select an atom type", "Spawn Atom", matches[1]) as null|anything in matches)
+		return (input("Select a type", "Select Type", matches[1]) as null|anything in matches)

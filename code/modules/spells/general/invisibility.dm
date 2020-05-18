@@ -18,7 +18,7 @@
 	if(on)
 		if(H.add_cloaking_source(src))
 			playsound(get_turf(H), 'sound/effects/teleport.ogg', 90, 1)
-			H.mutations |= CLUMSY
+			H.mutations |= MUTATION_CLUMSY
 	else if(H.remove_cloaking_source(src))
 		playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 90, 1)
-		H.mutations -= CLUMSY
+		H.mutations -= MUTATION_CLUMSY

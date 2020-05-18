@@ -8,9 +8,8 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
-	req_one_access = list(access_lawyer, access_heads, access_armory, access_qm)
+	var/send_access = list(list(access_lawyer, access_bridge, access_armory, access_qm))
 
-	use_power = 1
 	idle_power_usage = 30
 	active_power_usage = 200
 
@@ -26,13 +25,26 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	. = ..()
 
 	if(!admin_departments)
-		admin_departments = list("[GLOB.using_map.boss_name]", "Colonial Marshal Service", "[GLOB.using_map.boss_short] Supply") + GLOB.using_map.map_admin_faxes
+		admin_departments = list("[GLOB.using_map.boss_name]", "Sol Federal Police", "[GLOB.using_map.boss_short] Supply") + GLOB.using_map.map_admin_faxes
 	GLOB.allfaxes += src
 	if(!destination) destination = "[GLOB.using_map.boss_name]"
 	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
 		GLOB.alldepartments |= department
 
-/obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
+/obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+	if(istype(O, /obj/item/weapon/card/id))
+		if(!user.unEquip(O, src))
+			return
+		scan = O
+		to_chat(user, "<span class='notice'>You insert \the [O] into \the [src].</span>")
+	else
+		..()
+
+/obj/machinery/photocopier/faxmachine/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/photocopier/faxmachine/interact(mob/user)
 	user.set_machine(src)
 
 	var/dat = "Fax Machine<BR>"
@@ -80,67 +92,62 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		if(copyitem)
 			dat += "<a href ='byond://?src=\ref[src];remove=1'>Remove Item</a><br>"
 
-	user << browse(dat, "window=copier")
+	show_browser(user, dat, "window=copier")
 	onclose(user, "copier")
 	return
 
-/obj/machinery/photocopier/faxmachine/Topic(href, href_list)
+/obj/machinery/photocopier/faxmachine/OnTopic(mob/user, href_list, state)
 	if(href_list["send"])
 		if(copyitem)
 			if (destination in admin_departments)
-				send_admin_fax(usr, destination)
+				send_admin_fax(user, destination)
 			else
 				sendfax(destination)
 
 			if (sendcooldown)
 				spawn(sendcooldown) // cooldown time
 					sendcooldown = 0
+		return TOPIC_REFRESH
 
-	else if(href_list["remove"])
-		if(copyitem)
-			copyitem.loc = usr.loc
-			usr.put_in_hands(copyitem)
-			to_chat(usr, "<span class='notice'>You take \the [copyitem] out of \the [src].</span>")
-			copyitem = null
-			updateUsrDialog()
+	if(href_list["remove"])
+		OnRemove(user)
+		return TOPIC_REFRESH
 
 	if(href_list["scan"])
 		if (scan)
-			if(ishuman(usr))
-				scan.loc = usr.loc
-				if(!usr.get_active_hand())
-					usr.put_in_hands(scan)
-				scan = null
+			if(ishuman(user))
+				user.put_in_hands(scan)
 			else
-				scan.loc = src.loc
-				scan = null
+				scan.dropInto(loc)
+			scan = null
 		else
-			var/obj/item/I = usr.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
-				I.loc = src
+			var/obj/item/I = user.get_active_hand()
+			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I, src))
 				scan = I
 		authenticated = 0
+		return TOPIC_REFRESH
 
 	if(href_list["dept"])
-		var/lastdestination = destination
-		destination = input(usr, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
-		if(!destination) destination = lastdestination
+		var/desired_destination = input(user, "Which department?", "Choose a department", "") as null|anything in (GLOB.alldepartments + admin_departments)
+		if(desired_destination && CanInteract(user, state))
+			destination = desired_destination
+		return TOPIC_REFRESH
 
 	if(href_list["auth"])
 		if ( (!( authenticated ) && (scan)) )
-			if (check_access(scan))
+			if (has_access(send_access, scan.GetAccess()))
 				authenticated = 1
+		return TOPIC_REFRESH
 
 	if(href_list["logout"])
 		authenticated = 0
-
-	updateUsrDialog()
+		return TOPIC_REFRESH
 
 /obj/machinery/photocopier/faxmachine/proc/sendfax(var/destination)
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	use_power(200)
+	use_power_oneoff(200)
 
 	var/success = 0
 	for(var/obj/machinery/photocopier/faxmachine/F in GLOB.allfaxes)
@@ -175,14 +182,14 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	else
 		return 0
 
-	use_power(active_power_usage)
+	use_power_oneoff(active_power_usage)
 	return 1
 
 /obj/machinery/photocopier/faxmachine/proc/send_admin_fax(var/mob/sender, var/destination)
 	if(stat & (BROKEN|NOPOWER))
 		return
 
-	use_power(200)
+	use_power_oneoff(200)
 
 	//recieved copies should not use toner since it's being used by admins only.
 	var/obj/item/rcvdcopy
@@ -196,7 +203,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		visible_message("[src] beeps, \"Error transmitting message.\"")
 		return
 
-	rcvdcopy.loc = null //hopefully this shouldn't cause trouble
+	rcvdcopy.forceMove(null) //hopefully this shouldn't cause trouble
 	GLOB.adminfaxes += rcvdcopy
 
 	var/mob/intercepted = check_for_interception()
@@ -205,7 +212,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	//message badmins that a fax has arrived
 	if (destination == GLOB.using_map.boss_name)
 		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#006100")
-	else if (destination == "Colonial Marshal Service")
+	else if (destination == "Sol Federal Police")
 		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#1f66a0")
 	else if (destination == "[GLOB.using_map.boss_short] Supply")
 		message_admins(sender, "[uppertext(destination)] FAX[intercepted ? "(Intercepted by [intercepted])" : null]", rcvdcopy, destination, "#5f4519")

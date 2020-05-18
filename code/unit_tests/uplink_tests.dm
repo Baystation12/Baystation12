@@ -25,14 +25,22 @@
 	return TRUE
 
 /datum/unit_test/uplink_setup_test/proc/is_valid_uplink_item(var/datum/uplink_item/ui, var/type, var/optional_uplink_item_type)
+	. = TRUE
 	if(!istype(ui))
-		log_bad("[type]: [ui] was of an unexpected type: [ui ? ui.type : (optional_uplink_item_type ? optional_uplink_item_type : "NULL")]")
+		log_bad("[type]: [ui] was of an unexpected type: [log_info_line(ui)]")
 		return FALSE
 	if(!ui.category)
 		log_bad("[type]: [ui] has no category.")
-		return FALSE
+		. = FALSE
 	var/cost = 	ui.cost(0)
-	if(cost <= 0)
-		log_bad("[type]: [ui] has an invalid cost of [cost].")
-		return FALSE
-	return TRUE
+	if(cost <= 0 || round(cost) != cost)
+		log_bad("[type]: [ui] has an invalid modified cost of [cost].")
+		. = FALSE
+	if(ui.item_cost < 0 || round(ui.item_cost) != ui.item_cost)
+		log_bad("[type]: [ui] has an invalid base cost of [ui.item_cost].")
+		. = FALSE
+	for(var/antag_type in ui.antag_costs)
+		var/antag_cost = ui.antag_costs[antag_type]
+		if(antag_cost <= 0 || round(antag_cost) != antag_cost)
+			log_bad("[type]: [ui] has an invalid antag cost of [antag_cost] ([antag_type]).")
+			. = FALSE

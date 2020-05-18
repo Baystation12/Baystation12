@@ -4,22 +4,15 @@
 	set invisibility = 0
 	set background = 1
 
-	if (transforming)	return
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))	return
 	if(!loc)			return
 
 	..()
-
-	if (stat != DEAD && can_progress())
-		update_progression()
 
 	blinded = null
 
 	//Status updates, death etc.
 	update_icons()
-
-/mob/living/carbon/alien/proc/can_progress()
-	return 1
-
 
 /mob/living/carbon/alien/handle_mutations_and_radiation()
 
@@ -31,7 +24,7 @@
 
 	var/rads = radiation/25
 	radiation -= rads
-	nutrition += rads
+	adjust_nutrition(rads)
 	heal_overall_damage(rads,rads)
 	adjustOxyLoss(-(rads))
 	adjustToxLoss(-(rads))
@@ -92,7 +85,7 @@
 /mob/living/carbon/alien/handle_regular_hud_updates()
 	update_sight()
 	if (healths)
-		if (stat != 2)
+		if(stat != DEAD)
 			switch(health)
 				if(100 to INFINITY)
 					healths.icon_state = "health0"

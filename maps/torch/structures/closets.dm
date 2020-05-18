@@ -5,9 +5,7 @@
 /obj/structure/closet/toolcloset/excavation
 	name = "excavation equipment closet"
 	desc = "It's a storage unit for excavation equipment."
-	icon_state = "toolcloset"
-	icon_closed = "toolcloset"
-	icon_opened = "toolclosetopen"
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
 
 /obj/structure/closet/toolcloset/excavation/WillContain()
 	return list(
@@ -33,8 +31,7 @@
 
 /obj/structure/closet/wardrobe/ptgear
 	name = "pt gear wardrobe"
-	icon_state = "white"
-	icon_closed = "white"
+	closet_appearance = /decl/closet_appearance/wardrobe/white
 
 /obj/structure/closet/wardrobe/ptgear/WillContain()
 	return list(
@@ -45,8 +42,6 @@
 /obj/random/torchcloset //Random closets taking into account torch-specific ones
 	name = "random closet"
 	desc = "This is a random closet."
-	icon = 'icons/obj/closet.dmi'
-	icon_state = "syndicate1"
 
 /obj/random/torchcloset/spawn_choices()
 	return list(/obj/structure/closet,
@@ -71,5 +66,7 @@
 				/obj/structure/largecrate,
 				/obj/structure/closet/wardrobe/xenos,
 				/obj/structure/closet/wardrobe/mixed,
-				/obj/structure/closet/wardrobe/suit,
-				/obj/structure/closet/wardrobe/orange)
+				/obj/structure/closet/wardrobe/suit)
+
+/obj/structure/closet/secure_closet/brig/WillContain()
+	return null

@@ -10,11 +10,6 @@
 "c" = (
 /turf/unsimulated/wall/away/blueriver/livingwall,
 /area/bluespaceriver/underground)
-"d" = (
-/turf/unsimulated/wall/supermatter/no_spread{
-	plane = -19
-	},
-/area/bluespaceriver/underground)
 "e" = (
 /obj/machinery/crystal_static{
 	alpha = 120;
@@ -4365,7 +4360,7 @@ a
 a
 b
 b
-d
+b
 e
 f
 f

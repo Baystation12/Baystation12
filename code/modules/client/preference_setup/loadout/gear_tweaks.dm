@@ -1,7 +1,7 @@
 /datum/gear_tweak/proc/get_contents(var/metadata)
 	return
 
-/datum/gear_tweak/proc/get_metadata(var/user, var/metadata)
+/datum/gear_tweak/proc/get_metadata(var/user, var/metadata, title)
 	return
 
 /datum/gear_tweak/proc/get_default()
@@ -41,7 +41,7 @@
 /datum/gear_tweak/color/tweak_item(var/obj/item/I, var/metadata)
 	if(valid_colors && !(metadata in valid_colors))
 		return
-	I.color = metadata
+	I.color = sanitize_hexcolor(metadata, I.color)
 
 /*
 * Path adjustment
@@ -85,7 +85,7 @@
 /datum/gear_tweak/path/get_default()
 	return valid_paths[1]
 
-/datum/gear_tweak/path/get_metadata(var/user, var/metadata)
+/datum/gear_tweak/path/get_metadata(var/user, var/metadata, title)
 	return input(user, "Choose a type.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in valid_paths
 
 /datum/gear_tweak/path/tweak_gear_data(var/metadata, var/datum/gear_data/gear_data)
@@ -118,7 +118,7 @@
 	for(var/i = 1 to valid_contents.len)
 		. += "Random"
 
-/datum/gear_tweak/contents/get_metadata(var/user, var/list/metadata)
+/datum/gear_tweak/contents/get_metadata(var/user, var/list/metadata, title)
 	. = list()
 	for(var/i = metadata.len to (valid_contents.len - 1))
 		metadata += "Random"
@@ -130,7 +130,7 @@
 			return metadata
 
 /datum/gear_tweak/contents/tweak_item(var/obj/item/I, var/list/metadata)
-	if(metadata.len != valid_contents.len)
+	if(length(metadata) != length(valid_contents))
 		return
 	for(var/i = 1 to valid_contents.len)
 		var/path
@@ -164,7 +164,7 @@
 /datum/gear_tweak/reagents/get_default()
 	return "Random"
 
-/datum/gear_tweak/reagents/get_metadata(var/user, var/list/metadata)
+/datum/gear_tweak/reagents/get_metadata(var/user, var/list/metadata, title)
 	. = input(user, "Choose an entry.", CHARACTER_PREFERENCE_INPUT_TITLE, metadata) as null|anything in (valid_reagents + list("Random", "None"))
 	if(!.)
 		return metadata
@@ -172,24 +172,29 @@
 /datum/gear_tweak/reagents/tweak_item(var/obj/item/I, var/list/metadata)
 	if(metadata == "None")
 		return
+	var/reagent
 	if(metadata == "Random")
-		. = valid_reagents[pick(valid_reagents)]
+		reagent = valid_reagents[pick(valid_reagents)]
 	else
-		. = valid_reagents[metadata]
-	I.reagents.add_reagent(., I.reagents.get_free_space())
+		reagent = valid_reagents[metadata]
+	if(reagent)
+		return I.reagents.add_reagent(reagent, I.reagents.get_free_space())
 
 /datum/gear_tweak/tablet
-	var/list/ValidProcessors = list(/obj/item/weapon/computer_hardware/processor_unit/small)
-	var/list/ValidBatteries = list(/obj/item/weapon/computer_hardware/battery_module/nano, /obj/item/weapon/computer_hardware/battery_module/micro, /obj/item/weapon/computer_hardware/battery_module)
-	var/list/ValidHardDrives = list(/obj/item/weapon/computer_hardware/hard_drive/micro, /obj/item/weapon/computer_hardware/hard_drive/small, /obj/item/weapon/computer_hardware/hard_drive)
-	var/list/ValidNetworkCards = list(/obj/item/weapon/computer_hardware/network_card, /obj/item/weapon/computer_hardware/network_card/advanced)
-	var/list/ValidNanoPrinters = list(null, /obj/item/weapon/computer_hardware/nano_printer)
-	var/list/ValidCardSlots = list(null, /obj/item/weapon/computer_hardware/card_slot)
-	var/list/ValidTeslaLinks = list(null, /obj/item/weapon/computer_hardware/tesla_link)
+	var/list/ValidProcessors = list(/obj/item/weapon/stock_parts/computer/processor_unit/small)
+	var/list/ValidBatteries = list(/obj/item/weapon/stock_parts/computer/battery_module/nano, /obj/item/weapon/stock_parts/computer/battery_module/micro, /obj/item/weapon/stock_parts/computer/battery_module)
+	var/list/ValidHardDrives = list(/obj/item/weapon/stock_parts/computer/hard_drive/micro, /obj/item/weapon/stock_parts/computer/hard_drive/small, /obj/item/weapon/stock_parts/computer/hard_drive)
+	var/list/ValidNetworkCards = list(/obj/item/weapon/stock_parts/computer/network_card, /obj/item/weapon/stock_parts/computer/network_card/advanced)
+	var/list/ValidNanoPrinters = list(null, /obj/item/weapon/stock_parts/computer/nano_printer)
+	var/list/ValidCardSlots = list(null, /obj/item/weapon/stock_parts/computer/card_slot)
+	var/list/ValidTeslaLinks = list(null, /obj/item/weapon/stock_parts/computer/tesla_link)
 
 /datum/gear_tweak/tablet/get_contents(var/list/metadata)
 	var/list/names = list()
-	var/obj/O = ValidProcessors[metadata[1]]
+	var/obj/O = null
+	if (metadata.len != 7)
+		return
+	O = ValidProcessors[metadata[1]]
 	if(O)
 		names += initial(O.name)
 	O = ValidBatteries[metadata[2]]
@@ -210,10 +215,12 @@
 	O = ValidTeslaLinks[metadata[7]]
 	if(O)
 		names += initial(O.name)
-	return "[english_list(names, and_text = ", ")]"
+	return english_list(names, and_text = ", ")
 
-/datum/gear_tweak/tablet/get_metadata(var/user, var/metadata)
+/datum/gear_tweak/tablet/get_metadata(var/mob/user, var/metadata, title)
 	. = list()
+	if(!istype(user))
+		return
 
 	var/list/names = list()
 	var/counter = 1
@@ -224,6 +231,8 @@
 		else
 			names["None"] = counter++
 
+	if (!user || !user.client)
+		return
 	var/entry = input(user, "Choose a processor.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
@@ -236,6 +245,8 @@
 		else
 			names["None"] = counter++
 
+	if (!user || !user.client)
+		return
 	entry = input(user, "Choose a battery.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
@@ -248,6 +259,8 @@
 		else
 			names["None"] = counter++
 
+	if (!user || !user.client)
+		return
 	entry = input(user, "Choose a hard drive.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
@@ -260,6 +273,8 @@
 		else
 			names["None"] = counter++
 
+	if (!user || !user.client)
+		return
 	entry = input(user, "Choose a network card.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
@@ -272,6 +287,8 @@
 		else
 			names["None"] = counter++
 
+	if (!user || !user.client)
+		return
 	entry = input(user, "Choose a nanoprinter.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
@@ -284,6 +301,8 @@
 		else
 			names["None"] = counter++
 
+	if (!user || !user.client)
+		return
 	entry = input(user, "Choose a card slot.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
@@ -296,13 +315,19 @@
 		else
 			names["None"] = counter++
 
+	if (!user || !user.client)
+		return
 	entry = input(user, "Choose a tesla link.", CHARACTER_PREFERENCE_INPUT_TITLE) in names
 	. += names[entry]
 
 /datum/gear_tweak/tablet/get_default()
-	return list(1, 1, 1, 1, 1, 1, 1)
+	. = list()
+	for(var/i in 1 to TWEAKABLE_COMPUTER_PART_SLOTS)
+		. += 1
 
 /datum/gear_tweak/tablet/tweak_item(var/obj/item/modular_computer/tablet/I, var/list/metadata)
+	if(length(metadata) < TWEAKABLE_COMPUTER_PART_SLOTS)
+		return
 	if(ValidProcessors[metadata[1]])
 		var/t = ValidProcessors[metadata[1]]
 		I.processor_unit = new t(I)

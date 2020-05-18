@@ -3,6 +3,9 @@
 #define DEITY_TREE_DARK_MINION "Summoning"
 #define DEITY_TREE_TRANSMUTATION "Transmutation"
 #define DEITY_TREE_CONJURATION "Conjuration"
+#define DEITY_TREE_ARTIFACT "Artifacts"
+#define DEITY_TREE_FIRECONJ "Fire Conjuration"
+#define DEITY_TREE_HERALD "Phenomenas"
 
 #define DEITY_BLOOD_CRAFT "Blood Crafting"
 #define DEITY_ARMOR_CRAFT "Armor Crafting"

@@ -70,9 +70,10 @@
 	option_target = EVAC_OPT_ABANDON_SHIP
 	needs_syscontrol = TRUE
 	silicon_allowed = TRUE
+	abandon_ship = TRUE
 
 /datum/evacuation_option/abandon_ship/execute(mob/user)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 	if (evacuation_controller.deny)
 		to_chat(user, "Unable to initiate escape procedures.")
@@ -94,7 +95,7 @@
 	silicon_allowed = TRUE
 
 /datum/evacuation_option/bluespace_jump/execute(mob/user)
-	if (!ticker || !evacuation_controller)
+	if (!evacuation_controller)
 		return
 	if (evacuation_controller.deny)
 		to_chat(user, "Unable to initiate jump preparation.")
@@ -116,7 +117,7 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_abandon_ship/execute(mob/user)
-	if (ticker && evacuation_controller && evacuation_controller.cancel_evacuation())
+	if (evacuation_controller && evacuation_controller.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled abandonment of the spacecraft.")
 
 /datum/evacuation_option/cancel_bluespace_jump
@@ -127,7 +128,7 @@
 	silicon_allowed = FALSE
 
 /datum/evacuation_option/cancel_bluespace_jump/execute(mob/user)
-	if (ticker && evacuation_controller && evacuation_controller.cancel_evacuation())
+	if (evacuation_controller && evacuation_controller.cancel_evacuation())
 		log_and_message_admins("[key_name(user)] has cancelled the bluespace jump.")
 
 /obj/screen/fullscreen/bluespace_overlay

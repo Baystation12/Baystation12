@@ -13,6 +13,7 @@ var/global/nttransfer_uid = 0
 	network_destination = "other device via P2P tunnel"
 	available_on_ntnet = 1
 	nanomodule_path = /datum/nano_module/program/computer_nttransfer/
+	category = PROG_UTIL
 
 	var/error = ""										// Error screen
 	var/server_password = ""							// Optional password to download the file.
@@ -46,7 +47,7 @@ var/global/nttransfer_uid = 0
 		if(!remote)
 			crash_download("Connection to remote server lost")
 
-/datum/computer_file/program/nttransfer/kill_program(var/forced = 0)
+/datum/computer_file/program/nttransfer/on_shutdown(var/forced = 0)
 	if(downloaded_file) // Client mode, clean up variables for next use
 		finalize_download()
 
@@ -58,7 +59,7 @@ var/global/nttransfer_uid = 0
 
 // Finishes download and attempts to store the file on HDD
 /datum/computer_file/program/nttransfer/proc/finish_download()
-	if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(downloaded_file))
+	if(!computer || !computer.store_file(downloaded_file))
 		error = "I/O Error:  Unable to save file. Check your hard drive and try again."
 	finalize_download()
 
@@ -104,7 +105,7 @@ var/global/nttransfer_uid = 0
 		data["upload_filename"] = "[PRG.provided_file.filename].[PRG.provided_file.filetype]"
 	else if (PRG.upload_menu)
 		var/list/all_files[0]
-		for(var/datum/computer_file/F in PRG.computer.hard_drive.stored_files)
+		for(var/datum/computer_file/F in PRG.computer.get_all_files())
 			all_files.Add(list(list(
 			"uid" = F.uid,
 			"filename" = "[F.filename].[F.filetype]",
@@ -124,7 +125,7 @@ var/global/nttransfer_uid = 0
 			)))
 		data["servers"] = all_servers
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_transfer.tmpl", "NTNet P2P Transfer Client", 575, 700, state = state)
 		ui.auto_update_layout = 1
@@ -170,7 +171,7 @@ var/global/nttransfer_uid = 0
 		server_password = pass
 		return 1
 	if(href_list["PRG_uploadfile"])
-		for(var/datum/computer_file/F in computer.hard_drive.stored_files)
+		for(var/datum/computer_file/F in computer.get_all_files())
 			if("[F.uid]" == href_list["PRG_uploadfile"])
 				if(F.unsendable)
 					error = "I/O Error: File locked."

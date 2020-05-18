@@ -112,7 +112,7 @@
 /decl/poster/bay_23
 	icon_state="bsposter23"
 	name = "Safety first: because electricity doesn't wait!"
-	desc = "A safety poster starring a clueless looking redhead with frazzled hair. \"Every year, hundreds of NT employees expose themselves to electric shock. Play it safe. Avoid suspicious doors after electrical storms, and always wear protection when doing electric maintenance.\""
+	desc = "A safety poster starring a clueless looking redhead with frazzled hair. \"Every year, hundreds of employees expose themselves to electric shock. Play it safe. Avoid suspicious doors after electrical storms, and always wear protection when doing electric maintenance.\""
 
 /decl/poster/bay_24
 	icon_state="bsposter24"
@@ -127,7 +127,7 @@
 /decl/poster/bay_26
 	icon_state="bsposter26"
 	name = "The Men We Knew"
-	desc = "This movie poster depicts a group of soldiers fighting a large mech, the movie seems to be a patriotic war movie."
+	desc = "This movie poster depicts a group of soldiers fighting a large exosuit, the movie seems to be a patriotic war movie."
 
 /decl/poster/bay_27
 	icon_state="bsposter27"
@@ -214,11 +214,6 @@
 	name = "Responsible medbay habits, No #3"
 	desc = "A safety poster with a purple-haired surgeon. She looks a bit cross. \"Let the surgeons do their work. NEVER replace or remove a surgery tool from where the surgeon put it.\""
 
-/decl/poster/bay_44
-	icon_state="bsposter44"
-	name = "Time for a drink?"
-	desc = "This poster depicts a friendly-looking Tajara holding a tray of drinks."
-
 /decl/poster/bay_45
 	icon_state="bsposter45"
 	name = "Responsible engineering habits, No #1"
@@ -291,5 +286,5 @@
 
 /decl/poster/bay_59
 	icon_state="bsposter59"
-	name = "poster - Miss Science 2558"
-	desc = "A large piece of space-resistant printed paper. This pin-up poster depicts a woman wearing a NanoTrasen labcoat, a bikini, and a sheepish grin. She's shyly posing atop some highly specialized research equipment."
+	name = "poster - Miss Science 2299"
+	desc = "A large piece of space-resistant printed paper. This pin-up poster depicts a woman wearing a corporate labcoat, a bikini, and a sheepish grin. She's shyly posing atop some highly specialized research equipment."

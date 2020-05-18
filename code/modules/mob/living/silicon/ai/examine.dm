@@ -1,6 +1,5 @@
 /mob/living/silicon/ai/examine(mob/user)
-	if(!..(user))
-		return
+	. = ..()
 
 	var/msg = ""
 	if (src.stat == DEAD)

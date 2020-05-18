@@ -4,34 +4,32 @@
 
 	name = "automatic shutoff valve"
 	desc = "An automatic valve with control circuitry and pipe integrity sensor, capable of automatically isolating damaged segments of the pipe network."
-	var/override_open = FALSE	// If true it will be always open
+	var/close_on_leaks = TRUE	// If false it will be always open
 	level = 1
-	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR
+	connect_types = CONNECT_TYPE_SCRUBBER | CONNECT_TYPE_SUPPLY | CONNECT_TYPE_REGULAR | CONNECT_TYPE_FUEL
+	build_icon_state = "svalve"
 
-
-/obj/machinery/atmospherics/valve/shutoff/update_icon()
+/obj/machinery/atmospherics/valve/shutoff/on_update_icon()
 	icon_state = "vclamp[open]"
 
-/obj/machinery/atmospherics/valve/shutoff/examine(var/mob/user)
-	..()
-	to_chat(user, "The automatic shutoff circuit is [override_open ? "disabled" : "enabled"].")
+/obj/machinery/atmospherics/valve/shutoff/examine(mob/user)
+	. = ..()
+	to_chat(user, "The automatic shutoff circuit is [close_on_leaks ? "enabled" : "disabled"].")
 
-/obj/machinery/atmospherics/valve/shutoff/New()
+/obj/machinery/atmospherics/valve/shutoff/Initialize()
+	. = ..()
 	open()
 	hide(1)
-	..()
 
-/obj/machinery/atmospherics/valve/shutoff/attack_hand(var/mob/user as mob)
-	override_open = !override_open
-	to_chat(user, "You [override_open ? "disable" : "enable"] the automatic shutoff circuit.")
-
-/obj/machinery/atmospherics/valve/shutoff/attack_ai(var/mob/user as mob)
-	attack_hand(user)
+/obj/machinery/atmospherics/valve/shutoff/interface_interact(var/mob/user)
+	if(CanInteract(user, DefaultTopicState()))
+		close_on_leaks = !close_on_leaks
+		to_chat(user, "You [close_on_leaks ? "enable" : "disable"] the automatic shutoff circuit.")
+		return TRUE
 
 /obj/machinery/atmospherics/valve/shutoff/hide(var/do_hide)
 	if(do_hide)
 		if(level == 1)
-			plane = ABOVE_PLATING_PLANE
 			layer = PIPE_LAYER
 		else if(level == 2)
 			..()
@@ -41,14 +39,18 @@
 /obj/machinery/atmospherics/valve/shutoff/Process()
 	..()
 
-	if(!network_node1 || !network_node2)
+	if (!network_node1 || !network_node2)
 		if(open)
 			close()
 		return
 
-	var/closed_auto = (network_node1.leaks.len || network_node2.leaks.len || override_open)
+	if (!close_on_leaks)
+		if (!open)
+			open()
+		return
 
-	if(closed_auto && open)
-		close()
-	else if(!closed_auto && !open)
+	if (network_node1.leaks.len || network_node2.leaks.len)
+		if (open)
+			close()
+	else if (!open)
 		open()

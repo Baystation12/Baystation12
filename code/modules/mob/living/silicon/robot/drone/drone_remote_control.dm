@@ -3,6 +3,7 @@
 
 /mob/living/silicon/robot/drone
 	var/mob/living/silicon/ai/controlling_ai
+	var/obj/item/device/radio/drone_silicon_radio
 
 /mob/living/silicon/robot/drone/attack_ai(var/mob/living/silicon/ai/user)
 
@@ -26,8 +27,14 @@
 	local_transmit = FALSE
 	languages = controlling_ai.languages.Copy()
 
-	add_language("Drone Talk", 1)
-	default_language = all_languages["Drone Talk"]
+	//give controlled drone access to AI radio
+	drone_silicon_radio = silicon_radio
+	silicon_radio = new /obj/item/device/radio/headset/heads/ai_integrated(src)
+	//silicon_radio.recalculateChannels()
+
+	add_language(LANGUAGE_DRONE_GLOBAL, 1)
+	add_language(LANGUAGE_ROBOT_GLOBAL, 1)
+	default_language = controlling_ai.default_language
 
 	stat = CONSCIOUS
 	if(user.mind)
@@ -65,6 +72,7 @@
 /mob/living/silicon/robot/drone/death(gibbed)
 	if(controlling_ai)
 		release_ai_control("<b>WARNING: remote system failure.</b> Connection timed out.")
+	drone_silicon_radio = null
 	. = ..(gibbed)
 
 /mob/living/silicon/ai/death(gibbed)
@@ -94,6 +102,11 @@
 		to_chat(controlling_ai, "<span class='notice'>[message]</span>")
 		controlling_ai.controlling_drone = null
 		controlling_ai = null
+	//releases controlled drone access to AI radio
+	QDEL_NULL(silicon_radio)
+	silicon_radio = drone_silicon_radio
+	drone_silicon_radio = null
+	default_language = all_languages[LANGUAGE_DRONE_GLOBAL]
 
 	verbs -= /mob/living/silicon/robot/drone/proc/release_ai_control_verb
 	full_law_reset()

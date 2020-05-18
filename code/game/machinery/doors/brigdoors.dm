@@ -41,7 +41,7 @@
 			targets += M
 
 	for(var/obj/machinery/flasher/F in SSmachines.machinery)
-		if(F.id == src.id)
+		if(F.id_tag == src.id)
 			targets += F
 
 	for(var/obj/structure/closet/secure_closet/brig/C in world)
@@ -49,14 +49,13 @@
 			targets += C
 
 	if(targets.len==0)
-		stat |= BROKEN
-	update_icon()
+		set_broken(TRUE)
+	queue_icon_update()
 
 //Main door timer loop, if it's timing and time is >0 reduce time by 1.
 // if it's less than 0, open door, reset timer
 // update the door_timer window and the icon
 /obj/machinery/door_timer/Process()
-
 	if(stat & (NOPOWER|BROKEN))	return
 	if(src.timing)
 
@@ -68,7 +67,7 @@
 
 
 		if(world.timeofday > src.releasetime)
-			src.timer_end() // open doors, reset timer, clear status screen
+			src.timer_end(TRUE) // open doors, reset timer, clear status screen, broadcast to sec HUDs
 			src.timing = 0
 
 		src.update_icon()
@@ -101,13 +100,13 @@
 	for(var/obj/structure/closet/secure_closet/brig/C in targets)
 		if(C.broken)	continue
 		if(C.opened && !C.close())	continue
-		C.locked = 1
-		C.icon_state = C.icon_locked
+		C.locked = TRUE
+		C.queue_icon_update()
 	return 1
 
 
 // Opens and unlocks doors, power check
-/obj/machinery/door_timer/proc/timer_end()
+/obj/machinery/door_timer/proc/timer_end(var/broadcast_to_huds = 0)
 	if(stat & (NOPOWER|BROKEN))	return 0
 
 	// Reset releasetime
@@ -115,6 +114,9 @@
 
 	//reset timing
 	timing = 0
+
+	if (broadcast_to_huds)
+		broadcast_security_hud_message("The timer for [id] has expired.", src)
 
 	for(var/obj/machinery/door/window/brigdoor/door in targets)
 		if(!door.density)	continue
@@ -125,14 +127,14 @@
 		if(C.broken)	continue
 		if(C.opened)	continue
 		C.locked = 0
-		C.icon_state = C.icon_closed
+		C.queue_icon_update()
 
 	return 1
 
 
 // Check for releasetime timeleft
 /obj/machinery/door_timer/proc/timeleft()
-	. = (releasetime - world.timeofday)/10
+	. = round((releasetime - world.timeofday)/10)
 	if(. < 0)
 		. = 0
 
@@ -145,20 +147,17 @@
 
 	return
 
-//Allows AIs to use door_timer, see human attack_hand function below
-/obj/machinery/door_timer/attack_ai(var/mob/user as mob)
-	return src.attack_hand(user)
+/obj/machinery/door_timer/interface_interact(var/mob/user)
+	ui_interact(user)
+	return TRUE
 
-/obj/machinery/door_timer/attack_hand(var/mob/user as mob)
-	tg_ui_interact(user)
-
-/obj/machinery/door_timer/ui_data(mob/user)
+/obj/machinery/door_timer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/list/data = list()
 
+	var/timeval = timing ? timeleft() : timetoset/10
 	data["timing"] = timing
-	data["releasetime"] = releasetime
-	data["timetoset"] = timetoset
-	data["timeleft"] = timeleft()
+	data["minutes"] = round(timeval/60)
+	data["seconds"] = timeval % 60
 
 	var/list/flashes = list()
 
@@ -171,45 +170,47 @@
 		flashes[++flashes.len] = flashdata
 
 	data["flashes"] = flashes
-	return data
 
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
+	if (!ui)
+		ui = new(user, src, ui_key, "brig_timer.tmpl", name, 270, 150)
+		ui.set_initial_data(data)
+		ui.open()
+		ui.set_auto_update(1)
 
-/obj/machinery/door_timer/ui_act(action, params)
-	if(..())
-		return TRUE
+/obj/machinery/door_timer/CanUseTopic(user, state)
+	if(!allowed(user))
+		return STATUS_UPDATE
+	return ..()
 
-	if(!src.allowed(usr))
-		return TRUE
-
-	switch (action)
-		if("start")
+/obj/machinery/door_timer/OnTopic(var/mob/user, var/list/href_list, state)
+	if (href_list["toggle"])
+		if(timing)
+			timer_end()
+		else
+			timer_start()
 			if(timetoset > 18000)
 				log_and_message_admins("has started a brig timer over 30 minutes in length!")
-			timer_start()
-		if("stop")
-			timer_end()
-		if("flash")
-			for(var/obj/machinery/flasher/F in targets)
-				F.flash()
-		if("time")
-			timetoset += text2num(params["adjust"])
-			timetoset = Clamp(timetoset, 0, 36000)
+		. =  TOPIC_REFRESH
 
-	src.update_icon()
-	return TRUE
+	if (href_list["flash"])
+		for(var/obj/machinery/flasher/F in targets)
+			F.flash()
+		. =  TOPIC_REFRESH
+		
+	if (href_list["adjust"])
+		timetoset += text2num(href_list["adjust"])
+		timetoset = Clamp(timetoset, 0, 36000)
+		. = TOPIC_REFRESH
 
+	update_icon()
 
-/obj/machinery/door_timer/tg_ui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/ui_state/state = GLOB.default_state)
-	ui = tgui_process.try_update_ui(user, src, ui_key, ui, force_open)
-	if(!ui)
-		ui = new(user, src, ui_key, "brig_timer", name , 300, 150, master_ui, state)
-		ui.open()
 
 //icon update function
 // if NOPOWER, display blank
 // if BROKEN, display blue screen of death icon AI uses
 // if timing=true, run update display function
-/obj/machinery/door_timer/update_icon()
+/obj/machinery/door_timer/on_update_icon()
 	if(stat & (NOPOWER))
 		icon_state = "frame"
 		return
@@ -249,7 +250,7 @@
 //Stolen from status_display
 /obj/machinery/door_timer/proc/texticon(var/tn, var/px = 0, var/py = 0)
 	var/image/I = image('icons/obj/status_display.dmi', "blank")
-	var/len = lentext(tn)
+	var/len = length(tn)
 
 	for(var/d = 1 to len)
 		var/char = copytext(tn, len-d+1, len-d+2)

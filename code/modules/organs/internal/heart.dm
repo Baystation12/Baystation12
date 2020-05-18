@@ -8,9 +8,14 @@
 	var/heartbeat = 0
 	var/beat_sound = 'sound/effects/singlebeat.ogg'
 	var/tmp/next_blood_squirt = 0
-	relative_size = 15
+	damage_reduction = 0.7
+	relative_size = 5
 	max_damage = 45
 	var/open
+	var/list/external_pump
+
+/obj/item/organ/internal/heart/open
+	open = 1
 
 /obj/item/organ/internal/heart/die()
 	if(dead_icon)
@@ -27,19 +32,28 @@
 		if(pulse)
 			handle_heartbeat()
 			if(pulse == PULSE_2FAST && prob(1))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 			if(pulse == PULSE_THREADY && prob(5))
-				take_damage(0.5)
+				take_internal_damage(0.5)
 		handle_blood()
 	..()
 
 /obj/item/organ/internal/heart/proc/handle_pulse()
-	if(robotic >= ORGAN_ROBOT)
+	if(BP_IS_ROBOTIC(src))
 		pulse = PULSE_NONE	//that's it, you're dead (or your metal heart is), nothing can influence your pulse
 		return
 
+	// pulse mod starts out as just the chemical effect amount
 	var/pulse_mod = owner.chem_effects[CE_PULSE]
-
+	var/is_stable = owner.chem_effects[CE_STABLE]
+		
+	// If you have enough heart chemicals to be over 2, you're likely to take extra damage.
+	if(pulse_mod > 2 && !is_stable)
+		var/damage_chance = (pulse_mod - 2) ** 2
+		if(prob(damage_chance))
+			take_internal_damage(0.5)
+	
+	// Now pulse mod is impacted by shock stage and other things too
 	if(owner.shock_stage > 30)
 		pulse_mod++
 	if(owner.shock_stage > 80)
@@ -54,7 +68,7 @@
 	if(owner.status_flags & FAKEDEATH || owner.chem_effects[CE_NOPULSE])
 		pulse = Clamp(PULSE_NONE + pulse_mod, PULSE_NONE, PULSE_2FAST) //pretend that we're dead. unlike actual death, can be inflienced by meds
 		return
-	
+
 	//If heart is stopped, it isn't going to restart itself randomly.
 	if(pulse == PULSE_NONE)
 		return
@@ -66,12 +80,17 @@
 			to_chat(owner, "<span class='danger'>Your heart has stopped!</span>")
 			pulse = PULSE_NONE
 			return
-	if(pulse && oxy <= BLOOD_VOLUME_SURVIVE && !owner.chem_effects[CE_STABLE])	//I SAID MOAR OXYGEN
-		pulse = PULSE_THREADY
-		return
 
+	// Pulse normally shouldn't go above PULSE_2FAST
 	pulse = Clamp(PULSE_NORM + pulse_mod, PULSE_SLOW, PULSE_2FAST)
-	if(pulse != PULSE_NORM && owner.chem_effects[CE_STABLE])
+
+	// If fibrillation, then it can be PULSE_THREADY
+	var/fibrillation = oxy <= BLOOD_VOLUME_SURVIVE || (prob(30) && owner.shock_stage > 120)
+	if(pulse && fibrillation)	//I SAID MOAR OXYGEN
+		pulse = PULSE_THREADY
+
+	// Stablising chemicals pull the heartbeat towards the center
+	if(pulse != PULSE_NORM && is_stable)
 		if(pulse > PULSE_NORM)
 			pulse--
 		else
@@ -83,6 +102,8 @@
 		//High pulse value corresponds to a fast rate of heartbeat.
 		//Divided by 2, otherwise it is too slow.
 		var/rate = (PULSE_THREADY - pulse)/2
+		if(owner.chem_effects[CE_PULSE] > 2)
+			heartbeat++
 
 		if(heartbeat >= rate)
 			heartbeat = 0
@@ -99,13 +120,13 @@
 	if(!owner || owner.InStasis() || owner.stat == DEAD || owner.bodytemperature < 170)
 		return
 
-	if(pulse != PULSE_NONE || robotic >= ORGAN_ROBOT)
+	if(pulse != PULSE_NONE || BP_IS_ROBOTIC(src))
 		//Bleeding out
 		var/blood_max = 0
 		var/list/do_spray = list()
 		for(var/obj/item/organ/external/temp in owner.organs)
 
-			if(temp.robotic >= ORGAN_ROBOT)
+			if(BP_IS_ROBOTIC(temp))
 				continue
 
 			var/open_wound
@@ -133,7 +154,7 @@
 				if(bleed_amount)
 					if(open_wound)
 						blood_max += bleed_amount
-						do_spray += "the [temp.artery_name] in \the [owner]'s [temp.name]"
+						do_spray += "[temp.name]"
 					else
 						owner.vessel.remove_reagent(/datum/reagent/blood, bleed_amount)
 
@@ -149,9 +170,16 @@
 			blood_max *= 0.8
 
 		if(world.time >= next_blood_squirt && istype(owner.loc, /turf) && do_spray.len)
-			owner.visible_message("<span class='danger'>Blood squirts from [pick(do_spray)]!</span>")
-			// It becomes very spammy otherwise. Arterial bleeding will still happen outside of this block, just not the squirt effect.
-			next_blood_squirt = world.time + 100
+			var/spray_organ = pick(do_spray)
+			owner.visible_message(
+				SPAN_DANGER("Blood sprays out from \the [owner]'s [spray_organ]!"),
+				FONT_HUGE(SPAN_DANGER("Blood sprays out from your [spray_organ]!"))
+			)
+			owner.Stun(1)
+			owner.eye_blurry = 2
+
+			//AB occurs every heartbeat, this only throttles the visible effect
+			next_blood_squirt = world.time + 80
 			var/turf/sprayloc = get_turf(owner)
 			blood_max -= owner.drip(ceil(blood_max/3), sprayloc)
 			if(blood_max > 0)
@@ -165,10 +193,10 @@
 	if(!is_usable())
 		return FALSE
 
-	return pulse > PULSE_NONE || robotic == ORGAN_ROBOT || (owner.status_flags & FAKEDEATH)
+	return pulse > PULSE_NONE || BP_IS_ROBOTIC(src) || (owner.status_flags & FAKEDEATH)
 
 /obj/item/organ/internal/heart/listen()
-	if(robotic == ORGAN_ROBOT && is_working())
+	if(BP_IS_ROBOTIC(src) && is_working())
 		if(is_bruised())
 			return "sputtering pump"
 		else
@@ -192,3 +220,6 @@
 			pulsesound = "extremely fast and faint"
 
 	. = "[pulsesound] pulse"
+
+/obj/item/organ/internal/heart/get_mechanical_assisted_descriptor()
+	return "pacemaker-assisted [name]"

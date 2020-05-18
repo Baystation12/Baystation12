@@ -169,7 +169,7 @@
 			SetName("damaged [initial(name)]")
 	else if(all_patched)
 		SetName("patched [initial(name)]")
-	else 
+	else
 		SetName(initial(name))
 
 	return damage
@@ -180,20 +180,22 @@
 	if(istype(W,/obj/item/stack/material))
 		var/repair_power = 0
 		switch(W.get_material_name())
-			if(DEFAULT_WALL_MATERIAL)
+			if(MATERIAL_STEEL)
 				repair_power = 2
-			if("plastic")
+			if(MATERIAL_PLASTIC)
 				repair_power = 1
 
 		if(!repair_power)
 			return
 
-		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
-			return
+		if(istype(src.loc,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = src.loc
+			if(H.wear_suit == src)
+				to_chat(user, "<span class='warning'>You cannot repair \the [src] while it is being worn.</span>")
+				return
 
 		if(burn_damage <= 0)
-			to_chat(user, "There is no surface damage on \the [src] to repair.")
+			to_chat(user, "There is no surface damage on \the [src] to repair.") //maybe change the descriptor to more obvious? idk what
 			return
 
 		var/obj/item/stack/P = W
@@ -204,9 +206,11 @@
 
 	else if(isWelder(W))
 
-		if(istype(src.loc,/mob/living))
-			to_chat(user, "<span class='warning'>How do you intend to patch a hardsuit while someone is wearing it?</span>")
-			return
+		if(istype(src.loc,/mob/living/carbon/human))
+			var/mob/living/carbon/human/H = src.loc
+			if(H.wear_suit == src)
+				to_chat(user, "<span class='warning'>You cannot repair \the [src] while it is being worn.</span>")
+				return
 
 		if (brute_damage <= 0)
 			to_chat(user, "There is no structural damage on \the [src] to repair.")
@@ -230,17 +234,26 @@
 
 		if(!target_breach)
 			to_chat(user, "There are no open breaches to seal with \the [W].")
-		else if(user != loc || do_after(user, 30, src))		//Doing this in your own inventory is awkward.
-			user.visible_message("<b>[user]</b> uses \the [W] to seal \the [target_breach] on \the [src].")
-			target_breach.patched = TRUE
-			target_breach.update_descriptor()
-			calc_breach_damage()
+		else 
+			playsound(src, 'sound/effects/tape.ogg',25)
+			var/mob/living/carbon/human/H = user
+			if(!istype(H)) return
+			if(do_after(user, H.wear_suit == src? 60 : 30, istype(src.loc,/mob/living)? src.loc : null)) //Sealing a breach on your own suit is awkward and time consuming
+				user.visible_message("<b>[user]</b> uses \the [W] to seal \the [target_breach.descriptor] on \the [src].")
+				target_breach.patched = TRUE
+				target_breach.update_descriptor()
+				calc_breach_damage()
 		return
 
 	..()
 
 /obj/item/clothing/suit/space/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(can_breach && breaches && breaches.len)
 		for(var/datum/breach/B in breaches)
 			to_chat(user, "<span class='danger'>It has \a [B.descriptor].</span>")
+
+/obj/item/clothing/suit/space/get_pressure_weakness(pressure)
+	. = ..()
+	if(can_breach && damage)
+		. = min(1, . + damage*0.1)

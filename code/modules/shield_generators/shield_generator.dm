@@ -4,31 +4,42 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "generator0"
 	density = 1
-	var/datum/wires/shield_generator/wires
-	var/list/field_segments = list()	// List of all shield segments owned by this generator.
-	var/list/damaged_segments = list()	// List of shield segments that have failed and are currently regenerating.
-	var/shield_modes = 0				// Enabled shield mode flags
-	var/mitigation_em = 0				// Current EM mitigation
-	var/mitigation_physical = 0			// Current Physical mitigation
-	var/mitigation_heat = 0				// Current Burn mitigation
-	var/mitigation_max = 0				// Maximal mitigation reachable with this generator. Set by RefreshParts()
-	var/max_energy = 0					// Maximal stored energy. In joules. Depends on the type of used SMES coil when constructing this generator.
-	var/current_energy = 0				// Current stored energy.
-	var/field_radius = 1				// Current field radius.
-	var/running = SHIELD_OFF			// Whether the generator is enabled or not.
-	var/input_cap = 1 MEGAWATTS			// Currently set input limit. Set to 0 to disable limits altogether. The shield will try to input this value per tick at most
-	var/upkeep_power_usage = 0			// Upkeep power usage last tick.
-	var/upkeep_multiplier = 1			// Multiplier of upkeep values.
-	var/power_usage = 0					// Total power usage last tick.
-	var/overloaded = 0					// Whether the field has overloaded and shut down to regenerate.
-	var/hacked = 0						// Whether the generator has been hacked by cutting the safety wire.
-	var/offline_for = 0					// The generator will be inoperable for this duration in ticks.
-	var/input_cut = 0					// Whether the input wire is cut.
-	var/mode_changes_locked = 0			// Whether the control wire is cut, locking out changes.
-	var/ai_control_disabled = 0			// Whether the AI control is disabled.
-	var/list/mode_list = null			// A list of shield_mode datums.
+	base_type = /obj/machinery/power/shield_generator
+	construct_state = /decl/machine_construction/default/panel_closed
+	wires = /datum/wires/shield_generator
+	uncreated_component_parts = null
+	stat_immune = 0
+	var/list/field_segments = list()    // List of all shield segments owned by this generator.
+	var/list/damaged_segments = list()  // List of shield segments that have failed and are currently regenerating.
+	var/shield_modes = 0                // Enabled shield mode flags
+	var/mitigation_em = 0               // Current EM mitigation
+	var/mitigation_physical = 0         // Current Physical mitigation
+	var/mitigation_heat = 0             // Current Burn mitigation
+	var/mitigation_max = 0              // Maximal mitigation reachable with this generator. Set by RefreshParts()
+	var/max_energy = 0                  // Maximal stored energy. In joules. Depends on the type of used SMES coil when constructing this generator.
+	var/current_energy = 0              // Current stored energy.
+	var/field_radius = 1                // Current field radius.
+	var/target_radius = 1               // Desired field radius.
+	var/running = SHIELD_OFF            // Whether the generator is enabled or not.
+	var/input_cap = 1 MEGAWATTS         // Currently set input limit. Set to 0 to disable limits altogether. The shield will try to input this value per tick at most
+	var/upkeep_power_usage = 0          // Upkeep power usage last tick.
+	var/upkeep_multiplier = 1           // Multiplier of upkeep values.
+	var/power_usage = 0                 // Total power usage last tick.
+	var/overloaded = 0                  // Whether the field has overloaded and shut down to regenerate.
+	var/hacked = 0                      // Whether the generator has been hacked by cutting the safety wire.
+	var/offline_for = 0                 // The generator will be inoperable for this duration in ticks.
+	var/input_cut = 0                   // Whether the input wire is cut.
+	var/mode_changes_locked = 0         // Whether the control wire is cut, locking out changes.
+	var/ai_control_disabled = 0         // Whether the AI control is disabled.
+	var/list/mode_list = null           // A list of shield_mode datums.
+	var/full_shield_strength = 0        // The amount of power shields need to be at full operating strength.
 
-/obj/machinery/power/shield_generator/update_icon()
+	var/idle_multiplier   = 1           // Trades off cost vs. spin-up time from idle to running
+	var/idle_valid_values = list(1, 2, 5, 10)
+	var/spinup_delay      = 20
+	var/spinup_counter    = 0
+
+/obj/machinery/power/shield_generator/on_update_icon()
 	if(running)
 		icon_state = "generator1"
 	else
@@ -37,15 +48,7 @@
 
 /obj/machinery/power/shield_generator/New()
 	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/shield_generator(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)			// Capacitor. Improves shield mitigation when better part is used.
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/smes_coil(src)						// SMES coil. Improves maximal shield energy capacity.
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	RefreshParts()
 	connect_to_network()
-	wires = new(src)
 
 	mode_list = list()
 	for(var/st in subtypesof(/datum/shield_mode/))
@@ -58,22 +61,22 @@
 	field_segments = null
 	damaged_segments = null
 	mode_list = null
-	QDEL_NULL(wires)
 	. = ..()
 
 
 /obj/machinery/power/shield_generator/RefreshParts()
 	max_energy = 0
-	for(var/obj/item/weapon/smes_coil/S in component_parts)
-		max_energy += (S.ChargeCapacity / CELLRATE)
+	full_shield_strength = 0
+	for(var/obj/item/weapon/stock_parts/smes_coil/S in component_parts)
+		full_shield_strength += (S.ChargeCapacity / CELLRATE) * 5
+	max_energy = full_shield_strength * 20
 	current_energy = between(0, current_energy, max_energy)
 
-	mitigation_max = MAX_MITIGATION_BASE
-	for(var/obj/item/weapon/stock_parts/capacitor/C in component_parts)
-		mitigation_max += MAX_MITIGATION_RESEARCH * C.rating
+	mitigation_max = MAX_MITIGATION_BASE + MAX_MITIGATION_RESEARCH * total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
 	mitigation_em = between(0, mitigation_em, mitigation_max)
 	mitigation_physical = between(0, mitigation_physical, mitigation_max)
 	mitigation_heat = between(0, mitigation_heat, mitigation_max)
+	..()
 
 
 // Shuts down the shield, removing all shield segments and unlocking generator settings.
@@ -131,37 +134,49 @@
 	if(offline_for)
 		offline_for = max(0, offline_for - 1)
 	// We're turned off.
-	if(!running)
+	if(running == SHIELD_OFF)
 		return
+
+	if(target_radius != field_radius && running != SHIELD_RUNNING) // Do not recalculate the field while it's running; that's extremely laggy.
+		field_radius += (target_radius > field_radius) ? 1 : -1
+
 	// We are shutting down, therefore our stored energy disperses faster than usual.
 	else if(running == SHIELD_DISCHARGING)
 		current_energy -= SHIELD_SHUTDOWN_DISPERSION_RATE
+	else if(running == SHIELD_SPINNING_UP)
+		spinup_counter--
+		if(spinup_counter <= 0)
+			running = SHIELD_RUNNING
+			regenerate_field()
 
 	mitigation_em = between(0, mitigation_em - MITIGATION_LOSS_PASSIVE, mitigation_max)
 	mitigation_heat = between(0, mitigation_heat - MITIGATION_LOSS_PASSIVE, mitigation_max)
 	mitigation_physical = between(0, mitigation_physical - MITIGATION_LOSS_PASSIVE, mitigation_max)
 
-	upkeep_power_usage = round((field_segments.len - damaged_segments.len) * ENERGY_UPKEEP_PER_TILE * upkeep_multiplier)
+	if(running == SHIELD_RUNNING)
+		upkeep_power_usage = round((field_segments.len - damaged_segments.len) * ENERGY_UPKEEP_PER_TILE * upkeep_multiplier)
+	else if(running > SHIELD_RUNNING)
+		upkeep_power_usage = round(ENERGY_UPKEEP_IDLE * idle_multiplier * (field_radius * 8) * upkeep_multiplier) // Approximates number of turfs.
 
-	if(powernet && (running == SHIELD_RUNNING) && !input_cut)
+	if(powernet && (running >= SHIELD_RUNNING) && !input_cut)
 		var/energy_buffer = 0
 		energy_buffer = draw_power(min(upkeep_power_usage, input_cap))
 		power_usage += round(energy_buffer)
 
 		if(energy_buffer < upkeep_power_usage)
-			current_energy -= round(upkeep_power_usage - energy_buffer)	// If we don't have enough energy from the grid, take it from the internal battery instead.
+			current_energy -= round(upkeep_power_usage - energy_buffer) // If we don't have enough energy from the grid, take it from the internal battery instead.
 
 		// Now try to recharge our internal energy.
 		var/energy_to_demand
 		if(input_cap)
-			energy_to_demand = between(0, max_energy - current_energy, input_cap - upkeep_power_usage)
+			energy_to_demand = between(0, max_energy - current_energy, input_cap - energy_buffer)
 		else
 			energy_to_demand = max(0, max_energy - current_energy)
 		energy_buffer = draw_power(energy_to_demand)
 		power_usage += energy_buffer
 		current_energy += round(energy_buffer)
 	else
-		current_energy -= round(upkeep_power_usage)	// We are shutting down, or we lack external power connection. Use energy from internal source instead.
+		current_energy -= round(upkeep_power_usage) // We are shutting down, or we lack external power connection. Use energy from internal source instead.
 
 	if(current_energy <= 0)
 		energy_failure()
@@ -172,28 +187,21 @@
 	else if (field_integrity() > 25)
 		overloaded = 0
 
+/obj/machinery/power/shield_generator/components_are_accessible(path)
+	return !running && ..()
+
+/obj/machinery/power/shield_generator/cannot_transition_to(state_path)
+	if(running)
+		return SPAN_NOTICE("Turn off \the [src] first!")
+	if(offline_for)
+		return SPAN_NOTICE("Wait until \the [src] cools down from emergency shutdown first!")
+	return ..()
 
 /obj/machinery/power/shield_generator/attackby(obj/item/O as obj, mob/user as mob)
-	if(panel_open && isMultitool(O) || isWirecutter(O))
+	if(panel_open && (isMultitool(O) || isWirecutter(O)))
 		attack_hand(user)
-		return
-
-	if(default_deconstruction_screwdriver(user, O))
-		return
-
-	// Prevents dismantle-rebuild tactics to reset the emergency shutdown timer.
-	if(running)
-		to_chat(user, "Turn off \the [src] first!")
-		return
-	if(offline_for)
-		to_chat(user, "Wait until \the [src] cools down from emergency shutdown first!")
-		return
-
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
-
+		return TRUE
+	return component_attackby(O, user)
 
 /obj/machinery/power/shield_generator/proc/energy_failure()
 	if(running == SHIELD_DISCHARGING)
@@ -204,6 +212,18 @@
 		for(var/obj/effect/shield/S in field_segments)
 			S.fail(1)
 
+/obj/machinery/power/shield_generator/proc/set_idle(var/new_state)
+	if(new_state)
+		if(running == SHIELD_IDLE)
+			return
+		running = SHIELD_IDLE
+		for(var/obj/effect/shield/S in field_segments)
+			qdel(S)
+	else
+		if(running != SHIELD_IDLE)
+			return
+		running = SHIELD_SPINNING_UP
+		spinup_counter = round(spinup_delay / idle_multiplier)
 
 /obj/machinery/power/shield_generator/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -218,16 +238,20 @@
 	data["field_integrity"] = field_integrity()
 	data["max_energy"] = round(max_energy / 1000000, 0.1)
 	data["current_energy"] = round(current_energy / 1000000, 0.1)
+	data["percentage_energy"] = round(data["current_energy"] / data["max_energy"] * 100)
 	data["total_segments"] = field_segments ? field_segments.len : 0
 	data["functional_segments"] = damaged_segments ? data["total_segments"] - damaged_segments.len : data["total_segments"]
 	data["field_radius"] = field_radius
+	data["target_radius"] = target_radius
 	data["input_cap_kw"] = round(input_cap / 1000)
 	data["upkeep_power_usage"] = round(upkeep_power_usage / 1000, 0.1)
 	data["power_usage"] = round(power_usage / 1000)
 	data["hacked"] = hacked
 	data["offline_for"] = offline_for * 2
+	data["idle_multiplier"] = idle_multiplier
+	data["idle_valid_values"] = idle_valid_values
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "shieldgen.tmpl", src.name, 500, 800)
 		ui.set_initial_data(data)
@@ -235,29 +259,39 @@
 		ui.set_auto_update(1)
 
 
-/obj/machinery/power/shield_generator/attack_hand(var/mob/user)
+/obj/machinery/power/shield_generator/interface_interact(var/mob/user)
 	ui_interact(user)
-	if(panel_open)
-		wires.Interact(user)
-
+	return TRUE
 
 /obj/machinery/power/shield_generator/CanUseTopic(var/mob/user)
 	if(issilicon(user) && !Adjacent(user) && ai_control_disabled)
 		return STATUS_UPDATE
 	return ..()
 
-/obj/machinery/power/shield_generator/OnTopic(user, href_list)
+/obj/machinery/power/shield_generator/OnTopic(user, href_list, datum/topic_state/state)
 	if(href_list["begin_shutdown"])
-		if(running != SHIELD_RUNNING)
+		if(running < SHIELD_RUNNING)
 			return
-		running = SHIELD_DISCHARGING
+		var/alert = alert(user, "Are you sure you wish to do this? It will drain the power inside the internal storage rapidly.", "Are you sure?", "Yes", "No")
+		if(!CanInteract(user, state))
+			return
+		if(running < SHIELD_RUNNING)
+			return
+		if(alert == "Yes")
+			set_idle(TRUE) // do this first to clear the field
+			running = SHIELD_DISCHARGING
 		return TOPIC_REFRESH
 
 	if(href_list["start_generator"])
 		if(offline_for)
 			return
-		running = SHIELD_RUNNING
-		regenerate_field()
+		set_idle(TRUE)
+		return TOPIC_REFRESH
+
+	if(href_list["toggle_idle"])
+		if(running < SHIELD_RUNNING)
+			return TOPIC_HANDLED
+		set_idle(text2num(href_list["toggle_idle"]))
 		return TOPIC_REFRESH
 
 	// Instantly drops the shield, but causes a cooldown before it may be started again. Also carries a risk of EMP at high charge.
@@ -274,7 +308,7 @@
 		var/old_energy = current_energy
 		shutdown_field()
 		log_and_message_admins("has triggered \the [src]'s emergency shutdown!", user)
-		spawn()	
+		spawn()
 			empulse(src, old_energy / 60000000, old_energy / 32000000, 1) // If shields are charged at 450 MJ, the EMP will be 7.5, 14.0625. 90 MJ, 1.5, 2.8125
 		old_energy = 0
 
@@ -287,8 +321,7 @@
 		var/new_range = input(user, "Enter new field range (1-[world.maxx]). Leave blank to cancel.", "Field Radius Control", field_radius) as num
 		if(!new_range)
 			return TOPIC_HANDLED
-		field_radius = between(1, new_range, world.maxx)
-		regenerate_field()
+		target_radius = between(1, new_range, world.maxx)
 		return TOPIC_REFRESH
 
 	if(href_list["set_input_cap"])
@@ -307,10 +340,17 @@
 		toggle_flag(text2num(href_list["toggle_mode"]))
 		return TOPIC_REFRESH
 
+	if(href_list["switch_idle"])
+		if(running == SHIELD_SPINNING_UP)
+			return TOPIC_REFRESH
+		var/new_idle = text2num(href_list["switch_idle"])
+		if(new_idle in idle_valid_values)
+			idle_multiplier = new_idle
+		return TOPIC_REFRESH
 
 /obj/machinery/power/shield_generator/proc/field_integrity()
-	if(max_energy)
-		return (current_energy / max_energy) * 100
+	if(full_shield_strength)
+		return round(CLAMP01(current_energy / full_shield_strength) * 100)
 	return 0
 
 
@@ -344,11 +384,12 @@
 		energy_failure()
 		return SHIELD_BREACHED_FAILURE
 
-	if(prob(10 - field_integrity()))
+	var/breachChance = rand(field_integrity(), field_integrity() + 100)
+	if(breachChance <= CRITICAL_BREACH_THRESHOLD)
 		return SHIELD_BREACHED_CRITICAL
-	if(prob(20 - field_integrity()))
+	else if(breachChance <= MAJOR_BREACH_THRESHOLD)
 		return SHIELD_BREACHED_MAJOR
-	if(prob(35 - field_integrity()))
+	else if(breachChance <= MINOR_BREACH_THRESHOLD)
 		return SHIELD_BREACHED_MINOR
 	return SHIELD_ABSORBED
 
@@ -364,7 +405,7 @@
 	for(var/obj/effect/shield/S in field_segments)
 		S.flags_updated()
 
-	if((flag & (MODEFLAG_HULL|MODEFLAG_MULTIZ)) && running)
+	if((flag & (MODEFLAG_HULL|MODEFLAG_MULTIZ)) && (running == SHIELD_RUNNING))
 		regenerate_field()
 
 	if(flag & MODEFLAG_MODULATE)

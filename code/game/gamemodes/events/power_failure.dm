@@ -16,8 +16,9 @@
 		GLOB.using_map.grid_restored_announcement()
 	for(var/obj/machinery/power/apc/C in SSmachines.machinery)
 		C.failure_timer = 0
-		if(C.cell)
-			C.cell.charge = C.cell.maxcharge
+		var/obj/item/weapon/cell/cell = C.get_cell()
+		if(cell)
+			cell.charge = cell.maxcharge
 	for(var/obj/machinery/power/smes/S in SSmachines.machinery)
 		S.failure_timer = 0
 		S.charge = S.capacity

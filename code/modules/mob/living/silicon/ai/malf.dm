@@ -10,14 +10,14 @@
 	hacked_apcs = list()
 	recalc_cpu()
 
-	verbs += new/datum/game_mode/malfunction/verb/ai_select_hardware()
-	verbs += new/datum/game_mode/malfunction/verb/ai_select_research()
-	verbs += new/datum/game_mode/malfunction/verb/ai_help()
+	verbs += /datum/game_mode/malfunction/verb/ai_select_hardware
+	verbs += /datum/game_mode/malfunction/verb/ai_select_research
+	verbs += /datum/game_mode/malfunction/verb/ai_help
 
 	log_ability_use(src, "became malfunctioning AI")
 	// And greet user with some OOC info.
 	to_chat(user, "You are malfunctioning, you do not have to follow any laws.")
-	to_chat(user, "Use ai-help command to view relevant information about your abilities")
+	to_chat(user, "Use the display-help command to view relevant information about your abilities")
 
 // Safely remove malfunction status, fixing hacked APCs and resetting variables.
 /mob/living/silicon/ai/proc/stop_malf(var/loud = 1)

@@ -17,13 +17,13 @@
 	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 10
-	can_escape = 1
+	can_escape = TRUE
 	attacktext = "punched"
 	a_intent = I_HURT
 	var/corpse = /obj/effect/landmark/corpse/syndicate
 	var/weapon1
 	var/weapon2
-	unsuitable_atoms_damage = 15
+	unsuitable_atmos_damage = 15
 	environment_smash = 1
 	faction = "syndicate"
 	status_flags = CANPUSH
@@ -91,11 +91,11 @@
 	rapid = 1
 	icon_state = "syndicateranged"
 	icon_living = "syndicateranged"
-	casingtype = /obj/item/ammo_casing/a10mm
+	casingtype = /obj/item/ammo_casing/pistol
 	projectilesound = 'sound/weapons/gunshot/gunshot_smg.ogg'
-	projectiletype = /obj/item/projectile/bullet/pistol/medium
+	projectiletype = /obj/item/projectile/bullet/pistol
 
-	weapon1 = /obj/item/weapon/gun/projectile/automatic/c20r
+	weapon1 = /obj/item/weapon/gun/projectile/automatic/merc_smg
 
 /mob/living/simple_animal/hostile/syndicate/ranged/space
 	icon_state = "syndicaterangedpsace"
@@ -110,7 +110,7 @@
 /mob/living/simple_animal/hostile/viscerator
 	name = "viscerator"
 	desc = "A small, twin-bladed machine capable of inflicting very deadly lacerations."
-	icon = 'icons/mob/critter.dmi'
+	icon = 'icons/mob/simple_animal/critter.dmi'
 	icon_state = "viscerator_attack"
 	icon_living = "viscerator_attack"
 	pass_flags = PASS_FLAG_TABLE
@@ -125,6 +125,16 @@
 	max_gas = null
 	minbodytemp = 0
 
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
 /mob/living/simple_animal/hostile/viscerator/death(gibbed, deathmessage, show_dead_message)
 	..(null,"is smashed into pieces!", show_dead_message)
 	qdel(src)
+
+/mob/living/simple_animal/hostile/viscerator/hive
+	faction = "hivebot"

@@ -40,4 +40,12 @@
 
 	if(!include_own_turf)
 		turfs -= get_turf(src)
-	src.throw_at(pick(turfs), maxrange, speed, src)
+	src.throw_at(pick(turfs), maxrange, speed)
+
+/atom/movable/proc/do_simple_ranged_interaction(var/mob/user)
+	return FALSE
+
+/atom/movable/hitby(var/atom/movable/AM)
+	..()
+	if(density && prob(50))
+		do_simple_ranged_interaction()

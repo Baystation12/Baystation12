@@ -1,8 +1,6 @@
 /obj/item/device/transfer_valve
 	name = "tank transfer valve"
 	desc = "A small, versatile valve with dual-headed heat-resistant pipes. This mechanism is the standard size for coupling with portable gas tanks."
-	description_info = "This machine is used to merge the contents of two different gas tanks. Plug the tanks into the transfer, then open the valve to mix them together. You can also attach various assembly devices to trigger this process."
-	description_antag = "With a tank of hot phoron and cold oxygen, this benign little atmospheric device becomes an incredibly deadly bomb. You don't want to be anywhere near it when it goes off."
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "valve_1"
 	var/obj/item/weapon/tank/tank_one
@@ -28,8 +26,8 @@
 			to_chat(user, "<span class='warning'>There are already two tanks attached, remove one first.</span>")
 			return
 
-		user.drop_item()
-		item.forceMove(src)
+		if(!user.unEquip(item, src))
+			return
 		if(!tank_one)
 			tank_one = item
 		else
@@ -46,7 +44,7 @@
 
 		update_icon()
 
-		GLOB.nanomanager.update_uis(src) // update all UIs attached to src
+		SSnano.update_uis(src) // update all UIs attached to src
 //TODO: Have this take an assemblyholder
 	else if(isassembly(item))
 		var/obj/item/device/assembly/A = item
@@ -56,9 +54,9 @@
 		if(attached_device)
 			to_chat(user, "<span class='warning'>There is already an device attached to the valve, remove it first.</span>")
 			return
-		user.remove_from_mob(item)
+		if(!user.unEquip(item, src))
+			return
 		attached_device = A
-		A.forceMove(src)
 		to_chat(user, "<span class='notice'>You attach the [item] to the valve controls and secure it.</span>")
 		A.holder = src
 		A.toggle_secure()	//this calls update_icon(), which calls update_icon() on the holder (i.e. the bomb).
@@ -67,7 +65,7 @@
 		message_admins("[key_name_admin(user)] attached a [item] to a transfer valve. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[location.x];Y=[location.y];Z=[location.z]'>JMP</a>)")
 		log_game("[key_name_admin(user)] attached a [item] to a transfer valve.")
 		attacher = user
-		GLOB.nanomanager.update_uis(src) // update all UIs attached to src
+		SSnano.update_uis(src) // update all UIs attached to src
 	return
 
 
@@ -90,7 +88,7 @@
 	data["valveOpen"] = valve_open ? 1 : 0
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -116,7 +114,7 @@
 		toggle_valve()
 	else if(attached_device)
 		if(href_list["rem_device"])
-			attached_device.loc = get_turf(src)
+			attached_device.dropInto(loc)
 			attached_device:holder = null
 			attached_device = null
 			update_icon()
@@ -131,9 +129,9 @@
 		spawn(50) // To stop a signal being spammed from a proxy sensor constantly going off or whatever
 			toggle = 1
 
-/obj/item/device/transfer_valve/update_icon()
+/obj/item/device/transfer_valve/on_update_icon()
 	overlays.Cut()
-	underlays = null
+	underlays.Cut()
 
 	if(!tank_one && !tank_two && !attached_device)
 		icon_state = "valve_1"
@@ -167,9 +165,8 @@
 	if(valve_open)
 		return
 	tank_two.air_contents.volume += tank_one.air_contents.volume
-	var/datum/gas_mixture/temp
-	temp = tank_one.air_contents.remove_ratio(1)
-	tank_two.air_contents.merge(temp)
+	var/datum/gas_mixture/temp = tank_one.remove_air_ratio(1)
+	tank_two.assume_air(temp)
 	valve_open = 1
 
 /obj/item/device/transfer_valve/proc/split_gases()
@@ -182,11 +179,9 @@
 		return
 
 	var/ratio1 = tank_one.air_contents.volume/tank_two.air_contents.volume
-	var/datum/gas_mixture/temp
-	temp = tank_two.air_contents.remove_ratio(ratio1)
-	tank_one.air_contents.merge(temp)
+	var/datum/gas_mixture/temp = tank_two.remove_air_ratio(ratio1)
 	tank_two.air_contents.volume -=  tank_one.air_contents.volume
-
+	tank_one.assume_air(temp)
 
 	/*
 	Exadv1: I know this isn't how it's going to work, but this was just to check

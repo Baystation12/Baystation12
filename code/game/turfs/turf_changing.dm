@@ -1,7 +1,9 @@
-/turf/proc/ReplaceWithLattice()
-	src.ChangeTurf(get_base_turf_by_area(src))
-	spawn()
-		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
+/turf/proc/ReplaceWithLattice(var/material)
+	var base_turf = get_base_turf_by_area(src);
+	if(type != base_turf)
+		src.ChangeTurf(get_base_turf_by_area(src))
+	if(!locate(/obj/structure/lattice) in src)
+		new /obj/structure/lattice(src, material)
 
 // Removes all signs of lattice on the pos of the turf -Donkieyo
 /turf/proc/RemoveLattice()
@@ -11,12 +13,11 @@
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
-	var/turf/simulated/open/T = GetAbove(src)
-	if(istype(T))
-		T.update_icon()
+	if (above)
+		above.update_mimic()
 
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe = TRUE, var/force_lighting_update = FALSE, var/keep_air = FALSE)
 	if (!N)
 		return
 
@@ -24,17 +25,20 @@
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
 		if(istype(below) && !istype(below,/turf/space))
-			N = below.density ? /turf/simulated/floor/airless : /turf/simulated/open
+			N = /turf/simulated/open
 
-	var/obj/fire/old_fire = fire
+	var/old_air = air
+	var/old_fire = fire
 	var/old_opacity = opacity
 	var/old_dynamic_lighting = dynamic_lighting
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_corners = corners
+	var/old_ao_neighbors = ao_neighbors
 
 //	log_debug("Replacing [src.type] with [N]")
 
+	changing_turf = TRUE
 
 	if(connections) connections.erase_all()
 
@@ -47,9 +51,18 @@
 		var/turf/simulated/S = src
 		if(S.zone) S.zone.rebuild()
 
-	var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
+	// Run the Destroy() chain.
+	qdel(src)
+
+	var/turf/simulated/W = new N(src)
+
+	if (permit_ao)
+		regenerate_ao()
 
 	W.opaque_counter = opaque_counter
+
+	if (keep_air)
+		W.air = old_air
 
 	if(ispath(N, /turf/simulated))
 		if(old_fire)
@@ -57,7 +70,7 @@
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 	else if(old_fire)
-		old_fire.RemoveFire()
+		qdel(old_fire)
 
 	if(tell_universe)
 		GLOB.universe.OnTurfChange(W)
@@ -70,6 +83,7 @@
 	W.post_change()
 	. = W
 
+	W.ao_neighbors = old_ao_neighbors
 	if(lighting_overlays_initialised)
 		lighting_overlay = old_lighting_overlay
 		affecting_lights = old_affecting_lights
@@ -81,6 +95,9 @@
 				lighting_build_overlay()
 			else
 				lighting_clear_overlay()
+
+	for(var/turf/T in RANGE_TURFS(src, 1))
+		T.update_icon()
 
 /turf/proc/transport_properties_from(turf/other)
 	if(!istype(other, src.type))
@@ -107,6 +124,11 @@
 		other.zone.remove(other)
 	return 1
 
+/turf/simulated/wall/transport_properties_from(turf/simulated/wall/other)
+	if(!..())
+		return 0
+	paint_color = other.paint_color
+	return 1
 
 //No idea why resetting the base appearence from New() isn't enough, but without this it doesn't work
 /turf/simulated/shuttle/wall/corner/transport_properties_from(turf/simulated/other)

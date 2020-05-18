@@ -1,0 +1,168 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor/exoplanet/water/shallow/tar,
+/area/template_noop)
+"b" = (
+/turf/template_noop,
+/area/template_noop)
+"c" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/machinery/artifact,
+/obj/effect/landmark/clear,
+/turf/simulated/floor/exoplanet/shrouded,
+/area/template_noop)
+"e" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/obj/structure/monolith,
+/turf/simulated/floor/exoplanet/water/shallow/tar,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+b
+b
+b
+b
+b
+a
+a
+a
+e
+b
+"}
+(2,1,1) = {"
+b
+b
+c
+a
+a
+f
+a
+a
+a
+a
+b
+"}
+(3,1,1) = {"
+b
+b
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(4,1,1) = {"
+b
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(5,1,1) = {"
+c
+a
+a
+a
+a
+a
+a
+a
+a
+a
+b
+"}
+(6,1,1) = {"
+a
+f
+a
+a
+a
+d
+a
+a
+a
+f
+b
+"}
+(7,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+c
+"}
+(8,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+b
+"}
+(9,1,1) = {"
+b
+a
+a
+a
+a
+a
+a
+a
+a
+c
+b
+"}
+(10,1,1) = {"
+b
+b
+c
+a
+a
+f
+a
+a
+b
+a
+b
+"}
+(11,1,1) = {"
+b
+a
+b
+b
+b
+a
+b
+b
+b
+b
+b
+"}

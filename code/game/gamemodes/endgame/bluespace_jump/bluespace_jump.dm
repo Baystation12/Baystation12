@@ -28,8 +28,9 @@
 		GLOB.using_map.accessible_z_levels -= "[z]" //not accessible during the jump
 
 /datum/universal_state/bluespace_jump/OnExit()
-	for(var/M in bluespaced)
-		clear_bluespaced(M)
+	for(var/mob/M in bluespaced)
+		if(!QDELETED(M))
+			clear_bluespaced(M)
 
 	bluespaced.Cut()
 	GLOB.using_map.accessible_z_levels = old_accessible_z_levels
@@ -114,8 +115,8 @@
 /obj/effect/bluegoast/proc/mirror_dir(var/atom/movable/am, var/old_dir, var/new_dir)
 	set_dir(GLOB.reverse_dir[new_dir])
 
-/obj/effect/bluegoast/examine(user)
-	return daddy.examine(user)
+/obj/effect/bluegoast/examine()
+	return daddy.examine(arglist(args))
 
 /obj/effect/bluegoast/proc/blueswitch()
 	var/mob/living/carbon/human/H = new(get_turf(src), daddy.species.name)
@@ -124,7 +125,7 @@
 	H.sync_organ_dna()
 	H.flavor_text = daddy.flavor_text
 	H.UpdateAppearance()
-	var/datum/job/job = job_master.GetJob(daddy.job)
+	var/datum/job/job = SSjobs.get_by_title(daddy.job)
 	if(job)
 		job.equip(H)
 	daddy.dust()

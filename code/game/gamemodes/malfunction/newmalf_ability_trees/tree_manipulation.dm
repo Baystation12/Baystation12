@@ -3,7 +3,7 @@
 // Abilities in this tree allow the AI to physically manipulate systems around the station.
 // T1 - Electrical Pulse - Sends out pulse that breaks some lights and sometimes even APCs. This can actually break the AI's APC so be careful!
 // T2 - Reboot camera - Allows the AI to reactivate a camera.
-// T3 - Emergency Forcefield - Allows the AI to project 1 tile forcefield that blocks movement and air flow. Forcefield´dissipates over time. It is also very susceptible to energetic weaponry.
+// T3 - Emergency Forcefield - Allows the AI to project 1 tile forcefield that blocks movement and air flow. Forcefield dissipates over time. It is also very susceptible to energetic weaponry.
 // T4 - Machine Overload - Detonates machine of choice in a minor explosion. Two of these are usually enough to kill or K/O someone.
 // T5 - Machine Upgrade - Upgrades a machine of choice. Upgrade behavior can be defined for each machine independently.
 
@@ -58,7 +58,7 @@
 		if(prob(5))
 			AP.overload_lighting()
 		if(prob(2.5) && (get_area(AP) != get_area(user))) // Very very small chance to actually destroy the APC, but not if the APC is powering the AI.
-			AP.set_broken()
+			AP.set_broken(TRUE)
 	user.hacking = 1
 	log_ability_use(user, "electrical pulse")
 	spawn(15 SECONDS)
@@ -129,8 +129,9 @@
 			return
 		else if (istype(N, /obj/machinery/power/apc)) // APC. Explosion is increased by available cell power.
 			var/obj/machinery/power/apc/A = N
-			if(A.cell && A.cell.charge)
-				explosion_intensity = 4 + round((A.cell.charge / CELLRATE) / 100000)
+			var/obj/item/weapon/cell/cell = A.get_cell()
+			if(cell && cell.charge)
+				explosion_intensity = 4 + round((cell.charge / CELLRATE) / 100000)
 			else
 				to_chat(user, "<span class='notice'>ERROR: APC Malfunction - Cell depleted or removed. Unable to overload.</span>")
 				return
@@ -161,14 +162,15 @@
 	if(!ability_pay(user,price))
 		return
 
-	M.use_power(250 KILOWATTS)
+	M.use_power_oneoff(250 KILOWATTS)
 
 	// Trigger a powernet alarm. Careful engineers will probably notice something is going on.
 	var/area/temp_area = get_area(M)
 	if(temp_area)
 		var/obj/machinery/power/apc/temp_apc = temp_area.get_apc()
-		if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
-			temp_apc.terminal.powernet.trigger_warning(50) // Long alarm
+		var/obj/machinery/power/terminal/terminal = temp_apc && temp_apc.terminal()
+		if(terminal && terminal.powernet)
+			terminal.powernet.trigger_warning(50) // Long alarm
 			 // Such power surges are not good for APC electronics/cell in general.
 			if(prob(explosion_intensity))
 				temp_apc.emp_act(1)

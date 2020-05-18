@@ -1,9 +1,7 @@
 /obj/structure/closet/crate/secure/loot
 	name = "abandoned crate"
 	desc = "What could be inside?"
-	icon_state = "securecrate"
-	icon_opened = "securecrateopen"
-	icon_closed = "securecrate"
+	closet_appearance = /decl/closet_appearance/crate/secure
 	var/list/code = list()
 	var/list/lastattempt = list()
 	var/attempts = 10
@@ -32,7 +30,7 @@
 			new/obj/item/weapon/pickaxe/drill(src)
 			new/obj/item/device/taperecorder(src)
 			new/obj/item/clothing/suit/space(src)
-			new/obj/item/clothing/head/helmet/space(src)
+			new/obj/item/clothing/head/helmet/space/fishbowl(src)
 		if(11 to 15)
 			new/obj/item/weapon/reagent_containers/glass/beaker/bluespace(src)
 		if(16 to 20)
@@ -72,7 +70,7 @@
 		if(63 to 64)
 			var/t = rand(4,7)
 			for(var/i = 0, i < t, ++i)
-				var/newcoin = pick(/obj/item/weapon/coin/silver, /obj/item/weapon/coin/silver, /obj/item/weapon/coin/silver, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/iron, /obj/item/weapon/coin/gold, /obj/item/weapon/coin/diamond, /obj/item/weapon/coin/phoron, /obj/item/weapon/coin/uranium, /obj/item/weapon/coin/platinum)
+				var/newcoin = pick(/obj/item/weapon/material/coin/silver, /obj/item/weapon/material/coin/silver, /obj/item/weapon/material/coin/silver, /obj/item/weapon/material/coin/iron, /obj/item/weapon/material/coin/iron, /obj/item/weapon/material/coin/iron, /obj/item/weapon/material/coin/gold, /obj/item/weapon/material/coin/diamond, /obj/item/weapon/material/coin/phoron, /obj/item/weapon/material/coin/uranium, /obj/item/weapon/material/coin/platinum)
 				new newcoin(src)
 		if(65 to 66)
 			new/obj/item/clothing/suit/ianshirt(src)
@@ -103,9 +101,7 @@
 			new/obj/item/weed_extract(src)
 		if(88)
 			new/obj/item/xenos_claw(src)
-		if(89)
-			new/obj/item/organ/internal/xeno/plasmavessel(src)
-		if(90)
+		if(89, 90)
 			new/obj/item/organ/internal/heart(src)
 		if(91)
 			new/obj/item/device/soulstone(src)

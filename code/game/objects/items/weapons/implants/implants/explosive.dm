@@ -3,7 +3,8 @@
 	name = "explosive implant"
 	desc = "A military grade micro bio-explosive. Highly dangerous."
 	icon_state = "implant_evil"
-	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 2, TECH_ESOTERIC = 3)
+	hidden = 1
 	var/elevel
 	var/phrase
 	var/code = 13
@@ -109,7 +110,7 @@
 	return replace_characters(phrase, replacechars)
 
 /obj/item/weapon/implant/explosive/activate()
-	if (malfunction == MALFUNCTION_PERMANENT)
+	if (malfunction)
 		return
 
 	var/turf/T = get_turf(src)
@@ -119,12 +120,10 @@
 	playsound(loc, 'sound/items/countdown.ogg', 75, 1, -3)
 	if(ismob(imp_in))
 		imp_in.audible_message("<span class='warning'>Something beeps inside [imp_in][part ? "'s [part.name]" : ""]!</span>")
-		message_admins("Explosive implant triggered in [imp_in] ([imp_in.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[imp_in.x];Y=[imp_in.y];Z=[imp_in.z]'>JMP</a>) ")
-		log_game("Explosive implant triggered in [imp_in] ([imp_in.key]).")
+		log_and_message_admins("Explosive implant triggered in [imp_in] ([imp_in.key]). (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[imp_in.x];Y=[imp_in.y];Z=[imp_in.z]'>JMP</a>) ")
 	else
 		audible_message("<span class='warning'>[src] beeps omniously!</span>")
-		message_admins("Explosive implant triggered in [T.loc]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
-		log_game("Explosive implant triggered in [T.loc].")
+		log_and_message_admins("Explosive implant triggered in [T.loc]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[T.x];Y=[T.y];Z=[T.z]'>JMP</a>) ")
 
 	if(!elevel)
 		elevel = "Full Explosion"
@@ -133,7 +132,7 @@
 			if (part)
 				if (istype(part,/obj/item/organ/external/chest) ||	\
 					istype(part,/obj/item/organ/external/groin))
-					part.take_damage(60, used_weapon = "Explosion")
+					part.take_external_damage(60, used_weapon = "Explosion")
 				else
 					part.droplimb(0,DROPLIMB_BLUNT)
 			explosion(T, -1, -1, 2, 3)
@@ -152,24 +151,13 @@
 		elevel = alert("What sort of explosion would you prefer?", "Implant Intent", "Localized Limb", "Destroy Body", "Full Explosion")
 	if(!phrase)
 		phrase = sanitize_phrase(input("Choose activation phrase:") as text)
+	if(!phrase)
+		return
+
 	var/memo = "Explosive implant in [target] can be activated by saying something containing the phrase ''[phrase]'', <B>say [phrase]</B> to attempt to activate. It can also be triggered with a radio signal on frequency <b>[format_frequency(src.frequency)]</b> with code <b>[code]</b>."
-	usr.mind.store_memory(memo, 0, 0)
+	usr.StoreMemory(memo, /decl/memory_options/system)
 	to_chat(usr, memo)
 	return TRUE
-
-/obj/item/weapon/implant/explosive/emp_act(severity)
-	if (malfunction)
-		return
-	malfunction = MALFUNCTION_TEMPORARY
-	switch (severity)
-		if (1)	//strong EMP will melt implant either making it go off, or disarming it
-			if (prob(25))
-				if (prob(50))
-					activate()		//50% chance of bye bye
-				else
-					meltdown()		//50% chance of implant disarming
-	spawn (20)
-		malfunction = 0
 
 /obj/item/weapon/implant/explosive/Destroy()
 	removed()

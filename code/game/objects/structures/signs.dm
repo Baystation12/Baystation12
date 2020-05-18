@@ -180,7 +180,19 @@
 
 /obj/structure/sign/warning/pods
 	name = "\improper ESCAPE PODS"
-	icon_state = "pods"
+	icon_state = "podsnorth"
+
+/obj/structure/sign/warning/pods/south
+	name = "\improper ESCAPE PODS"
+	icon_state = "podssouth"
+
+/obj/structure/sign/warning/pods/east
+	name = "\improper ESCAPE PODS"
+	icon_state = "podseast"
+
+/obj/structure/sign/warning/pods/west
+	name = "\improper ESCAPE PODS"
+	icon_state = "podswest"
 
 /obj/structure/sign/warning/radioactive
 	name = "\improper RADIOACTIVE AREA"
@@ -250,11 +262,6 @@
 	desc = "This plaque memorializes those engineers and technicians who made the ultimate sacrifice to save their vessel and its crew."
 	icon_state = "atmosplaque"
 
-/obj/structure/sign/floorplaque
-	name = "\improper commemorative plaque"
-	desc = "A list of dead explorers who gave their lives in search of the next great discovery. Hope you don't join them."
-	icon_state = "floorplaque"
-
 /obj/structure/sign/double/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
 	name = "The Maltese Falcon"
 	desc = "The Maltese Falcon, Space Bar and Grill."
@@ -267,7 +274,7 @@
 
 /obj/structure/sign/warning/science
 	name = "\improper SCIENCE!"
-	icon_state = "science1"
+	icon_state = "science"
 
 /obj/structure/sign/warning/science/anomalous_materials
 	name = "\improper ANOMALOUS MATERIALS"
@@ -278,7 +285,7 @@
 /obj/structure/sign/science_1
 	name = "\improper RESEARCH WING"
 	desc = "A sign labelling the research wing."
-	icon_state = "science1"
+	icon_state = "science"
 
 /obj/structure/sign/science_2
 	name = "\improper RESEARCH"
@@ -313,7 +320,7 @@
 /obj/structure/sign/chemistry
 	name = "\improper CHEMISTRY"
 	desc = "A sign labelling an area containing chemical equipment."
-	icon_state = "chemistry1"
+	icon_state = "chemistry"
 
 /obj/structure/sign/xenoflora
 	name = "\improper XENOFLORA"
@@ -328,7 +335,7 @@
 /obj/structure/sign/hydro
 	name = "\improper HYDROPONICS"
 	desc = "A sign labelling an area as a place where plants are grown."
-	icon_state = "hydro1"
+	icon_state = "hydro"
 
 /obj/structure/sign/hydrostorage
 	name = "\improper HYDROPONICS STORAGE"
@@ -400,6 +407,10 @@
 	name = "\improper Fourth Deck"
 	icon_state = "deck-4"
 
+/obj/structure/sign/deck/fifth
+	name = "\improper Fifth Deck"
+	icon_state = "deck-5"
+
 /obj/item/sign/medipolma
 	name = "medical diploma"
 	desc = "A fancy print laminated paper that certifies that its bearer is indeed a Doctor of Medicine, graduated from a medical school in one of fringe systems. You don't recognize the name though, and half of latin words they used do not actually exist."
@@ -415,7 +426,7 @@
 	..()
 
 /obj/item/sign/medipolma/examine(mob/user)
-	..()
+	. = ..()
 	if(claimant)
 		to_chat(user,"This one belongs to Dr.[claimant], MD.")
 	else

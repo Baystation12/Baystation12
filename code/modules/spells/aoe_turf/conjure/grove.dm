@@ -16,13 +16,14 @@
 	var/spread = 0
 	var/datum/seed/seed
 	var/seed_type = /datum/seed/merlin_tear
+	cast_sound = 'sound/magic/repulse.ogg'
 
 /spell/aoe_turf/conjure/grove/New()
 	..()
 	if(seed_type)
 		seed = new seed_type()
 	else
-		seed = plant_controller.create_random_seed(1)
+		seed = SSplants.create_random_seed(1)
 
 /spell/aoe_turf/conjure/grove/before_cast()
 	var/turf/T = get_turf(holder)

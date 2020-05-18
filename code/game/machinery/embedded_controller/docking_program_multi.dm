@@ -130,10 +130,10 @@
 		else
 			override_enabled = 1
 			broadcast_override_status()
-		return
+		return TRUE
 
 	if (!docking_enabled|| override_enabled)	//only allow the port to be used as an airlock if nothing is docked here or the override is enabled
-		..(command)
+		return ..(command)
 
 /datum/computer/file/embedded_program/airlock/multi_docking/receive_signal(datum/signal/signal, receive_method, receive_param)
 	..()

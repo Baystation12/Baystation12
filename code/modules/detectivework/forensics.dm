@@ -8,10 +8,13 @@ var/const/FINGERPRINT_COMPLETE = 6
 proc/is_complete_print(var/print)
 	return stringpercent(print) <= FINGERPRINT_COMPLETE
 
+atom/var/list/fingerprintshidden
+atom/var/fingerprintslast
+
 atom/var/list/suit_fibers
-atom/var/var/list/fingerprints
-atom/var/var/list/fingerprintshidden
-atom/var/var/fingerprintslast = null
+atom/var/list/fingerprints
+atom/var/list/gunshot_residue
+obj/item/var/list/trace_DNA
 
 /atom/proc/add_hiddenprint(mob/M)
 	if(!M || !M.key)
@@ -49,6 +52,7 @@ atom/var/var/fingerprintslast = null
 	if(!full_print)
 		return
 
+	//Using prints from severed hand items!
 	var/obj/item/organ/external/E = M.get_active_hand()
 	if(src != E && istype(E) && E.get_fingerprint())
 		full_print = E.get_fingerprint()
@@ -64,16 +68,19 @@ atom/var/var/fingerprintslast = null
 			else if(prob(75))
 				return 0
 			H.gloves.add_fingerprint(M)
-
+	var/additional_chance = 0
+	if(!M.skill_check(SKILL_FORENSICS, SKILL_BASIC))
+		additional_chance = 10
 	// Add the fingerprints
-	add_partial_print(full_print)
+	add_partial_print(full_print, additional_chance)
 	return 1
 
-/atom/proc/add_partial_print(full_print)
+/atom/proc/add_partial_print(full_print, bonus)
+	LAZYINITLIST(fingerprints)
 	if(!fingerprints[full_print])
-		fingerprints[full_print] = stars(full_print, rand(0, 20))	//Initial touch, not leaving much evidence the first time.
+		fingerprints[full_print] = stars(full_print, rand(0 + bonus, 20 + bonus))	//Initial touch, not leaving much evidence the first time.
 	else
-		switch(stringpercent(fingerprints[full_print]))		//tells us how many stars are in the current prints.
+		switch(max(stringpercent(fingerprints[full_print]) - bonus,0))		//tells us how many stars are in the current prints.
 			if(28 to 32)
 				if(prob(1))
 					fingerprints[full_print] = full_print 		// You rolled a one buddy.
@@ -106,14 +113,23 @@ atom/var/var/fingerprintslast = null
 
 /atom/proc/transfer_fingerprints_to(var/atom/A)
 	if(fingerprints)
-		if(!A.fingerprints)
-			A.fingerprints = list()
-		A.fingerprints |= fingerprints.Copy()            //detective
+		LAZYDISTINCTADD(A.fingerprints, fingerprints)
 	if(fingerprintshidden)
-		if(!A.fingerprintshidden)
-			A.fingerprintshidden = list()
-		A.fingerprintshidden |= fingerprintshidden.Copy()    //admin
+		LAZYDISTINCTADD(A.fingerprintshidden, fingerprintshidden)
 		A.fingerprintslast = fingerprintslast
+	if(suit_fibers)
+		LAZYDISTINCTADD(A.suit_fibers, suit_fibers)
+	if(blood_DNA)
+		LAZYDISTINCTADD(A.blood_DNA, blood_DNA)
+	if(gunshot_residue)
+		var/obj/item/clothing/C = A
+		LAZYDISTINCTADD(C.gunshot_residue, gunshot_residue)
+
+/obj/item/transfer_fingerprints_to(var/atom/A)
+	..()
+	if(istype(A,/obj/item) && trace_DNA)
+		var/obj/item/I = A
+		LAZYDISTINCTADD(I.trace_DNA, trace_DNA)
 
 atom/proc/add_fibers(mob/living/carbon/human/M)
 	if(!istype(M))
@@ -127,7 +143,6 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		if(add_blood(M.bloody_hands_mob))
 			M.bloody_hands--
 
-	if(!suit_fibers) suit_fibers = list()
 	var/fibertext
 	var/item_multiplier = istype(src,/obj/item)?1.2:1
 	var/suit_coverage = 0
@@ -135,20 +150,28 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 		var/obj/item/clothing/C = M.wear_suit
 		fibertext = C.get_fibers()
 		if(fibertext && prob(10*item_multiplier))
-			suit_fibers |= fibertext
+			LAZYDISTINCTADD(suit_fibers, fibertext)
 		suit_coverage = C.body_parts_covered
 
 	if(istype(M.w_uniform, /obj/item/clothing) && (M.w_uniform.body_parts_covered & ~suit_coverage))
 		var/obj/item/clothing/C = M.w_uniform
 		fibertext = C.get_fibers()
 		if(fibertext && prob(15*item_multiplier))
-			suit_fibers |= fibertext
+			LAZYDISTINCTADD(suit_fibers, fibertext)
 
 	if(istype(M.gloves, /obj/item/clothing) && (M.gloves.body_parts_covered & ~suit_coverage))
 		var/obj/item/clothing/C = M.gloves
 		fibertext = C.get_fibers()
 		if(fibertext && prob(20*item_multiplier))
-			suit_fibers |= fibertext
+			LAZYDISTINCTADD(suit_fibers, fibertext)
+
+/obj/item/proc/add_trace_DNA(mob/living/carbon/M)
+	if(!istype(M))
+		return
+	if(M.isSynthetic())
+		return
+	if(istype(M.dna))
+		LAZYDISTINCTADD(trace_DNA, M.dna.unique_enzymes)
 
 /mob/proc/get_full_print()
 	return FALSE
@@ -166,20 +189,29 @@ atom/proc/add_fibers(mob/living/carbon/human/M)
 	if(E)
 		return E.get_fingerprint()
 
-/obj/item/organ/external/proc/get_fingerprint()
-	return
 
-/obj/item/organ/external/arm/get_fingerprint()
-	for(var/obj/item/organ/external/hand/H in children)
-		return H.get_fingerprint()
 
-/obj/item/organ/external/hand/get_fingerprint()
-	if(robotic >= ORGAN_ROBOT)
-		return null
-	if(dna && !is_stump())
-		return md5(dna.uni_identity)
+//on examination get hints of evidence
+/mob/examinate(atom/A as mob|obj|turf in view())
+	if(UNLINT(..()))
+		return 1 //I'll admit I am just imitating examine.dm
 
-/obj/item/organ/external/afterattack(atom/A, mob/user, proximity)
-	..()
-	if(proximity && get_fingerprint())
-		A.add_partial_print(get_fingerprint())
+
+	//Detective is on the case
+	if(get_skill_value(SKILL_FORENSICS) >= SKILL_EXPERT && get_dist(src, A) <= (get_skill_value(SKILL_FORENSICS) - SKILL_ADEPT))
+		var/clue
+		if(LAZYLEN(A.suit_fibers))
+			to_chat(src, "<span class='notice'>You notice some fibers embedded in \the [A].</span>")
+			clue = 1
+		if(LAZYLEN(A.fingerprints))
+			to_chat(src, "<span class='notice'>You notice a partial print on \the [A].</span>")
+			clue = 1
+		if(LAZYLEN(A.gunshot_residue))
+			to_chat(src, "<span class='notice'>You notice a faint acrid smell coming from \the [A].</span>")
+			clue = 1
+		//Noticing wiped blood is a bit harder
+		if((get_skill_value(SKILL_FORENSICS) >= SKILL_PROF) && LAZYLEN(A.blood_DNA))
+			to_chat(src, "<span class='warning'>You notice faint blood traces on \The [A].</span>")
+			clue = 1
+		if(clue && has_client_color(/datum/client_color/noir))
+			playsound_local(null, pick('sound/effects/clue1.ogg','sound/effects/clue2.ogg'), 60, is_global = TRUE)

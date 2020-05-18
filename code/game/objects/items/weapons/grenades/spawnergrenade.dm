@@ -25,7 +25,7 @@
 				if(newvars && length(newvars))
 					for(var/v in newvars)
 						x.vars[v] = newvars[v]
-				x.loc = T
+				x.dropInto(loc)
 				if(prob(50))
 					for(var/j = 1, j <= rand(1, 3), j++)
 						step(x, pick(NORTH,SOUTH,EAST,WEST))
@@ -39,10 +39,10 @@
 	name = "manhack delivery grenade"
 	spawner_type = /mob/living/simple_animal/hostile/viscerator
 	deliveryamt = 5
-	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4, TECH_ESOTERIC = 4)
 
 /obj/item/weapon/grenade/spawnergrenade/spesscarp
 	name = "carp delivery grenade"
 	spawner_type = /mob/living/simple_animal/hostile/carp
 	deliveryamt = 5
-	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4, TECH_ILLEGAL = 4)
+	origin_tech = list(TECH_MATERIAL = 3, TECH_MAGNET = 4, TECH_ESOTERIC = 4)

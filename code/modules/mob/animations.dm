@@ -65,15 +65,15 @@ note dizziness decrements automatically in the mob's Life() proc.
 	is_jittery = 1
 	while(jitteriness > 100)
 		var/amplitude = min(4, jitteriness / 100)
-		pixel_x = default_pixel_x + rand(-amplitude, amplitude)
-		pixel_y = default_pixel_y + rand(-amplitude/3, amplitude/3)
-
+		do_jitter(amplitude)
 		sleep(1)
 	//endwhile - reset the pixel offsets to zero
 	is_jittery = 0
-	pixel_x = default_pixel_x
-	pixel_y = default_pixel_y
+	do_jitter(0)
 
+/mob/proc/do_jitter(amplitude)
+	pixel_x = default_pixel_x + rand(-amplitude, amplitude)
+	pixel_y = default_pixel_y + rand(-amplitude/3, amplitude/3)
 
 //handles up-down floaty effect in space and zero-gravity
 /mob/var/is_floating = 0
@@ -107,17 +107,17 @@ note dizziness decrements automatically in the mob's Life() proc.
 	var/amplitude = 2 //maximum displacement from original position
 	var/period = 36 //time taken for the mob to go up >> down >> original position, in deciseconds. Should be multiple of 4
 
-	var/top = default_pixel_y + amplitude
-	var/bottom = default_pixel_y - amplitude
+	var/top = default_pixel_z + amplitude
+	var/bottom = default_pixel_z - amplitude
 	var/half_period = period / 2
 	var/quarter_period = period / 4
 
-	animate(src, pixel_y = top, time = quarter_period, easing = SINE_EASING | EASE_OUT, loop = -1)		//up
-	animate(pixel_y = bottom, time = half_period, easing = SINE_EASING, loop = -1)						//down
-	animate(pixel_y = default_pixel_y, time = quarter_period, easing = SINE_EASING | EASE_IN, loop = -1)			//back
+	animate(src, pixel_z = top, time = quarter_period, easing = SINE_EASING | EASE_OUT, loop = -1)		//up
+	animate(pixel_z = bottom, time = half_period, easing = SINE_EASING, loop = -1)						//down
+	animate(pixel_z = default_pixel_z, time = quarter_period, easing = SINE_EASING | EASE_IN, loop = -1)			//back
 
 /mob/proc/stop_floating()
-	animate(src, pixel_y = default_pixel_y, time = 5, easing = SINE_EASING | EASE_IN) //halt animation
+	animate(src, pixel_z = default_pixel_z, time = 5, easing = SINE_EASING | EASE_IN) //halt animation
 	//reset the pixel offsets to zero
 	is_floating = 0
 
@@ -222,10 +222,26 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 	playsound(T, 'sound/effects/phasein.ogg', 25, 1)
 	playsound(T, 'sound/effects/sparks2.ogg', 50, 1)
-	anim(T,src,'icons/mob/mob.dmi',,"phasein",,dir)
+	anim(src,'icons/mob/mob.dmi',,"phasein",,dir)
 
 /mob/proc/phase_out(var/turf/T)
 	if(!T)
 		return
 	playsound(T, "sparks", 50, 1)
-	anim(T,src,'icons/mob/mob.dmi',,"phaseout",,dir)
+	anim(src,'icons/mob/mob.dmi',,"phaseout",,dir)
+
+/mob/living/proc/on_structure_offset(var/offset = 0)
+	if(offset)
+		var/check = default_pixel_z + offset
+		if(pixel_z != check)
+			animate(src, pixel_z = check, time = 2, easing = SINE_EASING)
+	else if(pixel_z != default_pixel_z)
+		var/turf/T = get_turf(src)
+		for(var/obj/structure/S in T.contents)
+			if(S && S.mob_offset)
+				return
+		animate(src, pixel_z = default_pixel_z, time = 2, easing = SINE_EASING)
+
+/mob/living/Move()
+	. = ..()
+	on_structure_offset(0)

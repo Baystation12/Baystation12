@@ -41,17 +41,29 @@
 	icon_state = "longtie"
 	color = "#b18345"
 
-/obj/item/clothing/accessory/nt
-	name = "\improper NanoTrasen tie with a clip"
-	desc = "A neosilk clip-on tie. This one has a clip on it that proudly bears 'NT' on it."
-	icon_state = "ntcliptie"
+/obj/item/clothing/accessory/corptie
+	name = "corporate tie"
+	desc = "A green neosilk clip-on tie. This one has a clip on it that proudly bears a corporate logo."
+	icon_state = "cliptie"
+
+/obj/item/clothing/accessory/corptie/nanotrasen
+	name = "\improper NanoTrasen tie"
+	desc = "A red neosilk clip-on tie. This one has a clip on it that proudly bears the NanoTrasen logo."
+	icon_state = "cliptie_nt"
+
+/obj/item/clothing/accessory/corptie/heph
+	name = "\improper Hephaestus Industries tie"
+	desc = "A cyan neosilk clip-on tie. This one has a clip on it that proudly bears the Hephaestus Industries logo."
+	icon_state = "cliptie_heph"
+
+/obj/item/clothing/accessory/corptie/zeng
+	name = "\improper Zeng-Hu tie"
+	desc = "A gold neosilk clip-on tie. This one has a clip on it that proudly bears the Zeng-Hu Pharmaceuticals logo."
+	icon_state = "cliptie_zeng"
 
 //Bowties
 /obj/item/clothing/accessory/bowtie
-	var/icon_tied
-/obj/item/clothing/accessory/bowtie/New()
-	icon_tied = icon_tied || icon_state
-	..()
+	var/tied = TRUE
 
 /obj/item/clothing/accessory/bowtie/on_attached(obj/item/clothing/under/S, mob/user as mob)
 	..()
@@ -69,29 +81,24 @@
 
 	if(usr.incapacitated())
 		return 0
+	if(!istype(src)) // This verb is given to our holding clothing item and called on it, so src might not be the bowtie.
+		for(var/obj/item/clothing/accessory/bowtie/tie in accessories)
+			src = tie
+			break
+	if(!istype(src))
+		return
+	do_toggle(usr)
 
-	var/obj/item/clothing/accessory/bowtie/H = null
-	if (istype(src, /obj/item/clothing/accessory/bowtie))
-		H = src
-	else
-		H = locate() in src
-
-	if(H)
-		H.do_toggle(usr)
-
-/obj/item/clothing/accessory/bowtie/proc/do_toggle(user)
-	if(icon_state == icon_tied)
-		to_chat(usr, "You untie [src].")
-	else
-		to_chat(usr, "You tie [src].")
-
+/obj/item/clothing/accessory/bowtie/proc/do_toggle(mob/user)
+	user.visible_message("\The [user] [tied ? "un" : ""]ties \the [src].", "You [tied ? "un" : ""]tie \the [src].")
+	tied = !tied
 	update_icon()
 
-/obj/item/clothing/accessory/bowtie/update_icon()
-	if(icon_state == icon_tied)
-		icon_state = "[icon_tied]_untied"
+/obj/item/clothing/accessory/bowtie/on_update_icon()
+	if(tied)
+		icon_state = initial(icon_state)
 	else
-		icon_state = icon_tied
+		icon_state = "[initial(icon_state)]_untied"
 
 /obj/item/clothing/accessory/bowtie/color
 	name = "bowtie"

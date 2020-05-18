@@ -117,6 +117,12 @@ research holder datum.
 //Refreshes the levels of a given tech.
 //Input: Tech's ID and Level; Output: null
 /datum/research/proc/UpdateTech(var/ID, var/level)
+	// If a "brain expansion" event is active, we gain 1 extra level
+	for(var/datum/event/E in SSevent.active_events)
+		if(istype(E, /datum/event/brain_expansion))
+			level += 1
+			break
+
 	for(var/datum/tech/KT in known_tech)
 		if(KT.id == ID && KT.level <= level)
 			KT.level = max(KT.level + 1, level - 1)
@@ -185,16 +191,10 @@ research holder datum.
 	desc = "Computer and artificial intelligence and data storage systems."
 	id = TECH_DATA
 
-/datum/tech/syndicate
-	name = "ILLEGAL"
-	desc = "WARNING: Controlled technology detected. Fabrication of items using this technology is a direct violation of Federal Law 352-C part II and is a serious crime."
-	id = TECH_ILLEGAL
-	level = 0
-
-/datum/tech/arcane
-	name = "Arcane"
-	desc = "Techniques not explained by the mainstream science, commonly regarded as 'occult'."
-	id = TECH_ARCANE
+/datum/tech/esoteric
+	name = "Esoteric Technology"
+	desc = "A miscellaneous tech category filled with information on non-standard designs, personal projects and half-baked ideas."
+	id = TECH_ESOTERIC
 	level = 0
 
 /obj/item/weapon/disk/tech_disk
@@ -204,7 +204,7 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
-	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
+	matter = list(MATERIAL_PLASTIC = 30, MATERIAL_STEEL = 30, MATERIAL_GLASS = 10)
 	var/datum/tech/stored
 
 
@@ -215,5 +215,5 @@ research holder datum.
 	icon_state = "datadisk2"
 	item_state = "card-id"
 	w_class = ITEM_SIZE_SMALL
-	matter = list(DEFAULT_WALL_MATERIAL = 30, "glass" = 10)
+	matter = list(MATERIAL_PLASTIC = 30, MATERIAL_STEEL = 30, MATERIAL_GLASS = 10)
 	var/datum/design/blueprint

@@ -8,6 +8,9 @@
 	temperature = T20C
 	thermal_conductivity = OPEN_HEAT_TRANSFER_COEFFICIENT
 	var/static/list/dust_cache
+	permit_ao = FALSE
+
+	z_eventually_space = TRUE
 
 /turf/space/proc/build_dust_cache()
 	LAZYINITLIST(dust_cache)
@@ -40,11 +43,18 @@
 
 	return INITIALIZE_HINT_LATELOAD // oh no! we need to switch to being a different kind of turf!
 
+/turf/space/Destroy()
+	// Cleanup cached z_eventually_space values above us.
+	if (above)
+		var/turf/T = src
+		while ((T = GetAbove(T)))
+			T.z_eventually_space = FALSE
+	return ..()
+
 /turf/space/LateInitialize()
-	// We alter area type before the turf to ensure the turf-change-event-propagation is handled as expected.
 	if(GLOB.using_map.base_floor_area)
 		var/area/new_area = locate(GLOB.using_map.base_floor_area) || new GLOB.using_map.base_floor_area
-		new_area.contents.Add(src)
+		ChangeArea(src, new_area)
 	ChangeTurf(GLOB.using_map.base_floor_type)
 
 // override for space turfs, since they should never hide anything
@@ -59,33 +69,32 @@
 	if(!config.starlight)
 		return
 	if(locate(/turf/simulated) in orange(src,1)) //Let's make sure not to break everything if people use a crazy setting.
-		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.BGcolor)
+		set_light(min(0.1*config.starlight, 1), 1, 3, l_color = SSskybox.background_color)
 	else
 		set_light(0)
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 
-	if (istype(C, /obj/item/stack/rods))
+	if (istype(C, /obj/item/stack/material/rods))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			return L.attackby(C, user)
-		var/obj/item/stack/rods/R = C
+		var/obj/item/stack/material/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>Constructing support lattice ...</span>")
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			ReplaceWithLattice()
+			ReplaceWithLattice(R.material.name)
 		return
 
 	if (istype(C, /obj/item/stack/tile/floor))
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			var/obj/item/stack/tile/floor/S = C
-			if (S.get_amount() < 1)
+			if (!S.use(1))
 				return
 			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
-			S.use(1)
-			ChangeTurf(/turf/simulated/floor/airless)
+			ChangeTurf(/turf/simulated/floor/airless, keep_air = TRUE)
 			return
 		else
 			to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
@@ -96,10 +105,7 @@
 
 /turf/space/Entered(atom/movable/A as mob|obj)
 	..()
-	if(A && A.loc == src && ticker && ticker.mode)
-
-		// Okay, so let's make it so that people can travel z levels but not nuke disks!
-		// if(ticker.mode.name == "mercenary")	return
+	if(A && A.loc == src)
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE + 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE + 1))
 			A.touch_map_edge()
 
@@ -216,8 +222,11 @@
 					A.loc.Entered(A)
 	return
 
-/turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
-	return ..(N, tell_universe, 1)
+/turf/space/ChangeTurf(turf/N, tell_universe = TRUE, force_lighting_update = FALSE, keep_air = FALSE)
+	return ..(N, tell_universe, TRUE, keep_air)
+
+/turf/space/is_open()
+	return TRUE
 
 //Bluespace turfs for shuttles and possible future transit use
 /turf/space/bluespace

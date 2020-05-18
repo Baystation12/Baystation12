@@ -5,7 +5,7 @@
 	sharp = 1
 	embed = 1 //the dart is shot fast enough to pierce space suits, so I guess splintering inside the target can be a thing. Should be rare due to low damage.
 	var/reagent_amount = 15
-	kill_count = 15 //shorter range
+	life_span = 15 //shorter range
 	unacidable = 1
 
 	muzzle_type = null
@@ -17,14 +17,14 @@
 /obj/item/projectile/bullet/chemdart/on_hit(var/atom/target, var/blocked = 0, var/def_zone = null)
 	if(blocked < 100 && isliving(target))
 		var/mob/living/L = target
-		if(L.can_inject(null, def_zone))
+		if(L.can_inject(null, def_zone) == CAN_INJECT)
 			reagents.trans_to_mob(L, reagent_amount, CHEM_BLOOD)
 
 /obj/item/ammo_casing/chemdart
 	name = "chemical dart"
 	desc = "A small hardened, hollow dart."
 	icon_state = "dart"
-	caliber = "dart"
+	caliber = CALIBER_DART
 	projectile_type = /obj/item/projectile/bullet/chemdart
 	leaves_residue = 0
 
@@ -38,7 +38,7 @@
 	item_state = "rcdammo"
 	origin_tech = list(TECH_MATERIAL = 2)
 	mag_type = MAGAZINE
-	caliber = "dart"
+	caliber = CALIBER_DART
 	ammo_type = /obj/item/ammo_casing/chemdart
 	max_ammo = 5
 	multiple_sprites = 1
@@ -46,10 +46,11 @@
 /obj/item/weapon/gun/projectile/dartgun
 	name = "dart gun"
 	desc = "Zeng-Hu Pharmaceutical's entry into the arms market, the Z-H P Artemis is a gas-powered dart gun capable of delivering chemical cocktails swiftly across short distances."
+	icon = 'icons/obj/guns/dartgun.dmi'
 	icon_state = "dartgun-empty"
 	item_state = null
 
-	caliber = "dart"
+	caliber = CALIBER_DART
 	fire_sound = 'sound/weapons/empty.ogg'
 	fire_sound_text = "a metallic click"
 	screen_shake = 0
@@ -76,7 +77,7 @@
 	. = ..()
 	update_icon()
 
-/obj/item/weapon/gun/projectile/dartgun/update_icon()
+/obj/item/weapon/gun/projectile/dartgun/on_update_icon()
 	if(!ammo_magazine)
 		icon_state = "dartgun-empty"
 		return 1
@@ -117,7 +118,8 @@
 	if(beakers.len >= max_beakers)
 		to_chat(user, "<span class='warning'>[src] already has [max_beakers] beakers in it - another one isn't going to fit!</span>")
 		return
-	user.drop_from_inventory(B, src)
+	if(!user.unEquip(B, src))
+		return
 	beakers |= B
 	user.visible_message("\The [user] inserts \a [B] into [src].", "<span class='notice'>You slot [B] into [src].</span>")
 

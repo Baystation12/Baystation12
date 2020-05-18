@@ -1,7 +1,5 @@
 #define SAVE_RESET -1
 
-var/list/preferences_datums = list()
-
 datum/preferences
 	//doohickeys for savefiles
 	var/path
@@ -17,9 +15,6 @@ datum/preferences
 	//game-preferences
 	var/lastchangelog = ""				//Saved changlog filesize to detect if there was a change
 
-	//character preferences
-	var/species_preview                 //Used for the species selection window.
-
 		//Mob preview
 	var/icon/preview_icon = null
 
@@ -32,6 +27,17 @@ datum/preferences
 	var/datum/browser/panel
 
 /datum/preferences/New(client/C)
+	if(istype(C))
+		client = C
+		client_ckey = C.ckey
+		SScharacter_setup.preferences_datums[C.ckey] = src
+		if(SScharacter_setup.initialized)
+			setup()
+		else
+			SScharacter_setup.prefs_awaiting_setup += src
+	..()
+
+/datum/preferences/proc/setup()
 	if(!length(GLOB.skills))
 		decls_repository.get_decl(/decl/hierarchy/skill)
 	player_setup = new(src)
@@ -39,22 +45,26 @@ datum/preferences
 	real_name = random_name(gender,species)
 	b_type = RANDOM_BLOOD_TYPE
 
-	if(istype(C))
-		client = C
-		client_ckey = C.ckey
-		if(!IsGuestKey(C.key))
-			load_path(C.ckey)
-			load_preferences()
-			load_and_update_character()
+	if(client && !IsGuestKey(client.key))
+		load_path(client.ckey)
+		load_preferences()
+		load_and_update_character()
+	sanitize_preferences()
+	if(client && istype(client.mob, /mob/new_player))
+		var/mob/new_player/np = client.mob
+		np.new_player_panel(TRUE)
 
 /datum/preferences/proc/load_and_update_character(var/slot)
 	load_character(slot)
 	if(update_setup(loaded_preferences, loaded_character))
-		save_preferences()
+		SScharacter_setup.queue_preferences_save(src)
 		save_character()
 
 /datum/preferences/proc/ShowChoices(mob/user)
-	if(!user || !user.client)	return
+	if(!SScharacter_setup.initialized)
+		return
+	if(!user || !user.client)
+		return
 
 	if(!get_mob_by_key(client_ckey))
 		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
@@ -131,8 +141,10 @@ datum/preferences
 	// Sanitizing rather than saving as someone might still be editing when copy_to occurs.
 	player_setup.sanitize_setup()
 	character.set_species(species)
+
 	if(be_random_name)
-		real_name = random_name(gender,species)
+		var/decl/cultural_info/culture = SSculture.get_culture(cultural_info[TAG_CULTURE])
+		if(culture) real_name = culture.get_random_name(gender)
 
 	if(config.humans_need_surnames)
 		var/firstspace = findtext(real_name, " ")
@@ -188,7 +200,6 @@ datum/preferences
 		if(!O)
 			continue
 		O.status = 0
-		O.robotic = 0
 		O.model = null
 		if(status == "amputated")
 			character.organs_by_name[O.organ_tag] = null
@@ -197,19 +208,22 @@ datum/preferences
 				for(var/obj/item/organ/external/child in O.children)
 					character.organs_by_name[child.organ_tag] = null
 					character.organs -= child
+					qdel(child)
+			qdel(O)
 		else if(status == "cyborg")
 			if(rlimb_data[name])
 				O.robotize(rlimb_data[name])
 			else
 				O.robotize()
 		else //normal organ
-			O.force_icon = null
+			O.force_icon = initial(O.force_icon)
 			O.SetName(initial(O.name))
 			O.desc = initial(O.desc)
+
 	//For species that don't care about your silly prefs
 	character.species.handle_limbs_setup(character)
 	if(!is_preview_copy)
-		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS))
+		for(var/name in list(BP_HEART,BP_EYES,BP_BRAIN,BP_LUNGS,BP_LIVER,BP_KIDNEYS,BP_STOMACH))
 			var/status = organ_data[name]
 			if(!status)
 				continue
@@ -257,11 +271,14 @@ datum/preferences
 	character.update_hair(0)
 	character.update_icons()
 
-	character.char_branch = mil_branches.get_branch(char_branch)
-	character.char_rank = mil_branches.get_rank(char_branch, char_rank)
-
 	if(is_preview_copy)
 		return
+
+	for(var/token in cultural_info)
+		character.set_cultural_value(token, cultural_info[token], defer_language_update = TRUE)
+	character.update_languages()
+	for(var/lang in alternate_languages)
+		character.add_language(lang)
 
 	character.flavor_texts["general"] = flavor_texts["general"]
 	character.flavor_texts["head"] = flavor_texts["head"]
@@ -273,21 +290,19 @@ datum/preferences
 	character.flavor_texts["legs"] = flavor_texts["legs"]
 	character.flavor_texts["feet"] = flavor_texts["feet"]
 
+	character.public_record = public_record
 	character.med_record = med_record
 	character.sec_record = sec_record
 	character.gen_record = gen_record
 	character.exploit_record = exploit_record
 
-	character.home_system = home_system
-	character.citizenship = citizenship
-	character.personal_faction = faction
-	character.religion = religion
+	if(LAZYLEN(character.descriptors))
+		for(var/entry in body_descriptors)
+			character.descriptors[entry] = body_descriptors[entry]
 
 	if(!character.isSynthetic())
-		character.nutrition = rand(140,360)
-
-	return
-
+		character.set_nutrition(rand(140,360))
+		character.set_hydration(rand(140,360))
 
 /datum/preferences/proc/open_load_dialog(mob/user)
 	var/dat  = list()
@@ -313,5 +328,7 @@ datum/preferences
 	panel.open()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
-	user << browse(null, "window=saves")
-	panel.close()
+	if(panel)
+		panel.close()
+		panel = null
+	close_browser(user, "window=saves")

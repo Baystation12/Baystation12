@@ -23,7 +23,7 @@
 	var/check_records = 1	//checks if a security record exists at all
 	var/check_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
 	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
-	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
+	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms
 	var/check_synth = 0 	//if active, will shoot at anything not an AI or cyborg
 	var/ailock = 0 	//Silicons cannot use this
 
@@ -61,7 +61,7 @@
 		else
 			control_area = null
 
-	power_change() //Checks power and initial settings
+	updateTurrets()	//Initial settings
 	. = ..()
 
 /obj/machinery/turretid/proc/isLocked(mob/user)
@@ -104,21 +104,14 @@
 	if(!emagged)
 		to_chat(user, "<span class='danger'>You short out the turret controls' access analysis module.</span>")
 		emagged = 1
+		req_access.Cut()
 		locked = 0
 		ailock = 0
 		return 1
 
-/obj/machinery/turretid/attack_ai(mob/user as mob)
-	if(isLocked(user))
-		return
-
+/obj/machinery/turretid/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/turretid/attack_hand(mob/user as mob)
-	if(isLocked(user))
-		return
-
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/turretid/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -138,7 +131,7 @@
 		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
 		data["settings"] = settings
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "turret_control.tmpl", "Turret Controls", 500, 300)
 		ui.set_initial_data(data)
@@ -176,8 +169,7 @@
 			check_anomalies = value
 
 		if(!isnull(log_action))
-			log_admin("[key_name(usr)] has [log_action]")
-			message_admins("[key_name_admin(usr)] has [log_action]", 1)
+			log_and_message_admins("has [log_action]", 1)
 
 		updateTurrets()
 		return 1
@@ -198,14 +190,9 @@
 		for (var/obj/machinery/porta_turret/aTurret in control_area)
 			aTurret.setState(TC)
 
-	update_icon()
+	queue_icon_update()
 
-/obj/machinery/turretid/power_change()
-	. = ..()
-	if(.)
-		updateTurrets()
-
-/obj/machinery/turretid/update_icon()
+/obj/machinery/turretid/on_update_icon()
 	..()
 	if(stat & NOPOWER)
 		icon_state = "control_off"
@@ -231,6 +218,8 @@
 		check_weapons = pick(0, 1)
 		check_access = pick(0, 0, 0, 0, 1)	// check_access is a pretty big deal, so it's least likely to get turned on
 		check_anomalies = pick(0, 1)
+		locked = pick(0, 1)
+		ailock = pick(0, 1)
 
 		enabled=0
 		updateTurrets()

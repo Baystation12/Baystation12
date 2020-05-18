@@ -4,7 +4,8 @@
 	icon_state = "red"
 	slot = ACCESSORY_SLOT_ARMBAND
 	species_restricted = null
-	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/ties.dmi')
+	on_rolled = list("down" = "none")
+	sprite_sheets = list(SPECIES_NABBER = 'icons/mob/species/nabber/onmob_accessories_gas.dmi')
 
 /obj/item/clothing/accessory/armband/cargo
 	name = "cargo armband"
@@ -37,9 +38,9 @@
 	icon_state = "medblueband"
 
 /obj/item/clothing/accessory/armband/whitered
-	name = "\improper NanoTrasen armband"
-	desc = "An armband, worn by the crew to display which department they're assigned to. This one is white and red."
-	icon_state = "whitered"
+	name = "\improper corporate armband"
+	desc = "An armband, worn by the crew to display which department they're assigned to. This one is green and white."
+	icon_state = "corpsec_armband"
 
 /obj/item/clothing/accessory/armband/bluegold
 	name = "peacekeeper armband"

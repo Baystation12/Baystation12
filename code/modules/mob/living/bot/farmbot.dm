@@ -10,7 +10,7 @@
 	icon_state = "farmbot0"
 	health = 50
 	maxHealth = 50
-	req_one_access = list(access_hydroponics, access_robotics)
+	req_access = list(list(access_hydroponics, access_robotics))
 
 	var/action = "" // Used to update icon
 	var/waters_trays = 1
@@ -119,7 +119,7 @@
 				target = tray
 				return
 		if(!target && refills_water && tank && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			for(var/obj/structure/sink/source in view(7, src))
+			for(var/obj/structure/hygiene/sink/source in view(7, src))
 				target = source
 				return
 
@@ -160,7 +160,7 @@
 				busy = 1
 				if(do_after(src, 30, A))
 					visible_message("<span class='notice'>[src] [T.dead? "removes the plant from" : "harvests"] \the [A].</span>")
-					T.attack_hand(src)
+					T.physical_attack_hand(src)
 			if(FARMBOT_WATER)
 				action = "water"
 				update_icons()
@@ -190,7 +190,7 @@
 		action = ""
 		update_icons()
 		T.update_icon()
-	else if(istype(A, /obj/structure/sink))
+	else if(istype(A, /obj/structure/hygiene/sink))
 		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
 			return
 		action = "water"
@@ -198,7 +198,7 @@
 		visible_message("<span class='notice'>[src] starts refilling its tank from \the [A].</span>")
 		busy = 1
 		while(do_after(src, 10) && tank.reagents.total_volume < tank.reagents.maximum_volume)
-			tank.reagents.add_reagent(/datum/reagent/water, 10)
+			tank.reagents.add_reagent(/datum/reagent/water, 100)
 			if(prob(5))
 				playsound(loc, 'sound/effects/slosh.ogg', 25, 1)
 		busy = 0
@@ -231,10 +231,10 @@
 	new /obj/item/weapon/material/minihoe(Tsec)
 	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
 	new /obj/item/device/assembly/prox_sensor(Tsec)
-	new /obj/item/device/analyzer/plant_analyzer(Tsec)
+	new /obj/item/device/scanner/plant(Tsec)
 
 	if(tank)
-		tank.loc = Tsec
+		tank.forceMove(Tsec)
 
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
@@ -254,7 +254,7 @@
 			return 1
 		return 0
 
-	if(istype(targ, /obj/structure/sink))
+	if(istype(targ, /obj/structure/hygiene/sink))
 		if(!tank || tank.reagents.total_volume >= tank.reagents.maximum_volume)
 			return 0
 		return 1
@@ -279,79 +279,3 @@
 		return FARMBOT_NUTRIMENT
 
 	return 0
-
-// Assembly
-
-/obj/item/weapon/farmbot_arm_assembly
-	name = "water tank/robot arm assembly"
-	desc = "A water tank with a robot arm permanently grafted to it."
-	icon = 'icons/mob/bot/farmbot.dmi'
-	icon_state = "water_arm"
-	var/build_step = 0
-	var/created_name = "Farmbot"
-	var/obj/tank
-	w_class = ITEM_SIZE_NORMAL
-
-/obj/item/weapon/farmbot_arm_assembly/New(var/newloc, var/theTank)
-	..(newloc)
-	if(!theTank) // If an admin spawned it, it won't have a watertank it, so lets make one for em!
-		tank = new /obj/structure/reagent_dispensers/watertank(src)
-	else
-		tank = theTank
-		tank.forceMove(src)
-
-
-/obj/structure/reagent_dispensers/watertank/attackby(var/obj/item/robot_parts/S, mob/user as mob)
-	if ((!istype(S, /obj/item/robot_parts/l_arm)) && (!istype(S, /obj/item/robot_parts/r_arm)))
-		..()
-		return
-
-	to_chat(user, "You add the robot arm to [src].")
-	user.drop_from_inventory(S)
-	qdel(S)
-	new /obj/item/weapon/farmbot_arm_assembly(loc, src)
-
-/obj/item/weapon/farmbot_arm_assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	..()
-	if((istype(W, /obj/item/device/analyzer/plant_analyzer)) && (build_step == 0))
-		build_step++
-		to_chat(user, "You add the plant analyzer to [src].")
-		SetName("farmbot assembly")
-		user.remove_from_mob(W)
-		qdel(W)
-
-	else if((istype(W, /obj/item/weapon/reagent_containers/glass/bucket)) && (build_step == 1))
-		build_step++
-		to_chat(user, "You add a bucket to [src].")
-		SetName("farmbot assembly with bucket")
-		user.remove_from_mob(W)
-		qdel(W)
-
-	else if((istype(W, /obj/item/weapon/material/minihoe)) && (build_step == 2))
-		build_step++
-		to_chat(user, "You add a minihoe to [src].")
-		SetName("farmbot assembly with bucket and minihoe")
-		user.remove_from_mob(W)
-		qdel(W)
-
-	else if((isprox(W)) && (build_step == 3))
-		build_step++
-		to_chat(user, "You complete the Farmbot! Beep boop.")
-		var/mob/living/bot/farmbot/S = new /mob/living/bot/farmbot(get_turf(src), tank)
-		S.SetName(created_name)
-		user.remove_from_mob(W)
-		qdel(W)
-		qdel(src)
-
-	else if(istype(W, /obj/item/weapon/pen))
-		var/t = input(user, "Enter new robot name", name, created_name) as text
-		t = sanitize(t, MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, usr) && loc != usr)
-			return
-
-		created_name = t
-
-/obj/item/weapon/farmbot_arm_assembly/attack_hand(mob/user as mob)
-	return //it's a converted watertank, no you cannot pick it up and put it in your backpack

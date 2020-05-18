@@ -8,11 +8,9 @@
 	icon_state = "term"
 	desc = "It's an underfloor wiring terminal for power equipment."
 	level = 1
-	plane = ABOVE_TURF_PLANE
 	layer = EXPOSED_WIRE_TERMINAL_LAYER
-	var/obj/machinery/power/master = null
+	var/obj/item/weapon/stock_parts/power/terminal/master
 	anchored = 1
-
 
 /obj/machinery/power/terminal/New()
 	..()
@@ -20,20 +18,25 @@
 	if(level==1) hide(!T.is_plating())
 	return
 
-/obj/machinery/power/terminal/Destroy()
-	if(master)
-		master.disconnect_terminal(src)
-		master = null
-	return ..()
+/obj/machinery/power/terminal/proc/master_machine()
+	var/obj/machinery/machine = master && master.loc
+	if(istype(machine))
+		return machine
 
 /obj/machinery/power/terminal/hide(var/do_hide)
 	if(do_hide && level == 1)
-		plane = ABOVE_PLATING_PLANE
 		layer = WIRE_TERMINAL_LAYER
 	else
 		reset_plane_and_layer()
 
-// Needed so terminals are not removed from machines list.
-// Powernet rebuilds need this to work properly.
-/obj/machinery/power/terminal/Process()
-	return 1
+/obj/machinery/power/terminal/connect_to_network()
+	. = ..()
+	var/obj/machinery/machine = master_machine()
+	if(machine)
+		machine.power_change()
+
+/obj/machinery/power/terminal/disconnect_from_network()
+	. = ..()
+	var/obj/machinery/machine = master_machine()
+	if(machine)
+		machine.power_change()

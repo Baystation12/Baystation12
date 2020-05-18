@@ -46,10 +46,16 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/lunchbox/nt
-	name = "NanoTrasen brand lunchbox"
+	name = "\improper NanoTrasen brand lunchbox"
 	icon_state = "lunchbox_nanotrasen"
 	item_state = "toolbox_blue"
-	desc = "A little lunchbox. This one is branded with the Nanotrasen logo!"
+	desc = "A little lunchbox. This one is branded with the NanoTrasen logo!"
+
+/obj/item/weapon/storage/lunchbox/dais
+	name = "\improper DAIS brand lunchbox"
+	icon_state = "lunchbox_dais"
+	item_state = "toolbox_blue"
+	desc = "A little lunchbox. This one is branded with the Deimos Advanced Information Systems logo!"
 
 /obj/item/weapon/storage/lunchbox/nt/filled
 	filled = TRUE
@@ -91,10 +97,10 @@
 	filled = TRUE
 
 /obj/item/weapon/storage/lunchbox/TCC
-	name = "\improper TCC lunchbox"
+	name = "\improper GCC lunchbox"
 	icon_state = "lunchbox_tcc"
 	item_state = "toolbox_syndi"
-	desc = "A little lunchbox. This one is branded with the flag of the Terran Colonial Confederation!"
+	desc = "A little lunchbox. This one is branded with the flag of the Gilgamesh Colonial Confederation!"
 
 /obj/item/weapon/storage/lunchbox/syndicate/filled
 	filled = TRUE

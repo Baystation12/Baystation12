@@ -1,24 +1,10 @@
 /obj/item/weapon/book/manual/nt_regs
-	name = "NanoTrasen Regulations"
-	desc = "A set of corporate guidelines for employees of NanoTrasen."
+	name = "Corporate Regulations"
+	desc = "A set of corporate guidelines for employees of a megacorporation."
 	icon_state = "booknanoregs"
-	author = "NanoTrasen"
-	title = "NanoTrasen Regulations"
-
-/obj/item/weapon/book/manual/nt_regs/New()
-	..()
-	dat = {"
-
-		<html><head>
-		</head>
-
-		<body>
-		<iframe width='100%' height='97%' src="[config.wikiurl]Corporate_Regulations&printable=yes&remove_links=1" frameborder="0" id="main_frame"></iframe>
-		</body>
-
-		</html>
-
-		"}
+	author = "Employee Materials"
+	title = "Corporate Regulations"
+	url = "Corporate_Regulations"
 
 /obj/item/weapon/book/manual/hydroponics_pod_people
 	name = "The Diona Harvest - From Seed to Market"

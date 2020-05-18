@@ -3,13 +3,14 @@
 	desc = "A thing to keep your butts in."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "ashtray"
+	max_force = 10
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 	randpixel = 5
 	var/max_butts = 10
 
 /obj/item/weapon/material/ashtray/examine(mob/user)
-	..()
+	. = ..()
 	if(material)
 		to_chat(user, "It's made of [material.display_name].")
 	if(contents.len >= max_butts)
@@ -17,7 +18,8 @@
 	else if(contents.len)
 		to_chat(user, "It has [contents.len] cig butts in it.")
 
-/obj/item/weapon/material/ashtray/update_icon()
+/obj/item/weapon/material/ashtray/on_update_icon()
+	..()
 	overlays.Cut()
 	if (contents.len == max_butts)
 		overlays |= image('icons/obj/objects.dmi',"ashtray_full")
@@ -27,7 +29,7 @@
 /obj/item/weapon/material/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (health <= 0)
 		return
-	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
+	if (istype(W,/obj/item/trash/cigbutt) || istype(W,/obj/item/clothing/mask/smokable/cigarette) || istype(W, /obj/item/weapon/flame/match))
 		if (contents.len >= max_butts)
 			to_chat(user, "\The [src] is full.")
 			return
@@ -36,17 +38,14 @@
 			var/obj/item/clothing/mask/smokable/cigarette/cig = W
 			if (cig.lit == 1)
 				visible_message("[user] crushes [cig] in [src], putting it out.")
-				W = cig.die(1)
+				W = cig.extinguish(no_message = 1)
 			else if (cig.lit == 0)
 				to_chat(user, "You place [cig] in [src] without even smoking it. Why would you do that?")
 
-		user.remove_from_mob(W, src)
-
-		visible_message("[user] places [W] in [src].")
-		user.update_inv_l_hand()
-		user.update_inv_r_hand()
-		add_fingerprint(user)
-		update_icon()
+		if(user.unEquip(W, src))
+			visible_message("[user] places [W] in [src].")
+			set_extension(src, /datum/extension/scent/ashtray)
+			update_icon()
 	else
 		..()
 		health = max(0,health - W.force)
@@ -60,6 +59,7 @@
 			visible_message("<span class='danger'>\The [src] slams into [hit_atom], spilling its contents!</span>")
 			for (var/obj/O in contents)
 				O.dropInto(loc)
+			remove_extension(src, /datum/extension/scent)
 		if (health < 1)
 			shatter()
 			return
@@ -67,10 +67,10 @@
 	return ..()
 
 /obj/item/weapon/material/ashtray/plastic/New(var/newloc)
-	..(newloc, "plastic")
+	..(newloc, MATERIAL_PLASTIC)
 
 /obj/item/weapon/material/ashtray/bronze/New(var/newloc)
-	..(newloc, "bronze")
+	..(newloc, MATERIAL_BRONZE)
 
 /obj/item/weapon/material/ashtray/glass/New(var/newloc)
-	..(newloc, "glass")
+	..(newloc, MATERIAL_GLASS)

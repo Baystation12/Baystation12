@@ -1,11 +1,15 @@
 /obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
+	desc = "A mechanical basin designed to nurture plants. It has various useful sensors."
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
 	density = 1
 	anchored = 1
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
 	volume = 100
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/mechanical = 1         // Set to 0 to stop it from drawing the alert lights.
 	var/base_name = "tray"
@@ -44,40 +48,41 @@
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
 	var/global/list/toxic_reagents = list(
-		/datum/reagent/dylovene =     -2,
-		/datum/reagent/toxin =           2,
-		/datum/reagent/hydrazine =       2.5,
-		/datum/reagent/acetone =	        1,
-		/datum/reagent/acid =           1.5,
-		/datum/reagent/acid/hydrochloric =         1.5,
-		/datum/reagent/acid/polyacid =           3,
-		/datum/reagent/toxin/plantbgone =      3,
-		/datum/reagent/cryoxadone =     -3,
-		/datum/reagent/radium =          2
+		/datum/reagent/dylovene =         -2,
+		/datum/reagent/toxin =             2,
+		/datum/reagent/hydrazine =         2.5,
+		/datum/reagent/acetone =	       1,
+		/datum/reagent/acid =              1.5,
+		/datum/reagent/acid/hydrochloric = 1.5,
+		/datum/reagent/acid/polyacid =     3,
+		/datum/reagent/toxin/plantbgone =  3,
+		/datum/reagent/cryoxadone =       -3,
+		/datum/reagent/radium =            2,
+		/datum/reagent/three_eye =         2
 		)
 	var/global/list/nutrient_reagents = list(
-		/datum/reagent/drink/milk =            0.1,
-		/datum/reagent/ethanol/beer =            0.25,
-		/datum/reagent/phosphorus =      0.1,
-		/datum/reagent/sugar =           0.1,
-		/datum/reagent/drink/sodawater =       0.1,
-		/datum/reagent/ammonia =         1,
-		/datum/reagent/diethylamine =    2,
-		/datum/reagent/nutriment =       1,
-		/datum/reagent/adminordrazine =  1,
-		/datum/reagent/toxin/fertilizer/eznutrient =      1,
-		/datum/reagent/toxin/fertilizer/robustharvest =   1,
-		/datum/reagent/toxin/fertilizer/left4zed =        1
+		/datum/reagent/drink/milk =                     0.1,
+		/datum/reagent/ethanol/beer =                   0.25,
+		/datum/reagent/phosphorus =                     0.1,
+		/datum/reagent/sugar =                          0.1,
+		/datum/reagent/drink/sodawater =                0.1,
+		/datum/reagent/ammonia =                        1,
+		/datum/reagent/diethylamine =                   2,
+		/datum/reagent/nutriment =                      1,
+		/datum/reagent/adminordrazine =                 1,
+		/datum/reagent/toxin/fertilizer/eznutrient =    1,
+		/datum/reagent/toxin/fertilizer/robustharvest = 1,
+		/datum/reagent/toxin/fertilizer/left4zed =      1
 		)
 	var/global/list/weedkiller_reagents = list(
-		/datum/reagent/hydrazine =      -4,
-		/datum/reagent/phosphorus =     -2,
-		/datum/reagent/sugar =           2,
-		/datum/reagent/acid =          -2,
-		/datum/reagent/acid/hydrochloric =        -2,
-		/datum/reagent/acid/polyacid =          -4,
-		/datum/reagent/toxin/plantbgone =     -8,
-		/datum/reagent/adminordrazine = -5
+		/datum/reagent/hydrazine =          -4,
+		/datum/reagent/phosphorus =         -2,
+		/datum/reagent/sugar =               2,
+		/datum/reagent/acid =               -2,
+		/datum/reagent/acid/hydrochloric =  -2,
+		/datum/reagent/acid/polyacid =      -4,
+		/datum/reagent/toxin/plantbgone =   -8,
+		/datum/reagent/adminordrazine =     -5
 		)
 	var/global/list/pestkiller_reagents = list(
 		/datum/reagent/sugar =                 2,
@@ -89,32 +94,33 @@
 	var/global/list/water_reagents = list(
 		/datum/reagent/water =           1,
 		/datum/reagent/adminordrazine =  1,
-		/datum/reagent/drink/milk =            0.9,
-		/datum/reagent/ethanol/beer =            0.7,
+		/datum/reagent/drink/milk =      0.9,
+		/datum/reagent/ethanol/beer =    0.7,
 		/datum/reagent/hydrazine =      -2,
 		/datum/reagent/phosphorus =     -0.5,
 		/datum/reagent/water =           1,
-		/datum/reagent/drink/sodawater =       1,
+		/datum/reagent/drink/sodawater = 1,
 		)
 
 	// Beneficial reagents also have values for modifying yield_mod and mut_mod (in that order).
 	var/global/list/beneficial_reagents = list(
-		/datum/reagent/ethanol/beer =           list( -0.05, 0,   0  ),
-		/datum/reagent/hydrazine =      list( -2,    0,   0  ),
-		/datum/reagent/phosphorus =     list( -0.75, 0,   0  ),
-		/datum/reagent/drink/sodawater =      list(  0.1,  0,   0  ),
-		/datum/reagent/acid =          list( -1,    0,   0  ),
-		/datum/reagent/acid/hydrochloric =        list( -1,    0,   0  ),
-		/datum/reagent/acid/polyacid =          list( -2,    0,   0  ),
-		/datum/reagent/toxin/plantbgone =     list( -2,    0,   0.2),
-		/datum/reagent/cryoxadone =     list(  3,    0,   0  ),
-		/datum/reagent/ammonia =        list(  0.5,  0,   0  ),
-		/datum/reagent/diethylamine =   list(  1,    0,   0  ),
-		/datum/reagent/nutriment =      list(  0.5,  0.1, 0  ),
-		/datum/reagent/radium =         list( -1.5,  0,   0.2),
-		/datum/reagent/adminordrazine = list(  1,    1,   1  ),
+		/datum/reagent/ethanol/beer =                    list( -0.05, 0,   0  ),
+		/datum/reagent/hydrazine =                       list( -2,    0,   0  ),
+		/datum/reagent/phosphorus =                      list( -0.75, 0,   0  ),
+		/datum/reagent/drink/sodawater =                 list(  0.1,  0,   0  ),
+		/datum/reagent/acid =                            list( -1,    0,   0  ),
+		/datum/reagent/acid/hydrochloric =               list( -1,    0,   0  ),
+		/datum/reagent/acid/polyacid =                   list( -2,    0,   0  ),
+		/datum/reagent/toxin/plantbgone =                list( -2,    0,   0.2),
+		/datum/reagent/cryoxadone =                      list(  3,    0,   0  ),
+		/datum/reagent/ammonia =                         list(  0.5,  0,   0  ),
+		/datum/reagent/diethylamine =                    list(  1,    0,   0  ),
+		/datum/reagent/nutriment =                       list(  0.5,  0.1, 0  ),
+		/datum/reagent/radium =                          list( -1.5,  0,   0.2),
+		/datum/reagent/adminordrazine =                  list(  1,    1,   1  ),
 		/datum/reagent/toxin/fertilizer/robustharvest =  list(  0,    0.2, 0  ),
-		/datum/reagent/toxin/fertilizer/left4zed =       list(  0,    0,   0.2)
+		/datum/reagent/toxin/fertilizer/left4zed =       list(  0,    0,   0.2),
+		/datum/reagent/three_eye =                       list(  -1  , 0,   0.5)
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather
@@ -141,28 +147,9 @@
 	if(response == "Yes")
 		harvest()
 
-/obj/machinery/portable_atmospherics/hydroponics/attack_generic(var/mob/user)
-
-	// Why did I ever think this was a good idea. TODO: move this onto the nymph mob.
-	if(istype(user,/mob/living/carbon/alien/diona))
-		var/mob/living/carbon/alien/diona/nymph = user
-
-		if(nymph.stat == DEAD || nymph.paralysis || nymph.weakened || nymph.stunned || nymph.restrained())
-			return
-
-		if(weedlevel > 0)
-			nymph.reagents.add_reagent(/datum/reagent/nutriment/glucose, weedlevel)
-			weedlevel = 0
-			nymph.visible_message("<font color='blue'><b>[nymph]</b> begins rooting through [src], ripping out weeds and eating them noisily.</font>","<font color='blue'>You begin rooting through [src], ripping out weeds and eating them noisily.</font>")
-		else if(nymph.nutrition > 100 && nutrilevel < 10)
-			nymph.nutrition -= ((10-nutrilevel)*5)
-			nutrilevel = 10
-			nymph.visible_message("<font color='blue'><b>[nymph]</b> secretes a trickle of green liquid, refilling [src].</font>","<font color='blue'>You secrete a trickle of green liquid, refilling [src].</font>")
-		else
-			nymph.visible_message("<font color='blue'><b>[nymph]</b> rolls around in [src] for a bit.</font>","<font color='blue'>You roll around in [src] for a bit.</font>")
-		return
-
 /obj/machinery/portable_atmospherics/hydroponics/Initialize()
+	if(!mechanical)
+		construct_state = null
 	. = ..()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
@@ -171,7 +158,13 @@
 	if(mechanical)
 		connect()
 	update_icon()
+	STOP_PROCESSING_MACHINE(src, MACHINERY_PROCESS_ALL)
+	START_PROCESSING(SSplants, src)
 	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/portable_atmospherics/hydroponics/Destroy()
+	STOP_PROCESSING(SSplants, src)
+	. = ..()
 
 /obj/machinery/portable_atmospherics/hydroponics/LateInitialize()
 	. = ..()
@@ -284,9 +277,9 @@
 		return
 
 	if(user)
-		seed.harvest(user,yield_mod)
+		. = seed.harvest(user,yield_mod)
 	else
-		seed.harvest(get_turf(src),yield_mod)
+		. = seed.harvest(get_turf(src),yield_mod)
 	// Reset values.
 	harvest = 0
 	lastproduce = age
@@ -300,15 +293,16 @@
 		mutation_mod = 0
 
 	check_health()
-	return
 
 //Clears out a dead plant.
-/obj/machinery/portable_atmospherics/hydroponics/proc/remove_dead(var/mob/user)
-	if(!user || !dead) return
+/obj/machinery/portable_atmospherics/hydroponics/proc/remove_dead(var/mob/user, var/silent)
+	if(!dead)
+		return
 
 	if(closed_system)
-		to_chat(user, "You can't remove the dead plant while the lid is shut.")
-		return
+		if(user)
+			to_chat(user, "You can't remove the dead plant while the lid is shut.")
+		return FALSE
 
 	seed = null
 	dead = 0
@@ -317,17 +311,18 @@
 	yield_mod = 0
 	mutation_mod = 0
 
-	to_chat(user, "You remove the dead plant.")
+	if(!silent && user)
+		to_chat(user, "You remove the dead plant.")
 	lastproduce = 0
 	check_health()
-	return
+	return TRUE
 
 // If a weed growth is sufficient, this proc is called.
 /obj/machinery/portable_atmospherics/hydroponics/proc/weed_invasion()
 
 	//Remove the seed if something is already planted.
 	if(seed) seed = null
-	seed = plant_controller.seeds[pick(list("reishi","nettles","amanita","mushrooms","plumphelmet","towercap","harebells","weeds"))]
+	seed = SSplants.seeds[pick(list("reishi", "nettles", "amanita", "mushrooms", "plumphelmet", "towercap", "harebells", "weeds", "diona"))]
 	if(!seed) return //Weed does not exist, someone fucked up.
 
 	dead = 0
@@ -350,14 +345,14 @@
 		return
 
 	// Check if we should even bother working on the current seed datum.
-	if(seed.mutants. && seed.mutants.len && severity > 1)
+	if(seed.mutants && seed.mutants.len && severity > 1)
 		mutate_species()
 		return
 
 	// We need to make sure we're not modifying one of the global seed datums.
 	// If it's not in the global list, then no products of the line have been
 	// harvested yet and it's safe to assume it's restricted to this tray.
-	if(!isnull(plant_controller.seeds[seed.name]))
+	if(!isnull(SSplants.seeds[seed.name]))
 		seed = seed.diverge()
 	seed.mutate(severity,get_turf(src))
 
@@ -396,8 +391,8 @@
 
 	var/previous_plant = seed.display_name
 	var/newseed = seed.get_mutant_variant()
-	if(newseed in plant_controller.seeds)
-		seed = plant_controller.seeds[newseed]
+	if(newseed in SSplants.seeds)
+		seed = SSplants.seeds[newseed]
 	else
 		return
 
@@ -414,27 +409,31 @@
 
 	return
 
-/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/portable_atmospherics/hydroponics/attackby(var/obj/item/O, var/mob/user)
 
 	if (O.is_open_container())
 		return 0
 
-	if(isWirecutter(O) || istype(O, /obj/item/weapon/scalpel))
+	if(O.edge && O.w_class < ITEM_SIZE_NORMAL && user.a_intent != I_HURT)
 
 		if(!seed)
-			to_chat(user, "There is nothing to take a sample from in \the [src].")
+			to_chat(user, SPAN_WARNING("There is nothing to take a sample from in \the [src]."))
 			return
 
 		if(sampled)
-			to_chat(user, "You have already sampled from this plant.")
+			to_chat(user, SPAN_WARNING("There's no bits that can be used for a sampling left."))
 			return
 
 		if(dead)
-			to_chat(user, "The plant is dead.")
+			to_chat(user, SPAN_WARNING("The plant is dead."))
 			return
 
-		// Create a sample.
-		seed.harvest(user,yield_mod,1)
+		var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+		if(prob(user.skill_fail_chance(SKILL_BOTANY, 90, needed_skill)))
+			to_chat(user, SPAN_WARNING("You failed to get a usable sample."))
+		else
+			// Create a sample.
+			seed.harvest(user,yield_mod,1)
 		health -= (rand(3,5)*10)
 
 		if(prob(30))
@@ -467,40 +466,20 @@
 
 	else if (istype(O, /obj/item/seeds))
 
-		if(!seed)
-
-			var/obj/item/seeds/S = O
-			user.remove_from_mob(O)
-
-			if(!S.seed)
-				to_chat(user, "The packet seems to be empty. You throw it away.")
-				qdel(O)
-				return
-
-			to_chat(user, "You plant the [S.seed.seed_name] [S.seed.seed_noun].")
-			lastproduce = 0
-			seed = S.seed //Grab the seed datum.
-			dead = 0
-			age = 1
-			//Snowflakey, maybe move this to the seed datum
-			health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
-			lastcycle = world.time
-
-			qdel(O)
-
-			check_health()
-
-		else
-			to_chat(user, "<span class='danger'>\The [src] already has seeds in it!</span>")
+		plant_seed(user, O)
 
 	else if (istype(O, /obj/item/weapon/material/minihoe))  // The minihoe
 
 		if(weedlevel > 0)
-			user.visible_message("<span class='danger'>[user] starts uprooting the weeds.</span>", "<span class='danger'>You remove the weeds from the [src].</span>")
+			user.visible_message("<span class='notice'>[user] starts uprooting the weeds.</span>", "<span class='notice'>You remove the weeds from the [src].</span>")
 			weedlevel = 0
-			update_icon()
+			if(seed)
+				var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+				if(!user.skill_check(SKILL_BOTANY, needed_skill))
+					health -= rand(40,60)
+					check_health(1)
 		else
-			to_chat(user, "<span class='danger'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
+			to_chat(user, "<span class='notice'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
 	else if (istype(O, /obj/item/weapon/storage/plants))
 
@@ -515,7 +494,6 @@
 	else if ( istype(O, /obj/item/weapon/plantspray) )
 
 		var/obj/item/weapon/plantspray/spray = O
-		user.remove_from_mob(O)
 		toxins += spray.toxicity
 		pestlevel -= spray.pest_kill_str
 		weedlevel -= spray.weed_kill_str
@@ -541,51 +519,69 @@
 		if(!dead)
 			health -= O.force
 			check_health()
-	return
+	else if(mechanical)
+		return component_attackby(O, user)
 
-/obj/machinery/portable_atmospherics/hydroponics/attack_tk(mob/user as mob)
-	if(dead)
-		remove_dead(user)
-	else if(harvest)
-		harvest(user)
+/obj/machinery/portable_atmospherics/hydroponics/proc/plant_seed(var/mob/user, var/obj/item/seeds/S)
 
-/obj/machinery/portable_atmospherics/hydroponics/attack_hand(mob/user as mob)
-
-	if(istype(usr,/mob/living/silicon))
+	if(seed)
+		to_chat(user, "<span class='warning'>\The [src] already has seeds in it!</span>")
 		return
 
+	if(!S.seed)
+		to_chat(user, "The packet seems to be empty. You throw it away.")
+		qdel(S)
+		return
+
+	to_chat(user, "You plant the [S.seed.seed_name] [S.seed.seed_noun].")
+	lastproduce = 0
+	seed = S.seed //Grab the seed datum.
+	dead = 0
+	age = 1
+
+	//Snowflakey, maybe move this to the seed datum
+	health = (istype(S, /obj/item/seeds/cutting) ? round(seed.get_trait(TRAIT_ENDURANCE)/rand(2,5)) : seed.get_trait(TRAIT_ENDURANCE))
+	lastcycle = world.time
+
+	var/needed_skill = seed.mysterious ? SKILL_ADEPT : SKILL_BASIC
+	if(prob(user.skill_fail_chance(SKILL_BOTANY, 40, needed_skill)))
+		dead = 1
+		health = 0
+
+	qdel(S)
+	check_health()
+
+/obj/machinery/portable_atmospherics/hydroponics/attack_robot(mob/user)
+	return FALSE // no hands
+
+/obj/machinery/portable_atmospherics/hydroponics/physical_attack_hand(mob/user)
 	if(harvest)
 		harvest(user)
-	else if(dead)
-		remove_dead(user)
-
-/obj/machinery/portable_atmospherics/hydroponics/examine()
-
-	. = ..()
-
-	if(!seed)
-		to_chat(usr, "[src] is empty.")
-		return
-
-	to_chat(usr, "<span class='notice'>[seed.display_name] are growing here.</span>")
-
-	if(!Adjacent(usr))
-		return
-
-	to_chat(usr, "Water: [round(waterlevel,0.1)]/100")
-	to_chat(usr, "Nutrient: [round(nutrilevel,0.1)]/10")
-
-	if(weedlevel >= 5)
-		to_chat(usr, "\The [src] is <span class='danger'>infested with weeds</span>!")
-	if(pestlevel >= 5)
-		to_chat(usr, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
-
+		return TRUE
 	if(dead)
-		to_chat(usr, "<span class='danger'>The plant is dead.</span>")
-	else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-		to_chat(usr, "The plant looks <span class='danger'>unhealthy</span>.")
+		remove_dead(user)
+		return TRUE
 
-	if(mechanical)
+/obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
+	. = ..(user)
+	if(!seed)
+		to_chat(user, "\The [src] is empty.")
+		return
+
+	to_chat(user, "<span class='notice'>\An [seed.display_name] plant is growing here.</span>")
+
+	if(user.skill_check(SKILL_BOTANY, SKILL_BASIC))
+		if(weedlevel >= 5)
+			to_chat(user, "\The [src] is <span class='danger'>infested with weeds</span>!")
+		if(pestlevel >= 5)
+			to_chat(user, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
+
+		if(dead)
+			to_chat(user, "<span class='danger'>The [seed.display_name] plant is dead.</span>")
+		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
+			to_chat(user, "The [seed.display_name] plant looks <span class='danger'>unhealthy</span>.")
+
+	if(mechanical && Adjacent(user))
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
 
@@ -606,7 +602,9 @@
 			var/light_available = T.get_lumcount() * 5
 			light_string = "a light level of [light_available] lumens"
 
-		to_chat(usr, "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K.")
+		to_chat(user, "Water: [round(waterlevel,0.1)]/100")
+		to_chat(user, "Nutrient: [round(nutrilevel,0.1)]/10")
+		to_chat(user, "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K.")
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"
@@ -635,3 +633,11 @@
 	lastcycle = world.time
 	qdel(S)
 	check_health()
+
+/obj/machinery/portable_atmospherics/hydroponics/do_simple_ranged_interaction(var/mob/user)
+	if(dead)
+		remove_dead()
+	else if(harvest)
+		harvest()
+	return TRUE
+

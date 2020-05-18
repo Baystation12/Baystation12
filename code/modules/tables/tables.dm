@@ -5,9 +5,10 @@
 	desc = "It's a table, for putting things on. Or standing on, if you really want to."
 	density = 1
 	anchored = 1
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	layer = TABLE_LAYER
 	throwpass = 1
+	mob_offset = 12
 	var/flipped = 0
 	var/maxhealth = 10
 	var/health = 10
@@ -17,20 +18,19 @@
 	var/can_plate = 1
 
 	var/manipulating = 0
-	var/material/material = null
 	var/material/reinforced = null
 
 	// Gambling tables. I'd prefer reinforced with carpet/felt/cloth/whatever, but AFAIK it's either harder or impossible to get /obj/item/stack/material of those.
 	// Convert if/when you can easily get stacks of these.
 	var/carpeted = 0
 
-	var/list/connections = list("nw0", "ne0", "sw0", "se0")
+	connections = list("nw0", "ne0", "sw0", "se0")
 
 /obj/structure/table/New()
 	if(istext(material))
-		material = get_material_by_name(material)
+		material = SSmaterials.get_material_by_name(material)
 	if(istext(reinforced))
-		reinforced = get_material_by_name(reinforced)
+		reinforced = SSmaterials.get_material_by_name(reinforced)
 	..()
 
 /obj/structure/table/proc/update_material()
@@ -45,7 +45,7 @@
 
 	health += maxhealth - old_maxhealth
 
-/obj/structure/table/proc/take_damage(amount)
+/obj/structure/table/take_damage(amount)
 	// If the table is made of a brittle material, and is *not* reinforced with a non-brittle material, damage is multiplied by TABLE_BRITTLE_MATERIAL_MULTIPLIER
 	if(material && material.is_brittle())
 		if(reinforced)
@@ -95,9 +95,9 @@
 				to_chat(user, "<span class='warning'>It looks damaged!</span>")
 			if(0.5 to 1.0)
 				to_chat(user, "<span class='notice'>It has a few scrapes and dents.</span>")
-/obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
-	if(reinforced && istype(W, /obj/item/weapon/screwdriver))
+/obj/structure/table/attackby(obj/item/weapon/W, mob/user)
+	if(reinforced && isScrewdriver(W))
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()
@@ -123,7 +123,7 @@
 			return 1
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
-	if(!reinforced && !carpeted && material && istype(W, /obj/item/weapon/wrench))
+	if(!reinforced && !carpeted && material && isWrench(W) && user.a_intent == I_HURT) //robots dont have disarm so it's harm
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -134,7 +134,7 @@
 			update_material()
 		return 1
 
-	if(!carpeted && !reinforced && !material && istype(W, /obj/item/weapon/wrench))
+	if(!carpeted && !reinforced && !material && isWrench(W) && user.a_intent == I_HURT)
 		dismantle(W, user)
 		return 1
 
@@ -158,7 +158,10 @@
 			update_desc()
 			update_material()
 		return 1
-
+	if(istype(W, /obj/item/weapon/hand)) //playing cards
+		var/obj/item/weapon/hand/H = W
+		if(H.cards && H.cards.len == 1)
+			usr.visible_message("\The [user] plays \the [H.cards[1].name].")
 	return ..()
 
 /obj/structure/table/MouseDrop_T(obj/item/stack/material/what)
@@ -236,7 +239,7 @@
 		return M
 	user.visible_message("<span class='notice'>\The [user] removes the [M.display_name] [what] from \the [src].</span>",
 	                              "<span class='notice'>You remove the [M.display_name] [what] from \the [src].</span>")
-	new M.stack_type(src.loc)
+	M.place_sheet(src.loc)
 	manipulating = 0
 	return null
 
@@ -247,6 +250,7 @@
 	material = common_material_remove(user, material, 20, "plating", "bolts", 'sound/items/Ratchet.ogg')
 
 /obj/structure/table/proc/dismantle(obj/item/weapon/wrench/W, mob/user)
+	reset_mobs_offset()
 	if(manipulating) return
 	manipulating = 1
 	user.visible_message("<span class='notice'>\The [user] begins dismantling \the [src].</span>",
@@ -270,6 +274,7 @@
 // is to avoid filling the list with nulls, as place_shard won't place shards of certain materials (holo-wood, holo-steel)
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
+	reset_mobs_offset()
 	var/list/shards = list()
 	var/obj/item/weapon/material/shard/S = null
 	if(reinforced)
@@ -289,14 +294,15 @@
 	if(full_return || prob(20))
 		new /obj/item/stack/material/steel(src.loc)
 	else
-		var/material/M = get_material_by_name(DEFAULT_WALL_MATERIAL)
+		var/material/M = SSmaterials.get_material_by_name(MATERIAL_STEEL)
 		S = M.place_shard(loc)
 		if(S) shards += S
 	qdel(src)
 	return shards
 
-/obj/structure/table/update_icon()
-	if(flipped != 1)
+/obj/structure/table/on_update_icon()
+	if(!flipped)
+		mob_offset = initial(mob_offset)
 		icon_state = "blank"
 		overlays.Cut()
 
@@ -328,6 +334,7 @@
 				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
 				overlays += I
 	else
+		mob_offset = 0
 		overlays.Cut()
 		var/type = 0
 		var/tabledirs = 0
@@ -367,7 +374,7 @@
 	return TRUE
 
 // set propagate if you're updating a table that should update tables around it too, for example if it's a new table or something important has changed (like material).
-/obj/structure/table/proc/update_connections(propagate=0)
+/obj/structure/table/update_connections(propagate=0)
 	if(!material)
 		connections = list("0", "0", "0", "0")
 

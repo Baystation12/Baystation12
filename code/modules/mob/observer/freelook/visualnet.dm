@@ -21,7 +21,8 @@
 		remove_source(source, FALSE)
 	sources.Cut()
 	for(var/chunk in chunks)
-		qdel(chunk)
+		var/chunk_datum = chunks[chunk]
+		qdel(chunk_datum)
 	chunks.Cut()
 	. = ..()
 
@@ -81,7 +82,7 @@
 // Updates the chunks that the turf is located in. Use this when obstacles are destroyed or	when doors open.
 
 /datum/visualnet/proc/update_visibility(atom/A, var/opacity_check = TRUE)
-	if(!ticker || (opacity_check && !A.opacity))
+	if((GAME_STATE < RUNLEVEL_GAME) || (opacity_check && !A.opacity))
 		return
 	major_chunk_change(A)
 

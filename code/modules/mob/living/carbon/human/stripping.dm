@@ -25,15 +25,29 @@
 				if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 					place_in_pockets(held, user)
 			return
-		if("splints")
-			visible_message("<span class='danger'>\The [user] is trying to remove \the [src]'s splints!</span>")
-			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
-				remove_splints(user)
-			return
 		if("sensors")
 			visible_message("<span class='danger'>\The [user] is trying to set \the [src]'s sensors!</span>")
 			if(do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
 				toggle_sensors(user)
+			return
+		if ("lock_sensors")
+			if (!istype(w_uniform, /obj/item/clothing/under))
+				return
+			var/obj/item/clothing/under/subject_uniform = w_uniform
+			visible_message(SPAN_DANGER("\The [user] is trying to [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "un" : ""]lock \the [src]'s sensors!"))
+			if (do_after(user, HUMAN_STRIP_DELAY, src, progress = 0))
+				if (subject_uniform != w_uniform)
+					to_chat(user, SPAN_WARNING("\The [src] is not wearing \the [subject_uniform] anymore."))
+					return
+				if (!subject_uniform.has_sensor)
+					to_chat(user, SPAN_WARNING("\The [subject_uniform] has no sensors to lock."))
+					return
+				var/obj/item/device/multitool/user_multitool = user.get_multitool()
+				if (!istype(user_multitool))
+					to_chat(user, SPAN_WARNING("You need a multitool to lock \the [subject_uniform]'s sensors."))
+					return
+				subject_uniform.has_sensor = subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? SUIT_HAS_SENSORS : SUIT_LOCKED_SENSORS
+				visible_message(SPAN_NOTICE("\The [user] [subject_uniform.has_sensor == SUIT_LOCKED_SENSORS ? "" : "un"]locks \the [subject_uniform]'s suit sensor controls."), range = 2)
 			return
 		if("internals")
 			visible_message("<span class='danger'>\The [usr] is trying to set \the [src]'s internals!</span>")
@@ -131,47 +145,30 @@
 	admin_attack_log(user, src, "Toggled their suit sensors.", "Toggled their suit sensors.", "toggled the suit sensors of")
 	suit.set_sensors(user)
 
-// Remove all splints.
-/mob/living/carbon/human/proc/remove_splints(var/mob/living/user)
-	var/removed_splint = 0
-	for(var/obj/item/organ/external/o in organs)
-		if (o && o.splinted)
-			var/obj/item/S = o.splinted
-			if(!istype(S) || S.loc != o) //can only remove splints that are actually worn on the organ (deals with hardsuit splints)
-				to_chat(user, "<span class='warning'>You cannot remove any splints on [src]'s [o.name] - [o.splinted] is supporting some of the breaks.</span>")
-			else
-				S.add_fingerprint(user)
-				if(o.remove_splint())
-					user.put_in_active_hand(S)
-					removed_splint = 1
-	if(removed_splint)
-		visible_message("<span class='danger'>\The [user] removes \the [src]'s splints!</span>")
-	else
-		to_chat(user, "<span class='warning'>\The [src] has no splints that can be removed.</span>")
-
 // Set internals on or off.
 /mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
 	if(internal)
+		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")
 		internal.add_fingerprint(user)
-		internal = null
-		if(internals)
-			internals.icon_state = "internal0"
+		set_internals(null)
+		return
 	else
 		// Check for airtight mask/helmet.
-		if(!(istype(wear_mask, /obj/item/clothing/mask) || istype(head, /obj/item/clothing/head/helmet/space)))
-			return
+		if(!(wear_mask && wear_mask.item_flags & ITEM_FLAG_AIRTIGHT))
+			if(!(head && head.item_flags & ITEM_FLAG_AIRTIGHT))
+				to_chat(user, "<span class='warning'>\The [src] does not have a suitable mask or helmet.</span>")
+				return
+
 		// Find an internal source.
 		if(istype(back, /obj/item/weapon/tank))
-			internal = back
+			set_internals(back)
 		else if(istype(s_store, /obj/item/weapon/tank))
-			internal = s_store
+			set_internals(s_store)
 		else if(istype(belt, /obj/item/weapon/tank))
-			internal = belt
+			set_internals(belt)
+		else
+			to_chat(user, "<span class='warning'>You could not find a suitable tank!</span>")
+			return
 
-	if(internal)
 		visible_message("<span class='warning'>\The [src] is now running on internals!</span>")
 		internal.add_fingerprint(user)
-		if (internals)
-			internals.icon_state = "internal1"
-	else
-		visible_message("<span class='danger'>\The [user] disables \the [src]'s internals!</span>")

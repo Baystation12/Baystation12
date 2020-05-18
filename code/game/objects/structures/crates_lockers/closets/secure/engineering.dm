@@ -1,20 +1,16 @@
 /obj/structure/closet/secure_closet/engineering_chief
 	name = "chief engineer's locker"
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering/ce
 	req_access = list(access_ce)
-	icon_state = "securece1"
-	icon_closed = "securece"
-	icon_locked = "securece1"
-	icon_opened = "secureceopen"
-	icon_off = "secureceoff"
 
 /obj/structure/closet/secure_closet/engineering_chief/WillContain()
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/clothing/accessory/storage/brown_vest = 70, /obj/item/clothing/accessory/storage/webbing = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag/eng, 50),
 		/obj/item/blueprints,
 		/obj/item/clothing/under/rank/chief_engineer,
-		/obj/item/clothing/head/hardhat/white,
+		/obj/item/clothing/head/hardhat/firefighter/Chief,
 		/obj/item/clothing/head/welding,
 		/obj/item/clothing/gloves/insulated,
 		/obj/item/clothing/shoes/brown,
@@ -31,11 +27,7 @@
 /obj/structure/closet/secure_closet/engineering_electrical
 	name = "electrical supplies"
 	req_access = list(access_engine_equip)
-	icon_state = "secureengelec1"
-	icon_closed = "secureengelec"
-	icon_locked = "secureengelec1"
-	icon_opened = "toolclosetopen"
-	icon_off = "secureengelecoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering/electrical
 
 /obj/structure/closet/secure_closet/engineering_electrical/WillContain()
 	return list(
@@ -49,11 +41,7 @@
 /obj/structure/closet/secure_closet/engineering_welding
 	name = "welding supplies"
 	req_access = list(access_construction)
-	icon_state = "secureengweld1"
-	icon_closed = "secureengweld"
-	icon_locked = "secureengweld1"
-	icon_opened = "toolclosetopen"
-	icon_off = "secureengweldoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering/welding
 
 /obj/structure/closet/secure_closet/engineering_welding/WillContain()
 	return list(
@@ -67,16 +55,12 @@
 /obj/structure/closet/secure_closet/engineering_personal
 	name = "engineer's locker"
 	req_access = list(access_engine_equip)
-	icon_state = "secureeng1"
-	icon_closed = "secureeng"
-	icon_locked = "secureeng1"
-	icon_opened = "secureengopen"
-	icon_off = "secureengoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering
 
 /obj/structure/closet/secure_closet/engineering_personal/WillContain()
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/clothing/accessory/storage/brown_vest = 70, /obj/item/clothing/accessory/storage/webbing = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag/eng, 50),
 		/obj/item/weapon/storage/toolbox/mechanical,
 		/obj/item/device/radio/headset/headset_eng,
@@ -89,16 +73,12 @@
 /obj/structure/closet/secure_closet/atmos_personal
 	name = "technician's locker"
 	req_access = list(access_atmospherics)
-	icon_state = "secureatm1"
-	icon_closed = "secureatm"
-	icon_locked = "secureatm1"
-	icon_opened = "secureatmopen"
-	icon_off = "secureatmoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering/atmos
 
 /obj/structure/closet/secure_closet/atmos_personal/WillContain()
 	return list(
 		new/datum/atom_creator/weighted(list(/obj/item/clothing/accessory/storage/brown_vest = 70, /obj/item/clothing/accessory/storage/webbing = 30)),
-		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel_eng)),
+		new/datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/industrial, /obj/item/weapon/storage/backpack/satchel/eng)),
 		new/datum/atom_creator/simple(/obj/item/weapon/storage/backpack/dufflebag/eng, 50),
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/device/flashlight,

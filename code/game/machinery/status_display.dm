@@ -16,7 +16,6 @@
 	layer = ABOVE_WINDOW_LAYER
 	anchored = 1
 	density = 0
-	use_power = 1
 	idle_power_usage = 10
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
@@ -137,7 +136,7 @@
 	return 0
 
 /obj/machinery/status_display/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(mode != STATUS_DISPLAY_BLANK && mode != STATUS_DISPLAY_ALERT)
 		to_chat(user, "The display says:<br>\t[sanitize(message1)]<br>\t[sanitize(message2)]")
 	if(mode == STATUS_DISPLAY_ALERT)
@@ -190,7 +189,7 @@
 	return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
 
 /obj/machinery/status_display/proc/get_supply_shuttle_timer()
-	var/datum/shuttle/autodock/ferry/supply/shuttle = supply_controller.shuttle
+	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 	if (!shuttle)
 		return "Error"
 
@@ -231,8 +230,7 @@
 			set_picture(signal.data["picture_state"])
 	update()
 
-#undef CHARS_PER_LINE
-#undef FOND_SIZE
+#undef FONT_SIZE
 #undef FONT_COLOR
 #undef FONT_STYLE
 #undef SCROLL_SPEED

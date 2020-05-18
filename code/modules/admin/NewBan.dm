@@ -142,7 +142,7 @@ var/savefile/Banlist
 		ban_unban_log_save("[key_name_admin(usr)] unbanned [key]")
 		log_admin("[key_name_admin(usr)] unbanned [key]")
 		message_admins("[key_name_admin(usr)] unbanned: [key]")
-		feedback_inc("ban_unban",1)
+		SSstatistics.add_field("ban_unban",1)
 		usr.client.holder.DB_ban_unban( ckey(key), BANTYPE_ANY_FULLBAN)
 	for (var/A in Banlist.dir)
 		Banlist.cd = "/base/[A]"
@@ -192,7 +192,7 @@ var/savefile/Banlist
 
 	dat += "</table>"
 	dat = "<HR><B>Bans:</B> <FONT COLOR=blue>(U) = Unban , (E) = Edit Ban</FONT> - <FONT COLOR=green>([count] Bans)</FONT><HR><table border=1 rules=all frame=void cellspacing=0 cellpadding=3 >[dat]"
-	usr << browse(dat, "window=unbanp;size=875x400")
+	show_browser(usr, dat, "window=unbanp;size=875x400")
 
 //////////////////////////////////// DEBUG ////////////////////////////////////
 

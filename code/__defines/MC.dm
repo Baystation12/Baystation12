@@ -1,4 +1,5 @@
 #define MC_TICK_CHECK ( ( TICK_USAGE > Master.current_ticklimit || src.state != SS_RUNNING ) ? pause() : 0 )
+#define GAME_STATE 2 ** (Master.current_runlevel - 1)
 
 #define MC_SPLIT_TICK_INIT(phase_count) var/original_tick_limit = Master.current_ticklimit; var/split_tick_phases = ##phase_count
 #define MC_SPLIT_TICK \
@@ -17,7 +18,7 @@
 #define MC_AVG_FAST_UP_SLOW_DOWN(average, current) (average > current ? MC_AVERAGE_SLOW(average, current) : MC_AVERAGE_FAST(average, current))
 #define MC_AVG_SLOW_UP_FAST_DOWN(average, current) (average < current ? MC_AVERAGE_SLOW(average, current) : MC_AVERAGE_FAST(average, current))
 
-#define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover();qdel(varname);}varname = src;}
+#define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover(varname);qdel(varname);}varname = src;}
 
 #define START_PROCESSING(Processor, Datum) \
 if (Datum.is_processing) {\
@@ -38,6 +39,17 @@ if(Datum.is_processing) {\
 		crash_with("Failed to stop processing. [log_info_line(Datum)] is being processed by [Datum.is_processing] but de-queue attempt occured on [#Processor]."); \
 	}\
 }
+
+// For SSmachines, use these instead
+
+#define START_PROCESSING_MACHINE(machine, flag)\
+	if(!istype(machine, /obj/machinery)) CRASH("A non-machine [log_info_line(machine)] was queued to process on the machinery subsystem.");\
+	machine.processing_flags |= flag;\
+	START_PROCESSING(SSmachines, machine)
+
+#define STOP_PROCESSING_MACHINE(machine, flag)\
+	machine.processing_flags &= ~flag;\
+	if(machine.processing_flags == 0) STOP_PROCESSING(SSmachines, machine)
 
 //SubSystem flags (Please design any new flags so that the default is off, to make adding flags to subsystems easier)
 
@@ -72,27 +84,17 @@ if(Datum.is_processing) {\
 //	This flag overrides SS_KEEP_TIMING
 #define SS_POST_FIRE_TIMING 64
 
+// Run Shutdown() on server shutdown so the SS can finalize state.
+#define SS_NEEDS_SHUTDOWN 128
+
 // -- SStimer stuff --
-//Don't run if there is an identical unique timer active
-#define TIMER_UNIQUE		0x1
 
-//For unique timers: Replace the old timer rather then not start this one
-#define TIMER_OVERRIDE		0x2
-
-//Timing should be based on how timing progresses on clients, not the sever.
-//	tracking this is more expensive,
-//	should only be used in conjuction with things that have to progress client side, such as animate() or sound()
-#define TIMER_CLIENT_TIME	0x4
-
-//Timer can be stopped using deltimer()
-#define TIMER_STOPPABLE		0x8
-
-//To be used with TIMER_UNIQUE
-//prevents distinguishing identical timers with the wait variable
-#define TIMER_NO_HASH_WAIT  0x10
-
-//number of byond ticks that are allowed to pass before the timer subsystem thinks it hung on something
-#define TIMER_NO_INVOKE_WARNING 600
+#define TIMER_UNIQUE       (1 << 0) // Don't run if there is an identical unique timer active
+#define TIMER_OVERRIDE     (1 << 1) // For unique timers: Replace the old timer rather then not start this one
+#define TIMER_CLIENT_TIME  (1 << 2) // Timing should be based on how timing progresses on clients, not the server - this is more expensive, so should only be used with things that need to progress client-side (like animate or sound)
+#define TIMER_STOPPABLE    (1 << 3) // Timer can be stopped using deltimer()
+#define TIMER_NO_HASH_WAIT (1 << 4) // For unique timers: don't distinguish timers by wait
+#define TIMER_LOOP         (1 << 5) // Repeat the timer until it's deleted.
 
 #define TIMER_ID_NULL -1
 
@@ -103,6 +105,12 @@ if(Datum.is_processing) {\
 #define SS_PAUSED 3		//paused by mc_tick_check
 #define SS_SLEEPING 4	//fire() slept.
 #define SS_PAUSING 5 	//in the middle of pausing
+
+// Subsystem init-states, used for the initialization MC panel.
+#define SS_INITSTATE_NONE 0
+#define SS_INITSTATE_STARTED 1
+#define SS_INITSTATE_DONE 2
+
 
 #define SUBSYSTEM_DEF(X) GLOBAL_REAL(SS##X, /datum/controller/subsystem/##X);\
 /datum/controller/subsystem/##X/New(){\

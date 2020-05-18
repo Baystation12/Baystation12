@@ -8,7 +8,8 @@ var/list/holder_mob_icon_cache = list()
 	slot_flags = SLOT_HEAD | SLOT_HOLSTER
 
 	sprite_sheets = list(
-		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		SPECIES_VOX = 'icons/mob/species/vox/onmob_head_vox.dmi',
+		SPECIES_VOX_ARMALIS = 'icons/mob/species/vox/onmob_head_vox_armalis.dmi'
 		)
 
 	origin_tech = null
@@ -110,10 +111,6 @@ var/list/holder_mob_icon_cache = list()
 	update_held_icon()
 
 //Mob specific holders.
-/obj/item/weapon/holder/diona
-	origin_tech = list(TECH_MAGNET = 3, TECH_BIO = 5)
-	slot_flags = SLOT_HEAD | SLOT_OCLOTHING | SLOT_HOLSTER
-
 /obj/item/weapon/holder/drone
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 5)
 
@@ -135,7 +132,6 @@ var/list/holder_mob_icon_cache = list()
 /mob/living/var/holder_type
 
 /mob/living/proc/get_scooped(var/mob/living/carbon/human/grabber, var/self_grab)
-
 	if(!holder_type || buckled || pinned.len)
 		return
 

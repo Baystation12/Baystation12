@@ -5,10 +5,11 @@
 	icon_state = "papershredder0"
 	density = 1
 	anchored = 1
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	obj_flags = OBJ_FLAG_ANCHORABLE
 	var/max_paper = 10
 	var/paperamount = 0
+
 	var/list/shred_amounts = list(
 		/obj/item/weapon/photo = 1,
 		/obj/item/weapon/shreddedp = 1,
@@ -16,6 +17,7 @@
 		/obj/item/weapon/newspaper = 3,
 		/obj/item/weapon/card/id = 3,
 		/obj/item/weapon/paper_bundle = 3,
+		/obj/item/weapon/sample/print = 1
 		)
 
 /obj/machinery/papershredder/attackby(var/obj/item/W, var/mob/user)
@@ -33,14 +35,13 @@
 				to_chat(user, "<span class='warning'>\The [src] is full; please empty it before you continue.</span>")
 				return
 			paperamount += paper_result
-			user.drop_from_inventory(W)
 			qdel(W)
 			playsound(src.loc, 'sound/items/pshred.ogg', 75, 1)
 			if(paperamount > max_paper)
 				to_chat(user, "<span class='danger'>\The [src] was too full, and shredded paper goes everywhere!</span>")
 				for(var/i=(paperamount-max_paper);i>0;i--)
 					var/obj/item/weapon/shreddedp/SP = get_shredded_paper()
-					SP.loc = get_turf(src)
+					SP.dropInto(loc)
 					SP.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),1,5)
 				paperamount = max_paper
 			update_icon()
@@ -63,39 +64,47 @@
 	empty_bin(usr)
 
 /obj/machinery/papershredder/proc/empty_bin(var/mob/living/user, var/obj/item/weapon/storage/empty_into)
+	
+	if(empty_into) // If the user tries to empty the bin into something
 
-	// Sanity.
-	if(empty_into && !istype(empty_into))
-		empty_into = null
+		if(paperamount == 0) // Can't empty what is already empty
+			to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
+			return
 
-	if(empty_into && empty_into.contents.len >= empty_into.storage_slots)
-		to_chat(user, "<span class='notice'>\The [empty_into] is full.</span>")
-		return
+		if(empty_into && !istype(empty_into)) // Make sure we can store paper in the thing
+			to_chat(user, "<span class='notice'>You cannot put shredded paper into the [empty_into].</span>")
+			return
 
-	while(paperamount)
-		var/obj/item/weapon/shreddedp/SP = get_shredded_paper()
-		if(!SP) break
-		if(empty_into)
-			empty_into.handle_item_insertion(SP)
-			if(empty_into.contents.len >= empty_into.storage_slots)
+		// Move papers one by one as they fit; stop when we are empty or can't fit any more
+		while(paperamount > 0)
+
+			var/obj/item/weapon/shred_temp = get_shredded_paper()
+
+			if(empty_into.can_be_inserted(shred_temp, user, 0))
+				empty_into.handle_item_insertion(shred_temp)
+			else
+				qdel(shred_temp)
+				paperamount++
 				break
-	if(empty_into)
-		if(paperamount)
-			to_chat(user, "<span class='notice'>You fill \the [empty_into] with as much shredded paper as it will carry.</span>")
-		else
-			to_chat(user, "<span class='notice'>You empty \the [src] into \the [empty_into].</span>")
 
-	else
-		to_chat(user, "<span class='notice'>You empty \the [src].</span>")
+		// Report on how we did
+		if(paperamount == 0)
+			to_chat(user, "<span class='notice'>You empty \the [src] into \the [empty_into].</span>")
+		if(paperamount > 0)
+			to_chat(user, "<span class='notice'>\The [empty_into] will not fit any more shredded paper.</span>")
+
+	else // Just dump the paper out on the floor
+		while(paperamount > 0)
+			get_shredded_paper()
+
 	update_icon()
 
 /obj/machinery/papershredder/proc/get_shredded_paper()
-	if(!paperamount)
-		return
-	paperamount--
-	return new /obj/item/weapon/shreddedp(get_turf(src))
+	if(paperamount)
+		paperamount--
+		return new /obj/item/weapon/shreddedp(get_turf(src))		
 
-/obj/machinery/papershredder/update_icon()
+/obj/machinery/papershredder/on_update_icon()
 	icon_state = "papershredder[max(0,min(5,Floor(paperamount/2)))]"
 
 /obj/item/weapon/shreddedp/attackby(var/obj/item/W as obj, var/mob/user)
@@ -120,9 +129,6 @@
 	FireBurn()
 
 /obj/item/weapon/shreddedp/proc/FireBurn()
-	var/mob/living/M = loc
-	if(istype(M))
-		M.drop_from_inventory(src)
 	new /obj/effect/decal/cleanable/ash(get_turf(src))
 	qdel(src)
 

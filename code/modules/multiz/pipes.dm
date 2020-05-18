@@ -16,32 +16,7 @@ obj/machinery/atmospherics/pipe/zpipe
 	var/minimum_temperature_difference = 300
 	var/thermal_conductivity = 0 //WALL_HEAT_TRANSFER_COEFFICIENT No
 
-	var/maximum_pressure = 70*ONE_ATMOSPHERE
-	var/fatigue_pressure = 55*ONE_ATMOSPHERE
-	alert_pressure = 55*ONE_ATMOSPHERE
-
-
 	level = 1
-
-obj/machinery/atmospherics/pipe/zpipe/New()
-	..()
-	switch(dir)
-		if(SOUTH)
-			initialize_directions = SOUTH
-		if(NORTH)
-			initialize_directions = NORTH
-		if(WEST)
-			initialize_directions = WEST
-		if(EAST)
-			initialize_directions = EAST
-		if(NORTHEAST)
-			initialize_directions = NORTH
-		if(NORTHWEST)
-			initialize_directions = WEST
-		if(SOUTHEAST)
-			initialize_directions = EAST
-		if(SOUTHWEST)
-			initialize_directions = SOUTH
 
 /obj/machinery/atmospherics/pipe/zpipe/hide(var/i)
 	if(istype(loc, /turf/simulated))
@@ -77,23 +52,17 @@ obj/machinery/atmospherics/pipe/zpipe/proc/burst()
 	smoke.start()
 	qdel(src) // NOT qdel.
 
-obj/machinery/atmospherics/pipe/zpipe/proc/normalize_dir()
-	if(dir == (NORTH|SOUTH))
-		set_dir(NORTH)
-	else if(dir == (EAST|WEST))
-		set_dir(EAST)
-
 obj/machinery/atmospherics/pipe/zpipe/Destroy()
 	if(node1)
 		node1.disconnect(src)
 	if(node2)
 		node2.disconnect(src)
-	..()
+	. = ..()
 
 obj/machinery/atmospherics/pipe/zpipe/pipeline_expansion()
 	return list(node1, node2)
 
-obj/machinery/atmospherics/pipe/zpipe/update_icon()
+obj/machinery/atmospherics/pipe/zpipe/on_update_icon()
 	return
 
 obj/machinery/atmospherics/pipe/zpipe/disconnect(obj/machinery/atmospherics/reference)
@@ -120,7 +89,6 @@ obj/machinery/atmospherics/pipe/zpipe/up
 
 obj/machinery/atmospherics/pipe/zpipe/up/atmos_init()
 	..()
-	normalize_dir()
 	var/node1_dir
 
 	for(var/direction in GLOB.cardinal)
@@ -159,7 +127,6 @@ obj/machinery/atmospherics/pipe/zpipe/down
 
 obj/machinery/atmospherics/pipe/zpipe/down/atmos_init()
 	..()
-	normalize_dir()
 	var/node1_dir
 
 	for(var/direction in GLOB.cardinal)
@@ -238,6 +205,7 @@ obj/machinery/atmospherics/pipe/zpipe/up/fuel
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
+	connect_types = CONNECT_TYPE_FUEL
 
 obj/machinery/atmospherics/pipe/zpipe/down/fuel
 	name = "downwards fuel pipe"
@@ -245,3 +213,4 @@ obj/machinery/atmospherics/pipe/zpipe/down/fuel
 	maximum_pressure = 420*ONE_ATMOSPHERE
 	fatigue_pressure = 350*ONE_ATMOSPHERE
 	alert_pressure = 350*ONE_ATMOSPHERE
+	connect_types = CONNECT_TYPE_FUEL

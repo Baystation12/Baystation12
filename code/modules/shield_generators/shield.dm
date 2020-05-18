@@ -4,16 +4,16 @@
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "shield_normal"
 	anchored = 1
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	density = 1
 	invisibility = 0
 	var/obj/machinery/power/shield_generator/gen = null
 	var/disabled_for = 0
 	var/diffused_for = 0
+	atmos_canpass = CANPASS_PROC
 
 
-/obj/effect/shield/update_icon()
+/obj/effect/shield/on_update_icon()
 	if(gen && gen.check_flag(MODEFLAG_PHOTONIC) && !disabled_for && !diffused_for)
 		set_opacity(1)
 	else
@@ -26,8 +26,8 @@
 
 // Prevents shuttles, singularities and pretty much everything else from moving the field segments away.
 // The only thing that is allowed to move us is the Destroy() proc.
-/obj/effect/shield/forceMove(var/newloc, var/qdeled = 0)
-	if(qdeled)
+/obj/effect/shield/forceMove()
+	if(QDELING(src))
 		return ..()
 	return 0
 
@@ -83,7 +83,7 @@
 
 /obj/effect/shield/proc/diffuse(var/duration)
 	// The shield is trying to counter diffusers. Cause lasting stress on the shield.
-	if(gen.check_flag(MODEFLAG_BYPASS) && !diffused_for && !disabled_for)
+	if(gen.check_flag(MODEFLAG_BYPASS) && !disabled_for)
 		take_damage(duration * rand(8, 12), SHIELD_DAMTYPE_EM)
 		return
 
@@ -169,7 +169,7 @@
 
 
 /obj/effect/shield/c_airblock(turf/other)
-	return gen.check_flag(MODEFLAG_ATMOSPHERIC)
+	return gen.check_flag(MODEFLAG_ATMOSPHERIC) ? BLOCKED : 0
 
 
 // EMP. It may seem weak but keep in mind that multiple shield segments are likely to be affected.
@@ -185,7 +185,7 @@
 
 
 // Fire
-/obj/effect/shield/fire_act()
+/obj/effect/shield/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(!disabled_for)
 		take_damage(rand(5,10), SHIELD_DAMTYPE_HEAT)
 

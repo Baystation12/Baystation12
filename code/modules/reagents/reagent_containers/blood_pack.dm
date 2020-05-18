@@ -9,7 +9,7 @@
 	desc = "Flexible bag for IV injectors."
 	icon = 'icons/obj/bloodpack.dmi'
 	icon_state = "empty"
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_TINY
 	volume = 120
 	possible_transfer_amounts = "0.2;1;2"
 	amount_per_transfer_from_this = REM
@@ -25,13 +25,11 @@
 /obj/item/weapon/reagent_containers/ivbag/on_reagent_change()
 	update_icon()
 	if(reagents.total_volume > volume/2)
-		w_class = ITEM_SIZE_NORMAL
-	else
 		w_class = ITEM_SIZE_SMALL
+	else
+		w_class = ITEM_SIZE_TINY
 
-/obj/item/weapon/reagent_containers/attackby(obj/item/weapon/W as obj, mob/user as mob)
-
-/obj/item/weapon/reagent_containers/ivbag/update_icon()
+/obj/item/weapon/reagent_containers/ivbag/on_update_icon()
 	overlays.Cut()
 	var/percent = round(reagents.total_volume / volume * 100)
 	if(reagents.total_volume)
@@ -51,9 +49,7 @@
 		visible_message("\The [attached] is taken off \the [src]")
 		attached = null
 	else if(ishuman(over_object))
-		visible_message("<span class = 'warning'>\The [usr] starts hooking \the [over_object] up to \the [src].</span>")
-		if(do_after(usr, 30))
-			to_chat(usr, "You hook \the [over_object] up to \the [src].")
+		if(do_IV_hookup(over_object, usr, src))
 			attached = over_object
 			START_PROCESSING(SSobj,src)
 	update_icon()
@@ -93,7 +89,7 @@
 	..()
 	if(blood_type)
 		name = "blood pack [blood_type]"
-		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null, "virus2" = list(), "antibodies" = list()))
+		reagents.add_reagent(/datum/reagent/blood, volume, list("donor" = null, "blood_DNA" = null, "blood_type" = blood_type, "trace_chem" = null))
 
 /obj/item/weapon/reagent_containers/ivbag/blood/APlus
 	blood_type = "A+"

@@ -5,8 +5,8 @@
 		var/obj/item/weapon/glass_extra/GE = I
 		if(can_add_extra(GE))
 			extras += GE
-			user.remove_from_mob(GE)
-			GE.loc = src
+			if(!user.unEquip(GE, src))
+				return
 			to_chat(user, "<span class=notice>You add \the [GE] to \the [src].</span>")
 			update_icon()
 		else
@@ -17,10 +17,10 @@
 			return
 		var/obj/item/weapon/reagent_containers/food/snacks/fruit_slice/FS = I
 		extras += FS
-		user.remove_from_mob(FS)
+		if(!user.unEquip(FS, src))
+			return
 		FS.pixel_x = 0 // Reset its pixel offsets so the icons work!
 		FS.pixel_y = 0
-		FS.loc = src
 		to_chat(user, "<span class=notice>You add \the [FS] to \the [src].</span>")
 		update_icon()
 	else
@@ -51,9 +51,8 @@
 	desc = "This goes on a glass."
 	var/glass_addition
 	var/glass_desc
-	var/glass_color
 	w_class = ITEM_SIZE_TINY
-	icon = DRINK_ICON_FILE
+	icon = 'icons/obj/drink_glasses/extras.dmi'
 
 /obj/item/weapon/glass_extra/stick
 	name = "stick"
@@ -61,6 +60,12 @@
 	glass_addition = "stick"
 	glass_desc = "There is a stick in the glass."
 	icon_state = "stick"
+	color = COLOR_BLACK
+	
+/obj/item/weapon/glass_extra/stick/Initialize()
+	. = ..()
+	if(prob(50))
+		color = get_random_colour(0,50,150)
 
 /obj/item/weapon/glass_extra/straw
 	name = "straw"
@@ -68,5 +73,3 @@
 	glass_addition = "straw"
 	glass_desc = "There is a straw in the glass."
 	icon_state = "straw"
-
-#undef DRINK_ICON_FILE

@@ -1,6 +1,12 @@
 /datum/wires/shield_generator
 	holder_type = /obj/machinery/power/shield_generator/
 	wire_count = 5
+	descriptions = list(
+		new /datum/wire_description(SHIELDGEN_WIRE_POWER, "This wire seems to be carrying a heavy current.", SKILL_EXPERT),
+		new /datum/wire_description(SHIELDGEN_WIRE_HACK, "This wire seems designed to enable a manual override."),
+		new /datum/wire_description(SHIELDGEN_WIRE_CONTROL, "This wire connects to the main control panel."),
+		new /datum/wire_description(SHIELDGEN_WIRE_AICONTROL, "This wire connects to automated control systems.")
+	)
 
 var/const/SHIELDGEN_WIRE_POWER = 1			// Cut to disable power input into the generator. Pulse does nothing. Mend to restore.
 var/const/SHIELDGEN_WIRE_HACK = 2			// Pulse to hack the generator, enabling hacked modes. Cut to unhack. Mend does nothing.
@@ -36,11 +42,3 @@ var/const/SHIELDGEN_WIRE_NOTHING = 16		// A blank wire that doesn't have any spe
 	switch(index)
 		if(SHIELDGEN_WIRE_HACK)
 			S.hacked = 1
-
-/datum/wires/shield_generator/GetInteractWindow()
-	var/obj/machinery/power/shield_generator/S = holder
-	. += ..()
-	. += "<BR>A red light labeled \"Safety Override\" is [S.hacked ? "blinking" : "off"]."
-	. += "<BR>A green light labeled \"Power Connection\" is [S.input_cut ? "off" : "on"]."
-	. += "<BR>A blue light labeled \"Network Control\" is [S.ai_control_disabled ? "off" : "on"]."
-	. += "<BR>A yellow light labeled \"Interface Connection\" is [S.mode_changes_locked ? "off" : "on"].<BR>"

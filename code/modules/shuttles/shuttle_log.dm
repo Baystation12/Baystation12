@@ -6,7 +6,7 @@
 	var/list/datum/shuttle_mission/queued_missions = list() //Missions which are queued up, in order ([1] is the next one scheduled).
 	var/datum/shuttle_mission/current_mission         //The current mission, planned or ongoing. Will also be in either missions or queued_missions, depending on stage.
 	var/home_base                                     //The landmark tag from which missions originate.
-	var/list/datum/nano_module/registered = list()    //Nanomodules using logs should register to recieve updates.
+	var/list/datum/nano_module/registered = list()    //Nanomodules using logs should register to receive updates.
 	var/last_spam = 0                                 //Helps with spam control from deck software.
 
 /datum/shuttle_log/New(datum/shuttle/given_shuttle)
@@ -14,7 +14,7 @@
 	if(given_shuttle.logging_home_tag)
 		shuttle_name = given_shuttle.name
 		home_base = given_shuttle.logging_home_tag
-		shuttle_controller.shuttle_logs[given_shuttle] = src
+		SSshuttle.shuttle_logs[given_shuttle] = src
 
 /datum/shuttle_log/Destroy()
 	update_registred()
@@ -32,7 +32,7 @@
 
 /datum/shuttle_log/proc/update_registred()
 	for(var/datum/nano_module/module in registered)
-		GLOB.nanomanager.update_uis(module)
+		SSnano.update_uis(module)
 
 /datum/shuttle_log/proc/submit_report(datum/shuttle_mission/mission, datum/computer_file/report/report, mob/user)
 	if(!report.submit(user))
@@ -117,7 +117,7 @@
 			return mission
 
 /datum/shuttle_log/proc/handle_move(obj/effect/shuttle_landmark/origin, obj/effect/shuttle_landmark/destination)
-	var/obj/effect/shuttle_landmark/home = shuttle_controller.get_landmark(home_base)
+	var/obj/effect/shuttle_landmark/home = SSshuttle.get_landmark(home_base)
 	if(origin == home)
 		shuttle_launched()
 	if(destination == home)

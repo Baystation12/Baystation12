@@ -1,8 +1,7 @@
 /mob/living
 	see_in_dark = 2
 	see_invisible = SEE_INVISIBLE_LIVING
-
-	movement_handlers = list(/datum/movement_handler/mob_living/death, /datum/movement_handler/mob/eye)
+	waterproof = FALSE
 
 	//Health and life related vars
 	var/maxHealth = 100 //Maximum health that should be possible.
@@ -49,7 +48,5 @@
 
 	var/job = null//Living
 	var/list/obj/aura/auras = null //Basically a catch-all aura/force-field thing.
-
-	var/obj/screen/cells = null
 
 	var/last_resist = 0

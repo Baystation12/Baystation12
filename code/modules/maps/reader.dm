@@ -33,21 +33,24 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
  * 2) Read the map line by line, parsing the result (using parse_grid)
  *
  */
-/dmm_suite/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y)
+/dmm_suite/load_map(var/dmm_file, var/x_offset, var/y_offset, var/z_offset, var/cropMap, var/measureOnly, var/no_changeturf, var/clear_contents, var/lower_crop_x, var/lower_crop_y, var/upper_crop_x, var/upper_crop_y, var/initialized_areas_by_type)
 	//How I wish for RAII
 	Master.StartLoadingMap()
 	space_key = null
 	#ifdef TESTING
 	turfsSkipped = 0
 	#endif
-	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y)
+	initialized_areas_by_type = initialized_areas_by_type || list()
+	if(!(world.area in initialized_areas_by_type))
+		initialized_areas_by_type[world.area] = locate(world.area)
+	. = load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, lower_crop_x, upper_crop_x, lower_crop_y, upper_crop_y, initialized_areas_by_type)
 	#ifdef TESTING
 	if(turfsSkipped)
 		testing("Skipped loading [turfsSkipped] default turfs")
 	#endif
 	Master.StopLoadingMap()
 
-/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY)
+/dmm_suite/proc/load_map_impl(dmm_file, x_offset, y_offset, z_offset, cropMap, measureOnly, no_changeturf, clear_contents, x_lower = -INFINITY, x_upper = INFINITY, y_lower = -INFINITY, y_upper = INFINITY, initialized_areas_by_type)
 	var/tfile = dmm_file//the map file we're creating
 	if(isfile(tfile))
 		tfile = file2text(tfile)
@@ -169,7 +172,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 								if(!no_afterchange || (model_key != space_key))
 									if(!grid_models[model_key])
 										throw EXCEPTION("Undefined model key in DMM.")
-									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents)
+									var/datum/grid_load_metadata/M = parse_grid(grid_models[model_key], model_key, xcrd, ycrd, zcrd, no_changeturf || zexpansion, clear_contents, initialized_areas_by_type)
 									if (M)
 										atoms_to_initialise += M.atoms_to_initialise
 										atoms_to_delete += M.atoms_to_delete
@@ -228,11 +231,10 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		/obj/effect,
 		/obj/item,
 		/obj/machinery,
-		/obj/mecha,
 		/obj/structure,
 	)
 
-/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num)
+/dmm_suite/proc/parse_grid(model as text, model_key as text, xcrd as num,ycrd as num,zcrd as num, no_changeturf as num, clear_contents as num, initialized_areas_by_type)
 	/*Method parse_grid()
 	- Accepts a text string containing a comma separated list of type paths of the
 		same construction as those contained in a .dmm file, and instantiates them.
@@ -332,13 +334,10 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		if (LAZYLEN(attr))
 			GLOB._preloader.setup(attr)//preloader for assigning  set variables on atom creation
 		var/atype = members[index]
-		var/atom/instance
-		for(var/area/A in world)
-			if(A.type == atype)
-				instance = A
-				break
+		var/atom/instance = initialized_areas_by_type[atype]
 		if(!instance)
 			instance = new atype(null)
+			initialized_areas_by_type[atype] = instance
 		if(crds)
 			instance.contents.Add(crds)
 
@@ -408,15 +407,15 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 	if(GLOB.use_preloader && .)//second preloader pass, for those atoms that don't ..() in New()
 		GLOB._preloader.load(.)
 
-	//custom CHECK_TICK here because we don't want things created while we're sleeping to not initialize
+	//custom CHECK_TICK here because we don't want things created while we're sleeping to delay initialization.
 	if(TICK_CHECK)
 		SSatoms.map_loader_stop()
 		stoplag()
 		SSatoms.map_loader_begin()
 
 /dmm_suite/proc/create_atom(path, crds)
-	set waitfor = FALSE
-	. = new path (crds)
+	// Doing this async is impossible, as we must return the ref.
+	return new path (crds)
 
 //text trimming (both directions) helper proc
 //optionally removes quotes before and after the text (for variable name)
@@ -447,7 +446,7 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		. = copytext(text,2,findtext(text,"\"",3,0))
 
 	//Check for number
-	else if(isnum(text2num(text)))
+	else if(isnum(text2num(text)) && text == "[text2num(text)]") //text2num will parse truthy false positives; this demands that the only numbers parsed as such are properly formatted ones.
 		. = text2num(text)
 
 	//Check for null
@@ -473,7 +472,6 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 
 	var/position
 	var/old_position = 1
-	var/list_index = 1
 
 	do
 		//find next delimiter that is not within  "..."
@@ -482,16 +480,29 @@ GLOBAL_DATUM_INIT(_preloader, /dmm_suite/preloader, new)
 		//check if this is a simple variable (as in list(var1, var2)) or an associative one (as in list(var1="foo",var2=7))
 		var/equal_position = findtext(text,"=",old_position, position)
 
-		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)),1)//the name of the variable, must trim quotes to build a BYOND compliant associatives list
+		var/trim_left = trim_text(copytext(text,old_position,(equal_position ? equal_position : position)), 0)
 		old_position = position + 1
 
-		if(equal_position)//associative var, so do the association
-			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
-			to_return[trim_left] = readlistitem(trim_right)
-			list_index++
-		else if (length(trim_left))	//simple var
+		if(!length(trim_left))
+			if(position == 0)
+				break // That terminal commas are ignored is real dm behavior.
 			to_return.len++
-			to_return[list_index++] = readlistitem(trim_left)
+			continue
+
+		var/left = readlistitem(trim_left)
+		if(equal_position)
+			if(!left && trim_left != "null")
+				left = trim_left // This is dm behavior: unindentifiable keys in associative lists are parsed as literal strings.
+			if(left == 1.#INF || left == -1.#INF)
+				left = trim_left // This is not valid as a list index; we could let it runtime, but if associative it should be parsed as "inf" or "-inf" instead.
+		to_return += left
+
+		if(equal_position)//associative var, so do the association
+			if(isnum(left))
+				crash_with("Numerical key in associative list.")
+				break // This is invalid; apparently dm will runtime in this situation.
+			var/trim_right = trim_text(copytext(text,equal_position+1,position))//the content of the variable
+			to_return[left] = readlistitem(trim_right)
 
 	while(position != 0)
 

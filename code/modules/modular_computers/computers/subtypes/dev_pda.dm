@@ -1,26 +1,34 @@
 /obj/item/modular_computer/pda
 	name = "\improper PDA"
-	desc = "A very compact computer designed to keep its user always connected."
+	desc = "A very compact computer, designed to keep its user always connected."
 	icon = 'icons/obj/modular_pda.dmi'
 	icon_state = "pda"
 	icon_state_unpowered = "pda"
 	hardware_flag = PROGRAM_PDA
 	max_hardware_size = 1
 	w_class = ITEM_SIZE_SMALL
-	light_strength = 5
+	light_strength = 2
 	slot_flags = SLOT_ID | SLOT_BELT
 	stores_pen = TRUE
-	stored_pen = /obj/item/weapon/pen
+	stored_pen = /obj/item/weapon/pen/retractable
+	interact_sounds = list('sound/machines/pda_click.ogg')
+	interact_sound_volume = 20
 
 /obj/item/modular_computer/pda/Initialize()
 	. = ..()
 	enable_computer()
 
+obj/item/modular_computer/pda/CtrlClick(mob/user)
+	if(!isturf(loc)) ///If we are dragging the PDA across the ground we don't want to remove the pen
+		remove_pen(user)
+	else
+		. = ..()
+
 /obj/item/modular_computer/pda/AltClick(var/mob/user)
 	if(!CanPhysicallyInteract(user))
 		return
 	if(card_slot && istype(card_slot.stored_card))
-		eject_id()
+		card_slot.eject_id(user)
 	else
 		..()
 
@@ -104,6 +112,10 @@
 /obj/item/modular_computer/pda/cargo
 	icon_state = "pda-sup"
 	icon_state_unpowered = "pda-sup"
+
+/obj/item/modular_computer/pda/mining
+	icon_state = "pda-nt"
+	icon_state_unpowered = "pda-nt"
 
 /obj/item/modular_computer/pda/syndicate
 	icon_state = "pda-syn"

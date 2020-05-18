@@ -6,7 +6,7 @@
 	dir = SOUTH
 
 	load_item_visible = 1
-	buckle_pixel_shift = "x=0;y=5"
+	buckle_pixel_shift = "x=0;y=0;z=5"
 	health = 100
 	maxhealth = 100
 
@@ -71,8 +71,8 @@
 /obj/vehicle/bike/proc/load_engine(var/obj/item/weapon/engine/E, var/mob/user)
 	if(engine)
 		return
-	if(user)
-		user.drop_from_inventory(E)
+	if(user && !user.unEquip(E))
+		return
 	engine = E
 	engine.forceMove(src)
 	if(trail)
@@ -84,7 +84,7 @@
 /obj/vehicle/bike/proc/unload_engine()
 	if(!engine)
 		return
-	engine.forceMove(get_turf(src))
+	engine.dropInto(loc)
 	if(trail)
 		trail.stop()
 		qdel(trail)
@@ -92,7 +92,7 @@
 
 /obj/vehicle/bike/load(var/atom/movable/C)
 	var/mob/living/M = C
-	if(!istype(C)) return 0
+	if(!istype(M)) return 0
 	if(M.buckled || M.restrained() || !Adjacent(M) || !M.Adjacent(src))
 		return 0
 	return ..(M)
@@ -194,7 +194,7 @@
 		return
 	..()
 
-/obj/vehicle/bike/update_icon()
+/obj/vehicle/bike/on_update_icon()
 	overlays.Cut()
 
 	if(on)

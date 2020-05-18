@@ -21,7 +21,7 @@
 				to_chat(user, "<span class='notice'>[target] is full.</span>")
 				return
 
-			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you cant remove the shit.
+			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/clothing/mask/smokable/cigarette)) //You can inject humans and food but you can't remove the shit.
 				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 

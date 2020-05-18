@@ -16,6 +16,8 @@
 		normal_member.reassign_network(src, null)
 	gases.Cut()  // Do not qdel the gases, we don't own them
 	leaks.Cut()
+	normal_members.Cut()
+	line_members.Cut()
 	return ..()
 
 /datum/pipe_network/Process()
@@ -24,7 +26,7 @@
 		update = 0
 		reconcile_air() //equalize_gases(gases)
 
-	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes dont radiate heat - Mport
+	//Give pipelines their process call for pressure checking and what not. Have to remove pressure checks for the time being as pipes don't radiate heat - Mport
 	//for(var/datum/pipeline/line_member in line_members)
 	//	line_member.process()
 
@@ -35,7 +37,6 @@
 	if(!start_normal)
 		qdel(src)
 		return
-
 	start_normal.network_expand(src, reference)
 
 	update_network_gases()

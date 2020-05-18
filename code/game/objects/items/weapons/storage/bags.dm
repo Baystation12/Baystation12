@@ -16,9 +16,10 @@
 	if(.) update_w_class()
 
 /obj/item/weapon/storage/bag/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
-	if(istype(src.loc, /obj/item/weapon/storage))
+	var/mob/living/carbon/human/H = ishuman(user) ? user : null // if we're human, then we need to check if bag in a pocket
+	if(istype(src.loc, /obj/item/weapon/storage) || H?.is_in_pocket(src))
 		if(!stop_messages)
-			to_chat(user, "<span class='notice'>Take [src] out of [src.loc] first.</span>")
+			to_chat(user, SPAN_NOTICE("Take \the [src] out of [istype(src.loc, /obj) ? "\the [src.loc]" : "the pocket"] first."))
 		return 0 //causes problems if the bag expands and becomes larger than src.loc can hold, so disallow it
 	. = ..()
 
@@ -28,12 +29,12 @@
 		w_class = max(w_class, I.w_class)
 
 	var/cur_storage_space = storage_space_used()
-	while(base_storage_capacity(w_class) < cur_storage_space)
+	while(BASE_STORAGE_CAPACITY(w_class) < cur_storage_space)
 		w_class++
 
 /obj/item/weapon/storage/bag/get_storage_cost()
 	var/used_ratio = storage_space_used()/max_storage_space
-	return max(base_storage_cost(w_class), round(used_ratio*base_storage_cost(max_w_class), 1))
+	return max(BASE_STORAGE_COST(w_class), round(used_ratio*BASE_STORAGE_COST(max_w_class), 1))
 
 // -----------------------------
 //          Trash bag
@@ -42,7 +43,7 @@
 	name = "trash bag"
 	desc = "It's the heavy-duty black polymer kind. Time to take out the trash!"
 	icon = 'icons/obj/janitor.dmi'
-	icon_state = "trashbag0"
+	icon_state = "trashbag"
 	item_state = "trashbag"
 
 	w_class = ITEM_SIZE_SMALL
@@ -54,12 +55,25 @@
 	..()
 	update_icon()
 
-/obj/item/weapon/storage/bag/trash/update_icon()
+/obj/item/weapon/storage/bag/trash/on_update_icon()
 	switch(w_class)
-		if(2) icon_state = "trashbag0"
-		if(3) icon_state = "trashbag1"
-		if(4) icon_state = "trashbag2"
-		if(5 to INFINITY) icon_state = "trashbag3"
+		if(2) icon_state = "[initial(icon_state)]"
+		if(3) icon_state = "[initial(icon_state)]1"
+		if(4) icon_state = "[initial(icon_state)]2"
+		if(5 to INFINITY) icon_state = "[initial(icon_state)]3"
+
+/obj/item/weapon/storage/bag/trash/bluespace
+	name = "trash bag of holding"
+	max_storage_space = 56
+	desc = "The latest and greatest in custodial convenience, a trashbag that is capable of holding vast quantities of garbage."
+	icon_state = "bluetrashbag"
+
+/obj/item/weapon/storage/bag/trash/bluespace/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/storage/backpack/holding) || istype(W, /obj/item/weapon/storage/bag/trash/bluespace))
+		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
+		qdel(W)
+		return 1
+	return ..()
 
 // -----------------------------
 //        Plastic Bag
@@ -89,4 +103,4 @@
 	max_storage_space = 100
 	max_w_class = ITEM_SIZE_HUGE
 	w_class = ITEM_SIZE_SMALL
-	can_hold = list(/obj/item/weapon/coin,/obj/item/weapon/spacecash)
+	can_hold = list(/obj/item/weapon/material/coin,/obj/item/weapon/spacecash)

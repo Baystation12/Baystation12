@@ -1,5 +1,5 @@
-
 /datum/money_account
+	var/account_name = ""
 	var/owner_name = ""
 	var/account_number = 0
 	var/remote_access_pin = 0
@@ -9,73 +9,55 @@
 	var/security_level = 0	//0 - auto-identify from worn ID, require only account number
 							//1 - require manual login / account number and pin
 							//2 - require card and manual login
+	var/account_type = ACCOUNT_TYPE_PERSONAL
 
-/datum/money_account/proc/do_transaction(var/datum/transaction/T)
-	money = max(0, money + T.amount)
+/datum/money_account/New(var/account_type)
+	account_type = account_type ? account_type : ACCOUNT_TYPE_PERSONAL
+
+// is_source inverts the amount.
+/datum/money_account/proc/add_transaction(var/datum/transaction/T, is_source = FALSE)
+	money = max(is_source ? money - T.amount : money + T.amount, 0)
 	transaction_log += T
 
 /datum/money_account/proc/get_balance()
-	. = 0
-	for(var/datum/transaction/T in transaction_log)
-		if(T.purpose == "Account creation")
-			continue
-		T.sanitize_amount()
-		. += T.amount
+	return money
 
-/datum/transaction
-	var/target_name = ""
-	var/purpose = ""
-	var/amount = 0
-	var/date = ""
-	var/time = ""
-	var/source_terminal = ""
+/datum/money_account/proc/log_msg(msg, machine_id)
+	var/datum/transaction/log/T = new(src, msg, machine_id)
+	return T.perform()
 
-/datum/transaction/New(_target, _purpose, _amount, _source)
-	..()
-	date = stationdate2text()
-	time = stationtime2text()
-	target_name = _target
-	purpose = _purpose
-	amount = _amount
-	source_terminal = _source
+/datum/money_account/proc/deposit(amount, purpose, machine_id)
+	var/datum/transaction/singular/T = new(src, machine_id, amount, purpose)
+	return T.perform()
 
-/datum/transaction/proc/sanitize_amount() //some place still uses (number) for negative amounts and I can't find it
-	if(!istext(amount))
-		return
+/datum/money_account/proc/withdraw(amount, purpose, machine_id)
+	var/datum/transaction/singular/T = new(src, machine_id, -amount, purpose)
+	return T.perform()
 
-	// Check if the text is numeric.
-	var/text = amount
-	amount = text2num(text)
+/datum/money_account/proc/transfer(to_account, amount, purpose)
+	var/datum/transaction/T = new(src, to_account, amount, purpose)
+	return T.perform()
 
-	// Otherwise, the (digits) thing is going on.
-	if(!amount)
-		var/regex/R = regex("\\d+")
-		R.Find(text)
-		amount = -text2num(R.match)
 
-/proc/create_account(var/new_owner_name = "Default user", var/starting_funds = 0, var/obj/machinery/computer/account_database/source_db)
+/proc/create_account(var/account_name = "Default account name", var/owner_name, var/starting_funds = 0, var/account_type = ACCOUNT_TYPE_PERSONAL, var/obj/machinery/computer/account_database/source_db)
 
 	//create a new account
 	var/datum/money_account/M = new()
-	M.owner_name = new_owner_name
+	M.account_name = account_name
+	M.owner_name = (owner_name ? owner_name : account_name)
+	M.account_type = account_type
 	M.remote_access_pin = rand(1111, 111111)
-	M.money = starting_funds
 
 	//create an entry in the account transaction log for when it was created
-	var/datum/transaction/T = new()
-	T.target_name = new_owner_name
-	T.purpose = "Account creation"
-	T.amount = starting_funds
+	//note that using the deposit proc on the account isn't really feasible because we need to change the transaction data before performing it
+	var/datum/transaction/singular/T = new(M, (source_db ? source_db.machine_id : "NTGalaxyNet Terminal #[rand(111,1111)]"), starting_funds, "Account creation")
 	if(!source_db)
 		//set a random date, time and location some time over the past few decades
 		T.date = "[num2text(rand(1,31))] [pick("January","February","March","April","May","June","July","August","September","October","November","December")], [game_year-rand(8,18)]"
 		T.time = "[rand(0,24)]:[rand(11,59)]"
-		T.source_terminal = "NTGalaxyNet Terminal #[rand(111,1111)]"
 
 		M.account_number = random_id("station_account_number", 111111, 999999)
 	else
-		T.source_terminal = source_db.machine_id
-
 		M.account_number = next_account_number
 		next_account_number += rand(1,25)
 
@@ -84,19 +66,19 @@
 
 		var/obj/item/weapon/paper/R = new /obj/item/weapon/paper(P)
 		P.wrapped = R
-		R.SetName("Account information: [M.owner_name]")
+		R.SetName("Account information: [M.account_name]")
 		R.info = "<b>Account details (confidential)</b><br><hr><br>"
 		R.info += "<i>Account holder:</i> [M.owner_name]<br>"
 		R.info += "<i>Account number:</i> [M.account_number]<br>"
 		R.info += "<i>Account pin:</i> [M.remote_access_pin]<br>"
-		R.info += "<i>Starting balance:</i> T[M.money]<br>"
+		R.info += "<i>Starting balance:</i> [GLOB.using_map.local_currency_name_short][M.money]<br>"
 		R.info += "<i>Date and time:</i> [stationtime2text()], [stationdate2text()]<br><br>"
 		R.info += "<i>Creation terminal ID:</i> [source_db.machine_id]<br>"
-		R.info += "<i>Authorised NT officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
+		R.info += "<i>Authorised officer overseeing creation:</i> [source_db.held_card.registered_name]<br>"
 
 		//stamp the paper
 		var/image/stampoverlay = image('icons/obj/bureaucracy.dmi')
-		stampoverlay.icon_state = "paper_stamp-cent"
+		stampoverlay.icon_state = "paper_stamp-boss"
 		if(!R.stamped)
 			R.stamped = new
 		R.stamped += /obj/item/weapon/stamp
@@ -104,22 +86,10 @@
 		R.stamps += "<HR><i>This paper has been stamped by the Accounts Database.</i>"
 
 	//add the account
-	M.transaction_log.Add(T)
+	T.perform()
 	all_money_accounts.Add(M)
 
 	return M
-
-/proc/charge_to_account(var/attempt_account_number, var/source_name, var/purpose, var/terminal_id, var/amount)
-	var/datum/money_account/D = get_account(attempt_account_number)
-	if(!D || D.suspended)
-		return 0
-	D.money = max(0, D.money + amount)
-
-	//create a transaction log entry
-	var/datum/transaction/T = new(source_name, purpose, amount, terminal_id)
-	D.transaction_log.Add(T)
-
-	return 1
 
 //this returns the first account datum that matches the supplied accnum/pin combination, it returns null if the combination did not match any account
 /proc/attempt_account_access(var/attempt_account_number, var/attempt_pin_number, var/security_level_passed = 0)

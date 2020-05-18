@@ -14,6 +14,11 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 atom/proc/temperature_expose(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	return null
 
+/atom/movable/proc/is_burnable()
+	return FALSE
+
+/mob/is_burnable()
+	return simulated
 
 turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 
@@ -54,8 +59,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	else
 		for(var/turf/simulated/T in fire_tiles)
 			if(istype(T.fire))
-				T.fire.RemoveFire()
-			T.fire = null
+				qdel(T.fire)
 		fire_tiles.Cut()
 		fuel_objs.Cut()
 
@@ -89,6 +93,10 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	return 0
 
 /turf/simulated/create_fire(fl)
+
+	if(submerged())
+		return 1
+
 	if(fire)
 		fire.firelevel = max(fl, fire.firelevel)
 		return 1
@@ -116,7 +124,6 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	icon = 'icons/effects/fire.dmi'
 	icon_state = "1"
 	light_color = "#ed9200"
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = FIRE_LAYER
 
 	var/firelevel = 1 //Calculated by gas_mixture.calculate_firelevel()
@@ -125,11 +132,11 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	. = 1
 
 	var/turf/simulated/my_tile = loc
-	if(!istype(my_tile) || !my_tile.zone)
+	if(!istype(my_tile) || !my_tile.zone || my_tile.submerged())
 		if(my_tile && my_tile.fire == src)
 			my_tile.fire = null
-		RemoveFire()
-		return 1
+		qdel(src)
+		return PROCESS_KILL
 
 	var/datum/gas_mixture/air_contents = my_tile.return_air()
 
@@ -202,19 +209,12 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 	return heat2color(temperature)
 
 /obj/fire/Destroy()
-	RemoveFire()
-
-	. = ..()
-
-/obj/fire/proc/RemoveFire()
 	var/turf/T = loc
 	if (istype(T))
 		set_light(0)
-
 		T.fire = null
-		loc = null
 	SSair.active_hotspots.Remove(src)
-
+	. = ..()
 
 /turf/simulated/var/fire_protection = 0 //Protects newly extinguished tiles from being overrun again.
 /turf/proc/apply_fire_protection()
@@ -320,6 +320,9 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 		log_debug("new temperature = [temperature]; new pressure = [return_pressure()]")
 		#endif
 
+		if (temperature<220)
+			firelevel = 0
+
 		return firelevel
 
 datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
@@ -393,6 +396,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 /mob/living/proc/FireBurn(var/firelevel, var/last_temperature, var/pressure)
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 	apply_damage(2.5*mx, BURN)
+	return mx
 
 
 /mob/living/carbon/human/FireBurn(var/firelevel, var/last_temperature, var/pressure)
@@ -422,15 +426,18 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 				legs_exposure = 0
 			if(C.body_parts_covered & ARMS)
 				arms_exposure = 0
-	//minimize this for low-pressure enviroments
+	//minimize this for low-pressure environments
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.
 
-	apply_damage(2.5*mx*head_exposure,  BURN, BP_HEAD,  0, 0, "Fire")
-	apply_damage(2.5*mx*chest_exposure, BURN, BP_CHEST, 0, 0, "Fire")
-	apply_damage(2.0*mx*groin_exposure, BURN, BP_GROIN, 0, 0, "Fire")
-	apply_damage(0.6*mx*legs_exposure,  BURN, BP_L_LEG, 0, 0, "Fire")
-	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, 0, 0, "Fire")
-	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, 0, 0, "Fire")
-	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, 0, 0, "Fire")
+	apply_damage(0.9*mx*head_exposure,  BURN, BP_HEAD,  used_weapon =  "Fire")
+	apply_damage(2.5*mx*chest_exposure, BURN, BP_CHEST, used_weapon =  "Fire")
+	apply_damage(2.0*mx*groin_exposure, BURN, BP_GROIN, used_weapon =  "Fire")
+	apply_damage(0.6*mx*legs_exposure,  BURN, BP_L_LEG, used_weapon =  "Fire")
+	apply_damage(0.6*mx*legs_exposure,  BURN, BP_R_LEG, used_weapon =  "Fire")
+	apply_damage(0.4*mx*arms_exposure,  BURN, BP_L_ARM, used_weapon =  "Fire")
+	apply_damage(0.4*mx*arms_exposure,  BURN, BP_R_ARM, used_weapon =  "Fire")
+
+	//return a truthy value of whether burning actually happened
+	return mx * (head_exposure + chest_exposure + groin_exposure + legs_exposure + arms_exposure)

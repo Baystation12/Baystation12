@@ -7,12 +7,12 @@
 	icon_living = "vagrant"
 	icon_dead = "vagrant"
 	icon_gib = "vagrant"
-	maxHealth = 65
-	health = 40
+	maxHealth = 60
+	health = 20
 	speed = 5
 	speak_chance = 0
-	turns_per_move = 3
-	move_to_delay = 3
+	turns_per_move = 4
+	move_to_delay = 4
 	response_help = "pets the"
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
@@ -27,17 +27,13 @@
 	min_gas = null
 	max_gas = null
 	minbodytemp = 0
-	var/datum/disease2/disease/carried
 	var/cloaked = 0
 	var/mob/living/carbon/human/gripping = null
-	var/blood_per_tick = 4.25
+	var/blood_per_tick = 3
 	var/health_per_tick = 0.8
+	pass_flags = PASS_FLAG_TABLE
 
-/mob/living/simple_animal/hostile/vagrant/Initialize()
-	. = ..()
-	if(prob(40))
-		carried = new/datum/disease2/disease()
-		carried.makerandom(rand(2, 4))
+	bleed_colour = "#aad9de"
 
 /mob/living/simple_animal/hostile/vagrant/Allow_Spacemove(var/check_drift = 0)
 	return 1
@@ -47,11 +43,18 @@
 	. = ..()
 	if((target_mob != Proj.firer) && health < oldhealth && !incapacitated(INCAPACITATION_KNOCKOUT)) //Respond to being shot at
 		target_mob = Proj.firer
-		turns_per_move = 2
+		turns_per_move = 3
 		MoveToTarget()
+
+/mob/living/simple_animal/hostile/vagrant/death(gibbed)
+	. = ..()
+	if(. && !gibbed)
+		gib()
 
 /mob/living/simple_animal/hostile/vagrant/Life()
 	. = ..()
+	if(!.)
+		return FALSE
 	if(gripping)
 		if(!(get_turf(src) == get_turf(gripping)))
 			gripping = null
@@ -77,13 +80,10 @@
 		new/mob/living/simple_animal/hostile/vagrant(src.loc)
 		gib()
 		return
-	if(health < 1)
-		gib() //Leave no identifiable evidence.
-		return
 
-/mob/living/simple_animal/hostile/vagrant/update_icon()
+/mob/living/simple_animal/hostile/vagrant/on_update_icon()
 	if(cloaked) //It's fun time
-		alpha = 45
+		alpha = 75
 		set_light(0)
 		icon_state = initial(icon_state)
 		move_to_delay = initial(move_to_delay)
@@ -98,7 +98,8 @@
 	if(ishuman(.))
 		var/mob/living/carbon/human/H = .
 		if(gripping == H)
-			H.Weaken(3)
+			H.Weaken(1)
+			H.Stun(1)
 			return
 		//This line ensures there's always a reasonable chance of grabbing, while still
 		//Factoring in health
@@ -106,12 +107,10 @@
 			gripping = H
 			cloaked = 0
 			update_icon()
-			H.Weaken(3)
+			H.Weaken(1)
+			H.Stun(1)
 			H.visible_message("<span class='danger'>\the [src] latches onto \the [H], pulsating!</span>")
-			if(carried && length(gripping.virus2) == 0)
-				infect_virus2(gripping, carried, 1)
-			src.loc = gripping.loc
-			return
+			src.forceMove(gripping.loc)
 
 /mob/living/simple_animal/hostile/vagrant/swarm/Initialize()
 	. = ..()

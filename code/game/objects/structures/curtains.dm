@@ -2,14 +2,16 @@
 	name = "curtain"
 	icon = 'icons/obj/curtain.dmi'
 	icon_state = "closed"
-	plane = OBJ_PLANE
 	layer = ABOVE_WINDOW_LAYER
 	opacity = 1
 	density = 0
 
+/obj/structure/curtain/Initialize()
+	.=..()
+	set_extension(src, /datum/extension/turf_hand)
+
 /obj/structure/curtain/open
 	icon_state = "open"
-	plane = ABOVE_HUMAN_PLANE
 	layer = ABOVE_HUMAN_LAYER
 	opacity = 0
 
@@ -29,11 +31,9 @@
 	set_opacity(!opacity)
 	if(opacity)
 		icon_state = "closed"
-		plane = ABOVE_HUMAN_PLANE
-		layer = ABOVE_WINDOW_LAYER
+		layer = ABOVE_HUMAN_LAYER
 	else
 		icon_state = "open"
-		plane = OBJ_PLANE
 		layer = ABOVE_WINDOW_LAYER
 
 /obj/structure/curtain/black
@@ -63,6 +63,3 @@
 
 /obj/structure/curtain/open/shower/security
 	color = "#aa0000"
-
-#undef SHOWER_OPEN_LAYER
-#undef SHOWER_CLOSED_LAYER

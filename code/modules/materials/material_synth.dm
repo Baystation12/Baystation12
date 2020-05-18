@@ -13,26 +13,33 @@
 		matter = null
 
 /obj/item/stack/material/cyborg/plastic
-	icon_state = "sheet-plastic"
-	default_type = "plastic"
+	icon_state = "sheet"
+	default_type = MATERIAL_PLASTIC
 
 /obj/item/stack/material/cyborg/steel
-	icon_state = "sheet-metal"
-	default_type = "steel"
+	icon_state = "sheet"
+	default_type = MATERIAL_STEEL
 
 /obj/item/stack/material/cyborg/plasteel
-	icon_state = "sheet-plasteel"
-	default_type = "plasteel"
+	icon_state = "sheet-reinf"
+	default_type = MATERIAL_PLASTEEL
 
 /obj/item/stack/material/cyborg/wood
 	icon_state = "sheet-wood"
-	default_type = "wood"
+	default_type = MATERIAL_WOOD
 
 /obj/item/stack/material/cyborg/glass
-	icon_state = "sheet-glass"
-	default_type = "glass"
+	icon_state = "sheet"
+	default_type = MATERIAL_GLASS
+	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME
 
 /obj/item/stack/material/cyborg/glass/reinforced
-	icon_state = "sheet-rglass"
-	default_type = "rglass"
+	icon_state = "sheet-reinf"
+	default_type = MATERIAL_GLASS
+	default_reinf_type = MATERIAL_STEEL
 	charge_costs = list(500, 1000)
+
+/obj/item/stack/material/cyborg/aluminium
+	icon_state = "sheet"
+	default_type = MATERIAL_ALUMINIUM
+	material_flags = USE_MATERIAL_COLOR|USE_MATERIAL_SINGULAR_NAME|USE_MATERIAL_PLURAL_NAME

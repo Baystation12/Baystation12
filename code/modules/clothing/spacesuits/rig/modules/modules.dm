@@ -13,10 +13,11 @@
 	desc = "It looks pretty sciency."
 	icon = 'icons/obj/rig_modules.dmi'
 	icon_state = "module"
-	matter = list(DEFAULT_WALL_MATERIAL = 20000, "plastic" = 30000, "glass" = 5000)
+	matter = list(MATERIAL_STEEL = 20000, MATERIAL_PLASTIC = 30000, MATERIAL_GLASS = 5000)
 
 	var/damage = 0
 	var/obj/item/weapon/rig/holder
+	var/list/banned_modules = list()
 
 	var/module_cooldown = 10
 	var/next_use = 0
@@ -55,15 +56,15 @@
 
 	var/list/stat_rig_module/stat_modules = new()
 
-/obj/item/rig_module/examine()
+/obj/item/rig_module/examine(mob/user)
 	. = ..()
 	switch(damage)
 		if(0)
-			to_chat(usr, "It is undamaged.")
+			to_chat(user, "It is undamaged.")
 		if(1)
-			to_chat(usr, "It is badly damaged.")
+			to_chat(user, "It is badly damaged.")
 		if(2)
-			to_chat(usr, "It is almost completely destroyed.")
+			to_chat(user, "It is almost completely destroyed.")
 
 /obj/item/rig_module/attackby(obj/item/W as obj, mob/user as mob)
 
@@ -95,7 +96,7 @@
 				return
 
 		var/obj/item/stack/cable_coil/cable = W
-		if(!cable.amount >= 5)
+		if(!cable.can_use(5))
 			to_chat(user, "You need five units of cable to repair \the [src].")
 			return
 
@@ -144,8 +145,7 @@
 	holder = new_holder
 	return
 
-//Proc for one-use abilities like teleport.
-/obj/item/rig_module/proc/engage()
+/obj/item/rig_module/proc/check(var/charge = 50)
 
 	if(damage >= 2)
 		to_chat(usr, "<span class='warning'>The [interface_name] is damaged beyond use!</span>")
@@ -171,11 +171,18 @@
 		to_chat(usr, "<span class='danger'>Access denied.</span>")
 		return 0
 
-	if(!holder.check_power_cost(usr, use_power_cost, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) ) )
+	if(!holder.check_power_cost(usr, charge, 0, src, (istype(usr,/mob/living/silicon ? 1 : 0) ) ) )
+		return 0
+
+	return 1
+
+//Proc for one-use abilities like teleport.
+/obj/item/rig_module/proc/engage()
+
+	if(!check(use_power_cost))
 		return 0
 
 	next_use = world.time + module_cooldown
-
 	return 1
 
 // Proc for toggling on active abilities.
@@ -186,12 +193,11 @@
 
 	active = 1
 
-	spawn(1)
-		if(suit_overlay_active)
-			suit_overlay = suit_overlay_active
-		else
-			suit_overlay = null
-		holder.update_icon()
+	if(suit_overlay_active)
+		suit_overlay = suit_overlay_active
+	else
+		suit_overlay = null
+	holder.update_icon()
 
 	return 1
 
@@ -203,14 +209,33 @@
 
 	active = 0
 
-	spawn(1)
-		if(suit_overlay_inactive)
-			suit_overlay = suit_overlay_inactive
-		else
-			suit_overlay = null
-		if(holder)
-			holder.update_icon()
+	if(suit_overlay_inactive)
+		suit_overlay = suit_overlay_inactive
+	else
+		suit_overlay = null
+	if(holder)
+		holder.update_icon()
 
+	return 1
+
+//Proc for selecting module
+/obj/item/rig_module/proc/select()
+
+	if(!check())
+		return 0
+
+	if(holder.selected_module)
+		if(holder.selected_module.suit_overlay_inactive)
+			holder.selected_module.suit_overlay = holder.selected_module.suit_overlay_inactive
+		else
+			holder.selected_module.suit_overlay = null
+
+	holder.selected_module = src
+	if(suit_overlay_active)
+		suit_overlay = suit_overlay_active
+	else
+		suit_overlay = null
+	holder.update_icon()
 	return 1
 
 // Called when the module is uninstalled from a suit.
@@ -218,6 +243,9 @@
 	deactivate()
 	holder = null
 	return
+
+/obj/item/rig_module/get_cell()
+	return holder && holder.get_cell()
 
 // Called by the hardsuit each rig process tick.
 /obj/item/rig_module/Process()
@@ -241,13 +269,20 @@
 /mob/proc/SetupStat(var/obj/item/weapon/rig/R)
 	if(R && !R.canremove && R.installed_modules.len && statpanel("Hardsuit Modules"))
 		var/cell_status = R.cell ? "[R.cell.charge]/[R.cell.maxcharge]" : "ERROR"
-		stat("Suit charge", cell_status)
+		stat("Suit Charge:", cell_status)
+		var/air_tank
+		if(R.air_supply)//makes sure you have tank
+			if(R.air_supply.air_contents)//make sure your tank has air
+				air_tank = "[round(R.air_supply.air_contents.return_pressure())] kPa"
+			else
+				air_tank = "0 kPa"
+		else
+			air_tank = "NOT FOUND"
+		stat("Tank Pressure:", air_tank)
 		for(var/obj/item/rig_module/module in R.installed_modules)
-		{
 			for(var/stat_rig_module/SRM in module.stat_modules)
 				if(SRM.CanUse())
 					stat(SRM.module.interface_name,SRM)
-		}
 
 /stat_rig_module
 	parent_type = /atom/movable

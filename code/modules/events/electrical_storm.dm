@@ -2,7 +2,16 @@
 	announceWhen = 0		// Warn them shortly before it begins.
 	startWhen = 30
 	endWhen = 60			// Set in start()
+	has_skybox_image = TRUE
 	var/list/valid_apcs		// Shuffled list of valid APCs.
+	var/global/lightning_color
+
+/datum/event/electrical_storm/get_skybox_image()
+	if(!lightning_color)
+		lightning_color = pick("#ffd98c", "#ebc7ff", "#bdfcff", "#bdd2ff", "#b0ffca", "#ff8178", "#ad74cc")
+	var/image/res = overlay_image('icons/skybox/electrobox.dmi', "lightning", lightning_color, RESET_COLOR)
+	res.blend_mode = BLEND_ADD
+	return res
 
 /datum/event/electrical_storm/announce()
 	..()
@@ -68,4 +77,4 @@
 
 /datum/event/electrical_storm/end()
 	..()
-	command_announcement.Announce("The [location_name()] has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert")
+	command_announcement.Announce("The [location_name()] has cleared the electrical storm. Please repair any electrical overloads.", "Electrical Storm Alert", zlevels = affecting_z)

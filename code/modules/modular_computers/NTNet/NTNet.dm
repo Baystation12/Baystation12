@@ -6,6 +6,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/relays = list()
 	var/list/logs = list()
 	var/list/available_station_software = list()
+	var/list/available_software_by_category = list()
 	var/list/available_antag_software = list()
 	var/list/available_news = list()
 	var/list/chat_channels = list()
@@ -13,6 +14,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	var/list/email_accounts = list()				// I guess we won't have more than 999 email accounts active at once in single round, so this will do until Servers are implemented someday.
 	var/list/available_reports = list()             // A list containing one of each available report datums, used for the report editor program.
 	var/list/banned_nids = list()
+	var/list/registered_nids = list()				// list of nid - os datum pairs
 	// Amount of logs the system tries to keep in memory. Keep below 999 to prevent byond from acting weirdly.
 	// High values make displaying logs much laggier.
 	var/setting_maxlogcount = 100
@@ -41,12 +43,12 @@ var/global/datum/ntnet/ntnet_global = new()
 	build_reports_list()
 	add_log("NTNet logging system activated.")
 
-/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
 	if(intrusion_detection_enabled)
 		add_log(log_string, source)
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
-/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/stock_parts/computer/network_card/source = null)
 	var/log_text = "[stationtime2text()] - "
 	if(source)
 		log_text += "[source.get_network_tag()] - "
@@ -62,6 +64,25 @@ var/global/datum/ntnet/ntnet_global = new()
 				logs.Remove(L)
 			else
 				break
+
+	for(var/obj/machinery/ntnet_relay/R in ntnet_global.relays)
+		var/obj/item/weapon/stock_parts/computer/hard_drive/portable/P = R.get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
+		if(P)
+			var/datum/computer_file/data/logfile/file = P.find_file_by_name("ntnet_log")
+			if(!istype(file))
+				file = new()
+				file.filename = "ntnet_log"
+				P.store_file(file)
+			file.stored_data += log_text + "\[br\]"
+
+/datum/ntnet/proc/get_os_by_nid(var/NID)
+	return registered_nids["[NID]"]
+
+/datum/ntnet/proc/register(var/NID, var/datum/extension/interactive/ntos/os)
+	registered_nids["[NID]"] = os
+
+/datum/ntnet/proc/unregister(var/NID)
+	registered_nids -= "[NID]"
 
 /datum/ntnet/proc/check_banned(var/NID)
 	if(!relays || !relays.len)
@@ -110,9 +131,14 @@ var/global/datum/ntnet/ntnet_global = new()
 			continue
 		// Check whether the program should be available for station/antag download, if yes, add it to lists.
 		if(prog.available_on_ntnet)
-			available_station_software.Add(prog)
+			var/list/category_list = available_software_by_category[prog.category]
+			if(!category_list)
+				category_list = list()
+				available_software_by_category[prog.category] = category_list
+			ADD_SORTED(available_station_software, prog, /proc/cmp_program)
+			ADD_SORTED(category_list, prog, /proc/cmp_program)
 		if(prog.available_on_syndinet)
-			available_antag_software.Add(prog)
+			ADD_SORTED(available_antag_software, prog, /proc/cmp_program)
 
 // Builds lists that contain downloadable software.
 /datum/ntnet/proc/build_news_list()
@@ -214,7 +240,7 @@ var/global/datum/ntnet/ntnet_global = new()
 	add_log("Email address changed for [user]: [old_login] changed to [new_login]")
 	if(user.mind)
 		user.mind.initial_email_login["login"] = new_login
-		user.mind.store_memory("Your email account address has been changed to [new_login].")
+		user.StoreMemory("Your email account address has been changed to [new_login].", /decl/memory_options/system)
 	if(issilicon(user))
 		var/mob/living/silicon/S = user
 		var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)
@@ -222,7 +248,7 @@ var/global/datum/ntnet/ntnet_global = new()
 			my_client.stored_login = new_login
 
 //Used for initial email generation.
-/datum/ntnet/proc/create_email(mob/user, desired_name, domain)
+/datum/ntnet/proc/create_email(mob/user, desired_name, domain, assignment)
 	desired_name = sanitize_for_email(desired_name)
 	var/login = "[desired_name]@[domain]"
 	// It is VERY unlikely that we'll have two players, in the same round, with the same name and branch, but still, this is here.
@@ -232,16 +258,14 @@ var/global/datum/ntnet/ntnet_global = new()
 	// If even fallback login generation failed, just don't give them an email. The chance of this happening is astronomically low.
 	if(find_email_by_name(login))
 		to_chat(user, "You were not assigned an email address.")
-		user.mind.store_memory("You were not assigned an email address.")
+		user.StoreMemory("You were not assigned an email address.", /decl/memory_options/system)
 	else
-		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account()
+		var/datum/computer_file/data/email_account/EA = new/datum/computer_file/data/email_account(login, user.real_name, assignment)
 		EA.password = GenerateKey()
-		EA.login = login
-		to_chat(user, "Your email account address is <b>[EA.login]</b> and the password is <b>[EA.password]</b>. This information has also been placed into your notes.")
 		if(user.mind)
 			user.mind.initial_email_login["login"] = EA.login
 			user.mind.initial_email_login["password"] = EA.password
-			user.mind.store_memory("Your email account address is [EA.login] and the password is [EA.password].")
+			user.StoreMemory("Your email account address is [EA.login] and the password is [EA.password].", /decl/memory_options/system)
 		if(issilicon(user))
 			var/mob/living/silicon/S = user
 			var/datum/nano_module/email_client/my_client = S.get_subsystem_from_path(/datum/nano_module/email_client)

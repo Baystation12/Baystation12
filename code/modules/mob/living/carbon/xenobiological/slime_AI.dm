@@ -74,20 +74,20 @@
 		if (Leader)
 			if (holding_still)
 				holding_still = max(holding_still - 1, 0)
-			else if(canmove && isturf(loc))
-				step_to(src, Leader)
+			else if(isturf(loc))
+				step_to(src, get_dir(src, Leader))
 
 		else if(hungry)
 			if (holding_still)
 				holding_still = max(holding_still - 1 - hungry, 0)
-			else if(canmove && isturf(loc) && prob(50))
-				step(src, pick(GLOB.cardinal))
+			else if(isturf(loc) && prob(50))
+				SelfMove(pick(GLOB.cardinal))
 
 		else
 			if (holding_still)
 				holding_still = max(holding_still - 1, 0)
-			else if(canmove && isturf(loc) && prob(33))
-				step(src, pick(GLOB.cardinal))
+			else if(isturf(loc) && prob(33))
+				SelfMove(pick(GLOB.cardinal))
 
 /mob/living/carbon/slime/proc/AssessTarget(var/mob/living/M)
 	if(isslime(M)) // Ignore other slimes
@@ -110,7 +110,7 @@
 	return 0
 
 /mob/living/carbon/slime/proc/handle_AI()  // the master AI process
-	if(stat == DEAD || client || Victim)
+	if(QDELETED(src) || stat == DEAD || client || Victim)
 		AIproc = 0
 		return // If we're dead or have a client, we don't need AI, if we're feeding, we continue feeding
 
@@ -121,7 +121,7 @@
 	AIproc = 1
 	var/addedDelay = 0
 
-	if(amount_grown >= 10 && !Target)
+	if(amount_grown >= SLIME_EVOLUTION_THRESHOLD && !Target)
 		if(is_adult)
 			Reproduce()
 		else

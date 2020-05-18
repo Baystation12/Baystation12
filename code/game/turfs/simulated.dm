@@ -8,19 +8,12 @@
 	var/list/resources
 
 	var/thermite = 0
-	initial_gas = list("oxygen" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_OXYGEN = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 	var/to_be_destroyed = 0 //Used for fire, if a melting temperature was reached, it will be destroyed
 	var/max_fire_temperature_sustained = 0 //The max temperature of the fire which it was subjected to
 	var/dirt = 0
 
 	var/timer_id
-
-/turf/simulated/post_change()
-	..()
-	var/turf/T = GetAbove(src)
-	if(istype(T,/turf/space) || (density && istype(T,/turf/simulated/open)))
-		var/new_turf_type = density ? (istype(T.loc, /area/space) ? /turf/simulated/floor/airless : /turf/simulated/floor/plating) : /turf/simulated/open
-		T.ChangeTurf(new_turf_type)
 
 // This is not great.
 /turf/simulated/proc/wet_floor(var/wet_val = 1, var/overwrite = FALSE)
@@ -56,10 +49,6 @@
 		holy = 1
 	levelupdate()
 
-/turf/simulated/Destroy()
-	deltimer(timer_id)
-	return ..()
-
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor=COLOR_BLOOD_HUMAN)
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
 	if(!tracks)
@@ -67,7 +56,7 @@
 	tracks.AddTracks(bloodDNA,comingdir,goingdir,bloodcolor)
 
 /turf/simulated/proc/update_dirt()
-	dirt = min(dirt+1, 101)
+	dirt = min(dirt+0.5, 101)
 	var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, src)
 	if (dirt > 50)
 		if (!dirtoverlay)
@@ -79,10 +68,9 @@
 	. = ..()
 
 /turf/simulated/Entered(atom/A, atom/OL)
+	. = ..()
 	if (istype(A,/mob/living))
 		var/mob/living/M = A
-		if(M.lying)
-			return ..()
 
 		// Dirt overlays.
 		update_dirt()
@@ -95,10 +83,10 @@
 			if(H.shoes)
 				var/obj/item/clothing/shoes/S = H.shoes
 				if(istype(S))
-					S.handle_movement(src,(H.m_intent == M_RUN ? 1 : 0))
+					S.handle_movement(src, MOVING_QUICKLY(H))
 					if(S.track_blood && S.blood_DNA)
 						bloodDNA = S.blood_DNA
-						bloodcolor=S.blood_color
+						bloodcolor = S.blood_color
 						S.track_blood--
 			else
 				if(H.track_blood && H.feet_blood_DNA)
@@ -114,9 +102,16 @@
 
 				bloodDNA = null
 
+		if(M.lying)
+			return
+
 		if(src.wet)
 
-			if(M.buckled || (M.m_intent == M_WALK && prob(min(100, 100/(wet/10))) ) )
+			if(M.buckled || (MOVING_DELIBERATELY(M) && prob(min(100, 100/(wet/10))) ) )
+				return
+
+			// skillcheck for slipping
+			if(!prob(min(100, M.skill_fail_chance(SKILL_HAULING, 100, SKILL_MAX+1)/(3/wet))))
 				return
 
 			var/slip_dist = 1
@@ -137,8 +132,6 @@
 		else
 			M.inertia_dir = 0
 
-	..()
-
 //returns 1 if made bloody, returns 0 otherwise
 /turf/simulated/add_blood(mob/living/carbon/human/M as mob)
 	if (!..())
@@ -150,7 +143,6 @@
 				B.blood_DNA = list()
 			if(!B.blood_DNA[M.dna.unique_enzymes])
 				B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-				B.virus2 = virus_copylist(M.virus2)
 			return 1 //we bloodied the floor
 		blood_splatter(src,M.get_blood(M.vessel),1)
 		return 1 //we bloodied the floor
@@ -173,3 +165,8 @@
 		coil.turf_place(src, user)
 		return
 	return ..()
+
+/turf/simulated/Initialize()
+	if(GAME_STATE >= RUNLEVEL_GAME)
+		fluid_update()
+	. = ..()

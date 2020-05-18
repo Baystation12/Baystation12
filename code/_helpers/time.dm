@@ -12,6 +12,12 @@
 
 #define TimeOfGame (get_game_time())
 #define TimeOfTick (world.tick_usage*0.01*world.tick_lag)
+
+#define TICKS *world.tick_lag
+
+#define DS2TICKS(DS) ((DS)/world.tick_lag)
+#define TICKS2DS(T) ((T) TICKS)
+
 /proc/get_game_time()
 	var/global/time_offset = 0
 	var/global/last_time = 0
@@ -48,7 +54,7 @@ var/next_station_date_change = 1 DAY
 	if(!station_date || update_time)
 		var/extra_days = round(station_time_in_ticks / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
-		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+544)) + "-" + time2text(timeofday, "MM-DD")
+		station_date = num2text(game_year) + "-" + time2text(timeofday, "MM-DD")
 	return station_date
 
 /proc/time_stamp()
@@ -108,7 +114,7 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 #define DELTA_CALC max(((max(world.tick_usage, world.cpu) / 100) * max(Master.sleep_delta,1)), 1)
 
 /proc/stoplag()
-	if (!Master || !(Master.current_runlevel & RUNLEVELS_DEFAULT))
+	if (!Master || !(GAME_STATE & RUNLEVELS_DEFAULT))
 		sleep(world.tick_lag)
 		return 1
 	. = 0
@@ -120,3 +126,13 @@ GLOBAL_VAR_INIT(rollovercheck_last_timeofday, 0)
 	while (world.tick_usage > min(TICK_LIMIT_TO_RUN, Master.current_ticklimit))
 
 #undef DELTA_CALC
+
+/proc/acquire_days_per_month()
+	. = list(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+	if(isLeap(text2num(time2text(world.realtime, "YYYY"))))
+		.[2] = 29
+
+/proc/current_month_and_day()
+	var/time_string = time2text(world.realtime, "MM-DD")
+	var/time_list = splittext(time_string, "-")
+	return list(text2num(time_list[1]), text2num(time_list[2]))

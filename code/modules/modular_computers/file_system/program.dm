@@ -8,9 +8,10 @@
 	var/datum/nano_module/NM = null					// If the program uses NanoModule, put it here and it will be automagically opened. Otherwise implement ui_interact.
 	var/nanomodule_path = null						// Path to nanomodule, make sure to set this if implementing new program.
 	var/program_state = PROGRAM_STATE_KILLED		// PROGRAM_STATE_KILLED or PROGRAM_STATE_BACKGROUND or PROGRAM_STATE_ACTIVE - specifies whether this program is running.
-	var/obj/item/modular_computer/computer			// Device that runs this program.
+	var/datum/extension/interactive/ntos/computer	// OS that runs this program.
 	var/filedesc = "Unknown Program"				// User-friendly name of this program.
 	var/extended_desc = "N/A"						// Short description of this program's function.
+	var/category = PROG_MISC
 	var/program_icon_state = null					// Program-specific screen icon state
 	var/program_key_state = "standby_key"			// Program-specific keyboard icon state
 	var/program_menu_icon = "newwin"				// Icon to use for program's link in main menu
@@ -24,18 +25,16 @@
 	var/computer_emagged = 0						// Set to 1 if computer that's running us was emagged. Computer updates this every Process() tick
 	var/ui_header = null							// Example: "something.gif" - a header image that will be rendered in computer's UI when this program is running at background. Images are taken from /nano/images/status_icons. Be careful not to use too large images!
 	var/ntnet_speed = 0								// GQ/s - current network connectivity transfer rate
-
-/datum/computer_file/program/New(var/obj/item/modular_computer/comp = null)
-	..()
-	if(comp && istype(comp))
-		computer = comp
+	var/operator_skill = SKILL_MIN                  // Holder for skill value of current/recent operator for programs that tick.
 
 /datum/computer_file/program/Destroy()
+	if(computer && computer.active_program == src)
+		computer.kill_program(src)
 	computer = null
 	. = ..()
 
 /datum/computer_file/program/nano_host()
-	return computer.nano_host()
+	return computer && computer.nano_host()
 
 /datum/computer_file/program/clone()
 	var/datum/computer_file/program/temp = ..()
@@ -50,33 +49,16 @@
 
 // Used by programs that manipulate files.
 /datum/computer_file/program/proc/get_file(var/filename)
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
-	if(!HDD)
-		return
-	var/datum/computer_file/data/F = HDD.find_file_by_name(filename)
-	if(!istype(F))
-		return
-	return F
+	return computer.get_file(filename)
 
-/datum/computer_file/program/proc/create_file(var/newname, var/data = "", var/file_type = /datum/computer_file/data)
-	if(!newname)
-		return
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
-	if(!HDD)
-		return
-	if(get_file(newname))
-		return
-	var/datum/computer_file/data/F = new file_type
-	F.filename = newname
-	F.stored_data = data
-	F.calculate_size()
-	if(HDD.store_file(F))
-		return F
+/datum/computer_file/program/proc/create_file(var/newname, var/data = "", var/file_type = /datum/computer_file/data, var/list/metadata = null)
+	return computer.create_file(newname, data, file_type, metadata)
 
 // Relays icon update to the computer.
 /datum/computer_file/program/proc/update_computer_icon()
-	if(computer)
-		computer.update_icon()
+	if(istype(computer))
+		computer.update_host_icon()
+		return
 
 // Attempts to create a log in global ntnet datum. Returns 1 on success, 0 on fail.
 /datum/computer_file/program/proc/generate_network_log(var/text)
@@ -84,10 +66,10 @@
 		return computer.add_log(text)
 	return 0
 
-/datum/computer_file/program/proc/is_supported_by_hardware(var/hardware_flag = 0, var/loud = 0, var/mob/user = null)
+/datum/computer_file/program/proc/is_supported_by_hardware(var/hardware_flag, var/mob/user, var/loud = FALSE)
 	if(!(hardware_flag & usage_flags))
 		if(loud && computer && user)
-			to_chat(user, "<span class='warning'>\The [computer] flashes: \"Hardware Error - Incompatible software\".</span>")
+			computer.show_error(user, "Hardware Error - Incompatible software")
 		return 0
 	return 1
 
@@ -115,6 +97,8 @@
 // User has to wear their ID or have it inhand for ID Scan to work.
 // Can also be called manually, with optional parameter being access_to_check to scan the user's ID
 /datum/computer_file/program/proc/can_run(var/mob/living/user, var/loud = 0, var/access_to_check)
+	if(!requires_access_to_run)
+		return 1
 	// Defaults to required_access
 	if(!access_to_check)
 		access_to_check = required_access
@@ -146,22 +130,21 @@
 		return computer.get_header_data()
 	return list()
 
-// This is performed on program startup. May be overriden to add extra logic. Remember to include ..() call. Return 1 on success, 0 on failure.
+// This is performed on program startup. May be overriden to add extra logic. Remember to include ..() call.
 // When implementing new program based device, use this to run the program.
-/datum/computer_file/program/proc/run_program(var/mob/living/user)
-	if(can_run(user, 1) || !requires_access_to_run)
-		if(nanomodule_path)
-			NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
-			if(user)
-				NM.using_access = user.GetAccess()
-		if(requires_ntnet && network_destination)
-			generate_network_log("Connection opened to [network_destination].")
-		program_state = PROGRAM_STATE_ACTIVE
-		return 1
-	return 0
+/datum/computer_file/program/proc/on_startup(var/mob/living/user, var/datum/extension/interactive/ntos/new_host)
+	program_state = PROGRAM_STATE_ACTIVE
+	computer = new_host
+	if(nanomodule_path)
+		NM = new nanomodule_path(src, new /datum/topic_manager/program(src), src)
+		if(user)
+			NM.using_access = user.GetAccess()
+	if(requires_ntnet && network_destination)
+		generate_network_log("Connection opened to [network_destination].")
+	return 1
 
 // Use this proc to kill the program. Designed to be implemented by each program if it requires on-quit logic, such as the NTNRC client.
-/datum/computer_file/program/proc/kill_program(var/forced = 0)
+/datum/computer_file/program/proc/on_shutdown(var/forced = 0)
 	program_state = PROGRAM_STATE_KILLED
 	if(network_destination)
 		generate_network_log("Connection to [network_destination] closed.")
@@ -200,12 +183,6 @@
 		return NM.check_eye(user)
 	else
 		return -1
-
-/obj/item/modular_computer/initial_data()
-	return get_header_data()
-
-/obj/item/modular_computer/update_layout()
-	return TRUE
 
 /datum/nano_module/program
 	available_to_ai = FALSE

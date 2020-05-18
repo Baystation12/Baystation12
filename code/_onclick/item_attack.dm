@@ -45,19 +45,23 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	return I.attack(src, user, user.zone_sel.selecting)
 
 /mob/living/carbon/human/attackby(obj/item/I, mob/user)
-	if(user == src && src.a_intent == I_DISARM && src.zone_sel.selecting == "mouth")
+	if(user == src && zone_sel.selecting == BP_MOUTH && can_devour(I, silent = TRUE))
 		var/obj/item/blocked = src.check_mouth_coverage()
 		if(blocked)
-			to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-			return 1
-		else if(devour(I))
-			return 1
+			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
+			return TRUE
+		if(devour(I))
+			return TRUE
 	return ..()
 
 // Proximity_flag is 1 if this afterattack was called on something adjacent, in your square, or on your person.
 // Click parameters is the params string from byond Click() code, see that documentation.
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
+
+/datum/attack_result
+	var/hit_zone = 0
+	var/mob/living/attackee = null
 
 //I would prefer to rename this attack_as_weapon(), but that would involve touching hundreds of files.
 /obj/item/proc/attack(mob/living/M, mob/living/user, var/target_zone)
@@ -71,25 +75,30 @@ avoid code duplication. This includes items that may sometimes act as a standard
 	if(!no_attack_log)
 		admin_attack_log(user, M, "Attacked using \a [src] (DAMTYE: [uppertext(damtype)])", "Was attacked with \a [src] (DAMTYE: [uppertext(damtype)])", "used \a [src] (DAMTYE: [uppertext(damtype)]) to attack")
 	/////////////////////////
-
-	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+	user.setClickCooldown(attack_cooldown + w_class)
 	user.do_attack_animation(M)
 	if(!user.aura_check(AURA_TYPE_WEAPON, src, user))
 		return 0
 
 	var/hit_zone = M.resolve_item_attack(src, user, target_zone)
+
+	var/datum/attack_result/AR = hit_zone
+	if(istype(AR))
+		if(AR.hit_zone)
+			apply_hit_effect(AR.attackee ? AR.attackee : M, user, AR.hit_zone)
+		return 1
 	if(hit_zone)
 		apply_hit_effect(M, user, hit_zone)
 
 	return 1
 
-//Called when a weapon is used to make a successful melee attack on a mob. Returns the blocked result
+//Called when a weapon is used to make a successful melee attack on a mob. Returns whether damage was dealt.
 /obj/item/proc/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	if(hitsound)
 		playsound(loc, hitsound, 50, 1, -1)
 
 	var/power = force
-	if(HULK in user.mutations)
+	if(MUTATION_HULK in user.mutations)
 		power *= 2
 	return target.hit_with_weapon(src, user, power, hit_zone)
 

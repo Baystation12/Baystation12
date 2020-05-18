@@ -69,7 +69,7 @@
 /area/medical/surgery)
 "m" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	 icon_state = "sink";
 	dir = 4
 	},
@@ -128,7 +128,7 @@
 /obj/item/weapon/scalpel/laser2,
 /obj/item/weapon/scalpel/laser3,
 /obj/item/device/robotanalyzer,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /obj/item/weapon/storage/firstaid/adv,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -168,7 +168,7 @@
 /area/medical/surgery)
 "A" = (
 /obj/effect/floor_decal/corner/blue/diagonal,
-/obj/machinery/mecha_part_fabricator,
+/obj/machinery/robotics_fabricator,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "B" = (

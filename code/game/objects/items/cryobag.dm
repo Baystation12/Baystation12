@@ -1,9 +1,9 @@
 
 /obj/item/bodybag/cryobag
 	name = "stasis bag"
-	desc = "A folded, non-reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
+	desc = "A folded, reusable bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
 	a hostile enviroment."
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	origin_tech = list(TECH_BIO = 4)
 	var/stasis_power
@@ -18,9 +18,9 @@
 
 /obj/structure/closet/body_bag/cryobag
 	name = "stasis bag"
-	desc = "A non-reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
+	desc = "A reusable plastic bag designed to prevent additional damage to an occupant, especially useful if short on time or in \
 	a hostile enviroment."
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
 
 	storage_types = CLOSET_STORAGE_MOBS
@@ -33,8 +33,8 @@
 	. = ..()
 	airtank = new()
 	airtank.temperature = T0C
-	airtank.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
-	airtank.adjust_gas("nitrogen", MOLES_N2STANDARD)
+	airtank.adjust_gas(GAS_OXYGEN, MOLES_O2STANDARD, 0)
+	airtank.adjust_gas(GAS_NITROGEN, MOLES_N2STANDARD)
 	update_icon()
 
 /obj/structure/closet/body_bag/cryobag/Destroy()
@@ -52,7 +52,7 @@
 		STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/structure/closet/body_bag/cryobag/update_icon()
+/obj/structure/closet/body_bag/cryobag/on_update_icon()
 	..()
 	overlays.Cut()
 	var/image/I = image(icon, "indicator[opened]")
@@ -102,13 +102,13 @@
 	if(Adjacent(user)) //The bag's rather thick and opaque from a distance.
 		to_chat(user, "<span class='info'>You peer into \the [src].</span>")
 		for(var/mob/living/L in contents)
-			L.examine(user)
+			L.examine(arglist(args))
 
 /obj/item/usedcryobag
 	name = "used stasis bag"
 	desc = "Pretty useless now.."
 	icon_state = "bodybag_used"
-	icon = 'icons/obj/cryobag.dmi'
+	icon = 'icons/obj/closets/cryobag.dmi'
 
 /obj/structure/closet/body_bag/cryobag/blank
 	stasis_power = 60

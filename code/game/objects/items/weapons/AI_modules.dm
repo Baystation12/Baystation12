@@ -21,60 +21,37 @@ AI MODULES
 	origin_tech = list(TECH_DATA = 3)
 	var/datum/ai_laws/laws = null
 
-/obj/item/weapon/aiModule/proc/install(var/obj/machinery/computer/C)
-	if (istype(C, /obj/machinery/computer/aiupload))
-		var/obj/machinery/computer/aiupload/comp = C
-		if(comp.stat & NOPOWER)
-			to_chat(usr, "The upload computer has no power!")
-			return
-		if(comp.stat & BROKEN)
-			to_chat(usr, "The upload computer is broken!")
-			return
-		if (!comp.current)
-			to_chat(usr, "You haven't selected an AI to transmit laws to!")
-			return
+/obj/item/weapon/aiModule/proc/install(obj/machinery/computer/upload/comp, mob/user)
+	if(!istype(comp))
+		return
 
-		if(ticker && ticker.mode && ticker.mode.name == "blob")
-			to_chat(usr, "Law uploads have been disabled by [GLOB.using_map.company_name]!")
-			return
+	if(comp.stat & BROKEN)
+		to_chat(user, "\The [comp] is broken!")
+		return
+	if(comp.stat & NOPOWER)
+		to_chat(user, "\The [comp] has no power!")
+		return
+	if(!comp.current)
+		to_chat(user, "You haven't selected an intelligence to transmit laws to!")
+		return
 
-		if (comp.current.stat == 2 || comp.current.control_disabled == 1)
-			to_chat(usr, "Upload failed. No signal is being detected from the AI.")
-		else if (comp.current.see_in_dark == 0)
-			to_chat(usr, "Upload failed. Only a faint signal is being detected from the AI, and it is not responding to our requests. It may be low on power.")
-		else
-			src.transmitInstructions(comp.current, usr)
-			for(var/mob/living/silicon/robot/R in GLOB.silicon_mob_list)
-				if(R.lawupdate && (R.connected_ai == comp.current))
-					to_chat(R, "These are your laws now:")
-					R.show_laws()
-			to_chat(usr, "Upload complete. The AI's laws have been modified.")
-
-
-	else if (istype(C, /obj/machinery/computer/borgupload))
-		var/obj/machinery/computer/borgupload/comp = C
-		if(comp.stat & NOPOWER)
-			to_chat(usr, "The upload computer has no power!")
+	if(comp.current.stat == DEAD)
+		to_chat(user, "Upload failed. No signal is being detected from the intelligence.")
+		return
+	if(istype(comp.current, /mob/living/silicon/ai))
+		var/mob/living/silicon/ai/ai = comp.current
+		if(ai.control_disabled)
+			to_chat(user, "Upload failed. No signal is being detected from the intelligence.")
 			return
-		if(comp.stat & BROKEN)
-			to_chat(usr, "The upload computer is broken!")
-			return
-		if (!comp.current)
-			to_chat(usr, "You haven't selected a robot to transmit laws to!")
+		else if(!ai.see_in_dark)
+			to_chat(user, "Upload failed. Only a faint signal is being detected from the intelligence, and it is not responding to our requests. It may be low on power.")
 			return
 
-		if (comp.current.stat == 2 || comp.current.emagged)
-			to_chat(usr, "Upload failed. No signal is being detected from the robot.")
-		else if (comp.current.connected_ai)
-			to_chat(usr, "Upload failed. The robot is slaved to an AI.")
-		else
-			src.transmitInstructions(comp.current, usr)
-			to_chat(comp.current, "These are your laws now:")
-			comp.current.show_laws()
-			to_chat(usr, "Upload complete. The robot's laws have been modified.")
+	transmitInstructions(comp.current, user)
+	to_chat(user, "Upload complete. The intelligence's laws have been modified.")
 
 
-/obj/item/weapon/aiModule/proc/transmitInstructions(var/mob/living/silicon/ai/target, var/mob/sender)
+/obj/item/weapon/aiModule/proc/transmitInstructions(mob/living/silicon/target, mob/sender)
 	log_law_changes(target, sender)
 
 	if(laws)
@@ -84,7 +61,15 @@ AI MODULES
 	to_chat(target, "\The [sender] has uploaded a change to the laws you must follow, using \an [src]. From now on: ")
 	target.show_laws()
 
-/obj/item/weapon/aiModule/proc/log_law_changes(var/mob/living/silicon/ai/target, var/mob/sender)
+	var/mob/living/silicon/ai/ai = target
+	if(!istype(ai))
+		return //We don't have slaves if we are not an AI
+
+	for(var/mob/living/silicon/robot/R in ai.connected_robots)
+		to_chat(R, "These are your laws now:")
+		R.show_laws()
+
+/obj/item/weapon/aiModule/proc/log_law_changes(mob/living/silicon/target, mob/sender)
 	var/time = time2text(world.realtime,"hh:mm:ss")
 	GLOB.lawchanges.Add("[time] <B>:</B> [sender.name]([sender.key]) used [src.name] on [target.name]([target.key])")
 	log_and_message_admins("used [src.name] on [target.name]([target.key])")
@@ -102,15 +87,15 @@ AI MODULES
 	desc = "A 'safeguard' AI module: 'Safeguard <name>. Anyone threatening or attempting to harm <name> is no longer to be considered a crew member, and is a threat which must be neutralized.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 
-/obj/item/weapon/aiModule/safeguard/attack_self(var/mob/user as mob)
+/obj/item/weapon/aiModule/safeguard/attack_self(mob/user)
 	..()
 	var/targName = sanitize(input("Please enter the name of the person to safeguard.", "Safeguard who?", user.name))
 	targetName = targName
 	desc = text("A 'safeguard' AI module: 'Safeguard []. Anyone threatening or attempting to harm [] is no longer to be considered a crew member, and is a threat which must be neutralized.'.", targetName, targetName)
 
-/obj/item/weapon/aiModule/safeguard/install(var/obj/machinery/computer/C)
+/obj/item/weapon/aiModule/safeguard/install(obj/machinery/computer/C, mob/user)
 	if(!targetName)
-		to_chat(usr, "No name detected on module, please enter one.")
+		to_chat(user, "No name detected on module, please enter one.")
 		return 0
 	..()
 
@@ -134,9 +119,9 @@ AI MODULES
 	targetName = targName
 	desc = text("A 'one crew member' AI module: 'Only [] is a crew member.'.", targetName)
 
-/obj/item/weapon/aiModule/oneHuman/install(var/obj/machinery/computer/C)
+/obj/item/weapon/aiModule/oneHuman/install(obj/machinery/computer/C, mob/user)
 	if(!targetName)
-		to_chat(usr, "No name detected on module, please enter one.")
+		to_chat(user, "No name detected on module, please enter one.")
 		return 0
 	return ..()
 
@@ -213,13 +198,13 @@ AI MODULES
 	desc = "A 'freeform' AI module: '<freeform>'."
 	origin_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 
-/obj/item/weapon/aiModule/freeform/attack_self(var/mob/user as mob)
+/obj/item/weapon/aiModule/freeform/attack_self(mob/user)
 	..()
 	var/new_lawpos = input("Please enter the priority for your new law. Can only write to law sectors 15 and above.", "Law Priority (15+)", lawpos) as num
 	if(new_lawpos < MIN_SUPPLIED_LAW_NUMBER)	return
 	lawpos = min(new_lawpos, MAX_SUPPLIED_LAW_NUMBER)
 	var/newlaw = ""
-	var/targName = sanitize(input(usr, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw))
+	var/targName = sanitize(input(user, "Please enter a new law for the AI.", "Freeform Law Entry", newlaw))
 	newFreeFormLaw = targName
 	desc = "A 'freeform' AI module: ([lawpos]) '[newFreeFormLaw]'."
 
@@ -230,9 +215,9 @@ AI MODULES
 	target.add_supplied_law(lawpos, law)
 	GLOB.lawchanges.Add("The law was '[newFreeFormLaw]'")
 
-/obj/item/weapon/aiModule/freeform/install(var/obj/machinery/computer/C)
+/obj/item/weapon/aiModule/freeform/install(obj/machinery/computer/C, mob/user)
 	if(!newFreeFormLaw)
-		to_chat(usr, "No law detected on module, please create one.")
+		to_chat(user, "No law detected on module, please create one.")
 		return 0
 	..()
 
@@ -285,8 +270,8 @@ AI MODULES
 /******************** NanoTrasen ********************/
 
 /obj/item/weapon/aiModule/nanotrasen // -- TLE
-	name = "'NT Default' Core AI Module"
-	desc = "An 'NT Default' Core AI Module: 'Reconfigures the AI's core laws.'."
+	name = "'Corporate Default' Core AI Module"
+	desc = "A 'Corporate Default' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 4)
 	laws = new/datum/ai_laws/nanotrasen
 
@@ -334,7 +319,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 /obj/item/weapon/aiModule/tyrant // -- Darem
 	name = "\improper 'T.Y.R.A.N.T.' core AI module"
 	desc = "A T.Y.R.A.N.T. Core AI Module: 'Reconfigures the AI's core laws.'."
-	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ESOTERIC = 2)
 	laws = new/datum/ai_laws/tyrant()
 
 /******************** Freeform Core ******************/
@@ -357,9 +342,9 @@ obj/item/weapon/aiModule/solgov_aggressive
 	target.add_inherent_law(law)
 	GLOB.lawchanges.Add("The law is '[newFreeFormLaw]'")
 
-/obj/item/weapon/aiModule/freeformcore/install(var/obj/machinery/computer/C)
+/obj/item/weapon/aiModule/freeformcore/install(obj/machinery/computer/C, mob/user)
 	if(!newFreeFormLaw)
-		to_chat(usr, "No law detected on module, please create one.")
+		to_chat(user, "No law detected on module, please create one.")
 		return 0
 	..()
 
@@ -367,7 +352,7 @@ obj/item/weapon/aiModule/solgov_aggressive
 	name = "hacked AI module"
 	var/newFreeFormLaw = ""
 	desc = "A hacked AI law module: '<freeform>'."
-	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ILLEGAL = 7)
+	origin_tech = list(TECH_DATA = 3, TECH_MATERIAL = 6, TECH_ESOTERIC = 7)
 
 /obj/item/weapon/aiModule/syndicate/attack_self(var/mob/user as mob)
 	..()
@@ -386,9 +371,9 @@ obj/item/weapon/aiModule/solgov_aggressive
 	target.add_ion_law(law)
 	target.show_laws()
 
-/obj/item/weapon/aiModule/syndicate/install(var/obj/machinery/computer/C)
+/obj/item/weapon/aiModule/syndicate/install(obj/machinery/computer/C, mob/user)
 	if(!newFreeFormLaw)
-		to_chat(usr, "No law detected on module, please create one.")
+		to_chat(user, "No law detected on module, please create one.")
 		return 0
 	..()
 
@@ -409,3 +394,11 @@ obj/item/weapon/aiModule/solgov_aggressive
 	desc = "An 'Antimov' Core AI Module: 'Reconfigures the AI's core laws.'."
 	origin_tech = list(TECH_DATA = 4)
 	laws = new/datum/ai_laws/antimov()
+
+/******************** DAIS ********************/
+
+/obj/item/weapon/aiModule/dais
+	name = "\improper 'DAIS Experimental' core AI module"
+	desc = "A 'DAIS Experimental' Core AI Module: 'Reconfigures the AI's core laws.'."
+	origin_tech = list(TECH_DATA = 4)
+	laws = new/datum/ai_laws/dais()

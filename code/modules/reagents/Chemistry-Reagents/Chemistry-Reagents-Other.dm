@@ -111,27 +111,7 @@
 	affect_blood(M, alien, removed)
 
 /datum/reagent/adminordrazine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.setCloneLoss(0)
-	M.setOxyLoss(0)
-	M.radiation = 0
-	M.heal_organ_damage(5,5)
-	M.adjustToxLoss(-5)
-	M.hallucination_power = 0
-	M.setBrainLoss(0)
-	M.disabilities = 0
-	M.sdisabilities = 0
-	M.eye_blurry = 0
-	M.eye_blind = 0
-	M.SetWeakened(0)
-	M.SetStunned(0)
-	M.SetParalysis(0)
-	M.silent = 0
-	M.dizziness = 0
-	M.drowsyness = 0
-	M.stuttering = 0
-	M.confused = 0
-	M.sleeping = 0
-	M.jitteriness = 0
+	M.rejuvenate()
 
 /datum/reagent/gold
 	name = "Gold"
@@ -139,6 +119,7 @@
 	taste_description = "expensive metal"
 	reagent_state = SOLID
 	color = "#f7c430"
+	value = 7
 
 /datum/reagent/silver
 	name = "Silver"
@@ -146,19 +127,21 @@
 	taste_description = "expensive yet reasonable metal"
 	reagent_state = SOLID
 	color = "#d0d0d0"
+	value = 4
 
 /datum/reagent/uranium
-	name ="Uranium"
+	name = "Uranium"
 	description = "A silvery-white metallic chemical element in the actinide series, weakly radioactive."
 	taste_description = "the inside of a reactor"
 	reagent_state = SOLID
 	color = "#b8b8c0"
+	value = 9
 
 /datum/reagent/uranium/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_ingest(M, alien, removed)
 
 /datum/reagent/uranium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	M.apply_effect(5 * removed, IRRADIATE, blocked = 0)
+	M.apply_damage(5 * removed, IRRADIATE, armor_pen = 100)
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
 	if(volume >= 3)
@@ -185,6 +168,19 @@
 			if(prob(2))
 				var/obj/effect/spider/spiderling/S = new /obj/effect/spider/spiderling(M.loc)
 				M.visible_message("<span class='warning'>\The [M] coughs up \the [S]!</span>")
+		else if(M.mind && GLOB.godcult.is_antagonist(M.mind))
+			if(volume > 5)
+				M.adjustHalLoss(5)
+				M.adjustBruteLoss(1)
+				if(prob(10)) //Only annoy them a /bit/
+					to_chat(M,"<span class='danger'>You feel your insides curdle and burn!</span> \[<a href='?src=\ref[src];deconvert=\ref[M]'>Give Into Purity</a>\]")
+
+/datum/reagent/water/holywater/Topic(href, href_list)
+	. = ..()
+	if(!. && href_list["deconvert"])
+		var/mob/living/carbon/C = locate(href_list["deconvert"])
+		if(C.mind)
+			GLOB.godcult.remove_antagonist(C.mind,1)
 
 /datum/reagent/water/holywater/touch_turf(var/turf/T)
 	if(volume >= 5)
@@ -197,6 +193,7 @@
 	taste_description = "iron"
 	reagent_state = LIQUID
 	color = "#604030"
+	value = 0.9
 
 /datum/reagent/surfactant // Foam precursor
 	name = "Azosurfactant"
@@ -204,6 +201,7 @@
 	taste_description = "metal"
 	reagent_state = LIQUID
 	color = "#9e6b38"
+	value = 0.05
 
 /datum/reagent/foaming_agent // Metal foaming agent. This is lithium hydride. Add other recipes (e.g. LiH + H2O -> LiOH + H2) eventually.
 	name = "Foaming agent"
@@ -219,6 +217,7 @@
 	reagent_state = SOLID
 	color = "#673910"
 	touch_met = 50
+	value = 6
 
 /datum/reagent/thermite/touch_turf(var/turf/T)
 	if(volume >= 5)
@@ -236,6 +235,26 @@
 /datum/reagent/thermite/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	M.adjustFireLoss(3 * removed)
 
+/datum/reagent/napalm
+	name = "Napalm"
+	description = "A sticky volatile substance made from mixing quick burning goo with slow burning goo, to make a viscous average burning goo that sticks to everything."
+	taste_description = "burnt corn"
+	reagent_state = LIQUID
+	color = "#673910"
+	touch_met = 50
+
+/datum/reagent/napalm/touch_turf(var/turf/T)
+	new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
+	remove_self(volume)
+
+/datum/reagent/napalm/touch_mob(var/mob/living/L, var/amount)
+	if(istype(L))
+		L.adjust_fire_stacks(amount / 100)
+
+/datum/reagent/napalm/b
+	name = "Napalm B"
+	taste_description = "burnt plastic and metal"
+
 /datum/reagent/space_cleaner
 	name = "Space cleaner"
 	description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
@@ -243,6 +262,7 @@
 	reagent_state = LIQUID
 	color = "#a5f0ee"
 	touch_met = 50
+	value = 0.7
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	O.clean_blood()
@@ -287,12 +307,13 @@
 			return
 	M.clean_blood()
 
-/datum/reagent/lube // TODO: spraying on borgs speeds them up
+/datum/reagent/lube
 	name = "Space Lube"
 	description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 	taste_description = "slime"
 	reagent_state = LIQUID
 	color = "#009ca8"
+	value = 0.6
 
 /datum/reagent/lube/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -310,26 +331,13 @@
 	if(!istype(T, /turf/space))
 		new /obj/effect/decal/cleanable/blood/oil/streak(T)
 
-/datum/reagent/silicate
-	name = "Silicate"
-	description = "A compound that can be used to reinforce glass."
-	taste_description = "plastic"
-	reagent_state = LIQUID
-	color = "#c7ffff"
-
-/datum/reagent/silicate/touch_obj(var/obj/O)
-	if(istype(O, /obj/structure/window))
-		var/obj/structure/window/W = O
-		W.apply_silicate(volume)
-		remove_self(volume)
-	return
-
 /datum/reagent/glycerol
 	name = "Glycerol"
 	description = "Glycerol is a simple polyol compound. Glycerol is sweet-tasting and of low toxicity."
 	taste_description = "sweetness"
 	reagent_state = LIQUID
 	color = "#808080"
+	value = 8
 
 /datum/reagent/nitroglycerin
 	name = "Nitroglycerin"
@@ -337,6 +345,7 @@
 	taste_description = "oil"
 	reagent_state = LIQUID
 	color = "#808080"
+	value = 9
 
 /datum/reagent/nitroglycerin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -350,6 +359,7 @@
 	taste_mult = 1.1
 	reagent_state = LIQUID
 	color = "#c8a5dc"
+	value = 0.8
 
 /datum/reagent/coolant/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
@@ -373,7 +383,6 @@
 			T.visible_message("<span class='warning'>The water sizzles as it lands on \the [T]!</span>")
 
 
-
 /datum/reagent/ultraglue
 	name = "Ultra Glue"
 	description = "An extremely powerful bonding agent."
@@ -384,8 +393,15 @@
 	name = "Wood Pulp"
 	description = "A mass of wood fibers."
 	taste_description = "wood"
-	reagent_state = LIQUID
-	color = "#b97a57"
+	reagent_state = SOLID
+	color = WOOD_COLOR_GENERIC
+
+/datum/reagent/bamboo
+	name = "Bamboo Pulp"
+	description = "A mass of bamboo fibers."
+	taste_description = "grass"
+	reagent_state = SOLID
+	color = WOOD_COLOR_PALE2
 
 /datum/reagent/luminol
 	name = "Luminol"
@@ -393,9 +409,117 @@
 	taste_description = "metal"
 	reagent_state = LIQUID
 	color = "#f2f3f4"
+	value = 1.4
 
 /datum/reagent/luminol/touch_obj(var/obj/O)
 	O.reveal_blood()
 
 /datum/reagent/luminol/touch_mob(var/mob/living/L)
 	L.reveal_blood()
+
+/datum/reagent/helium
+	name = "Helium"
+	description = "A noble gas. It makes your voice squeaky."
+	taste_description = "nothing"
+	reagent_state = LIQUID
+	color = COLOR_GRAY80
+	metabolism = 0.05 // So that low dosages have a chance to build up in the body.
+
+/datum/reagent/helium/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+	..()
+	M.add_chemical_effect(CE_SQUEAKY, 1)
+
+// This is only really used to poison vox.
+/datum/reagent/oxygen
+	name = "Oxygen"
+	description = "An ubiquitous oxidizing agent."
+	taste_description = "nothing"
+	reagent_state = LIQUID
+	color = COLOR_GRAY80
+
+/datum/reagent/oxygen/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_VOX)
+		M.adjustToxLoss(removed * 6)
+
+/datum/reagent/carbon_monoxide
+	name = "Carbon Monoxide"
+	description = "A dangerous carbon comubstion byproduct."
+	taste_description = "stale air"
+	reagent_state = LIQUID
+	color = COLOR_GRAY80
+	metabolism = 0.05 // As with helium.
+
+/datum/reagent/carbon_monoxide/affect_blood(var/mob/living/carbon/human/M, var/alien, var/removed)
+	if(!istype(M) || alien == IS_DIONA)
+		return
+	var/warning_message
+	var/warning_prob = 10
+	var/dosage = M.chem_doses[type]
+	if(dosage >= 3)
+		warning_message = pick("extremely dizzy","short of breath","faint","confused")
+		warning_prob = 15
+		M.adjustOxyLoss(10,20)
+		M.co2_alert = 1
+	else if(dosage >= 1.5)
+		warning_message = pick("dizzy","short of breath","faint","momentarily confused")
+		M.co2_alert = 1
+		M.adjustOxyLoss(3,5)
+	else if(dosage >= 0.25)
+		warning_message = pick("a little dizzy","short of breath")
+		warning_prob = 10
+		M.co2_alert = 0
+	else
+		M.co2_alert = 0
+	if(warning_message && prob(warning_prob))
+		to_chat(M, "<span class='warning'>You feel [warning_message].</span>")
+
+/datum/reagent/anfo
+	name = "ANFO"
+	description = "Ammonia Nitrate Fuel Oil mix, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
+	taste_description = "fertilizer and fuel"
+	reagent_state = SOLID
+	color = "#dbc3c3"
+	var/boompower = 1
+
+/datum/reagent/anfo/ex_act(obj/item/weapon/reagent_containers/holder, severity)
+	var/activated_volume = volume
+	switch(severity)
+		if(2)
+			if(prob(max(0, 2*(volume - 120))))
+				activated_volume = rand(volume/4, volume)
+		if(3)
+			if(prob(max(0, 2*(volume - 60))))
+				activated_volume = rand(0, max(volume, 120))
+	if(activated_volume < 30) //whiff
+		return
+	var/turf/T = get_turf(holder)
+	if(T)
+		var/adj_power = round(boompower * activated_volume/60)
+		var/datum/gas_mixture/products = new(_temperature = 5 * PHORON_FLASHPOINT)
+		var/gas_moles = 3 * volume
+		products.adjust_multi(GAS_CO2, 0.5 * gas_moles, GAS_NITROGEN, 0.3 * gas_moles, GAS_STEAM, 0.2 * gas_moles)
+		T.assume_air(products)
+		explosion(T, adj_power, adj_power + 1, adj_power*2 + 2)
+		remove_self(activated_volume)
+
+/datum/reagent/anfo/plus
+	name = "ANFO+"
+	description = "Ammonia Nitrate Fuel Oil, with aluminium powder, an explosive compound known for centuries. Safe to handle, can be set off with a small explosion."
+	color = "#ffe8e8"
+	boompower = 2
+
+/datum/reagent/dye
+	name = "Dye"
+	description = "Non-toxic artificial coloration used for food and drinks. When mixed with reagents, the compound will take on the dye's coloration."
+	color = "#ffffff"
+	color_weight = 40
+	color_transfer = TRUE
+	color_foods = TRUE
+	taste_mult = 0
+
+/datum/reagent/dye/strong
+	name = "Strong Dye"
+	description = "An extra-strength dye. Used for tinting food, but is especially effective with drinks and other fluids."
+	color_weight = 100

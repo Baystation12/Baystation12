@@ -7,7 +7,7 @@
 		return
 	if( !ismob(M) || !M.client )	return
 	cmd_admin_pm(M.client,null)
-	feedback_add_details("admin_verb","APMM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","APMM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 //shows a list of clients we could send PMs to, then forwards our choice to cmd_admin_pm
 /client/proc/cmd_admin_pm_panel()
@@ -30,7 +30,7 @@
 	var/list/sorted = sortList(targets)
 	var/target = input(src,"To whom shall we send a message?","Admin PM",null) in sorted|null
 	cmd_admin_pm(targets[target],null)
-	feedback_add_details("admin_verb","APM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","APM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 //takes input from cmd_admin_pm_context, cmd_admin_pm_panel or /client/Topic and sends them a PM.
@@ -140,7 +140,7 @@
 	receiver_message += "</span></span>"
 	to_chat(C, receiver_message)
 
-	//play the recieving admin the adminhelp sound (if they have them enabled)
+	//play the receiving admin the adminhelp sound (if they have them enabled)
 	//non-admins shouldn't be able to disable this
 	if(C.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
 		sound_to(C, 'sound/effects/adminhelp.ogg')
@@ -156,7 +156,7 @@
 		//check client/X is an admin and isn't the sender or recipient
 		if(X == C || X == src)
 			continue
-		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD|R_MENTOR))
+		if(X.key != key && X.key != C.key && (X.holder.rights & R_ADMIN|R_MOD))
 			to_chat(X, "<span class='pm'><span class='other'>" + create_text_tag("pm_other", "PM:", X) + " <span class='name'>[key_name(src, X, 0, ticket)]</span> to <span class='name'>[key_name(C, X, 0, ticket)]</span> (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): <span class='message'>[msg]</span></span></span>")
 
 /client/proc/cmd_admin_irc_pm(sender)
@@ -170,7 +170,7 @@
 		return
 
 	// Handled on Bot32's end, unsure about other bots
-//	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into seperate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
+//	if(length(msg) > 400) // TODO: if message length is over 400, divide it up into separate messages, the message length restriction is based on IRC limitations.  Probably easier to do this on the bots ends.
 //		to_chat(src, "<span class='warning'>Your message was not sent because it was more then 400 characters find your message below for ease of copy/pasting</span>")
 //		to_chat(src, "<span class='notice'>[msg]</span>")
 //		return

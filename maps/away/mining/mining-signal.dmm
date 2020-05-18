@@ -23,7 +23,6 @@
 /area/outpost/abandoned)
 "ai" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/mecha_parts/part/durand_right_arm,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "aj" = (
@@ -34,10 +33,6 @@
 /obj/structure/table/rack,
 /obj/item/weapon/cell/hyper,
 /obj/item/weapon/cell/hyper,
-/turf/simulated/floor/holofloor/tiled/dark,
-/area/outpost/abandoned)
-"al" = (
-/obj/structure/table/steel_reinforced,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "am" = (
@@ -59,7 +54,6 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/mecha_parts/chassis/durand,
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/outpost/abandoned)
 "ao" = (
@@ -74,7 +68,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "ar" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/airless,
 /area/outpost/abandoned)
 "as" = (
@@ -107,7 +101,6 @@
 "ay" = (
 /obj/structure/table,
 /obj/effect/floor_decal/corner/paleblue/diagonal,
-/obj/item/mecha_parts/part/durand_right_leg,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "az" = (
@@ -157,11 +150,6 @@
 "aI" = (
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
-"aJ" = (
-/obj/structure/table,
-/obj/effect/floor_decal/corner/paleblue/diagonal,
-/turf/simulated/floor/tiled/white,
-/area/outpost/abandoned)
 "aK" = (
 /obj/structure/bed/chair/office/dark{
 	icon_state = "officechair_dark";
@@ -204,7 +192,7 @@
 /area/outpost/abandoned)
 "aR" = (
 /obj/machinery/mech_recharger,
-/obj/effect/decal/mecha_wreckage/ripley,
+/obj/structure/mech_wreckage/powerloader,
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "aS" = (
@@ -223,7 +211,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "aV" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "aW" = (
@@ -313,7 +301,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "bm" = (
-/obj/machinery/door/airlock/glass_science,
+/obj/machinery/door/airlock/glass/science,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "bn" = (
@@ -328,7 +316,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "bp" = (
-/obj/machinery/door/airlock/glass_science{
+/obj/machinery/door/airlock/glass/science{
 	icon_state = "door_locked";
 	locked = 1;
 	secured_wires = 1
@@ -336,7 +324,7 @@
 /turf/simulated/floor/tiled,
 /area/outpost/abandoned)
 "bq" = (
-/obj/machinery/door/airlock/glass_science,
+/obj/machinery/door/airlock/glass/science,
 /obj/structure/barricade,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
@@ -478,7 +466,7 @@
 "bI" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/cigbutt/cigarbutt,
+/obj/item/trash/cigbutt/cigarbutt,
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "bJ" = (
@@ -555,14 +543,14 @@
 "bW" = (
 /obj/machinery/door/airlock/security,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "bX" = (
 /obj/machinery/door/airlock/science,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
@@ -571,7 +559,7 @@
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "bZ" = (
-/obj/effect/wingrille_spawn,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "ca" = (
@@ -629,7 +617,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "cg" = (
@@ -638,7 +626,7 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "ch" = (
@@ -649,10 +637,6 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/outpost/abandoned)
-"ci" = (
-/obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "cj" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -667,7 +651,7 @@
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "cl" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -738,7 +722,7 @@
 "ct" = (
 /obj/machinery/door/airlock/centcom,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
@@ -904,7 +888,7 @@
 	icon_state = "corner_white_three_quarters";
 	dir = 4
 	},
-/obj/item/modular_computer/console/preset/security{
+/obj/machinery/computer/modular/preset/security{
 	icon_state = "console";
 	dir = 8
 	},
@@ -923,7 +907,7 @@
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "de" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	icon_state = "shower";
 	dir = 8
 	},
@@ -943,10 +927,10 @@
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "df" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -990,9 +974,9 @@
 /turf/simulated/floor/carpet,
 /area/outpost/abandoned)
 "dm" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -1023,7 +1007,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "dt" = (
-/obj/structure/door_assembly/door_assembly_science{
+/obj/structure/door_assembly{
 	anchored = 1
 	},
 /turf/simulated/floor/diona,
@@ -1093,9 +1077,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "dD" = (
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dE" = (
 /obj/effect/decal/remains,
@@ -1104,9 +1086,7 @@
 	icon_state = "shardlarge"
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dF" = (
 /obj/structure/table,
@@ -1118,18 +1098,14 @@
 	dir = 5
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dG" = (
 /obj/effect/floor_decal/corner/paleblue{
 	icon_state = "corner_white";
 	dir = 5
 	},
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dH" = (
 /turf/simulated/floor/tiled/airless,
@@ -1214,9 +1190,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dV" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1227,15 +1201,7 @@
 /area/outpost/abandoned)
 "dW" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_broken1"
-	},
-/area/outpost/abandoned)
-"dX" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dY" = (
 /obj/structure/extinguisher_cabinet{
@@ -1247,9 +1213,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "dZ" = (
 /obj/effect/decal/cleanable/liquid_fuel,
@@ -1278,7 +1242,6 @@
 /area/outpost/abandoned)
 "ed" = (
 /obj/effect/decal/cleanable/liquid_fuel,
-/obj/item/weapon/secbot_assembly,
 /obj/effect/decal/cleanable/blood/oil,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
@@ -1295,11 +1258,11 @@
 /area/outpost/abandoned)
 "eg" = (
 /obj/effect/decal/cleanable/cobweb2,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eh" = (
-/obj/structure/sink/puddle,
+/obj/structure/hygiene/sink/puddle,
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "ei" = (
@@ -1318,41 +1281,21 @@
 /turf/simulated/floor/asteroid,
 /area/mine/explored)
 "el" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
-	dir = 10
-	},
-/obj/structure/window/reinforced{
-	icon_state = "rwindow";
-	dir = 8
-	},
 /obj/structure/firedoor_assembly{
 	anchored = 1
 	},
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "em" = (
+/obj/structure/wall_frame,
 /obj/structure/grille/broken,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/item/weapon/material/shard{
-	icon_state = "shrapnelmedium"
-	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "en" = (
 /obj/machinery/door/airlock/centcom,
 /turf/simulated/floor/tiled/dark,
-/area/outpost/abandoned)
-"eo" = (
-/obj/effect/wingrille_spawn/reinforced,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "ep" = (
 /obj/machinery/newscaster,
@@ -1375,18 +1318,13 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/mecha_parts/part/durand_left_arm,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "es" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "et" = (
 /obj/effect/decal/cleanable/liquid_fuel,
@@ -1399,27 +1337,18 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "eu" = (
 /obj/effect/decal/cleanable/liquid_fuel,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /mob/living/bot/medbot,
-/turf/simulated/floor/tiled/airless,
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "ev" = (
 /obj/effect/decal/cleanable/liquid_fuel,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
-/area/outpost/abandoned)
-"ew" = (
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "ex" = (
 /obj/machinery/door/airlock/medical,
@@ -1449,13 +1378,13 @@
 /area/outpost/abandoned)
 "eB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/plating{
 	icon_state = "dmg1"
 	},
 /area/outpost/abandoned)
 "eC" = (
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eD" = (
@@ -1463,12 +1392,11 @@
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "eE" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "eF" = (
@@ -1522,15 +1450,7 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
-/area/outpost/abandoned)
-"eN" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_broken4"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "eO" = (
 /obj/structure/table/glass,
@@ -1540,9 +1460,7 @@
 	},
 /obj/structure/window/reinforced,
 /obj/random/loot,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "eP" = (
 /obj/effect/decal/cleanable/dirt,
@@ -1555,12 +1473,10 @@
 	icon_state = "intact";
 	dir = 4
 	},
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "eR" = (
-/obj/structure/door_assembly/door_assembly_med,
+/obj/structure/door_assembly,
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/green{
 	icon_state = "intact";
@@ -1666,12 +1582,12 @@
 "fc" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/blood,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fd" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fe" = (
@@ -1716,42 +1632,24 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned1"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fm" = (
 /turf/simulated/floor/plating{
 	icon_state = "dmg3"
 	},
 /area/outpost/abandoned)
-"fn" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_broken4"
-	},
-/area/outpost/abandoned)
 "fo" = (
 /obj/random/medical,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
-/area/outpost/abandoned)
-"fp" = (
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_broken0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fq" = (
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fr" = (
 /obj/structure/window/basic{
@@ -1797,7 +1695,7 @@
 "fx" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/c9mm,
+/obj/item/ammo_magazine/pistol/small,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
 "fy" = (
@@ -1844,9 +1742,7 @@
 /area/outpost/abandoned)
 "fE" = (
 /obj/effect/floor_decal/corner/paleblue/three_quarters,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fF" = (
 /obj/effect/floor_decal/corner/paleblue{
@@ -1855,27 +1751,21 @@
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fG" = (
-/obj/effect/decal/mecha_wreckage/ripley/firefighter,
+/obj/structure/mech_wreckage/powerloader,
 /obj/effect/floor_decal/corner/paleblue{
 	icon_state = "corner_white";
 	dir = 10
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fH" = (
 /obj/random/firstaid,
-/turf/simulated/floor/tiled/airless{
-	icon_state = "steel_burned0"
-	},
+/turf/simulated/floor/tiled/white/airless,
 /area/outpost/abandoned)
 "fI" = (
 /turf/simulated/floor/grass,
@@ -1984,7 +1874,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "fW" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "fX" = (
@@ -2062,10 +1952,9 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gh" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
-/obj/machinery/door/firedoor,
 /obj/structure/barricade,
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gi" = (
@@ -2075,7 +1964,7 @@
 	},
 /area/mine/explored)
 "gj" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
@@ -2111,7 +2000,7 @@
 "go" = (
 /obj/machinery/door/airlock/external,
 /obj/machinery/door/blast/regular{
-	id = "mars_blast"
+	id_tag = "mars_blast"
 	},
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
@@ -2221,7 +2110,7 @@
 	},
 /area/mine/explored)
 "gD" = (
-/obj/structure/door_assembly/door_assembly_mhatch,
+/obj/effect/floor_decal/industrial/hatch,
 /obj/structure/cable/orange{
 	icon_state = "1-2";
 	dir = 1
@@ -2240,12 +2129,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/airless,
 /area/outpost/abandoned)
-"gG" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/plating,
-/area/outpost/abandoned)
 "gH" = (
 /obj/structure/cable/orange{
 	icon_state = "1-4"
@@ -2261,7 +2144,7 @@
 /turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "gJ" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /obj/structure/cable/orange{
 	d1 = 4;
 	d2 = 8;
@@ -2333,7 +2216,6 @@
 /obj/machinery/firealarm{
 	dir = 4;
 	icon_state = "firex";
-	layer = 3.3;
 	pixel_x = 26
 	},
 /turf/simulated/floor/tiled/airless,
@@ -2441,13 +2323,6 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/airless,
-/area/outpost/abandoned)
-"hd" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
-/obj/machinery/door/blast/regular/open,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/plating,
 /area/outpost/abandoned)
 "he" = (
 /obj/effect/floor_decal/solarpanel,
@@ -2671,7 +2546,7 @@
 /area/outpost/abandoned)
 "hL" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/overmap/sector/away,
+/obj/effect/overmap/visitable/sector/away,
 /turf/simulated/floor/tiled/white,
 /area/outpost/abandoned)
 "ib" = (
@@ -2716,7 +2591,7 @@
 	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "rb" = (
@@ -2728,7 +2603,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/ammo_casing/a50,
+/obj/item/ammo_casing/pistol/magnum,
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "sb" = (
@@ -2741,13 +2616,13 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/button/remote/blast_door{
-	id = "mars_blast"
+/obj/machinery/button/blast_door{
+	id_tag = "mars_blast"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/outpost/abandoned)
 "tb" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
 	dir = 4;
 	icon_state = "intact"
@@ -2774,19 +2649,12 @@
 /turf/simulated/floor/diona,
 /area/outpost/abandoned)
 "wb" = (
-/obj/item/modular_computer/console/preset/command{
+/obj/machinery/computer/modular/preset/cardslot/command{
 	icon_state = "console";
 	dir = 4
 	},
 /turf/simulated/floor/carpet/blue,
 /area/outpost/abandoned)
-"xb" = (
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 200;
-	generation_width = 200
-	},
-/turf/unsimulated/mask,
-/area/mine/unexplored)
 "yb" = (
 /obj/item/weapon/storage/mirror{
 	icon_state = "mirror_broke";
@@ -2807,6 +2675,17 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
+/area/outpost/abandoned)
+"HD" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/white/airless,
+/area/outpost/abandoned)
+"IX" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/blast/regular/open,
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor/plating,
 /area/outpost/abandoned)
 
 (1,1,1) = {"
@@ -3009,7 +2888,7 @@ aa
 aa
 aa
 aa
-xb
+aa
 "}
 (2,1,1) = {"
 aa
@@ -12202,9 +12081,9 @@ af
 dE
 cW
 dD
-eN
+dW
 fm
-ew
+dD
 cG
 aa
 aa
@@ -12404,8 +12283,8 @@ cG
 dF
 dV
 es
-cw
-fn
+HD
+HD
 fF
 cG
 aa
@@ -12806,10 +12685,10 @@ cw
 cX
 af
 dG
-dX
+dW
 eu
 dW
-fp
+dD
 dD
 af
 aa
@@ -13211,7 +13090,7 @@ af
 cG
 cG
 cG
-ew
+dD
 eQ
 af
 af
@@ -15015,7 +14894,7 @@ aa
 aa
 af
 aw
-aJ
+ay
 aW
 bf
 af
@@ -15427,9 +15306,9 @@ bt
 bJ
 aA
 af
-ci
+bZ
 tb
-ci
+bZ
 cy
 dH
 cW
@@ -16855,7 +16734,7 @@ ab
 gh
 gp
 gA
-gG
+bZ
 ab
 af
 cy
@@ -17057,10 +16936,10 @@ ab
 gh
 gq
 gB
-gG
+bZ
 ab
 ab
-eE
+IX
 hb
 hj
 dH
@@ -17262,7 +17141,7 @@ gr
 af
 ab
 ab
-eE
+IX
 hc
 hk
 hm
@@ -17464,9 +17343,9 @@ gs
 ab
 fy
 ab
-eE
-hd
-eE
+IX
+IX
+IX
 af
 hx
 af
@@ -18042,7 +17921,7 @@ aa
 aa
 aa
 af
-al
+ai
 ao
 aF
 af
@@ -20886,7 +20765,7 @@ cQ
 cQ
 cQ
 dR
-eo
+bZ
 dT
 fi
 eL

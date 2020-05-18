@@ -11,7 +11,8 @@
 	reverse_facing = 0
 	can_absorb = 0
 	shield_assailant = 0
-	point_blank_mult = 1
+	point_blank_mult = 1.5
+	damage_stage = 1
 	same_tile = 0
 	can_throw = 1
 	force_danger = 1
@@ -37,7 +38,7 @@
 		return FALSE
 	var/obj/item/clothing/C = G.affecting.head
 	if(istype(C)) //hardsuit helmets etc
-		if((C.item_flags & ITEM_FLAG_STOPPRESSUREDAMAGE) && C.armor["melee"] > 20)
+		if((C.max_pressure_protection) && C.armor["melee"] > 20)
 			to_chat(G.assailant, "<span class='warning'>\The [C] is in the way!</span>")
 			return FALSE
 	return TRUE

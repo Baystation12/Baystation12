@@ -22,10 +22,10 @@
 	icon_state = "folder_white"
 
 /obj/item/weapon/folder/nt
-	desc = "A NanoTrasen folder."
+	desc = "A corporate folder."
 	icon_state = "folder_nt"
 
-/obj/item/weapon/folder/update_icon()
+/obj/item/weapon/folder/on_update_icon()
 	overlays.Cut()
 	if(contents.len)
 		overlays += "folder_paper"
@@ -33,8 +33,8 @@
 
 /obj/item/weapon/folder/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/weapon/photo) || istype(W, /obj/item/weapon/paper_bundle))
-		user.drop_item()
-		W.loc = src
+		if(!user.unEquip(W, src))
+			return
 		to_chat(user, "<span class='notice'>You put the [W] into \the [src].</span>")
 		update_icon()
 	else if(istype(W, /obj/item/weapon/pen))
@@ -45,14 +45,13 @@
 
 /obj/item/weapon/folder/attack_self(mob/user as mob)
 	var/dat = "<title>[name]</title>"
-
 	for(var/obj/item/weapon/paper/P in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[P]'>Remove</A> <A href='?src=\ref[src];rename=\ref[P]'>Rename</A> - <A href='?src=\ref[src];read=\ref[P]'>[P.name]</A><BR>"
 	for(var/obj/item/weapon/photo/Ph in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Ph]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Ph]'>Rename</A> - <A href='?src=\ref[src];look=\ref[Ph]'>[Ph.name]</A><BR>"
 	for(var/obj/item/weapon/paper_bundle/Pb in src)
 		dat += "<A href='?src=\ref[src];remove=\ref[Pb]'>Remove</A> <A href='?src=\ref[src];rename=\ref[Pb]'>Rename</A> - <A href='?src=\ref[src];browse=\ref[Pb]'>[Pb.name]</A><BR>"
-	user << browse(dat, "window=folder")
+	show_browser(user, dat, "window=folder")
 	onclose(user, "folder")
 	add_fingerprint(usr)
 	return
@@ -67,17 +66,16 @@
 		if(href_list["remove"])
 			var/obj/item/P = locate(href_list["remove"])
 			if(P && (P.loc == src) && istype(P))
-				P.loc = usr.loc
 				usr.put_in_hands(P)
 
-		else if(href_list["read"])
+		else if(href_list["read"])			
 			var/obj/item/weapon/paper/P = locate(href_list["read"])
 			if(P && (P.loc == src) && istype(P))
 				if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>", "window=[P.name]")
+					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.show_info(usr))][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 				else
-					usr << browse("<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>", "window=[P.name]")
+					show_browser(usr, "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.show_info(usr)][P.stamps]</BODY></HTML>", "window=[P.name]")
 					onclose(usr, "[P.name]")
 		else if(href_list["look"])
 			var/obj/item/weapon/photo/P = locate(href_list["look"])
@@ -115,14 +113,14 @@
 	icon_state = "envelope_sealed"
 	var/sealed = 1
 
-/obj/item/weapon/folder/envelope/update_icon()
+/obj/item/weapon/folder/envelope/on_update_icon()
 	if(sealed)
 		icon_state = "envelope_sealed"
 	else
 		icon_state = "envelope[contents.len > 0]"
 
-/obj/item/weapon/folder/envelope/examine(var/user)
-	..()
+/obj/item/weapon/folder/envelope/examine(mob/user)
+	. = ..()
 	to_chat(user, "The seal is [sealed ? "intact" : "broken"].")
 
 /obj/item/weapon/folder/envelope/proc/sealcheck(user)

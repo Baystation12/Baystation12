@@ -37,14 +37,15 @@
 			var/datum/pipeline/P2 = node2.parent
 			network_node2 = P2.network
 
-/obj/machinery/clamp/attack_hand(var/mob/user)
-	if(!target || !user)
-		return
+/obj/machinery/clamp/physical_attack_hand(var/mob/user)
+	if(!target)
+		return FALSE
 	if(!open)
 		open()
 	else
 		close()
 	to_chat(user, "<span class='notice'>You turn [open ? "off" : "on"] \the [src]</span>")
+	return TRUE
 
 /obj/machinery/clamp/Destroy()
 	if(!open)
@@ -145,8 +146,8 @@
 	if (istype(A, /obj/machinery/atmospherics/pipe/simple))
 		to_chat(user, "<span class='notice'>You begin to attach \the [src] to \the [A]...</span>")
 		if (do_after(user, 30, src))
+			if(!user.unEquip(src))
+				return
 			to_chat(user, "<span class='notice'>You have attached \the [src] to \the [A].</span>")
 			new/obj/machinery/clamp(A.loc, A)
-			user.drop_from_inventory(src)
 			qdel(src)
-

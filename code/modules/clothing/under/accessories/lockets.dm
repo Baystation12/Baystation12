@@ -24,7 +24,7 @@
 		icon_state = "[base_icon]_open"
 		if(held)
 			to_chat(user, "\The [held] falls out!")
-			held.loc = get_turf(user)
+			held.dropInto(user.loc)
 			src.held = null
 	else
 		icon_state = "[base_icon]"
@@ -38,9 +38,9 @@
 		if(held)
 			to_chat(usr, "\The [src] already has something inside it.")
 		else
+			if(!user.unEquip(O, src))
+				return
 			to_chat(usr, "You slip [O] into [src].")
-			user.drop_item()
-			O.loc = src
 			src.held = O
 		return
 	..()

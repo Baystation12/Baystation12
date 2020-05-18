@@ -9,9 +9,6 @@ var/list/ship_engines = list()
 	..()
 	holder = _holder
 	ship_engines += src
-	var/obj/effect/overmap/ship/S = map_sectors["[holder.z]"]
-	if(istype(S))
-		S.engines |= src
 
 /datum/ship_engine/proc/can_burn()
 	return 0
@@ -41,9 +38,8 @@ var/list/ship_engines = list()
 	return 1
 
 /datum/ship_engine/Destroy()
-	..()
 	ship_engines -= src
-	var/obj/effect/overmap/ship/S = map_sectors["[holder.z]"]
-	if(istype(S))
+	for(var/obj/effect/overmap/visitable/ship/S in SSshuttle.ships)
 		S.engines -= src
 	holder = null
+	. = ..()

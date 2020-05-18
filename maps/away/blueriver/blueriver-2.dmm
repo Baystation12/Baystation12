@@ -64,7 +64,7 @@
 	},
 /area/bluespaceriver/ground)
 "al" = (
-/obj/effect/overmap/sector/arcticplanet{
+/obj/effect/overmap/visitable/sector/arcticplanet{
 	desc = "Sensor array an arctic planet with a small vessle on the surface. The vessle is located in the western region of a plateu surrounded by mineral rich mountains on all four sides. Scans further indicate strange energy levels below the planet's surface. Sunrise expected in 56 hours."
 	},
 /turf/simulated/floor/exoplanet/snow{
@@ -78,7 +78,7 @@
 	},
 /area/bluespaceriver/ground)
 "an" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor,
 /area/bluespaceriver/ship)
 "ao" = (
@@ -86,15 +86,15 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ap" = (
-/obj/machinery/computer/helm,
+/obj/machinery/computer/ship/helm,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aq" = (
-/obj/machinery/computer/sensors,
+/obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ar" = (
-/obj/machinery/computer/engines,
+/obj/machinery/computer/ship/engines,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "as" = (
@@ -155,7 +155,9 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "aC" = (
-/obj/machinery/vending/boozeomat,
+/obj/machinery/vending/boozeomat{
+	req_access = list()
+	},
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "aD" = (
@@ -194,7 +196,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/obj/item/weapon/material/knife,
+/obj/item/weapon/material/knife/table,
 /obj/item/weapon/paper{
 	info = "Well, it didn't take the three days I was betting on, so i'm out twenty bucks, but we managed to punch through into a cave of some sort with the drilling equipment. We're lowering a ladder down now and sending one of the guards down to check that there's no spiders in there or anything. Once they report back, we'll Move the whole basecamp down there, and- SO, We've moved down into the cave now, and what we've found is astounding! It looks a LOT like a lake or river of blue goo, but... not? I took some scans, but couldn't pick anything up aside from radiation spikes from the pool. I also lowered a swab into the fluid to take a sample, but when I touched the swab to the surface of the... Fluid? the Swab just... Ceased And yes, that's the best way to describe it. it just stopped existing in my hand. We figure it's best we DON'T touch the blue stuff for now. one of our help has started moving supplies down into the cave to build a bridge of sorts though across the pool. We spotted some sort of structure on the far side, and the bridge is the only way to get to it, so now we wait."
 	},
@@ -283,7 +285,6 @@
 "aZ" = (
 /obj/structure/table/steel,
 /obj/machinery/atmospherics/unary/vent_pump/on,
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/machinery/light{
 	dir = 4;
 	icon_state = "tube1"
@@ -292,7 +293,7 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "ba" = (
-/obj/effect/wingrille_spawn/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/bluespaceriver/ship)
 "bb" = (
@@ -313,7 +314,6 @@
 "bd" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -388,8 +388,8 @@
 /area/bluespaceriver/ship)
 "bl" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
 	},
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
@@ -404,7 +404,6 @@
 /obj/item/weapon/bedsheet/rd,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -419,7 +418,7 @@
 	},
 /area/bluespaceriver/ship)
 "bp" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bq" = (
@@ -432,13 +431,13 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bs" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = 24
 	},
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 1
 	},
 /obj/random/soap,
@@ -468,8 +467,10 @@
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "by" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bz" = (
@@ -518,7 +519,6 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bF" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light{
 	dir = 4;
@@ -569,10 +569,6 @@
 /turf/simulated/floor/tiled,
 /area/bluespaceriver/ship)
 "bN" = (
-/obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	 icon_state = "intact";
-	dir = 5
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/power/apc{
 	dir = 8;
@@ -585,7 +581,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
 "bO" = (
-/obj/machinery/atmospherics/pipe/tank/air{
+/obj/machinery/atmospherics/unary/tank/air{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
@@ -606,7 +602,6 @@
 /area/bluespaceriver/ship)
 "bS" = (
 /obj/machinery/vending/wallmed1{
-	layer = 3.3;
 	name = "Emergency NanoMed";
 	pixel_x = 28;
 	pixel_y = 0;
@@ -614,7 +609,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -735,7 +729,7 @@
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)
 "cm" = (
-/obj/machinery/door/airlock/glass_external/bolted,
+/obj/machinery/door/airlock/external/bolted,
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
 "cn" = (
@@ -745,7 +739,6 @@
 "co" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /obj/machinery/floodlight,
@@ -838,14 +831,25 @@
 /obj/effect/landmark/map_data{
 	height = 2
 	},
-/obj/effect/landmark/random_gen/asteroid{
-	generation_height = 100;
-	generation_width = 100
-	},
 /turf/unsimulated/mineral{
 	temperature = 233
 	},
 /area/bluespaceriver/ground)
+"hN" = (
+/obj/machinery/door/airlock/science,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
+/area/bluespaceriver/ship)
+"Co" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/wall/titanium,
+/area/bluespaceriver/ship)
+"Lk" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled,
+/area/bluespaceriver/ship)
 
 (1,1,1) = {"
 aa
@@ -3643,8 +3647,8 @@ an
 an
 aL
 aR
-au
-bk
+Lk
+bi
 bx
 ay
 ay
@@ -3849,8 +3853,8 @@ an
 an
 ay
 bm
-aG
-ay
+hN
+Co
 bO
 bU
 ay

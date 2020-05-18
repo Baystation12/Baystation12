@@ -4,6 +4,7 @@
 	var/max_late_time = (30 SECONDS)
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
 	category = /datum/shuttle/autodock/ferry/supply
+	ceiling_type = /turf/simulated/floor/shuttle_ceiling
 
 /datum/shuttle/autodock/ferry/supply/short_jump(var/area/destination)
 	if(moving_status != SHUTTLE_IDLE)
@@ -24,7 +25,7 @@
 			return
 
 		if (!at_station())	//at centcom
-			supply_controller.buy()
+			SSsupply.buy()
 
 		//We pretend it's a long_jump by making the shuttle stay at centcom for the "in-transit" period.
 		var/obj/effect/shuttle_landmark/away_waypoint = get_location_waypoint(away_location)
@@ -35,7 +36,7 @@
 			attempt_move(away_waypoint)
 
 		//wait ETA here.
-		arrive_time = world.time + supply_controller.movetime
+		arrive_time = world.time + SSsupply.movetime
 		while (world.time <= arrive_time)
 			sleep(5)
 
@@ -49,15 +50,15 @@
 		moving_status = SHUTTLE_IDLE
 
 		if (!at_station())	//at centcom
-			supply_controller.sell()
+			SSsupply.sell()
 
 // returns 1 if the supply shuttle should be prevented from moving because it contains forbidden atoms
 /datum/shuttle/autodock/ferry/supply/proc/forbidden_atoms_check()
 	if (!at_station())
 		return 0	//if badmins want to send forbidden atoms on the supply shuttle from centcom we don't care
-	
+
 	for(var/area/A in shuttle_area)
-		if(supply_controller.forbidden_atoms_check(A))
+		if(SSsupply.forbidden_atoms_check(A))
 			return 1
 
 /datum/shuttle/autodock/ferry/supply/proc/at_station()

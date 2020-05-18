@@ -1,6 +1,6 @@
 /turf/simulated/wall
 	name = "wall"
-	desc = "A huge chunk of metal used to seperate rooms."
+	desc = "A huge chunk of metal used to separate rooms."
 	icon = 'icons/turf/wall_masks.dmi'
 	icon_state = "generic"
 	opacity = 1
@@ -20,28 +20,33 @@
 	var/construction_stage
 	var/hitsound = 'sound/weapons/Genhit.ogg'
 	var/list/wall_connections = list("0", "0", "0", "0")
+	var/list/other_connections = list("0", "0", "0", "0")
 	var/floor_type = /turf/simulated/floor/plating //turf it leaves after destruction
 	var/paint_color
+	var/stripe_color
+	var/global/list/wall_stripe_cache = list()
+	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood, /turf/simulated/wall/walnut, /turf/simulated/wall/maple, /turf/simulated/wall/mahogany, /turf/simulated/wall/ebony)
+	var/list/blend_objects = list(/obj/machinery/door, /obj/structure/wall_frame, /obj/structure/grille, /obj/structure/window/reinforced/full, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, ,/obj/structure/window/phoronbasic/full, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
+	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
 
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)
 	icon_state = "blank"
 	if(!materialtype)
 		materialtype = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(materialtype)
+	material = SSmaterials.get_material_by_name(materialtype)
 	if(!isnull(rmaterialtype))
-		reinf_material = get_material_by_name(rmaterialtype)
+		reinf_material = SSmaterials.get_material_by_name(rmaterialtype)
 	update_material()
 	hitsound = material.hitsound
-	processing_turfs |= src
 
 /turf/simulated/wall/Initialize()
-	set_extension(src, /datum/extension/penetration, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	set_extension(src, /datum/extension/penetration/proc_call, .proc/CheckPenetration)
+	START_PROCESSING(SSturf, src) //Used for radiation.
 	. = ..()
 
 /turf/simulated/wall/Destroy()
-	processing_turfs -= src
-	dismantle_wall(null,null,1)
+	STOP_PROCESSING(SSturf, src)
 	. = ..()
 
 // Walls always hide the stuff below them.
@@ -53,8 +58,10 @@
 	var/obj/O = A
 	return (istype(O) && O.hides_under_flooring()) || ..()
 
-/turf/simulated/wall/process()
-	// Calling parent will kill processing
+/turf/simulated/wall/Process(wait, times_fired)
+	var/how_often = max(round(2 SECONDS/wait), 1)
+	if(times_fired % how_often)
+		return //We only work about every 2 seconds
 	if(!radiate())
 		return PROCESS_KILL
 
@@ -69,6 +76,9 @@
 
 	var/proj_damage = Proj.get_structure_damage()
 
+	if(Proj.ricochet_sounds && prob(15))
+		playsound(src, pick(Proj.ricochet_sounds), 100, 1)
+
 	if(reinf_material)
 		if(Proj.damage_type == BURN)
 			proj_damage /= reinf_material.burn_armor
@@ -81,16 +91,14 @@
 	take_damage(damage)
 	return
 
-/turf/simulated/wall/hitby(AM as mob|obj, var/speed=THROWFORCE_SPEED_DIVISOR)
+/turf/simulated/wall/hitby(AM as mob|obj, var/datum/thrownthing/TT)
+	if(!ismob(AM))
+		var/obj/O = AM
+		var/tforce = O.throwforce * (TT.speed/THROWFORCE_SPEED_DIVISOR)
+		playsound(src, hitsound, tforce >= 15? 60 : 25, TRUE)
+		if (tforce >= 15)
+			take_damage(tforce)
 	..()
-	if(ismob(AM))
-		return
-
-	var/tforce = AM:throwforce * (speed/THROWFORCE_SPEED_DIVISOR)
-	if (tforce < 15)
-		return
-
-	take_damage(tforce)
 
 /turf/simulated/wall/proc/clear_plants()
 	for(var/obj/effect/overlay/wallrot/WR in src)
@@ -101,7 +109,6 @@
 			plant.update_icon()
 			plant.pixel_x = 0
 			plant.pixel_y = 0
-		plant.update_neighbors()
 
 /turf/simulated/wall/ChangeTurf(var/newtype)
 	clear_plants()
@@ -109,7 +116,7 @@
 
 //Appearance
 /turf/simulated/wall/examine(mob/user)
-	. = ..(user)
+	. = ..()
 
 	if(!damage)
 		to_chat(user, "<span class='notice'>It looks fully intact.</span>")
@@ -192,7 +199,7 @@
 			O.forceMove(src)
 
 	clear_plants()
-	material = get_material_by_name("placeholder")
+	material = SSmaterials.get_material_by_name("placeholder")
 	reinf_material = null
 	update_connections(1)
 
@@ -257,7 +264,7 @@
 	if(!total_radiation)
 		return
 
-	radiation_repository.radiate(src, total_radiation)
+	SSradiation.radiate(src, total_radiation)
 	return total_radiation
 
 /turf/simulated/wall/proc/burn(temperature)
@@ -275,3 +282,9 @@
 
 /turf/simulated/wall/proc/CheckPenetration(var/base_chance, var/damage)
 	return round(damage/material.integrity*180)
+
+/turf/simulated/wall/can_engrave()
+	return (material && material.hardness >= 10 && material.hardness <= 100)
+
+/turf/simulated/wall/is_wall()
+	return TRUE

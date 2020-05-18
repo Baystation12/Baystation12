@@ -1,5 +1,5 @@
-// This system is used to grab a ghost from observers with the required preferences and
-// lack of bans set. See posibrain.dm for an example of how they are called/used. ~Z
+// This system is used to grab a ghost from observers with the required preferences 
+// and lack of bans set. See posibrain.dm for an example of how they are called/used.
 
 var/list/ghost_traps
 
@@ -37,7 +37,7 @@ var/list/ghost_traps
 
 // Check for bans, proper atom types, etc.
 /datum/ghosttrap/proc/assess_candidate(var/mob/observer/ghost/candidate, var/mob/target, var/feedback = TRUE)
-	if(!candidate.MayRespawn(1, minutes_since_death))
+	if(!candidate.MayRespawn(feedback, minutes_since_death))
 		return 0
 	if(islist(ban_checks))
 		for(var/bantype in ban_checks)
@@ -94,6 +94,7 @@ var/list/ghost_traps
 		return 0
 	target.ckey = candidate.ckey
 	if(target.mind)
+		target.mind.reset()
 		target.mind.assigned_role = "[ghost_trap_role]"
 	announce_ghost_joinleave(candidate, 0, "[ghost_trap_message]")
 	welcome_candidate(target)

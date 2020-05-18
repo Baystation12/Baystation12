@@ -164,7 +164,6 @@ function find_code_deps {
     need_cmd grep
     need_cmd awk
     need_cmd md5sum
-    need_cmd python2
     need_cmd python3
     need_cmd pip
 }
@@ -202,30 +201,18 @@ function run_code_tests {
     shopt -s globstar
     run_test "check travis contains all maps" "scripts/validateTravisContainsAllMaps.sh"
     run_test_fail "maps contain no step_[xy]" "grep 'step_[xy]' maps/**/*.dmm"
+    run_test_fail "maps contain no layer adjustments" "grep 'layer = ' maps/**/*.dmm"
+    run_test_fail "maps contain no plane adjustments" "grep 'plane = ' maps/**/*.dmm"
     run_test_fail "ensure nanoui templates unique" "find nano/templates/ -type f -exec md5sum {} + | sort | uniq -D -w 32 | grep nano"
     run_test_fail "no invalid spans" "grep -En \"<\s*span\s+class\s*=\s*('[^'>]+|[^'>]+')\s*>\" **/*.dm"
     run_test "code quality checks" "test/check-paths.sh"
     run_test "indentation check" "awk -f tools/indentation.awk **/*.dm"
-    run_test "check changelog example unchanged" "md5sum -c - <<< '79e058ac02ed52aad99a489ab4c8f75b *html/changelogs/example.yml'"
-    run_test "check tags" "python2 tools/TagMatcher/tag-matcher.py ."
+    run_test "check changelog example unchanged" "md5sum -c - <<< '683a3e0d21b90581ae6e4c95052d461e *html/changelogs/example.yml'"
+    run_test "check tags" "python3 tools/TagMatcher/tag-matcher.py ."
     run_test "check color hex" "python3 tools/ColorHexChecker/color-hex-checker.py ."
-    run_test "check punctuation" "python2 tools/PunctuationChecker/punctuation-checker.py ."
-    run_test "check icon state limit" "python2 tools/dmitool/check_icon_state_limit.py ."
-    run_test_ci "check changelog builds" "python2 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
-}
-
-function run_web_tests {
-    msg "*** running web tests ***"
-    find_web_deps
-    msg "installing web tools"
-    if [[ "$CI" == "true" ]]; then
-        rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $NODE_VERSION
-        npm install --no-spin -g gulp-cli
-    fi
-
-    msg "installing node modules"
-    cd tgui && npm install --no-spin && cd ..
-    run_test "check tgui builds" "cd tgui && gulp; cd .."
+    run_test "check punctuation" "python3 tools/PunctuationChecker/punctuation-checker.py ."
+    run_test "check icon state limit" "python3 tools/dmitool/check_icon_state_limit.py ."
+    run_test_ci "check changelog builds" "python3 tools/GenerateChangelog/ss13_genchangelog.py html/changelog.html html/changelogs"
 }
 
 function run_byond_tests {
@@ -241,8 +228,8 @@ function run_byond_tests {
         ./install-byond.sh || exit 1
         source $HOME/BYOND-${BYOND_MAJOR}.${BYOND_MINOR}/byond/bin/byondsetup
     fi
-    run_test_ci "check globals build" "python tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
-    run_test "check globals unchanged" "md5sum -c - <<< 'a3bfcbd4e5e35726b1ba5c6dec7c5e09 *code/_helpers/global_access.dm'"
+    run_test_ci "check globals build" "python3 tools/GenerateGlobalVarAccess/gen_globals.py baystation12.dme code/_helpers/global_access.dm"
+    run_test "check globals unchanged" "md5sum -c - <<< '510f3a8215fd2c25c2ddbe95e31bb4c9 *code/_helpers/global_access.dm'"
     run_test "build map unit tests" "scripts/dm.sh -DUNIT_TEST -M$MAP_PATH baystation12.dme"
     run_test "check no warnings in build" "grep ', 0 warnings' build_log.txt"
     run_test "run unit tests" "DreamDaemon baystation12.dmb -invisible -trusted -core 2>&1 | tee log.txt"
@@ -251,12 +238,11 @@ function run_byond_tests {
     run_test_fail "check no runtimes 2" "grep 'runtime error:' log.txt"
     run_test_fail "check no scheduler failures" "grep 'Process scheduler caught exception processing' log.txt"
     run_test_fail "check no warnings" "grep 'WARNING:' log.txt"
-    run_test_fail "check no failures" "grep 'ERROR:' log.txt"
+    run_test_fail "check no errors" "grep 'ERROR:' log.txt"
 }
 
 function run_all_tests {
     run_code_tests
-    run_web_tests
     run_byond_tests
 }
 
@@ -272,9 +258,6 @@ function run_configured_tests {
             ;;
         "MAP")
             run_byond_tests
-            ;;
-        "WEB")
-            run_web_tests
             ;;
         "CODE")
             run_code_tests

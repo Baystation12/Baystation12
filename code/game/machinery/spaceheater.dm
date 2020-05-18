@@ -1,5 +1,5 @@
 /obj/machinery/space_heater
-	use_power = 0
+	use_power = POWER_USE_OFF
 	anchored = 0
 	density = 1
 	icon = 'icons/obj/atmos.dmi'
@@ -11,7 +11,7 @@
 	var/set_temperature = T0C + 20	//K
 	var/active = 0
 	var/heating_power = 40 KILOWATTS
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	clicksound = "switch"
 
 
@@ -20,15 +20,19 @@
 	cell = new/obj/item/weapon/cell/high(src)
 	update_icon()
 
-/obj/machinery/space_heater/update_icon(var/rebuild_overlay = 0)
+/obj/machinery/space_heater/on_update_icon(var/rebuild_overlay = 0)
 	if(!on)
 		icon_state = "sheater-off"
+		set_light(0)
 	else if(active > 0)
 		icon_state = "sheater-heat"
+		set_light(0.7, 1, 2, 3, COLOR_SEDONA)
 	else if(active < 0)
 		icon_state = "sheater-cool"
+		set_light(0.7, 1, 2, 3, COLOR_DEEP_SKY_BLUE)
 	else
 		icon_state = "sheater-standby"
+		set_light(0)
 
 	if(rebuild_overlay)
 		overlays.Cut()
@@ -36,14 +40,13 @@
 			overlays  += "sheater-open"
 
 /obj/machinery/space_heater/examine(mob/user)
-	. = ..(user)
+	. = ..()
 
 	to_chat(user, "The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"].")
 	if(panel_open)
 		to_chat(user, "The power cell is [cell ? "installed" : "missing"].")
 	else
 		to_chat(user, "The charge meter reads [cell ? round(cell.percent(),1) : 0]%")
-	return
 
 /obj/machinery/space_heater/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -61,15 +64,11 @@
 				return
 			else
 				// insert cell
-				var/obj/item/weapon/cell/C = usr.get_active_hand()
-				if(istype(C))
-					user.drop_item()
-					cell = C
-					C.forceMove(src)
-					C.add_fingerprint(usr)
-
-					user.visible_message("<span class='notice'>[user] inserts a power cell into [src].</span>", "<span class='notice'>You insert the power cell into [src].</span>")
-					power_change()
+				if(!user.unEquip(I, src))
+					return
+				cell = I
+				user.visible_message("<span class='notice'>[user] inserts a power cell into [src].</span>", "<span class='notice'>You insert the power cell into [src].</span>")
+				power_change()
 		else
 			to_chat(user, "The hatch must be open to insert a power cell.")
 			return
@@ -84,14 +83,13 @@
 		..()
 	return
 
-/obj/machinery/space_heater/attack_hand(mob/user as mob)
-	..()
-	interact(user)
-
-/obj/machinery/space_heater/interact(mob/user as mob)
-
+/obj/machinery/space_heater/interface_interact(mob/user)
 	if(panel_open)
+		interact(user)
+		return TRUE
 
+/obj/machinery/space_heater/interact(mob/user)
+	if(panel_open)
 		var/list/dat = list()
 		dat += "Power cell: "
 		if(cell)
@@ -112,12 +110,15 @@
 		popup.set_content(jointext(dat, null))
 		popup.set_title_image(usr.browse_rsc_icon(src.icon, "sheater-standby"))
 		popup.open()
-	else
+
+	return
+
+/obj/machinery/space_heater/physical_attack_hand(mob/user)
+	if(!panel_open)
 		on = !on
 		user.visible_message("<span class='notice'>[user] switches [on ? "on" : "off"] the [src].</span>","<span class='notice'>You switch [on ? "on" : "off"] the [src].</span>")
 		update_icon()
-	return
-
+		return TRUE
 
 /obj/machinery/space_heater/Topic(href, href_list, state = GLOB.physical_state)
 	if (..())
@@ -146,9 +147,9 @@
 			if(panel_open && !cell)
 				var/obj/item/weapon/cell/C = usr.get_active_hand()
 				if(istype(C))
-					usr.drop_item()
+					if(!usr.unEquip(C, src))
+						return
 					cell = C
-					C.forceMove(src)
 					C.add_fingerprint(usr)
 					power_change()
 					usr.visible_message("<span class='notice'>[usr] inserts \the [C] into \the [src].</span>", "<span class='notice'>You insert \the [C] into \the [src].</span>")
@@ -186,7 +187,7 @@
 					if(!powered())
 						cell.use(power_draw*CELLRATE)
 					else
-						use_power(power_draw)
+						use_power_oneoff(power_draw)
 					active = heat_transfer
 
 				env.merge(removed)

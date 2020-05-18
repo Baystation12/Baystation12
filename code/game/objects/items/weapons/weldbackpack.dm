@@ -1,9 +1,6 @@
 /obj/item/weapon/weldpack
 	name = "welding kit"
 	desc = "An unwieldy, heavy backpack with two massive fuel tanks. Includes a connector for most models of portable welding tools."
-	description_info = "This pack acts as a portable source of welding fuel. Use a welder on it to refill its tank - but make sure it's not lit! You can use this kit on a fuel tank or appropriate reagent dispenser to replenish its reserves."
-	description_fluff = "The Shenzhen Chain of 2380 was an industrial accident of noteworthy infamy that occurred at Earth's L3 Lagrange Point. An apprentice welder, working for the Shenzhen Space Fabrication Group, failed to properly seal her fuel port, triggering a chain reaction that spread from laborer to laborer, instantly vaporizing a crew of fourteen. Don't let this happen to you!"
-	description_antag = "In theory, you could hold an open flame to this pack and produce some pretty catastrophic results. The trick is getting out of the blast radius."
 	slot_flags = SLOT_BACK
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "welderpack"
@@ -26,8 +23,7 @@
 	if(isWelder(W))
 		var/obj/item/weapon/weldingtool/T = W
 		if(T.welding & prob(50))
-			message_admins("[key_name_admin(user)] triggered a fueltank explosion.")
-			log_game("[key_name(user)] triggered a fueltank explosion.")
+			log_and_message_admins("triggered a fueltank explosion.", user)
 			to_chat(user, "<span class='danger'>That was stupid of you.</span>")
 			explosion(get_turf(src),-1,0,2)
 			if(src)
@@ -73,7 +69,7 @@
 	else
 		..()
 
-/obj/item/weapon/weldpack/update_icon()
+/obj/item/weapon/weldpack/on_update_icon()
 	..()
 
 	overlays.Cut()
@@ -83,7 +79,7 @@
 		overlays += welder_image
 
 /obj/item/weapon/weldpack/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	to_chat(user, text("\icon[] [] units of fuel left!", src, src.reagents.total_volume))
 
 	if(welder)

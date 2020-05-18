@@ -39,7 +39,7 @@
 		data["prime"] = user.pai_law0
 		data["supplemental"] = user.pai_laws
 
-		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_directives.tmpl", "pAI Directives", 450, 600)
@@ -104,7 +104,7 @@
 
 		data["channels"] = channels
 
-		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			ui = new(user, user, id, "pai_radio.tmpl", "Radio Configuration", 300, 150)
 			ui.set_initial_data(data)
@@ -128,7 +128,7 @@
 		// This is dumb, but NanoUI breaks if it has no data to send
 		data["crew_manifest"] = html_crew_manifest()
 
-		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "crew_manifest.tmpl", "Crew Manifest", 450, 600)
@@ -152,7 +152,7 @@
 		data["progress_b"] = user.hackprogress % 10
 		data["aborted"] = user.hack_aborted
 
-		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_doorjack.tmpl", "Door Jack", 300, 150)
@@ -243,7 +243,7 @@
 				gases[++gases.len] = gas
 			data["gas"] = gases
 
-		ui = GLOB.nanomanager.try_update_ui(user, user, id, ui, data, force_open)
+		ui = SSnano.try_update_ui(user, user, id, ui, data, force_open)
 		if(!ui)
 			// Don't copy-paste this unless you're making a pAI software module!
 			ui = new(user, user, id, "pai_atmosphere.tmpl", "Atmosphere Sensor", 350, 300)
@@ -276,7 +276,7 @@
 	name = "Universal Translator"
 	ram_cost = 35
 	id = "translator"
-	var/list/languages = list(LANGUAGE_UNATHI, LANGUAGE_SIIK_MAAS, LANGUAGE_SKRELLIAN, LANGUAGE_EAL, LANGUAGE_INDEPENDENT, LANGUAGE_SPACER, LANGUAGE_LUNAR)
+	var/list/languages = list(LANGUAGE_SPACER, LANGUAGE_GUTTER, LANGUAGE_UNATHI_SINTA, LANGUAGE_SKRELLIAN, LANGUAGE_EAL, LANGUAGE_HUMAN_ARABIC, LANGUAGE_HUMAN_CHINESE, LANGUAGE_HUMAN_IBERIAN, LANGUAGE_HUMAN_INDIAN, LANGUAGE_HUMAN_RUSSIAN, LANGUAGE_HUMAN_SELENIAN)
 
 	toggle(mob/living/silicon/pai/user)
 		// 	Sol Common, Tradeband and Gutter are added with New() and are therefore the current default, always active languages

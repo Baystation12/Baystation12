@@ -21,7 +21,7 @@
 	if (!can_touch(usr) || ismouse(usr))
 		return
 
-	if(flipped < 0 || !flip(get_cardinal_dir(usr,src)))
+	if(reinforced || flipped < 0 || !flip(get_cardinal_dir(usr,src)))
 		to_chat(usr, "<span class='notice'>It won't budge.</span>")
 		return
 
@@ -86,7 +86,6 @@
 
 	set_dir(direction)
 	if(dir != NORTH)
-		plane = ABOVE_HUMAN_PLANE
 		layer = ABOVE_HUMAN_LAYER
 	atom_flags &= ~ATOM_FLAG_CLIMBABLE //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
@@ -122,7 +121,10 @@
 	return TRUE
 
 /obj/structure/table/CtrlClick()
-	if(!flipped)
-		do_flip()
-	else
-		do_put()
+	if(usr && usr.Adjacent(src))
+		if(!flipped)
+			do_flip()
+		else
+			do_put()
+		return TRUE
+	return FALSE

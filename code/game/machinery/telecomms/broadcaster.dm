@@ -17,12 +17,12 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	desc = "A dish-shaped machine used to broadcast processed subspace signals."
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 25
 	machinetype = 5
 	produces_heat = 0
 	delay = 7
-	circuitboard = /obj/item/weapon/circuitboard/telecomms/broadcaster
+	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/broadcaster
+	base_type = /obj/machinery/telecomms/broadcaster
 	outage_probability = 10
 
 /obj/machinery/telecomms/broadcaster/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
@@ -118,11 +118,21 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	desc = "A compact machine used for portable subspace telecommuniations processing."
 	density = 1
 	anchored = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 0
 	machinetype = 6
 	produces_heat = 0
+	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone
+	construct_state = /decl/machine_construction/tcomms/panel_closed/cannot_print
+	var/listening_freqs
+	var/channel_color
+	var/channel_name
 	var/intercept = 0 // if nonzero, broadcasts all messages to syndicate channel
+
+/obj/machinery/telecomms/allinone/Initialize()
+	if(!listening_freqs)
+		listening_freqs = ANTAG_FREQS	//Covers any updates to ANTAG_FREQS
+	return ..()
 
 /obj/machinery/telecomms/allinone/receive_signal(datum/signal/signal)
 
@@ -146,13 +156,13 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		var/datum/radio_frequency/connection = signal.data["connection"]
 
-		if(connection.frequency in ANTAG_FREQS) // if antag broadcast, just
+		if(connection.frequency in listening_freqs) // if antag broadcast, just
 			Broadcast_Message(signal.data["connection"], signal.data["mob"],
 							  signal.data["vmask"], signal.data["vmessage"],
 							  signal.data["radio"], signal.data["message"],
 							  signal.data["name"], signal.data["job"],
 							  signal.data["realname"], signal.data["vname"],, signal.data["compression"], list(0), connection.frequency,
-							  signal.data["verb"], signal.data["language"], signal.data["channel_tag"], signal.data["channel_color"])
+							  signal.data["verb"], signal.data["language"], channel_name ? channel_name : signal.data["channel_tag"], channel_color ? channel_color : signal.data["channel_color"])
 		else
 			if(intercept)
 				Broadcast_Message(signal.data["connection"], signal.data["mob"],
@@ -270,12 +280,16 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 					radios += R
 
 	// --- Broadcast to ALL radio devices ---
-
 	else
 
 		for (var/obj/item/device/radio/R in connection.devices["[RADIO_CHAT]"])
 			if(R.receive_range(display_freq, level) > -1)
 				radios += R
+
+	for(var/obj/item/device/radio/R in radios)
+		if((R.last_radio_sound + 1 SECOND) < world.time && R != radio)
+			playsound(R.loc, 'sound/effects/radio_chatter.ogg', 10, 0, -6)
+			R.last_radio_sound = world.time
 
 	// Get a list of mobs who can hear from the radios we collected.
 	var/list/receive = get_mobs_in_radio_ranges(radios)
@@ -340,66 +354,19 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 
 		// Default to commons channel green
 		if(!channel_color)
-			channel_color = channel_color_presets["Global Green"] 
+			channel_color = channel_color_presets["Global Green"]
 
 		var/part_b_extra = ""
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
-		var/part_a = "<span style='color: [channel_color]'>\icon[radio]<b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
+		var/part_a = "<span style='color: [channel_color]'><b>\[[freq_text]\][part_b_extra]</b> <span class='name'>" // goes in the actual output
 
 		// --- Some more pre-message formatting ---
 		var/part_b = "</span> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
 
 
-		// --- Filter the message; place it in quotes apply a verb ---
-
-		var/quotedmsg = null
-		if(M)
-			quotedmsg = M.say_quote(message)
-		else
-			quotedmsg = "says, \"[message]\""
-
-		// --- This following recording is intended for research and feedback in the use of department radio channels ---
-
-		var/part_blackbox_b = "</span><b> \[[freq_text]\]</b> <span class='message'>" // Tweaked for security headsets -- TLE
-		var/blackbox_msg = "[part_a][name][part_blackbox_b][quotedmsg][part_c]"
-		//var/blackbox_admin_msg = "[part_a][M.name] (Real name: [M.real_name])[part_blackbox_b][quotedmsg][part_c]"
-
-		//BR.messages_admin += blackbox_admin_msg
-		if(istype(blackbox))
-			switch(display_freq)
-				if(PUB_FREQ)
-					blackbox.msg_common += blackbox_msg
-				if(SCI_FREQ)
-					blackbox.msg_science += blackbox_msg
-				if(COMM_FREQ)
-					blackbox.msg_command += blackbox_msg
-				if(MED_FREQ)
-					blackbox.msg_medical += blackbox_msg
-				if(ENG_FREQ)
-					blackbox.msg_engineering += blackbox_msg
-				if(SEC_FREQ)
-					blackbox.msg_security += blackbox_msg
-				if(DTH_FREQ)
-					blackbox.msg_deathsquad += blackbox_msg
-				if(SYND_FREQ)
-					blackbox.msg_syndicate += blackbox_msg
-				if(RAID_FREQ)
-					blackbox.msg_raider += blackbox_msg
-				if(SUP_FREQ)
-					blackbox.msg_cargo += blackbox_msg
-				if(SRV_FREQ)
-					blackbox.msg_service += blackbox_msg
-				if(EXP_FREQ)
-					blackbox.msg_exploration += blackbox_msg
-				else
-					blackbox.messages += blackbox_msg
-
-		//End of research and feedback code.
-
-	 /* ###### Send the message ###### */
-
+		 /* ###### Send the message ###### */
 
 	  	/* --- Process all the mobs that heard a masked voice (understood) --- */
 
@@ -532,7 +499,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 			freq_text = channel_tag
 
 		if(!channel_color)
-			channel_color = channel_color_presets["Global Green"] 
+			channel_color = channel_color_presets["Global Green"]
 
 		var/part_a = "<span style='color: [channel_color]'><span class='name'>" // goes in the actual output
 
@@ -542,44 +509,8 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 		if(data == 3) // intercepted radio message
 			part_b_extra = " <i>(Intercepted)</i>"
 
-		// Create a radio headset for the sole purpose of using its icon
-		var/obj/item/device/radio/headset/radio = new
-
-		var/part_b = "</span><b> \icon[radio]\[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
-		var/part_blackbox_b = "</span><b> \[[freq_text]\]</b> <span class='message'>" // Tweaked for security headsets -- TLE
+		var/part_b = "</span><b> \[[freq_text]\][part_b_extra]</b> <span class='message'>" // Tweaked for security headsets -- TLE
 		var/part_c = "</span></span>"
-
-		var/blackbox_msg = "[part_a][source][part_blackbox_b]\"[text]\"[part_c]"
-
-		//BR.messages_admin += blackbox_admin_msg
-		if(istype(blackbox))
-			switch(display_freq)
-				if(PUB_FREQ)
-					blackbox.msg_common += blackbox_msg
-				if(SCI_FREQ)
-					blackbox.msg_science += blackbox_msg
-				if(COMM_FREQ)
-					blackbox.msg_command += blackbox_msg
-				if(MED_FREQ)
-					blackbox.msg_medical += blackbox_msg
-				if(ENG_FREQ)
-					blackbox.msg_engineering += blackbox_msg
-				if(SEC_FREQ)
-					blackbox.msg_security += blackbox_msg
-				if(DTH_FREQ)
-					blackbox.msg_deathsquad += blackbox_msg
-				if(SYND_FREQ)
-					blackbox.msg_syndicate += blackbox_msg
-				if(RAID_FREQ)
-					blackbox.msg_raider += blackbox_msg
-				if(SUP_FREQ)
-					blackbox.msg_cargo += blackbox_msg
-				if(SRV_FREQ)
-					blackbox.msg_service += blackbox_msg
-				if(EXP_FREQ)
-					blackbox.msg_exploration += blackbox_msg
-				else
-					blackbox.messages += blackbox_msg
 
 		//End of research and feedback code.
 
@@ -647,7 +578,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	if(do_sleep)
 		sleep(rand(10,25))
 
-	//world.log << "Level: [signal.data["level"]] - Done: [signal.data["done"]]"
+	//to_world_log("Level: [signal.data["level"]] - Done: [signal.data["done"]]")
 
 	return signal
 

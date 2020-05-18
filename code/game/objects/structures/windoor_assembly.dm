@@ -43,7 +43,7 @@ obj/structure/windoor_assembly/Destroy()
 	update_nearby_tiles()
 	..()
 
-/obj/structure/windoor_assembly/update_icon()
+/obj/structure/windoor_assembly/on_update_icon()
 	icon_state = "[facing]_[secure]windoor_assembly[state]"
 
 /obj/structure/windoor_assembly/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -79,7 +79,7 @@ obj/structure/windoor_assembly/Destroy()
 						to_chat(user, "<span class='notice'>You dissasembled the windoor assembly!</span>")
 						new /obj/item/stack/material/glass/reinforced(get_turf(src), 5)
 						if(secure)
-							new /obj/item/stack/rods(get_turf(src), 4)
+							new /obj/item/stack/material/rods(get_turf(src), 4)
 						qdel(src)
 				else
 					to_chat(user, "<span class='notice'>You need more welding fuel to dissassemble the windoor assembly.</span>")
@@ -114,8 +114,8 @@ obj/structure/windoor_assembly/Destroy()
 						src.SetName("Windoor Assembly")
 
 			//Adding plasteel makes the assembly a secure windoor assembly. Step 2 (optional) complete.
-			else if(istype(W, /obj/item/stack/rods) && !secure)
-				var/obj/item/stack/rods/R = W
+			else if(istype(W, /obj/item/stack/material/rods) && !secure)
+				var/obj/item/stack/material/rods/R = W
 				if(R.get_amount() < 4)
 					to_chat(user, "<span class='warning'>You need more rods to do this.</span>")
 					return
@@ -171,14 +171,13 @@ obj/structure/windoor_assembly/Destroy()
 
 				if(do_after(user, 40,src))
 					if(!src) return
-
-					user.drop_item()
-					W.loc = src
+					if(!user.unEquip(W, src))
+						return
 					to_chat(user, "<span class='notice'>You've installed the airlock electronics!</span>")
 					src.SetName("Near finished Windoor Assembly")
 					src.electronics = W
 				else
-					W.loc = src.loc
+					W.dropInto(loc)
 
 			//Screwdriver to remove airlock electronics. Step 6 undone.
 			else if(isScrewdriver(W) && src.electronics)
@@ -194,64 +193,39 @@ obj/structure/windoor_assembly/Destroy()
 						src.SetName("Wired Windoor Assembly")
 					var/obj/item/weapon/airlock_electronics/ae = electronics
 					electronics = null
-					ae.loc = src.loc
+					ae.dropInto(loc)
 
 			//Crowbar to complete the assembly, Step 7 complete.
 			else if(isCrowbar(W))
 				if(!src.electronics)
 					to_chat(usr, "<span class='warning'>The assembly is missing electronics.</span>")
 					return
-				usr << browse(null, "window=windoor_access")
+				close_browser(usr, "window=windoor_access")
 				playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 				user.visible_message("[user] pries the windoor into the frame.", "You start prying the windoor into the frame.")
 
 				if(do_after(user, 40,src))
-
-					if(!src) return
-
 					set_density(1) //Shouldn't matter but just incase
 					to_chat(user, "<span class='notice'>You finish the windoor!</span>")
 
+					var/obj/machinery/door/window/windoor
 					if(secure)
-						var/obj/machinery/door/window/brigdoor/windoor = new /obj/machinery/door/window/brigdoor(src.loc)
-						if(src.facing == "l")
+						windoor = new /obj/machinery/door/window/brigdoor(loc, src)
+						if(facing == "l")
 							windoor.icon_state = "leftsecureopen"
 							windoor.base_state = "leftsecure"
 						else
 							windoor.icon_state = "rightsecureopen"
 							windoor.base_state = "rightsecure"
-						windoor.set_dir(src.dir)
-						windoor.set_density(0)
-
-						if(src.electronics.one_access)
-							windoor.req_access = null
-							windoor.req_one_access = src.electronics.conf_access
-						else
-							windoor.req_access = src.electronics.conf_access
-						windoor.electronics = src.electronics
-						src.electronics.loc = windoor
 					else
-						var/obj/machinery/door/window/windoor = new /obj/machinery/door/window(src.loc)
+						windoor = new (loc, src)
 						if(src.facing == "l")
 							windoor.icon_state = "leftopen"
 							windoor.base_state = "left"
 						else
 							windoor.icon_state = "rightopen"
 							windoor.base_state = "right"
-						windoor.set_dir(src.dir)
-						windoor.set_density(0)
-
-						if(src.electronics.one_access)
-							windoor.req_access = null
-							windoor.req_one_access = src.electronics.conf_access
-						else
-							windoor.req_access = src.electronics.conf_access
-						windoor.electronics = src.electronics
-						src.electronics.loc = windoor
-
-
 					qdel(src)
-
 
 			else
 				..()

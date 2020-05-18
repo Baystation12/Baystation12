@@ -9,10 +9,6 @@
 	flags = GEAR_HAS_COLOR_SELECTION
 	description = "A simple, solid color beret. This one has no emblems or insignia on it."
 
-/datum/gear/head/whitentberet
-	display_name = "beret, NanoTrasen security"
-	path = /obj/item/clothing/head/beret/guard
-
 /datum/gear/head/bandana
 	display_name = "bandana selection"
 	path = /obj/item/clothing
@@ -21,9 +17,19 @@
 	..()
 	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(typesof(/obj/item/clothing/mask/bandana) + typesof(/obj/item/clothing/head/bandana))
 
+/datum/gear/head/beanie
+	display_name = "beanie, color select"
+	path = /obj/item/clothing/head/beanie
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/head/bow
 	display_name = "hair bow, colour select"
 	path = /obj/item/clothing/head/hairflower/bow
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/head/flat_cap
+	display_name = "flat cap, colour select"
+	path = /obj/item/clothing/head/flatcap
 	flags = GEAR_HAS_COLOR_SELECTION
 
 /datum/gear/head/cap
@@ -35,7 +41,6 @@
 	var/caps = list()
 	caps["black cap"] = /obj/item/clothing/head/soft/black
 	caps["blue cap"] = /obj/item/clothing/head/soft/blue
-	caps["flat cap"] = /obj/item/clothing/head/flatcap
 	caps["green cap"] = /obj/item/clothing/head/soft/green
 	caps["grey cap"] = /obj/item/clothing/head/soft/grey
 	caps["mailman cap"] = /obj/item/clothing/head/mailman
@@ -72,7 +77,11 @@
 	hardhats["blue hardhat"] = /obj/item/clothing/head/hardhat/dblue
 	hardhats["orange hardhat"] = /obj/item/clothing/head/hardhat/orange
 	hardhats["red hardhat"] = /obj/item/clothing/head/hardhat/red
-	hardhats["yellow hardhat"] = /obj/item/clothing/head/hardhat
+	hardhats["light damage control helmet"] = /obj/item/clothing/head/hardhat/EMS/DC_light
+	hardhats["Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB
+	hardhats["red ancient Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient
+	hardhats["yellow ancient Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/yellow
+	hardhats["white ancient Emergency Management Bureau helmet"] = /obj/item/clothing/head/hardhat/damage_control/EMB_Ancient/white
 	gear_tweaks += new/datum/gear_tweak/path(hardhats)
 
 /datum/gear/head/formalhat
@@ -101,7 +110,6 @@
 	var/informalhats = list()
 	informalhats["cowboy hat"] = /obj/item/clothing/head/cowboy_hat
 	informalhats["ushanka"] = /obj/item/clothing/head/ushanka
-	informalhats["TCC ushanka"] = /obj/item/clothing/head/ushanka/tcc
 	gear_tweaks += new/datum/gear_tweak/path(informalhats)
 
 /datum/gear/head/hijab
@@ -123,6 +131,10 @@
 	display_name = "taqiyah, colour select"
 	path = /obj/item/clothing/head/taqiyah
 	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/head/rastacap
+	display_name = "rastacap"
+	path = /obj/item/clothing/head/rastacap
 
 /datum/gear/head/surgical
 	display_name = "standard surgical caps"
@@ -150,3 +162,7 @@
 /datum/gear/head/tankccap
 	display_name = "padded cap"
 	path = /obj/item/clothing/head/tank
+
+/datum/gear/tactical/balaclava
+	display_name = "balaclava"
+	path = /obj/item/clothing/mask/balaclava

@@ -7,7 +7,7 @@
 	icon_living = "drone"
 	icon_dead = "drone_dead"
 	ranged = 1
-	rapid = 1
+	rapid = 0
 	speak_chance = 5
 	turns_per_move = 3
 	response_help = "pokes"
@@ -20,9 +20,18 @@
 	health = 300
 	maxHealth = 300
 	speed = 8
+	move_to_delay = 6
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
 	destroy_surroundings = 0
+
+	meat_type =     null
+	meat_amount =   0
+	bone_material = null
+	bone_amount =   0
+	skin_material = null
+	skin_amount =   0
+
 	var/datum/effect/effect/system/trail/ion_trail
 
 	//the drone randomly switches between these states if it's malfunctioning
@@ -181,16 +190,16 @@
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//rods
-		O = new /obj/item/stack/rods(loc)
+		O = new /obj/item/stack/material/rods(loc)
 		step_to(O, get_turf(pick(view(7, src))))
 		if(prob(75))
-			O = new /obj/item/stack/rods(loc)
+			O = new /obj/item/stack/material/rods(loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(50))
-			O = new /obj/item/stack/rods(loc)
+			O = new /obj/item/stack/material/rods(loc)
 			step_to(O, get_turf(pick(view(7, src))))
 		if(prob(25))
-			O = new /obj/item/stack/rods(loc)
+			O = new /obj/item/stack/material/rods(loc)
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//plasteel
@@ -207,7 +216,7 @@
 			step_to(O, get_turf(pick(view(7, src))))
 
 		//also drop dummy circuit boards deconstructable for research (loot)
-		var/obj/item/weapon/circuitboard/C
+		var/obj/item/weapon/stock_parts/circuitboard/C
 
 		//spawn 1-4 boards of a random type
 		var/spawnees = 0
@@ -266,7 +275,7 @@
 		if(spawnees & 512)
 			C = new(src.loc)
 			C.SetName("Corrupted drone morality core")
-			C.origin_tech = list(TECH_ILLEGAL = rand(3,6))
+			C.origin_tech = list(TECH_ESOTERIC = rand(3,6))
 
 	..()
 

@@ -2,7 +2,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/tournament_gear
 	head = /obj/item/clothing/head/helmet/thunderdome
 	suit = /obj/item/clothing/suit/armor/vest
-	l_hand = /obj/item/weapon/material/knife
+	l_hand = /obj/item/weapon/material/knife/combat
 	r_hand = /obj/item/weapon/gun/energy/pulse_rifle/destroyer
 	r_pocket = /obj/item/weapon/grenade/smokebomb
 	shoes = /obj/item/clothing/shoes/black
@@ -22,7 +22,7 @@
 	suit_store = /obj/item/clothing/suit/storage/det_trench
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	r_hand = /obj/item/weapon/gun/projectile/revolver
-	l_pocket = /obj/item/ammo_magazine/a357
+	l_pocket = /obj/item/ammo_magazine/speedloader
 
 /decl/hierarchy/outfit/tournament_gear/chef
 	name = "Tournament gear - Chef"
@@ -30,8 +30,8 @@
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
 	r_hand = /obj/item/weapon/material/kitchen/rollingpin
-	l_pocket = /obj/item/weapon/material/hatchet/tacknife
-	r_pocket = /obj/item/weapon/material/hatchet/tacknife
+	l_pocket = /obj/item/weapon/material/knife/combat
+	r_pocket = /obj/item/weapon/material/knife/combat
 
 /decl/hierarchy/outfit/tournament_gear/janitor
 	name = "Tournament gear - Janitor"

@@ -1,14 +1,27 @@
 #include "bearcat_areas.dm"
+#include "bearcat_jobs.dm"
+#include "bearcat_access.dm"
 
-/obj/effect/overmap/ship/bearcat
+/obj/effect/submap_landmark/joinable_submap/bearcat
+	name = "FTV Bearcat"
+	archetype = /decl/submap_archetype/derelict/bearcat
+
+/decl/submap_archetype/derelict/bearcat
+	descriptor = "derelict cargo vessel"
+	map = "Bearcat Wreck"
+	crew_jobs = list(
+		/datum/job/submap/bearcat_captain,
+		/datum/job/submap/bearcat_crewman
+	)
+
+/obj/effect/overmap/visitable/ship/bearcat
 	name = "light freighter"
 	color = "#00ffff"
 	vessel_mass = 60
-	default_delay = 3 MINUTES
-	speed_mod = 0.1 MINUTE
+	max_speed = 1/(10 SECONDS)
 	burn_delay = 10 SECONDS
 
-/obj/effect/overmap/ship/bearcat/New()
+/obj/effect/overmap/visitable/ship/bearcat/New()
 	name = "[pick("FTV","ITV","IEV")] [pick("Bearcat", "Firebug", "Defiant", "Unsinkable","Horizon","Vagrant")]"
 	for(var/area/ship/scrap/A)
 		A.name = "\improper [name] - [A.name]"
@@ -23,6 +36,20 @@
 	suffixes = list("bearcat/bearcat-1.dmm", "bearcat/bearcat-2.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/ferry/lift)
+	area_usage_test_exempted_root_areas = list(/area/ship)
+	apc_test_exempt_areas = list(
+		/area/ship/scrap/maintenance/engine/port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/engine/starboard = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/port= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/crew/hallway/starboard= NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/hallway = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/lower = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/maintenance/atmos = NO_SCRUBBER,
+		/area/ship/scrap/escape_port = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/escape_star = NO_SCRUBBER|NO_VENT,
+		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
+	)
 
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"
@@ -48,7 +75,7 @@
 /obj/effect/shuttle_landmark/lift/top
 	name = "Top Deck"
 	landmark_tag = "nav_bearcat_lift_top"
-	autoset = 1
+	flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/lift/bottom
 	name = "Lower Deck"
@@ -65,26 +92,22 @@
 	coverlocked = 0
 
 /obj/machinery/door/airlock/autoname/command
-	icon = 'icons/obj/doors/Doorhatchele.dmi'
-	req_access = list(access_heads)
+	door_color = COLOR_COMMAND_BLUE
 
 /obj/machinery/door/airlock/autoname/engineering
-	req_access = list(access_engine)
+	door_color = COLOR_AMBER
 
 /turf/simulated/floor/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
-
-/turf/simulated/floor/wood/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/tiled/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/tiled/dark/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 
 /turf/simulated/floor/tiled/white/usedup
-	initial_gas = list("carbon_dioxide" = MOLES_O2STANDARD, "nitrogen" = MOLES_N2STANDARD)
+	initial_gas = list(GAS_CO2 = MOLES_O2STANDARD, GAS_NITROGEN = MOLES_N2STANDARD)
 
 /obj/effect/landmark/deadcap
 	name = "Dead Captain"

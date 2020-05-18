@@ -7,7 +7,7 @@
 	uniform = /obj/item/clothing/under/rank/cargo
 	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses
-	l_hand = /obj/item/weapon/clipboard
+	l_hand = /obj/item/weapon/material/clipboard
 	id_type = /obj/item/weapon/card/id/cargo/head
 	pda_type = /obj/item/modular_computer/pda/cargo
 

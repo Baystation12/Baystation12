@@ -6,37 +6,44 @@ var/global/list/additional_antag_types = list()
 	var/round_description = "How did you even vote this in?"
 	var/extended_round_description = "This roundtype should not be spawned, let alone votable. Someone contact a developer and tell them the game's broken again."
 	var/config_tag = null
-	var/votable = 1
+	var/votable = TRUE
 	var/probability = 0
 
 	var/required_players = 0                 // Minimum players for round to start if voted in.
 	var/required_enemies = 0                 // Minimum antagonists for round to start.
 	var/newscaster_announcements = null
-	var/end_on_antag_death = 0               // Round will end when all antagonists are dead.
-	var/ert_disabled = 0                     // ERT cannot be called.
-	var/deny_respawn = 0	                 // Disable respawn during this round.
+	var/end_on_antag_death = FALSE           // Round will end when all antagonists are dead.
+	var/ert_disabled = FALSE                 // ERT cannot be called.
+	var/deny_respawn = FALSE	             // Disable respawn during this round.
 
-	var/list/disabled_jobs = list()           // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
+	var/list/disabled_jobs = list()          // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
 
 	var/shuttle_delay = 1                    // Shuttle transit time is multiplied by this.
-	var/auto_recall_shuttle = 0              // Will the shuttle automatically be recalled?
+	var/auto_recall_shuttle = FALSE          // Will the shuttle automatically be recalled?
 
 	var/list/antag_tags = list()             // Core antag templates to spawn.
 	var/list/antag_templates                 // Extra antagonist types to include.
-	var/list/latejoin_antag_tags = list()        // Antags that may auto-spawn, latejoin or otherwise come in midround.
-	var/round_autoantag = 0                  // Will this round attempt to periodically spawn more antagonists?
+	var/list/latejoin_antag_tags = list()    // Antags that may auto-spawn, latejoin or otherwise come in midround.
+	var/round_autoantag = FALSE              // Will this round attempt to periodically spawn more antagonists?
 	var/antag_scaling_coeff = 5              // Coefficient for scaling max antagonists to player count.
-	var/require_all_templates = 0            // Will only start if all templates are checked and can spawn.
+	var/require_all_templates = FALSE        // Will only start if all templates are checked and can spawn.
 	var/addantag_allowed = ADDANTAG_ADMIN | ADDANTAG_AUTO
 
-	var/station_was_nuked = 0                // See nuclearbomb.dm and malfunction.dm.
-	var/explosion_in_progress = 0            // Sit back and relax
+	var/station_was_nuked = FALSE            // See nuclearbomb.dm and malfunction.dm.
+	var/explosion_in_progress = FALSE        // Sit back and relax
 
 	var/event_delay_mod_moderate             // Modifies the timing of random events.
 	var/event_delay_mod_major                // As above.
 
 	var/waittime_l = 60 SECONDS				 // Lower bound on time before start of shift report
 	var/waittime_h = 180 SECONDS		     // Upper bounds on time before start of shift report
+
+	//Format: list(start_animation = duration, hit_animation, miss_animation). null means animation is skipped.
+	var/cinematic_icon_states = list(
+		"intro_nuke" = 35,
+		"summary_selfdes",
+		null
+	)
 
 /datum/game_mode/New()
 	..()
@@ -114,17 +121,13 @@ var/global/list/additional_antag_types = list()
 			return
 		var/datum/antagonist/antag = GLOB.all_antag_types_[choice]
 		if(antag)
-			if(!islist(ticker.mode.antag_templates))
-				ticker.mode.antag_templates = list()
-			ticker.mode.antag_templates |= antag
+			if(!islist(SSticker.mode.antag_templates))
+				SSticker.mode.antag_templates = list()
+			SSticker.mode.antag_templates |= antag
 			message_admins("Admin [key_name_admin(usr)] added [antag.role_text] template to game mode.")
 
-	// I am very sure there's a better way to do this, but I'm not sure what it might be. ~Z
-	spawn(1)
-		for(var/datum/admins/admin in world)
-			if(usr.client == admin.owner)
-				admin.show_game_mode(usr)
-				return
+	if (usr.client && usr.client.holder)
+		usr.client.holder.show_game_mode(usr)
 
 /datum/game_mode/proc/announce() //to be called when round starts
 	to_world("<B>The current game mode is [capitalize(name)]!</B>")
@@ -142,7 +145,7 @@ var/global/list/additional_antag_types = list()
 			antag_summary += "[antag.role_text_plural]"
 			i++
 		antag_summary += "."
-		if(antag_templates.len > 1 && master_mode != "secret")
+		if(antag_templates.len > 1 && SSticker.master_mode != "secret")
 			to_world("[antag_summary]")
 		else
 			message_admins("[antag_summary]")
@@ -186,18 +189,18 @@ var/global/list/additional_antag_types = list()
 
 /datum/game_mode/proc/refresh_event_modifiers()
 	if(event_delay_mod_moderate || event_delay_mod_major)
-		GLOB.event_manager.report_at_round_end = 1
+		SSevent.report_at_round_end = 1
 		if(event_delay_mod_moderate)
-			var/datum/event_container/EModerate = GLOB.event_manager.event_containers[EVENT_LEVEL_MODERATE]
+			var/datum/event_container/EModerate = SSevent.event_containers[EVENT_LEVEL_MODERATE]
 			EModerate.delay_modifier = event_delay_mod_moderate
 		if(event_delay_mod_moderate)
-			var/datum/event_container/EMajor = GLOB.event_manager.event_containers[EVENT_LEVEL_MAJOR]
+			var/datum/event_container/EMajor = SSevent.event_containers[EVENT_LEVEL_MAJOR]
 			EMajor.delay_modifier = event_delay_mod_major
 
 /datum/game_mode/proc/pre_setup()
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.update_current_antag_max()
-		antag.build_candidate_list() //compile a list of all eligible candidates
+		antag.update_current_antag_max(src)
+		antag.build_candidate_list(src) //compile a list of all eligible candidates
 
 		//antag roles that replace jobs need to be assigned before the job controller hands out jobs.
 		if(antag.flags & ANTAG_OVERRIDE_JOB)
@@ -228,13 +231,19 @@ var/global/list/additional_antag_types = list()
 	for(var/datum/antagonist/antag in antag_templates)
 		antag.post_spawn()
 
+	// Update goals, now that antag status and jobs are both resolved.
+	for(var/thing in SSticker.minds)
+		var/datum/mind/mind = thing
+		mind.generate_goals(mind.assigned_job, is_spawning=TRUE)
+		mind.current.show_goals()
+
 	if(evacuation_controller && auto_recall_shuttle)
 		evacuation_controller.recall = 1
 
-	feedback_set_details("round_start","[time2text(world.realtime)]")
-	if(ticker && ticker.mode)
-		feedback_set_details("game_mode","[ticker.mode]")
-	feedback_set_details("server_ip","[world.internet_address]:[world.port]")
+	SSstatistics.set_field_details("round_start","[time2text(world.realtime)]")
+	if(SSticker.mode)
+		SSstatistics.set_field_details("game_mode","[SSticker.mode]")
+	SSstatistics.set_field_details("server_ip","[world.internet_address]:[world.port]")
 	return 1
 
 /datum/game_mode/proc/fail_setup()
@@ -271,11 +280,11 @@ var/global/list/additional_antag_types = list()
 		"artifacts of eldritch horror",
 		"a brain slug infestation",
 		"killer bugs that lay eggs in the husks of the living",
-		"a deserted transport carrying xenomorph specimens",
+		"a deserted transport carrying xenofauna specimens",
 		"an emissary for the gestalt requesting a security detail",
-		"a Tajaran slave rebellion",
 		"radical Skrellian transevolutionaries",
-		"classified security operations"
+		"classified security operations",
+		"a gargantuan glowing goat"
 		)
 	command_announcement.Announce("The presence of [pick(reasons)] in the region is tying up all available local emergency resources; emergency response teams cannot be called at this time, and post-evacuation recovery efforts will be substantially delayed.","Emergency Transmission")
 
@@ -299,12 +308,10 @@ var/global/list/additional_antag_types = list()
 /datum/game_mode/proc/declare_completion()
 	set waitfor = FALSE
 
-	check_victory()
 	sleep(2)
 
 	var/list/all_antag_types = GLOB.all_antag_types_
 	for(var/datum/antagonist/antag in antag_templates)
-		antag.check_victory()
 		antag.print_player_summary()
 		sleep(2)
 	for(var/antag_type in all_antag_types)
@@ -316,6 +323,8 @@ var/global/list/additional_antag_types = list()
 	sleep(2)
 
 	uplink_purchase_repository.print_entries()
+
+	sleep(2)
 
 	var/clients = 0
 	var/surviving_humans = 0
@@ -339,28 +348,36 @@ var/global/list/additional_antag_types = list()
 			else if(isghost(M))
 				ghosts++
 
-	var/text = ""
+	var/departmental_goal_summary = SSgoals.get_roundend_summary()
+	for(var/thing in GLOB.clients)
+		var/client/client = thing
+		if(client.mob && client.mob.mind)
+			client.mob.mind.show_roundend_summary(departmental_goal_summary)
+
+	var/text = "<br><br>"
 	if(surviving_total > 0)
-		text += "<br>There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
+		text += "There [surviving_total>1 ? "were <b>[surviving_total] survivors</b>" : "was <b>one survivor</b>"]"
 		text += " (<b>[escaped_total>0 ? escaped_total : "none"] [evacuation_controller.emergency_evacuation ? "escaped" : "transferred"]</b>) and <b>[ghosts] ghosts</b>.<br>"
 	else
 		text += "There were <b>no survivors</b> (<b>[ghosts] ghosts</b>)."
+
 	to_world(text)
 
 	if(clients > 0)
-		feedback_set("round_end_clients",clients)
+		SSstatistics.set_field("round_end_clients",clients)
 	if(ghosts > 0)
-		feedback_set("round_end_ghosts",ghosts)
+		SSstatistics.set_field("round_end_ghosts",ghosts)
 	if(surviving_humans > 0)
-		feedback_set("survived_human",surviving_humans)
+		SSstatistics.set_field("survived_human",surviving_humans)
 	if(surviving_total > 0)
-		feedback_set("survived_total",surviving_total)
+		SSstatistics.set_field("survived_total",surviving_total)
 	if(escaped_humans > 0)
-		feedback_set("escaped_human",escaped_humans)
+		SSstatistics.set_field("escaped_human",escaped_humans)
 	if(escaped_total > 0)
-		feedback_set("escaped_total",escaped_total)
+		SSstatistics.set_field("escaped_total",escaped_total)
 
 	send2mainirc("A round of [src.name] has ended - [surviving_total] survivor\s, [ghosts] ghost\s.")
+	SSwebhooks.send(WEBHOOK_ROUNDEND, list("survivors" = surviving_total, "escaped" = escaped_total, "ghosts" = ghosts))
 
 	return 0
 
@@ -377,7 +394,7 @@ var/global/list/additional_antag_types = list()
 		return candidates
 
 	// If this is being called post-roundstart then it doesn't care about ready status.
-	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
+	if(GAME_STATE == RUNLEVEL_GAME)
 		for(var/mob/player in GLOB.player_list)
 			if(!player.client)
 				continue
@@ -402,7 +419,7 @@ var/global/list/additional_antag_types = list()
 		// If we don't have enough antags, draft people who voted for the round.
 		if(candidates.len < required_enemies)
 			for(var/mob/new_player/player in players)
-				if(!antag_id || !(antag_id in player.client.prefs.never_be_special_role))
+				if(!antag_id || ((antag_id in player.client.prefs.be_special_role) || (antag_id in player.client.prefs.may_be_special_role)))
 					log_debug("[player.key] has not selected never for this role, so we are drafting them.")
 					candidates += player.mind
 					players -= player
@@ -446,8 +463,30 @@ var/global/list/additional_antag_types = list()
 	shuffle(antag_templates) //In the case of multiple antag types
 	newscaster_announcements = pick(newscaster_standard_feeds)
 
-/datum/game_mode/proc/check_victory()
-	return
+// Manipulates the end-game cinematic in conjunction with GLOB.cinematic
+/datum/game_mode/proc/nuke_act(obj/screen/cinematic_screen, station_missed = 0)
+	if(!cinematic_icon_states)
+		return
+	if(station_missed < 2)
+		var/intro = cinematic_icon_states[1]
+		if(intro)
+			flick(intro,cinematic_screen)
+			sleep(cinematic_icon_states[intro])
+		var/end = cinematic_icon_states[3]
+		var/to_flick = "station_intact_fade_red"
+		if(!station_missed)
+			end = cinematic_icon_states[2]
+			to_flick = "station_explode_fade_red"
+			for(var/mob/living/M in GLOB.living_mob_list_)
+				if(is_station_turf(get_turf(M)))
+					M.death()//No mercy
+		if(end)
+			flick(to_flick,cinematic_screen)
+			cinematic_screen.icon_state = end
+
+	else
+		sleep(50)
+	sound_to(world, sound('sound/effects/explosionfar.ogg'))
 
 //////////////////////////
 //Reports player logouts//
@@ -496,16 +535,6 @@ proc/display_roundstart_logout_report()
 	for(var/mob/M in SSmobs.mob_list)
 		if(M.client && M.client.holder)
 			to_chat(M, msg)
-proc/get_nt_opposed()
-	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in GLOB.player_list)
-		if(man.client)
-			if(man.client.prefs.nanotrasen_relation == COMPANY_OPPOSED)
-				dudes += man
-			else if(man.client.prefs.nanotrasen_relation == COMPANY_SKEPTICAL && prob(50))
-				dudes += man
-	if(dudes.len == 0) return null
-	return pick(dudes)
 
 /proc/show_objectives(var/datum/mind/player)
 
@@ -526,15 +555,15 @@ proc/get_nt_opposed()
 
 	GLOB.using_map.map_info(src)
 
-	if(!ticker || !ticker.mode)
+	if(!SSticker.mode)
 		to_chat(usr, "Something is terribly wrong; there is no gametype.")
 		return
 
-	if(!ticker.hide_mode)
-		to_chat(usr, "<b>The roundtype is [capitalize(ticker.mode.name)]</b>")
-		if(ticker.mode.round_description)
-			to_chat(usr, "<i>[ticker.mode.round_description]</i>")
-		if(ticker.mode.extended_round_description)
-			to_chat(usr, "[ticker.mode.extended_round_description]")
+	if(SSticker.master_mode != "secret")
+		to_chat(usr, "<b>The roundtype is [capitalize(SSticker.mode.name)]</b>")
+		if(SSticker.mode.round_description)
+			to_chat(usr, "<i>[SSticker.mode.round_description]</i>")
+		if(SSticker.mode.extended_round_description)
+			to_chat(usr, "[SSticker.mode.extended_round_description]")
 	else
 		to_chat(usr, "<i>Shhhh</i>. It's a secret.")

@@ -11,14 +11,19 @@
 /obj/machinery/door/firedoor
 	name = "\improper Emergency Shutter"
 	desc = "Emergency air-tight shutter, capable of sealing off breached areas."
-	icon = 'icons/obj/doors/DoorHazard.dmi'
-	icon_state = "door_open"
-	req_one_access = list(access_atmospherics, access_engine_equip)
+	icon = 'icons/obj/doors/hazard/door.dmi'
+	var/panel_file = 'icons/obj/doors/hazard/panel.dmi'
+	var/welded_file = 'icons/obj/doors/hazard/welded.dmi'
+	icon_state = "open"
+	req_access = list(list(access_atmospherics, access_engine_equip))
+	autoset_access = FALSE
 	opacity = 0
 	density = 0
 	layer = BELOW_DOOR_LAYER
 	open_layer = BELOW_DOOR_LAYER
-	closed_layer = ABOVE_DOOR_LAYER
+	closed_layer = ABOVE_WINDOW_LAYER
+	movable_flags = MOVABLE_FLAG_Z_INTERACT
+	pry_mod = 0.75
 
 	//These are frequenly used with windows, so make sure zones can pass.
 	//Generally if a firedoor is at a place where there should be a zone boundery then there will be a regular door underneath it.
@@ -37,17 +42,24 @@
 	var/hatch_open = 0
 
 	power_channel = ENVIRON
-	use_power = 1
 	idle_power_usage = 5
 
 	var/list/tile_info[4]
 	var/list/dir_alerts[4] // 4 dirs, bitflags
+
+	turf_hand_priority = 2 //Lower priority than normal doors to prevent interference
 
 	// MUST be in same order as FIREDOOR_ALERT_*
 	var/list/ALERT_STATES=list(
 		"hot",
 		"cold"
 	)
+
+	blend_objects = list(/obj/machinery/door/firedoor, /obj/structure/wall_frame, /turf/unsimulated/wall, /obj/structure/window) // Objects which to blend with
+
+/obj/machinery/door/firedoor/autoset
+	autoset_access = TRUE	//subtype just to make mapping away sites with custom access usage
+	req_access = list()
 
 /obj/machinery/door/firedoor/Initialize()
 	. = ..()
@@ -72,11 +84,11 @@
 	. = ..()
 
 /obj/machinery/door/firedoor/get_material()
-	return get_material_by_name(DEFAULT_WALL_MATERIAL)
+	return SSmaterials.get_material_by_name(MATERIAL_STEEL)
 
-/obj/machinery/door/firedoor/examine(mob/user)
-	. = ..(user, 1)
-	if(!. || !density)
+/obj/machinery/door/firedoor/examine(mob/user, distance)
+	. = ..()
+	if(distance > 1 || !density)
 		return
 
 	if(pdiff >= FIREDOOR_MAX_PRESSURE_DIFF)
@@ -110,18 +122,12 @@
 			for(var/i = 2 to users_to_open.len)
 				users_to_open_string += ", [users_to_open[i]]"
 		to_chat(user, "These people have opened \the [src] during an alert: [users_to_open_string].")
+
 /obj/machinery/door/firedoor/Bumped(atom/AM)
 	if(p_open || operating)
 		return
 	if(!density)
 		return ..()
-	if(istype(AM, /obj/mecha))
-		var/obj/mecha/mecha = AM
-		if(mecha.occupant)
-			var/mob/M = mecha.occupant
-			if(world.time - M.last_bumped <= 10) return //Can bump-open one airlock per second. This is to prevent popup message spam.
-			M.last_bumped = world.time
-			attack_hand(M)
 	return 0
 
 /obj/machinery/door/firedoor/attack_hand(mob/user as mob)
@@ -142,13 +148,16 @@
 	"\The [src]", "Yes, [density ? "open" : "close"]", "No")
 	if(answer == "No")
 		return
+	var/mob/living/carbon/human/H = locate() in get_turf(src)
+	if(H)
+		user.visible_message("Someone is blocking the [src]")
+		return
 	if(user.incapacitated() || (get_dist(src, user) > 1  && !issilicon(user)))
 		to_chat(user, "Sorry, you must remain able bodied and close to \the [src] in order to use it.")
 		return
 	if(density && (stat & (BROKEN|NOPOWER))) //can still close without power
 		to_chat(user, "\The [src] is not functioning, you'll have to force it open manually.")
 		return
-
 	if(alarmed && density && lockdown && !allowed(user))
 		to_chat(user, "<span class='warning'>Access denied. Please wait for authorities to arrive, or for the alert to clear.</span>")
 		return
@@ -186,18 +195,25 @@
 	if(isWelder(C) && !repairing)
 		var/obj/item/weapon/weldingtool/W = C
 		if(W.remove_fuel(0, user))
-			blocked = !blocked
-			user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
-			"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
-			"You hear something being welded.")
 			playsound(src, 'sound/items/Welder.ogg', 100, 1)
-			update_icon()
-			return
+			if(do_after(user, 2 SECONDS, src))
+				if(!W.isOn()) return
+				blocked = !blocked
+				user.visible_message("<span class='danger'>\The [user] [blocked ? "welds" : "unwelds"] \the [src] with \a [W].</span>",\
+				"You [blocked ? "weld" : "unweld"] \the [src] with \the [W].",\
+				"You hear something being welded.")
+				playsound(src, 'sound/items/Welder.ogg', 100, 1)
+				update_icon()
+				return
+			else
+				to_chat(user, SPAN_WARNING("You must remain still to complete this task."))
+				return
 
 	if(density && isScrewdriver(C))
 		hatch_open = !hatch_open
 		user.visible_message("<span class='danger'>[user] has [hatch_open ? "opened" : "closed"] \the [src] maintenance hatch.</span>",
 									"You have [hatch_open ? "opened" : "closed"] the [src] maintenance hatch.")
+		playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 		update_icon()
 		return
 
@@ -262,7 +278,7 @@
 
 /obj/machinery/door/firedoor/deconstruct(mob/user, var/moved = FALSE)
 	if (stat & BROKEN)
-		new /obj/item/weapon/circuitboard/broken(src.loc)
+		new /obj/item/weapon/stock_parts/circuitboard/broken(src.loc)
 	else
 		new/obj/item/weapon/airalarm_electronics(src.loc)
 
@@ -277,8 +293,6 @@
 
 // CHECK PRESSURE
 /obj/machinery/door/firedoor/Process()
-	..()
-
 	if(density && next_process_time <= world.time)
 		next_process_time = world.time + 100		// 10 second delays between process updates
 		var/changed = 0
@@ -334,6 +348,11 @@
 	return
 
 /obj/machinery/door/firedoor/close()
+	// if there are humans on the tile, don't close
+	var/mob/living/carbon/human/H = locate() in get_turf(src)
+	if(H)
+		return
+
 	latetoggle()
 	return ..()
 
@@ -347,7 +366,7 @@
 		if(stat & (BROKEN|NOPOWER))
 			return //needs power to open unless it was forced
 		else
-			use_power(360)
+			use_power_oneoff(360)
 	else
 		log_and_message_admins("has forced open an emergency shutter.")
 	latetoggle()
@@ -367,34 +386,45 @@
 		if(. & AIR_BLOCKED)
 			continue
 		var/area/A = get_area(neighbour)
-		if(!A.master_air_alarm)
-			return
 		if(A.atmosalm)
+			return
+		var/obj/machinery/alarm/alarm = locate() in A
+		if(!alarm || (alarm.stat & (NOPOWER|BROKEN)))
 			return
 	return TRUE
 
 /obj/machinery/door/firedoor/do_animate(animation)
 	switch(animation)
 		if("opening")
-			flick("door_opening", src)
+			flick("opening", src)
 		if("closing")
-			flick("door_closing", src)
+			flick("closing", src)
 	return
 
 
-/obj/machinery/door/firedoor/update_icon()
+/obj/machinery/door/firedoor/on_update_icon()
+	var/icon/lights_overlay
+	var/icon/panel_overlay
+	var/icon/weld_overlay
+
 	overlays.Cut()
 	set_light(0)
 	var/do_set_light = FALSE
 
+	if(connections in list(NORTH, SOUTH, NORTH|SOUTH))
+		if(connections in list(WEST, EAST, EAST|WEST))
+			set_dir(SOUTH)
+		else
+			set_dir(EAST)
+	else
+		set_dir(SOUTH)
+
 	if(density)
-		icon_state = "door_closed"
+		icon_state = "closed"
 		if(hatch_open)
-			overlays += "hatch"
-		if(blocked)
-			overlays += "welded"
+			overlays = panel_overlay
 		if(pdiff_alert)
-			overlays += "palert"
+			lights_overlay += "palert"
 			do_set_light = TRUE
 		if(dir_alerts)
 			for(var/d=1;d<=4;d++)
@@ -404,54 +434,14 @@
 						overlays += new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir)
 						do_set_light = TRUE
 	else
-		icon_state = "door_open"
-		if(blocked)
-			overlays += "welded_open"
+		icon_state = "open"
+
+	if(blocked)
+		weld_overlay = welded_file
 
 	if(do_set_light)
 		set_light(0.25, 0.1, 1, 2, COLOR_SUN)
 
-//These are playing merry hell on ZAS.  Sorry fellas :(
-
-/obj/machinery/door/firedoor/border_only
-/*
-	icon = 'icons/obj/doors/edge_Doorfire.dmi'
-	glass = 1 //There is a glass window so you can see through the door
-			  //This is needed due to BYOND limitations in controlling visibility
-	heat_proof = 1
-	air_properties_vary_with_direction = 1
-
-	CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-		if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
-			return 1
-		if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
-			if(air_group) return 0
-			return !density
-		else
-			return 1
-
-	CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-		if(istype(mover) && mover.checkpass(PASS_FLAG_GLASS))
-			return 1
-		if(get_dir(loc, target) == dir)
-			return !density
-		else
-			return 1
-
-
-	update_nearby_tiles(need_rebuild)
-		if(!air_master) return 0
-
-		var/turf/simulated/source = loc
-		var/turf/simulated/destination = get_step(source,dir)
-
-		update_heat_protection(loc)
-
-		if(istype(source)) air_master.tiles_to_update += source
-		if(istype(destination)) air_master.tiles_to_update += destination
-		return 1
-*/
-
-/obj/machinery/door/firedoor/multi_tile
-	icon = 'icons/obj/doors/DoorHazard2x1.dmi'
-	width = 2
+	overlays += panel_overlay
+	overlays += weld_overlay
+	overlays += lights_overlay

@@ -2,8 +2,6 @@
 	//SECURITY//
 	////////////
 #define UPLOAD_LIMIT		10485760	//Restricts client uploads to the server to 10MB //Boosted this thing. What's the worst that can happen?
-#define MIN_CLIENT_VERSION	0		//Just an ambiguously low version for now, I don't want to suddenly stop people playing.
-									//I would just like the code ready should it ever need to be used.
 
 //#define TOPIC_DEBUGGING 1
 
@@ -25,6 +23,8 @@
 /client/Topic(href, href_list, hsrc)
 	if(!usr || usr != mob)	//stops us calling Topic for somebody else's client. Also helps prevent usr=null
 		return
+	if(!user_acted(src))
+		return
 
 	#if defined(TOPIC_DEBUGGING)
 	log_debug("[src]'s Topic: [href] destined for [hsrc].")
@@ -44,7 +44,7 @@
 
 	//search the href for script injection
 	if( findtext(href,"<script",1,0) )
-		world.log << "Attempted use of scripts within a topic call, by [src]"
+		to_world_log("Attempted use of scripts within a topic call, by [src]")
 		message_admins("Attempted use of scripts within a topic call, by [src]")
 		//qdel(usr)
 		return
@@ -78,8 +78,6 @@
 
 		ticket.close(client_repository.get_lite_client(usr.client))
 
-
-
 	//Logs all hrefs
 	if(config && config.log_hrefs && href_logfile)
 		to_chat(href_logfile, "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>")
@@ -90,10 +88,19 @@
 		if("prefs")		return prefs.process_link(usr,href_list)
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
 
+	if(codex_topic(href, href_list))
+		return
+
+	if(href_list["SDQL_select"])
+		debug_variables(locate(href_list["SDQL_select"]))
+		return
+
 	..()	//redirect to hsrc.Topic()
 
 //This stops files larger than UPLOAD_LIMIT being sent from client to server via input(), client.Import() etc.
 /client/AllowUpload(filename, filelength)
+	if(!user_acted(src))
+		return 0
 	if(filelength > UPLOAD_LIMIT)
 		to_chat(src, "<font color='red'>Error: AllowUpload(): File Upload too large. Upload Limit: [UPLOAD_LIMIT/1024]KiB.</font>")
 		return 0
@@ -113,10 +120,24 @@
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
-	if(!(connection in list("seeker", "web")))					//Invalid connection type.
-		return null
-	if(byond_version < MIN_CLIENT_VERSION)		//Out of date client.
-		return null
+	switch (connection)
+		if ("seeker", "web") // check for invalid connection type. do nothing if valid
+		else return null
+	#if DM_VERSION >= 512
+	var/bad_version = config.minimum_byond_version && byond_version < config.minimum_byond_version
+	var/bad_build = config.minimum_byond_build && byond_build < config.minimum_byond_build
+	if (bad_build || bad_version)
+		to_chat(src, "You are attempting to connect with a out of date version of BYOND. Please update to the latest version at http://www.byond.com/ before trying again.")
+		qdel(src)
+		return
+
+	if("[byond_version].[byond_build]" in config.forbidden_versions)
+		_DB_staffwarn_record(ckey, "Tried to connect with broken and possibly exploitable BYOND build.")
+		to_chat(src, "You are attempting to connect with a broken and possibly exploitable BYOND build. Please update to the latest version at http://www.byond.com/ before trying again.")
+		qdel(src)
+		return
+
+	#endif
 
 	if(!config.guests_allowed && IsGuestKey(key))
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
@@ -149,16 +170,14 @@
 		holder.owner = src
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
-	prefs = preferences_datums[ckey]
+	prefs = SScharacter_setup.preferences_datums[ckey]
 	if(!prefs)
 		prefs = new /datum/preferences(src)
-		preferences_datums[ckey] = prefs
 	prefs.last_ip = address				//these are gonna be used for banning
 	prefs.last_id = computer_id			//these are gonna be used for banning
 	apply_fps(prefs.clientfps)
 
 	. = ..()	//calls mob.Login()
-	prefs.sanitize_preferences()
 
 	GLOB.using_map.map_info(src)
 
@@ -167,7 +186,6 @@
 		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")
 		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
 		to_chat(src, "<br>")
-
 
 	if(holder)
 		add_admin_verbs()
@@ -311,9 +329,7 @@
 	query_accesslog.Execute()
 
 
-#undef TOPIC_SPAM_DELAY
 #undef UPLOAD_LIMIT
-#undef MIN_CLIENT_VERSION
 
 //checks if a client is afk
 //3000 frames = 5 minutes
@@ -336,7 +352,6 @@
 	statpanel("Status")
 
 	. = ..()
-	sleep(1)
 
 //send resources to the client. It's here in its own proc so we can move it around easiliy if need be
 /client/proc/send_resources()
@@ -350,9 +365,16 @@
 		'html/images/bluentlogo.png',
 		'html/images/sollogo.png',
 		'html/images/terralogo.png',
-		'html/images/talisman.png'
+		'html/images/talisman.png',
+		'html/images/exologo.png',
+		'html/images/xynlogo.png',
+		'html/images/daislogo.png',
+		'html/images/eclogo.png',
+		'html/images/fleetlogo.png',
+		'html/images/sfplogo.png'
 		)
 
+	var/decl/asset_cache/asset_cache = decls_repository.get_decl(/decl/asset_cache)
 	spawn (10) //removing this spawn causes all clients to not get verbs.
 		//Precache the client with all other assets slowly, so as to not block other browse() calls
 		getFilesSlow(src, asset_cache.cache, register_asset = FALSE)
@@ -376,3 +398,9 @@ client/verb/character_setup()
 /client/proc/apply_fps(var/client_fps)
 	if(world.byond_version >= 511 && byond_version >= 511 && client_fps >= CLIENT_MIN_FPS && client_fps <= CLIENT_MAX_FPS)
 		vars["fps"] = prefs.clientfps
+
+/client/MouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+	. = ..()
+	var/mob/living/M = mob
+	if(istype(M))
+		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)

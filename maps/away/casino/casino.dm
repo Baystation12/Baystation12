@@ -1,15 +1,14 @@
 #include "casino_areas.dm"
 #include "../mining/mining_areas.dm"
 
-/obj/effect/overmap/ship/casino
+/obj/effect/overmap/visitable/ship/casino
 	name = "passenger liner"
 	desc = "Sensors detect an undamaged vessel without any signs of activity."
 	color = "#bd6100"
-	vessel_mass = 100
-	default_delay = 30 SECONDS
-	speed_mod = 5 SECONDS
-	burn_delay = 20 SECONDS
-	generic_waypoints = list(
+	vessel_mass = 5000
+	max_speed = 1/(2 SECONDS)
+	burn_delay = 1 SECOND
+	initial_generic_waypoints = list(
 		"nav_casino_1",
 		"nav_casino_2",
 		"nav_casino_3",
@@ -17,11 +16,11 @@
 		"nav_casino_antag",
 		"nav_casino_hangar",
 	)
-	restricted_waypoints = list(
+	initial_restricted_waypoints = list(
 		"Casino Cutter" = list("nav_casino_hangar"),
 	)
 
-/obj/effect/overmap/ship/casino/New(nloc, max_x, max_y)
+/obj/effect/overmap/visitable/ship/casino/New(nloc, max_x, max_y)
 	name = "IPV [pick("Fortuna","Gold Rush","Ebisu","Lucky Paw","Four Leaves")], \a [name]"
 	..()
 
@@ -32,6 +31,13 @@
 	suffixes = list("casino/casino.dmm")
 	cost = 1
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/casino_cutter)
+	area_usage_test_exempted_root_areas = list(/area/casino)
+	apc_test_exempt_areas = list(
+		/area/casino/casino_hangar = NO_SCRUBBER,
+		/area/casino/casino_cutter = NO_SCRUBBER|NO_VENT,
+		/area/casino/casino_solar_control = NO_SCRUBBER,
+		/area/casino/casino_maintenance = NO_SCRUBBER|NO_VENT
+	)
 
 /obj/effect/shuttle_landmark/nav_casino/nav1
 	name = "Casino Ship Navpoint #1"
@@ -149,20 +155,20 @@
 	icon_state = "craps_down"
 
 //========================used bullet casings=======================
-/obj/item/ammo_casing/a556/used/Initialize()
+/obj/item/ammo_casing/rifle/used/Initialize()
 	. = ..()
 	expend()
 	pixel_x = rand(-10, 10)
 	pixel_y = rand(-10, 10)
 
 
-/obj/item/ammo_casing/c45/used/Initialize()
+/obj/item/ammo_casing/pistol/used/Initialize()
 	. = ..()
 	expend()
 	pixel_x = rand(-10, 10)
 	pixel_y = rand(-10, 10)
 
-/obj/item/ammo_casing/a50/used/Initialize()
+/obj/item/ammo_casing/pistol/magnum/used/Initialize()
 	. = ..()
 	expend()
 	pixel_x = rand(-10, 10)

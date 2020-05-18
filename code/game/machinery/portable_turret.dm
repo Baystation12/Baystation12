@@ -14,7 +14,6 @@
 	anchored = 1
 
 	density = 0
-	use_power = 1				//this turret uses and requires power
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
@@ -42,7 +41,7 @@
 	var/check_records = 1	//checks if a security record exists at all
 	var/check_weapons = 0	//checks if it can shoot people that have a weapon they aren't authorized to have
 	var/check_access = 1	//if this is active, the turret shoots everything that does not meet the access requirements
-	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
+	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms
 	var/check_synth	 = 0 	//if active, will shoot at anything not an AI or cyborg
 	var/ailock = 0 			// AI cannot use this
 
@@ -60,6 +59,8 @@
 	var/wrenching = 0
 	var/last_target			//last target fired at, prevents turrets from erratically firing at all valid targets in range
 
+	req_access = list(list(access_security, access_bridge))
+
 /obj/machinery/porta_turret/crescent
 	enabled = 0
 	ailock = 1
@@ -69,6 +70,7 @@
 	check_records = 1
 	check_weapons = 1
 	check_anomalies = 1
+	req_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/stationary
 	ailock = 1
@@ -83,13 +85,11 @@
 	maxhealth = round(initial(maxhealth) * 1.5)
 	shot_delay = round(initial(shot_delay) / 2)
 	auto_repair = 1
-	active_power_usage = round(initial(active_power_usage) * 5)
+	change_power_consumption(round(initial(active_power_usage) * 5), POWER_USE_ACTIVE)
 	return 1
 
 /obj/machinery/porta_turret/New()
 	..()
-	req_access.Cut()
-	req_one_access = list(access_security, access_heads)
 
 	//Sets up a spark system
 	spark_system = new /datum/effect/effect/system/spark_spread
@@ -97,11 +97,6 @@
 	spark_system.attach(src)
 
 	setup()
-
-/obj/machinery/porta_turret/crescent/New()
-	..()
-	req_one_access.Cut()
-	req_access = list(access_cent_specops)
 
 /obj/machinery/porta_turret/Destroy()
 	qdel(spark_system)
@@ -161,7 +156,7 @@
 
 var/list/turret_icons
 
-/obj/machinery/porta_turret/update_icon()
+/obj/machinery/porta_turret/on_update_icon()
 	if(!turret_icons)
 		turret_icons = list()
 		turret_icons["open"] = image(icon, "openTurretCover")
@@ -195,17 +190,9 @@ var/list/turret_icons
 
 	return 0
 
-/obj/machinery/porta_turret/attack_ai(mob/user)
-	if(isLocked(user))
-		return
-
+/obj/machinery/porta_turret/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/porta_turret/attack_hand(mob/user)
-	if(isLocked(user))
-		return
-
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/porta_turret/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -225,7 +212,7 @@ var/list/turret_icons
 		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
 		data["settings"] = settings
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "turret_control.tmpl", "Turret Controls", 500, 300)
 		ui.set_initial_data(data)
@@ -279,11 +266,11 @@ var/list/turret_icons
 /obj/machinery/porta_turret/power_change()
 	if(powered())
 		stat &= ~NOPOWER
-		update_icon()
+		queue_icon_update()
 	else
 		spawn(rand(0, 15))
 			stat |= NOPOWER
-			update_icon()
+			queue_icon_update()
 
 
 /obj/machinery/porta_turret/attackby(obj/item/I, mob/user)
@@ -414,12 +401,15 @@ var/list/turret_icons
 		if(prob(5))
 			emagged = 1
 
-		enabled=0
-		spawn(rand(60,600))
-			if(!enabled)
-				enabled=1
+	disabled = 1
+	var/power = 4 - severity
+	addtimer(CALLBACK(src,/obj/machinery/porta_turret/proc/enable), rand(60*power,600*power))
 
 	..()
+
+/obj/machinery/porta_turret/proc/enable()
+	if(disabled)
+		disabled = 0
 
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
@@ -435,14 +425,11 @@ var/list/turret_icons
 
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
-	stat |= BROKEN	//enables the BROKEN bit
+	set_broken(TRUE)
 	spark_system.start()	//creates some sparks because they look cool
-	update_icon()
 	atom_flags |= ATOM_FLAG_CLIMBABLE // they're now climbable
 
 /obj/machinery/porta_turret/Process()
-	//the main machinery process
-
 	if(stat & (NOPOWER|BROKEN))
 		//if the turret has no power or is broken, make the turret pop down if it hasn't already
 		popDown()
@@ -461,11 +448,10 @@ var/list/turret_icons
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
-			spawn()
-				popDown() // no valid targets, close the cover
+			popDown() // no valid targets, close the cover
 
 	if(auto_repair && (health < maxhealth))
-		use_power(20000)
+		use_power_oneoff(20000)
 		health = min(health+1, maxhealth) // 1HP for 20kJ
 
 /obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
@@ -513,9 +499,6 @@ var/list/turret_icons
 
 	if(isanimal(L) || issmall(L)) // Animals are not so dangerous
 		return check_anomalies ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
-
-	if(isxenomorph(L) || isalien(L)) // Xenos are dangerous
-		return check_anomalies ? TURRET_PRIORITY_TARGET	: TURRET_NOT_TARGET
 
 	if(ishuman(L))	//if the target is a human, analyze threat level
 		if(assess_perp(L) < 4)
@@ -566,6 +549,7 @@ var/list/turret_icons
 	update_icon()
 
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
+	set waitfor = FALSE
 	last_target = null
 	if(disabled)
 		return
@@ -632,7 +616,7 @@ var/list/turret_icons
 
 	// Lethal/emagged turrets use twice the power due to higher energy beams
 	// Emagged turrets again use twice as much power due to higher firing rates
-	use_power(reqpower * (2 * (emagged || lethal)) * (2 * emagged))
+	use_power_oneoff(reqpower * (2 * (emagged || lethal)) * (2 * emagged))
 
 	//Turrets aim for the center of mass by default.
 	//If the target is grabbing someone then the turret smartly aims for extremities
@@ -704,7 +688,7 @@ var/list/turret_icons
 				return
 
 		if(1)
-			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
+			if(istype(I, /obj/item/stack/material) && I.get_material_name() == MATERIAL_STEEL)
 				var/obj/item/stack/M = I
 				if(M.use(2))
 					to_chat(user, "<span class='notice'>You add some metal armor to the interior frame.</span>")
@@ -792,7 +776,7 @@ var/list/turret_icons
 			//attack_hand() removes the prox sensor
 
 		if(6)
-			if(istype(I, /obj/item/stack/material) && I.get_material_name() == DEFAULT_WALL_MATERIAL)
+			if(istype(I, /obj/item/stack/material) && I.get_material_name() == MATERIAL_STEEL)
 				var/obj/item/stack/M = I
 				if(M.use(2))
 					to_chat(user, "<span class='notice'>You add some metal armor to the exterior frame.</span>")

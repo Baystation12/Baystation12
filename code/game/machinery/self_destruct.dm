@@ -9,66 +9,64 @@
 	var/armed = 0
 	var/damaged = 0
 
-/obj/machinery/self_destruct/attackby(obj/item/W as obj, mob/usr as mob)
+/obj/machinery/self_destruct/attackby(obj/item/W as obj, mob/user as mob)
 	if(isWelder(W))
 		if(damaged)
-			usr.visible_message("[usr] begins to repair [src].", "You begin repairing [src].")
+			user.visible_message("[user] begins to repair [src].", "You begin repairing [src].")
 			if(do_after(usr, 100, src))
 				var/obj/item/weapon/weldingtool/w
 				if(w.burn_fuel(10))
 					damaged = 0
-					usr.visible_message("[usr] repairs [src].", "You repair [src].")
+					user.visible_message("[user] repairs [src].", "You repair [src].")
 				else
-					to_chat(usr, "<span class='warning'>There is not enough fuel to repair [src].</span>")
+					to_chat(user, "<span class='warning'>There is not enough fuel to repair [src].</span>")
 				return
 	if(istype(W, /obj/item/weapon/nuclear_cylinder))
 		if(damaged)
-			to_chat(usr, "<span class='warning'>[src] is damaged, you cannot place the cylinder.</span>")
+			to_chat(user, "<span class='warning'>[src] is damaged, you cannot place the cylinder.</span>")
 			return
 		if(cylinder)
-			to_chat(usr, "There is already a cylinder here.")
+			to_chat(user, "There is already a cylinder here.")
 			return
-		usr.visible_message("[usr] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
-		if(do_after(usr, 80, src))
-			usr.drop_from_inventory(W, src)
+		user.visible_message("[user] begins to carefully place [W] onto the Inserter.", "You begin to carefully place [W] onto the Inserter.")
+		if(do_after(user, 80, src) && user.unEquip(W, src))
 			cylinder = W
 			density = 1
-			usr.visible_message("[usr] places [W] onto the Inserter.", "You place [W] onto the Inserter.")
+			user.visible_message("[user] places [W] onto the Inserter.", "You place [W] onto the Inserter.")
 			update_icon()
 			return
 	..()
 
-/obj/machinery/self_destruct/attack_hand(mob/usr as mob)
+/obj/machinery/self_destruct/physical_attack_hand(mob/user)
 	if(cylinder)
+		. = TRUE
 		if(armed)
 			if(damaged)
-				to_chat(usr, "<span class='warning'>The inserter has been damaged, unable to disarm.</span>")
+				to_chat(user, "<span class='warning'>The inserter has been damaged, unable to disarm.</span>")
 				return
 			var/obj/machinery/nuclearbomb/nuke = locate(/obj/machinery/nuclearbomb/station) in get_area(src)
 			if(!nuke)
-				to_chat(usr, "<span class='warning'>Unable to interface with the self destruct terminal, unable to disarm.</span>")
+				to_chat(user, "<span class='warning'>Unable to interface with the self destruct terminal, unable to disarm.</span>")
 				return
 			if(nuke.timing)
-				to_chat(usr, "<span class='warning'>The self destruct sequence is in progress, unable to disarm.</span>")
+				to_chat(user, "<span class='warning'>The self destruct sequence is in progress, unable to disarm.</span>")
 				return
-			usr.visible_message("[usr] begins extracting [cylinder].", "You begin extracting [cylinder].")
-			if(do_after(usr, 40, src))
-				usr.visible_message("[usr] extracts [cylinder].", "You extract [cylinder].")
+			user.visible_message("[user] begins extracting [cylinder].", "You begin extracting [cylinder].")
+			if(do_after(user, 40, src))
+				user.visible_message("[user] extracts [cylinder].", "You extract [cylinder].")
 				armed = 0
 				density = 1
 				flick("unloading", src)
 		else if(!damaged)
-			usr.visible_message("[usr] begins to arm [cylinder].", "You begin to arm [cylinder].")
-			if(do_after(usr, 40, src))
+			user.visible_message("[user] begins to arm [cylinder].", "You begin to arm [cylinder].")
+			if(do_after(user, 40, src))
 				armed = 1
 				density = 0
-				usr.visible_message("[usr] arms [cylinder].", "You arm [cylinder].")
+				user.visible_message("[user] arms [cylinder].", "You arm [cylinder].")
 				flick("loading", src)
 				playsound(src.loc,'sound/effects/caution.ogg',50,1,5)
 		update_icon()
-		src.add_fingerprint(usr)
-	else
-		..()
+		src.add_fingerprint(user)
 
 /obj/machinery/self_destruct/MouseDrop(atom/over)
 	if(!CanMouseDrop(over, usr))
@@ -102,19 +100,18 @@
 		src.visible_message("<span class='warning'>[src] dents and chars.</span>")
 		damaged = 1
 
-/obj/machinery/self_destruct/examine(mob/usr)
+/obj/machinery/self_destruct/examine(mob/user)
 	. = ..()
 	if(damaged)
-		to_chat(usr, "<span class='warning'>[src] is damaged, it needs repairs.</span>")
+		to_chat(user, "<span class='warning'>[src] is damaged, it needs repairs.</span>")
 		return
 	if(armed)
-		to_chat(usr, "[src] is armed and ready.")
+		to_chat(user, "[src] is armed and ready.")
 		return
 	if(cylinder)
-		to_chat(usr, "[src] is loaded and ready to be armed.")
-		return
+		to_chat(user, "[src] is loaded and ready to be armed.")
 
-/obj/machinery/self_destruct/update_icon()
+/obj/machinery/self_destruct/on_update_icon()
 	if(armed)
 		icon_state = "armed"
 	else if(cylinder)

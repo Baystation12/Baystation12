@@ -11,7 +11,7 @@
 	possible_transfer_amounts = null
 	w_class = ITEM_SIZE_TINY
 	slot_flags = SLOT_EARS
-	volume = 60
+	volume = 30
 
 /obj/item/weapon/reagent_containers/pill/New()
 	..()
@@ -25,8 +25,7 @@
 		if(!M.can_eat(src))
 			return
 
-		to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
-		M.drop_from_inventory(src) //icon update
+		M.visible_message(SPAN_NOTICE("[M] swallows a pill."), SPAN_NOTICE("You swallow \the [src]."), null, 2)
 		if(reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 		qdel(src)
@@ -36,12 +35,11 @@
 		if(!M.can_force_feed(user, src))
 			return
 
-		user.visible_message("<span class='warning'>[user] attempts to force [M] to swallow \the [src].</span>")
+		user.visible_message(SPAN_WARNING("[user] attempts to force [M] to swallow \the [src]."))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(!do_mob(user, M))
 			return
-		user.drop_from_inventory(src) //icon update
-		user.visible_message("<span class='warning'>[user] forces [M] to swallow \the [src].</span>")
+		user.visible_message(SPAN_WARNING("[user] forces [M] to swallow \the [src]."))
 		var/contained = reagentlist()
 		admin_attack_log(user, M, "Fed the victim with [name] (Reagents: [contained])", "Was fed [src] (Reagents: [contained])", "used [src] (Reagents: [contained]) to feed")
 		if(reagents.total_volume)
@@ -86,6 +84,7 @@
 	name = "toxins pill"
 	desc = "Highly toxic."
 	icon_state = "pill4"
+	volume = 50
 /obj/item/weapon/reagent_containers/pill/tox/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin, 50)
@@ -96,6 +95,7 @@
 	name = "strange pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
+	volume = 50
 /obj/item/weapon/reagent_containers/pill/cyanide/New()
 	..()
 	reagents.add_reagent(/datum/reagent/toxin/cyanide, 50)
@@ -105,10 +105,10 @@
 	name = "Adminordrazine pill"
 	desc = "It's magic. We don't have to explain it."
 	icon_state = "pillA"
-/obj/item/weapon/reagent_containers/pill/adminordrazine/New()
-	..()
-	reagents.add_reagent(/datum/reagent/adminordrazine, 50)
 
+/obj/item/weapon/reagent_containers/pill/adminordrazine/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/adminordrazine, 1)
 
 /obj/item/weapon/reagent_containers/pill/stox
 	name = "Soporific (15u)"
@@ -232,6 +232,15 @@
 	reagents.add_reagent(/datum/reagent/hyperzine, 5)
 	color = reagents.get_color()
 
+/obj/item/weapon/reagent_containers/pill/three_eye
+	name = "strange pill"
+	desc = "The surface of this unlabelled pill crawls against your skin."
+	icon_state = "pill2"
+
+/obj/item/weapon/reagent_containers/pill/three_eye/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/three_eye, 10)
+	color = reagents.get_color()
 
 /obj/item/weapon/reagent_containers/pill/spaceacillin
 	name = "Spaceacillin (10u)"
@@ -314,6 +323,15 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 	reagents.add_reagent(/datum/reagent/hyronalin, 7)
 	color = reagents.get_color()
 
+/obj/item/weapon/reagent_containers/pill/antirad
+	name = "AntiRad"
+	desc = "Used to treat radiation poisoning."
+	icon_state = "yellow"
+/obj/item/weapon/reagent_containers/pill/antirad/New()
+	..()
+	reagents.add_reagent(/datum/reagent/hyronalin, 5)
+	reagents.add_reagent(/datum/reagent/dylovene, 10)
+
 
 /obj/item/weapon/reagent_containers/pill/sugariron
 	name = "Sugar-Iron (10u)"
@@ -328,8 +346,46 @@ obj/item/weapon/reagent_containers/pill/noexcutite/New()
 /obj/item/weapon/reagent_containers/pill/detergent
 	name = "detergent pod"
 	desc = "Put in water to get space cleaner. Do not eat. Really."
-	icon_state = "pill21"
+	icon_state = "pod21"
+	var/smell_clean_time = 10 MINUTES
 
 /obj/item/weapon/reagent_containers/pill/detergent/New()
 	..()
 	reagents.add_reagent(/datum/reagent/ammonia, 30)
+
+/obj/item/weapon/reagent_containers/pill/pod
+	name = "master flavorpod item"
+	desc = "A cellulose pod containing some kind of flavoring."
+	icon_state = "pill4"
+
+/obj/item/weapon/reagent_containers/pill/pod/cream
+	name = "creamer pod"
+
+/obj/item/weapon/reagent_containers/pill/pod/cream/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/milk, 5)
+	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/pod/cream_soy
+	name = "non-dairy creamer pod"
+
+/obj/item/weapon/reagent_containers/pill/pod/cream_soy/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/milk/soymilk, 5)
+	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/pod/orange
+	name = "orange flavorpod"
+
+/obj/item/weapon/reagent_containers/pill/pod/orange/New()
+	..()
+	reagents.add_reagent(/datum/reagent/drink/juice/orange, 5)
+	color = reagents.get_color()
+
+/obj/item/weapon/reagent_containers/pill/pod/mint
+	name = "mint flavorpod"
+
+/obj/item/weapon/reagent_containers/pill/pod/mint/New()
+	..()
+	reagents.add_reagent(/datum/reagent/nutriment/mint, 1) //mint is used as a catalyst in all reactions as of writing
+	color = reagents.get_color()

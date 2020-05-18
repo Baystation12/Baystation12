@@ -23,6 +23,9 @@
 	return 0
 
 /mob/living/simple_animal/hostile/commanded/Life()
+	. = ..()
+	if(!.)
+		return FALSE
 	while(command_buffer.len > 0)
 		var/mob/speaker = command_buffer[1]
 		var/text = command_buffer[2]
@@ -53,11 +56,6 @@
 			continue
 		if(isliving(A))
 			M = A
-		if(istype(A,/obj/mecha))
-			var/obj/mecha/mecha = A
-			if(!mecha.occupant)
-				continue
-			M = mecha.occupant
 		if(M && M.stat)
 			continue
 		if(mode == "specific")
@@ -87,7 +85,7 @@
 		if(findtext(text,command))
 			switch(command)
 				if("stay")
-					if(stay_command(speaker,text)) //find a valid command? Stop. Dont try and find more.
+					if(stay_command(speaker,text)) //find a valid command? Stop. Don't try and find more.
 						break
 				if("stop")
 					if(stop_command(speaker,text))
@@ -174,7 +172,7 @@
 /mob/living/simple_animal/hostile/commanded/hit_with_weapon(obj/item/O, mob/living/user, var/effective_force, var/hit_zone)
 	//if they attack us, we want to kill them. None of that "you weren't given a command so free kill" bullshit.
 	. = ..()
-	if(!. && retribution)
+	if(. && retribution)
 		stance = HOSTILE_STANCE_ATTACK
 		target_mob = user
 		allowed_targets += user //fuck this guy in particular.

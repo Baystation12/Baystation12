@@ -41,7 +41,7 @@ Nano Printer: Allows the computer to scan paper contents and save them to file, 
 NTNet is stationwide network that allows users to download programs needed for their work. It will be possible to send any files to other active computers using relevant program (NTN Transfer).
 NTNet is under jurisdiction of both Engineering and Research. Engineering is responsible for any repairs if necessary and research is responsible for monitoring. It is similar to PDA messaging.
 Operation requires functional "NTNet Relay" which is by default placed on tcommsat. If the relay is damaged NTNet will be offline until it is replaced. Multiple relays bring extra redundancy,
-if one is destroyed the second will take over. If all relays are gone it stops working, simple as that. NTNet may be altered via administration console available to Research Director. It is
+if one is destroyed the second will take over. If all relays are gone it stops working, simple as that. NTNet may be altered via administration console available to Chief Science Officer. It is
 possible to enable/disable Software Downloading, P2P file transfers and Communication (IC version of IRC, PDA messages for more than two people)
 
 5. Software
@@ -75,8 +75,8 @@ Medical - Requires "Medbay" access on ID card (ie. CMO, Doctor,..)
 Research - Requires "Research and Development" access on ID card (ie. RD, Roboticist, etc.)
 	Research Server Monitor - Allows monitoring of research levels on RnD servers. (read only)
 	Robotics Monitor Console - Allows monitoring of robots and exosuits. Lockdown/Self-Destruct options are unavailable [balance reasons for malf/traitor AIs]. Requires extra access: "Robotics"
-	NTNRC Administration Console - Allows administrative access to NTNRC. This includes bypassing any channel passwords and enabling "invisible" mode for spying on conversations. Requires extra access: "Research Director"
-	NTNet Administration Console - Allows remote configuration of NTNet Relay - CAUTION: If NTNet is turned off it won't be possible to turn it on again from the computer, as operation requires NTNet to work! Requires extra access: "Research Director"
+	NTNRC Administration Console - Allows administrative access to NTNRC. This includes bypassing any channel passwords and enabling "invisible" mode for spying on conversations. Requires extra access: "Chief Science Officer"
+	NTNet Administration Console - Allows remote configuration of NTNet Relay - CAUTION: If NTNet is turned off it won't be possible to turn it on again from the computer, as operation requires NTNet to work! Requires extra access: "Chief Science Officer"
 	NTNet Monitor - Allows monitoring of NTNet and it's various components, including simplified network logs and system status.
 
 Security - Requires "Security" access on ID card (ie. HOS, Security officer, Detective)

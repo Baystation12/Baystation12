@@ -3,17 +3,11 @@
 /obj/machinery/power/emitter
 	name = "emitter"
 	desc = "A massive heavy industrial laser. This design is a fixed installation, capable of shooting in only one direction."
-	description_info = "You must secure this in place with a wrench and weld it to the floor before using it. The emitter will only fire if it is installed above a cable endpoint. Clicking will toggle it on and off, at which point, so long as it remains powered, it will fire in a single direction in bursts of four."
-	description_fluff = "Lasers like this one have been in use for ages, in applications such as mining, cutting, and in the startup sequence of many advanced space station and starship engines."
-	description_antag = "This baby is capable of slicing through walls, sealed lockers, and people."
 	icon = 'icons/obj/singularity.dmi'
 	icon_state = "emitter"
 	anchored = 0
 	density = 1
 	req_access = list(access_engine_equip)
-	var/id = null
-
-	use_power = 0	//uses powernet power, not APC power
 	active_power_usage = 100 KILOWATTS
 
 	var/efficiency = 0.3	// Energy efficiency. 30% at this time, so 100kW load means 30kW laser pulses.
@@ -27,53 +21,51 @@
 	var/shot_number = 0
 	var/state = 0
 	var/locked = 0
+	core_skill = SKILL_ENGINES
 
-	var/_wifi_id
-	var/datum/wifi/receiver/button/emitter/wifi_receiver
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+		/obj/item/weapon/stock_parts/power/apc
+	)
+	public_variables = list(
+		/decl/public_access/public_variable/emitter_active,
+		/decl/public_access/public_variable/emitter_locked
+	)
+	public_methods = list(
+		/decl/public_access/public_method/toggle_emitter
+	)
+	stock_part_presets = list(/decl/stock_part_preset/radio/receiver/emitter = 1)
 
 /obj/machinery/power/emitter/anchored
 	anchored = 1
 	state = 2
 
-/obj/machinery/power/emitter/verb/rotate()
-	set name = "Rotate"
-	set category = "Object"
-	set src in oview(1)
-
-	if(usr.incapacitated())
-		return
-
-	if (src.anchored)
-		to_chat(usr, "It is fastened to the floor!")
-		return 0
-	src.set_dir(turn(src.dir, 90))
-	return 1
-
 /obj/machinery/power/emitter/Initialize()
 	. = ..()
 	if(state == 2 && anchored)
 		connect_to_network()
-		if(_wifi_id)
-			wifi_receiver = new(_wifi_id, src)
 
 /obj/machinery/power/emitter/Destroy()
 	log_and_message_admins("deleted \the [src]")
 	investigate_log("<font color='red'>deleted</font> at ([x],[y],[z])","singulo")
-	qdel(wifi_receiver)
-	wifi_receiver = null
 	return ..()
 
-/obj/machinery/power/emitter/update_icon()
+/obj/machinery/power/emitter/on_update_icon()
 	if (active && powernet && avail(active_power_usage))
 		icon_state = "emitter_+a"
 	else
 		icon_state = "emitter"
 
-/obj/machinery/power/emitter/attack_hand(mob/user as mob)
-	src.add_fingerprint(user)
+/obj/machinery/power/emitter/interface_interact(mob/user)
+	if(!CanInteract(user, DefaultTopicState()))
+		return FALSE
 	activate(user)
+	return TRUE
 
 /obj/machinery/power/emitter/proc/activate(mob/user as mob)
+	if(!istype(user))
+		user = null // safety, as the proc is publicly available.
+
 	if(state == 2)
 		if(!powernet)
 			to_chat(user, "\The [src] isn't connected to a wire.")
@@ -83,14 +75,17 @@
 				src.active = 0
 				to_chat(user, "You turn off \the [src].")
 				log_and_message_admins("turned off \the [src]")
-				investigate_log("turned <font color='red'>off</font> by [user.key]","singulo")
+				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)]","singulo")
 			else
 				src.active = 1
+				if(user)
+					operator_skill = user.get_skill_value(core_skill)
+				update_efficiency()
 				to_chat(user, "You turn on \the [src].")
 				src.shot_number = 0
 				src.fire_delay = get_initial_fire_delay()
 				log_and_message_admins("turned on \the [src]")
-				investigate_log("turned <font color='green'>on</font> by [user.key]","singulo")
+				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user || usr)]","singulo")
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>The controls are locked!</span>")
@@ -98,6 +93,12 @@
 		to_chat(user, "<span class='warning'>\The [src] needs to be firmly secured to the floor first.</span>")
 		return 1
 
+/obj/machinery/power/emitter/proc/update_efficiency()
+	efficiency = initial(efficiency)
+	if(!operator_skill)
+		return
+	var/skill_modifier = 0.8 * (SKILL_MAX - operator_skill)/(SKILL_MAX - SKILL_MIN) //How much randomness is added
+	efficiency *= 1 + (rand() - 1) * skill_modifier //subtract off between 0.8 and 0, depending on skill and luck.
 
 /obj/machinery/power/emitter/emp_act(var/severity)
 	return 1
@@ -224,6 +225,7 @@
 	if(!emagged)
 		locked = 0
 		emagged = 1
+		req_access.Cut()
 		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
 		return 1
 
@@ -238,3 +240,32 @@
 
 /obj/machinery/power/emitter/proc/get_emitter_beam()
 	return new /obj/item/projectile/beam/emitter(get_turf(src))
+
+/decl/public_access/public_method/toggle_emitter
+	name = "toggle emitter"
+	desc = "Toggles whether or not the emitter is active. It must be unlocked to work."
+	call_proc = /obj/machinery/power/emitter/proc/activate
+
+/decl/public_access/public_variable/emitter_active
+	expected_type = /obj/machinery/power/emitter
+	name = "emitter active"
+	desc = "Whether or not the emitter is firing."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/emitter_active/access_var(obj/machinery/power/emitter/emitter)
+	return emitter.active
+
+/decl/public_access/public_variable/emitter_locked
+	expected_type = /obj/machinery/power/emitter
+	name = "emitter locked"
+	desc = "Whether or not the emitter is locked. Being locked prevents one from changing the active state."
+	can_write = FALSE
+	has_updates = FALSE
+
+/decl/public_access/public_variable/emitter_locked/access_var(obj/machinery/power/emitter/emitter)
+	return emitter.locked
+
+/decl/stock_part_preset/radio/receiver/emitter
+	frequency = BUTTON_FREQ
+	receive_and_call = list("button_active" = /decl/public_access/public_method/toggle_emitter)

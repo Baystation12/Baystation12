@@ -11,8 +11,7 @@
 /obj/structure/closet/gmcloset
 	name = "formal closet"
 	desc = "It's a storage unit for formal clothing."
-	icon_state = "black"
-	icon_closed = "black"
+	closet_appearance = /decl/closet_appearance/wardrobe/black
 
 /obj/structure/closet/gmcloset/WillContain()
 	return list(
@@ -25,7 +24,7 @@
 		/obj/item/clothing/under/sl_suit = 2,
 		/obj/item/clothing/under/rank/bartender = 2,
 		/obj/item/clothing/under/dress/dress_saloon,
-		/obj/item/clothing/accessory/wcoat = 2,
+		/obj/item/clothing/accessory/wcoat/black = 2,
 		/obj/item/clothing/shoes/black = 2
 	)
 
@@ -35,8 +34,7 @@
 /obj/structure/closet/chefcloset
 	name = "chef's closet"
 	desc = "It's a storage unit for foodservice garments."
-	icon_state = "black"
-	icon_closed = "black"
+	closet_appearance = /decl/closet_appearance/wardrobe/black
 
 /obj/structure/closet/chefcloset/WillContain()
 	return list(
@@ -54,8 +52,7 @@
 /obj/structure/closet/jcloset
 	name = "custodial closet"
 	desc = "It's a storage unit for janitorial clothes and gear."
-	icon_state = "mixed"
-	icon_closed = "mixed"
+	closet_appearance = /decl/closet_appearance/wardrobe/mixed
 
 /obj/structure/closet/jcloset/WillContain()
 	return list(
@@ -69,7 +66,9 @@
 		/obj/item/device/lightreplacer,
 		/obj/item/weapon/storage/bag/trash,
 		/obj/item/clothing/shoes/galoshes,
-		/obj/item/weapon/soap/nanotrasen)
+		/obj/item/weapon/soap,
+		/obj/item/weapon/storage/belt/janitor
+	)
 
 /*
  * Lawyer
@@ -77,8 +76,8 @@
 /obj/structure/closet/lawcloset
 	name = "legal closet"
 	desc = "It's a storage unit for courtroom apparel and items."
-	icon_state = "blue"
-	icon_closed = "blue"
+	closet_appearance = /decl/closet_appearance/wardrobe
+
 
 /obj/structure/closet/lawcloset/WillContain()
 	return list(

@@ -1,71 +1,41 @@
 /obj/skybox
 	name = "skybox"
 	mouse_opacity = 0
-	blend_mode = BLEND_MULTIPLY
+	anchored = TRUE
+	simulated = FALSE
+	screen_loc = "CENTER:-224,CENTER:-224"
 	plane = SKYBOX_PLANE
-//	invisibility = 101
-	anchored = 1
-	var/mob/owner
-	var/image/image
-	var/image/stars
+	blend_mode = BLEND_MULTIPLY
 
-/obj/skybox/Initialize()
-	. = ..()
-	var/mob/M = loc
-	SSskybox.skyboxes += src
-	owner = M
-	loc = null
-	SSskybox.skyboxes += src
-	color = SSskybox.BGcolor
-	image = image('icons/turf/skybox.dmi', src, "background_[SSskybox.BGstate]")
-	overlays += image
-
-	if(SSskybox.use_stars)
-		stars = image('icons/turf/skybox.dmi', src, SSskybox.star_state)
-		stars.appearance_flags = RESET_COLOR
-		overlays += stars
-	DoRotate()
-	update()
-
-/obj/skybox/proc/update()
-	if(isnull(owner) || isnull(owner.client))
-		qdel(src)
-	else
-		var/turf/T = get_turf(owner.client.eye)
-		screen_loc = "CENTER:[-224-(T&&T.x)],CENTER:[-224-(T&&T.y)]"
-
-/obj/skybox/proc/DoRotate()
-	var/matrix/rotation = matrix()
-	rotation.TurnTo(SSskybox.BGrot)
-	appearance = rotation
-
-/obj/skybox/Destroy()
-	owner = null
-	SSskybox.skyboxes -= src
-	return ..()
-
-/mob
+/client
 	var/obj/skybox/skybox
 
-/mob/Move()
-	. = ..()
-	if(. && skybox)
-		skybox.update()
+/client/proc/update_skybox(rebuild)
+	if(!skybox)
+		skybox = new()
+		screen += skybox
+		rebuild = 1
 
-/mob/forceMove()
-	. = ..()
-	if(. && skybox)
-		skybox.update()
+	var/turf/T = get_turf(eye)
+	if(T)
+		if(rebuild)
+			skybox.overlays.Cut()
+			skybox.overlays += SSskybox.get_skybox(T.z)
+			screen |= skybox
+		skybox.screen_loc = "CENTER:[-224 - T.x],CENTER:[-224 - T.y]"
 
 /mob/Login()
-	if(!skybox)
-		skybox = new(src)
-		skybox.owner = src
-	client.screen += skybox
 	..()
+	client.update_skybox(1)
 
-/mob/Destroy()
-	if(client)
-		client.screen -= skybox
-	QDEL_NULL(skybox)
-	return ..()
+/mob/Move()
+	var/old_z = get_z(src)
+	. = ..()
+	if(. && client)
+		client.update_skybox(old_z != get_z(src))
+
+/mob/forceMove()
+	var/old_z = get_z(src)
+	. = ..()
+	if(. && client)
+		client.update_skybox(old_z != get_z(src))

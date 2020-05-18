@@ -8,8 +8,12 @@
 	icon_state = "freezer_0"
 	density = 1
 	anchored = 1
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 5			// 5 Watts for thermostat related circuitry
+	base_type = /obj/machinery/atmospherics/unary/freezer
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 
 	var/heatsink_temperature = T20C	// The constant temperature reservoir into which the freezer pumps heat. Probably the hull of the station or something.
 	var/internal_volume = 600		// L
@@ -19,18 +23,6 @@
 
 	var/set_temperature = T20C		// Thermostat
 	var/cooling = 0
-
-/obj/machinery/atmospherics/unary/freezer/New()
-	..()
-	initialize_directions = dir
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/unary_atmos/cooler(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 2)
-	RefreshParts()
 
 /obj/machinery/atmospherics/unary/freezer/atmos_init()
 	..()
@@ -53,7 +45,7 @@
 
 	update_icon()
 
-/obj/machinery/atmospherics/unary/freezer/update_icon()
+/obj/machinery/atmospherics/unary/freezer/on_update_icon()
 	if(node)
 		if(use_power && cooling)
 			icon_state = "freezer_1"
@@ -63,11 +55,9 @@
 		icon_state = "freezer_0"
 	return
 
-/obj/machinery/atmospherics/unary/freezer/attack_ai(mob/user as mob)
+/obj/machinery/atmospherics/unary/freezer/interface_interact(mob/user)
 	ui_interact(user)
-
-/obj/machinery/atmospherics/unary/freezer/attack_hand(mob/user as mob)
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/atmospherics/unary/freezer/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	// this is the data which will be sent to the ui
@@ -88,7 +78,7 @@
 	data["gasTemperatureClass"] = temp_class
 
 	// update the ui if it exists, returns null if no ui is passed/found
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		// the ui does not exist, so we'll create a new() one
 		// for a list of parameters and their descriptions see the code docs in \code\modules\nano\nanoui.dm
@@ -104,7 +94,7 @@
 	if(..())
 		return 1
 	if(href_list["toggleStatus"])
-		use_power = !use_power
+		update_use_power(!use_power)
 		update_icon()
 	if(href_list["temp"])
 		var/amount = text2num(href_list["temp"])
@@ -140,7 +130,7 @@
 		if(debug)
 			visible_message("[src]: Removing [removed] W.")
 
-		use_power(power_rating)
+		use_power_oneoff(power_rating)
 
 		network.update = 1
 	else
@@ -151,17 +141,9 @@
 //upgrading parts
 /obj/machinery/atmospherics/unary/freezer/RefreshParts()
 	..()
-	var/cap_rating = 0
-	var/manip_rating = 0
-	var/bin_rating = 0
-
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
-			cap_rating += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
-			manip_rating += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
-			bin_rating += P.rating
+	var/cap_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor), 0, 20)
+	var/manip_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 1, 10)
+	var/bin_rating = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
 
 	power_rating = initial(power_rating) * cap_rating / 2			//more powerful
 	heatsink_temperature = initial(heatsink_temperature) / ((manip_rating + bin_rating) / 2)	//more efficient
@@ -172,17 +154,7 @@
 	power_setting = new_power_setting
 	power_rating = max_power_rating * (power_setting/100)
 
-/obj/machinery/atmospherics/unary/freezer/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(default_deconstruction_screwdriver(user, O))
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
-
-	..()
-
 /obj/machinery/atmospherics/unary/freezer/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(panel_open)
 		to_chat(user, "The maintenance hatch is open.")

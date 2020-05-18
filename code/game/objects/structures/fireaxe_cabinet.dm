@@ -26,7 +26,7 @@
 	playsound(user, 'sound/effects/Glassbr3.ogg', 100, 1)
 	update_icon()
 
-/obj/structure/fireaxecabinet/update_icon()
+/obj/structure/fireaxecabinet/on_update_icon()
 	overlays.Cut()
 	if(fireaxe)
 		overlays += image(icon, "fireaxe_item")
@@ -63,7 +63,6 @@
 			to_chat(user, "<span class='warning'>\The [src] is empty.</span>")
 			return
 
-		fireaxe.forceMove(get_turf(user))
 		user.put_in_hands(fireaxe)
 		fireaxe = null
 		update_icon()
@@ -72,7 +71,7 @@
 
 /obj/structure/fireaxecabinet/Destroy()
 	if(fireaxe)
-		fireaxe.forceMove(get_turf(src))
+		fireaxe.dropInto(loc)
 		fireaxe = null
 	return ..()
 

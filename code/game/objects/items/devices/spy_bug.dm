@@ -4,7 +4,6 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "eshield0"
 	item_state = "nothing"
-	plane = OBJ_PLANE
 	layer = BELOW_TABLE_LAYER
 
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
@@ -15,7 +14,7 @@
 	throw_range = 15
 	throw_speed = 3
 
-	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ESOTERIC = 3)
 
 	var/obj/item/device/radio/spy/radio
 	var/obj/machinery/camera/spy/camera
@@ -32,9 +31,9 @@
 	GLOB.listening_objects -= src
 	return ..()
 
-/obj/item/device/spy_bug/examine(mob/user)
-	. = ..(user, 0)
-	if(.)
+/obj/item/device/spy_bug/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 0)
 		to_chat(user, "It's a tiny camera, microphone, and transmission device in a happy union.")
 		to_chat(user, "Needs to be both configured and brought in contact with monitor device to be fully functional.")
 
@@ -55,13 +54,12 @@
 /obj/item/device/spy_monitor
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
-	icon = 'icons/obj/pda.dmi'
+	icon = 'icons/obj/modular_pda.dmi'
 	icon_state = "pda"
-	item_state = "electronic"
 
 	w_class = ITEM_SIZE_SMALL
 
-	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ILLEGAL = 3)
+	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ESOTERIC = 3)
 
 	var/operating = 0
 	var/obj/item/device/radio/spy/radio
@@ -77,9 +75,9 @@
 	GLOB.listening_objects -= src
 	return ..()
 
-/obj/item/device/spy_monitor/examine(mob/user)
-	. = ..(user, 1)
-	if(.)
+/obj/item/device/spy_monitor/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made.")
 
 /obj/item/device/spy_monitor/attack_self(mob/user)

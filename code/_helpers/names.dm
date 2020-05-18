@@ -174,7 +174,7 @@ var/syndicate_code_response//Code response for traitors.
 	-N
 	*/
 
-/proc/generate_code_phrase()//Proc is used for phrase and response in master_controller.dm
+/proc/generate_code_phrase()//Proc is used for phrase and response in subsystem init.
 
 	var/code_phrase = ""//What is returned when the proc finishes.
 	var/words = pick(//How many words there will be. Minimum of two. 2, 4 and 5 have a lesser chance of being selected. 3 is the most likely.
@@ -213,7 +213,7 @@ var/syndicate_code_response//Code response for traitors.
 							code_phrase += " "
 							code_phrase += pick(GLOB.last_names)
 					if(2)
-						code_phrase += pick(joblist)//Returns a job.
+						code_phrase += pick(SSjobs.titles_to_datums) //Returns a job.
 				safety -= 1
 			if(2)
 				switch(rand(1,2))//Places or things.

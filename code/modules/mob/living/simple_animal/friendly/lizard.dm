@@ -1,7 +1,7 @@
 /mob/living/simple_animal/lizard
 	name = "lizard"
 	desc = "A cute tiny lizard."
-	icon = 'icons/mob/critter.dmi'
+	icon = 'icons/mob/simple_animal/critter.dmi'
 	icon_state = "lizard"
 	icon_living = "lizard"
 	icon_dead = "lizard-dead"
@@ -16,4 +16,10 @@
 	response_harm   = "stomps on"
 	mob_size = MOB_MINISCULE
 	possession_candidate = 1
-	can_escape = 1
+	can_escape = TRUE
+	pass_flags = PASS_FLAG_TABLE
+
+	meat_amount = 1
+	bone_amount = 1
+	skin_amount = 1
+	skin_material = MATERIAL_SKIN_LIZARD

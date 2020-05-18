@@ -121,6 +121,10 @@
 		previous_security_level.switching_down_from()
 		new_security_level.switching_down_to()
 
+	for(var/thing in SSpsi.psi_dampeners)
+		var/obj/item/weapon/implant/psi_control/implant = thing
+		implant.update_functionality()
+
 	log_and_message_admins("has changed the security level from [previous_security_level.name] to [new_security_level.name].")
 	return TRUE
 
@@ -144,6 +148,10 @@
 
 	var/overlay_alarm
 	var/overlay_status_display
+
+	var/up_description
+	var/down_description
+	var/psionic_control_level = PSI_IMPLANT_WARN
 
 // Called when we're switching from a lower security level to this one.
 /decl/security_level/proc/switching_up_to()
@@ -169,8 +177,6 @@
 
 /decl/security_level/default
 	icon = 'icons/misc/security_state.dmi'
-	var/up_description
-	var/down_description
 
 	var/static/datum/announcement/priority/security/security_announcement_up = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
 	var/static/datum/announcement/priority/security/security_announcement_down = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/misc/notice1.ogg'))
@@ -215,6 +221,8 @@
 	light_color_alarm = COLOR_BLUE
 	light_color_status_display = COLOR_BLUE
 
+	psionic_control_level = PSI_IMPLANT_LOG
+
 	overlay_alarm = "alarm_blue"
 	overlay_status_display = "status_display_blue"
 
@@ -233,6 +241,8 @@
 	overlay_alarm = "alarm_red"
 	overlay_status_display = "status_display_red"
 
+	psionic_control_level = PSI_IMPLANT_DISABLED
+
 	up_description = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
 	down_description = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
 
@@ -247,6 +257,8 @@
 
 	overlay_alarm = "alarm_delta"
 	overlay_status_display = "status_display_delta"
+
+	psionic_control_level = PSI_IMPLANT_DISABLED
 
 	var/static/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
 

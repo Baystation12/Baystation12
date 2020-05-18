@@ -5,7 +5,7 @@
 var/list/robot_custom_icons
 
 /hook/startup/proc/load_robot_custom_sprites()
-	var/config_file = file2text("config/custom_sprites.txt")
+	var/config_file = file2text(CUSTOM_ITEM_SYNTH_CONFIG)
 	var/list/lines = splittext(config_file, "\n")
 
 	robot_custom_icons = list()

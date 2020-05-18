@@ -21,7 +21,7 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 			affecting.add_pain(ceil(power/2))
 		else
 			adjustHalLoss(ceil(power/2))
-	
+
 	flash_pain(min(round(2*power)+55, 255))
 
 	// Anti message spam checks
@@ -35,6 +35,12 @@ mob/living/carbon/proc/custom_pain(var/message, var/power, var/force, var/obj/it
 			to_chat(src, "<span class='danger'>[message]</span>")
 		else
 			to_chat(src, "<span class='warning'>[message]</span>")
+
+		var/force_emote = species.get_pain_emote(src, power)
+		if(force_emote && prob(power))
+			var/decl/emote/use_emote = usable_emotes[force_emote]
+			if(!(use_emote.message_type == AUDIBLE_MESSAGE && silent))
+				emote(force_emote)
 	next_pain_time = world.time + (100-power)
 
 mob/living/carbon/human/proc/handle_pain()
@@ -58,7 +64,7 @@ mob/living/carbon/human/proc/handle_pain()
 		if(maxdam > 10 && paralysis)
 			paralysis = max(0, paralysis - round(maxdam/10))
 		if(maxdam > 50 && prob(maxdam / 5))
-			drop_item()
+			unequip_item()
 		var/burning = damaged_organ.burn_dam > damaged_organ.brute_dam
 		var/msg
 		switch(maxdam)
@@ -71,7 +77,7 @@ mob/living/carbon/human/proc/handle_pain()
 		custom_pain(msg, maxdam, prob(10), damaged_organ, TRUE)
 	// Damage to internal organs hurts a lot.
 	for(var/obj/item/organ/internal/I in internal_organs)
-		if(prob(1) && !((I.status & ORGAN_DEAD) || I.robotic >= ORGAN_ROBOT) && I.damage > 5)
+		if(prob(1) && !((I.status & ORGAN_DEAD) || BP_IS_ROBOTIC(I)) && I.damage > 5)
 			var/obj/item/organ/external/parent = get_organ(I.parent_organ)
 			var/pain = 10
 			var/message = "You feel a dull pain in your [parent.name]"

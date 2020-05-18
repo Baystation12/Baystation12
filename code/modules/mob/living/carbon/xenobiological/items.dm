@@ -1,7 +1,7 @@
 /obj/item/slime_extract
 	name = "slime extract"
 	desc = "Goo extracted from a slime. Legends claim these to have \"magical powers\"."
-	icon = 'icons/mob/slimes.dmi'
+	icon = 'icons/mob/simple_animal/slimes.dmi'
 	icon_state = "grey slime extract"
 	force = 1.0
 	w_class = ITEM_SIZE_TINY
@@ -27,9 +27,10 @@
 			qdel(O)
 
 /obj/item/slime_extract/New()
-	..()
+	SSstatistics.extracted_slime_cores_amount++
 	create_reagents(100)
 	reagents.add_reagent(/datum/reagent/slimejelly, 30)
+	..()
 
 /obj/item/slime_extract/grey
 	name = "grey slime extract"
@@ -98,6 +99,10 @@
 /obj/item/slime_extract/adamantine
 	name = "adamantine slime extract"
 	icon_state = "adamantine slime extract"
+
+/obj/item/slime_extract/adamantine/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/crystal, 10)
 
 /obj/item/slime_extract/bluespace
 	name = "bluespace slime extract"
@@ -233,16 +238,15 @@
 
 /obj/effect/golemrune
 	anchored = 1
-	desc = "a strange rune used to create golems. It glows when spirits are nearby."
+	desc = "a strange rune used to create golems. It glows when it can be activated."
 	name = "rune"
 	icon = 'icons/obj/rune.dmi'
 	icon_state = "golem"
 	unacidable = 1
-	plane = ABOVE_TURF_PLANE
 	layer = RUNE_LAYER
 
 /obj/effect/golemrune/Initialize()
-	..()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/effect/golemrune/Process()
@@ -260,17 +264,31 @@
 /obj/effect/golemrune/attack_hand(mob/living/user as mob)
 	var/mob/observer/ghost/ghost
 	for(var/mob/observer/ghost/O in src.loc)
-		if(!O.client)	continue
-		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)	continue
+		if(!O.client)
+			continue
+		if(O.mind && O.mind.current && O.mind.current.stat != DEAD)
+			continue
 		ghost = O
 		break
 	if(!ghost)
-		to_chat(user, "The rune fizzles uselessly. There is no spirit nearby.")
+		to_chat(user, SPAN_WARNING("The rune fizzles uselessly."))
 		return
+	visible_message(SPAN_WARNING("A craggy humanoid figure coalesces into being!"))
+
 	var/mob/living/carbon/human/G = new(src.loc)
 	G.set_species("Golem")
 	G.key = ghost.key
-	to_chat(G, "You are an adamantine golem. You move slowly, but are highly resistant to heat and cold as well as blunt trauma. Serve [user], and assist them in completing their goals at any cost.")
+
+	var/obj/item/weapon/implant/translator/natural/I = new()
+	I.implant_in_mob(G, BP_HEAD)
+	if (user.languages.len)
+		var/datum/language/lang = user.languages[1]
+		G.add_language(lang.name)
+		G.set_default_language(lang)
+		I.languages[lang.name] = 1
+
+	to_chat(G, FONT_LARGE(SPAN_BOLD("You are a golem. Serve [user] and assist them at any cost.")))
+	to_chat(G, SPAN_ITALIC("You move slowly and are vulnerable to trauma, but are resistant to heat and cold."))
 	qdel(src)
 
 

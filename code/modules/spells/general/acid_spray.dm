@@ -10,6 +10,7 @@
 	invocation_type = SpI_SHOUT
 	var/reagent_type = /datum/reagent/acid/hydrochloric
 	hud_state = "wiz_acid"
+	cast_sound = 'sound/magic/disintegrate.ogg'
 
 /spell/acid_spray/choose_targets()
 	return list(holder)
@@ -24,3 +25,6 @@
 		chem.set_color()
 		spawn(0)
 			chem.set_up(get_ranged_target_turf(target, angle2dir(angle+mod), 3))
+
+/spell/acid_spray/tower
+	charge_max = 2

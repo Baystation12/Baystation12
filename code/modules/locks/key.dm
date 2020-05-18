@@ -24,7 +24,6 @@
 	if(uses == 1)
 		to_chat(user, "<span class='warning'>\The [src] is going to break soon!</span>")
 	else if(uses <= 0)
-		user.drop_item(src)
 		to_chat(user, "<span class='warning'>\The [src] crumbles in your hands.</span>")
 		qdel(src)
 	return ..()

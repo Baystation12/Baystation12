@@ -5,17 +5,20 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 */
 
 /obj/machinery/r_n_d/circuit_imprinter
-	name = "\improper Circuit Imprinter"
+	name = "circuit imprinter"
+	desc = "Accessed by a connected core fabricator console, it produces circuits from various materials and sulphuric acid."
 	icon_state = "circuit_imprinter"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	base_type = /obj/machinery/r_n_d/circuit_imprinter
+	construct_state = /decl/machine_construction/default/panel_closed
+
 	var/list/datum/design/queue = list()
 	var/progress = 0
 
-	var/max_material_storage = 75000
+	var/max_material_storage = 100000
 	var/mat_efficiency = 1
 	var/speed = 1
 
-	use_power = 1
 	idle_power_usage = 30
 	active_power_usage = 2500
 
@@ -23,17 +26,10 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	materials = default_material_composition.Copy()
 
 	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/circuit_imprinter(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	RefreshParts()
 
 /obj/machinery/r_n_d/circuit_imprinter/Process()
 	..()
-	if(stat)
+	if(stat & (BROKEN | NOPOWER))
 		update_icon()
 		return
 	if(queue.len == 0)
@@ -59,19 +55,23 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 
 /obj/machinery/r_n_d/circuit_imprinter/RefreshParts()
 	var/T = 0
-	for(var/obj/item/weapon/reagent_containers/glass/G in component_parts)
-		T += G.reagents.maximum_volume
-	create_reagents(T)
-	max_material_storage = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
-		max_material_storage += M.rating * 75000
-	T = 0
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
-		T += M.rating
+	var/obj/item/weapon/stock_parts/building_material/mat = get_component_of_type(/obj/item/weapon/stock_parts/building_material)
+	if(mat)
+		for(var/obj/item/weapon/reagent_containers/glass/G in mat.materials)
+			T += G.volume
+		if(!reagents)
+			create_reagents(T)
+		else
+			reagents.maximum_volume = T
+
+	max_material_storage = 75000 * Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/matter_bin), 0, 10)
+
+	T = Clamp(total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator), 0, 3)
 	mat_efficiency = 1 - (T - 1) / 4
 	speed = T
+	..()
 
-/obj/machinery/r_n_d/circuit_imprinter/update_icon()
+/obj/machinery/r_n_d/circuit_imprinter/on_update_icon()
 	if(panel_open)
 		icon_state = "circuit_imprinter_t"
 	else if(busy)
@@ -79,20 +79,26 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	else
 		icon_state = "circuit_imprinter"
 
+/obj/machinery/r_n_d/circuit_imprinter/state_transition(var/decl/machine_construction/default/new_state)
+	. = ..()
+	if(istype(new_state) && linked_console)
+		linked_console.linked_imprinter = null
+		linked_console = null
+
+/obj/machinery/r_n_d/circuit_imprinter/components_are_accessible(path)
+	return !busy && ..()
+
+/obj/machinery/r_n_d/circuit_imprinter/cannot_transition_to(state_path)
+	if(busy)
+		return SPAN_NOTICE("\The [src] is busy. Please wait for completion of previous operation.")
+	return ..()
 
 /obj/machinery/r_n_d/circuit_imprinter/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
 		to_chat(user, "<span class='notice'>\The [src] is busy. Please wait for completion of previous operation.</span>")
 		return 1
-	if(default_deconstruction_screwdriver(user, O))
-		if(linked_console)
-			linked_console.linked_imprinter = null
-			linked_console = null
-		return
-	if(default_deconstruction_crowbar(user, O))
-		return
-	if(default_part_replacement(user, O))
-		return
+	if(component_attackby(O, user))
+		return TRUE
 	if(panel_open)
 		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
 		return 1
@@ -106,7 +112,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	if(!istype(O, /obj/item/stack/material))
 		to_chat(user, "<span class='notice'>You cannot insert this item into \the [src]!</span>")
 		return 0
-	if(stat)
+	if(stat & (BROKEN | NOPOWER))
 		return 1
 
 	if(TotalMaterials() + SHEET_MATERIAL_AMOUNT > max_material_storage)
@@ -117,7 +123,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	var/amount = min(stack.get_amount(), round((max_material_storage - TotalMaterials()) / SHEET_MATERIAL_AMOUNT))
 
 	busy = 1
-	use_power(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
+	use_power_oneoff(max(1000, (SHEET_MATERIAL_AMOUNT * amount / 10)))
 
 	var/t = stack.material.name
 	if(t)
@@ -133,15 +139,16 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	return
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/removeFromQueue(var/index)
+	if(!is_valid_index(index, queue))
+		return
 	queue.Cut(index, index + 1)
-	return
 
 /obj/machinery/r_n_d/circuit_imprinter/proc/canBuild(var/datum/design/D)
 	for(var/M in D.materials)
 		if(materials[M] <= D.materials[M] * mat_efficiency)
 			return 0
 	for(var/C in D.chemicals)
-		if(!reagents.has_reagent(C, D.chemicals[C]))
+		if(!reagents.has_reagent(C, D.chemicals[C] * mat_efficiency))
 			return 0
 	return 1
 
@@ -150,15 +157,14 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 	for(var/M in D.materials)
 		power += round(D.materials[M] / 5)
 	power = max(active_power_usage, power)
-	use_power(power)
+	use_power_oneoff(power)
 	for(var/M in D.materials)
 		materials[M] = max(0, materials[M] - D.materials[M] * mat_efficiency)
 	for(var/C in D.chemicals)
 		reagents.remove_reagent(C, D.chemicals[C] * mat_efficiency)
 
 	if(D.build_path)
-		var/obj/new_item = D.Fabricate(src, src)
-		new_item.loc = loc
+		var/obj/new_item = D.Fabricate(loc, src)
 		if(mat_efficiency != 1) // No matter out of nowhere
 			if(new_item.matter && new_item.matter.len > 0)
 				for(var/i in new_item.matter)

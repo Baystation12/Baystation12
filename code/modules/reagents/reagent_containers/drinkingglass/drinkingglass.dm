@@ -1,32 +1,37 @@
-#define DRINK_ICON_FILE 'icons/pdrink.dmi'
-
 /var/const/DRINK_FIZZ = "fizz"
 /var/const/DRINK_ICE = "ice"
 /var/const/DRINK_VAPOR = "vapor"
 /var/const/DRINK_ICON_DEFAULT = ""
-/var/const/DRINK_ICON_NOISY = "_noise"
+/var/const/DRINK_ICON_NOISY = "noise"
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2
 	name = "glass" // Name when empty
 	base_name = "glass"
 	desc = "A generic drinking glass." // Description when empty
-	icon = DRINK_ICON_FILE
+	icon = 'icons/obj/drink_glasses/square.dmi'
+	icon_state = null
 	base_icon = "square" // Base icon name
 	filling_states = "20;40;60;80;100"
 	volume = 30
-	matter = list("glass" = 65)
+	matter = list(MATERIAL_GLASS = 65)
 
 	var/list/extras = list() // List of extras. Two extras maximum
 
 	var/rim_pos // Position of the rim for fruit slices. list(y, x_left, x_right)
+	var/filling_overlayed //if filling should go on top of the icon (e.g. opaque cups)
+	var/global/list/filling_icons_cache = list()
 
 	center_of_mass ="x=16;y=9"
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = "5;10;15;30"
 	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	temperature_coefficient = 4
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
+	var/custom_name
+	var/custom_desc
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M)
 	. = ..()
 
 	for(var/I in extras)
@@ -55,17 +60,20 @@
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_fizz()
 	if(reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
-		if(!("fizz" in R.glass_special))
-			var/totalfizzy = 0
-			for(var/datum/reagent/re in reagents.reagent_list)
-				if("fizz" in re.glass_special)
-					totalfizzy += re.volume
-			if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
-				return 1
+		if(("fizz" in R.glass_special))
+			return 1
+		var/totalfizzy = 0
+		for(var/datum/reagent/re in reagents.reagent_list)
+			if("fizz" in re.glass_special)
+				totalfizzy += re.volume
+		if(totalfizzy >= reagents.total_volume / 5) // 20% fizzy by volume
+			return 1
 	return 0
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_vapor()
 	if(reagents.reagent_list.len > 0)
+		if(temperature > T0C + 40)
+			return 1
 		var/datum/reagent/R = reagents.get_master_reagent()
 		if(!("vapor" in R.glass_special))
 			var/totalvape = 0
@@ -76,28 +84,42 @@
 				return 1
 	return 0
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/New()
-	..()
-	icon_state = base_icon
+/obj/item/weapon/reagent_containers/food/drinks/glass2/Initialize()
+	. = ..()
+	if(!icon_state)
+		icon_state = base_icon
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/on_reagent_change()
+	temperature_coefficient = 4 / max(1, reagents.total_volume)
 	update_icon()
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/can_add_extra(obj/item/weapon/glass_extra/GE)
-	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(DRINK_ICON_FILE)))
+	if(!("[base_icon]_[GE.glass_addition]left" in icon_states(icon)))
 		return 0
-	if(!("[base_icon]_[GE.glass_addition]right" in icon_states(DRINK_ICON_FILE)))
+	if(!("[base_icon]_[GE.glass_addition]right" in icon_states(icon)))
 		return 0
 
 	return 1
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/update_icon()
+/obj/item/weapon/reagent_containers/food/drinks/glass2/proc/get_filling_overlay(amount, overlay)
+	var/image/I = new()
+	if(!filling_icons_cache["[base_icon][amount][overlay]"])
+		var/icon/base = new/icon(icon, "[base_icon][amount]")
+		if(overlay)
+			var/icon/extra = new/icon('icons/obj/drink_glasses/extras.dmi', overlay)
+			base.Blend(extra, ICON_MULTIPLY)
+		filling_icons_cache["[base_icon][amount][overlay]"] = image(base)
+	I.appearance = filling_icons_cache["[base_icon][amount][overlay]"]
+	return I
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/on_update_icon()
 	underlays.Cut()
+	overlays.Cut()
 
 	if (reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
 		SetName("[base_name] of [R.glass_name ? R.glass_name : "something"]")
-		desc = R.glass_desc ? R.glass_desc : initial(desc)
+		desc = R.glass_desc || custom_desc || initial(desc)
 
 		var/list/under_liquid = list()
 		var/list/over_liquid = list()
@@ -105,40 +127,41 @@
 		var/amnt = get_filling_state()
 
 		if(has_ice())
-			over_liquid |= "[base_icon][amnt]_ice"
+			over_liquid |= image(icon, src, "[base_icon][amnt]_ice")
 
 		if(has_fizz())
-			over_liquid |= "[base_icon][amnt]_fizz"
+			over_liquid |= get_filling_overlay(amnt, "fizz")
 
 		if(has_vapor())
-			over_liquid |= "[base_icon]_vapor"
+			over_liquid |= image(icon, src, "[base_icon]_vapor")
 
 		for(var/S in R.glass_special)
-			if("[base_icon]_[S]" in icon_states(DRINK_ICON_FILE))
-				under_liquid |= "[base_icon]_[S]"
-			else if("[base_icon][amnt]_[S]" in icon_states(DRINK_ICON_FILE))
-				over_liquid |= "[base_icon][amnt]_[S]"
+			if("[base_icon]_[S]" in icon_states(icon))
+				under_liquid |= image(icon, src, "[base_icon]_[S]")
+			else if("[base_icon][amnt]_[S]" in icon_states(icon))
+				over_liquid |= image(icon, src, "[base_icon][amnt]_[S]")
 
-		for(var/k in under_liquid)
-			underlays += image(DRINK_ICON_FILE, src, k, -3)
+		underlays += under_liquid
 
-		var/image/filling = image(DRINK_ICON_FILE, src, "[base_icon][amnt][R.glass_icon]", -2)
+		var/image/filling = get_filling_overlay(amnt, R.glass_icon)
 		filling.color = reagents.get_color()
-		underlays += filling
+		if(filling_overlayed)
+			overlays += filling
+		else
+			underlays += filling
 
-		for(var/k in over_liquid)
-			underlays += image(DRINK_ICON_FILE, src, k, -1)
+		overlays += over_liquid
+		
 	else
-		SetName(initial(name))
-		desc = initial(desc)
+		SetName(custom_name || initial(name))
+		desc = custom_desc || initial(desc)
 
 	var/side = "left"
 	for(var/item in extras)
 		if(istype(item, /obj/item/weapon/glass_extra))
 			var/obj/item/weapon/glass_extra/GE = item
-			var/image/I = image(DRINK_ICON_FILE, src, "[base_icon]_[GE.glass_addition][side]")
-			if(GE.glass_color)
-				I.color = GE.glass_color
+			var/image/I = image(icon, src, "[base_icon]_[GE.glass_addition][side]")
+			I.color = GE.color
 			underlays += I
 		else if(rim_pos && istype(item, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
 			var/obj/FS = item
@@ -169,3 +192,9 @@
 		user.visible_message("<span class='notice'>[user] gently strikes \the [src] with a spoon, calling the room to attention.</span>")
 		playsound(src, "sound/items/wineglass.ogg", 65, 1)
 	else return ..()
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/ProcessAtomTemperature()
+	var/old_temp = temperature
+	. = ..()
+	if(old_temp != temperature)
+		update_icon()

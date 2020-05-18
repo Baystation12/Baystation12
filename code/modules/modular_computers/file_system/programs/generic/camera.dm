@@ -33,6 +33,7 @@
 	size = 12
 	available_on_ntnet = 1
 	requires_ntnet = 1
+	category = PROG_MONITOR
 
 /datum/nano_module/camera_monitor
 	name = "Camera Monitoring program"
@@ -59,7 +60,7 @@
 	if(current_network)
 		data["cameras"] = camera_repository.cameras_in_network(current_network)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "sec_camera.tmpl", "Camera Monitoring", 900, 800, state = state)
 		// ui.auto_update_layout = 1 // Disabled as with suit sensors monitor - breaks the UI map. Re-enable once it's fixed somehow.
@@ -68,6 +69,9 @@
 		ui.add_template("mapHeader", "sec_camera_map_header.tmpl")
 		ui.set_initial_data(data)
 		ui.open()
+
+	user.machine = nano_host()
+	user.reset_view(current_camera)
 
 // Intended to be overriden by subtypes to manually add non-station networks to the list.
 /datum/nano_module/camera_monitor/proc/modify_networks_list(var/list/networks)
@@ -89,6 +93,9 @@
 		if(!C)
 			return
 		if(!(current_network in C.network))
+			return
+		if(!AreConnectedZLevels(get_z(C), get_z(host)) && !(get_z(C) in GLOB.using_map.admin_levels))
+			to_chat(usr, "Unable to establish a connection.")
 			return
 
 		switch_to_camera(usr, C)
@@ -120,8 +127,6 @@
 		return 1
 
 	set_current(C)
-	user.machine = nano_host()
-	user.reset_view(C)
 	return 1
 
 /datum/nano_module/camera_monitor/proc/set_current(var/obj/machinery/camera/C)

@@ -9,13 +9,15 @@
 	sharp = 1
 	edge = 1
 	w_class = ITEM_SIZE_SMALL
-	force_divisor = 0.2 // 6 with hardness 30 (glass)
+	max_force = 8
+	force_divisor = 0.12 // 6 with hardness 30 (glass)
 	thrown_force_divisor = 0.4 // 4 with weight 15 (glass)
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
-	default_material = "glass"
+	default_material = MATERIAL_GLASS
 	unbreakable = 1 //It's already broken.
 	drops_debris = 0
+	item_flags = ITEM_FLAG_CAN_HIDE_IN_SHOES
 
 /obj/item/weapon/material/shard/set_material(var/new_material)
 	..(new_material)
@@ -36,7 +38,7 @@
 	else
 		qdel(src)
 
-/obj/item/weapon/material/shard/update_icon()
+/obj/item/weapon/material/shard/on_update_icon()
 	if(material)
 		color = material.icon_colour
 		// 1-(1-x)^2, so that glass shards with 0.3 opacity end up somewhat visible at 0.51 opacity
@@ -79,9 +81,9 @@
 				var/picked = pick(check)
 				var/obj/item/organ/external/affecting = H.get_organ(picked)
 				if(affecting)
-					if(affecting.robotic >= ORGAN_ROBOT)
+					if(BP_IS_ROBOTIC(affecting))
 						return
-					affecting.take_damage(5, 0)
+					affecting.take_external_damage(5, 0)
 					H.updatehealth()
 					if(affecting.can_feel_pain())
 						H.Weaken(3)
@@ -90,13 +92,10 @@
 			return
 
 // Preset types - left here for the code that uses them
-/obj/item/weapon/material/shrapnel
-	name = "shrapnel"
-	default_material = DEFAULT_WALL_MATERIAL
-	w_class = ITEM_SIZE_TINY	//it's real small
-
-/obj/item/weapon/material/shard/shrapnel/New(loc)
-	..(loc, DEFAULT_WALL_MATERIAL)
-
 /obj/item/weapon/material/shard/phoron/New(loc)
-	..(loc, "phglass")
+	..(loc, MATERIAL_PHORON_GLASS)
+
+/obj/item/weapon/material/shard/shrapnel
+	name = "shrapnel"
+	default_material = MATERIAL_STEEL
+	w_class = ITEM_SIZE_TINY	//it's real small

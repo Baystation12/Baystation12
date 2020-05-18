@@ -7,10 +7,14 @@
 	filename = "deckmngr"
 	filedesc = "Deck Management"
 	nanomodule_path = /datum/nano_module/deck_management
+	program_icon_state = "request"
+	program_key_state = "rd_key"
+	program_menu_icon = "clock"
 	extended_desc = "A tool for managing shuttles, filling out flight plans, and submitting flight-related paperwork."
 	size = 18
 	available_on_ntnet = 1
 	requires_ntnet = 1
+	category = PROG_SUPPLY
 
 /datum/nano_module/deck_management
 	name = "Deck Management Program"
@@ -22,23 +26,23 @@
 	var/list/report_prototypes = list()              //Stores report prototypes to use for UI purposes.
 	var/datum/shuttle/prototype_shuttle              //The shuttle for which the prototypes were built (to avoid excessive prototype rebuilding)
 	//The default access needed to properly use. Should be set in map files.
-	var/default_access = list(access_cargo, access_heads)  //The format is (needs one of list(these access constants or lists of access constants))
+	var/default_access = list(access_cargo, access_bridge)  //The format is (needs one of list(these access constants or lists of access constants))
 
 /datum/nano_module/deck_management/New()
 	..()
-	for(var/shuttle in shuttle_controller.shuttle_logs) //Registering to get shuttle updates.
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[shuttle]
+	for(var/shuttle in SSshuttle.shuttle_logs) //Registering to get shuttle updates.
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.register(src)
 
 /datum/nano_module/deck_management/Destroy()
-	for(var/shuttle in shuttle_controller.shuttle_logs) //Unregistering; important for garbage collection.
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[shuttle]
+	for(var/shuttle in SSshuttle.shuttle_logs) //Unregistering; important for garbage collection.
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[shuttle]
 		my_log.unregister(src)
 	. = ..()
 
 /datum/nano_module/deck_management/ui_interact(mob/user, ui_key = "main", datum/nanoui/ui = null, force_open = 1, state = GLOB.default_state)
 	var/list/data = host.initial_data()
-	var/logs = shuttle_controller.shuttle_logs
+	var/logs = SSshuttle.shuttle_logs
 
 	data["prog_state"] = prog_state
 	data["default_access"] = get_default_access(user)
@@ -74,7 +78,7 @@
 				return
 			data["shuttle_access"] = get_shuttle_access(user, selected_shuttle)
 			data["shuttle_name"] = selected_shuttle.name
-			var/datum/shuttle_log/log = shuttle_controller.shuttle_logs[selected_shuttle]
+			var/datum/shuttle_log/log = SSshuttle.shuttle_logs[selected_shuttle]
 			var/missions = list()
 			for(var/datum/shuttle_mission/M in log.missions)
 				missions += list(generate_mission_data(M))
@@ -116,7 +120,7 @@
 			data["mission_data"] = generate_mission_data(selected_mission)
 			data["view_only"] = can_view_only
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "deck_management.tmpl", name, 700, 800, state = state)
 		ui.auto_update_layout = 1
@@ -125,7 +129,7 @@
 
 //Checks that the selected shuttle is valid, and resets to home screen if not.
 /datum/nano_module/deck_management/proc/ensure_valid_shuttle()
-	if(!(selected_shuttle in shuttle_controller.shuttle_logs))
+	if(!(selected_shuttle in SSshuttle.shuttle_logs))
 		selected_mission = null
 		selected_shuttle = null
 		prog_state = DECK_HOME
@@ -136,7 +140,7 @@
 /datum/nano_module/deck_management/proc/ensure_valid_mission()
 	if(!ensure_valid_shuttle())
 		return 0
-	var/datum/shuttle_log/log = shuttle_controller.shuttle_logs[selected_shuttle]
+	var/datum/shuttle_log/log = SSshuttle.shuttle_logs[selected_shuttle]
 	if(!(selected_mission in (log.missions + log.queued_missions)) || (selected_mission.shuttle_name != selected_shuttle.name))
 		selected_mission = null
 		prog_state = DECK_ALL_MISSIONS
@@ -147,7 +151,7 @@
 	var/mission_data = list()
 	mission_data["name"] = mission.name
 	mission_data["departure"] = mission.depart_time || "N/A"
-	mission_data["return"] = mission.return_time || "N/A"
+	mission_data["return_time"] = mission.return_time || "N/A"
 	switch(mission.stage)
 		if(SHUTTLE_MISSION_QUEUED)
 			mission_data["status"] = "Mission Scheduled."
@@ -160,7 +164,7 @@
 			mission_data["status"] = "Mission Complete."
 	mission_data["ID"] = mission.ID
 	if(selected_shuttle)
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(my_log.current_mission == mission)
 			mission_data["is_current"] = 1
 		if(mission in my_log.queued_missions)
@@ -173,11 +177,11 @@
 			return 1
 
 /datum/nano_module/deck_management/proc/get_shuttle_access(mob/user, datum/shuttle/shuttle)
-	return shuttle.logging_access ? (check_access(user, shuttle.logging_access) || check_access(user, access_heads)) : 0
+	return shuttle.logging_access ? (check_access(user, shuttle.logging_access) || check_access(user, access_bridge)) : 0
 
 /datum/nano_module/deck_management/proc/set_shuttle(mob/user, shuttle_name, need_access = 1)
 	var/datum/shuttle/shuttle
-	if(!(shuttle = shuttle_controller.shuttles[shuttle_name]))
+	if(!(shuttle = SSshuttle.shuttles[shuttle_name]))
 		return 0
 	if(need_access && !get_shuttle_access(user, shuttle))
 		return 0
@@ -195,7 +199,7 @@
 	return 1
 
 /datum/nano_module/deck_management/proc/set_mission(mission_ID)
-	var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+	var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 	var/datum/shuttle_mission/mission = my_log.mission_from_ID(mission_ID)
 	if(!mission)
 		return 0
@@ -229,7 +233,7 @@
 		var/shuttle_name = href_list["new_mission"]
 		if(!set_shuttle(user, shuttle_name, 1))
 			return 1
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		var/input = input(user, "Mission Name:", "Mission Creation") as null|text
 		selected_mission = my_log.create_mission(sanitize(input, 50))
 		prog_state = DECK_MISSION_DETAILS
@@ -239,7 +243,7 @@
 		var/mission_ID = text2num(href_list["mission"])
 		var/function = href_list["modify"]
 		if(set_shuttle(user, shuttle_name, 1) && set_mission(mission_ID))
-			var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+			var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 			switch(function)
 				if("rename")
 					var/input = input(user, "Mission Name:", "Rename Mission") as null|text
@@ -300,7 +304,7 @@
 			return 1
 		if(!selected_report.verify_access_edit(get_access(user)))
 			return 1
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(my_log.submit_report(selected_mission, selected_report, user))
 			selected_report = null
 			prog_state = DECK_MISSION_DETAILS
@@ -322,8 +326,8 @@
 		var/crew = selected_mission.flight_plan.manifest.get_value(in_line = 1)
 		var/time = selected_mission.flight_plan.planned_depart.get_value()
 		if(!crew || !time)
-			return 1
 			to_chat(user, "<span class='warning'>Please fill in the crew manifest and departure time first.</span>")
+			return 1
 		var/place = selected_shuttle.name
 		if(alert(user, "Would you like to choose a custom gathering point, or just use [place]?", "Announcement Creation", "Default", "Custom") == "Custom")
 			var/list/areas = area_repository.get_areas_by_name()
@@ -332,7 +336,7 @@
 				place = A
 		if(alert(user, "This will make a radio announcement summoning all mission crew to the [place]. Are you sure you want to do this?",, "Yes.", "No.") == "No.")
 			return 1
-		var/datum/shuttle_log/my_log = shuttle_controller.shuttle_logs[selected_shuttle]
+		var/datum/shuttle_log/my_log = SSshuttle.shuttle_logs[selected_shuttle]
 		if(world.time - my_log.last_spam >= 1 MINUTE) //Slow down with that spam button
 			GLOB.global_announcer.autosay("The [selected_shuttle.name] is planning to depart on a mission promptly at [time]. The following crew members are to make their way to \the [place] immediately: [crew].", "Hangar Announcement System")
 			my_log.last_spam = world.time

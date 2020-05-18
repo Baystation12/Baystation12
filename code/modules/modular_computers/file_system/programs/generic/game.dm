@@ -34,7 +34,7 @@
 	return G
 
 // When running the program, we also want to pass our enemy name to the nano module.
-/datum/computer_file/program/game/run_program()
+/datum/computer_file/program/game/on_startup()
 	. = ..()
 	if(. && NM)
 		var/datum/nano_module/arcade_classic/NMC = NM
@@ -71,7 +71,7 @@
 	data["gameover"] = gameover
 	data["information"] = information
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "arcade_classic.tmpl", "Defeat [enemy_name]", 500, 350, state = state)
 		if(host.update_layout())

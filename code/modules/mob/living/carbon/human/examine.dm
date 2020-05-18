@@ -1,4 +1,5 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/carbon/human/examine(mob/user, distance)
+	. = TRUE
 	var/skipgloves = 0
 	var/skipsuitstorage = 0
 	var/skipjumpsuit = 0
@@ -22,10 +23,12 @@
 		skipface = head.flags_inv & HIDEFACE
 
 	if(wear_mask)
+		skipeyes |= wear_mask.flags_inv & HIDEEYES
+		skipears |= wear_mask.flags_inv & HIDEEARS
 		skipface |= wear_mask.flags_inv & HIDEFACE
 
 	//no accuately spotting headsets from across the room.
-	if(get_dist(user, src) > 3)
+	if(distance > 3)
 		skipears = 1
 
 	var/list/msg = list("<span class='info'>*---------*\nThis is ")
@@ -46,10 +49,12 @@
 	var/is_synth = isSynthetic()
 	if(!(skipjumpsuit && skipface))
 		var/species_name = "\improper "
-		if(is_synth && species.type != /datum/species/machine)
-			species_name += "Cyborg "
-		species_name += "[species.name]"
-		msg += ", <b><font color='[species.get_flesh_colour(src)]'> \a [species_name]!</font></b>"
+		if(is_synth && species.cyborg_noun)
+			species_name += "[species.cyborg_noun] [species.get_bodytype(src)]"
+		else
+			species_name += "[species.name]"
+		msg += ", <b><font color='[species.get_flesh_colour(src)]'>\a [species_name]!</font></b>[(user.can_use_codex() && SScodex.get_codex_entry(get_codex_value())) ?  SPAN_NOTICE(" \[<a href='?src=\ref[SScodex];show_examined_info=\ref[src];show_to=\ref[user]'>?</a>\]") : ""]"
+
 	var/extra_species_text = species.get_additional_examine_text(src)
 	if(extra_species_text)
 		msg += "[extra_species_text]<br>"
@@ -142,7 +147,7 @@
 	//Disfigured face
 	if(!skipface) //Disfigurement only matters for the head currently.
 		var/obj/item/organ/external/head/E = get_organ(BP_HEAD)
-		if(E && E.disfigured) //Check to see if we even have a head and if the head's disfigured.
+		if(E && (E.status & ORGAN_DISFIGURED)) //Check to see if we even have a head and if the head's disfigured.
 			if(E.species) //Check to make sure we have a species
 				msg += E.species.disfigure_msg(src)
 			else //Just in case they lack a species for whatever reason.
@@ -157,11 +162,6 @@
 	if(mSmallsize in mutations)
 		msg += "[T.He] [T.is] small halfling!\n"
 
-	var/distance = 0
-	if(isghost(user) || user.stat == DEAD) // ghosts can see anything
-		distance = 1
-	else
-		distance = get_dist(user,src)
 	if (src.stat)
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be unconscious.</span>\n"
 		if((stat == DEAD || is_asystole() || src.losebreath) && distance <= 3)
@@ -190,6 +190,11 @@
 	var/obj/item/organ/external/head/H = organs_by_name[BP_HEAD]
 	if(istype(H) && H.forehead_graffiti && H.graffiti_style)
 		msg += "<span class='notice'>[T.He] [T.has] \"[H.forehead_graffiti]\" written on [T.his] [H.name] in [H.graffiti_style]!</span>\n"
+
+	if(became_younger)
+		msg += "[T.He] looks a lot younger than you remember.\n"
+	if(became_older)
+		msg += "[T.He] looks a lot older than you remember.\n"
 
 	var/list/wound_flavor_text = list()
 	var/applying_pressure = ""
@@ -226,10 +231,10 @@
 		else
 			if(E.is_stump())
 				wound_flavor_text[E.name] += "<b>[T.He] [T.has] a stump where [T.his] [organ_descriptor] should be.</b>\n"
-				if(E.wounds.len && E.parent)
+				if(LAZYLEN(E.wounds) && E.parent)
 					wound_flavor_text[E.name] += "[T.He] [T.has] [E.get_wounds_desc()] on [T.his] [E.parent.name].<br>"
 			else
-				if(!is_synth && E.robotic >= ORGAN_ROBOT && (E.parent && E.parent.robotic < ORGAN_ROBOT))
+				if(!is_synth && BP_IS_ROBOTIC(E) && (E.parent && !BP_IS_ROBOTIC(E.parent) && !BP_IS_ASSISTED(E.parent)))
 					wound_flavor_text[E.name] = "[T.He] [T.has] a [E.name].\n"
 				var/wounddesc = E.get_wounds_desc()
 				if(wounddesc != "nothing")
@@ -242,7 +247,7 @@
 
 		for(var/datum/wound/wound in E.wounds)
 			var/list/embedlist = wound.embedded_objects
-			if(embedlist.len)
+			if(LAZYLEN(embedlist))
 				shown_objects += embedlist
 				var/parsedembed[0]
 				for(var/obj/embedded in embedlist)
@@ -305,14 +310,22 @@
 
 	if(print_flavor_text()) msg += "[print_flavor_text()]\n"
 
+	if(mind && user.mind && name == real_name)
+		var/list/relations = matchmaker.get_relationships_between(user.mind, mind, TRUE)
+		if(length(relations))
+			msg += "<br><span class='notice'>You know them. <a href='byond://?src=\ref[src];show_relations=1'>More...</a></span><br>"
+
 	msg += "*---------*</span><br>"
 	msg += applying_pressure
 
 	if (pose)
-		if( findtext(pose,".",lentext(pose)) == 0 && findtext(pose,"!",lentext(pose)) == 0 && findtext(pose,"?",lentext(pose)) == 0 )
+		if( findtext(pose,".",length(pose)) == 0 && findtext(pose,"!",length(pose)) == 0 && findtext(pose,"?",length(pose)) == 0 )
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
-		msg += "[T.He] [pose]"
+		msg += "[T.He] [pose]\n"
 
+	var/show_descs = show_descriptors_to(user)
+	if(show_descs)
+		msg += "<span class='notice'>[jointext(show_descs, "<br>")]</span>"
 	to_chat(user, jointext(msg, null))
 
 //Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
@@ -326,7 +339,6 @@
 		for(var/obj/item/borg/sight/sight in list(R.module_state_1, R.module_state_2, R.module_state_3))
 			if(istype(sight) && (sight.hud_type & hudtype))
 				return TRUE
-
 	return FALSE
 
 /mob/living/carbon/human/verb/pose()
@@ -376,4 +388,4 @@
 	HTML += "<hr />"
 	HTML +="<a href='?src=\ref[src];flavor_change=done'>\[Done\]</a>"
 	HTML += "<tt>"
-	src << browse(jointext(HTML,null), "window=flavor_changes;size=430x300")
+	show_browser(src, jointext(HTML,null), "window=flavor_changes;size=430x300")

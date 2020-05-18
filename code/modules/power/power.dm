@@ -11,7 +11,7 @@
 	icon = 'icons/obj/power.dmi'
 	anchored = 1.0
 	var/datum/powernet/powernet = null
-	use_power = 0
+	use_power = POWER_USE_OFF
 	idle_power_usage = 0
 	active_power_usage = 0
 
@@ -65,52 +65,6 @@
 	else
 		return 0
 
-/obj/machinery/power/proc/disconnect_terminal(var/obj/machinery/power/terminal/term) // machines without a terminal will just return, no harm no fowl.
-	return
-
-// returns true if the area has power on given channel (or doesn't require power), defaults to power_channel.
-// May also optionally specify an area, otherwise defaults to src.loc.loc
-/obj/machinery/proc/powered(var/chan = -1, var/area/check_area = null)
-
-	if(!src.loc)
-		return 0
-
-	//Don't do this. It allows machines that set use_power to 0 when off (many machines) to
-	//be turned on again and used after a power failure because they never gain the NOPOWER flag.
-	//if(!use_power)
-	//	return 1
-
-	if(!check_area)
-		check_area = src.loc.loc		// make sure it's in an area
-	if(!check_area || !isarea(check_area))
-		return 0					// if not, then not powered
-	if(chan == -1)
-		chan = power_channel
-	return check_area.powered(chan)			// return power status of the area
-
-// increment the power usage stats for an area
-/obj/machinery/proc/use_power(var/amount, var/chan = -1) // defaults to power_channel
-	var/area/A = get_area(src)		// make sure it's in an area
-	if(!A || !isarea(A))
-		return
-	if(chan == -1)
-		chan = power_channel
-	A.use_power(amount, chan)
-
-// called whenever the power settings of the containing area change
-// by default, check equipment channel & set flag can override if needed
-/obj/machinery/proc/power_change()
-	var/oldstat = stat
-
-	if(powered(power_channel))
-		stat &= ~NOPOWER
-	else
-		stat |= NOPOWER
-
-	. = (stat != oldstat)
-	if(.)
-		update_icon()
-
 // connect the machine to a powernet if a node cable is present on the turf
 /obj/machinery/power/proc/connect_to_network()
 	var/turf/T = src.loc
@@ -134,6 +88,8 @@
 // attach a wire to a power machine - leads from the turf you are standing on
 //almost never called, overwritten by all power machines but terminal and generator
 /obj/machinery/power/attackby(obj/item/weapon/W, mob/user)
+	if((. = ..()))
+		return
 
 	if(isCoil(W))
 
@@ -148,10 +104,7 @@
 			return
 
 		coil.turf_place(T, user)
-		return
-	else
-		..()
-	return
+		return TRUE
 
 ///////////////////////////////////////////
 // Powernet handling helpers
@@ -236,7 +189,7 @@
 
 //remove the old powernet and replace it with a new one throughout the network.
 /proc/propagate_network(var/obj/O, var/datum/powernet/PN)
-	//world.log << "propagating new network"
+	//to_world_log("propagating new network")
 	var/list/worklist = list()
 	var/list/found_machines = list()
 	var/index = 1
@@ -299,7 +252,6 @@
 //source is an object caused electrocuting (airlock, grille, etc)
 //No animations will be performed by this proc.
 /proc/electrocute_mob(mob/living/carbon/M as mob, var/power_source, var/obj/source, var/siemens_coeff = 1.0)
-	if(istype(M.loc,/obj/mecha))	return 0	//feckin mechs are dumb
 	var/area/source_area
 	if(istype(power_source,/area))
 		source_area = power_source
@@ -317,9 +269,10 @@
 		cell = power_source
 	else if(istype(power_source,/obj/machinery/power/apc))
 		var/obj/machinery/power/apc/apc = power_source
-		cell = apc.cell
-		if (apc.terminal)
-			PN = apc.terminal.powernet
+		cell = apc.get_cell()
+		var/obj/machinery/power/terminal/term = apc.terminal()
+		if (term)
+			PN = term.powernet
 	else if (!power_source)
 		return 0
 	else
@@ -361,7 +314,7 @@
 	var/drained_energy = drained_hp*20
 
 	if (source_area)
-		source_area.use_power(drained_energy/CELLRATE)
+		source_area.use_power_oneoff(drained_energy/CELLRATE)
 	else if (istype(power_source,/datum/powernet))
 		var/drained_power = drained_energy/CELLRATE
 		drained_power = PN.draw_power(drained_power)

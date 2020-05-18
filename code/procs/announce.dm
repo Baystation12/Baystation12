@@ -100,13 +100,13 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 /proc/level_seven_announcement()
 	GLOB.using_map.level_x_biohazard_announcement(7)
 
-/proc/ion_storm_announcement()
-	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
+/proc/ion_storm_announcement(list/affecting_z)
+	command_announcement.Announce("It has come to our attention that the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert", zlevels = affecting_z)
 
 /proc/AnnounceArrival(var/mob/living/carbon/human/character, var/datum/job/job, var/join_message)
 	if(!istype(job) || !job.announced)
 		return
-	if (ticker.current_state != GAME_STATE_PLAYING)
+	if (GAME_STATE != RUNLEVEL_GAME)
 		return
 	var/rank = job.title
 	if(character.mind.role_alt_title)

@@ -13,8 +13,8 @@ SUBSYSTEM_DEF(processing)
 	var/debug_last_thing
 	var/debug_original_process_proc // initial() does not work with procs
 
-/datum/controller/subsystem/processing/stat_entry()
-	..(processing.len)
+/datum/controller/subsystem/processing/stat_entry(msg)
+	..("P:[processing.len][msg]")
 
 /datum/controller/subsystem/processing/fire(resumed = 0)
 	if (!resumed)
@@ -46,6 +46,9 @@ SUBSYSTEM_DEF(processing)
 		process_proc = /datum/proc/DebugSubsystemProcess
 
 	to_chat(usr, "[name] - Debug mode [debug_original_process_proc ? "en" : "dis"]abled")
+
+/datum/controller/subsystem/processing/Recover(var/datum/controller/subsystem/processing/P)
+	processing = P.processing
 
 /datum/controller/subsystem/processing/VV_static()
 	return ..() + list("processing", "current_run", "process_proc", "debug_last_thing", "debug_original_process_proc")

@@ -94,7 +94,7 @@
 /turf/space,
 /area/derelict/ship)
 "am" = (
-/obj/item/modular_computer/console/preset/medical,
+/obj/machinery/computer/modular/preset/medical,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "an" = (
@@ -141,9 +141,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "au" = (
-/obj/structure/computerframe{
-	anchored = 1
-	},
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "av" = (
@@ -422,15 +420,16 @@
 /area/derelict/ship)
 "bh" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "bi" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "bj" = (
 /obj/structure/table/standard,
-/obj/item/device/analyzer,
+/obj/item/device/scanner/gas,
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "bk" = (
@@ -491,19 +490,21 @@
 "bw" = (
 /obj/structure/grille,
 /obj/machinery/door/blast/regular/open,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
 "bx" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
 "by" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular/open,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "bz" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
 "bA" = (
@@ -696,7 +697,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "ce" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/airless,
 /area/constructionsite/maintenance)
 "cf" = (
@@ -713,7 +714,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "ci" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /obj/machinery/door/blast/regular/open,
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
@@ -728,7 +729,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "cl" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /obj/machinery/door/blast/regular,
 /turf/simulated/floor/airless,
 /area/constructionsite/bridge)
@@ -774,7 +775,7 @@
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cs" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/bridge)
 "ct" = (
@@ -861,7 +862,7 @@
 /turf/simulated/floor/tiled,
 /area/derelict/ship)
 "cL" = (
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /turf/simulated/floor/plating,
 /area/derelict/ship)
 "cM" = (
@@ -951,9 +952,8 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "cZ" = (
-/obj/machinery/door/airlock/glass_command{
-	name = "Bridge";
-	req_access = list(19)
+/obj/machinery/door/airlock/glass/command{
+	name = "Bridge"
 	},
 /obj/machinery/door/blast/regular,
 /turf/simulated/floor/tiled/dark/airless,
@@ -1008,7 +1008,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dj" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dk" = (
@@ -1085,7 +1085,7 @@
 /turf/simulated/wall,
 /area/constructionsite/hallway/fore)
 "dA" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dB" = (
@@ -1095,7 +1095,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "dC" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -1117,23 +1117,20 @@
 /turf/simulated/wall,
 /area/constructionsite/hallway/fore)
 "dG" = (
-/obj/machinery/door/airlock/glass_command{
-	name = "Bridge";
-	req_access = list(19)
+/obj/machinery/door/airlock/glass/command{
+	name = "Bridge"
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dH" = (
-/obj/machinery/door/airlock/glass_command{
-	name = "Bridge";
-	req_access = list(19)
+/obj/machinery/door/airlock/glass/command{
+	name = "Bridge"
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/constructionsite/hallway/fore)
 "dI" = (
 /obj/machinery/door/airlock/glass{
-	name = "Kitchen";
-	req_access = list(28)
+	name = "Kitchen"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
@@ -1189,6 +1186,7 @@
 /area/constructionsite/hallway/fore)
 "dU" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "dV" = (
@@ -1224,11 +1222,10 @@
 /area/constructionsite/teleporter)
 "ec" = (
 /obj/machinery/mech_recharger,
-/obj/effect/decal/mecha_wreckage/mauler,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "ed" = (
-/obj/machinery/mecha_part_fabricator,
+/obj/machinery/robotics_fabricator,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "ee" = (
@@ -1453,11 +1450,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eD" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "eE" = (
-/obj/machinery/door/airlock/glass_science{
+/obj/machinery/door/airlock/glass/science{
 	name = "Robotics"
 	},
 /turf/simulated/floor/airless{
@@ -1466,6 +1463,7 @@
 /area/constructionsite/storage)
 "eF" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "eG" = (
@@ -1477,7 +1475,7 @@
 	master_tag = "constructionsite_airlock";
 	pixel_x = 20;
 	pixel_y = 0;
-	req_access = list(10)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
@@ -1489,7 +1487,7 @@
 	master_tag = "constructionsite_airlock";
 	pixel_x = -20;
 	pixel_y = 0;
-	req_access = list(10)
+	req_access = newlist()
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	icon_state = "warningcorner";
@@ -1525,14 +1523,14 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/storage)
 "eP" = (
-/obj/machinery/door/airlock/glass_science{
+/obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
 /obj/machinery/door/blast/shutters,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "eQ" = (
-/obj/machinery/door/airlock/glass_science{
+/obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
 /obj/machinery/door/blast/shutters,
@@ -1543,14 +1541,12 @@
 	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_outer";
-	locked = 1;
-	req_access = list(10)
+	locked = 1
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
 "eS" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1379;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -1564,8 +1560,7 @@
 	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
-	locked = 1;
-	req_access = list(10)
+	locked = 1
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1584,7 +1579,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "eX" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "eY" = (
@@ -1592,7 +1587,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "eZ" = (
-/obj/machinery/door/airlock/glass_science{
+/obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
 /obj/machinery/door/blast/shutters/open,
@@ -1609,7 +1604,7 @@
 	id_tag = "constructionsite_airlock";
 	pixel_x = 0;
 	pixel_y = -25;
-	req_access = list(10);
+	req_access = newlist();
 	tag_airpump = "constructionsite_vent";
 	tag_chamber_sensor = "constructionsite_sensor";
 	tag_exterior_door = "constructionsite_outer";
@@ -1644,8 +1639,7 @@
 	frequency = 1379;
 	icon_state = "door_locked";
 	id_tag = "constructionsite_inner";
-	locked = 1;
-	req_access = list(10)
+	locked = 1
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
@@ -1699,16 +1693,18 @@
 /area/space)
 "fj" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/storage)
 "fk" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/storage)
 "fl" = (
-/obj/machinery/door/airlock/glass_science{
+/obj/machinery/door/airlock/glass/science{
 	name = "Research"
 	},
 /turf/simulated/floor/airless{
@@ -1716,7 +1712,7 @@
 	},
 /area/constructionsite/storage)
 "fm" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/storage)
 "fn" = (
@@ -1777,7 +1773,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/autolathe,
+/obj/machinery/fabricator,
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
@@ -1868,7 +1864,7 @@
 	icon_state = "warning";
 	dir = 9
 	},
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "fI" = (
@@ -1924,7 +1920,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "fT" = (
-/obj/effect/overmap/sector/derelict,
+/obj/effect/overmap/visitable/sector/derelict,
 /turf/simulated/floor/airless,
 /area/constructionsite/solar)
 "fU" = (
@@ -1941,14 +1937,17 @@
 /area/constructionsite/solar)
 "fX" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/fore)
 "fY" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/solar)
 "fZ" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/solar)
 "ga" = (
@@ -1978,8 +1977,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
 	locked = 0;
-	name = "AI Upload Access";
-	req_access = list(16)
+	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/hallway/fore)
@@ -2012,8 +2010,7 @@
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
 	locked = 0;
-	name = "AI Upload";
-	req_access = list(16)
+	name = "AI Upload"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/ai)
@@ -2081,15 +2078,13 @@
 /area/constructionsite/maintenance)
 "gB" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Messaging Server";
-	req_access = list(30)
+	name = "Messaging Server"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/fore)
 "gC" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Messaging Server";
-	req_access = list(30)
+	name = "Messaging Server"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/ai)
@@ -2104,8 +2099,7 @@
 /area/constructionsite/ai)
 "gE" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Cyborg Station";
-	req_access = list(16)
+	name = "Cyborg Station"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/ai)
@@ -2123,8 +2117,7 @@
 /area/constructionsite/ai)
 "gH" = (
 /obj/machinery/door/airlock/highsecurity{
-	name = "Cyborg Station";
-	req_access = list(16)
+	name = "Cyborg Station"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/hallway/fore)
@@ -2171,7 +2164,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite/hallway/aft)
 "gS" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "gT" = (
@@ -2188,6 +2181,7 @@
 /area/constructionsite/hallway/aft)
 "gW" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "gX" = (
@@ -2195,15 +2189,14 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "gY" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "gZ" = (
 /obj/machinery/door/airlock/highsecurity{
 	icon_state = "door_closed";
 	locked = 0;
-	name = "AI Upload Access";
-	req_access = list(16)
+	name = "AI Upload Access"
 	},
 /turf/simulated/floor/bluegrid/airless,
 /area/constructionsite/hallway/aft)
@@ -2245,13 +2238,14 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "hg" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
 /area/constructionsite/hallway/aft)
 "hh" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -2265,7 +2259,6 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "hk" = (
-/obj/effect/decal/mecha_wreckage/odysseus,
 /obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/white/airless,
 /area/constructionsite/medical)
@@ -2349,18 +2342,17 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hC" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hD" = (
-/obj/machinery/door/airlock/glass_medical{
-	name = "Medbay";
-	req_one_access = list(65,5)
+/obj/machinery/door/airlock/glass/medical{
+	name = "Medbay"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/medical)
 "hE" = (
-/obj/structure/door_assembly/door_assembly_med{
+/obj/structure/door_assembly{
 	name = "Medbay"
 	},
 /turf/simulated/floor/airless,
@@ -2465,7 +2457,7 @@
 /turf/space,
 /area/constructionsite/medical)
 "ic" = (
-/obj/effect/decal/mecha_wreckage/ripley/firefighter,
+/obj/structure/mech_wreckage/powerloader,
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "id" = (
@@ -2495,16 +2487,14 @@
 /turf/space,
 /area/constructionsite/medical)
 "ii" = (
-/obj/machinery/door/airlock/glass_medical{
-	name = "Medbay Storage";
-	req_one_access = list(65,5)
+/obj/machinery/door/airlock/glass/medical{
+	name = "Medbay Storage"
 	},
 /turf/simulated/wall,
 /area/constructionsite/hallway/aft)
 "ij" = (
-/obj/machinery/door/airlock/glass_atmos{
-	name = "Atmospherics";
-	req_access = list(24)
+/obj/machinery/door/airlock/glass/atmos{
+	name = "Atmospherics"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
@@ -2546,10 +2536,6 @@
 /obj/random/medical/lite,
 /turf/space,
 /area/constructionsite/medical)
-"is" = (
-/obj/structure/girder/reinforced,
-/turf/simulated/floor/airless,
-/area/constructionsite/hallway/aft)
 "it" = (
 /obj/effect/shuttle_landmark/derelict/nav5,
 /turf/space,
@@ -2579,13 +2565,13 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
 "iy" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
-	frequency = 1443;
+/obj/machinery/computer/air_control{
 	input_tag = "d_air_in";
 	name = "Mixed Air Supply Control";
 	output_tag = "d_air_out";
 	pressure_setting = 2000;
-	sensors = list("d_air_sensor" = "Tank")
+	sensor_tag = "d_air_sensor";
+	sensor_name = "Air Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2601,7 +2587,7 @@
 	dir = 4
 	},
 /obj/structure/window/reinforced,
-/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/firedoor,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -2611,11 +2597,10 @@
 /turf/simulated/floor/plating,
 /area/constructionsite/atmospherics)
 "iA" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
-	external_pressure_bound_default = 0;
-	frequency = 1443;
+	external_pressure_bound_default = 0
 	icon_state = "map_vent_in";
 	id_tag = "d_air_out";
 	internal_pressure_bound = 2000;
@@ -2631,15 +2616,13 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/machinery/air_sensor{
-	frequency = 1443;
-	id_tag = "d_air_sensor";
-	output = 7
+/obj/machinery/air_sensor/dist{
+	id_tag = "d_air_sensor"
 	},
 /turf/simulated/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iC" = (
-/obj/structure/girder/reinforced,
+/obj/structure/girder,
 /turf/space,
 /area/constructionsite/medical)
 "iD" = (
@@ -2665,7 +2648,7 @@
 "iH" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 8;
-	frequency = 1443;
+	frequency = 1441;
 	icon_state = "map_injector";
 	id = "d_air_in";
 	use_power = 1
@@ -2677,9 +2660,8 @@
 /turf/simulated/floor/reinforced/airmix,
 /area/constructionsite/atmospherics)
 "iJ" = (
-/obj/machinery/door/airlock/glass_medical{
-	name = "Medbay";
-	req_one_access = list(65,5)
+/obj/machinery/door/airlock/glass/medical{
+	name = "Medbay"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/hallway/aft)
@@ -2710,12 +2692,12 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "iO" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
-	frequency = 1441;
+/obj/machinery/computer/air_control{
 	input_tag = "d_o2_in";
 	name = "Oxygen Supply Control";
 	output_tag = "d_o2_out";
-	sensors = list("d_o2_sensor" = "Tank")
+	sensor_tag = "d_o2_sensor";
+	sensor_name = "Oxygen Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2723,11 +2705,10 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "iP" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d_o2_out";
 	initialize_directions = 1;
@@ -2745,7 +2726,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_o2_sensor"
 	},
 /turf/simulated/floor/reinforced/oxygen,
@@ -2794,10 +2774,12 @@
 /area/constructionsite)
 "iZ" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "ja" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jb" = (
@@ -2809,12 +2791,12 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "jc" = (
-/obj/machinery/computer/general_air_control/large_tank_control{
-	frequency = 1441;
+/obj/machinery/computer/air_control{
 	input_tag = "d_n2_in";
 	name = "Nitrogen Supply Control";
 	output_tag = "d_n2_out";
-	sensors = list("d_n2_sensor" = "Tank")
+	sensor_tag = "d_n2_sensor";
+	sensor_name = "N2 Supply Tank"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
 	dir = 4
@@ -2822,11 +2804,10 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/atmospherics)
 "jd" = (
-/obj/machinery/atmospherics/unary/vent_pump{
+/obj/machinery/atmospherics/unary/vent_pump/tank{
 	dir = 8;
 	external_pressure_bound = 0;
 	external_pressure_bound_default = 0;
-	frequency = 1441;
 	icon_state = "map_vent_in";
 	id_tag = "d_n2_out";
 	initialize_directions = 1;
@@ -2844,7 +2825,6 @@
 	dir = 1
 	},
 /obj/machinery/air_sensor{
-	frequency = 1441;
 	id_tag = "d_n2_sensor"
 	},
 /turf/simulated/floor/reinforced/nitrogen,
@@ -2928,6 +2908,7 @@
 /area/constructionsite/atmospherics)
 "jt" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -2971,12 +2952,7 @@
 	},
 /area/constructionsite)
 "jE" = (
-/obj/structure/closet{
-	icon_closed = "cabinet_closed";
-	icon_opened = "cabinet_open";
-	icon_state = "cabinet_closed";
-	name = "Wardrobe"
-	},
+/obj/structure/closet/cabinet,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jF" = (
@@ -2984,7 +2960,7 @@
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite)
 "jG" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "jH" = (
@@ -3056,6 +3032,7 @@
 /area/constructionsite)
 "jV" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless{
 	icon_state = "dmg2"
 	},
@@ -3066,6 +3043,7 @@
 /area/constructionsite)
 "jX" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/tiled/dark/airless,
 /area/constructionsite)
 "jY" = (
@@ -3078,7 +3056,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "ka" = (
-/obj/machinery/door/airlock/glass_engineering,
+/obj/machinery/door/airlock/glass/engineering,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "kb" = (
@@ -3187,7 +3165,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "kx" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/airless,
 /area/constructionsite)
 "ky" = (
@@ -3198,9 +3176,8 @@
 /turf/simulated/wall,
 /area/constructionsite/engineering)
 "kA" = (
-/obj/machinery/door/airlock/glass_engineering{
-	name = "Engine Access";
-	req_access = list(11)
+/obj/machinery/door/airlock/glass/engineering{
+	name = "Engine Access"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3212,7 +3189,7 @@
 /turf/space,
 /area/space)
 "kD" = (
-/obj/machinery/door/airlock/maintenance_hatch,
+/obj/machinery/door/airlock/hatch,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kE" = (
@@ -3224,7 +3201,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kG" = (
-/obj/machinery/door/airlock/glass_engineering,
+/obj/machinery/door/airlock/glass/engineering,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kH" = (
@@ -3262,6 +3239,7 @@
 /area/constructionsite/engineering)
 "kP" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kQ" = (
@@ -3272,6 +3250,7 @@
 /area/constructionsite/engineering)
 "kR" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "kS" = (
@@ -3308,6 +3287,7 @@
 /area/constructionsite/engineering)
 "kY" = (
 /obj/structure/grille/broken,
+/obj/structure/wall_frame,
 /turf/space,
 /area/constructionsite/engineering)
 "kZ" = (
@@ -3317,6 +3297,7 @@
 /area/constructionsite/engineering)
 "la" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/space,
 /area/constructionsite/engineering)
 "lb" = (
@@ -3324,7 +3305,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lc" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "ld" = (
@@ -3377,9 +3358,8 @@
 /turf/space,
 /area/space)
 "lo" = (
-/obj/machinery/door/airlock/glass_engineering{
-	name = "SMES";
-	req_access = list(11)
+/obj/machinery/door/airlock/glass/engineering{
+	name = "SMES"
 	},
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
@@ -3480,7 +3460,7 @@
 /turf/simulated/floor/airless,
 /area/constructionsite/engineering)
 "lC" = (
-/obj/structure/computerframe,
+/obj/machinery/constructable_frame/computerframe,
 /obj/structure/cable{
 	icon_state = "0-2";
 	d2 = 2
@@ -3661,8 +3641,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/constructionsite/teleporter)
 "ob" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
-	frequency = 1379;
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	id_tag = "constructionsite_vent"
 	},
 /obj/effect/floor_decal/industrial/warning{
@@ -3674,6 +3653,27 @@
 	},
 /turf/simulated/floor,
 /area/constructionsite/teleporter)
+"AR" = (
+/obj/structure/grille,
+/obj/structure/wall_frame,
+/obj/structure/wall_frame,
+/turf/simulated/floor/airless,
+/area/constructionsite/hallway/aft)
+"BO" = (
+/obj/structure/grille,
+/obj/structure/wall_frame,
+/turf/simulated/floor/airless,
+/area/constructionsite/hallway/fore)
+"DP" = (
+/obj/structure/grille,
+/obj/structure/wall_frame,
+/turf/simulated/floor/airless,
+/area/constructionsite/hallway/aft)
+"Lk" = (
+/obj/structure/grille/broken,
+/obj/structure/wall_frame,
+/turf/simulated/floor/airless,
+/area/constructionsite/hallway/fore)
 
 (1,1,1) = {"
 aa
@@ -19063,10 +19063,10 @@ aa
 aa
 aR
 dz
-dP
-dv
-dv
-dv
+Lk
+BO
+BO
+BO
 dz
 aR
 aR
@@ -19270,16 +19270,16 @@ cN
 cw
 cN
 dz
-dv
-dv
-dP
-dv
-dP
-dv
-dP
-dP
-dP
-dv
+BO
+BO
+Lk
+BO
+Lk
+BO
+Lk
+Lk
+Lk
+BO
 dz
 cw
 cw
@@ -19892,17 +19892,17 @@ cN
 cw
 cw
 dz
-dv
+BO
 dj
 dj
 dj
 dj
 dj
-dv
-dv
-dP
-dv
-dP
+BO
+BO
+Lk
+BO
+Lk
 dz
 dz
 dz
@@ -19912,15 +19912,15 @@ cw
 dz
 gO
 gO
-gV
+DP
 gW
-gV
+DP
 gS
-gV
-gV
+DP
+DP
 gW
-gV
-gV
+DP
+DP
 gW
 gW
 gO
@@ -20294,7 +20294,7 @@ bo
 dz
 cw
 cw
-dv
+BO
 aR
 aa
 aa
@@ -20496,7 +20496,7 @@ bo
 dz
 cN
 cN
-dP
+Lk
 aR
 aR
 aR
@@ -20698,7 +20698,7 @@ bo
 dz
 cN
 cN
-dv
+BO
 aR
 aa
 aa
@@ -20900,7 +20900,7 @@ bo
 dz
 cw
 cw
-dv
+BO
 aR
 aR
 aR
@@ -20934,7 +20934,7 @@ aR
 aR
 aR
 aR
-gV
+DP
 gQ
 gQ
 gS
@@ -21102,7 +21102,7 @@ bo
 dz
 cw
 cy
-dP
+Lk
 aR
 aa
 aa
@@ -21136,7 +21136,7 @@ aR
 aa
 aa
 aR
-gV
+DP
 gQ
 gR
 gO
@@ -21304,7 +21304,7 @@ bo
 dz
 fR
 cN
-dP
+Lk
 aR
 aR
 aR
@@ -21338,7 +21338,7 @@ aR
 aR
 aR
 aR
-gV
+DP
 gQ
 gR
 gO
@@ -21708,7 +21708,7 @@ bu
 dz
 cN
 cN
-dv
+BO
 aR
 aW
 bo
@@ -21742,7 +21742,7 @@ bH
 bo
 aW
 aR
-gV
+DP
 gR
 gQ
 gS
@@ -21910,7 +21910,7 @@ bo
 dz
 cw
 cN
-dP
+Lk
 aR
 aW
 bo
@@ -22112,7 +22112,7 @@ bo
 dz
 cw
 dm
-dv
+BO
 aR
 aW
 bo
@@ -22146,7 +22146,7 @@ bo
 bo
 aW
 aR
-gV
+DP
 gX
 gQ
 gS
@@ -22314,7 +22314,7 @@ bo
 dz
 cN
 cN
-dv
+BO
 aR
 aW
 bo
@@ -22969,7 +22969,7 @@ ii
 gS
 gS
 gO
-is
+hA
 gO
 gQ
 gQ
@@ -24536,7 +24536,7 @@ bo
 dz
 cw
 cN
-dP
+Lk
 aR
 aW
 ga
@@ -24570,7 +24570,7 @@ bo
 bo
 aW
 aR
-gV
+DP
 gQ
 gR
 hg
@@ -24738,7 +24738,7 @@ bo
 dz
 cy
 cN
-dP
+Lk
 aR
 aW
 bo
@@ -24772,7 +24772,7 @@ bo
 hd
 aW
 aR
-gV
+DP
 gX
 gR
 gS
@@ -24940,7 +24940,7 @@ bo
 dz
 cN
 cN
-dv
+BO
 aR
 aW
 bp
@@ -25142,7 +25142,7 @@ bo
 dz
 cN
 cN
-dP
+Lk
 aR
 aW
 aW
@@ -25176,7 +25176,7 @@ aW
 aW
 aW
 aR
-gV
+DP
 gR
 gQ
 hh
@@ -25344,7 +25344,7 @@ fK
 dR
 cw
 cw
-dv
+BO
 aR
 aR
 aR
@@ -25394,7 +25394,7 @@ hP
 hP
 hr
 hr
-hr
+iu
 hs
 hr
 hr
@@ -25546,7 +25546,7 @@ bo
 dz
 cw
 cw
-dv
+BO
 aa
 aa
 aa
@@ -25580,10 +25580,10 @@ aR
 aa
 aa
 aR
-gV
+DP
 gR
 gR
-gV
+DP
 ht
 hr
 hr
@@ -25748,7 +25748,7 @@ bo
 dz
 cN
 cN
-dv
+BO
 aR
 aR
 aR
@@ -25950,7 +25950,7 @@ bo
 dz
 cw
 cw
-dP
+Lk
 aR
 aa
 aa
@@ -26152,7 +26152,7 @@ bo
 dz
 cw
 cy
-dP
+Lk
 aa
 aR
 aR
@@ -26186,7 +26186,7 @@ aR
 aR
 aR
 aR
-gV
+DP
 gR
 gQ
 gS
@@ -26354,7 +26354,7 @@ bH
 dz
 cN
 cN
-dv
+BO
 aR
 aa
 aa
@@ -26760,17 +26760,17 @@ cw
 cN
 cw
 dz
-dv
+BO
 dj
-dv
-dP
+BO
+Lk
 dj
-dP
-dv
-dv
+Lk
+BO
+BO
 dj
-dv
-dP
+BO
+Lk
 dz
 dz
 dz
@@ -26780,17 +26780,17 @@ cw
 dz
 gO
 gO
-gV
+DP
 gW
 gW
-gV
-gV
+DP
+DP
 gW
-gV
+DP
 gW
-gV
+DP
 gW
-gV
+DP
 gO
 gR
 gQ
@@ -27350,16 +27350,16 @@ cy
 cw
 dW
 dz
-dv
-dP
-dv
-dv
-dP
-dv
-dv
-dP
-dP
-dv
+BO
+Lk
+BO
+BO
+Lk
+BO
+BO
+Lk
+Lk
+BO
 dz
 cw
 cw
@@ -27403,28 +27403,28 @@ gQ
 gR
 gQ
 gO
-gV
-gV
+DP
+DP
 gW
-gV
-gV
-gV
-gV
-gV
-gV
-gV
+DP
+DP
+DP
+DP
+DP
+DP
+DP
 gO
 gW
-gV
-gV
+DP
+DP
 gW
 gW
-gV
-gV
-gV
+DP
+AR
+DP
 gW
-gV
-gV
+DP
+DP
 gW
 iY
 jg
@@ -27547,10 +27547,10 @@ aa
 aa
 aR
 dz
-dv
+BO
 dU
-dP
-dv
+Lk
+BO
 dz
 aR
 aR
@@ -27600,10 +27600,10 @@ bo
 bo
 bo
 gO
-gV
+DP
 gW
-gV
-gV
+DP
+DP
 gO
 aR
 aR

@@ -52,6 +52,8 @@ GLOBAL_LIST_INIT(keystroke_sound,list('sound/machines/keyboard/keystroke1.ogg','
 GLOBAL_LIST_INIT(switch_sound,list('sound/machines/switch1.ogg','sound/machines/switch2.ogg','sound/machines/switch3.ogg','sound/machines/switch4.ogg'))
 GLOBAL_LIST_INIT(button_sound,list('sound/machines/button1.ogg','sound/machines/button2.ogg','sound/machines/button3.ogg','sound/machines/button4.ogg'))
 GLOBAL_LIST_INIT(chop_sound,list('sound/weapons/chop1.ogg','sound/weapons/chop2.ogg','sound/weapons/chop3.ogg'))
+GLOBAL_LIST_INIT(glasscrack_sound,list('sound/effects/glass_crack1.ogg','sound/effects/glass_crack2.ogg','sound/effects/glass_crack3.ogg','sound/effects/glass_crack4.ogg'))
+GLOBAL_LIST_INIT(tray_hit_sound,list('sound/items/trayhit1.ogg', 'sound/items/trayhit2.ogg'))
 
 /proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, falloff, var/is_global, var/frequency, var/is_ambiance = 0)
 
@@ -92,11 +94,12 @@ var/const/FALLOFF_SOUNDS = 0.5
 
 	//sound volume falloff with pressure
 	var/pressure_factor = 1.0
+	
+	S.volume *= get_sound_volume_multiplier()
 
+	var/turf/T = get_turf(src)
+	// 3D sounds, the technology is here!
 	if(isturf(turf_source))
-		// 3D sounds, the technology is here!
-		var/turf/T = get_turf(src)
-
 		//sound volume falloff with distance
 		var/distance = get_dist(T, turf_source)
 
@@ -143,6 +146,8 @@ var/const/FALLOFF_SOUNDS = 0.5
 				S.environment = DIZZY
 			else if (M.stat == UNCONSCIOUS)
 				S.environment = UNDERWATER
+			else if (T?.is_flooded(M.lying))
+				S.environment = UNDERWATER
 			else if (pressure_factor < 0.5)
 				S.environment = SPACE
 			else
@@ -183,4 +188,6 @@ var/const/FALLOFF_SOUNDS = 0.5
 			if ("switch") soundin = pick(GLOB.switch_sound)
 			if ("button") soundin = pick(GLOB.button_sound)
 			if ("chop") soundin = pick(GLOB.chop_sound)
+			if ("glasscrack") soundin = pick(GLOB.glasscrack_sound)
+			if ("tray_hit") soundin = pick(GLOB.tray_hit_sound)
 	return soundin

@@ -49,7 +49,7 @@
 		if(src.occupant)
 			dat += "[src.ready ? "<A href='?src=\ref[src];implant=1'>Implant</A>" : "Recharging"]<BR>"
 		user.set_machine(src)
-		user << browse(dat, "window=implant")
+		show_browser(user, dat, "window=implant")
 		onclose(user, "implant")
 
 
@@ -79,11 +79,11 @@
 			var/obj/item/grab/grab = G
 			if(!ismob(grab.affecting))
 				return
-			for(var/mob/living/carbon/slime/M in range(1,G:affecting))
+			for(var/mob/living/carbon/slime/M in range(1, grab.affecting))
 				if(M.Victim == grab.affecting)
-					to_chat(usr, "[grab.affecting:name] will not fit into the [src.name] because they have a slime latched onto their head.")
+					to_chat(usr, "[grab.affecting.name] will not fit into the [src.name] because they have a slime latched onto their head.")
 					return
-			var/mob/M = G:affecting
+			var/mob/M = grab.affecting
 			if(put_mob(M))
 				qdel(G)
 		src.updateUsrDialog()
@@ -98,7 +98,7 @@
 		if (src.occupant.client)
 			src.occupant.client.eye = src.occupant.client.mob
 			src.occupant.client.perspective = MOB_PERSPECTIVE
-		src.occupant.loc = src.loc
+		occupant.dropInto(loc)
 		if(injecting)
 			implant(src.occupant)
 			injecting = 0
@@ -118,7 +118,7 @@
 			M.client.perspective = EYE_PERSPECTIVE
 			M.client.eye = src
 		M.stop_pulling()
-		M.loc = src
+		M.forceMove(src)
 		src.occupant = M
 		src.add_fingerprint(usr)
 		icon_state = "implantchair_on"
@@ -136,7 +136,7 @@
 					O.show_message("<span class='warning'>\The [M] has been implanted by \the [src].</span>", 1)
 
 				if(imp.implanted(M))
-					imp.loc = M
+					imp.forceMove(M)
 					imp.imp_in = M
 					imp.implanted = 1
 				implant_list -= imp

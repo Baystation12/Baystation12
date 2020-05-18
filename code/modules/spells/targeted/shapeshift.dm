@@ -14,8 +14,8 @@
 	var/list/possible_transformations = list()
 	var/list/newVars = list() //what the variables of the new created thing will be.
 
-	cast_sound = 'sound/weapons/emitter2.ogg'
-	var/revert_sound = 'sound/weapons/emitter.ogg' //the sound that plays when something gets turned back.
+	cast_sound = 'sound/magic/charge.ogg'
+	var/revert_sound = 'sound/magic/charge.ogg' //the sound that plays when something gets turned back.
 	var/share_damage = 1 //do we want the damage we take from our new form to move onto our real one? (Only counts for finite duration)
 	var/drop_items = 1 //do we want to drop all our items when we transform?
 	var/toggle = 0 //Can we toggle this?
@@ -45,8 +45,6 @@
 		trans.SetName("[trans.name] ([M])")
 		if(istype(M,/mob/living/carbon/human) && drop_items)
 			for(var/obj/item/I in M.contents)
-				if(istype(I,/obj/item/organ))
-					continue
 				M.drop_from_inventory(I)
 		if(M.mind)
 			M.mind.transfer_to(trans)
@@ -55,7 +53,7 @@
 		new /obj/effect/temporary(get_turf(M), 5, 'icons/effects/effects.dmi', "summoning")
 
 		M.forceMove(trans) //move inside the new dude to hide him.
-		M.status_flags |= GODMODE //dont want him to die or breathe or do ANYTHING
+		M.status_flags |= GODMODE //don't want him to die or breathe or do ANYTHING
 		transformed_dudes[trans] = M
 		GLOB.death_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
 		GLOB.destroyed_event.register(trans,src,/spell/targeted/shapeshift/proc/stop_transformation)
@@ -130,7 +128,7 @@
 	name = "Polymorph"
 	desc = "This spell transforms the wizard into the common parrot."
 	feedback = "AV"
-	possible_transformations = list(/mob/living/simple_animal/parrot)
+	possible_transformations = list(/mob/living/simple_animal/hostile/retaliate/parrot)
 
 	drop_items = 0
 	share_damage = 0
@@ -165,6 +163,7 @@
 	newVars = list("name" = "corrupted soul")
 
 	hud_state = "wiz_corrupt"
+	cast_sound = 'sound/magic/disintegrate.ogg'
 
 /spell/targeted/shapeshift/corrupt_form/empower_spell()
 	if(!..())
@@ -189,13 +188,12 @@
 	feedback = "FA"
 	possible_transformations = list()
 	drop_items = 0
-	share_damage = 0
 	invocation_type = SpI_EMOTE
 	invocation = "'s body dissipates into a pale mass of light, then reshapes!"
 	range = -1
 	spell_flags = INCLUDEUSER
 	duration = 0
-	charge_max = 100
+	charge_max = 2 MINUTES
 	toggle = 1
 
 	hud_state = "wiz_carp"

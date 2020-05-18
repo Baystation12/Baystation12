@@ -72,9 +72,6 @@ LOG_PDA
 ## log admin warning messages
 ##LOG_ADMINWARN  ## Also duplicates a bunch of other messages.
 
-## sql switching
-# SQL_ENABLED
-
 ## disconnect players who did nothing during the set amount of minutes
 # KICK_INACTIVE 10
 
@@ -121,9 +118,6 @@ TRAITOR_SCALING
 ## If security is prohibited from being most antagonists
 #PROTECT_ROLES_FROM_ANTAGONIST
 
-## If cortical stacks are to be used instead of standard cloning.
-USE_CORTICAL_STACKS
-
 ## Comment this out to stop admins being able to choose their personal ooccolor
 ALLOW_ADMIN_OOCCOLOR
 
@@ -148,8 +142,8 @@ VOTE_AUTOTRANSFER_INITIAL 108000
 ##autovote delay (deciseconds) before sequential automatic transfer votes are called (default 30 minutes)
 VOTE_AUTOTRANSFER_INTERVAL 18000
 
-## Time left (seconds) before round start when automatic gamemote vote is called (default 100).
-VOTE_AUTOGAMEMODE_TIMELEFT 100
+## Time left (seconds) before round start when automatic gamemote vote is called (default 160).
+VOTE_AUTOGAMEMODE_TIMELEFT 160
 
 ## prevents dead players from voting or starting votes
 #NO_DEAD_VOTE
@@ -168,7 +162,6 @@ ANTAG_HUD_RESTRICTED
 
 ## allow AI job
 ALLOW_AI
-
 
 ## disable abandon mob
 # NORESPAWN
@@ -205,6 +198,9 @@ GUEST_BAN
 ## GitHub address
 # GITHUBURL https://github.com/example-user/example-repository
 
+## GitHub new issue address
+# ISSUEREPORTURL https://github.com/example-user/example-repository/issues/new
+
 ## Ban appeals URL - usually for a forum or wherever people should go to contact your admins.
 # BANAPPEALS http://example.com
 
@@ -225,8 +221,8 @@ GUEST_BAN
 ## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
 ALLOW_HOLIDAYS
 
-##Defines the ticklag for the world.  0.9 is the normal one, 0.5 is smoother.
-TICKLAG 0.7
+##Defines the ticklag for the world. 0.5 is smooth, 0.7 is less smooth.
+TICKLAG 0.5
 
 ##Defines world FPS. Defaults to 20.
 # FPS 20
@@ -262,6 +258,9 @@ USEALIENWHITELIST
 
 ## Password used for authorizing external tools that can apply bans
 #BAN_COMMS_PASSWORD
+
+## BYOND builds that will result the client using them to be banned.
+#FORBIDDEN_VERSIONS 512.0001;512.0002
 
 ## Export address where external tools that monitor logins are located
 #LOGIN_EXPORT_ADDR
@@ -329,6 +328,9 @@ EVENT_CUSTOM_START_MAJOR 80;100
 
 ## Uncomment to disable the OOC channel by default.
 #DISABLE_OOC
+
+## Uncomment to disable the LOOC channel by default.
+#DISABLE_LOOC
 
 ## Uncomment to disable the dead OOC channel by default.
 #DISABLE_DEAD_OOC
@@ -400,3 +402,31 @@ RADIATION_MATERIAL_RESISTANCE_DIVISOR 2
 
 ## Below this point, radiation is ignored
 RADIATION_LOWER_LIMIT 0.15
+
+## Uncomment this to prevent players from printing copy/pasted circuits
+#DISABLE_CIRCUIT_PRINTING
+
+## Uncomment this to allow admins to narrate using HTML tags
+#ALLOW_UNSAFE_NARRATES
+
+## Uncomment this to DISABLE action spam kicking. Not recommended; this helps protect from spam attacks.
+#DO_NOT_PREVENT_SPAM
+
+## Uncomment this to modify the length of the spam kicking interval in seconds.
+#ACT_INTERVAL 0.1
+
+## Uncomment this to modify the number of actions permitted per interval before being kicked for spam.
+#MAX_ACTS_PER_INTERVAL 140
+
+##Clients will be unable to connect unless their version is equal to or higher than this (a number, e.g. 511)
+#MINIMUM_BYOND_VERSION
+
+## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
+#MINIMUM_BYOND_BUILD
+
+## Direct clients to preload the server resource file from a URL pointing to a .rsc file. NOTE: At this time (byond 512),
+## the client/resource_rsc var does not function as one would expect. See client_defines.dm, the "preload_rsc" var's
+## comments on how to use it properly. If you use a resource URL, you must set preload_rsc to 0 at compile time or
+## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
+## Spaces are prohibited in each URL by spec, you must use encoded spaces.
+#RESOURCE_URLS URL URL2 URL3

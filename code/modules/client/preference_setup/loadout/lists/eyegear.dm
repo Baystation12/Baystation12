@@ -5,7 +5,7 @@
 
 /datum/gear/eyes/glasses
 	display_name = "prescription glasses"
-	path = /obj/item/clothing/glasses/regular
+	path = /obj/item/clothing/glasses/prescription
 
 /datum/gear/eyes/eyepatch
 	display_name = "eyepatch"
@@ -18,16 +18,19 @@
 /datum/gear/eyes/fashionglasses/New()
 	..()
 	var/glasses = list()
-	glasses["green glasses"] = /obj/item/clothing/glasses/gglasses
-	glasses["hipster glasses"] = /obj/item/clothing/glasses/regular/hipster
+	glasses["green glasses"] = /obj/item/clothing/glasses/prescription/gglasses
+	glasses["hipster glasses"] = /obj/item/clothing/glasses/prescription/hipster
 	glasses["monocle"] = /obj/item/clothing/glasses/monocle
-	glasses["scanning goggles"] = /obj/item/clothing/glasses/regular/scanners
+	glasses["scanning goggles"] = /obj/item/clothing/glasses/prescription/scanners
 	gear_tweaks += new/datum/gear_tweak/path(glasses)
 
 /datum/gear/eyes/sciencegoggles
 	display_name = "Science Goggles"
 	path = /obj/item/clothing/glasses/science
 
+/datum/gear/eyes/sciencegoggles/prescription
+	display_name = "Science Goggles, prescription"
+	path = /obj/item/clothing/glasses/science/prescription
 /datum/gear/eyes/security
 	display_name = "Security HUD"
 	path = /obj/item/clothing/glasses/hud/security
@@ -76,6 +79,10 @@
 	display_name = "Meson Goggles, prescription"
 	path = /obj/item/clothing/glasses/meson/prescription
 
+/datum/gear/eyes/welding
+	display_name = "Welding Goggles"
+	path = /obj/item/clothing/glasses/welding
+
 /datum/gear/eyes/meson/ipatch
 	display_name = "HUDpatch, Meson"
 	path = /obj/item/clothing/glasses/eyepatch/hud/meson
@@ -104,3 +111,18 @@
 /datum/gear/eyes/hudpatch
 	display_name = "iPatch"
 	path = /obj/item/clothing/glasses/eyepatch/hud
+
+/datum/gear/eyes/blindfold
+	display_name = "blindfold"
+	path = /obj/item/clothing/glasses/blindfold
+	flags = GEAR_HAS_COLOR_SELECTION
+
+/datum/gear/eyes/janitor
+	display_name = "JaniHUD"
+	path = /obj/item/clothing/glasses/hud/janitor
+	cost = 2
+	allowed_roles = list(/datum/job/janitor)
+
+/datum/gear/eyes/janitor/prescription
+	display_name = "JaniHUD, prescription"
+	path = /obj/item/clothing/glasses/hud/janitor/prescription

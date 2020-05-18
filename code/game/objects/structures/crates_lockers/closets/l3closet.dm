@@ -1,14 +1,7 @@
 /obj/structure/closet/l3closet
 	name = "level-3 biohazard suit closet"
 	desc = "It's a storage unit for level-3 biohazard gear."
-	icon_state = "bio"
-	icon_closed = "bio"
-	icon_opened = "bioopen"
-
-/obj/structure/closet/l3closet/general
-	icon_state = "bio_general"
-	icon_closed = "bio_general"
-	icon_opened = "bio_generalopen"
+	closet_appearance = /decl/closet_appearance/bio
 
 /obj/structure/closet/l3closet/general/WillContain()
 	return list(
@@ -28,9 +21,7 @@
 
 
 /obj/structure/closet/l3closet/virology
-	icon_state = "bio_virology"
-	icon_closed = "bio_virology"
-	icon_opened = "bio_virologyopen"
+	closet_appearance = /decl/closet_appearance/bio/virology
 
 /obj/structure/closet/l3closet/virology/WillContain()
 	return list(
@@ -40,11 +31,8 @@
 		/obj/item/weapon/tank/oxygen
 	)
 
-
 /obj/structure/closet/l3closet/security
-	icon_state = "bio_security"
-	icon_closed = "bio_security"
-	icon_opened = "bio_securityopen"
+	closet_appearance = /decl/closet_appearance/bio/security
 
 /obj/structure/closet/l3closet/security/WillContain()
 	return list(
@@ -55,9 +43,7 @@
 	)
 
 /obj/structure/closet/l3closet/janitor
-	icon_state = "bio_janitor"
-	icon_closed = "bio_janitor"
-	icon_opened = "bio_janitoropen"
+	closet_appearance = /decl/closet_appearance/bio/janitor
 
 /obj/structure/closet/l3closet/janitor/WillContain()
 	return list(
@@ -68,9 +54,8 @@
 	)
 
 /obj/structure/closet/l3closet/scientist
-	icon_state = "bio_scientist"
-	icon_closed = "bio_scientist"
-	icon_opened = "bio_scientistopen"
+	closet_appearance = /decl/closet_appearance/bio/science
+
 
 /obj/structure/closet/l3closet/scientist/WillContain()
 	return list(
@@ -89,9 +74,8 @@
 	))
 
 /obj/structure/closet/l3closet/command
-	icon_state = "bio_command"
-	icon_closed = "bio_command"
-	icon_opened = "bio_commandopen"
+	closet_appearance = /decl/closet_appearance/bio/command
+
 
 /obj/structure/closet/l3closet/command/WillContain()
 	return list(

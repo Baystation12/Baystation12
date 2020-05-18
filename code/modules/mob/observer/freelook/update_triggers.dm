@@ -3,7 +3,7 @@
 // TURFS
 
 /proc/updateVisibility(atom/A, var/opacity_check = 1)
-	if(ticker)
+	if(GAME_STATE >= RUNLEVEL_GAME)
 		for(var/datum/visualnet/VN in visual_nets)
 			VN.update_visibility(A, opacity_check)
 
@@ -14,16 +14,6 @@
 	if(opacity)
 		updateVisibility(src)
 	. = ..()
-
-/atom/movable/Move()
-	. = ..()
-	if(opacity && .)
-		updateVisibility(src)
-
-/atom/movable/forceMove()
-	. = ..()
-	if(opacity && .)
-		updateVisibility(src)
 
 // DOORS
 

@@ -20,8 +20,14 @@
 /datum/robot_component/New(mob/living/silicon/robot/R)
 	src.owner = R
 
+/datum/robot_component/proc/accepts_component(var/obj/item/thing)
+	. = istype(thing, external_type)
+
 /datum/robot_component/proc/install()
+	return
+
 /datum/robot_component/proc/uninstall()
+	return
 
 /datum/robot_component/proc/destroy()
 	if (istype(wrapped, /obj/item/robot_parts/robot_component))
@@ -67,15 +73,23 @@
 	else
 		powered = 0
 
-
 // ARMOUR
 // Protects the cyborg from damage. Usually first module to be hit
 // No power usage
 /datum/robot_component/armour
 	name = "armour plating"
 	external_type = /obj/item/robot_parts/robot_component/armour
-	max_damage = 60
+	max_damage = 150
 
+// LIGHT ARMOUR
+// Same as armour, but for flying borgs - Less protection.
+/datum/robot_component/armour/light
+	name = "light armour plating"
+	external_type = /obj/item/robot_parts/robot_component/armour/light
+	max_damage = 75
+
+/datum/robot_component/armour/accepts_component(var/obj/item/thing)
+	. = (!istype(thing, /obj/item/robot_parts/robot_component/armour/exosuit) && ..())
 
 // ACTUATOR
 // Enables movement.
@@ -213,6 +227,24 @@
 	var/brute = 0
 	var/burn = 0
 	var/icon_state_broken = "broken"
+	var/total_dam = 0
+	var/max_dam = 30
+
+/obj/item/robot_parts/robot_component/proc/take_damage(var/brute_amt, var/burn_amt)
+	brute += brute_amt
+	burn += burn_amt
+	total_dam = brute+burn
+	if(total_dam >= max_dam)
+		var/obj/item/weapon/stock_parts/circuitboard/broken/broken_device = new (get_turf(src))
+		if(icon_state_broken != "broken")
+			broken_device.icon = src.icon
+			broken_device.icon_state = icon_state_broken
+		broken_device.name = "broken [name]"
+		return broken_device
+	return 0
+
+/obj/item/robot_parts/robot_component/proc/is_functional()
+	return ((brute + burn) < max_dam)
 
 /obj/item/robot_parts/robot_component/binary_communication_device
 	name = "binary communication device"
@@ -228,6 +260,9 @@
 	name = "armour plating"
 	icon_state = "armor"
 	icon_state_broken = "armor_broken"
+
+/obj/item/robot_parts/robot_component/armour/light
+	name = "light-weight armour plating"
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"

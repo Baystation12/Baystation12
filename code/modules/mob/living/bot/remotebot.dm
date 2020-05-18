@@ -20,7 +20,7 @@
 	return tally
 
 /mob/living/bot/remotebot/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(holding)
 		to_chat(user, "<span class='notice'>It is holding \the \icon[holding] [holding].</span>")
 
@@ -34,7 +34,7 @@
 	for(var/i in 1 to rand(3,5))
 		var/obj/item/stack/material/cardboard/C = new(src.loc)
 		if(prob(50))
-			C.loc = get_step(src, pick(GLOB.alldirs))
+			C.forceMove(get_step(src, pick(GLOB.alldirs)))
 
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(3, 1, src)
@@ -108,7 +108,7 @@
 /obj/item/device/bot_controller/interact(var/mob/user)
 	user.set_machine(src)
 	if(!(src in user) || !bot)
-		user << browse(null, "window=bot_controller")
+		close_browser(user, "window=bot_controller")
 		return
 	var/dat = "<center><TT><b>Remote Control: [bot.name]</b></TT><br>"
 	dat += "Currently Holding: [bot.holding ? bot.holding.name : "Nothing"]<br><br>"
@@ -116,7 +116,7 @@
 	dat += "<a href='byond://?src=\ref[src];look=[is_looking];'>[is_looking ? "Stop" : "Start"] Looking</a><br>"
 	dat += "<a href='byond://?src=\ref[src];drop=1;'>Drop Item</a><br></center>"
 
-	user << browse(dat, "window=bot_controller")
+	show_browser(user, dat, "window=bot_controller")
 	onclose(user, "botcontroller")
 
 /obj/item/device/bot_controller/check_eye()
@@ -167,5 +167,4 @@
 	var/turf/T = get_turf(src.loc)
 	new /mob/living/bot/remotebot(T)
 	new /obj/item/device/bot_controller(T)
-	user.drop_from_inventory(src)
 	qdel(src)

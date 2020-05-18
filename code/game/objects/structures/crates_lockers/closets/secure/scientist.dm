@@ -1,69 +1,53 @@
 /obj/structure/closet/secure_closet/scientist
 	name = "scientist's locker"
-	req_one_access = list(access_tox,access_tox_storage)
-	icon_state = "secureres1"
-	icon_closed = "secureres"
-	icon_locked = "secureres1"
-	icon_opened = "secureresopen"
-	icon_off = "secureresoff"
+	req_access = list(list(access_tox,access_tox_storage))
+	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
 
 /obj/structure/closet/secure_closet/scientist/WillContain()
 	return list(
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger/tox, /obj/item/weapon/storage/backpack/satchel_tox)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger/tox, /obj/item/weapon/storage/backpack/satchel/tox)),
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
-		/obj/item/weapon/clipboard
+		/obj/item/weapon/material/clipboard
 	)
 
 /obj/structure/closet/secure_closet/xenobio
 	name = "xenobiologist's locker"
 	req_access = list(access_xenobiology)
-	icon_state = "secureres1"
-	icon_closed = "secureres"
-	icon_locked = "secureres1"
-	icon_opened = "secureresopen"
-	icon_off = "secureresoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/expedition/science
 
 /obj/structure/closet/secure_closet/xenobio/WillContain()
 	return list(
-		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger/tox, /obj/item/weapon/storage/backpack/satchel_tox)),
+		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/messenger/tox, /obj/item/weapon/storage/backpack/satchel/tox)),
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_sci,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/gloves/latex,
-		/obj/item/weapon/clipboard
+		/obj/item/weapon/material/clipboard,
+		/obj/item/weapon/storage/belt/general
 	)
 
 /obj/structure/closet/secure_closet/RD
-	name = "research director's locker"
+	name = "chief science officer's locker"
 	req_access = list(access_rd)
-	icon_state = "rdsecure1"
-	icon_closed = "rdsecure"
-	icon_locked = "rdsecure1"
-	icon_opened = "rdsecureopen"
-	icon_off = "rdsecureoff"
+	closet_appearance = /decl/closet_appearance/secure_closet/rd
 
 /obj/structure/closet/secure_closet/RD/WillContain()
 	return list(
 		/obj/item/clothing/suit/bio_suit/scientist = 2,
-		/obj/item/clothing/under/rank/research_director,
-		/obj/item/clothing/under/rank/research_director/rdalt,
-		/obj/item/clothing/under/rank/research_director/dress_rd,
-		/obj/item/clothing/under/rank/scientist/executive,
+		/obj/item/clothing/head/bio_hood/scientist = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
-		/obj/item/clothing/shoes/leather,
 		/obj/item/clothing/gloves/latex,
 		/obj/item/device/radio/headset/heads/rd,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flash,
-		/obj/item/weapon/clipboard,
-		/obj/item/clothing/suit/storage/toggle/labcoat/rd
+		/obj/item/weapon/material/clipboard,
 	)
 
 /obj/structure/closet/secure_closet/animal

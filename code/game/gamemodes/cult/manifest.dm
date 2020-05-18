@@ -1,14 +1,14 @@
 /datum/species/human/cult
 	name = "Cult"
 	spawn_flags = SPECIES_IS_RESTRICTED
-
 	brute_mod = 2
 	burn_mod = 2
-
 	species_flags = SPECIES_FLAG_NO_SCAN
-
-/datum/species/human/cult/get_random_name()
-	return "[pick("Anguished", "Blasphemous", "Corrupt", "Cruel", "Depraved", "Despicable", "Disturbed", "Exacerbated", "Foul", "Hateful", "Inexorable", "Implacable", "Impure", "Malevolent", "Malignant", "Malicious", "Pained", "Profane", "Profligate", "Relentless", "Resentful", "Restless", "Spiteful", "Tormented", "Unclean", "Unforgiving", "Vengeful", "Vindictive", "Wicked", "Wronged")] [pick("Apparition", "Aptrgangr", "Dis", "Draugr", "Dybbuk", "Eidolon", "Fetch", "Fylgja", "Ghast", "Ghost", "Gjenganger", "Haint", "Phantom", "Phantasm", "Poltergeist", "Revenant", "Shade", "Shadow", "Soul", "Spectre", "Spirit", "Spook", "Visitant", "Wraith")]"
+	force_cultural_info = list(
+		TAG_CULTURE =   CULTURE_CULTIST,
+		TAG_HOMEWORLD = HOME_SYSTEM_STATELESS,
+		TAG_FACTION =   FACTION_OTHER
+	)
 
 /datum/species/human/cult/handle_death(var/mob/living/carbon/human/H)
 	spawn(1)

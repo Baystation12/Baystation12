@@ -129,7 +129,7 @@
 	anchored = 1
 	name = "foamed metal"
 	desc = "A lightweight foamed metal wall."
-	var/metal = 1 // 1 = aluminum, 2 = iron
+	var/metal = 1 // 1 = aluminium, 2 = iron
 
 /obj/structure/foamedmetal/New()
 	..()
@@ -140,7 +140,7 @@
 	update_nearby_tiles(1)
 	..()
 
-/obj/structure/foamedmetal/update_icon()
+/obj/structure/foamedmetal/on_update_icon()
 	if(metal == 1)
 		icon_state = "metalfoam"
 	else
@@ -154,7 +154,7 @@
 		qdel(src)
 
 /obj/structure/foamedmetal/attack_hand(var/mob/user)
-	if ((HULK in user.mutations) || (prob(75 - metal * 25)))
+	if ((MUTATION_HULK in user.mutations) || (prob(75 - metal * 25)))
 		user.visible_message("<span class='warning'>[user] smashes through the foamed metal.</span>", "<span class='notice'>You smash through the metal foam wall.</span>")
 		qdel(src)
 	else

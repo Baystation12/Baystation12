@@ -2,7 +2,7 @@
 	set invisibility = 0
 	set background = 1
 
-	if (src.transforming)
+	if (HAS_TRANSFORMATION_MOVEMENT_HANDLER(src))
 		return
 
 	..()
@@ -25,7 +25,8 @@
 		var/turf/heat_turf = get_turf(src)
 		loc_temp = heat_turf.temperature
 	else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-		loc_temp = loc:air_contents.temperature
+		var/obj/machinery/atmospherics/unary/cryo_cell/cryo
+		loc_temp = cryo.air_contents.temperature
 	else
 		loc_temp = environment.temperature
 
@@ -45,7 +46,7 @@
 	return //TODO: DEFERRED
 
 /mob/living/carbon/slime/proc/adjust_body_temperature(current, loc_temp, boost)
-	var/temperature = current
+	var/btemperature = current
 	var/difference = abs(current-loc_temp)	//get difference
 	var/increments// = difference/10			//find how many increments apart they are
 	if(difference > 50)
@@ -55,17 +56,18 @@
 	var/change = increments*boost	// Get the amount to change by (x per increment)
 	var/temp_change
 	if(current < loc_temp)
-		temperature = min(loc_temp, temperature+change)
+		btemperature = min(loc_temp, btemperature+change)
 	else if(current > loc_temp)
-		temperature = max(loc_temp, temperature-change)
-	temp_change = (temperature - current)
+		btemperature = max(loc_temp, btemperature-change)
+	temp_change = (btemperature - current)
 	return temp_change
 
 /mob/living/carbon/slime/handle_chemicals_in_body()
 	chem_effects.Cut()
 
 	if(touching) touching.metabolize()
-	if(ingested) ingested.metabolize()
+	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
+	if(istype(ingested)) ingested.metabolize()
 	if(bloodstr) bloodstr.metabolize()
 
 	src.updatehealth()
@@ -123,9 +125,9 @@
 
 	src.set_density(!src.lying)
 
-	if (src.sdisabilities & BLIND)
+	if (src.sdisabilities & BLINDED)
 		src.blinded = 1
-	if (src.sdisabilities & DEAF)
+	if (src.sdisabilities & DEAFENED)
 		src.ear_deaf = 1
 
 	if (src.eye_blurry > 0)
@@ -138,16 +140,15 @@
 
 /mob/living/carbon/slime/proc/handle_nutrition()
 
-	nutrition -= 0.1 + 0.05 * is_adult
+	adjust_nutrition(-(0.1 + 0.05 * is_adult))
 
 	if(nutrition <= 0)
-		nutrition = 0
 		adjustToxLoss(2)
 		if (client && prob(5))
 			to_chat(src, "<span class='danger'>You are starving!</span>")
 
-	else if (nutrition >= get_grow_nutrition() && amount_grown < 10)
-		nutrition -= 20
+	else if (nutrition >= get_grow_nutrition() && amount_grown < SLIME_EVOLUTION_THRESHOLD)
+		adjust_nutrition(-20)
 		amount_grown++
 
 /mob/living/carbon/slime/proc/get_max_nutrition() // Can't go above it

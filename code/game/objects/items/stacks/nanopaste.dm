@@ -30,8 +30,13 @@
 
 		if(!S)
 			to_chat(user, "<span class='warning'>\The [M] is missing that body part.</span>")
+			return
 
-		if(S && S.robotic >= ORGAN_ROBOT && S.hatch_state == HATCH_OPENED)
+		if(BP_IS_BRITTLE(S))
+			to_chat(user, "<span class='warning'>\The [M]'s [S.name] is hard and brittle - \the [src] cannot repair it.</span>")
+			return
+
+		if(S && BP_IS_ROBOTIC(S) && S.hatch_state == HATCH_OPENED)
 			if(!S.get_damage())
 				to_chat(user, "<span class='notice'>Nothing to fix here.</span>")
 			else if(can_use(1))

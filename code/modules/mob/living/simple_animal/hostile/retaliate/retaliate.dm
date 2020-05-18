@@ -9,11 +9,6 @@
 			return L
 		else
 			enemies -= weakref(L)
-	else if(istype(A, /obj/mecha))
-		var/obj/mecha/M = A
-		if(M.occupant)
-			stance = HOSTILE_STANCE_ATTACK
-			return A
 
 /mob/living/simple_animal/hostile/retaliate/ListTargets()
 	. = list()
@@ -26,7 +21,6 @@
 			. += M
 
 /mob/living/simple_animal/hostile/retaliate/proc/Retaliate()
-	..()
 	var/list/around = view(src, 7)
 
 	for(var/atom/movable/A in around)
@@ -36,11 +30,6 @@
 			var/mob/living/M = A
 			if(!attack_same && M.faction != faction)
 				enemies |= weakref(M)
-		else if(istype(A, /obj/mecha))
-			var/obj/mecha/M = A
-			if(M.occupant)
-				enemies |= weakref(M)
-				enemies |= weakref(M.occupant)
 
 	for(var/mob/living/simple_animal/hostile/retaliate/H in around)
 		if(!attack_same && !H.attack_same && H.faction == faction)

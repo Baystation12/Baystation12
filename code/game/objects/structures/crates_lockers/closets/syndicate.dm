@@ -1,10 +1,7 @@
 /obj/structure/closet/syndicate
 	name = "armory closet"
 	desc = "Why is this here?"
-	icon_state = "syndicate"
-	icon_closed = "syndicate"
-	icon_opened = "syndicateopen"
-
+	closet_appearance = /decl/closet_appearance/tactical/alt
 
 /obj/structure/closet/syndicate/personal
 	desc = "It's a storage unit for operative gear."
@@ -42,11 +39,11 @@
 /obj/structure/closet/syndicate/nuclear/New()
 	..()
 
-	new /obj/item/ammo_magazine/a10mm(src)
-	new /obj/item/ammo_magazine/a10mm(src)
-	new /obj/item/ammo_magazine/a10mm(src)
-	new /obj/item/ammo_magazine/a10mm(src)
-	new /obj/item/ammo_magazine/a10mm(src)
+	new /obj/item/ammo_magazine/smg(src)
+	new /obj/item/ammo_magazine/smg(src)
+	new /obj/item/ammo_magazine/smg(src)
+	new /obj/item/ammo_magazine/smg(src)
+	new /obj/item/ammo_magazine/smg(src)
 	new /obj/item/weapon/storage/box/handcuffs(src)
 	new /obj/item/weapon/storage/box/flashbangs(src)
 	new /obj/item/weapon/gun/energy/gun(src)
@@ -135,7 +132,7 @@
 		/obj/item/stack/material/uranium,
 		/obj/item/stack/material/diamond,
 		/obj/item/stack/material/plasteel,
-		/obj/item/stack/rods
+		/obj/item/stack/material/rods
 		)
 
 

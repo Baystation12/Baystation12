@@ -2,7 +2,7 @@
 	name = "Triple AI Mode"
 
 /datum/admin_secret_item/fun_secret/triple_ai_mode/can_execute(var/mob/user)
-	if(ticker && ticker.current_state > GAME_STATE_PREGAME)
+	if(GAME_STATE > RUNLEVEL_LOBBY)
 		return 0
 
 	return ..()

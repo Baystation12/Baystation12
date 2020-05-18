@@ -31,30 +31,31 @@
 	icon = 'icons/obj/computer.dmi'
 	icon_keyboard = "tech_key"
 	icon_screen = "turbinecomp"
-	circuit = /obj/item/weapon/circuitboard/turbine_control
 	anchored = 1
 	density = 1
 	var/obj/machinery/compressor/compressor
 	var/list/obj/machinery/door/blast/doors
-	var/id = 0
 	var/door_status = 0
 
 // the inlet stage of the gas turbine electricity generator
 
-/obj/machinery/compressor/New()
-	..()
-
+/obj/machinery/compressor/Initialize()
+	. = ..()
 	gas_contained = new
 	inturf = get_step(src, dir)
+	turbine = locate() in get_step(src, get_dir(inturf, src))
+	if(!turbine)
+		set_broken(TRUE)
+	else
+		turbine.compressor = src
 
-	spawn(5)
-		turbine = locate() in get_step(src, get_dir(inturf, src))
-		if(!turbine)
-			stat |= BROKEN
-		else
-			turbine.stat &= !BROKEN
-			turbine.compressor = src
-
+/obj/machinery/compressor/Destroy()
+	if(turbine)
+		turbine.compressor = null
+		turbine.set_broken(TRUE)
+		turbine = null
+	QDEL_NULL(gas_contained)
+	return ..()
 
 #define COMPFRICTION 5e5
 #define COMPSTARTERLOAD 2800
@@ -64,9 +65,6 @@
 		return
 	overlays.Cut()
 	if(stat & BROKEN)
-		return
-	if(!turbine)
-		stat |= BROKEN
 		return
 	rpm = 0.9* rpm + 0.1 * rpmtarget
 	var/datum/gas_mixture/environment = inturf.return_air()
@@ -79,7 +77,7 @@
 
 
 	if(starter && !(stat & NOPOWER))
-		use_power(2800)
+		use_power_oneoff(2800)
 		if(rpm<1000)
 			rpmtarget = 1000
 	else
@@ -98,20 +96,22 @@
 		overlays += image('icons/obj/pipes.dmi', "comp-o1", FLY_LAYER)
 	 //TODO: DEFERRED
 
-/obj/machinery/power/turbine/New()
+/obj/machinery/power/turbine/Initialize()
 	..()
-
 	outturf = get_step(src, dir)
+	return INITIALIZE_HINT_LATELOAD
 
-	spawn(5)
+/obj/machinery/power/turbine/LateInitialize()
+	..()
+	if(!compressor) // It should have found us and subscribed.
+		set_broken(TRUE)
 
-		compressor = locate() in get_step(src, get_dir(outturf, src))
-		if(!compressor)
-			stat |= BROKEN
-		else
-			compressor.stat &= !BROKEN
-			compressor.turbine = src
-
+/obj/machinery/power/turbine/Destroy()
+	if(compressor)
+		compressor.turbine = null
+		compressor.set_broken(TRUE)
+		compressor = null
+	return ..()
 
 #define TURBPRES 9000000
 #define TURBGENQ 20000
@@ -122,9 +122,6 @@
 		return
 	overlays.Cut()
 	if(stat & BROKEN)
-		return
-	if(!compressor)
-		stat |= BROKEN
 		return
 	lastgen = ((compressor.rpm / TURBGENQ)**TURBGENG) *TURBGENQ
 
@@ -153,7 +150,7 @@
 
 	if ( (get_dist(src, user) > 1 ) || (stat & (NOPOWER|BROKEN)) && (!istype(user, /mob/living/silicon/ai)) )
 		user.machine = null
-		user << browse(null, "window=turbine")
+		close_browser(user, "window=turbine")
 		return
 
 	user.machine = src
@@ -169,7 +166,7 @@
 	t += "</PRE><HR><A href='?src=\ref[src];close=1'>Close</A>"
 
 	t += "</TT>"
-	user << browse(t, "window=turbine")
+	show_browser(user, t, "window=turbine")
 	onclose(user, "turbine")
 
 	return
@@ -182,7 +179,7 @@
 
 /obj/machinery/power/turbine/OnTopic(user, href_list)
 	if(href_list["close"])
-		usr << browse(null, "window=turbine")
+		close_browser(usr, "window=turbine")
 		return TOPIC_HANDLED
 
 	if(href_list["str"])
@@ -201,49 +198,23 @@
 /obj/machinery/computer/turbine_computer/Initialize()
 	. = ..()
 	for(var/obj/machinery/compressor/C in SSmachines.machinery)
-		if(id == C.comp_id)
+		if(id_tag == C.comp_id)
 			compressor = C
 	doors = new /list()
 	for(var/obj/machinery/door/blast/P in SSmachines.machinery)
-		if(P.id == id)
+		if(P.id_tag == id_tag)
 			doors += P
 
-/*
-/obj/machinery/computer/turbine_computer/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20))
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				new /obj/item/weapon/material/shard( src.loc )
-				var/obj/item/weapon/circuitboard/turbine_control/M = new /obj/item/weapon/circuitboard/turbine_control( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				M.id = src.id
-				A.circuit = M
-				A.state = 3
-				A.icon_state = "3"
-				A.anchored = 1
-				qdel(src)
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-				var/obj/item/weapon/circuitboard/turbine_control/M = new /obj/item/weapon/circuitboard/turbine_control( A )
-				for (var/obj/C in src)
-					C.loc = src.loc
-				M.id = src.id
-				A.circuit = M
-				A.state = 4
-				A.icon_state = "4"
-				A.anchored = 1
-				qdel(src)
-	else
-		src.attack_hand(user)
-	return
-*/
+/obj/machinery/computer/turbine_computer/Destroy()
+	doors.Cut()
+	compressor = null
+	return ..()
 
-/obj/machinery/computer/turbine_computer/attack_hand(var/mob/user as mob)
+/obj/machinery/computer/turbine_computer/interface_interact(mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/computer/turbine_computer/interact(var/mob/user)
 	user.machine = src
 	var/dat
 	if(src.compressor)
@@ -261,7 +232,7 @@
 	else
 		dat += "<span class='danger'>No compatible attached compressor found.</span>"
 
-	user << browse(dat, "window=computer;size=400x500")
+	show_browser(user, dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
 
@@ -286,12 +257,8 @@
 					door_status = 0
 		. = TOPIC_REFRESH
 	else if( href_list["close"] )
-		user << browse(null, "window=computer")
+		close_browser(user, "window=computer")
 		return TOPIC_HANDLED
 
 	if(. == TOPIC_REFRESH)
 		interact(user)
-
-/obj/machinery/computer/turbine_computer/Process()
-	src.updateDialog()
-	return

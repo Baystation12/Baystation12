@@ -57,12 +57,11 @@
 		/obj/item/weapon/storage/fancy/crayons,
 		/obj/item/weapon/storage/backpack/holding,
 		/obj/item/weapon/storage/belt/champion,
-		/obj/item/weapon/soap/deluxe,
 		/obj/item/weapon/pickaxe/silver,
 		/obj/item/weapon/pen/invisible,
 		/obj/item/weapon/lipstick/random,
 		/obj/item/weapon/grenade/smokebomb,
-		/obj/item/weapon/corncob,
+		/obj/item/weapon/carvable/corncob,
 		/obj/item/weapon/contraband/poster,
 		/obj/item/weapon/book/manual/barman_recipes,
 		/obj/item/weapon/book/manual/chef_recipes,
@@ -83,25 +82,26 @@
 		/obj/item/toy/prize/mauler,
 		/obj/item/toy/prize/odysseus,
 		/obj/item/toy/prize/phazon,
-		/obj/item/toy/prize/ripley,
+		/obj/item/toy/prize/powerloader,
 		/obj/item/toy/prize/seraph,
 		/obj/item/toy/spinningtoy,
 		/obj/item/toy/sword,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris,
 		/obj/item/device/paicard,
-		/obj/item/device/violin,
+		/obj/item/device/synthesized_instrument/violin,
 		/obj/item/weapon/storage/belt/utility/full,
-		/obj/item/clothing/accessory/horrible)
+		/obj/item/clothing/accessory/horrible,
+		/obj/item/weapon/storage/box/large/foam_gun,
+		/obj/item/weapon/storage/box/large/foam_gun/burst,
+		/obj/item/weapon/storage/box/large/foam_gun/revolver)
 
 	if(!ispath(gift_type,/obj/item))	return
 
 	var/obj/item/I = new gift_type(M)
-	M.remove_from_mob(src)
 	M.put_in_hands(I)
 	I.add_fingerprint(M)
 	qdel(src)
-	return
 
 /*
  * Wrapping Paper and Gifts
@@ -148,7 +148,7 @@
 	desc = "You can use this to wrap items in."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "wrap_paper"
-	var/amount = 2.5*base_storage_cost(ITEM_SIZE_HUGE)
+	var/amount = 2.5*BASE_STORAGE_COST(ITEM_SIZE_HUGE)
 
 /obj/item/weapon/wrapping_paper/attackby(obj/item/W as obj, mob/user as mob)
 	..()
@@ -168,7 +168,7 @@
 				if(istype(W, /obj/item/smallDelivery) || istype(W, /obj/item/weapon/gift)) //No gift wrapping gifts!
 					return
 
-				if(user.drop_from_inventory(W))
+				if(user.unEquip(W))
 					var/obj/item/weapon/gift/G = new /obj/item/weapon/gift( src.loc, W )
 					G.add_fingerprint(user)
 					W.add_fingerprint(user)
@@ -185,8 +185,9 @@
 	return
 
 
-/obj/item/weapon/wrapping_paper/examine(mob/user)
-	if(..(user, 1))
+/obj/item/weapon/wrapping_paper/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, text("There is about [] square units of paper left!", src.amount))
 
 /obj/item/weapon/wrapping_paper/attack(mob/target as mob, mob/user as mob)

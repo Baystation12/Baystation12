@@ -58,7 +58,7 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 								msg += " <A HREF='?_src_=holder;adminchecklaws=\ref[mob]'>(CL)</A>"
 							msg += "</b> "
 							continue
-			msg += "[original_word] "
+		msg += "[original_word] "
 
 	return msg
 
@@ -111,24 +111,20 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	update_ticket_panels()
 
 
-	//Options bar:  mob, details ( admin = 2, dev = 3, mentor = 4, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
+	//Options bar:  mob, details ( admin = 2, dev = 3, character name (0 = just ckey, 1 = ckey and character name), link? (0 no don't make it a link, 1 do so),
 	//		highlight special roles (0 = everyone has same looking name, 1 = antags / special roles get a golden name)
 
-	var/mentor_msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 4, 1, 1, 0, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 	msg = "<span class='notice'><b><font color=red>HELP: </font>[get_options_bar(mob, 2, 1, 1, 1, ticket)] (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>):</b> [msg]</span>"
 
 	var/admin_number_afk = 0
 
 	for(var/client/X in GLOB.admins)
-		if((R_ADMIN|R_MOD|R_MENTOR) & X.holder.rights)
+		if((R_ADMIN|R_MOD) & X.holder.rights)
 			if(X.is_afk())
 				admin_number_afk++
 			if(X.get_preference_value(/datum/client_preference/staff/play_adminhelp_ping) == GLOB.PREF_HEAR)
 				sound_to(X, 'sound/effects/adminhelp.ogg')
-			if(X.holder.rights == R_MENTOR)
-				to_chat(X, mentor_msg)// Mentors won't see coloring of names on people with special_roles (Antags, etc.)
-			else
-				to_chat(X, msg)
+			to_chat(X, msg)
 	//show it to the person adminhelping too
 	to_chat(src, "<font color='blue'>PM to-<b>Staff</b> (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>): [original_msg]</font>")
 	var/admin_number_present = GLOB.admins.len - admin_number_afk
@@ -138,6 +134,6 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 	else
 		adminmsg2adminirc(src, null, "[html_decode(original_msg)]")
 
-	feedback_add_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","AH") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	return
 

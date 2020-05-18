@@ -223,6 +223,7 @@
 	applied_lum_b = lum_b
 
 	FOR_DVIEW(var/turf/T, light_outer_range, source_turf, INVISIBILITY_LIGHTING)
+		check_t:
 		if(!T.lighting_corners_initialised)
 			T.generate_missing_corners()
 
@@ -239,63 +240,22 @@
 
 			APPLY_CORNER(C)
 
+		LAZYADD(T.affecting_lights, src)
+		affecting_turfs += T
 
+		if (T.z_flags & ZM_ALLOW_LIGHTING)
+			T = T.below
+			goto check_t
 
-		if(!T.affecting_lights)
-			T.affecting_lights = list()
-
-		T.affecting_lights += src
-		affecting_turfs    += T
-
-		var/turf/simulated/open/O = T
-		if(istype(O) && O.below)
-			// Consider the turf below us as well. (Z-lights)
-			//Do subprocessing for open turfs
-			for(T = O.below; !isnull(T); T = process_the_turf(T,update_gen));
-
-
+	END_FOR_DVIEW
 
 	update_gen++
-
-/datum/light_source/proc/process_the_turf(var/turf/T, update_gen)
-
-	if(!T.lighting_corners_initialised)
-		T.generate_missing_corners()
-
-	for(var/datum/lighting_corner/C in T.get_corners())
-		if(C.update_gen == update_gen)
-			continue
-
-		C.update_gen = update_gen
-		C.affecting += src
-
-		if(!C.active)
-			effect_str[C] = 0
-			continue
-
-		APPLY_CORNER(C)
-
-
-
-	if(!T.affecting_lights)
-		T.affecting_lights = list()
-
-	T.affecting_lights += src
-	affecting_turfs    += T
-
-	var/turf/simulated/open/O = T
-	if(istype(O) && O.below)
-		return O.below
-	return null
 
 /datum/light_source/proc/remove_lum()
 	applied = FALSE
 
 	for(var/turf/T in affecting_turfs)
-		if(!T.affecting_lights)
-			T.affecting_lights = list()
-		else
-			T.affecting_lights -= src
+		LAZYREMOVE(T.affecting_lights, src)
 
 	affecting_turfs.Cut()
 
@@ -329,15 +289,12 @@
 	var/list/L = turfs - affecting_turfs // New turfs, add us to the affecting lights of them.
 	affecting_turfs += L
 	for(var/turf/T in L)
-		if(!T.affecting_lights)
-			T.affecting_lights = list(src)
-		else
-			T.affecting_lights += src
+		LAZYADD(T.affecting_lights, src)
 
 	L = affecting_turfs - turfs // Now-gone turfs, remove us from the affecting lights.
 	affecting_turfs -= L
 	for(var/turf/T in L)
-		T.affecting_lights -= src
+		LAZYREMOVE(T.affecting_lights, src)
 
 	for(var/datum/lighting_corner/C in corners - effect_str) // New corners
 		C.affecting += src

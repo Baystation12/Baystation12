@@ -1,15 +1,14 @@
-/obj/item/weapon/gun/projectile/colt/detective
+/obj/item/weapon/gun/projectile/pistol/sec/detective
 	var/unique_name
 	var/datum/detective_gun_skin/unique_reskin
 	var/static/list/gun_options
-	magazine_type = /obj/item/ammo_magazine/c45m/flash
 
-/obj/item/weapon/gun/projectile/colt/detective/New()
-	..()
+/obj/item/weapon/gun/projectile/pistol/sec/detective/Initialize()
+	. = ..()
 	if(!gun_options)
 		gun_options = init_subtypes(/datum/detective_gun_skin)
 
-/obj/item/weapon/gun/projectile/colt/detective/update_icon()
+/obj/item/weapon/gun/projectile/pistol/sec/detective/on_update_icon()
 	if(ammo_magazine && ammo_magazine.stored_ammo.len)
 		if(unique_reskin)
 			icon_state = unique_reskin.icon_state
@@ -21,7 +20,7 @@
 		else
 			icon_state = "[initial(icon_state)]-e"
 
-/obj/item/weapon/gun/projectile/colt/detective/verb/rename_gun()
+/obj/item/weapon/gun/projectile/pistol/sec/detective/verb/rename_gun()
 	set name = "Name Gun"
 	set category = "Object"
 	set desc = "Rename your gun. If you're the detective."
@@ -43,7 +42,7 @@
 		to_chat(M, "You name the gun '[input]'. Say hello to your new friend.")
 		return 1
 
-/obj/item/weapon/gun/projectile/colt/detective/verb/reskin_gun()
+/obj/item/weapon/gun/projectile/pistol/sec/detective/verb/reskin_gun()
 	set name = "Reskin gun"
 	set category = "Object"
 	set desc = "Click to reskin your gun."
@@ -63,7 +62,7 @@
 
 
 //apart of reskins that have two sprites, touching may result in frustration and breaks
-/obj/item/weapon/gun/projectile/colt/detective/attack_hand(var/mob/living/user)
+/obj/item/weapon/gun/projectile/pistol/sec/detective/attack_hand(var/mob/living/user)
 	if(!unique_reskin && loc == user)
 		reskin_gun(user)
 		return
@@ -72,37 +71,16 @@
 /datum/detective_gun_skin
 	var/name
 	var/icon_state
+	var/icon
 
 /datum/detective_gun_skin/default/New()
 	..()
-	var/obj/item/weapon/gun/projectile/colt/detective/d = /obj/item/weapon/gun/projectile/colt/detective
+	var/obj/item/weapon/gun/projectile/pistol/sec/detective/d = /obj/item/weapon/gun/projectile/pistol/sec/detective
 	name = initial(d.name)
+	icon_state = initial(d.icon)
 	icon_state = initial(d.icon_state)
-
-/datum/detective_gun_skin/colt
-	name = "\improper Colt M1911"
-	icon_state = "colt"
-
-/datum/detective_gun_skin/luger
-	name = "\improper P08 Luger"
-	icon_state = "p08"
-
-/datum/detective_gun_skin/luger_brown
-	name = "\improper P08 Luger, brown"
-	icon_state = "p08b"
 
 /datum/detective_gun_skin/mk_standard
 	name = "\improper NT Mk. 58"
 	icon_state = "secguncomp"
-
-/datum/detective_gun_skin/mk_custom
-	name = "\improper NT Mk. 58 Custom"
-	icon_state = "secgundark"
-
-/datum/detective_gun_skin/usp
-	name = "\improper USP"
-	icon_state = "usp"
-
-/datum/detective_gun_skin/vp
-	name = "\improper H&K VP"
-	icon_state = "VP78"
+	icon = 'icons/obj/guns/pistol.dmi'

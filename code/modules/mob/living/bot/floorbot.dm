@@ -3,7 +3,7 @@
 	desc = "A little floor repairing robot, he looks so excited!"
 	icon = 'icons/mob/bot/floorbot.dmi'
 	icon_state = "floorbot0"
-	req_one_access = list(access_construction, access_robotics)
+	req_access = list(list(access_construction, access_robotics))
 	wait_if_pulled = 1
 	min_target_dist = 0
 
@@ -175,7 +175,7 @@
 			anchored = TRUE
 			if(do_after(src, 50, F))
 				if(!F.flooring)
-					F.set_flooring(get_flooring_data(floor_build_type))
+					F.set_flooring(decls_repository.get_decl(floor_build_type))
 					addTiles(-1)
 			anchored = FALSE
 			target = null
@@ -196,7 +196,7 @@
 		update_icons()
 	else if(istype(A, /obj/item/stack/material) && amount + 4 <= maxAmount)
 		var/obj/item/stack/material/M = A
-		if(M.get_material_name() == DEFAULT_WALL_MATERIAL)
+		if(M.get_material_name() == MATERIAL_STEEL)
 			visible_message("<span class='notice'>\The [src] begins to make tiles.</span>")
 			busy = 1
 			anchored = TRUE
@@ -220,7 +220,7 @@
 	var/list/shrapnel = list()
 
 	for(var/I = 3, I<3 , I++) //Toolbox shatters.
-		shrapnel += new /obj/item/weapon/material/shrapnel(Tsec)
+		shrapnel += new /obj/item/weapon/material/shard/shrapnel(Tsec)
 
 	for(var/Amt = amount, Amt>0, Amt--) //Why not just spit them out in a disorganized jumble?
 		shrapnel += new /obj/item/stack/tile/floor(Tsec)
@@ -245,90 +245,3 @@
 	else if(amount > maxAmount)
 		amount = maxAmount
 	busy = FALSE
-
-
-/* Assembly */
-
-/obj/item/weapon/storage/toolbox/attackby(var/obj/item/stack/tile/floor/T, mob/user as mob)
-	if(!istype(T, /obj/item/stack/tile/floor))
-		..()
-		return
-	if(contents.len >= 1)
-		to_chat(user, "<span class='notice'>They wont fit in as there is already stuff inside.</span>")
-		return
-	if(user.s_active)
-		user.s_active.close(user)
-	if(T.use(10))
-		var/obj/item/weapon/toolbox_tiles/B = new /obj/item/weapon/toolbox_tiles
-		B.boxtype = icon_state
-		user.put_in_hands(B)
-		to_chat(user, "<span class='notice'>You add the tiles into the empty toolbox. They protrude from the top.</span>")
-		user.drop_from_inventory(src)
-		qdel(src)
-	else
-		to_chat(user, "<span class='warning'>You need 10 floor tiles for a floorbot.</span>")
-	return
-
-/obj/item/weapon/toolbox_tiles
-	desc = "It's a toolbox with tiles sticking out the top."
-	name = "tiles and toolbox"
-	icon = 'icons/mob/bot/floorbot.dmi'
-	icon_state = "toolbox_tiles"
-	force = 3.0
-	throwforce = 10.0
-	throw_speed = 2
-	throw_range = 5
-	w_class = ITEM_SIZE_NORMAL
-	var/boxtype = ""
-	var/created_name = "Floorbot"
-
-/obj/item/weapon/toolbox_tiles/attackby(var/obj/item/W, mob/user)
-	..()
-	if(isprox(W))
-		qdel(W)
-		var/obj/item/weapon/toolbox_tiles_sensor/B = new /obj/item/weapon/toolbox_tiles_sensor()
-		B.created_name = created_name
-		user.put_in_hands(B)
-		to_chat(user, "<span class='notice'>You add the sensor to the toolbox and tiles!</span>")
-		user.drop_from_inventory(src)
-		B.boxtype = src.boxtype
-		qdel(src)
-	else if (istype(W, /obj/item/weapon/pen))
-		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, user) && loc != user)
-			return
-		created_name = t
-
-/obj/item/weapon/toolbox_tiles_sensor
-	desc = "It's a toolbox with tiles sticking out the top and a sensor attached."
-	name = "tiles, toolbox and sensor arrangement"
-	icon = 'icons/mob/bot/floorbot.dmi'
-	icon_state = "toolbox_tiles_sensor"
-	force = 3.0
-	throwforce = 10.0
-	throw_speed = 2
-	throw_range = 5
-	w_class = ITEM_SIZE_NORMAL
-	var/created_name = "Floorbot"
-	var/boxtype = ""
-
-/obj/item/weapon/toolbox_tiles_sensor/attackby(var/obj/item/W, mob/user as mob)
-	..()
-	if(istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm))
-		qdel(W)
-		var/turf/T = get_turf(user.loc)
-		var/mob/living/bot/floorbot/A = new /mob/living/bot/floorbot(T)
-		A.SetName(created_name)
-		to_chat(user, "<span class='notice'>You add the robot arm to the odd looking toolbox assembly! Boop beep!</span>")
-		A.boxtype = src.boxtype
-		user.drop_from_inventory(src)
-		qdel(src)
-	else if(istype(W, /obj/item/weapon/pen))
-		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, user) && loc != user)
-			return
-		created_name = t

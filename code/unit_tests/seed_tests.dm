@@ -7,7 +7,7 @@
 	for (var/subtype in subtypesof(/datum/seed))
 		var/datum/seed/S = new subtype()
 		var/sprite = S.get_trait(TRAIT_PLANT_ICON)
-		if(sprite && (!(sprite in plant_controller.plant_sprites)))
+		if(sprite && (!(sprite in SSplants.plant_sprites)))
 			log_bad("[subtype] references nonexistent sprite [sprite].")
 			any_failed = TRUE
 

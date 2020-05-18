@@ -3,20 +3,16 @@
 #define   UNIDNASIZE 13
 
 // Generic mutations:
-#define TK              1
-#define COLD_RESISTANCE 2
-#define XRAY            3
-#define HULK            4
-#define CLUMSY          5
-#define FAT             6
-#define HUSK            7
-#define NOCLONE         8
-#define LASER           9  // Harm intent - click anywhere to shoot lasers from eyes.
-#define HEAL            10 // Healing people with hands.
-#define SPACERES        11 // Can't be harmed via pressure damage.
-
-#define SKELETON      29
-#define PLANT         30
+#define MUTATION_COLD_RESISTANCE 1
+#define MUTATION_XRAY            2
+#define MUTATION_HULK            3
+#define MUTATION_CLUMSY          4
+#define MUTATION_FAT             5
+#define MUTATION_HUSK            6
+#define MUTATION_LASER           7  // Harm intent - click anywhere to shoot lasers from eyes.
+#define MUTATION_HEAL            8 // Healing people with hands.
+#define MUTATION_SPACERES        9 // Can't be harmed via pressure damage.
+#define MUTATION_SKELETON        10
 
 // Other Mutations:
 #define mNobreath      100 // No need to breathe.
@@ -39,9 +35,9 @@
 #define NERVOUS     0x10
 
 // sdisabilities
-#define BLIND 0x1
-#define MUTE  0x2
-#define DEAF  0x4
+#define BLINDED 0x1
+#define MUTED  0x2
+#define DEAFENED  0x4
 
 // The way blocks are handled badly needs a rewrite, this is horrible.
 // Too much of a project to handle at the moment, TODO for later.

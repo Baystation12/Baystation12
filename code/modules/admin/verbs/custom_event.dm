@@ -8,7 +8,9 @@
 		return
 
 	var/input = sanitize(input(usr, "Enter the description of the custom event. Be descriptive. To cancel the event, make this blank or hit cancel.", "Custom Event", custom_event_msg) as message|null, MAX_BOOK_MESSAGE_LEN, extra = 0)
-	if(!input || input == "")
+	if(isnull(input))
+		return
+	if(input == "")
 		custom_event_msg = null
 		log_admin("[usr.key] has cleared the custom event text.")
 		message_admins("[key_name_admin(usr)] has cleared the custom event text.")
@@ -23,6 +25,8 @@
 	to_world("<h2 class='alert'>A custom event is starting. OOC Info:</h2>")
 	to_world("<span class='alert'>[custom_event_msg]</span>")
 	to_world("<br>")
+
+	SSwebhooks.send(WEBHOOK_CUSTOM_EVENT, list("text" = custom_event_msg))
 
 // normal verb for players to view info
 /client/verb/cmd_view_custom_event()

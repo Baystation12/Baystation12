@@ -2,12 +2,15 @@
 /obj/machinery/ntnet_relay
 	name = "NTNet Quantum Relay"
 	desc = "A very complex router and transmitter capable of connecting electronic devices together. Looks fragile."
-	use_power = 2
+	use_power = POWER_USE_ACTIVE
 	active_power_usage = 20000 //20kW, apropriate for machine that keeps massive cross-Zlevel wireless network operational.
 	idle_power_usage = 100
 	icon_state = "bus"
 	anchored = 1
 	density = 1
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = null
+	stat_immune = 0
 	var/datum/ntnet/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
 	var/enabled = 1				// Set to 0 if the relay was turned off
 	var/dos_failure = 0			// Set to 1 if the relay failed due to (D)DoS attack
@@ -29,7 +32,7 @@
 		return 0
 	return 1
 
-/obj/machinery/ntnet_relay/update_icon()
+/obj/machinery/ntnet_relay/on_update_icon()
 	if(operable())
 		icon_state = "bus"
 	else
@@ -37,9 +40,9 @@
 
 /obj/machinery/ntnet_relay/Process()
 	if(operable())
-		use_power = 2
+		update_use_power(POWER_USE_ACTIVE)
 	else
-		use_power = 1
+		update_use_power(POWER_USE_IDLE)
 
 	if(dos_overload)
 		dos_overload = max(0, dos_overload - dos_dissipate)
@@ -54,7 +57,6 @@
 		dos_failure = 0
 		update_icon()
 		ntnet_global.add_log("Quantum relay switched from overload recovery mode to normal operation mode.")
-	..()
 
 /obj/machinery/ntnet_relay/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = list()
@@ -62,16 +64,18 @@
 	data["dos_capacity"] = dos_capacity
 	data["dos_overload"] = dos_overload
 	data["dos_crashed"] = dos_failure
+	data["portable_drive"] = !!get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable)
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_relay.tmpl", "NTNet Quantum Relay", 500, 300, state = state)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/ntnet_relay/attack_hand(var/mob/living/user)
+/obj/machinery/ntnet_relay/interface_interact(var/mob/living/user)
 	ui_interact(user)
+	return TRUE
 
 /obj/machinery/ntnet_relay/Topic(href, href_list)
 	if(..())
@@ -91,14 +95,12 @@
 		ntnet_global.banned_nids.Cut()
 		ntnet_global.add_log("Manual override: Network blacklist cleared.")
 		return 1
+	else if(href_list["eject_drive"] && uninstall_component(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+		visible_message("\icon[src] [src] beeps and ejects its portable disk.")
 
 /obj/machinery/ntnet_relay/New()
 	uid = gl_uid
 	gl_uid++
-	component_parts = list()
-	component_parts += new /obj/item/stack/cable_coil(src,15)
-	component_parts += new /obj/item/weapon/circuitboard/ntnet_relay(src)
-
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global
@@ -115,22 +117,11 @@
 		D.error = "Connection to quantum relay severed"
 	..()
 
-/obj/machinery/ntnet_relay/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(isScrewdriver(W))
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		panel_open = !panel_open
-		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance hatch")
+/obj/machinery/ntnet_relay/attackby(obj/item/P, mob/user)
+	if (!istype(P,/obj/item/weapon/stock_parts/computer/hard_drive/portable))
 		return
-	if(isCrowbar(W))
-		if(!panel_open)
-			to_chat(user, "Open the maintenance panel first.")
-			return
-		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		to_chat(user, "You disassemble \the [src]!")
-
-		for(var/atom/movable/A in component_parts)
-			A.forceMove(src.loc)
-		new/obj/machinery/constructable_frame/machine_frame(src.loc)
-		qdel(src)
-		return
-	..()
+	else if (get_component_of_type(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
+		to_chat(user, "This relay's portable drive slot is already occupied.")
+	else if(user.unEquip(P,src))
+		install_component(P)
+		to_chat(user, "You install \the [P] into \the [src]")

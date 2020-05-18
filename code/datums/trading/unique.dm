@@ -1,7 +1,7 @@
 /datum/trader/ship/unique
 	trade_flags = TRADER_WANTED_ONLY|TRADER_GOODS
 	want_multiplier = 5
-	typical_duration = 10
+	typical_duration = 40
 
 /datum/trader/ship/unique/New()
 	..()
@@ -35,9 +35,8 @@
 							/mob/living/carbon/human                                                   = TRADER_ALL
 							)
 
-	possible_trading_items = list(/obj/mecha/combat                                                    = TRADER_SUBTYPES_ONLY,
-							/obj/item/weapon/gun/projectile/automatic                                  = TRADER_SUBTYPES_ONLY,
-							/obj/item/weapon/gun/projectile/automatic/mini_uzi/usi                     = TRADER_BLACKLIST,
+	possible_trading_items = list(/obj/item/weapon/gun/projectile/automatic                            = TRADER_SUBTYPES_ONLY,
+							/obj/item/weapon/gun/projectile/automatic/machine_pistol/usi                     = TRADER_BLACKLIST,
 							/obj/item/weapon/gun/projectile/automatic/l6_saw/mag                       = TRADER_BLACKLIST
 							)
 

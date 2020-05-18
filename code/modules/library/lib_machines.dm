@@ -18,10 +18,14 @@
 
 /obj/machinery/libraryscanner/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/book))
-		user.drop_item()
-		O.loc = src
+		if(!user.unEquip(O, src))
+			return
 
-/obj/machinery/libraryscanner/attack_hand(var/mob/user as mob)
+/obj/machinery/libraryscanner/interface_interact(var/mob/user)
+	interact(user)
+	return TRUE
+
+/obj/machinery/libraryscanner/interact(var/mob/user)
 	usr.set_machine(src)
 	var/dat = "<HEAD><TITLE>Scanner Control Interface</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	if(cache)
@@ -33,12 +37,12 @@
 		dat += "       <A href='?src=\ref[src];clear=1'>\[Clear Memory\]</A><BR><BR><A href='?src=\ref[src];eject=1'>\[Remove Book\]</A>"
 	else
 		dat += "<BR>"
-	user << browse(dat, "window=scanner")
+	show_browser(user, dat, "window=scanner")
 	onclose(user, "scanner")
 
 /obj/machinery/libraryscanner/Topic(href, href_list)
 	if(..())
-		usr << browse(null, "window=scanner")
+		close_browser(usr, "window=scanner")
 		onclose(usr, "scanner")
 		return
 
@@ -50,11 +54,9 @@
 		cache = null
 	if(href_list["eject"])
 		for(var/obj/item/weapon/book/B in contents)
-			B.loc = src.loc
+			B.dropInto(loc)
 	src.add_fingerprint(usr)
 	src.updateUsrDialog()
-	return
-
 
 /*
  * Book binder
@@ -68,8 +70,8 @@
 
 /obj/machinery/bookbinder/attackby(var/obj/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/paper))
-		user.drop_item()
-		O.loc = src
+		if(!user.unEquip(O, src))
+			return
 		user.visible_message("[user] loads some paper into [src].", "You load some paper into [src].")
 		src.visible_message("[src] begins to hum as it warms up its printing drums.")
 		sleep(rand(200,400))

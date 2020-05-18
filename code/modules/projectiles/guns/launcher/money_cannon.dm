@@ -1,9 +1,6 @@
 /obj/item/weapon/gun/launcher/money
 	name = "money cannon"
-	desc = "A blocky, plastic novelty launcher that claims to be able to shoot thaler at considerable velocities."
-	description_info = "Load money into the cannon by picking it up with the gun, or feeding it directly by hand. Use in your hand to configure how much money you want to fire per shot."
-	description_fluff = "These devices were invented several centuries ago and are a distinctly human cultural infection. They have produced knockoffs as timeless and as insipid as the potato gun and the paddle ball, showing up in all corners of the galaxy. The Money Cannon variation is noteworthy for its sturdiness and build quality, but is, at the end of the day, just another knockoff of the ancient originals."
-	description_antag = "Sliding a cryptographic sequencer into the receptacle will short the motors and override their speed. If you set the cannon to dispense 100 thaler or more, this might make a handy weapon."
+	desc = "A blocky, plastic novelty launcher that claims to be able to shoot money at considerable velocities."
 	icon_state = "money_launcher"
 	item_state = "money_launcher"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
@@ -43,7 +40,7 @@
 		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] blasts themselves full in the face with \the [src]!</span>")
 		playsound(T, "sound/weapons/gunshot/money_launcher_jackpot.ogg", 100, 1)
 	else
-		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few thaler into their face.</span>")
+		vomit_onto.visible_message("<span class='danger'>\The [vomit_onto] ejects a few [GLOB.using_map.local_currency_name] into their face.</span>")
 		playsound(T, 'sound/weapons/gunshot/money_launcher.ogg', 100, 1)
 
 	receptacle_value = 0
@@ -68,7 +65,7 @@
 	bling.worth = receptacle_value
 	bling.update_icon()
 	user.put_in_hands(bling)
-	to_chat(user, "<span class='notice'>You eject [receptacle_value] thaler from [src]'s receptacle.</span>")
+	to_chat(user, "<span class='notice'>You eject [receptacle_value] [GLOB.using_map.local_currency_name_singular] from [src]'s receptacle.</span>")
 	receptacle_value = 0
 
 /obj/item/weapon/gun/launcher/money/proc/absorb_cash(var/obj/item/weapon/spacecash/bling, mob/user)
@@ -78,7 +75,6 @@
 
 	src.receptacle_value += bling.worth
 	to_chat(user, "<span class='notice'>You load [bling] into [src].</span>")
-	user.drop_from_inventory(bling)
 	qdel(bling)
 
 /obj/item/weapon/gun/launcher/money/consume_next_projectile(mob/user=null)
@@ -103,9 +99,14 @@
 	return bling
 
 /obj/item/weapon/gun/launcher/money/attack_self(mob/user as mob)
-	src.dispensing = min(input(user, "How many thaler do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
+	var/disp_amount = min(input(user, "How many [GLOB.using_map.local_currency_name_singular] do you want to dispense at a time? (0 to [src.receptacle_value])", "Money Cannon Settings", 20) as num, receptacle_value)
 
-	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] thaler at a time.</span>")
+	if (disp_amount < 1)
+		to_chat(user, "<span class='warning'>You have to dispense at least one [GLOB.using_map.local_currency_name_singular] at a time!</span>")
+		return
+
+	src.dispensing = disp_amount
+	to_chat(user, "<span class='notice'>You set [src] to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time.</span>")
 
 /obj/item/weapon/gun/launcher/money/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
@@ -121,7 +122,7 @@
 			return
 
 		receptacle_value += bling.worth
-		to_chat(user, "<span class='notice'>You slide [bling.worth] thaler into [src]'s receptacle.</span>")
+		to_chat(user, "<span class='notice'>You slide [bling.worth] [GLOB.using_map.local_currency_name_singular] into [src]'s receptacle.</span>")
 		qdel(bling)
 
 	else
@@ -129,10 +130,10 @@
 
 /obj/item/weapon/gun/launcher/money/examine(mob/user)
 	. = ..(user)
-	to_chat(user, "It is configured to dispense [dispensing] thaler at a time.")
+	to_chat(user, "It is configured to dispense [dispensing] [GLOB.using_map.local_currency_name_singular] at a time.")
 
 	if(receptacle_value >= 1)
-		to_chat(user, "The receptacle is loaded with [receptacle_value] thaler.")
+		to_chat(user, "The receptacle is loaded with [receptacle_value] [GLOB.using_map.local_currency_name_singular].")
 
 	else
 		to_chat(user, "The receptacle is empty.")

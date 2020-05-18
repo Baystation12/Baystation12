@@ -4,7 +4,7 @@
 	feedback = "TM"
 	school = "illusion"
 	charge_max = 150
-	spell_flags = 0
+	spell_flags = NOFACTION
 	invocation = "Rai Di-Kaal!"
 	invocation_type = SpI_SHOUT
 	range = 5
@@ -18,7 +18,7 @@
 	var/loss = 30
 
 	hud_state = "wiz_horse"
-
+	cast_sound = 'sound/magic/cowhead_curse.ogg'
 
 /spell/targeted/torment/cast(var/list/targets, var/mob/user)
 	gibs(user.loc)

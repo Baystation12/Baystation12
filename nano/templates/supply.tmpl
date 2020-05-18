@@ -1,18 +1,58 @@
+{{##def.common_supply_header:
+  <th style="width:65%">Item
+  <th style="width:20%">Cost
+  <th style="width:15%">Options
+#}}
+{{##def.common_request_header:
+  <th style="width:5%">ID
+  <th style="width:25%">Requested item
+  <th style="width:20%">Requested by
+  <th style="width:20%">Reason
+  <th style="width:10%">Cost
+  <th style="width:20%">Options
+#}}
+{{##def.supply_request_item:
+	<tr class="candystripe">
+	<td>{{:value.id}}
+	<td>{{:value.object}}
+	<td>{{:value.orderer}}
+	<td>{{:value.reason || '<i>No reason provided.</i>'}}
+	<td>{{:value.cost}} {{:data.currency_short}}
+#}}
 <div class='notice'>
 	{{if data.is_admin}}
 		You are authenticated. You may access all functions of this program.
 	{{else}}
-		You are unauthenticated. Some functions may me unavailable.
+		You are unauthenticated. Some functions may be unavailable.
 	{{/if}}
 </div>
+{{if data.is_admin}}
+	{{if data.request_length || data.shopping_cart_length}}
+		<div class='notice'>
+			{{if data.request_length}}
+				You have <u>{{:data.request_length}}</u> orders pending.
+			{{/if}}
+			{{if data.request_length && data.shopping_cart_length}}
+				&#32;|&#32;
+			{{/if}}
+			{{if data.shopping_cart_length}}
+				You have <u>{{:data.shopping_cart_length}}</u> orders awaiting shuttle delivery.
+			{{/if}}
+		</div>
+	{{else}}
+		<div class='notice info'>
+			All orders caught up.
+		</div>
+	{{/if}}
+{{/if}}
 <div class="item">
 	{{:helper.link('Browse Goods', 'cart', {'set_screen' : 1}, data.screen == 1 ? 'selected' : null)}}
 	{{:helper.link('View Statistics', 'calculator', {'set_screen' : 2}, data.screen == 2 ? 'selected' : null)}}
-	{{:helper.link('Shuttle Control', 'bullet', {'set_screen' : 3}, data.screen == 3 ? 'selected' : null)}}
+	{{:helper.link('Controls', 'bullet', {'set_screen' : 3}, data.screen == 3 ? 'selected' : null)}}
 	{{:helper.link('Browse Orders', 'check', {'set_screen' : 4}, data.screen == 4 ? 'selected' : null)}}
 </div>
 <hr>
-<span>Current balance: {{:data.credits}} Credits</span>
+<span>Current balance: {{:data.credits}} {{:data.currency}}</span>
 <hr>
 {{if data.screen == 1}}
 	{{for data.categories}}
@@ -20,80 +60,39 @@
 	{{/for}}
 	{{if data.category}}
 		<table style="width:100%">
-			<tr><th style="width:70%">Item<th style="width:20%">Cost<th style="width:10%">Order
+			<tr>{{#def.common_supply_header}}
 			{{for data.possible_purchases}}
-				<tr>
+				<tr class="candystripe">
 				<td>{{:value.name}}
-				<td>{{:value.cost}} Credits
-				<td>{{:helper.link('Order', null, {'order' : value.ref})}}
+				<td>{{:value.cost}} {{:data.currency}}
+				<td>
+				{{:helper.link('Order', null, {'order' : value.ref})}}
+				{{if data.showing_contents_of && data.showing_contents_of == value.ref}}
+					{{:helper.link('Close', null, {'hide_contents' : 1})}}
+					<tr class="candystripe"><th colspan="3">Contents
+					{{for data.contents_of_order :content :content_index}}
+						<tr class="candystripe">
+						<td colspan="3">{{:content.name}} × {{:content.amount}}
+					{{/for}}
+          			<hr>
+					<tr>{{#def.common_supply_header}}
+				{{else}}
+					{{:helper.link('Contents', null, {'show_contents' : value.ref})}}
+				{{/if}}
 			{{/for}}
 		</table>
 	{{/if}}
 {{else data.screen == 2}}
-	<div class="item">
-		<div class="itemLabel">
-			Total credits generated today:
+	{{for data.point_breakdown}}
+		<div class="item">
+			<div class="itemLabel">
+				{{:value.desc}}: 
+			</div>
+			<div class="itemContent">
+				{{:value.points}} {{:data.currency_short}}
+			</div>
 		</div>
-		<div class="itemContent">
-			{{:data.total_credits}} Cr.
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Standard allocation:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_passive}} Cr.
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Credits from recycled crates:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_crates}} Cr.
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Credits from phoron exports:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_phoron}} Cr.
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Credits from platinum exports:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_platinum}} Cr.
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Credits from uploaded antibody data:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_virology}} Cr.
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Credits from uploaded good explorer points:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_gep}} Cr.
-		</div>
-	</div>
-	<div class="item">
-		<div class="itemLabel">
-			Credit bonus for paperwork handling:
-		</div>
-		<div class="itemContent">
-			{{:data.credits_paperwork}} Cr.
-		</div>
-	</div>
+	{{/for}}
 	<div class="item">
 		<div class="itemLabel">
 			Options:
@@ -105,7 +104,7 @@
 {{else data.screen == 3}}
 	<div class="item">
 		<div class="itemLabel">
-			Current shuttle location:
+			Current {{:data.shuttle_name}} location:
 		</div>
 		<div class="itemContent">
 			{{:data.shuttle_location}}
@@ -113,7 +112,7 @@
 	</div>
 	<div class="item">
 		<div class="itemLabel">
-			Current shuttle status:
+			Current {{:data.shuttle_name}} status:
 		</div>
 		<div class="itemContent">
 			{{:data.shuttle_status}}
@@ -129,52 +128,54 @@
 	</div>
 {{else data.screen == 4}}
 	{{if data.is_admin}}
+		{{if data.is_NTOS}}
+			<div class="item">
+				<div class="itemLabel">
+					Notifications are: 
+				</div>
+				<div class="itemContent">
+					{{:helper.link((data.notifications_enabled ? 'Enabled' : 'Disabled'), null, {'toggle_notifications': 1})}}
+				</div>
+			</div>
+		{{/if}}
 		<div class="item">
 			<center><h3>Pending orders</h3></span>
 			<table style="width:100%">
-				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">Options
+				<tr>{{#def.common_request_header}}
 				{{for data.requests}}
-					<tr>
-					<td>{{:value.id}}
-					<td>{{:value.object}}
-					<td>{{:value.orderer}}
-					<td>{{:value.reason}}
-					<td>{{:value.cost}} Cr.
-					<td>{{:helper.link('Approve', 'check', {'approve_order' : value.id}, value.cost > data.credits ? 'disabled' : null )}}{{:helper.link('Deny', 'cancel', {'deny_order' : value.id})}}
+					{{#def.supply_request_item}}
+					<td>
+					{{:helper.link('Approve', 'check', {'approve_order' : value.id}, value.cost > data.credits ? 'disabled' : null )}}
+					{{:helper.link('Deny', 'cancel', {'deny_order' : value.id})}}
+					{{:helper.link('Print', 'print', {'print_receipt' : value.id, 'list_id' : value.list_id}, data.can_print ? null : 'disabled')}}
 				{{/for}}
 			</table>
 		</div>
 		<div class="item">
 			<center><h3>Approved orders</h3></span>
 			<table style="width:100%">
-				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">Options
+				<tr>{{#def.common_request_header}}
 				{{for data.cart}}
-					<tr>
-					<td>{{:value.id}}
-					<td>{{:value.object}}
-					<td>{{:value.orderer}}
-					<td>{{:value.reason}}
-					<td>{{:value.cost}} Cr.
-					<td>{{:helper.link('Cancel', 'cancel', {'cancel_order' : value.id})}}
+					{{#def.supply_request_item}}
+					<td>
+					{{:helper.link('Cancel', 'cancel', {'cancel_order' : value.id})}}
+					{{:helper.link('Print', 'print', {'print_receipt' : value.id, 'list_id' : value.list_id}, data.can_print ? null : 'disabled')}}
 				{{/for}}
 			</table>
 		</div>
 		<div class="item">
 			<center><h3>Filled orders</h3></span>
 			<table style="width:100%">
-				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">>Cost<th style="width:15%">Options
+				<tr>{{#def.common_request_header}}
 				{{for data.done}}
-					<tr>
-					<td>{{:value.id}}
-					<td>{{:value.object}}
-					<td>{{:value.orderer}}
-					<td>{{:value.reason}}
-					<td>{{:value.cost}} Cr.
-					<td>{{:helper.link('Delete', 'cancel', {'delete_order' : value.id})}}
+					{{#def.supply_request_item}}
+					<td>
+					{{:helper.link('Delete', 'cancel', {'delete_order' : value.id})}}
+					{{:helper.link('Print', 'print', {'print_receipt' : value.id, 'list_id' : value.list_id}, data.can_print ? null : 'disabled')}}
 				{{/for}}
 			</table>
 		</div>
 	{{else}}
-		<h3>Access denied: Missing identificaton or insufficient permissions.</h3>
+		<h3>Access denied: Missing identification or insufficient permissions.</h3>
 	{{/if}}
 {{/if}}

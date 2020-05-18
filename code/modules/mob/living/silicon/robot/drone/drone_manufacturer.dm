@@ -12,7 +12,6 @@
 
 	density = 1
 	anchored = 1
-	use_power = 1
 	idle_power_usage = 20
 	active_power_usage = 5000
 
@@ -34,13 +33,12 @@
 	..()
 
 /obj/machinery/drone_fabricator/power_change()
-	..()
+	. = ..()
 	if (stat & NOPOWER)
 		icon_state = "drone_fab_nopower"
 
 /obj/machinery/drone_fabricator/Process()
-
-	if(ticker.current_state < GAME_STATE_PLAYING)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		return
 
 	if(stat & NOPOWER || !produce_drones)
@@ -59,7 +57,7 @@
 		visible_message("\The [src] voices a strident beep, indicating a drone chassis is prepared.")
 
 /obj/machinery/drone_fabricator/examine(mob/user)
-	. = ..(user)
+	. = ..()
 	if(produce_drones && drone_progress >= 100 && isghost(user) && config.allow_drone_spawn && count_drones() < config.max_maint_drones)
 		to_chat(user, "<BR><B>A drone is prepared. Select 'Join As Drone' from the Ghost tab to spawn as a maintenance drone.</B>")
 
@@ -95,7 +93,7 @@
 
 /proc/try_drone_spawn(var/mob/user, var/obj/machinery/drone_fabricator/fabricator)
 
-	if(ticker.current_state < GAME_STATE_PLAYING)
+	if(GAME_STATE < RUNLEVEL_GAME)
 		to_chat(user, "<span class='danger'>The game hasn't started yet!</span>")
 		return
 

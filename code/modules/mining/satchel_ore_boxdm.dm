@@ -12,9 +12,8 @@
 
 /obj/structure/ore_box/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/ore))
-		user.remove_from_mob(W)
-		src.contents += W
-	if (istype(W, /obj/item/weapon/storage))
+		user.unEquip(W, src)
+	else if (istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = W
 		S.hide_from(usr)
 		for(var/obj/item/weapon/ore/O in S.contents)
@@ -23,8 +22,6 @@
 		to_chat(user, "<span class='notice'>You empty the satchel into the box.</span>")
 
 	update_ore_count()
-
-	return
 
 /obj/structure/ore_box/proc/update_ore_count()
 
@@ -38,7 +35,7 @@
 			stored_ore[O.name] = 1
 
 /obj/structure/ore_box/examine(mob/user)
-	. = ..(user)
+	. = ..()
 
 	// Borgs can now check contents too.
 	if((!istype(user, /mob/living/carbon/human)) && (!istype(user, /mob/living/silicon/robot)))
@@ -86,16 +83,12 @@
 		return
 
 	for (var/obj/item/weapon/ore/O in contents)
-		contents -= O
-		O.loc = src.loc
+		O.dropInto(loc)
 	to_chat(usr, "<span class='notice'>You empty the ore box</span>")
-
-	return
 
 /obj/structure/ore_box/ex_act(severity)
 	if(severity == 1.0 || (severity < 3.0 && prob(50)))
 		for (var/obj/item/weapon/ore/O in contents)
-			O.loc = src.loc
+			O.dropInto(loc)
 			O.ex_act(severity++)
 		qdel(src)
-		return

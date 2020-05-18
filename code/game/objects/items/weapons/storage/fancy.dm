@@ -5,32 +5,25 @@
  *
  * Contains:
  *		Egg Box
- *		Candle Box
  *		Crayon Box
  *		Cigarette Box
  */
 
 /obj/item/weapon/storage/fancy
 	item_state = "syringe_kit" //placeholder, many of these don't have inhands
+	opened = 0 //if an item has been removed from this container
 	var/obj/item/key_type //path of the key item that this "fancy" container is meant to store
-	var/opened = 0 //if an item has been removed from this container
 
-/obj/item/weapon/storage/fancy/remove_from_storage()
-	. = ..()
-	if(!opened && .)
-		opened = 1
-		update_icon()
-
-
-/obj/item/weapon/storage/fancy/update_icon()
+/obj/item/weapon/storage/fancy/on_update_icon()
 	if(!opened)
 		src.icon_state = initial(icon_state)
 	else
 		var/key_count = count_by_type(contents, key_type)
 		src.icon_state = "[initial(icon_state)][key_count]"
 
-/obj/item/weapon/storage/fancy/examine(mob/user)
-	if(!..(user, 1))
+/obj/item/weapon/storage/fancy/examine(mob/user, distance)
+	. = ..()
+	if(distance > 1)
 		return
 
 	var/key_name = initial(key_type.name)
@@ -63,25 +56,20 @@
 /obj/item/weapon/storage/fancy/egg_box/empty
 	startswith = null
 
-
 /*
- * Candle Box
+ * Cracker Packet
  */
 
-/obj/item/weapon/storage/fancy/candle_box
-	name = "candle pack"
-	desc = "A pack of red candles."
-	icon = 'icons/obj/candle.dmi'
-	icon_state = "candlebox"
-	opened = 1 //no closed state
-	throwforce = 2
-	w_class = ITEM_SIZE_SMALL
+/obj/item/weapon/storage/fancy/crackers
+	name = "\improper Getmore Crackers"
+	icon = 'icons/obj/food.dmi'
+	icon_state = "crackerbag"
+	storage_slots = 6
 	max_w_class = ITEM_SIZE_TINY
-	max_storage_space = 5
-	slot_flags = SLOT_BELT
-
-	key_type = /obj/item/weapon/flame/candle
-	startswith = list(/obj/item/weapon/flame/candle = 5)
+	w_class = ITEM_SIZE_SMALL
+	key_type = /obj/item/weapon/reagent_containers/food/snacks/cracker
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/cracker)
+	startswith = list(/obj/item/weapon/reagent_containers/food/snacks/cracker = 6)
 
 /*
  * Crayon Box
@@ -106,11 +94,33 @@
 		/obj/item/weapon/pen/crayon/purple,
 		)
 
-/obj/item/weapon/storage/fancy/crayons/update_icon()
+/obj/item/weapon/storage/fancy/crayons/on_update_icon()
 	overlays = list() //resets list
 	overlays += image('icons/obj/crayons.dmi',"crayonbox")
 	for(var/obj/item/weapon/pen/crayon/crayon in contents)
 		overlays += image('icons/obj/crayons.dmi',crayon.colourName)
+
+/*
+ * Pencil Case
+ */
+
+/obj/item/weapon/storage/fancy/pencilcase
+	name = "pencil case"
+	desc = "A pencil case for all those schoolboys to carry."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "pencil_case"
+	w_class = ITEM_SIZE_SMALL
+	max_w_class = ITEM_SIZE_TINY
+	max_storage_space = 6 * ITEM_SIZE_TINY
+	key_type = /obj/item/weapon/pen
+	startswith = list(
+		/obj/item/weapon/pen,
+		/obj/item/weapon/pen/blue,
+		/obj/item/weapon/pen/red,
+		/obj/item/weapon/pen/green,
+		/obj/item/weapon/pen/crayon/yellow,
+		/obj/item/weapon/pen/crayon/purple,
+		)
 
 ////////////
 //CIG PACK//
@@ -295,7 +305,7 @@
 	key_type = /obj/item/weapon/reagent_containers/glass/beaker/vial
 	startswith = list(/obj/item/weapon/reagent_containers/glass/beaker/vial = 12)
 
-/obj/item/weapon/storage/fancy/vials/update_icon()
+/obj/item/weapon/storage/fancy/vials/on_update_icon()
 	var/key_count = count_by_type(contents, key_type)
 	src.icon_state = "[initial(icon_state)][Floor(key_count/2)]"
 
@@ -318,7 +328,7 @@
 	..()
 	update_icon()
 
-/obj/item/weapon/storage/lockbox/vials/update_icon()
+/obj/item/weapon/storage/lockbox/vials/on_update_icon()
 	var/total_contents = count_by_type(contents, /obj/item/weapon/reagent_containers/glass/beaker/vial)
 	src.icon_state = "vialbox[Floor(total_contents/2)]"
 	src.overlays.Cut()

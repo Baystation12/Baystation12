@@ -3,8 +3,16 @@
 	if(!add_antagonist_mind(player, ignore_role))
 		return
 
+	if(base_to_load)
+		var/datum/map_template/base = new base_to_load()
+		report_progress("Loading map template '[base]' for [role_text]...")
+		base_to_load = null
+		base.load_new_z()
+		get_starting_locations()
+
 	//do this again, just in case
 	if(flags & ANTAG_OVERRIDE_JOB)
+		player.assigned_job = null
 		player.assigned_role = role_text
 		player.role_alt_title = null
 	player.special_role = role_text
@@ -13,11 +21,13 @@
 		create_default(player.current)
 	else
 		create_antagonist(player, move_to_spawn, do_not_announce, preserve_appearance)
-		player.current.skillset.set_antag_skills()
+		if(istype(skill_setter))
+			skill_setter.initialize_skills(player.current.skillset)
 		if(!do_not_equip)
 			equip(player.current)
 
-	player.current.faction = faction
+	if(player.current)
+		player.current.faction = faction
 	return 1
 
 /datum/antagonist/proc/add_antagonist_mind(var/datum/mind/player, var/ignore_role, var/nonstandard_role_type, var/nonstandard_role_msg)
@@ -31,19 +41,20 @@
 		return 0
 	current_antagonists |= player
 
-	if(faction_verb && player.current)
+	if(faction_verb)
 		player.current.verbs |= faction_verb
 
 	if(config.objectives_disabled == CONFIG_OBJECTIVE_VERB)
 		player.current.verbs += /mob/proc/add_objectives
 
-	player.current.client.verbs += /client/proc/aooc
+	if(player.current.client)
+		player.current.client.verbs += /client/proc/aooc
 
 	spawn(1 SECOND) //Added a delay so that this should pop up at the bottom and not the top of the text flood the new antag gets.
 		to_chat(player.current, "<span class='notice'>Once you decide on a goal to pursue, you can optionally display it to \
 			everyone at the end of the shift with the <b>Set Ambition</b> verb, located in the IC tab.  You can change this at any time, \
 			and it otherwise has no bearing on your round.</span>")
-	player.current.verbs += /mob/living/proc/write_ambition
+	player.current.verbs += /mob/living/proc/set_ambition
 
 	// Handle only adding a mind and not bothering with gear etc.
 	if(nonstandard_role_type)
@@ -60,21 +71,24 @@
 		return 0
 	if(player.current && faction_verb)
 		player.current.verbs -= faction_verb
+	if(faction && player.current.faction == faction)
+		player.current.faction = MOB_FACTION_NEUTRAL
 	if(player in current_antagonists)
 		to_chat(player.current, "<span class='danger'><font size = 3>You are no longer a [role_text]!</font></span>")
 		current_antagonists -= player
 		faction_members -= player
 		player.special_role = null
 		update_icons_removed(player)
-		BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
 
-		var/datum/job/job = job_master.GetJob(player.assigned_role) //Reset their skills to be job-appropriate.
 		if(player.current)
-			player.current.skillset.obtain_from_client(job, player.current.client)
+			BITSET(player.current.hud_updateflag, SPECIALROLE_HUD)
+			player.current.reset_skillset() //Reset their skills to be job-appropriate.
 
 		if(!is_special_character(player))
-			player.current.verbs -= /mob/living/proc/write_ambition
-			player.current.client.verbs -= /client/proc/aooc
-			player.ambitions = ""
+			if(player.current)
+				player.current.verbs -= /mob/living/proc/set_ambition
+				if(player.current.client)
+					player.current.client.verbs -= /client/proc/aooc
+			qdel(SSgoals.ambitions[player])
 		return 1
 	return 0

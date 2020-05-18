@@ -144,7 +144,7 @@
 	check_instability()
 	Radiate()
 	if(radiation)
-		radiation_repository.radiate(src, round(radiation*0.001))
+		SSradiation.radiate(src, round(radiation*0.001))
 	return 1
 
 /obj/effect/fusion_em_field/proc/check_instability()
@@ -202,6 +202,9 @@
 								reactants.Remove(particle)
 					Radiate()
 	return
+
+/obj/effect/fusion_em_field/proc/is_shutdown_safe()
+	return plasma_temperature < 1000
 
 /obj/effect/fusion_em_field/proc/Rupture()
 	visible_message("<span class='danger'>\The [src] shudders like a dying animal before flaring to eye-searing brightness and rupturing!</span>")
@@ -276,7 +279,7 @@
 	radiation += plasma_temperature/2
 	plasma_temperature = 0
 
-	radiation_repository.radiate(src, round(radiation*0.001))
+	SSradiation.radiate(src, round(radiation*0.001))
 	Radiate()
 
 /obj/effect/fusion_em_field/proc/Radiate()
@@ -307,11 +310,19 @@
 
 /obj/effect/fusion_em_field/proc/change_size(var/newsize = 1)
 	var/changed = 0
+	var/static/list/size_to_icon = list(
+			"3" = 'icons/effects/96x96.dmi', 
+			"5" = 'icons/effects/160x160.dmi', 
+			"7" = 'icons/effects/224x224.dmi', 
+			"9" = 'icons/effects/288x288.dmi', 
+			"11" = 'icons/effects/352x352.dmi', 
+			"13" = 'icons/effects/416x416.dmi'
+			)
 
 	if( ((newsize-1)%2==0) && (newsize<=13) )
 		icon = 'icons/obj/machines/power/fusion.dmi'
 		if(newsize>1)
-			icon = "icons/effects/[newsize*32]x[newsize*32].dmi"
+			icon = size_to_icon["[newsize]"]
 		icon_state = "emfield_s[newsize]"
 		pixel_x = ((newsize-1) * -16) * PIXEL_MULTIPLIER
 		pixel_y = ((newsize-1) * -16) * PIXEL_MULTIPLIER
@@ -353,21 +364,24 @@
 				possible_s_reacts.Remove(cur_p_react)
 
 			//loop through and work out all the possible reactions
-			var/list/possible_reactions = new/list
+			var/list/possible_reactions
 			for(var/cur_s_react in possible_s_reacts)
 				if(possible_s_reacts[cur_s_react] < 1)
 					continue
 				var/decl/fusion_reaction/cur_reaction = get_fusion_reaction(cur_p_react, cur_s_react)
 				if(cur_reaction && plasma_temperature >= cur_reaction.minimum_energy_level)
-					possible_reactions.Add(cur_reaction)
+					LAZYDISTINCTADD(possible_reactions, cur_reaction)
 
 			//if there are no possible reactions here, abandon this primary reactant and move on
-			if(!possible_reactions.len)
+			if(!LAZYLEN(possible_reactions))
 				continue
+
+			/// Sort based on reaction priority to avoid deut-deut eating all the deut before deut-trit can run etc.
+			sortTim(possible_reactions, /proc/cmp_fusion_reaction_des)
 
 			//split up the reacting atoms between the possible reactions
 			while(possible_reactions.len)
-				var/decl/fusion_reaction/cur_reaction = pick(possible_reactions)
+				var/decl/fusion_reaction/cur_reaction = possible_reactions[1]
 				possible_reactions.Remove(cur_reaction)
 
 				//set the randmax to be the lower of the two involved reactants

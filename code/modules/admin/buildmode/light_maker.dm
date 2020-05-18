@@ -21,8 +21,9 @@
 			if(input)
 				light_outer_range = input
 		if("Power")
-			var/input = input("New light power.", name, light_max_bright) as null|num
+			var/input = input("New light power, from 0.1 to 1 in decimal increments.", name, light_max_bright) as null|num
 			if(input)
+				input = Clamp(input, 0.1, 1)
 				light_max_bright = input
 		if("Color")
 			var/input = input("New light color.", name, light_color) as null|color

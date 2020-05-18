@@ -203,6 +203,8 @@
 		holder.callproc.do_args()
 
 /client/Click(atom/A)
+	if(!user_acted(src))
+		return
 	if(holder && holder.callproc && holder.callproc.waiting_for_click)
 		if(alert("Do you want to select \the [A] as the [holder.callproc.arguments.len+1]\th argument?",, "Yes", "No") == "Yes")
 			holder.callproc.arguments += A
@@ -230,7 +232,7 @@
 		returnval = call(procname)(arglist(arguments))
 
 	to_chat(usr, "<span class='info'>[procname]() returned: [json_encode(returnval)]</span>")
-	feedback_add_details("admin_verb","APC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSstatistics.add_field_details("admin_verb","APC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 #undef CANCEL
 #undef WAITING

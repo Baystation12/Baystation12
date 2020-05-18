@@ -16,6 +16,7 @@
 	smoke_amt = 5
 
 	hud_state = "wiz_smoke"
+	cast_sound = 'sound/magic/smoke.ogg'
 
 /spell/aoe_turf/smoke/empower_spell()
 	if(!..())
@@ -23,3 +24,6 @@
 	smoke_amt += 2
 
 	return "[src] will now create more smoke."
+
+/spell/aoe_turf/smoke/tower
+	charge_max = 2

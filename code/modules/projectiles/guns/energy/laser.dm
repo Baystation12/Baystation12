@@ -1,15 +1,16 @@
 /obj/item/weapon/gun/energy/laser
 	name = "laser carbine"
 	desc = "A Hephaestus Industries G40E carbine, designed to kill with concentrated energy blasts."
+	icon = 'icons/obj/guns/laser_carbine.dmi'
 	icon_state = "laser"
 	item_state = "laser"
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEM_SIZE_LARGE
 	force = 10
 	one_hand_penalty = 2
-	accuracy = 2
+	bulk = GUN_BULK_RIFLE
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	matter = list(MATERIAL_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/midlaser
 	wielded_item_state = "laser-wielded"
 
@@ -17,6 +18,7 @@
 	self_recharge = 1
 	use_external_power = 1
 	one_hand_penalty = 0 //just in case
+	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/laser/practice
 	name = "practice laser carbine"
@@ -49,6 +51,7 @@
 
 obj/item/weapon/gun/energy/retro
 	name = "retro laser"
+	icon = 'icons/obj/guns/retro_laser.dmi'
 	icon_state = "retro"
 	item_state = "retro"
 	desc = "An older model of the basic lasergun. Nevertheless, it is still quite deadly and easy to maintain, making it a favorite amongst pirates and other outlaws."
@@ -59,6 +62,7 @@ obj/item/weapon/gun/energy/retro
 
 /obj/item/weapon/gun/energy/captain
 	name = "antique laser gun"
+	icon = 'icons/obj/guns/caplaser.dmi'
 	icon_state = "caplaser"
 	item_state = "caplaser"
 	desc = "A rare weapon, handcrafted by a now defunct specialty manufacturer on Luna for a small fortune. It's certainly aged well."
@@ -75,6 +79,7 @@ obj/item/weapon/gun/energy/retro
 	name = "laser cannon"
 	desc = "With the laser cannon, the lasing medium is enclosed in a tube lined with uranium-235 and subjected to high neutron flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
+	icon = 'icons/obj/guns/laser_cannon.dmi'
 	item_state = null
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
@@ -94,14 +99,16 @@ obj/item/weapon/gun/energy/retro
 	recharge_time = 10
 	accuracy = 0 //mounted laser cannons don't need any help, thanks
 	one_hand_penalty = 0
+	has_safety = FALSE
 
 /obj/item/weapon/gun/energy/xray
 	name = "x-ray laser carbine"
 	desc = "A high-power laser gun capable of emitting concentrated x-ray blasts, that are able to penetrate laser-resistant armor much more readily than standard photonic beams."
+	icon = 'icons/obj/guns/xray.dmi'
 	icon_state = "xray"
 	item_state = "xray"
 	slot_flags = SLOT_BELT|SLOT_BACK
-	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	projectile_type = /obj/item/projectile/beam/xray/midlaser
 	one_hand_penalty = 2
 	w_class = ITEM_SIZE_LARGE
@@ -112,10 +119,11 @@ obj/item/weapon/gun/energy/retro
 
 /obj/item/weapon/gun/energy/xray/pistol
 	name = "x-ray laser gun"
+	icon = 'icons/obj/guns/xray_pistol.dmi'
 	icon_state = "oldxray"
 	item_state = "oldxray"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ILLEGAL = 2)
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2, TECH_ESOTERIC = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	one_hand_penalty = 1
 	w_class = ITEM_SIZE_NORMAL
@@ -124,6 +132,7 @@ obj/item/weapon/gun/energy/retro
 /obj/item/weapon/gun/energy/sniperrifle
 	name = "marksman energy rifle"
 	desc = "The HI DMR 9E is an older design of Hephaestus Industries. A designated marksman rifle capable of shooting powerful ionized beams, this is a weapon to kill from a distance."
+	icon = 'icons/obj/guns/laser_sniper.dmi'
 	icon_state = "sniper"
 	item_state = "laser"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 5, TECH_POWER = 4)
@@ -136,29 +145,25 @@ obj/item/weapon/gun/energy/retro
 	force = 10
 	w_class = ITEM_SIZE_HUGE
 	accuracy = -2 //shooting at the hip
-	scoped_accuracy = 0
+	scoped_accuracy = 9
+	scope_zoom = 2
 	wielded_item_state = "gun_wielded"
 
-/obj/item/weapon/gun/energy/sniperrifle/update_icon()
+/obj/item/weapon/gun/energy/sniperrifle/on_update_icon()
 	..()
 	item_state_slots[slot_back_str] = icon_state //so that the on-back overlay uses the different charged states
-
-/obj/item/weapon/gun/energy/sniperrifle/verb/scope()
-	set category = "Object"
-	set name = "Use Scope"
-	set popup_menu = 1
-
-	toggle_scope(usr, 2.0)
 
 ////////Laser Tag////////////////////
 
 /obj/item/weapon/gun/energy/lasertag
 	name = "laser tag gun"
+	icon = 'icons/obj/guns/lasertag.dmi'
+	icon_state = "bluetag"
 	item_state = "laser"
 	desc = "Standard issue weapon of the Imperial Guard."
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	self_recharge = 1
-	matter = list(DEFAULT_WALL_MATERIAL = 2000)
+	matter = list(MATERIAL_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/lastertag/blue
 	var/required_vest
 

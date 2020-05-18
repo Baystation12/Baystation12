@@ -1,3 +1,8 @@
+/obj/structure/deity/altar/narsie
+	name = "altar"
+	desc = "A small desk, covered in blood."
+	icon_state = "talismanaltar"
+
 /obj/structure/deity/blood_forge
 	name = "unholy forge"
 	desc = "This forge gives off no heat, no light, its flames look almost unnatural."

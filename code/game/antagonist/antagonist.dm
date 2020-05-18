@@ -3,7 +3,7 @@
 	// Text shown when becoming this antagonist.
 	var/list/restricted_jobs = 		list()   // Jobs that cannot be this antagonist at roundstart (depending on config)
 	var/list/protected_jobs = 		list()   // As above.
-	var/list/blacklisted_jobs =		list()   // Jobs that can NEVER be this antagonist
+	var/list/blacklisted_jobs =		list(/datum/job/submap)   // Jobs that can NEVER be this antagonist
 
 	// Strings.
 	var/welcome_text = "Cry havoc and let slip the dogs of war!"
@@ -37,7 +37,7 @@
 	var/initial_spawn_req = 1               // Gamemode using this template won't start without this # candidates.
 	var/initial_spawn_target = 3            // Gamemode will attempt to spawn this many antags.
 	var/announced                           // Has an announcement been sent?
-	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. xenos)
+	var/spawn_announcement                  // When the datum spawn proc is called, does it announce to the world? (ie. borers)
 	var/spawn_announcement_title            // Report title.
 	var/spawn_announcement_sound            // Report sound clip.
 	var/spawn_announcement_delay            // Time between initial spawn and round announcement.
@@ -50,9 +50,11 @@
 	var/suspicion_chance = 50               // Prob of being on the initial Command report
 	var/flags = 0                           // Various runtime options.
 	var/show_objectives_on_creation = 1     // Whether or not objectives are shown when a player is added to this antag datum
+	var/datum/antag_skill_setter/skill_setter = /datum/antag_skill_setter/generic // Used to set up skills.
+	var/datum/language/required_language = null
 
 	// Used for setting appearance.
-	var/list/valid_species =       list(SPECIES_UNATHI,SPECIES_TAJARA,SPECIES_SKRELL,SPECIES_HUMAN,SPECIES_VOX)
+	var/list/valid_species =       list(SPECIES_UNATHI,SPECIES_SKRELL,SPECIES_HUMAN,SPECIES_VOX)
 	var/min_player_age = 14
 
 	// Runtime vars.
@@ -77,11 +79,16 @@
 		and before taking extreme actions, please try to also contact the administration! \
 		Think through your actions and make the roleplay immersive! <b>Please remember all \
 		rules aside from those without explicit exceptions apply to antagonists.</b>"
+	
+	// Map template that antag needs to load before spawning. Nulled after it's loaded.
+	var/datum/map_template/base_to_load
 
 /datum/antagonist/New()
 	GLOB.all_antag_types_[id] = src
 	GLOB.all_antag_spawnpoints_[landmark_id] = list()
 	GLOB.antag_names_to_ids_[role_text] = id
+	if(ispath(skill_setter))
+		skill_setter = new skill_setter
 	..()
 
 /datum/antagonist/proc/Initialize()
@@ -101,12 +108,12 @@
 	return 1
 
 // Get the raw list of potential players.
-/datum/antagonist/proc/build_candidate_list(var/ghosts_only)
+/datum/antagonist/proc/build_candidate_list(datum/game_mode/mode, ghosts_only)
 	candidates = list() // Clear.
 
 	// Prune restricted status. Broke it up for readability.
 	// Note that this is done before jobs are handed out.
-	for(var/datum/mind/player in ticker.mode.get_players_for_role(id))
+	for(var/datum/mind/player in mode.get_players_for_role(id))
 		if(ghosts_only && !(isghostmind(player) || isnewplayer(player.current)))
 			log_debug("[key_name(player)] is not eligible to become a [role_text]: Only ghosts may join as this role!")
 		else if(config.use_age_restriction_for_antags && player.current.client.player_age < minimum_player_age)
@@ -142,8 +149,8 @@
 	return candidates
 
 /datum/antagonist/proc/attempt_random_spawn()
-	update_current_antag_max()
-	build_candidate_list(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	update_current_antag_max(SSticker.mode)
+	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
 	attempt_spawn()
 	finalize_spawn()
 
@@ -151,27 +158,27 @@
 	if(!can_late_spawn())
 		return 0
 
-	update_current_antag_max()
+	update_current_antag_max(SSticker.mode)
 	var/active_antags = get_active_antag_count()
-	log_debug("[uppertext(id)]: Found [active_antags]/[cur_max] active [role_text_plural].")
+	message_admins("[uppertext(id)]: Found [active_antags]/[cur_max] active [role_text_plural].")
 
 	if(active_antags >= cur_max)
-		log_debug("Could not auto-spawn a [role_text], active antag limit reached.")
+		message_admins("Could not auto-spawn a [role_text], active antag limit reached.")
 		return 0
 
-	build_candidate_list(flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
+	build_candidate_list(SSticker.mode, flags & (ANTAG_OVERRIDE_MOB|ANTAG_OVERRIDE_JOB))
 	if(!candidates.len)
-		log_debug("Could not auto-spawn a [role_text], no candidates found.")
+		message_admins("Could not auto-spawn a [role_text], no candidates found.")
 		return 0
 
 	attempt_spawn(1) //auto-spawn antags one at a time
 	if(!pending_antagonists.len)
-		log_debug("Could not auto-spawn a [role_text], none of the available candidates could be selected.")
+		message_admins("Could not auto-spawn a [role_text], none of the available candidates could be selected.")
 		return 0
 
 	var/datum/mind/player = pending_antagonists[1]
 	if(!add_antagonist(player,0,0,0,1,1))
-		log_debug("Could not auto-spawn a [role_text], failed to add antagonist.")
+		message_admins("Could not auto-spawn a [role_text], failed to add antagonist.")
 		return 0
 
 	reset_antag_selection()
@@ -210,7 +217,7 @@
 	if(!(flags & ANTAG_OVERRIDE_JOB) && (!player.current || istype(player.current, /mob/new_player)))
 		log_debug("[player.key] was selected for [role_text] by lottery, but they have not joined the game.")
 		return 0
-	if(ticker.current_state >= GAME_STATE_PLAYING && (isghostmind(player) || isnewplayer(player.current)) && !(player in ticker.antag_pool))
+	if(GAME_STATE >= RUNLEVEL_GAME && (isghostmind(player) || isnewplayer(player.current)) && !(player in SSticker.antag_pool))
 		log_debug("[player.key] was selected for [role_text] by lottery, but they are a ghost not in the antag pool.")
 		return 0
 
@@ -248,6 +255,7 @@
 /datum/antagonist/proc/reset_antag_selection()
 	for(var/datum/mind/player in pending_antagonists)
 		if(flags & ANTAG_OVERRIDE_JOB)
+			player.assigned_job = null
 			player.assigned_role = null
 		player.special_role = null
 	pending_antagonists.Cut()

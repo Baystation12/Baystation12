@@ -1,3 +1,5 @@
+var/global/list/empty_playable_ai_cores = list()
+
 /obj/structure/AIcore
 	density = 1
 	anchored = 0
@@ -6,7 +8,7 @@
 	icon_state = "0"
 	var/state = 0
 	var/datum/ai_laws/laws = new /datum/ai_laws/nanotrasen
-	var/obj/item/weapon/circuitboard/circuit = null
+	var/obj/item/weapon/stock_parts/circuitboard/circuit = null
 	var/obj/item/device/mmi/brain = null
 	var/authorized
 
@@ -49,13 +51,11 @@
 					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 					anchored = 0
 					state = 0
-			if(istype(P, /obj/item/weapon/circuitboard/aicore) && !circuit)
+			if(istype(P, /obj/item/weapon/stock_parts/circuitboard/aicore) && !circuit && user.unEquip(P, src))
 				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You place the circuit board inside the frame.</span>")
 				icon_state = "1"
 				circuit = P
-				user.drop_item()
-				P.loc = src
 			if(isScrewdriver(P) && circuit)
 				playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
@@ -66,7 +66,7 @@
 				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
 				state = 1
 				icon_state = "0"
-				circuit.loc = loc
+				circuit.dropInto(loc)
 				circuit = null
 		if(2)
 			if(isScrewdriver(P) && circuit)
@@ -99,18 +99,19 @@
 					var/obj/item/stack/cable_coil/A = new /obj/item/stack/cable_coil( loc )
 					A.amount = 5
 
-			if(istype(P, /obj/item/stack/material) && P.get_material_name() == "rglass")
-				var/obj/item/stack/RG = P
-				if (RG.get_amount() < 2)
-					to_chat(user, "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>")
-					return
-				to_chat(user, "<span class='notice'>You start to put in the glass panel.</span>")
-				playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
-				if (do_after(user, 20,src) && state == 3)
-					if(RG.use(2))
-						to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
-						state = 4
-						icon_state = "4"
+			if(istype(P, /obj/item/stack/material))
+				var/obj/item/stack/material/RG = P
+				if(RG.material.name == MATERIAL_GLASS && RG.reinf_material)
+					if (RG.get_amount() < 2)
+						to_chat(user, "<span class='warning'>You need two sheets of glass to put in the glass panel.</span>")
+						return
+					to_chat(user, "<span class='notice'>You start to put in the glass panel.</span>")
+					playsound(loc, 'sound/items/Deconstruct.ogg', 50, 1)
+					if (do_after(user, 20,src) && state == 3)
+						if(RG.use(2))
+							to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
+							state = 4
+							icon_state = "4"
 
 			if(istype(P, /obj/item/weapon/aiModule/asimov))
 				laws.add_inherent_law("You may not injure a human being or, through inaction, allow a human being to come to harm.")
@@ -152,12 +153,11 @@
 				if(jobban_isbanned(B, "AI"))
 					to_chat(user, "<span class='warning'>This [P] does not seem to fit.</span>")
 					return
-
+				if(!user.unEquip(P, src))
+					return
 				if(B.mind)
 					clear_antag_roles(B.mind, 1)
 
-				user.drop_item()
-				P.loc = src
 				brain = P
 				to_chat(usr, "Added [P].")
 				icon_state = "3b"
@@ -165,7 +165,7 @@
 			if(isCrowbar(P) && brain)
 				playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 				to_chat(user, "<span class='notice'>You remove the brain.</span>")
-				brain.loc = loc
+				brain.dropInto(loc)
 				brain = null
 				icon_state = "3"
 
@@ -198,7 +198,7 @@
 					if(A) //if there's no brain, the mob is deleted and a structure/AIcore is created
 						A.on_mob_init()
 						A.rename_self("ai", 1)
-				feedback_inc("cyborg_ais_created",1)
+				SSstatistics.add_field("cyborg_ais_created",1)
 				qdel(src)
 
 /obj/structure/AIcore/deactivated
@@ -220,7 +220,7 @@
 	transfer.aiRestorePowerRoutine = 0
 	transfer.control_disabled = 0
 	transfer.ai_radio.disabledAi = 0
-	transfer.loc = get_turf(src)
+	transfer.dropInto(src)
 	transfer.create_eyeobj()
 	transfer.cancel_camera()
 	to_chat(user, "<span class='notice'>Transfer successful:</span> [transfer.name] ([rand(1000,9999)].exe) downloaded to host terminal. Local copy wiped.")

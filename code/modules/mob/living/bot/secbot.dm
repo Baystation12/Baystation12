@@ -8,11 +8,10 @@
 	icon = 'icons/mob/bot/secbot.dmi'
 	icon_state = "secbot0"
 	var/attack_state = "secbot-c"
-	plane = MOB_PLANE
 	layer = MOB_LAYER
 	maxHealth = 50
 	health = 50
-	req_one_access = list(access_security, access_forensics_lockers)
+	req_access = list(list(access_security, access_forensics_lockers))
 	botcard_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels)
 
 	patrol_speed = 2
@@ -40,11 +39,11 @@
 	desc = "It's Officer Beep O'sky! Powered by a potato and a shot of whiskey."
 	will_patrol = 1
 
-/mob/living/bot/secbot/New()
-	..()
+/mob/living/bot/secbot/Initialize()
 	stun_baton = new(src)
 	stun_baton.bcell = new /obj/item/weapon/cell/infinite(stun_baton)
 	stun_baton.set_status(1, null)
+	. = ..()
 
 	handcuffs = new(src)
 
@@ -217,11 +216,6 @@
 /mob/living/bot/secbot/explode()
 	visible_message("<span class='warning'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
-
-	var/obj/item/weapon/secbot_assembly/Sa = new /obj/item/weapon/secbot_assembly(Tsec)
-	Sa.build_step = 1
-	Sa.overlays += image('icons/mob/bot/secbot.dmi', "hs_hole")
-	Sa.created_name = name
 	new /obj/item/device/assembly/prox_sensor(Tsec)
 	new /obj/item/weapon/melee/baton(Tsec)
 	if(prob(50))
@@ -248,74 +242,3 @@
 		return 10
 
 	return M.assess_perp(access_scanner, 0, idcheck, check_records, check_arrest)
-
-//Secbot Construction
-
-/obj/item/clothing/head/helmet/attackby(var/obj/item/device/assembly/signaler/S, mob/user as mob)
-	..()
-	if(!issignaler(S))
-		..()
-		return
-
-	if(type != /obj/item/clothing/head/helmet) //Eh, but we don't want people making secbots out of space helmets.
-		return
-
-	if(S.secured)
-		qdel(S)
-		var/obj/item/weapon/secbot_assembly/A = new /obj/item/weapon/secbot_assembly
-		user.put_in_hands(A)
-		to_chat(user, "You add the signaler to the helmet.")
-		user.drop_from_inventory(src)
-		qdel(src)
-	else
-		return
-
-/obj/item/weapon/secbot_assembly
-	name = "helmet/signaler assembly"
-	desc = "Some sort of bizarre assembly."
-	icon = 'icons/mob/bot/secbot.dmi'
-	icon_state = "helmet_signaler"
-	item_state = "helmet"
-	var/build_step = 0
-	var/created_name = "Securitron"
-
-/obj/item/weapon/secbot_assembly/attackby(var/obj/item/O, var/mob/user)
-	..()
-	if(isWelder(O) && !build_step)
-		var/obj/item/weapon/weldingtool/WT = O
-		if(WT.remove_fuel(0, user))
-			build_step = 1
-			overlays += image('icons/mob/bot/secbot.dmi', "hs_hole")
-			to_chat(user, "You weld a hole in \the [src].")
-
-	else if(isprox(O) && (build_step == 1))
-		user.drop_item()
-		build_step = 2
-		to_chat(user, "You add \the [O] to [src].")
-		overlays += image('icons/mob/bot/secbot.dmi', "hs_eye")
-		SetName("helmet/signaler/prox sensor assembly")
-		qdel(O)
-
-	else if((istype(O, /obj/item/robot_parts/l_arm) || istype(O, /obj/item/robot_parts/r_arm)) && build_step == 2)
-		user.drop_item()
-		build_step = 3
-		to_chat(user, "You add \the [O] to [src].")
-		SetName("helmet/signaler/prox sensor/robot arm assembly")
-		overlays += image('icons/mob/bot/secbot.dmi', "hs_arm")
-		qdel(O)
-
-	else if(istype(O, /obj/item/weapon/melee/baton) && build_step == 3)
-		user.drop_item()
-		to_chat(user, "You complete the Securitron! Beep boop.")
-		var/mob/living/bot/secbot/S = new /mob/living/bot/secbot(get_turf(src))
-		S.SetName(created_name)
-		qdel(O)
-		qdel(src)
-
-	else if(istype(O, /obj/item/weapon/pen))
-		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
-		if(!t)
-			return
-		if(!in_range(src, usr) && loc != usr)
-			return
-		created_name = t

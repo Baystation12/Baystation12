@@ -20,10 +20,10 @@
 	if(istype(I, /obj/item/grab))
 		var/obj/item/grab/G = I
 		if(G.force_danger())
-			G.affecting.forceMove(get_turf(src))
+			G.affecting.dropInto(loc)
 			G.affecting.Weaken(1)
 			user.visible_message("<span class='warning'>\The [user] throws \the [G.affecting] onto \the [src]!</span>")
-			user.drop_from_inventory(G)
+			qdel(G)
 	else ..()
 
 /obj/structure/deity/altar/Process()
@@ -91,7 +91,7 @@
 			M.adjustHalLoss(30)
 		return TOPIC_REFRESH
 
-/obj/structure/deity/altar/update_icon()
+/obj/structure/deity/altar/on_update_icon()
 	overlays.Cut()
 	if(target)
 		overlays += image('icons/effects/effects.dmi', icon_state =  "summoning")

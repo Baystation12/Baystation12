@@ -20,7 +20,7 @@
 	active_power_cost = 6 KILOWATTS		// 30 min battery life /w best (3kWh) cell
 	passive_power_cost = 0
 	module_cooldown = 10 SECONDS
-	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ILLEGAL = 6, TECH_ENGINEERING = 7)
+	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 6, TECH_ESOTERIC = 6, TECH_ENGINEERING = 7)
 	activate_string = "Enable Cloak"
 	deactivate_string = "Disable Cloak"
 
@@ -38,7 +38,7 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(H.add_cloaking_source(src))
-		anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
+		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
 
 /obj/item/rig_module/stealth_field/deactivate()
 
@@ -48,9 +48,9 @@
 	var/mob/living/carbon/human/H = holder.wearer
 
 	if(H.remove_cloaking_source(src))
-		anim(get_turf(H), H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
-		anim(get_turf(H), H, 'icons/effects/effects.dmi', "electricity",null,20,null)
-	
+		anim(H,'icons/mob/mob.dmi',,"uncloak",,H.dir)
+		anim(H, 'icons/effects/effects.dmi', "electricity",null,20,null)
+
 	// We still play the sound, even if not visibly uncloaking. Ninjas are not that stealthy.
 	playsound(get_turf(H), 'sound/effects/stealthoff.ogg', 75, 1)
 
@@ -144,7 +144,7 @@
 
 	fabrication_type = /obj/item/weapon/energy_net
 	use_power_cost = 20 KILOWATTS
-	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ILLEGAL = 4, TECH_ENGINEERING = 6)
+	origin_tech = list(TECH_MATERIAL = 5, TECH_POWER = 6, TECH_MAGNET = 5, TECH_ESOTERIC = 4, TECH_ENGINEERING = 6)
 
 /obj/item/rig_module/fabricator/energy_net/engage(atom/target)
 
@@ -222,7 +222,7 @@
 
 	explosion(get_turf(src), explosion_values[1], explosion_values[2], explosion_values[3], explosion_values[4])
 	if(holder && holder.wearer)
-		holder.wearer.drop_from_inventory(src)
+		holder.wearer.gib()
 		qdel(holder)
 	qdel(src)
 

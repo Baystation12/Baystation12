@@ -71,7 +71,8 @@
 		var/channel_title = sanitizeSafe(input(user,"Enter channel name or leave blank to cancel:"), 64)
 		if(!channel_title)
 			return
-		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation()
+		var/atom/A = computer.get_physical_host()
+		var/datum/ntnet_conversation/C = new/datum/ntnet_conversation(A.z)
 		C.add_client(src)
 		C.operator = src
 		channel = C
@@ -121,15 +122,8 @@
 			logfile.stored_data += "[logstring]\[BR\]"
 		logfile.stored_data += "\[b\]Logfile dump completed.\[/b\]"
 		logfile.calculate_size()
-		if(!computer || !computer.hard_drive || !computer.hard_drive.store_file(logfile))
-			if(!computer)
-				// This program shouldn't even be runnable without computer.
-				CRASH("Var computer is null!")
-				return 1
-			if(!computer.hard_drive)
-				computer.visible_message("\The [computer] shows an \"I/O Error - Hard drive connection error\" warning.")
-			else	// In 99.9% cases this will mean our HDD is full
-				computer.visible_message("\The [computer] shows an \"I/O Error - Hard drive may be full. Please free some space and try again. Required space: [logfile.size]GQ\" warning.")
+		if(!computer.store_file(logfile))
+			computer.show_error(user, "I/O Error - Check hard drive and free space. Required space: [logfile.size]GQ.")
 	if(href_list["PRG_renamechannel"])
 		. = 1
 		if(!operator_mode || !channel)
@@ -161,7 +155,14 @@
 			channel.password = newpassword
 
 /datum/computer_file/program/chatclient/process_tick()
+
 	..()
+
+	var/atom/A = computer.get_physical_host()
+	if(channel && !(channel.source_z in GetConnectedZlevels(A.z)))
+		channel.remove_client(src)
+		channel = null
+
 	if(program_state != PROGRAM_STATE_KILLED)
 		ui_header = "ntnrc_idle.gif"
 		if(channel)
@@ -170,12 +171,13 @@
 		else
 			last_message = null
 		return 1
+
 	if(channel && channel.messages && channel.messages.len)
 		ui_header = last_message == channel.messages[channel.messages.len - 1] ? "ntnrc_idle.gif" : "ntnrc_new.gif"
 	else
 		ui_header = "ntnrc_idle.gif"
 
-/datum/computer_file/program/chatclient/kill_program(var/forced = 0)
+/datum/computer_file/program/chatclient/on_shutdown(var/forced = 0)
 	if(channel)
 		channel.remove_client(src)
 		channel = null
@@ -216,15 +218,17 @@
 
 	else // Channel selection screen
 		var/list/all_channels[0]
+		var/atom/A = C.computer.get_physical_host()
+		var/list/connected_zs = GetConnectedZlevels(A.z)
 		for(var/datum/ntnet_conversation/conv in ntnet_global.chat_channels)
-			if(conv && conv.title)
+			if(conv && conv.title && (conv.source_z in connected_zs))
 				all_channels.Add(list(list(
 					"chan" = conv.title,
 					"id" = conv.id
 				)))
 		data["all_channels"] = all_channels
 
-	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
+	ui = SSnano.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
 		ui = new(user, src, ui_key, "ntnet_chat.tmpl", "NTNet Relay Chat Client", 575, 700, state = state)
 		ui.auto_update_layout = 1

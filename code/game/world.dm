@@ -64,21 +64,20 @@
 
 	return match
 
-#define RECOMMENDED_VERSION 511
+#define RECOMMENDED_VERSION 512
 /world/New()
+
+	enable_debugger()
 	//set window title
 	name = "[server_name] - [GLOB.using_map.full_name]"
 
 	//logs
 	SetupLogs()
-	var/date_string = time2text(world.realtime, "YYYY/MM-Month/DD-Day")
+	var/date_string = time2text(world.realtime, "YYYY/MM/DD")
 	href_logfile = file("data/logs/[date_string] hrefs.htm")
 	diary = file("data/logs/[date_string].log")
 	diary << "[log_end]\n[log_end]\nStarting up. (ID: [game_id]) [time2text(world.timeofday, "hh:mm.ss")][log_end]\n---------------------[log_end]"
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
-
-	if(byond_version < RECOMMENDED_VERSION)
-		world.log << "Your server's byond version does not meet the recommended requirements for this server. Please update BYOND"
 
 	if(config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~
@@ -87,7 +86,10 @@
 	if(config && config.log_runtime)
 		var/runtime_log = file("data/logs/runtime/[date_string]_[time2text(world.timeofday, "hh:mm")]_[game_id].log")
 		runtime_log << "Game [game_id] starting up at [time2text(world.timeofday, "hh:mm.ss")]"
-		log = runtime_log
+		log = runtime_log // Note that, as you can see, this is misnamed: this simply moves world.log into the runtime log file.
+
+	if(byond_version < RECOMMENDED_VERSION)
+		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
 
 	callHook("startup")
 	//Emergency Fix
@@ -100,31 +102,7 @@
 	log_unit_test("Unit Tests Enabled. This will destroy the world when testing is complete.")
 	load_unit_test_changes()
 #endif
-
-	// Set up roundstart seed list.
-	plant_controller = new()
-
-	// This is kinda important. Set up details of what the hell things are made of.
-	populate_material_list()
-
-	if(config.generate_map)
-		GLOB.using_map.perform_map_generation()
-	GLOB.using_map.build_exoplanets()
-
-	// Create robolimbs for chargen.
-	populate_robolimb_list()
-
-	processScheduler = new
-	master_controller = new /datum/controller/game_controller()
-
-	processScheduler.deferSetupFor(/datum/controller/process/ticker)
-	processScheduler.setup()
 	Master.Initialize(10, FALSE)
-
-#ifdef UNIT_TEST
-	spawn(1)
-		initialize_unit_tests()
-#endif
 
 #undef RECOMMENDED_VERSION
 
@@ -133,6 +111,11 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
 	diary << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
+
+	/* * * * * * * *
+	* Public Topic Calls
+	* The following topic calls are available without a comms secret.
+	* * * * * * * */
 
 	if (T == "ping")
 		var/x = 1
@@ -208,7 +191,9 @@ var/world_topic_spam_protect_time = world.timeofday
 		var/list/L = list()
 		L["gameid"] = game_id
 		L["dm_version"] = DM_VERSION // DreamMaker version compiled in
+		L["dm_build"] = DM_BUILD // DreamMaker build compiled in
 		L["dd_version"] = world.byond_version // DreamDaemon version running on
+		L["dd_build"] = world.byond_build // DreamDaemon build running on
 
 		if(revdata.revision)
 			L["revision"] = revdata.revision
@@ -218,6 +203,51 @@ var/world_topic_spam_protect_time = world.timeofday
 			L["revision"] = "unknown"
 
 		return list2params(L)
+
+	/* * * * * * * *
+	* Admin Topic Calls
+	* The following topic calls are only available if a ban comms secret has been defined, supplied, and is correct.
+	* * * * * * * */
+
+	if(copytext(T,1,14) == "placepermaban")
+		var/input[] = params2list(T)
+		if(!config.ban_comms_password)
+			return "Not enabled"
+		if(input["bankey"] != config.ban_comms_password)
+			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
+				spawn(50)
+					world_topic_spam_protect_time = world.time
+					return "Bad Key (Throttled)"
+
+			world_topic_spam_protect_time = world.time
+			world_topic_spam_protect_ip = addr
+			return "Bad Key"
+
+		var/target = ckey(input["target"])
+
+		var/client/C
+		for(var/client/K in GLOB.clients)
+			if(K.ckey == target)
+				C = K
+				break
+		if(!C)
+			return "No client with that name found on server"
+		if(!C.mob)
+			return "Client missing mob"
+
+		if(!_DB_ban_record(input["id"], "0", "127.0.0.1", 1, C.mob, -1, input["reason"]))
+			return "Save failed"
+		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
+		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
+		qdel(C)
+
+	/* * * * * * * *
+	* Secure Topic Calls
+	* The following topic calls are only available if a comms secret has been defined, supplied, and is correct.
+	* * * * * * * */
+
+	if (!config.comms_password)
+		return "Not enabled"
 
 	else if(copytext(T,1,5) == "laws")
 		var/input[] = params2list(T)
@@ -242,6 +272,11 @@ var/world_topic_spam_protect_time = world.timeofday
 			var/info = list()
 			info["name"] = S.name
 			info["key"] = S.key
+
+			if(istype(S, /mob/living/silicon/robot))
+				var/mob/living/silicon/robot/R = S
+				info["master"] = R.connected_ai?.name
+				info["sync"] = R.lawupdate
 
 			if(!S.laws)
 				info["laws"] = null
@@ -423,38 +458,6 @@ var/world_topic_spam_protect_time = world.timeofday
 		else
 			return "Database connection failed or not set up"
 
-	else if(copytext(T,1,14) == "placepermaban")
-		var/input[] = params2list(T)
-		if(!config.ban_comms_password)
-			return "Not enabled"
-		if(input["bankey"] != config.ban_comms_password)
-			if(world_topic_spam_protect_ip == addr && abs(world_topic_spam_protect_time - world.time) < 50)
-				spawn(50)
-					world_topic_spam_protect_time = world.time
-					return "Bad Key (Throttled)"
-
-			world_topic_spam_protect_time = world.time
-			world_topic_spam_protect_ip = addr
-			return "Bad Key"
-
-		var/target = ckey(input["target"])
-
-		var/client/C
-		for(var/client/K in GLOB.clients)
-			if(K.ckey == target)
-				C = K
-				break
-		if(!C)
-			return "No client with that name found on server"
-		if(!C.mob)
-			return "Client missing mob"
-
-		if(!_DB_ban_record(input["id"], "0", "127.0.0.1", 1, C.mob, -1, input["reason"]))
-			return "Save failed"
-		ban_unban_log_save("[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.")
-		notes_add(target,"[input["id"]] has permabanned [C.ckey]. - Reason: [input["reason"]] - This is a ban until appeal.",input["id"])
-		qdel(C)
-
 	else if(copytext(T,1,19) == "prometheus_metrics")
 		var/input[] = params2list(T)
 		if(input["key"] != config.comms_password)
@@ -479,7 +482,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 		*/
 
-	processScheduler.stop()
+	Master.Shutdown()
 
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 		for(var/client/C in GLOB.clients)
@@ -507,8 +510,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	var/list/Lines = file2list("data/mode.txt")
 	if(Lines.len)
 		if(Lines[1])
-			master_mode = Lines[1]
-			log_misc("Saved mode is '[master_mode]'")
+			SSticker.master_mode = Lines[1]
+			log_misc("Saved mode is '[SSticker.master_mode]'")
 
 /world/proc/save_mode(var/the_mode)
 	var/F = file("data/mode.txt")
@@ -527,12 +530,13 @@ var/world_topic_spam_protect_time = world.timeofday
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
+	if (GLOB.using_map?.config_path)
+		config.load(GLOB.using_map.config_path, "using_map")
 	config.loadsql("config/dbconfig.txt")
 	config.load_event("config/custom_event.txt")
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
-	world.load_mentors() // no need to write another hook.
 	return 1
 
 /world/proc/load_mods()
@@ -556,26 +560,6 @@ var/world_topic_spam_protect_time = world.timeofday
 				var/datum/admins/D = new /datum/admins(title, rights, ckey)
 				D.associate(GLOB.ckey_directory[ckey])
 
-/world/proc/load_mentors()
-	if(config.admin_legacy_system)
-		var/text = file2text("config/mentors.txt")
-		if (!text)
-			error("Failed to load config/mentors.txt")
-		else
-			var/list/lines = splittext(text, "\n")
-			for(var/line in lines)
-				if (!line)
-					continue
-				if (copytext(line, 1, 2) == ";")
-					continue
-
-				var/title = "Mentor"
-				var/rights = admin_ranks[title]
-
-				var/ckey = copytext(line, 1, length(line)+1)
-				var/datum/admins/D = new /datum/admins(title, rights, ckey)
-				D.associate(GLOB.ckey_directory[ckey])
-
 /world/proc/update_status()
 	var/s = ""
 
@@ -584,17 +568,16 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	s += "<b>[station_name()]</b>";
 	s += " ("
-	s += "<a href=\"http://\">" //Change this to wherever you want the hub to link to.
+	s += "<a href=\"https://forums.baystation12.net/\">" //Change this to wherever you want the hub to link to.
 //	s += "[game_version]"
-	s += "Default"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
+	s += "Forums"  //Replace this with something else. Or ever better, delete it and uncomment the game version.
 	s += "</a>"
 	s += ")"
 
 	var/list/features = list()
 
-	if(ticker)
-		if(master_mode)
-			features += master_mode
+	if(SSticker.master_mode)
+		features += SSticker.master_mode
 	else
 		features += "<b>STARTING</b>"
 
@@ -630,8 +613,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (src.status != s)
 		src.status = s
 
-#define WORLD_LOG_START(X) WRITE_FILE(GLOB.world_##X##_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
-#define WORLD_SETUP_LOG(X) GLOB.world_##X##_log = file("[GLOB.log_directory]/[#X].log") ; WORLD_LOG_START(X)
 /world/proc/SetupLogs()
 	GLOB.log_directory = "data/logs/[time2text(world.realtime, "YYYY/MM/DD")]/round-"
 	if(game_id)
@@ -639,11 +620,8 @@ var/world_topic_spam_protect_time = world.timeofday
 	else
 		GLOB.log_directory += "[replacetext(time_stamp(), ":", ".")]"
 
-	WORLD_SETUP_LOG(runtime)
-	WORLD_SETUP_LOG(qdel)
-
-#undef WORLD_SETUP_LOG
-#undef WORLD_LOG_START
+	GLOB.world_qdel_log = file("[GLOB.log_directory]/qdel.log")
+	WRITE_FILE(GLOB.world_qdel_log, "\n\nStarting up round ID [game_id]. [time_stamp()]\n---------------------")
 
 #define FAILED_DB_CONNECTION_CUTOFF 5
 var/failed_db_connections = 0
@@ -651,9 +629,9 @@ var/failed_old_db_connections = 0
 
 /hook/startup/proc/connectDB()
 	if(!setup_database_connection())
-		world.log << "Your server failed to establish a connection with the feedback database."
+		to_world_log("Your server failed to establish a connection with the feedback database.")
 	else
-		world.log << "Feedback database connection established."
+		to_world_log("Feedback database connection established.")
 	return 1
 
 proc/setup_database_connection()
@@ -676,8 +654,7 @@ proc/setup_database_connection()
 		failed_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
 	else
 		failed_db_connections++		//If it failed, increase the failed connections counter.
-		world.log << dbcon.ErrorMsg()
-
+		to_world_log(dbcon.ErrorMsg())
 	return .
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
@@ -693,9 +670,9 @@ proc/establish_db_connection()
 
 /hook/startup/proc/connectOldDB()
 	if(!setup_old_database_connection())
-		world.log << "Your server failed to establish a connection with the SQL database."
+		to_world_log("Your server failed to establish a connection with the SQL database.")
 	else
-		world.log << "SQL database connection established."
+		to_world_log("SQL database connection established.")
 	return 1
 
 //These two procs are for the old database, while it's being phased out. See the tgstation.sql file in the SQL folder for more information.
@@ -719,7 +696,7 @@ proc/setup_old_database_connection()
 		failed_old_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
 	else
 		failed_old_db_connections++		//If it failed, increase the failed connections counter.
-		world.log << dbcon.ErrorMsg()
+		to_world_log(dbcon.ErrorMsg())
 
 	return .
 
@@ -734,3 +711,8 @@ proc/establish_old_db_connection()
 		return 1
 
 #undef FAILED_DB_CONNECTION_CUTOFF
+
+/world/proc/enable_debugger()
+	var/dll = world.GetConfig("env", "EXTOOLS_DLL")
+	if (dll)
+		call(dll, "debug_initialize")()

@@ -14,7 +14,6 @@ use_map
 stopserver
 reboot_called
 atupdate
-__pycache__
 
 # ignore config, but not subdirs
 !config/*/
@@ -40,3 +39,12 @@ Session.vim
 
 # auto-generated tag files
 tags
+baystation12.code-workspace
+
+# ignore built libs
+lib/*.dll
+lib/*.so
+
+# python
+*.pyc
+__pycache__

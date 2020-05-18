@@ -13,11 +13,11 @@
 	throw_speed = 5
 	throw_range = 10
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 1, TECH_ENGINEERING = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 200)
+	matter = list(MATERIAL_STEEL = 250, MATERIAL_GLASS = 100, MATERIAL_PLASTIC = 75)
 	var/mode = 1;
 
 /obj/item/device/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
-	if((CLUMSY in user.mutations) && prob(50))
+	if((MUTATION_CLUMSY in user.mutations) && prob(50))
 		to_chat(user, text("<span class='warning'>You try to analyze the floor's vitals!</span>"))
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("<span class='warning'>[user] has analyzed the floor's vitals!</span>"), 1)
@@ -69,10 +69,15 @@
 			var/mob/living/carbon/human/H = M
 			to_chat(user, "<span class='notice'>Analyzing Results for \the [H]:</span>")
 			to_chat(user, "Key: <font color='#ffa500'>Electronics</font>/<font color='red'>Brute</font>")
+			var/obj/item/organ/internal/cell/C = H.internal_organs_by_name[BP_CELL]
+			if(C)
+				to_chat(user, SPAN_NOTICE("Cell charge: [C.percent()] %"))
+			else
+				to_chat(user, SPAN_NOTICE("Cell charge: ERROR - Cell not present"))
 			to_chat(user, "<span class='notice'>External prosthetics:</span>")
 			var/organ_found
 			for(var/obj/item/organ/external/E in H.organs)
-				if(E.robotic < ORGAN_ROBOT)
+				if(!BP_IS_ROBOTIC(E))
 					continue
 				organ_found = 1
 				to_chat(user, "[E.name]: <font color='red'>[E.brute_dam]</font> <font color='#ffa500'>[E.burn_dam]</font>")
@@ -82,7 +87,7 @@
 			to_chat(user, "<span class='notice'>Internal prosthetics:</span>")
 			organ_found = null
 			for(var/obj/item/organ/O in H.internal_organs)
-				if(O.robotic < ORGAN_ROBOT)
+				if(!BP_IS_ROBOTIC(O))
 					continue
 				organ_found = 1
 				to_chat(user, "[O.name]: <font color='red'>[O.damage]</font>")

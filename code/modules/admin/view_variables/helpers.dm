@@ -38,8 +38,6 @@
 		<option value='?_src_=vars;mob_player_panel=\ref[src]'>Show player panel</option>
 		<option>---</option>
 		<option value='?_src_=vars;give_spell=\ref[src]'>Give Spell</option>
-		<option value='?_src_=vars;give_disease2=\ref[src]'>Give Disease</option>
-		<option value='?_src_=vars;give_disease=\ref[src]'>Give TG-style Disease</option>
 		<option value='?_src_=vars;godmode=\ref[src]'>Toggle Godmode</option>
 		<option value='?_src_=vars;build_mode=\ref[src]'>Toggle Build Mode</option>
 
@@ -154,7 +152,7 @@
 
 // The following vars require R_DEBUG to edit
 /datum/proc/VV_locked()
-	return list("vars", "virus", "viruses", "cuffed")
+	return list("vars", "cuffed")
 
 /client/VV_locked()
 	return list("vars", "mob")
@@ -199,7 +197,5 @@
 
 /proc/forbidden_varedit_object_types()
  	return list(
-		/datum/admins,						//Admins editing their own admin-power object? Yup, sounds like a good idea.,
-		/obj/machinery/blackbox_recorder,	//Prevents people messing with feedback gathering,
-		/datum/feedback_variable			//Prevents people messing with feedback gathering
+		/datum/admins						//Admins editing their own admin-power object? Yup, sounds like a good idea.
 	)

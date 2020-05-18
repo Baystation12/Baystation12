@@ -1,66 +1,5 @@
 // ### Preset machines  ###
 
-//Relay
-
-/obj/machinery/telecomms/relay/preset
-	network = "tcommsat"
-
-/obj/machinery/telecomms/relay/preset/station
-	id = "Primary Relay"
-	autolinkers = list("s_relay")
-
-/obj/machinery/telecomms/relay/preset/station/Initialize()
-	listening_levels = GLOB.using_map.contact_levels
-	return ..()
-
-/obj/machinery/telecomms/relay/preset/telecomms
-	id = "Telecomms Relay"
-	autolinkers = list("relay")
-
-/obj/machinery/telecomms/relay/preset/mining
-	id = "Mining Relay"
-	autolinkers = list("m_relay")
-
-/obj/machinery/telecomms/relay/preset/bridge
-	id = "Bridge Relay"
-	autolinkers = list("b_relay")
-
-/obj/machinery/telecomms/relay/preset/firstdeck
-	id = "First Deck Relay"
-	autolinkers = list("1_relay")
-
-/obj/machinery/telecomms/relay/preset/seconddeck
-	id = "Second Deck Relay"
-	autolinkers = list("2_relay")
-
-/obj/machinery/telecomms/relay/preset/thirddeck
-	id = "Third Deck Relay"
-	autolinkers = list("3_relay")
-
-/obj/machinery/telecomms/relay/preset/fourthdeck
-	id = "Fourth Deck Relay"
-	autolinkers = list("4_relay")
-
-/obj/machinery/telecomms/relay/preset/fifthdeck
-	id = "Fifth Deck Relay"
-	autolinkers = list("5_relay")
-
-/obj/machinery/telecomms/relay/preset/ruskie
-	id = "Ruskie Relay"
-	hide = 1
-	toggled = 0
-	autolinkers = list("r_relay")
-
-/obj/machinery/telecomms/relay/preset/centcom
-	id = "Centcom Relay"
-	hide = 1
-	toggled = 1
-	//anchored = 1
-	//use_power = 0
-	//idle_power_usage = 0
-	produces_heat = 0
-	autolinkers = list("c_relay")
-
 //HUB
 
 /obj/machinery/telecomms/hub/preset
@@ -115,7 +54,7 @@
 
 /obj/machinery/telecomms/bus/preset_two/New()
 	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
-		if(i == PUB_FREQ)
+		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ)
 			continue
 		freq_listening |= i
 	..()
@@ -129,7 +68,7 @@
 /obj/machinery/telecomms/bus/preset_four
 	id = "Bus 4"
 	network = "tcommsat"
-	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ, ENT_FREQ)
+	freq_listening = list(ENG_FREQ, AI_FREQ, PUB_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ)
 	autolinkers = list("processor4", "engineering", "common")
 
 /obj/machinery/telecomms/bus/preset_cent
@@ -199,11 +138,13 @@
 
 /obj/machinery/telecomms/server/presets/common
 	id = "Common Server"
-	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ) // AI Private and Common
+	freq_listening = list(PUB_FREQ, AI_FREQ, ENT_FREQ, MED_I_FREQ, SEC_I_FREQ) // AI Private, Common, and Departmental Intercomms
 	channel_tags = list(
 		list(PUB_FREQ, "Common", COMMS_COLOR_COMMON),
 		list(AI_FREQ, "AI Private", COMMS_COLOR_AI),
-		list(ENT_FREQ, "Entertainment", COMMS_COLOR_ENTERTAIN)
+		list(ENT_FREQ, "Entertainment", COMMS_COLOR_ENTERTAIN),
+		list(MED_I_FREQ, "Medical (I)", COMMS_COLOR_MEDICAL_I),
+		list(SEC_I_FREQ, "Security (I)", COMMS_COLOR_SECURITY_I)
 	)
 	autolinkers = list("common")
 
@@ -215,7 +156,7 @@
 
 /obj/machinery/telecomms/server/presets/unused/New()
 	for(var/i = PUBLIC_LOW_FREQ, i < PUBLIC_HIGH_FREQ, i += 2)
-		if(i == AI_FREQ || i == PUB_FREQ)
+		if(i == AI_FREQ || i == PUB_FREQ || i == MED_I_FREQ || i == SEC_I_FREQ)
 			continue
 		freq_listening |= i
 	..()

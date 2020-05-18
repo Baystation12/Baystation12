@@ -1,0 +1,19 @@
+<table class='block' width='95%'>
+    <tr><td>
+    {{if data.scanEnabled}}
+        {{if data.isCompatible}}
+            {{:helper.link( 'Scan Occupant', null, { "scan" : 1 }, null)}}
+        {{else}}
+            {{:helper.link( 'Incompatible Lifeform', null, { "scan" : 1 }, 'disabled')}}
+        {{/if}}
+    {{else}}
+        {{:helper.link( 'Scanner Empty', null, { "scan" : 1 }, 'disabled')}}
+    {{/if}}
+    </td>
+    <td>{{:helper.link('Print Scan', null, {"print" : 1}, data.printEnabled ? null : 'disabled')}}</td>
+    <td>{{:helper.link('Erase Scan', null, {"erase" : 1}, data.eraseEnabled ? null : 'disabled')}}</td>
+    <td>{{:helper.link('Push  Scan to Displays', null, {"push" : 1}, data.pushEnabled ? null : 'disabled' )}}</td></tr>
+</table>
+{{:data.html_scan_header}}
+{{:data.html_scan_health}}
+{{:data.html_scan_body}}

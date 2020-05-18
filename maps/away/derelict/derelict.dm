@@ -1,12 +1,12 @@
 #include "derelict_areas.dm"
 
-/obj/effect/overmap/sector/derelict
+/obj/effect/overmap/visitable/sector/derelict
 	name = "debris field"
 	desc = "A large field of miscellanious debris."
 	icon_state = "object"
 	known = 0
 
-	generic_waypoints = list(
+	initial_generic_waypoints = list(
 		"nav_derelict_1",
 		"nav_derelict_2",
 		"nav_derelict_3",
@@ -23,6 +23,22 @@
 	suffixes = list("derelict/derelict-station.dmm")
 	cost = 1
 	accessibility_weight = 10
+	area_usage_test_exempted_areas = list(/area/AIsattele)
+	area_usage_test_exempted_root_areas = list(/area/constructionsite, /area/derelict)
+	apc_test_exempt_areas = list(
+		/area/AIsattele = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/constructionsite = NO_SCRUBBER|NO_VENT|NO_APC,
+		/area/constructionsite/ai = NO_SCRUBBER|NO_VENT,
+		/area/constructionsite/atmospherics = NO_SCRUBBER|NO_VENT,
+		/area/constructionsite/teleporter = NO_SCRUBBER|NO_VENT,
+		/area/derelict/ship = NO_SCRUBBER|NO_VENT,
+		/area/djstation = NO_SCRUBBER|NO_VENT|NO_APC
+	)
+	area_coherency_test_subarea_count = list(
+		/area/constructionsite = 7,
+		/area/constructionsite/maintenance = 14,
+		/area/constructionsite/solar = 3,
+	)
 
 /obj/effect/shuttle_landmark/derelict/nav1
 	name = "Debris Navpoint #1"

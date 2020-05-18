@@ -65,8 +65,6 @@
 						P.updateinfolinks()
 			else if (response == "Carbon-Copy")
 				P = new /obj/item/weapon/paper/carbon
-
-		P.loc = user.loc
 		user.put_in_hands(P)
 		to_chat(user, "<span class='notice'>You take [P] out of the [src].</span>")
 	else
@@ -78,8 +76,8 @@
 
 /obj/item/weapon/paper_bin/attackby(obj/item/weapon/i as obj, mob/user as mob)
 	if(istype(i, /obj/item/weapon/paper))
-		user.drop_item()
-		i.forceMove(src)
+		if(!user.unEquip(i, src))
+			return
 		to_chat(user, "<span class='notice'>You put [i] in [src].</span>")
 		papers.Add(i)
 		update_icon()
@@ -96,24 +94,21 @@
 				was_there_a_photo = 1
 				bundleitem.dropInto(user.loc)
 				bundleitem.reset_plane_and_layer()
-		user.drop_from_inventory(i)
 		qdel(i)
 		if(was_there_a_photo)
 			to_chat(user, "<span class='notice'>The photo cannot go into \the [src].</span>")
-	return
 
 
-/obj/item/weapon/paper_bin/examine(mob/user)
+/obj/item/weapon/paper_bin/examine(mob/user, distance)
 	. = ..()
-	if(get_dist(src, user) <= 1)
+	if(distance <= 1)
 		if(amount)
 			to_chat(user, "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>")
 		else
 			to_chat(user, "<span class='notice'>There are no papers in the bin.</span>")
-	return
 
 
-/obj/item/weapon/paper_bin/update_icon()
+/obj/item/weapon/paper_bin/on_update_icon()
 	if(amount < 1)
 		icon_state = "paper_bin0"
 	else

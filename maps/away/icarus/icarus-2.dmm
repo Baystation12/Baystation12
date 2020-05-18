@@ -16,6 +16,7 @@
 /area/icarus/vessel)
 "af" = (
 /obj/structure/grille,
+/obj/structure/wall_frame,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "ag" = (
@@ -30,7 +31,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aj" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ak" = (
@@ -104,13 +105,12 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "ay" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "az" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -125,7 +125,7 @@
 /area/icarus/vessel)
 "aB" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/overmap/sector/icarus,
+/obj/effect/overmap/visitable/sector/icarus,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aD" = (
@@ -163,7 +163,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aK" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /obj/item/weapon/disk/icarus,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -177,7 +177,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "aN" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /obj/item/weapon/paper/icarus/log,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -463,9 +463,8 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "bE" = (
-/obj/structure/window/reinforced/full,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
-/obj/structure/grille,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -481,7 +480,6 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/wine,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/tiled,
@@ -529,12 +527,6 @@
 /obj/machinery/suit_storage_unit/security/alt,
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
-"bQ" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled,
-/area/icarus/open)
 "bR" = (
 /obj/structure/table/steel,
 /obj/random/tool,
@@ -543,7 +535,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/open)
 "bS" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -838,7 +830,7 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -915,7 +907,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cV" = (
-/obj/item/modular_computer/console,
+/obj/machinery/computer/modular,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -931,8 +923,7 @@
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "cX" = (
-/obj/structure/window/reinforced/full,
-/obj/structure/grille,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -953,7 +944,7 @@
 /area/icarus/vessel)
 "cZ" = (
 /obj/structure/table/standard,
-/obj/machinery/reagentgrinder,
+/obj/machinery/reagentgrinder/juicer,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "da" = (
@@ -1101,7 +1092,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -1156,7 +1147,7 @@
 	pixel_y = 0
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/storage/box/flashshells,
+/obj/item/weapon/storage/box/ammo/flashshells,
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "dD" = (
@@ -1198,9 +1189,9 @@
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25;
-	req_one_access = list(24,11)
+	req_access = newlist()
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
@@ -1224,7 +1215,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
 	},
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -1523,7 +1514,7 @@
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
 "eJ" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/shuttle/white,
@@ -1548,9 +1539,8 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "eO" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 4;
-	frequency = 1379;
 	id_tag = "bridgeport_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1572,9 +1562,8 @@
 /turf/simulated/floor/plating,
 /area/icarus/vessel)
 "eR" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
-	frequency = 1331;
 	id_tag = "ninja_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1801,9 +1790,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 1;
-	frequency = 1331;
 	id_tag = "calypso_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
@@ -1909,36 +1897,41 @@
 	},
 /turf/unsimulated/mineral,
 /area/space)
-"hb" = (
-/obj/effect/landmark/random_gen/asteroid,
-/turf/unsimulated/mineral,
-/area/space)
 "kT" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/open)
 "le" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "mg" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/open)
+"Bd" = (
+/obj/structure/wall_frame,
+/turf/simulated/floor/plating,
+/area/icarus/vessel)
+"Fo" = (
+/obj/item/weapon/ore/slag,
+/obj/structure/wall_frame,
+/turf/simulated/floor/plating,
+/area/icarus/vessel)
 "RQ" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
 "Vb" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -2144,7 +2137,7 @@ aa
 aa
 aa
 aa
-hb
+aa
 "}
 (2,1,1) = {"
 aa
@@ -19574,7 +19567,7 @@ ac
 ac
 ac
 ao
-bQ
+ay
 ao
 ao
 ao
@@ -22186,7 +22179,7 @@ ad
 ad
 ad
 ae
-ah
+Fo
 aq
 at
 ar
@@ -22588,8 +22581,8 @@ ad
 ad
 ae
 ae
-ah
-ag
+Fo
+Bd
 ak
 ar
 ai
@@ -22790,7 +22783,7 @@ ad
 ad
 ae
 af
-ag
+Bd
 ai
 ai
 ai
@@ -23800,7 +23793,7 @@ ad
 ad
 ae
 ae
-ag
+Bd
 ak
 am
 ak
@@ -24003,7 +23996,7 @@ ad
 ad
 ae
 ae
-ah
+Fo
 ai
 ak
 ak
@@ -25644,7 +25637,7 @@ ap
 cX
 dn
 ap
-bQ
+ay
 dW
 cL
 dR
@@ -27053,14 +27046,14 @@ ao
 ao
 ao
 ao
-bQ
-bQ
-bQ
+ay
+ay
+ay
 ao
 ao
-bQ
-bQ
-bQ
+ay
+ay
+ay
 cL
 ac
 ac

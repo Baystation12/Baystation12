@@ -5,7 +5,7 @@
 	icon_state = ""
 	obj_flags = OBJ_FLAG_CONDUCTIBLE
 	w_class = ITEM_SIZE_SMALL
-	matter = list(DEFAULT_WALL_MATERIAL = 100)
+	matter = list(MATERIAL_STEEL = 100)
 	throwforce = 2
 	throw_speed = 3
 	throw_range = 10
@@ -116,14 +116,13 @@
 	return PROCESS_KILL
 
 
-/obj/item/device/assembly/examine(mob/user)
-	. = ..(user)
-	if((in_range(src, user) || loc == user))
+/obj/item/device/assembly/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1 || loc == user)
 		if(secured)
 			to_chat(user, "\The [src] is ready!")
 		else
 			to_chat(user, "\The [src] can be attached!")
-	return
 
 
 /obj/item/device/assembly/attack_self(mob/user as mob)

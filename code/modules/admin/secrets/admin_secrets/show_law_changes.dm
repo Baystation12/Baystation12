@@ -12,4 +12,4 @@
 	var/dat = "<B>Showing last [length(GLOB.lawchanges)] law changes.</B><HR>"
 	for(var/sig in GLOB.lawchanges)
 		dat += "[sig]<BR>"
-	user << browse(dat, "window=lawchanges;size=800x500")
+	show_browser(user, dat, "window=lawchanges;size=800x500")

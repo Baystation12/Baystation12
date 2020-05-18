@@ -5,8 +5,7 @@
 	icon_state = "mopbucket"
 	density = 1
 	w_class = ITEM_SIZE_NORMAL
-	atom_flags = ATOM_FLAG_CLIMBABLE
-	atom_flags = ATOM_FLAG_OPEN_CONTAINER
+	atom_flags = ATOM_FLAG_CLIMBABLE | ATOM_FLAG_OPEN_CONTAINER
 	var/amount_per_transfer_from_this = 5	//shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 
 
@@ -14,8 +13,9 @@
 	create_reagents(180)
 	..()
 
-/obj/structure/mopbucket/examine(mob/user)
-	if(..(user, 1))
+/obj/structure/mopbucket/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		to_chat(user, "[src] \icon[src] contains [reagents.total_volume] unit\s of water!")
 
 /obj/structure/mopbucket/attackby(obj/item/I, mob/user)

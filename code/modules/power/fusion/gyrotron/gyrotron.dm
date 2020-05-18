@@ -1,36 +1,39 @@
 #define GYRO_POWER 25000
 
-var/list/gyrotrons = list()
-
 /obj/machinery/power/emitter/gyrotron
 	name = "gyrotron"
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	desc = "It is a heavy duty industrial gyrotron suited for powering fusion reactors."
 	icon_state = "emitter-off"
 	req_access = list(access_engine)
-	use_power = 1
+	use_power = POWER_USE_IDLE
 	active_power_usage = GYRO_POWER
 
-	var/id_tag
+	var/initial_id_tag
 	var/rate = 3
 	var/mega_energy = 1
 
+	construct_state = /decl/machine_construction/default/panel_closed
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/radio/receiver,
+	)
+	stat_immune = 0
+	base_type = /obj/machinery/power/emitter/gyrotron
 
 /obj/machinery/power/emitter/gyrotron/anchored
 	anchored = 1
 	state = 2
 
 /obj/machinery/power/emitter/gyrotron/Initialize()
-	gyrotrons += src
-	active_power_usage = mega_energy * GYRO_POWER
+	set_extension(src, /datum/extension/local_network_member)
+	if(initial_id_tag)
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		fusion.set_tag(null, initial_id_tag)
+	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
 	. = ..()
 
-/obj/machinery/power/emitter/gyrotron/Destroy()
-	gyrotrons -= src
-	return ..()
-
 /obj/machinery/power/emitter/gyrotron/Process()
-	active_power_usage = mega_energy * GYRO_POWER
+	change_power_consumption(mega_energy * GYRO_POWER, POWER_USE_ACTIVE)
 	. = ..()
 
 /obj/machinery/power/emitter/gyrotron/get_rand_burst_delay()
@@ -44,7 +47,7 @@ var/list/gyrotrons = list()
 	E.damage = mega_energy * 50
 	return E
 
-/obj/machinery/power/emitter/gyrotron/update_icon()
+/obj/machinery/power/emitter/gyrotron/on_update_icon()
 	if (active && powernet && avail(active_power_usage))
 		icon_state = "emitter-on"
 	else
@@ -52,9 +55,8 @@ var/list/gyrotrons = list()
 
 /obj/machinery/power/emitter/gyrotron/attackby(var/obj/item/W, var/mob/user)
 	if(isMultitool(W))
-		var/new_ident = input("Enter a new ident tag.", "Gyrotron", id_tag) as null|text
-		if(new_ident && user.Adjacent(src))
-			id_tag = new_ident
+		var/datum/extension/local_network_member/fusion = get_extension(src, /datum/extension/local_network_member)
+		fusion.get_new_tag(user)
 		return
 	return ..()
 

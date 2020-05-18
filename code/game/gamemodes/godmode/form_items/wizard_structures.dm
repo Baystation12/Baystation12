@@ -1,3 +1,6 @@
+/obj/structure/deity/altar/tower
+	icon_state = "tomealtar"
+
 /obj/structure/deity/wizard_recharger
 	name = "fountain of power"
 	desc = "Refreshing, cool water surrounded by archaic carvings."
@@ -11,14 +14,10 @@
 		return
 
 	hitter.visible_message("<span class='notice'>\The [hitter] dips their hands into \the [src], a soft glow emanating from them.</span>")
-	if(do_after(hitter,600,src,needhand=0))
+	if(do_after(hitter,300,src,needhand=0))
 		for(var/s in hitter.mind.learned_spells)
 			var/spell/spell = s
-			switch(spell.charge_type)
-				if(Sp_RECHARGE)
-					spell.charge_counter = spell.charge_max
-				if(Sp_CHARGES)
-					spell.charge_counter = min(spell.charge_counter + 1, spell.charge_max)
+			spell.charge_counter = spell.charge_max
 		to_chat(hitter, "<span class='notice'>You feel refreshed!</span>")
 		return
 	to_chat(hitter,"<span class='warning'>You need to keep in contact with \the [src]!</span>")

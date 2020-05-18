@@ -32,7 +32,7 @@
 	update_icon()
 	if(ishuman(hood.loc))
 		var/mob/living/carbon/H = hood.loc
-		H.unEquip(hood, 1)
+		H.drop_from_inventory(hood)
 		H.update_inv_wear_suit()
 	hood.forceMove(src)
 
@@ -57,7 +57,7 @@
 	else
 		RemoveHood()
 
-/obj/item/clothing/suit/storage/hooded/update_icon()
+/obj/item/clothing/suit/storage/hooded/on_update_icon()
 	if(suittoggled)
 		icon_state = "[initial(icon_state)]_t"
 	else
@@ -71,7 +71,9 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	min_cold_protection_temperature = ARMOR_MIN_COLD_PROTECTION_TEMPERATURE
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
+	armor = list(
+		bio = ARMOR_BIO_MINOR
+		)
 	action_button_name = "Toggle Winter Hood"
 	hoodtype = /obj/item/clothing/head/winterhood
 	allowed = list (/obj/item/weapon/pen, /obj/item/weapon/paper, /obj/item/device/flashlight,/obj/item/weapon/storage/fancy/cigarettes, /obj/item/weapon/storage/box/matches, /obj/item/weapon/reagent_containers/food/drinks/flask)
@@ -89,31 +91,59 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat/captain
 	name = "captain's winter coat"
 	icon_state = "coatcaptain"
-	armor = list(melee = 20, bullet = 15, laser = 20, energy = 10, bomb = 15, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_MINOR, 
+		laser = ARMOR_LASER_SMALL, 
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_MINOR
+		)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/security
 	name = "security winter coat"
 	icon_state = "coatsecurity"
-	armor = list(melee = 25, bullet = 20, laser = 20, energy = 15, bomb = 20, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_KNIVES, 
+		bullet = ARMOR_BALLISTIC_SMALL, 
+		laser = ARMOR_LASER_SMALL, 
+		energy = ARMOR_ENERGY_MINOR, 
+		bomb = ARMOR_BOMB_MINOR
+		)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/medical
 	name = "medical winter coat"
 	icon_state = "coatmedical"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
+	armor = list(
+		bio = ARMOR_BIO_RESISTANT
+		)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/science
 	name = "science winter coat"
 	icon_state = "coatscience"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
+	armor = list(
+		bomb = ARMOR_BOMB_MINOR
+		)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering
 	name = "engineering winter coat"
 	icon_state = "coatengineer"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 20)
+	armor = list(
+		rad = ARMOR_RAD_MINOR
+		)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering/atmos
 	name = "atmospherics winter coat"
 	icon_state = "coatatmos"
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/dais
+	name = "\improper DAIS winter coat"
+	icon_state = "coat_dais"
+	siemens_coefficient = 0.5
+	armor = list(
+		melee = ARMOR_MELEE_SMALL, 
+		energy = ARMOR_ENERGY_MINOR
+		)
+	desc = "A hooded winter coat colored blue and white and bearing the logo of Deimos Advanced Information Systems."
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/hydro
 	name = "hydroponics winter coat"
@@ -126,18 +156,19 @@
 /obj/item/clothing/suit/storage/hooded/wintercoat/miner
 	name = "mining winter coat"
 	icon_state = "coatminer"
-	armor = list(melee = 10, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 0)
+	armor = list(
+		melee = ARMOR_MELEE_SMALL
+		)
 
 /obj/item/clothing/suit/storage/hooded/hoodie
 	name = "hoodie"
 	desc = "A warm sweatshirt."
 	icon_state = "hoodie"
-	item_state = "hoodie"
 	min_cold_protection_temperature = T0C - 20
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
 	action_button_name = "Toggle Hood"
 	hoodtype = /obj/item/clothing/head/hoodiehood
-	
+
 /obj/item/clothing/head/hoodiehood
 	name = "hoodie hood"
 	desc = "A hood attached to a warm sweatshirt."

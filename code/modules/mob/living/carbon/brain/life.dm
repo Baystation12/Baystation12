@@ -72,10 +72,11 @@
 	chem_effects.Cut()
 
 	if(touching) touching.metabolize()
-	if(ingested) ingested.metabolize()
+	var/datum/reagents/metabolism/ingested = get_ingested_reagents()
+	if(istype(ingested)) ingested.metabolize()
 	if(bloodstr) bloodstr.metabolize()
 
-	confused = max(0, confused - 1)
+	handle_confused()
 	// decrement dizziness counter, clamped to 0
 	if(resting)
 		dizziness = max(0, dizziness - 5)
@@ -192,11 +193,3 @@
 				reset_view(null)
 
 	return 1
-
-	if (stat != 2)
-		if (machine)
-			if (machine.check_eye(src) < 0)
-				reset_view(null)
-		else
-			if(client && !client.adminobs)
-				reset_view(null)

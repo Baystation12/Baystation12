@@ -7,7 +7,6 @@
 	icon_state = "singularity_s1"
 	anchored = 1
 	density = 1
-	plane = EFFECTS_BELOW_LIGHTING_PLANE
 	layer = SINGULARITY_LAYER
 	light_outer_range = 6
 	unacidable = 1 //Don't comment this out.
@@ -25,7 +24,7 @@
 	var/consume_range = 0 //How many tiles out do we eat.
 	var/event_chance = 15 //Prob for event each tick.
 	var/target = null //Its target. Moves towards the target if it has one.
-	var/last_failed_movement = 0 //Will not move in the same dir if it couldnt before, will help with the getting stuck on fields thing.
+	var/last_failed_movement = 0 //Will not move in the same dir if it couldn't before, will help with the getting stuck on fields thing.
 	var/last_warning
 
 	var/chained = 0//Adminbus chain-grab
@@ -135,9 +134,9 @@
 			dissipate_delay = 10
 			dissipate_track = 0
 			dissipate_strength = 1
-			overlays = 0
+			overlays.Cut()
 			if(chained)
-				overlays = "chain_s1"
+				overlays = list("chain_s1")
 			visible_message("<span class='notice'>The singularity has shrunk to a rather pitiful size.</span>")
 		if (STAGE_TWO) //1 to 3 does not check for the turfs if you put the gens right next to a 1x1 then its going to eat them.
 			SetName("gravitational singularity")
@@ -152,9 +151,9 @@
 			dissipate_delay = 5
 			dissipate_track = 0
 			dissipate_strength = 5
-			overlays = 0
+			overlays.Cut()
 			if(chained)
-				overlays = "chain_s3"
+				overlays = list("chain_s3")
 			if(growing)
 				visible_message("<span class='notice'>The singularity noticeably grows in size.</span>")
 			else
@@ -173,9 +172,9 @@
 				dissipate_delay = 4
 				dissipate_track = 0
 				dissipate_strength = 20
-				overlays = 0
+				overlays.Cut()
 				if(chained)
-					overlays = "chain_s5"
+					overlays = list("chain_s5")
 				if(growing)
 					visible_message("<span class='notice'>The singularity expands to a reasonable size.</span>")
 				else
@@ -194,9 +193,9 @@
 				dissipate_delay = 10
 				dissipate_track = 0
 				dissipate_strength = 10
-				overlays = 0
+				overlays.Cut()
 				if(chained)
-					overlays = "chain_s7"
+					overlays = list("chain_s7")
 				if(growing)
 					visible_message("<span class='warning'>The singularity expands to a dangerous size.</span>")
 				else
@@ -211,10 +210,10 @@
 			pixel_y = -128
 			grav_pull = 10
 			consume_range = 4
-			dissipate = 0 //It cant go smaller due to e loss.
-			overlays = 0
+			dissipate = 0 //It can't go smaller due to e loss.
+			overlays.Cut()
 			if(chained)
-				overlays = "chain_s9"
+				overlays = list("chain_s9")
 			if(growing)
 				visible_message("<span class='danger'><font size='2'>The singularity has grown out of control!</font></span>")
 			else
@@ -229,10 +228,10 @@
 			pixel_y = -160
 			grav_pull = 16
 			consume_range = 5
-			dissipate = 0 //It cant go smaller due to e loss
+			dissipate = 0 //It can't go smaller due to e loss
 			event_chance = 25 //Events will fire off more often.
 			if(chained)
-				overlays = "chain_s9"
+				overlays = list("chain_s9")
 			visible_message("<span class='sinister'><font size='3'>You witness the creation of a destructive force that cannot possibly be stopped by human hands.</font></span>")
 
 	if (current_size == allowed_size)
@@ -410,14 +409,11 @@
 	if (src.energy>200)
 		toxdamage = round(((src.energy-150)/50)*4,1)
 		radiation = round(((src.energy-150)/50)*5,1)
-	radiation_repository.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
+	SSradiation.radiate(src, radiation) //Always radiate at max, so a decent dose of radiation is applied
 	for(var/mob/living/M in view(toxrange, src.loc))
 		if(M.status_flags & GODMODE)
 			continue
-		toxdamage = (toxdamage - (toxdamage*M.getarmor(null, "rad")))
-		M.apply_effect(toxdamage, TOX)
-	return
-
+		M.apply_damage(toxdamage, TOX, null, damage_flags = DAM_DISPERSED)
 
 /obj/singularity/proc/mezzer()
 	for(var/mob/living/carbon/M in oviewers(8, src))
@@ -447,13 +443,13 @@
 /obj/singularity/proc/smwave()
 	for(var/mob/living/M in view(10, src.loc))
 		if(prob(67))
-			to_chat(M, "<span class=\"warning\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+			to_chat(M, "<span class=\"warning\">You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 			to_chat(M, "<span class=\"notice\">Miraculously, it fails to kill you.</span>")
 		else
-			to_chat(M, "<span class=\"danger\">You hear an uneartly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
+			to_chat(M, "<span class=\"danger\">You hear an unearthly ringing, then what sounds like a shrilling kettle as you are washed with a wave of heat.</span>")
 			to_chat(M, "<span class=\"danger\">You don't even have a moment to react as you are reduced to ashes by the intense radiation.</span>")
 			M.dust()
-	radiation_repository.radiate(src, rand(energy))
+	SSradiation.radiate(src, rand(energy))
 	return
 
 /obj/singularity/proc/pulse()
@@ -463,7 +459,7 @@
 
 /obj/singularity/proc/on_capture()
 	chained = 1
-	overlays = 0
+	overlays.Cut()
 	move_self = 0
 	switch (current_size)
 		if(1)
@@ -479,7 +475,7 @@
 
 /obj/singularity/proc/on_release()
 	chained = 0
-	overlays = 0
+	overlays.Cut()
 	move_self = 1
 
 /obj/singularity/singularity_act(S, size)

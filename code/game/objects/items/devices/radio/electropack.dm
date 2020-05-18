@@ -8,7 +8,7 @@
 	slot_flags = SLOT_BACK
 	w_class = ITEM_SIZE_HUGE
 
-	matter = list(DEFAULT_WALL_MATERIAL = 10000,"glass" = 2500)
+	matter = list(MATERIAL_STEEL = 10000,MATERIAL_GLASS = 2500)
 
 	var/code = 2
 
@@ -24,16 +24,16 @@
 		if(!b_stat)
 			to_chat(user, "<span class='notice'>[src] is not ready to be attached!</span>")
 			return
+		if(!user.unEquip(W) || !user.unEquip(src))
+			return
 		var/obj/item/assembly/shock_kit/A = new /obj/item/assembly/shock_kit( user )
 		A.icon = 'icons/obj/assemblies.dmi'
 
-		user.drop_from_inventory(W)
-		W.loc = A
+		W.forceMove(A)
 		W.master = A
 		A.part1 = W
 
-		user.drop_from_inventory(src)
-		loc = A
+		forceMove(A)
 		master = A
 		A.part2 = src
 
@@ -43,7 +43,7 @@
 	//..()
 	if(usr.stat || usr.restrained())
 		return
-	if(((istype(usr, /mob/living/carbon/human) && ((!( ticker ) || (ticker && ticker.mode != "monkey")) && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && istype(loc, /turf)))))
+	if(((istype(usr, /mob/living/carbon/human) && (usr.IsAdvancedToolUser() && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && istype(loc, /turf)))))
 		usr.set_machine(src)
 		if(href_list["freq"])
 			var/new_frequency = sanitize_frequency(frequency + text2num(href_list["freq"]))
@@ -73,7 +73,7 @@
 					if(M.client)
 						attack_self(M)
 	else
-		usr << browse(null, "window=radio")
+		close_browser(usr, "window=radio")
 		return
 	return
 
@@ -122,6 +122,6 @@ Code:
 <A href='byond://?src=\ref[src];code=1'>+</A>
 <A href='byond://?src=\ref[src];code=5'>+</A><BR>
 </TT>"}
-	user << browse(dat, "window=radio")
+	show_browser(user, dat, "window=radio")
 	onclose(user, "radio")
 	return

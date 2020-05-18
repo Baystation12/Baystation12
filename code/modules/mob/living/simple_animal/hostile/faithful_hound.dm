@@ -8,9 +8,9 @@
 	maxHealth = 100
 	melee_damage_lower = 15
 	melee_damage_upper = 30
-	attacktext = "bites"
+	attacktext = "bitten"
 	attack_sound = 'sound/weapons/bite.ogg'
-	faction = "neutral"
+	faction = MOB_FACTION_NEUTRAL
 	density = 0
 	stop_automated_movement = 1
 	wander = 0

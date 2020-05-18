@@ -84,7 +84,7 @@
 		if(!code_owner && leader)
 			code_owner = leader
 		if(code_owner)
-			code_owner.store_memory("<B>Nuclear Bomb Code</B>: [code]", 0, 0)
+			code_owner.StoreMemory("<B>Nuclear Bomb Code</B>: [code]", /decl/memory_options/system)
 			to_chat(code_owner.current, "The nuclear authorization code is: <B>[code]</B>")
 	else
 		message_admins("<span class='danger'>Could not spawn nuclear bomb. Contact a developer.</span>")
@@ -98,11 +98,11 @@
 	// Basic intro text.
 	to_chat(player.current, "<span class='danger'><font size=3>You are a [role_text]!</font></span>")
 	if(leader_welcome_text && player == leader)
-		to_chat(player.current, "<span class='notice'>[leader_welcome_text]</span>")
+		to_chat(player.current, "<span class='antagdesc'>[leader_welcome_text]</span>")
 	else
-		to_chat(player.current, "<span class='notice'>[welcome_text]</span>")
+		to_chat(player.current, "<span class='antagdesc'>[welcome_text]</span>")
 	if (config.objectives_disabled == CONFIG_OBJECTIVE_NONE || !player.objectives.len)
-		to_chat(player.current, "<span class='notice'>[antag_text]</span>")
+		to_chat(player.current, "[antag_text]")
 
 	if((flags & ANTAG_HAS_NUKE) && !spawned_nuke)
 		create_nuke()

@@ -1,7 +1,7 @@
 /datum/trader/ship/vox
-	typical_duration = 15
+	typical_duration = 60
 	origin = "UNREGISTERED VESSEL"
-	name_language = "Vox-pidgin"
+	name_language = LANGUAGE_VOX
 	compliment_increase = 0
 	trade_flags = TRADER_GOODS
 	var/hailed_vox = 0 //Whether we have been hailed by a vox. negatives mean pariah, positives mean regular.
@@ -48,8 +48,6 @@
 								)
 
 	possible_trading_items = list(/obj/item/weapon/gun/projectile/dartgun/vox           = TRADER_SUBTYPES_ONLY,
-								/obj/item/mecha_parts/mecha_equipment/tool/             = TRADER_SUBTYPES_ONLY,
-								/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/ = TRADER_SUBTYPES_ONLY,
 								/obj/item/trash                                         = TRADER_SUBTYPES_ONLY,
 								/obj/item/remains                                       = TRADER_ALL,
 								/obj/item/clothing/accessory                            = TRADER_ALL,

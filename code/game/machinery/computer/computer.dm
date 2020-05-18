@@ -4,10 +4,12 @@
 	icon_state = "computer"
 	density = 1
 	anchored = 1.0
-	use_power = 1
 	idle_power_usage = 300
 	active_power_usage = 300
-	var/circuit = null //The path to the circuit board type. If circuit==null, the computer can't be disassembled.
+	construct_state = /decl/machine_construction/default/panel_closed/computer
+	uncreated_component_parts = null
+	stat_immune = 0
+	frame_type = /obj/machinery/constructable_frame/computerframe/deconstruct
 	var/processing = 0
 
 	var/icon_keyboard = "generic_key"
@@ -16,7 +18,7 @@
 	var/light_inner_range_on = 0.1
 	var/light_outer_range_on = 2
 	var/overlay_layer
-	atom_flags = ATOM_FLAG_CLIMBABLE
+	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_CLIMBABLE
 	clicksound = "keyboard"
 
 /obj/machinery/computer/New()
@@ -25,18 +27,11 @@
 
 /obj/machinery/computer/Initialize()
 	. = ..()
-	power_change()
 	update_icon()
 
-/obj/machinery/computer/Process()
-	if(stat & (NOPOWER|BROKEN))
-		return 0
-	return 1
-
 /obj/machinery/computer/emp_act(severity)
-	if(prob(20/severity)) set_broken()
+	if(prob(20/severity)) set_broken(TRUE)
 	..()
-
 
 /obj/machinery/computer/ex_act(severity)
 	switch(severity)
@@ -50,22 +45,35 @@
 			if (prob(50))
 				for(var/x in verbs)
 					verbs -= x
-				set_broken()
+				set_broken(TRUE)
 		if(3.0)
 			if (prob(25))
 				for(var/x in verbs)
 					verbs -= x
-				set_broken()
-		else
-	return
+				set_broken(TRUE)
 
 /obj/machinery/computer/bullet_act(var/obj/item/projectile/Proj)
 	if(prob(Proj.get_structure_damage()))
-		set_broken()
+		set_broken(TRUE)
 	..()
 
-/obj/machinery/computer/update_icon()
+/obj/machinery/computer/on_update_icon()
 	overlays.Cut()
+	icon = initial(icon)
+	icon_state = initial(icon_state)
+
+	if(reason_broken & MACHINE_BROKEN_NO_PARTS)
+		set_light(0)
+		icon = 'icons/obj/computer.dmi'
+		icon_state = "wired"
+		var/screen = get_component_of_type(/obj/item/weapon/stock_parts/console_screen)
+		var/keyboard = get_component_of_type(/obj/item/weapon/stock_parts/keyboard)
+		if(screen)
+			overlays += "comp_screen"
+		if(keyboard)
+			overlays += icon_keyboard ? "[icon_keyboard]_off" : "keyboard"
+		return
+
 	if(stat & NOPOWER)
 		set_light(0)
 		if(icon_keyboard)
@@ -77,43 +85,28 @@
 	if(stat & BROKEN)
 		overlays += image(icon,"[icon_state]_broken", overlay_layer)
 	else
-		overlays += image(icon,icon_screen, overlay_layer)
+		overlays += get_screen_overlay()
 
+	overlays += get_keyboard_overlay()
+
+/obj/machinery/computer/proc/get_screen_overlay()
+	return image(icon,icon_screen, overlay_layer)
+
+/obj/machinery/computer/proc/get_keyboard_overlay()
 	if(icon_keyboard)
 		overlays += image(icon, icon_keyboard, overlay_layer)
-
-/obj/machinery/computer/proc/set_broken()
-	stat |= BROKEN
-	update_icon()
 
 /obj/machinery/computer/proc/decode(text)
 	// Adds line breaks
 	text = replacetext(text, "\n", "<BR>")
 	return text
 
-/obj/machinery/computer/attackby(I as obj, user as mob)
-	if(isScrewdriver(I) && circuit)
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		if(do_after(user, 20, src))
-			var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
-			var/obj/item/weapon/circuitboard/M = new circuit( A )
-			A.circuit = M
-			A.anchored = 1
-			for (var/obj/C in src)
-				C.dropInto(loc)
-			if (src.stat & BROKEN)
-				to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-				new /obj/item/weapon/material/shard( src.loc )
-				A.state = 3
-				A.icon_state = "3"
-			else
-				to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
-				A.state = 4
-				A.icon_state = "4"
-			M.deconstruct(src)
-			qdel(src)
+/obj/machinery/computer/dismantle(mob/user)
+	if(stat & BROKEN)
+		to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
+		for(var/obj/item/weapon/stock_parts/console_screen/screen in component_parts)
+			qdel(screen)
+			new /obj/item/weapon/material/shard(loc)
 	else
-		..()
-
-/obj/machinery/computer/attack_ghost(var/mob/ghost)
-	attack_hand(ghost)
+		to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
+	return ..()

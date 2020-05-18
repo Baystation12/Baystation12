@@ -11,6 +11,7 @@
 	var/wall_type =  /turf/simulated/wall/elevator
 	var/floor_type = /turf/simulated/floor/tiled/dark
 	var/door_type =  /obj/machinery/door/airlock/lift
+	var/firedoor_type = /obj/machinery/door/firedoor
 
 	var/list/areas_to_use = list()
 
@@ -163,6 +164,12 @@
 				if(tx >= ux && tx <= ex && ty >= uy && ty <= ey)
 					floor_turfs += checking
 
+		var/area_path = areas_to_use[az]
+		var/area/A = locate(area_path) || new area_path()
+		for(var/T in floor_turfs)
+			ChangeArea(T, A)
+		cfloor.set_area_ref("\ref[A]")
+
 		// Place exterior doors.
 		for(var/tx = door_x1 to door_x2)
 			for(var/ty = door_y1 to door_y2)
@@ -182,7 +189,9 @@
 						lift.doors += newdoor
 						newdoor.lift = cfloor
 					else
+						var/obj/machinery/door/firedoor/newfiredoor = new firedoor_type(checking)
 						cfloor.doors += newdoor
+						cfloor.doors += newfiredoor
 						newdoor.floor = cfloor
 
 		// Place exterior control panel.
@@ -209,12 +218,6 @@
 			log_debug("Insufficient defined areas in turbolift datum, aborting.")
 			qdel(src)
 			return
-
-		var/area_path = areas_to_use[az]
-		for(var/thing in floor_turfs)
-			new area_path(thing)
-		var/area/A = locate(area_path)
-		cfloor.set_area_ref("\ref[A]")
 		az++
 
 	// Place lift panel.

@@ -17,7 +17,7 @@
 			to_chat(user, "<span class='danger'>It looks like the locking system has been shorted out.</span>")
 			return
 
-		if((!req_access || !req_access.len) && (!req_one_access || !req_one_access.len))
+		if(!length(req_access))
 			locked = 0
 			to_chat(user, "<span class='danger'>\The [src] doesn't seem to have a locking mechanism.</span>")
 			return
@@ -40,15 +40,21 @@
 		to_chat(user, "You [open ? "open" : "close"] the access panel.")
 		return
 
+	else if(isScrewdriver(W))
+		p_open = !p_open
+		to_chat(user, "You [p_open ? "open" : "close"] the wire cover.")
+
+	// Hacking.
+	else if(isWirecutter(W) || isMultitool(W))
+		if(p_open)
+			wires.Interact(user)
+		else
+			to_chat(user, "You can't reach the wiring.")
+		return
+
 	if(open)
 
-		// Hacking.
-		if(isWirecutter(W) || isMultitool(W))
-			if(open)
-				wires.Interact(user)
-			else
-				to_chat(user, "You can't reach the wiring.")
-			return
+
 		// Air tank.
 		if(istype(W,/obj/item/weapon/tank)) //Todo, some kind of check for suits without integrated air supplies.
 
@@ -71,14 +77,26 @@
 					to_chat(user, "<span class='danger'>You can't install a hardsuit module while the suit is being worn.</span>")
 					return 1
 
+			if(is_type_in_list(W,banned_modules))
+				to_chat(user, SPAN_DANGER("\The [src] cannot mount this type of module."))
+				return 1
+
+			var/obj/item/rig_module/mod = W
+
 			if(!installed_modules) installed_modules = list()
 			if(installed_modules.len)
 				for(var/obj/item/rig_module/installed_mod in installed_modules)
-					if(!installed_mod.redundant && istype(installed_mod,W))
+					if(is_type_in_list(installed_mod,mod.banned_modules))
+						to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
+						return 1
+					if(installed_mod.banned_modules.len)
+						if(is_type_in_list(W,installed_mod.banned_modules))
+							to_chat(user, SPAN_DANGER("\The [installed_mod] is incompatible with this module."))
+							return 1
+					if(!installed_mod.redundant && installed_mod.type == W.type)
 						to_chat(user, "The hardsuit already has a module of that class installed.")
 						return 1
 
-			var/obj/item/rig_module/mod = W
 			to_chat(user, "You begin installing \the [mod] into \the [src].")
 			if(!do_after(user,40,src))
 				return
@@ -102,26 +120,16 @@
 
 		else if(isWrench(W))
 
-			if(!air_supply)
-				to_chat(user, "There is not tank to remove.")
-				return
-
-			user.put_in_hands(air_supply)
-			to_chat(user, "You detach and remove \the [air_supply].")
-			air_supply = null
-			return
-
-		else if(isScrewdriver(W))
-
 			var/list/current_mounts = list()
 			if(cell) current_mounts   += "cell"
+			if(air_supply) current_mounts += "tank"
 			if(installed_modules && installed_modules.len) current_mounts += "system module"
 
 			var/to_remove = input("Which would you like to modify?") as null|anything in current_mounts
 			if(!to_remove)
 				return
 
-			if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell")
+			if(istype(src.loc,/mob/living/carbon/human) && to_remove != "cell" && to_remove != "tank")
 				var/mob/living/carbon/human/H = src.loc
 				if(H.back == src)
 					to_chat(user, "You can't remove an installed device while the hardsuit is being worn.")
@@ -139,6 +147,15 @@
 						cell = null
 					else
 						to_chat(user, "There is nothing loaded in that mount.")
+
+				if("tank")
+					if(!air_supply)
+						to_chat(user, "There is no tank to remove.")
+						return
+
+					user.put_in_hands(air_supply)
+					to_chat(user, "You detach and remove \the [air_supply].")
+					air_supply = null
 
 				if("system module")
 
@@ -158,7 +175,7 @@
 
 					var/obj/item/rig_module/removed = possible_removals[removal_choice]
 					to_chat(user, "You detach \the [removed] from \the [src].")
-					removed.forceMove(get_turf(src))
+					removed.dropInto(loc)
 					removed.removed()
 					installed_modules -= removed
 					update_icon()
@@ -195,7 +212,6 @@
 /obj/item/weapon/rig/emag_act(var/remaining_charges, var/mob/user)
 	if(!subverted)
 		req_access.Cut()
-		req_one_access.Cut()
 		locked = 0
 		subverted = 1
 		to_chat(user, "<span class='danger'>You short out the access protocol for the suit.</span>")

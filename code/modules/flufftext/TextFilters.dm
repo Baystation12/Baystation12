@@ -2,8 +2,8 @@
 
 proc/Intoxicated(phrase)
 	phrase = html_decode(phrase)
-	var/leng=lentext(phrase)
-	var/counter=lentext(phrase)
+	var/leng=length(phrase)
+	var/counter=length(phrase)
 	var/newphrase=""
 	var/newletter=""
 	while(counter>=1)
@@ -66,9 +66,8 @@ proc/Ellipsis(original_msg, chance = 50)
 	if(chance <= 0) return "..."
 	if(chance >= 100) return original_msg
 
-	var/list
-		words = splittext(original_msg," ")
-		new_words = list()
+	var/list/words = splittext(original_msg," ")
+	var/list/new_words = list()
 
 	var/new_msg = ""
 
@@ -152,7 +151,7 @@ proc/RadioChat(mob/living/user, message, distortion_chance = 60, distortion_spee
 					if("s")
 						newletter = "$"
 					if("e")
-						newletter = "€"
+						newletter = "£"
 					if("w")
 						newletter = "ø"
 					if("y")

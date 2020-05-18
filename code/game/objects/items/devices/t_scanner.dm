@@ -3,13 +3,11 @@
 /obj/item/device/t_scanner
 	name = "\improper T-ray scanner"
 	desc = "A terahertz-ray emitter and scanner, capable of penetrating conventional hull materials."
-	description_info = "Use this to toggle its scanning capabilities on and off. While on, it will expose the layout of cabling and pipework in a 7x7 area around you."
-	description_fluff = "The T-ray scanner is a modern spectroscopy solution and labor-saving device. Why work yourself to the bone removing floor panels when you can simply look through them with submillimeter radiation?"
 	icon_state = "t-ray0"
 	slot_flags = SLOT_BELT
 	w_class = ITEM_SIZE_SMALL
 	item_state = "electronic"
-	matter = list(DEFAULT_WALL_MATERIAL = 150)
+	matter = list(MATERIAL_ALUMINIUM = 150)
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	action_button_name = "Toggle T-Ray scanner"
 
@@ -26,7 +24,7 @@
 	if(on)
 		set_active(FALSE)
 
-/obj/item/device/t_scanner/update_icon()
+/obj/item/device/t_scanner/on_update_icon()
 	icon_state = "t-ray[on]"
 
 /obj/item/device/t_scanner/emp_act()
@@ -36,6 +34,11 @@
 /obj/item/device/t_scanner/attack_self(mob/user)
 	set_active(!on)
 	user.update_action_buttons()
+
+/obj/item/device/t_scanner/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	var/obj/structure/disposalpipe/D = target
+	if(D && istype(D))
+		to_chat(user, "<span class='info'>Pipe segment integrity: [(D.health / 10) * 100]%</span>")
 
 /obj/item/device/t_scanner/proc/set_active(var/active)
 	on = active

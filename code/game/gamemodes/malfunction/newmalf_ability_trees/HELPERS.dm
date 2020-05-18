@@ -70,7 +70,7 @@
 	if(!help)
 		help = "Error loading help (file /ingame_manuals/malf_ai.html is probably missing). Please report this to server administration staff."
 
-	user << browse(help, "window=malf_ai_help;size=600x500")
+	show_browser(user, help, "window=malf_ai_help;size=600x500")
 
 
 // Verb: ai_select_research()
@@ -192,7 +192,7 @@
 
 	var/list/L = list()
 	for(var/mob/living/silicon/robot/RB in SSmobs.mob_list)
-		if(istype(RB, /mob/living/silicon/robot/drone))
+		if(is_drone(RB))
 			continue
 		if(RB.connected_ai == A)
 			continue

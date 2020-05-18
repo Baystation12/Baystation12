@@ -1,0 +1,4173 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"ak" = (
+/obj/structure/hygiene/toilet{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/living)
+"am" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -23
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"an" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"aq" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"aW" = (
+/obj/effect/spider/eggcluster,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"bc" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"bg" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"bl" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"bq" = (
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"bt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"bz" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/effect/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"bJ" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"bP" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"bQ" = (
+/obj/machinery/computer/crew,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"bV" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"cd" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"cv" = (
+/obj/effect/landmark/clear,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/station/southairlock)
+"cw" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/computer/rdconsole/robotics{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"cI" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 6
+	},
+/obj/machinery/power/port_gen/pacman/mrs,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"cY" = (
+/obj/machinery/reagentgrinder,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"dc" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"dd" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 6
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"do" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"dx" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"dz" = (
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"dG" = (
+/obj/structure/reagent_dispensers/acid{
+	density = 0;
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"dU" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"eb" = (
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"ed" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/optable{
+	name = "Robotics Operating Table"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"ef" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"ej" = (
+/obj/machinery/atmospherics/pipe/simple/visible,
+/obj/machinery/door/airlock/external{
+	frequency = 1379;
+	id_tag = "labport_inner";
+	locked = 1;
+	name = "South Lab Airlock"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"eu" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"ev" = (
+/obj/machinery/computer/modular/preset/civilian{
+	dir = 4;
+	icon_state = "console"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"eL" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"eW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"fi" = (
+/obj/machinery/door/airlock/civilian{
+	name = "Shower"
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/living)
+"fk" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"fs" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"fH" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"fJ" = (
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"fY" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"gi" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/structure/reagent_dispensers/watertank,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"gj" = (
+/turf/simulated/wall/prepainted,
+/area/map_template/oldlab/station/northairlockatmos)
+"gn" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/hygiene/sink{
+	dir = 1;
+	pixel_y = 16
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/living)
+"gu" = (
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"gG" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"gL" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/structure/table/steel,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"hh" = (
+/obj/structure/bed/chair/office/comfy/red{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"hn" = (
+/obj/machinery/atmospherics/binary/pump/on,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"hq" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"hF" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/mob/living/simple_animal/hostile/giant_spider/nurse,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"hI" = (
+/obj/effect/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"hK" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"hO" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/computer/atmos_alert{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"hP" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"ib" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"ii" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/mob/living/simple_animal/hostile/giant_spider/spitter,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"ij" = (
+/obj/structure/table/rack,
+/obj/item/weapon/crowbar,
+/obj/item/weapon/shovel,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"it" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"iu" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"ix" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"iF" = (
+/obj/machinery/power/tracker,
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/structure/cable/yellow,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"iG" = (
+/obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"iR" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"jf" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"jl" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"jn" = (
+/obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"jr" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"jx" = (
+/obj/machinery/vending/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"jA" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	level = 2
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"ke" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/item/device/radio/intercom/entertainment{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"kQ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/machinery/atmospherics/unary/tank/air,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"li" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/button/blast_door{
+	active = null;
+	contaminated = null;
+	id_tag = "research_lab_shutters";
+	name = "Lab Shutters Control";
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"lj" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"ln" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/obj/structure/closet/hydrant{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"lo" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/machinery/vending/robotics{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"lx" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"lC" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"lN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"lO" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"lV" = (
+/obj/effect/landmark/clear,
+/obj/machinery/light/spot,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/station/northairlockatmos)
+"mn" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"mz" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 6
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"mP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/breakroom)
+"mR" = (
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/air/airlock,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"mZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/bed/chair{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"nb" = (
+/obj/machinery/light_switch{
+	pixel_x = 24;
+	pixel_y = -6
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"nf" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/sleeper{
+	dir = 8
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"ni" = (
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "labport_pump"
+	},
+/obj/machinery/oxygen_pump{
+	pixel_x = -32
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"nq" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"ns" = (
+/obj/structure/table/steel,
+/obj/item/weapon/reagent_containers/glass/beaker/insulated,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"nz" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/closet/hydrant{
+	pixel_y = 32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"nD" = (
+/obj/effect/floor_decal/techfloor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"nS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"nV" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"nW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"ob" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/button/blast_door{
+	active = null;
+	contaminated = null;
+	id_tag = "research_lab_shutters";
+	name = "Lab Shutters Control";
+	pixel_x = -32
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"od" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"ol" = (
+/obj/machinery/access_button{
+	active_power_usage = "portlab_airlock";
+	command = "cycle_interior";
+	frequency = 1379;
+	master_tag = "labport_airlock";
+	name = "interior access button";
+	pixel_x = 24;
+	pixel_y = -24;
+	req_access = null
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"ow" = (
+/obj/structure/closet/firecloset,
+/obj/machinery/light,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"oF" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"oH" = (
+/obj/machinery/chem_master,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"oI" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/random/tech_supply,
+/obj/structure/closet/hydrant{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"oM" = (
+/obj/structure/table/steel,
+/obj/item/weapon/reagent_containers/glass/beaker,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"oU" = (
+/obj/effect/landmark/clear,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/station/northairlockatmos)
+"pc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"pq" = (
+/obj/machinery/light_switch{
+	pixel_x = -6;
+	pixel_y = -24
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"pt" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/terminal,
+/obj/machinery/power/apc{
+	name = "south bump";
+	pixel_y = -28
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"pB" = (
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"pH" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"pO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"qf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"qn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"qt" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"qB" = (
+/obj/structure/table/steel,
+/obj/random/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"qF" = (
+/obj/structure/table/steel,
+/obj/random/mre,
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"qR" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/mob/living/simple_animal/hostile/giant_spider/guard,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"qX" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"rd" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/button/blast_door{
+	active = null;
+	contaminated = null;
+	id_tag = "research_lab_shutters";
+	name = "Lab Shutters Control";
+	pixel_x = 32
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"re" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"rt" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/chem)
+"rw" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"rz" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"rO" = (
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/living)
+"rQ" = (
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/light,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"rS" = (
+/obj/structure/closet/wardrobe/science_white,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"rV" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"sj" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/table/steel,
+/obj/item/device/robotanalyzer,
+/obj/machinery/recharger,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"sp" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/breakroom)
+"sY" = (
+/turf/simulated/wall/prepainted,
+/area/map_template/oldlab/station/southairlock)
+"tc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"ty" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/suit_storage_unit/engineering/alt,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"tI" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"tM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/machinery/button/blast_door{
+	active = null;
+	contaminated = null;
+	id_tag = "research_lab_shutters";
+	name = "Lab Shutters Control";
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"tO" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/structure/table/steel,
+/obj/random/toolbox,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"tP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"tU" = (
+/obj/structure/table/steel,
+/obj/item/stack/nanopaste,
+/obj/random/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"ue" = (
+/obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"uj" = (
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"uq" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"uy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/door/airlock/civilian{
+	name = "Shower"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/breakroom)
+"vh" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/structure/closet/toolcloset,
+/obj/item/weapon/storage/box/lights/mixed,
+/obj/random/handgun,
+/obj/random/accessory,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"vk" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"vw" = (
+/obj/structure/cable/yellow{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/machinery/power/apc{
+	dir = 8;
+	name = "west bump";
+	pixel_x = -24
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"vy" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"vH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"vW" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"wg" = (
+/obj/item/modular_computer/telescreen/preset/medical,
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/breakroom)
+"wm" = (
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"wq" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"wr" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"wD" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/shutters{
+	icon_state = "shutter0";
+	id_tag = "research_lab_shutters";
+	opacity = 0
+	},
+/obj/effect/paint/black,
+/turf/space,
+/area/map_template/oldlab/station/xenobio)
+"xg" = (
+/obj/structure/table/steel,
+/obj/item/device/radio/intercom/entertainment{
+	dir = 8;
+	pixel_x = 22
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"xl" = (
+/obj/structure/closet/wardrobe/lawyer_black,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"xs" = (
+/obj/structure/table/steel,
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/random/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"xB" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/computer/rcon{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"xF" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"xH" = (
+/obj/effect/landmark/clear,
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/station/southairlock)
+"xK" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"xU" = (
+/obj/machinery/bodyscanner{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"yh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"yt" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"yC" = (
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"yW" = (
+/obj/structure/bed/roller,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"za" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/shutters{
+	icon_state = "shutter0";
+	id_tag = "research_lab_shutters";
+	opacity = 0
+	},
+/obj/effect/paint/black,
+/turf/space,
+/area/map_template/oldlab/station/chem)
+"zb" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/item/weapon/stool,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"zd" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"zq" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"zG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light,
+/obj/machinery/button/blast_door{
+	active = null;
+	contaminated = null;
+	id_tag = "exterior_lab_shutters";
+	name = "Exterior Lab Shutters Control";
+	pixel_x = 32
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"zJ" = (
+/obj/machinery/airlock_sensor{
+	id_tag = "labport_sensor";
+	pixel_x = 25;
+	pixel_y = -6
+	},
+/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
+	active_power_usage = "labport_sensor";
+	anchor_fall = "labport_airlock";
+	dir = 8;
+	id_tag = "labport_airlock";
+	pixel_x = 25;
+	pixel_y = 8;
+	req_access = null;
+	tag_airpump = "labport_pump";
+	tag_chamber_sensor = "labport_sensor";
+	tag_exterior_door = "labport_outer";
+	tag_exterior_sensor = "labport_sensor_external";
+	tag_interior_door = "labport_inner"
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"zM" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"zR" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Ak" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/visible{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"As" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"AE" = (
+/obj/effect/landmark/clear,
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/station/southairlock)
+"AP" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Bm" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"BD" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/obj/random/toolbox,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"BY" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Cd" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Cv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/item/device/radio/intercom/entertainment{
+	dir = 4;
+	pixel_x = -22
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Cz" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	level = 2
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/breakroom)
+"CB" = (
+/obj/structure/reagent_dispensers/water_cooler{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"CF" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"CL" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"CX" = (
+/obj/machinery/body_scanconsole{
+	dir = 1;
+	display_tags = list("med_or_display","rob_or_display1","rob_or_display2")
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Di" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"Dr" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Du" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"DC" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/structure/table/steel,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"DD" = (
+/obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"DK" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"DX" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/structure/table/steel,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"Ej" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/machinery/fabricator,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Eq" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"Eu" = (
+/obj/structure/table/steel,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"Ez" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/structure/iv_drip,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"EE" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/breakroom)
+"EH" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"Fg" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/paint/black,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"Fj" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"Ft" = (
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/machinery/power/terminal{
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/item/weapon/bedsheet/blue,
+/obj/structure/bed/padded,
+/obj/random/plushie,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"Fv" = (
+/obj/structure/table/rack,
+/obj/item/stack/material/steel/fifty,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"FA" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"FF" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/robotics_fabricator,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Gd" = (
+/obj/machinery/access_button{
+	command = "cycle_exterior";
+	frequency = 1379;
+	master_tag = "labport_airlock";
+	name = "exterior access button";
+	pixel_x = 24;
+	pixel_y = 24;
+	req_access = list("ACCESS_MAINT")
+	},
+/obj/effect/landmark/clear,
+/obj/machinery/airlock_sensor{
+	frequency = 1550;
+	id_tag = "starboardlab_sensor_external";
+	pixel_x = -24;
+	pixel_y = 24
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/station/southairlock)
+"Gk" = (
+/obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/item/device/flashlight/lamp,
+/obj/machinery/light_switch{
+	pixel_x = -6;
+	pixel_y = 24
+	},
+/obj/random/advdevice,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"Gl" = (
+/obj/machinery/washing_machine,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"Gv" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Hc" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/item/weapon/bedsheet/brown,
+/obj/structure/bed/padded,
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"Hd" = (
+/obj/structure/hygiene/shower{
+	dir = 1
+	},
+/obj/structure/curtain/open/shower,
+/obj/random/soap,
+/turf/simulated/floor/tiled/freezer,
+/area/map_template/oldlab/station/living)
+"Hk" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Hp" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/fireaxecabinet{
+	pixel_y = -32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Hu" = (
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"HC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"HG" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"HU" = (
+/obj/machinery/power/solar/improved,
+/obj/effect/floor_decal/solarpanel,
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"HV" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/item/device/radio/intercom/entertainment{
+	pixel_y = 24
+	},
+/mob/living/simple_animal/hostile/giant_spider/guard,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"If" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 6
+	},
+/obj/machinery/power/smes/buildable/outpost_substation,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Is" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/effect/paint/black,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"IV" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"IY" = (
+/obj/item/device/radio/intercom/entertainment{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"Jc" = (
+/obj/structure/table/steel,
+/obj/random/medical,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Jf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Jz" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"JC" = (
+/obj/structure/table/steel,
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/device/radio/intercom/entertainment{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Kg" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/southairlock)
+"Km" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/computer/power_monitor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Ku" = (
+/obj/effect/floor_decal/techfloor,
+/obj/machinery/light,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Ky" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/item/device/radio/intercom/entertainment{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"KC" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"KS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Lg" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/atmospherics/unary/tank/air,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Lh" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 10
+	},
+/obj/structure/table/steel,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/item/weapon/reagent_containers/spray/cleaner,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"Ll" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light_switch{
+	pixel_x = -6;
+	pixel_y = -24
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"Ln" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -23
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Lv" = (
+/obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Ly" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/light,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"LA" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/structure/bed/chair/office/comfy/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"LB" = (
+/obj/structure/bed/chair/wheelchair,
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"LJ" = (
+/obj/machinery/light_switch{
+	pixel_x = 24;
+	pixel_y = -6
+	},
+/obj/machinery/computer/modular/preset/civilian{
+	dir = 8;
+	icon_state = "console"
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"LP" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/shutters{
+	dir = 4;
+	icon_state = "shutter0";
+	id_tag = "research_lab_shutters";
+	opacity = 0
+	},
+/obj/effect/paint/black,
+/turf/space,
+/area/map_template/oldlab/station/xenobio)
+"LW" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/breakroom)
+"Md" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Mf" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/civilian,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"Mh" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Ms" = (
+/obj/effect/landmark/clear,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/station/northairlockatmos)
+"Mx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"ME" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/random/technology_scanner,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"MH" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/alarm{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"MN" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/table/steel,
+/obj/machinery/light/small,
+/obj/random/single/playing_cards,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"MQ" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/xenobio)
+"MV" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"MX" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"Nf" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/bed/chair/office,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Ni" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"NB" = (
+/obj/structure/table/rack,
+/obj/item/stack/cable_coil/random,
+/obj/item/weapon/crowbar/brace_jack,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"NO" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"NR" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"NU" = (
+/obj/machinery/door/airlock/multi_tile/civilian{
+	dir = 8
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"NW" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"OI" = (
+/obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"OJ" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Pj" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Po" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"PL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"PQ" = (
+/obj/machinery/door/airlock/external{
+	frequency = 1379;
+	id_tag = "labport_outer";
+	locked = 1;
+	name = "South Lab Airlock"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"PY" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/structure/reagent_dispensers/fueltank,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Qf" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/random/contraband,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"Qp" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	level = 2
+	},
+/obj/item/device/radio/intercom/entertainment{
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"QE" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/northairlockatmos)
+"QS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"Ra" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/giant_spider/nurse,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Rd" = (
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Rk" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Rr" = (
+/obj/machinery/computer/crew,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"RA" = (
+/obj/machinery/cooker/grill,
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"RE" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"RN" = (
+/obj/structure/table/steel,
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/light_switch{
+	pixel_y = 25
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"RX" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/power/terminal,
+/obj/structure/cable/yellow{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable/yellow,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/item/device/radio/intercom/entertainment{
+	dir = 8;
+	pixel_x = 22
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Sd" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/mob/living/simple_animal/hostile/giant_spider/hunter,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"Sk" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Sp" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/obj/structure/closet/hydrant{
+	pixel_x = -32
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"SB" = (
+/obj/structure/table/steel,
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"SL" = (
+/obj/machinery/cooker/oven,
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"SS" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"SW" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Tl" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Tu" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Tw" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"TF" = (
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/obj/machinery/door/blast/shutters{
+	dir = 4;
+	icon_state = "shutter0";
+	id_tag = "exterior_lab_shutters";
+	opacity = 0
+	},
+/obj/effect/paint/black,
+/turf/space,
+/area/map_template/oldlab/station/hall)
+"TS" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/hall)
+"TV" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 9
+	},
+/obj/machinery/recharge_station,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"TX" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/machinery/portable_atmospherics/powered/pump/filled,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Ul" = (
+/obj/structure/bed/chair/office/comfy/red{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Um" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/door/firedoor,
+/obj/machinery/door/airlock/multi_tile/glass/medical{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Uu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Ux" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"UR" = (
+/obj/structure/table/steel,
+/obj/machinery/microwave,
+/obj/effect/floor_decal/corner/red,
+/obj/effect/floor_decal/corner/red{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/breakroom)
+"Vf" = (
+/obj/machinery/vitals_monitor,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Vi" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/effect/floor_decal/techfloor{
+	dir = 8
+	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
+	dir = 4;
+	id_tag = "labport_pump"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"Vp" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"Vq" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/firedoor,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Vs" = (
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"VC" = (
+/obj/structure/table/steel,
+/obj/item/weapon/reagent_containers/glass/beaker/vial/random{
+	pixel_x = 3;
+	pixel_y = 7
+	},
+/obj/item/weapon/reagent_containers/glass/beaker/vial/random{
+	pixel_x = 9;
+	pixel_y = 6
+	},
+/obj/item/weapon/reagent_containers/glass/beaker/vial/random,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"VK" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"VL" = (
+/obj/machinery/optable{
+	name = "Xenobiology Operating Table"
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"VX" = (
+/obj/structure/closet/firecloset,
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Wo" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/southairlock)
+"WG" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/vending/tool{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"WJ" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/solars)
+"WM" = (
+/obj/effect/floor_decal/techfloor,
+/obj/structure/table/steel,
+/obj/item/modular_computer/laptop,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Xi" = (
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Xj" = (
+/obj/structure/table/rack,
+/obj/random/tool,
+/obj/random/tool,
+/obj/item/weapon/storage/belt/utility/full,
+/obj/item/device/suit_cooling_unit,
+/obj/random/technology_scanner,
+/obj/random/tool,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Xl" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Xx" = (
+/obj/structure/grille,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"Yb" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/obj/item/device/radio/intercom/entertainment{
+	dir = 4;
+	pixel_x = -22
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/map_template/oldlab/station/living)
+"Yd" = (
+/turf/simulated/wall/r_wall/prepainted,
+/area/map_template/oldlab/station/living)
+"Yh" = (
+/obj/machinery/power/solar_control,
+/obj/effect/floor_decal/techfloor{
+	dir = 5
+	},
+/obj/structure/cable/yellow,
+/obj/structure/cable/yellow{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Yi" = (
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/xenobio)
+"Yp" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/solars)
+"Yt" = (
+/obj/machinery/chemical_dispenser/full,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"YJ" = (
+/obj/machinery/smartfridge/chemistry,
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/chem)
+"YW" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 6
+	},
+/obj/structure/reagent_dispensers/acid{
+	density = 0;
+	pixel_x = 32
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"YZ" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"Ze" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"Zf" = (
+/obj/effect/floor_decal/techfloor{
+	dir = 4
+	},
+/obj/machinery/alarm{
+	dir = 8;
+	pixel_x = 24
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"Zk" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/machinery/light,
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/white,
+/area/map_template/oldlab/station/hall)
+"ZC" = (
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+"ZS" = (
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/map_template/oldlab/station/northairlockatmos)
+"ZW" = (
+/obj/structure/cable/yellow{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/exoplanet/concrete/reinforced,
+/area/map_template/oldlab/solars)
+
+(1,1,1) = {"
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+Xx
+"}
+(2,1,1) = {"
+Xx
+ZC
+bg
+MX
+bg
+xF
+bg
+xF
+bg
+xF
+bg
+xF
+iF
+MX
+bg
+MX
+bg
+MX
+bg
+MX
+bg
+MX
+bg
+Vp
+Xx
+"}
+(3,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+YZ
+Xx
+"}
+(4,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+YZ
+Xx
+"}
+(5,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+YZ
+Xx
+"}
+(6,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+YZ
+Xx
+"}
+(7,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+YZ
+Xx
+"}
+(8,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+aa
+HU
+YZ
+Xx
+"}
+(9,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+FA
+bg
+wr
+bg
+wr
+bg
+wr
+bg
+wr
+bg
+wr
+bg
+wr
+bg
+dx
+HU
+aa
+HU
+YZ
+Xx
+"}
+(10,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+YZ
+uj
+Is
+Is
+Is
+Is
+Is
+Is
+Is
+Is
+Is
+Is
+Is
+uj
+re
+HU
+aa
+HU
+YZ
+Xx
+"}
+(11,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+YZ
+uj
+Is
+DC
+BY
+hO
+hq
+hq
+hq
+xB
+BD
+gL
+Is
+uj
+re
+HU
+aa
+HU
+YZ
+Xx
+"}
+(12,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+YZ
+uj
+Is
+Km
+Nf
+VK
+VK
+ii
+SW
+SW
+zb
+WM
+Is
+uj
+re
+HU
+aa
+HU
+YZ
+Xx
+"}
+(13,1,1) = {"
+Xx
+re
+HU
+aa
+HU
+aa
+bg
+Fg
+Yh
+Rk
+Ni
+WG
+Jf
+Tu
+gG
+RX
+If
+Is
+uj
+re
+HU
+aa
+HU
+YZ
+Xx
+"}
+(14,1,1) = {"
+Xx
+re
+HU
+aa
+bg
+eL
+uj
+WJ
+WJ
+WJ
+WJ
+WJ
+aq
+NU
+WJ
+WJ
+WJ
+WJ
+uj
+xK
+bg
+dx
+HU
+YZ
+Xx
+"}
+(15,1,1) = {"
+Xx
+re
+HU
+YZ
+QE
+QE
+QE
+QE
+PY
+ed
+tO
+QE
+eu
+Sk
+Kg
+Kg
+Kg
+Kg
+Kg
+Kg
+Kg
+re
+HU
+YZ
+Xx
+"}
+(16,1,1) = {"
+Xx
+re
+HU
+YZ
+QE
+TV
+ke
+DK
+KS
+hP
+sj
+QE
+wq
+Ly
+Kg
+Kg
+vh
+Ky
+nV
+Lh
+Kg
+re
+HU
+YZ
+Xx
+"}
+(17,1,1) = {"
+Xx
+iu
+ZW
+bP
+QE
+fs
+Zf
+tc
+HG
+MV
+cI
+QE
+jr
+Jz
+Kg
+Kg
+Hc
+Qf
+lN
+MN
+Kg
+iu
+ZW
+bP
+Xx
+"}
+(18,1,1) = {"
+Ms
+QE
+QE
+QE
+gj
+QE
+QE
+fY
+QE
+QE
+QE
+QE
+MH
+Hk
+Kg
+Kg
+Kg
+Kg
+eb
+Kg
+Kg
+Kg
+Kg
+sY
+cv
+"}
+(19,1,1) = {"
+lV
+QE
+kQ
+Du
+gj
+Ej
+Cd
+Uu
+DK
+DK
+DK
+iG
+Md
+NW
+DD
+oI
+am
+HC
+vk
+mR
+Kg
+Vi
+ni
+sY
+xH
+"}
+(20,1,1) = {"
+Ms
+QE
+Lg
+bz
+gj
+nz
+ef
+AP
+hK
+IV
+mn
+ib
+nq
+SS
+RE
+Wo
+ME
+vH
+hn
+ol
+ej
+Ak
+zJ
+PQ
+Gd
+"}
+(21,1,1) = {"
+Ms
+QE
+Lg
+Xl
+ZS
+qt
+Fv
+Xj
+Uu
+pt
+QE
+QE
+HV
+Sk
+Kg
+Kg
+lC
+NB
+ij
+hI
+Kg
+Kg
+Kg
+sY
+cv
+"}
+(22,1,1) = {"
+Ms
+QE
+tI
+nD
+gj
+Pj
+zM
+zM
+nS
+Ku
+QE
+QE
+Yp
+Dr
+Kg
+Kg
+it
+bt
+bt
+rQ
+Kg
+Kg
+Kg
+xH
+cv
+"}
+(23,1,1) = {"
+lV
+QE
+TX
+mz
+gj
+lo
+FF
+cw
+OJ
+YW
+QE
+QE
+eu
+Hp
+Kg
+Kg
+gi
+ty
+ty
+dd
+Kg
+Kg
+Kg
+cv
+cv
+"}
+(24,1,1) = {"
+Ms
+QE
+QE
+QE
+QE
+QE
+QE
+QE
+QE
+QE
+QE
+QE
+bc
+Um
+TS
+TS
+TS
+TS
+TS
+TS
+TS
+TS
+TS
+cv
+cv
+"}
+(25,1,1) = {"
+Ms
+Ms
+TS
+As
+zR
+Cv
+Gv
+Sp
+ob
+Ln
+PL
+rw
+Xi
+Tl
+rw
+PL
+Cv
+Sp
+Gv
+PL
+Tw
+As
+TS
+cv
+cv
+"}
+(26,1,1) = {"
+Ms
+lV
+TS
+VX
+jA
+od
+dU
+od
+od
+od
+od
+od
+zq
+od
+od
+od
+qf
+od
+dU
+od
+do
+ow
+TS
+xH
+cv
+"}
+(27,1,1) = {"
+Ms
+Ms
+MQ
+LP
+LP
+LP
+yC
+LP
+LP
+LP
+MQ
+OI
+Vq
+OI
+LW
+LW
+LW
+LW
+dc
+LW
+LW
+LW
+LW
+cv
+cv
+"}
+(28,1,1) = {"
+Ms
+Ms
+MQ
+Rr
+Yi
+pO
+CL
+Ez
+yW
+tU
+wD
+pH
+fH
+gu
+LW
+UR
+ln
+vw
+Ll
+LW
+EE
+sp
+LW
+cv
+cv
+"}
+(29,1,1) = {"
+Ms
+Ms
+MQ
+JC
+Yi
+Mh
+yt
+yh
+Yi
+Jc
+wD
+pH
+fH
+pq
+LW
+RN
+mZ
+jl
+EH
+LW
+Cz
+mP
+LW
+cv
+cv
+"}
+(30,1,1) = {"
+Ms
+lV
+MQ
+VL
+aW
+Mh
+xU
+CX
+rV
+CF
+KC
+zd
+lO
+zd
+Mf
+vW
+vW
+Sd
+Mx
+LW
+LW
+uy
+LW
+xH
+cv
+"}
+(31,1,1) = {"
+Ms
+Ms
+MQ
+Vf
+Yi
+Mh
+Ra
+yh
+bV
+Ul
+wD
+pH
+fH
+jf
+wg
+SL
+pB
+pB
+Di
+fk
+fk
+nW
+LW
+cv
+cv
+"}
+(32,1,1) = {"
+Ms
+Ms
+MQ
+jx
+rz
+tM
+NR
+ix
+nf
+LJ
+wD
+pH
+fH
+jf
+LW
+RA
+Po
+CB
+xg
+qF
+Po
+bq
+LW
+cv
+cv
+"}
+(33,1,1) = {"
+Ms
+Ms
+MQ
+MQ
+MQ
+MQ
+yC
+MQ
+MQ
+MQ
+MQ
+wm
+Ux
+Zk
+LW
+LW
+LW
+LW
+LW
+LW
+LW
+LW
+LW
+cv
+cv
+"}
+(34,1,1) = {"
+Ms
+Ms
+rt
+cY
+xs
+oM
+QS
+li
+DX
+ev
+za
+qR
+fH
+Rd
+Yd
+Gl
+Yb
+rS
+xl
+fJ
+vy
+fJ
+Yd
+cv
+cv
+"}
+(35,1,1) = {"
+Ms
+lV
+rt
+IY
+Fj
+Fj
+cd
+Fj
+eW
+hh
+za
+pH
+fH
+pq
+Yd
+Qp
+pc
+fJ
+fJ
+fJ
+fJ
+fJ
+Yd
+xH
+cv
+"}
+(36,1,1) = {"
+Ms
+Ms
+rt
+oH
+Fj
+Eu
+oM
+qB
+iR
+bl
+lx
+Bm
+lj
+bJ
+Eq
+an
+NO
+hF
+fJ
+Yd
+Yd
+fi
+Yd
+cv
+cv
+"}
+(37,1,1) = {"
+Ms
+Ms
+rt
+Yt
+Fj
+SB
+VC
+ns
+uq
+Fj
+za
+rd
+Ze
+zG
+Yd
+Gk
+qn
+qX
+Hu
+Yd
+gn
+rO
+Yd
+cv
+cv
+"}
+(38,1,1) = {"
+Ms
+Ms
+rt
+YJ
+Vs
+dG
+oF
+tP
+dz
+nb
+za
+Lv
+jn
+ue
+Yd
+bQ
+LA
+Ft
+LB
+Yd
+ak
+Hd
+Yd
+cv
+cv
+"}
+(39,1,1) = {"
+Ms
+Ms
+rt
+rt
+rt
+rt
+rt
+rt
+rt
+rt
+rt
+TF
+TF
+TF
+Yd
+Yd
+Yd
+Yd
+Yd
+Yd
+Yd
+Yd
+Yd
+cv
+cv
+"}
+(40,1,1) = {"
+Ms
+Ms
+Ms
+Ms
+Ms
+oU
+Ms
+Ms
+Ms
+Ms
+oU
+Ms
+cv
+cv
+AE
+cv
+cv
+cv
+cv
+AE
+cv
+cv
+cv
+cv
+cv
+"}

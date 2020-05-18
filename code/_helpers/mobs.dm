@@ -1,9 +1,6 @@
 /atom/movable/proc/get_mob()
 	return
 
-/obj/mecha/get_mob()
-	return occupant
-
 /obj/vehicle/train/get_mob()
 	return buckled_mob
 
@@ -39,34 +36,20 @@ proc/random_hair_style(gender, species = SPECIES_HUMAN)
 
 proc/random_facial_hair_style(gender, var/species = SPECIES_HUMAN)
 	var/f_style = "Shaved"
-
 	var/datum/species/mob_species = all_species[species]
 	var/list/valid_facialhairstyles = mob_species.get_facial_hair_styles(gender)
 	if(valid_facialhairstyles.len)
 		f_style = pick(valid_facialhairstyles)
-
 		return f_style
 
-proc/sanitize_name(name, species = SPECIES_HUMAN)
-	var/datum/species/current_species
-	if(species)
-		current_species = all_species[species]
-
-	return current_species ? current_species.sanitize_name(name) : sanitizeName(name)
-
 proc/random_name(gender, species = SPECIES_HUMAN)
-
-	var/datum/species/current_species
 	if(species)
-		current_species = all_species[species]
-
-	if(!current_species)
-		if(gender==FEMALE)
-			return capitalize(pick(GLOB.first_names_female)) + " " + capitalize(pick(GLOB.last_names))
-		else
-			return capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
-	else
-		return current_species.get_random_name(gender)
+		var/datum/species/current_species = all_species[species]
+		if(current_species)
+			var/decl/cultural_info/current_culture = SSculture.get_culture(current_species.default_cultural_info[TAG_CULTURE])
+			if(current_culture)
+				return current_culture.get_random_name(gender)
+	return capitalize(pick(gender == FEMALE ? GLOB.first_names_female : GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
 proc/random_skin_tone(var/datum/species/current_species)
 	var/species_tone = current_species ? 35 - current_species.max_skin_tone() : -185
@@ -114,10 +97,14 @@ proc/age2agedescription(age)
 
 //checks whether this item is a module of the robot it is located in.
 /proc/is_robot_module(var/obj/item/thing)
-	if (!thing || !istype(thing.loc, /mob/living/silicon/robot))
-		return 0
+	if(!thing)
+		return FALSE
+	if(istype(thing.loc, /mob/living/exosuit))
+		return FALSE
+	if(!istype(thing.loc, /mob/living/silicon/robot))
+		return FALSE
 	var/mob/living/silicon/robot/R = thing.loc
-	return (thing in R.module.modules)
+	return (thing in R.module.equipment)
 
 /proc/get_exposed_defense_zone(var/atom/movable/target)
 	return pick(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_FOOT, BP_R_FOOT, BP_L_ARM, BP_R_ARM, BP_L_LEG, BP_R_LEG, BP_CHEST, BP_GROIN)
@@ -146,11 +133,11 @@ proc/age2agedescription(age)
 		if(uninterruptible)
 			continue
 
-		if(!user || user.incapacitated(incapacitation_flags) || user.loc != user_loc)
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || user.loc != user_loc)
 			. = 0
 			break
 
-		if(target.loc != target_loc)
+		if(QDELETED(target) || target.loc != target_loc)
 			. = 0
 			break
 
@@ -193,11 +180,11 @@ proc/age2agedescription(age)
 		if (progress)
 			progbar.update(world.time - starttime)
 
-		if(!user || user.incapacitated(incapacitation_flags) || (user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
+		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
 			. = 0
 			break
 
-		if(target_loc && (!target || QDELETED(target) || target_loc != target.loc || target_type != target.type))
+		if(target_loc && (QDELETED(target) || target_loc != target.loc || target_type != target.type))
 			. = 0
 			break
 
@@ -280,3 +267,21 @@ proc/age2agedescription(age)
 				selected = M
 				break
 	return selected
+
+/proc/damflags_to_strings(damflags)
+	var/list/res = list()
+	if(damflags & DAM_SHARP)
+		res += "sharp"
+	if(damflags & DAM_EDGE)
+		res += "edge"
+	if(damflags & DAM_LASER)
+		res += "laser"
+	if(damflags & DAM_BULLET)
+		res += "bullet"
+	if(damflags & DAM_EXPLODE)
+		res += "explode"
+	if(damflags & DAM_DISPERSED)
+		res += "dispersed"
+	if(damflags & DAM_BIO)
+		res += "bio"
+	return english_list(res)

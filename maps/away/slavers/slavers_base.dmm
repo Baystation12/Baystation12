@@ -77,7 +77,7 @@
 /area/slavers_base/mort)
 "ar" = (
 /obj/structure/table/standard,
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "as" = (
@@ -110,7 +110,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "az" = (
-/obj/item/weapon/material/kitchen/utensil/knife,
+/obj/item/weapon/material/knife/table,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/mort)
 "aA" = (
@@ -201,7 +201,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "aO" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -216,11 +216,11 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aR" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aS" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -249,7 +249,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aX" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -263,7 +263,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "aZ" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -284,7 +284,7 @@
 /area/slavers_base/cells)
 "bc" = (
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -292,14 +292,14 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bd" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/trash/liquidfood,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "be" = (
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -311,7 +311,7 @@
 /area/slavers_base/cells)
 "bg" = (
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -319,9 +319,9 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bh" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -332,7 +332,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bj" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
 	d2 = 2;
 	icon_state = "0-2"
@@ -451,7 +451,7 @@
 /area/slavers_base/cells)
 "bs" = (
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -478,7 +478,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "bu" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -503,7 +503,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "by" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "bz" = (
@@ -566,7 +566,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "bG" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -585,7 +585,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bK" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
 	d2 = 4;
 	icon_state = "0-4"
@@ -593,7 +593,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bL" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
 	d1 = 2;
 	d2 = 4;
@@ -611,7 +611,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bM" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
 	d2 = 8;
 	icon_state = "0-8"
@@ -632,12 +632,12 @@
 /area/slavers_base/cells)
 "bP" = (
 /obj/machinery/light/small/red,
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "bQ" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -712,7 +712,7 @@
 /area/slavers_base/cells)
 "bW" = (
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -796,7 +796,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "ca" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
 	d1 = 1;
 	d2 = 4;
@@ -833,7 +833,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "cd" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
@@ -843,11 +843,11 @@
 /obj/machinery/light/small/red{
 	dir = 1
 	},
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cf" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/random/snack,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -859,7 +859,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "ch" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/remains/human,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -1008,7 +1008,7 @@
 /area/slavers_base/hangar)
 "cu" = (
 /obj/machinery/door/blast/regular{
-	id = "service_hangar"
+	id_tag = "service_hangar"
 	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/hangar)
@@ -1029,7 +1029,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
 "cx" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/cells)
@@ -1134,7 +1134,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cM" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/random/junk,
 /turf/simulated/floor/airless/ceiling,
@@ -1145,14 +1145,14 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cO" = (
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/glass/rag,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/effect/landmark/corpse/slavers_base/slave,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
 "cP" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 4
 	},
 /obj/item/trash/liquidfood,
@@ -1160,7 +1160,7 @@
 /area/slavers_base/cells)
 "cQ" = (
 /obj/machinery/light/small/red,
-/obj/structure/slavers_base/mattress,
+/obj/structure/mattress/dirty,
 /obj/item/weapon/reagent_containers/glass/rag,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/cells)
@@ -1204,11 +1204,11 @@
 /turf/space,
 /area/space)
 "cX" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "cY" = (
-/obj/machinery/atmospherics/pipe/tank/air,
+/obj/machinery/atmospherics/unary/tank/air,
 /obj/machinery/light/small{
 	dir = 1
 	},
@@ -1289,7 +1289,7 @@
 /area/slavers_base/secwing)
 "dm" = (
 /obj/structure/table/rack,
-/obj/item/weapon/storage/box/stunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
 /obj/item/weapon/gun/projectile/shotgun/pump,
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
@@ -1319,7 +1319,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dr" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable/cyan{
 	d1 = 4;
 	d2 = 8;
@@ -1387,7 +1387,7 @@
 /area/slavers_base/med)
 "dv" = (
 /obj/machinery/flasher{
-	id = "permentryflash";
+	id_tag = "permentryflash";
 	name = "Floor mounted flash";
 	pixel_x = 0
 	},
@@ -1432,7 +1432,7 @@
 /area/slavers_base/med)
 "dz" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	pixel_y = 30
 	},
 /turf/simulated/floor/tiled/airless,
@@ -1546,7 +1546,7 @@
 /area/slavers_base/secwing)
 "dR" = (
 /obj/structure/table/steel,
-/obj/item/weapon/storage/box/stunshells,
+/obj/item/weapon/storage/box/ammo/stunshells,
 /obj/item/weapon/melee/baton,
 /obj/machinery/power/terminal{
 	icon_state = "term";
@@ -1559,7 +1559,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "dS" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
@@ -1717,7 +1717,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eq" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/secwing)
 "er" = (
@@ -1902,13 +1902,13 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eQ" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	name = "Cameras console"
 	},
 /turf/simulated/floor/tiled,
 /area/slavers_base/secwing)
 "eR" = (
-/obj/item/modular_computer/console{
+/obj/machinery/computer/modular{
 	name = "Riot control console"
 	},
 /obj/machinery/power/apc{
@@ -2055,7 +2055,6 @@
 /obj/effect/decal/cleanable/generic,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4;
-	layer = 2.4;
 	level = 2
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -2317,7 +2316,7 @@
 /turf/simulated/wall,
 /area/slavers_base/maint)
 "fK" = (
-/obj/machinery/atmospherics/pipe/tank/carbon_dioxide,
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "fL" = (
@@ -2457,7 +2456,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "ge" = (
-/obj/machinery/atmospherics/trinary/filter{
+/obj/machinery/atmospherics/omni/filter{
 	dir = 8
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -2502,7 +2501,6 @@
 /turf/simulated/wall,
 /area/slavers_base/dorms)
 "gj" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/airlock{
 	name = "Mess"
 	},
@@ -2572,7 +2570,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/item/weapon/circuitboard/broken,
+/obj/item/weapon/stock_parts/circuitboard/broken,
 /obj/item/weapon/contraband/poster,
 /obj/item/device/radio,
 /obj/machinery/light/small{
@@ -3007,11 +3005,13 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "hz" = (
-/obj/machinery/vending/engineering,
+/obj/machinery/vending/engineering{
+	req_access = list()
+	},
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hA" = (
-/obj/item/weapon/computer_hardware/card_slot,
+/obj/item/weapon/stock_parts/computer/card_slot,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/powatm)
 "hB" = (
@@ -3121,7 +3121,7 @@
 /obj/random/coin,
 /obj/machinery/door/blast/regular/open{
 	icon_state = "pdoor0";
-	id = "SC BD"
+	id_tag = "SC BD"
 	},
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
@@ -3770,7 +3770,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/dorms)
 "jm" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -3779,7 +3779,7 @@
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "jn" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/tiled/airless,
 /area/slavers_base/demo)
 "jo" = (
@@ -3955,7 +3955,7 @@
 /area/slavers_base/demo)
 "jM" = (
 /obj/structure/table/standard,
-/obj/item/device/healthanalyzer,
+/obj/item/device/scanner/health,
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jN" = (
@@ -4027,7 +4027,7 @@
 /turf/simulated/floor/tiled,
 /area/slavers_base/demo)
 "jX" = (
-/obj/machinery/shower{
+/obj/structure/hygiene/shower{
 	dir = 4;
 	icon_state = "shower";
 	pixel_x = 0;
@@ -4065,7 +4065,7 @@
 /turf/simulated/floor/tiled/white/airless,
 /area/slavers_base/dorms)
 "ke" = (
-/obj/structure/toilet{
+/obj/structure/hygiene/toilet{
 	dir = 8
 	},
 /obj/random/junk,
@@ -4248,7 +4248,7 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kJ" = (
-/obj/effect/wingrille_spawn/reinforced,
+/obj/effect/wallframe_spawn/reinforced,
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kK" = (
@@ -4301,9 +4301,8 @@
 /turf/simulated/floor/airless/ceiling,
 /area/slavers_base/maint)
 "kU" = (
-/obj/machinery/atmospherics/unary/vent_pump/high_volume{
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
 	dir = 1;
-	frequency = 1379;
 	id_tag = "solar_port_pump"
 	},
 /turf/simulated/floor/airless/ceiling,
@@ -4313,7 +4312,7 @@
 /turf/space,
 /area/slavers_base/maint)
 "kW" = (
-/obj/effect/overmap/sector/slavers_base,
+/obj/effect/overmap/visitable/sector/slavers_base,
 /turf/space,
 /area/space)
 "kX" = (
@@ -4324,12 +4323,8 @@
 /obj/effect/shuttle_landmark/nav_slavers_base/nav6,
 /turf/space,
 /area/space)
-"kZ" = (
-/obj/effect/landmark/random_gen/asteroid,
-/turf/space,
-/area/space)
 "lb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
 /obj/item/weapon/storage/mirror{
@@ -4340,7 +4335,7 @@
 /turf/simulated/floor/tiled/white,
 /area/slavers_base/dorms)
 "mb" = (
-/obj/structure/sink{
+/obj/structure/hygiene/sink{
 	pixel_y = -20
 	},
 /obj/item/weapon/storage/mirror{
@@ -4549,7 +4544,7 @@ aa
 aa
 aa
 aa
-kZ
+aa
 "}
 (2,1,1) = {"
 aa

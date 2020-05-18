@@ -24,13 +24,10 @@
 	return ..()
 
 //when thrown on impact, bottles smash and spill their contents
-/obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/speed)
+/obj/item/weapon/reagent_containers/food/drinks/bottle/throw_impact(atom/hit_atom, var/datum/thrownthing/TT)
 	..()
-
-	var/mob/M = thrower
-	if(isGlass && istype(M) && M.a_intent != I_HELP)
-		var/throw_dist = get_dist(throw_source, loc)
-		if(speed > throw_speed || smash_check(throw_dist)) //not as reliable as smashing directly
+	if(isGlass && TT.thrower && TT.thrower.a_intent != I_HELP)
+		if(TT.speed > throw_speed || smash_check(TT.dist_travelled)) //not as reliable as smashing directly
 			if(reagents)
 				hit_atom.visible_message("<span class='notice'>The contents of \the [src] splash all over [hit_atom]!</span>")
 				reagents.splash(hit_atom, reagents.total_volume)
@@ -47,10 +44,6 @@
 	return prob(chance_table[idx])
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/proc/smash(var/newloc, atom/against = null)
-	if(ismob(loc))
-		var/mob/M = loc
-		M.drop_from_inventory(src)
-
 	//Creates a shattering noise and replaces the bottle with a broken_bottle
 	var/obj/item/weapon/broken_bottle/B = new /obj/item/weapon/broken_bottle(newloc)
 	if(prob(33))
@@ -108,7 +101,7 @@
 	if(rag) return
 	..()
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/update_icon()
+/obj/item/weapon/reagent_containers/food/drinks/bottle/on_update_icon()
 	underlays.Cut()
 	if(rag)
 		var/underlay_image = image(icon='icons/obj/drinks.dmi', icon_state=rag.on_fire? "[rag_underlay]_lit" : rag_underlay)
@@ -118,22 +111,20 @@
 		set_light(0)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
-	var/blocked = ..()
+	. = ..()
 
 	if(user.a_intent != I_HURT)
 		return
 	if(!smash_check(1))
 		return //won't always break on the first hit
 
-	// You are going to knock someone out for longer if they are not wearing a helmet.
-	var/weaken_duration = 0
-	if(blocked < 100)
-		weaken_duration = smash_duration + min(0, force - target.getarmor(hit_zone, "melee") + 10)
-
 	var/mob/living/carbon/human/H = target
 	if(istype(H) && H.headcheck(hit_zone))
 		var/obj/item/organ/affecting = H.get_organ(hit_zone) //headcheck should ensure that affecting is not null
 		user.visible_message("<span class='danger'>[user] smashes [src] into [H]'s [affecting.name]!</span>")
+		// You are going to knock someone out for longer if they are not wearing a helmet.
+		var/blocked = target.get_blocked_ratio(hit_zone, BRUTE, damage = 10) * 100
+		var/weaken_duration = smash_duration + min(0, force - blocked + 10)
 		if(weaken_duration)
 			target.apply_effect(min(weaken_duration, 5), WEAKEN, blocked) // Never weaken more than a flash!
 	else
@@ -147,8 +138,6 @@
 	//Finally, smash the bottle. This kills (qdel) the bottle.
 	var/obj/item/weapon/broken_bottle/B = smash(target.loc, target)
 	user.put_in_active_hand(B)
-
-	return blocked
 
 //Keeping this here for now, I'll ask if I should keep it here.
 /obj/item/weapon/broken_bottle
@@ -201,7 +190,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/vodka
 	name = "Tunguska Triple Distilled"
-	desc = "Aah, vodka. Prime choice of drink AND fuel by Terrans around the galaxy."
+	desc = "Aah, vodka. Prime choice of drink AND fuel by Indies around the galaxy."
 	icon_state = "vodkabottle"
 	center_of_mass = "x=17;y=3"
 	New()
@@ -379,17 +368,88 @@
 		..()
 		reagents.add_reagent(/datum/reagent/ethanol/pwine, 100)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/blackstrap
+	name = "Two Brothers Blackstrap"
+	desc = "A bottle of Blackstrap, distilled in Two Brothers, Tersten."
+	icon_state = "blackstrap"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/blackstrap/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/blackstrap, 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/sake
+	name = "Takeo Sadow's Combined Sake"
+	desc = "Finest Sake allowed for import in the SCG."
+	icon_state = "sake"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/sake/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/sake, 100)
+
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/lordaniawine
+	name = "New Aresian Vintage 2230"
+	desc = "The kind of wine that just demands attention, and a big wallet."
+	icon_state = "lordaniawine"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/lordaniawine/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/lordaniawine, 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne
+	name = "Murcelano Vinyard's Premium Champagne"
+	desc = "The regal drink of celebrities and royalty."
+	icon_state = "champagne"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/champagne/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/champagne, 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/prosecco
+	name = "2280 Prosecco"
+	desc = "A delicious prosecco, ideal for long days at work."
+	icon_state = "prosecco"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/prosecco/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/prosecco, 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/llanbrydewhiskey
+	name = "Pritchard's Wisgi Ucheldirol"
+	desc = "The bottle is covered in strange archaic markings... Oh wait, that's just Welsh."
+	icon_state = "whiskeybottle3"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/llanbrydewhiskey/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/llanbrydewhiskey, 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/jagermeister
+	name = "Kaisermeister Deluxe"
+	desc = "Jagermeister. This drink just demands a party."
+	icon_state = "herbal"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/jagermeister/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/jagermeister, 100)
+
 //////////////////////////PREMIUM ALCOHOL ///////////////////////
 /obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka
 	name = "Four Stripes Quadruple Distilled"
-	desc = "Premium distilled vodka imported directly from the Terran Colonial Confederation."
+	desc = "Premium distilled vodka imported directly from the Gilgamesh Colonial Confederation."
 	icon_state = "premiumvodka"
 	center_of_mass = "x=17;y=3"
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka/New()
 	..()
 	reagents.add_reagent(/datum/reagent/ethanol/vodka/premium, 100)
-	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Terran","STS-35")
+	var/namepick = pick("Four Stripes","Gilgamesh","Novaya Zemlya","Indie","STS-35")
 	var/typepick = pick("Absolut","Gold","Quadruple Distilled","Platinum","Standard")
 	name = "[namepick] [typepick]"
 
@@ -403,9 +463,22 @@
 	..()
 	reagents.add_reagent(/datum/reagent/ethanol/wine/premium, 100)
 	var/namepick = pick("Calumont","Sciacchemont","Recioto","Torcalota")
-	var/agedyear = rand(2350,2550)
+	var/agedyear = rand(game_year-150,game_year)
 	name = "Chateau [namepick] De Blanc"
 	desc += " This bottle is marked as [agedyear] Vintage."
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/brandy
+	name = "New Amsterdam Deluxe Brandy"
+	desc = "A bottle of premium Lunar brandy."
+	icon_state = "lunabrandy"
+	center_of_mass = "x=16;y=4"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/brandy/Initialize()
+	. = ..()
+	reagents.add_reagent(/datum/reagent/ethanol/lunabrandy, 100)
+	var/namepick = pick("Selenian","New Vegas","Yueliang","Gideon","New Amsterdam","Saurian")
+	var/typepick = pick("Deluxe Brandy","Premium Brandy","Luxury Brandy","Expensive Brandy","Special Brandy")
+	SetName("[namepick] [typepick]")
 
 //////////////////////////JUICES AND STUFF ///////////////////////
 
@@ -453,6 +526,19 @@
 		..()
 		reagents.add_reagent(/datum/reagent/drink/juice/lime, 100)
 
+/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice
+	name = "Hrukhza Leaf Extract"
+	desc = "Hrukhza Leaf, a vital component of any Moghes drinks."
+	icon_state = "hrukhzaextract"
+	item_state = "carton"
+	center_of_mass = "x=16;y=8"
+	isGlass = 0
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/unathijuice/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/alien/unathijuice, 100)
+
+
 //Small bottles
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small
 	volume = 50
@@ -478,6 +564,26 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/New()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/ethanol/ale, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/hellshenpa
+	name = "Hellshen Pale Ale"
+	desc = "The best ale on Mars, according to the label."
+	icon_state = "hellshenbeer"
+	center_of_mass = "x=16;y=12"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/hellshenpa/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/ethanol/hellshenpa, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/gingerbeer
+	name = "Ginger Beer"
+	desc = "A delicious non-alcoholic beverage enjoyed across Sol space."
+	icon_state = "gingerbeer"
+	center_of_mass = "x=16;y=12"
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/gingerbeer/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/drink/gingerbeer, 50)
 
 //Probably not the right place for it, but no idea where else to put it without making a brand new DM and slogging through making vars from scratch.
 

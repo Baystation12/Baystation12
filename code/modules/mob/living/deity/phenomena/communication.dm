@@ -55,7 +55,7 @@
 	var/static/list/punishment_list = list("Pain (0)" = 0, "Light Wound (5)" = 5, "Brain Damage (10)" = 10, "Heavy Wounds (20)" = 20)
 
 /datum/phenomena/punish/activate(var/mob/living/L)
-	var/pain = input(linked, "Choose their punishment.", "Punishment") as anything in punishment_list
+	var/pain = input(linked, "Choose their punishment.", "Punishment") as null|anything in punishment_list
 	if(!pain)
 		return
 	if(punishment_list[pain] && linked.power < punishment_list[pain])

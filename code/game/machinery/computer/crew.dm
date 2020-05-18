@@ -4,10 +4,8 @@
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
 	light_color = "#315ab4"
-	use_power = 1
 	idle_power_usage = 250
 	active_power_usage = 500
-	circuit = /obj/item/weapon/circuitboard/crew
 	var/datum/nano_module/crew_monitor/crew_monitor
 
 /obj/machinery/computer/crew/New()
@@ -19,14 +17,9 @@
 	crew_monitor = null
 	..()
 
-/obj/machinery/computer/crew/attack_ai(mob/user)
+/obj/machinery/computer/crew/interface_interact(user)
 	ui_interact(user)
-
-/obj/machinery/computer/crew/attack_hand(mob/user)
-	..()
-	if(stat & (BROKEN|NOPOWER))
-		return
-	ui_interact(user)
+	return TRUE
 
 /obj/machinery/computer/crew/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	crew_monitor.ui_interact(user, ui_key, ui, force_open, state)

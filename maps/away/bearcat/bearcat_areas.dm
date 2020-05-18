@@ -97,6 +97,7 @@
 /area/ship/scrap/maintenance
 	name = "Maintenance Compartments"
 	icon_state = "amaint"
+	req_access = list(access_bearcat)
 
 /area/ship/scrap/maintenance/hallway
 	name = "Maintenance Corridors"
@@ -147,14 +148,17 @@
 /area/ship/scrap/command/hallway
 	name = "Command Deck"
 	icon_state = "centcom"
+	req_access = list(access_bearcat)
 
 /area/ship/scrap/command/bridge
 	name = "Bridge"
 	icon_state = "bridge"
+	req_access = list(access_bearcat)
 
 /area/ship/scrap/command/captain
 	name = "Captain's Quarters"
 	icon_state = "captain"
+	req_access = list(access_bearcat_captain)
 
 /area/ship/scrap/comms
 	name = "Communications Relay"

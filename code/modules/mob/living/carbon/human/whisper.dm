@@ -13,14 +13,10 @@
 	if (src.stat)
 		return
 
-	var/alt_name = ""
-	if(name != GetVoice())
-		if(get_id_name("Unknown") != GetVoice())
-			alt_name = "(as [get_id_name("Unknown")])"
-		else
-			SetName(get_id_name("Unknown"))
+	if(get_id_name("Unknown") == GetVoice())
+		SetName(get_id_name("Unknown"))
 
-	whisper_say(message, alt_name = alt_name)
+	whisper_say(message)
 
 
 //This is used by both the whisper verb and human/say() to handle whispering

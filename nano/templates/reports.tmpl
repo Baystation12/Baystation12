@@ -11,7 +11,7 @@
 		{{for data.report_data.fields}}
 			<div class='item'>
 				{{if value.ignore_value}}
-					<h3>{{:value.name}}</h3>
+					{{:value.name}}
 				{{else}}
 					<div class='itemLabel'>
 						{{if (value.can_edit && value.access_edit && !data.view_only)}}

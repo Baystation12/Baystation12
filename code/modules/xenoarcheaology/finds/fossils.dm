@@ -31,15 +31,16 @@
 /obj/item/weapon/fossil/skull/horned
 	icon_state = "hskull"
 
-/obj/item/weapon/fossil/skull/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/fossil/skull/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W,/obj/item/weapon/fossil/bone))
+		if(!user.canUnEquip(W))
+			return
+		var/mob/M = get_holder_of_type(src, /mob)
+		if(M && !M.unEquip(src))
+			return
 		var/obj/o = new /obj/skeleton(get_turf(src))
-		var/a = new /obj/item/weapon/fossil/bone
-		var/b = new src.type
-		o.contents.Add(a)
-		o.contents.Add(b)
-		qdel(W)
-		qdel(src)
+		user.unEquip(W, o)
+		forceMove(o)
 
 /obj/skeleton
 	name = "Incomplete skeleton"
@@ -55,12 +56,10 @@
 	src.breq = rand(6)+3
 	src.desc = "An incomplete skeleton, looks like it could use [src.breq-src.bnum] more bones."
 
-/obj/skeleton/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/skeleton/attackby(obj/item/weapon/W, mob/user)
 	if(istype(W,/obj/item/weapon/fossil/bone))
-		if(!bstate)
+		if(!bstate && user.unEquip(W, src))
 			bnum++
-			src.contents.Add(new/obj/item/weapon/fossil/bone)
-			qdel(W)
 			if(bnum==breq)
 				usr = user
 				icon_state = "skel"

@@ -17,7 +17,11 @@
 
 /obj/item/weapon/paper_bundle/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
-
+	if(!istype(W))
+		return
+	var/obj/item/weapon/paper/paper = W
+	if(istype(paper) && !paper.can_bundle())
+		return //non-paper or bundlable paper only
 	if (istype(W, /obj/item/weapon/paper/carbon))
 		var/obj/item/weapon/paper/carbon/C = W
 		if (!C.iscopy && !C.copied)
@@ -34,10 +38,9 @@
 
 	// merging bundles
 	else if(istype(W, /obj/item/weapon/paper_bundle))
-		user.drop_from_inventory(W)
 		for(var/obj/O in W)
-			O.loc = src
-			O.add_fingerprint(usr)
+			O.forceMove(src)
+			O.add_fingerprint(user)
 			pages.Add(O)
 
 		to_chat(user, "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
@@ -46,26 +49,25 @@
 		if(istype(W, /obj/item/weapon/tape_roll))
 			return 0
 		if(istype(W, /obj/item/weapon/pen))
-			usr << browse("", "window=[name]") //Closes the dialog
+			show_browser(user, "", "window=[name]") //Closes the dialog
 		var/obj/P = pages[page]
 		P.attackby(W, user)
 
 	update_icon()
-	attack_self(usr) //Update the browsed page.
-	add_fingerprint(usr)
+	attack_self(user) //Update the browsed page.
+	add_fingerprint(user)
 	return
 
 /obj/item/weapon/paper_bundle/proc/insert_sheet_at(mob/user, var/index, obj/item/weapon/sheet)
-	if(istype(sheet, /obj/item/weapon/paper))
-		to_chat(user, "<span class='notice'>You add [(sheet.name == "paper") ? "the paper" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
-	else if(istype(sheet, /obj/item/weapon/photo))
-		to_chat(user, "<span class='notice'>You add [(sheet.name == "photo") ? "the photo" : sheet.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>")
-
-	user.drop_from_inventory(sheet)
-	sheet.loc = src
-
+	if (!user.unEquip(sheet, src))
+		return
+	var/bundle_name = "paper bundle"
+	var/sheet_name = istype(sheet, /obj/item/weapon/photo) ? "photo" : "sheet of paper"
+	bundle_name = (bundle_name == name) ? "the [bundle_name]" : name
+	sheet_name = (sheet_name == sheet.name) ? "the [sheet_name]" : sheet.name
+	
+	to_chat(user, "<span class='notice'>You add [sheet_name] to [bundle_name].</span>")
 	pages.Insert(index, sheet)
-
 	if(index <= page)
 		page++
 
@@ -93,12 +95,12 @@
 			else
 				to_chat(user, "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>")
 
-/obj/item/weapon/paper_bundle/examine(mob/user)
-	if(..(user, 1))
+/obj/item/weapon/paper_bundle/examine(mob/user, distance)
+	. = ..()
+	if(distance <= 1)
 		src.show_content(user)
 	else
 		to_chat(user, "<span class='notice'>It is too far away.</span>")
-	return
 
 /obj/item/weapon/paper_bundle/proc/show_content(mob/user as mob)
 	var/dat
@@ -122,23 +124,18 @@
 
 	if(istype(pages[page], /obj/item/weapon/paper))
 		var/obj/item/weapon/paper/P = W
-		if(!(istype(usr, /mob/living/carbon/human) || isghost(usr) || istype(usr, /mob/living/silicon)))
-			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[stars(P.info)][P.stamps]</BODY></HTML>"
-		else
-			dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.info][P.stamps]</BODY></HTML>"
-		user << browse(dat, "window=[name]")
+		dat+= "<HTML><HEAD><TITLE>[P.name]</TITLE></HEAD><BODY>[P.show_info(user)][P.stamps]</BODY></HTML>"
+		show_browser(user, dat, "window=[name]")
 	else if(istype(pages[page], /obj/item/weapon/photo))
 		var/obj/item/weapon/photo/P = W
-		user << browse_rsc(P.img, "tmp_photo.png")
-		user << browse(dat + "<html><head><title>[P.name]</title></head>" \
-		+ "<body style='overflow:hidden'>" \
-		+ "<div> <img src='tmp_photo.png' width = '180'" \
-		+ "[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : ]"\
-		+ "</body></html>", "window=[name]")
+		dat += "<html><head><title>[P.name]</title></head><body style='overflow:hidden'>"
+		dat += "<div> <img src='tmp_photo.png' width = '180'[P.scribble ? "<div> Written on the back:<br><i>[P.scribble]</i>" : null ]</body></html>"
+		send_rsc(user, P.img, "tmp_photo.png")
+		show_browser(user, JOINTEXT(dat), "window=[name]")
 
 /obj/item/weapon/paper_bundle/attack_self(mob/user as mob)
 	src.show_content(user)
-	add_fingerprint(usr)
+	add_fingerprint(user)
 	update_icon()
 	return
 
@@ -207,16 +204,14 @@
 		O.dropInto(usr.loc)
 		O.reset_plane_and_layer()
 		O.add_fingerprint(usr)
-	usr.drop_from_inventory(src)
 	qdel(src)
-	return
 
 
-/obj/item/weapon/paper_bundle/update_icon()
+/obj/item/weapon/paper_bundle/on_update_icon()
 	var/obj/item/weapon/paper/P = pages[1]
 	icon_state = P.icon_state
 	overlays = P.overlays
-	underlays = 0
+	underlays.Cut()
 	var/i = 0
 	var/photo
 	for(var/obj/O in src)
