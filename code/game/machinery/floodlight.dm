@@ -12,6 +12,7 @@
 	var/unlocked = 0
 	var/open = 0
 	var/brightness_on = 8		//can't remember what the maxed out value is
+	var/health = 100
 
 /obj/machinery/floodlight/New()
 	cell = new cell_type(src)
@@ -112,7 +113,7 @@
 				unlocked = 1
 				to_chat(user, "You unscrew the battery panel.")
 
-	if (istype(W, /obj/item/weapon/crowbar))
+	else if (istype(W, /obj/item/weapon/crowbar))
 		if(unlocked)
 			if(open)
 				open = 0
@@ -123,7 +124,7 @@
 					open = 1
 					to_chat(user, "You remove the battery panel.")
 
-	if (istype(W, /obj/item/weapon/cell))
+	else if (istype(W, /obj/item/weapon/cell))
 		if(open)
 			if(cell)
 				to_chat(user, "There is a power cell already installed.")
@@ -132,7 +133,44 @@
 				W.loc = src
 				cell = W
 				to_chat(user, "You insert the power cell.")
+	else
+		. = ..()
+		take_damage(W.force)
+
 	update_icon()
+
+/obj/machinery/floodlight/bullet_act(obj/item/projectile/Proj)
+	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+	take_damage(Proj.damage)
+
+/obj/machinery/floodlight/attack_generic(var/mob/living/attacker, var/damage, var/attacktext)
+	if(damage > 0)
+		src.visible_message("<span class='danger'>[attacker] bashes the [src]!</span>")
+		playsound(src.loc, 'sound/weapons/bite.ogg', 50, 0, 0)
+		take_damage(health/2)
+
+/obj/machinery/floodlight/ex_act(var/severity)
+	take_damage(severity * health / 3)
+
+/obj/machinery/floodlight/proc/take_damage(var/amount)
+	health -= amount
+	if(health <= 0)
+		if(on)
+			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
+			s.set_up(3, 1, src)
+			s.start()
+			turn_off()
+		var/loot_types = list(/obj/item/salvage/metal,\
+			/obj/item/salvage/plastic,\
+			/obj/item/stack/material/plastic,\
+			/obj/item/stack/material/steel)
+		var/spawn_type = pick(loot_types)
+		if(prob(50))
+			new spawn_type(src.loc)
+		spawn_type = pick(loot_types)
+		if(prob(50))
+			new spawn_type(src.loc)
+		qdel(src)
 
 /obj/machinery/floodlight/active
 	on = 1
