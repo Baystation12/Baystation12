@@ -81,7 +81,7 @@ Cael May 2020
 
 	//a starting weapon
 	gloves = /obj/item/clothing/gloves/thick/unsc
-	belt = /obj/item/weapon/gun/projectile/m7_smg/silenced
+	belt = /obj/item/weapon/gun/projectile/m7_smg
 	l_pocket = /obj/item/ammo_magazine/m5
 
 /decl/hierarchy/outfit/job/unsc/odst/firefight
