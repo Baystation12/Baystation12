@@ -29,13 +29,9 @@
 	else
 		icon_state = "fuel_rod"
 
-/obj/item/weapon/gun/projectile/fuel_rod/process_projectile(var/obj/item/projectile/bullet/P, mob/user, atom/target, var/target_zone, var/params=null, var/pointblank=0, var/reflex=0)
-	P.kill_count = get_dist(src, target)
-	P.kill_count += rand(0,6) - 3
-	. = ..()
-
 #define FUEL_ROD_IRRADIATE_RANGE 2
 #define FUEL_ROD_IRRADIATE_AMOUNT 15
+#define FUEL_ROD_MAX_OVERSHOOT 4
 
 /obj/item/ammo_magazine/fuel_rod
 	name = "Type-33 Light Anti-Armor Weapon Magazine"
@@ -60,9 +56,19 @@
 	check_armour = "bomb"
 	step_delay = 1.2
 	dispersion = 0.5	//random offset of 4.5 tiles
+	kill_count = 15
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_green
+
+/obj/item/projectile/bullet/fuel_rod/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
+	//kill count is the number of turfs the bullet travels, at the end it automatically calls on_impact()
+	//we want the fuel rod to not fly off into the distance if it misses
+	kill_count = get_dist(src, target)
+
+	//add a bit of randomness
+	kill_count += rand(0, FUEL_ROD_MAX_OVERSHOOT * 2) - FUEL_ROD_MAX_OVERSHOOT
+	. = ..()
 
 /obj/item/projectile/bullet/fuel_rod/throw_impact(atom/hit_atom)
 	return on_impact(hit_atom)
@@ -76,3 +82,4 @@
 
 #undef FUEL_ROD_IRRADIATE_RANGE
 #undef FUEL_ROD_IRRADIATE_AMOUNT
+#undef FUEL_ROD_MAX_OVERSHOOT
