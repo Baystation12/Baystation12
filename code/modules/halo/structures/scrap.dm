@@ -48,16 +48,3 @@
 /obj/item/salvage/wood/New()
 	. = ..()
 	icon_state = "base[pick(3,4,7,10,15)]"
-
-
-
-/* MATERIALS */
-
-/material/steel
-	shard_type = /obj/item/salvage/metal
-
-/material/wood
-	shard_type = /obj/item/salvage/wood
-
-/material/plastic
-	shard_type = /obj/item/salvage/plastic
