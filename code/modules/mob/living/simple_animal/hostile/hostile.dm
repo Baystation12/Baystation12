@@ -235,20 +235,6 @@
 		fire_delay_use = using_vehicle_gun.fire_delay
 	setClickCooldown(fire_delay_use)
 
-/mob/living/simple_animal/hostile/proc/retaliate_ranged(var/mob/aggressor)
-	if(!client && stat != DEAD && ranged && world.time >= min_nextfire && istype(aggressor) && aggressor.faction != faction && aggressor in ListTargets())
-		OpenFire(aggressor)
-
-/mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
-	. = ..()
-	if(.)
-		retaliate_ranged(Proj.firer)
-
-/mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
-	. = ..()
-	if(.)
-		retaliate_ranged(user)
-
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
 	target_mob = null
@@ -264,18 +250,12 @@
 		dist *= v.vehicle_view_modifier
 	var/list/L = list()
 
-	var/turf/loc_infront = get_step(src,dir) //This is used when in complete darkenss, seeing only what's directly in front of them.
-
-	for(var/A in view(dist,src.loc) | (loc_infront ? loc_infront.contents : list()))
-		if(istype(A,/mob/living))
-			L += A
-			continue
-		if(istype(A,/obj/mecha))
-			L += A
-			continue
-		if(istype(A,/obj/vehicles))
-			L += A
-			continue
+	var/list/in_sight = view(dist,src)
+	for(var/mob/living/M in in_sight)
+		L += M
+	for(var/obj/vehicles/M in in_sight)
+		L += M
+	for(var/obj/mecha/M in in_sight)
 
 	return L
 
@@ -305,10 +285,6 @@
 /mob/living/simple_animal/hostile/Life()
 
 	. = ..()
-	if(client)
-		see_in_dark = 5//setting this 2 points above human for now
-	else
-		see_in_dark = 4//NPCs will target people beside them
 
 	if(!.)
 		walk(src, 0)
@@ -342,59 +318,45 @@
 			walk(src,0)
 			target_mob = null
 
+/mob/living/simple_animal/hostile/proc/retaliate(var/mob/aggressor)
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
+		return
+	if(aggressor.faction == faction)
+		return
+	if(client)
+		return
+	if(stat == DEAD)
+		return
+
+	target_mob = aggressor
+	stance = HOSTILE_STANCE_ATTACK
+
+	if(ranged)
+		EvasiveMove(aggressor)
+
+	return 1
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
-	var/oldhealth = health
-	. = ..()
-	if(health < oldhealth && user.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = user
-		stance = HOSTILE_STANCE_ATTACK
-		Life()
+	retaliate(user)
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
 	. = ..()
-	if(M.a_intent == I_HURT && M.faction != faction && !incapacitated(INCAPACITATION_KNOCKOUT))
-		target_mob = M
-		stance = HOSTILE_STANCE_ATTACK
-		Life()
+	if(M.a_intent == I_HURT)
+		retaliate(M)
 
-/mob/living/simple_animal/hostile/proc/EvasiveMove(var/atom/movable/attacker,var/do_move = 0)
+/mob/living/simple_animal/hostile/proc/EvasiveMove(var/atom/movable/attacker)
 	if(isnull(attacker) || stat == DEAD)
 		return 0
 	var/dir_attack = get_dir(loc,attacker.loc)
 	var/list/dirlist = list(NORTH,SOUTH,EAST,WEST) - dir_attack //If it's a diagonal attack vector, we won't try to move directly towards them anyway.
 	var/randDir = pick(dirlist)
 	rollDir(randDir)
-	if(do_move)
-		var/targ_loc = loc
-		for(var/i = 1 to rand(world.view/2,world.view))
-			var/turf/tmp_step = get_step(targ_loc,pick(dirlist))
-			if(tmp_step.density == 1)
-				break
-			targ_loc = tmp_step
-			//walk_to(src, target_mob, 1, move_to_delay)
 
 	return 1
 
 /mob/living/simple_animal/hostile/bullet_act(var/obj/item/projectile/Proj)
-	var/oldhealth = health
 	. = ..()
-	if(!stat)
-		var/tick_life = 0
-		if(!target_mob && Proj.firer && Proj.firer.faction != faction && health < oldhealth)
-			target_mob = Proj.firer
-			stance = HOSTILE_STANCE_ATTACK
-			tick_life = 1
-		if(target_mob && target_mob.loc)
-			var/chasing = 0
-			if(get_dist(loc,target_mob) > world.view*0.75) //make chase
-				walk_to(src, target_mob, 1, move_to_delay)
-				chasing = 1
-			else
-				walk(src,0)
-			EvasiveMove(target_mob,!chasing)
-		if(tick_life)
-			Life()
+	retaliate(Proj.firer)
 
 /mob/living/simple_animal/hostile/proc/OpenFire(target_mob)
 	if(hold_fire)
@@ -435,11 +397,7 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 	/obj/structure/girder,\
 	/obj/structure/barricade,\
 	/obj/machinery/door/unpowered,\
-	/obj/structure/destructible/tanktrap,\
-	/obj/structure/destructible/steel_barricade,\
-	/obj/structure/destructible/plasteel_barricade,\
-	/obj/structure/destructible/marine_barricade,\
-	/obj/structure/destructible/sandbag
+	/obj/structure/destructible\
 ))
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings()
@@ -457,6 +415,10 @@ GLOBAL_LIST_INIT(hostile_attackables, list(\
 			if(obstacle && CheckDestroyAllowed(obstacle))
 				obstacle.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext, 1)
 				do_attack_animation(obstacle)
+			else
+				var/obj/machinery/M = locate(/obj/machinery, get_step(src, checkdir))
+				if(M)
+					M.attack_generic(src,rand(melee_damage_lower,melee_damage_upper),attacktext, 1)
 
 /mob/living/simple_animal/hostile/proc/CheckDestroyAllowed(var/obj/to_destroy)
 	. = 0
