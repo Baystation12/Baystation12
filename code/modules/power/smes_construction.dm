@@ -104,8 +104,8 @@
 		s.set_up(5, 1, src)
 		s.start()
 		charge -= (output_level_max * CELLRATE)
-		if(prob(1)) // Small chance of overload occuring since grounding is disabled.
-			apcs_overload(5,10,20)
+		if(powernet && prob(1)) // Small chance of overload occuring since grounding is disabled.
+			powernet.apcs_overload(5,10,20)
 
 	..()
 
@@ -196,7 +196,8 @@
 				h_user.electrocute_act(rand(15,35), src, def_zone = h_user.hand ? BP_L_HAND : BP_R_HAND)
 			spawn(0)
 				empulse(src.loc, 2, 4)
-			apcs_overload(0, 5, 10)
+			if(powernet)
+				powernet.apcs_overload(0, 5, 10)
 			charge = 0
 
 		if (36 to 60)
@@ -215,7 +216,8 @@
 			spawn(0)
 				empulse(src.loc, 8, 16)
 			charge = 0
-			apcs_overload(1, 10, 20)
+			if(powernet)
+				powernet.apcs_overload(1, 10, 20)
 			energy_fail(10)
 			src.ping("Caution. Output regulators malfunction. Uncontrolled discharge detected.")
 
@@ -231,7 +233,8 @@
 			spawn(0)
 				empulse(src.loc, 32, 64)
 			charge = 0
-			apcs_overload(5, 25, 100)
+			if(powernet)
+				powernet.apcs_overload(5, 25, 100)
 			energy_fail(30)
 			src.ping("Caution. Output regulators malfunction. Significant uncontrolled discharge detected.")
 
@@ -262,23 +265,6 @@
 	if (failure_probability && prob(failure_probability * (1.5 - (user.get_skill_value(core_skill) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))))// 0.5 - 1.5, step of 0.25
 		total_system_failure(failure_probability, user)
 		return TRUE
-
-// Proc: apcs_overload()
-// Parameters: 3 (failure_chance - chance to actually break the APC, overload_chance - Chance of breaking lights, reboot_chance - Chance of temporarily disabling the APC)
-// Description: Damages output powernet by power surge. Destroys few APCs and lights, depending on parameters.
-/obj/machinery/power/smes/buildable/proc/apcs_overload(var/failure_chance, var/overload_chance, var/reboot_chance)
-	if (!src.powernet)
-		return
-
-	for(var/obj/machinery/power/terminal/T in powernet.nodes)
-		var/obj/machinery/power/apc/A = T.master_machine()
-		if(istype(A))
-			if (prob(overload_chance))
-				A.overload_lighting()
-			if (prob(failure_chance))
-				A.set_broken(TRUE)
-			if(prob(reboot_chance))
-				A.energy_fail(rand(30,60))
 
 // Proc: update_icon()
 // Parameters: None
