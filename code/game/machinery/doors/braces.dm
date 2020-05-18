@@ -13,6 +13,7 @@
 
 
 // BRACE - Can be installed on airlock to reinforce it and keep it closed.
+// Set req_access if you dont want the brace and its electronics to derive their access from the door its placed on.
 /obj/item/weapon/airlock_brace
 	name = "airlock brace"
 	desc = "A sturdy device that can be attached to an airlock to reinforce it and provide additional security."
@@ -56,6 +57,8 @@
 	..()
 	cur_health = max_health
 	electronics = new/obj/item/weapon/airlock_electronics/brace(src)
+	if(length(req_access))
+		electronics.set_access(src)
 	update_access()
 
 /obj/item/weapon/airlock_brace/Destroy()
