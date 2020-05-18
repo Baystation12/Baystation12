@@ -1,4 +1,0 @@
-author: "YodaDoge"
-delete-after: True
-changes: 
-  - tweak: "Sparking TEGs that are directly connected to APCs can cause the APCs to shut down temporarily, or rarely fail."

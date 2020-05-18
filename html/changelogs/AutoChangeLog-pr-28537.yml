@@ -1,5 +1,0 @@
-author: "radagast-the-red"
-delete-after: True
-changes: 
-  - tweak: "Smokable butts will be held instead of being dumped on the ground, if a hand is available."
-  - tweak: "Changed the extinguishing chat message to reflect smokables no longer being dropped."
