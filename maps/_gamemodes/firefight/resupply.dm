@@ -1,7 +1,7 @@
 
 /datum/game_mode/firefight
-	var/sound/sound_crash = sound('sound/effects/crash.ogg')
-	var/sound/sound_flyby = sound('sound/effects/start.ogg')
+	var/sound/sound_crash = sound('sound/effects/crash.ogg', volume = 50)
+	var/sound/sound_flyby = sound('sound/effects/start.ogg', volume = 50)
 	var/list/resupply_procs = list(/datum/game_mode/firefight/proc/spawn_resupply)
 
 	var/list/supply_obj_types = list(\
@@ -103,11 +103,15 @@
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_crash)
 
+#define MAX_CRATES 3
+#define MIN_CRATES 1
+#define DROP_OFFSET 3
+
 /datum/game_mode/firefight/proc/spawn_resupply(var/turf/epicentre)
 	. = "Supply run completed, I've dropped off my cargo to the %DIRTEXT%. \
 		[pick("Good luck!","Hang in there!","Evacuation is coming!")]"
 
-	var/num_crates = rand(1,3)
+	var/num_crates = rand(MIN_CRATES,MAX_CRATES)
 	var/failed_attempts = 0
 	var/list/must_spawn = supply_always_spawn.Copy()
 	num_crates += must_spawn.len
@@ -118,7 +122,10 @@
 
 		if(!spawn_turf)
 			//pick a random turf nearby
-			spawn_turf = locate(epicentre.x - 3 + rand(0,6), epicentre.y - 3 + rand(0,6), epicentre.z)
+			spawn_turf = locate(\
+				epicentre.x - DROP_OFFSET + rand(0,DROP_OFFSET*2),\
+				epicentre.y - DROP_OFFSET + rand(0,DROP_OFFSET*2),\
+				epicentre.z)
 
 		//make sure we dont double up turfs
 		if(turf_contains_dense_objects(spawn_turf))
@@ -143,3 +150,7 @@
 	//play a cool sound to everyone
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_flyby)
+
+#undef MAX_CRATES
+#undef MIN_CRATES
+#undef DROP_OFFSET
