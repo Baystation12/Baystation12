@@ -26,7 +26,7 @@
 "aA" = (/obj/structure/ore_box,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aB" = (/obj/structure/sandbag_dead{dir = 4},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aC" = (/obj/structure/jump_pad{id = "deck 3 starboard airlock"; name = "Covenant Jump Pad - deck 3 starboard external airlock"},/turf/unsimulated/floor/grass2,/area/ccs_battlecruiser/planet_staging)
-"aD" = (/obj/structure/barrel,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
+"aD" = (/obj/structure/destructible/barrel,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aE" = (/obj/structure/destructible/sandbag{dir = 4},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aF" = (/obj/machinery/floodlight{anchored = 1},/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)
 "aG" = (/obj/structure/sandbag_dead,/turf/unsimulated/floor/dirt,/area/ccs_battlecruiser/planet_staging)

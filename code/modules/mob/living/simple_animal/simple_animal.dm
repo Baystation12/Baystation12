@@ -79,6 +79,8 @@
 /mob/living/simple_animal/New()
 	. = ..()
 	spawn_turf = get_turf(src)
+	apply_difficulty_setting()
+	create_pain_screams()
 
 /mob/living/simple_animal/verb/verb_set_leader()
 	set name = "Follow Me"

@@ -1,37 +1,40 @@
 
-/datum/map/crusade_crashsite_zeta
-	name = "Crusade: Crashsite Zeta"
-	full_name = "Crusade gamemode on Crashsite Zeta map"
-	path = "crusade_crashsite_zeta"
+/datum/map/crusade_octanus_landing
+	name = "Crusade: Octanus Landing"
+	full_name = "Crusade gamemode on Octanus Landing map"
+	path = "crusade_octanus_landing"
 	allowed_gamemodes = list("crusade")
-	id_hud_icons = 'crusade_hud_icons.dmi'
 	lobby_icon = 'code/modules/halo/splashworks/covenant.jpg'
+	system_name = "Sigma Octanus"
+	station_name  = "Sigma Octanus IV"
+	station_short = "Sigma Octanus IV"
+	boss_name = "Covenant"
 
 	allowed_gamemodes = list("crusade")
 	allowed_jobs = list(\
-		/datum/job/covenant/brute_captain,\
-		/datum/job/covenant/brute_major,\
-		/datum/job/covenant/brute_minor,\
-		/datum/job/covenant/kigyarminor,\
-		/datum/job/covenant/kigyar_marksman,\
-		/datum/job/covenant/kigyar_sniper,\
-		/datum/job/covenant/sangheili_minor,\
-		/datum/job/covenant/sangheili_major,\
-		/datum/job/covenant/sangheili_zealot,\
-		/datum/job/covenant/sangheili_ultra,\
-		/datum/job/covenant/sangheili_specops,\
-		/datum/job/covenant/skirmminor,\
-		/datum/job/covenant/skirmmajor,\
-		/datum/job/covenant/skirmmurmillo,\
-		/datum/job/covenant/skirmcommando,\
-		/datum/job/covenant/skirmchampion,\
-		/datum/job/covenant/unggoy_minor,\
-		/datum/job/covenant/unggoy_major,\
-		/datum/job/covenant/unggoy_ultra,\
-		/datum/job/covenant/unggoy_deacon,\
-		/datum/job/covenant/unggoy_specops,\
-		/datum/job/covenant/yanmee_minor,\
-		/datum/job/covenant/yanmee_major,\
-		/datum/job/covenant/yanmee_ultra,\
-		/datum/job/covenant/yanmee_leader\
+		/datum/job/covenant/brute_captain/firefight,\
+		/datum/job/covenant/brute_major/firefight,\
+		/datum/job/covenant/brute_minor/firefight,\
+		/datum/job/covenant/kigyarminor/firefight,\
+		/datum/job/covenant/kigyar_marksman/firefight,\
+		/datum/job/covenant/kigyar_sniper/firefight,\
+		/datum/job/covenant/sangheili_minor/firefight,\
+		/datum/job/covenant/sangheili_major/firefight,\
+		/datum/job/covenant/sangheili_zealot/firefight,\
+		/datum/job/covenant/sangheili_ultra/firefight,\
+		/datum/job/covenant/sangheili_specops/firefight,\
+		/datum/job/covenant/skirmminor/firefight,\
+		/datum/job/covenant/skirmmajor/firefight,\
+		/datum/job/covenant/skirmmurmillo/firefight,\
+		/datum/job/covenant/skirmcommando/firefight,\
+		/datum/job/covenant/skirmchampion/firefight,\
+		/datum/job/covenant/unggoy_minor/firefight,\
+		/datum/job/covenant/unggoy_major/firefight,\
+		/datum/job/covenant/unggoy_ultra/firefight,\
+		/datum/job/covenant/unggoy_deacon/firefight,\
+		/datum/job/covenant/unggoy_specops/firefight,\
+		/datum/job/covenant/yanmee_minor/firefight,\
+		/datum/job/covenant/yanmee_major/firefight,\
+		/datum/job/covenant/yanmee_ultra/firefight,\
+		/datum/job/covenant/yanmee_leader/firefight\
 		)

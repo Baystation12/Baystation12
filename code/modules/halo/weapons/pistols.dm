@@ -23,7 +23,7 @@
 		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
 
-	slowdown_general = 0.25
+	slowdown_general = 0
 
 /obj/item/weapon/gun/projectile/m6d_magnum/update_icon()
 	if(ammo_magazine)
@@ -102,6 +102,7 @@
 	fire_delay = 3
 	silenced = 1
 	screen_shake = 0
+	slowdown_general = 0
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

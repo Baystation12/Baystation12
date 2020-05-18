@@ -23,6 +23,7 @@
 		affected_faction = possible_targets[target_ship]
 	else
 		log_and_message_admins("EVENTS ERROR: No target ships detected for [src.type]")
+		kill()
 
 /datum/event/ship/proc/get_area_list()
 

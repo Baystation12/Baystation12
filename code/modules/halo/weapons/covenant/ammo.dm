@@ -290,43 +290,5 @@
 	icon_state = "needlerifle_trail"
 
 #undef RIFLENEEDLE_TRACK_DIST
-#define FUEL_ROD_IRRADIATE_RANGE 2
-#define FUEL_ROD_IRRADIATE_AMOUNT 15
-
-/obj/item/ammo_magazine/fuel_rod
-	name = "Type-33 Light Anti-Armor Weapon Magazine"
-	desc = "Contains a maximum of 5 fuel rods."
-	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
-	icon_state = "fuel_rod_magazine"
-	mag_type = MAGAZINE
-	ammo_type = /obj/item/ammo_casing/fuel_rod
-	caliber = "fuel rod"
-	max_ammo = 5
-	w_class = ITEM_SIZE_NORMAL
-
-/obj/item/ammo_casing/fuel_rod
-	icon = 'code/modules/halo/weapons/icons/fuel_rod_cannon.dmi'
-	icon_state = "fuel_rod_casing"
-	caliber = "fuel rod"
-	projectile_type = /obj/item/projectile/bullet/fuel_rod
-
-/obj/item/projectile/bullet/fuel_rod
-	name = "fuel rod"
-	check_armour = "bomb"
-	step_delay = 1.2
-	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
-	icon_state = "Overcharged_Plasmapistol shot"
-	embed = 1
-	shield_damage = 200
-	muzzle_type = /obj/effect/projectile/muzzle/cov_green
-
-/obj/item/projectile/bullet/fuel_rod/on_impact(var/atom/A)
-	. = ..()
-	explosion(A,-1,1,2,4,guaranteed_damage = 30, guaranteed_damage_range = 2)
-	for(var/mob/living/l in range(FUEL_ROD_IRRADIATE_RANGE,loc))
-		l.rad_act(FUEL_ROD_IRRADIATE_AMOUNT)
-
-#undef FUEL_ROD_IRRADIATE_RANGE
-#undef FUEL_ROD_IRRADIATE_AMOUNT
 #undef NEEDLER_EMBED_PROB
 #undef NEEDLER_SHARD_DET_TIME

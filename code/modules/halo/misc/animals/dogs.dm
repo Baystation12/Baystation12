@@ -19,6 +19,14 @@
 	pass_flags = PASSTABLE
 	mob_size = MOB_MEDIUM
 
+/mob/living/simple_animal/dog/New()
+	. = ..()
+	if(prob(50))
+		icon_state = "german_shep2"
+		icon_living = "german_shep2"
+		icon_dead = "german_shep2_dead"
+
+
 /mob/living/simple_animal/dog/battledog
 	name = "\improper Dog"
 	desc = "It's a battledog."

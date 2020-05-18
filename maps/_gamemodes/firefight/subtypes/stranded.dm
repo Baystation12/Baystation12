@@ -16,6 +16,8 @@
 		/datum/game_mode/firefight/proc/spawn_resupply,\
 		/datum/game_mode/firefight/proc/spawn_ship_debris)
 
+	wave_spawns = list()
+
 /datum/game_mode/firefight/stranded/pre_setup()
 	. = ..()
 	allowed_ghost_roles += list(/datum/ghost_role/flood_combat_form)

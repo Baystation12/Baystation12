@@ -16,19 +16,18 @@
 
 	//check if the evac ship was destroyed
 	if(evac_stage > 1)
-		var/obj/structure/evac_ship/evac_ship = locate() in world
 		if(!evac_ship || evac_ship.health <= 0)
-			finish_reason = 1
+			finish_reason = FINISH_DESTROYED
 			return 1
 
 		//evac has left! the round is over
 		if(world.time > time_evac_leave)
-			finish_reason = 2
+			finish_reason = FINISH_LEFT
 			return 1
 
 	//if the players are all dead
 	if(!survivors_left())
-		finish_reason = 3
+		finish_reason = FINISH_OVERRUN
 		return 1
 
 	//don't finish if there are still enemies left

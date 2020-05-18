@@ -8,10 +8,6 @@
 
 #include "../faction_bases/ODP_Cassius/ODP_Cassius.dm"
 
-#include "../ONI_Prowler/outfits.dm"
-
-#include "../ONI_Prowler/jobs.dm"
-
 #include "../SOE_Argentum/jobs.dm"
 #include "../SOE_Argentum/outfits.dm"
 #include "../SOE_Argentum/spawns.dm"

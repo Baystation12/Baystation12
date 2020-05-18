@@ -64,11 +64,11 @@ mob/living/proc/getPerRollDelay()
 			m = matrix()
 		else
 			m = transform
-		animate(src,transform = turn(m,359/(roll_dist)),time = roll_delay) //We use 359 instead of 360 to ensure the flip-vertically animation doesn't happen
-		setClickCooldown(roll_delay)
+		animate(src,transform = turn(m,359/(roll_dist)),time = 2) //We use 359 instead of 360 to ensure the flip-vertically animation doesn't happen
+		setClickCooldown(2)
 		if(client)
-			client.move_delay = max(client.move_delay,world.time + roll_delay)
-		sleep(roll_delay)
+			client.move_delay = max(client.move_delay,world.time + 2)
+		sleep(2)
 	animate(src,transform = null,time = 1)
 	return 1
 

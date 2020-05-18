@@ -2,14 +2,15 @@
 /mob/living/simple_animal/hostile/covenant/elite
 	name = "Elite Minor (NPC)"
 	icon = 'code/modules/halo/covenant/simple_mobs/simple_mobs48.dmi'
-	health = 125
-	maxHealth = 125
+	health = 150
+	maxHealth = 150
 	combat_tier = 3
 	resistance = 10
 	icon_state = "minor"
 	icon_living = "minor"
 	icon_dead = "dead_minor"
 	possible_weapons = list(/obj/item/weapon/gun/energy/plasmarifle)
+	species_name = "Sangheili"
 	var/shield_left = 50
 	var/shield_max = 50
 	var/recharge_delay = 5 SECONDS
@@ -18,50 +19,45 @@
 	var/recharging = 0
 
 /mob/living/simple_animal/hostile/covenant/elite/major
-	name = "Elite Major (NCP)"
+	name = "Elite Major (NPC)"
 	icon_state = "major"
 	icon_living = "major"
 	icon_dead = "dead_major"
 	shield_left = 100
 	shield_max = 100
+	recharge_rate = 20
 	combat_tier = 4
 	possible_weapons = list(/obj/item/weapon/gun/energy/plasmarepeater)
 
-/mob/living/simple_animal/hostile/covenant/elite/adjustBruteLoss(damage)
-	last_damage = world.time
-	if(recharging)
-		overlays -= "shield_recharge"
-		recharging = 0
+/mob/living/simple_animal/hostile/covenant/elite/ultra
+	name = "Elite Ultra (NPC)"
+	icon_state = "ultra"
+	icon_living = "ultra"
+	icon_dead = "dead_ultra"
+	shield_left = 150
+	shield_max = 150
+	recharge_rate = 25
+	combat_tier = 5
+	possible_weapons = list(/obj/item/weapon/gun/projectile/type31needlerifle,/obj/item/weapon/gun/projectile/type51carbine)
 
-	//take damage from shield first
-	if(shield_left > 0)
-		overlays |= "shield_flicker"
-		var/shield_absorbed = min(shield_left, damage)
-		shield_left -= shield_absorbed
-		damage -= shield_absorbed
+/mob/living/simple_animal/hostile/covenant/elite/zealot
+	name = "Elite Zealot (NPC)"
+	icon_state = "zealot"
+	icon_living = "zealot"
+	icon_dead = "dead_zealot"
+	shield_left = 150
+	shield_max = 150
+	recharge_rate = 25
+	combat_tier = 6
+	melee_damage_lower = 45
+	melee_damage_upper = 55
+	possible_weapons = list()
+	damtype = BURN
 
-	. = ..(damage)
-
-/mob/living/simple_animal/hostile/covenant/elite/Life()
+/mob/living/simple_animal/hostile/covenant/elite/zealot/New()
 	. = ..()
+	playsound(get_turf(src), 'code/modules/halo/sounds/Energysworddeploy.ogg', 100, 0, 0)
 
-	//dont need to display damage anny more
-	overlays -= "shield_flicker"
-
-	if(stat == DEAD)
-		overlays -= "shield_recharge"
-	else
-		//are we currently recharging?
-		if(recharging)
-			shield_left += recharge_rate
-
-			//have we just finished recharging?
-			if(shield_left >= shield_max)
-				shield_left = shield_max
-				overlays -= "shield_recharge"
-				recharging = 0
-
-		//should we start recharging?
-		else if(world.time >= last_damage + recharge_delay && shield_left < shield_max)
-			recharging = 1
-			overlays |= "shield_recharge"
+/mob/living/simple_animal/hostile/covenant/elite/zealot/do_attack_animation(var/target)
+	. = ..()
+	playsound(get_turf(src), 'code/modules/halo/sounds/Energyswordhit.ogg', 100, 0, 0)

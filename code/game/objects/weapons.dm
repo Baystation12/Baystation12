@@ -68,7 +68,7 @@
 	if(mob_holding_disintegrated)
 		mob_holding_disintegrated.drop_from_inventory(item_to_disintegrate)
 	new /obj/effect/decal/cleanable/ash (item_to_disintegrate.loc)
-	new /obj/item/metalscrap (item_to_disintegrate.loc)
+	new /obj/item/salvage/metal (item_to_disintegrate.loc)
 	qdel(item_to_disintegrate)
 
 	return 1

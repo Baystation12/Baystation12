@@ -2,7 +2,7 @@
 /obj/structure/plasma_battery
 	name = "plasma battery"
 	desc = "A portable power cell for plasma powered machinery and devices used by the Covenant."
-	icon = 'plasma_battery.dmi'
+	icon = 'code/modules/halo/covenant/structures_machines/plasma_battery.dmi'
 	icon_state = "full"
 	density = 1
 	var/last_use_time = 0

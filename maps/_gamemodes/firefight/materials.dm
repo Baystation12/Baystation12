@@ -17,19 +17,20 @@
 	recipes += new/datum/stack_recipe("metal rod", /obj/item/stack/rods, 1, 2, 60)
 	recipes += new/datum/stack_recipe("table frame", /obj/structure/table, 1, time = 10, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("rack", /obj/structure/table/rack, 1, time = 5, one_per_turf = 1, on_floor = 1)
-	recipes += new/datum/stack_recipe("closet", /obj/structure/closet, 2, time = 15, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("closet", /obj/structure/closet, 4, time = 15, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade)
-	recipes += new/datum/stack_recipe("metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/barrel, 10, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
+	recipes += new/datum/stack_recipe("metal crate", /obj/structure/closet/crate, 4, time = 50, one_per_turf = 1)
+	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/destructible/barrel, 4, time = 50, one_per_turf = 1)
+	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, 2, time = 30)
 	recipes += new/datum/stack_recipe("tank trap", /obj/structure/destructible/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
-	recipes += new/datum/stack_recipe("barricade", /obj/structure/destructible/steel_barricade, 4, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/steel_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
 
 
 /material/plasteel/generate_recipes()
 	recipes = list()
 
-	recipes += new/datum/stack_recipe("barricade", /obj/structure/destructible/plasteel_barricade, 4, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/plasteel_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("marine barricade", /obj/structure/destructible/marine_barricade, 10, one_per_turf = 1, on_floor = 1, time = 50)
 
 
 
@@ -37,6 +38,8 @@
 	recipes = list()
 
 	recipes += new/datum/stack_recipe("planting bed", /obj/machinery/portable_atmospherics/hydroponics/soil, 3, time = 10, one_per_turf = 1, on_floor = 1)
+	recipes += new/datum/stack_recipe("[display_name] door", /obj/machinery/door/unpowered/simple, 10, time = 50, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/barricade, 5, time = 50, one_per_turf = 1, on_floor = 1, supplied_material = "[name]")
 
 
 /material/plastic/generate_recipes()
@@ -62,6 +65,11 @@
 	recipes = list()
 
 	recipes += new/datum/stack_recipe("empty sandbags", /obj/item/empty_sandbags, 1, time = 30)
+
+/material/nanolaminate/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/covenant_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
 
 #else
 

@@ -81,15 +81,24 @@
 		new/datum/stack_recipe("modular laptop frame", /obj/item/modular_computer/laptop, 10),\
 		new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5),\
 	))
-	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/barrel, 10, time = 50, one_per_turf = 1)
-	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, time = 30)
+
+/material/steel/generate_recipes()
+	..()
+
+	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/destructible/barrel, 4, time = 50, one_per_turf = 1)
+	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, 2, time = 30)
 	recipes += new/datum/stack_recipe("tank trap", /obj/structure/destructible/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/steel_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
+
 /material/plasteel/generate_recipes()
 	..()
 	//recipes += new/datum/stack_recipe("AI core", /obj/structure/AIcore, 4, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("Metal crate", /obj/structure/closet/crate, 10, time = 50, one_per_turf = 1)
 	recipes += new/datum/stack_recipe("knife grip", /obj/item/weapon/material/butterflyhandle, 4, time = 20, one_per_turf = 0, on_floor = 1, supplied_material = "[name]")
 	recipes += new/datum/stack_recipe("dark floor tile", /obj/item/stack/tile/floor_dark, 1, 4, 20)
+
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/plasteel_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("marine barricade", /obj/structure/destructible/marine_barricade, 10, one_per_turf = 1, on_floor = 1, time = 50)
 
 /material/stone/generate_recipes()
 	..()

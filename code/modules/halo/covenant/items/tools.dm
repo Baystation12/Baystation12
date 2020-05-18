@@ -116,6 +116,26 @@
 	icon = 'code/modules/halo/covenant/items/tools.dmi'
 	icon_state = "luminator"
 
+/obj/item/device/flashlight/glowstick/covenant/New()
+	if(prob(33))
+		name = "purple glowstick"
+		color = "#800080"
+	else if(prob(50))
+		name = "cyan glowstick"
+		color = "#00FFFF"
+	else
+		name = "blue glowstick"
+		color = "#599DFF"
+	..()
+
+/obj/item/device/flashlight/glowstick/purple
+	name = "purple glowstick"
+	color = "#800080"
+
+/obj/item/device/flashlight/glowstick/cyan
+	name = "cyan glowstick"
+	color = "#00FFFF"
+
 
 
 /* TOOLBOXES */
