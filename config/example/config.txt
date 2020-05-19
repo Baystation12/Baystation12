@@ -87,6 +87,10 @@ MOD_TEMPBAN_MAX 1440
 ## Maximum mod job tempban duration (in minutes)
 MOD_JOB_TEMPBAN_MAX 1440
 
+# Uncomment to allow links to be posted in OOC and LOOC of the following kinds. 
+# ALLOW_BYOND_LINKS
+# ALLOW_DISCORD_LINKS
+ALLOW_URL_LINKS
 
 ## probablities for game modes chosen in "secret" and "random" modes
 ##
