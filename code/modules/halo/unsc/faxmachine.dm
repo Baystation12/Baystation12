@@ -7,7 +7,9 @@
 	network_name = "UNSC wavespace communications network"
 	department = "UNSC"
 	available_departments  = list("UNSC","UEG Colony")
-	admin_departments = list("HIGHCOM")
+	admin_departments = list(\
+		"UNSC High Command - HIGHCOM",\
+		"Office of Naval Intelligence - ONI")
 	req_access = list(access_unsc)
 
 /obj/machinery/photocopier/faxmachine/unsc/New()
