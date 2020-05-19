@@ -79,6 +79,7 @@
 	see_invisible = SEE_INVISIBLE_NOLIGHTING
 	var/nv_enabled = 1
 	var/nv_screen_colour = /obj/screen/fullscreen/night_vision/green
+	var/nv_screen_impair = /obj/screen/fullscreen/night_vision/cone
 	action_button_name = "Toggle HUD Night Vision"
 	var/image/vision_cone
 	var/limit_ui_entire_screen = 0
@@ -119,7 +120,7 @@
 /obj/item/clothing/glasses/hud/tactical/proc/enable_effect(var/mob/living/user)
 	user.overlay_fullscreen("nv_colour", nv_screen_colour)
 	user.overlay_fullscreen("nv_noise", /obj/screen/fullscreen/night_vision/noise)
-	user.overlay_fullscreen("nv_visioncone", /obj/screen/fullscreen/night_vision/cone)
+	user.overlay_fullscreen("nv_visioncone", nv_screen_impair)
 	/*
 	for(var/screen_name in nv_screens)
 		user.overlay_fullscreen(screen_name, nv_screens[screen_name])
@@ -172,7 +173,7 @@
 	icon = KIGYAR_CLOTHING_PATH
 	icon_state = "inbuilt_nv"
 	nv_screen_colour = /obj/screen/fullscreen/night_vision/cyan
-
+	nv_screen_impair = /obj/screen/fullscreen/night_vision/cone/better
 
 /obj/item/clothing/glasses/hud/tactical/covenant
 	icon_state = "hud_covie"
@@ -241,3 +242,6 @@
 	screen_loc = "CENTER-7,CENTER-7"
 	plane = LIGHTING_PLANE
 	layer = 11
+
+/obj/screen/fullscreen/night_vision/cone/better
+	icon_state = "impairedoverlay1"
