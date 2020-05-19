@@ -27,6 +27,10 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	available_departments  = list("UNSC","UEG Colony")
 	admin_departments = list("United Earth Government")
 
+/obj/machinery/photocopier/faxmachine/badmin
+	name = "Badmin sext machine"
+	available_departments  = list("UNSC","UEG Colony","Insurrection","Covenant")
+
 /obj/machinery/photocopier/faxmachine/Initialize()
 	. = ..()
 
