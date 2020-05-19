@@ -1,0 +1,13402 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/scavship)
+"ab" = (
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"ac" = (
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/engineering)
+"ad" = (
+/obj/machinery/portable_atmospherics/canister/empty,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"ae" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 6
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"af" = (
+/obj/machinery/atmospherics/unary/engine{
+	icon_state = "nozzle";
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"ag" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/voxship/engineering)
+"ah" = (
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"ai" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 6
+	},
+/obj/machinery/portable_atmospherics/canister/empty,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aj" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"ak" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_hydro";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"al" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_hydro";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"am" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_hydro";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"an" = (
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"ao" = (
+/obj/random/junk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"ap" = (
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"ar" = (
+/turf/simulated/wall/prepainted,
+/area/voxship/fore)
+"as" = (
+/turf/simulated/wall/prepainted,
+/area/voxship/scavship)
+"at" = (
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/fore)
+"au" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"av" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"aw" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ax" = (
+/obj/machinery/portable_atmospherics/hydroponics,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ay" = (
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"az" = (
+/obj/random/snack,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"aA" = (
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"aB" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aC" = (
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aD" = (
+/obj/machinery/atmospherics/binary/pump{
+	icon_state = "map_off";
+	dir = 8
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aE" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aF" = (
+/obj/machinery/alarm/vox,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aG" = (
+/obj/effect/decal/cleanable/cobweb2,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/random/junk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aH" = (
+/obj/random/loot,
+/obj/random/hat,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"aI" = (
+/obj/item/weapon/reagent_containers/food/drinks/glass2/flute,
+/obj/random/junk,
+/obj/random/advdevice,
+/obj/random/powercell,
+/obj/item/device/gps,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"aJ" = (
+/obj/structure/table/rack,
+/obj/item/weapon/gun/energy/darkmatter,
+/obj/item/weapon/gun/energy/sonic,
+/obj/item/weapon/gun/launcher/alien/spikethrower,
+/obj/item/weapon/gun/launcher/alien/slugsling,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"aK" = (
+/obj/structure/table/rack,
+/obj/item/weapon/rig/vox,
+/obj/item/weapon/rig/vox,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"aL" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"aM" = (
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"aN" = (
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"aO" = (
+/turf/simulated/floor/reinforced/nitrogen,
+/area/voxship/engineering)
+"aP" = (
+/obj/machinery/atmospherics/unary/vent_pump/tank{
+	dir = 4;
+	external_pressure_bound = 0;
+	external_pressure_bound_default = 0;
+	icon_state = "map_vent_in";
+	id_tag = "o2_out";
+	initialize_directions = 1;
+	internal_pressure_bound = 4000;
+	internal_pressure_bound_default = 4000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 1
+	},
+/turf/simulated/floor/reinforced/nitrogen,
+/area/voxship/engineering)
+"aQ" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden/blue{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"aR" = (
+/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{
+	icon_state = "map_on";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"aS" = (
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"aT" = (
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"aU" = (
+/turf/simulated/floor/reinforced/carbon_dioxide,
+/area/voxship/engineering)
+"aV" = (
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"aW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aX" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"aZ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8;
+	level = 2
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"ba" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 8
+	},
+/obj/machinery/meter,
+/obj/effect/decal/cleanable/filth,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/effect/decal/cleanable/filth,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/machinery/power/apc{
+	dir = 4;
+	icon_state = "apc0";
+	name = "east bump";
+	pixel_x = 24;
+	pixel_y = 0
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bd" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel,
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"be" = (
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/fore)
+"bf" = (
+/obj/item/weapon/reagent_containers/food/drinks/glass2/flute,
+/obj/random/hat,
+/obj/random/closet,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bg" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/random/contraband,
+/obj/random/advdevice,
+/obj/random/drinkbottle,
+/obj/random/action_figure,
+/obj/random/smokes,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bh" = (
+/obj/random/hat,
+/obj/random/loot,
+/obj/random/clothing,
+/obj/effect/decal/cleanable/filth,
+/obj/random/energy,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bi" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/space/vox/pressure,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/suit/space/vox/pressure,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bj" = (
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bk" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/space/vox/carapace,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/suit/space/vox/carapace,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bl" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/alarm/vox{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -16
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"bm" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"bn" = (
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/button/blast_door{
+	id_tag = "vox_hydro";
+	name = "shutter control";
+	pixel_x = -6;
+	pixel_y = -26
+	},
+/obj/machinery/seed_storage/random,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"bo" = (
+/obj/structure/closet/crate/hydroponics/prespawned,
+/obj/item/weapon/material/hatchet,
+/obj/item/weapon/material/minihoe,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"bp" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"bq" = (
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"br" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/blue,
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"bs" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 1
+	},
+/obj/effect/decal/cleanable/cobweb2,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"bt" = (
+/obj/machinery/atmospherics/unary/vent_pump/tank{
+	dir = 4;
+	external_pressure_bound = 0;
+	external_pressure_bound_default = 0;
+	icon_state = "map_vent_in";
+	id_tag = "o2_out";
+	initialize_directions = 1;
+	internal_pressure_bound = 4000;
+	internal_pressure_bound_default = 4000;
+	pressure_checks = 2;
+	pressure_checks_default = 2;
+	pump_direction = 0;
+	use_power = 1
+	},
+/turf/simulated/floor/reinforced/carbon_dioxide,
+/area/voxship/engineering)
+"bu" = (
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"bv" = (
+/obj/machinery/atmospherics/binary/pump/high_power{
+	icon_state = "map_off";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"bw" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/black{
+	dir = 1
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"bx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"by" = (
+/obj/effect/decal/cleanable/blood/oil,
+/obj/machinery/atmospherics/valve{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bz" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 1
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 9
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bC" = (
+/obj/effect/decal/cleanable/filth,
+/obj/random/junk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bD" = (
+/obj/random/mre,
+/obj/random/snack,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 5
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"bF" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/fore)
+"bG" = (
+/obj/random/junk,
+/obj/random/contraband,
+/obj/random/clothing,
+/obj/random/energy,
+/obj/item/clothing/accessory/stethoscope,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bH" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/random/hat,
+/obj/random/loot,
+/obj/effect/decal/cleanable/filth,
+/obj/random/snack,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bI" = (
+/obj/item/weapon/reagent_containers/food/drinks/glass2/flute,
+/obj/random/junk,
+/obj/random/contraband,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bJ" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/space/vox/stealth,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/suit/space/vox/stealth,
+/obj/machinery/alarm/vox{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -16
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bK" = (
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bL" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bM" = (
+/obj/structure/table/rack,
+/obj/item/clothing/head/helmet/space/vox/medic,
+/obj/item/clothing/mask/gas/swat/vox,
+/obj/item/clothing/suit/space/vox/medic,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/decal/cleanable/filth,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"bO" = (
+/obj/structure/reagent_dispensers/watertank,
+/obj/item/weapon/reagent_containers/glass/bucket,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"bP" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/blue,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"bQ" = (
+/obj/machinery/atmospherics/unary/tank/nitrogen,
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"bR" = (
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"bS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	icon_state = "intact";
+	dir = 9
+	},
+/obj/random/junk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"bT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"bU" = (
+/turf/simulated/wall/ocp_wall,
+/area/voxship/thrusters)
+"bV" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/turf/simulated/wall/ocp_wall,
+/area/voxship/thrusters)
+"bW" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/curtain/black,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bX" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"bZ" = (
+/obj/structure/table/rack,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/gloves/vox,
+/obj/item/clothing/mask/gas/vox,
+/obj/item/clothing/mask/gas/vox,
+/obj/item/clothing/mask/gas/vox,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/shoes/magboots/vox,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/suit/armor/vox_scrap,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/under/vox/vox_casual,
+/obj/item/clothing/under/vox/vox_robes,
+/obj/item/clothing/under/vox/vox_robes,
+/obj/item/clothing/under/vox/vox_robes,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"ca" = (
+/obj/effect/overmap/visitable/sector/vox_scav_ship,
+/turf/space,
+/area/space)
+"cb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"cc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall/prepainted,
+/area/voxship/scavship)
+"cd" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/screwdriver,
+/obj/item/weapon/crowbar,
+/obj/machinery/recharger,
+/obj/effect/decal/cleanable/cobweb,
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"ce" = (
+/obj/structure/table/reinforced,
+/obj/item/stack/cable_coil/random,
+/obj/item/stack/cable_coil/random,
+/obj/item/stack/cable_coil/random,
+/obj/item/weapon/weldpack,
+/obj/item/weapon/weldingtool/largetank,
+/obj/item/stack/material/steel/ten,
+/obj/item/stack/material/plastic/ten,
+/obj/item/stack/material/aluminium/ten,
+/obj/item/stack/material/glass/ten,
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cf" = (
+/obj/machinery/recharge_station,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cg" = (
+/turf/simulated/wall/prepainted,
+/area/voxship/engineering)
+"ch" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/inflatable_dispenser,
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/obj/effect/floor_decal/borderfloorblack,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"ci" = (
+/obj/effect/floor_decal/borderfloorblack,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"cj" = (
+/obj/machinery/atmospherics/binary/passive_gate/on{
+	name = "nitrogen supply";
+	target_pressure = 280
+	},
+/obj/effect/floor_decal/borderfloorblack,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"ck" = (
+/obj/random/junk,
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"cl" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	icon_state = "intact-supply";
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"co" = (
+/obj/effect/submap_landmark/joinable_submap/voxship/scavship,
+/turf/space,
+/area/space)
+"cp" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction,
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"cq" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 6;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"cr" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	icon_state = "intact";
+	dir = 10
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"cs" = (
+/obj/machinery/computer/ship/engines{
+	req_access = list("ACCESS_VOXSHIP")
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"ct" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/machinery/computer/shuttle_control/explore/vox_ship,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cu" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cv" = (
+/obj/random/junk,
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cw" = (
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall/prepainted,
+/area/voxship/fore)
+"cy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cz" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/item/weapon/storage/toolbox/electrical,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cA" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cD" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cF" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/random/junk,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"cH" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/blue,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/light/small,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cI" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/effect/decal/cleanable/filth,
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cN" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"cO" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8;
+	level = 2
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"cP" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging,
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"cQ" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging,
+/obj/machinery/igniter,
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"cR" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id_tag = "vox_fusion"
+	},
+/obj/structure/grille,
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"cS" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/fore)
+"cT" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_bridge";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/obj/machinery/door/firedoor,
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/fore)
+"cU" = (
+/obj/machinery/button/blast_door{
+	id_tag = "vox_bridge";
+	name = "shutter control";
+	pixel_x = -26;
+	pixel_y = -8
+	},
+/obj/machinery/computer/ship/engines{
+	req_access = list("ACCESS_VOXSHIP")
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cV" = (
+/obj/structure/bed/chair/comfy/captain{
+	icon_state = "capchair_preview";
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/random/drinkbottle,
+/obj/item/weapon/reagent_containers/food/drinks/glass2/flute,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cW" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cX" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/effect/shuttle_landmark/vox_base/hangar/vox_ship,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"cY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/fore)
+"cZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/fore)
+"da" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/fore)
+"db" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/fore)
+"dc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"dd" = (
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"de" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"df" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 9
+	},
+/obj/effect/floor_decal/corner_techfloor_gray,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dg" = (
+/obj/machinery/fabricator,
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 1
+	},
+/obj/effect/floor_decal/corner_techfloor_gray,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dh" = (
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 1
+	},
+/obj/effect/floor_decal/corner_techfloor_gray,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"di" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/bed/chair{
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood/oil,
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall/prepainted,
+/area/voxship/scavship)
+"dk" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/hatch/voxship,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dl" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/wall/prepainted,
+/area/voxship/engineering)
+"dm" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"dn" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 5;
+	icon_state = "intact"
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"do" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	icon_state = "intact";
+	dir = 9
+	},
+/obj/machinery/atmospherics/pipe/vent/high_volume,
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"dp" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"dq" = (
+/obj/machinery/computer/ship/sensors{
+	icon_state = "computer";
+	dir = 1
+	},
+/obj/machinery/alarm/vox{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -16
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"dr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/curtain/black,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"ds" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/fore)
+"dt" = (
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/fore)
+"du" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"dv" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 8
+	},
+/obj/effect/floor_decal/corner_techfloor_gray,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dw" = (
+/obj/machinery/vending/tool,
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dx" = (
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dy" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_techfloor_gray{
+	icon_state = "corner_techfloor_gray";
+	dir = 1
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/random/snack,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dz" = (
+/obj/structure/table/rack,
+/obj/item/weapon/storage/ore,
+/obj/item/weapon/storage/ore,
+/obj/item/weapon/storage/ore,
+/obj/item/weapon/pickaxe/jackhammer,
+/obj/item/weapon/pickaxe/hammer,
+/obj/item/weapon/pickaxe/drill,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dA" = (
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dB" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dC" = (
+/obj/machinery/mining/brace,
+/obj/machinery/alarm/vox,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dD" = (
+/obj/machinery/mining/drill,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dE" = (
+/obj/machinery/portable_atmospherics/canister/oxygen,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"dF" = (
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"dG" = (
+/obj/machinery/portable_atmospherics/canister/hydrogen,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"dH" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"dI" = (
+/obj/machinery/button/blast_door{
+	id_tag = "vox_engineview";
+	name = "chamber viewing port control"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/voxship/thrusters)
+"dJ" = (
+/obj/machinery/button/blast_door{
+	id_tag = "vox_fusion";
+	name = "Chamber Vent Control"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/voxship/thrusters)
+"dK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black,
+/obj/effect/wallframe_spawn/reinforced_phoron/hull,
+/obj/machinery/door/blast/regular{
+	density = 0;
+	dir = 4;
+	icon_state = "pdoor0";
+	id_tag = "vox_engineview";
+	name = "blast door";
+	opacity = 0
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"dL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/machinery/door/airlock/hatch/voxship{
+	id_tag = "voxengine";
+	locked = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"dM" = (
+/obj/machinery/button/alternate/door/bolts{
+	id_tag = "voxengine";
+	name = "Chamber Hatch Control"
+	},
+/turf/simulated/wall/ocp_wall,
+/area/voxship/thrusters)
+"dN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"dO" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"dP" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	icon_state = "intact";
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/thrusters)
+"dQ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/decal/cleanable/filth,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"dR" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/item/weapon/tank/nitrogen,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"dS" = (
+/obj/structure/bed,
+/obj/item/weapon/bedsheet/mime,
+/obj/structure/curtain/open/bed,
+/obj/item/clothing/suit/pirate,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/engineer,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"dT" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/random/junk,
+/obj/effect/decal/cleanable/filth,
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 1
+	},
+/obj/effect/floor_decal/corner_techfloor_gray,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dU" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/floor_decal/borderfloorblack/corner{
+	icon_state = "borderfloorcorner_white";
+	dir = 1
+	},
+/obj/effect/floor_decal/corner_techfloor_gray,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dV" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	icon_state = "intact";
+	dir = 8
+	},
+/turf/simulated/floor/airless,
+/area/voxship/scavship)
+"dW" = (
+/obj/machinery/vending/engivend{
+	req_access = list()
+	},
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dX" = (
+/obj/item/weapon/storage/toolbox,
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dY" = (
+/obj/effect/decal/cleanable/filth,
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_techfloor_gray{
+	icon_state = "corner_techfloor_gray";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"dZ" = (
+/obj/structure/closet/crate,
+/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/tritium/ten,
+/obj/item/stack/material/tritium/ten,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ea" = (
+/obj/random/junk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"eb" = (
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ec" = (
+/obj/item/weapon/tank/nitrogen,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ed" = (
+/obj/machinery/mining/brace,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ee" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/decal/cleanable/filth,
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/alarm/vox{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -16
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"ef" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"eg" = (
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"eh" = (
+/obj/machinery/atmospherics/valve,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"ei" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 8
+	},
+/obj/machinery/meter,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"ej" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4;
+	name = "emergency fuel vent"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"ek" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"el" = (
+/obj/structure/bed,
+/obj/item/weapon/bedsheet/hos,
+/obj/structure/curtain/open/bed,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/quill,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"em" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/item/weapon/storage/box/vox,
+/obj/item/weapon/storage/box/vox,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"en" = (
+/obj/item/weapon/inflatable_duck,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"eo" = (
+/obj/effect/decal/cleanable/cobweb,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/structure/kitchenspike,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"ep" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"eq" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal,
+/obj/machinery/alarm/vox{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -16
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"er" = (
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/machinery/chem_master,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"es" = (
+/obj/random/junk,
+/obj/effect/decal/cleanable/blood/oil,
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"et" = (
+/obj/effect/floor_decal/corner_techfloor_gray/diagonal,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"eu" = (
+/obj/random/junk,
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 4
+	},
+/obj/effect/floor_decal/corner_techfloor_gray{
+	icon_state = "corner_techfloor_gray";
+	dir = 1
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ev" = (
+/obj/machinery/power/port_gen/pacman/mrs,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ew" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ex" = (
+/obj/item/weapon/tank/emergency/nitrogen,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ey" = (
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"ez" = (
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"eA" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/obj/effect/floor_decal/borderfloorblack,
+/obj/effect/floor_decal/corner_techfloor_gray{
+	icon_state = "corner_techfloor_gray";
+	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"eB" = (
+/obj/item/weapon/storage/toolbox/syndicate,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"eC" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"eD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"eE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"eF" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"eG" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"eH" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "2-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"eI" = (
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"eJ" = (
+/obj/machinery/atmospherics/omni/mixer,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"eK" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/machinery/atmospherics/portables_connector{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"eL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"eM" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 9
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"eN" = (
+/obj/structure/extinguisher_cabinet,
+/turf/simulated/wall/prepainted,
+/area/voxship/fore)
+"eO" = (
+/obj/item/pizzabox/meat,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/item/weapon/tank/nitrogen,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"eP" = (
+/obj/effect/decal/cleanable/filth,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/random/snack,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"eQ" = (
+/obj/machinery/bodyscanner,
+/obj/machinery/alarm/vox{
+	dir = 4;
+	icon_state = "alarm0";
+	pixel_x = -16
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"eR" = (
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 1
+	},
+/obj/item/weapon/defibrillator,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"eS" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/item/clothing/glasses/hud/health,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"eT" = (
+/obj/machinery/chemical_dispenser/full,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"eU" = (
+/obj/machinery/computer/mining,
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/scavship)
+"eV" = (
+/obj/structure/window/reinforced,
+/obj/effect/decal/cleanable/filth,
+/obj/effect/floor_decal/borderfloorblack,
+/obj/effect/floor_decal/corner_techfloor_gray{
+	icon_state = "corner_techfloor_gray";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"eW" = (
+/obj/machinery/mineral/unloading_machine{
+	input_turf = 1;
+	output_turf = 2
+	},
+/obj/effect/floor_decal/borderfloorblack{
+	icon_state = "borderfloor_white";
+	dir = 6
+	},
+/obj/effect/floor_decal/corner_techfloor_gray{
+	icon_state = "corner_techfloor_gray";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"eX" = (
+/obj/item/weapon/storage/toolbox/mechanical,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"eY" = (
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"eZ" = (
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fa" = (
+/obj/machinery/atmospherics/binary/pump/high_power/on/max_pressure{
+	icon_state = "map_on";
+	dir = 4
+	},
+/obj/machinery/vending/engineering{
+	req_access = list()
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fb" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	icon_state = "intact";
+	dir = 4
+	},
+/obj/structure/table/reinforced,
+/obj/machinery/cell_charger,
+/obj/item/weapon/cell/crap,
+/obj/item/weapon/cell/high,
+/obj/item/weapon/cell/apc,
+/obj/item/clothing/gloves/vox,
+/obj/random/advdevice,
+/obj/random/advdevice,
+/obj/item/weapon/storage/briefcase/inflatable,
+/obj/item/device/lightreplacer,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fc" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black{
+	icon_state = "intact";
+	dir = 10
+	},
+/obj/machinery/pipedispenser,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fd" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/airlock/hatch/voxship,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"fe" = (
+/obj/machinery/mineral/stacking_machine{
+	input_turf = 4;
+	output_turf = 8
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"ff" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 8
+	},
+/obj/effect/decal/cleanable/blood/oil,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"fg" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"fh" = (
+/obj/structure/bed,
+/obj/item/weapon/bedsheet/rd,
+/obj/structure/curtain/open/bed,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew,
+/obj/item/weapon/bikehorn/rubberducky,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"fi" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"fj" = (
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"fk" = (
+/obj/machinery/body_scanconsole{
+	dir = 1;
+	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
+	icon_state = "body_scannerconsole"
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fl" = (
+/obj/item/clothing/suit/storage/toggle/labcoat,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fm" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1;
+	level = 2
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fn" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/storage/firstaid/adv,
+/obj/item/weapon/storage/firstaid/combat,
+/obj/item/weapon/storage/box/detergent,
+/obj/item/weapon/storage/box/syringes,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fo" = (
+/obj/structure/plasticflaps,
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"fp" = (
+/obj/machinery/mineral/processing_unit{
+	input_turf = 4;
+	output_turf = 8
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/scavship)
+"fq" = (
+/obj/machinery/door/airlock/hatch/voxship,
+/obj/machinery/atmospherics/pipe/simple/hidden/blue{
+	icon_state = "intact";
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black,
+/turf/simulated/wall/prepainted,
+/area/voxship/engineering)
+"fs" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/light/small{
+	dir = 8
+	},
+/obj/structure/closet/crate/uranium,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"ft" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 8;
+	icon_state = "1-8"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"fu" = (
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fv" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"fw" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/thrusters)
+"fx" = (
+/obj/structure/bed,
+/obj/item/weapon/bedsheet/rd,
+/obj/structure/curtain/open/bed,
+/obj/effect/floor_decal/corner_steel_grid/diagonal,
+/obj/effect/submap_landmark/spawnpoint/voxship_crew/doc,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"fy" = (
+/obj/item/roller,
+/obj/item/auto_cpr,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fz" = (
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fA" = (
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fB" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/blue{
+	icon_state = "intact";
+	dir = 10
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/engineering)
+"fC" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/machinery/alarm/vox,
+/obj/machinery/atmospherics/pipe/manifold/hidden/blue{
+	icon_state = "map";
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fD" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/turf/simulated/floor/airless,
+/area/voxship/scavship)
+"fE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/black,
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/engineering)
+"fF" = (
+/obj/structure/cable,
+/obj/machinery/power/smes/buildable/preset/voxship/ship,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fG" = (
+/turf/simulated/mineral/random,
+/area/space)
+"fH" = (
+/obj/item/stack/material/rods,
+/turf/space,
+/area/space)
+"fI" = (
+/obj/structure/lattice,
+/turf/space,
+/area/space)
+"fJ" = (
+/obj/machinery/power/terminal{
+	dir = 8
+	},
+/obj/structure/catwalk,
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 0
+	},
+/obj/item/device/geiger,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 1
+	},
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"fK" = (
+/obj/structure/closet/crate/uranium,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"fL" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel,
+/obj/structure/grille,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"fM" = (
+/obj/machinery/organ_printer/robot/mapped,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fN" = (
+/turf/simulated/shuttle/wall,
+/area/space)
+"fO" = (
+/obj/item/weapon/material/shard,
+/turf/simulated/floor/airless,
+/area/space)
+"fP" = (
+/obj/structure/lattice,
+/obj/random/loot,
+/turf/space,
+/area/space)
+"fQ" = (
+/obj/item/stack/material/rods,
+/turf/simulated/floor/airless,
+/area/space)
+"fR" = (
+/obj/item/weapon/reagent_containers/food/snacks/clownburger,
+/turf/simulated/floor/airless,
+/area/space)
+"fS" = (
+/obj/item/weapon/material/shard,
+/turf/space,
+/area/space)
+"fT" = (
+/obj/machinery/atmospherics/unary/engine{
+	icon_state = "nozzle";
+	dir = 1
+	},
+/turf/space,
+/area/space)
+"fU" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/storage/firstaid/surgery,
+/obj/item/stack/nanopaste,
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fV" = (
+/obj/machinery/optable,
+/obj/item/device/scanner/health,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/freezer{
+	initial_gas = list("nitrogen" = 101.383)
+	},
+/area/voxship/fore)
+"fW" = (
+/obj/random/advdevice,
+/turf/simulated/floor/airless,
+/area/space)
+"fX" = (
+/turf/space,
+/area/space)
+"fY" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	icon_state = "intact";
+	dir = 1
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/engineering)
+"fZ" = (
+/obj/machinery/door/window,
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/machinery/door/window{
+	icon_state = "left";
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"ga" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 5
+	},
+/obj/machinery/meter,
+/obj/item/weapon/slugegg,
+/turf/simulated/floor/plating/vox,
+/area/voxship/thrusters)
+"gb" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 1
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/thrusters)
+"gc" = (
+/obj/machinery/power/port_gen/pacman/super/potato,
+/obj/structure/cable,
+/turf/simulated/floor/plating/vox,
+/area/voxship/engineering)
+"gd" = (
+/obj/effect/overmap/visitable/ship/landable/vox_ship,
+/turf/space,
+/area/space)
+"ge" = (
+/obj/structure/fuel_port,
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/engineering)
+"gf" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/computer/ship/helm{
+	dir = 4;
+	icon_state = "computer";
+	req_access = list("ACCESS_VOXSHIP")
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"gg" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume{
+	icon_state = "intact";
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/shuttle)
+"gh" = (
+/obj/structure/lattice,
+/obj/random/advdevice,
+/turf/space,
+/area/space)
+"gi" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"gj" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/airlock/hatch/voxship,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"gk" = (
+/obj/machinery/light/small{
+	icon_state = "bulb1";
+	dir = 4
+	},
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 1
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"gl" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"gm" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/engineering)
+"gn" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal,
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/door/blast/shutters{
+	density = 0;
+	dir = 2;
+	icon_state = "shutter0";
+	id_tag = "vox_bridge";
+	name = "Window Shutters";
+	opacity = 0
+	},
+/turf/simulated/floor/airless,
+/area/voxship/engineering)
+"go" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/engineering)
+"gp" = (
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/turf/simulated/floor/airless,
+/area/voxship/scavship)
+"gq" = (
+/obj/machinery/atmospherics/pipe/vent/high_volume,
+/turf/simulated/floor/airless,
+/area/voxship/engineering)
+"gs" = (
+/obj/random/loot,
+/turf/simulated/floor/airless,
+/area/space)
+"gt" = (
+/obj/random/hat,
+/obj/random/loot,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/fore)
+"gx" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
+	icon_state = "map_universal";
+	dir = 4
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/shuttle)
+"gy" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/shuttle)
+"gz" = (
+/turf/simulated/wall/r_wall/hull{
+	initial_gas = list("nitrogen" = 101.38)
+	},
+/area/voxship/shuttle)
+"gA" = (
+/obj/machinery/door/airlock/hatch/voxship,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gB" = (
+/obj/machinery/door/airlock/hatch/voxship,
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/shuttle_landmark/vox_base/hangar/vox_scavshuttle,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/scavship)
+"gC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/machinery/computer/shuttle_control/explore/vox_lander,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/cable{
+	icon_state = "0-4";
+	d2 = 4
+	},
+/obj/effect/decal/cleanable/filth,
+/obj/machinery/power/apc/debug/vox{
+	dir = 1;
+	icon_state = "apc0";
+	pixel_y = 24
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gE" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	icon_state = "map-scrubbers";
+	dir = 1
+	},
+/obj/machinery/alarm/vox,
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gF" = (
+/obj/machinery/door/window/brigdoor,
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gG" = (
+/obj/structure/window/reinforced{
+	icon_state = "rwindow";
+	dir = 8
+	},
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gH" = (
+/obj/machinery/power/smes/buildable/preset/voxship/ship,
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gI" = (
+/obj/structure/table/reinforced,
+/obj/machinery/recharger,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/fuel{
+	icon_state = "intact";
+	dir = 6
+	},
+/obj/machinery/recharge_station,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gK" = (
+/obj/machinery/atmospherics/unary/engine{
+	icon_state = "nozzle";
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/shuttle)
+"gL" = (
+/obj/machinery/computer/ship/helm{
+	dir = 4;
+	icon_state = "computer";
+	req_access = list("ACCESS_VOXSHIP")
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gM" = (
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gN" = (
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gO" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	icon_state = "map_scrubber_on";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gP" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gQ" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8";
+	pixel_y = 0
+	},
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gR" = (
+/obj/machinery/power/terminal{
+	icon_state = "term";
+	dir = 1
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gS" = (
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gT" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gU" = (
+/obj/machinery/computer/ship/engines{
+	icon_state = "computer";
+	dir = 4;
+	req_access = list("ACCESS_VOXSHIP")
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gV" = (
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gW" = (
+/obj/effect/overmap/visitable/ship/landable/vox_scavshuttle,
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gX" = (
+/obj/machinery/atmospherics/binary/passive_gate/on{
+	icon_state = "map_on";
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gY" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/blue{
+	icon_state = "intact";
+	dir = 10
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"gZ" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel{
+	icon_state = "map";
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"ha" = (
+/obj/machinery/computer/ship/sensors{
+	icon_state = "computer";
+	dir = 1
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"hb" = (
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"hc" = (
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
+	dir = 1
+	},
+/obj/random/junk,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"hd" = (
+/obj/structure/bed/chair/shuttle/black{
+	icon_state = "shuttle_chair_preview";
+	dir = 1
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"he" = (
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 1
+	},
+/obj/machinery/portable_atmospherics/canister/nitrogen,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"hf" = (
+/obj/machinery/shipsensors,
+/turf/simulated/floor/reinforced/airless,
+/area/voxship/shuttle)
+"hg" = (
+/obj/machinery/atmospherics/portables_connector{
+	icon_state = "map_connector";
+	dir = 4
+	},
+/obj/machinery/portable_atmospherics/canister/carbon_dioxide,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"hh" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4;
+	name = "fuel input"
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+"hi" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
+/obj/structure/fuel_port{
+	pixel_y = -32
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/random/snack,
+/turf/simulated/floor/tiled/techmaint/vox,
+/area/voxship/shuttle)
+
+(1,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(2,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(3,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(4,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(5,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(6,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(7,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(8,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(9,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(10,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(11,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(12,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(13,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(14,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(15,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(16,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(17,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fX
+fX
+fX
+fH
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(18,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(19,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fI
+fI
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(20,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(21,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(22,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(23,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fN
+fN
+fN
+fN
+fT
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(24,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fO
+fQ
+fW
+gs
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(25,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fW
+fR
+fQ
+fI
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fS
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(26,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fN
+fS
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fH
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(27,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+at
+be
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(28,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+at
+be
+fX
+fX
+fX
+fX
+fX
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fS
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(29,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+at
+be
+fX
+fX
+fX
+fX
+fX
+fX
+be
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fI
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(30,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+at
+be
+fX
+fX
+fX
+fX
+fX
+fX
+be
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fI
+gh
+fH
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(31,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+at
+be
+fX
+fX
+ca
+co
+gd
+fX
+fX
+be
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fI
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(32,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+at
+be
+fX
+fX
+at
+cS
+at
+fX
+fX
+be
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fS
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(33,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+at
+be
+bF
+at
+at
+cT
+at
+at
+fX
+be
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(34,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+at
+at
+at
+at
+ar
+gf
+ar
+at
+at
+at
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(35,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+at
+at
+ar
+ar
+ar
+cU
+cV
+dq
+ar
+ar
+ar
+at
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(36,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+at
+gt
+bf
+bG
+ar
+ct
+cW
+ar
+ar
+el
+eN
+fh
+at
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(37,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+at
+at
+aH
+bg
+bH
+bW
+cu
+cX
+dr
+dQ
+em
+eO
+fi
+at
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(38,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+at
+ar
+aI
+bh
+bI
+ar
+cv
+cY
+ar
+dR
+en
+eP
+fj
+fx
+at
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(39,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+at
+at
+ar
+ar
+ar
+ar
+ar
+cw
+cZ
+ar
+dS
+ar
+ar
+ar
+ar
+ar
+at
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(40,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+at
+ar
+ar
+bi
+bJ
+ar
+ar
+da
+ar
+ar
+ar
+eQ
+fk
+fy
+fM
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(41,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+at
+at
+at
+at
+ar
+aJ
+aS
+bK
+bX
+cx
+db
+ds
+cx
+eo
+eR
+fl
+fz
+fU
+at
+at
+at
+at
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(42,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+at
+ar
+aK
+bj
+bL
+bY
+cy
+dc
+dt
+cy
+ep
+eS
+fm
+fA
+fV
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(43,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+at
+at
+ar
+ar
+bk
+bM
+bZ
+ar
+ar
+cZ
+ar
+er
+eT
+fn
+ar
+ar
+at
+at
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(44,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+aa
+as
+as
+as
+as
+as
+as
+dd
+cC
+as
+as
+as
+as
+as
+aa
+aa
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(45,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+ak
+au
+aL
+bl
+bN
+cb
+cz
+de
+du
+dT
+eq
+eA
+eY
+as
+aa
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(46,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+al
+av
+aM
+bm
+bO
+cc
+cA
+df
+dv
+dU
+es
+eU
+fe
+as
+aa
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(47,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+al
+aw
+aN
+bn
+as
+as
+cB
+dg
+dw
+dW
+et
+eV
+fo
+aa
+aa
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(48,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fX
+fX
+fX
+fG
+fX
+fX
+fH
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+am
+ax
+aN
+bo
+as
+cd
+cC
+dh
+dx
+dX
+dx
+eU
+fp
+aa
+fX
+fX
+gg
+gz
+gz
+gz
+gz
+hf
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(49,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fH
+fX
+fG
+fG
+fX
+fX
+fX
+fX
+fG
+fG
+fX
+fX
+fX
+fX
+aa
+aa
+aa
+aa
+aa
+ce
+cD
+di
+dy
+dY
+eu
+eW
+fo
+aa
+fX
+fX
+gx
+gz
+gL
+gU
+gz
+gz
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(50,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fX
+fX
+fX
+fX
+fG
+fX
+fX
+fX
+fX
+fX
+ac
+ac
+aO
+aO
+ac
+cf
+cC
+as
+as
+as
+as
+as
+as
+aa
+fX
+fX
+gy
+gC
+gM
+gM
+ha
+gz
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(51,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ag
+ac
+ac
+aP
+aO
+ac
+cg
+cE
+as
+dz
+dZ
+ev
+ey
+aa
+aa
+fX
+fX
+gz
+gD
+gN
+gV
+hb
+gz
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(52,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+gm
+ac
+ac
+aQ
+bp
+ac
+ch
+cF
+dj
+dA
+ea
+ew
+eX
+aa
+aa
+fD
+fD
+gz
+gE
+gO
+gW
+hc
+gz
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(53,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fI
+fP
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+an
+go
+aT
+fq
+aR
+bq
+eC
+ci
+cG
+dk
+dB
+eb
+ex
+gi
+gj
+gk
+gl
+gB
+gA
+gF
+gP
+gX
+hd
+gz
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(54,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+ac
+ac
+fB
+fC
+br
+bP
+cj
+cH
+as
+dC
+ec
+ey
+aM
+aa
+aa
+gp
+fD
+gz
+gG
+gQ
+gY
+he
+gz
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(55,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fH
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+gq
+gn
+bs
+ay
+bQ
+bQ
+ck
+cI
+as
+dD
+ed
+ez
+aN
+aa
+aa
+dV
+fX
+gz
+gH
+gR
+gN
+hg
+gz
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(56,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fH
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+ac
+ac
+ac
+ac
+ac
+cJ
+as
+as
+as
+as
+as
+as
+aa
+fX
+fX
+gz
+gI
+gS
+gN
+hh
+gz
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(57,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+ac
+aU
+aU
+aU
+ac
+cK
+cg
+dE
+dE
+eB
+eZ
+cg
+aa
+fX
+fX
+gz
+gJ
+gT
+gZ
+hi
+gz
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(58,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+ac
+aU
+bt
+aU
+ac
+cL
+cg
+dE
+dE
+eC
+fa
+cg
+ac
+fX
+fX
+gz
+gK
+gK
+gK
+gK
+gz
+fX
+fX
+fX
+fS
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(59,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+ge
+ac
+bu
+ac
+ac
+cJ
+cg
+dF
+dG
+eD
+fb
+cg
+ac
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fS
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(60,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+az
+aA
+bv
+bR
+cl
+cM
+cg
+dG
+dG
+eE
+fc
+fr
+fE
+fY
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fS
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(61,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fP
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ac
+cs
+aV
+bw
+bS
+cm
+cN
+dl
+dl
+dl
+eF
+cg
+cg
+ac
+ac
+ac
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(62,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fI
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+ab
+aB
+aW
+bx
+bT
+cn
+cO
+dm
+dH
+ee
+eG
+cg
+fs
+fF
+cg
+ac
+ac
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(63,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+ab
+ao
+ah
+aX
+by
+bU
+bU
+bU
+bU
+dI
+ef
+eH
+fd
+ft
+fJ
+fZ
+gc
+ac
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(64,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+ab
+ah
+ap
+aC
+aY
+bz
+bV
+cp
+cP
+dn
+dJ
+eg
+eI
+cg
+fu
+fK
+cg
+ac
+ac
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fI
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(65,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+ad
+ad
+ah
+aD
+aZ
+bA
+bU
+cq
+cQ
+do
+dK
+eh
+eJ
+cg
+cg
+cg
+cg
+ac
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fI
+fI
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(66,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+ad
+ai
+aq
+aE
+ba
+bB
+bU
+cr
+cP
+dp
+dL
+ei
+eK
+ff
+fv
+fL
+ga
+ab
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fI
+fP
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(67,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fH
+fX
+fX
+fX
+fH
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+ae
+aj
+ab
+aF
+bb
+bC
+bU
+bU
+cR
+bU
+dM
+ej
+eL
+fg
+fw
+ab
+gb
+bE
+ab
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(68,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fH
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+ab
+af
+af
+ab
+aG
+bc
+bD
+ab
+fX
+fX
+fX
+dN
+ek
+eM
+bd
+bE
+ab
+af
+af
+ab
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(69,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+ae
+bd
+bE
+ab
+fX
+fX
+fX
+dO
+dO
+af
+af
+af
+ab
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(70,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+ab
+af
+af
+af
+ab
+fX
+fX
+fX
+dP
+dP
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fH
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(71,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fH
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(72,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fS
+fX
+fH
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(73,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(74,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(75,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(76,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(77,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(78,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(79,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(80,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(81,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(82,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(83,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(84,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(85,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(86,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(87,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fG
+fG
+fG
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(88,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(89,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(90,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(91,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(92,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(93,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(94,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(95,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(96,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(97,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(98,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(99,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
+(100,1,1) = {"
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+fX
+"}
