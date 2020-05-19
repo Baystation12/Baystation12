@@ -24,5 +24,3 @@
 	overmap_event_tokens = 50
 
 	use_overmap = 1
-
-	map_admin_faxes = list("Ministry of Tranquility (General)","Ministry of Resolution (War Matters)","Ministry of Fervent Intercession (Internal Affairs)")

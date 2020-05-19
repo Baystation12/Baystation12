@@ -112,6 +112,9 @@
 /area/exo_ice_facility/interior/umbi_east
 	name = "KS7 - East Umbilical"
 
+/area/exo_ice_facility/interior/radio_shack
+	name = "KS7 - Comms Relay Shack"
+
 /*
 /area/exo_Ice_facility/ground/interior
 	name = "KS7-535 Facility Interior"

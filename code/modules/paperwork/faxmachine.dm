@@ -4,11 +4,10 @@ GLOBAL_LIST_EMPTY(alldepartments)
 GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
-	name = "fax machine"
+	name = "UEG fax machine"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
-	req_one_access = list()
 
 	use_power = 1
 	idle_power_usage = 30
@@ -24,6 +23,14 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	var/list/available_departments = list()
 	var/list/admin_departments = list()
 
+	department = "UEG Colony"
+	available_departments  = list("UNSC","UEG Colony")
+	admin_departments = list("United Earth Government")
+
+/obj/machinery/photocopier/faxmachine/badmin
+	name = "Badmin sext machine"
+	available_departments  = list("UNSC","UEG Colony","Insurrection","Covenant")
+
 /obj/machinery/photocopier/faxmachine/Initialize()
 	. = ..()
 
@@ -37,6 +44,20 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	if( !(("[department]" in GLOB.alldepartments) || ("[department]" in admin_departments)))
 		GLOB.alldepartments |= department
 		*/
+
+/obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
+	if(istype(O, /obj/item/weapon/card/id))
+		if(scan)
+			to_chat(user, "\icon[src] <span class='warning'>There is already a card in [src].</span>")
+		else
+			var/obj/item/I = usr.get_active_hand()
+			if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
+				I.loc = src
+				scan = I
+				to_chat(user, "\icon[src] <span class='info'>You insert [O] into [src].</span>")
+				updateUsrDialog()
+	else
+		. = ..()
 
 /obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
 	user.set_machine(src)
@@ -62,23 +83,23 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		dat += "<b>Logged in to:</b> [network_name ? network_name : "communication network"]<br><br>"
 
 		if(copyitem)
-			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br><br>"
+			dat += "<a href='byond://?src=\ref[src];remove=1'>Remove Item</a><br>"
 
 			if(sendcooldown)
 				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
 
 			else
 
-				dat += "<a href='byond://?src=\ref[src];send=1'>Send</a><br>"
-				dat += "<b>Currently sending:</b> [copyitem.name]<br>"
+				dat += "<a href='byond://?src=\ref[src];send=1'>Send Item</a><br><br>"
+				dat += "<b>Currently loaded:</b> [copyitem.name]<br>"
 				dat += "<b>Sending to:</b> <a href='byond://?src=\ref[src];dept=1'>[destination]</a><br>"
 
+				dat += "<a href='byond://?src=\ref[src];dept=1'>Change Destination</a>"
+
 		else
+			dat += "Please insert paper to send via secure connection.<br><br>"
 			if(sendcooldown)
-				dat += "Please insert paper to send via secure connection.<br><br>"
 				dat += "<b>Transmitter arrays realigning. Please stand by.</b><br>"
-			else
-				dat += "Please insert paper to send via secure connection.<br><br>"
 
 	else
 		dat += "Proper authentication is required to use this device.<br><br>"
@@ -133,9 +154,12 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		if(!destination) destination = lastdestination
 
 	if(href_list["auth"])
-		if ( (!( authenticated ) && (scan)) )
-			if (check_access(scan))
+		if (!authenticated)
+			if((scan && check_access(scan)) || !(req_access.len + req_one_access.len))
 				authenticated = 1
+				to_chat(usr,"\icon[src] <span class='notice'>Access granted.</span>")
+			else
+				to_chat(usr,"\icon[src] <span class='warning'>Access denied.</span>")
 
 	if(href_list["logout"])
 		authenticated = 0
@@ -159,9 +183,9 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 	if (success)
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
-		//sendcooldown = 600
+		sendcooldown = 600
 	else
-		visible_message("[src] beeps, \"Error transmitting message.\"")
+		visible_message("[src] beeps, \"Error transmitting message: no destinations found.\"")
 
 /obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming)
 	if(stat & (BROKEN|NOPOWER))

@@ -1681,6 +1681,7 @@
 #include "code\modules\halo\Forerunner\sentinel_spawner.dm"
 #include "code\modules\halo\insurrection\access_ids.dm"
 #include "code\modules\halo\insurrection\commando_outfits.dm"
+#include "code\modules\halo\insurrection\faxmachine.dm"
 #include "code\modules\halo\insurrection\orion.dm"
 #include "code\modules\halo\insurrection\orion_gear.dm"
 #include "code\modules\halo\insurrection\simple_mobs.dm"
