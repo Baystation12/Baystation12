@@ -123,7 +123,8 @@
 			updateUsrDialog()
 		else
 			to_chat(user, "<span class='notice'>This cartridge is not yet ready for replacement! Use up the rest of the toner.</span>")
-	..()
+	else
+		. = ..()
 	return
 
 /obj/machinery/photocopier/ex_act(severity)
