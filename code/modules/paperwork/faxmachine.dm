@@ -4,11 +4,10 @@ GLOBAL_LIST_EMPTY(alldepartments)
 GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
-	name = "fax machine"
+	name = "UEG fax machine"
 	icon = 'icons/obj/library.dmi'
 	icon_state = "fax"
 	insert_anim = "faxsend"
-	req_one_access = list()
 
 	use_power = 1
 	idle_power_usage = 30
@@ -151,8 +150,8 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		if(!destination) destination = lastdestination
 
 	if(href_list["auth"])
-		if ( (!( authenticated ) && (scan)) )
-			if (check_access(scan))
+		if (!authenticated)
+			if((scan && check_access(scan)) || !(req_access.len + req_one_access.len))
 				authenticated = 1
 				to_chat(usr,"\icon[src] <span class='notice'>Access granted.</span>")
 			else
@@ -182,7 +181,7 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 		visible_message("[src] beeps, \"Message transmitted successfully.\"")
 		sendcooldown = 600
 	else
-		visible_message("[src] beeps, \"Error transmitting message.\"")
+		visible_message("[src] beeps, \"Error transmitting message: no destinations found.\"")
 
 /obj/machinery/photocopier/faxmachine/proc/recievefax(var/obj/item/incoming)
 	if(stat & (BROKEN|NOPOWER))
