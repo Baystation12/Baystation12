@@ -199,6 +199,9 @@ GUEST_BAN
 ## Wiki address
 # WIKIURL http://example.com
 
+## Discord Invite
+# DISCORDURL http://discord.gg
+
 ## GitHub address
 # GITHUBURL https://github.com/example-user/example-repository
 
