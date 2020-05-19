@@ -21,9 +21,10 @@
 			log_and_message_admins("has attempted to advertise in [name]: [message]")
 			return FALSE
 		if(findtext(message, "discord.gg") && !config.allow_discord_links)
-			to_chat(C, "<B>Advertising discords is not allowed.</B>")
-			log_and_message_admins("has attempted to advertise in [name]: [message]")
-			return FALSE
+			if(!config.discordurl || (config.discordurl && !findtext(message, "[config.discordurl]")))
+				to_chat(C, "<B>Advertising discords is not allowed.</B>")
+				log_and_message_admins("has attempted to advertise in [name]: [message]")
+				return FALSE
 		if((findtext(message, "http://") || findtext(message, "https://")) && !config.allow_url_links)
 			to_chat(C, "<B>Posting links in OOC is not allowed.</B>")
 			log_and_message_admins("has attempted to advertise in [name]: [message]")
