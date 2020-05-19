@@ -3,6 +3,9 @@
 	//gamemode
 	#include "../_gamemodes/firefight/_all_includes.dm"
 
+	//lobby music
+	#include "../../code/modules/halo/lobby_music/halo_music.dm"
+
 	//subtype
 	#include "../_gamemodes/firefight/subtypes/stranded.dm"
 	#include "../_gamemodes/firefight/subtypes/jobs_colonist.dm"
