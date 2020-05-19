@@ -6,6 +6,7 @@
 	allowed_gamemodes = list("firefight")
 	lobby_icon = 'code/modules/halo/splashworks/title3.jpg'
 	boss_name = "UNSC"
+	company_name = "UNSC"
 
 	allowed_gamemodes = list("firefight")
 	allowed_jobs = list(\
