@@ -167,7 +167,8 @@
 			supply_obj_types -= spawn_type
 
 		//spawn the item
-		new spawn_type(spawn_turf)
+		var/obj/O = new spawn_type(spawn_turf)
+		O.anchored = 0
 		spawn_turf = null
 
 		//this crate is finished
