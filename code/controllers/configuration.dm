@@ -449,7 +449,7 @@ var/list/gamemode_cache = list()
 					config.forumurl = value
 					
 				if ("discordurl")
-					config.forumurl = value
+					config.discordurl = value
 
 				if ("githuburl")
 					config.githuburl = value
