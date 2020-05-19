@@ -15,7 +15,7 @@
 	if(!get_turf(M))
 		to_chat(C, "<span class='danger'>You cannot use [name] while in nullspace.</span>")
 		return FALSE
-	if(!holder)
+	if(!C.holder)
 		if(findtext(message, "byond://") && !config.allow_byond_links)
 			to_chat(C, "<B>Advertising other servers is not allowed.</B>")
 			log_and_message_admins("has attempted to advertise in [name]: [message]")
