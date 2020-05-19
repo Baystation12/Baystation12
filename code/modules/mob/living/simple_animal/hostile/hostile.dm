@@ -336,6 +336,7 @@
 	return 1
 
 /mob/living/simple_animal/hostile/attackby(var/obj/item/O, var/mob/user)
+	. = ..()
 	retaliate(user)
 
 /mob/living/simple_animal/hostile/attack_hand(mob/living/carbon/human/M)
