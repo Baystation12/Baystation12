@@ -195,6 +195,10 @@ var/list/gamemode_cache = list()
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
 	var/aooc_allowed = 1
+	
+	var/allow_byond_links = 0
+	var/allow_discord_links = 0
+	var/allow_url_links = 0					// honestly if I were you i'd leave this one off, only use in dire situations
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
@@ -372,6 +376,15 @@ var/list/gamemode_cache = list()
 
 				if ("allow_admin_spawning")
 					config.allow_admin_spawning = 1
+
+				if ("allow_byond_links")
+					allow_byond_links = 1
+
+				if ("allow_discord_links")
+					allow_discord_links = 1	
+
+				if ("allow_url_links")
+					allow_url_links = 1	
 
 				if ("no_dead_vote")
 					config.vote_no_dead = 1
