@@ -15,18 +15,20 @@
 	if(!get_turf(M))
 		to_chat(C, "<span class='danger'>You cannot use [name] while in nullspace.</span>")
 		return FALSE
-	if(findtext(message, "byond://") && !config.allow_byond_links)
-		to_chat(C, "<B>Advertising other servers is not allowed.</B>")
-		log_and_message_admins("has attempted to advertise in [name]: [message]")
-		return FALSE
-	if(findtext(message, "discord.gg") && !config.allow_discord_links)
-		to_chat(C, "<B>Advertising discords is not allowed.</B>")
-		log_and_message_admins("has attempted to advertise in [name]: [message]")
-		return FALSE
-	if((findtext(message, "http://") || findtext(message, "https://")) && !config.allow_url_links)
-		to_chat(C, "<B>Posting links in OOC is not allowed.</B>")
-		log_and_message_admins("has attempted to advertise in [name]: [message]")
-		return FALSE
+	if(!holder)
+		if(findtext(message, "byond://") && !config.allow_byond_links)
+			to_chat(C, "<B>Advertising other servers is not allowed.</B>")
+			log_and_message_admins("has attempted to advertise in [name]: [message]")
+			return FALSE
+		if(findtext(message, "discord.gg") && !config.allow_discord_links)
+			if(!config.discordurl || (config.discordurl && !findtext(message, "[config.discordurl]")))
+				to_chat(C, "<B>Advertising discords is not allowed.</B>")
+				log_and_message_admins("has attempted to advertise in [name]: [message]")
+				return FALSE
+		if((findtext(message, "http://") || findtext(message, "https://")) && !config.allow_url_links)
+			to_chat(C, "<B>Posting links in OOC is not allowed.</B>")
+			log_and_message_admins("has attempted to advertise in [name]: [message]")
+			return FALSE
 		
 /decl/communication_channel/ooc/looc/do_communicate(var/client/C, var/message)
 	var/mob/M = C.mob ? C.mob.get_looc_mob() : null
