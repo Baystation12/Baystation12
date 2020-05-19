@@ -49,6 +49,7 @@
 "W" = (/obj/item/weapon/gun/energy/plasmapistol,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 "X" = (/obj/structure/closet/crate/random/covenant/medical,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 "Y" = (/obj/structure/closet/crate/random/covenant/construction,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
+"Z" = (/obj/structure/bed/roller/covenant,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 
 (1,1,1) = {"
 gjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
@@ -97,7 +98,7 @@ gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMwMkkmkkkkkkkkkkknopkkkkkkkkMMMMMMMMMMMMMMM
 gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMkkknokkkWkkkkkrkskkkkkkkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
 gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMkkkkkkkkrkkkkkkkVkkkkkkkkkkkkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
 gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMkkkkkkkktukkkkkkkkkvkkkkkkkkkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
-gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMklkkkkkkkkkkkUkkkkkkkkkkkkkkkkkkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
+gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMklkkkkkkkkkkkUkkkZkkkkkkkkkkkkkkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
 gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMkkkkkkkkkkVkkkxkkkkkkkoykkkkkklkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
 gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMkkkkkkkkkkkkzzzzkmkWkkskkkkkkkkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
 gMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMkkkkkkkvkkAkzzzzkkkkkuBkkkkkkkkkMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMj
