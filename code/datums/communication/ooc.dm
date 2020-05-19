@@ -16,11 +16,18 @@
 		if(!config.dooc_allowed && (C.mob.stat == DEAD))
 			to_chat(C, "<span class='danger'>[name] for dead mobs has been turned off.</span>")
 			return FALSE
-		if(findtext(message, "byond://"))
+		if(findtext(message, "byond://") && !config.allow_byond_links)
 			to_chat(C, "<B>Advertising other servers is not allowed.</B>")
 			log_and_message_admins("has attempted to advertise in [name]: [message]")
 			return FALSE
-
+		if(findtext(message, "discord.gg") && !config.allow_discord_links)
+			to_chat(C, "<B>Advertising discords is not allowed.</B>")
+			log_and_message_admins("has attempted to advertise in [name]: [message]")
+			return FALSE
+		if((findtext(message, "http://") || findtext(message, "https://")) && !config.allow_url_links)
+			to_chat(C, "<B>Posting links in OOC is not allowed.</B>")
+			log_and_message_admins("has attempted to advertise in [name]: [message]")
+			return FALSE
 /decl/communication_channel/ooc/do_communicate(var/client/C, var/message)
 	var/datum/admins/holder = C.holder
 	var/is_stealthed = C.is_stealthed()
