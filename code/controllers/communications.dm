@@ -349,6 +349,10 @@ var/global/datum/controller/radio/radio_controller
 			continue
 
 		if(!obj_turf)
+			if(istype(check_obj.loc, /mob/living/carbon/human/dummy/mannequin))
+				//stop this one from listening
+				radio_controller.remove_object(check_obj, frequency)
+				continue
 			to_debug_listeners("Warning, radio listener [check_obj]|[check_obj.type] on freq \'[src.frequency]\' and filter \'[filter]\' ([check_obj.x],[check_obj.y],[check_obj.z]) in devices\[[filter]\] has null location")
 			continue
 
