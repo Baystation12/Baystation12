@@ -70,7 +70,9 @@
 /obj/structure/closet/crate/random/unsc_landmine
 	name = "Landmines Capsule"
 	num_contents = 6
-	possible_spawns = list(/obj/item/device/landmine)
+	possible_spawns = list(\
+		/obj/item/device/landmine/explosive,\
+		/obj/item/device/landmine/frag)
 
 /obj/structure/closet/crate/random/unsc_armour
 	name = "Armour Capsule"
