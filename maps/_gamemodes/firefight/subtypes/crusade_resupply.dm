@@ -9,13 +9,16 @@
 		/obj/structure/closet/crate/random/covenant/fuel_rod,\
 		/obj/structure/closet/crate/random/covenant/food,\
 		/obj/structure/closet/crate/random/covenant/medical,\
+		/obj/structure/closet/crate/random/covenant/energy_barricades,\
+		/obj/structure/closet/crate/random/covenant/construction,\
+		/obj/structure/bed/roller/covenant,\
+		/obj/structure/weapon_rack,\
 		/obj/structure/repair_bench/cov,\
 		/obj/machinery/floodlight/covenant)
 
-	supply_always_spawn = list(\
-		/obj/structure/weapon_rack,\
-		/obj/structure/closet/crate/random/covenant/energy_barricades,\
-		/obj/structure/closet/crate/random/covenant/construction)
+	flare_type = /obj/item/device/flashlight/glowstick/covenant
+
+	supply_always_spawn = list()
 
 /datum/game_mode/firefight/crusade/spawn_resupply(var/turf/epicentre)
 	..()

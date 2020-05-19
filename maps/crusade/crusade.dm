@@ -3,6 +3,9 @@
 	//gamemode
 	#include "../_gamemodes/firefight/_all_includes.dm"
 
+	//lobby music
+	#include "../../code/modules/halo/lobby_music/covenant_music.dm"
+
 	//subtype
 	#include "../_gamemodes/firefight/subtypes/crusade.dm"
 	#include "../_gamemodes/firefight/subtypes/crusade_resupply.dm"

@@ -18,10 +18,14 @@
 		/obj/structure/closet/crate/random/unsc_missile,\
 		/obj/structure/closet/crate/random/unsc_splaser,\
 		/obj/structure/repair_bench,\
-		/obj/machinery/floodlight,\
-		/obj/structure/reagent_dispensers/fueltank)
+		/obj/structure/closet/crate/random/unsc_mats,\
+		/obj/machinery/floodlight)
 
-	var/list/supply_always_spawn = list(/obj/structure/closet/crate/random/unsc_mats)
+	var/flare_type = /obj/item/device/flashlight/flare
+
+	var/list/supply_always_spawn = list()
+
+	var/list/recently_spawned_supplies = list()
 
 	var/list/debris_structures = list(\
 		/obj/structure/grille/broken=5,\
@@ -116,8 +120,18 @@
 	var/list/must_spawn = supply_always_spawn.Copy()
 	num_crates += must_spawn.len
 
+	//drop a light on the supply drop to make it a bit easier to find
+	var/obj/item/device/flashlight/F = new flare_type(epicentre)
+	F.on = 1
+	F.update_icon()
+
+	spawn(0)
+		var/datum/effect/effect/system/smoke_spread/S = new/datum/effect/effect/system/smoke_spread()
+		S.set_up(5,0,epicentre)
+		S.start()
+
 	//always spawn the first crate crate on the landmark
-	var/turf/spawn_turf = epicentre
+	var/turf/spawn_turf
 	while(num_crates > 0)
 
 		if(!spawn_turf)
@@ -140,8 +154,21 @@
 			spawn_type = pick(must_spawn)
 			must_spawn -= spawn_type
 		else
+			//cycle the spawn lists
+			if(!supply_obj_types.len)
+				supply_obj_types = recently_spawned_supplies
+				recently_spawned_supplies = list()
+
+			//pick a random thing to spawn
 			spawn_type = pick(supply_obj_types)
-		new spawn_type(spawn_turf)
+
+			//dont spawn this thing again for a while
+			recently_spawned_supplies += spawn_type
+			supply_obj_types -= spawn_type
+
+		//spawn the item
+		var/obj/O = new spawn_type(spawn_turf)
+		O.anchored = 0
 		spawn_turf = null
 
 		//this crate is finished

@@ -9,6 +9,7 @@
 	station_name  = "Sigma Octanus IV"
 	station_short = "Sigma Octanus IV"
 	boss_name = "Covenant"
+	company_name = "Covenant"
 
 	allowed_gamemodes = list("crusade")
 	allowed_jobs = list(\
@@ -22,7 +23,6 @@
 		/datum/job/covenant/sangheili_major/firefight,\
 		/datum/job/covenant/sangheili_zealot/firefight,\
 		/datum/job/covenant/sangheili_ultra/firefight,\
-		/datum/job/covenant/sangheili_specops/firefight,\
 		/datum/job/covenant/skirmminor/firefight,\
 		/datum/job/covenant/skirmmajor/firefight,\
 		/datum/job/covenant/skirmmurmillo/firefight,\
@@ -32,7 +32,6 @@
 		/datum/job/covenant/unggoy_major/firefight,\
 		/datum/job/covenant/unggoy_ultra/firefight,\
 		/datum/job/covenant/unggoy_deacon/firefight,\
-		/datum/job/covenant/unggoy_specops/firefight,\
 		/datum/job/covenant/yanmee_minor/firefight,\
 		/datum/job/covenant/yanmee_major/firefight,\
 		/datum/job/covenant/yanmee_ultra/firefight,\

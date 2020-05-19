@@ -81,6 +81,7 @@
 		var/chosen_title = pick(special_job_titles)
 		var/datum/job/special_job = job_master.occupations_by_title[chosen_title]
 		if(special_job)
+			special_job.total_positions += 1
 			to_world("\
 			<span class='radio'>\
 			<span class='name'>[pilot_name]</span> \

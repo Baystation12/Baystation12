@@ -15,11 +15,8 @@
 	evac_message = "The spirit has arrived. Protect it until we can depart this place."
 
 	special_job_titles = list(\
-		"Special Operations Sangheili",
 		"Sangheili Zealot",\
-		"T-Voan Champion",\
-		"Special Operations Unggoy",\
-		"Unggoy Ultra")
+		"T-Voan Champion")
 
 	wave_spawns = list(\
 		list(\
