@@ -174,6 +174,10 @@
 	req_access = list(8076)
 	secured_wires = 1
 
+/obj/machinery/door/airlock/police/comms
+	name = "Comms Relay Shack"
+	desc = "Requires a colonial marshall or the mayor to open."
+
 /obj/machinery/door/airlock/multi_tile/police
 	name = "Police Station"
 	door_color = "#9d2300"
@@ -346,7 +350,7 @@
 	name = "Shutter Control"
 	_wifi_id = "barShutter"
 	id = "barShutter"
-	req_access = list(6766)
+	req_access = list(6682)
 
 
 /obj/machinery/autolathe/ammo_fabricator/police_station
