@@ -4,7 +4,7 @@
 	desc = "Contains all the parts and single-use tools to construct a turret emplacement"
 
 	w_class = ITEM_SIZE_HUGE
-	slowdown_general = 4
+	slowdown_general = 2
 
 	icon = 'code/modules/halo/weapons/turrets/deploy_kit_items.dmi'
 	icon_state = "hmg_kit"
@@ -16,7 +16,7 @@
 		)
 
 	var/obj/turret_contained = /obj/structure/turret
-	var/deploy_time = 7 //The time it takes to deploy the turret, in seconds.
+	var/deploy_time = 3 //The time it takes to deploy the turret, in seconds.
 
 /obj/item/turret_deploy_kit/attack_self(var/mob/user)
 	visible_message("<span class = 'danger'>[user] starts setting up a turret emplacement</span>")

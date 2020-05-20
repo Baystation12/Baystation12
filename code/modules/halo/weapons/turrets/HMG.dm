@@ -6,10 +6,11 @@
 	icon_state = "hmgturret"
 
 	turret_gun = /obj/item/weapon/gun/projectile/turret/HMG
+	kit_undeploy = /obj/item/turret_deploy_kit/HMG
 
 /obj/item/weapon/gun/projectile/turret/HMG
 	name = "HMG Turret"
-	desc = "YATATATATATATATA"
+	desc = "Fires slower than the Confetti Maker, but with more stopping power per round."
 
 	icon_state = "m247h_obj"
 	item_state = "m247h_obj"
@@ -19,8 +20,8 @@
 
 	//burst = 10
 	//burst_delay = 3
-	burst_accuracy = list(3,2,2,1,0,-1,-1,-3,-4,-5)
-	dispersion = list(0,0,0.5,0.5,1,1,1.5,2,2,2.5)
+	burst_accuracy = list(0,0,0,0,0,0,0,0,0,0,-1)
+	dispersion = list(0,0,0,0,0,0.5,1.0,1.4)
 
 	load_time = 7
 
@@ -33,7 +34,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		)
-	burst_accuracy = list(0,-1,-1,-1,-2,-3,-3,-5,-5,-6)
-	dispersion = list(0.5,0.5,1,1,1.5,1.5,2,2.5,2.5,3)
 
+	move_delay_malus = 2
+	fire_delay = 15
 	sustain_time = 3 SECONDS
