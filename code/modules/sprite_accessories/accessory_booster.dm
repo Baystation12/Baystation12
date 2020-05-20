@@ -46,3 +46,19 @@
 /datum/sprite_accessory/marking/booster/horns/frills_short
 	icon_state = "horns_frills_short"
 	name = "Horn Biomods (Short Frills)"
+	
+	/datum/sprite_accessory/marking/booster/mouth/ant
+	icon_state = "teeth_ant"
+	name = "Teeth Biomods (Mandibles)"
+
+/datum/sprite_accessory/marking/booster/ears/dog
+	icon_state = "ears_dog"
+	name = "Ear Biomods (Dog)"
+
+/datum/sprite_accessory/marking/booster/mouth/maw
+	icon_state = "teeth_maw"
+	name = "Teeth Biomods (Maw)"
+
+/datum/sprite_accessory/marking/booster/horns/bat
+	icon_state = "wings_bat"
+	name = "Wing Biomods (Bat)"
