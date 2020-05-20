@@ -5,7 +5,8 @@
 	If the fire mode value for a setting is null, it will be replaced with the initial value of that gun's variable when the firemode is created.
 	Obviously not compatible with variables that take a null value. If a setting is not present, then the corresponding var will not be modified.
 */
-#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 0.75 SECONDS
+#define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 1 SECOND
+#define FULLCLEAR_MOD_OVERHEAT_MODIFIER 2
 
 /datum/firemode
 	var/name = "default"
@@ -67,7 +68,7 @@
 	var/accuracy = 0   //accuracy is measured in tiles. +1 accuracy means that everything is effectively one tile closer for the purpose of miss chance, -1 means the opposite. launchers are not supported, at the moment.
 	var/scoped_accuracy = null
 	var/list/burst_accuracy = list(0) //allows for different accuracies for each shot in a burst. Applied on top of accuracy
-	var/list/dispersion = list(0)
+	var/list/dispersion = list(0) // 1 = 9 degrees of dispersion in positive, 9 in negative
 	var/one_hand_penalty // -1 is used for "unable to fire unless twohandable".
 	var/wielded_item_state
 	var/can_rename = 1 //Can this weapon be renamed by the user?
@@ -100,6 +101,15 @@
 	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
 	var/advanced_covenant = 0
 
+	//Fire delay is modified by this, then used to determine the time after last firing to count as the weapon
+	//recovering from all the overheat it has accumulated
+	//Example: fire_delay 10 with a fullclear_mod of 2 means the player must wait for 20 before firing for the heat to
+	//be cleared.
+	var/overheat_fullclear_delay = 15
+	var/overheat_fullclear_at = -1
+	var/overheat_sfx = null
+	var/overheat_capacity = -1 //If set above -1, a weapon will decrement this counter per-shot until it hits 0.
+
 	//"Channeled" weapons, aka longfire beam sustained types (sentinel beam)//
 
 	var/sustain_delay = -1 //Set this to the delay between "firing" whilst channeled.Set the weapon tracer to match this value.
@@ -122,6 +132,25 @@
 		if(!istype(attachment))
 			continue
 		attachment.attach_to(src)
+
+/obj/item/weapon/gun/proc/check_reset_overheat()
+	if(overheat_capacity != -1 && world.time >= overheat_fullclear_at)
+		overheat_capacity = initial(overheat_capacity)
+
+/obj/item/weapon/gun/proc/calc_overheat_clear_at(var/mob/user,var/alt_overheat_message = 0)//An alternate "we've already warned you esque" overheat message.
+	overheat_capacity = max(overheat_capacity-1,0)
+	var/modifier = 1
+	if(overheat_capacity == 0)
+		modifier = FULLCLEAR_MOD_OVERHEAT_MODIFIER
+		var/msg = "[src] reaches its thermal limit and quickly starts ventilating heat, disabling their firing mechanism!"
+		if(alt_overheat_message)
+			msg = "[src] clunks as you pull the trigger, it has overheated and needs to ventilate heat..."
+		visible_message("<span class = 'warning'>[msg]</span>")
+
+		if(overheat_sfx)
+			playsound(user,overheat_sfx,100,1)
+
+	overheat_fullclear_at = world.time + overheat_fullclear_delay*modifier
 
 /obj/item/weapon/gun/proc/get_attachments(var/names_only = 0)
 	var/list/attachments = list()
@@ -301,7 +330,9 @@
 	return 1
 
 /obj/item/weapon/gun/proc/pershot_check(var/mob/user) //Placeholder for any checks that must be performed per-shot. Used for vehicles.
-	return 1
+	if(overheat_capacity == -1 || overheat_capacity > 0)
+		return 1
+	return 0
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
@@ -326,6 +357,8 @@
 		if(!check_z_compatible(target,user)) return
 
 	add_fingerprint(user)
+	check_reset_overheat()
+
 	var/list/attachments = get_attachments()
 	if(attachments.len > 0)
 		var/have_fired = 0
@@ -337,6 +370,10 @@
 			return //if one of our attachments have fired, let's not fire normally.
 
 	if(!special_check(user))
+		return
+
+	if(overheat_capacity == 0)
+		calc_overheat_clear_at(user,1)
 		return
 
 	if(stored_targ)
@@ -394,6 +431,9 @@
 			handle_click_empty(user)
 			. = 0
 			break
+		if(overheat_capacity != -1)
+			calc_overheat_clear_at(user)
+
 		if(istype(projectile,/obj/item/projectile))
 			var/obj/item/projectile/proj_obj = projectile
 			proj_obj.target_elevation = last_elevation
@@ -662,8 +702,13 @@
 			cumulative_accmod += attrib_mods[2]
 			cumulative_slowdownmod += attrib_mods[3]
 
-	dispersion += cumulative_dispmod
-	accuracy += cumulative_accmod
+	if(cumulative_dispmod > 0)
+		for(var/entry in dispersion)
+			entry += cumulative_dispmod
+	if(cumulative_accmod > 0)
+		for(var/entry in burst_accuracy)
+			entry += cumulative_accmod
+		accuracy += cumulative_accmod
 	slowdown_general += cumulative_slowdownmod
 
 /obj/item/weapon/gun/proc/toggle_scope(mob/user, var/zoom_amount=2.0)
@@ -730,6 +775,13 @@
 		for(var/name in attachments_names)
 			to_chat(user,"\n[name]")
 
+	if(overheat_capacity == 0)
+		check_reset_overheat()
+		to_chat(user,"[src] is overheating and needs to ventilate heat.")
+	else if(overheat_capacity != -1)
+		check_reset_overheat()
+		to_chat(user,"[src] has [overheat_capacity]/[initial(overheat_capacity)] shots left until overheat.")
+
 /obj/item/weapon/gun/proc/switch_firemodes()
 	if(firemodes.len <= 1)
 		return null
@@ -745,7 +797,7 @@
 /obj/item/weapon/gun/attack_self(mob/user)
 	if(stored_targ)
 		to_chat(user,"<span class = 'notice'>You stop your sustained burst from [src]</span>")
-		stored_targ = null
+		stored_targ = user
 		return
 	var/datum/firemode/new_mode = switch_firemodes(user)
 	if(new_mode)
