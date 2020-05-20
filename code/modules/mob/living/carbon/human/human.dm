@@ -96,6 +96,20 @@
 				for(var/helm in mon.valid_helmets)
 					if(istype(head,helm)) //No correct helm? No shield indicator.
 						stat("Shield Level:","[(shield_datum.shieldstrength/shield_datum.totalshields)*100]%")
+		var/obj/item/weapon/gun/gun_l = l_hand
+		var/obj/item/weapon/gun/gun_r = r_hand
+		if(istype(gun_l) && gun_l.overheat_capacity != -1)
+			gun_l.check_reset_overheat()
+			var/overheat_percent = 100
+			if(gun_l.overheat_capacity > 0)
+				overheat_percent = 100 *(1 - (gun_l.overheat_capacity/initial(gun_l.overheat_capacity)))
+			stat("[gun_l] Overheat: [overheat_percent]%")
+		if(istype(gun_r) && gun_r.overheat_capacity != -1)
+			gun_r.check_reset_overheat()
+			var/overheat_percent = 100
+			if(gun_r.overheat_capacity > 0)
+				overheat_percent = 100 *(1 - (gun_r.overheat_capacity/initial(gun_r.overheat_capacity)))
+			stat("[gun_r] Overheat: [overheat_percent]%")
 
 /mob/living/carbon/human/ex_act(severity)
 	if(!blinded)

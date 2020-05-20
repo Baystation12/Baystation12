@@ -12,6 +12,7 @@
 	magazine_type = /obj/item/ammo_magazine/m127_saphe
 	caliber = "12.7mm"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
+	one_hand_penalty = 2
 	fire_sound = 'code/modules/halo/sounds/Magnum_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/Magnum_Reload_New.wav'
 	load_method = MAGAZINE
@@ -22,6 +23,8 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
 		)
+
+	dispersion = list(0.4) //Maxes out at just about 1 tile @ 7 tiles range. Should rarely actually deviate to that tile, though.
 
 	slowdown_general = 0
 
@@ -42,7 +45,7 @@
 /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum
 	name = "\improper CO\'s Magnum"
 	desc = "I don't keep it loaded, Son. You'll have to find ammo as you go."
-	accuracy = 2
+	accuracy = 1
 	burst = 2
 
 /obj/item/weapon/gun/projectile/m6d_magnum/CO_magnum/New()
@@ -61,6 +64,8 @@
 	fire_sound = 'code/modules/halo/sounds/MagnumShotSoundEffect.ogg'
 	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	magazine_type = /obj/item/ammo_magazine/r127
+
+	one_hand_penalty = 0
 
 /obj/item/weapon/gun/projectile/m6d_magnum/m6b/update_icon()
 	. = ..()
@@ -99,10 +104,9 @@
 	fire_sound = 'code/modules/halo/sounds/Magnum_SOCOM_Fire.wav'
 	reload_sound = 'code/modules/halo/sounds/MagnumReloadSoundEffect.ogg'
 	load_method = MAGAZINE
-	fire_delay = 3
+	dispersion = list(0.4)
 	silenced = 1
-	screen_shake = 0
-	slowdown_general = 0
+	one_hand_penalty = 2
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -136,8 +140,10 @@
 	screen_shake = 1 //extra kickback
 	max_shells = 3
 	one_hand_penalty = 0
+	dispersion = list(0.1) //Sniper pistol, using sniper dispersions.
 	ammo_type = /obj/item/ammo_casing/a145_ap/tracerless
 	w_class = ITEM_SIZE_NORMAL
+	one_hand_penalty = 3
 	accuracy = 0
 	wielded_item_state = "handgonne"
 

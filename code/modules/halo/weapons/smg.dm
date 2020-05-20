@@ -18,10 +18,11 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m5
 	handle_casings = CASELESS
-	burst = 4
+	burst = 6
 	burst_delay = 1.4
-	burst_accuracy = list(0,0,0,-1)
-	dispersion = list(0.0, 0.4, 0.8, 1.0)
+	burst_accuracy = list(0,0,-1,-1,-1,-1)
+	dispersion = list(0.2, 0.4, 0.6, 0.8, 1.1,1.4)
+	one_hand_penalty = 3
 	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5/rubber)
 	w_class = ITEM_SIZE_NORMAL
 	wielded_item_state = "m7-wielded"
@@ -31,11 +32,6 @@
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		slot_belt_str = 'code/modules/halo/weapons/icons/Belt_Weapons.dmi',
-		)
-
-	firemodes = list(
-		list(mode_name="4-round bursts", burst=4, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1,-2),       dispersion=list(0.0, 0.4, 0.8, 1.0)),
-		list(mode_name="short bursts",   burst=6, fire_delay=null, move_delay=4,    burst_accuracy=list(0,-1,-1,-2,-2,-2), dispersion=list(0.6, 1.0, 1.0, 1.0, 1.2, 1.2)),
 		)
 
 /obj/item/weapon/gun/projectile/m7_smg/update_icon()

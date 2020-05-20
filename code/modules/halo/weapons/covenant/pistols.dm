@@ -7,15 +7,20 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/haloplasmapistol.ogg'
 	charge_meter = 1
-	max_shots = 80
+	max_shots = 100
 	slowdown_general = 0
+	dispersion = list(0.45)
 	var/overcharge = 0
 	var/overcharge_type = /obj/item/projectile/bullet/covenant/plasmapistol/overcharge
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmapistol
 	screen_shake = 0
 	irradiate_non_cov = 10
 	var/overcharge_cost = 1
-	accuracy = 1
+
+	overheat_capacity = 20 //Higher than the mag size of a magnum by 8, but you can reload a magnum faster.
+	overheat_fullclear_delay = 20
+	overheat_sfx = 'code/modules/halo/sounds/plaspistol_overheat.ogg'
+
 	item_state = "plasmapistol"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -36,7 +41,7 @@
 /obj/item/weapon/gun/energy/plasmapistol/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)
 		if(power_supply.charge < power_supply.maxcharge)
-			power_supply.give(charge_cost/3)
+			power_supply.give(charge_cost)
 			update_icon()
 			return 1
 
@@ -87,10 +92,10 @@
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmapistol/fastfire
 	overcharge_type = /obj/item/projectile/bullet/covenant/plasmapistol/overcharge/fastfire
 	one_hand_penalty = -1
-	burst = 4
+	burst = 6
 	burst_delay = 1.4
-	burst_accuracy = list(0,0,0,-1)
-	dispersion = list(0.0, 0.4, 0.8, 1.0)
+	burst_accuracy = list(0,0,-1,-1,-1,-1)
+	dispersion = list(0.2, 0.4, 0.6, 0.8, 1.1,1.4)
 
 /obj/item/weapon/gun/energy/plasmapistol/fastfire/special_check(var/mob/user)
 	. = ..()
@@ -113,7 +118,10 @@
 	handle_casings = CASELESS
 	caliber = "needler"
 	load_method = MAGAZINE
-	burst = 3
+	one_hand_penalty = 2
+	burst = 6
+	burst_accuracy = list(0,0,0,-1,-1,-1)
+	dispersion = list(0.3, 0.5, 0.7, 0.9, 1.1,1.4)
 	is_heavy = 1
 	irradiate_non_cov = 5
 	slowdown_general = 0

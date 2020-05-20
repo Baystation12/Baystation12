@@ -25,10 +25,10 @@
 
 /obj/item/projectile/bullet/a127_saphe
 	damage = 55		//deadly but inaccurate
-	accuracy = -1
 
 /obj/item/projectile/bullet/a127
 	damage = 25
+	accuracy = 1
 
 /obj/item/weapon/storage/box/m127_saphe
 	name = "box of 12.7mm M225 magazines"
@@ -197,8 +197,9 @@
 	caliber = "9.5mm"
 	projectile_type = /obj/item/projectile/bullet/m95_sap
 
-/obj/item/projectile/bullet/m95_sap
-	damage = 35
+/obj/item/projectile/bullet/m95_sap //it fires 3 of these in functionally a straight line, so individual damage is lower
+	damage = 15
+	shield_damage = 5
 
 /obj/item/weapon/storage/box/m95_sap
 	name = "box of 9.5mm M634 magazines"
@@ -315,11 +316,13 @@
 
 /obj/item/projectile/bullet/m5
 	damage = 20
+	shield_damage = 10
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
 	name = "rubber bullet"
 	check_armour = "melee"
 	damage = 5
+	shield_damage = 0
 	agony = 20
 	embed = 0
 	sharp = 0

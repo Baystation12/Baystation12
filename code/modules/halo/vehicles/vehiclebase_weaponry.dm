@@ -26,7 +26,8 @@
 	qdel(src)
 
 /obj/item/weapon/gun/vehicle_turret/pershot_check(var/mob/user)
-	if(user.loc != linked_vehicle)
+	. = ..()
+	if(!. || user.loc != linked_vehicle)
 		return 0
 	return 1
 
