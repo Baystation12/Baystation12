@@ -1,3 +1,5 @@
+#define SUPPRESSION_GRACE_STEPS 2//How many steps can a bullet make before it actually starts suppressing people.
+
 /obj/item/projectile
 	name = "projectile"
 	icon = 'icons/obj/projectiles.dmi'
@@ -230,11 +232,12 @@
 
 	return 1
 
-/obj/item/projectile/proc/do_supression_aoe(var/location)
+/obj/item/projectile/proc/do_suppression_aoe(var/location)
 	for(var/mob/living/carbon/human/h in orange(1,location))
 		if(h in permutated)
 			continue
-		h.supression_act(src)
+		spawn()
+			h.suppression_act(src)
 
 /obj/item/projectile/Bump(atom/A as mob|obj|turf|area, forced=0)
 	if(A == src)
@@ -312,8 +315,10 @@
 
 /obj/item/projectile/process()
 	var/first_step = 1
-
 	spawn while(src && src.loc)
+		if(kill_count < initial(kill_count) - SUPPRESSION_GRACE_STEPS)
+			do_suppression_aoe(loc)
+
 		if(kill_count-- < 1)
 			on_impact(src.loc) //for any final impact behaviours
 			qdel(src)
@@ -344,10 +349,6 @@
 
 		before_move()
 		Move(location.return_turf())
-
-		if(first_step != 1)
-			spawn()
-				do_supression_aoe(loc)
 
 		if(!bumped && original && !isturf(original))
 			if(loc == get_turf(original))
