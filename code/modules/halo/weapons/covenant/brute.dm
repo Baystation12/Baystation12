@@ -66,6 +66,7 @@
 	is_heavy = 1
 	armor_penetration = 35
 	accuracy = -1
+	dispersion = list(0.2,0.3,0.5)
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 	lunge_dist = 5
@@ -129,6 +130,7 @@
 	is_heavy = 1
 	armor_penetration = 35
 	accuracy = -1
+	dispersion = list(0.45)
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 	lunge_dist = 5

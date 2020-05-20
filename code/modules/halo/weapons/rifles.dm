@@ -11,18 +11,20 @@
 	item_state = "ma5b"
 	caliber = "a762"
 	slot_flags = SLOT_BACK
-	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_New.wav'
-	//fire_sound_burst = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_Sound_Effect.ogg'
+	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/Assault_Rifle_Reload_New.wav'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA5B
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA5B) //Disallows loading LMG boxmags into the MA5B
-	burst = 3
-	burst_delay = 2
+
+	burst = 5
+	burst_delay = 1.8
 	one_hand_penalty = -1
-	dispersion = list(0.0,0.6,0.6)
+	dispersion = list(0.0,0.2,0.3,0.5,0.73) //@ 7 tiles, deviation is 0 - 1 tiles.
+
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
+
 	w_class = ITEM_SIZE_LARGE
 	wielded_item_state = "ma5b-wielded"
 
@@ -31,11 +33,6 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
-		)
-
-	firemodes = list(
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-1,-1),       dispersion=list(0.0, 0.6, 0.6)),
-		list(mode_name="short bursts", 	burst=5, fire_delay=null, move_delay=6,    burst_accuracy=list(-1,-1,-2,-2,-3), dispersion=list(0.6, 1.0, 1.5, 1.5, 1.9)),
 		)
 
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock", "stock")
@@ -69,6 +66,11 @@
 	//fire_sound_burst = 'code/modules/halo/sounds/MA37_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/MA37_Reload_New.wav'
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
+
+	burst = 3
+	burst_delay = 2.0
+	dispersion = list(0.0,0.3,0.5)
+
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
 	attachment_slots = null
@@ -101,13 +103,12 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA3)
 	attachment_slots = null
 	attachments_on_spawn = null
-	burst_delay = 1
+	burst = 4
+	burst_delay = 1.7
+	one_hand_penalty = -1
+	dispersion = list(0.2,0.3,0.5,0.73)
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'
 	reload_sound = 'code/modules/halo/sounds/MA3reload.ogg'
-	firemodes = list(
-		list(mode_name="4-round bursts", burst=4, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1),       dispersion=list(0.3, 0.9, 1.3, 1.6)),
-		list(mode_name="short bursts", 	burst=6, fire_delay=1, move_delay=6,    burst_accuracy=list(0,0,-1,-1,-2,-2), dispersion=list(0.3, 0.7, 1.2, 1.2, 1.6, 1.6)),
-		)
 
 	attachment_slots = list("underbarrel rail","sight","barrel")
 	attachments_on_spawn = list(/obj/item/weapon_attachment/light/flashlight)
@@ -137,11 +138,10 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m95_sap)
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 1.5
-	fire_delay = 7
-	accuracy = 1
+	burst_delay = 1.2
+	fire_delay = 8
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.1, 0.3, 0.5)
+	dispersion=list(0.26, 0.26, 0.26) //About a third of a tile at 7 tile range.
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -176,11 +176,10 @@
 	load_method = MAGAZINE
 	one_hand_penalty = -1
 	burst = 3
-	burst_delay = 1.5
+	burst_delay = 1.2
 	fire_delay = 8
-	accuracy = 2
 	w_class = ITEM_SIZE_LARGE
-	dispersion=list(0.1, 0.3, 0.5)
+	dispersion=list(0.26, 0.26, 0.26)
 	wielded_item_state = "br55-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

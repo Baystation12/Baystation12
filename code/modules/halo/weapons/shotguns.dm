@@ -13,6 +13,7 @@
 	max_shells = 8
 	fire_delay = 8
 	one_hand_penalty = -1
+	dispersion = list(0.45)
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 	w_class = ITEM_SIZE_LARGE
@@ -52,7 +53,7 @@
 	fire_delay = 1
 	screen_shake = 1
 	accuracy = -1
-	dispersion=list(0.0, 0.6)
+	dispersion = list(0.45,0.45)
 	w_class = ITEM_SIZE_LARGE
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -82,6 +83,7 @@
 	ammo_type = /obj/item/ammo_casing/shotgun/pellet
 	max_shells = 6
 	one_hand_penalty = -1
+	dispersion = list(0.45)
 	var/on = 0
 	var/activation_sound = 'sound/effects/flashlight.ogg'
 	w_class = ITEM_SIZE_LARGE

@@ -18,22 +18,50 @@
 
 	var/mob/living/carbon/human/mob_manning //The mob manning the gun.
 	var/list/manning_pixel_offsets = list(25,25) //Format is offset (EW,NS)
+	var/obj/kit_undeploy = null
 	var/obj/item/weapon/gun/projectile/turret_gun = /obj/item/weapon/gun/projectile/turret //The "gun" the turret uses to fire.
 	var/obj/stand = /obj/structure/bipod //The object reference to the object to replace with when the gun is removed.
-	var/remove_time = 5 //The time it takes to rip the gun off the stand, in seconds.
-	var/bullet_deflect_chance = 30 //The chance the gun has to reflect projectiles.
+	var/remove_time = 5 //The time it takes to rip the gun off the stand, in seconds. Half this is pack-up time.
+	var/bullet_deflect_chance = 40 //The chance the gun has to reflect projectiles, from the sides
+	var/bullet_facing_deflect_chance = 75 //the chance the gun has to reflect projectiles from the "front" + the two angles.
+
+/obj/structure/turret/New()
+	. = ..()
+	if(kit_undeploy)
+		verbs += /obj/structure/turret/proc/pack_up_turret
+
+/obj/structure/turret/proc/pack_up_turret()
+	set name = "Pack Up Turret"
+	set category = "Object"
+	set src in view(1)
+
+	var/mob/living/user = usr
+	if(!istype(user) || user.incapacitated())
+		to_chat(usr,"<span class = 'notice'>You cannot do that!</span>")
+		return
+	visible_message("<span class = 'warning'>[user] starts packing up [src]...</span>")
+	if(!do_after(user,remove_time/4 SECONDS,src))
+		return
+	visible_message("<span class = 'notice'>[user] packs up [src], readying it for movement.</span>")
+	new kit_undeploy (loc)
+	unman_turret()
+	qdel(src)
 
 /obj/structure/turret/bullet_act(var/obj/item/projectile/P, var/def_zone)
-	if(!prob(bullet_deflect_chance))
+	var/prob_use = bullet_deflect_chance
+	if(get_dir(src, P.starting) in list(dir,turn(dir,-45),turn(dir,45)))
+		prob_use = bullet_facing_deflect_chance
+	if(dir == turn(dir,180) || !prob(prob_use))
 		if(mob_manning)
 			mob_manning.bullet_act(P,def_zone)
 			return
-	if(P.damtype == BRUTE)
-		visible_message("<span class = 'danger'>The [P.name] pings off the [name]</span>","<span class = 'notice'>You hear something ricochet</span>")
-	else if(P.damtype == BURN)
-		visible_message("<span class = 'danger'>The [P.name] harmlessly splashes against the armour of the [name]</span>","<span class = 'notice'>You hear something violently boiling</span>")
 	else
-		visible_message("<span class = 'danger'>The [P.name] ineffectively skims the armour of the [name]</span>","<span class = 'notice'>You hear something ricochet</span>")
+		if(P.damtype == BRUTE)
+			visible_message("<span class = 'danger'>The [P.name] pings off the [name]</span>","<span class = 'notice'>You hear something ricochet</span>")
+		else if(P.damtype == BURN)
+			visible_message("<span class = 'danger'>The [P.name] harmlessly splashes against the armour of the [name]</span>","<span class = 'notice'>You hear something violently boiling</span>")
+		else
+			visible_message("<span class = 'danger'>The [P.name] ineffectively skims the armour of the [name]</span>","<span class = 'notice'>You hear something ricochet</span>")
 
 /obj/structure/turret/proc/rip_turret(var/mob/living/carbon/human/user)
 	visible_message("<span class = 'danger'>[user] starts ripping the turret off the [name]</span>",)
@@ -61,6 +89,8 @@
 	return 1
 
 /obj/structure/turret/proc/handle_dir()
+	if(!mob_manning)
+		return
 	mob_manning.pixel_y = initial(mob_manning.pixel_y)
 	mob_manning.pixel_x = initial(mob_manning.pixel_x)
 	switch(mob_manning.dir)
@@ -145,6 +175,10 @@
 	check_user_has_gun()
 	handle_dir()
 
+/obj/structure/turret/Destroy()
+	unman_turret()
+	. = ..()
+
 /obj/structure/turret/verb/remove_turret()
 	set name = "Remove Turret"
 	set category = "Object"
@@ -196,15 +230,15 @@
 	slot_flags = 0
 
 	caliber = "a762"
-	auto_eject = 1
 	magazine_type = /obj/item/ammo_magazine/a762_box_ap
 
+	fire_delay = 15
 	burst = 10
 	burst_delay = 1
-	burst_accuracy = list(2,1,1,0,-1,-2,-3,-4,-5,-6)
-	dispersion = list(0,1,1,2,3,3,4,4,5,5)
+	burst_accuracy = list(0,0,0,0,0,0,-1)
+	dispersion = list(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.2,1.4)
 
-	var/load_time = 2 //The time it takes to load the weapon, in seconds.
+	var/load_time = 1 //The time it takes to load the weapon, in seconds.
 	var/removed_from_turret = 0 //If the gun has been removed from the turret base.
 
 /obj/item/weapon/gun/projectile/turret/unload_ammo(var/mob/user,var/allow_dump,var/force_drop)
@@ -213,21 +247,31 @@
 	to_chat(user,"<span class = 'notice'>You can't unload the [name]</span>")
 
 /obj/item/weapon/gun/projectile/turret/load_ammo(var/obj/item/A, mob/user)
-	visible_message("<span class = 'danger'>[user.name] starts loading the [name]</span>",)
-	if(do_after(user,load_time SECONDS,src,1,1,,1))
-		return ..(A,user)
+	visible_message("<span class = 'danger'>[user.name] loads the [name]</span>",)
+	..(A,user)
 
 /obj/item/weapon/gun/projectile/turret/dropped()
+	. = ..()
 	if(!removed_from_turret)
 		qdel(src)
-	else
-		. = ..()
 
 /obj/item/weapon/gun/projectile/turret/update_icon()
 	if(ammo_magazine)
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]_unloaded"
+
+/obj/item/weapon/gun/projectile/turret/verb/scope()
+	set category = "Weapon"
+	set name = "Use Scope (Mounted)"
+	set popup_menu = 1
+
+	if(removed_from_turret)
+		to_chat(usr,"<span class = 'notice'>[src]'s scope cannot function whilst detached!</span>")
+		verbs -= /obj/item/weapon/gun/projectile/turret/verb/scope
+		return
+
+	toggle_scope(usr, 1.75) //Equal to a sniper's scope, we'll be unlikely to hit anything at this range though.
 
 //Detached Turret Gun Define// Every detachable turret gun needs this.
 /obj/item/weapon/gun/projectile/turret/detached

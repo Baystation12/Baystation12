@@ -13,6 +13,7 @@
 	magazine_type = /obj/item/ammo_magazine/spnkr
 	fire_delay = 8
 	one_hand_penalty = -1
+	dispersion = list(2.6)
 	caliber = "spnkr"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE
@@ -55,6 +56,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m26
 	fire_delay = 8
+	dispersion = list(2.6)
 	one_hand_penalty = -1
 	caliber = "m26"
 	handle_casings = CASELESS

@@ -52,7 +52,7 @@
 	mag_type = MAGAZINE
 
 
-	max_ammo = 100
+	max_ammo = 175
 	multiple_sprites = 1
 
 /obj/item/ammo_casing/plasturret

@@ -129,14 +129,15 @@
 /obj/item/projectile/bullet/covenant/needles
 	name = "Needle"
 	desc = "A sharp, pink crystalline shard"
-	damage = 20 // Low damage, special effect would do the most damage.
+	damage = 15 // Low damage, special effect would do the most damage.
+	shield_damage = 15
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Needler Shot"
 	embed = 1
 	sharp = 1
 	armor_penetration = 20
 	step_delay = 0.75 //slower than most
-	var/max_track_steps = 4
+	var/max_track_steps = 2 // 4 tiles worth of tracking
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
@@ -145,7 +146,7 @@
 
 /obj/item/projectile/bullet/covenant/needles/New()
 	. = ..()
-	max_track_steps *= 2//We only track every other kill-count decrement.
+	max_track_steps *= 2//We only track every 2 kill-count decrements.
 
 /obj/item/projectile/bullet/covenant/needles/on_hit(var/mob/living/carbon/human/L, var/blocked, var/def_zone )
 	if(!istype(L))
@@ -198,14 +199,11 @@
 
 /obj/item/projectile/bullet/covenant/needles/Move()
 	. = ..()
-	if(kill_count % 3 == 0)
+	if(kill_count % 2 == 0)
 		return
 	if(locked_target)
-		if(get_dir(loc,locked_target) in list(dir,turn(dir,45),turn(dir,-45)))
-			redirect(locked_target, starting)
-			dir = get_dir(loc,locked_target)
-		else
-			locked_target = null
+		redirect(locked_target, starting)
+		dir = get_dir(loc,locked_target)
 	if(initial(kill_count) - kill_count >= max_track_steps)
 		locked_target = null
 
@@ -274,6 +272,7 @@
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
 	damage = 30
+	shield_damage = 5
 	shards_to_explode = 3
 	shard_name = "Rifle Needle shrapnel"
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
@@ -281,7 +280,7 @@
 	invisibility = 101
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
-	max_track_steps = 2
+	max_track_steps = 1
 	shield_damage = 50
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 

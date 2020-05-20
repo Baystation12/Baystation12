@@ -20,16 +20,18 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
-	accuracy = 1000
 	one_hand_penalty = -1
 	self_recharge = 1
 	recharge_time = 20
 	max_shots = 4
 
-	arm_time = 30 //Deciseconds
+	arm_time = 10 //Deciseconds
 	charge_meter = 0
 	force = 10
 	screen_shake = 0.5
+	fire_delay = 10
+	overheat_capacity = 3
+	overheat_fullclear_delay = 18
 
 	fire_sound = null
 
@@ -50,7 +52,8 @@
 /obj/item/projectile/beam/spartan
 	name = "spartan laser"
 	icon_state = "heavylaser"
-	damage = 500 //This should one-hit kill all mobs, including lekgolo. Likely destroys most vehicles just as fast, if not instantly.
+	damage = 100
+	shield_damage = 500 //No shields for you
 	damage_type = "bomb"
 	damtype = "bomb"
 	armor_penetration = 100

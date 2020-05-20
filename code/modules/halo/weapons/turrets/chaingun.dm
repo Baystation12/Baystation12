@@ -5,10 +5,11 @@
 
 	icon_state = "chaingunturret"
 	turret_gun = /obj/item/weapon/gun/projectile/turret/chaingun
+	kit_undeploy = /obj/item/turret_deploy_kit/chaingun
 
 /obj/item/weapon/gun/projectile/turret/chaingun
 	name = "Confetti Maker Chaingun Turret"
-	desc = "Dakka."
+	desc = "A lead-spewing gun, usually found mounted to a turret. It is known for it's inaccuracy and extraordinary rate of fire.."
 
 	icon_state = "chaingun_obj"
 	item_state = "chaingun_obj"
@@ -19,8 +20,8 @@
 	//Burst Settings irrelevant in the face of sustain fire settings//
 	//burst = 15
 	//burst_delay = 1
-	burst_accuracy = list(2,1,1,0,-1,-2,-3,-4,-4,-3,-3,-2,-2,-3)
-	dispersion = list(0,0,0,0.5,0.5,0.5,1,1,1,2,2,2,2,2.5,2.5)
+	burst_accuracy = list(0,0,0,0,0,0,-1)
+	dispersion = list(0.0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0,1.2,1.4,1.4)
 
 	load_time = 5
 
@@ -33,7 +34,7 @@
 		slot_l_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/turrets/mob_turret.dmi',
 		)
-	burst_accuracy = list(0,-1,-1,-1,-2,-3,-3,-5,-5,-6)
-	dispersion = list(0.5,0.5,0.5,1,1,1,1.5,1.5,1.5,2.5,2.5,2.5,2.5,3,3)
 
-	sustain_time = 2.5 SECONDS
+	move_delay_malus = 2
+	fire_delay = 15
+	sustain_time = 3 SECONDS
