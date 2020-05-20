@@ -31,9 +31,9 @@
 /obj/structure/closet/crate/random/unsc_guns
 	name = "Weapons Capsule"
 	possible_spawns = list(\
-		/obj/item/weapon/gun/projectile/ma5b_ar = /obj/item/ammo_magazine/m762_ap,\
+		/obj/item/weapon/gun/projectile/ma5b_ar = /obj/item/ammo_magazine/m762_ap/MA5B,\
 		/obj/item/weapon/gun/projectile/m7_smg = /obj/item/ammo_magazine/m5,\
-		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = /obj/item/weapon/storage/box/shotgunshells)
+		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = /obj/item/ammo_box/shotgun)
 
 /obj/structure/closet/crate/random/unsc_guns/WillContain()
 	return list(/obj/item/weapon/gun/projectile/m6d_magnum,\
