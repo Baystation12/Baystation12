@@ -899,6 +899,30 @@
 	else
 		germ_level += n
 
+mob/living/carbon/human/verb/surrender() 
+	set name = "Surrender"
+	set category = "IC"
+
+	if(src.restrained() || src.buckled || src.stat || (src.weakened && src.stunned))
+		to_chat(src, SPAN_WARNING("You can't do that right now."))
+		return
+
+	var/datum/gender/user_gender = gender_datums[src.get_visible_gender()]
+	var/message = "[src] puts [user_gender.his] hands on [user_gender.his] head and drops to the ground; [user_gender.he] surrenders!"
+
+	if(src.drop_l_hand())
+		message = "[src] drops what [user_gender.he] is holding, puts [user_gender.his] hands on [user_gender.his] head, and drops to the ground; [user_gender.he] surrenders!"
+
+	if(src.drop_r_hand()) //Done separately to bypass short-circuit evaluation
+		message = "[src] drops what [user_gender.he] is holding, puts [user_gender.his] hands on [user_gender.his] head, and drops to the ground; [user_gender.he] surrenders!"
+
+	if(src.lying) //You cannot hold things while lying down so there is no need to check for both conditions at once
+		message = "[src] puts [user_gender.his] hands on [user_gender.his] head while on the ground; [user_gender.he] surrenders!"
+
+	src.Resting(5)
+
+	src.visible_message(SPAN_GOOD(SPAN_BOLD(message)))
+
 /mob/living/carbon/human/revive()
 
 	if(should_have_organ(BP_HEART))
