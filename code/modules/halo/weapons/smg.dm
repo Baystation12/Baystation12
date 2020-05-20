@@ -19,7 +19,7 @@
 	magazine_type = /obj/item/ammo_magazine/m5
 	handle_casings = CASELESS
 	burst = 6
-	burst_delay = 1.4
+	burst_delay = 1.5
 	burst_accuracy = list(0,0,-1,-1,-1,-1)
 	dispersion = list(0.2, 0.4, 0.6, 0.8, 1.1,1.4)
 	one_hand_penalty = 3

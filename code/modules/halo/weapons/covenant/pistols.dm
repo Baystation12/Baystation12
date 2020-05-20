@@ -9,6 +9,7 @@
 	charge_meter = 1
 	max_shots = 100
 	slowdown_general = 0
+	fire_delay = 5 //Lower damage projectile, so we fire just slightly faster.
 	dispersion = list(0.45)
 	var/overcharge = 0
 	var/overcharge_type = /obj/item/projectile/bullet/covenant/plasmapistol/overcharge
@@ -94,6 +95,7 @@
 	one_hand_penalty = -1
 	burst = 6
 	burst_delay = 1.4
+	fire_delay = 6 //Resetting to default
 	burst_accuracy = list(0,0,-1,-1,-1,-1)
 	dispersion = list(0.2, 0.4, 0.6, 0.8, 1.1,1.4)
 
@@ -120,6 +122,7 @@
 	load_method = MAGAZINE
 	one_hand_penalty = 2
 	burst = 6
+	burst_delay = 1.5
 	burst_accuracy = list(0,0,0,-1,-1,-1)
 	dispersion = list(0.3, 0.5, 0.7, 0.9, 1.1,1.4)
 	is_heavy = 1

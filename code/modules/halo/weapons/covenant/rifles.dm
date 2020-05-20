@@ -14,8 +14,8 @@
 	is_heavy = 1
 
 	//MA5 Counterpart. One less in burst, with overheat tracking, with an accuracy boon.
-	fire_delay = 7
-	burst_delay = 2
+	fire_delay = 6
+	burst_delay = 1.8
 	dispersion = list(0.2,0.3,0.5,0.73)
 	accuracy = 1
 	one_hand_penalty = 3

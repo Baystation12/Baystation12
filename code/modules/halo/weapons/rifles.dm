@@ -18,7 +18,7 @@
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA5B) //Disallows loading LMG boxmags into the MA5B
 
 	burst = 5
-	burst_delay = 2
+	burst_delay = 1.8
 	one_hand_penalty = -1
 	dispersion = list(0.0,0.2,0.3,0.5,0.73) //@ 7 tiles, deviation is 0 - 1 tiles.
 
@@ -68,7 +68,7 @@
 	magazine_type = /obj/item/ammo_magazine/m762_ap/MA37
 
 	burst = 3
-	burst_delay = 1.7
+	burst_delay = 2.0
 	dispersion = list(0.0,0.3,0.5)
 
 	ammo_icon_state = null
@@ -104,7 +104,7 @@
 	attachment_slots = null
 	attachments_on_spawn = null
 	burst = 4
-	burst_delay = 1.8
+	burst_delay = 1.7
 	one_hand_penalty = -1
 	dispersion = list(0.2,0.3,0.5,0.73)
 	fire_sound = 'code/modules/halo/sounds/MA3firefix.ogg'

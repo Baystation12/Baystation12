@@ -202,11 +202,8 @@
 	if(kill_count % 2 == 0)
 		return
 	if(locked_target)
-		if(get_dir(loc,locked_target) in list(dir,turn(dir,45),turn(dir,-45)))
-			redirect(locked_target, starting)
-			dir = get_dir(loc,locked_target)
-		else
-			locked_target = null
+		redirect(locked_target, starting)
+		dir = get_dir(loc,locked_target)
 	if(initial(kill_count) - kill_count >= max_track_steps)
 		locked_target = null
 

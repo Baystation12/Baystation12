@@ -1,4 +1,4 @@
-
+a
 /obj/item/weapon/gun/projectile/type51carbine
 	name = "Type-51 Carbine"
 	desc = "One of the few covenant weapons that utilise magazines."
@@ -13,6 +13,7 @@
 	caliber = "cov_carbine"
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_carbine_reload.ogg'
+	fire_delay = 5 //Doesn't have the 3rnd burst of the counterpart BR
 	dispersion = list(0.26)
 	one_hand_penalty = -1
 	irradiate_non_cov = 12

@@ -24,7 +24,7 @@
 	projectile_type = /obj/item/projectile/bullet/a127_saphe
 
 /obj/item/projectile/bullet/a127_saphe
-	damage = 55		//deadly but inaccurate
+	damage = 55		//deadly but no AP
 
 /obj/item/projectile/bullet/a127
 	damage = 25
@@ -76,8 +76,7 @@
 //deadly but inaccurate
 /obj/item/projectile/bullet/a127_saphp
 	damage = 40
-	armor_penetration = 20
-	accuracy = 1
+	armor_penetration = 10
 
 /obj/item/weapon/storage/box/m127_saphp
 	name = "box of 12.7mm M228 magazines"
