@@ -135,8 +135,8 @@
 /turf/simulated/wall/titanium,
 /area/unishi/chem)
 "ay" = (
-/turf/simulated/wall,
-/area/unishi/chem)
+/turf/simulated/wall/r_wall,
+/area/unishi/library)
 "az" = (
 /obj/machinery/door/airlock/glass/research,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -176,12 +176,6 @@
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
 "aC" = (
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_x = 0;
-	pixel_y = 24
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
@@ -191,6 +185,13 @@
 /obj/structure/cable/yellow{
 	d2 = 4;
 	icon_state = "0-4"
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_x = 0;
+	pixel_y = 24;
+	req_access = newlist()
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/chem)
@@ -441,7 +442,7 @@
 /turf/simulated/wall,
 /area/unishi/common)
 "bm" = (
-/turf/simulated/wall,
+/turf/simulated/wall/titanium,
 /area/unishi/classroom)
 "bn" = (
 /turf/simulated/wall/r_wall,
@@ -604,9 +605,34 @@
 	},
 /turf/simulated/floor,
 /area/unishi/common)
+"bD" = (
+/obj/structure/table/glass,
+/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -22;
+	req_access = newlist()
+	},
+/obj/item/stack/material/diamond/ten,
+/obj/item/stack/material/steel/fifty,
+/obj/item/stack/material/silver/ten,
+/obj/item/stack/material/glass/fifty,
+/obj/item/clothing/glasses/science,
+/obj/item/clothing/glasses/science,
+/turf/simulated/floor/tiled,
+/area/unishi/rnd)
 "bE" = (
 /turf/simulated/floor/tiled/dark,
 /area/unishi/classroom)
+"bF" = (
+/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
+	dir = 5
+	},
+/turf/simulated/wall/titanium,
+/area/unishi/smresearch)
 "bG" = (
 /obj/structure/closet/firecloset,
 /turf/simulated/floor/tiled/dark,
@@ -901,9 +927,6 @@
 "cr" = (
 /turf/simulated/wall/titanium,
 /area/unishi/meeting)
-"cs" = (
-/turf/simulated/wall,
-/area/unishi/meeting)
 "ct" = (
 /turf/simulated/wall/r_wall,
 /area/unishi/meeting)
@@ -1065,13 +1088,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/unishi/toxins)
-"cL" = (
-/obj/machinery/door/blast/regular{
-	icon_state = "pdoor1";
-	dir = 8
-	},
-/turf/simulated/floor/reinforced,
-/area/space)
 "cM" = (
 /obj/structure/bed/chair/office/comfy/black{
 	dir = 4
@@ -1424,9 +1440,6 @@
 	},
 /turf/simulated/wall/titanium,
 /area/unishi/toxins)
-"dJ" = (
-/turf/simulated/wall/titanium,
-/area/unishi/hydro)
 "dK" = (
 /obj/structure/bed/chair/office{
 	dir = 1
@@ -1565,23 +1578,6 @@
 /area/unishi/rnd)
 "dZ" = (
 /obj/machinery/r_n_d/protolathe,
-/turf/simulated/floor/tiled,
-/area/unishi/rnd)
-"ea" = (
-/obj/structure/table/glass,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/item/weapon/reagent_containers/glass/bottle/tericadone,
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -22;
-	req_access = newlist()
-	},
-/obj/item/stack/material/diamond/ten,
-/obj/item/stack/material/steel/fifty,
-/obj/item/stack/material/silver/ten,
-/obj/item/stack/material/glass/fifty,
 /turf/simulated/floor/tiled,
 /area/unishi/rnd)
 "eb" = (
@@ -2145,10 +2141,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor,
 /area/unishi/common)
-"fu" = (
-/obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor,
-/area/space)
 "fv" = (
 /obj/structure/flora/pottedplant/aquatic,
 /turf/simulated/floor/tiled/dark,
@@ -2483,9 +2475,6 @@
 	},
 /obj/effect/floor_decal/industrial/loading,
 /turf/simulated/floor,
-/area/unishi/smresearch)
-"gn" = (
-/turf/space,
 /area/unishi/smresearch)
 "go" = (
 /obj/effect/decal/cleanable/vomit,
@@ -3049,20 +3038,6 @@
 	dir = 1
 	},
 /turf/simulated/wall/titanium,
-/area/unishi/smresearch)
-"hF" = (
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 5
-	},
-/obj/structure/lattice,
-/turf/space,
-/area/unishi/smresearch)
-"hG" = (
-/obj/machinery/atmospherics/pipe/simple/heat_exchanging{
-	dir = 4
-	},
-/obj/structure/lattice,
-/turf/space,
 /area/unishi/smresearch)
 "qW" = (
 /obj/structure/table/standard,
@@ -7313,25 +7288,25 @@ ad
 ad
 ad
 ad
-ad
-ad
-fu
-fu
+fh
+fh
+fp
+fp
 fK
 fK
 fK
 fK
 fK
 fK
-gn
-gn
-gn
-gn
-gn
-gn
-gn
-gn
-gn
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 aa
 aa
 aa
@@ -7433,7 +7408,7 @@ gW
 fK
 fK
 fK
-gn
+aa
 aa
 aa
 aa
@@ -7491,10 +7466,10 @@ ax
 ax
 ax
 ax
-ay
-ay
-ay
-ay
+ax
+ax
+ax
+ax
 bm
 bm
 bm
@@ -7502,7 +7477,7 @@ bm
 bm
 bm
 bm
-cs
+ct
 cz
 cM
 cW
@@ -7535,7 +7510,7 @@ fK
 fK
 fK
 fK
-gn
+aa
 aa
 aa
 aa
@@ -7637,7 +7612,7 @@ fL
 ge
 fK
 fK
-gn
+fK
 aa
 aa
 aa
@@ -7691,7 +7666,7 @@ ak
 ak
 ak
 ak
-ay
+bd
 aB
 aM
 aM
@@ -7793,7 +7768,7 @@ al
 aq
 au
 av
-ay
+bd
 aC
 aN
 aU
@@ -7816,7 +7791,7 @@ df
 dr
 dA
 dN
-ea
+bD
 em
 ev
 eD
@@ -7895,7 +7870,7 @@ am
 aq
 ao
 av
-ay
+bd
 aD
 aO
 aV
@@ -7929,10 +7904,10 @@ fl
 fq
 fw
 fF
-fL
+fN
 fO
 fN
-fL
+fN
 fW
 gh
 gp
@@ -7997,7 +7972,7 @@ am
 ar
 ao
 aw
-ak
+ay
 aE
 aP
 aW
@@ -8031,10 +8006,10 @@ aE
 fr
 bl
 fr
-fL
+fN
 fP
 fS
-fL
+fN
 fX
 gi
 gq
@@ -8201,7 +8176,7 @@ ao
 at
 ao
 at
-ak
+ay
 aG
 aG
 aY
@@ -8235,10 +8210,10 @@ dj
 bl
 bl
 bl
-fL
+fN
 fR
 fU
-fL
+fN
 fZ
 gj
 gs
@@ -8303,7 +8278,7 @@ ao
 aq
 ao
 aq
-ak
+ay
 aH
 aR
 aS
@@ -8337,10 +8312,10 @@ dj
 fp
 fy
 fE
-fL
 fN
 fN
-fL
+fN
+fN
 ga
 gk
 gt
@@ -8405,7 +8380,7 @@ ap
 aq
 ao
 aq
-ak
+ay
 aI
 aS
 aS
@@ -8413,9 +8388,9 @@ bh
 aG
 aG
 bA
-bl
-bl
-bl
+aG
+aG
+aG
 bX
 ce
 ck
@@ -8507,22 +8482,22 @@ ak
 ak
 ak
 ak
-ak
+ay
 aJ
 aS
 aZ
 bi
-bl
+aG
 br
 bB
 bK
 aS
-bl
+aG
 bY
 cf
 cl
 cp
-cy
+cx
 cH
 cU
 dd
@@ -8609,17 +8584,17 @@ ad
 ad
 ad
 ad
-ad
+fh
 aK
 aS
 ba
 ba
-bl
+aG
 bs
 bC
 bL
 bP
-bl
+aG
 bZ
 cg
 cm
@@ -8657,7 +8632,7 @@ hd
 hd
 hz
 hD
-hF
+bF
 aa
 aa
 aa
@@ -8711,21 +8686,21 @@ aa
 aa
 aa
 aa
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
-ad
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
+fh
 cy
 cJ
 cV
@@ -8759,7 +8734,7 @@ fN
 fN
 fN
 fK
-hG
+gJ
 aa
 aa
 aa
@@ -8861,7 +8836,7 @@ gW
 fK
 fK
 fK
-hG
+gJ
 aa
 aa
 aa
@@ -8930,13 +8905,13 @@ aa
 aa
 aa
 ad
-ad
-cL
-ad
-ad
-ad
-ad
-dJ
+dp
+cK
+dp
+dp
+dp
+dp
+dp
 dW
 dW
 dW
@@ -8954,7 +8929,7 @@ fK
 fK
 fK
 fK
-ad
+fK
 gw
 gJ
 gU
