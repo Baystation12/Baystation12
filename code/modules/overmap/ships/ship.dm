@@ -19,6 +19,7 @@
 	var/vessel_size = SHIP_SIZE_LARGE	//arbitrary number, affects how likely are we to evade meteors
 	var/max_speed = 1/(1 SECOND)        //"speed of light" for the ship, in turfs/tick.
 	var/min_speed = 1/(2 MINUTES)       // Below this, we round speed to 0 to avoid math errors.
+	var/max_autopilot = 1 / (20 SECONDS) // The maximum speed any attached helm can try to autopilot at.
 
 	var/list/speed = list(0,0)          //speed in x,y direction
 	var/last_burn = 0                   //worldtime when ship last acceleated

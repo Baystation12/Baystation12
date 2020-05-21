@@ -180,13 +180,14 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		dy = 0
 
 	if (href_list["speedlimit"])
-		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit*1000) as num|null
-		if(newlimit)
-			speedlimit = Clamp(newlimit/1000, 0, 100)
+		var/newlimit = input("Autopilot Speed Limit (0 ~ [round(linked.max_autopilot * 1000, 0.1)])", "Autopilot speed limit", speedlimit * 1000) as num|null
+		if (!isnull(newlimit))
+			speedlimit = round(Clamp(newlimit, 0, linked.max_autopilot * 1000), 0.1) * 0.001
+
 	if (href_list["accellimit"])
-		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit*1000) as num|null
-		if(newlimit)
-			accellimit = max(newlimit/1000, 0)
+		var/newlimit = input("Input new acceleration limit (0 ~ 10)", "Acceleration limit", accellimit * 1000) as num|null
+		if (!isnull(newlimit))
+			accellimit = round(Clamp(newlimit, 0, 10)) * 0.001
 
 	if (href_list["move"])
 		var/ndir = text2num(href_list["move"])
