@@ -1,4 +1,4 @@
-a
+
 /obj/item/weapon/gun/projectile/type51carbine
 	name = "Type-51 Carbine"
 	desc = "One of the few covenant weapons that utilise magazines."
