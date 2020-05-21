@@ -28,11 +28,14 @@
 /datum/game_mode/outer_colonies/reclamation/setup_objectives()
 	. = ..()
 
-/*	var/datum/objective/capture_innies/obj = locate() in GLOB.UNSC.all_objectives
-	obj.fake = 1*/
+	//in rev and rec, UNSC keep some objectives but they aren't tracked as the faction doesnt exist
+	//this is to prevent metagaming if the mode is secret
 
-	var/datum/objective/colony_capture/unsc/obj2 = locate() in GLOB.UNSC.all_objectives
-	obj2.fake = 1
+	var/list/fake_objective_types = list(\
+		/datum/objective/capture_innies,\
+		/datum/objective/overmap/unsc_innie_ship,\
+	)
 
-	var/datum/objective/overmap/unsc_innie_base/obj3 = locate() in GLOB.UNSC.all_objectives
-	obj3.fake = 1
+	for(var/datum/objective/obj in GLOB.UNSC.all_objectives)
+		if(fake_objective_types.Find(obj.type))
+			obj.fake = 1
