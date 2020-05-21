@@ -1,7 +1,13 @@
 
 /datum/map/geminus_city
 	allowed_jobs = list(\
-		/datum/job/insurrectionist_ai,\
+		/datum/job/unsc/marine,\
+		/datum/job/unsc/marine/specialist,\
+		/datum/job/unsc/marine/squad_leader,\
+		/datum/job/unsc/odst,\
+		/datum/job/unsc/odst/squad_leader,\
+		/datum/job/unsc/commanding_officer,\
+		/datum/job/unsc/executive_officer,\
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\

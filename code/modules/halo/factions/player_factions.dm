@@ -9,12 +9,18 @@
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
 	defender_mob_types = list(
 		/mob/living/simple_animal/hostile/covenant/grunt = 6,\
-		/mob/living/simple_animal/hostile/covenant/jackal/shield = 4,\
-		/mob/living/simple_animal/hostile/covenant/drone = 3,\
-		/mob/living/simple_animal/hostile/covenant/drone/ranged = 3,\
-		/mob/living/simple_animal/hostile/covenant/jackal = 2,\
-		/mob/living/simple_animal/hostile/covenant/elite = 2,\
-		/mob/living/simple_animal/hostile/covenant/elite/major = 1)
+		/mob/living/simple_animal/hostile/covenant/grunt/major = 5,\
+		/mob/living/simple_animal/hostile/covenant/grunt/ultra = 4,\
+		/mob/living/simple_animal/hostile/covenant/grunt/heavy = 1,\
+		/mob/living/simple_animal/hostile/covenant/jackal = 4,\
+		/mob/living/simple_animal/hostile/covenant/jackal/shield = 6,\
+		/mob/living/simple_animal/hostile/covenant/jackal/sniper = 4,\
+		/mob/living/simple_animal/hostile/covenant/drone = 4,\
+		/mob/living/simple_animal/hostile/covenant/drone/ranged = 5,\
+		/mob/living/simple_animal/hostile/covenant/elite = 4,\
+		/mob/living/simple_animal/hostile/covenant/elite/major = 3,\
+		/mob/living/simple_animal/hostile/covenant/elite/ultra = 2,\
+		/mob/living/simple_animal/hostile/covenant/elite/zealot = 1)
 	default_radio_channel = RADIO_COV
 
 /datum/faction/covenant/New()
@@ -125,7 +131,7 @@
 	/mob/living/simple_animal/hostile/flood/combat_form/oni = 3,\
 	/mob/living/simple_animal/hostile/flood/combat_form/minor = 3,\
 	/mob/living/simple_animal/hostile/flood/combat_form/minor2 = 3,\
-	/mob/living/simple_animal/hostile/flood/carrier = 2,\
+	/mob/living/simple_animal/hostile/flood/carrier = 8,\
 	/mob/living/simple_animal/hostile/flood/combat_form/major = 2,\
 	/mob/living/simple_animal/hostile/flood/combat_form/zealot = 2,\
 	/mob/living/simple_animal/hostile/flood/combat_form/ultra = 2,\

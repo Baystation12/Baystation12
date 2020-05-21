@@ -9,6 +9,7 @@
 	extended_round_description = "The Great Journey waits for no-one! Not even these filthy humans..."
 	assault_landmark_type = /obj/effect/landmark/assault_target/unsc
 	pilot_name = "Spirit Dropship Pilot"
+	sound_flyby = sound('code/modules/halo/sound/sprit_flyby.ogg', volume = 75)
 
 	wave_message = "The human vermin are coming! We shall be like the rock that the tides wash against!"
 	rest_message = "The humans have been destroyed for now. But they will return."

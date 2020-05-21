@@ -1,7 +1,7 @@
 
 /datum/game_mode/firefight
-	var/sound/sound_crash = sound('sound/effects/crash.ogg', volume = 50)
-	var/sound/sound_flyby = sound('sound/effects/start.ogg', volume = 50)
+	var/sound/sound_crash = sound('code/modules/halo/sound/crash.ogg', volume = 50)
+	var/sound/sound_flyby = sound('code/modules/halo/sound/start.ogg', volume = 50)
 	var/list/resupply_procs = list(/datum/game_mode/firefight/proc/spawn_resupply)
 
 	var/list/supply_obj_types = list(\

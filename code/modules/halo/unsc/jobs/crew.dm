@@ -7,9 +7,9 @@
 	"UNSC Ship Logistics" = /decl/hierarchy/outfit/job/unsc/logistics,
 	"UNSC Ship Technician" = /decl/hierarchy/outfit/job/unsc/technician,
 	"UNSC Ship Gunner" = /decl/hierarchy/outfit/job/unsc/gunner,
-	"UNSC Pelican Pilot" = /decl/hierarchy/outfit/job/unsc/pilot,
+	"UNSC Pilot" = /decl/hierarchy/outfit/job/unsc/pilot,
 	"UNSC Bridge Crew" = /decl/hierarchy/outfit/job/unsc/bridge,
-	"UNSC Ship Ops" = /decl/hierarchy/outfit/job/unsc/science,
+	"UNSC Ship Operations" = /decl/hierarchy/outfit/job/unsc/science,
 	"UNSC Ship Helmsman" = /decl/hierarchy/outfit/job/unsc/helm)
 
 /datum/job/unsc/medical

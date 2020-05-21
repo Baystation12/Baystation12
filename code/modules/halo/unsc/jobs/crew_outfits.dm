@@ -27,7 +27,7 @@
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e6)
 
 /decl/hierarchy/outfit/job/unsc/pilot
-	name = "UNSC Pelican Pilot"
+	name = "UNSC Pilot"
 	l_ear = /obj/item/device/radio/headset/unsc/pilot
 	uniform = /obj/item/clothing/under/unsc/newpilot
 	head = /obj/item/clothing/head/helmet/newpilot
