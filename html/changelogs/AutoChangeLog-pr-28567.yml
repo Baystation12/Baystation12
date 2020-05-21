@@ -1,0 +1,8 @@
+author: "Detritus-Ha"
+delete-after: True
+changes: 
+  - maptweak: "Replaced and moved several odd walls on Verne."
+  - maptweak: "Verne airlock now has windows and the interior access button is no longer covered by an airlock sign."
+  - maptweak: "Verne's fuel tank now has reinforced floor and spawns without gas."
+  - maptweak: "Added science goggles to Verne."
+  - maptweak: "Removed chemistry APC access requirement on Verne."
