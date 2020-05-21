@@ -9,15 +9,15 @@
 	target_faction_name = "UNSC"
 	objective_type = 0
 	win_points = 50
-/*
+
 /datum/objective/overmap/covenant_odp
 	short_text = "Destroy the human defence platform"
-	explanation_text = "We require safe access to the human worlds. Take out their defence platforms!"
+	explanation_text = "Destroy the human defence platform by boarding it and detonating the antimatter bomb."
 	target_faction_name = "UNSC"
 	objective_type = 0
 	overmap_type = 0
 	win_points = 50
-*/
+
 /datum/objective/overmap/covenant_ship
 	short_text = "Protect Covenant ship"
 	explanation_text = "Your ship is your only route back to Covenant space. Do not allow it to be destroyed."
@@ -98,6 +98,6 @@
 	short_text = "Capture the human colony"
 	explanation_text = "Holding the human colony will give us time to search it for artifacts."
 	radio_language = "Sangheili"
-	radio_name = "Ministry of Fervent Intercession"
+	radio_name = "Covenant Overwatch"
 
 #undef COLONY_GLASSED_AMOUNT_REQUIRED
