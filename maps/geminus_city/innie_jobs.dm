@@ -101,6 +101,7 @@
 /datum/job/insurrectionist_ai
 	title = "Insurrectionist AI"
 	spawn_faction = "Insurrection"
+	selection_color = "#800000"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/halo_ai_smart
