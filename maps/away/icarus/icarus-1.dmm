@@ -2562,7 +2562,9 @@
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
 "id" = (
-/obj/machinery/atmospherics/unary/engine,
+/obj/machinery/atmospherics/unary/engine{
+	dir = 1
+	},
 /turf/simulated/wall/r_wall,
 /area/icarus/open)
 "ie" = (
@@ -2613,7 +2615,8 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/engine{
-	anchored = 0
+	anchored = 0;
+	dir = 1
 	},
 /turf/unsimulated/beach/sand,
 /area/icarus/open)
