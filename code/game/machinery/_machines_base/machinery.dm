@@ -205,8 +205,8 @@ Class Procs:
 /obj/machinery/proc/is_broken(var/additional_flags = 0)
 	return (stat & (BROKEN|additional_flags))
 
-/obj/machinery/proc/is_unpowered(var/additional_flags = 0)
-	return (stat & (NOPOWER|additional_flags))
+/obj/machinery/proc/is_powered(var/additional_flags = 0)
+	return !(stat & (NOPOWER|additional_flags))
 
 /obj/machinery/proc/operable(var/additional_flags = 0)
 	return !inoperable(additional_flags)

@@ -134,6 +134,8 @@
 		s.set_up(3, 1, src)
 		s.start()
 		stored_energy *= 0.5
+		if (powernet)
+			powernet.apcs_overload(1, 5, 10)
 
 	//Power
 	last_circ1_gen = circ1.return_stored_energy()

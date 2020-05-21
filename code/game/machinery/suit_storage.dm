@@ -273,7 +273,7 @@
 		to_chat(user, SPAN_NOTICE("You push the button. The coloured LED next to it [safetieson ? "turns green" : "turns red"]."))
 
 /obj/machinery/suit_storage_unit/proc/toggle_open(var/mob/user)
-	if(is_unpowered())
+	if(!is_powered())
 		to_chat(user, SPAN_NOTICE("The unit is offline."))
 		return
 	if(islocked || isUV)
@@ -286,7 +286,7 @@
 	playsound(src, 'sound/machines/suitstorage_cycledoor.ogg', 50, 0)
 
 /obj/machinery/suit_storage_unit/proc/toggle_lock(var/mob/user)
-	if(is_unpowered())
+	if(!is_powered())
 		to_chat(user, SPAN_NOTICE("The unit is offline."))
 		return
 	if(!allowed(user))
@@ -303,7 +303,7 @@
 /obj/machinery/suit_storage_unit/proc/start_UV(var/mob/user)
 	if(isUV || isopen)
 		return
-	if(is_unpowered())
+	if(!is_powered())
 		to_chat(user, SPAN_NOTICE("The unit is offline."))
 		return
 	if(occupant && safetieson)

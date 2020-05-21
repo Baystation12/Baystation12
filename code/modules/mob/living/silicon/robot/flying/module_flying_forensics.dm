@@ -5,7 +5,8 @@
 	networks = list(NETWORK_SECURITY)
 	subsystems = list(
 		/datum/nano_module/crew_monitor,
-		/datum/nano_module/digitalwarrant
+		/datum/nano_module/digitalwarrant,
+		/datum/nano_module/records
 	)
 	sprites = list(
 		"Drone" = "drone-sec",
@@ -22,6 +23,7 @@
 		/obj/item/taperoll/police,
 		/obj/item/weapon/scalpel/laser1,
 		/obj/item/weapon/autopsy_scanner,
+		/obj/item/device/scanner/reagent,
 		/obj/item/weapon/reagent_containers/spray/luminol,
 		/obj/item/device/uv_light,
 		/obj/item/weapon/crowbar

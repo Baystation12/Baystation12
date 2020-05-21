@@ -156,6 +156,16 @@
 	desc = "A high-visibility vest used in work zones. This one is green!"
 	icon_state = "hazard_g"
 
+
+/obj/item/clothing/suit/storage/toggle/highvis
+	name = "high visibility jacket"
+	desc = "A loose-fitting, high visibility jacket to help crew be recognizable in high traffic areas with large industrial equipment. Don't catch the Charon's landing gear with your teeth!"
+	icon_state = "highvis_open"
+	icon_open = "highvis_open"
+	icon_closed = "highvis"
+	blood_overlay_type = "coat"
+	body_parts_covered = UPPER_TORSO|ARMS
+
 //Lawyer
 /obj/item/clothing/suit/storage/toggle/suit
 	name = "suit jacket"

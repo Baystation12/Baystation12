@@ -1,4 +1,0 @@
-author: "WezYo"
-delete-after: True
-changes: 
-  - bugfix: "Fixed the windoor opening animation sometimes flickering"
