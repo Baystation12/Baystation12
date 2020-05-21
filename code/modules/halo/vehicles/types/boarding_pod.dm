@@ -7,7 +7,7 @@
 	launch_arm_time = 5 SECONDS
 	drop_accuracy = 5
 	occupants = list(8,0)
-	pod_range = 8
+	pod_range = 14
 
 	light_color = "#E1FDFF"
 
@@ -44,6 +44,12 @@
 	for(var/mob/living/m in GLOB.player_list)
 		if(m.z in om_obj.map_z)
 			to_chat(m,"<span class = 'danger'>EXTERNAL INCURSION WARNING: BOARDING POD COLLISION DETECTED. LOCATION: [drop_turf.loc.name]</span>")
+
+/obj/vehicles/drop_pod/overmap/boarding_pod/get_overmap_targets()
+	var/list/potential_om_targ = list()
+	for(var/obj/effect/overmap/ship/o in (range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"]))
+		potential_om_targ["[o.name]"] = o
+	return potential_om_targ
 
 /obj/vehicles/drop_pod/overmap/boarding_pod
 	name = "Class-3 Armoured Boarding Pod"
