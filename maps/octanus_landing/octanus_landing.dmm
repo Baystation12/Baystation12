@@ -30,7 +30,7 @@
 "D" = (/obj/structure/grav_elevator_external,/obj/effect/landmark/start/joinlate,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 "E" = (/obj/structure/energybarricade{dir = 4},/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 "F" = (/obj/structure/energybarricade,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
-"G" = (/obj/item/stack/cable_coil,/turf/unsimulated/floor/grass,/area/planet/daynight/miner_base)
+"G" = (/obj/item/stack/cable_coil,/obj/item/device/binoculars,/turf/unsimulated/floor/grass,/area/planet/daynight/miner_base)
 "H" = (/obj/structure/barricade,/turf/unsimulated/floor/grass,/area/planet/daynight/miner_base)
 "I" = (/obj/item/stack/material/wood,/turf/unsimulated/floor/grass,/area/planet/daynight/miner_base)
 "J" = (/obj/effect/gibspawner,/turf/unsimulated/floor/grass,/area/planet/daynight/miner_base)
@@ -49,7 +49,7 @@
 "W" = (/obj/item/weapon/gun/energy/plasmapistol,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 "X" = (/obj/structure/closet/crate/random/covenant/medical,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 "Y" = (/obj/structure/closet/crate/random/covenant/construction,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
-"Z" = (/obj/structure/bed/roller/covenant,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
+"Z" = (/obj/structure/bed/roller/covenant,/obj/item/device/binoculars,/turf/unsimulated/floor/grass,/area/planet/daynight/covenant_landing)
 
 (1,1,1) = {"
 gjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
