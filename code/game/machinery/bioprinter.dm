@@ -213,8 +213,6 @@
 	var/new_organ
 	if(loaded_species.has_organ[choice])
 		new_organ = loaded_species.has_organ[choice]
-	else if(loaded_species.has_limbs[choice])
-		new_organ = loaded_species.has_limbs[choice]["path"]
 	if(new_organ)
 		O = new new_organ(get_turf(src), loaded_dna_datum)
 		O.status |= ORGAN_CUT_AWAY
@@ -278,8 +276,6 @@
 	var/list/organs = list()
 	for(var/organ in loaded_species.has_organ)
 		organs += loaded_species.has_organ[organ]
-	for(var/organ in loaded_species.has_limbs)
-		organs += loaded_species.has_limbs[organ]["path"]
 	for(var/organ in organs)
 		var/obj/item/organ/O = organ
 		if(check_printable(organ))
