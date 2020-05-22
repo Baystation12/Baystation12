@@ -66,12 +66,12 @@ GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 	var/comms_language = "Galactic Common"
 	var/next_comms_at = 0
 
-/datum/npc_overmind/proc/create_comms_message(var/message,var/override = 0)
+/datum/npc_overmind/proc/create_comms_message(var/message,var/override = 0, var/mob/living/source_mob)
 	if(isnull(comms_channel))
 		return
 	if(!override && world.time < next_comms_at)
 		return
-	GLOB.global_announcer.autosay(message, overmind_name, comms_channel, comms_language)
+	GLOB.global_announcer.autosay(message, source_mob ? source_mob.name : overmind_name, comms_channel, comms_language)
 	next_comms_at = world.time + RADIO_COMMS_DELAY
 
 /datum/npc_overmind/proc/create_report(var/report_type,var/mob/reporter,var/target_num = null,var/report_targ = null,var/reporter_assault_point = null,var/reporter_loc)
@@ -172,7 +172,7 @@ GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 			return
 		else
 			var/obj/taskpoint = create_taskpoint(report.reporter_mob.target_mob.loc)
-			create_comms_message("Hostile Contact at [taskpoint.loc.loc]. Engaging.")
+			create_comms_message("Hostile Contact at [taskpoint.loc.loc]. Engaging.", 0, report.reporter_mob)
 			create_taskpoint_assign(report.reporter_mob,taskpoint,"combat",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE))
 
 /datum/npc_overmind/proc/process_casualty_report(var/datum/npc_report/report)
@@ -191,7 +191,7 @@ GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 		squad_assigned.Cut()
 		return
 	var/obj/reporter_taskpoint = create_taskpoint(report.reporter_loc)
-	create_comms_message("Taking casualties at [reporter_taskpoint.loc.loc].")
+	create_comms_message("Taking casualties at [reporter_taskpoint.loc.loc].", 0, report.reporter_mob)
 	create_taskpoint_assign(pick(valid_squadmembers),reporter_taskpoint,"reinforcement",max(1,report.targets_reported/SINGLESQUAD_MAXTARGET_HANDLE),form_squad_searchrange*3)
 	update_taskpoint_timeout(report.reporter_assault_point)
 	update_taskpoint_timeout(reporter_taskpoint)
