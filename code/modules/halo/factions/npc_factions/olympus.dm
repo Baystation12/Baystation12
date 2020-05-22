@@ -1,7 +1,7 @@
 
 /datum/faction/npc/olympus_council
 	name = "Olympus Council"
-	enemy_factions = list("UNSC","ONI")
+	enemy_faction_names = list("UNSC","ONI")
 	blurb = "Not much is known about the Olympus Council from the outside. Most people will have never heard of them, and the \
 		majority that have some knowledge of what the council is, will assume they are the collective 15 owners of Adept Robotics. \
 		While this is technically true, they are not just the creators of AI ran machines and human piloted drones. Beneath \

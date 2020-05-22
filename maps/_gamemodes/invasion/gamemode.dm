@@ -186,7 +186,7 @@
 
 					if(new_fleet.leader_ship == ship)
 						var/list/targets = list()
-						for(var/enemy in F.enemy_factions)
+						for(var/enemy in F.enemy_faction_names)
 							var/datum/faction/f_enemy = GLOB.factions_by_name[enemy]
 							if(f_enemy && f_enemy in factions)
 								targets += f_enemy.npc_ships
