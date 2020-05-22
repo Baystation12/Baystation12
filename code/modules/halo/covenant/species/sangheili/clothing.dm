@@ -228,7 +228,7 @@
 /obj/item/clothing/shoes/sangheili/major
 	name = "Sanghelli Leg Armour (Major)"
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon_state = "major_legs"
+	icon_state = "major_legs_obj"
 	item_state = "major_legs"
 
 /obj/item/clothing/gloves/thick/sangheili/major
