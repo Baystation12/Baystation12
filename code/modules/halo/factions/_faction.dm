@@ -43,6 +43,7 @@
 	var/quest_interval_max = 5 MINUTES
 	var/gear_supply_type
 	var/default_radio_channel = RADIO_HUMAN
+	var/default_language = LANGUAGE_GALCOM
 
 	var/list/listening_programs = list()
 

@@ -6,6 +6,7 @@
 	var/list/objective_types = list()
 	enemy_factions = list("UNSC","Insurrection", "Human Colony","Flood")
 	commander_titles = list("Sangheili Shipmaster")
+	default_language = LANGUAGE_SANGHEILI
 	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
 	defender_mob_types = list(
 		/mob/living/simple_animal/hostile/covenant/grunt = 6,\
