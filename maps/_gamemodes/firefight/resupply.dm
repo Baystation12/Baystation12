@@ -87,11 +87,10 @@
 /datum/game_mode/firefight/proc/spawn_ship_debris(var/turf/epicentre)
 	. = "A clump of debris from your ship has crashed down to the %DIRTEXT%. See if you can salvage it for resources."
 
-	var/max_dist = 10
-	for(var/turf/spawn_turf in range(max_dist, epicentre))
+	for(var/turf/spawn_turf in range(SUPPLY_SPREAD_RADIUS, epicentre))
 		//closer to the center has more goodies
 		var/cur_dist = get_dist(epicentre, spawn_turf)
-		var/spawn_chance = 100 * ((max_dist - cur_dist) / max_dist)
+		var/spawn_chance = 100 * ((SUPPLY_SPREAD_RADIUS - cur_dist) / SUPPLY_SPREAD_RADIUS)
 		spawn_chance = Clamp(spawn_chance, 0, 100)
 		if(prob(spawn_chance))
 			//low chance to spawn a useful supply crate
@@ -109,8 +108,6 @@
 	//play a cool sound to everyone
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_crash)
-
-#define DROP_OFFSET 3
 
 /datum/game_mode/firefight/proc/spawn_resupply(var/turf/epicentre)
 	. = "Supply run completed, I've dropped off my cargo to the %DIRTEXT%. \
@@ -143,8 +140,8 @@
 		if(!spawn_turf)
 			//pick a random turf nearby
 			spawn_turf = locate(\
-				epicentre.x - DROP_OFFSET + rand(0,DROP_OFFSET*2),\
-				epicentre.y - DROP_OFFSET + rand(0,DROP_OFFSET*2),\
+				epicentre.x - SUPPLY_SPREAD_RADIUS + rand(0,SUPPLY_SPREAD_RADIUS*2),\
+				epicentre.y - SUPPLY_SPREAD_RADIUS + rand(0,SUPPLY_SPREAD_RADIUS*2),\
 				epicentre.z)
 
 		//make sure we dont double up turfs
@@ -183,5 +180,3 @@
 	//play a cool sound to everyone
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_flyby)
-
-#undef DROP_OFFSET
