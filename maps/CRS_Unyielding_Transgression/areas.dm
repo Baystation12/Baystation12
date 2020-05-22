@@ -50,11 +50,11 @@
 
 /area/covenant_light_cruiser/porthangar
 	name = "CRS Unyielding Transgression Port Hangar Bay"
-	icon_state = "shuttle"
+	icon_state = "shuttlered2"
 
 /area/covenant_light_cruiser/starboardhangar
 	name = "CRS Unyielding Transgression Starboard Hangar Bay"
-	icon_state = "shuttle"
+	icon_state = "shuttlered"
 
 /area/covenant_light_cruiser/Rearhallway
 	name = "CRS Unyielding Transgression Central Rear Hallway"
@@ -70,11 +70,11 @@
 
 /area/covenant_light_cruiser/dockingumbilicalport
 	name = "CRS Unyielding Transgression Docking Umbilical Port"
-	icon_state = "shuttlegrn"
+	icon_state = "LP"
 
 /area/covenant_light_cruiser/dockingumbilicalstarboard
 	name = "CRS Unyielding Transgression Docking Umbilical Starboard"
-	icon_state = "shuttlered"
+	icon_state = "LPS"
 
 /area/covenant_light_cruiser/portsidestorage
 	name = "CRS Unyielding Transgression Portside Storage"
@@ -90,7 +90,7 @@
 
 /area/covenant_light_cruiser/portgarage
 	name = "CRS Unyielding Transgression Port Vehicle Garage"
-	icon_state = "shuttle3"
+	icon_state = "shuttle2"
 
 /area/covenant_light_cruiser/starboardgarage
 	name = "CRS Unyielding Transgression Starboard Vehicle Garage"
@@ -124,13 +124,17 @@
 	name = "CRS Unyielding Transgression Starboard Engine"
 	icon_state = "engine_starboard"
 
-/area/covenant_light_cruiser/starboardhangar
-	name = "CRS Unyielding Transgression Starboard Hangar Bay"
-	icon_state = "shuttle"
+/area/covenant_light_cruiser/supplypods
+	name = "CRS Unyielding Transgression Supply Pod Bay"
+	icon_state = "thunder"
 
-/area/covenant_light_cruiser/droppods
-	name = "CRS Unyielding Transgression Drop Pod Bay"
-	icon_state = "shuttle"
+/area/covenant_light_cruiser/droppods_port
+	name = "CRS Unyielding Transgression Port Drop Pod Bay"
+	icon_state = "shuttlegrn2"
+
+/area/covenant_light_cruiser/droppods_sb
+	name = "CRS Unyielding Transgression Starboard Drop Pod Bay"
+	icon_state = "shuttlegrn2"
 
 /area/covenant_light_cruiser/boardcraft
 	name = "CRS Unyielding Transgression Boarding Craft Bay"
