@@ -8,6 +8,7 @@
 	end_conditions_required = 2
 	factions = list(/datum/faction/unsc, /datum/faction/covenant,/datum/faction/human_civ)
 	overmap_hide = list(/obj/effect/overmap/sector/exo_listen)
+	overmap_hide = list(/obj/effect/overmap/ship/urf_flagship)
 	disabled_jobs_types = list(\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
