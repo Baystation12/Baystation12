@@ -25,7 +25,7 @@
 
 /obj/machinery/r_n_d/server/Destroy()
 	griefProtection()
-	..()
+	. = ..()
 
 /obj/machinery/r_n_d/server/RefreshParts()
 	var/tot_rating = 0

@@ -1,7 +1,7 @@
 
 /datum/faction/npc/gao_republic
 	name = "Reublic of Gao"
-	enemy_factions = list("UNSC","ONI")
+	enemy_faction_names = list("UNSC","ONI")
 	blurb = "While Gao is an incredibly bio diverse place, with plenty of unique creatures, such as great apes and snails with no \
 	shells, a functioning government is still operational, and democracy is still maintained, ran by a Cabinet of Ministers and an \
 	elected president. One would consider this to be the perfect UEG world, but this isn't quite the case. The Gao Charter declares \

@@ -1,7 +1,7 @@
 
 /datum/faction/npc/khoros_desert_raiders
 	name = "Khoros Desert Raiders"
-	enemy_factions = list("UNSC","ONI")
+	enemy_faction_names = list("UNSC","ONI")
 	gear_supply_type = /decl/hierarchy/supply_pack/khoros
 	blurb = "Deserts are a vast and empty place. The rich don't understand the appeals of living in a place so lifeless, \
 		and the poor fear a land so hospitable, cruel and indifferent. Many are lost in deserts, forgotten to the vast \

@@ -39,6 +39,13 @@
 	win_points = 100
 
 /datum/objective/overmap/innie_base
+	short_text = "Protect Base"
+	explanation_text = "Protect your hidden base. From there you can launch the campaign to take over Geminus and beyond!"
+	target_faction_name = "Insurrection"
+	overmap_type = 0
+	lose_points = 100
+
+/datum/objective/overmap/innie_ship
 	short_text = "Protect Flagship"
 	explanation_text = "Protect your flagship. From there you can launch the campaign to take over Geminus and beyond!"
 	target_faction_name = "Insurrection"
@@ -63,3 +70,17 @@
 /datum/objective/assassinate/leader/innies_unsc
 	explanation_text = "Assassinate the leader of the UNSC"
 	target_faction_name = "UNSC"
+
+/datum/objective/overmap/innie_odp
+	short_text = "Destroy the UNSC defence platform"
+	explanation_text = "The orbital defence platform is a symbol of UNSC dominance in orbit. Bring it down"
+	target_faction_name = "UNSC"
+	objective_type = 0
+	overmap_type = 0
+	win_points = 50
+
+/datum/objective/overmap/innie_ship
+	short_text = "Protect URF ship"
+	explanation_text = "Our ship lets us strike from space where the UNSC least expects it. Do not let it get destroyed!"
+	target_faction_name = "Insurrection"
+	lose_points = 150

@@ -2,7 +2,7 @@
 /obj/payload
 	name = "Nuclear Warhead Payload"
 	desc = "The word 'UNSC' is scratched out, replaced with a spraypainted image of a skull"
-	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon = 'code/modules/halo/misc/payload.dmi'
 	icon_state = "MFDD"
 	anchored = 0
 	density = 1
@@ -16,10 +16,10 @@
 	var/mob/living/u = null
 	var/disarming
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
-	var/activeoverlay = "MFDD Armed Screen"
+	var/activeoverlay = "MFDD_active"
 	var/strength=1 //The size of the explosion
 	var/free_explode = 0
-	var/list/blocked_species = COVENANT_SPECIES_AND_MOBS
+	var/list/blocked_species = list()//COVENANT_SPECIES_AND_MOBS
 
 /obj/payload/attack_hand(var/mob/living/carbon/human/user)
 	if(!exploding)
@@ -27,11 +27,12 @@
 			to_chat(user,"<span class='warning'>Your species does not know how to use that!</span>")
 		if(!checkturf())
 			src.visible_message("<span class='danger'>The [src] beeps a warning:'OPTIMAL LOCATION NOT REACHED'</span>")
-		else
+		else if(alert("Once activated, [src] cannot be moved. Are you sure you want to proceed?",\
+				"Are you sure you want to proceed?","Continue","Get me out of here!") == "Continue")
 			if(do_after(user,arm_time SECONDS,src,1,1,,1))
 				u = user
 				u.visible_message("<span class = 'userdanger'>[user.name] primes the [src] for detonation</span>","<span class ='notice'>You prime the [src] for detonation</span>")
-				admin_attack_log("([user.name]) primed a nuke/anti-matter charge.")
+				log_and_message_admins(" primed a nuke/anti-matter charge.",user)
 				explode_at = world.time + seconds_to_explode SECONDS
 				exploding = 1
 				GLOB.processing_objects += src
@@ -119,15 +120,14 @@
 /obj/payload/covenant
 	name = "Antimatter Bomb"
 	desc = "Menacing spikes jut out from this device's frame."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
 	icon_state ="Antimatter"
-	activeoverlay = null
+	activeoverlay = "am_active"
 	explodedesc = "Spikes conceal a countdown timer."
 	seconds_to_explode = 300
 	seconds_to_disarm = 60
 	strength=1.5
 	explodetype = /datum/explosion
-	blocked_species = list(/datum/species/human)
+	blocked_species = list()
 
 /obj/item/weapon/pinpointer/advpinpointer/bombplantlocator
 	name = "Optimal Ordinance Yield Locator"

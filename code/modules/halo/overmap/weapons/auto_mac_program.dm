@@ -1,5 +1,5 @@
 
-datum/computer_file/program/auto_mac
+/datum/computer_file/program/auto_mac
 	filename = "mac_control_automated"
 	filedesc = "MAC Automated Fire Control"
 	program_icon_state = "forensic"
@@ -39,6 +39,10 @@ datum/computer_file/program/auto_mac
 
 		//play audio feedback
 		play_fire_sound(host)
+
+		//set a timer on the manual fire control
+		var/obj/machinery/overmap_weapon_console/mac/M = locate() in range(7, host)
+		M.next_fire_at = world.time + M.fire_delay
 
 /datum/nano_module/auto_mac/proc/play_fire_sound(var/atom/loc_sound_origin)
 	playsound(loc_sound_origin, fire_sound, 50, 1, 5, 5,1)

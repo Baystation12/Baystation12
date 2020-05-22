@@ -46,6 +46,10 @@
 	capacity_flag = ITEM_SIZE_VEHICLE
 	vehicle_carry_size = ITEM_SIZE_VEHICLE_LARGE
 
+/obj/vehicles/drop_pod/supply_pod
+	icon = 'code/modules/halo/vehicles/supply_unsc.dmi'
+	icon_state = "UNSC_Supply"
+
 /obj/vehicles/drop_pod/supply_pod/update_object_sprites()
 	return
 

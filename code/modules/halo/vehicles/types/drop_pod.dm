@@ -30,7 +30,8 @@
 
 	var/launch_arm_time = 2.5 SECONDS
 
-	var/pod_range = 8 //Range of pod in overmap tiles
+	var/pod_range = 7 //Range of pod in overmap tiles
+	var/obj/effect/overmap/om_targ
 
 /obj/vehicles/drop_pod/on_death()
 	return
@@ -159,17 +160,15 @@
 		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>")
 		return
 
-	var/list/potential_om_targ = list()
-	for(var/obj/effect/overmap/o in (range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"]))
-		potential_om_targ["[o.name]"] = o
+	var/list/potential_om_targ = get_overmap_targets()
 	if(isnull(potential_om_targ) || potential_om_targ.len == 0)
 		to_chat(usr,"<span class = 'notice'>No valid overmap targets in range.</span>")
 		return
-	var/om_user_choice = input("Select Target Object","Target Object Selection","Cancel") in potential_om_targ + list("Cancel")
-	if(om_user_choice == "Cancel")
+	var/om_user_choice = input("Select Target Object","Target Object Selection","Cancel") as null|anything in potential_om_targ
+	if(!om_user_choice || om_user_choice == "Cancel")
 		to_chat(usr,"<span class = 'notice'>Launch target selection cancelled</span>")
 		return
-	var/obj/effect/overmap/om_targ = potential_om_targ[om_user_choice]
+	om_targ = potential_om_targ[om_user_choice]
 
 	var/turf/drop_turf = get_drop_turf(get_drop_point(om_targ.map_z))
 	if(isnull(drop_turf))
@@ -177,6 +176,12 @@
 		return
 
 	proc_launch_pod(usr,drop_turf)
+
+/obj/vehicles/drop_pod/overmap/proc/get_overmap_targets()
+	var/list/potential_om_targ = list()
+	for(var/obj/effect/overmap/sector/o in (range(pod_range,map_sectors["[z]"]) - map_sectors["[z]"]))
+		potential_om_targ["[o.name]"] = o
+	return potential_om_targ
 
 /obj/vehicles/drop_pod/overmap/get_drop_point(var/list/om_targ_zs)
 	var/list/valid_points = list()
