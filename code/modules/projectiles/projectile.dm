@@ -185,7 +185,7 @@
 		return
 
 	//roll to-hit
-	miss_modifier = max(15*(distance-2) - round(15*accuracy) + miss_modifier, 0)
+	miss_modifier = max(PROJECTILE_MISS_CHANCE_PERTILE*(distance-PROJECTILE_MISS_CHANCE_DIST_REDUCTION) - round(PROJECTILE_MISS_CHANCE_PERTILE*accuracy) + miss_modifier, 0)
 	var/hit_zone = get_zone_with_miss_chance(def_zone, target_mob, miss_modifier, ranged_attack=(distance > 1 || original != target_mob)) //if the projectile hits a target we weren't originally aiming at then retain the chance to miss
 
 	var/result = PROJECTILE_FORCE_MISS

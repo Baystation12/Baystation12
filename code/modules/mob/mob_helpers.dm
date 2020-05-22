@@ -84,16 +84,16 @@ proc/getsensorlevel(A)
 //The base miss chance for the different defence zones
 var/list/global/base_miss_chance = list(
 	BP_HEAD = 70,
-	BP_CHEST = 20,
-	BP_GROIN = 30,
-	BP_L_LEG = 55,
-	BP_R_LEG = 55,
-	BP_L_ARM = 60,
-	BP_R_ARM = 60,
-	BP_L_HAND = 80,
-	BP_R_HAND = 80,
-	BP_L_FOOT = 80,
-	BP_R_FOOT = 80,
+	BP_CHEST = 10,
+	BP_GROIN = 20,
+	BP_L_LEG = 65,
+	BP_R_LEG = 65,
+	BP_L_ARM = 50,
+	BP_R_ARM = 50,
+	BP_L_HAND = 55,
+	BP_R_HAND = 55,
+	BP_L_FOOT = 70,
+	BP_R_FOOT = 70,
 )
 
 //Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
@@ -155,8 +155,8 @@ var/list/global/organ_rel_size = list(
 	zone = check_zone(zone)
 
 	if(!ranged_attack)
-		// you cannot miss if your target is prone or restrained
-		if(target.buckled || target.lying)
+		// you cannot miss if your target is restrained
+		if(target.buckled)
 			return zone
 		// if your target is being grabbed aggressively by someone you cannot miss either
 		for(var/obj/item/grab/G in target.grabbed_by)
