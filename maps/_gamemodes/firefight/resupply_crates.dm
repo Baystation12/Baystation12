@@ -132,7 +132,7 @@
 		/obj/item/device/flashlight/flare,\
 		/obj/item/device/flashlight,\
 		/obj/item/weapon/cell/high,\
-		/obj/item/weapon/melee/baton/humbler)
+		/obj/item/device/binoculars)
 
 /obj/structure/closet/crate/random/unsc_misc/WillContain()
 	return list(\

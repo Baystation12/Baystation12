@@ -110,6 +110,7 @@
 		/obj/item/weapon/cell/covenant,\
 		/obj/item/clothing/head/welding/covenant,\
 		/obj/item/device/flashlight/covenant,\
+		/obj/item/device/binoculars,\
 		/obj/item/stack/material/nanolaminate/fifty)
 
 /obj/structure/closet/crate/random/covenant/construction/WillContain()
