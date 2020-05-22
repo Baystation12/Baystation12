@@ -13,4 +13,8 @@
 /datum/job/covenant/lesser_prophet/equip()
 	.=..()
 	var/datum/job/to_modify = job_master.occupations_by_type[/datum/job/covenant/sangheili_honour_guard]
-	to_modify.total_positions = 2
+	if(to_modify)
+		to_modify.total_positions = 2
+	else
+		message_admins("Warning, a [src]|[src.type] has joined the game \
+			but the job code was unable to add 2 Sangheili Honour Guards")
