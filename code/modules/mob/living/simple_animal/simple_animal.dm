@@ -253,7 +253,7 @@
 	custom_emote(2, act_desc)
 
 /mob/living/simple_animal/proc/do_pain_scream()
-	if(health <= 0)
+	if(stat == DEAD || health == 0)
 		return
 	if(world.time < next_scream_at)
 		return
