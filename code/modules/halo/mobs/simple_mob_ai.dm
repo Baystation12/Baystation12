@@ -63,7 +63,8 @@ also using astar would have a performance impact due to eg hordes
 */
 
 /mob/living/simple_animal/hostile/proc/set_assault_target(var/obj/effect/landmark/assault_target/new_assault_target)
-	last_assault_target = assault_target
+	if(assault_target)
+		last_assault_target = assault_target
 	assault_target = new_assault_target
 	walk(src, 0)
 
@@ -135,7 +136,8 @@ also using astar would have a performance impact due to eg hordes
 			var/list/zlevel_targets  = possible_targets["[src.z]"]
 			if(zlevel_targets)
 				if(zlevel_targets.len > 1)
-					var/obj/effect/landmark/assault_target/A = pick(zlevel_targets - last_assault_target)
+					var/obj/effect/landmark/assault_target/A = pick(\
+						zlevel_targets.len > 1 ? zlevel_targets - last_assault_target : zlevel_targets)
 					set_assault_target(A)
 				else if(zlevel_targets.len == 1)
 					set_assault_target(zlevel_targets[1])
