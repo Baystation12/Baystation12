@@ -20,7 +20,7 @@ cloak disrupt override
 	var/shield_check = check_shields(P.damage, P, null, def_zone, "the [P.name]")
 	if(shield_check)
 		if(shield_check < 0)
-			return shield_check
+			return PROJECTILE_ABSORB
 		else
 			P.on_hit(src, 100, def_zone)
 			return 100

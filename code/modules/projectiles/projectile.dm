@@ -134,8 +134,8 @@
 		return 1
 
 	if(targloc == curloc) //Shooting something in the same turf
-		target.bullet_act(src, target_zone)
-		on_impact(target)
+		if(target.bullet_act(src, target_zone) > 0)
+			on_impact(target)
 		qdel(src)
 		return 0
 
@@ -195,8 +195,11 @@
 
 	if(result == PROJECTILE_FORCE_MISS)
 		if(!silenced)
-			target_mob.visible_message("<span class='notice'>\The [src] misses [target_mob] narrowly!</span>")
+			to_chat(target_mob,"<span class='notice'>\The [src] misses you narrowly!</span>")
 		return 0
+
+	if(result == PROJECTILE_ABSORB)
+		return 1
 
 	//hit messages
 	if(isnull(target_mob))
