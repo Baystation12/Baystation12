@@ -48,6 +48,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	wander = 1
 	melee_damage_lower = 5
 	melee_damage_upper = 10
+	break_stuff_probability = 50
 	min_gas = list()
 	max_gas = list()
 	var/datum/flood_spawner/flood_spawner
@@ -301,6 +302,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 	maxHealth = 10
 	melee_damage_lower = 5
 	melee_damage_upper = 15
+	break_stuff_probability = 10
 
 /mob/living/simple_animal/hostile/flood/carrier/AttackingTarget()
 	if(!Adjacent(target_mob))

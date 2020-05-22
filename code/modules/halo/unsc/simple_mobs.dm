@@ -4,8 +4,10 @@
 	faction = "UNSC"
 	health = 100
 	maxHealth = 100
+	break_stuff_probability = 50
 	icon = 'code/modules/halo/unsc/simple_mobs.dmi'
 	combat_tier = 1
+	assault_target_type = /obj/effect/landmark/assault_target/unsc
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum/npc)
 	var/obj/item/device/flashlight/held_light
 	species_name = "Human"
