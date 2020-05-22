@@ -1,5 +1,10 @@
 /mob/living/carbon/human/get_acrobatics_multiplier(var/decl/maneuver/attempting_maneuver)
 	. = 0.5 + ((get_skill_value(SKILL_HAULING) - SKILL_MIN)/(SKILL_MAX - SKILL_MIN))
+	//Perhaps one day this should grab logic from organs directly
+	var/obj/item/organ/internal/augment/boost/muscle/aug = internal_organs_by_name[BP_AUGMENT_R_LEG]
+	if(istype(aug))
+		. += aug.get_acrobatics_modifier()
+
 	if(skill_check(SKILL_HAULING, SKILL_BASIC))
 		. = max(..(), .)
 
