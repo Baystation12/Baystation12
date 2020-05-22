@@ -8,20 +8,20 @@
 	fire_sound = 'code/modules/halo/sounds/plasrifle1shot.ogg'
 	charge_meter = 1
 	max_shots = 240
-	burst = 4
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
 	screen_shake = 0
 	is_heavy = 1
 
 	//MA5 Counterpart. One less in burst, with overheat tracking, with an accuracy boon.
 	fire_delay = 6
+	burst = 4
 	burst_delay = 1.8
 	dispersion = list(0.2,0.3,0.5,0.73)
 	accuracy = 1
 	one_hand_penalty = 3
 
-	overheat_capacity = 32 //8 clicks, close to 1/2ths the mag size of an ma5
-	overheat_fullclear_delay = 25
+	overheat_capacity = 24 //6 clicks/bursts
+	overheat_fullclear_delay = 30
 	overheat_sfx = 'code/modules/halo/sounds/plasrifle_overheat.ogg'
 
 	item_icons = list(

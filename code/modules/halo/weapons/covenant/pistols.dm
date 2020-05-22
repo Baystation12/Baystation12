@@ -18,8 +18,8 @@
 	irradiate_non_cov = 10
 	var/overcharge_cost = 1
 
-	overheat_capacity = 20 //Higher than the mag size of a magnum by 8, but you can reload a magnum faster.
-	overheat_fullclear_delay = 20
+	overheat_capacity = 12
+	overheat_fullclear_delay = 25
 	overheat_sfx = 'code/modules/halo/sounds/plaspistol_overheat.ogg'
 
 	item_state = "plasmapistol"

@@ -69,8 +69,8 @@
 	scoped_accuracy = 7
 	advanced_covenant = 1
 	overheat_sfx = 'code/modules/halo/sounds/beam_rifle_overheat.ogg'
-	overheat_capacity = 3 //1 less than srs' mag. overheats on third click.
-	overheat_fullclear_delay = 30
+	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
+	overheat_fullclear_delay = 40
 
 	var/next_allowed_fire
 
