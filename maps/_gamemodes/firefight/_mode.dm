@@ -95,4 +95,4 @@
 			special_job_titles -= chosen_title
 
 /datum/game_mode/firefight/get_respawn_time()
-	return 1 MINUTE
+	return 1
