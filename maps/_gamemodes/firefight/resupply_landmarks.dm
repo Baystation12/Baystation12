@@ -33,7 +33,7 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 		for(var/cury = 5, cury < world.maxy - 5, cury += resup_dist)
 			var/turf/T = locate(curx, cury, 1)
 			//if there is a scavenge_spawn_skip landmark, skip this spot (place one eg near the player base)
-			var/obj/effect/landmark/resupply_skip/N = locate() in range(resup_dist, T)
+			var/obj/effect/landmark/resupply_skip/N = locate() in range(10, T)
 			if(N)
 				continue
 			new /obj/effect/landmark/resupply(T)
