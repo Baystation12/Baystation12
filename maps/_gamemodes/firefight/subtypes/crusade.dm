@@ -41,9 +41,3 @@
 			/mob/living/simple_animal/hostile/unsc/spartan_two = 1,\
 			)\
 		)
-
-/datum/game_mode/firefight/crusade/pre_setup()
-	. = ..()
-
-	//human radio channel
-	overmind.comms_channel = RADIO_SQUAD
