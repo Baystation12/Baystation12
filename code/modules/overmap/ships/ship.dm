@@ -54,6 +54,16 @@
 	my_pixel_transform.max_pixel_speed = ship_max_speed
 	my_pixel_transform.my_observers = my_observers
 
+/obj/effect/overmap/ship/LateInitialize()
+	. = ..()
+	if(my_faction)
+		my_faction.all_ships.Add(src)
+
+/obj/effect/overmap/ship/Destroy()
+	if(my_faction)
+		my_faction.all_ships.Remove(src)
+	. = ..()
+
 /obj/effect/overmap/ship/proc/assign_fleet(var/assign)
 	if(our_fleet == assign)
 		return

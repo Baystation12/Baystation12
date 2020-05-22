@@ -20,9 +20,9 @@
 	if(mapname == "Cancel")
 		return
 
-	var/secret = alert("Keep map name a secret until after restart?","Secret Map","Yes","No")
+	var/reveal = alert("Announce map name now?","Announce map name","Yes","No")
 
-	to_world("<span class='danger'>>World restarting to [secret == "Yes" ? "a secret" : "\'[mapname]\'"] map due to admin mapswitch...</span>")
+	to_world("<span class='danger'>>World restarting to [reveal == "Yes" ? "\'[mapname]\'" : "a secret"] map due to admin mapswitch...</span>")
 	log_game("Rebooting due to admin map switch ([usr.ckey])")
 	feedback_set_details("end_error","admin map switch ([usr.ckey])")
 

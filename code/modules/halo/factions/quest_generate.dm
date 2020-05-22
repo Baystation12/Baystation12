@@ -8,7 +8,7 @@
 	. = new_quest
 
 	//quest details
-	new_quest.enemy_faction = pick(enemy_factions + GLOB.criminal_factions_by_name)
+	new_quest.enemy_faction = pick(enemy_faction_names + GLOB.criminal_factions_by_name)
 	new_quest.location_name = "\
 		[pick(GLOB.station_departments)] \
 		[pick(GLOB.station_suffixes)] \

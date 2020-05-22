@@ -163,7 +163,7 @@
 	var/list/sectors_onmap = list()
 	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
 		var/obj/effect/overmap/om_obj = locate(type)
-		if(om_obj && !isnull(om_obj.loc) && om_obj.base && my_faction && !(om_obj.get_faction() in my_faction.enemy_factions)) //Only even try going if it's a "base" object
+		if(om_obj && !isnull(om_obj.loc) && om_obj.base && my_faction && !(om_obj.get_faction() in my_faction.enemy_faction_names)) //Only even try going if it's a "base" object
 			sectors_onmap += om_obj
 	if(sectors_onmap.len == 0)
 		target_loc = pick(GLOB.overmap_tiles_uncontrolled)

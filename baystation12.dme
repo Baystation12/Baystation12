@@ -1570,7 +1570,6 @@
 #include "code\modules\halo\covenant\species\yanmee\clothing.dm"
 #include "code\modules\halo\covenant\species\yanmee\yanmee.dm"
 #include "code\modules\halo\covenant\species\yanmee\yanmee_outfits.dm"
-#include "code\modules\halo\covenant\structures_machines\antimatter_bomb.dm"
 #include "code\modules\halo\covenant\structures_machines\bed.dm"
 #include "code\modules\halo\covenant\structures_machines\boarding_beacon_launcher.dm"
 #include "code\modules\halo\covenant\structures_machines\chair.dm"

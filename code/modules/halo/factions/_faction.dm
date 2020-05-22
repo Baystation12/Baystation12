@@ -15,6 +15,7 @@
 	var/obj/effect/overmap/base
 	var/archived_base_name = "NA_BASE_NAME"
 	var/archived_flagship_name = "NA_FLAGSHIP_NAME"
+	var/list/enemy_faction_names = list()
 	var/list/enemy_factions = list()
 	var/list/angry_factions = list()
 
@@ -32,6 +33,7 @@
 	var/list/ship_types = list()
 	var/list/npc_ships = list()
 	var/list/player_ships = list()
+	var/list/all_ships = list()
 	var/list/faction_reputation = list()
 	var/leader_name
 	var/datum/computer_file/data/com/faction_contact_data
@@ -71,6 +73,10 @@
 		leader_name = capitalize(pick(GLOB.first_names_male)) + " " + capitalize(pick(GLOB.last_names))
 
 /datum/faction/proc/Initialize()
+	for(var/faction_name in enemy_faction_names)
+		var/datum/faction/F = GLOB.factions_by_name[faction_name]
+		if(F)
+			enemy_factions.Add(F)
 
 /datum/faction/proc/add_faction_reputation(var/faction_name, var/new_rep)
 	if(!faction_reputation.Find(faction_name))

@@ -23,6 +23,7 @@
 	var/fleet_wave_delay_max = 15 MINUTES
 	var/fleet_wave_delay_min = 10 MINUTES
 	var/fleet_wave_num = 0
+	votable = 0
 
 /datum/game_mode/outer_colonies/pre_setup()
 	. = ..()
@@ -54,44 +55,47 @@
 	var/list/objective_types = list(\
 		/datum/objective/overmap/covenant_ship,\
 		/datum/objective/protect/leader,\
-		/datum/objective/glass_colony,\
+		//datum/objective/glass_colony,\
 		//datum/objective/retrieve/steal_ai,
-		/datum/objective/retrieve/nav_data,\
-		/datum/objective/overmap/covenant_unsc_ship,
-		//datum/objective/overmap/covenant_odp,
-		//datum/objective/colony_capture/cov,
+		//datum/objective/retrieve/nav_data,
+		//datum/objective/overmap/covenant_unsc_ship,
+		/datum/objective/overmap/covenant_odp,\
+		/datum/objective/colony_capture/cov,\
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
 	GLOB.COVENANT.has_flagship = 1
 
 	//setup unsc objectives
 	objective_types = list(\
-		/datum/objective/overmap/unsc_ship,\
-		/datum/objective/retrieve/artifact/unsc,\
+		//datum/objective/overmap/unsc_ship,
+		//datum/objective/retrieve/artifact/unsc,
 		/datum/objective/protect/leader,\
-//		/datum/objective/capture_innies,
-		/datum/objective/retrieve/steal_ai/cole_protocol,\
-		/datum/objective/retrieve/nav_data/cole_protocol,\
+		/datum/objective/capture_innies,\
+		//datum/objective/retrieve/steal_ai/cole_protocol,
+		//datum/objective/retrieve/nav_data/cole_protocol,
 		/datum/objective/overmap/unsc_cov_ship,\
 		/datum/objective/colony_capture/unsc,\
 		/datum/objective/protect_colony,\
-		/datum/objective/overmap/unsc_innie_base)
+		//datum/objective/overmap/unsc_innie_base,
+		/datum/objective/overmap/unsc_innie_ship)
 	GLOB.UNSC.setup_faction_objectives(objective_types)
-	GLOB.UNSC.has_flagship = 1
+	//GLOB.UNSC.has_flagship = 1
 	GLOB.UNSC.has_base = 1
 
 	//setup innie objectives
 	objective_types = list(\
 		/datum/objective/protect/leader,\
-		/datum/objective/overmap/innie_unsc_ship,\
+		//datum/objective/overmap/innie_unsc_ship,\
 		/datum/objective/assassinate/leader/innies_unsc,\
 		///datum/objective/recruit_pirates,
 		///datum/objective/recruit_scientists,
+		/datum/objective/overmap/innie_odp,\
 		/datum/objective/colony_capture/innie,\
-		/datum/objective/overmap/innie_base)
+		/datum/objective/overmap/innie_ship)
+		//datum/objective/overmap/innie_base)
 	GLOB.INSURRECTION.setup_faction_objectives(objective_types)
 	GLOB.INSURRECTION.has_flagship = 1
-	GLOB.INSURRECTION.base_desc = "secret underground HQ"
+	//GLOB.INSURRECTION.base_desc = "secret underground HQ"
 
 	//todo: remove the hardcoded Geminus colony name here
 
@@ -182,7 +186,7 @@
 
 					if(new_fleet.leader_ship == ship)
 						var/list/targets = list()
-						for(var/enemy in F.enemy_factions)
+						for(var/enemy in F.enemy_faction_names)
 							var/datum/faction/f_enemy = GLOB.factions_by_name[enemy]
 							if(f_enemy && f_enemy in factions)
 								targets += f_enemy.npc_ships
@@ -224,13 +228,16 @@
 		if(F.has_flagship)
 			//currently only the covenant have has_flagship = 1, but this can be tweaked as needed
 			var/obj/effect/overmap/flagship = F.get_flagship()
-			if(!flagship || !flagship.loc)
-				if(F.flagship_slipspaced || flagship.slipspace_status == 2)
-					round_end_reasons += "the [F.name] ship has gone to slipspace and left the system"
-					/*var/datum/faction/covenant/C = locate() in factions
-					C.ignore_players_dead = 1*/
-				else if(!flagship.slipspace_status)
-					round_end_reasons += "the [F.name] ship has been destroyed"
+			if(flagship)
+				if(!flagship.loc)
+					if(F.flagship_slipspaced || flagship.slipspace_status == 2)
+						round_end_reasons += "the [F.name] ship has gone to slipspace and left the system"
+						/*var/datum/faction/covenant/C = locate() in factions
+						C.ignore_players_dead = 1*/
+					else if(!flagship.slipspace_status)
+						round_end_reasons += "the [F.name] ship has been destroyed"
+			else
+				round_end_reasons += "the [F.name] ship has been destroyed"
 
 		if(F.has_base)
 			//currently no factions have has_base = 1, but this can be tweaked as needed (see: UNSC cassius station, innie rabbit hole base)

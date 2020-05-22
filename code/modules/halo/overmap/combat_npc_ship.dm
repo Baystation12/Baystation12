@@ -85,7 +85,7 @@
 			faction_name = their_faction.name
 		if(isnull(my_faction) || isnull(faction_name))
 			continue
-		if(faction_name in my_faction.enemy_factions)
+		if(faction_name in my_faction.enemy_faction_names)
 			targets += ship
 
 	if(targets.len > 0)

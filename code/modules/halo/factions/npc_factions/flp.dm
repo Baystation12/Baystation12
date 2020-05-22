@@ -1,7 +1,7 @@
 
 /datum/faction/npc/freedom_liberation_party
 	name = "Freedom and Liberation Party"
-	enemy_factions = list("UNSC","ONI")
+	enemy_faction_names = list("UNSC","ONI")
 	blurb = "The Freedom and Liberation Party (FLP) is an insurrectionist group based in the Eridanus sector, but with strong ties \
 	to the planet Mamore. In 2511, they detonated a nuclear device near one of Mamore's landmarks, killing 2 million and injuring \
 	8 million more. Many have suspected to have died of radiation based illnesses, such as cancer, much later after the attacking, \

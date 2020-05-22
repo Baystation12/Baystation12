@@ -248,10 +248,12 @@
 /obj/payload/slipspace_core/cov
 	icon = 'code/modules/halo/overmap/icons/slipspace_drive_cov.dmi'
 	icon_state = "core"
+	activeoverlay =  "core_active"
 
 /obj/payload/slipspace_core/human
 	icon = 'code/modules/halo/overmap/icons/slipspace_drive_human.dmi'
 	icon_state = "core"
+	activeoverlay = "core_active"
 
 //SLIPSPACE RUPTURE EFFECT//
 /obj/effect/slipspace_rupture
