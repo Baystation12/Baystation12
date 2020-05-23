@@ -59,6 +59,7 @@
 	/obj/item/clothing/shoes/marine/brown = 8,
 	/obj/item/clothing/mask/marine = 5,
 	/obj/item/weapon/storage/belt/marine_ammo = 8,
+	/obj/item/weapon/storage/belt/marine_medic = 8,
 	/obj/item/clothing/gloves/thick/unsc = 8,
 	/obj/item/clothing/gloves/thick/unsc/brown = 8,
 	/obj/item/weapon/armor_patch = 10,
