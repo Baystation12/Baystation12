@@ -4,6 +4,7 @@
 	icon = 'maps/geminus_city/sector_icon.dmi'
 	desc = "A temperate, lightly forested world with deposits of valuable ore and a large human colony."
 	icon_state = "geminus"
+	damage_overlay_file = 'maps/geminus_city/sector_icon_damage.dmi'
 
 	map_bounds = list(1,160,175,1)
 
