@@ -63,7 +63,6 @@
 	icon_living  = "mjolnir_mk4"
 	icon_dead = "mjolnir_mk4_dead"
 	possible_weapons = list(
-		/obj/item/weapon/gun/energy/charged/spartanlaser/npc,\
 		/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,\
 		/obj/item/weapon/gun/projectile/m739_lmg)
 	health = 150
@@ -149,6 +148,10 @@ mob/living/simple_animal/hostile/unsc/spartan_two/apply_difficulty_setting()
 			if(shield_max)
 				shield_max += 50
 		if(DIFFICULTY_LEGENDARY)
+			possible_weapons = list(
+				/obj/item/weapon/gun/energy/charged/spartanlaser/npc,\
+				/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,\
+				/obj/item/weapon/gun/projectile/m739_lmg)
 			if(shield_max)
 				shield_max += 100
 				recharge_rate *= 2
