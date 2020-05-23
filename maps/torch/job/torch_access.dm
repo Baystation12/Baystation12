@@ -43,12 +43,6 @@
 	desc = "Corporate Personnel"
 	region = ACCESS_REGION_RESEARCH
 
-/var/const/access_robotics_engineering = "ACCESS_TORCH_BIOMECH"  //82
-/datum/access/robotics_engineering
-	id = access_robotics_engineering
-	desc = "Biomechanical Engineering"
-	region = ACCESS_REGION_ENGINEERING
-
 /var/const/access_emergency_armory = "ACCESS_TORCH_ARMORY" //83
 /datum/access/emergency_armory
 	id = access_emergency_armory

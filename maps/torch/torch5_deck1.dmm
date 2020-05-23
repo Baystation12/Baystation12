@@ -18801,7 +18801,7 @@
 /obj/machinery/door/airlock/medical{
 	autoset_access = 0;
 	name = "Operating Theater 2";
-	req_access = list(list("ACCESS_SURGERY", "ACCESS_TORCH_BIOMECH"))
+	req_access = list(list("ACCESS_SURGERY", "ACCESS_ROBOTICS"))
 	},
 /obj/machinery/holosign/surgery{
 	dir = 4;
