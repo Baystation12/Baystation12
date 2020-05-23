@@ -37,9 +37,14 @@
 		for(var/obj/effect/landmark/spawn_hard/F in world)
 			hard_spawns.Add(F)
 
+		var/list/legendary_spawns = list()
+		for(var/obj/effect/landmark/spawn_legendary/F in world)
+			legendary_spawns.Add(F)
+
 		spawn_landmarks[1] = easy_spawns
 		spawn_landmarks[2] = medium_spawns
 		spawn_landmarks[3] = hard_spawns
+		spawn_landmarks[4] = legendary_spawns
 
 	//loop over the map and setup assault targets
 	spawn(-1)

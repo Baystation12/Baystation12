@@ -14,6 +14,11 @@
 	icon = 'spawn.dmi'
 	icon_state = "hard"
 
+/obj/effect/landmark/spawn_legendary
+	name = "spawn marker legendary"
+	icon = 'spawn.dmi'
+	icon_state = "legendary"
+
 /datum/game_mode/firefight
 	var/list/wave_spawns = list(\
 		list(\
@@ -104,6 +109,7 @@
 	//random list of spawns for enemy mobs
 	//later waves unlock more spawn locations
 	//higher difficulties unlock the spawn locations faster
+	/*
 	var/list/available_spawns = list()
 	var/difficulty_modifier = max(GLOB.difficulty_level - 2, 0)
 	for(var/previous_wave = 1, previous_wave <= current_wave + difficulty_modifier, previous_wave++)
@@ -111,10 +117,11 @@
 			break
 		var/list/spawn_tier = spawn_landmarks[previous_wave]
 		available_spawns.Add(spawn_tier)
+		*/
 
-	if(available_spawns.len)
+	if(wave_spawn_landmarks.len)
 		for(var/i=0, i<amount, i++)
-			var/obj/spawn_landmark = pick(available_spawns)
+			var/obj/spawn_landmark = pick(wave_spawn_landmarks)
 			var/atom/spawnloc = spawn_landmark.loc		//could be inside a vehicle etc
 			var/mob/living/simple_animal/hostile/H = new spawntype(spawnloc)
 			H.our_overmind = overmind

@@ -1,5 +1,5 @@
 
-#define SUPPLY_SPREAD_RADIUS 10
+#define SUPPLY_SPREAD_RADIUS 3
 
 /datum/game_mode/firefight
 	name = "Firefight"
@@ -18,7 +18,7 @@
 	var/enemy_faction_name = "Covenant"
 	var/datum/faction/enemy_faction
 	//var/area/planet/daynight/planet_area
-	var/list/spawn_landmarks[3]
+	var/list/spawn_landmarks[4]
 	var/assault_landmark_type = /obj/effect/landmark/assault_target/covenant
 	var/pilot_name = "GA-TL1 Longsword Pilot"
 
@@ -31,6 +31,7 @@
 	var/enemy_numbers_left = 15
 	var/wave_bonus_enemies = list(3, 6, 9, 12, 15)
 	var/player_bonus_enemies = list(3, 3, 3, 3)
+	var/list/wave_spawn_landmarks = list()
 
 	var/time_rest_end = 0
 	var/interval_resupply = 4 MINUTES

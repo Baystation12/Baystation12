@@ -62,11 +62,12 @@
 "bj" = (/obj/structure/barricade,/obj/structure/destructible/sandbag,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
 "bk" = (/obj/structure/barricade,/obj/structure/destructible/sandbag,/obj/structure/destructible/sandbag{dir = 4},/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
 "bl" = (/obj/structure/bed/roller,/turf/unsimulated/floor/rock,/area/planet/stranded_outpost)
+"bm" = (/obj/effect/landmark/spawn_legendary,/turf/unsimulated/floor/desert,/area/planet/daynight)
 "bn" = (/obj/structure/destructible/marine_barricade,/turf/unsimulated/floor/desert,/area/planet/stranded_outpost)
 "bo" = (/obj/structure/turret/chaingun{dir = 2},/turf/unsimulated/floor/desert,/area/planet/stranded_outpost)
 
 (1,1,1) = {"
-aCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaCaC
+bmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbmbm
 acababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaC
 acababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaC
 acababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababaC
