@@ -3,6 +3,8 @@
 	var/sound/sound_crash = sound('code/modules/halo/sound/crash.ogg', volume = 50)
 	var/sound/sound_flyby = sound('code/modules/halo/sound/start.ogg', volume = 50)
 	var/list/resupply_procs = list(/datum/game_mode/firefight/proc/spawn_resupply)
+	var/min_crates = 3
+	var/max_crates = 5
 
 	var/list/supply_obj_types = list(\
 		/obj/structure/closet/crate/random/unsc_guns,\
@@ -24,6 +26,7 @@
 	var/flare_type = /obj/item/device/flashlight/flare
 
 	var/list/supply_always_spawn = list()
+	var/list/many_players_bonus = list(/obj/structure/closet/crate/random/unsc_guns)
 
 	var/list/recently_spawned_supplies = list()
 
@@ -84,11 +87,10 @@
 /datum/game_mode/firefight/proc/spawn_ship_debris(var/turf/epicentre)
 	. = "A clump of debris from your ship has crashed down to the %DIRTEXT%. See if you can salvage it for resources."
 
-	var/max_dist = 10
-	for(var/turf/spawn_turf in range(max_dist, epicentre))
+	for(var/turf/spawn_turf in range(SUPPLY_SPREAD_RADIUS, epicentre))
 		//closer to the center has more goodies
 		var/cur_dist = get_dist(epicentre, spawn_turf)
-		var/spawn_chance = 100 * ((max_dist - cur_dist) / max_dist)
+		var/spawn_chance = 100 * ((SUPPLY_SPREAD_RADIUS - cur_dist) / SUPPLY_SPREAD_RADIUS)
 		spawn_chance = Clamp(spawn_chance, 0, 100)
 		if(prob(spawn_chance))
 			//low chance to spawn a useful supply crate
@@ -107,15 +109,11 @@
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_crash)
 
-#define MAX_CRATES 3
-#define MIN_CRATES 1
-#define DROP_OFFSET 3
-
 /datum/game_mode/firefight/proc/spawn_resupply(var/turf/epicentre)
 	. = "Supply run completed, I've dropped off my cargo to the %DIRTEXT%. \
 		[pick("Good luck!","Hang in there!","Evacuation is coming!")]"
 
-	var/num_crates = rand(MIN_CRATES,MAX_CRATES)
+	var/num_crates = rand(min_crates,max_crates)
 	var/failed_attempts = 0
 	var/list/must_spawn = supply_always_spawn.Copy()
 	num_crates += must_spawn.len
@@ -125,20 +123,25 @@
 	F.on = 1
 	F.update_icon()
 
+	//smoke visual effect to make it more obvious
 	spawn(0)
 		var/datum/effect/effect/system/smoke_spread/S = new/datum/effect/effect/system/smoke_spread()
 		S.set_up(5,0,epicentre)
 		S.start()
 
-	//always spawn the first crate crate on the landmark
+	//add more supplies with more players
+	var/num_players = survivors_left()
+	if(num_players >= 5)
+		must_spawn.Add(many_players_bonus)
+
 	var/turf/spawn_turf
 	while(num_crates > 0)
 
 		if(!spawn_turf)
 			//pick a random turf nearby
 			spawn_turf = locate(\
-				epicentre.x - DROP_OFFSET + rand(0,DROP_OFFSET*2),\
-				epicentre.y - DROP_OFFSET + rand(0,DROP_OFFSET*2),\
+				epicentre.x - SUPPLY_SPREAD_RADIUS + rand(0,SUPPLY_SPREAD_RADIUS*2),\
+				epicentre.y - SUPPLY_SPREAD_RADIUS + rand(0,SUPPLY_SPREAD_RADIUS*2),\
 				epicentre.z)
 
 		//make sure we dont double up turfs
@@ -177,7 +180,3 @@
 	//play a cool sound to everyone
 	for(var/mob/M in GLOB.player_list)
 		sound_to(M, sound_flyby)
-
-#undef MAX_CRATES
-#undef MIN_CRATES
-#undef DROP_OFFSET

@@ -16,7 +16,7 @@
 	var/obj/item/ammo_casing/casingtype
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
 	var/list/friends = list()
-	var/break_stuff_probability = 10
+	var/break_stuff_probability = 0
 	stop_automated_movement_when_pulled = 0
 	var/destroy_surroundings = 1
 	a_intent = I_HURT

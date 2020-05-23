@@ -1,4 +1,6 @@
 
+#define SUPPLY_SPREAD_RADIUS 10
+
 /datum/game_mode/firefight
 	name = "Firefight"
 	config_tag = "firefight"

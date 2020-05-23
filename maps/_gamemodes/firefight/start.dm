@@ -12,13 +12,15 @@
 
 	overmind = new()
 
-	//covenant radio channel
-	overmind.comms_channel = RADIO_COV
-
-
+	//setup the factions
 	enemy_faction = GLOB.factions_by_name[enemy_faction_name]
 	player_faction = GLOB.factions_by_name[player_faction_name]
-	overmind.comms_channel = enemy_faction.default_radio_channel
+
+	//setup NPC comms
+	//overmind radio chatter is only seen by ghosts so mostly pointless
+	//im commenting it out for performance reasons
+	//overmind.comms_channel = enemy_faction.default_radio_channel
+	//overmind.comms_language = enemy_faction.default_language
 
 	//loop over the map and setup spawn landmarks
 	spawn(-1)

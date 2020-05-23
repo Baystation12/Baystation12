@@ -4,7 +4,6 @@
 	total_positions = -1
 	spawn_positions = -1
 	outfit_type = /decl/hierarchy/outfit/yanmee/minor
-	access = list(230,250)
 	whitelisted_species = list(/datum/species/yanmee)
 
 /datum/job/covenant/yanmee_major
@@ -13,7 +12,6 @@
 	spawn_positions = 2
 	open_slot_on_death = 1
 	outfit_type = /decl/hierarchy/outfit/yanmee/major
-	access = list(230,250)
 	whitelisted_species = list(/datum/species/yanmee)
 
 /datum/job/covenant/yanmee_ultra
@@ -22,7 +20,6 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/yanmee/ultra
 	faction_whitelist = "Covenant"
-	access = list(230,250)
 	whitelisted_species = list(/datum/species/yanmee)
 
 /datum/job/covenant/yanmee_leader
@@ -31,5 +28,4 @@
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/yanmee/leader
 	faction_whitelist = "Covenant"
-	access = list(230,250)
 	whitelisted_species = list(/datum/species/yanmee)

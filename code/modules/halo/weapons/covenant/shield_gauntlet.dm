@@ -7,13 +7,13 @@
 	desc = "Shield Gauntlet"
 
 	icon = SHIELD_GAUNTLET_ICON
-	icon_state = "shield"
+	icon_state = "gauntlet"
 
 	action_button_name = "Toggle Shield Gauntlet"
 
 	var/shield_max_charge = 600
 	var/shield_current_charge = 600
-	var/list/shield_colour_values = list("#ff4248","#ffa76d","#6d63ff")		//highest charge to lowest charge
+	var/list/shield_colour_values = list("#0000FF","#00FFFF","#FFFF00","#FFA500","#FF2600")		//highest charge to lowest charge
 	var/shield_recharge_delay = 6 SECONDS //The delay between taking damage and starting to recharge, in ticks.
 	var/shield_next_charge
 	var/active_slowdown_amount = 5
@@ -23,23 +23,31 @@
 
 /obj/item/clothing/gloves/shield_gauntlet/examine(var/mob/user)
 	. = ..()
-	var/span_class = "info"
-	if(shield_current_charge < shield_max_charge * 0.33)
-		span_class = "danger"
-	else if(shield_current_charge < shield_max_charge * 0.66)
-		span_class = "warning"
-	to_chat(user, "<span class='[span_class]'>It has [shield_charge_string()].</span>")
+	if(overloaded)
+		to_chat(user, "\icon[src] <span class='warning'>[src] has been overloaded and cannot be used for another \
+			[(shield_next_charge - world.time)/10] seconds.</span>")
+	else
+		var/span_class = "info"
+		if(shield_current_charge < shield_max_charge * 0.33)
+			span_class = "danger"
+		else if(shield_current_charge < shield_max_charge * 0.66)
+			span_class = "warning"
+		to_chat(user, "<span class='[span_class]'>It has [shield_charge_string()].</span>")
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/shield_charge_string()
-	return "[shield_current_charge]/[shield_max_charge] charge \
-		([100*shield_current_charge/shield_max_charge]%)"
+	return "[shield_current_charge]/[shield_max_charge] charge ([shield_percent_string()])"
+
+/obj/item/clothing/gloves/shield_gauntlet/proc/shield_percent_string()
+	var/percent = round(100 * shield_current_charge/shield_max_charge)
+	if(shield_current_charge > 0 && !percent)
+		percent = 1
+	return "[percent]%"
 
 /obj/item/clothing/gloves/shield_gauntlet/attack_self(var/mob/living/carbon/human/user)
 	if(connected_shield)
-		qdel(connected_shield)
-		connected_shield = null
+		deactivate()
 
-	else if(shield_next_charge)
+	else if(overloaded)
 		to_chat(user, "\icon[src] <span class='warning'>[src] has been overloaded and cannot be used for another \
 			[(shield_next_charge - world.time)/10] seconds.</span>")
 		return
@@ -50,7 +58,8 @@
 	else if(!try_activate())
 		return
 
-	to_chat(user, "\icon[src] <span class='info'>You [connected_shield ? "en" : "dis"]able [src].</span>")
+	to_chat(user, "\icon[connected_shield ? connected_shield : src] <span class='info'>You [connected_shield ? "en" : "dis"]able [src].</span>")
+	update_icon()
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/try_activate()
 	var/mob/user = src.loc
@@ -61,6 +70,7 @@
 				qdel(connected_shield)
 				to_chat(user,"<span class = 'notice'>You need one hand free to use [src].</span>")
 				return 0
+		set_light(2,1)
 		update_icon()
 		return 1
 
@@ -78,7 +88,8 @@
 /obj/item/clothing/gloves/shield_gauntlet/proc/hand_dropped()
 	//just annul it
 	connected_shield = null
-	icon_state = "shield"
+	update_icon()
+	set_light(0,0)
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/deactivate()
 	if(connected_shield)
@@ -109,9 +120,9 @@
 	if(drain_shield(damage))
 		//did our shield absorb the shot?
 		if(istype(attacker))
-			user.visible_message("<span class = 'danger'>[attacker]'s attack is absorbed by the [src].</span>")
+			to_chat(user,"<span class = 'warning'>[attacker]'s attack is absorbed by the [src].</span>")
 		else
-			user.visible_message("<span class = 'danger'>[damage_source] is absorbed by the [src].</span>")
+			to_chat(user,"<span class = 'warning'>[damage_source] is absorbed by the [src].</span>")
 		return -1
 
 	return 0
@@ -131,50 +142,53 @@
 	return allowed_attack_dirs
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/drain_shield(var/damage)
-	if(damage > 0)
-		if(connected_shield && shield_current_charge > 0)
+	if(connected_shield)
 
-			//set a delay on recharging
-			if(!shield_next_charge)
-				GLOB.processing_objects |= src
-			shield_next_charge = world.time + shield_recharge_delay
+		//set a delay on recharging
+		if(!shield_next_charge)
+			GLOB.processing_objects |= src
+		shield_next_charge = world.time + shield_recharge_delay
 
-			//subtract the damage
-			shield_current_charge -= damage
+		//subtract the damage
+		shield_current_charge -= damage
 
-			//overloaded from damage?
-			if(shield_current_charge < 0)
-				shield_current_charge = 0
-				deactivate(1)
-				visible_message("<span class = 'warning'>[src.loc]'s [src] fails, overloading the shield projector.</span>")
+		//overloaded from damage?
+		if(shield_current_charge < 0)
+			shield_current_charge = 0
+			overloaded = 1
+			deactivate()
+			visible_message("<span class = 'danger'>[src.loc]'s [src] fails, overloading the shield projector.</span>")
 
-				//double the normal recharge time
-				shield_next_charge += shield_recharge_delay
-			else
-				update_icon()
+			//double the normal recharge time
+			shield_next_charge += shield_recharge_delay
 
-			return 1
+		update_icon()
 
-		return 0
+		return 1
 
-	return 1
+	return 0
 
 /obj/item/clothing/gloves/shield_gauntlet/update_icon()
 	if(connected_shield)
 		//our gauntlets are active
-		icon_state = "shield_active"
+		icon_state = "gauntlet_active"
 
 		//work out which damage indicator we are at
+		//deep blue -> light blue -> yellow -> orange -> red
 		var/shield_colour
-		if(shield_current_charge < 1 * shield_max_charge / 3)
-			shield_colour = shield_colour_values[1]
-		else if(shield_current_charge < 2 * shield_max_charge / 3)
+		if(shield_current_charge < 1 * shield_max_charge / 5)
+			shield_colour = shield_colour_values[5]
+		else if(shield_current_charge < 2 * shield_max_charge / 5)
+			shield_colour = shield_colour_values[4]
+		else if(shield_current_charge < 3 * shield_max_charge / 5)
+			shield_colour = shield_colour_values[3]
+		else if(shield_current_charge < 4 * shield_max_charge / 5)
 			shield_colour = shield_colour_values[2]
 		else
-			shield_colour = shield_colour_values[3]
+			shield_colour = shield_colour_values[1]
 
 		//set the inhand shield colour
-		animate(connected_shield, color = shield_colour, 4 SECONDS)
+		connected_shield.color = shield_colour
 
 		var/mob/living/user = src.loc
 		if(istype(user))
@@ -184,9 +198,18 @@
 				user.update_inv_r_hand()
 
 	else if(overloaded)
-		icon_state = "shield_overloaded"
+		icon_state = "gauntlet_overloaded"
 	else
-		icon_state = "shield"
+		icon_state = "gauntlet"
+
+	update_action_icon()
+
+/obj/item/clothing/gloves/shield_gauntlet/proc/update_action_icon()
+	action.button.UpdateIcon()
+	if(connected_shield)
+		action.button.maptext = "[shield_percent_string()]"
+	else
+		action.button.maptext = null
 
 /obj/item/clothing/gloves/shield_gauntlet/process()
 	if(shield_current_charge >= shield_max_charge)
@@ -204,43 +227,20 @@
 			shield_current_charge = shield_max_charge
 
 		//automatically come back up after an overload
+		var/mob/M = src.loc
 		if(overloaded)
 			overloaded = 0
-			if(!try_activate())
+			shield_current_charge = shield_max_charge / 2
+			if(try_activate())
+				//tell our holder
+				to_chat(M,"\icon[connected_shield] <span class='notice'>[src] flares back to life!</span>")
+			else
 				update_icon()
 		else
 			update_icon()
 
-		//tell our holder
-		var/mob/M = src.loc
 		if(istype(M))
-			to_chat(M,"\icon[src] <span class='info'>[src] is now at [shield_charge_string()].</span>")
-
-
-
-//Physical shield object define//
-/obj/item/weapon/gauntlet_shield //The shield object that appears when you activate the gauntlet.
-	name = "Handheld Shield"
-	desc = "A shimmering shield"
-
-	icon = SHIELD_GAUNTLET_ICON
-	icon_state = "shield1"
-	item_state = "shield1"
-
-	item_icons = list(\
-		slot_l_hand_str = SHIELD_GAUNTLET_ICON_INHAND_L,
-		slot_r_hand_str = SHIELD_GAUNTLET_ICON_INHAND_R)
-
-	slowdown_general = 5
-	canremove = 0
-	var/obj/item/clothing/gloves/shield_gauntlet/creator_gauntlet
-
-/obj/item/weapon/gauntlet_shield/New(var/loc, var/obj/created_by)
-	. = ..()
-	creator_gauntlet = created_by
-
-/obj/item/weapon/gauntlet_shield/dropped()
-	creator_gauntlet.hand_dropped()
+			to_chat(M,"\icon[connected_shield] <span class='info'>[src] is now at [shield_charge_string()].</span>")
 
 
 

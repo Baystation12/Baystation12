@@ -16,6 +16,8 @@
 		/obj/structure/repair_bench/cov,\
 		/obj/machinery/floodlight/covenant)
 
+	many_players_bonus = list(/obj/structure/closet/crate/random/covenant/weapons)
+
 	flare_type = /obj/item/device/flashlight/glowstick/covenant
 
 	supply_always_spawn = list()
