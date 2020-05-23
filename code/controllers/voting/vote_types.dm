@@ -183,7 +183,6 @@
 	. = ..()
 
 	if(.[1] == "End Round Early")
-		ticker.mode.declare_completion()
 		evacuation_controller.finish_evacuation()
 
 

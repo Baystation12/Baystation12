@@ -49,6 +49,8 @@ var/list/points_of_interest = list()
 	var/nuked = 0
 	var/demolished = 0
 
+	var/damage_overlay_file = null
+
 	var/last_adminwarn_attack = 0
 
 	var/controlling_faction = null
@@ -122,6 +124,14 @@ var/list/points_of_interest = list()
 			F.get_base_name()		//update the archived name
 
 	my_faction = GLOB.factions_by_name[faction]
+
+/obj/effect/overmap/proc/get_visible_damage()
+	return min(glassed,5)
+
+/obj/effect/overmap/proc/update_damage_sprite()
+	if(damage_overlay_file)
+		overlays.Cut()
+		overlays += image(damage_overlay_file,loc,"[get_visible_damage()]")
 
 /obj/effect/overmap/proc/play_jump_sound(var/sound_loc_origin,var/sound)
 	var/list/mobs_to_sendsound = list()
@@ -380,6 +390,10 @@ var/list/points_of_interest = list()
 	if(superstructure_strength <= SUPERSTRUCTURE_FAIL_PERCENT)
 		pre_superstructure_failing()
 
+/obj/effect/overmap/update_icon()
+	. = ..()
+	update_damage_sprite()
+
 /obj/effect/overmap/sector
 	name = "generic sector"
 	desc = "Sector with some stuff in it."
@@ -429,5 +443,6 @@ var/list/points_of_interest = list()
 	report_progress("Overmap build complete.")
 	shipmap_handler.max_z_cached = world.maxz
 	return 1
+
 
 

@@ -78,28 +78,29 @@
 		to_glass = GetBelow(to_glass)
 	if(isnull(to_glass))
 		return
-
-	for(var/turf/simulated/F in circlerange(to_glass,glass_radius))
-		if(!istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
-			if(!isnull(GetBelow(F)))
-				var/turf/under_loc = GetBelow(F)
-				if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated))
-					F.ChangeTurf(/turf/simulated/open)
-					under_loc.ChangeTurf(glassed_turf_use)
+	spawn() //Let's not hold the entire server hostage as we do this
+		for(var/turf/simulated/F in circlerange(to_glass,glass_radius))
+			if(!istype(F,/turf/unsimulated/floor/lava) && !istype(F,/turf/space))
+				if(!isnull(GetBelow(F)))
+					var/turf/under_loc = GetBelow(F)
+					if(istype(under_loc,/turf/simulated/floor) || istype(under_loc,/turf/unsimulated))
+						F.ChangeTurf(/turf/simulated/open)
+						under_loc.ChangeTurf(glassed_turf_use)
+					else
+						F.ChangeTurf(glassed_turf_use)
 				else
 					F.ChangeTurf(glassed_turf_use)
-			else
-				F.ChangeTurf(glassed_turf_use)
-			for(var/atom/a in F.contents)
-				F.Entered(a,F) //Make the lava do it's thing, then just delete it.
-				if(a)
-					qdel(a)
+				for(var/atom/a in F.contents)
+					F.Entered(a,F) //Make the lava do it's thing, then just delete it.
+					if(a)
+						qdel(a)
 
 /obj/item/projectile/overmap/beam/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 	if(initial(kill_count) - kill_count > 1)
 		console_fired_by.visible_message("<span class = 'notice'>[console_fired_by] emits a warning: \"Beam impact dissipated due to atmospheric interference. Orbit the object to perform glassing.\"</span>")
 		return
 	hit.glassed += 1
+	hit.update_icon()
 	for(var/mob/m in GLOB.mobs_in_sectors[hit])
 		to_chat(m,"<span class = 'danger'>A wave of heat washes over you as the atmosphere boils and the ground liquefies. [hit] is being glassed!</span>")
 	var/turf/turf_to_explode = locate(rand(hit_bounds[1],hit_bounds[3]),rand(hit_bounds[2],hit_bounds[4]),z_level)
