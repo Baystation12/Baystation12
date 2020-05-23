@@ -123,9 +123,22 @@
 		else
 			to_chat(M, "<span class='warning'>You are unable to do that.</span>")
 
+/obj/structure/evac_ship/proc/attempt_exit(var/mob/L)
+	if(isliving(usr))
+		var/mob/living/M = usr
+		M.loc = pick(src.locs)
+		to_chat(M, "<span class='info'>You exit [src].</span>")
+
 /obj/structure/evac_ship/verb/enter_ship()
 	set name = "Enter the evac ship"
 	set src in view()
 	set category = "IC"
 
 	attempt_enter(usr)
+
+/obj/structure/evac_ship/verb/exit_ship()
+	set name = "Exit the evac ship"
+	set src = usr.loc
+	set category = "IC"
+
+	attempt_exit(usr)
