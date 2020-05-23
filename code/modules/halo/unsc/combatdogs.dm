@@ -39,6 +39,8 @@
 	icon_living = "pmc_gshep"
 	icon_dead = "pmc_gshep_d"
 	resistance = 5
+	health = 125
+	maxHealth = 125
 	pass_flags = PASSTABLE
 	mob_size = MOB_MEDIUM
 	combat_tier = 2
@@ -54,6 +56,8 @@
 	pass_flags = PASSTABLE
 	mob_size = MOB_MEDIUM
 	resistance = 10
+	health = 125
+	maxHealth = 125
 	combat_tier = 3
 
 	speak = list("Bark!","Arf!","Bork!")

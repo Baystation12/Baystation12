@@ -19,6 +19,7 @@
 		/obj/structure/closet/crate/random/unsc_food,\
 		/obj/structure/closet/crate/random/unsc_missile,\
 		/obj/structure/closet/crate/random/unsc_splaser,\
+		/obj/machinery/autosurgeon,\
 		/obj/structure/repair_bench,\
 		/obj/structure/closet/crate/random/unsc_mats,\
 		/obj/machinery/floodlight)
@@ -54,7 +55,7 @@
 
 /datum/game_mode/firefight/proc/do_resupply()
 	if(!GLOB.available_resupply_points.len)
-		//log_and_message_admins("Warning: No resupply points available")
+		log_and_message_admins("Warning: No resupply points available")
 		return
 
 	var/turf/center_turf = locate(world.maxx/2, world.maxy/2, 1)

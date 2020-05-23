@@ -27,14 +27,13 @@
 	overlays.Cut()
 	icon_state = "flood[open ? "o" : ""][open && cell ? "b" : ""]0[on]"
 
+		desc = initial(desc)
 	if(health < maxHealth / 2)
 		overlays += "damage2"
 		desc += " It is heavily damaged, repair it with a welder."
 	else if(health < maxHealth)
 		overlays += "damage1"
 		desc += " It is lightly damaged, repair it with a welder."
-	else
-		desc = initial(desc)
 
 /obj/machinery/floodlight/process()
 	if(!on)

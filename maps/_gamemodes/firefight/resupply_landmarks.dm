@@ -4,7 +4,6 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 	name = "resupply marker"
 	icon = 'resupply.dmi'
 	icon_state = "resupply"
-	invisibility = 101
 
 /obj/effect/landmark/resupply/New()
 	. = ..()
@@ -15,13 +14,11 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 	name = "resupply skip marker"
 	icon = 'resupply.dmi'
 	icon_state = "resupply_skip"
-	invisibility = 101
 
 /obj/effect/landmark/resupply_openworld
 	name = "resupply open world marker"
 	icon = 'resupply.dmi'
 	icon_state = "resupply_open"
-	invisibility = 101
 
 /obj/effect/landmark/resupply_openworld/Initialize()
 	..()
@@ -30,7 +27,7 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 /obj/effect/landmark/resupply_openworld/LateInitialize()
 	. = ..()
 	var/area/host_area = get_area(src)
-	var/resup_dist = 21
+	var/resup_dist = 14
 	for(var/curx = SUPPLY_SPREAD_RADIUS,\
 		curx < world.maxx - SUPPLY_SPREAD_RADIUS,\
 		curx += resup_dist + rand(-5, 5))
@@ -50,3 +47,6 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 				continue
 				*/
 			new /obj/effect/landmark/resupply(T)
+
+	if(!GLOB.available_resupply_points)
+		log_and_message_admins("ERROR: [src.type] was unable to generate any /obj/effect/landmark/resupply")
