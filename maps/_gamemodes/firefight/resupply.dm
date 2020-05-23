@@ -19,6 +19,7 @@
 		/obj/structure/closet/crate/random/unsc_food,\
 		/obj/structure/closet/crate/random/unsc_missile,\
 		/obj/structure/closet/crate/random/unsc_splaser,\
+		/obj/machinery/autosurgeon,\
 		/obj/structure/repair_bench,\
 		/obj/structure/closet/crate/random/unsc_mats,\
 		/obj/machinery/floodlight)

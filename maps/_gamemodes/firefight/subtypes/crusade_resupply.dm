@@ -12,6 +12,7 @@
 		/obj/structure/closet/crate/random/covenant/energy_barricades,\
 		/obj/structure/closet/crate/random/covenant/construction,\
 		/obj/structure/bed/roller/covenant,\
+		/obj/machinery/autosurgeon/covenant,\
 		/obj/structure/weapon_rack,\
 		/obj/structure/repair_bench/cov,\
 		/obj/machinery/floodlight/covenant)
