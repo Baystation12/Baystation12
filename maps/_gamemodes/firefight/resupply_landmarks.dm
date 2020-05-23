@@ -29,17 +29,19 @@ GLOBAL_LIST_EMPTY(available_resupply_points)
 
 /obj/effect/landmark/resupply_openworld/LateInitialize()
 	. = ..()
-	var/host_area_type = get_area(src)
+	var/area/host_area = get_area(src)
 	var/resup_dist = 21
 	for(var/curx = SUPPLY_SPREAD_RADIUS,\
 		curx < world.maxx - SUPPLY_SPREAD_RADIUS,\
-		curx += resup_dist + rand(0, SUPPLY_SPREAD_RADIUS))
+		curx += resup_dist + rand(-5, 5))
 		for(var/cury = SUPPLY_SPREAD_RADIUS,\
 			cury < world.maxy - SUPPLY_SPREAD_RADIUS,\
-			cury += resup_dist + rand(0, SUPPLY_SPREAD_RADIUS))
+			cury += resup_dist + rand(-5, 5))
 			var/turf/T = locate(curx, cury, 1)
+			if(!T)
+				continue
 			var/area/cur_area = get_area(T)
-			if(cur_area.type != host_area_type)
+			if(cur_area.type != host_area.type)
 				continue
 			/*
 			//if there is a scavenge_spawn_skip landmark, skip this spot (place one eg near the player base)

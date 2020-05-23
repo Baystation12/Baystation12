@@ -38,8 +38,20 @@
 			//calculate the enemy strength for this wave
 			enemy_numbers_left = enemy_numbers_base + wave_bonus + player_bonus
 
-			//is this the final wave?
+			//choose the places they will spawn from
 			current_wave++
+			var/list/possible_spawns = spawn_landmarks.Copy()
+			for(var/i=0,i<current_wave,i++)
+				if(!possible_spawns.len)
+					break
+				var/list/chosen_spawns = pick(possible_spawns)
+				wave_spawn_landmarks |= chosen_spawns
+				possible_spawns -= chosen_spawns
+
+			if(!possible_spawns.len)
+				log_admin("SPAWN: cannot find spawn landmark list")
+
+			//is this the final wave?
 			if(current_wave == max_waves)
 				evac_stage = 1
 				to_world("<span class='danger'>[evac_message]</span>")
