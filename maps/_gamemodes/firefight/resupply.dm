@@ -114,9 +114,9 @@
 		[pick("Good luck!","Hang in there!","Evacuation is coming!")]"
 
 	var/num_crates = rand(min_crates,max_crates)
-	var/failed_attempts = 0
 	var/list/must_spawn = supply_always_spawn.Copy()
 	num_crates += must_spawn.len
+	var/drop_crates = num_crates
 
 	//drop a light on the supply drop to make it a bit easier to find
 	var/obj/item/device/flashlight/F = new flare_type(epicentre)
@@ -134,6 +134,8 @@
 	if(num_players >= 5)
 		must_spawn.Add(many_players_bonus)
 
+	var/failed_attempts = 0
+
 	var/turf/spawn_turf
 	while(num_crates > 0)
 
@@ -145,9 +147,11 @@
 				epicentre.z)
 
 		//make sure we dont double up turfs
-		if(turf_contains_dense_objects(spawn_turf))
+		if(!spawn_turf || turf_contains_dense_objects(spawn_turf))
 			failed_attempts++
 			if(failed_attempts > 10)
+				message_admins("RESUPPLY: failed to find a valid turf after 10 attempts. \
+					Successfully spawned [num_crates]/[drop_crates] crates.")
 				break
 			continue
 
