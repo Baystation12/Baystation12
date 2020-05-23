@@ -27,8 +27,8 @@
 
 	var/is_spawning = 0	//0 = rest, 1 = spawning
 	var/max_spawns_tick = 20		//keep this the same for performance reasons
-	var/enemy_numbers_base = 15		//the total number of enemies
-	var/enemy_numbers_left = 15
+	var/enemy_numbers_base = 10		//the total number of enemies
+	var/enemy_numbers_left = 10
 	var/wave_bonus_enemies = list(3, 6, 9, 12, 15)
 	var/player_bonus_enemies = list(3, 3, 3, 3)
 	var/list/wave_spawn_landmarks = list()
