@@ -15,6 +15,7 @@
 
 	takeoff_overlay_icon_state = "thrust"
 	takeoff_sound = null
+	overmap_range = 10
 
 	comp_prof = /datum/component_profile/spirit
 

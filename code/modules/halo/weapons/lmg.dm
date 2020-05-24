@@ -14,7 +14,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762_box_ap
 	allowed_magazines = list(/obj/item/ammo_magazine/a762_box_ap) //Disallows loading normal ma5b mags into the LMG.
-	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Short_Burst_New.wav'
+	fire_sound = 'code/modules/halo/sounds/Assault_Rifle_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/UNSC_Saw_Reload_Sound_Effect.ogg'
 	one_hand_penalty = -1
 	burst_accuracy = list(0, 0, -1, -1, -1, -2, -2, -2, -3, -3, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3, 0, 0, -1, -1, -1, -2, -2, -2, -3, -3,0,0,-1)
