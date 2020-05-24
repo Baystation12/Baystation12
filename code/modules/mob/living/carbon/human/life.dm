@@ -81,6 +81,9 @@
 
 		handle_medical_side_effects()
 
+		if(life_tick % 2 == 0)
+			UpdateDamageIcon() //To solve the problem of not updating after all wounds heal
+
 		if(!client && !mind)
 			species.handle_npc(src)
 
