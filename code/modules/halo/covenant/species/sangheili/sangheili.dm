@@ -15,6 +15,9 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	icobase = 'code/modules/halo/covenant/species/sangheili/r_elite.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/covenant/species/sangheili/r_elite.dmi'
 	icon_template = 'code/modules/halo/covenant/species/sangheili/Sangheili_template.dmi'
+	damage_overlays = 'code/modules/halo/icons/species/dam_elite.dmi'
+	damage_mask = 'code/modules/halo/icons/species/dam_mask_elite.dmi'
+	blood_mask = 'code/modules/halo/icons/species/blood_elite.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
 	flags = NO_MINOR_CUT
