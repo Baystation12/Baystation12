@@ -169,6 +169,7 @@
 	#include "../away/voxship/voxship.dm"
 	#include "../away/skrellscoutship/skrellscoutship.dm"
 	#include "../away/meatstation/meatstation.dm"
+	#include "../away/miningstation/miningstation.dm"
 
 	#include "../../code/datums/music_tracks/chasing_time.dm"
 
