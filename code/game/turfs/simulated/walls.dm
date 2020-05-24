@@ -236,13 +236,15 @@
 	O.plane = LIGHTING_PLANE
 	O.layer = FIRE_LAYER
 
+	var/material/wallmat = get_material_by_name(DEFAULT_WALL_MATERIAL)
+	var/burn_time =  10 SECONDS
+	if(src) //apparently a bug can happen where this is triggered after a wall self-deconstructs
+		burn_time = 100 * (max_health()/wallmat.integrity)
 	src.ChangeTurf(floor_type)
 
 	var/turf/simulated/floor/F = src
 	F.burn_tile()
 	F.icon_state = "wall_thermite"
-	var/material/wallmat = get_material_by_name(DEFAULT_WALL_MATERIAL)
-	var/burn_time = 100 * (max_health()/wallmat.integrity)
 	to_chat(user, "<span class='warning'>The thermite starts melting through the wall. You estimate it'll take [round(burn_time/60)] minutes.</span>")
 
 	spawn(burn_time)
