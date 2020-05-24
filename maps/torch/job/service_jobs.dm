@@ -80,7 +80,7 @@
 	min_skill = list(   SKILL_COOKING   = SKILL_ADEPT,
 	                    SKILL_BOTANY    = SKILL_BASIC,
 	                    SKILL_CHEMISTRY = SKILL_BASIC)
-	access = list(access_maint_tunnels, access_hydroponics, access_kitchen, access_solgov_crew, access_bar, access_commissary)
+	access = list(access_hydroponics, access_kitchen, access_solgov_crew, access_bar, access_commissary)
 	minimal_access = list()
 
 /datum/job/bartender
