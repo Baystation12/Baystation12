@@ -168,7 +168,6 @@
 "dl" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck1/westhangar)
 "dm" = (/obj/structure/table/standard,/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
 "dn" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
-"do" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/structure/closet/crate/bin,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
 "dp" = (/obj/item/weapon/stool{anchored = 1},/obj/structure/closet/medical_wall/filled{pixel_y = 32},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
 "dq" = (/obj/structure/table/standard,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
 "dr" = (/obj/structure/sign/halo_floorsign/stairs{dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
@@ -212,8 +211,6 @@
 "ed" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 4},/obj/structure/window/reinforced/treated{tag = "icon-rwindow (WEST)"; icon_state = "rwindow"; dir = 8},/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck1/westhangar)
 "ee" = (/obj/machinery/light{dir = 1},/obj/machinery/vending/armory/hybrid,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/marinebunks)
 "ef" = (/obj/item/device/radio/intercom{name = "intercom"; pixel_y = 32},/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/machinery/vending/armory/odstvend,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/marinebunks)
-"eg" = (/obj/machinery/light{dir = 1},/obj/item/device/radio/intercom{name = "intercom"; pixel_y = 32},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/marinebunks)
-"eh" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/marinebunks)
 "ei" = (/obj/structure/closet/crate/bin,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
 "ej" = (/obj/machinery/camera/autoname/invis/odp_cassius,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/centralcorridor)
 "ek" = (/obj/machinery/portable_atmospherics/canister/oxygen{anchored = 1},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck1/easthangar)
@@ -345,12 +342,15 @@
 "gG" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/southwestumbilical)
 "gH" = (/obj/effect/landmark/drop_pod_landing,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/southeastumbilical)
 "gJ" = (/obj/structure/ai_terminal/unsc/odp_cassius,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/northeastumbilical)
+"nc" = (/obj/machinery/light{dir = 1},/obj/machinery/vending/armory/armor,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/marinebunks)
 "pa" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
+"qJ" = (/obj/machinery/light{dir = 1},/obj/item/device/radio/intercom{name = "intercom"; pixel_y = 32},/obj/machinery/vending/armory/armor,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/marinebunks)
 "sX" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/northobservation)
 "tB" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (WEST)"; icon_state = "warning_dust"; dir = 8},/obj/machinery/alarm{dir = 8; icon_state = "alarm0"; pixel_x = 24},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck1/westhangar)
 "wr" = (/obj/structure/ai_terminal/unsc/odp_cassius,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/southwestumbilical)
 "wu" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/obj/machinery/alarm{dir = 4; icon_state = "alarm0"; pixel_x = -22},/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck1/easthangar)
 "wH" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/janitor)
+"GQ" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/obj/machinery/vending/armory/armor,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
 "HO" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/structure/ai_terminal/unsc/odp_cassius,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/crewmess)
 "MC" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/southeastumbilical)
 "Nb" = (/obj/structure/ai_terminal/unsc/odp_cassius,/turf/simulated/floor/tech/gray,/area/faction_base/unsc/odp/interior/deck1/nortwestumbilical)
@@ -447,9 +447,9 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBaBbJcocLdQcoco
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBaBbacodjdkdkdkdkdkdlaXgcfJbcbcbqcReiaxbedqcUgAdmdpdrdIbqfSbcfJbdbrdsdtdtdtdtdtducBclaBaBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaBaBbacodvgdcocodvgecoevbcbcbcbcbqdhdwdwcUdqgAcUdqcUdwdxbqbcbcbcbceDcBcBgfcBcBggdycBclaBaBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaifCdAbabadBdCbaezcibabqbqaVbcbqdidwdwdwdwpadwdwdwdwdEbqaVbcbqbqcleCcncldFdGclcldHfDaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaibacodJbadKdLbaaiaiaiaibqbVfvbqdodMdMghdndDdUghdwdwHObqbccbbqaiaiaiaicldNdOcldPcBclaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaibacodJbadKdLbaaiaiaiaibqbVfvbqGQdMdMghdndDdUghdwdwHObqbccbbqaiaiaiaicldNdOcldPcBclaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaibadRgidTdTdTdTaiaaaaaibqbcbPbqdWctdVdWdWdWdWdWdWdXdWbqcabcbqaiaaaaaidYdYdYdYgjeaclaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaibjcocfdTeFexdTaiaaaaaibbbcbcbqeedVdVeeefdVeqdWegdVehbqbcbcbbaiaaaaaidYeEeKdYekcBelaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaibjcocfdTeFexdTaiaaaaaibbbcbcbqeedVdVeeefdVeqdWqJdVncbqbcbcbbaiaaaaaidYeEeKdYekcBelaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiewcoebdTgkexeGaiaaaaaibAbcbcbqeBdVdVgmeNdVgBdWerdVerbqfSbcbAaiaaaaaieHeEgldYemcBeIaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaibababadTexexeLaiaaaaaibqbcbcbqgDdVdVdVeOdVgCdWerdVerbqbcbcbqaiaaaaaieReEeEdYclclclaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaiaiaiaidTeFexeTaiaaaaaibbbcgnbqeBdVdVgmeNdVgBdWerdVerbqgobcbbaiaaaaaieUeEeKdYaiaiaiaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -511,3 +511,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 fBaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

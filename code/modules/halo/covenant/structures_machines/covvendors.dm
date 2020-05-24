@@ -97,7 +97,7 @@
 	desc = "Storage for Covenant Sangheili equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/storage/backpack/sangheili = 10,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5
+	products = list(/obj/item/weapon/storage/backpack/sangheili = 10,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5,
 		,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/clothing/head/helmet/sangheili/ranger = 9,/obj/item/clothing/suit/armor/special/combatharness/ranger = 9
 		,/obj/item/clothing/shoes/sangheili/ranger = 9, /obj/item/clothing/gloves/thick/sangheili/ranger = 9,/obj/item/weapon/tank/air/covenant = 9,/obj/item/clothing/mask/breath = 7
 		,/obj/item/weapon/pickaxe/plasma_drill = 1,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 3)
@@ -124,7 +124,7 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/EVA = 7,/obj/item/clothing/suit/armor/jiralhanae/covenant/EVA = 7,/obj/item/weapon/tank/air/covenant = 7
-		,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 1)
+		,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,	/obj/item/weapon/storage/belt/utility/full = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 1)
 
 /obj/machinery/vending/armory/covenant/jiralhanae/heavy // Equipment for Jiralhanae
 	name = "Covenant - Jiralhanae Heavy Vendor"
@@ -149,7 +149,7 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/storage/belt/covenant_medic = 5,
-	/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,
+	/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,
 	/obj/item/clothing/under/kigyar/armless = 8,,/obj/item/weapon/pickaxe/plasma_drill = 1,
 	/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,
 	/obj/item/clothing/gloves/shield_gauntlet/kigyar = 4,/obj/item/weapon/pinpointer/artifact = 2)
@@ -182,7 +182,7 @@
 	desc = "Storage for Covenant Unggoy equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6
+	products = list(/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6
 		,/obj/item/weapon/pickaxe/plasma_drill = 1,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 12,/obj/item/weapon/pinpointer/artifact = 1)
 
 /obj/machinery/vending/armory/covenant/unggoy/heavy // Equipment for Unggoy
@@ -218,7 +218,7 @@
 	desc = "Storage for Covenant Yanmee equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/storage/belt/covenant_medic = 4,/obj/item/weapon/storage/belt/covenant_ammo = 4,/obj/item/clothing/accessory/storage/bandolier/covenant = 4
+	products = list(/obj/item/weapon/storage/belt/covenant_medic = 4,/obj/item/weapon/storage/belt/covenant_ammo = 4,/obj/item/weapon/storage/belt/utility/full = 4,/obj/item/clothing/accessory/storage/bandolier/covenant = 4
 		,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 16,/obj/item/weapon/pinpointer/artifact = 1)
 
 /obj/machinery/vending/armory/covenant/yanmee/weapon
