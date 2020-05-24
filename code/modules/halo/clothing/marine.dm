@@ -64,25 +64,25 @@
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "CH252 Helmet B"
-	icon_state = "helmet_b"
+	icon_state = "helmet_novisor_b"
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/helmet/marine/medic/brown
-	name = "Brown Camo CH251 Helmet"
+	name = "Brown Camo CH251 Helmet Medic"
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "CH252 Helmet Medic B"
-	icon_state = "helmet medic-b_obj"
+	icon_state = "helmet novisor medic-b_obj"
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/helmet/marine/medic/brownvisor
-	name = "Brown Camo CH251 Helmet"
+	name = "Brown Camo CH251-V Helmet Medic"
 	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force. Has an inbuilt VISOR for eye protection."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
 	item_state = "CH252 Visor Helmet Medic B"
-	icon_state = "helmet medic-b_obj"
+	icon_state = "helmet medic_obj"
 	body_parts_covered = HEAD|EYES
 
 /obj/item/clothing/head/helmet/marine/brownvisor
@@ -236,7 +236,7 @@
 	icon_state = "marinemask"
 	item_state = "marinemask"
 	w_class = ITEM_SIZE_SMALL
-	body_parts_covered = HEAD|FACE
+	body_parts_covered = HEAD
 	flags_inv = HIDEEARS|BLOCKHAIR
 
 /obj/item/clothing/suit/space/void/unsc
