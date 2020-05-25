@@ -55,6 +55,7 @@
 /obj/machinery/computer/shuttle_control/explore/vox_shuttle
 	name = "shuttle control console"
 	shuttle_tag = "Vox Shuttle"
+	req_access = list(access_voxship)
 
 /obj/effect/overmap/visitable/ship/landable/vox
 	name = "Unknown Signature"
