@@ -77,6 +77,8 @@
 	for(var/turf/t in view(drop_point,drop_accuracy))
 		if(istype(t,/turf/simulated/wall))
 			continue
+		if(istype(t,/turf/simulated/mineral))
+			continue
 		if(istype(t,/turf/unsimulated/wall))
 			continue
 		if(istype(t,/turf/unsimulated/floor/rock2)) //No spawning in rock walls, even if they are subtypes of /floor/
