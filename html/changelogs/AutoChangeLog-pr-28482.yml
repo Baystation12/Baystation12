@@ -1,4 +1,0 @@
-author: "mkalash"
-delete-after: True
-changes: 
-  - tweak: "First, second, and third vote weights have been replaced with a blind single transferable vote. Click on vote options in the order you'd like to see them, as few or many as you want. Click on any option again to rescind your vote for it. Options with a 50% majority will win. If the vote wants more than one result (game mode votes need 3), then the winner's voters will have their votes transferred to their next choice. If there is no majority winner, the last place options will be removed and their voters will have their votes transferred to their next choice. Ties and situations where there aren't enough votes to fill all the results are resolved randomly."

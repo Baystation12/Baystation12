@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - rscadd: "There are now feedback messages in the chat for when you open or close an airlock's maintenance panel, cut, mend, or pulse a wire, and attach or detach a signaler. There are also sound effects for all of these except signalers."
