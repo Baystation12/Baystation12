@@ -40,10 +40,10 @@
 	if(.)
 		emote("flutters towards [.]")
 
-/mob/living/simple_animal/hostile/scarybat/Found(var/atom/A)//This is here as a potential override to pick a specific target if available
-	if(istype(A) && A == owner)
-		return 0
-	return ..()
+/mob/living/simple_animal/hostile/scarybat/ValidTarget(var/mob/M)
+	. = ..()
+	if(M == owner)
+		return FALSE
 
 /mob/living/simple_animal/hostile/scarybat/AttackingTarget()
 	. =..()
