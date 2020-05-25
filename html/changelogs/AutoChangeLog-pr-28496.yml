@@ -1,0 +1,4 @@
+author: "Faustico"
+delete-after: True
+changes: 
+  - tweak: "The following augments no longer have a research requirement and can be printed from roundstart: surgical toolset, engineering toolset, mechanical muscles, subdermal armor."
