@@ -58,11 +58,6 @@
 		else
 			if(response == "Regular")
 				P = new /obj/item/weapon/paper
-				if(Holiday == "April Fool's Day")
-					if(prob(30))
-						P.info = "<font face=\"[P.crayonfont]\" color=\"red\"><b>HONK HONK HONK HONK HONK HONK HONK<br>HOOOOOOOOOOOOOOOOOOOOOONK<br>APRIL FOOLS</b></font>"
-						P.rigged = 1
-						P.updateinfolinks()
 			else if (response == "Carbon-Copy")
 				P = new /obj/item/weapon/paper/carbon
 		user.put_in_hands(P)

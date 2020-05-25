@@ -218,9 +218,6 @@ GUEST_BAN
 ## The intention is to make adminPMs more visible. (although I fnd popups annoying so this defaults to off)
 #POPUP_ADMIN_PM
 
-## Remove the # to allow special 'Easter-egg' events on special holidays such as seasonal holidays and stuff like 'Talk Like a Pirate Day' :3 YAARRR
-ALLOW_HOLIDAYS
-
 ##Defines the ticklag for the world. 0.5 is smooth, 0.7 is less smooth.
 TICKLAG 0.5
 

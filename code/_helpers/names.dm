@@ -70,23 +70,9 @@ var/religion_name = null
 		GLOB.using_map.station_name = name + " "
 
 	// Prefix
-	switch(Holiday)
-		//get normal name
-		if(null,"",0)
-			name = pick(GLOB.station_names)
-			if(name)
-				GLOB.using_map.station_name += name + " "
-
-		//For special days like christmas, easter, new-years etc ~Carn
-		if("Friday the 13th")
-			name = pick("Mike","Friday","Evil","Myers","Murder","Deathly","Stabby")
-			GLOB.using_map.station_name += name + " "
-			random = 13
-		else
-			//get the first word of the Holiday and use that
-			var/i = findtext(Holiday," ",1,0)
-			name = copytext(Holiday,1,i)
-			GLOB.using_map.station_name += name + " "
+	name = pick(GLOB.station_names)
+	if(name)
+		GLOB.using_map.station_name += name + " "
 
 	// Suffix
 	name = pick(GLOB.station_suffixes)
