@@ -1,0 +1,5 @@
+author: "PigeonLord"
+delete-after: True
+changes: 
+  - rscadd: "Added an MRE vendor to the mess hall."
+  - tweak: "Removed MREs from sweatmax vendors."
