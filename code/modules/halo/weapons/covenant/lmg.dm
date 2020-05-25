@@ -3,8 +3,8 @@
 	name = "Type-51 Directed Energy Rifle"
 	desc = "Also known as the \"Plasma Repeater\", this weapon fires long bursts of superheated plasma. A unique ventilation and cooling system gives it a reversed dispersion and accuracy profile."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
-	icon_state = "PlasmaRepeater"
-	item_state = "plasmarifle"//Need an inhand sprite. Plasrifle used as placeholder.
+	icon_state = "plasmarepeater"
+	item_state = "repeater"
 	w_class = ITEM_SIZE_HUGE
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarepeater
@@ -19,6 +19,11 @@
 	advanced_covenant = 1
 	move_delay_malus = 1.5
 	slowdown_general = 1
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		)
+	wielded_item_state = "repeater-wielded"
 
 	overheat_capacity = 121 //4 bursts, overheating on first round of 5th burst
 	overheat_fullclear_delay = 35

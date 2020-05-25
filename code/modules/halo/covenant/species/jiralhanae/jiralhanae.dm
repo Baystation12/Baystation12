@@ -28,6 +28,9 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	icobase = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_mob.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_mob.dmi'
 	icon_template = 'code/modules/halo/covenant/species/jiralhanae//jiralhanae_template.dmi'
+	damage_overlays = 'code/modules/halo/covenant/species/jiralhanae/dam_jiralhanae.dmi'
+	damage_mask = 'code/modules/halo/covenant/species/jiralhanae/dam_mask_jiralhanae.dmi'
+	blood_mask = 'code/modules/halo/covenant/species/jiralhanae/blood_jiralhanae.dmi'
 	default_language = "Sangheili"
 	language = "Sangheili"
 	additional_langs = list("Doisacci")
