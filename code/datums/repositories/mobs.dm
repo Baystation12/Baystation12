@@ -21,6 +21,8 @@ var/repository/mob/mob_repository = new()
 	var/assigned_role
 
 /datum/mob_lite/New(var/mob/M)
+	if(isnull(M))
+		return INITIALIZE_HINT_QDEL
 	name = M ? (M.real_name ? M.real_name : M.name) : name
 	assigned_role = M.mind ? M.mind.assigned_role : null
 	ref = any2ref(M)

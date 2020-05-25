@@ -20,7 +20,10 @@
 
 /obj/effect/overmap/sector/geminus_city/New()
 	. = ..()
-	loot_distributor.loot_list["artifactRandom"] = list(/obj/machinery/artifact/forerunner_artifact,null,null,null,null,null,null,null,null,null)
+	//loot_distributor.loot_list["artifactRandom"] = list(/obj/machinery/artifact/forerunner_artifact,null,null,null,null,null,null,null,null,null)
 
 /obj/effect/loot_marker/artifact_spawn
 	loot_type = "artifactRandom"
+
+/obj/effect/landmark/artifact_spawn
+	name = "Post-Scan Artifact Spawn"

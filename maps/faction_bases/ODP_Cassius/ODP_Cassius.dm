@@ -25,3 +25,9 @@
 	map_bounds = list(23,106,140,32) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
 	occupy_range = 7
+
+/obj/effect/overmap/ship/unsc_odp_cassius/Destroy()
+	var/datum/game_mode/outer_colonies/gm = ticker.mode
+	if(istype(gm))
+		gm.allow_scan = 1
+	. = ..()
