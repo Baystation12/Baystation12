@@ -42,15 +42,16 @@
 
 /obj/structure/invasion_scanner/proc/toggle_scanner()
 	if(anchored)
-		gm.unregister_scanner()
+		gm:unregister_scanner()
 	else
 		if(!can_register())
 			return
-		gm.register_scanner()
+		gm:register_scanner()
 	anchored = !anchored
 
 /obj/structure/invasion_scanner/Destroy()
-	gm.register_scanner_destroy()
+	if(gm)
+		gm:register_scanner_destroy()
 	. = ..()
 
 /obj/effect/landmark/scanning_point
