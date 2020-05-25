@@ -1,0 +1,5 @@
+author: "radagast-the-red"
+delete-after: True
+changes: 
+  - rscadd: "Humans will now vomit into adjacent toilets."
+  - rscadd: "Humans will now vomit into adjacent disposal units. Vomit will be thrown out of the corresponding disposal outlet."
