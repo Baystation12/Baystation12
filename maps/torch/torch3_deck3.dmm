@@ -2427,8 +2427,8 @@
 /area/engineering/atmos/aux)
 "fe" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -2734,22 +2734,9 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
-"fI" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/structure/ladder/up,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/thirddeck/starboard)
 "fJ" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance{
-	autoset_access = 0;
-	name = "Expedition Storage Maintenance";
-	req_access = list(list("ACCESS_MINING","ACCESS_XENOARCH"),"ACCESS_MAINT")
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/structure/catwalk,
+/turf/simulated/floor/plating,
 /area/maintenance/thirddeck/starboard)
 "fK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -15656,8 +15643,8 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/junction{
-	icon_state = "pipe-j2";
-	dir = 1
+	dir = 1;
+	icon_state = "pipe-j2"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -41069,7 +41056,7 @@ Pd
 Gz
 EF
 cl
-cl
+dD
 cl
 cl
 OE
@@ -41271,7 +41258,7 @@ WZ
 VR
 oH
 cl
-fI
+cl
 Wb
 Wb
 Wb
