@@ -17,11 +17,12 @@
 		abort = 1
 		return
 	for(var/i=1,i<=10,i++)
-		var/option = capitalize(sanitize(input(creator,"Please enter an option or hit cancel to finish") as text|null))
+		var/option = capitalize(sanitizeSafe(input(creator,"Please enter an option or hit cancel to finish") as text|null))
 		if(!option || !creator.client)
 			break
 		choices += option
 	if(!length(choices))
 		abort = 1
 		return
+	result_length = length(choices)
 	..()

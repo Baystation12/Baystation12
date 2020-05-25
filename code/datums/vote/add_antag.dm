@@ -1,5 +1,9 @@
+#define CHOICE_RANDOM "Random"
+#define CHOICE_NONE "None"
+
 /datum/vote/add_antagonist
 	name = "add antagonist"
+	result_length = 3
 	var/automatic = 0 //Handled slightly differently.
 
 /datum/vote/add_antagonist/can_run(mob/creator, automatic)
@@ -14,21 +18,21 @@
 		var/datum/antagonist/antag = all_antag_types[antag_type]
 		if(!(antag.id in additional_antag_types) && antag.is_votable())
 			choices += antag.role_text
-	choices += "Random"
+	choices += CHOICE_RANDOM
 	if(!automatic)
-		choices += "None"
+		choices += CHOICE_NONE
 	src.automatic = automatic
 	..()
 
 /datum/vote/add_antagonist/report_result()
-	if((. = ..()) || (result[1] == "None")) // Failed vote or no antag desired
+	if((. = ..()) || (result[1] == CHOICE_NONE)) // Failed vote or no antag desired
 		antag_add_finished = 1             // So we will never try this again.
 		return
 
-	if(result[1] == "Random")
+	if(result[1] == CHOICE_RANDOM)
 		var/list/pick_random = choices.Copy()
-		pick_random -= "Random"
-		pick_random -= "None"
+		pick_random -= CHOICE_RANDOM
+		pick_random -= CHOICE_NONE
 		result[1] = pick(pick_random)
 
 	if(GAME_STATE <= RUNLEVEL_LOBBY)
@@ -54,3 +58,6 @@
 		to_world("<b>No antags were added.</b>")
 		if(automatic)
 			SSvote.queued_auto_vote = /datum/vote/transfer
+
+#undef CHOICE_RANDOM
+#undef CHOICE_NONE
