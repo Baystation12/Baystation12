@@ -1081,8 +1081,12 @@ About the new airlock wires panel:
 				to_chat(user, "<span class='warning'>The panel is broken, and cannot be closed.</span>")
 			else
 				src.p_open = 0
+				user.visible_message(SPAN_NOTICE("[user.name] closes the maintenance panel on \the [src]."), SPAN_NOTICE("You close the maintenance panel on \the [src]."))
+				playsound(src.loc, "sound/items/Screwdriver.ogg", 20)
 		else
 			src.p_open = 1
+			user.visible_message(SPAN_NOTICE("[user.name] opens the maintenance panel on \the [src]."), SPAN_NOTICE("You open the maintenance panel on \the [src]."))
+			playsound(src.loc, "sound/items/Screwdriver.ogg", 20)
 		src.update_icon()
 	else if(isWirecutter(C))
 		return src.attack_hand(user)
