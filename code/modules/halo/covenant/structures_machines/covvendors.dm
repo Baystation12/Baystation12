@@ -90,14 +90,14 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/gun/energy/plasmapistol = 15,/obj/item/weapon/gun/energy/plasmarifle = 5,/obj/item/weapon/gun/projectile/type31needlerifle = 3,/obj/item/weapon/gun/projectile/needler = 3,
-	/obj/item/ammo_magazine/needles = 32,,/obj/item/weapon/gun/projectile/type51carbine = 3,/obj/item/ammo_magazine/rifleneedlepack = 30,/obj/item/ammo_magazine/type51mag = 30,/obj/item/weapon/grenade/plasma = 12)
+	/obj/item/ammo_magazine/needles = 32,/obj/item/weapon/gun/projectile/type51carbine = 3,/obj/item/ammo_magazine/rifleneedlepack = 30,/obj/item/ammo_magazine/type51mag = 30,/obj/item/weapon/grenade/plasma = 12)
 
 /obj/machinery/vending/armory/covenant/sangheili/equipment // Equipment for Sangheili
 	name = "Covenant - Sangheili Equipment Vendor"
 	desc = "Storage for Covenant Sangheili equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/storage/backpack/sangheili = 10,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5,
+	products = list(/obj/item/weapon/storage/backpack/sangheili = 10,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5
 		,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/clothing/head/helmet/sangheili/ranger = 9,/obj/item/clothing/suit/armor/special/combatharness/ranger = 9
 		,/obj/item/clothing/shoes/sangheili/ranger = 9, /obj/item/clothing/gloves/thick/sangheili/ranger = 9,/obj/item/weapon/tank/air/covenant = 9,/obj/item/clothing/mask/breath = 7
 		,/obj/item/weapon/pickaxe/plasma_drill = 1,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 3)
@@ -132,7 +132,7 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/gun/launcher/grenade/brute_shot = 2,/obj/item/weapon/grenade/brute_shot = 8,
-		,/obj/item/turret_deploy_kit/plasturret = 2,/obj/item/weapon/gun/projectile/fuel_rod = 1,/obj/item/ammo_magazine/fuel_rod = 3)
+		/obj/item/turret_deploy_kit/plasturret = 2,/obj/item/weapon/gun/projectile/fuel_rod = 1,/obj/item/ammo_magazine/fuel_rod = 3)
 
 /obj/machinery/vending/armory/covenant/kigyar/weapon // Both ammo, and guns!
 	name = "Covenant - Kig-Yar Weapon Vendor"
@@ -150,7 +150,7 @@
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/storage/belt/covenant_medic = 5,
 	/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,
-	/obj/item/clothing/under/kigyar/armless = 8,,/obj/item/weapon/pickaxe/plasma_drill = 1,
+	/obj/item/clothing/under/kigyar/armless = 8,/obj/item/weapon/pickaxe/plasma_drill = 1,
 	/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,
 	/obj/item/clothing/gloves/shield_gauntlet/kigyar = 4,/obj/item/weapon/pinpointer/artifact = 2)
 
