@@ -17,7 +17,7 @@
 /turf/simulated/floor,
 /area/unishi/bridge)
 "ae" = (
-/turf/simulated/floor/airless,
+/turf/simulated/floor/reinforced/airless,
 /area/unishi/bridge)
 "af" = (
 /obj/effect/wingrille_spawn/reinforced/full,
@@ -141,7 +141,7 @@
 /area/unishi/bridge)
 "aC" = (
 /obj/machinery/shipsensors,
-/turf/simulated/floor/airless,
+/turf/simulated/floor/reinforced/airless,
 /area/unishi/bridge)
 "aD" = (
 /turf/simulated/wall/titanium,
@@ -213,7 +213,7 @@
 /turf/simulated/floor,
 /area/unishi/bridge)
 "aR" = (
-/turf/simulated/wall,
+/turf/simulated/wall/r_titanium,
 /area/unishi/bridge)
 "aS" = (
 /obj/machinery/door/airlock/command,
@@ -226,7 +226,7 @@
 	icon_state = "1-2"
 	},
 /turf/simulated/floor/tiled,
-/area/unishi/living)
+/area/unishi/bridge)
 "aT" = (
 /obj/structure/largecrate,
 /turf/simulated/floor,
@@ -313,8 +313,7 @@
 /turf/simulated/wall,
 /area/unishi/living)
 "bg" = (
-/obj/structure/sign/warning/secure_area/armory,
-/turf/simulated/wall,
+/turf/simulated/wall/r_titanium,
 /area/unishi/living)
 "bh" = (
 /obj/machinery/door/firedoor,
@@ -331,7 +330,7 @@
 /obj/structure/sign/directions/bridge{
 	dir = 1
 	},
-/turf/simulated/wall,
+/turf/simulated/wall/titanium,
 /area/unishi/living)
 "bj" = (
 /obj/structure/closet/crate/med_crate/trauma,
@@ -606,6 +605,7 @@
 	req_access = newlist()
 	},
 /obj/item/weapon/defibrillator/loaded,
+/obj/item/clothing/accessory/stethoscope,
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
 "bT" = (
@@ -919,7 +919,7 @@
 "cA" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor,
-/area/space)
+/area/unishi/lounge)
 "cB" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor,
@@ -2005,6 +2005,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
+"fh" = (
+/obj/structure/sign/warning/secure_area/armory,
+/turf/simulated/wall/r_titanium,
+/area/unishi/living)
+"fi" = (
+/turf/simulated/floor/reinforced/airless,
+/area/space)
 "gj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -6392,7 +6399,20 @@ aa
 aa
 aa
 aa
-ae
+fi
+fi
+fi
+fi
+fi
+fi
+be
+be
+be
+aP
+aP
+aP
+aP
+aP
 aO
 aO
 aO
@@ -6406,26 +6426,13 @@ aP
 aP
 aP
 aP
-aO
-aO
-aO
-aO
-aO
-be
-be
-be
-be
-be
-be
-be
-be
-be
-be
-be
-be
-be
-be
-be
+aP
+aP
+aP
+aP
+aP
+aP
+aP
 aP
 aP
 aP
@@ -6495,10 +6502,10 @@ aa
 aC
 ae
 ae
-aP
-aP
-aP
-aP
+aD
+aD
+aD
+aD
 be
 be
 bC
@@ -6604,7 +6611,7 @@ bj
 be
 bw
 bp
-bM
+bN
 bQ
 bZ
 cn
@@ -6696,8 +6703,8 @@ af
 as
 as
 as
-aD
-aD
+as
+as
 aL
 aQ
 aV
@@ -6706,7 +6713,7 @@ bk
 be
 bx
 bD
-bM
+bN
 bR
 ca
 ch
@@ -6801,11 +6808,11 @@ aw
 as
 aE
 aJ
-aD
-aD
+aR
+aR
+bg
 be
 be
-bf
 bf
 bE
 bN
@@ -6903,9 +6910,9 @@ ax
 as
 aF
 aK
-aD
+aR
 aW
-bf
+bg
 bl
 bq
 by
@@ -7007,7 +7014,7 @@ aG
 cg
 aR
 aX
-bg
+fh
 bm
 bp
 bp
@@ -7209,7 +7216,7 @@ aA
 as
 as
 aN
-aR
+aD
 aZ
 bi
 bo
@@ -7313,7 +7320,7 @@ aH
 aJ
 aD
 ba
-bf
+be
 XA
 bs
 bz
@@ -7512,20 +7519,20 @@ af
 as
 as
 as
-aD
-aD
+as
+as
 aJ
 aT
 bb
-aR
-aR
+be
+bf
 bu
 bA
 bK
-be
-bW
-bW
-bW
+bf
+bV
+bV
+bV
 cy
 cz
 cz
@@ -7618,26 +7625,26 @@ aD
 aD
 aD
 aD
-aR
-aR
-aJ
+aD
+be
+bv
 Um
 bB
 bv
 bv
 bX
 ce
-bW
-bW
+bV
+bV
 cG
 cK
 cG
-aP
-aP
-aP
-aP
-aP
-aP
+dA
+dA
+dA
+dA
+dA
+dA
 dA
 dI
 dP
@@ -7719,10 +7726,10 @@ aa
 ae
 ae
 ae
-aP
-aP
-aP
-aP
+aD
+aD
+be
+be
 be
 be
 bL
@@ -7730,7 +7737,7 @@ bP
 bY
 cf
 co
-aP
+bW
 cA
 cA
 cA
@@ -7739,19 +7746,19 @@ aP
 aP
 aP
 aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
-aP
+dA
+dA
+dA
+dA
+be
+be
+be
+be
+be
+be
+be
+be
+be
 aP
 aP
 aP
@@ -7820,19 +7827,19 @@ aa
 aa
 aa
 aa
-aO
-aO
-aO
-aO
-aO
-aO
-aP
-aP
-aP
-aP
-aP
-aP
-aP
+fi
+fi
+fi
+fi
+fi
+fi
+be
+be
+be
+be
+be
+be
+be
 aO
 aO
 aO

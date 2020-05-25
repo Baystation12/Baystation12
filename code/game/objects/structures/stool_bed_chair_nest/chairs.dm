@@ -8,6 +8,7 @@
 	buckle_lying = 0 //force people to sit up in chairs when buckled
 	obj_flags = OBJ_FLAG_ROTATABLE
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
+	buckle_movable = TRUE
 
 /obj/structure/bed/chair/do_simple_ranged_interaction(var/mob/user)
 	if(!buckled_mob && user)
@@ -162,7 +163,6 @@
 	desc = "It's a chair. Only for the highest ranked asses."
 	icon_state = "capchair_preview"
 	base_icon = "capchair"
-	buckle_movable = 1
 
 /obj/structure/bed/chair/comfy/captain/on_update_icon()
 	..()
@@ -178,6 +178,7 @@
 	desc = "It's an armchair. It looks comfy."
 	icon_state = "armchair_preview"
 	base_icon = "armchair"
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/armchair/brown/New(newloc, newmaterial = DEFAULT_FURNITURE_MATERIAL)
 	..(newloc, newmaterial, MATERIAL_LEATHER_GENERIC)
@@ -214,7 +215,6 @@
 	icon_state = "officechair_preview"
 	base_icon = "officechair"
 	anchored = 0
-	buckle_movable = 1
 
 /obj/structure/bed/chair/office/Move()
 	. = ..()
@@ -301,6 +301,7 @@
 	base_icon = "shuttle_chair"
 	icon_state = "shuttle_chair_preview"
 	buckling_sound = 'sound/effects/metal_close.ogg'
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/shuttle/post_buckle_mob()
 	if(buckled_mob)
@@ -334,6 +335,7 @@
 	icon_state = "wooden_chair_preview"
 	color = WOOD_COLOR_GENERIC
 	var/chair_material = MATERIAL_WOOD
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
@@ -388,6 +390,7 @@
 	color = WOOD_COLOR_GENERIC
 	var/material/pew_material = MATERIAL_WOOD
 	obj_flags = 0
+	buckle_movable = FALSE
 
 /obj/structure/bed/chair/pew/left
 	icon_state = "pew_left"

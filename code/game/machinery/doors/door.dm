@@ -240,7 +240,7 @@
 		else
 			repairing = stack.split(amount_needed)
 			if (repairing)
-				repairing.dropInto(loc)
+				repairing.dropInto(src)
 				transfer = repairing.amount
 
 		if (transfer)

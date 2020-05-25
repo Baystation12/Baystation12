@@ -21,8 +21,6 @@
 			return global.Failsafe;
 		if("GLOB")
 			return global.GLOB;
-		if("Holiday")
-			return global.Holiday;
 		if("IClog")
 			return global.IClog;
 		if("LIGHTING_CORNER_DIAGONAL")
@@ -934,8 +932,6 @@
 			global.Failsafe=newval;
 		if("GLOB")
 			global.GLOB=newval;
-		if("Holiday")
-			global.Holiday=newval;
 		if("IClog")
 			global.IClog=newval;
 		if("LIGHTING_CORNER_DIAGONAL")
@@ -1836,7 +1832,6 @@
 	"Debug2",
 	"Failsafe",
 	"GLOB",
-	"Holiday",
 	"IClog",
 	"LIGHTING_CORNER_DIAGONAL",
 	"Master",

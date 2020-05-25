@@ -97,7 +97,26 @@
 			fail_smash(user)
 			return 1
 
-	try_touch(user, rotting)
+	if(iscarbon(user))
+		var/mob/living/carbon/M = user
+		switch(M.a_intent)
+			if(I_HELP)
+				return
+			if(I_DISARM, I_GRAB)
+				try_touch(M, rotting)
+			if(I_HURT)
+				if (!(M.organs_by_name[M.hand ? BP_L_HAND : BP_R_HAND].is_usable()))
+					to_chat(user, SPAN_WARNING("You can't use that hand."))
+					return
+				if(rotting && !reinf_material)
+					M.visible_message(SPAN_DANGER("[M.name] punches \the [src] and it crumbles!"), SPAN_DANGER("You punch \the [src] and it crumbles!"))
+					dismantle_wall()
+				else
+					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
+					M.apply_damage(3, BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
+
+	else
+		try_touch(user, rotting)
 
 /turf/simulated/wall/attack_generic(var/mob/user, var/damage, var/attack_message, var/wallbreaker)
 

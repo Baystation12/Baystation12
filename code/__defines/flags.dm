@@ -1,5 +1,12 @@
 GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768))
 
+// Flag Utils
+#define GET_FLAGS(field, mask)      ((field) & (mask))
+#define HAS_FLAGS(field, mask)      (((field) & (mask)) == (mask))
+#define SET_FLAGS(field, mask)      ((field) |= (mask))
+#define CLEAR_FLAGS(field, mask)    ((field) &= ~(mask))
+#define FLIP_FLAGS(field, mask)     ((field) ^= (mask))
+
 #define CLOSET_HAS_LOCK  1
 #define CLOSET_CAN_BE_WELDED 2
 
@@ -49,3 +56,9 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define PASS_FLAG_TABLE  0x1
 #define PASS_FLAG_GLASS  0x2
 #define PASS_FLAG_GRILLE 0x4
+
+// Flags for gas tanks
+#define TANK_FLAG_WELDED      0x000001
+#define TANK_FLAG_FORCED      0x000002
+#define TANK_FLAG_LEAKING     0x000004
+#define TANK_FLAG_WIRED       0x000008

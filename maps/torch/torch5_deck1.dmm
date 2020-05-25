@@ -18530,7 +18530,9 @@
 /area/medical/virology)
 "fVb" = (
 /obj/machinery/door/airlock/medical{
-	name = "Autopsy"
+	autoset_access = 0;
+	name = "Autopsy";
+	req_access = list("ACCESS_MORGUE")
 	},
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -18797,7 +18799,9 @@
 "glb" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/medical{
-	name = "Operating Theater 2"
+	autoset_access = 0;
+	name = "Operating Theater 2";
+	req_access = list(list("ACCESS_SURGERY", "ACCESS_TORCH_BIOMECH"))
 	},
 /obj/machinery/holosign/surgery{
 	dir = 4;
@@ -22320,9 +22324,10 @@
 	},
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/multi_tile/glass/medical{
+	autoset_access = 0;
 	dir = 8;
-	id_tag = null;
-	name = "Infirmary Wing"
+	name = "Infirmary Wing";
+	req_access = list(list("ACCESS_MEDICAL", "ACCESS_MORGUE"))
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -24354,10 +24359,6 @@
 	},
 /turf/simulated/floor/reinforced/oxygen,
 /area/thruster/d1starboard)
-"mIb" = (
-/obj/structure/closet/secure_closet/nuke_wall,
-/turf/simulated/wall/r_wall/prepainted,
-/area/security/nuke_storage)
 "mJb" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -24584,6 +24585,9 @@
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
+	},
+/obj/machinery/nuke_cylinder_dispenser{
+	pixel_x = 2
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/nuke_storage)
@@ -44243,11 +44247,11 @@ mkb
 axR
 axR
 axR
-mIb
+axR
 axR
 aDL
 axR
-mIb
+axR
 axR
 axR
 axR

@@ -7,16 +7,15 @@
 	var/list/display_choices = list() // What's actually shown to the users.
 	var/list/additional_text = list() // Stuff for UI formatting.
 	var/additional_header
-	var/list/priorities = list("First", "Second", "Third") // Should have the same length as weights below.
 
 	var/start_time
 	var/time_remaining
 	var/status = VOTE_STATUS_PREVOTE
 
 	var/list/result                // The results; format is list(choice = votes).
-	var/results_length = 3         // How many choices to show in the result. Setting to -1 will show all choices.
-	var/list/weights = list(3,2,1) // Controls how many things a person can vote for and how they will be weighed.
-	var/list/voted = list()        // Format is list(ckey = list(a, b, ...)); a, b, ... are ordered by order of preference and are numbers, referring to the index in choices
+	var/result_length = 1         // How many choices to show in the result. Must be >= 1
+
+	var/list/votes = list()        // Format is list(ckey = list(a, b, ...)); a, b, ... are ordered by order of preference and are numbers, referring to the index in choices
 
 	var/win_x = 450
 	var/win_y = 740                // Vote window size.
@@ -62,17 +61,44 @@
 //Modifies the vote totals based on non-voting mobs.
 /datum/vote/proc/handle_default_votes()
 	if(!config.vote_no_default)
-		return length(GLOB.clients) - length(voted) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
+		return length(GLOB.clients) - length(votes) //Number of non-voters (might not be active, though; should be revisited if the config option is used. This is legacy code.)
 
 /datum/vote/proc/tally_result()
 	handle_default_votes()
-	result = choices.Copy()
-	shuffle(result) //This looks idiotic, but it will randomize the order in which winners are picked in the event of ties.
-	sortTim(result, /proc/cmp_numeric_dsc, 1)
-	if(length(result) > results_length)
-		result.Cut(results_length + 1, 0)
 
-// Truthy return indicates that either no one voted or there was another error.
+	result = list()
+	var/list/remaining_choices = choices.Copy()
+	var/list/remaining_votes = votes.Copy()
+	while(length(result) < result_length)
+		remaining_choices = shuffle(remaining_choices)
+		sortTim(remaining_choices, /proc/cmp_numeric_dsc, TRUE)
+		if(!length(remaining_votes) || !length(remaining_choices))  // we ran out of options or votes, you get what we have
+			result += remaining_choices.Copy(1, Clamp(result_length - length(result) + 1, 0, length(remaining_choices) + 1))
+			break
+		else 
+			// 50% majority or we don't have enough candidates to be picky, declare the winner and remove it from the possible candidates
+			if(remaining_choices[remaining_choices[1]] > length(remaining_votes) / 2 || length(remaining_choices) <= result_length - length(result))
+				var/winner = remaining_choices[1]
+				result[winner] = remaining_choices[remaining_choices[1]]
+				remove_candidate(remaining_choices, remaining_votes, winner)
+			else // no winner, remove the biggest loser and go again
+				var/loser = remaining_choices[length(remaining_choices)]
+				remove_candidate(remaining_choices, remaining_votes, loser)
+			
+// Remove candidate from choice_list and any votes for it from vote_list, transfering first choices to second
+/datum/vote/proc/remove_candidate(list/choice_list, list/vote_list, candidate)
+	var/candidate_index = choices.Find(candidate) // use choices instead of choice_list because we need the original indexing
+	choice_list -= candidate
+	for(var/ckey in vote_list)
+		if(vote_list[ckey][1] == candidate_index && length(vote_list[ckey]) > 1)
+			var/new_first_choice = choices[vote_list[ckey][2]]
+			choice_list[new_first_choice] += 1
+		vote_list[ckey] -= candidate_index
+
+		if(!length(vote_list[ckey]))
+			vote_list -= ckey
+
+// Truthy return indicates that either no one votes or there was another error.
 /datum/vote/proc/report_result()
 	if(!length(result))
 		return 1
@@ -86,40 +112,39 @@
 
 /datum/vote/proc/get_result_announcement()
 	var/list/text = list()
-	if(!(result[result[1]] > 0)) // No one voted.
+	if(!(result[result[1]] > 0)) // No one votes.
 		text += "<b>Vote Result: Inconclusive - No Votes!</b>"
 	else
 		text += "<b>Vote Result: [display_choices[result[1]]]</b>"
-		if(length(result) >= 2)
-			text += "\nSecond place: [display_choices[result[2]]]"
-		if(length(result) >= 3)
-			text += ", third place: [display_choices[result[3]]]"
+		if(result_length > 1)
+			text += "\nRunner ups: "
+			var/list/runner_ups = list()
+			for(var/runner_up in result.Copy(2))
+				runner_ups += display_choices[runner_up]
+			text += english_list(runner_ups)
 
 	return JOINTEXT(text)
 
-// False return means vote was not changed for whatever reason.
-/datum/vote/proc/submit_vote(var/mob/voter, var/vote, var/priority)
+/datum/vote/proc/submit_vote(var/mob/voter, var/vote)
 	if(mob_not_participating(voter))
 		return
-	if(vote && (vote in 1 to length(choices)) && priority && (priority in 1 to length(weights)))
-		var/ckey = voter.ckey
-		if(!voted[ckey]) //No vote yet; set up and vote.
-			voted[ckey] = new /list(length(weights))
-			voted[ckey][priority] = vote
-			choices[choices[vote]] += weights[priority]
-			return 1
-		var/old_choice = voted[ckey][priority]
-		if(old_choice == vote)
-			return //OK, voted for the same thing again.
-		if(old_choice)
-			choices[choices[old_choice]] -= weights[priority] //Remove the old vote.
-		for(var/i in 1 to length(weights)) //Look if we voted for this option before at a different priority
-			if(voted[ckey][i] == vote)
-				choices[choices[vote]] -= weights[i]
-				voted[ckey][i] = null
-		voted[ckey][priority] = vote  // Record our vote.
-		choices[choices[vote]] += weights[priority]
-		return 1
+
+	var/ckey = voter.ckey
+	if(!votes[ckey])
+		votes[ckey] = list()
+
+	var/choice = choices[vote]
+	if(vote in votes[ckey])
+		if(votes[ckey][1] == vote)
+			choices[choice] -= 1
+			if(length(votes[ckey]) > 1) // If the player has rescinded their first choice, their second choice is promoted to their first choice, if it exists.
+				var/new_choice = choices[votes[ckey][2]]
+				choices[new_choice] += 1  // Update the running tally to reflect that
+		votes[ckey] -= vote
+	else
+		votes[ckey] += vote
+		if(votes[ckey][1] == vote)
+			choices[choice] += 1
 
 // Checks if the mob is participating in the round sufficiently to vote, as per config settings.
 /datum/vote/proc/mob_not_participating(mob/voter)
@@ -153,32 +178,24 @@
 	else
 		. += "<h2>Vote: [capitalize(name)]</h2>"
 	. += "Time Left: [time_remaining] s<hr>"
-	. += "<table width = '100%'><tr><td align = 'center'><b>Choices</b></td><td colspan='3' align = 'center'><b>Votex</b></td><td align = 'center'><b>Votes</b></td>"
+	. += "<table width = '100%'><tr><th>Choices</th><th>Order</th>"
 	. += additional_header
+	. += "</tr>"
 
-	var/totalvotes = 0
 	for(var/i = 1, i <= choices.len, i++)
-		totalvotes += choices[choices[i]]
+		var/choice = choices[i]
+		var/voted_for = votes[user.ckey] && (i in votes[user.ckey])
 
-	for(var/j = 1, j <= choices.len, j++)
-		var/choice = choices[j]
-		var/number_of_votes = choices[choice] || 0
-		var/votepercent = 0
-		if(totalvotes)
-			votepercent = round((number_of_votes/totalvotes)*100)
-
-		. += "<tr><td>"
+		. += "<tr><td><a href='?src=\ref[src];choice=[i]'[voted_for ? " style='font-weight: bold'" : ""]>"
 		. += "[display_choices[choice]]"
+		. += "</a></td>"
+
+		. += "<td style='text-align: center;'>"
+		if(voted_for)
+			var/list/vote = votes[user.ckey]
+			. += "[vote.Find(i)]"
 		. += "</td>"
 
-		for(var/i = 1, i <= length(priorities), i++)
-			. += "<td>"
-			if(voted[user.ckey] && (voted[user.ckey][i] == j)) //We have this jth choice chosen at priority i.
-				. += "<b><a href='?src=\ref[src];choice=[j];priority=[i]'>[priorities[i]]</a></b>"
-			else
-				. += "<a href='?src=\ref[src];choice=[j];priority=[i]'>[priorities[i]]</a>"
-			. += "</td>"
-		. += "</td><td align = 'center'>[votepercent]%</td>"
 		if (additional_text[choice])
 			. += "[additional_text[choice]]" //Note lack of cell wrapper, to allow for dynamic formatting.
 		. += "</tr>"
@@ -189,11 +206,11 @@
 	if(!istype(user) || !user.client)
 		return
 
+	if(!href_list["choice"])
+		return
+
 	var/choice = text2num(href_list["choice"])
-	var/priority = text2num(href_list["priority"])
 	if(!is_valid_index(choice, choices))
 		return
-	if(!is_valid_index(priority, weights))
-		return // If the input was invalid, we don't continue recording the vote.
 
-	submit_vote(user, choice, priority)
+	submit_vote(user, choice)

@@ -34,6 +34,9 @@
 	req_access = list(list(access_brig, access_bridge))
 	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED)
 
+/obj/item/weapon/gun/energy/gun/secure/preauthorized
+	authorized_modes = list(ALWAYS_AUTHORIZED, AUTHORIZED, AUTHORIZED)
+
 /obj/item/weapon/gun/energy/revolver/secure
 	name = "smart service revolver"
 	desc = "The LAER680-S, a standard issue service revolver commonly used by higher ranking offcers among the SCG. Fitted with an NT1019 chip which allows remote authorization of the weapon's functionality."
@@ -67,7 +70,7 @@
 	if(!borg)
 		CRASH("Invalid spawn location.")
 	registered_owner = borg.name
-	GLOB.registered_cyborg_weapons += src
+	GLOB.secure_weapons |= src
 	. = ..()
 
 /obj/item/weapon/gun/energy/laser/secure

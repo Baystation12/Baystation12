@@ -2964,7 +2964,7 @@
 /area/map_template/oldlab/station/northairlockatmos)
 "Xx" = (
 /obj/structure/grille,
-/turf/space,
+/turf/simulated/floor/exoplanet/concrete/reinforced,
 /area/map_template/oldlab/solars)
 "Yb" = (
 /obj/machinery/light{

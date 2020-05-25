@@ -1,41 +1,31 @@
 /mob/living/simple_animal/hostile/retaliate
 	var/list/enemies = list()
 
-/mob/living/simple_animal/hostile/retaliate/Found(var/atom/A)
-	if(isliving(A))
-		var/mob/living/L = A
-		if(!L.stat)
-			stance = HOSTILE_STANCE_ATTACK
-			return L
-		else
-			enemies -= weakref(L)
-
-/mob/living/simple_animal/hostile/retaliate/ListTargets()
+/mob/living/simple_animal/hostile/retaliate/ListTargets(var/dist = world.view)
 	. = list()
 	if(!enemies.len)
 		return
-	var/list/see = ..()
-	for(var/weakref/W in enemies) // Remove all entries that aren't in enemies
+	var/possible_targets = ..()
+	for(var/weakref/W in enemies)
 		var/mob/M = W.resolve()
-		if(M in see)
+		if(M in possible_targets)
 			. += M
 
-/mob/living/simple_animal/hostile/retaliate/proc/Retaliate()
-	var/list/around = view(src, 7)
+/mob/living/simple_animal/hostile/retaliate/proc/AddEnemies(var/list/possible_enemies)
+	for(var/mob/M in possible_enemies)
+		if(ValidTarget(M))
+			enemies |= weakref(M)	
 
-	for(var/atom/movable/A in around)
-		if(A == src)
-			continue
-		if(isliving(A))
-			var/mob/living/M = A
-			if(!attack_same && M.faction != faction)
-				enemies |= weakref(M)
-
-	for(var/mob/living/simple_animal/hostile/retaliate/H in around)
+/mob/living/simple_animal/hostile/retaliate/proc/FindAllies(var/list/possible_allies)
+	for(var/mob/living/simple_animal/hostile/retaliate/H in possible_allies)
 		if(!attack_same && !H.attack_same && H.faction == faction)
 			H.enemies |= enemies
-	return 0
+
+/mob/living/simple_animal/hostile/retaliate/proc/Retaliate(var/dist = world.view)
+	var/list/possible_targets_or_allies = hearers(usr, dist)
+	AddEnemies(possible_targets_or_allies)
+	FindAllies(possible_targets_or_allies)
 
 /mob/living/simple_animal/hostile/retaliate/adjustBruteLoss(var/damage)
 	..(damage)
-	Retaliate()
+	Retaliate(10)

@@ -15,7 +15,7 @@
 /obj/effect/overmap/visitable/ship/landable/ascent/two
 	name = "Lepidoptera"
 	shuttle = "Lepidoptera"
-	fore_dir = NORTH
+	fore_dir = SOUTH
 
 /obj/machinery/computer/shuttle_control/explore/ascent
 	name = "shuttle control console"
@@ -41,6 +41,11 @@
 	landmark_tag = "nav_hangar_ascent_two"
 	docking_controller = "ascent_starboard_dock"
 	base_area = /area/ship/ascent/wing_starboard
+
+//Add Torck Docking Port for Trichoptera
+/obj/effect/shuttle_landmark/ascent_seedship/torch/trichoptera
+	name = "Trichoptera Docking Port"
+	landmark_tag = "nav_trichoptera_altdock"
 
 /datum/shuttle/autodock/overmap/ascent
 	name = "Trichoptera"

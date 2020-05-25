@@ -203,7 +203,7 @@
 		if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
 			toggle_safety(user)
 		else
-			handle_click_empty(user)
+			handle_click_safety(user)
 			return
 
 	if(world.time < next_fire_time)
@@ -268,6 +268,9 @@
 	else
 		src.visible_message("*click click*")
 	playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
+
+/obj/item/weapon/gun/proc/handle_click_safety(mob/user)
+	user.visible_message(SPAN_WARNING("[user] squeezes the trigger of \the [src] but it doesn't move!"), SPAN_WARNING("You squeeze the trigger but it doesn't move!"), range = 3)
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)

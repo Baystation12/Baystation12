@@ -1,6 +1,6 @@
 /datum/job/captain
 	title = "Commanding Officer"
-	supervisors = "the Sol Central Government and the Sol Code of Military Justice"
+	supervisors = "the Sol Central Government and the Sol Code of Uniform Justice"
 	minimal_player_age = 14
 	economic_power = 15
 	minimum_character_age = list(SPECIES_HUMAN = 40)
@@ -384,7 +384,7 @@
 	access = list(access_security, access_medical, access_engine, access_maint_tunnels, access_emergency_storage,
 			            access_bridge, access_janitor, access_kitchen, access_cargo, access_mailsorting, access_RC_announce, access_keycard_auth,
 			            access_solgov_crew, access_aquila, access_aquila_helm, access_guppy, access_guppy_helm, access_external_airlocks,
-			            access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm)
+			            access_eva, access_hangar, access_cent_creed, access_explorer, access_expedition_shuttle, access_expedition_shuttle_helm, access_teleporter)
 
 	software_on_spawn = list(/datum/computer_file/program/comm,
 							 /datum/computer_file/program/suit_sensors,

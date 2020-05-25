@@ -220,18 +220,6 @@
 /area/maintenance/fourthdeck/starboard)
 "aJ" = (
 /obj/effect/wallframe_spawn/reinforced/hull,
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	dir = 4;
-	display_name = "Starboard Dock C";
-	frequency = 1380;
-	id_tag = "admin_shuttle_dock_airlock";
-	pixel_x = -24;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	tag_airpump = "admin_shuttle_dock_pump";
-	tag_chamber_sensor = "admin_shuttle_dock_sensor";
-	tag_exterior_door = "admin_shuttle_dock_outer";
-	tag_interior_door = "admin_shuttle_dock_inner"
-	},
 /turf/simulated/floor/plating,
 /area/hallway/primary/fourthdeck/aft)
 "aK" = (
@@ -331,6 +319,19 @@
 	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 4;
+	display_name = "Starboard Dock C";
+	frequency = 1380;
+	id_tag = "admin_shuttle_dock_airlock";
+	pixel_x = -24;
+	pixel_y = 32;
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
+	tag_airpump = "admin_shuttle_dock_pump";
+	tag_chamber_sensor = "admin_shuttle_dock_sensor";
+	tag_exterior_door = "admin_shuttle_dock_outer";
+	tag_interior_door = "admin_shuttle_dock_inner"
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/aft)
@@ -3491,22 +3492,6 @@
 /obj/item/device/radio/beacon,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fourthdeck/aft)
-"lQ" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
-/obj/machinery/embedded_controller/radio/airlock/docking_port{
-	dir = 4;
-	display_name = "Port Dock C";
-	frequency = 1331;
-	id_tag = "rescue_shuttle_dock_airlock";
-	pixel_x = -24;
-	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
-	tag_airpump = "rescue_shuttle_dock_pump";
-	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
-	tag_exterior_door = "rescue_shuttle_dock_outer";
-	tag_interior_door = "rescue_shuttle_dock_inner"
-	},
-/turf/simulated/floor/plating,
-/area/hallway/primary/fourthdeck/aft)
 "lX" = (
 /obj/structure/disposalpipe/segment{
 	dir = 1;
@@ -3997,8 +3982,8 @@
 /area/hallway/primary/fourthdeck/fore)
 "ni" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 5
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -4118,8 +4103,8 @@
 /area/hallway/primary/fourthdeck/fore)
 "ns" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 5
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
@@ -4342,8 +4327,8 @@
 /area/space)
 "ot" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 5
 	},
 /obj/structure/table/gamblingtable,
 /obj/effect/catwalk_plated,
@@ -4364,8 +4349,8 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden{
-	dir = 5;
-	icon_state = "intact"
+	icon_state = "intact";
+	dir = 5
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/fore)
@@ -4626,6 +4611,12 @@
 /obj/item/weapon/book/manual/nt_regs,
 /turf/simulated/floor/wood,
 /area/command/captainmess)
+"pz" = (
+/obj/machinery/door/firedoor,
+/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/shuttle_landmark/ascent_seedship/torch/trichoptera,
+/turf/simulated/floor/plating,
+/area/hallway/primary/fourthdeck/aft)
 "pD" = (
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -10544,6 +10535,19 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/embedded_controller/radio/airlock/docking_port{
+	dir = 4;
+	display_name = "Port Dock C";
+	frequency = 1331;
+	id_tag = "rescue_shuttle_dock_airlock";
+	pixel_x = -24;
+	pixel_y = -32;
+	req_access = list(list("ACCESS_EXTERNAL","ACCESS_TORCH_CREW"));
+	tag_airpump = "rescue_shuttle_dock_pump";
+	tag_chamber_sensor = "rescue_shuttle_dock_sensor";
+	tag_exterior_door = "rescue_shuttle_dock_outer";
+	tag_interior_door = "rescue_shuttle_dock_inner"
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/hallway/primary/fourthdeck/aft)
 "JQ" = (
@@ -10697,6 +10701,7 @@
 /area/space)
 "Ko" = (
 /obj/effect/shuttle_landmark/ert/dock,
+/obj/effect/shuttle_landmark/skrellscout/dock,
 /turf/space,
 /area/space)
 "Kp" = (
@@ -40808,10 +40813,10 @@ uj
 uj
 Jx
 JP
-lQ
+aJ
 Px
 Ms
-Yj
+pz
 aa
 aa
 aa

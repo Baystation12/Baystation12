@@ -17,7 +17,7 @@
 	name = "mounted flash"
 	desc = "You are the law."
 	icon_state = "flash"
-	
+
 	selectable = 0
 	toggleable = 1
 	activates_on_touch = 1
@@ -314,7 +314,7 @@
 	selectable = 1
 	toggleable = 1
 	use_power_cost = 10 KILOWATTS
-	active_power_cost = 500
+	active_power_cost = 0.5 KILOWATTS
 	passive_power_cost = 0
 
 	gun = /obj/item/weapon/gun/energy/crossbow/ninja/mounted
@@ -329,10 +329,6 @@
 	return ..()
 
 /obj/item/rig_module/mounted/energy_blade/activate()
-
-	if(!..() || !gun)
-		return 0
-
 	var/mob/living/M = holder.wearer
 
 	if(M.l_hand && M.r_hand)
@@ -343,6 +339,9 @@
 	var/obj/item/weapon/melee/energy/blade/blade = new(M)
 	blade.creator = M
 	M.put_in_hands(blade)
+
+	if(!..() || !gun)
+		return 0
 
 /obj/item/rig_module/mounted/energy_blade/deactivate()
 

@@ -6,8 +6,11 @@
 /turf/simulated/wall/titanium,
 /area/space)
 "ac" = (
-/turf/simulated/wall,
-/area/space)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/wall/r_wall,
+/area/unishi/engineering)
 "ad" = (
 /obj/machinery/power/port_gen/pacman/super/potato,
 /obj/structure/cable/yellow{
@@ -55,7 +58,13 @@
 /turf/simulated/floor/reinforced/airmix,
 /area/unishi/engineering)
 "ai" = (
-/turf/simulated/wall,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor,
 /area/unishi/engineering)
 "aj" = (
 /obj/machinery/power/port_gen/pacman/super/potato,
@@ -117,10 +126,10 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aq" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/turf/simulated/wall,
+/turf/simulated/floor,
 /area/unishi/engineering)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
@@ -137,7 +146,13 @@
 /turf/space,
 /area/unishi/engineering)
 "at" = (
-/turf/simulated/wall/ocp_wall,
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 10
+	},
+/obj/structure/sign/warning/airlock,
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor,
 /area/unishi/engineering)
 "au" = (
 /obj/structure/cable/yellow{
@@ -182,14 +197,17 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aB" = (
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
+/obj/structure/cable/yellow{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/wall,
-/area/unishi/engineering)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/wall/r_wall,
+/area/unishi/engineroom)
 "aC" = (
 /obj/machinery/atmospherics/portables_connector{
 	icon_state = "map_connector";
@@ -199,13 +217,18 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aD" = (
-/obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
-	dir = 10
+/obj/structure/cable/yellow{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
 	},
-/obj/structure/sign/warning/airlock,
-/turf/simulated/wall,
-/area/unishi/engineering)
+/obj/machinery/vending/wallmed1,
+/obj/structure/sign/warning/high_voltage{
+	icon_state = "shock";
+	dir = 4
+	},
+/turf/simulated/wall/r_wall,
+/area/unishi/engineroom)
 "aE" = (
 /obj/machinery/airlock_sensor{
 	id_tag = "unishi_sensor";
@@ -332,17 +355,14 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "aT" = (
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
+/obj/machinery/atmospherics/unary/outlet_injector{
+	dir = 1;
+	frequency = 1438;
+	icon_state = "map_injector";
+	id = "unishi_fuel_in";
+	use_power = 1
 	},
-/obj/machinery/vending/wallmed1,
-/obj/structure/sign/warning/high_voltage{
-	icon_state = "shock";
-	dir = 4
-	},
-/turf/simulated/wall,
+/turf/simulated/floor/reinforced/airless,
 /area/unishi/engineroom)
 "aU" = (
 /turf/simulated/floor,
@@ -364,9 +384,8 @@
 /turf/simulated/floor,
 /area/unishi/engineering)
 "aY" = (
-/obj/structure/sign/warning/airlock,
-/turf/simulated/wall/titanium,
-/area/unishi/engineering)
+/turf/simulated/floor/reinforced/airless,
+/area/unishi/engineroom)
 "aZ" = (
 /obj/machinery/access_button/airlock_exterior{
 	master_tag = "unishi";
@@ -487,7 +506,7 @@
 /turf/simulated/wall/ocp_wall,
 /area/unishi/engineroom)
 "bq" = (
-/obj/machinery/suit_storage_unit/engineering,
+/obj/machinery/suit_storage_unit/engineering/unishi,
 /obj/structure/sign/warning/fire{
 	dir = 4;
 	pixel_x = -32
@@ -511,21 +530,18 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bt" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 1;
-	frequency = 1438;
-	icon_state = "map_injector";
-	id = "unishi_fuel_in";
-	use_power = 1
+/obj/machinery/sparker{
+	id_tag = "unishi";
+	pixel_x = -20
 	},
-/turf/simulated/floor,
+/turf/simulated/floor/reinforced/airless,
 /area/unishi/engineroom)
 "bu" = (
 /obj/effect/wallframe_spawn/reinforced_phoron,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bv" = (
-/obj/machinery/suit_storage_unit/engineering,
+/obj/machinery/suit_storage_unit/engineering/unishi,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bw" = (
@@ -561,7 +577,7 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/machinery/suit_storage_unit/engineering,
+/obj/machinery/suit_storage_unit/engineering/unishi,
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bA" = (
@@ -599,16 +615,13 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bD" = (
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/wall,
+/turf/simulated/wall/r_wall,
 /area/unishi/engineroom)
 "bE" = (
 /obj/structure/cable/yellow{
@@ -649,13 +662,8 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bI" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
-/turf/simulated/wall,
+/obj/structure/closet/hydrant,
+/turf/simulated/wall/r_wall,
 /area/unishi/engineroom)
 "bJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -678,13 +686,6 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bL" = (
-/obj/machinery/sparker{
-	id_tag = "unishi";
-	pixel_x = -20
-	},
-/turf/simulated/floor,
-/area/unishi/engineroom)
-"bM" = (
 /obj/machinery/atmospherics/unary/vent_pump/engine{
 	dir = 4;
 	external_pressure_bound = 100;
@@ -697,8 +698,12 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor/reinforced/airless,
 /area/unishi/engineroom)
+"bM" = (
+/obj/effect/wallframe_spawn/reinforced,
+/turf/simulated/floor,
+/area/unishi/engineering)
 "bN" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4
@@ -725,8 +730,9 @@
 /turf/simulated/floor,
 /area/unishi/engineroom)
 "bR" = (
-/turf/simulated/wall,
-/area/unishi/engineroom)
+/obj/machinery/light/small,
+/turf/simulated/floor,
+/area/unishi/engineering)
 "bS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
@@ -763,10 +769,6 @@
 	},
 /obj/machinery/portable_atmospherics/canister/hydrogen,
 /turf/simulated/floor,
-/area/unishi/engineroom)
-"bX" = (
-/obj/structure/closet/hydrant,
-/turf/simulated/wall,
 /area/unishi/engineroom)
 "bY" = (
 /obj/structure/table/standard,
@@ -822,10 +824,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/unishi/engineroom)
-"ch" = (
-/obj/structure/sign/warning/vent_port,
-/turf/simulated/wall/titanium,
-/area/space)
 "ci" = (
 /obj/structure/lattice,
 /turf/space,
@@ -840,12 +838,6 @@
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
-"Ic" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
-/turf/simulated/wall,
-/area/unishi/engineering)
 
 (1,1,1) = {"
 aa
@@ -5257,10 +5249,10 @@ aa
 aa
 ab
 ab
-aG
-aG
-aG
-aG
+bZ
+bZ
+bZ
+bZ
 aG
 aG
 aG
@@ -5358,16 +5350,16 @@ ab
 ab
 ab
 ab
-at
-aG
+ag
+bg
 aO
 ba
 bi
 bo
+aT
+aY
+aY
 bt
-aU
-aU
-bL
 bS
 ca
 ce
@@ -5455,21 +5447,21 @@ aa
 aa
 ab
 ab
-ac
-ac
-ac
-ac
-ac
-at
-aG
+ag
+ag
+ag
+ag
+ag
+ag
+bg
 aP
 bb
 bj
 aG
-aU
-aU
-aU
-bM
+aY
+aY
+aY
+bL
 bT
 cb
 ce
@@ -5557,13 +5549,13 @@ aa
 aa
 ab
 ab
-ab
+ag
 ad
 aj
 aj
-at
-at
-aG
+ag
+ag
+bg
 aP
 bb
 bk
@@ -5659,13 +5651,13 @@ aa
 aa
 ab
 ab
-ab
+ag
 ae
 ak
 ak
-at
-at
-aG
+ag
+ag
+bg
 aQ
 bc
 bd
@@ -5761,7 +5753,7 @@ aa
 aa
 ab
 ab
-ab
+ag
 af
 al
 an
@@ -5863,13 +5855,13 @@ aa
 aa
 ab
 ab
-ab
 ag
 ag
 ag
-at
-at
-at
+ag
+ag
+ag
+ag
 aS
 be
 bm
@@ -5965,14 +5957,14 @@ aa
 aa
 ab
 ab
-ab
+ag
 ah
 ah
 ao
 av
-Ic
-aH
-aT
+aq
+ag
+aD
 bc
 bc
 bc
@@ -6067,11 +6059,11 @@ aa
 aa
 ab
 ab
-ab
+ag
 ah
 ah
 ao
-aw
+aH
 aA
 aw
 aU
@@ -6169,22 +6161,22 @@ aa
 aa
 ab
 ab
-ab
+ag
 ah
 am
 ap
 ax
-aB
+ai
 aI
 aV
 bf
 bn
 bs
 bx
+aB
 bD
+bg
 bI
-bR
-bX
 cc
 ce
 cg
@@ -6271,12 +6263,12 @@ aa
 aa
 ab
 ab
+ag
+ag
+ag
 ac
-ai
-ai
-aq
-ai
-ai
+ag
+ag
 aJ
 aW
 bg
@@ -6480,20 +6472,20 @@ aa
 aa
 as
 ay
-aD
+at
 aL
-aY
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ab
-ch
+ay
+ay
+ay
+ay
+ay
+bZ
+bZ
+bZ
+bZ
+bZ
+bZ
+cf
 aa
 aa
 aa
@@ -6685,7 +6677,7 @@ aa
 aa
 ay
 aF
-aw
+bR
 ay
 aa
 aa
@@ -6786,7 +6778,7 @@ aa
 aa
 aa
 ay
-ai
+bM
 aN
 ay
 aa

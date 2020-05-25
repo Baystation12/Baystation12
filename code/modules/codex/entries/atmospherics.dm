@@ -201,7 +201,7 @@
 	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
 	<br>\
 	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173?C. \
-	The valve itself will close after expending most or all of the contents into the air.<br>\
+	Normally the valve itself will close after expending most or all of the contents into the air, but can be forced open or closed with a screwdriver.<br>\
 	<br>\
 	Filling a tank such that experiences ~4000kPa of pressure will cause the tank to rupture, spilling out its contents and destroying the tank. \
 	Tanks filled over ~5000kPa will rupture rather violently, exploding with significant force."
