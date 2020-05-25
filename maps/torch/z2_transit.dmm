@@ -107,10 +107,6 @@
 /obj/effect/shuttle_landmark/escape_pod/transit/pod13,
 /turf/space/transit/north,
 /area/space)
-"o" = (
-/obj/effect/shuttle_landmark/escape_pod/transit/pod14,
-/turf/space/transit/north,
-/area/space)
 "p" = (
 /obj/effect/shuttle_landmark/transit/torch/exploration_shuttle,
 /turf/space/transit/north,
@@ -238,10 +234,6 @@
 /area/space)
 "N" = (
 /obj/effect/shuttle_landmark/escape_pod/out/pod13,
-/turf/space,
-/area/space)
-"O" = (
-/obj/effect/shuttle_landmark/escape_pod/out/pod14,
 /turf/space,
 /area/space)
 "P" = (
@@ -4163,7 +4155,7 @@ e
 e
 e
 h
-o
+e
 e
 e
 e
@@ -13614,7 +13606,7 @@ d
 d
 d
 d
-O
+d
 d
 d
 d
