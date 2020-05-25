@@ -1,3 +1,5 @@
+GLOBAL_LIST(hazard_overlays)
+
 //Define all tape types in policetape.dm
 /obj/item/taperoll
 	name = "tape roll"
@@ -13,6 +15,12 @@
 
 /obj/item/taperoll/Initialize()
 	. = ..()
+	if(!GLOB.hazard_overlays)
+		GLOB.hazard_overlays = list()
+		GLOB.hazard_overlays["[NORTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "N")
+		GLOB.hazard_overlays["[EAST]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "E")
+		GLOB.hazard_overlays["[SOUTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "S")
+		GLOB.hazard_overlays["[WEST]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "W")
 	if(apply_tape)
 		var/turf/T = get_turf(src)
 		if(!T)
@@ -22,8 +30,6 @@
 			afterattack(airlock, null, TRUE)
 		return INITIALIZE_HINT_QDEL
 
-
-var/list/image/hazard_overlays
 var/list/tape_roll_applications = list()
 
 /obj/item/tape
@@ -59,15 +65,6 @@ var/list/tape_roll_applications = list()
 		var/image/I = overlay_image(icon, "[new_state]_[detail_overlay]", flags=RESET_COLOR)
 		I.color = detail_color
 		overlays |= I
-
-/obj/item/tape/New()
-	..()
-	if(!hazard_overlays)
-		hazard_overlays = list()
-		hazard_overlays["[NORTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "N")
-		hazard_overlays["[EAST]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "E")
-		hazard_overlays["[SOUTH]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "S")
-		hazard_overlays["[WEST]"]	= new/image('icons/effects/warning_stripes.dmi', icon_state = "W")
 
 /obj/item/taperoll/police
 	name = "police tape"
@@ -300,7 +297,7 @@ var/list/tape_roll_applications = list()
 	if (istype(A, /turf/simulated/floor) ||istype(A, /turf/unsimulated/floor))
 		var/turf/F = A
 		var/direction = user.loc == F ? user.dir : turn(user.dir, 180)
-		var/icon/hazard_overlay = hazard_overlays["[direction]"]
+		var/hazard_overlay = GLOB.hazard_overlays["[direction]"]
 		if(tape_roll_applications[F] == null)
 			tape_roll_applications[F] = 0
 

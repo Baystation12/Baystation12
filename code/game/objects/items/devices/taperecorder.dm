@@ -269,7 +269,7 @@
 	update_icon()
 	to_chat(user, "<span class='notice'>Audio playback started.</span>")
 	playsound(src, 'sound/machines/click.ogg', 10, 1)
-	for(var/i=1 , i < mytape.max_capacity , i++)
+	for(var/i=1 , i < mytape?.max_capacity , i++)
 		if(!mytape || !playing)
 			break
 		if(mytape.storedinfo.len < i)

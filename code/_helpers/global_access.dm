@@ -475,8 +475,6 @@
 			return global.gzn_check;
 		if("hadevent")
 			return global.hadevent;
-		if("hazard_overlays")
-			return global.hazard_overlays;
 		if("hivemind_bank")
 			return global.hivemind_bank;
 		if("holder_mob_icon_cache")
@@ -1388,8 +1386,6 @@
 			global.gzn_check=newval;
 		if("hadevent")
 			global.hadevent=newval;
-		if("hazard_overlays")
-			global.hazard_overlays=newval;
 		if("hivemind_bank")
 			global.hivemind_bank=newval;
 		if("holder_mob_icon_cache")
@@ -2063,7 +2059,6 @@
 	"gravity_is_on",
 	"gzn_check",
 	"hadevent",
-	"hazard_overlays",
 	"hivemind_bank",
 	"holder_mob_icon_cache",
 	"host",

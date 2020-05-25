@@ -558,7 +558,7 @@
 
 	// Trace chemicals
 	for(var/T in chem_doses)
-		if(bloodstr.has_reagent(T) || ingested.has_reagent(T) || touching.has_reagent(T))
+		if(bloodstr?.has_reagent(T) || ingested?.has_reagent(T) || touching?.has_reagent(T))
 			continue
 		var/datum/reagent/R = T
 		chem_doses[T] -= initial(R.metabolism)*2
