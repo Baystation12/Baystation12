@@ -780,9 +780,6 @@
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 8,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 8,
-					/obj/item/weapon/storage/mre/random = 8,
-					/obj/item/weapon/storage/mre/menu9 = 4,
-					/obj/item/weapon/storage/mre/menu10 = 4,
 					/obj/item/weapon/reagent_containers/pill/diet = 8,
 					/obj/item/weapon/towel/random = 8)
 
@@ -792,9 +789,6 @@
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake = 20,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/fitnessflask = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar = 5,
-					/obj/item/weapon/storage/mre/random = 50,
-					/obj/item/weapon/storage/mre/menu9 = 50,
-					/obj/item/weapon/storage/mre/menu10 = 50,
 					/obj/item/weapon/reagent_containers/pill/diet = 25,
 					/obj/item/weapon/towel/random = 40)
 
@@ -1419,3 +1413,33 @@
 	..()
 	if(!(stat & NOPOWER))
 		overlays += image(icon, "[initial(icon_state)]-heater")
+
+
+/obj/machinery/vending/mredispenser
+	name = "mre-dispenser"
+	desc = "A Vending machine filled with MRE's."
+	icon_state = "mrevend"
+	icon_deny = "mrevend-deny"
+	icon_vend = "mrevend-vend"
+	products = list(
+		/obj/item/weapon/storage/mre = 2,
+		/obj/item/weapon/storage/mre/menu2 = 2,
+		/obj/item/weapon/storage/mre/menu3 = 2,
+		/obj/item/weapon/storage/mre/menu4 = 2,
+		/obj/item/weapon/storage/mre/menu5 = 2,
+		/obj/item/weapon/storage/mre/menu6 = 2,
+		/obj/item/weapon/storage/mre/menu7 = 2,
+		/obj/item/weapon/storage/mre/menu8 = 2,
+		/obj/item/weapon/storage/mre/menu9 = 10,
+		/obj/item/weapon/storage/mre/menu10 = 10
+	)
+
+	contraband = list(
+		/obj/item/weapon/storage/mre/menu11 = 5,
+		/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 5
+	)
+	vend_delay = 15
+	idle_power_usage = 211
+	product_slogans = ";STARFIGHTER TESTED!, STARFIGHTER RECOMMENDED!, STARFIGHTER APPROVED!;YOU ARE NOT ALLOWED A JELLY DOUGHNUT!;YOU DONT WANT TO DIE HUNGRY SOLDIER!"
+	product_ads = "Everything the body needs!;Now transfat free;Vegan options are available.;Rated for all known species!"
+	base_type = /obj/machinery/vending/mredispenser

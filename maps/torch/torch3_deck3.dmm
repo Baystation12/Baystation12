@@ -2577,8 +2577,8 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/machinery/vending/fitness{
-	icon_state = "fitness";
+/obj/machinery/vending/mredispenser{
+	icon_state = "mrevend";
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,

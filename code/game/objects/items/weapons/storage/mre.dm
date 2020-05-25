@@ -3,7 +3,7 @@ MRE Stuff
  */
 
 /obj/item/weapon/storage/mre
-	name = "standard MRE"
+	name = "MRE, Menu 1"
 	desc = "A vacuum-sealed bag containing a day's worth of nutrients for an adult in strenuous situations. There is no visible expiration date on the package."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "mre"
@@ -14,12 +14,12 @@ MRE Stuff
 	var/main_meal = /obj/item/weapon/storage/mrebag
 	var/meal_desc = "This one is menu 1, meat pizza."
 	startswith = list(
-	/obj/item/weapon/storage/mrebag/dessert,
-	/obj/item/weapon/storage/fancy/crackers,
-	/obj/random/mre/spread,
-	/obj/random/mre/drink,
-	/obj/random/mre/sauce,
-	/obj/item/weapon/material/kitchen/utensil/spork/plastic
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
+		/obj/item/weapon/material/kitchen/utensil/fork/plastic
 	)
 
 /obj/item/weapon/storage/mre/Initialize()
@@ -45,32 +45,95 @@ MRE Stuff
 	. = ..()
 
 /obj/item/weapon/storage/mre/menu2
+	name = "MRE, Menu 2"
 	meal_desc = "This one is menu 2, margherita."
 	main_meal = /obj/item/weapon/storage/mrebag/menu2
+	startswith = list(
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/salt,
+		/obj/item/weapon/material/kitchen/utensil/fork/plastic
+	)
 
 /obj/item/weapon/storage/mre/menu3
+	name = "MRE, Menu 3"
 	meal_desc = "This one is menu 3, vegetable pizza."
 	main_meal = /obj/item/weapon/storage/mrebag/menu3
+	startswith = list(
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/pepper,
+		/obj/item/weapon/material/kitchen/utensil/fork/plastic
+	)
 
 /obj/item/weapon/storage/mre/menu4
+	name = "MRE, Menu 4"
 	meal_desc = "This one is menu 4, hamburger."
 	main_meal = /obj/item/weapon/storage/mrebag/menu4
+	startswith = list(
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/mayo,
+		/obj/item/weapon/material/kitchen/utensil/spork/plastic
+	)
 
 /obj/item/weapon/storage/mre/menu5
+	name = "MRE, Menu 5"
 	meal_desc = "This one is menu 5, taco."
 	main_meal = /obj/item/weapon/storage/mrebag/menu5
+	startswith = list(
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/ketchup,
+		/obj/item/weapon/material/kitchen/utensil/spork/plastic
+	)
 
 /obj/item/weapon/storage/mre/menu6
+	name = "MRE, Menu 6"
 	meal_desc = "This one is menu 6, meatbread."
 	main_meal = /obj/item/weapon/storage/mrebag/menu6
+	startswith = list(
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/random/mre/sauce/sugarfree,
+		/obj/item/weapon/material/kitchen/utensil/fork/plastic
+	)
 
 /obj/item/weapon/storage/mre/menu7
+	name = "MRE, Menu 7"
 	meal_desc = "This one is menu 7, salad."
 	main_meal = /obj/item/weapon/storage/mrebag/menu7
+	startswith = list(
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy,
+		/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+	)
 
 /obj/item/weapon/storage/mre/menu8
+	name = "MRE, Menu 8"
 	meal_desc = " This one is menu 8, hot chili."
 	main_meal = /obj/item/weapon/storage/mrebag/menu8
+	startswith = list(
+		/obj/item/weapon/storage/mrebag/dessert,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/capsaicin,
+		/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+	)
 
 /obj/item/weapon/storage/mre/menu9
 	name = "vegan MRE"
@@ -78,12 +141,12 @@ MRE Stuff
 	icon_state = "vegmre"
 	main_meal = /obj/item/weapon/storage/mrebag/menu9
 	startswith = list(
-	/obj/item/weapon/storage/mrebag/dessert/menu9,
-	/obj/item/weapon/storage/fancy/crackers,
-	/obj/random/mre/spread/vegan,
-	/obj/random/mre/drink,
-	/obj/random/mre/sauce/vegan,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+		/obj/item/weapon/storage/mrebag/dessert/menu9,
+		/obj/item/weapon/storage/fancy/crackers,
+		/obj/random/mre/spread/vegan,
+		/obj/random/mre/drink,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/soy,
+		/obj/item/weapon/material/kitchen/utensil/spoon/plastic
 	)
 
 /obj/item/weapon/storage/mre/menu10
@@ -92,10 +155,10 @@ MRE Stuff
 	icon_state = "meatmre"
 	main_meal = /obj/item/weapon/storage/mrebag/menu10
 	startswith = list(
-	/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
-	/obj/item/weapon/reagent_containers/food/condiment/small/packet/protein,
-	/obj/random/mre/sauce/sugarfree,
-	/obj/item/weapon/material/kitchen/utensil/spoon/plastic
+		/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
+		/obj/item/weapon/reagent_containers/food/condiment/small/packet/protein,
+		/obj/random/mre/sauce/sugarfree,
+		/obj/item/weapon/material/kitchen/utensil/fork/plastic
 	)
 
 /obj/item/weapon/storage/mre/menu11
@@ -104,10 +167,10 @@ MRE Stuff
 	icon_state = "crayonmre"
 	main_meal = /obj/item/weapon/storage/fancy/crayons
 	startswith = list(
-	/obj/item/weapon/storage/mrebag/dessert/menu11,
-	/obj/random/mre/sauce/crayon,
-	/obj/random/mre/sauce/crayon,
-	/obj/random/mre/sauce/crayon
+		/obj/item/weapon/storage/mrebag/dessert/menu11,
+		/obj/random/mre/sauce/crayon,
+		/obj/random/mre/sauce/crayon,
+		/obj/random/mre/sauce/crayon
 	)
 
 /obj/item/weapon/storage/mre/menu11/special
