@@ -682,18 +682,15 @@
 	icon_state = "corner_white";
 	dir = 6
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 10
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
 	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "bv" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
@@ -705,21 +702,27 @@
 	icon_state = "1-2";
 	pixel_y = 0
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/lower)
 "bw" = (
 /obj/machinery/door/airlock/autoname/bearcat,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8";
 	pixel_x = 0
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/dark/airless,
 /area/ship/scrap/crew/dorms1)
@@ -846,10 +849,12 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 10
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "bK" = (
@@ -949,8 +954,6 @@
 /turf/simulated/floor/tiled/usedup,
 /area/ship/scrap/cargo/lower)
 "bU" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
@@ -971,6 +974,8 @@
 	pixel_y = 1;
 	d2 = 2
 	},
+/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers,
+/obj/machinery/atmospherics/pipe/zpipe/up/supply,
 /turf/simulated/floor/usedup,
 /area/ship/scrap/maintenance/lower)
 "bV" = (
@@ -2749,6 +2754,15 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/broken1)
+"va" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2";
+	pixel_y = 0
+	},
+/turf/simulated/floor/usedup,
+/area/ship/scrap/maintenance/lower)
 "vU" = (
 /obj/effect/floor_decal/corner/beige{
 	icon_state = "corner_white";
@@ -2775,6 +2789,16 @@
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
 /area/ship/scrap/maintenance/eva)
+"EP" = (
+/obj/machinery/door/airlock/autoname/bearcat,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/usedup,
+/area/ship/scrap/cargo/lower)
 "GU" = (
 /obj/effect/paint/brown,
 /turf/simulated/wall/r_wall,
@@ -10291,7 +10315,7 @@ ao
 ao
 ao
 ao
-bo
+EP
 ao
 ao
 ao
@@ -10414,7 +10438,7 @@ aH
 aS
 be
 bv
-bK
+va
 bU
 cg
 cx
