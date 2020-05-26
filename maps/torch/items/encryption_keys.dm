@@ -62,7 +62,7 @@
 /obj/item/device/encryptionkey/pathfinder
 	name = "pathfinder's encryption key"
 	icon_state = "com_cypherkey"
-	channels = list("Exploration" = 1, "Command" = 1, "Science" = 1)
+	channels = list("Exploration" = 1, "Science" = 1)
 
 /obj/item/weapon/storage/box/radiokeys
 	name = "box of radio encryption keys"
