@@ -1,32 +1,34 @@
 /mob/living/simple_animal/hostile
+	a_intent = I_HURT
 	faction = "hostile"
-	var/stance = HOSTILE_STANCE_IDLE	//Used to determine behavior
-	var/mob/living/target_mob
-	var/attack_same = 0
-	var/ranged = 0
-	var/rapid = 0
+	stop_automated_movement_when_pulled = FALSE
+
+	var/attack_same = FALSE
+	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
+	var/melee_accuracy = 85 //base chance to hit out of 100
 	var/melee_damage_flags //sharp, edge, etc
-	var/sa_accuracy = 85 //base chance to hit out of 100
+	var/list/friends = list() //list of mobs that are not valid targets, add to using weakref()
+
+	var/ranged = FALSE
+	var/ranged_distance = 6
+	var/rapid = FALSE //if the ranged attacks can happen in quick succession
+	var/casingtype //if the mob drops a casing after a ranged attack
+	var/fire_desc = "fires" //"X fire_desc at Y!"
 	var/projectiletype
 	var/projectilesound
-	var/casingtype
-	var/fire_desc = "fires" //"X fire_desc at Y!"
-	var/ranged_range = 6 //tiles of range for ranged attackers to attack
-	var/move_to_delay = 4 //delay for the automated movement.
-	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
-	var/list/friends = list() //List of mobs that wont be picked as a target. Add to using weakref().
-	var/break_stuff_probability = 10
-	stop_automated_movement_when_pulled = 0
-	var/destroy_surroundings = 1
-	a_intent = I_HURT
 
-	var/shuttletarget = null
-	var/enroute = 0
+	var/stance = HOSTILE_STANCE_IDLE //used to determine behavior
+	var/can_climb = FALSE //can it climb insted of destroy certain obstacles
+	var/move_to_delay = 4 //delay in ticks between movement towards target
 	var/stop_automation = FALSE //stops AI procs from running
+	var/destroy_surroundings = TRUE
+	var/break_stuff_probability = 20
 
 	var/can_pry = TRUE
 	var/pry_time = 7 SECONDS //time it takes for mob to pry open a door
 	var/pry_desc = "prying" //"X begins pry_desc the door!"
+
+	var/mob/living/target_mob
 
 	//hostile mobs will bash through these in order - any new entry must have a functioning attack_generic()
 	var/list/valid_obstacles_by_priority = list(/obj/structure/window,
@@ -57,6 +59,7 @@
 	stop_automated_movement = 0
 	for(var/mob/M in ListTargets(10))
 		stance = HOSTILE_STANCE_ATTACK
+		face_atom(M)
 		return M
 
 /mob/living/simple_animal/hostile/proc/ValidTarget(var/mob/M)
@@ -90,13 +93,13 @@
 		stance = HOSTILE_STANCE_IDLE
 	if(target_mob in ListTargets(10))
 		if(ranged)
-			if(get_dist(src, target_mob) <= ranged_range)
+			if(get_dist(src, target_mob) <= ranged_distance)
 				OpenFire(target_mob)
 			else
 				walk_to(src, target_mob, 1, move_to_delay)
 		else
-			stance = HOSTILE_STANCE_ATTACKING
 			walk_to(src, target_mob, 1, move_to_delay)
+			stance = HOSTILE_STANCE_ATTACKING
 
 /mob/living/simple_animal/hostile/proc/AttackTarget()
 	stop_automated_movement = 1
@@ -147,7 +150,7 @@
 	return possible_targets
 
 /mob/living/simple_animal/hostile/proc/get_accuracy()
-	return Clamp(sa_accuracy - melee_accuracy_mods(), 0, 100)
+	return Clamp(melee_accuracy - melee_accuracy_mods(), 0, 100)
 
 /mob/living/simple_animal/hostile/death(gibbed, deathmessage, show_dead_message)
 	..(gibbed, deathmessage, show_dead_message)
@@ -172,15 +175,16 @@
 
 			if(HOSTILE_STANCE_ATTACK)
 				face_atom(target_mob)
+				MoveToTarget()
 				if(destroy_surroundings)
 					DestroySurroundings()
-				MoveToTarget()
 
 			if(HOSTILE_STANCE_ATTACKING)
 				face_atom(target_mob)
+				AttackTarget()
 				if(destroy_surroundings)
 					DestroySurroundings()
-				AttackTarget()
+
 			if(HOSTILE_STANCE_INSIDE) //we aren't inside something so just switch
 				stance = HOSTILE_STANCE_IDLE
 	else
@@ -261,6 +265,9 @@
 
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
+			if(can_climb && istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/wall_frame))
+				if(obstacle.do_climb(src))
+					return
 			if(obstacle)
 				face_atom(obstacle)
 				obstacle.attack_generic(src, rand(melee_damage_lower, melee_damage_upper), attacktext)

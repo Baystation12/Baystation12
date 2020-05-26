@@ -11,31 +11,39 @@
 	icon_state = "green"
 	icon_living = "green"
 	icon_dead = "green_dead"
+
+	speak_chance = 5
 	speak_emote = list("chitters")
 	emote_hear = list("chitters")
 	emote_see = list("rubs its forelegs together", "wipes its fangs", "stops suddenly")
-	speak_chance = 5
+
+	speed = 1
 	turns_per_move = 5
+	move_to_delay = 3
 	see_in_dark = 10
+
 	response_help  = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm   = "pokes"
+
 	maxHealth = 125
 	health = 125
 	melee_damage_lower = 10
 	melee_damage_upper = 15
 	melee_damage_flags = DAM_SHARP
+	bleed_colour = "#0d5a71"
+
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 20
+
 	faction = "spiders"
 	pass_flags = PASS_FLAG_TABLE
-	move_to_delay = 3
-	speed = 1
 	max_gas = list(GAS_PHORON = 1, GAS_CO2 = 5, GAS_METHYL_BROMIDE = 1)
-	bleed_colour = "#0d5a71"
-	break_stuff_probability = 25
+	
+	can_climb = TRUE
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+	break_stuff_probability = 35
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/spider
 	meat_amount = 3
@@ -142,7 +150,7 @@
 	projectiletype = /obj/item/projectile/venom
 	projectilesound = 'sound/effects/hypospray.ogg'
 	fire_desc = "spits venom"
-	ranged_range = 6
+	ranged_distance = 6
 	pry_time = 7 SECONDS
 	flash_vulnerability = 2
 
