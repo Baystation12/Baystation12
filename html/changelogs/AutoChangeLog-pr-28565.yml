@@ -1,5 +1,0 @@
-author: "Funguss"
-delete-after: True
-changes: 
-  - maptweak: "Adds a new alternative vox site, mutually exclusive with the old one during overmap generation, starts inside of a small asteroid field for spawn protection"
-  - tweak: "gives shoal scavengers and sub-jobs their own access card for accessing the new ship"
