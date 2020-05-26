@@ -19,7 +19,7 @@
 	var/activeoverlay = "MFDD_active"
 	var/strength=1 //The size of the explosion
 	var/free_explode = 0
-	var/do_arm_disarm_alert = 0
+	var/do_arm_disarm_alert = 1
 	var/list/blocked_species = list()//COVENANT_SPECIES_AND_MOBS
 
 /obj/payload/attack_hand(var/mob/living/carbon/human/user)
