@@ -27,7 +27,9 @@
 		if(blocked_species.len && user.species in blocked_species)
 			to_chat(user,"<span class='warning'>Your species does not know how to use that!</span>")
 		if(!checkturf())
-			src.visible_message("<span class='danger'>The [src] beeps a warning:'OPTIMAL LOCATION NOT REACHED'</span>")
+			visible_message("<span class='danger'>[src] beeps a warning:'OPTIMAL LOCATION NOT REACHED'</span>")
+		else if(istype(get_area(src),/area/space))
+			visible_message("<span class='danger'>[src] beeps a warning:'CURRENT LOCATION WOULD CAUSE EFFECT-ELIMINATING DISPERSION OF EXPLOSION ENERGY. ABORTING ARMING. RELOCATE DEVICE.'</span>")
 		else if(alert("Once activated, [src] cannot be moved. Are you sure you want to proceed?",\
 				"Are you sure you want to proceed?","Continue","Get me out of here!") == "Continue")
 			if(do_after(user,arm_time SECONDS,src,1,1,,1))
@@ -72,17 +74,16 @@
 
 /obj/payload/proc/checknextto()
 	if(u)
-		if(u in range(1,loc))
+		if(get_dist(src,u) <= 1)
 			return 1
 		else
 			u = null
 			return 0
 
 /obj/payload/proc/checkalive()
-	if(u.health > -u.maxHealth)
-		return 1
-	else
+	if(u.incapacitated())
 		return 0
+	return 1
 
 /obj/payload/proc/checkexplode()
 	if(exploding)
