@@ -19,6 +19,7 @@
 	var/activeoverlay = "MFDD_active"
 	var/strength=1 //The size of the explosion
 	var/free_explode = 0
+	var/do_arm_disarm_alert = 0
 	var/list/blocked_species = list()//COVENANT_SPECIES_AND_MOBS
 
 /obj/payload/attack_hand(var/mob/living/carbon/human/user)
@@ -39,6 +40,11 @@
 				message2discord(config.oni_discord, "Alert! Payload device armed by [user.real_name] ([user.ckey]) @ ([loc.x],[loc.y],[loc.z])")
 				set_anchor(1)
 				checkoverlay(1)
+				if(do_arm_disarm_alert)
+					var/om_obj = map_sectors["[z]"]
+					if(om_obj)
+						for(var/m in GLOB.mobs_in_sector[om_obj])
+							to_chat(m,"<span class = 'danger'>HIGH-YIELD EXPLOSIVE ARMING DETECTED AT [loc.loc], ([x],[y])</span>")
 	else
 		if(!disarming)
 			u = user
@@ -80,7 +86,7 @@
 
 /obj/payload/proc/checkexplode()
 	if(exploding)
-		desc = explodedesc + " [(explode_at - world.time)/10] seconds remain."
+		desc = explodedesc + " [(explode_at - world.time)/100] seconds remain."
 	if(exploding && world.time >= explode_at)
 		GLOB.processing_objects -= src
 		var/explode_datum = new explodetype(src)
@@ -104,6 +110,11 @@
 		desc = initial(desc)
 		checkoverlay(0)
 		GLOB.processing_objects -= src
+		if(do_arm_disarm_alert)
+			var/om_obj = map_sectors["[z]"]
+			if(om_obj)
+				for(var/m in GLOB.mobs_in_sector[om_obj])
+					to_chat(m,"<span class = 'danger'>HIGH-YIELD EXPLOSIVE DISARM DETECTED AT [loc.loc], ([x],[y])</span>")
 
 /obj/payload/process()
 	checkexplode()
