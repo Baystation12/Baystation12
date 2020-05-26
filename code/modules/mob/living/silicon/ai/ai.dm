@@ -205,6 +205,10 @@ var/list/ai_verbs_default = list(
 
 	to_chat(src, radio_text)
 
+	//Prevents more than one active core spawning on the same tile. Technically just a sanitization for roundstart join
+	for(var/obj/structure/AIcore/deactivated/C in src.loc)
+		qdel(C)
+
 	if (GLOB.malf && !(mind in GLOB.malf.current_antagonists))
 		show_laws()
 		to_chat(src, "<b>These laws may be changed by other players or by other random events.</b>")
