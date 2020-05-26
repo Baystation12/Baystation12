@@ -90,7 +90,7 @@
 	var/candidate_index = choices.Find(candidate) // use choices instead of choice_list because we need the original indexing
 	choice_list -= candidate
 	for(var/ckey in vote_list)
-		if(vote_list[ckey][1] == candidate_index && length(vote_list[ckey]) > 1)
+		if(length(votes[ckey]) && vote_list[ckey][1] == candidate_index && length(vote_list[ckey]) > 1)
 			var/new_first_choice = choices[vote_list[ckey][2]]
 			choice_list[new_first_choice] += 1
 		vote_list[ckey] -= candidate_index
@@ -141,6 +141,9 @@
 				var/new_choice = choices[votes[ckey][2]]
 				choices[new_choice] += 1  // Update the running tally to reflect that
 		votes[ckey] -= vote
+
+		if(!length(votes[ckey]))
+			votes -= ckey
 	else
 		votes[ckey] += vote
 		if(votes[ckey][1] == vote)
