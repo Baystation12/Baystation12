@@ -43,7 +43,7 @@
 				if(do_arm_disarm_alert)
 					var/om_obj = map_sectors["[z]"]
 					if(om_obj)
-						for(var/m in GLOB.mobs_in_sector[om_obj])
+						for(var/m in GLOB.mobs_in_sectors[om_obj])
 							to_chat(m,"<span class = 'danger'>HIGH-YIELD EXPLOSIVE ARMING DETECTED AT [loc.loc], ([x],[y])</span>")
 	else
 		if(!disarming)
@@ -113,7 +113,7 @@
 		if(do_arm_disarm_alert)
 			var/om_obj = map_sectors["[z]"]
 			if(om_obj)
-				for(var/m in GLOB.mobs_in_sector[om_obj])
+				for(var/m in GLOB.mobs_in_sectors[om_obj])
 					to_chat(m,"<span class = 'danger'>HIGH-YIELD EXPLOSIVE DISARM DETECTED AT [loc.loc], ([x],[y])</span>")
 
 /obj/payload/process()
