@@ -12,7 +12,7 @@
 	S.add_to_stacks(user, 1)
 	return S
 
-// Tiles 
+// Tiles
 /datum/stack_recipe/tile
 	res_amount = 4
 	max_res_amount = 20
@@ -89,7 +89,6 @@
 
 /datum/stack_recipe/tile/ebony
 	title = "ebony floor tile"
-	difficulty = 3
 	result_type = /obj/item/stack/tile/ebony
 
 /datum/stack_recipe/tile/walnut
