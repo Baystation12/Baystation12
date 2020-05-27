@@ -16,7 +16,8 @@
 	else
 		index++
 		if(index > artifs.len)
-			index = 0
+			index = 1
+		artif = artifs[index]
 		visible_message("<span class = 'notice'>[src] switches target.</span>")
 	if(!workdisk())
 		active = 0

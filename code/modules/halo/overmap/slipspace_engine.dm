@@ -227,6 +227,7 @@
 	desc = "The core of a slipspace device, detached and armed."
 	w_class = ITEM_SIZE_HUGE
 	free_explode = 1
+	do_arm_disarm_alert = 0
 	explodetype = /datum/explosion/slipspace_core
 	seconds_to_explode = 300 //5 minutes to explode.
 	seconds_to_disarm = 30 // 30 sesconds to disarm.
@@ -243,6 +244,7 @@
 	var/obj/effect/overmap/om = map_sectors["[b.z]"]
 	if(isnull(om))
 		return
+	explosion(get_turf(b),5,7,10,15)
 	om.pre_superstructure_failing()
 
 /obj/payload/slipspace_core/cov

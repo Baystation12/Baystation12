@@ -1472,6 +1472,7 @@
 #include "code\modules\halo\covenant\admin_covenant_strike_team.dm"
 #include "code\modules\halo\covenant\cycling_trader.dm"
 #include "code\modules\halo\covenant\heresy_waiver.dm"
+#include "code\modules\halo\covenant\invasion_scanner_pinpointers.dm"
 #include "code\modules\halo\covenant\language_teacher.dm"
 #include "code\modules\halo\covenant\materials.dm"
 #include "code\modules\halo\covenant\memorial_statue.dm"

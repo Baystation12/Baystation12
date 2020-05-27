@@ -2,6 +2,38 @@
 #define FLEET_SCALING_AMOUNT 1
 #define FLEET_PERFACTION_MAXSIZE 30
 
+#define SCANNER_TICK_DELAY 10 SECONDS
+#define BASE_SCANNER_DESTROYABLE_AMOUNT 3
+#define SCAN_JAM_LOC_NAME "Orbital Defense Platform"
+
+// OC + variant specific objective, GM linked//
+
+/datum/objective/phase2_scan
+	short_text = "Successfully scan the colony for the holy relic."
+	explanation_text = "Deploy scanners at the marked locations, and protect them. The scan will reveal the location of the relic."
+	win_points = 50
+
+/datum/objective/phase2_scan/check_completion()
+	var/datum/game_mode/outer_colonies/gm = ticker.mode
+	if(!istype(gm))
+		return 0
+	if(gm.scan_percent >= 100)
+		return 1
+
+/datum/objective/phase2_scan_unsc
+	short_text = "Stop the Covenant from scanning the colony."
+	explanation_text = "Search and destroy for Covenant scanners. Eliminating enough will disrupt their scans permenantly and cause a rout."
+	win_points = 50
+	lose_points = 50
+
+/datum/objective/phase2_scan_unsc/check_completion()
+	var/datum/game_mode/outer_colonies/gm = ticker.mode
+	if(!istype(gm))
+		return 0
+	if(gm.scan_percent < 100 && gm.scanner_destructions_left == 0 && !gm.scanners_active)
+		return 1
+
+
 /datum/game_mode/outer_colonies
 	name = "Outer Colonies"
 	config_tag = "outer_colonies"
@@ -10,12 +42,25 @@
 	probability = 1
 	ship_lockdown_duration = 10 MINUTES
 	required_players = 6
+
 	var/safe_expire_warning = 0
+
 	var/list/factions = list(/datum/faction/unsc, /datum/faction/covenant, /datum/faction/insurrection,/datum/faction/human_civ)
+
 	var/list/overmap_hide = list()
+
 	var/list/objectives_slipspace_affected = list()
+
 	var/list/round_end_reasons = list()
-	var/end_conditions_required = 3
+
+	var/scan_percent = 0
+	var/allow_scan = 0
+	var/scanner_destructions_left = BASE_SCANNER_DESTROYABLE_AMOUNT
+	var/scanners_active = 0
+	var/cov_scan_next_tick = 0
+
+	var/end_conditions_required = 4 //3 destructions, with the fourth causing failure.
+
 	var/list/fleet_list = list() //Format: Faction Name, list of active npc ships
 	var/fleets_arrive_at = 0
 	var/fleets_arrive_delay_max = 90 MINUTES
@@ -55,12 +100,13 @@
 	var/list/objective_types = list(\
 		/datum/objective/overmap/covenant_ship,\
 		/datum/objective/protect/leader,\
-		//datum/objective/glass_colony,\
+		//datum/objective/glass_colony,
 		//datum/objective/retrieve/steal_ai,
 		//datum/objective/retrieve/nav_data,
 		//datum/objective/overmap/covenant_unsc_ship,
 		/datum/objective/overmap/covenant_odp,\
-		/datum/objective/colony_capture/cov,\
+		//datum/objective/colony_capture/cov,
+		/datum/objective/phase2_scan,\
 		/datum/objective/retrieve/artifact)
 	GLOB.COVENANT.setup_faction_objectives(objective_types)
 	GLOB.COVENANT.has_flagship = 1
@@ -74,7 +120,8 @@
 		//datum/objective/retrieve/steal_ai/cole_protocol,
 		//datum/objective/retrieve/nav_data/cole_protocol,
 		/datum/objective/overmap/unsc_cov_ship,\
-		/datum/objective/colony_capture/unsc,\
+		//datum/objective/colony_capture/unsc,
+		/datum/objective/phase2_scan_unsc,\
 		/datum/objective/protect_colony,\
 		//datum/objective/overmap/unsc_innie_base,
 		/datum/objective/overmap/unsc_innie_ship)
@@ -103,6 +150,33 @@
 	GLOB.HUMAN_CIV.has_base = 1
 	GLOB.HUMAN_CIV.base_desc = "human colony"
 
+/datum/game_mode/outer_colonies/proc/increase_scan_percent(var/amt)
+	var/old_scan = scan_percent
+	scan_percent = min(100,max(0,scan_percent+amt))
+	if(prob(25 * scanners_active) || (old_scan < 25 && scan_percent >= 25) || (old_scan < 50 && scan_percent >= 50) || (old_scan < 75 && scan_percent >= 75))
+		GLOB.global_announcer.autosay("Intel suggests Covenant scanning has reached [scan_percent] percent complete.", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_GALCOM)
+		GLOB.global_announcer.autosay("Our scan moves forward, bringing us closer to the holy relic! [scan_percent]%", "Covenant Overwatch", RADIO_COV, LANGUAGE_SANGHEILI)
+	if(scan_percent >= 100)
+		GLOB.global_announcer.autosay("The Covenant has completed their scan! We have failed to defend the colony. Stop the covenant escaping with what they found.", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_GALCOM)
+		GLOB.global_announcer.autosay("We have found the holy relic! Rejoice, for the Forerunners smile upon us on this day!", "Covenant Overwatch", RADIO_COV, LANGUAGE_SANGHEILI)
+		var/list/relic_sites = list()
+		for(var/obj/effect/landmark/artifact_spawn/spawnpoint in world)
+			relic_sites += spawnpoint.loc
+		new /obj/machinery/artifact/forerunner_artifact (pick(relic_sites))
+
+/datum/game_mode/outer_colonies/proc/register_scanner()
+	scanners_active++
+
+/datum/game_mode/outer_colonies/proc/unregister_scanner()
+	scanners_active = max(scanners_active-1,0)
+
+/datum/game_mode/outer_colonies/proc/register_scanner_destroy()
+	unregister_scanner()
+	if(scan_percent >= 100) //They already won the phase, destruction does nothing
+		return
+	scanner_destructions_left = max(0,scanner_destructions_left-1)
+	increase_scan_percent(-25)
+
 /datum/game_mode/outer_colonies/handle_latejoin(var/mob/living/carbon/human/character)
 	for(var/datum/faction/F in factions)
 		for(var/datum/objective/objective in F.objectives_without_targets)
@@ -120,6 +194,13 @@
 
 /datum/game_mode/outer_colonies/process()
 	. = ..()
+	if(scan_percent < 100 && scanner_destructions_left && scanners_active && world.time >= cov_scan_next_tick)
+		if(allow_scan)
+			increase_scan_percent(scanners_active)
+		else
+			GLOB.global_announcer.autosay("Their [SCAN_JAM_LOC_NAME] blocks our holy scanning! Eliminate it!", "Covenant Overwatch", RADIO_COV, LANGUAGE_SANGHEILI)
+		cov_scan_next_tick = world.time + SCANNER_TICK_DELAY
+
 	if(world.time >= fleets_arrive_at)
 		fleets_arrive_at = world.time + rand(fleet_wave_delay_min,fleet_wave_delay_max)
 		for(var/z = 1,z<=world.maxz,z++)
@@ -222,6 +303,9 @@
 	if(.)
 		round_end_reasons += "an early round end was voted for"
 		return .
+
+	if(scan_percent < 100 && scanner_destructions_left == 0 && !scanners_active)
+		round_end_reasons += "the Covenant scanning devices were destroyed"
 
 	for(var/datum/faction/F in factions)
 

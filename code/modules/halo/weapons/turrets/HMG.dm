@@ -8,7 +8,7 @@
 	turret_gun = /obj/item/weapon/gun/projectile/turret/HMG
 	kit_undeploy = /obj/item/turret_deploy_kit/HMG
 
-/obj/item/weapon/gun/projectile/turret/HMG
+/obj/item/weapon/gun/projectile/turret/HM //Slowfiring, so we're going to cap our dispersion much lower.
 	name = "HMG Turret"
 	desc = "Fires slower than the Confetti Maker, but with more stopping power per round."
 
@@ -21,7 +21,7 @@
 	//burst = 10
 	//burst_delay = 3
 	burst_accuracy = list(0,0,0,0,0,0,0,0,0,0,-1)
-	dispersion = list(0,0,0,0,0,0.5,1.0,1.4)
+	dispersion = list(0,0,0,0,0,0.5,0.6,0.73)
 
 	load_time = 7
 

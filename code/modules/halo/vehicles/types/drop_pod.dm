@@ -77,12 +77,14 @@
 	for(var/turf/t in view(drop_point,drop_accuracy))
 		if(istype(t,/turf/simulated/wall))
 			continue
+		if(istype(t,/turf/simulated/mineral))
+			continue
 		if(istype(t,/turf/unsimulated/wall))
 			continue
 		if(istype(t,/turf/unsimulated/floor/rock2)) //No spawning in rock walls, even if they are subtypes of /floor/
 			continue
 		valid_points += t
-	if(isnull(valid_points))
+	if(isnull(valid_points) || valid_points.len == 0)
 		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
 		return
 	return pick(valid_points)
@@ -170,7 +172,7 @@
 		return
 	om_targ = potential_om_targ[om_user_choice]
 
-	var/turf/drop_turf = get_drop_turf(get_drop_point(om_targ.map_z))
+	var/turf/drop_turf = get_drop_turf(get_drop_point(usr,om_targ,om_targ.map_z))
 	if(isnull(drop_turf))
 		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
 		return
@@ -183,11 +185,8 @@
 		potential_om_targ["[o.name]"] = o
 	return potential_om_targ
 
-/obj/vehicles/drop_pod/overmap/get_drop_point(var/list/om_targ_zs)
+/obj/vehicles/drop_pod/overmap/get_drop_point(var/mob/user,var/obj/effect/overmap/om_targ,var/list/om_targ_zs)
 	var/list/valid_points = list()
-	for(var/obj/effect/landmark/drop_pod_landing/l in world)
-		if(l.loc.z in om_targ_zs)
-			valid_points += l
 	var/beacons_present = 0
 	for(var/obj/item/drop_pod_beacon/b in world)
 		if(!(b.loc.z  in om_targ_zs))
@@ -198,10 +197,13 @@
 				visible_message("<span class = 'notice'>Electronic Locator beacon detected. Overriding landing systems.</span>")
 			beacons_present = 1
 			valid_points += b.loc
-	if(isnull(valid_points) || valid_points.len == 0)
-		return null
-	else
+	if(valid_points.len > 0)
 		return pick(valid_points)
+	var/list/chosen_area = om_targ.map_bounds
+	if(om_targ.targeting_locations.len > 0)
+		var/chosen_loc_name = input(user,"Pick a location to land the [name]","[name] Landing Selection","Cancel") in om_targ.targeting_locations + list("Cancel")
+		chosen_area = om_targ.targeting_locations[chosen_loc_name]
+	return locate(rand(chosen_area[1],chosen_area[3]),rand(chosen_area[2],chosen_area[4]),pick(om_targ_zs))
 
 /obj/vehicles/drop_pod/overmap/post_drop_effects(var/turf/drop_turf)
 	var/obj/effect/overmap/our_om_obj = map_sectors["[drop_turf.z]"]

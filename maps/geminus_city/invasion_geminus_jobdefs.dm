@@ -8,6 +8,7 @@
 		/datum/job/unsc/odst/squad_leader,\
 		/datum/job/unsc/commanding_officer,\
 		/datum/job/unsc/executive_officer,\
+		/datum/job/unsc/oni/research,\
 		/datum/job/geminus_innie,\
 		/datum/job/geminus_innie/officer,\
 		/datum/job/geminus_innie/commander,\
