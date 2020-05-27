@@ -9,14 +9,6 @@
 	pixel_x = -16
 	var/datum/game_mode/outer_colonies/gm
 
-/obj/structure/invasion_scanner/Initialize()
-	. = ..()
-	gm = ticker.mode
-	if(!istype(gm))
-		gm = null
-		loc = null
-		qdel(src)
-
 /obj/structure/invasion_scanner/examine(var/mob/user)
 	. = ..()
 	to_chat(user,"It is [anchored ? "active" : "inactive"]")
@@ -27,8 +19,11 @@
 	if(!is_covenant_mob(attacker))
 		to_chat(attacker, "<span class = 'notice'>You don't know how to toggle [src]...</span>")
 		return
-	visible_message("<span class = 'notice'>[attacker] toggles [src]</span>")
-	toggle_scanner()
+	if(gm)
+		visible_message("<span class = 'notice'>[attacker] toggles [src]</span>")
+		toggle_scanner()
+	else
+		gm = ticker.mode
 
 /obj/structure/invasion_scanner/proc/can_register()
 	var/obj/effect/landmark/scanning_point/point = locate(/obj/effect/landmark/scanning_point) in range(2,src)
