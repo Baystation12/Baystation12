@@ -22,11 +22,15 @@ var/repository/mob/mob_repository = new()
 
 /datum/mob_lite/New(var/mob/M)
 	if(isnull(M))
-		return INITIALIZE_HINT_QDEL
-	name = M ? (M.real_name ? M.real_name : M.name) : name
-	assigned_role = M.mind ? M.mind.assigned_role : null
-	ref = any2ref(M)
-	client = client_repository.get_lite_client(M)
+		name = "Error"
+		assigned_role = "Error"
+		ref = null
+		client = null
+	else
+		name = M ? (M.real_name ? M.real_name : M.name) : name
+		assigned_role = M.mind ? M.mind.assigned_role : null
+		ref = any2ref(M)
+		client = client_repository.get_lite_client(M)
 
 /datum/mob_lite/proc/key_name(var/pm_link = TRUE, var/check_if_offline = TRUE)
 	return client.key_name(pm_link, check_if_offline)

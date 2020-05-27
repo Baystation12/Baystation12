@@ -2,8 +2,8 @@
 /obj/structure/invasion_scanner
 	name = "Forerunner Scanning Device"
 	desc = "Used to scan for forerunner facilities and artifacts. Destruction of a singular device greatly disrupts the scanning, and multiple scanners increase the scanning efficiency."
-	icon = 'code/modules/halo/covenant/structures_machines/comms.dmi'
-	icon_state = "comms"
+	icon = 'code/modules/halo/covenant/structures_machines/scanner.dmi'
+	icon_state = "scan"
 	density = 1
 	anchored = 0
 	pixel_x = -16
