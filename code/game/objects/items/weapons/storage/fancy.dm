@@ -281,7 +281,7 @@
 	max_storage_space = null
 	storage_slots = 6
 
-/obj/item/weapon/storage/fancy/cigarettes/case/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/weapon/storage/fancy/cigarettes/case/attack()
 	return
 
 /obj/item/weapon/storage/fancy/cigar
