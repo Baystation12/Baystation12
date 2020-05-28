@@ -122,6 +122,16 @@
 		/obj/item/weapon/pen/crayon/purple,
 		)
 
+/obj/item/weapon/storage/fancy/pencilcase/on_update_icon()
+	if(!opened)
+		src.icon_state = initial(icon_state)
+	else
+		var/key_count = count_by_type(contents, key_type)
+		if(key_count >= 1)
+			src.icon_state = "[initial(icon_state)]1"
+		else
+			src.icon_state = "[initial(icon_state)]0"
+
 ////////////
 //CIG PACK//
 ////////////
