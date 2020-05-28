@@ -81,7 +81,8 @@
 /obj/item/weapon/storage/belt/holster/examine(mob/user)
 	. = ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
-	H.examine_holster(user)
+	if (!QDELETED(H))
+		H.examine_holster(user)
 
 /obj/item/weapon/storage/belt/holster/on_update_icon()
 	if (ismob(src.loc))

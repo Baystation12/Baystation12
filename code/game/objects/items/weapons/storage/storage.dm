@@ -289,7 +289,8 @@
 		src.open(user)
 	else
 		..()
-		storage_ui.on_hand_attack(user)
+		if (storage_ui)
+			storage_ui.on_hand_attack(user)
 	src.add_fingerprint(user)
 	return
 

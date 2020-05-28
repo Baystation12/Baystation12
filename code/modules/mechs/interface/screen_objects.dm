@@ -126,7 +126,7 @@
 	if(!(..()))
 		return
 
-	if(!owner.hatch_closed)
+	if(!owner?.hatch_closed)
 		to_chat(usr, SPAN_WARNING("Error: Hardpoint interface disabled while [owner.body.hatch_descriptor] is open."))
 		return
 

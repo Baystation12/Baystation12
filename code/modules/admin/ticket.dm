@@ -184,7 +184,7 @@ proc/get_open_ticket_by_client(var/datum/client_lite/owner)
 	return jointext(dat, null)
 
 /datum/ticket_panel/Topic(href, href_list)
-	if(usr && usr != ticket_panel_window.user)
+	if(usr && usr.client && usr != ticket_panel_window.user)
 		if(href_list["close"]) // catch the case where a user switches mobs, then closes the window that was linked to the old mob
 			ticket_panels -= usr.client
 		else

@@ -67,6 +67,8 @@ Right Click       - List/Create Area
 		to_chat(user, "Created area [new_area.name]")
 
 /datum/build_mode/areas/TimerEvent()
+	if (!user.client)
+		return
 	user.client.images -= vision_images
 	vision_images = list()
 
@@ -88,7 +90,8 @@ Right Click       - List/Create Area
 	user.client.images += vision_images
 
 /datum/build_mode/areas/Unselected()
-	user.client.images -= vision_images
+	if (user.client)
+		user.client.images -= vision_images
 	vision_images = list()
 
 /datum/build_mode/areas/proc/SelectArea(var/area/A)

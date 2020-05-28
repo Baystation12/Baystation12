@@ -49,7 +49,7 @@
 			. += body_armor
 
 /mob/living/exosuit/updatehealth()
-	maxHealth = body.mech_health
+	maxHealth = body ? body.mech_health : 0
 	health = maxHealth-(getFireLoss()+getBruteLoss())
 
 /mob/living/exosuit/adjustFireLoss(var/amount, var/obj/item/mech_component/MC = pick(list(arms, legs, body, head)))
