@@ -16,10 +16,6 @@
 		if(!config.dooc_allowed && (C.mob.stat == DEAD))
 			to_chat(C, "<span class='danger'>[name] for dead mobs has been turned off.</span>")
 			return FALSE
-		if(findtext(message, "byond://"))
-			to_chat(C, "<B>Advertising other servers is not allowed.</B>")
-			log_and_message_admins("has attempted to advertise in [name]: [message]")
-			return FALSE
 
 /decl/communication_channel/ooc/do_communicate(var/client/C, var/message)
 	var/datum/admins/holder = C.holder

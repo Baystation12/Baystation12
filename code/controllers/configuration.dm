@@ -97,6 +97,8 @@ var/list/gamemode_cache = list()
 	var/githuburl
 	var/issuereporturl
 
+	var/forbidden_message_regex
+
 	var/forbid_singulo_possession = 0
 
 	//game_options.txt configs
@@ -755,6 +757,17 @@ var/list/gamemode_cache = list()
 					config.max_acts_per_interval = text2num(value)
 				if ("act_interval")
 					config.act_interval = text2num(value) SECONDS
+
+				if ("forbidden_message_regex")
+					var/end = findlasttext(value, "/")
+					if (length(value) < 3 || value[1] != "/" || end < 3)
+						log_error("Invalid regex '[value]' supplied to '[name]'")
+					var/matcher = copytext(value, 2, end)
+					var/flags = end == length(value) ? FALSE : copytext(value, end + 1)
+					try
+						config.forbidden_message_regex = flags ? regex(matcher, flags) : regex(matcher)
+					catch(var/exception/ex)
+						log_error("Invalid regex '[value]' supplied to '[name]': [ex]")
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
