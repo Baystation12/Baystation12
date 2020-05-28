@@ -29,7 +29,7 @@
 		set_extension(src, style.scent_datum)
 
 /obj/item/weapon/flame/candle/scented/proc/get_scent()
-	var/scent_type = safepick(scent_types)
+	var/scent_type = DEFAULTPICK(scent_types, null)
 	if(scent_type)
 		style = decls_repository.get_decl(scent_type)
 		color = style.color
