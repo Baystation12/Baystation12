@@ -163,9 +163,9 @@
 		return 0
 	if(client)
 		return 0
+	kick_stance()
 	if(!can_act())
 		walk(src, 0)
-		kick_stance()
 		return 0
 
 	if(isturf(src.loc) && !src.buckled)
@@ -265,7 +265,7 @@
 
 		for(var/type in valid_obstacles_by_priority)
 			var/obj/obstacle = locate(type) in targ
-			if(can_climb && istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/wall_frame))
+			if(can_climb && (istype(obstacle, /obj/structure/table) || istype(obstacle, /obj/structure/wall_frame)))
 				if(obstacle.do_climb(src))
 					return
 			if(obstacle)
