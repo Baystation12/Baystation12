@@ -274,6 +274,16 @@
 	icon_state = "CRMpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/trident/mint = 5)
 
+/obj/item/weapon/storage/fancy/cigarettes/case
+	name = "cigarette case"
+	desc = "A fancy little case for holding cigarettes in it."
+	icon_state = "cigscase"
+	max_storage_space = null
+	storage_slots = 6
+
+/obj/item/weapon/storage/fancy/cigarettes/case/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+	return
+
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
 	desc = "A case for holding your cigars when you are not smoking them."

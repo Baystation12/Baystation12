@@ -184,6 +184,11 @@
 	display_name = "ashtray, plastic"
 	path = /obj/item/weapon/material/ashtray/plastic
 
+/datum/gear/cigscase
+	display_name = "fancy cigarette case"
+	path = /obj/item/weapon/storage/fancy/cigarettes/case
+	cost = 2
+
 /datum/gear/cigars
 	display_name = "fancy cigar case"
 	path = /obj/item/weapon/storage/fancy/cigar
