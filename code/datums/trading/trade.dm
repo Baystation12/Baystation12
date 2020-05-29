@@ -222,13 +222,13 @@
 	return get_response("compliment_accept", "Thank you!")
 
 /datum/trader/proc/trade(var/list/offers, var/num, var/turf/location)
-	if(offers && offers.len)
-		for(var/offer in offers)
-			if(istype(offer,/mob))
-				var/text = mob_transfer_message
-				to_chat(offer, replacetext(text, "ORIGIN", origin))
-			qdel(offer)
+	for(var/offer in offers)
+		if(istype(offer,/mob))
+			var/text = mob_transfer_message
+			to_chat(offer, replacetext(text, "ORIGIN", origin))
+		qdel(offer)
 
+	num = Clamp(num, 1, trading_items.len)
 	var/type = trading_items[num]
 
 	var/atom/movable/M = new type(location)
@@ -239,6 +239,7 @@
 	return M
 
 /datum/trader/proc/how_much_do_you_want(var/num, skill = SKILL_MAX)
+	num = Clamp(num, 1, trading_items.len)
 	var/atom/movable/M = trading_items[num]
 	. = get_response("how_much", "Hmm.... how about VALUE CURRENCY?")
 	. = replacetext(.,"VALUE",get_item_value(num, skill))

@@ -212,8 +212,7 @@
 		pick_organs -= brain
 		pick_organs += brain
 
-	for(var/internal in pick_organs)
-		var/obj/item/organ/internal/I = internal
+	for(var/obj/item/organ/internal/I in pick_organs)
 		if(amount <= 0)
 			break
 		if(heal)
