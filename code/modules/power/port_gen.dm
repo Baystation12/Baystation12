@@ -164,7 +164,7 @@
 	if(overheating) to_chat(user, "<span class='danger'>\The [src] is overheating!</span>")
 
 /obj/machinery/power/port_gen/pacman/proc/process_exhaust()
-	var/datum/gas_mixture/environment = loc.return_air()
+	var/datum/gas_mixture/environment = loc?.return_air()
 	if(environment)
 		environment.adjust_gas(GAS_CO, 0.05*power_output)
 

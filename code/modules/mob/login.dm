@@ -43,7 +43,7 @@
 			world.Export("[config.login_export_addr]?[list2params(params)]", null, 1)
 
 /mob/proc/maybe_send_staffwarns(var/action)
-	if(client.staffwarn)
+	if(client?.staffwarn)
 		for(var/client/C in GLOB.admins)
 			send_staffwarn(C, action)
 

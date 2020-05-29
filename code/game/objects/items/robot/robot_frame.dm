@@ -123,7 +123,8 @@
 			O.job = "Robot"
 
 		var/obj/item/robot_parts/chest/chest = parts[BP_CHEST]
-		chest.cell.forceMove(O)
+		if (chest && chest.cell)
+			chest.cell.forceMove(O)
 		W.forceMove(O) //Should fix cybros run time erroring when blown up. It got deleted before, along with the frame.
 
 		// Since we "magically" installed a cell, we also have to update the correct component.
