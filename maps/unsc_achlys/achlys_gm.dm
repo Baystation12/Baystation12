@@ -81,7 +81,7 @@
 		spawned_nopower_area.requires_power = 0
 		var/spawned_relay = new /obj/machinery/telecomms/relay/ship_relay (item_spawn_turf)
 		var/spawned_tcomms_machine = new /obj/machinery/telecomms/allinone (item_spawn_turf)
-		var/obj/machinery/telecomms_jammers/spawned_jammer = new /obj/machinery/telecomms_jammers (item_spawn_turf)
+		var/obj/machinery/overmap_comms/jammer = new /obj/machinery/overmap_comms/jammer (item_spawn_turf)
 		spawned_jammer.jam_chance = 50
 		spawned_jammer.jam_range = 999
 		spawned_jammer.jamming_active = 1
