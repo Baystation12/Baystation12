@@ -33,8 +33,13 @@
 	. = FALSE
 	var/obj/item/organ/external/E = tool
 	var/obj/item/organ/external/P = target.organs_by_name[E.parent_organ]
+	var/obj/item/organ/external/T = target.organs_by_name[E.organ_tag]
 	if(!P || P.is_stump())
 		to_chat(user, SPAN_WARNING("The [E.amputation_point] is missing!"))
+	else if(T && T.is_stump())
+		to_chat(user, SPAN_WARNING("You cannot attach \a [E] when there is a stump!"))
+	else if(T)
+		to_chat(user, SPAN_WARNING("There is already \a [E]!"))
 	else if(BP_IS_ROBOTIC(P) && !BP_IS_ROBOTIC(E))
 		to_chat(user, SPAN_WARNING("You cannot attach a flesh part to a robotic body."))
 	else if(BP_IS_CRYSTAL(P) && !BP_IS_CRYSTAL(E))
