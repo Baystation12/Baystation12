@@ -186,6 +186,7 @@ var/list/gamemode_cache = list()
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 
 	var/use_discord_bot = 0 //Should the discord bot be used?
+	var/use_request_library = 0 //Use the request library instead of world.Export()
 	var/discord_bot_address = "" //The address to push info to the discord bot
 	var/oni_discord = "" //The channel for ONI messages
 
@@ -605,6 +606,9 @@ var/list/gamemode_cache = list()
 
 				if("use_discord_bot")
 					use_discord_bot = 1
+
+				if("use_request_library")
+					use_request_library = 1
 
 				if("discord_bot_address")
 					discord_bot_address = value
