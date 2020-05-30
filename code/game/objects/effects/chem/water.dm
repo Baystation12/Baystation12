@@ -13,6 +13,7 @@
 	icon += reagents.get_color()
 
 /obj/effect/effect/water/proc/set_up(var/turf/target, var/step_count = 5, var/delay = 5)
+	set waitfor = FALSE
 	if(!target)
 		return
 	for(var/i = 1 to step_count)

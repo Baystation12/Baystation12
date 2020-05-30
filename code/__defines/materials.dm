@@ -48,6 +48,7 @@
 #define MATERIAL_CARPET                  "carpet"
 #define MATERIAL_ALUMINIUM               "aluminium"
 #define MATERIAL_NULLGLASS               "nullglass"
+#define MATERIAL_GROWTH                  "growth"
 
 //woods
 #define MATERIAL_WOOD                    "wood"
