@@ -122,6 +122,16 @@
 		/obj/item/weapon/pen/crayon/purple,
 		)
 
+/obj/item/weapon/storage/fancy/pencilcase/on_update_icon()
+	if(!opened)
+		src.icon_state = initial(icon_state)
+	else
+		var/key_count = count_by_type(contents, key_type)
+		if(key_count >= 1)
+			src.icon_state = "[initial(icon_state)]1"
+		else
+			src.icon_state = "[initial(icon_state)]0"
+
 ////////////
 //CIG PACK//
 ////////////
@@ -263,6 +273,16 @@
 	desc = "The Trident brand's wood tipped little cigar, favored by the Sol corps diplomatique for their pleasant aroma. Machine made on Mars for over 100 years. These are the menthol variety."
 	icon_state = "CRMpacket"
 	startswith = list(/obj/item/clothing/mask/smokable/cigarette/trident/mint = 5)
+
+/obj/item/weapon/storage/fancy/cigarettes/case
+	name = "cigarette case"
+	desc = "A fancy little case for holding cigarettes in it."
+	icon_state = "cigscase"
+	max_storage_space = null
+	storage_slots = 6
+
+/obj/item/weapon/storage/fancy/cigarettes/case/attack()
+	return
 
 /obj/item/weapon/storage/fancy/cigar
 	name = "cigar case"
