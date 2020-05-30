@@ -1,6 +1,0 @@
-author: "AshtonFox"
-delete-after: True
-changes: 
-  - rscadd: "Added cigarette cases to loadout."
-  - imageadd: "New icons for opened pencil cases, empty and filled states."
-  - bugfix: "Pencil case will no longer disappear when opened."

@@ -1,4 +1,0 @@
-author: "AshtonFox"
-delete-after: True
-changes: 
-  - bugfix: "An AI joining the game at a roundstart will no longer leave an available-for-entry inactive core on it's tile."

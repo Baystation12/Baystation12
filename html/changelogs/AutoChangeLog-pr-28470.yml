@@ -1,5 +1,0 @@
-author: "Shadowtail117 & mkalash"
-delete-after: True
-changes: 
-  - rscadd: "You will now receive an audible ping when you receive a new email, provided your email client is open. You can change whether you receive this ping or not in the email program."
-  - rscadd: "You can now set a custom chat notification when you receive a new email."
