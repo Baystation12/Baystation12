@@ -1,3 +1,6 @@
+#define MARINE_OVERRIDE 'code/modules/halo/clothing/marine.dmi'
+#define ITEM_INHAND 'code/modules/halo/clothing/marine_items.dmi'
+
 /obj/item/weapon/storage/box/flares
 	name = "box of flares"
 	icon_state = "flashbang"

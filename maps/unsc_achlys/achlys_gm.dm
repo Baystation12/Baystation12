@@ -81,10 +81,11 @@
 		spawned_nopower_area.requires_power = 0
 		var/spawned_relay = new /obj/machinery/telecomms/relay/ship_relay (item_spawn_turf)
 		var/spawned_tcomms_machine = new /obj/machinery/telecomms/allinone (item_spawn_turf)
-		var/obj/machinery/overmap_comms/spawned_jammer = new /obj/machinery/overmap_comms/jammer (item_spawn_turf)
+		var/obj/machinery/overmap_comms/jammer/spawned_jammer = new /obj/machinery/overmap_comms/jammer (item_spawn_turf)
 		spawned_jammer.jam_chance = 50
 		spawned_jammer.jam_range = 999
-		spawned_jammer.jamming_active = 1
+		spawned_jammer.active = 1
+		spawned_jammer.toggle_active()
 		spawn(COMMS_CUTIN_EVENT_DURATION)
 			qdel(spawned_nopower_area)
 			qdel(spawned_relay)
