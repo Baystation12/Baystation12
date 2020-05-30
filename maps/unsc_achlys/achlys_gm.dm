@@ -15,6 +15,8 @@
 	probability = 0
 	allowed_ghost_roles = list(/datum/ghost_role/flood_prisoner)
 	var/special_event_starttime = 0 //Used to determine if we should run the gamemode's "special event" (Currently just a comms cut-in). Is set to the time the event should start.
+	var/start_comms_event = 0
+	var/stop_comms_event = 0
 	var/item_destroy_tag = "destroythis" //Map-set tags for items that need to be destroyed.
 	var/list/items_to_destroy = list()
 	var/item_retrieve_tag = "retrievethis" //Map-set tags for items that need to be retrieved.
@@ -22,6 +24,7 @@
 	var/list/item_success_tag = "retrieveto"//the tag of an object that when the documents are in the contents of, counts as success
 	var/flood_spawn_event_minor
 	var/flood_spawn_event_major
+	var/obj/machinery/overmap_comms/jammer/spawned_jammer
 
 /datum/ghost_role/flood_prisoner
 
@@ -45,7 +48,19 @@
 	flood_spawn_event_major = world.time + FLOOD_EVENT_MAJOR_START
 	populate_items_destroy()
 	populate_items_retrieve()
-	special_event_starttime = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
+	start_comms_event = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
+	stop_comms_event = start_comms_event + COMMS_CUTIN_EVENT_DURATION
+
+/datum/game_mode/achlys/post_setup()
+	..()
+
+	//setup the comms jamming for the asteroid field
+	var/obj/effect/overmap/sector/achlys/A = locate() in world
+	var/obj/effect/landmark/map_data = A.map_z_data[1]
+	spawned_jammer = new /obj/machinery/overmap_comms/jammer (map_data.loc)
+
+	//activate the jammer
+	spawned_jammer.toggle_active()
 
 /datum/game_mode/achlys/check_finished()
 	. = 0
@@ -71,26 +86,29 @@
 	for(var/atom/movable/item in items_to_retrieve)
 		if(!(item.loc == retrieval_loc))
 			. = 0
+/*
+	start_comms_event = world.time + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
+	stop_comms_event = stop_comms_event + COMMS_CUTIN_EVENT_DURATION
+	*/
+/datum/game_mode/achlys/proc/handle_comms_jamming()
+	//a comms window opens in the asteroid field
+	if(world.time > start_comms_event)
+		//reset the timer
+		start_comms_event = stop_comms_event + rand(COMMS_CUTIN_EVENT_MIN,COMMS_CUTIN_EVENT_MAX)
 
-/datum/game_mode/achlys/proc/do_special_event_handling() //Currently handles the "Comms cut-in event"
-	special_event_starttime = 0
-	command_announcement.Announce("There is a brief burst of static across the ship's intercomms as the Fresnel zone clears up, allowing radio communications.")
-	for(var/z_level = 0,z_level <= world.maxz, z_level += 1)
-		var/turf/item_spawn_turf = locate(0,0,z_level)
-		var/area/spawned_nopower_area = new /area (item_spawn_turf)
-		spawned_nopower_area.requires_power = 0
-		var/spawned_relay = new /obj/machinery/telecomms/relay/ship_relay (item_spawn_turf)
-		var/spawned_tcomms_machine = new /obj/machinery/telecomms/allinone (item_spawn_turf)
-		var/obj/machinery/overmap_comms/jammer/spawned_jammer = new /obj/machinery/overmap_comms/jammer (item_spawn_turf)
-		spawned_jammer.jam_chance = 50
-		spawned_jammer.jam_range = 999
-		spawned_jammer.active = 1
+		//deactivate the jammer
 		spawned_jammer.toggle_active()
-		spawn(COMMS_CUTIN_EVENT_DURATION)
-			qdel(spawned_nopower_area)
-			qdel(spawned_relay)
-			qdel(spawned_tcomms_machine)
-			qdel(spawned_jammer)
+
+		//tell the players
+		command_announcement.Announce("There is a brief burst of static across the ship's intercomms as the Fresnel zone clears up, allowing radio communications.")
+
+	//the asteroid field is now blocking comms again
+	if(world.time > stop_comms_event)
+		//reset the timer
+		stop_comms_event = start_comms_event + COMMS_CUTIN_EVENT_DURATION
+
+		//activate the jammer
+		spawned_jammer.toggle_active()
 
 /*
 25 minutes in: flood spore and spore growing appear across the Achlys area
@@ -108,8 +126,9 @@ All 3 of these cannot spawn on open space
 
 /datum/game_mode/achlys/process()
 	..()
-	if(special_event_starttime != 0 && world.time > special_event_starttime)
-		do_special_event_handling()
+
+	handle_comms_jamming()
+
 	if(flood_spawn_event_major != 0 && world.time > flood_spawn_event_major)
 		flood_spawn_event_minor = world.time //Trigger minor-event ASAP.
 		flood_spawn_event_major = world.time + FLOOD_EVENT_REPEAT_TIME
