@@ -6,7 +6,6 @@
 	icon_state = "scan"
 	density = 1
 	anchored = 0
-	pixel_x = -16
 	var/datum/game_mode/outer_colonies/gm
 
 /obj/structure/invasion_scanner/examine(var/mob/user)
