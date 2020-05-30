@@ -83,6 +83,7 @@
 	var/desc = "gun"
 	var/burst_size = 1
 	var/burst_delay = 1
+	var/dispersion = list(0)
 	var/fire_delay = 1
 	var/fire_sound
 	var/mag_used

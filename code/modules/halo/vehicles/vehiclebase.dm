@@ -354,7 +354,7 @@
 		if(2)
 			moving_y = 1
 	while (speed[speed_index_target] != 0)
-		sleep(max(min_speed - ((abs(speed[1]) + abs(speed[2])/2)),max_speed)) //Our delay is the average of both.
+		sleep(max(min_speed - (abs(speed[speed_index_target]) + abs(speed[speed_index_target==1?2:1])/2),max_speed)) //Our delay is the average of both.
 		if(speed[speed_index_target] > 0)
 			switch(speed_index_target)
 				if(1)

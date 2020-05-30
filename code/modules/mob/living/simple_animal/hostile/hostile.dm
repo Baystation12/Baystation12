@@ -215,9 +215,11 @@
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	var/obj/vehicles/v = loc
 	if(istype(v))
-		if(!using_vehicle_gun && !v.guns_disabled && src in v.get_occupants_in_position("gunner"))
+		if(!using_vehicle_gun && !v.guns_disabled && src in v.get_occupants_in_position(v.comp_prof.pos_to_check))
 			var/using_vehicle_gun_type = pick(v.comp_prof.gunner_weapons)
-			using_vehicle_gun = new using_vehicle_gun_type
+			using_vehicle_gun = new using_vehicle_gun_type (v)
+		else if(!(v.occupants[src] in (v.exposed_positions - "driver" | v.comp_prof.pos_to_check)))
+			return
 	else if(using_vehicle_gun)
 		qdel(using_vehicle_gun)
 
