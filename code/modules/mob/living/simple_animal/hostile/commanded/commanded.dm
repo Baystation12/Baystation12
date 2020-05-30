@@ -77,7 +77,7 @@
 	if(!target_mob)
 		return
 	if(target_mob in ListTargets(10))
-		walk_to(src,target_mob,1,move_to_delay)
+		hostilemob_walk_to(target_mob,1,move_to_delay)
 
 /mob/living/simple_animal/hostile/commanded/proc/commanded_stop() //basically a proc that runs whenever we are asked to stay put. Probably going to remain unused.
 	return
@@ -141,12 +141,12 @@
 	target_mob = null
 	stance = COMMANDED_STOP
 	stop_automated_movement = 1
-	walk_to(src,0)
+	walk(src,0)
 	return 1
 
 /mob/living/simple_animal/hostile/commanded/proc/stop_command(var/mob/speaker,var/text)
 	allowed_targets = list()
-	walk_to(src,0)
+	walk(src,0)
 	target_mob = null //gotta stop SOMETHIN
 	stance = HOSTILE_STANCE_IDLE
 	stop_automated_movement = 0

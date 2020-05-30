@@ -3,7 +3,7 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 
 /datum/controller/process/atom_despawner
 	var/list/cleanables = list()
-	var/max_cleanables = 200 //This isn't a hard cap. Anything added that causes the cleanables list to go over this length will automatically set the despawner to start cleaning.
+	var/max_cleanables = 100 //This isn't a hard cap. Anything added that causes the cleanables list to go over this length will automatically set the despawner to start cleaning.
 	var/atom_timeout = 10 MINUTES	//deciseconds before despawning
 	var/do_cleaning = 1
 	var/list_index = 1
@@ -52,6 +52,5 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 		cleanables[AM] = world.time
 		if(cleanables.len > max_cleanables)
 			for(var/i = 1 to (cleanables.len - max_cleanables))
-				var/to_clean = cleanables[i]
-				cleanables[to_clean] = 0
+				cleanables[i] = 0
 		return 1

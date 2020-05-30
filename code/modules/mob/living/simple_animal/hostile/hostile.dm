@@ -61,6 +61,8 @@
 /mob/living/simple_animal/hostile/Move(var/turfnew,var/dir)
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
+		if(isnull(dir))
+			dir = get_step(src,turfnew)//Important that we actually have a dir to pass, so generate one if we somehow got here without one.
 		. = v.relaymove(src,dir)
 		if(v.guns_disabled)
 			qdel(using_vehicle_gun)
@@ -68,6 +70,18 @@
 		if(using_vehicle_gun)
 			qdel(using_vehicle_gun)
 		. = ..()
+
+/mob/living/simple_animal/hostile/proc/hostilemob_walk_to(var/target,var/safedist,var/delay)
+	if(istype(loc,/obj/vehicles))
+		spawn(-1)
+			while(get_dist(src.loc,target) > safedist)
+				var/obj/vehicles/v = loc
+				if(!istype(v))
+					break
+				v.relaymove(src,get_dir(src.loc,target))
+				sleep(1)
+	else
+		walk_to(src, target, safedist, delay)
 
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!faction) //No faction, no reason to attack anybody.
@@ -135,20 +149,18 @@
 	var/list/targlist = ListTargets(7)
 	if(target_mob in targlist)
 		if(ranged || istype(loc,/obj/vehicles))
+			var/targ_loc_cached = target_mob.loc //This is required because OpenFire clears the target mob.
 			if(target_mob in targlist)
 				walk(src, 0)
 				OpenFire(target_mob)
-				return
-			if(get_dist(loc,target_mob) > world.view) //Don't let them flee!
-				var/do_chase = 1
-				if(istype(target_mob,/mob/living/carbon/human))
-					if(locate(/obj/item/weapon/gun/projectile/shotgun in target_mob)) //Okay wait they have a shotty.
-						do_chase = 0
-				if(do_chase)
-					walk_to(src, target_mob, 1, move_to_delay)
+			var/engage_dist_mod = 0.5
+			if(istype(loc,/obj/vehicles))
+				engage_dist_mod = 0
+			if(get_dist(loc,targ_loc_cached) >= world.view*engage_dist_mod) //Don't let them flee!
+				hostilemob_walk_to(targ_loc_cached,world.view*engage_dist_mod,move_to_delay)
 		else
 			stance = HOSTILE_STANCE_ATTACKING
-			walk_to(src, target_mob, 1, move_to_delay)
+			hostilemob_walk_to(target_mob,1,move_to_delay)
 			spawn(get_dist(src,target_mob)*move_to_delay) //If the target is within range after our original move, we attack them.
 				AttackTarget()
 	else
@@ -245,17 +257,20 @@
 	walk(src, 0)
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 8)
+	var/view_from = src
 	if(istype(loc,/obj/vehicles))
 		var/obj/vehicles/v = loc
 		dist *= v.vehicle_view_modifier
+		view_from = v
 	var/list/L = list()
 
-	var/list/in_sight = view(dist,src)
+	var/list/in_sight = view(dist,view_from)
 	for(var/mob/living/M in in_sight)
 		L += M
 	for(var/obj/vehicles/M in in_sight)
 		L += M
 	for(var/obj/mecha/M in in_sight)
+		L += M
 
 	return L
 

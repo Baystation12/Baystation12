@@ -407,16 +407,15 @@
 		for(var/mob/living/m in get_occupants_in_position(position))
 			m.apply_damage((250/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
 
-//TODO: REIMPLEMENT SPEED BASED MOVEMENT
 /obj/vehicles/relaymove(var/mob/user, var/direction)
 	if(world.time < next_move_input_at)
-		return
+		return 0
 	if(movement_destroyed)
 		to_chat(user,"<span class = 'notice'>[src] is in no state to move!</span>")
-		return
+		return 0
 	if(!active)
 		to_chat(user,"<span class = 'notice'>[src] needs to be active to move!</span>")
-		return
+		return 0
 	var/list/driver_list = get_occupants_in_position("driver")
 	var/is_driver = FALSE
 	for(var/mob/driver in driver_list)
@@ -424,7 +423,12 @@
 			is_driver = TRUE
 			break
 	if(!is_driver)
-		return
+		return -1 //doesn't return 0 so we can differentiate this from the other problems for simple mobs.
+	if(!(direction in list(NORTH,SOUTH,EAST,WEST)))
+		var/dirturn = 45
+		if(prob(50))
+			dirturn = -45
+		direction = turn(direction,dirturn)
 	switch(direction)
 		if(NORTH)
 			last_moved_axis = 2
@@ -452,6 +456,7 @@
 		spawn()
 			movement_loop(2)
 	next_move_input_at = world.time + acceleration
+	return 1
 
 /obj/vehicles/verb/verb_inspect_components()
 	set name = "Inspect Components"
