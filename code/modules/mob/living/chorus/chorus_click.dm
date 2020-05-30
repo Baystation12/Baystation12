@@ -3,6 +3,8 @@
 	var/last_click = 0
 
 /mob/living/chorus/ClickOn(var/atom/A, var/params)
+	if(stat == DEAD)
+		return
 	if(istype(A, /obj/structure/chorus))
 		if(selected_building == deletion)
 			deletion.build(A, src)

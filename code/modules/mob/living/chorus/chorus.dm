@@ -21,6 +21,7 @@
 	eye.possess(src)
 	chorus_net.add_source(eyeobj)
 	chorus_net.add_source(src)
+	set_sight(SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF)
 
 /mob/living/chorus/Destroy()
 	eyeobj.release(src)
@@ -29,12 +30,7 @@
 	. = ..()
 
 /mob/living/chorus/update_sight()
-	if (phase == CHORUS_PHASE_OBSERVE)
-		sight = SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
-	else if (stat == DEAD)
-		update_dead_sight()
-	else
-		update_living_sight()
+	return
 
 /mob/living/chorus/proc/upgrade_to_egg(var/position)
 	set name = "Plant"
@@ -48,3 +44,4 @@
 	invisibility = 0
 	anchored = TRUE
 	phase = CHORUS_PHASE_EGG
+	update_sight()

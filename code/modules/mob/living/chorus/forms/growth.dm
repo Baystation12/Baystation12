@@ -28,6 +28,7 @@
 			/datum/chorus_building/set_to_turf/growth/tendril_thorned,
 			/datum/chorus_building/set_to_turf/growth/bone_shooter,
 			/datum/chorus_building/set_to_turf/growth/gastric_emitter,
+			/datum/chorus_building/set_to_turf/growth/spinal_column,
 			/datum/chorus_building/set_to_turf/growth/womb
 	)
 	var/released_eggs = 0 //Growth's win condition.

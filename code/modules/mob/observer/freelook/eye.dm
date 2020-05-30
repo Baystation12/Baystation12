@@ -129,3 +129,23 @@
 	else
 		sprint = initial
 	return 1
+
+/mob/verb/northeast()
+	set name = ".northeast"
+	if(!eyeobj || !HasAbove(eyeobj.z))
+		return
+	EyeMove(UP)
+
+/mob/observer/northeast()
+	if(HasAbove(z))
+		forceMove(get_step(src, UP))
+
+/mob/verb/southeast()
+	set name = ".southeast"
+	if(!eyeobj || !HasBelow(eyeobj.z))
+		return
+	EyeMove(DOWN)
+
+/mob/observer/southeast()
+	if(HasBelow(z))
+		forceMove(get_step(src, DOWN))

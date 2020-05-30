@@ -2094,6 +2094,7 @@
 #include "code\modules\mob\living\chorus\chorus_end.dm"
 #include "code\modules\mob\living\chorus\chorus_followers.dm"
 #include "code\modules\mob\living\chorus\chorus_form.dm"
+#include "code\modules\mob\living\chorus\chorus_life.dm"
 #include "code\modules\mob\living\chorus\chorus_pylon.dm"
 #include "code\modules\mob\living\chorus\chorus_resources.dm"
 #include "code\modules\mob\living\chorus\chorus_say.dm"

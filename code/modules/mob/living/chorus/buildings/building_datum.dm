@@ -129,6 +129,6 @@
 	. = ..()
 	if(.)
 		for(var/turf/T in range(range, target))
-			if(T.density)
+			if(T.density || istype(T, /turf/space))
 				continue
 			T.ChangeTurf(turf_to_change_to)

@@ -90,7 +90,7 @@
 	name = "maw"
 	desc = "A neck high wall made of teeth and meat"
 	click_cooldown = 3 SECONDS
-	health = 60
+	health = 200
 	gives_sight = FALSE
 	icon_state = "growth_maw_closed"
 
@@ -103,3 +103,24 @@
 		density = 1
 		icon_state = "growth_maw_closed"
 		flick("growth_maw_close", src)
+
+/datum/chorus_building/set_to_turf/growth/spinal_column
+	desc = "For growths that must grow up and out"
+	building_type_to_build = /obj/structure/chorus/zleveler/spinal_column
+	build_time = 120
+	build_level = 2
+	range = 0
+	resource_cost = list(
+		/datum/chorus_resource/growth_bones = 50
+	)
+
+/obj/structure/chorus/zleveler/spinal_column
+	name = "spinal column"
+	desc = "A thick pillar of bone and marrow extending from floor to ceiling"
+	health = 125
+	icon_state = "growth_spine"
+	activation_cost_resource = /datum/chorus_resource/growth_bones
+	activation_cost_amount = 50
+	gives_sight = TRUE
+	density = TRUE
+	turf_type_to_add = /turf/simulated/floor/scales

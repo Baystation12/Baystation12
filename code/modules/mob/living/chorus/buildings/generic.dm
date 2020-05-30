@@ -56,13 +56,14 @@
 	var/mob/living/carbon/human/target
 	var/turf/T = get_turf(src)
 	for(var/mob/living/carbon/human/H in T)
-		if(owner.get_implant(H))
+		if(owner.get_implant(H) || !H.mind)
 			continue
 		target = H
 		break
 	converting = TRUE
 	update_icon()
 	if(target && do_after(target, 50, incapacitation_flags = INCAPACITATION_NONE))
+		GLOB.godcult.add_antagonist_mind(target.mind)
 		owner.add_follower(target)
 	converting = FALSE
 	update_icon()
@@ -136,7 +137,7 @@
 			if(!istype(m, /mob/living))
 				continue
 			var/mob/living/L = m
-			if(L.stat)
+			if(L == owner || L.stat)
 				continue
 			if(!owner.get_implant(L))
 				filtered += m
@@ -146,3 +147,54 @@
 
 /obj/structure/chorus/processor/sentry/proc/trigger_effect(var/list/possible_targets)
 	return
+
+/obj/structure/chorus/zleveler
+	name = "Zleveler"
+	desc = "This structure allows the Chorus to go up and down zlevels."
+	click_cooldown = 5 SECONDS
+	density = TRUE
+	var/turf_type_to_add
+	var/growth_verb = "suddenly appears"
+
+/obj/structure/chorus/zleveler/proc/check_turf(var/turf/T, var/warning_context, var/warnings)
+	if(T.density || istype(T, /turf/space))
+		to_chat(owner, "<span class='wanring'>You can't build [warning_context] there</span>")
+		return FALSE
+	for(var/a in T)
+		var/atom/at = a
+		if(istype(a, /obj/structure/chorus/zleveler) || at.density)
+			if(warnings)
+				to_chat(owner, "<span class='warning'>There is something blocking your way [warning_context]!</span>")
+			return FALSE
+	return TRUE
+
+/obj/structure/chorus/zleveler/can_activate(var/mob/living/chorus/C, var/warning = TRUE)
+	. = FALSE
+	var/turf/T = get_turf(src)
+	if(HasBelow(T.z)) //If we have a below level
+		if(check_turf(get_step(T, DOWN), "down", warning))
+			. = TRUE
+	if(HasAbove(T.z))
+		if(check_turf(get_step(T, UP), "up", warning))
+			. = TRUE
+	if(.)
+		. = ..()
+
+/obj/structure/chorus/zleveler/activate()
+	var/turf/T = get_turf(src)
+	var/turf/target
+	var/through_text
+	var/extend_text
+	if(HasBelow(T.z) && check_turf(get_step(T, DOWN), "down", FALSE)) //We goin' down
+		target = get_step(T, DOWN)
+		through_text = "through the ceiling"
+		extend_text = "down"
+	else //We have to go up by default
+		target = get_step(T, UP)
+		through_text = "through the floor"
+		extend_text = "up"
+	if(turf_type_to_add)
+		target.ChangeTurf(turf_type_to_add)
+	var/atom/a = new type(target, owner)
+	to_chat(owner, "<span class='notice'>You extend \the [src] [extend_text].</span>")
+	a.visible_message("<span class='danger'>\The [a] [growth_verb] [through_text]!</span>")

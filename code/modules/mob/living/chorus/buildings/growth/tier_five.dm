@@ -18,7 +18,7 @@
 	activation_cost_amount = 100
 	health = 200
 	click_cooldown = 120 SECONDS
-	gives_sight = FALSE
+	gives_sight = TRUE
 
 /obj/structure/chorus/growth_womb/activate()
 	to_chat(owner, "<span class='notice'>You send out another one of your children.</span>")

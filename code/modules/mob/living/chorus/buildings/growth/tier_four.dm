@@ -18,6 +18,7 @@
 	desc = "A large mucus covered tentacle. <span class='notice'>This one has a large spike on the end</span>"
 	icon_state = "growth_tendril_thorned"
 	damage = 14
+	health = 300
 
 /datum/chorus_building/set_to_turf/growth/bone_shooter
 	desc = "Automatically shoots bone fragments at enemies"
@@ -43,7 +44,8 @@
 
 /obj/structure/chorus/processor/sentry/bone_shooter/trigger_effect(var/list/targets)
 	var/mob/living/T = get_atom_closest_to_atom(src, targets)
-	var/obj/item/projectile/bone_shard/bs = new(get_turf(src))
+	var/obj/item/projectile/bone_shard/bs = new(get_turf(src), owner)
+	set_dir(get_dir(src, T))
 	visible_message("<b>\The [src]</b> fires a small dart at \the [T]")
 	bs.firer = src
 	bs.launch(T, BP_CHEST)
@@ -54,6 +56,18 @@
 	icon_state = "sliver"
 	damage_type = BRUTE
 	damage_flags = 0
+	var/mob/living/chorus/ignore
+
+/obj/item/projectile/bone_shard/Initialize(var/maploading, var/ignoring)
+	..()
+	ignore = ignoring
+
+/obj/item/projectile/bone_shard/Bump(atom/A as mob|obj|turf|area, forced=0)
+	if(istype(A, /obj/structure/chorus))
+		var/obj/structure/chorus/c = A
+		if(c.owner == ignore)
+			return FALSE
+	. = ..()
 
 /datum/chorus_building/set_to_turf/growth/gastric_emitter
 	desc = "Activate to spill acid on nearby tiles: watch out for your allies!"
@@ -68,7 +82,7 @@
 
 /obj/structure/chorus/gastric_emitter
 	name = "gastric emitter"
-	desc = "You can hear caustic chemicals slosh in this fleshy sack."
+	desc = "You can hear chemicals slosh in this fleshy sack."
 	icon_state = "growth_gastric"
 	click_cooldown = 30 SECONDS
 	gives_sight = FALSE
