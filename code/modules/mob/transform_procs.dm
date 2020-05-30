@@ -72,6 +72,8 @@
 	if(mind)
 		mind.transfer_to(O)
 		O.mind.original = O
+		var/datum/job/job = SSjobs.get_by_title(O.mind.assigned_role)
+		O.skillset.obtain_from_job(job)
 	else
 		O.key = key
 

@@ -75,6 +75,16 @@
 		skill_list[S.type] = min + (allocation[S] || 0)
 	on_levels_change()
 
+/datum/skillset/proc/obtain_from_job(datum/job/job)
+	if(!job)
+		return
+
+	skill_list = list()
+
+	for(var/decl/hierarchy/skill/S in GLOB.skills)
+		skill_list[S.type] = job.get_min_skill(S)
+	on_levels_change()
+
 //Skill-related mob helper procs
 
 /mob/proc/get_skill_value(skill_path)
@@ -102,8 +112,8 @@
 /mob/proc/get_skill_difference(skill_path, mob/opponent)
 	return get_skill_value(skill_path) - opponent.get_skill_value(skill_path)
 
-// A generic way of modifying times via skill values	
-/mob/proc/skill_delay_mult(skill_path, factor = 0.3) 
+// A generic way of modifying times via skill values
+/mob/proc/skill_delay_mult(skill_path, factor = 0.3)
 	var/points = get_skill_value(skill_path)
 	switch(points)
 		if(SKILL_BASIC)
@@ -117,7 +127,7 @@
 	return do_after(src, base_delay * skill_delay_mult(skill_path, factor), target)
 
 // A generic way of modifying success probabilities via skill values. Higher factor means skills have more effect. fail_chance is the chance at SKILL_NONE.
-/mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1) 
+/mob/proc/skill_fail_chance(skill_path, fail_chance, no_more_fail = SKILL_MAX, factor = 1)
 	var/points = get_skill_value(skill_path)
 	if(points >= no_more_fail)
 		return 0
