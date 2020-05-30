@@ -169,11 +169,11 @@ also using astar would have a performance impact due to eg hordes
 			if(istype(leader_follow.loc,/obj/vehicles))
 				var/obj/vehicles/v = leader_follow.loc
 				if(v.Adjacent(src))
-					for(var/seat in list("driver","gunner","passenger"))
+					for(var/seat in list("gunner","driver","passenger"))
 						if(!v.enter_as_position(src,seat))
 							v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s [seat] seat.</span>")
 						else
-							v.visible_message("<span class = 'notice'>[name] enters [v.name]'s passenger seat.</span>")
+							v.visible_message("<span class = 'notice'>[name] enters [v.name]'s [seat] seat.</span>")
 							return 1
 					set_leader(null)
 		else
