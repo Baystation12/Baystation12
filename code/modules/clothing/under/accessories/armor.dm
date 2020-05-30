@@ -384,8 +384,8 @@
 	icon_state = "helmcover_tan"
 
 /obj/item/clothing/accessory/armor/helmcover/nt
-	name = "corporate helmet cover"
-	desc = "A fabric cover for armored helmets. This one has corporate colors."
+	name = "white helmet cover"
+	desc = "A fabric cover for armored helmets. This one is white."
 	icon_state = "helmcover_nt"
 
 /obj/item/clothing/accessory/armor/helmcover/pcrc
