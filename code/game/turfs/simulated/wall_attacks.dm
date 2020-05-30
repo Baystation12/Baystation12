@@ -111,9 +111,11 @@
 				if(rotting && !reinf_material)
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src] and it crumbles!"), SPAN_DANGER("You punch \the [src] and it crumbles!"))
 					dismantle_wall()
+					playsound(src, pick(GLOB.punch_sound), 20)
 				else
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
 					M.apply_damage(3, BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)
+					playsound(src, pick(GLOB.punch_sound), 40)
 
 	else
 		try_touch(user, rotting)
