@@ -8,6 +8,24 @@
 /obj/item/device/flashlight/flare/unsc
 	brightness_on = 4 //halved normal flare light
 
+/obj/item/clothing/head/helmet/achlys_marine //regular marine helmet lacking a flashlight and visor
+	name = "Olive Camo CH251 Helmet"
+	desc = "The standard issue combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
+	icon = ITEM_INHAND
+	icon_override = MARINE_OVERRIDE
+	item_state = "CH252 Helmet"
+	icon_state = "helmet_novisor"
+	item_flags = THICKMATERIAL
+	body_parts_covered = HEAD
+	armor = list(melee = 50, bullet = 30, laser = 50,energy = 20, bomb = 25, bio = 0, rad = 0)
+	flags_inv = HIDEEARS|HIDEEYES
+	cold_protection = HEAD
+	min_cold_protection_temperature = HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = HEAD
+	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0.7
+	w_class = 3
+
 /obj/item/weapon/storage/belt/utility/marine_engineer
 	can_hold = list(/obj/item/weapon/weldingtool,/obj/item/weapon/crowbar,/obj/item/ammo_magazine,/obj/item/ammo_box,/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/chem_grenade/incendiary,/obj/item/weapon/armor_patch)
 
@@ -32,7 +50,7 @@
 	/obj/item/weapon/gun/projectile/m6d_magnum = 1,
 	/obj/item/ammo_magazine/m5 = 2,
 	/obj/item/weapon/gun/projectile/m7_smg = 1,
-	/obj/item/clothing/head/helmet/marine/medic = 1,
+	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
 	/obj/item/clothing/glasses/hud/tactical = 1,
 	/obj/item/clothing/suit/storage/marine/medic = 1,
@@ -60,7 +78,7 @@
 	/obj/item/ammo_box/shotgun/slug = 1,
 	/obj/item/ammo_box/shotgun = 1,
 	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 1,
-	/obj/item/clothing/head/helmet/marine/visor = 1,
+	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
 	/obj/item/clothing/glasses/hud/tactical = 1,
 	/obj/item/clothing/suit/storage/marine = 1,
@@ -77,7 +95,7 @@
 
 /obj/structure/closet/crate/marine/engineer/WillContain()
 	return list(
-	/obj/item/clothing/head/helmet/marine/visor = 1,
+	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
 	/obj/item/clothing/glasses/welding = 1,
 	/obj/item/clothing/suit/storage/marine = 1,
@@ -110,7 +128,7 @@
 	/obj/item/ammo_magazine/m762_ap/MA5B = 3,
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/weapon/grenade/frag/m9_hedp = 1,
-	/obj/item/clothing/head/helmet/marine = 1,
+	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
 	/obj/item/clothing/glasses/hud/tactical = 1,
 	/obj/item/clothing/suit/storage/marine = 1,
@@ -137,7 +155,7 @@
 	/obj/item/weapon/gun/projectile/ma5b_ar = 1,
 	/obj/item/device/taperecorder = 1,
 	/obj/item/squad_manager = 1,
-	/obj/item/clothing/head/helmet/marine = 1,
+	/obj/item/clothing/head/helmet/achlys_marine = 1,
 	/obj/item/clothing/mask/marine = 1,
 	/obj/item/clothing/glasses/hud/tactical = 1,
 	/obj/item/clothing/suit/storage/marine = 1,
