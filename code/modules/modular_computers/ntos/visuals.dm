@@ -36,5 +36,10 @@
 	if(istype(A))
 		A.visible_message("<span class='notice'>\The [A] screen displays a notification: \"[message]\"</span>", range = 1)
 
+/datum/extension/interactive/ntos/proc/audible_notification(notification)
+	var/atom/A = holder
+	if(istype(A))
+		playsound(A, notification, 5, falloff = 1)
+
 /datum/extension/interactive/ntos/proc/show_error(user, message)
 	to_chat(user, "<span class='warning'>[message]</span>")
