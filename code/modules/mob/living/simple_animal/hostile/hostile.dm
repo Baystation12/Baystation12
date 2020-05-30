@@ -362,7 +362,7 @@
 		retaliate(M)
 
 /mob/living/simple_animal/hostile/proc/EvasiveMove(var/atom/movable/attacker)
-	if(isnull(attacker) || stat == DEAD)
+	if(isnull(attacker) || stat == DEAD || istype(loc,/obj/vehicles))
 		return 0
 	var/dir_attack = get_dir(loc,attacker.loc)
 	var/list/dirlist = list(NORTH,SOUTH,EAST,WEST) - dir_attack //If it's a diagonal attack vector, we won't try to move directly towards them anyway.
