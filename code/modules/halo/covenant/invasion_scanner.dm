@@ -32,11 +32,15 @@
 	if(point.active_scanner)
 		visible_message("<span class = 'notice'>[src] shuts down quickly, recognising the interference it would cause with this local area's scanning operations. Relocate to a different point-of-interest.</span>")
 		return 0
+	point.active_scanner = src
 	return 1
 
 /obj/structure/invasion_scanner/proc/toggle_scanner()
 	if(anchored)
 		gm.unregister_scanner()
+		var/obj/effect/landmark/scanning_point/point = locate(/obj/effect/landmark/scanning_point) in range(2,src)
+		if(point.active_scanner == src)
+			point.active_scanner = null
 	else
 		if(!can_register())
 			return
@@ -44,6 +48,7 @@
 	anchored = !anchored
 
 /obj/structure/invasion_scanner/Destroy()
+	gm = ticker.mode
 	if(gm)
 		gm.register_scanner_destroy()
 	. = ..()
