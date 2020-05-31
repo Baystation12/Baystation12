@@ -1,7 +1,7 @@
 // Rigs and gear themselves.
 /obj/item/weapon/rig/mantid
-	name = "alate support exosuit"
-	desc = "A powerful support exosuit with integrated power supply, weapon and atmosphere. It's closer to a mech than a rig."
+	name = "alate combat exosuit"
+	desc = "A powerful combat exosuit with integrated power supply, weapon and atmosphere. It's closer to a mech than a rig."
 	icon_state = "kexosuit"
 	item_state = null
 	suit_type = "support exosuit"
@@ -207,15 +207,15 @@
 	icon = 'icons/obj/ascent.dmi'
 	icon_state = "injector"
 	charges = list(
-		list("bromide",             "bromide",             /datum/reagent/toxin/bromide, 80),
-		list("crystallizing agent", "crystallizing agent", /datum/reagent/crystal,       80),
-		list("spaceacillin",        "spaceacillin",        /datum/reagent/spaceacillin,  80),
-		list("tramadol",            "tramadol",            /datum/reagent/tramadol,      80)
+		list("bromide",             "bromide",             /datum/reagent/toxin/bromide, 20),
+		list("crystallizing agent", "crystallizing agent", /datum/reagent/crystal,       20),
+		list("spaceacillin",        "spaceacillin",        /datum/reagent/spaceacillin,  20),
+		list("tramadol",            "tramadol",            /datum/reagent/tramadol,      20)
 	)
 
 // Rig definitions.
 /obj/item/weapon/rig/mantid/gyne
-	name = "gyne support exosuit"
+	name = "gyne combat exosuit"
 	armor = list(
 		melee = ARMOR_MELEE_VERY_HIGH,
 		bullet = ARMOR_BALLISTIC_RIFLE,
@@ -323,4 +323,101 @@
 		SPECIES_MANTID_GYNE =  'icons/mob/species/mantid/onmob_gloves_gyne.dmi',
 		SPECIES_MANTID_ALATE = 'icons/mob/species/mantid/onmob_gloves_alate.dmi',
 		SPECIES_NABBER =       'icons/mob/species/nabber/onmob_hands_gas.dmi'
+		)
+
+//Add SeedShip Specific Exosuits
+
+// Rigs and gear themselves.
+/obj/item/weapon/rig/mantid/seed
+	name = "alate support exosuit"
+	desc = "A powerful support exosuit with integrated power supply, weapon and atmosphere. It's closer to a mech than a rig."
+	armor = list(
+		melee = ARMOR_MELEE_RESISTANT,
+		bullet = 1.1 * ARMOR_BALLISTIC_PISTOL,
+		laser = 1.1 * ARMOR_LASER_HANDGUNS,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+	)
+	online_slowdown = 1
+	initial_modules = list(
+		/obj/item/rig_module/vision/nvg,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/chem_dispenser/mantid,
+		/obj/item/rig_module/device/multitool,
+		/obj/item/rig_module/device/cable_coil,
+		/obj/item/rig_module/device/welder,
+		/obj/item/rig_module/device/clustertool,
+		/obj/item/rig_module/mounted/plasmacutter,
+		/obj/item/rig_module/maneuvering_jets
+		)
+
+/obj/item/weapon/rig/mantid/gyne/seed
+	name = "gyne support exosuit"
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_RIFLE,
+		laser = ARMOR_LASER_MAJOR,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+	)
+	initial_modules = list(
+		/obj/item/rig_module/vision/nvg,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/chem_dispenser/mantid,
+		/obj/item/rig_module/device/multitool,
+		/obj/item/rig_module/device/cable_coil,
+		/obj/item/rig_module/device/welder,
+		/obj/item/rig_module/device/clustertool,
+		/obj/item/rig_module/mounted/plasmacutter,
+		/obj/item/rig_module/maneuvering_jets
+	)
+
+/obj/item/weapon/rig/mantid/nabber/queen/seed
+	online_slowdown = 1
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = 1.1 * ARMOR_BALLISTIC_RESISTANT,
+		laser = 1.1 * ARMOR_LASER_RIFLES,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+	)
+	initial_modules = list(
+		/obj/item/rig_module/vision/nvg,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/chem_dispenser/mantid,
+		/obj/item/rig_module/device/multitool,
+		/obj/item/rig_module/device/cable_coil,
+		/obj/item/rig_module/device/welder,
+		/obj/item/rig_module/device/clustertool,
+		/obj/item/rig_module/mounted/plasmacutter,
+		/obj/item/rig_module/maneuvering_jets
+	)
+		
+/obj/item/weapon/rig/mantid/nabber/seed
+	online_slowdown = 1
+	armor = list(
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = 1.1 * ARMOR_BALLISTIC_RESISTANT,
+		laser = 1.1 * ARMOR_LASER_RIFLES,
+		energy = ARMOR_ENERGY_RESISTANT,
+		bomb = ARMOR_BOMB_RESISTANT,
+		bio = ARMOR_BIO_SHIELDED,
+		rad = ARMOR_RAD_SHIELDED
+	)
+	initial_modules = list(
+		/obj/item/rig_module/vision/nvg,
+		/obj/item/rig_module/ai_container,
+		/obj/item/rig_module/chem_dispenser/mantid,
+		/obj/item/rig_module/device/multitool,
+		/obj/item/rig_module/device/cable_coil,
+		/obj/item/rig_module/device/welder,
+		/obj/item/rig_module/device/clustertool,
+		/obj/item/rig_module/mounted/plasmacutter,
+		/obj/item/rig_module/maneuvering_jets
 		)
