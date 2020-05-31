@@ -1,6 +1,0 @@
-author: "Karlious"
-delete-after: True
-changes: 
-  - rscadd: "Adds the Skrellian Hard Suits"
-  - tweak: "Numerous balance updates for the Ascent Hard Suits - Replacing the current Hunter suits with weaker suits, while preserving the hunter suits for that game mode"
-  - maptweak: "Adds the Skrellian Hard Suits to the Skrell Ship"
