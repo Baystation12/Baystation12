@@ -3167,7 +3167,7 @@
 "ho" = (
 /obj/structure/table/rack/dark,
 /obj/item/weapon/gun/energy/particle/small,
-/obj/item/weapon/rig/mantid/gyne,
+/obj/item/weapon/rig/mantid/gyne/seed,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
 "hp" = (
@@ -4841,9 +4841,9 @@
 /area/ship/ascent/aft_starboard_jut)
 "JE" = (
 /obj/structure/table/rack/dark,
-/obj/item/weapon/rig/mantid/nabber/queen,
-/obj/item/weapon/rig/mantid/nabber,
-/obj/item/weapon/rig/mantid/nabber,
+/obj/item/weapon/rig/mantid/nabber/queen/seed,
+/obj/item/weapon/rig/mantid/nabber/seed,
+/obj/item/weapon/rig/mantid/nabber/seed,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/habitation)
 "JZ" = (
@@ -4853,8 +4853,8 @@
 /area/ship/ascent/fore_starboard_jut)
 "Ka" = (
 /obj/structure/table/rack/dark,
-/obj/item/weapon/rig/mantid,
-/obj/item/weapon/rig/mantid,
+/obj/item/weapon/rig/mantid/seed,
+/obj/item/weapon/rig/mantid/seed,
 /obj/machinery/light/ascent,
 /obj/structure/window/phoronreinforced{
 	dir = 8
@@ -4887,8 +4887,8 @@
 /area/ship/ascent/aft_starboard_jut)
 "Lp" = (
 /obj/structure/table/rack/dark,
-/obj/item/weapon/rig/mantid,
-/obj/item/weapon/rig/mantid,
+/obj/item/weapon/rig/mantid/seed,
+/obj/item/weapon/rig/mantid/seed,
 /obj/machinery/light/ascent{
 	dir = 1
 	},

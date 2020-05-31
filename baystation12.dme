@@ -2853,6 +2853,7 @@
 #include "code\modules\shuttles\shuttle_specops.dm"
 #include "code\modules\shuttles\shuttle_supply.dm"
 #include "code\modules\shuttles\shuttles_multi.dm"
+#include "code\modules\skrell\skrell_rigs.dm"
 #include "code\modules\species\species.dm"
 #include "code\modules\species\species_attack.dm"
 #include "code\modules\species\species_getters.dm"
