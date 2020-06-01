@@ -139,6 +139,7 @@
 	/obj/item/weapon/storage/backpack/odst/medic = 1,
 	/obj/item/clothing/head/helmet/odst/squadleader = 1,
 	/obj/item/clothing/suit/armor/special/odst/squadleader = 1,
+	/obj/item/weapon/storage/backpack/odst/squadlead = 1,
 	/obj/item/clothing/head/helmet/odst/sharpshooter = 1,
 	/obj/item/clothing/suit/armor/special/odst/sharpshooter = 1,
 	/obj/item/weapon/storage/backpack/odst/sharpshooter = 1,
