@@ -516,6 +516,7 @@
 
 /obj/structure/closet/CtrlAltClick(var/mob/user)
 	verb_toggleopen()
+	return 1
 
 /obj/structure/closet/emp_act(severity)
 	for(var/obj/O in src)

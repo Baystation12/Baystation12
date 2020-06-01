@@ -300,8 +300,9 @@
 	Control+Alt click
 */
 /mob/proc/CtrlAltClickOn(var/atom/A)
-	A.CtrlAltClick(src)
-	return
+	if(A.CtrlAltClick(src))
+		return
+	pointed(A)
 
 /atom/proc/CtrlAltClick(var/mob/user)
 	return
