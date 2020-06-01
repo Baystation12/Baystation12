@@ -55,7 +55,7 @@
 		updateVisibility(src)
 		var/turf/T = loc
 		if(istype(T))
-			T.handle_opacity_change(src)
+			T.RecalculateOpacity()
 
 	return INITIALIZE_HINT_NORMAL
 
