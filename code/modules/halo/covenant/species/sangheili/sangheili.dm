@@ -26,6 +26,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	spawn_flags = SPECIES_CAN_JOIN
 	appearance_flags = HAS_SKIN_TONE
 	brute_mod = 0.9
+	burn_mod = 0.9
 	pain_mod = 0.75 //Pain has quarter an effect on them
 	slowdown = -0.3
 	explosion_effect_mod = 0.5

@@ -15,6 +15,7 @@
 	total_health = 250 //Same base health as sangheili
 	spawn_flags = SPECIES_CAN_JOIN
 	brute_mod = 0.8 //Lower amount of brute damage taken than sangheili
+	burn_mod = 0.8 //ditto for burn
 	pain_mod = 0.6 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(1,0),null)
 	slowdown = -0.5
