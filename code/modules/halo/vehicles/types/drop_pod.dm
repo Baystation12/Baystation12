@@ -124,6 +124,10 @@
 		to_chat(usr,"<span class = 'notice'>[src] has already been launched once and cannot be launched again.</span>")
 		return
 
+	if(world.time < ticker.mode.ship_lockdown_until)
+		to_chat(usr,"<span class = 'notice'>[src] is still finalising deployment preparations!</span>")
+		return
+
 	var/turf/drop_turf = get_drop_turf(get_drop_point())
 	if(isnull(drop_turf))
 		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
