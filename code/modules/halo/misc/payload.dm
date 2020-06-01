@@ -87,7 +87,7 @@
 
 /obj/payload/proc/checkexplode()
 	if(exploding)
-		desc = explodedesc + " [(explode_at - world.time)/100] seconds remain."
+		desc = explodedesc + " [(explode_at - world.time)/10] seconds remain."
 	if(exploding && world.time >= explode_at)
 		GLOB.processing_objects -= src
 		var/explode_datum = new explodetype(src)
