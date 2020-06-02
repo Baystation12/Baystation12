@@ -250,7 +250,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/research{
-	id_tag = "liaisondoor";
+	id_tag = "liaisondoor2";
 	name = "Corporate Liaison";
 	secured_wires = 1
 	},
@@ -16351,13 +16351,13 @@
 	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
 	id_tag = "liaisondoor2"
 	},
-/obj/machinery/button/alternate/door{
-	name = "CL's Rear Office Door Control";
+/obj/machinery/button/alternate/door/bolts{
+	name = "CL's Front Office Door Bolt Control";
 	desc = "A remote control-switch for the office door.";
 	pixel_x = -5;
 	pixel_y = 26;
 	req_access = list("ACCESS_TORCH_CORPORATE_LIAISON");
-	id_tag = "liaisondoor2"
+	id_tag = "liaisondoor"
 	},
 /obj/machinery/light_switch{
 	pixel_x = 1;
