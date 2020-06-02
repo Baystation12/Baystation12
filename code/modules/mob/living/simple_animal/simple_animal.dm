@@ -167,26 +167,29 @@
 
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
-		if(isturf(src.loc) && !resting && !buckled && canmove)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
+		if((isturf(src.loc) || istype(loc,/obj/vehicles)) && !resting && !buckled && canmove)	//This is so it only moves if it's not inside a closet, gentics machine, etc.
 			turns_since_move++
 			if(turns_since_move >= turns_per_move)
-				if(!(stop_automated_movement_when_pulled && pulledby)) //Soma animals don't move when pulled
+				if(!(stop_automated_movement_when_pulled && pulledby)) //Some animals don't move when pulled
 					if(handle_leader_pathing())
 					else
 						var/moving_to = 0 // otherwise it always picks 4, fuck if I know.   Did I mention fuck BYOND
 						var/list/dirs_pickfrom = GLOB.cardinal.Copy()
 						var/allow_move = 0
+						var/move_step = null
 						while(!allow_move)
 							if(dirs_pickfrom.len == 0)
 								allow_move = 1
 								break
 							moving_to = pick(dirs_pickfrom)
-							if(!istype(get_step(src,moving_to),/turf/simulated/open) && isnull(locate(/obj/structure/bardbedwire) in moving_to))
+							move_step = get_step(loc,moving_to)
+							if(!istype(move_step,/turf/simulated/open) && isnull(locate(/obj/structure/bardbedwire) in move_step))
 								allow_move = 1
 							dirs_pickfrom -= moving_to
-						set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
-						Move(get_step(src,moving_to))
-						turns_since_move = 0
+						if(move_step)
+							set_dir(moving_to)			//How about we turn them the direction they are moving, yay.
+							Move(move_step,moving_to)
+							turns_since_move = 0
 
 	//Speaking
 	if(!client && speak_chance)
@@ -370,7 +373,7 @@
 	icon_state = icon_dead
 	density = 0
 	//adjustBruteLoss(maxHealth) //Make sure dey dead.
-	walk_to(src,0)
+	walk(src,0)
 	if(death_sounds.len > 0)
 		playsound(loc, pick(death_sounds),75,0,7)
 	return ..(gibbed,deathmessage,show_dead_message)

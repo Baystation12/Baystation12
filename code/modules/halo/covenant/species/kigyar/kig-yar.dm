@@ -20,6 +20,7 @@
 	appearance_flags = HAS_SKIN_TONE | HAS_UNDERWEAR
 	darksight = 6
 	brute_mod = 1.1
+	burn_mod = 1.1
 	gluttonous = GLUT_ANYTHING
 	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 	total_health = 200

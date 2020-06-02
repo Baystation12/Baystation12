@@ -161,25 +161,21 @@ also using astar would have a performance impact due to eg hordes
 
 /mob/living/simple_animal/proc/handle_leader_pathing()
 	if(leader_follow)
-		if(get_dist(loc,leader_follow.loc) < 14 && loc != leader_follow.loc)//A bit higher than a single screen
+		if(get_dist(loc,leader_follow.loc) < world.view*2 && loc != leader_follow.loc)//A bit higher than a single screen
 			if(istype(loc,/obj/vehicles))
 				var/obj/vehicles/v = loc
 				v.exit_vehicle(src,1)
-			walk_to(src,pick(orange(2,leader_follow.loc)),0,move_to_delay)
+			walk_to(src,pick(trange(2,leader_follow.loc)-leader_follow.loc),1,move_to_delay)
 			if(istype(leader_follow.loc,/obj/vehicles))
 				var/obj/vehicles/v = leader_follow.loc
 				if(v.Adjacent(src))
-					if(!v.enter_as_position(src,"gunner"))
-						v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s gunner seat.</span>")
-						if(!v.enter_as_position(src,"passenger"))
-							v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s passenger seat.</span>")
-							set_leader(null)
+					for(var/seat in list("gunner","driver","passenger"))
+						if(!v.enter_as_position(src,seat))
+							v.visible_message("<span class = 'notice'>[name] fails to enter [v.name]'s [seat] seat.</span>")
 						else
-							v.visible_message("<span class = 'notice'>[name] enters [v.name]'s passenger seat.</span>")
+							v.visible_message("<span class = 'notice'>[name] enters [v.name]'s [seat] seat.</span>")
 							return 1
-					else
-						v.visible_message("<span class = 'notice'>[name] enters [v.name]'s gunner seat.</span>")
-						return 1
+					set_leader(null)
 		else
 			if(leader_follow && loc != leader_follow.loc)
 				set_leader(null)

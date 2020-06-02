@@ -1,5 +1,6 @@
 /obj/effect/landmark/scanning_point
 	name = "Invasion Scan Point"
+	invisibility = 61
 	var/active_scanner = 0
 
 /obj/item/weapon/pinpointer/scanpoint_locator
@@ -24,7 +25,7 @@
 			if(!check_point_active || point.active_scanner)
 				scanpoint = point
 				index = i
-		if(scanpoint == oldpoint)
+		if(scanpoint == oldpoint || index == scanpoints.len)
 			index = 1
 		visible_message("<span class = 'notice'>[src] switches target.</span>")
 	if(!workdisk())

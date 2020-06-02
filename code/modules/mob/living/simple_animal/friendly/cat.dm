@@ -51,7 +51,7 @@
 
 	turns_since_scan++
 	if (turns_since_scan > 5)
-		walk_to(src,0)
+		walk(src,0)
 		turns_since_scan = 0
 
 		if (flee_target) //fleeing takes precendence
@@ -145,7 +145,7 @@
 		if (movement_target != friend)
 			if (current_dist > follow_dist && !istype(movement_target, /mob/living/simple_animal/mouse) && (friend in oview(src)))
 				//stop existing movement
-				walk_to(src,0)
+				walk(src,0)
 				turns_since_scan = 0
 
 				//walk to friend
@@ -155,7 +155,7 @@
 
 		//already following and close enough, stop
 		else if (current_dist <= near_dist)
-			walk_to(src,0)
+			walk(src,0)
 			movement_target = null
 			stop_automated_movement = 0
 			if (prob(10))

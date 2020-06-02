@@ -23,6 +23,7 @@
 
 	pain_mod = 0.9
 	brute_mod = 1.1
+	burn_mod = 1.1
 	slowdown = -1.0
 
 	pixel_offset_x = -4

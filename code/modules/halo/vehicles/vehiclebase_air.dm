@@ -112,6 +112,10 @@
 	if(!active)
 		to_chat(usr,"<span class = 'notice'>You need to be in the air to do that!.</span>")
 		return
+	if(world.time < ticker.mode.ship_lockdown_until)
+		to_chat(usr,"<span class = 'notice'>[src] is still finalising long-range deployment preparations!</span>")
+		return
+
 	to_chat(usr,"<span class = 'notice'>You start prepping [src] for long-range flight..</span>")
 	visible_message("<span class = 'notice'>[src] starts prepping for long-range flight..</span>")
 	if(!do_after(usr,WAYPOINT_FLIGHT_DELAY,src))
