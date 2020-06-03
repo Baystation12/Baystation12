@@ -154,7 +154,7 @@
 	var/old_scan = scan_percent
 	scan_percent = min(100,max(0,scan_percent+amt))
 	if(prob(25 * scanners_active) || (old_scan < 25 && scan_percent >= 25) || (old_scan < 50 && scan_percent >= 50) || (old_scan < 75 && scan_percent >= 75))
-		GLOB.global_announcer.autosay("Intel suggests Covenant scanning has reached [scan_percent] percent complete.", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_GALCOM)
+		GLOB.global_announcer.autosay("Intel suggests Covenant scanning has reached [scan_percent] percent complete.", "HIGHCOMM SIGINT", RADIO_SQUAD, LANGUAGE_GALCOM)
 		GLOB.global_announcer.autosay("Our scan moves forward, bringing us closer to the holy relic! [scan_percent]%", "Covenant Overwatch", RADIO_COV, LANGUAGE_SANGHEILI)
 	if(scan_percent >= 100)
 		GLOB.global_announcer.autosay("The Covenant has completed their scan! We have failed to defend the colony. Stop the covenant escaping with what they found.", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_GALCOM)
