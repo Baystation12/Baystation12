@@ -688,10 +688,10 @@
 		M.add_chemical_effect(CE_PULSE, 2)
 	if(dose > 5)
 		M.make_jittery(5)
-	if(volume >= M.species.adrenal_break_threshold)//slightly more than 100/5.
-		M.add_chemical_effect(CE_PAINKILLER,120) //Reach a threshold of adrenaline, massive painkill effect
-		M.add_chemical_effect(CE_PULSE,3) //But your heart goes mental
-		remove_self(M.species.adrenal_break_threshold) //And your body consumes the adrenaline for that last final push
 	if(volume >= 5 && M.is_asystole())
 		remove_self(5)
 		M.resuscitate()
+	while(volume >= M.species.adrenal_break_threshold)//slightly more than 100/5.
+		M.add_chemical_effect(CE_PAINKILLER,120) //Reach a threshold of adrenaline, massive painkill effect
+		M.add_chemical_effect(CE_PULSE,3) //But your heart goes mental
+		remove_self(M.species.adrenal_break_threshold) //And your body consumes the adrenaline for that last final push
