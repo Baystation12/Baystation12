@@ -234,6 +234,7 @@
 	icon_closed = "medical_wall"
 	icon_opened = "medical_wall_open"
 	anchored = 1
+	large = 0
 	density = 0
 	wall_mounted = 1
 
