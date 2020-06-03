@@ -52,5 +52,6 @@ var/global/datum/controller/process/atom_despawner/atom_despawner = new
 		cleanables[AM] = world.time
 		if(cleanables.len > max_cleanables)
 			for(var/i = 1 to (cleanables.len - max_cleanables))
-				cleanables[i] = 0
+				var/obj = cleanables[i]
+				cleanables[obj] = 0
 		return 1
