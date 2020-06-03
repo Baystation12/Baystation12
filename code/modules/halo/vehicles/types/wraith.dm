@@ -111,7 +111,7 @@
 	armor_penetration = 50
 	shield_damage = 240
 
-/obj/item/projectile/bullet/covenant/wraith_cannon/New()
+/obj/item/projectile/bullet/covenant/wraith_cannon/setup_trajectory()
 	. = ..()
 	kill_count = get_dist(loc,get_turf(original)) + rand(-dispersion,dispersion)
 
