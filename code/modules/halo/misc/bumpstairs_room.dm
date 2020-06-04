@@ -1,37 +1,10 @@
 
-/obj/structure/bumpstairs
-	name = "stairs"
-	desc = "On and on and on, they lead somewhere else..."
-	density = 0
-	anchored = 1
-	icon = 'citymap_icons/ramps.dmi'
-	icon_state = "rampbottom"
-	var/id_self
-	var/id_target
-
-/obj/structure/bumpstairs/New()
-	. = ..()
-
-	var/obj/effect/bump_teleporter/bump = new(src.loc)
-	bump.id = id_self
-	bump.id_target = id_target
-
-/obj/structure/bumpstairs/sewers_one
-	id_self = "sewers1"
-	id_target = "innie1"
-
-/obj/structure/bumpstairs/sewers_two
-	id_self = "sewers2"
-	id_target = "innie2"
-
-/obj/structure/bumpstairs/sewers_three
-	id_self = "sewers3"
-	id_target = "innie3"
+//see code/modules/halo/misc/bumpstairs.dm
+//and code/modules/halo/misc/bumpstairs_sewer.dm
 
 /obj/effect/landmark/bumpstairs_room
 	name = "bumpstairs_room_one"
 	icon_state = "x2"
-	invisibility = 101
 	var/bumpstairs_type = /obj/structure/bumpstairs/sewers_one
 
 /obj/effect/landmark/bumpstairs_room/one
