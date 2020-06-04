@@ -278,7 +278,7 @@
 							if(targets.len == 0) //Fallback, go on the defensive.
 								targets += F.flagship
 								targets += F.base
-							ship.slipspace_to_location(pick(view(pick(targets),7)))
+							ship.slipspace_to_location(pick(trange(7,pick(targets))))
 							ship.radio_message("Slipspace manouver complete. Fleet leader reporting at [ship.loc.x],[ship.loc.y].")
 
 						if(targets.len == 0)
