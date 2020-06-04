@@ -31,6 +31,7 @@ GLOBAL_LIST_EMPTY(achlys_prison_spawns)
 	title = "Prisoner"
 	total_positions = 10
 	spawn_positions = 10
+	poplock_divisor = 5
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/job/unsc_achlys/prisoner
 	whitelisted_species = list(/datum/species/human)
