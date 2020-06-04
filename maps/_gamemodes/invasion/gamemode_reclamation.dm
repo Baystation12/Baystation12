@@ -20,10 +20,10 @@
 		/datum/job/geminus_innie/commander,\
 		/datum/job/geminus_innie/orion_defector,\
 		/datum/job/insurrectionist_ai,\
-		/datum/job/police,\
-		/datum/job/police_chief,\
+		/datum/job/colonist/police,\
+		/datum/job/colonist/police/chief,\
 		/datum/job/colonist,\
-		/datum/job/colonist_mayor,\
+		/datum/job/colonist/mayor,\
 		/datum/job/colony_ai)
 
 /datum/game_mode/outer_colonies/reclamation/setup_objectives()

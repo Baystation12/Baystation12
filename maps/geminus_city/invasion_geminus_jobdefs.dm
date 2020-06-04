@@ -20,9 +20,9 @@
 		/datum/job/geminus_x52/researcher,\
 		/datum/job/geminus_x52/research_director,\
 		/datum/job/colonist,\
-		/datum/job/colonist_mayor,\
-		/datum/job/police,\
-		/datum/job/police_chief,\
+		/datum/job/colonist/mayor,\
+		/datum/job/colonist/police,\
+		/datum/job/colonist/police/chief,\
 		/datum/job/covenant/huragok,\
 		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
