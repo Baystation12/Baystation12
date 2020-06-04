@@ -88,6 +88,7 @@
 		active = 0
 	else
 		active = 1
+		communicate(/decl/communication_channel/dsay, src, "A [spawn_datum.spawn_faction] mobile respawn point within [src] has just been activated at ([x],[y],[z]), [get_area(src)]", /decl/dsay_communication/direct)
 
 /obj/vehicles/verb/toggle_headlights()
 	set name = "Toggle Headlights"
