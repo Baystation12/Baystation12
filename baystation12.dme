@@ -1612,6 +1612,7 @@
 #include "code\modules\halo\custom_ai_objects\custom_ai_type.dm"
 #include "code\modules\halo\custom_ai_objects\cyberwarfare.dm"
 #include "code\modules\halo\custom_ai_objects\cyberwarfare_commands.dm"
+#include "code\modules\halo\custom_ai_objects\dumb_ai_chip.dm"
 #include "code\modules\halo\custom_ai_objects\routing_node.dm"
 #include "code\modules\halo\demolitions\demolition_manager.dm"
 #include "code\modules\halo\demolitions\pinpointer.dm"

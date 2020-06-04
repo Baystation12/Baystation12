@@ -67,7 +67,6 @@
 	w_class = ITEM_SIZE_LARGE
 	dispersion = list(0.26)
 	accuracy = 2
-	scoped_accuracy = 1
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
 
