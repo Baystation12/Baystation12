@@ -1429,6 +1429,7 @@
 #include "code\modules\halo\admin\difficulty.dm"
 #include "code\modules\halo\admin\ert_ship_spawn.dm"
 #include "code\modules\halo\admin\fleet_spawn.dm"
+#include "code\modules\halo\admin\radio_message.dm"
 #include "code\modules\halo\admin\spawn_conversion.dm"
 #include "code\modules\halo\admin\start_flood_attack.dm"
 #include "code\modules\halo\admin\truce.dm"

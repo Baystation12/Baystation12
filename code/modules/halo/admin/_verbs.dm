@@ -18,4 +18,7 @@
 	admin_verbs_fun.Add(/client/proc/npc_difficulty)
 	admin_verbs_hideable.Add(/client/proc/npc_difficulty)
 
+	admin_verbs_fun.Add(/client/proc/custom_radio_message)
+	admin_verbs_hideable.Add(/client/proc/custom_radio_message)
+
 	return 1
