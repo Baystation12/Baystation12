@@ -2,7 +2,6 @@
 /datum/job/colonist
 	title = "Colonist"
 	selection_color = "#94940A"
-	spawnpoint_override = "Colony Arrival Shuttle"
 	whitelisted_species = list(/datum/species/human)
 	spawn_faction = "Human Colony"
 	supervisors = " the Colony Mayor"
@@ -12,6 +11,7 @@
 	account_allowed = TRUE
 	generate_email = TRUE
 	latejoin_at_spawnpoints = FALSE
+	outfit_type = /decl/hierarchy/outfit/job/colonist
 	//access = list(access_janitor, access_maint_tunnels, access_research)
 	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
 
