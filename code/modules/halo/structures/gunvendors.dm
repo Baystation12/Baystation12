@@ -39,7 +39,7 @@
 
 /obj/machinery/vending/armory/armor
 	name = "Armor Vendor"
-	desc = "A machine full of spare UNSC armor."
+	desc = "A machine full of spare UNSC armor and equipment"
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,
@@ -65,7 +65,8 @@
 	/obj/item/clothing/gloves/thick/unsc/brown = 8,
 	/obj/item/weapon/armor_patch = 10,
 	/obj/item/weapon/storage/backpack/marine = 6,
-	/obj/item/weapon/storage/backpack/marine/brown = 6)
+	/obj/item/weapon/storage/backpack/marine/brown = 6,
+	/obj/item/dumb_ai_chip = 2)
 
 /obj/machinery/vending/armory/oni
 	name = "ONI Vendor"

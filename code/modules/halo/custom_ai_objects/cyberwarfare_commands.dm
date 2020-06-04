@@ -1,5 +1,5 @@
 
-#define OVERMIND_INTERFACE_SQUADSEARCH_RANGE 14 //Double viewrange5
+#define OVERMIND_INTERFACE_SQUADSEARCH_RANGE 14 //Double viewrange
 
 //RECON//
 
@@ -18,7 +18,7 @@
 	. = ..()
 	if(!.)
 		return 0
-	to_chat(our_ai,"<span class = 'notice'>Commencing a Level [scan_level] system scan.</span>")
+	output_message("<span class = 'notice'>Commencing a Level [scan_level] system scan.</span>")
 	if(scan_level > 1)
 		our_ai.do_network_alert("Level [scan_level] system scan detected on network \[[our_ai.network]\]")
 	var/list/ais_in_net = get_ais_in_network(our_ai.network,our_ai.native_network)
@@ -28,32 +28,32 @@
 			var/msg = "Foreign artificial intelligence detected in network \[[our_ai.network]\]"
 			if(ais_in_net.len == 0)
 				msg = "No foreign artificial intelligences detected in network \[[our_ai.network]\]"
-			to_chat(our_ai,"<span class = 'notice'>[msg]</span>")
+			output_message("<span class = 'notice'>[msg]</span>")
 		if(2)
 			for(var/ai_untyped in ais_in_net)
 				if(ai_untyped == our_ai)
 					continue
 				var/mob/living/silicon/ai/ai = ai_untyped
-				to_chat(our_ai,"<span class = 'notice'>Artificial Intelligence Detected: [ai.name]\nScan strength failed to discover all nodes. Displaying found access nodes:</span>")
+				output_message("<span class = 'notice'>Artificial Intelligence Detected: [ai.name]\nScan strength failed to discover all nodes. Displaying found access nodes:</span>")
 				var/list/node_accessed_tmp = ai.nodes_accessed.Copy()
 				for(var/i = 0,i<=rand(NET_SCAN_L2_NODESCAN_LOWER,NET_SCAN_L2_NODESCAN_LOWER),i++)
 					if(node_accessed_tmp.len == 0)
 						break
 					var/obj/structure/ai_routing_node/picked = pick(node_accessed_tmp)
 					node_accessed_tmp -= picked
-					to_chat(our_ai,"<span class = 'notice'>[picked.name] at [picked.loc.loc.name], access level [picked.get_access_for_ai(ai)].</span>")
+					output_message("<span class = 'notice'>[picked.name] at [picked.loc.loc.name], access level [picked.get_access_for_ai(ai)].</span>")
 
 		if(3)
 			for(var/ai_untyped in ais_in_net)
 				if(ai_untyped == our_ai)
 					continue
 				var/mob/living/silicon/ai/ai = ai_untyped
-				to_chat(our_ai,"<span class = 'notice'>Artificial Intelligence Detected: [ai.name]. Terminal Located at [ai.our_terminal.loc.loc.name]\nDisplaying found access nodes:</span>")
+				output_message("<span class = 'notice'>Artificial Intelligence Detected: [ai.name]. Terminal Located at [ai.our_terminal.loc.loc.name]\nDisplaying found access nodes:</span>")
 				for(var/n in ai.nodes_accessed)
 					var/obj/structure/ai_routing_node/node = n
-					to_chat(our_ai,"<span class = 'notice'>[node.name] at [node.loc.loc.name], access level [node.get_access_for_ai(ai)].</span>")
+					output_message("<span class = 'notice'>[node.name] at [node.loc.loc.name], access level [node.get_access_for_ai(ai)].</span>")
 
-	to_chat(our_ai,"<span class = 'notice'>Level [scan_level] system scan finished.</span>")
+	output_message("<span class = 'notice'>Level [scan_level] system scan finished.</span>")
 	expire()
 
 /datum/cyberwarfare_command/network_scan/l2
@@ -91,7 +91,7 @@
 		var/mob/ai = a
 		var/access = node.get_access_for_ai(ai)
 		if(access > 0)
-			to_chat(our_ai,"<span class = 'notice'>AI: [ai.name]\nAccess:[access]</span>")
+			output_message("<span class = 'notice'>AI: [ai.name]\nAccess:[access]</span>")
 			our_ai.process_trap_trigger(node,1)
 
 //OFFENSIVE//
@@ -110,7 +110,7 @@
 /datum/cyberwarfare_command/hack_routing_node/is_target_valid(var/obj/structure/ai_routing_node/node)
 	if(istype(node))
 		if(node.get_access_for_ai(our_ai) >= 4)
-			to_chat(our_ai,"<span class = 'notice'>You already have the maximum access level on this node.</span>")
+			output_message("<span class = 'notice'>You already have the maximum access level on this node.</span>")
 			return 0
 		return 1
 
@@ -135,7 +135,7 @@
 		sound_to(our_ai,command_sfx)
 	if(node.modify_access_levels(our_ai,1))
 		node.attack_ai(our_ai)
-		to_chat(our_ai,"<span class = 'notice'>Access level increased.</span>")
+		output_message("<span class = 'notice'>Access level increased.</span>")
 		if(curr_access >= 2) // uses >= instead of > because our curr_access is the pre-increased access value.
 			our_ai.do_network_alert("An AI has brute-forced level [curr_access + 1] access on [node] at [node.loc.loc.name]!")
 	our_ai.process_trap_trigger(node)
@@ -158,10 +158,10 @@
 /datum/cyberwarfare_command/node_lockdown/is_target_valid(var/obj/structure/ai_routing_node/node)
 	if(istype(node))
 		if(node.get_access_for_ai(our_ai) < 2)
-			to_chat(our_ai,"<span class = 'notice'>Insufficient access to enact a node lockdown.</span>")
+			output_message("<span class = 'notice'>Insufficient access to enact a node lockdown.</span>")
 			return 0
 		if(world.time < node.lockdown_until)
-			to_chat(our_ai,"<span class = 'notice'>A lockdown on this node is still ongoing.</span>")
+			output_message("<span class = 'notice'>A lockdown on this node is still ongoing.</span>")
 			return 0
 		return 1
 	return 0
@@ -171,7 +171,7 @@
 	if(!.)
 		return 0
 	node.lockdown_until = world.time + LOCKDOWN_TIME
-	to_chat(our_ai,"<span class = 'notice'>Routing Node lockdown enacted.</span>")
+	output_message("<span class = 'notice'>Routing Node lockdown enacted.</span>")
 	our_ai.do_network_alert("An AI has enacted a connection lockdown on a routing node.")
 	our_ai.process_trap_trigger(node)
 	expire()
@@ -200,15 +200,15 @@
 		return 0
 	if(term.held_ai)
 		if(term.held_ai.spend_cpu(SHOCK_DAMAGE))
-			to_chat(our_ai,"<span class = 'warning'>Attack successful. AI processing capability damaged.</span>")
+			output_message("<span class = 'warning'>Attack successful. AI processing capability damaged.</span>")
 		else
-			to_chat(our_ai,"<span class = 'warning'>Attack successful. AI has been stunned and is awaiting manual extraction from terminal.</span>")
+			output_message("<span class = 'warning'>Attack successful. AI has been stunned and is awaiting manual extraction from terminal.</span>")
 		to_chat(term.held_ai,"<span class = 'danger'>A surge of garbage data fills your processing feeds, sapping your CPU processing ability!</span>")
 		if(siphon)
 			our_ai.spend_cpu(-siphon)
-			to_chat(our_ai,"<span class = 'notice'>Attack has cleared some input streams. CPU processing ability bolstered.</span>")
+			output_message("<span class = 'notice'>Attack has cleared some input streams. CPU processing ability bolstered.</span>")
 	else
-		to_chat(our_ai,"<span class = 'warning'>No AI detected in terminal. Attack had no effect.</span>")
+		output_message("<span class = 'warning'>No AI detected in terminal. Attack had no effect.</span>")
 
 #undef SHOCK_DAMAGE
 
@@ -248,11 +248,11 @@
 		ai.cancel_camera()
 
 	if(!hit_someone)
-		to_chat(our_ai,"<span class = 'notice'>ERROR: DISCONNECT FLOOD FEEDBACK DETECTED. RESETTING.</span>")
+		output_message("<span class = 'notice'>ERROR: DISCONNECT FLOOD FEEDBACK DETECTED. RESETTING.</span>")
 		our_ai.flash_eyes(FLASH_PROTECTION_MAJOR,1,1)
 		our_ai.cancel_camera()
 
-	to_chat(our_ai,"<span class = 'notice'>Disconnect flood sent. Reminder: Some AIs may resist this effect.</span>")
+	output_message("<span class = 'notice'>Disconnect flood sent. Reminder: Some AIs may resist this effect.</span>")
 	expire()
 
 /datum/cyberwarfare_command/nuke_node
@@ -266,7 +266,7 @@
 /datum/cyberwarfare_command/nuke_node/is_target_valid(var/obj/structure/ai_routing_node/node)
 	if(istype(node))
 		if(node.get_access_for_ai(our_ai) < 3)
-			to_chat(our_ai,"<span class = 'notice'>You need access level 3 on that node to do this.</span>")
+			output_message("<span class = 'notice'>You need access level 3 on that node to do this.</span>")
 			return 0
 		return 1
 	return 0
@@ -321,7 +321,7 @@
 	. = ..()
 	if(!.)
 		return 0
-	to_chat(our_ai,"<span class = 'warning'>[ai] just tripped your [name] on [trap_target] at [trap_target.loc.loc.name].</span>")
+	output_message("<span class = 'warning'>[ai] just tripped your [name] on [trap_target] at [trap_target.loc.loc.name].</span>")
 	to_chat(ai,"<span class = 'danger'>A hidden fragment of malicious code disrupts your core routines, stripping you of processing power!</span>")
 	ai.spend_cpu(trap_damage)
 	expire()
@@ -341,7 +341,7 @@
 	. = ..()
 	if(!.)
 		return 0
-	to_chat(our_ai,"<span class = 'warning'>[ai] has just entered [trap_target] at [trap_target.loc.loc.name].</span>")
+	output_message("<span class = 'warning'>[ai] has just entered [trap_target] at [trap_target.loc.loc.name].</span>")
 
 //DEFENSIVE//
 #define AI_HIDE_DURATION 2 SECONDS
@@ -361,13 +361,13 @@
 	if(!.)
 		return 0
 	if(!our_ai.our_terminal)
-		to_chat(our_ai,"<span class = 'notice'>You need to be in a terminal to do that.</span>")
+		output_message("<span class = 'notice'>You need to be in a terminal to do that.</span>")
 		return
 	set_expire()
 	our_ai.Stun(2)
 	saved_terminal = our_ai.our_terminal
 	saved_terminal.held_ai = null
-	to_chat(our_ai,"<span class = 'notice'>You disconnect yourself from your terminal.</span>")
+	output_message("<span class = 'notice'>You disconnect yourself from your terminal.</span>")
 
 /datum/cyberwarfare_command/ai_hide/command_process()
 	our_ai.Stun(2)
@@ -375,12 +375,12 @@
 
 /datum/cyberwarfare_command/ai_hide/expire()
 	if(saved_terminal.held_ai)
-		to_chat(our_ai,"<span class = 'notice'>As you try to reconnect to your old terminal, the connection is unexpectedly severed and you lose your connection to the material world...</span>")
+		output_message("<span class = 'notice'>As you try to reconnect to your old terminal, the connection is unexpectedly severed and you lose your connection to the material world...</span>")
 		our_ai.death()
 		. = ..()
 		return
 	saved_terminal.held_ai = our_ai
-	to_chat(our_ai,"<span class = 'notice'>You reconnect to your saved terminal.</span>")
+	output_message("<span class = 'notice'>You reconnect to your saved terminal.</span>")
 	. = ..()
 
 #undef AI_HIDE_DURATION
@@ -433,7 +433,7 @@
 	if(!.)
 		return 0
 	set_expire()
-	to_chat(our_ai,"<span class = 'notice'>Disconnect bypass established. Will remain active for [lifespan/10] seconds.</span>")
+	output_message("<span class = 'notice'>Disconnect bypass established. Will remain active for [lifespan/10] seconds.</span>")
 
 //Time to utilise the EWAR system for things other than actual electronic warfare//
 /datum/cyberwarfare_command/designate_build
@@ -448,7 +448,7 @@
 /datum/cyberwarfare_command/designate_build/is_target_valid(var/targ)
 	if(istype(targ,/obj/structure) || istype(targ,/turf/simulated))
 		return 1
-	to_chat(our_ai,"<span class = 'notice'>Invalid Target</span>")
+	output_message("<span class = 'notice'>Invalid Target</span>")
 	return 0
 
 /datum/cyberwarfare_command/designate_build/send_command(var/atom/targ)
@@ -492,12 +492,12 @@
 /datum/cyberwarfare_command/overmind_command/is_target_valid(var/atom/targ)
 	if(istype(targ,/turf) && targ.density == 0)
 		return 1
-	to_chat(our_ai,"<span class = 'notice'>Please click a non dense turf to direct the overmind.</span>")
+	output_message("<span class = 'notice'>Please click a non dense turf to direct the overmind.</span>")
 	return 0
 
 /datum/cyberwarfare_command/overmind_command/send_command(var/turf/targ)
 	if(!our_mind || our_mind.overmind_active == 0)
-		to_chat(our_ai,"<span class ='notice'>No Overmind Active</span>")
+		output_message("<span class ='notice'>No Overmind Active</span>")
 		return
 	var/report_types = list("reinforcement","construct","combat")
 	var/severities = list("1","2","3") //Specific restricted list to ensure players can't send literally every mob to one spot.
@@ -509,7 +509,7 @@
 	if(!taskpoint)
 		return
 	our_mind.create_taskpoint_assign(null,taskpoint,user_choice,text2num(user_severity),OVERMIND_INTERFACE_SQUADSEARCH_RANGE)
-	to_chat(our_ai,"<span class = 'warning'>Taskpoint Assigned to squad.</span>")
+	output_message("<span class = 'warning'>Taskpoint Assigned to squad.</span>")
 
 /datum/cyberwarfare_command/overmind_command/flood/New()
 	. = ..()
