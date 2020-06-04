@@ -223,7 +223,10 @@
 /mob/living/simple_animal/hostile/giant_spider/proc/disable_stop_automated_movement()
 	stop_automated_movement = 0
 	walk(src,0)
-	kick_stance()
+	if (!target_mob)
+		stance = HOSTILE_STANCE_IDLE
+	else
+		stance = HOSTILE_STANCE_ATTACK
 
 /mob/living/simple_animal/hostile/giant_spider/proc/divorce()
 	return

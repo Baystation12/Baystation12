@@ -45,12 +45,6 @@
 		return FALSE
 	return TRUE
 
-/mob/living/simple_animal/hostile/proc/kick_stance()
-	if(target_mob)
-		stance = HOSTILE_STANCE_ATTACK
-	else
-		stance = HOSTILE_STANCE_IDLE
-
 /mob/living/simple_animal/hostile/proc/FindTarget()
 	if(!can_act())
 		return null
@@ -163,7 +157,11 @@
 		return 0
 	if(client)
 		return 0
-	kick_stance()
+	if (!target_mob)
+		if (stance > HOSTILE_STANCE_IDLE)
+			stance = HOSTILE_STANCE_IDLE
+	else if (stance < HOSTILE_STANCE_ATTACK)
+		stance = HOSTILE_STANCE_ATTACK
 	if(!can_act())
 		walk(src, 0)
 		return 0
@@ -250,6 +248,8 @@
 	A.launch(target, def_zone)
 
 /mob/living/simple_animal/hostile/proc/DestroySurroundings() //courtesy of Lohikar
+	if (!target_mob)
+		return
 	if(!can_act())
 		return
 	if(prob(break_stuff_probability) && !Adjacent(target_mob))
