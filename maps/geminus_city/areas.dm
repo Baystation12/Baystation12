@@ -220,6 +220,10 @@
 	name = "\improper Geminus MAC"
 	icon_state = "firingrange"
 
+/area/planets/Geminus/outdoor/MAC/upper
+	name = "\improper Geminus MAC - Upper Level"
+	icon_state = "firingrange"
+
 //UNDERGROUND//
 /area/geminus_underground
 	name = "\improper Geminus Underground Northeast"
