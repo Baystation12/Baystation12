@@ -9,7 +9,7 @@
 	can_adjust_timer = 0
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 	alt_explosion_range = 1
-	alt_explosion_damage_max = 50
+	alt_explosion_damage_max = 65
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
 	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))

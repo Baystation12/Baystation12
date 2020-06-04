@@ -12,7 +12,7 @@
 	var/seconds_to_explode = 240
 	var/arm_time = 3 //Time in seconds to arm the bomb.
 	var/disarm_at
-	var/seconds_to_disarm = 60
+	var/seconds_to_disarm = 30
 	var/mob/living/u = null
 	var/disarming
 	var/explodedesc = "A spraypainted image of a skull adorns this slowly ticking bomb."
@@ -136,7 +136,6 @@
 	activeoverlay = "am_active"
 	explodedesc = "Spikes conceal a countdown timer."
 	seconds_to_explode = 300
-	seconds_to_disarm = 60
 	strength=1.5
 	explodetype = /datum/explosion
 	blocked_species = list()

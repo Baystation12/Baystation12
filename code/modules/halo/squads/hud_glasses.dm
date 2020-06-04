@@ -172,6 +172,7 @@
 	desc = "Scout Helmet night vision active."
 	icon = KIGYAR_CLOTHING_PATH
 	icon_state = "inbuilt_nv"
+	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	nv_screen_colour = /obj/screen/fullscreen/night_vision/cyan
 	nv_screen_impair = /obj/screen/fullscreen/night_vision/cone/better
 
