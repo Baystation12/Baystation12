@@ -215,6 +215,10 @@
 	name = "\improper Space Elevator"
 	icon_state = "observatory"
 
+/area/planets/Geminus/outdoor/spaceport
+	name = "\improper Spaceport"
+	icon_state = "green"
+
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
