@@ -18,22 +18,23 @@
 	for(var/station_level in affecting_z)
 		for(var/count in 1 to adult_whales_per_z)
 			var/dir = pick(GLOB.cardinal)
-			var/opdir = GLOB.reverse_dir[dir]
 			var/turf/T
+			var/turf/oppT
 			while(!istype(T, /turf/space))
 				T = get_random_edge_turf(dir, TRANSITIONEDGE + 5, station_level)
+			oppT = get_random_edge_turf(GLOB.reverse_dir[dir], TRANSITIONEDGE + 5, station_level)
 			var/mob/living/simple_animal/hostile/retaliate/space_whale/adult
 			var/mob/living/simple_animal/juvenile_space_whale/child
 			if(prob(75))
 				adult = new(T)
 				child = new(get_step(T, dir))
 				total_whales += list(adult, child)
-				adult.throw_at(get_random_edge_turf(opdir, TRANSITIONEDGE + 5, station_level), 3, 1, null, FALSE)
-				child.throw_at(get_random_edge_turf(opdir, TRANSITIONEDGE + 5, station_level), 3, 1, null, FALSE)
+				adult.throw_at(oppT, 3, 1, null, FALSE)
+				child.throw_at(oppT, 3, 1, null, FALSE)
 			else
 				adult = new(T)
 				total_whales += adult
-				adult.throw_at(get_random_edge_turf(opdir, TRANSITIONEDGE + 5, station_level), 3, 1, null, FALSE)
+				adult.throw_at(oppT, 3, 1, null, FALSE)
 
 /datum/event/whale_migration/end()
 	for(var/mob/whale in total_whales)
