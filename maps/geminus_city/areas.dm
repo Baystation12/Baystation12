@@ -58,9 +58,12 @@
 	name = "\improper Disco"
 	icon_state = "red"
 */
+
+/*
 /area/planets/Geminus/indoor/backroom
 	name = "\improper Nightclub Backroom"
 	icon_state = "green"
+*/
 
 /area/planets/Geminus/indoor/bar
 	name = "\improper Bar"
@@ -167,13 +170,17 @@
 	name = "\improper Disposal Bay"
 	icon_state = "blue"
 
+/*
 /area/planets/Geminus/indoor/museum
 	name = "\improper Geminus Museum"
 	icon_state = "blue"
+*/
 
+/*
 /area/planets/Geminus/indoor/science
 	name = "\improper Research and Development Labs"
 	icon_state = "purple"
+*/
 
 /area/planets/Geminus/indoor/morgue
 	name = "\improper Morgue"
@@ -215,9 +222,17 @@
 	name = "\improper Space Elevator"
 	icon_state = "observatory"
 
+/area/planets/Geminus/outdoor/spaceport
+	name = "\improper Spaceport"
+	icon_state = "green"
+
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC
 	name = "\improper Geminus MAC"
+	icon_state = "firingrange"
+
+/area/planets/Geminus/outdoor/MAC/upper
+	name = "\improper Geminus MAC - Upper Level"
 	icon_state = "firingrange"
 
 //UNDERGROUND//
