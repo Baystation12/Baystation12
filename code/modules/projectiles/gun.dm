@@ -609,7 +609,7 @@
 
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod
-	P.dispersion = disp_mod
+	P.dispersion = max(0,disp_mod)
 
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
