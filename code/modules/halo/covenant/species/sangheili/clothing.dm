@@ -374,7 +374,6 @@
 	species_restricted = list("Sangheili")
 	body_parts_covered = HEAD | FACE
 	item_flags = THICKMATERIAL
-	armor = list(melee = 40,bullet = 20,laser = 40,energy = 5,bomb = 25,bio = 0,rad = 0)
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE
@@ -386,8 +385,7 @@
 	desc = "A sealed. airtight Sangheili Combat Harness."
 	icon_state = "ranger_chest_obj"
 	item_state = "ranger_chest"
-	totalshields = 210
-	armor = list(melee = 70, bullet = 60, laser = 55, energy = 55, bomb = 50, bio = 25, rad = 25)
+	totalshields = 180
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	cold_protection = UPPER_TORSO|LOWER_TORSO|ARMS
