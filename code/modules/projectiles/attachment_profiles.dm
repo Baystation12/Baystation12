@@ -46,7 +46,7 @@
 	)
 
 	attribute_modifications = list(\
-		"red dot sight" = list(0,0.5,0,005),
+		"red dot sight" = list(0,0.5,0.005),
 		"acog sight" = list(0,0.5,0.005),
 		"suppressor" = list(0.1,0,0.01),
 		"MA5 stock cheekrest" = list(0,0,0),
@@ -57,7 +57,7 @@
 		"MA5 basic upper" = list(0,0,0),
 		"underslung grenade launcher" = list(0,0,0,0.03),
 		"flashlight attachment" = list(0,0,0.01),
-		"MA5 railed upper" = list(0,0,0,005)
+		"MA5 railed upper" = list(0,0,0.005)
 		)
 
 /datum/attachment_profile/BR55

@@ -708,10 +708,11 @@
 			cumulative_accmod += attrib_mods[2]
 			cumulative_slowdownmod += attrib_mods[3]
 
-	if(cumulative_dispmod > 0)
+	if(cumulative_dispmod > 0) //Allowing the changing of dispersion through attachments can be abused for laser accurate guns.
+	//Attachments granting dispersion decreases can be used to counter the dispersion increase of other attachments.
 		for(var/entry in dispersion)
 			entry += cumulative_dispmod
-	if(cumulative_accmod > 0)
+	if(cumulative_accmod != 0)
 		for(var/entry in burst_accuracy)
 			entry += cumulative_accmod
 		accuracy += cumulative_accmod
