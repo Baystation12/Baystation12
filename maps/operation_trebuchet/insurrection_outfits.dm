@@ -1,6 +1,6 @@
 
 /decl/hierarchy/outfit/job/UNSC_Assault
-	name = "ODST Assault"
+	name = "Operation: Trebuchet ODST Assault"
 	pda_slot = null
 
 	uniform = /obj/item/clothing/under/pj/red
@@ -8,7 +8,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/Insurrectionist
-	name = "Insurrectionist"
+	name = "Operation: Trebuchet Insurrectionist"
 
 	head = /obj/item/clothing/head/helmet/tactical
 	glasses = /obj/item/clothing/glasses/hud/tactical
@@ -23,7 +23,7 @@
 	flags = 0
 
 /decl/hierarchy/outfit/job/Insurrectionist_leader
-	name = "Insurrectionist Leader"
+	name = "Operation: Trebuchet Insurrectionist Leader"
 
 	head = /obj/item/clothing/head/helmet/tactical/mirania
 	glasses =/obj/item/clothing/glasses/hud/tactical

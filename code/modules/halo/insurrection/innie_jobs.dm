@@ -51,6 +51,9 @@
 
 	antag.add_antagonist_mind(H.mind, 1, "Geminus Insurrectionist")
 
+/obj/effect/landmark/start/geminus_innie
+	name = "Insurrectionist"
+
 /datum/job/geminus_innie/officer
 	title = "Insurrectionist Officer"
 	spawn_faction = "Insurrection"
