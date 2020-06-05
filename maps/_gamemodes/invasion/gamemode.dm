@@ -176,6 +176,8 @@
 		return
 	scanner_destructions_left = max(0,scanner_destructions_left-1)
 	increase_scan_percent(-25)
+	GLOB.global_announcer.autosay("The Covenant's scanning signal has weakened! Eliminate all of their scanners!", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_GALCOM)
+	GLOB.global_announcer.autosay("A holy scanner has gone dark. Protect them, for their loss inhibits our progress!", "Covenant Overwatch", RADIO_COV, LANGUAGE_SANGHEILI)
 
 /datum/game_mode/outer_colonies/handle_latejoin(var/mob/living/carbon/human/character)
 	for(var/datum/faction/F in factions)
