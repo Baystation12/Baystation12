@@ -17,7 +17,7 @@
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
-	appearance_flags = HAS_SKIN_TONE | HAS_UNDERWEAR
+	appearance_flags = HAS_SKIN_TONE | HAS_HAIR_COLOR
 	darksight = 6
 	brute_mod = 1.1
 	burn_mod = 1.1
@@ -93,3 +93,23 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenan
     damage = 0
     sharp = 1
     edge = 1
+
+/datum/sprite_accessory/hair/kiggiyhair/
+		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
+		icon_state = "h_kiggiyhair"
+		name = "No Quills"
+		species_allowed = list("Kig-Yar")
+
+/datum/sprite_accessory/hair/kiggiyhair/one
+		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
+		icon_state = "h_kiggiyhairone"
+		name = "Long Quills"
+		species_allowed = list("Kig-Yar")
+
+/datum/sprite_accessory/hair/kiggiyhair/two
+		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
+		icon_state = "h_kiggiyhairtwo"
+		name = "Short Quills"
+		species_allowed = list("Kig-Yar")
+
+
