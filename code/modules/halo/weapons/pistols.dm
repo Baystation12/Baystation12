@@ -143,7 +143,6 @@
 	dispersion = list(0.1) //Sniper pistol, using sniper dispersions.
 	ammo_type = /obj/item/ammo_casing/a145_ap/tracerless
 	w_class = ITEM_SIZE_NORMAL
-	one_hand_penalty = 3
 	accuracy = 0
 	wielded_item_state = "handgonne"
 
