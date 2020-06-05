@@ -16,6 +16,7 @@
 
 /obj/structure/lattice/Initialize(mapload, var/new_material)
 	. = ..()
+	DELETE_IF_DUPLICATE_OF(/obj/structure/lattice)
 	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open)))
 		return INITIALIZE_HINT_QDEL
 	if(!new_material)
@@ -28,10 +29,6 @@
 	desc = "A lightweight support [material.display_name] lattice."
 	color =  material.icon_colour
 
-	for(var/obj/structure/lattice/LAT in loc)
-		if(LAT != src)
-			crash_with("Found multiple lattices at '[log_info_line(loc)]'")
-			qdel(LAT)
 	update_icon()
 	if(!mapload)
 		update_neighbors()
