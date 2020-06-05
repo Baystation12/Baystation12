@@ -21,6 +21,7 @@
 	#include "../away/unishi/unishi.dm"
 	#include "../away/ascent/ascent.dm"
 	#include "../away/meatstation/meatstation.dm"
+	#include "../away/miningstation/miningstation.dm"
 
 	#include "../away/voxship/voxship.dm"
 
