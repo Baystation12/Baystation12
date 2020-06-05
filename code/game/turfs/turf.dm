@@ -42,7 +42,7 @@
 	else
 		luminosity = 1
 
-	opaque_counter = opacity
+	RecalculateOpacity()
 
 	if (mapload && permit_ao)
 		queue_ao()

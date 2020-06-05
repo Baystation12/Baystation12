@@ -25,9 +25,3 @@ GLOBAL_DATUM_INIT(opacity_set_event, /decl/observ/opacity_set, new)
 		return TRUE
 	else
 		return FALSE
-
-/turf/ChangeTurf()
-	var/old_opacity = opacity
-	. = ..()
-	if(opacity != old_opacity)
-		GLOB.opacity_set_event.raise_event(src, old_opacity, opacity)

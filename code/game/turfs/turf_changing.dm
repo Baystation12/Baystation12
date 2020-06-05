@@ -54,12 +54,14 @@
 	// Run the Destroy() chain.
 	qdel(src)
 
+	var/old_opaque_counter = opaque_counter 
 	var/turf/simulated/W = new N(src)
 
 	if (permit_ao)
 		regenerate_ao()
 
-	W.opaque_counter = opaque_counter
+	W.opaque_counter = old_opaque_counter
+	W.RecalculateOpacity()
 
 	if (keep_air)
 		W.air = old_air
