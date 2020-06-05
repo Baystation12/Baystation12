@@ -338,7 +338,7 @@
 	if(!user || !target) return
 	if(target.elevation != last_elevation && (istype(target,/obj/vehicles) || istype(target,/mob/living)))
 		last_elevation = target.elevation
-		visible_message("<span class = 'warning'>[user.name] changes their firing elevation to target [target.name]</span>")
+		visible_message("<span class = 'danger'>[user.name] changes their firing elevation to target [target.name]</span>")
 	var/list/rounds_nosuppress = list()
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
