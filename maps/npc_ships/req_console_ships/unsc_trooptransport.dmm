@@ -1,6 +1,9 @@
 "aa" = (/turf/space,/area/space)
 "ab" = (/obj/structure/rearm_repair_station/human,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "ac" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
+"ad" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine/unsc{dir = 4; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"ae" = (/obj/machinery/door/airlock/multi_tile/halo/unsc_ship_preset{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"af" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "aN" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "ce" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "cy" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -48,15 +51,12 @@
 "sr" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "st" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "tl" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (EAST)"; icon_state = "warningcorner_dust"; dir = 4},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
-"ts" = (/obj/machinery/door/airlock/multi_tile/halo/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "tz" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "tD" = (/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "uP" = (/obj/effect/floor_decal/industrial/warning/dust/corner{tag = "icon-warningcorner_dust (NORTH)"; icon_state = "warningcorner_dust"; dir = 1},/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "vd" = (/obj/machinery/light/spot{dir = 1},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "vo" = (/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"xo" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{density = 0; department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "yy" = (/obj/machinery/light/spot{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"zZ" = (/obj/structure/computerframe{anchored = 1; dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "computer"; layer = 2; level = 1; tag = "icon-computer (WEST)"},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "AE" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (EAST)"; icon_state = "warning_dust"; dir = 4},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "AW" = (/obj/effect/floor_decal/industrial/warning/dust{tag = "icon-warning_dust (NORTH)"; icon_state = "warning_dust"; dir = 1},/obj/effect/hull_segment,/turf/simulated/wall/r_wall,/area/om_ships/req_console_ship)
 "BJ" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -92,10 +92,8 @@
 "Ux" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "UQ" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Vi" = (/obj/structure/table/steel,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"Vw" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Wt" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WF" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"WG" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WV" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Xf" = (/obj/effect/landmark/dropship_land_point/unsc{name = "Transport Vessel Port Hangar"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Xi" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -128,11 +126,11 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslsFcAEFcFcFcFcIDlsruaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslsabFcAEFcqhFcFcIDlsruruaaaaaaaaaaaaruruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXZaqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXZaqXqXqXRkdMFbKGhdhdhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaarZEdXZEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsraKGewrXdTpRgmPTqXhdcOhdqXXihdhdhdhdhdhdMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaahIkOEdEdtDqXEdEdEdEdEdEdqXFcFcjUcNcNcNcNoZWthdhdhdhdhdhdhdhdhdhdhdhdqXhdWGhdqXqXMTqXZamAFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEZQEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcdrFcFcFcqXhdPwPwPwPwPwPwhdtshdhdstqXBJqXBJqXFcFcFcqXtzFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEoSebgJqXacEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyyNsdZdZdZdZhRxoqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEzZEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcvdFcFcFcqXhdHzHzHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcqXjWFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDivoEdEdtDqXEdEdEdEdEdEdqXFcFccJojojojojTYWthdhdhdhdhdhdhdhdtshdhdhdqXhdVwhdqXqXMTqXZaolFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaahIkOEdEdtDqXEdEdEdEdEdEdqXFcFcjUcNcNcNcNoZWthdhdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXZamAFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEZQEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcdrFcFcFcqXhdPwPwPwPwPwPwhdaehdhdstqXBJqXBJqXFcFcFcqXtzFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEoSebgJqXacEdoSebQVNKEddDqXqXTRqXqXqXTRqXqXyyNsdZdZdZdZhRadqXyyhdhdBJRXqXRZqXUQCYnPqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaagEafEdEdqXqXgJqXCNEdEdgJqXqXFcFcFcvdFcFcFcqXhdHzHzHzHzHzHzhdhdhdhdstqXBJqXBJqXFcFcFcqXjWFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaDivoEdEdtDqXEdEdEdEdEdEdqXFcFccJojojojojTYWthdhdhdhdhdhdhdhdaehdhdhdqXhdhdhdqXqXMTqXZaolFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaGuEdIXEdWVEdEdEdEdEdEdWVFcFcAEFcFcFcFcIDlsViUxlHkzRycysrceqXhdlbhdqXXihdhdhdhdhdhdMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXZaqXqXqXqXFcFcAEFcFcFcFcIDlsqXqXqXlslslslslsqXZaqXqXqXWFMIZFKGhdhdhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslsabFcAEFcXfFcFcIDlsruruaaaaaaaaaaaaruruqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaa
