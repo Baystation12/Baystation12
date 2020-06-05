@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - rscadd: "You can now control-alt-click something to quickly point at it instead of using the context menu."
