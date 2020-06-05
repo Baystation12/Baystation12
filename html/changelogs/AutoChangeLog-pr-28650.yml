@@ -1,0 +1,4 @@
+author: "Cdbrunow"
+delete-after: True
+changes: 
+  - bugfix: "The nacelle status lights in engineering can no longer be moved"
