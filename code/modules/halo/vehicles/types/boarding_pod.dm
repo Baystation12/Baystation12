@@ -41,7 +41,7 @@
 	var/obj/effect/overmap/om_obj = map_sectors["[drop_turf.z]"]
 	if(istype(om_obj,/obj/effect/overmap/sector)) //Let's not send a message if we're dropping onto a planet.
 		return
-	spawn(5 MINUTES)
+	spawn(2 MINUTES)
 		for(var/mob/living/m in GLOB.mobs_in_sectors[om_obj])
 			to_chat(m,"<span class = 'danger'>EXTERNAL INCURSION WARNING: BOARDING POD COLLISION DETECTED. LOCATION: [drop_turf.loc.name]</span>")
 
