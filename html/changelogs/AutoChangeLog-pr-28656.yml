@@ -1,4 +1,0 @@
-author: "Alex6511"
-delete-after: True
-changes: 
-  - bugfix: "Nabbers will no longer retain their slowness after their blood has been restored."

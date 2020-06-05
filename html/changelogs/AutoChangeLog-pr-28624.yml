@@ -1,6 +1,0 @@
-author: "AshtonFox"
-delete-after: True
-changes: 
-  - bugfix: "Limbs can no longer be attached until a limb of the same type or a stump of that limb is surgically amputated."
-  - bugfix: "Stumps will no longer stack."
-  - bugfix: "Fixed a bug when both the limb and stump cannot not amputated if present together by surgeon's mistake."
