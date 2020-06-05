@@ -325,7 +325,7 @@
 	armor_thickness = 20
 	w_class = ITEM_SIZE_HUGE
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 55, bullet = 40, laser = 25, energy = 25, bomb = 30, bio = 100, rad = 100)
+	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20)
 
 /obj/item/clothing/head/helmet/eva/marine
 	name = "\improper EVA Marine Helmet"
@@ -338,7 +338,7 @@
 	item_state = "eva"
 	icon_state = "eva"
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
-	armor = list(melee = 55, bullet = 25, laser = 55,energy = 25, bomb = 15, bio = 100, rad = 50)
+	armor = list(melee = 45, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 10, rad = 10)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	action_button_name = "Toggle Helmet Light"
