@@ -1,0 +1,4 @@
+author: "GrazalThruka"
+delete-after: True
+changes: 
+  - rscdel: "The Bioprinter can no longer print hands, feet, arms, or legs for all species but GAS"
