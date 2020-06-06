@@ -16,7 +16,7 @@
 	name = "Kig-Yar Body-Suit"
 	desc = "A Kig-Yar body suit for Ruuhtians and T-Voans. Meant to be worn underneath a combat harness"
 	icon = KIGYAR_CLOTHING_PATH
-	icon_state = "jackal_bodysuit_s"
+	icon_state = "jackal_bodysuit_obj"
 	worn_state = "jackal_bodysuit"
 	sprite_sheets = list("Default" = KIGYAR_CLOTHING_PATH,\
 		"Kig-Yar" = KIGYAR_CLOTHING_PATH,\
@@ -26,7 +26,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 
 /obj/item/clothing/under/kigyar/armless //Purposefully a visual change only so their armour still applies.
-	icon_state = "jackal_bodysuit_armless_s"
+	icon_state = "jackal_bodysuit_armless_obj"
 	worn_state = "jackal_bodysuit_armless"
 	species_restricted = list("Kig-Yar")
 

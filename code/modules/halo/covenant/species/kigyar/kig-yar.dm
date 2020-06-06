@@ -17,7 +17,7 @@
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
-	appearance_flags = HAS_SKIN_TONE | HAS_UNDERWEAR
+	appearance_flags = HAS_HAIR_COLOR | HAS_EYE_COLOR
 	darksight = 6
 	brute_mod = 1.1
 	burn_mod = 1.1
@@ -30,7 +30,7 @@
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/kigyar),
 		BP_L_ARM =  list("path" = /obj/item/organ/external/arm/hollow_bones),
 		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/hollow_bones),
 		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/hollow_bones),
@@ -93,3 +93,26 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenan
     damage = 0
     sharp = 1
     edge = 1
+
+/datum/sprite_accessory/hair/kiggyhair/
+		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
+		icon_state = "h_kiggyhair"
+		name = "No Quills"
+		species_allowed = list("Kig-Yar")
+
+/datum/sprite_accessory/hair/kiggyhair/one
+		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
+		icon_state = "h_kiggyhairone"
+		name = "Long Quills"
+		species_allowed = list("Kig-Yar")
+
+/datum/sprite_accessory/hair/kiggyhair/two
+		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
+		icon_state = "h_kiggyhairtwo"
+		name = "Short Quills"
+		species_allowed = list("Kig-Yar")
+
+/obj/item/organ/external/head/kigyar
+	eye_icon = "eyes_s"
+	eye_icon_location = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
+
