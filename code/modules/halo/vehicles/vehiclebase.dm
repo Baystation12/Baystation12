@@ -124,9 +124,9 @@
 	if(spawn_datum)
 		spawn_datum = new spawn_datum
 		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
-
-	internal_air.volume = 2500
-	internal_air.temperature = T20C
+	if(internal_air)
+		internal_air.volume = 2500
+		internal_air.temperature = T20C
 
 /obj/vehicles/return_air_for_internal_lifeform(var/mob/living/carbon/human/form)
 	if(!internal_air)

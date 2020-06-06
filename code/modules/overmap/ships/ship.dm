@@ -82,7 +82,7 @@
 					using_axis_x = 1
 
 			var/turf/point_at
-			var/z_level = map_z[i]
+			var/z_level = map_z[i+1]
 			var/midpoint = 0
 			if(using_axis_x)
 				midpoint = (map_bounds[1] + map_bounds[3]) /2
