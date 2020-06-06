@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - rscadd: "You can set a character email address and password preference. Email addresses are only applied to civilians."
