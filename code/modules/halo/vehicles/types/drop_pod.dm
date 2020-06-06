@@ -242,4 +242,5 @@
 
 /obj/effect/landmark/drop_pod_landing
 	name = "Drop Pod landing Marker"
-	invisibility = 101
+	icon = 'code/modules/halo/vehicles/types/landmark.dmi'
+	icon_state = "droppod"

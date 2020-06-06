@@ -30,6 +30,8 @@
 	#include "geminuscity_2.dmm"
 	#include "geminuscity_1.dmm"
 
+	#include "../faction_bases/complex046/complex046.dm"
+
 #elif !defined(MAP_OVERRIDE)
 
 	#warn A map has already been included, ignoring GeminusCity

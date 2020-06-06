@@ -4,7 +4,7 @@
 	requires_power = 0
 	dynamic_lighting = 1
 	has_gravity = 1
-	base_turf = /turf/simulated/floor/asteroid/planet
+	base_turf = /turf/unsimulated/floor/dirt
 
 
 /area/planets/Geminus
@@ -224,7 +224,7 @@
 
 /area/planets/Geminus/outdoor/spaceport
 	name = "\improper Spaceport"
-	icon_state = "green"
+	icon_state = "hangar"
 
 //COLONY MAC//
 /area/planets/Geminus/outdoor/MAC

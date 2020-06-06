@@ -24,7 +24,7 @@
 	desc = "Storage for advanced weapons and ammunition"
 	icon_state = "ironhammer" //SPRITES
 	icon_deny = "ironhammer-deny"
-	req_access = list(access_unsc_specialist)
+	req_access = list(access_unsc_armoury, access_unsc_specialist)
 	products = list(/obj/item/ammo_magazine/m145_ap = 4,/obj/item/ammo_magazine/a762_box_ap = 6,/obj/item/weapon/gun/projectile/m739_lmg = 1
 	,/obj/item/weapon/gun/projectile/srs99_sniper = 1, /obj/item/weapon/gun/projectile/m41 = 1, /obj/item/weapon/storage/box/spnkr = 2,/obj/item/turret_deploy_kit/HMG = 3,/obj/item/turret_deploy_kit/chaingun = 3,/obj/item/weapon/plastique = 6,/obj/item/weapon/armor_patch = 2)
 
@@ -38,10 +38,11 @@
 					,/obj/item/ammo_box/shotgun/beanbag = 6, /obj/item/ammo_box/shotgun/flash = 6, /obj/item/ammo_box/shotgun/practice = 4)
 
 /obj/machinery/vending/armory/armor
-	name = "Armor Vendor"
+	name = "UNSC Armor Vendor"
 	desc = "A machine full of spare UNSC armor and equipment"
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
+	req_access = list(access_unsc_marine)
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,
 	/obj/item/clothing/head/helmet/marine = 8,
 	/obj/item/clothing/head/helmet/marine/brown = 8,
@@ -68,14 +69,14 @@
 	/obj/item/clothing/gloves/thick/unsc/brown = 8,
 	/obj/item/weapon/armor_patch = 10,
 	/obj/item/weapon/storage/backpack/marine = 6,
-	/obj/item/weapon/storage/backpack/marine/brown = 6,
-	/obj/item/dumb_ai_chip = 2)
+	/obj/item/weapon/storage/backpack/marine/brown = 6)
 
 /obj/machinery/vending/armory/oni
 	name = "ONI Vendor"
 	desc = "A machine full of spare ONI guard equipment."
 	icon_state = "ironhammer"
 	icon_deny = "ironhammer-deny"
+	req_access = list(access_unsc_oni)
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform = 12,
 	/obj/item/clothing/head/helmet/oni_guard = 8,
 	/obj/item/clothing/head/helmet/oni_guard/visor = 8,
@@ -87,11 +88,11 @@
 	/obj/item/weapon/armor_patch = 10)
 
 /obj/machinery/vending/armory/attachment
-	name = "Attachment Vendor"
+	name = "UNSC Attachment Vendor"
 	desc = "A vendor full of attachments for the MA5B."
 	icon_state ="ironhammer"
 	icon_deny = "ironhammer-deny"
-	req_access = list(access_unsc_armoury,access_unsc_specialist)
+	req_access = list(access_unsc_armoury)
 	products = list(\
 	/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
 	/obj/item/weapon_attachment/ma5_upper_railed =5,
@@ -109,7 +110,7 @@
 	icon_state ="ironhammer"
 	product_ads = "ME WANT ATTACHMENTS!"
 	icon_deny = "ironhammer-deny"
-	req_access = list()
+	req_access = list(access_soe)
 	products = list(\
 	/obj/item/weapon_attachment/barrel/suppressor = 5,
 	/obj/item/weapon_attachment/light/flashlight = 5,
@@ -120,7 +121,7 @@
 )
 
 /obj/machinery/vending/armory/odstvend
-	name = "Armtech 5530"
+	name = "Armtech 5530 Weaponry"
 	desc = "Cold, dark, and slightly depressed. Basically an ODST in vending machine form."
 	product_ads = "Life is woe;Suspect, Investigate, Terminate;CAUTION SHIP SELF DESTRUCT ACTIVATED! Just kidding."
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
@@ -128,6 +129,29 @@
 	icon_deny = "ironhammer-deny"
 	color = COLOR_DARK_GRAY
 	req_access = list(access_unsc_odst)
+	products = list(
+	/obj/item/weapon/material/knife/combat_knife = 4,
+	/obj/item/weapon/material/machete = 2,
+	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
+	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
+	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
+	/obj/item/weapon/gun/projectile/m6c_magnum_s = 6,
+	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
+	/obj/item/weapon/gun/projectile/m392_dmr = 2,
+	/obj/item/weapon/gun/projectile/br55 = 2,
+	/obj/item/ammo_magazine/m762_ap/MA5B = 40,
+	/obj/item/ammo_magazine/m127_saphe = 16,
+	/obj/item/ammo_magazine/m127_saphp = 16,
+	/obj/item/ammo_magazine/m5 = 24,
+	/obj/item/ammo_magazine/m95_sap/br55 = 10,
+	/obj/item/ammo_magazine/m762_ap/M392 = 16,
+	/obj/item/ammo_box/shotgun = 10,
+	/obj/item/ammo_box/shotgun/slug = 10,
+	/obj/item/weapon/grenade/smokebomb = 8,
+	/obj/item/weapon/grenade/frag/m9_hedp = 8)
+
+/obj/machinery/vending/armory/odstvend/armour
+	name = "Armtech 5530 Gear"
 	products = list(
 	/obj/item/clothing/head/helmet/odst/rifleman = 2,
 	/obj/item/clothing/suit/armor/special/odst = 2,
@@ -152,28 +176,9 @@
 	/obj/item/weapon/storage/belt/marine_medic = 4,
 	/obj/item/clothing/accessory/storage/odst = 4,
 	/obj/item/clothing/shoes/magboots/odst = 8,
-	/obj/item/weapon/material/knife/combat_knife = 4,
-	/obj/item/weapon/material/machete = 2,
-	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
-	/obj/item/weapon/gun/projectile/m7_smg/silenced = 5,
-	/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 4,
-	/obj/item/weapon/gun/projectile/m6c_magnum_s = 6,
-	/obj/item/weapon/gun/projectile/ma5b_ar = 10,
-	/obj/item/weapon/gun/projectile/m392_dmr = 2,
-	/obj/item/weapon/gun/projectile/br55 = 2,
 	/obj/item/weapon/plastique = 9,
 	/obj/item/weapon/storage/firstaid/unsc = 6,
 	/obj/item/device/binoculars = 4,
-	/obj/item/ammo_magazine/m762_ap/MA5B = 40,
-	/obj/item/ammo_magazine/m127_saphe = 16,
-	/obj/item/ammo_magazine/m127_saphp = 16,
-	/obj/item/ammo_magazine/m5 = 24,
-	/obj/item/ammo_magazine/m95_sap/br55 = 10,
-	/obj/item/ammo_magazine/m762_ap/M392 = 16,
-	/obj/item/ammo_box/shotgun = 10,
-	/obj/item/ammo_box/shotgun/slug = 10,
-	/obj/item/weapon/grenade/smokebomb = 8,
-	/obj/item/weapon/grenade/frag/m9_hedp = 8,
 	/obj/item/weapon/armor_patch = 8,
 	/obj/item/drop_pod_beacon = 3)
 
@@ -183,7 +188,7 @@
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
 	icon_state = "ironhammer"
 	icon_deny = "ironhammer-deny"
-	req_access = list(117)
+	req_access = list(access_spartan)
 	color = COLOR_DARK_GRAY
 	products = list(
 	/obj/item/clothing/under/spartan_internal = 1,
@@ -236,7 +241,7 @@
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
 	icon_state = "ironhammer"
 	icon_deny = "ironhammer-deny"
-	req_access = list()
+	req_access = list(access_soe)
 	products = list(
 	/obj/item/weapon/gun/projectile/heavysniper = 1,
 	/obj/item/weapon/gun/projectile/br55 = 2,
@@ -299,10 +304,11 @@
 	/obj/item/weapon/tank/jetpack/void/urfc = 6 )
 
 /obj/machinery/vending/armory/medical
-	name = "Medical Vendor"
+	name = "UNSC Medical Vendor"
 	desc = "A vendor that supplies medical equipment"
 	icon_state ="ironhammer" // SPRITES
 	icon_deny = "ironhammer-deny"
+	req_access = list(access_unsc)
 	products = list(/obj/item/bodybag/cryobag = 3,/obj/item/weapon/storage/firstaid/unsc = 10, /obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10, /obj/item/weapon/storage/firstaid/fire = 2
 		,/obj/item/weapon/storage/firstaid/o2 = 4,/obj/item/weapon/storage/firstaid/toxin = 4,/obj/item/weapon/storage/firstaid/erk = 4,/obj/item/weapon/storage/firstaid/combat/unsc = 7,/obj/item/weapon/storage/firstaid/adv = 7
 		,/obj/item/weapon/storage/pill_bottle/bicaridine = 6, /obj/item/weapon/storage/pill_bottle/dermaline = 6, /obj/item/weapon/storage/pill_bottle/tramadol = 6, /obj/item/weapon/storage/pill_bottle/hyronalin = 6

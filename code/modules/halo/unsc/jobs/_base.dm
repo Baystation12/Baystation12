@@ -14,6 +14,9 @@
 	account_allowed = TRUE
 	generate_email = TRUE
 
+/datum/job/unsc/get_email_domain()
+	return "unsc.mil.gov"
+
 /decl/hierarchy/outfit/job/unsc
 	name = "UNSC Ship Crew"
 	l_ear = /obj/item/device/radio/headset/unsc

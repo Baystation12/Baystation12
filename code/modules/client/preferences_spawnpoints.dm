@@ -22,11 +22,18 @@ GLOBAL_VAR(spawntypes)
 	var/list/disallow_job_type = null
 	var/disable_atmos_unsafe = 1
 	var/list/unsafe_turfs
+	var/disabled = FALSE
 
 /datum/spawnpoint/proc/check_job_spawning(var/datum/job/job_datum, var/joined_late = 0)
 
+	if(disabled)
+		return "disabled"
+
 	if(!job_datum)
 		return "invalid job (NULL)"
+
+	if(!turfs)
+		return "no turfs generated"
 
 	if(restrict_job && !(job_datum.title in restrict_job))
 		return "restricted job"
@@ -48,9 +55,6 @@ GLOBAL_VAR(spawntypes)
 
 	if(restrict_spawn_faction && job_datum.spawn_faction != restrict_spawn_faction)
 		return "restricted spawn faction"
-
-	if(!turfs)
-		return "no turfs generated"
 
 	if(disable_atmos_unsafe)
 		var/list/newly_dangerous_turfs = list()
@@ -102,8 +106,26 @@ GLOBAL_VAR(spawntypes)
 	if(S)
 		return S.loc
 
-	var/error_message = "SPAWN ERROR: unable to find spawn turf for [rank]"
-	log_and_message_admins(error_message)
+	var/error_message = "SPAWN WARNING: [src.type] is unable to find spawn turf for [rank]"
+	if(Debug2)
+		message_admins(error_message)
+	log_debug(error_message)
+
+/datum/spawnpoint/proc/try_destroy(var/obj/effect/landmark/start/destroyed_landmark)
+	//this proc isnt working but its late and im tired, ill try to finish it and get it working sometime in the 2020s -C
+	log_and_message_admins("Attempting to destroy spawn for [destroyed_landmark.type] \
+		([destroyed_landmark.x],[destroyed_landmark.y],[destroyed_landmark.z])")
+	if(!unsafe_turfs.Remove(destroyed_landmark.loc))
+		if(!turfs.Remove(destroyed_landmark.loc))
+			log_and_message_admins("SPAWN ERROR: [src] attempted to forget destroyed landmark [destroyed_landmark] \
+				([destroyed_landmark.x],[destroyed_landmark.y],[destroyed_landmark.z]) but failed")
+
+	if(!turfs.len && !unsafe_turfs.len)
+		disabled = 1
+		var/msg = "[src.display_name] ([src.type]) permanently disabled due to landmark destruction."
+		if(Debug2)
+			message_admins(msg)
+		to_debug_listeners(msg)
 
 #ifdef UNIT_TEST
 /datum/spawnpoint/Del()
