@@ -222,6 +222,7 @@
 	name = "Civilian"
 	name_short = "Civ"
 	email_domain = "freemail.net"
+	allow_custom_email = TRUE
 
 	rank_types = list(
 		/datum/mil_rank/civ/civ,

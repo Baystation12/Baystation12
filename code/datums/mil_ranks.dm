@@ -111,6 +111,8 @@ var/datum/mil_branches/mil_branches = new()
 	// Email addresses will be created under this domain name. Mostly for the looks.
 	var/email_domain = "freemail.net"
 
+	var/allow_custom_email = FALSE
+
 	var/list/min_skill
 
 /datum/mil_branch/New()

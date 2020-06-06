@@ -4,42 +4,57 @@
 	var/sec_record = ""
 	var/gen_record = ""
 	var/memory = ""
+	var/email_addr = ""
+	var/email_pass = ""
 
 /datum/category_item/player_setup_item/background/records
 	name = "Records"
 	sort_order = 3
 
-/datum/category_item/player_setup_item/background/records/load_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/records/load_character(savefile/S)
 	from_file(S["public_record"],pref.public_record)
 	from_file(S["med_record"],pref.med_record)
 	from_file(S["sec_record"],pref.sec_record)
 	from_file(S["gen_record"],pref.gen_record)
 	from_file(S["memory"],pref.memory)
+	from_file(S["email_addr"], pref.email_addr)
+	from_file(S["email_pass"], pref.email_pass)
 
-/datum/category_item/player_setup_item/background/records/save_character(var/savefile/S)
+/datum/category_item/player_setup_item/background/records/save_character(savefile/S)
 	to_file(S["public_record"],pref.public_record)
 	to_file(S["med_record"],pref.med_record)
 	to_file(S["sec_record"],pref.sec_record)
 	to_file(S["gen_record"],pref.gen_record)
 	to_file(S["memory"],pref.memory)
+	to_file(S["email_addr"], pref.email_addr)
+	to_file(S["email_pass"], pref.email_pass)
 
-/datum/category_item/player_setup_item/background/records/content(var/mob/user)
+/datum/category_item/player_setup_item/background/records/proc/allow_email_branch_check(datum/mil_branch/B)
+	return B.allow_custom_email
+
+/datum/category_item/player_setup_item/background/records/content(mob/user)
 	. = list()
-	. += "<br/><b>Records</b>:<br/>"
-	if(jobban_isbanned(user, "Records"))
-		. += "<span class='danger'>You are banned from using character records.</span><br>"
+
+	. += "<br><b>Records</b>:"
+	if (jobban_isbanned(user, "Records"))
+		. += "[SPAN_WARNING("You are banned from using character records.")]"
 	else
-		. += "General Notes (Public): "
-		. += "<a href='?src=\ref[src];set_public_record=1'>[TextPreview(pref.public_record,40)]</a><br>"
-		. += "Medical Records: "
-		. += "<a href='?src=\ref[src];set_medical_records=1'>[TextPreview(pref.med_record,40)]</a><br>"
-		. += "Employment Records: "
-		. += "<a href='?src=\ref[src];set_general_records=1'>[TextPreview(pref.gen_record,40)]</a><br>"
-		. += "Security Records: "
-		. += "<a href='?src=\ref[src];set_security_records=1'>[TextPreview(pref.sec_record,40)]</a><br>"
-		. += "Memory: "
-		. += "<a href='?src=\ref[src];set_memory=1'>[TextPreview(pref.memory,40)]</a><br>"
-	. = jointext(.,null)
+		.+= UIBUTTON("set_public_record", TextPreview(pref.public_record, 40), "Public")
+		.+= UIBUTTON("set_medical_records", TextPreview(pref.med_record, 40), "Medical")
+		.+= UIBUTTON("set_general_records", TextPreview(pref.gen_record, 40), "Employment")
+		.+= UIBUTTON("set_security_records", TextPreview(pref.sec_record, 40), "Security")
+		.+= UIBUTTON("set_memory", TextPreview(pref.memory, 40), "Memory")
+
+	. += "<br><b>Other</b>:"
+	var/set_addr_button = UIBUTTON("set_email_addr", pref.email_addr ? pref.email_addr : "(default)", "Email Address")
+	var/list/branches = pref.for_each_selected_branch(CALLBACK(src, .proc/allow_email_branch_check))
+	to_world(branches)
+	for (var/name in branches)
+		set_addr_button += "  " + (branches[name] ? UI_FONT_GOOD(name) : UI_FONT_BAD(name))
+	. += set_addr_button
+
+	. += UIBUTTON("set_email_pass", pref.email_pass ? pref.email_pass : "(random)", "Email Password")
+	. = jointext(., "<br>")
 
 /datum/category_item/player_setup_item/background/records/OnTopic(var/href,var/list/href_list, var/mob/user)
 	if (href_list["set_public_record"])
@@ -70,6 +85,34 @@
 		var/memes = sanitize(input(user,"Enter memorized information here.",CHARACTER_PREFERENCE_INPUT_TITLE, html_decode(pref.memory)) as message|null, MAX_PAPER_MESSAGE_LEN, extra = 0)
 		if(!isnull(memes) && CanUseTopic(user))
 			pref.memory = memes
+		return TOPIC_REFRESH
+
+	else if (href_list["set_email_pass"])
+		var/value = input(user, "Enter email password:", "Email Password", pref.email_pass) as text
+		if (isnull(value) || !CanUseTopic(user))
+			return TOPIC_NOACTION
+		if (value != "")
+			var/clean = sanitize(value)
+			var/chars = length(clean)
+			if (chars < 4 || chars > 16)
+				to_chat(user, SPAN_WARNING("Invalid Email Password '[clean]': must be 4..16 safe glyphs."))
+				return TOPIC_NOACTION
+			value = clean
+		pref.email_pass = value
+		return TOPIC_REFRESH
+
+	else if (href_list["set_email_addr"])
+		var/value = input(user, "Enter email username:", "Email Address", pref.email_addr) as text
+		if (isnull(value) || !CanUseTopic(user))
+			return TOPIC_NOACTION
+		if (value != "")
+			var/clean = sanitize_for_email(value)
+			var/chars = length(clean)
+			if (chars < 4 || chars > 24)
+				to_chat(user, SPAN_WARNING("Invalid Email Username '[clean]': must be 4..24 glyphs from /a-z0-9./"))
+				return TOPIC_NOACTION
+			value = clean
+		pref.email_addr = value
 		return TOPIC_REFRESH
 
 	. =  ..()
