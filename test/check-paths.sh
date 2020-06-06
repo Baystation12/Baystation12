@@ -29,13 +29,15 @@ exactly 2 "/datum text paths" '"/datum'
 exactly 2 "/mob text paths" '"/mob'
 exactly 10 "/obj text paths" '"/obj'
 exactly 8 "/turf text paths" '"/turf'
+exactly 131 "to_world uses" '\sto_world\('
+exactly 65 "to_world_log uses" '\sto_world_log\('
 exactly 1 "world<< uses" 'world<<|world[[:space:]]<<'
 exactly 2 "world.log<< uses" 'world.log<<|world.log[[:space:]]<<'
 exactly 208 "<< uses" '(?<!<)<<(?!<)' -P
 exactly 0 "incorrect indentations" '^( {4,})' -P
 exactly 24 "text2path uses" 'text2path'
 exactly 3 "update_icon() override" '/update_icon\((.*)\)'  -P
-exactly 1 "goto uses" 'goto '
+exactly 1 "goto use" 'goto '
 exactly 492 "spawn uses" 'spawn\s*\(\s*(-\s*)?\d*\s*\)' -P
 # With the potential exception of << if you increase any of these numbers you're probably doing it wrong
 
