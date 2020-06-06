@@ -460,6 +460,8 @@
 
 //return 1 if slipped, 0 otherwise
 /mob/proc/handle_spaceslipping()
+	if(istype(loc,/obj/vehicles))
+		return 0
 	if(prob(slip_chance(5)) && !buckled)
 		to_chat(src, "<span class='warning'>You slipped!</span>")
 		src.inertia_dir = src.last_move
