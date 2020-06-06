@@ -59,14 +59,6 @@
 	light_power = 4
 	light_range = 6
 
-/obj/vehicles/return_air_for_internal_lifeform(var/mob/living/carbon/human/form)
-	if(!internal_air)
-		return
-	if(!istype(form))
-		return
-	internal_air.gas[form.species.breath_type] = 60
-	return internal_air
-
 /obj/vehicles/proc/mobile_spawn_check(var/mob/user)
 	if(spawn_datum.is_spawn_active == 0 && (guns_disabled || movement_destroyed))
 		to_chat(user,"<span class = 'notice'>[src] is too damaged to lock down.</span>")
@@ -132,6 +124,17 @@
 	if(spawn_datum)
 		spawn_datum = new spawn_datum
 		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
+
+	internal_air.volume = 1
+	internal_air.temperature = T20C
+
+/obj/vehicles/return_air_for_internal_lifeform(var/mob/living/carbon/human/form)
+	if(!internal_air)
+		return
+	if(!istype(form))
+		return
+	internal_air.gas[form.species.breath_type] = 1
+	return internal_air
 
 /obj/vehicles/attack_generic(var/mob/living/simple_animal/attacker,var/damage,var/text)
 	visible_message("<span class = 'danger'>[attacker] [text] [src]</span>")
