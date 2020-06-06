@@ -125,7 +125,7 @@
 		spawn_datum = new spawn_datum
 		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
 
-	internal_air.volume = 1
+	internal_air.volume = 2500
 	internal_air.temperature = T20C
 
 /obj/vehicles/return_air_for_internal_lifeform(var/mob/living/carbon/human/form)
@@ -133,7 +133,12 @@
 		return
 	if(!istype(form))
 		return
-	internal_air.gas[form.species.breath_type] = 1
+	internal_air.gas[form.species.breath_type] = 0
+	for(var/gas in internal_air.gas)
+		internal_air.gas[gas] = 100/internal_air.gas.len
+	return internal_air
+
+/obj/vehicles/return_air()
 	return internal_air
 
 /obj/vehicles/attack_generic(var/mob/living/simple_animal/attacker,var/damage,var/text)
