@@ -12,7 +12,7 @@
 	magazine_type = /obj/item/ammo_magazine/m127_saphe
 	caliber = "12.7mm"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
-	one_hand_penalty = 2
+	one_hand_penalty = 1
 	fire_sound = 'code/modules/halo/sounds/Magnum_Fire_New.wav'
 	reload_sound = 'code/modules/halo/sounds/Magnum_Reload_New.wav'
 	load_method = MAGAZINE
@@ -106,7 +106,7 @@
 	load_method = MAGAZINE
 	dispersion = list(0.4)
 	silenced = 1
-	one_hand_penalty = 2
+	one_hand_penalty = 1
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -143,7 +143,6 @@
 	dispersion = list(0.1) //Sniper pistol, using sniper dispersions.
 	ammo_type = /obj/item/ammo_casing/a145_ap/tracerless
 	w_class = ITEM_SIZE_NORMAL
-	one_hand_penalty = 3
 	accuracy = 0
 	wielded_item_state = "handgonne"
 

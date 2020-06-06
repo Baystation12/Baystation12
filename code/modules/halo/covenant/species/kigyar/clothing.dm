@@ -5,7 +5,7 @@
 	desc = "A Kig-Yar scout helmet with inbuilt night vision."
 	icon = KIGYAR_CLOTHING_PATH
 	icon_state = "scouthelm"
-	sprite_sheets = list("Kig-Yar" = KIGYAR_CLOTHING_PATH)
+	sprite_sheets = list("Kig-Yar" = KIGYAR_CLOTHING_PATH,"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi')
 	armor = list(melee = 50, bullet = 55, laser = 40,energy = 40, bomb = 20, bio = 0, rad = 0)
 	species_restricted = list("Kig-Yar")
 	flags_inv = null
@@ -20,7 +20,7 @@
 	worn_state = "jackal_bodysuit"
 	sprite_sheets = list("Default" = KIGYAR_CLOTHING_PATH,\
 		"Kig-Yar" = KIGYAR_CLOTHING_PATH,\
-		"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/skirm_clothing.dmi')
+		"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	armor =  list(melee = 10, bullet = 10, laser = 0, energy = 10, bomb = 0, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -38,7 +38,7 @@
 	item_state = "scout"
 	sprite_sheets = list("Default" = KIGYAR_CLOTHING_PATH,\
 		"Kig-Yar" = KIGYAR_CLOTHING_PATH,\
-		"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/skirm_clothing.dmi')
+		"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
 	armor_thickness_modifiers = list()

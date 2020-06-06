@@ -30,7 +30,7 @@
 	var/datum/game_mode/outer_colonies/gm = ticker.mode
 	if(!istype(gm))
 		return 0
-	if(gm.scan_percent < 100 && gm.scanner_destructions_left == 0 && !gm.scanners_active)
+	if(gm.scan_percent < 100)
 		return 1
 
 

@@ -324,7 +324,7 @@
 	vendor_account.do_transaction(T)
 
 /obj/machinery/vending/allowed(var/mob/m)
-	if(emagged || scan_id)
+	if(emagged || !scan_id)
 		return 1
 	. = ..()
 

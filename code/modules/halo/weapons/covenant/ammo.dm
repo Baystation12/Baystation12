@@ -1,4 +1,4 @@
-#define NEEDLER_EMBED_PROB 33
+#define NEEDLER_EMBED_PROB 66
 #define NEEDLER_SHARD_DET_TIME 10 SECONDS
 
  // need icons for all projectiles and magazines
@@ -72,7 +72,7 @@
 	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1.5 SECONDS
-	penetrating = 2
+	penetrating = 5
 	invisibility = 101
 	shield_damage = 210
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
@@ -141,6 +141,7 @@
 	var/shards_to_explode = 6
 	var/shard_name = "Needle shrapnel"
 	var/mob/locked_target
+	var/shrapnel_damage = 5
 	use_covenant_burndam_override = 0
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
@@ -173,7 +174,7 @@
 		shard.name = shard_name
 		shard.die_at = world.time + NEEDLER_SHARD_DET_TIME
 		GLOB.processing_objects += shard
-		shard.our_dam = damage / 4
+		shard.our_dam = shrapnel_damage
 		//We're doing some speshul things here with out embed, so let's not do the usual damage.
 		L.contents += shard
 		L.embedded += shard
@@ -275,6 +276,7 @@
 	step_delay = 0.65 //slower than most, faster than normal needles
 	armor_penetration = 20
 	max_track_steps = 2
+	shrapnel_damage = 10
 	shield_damage = 50
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 

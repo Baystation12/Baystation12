@@ -337,8 +337,11 @@
 	if(istype(obstacle,/mob/living))
 		var/mob/living/hit_mob = obstacle
 		playsound(loc,collision_sound,100,0,4)
-		hit_mob.Weaken(1) //No damage for now, let's just knock them over.
+		hit_mob.Weaken(2) //No damage for now, let's just knock them over.
 	else
+		moving_x = 0
+		moving_y = 0
+		last_moved_axis = 0
 		speed[1] = 0
 		speed[2] = 0
 	visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")

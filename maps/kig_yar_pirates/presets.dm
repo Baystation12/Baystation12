@@ -1,13 +1,4 @@
 
-/obj/machinery/autolathe/ammo_fabricator/kig_yar
-	name = "Stolen Ammunition Fabrication Machine"
-	desc = "Obviously ripped from elsewhere, this machine is loaded with ammunition manufacturing recipes for covenant ammunition"
-
-	machine_recipes = newlist(\
-	/datum/autolathe/recipe/blamite_needles,
-	/datum/autolathe/recipe/cov_carbine_mag,
-	/datum/autolathe/recipe/needlerifle_mag
-	)
 
 /obj/structure/closet/secure_closet/ks7_cov
 	name = "Covenant Supply Crate"

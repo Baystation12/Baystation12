@@ -17,7 +17,7 @@
 	reload_sound = 'code/modules/halo/sounds/Sniper_Reload_New.wav'
 	one_hand_penalty = -1
 	scoped_accuracy = 7
-	accuracy = -5
+	accuracy = -10
 	screen_shake = 0
 	dispersion = list(0.1)
 	fire_delay = 12
@@ -49,7 +49,6 @@
 	. = ..()
 
 //M392 designated marksman rifle
-//todo: should this be a sniper?
 /obj/item/weapon/gun/projectile/m392_dmr
 	name = "M392 Designated Marksman Rifle"
 	desc = "This rifle favors mid- to long-ranged combat, offering impressive stopping power over a long distance. Has an inbuilt underbarrel flashlight.  Takes 7.62mm calibre magazines."

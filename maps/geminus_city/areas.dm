@@ -239,6 +239,7 @@
 /area/geminus_underground
 	name = "\improper Geminus Underground Northeast"
 	icon_state = "yellow"
+	base_turf = /turf/simulated/floor/asteroid/planet
 
 /area/geminus_underground/northwest
 	name = "\improper Geminus Underground Northwest"

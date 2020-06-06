@@ -18,7 +18,7 @@
 	burst_delay = 1.8
 	dispersion = list(0.2,0.3,0.5,0.73)
 	accuracy = 1
-	one_hand_penalty = 3
+	one_hand_penalty = 2
 
 	overheat_capacity = 24 //6 clicks/bursts
 	overheat_fullclear_delay = 30

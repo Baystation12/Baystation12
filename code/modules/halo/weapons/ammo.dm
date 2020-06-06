@@ -243,7 +243,7 @@
 	icon_state = "SRS99mag"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/a145_ap
-	matter = list(DEFAULT_WALL_MATERIAL = 4000) //7.62mm casing = 50 metal each
+	matter = list(DEFAULT_WALL_MATERIAL = 10000)
 	caliber = "14.5mm"
 	max_ammo = 4
 	multiple_sprites = 1
@@ -260,9 +260,9 @@
 
 /obj/item/projectile/bullet/a145_ap
 	damage = 55
+	armor_penetration = 60
 	step_delay = 0
 	penetrating = 5
-	armor_penetration = 60
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
 	shield_damage = 210
