@@ -54,10 +54,9 @@
 	my_pixel_transform.max_pixel_speed = ship_max_speed
 	my_pixel_transform.my_observers = my_observers
 
-	create_dropship_markers()
-
 /obj/effect/overmap/ship/LateInitialize()
 	. = ..()
+	create_dropship_markers()
 	if(my_faction)
 		my_faction.all_ships.Add(src)
 
