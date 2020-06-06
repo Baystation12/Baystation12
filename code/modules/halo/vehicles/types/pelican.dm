@@ -33,6 +33,7 @@
 	max_speed = 2.25
 	acceleration = 6
 	drag = 3.5
+	internal_air = new
 
 /obj/vehicles/air/pelican/update_object_sprites()
 
@@ -111,6 +112,8 @@
 	max_speed = 2.25
 	acceleration = 6
 	drag = 3.5
+
+	internal_air = new
 
 /obj/vehicles/air/overmap/pelican/unsc
 	faction = "unsc"

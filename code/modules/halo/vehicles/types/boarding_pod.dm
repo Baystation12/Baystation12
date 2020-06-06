@@ -8,6 +8,7 @@
 	drop_accuracy = 5
 	occupants = list(8,0)
 	pod_range = 14
+	internal_air = new
 
 	light_color = "#E1FDFF"
 

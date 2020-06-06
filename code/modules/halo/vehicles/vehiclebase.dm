@@ -53,8 +53,19 @@
 
 	var/datum/mobile_spawn/spawn_datum //Setting this makes this a mobile spawn point.
 
+	var/datum/gas_mixture/internal_air = 0//If this is new()'d, the vehicle provides air to the occupants.
+	//I would make it require refilling, but that's likely to just be boring tedium for players.
+
 	light_power = 4
 	light_range = 6
+
+/obj/vehicles/return_air_for_internal_lifeform(var/mob/living/carbon/human/form)
+	if(!internal_air)
+		return
+	if(!istype(form))
+		return
+	internal_air.gas[form.species.breath_type] = 60
+	return internal_air
 
 /obj/vehicles/proc/mobile_spawn_check(var/mob/user)
 	if(spawn_datum.is_spawn_active == 0 && (guns_disabled || movement_destroyed))
