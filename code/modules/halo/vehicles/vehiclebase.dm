@@ -435,7 +435,7 @@
 	if(world.time < next_move_input_at)
 		return 0
 	if(isspace(loc) && !can_space_move)
-		to_chat(user,"<span class = 'notice'>[src] cannot mvoe in space!</span>")
+		to_chat(user,"<span class = 'notice'>[src] cannot move in space!</span>")
 		return
 	if(movement_destroyed)
 		to_chat(user,"<span class = 'notice'>[src] is in no state to move!</span>")

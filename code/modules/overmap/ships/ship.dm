@@ -25,8 +25,6 @@
 	var/lock_thrust = 0
 	var/braking = 0
 
-	var/genned_dropship_points = 0
-
 /obj/effect/overmap/ship/New()
 	. = ..()
 	our_fleet = new(src)
@@ -56,6 +54,8 @@
 	my_pixel_transform.max_pixel_speed = ship_max_speed
 	my_pixel_transform.my_observers = my_observers
 
+	create_dropship_markers()
+
 /obj/effect/overmap/ship/LateInitialize()
 	. = ..()
 	if(my_faction)
@@ -68,7 +68,7 @@
 
 //Creates dropship markers for each z-level, for each cardinal direction.
 /obj/effect/overmap/ship/proc/create_dropship_markers()
-	for(var/i = 0 to map_z.len)
+	for(var/i = 1 to map_z.len)
 		for(var/n in list("North","East","South","West"))//1 for each cardinal direction
 			var/using_axis_x = 0 //if this is ticked, the y axis becomes static
 			var/use_opposite_side = 0
@@ -82,7 +82,7 @@
 					using_axis_x = 1
 
 			var/turf/point_at
-			var/z_level = map_z[i+1]
+			var/z_level = map_z[i]
 			var/midpoint = 0
 			if(using_axis_x)
 				midpoint = (map_bounds[1] + map_bounds[3]) /2
@@ -100,7 +100,7 @@
 					point_at = locate(map_bounds[1],midpoint,z_level)
 			if(point_at)
 				var/obj/point = new /obj/effect/landmark/dropship_land_point (point_at)
-				point.name = "Level [i+1] - [n]"
+				point.name = "Level [i] - [n]"
 
 /obj/effect/overmap/ship/proc/assign_fleet(var/assign)
 	if(our_fleet == assign)
@@ -244,9 +244,6 @@
 
 /obj/effect/overmap/ship/process()
 	. = ..()
-	if(!genned_dropship_points)
-		create_dropship_markers()
-		genned_dropship_points = 1
 	if(moving_dir)
 		accelerate(moving_dir)
 		if(!lock_thrust)
