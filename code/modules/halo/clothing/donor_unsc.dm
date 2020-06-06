@@ -303,7 +303,7 @@
 //ODST
 
 /obj/item/clothing/head/helmet/odst/donator/flaksim
-	name = "Kashada's ODST Helmet"
+	name = "Flaksim's ODST Helmet"
 
 	item_state = "Odst Helmet Flaksim"
 	icon_state = "Odst Helmet Flaksim"
@@ -311,14 +311,14 @@
 	icon_state_novisr = "Odst Helmet Flaksim Transparent"
 
 /obj/item/clothing/suit/armor/special/odst/donator/flaksim
-	name = "Kashada's ODST Armour"
+	name = "Flaksim's ODST Armour"
 
 	icon_state = "Odst Armor Flaksim"
 
 /obj/item/weapon/storage/backpack/odst/donator/flaksim
 	icon = ITEM_INHAND
 	icon_override = ODST_OVERRIDE
-	name = "Kashada's Backpack"
+	name = "Flaksim's Backpack"
 	item_state = "Odst Flaksim Backpack"
 	icon_state = "Odst Flaksim Backpack"
 
