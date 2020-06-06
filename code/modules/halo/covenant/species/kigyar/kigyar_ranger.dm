@@ -3,7 +3,7 @@
 	name = "Kig-yar ranger suit"
 	desc = "A Kig-yar ranger suit. Made for combat in low gravity and low pressure enviroments. Requires sealed armour and a helmet to function."
 	icon = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi'
-	icon_state = "Ranger_bodysuit_s"
+	icon_state = "Ranger_bodysuit_obj"
 	worn_state = "Ranger_bodysuit"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_tvoan.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
@@ -24,8 +24,8 @@
 	desc = "Lightweight, durable armour specially made for low gravity and low pressure enviroments. Requires a sealed bodysuit and helmet to be functional."
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	icon = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi'
-	icon_state = "Ranger_armor"
-	item_state = "Ranger_armor"
+	icon_state = "ranger_armor_obj"
+	item_state = "ranger_armor"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_tvoan.dmi')
 	blood_overlay_type = "armor"
 	armor = list(melee = 40, bullet = 35, laser = 35, energy = 35, bomb = 40, bio = 100, rad = 35)
@@ -46,7 +46,8 @@
 	name = "Kig-yar ranger helmet"
 	desc = "A helmet made for ranger kig-yars. Useful in harsh, low gravity enviroments.  Requires a sealed bodysuit and armour to be functional."
 	icon = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi'
-	icon_state = "Ranger_Helmet"
+	icon_state = "Ranger_Helmet_obj"
+	item_state = "Ranger_Helmet"
 	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_tvoan.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
