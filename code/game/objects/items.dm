@@ -749,8 +749,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			mob_state = "[mob_state]_l"
 		if(slot == slot_r_ear)
 			mob_state = "[mob_state]_r"
-
 		mob_icon = sprite_sheets[bodytype]
+
 	else if(item_icons && item_icons[slot])
 		mob_icon = item_icons[slot]
 	else
@@ -761,12 +761,10 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 #define ARMOR_DAMAGED 0
 
 /obj/item/proc/degrade_armor_thickness(var/damage,var/damage_type)
-	damage /= 10 //The lower the thickness of the armor, the harder it gets to damage it further. Divided by 10 to keep loss-per-shot sane.
+	damage /= 10
 	var/thickness_dam_cap = ARMOUR_THICKNESS_DAMAGE_CAP
 	if(damage_type in armor_thickness_modifiers)
 		thickness_dam_cap /= armor_thickness_modifiers[damage_type]
-	if(damage > thickness_dam_cap)
-		damage = thickness_dam_cap
 	var/new_thickness = (armor_thickness - min(damage,thickness_dam_cap))
 	if(new_thickness < 0)
 		armor_thickness = 0
