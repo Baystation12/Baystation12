@@ -25,6 +25,8 @@
 	var/lock_thrust = 0
 	var/braking = 0
 
+	var/genned_dropship_points = 0
+
 /obj/effect/overmap/ship/New()
 	. = ..()
 	our_fleet = new(src)
@@ -56,7 +58,6 @@
 
 /obj/effect/overmap/ship/LateInitialize()
 	. = ..()
-	create_dropship_markers()
 	if(my_faction)
 		my_faction.all_ships.Add(src)
 
@@ -243,6 +244,9 @@
 
 /obj/effect/overmap/ship/process()
 	. = ..()
+	if(!genned_dropship_points)
+		create_dropship_markers()
+		genned_dropship_points = 1
 	if(moving_dir)
 		accelerate(moving_dir)
 		if(!lock_thrust)
