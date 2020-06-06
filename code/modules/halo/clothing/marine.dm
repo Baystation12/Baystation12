@@ -169,6 +169,9 @@
 	siemens_coefficient = 0.6
 	body_parts_covered = FEET|LEGS
 	can_hold_knife = 1
+	item_state_slots = list(
+	slot_l_hand_str = "boots",
+	slot_r_hand_str = "boots" )
 	stepsound = 'code/modules/halo/sounds/walk_sounds/marine_boots.ogg'
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
