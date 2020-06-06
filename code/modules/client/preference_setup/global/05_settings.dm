@@ -101,7 +101,7 @@
 /client/proc/get_preference_value(var/preference)
 	if(prefs)
 		var/datum/client_preference/cp = get_client_preference(preference)
-		if(cp)
+		if(cp && prefs.preference_values)
 			return prefs.preference_values[cp.key]
 		else
 			return null
