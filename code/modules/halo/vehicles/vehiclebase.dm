@@ -22,6 +22,7 @@
 	var/max_speed = 1//What's the lowest number we can go to in terms of delay?
 	var/acceleration = 1 //By how much does our speed change per input?
 	var/braking_mode = 0 //1 = brakes active, -1 = purposefully reducing drag to slide.
+	var/can_space_move = 0
 
 	//Advanced Damage Handling
 	var/datum/component_profile/comp_prof = /datum/component_profile
@@ -433,6 +434,9 @@
 /obj/vehicles/relaymove(var/mob/user, var/direction)
 	if(world.time < next_move_input_at)
 		return 0
+	if(isspace(loc) && !can_space_move)
+		to_chat(user,"<span class = 'notice'>[src] cannot mvoe in space!</span>")
+		return
 	if(movement_destroyed)
 		to_chat(user,"<span class = 'notice'>[src] is in no state to move!</span>")
 		return 0
