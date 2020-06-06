@@ -159,7 +159,7 @@
 	desc = "Storage for Covenant Kig-Yar equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/weapon/gun/energy/beam_rifle = 3)
+	products = list(/obj/item/weapon/gun/energy/beam_rifle = 1)
 
 /obj/machinery/vending/armory/covenant/kigyar/ranger // Equipment for Kig-Yar
 	name = "Covenant - Kig-Yar Ranger Vendor"
