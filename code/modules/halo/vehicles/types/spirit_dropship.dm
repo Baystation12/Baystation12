@@ -35,6 +35,8 @@
 	acceleration = 6
 	drag = 3.5
 
+	internal_air = new
+
 /obj/vehicles/air/overmap/spirit_dropship/update_object_sprites()
 	. = ..()
 	if(dir == NORTH || dir == SOUTH)

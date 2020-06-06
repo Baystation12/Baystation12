@@ -411,12 +411,11 @@
 		stored_targ = target
 		use_targ = stored_targ
 	. = 1
-	if(burst > 1)
-		user.visible_message(
-		"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
-		"<span class='warning'>You fire \the [src]!</span>",
-		"You hear a [fire_sound_text]!"
-		)
+	user.visible_message(
+	"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
+	"<span class='warning'>You fire \the [src]!</span>",
+	"You hear a [fire_sound_text]!"
+	)
 	for(var/i in 1 to burst)
 		if(!pershot_check(user))
 			break

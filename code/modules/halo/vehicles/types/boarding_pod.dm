@@ -8,6 +8,7 @@
 	drop_accuracy = 5
 	occupants = list(8,0)
 	pod_range = 14
+	internal_air = new
 
 	light_color = "#E1FDFF"
 
@@ -31,7 +32,7 @@
 		if(istype(t,/turf/unsimulated/floor))
 			valid_points += t
 			continue
-	if(isnull(valid_points))
+	if(isnull(valid_points) || valid_points.len == 0)
 		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
 		return
 	return pick(valid_points)
