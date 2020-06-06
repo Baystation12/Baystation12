@@ -131,7 +131,7 @@
 	load_method = MAGAZINE
 	caliber = "mauler"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
-	fire_sound = 'code/modules/halo/sounds/Mauler_Fire.ogg'
+	fire_sound = 'code/modules/halo/sounds/mauler_firing.ogg'
 	edge = 1
 	sharp = 1
 	force = 40
