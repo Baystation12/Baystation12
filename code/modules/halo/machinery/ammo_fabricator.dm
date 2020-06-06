@@ -31,3 +31,15 @@
 	/datum/autolathe/recipe/m443_fmj
 	)
 	req_access = list(access_unsc_oni)
+
+/obj/machinery/autolathe/ammo_fabricator/kig_yar
+	name = "Ammunition Fabrication Machine"
+	desc = "Brought along by the Kig-Yar, this machine is loaded with ammunition manufacturing recipes for covenant ammunition"
+	icon = 'code/modules/halo/covenant/manufactory/machines.dmi'
+	icon_state = "dispenser"
+
+	machine_recipes = newlist(\
+	/datum/autolathe/recipe/blamite_needles,
+	/datum/autolathe/recipe/cov_carbine_mag,
+	/datum/autolathe/recipe/needlerifle_mag
+	)
