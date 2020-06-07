@@ -60,13 +60,13 @@
 /datum/sprite_accessory/hair/skirmisherquills
 	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_state = "tvoanhair1"
-	name = "Long Quills"
+	name = "Long Feathers"
 	species_allowed = list("Tvaoan Kig-Yar")
 
 /datum/sprite_accessory/hair/skirmisherquills/two
 	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_state = "tvoanhair2"
-	name = "Short Quills"
+	name = "Short Feathers"
 	species_allowed = list("Tvaoan Kig-Yar")
 
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
