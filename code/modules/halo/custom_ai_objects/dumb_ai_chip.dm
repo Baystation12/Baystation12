@@ -27,6 +27,8 @@
 	var/list/command_names = list()
 	for(var/i = 1 to ai.cyberwarfare_commands.len)
 		var/datum/cyberwarfare_command/command = ai.cyberwarfare_commands[i]
+		if(!command)
+			continue
 		if(!command.our_ai)
 			command.output_to = src
 			command.our_ai = ai
@@ -44,7 +46,7 @@
 			to_chat(user,"<span class = 'notice'>[src] is working...</span>")
 			return
 		var/datum/cyberwarfare_command/cmd = ai.cyberwarfare_commands[command_to_use_index]
-		if(!cmd.is_target_valid(A))
+		if(cmd && !cmd.is_target_valid(A))
 			visible_message("<span class = 'notice'>[src] beeps: Invalid target for command.</span>")
 			return
 		working = 1
