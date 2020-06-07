@@ -530,7 +530,7 @@
 "kj" = (/obj/machinery/door/airlock/multi_tile/covenant/four{name = "Supplies Storage Bay"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portgarage)
 "kk" = (/obj/machinery/deck_gun/missile_pod/plasma_torpedo,/turf/space,/area/space)
 "kl" = (/obj/structure/window/reinforced/projresist/covenant,/obj/machinery/overmap_weapon_console/ship_scanning_console/cov,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
-"km" = (/obj/payload/covenant{free_explode = 1},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
+"km" = (/obj/payload/covenant{anchored = 1; free_explode = 1; name = "Antimatter Self Destruct Device"},/turf/simulated/floor/covenant{tag = "icon-cov_floor"; icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "kn" = (/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 8},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/bridge)
 "ko" = (/obj/machinery/light/covenant/west,/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portholdingcell)
 "kp" = (/obj/machinery/light/covenant/north{dir = 4; icon_state = "covie_light1"; pixel_x = 16; pixel_y = 0; tag = "icon-covie_light1 (EAST)"},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/portholdingcell)
