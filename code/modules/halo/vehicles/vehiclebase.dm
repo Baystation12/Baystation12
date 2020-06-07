@@ -129,6 +129,11 @@
 		internal_air.volume = 2500
 		internal_air.temperature = T20C
 
+/obj/vehicles/lost_in_space()
+	if(!can_space_move)
+		return TRUE
+	return FALSE
+
 /obj/vehicles/return_air_for_internal_lifeform(var/mob/living/carbon/human/form)
 	if(!internal_air)
 		return
@@ -201,6 +206,7 @@
 
 /obj/vehicles/Destroy()
 	GLOB.processing_objects -= src
+	kick_occupants()
 	. = ..()
 
 /obj/vehicles/proc/on_death()

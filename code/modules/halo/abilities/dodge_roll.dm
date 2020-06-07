@@ -54,10 +54,17 @@ mob/living/proc/getPerRollDelay()
 		v.exit_vehicle(src)
 	next_roll_at = world.time + ((roll_delay * roll_dist) + DODGE_ROLL_BASE_COOLDOWN)
 	to_chat(src,"<span class = 'warning'>[name] performs a dodge roll!</span>")
+	var/tableroll = 1
+	if(pass_flags & PASSTABLE)
+		tableroll = 0
+	if(tableroll)
+		pass_flags |= PASSTABLE
 	for(var/i = 0,i < roll_dist,i++)
 		var/turf/step_to = get_step(loc,dir)
 		if(step_to.density == 1 || !step(src,dir))
 			visible_message("<span class = 'warning'>[name] rolls into [step_to].</span>")
+			if(tableroll)
+				pass_flags &= ~PASSTABLE
 			break
 		var/matrix/m
 		if(isnull(transform))
@@ -70,6 +77,8 @@ mob/living/proc/getPerRollDelay()
 			client.move_delay = max(client.move_delay,world.time + 2)
 		sleep(2)
 	animate(src,transform = null,time = 1)
+	if(tableroll)
+		pass_flags &= ~PASSTABLE
 	return 1
 
 #undef DODGE_ROLL_BASE_COOLDOWN
