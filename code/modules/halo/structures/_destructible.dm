@@ -8,6 +8,7 @@
 	density = 1
 	var/health = 200
 	var/maxHealth = 200
+	var/closerange_freefire = 1 //mobs within 1 tile are allowed to shoot through if set to 1
 	var/list/maneuvring_mobs = list()
 	var/repair_material_name
 	var/cover_rating = 10
@@ -227,11 +228,11 @@
 		//get_dist() will return 0 for on top of, 1 for adjacent and surrounds
 		var/dist = get_dist(get_turf(src), P.starting)
 
-		if(dist <= 1)
+		if(closerange_freefire && dist <= 1)
 			//never block bullets fired from an adjacent turf
 			modified_cover_rating = 0
 
-		else if(dist < 2)
+		else if(dist < 3)
 			//reduced block chance
 			modified_cover_rating *= 0.5
 

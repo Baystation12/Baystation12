@@ -33,6 +33,7 @@
 	flags = ON_BORDER
 	cover_rating = 95 //High intercept, low health
 	maxHealth = 300
+	closerange_freefire = 0 //Also, we can't fire from behind this, just like the covenant energy 'cade
 	loot_types = list(/obj/item/stack/material/plasteel)
 	repair_material_name = "plasteel"
 	climbable = 0

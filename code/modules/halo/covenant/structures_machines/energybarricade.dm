@@ -86,14 +86,6 @@
 	if(ismob(A) && !blocks_mobs)
 		return ..()
 
-	var/obj/item/projectile/P = A
-	if(istype(P) && P.starting)
-		//get_dist() will return 0 for on top of, 1 for adjacent and surrounds
-		var/dist = get_dist(get_turf(src), P.starting)
-
-		if(dist <= 1)
-			return 1
-
 	//block movement from some directions if we are active
 	if(A && T && shield_health > 0 && !(A in climbing) && A.elevation == elevation)
 		var/turf/front_turf = get_step(src, dir)
