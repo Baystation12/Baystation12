@@ -25,10 +25,6 @@ cloak disrupt override
 			P.on_hit(src, 100, def_zone)
 			return 100
 
-	var/blocked = ..(P, def_zone)
-
-	projectile_hit_bloody(P, P.damage*blocked_mult(blocked), def_zone)
-
 	//Shrapnel
 	if(!(species.flags & NO_EMBED) && P.can_embed())
 		var/obj/item/organ/external/organ = get_organ(def_zone)
@@ -39,6 +35,10 @@ cloak disrupt override
 			SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
 			SP.loc = organ
 			organ.embed(SP)
+
+	var/blocked = ..(P, def_zone)
+
+	projectile_hit_bloody(P, P.damage*blocked_mult(blocked), def_zone)
 
 	return blocked
 
