@@ -102,7 +102,7 @@
 			return
 		LAZYSET(amount_of_underwear_by_id_card, id, ++current_quota)
 
-		var/obj/UW = UWI.create_underwear(metadata_list)
+		var/obj/UW = UWI.create_underwear(H, metadata_list)
 		UW.forceMove(loc)
 		H.put_in_hands(UW)
 

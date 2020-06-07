@@ -241,7 +241,9 @@ var/list/gear_datums = list()
 		if(ticked)
 			entry += "<tr><td colspan=3>"
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
-				entry += " <a href='?src=\ref[src];gear=\ref[G];tweak=\ref[tweak]'>[tweak.get_contents(get_tweak_metadata(G, tweak))]</a>"
+				var/contents = tweak.get_contents(get_tweak_metadata(G, tweak))
+				if(contents)
+					entry += " <a href='?src=\ref[src];gear=\ref[G];tweak=\ref[tweak]'>[contents]</a>"
 			entry += "</td></tr>"
 		if(!hide_unavailable_gear || allowed || ticked)
 			. += entry
@@ -378,22 +380,22 @@ var/list/gear_datums = list()
 	src.path = path
 	src.location = location
 
-/datum/gear/proc/spawn_item(var/location, var/metadata)
+/datum/gear/proc/spawn_item(user, location, metadata)
 	var/datum/gear_data/gd = new(path, location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
 		gt.tweak_gear_data(metadata && metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
 	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(item, metadata && metadata["[gt]"])
+		gt.tweak_item(user, item, metadata && metadata["[gt]"])
 	return item
 
 /datum/gear/proc/spawn_on_mob(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, metadata)
+	var/obj/item/item = spawn_item(H, H, metadata)
 	if(H.equip_to_slot_if_possible(item, slot, del_on_fail = 1, force = 1))
 		. = item
 
 /datum/gear/proc/spawn_in_storage_or_drop(var/mob/living/carbon/human/H, var/metadata)
-	var/obj/item/item = spawn_item(H, metadata)
+	var/obj/item/item = spawn_item(H, H, metadata)
 	item.add_fingerprint(H)
 
 	var/atom/placed_in = H.equip_to_storage(item)

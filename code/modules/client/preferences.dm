@@ -249,7 +249,7 @@ datum/preferences
 			var/underwear_item_name = all_underwear[underwear_category_name]
 			var/datum/category_item/underwear/UWD = underwear_category.items_by_name[underwear_item_name]
 			var/metadata = all_underwear_metadata[underwear_category_name]
-			var/obj/item/underwear/UW = UWD.create_underwear(metadata)
+			var/obj/item/underwear/UW = UWD.create_underwear(character, metadata)
 			if(UW)
 				UW.ForceEquipUnderwear(character, FALSE)
 		else
