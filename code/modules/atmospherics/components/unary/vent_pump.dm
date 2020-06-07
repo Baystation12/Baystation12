@@ -74,11 +74,6 @@
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 
 	icon = null
-	initial_loc = get_area(loc)
-	area_uid = initial_loc.uid
-	if (!id_tag)
-		assign_uid()
-		id_tag = num2text(uid)
 
 /obj/machinery/atmospherics/unary/vent_pump/Destroy()
 	unregister_radio(src, frequency)
@@ -253,6 +248,12 @@
 
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
 	. = ..()
+
+	initial_loc = get_area(loc)
+	area_uid = initial_loc.uid
+	if (!id_tag)
+		assign_uid()
+		id_tag = num2text(uid)
 
 	//some vents work his own special way
 	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null
