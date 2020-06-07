@@ -39,7 +39,7 @@
 	item_state = "scout"
 	sprite_sheets = list("Default" = KIGYAR_CLOTHING_PATH,\
 		"Kig-Yar" = KIGYAR_CLOTHING_PATH,\
-		"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/skirm_clothing.dmi')
+		"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi')
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
 	armor_thickness_modifiers = list()
