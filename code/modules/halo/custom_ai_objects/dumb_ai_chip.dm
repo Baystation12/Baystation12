@@ -9,7 +9,6 @@
 
 	var/mob/living/silicon/ai/dumb_ai/ai
 	var/command_use_name
-	var/command_to_use_index
 	var/working = 0
 
 /obj/item/dumb_ai_chip/examine(var/examiner)
@@ -37,22 +36,22 @@
 	if(choice == "Cancel")
 		return
 	command_use_name = choice
-	command_to_use_index = command_names[choice]
+	var/datum/cyberwarfare_command/picked = command_names[choice]
+	ai.prepped_command = new picked.type (ai)
 	to_chat(user,"<span class = 'notice'>Dumb AI primed to deploy [command_use_name] command. Interface with a valid command target to deploy.</span>")
 
 /obj/item/dumb_ai_chip/resolve_attackby(atom/A, mob/user, var/click_params)
-	if(command_to_use_index)
+	if(ai && ai.prepped_command)
 		if(working)
 			to_chat(user,"<span class = 'notice'>[src] is working...</span>")
 			return
-		var/datum/cyberwarfare_command/cmd = ai.cyberwarfare_commands[command_to_use_index]
-		if(cmd && !cmd.is_target_valid(A))
+		if(!ai.prepped_command.is_target_valid(A))
 			visible_message("<span class = 'notice'>[src] beeps: Invalid target for command.</span>")
 			return
 		working = 1
 		user.visible_message("<span class = 'notice'>[user] starts preparing [src] to deploy a command to [A]</span>")
-		if(do_after(user,cmd.command_delay,A,needhand = 0,same_direction = 1))
-			cmd.send_command(A)
+		if(do_after(user,ai.prepped_command.command_delay,A,needhand = 0,same_direction = 1))
+			ai.prepped_command.send_command(A)
 		working = 0
 	add_fingerprint(user)
 	return A.attackby(src, user, click_params)
