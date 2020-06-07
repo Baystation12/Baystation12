@@ -4,7 +4,8 @@
 	name = "Kig-Yar Scout Helmet"
 	desc = "A Kig-Yar scout helmet with inbuilt night vision."
 	icon = KIGYAR_CLOTHING_PATH
-	icon_state = "scouthelm"
+	icon_state = "scouthelm_obj"
+	item_state = "scouthelm"
 	sprite_sheets = list("Kig-Yar" = KIGYAR_CLOTHING_PATH,"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi')
 	armor = list(melee = 50, bullet = 55, laser = 40,energy = 40, bomb = 20, bio = 0, rad = 0)
 	species_restricted = list("Kig-Yar")
