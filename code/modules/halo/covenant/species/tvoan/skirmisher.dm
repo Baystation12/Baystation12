@@ -19,23 +19,21 @@
 	icon_template = 'code/modules/halo/covenant/species/tvoan/r_skirmisher_template.dmi'
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/bird_punch)
-	appearance_flags = HAS_SKIN_TONE | HAS_HAIR_COLOR
+	appearance_flags = HAS_SKIN_TONE | HAS_HAIR_COLOR | HAS_EYE_COLOR
 
 	pain_mod = 0.9
 	brute_mod = 1.1
 	burn_mod = 1.1
 	slowdown = -1.0
 
-	pixel_offset_x = -4
-
 	equipment_slowdown_multiplier = 0.3
 
-	item_icon_offsets = list(list(4,-1),list(4,-1),null,list(0,0),null,null,null,list(0,0),null)
+	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 
 	has_limbs = list( //Normal limbs. A bit better than ruutian
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/tvoan),
 		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
 		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
 		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
@@ -61,8 +59,14 @@
 
 /datum/sprite_accessory/hair/skirmisherquills
 	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
-	icon_state = "h_quills"
-	name = "Quills"
+	icon_state = "tvoanhair1"
+	name = "Long Quills"
+	species_allowed = list("Tvaoan Kig-Yar")
+
+/datum/sprite_accessory/hair/skirmisherquills/two
+	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
+	icon_state = "tvoanhair2"
+	name = "Short Quills"
 	species_allowed = list("Tvaoan Kig-Yar")
 
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
@@ -77,3 +81,8 @@
 	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
 	key = "T"
 	flags = RESTRICTED
+
+/obj/item/organ/external/head/tvoan
+	eye_icon = "eyes_s"
+	eye_icon_location = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
+
