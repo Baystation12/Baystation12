@@ -38,7 +38,7 @@
 			playsound(src,takeoff_sound,100,0)
 	var/takeoff_overlay = image(icon,takeoff_overlay_icon_state)
 	overlays += takeoff_overlay
-	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	pass_flags = PASSTABLE | PASSGRILLE
 	block_enter_exit = 1
 
 /obj/vehicles/air/proc/land_vehicle(var/message_n_sound_override = 0)
