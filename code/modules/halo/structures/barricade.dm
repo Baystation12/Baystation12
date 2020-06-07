@@ -12,7 +12,8 @@
 	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "barricade"
 	flags = ON_BORDER
-	cover_rating = 50
+	cover_rating = 50 //Lower intercept, higher health
+	maxHealth = 400
 	loot_types = list(/obj/item/stack/material/plasteel)
 	repair_material_name = "plasteel"
 
@@ -30,8 +31,8 @@
 	icon = 'code/modules/halo/structures/Marine_Barricade.dmi'
 	icon_state = "marine barricade"
 	flags = ON_BORDER
-	cover_rating = 95
-	maxHealth = 1000
+	cover_rating = 95 //High intercept, low health
+	maxHealth = 300
 	loot_types = list(/obj/item/stack/material/plasteel)
 	repair_material_name = "plasteel"
 	climbable = 0
@@ -51,7 +52,7 @@
 	icon_state = "covenant_barricade"
 	flags = ON_BORDER
 	cover_rating = 66
-	maxHealth = 750
+	maxHealth = 400
 	loot_types = list(/obj/item/stack/material/nanolaminate)
 	repair_material_name = "nanolaminate"
 

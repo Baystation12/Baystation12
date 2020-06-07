@@ -231,7 +231,7 @@
 			//never block bullets fired from an adjacent turf
 			modified_cover_rating = 0
 
-		else if(dist < 4)
+		else if(dist < 2)
 			//reduced block chance
 			modified_cover_rating *= 0.5
 

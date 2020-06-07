@@ -32,12 +32,12 @@
 	var/fail_state = "0"
 	anchored = 1
 	var/shield_health = 0
-	var/max_shield = 750
+	var/max_shield = 300
 	var/recharge_time = 50
 	var/time_recharged = 50
 	var/can_deconstruct = 1
 	var/processing = 0
-	var/recharge_per_tick = 34
+	var/recharge_per_tick = 30
 	var/blocks_air = 0
 	var/blocks_mobs = 1
 	var/item_type = /obj/item/energybarricade
@@ -85,6 +85,14 @@
 	//can mobs pass unhindered using advanced alien technology?
 	if(ismob(A) && !blocks_mobs)
 		return ..()
+
+	var/obj/item/projectile/P = A
+	if(istype(P) && P.starting)
+		//get_dist() will return 0 for on top of, 1 for adjacent and surrounds
+		var/dist = get_dist(get_turf(src), P.starting)
+
+		if(dist <= 1)
+			return 1
 
 	//block movement from some directions if we are active
 	if(A && T && shield_health > 0 && !(A in climbing) && A.elevation == elevation)
