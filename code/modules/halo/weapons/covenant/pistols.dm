@@ -120,7 +120,7 @@
 	handle_casings = CASELESS
 	caliber = "needler"
 	load_method = MAGAZINE
-	one_hand_penalty = 2
+	one_hand_penalty = 1
 	burst = 6
 	burst_delay = 1.5
 	burst_accuracy = list(0,0,0,-1,-1,-1)

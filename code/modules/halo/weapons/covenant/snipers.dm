@@ -64,15 +64,13 @@
 	irradiate_non_cov = 17
 	wielded_item_state = "beamrifle-wielded"
 	fire_delay = 10
-	accuracy = -5
+	accuracy = -10
 	dispersion = list(0.1)
 	scoped_accuracy = 7
 	advanced_covenant = 1
 	overheat_sfx = 'code/modules/halo/sounds/beam_rifle_overheat.ogg'
 	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
 	overheat_fullclear_delay = 40
-
-	var/next_allowed_fire
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

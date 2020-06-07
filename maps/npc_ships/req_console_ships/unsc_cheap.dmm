@@ -1,5 +1,7 @@
 "aa" = (/turf/space,/area/space)
 "ab" = (/obj/machinery/overmap_comms/receiver,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
+"ac" = (/obj/machinery/door/airlock/multi_tile/halo/unsc_ship_preset{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"ad" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine/unsc{dir = 4; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "aR" = (/obj/effect/hull_segment,/turf/simulated/wall,/area/om_ships/req_console_ship)
 "bS" = (/obj/structure/janitorialcart,/obj/item/weapon/mop,/obj/item/weapon/reagent_containers/glass/bucket,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "ce" = (/obj/machinery/vending/dinnerware,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -34,7 +36,6 @@
 "sh" = (/obj/machinery/fusion_thruster/fueled{dir = 8},/obj/structure/window/reinforced/projresist{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "sr" = (/obj/machinery/vending/cola,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "st" = (/obj/machinery/light/spot{dir = 4},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"ts" = (/obj/machinery/door/airlock/multi_tile/halo/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "tz" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "tD" = (/obj/structure/closet/emcloset/legacy,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "vo" = (/obj/structure/window/reinforced/projresist{dir = 4},/obj/structure/window/reinforced/projresist{dir = 1},/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
@@ -46,7 +47,6 @@
 "BJ" = (/obj/machinery/door/airlock/halo_maint/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "CN" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "CY" = (/obj/machinery/power/fusion_drive_simple,/obj/structure/cable/blue{icon_state = "0-4"},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"Dg" = (/obj/machinery/light/spot{dir = 4},/obj/machinery/photocopier/faxmachine{density = 0; department = "Deployed Vessel"; dir = 4; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "nav"; name = "UNSC HIGHCOM Priority Communications Line"; pixel_x = 32},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Di" = (/obj/structure/window/reinforced/projresist{dir = 8},/obj/structure/window/reinforced/projresist,/obj/structure/grille,/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
 "Ed" = (/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Eh" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/o2,/obj/item/weapon/storage/firstaid/o2,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
@@ -81,10 +81,10 @@
 "UC" = (/obj/structure/table/steel,/obj/item/weapon/storage/firstaid/unsc,/obj/item/weapon/storage/firstaid/unsc,/obj/machinery/light,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "UP" = (/obj/structure/table/steel,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/obj/item/bodybag/cryobag,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "UQ" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/plating,/area/om_ships/req_console_ship)
-"Vw" = (/obj/machinery/telecomms/relay/ship_relay,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"Vw" = (/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "Wt" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WF" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
-"WG" = (/obj/machinery/telecomms/relay/long_range_emergency,/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
+"WG" = (/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "WV" = (/obj/machinery/door/airlock/halo/unsc_ship_preset,/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
 "Xi" = (/obj/machinery/light{dir = 8},/turf/simulated/floor/tiled,/area/om_ships/req_console_ship)
 "XZ" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled/dark,/area/om_ships/req_console_ship)
@@ -116,10 +116,10 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslsaaaaruaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXaRqXqXqXqXqXqXlslslslszjqXqXqXqXqXqXqXqXqXqXqXqXqXRkhdtzdMFbJNKGhdhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaarZEdXZEdWVEdEdEdEdEdEdWVhdSqhdhdhdhdqXewrXFApRgmPTqXhdcOhdqXaRqXXihdhdhdhdhdhdhdhdMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaahIkOEdEdtDqXEdEdEdEdEdEdqXKGhdhdhdhdhdWthdhdhdhdhdhdhdhdhdhdhdqXhdhdhdqXqXMTqXqXXihdaRTCFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaagEGIEdEdqXqXgJqXCNQVyOgJqXqXhdEhUCUPhdqXhdPwPwPwPwhdtshdhdhdstqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaagEoSebgJqXabEdoSebQVNKEddDqXWtqXqXqXWtqXyyMqdZdZyZDgqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXBJqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaagEGIEdEdqXqXgJqXCNQVyOgJqXqXhdEhUCUPhdqXhdPwPwPwPwhdachdhdhdstqXBJqXBJqXFcFcFcqXWGhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaagEoSebgJqXabEdoSebQVNKEddDqXWtqXqXqXWtqXyyMqdZdZyZadqXyyhdhdhdBJRXqXRZqXUQCYnPqXqXBJqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaagEOJEdEdqXqXgJqXCNQVxxgJqXqXhdEhOaUPhdqXhdHzHzHzHzhdhdhdhdhdstqXBJqXBJqXFcFcFcqXVwhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaDivoEdEdtDqXEdEdEdEdEdEdqXKGhdhdhdhdhdWthdhdhdhdhdhdtshdhdhdhdqXhdhdhdqXqXMTqXqXXihdaRTCFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaDivoEdEdtDqXEdEdEdEdEdEdqXKGhdhdhdhdhdWthdhdhdhdhdhdachdhdhdhdqXhdhdhdqXqXMTqXqXXihdaRTCFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaGuEdIXEdWVEdEdEdEdEdEdWVhdTghdhdhdhdqXlHkzRycysrceqXhdlbhdqXqXqXXihdhdhdhdhdhdhdhdMTFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslsqXqXqXqXaRqXqXqXqXqXqXlslslslszjqXqXqXqXqXqXqXqXqXqXqXaRqXWFhdMIbSZFjWKGhdhdqXFcFcshaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaalslslslslslslslslslslslslslslslslsaaaaruaaaaaaaaaaaaaaaaaaaaaaqXqXqXqXqXqXqXqXqXMTqXqXqXqXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa

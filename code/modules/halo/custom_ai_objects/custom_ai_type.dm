@@ -16,8 +16,6 @@
 	cpu_points_max = 60
 	cpu_points = 60
 	cyberwarfare_commands = newlist(\
-	/datum/cyberwarfare_command/network_scan,
-	/datum/cyberwarfare_command/network_scan/l2,
 	/datum/cyberwarfare_command/investigate_node,
 	/datum/cyberwarfare_command/hack_routing_node,
 	/datum/cyberwarfare_command/node_lockdown,

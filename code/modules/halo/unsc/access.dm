@@ -88,3 +88,8 @@
 /datum/access/unsc_specialist
 	id = access_unsc_specialist
 	desc = "Specialist Access"
+
+/var/const/access_spartan = 117
+/datum/access/spartan
+	id = access_spartan
+	desc = "Spartan Access"

@@ -44,7 +44,7 @@
 	icon_state = "trashbag0"
 	item_state = "trashbag"
 
-	w_class = ITEM_SIZE_SMALL
+	w_class = ITEM_SIZE_HUGE
 	max_w_class = ITEM_SIZE_HUGE //can fit a backpack inside a trash bag, seems right
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	can_hold = list() // any

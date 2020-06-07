@@ -75,7 +75,8 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 	if(authenticated)
 		dat += "<a href='byond://?src=\ref[src];logout=1'>{Log Out}</a>"
 	else
-		dat += "<a href='byond://?src=\ref[src];auth=1'>{Log In}</a>"
+		dat += "<a href='byond://?src=\ref[src];auth=1'>{Log In}</a><br>"
+		dat += "<a href='byond://?src=\ref[src];lace=1'>{Optical scan}</a>"
 
 	dat += "<hr>"
 
@@ -147,6 +148,17 @@ GLOBAL_LIST_EMPTY(adminfaxes)	//cache for faxes that have been sent to admins
 				I.loc = src
 				scan = I
 		authenticated = 0
+
+	if(href_list["lace"])
+		if (!authenticated)
+			var/mob/living/M = usr
+			if(istype(M))
+				var/obj/item/organ/internal/stack/lace = M.GetLace()
+				if((lace && check_access_list(lace.access)) || !(req_access.len + req_one_access.len))
+					authenticated = 1
+					to_chat(usr,"\icon[src] <span class='notice'>Access granted.</span>")
+				else
+					to_chat(usr,"\icon[src] <span class='warning'>Access denied.</span>")
 
 	if(href_list["dept"])
 		var/lastdestination = destination

@@ -324,7 +324,7 @@
 	vendor_account.do_transaction(T)
 
 /obj/machinery/vending/allowed(var/mob/m)
-	if(emagged || scan_id)
+	if(emagged || !scan_id)
 		return 1
 	. = ..()
 
@@ -340,7 +340,10 @@
 			return
 
 	wires.Interact(user)
-	ui_interact(user)
+	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+		to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
+	else
+		ui_interact(user)
 
 /**
  *  Display the NanoUI window for the vending machine.

@@ -15,6 +15,7 @@
 
 /datum/job/unsc/medical
 	title = "UNSC Medic"
+	fallback_spawnpoint = null
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc/medic

@@ -176,7 +176,7 @@
 		return
 	om_targ = potential_om_targ[om_user_choice]
 
-	var/turf/drop_turf = get_drop_turf(get_drop_point(usr,om_targ,om_targ.map_z))
+	var/turf/drop_turf = get_drop_turf(get_drop_point(usr,om_targ))
 	if(isnull(drop_turf))
 		to_chat(usr,"<span class = 'notice'>No valid drop-turfs available.</span>")
 		return
@@ -189,11 +189,11 @@
 		potential_om_targ["[o.name]"] = o
 	return potential_om_targ
 
-/obj/vehicles/drop_pod/overmap/get_drop_point(var/mob/user,var/obj/effect/overmap/om_targ,var/list/om_targ_zs)
+/obj/vehicles/drop_pod/overmap/get_drop_point(var/mob/user,var/obj/effect/overmap/om_targ)
 	var/list/valid_points = list()
 	var/beacons_present = 0
 	for(var/obj/item/drop_pod_beacon/b in world)
-		if(!(b.loc.z  in om_targ_zs))
+		if(!(b.loc.z  in om_targ.map_z))
 			continue
 		if(b.is_active == 1)
 			if(!beacons_present) //If we've not already realised we have beacons, remove all normal drop-pod markers from pick-choice.
@@ -207,7 +207,7 @@
 	if(om_targ.targeting_locations.len > 0)
 		var/chosen_loc_name = input(user,"Pick a location to land the [name]","[name] Landing Selection","Cancel") in om_targ.targeting_locations + list("Cancel")
 		chosen_area = om_targ.targeting_locations[chosen_loc_name]
-	return locate(rand(chosen_area[1],chosen_area[3]),rand(chosen_area[2],chosen_area[4]),pick(om_targ_zs))
+	return locate(rand(chosen_area[1],chosen_area[3]),rand(chosen_area[2],chosen_area[4]),pick(om_targ.map_z))
 
 /obj/vehicles/drop_pod/overmap/post_drop_effects(var/turf/drop_turf)
 	var/obj/effect/overmap/our_om_obj = map_sectors["[drop_turf.z]"]
@@ -242,4 +242,5 @@
 
 /obj/effect/landmark/drop_pod_landing
 	name = "Drop Pod landing Marker"
-	invisibility = 101
+	icon = 'code/modules/halo/vehicles/types/landmark.dmi'
+	icon_state = "droppod"

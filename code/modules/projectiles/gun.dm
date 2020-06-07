@@ -338,7 +338,7 @@
 	if(!user || !target) return
 	if(target.elevation != last_elevation && (istype(target,/obj/vehicles) || istype(target,/mob/living)))
 		last_elevation = target.elevation
-		visible_message("<span class = 'warning'>[user.name] changes their firing elevation to target [target.name]</span>")
+		visible_message("<span class = 'danger'>[user.name] changes their firing elevation to target [target.name]</span>")
 	var/list/rounds_nosuppress = list()
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
@@ -411,6 +411,11 @@
 		stored_targ = target
 		use_targ = stored_targ
 	. = 1
+	user.visible_message(
+	"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
+	"<span class='warning'>You fire \the [src]!</span>",
+	"You hear a [fire_sound_text]!"
+	)
 	for(var/i in 1 to burst)
 		if(!pershot_check(user))
 			break
@@ -508,8 +513,8 @@
 			)
 		else
 			user.visible_message(
-				"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
-				"<span class='warning'>You fire \the [src]!</span>",
+				"<span class='notice'>\The [user] [burst > 1 ? "continues firing":"fires"] \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
+				,
 				"You hear a [fire_sound_text]!"
 				)
 
@@ -603,7 +608,7 @@
 
 	//Accuracy modifiers
 	P.accuracy = accuracy + acc_mod
-	P.dispersion = disp_mod
+	P.dispersion = max(0,disp_mod)
 
 	//accuracy bonus from aiming
 	if (aim_targets && (target in aim_targets))
@@ -702,10 +707,11 @@
 			cumulative_accmod += attrib_mods[2]
 			cumulative_slowdownmod += attrib_mods[3]
 
-	if(cumulative_dispmod > 0)
+	if(cumulative_dispmod > 0) //Allowing the changing of dispersion through attachments can be abused for laser accurate guns.
+	//Attachments granting dispersion decreases can be used to counter the dispersion increase of other attachments.
 		for(var/entry in dispersion)
 			entry += cumulative_dispmod
-	if(cumulative_accmod > 0)
+	if(cumulative_accmod != 0)
 		for(var/entry in burst_accuracy)
 			entry += cumulative_accmod
 		accuracy += cumulative_accmod

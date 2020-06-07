@@ -97,6 +97,8 @@
 		return
 
 /obj/payload/proc/set_anchor(var/onoff)
+	if(initial(anchored) == 1) //if we started anchored, we shall not change our status
+		return
 	anchored = onoff
 
 /obj/payload/proc/checkdisarm()

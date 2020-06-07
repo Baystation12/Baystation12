@@ -1728,6 +1728,7 @@
 #include "code\modules\halo\machinery\medical\thermopod.dm"
 #include "code\modules\halo\medicine\combat.dm"
 #include "code\modules\halo\medicine\firstaid.dm"
+#include "code\modules\halo\misc\artifact_spawn.dm"
 #include "code\modules\halo\misc\atom_despawner.dm"
 #include "code\modules\halo\misc\bumpstairs.dm"
 #include "code\modules\halo\misc\bumpstairs_oni.dm"

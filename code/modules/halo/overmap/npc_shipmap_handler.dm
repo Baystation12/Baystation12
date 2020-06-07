@@ -28,7 +28,7 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	sleep(10)//Ensure above message is shown.
 	var/list/z_level_toclear = block(locate(1,1,z_level),locate(255,255,z_level))
 	for(var/turf/to_clear in z_level_toclear)
-		for(var/obj/obj_to_clear in to_clear.contents)
+		for(var/atom/movable/obj_to_clear in to_clear.contents)
 			obj_to_clear.loc = null
 			GLOB.processing_objects -= obj_to_clear
 			qdel(obj_to_clear)
