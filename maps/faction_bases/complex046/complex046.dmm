@@ -40,10 +40,10 @@
 "aN" = (/turf/simulated/floor/tiled,/area/faction_base/oni/hangar)
 "aO" = (/obj/effect/landmark/start/unsc_base_fallback,/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (EAST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 4},/area/faction_base/oni/cryodorms)
 "aP" = (/obj/machinery/light{dir = 1; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/faction_base/oni/hangar)
-"aQ" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Plasteel Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/plasteel/fifty,/obj/structure/window/reinforced{color = ""; dir = 8; health = 1e+007; name = "reinforced window"},/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
+"aQ" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Plasteel Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/plasteel/fifty,/obj/structure/window/reinforced{color = ""; dir = 8; health = 1e+007; name = "reinforced window"},/obj/item/stack/material/plasteel/fifty,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "aR" = (/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (SOUTHWEST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 10},/area/faction_base/oni/cryodorms)
-"aS" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Glass Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
-"aT" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/structure/window/reinforced{color = ""; dir = 8; health = 1e+007; name = "reinforced window"},/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
+"aS" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Glass Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
+"aT" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/structure/window/reinforced{color = ""; dir = 8; health = 1e+007; name = "reinforced window"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "aU" = (/obj/machinery/door/airlock/multi_tile/halo/quadruple{id_tag = "oni_geminus_garage_outer"; name = "Complex 046 Garage Blast Doors"},/turf/simulated/floor/road/empty,/area/faction_base/oni/garage)
 "aV" = (/turf/simulated/floor/tech/orange,/area/faction_base/oni/cryodorms)
 "aW" = (/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
@@ -102,7 +102,7 @@
 "bX" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "bY" = (/obj/structure/closet/crate/medical{name = "Blood Packs Crate"},/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OMinus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/OPlus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/BMinus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/APlus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/AMinus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/item/weapon/reagent_containers/blood/BPlus,/obj/item/weapon/reagent_containers/blood/BPlus,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "bZ" = (/obj/structure/closet/crate/medical{name = "Biofoam Canisters Crate"},/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/obj/item/weapon/reagent_containers/syringe/biofoam,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
-"ca" = (/obj/machinery/vending/medical,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"ca" = (/obj/structure/window/reinforced{color = ""; dir = 8; health = 1e+007; name = "reinforced window"},/obj/machinery/vending/tool,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "cb" = (/obj/structure/flora/pottedplant/orientaltree,/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "cc" = (/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "cd" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
@@ -125,7 +125,7 @@
 "cu" = (/obj/structure/bed/chair/comfy/captain{name = "Comfy chair"},/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "cv" = (/obj/structure/bed/chair/comfy/captain{name = "Comfy Chair"},/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
 "cw" = (/obj/item/device/radio/intercom{dir = 8; icon_state = "intercom"; name = "intercom"; pixel_x = 25; pixel_y = 0; tag = "icon-intercom (WEST)"},/turf/simulated/floor/tech/gray,/area/faction_base/oni/research)
-"cx" = (/obj/structure/window/reinforced{color = ""; dir = 8; health = 1e+007; name = "reinforced window"},/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
+"cx" = (/obj/machinery/vending/engivend,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "cy" = (/obj/machinery/light/colored/blue{icon_state = "blue1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/blacksite)
 "cz" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (WEST)"; icon_state = "orange1"; dir = 8},/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 4},/turf/simulated/floor/tech/gray,/area/faction_base/oni/blacksite)
 "cA" = (/obj/machinery/cryopod/oni,/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/turf/simulated/floor/tech/gray,/area/faction_base/oni/blacksite)
@@ -212,7 +212,7 @@
 "ed" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "ONI Research"; req_access = list(315)},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ee" = (/obj/machinery/atmospherics/unary/cryo_cell,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "ef" = (/obj/machinery/organ_printer/robot/mapped,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
-"eg" = (/obj/machinery/organ_printer/flesh/mapped{max_stored_matter = 1e+007},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"eg" = (/obj/machinery/vending/armory/medical,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eh" = (/obj/machinery/computer/mecha,/obj/machinery/light/colored/blue{icon_state = "blue1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ei" = (/obj/machinery/r_n_d/protolathe,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ej" = (/obj/machinery/robotic_fabricator,/obj/machinery/light/colored/blue{icon_state = "blue1"; dir = 8},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
@@ -251,12 +251,12 @@
 "eQ" = (/obj/structure/closet/secure_closet/miner,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "eR" = (/obj/machinery/floodlight/active/hi_cap,/turf/unsimulated/floor/dirt{icon = 'code/modules/halo/misc/TWS- Assests/floors/floors.dmi'},/area/faction_base/oni/digsite)
 "eS" = (/turf/simulated/wall/forerunner,/area/faction_base/oni/digsite)
-"eT" = (/obj/machinery/oxygen_pump/anesthetic{name = "surgery anesthetic"; pixel_y = 25},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"eT" = (/obj/machinery/organ_printer/flesh/mapped{matter = 1e+007; max_stored_matter = 1e+007},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eU" = (/obj/structure/table/steel_reinforced,/obj/item/bodybag,/obj/item/bodybag,/obj/item/bodybag,/obj/item/bodybag,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eV" = (/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eW" = (/obj/structure/morgue,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eX" = (/obj/item/device/radio/intercom{dir = 8; icon_state = "intercom"; name = "intercom"; pixel_x = 25; pixel_y = 0; tag = "icon-intercom (WEST)"},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
-"eY" = (/obj/machinery/optable,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"eY" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/circuitboard/mecha/hrunting/targeting,/obj/item/weapon/circuitboard/mecha/hrunting/targeting,/obj/item/weapon/circuitboard/mecha/hrunting/targeting,/obj/item/weapon/circuitboard/mecha/hrunting/targeting,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "eZ" = (/obj/machinery/light,/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fa" = (/obj/structure/morgue,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fb" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled,/area/faction_base/oni/hangar)
@@ -288,6 +288,7 @@
 "fB" = (/obj/machinery/light,/obj/machinery/vending/armory/attachment,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "fC" = (/obj/structure/window/reinforced/projresist{icon_state = "rwindow"; dir = 8},/obj/machinery/vending/armory/odstvend,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "fD" = (/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
+"fE" = (/obj/structure/table/steel_reinforced,/obj/item/weapon/circuitboard/mecha/hrunting/main,/obj/item/weapon/circuitboard/mecha/hrunting/main,/obj/item/weapon/circuitboard/mecha/hrunting/main,/obj/item/weapon/circuitboard/mecha/hrunting/main,/obj/item/weapon/circuitboard/mecha/hrunting/peripherals,/obj/item/weapon/circuitboard/mecha/hrunting/peripherals,/obj/item/weapon/circuitboard/mecha/hrunting/peripherals,/obj/item/weapon/circuitboard/mecha/hrunting/peripherals,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "fF" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{name = "Holotable - Scanning"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; dir = 2},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "fG" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{name = "Holotable - Scanning"; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; dir = 1},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "fH" = (/obj/structure/closet/crate{name = "Defensive AI Crate"},/obj/item/dumb_ai_chip,/obj/item/dumb_ai_chip,/obj/item/dumb_ai_chip,/turf/simulated/floor/tiled,/area/faction_base/oni/hangar)
@@ -299,6 +300,9 @@
 "fN" = (/obj/machinery/overmap_weapon_console/ship_scanning_console{dir = 8; icon = 'code/modules/halo/icons/machinery/computer.dmi'; icon_state = "holotable"; name = "Holotable - Scanning"},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "fO" = (/turf/simulated/floor/tiled/dark,/area/faction_base/oni)
 "fP" = (/turf/simulated/wall/r_wall,/area/faction_base/oni)
+"fQ" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/box/masks,/obj/item/weapon/storage/box/gloves,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"fR" = (/obj/structure/sink{icon_state = "sink"; dir = 8; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"fS" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{name = "surgery anesthetic"; pixel_y = -32},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -317,7 +321,7 @@ aaasatauasaUaWaWaWasasasasasasaDaDaDaDaeaeaeaeaeaeaeaeaeaeaeaeaeaDaDaDaDaDaDaDaD
 aaasfJaubPaWaWaWaWcicjcjcjcjfIaEaIaKaLaeaeamaoapavazapavapapaAaeaMcIcIfHaNaPaNaNaKflaDaDaaaaaaaaaaaaaa
 aaasckauaWaWaWaWaWdDcjdDcjdDcjaQaKaKaSaeaBaCaFaCaFaCaFaCaFaCaGaeaNaNaNaNfbaNaNaNaKaKaDaDaaaaaaaaaaaaaa
 aaasauauaWaWaWaWaWaWaWaWaWaWaWaTaKaKaXaeaHfmaJfmaJfmaJfmaJfmaOaebLaNaKaKaKaKaNaNaKcfaDaDaaaaaaaaaaaaaa
-aaasaufrcjcjcjaWaWaWaWaWaWaWaWcxaKaKaKaeaRaVaVaVaYaZaVaVbabbbcaeaNaNaKaKaKaKaNaNaKaKaDaDaaaaaaaaaaaaaa
+aaasaufrcjcjcjaWaWaWaWaWaWaWaWcaaKaKcxaeaRaVaVaVaYaZaVaVbabbbcaeaNaNaKaKaKaKaNaNaKaKaDaDaaaaaaaaaaaaaa
 aaasauaucjcjcjaWaWaWaWcjeAeAeDaDdbdbdcaeaeaeaeaeaeaebdbeaeaeaeaeddaNaDaDaDaDdedlaDaDaDaDaaaaaaaaaaaaaa
 aaasauaueGcjcjaWaWaWaWcjcjcjcjasdbdbdFdHdIdIdIdIdIdJdbdbdKaKaKaIaNaNaKdLdFdFdFdFdJdFdFaDaaaaaaaaaaaaaa
 aaasckauauauauauauauauauauauauaudbdbdMdNdNdNdNdNdNdOdbdbdKaKaKaKaNaNaKdLdFdFdFdFdFdFdFaDaaaaaaaaaaaaaa
@@ -328,7 +332,7 @@ aabfblbhbhbmbnbmbhbmbnbmbhbhbhbhdbdbdFdWdWdWdWdWdWdFdbdbdXdZeaeadZdZdZemeqeqdFdF
 aabfbpbhbhbmbnbmbhbmbnbmbhbhbhbqdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbeyeydbdbdbbrbrbrbsbrbrboaa
 aabfbtbhbhbmbnbmbhbmbnbmbhbhbubfeBeCdbdbdbdbdbdbdbdbeCdbdbdbdbeCdbdbdbdbdbdbdbeCdbdbdbbrbrbrbrbrbrboaa
 aabfbhbhbhbhbhbhbvbhbhbhbhbhbwbfbxbxbybzbAbBbCbxbxbxbxbDbKbEbxbFbGanbHbIbJbGananbHbFbMbrbNbNbObNbNbNaa
-aabfbhbhbQbQbRbSbTbUbRbhbhbhbVbfbxbWbCbCfybCbCbCbCbXbxbYbZcabxbFcbcdcccccccccccdfkbFbJbrbNcecgchclbNaa
+aabfbhbhbQbQbRbSbTbUbRbhbhbhbVbfbxbWbCbCfybCbCbCbCbXbxbYbZegbxbFcbcdcccccccccccdfkbFbJbrbNcecgchclbNaa
 aabfbfbfcmbhbfbfbfbfbfbfcnbfbfbfbxcocpbCcqbCbCcrbCbCcsbCbCbXbxbFctcucccvcccvcccccwbFbJcybNczcgcgcAbNaa
 aabfbfcBbhbhcCcDbhcSbfcEbhbhcEbfbxcFcGcHbxbCbCbxevevbxbCbCcJbxbFcKcLcMcNcOcPcQccccbFbJbrbNcRcgcgclbNaa
 aabfbfcTbhbhcUdabhbmbfcVbhbhcVbfbxcWcWcWbCbCbCevbCcXbxbCbCcYbxbFcccZcccZcccZccfFfGbFbJfKbNbNbNbNbNbNaa
@@ -336,13 +340,13 @@ aabfbfdfbhbhbhdqbhbnbfcVbhbhcVbfbxdgbCbCbCbCbCevdhbCbxbCbCdibxbFfLdjccccccccccfM
 aabfbfcTbhbhdrdabhbmbfcVbhbhcVbfbxdmbCbCbCdncXbxevevbxbCbCdobxbFbFbFbFdpccbFbFbFbFbFdkfOfPeEeFeFeFeFeE
 aabfbfdsbhbhfBfCfDcSbfcVbRbhcVbfbxdtbCbCdudvbCevbCcXbxbCbCdwbxbFdxdydzbJbJdAbJbJbJdzbJfOfPeEeFeFeFeFeE
 aabfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxdBbCbCdCdEbCevdhbCbxdGbCdYbxbFebbJbJecbJbJbJedbJbJbJfOfPeEeFeFeFeFeE
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxeebCbCefegbCbxevevbxbxcsbxbxbFehbJbJeiftbJejbFbJbJbFfPfPeEeFeFeFeFeE
-aaajajajajajajajajajajajajajajaabxekbCbCbCbCbCbCbCbCbCbCbCbCbCelbJbJbJenbJbJeoepeMeNepeOeOeOeEeFeFeFeE
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxeebCbCefeTbCbxevevbxbxcsbxbxbFehbJeYeiftbJejbFbJbJbFfPfPeEeFeFeFeFeE
+aaajajajajajajajajajajajajajajaabxekbCbCbCbCbCbCbCbCbCbCbCbCbCelbJbJfEenbJbJeoepeMeNepeOeOeOeEeFeFeFeE
 aaajajajajajajajajajajajajajajaabxerbCesbCbCbCdGbCbCbCbCdGbCbCetbJbJbJbJbJbJeuepePePePePePeQeOeOeOeFeE
 aaajajajajajajajajajajajajajajaabxbxevbxbxbxevbxbxbxevbxbxbxbxbFewexezeKeHbJeuepePePePePePePePeReOeOeE
-aaajajajajajajajajajajajajajajaabxeLbCeTbxeLbCeTbxeUbCeVbxbxbxbFbFbFbFbFbFfubFepePePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxbCbCbCbxbCbCbCbxeWbCeXbxbxbxeEeEeEeEbFaxaxbFeOeRePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxbCeYeZbxbCeYeZbxfafxfcbxbxbxeEeEeEeEbFfefvbFeEeOePePePePePePePePeOeE
+aaajajajajajajajajajajajajajajaabxeLbCfQbxeLbCfQbxeUbCeVbxbxbxbFbFbFbFbFbFfubFepePePePePePePePePePeOeE
+aaajajajajajajajajajajajajajajaabxfRbCbCbxfRbCbCbxeWbCeXbxbxbxeEeEeEeEbFaxaxbFeOeRePePePePePePePePeOeE
+aaajajajajajajajajajajajajajajaabxbCfSeZbxbCfSeZbxfafxfcbxbxbxeEeEeEeEbFfefvbFeEeOePePePePePePePePeOeE
 aaajajajajajajajajajajajajajajaabxbxbxbxbxbxbxbxbxbxbxbxbxbxbxeEeEeEeEbFfwaxbFeEeOeSfdfdfdfdfdfdfdeSaa
 aaajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeEeEeEeEbFbFbFbFeEeOeSfdfdfdfdfdfdfdeSaa
 aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
