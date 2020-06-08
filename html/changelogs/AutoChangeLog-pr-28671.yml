@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - bugfix: "Rejuvenate now reapplies eye color, tattoos, etc."
