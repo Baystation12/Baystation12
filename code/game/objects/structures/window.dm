@@ -563,7 +563,6 @@
 /obj/structure/window/reinforced/projresist
 	name = "coated window"
 	desc = "A thin sheen covers this window. It looks incredibly hard to destroy with guns."
-	maxhealth = 500
 	icon_state = "rwindow"
 	basestate = "rwindow"
 	reinf = 1
