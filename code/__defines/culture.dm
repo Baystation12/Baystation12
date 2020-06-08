@@ -153,6 +153,8 @@
 #define CULTURE_UNATHI              "Moghes Hegemony"
 
 #define HOME_SYSTEM_MOGHES          "Moghes"
+#define HOME_SYSTEM_OUERE			"Ouere"
+#define HOME_SYSTEM_OFFWORLD		"Off World"
 
 #define FACTION_UNATHI_POLAR        "Polar Clans"
 #define FACTION_UNATHI_DESERT       "Desert Clans"
