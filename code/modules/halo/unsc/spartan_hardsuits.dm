@@ -30,6 +30,8 @@
 
 	air_type = /obj/item/weapon/tank/oxygen
 	cell_type = /obj/item/weapon/cell/infinite/microfusion_cell
+	boot_type = /obj/item/clothing/shoes/magboots/spartan
+	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/mjolnir_mk4
 	name = "Mark IV MJOLNIR Powered Assault Armor"
@@ -38,8 +40,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan
 	helm_type = /obj/item/clothing/head/helmet/spartan
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/mjolnir_mk5
 	name = "Mark V Mjolnir Powered Assault Armor"
@@ -48,8 +48,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/mjolnir_mk5_gungir
 	name = "Mark V GUNGIR-class Mjolnir Powered Assault Armor "
@@ -58,8 +56,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv_gungnir
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_gungnir
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 //Disabled due to missing gear in the code)
 /*
@@ -70,8 +66,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_commando
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 */
 
 //Disabled due to missing gear in the code)
@@ -83,8 +77,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_airassault
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 */
 
 //Disabled due to missing gear in the code)
@@ -96,8 +88,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_noblesix
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 */
 
 //Donator Spartan Rigsuits, path must contain the ckey FIRST to make searching easier while ingame.
@@ -109,8 +99,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/praetor
 	helm_type = /obj/item/clothing/head/helmet/spartan/praetor
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/burnedsweetpotato_burnt
 	name = "Mark IV MJOLNIR Powered Assault Armor Burnt"
@@ -119,8 +107,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/burnedsweetpotato
 	helm_type = /obj/item/clothing/head/helmet/spartan/burnedsweetpotato
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/flaksim_mk4
 	name = "Mark IV MJOLNIR Powered Assault Armor Flak"
@@ -129,8 +115,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkiv_flak
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkiv_flak
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/focksinabocks_security
 	name = "Mark IV MJOLNIR Powered Assault Armor Security"
@@ -139,8 +123,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkiv_security
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkiv_security
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/franzemmerich
 	name = "Mark IV MJOLNIR Powered Assault Armor Franz"
@@ -149,8 +131,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv_franz
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_franz
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/kelso_recon
 	name = "Mark IV MJOLNIR Powered Assault Armor Recon"
@@ -159,8 +139,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkiv_kelso
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkiv_kelso
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/kozi_hassar
 	name = "Mark IV MJOLNIR Powered Assault Armor Hassar"
@@ -169,8 +147,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/kozi_spartan
 	helm_type = /obj/item/clothing/head/helmet/spartan/kozi_spartan
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/liam_gallagher_scarred_eva
 	name = "Mark IV MJOLNIR Powered Assault Armor Scarred EVA"
@@ -179,8 +155,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/liam_gallagher
 	helm_type = /obj/item/clothing/head/helmet/spartan/liam_gallagher
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/liam_gallagher_grenadier
 	name = "Mark IV MJOLNIR Powered Assault Armor Grenadier"
@@ -189,8 +163,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv_grenadier
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_grenadier
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/mann_mk5_gungir
 	name = "Mark V GUNGIR-class MJOLNIR Powered Assault Armor"
@@ -199,8 +171,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv_gungnir_mann
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_gungnir_mann
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/maxattacker_mk5_gungir_navy
 	name = "Mark V GUNGIR-class MJOLNIR Powered Assault Armor Navy"
@@ -209,8 +179,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv_gungnir_navy
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_gungnir_navy
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/spartan_killer_scarred_eva
 	name = "Mark IV MJOLNIR Powered Assault Armor Scarred EVA"
@@ -219,8 +187,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/spartan_killer
 	helm_type = /obj/item/clothing/head/helmet/spartan/spartan_killer
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/pinstripe
 	name = "Mark IV MJOLNIR Powered Assault Armor"
@@ -229,8 +195,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/pinstripe
 	helm_type = /obj/item/clothing/head/helmet/spartan/pinstripe
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/socks_mk4_domeprotector
 	name = "Mark IV MJOLNIR Powered Assault Armor Special Issue Dome Protector"
@@ -239,8 +203,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkiv_domeprotector
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkiv_domeprotector
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/stingray
 	name = "Ryan-074's MJOLNIR Powered Assault Armor"
@@ -249,8 +211,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/stingray
 	helm_type = /obj/item/clothing/head/helmet/spartan/stingray
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/mark6_wehraboo
 	name = "Mark VI MJOLNIR Powered Assault Armor"
@@ -259,8 +219,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/markvi_wehraboo
 	helm_type = /obj/item/clothing/head/helmet/spartan/markvi_wehraboo
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/amy_mk5_airassault
 	name = "Mark V MJOLNIR Powered Assault Armor Air Assault (customised)"
@@ -269,8 +227,6 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/mkv_airassault_amy
 	helm_type = /obj/item/clothing/head/helmet/spartan/mkv_airassault_amy
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
 
 /obj/item/weapon/rig/spartan/ghostdex
 	name = "Mark IV MJOLNIR Powered Assault Armor"
@@ -279,5 +235,3 @@
 
 	chest_type = /obj/item/clothing/suit/armor/special/spartan/ghostdex
 	helm_type = /obj/item/clothing/head/helmet/spartan/ghostdex
-	boot_type = /obj/item/clothing/shoes/magboots/spartan
-	glove_type = /obj/item/clothing/gloves/spartan
