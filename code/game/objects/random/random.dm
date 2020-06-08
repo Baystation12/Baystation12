@@ -152,6 +152,7 @@
 				/obj/item/weapon/storage/box/freezer = 1,
 				/obj/item/stack/nanopaste = 1)
 
+
 /obj/random/medical/lite
 	name = "Random Medicine"
 	desc = "This is a random simple medical item."
@@ -179,13 +180,16 @@
 	icon_state = "firstaid"
 
 /obj/random/firstaid/spawn_choices()
-	return list(/obj/item/weapon/storage/firstaid/regular = 4,
+	return list(/obj/item/weapon/storage/firstaid/regular = 5,
 				/obj/item/weapon/storage/firstaid/toxin = 3,
 				/obj/item/weapon/storage/firstaid/o2 = 3,
 				/obj/item/weapon/storage/firstaid/adv = 2,
 				/obj/item/weapon/storage/firstaid/combat = 1,
 				/obj/item/weapon/storage/firstaid/empty = 2,
-				/obj/item/weapon/storage/firstaid/fire = 3)
+				/obj/item/weapon/storage/firstaid/fire = 3,
+				/obj/item/weapon/storage/firstaid/erk = 2,
+				/obj/item/weapon/storage/firstaid/unsc = 2,
+				/obj/item/weapon/storage/firstaid/combat/unsc = 1)
 
 /obj/random/contraband
 	name = "Random Illegal Item"
@@ -296,6 +300,21 @@
 				/obj/item/weapon/gun/projectile/m739_lmg= 3,
 				/obj/item/weapon/gun/projectile/m739_lmg= 1,
 				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 3)
+
+/obj/random/projectile/unsc/spawn_choices()
+	return list (/obj/item/weapon/gun/projectile/ma5b_ar/MA37 = 8,
+				/obj/item/weapon/gun/projectile/ma5b_ar/MA3 = 6,
+				/obj/item/weapon/gun/projectile/ma5b_ar = 4,
+				/obj/item/weapon/gun/projectile/br55 = 1,
+				/obj/item/weapon/gun/projectile/m7_smg = 4,
+				/obj/item/weapon/gun/projectile/m7_smg/silenced = 1,
+				/obj/item/weapon/gun/projectile/shotgun/pump/m45_ts = 5,
+				/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts = 1,
+				/obj/item/weapon/gun/projectile/m392_dmr = 1,
+				/obj/item/weapon/gun/projectile/m6d_magnum/m6b = 8,
+				/obj/item/weapon/gun/projectile/m6d_magnum/m6b/police = 6,
+				/obj/item/weapon/gun/projectile/m6d_magnum = 4,
+				/obj/item/weapon/gun/projectile/m6c_magnum_s = 1)
 
 /obj/random/handgun
 	name = "Random Handgun"
