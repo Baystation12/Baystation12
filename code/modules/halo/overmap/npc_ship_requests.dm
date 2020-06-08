@@ -176,7 +176,7 @@
 		origin_ship.our_fleet.assign_leader(origin_ship)
 	if(!origin_ship || !istype(origin_ship) || !origin_ship.our_fleet)
 		return
-	origin_ship.our_fleet.add_tofleet(ship_source)
+	origin_ship.our_fleet.add_ship(ship_source)
 
 /datum/npc_ship_request/give_control
 	request_name = "Give Fleet Control"

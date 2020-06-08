@@ -157,9 +157,19 @@
 	walk(src,0)
 	if(isnull(loc))
 		return
-	if(our_fleet && our_fleet.leader_ship != src && our_fleet.leader_ship.loc != null)
-		target_loc = pick(trange(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
-		return
+
+	if(our_fleet)
+
+		//do we have a valid fleet leader to follow?
+		if(our_fleet.leader_ship && our_fleet.leader_ship != src && our_fleet.leader_ship.loc != null)
+			target_loc = pick(trange(FLEET_STICKBY_RANGE,our_fleet.leader_ship.loc))
+			return
+
+		//does our fleet have an objective?
+		if(our_fleet.fleet_target)
+			target_loc  = pick(trange(FLEET_STICKBY_RANGE,our_fleet.fleet_target))
+			return
+
 	var/list/sectors_onmap = list()
 	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
 		var/obj/effect/overmap/om_obj = locate(type)
