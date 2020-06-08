@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "sdv_corvette.dmm"
 #include "code\_macros.dm"
 #include "code\client_macros.dm"
 #include "code\hub.dm"
@@ -1902,6 +1903,7 @@
 #include "code\modules\halo\unsc\simple_mobs.dm"
 #include "code\modules\halo\unsc\spartan.dm"
 #include "code\modules\halo\unsc\spartan_gear.dm"
+#include "code\modules\halo\unsc\spartan_hardsuits.dm"
 #include "code\modules\halo\unsc\jobs\_base.dm"
 #include "code\modules\halo\unsc\jobs\ai.dm"
 #include "code\modules\halo\unsc\jobs\crew.dm"
