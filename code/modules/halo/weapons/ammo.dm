@@ -485,7 +485,7 @@
 
 /obj/item/projectile/bullet/g40mm
 	name = "shell"
-	fire_sound = 'sound/weapons/empty.ogg'
+	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
 	damage = 60 //it's less dangerous than a shotgun slug with its low AP, but 40mm grenades do obliterate unarmoured flesh
 	armor_penetration = 5
 	step_delay = 0.9
@@ -505,6 +505,7 @@
 
 /obj/item/projectile/bullet/g40mm/frag/on_impact(var/atom/target)
 	if (get_dist(starting, loc)>2)
+		playsound(src.loc, 'sound/effects/explosion1.ogg', 30, 1, -3)
 		src.fragmentate(target, 50, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1))
 	..()
 

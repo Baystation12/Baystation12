@@ -107,4 +107,5 @@
 	weapon_slot = "underbarrel rail"
 	ammotype = /obj/item/ammo_casing/g40mm
 	int_mag_size = 1
+	alt_fire_loadsout = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
 	ejection = 0
