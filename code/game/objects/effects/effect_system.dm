@@ -222,6 +222,9 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/bad
 	time_to_live = 200
 
+/obj/effect/effect/smoke/bad/cov
+	color = "#8d778f"
+
 /obj/effect/effect/smoke/bad/Move()
 	..()
 	for(var/mob/living/carbon/M in get_turf(src))
@@ -342,6 +345,9 @@ steam.start() -- spawns the effect
 
 /datum/effect/effect/system/smoke_spread/bad
 	smoke_type = /obj/effect/effect/smoke/bad
+
+/datum/effect/effect/system/smoke_spread/bad/cov
+	smoke_type = /obj/effect/effect/smoke/bad/cov
 
 /datum/effect/effect/system/smoke_spread/sleepy
 	smoke_type = /obj/effect/effect/smoke/sleepy
