@@ -192,6 +192,8 @@
 	var/breathing_sound = 'sound/voice/monkey.ogg'
 
 	var/list/item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null) //A list (x,y) of offsets to apply to inhand images, each list corrresponds to a dir.
+	var/list/inhand_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null) //Align a test item with the right hand when facing south for n/s.
+	var/inter_hand_dist = 12 //Measured from bottom right-middle of left hand to bottom left-middle of right hand
 	//NOTE FOR ABOVE: Posive X moves right, positive Y moves up.
 	var/melee_force_multiplier = 1
 	var/equipment_slowdown_multiplier = 1	//for strong or weak species
