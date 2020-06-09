@@ -1,21 +1,11 @@
 
 /obj/structure/destructible/steel_barricade
-	name = "steel barricade"
+	name = "Combat barrier"
 	icon = 'code/modules/halo/structures/structures.dmi'
 	icon_state = "barricade"
 	flags = ON_BORDER
 	cover_rating = 50
 	repair_material_name = "steel"
-
-/obj/structure/destructible/plasteel_barricade
-	name = "plasteel barricade2"
-	icon = 'code/modules/halo/structures/structures.dmi'
-	icon_state = "barricade2"
-	flags = ON_BORDER
-	cover_rating = 50 //Lower intercept, higher health
-	maxHealth = 400
-	loot_types = list(/obj/item/stack/material/plasteel)
-	repair_material_name = "plasteel"
 
 /obj/structure/destructible/steel_barricade/update_icon()
 	. = ..()
@@ -26,10 +16,30 @@
 	else
 		icon_state = "barricade_dmg2"
 
-/obj/structure/destructible/marine_barricade
-	name = "marine barricade"
+/obj/structure/destructible/plasteel_barricade
+	name = "Reinforced Combat barrier"
 	icon = 'code/modules/halo/structures/structures.dmi'
-	icon_state = "marine barricade"
+	icon_state = "barricade2"
+	flags = ON_BORDER
+	cover_rating = 50 //Lower intercept, higher health
+	maxHealth = 400
+	loot_types = list(/obj/item/stack/material/plasteel)
+	repair_material_name = "plasteel"
+
+/obj/structure/destructible/plasteel_barricade/update_icon()
+	. = ..()
+	if(health > maxHealth * 0.66)
+		icon_state = "barricade2"
+	else if(health > maxHealth * 0.33)
+		icon_state = "barricade2_dmg1"
+	else
+		icon_state = "barricade2_dmg2"
+
+
+/obj/structure/destructible/marine_barricade
+	name = "M72 Mobile Barrier"
+	icon = 'code/modules/halo/structures/structures.dmi'
+	icon_state = "fullbarricade"
 	flags = ON_BORDER
 	cover_rating = 95 //High intercept, low health
 	maxHealth = 300
@@ -38,14 +48,22 @@
 	repair_material_name = "plasteel"
 	climbable = 0
 
-/obj/structure/destructible/plasteel_barricade/update_icon()
+/obj/structure/destructible/marine_barricade/update_icon()
 	. = ..()
-	if(dir == NORTH || dir == SOUTH)
-		pixel_x = -6
 
 	if(dir == EAST || dir == WEST)
 		plane = ABOVE_HUMAN_PLANE
 		layer = ABOVE_HUMAN_LAYER
+
+/obj/structure/destructible/marine_barricade/update_icon()
+	. = ..()
+	if(health > maxHealth * 0.66)
+		icon_state = "fullbarricade"
+	else if(health > maxHealth * 0.33)
+		icon_state = "fullbarricade_dmg1"
+	else
+		icon_state = "fullbarricade_dmg2"
+
 
 /obj/structure/destructible/covenant_barricade
 	name = "covenant barricade"
