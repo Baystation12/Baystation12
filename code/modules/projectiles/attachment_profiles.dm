@@ -25,7 +25,7 @@
 		"vertical grip" = "vertical-grip",
 		"underslung shotgun" = "Underbarrel-Shotgun",
 		"MA5 basic upper" = "MA5-Top-Basic",
-		"underslung grenade launcher" = "underslung grenade launcher",
+		"M301 Grenade Launcher" = "MA5-NadeLauncher",
 		"flashlight attachment" = "Underbarrel-Flashlight",
 		"MA5 railed upper" = "MA5-Top-Rails")
 
@@ -40,7 +40,7 @@
 	"vertical grip" = list(-4,2),
 	"underslung shotgun" = list(0,0),
 	"MA5 basic upper" = list(0,0),
-	"underslung grenade launcher" = list(0,0),
+	"M301 Grenade Launcher" = list(0,0),
 	"flashlight attachment" = list(0,0),
 	"MA5 railed upper" = list(0,0)
 	)
@@ -156,7 +156,8 @@
 		"vertical grip" = "vertical-grip",
 		"red dot sight" = "red-dot",
 		"acog sight" = "acog-scope",
-		"SOE underslung shotgun" = "Underbarrel-Shotgun-SOE")
+		"SOE underslung shotgun" = "Underbarrel-Shotgun-SOE",
+		"M301 Grenade Launcher" = "MA5-NadeLauncher",)
 	weapon_pixel_offsets = list(\
 	"suppressor" = list(4,0),
 	"SOE underslung shotgun" = list(0,0),
