@@ -31,7 +31,7 @@
 		if(!command.our_ai)
 			command.output_to = src
 			command.our_ai = ai
-		command_names[command] = i
+		command_names[command.name] = command
 	var/choice = input(user,"Prime for what command?","Command priming","Cancel") in command_names + list("Cancel")
 	if(choice == "Cancel")
 		return
