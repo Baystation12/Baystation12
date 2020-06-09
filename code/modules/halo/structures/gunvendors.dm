@@ -157,7 +157,7 @@
 					/obj/item/ammo_casing/g40mm/he = 8,
 					/obj/item/ammo_casing/g40mm/frag = 8,
 					/obj/item/ammo_casing/g40mm/smoke = 8,
-					/obj/item/ammo_casing/g40mm/illumination = 8))
+					/obj/item/ammo_casing/g40mm/illumination = 8)
 
 /obj/machinery/vending/armory/odstvend
 	name = "Armtech 5530 Weaponry"
@@ -343,7 +343,7 @@
 	icon_state ="ironhammer" // SPRITES
 	icon_deny = "ironhammer-deny"
 	req_access = list(access_unsc)
-	products = list(/obj/item/bodybag/cryobag = 3
+	products = list(/obj/item/bodybag/cryobag = 3,
 					/obj/item/weapon/storage/firstaid/unsc = 10,
 					/obj/item/weapon/reagent_containers/syringe/ld50_syringe/triadrenaline = 10,
 					/obj/item/weapon/storage/firstaid/fire = 2,
