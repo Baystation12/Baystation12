@@ -12,7 +12,7 @@
 	name = "Type-0 Visual Occlusion Device"
 	desc = "This simple device creates a protective screen of smoke. Fuse 2 seconds. Do not swallow. Prophet approved(tm)."
 	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
-	/datum/effect/effect/system/smoke_spread/bad/smoke/cov
+
 
 /obj/item/weapon/grenade/smokebomb/New()
 	..()
