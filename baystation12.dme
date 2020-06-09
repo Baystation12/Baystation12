@@ -1941,6 +1941,7 @@
 #include "code\modules\halo\vehicles\types\ghost.dm"
 #include "code\modules\halo\vehicles\types\mongoose.dm"
 #include "code\modules\halo\vehicles\types\pelican.dm"
+#include "code\modules\halo\vehicles\types\prophet_chair.dm"
 #include "code\modules\halo\vehicles\types\scorpion.dm"
 #include "code\modules\halo\vehicles\types\shadow.dm"
 #include "code\modules\halo\vehicles\types\SOEIV.dm"

@@ -18,6 +18,7 @@
 	burn_mod = 0.8 //ditto for burn
 	pain_mod = 0.6 //Lower pain damage taken than sangheili
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(1,0),null)
+	inhand_icon_offsets = list(list(-2,0),list(2,0),null,list(0,0),null,null,null,list(0,0),null)
 	slowdown = -0.5
 	can_force_door = 1
 	additional_langs = list("Sign Language")

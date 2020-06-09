@@ -14,7 +14,6 @@
 
 	ammo_containers = newlist(/obj/item/ammo_magazine/cobra_cannon,/obj/item/ammo_magazine/cobra_sniper)
 
-	vehicle_move_delay = 4.5
 	exposed_positions = list("passenger"=5)
 
 	occupants = list(2,1)

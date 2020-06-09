@@ -371,8 +371,9 @@ var/global/list/damage_icon_parts = list()
 		I.appearance_flags = RESET_COLOR
 		I.color = UW.color
 		if(species.icon_template)//Is the species-size greater than 32x32? Probably needs repositioning.
-			I.pixel_x = species.item_icon_offsets[1]
-			I.pixel_y = species.item_icon_offsets[2]
+			var/list/offset = species.item_icon_offsets[dir]
+			I.pixel_x = offset[1]
+			I.pixel_y = offset[2]
 
 		overlays_standing[UNDERWEAR_LAYER] += I
 
@@ -611,36 +612,34 @@ var/global/list/damage_icon_parts = list()
 		if(hud_used)
 			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
 
-/mob/living/carbon/human/get_mob_offset_for(var/obj/item/a)
-	var/obj/item/clothing/c = a
-	if(istype(a,/obj/item/clothing) && (species.get_bodytype(src) in c.species_restricted))
-		if (!("exclude" in c.species_restricted)) // are they included?
-			return list(0,0)//Already modified for them, let's not apply any more modifications.
-	if(species.get_bodytype(src) in a.sprite_sheets)
-		return list(0,0) //Custom sprite sheet, let's not apply offsets.
-
-	. = species.item_icon_offsets[dir]
+/mob/living/carbon/human/get_mob_offset_for(var/img,var/get_inhand_offset = 0)
+	var/obj/item/a = img
+	if(istype(a))
+		var/obj/item/clothing/c = a
+		if(istype(a,/obj/item/clothing) && (species.get_bodytype(src) in c.species_restricted))
+			if (!("exclude" in c.species_restricted)) // are they included?
+				return list(0,0)//Already modified for them, let's not apply any more modifications.
+		if(species.get_bodytype(src) in a.sprite_sheets)
+			return list(0,0) //Custom sprite sheet, let's not apply offsets.
+	if(get_inhand_offset)
+		. = species.inhand_icon_offsets[dir]
+	else
+		. = species.item_icon_offsets[dir]
 	if(isnull(.))
 		return list(0,0)
 
 /mob/living/carbon/human/proc/apply_hand_offsets(var/image/image,var/right_hand = 0)
-	var/list/offset_list = species.item_icon_offsets[dir]
-	if(isnull(offset_list))
-		return
-	var/extra_mod_x = 0
-	switch(dir)
-		if(NORTH)
-			if(r_hand)
-				extra_mod_x = -species.pixel_offset_x/2
-			else
-				extra_mod_x = species.pixel_offset_x/2
-		if(SOUTH)
-			if(!r_hand)
-				extra_mod_x = -species.pixel_offset_x/2
-			else
-				extra_mod_x = species.pixel_offset_x/2
+	var/list/offset_list = get_mob_offset_for(image,1)
+	var/extra_offset_x = 0
+	if(offset_list[1] != 0 || offset_list[2] != 0)
+		if(!right_hand)
+			switch(dir)
+				if(SOUTH)
+					extra_offset_x = species.inter_hand_dist
+				if(NORTH)
+					extra_offset_x = -species.inter_hand_dist //North facing, right hand is now on the right
 
-	image.pixel_x += offset_list[1] + extra_mod_x
+	image.pixel_x += offset_list[1] + extra_offset_x
 	image.pixel_y += offset_list[2]
 
 /mob/living/carbon/human/update_inv_handcuffed(var/update_icons=1)
