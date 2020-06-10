@@ -127,7 +127,12 @@ datum/admins/proc/notes_gethtml(var/ckey)
 		discord_report["note"] = "New Note for [key]:\n[P.content]\nby [P.author] ([P.rank]) on [P.timestamp]"
 		discord_report["ckey"] = "[key]"
 		//Send the note
-		world.Export("[config.discord_bot_address]/newnote?[list2params(discord_report)]")
+		if(config.use_request_library)
+			spawn(-1)
+				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/newnote?", "[list2params(discord_report)]")
+		else
+			spawn(-1)
+				world.Export("[config.discord_bot_address]/newnote?[list2params(discord_report)]")
 
 
 /proc/notes_del(var/key, var/index)
