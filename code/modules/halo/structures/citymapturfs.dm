@@ -1,39 +1,6 @@
 /datum/map/geminus_city
 	base_turf_by_z = list("1" = /turf/simulated/floor/planet/dirt)
 
-//Tech Floors
-
-/turf/simulated/floor/tech
-	icon = 'maps/geminus_city/citymap_icons/floors.dmi'
-	icon_state = "techfloor_grid"
-
-/turf/simulated/floor/tech/white
-	icon_state = "techfloor_white"
-
-/turf/simulated/floor/tech/orange
-	icon_state = "techfloor_orangefulltwogrid"
-
-/turf/simulated/floor/tech/gray
-	icon_state = "techfloor_gray"
-
-
-/turf/simulated/floor/light/tech_neon
-	icon = 'maps/geminus_city/citymap_icons/floors.dmi'
-	icon_state = "techfloor_neon"
-	luminosity = 2
-	New()
-		..()
-		update_icon()
-
-/turf/simulated/floor/light/tech_neon/tech_white
-	icon_state = "techfloor_neonwhte"
-
-/turf/simulated/floor/light/tech_neon/side
-	icon_state = "techfloor_lightedcorner"
-
-/turf/simulated/floor/light/tech_neon/side_grid
-	icon_state = "techfloor_lightedcorner_grid"
-
 
 
 
