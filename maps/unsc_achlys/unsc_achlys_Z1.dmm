@@ -216,7 +216,7 @@
 "eh" = (/obj/effect/decal/cleanable/dirt,/obj/structure/vent,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "ei" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
 "ej" = (/obj/effect/decal/cleanable/blood/splatter,/obj/effect/gibspawner/human,/turf/simulated/floor/plating,/area/achlys/nine/z1commandhallway)
-"ek" = (/obj/machinery/door/blast/regular,/turf/simulated/wall/strong,/area/achlys)
+"ek" = (/obj/machinery/door/blast/regular,/turf/simulated/floor/plating,/area/achlys)
 "el" = (/obj/effect/decal/cleanable/blood/splatter,/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "em" = (/obj/structure/floodspawner{spawn_spot_x = 62; spawn_spot_y = 66},/turf/simulated/floor/plating,/area/achlys/eight/z1cargohallway)
 "en" = (/obj/effect/floor_decal/corner/black/diagonal,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/blood/writing,/turf/simulated/floor/tiled/dark,/area/achlys/three/z1sechallway)
