@@ -28,6 +28,7 @@
 	var/list/blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall/wood)
 	var/list/blend_objects = list(/obj/machinery/door, /obj/machinery/door/airlock/halo, /obj/structure/window/reinforced/polarized/full, /obj/structure/window/shuttle, /obj/structure/window/phoronreinforced/full) // Objects which to blend with
 	var/list/noblend_objects = list(/obj/machinery/door/window) //Objects to avoid blending with (such as children of listed blend objects.
+	can_build_wall = TRUE
 
 /turf/simulated/wall/New(var/newloc, var/materialtype, var/rmaterialtype)
 	..(newloc)

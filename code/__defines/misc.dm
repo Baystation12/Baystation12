@@ -203,3 +203,6 @@
 #define RAD_LEVEL_MODERATE 5
 #define RAD_LEVEL_HIGH 25
 #define RAD_LEVEL_VERY_HIGH 75
+
+//Request Lib
+#define REQUEST_LIBRARY_LOCATION (world.system_type == MS_WINDOWS ? "lib/gotbyond.dll" : "lib/gotbyond.so")

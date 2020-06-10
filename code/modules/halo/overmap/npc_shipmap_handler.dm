@@ -47,17 +47,22 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 		world.maxz = max_z_cached
 		return max_z_cached
 
-/datum/npc_ship_map_handler/proc/spawn_ship(var/datum/faction/F, var/amount = 1, var/turf/spawn_loc)
+/datum/npc_ship_map_handler/proc/spawn_ship(var/datum/faction/F, var/amount = 1, var/turf/spawn_loc, var/overpowered = 0)
 	//pick a random location
 	if(!spawn_loc)
 		spawn_loc = pick(GLOB.overmap_tiles_uncontrolled)
 
+	var/list/source_ship_types = F.ship_types
+	if(overpowered)
+		source_ship_types = F.overpowered_ship_types
+
 	//just in case
-	if(!F.ship_types.len)
-		log_and_message_admins("SHIPS ERROR: Attempted to spawn [F.name] ships but there were none to choose from!")
+	if(!source_ship_types.len)
+		log_and_message_admins("SHIPS ERROR: Attempted to spawn [F.name] ships but there were none to choose from \
+			(overpowered:[overpowered])!")
 		return
 
-	var/ship_type = pick(F.ship_types)
+	var/ship_type = pick(source_ship_types)
 	var/ships_spawned = list()
 	if(ship_type)
 		for(var/i = 0, i < amount, i++)

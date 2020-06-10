@@ -31,6 +31,7 @@
 	var/base_desc
 	var/destroyed_reason = null
 	var/list/ship_types = list()
+	var/list/overpowered_ship_types = list()
 	var/list/npc_ships = list()
 	var/list/player_ships = list()
 	var/list/all_ships = list()

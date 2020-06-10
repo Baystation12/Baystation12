@@ -4,8 +4,12 @@
 		parameters["key"] = config.comms_password
 		parameters["channel"] = channel
 		parameters["message"] = message
-		spawn(-1)
-			world.Export("[config.discord_bot_address]/relayMessage?[list2params(parameters)]")
+		if(config.use_request_library)
+			spawn(-1)
+				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/relayMessage", "[list2params(parameters)]")
+		else
+			spawn(-1)
+				world.Export("[config.discord_bot_address]/relayMessage?[list2params(parameters)]")
 
 /proc/ahelp2discord(client/source, client/target, msg)
 	if(config.use_discord_bot && config.discord_bot_address)
@@ -25,8 +29,12 @@
 			params["type"] = "adminpm"
 			params["trg_key"] = target.key
 			params["trg_char"] = target.mob.real_name || target.mob.name
-		spawn(-1)
-			world.Export("[config.discord_bot_address]/ahelp?[list2params(params)]")
+		if(config.use_request_library)
+			spawn(-1)
+				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/ahelp", "[list2params(params)]")
+		else
+			spawn(-1)
+				world.Export("[config.discord_bot_address]/ahelp?[list2params(params)]")
 
 //Message the general channel on server startup
 /hook/startup/proc/notifyDiscord()

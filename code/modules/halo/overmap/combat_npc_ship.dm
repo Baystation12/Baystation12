@@ -136,7 +136,7 @@
 
 //UNSC//
 /obj/effect/overmap/ship/npc_ship/combat/unsc
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/prowler.dmi','code/modules/halo/icons/overmap/corvette.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/prowler.dmi')
 	faction = "UNSC"
 	ship_datums = list(/datum/npc_ship/unsc_patrol)
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/unsc,/datum/npc_ship_request/fire_on_target/unsc,/datum/npc_ship_request/control_fleet/unsc,/datum/npc_ship_request/add_to_fleet/unsc,/datum/npc_ship_request/give_control/unsc)
@@ -147,10 +147,11 @@
 	name = "UNSC [name]"
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/corvette.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/corvette.dmi','code/modules/halo/icons/overmap/Cruiser.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/Cruiser.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2 SECONDS, /obj/item/projectile/overmap/mac/npc = 15 SECONDS)
 
 //INNIE//
@@ -207,7 +208,7 @@
 	"Vanguard of Charity",
 	"Faithful's Endeavour"
 	)
-	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi','code/modules/halo/icons/overmap/SDV.dmi')
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/covshuttle2.dmi')
 	faction = "Covenant"
 	radio_language = "Sangheili"
 	radio_channel = RADIO_COV
@@ -215,9 +216,11 @@
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov,/datum/npc_ship_request/control_fleet/cov,/datum/npc_ship_request/add_to_fleet/cov,/datum/npc_ship_request/give_control/cov)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed
+	icons_pickfrom_list = list('code/modules/halo/icons/overmap/SDV.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.1 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 20 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood
