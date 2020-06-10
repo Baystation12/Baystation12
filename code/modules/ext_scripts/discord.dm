@@ -6,7 +6,7 @@
 		parameters["message"] = message
 		if(config.use_request_library)
 			spawn(-1)
-				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/relayMessage?", "[list2params(parameters)]")
+				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/relayMessage", "[list2params(parameters)]")
 		else
 			spawn(-1)
 				world.Export("[config.discord_bot_address]/relayMessage?[list2params(parameters)]")
@@ -31,7 +31,7 @@
 			params["trg_char"] = target.mob.real_name || target.mob.name
 		if(config.use_request_library)
 			spawn(-1)
-				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/ahelp?", "[list2params(params)]")
+				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/ahelp", "[list2params(params)]")
 		else
 			spawn(-1)
 				world.Export("[config.discord_bot_address]/ahelp?[list2params(params)]")

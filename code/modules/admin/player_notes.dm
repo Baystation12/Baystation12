@@ -129,7 +129,7 @@ datum/admins/proc/notes_gethtml(var/ckey)
 		//Send the note
 		if(config.use_request_library)
 			spawn(-1)
-				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/newnote?", "[list2params(discord_report)]")
+				call(REQUEST_LIBRARY_LOCATION, "sendGetRequest")("[config.discord_bot_address]/newnote", "[list2params(discord_report)]")
 		else
 			spawn(-1)
 				world.Export("[config.discord_bot_address]/newnote?[list2params(discord_report)]")
