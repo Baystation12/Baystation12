@@ -6,6 +6,7 @@
 	var/int_mag_size = 0
 	var/list/int_mag = list()
 	var/alt_fire_loadsound = null
+	var/alt_fire_ejectsound = null
 	var/fire_delay = 0 //An extra delay to add to user click_delay when firing this weapon
 	var/ejection = 1 //1 for eject automatically, -1 for caseless, 0 for manual ejection
 
@@ -76,6 +77,7 @@
 			contents -= casing
 			int_mag -= casing
 			casing.forceMove(user.loc)
+			spawn(1) playsound(src.loc alt_fire_ejectsound, 50,1)
 		to_chat(user,"<span class = 'notice'>[user] unloads [src]</span>")
 	else
 		to_chat(user,"<span class = 'notice'>[src] is already empty!</span>")
@@ -107,5 +109,7 @@
 	weapon_slot = "underbarrel rail"
 	ammotype = /obj/item/ammo_casing/g40mm
 	int_mag_size = 1
-	alt_fire_loadsound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
+//	alt_fire_loadsound = 'code/modules/halo/sounds/DMR_Reload_Sound_Effect.ogg'
+//	get a better sound ^
+//	alt_fire_ejectsound =
 	ejection = 0
