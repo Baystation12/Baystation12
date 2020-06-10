@@ -221,9 +221,10 @@
 /mob/living/simple_animal/hostile/proc/throw_nade(var/atom/attacked)
 	var/turf/atk_trf = get_turf(attacked)
 	primed_grenade = 0
-	var/obj/item/grenade/nade = new pick(possible_nades) (loc)
+	var/nadetype = pick(possible_nades)
+	var/obj/item/weapon/grenade/nade = new nadetype (loc)
 	nade.activate(src)
-	nade.throw_at(attacked)
+	nade.throw_at(atk_trf)
 
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	var/obj/vehicles/v = loc
