@@ -7,21 +7,21 @@
 	possible_wanted_items = list() //They are a pizza shop, not a bargainer.
 	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza   = TRADER_SUBTYPES_ONLY)
 
-	speech = list("hail_generic"    = "Hello! Welcome to ORIGIN, may I take your order?",
-				"hail_deny"         = "Beeeep... I'm sorry, your connection has been severed.",
+	speech = list(TRADER_HAIL_GENERIC    = "Hello! Welcome to ORIGIN, may I take your order?",
+				TRADER_HAIL_DENY         = "Beeeep... I'm sorry, your connection has been severed.",
 
-				"trade_complete"    = "Thank you for choosing ORIGIN!",
-				"trade_no_goods"    = "I'm sorry but we only take cash.",
-				"trade_blacklisted" = "Sir that's... highly illegal.",
-				"trade_not_enough"  = "Uhh... that's not enough money for pizza.",
-				"how_much"          = "That pizza will cost you VALUE CURRENCY.",
+				TRADER_TRADE_COMPLETE    = "Thank you for choosing ORIGIN!",
+				TRADER_NO_GOODS    = "I'm sorry but we only take cash.",
+				TRADER_NO_BLACKLISTED = "Sir that's... highly illegal.",
+				TRADER_NOT_ENOUGH  = "Uhh... that's not enough money for pizza.",
+				TRADER_HOW_MUCH          = "That pizza will cost you VALUE CURRENCY.",
 
-				"compliment_deny"   = "That's a bit forward, don't you think?",
-				"compliment_accept" = "Thanks, sir! You're very nice!",
-				"insult_good"       = "Please stop that, sir.",
-				"insult_bad"        = "Sir, just because I'm contractually obligated to keep you on the line for a minute doesn't mean I have to take this.",
+				TRADER_COMPLEMENT_FAILURE   = "That's a bit forward, don't you think?",
+				TRADER_COMPLEMENT_SUCCESS = "Thanks, sir! You're very nice!",
+				TRADER_INSULT_GOOD       = "Please stop that, sir.",
+				TRADER_INSULT_BAD        = "Sir, just because I'm contractually obligated to keep you on the line for a minute doesn't mean I have to take this.",
 
-				"bribe_refusal"     = "Uh... thanks for the cash, sir. As long as you're in the area, we'll be here...",
+				TRADER_BRIBE_FAILURE     = "Uh... thanks for the cash, sir. As long as you're in the area, we'll be here...",
 				)
 
 /datum/trader/pizzaria/trade(var/list/offers, var/num, var/turf/location)
@@ -62,22 +62,22 @@
 							"Your ability for accomplishment will follow with success.",
 							"Please help me, I'm trapped in a fortune cookie factory!")
 
-	speech = list("hail_generic"     = "There are two things constant in life, death and Chinese food. How may I help you?",
-				"hail_deny"          = "We do not take orders from rude customers.",
+	speech = list(TRADER_HAIL_GENERIC     = "There are two things constant in life, death and Chinese food. How may I help you?",
+				TRADER_HAIL_DENY          = "We do not take orders from rude customers.",
 
-				"trade_complete"     = "Thank you, sir, for your patronage.",
-				"trade_blacklist"    = "No, that is very odd. Why would you trade that away?",
-				"trade_no_goods"     = "I only accept money transfers.",
-				"trade_not_enough"   = "No, I am sorry, that is not possible. I need to make a living.",
-				"how_much"           = "I give you ITEM, for VALUE CURRENCY. No more, no less.",
+				TRADER_TRADE_COMPLETE     = "Thank you, sir, for your patronage.",
+				TRADER_NO_BLACKLISTED    = "No, that is very odd. Why would you trade that away?",
+				TRADER_NO_GOODS     = "I only accept money transfers.",
+				TRADER_NOT_ENOUGH   = "No, I am sorry, that is not possible. I need to make a living.",
+				TRADER_HOW_MUCH           = "I give you ITEM, for VALUE CURRENCY. No more, no less.",
 
-				"compliment_deny"    = "That was an odd thing to say. You are very odd.",
-				"compliment_accept"  = "Good philosophy, see good in bad, I like.",
-				"insult_good"        = "As a man said long ago, \"When anger rises, think of the consequences.\" Think on that.",
-				"insult_bad"         = "I do not need to take this from you.",
+				TRADER_COMPLEMENT_FAILURE    = "That was an odd thing to say. You are very odd.",
+				TRADER_COMPLEMENT_SUCCESS  = "Good philosophy, see good in bad, I like.",
+				TRADER_INSULT_GOOD        = "As a man said long ago, \"When anger rises, think of the consequences.\" Think on that.",
+				TRADER_INSULT_BAD         = "I do not need to take this from you.",
 
-				"bribe_refusal"     = "Hm... I'll think about it.",
-				"bribe_accept"      = "Oh yes! I think I'll stay a few more minutes, then.",
+				TRADER_BRIBE_FAILURE     = "Hm... I'll think about it.",
+				TRADER_BRIBE_SUCCESS      = "Oh yes! I think I'll stay a few more minutes, then.",
 				)
 
 /datum/trader/ship/chinese/trade(var/list/offers, var/num, var/turf/location)
@@ -110,21 +110,21 @@
 							/obj/item/weapon/reagent_containers/food/snacks/variable                   = TRADER_BLACKLIST_ALL
 							)
 
-	speech = list("hail_generic"     = "Hello, welcome to ORIGIN, grocery store of the future!",
-				"hail_deny"          = "I'm sorry, we've blacklisted your communications due to rude behavior.",
+	speech = list(TRADER_HAIL_GENERIC     = "Hello, welcome to ORIGIN, grocery store of the future!",
+				TRADER_HAIL_DENY          = "I'm sorry, we've blacklisted your communications due to rude behavior.",
 
-				"trade_complete"     = "Thank you for shopping at ORIGIN!",
-				"trade_blacklist"    = "I... wow, that's... no, sir. No.",
-				"trade_no_goods"     = "ORIGIN only accepts cash, sir.",
-				"trade_not_enough"   = "That is not enough money, sir.",
-				"how_much"           = "Sir, that'll cost you VALUE CURRENCY. Will that be all?",
+				TRADER_TRADE_COMPLETE     = "Thank you for shopping at ORIGIN!",
+				TRADER_NO_BLACKLISTED    = "I... wow, that's... no, sir. No.",
+				TRADER_NO_GOODS     = "ORIGIN only accepts cash, sir.",
+				TRADER_NOT_ENOUGH   = "That is not enough money, sir.",
+				TRADER_HOW_MUCH           = "Sir, that'll cost you VALUE CURRENCY. Will that be all?",
 
-				"compliment_deny"    = "Sir, this is a professional environment. Please don't make me get my manager.",
-				"compliment_accept"  = "Thank you, sir!",
-				"insult_good"        = "Sir, please do not make a scene.",
-				"insult_bad"         = "Sir, I WILL get my manager if you don't calm down.",
+				TRADER_COMPLEMENT_FAILURE    = "Sir, this is a professional environment. Please don't make me get my manager.",
+				TRADER_COMPLEMENT_SUCCESS  = "Thank you, sir!",
+				TRADER_INSULT_GOOD        = "Sir, please do not make a scene.",
+				TRADER_INSULT_BAD         = "Sir, I WILL get my manager if you don't calm down.",
 
-				"bribe_refusal"      = "Of course sir! ORIGIN is always here for you!",
+				TRADER_BRIBE_FAILURE      = "Of course sir! ORIGIN is always here for you!",
 				)
 
 /datum/trader/bakery
@@ -133,21 +133,21 @@
 	origin = "Bakery"
 	possible_origins = list("Cakes By Design", "Corner Bakery Local", "My Favorite Cake & Pastry Cafe", "Mama Joes Bakery", "Sprinkles and Fun", "Cakestrosity")
 
-	speech = list("hail_generic"     = "Hello, welcome to ORIGIN! We serve baked goods, including pies, cakes, and anything sweet!",
-				"hail_deny"          = "Our food is a privilege, not a right. Goodbye.",
+	speech = list(TRADER_HAIL_GENERIC     = "Hello, welcome to ORIGIN! We serve baked goods, including pies, cakes, and anything sweet!",
+				TRADER_HAIL_DENY          = "Our food is a privilege, not a right. Goodbye.",
 
-				"trade_complete"     = "Thank you for your purchase! Come again if you're hungry for more!",
-				"trade_blacklist"    = "We only accept money. Not... that.",
-				"trade_no_goods"     = "Cash for cakes! That's our business!",
-				"trade_not_enough"   = "Our dishes are much more expensive than that, sir.",
-				"how_much"           = "That lovely dish will cost you VALUE CURRENCY.",
+				TRADER_TRADE_COMPLETE     = "Thank you for your purchase! Come again if you're hungry for more!",
+				TRADER_NO_BLACKLISTED    = "We only accept money. Not... that.",
+				TRADER_NO_GOODS     = "Cash for cakes! That's our business!",
+				TRADER_NOT_ENOUGH   = "Our dishes are much more expensive than that, sir.",
+				TRADER_HOW_MUCH           = "That lovely dish will cost you VALUE CURRENCY.",
 
-				"compliment_deny"    = "Oh wow, how nice of you...",
-				"compliment_accept"  = "You're almost as sweet as my pies!",
-				"insult_good"        = "My pies are NOT knockoffs!",
-				"insult_bad"         = "Well, aren't you a sour apple?",
+				TRADER_COMPLEMENT_FAILURE    = "Oh wow, how nice of you...",
+				TRADER_COMPLEMENT_SUCCESS  = "You're almost as sweet as my pies!",
+				TRADER_INSULT_GOOD        = "My pies are NOT knockoffs!",
+				TRADER_INSULT_BAD         = "Well, aren't you a sour apple?",
 
-				"bribe_refusal"      = "Oh ho ho! I'd never think of taking ORIGIN on the road!",
+				TRADER_BRIBE_FAILURE      = "Oh ho ho! I'd never think of taking ORIGIN on the road!",
 				)
 	possible_trading_items = list(/obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake/filled     = TRADER_THIS_TYPE,
 								/obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake/filled         = TRADER_THIS_TYPE,

@@ -68,25 +68,22 @@
 		return 1
 	return 0
 
+/datum/computer_file/program/merchant/proc/get_response(var/datum/trade_response/tr)
+	last_comms = tr.text
+	bank += tr.money_delta
+	return tr.success
+
 /datum/computer_file/program/merchant/proc/offer_money(var/datum/trader/T, var/num, skill)
 	if(pad)
-		var/response = T.offer_money_for_trade(num, bank, skill)
-		if(istext(response))
-			last_comms = T.get_response(response, "No thank you.")
-		else
-			last_comms = T.get_response("trade_complete", "Thank you!")
-			T.trade(null,num, get_turf(pad))
-			bank -= response
-		return
-	last_comms = "PAD NOT CONNECTED"
+		get_response(T.offer_money_for_trade(num, bank, get_turf(pad), skill))
+	else
+		last_comms = "PAD NOT CONNECTED"
 
 /datum/computer_file/program/merchant/proc/bribe(var/datum/trader/T, var/amt)
 	if(bank < amt)
 		last_comms = "ERROR: NOT ENOUGH FUNDS."
 		return
-
-	bank -= amt
-	last_comms = T.bribe_to_stay_longer(amt)
+	get_response(T.bribe_to_stay_longer(amt))
 
 /datum/computer_file/program/merchant/proc/offer_item(var/datum/trader/T, var/num, skill)
 	if(pad)
@@ -95,26 +92,16 @@
 			if(!computer_emagged && istype(target,/mob/living/carbon/human))
 				last_comms = "SAFETY LOCK ENABLED: SENTIENT MATTER UNTRANSMITTABLE"
 				return
-		var/response = T.offer_items_for_trade(targets,num, get_turf(pad), skill)
-		if(istext(response))
-			last_comms = T.get_response(response,"No, a million times no.")
-		else
-			last_comms = T.get_response("trade_complete","Thanks for your business!")
-
-		return
-	last_comms = "PAD NOT CONNECTED"
+		get_response(T.offer_items_for_trade(targets,num, get_turf(pad), skill))
+	else
+		last_comms = "PAD NOT CONNECTED"
 
 /datum/computer_file/program/merchant/proc/sell_items(var/datum/trader/T, skill)
 	if(pad)
 		var/list/targets = pad.get_targets()
-		var/response = T.sell_items(targets, skill)
-		if(istext(response))
-			last_comms = T.get_response(response, "Nope. Nope nope nope.")
-		else
-			last_comms = T.get_response("trade_complete", "Glad to be of service!")
-			bank += response
-		return
-	last_comms = "PAD NOT CONNECTED"
+		get_response(T.sell_items(targets, skill))
+	else
+		last_comms = "PAD NOT CONNECTED"
 
 /datum/computer_file/program/merchant/proc/transfer_to_bank()
 	if(pad)
@@ -187,36 +174,34 @@
 		current_merchant = new_merchant
 	if(current_merchant)
 		var/datum/trader/T = get_merchant(current_merchant)
-		if(!T.can_hail())
-			last_comms = T.get_response("hail_deny", "No, I'm not speaking with you.")
-			. = 1
-		else
+		if(!hailed_merchant)
 			if(href_list["PRG_hail"])
 				. = 1
-				last_comms = T.hail(user)
+				hailed_merchant = get_response(T.hail(user))
 				show_trades = 0
-				hailed_merchant = 1
+			. = 1
+		else
 			if(href_list["PRG_show_trades"])
 				. = 1
 				show_trades = !show_trades
 			if(href_list["PRG_insult"])
 				. = 1
-				last_comms = T.insult()
+				get_response(T.insult())
 			if(href_list["PRG_compliment"])
 				. = 1
-				last_comms = T.compliment()
+				get_response(T.compliment())
 			if(href_list["PRG_offer_item"])
 				. = 1
 				offer_item(T,text2num(href_list["PRG_offer_item"]) + 1, user.get_skill_value(SKILL_FINANCE))
 			if(href_list["PRG_how_much_do_you_want"])
 				. = 1
-				last_comms = T.how_much_do_you_want(text2num(href_list["PRG_how_much_do_you_want"]) + 1, user.get_skill_value(SKILL_FINANCE))
+				get_response(T.how_much_do_you_want(text2num(href_list["PRG_how_much_do_you_want"]) + 1, user.get_skill_value(SKILL_FINANCE)))
 			if(href_list["PRG_offer_money_for_item"])
 				. = 1
 				offer_money(T, text2num(href_list["PRG_offer_money_for_item"])+1, user.get_skill_value(SKILL_FINANCE))
 			if(href_list["PRG_what_do_you_want"])
 				. = 1
-				last_comms = T.what_do_you_want()
+				get_response(T.what_do_you_want())
 			if(href_list["PRG_sell_items"])
 				. = 1
 				sell_items(T, user.get_skill_value(SKILL_FINANCE))
