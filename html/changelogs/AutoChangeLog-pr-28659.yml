@@ -1,0 +1,4 @@
+author: "RustingWithYou"
+delete-after: True
+changes: 
+  - tweak: "removes merchant from the vox job list"
