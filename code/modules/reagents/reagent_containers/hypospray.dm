@@ -36,6 +36,9 @@
 	for(var/datum/chem in reagents)
 		if(!(chem.type in starts_with))
 			return 1
+		else
+			if(chem.volume > startswith[chem,type])
+				return 1
 	return 0
 
 /obj/item/weapon/reagent_containers/hypospray/attack(mob/living/M as mob, mob/user as mob)
