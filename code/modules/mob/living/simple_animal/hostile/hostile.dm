@@ -12,6 +12,12 @@
 	var/burst_delay = 0.5 SECONDS
 	var/projectiletype
 	var/projectilesound
+
+	var/primed_grenade = 0 //If set to 1, we will throw a grenade next time we attack.
+	var/next_grenade_at = 0 //WE cannot prime a nade again until this time.
+	var/grenade_delay = 10 SECONDS //Delays between nade priming
+	var/list/possible_nades = list()
+
 	var/list/attack_sfx = list()
 	var/obj/item/ammo_casing/casingtype
 	var/attack_delay = DEFAULT_ATTACK_COOLDOWN
@@ -212,6 +218,13 @@
 				stance = HOSTILE_STANCE_IDLE
 		return o
 
+/mob/living/simple_animal/hostile/proc/throw_nade(var/atom/attacked)
+	var/turf/atk_trf = get_turf(attacked)
+	primed_grenade = 0
+	var/obj/item/grenade/nade = new pick(possible_nades) (loc)
+	nade.activate(src)
+	nade.throw_at(attacked)
+
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
 	var/obj/vehicles/v = loc
 	if(istype(v))
@@ -248,6 +261,11 @@
 	if(using_vehicle_gun && !v.guns_disabled)
 		fire_delay_use = using_vehicle_gun.fire_delay
 	setClickCooldown(fire_delay_use)
+	if(possible_nades.len > 0 && world.time >= next_grenade_at)
+		primed_grenade = 1
+		next_grenade_at = world.time + grenade_delay
+	if(primed_grenade)
+		throw_nade(target)
 
 /mob/living/simple_animal/hostile/proc/LoseTarget()
 	stance = HOSTILE_STANCE_IDLE
