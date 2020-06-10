@@ -232,7 +232,7 @@
 		// Check for required job title.
 		if(citem.req_titles && citem.req_titles.len > 0)
 			var/has_title
-			var/current_title = M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role
+			var/current_title = M.mind.assigned_role//M.mind.role_alt_title ? M.mind.role_alt_title : M.mind.assigned_role
 			for(var/title in citem.req_titles)
 				if(title == current_title)
 					has_title = 1
