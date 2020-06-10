@@ -130,4 +130,4 @@
 	var/olddir = dir
 	. = ..()
 	if(olddir != dir)
-		regenerate_icons()
+		reapply_offsets()

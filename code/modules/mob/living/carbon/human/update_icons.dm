@@ -371,7 +371,7 @@ var/global/list/damage_icon_parts = list()
 		I.appearance_flags = RESET_COLOR
 		I.color = UW.color
 		if(species.icon_template)//Is the species-size greater than 32x32? Probably needs repositioning.
-			var/list/offset = species.item_icon_offsets[dir]
+			var/list/offset = get_mob_offset_for(I)
 			I.pixel_x = offset[1]
 			I.pixel_y = offset[2]
 
@@ -795,6 +795,18 @@ var/global/list/damage_icon_parts = list()
 	total.appearance_flags = RESET_COLOR
 	overlays_standing[SURGERY_LEVEL] = total
 	if(update_icons)   update_icons()
+
+/mob/living/carbon/human/proc/reapply_offsets()
+	for(var/i = 1 to overlays_standing.len)
+		var/image/img = overlays_standing[i]
+		if(!img || img.pixel_x == 0 && img.pixel_y == 0)
+			continue
+		var/is_hand = 0
+		if(i == L_HAND_LAYER || i == R_HAND_LAYER)
+			is_hand = 1
+		var/list/offsets = get_mob_offset_for(img,is_hand)
+		img.pixel_x = offsets[1]
+		img.pixel_y = offsets[2]
 
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
