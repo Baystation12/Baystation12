@@ -40,7 +40,7 @@ mob/living/proc/getPerRollDelay()
 /mob/living/carbon/human/getPerRollDelay()
 	return species.per_roll_delay
 
-/mob/living/proc/rollDir(var/dir)
+/mob/living/proc/rollDir(var/dir_roll)
 	if(world.time < next_roll_at)
 		to_chat(src,"<span class = 'notice'>You can't dodge roll again just yet!</span>")
 		return 0
@@ -53,6 +53,9 @@ mob/living/proc/getPerRollDelay()
 	if(istype(v))
 		v.exit_vehicle(src)
 	next_roll_at = world.time + ((roll_delay * roll_dist) + DODGE_ROLL_BASE_COOLDOWN)
+	doRoll(dir_roll,roll_dist,roll_delay)
+
+/mob/living/proc/doRoll(var/dir_roll,var/roll_dist,var/roll_delay)
 	to_chat(src,"<span class = 'warning'>[name] performs a dodge roll!</span>")
 	var/tableroll = 1
 	if(pass_flags & PASSTABLE)
@@ -60,8 +63,8 @@ mob/living/proc/getPerRollDelay()
 	if(tableroll)
 		pass_flags |= PASSTABLE
 	for(var/i = 0,i < roll_dist,i++)
-		var/turf/step_to = get_step(loc,dir)
-		if(step_to.density == 1 || !step(src,dir))
+		var/turf/step_to = get_step(loc,dir_roll)
+		if(step_to.density == 1 || !step(src,dir_roll))
 			visible_message("<span class = 'warning'>[name] rolls into [step_to].</span>")
 			if(tableroll)
 				pass_flags &= ~PASSTABLE
@@ -80,5 +83,13 @@ mob/living/proc/getPerRollDelay()
 	if(tableroll)
 		pass_flags &= ~PASSTABLE
 	return 1
+
+/mob/living/carbon/human/doRoll(var/dir_roll,var/roll_dist,var/roll_delay)
+	if(species.handle_dodge_roll(src,dir_roll,roll_dist,roll_delay))
+		return
+	. = ..()
+
+/datum/species/proc/handle_dodge_roll(var/mob/roller,var/rolldir)
+	return 0
 
 #undef DODGE_ROLL_BASE_COOLDOWN
