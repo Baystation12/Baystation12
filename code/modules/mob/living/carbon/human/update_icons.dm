@@ -799,7 +799,7 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/reapply_offsets()
 	for(var/i = 1 to overlays_standing.len)
 		var/image/img = overlays_standing[i]
-		if(!img || img.pixel_x == 0 && img.pixel_y == 0)
+		if(!istype(img) || img.pixel_x == 0 && img.pixel_y == 0)
 			continue
 		var/is_hand = 0
 		if(i == L_HAND_LAYER || i == R_HAND_LAYER)
