@@ -7,7 +7,11 @@
 	enemy_faction_names = list("UNSC","Insurrection", "Human Colony","Flood")
 	commander_titles = list("Sangheili Shipmaster")
 	default_language = LANGUAGE_SANGHEILI
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
+	ship_types = list(\
+		/obj/effect/overmap/ship/npc_ship/combat/covenant,\
+		/obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed,\
+		/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
+	overpowered_ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed)
 	defender_mob_types = list(
 		/mob/living/simple_animal/hostile/covenant/grunt = 6,\
 		/mob/living/simple_animal/hostile/covenant/grunt/major = 5,\
@@ -44,7 +48,11 @@
 	contraband_gear = "UNSC"
 	enemy_faction_names = list("Covenant","Insurrection","Flood")
 	commander_titles = list("UNSC Bertels Commanding Officer")
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
+	ship_types = list(\
+		/obj/effect/overmap/ship/npc_ship/combat/unsc,\
+		/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,\
+		/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
+	overpowered_ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed)
 	defender_mob_types = list(
 		/mob/living/simple_animal/hostile/unsc/marine = 13,\
 		/mob/living/simple_animal/hostile/unsc/odst = 6,\
@@ -85,7 +93,11 @@
 	contraband_gear = "Insurrection"
 	enemy_faction_names = list("UNSC","Covenant","Flood")
 	commander_titles = list("Insurrectionist Commander")
-	ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
+	ship_types = list(\
+		/obj/effect/overmap/ship/npc_ship/combat/innie,\
+		/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,\
+		/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
+	overpowered_ship_types = list(/obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed)
 	defender_mob_types = list(/mob/living/simple_animal/hostile/innie = 1,\
 		/mob/living/simple_animal/hostile/innie/medium = 2,\
 		/mob/living/simple_animal/hostile/innie/heavy = 1)
