@@ -182,7 +182,9 @@
 			italics = 1
 			sound_vol *= 0.5 //muffle the sound a bit, so it's like we're actually talking through contact
 
+		if(debug_say)	to_debug_listeners("[src] hear_say() pressure check message_range:[message_range]")
 		get_mobs_and_objs_in_view_fast(T, message_range, listening, listening_obj, /datum/client_preference/ghost_ears)
+		if(debug_say)	to_debug_listeners("[src] listening.len:[listening.len]")
 
 
 	var/speech_bubble_test = say_test(message)
