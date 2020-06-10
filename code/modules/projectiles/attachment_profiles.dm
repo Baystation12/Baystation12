@@ -173,7 +173,7 @@
 		"red dot sight" = list(0,0.5,0.01),
 		"acog sight" = list(0,0.5,0.1),
 		"flashlight attachment" = list(0,0,0.01),
-		"suppressor" = list(0.1,0.5,0)
+		"suppressor" = list(0.1,0.5,0),
 		"M301 Grenade Launcher" = list(0.5,0,0.03)
 		)
        //dispersion,accuracy,slowdown//

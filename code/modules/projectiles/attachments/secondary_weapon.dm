@@ -7,6 +7,7 @@
 	var/list/int_mag = list()
 	var/alt_fire_loadsound = null
 	var/alt_fire_ejectsound = null
+	var/alt_fire_firesound = null
 	var/fire_delay = 0 //An extra delay to add to user click_delay when firing this weapon
 	var/ejection = 1 //1 for eject automatically, -1 for caseless, 0 for manual ejection
 

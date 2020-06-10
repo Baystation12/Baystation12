@@ -485,7 +485,7 @@
 
 /obj/item/projectile/bullet/g40mm
 	name = "shell"
-	fire_sound = 'code/modules/halo/sounds/Grenade 1.wav'
+	fire_sound = 'code/modules/halo/sounds/Grenade 1.ogg'
 	damage = 60 //it's less dangerous than a shotgun slug with its low AP, but 40mm grenades do obliterate unarmoured flesh
 	armor_penetration = 5
 	step_delay = 0.9
