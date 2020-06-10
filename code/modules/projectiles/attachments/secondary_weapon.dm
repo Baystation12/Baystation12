@@ -48,7 +48,10 @@
 	proj.forceMove(user.loc)
 	//launches the projectile
 	proj.launch(target)
-	if(proj.fire_sound)
+	//weapon sound takes priority over ammo sound
+	if(alt_fire_firesound)
+		playsound(user, alt_fire_firesound, 50, 1)
+	else if(proj.fire_sound)
 		playsound(user, proj.fire_sound, 50, 1)
 	visible_message("<span class = 'danger'>[user] fires [src] at [target].</span>")
 
