@@ -80,7 +80,7 @@
 			contents -= casing
 			int_mag -= casing
 			casing.forceMove(user.loc)
-			spawn(1) playsound(src.loc alt_fire_ejectsound, 50,1)
+			spawn(1) playsound(src.loc, alt_fire_ejectsound, 50,1)
 		to_chat(user,"<span class = 'notice'>[user] unloads [src]</span>")
 	else
 		to_chat(user,"<span class = 'notice'>[src] is already empty!</span>")
