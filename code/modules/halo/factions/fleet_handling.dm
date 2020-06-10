@@ -89,7 +89,7 @@
 		npc_fleets.Add(new_fleet)
 
 		//spawn the ships in the fleet
-		var/list/spawned_ships = shipmap_handler.spawn_ship(src, num_spawn)
+		var/list/spawned_ships = shipmap_handler.spawn_ship(src, num_spawn, overpowered = 1)
 		new_fleet.add_ships(spawned_ships)
 
 		//give the fleet it's first objective objective
