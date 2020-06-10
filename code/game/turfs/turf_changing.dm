@@ -32,6 +32,7 @@
 	var/old_affecting_lights = affecting_lights
 	var/old_lighting_overlay = lighting_overlay
 	var/old_corners = corners
+	var/old_can_build_wall = can_build_wall
 
 //	log_debug("Replacing [src.type] with [N]")
 
@@ -67,6 +68,8 @@
 
 	for(var/turf/space/S in range(W,1))
 		S.update_starlight()
+
+	can_build_wall = old_can_build_wall
 
 	W.post_change()
 	. = W
