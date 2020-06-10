@@ -11,6 +11,7 @@
 	possible_weapons = list(/obj/item/weapon/gun/projectile/m6d_magnum/npc)
 	var/obj/item/device/flashlight/held_light
 	species_name = "Human"
+	possible_grenades = list(/obj/item/weapon/grenade/frag/m9_hedp,/obj/item/weapon/grenade/smokebomb,/obj/item/weapon/grenade/flashbang)
 
 /mob/living/simple_animal/hostile/unsc/New()
 	. = ..()
