@@ -265,6 +265,9 @@
 	H.organs_by_name = list()
 	H.internal_organs_by_name = list()
 
+	if(s)
+		H.internal_organs_by_name["stack"] = s
+
 	for(var/limb_type in has_limbs)
 		var/list/organ_data = has_limbs[limb_type]
 		var/limb_path = organ_data["path"]
@@ -286,11 +289,6 @@
 
 	for(var/obj/item/organ/O in (H.organs|H.internal_organs))
 		O.owner = H
-
-	if(s)
-		H.internal_organs_by_name["stack"] = s
-		H.internal_organs += s
-		s.owner = H
 
 	H.sync_organ_dna()
 
