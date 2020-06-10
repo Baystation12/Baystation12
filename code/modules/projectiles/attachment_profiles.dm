@@ -164,7 +164,7 @@
 	"vertical grip" = list(0,-1),
 	"red dot sight" = list(1,6),
 	"acog sight" = list(-1,5),
-	"flashlight attachment" = list(3,-3)
+	"flashlight attachment" = list(3,-3),
 	"M301 Grenade Launcher" = list(2,2)
 	)
 	attribute_modifications = list(\
