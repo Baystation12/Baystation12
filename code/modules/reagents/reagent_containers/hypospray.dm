@@ -31,13 +31,11 @@
 	return 1
 
 /obj/item/weapon/reagent_containers/hypospray/proc/has_been_refilled()
-	if(starts_with.len == 0)
-		return 0
-	for(var/datum/chem in reagents)
+	for(var/datum/reagent/chem in reagents.reagent_list)
 		if(!(chem.type in starts_with))
 			return 1
 		else
-			if(chem.volume > startswith[chem,type])
+			if(chem.volume > chem.overdose)
 				return 1
 	return 0
 
