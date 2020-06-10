@@ -315,7 +315,7 @@
 
 /obj/item/projectile/bullet/m5
 	damage = 20
-	shield_damage = 10
+	shield_damage = 20
 
 /obj/item/projectile/bullet/m5/rubber //"rubber" bullets
 	name = "rubber bullet"
@@ -493,10 +493,12 @@
 /obj/item/projectile/bullet/g40mm/he
 	damage = 20 //explosive is lower mass than a chunk of practice ammo
 	armor_penetration = 0 //likewise no room for AP in a regular old bomb
+	shield_damage = 100 //half minor shields
+	check_armour = "bomb"
 
 /obj/item/projectile/bullet/g40mm/he/on_impact(var/atom/target)
-	if (get_dist(starting, loc)>3)
-		explosion(target, -1, 0, 2, 3, 0)
+	if (get_dist(starting, loc)>1)
+		explosion(target, -1, 0, 2, 3, 1) //adminlog for testing purposes
 	..()
 
 /obj/item/projectile/bullet/g40mm/frag
@@ -504,9 +506,9 @@
 	armor_penetration = 0
 
 /obj/item/projectile/bullet/g40mm/frag/on_impact(var/atom/target)
-	if (get_dist(starting, loc)>2)
+	if (get_dist(starting, loc)>1)
 		playsound(src.loc, 'sound/effects/explosion1.ogg', 30, 1, -3)
-		src.fragmentate(target, 50, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1))
+		src.fragmentate(get_turf(target), 50, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1))
 	..()
 
 /obj/item/projectile/bullet/g40mm/smoke
