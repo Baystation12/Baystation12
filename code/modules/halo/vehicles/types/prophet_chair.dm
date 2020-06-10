@@ -23,16 +23,20 @@
 	light_color = "#C1CEFF"
 
 /obj/vehicles/prophet_throne/update_object_sprites()
-	underlays.Cut()
 	overlays.Cut()
 	var/list/offsets_to_use = sprite_offsets["[dir]"]
 	var/list/drivers = get_occupants_in_position("driver")
 	if(!(isnull(offsets_to_use) || isnull(drivers) || drivers.len == 0))
 		var/image/driver_image = image(pick(drivers))
+		driver_image.plane = ABOVE_HUMAN_PLANE
+		driver_image.layer = VEHICLE_LOAD_LAYER
 		driver_image.pixel_x = offsets_to_use[1]
 		driver_image.pixel_y = offsets_to_use[2]
 		overlays += driver_image
-		driver_image.overlays += image(icon,null,"chair-front")
+		var/image/front = image(icon,null,"chair-front")
+		front.plane = ABOVE_HUMAN_PLANE
+		front.layer = VEHICLE_LOAD_LAYER
+		overlays += front
 
 /obj/item/vehicle_component/health_manager/throne
 	integrity = 500

@@ -83,6 +83,7 @@
 	F = new spawn_type(spawn_turf)
 	F.flood_spawner = src
 	live_flood.Add(F)
+	owner.visible_message("<span class = 'danger'>[owner] writhes and produces [F].</span>")
 	return 1
 
 /datum/flood_spawner/proc/flood_die(var/mob/living/simple_animal/hostile/flood/F)

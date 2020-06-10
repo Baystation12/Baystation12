@@ -305,7 +305,8 @@
 		return
 
 	if(is_charged_weapon==1)
-		playsound(src.loc, charge_sound, 100, 1)
+		if(charge_sound)
+			playsound(src.loc, charge_sound, 100, 1)
 		user.visible_message("<span class = 'notice'>[user] starts charging the [src]!</span>")
 
 		is_charging = 1

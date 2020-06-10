@@ -613,11 +613,13 @@
 
 // Check if we should die.
 /mob/living/carbon/human/proc/handle_death_check()
-	if(should_have_organ(BP_BRAIN))
-		var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
-		if(!brain || (brain.status & ORGAN_DEAD))
-			return TRUE
-	return species.handle_death_check(src)
+	. = species.handle_death_check(src)
+	if(!.)
+		if(should_have_organ(BP_BRAIN))
+			var/obj/item/organ/internal/brain/brain = internal_organs_by_name[BP_BRAIN]
+			if(!brain || (brain.status & ORGAN_DEAD))
+				return TRUE
+	return
 
 //DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
 /mob/living/carbon/human/handle_regular_status_updates()
@@ -826,7 +828,7 @@
 				if(150 to 250)					nutrition_icon.icon_state = "nutrition3"
 				else							nutrition_icon.icon_state = "nutrition4"
 
-		if(isSynthetic())
+		if(isSynthetic() && cells)
 			var/obj/item/organ/internal/cell/C = internal_organs_by_name[BP_CELL]
 			if (istype(C))
 				var/chargeNum = Clamp(ceil(C.percent()/25), 0, 4)	//0-100 maps to 0-4, but give it a paranoid clamp just in case.
