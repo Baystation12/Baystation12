@@ -515,9 +515,6 @@
 	damage = 30
 	armor_penetration = 5
 
-/obj/item/weapon/grenade/smokebomb/New()
-	..()
-
 /obj/item/projectile/bullet/g40mm/smoke/on_impact(var/atom/target)
 	var/datum/effect/effect/system/smoke_spread/bad/smoke
 	smoke = new  /datum/effect/effect/system/smoke_spread/bad()
