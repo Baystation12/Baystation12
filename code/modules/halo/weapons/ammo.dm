@@ -485,7 +485,7 @@
 
 /obj/item/projectile/bullet/g40mm
 	name = "shell"
-	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
+	fire_sound = 'code/modules/halo/sounds/Grenade 1.wav'
 	damage = 60 //it's less dangerous than a shotgun slug with its low AP, but 40mm grenades do obliterate unarmoured flesh
 	armor_penetration = 5
 	step_delay = 0.9
@@ -493,7 +493,7 @@
 /obj/item/projectile/bullet/g40mm/he
 	damage = 20 //explosive is lower mass than a chunk of practice ammo
 	armor_penetration = 0 //likewise no room for AP in a regular old bomb
-	shield_damage = 100 //half minor shields
+	shield_damage = 100 //less than half minor shields but the explosion will put it pretty low
 	check_armour = "bomb"
 
 /obj/item/projectile/bullet/g40mm/he/on_impact(var/atom/target)
