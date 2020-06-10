@@ -12,8 +12,6 @@
 
 	sprite_offsets = list("1" = list(16,2),"2" = list(16,2),"4" = list(10,2),"8" = list(22,2))
 
-	vehicle_move_delay = 1.5
-
 	occupants = list(0,0)
 	exposed_positions = list("driver" = 10)
 
@@ -60,7 +58,7 @@
 	name = "Type-32 RAV Plasma Weapon"
 
 	icon = 'code/modules/halo/weapons/turrets/turret_items.dmi'
-	icon_state = "chaingun_obj"
+	icon_state = "plasmaturret_obj"
 	item_state = ""
 
 	fire_sound = 'code/modules/halo/sounds/plasrifle3burst.ogg'

@@ -96,6 +96,7 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8/theta/update_icon()
 	. = ..()
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
 	if(ammo_magazine)
 		icon_state = "MA9"
 	else

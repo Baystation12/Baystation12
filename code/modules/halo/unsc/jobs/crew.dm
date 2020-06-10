@@ -1,6 +1,6 @@
 
 /datum/job/unsc/crew
-	title = "UNSC Crew"
+	title = "UNSC Station Crew"
 	fallback_spawnpoint = null
 	outfit_type = /decl/hierarchy/outfit/job/unsc
 	alt_titles = list(\
@@ -14,7 +14,7 @@
 	"UNSC Helmsman" = /decl/hierarchy/outfit/job/unsc/helm)
 
 /datum/job/unsc/medical
-	title = "UNSC Medic"
+	title = "UNSC Station Medic"
 	fallback_spawnpoint = null
 	total_positions = 1
 	spawn_positions = 1

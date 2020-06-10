@@ -14,7 +14,6 @@
 
 	ammo_containers = newlist(/obj/item/ammo_magazine/wraith_coax,/obj/item/ammo_magazine/wraith_cannon)
 
-	vehicle_move_delay = 4.75
 	exposed_positions = list("gunner" = 5)
 
 	occupants = list(0,1)

@@ -29,8 +29,8 @@
 /material/plasteel/generate_recipes()
 	recipes = list()
 
-	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/plasteel_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
-	recipes += new/datum/stack_recipe("marine barricade", /obj/structure/destructible/marine_barricade, 10, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("Reinforced Combat barrier", /obj/structure/destructible/plasteel_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("M72 Mobile Barrier", /obj/structure/destructible/marine_barricade, 10, one_per_turf = 1, on_floor = 1, time = 50)
 
 
 

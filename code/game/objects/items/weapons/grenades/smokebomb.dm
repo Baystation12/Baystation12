@@ -1,12 +1,18 @@
 /obj/item/weapon/grenade/smokebomb
 	desc = "It is set to detonate in 2 seconds."
 	name = "smoke grenade"
-	icon = 'icons/obj/grenade.dmi'
-	icon_state = "fragshell"
+	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
+	icon_state = "grenade_smoke"
 	det_time = 20
 	item_state = "flashbang"
 	slot_flags = SLOT_BELT
 	var/datum/effect/effect/system/smoke_spread/bad/smoke
+
+/obj/item/weapon/grenade/smokebomb/covenant
+	name = "Type-0 Visual Occlusion Device"
+	desc = "This simple device creates a protective screen of smoke. Fuse 2 seconds. Do not swallow. Prophet approved(tm)."
+	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+
 
 /obj/item/weapon/grenade/smokebomb/New()
 	..()

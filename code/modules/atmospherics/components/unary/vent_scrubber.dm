@@ -38,11 +38,6 @@
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 	icon = null
-	initial_loc = get_area(loc)
-	area_uid = initial_loc.uid
-	if (!id_tag)
-		assign_uid()
-		id_tag = num2text(uid)
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Destroy()
 	unregister_radio(src, frequency)
@@ -123,6 +118,13 @@
 
 /obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
 	. = ..()
+
+	initial_loc = get_area(loc)
+	area_uid = initial_loc.uid
+	if (!id_tag)
+		assign_uid()
+		id_tag = num2text(uid)
+
 	radio_filter_in = frequency==initial(frequency)?(RADIO_FROM_AIRALARM):null
 	radio_filter_out = frequency==initial(frequency)?(RADIO_TO_AIRALARM):null
 	if (frequency)

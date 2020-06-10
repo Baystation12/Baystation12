@@ -32,7 +32,9 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	explosion_effect_mod = 0.5
 	can_force_door = 1
 	pixel_offset_x = -8
-	item_icon_offsets = list(list(9,1),list(9,1),null,list(6,1),null,null,null,list(6,1),null)
+	item_icon_offsets = list(list(9,6),list(9,6),null,list(6,6),null,null,null,list(6,6),null)
+	inhand_icon_offsets = list(list(6,-4),list(-6,-4),null,list(2,-4),null,null,null,list(2,-4),null)
+	inter_hand_dist = 9
 	inherent_verbs = list()
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/elite_punch)

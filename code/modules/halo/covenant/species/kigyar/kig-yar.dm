@@ -99,18 +99,21 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenan
 		icon_state = "h_kiggyhair"
 		name = "No Quills"
 		species_allowed = list("Kig-Yar")
+		gender = FEMALE
 
 /datum/sprite_accessory/hair/kiggyhair/one
 		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
 		icon_state = "h_kiggyhairone"
 		name = "Long Quills"
 		species_allowed = list("Kig-Yar")
+		gender = MALE
 
 /datum/sprite_accessory/hair/kiggyhair/two
 		icon = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
 		icon_state = "h_kiggyhairtwo"
 		name = "Short Quills"
 		species_allowed = list("Kig-Yar")
+		gender = MALE
 
 /obj/item/organ/external/head/kigyar
 	eye_icon = "eyes_s"

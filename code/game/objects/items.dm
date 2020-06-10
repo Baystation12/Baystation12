@@ -108,7 +108,7 @@
 
 /obj/item/afterattack(var/atom/target,var/mob/user)
 	. = ..()
-	if(lunge_dist == 0 || user.loc.Adjacent(target) || istype(user.loc,/obj/vehicles))
+	if(get_lunge_dist(user) == 0 || user.loc.Adjacent(target) || istype(user.loc,/obj/vehicles))
 		return
 	if(world.time < next_leapwhen)
 		to_chat(user,"<span class = 'notice'>You're still recovering from the last lunge!</span>")
@@ -134,6 +134,7 @@
 		user.visible_message("<span class = 'danger'>[user] lunges forward, [src] in hand, ready to strike!</span>")
 		var/image/user_image = image(user)
 		user_image.dir = user.dir
+		var/do_post_stun = 0
 		for(var/i = 0 to get_dist(user,target))
 			var/obj/after_image = new /obj/effect/esword_path
 			if(i == 0)
@@ -146,8 +147,12 @@
 			after_image.overlays += user_image
 			spawn(5)
 				qdel(after_image)
+			if(i > get_lunge_dist(user)/2)
+				do_post_stun = 1
 		if(user.Adjacent(target) && ismob(target))
 			attack(target,user)
+		if(do_post_stun)
+			user.Stun(2)
 		next_leapwhen = world.time + lunge_delay
 
 /obj/item/device

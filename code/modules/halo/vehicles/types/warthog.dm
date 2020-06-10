@@ -14,7 +14,6 @@
 
 	ammo_containers = newlist(/obj/item/ammo_magazine/warthog_mag)
 
-	vehicle_move_delay = 1.5
 
 	occupants = list(1,1)
 	exposed_positions = list("driver" = 10,"passenger" = 10,"gunner" = 10)

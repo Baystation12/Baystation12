@@ -27,8 +27,6 @@
 	//Advanced Damage Handling
 	var/datum/component_profile/comp_prof = /datum/component_profile
 
-	var/vehicle_move_delay = 1
-
 	var/list/sprite_offsets = list("1" = list(0,0),"2" = list(0,0),"4" = list(0,0),"8" = list(0,0)) //Handled Directionally. Numbers correspond to directions
 
 	//Passenger Management
@@ -54,7 +52,7 @@
 
 	var/datum/mobile_spawn/spawn_datum //Setting this makes this a mobile spawn point.
 
-	var/datum/gas_mixture/internal_air = 0//If this is new()'d, the vehicle provides air to the occupants.
+	var/datum/gas_mixture/internal_air = null//If this is new()'d, the vehicle provides air to the occupants.
 	//I would make it require refilling, but that's likely to just be boring tedium for players.
 
 	light_power = 4
@@ -129,18 +127,23 @@
 		internal_air.volume = 2500
 		internal_air.temperature = T20C
 
+/obj/vehicles/lost_in_space()
+	if(!can_space_move)
+		return TRUE
+	return FALSE
+
 /obj/vehicles/return_air_for_internal_lifeform(var/mob/living/carbon/human/form)
-	if(!internal_air)
-		return
-	if(!istype(form))
-		return
+	if(!internal_air || !istype(form))
+		return loc.return_air()
 	internal_air.gas[form.species.breath_type] = 0
 	for(var/gas in internal_air.gas)
 		internal_air.gas[gas] = 100/internal_air.gas.len
 	return internal_air
 
 /obj/vehicles/return_air()
-	return internal_air
+	if(internal_air)
+		return internal_air
+	return loc.return_air()
 
 /obj/vehicles/attack_generic(var/mob/living/simple_animal/attacker,var/damage,var/text)
 	visible_message("<span class = 'danger'>[attacker] [text] [src]</span>")
@@ -201,6 +204,7 @@
 
 /obj/vehicles/Destroy()
 	GLOB.processing_objects -= src
+	kick_occupants()
 	. = ..()
 
 /obj/vehicles/proc/on_death()

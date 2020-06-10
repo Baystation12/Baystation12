@@ -43,7 +43,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	pain_mod = 0.65 //receives 25% pain damage.
 	burn_mod = 0.7  // receives 70% of burn damage
 	slowdown = -0.1 //A miniscule amount faster than most.
-	adrenal_break_threshold = 20 //at this threshold of adrenaline (which is generated through taking damage, damage/5)
+	adrenal_break_threshold = 23 //at this threshold of adrenaline (which is generated through taking damage, damage/5)
 	//, the body consumes the adrenaline and creates a short-lived 120 painkill
 	//This lowered threshold means you can, through consistent aggressiveness, stave off the pain of the fight.
 	//Failing to be aggressive or smart hostiles stopping their fire at you means you will start to feel the effects
@@ -51,7 +51,9 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	can_force_door = 1
 	default_faction = "Covenant"
 	pixel_offset_x = -12
-	item_icon_offsets = list(list(10,4),list(10,4),null,list(6,2),null,null,null,list(6,2),null)
+	item_icon_offsets = list(list(14,4),list(10,4),null,list(6,2),null,null,null,list(6,2),null)
+	inhand_icon_offsets = list(list(6,0),list(-6,0),null,list(6,0),null,null,null,list(6,0),null)
+	inter_hand_dist = 15
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 	inherent_verbs = list()
 

@@ -117,9 +117,9 @@
 	name = "\improper Southwest Appartment Level 2"
 	icon_state = "courtroom"*/
 
-/area/planets/Geminus/indoor/labs1
+/*/area/planets/Geminus/indoor/labs1
 	name = "\improper Research and development level 1"
-	icon_state = "courtroom"
+	icon_state = "courtroom"*/
 
 
 /area/planets/Geminus/indoor/chapel
@@ -138,9 +138,9 @@
 	name = "\improper Police Station"
 	icon_state = "brig"
 
-/area/planets/Geminus/indoor/xenoflora
+/*/area/planets/Geminus/indoor/xenoflora
 	name = "\improper Xenoflora Lab"
-	icon_state = "xeno_f_lab"
+	icon_state = "xeno_f_lab"*/
 
 /area/planets/Geminus/indoor/city_hall
 	name = "\improper City Hall"

@@ -32,12 +32,12 @@
 	var/fail_state = "0"
 	anchored = 1
 	var/shield_health = 0
-	var/max_shield = 750
+	var/max_shield = 300
 	var/recharge_time = 50
 	var/time_recharged = 50
 	var/can_deconstruct = 1
 	var/processing = 0
-	var/recharge_per_tick = 34
+	var/recharge_per_tick = 30
 	var/blocks_air = 0
 	var/blocks_mobs = 1
 	var/item_type = /obj/item/energybarricade

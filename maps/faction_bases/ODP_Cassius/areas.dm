@@ -60,6 +60,14 @@
 	name = "ODP Cassius Southern Observation Lounge"
 	icon_state = "observatory"
 
+/area/faction_base/unsc/odp/interior/deck1/atmos_one
+	name = "ODP Cassius Primary Atmospherics"
+	icon_state = "atmos_monitoring"
+/*
+/area/faction_base/unsc/odp/interior/deck1/atmos_two
+	name = "ODP Cassius Secondary Atmospherics"
+	icon_state = "atmos"
+*/
 
 //deck 2 areas
 
