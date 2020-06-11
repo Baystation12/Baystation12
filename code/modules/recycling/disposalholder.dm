@@ -40,6 +40,7 @@
 	// note AM since can contain mobs or objs
 	for(var/atom/movable/AM in stuff)
 		AM.forceMove(src)
+		SEND_SIGNAL(AM, COMSIG_MOVABLE_DISPOSING, src, D)
 		if(istype(AM, /obj/structure/bigDelivery) && !hasmob)
 			var/obj/structure/bigDelivery/T = AM
 			src.destinationTag = T.sortTag

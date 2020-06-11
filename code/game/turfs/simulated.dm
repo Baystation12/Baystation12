@@ -84,6 +84,7 @@
 				var/obj/item/clothing/shoes/S = H.shoes
 				if(istype(S))
 					S.handle_movement(src, MOVING_QUICKLY(H))
+					S.step_action()
 					if(S.track_blood && S.blood_DNA)
 						bloodDNA = S.blood_DNA
 						bloodcolor = S.blood_color

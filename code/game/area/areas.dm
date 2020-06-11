@@ -215,10 +215,13 @@
 
 var/list/mob/living/forced_ambiance_list = new
 
-/area/Entered(A)
-	if(!istype(A,/mob/living))	return
+/area/Entered(atom/movable/AM)
+	SEND_SIGNAL(src, COMSIG_AREA_ENTERED, AM)
+	SEND_SIGNAL(AM, COMSIG_ENTER_AREA, src) //The atom that enters the area
 
-	var/mob/living/L = A
+	if(!istype(AM,/mob/living))	return
+
+	var/mob/living/L = AM
 	if(!L.ckey)	return
 
 	if(!L.lastarea)
@@ -263,6 +266,10 @@ var/list/mob/living/forced_ambiance_list = new
 	if(ambience.len && prob(5) && (world.time >= L.client.played + 3 MINUTES))
 		L.playsound_local(T, sound(pick(ambience), repeat = 0, wait = 0, volume = 15, channel = GLOB.lobby_sound_channel))
 		L.client.played = world.time
+
+/area/Exited(atom/movable/M)
+	SEND_SIGNAL(src, COMSIG_AREA_EXITED, M)
+	SEND_SIGNAL(M, COMSIG_EXIT_AREA, src) //The atom that exits the area
 
 /area/proc/gravitychange(var/gravitystate = 0)
 	has_gravity = gravitystate

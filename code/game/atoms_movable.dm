@@ -49,10 +49,16 @@
 	if(!QDELETED(throwing))
 		throwing.hit_atom(A)
 
+	SEND_SIGNAL(src, COMSIG_MOVABLE_BUMP, A)
+
 	if (A && yes)
 		A.last_bumped = world.time
 		INVOKE_ASYNC(A, /atom/proc/Bumped, src) // Avoids bad actors sleeping or unexpected side effects, as the legacy behavior was to spawn here
 	..()
+
+//oldloc = old location on atom, inserted when forceMove is called and ONLY when forceMove is called!
+/atom/movable/Crossed(atom/movable/AM, oldloc)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_CROSSED, AM)
 
 /atom/movable/proc/forceMove(atom/destination)
 	if((gc_destroyed && gc_destroyed != GC_CURRENTLY_BEING_QDELETED) && !isnull(destination))
@@ -135,6 +141,8 @@
 	else if(isturf(hit_atom))
 		var/turf/T = hit_atom
 		T.hitby(src,TT)
+
+	SEND_SIGNAL(src, COMSIG_MOVABLE_IMPACT, hit_atom)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, mob/thrower, spin = TRUE, datum/callback/callback) //If this returns FALSE then callback will not be called.
 	. = TRUE
