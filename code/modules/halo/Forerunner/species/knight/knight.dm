@@ -1,5 +1,6 @@
 
 #define KNIGHT_TELEPORT_ANIM_TIME 2
+#define KNIGHT_DEATH_TP_DELAY 3 SECONDS
 
 /datum/species/knight
 	name = "Knight"
@@ -52,6 +53,12 @@
 
 	inherent_verbs = list(/mob/living/proc/tele_evac)
 
+	pain_scream_sounds = list(\
+	'code/modules/halo/sounds/species_pain_screams/knightscream.ogg',
+	'code/modules/halo/sounds/species_pain_screams/knightscream2.ogg',
+	'code/modules/halo/sounds/species_pain_screams/knightscream3.ogg'
+	)
+
 	has_organ = list(
 		"elegiast" =    /obj/item/organ/internal/knight_core,
 		BP_BRAIN =    /obj/item/organ/internal/brain/knight
@@ -82,7 +89,8 @@
 
 /datum/species/knight/handle_death(var/mob/living/carbon/human/H)
 	H.visible_message("<span class = 'danger'>[H] begins to disintegrate as it starts an emergency translocation jump...</span>")
-	sleep(3 SECONDS)
+	stun(KNIGHT_DEATH_TP_DELAY)
+	sleep(KNIGHT_DEATH_TP_DELAY)
 	H.do_tele_evac(null)
 
 /datum/species/knight/handle_dodge_roll(var/mob/roller,var/rolldir,var/roll_dist,var/roll_delay)
@@ -190,3 +198,6 @@
 /mob/living/carbon/human/knight/New(var/new_loc)
 	. = ..(new_loc,"Knight")
 	faction = "Forerunner"
+
+#undef KNIGHT_DEATH_TP_DELAY
+#undef KNIGHT_TELEPORT_ANIM_TIME
