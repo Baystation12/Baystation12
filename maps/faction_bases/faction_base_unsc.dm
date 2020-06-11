@@ -22,6 +22,7 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 	/datum/job/unsc/commanding_officer,\
 	/datum/job/unsc/executive_officer,\
 	/datum/job/unsc/oni/research,\
+	/datum/job/unsc_ai,\
 	/datum/job/unsc/odst,\
 	/datum/job/unsc/odst/squad_leader)
 
