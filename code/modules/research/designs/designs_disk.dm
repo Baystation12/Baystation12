@@ -25,3 +25,4 @@ datum/design/item/disk/flora
 	id = "flora_disk"
 	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/disk/botany
+	sort_string = "AAAAC"
