@@ -1,0 +1,3 @@
+[submodule "lib/gotbyond"]
+	path = lib/gotbyond
+	url = https://github.com/HaloSpaceStation/GotByond.git

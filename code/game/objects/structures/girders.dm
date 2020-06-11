@@ -128,6 +128,17 @@
 		to_chat(user, "<span class='notice'>There isn't enough material here to construct a wall.</span>")
 		return 0
 
+	var/turf/my_turf = get_turf(src)
+	if(!my_turf.can_build_wall)
+		to_chat(user, "<span class='warning'>The ground is not strong enough to support a wall here.</span>")
+		for(var/turf/check_turf in trange(8, my_turf))
+			if(check_turf.can_build_wall)
+				var/image/I = image('code/game/objects/structures/girderbuild.dmi',check_turf,"hammer")
+				to_chat(user,I)
+				spawn(20)
+					qdel(I)
+		return 1
+
 	var/material/M = name_to_material[S.default_type]
 	if(!istype(M))
 		return 0

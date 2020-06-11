@@ -360,3 +360,9 @@
 	anchored = 1
 	density = 0
 	opacity = 0
+
+/obj/vehicles/air/overmap/pelican/achlys/enter_as_position(var/mob/living/carbon/human/user,var/position = "passenger")
+	if(!istype(user))
+		to_chat(user,"<span class = 'notice'>You can't enter [src]!</span>")
+		return
+	. = ..()
