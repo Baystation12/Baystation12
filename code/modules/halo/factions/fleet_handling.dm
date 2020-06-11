@@ -28,12 +28,12 @@
 	GLOB.UNSC.AnnounceCommand("Reinforcements from the [fleetname] Fleet have arrived in the system. Hold out for just a little longer, marines.")
 	GLOB.COVENANT.AnnounceCommand("An overwhelming human fleet has jumped insystem. You have failed to achieve your objectives in time.")
 
-	//unlock a spartan after a short delay
+	//unlock a spartan slot after a short delay
 	spawn(100)
-		var/datum/job/special_job = job_master.occupations_by_title[/datum/job/unsc/spartan_two]
+		var/datum/job/special_job = job_master.occupations_by_type[/datum/job/unsc/spartan_two]
 		if(special_job)
 			special_job.total_positions += 1
-			GLOB.UNSC.AnnounceCommand("Spartan IIs have been deployed to the battlefront.")
+			GLOB.UNSC.AnnounceCommand("A Spartan II is being deployed to the battlefront.")
 	. = ..()
 
 /datum/faction/proc/set_endless_fleets()
