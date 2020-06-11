@@ -203,14 +203,9 @@ cloak disrupt override
 		if(!stat)
 			if(headcheck(hit_zone))
 				//Harder to score a stun but if you do it lasts a bit longer
-				if(prob(effective_force))
+				if(prob(effective_force/2))
 					visible_message("<span class='danger'>[src] [species.knockout_message]</span>")
 					apply_effect(20, PARALYZE, blocked)
-			else
-				//Easier to score a stun but lasts less time
-				if(prob(effective_force + 10))
-					visible_message("<span class='danger'>[src] has been knocked down!</span>")
-					apply_effect(2, WEAKEN, blocked)
 
 		//Apply blood
 		attack_bloody(I, user, effective_force, hit_zone)

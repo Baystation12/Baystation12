@@ -1,5 +1,5 @@
 
-#define SANSHYUUM_ARMOUR_ICON 'code/modules/halo/covenant/species/sangheili/Sangheili_Combat_Harness.dmi'
+#define SANSHYUUM_ARMOUR_ICON 'code/modules/halo/covenant/species/sanshyuum/r_sanshyuum.dmi'
 
 /obj/item/clothing/suit/prophet_robe
 	name = "San Shyuum Robe"

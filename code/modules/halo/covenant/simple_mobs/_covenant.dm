@@ -9,6 +9,7 @@
 	assault_target_type = /obj/effect/landmark/assault_target/covenant
 	icon = 'code/modules/halo/covenant/simple_mobs/simple_mobs.dmi'
 	var/obj/item/device/flashlight/held_light
+	possible_grenades = list(/obj/item/weapon/grenade/plasma)
 
 /mob/living/simple_animal/hostile/covenant/New()
 	. = ..()

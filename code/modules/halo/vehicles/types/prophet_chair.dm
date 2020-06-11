@@ -8,6 +8,7 @@
 	icon_state = "chair-back"
 
 	comp_prof = /datum/component_profile/throne
+	occupants = list(0,0)
 
 	exposed_positions = list("driver" = 20)
 

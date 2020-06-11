@@ -14,9 +14,8 @@
 	desc = "Floor made of an advanced alien alloy."
 	icon = 'code/modules/halo/turfs/forerunner/floors.dmi'
 	icon_base = "floortile"
-	build_type = /obj/item/stack/tile
 	flags = TURF_ACID_IMMUNE
-	build_type = /obj/item/stack/tile
+	build_type = null
 	build_cost = 2
 	build_time = 30
 	apply_thermal_conductivity = 0.025
