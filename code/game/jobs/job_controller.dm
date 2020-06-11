@@ -671,18 +671,20 @@ var/global/datum/controller/occupations/job_master
 	//grab the spawn
 	candidate = spawntypes()[spawnpoint_id]
 
+	var/error_message
 	if(candidate)
 		var/retval = candidate.check_job_spawning(job_datum, joined_late)
 		if(!retval)
 			return candidate
-		else
-			to_chat(C,"<span class = 'warning'>SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum ? job_datum.type : "NULL JOB"]\' is blocked! Reason: [retval] (client: [C])</span>")
-			log_debug("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum ? job_datum.type : "NULL JOB"]\' is blocked! (client: [C]) Reason: [retval]")
-			message_admins("SPAWN WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum ? job_datum.type : "NULL JOB"]\' is blocked! (client: [C]) Reason: [retval]")
+		else if(retval != "disabled")
+			error_message = "JOBMASTER WARNING: Spawnpoint set to \'[spawnpoint_id]\', yet spawning as \'[job_datum ? job_datum.type : "NULL JOB"]\' is blocked! Reason: [retval] (client: [C])"
 	else
-		to_chat(C,"<span class = 'warning'>SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist!</span> (client: [C])")
-		log_debug("SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist! (client: [C], job:[job_datum.type])")
-		message_admins("SPAWN ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist! (client: [C], job:[job_datum.type])")
+		error_message = "JOBMASTER ERROR: Spawnpoint set to [spawnpoint_id], yet spawnpoint does not exist! (job:[job_datum.type], client: [C])"
+
+	if(error_message)
+		if(Debug2)
+			message_admins(error_message)
+		log_debug(error_message)
 
 	/*
 	candidate = GLOB.using_map.get_working_spawn(C, job_datum)

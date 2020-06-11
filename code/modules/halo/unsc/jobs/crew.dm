@@ -1,19 +1,21 @@
 
 /datum/job/unsc/crew
-	title = "UNSC Ship Crew"
+	title = "UNSC Station Crew"
+	fallback_spawnpoint = null
 	outfit_type = /decl/hierarchy/outfit/job/unsc
 	alt_titles = list(\
-	"UNSC Ship Janitor" = /decl/hierarchy/outfit/job/unsc/janitor,
-	"UNSC Ship Logistics" = /decl/hierarchy/outfit/job/unsc/logistics,
-	"UNSC Ship Technician" = /decl/hierarchy/outfit/job/unsc/technician,
-	"UNSC Ship Gunner" = /decl/hierarchy/outfit/job/unsc/gunner,
+	"UNSC Janitor" = /decl/hierarchy/outfit/job/unsc/janitor,
+	"UNSC Logistics" = /decl/hierarchy/outfit/job/unsc/logistics,
+	"UNSC Technician" = /decl/hierarchy/outfit/job/unsc/technician,
+	"UNSC Gunner" = /decl/hierarchy/outfit/job/unsc/gunner,
 	"UNSC Pilot" = /decl/hierarchy/outfit/job/unsc/pilot,
 	"UNSC Bridge Crew" = /decl/hierarchy/outfit/job/unsc/bridge,
-	"UNSC Ship Operations" = /decl/hierarchy/outfit/job/unsc/science,
-	"UNSC Ship Helmsman" = /decl/hierarchy/outfit/job/unsc/helm)
+	"UNSC Operations" = /decl/hierarchy/outfit/job/unsc/science,
+	"UNSC Helmsman" = /decl/hierarchy/outfit/job/unsc/helm)
 
 /datum/job/unsc/medical
-	title = "UNSC Ship Medic"
+	title = "UNSC Station Medic"
+	fallback_spawnpoint = null
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc/medic

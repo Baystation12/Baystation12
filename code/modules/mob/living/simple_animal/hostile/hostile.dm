@@ -195,17 +195,27 @@
 
 /mob/living/simple_animal/hostile/UnarmedAttack(var/atom/attacked,var/prox_flag)
 	setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	if(istype(attacked,/mob/living))
+	if(isliving(attacked))
+		//some prep stuff
 		var/mob/living/L = attacked
 		var/damage_to_apply = rand(melee_damage_lower,melee_damage_upper)
-		if(istype(L,/mob/living/carbon/human))
+
+		//tell the world
+		L.visible_message("<span class='danger'>[src] has [attacktext] [L]!</span>")
+
+		//shields check
+		if(ishuman(attacked))
 			var/mob/living/carbon/human/h = L
 			if(h.check_shields(damage_to_apply, src, src, attacktext))
 				return
-		L.visible_message("<span class='danger'>[src] has attacked [L]!</span>")
+
+		//do the thing
 		L.apply_damage(damage_to_apply,damtype,null,L.run_armor_check(null,defense))
 		src.do_attack_animation(L)
-		spawn(1) L.updatehealth()
+
+		//we're doing a hack here but ok
+		if(isanimal(L))
+			L.updatehealth()
 		return L
 	else if(istype(attacked,/obj/mecha) || istype(attacked,/obj/effect) || istype(attacked,/obj/structure) || istype(attacked,/obj/vehicles))
 		var/obj/o = attacked

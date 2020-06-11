@@ -206,6 +206,10 @@ var/list/airlock_overlays = list()
 	door_color = COLOR_WHITE
 	stripe_color = COLOR_VIOLET
 
+/obj/machinery/door/airlock/glass/chemistry
+	door_color = COLOR_WHITE
+	stripe_color = COLOR_PALE_ORANGE
+
 /obj/machinery/door/airlock/glass/sol
 	door_color = COLOR_BLUE_GRAY
 	stripe_color = COLOR_AMBER
@@ -240,7 +244,7 @@ var/list/airlock_overlays = list()
 	locked = 1
 
 /obj/machinery/door/airlock/external/bolted/cycling
-	frequency = 1379
+	frequency = AIRLOCK_FREQ
 
 /obj/machinery/door/airlock/external/bolted_open
 	icon_state = "open"
@@ -258,7 +262,7 @@ var/list/airlock_overlays = list()
 	locked = 1
 
 /obj/machinery/door/airlock/external/glass/bolted/cycling
-	frequency = 1379
+	frequency = AIRLOCK_FREQ
 
 /obj/machinery/door/airlock/external/glass/bolted_open
 	icon_state = "open"

@@ -4,24 +4,8 @@
 
 	#include "areas.dm"
 
-	#include "fakewall.dm"
-	#include "sewer_tunnel_thin.dm"
-	#include "bumpstairs.dm"
-
-	#include "innie_outfits.dm"
-	#include "innie_spawns.dm"
-	#include "innie_hud.dm"
-	#include "innie_jobs.dm"
-
-	#include "x52_spawns.dm"
-	#include "x52_outfits.dm"
-	#include "x52_jobs.dm"
-
-	#include "geminus_city_spawns.dm"
 	#include "geminus_city_overmap.dm"
-	#include "geminus_city_outfits.dm"
 	#include "geminus_city_map.dm"
-	#include "geminus_city_jobs.dm"
 
 	#include "innie_quest/transport_area.dm"
 	#include "innie_quest/computer_comms.dm"
@@ -45,6 +29,8 @@
 	#include "geminuscity_3.dmm"
 	#include "geminuscity_2.dmm"
 	#include "geminuscity_1.dmm"
+
+	#include "../faction_bases/complex046/complex046.dm"
 
 #elif !defined(MAP_OVERRIDE)
 

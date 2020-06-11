@@ -6,9 +6,9 @@
 	extended_round_description = "The Covenant ransack the outer edges of human space for Forerunner artifacts."
 	required_players = 0
 	end_conditions_required = 2
-	factions = list(/datum/faction/unsc, /datum/faction/covenant,/datum/faction/human_civ)
-	overmap_hide = list(/obj/effect/overmap/sector/exo_listen)
-	overmap_hide = list(/obj/effect/overmap/ship/urf_flagship)
+	factions = list(/datum/faction/unsc, /datum/faction/covenant)
+	overmap_hide = list(/obj/effect/overmap/sector/exo_listen, /obj/effect/overmap/ship/urf_flagship)
+	faction_balance = list(/datum/faction/covenant,/datum/faction/unsc)
 	disabled_jobs_types = list(\
 		/datum/job/soe_commando,\
 		/datum/job/soe_commando_officer,\
@@ -20,10 +20,10 @@
 		/datum/job/geminus_innie/commander,\
 		/datum/job/geminus_innie/orion_defector,\
 		/datum/job/insurrectionist_ai,\
-		/datum/job/police,\
-		/datum/job/police_chief,\
+		/datum/job/colonist/police,\
+		/datum/job/colonist/police/chief,\
 		/datum/job/colonist,\
-		/datum/job/colonist_mayor,\
+		/datum/job/colonist/mayor,\
 		/datum/job/colony_ai)
 
 /datum/game_mode/outer_colonies/reclamation/setup_objectives()

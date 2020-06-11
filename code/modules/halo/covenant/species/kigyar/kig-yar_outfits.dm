@@ -73,7 +73,6 @@
 	l_ear = /obj/item/device/radio/headset/covenant
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 
-	uniform = /obj/item/clothing/under/ranger_kigyar
 	suit = /obj/item/clothing/suit/armor/ranger_kigyar
 	head = /obj/item/clothing/head/helmet/ranger_kigyar
 

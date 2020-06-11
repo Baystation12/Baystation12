@@ -101,7 +101,7 @@
 			if(point_at)
 				var/obj/point = new /obj/effect/landmark/dropship_land_point (point_at)
 				point.name = "Level [i] - [n]"
-
+/*
 /obj/effect/overmap/ship/proc/assign_fleet(var/assign)
 	if(our_fleet == assign)
 		return
@@ -112,6 +112,7 @@
 		else
 			qdel(our_fleet)
 	our_fleet = assign
+	*/
 
 /obj/effect/overmap/ship/generate_targetable_areas()
 	if(isnull(parent_area_type))
