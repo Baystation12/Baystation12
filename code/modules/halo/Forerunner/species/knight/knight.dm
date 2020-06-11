@@ -81,8 +81,8 @@
 	return FALSE
 
 /datum/species/knight/handle_death(var/mob/living/carbon/human/H)
-	H.visible_message("<span class = 'notice'>[H] begins to disintegrate as it starts an emergency translocation jump...</span>")
-	sleep(15)
+	H.visible_message("<span class = 'danger'>[H] begins to disintegrate as it starts an emergency translocation jump...</span>")
+	sleep(3 SECONDS)
 	H.do_tele_evac(null)
 
 /datum/species/knight/handle_dodge_roll(var/mob/roller,var/rolldir,var/roll_dist,var/roll_delay)
