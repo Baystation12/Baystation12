@@ -165,7 +165,12 @@
 /datum/job/proc/has_alt_title(var/mob/H, var/supplied_title, var/desired_title)
 	return (supplied_title == desired_title) || (H.mind && H.mind.role_alt_title == desired_title)
 
+/datum/job
+	var/debug_pop_balance = 0
+
 /datum/job/proc/is_restricted(var/datum/preferences/prefs, var/feedback)
+	. = FALSE
+
 	if(!is_branch_allowed(prefs.char_branch))
 		to_chat(feedback, "<span class='boldannounce'>Wrong branch of service for [title]. Valid branches are: [get_branches()].</span>")
 		return TRUE
@@ -178,6 +183,56 @@
 	if(!is_species_allowed(S))
 		to_chat(feedback, "<span class='boldannounce'>Restricted species, [S], for [title].</span>")
 		return TRUE
+
+
+	//is this gamemode trying to balance the faction population?
+	var/num_balancing_factions = ticker.mode.faction_balance.len
+	if(num_balancing_factions >= 2)
+		if(debug_pop_balance)	to_debug_listeners("Checking gamemode balance for [src.title]...")
+
+		//are we out of the safe time?
+		if(world.time > GLOB.round_no_balance_time)
+			if(debug_pop_balance)	to_debug_listeners("Timer: Balance checks active...")
+
+			//only try to balance if this job is part of a faction, and there is at least 1 person assigned
+			var/datum/faction/my_faction = GLOB.factions_by_name[spawn_faction]
+			if(my_faction && my_faction.living_minds.len > 0)
+				if(debug_pop_balance)	to_debug_listeners("[my_faction.name] has [my_faction.living_minds.len] minds assigned")
+
+				//is our faction being balanced?
+				if(my_faction.type in ticker.mode.faction_balance)
+					if(debug_pop_balance)	to_debug_listeners("Faction: Balance checks active...")
+
+					//work out how many players there are in total
+					var/total_faction_players = 0
+					for(var/faction_type in ticker.mode.faction_balance)
+						var/datum/faction/F = GLOB.factions_by_type[faction_type]
+						total_faction_players += F.living_minds.len
+
+					//only try balancing if people have actually joined
+					if(debug_pop_balance)	to_debug_listeners("[total_faction_players] active")
+					if(total_faction_players > 0)
+						//what is the max players we can have?
+						var/max_ratio = 1 / num_balancing_factions
+						max_ratio += max_ratio * GLOB.max_overpop
+
+						//how many players do we have?
+						var/my_faction_players = my_faction.living_minds.len
+						var/my_ratio = my_faction_players / total_faction_players
+
+						//are we overpopped?
+						if(my_ratio > max_ratio)
+							to_chat(feedback, "<span class='boldannounce'>Joining as [title] is blocked due to [spawn_faction] faction overpop.</span>")
+
+							//tell the admins, but dont spam them too much
+							if(world.time > GLOB.last_admin_notice_overpop + 30 SECONDS)
+								GLOB.last_admin_notice_overpop = world.time
+								message_admins("NOTICE: [spawn_faction] jobs disabled due to overpop \
+									([my_faction_players]/[total_faction_players] or \
+									[round(100 * my_faction_players/total_faction_players)]% of living characters... \
+									max [round(100*max_ratio)]% or [round(max_ratio*total_faction_players,0.1)]/[total_faction_players] players)")
+							return TRUE
+						else if(debug_pop_balance)	to_debug_listeners("my_ratio:[my_ratio], max_ratio:[max_ratio], my_faction_players:[my_faction_players]")
 
 	return FALSE
 

@@ -188,33 +188,53 @@
 	followed_type = /mob/observer/ghost
 	suffix = "Ghost"
 
+/*
 /datum/follow_holder/simple_animal
 	sort_order = 6
 	followed_type = /mob/living/simple_animal
 	suffix = "Animal"
+*/
+/datum/follow_holder/sector
+	sort_order = 6
+	followed_type = /obj/effect/overmap/sector
+	suffix = "Planet/Station"
 
+/datum/follow_holder/ship
+	sort_order = 6
+	followed_type = /obj/effect/overmap/ship
+	suffix = "Ship"
+/*
 /datum/follow_holder/slime
 	sort_order = 6
 	followed_type = /mob/living/carbon/slime
 	suffix = "Slime"
+*/
 
+/*
 /datum/follow_holder/spiderling
 	sort_order = 6
 	followed_type = /obj/effect/spider/spiderling
+*/
 
+/*
 /datum/follow_holder/spiderling/show_entry()
 	var/obj/effect/spider/spiderling/S = followed_instance
 	return ..() && S.amount_grown > 0
+*/
 
+/*
 /datum/follow_holder/bot
 	sort_order = 7
 	followed_type = /mob/living/bot
 	suffix = "Bot"
+*/
 
+/*
 /datum/follow_holder/mob
 	sort_order = 7
 	followed_type = /mob/living // List all other (living) mobs we haven't given a special suffix
 	suffix = "Mob"
+*/
 
 /datum/follow_holder/mech
 	sort_order = 8

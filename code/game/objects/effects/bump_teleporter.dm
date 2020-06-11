@@ -10,6 +10,7 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 	anchored = 1
 	density = 1
 	opacity = 0
+	var/faction_restrict
 
 /obj/effect/bump_teleporter/New()
 	..()
@@ -26,6 +27,20 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 	if(!id_target)
 		//user.loc = src.loc	//Stop at teleporter location, there is nowhere to teleport to.
 		return
+
+	if(faction_restrict)
+		if(isliving(user))
+			var/mob/living/L = user
+			if(L.faction != faction_restrict)
+				return
+		else
+			var/success = 0
+			for(var/mob/living/L in user)
+				if(L.faction == faction_restrict)
+					success = 1
+					break
+			if(!success)
+				return
 
 	for(var/obj/effect/bump_teleporter/BT in BUMP_TELEPORTERS)
 		if(BT.id == src.id_target)

@@ -1,6 +1,7 @@
 
 /datum/job/covenant/brute_captain
 	title = "Jiralhanae Captain"
+	department_flag = COM
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/jiralhanae/covenant/captain

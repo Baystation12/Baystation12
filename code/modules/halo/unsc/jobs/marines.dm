@@ -32,13 +32,14 @@
 	total_positions = 1
 	spawn_positions = 1
 	spawn_positions = 1.5
+	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/e5
 	alt_titles = list(\
 		"Marine Staff Sergeant" = /decl/hierarchy/outfit/job/unsc/marine/e6,\
 		"Marine Gunnery Sergeant" = /decl/hierarchy/outfit/job/unsc/marine/e7)
 	access = list(access_unsc,access_unsc_armoury,access_unsc_marine,access_unsc_specialist)
 
-/datum/job/unsc_ship_iwo
+/datum/job/unsc/marine/iwo
 	title = "Infantry Weapons Officer"
 	total_positions = 1
 	spawn_positions = 1

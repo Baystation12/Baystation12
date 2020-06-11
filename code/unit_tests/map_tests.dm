@@ -495,5 +495,98 @@ datum/unit_test/ladder_check/start_test()
 		pass("Found valid observer spawn points.")
 	return 1
 
+//=======================================================================================
+
+/datum/unit_test/map_no_walls_under_airlocks
+	name = "MAP: No walls under airlocks"
+
+/datum/unit_test/map_no_walls_under_airlocks/start_test()
+
+	var/failed = 0
+	for(var/obj/machinery/door/D in world)
+		var/turf/T = get_turf(D)
+		if(T.density)
+			var/area/A = T.loc
+			failed = 1
+			log_bad("[D] ([D.type]) above [T] ([T.type]) in [A] ([A.type]) at ([T.x],[T.y],[T.z]) ")
+
+	if(failed)
+		fail("Found one or more dense turfs under airlocks")
+	else
+		pass("Found no dense turfs under airlocks")
+	return 1
+
+//=======================================================================================
+
+/datum/unit_test/open_space_above_stairs
+	name = "MAP: Open space above stairs"
+
+/datum/unit_test/open_space_above_stairs/start_test()
+
+	//note: this unit test will automatically ignore any failures due to no linked zlevel above it
+	var/failed = FALSE
+
+	for(var/obj/structure/stairs/S in world)
+		var/turf/simulated/open/O = GetAbove(S)
+		var/area/A = get_area(S)
+		if(O)
+			if(!istype(O))
+				failed = TRUE
+				log_bad("[S] ([S.type]) in [A] ([A.type]) at ([S.x],[S.y],[S.z]) has no open space above")
+		else
+			log_debug("[S] ([S.type]) in [A] ([A.type]) at ([S.x],[S.y],[S.z]) has no zlevel above")
+
+	if(failed)
+		fail("Found one or more stairs without open space above")
+	else
+		pass("All stairs had open space above")
+	return 1
+
+/datum/unit_test/ladders_linking
+	name = "MAP: Ladders should be correctly linked vertically"
+
+/datum/unit_test/ladders_linking/start_test()
+
+	//note: this unit test will automatically ignore any failures due to no linked zlevel in the allowed_directions
+	var/failed = FALSE
+
+	for(var/obj/structure/ladder/L in world)
+
+		//check upwards
+		if(L.allowed_directions & UP)
+			var/turf/T = GetAbove(L)
+			var/area/A = get_area(L)
+			if(T)
+				var/obj/structure/ladder/check_ladder = locate() in T
+				if(!check_ladder)
+					failed = TRUE
+					log_bad("[L] ([L.type]) in [A] ([A.type]) at ([L.x],[L.y],[L.z]) has no ladder above")
+				else if(!(check_ladder.allowed_directions & DOWN))
+					failed = TRUE
+					log_bad("[L] ([L.type]) in [A] ([A.type]) at ([L.x],[L.y],[L.z]) has an incorrect ladder above")
+			else
+				log_debug("[L] ([L.type]) in [A] ([A.type]) at ([L.x],[L.y],[L.z]) has no zlevel above")
+
+		//check downwards
+		if(L.allowed_directions & DOWN)
+			var/turf/T = GetBelow(L)
+			var/area/A = get_area(L)
+			if(T)
+				var/obj/structure/ladder/check_ladder = locate() in T
+				if(!check_ladder)
+					failed = TRUE
+					log_bad("[L] ([L.type]) in [A] ([A.type]) at ([L.x],[L.y],[L.z]) has no ladder below")
+				else if(!(check_ladder.allowed_directions & UP))
+					failed = TRUE
+					log_bad("[L] ([L.type]) in [A] ([A.type]) at ([L.x],[L.y],[L.z]) has an incorrect ladder below")
+			else
+				log_debug("[L] ([L.type]) in [A] ([A.type]) at ([L.x],[L.y],[L.z]) has no zlevel below")
+
+	if(failed)
+		fail("Found one or more ladders without a correctly paired vertical ladder")
+	else
+		pass("All ladders paired correctly")
+	return 1
+
 #undef SUCCESS
 #undef FAILURE

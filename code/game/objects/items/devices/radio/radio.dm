@@ -271,13 +271,21 @@ GLOBAL_LIST_EMPTY(all_radios)
 
 	var/datum/radio_frequency/connection = dongles_connections[dongle]
 
+	return autosay_connection(message, from, connection, language_name, dongle.cipher)
+
+/obj/item/device/radio/proc/autosay_connection(var/message, var/from, var/datum/radio_frequency/connection, var/language_name, var/cipher)
 	var/mob/living/silicon/ai/A = new /mob/living/silicon/ai(src, null, null, 1)
 	A.fully_replace_character_name(from)
-	post_signal(A, message, connection, "states", all_languages[language_name], dongle.cipher)
+	post_signal(A, message, connection, "says", all_languages[language_name], cipher)
 	A.loc = null
 	qdel(A)
 
 	return 1
+
+/obj/item/device/radio/proc/autosay_freq(var/message, var/from, var/custom_freq, var/language_name)
+	if(isnum(custom_freq))
+		set_frequency(custom_freq)
+		return autosay_connection(message, from, radio_connection, language_name)
 
 /obj/item/device/radio/talk_into(mob/living/M as mob, message, var/hotkey, var/speaking_verb = "says", var/datum/language/speaking = null)
 	if(!on)

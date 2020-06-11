@@ -76,10 +76,6 @@
 	name = "CRS Unyielding Transgression Docking Umbilical Starboard"
 	icon_state = "LPS"
 
-/area/covenant_light_cruiser/portsidestorage
-	name = "CRS Unyielding Transgression Portside Storage"
-	icon_state = "maint_cargo"
-
 /area/covenant_light_cruiser/portholdingcell
 	name = "CRS Unyielding Transgression Port Holding Cells"
 	icon_state = "sec_prison"

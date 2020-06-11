@@ -157,4 +157,25 @@ See code/procs/announce.dm
 	if(!check_rights(R_FUN))
 		return
 
-	custom_faction_announcement(GLOB.HUMAN_CIV)
+	custom_faction_announcement(GLOB.FLOOD)
+
+
+
+// secrets panel entry for player faction announcements
+
+/datum/admin_secret_item/fun_secret/custom_announcement
+	name = "Custom Faction Announcement"
+
+/datum/admin_secret_item/fun_secret/custom_announcement/execute(var/mob/user)
+	var/list/options = list(\
+		"UNSC" = /client/proc/unsc_announcement,\
+		"Covenant" = /client/proc/covenant_announcement,\
+		"Insurrection" = /client/proc/innie_announcement,\
+		"All-Human" = /client/proc/human_announcement,\
+		"Flood" = /client/proc/flood_announcement\
+		)
+
+	var/choice = input("What faction should recieve the announcement?","Custom Announcement") as null|anything in options
+	var/proc_call = options[choice]
+	if(proc_call)
+		call(user.client, proc_call)()

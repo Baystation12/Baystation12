@@ -33,6 +33,9 @@
 				//assume the quest has already been removed from processing_quests elsewhere if PROCESS_KILL is returned
 				keep_processing = 1
 
+	if(handle_fleet())
+		keep_processing = 1
+
 	//looks like we're finished and can go dormant for now
 	if(!keep_processing)
 		GLOB.factions_controller.processing_factions.Remove(src)

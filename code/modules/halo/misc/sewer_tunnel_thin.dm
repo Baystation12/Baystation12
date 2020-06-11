@@ -71,6 +71,8 @@
 			left.ChangeTurf(walltype)
 		else
 			break
+		if(prob(1))
+			new /obj/effect/landmark/artifact_spawn(left)
 
 		//right wall
 		walltype = /turf/simulated/wall/tech
@@ -85,6 +87,8 @@
 			right.ChangeTurf(walltype)
 		else
 			break
+		if(prob(1))
+			new /obj/effect/landmark/artifact_spawn(right)
 
 		//hostile NPC animal
 		if(prob(animal_chance))

@@ -1,12 +1,16 @@
 // At minimum every mob has a hear_say proc.
 
+/mob/var/debug_say = 0
+
 /mob/proc/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/alt_name = "",var/italics = 0, var/mob/speaker = null, var/sound/speech_sound, var/sound_vol)
 	if(!client)
+		if(debug_say)	to_debug_listeners("[src] hear_say() exit 1")
 		return
 
 	if(speaker && !speaker.client && isghost(src) && is_preference_enabled(/datum/client_preference/ghost_ears) && !(speaker in view(src)))
 			//Does the speaker have a client?  It's either random stuff that observers won't care about (Experiment 97B says, 'EHEHEHEHEHEHEHE')
 			//Or someone snoring.  So we make it where they won't hear it.
+		if(debug_say)	to_debug_listeners("[src] hear_say() exit 2")
 		return
 
 	//make sure the air can transmit speech - hearer's side
@@ -15,6 +19,7 @@
 		var/datum/gas_mixture/environment = T.return_air()
 		var/pressure = (environment)? environment.return_pressure() : 0
 		if(pressure < SOUND_MINIMUM_PRESSURE && get_dist(speaker, src) > 1)
+			if(debug_say)	to_debug_listeners("[src] hear_say() exit 3")
 			return
 
 		if (pressure < ONE_ATMOSPHERE*0.4) //sound distortion pressure, to help clue people in that the air is thin, even if it isn't a vacuum yet
@@ -23,6 +28,7 @@
 
 	if(sleeping || stat == UNCONSCIOUS)
 		hear_sleep(message)
+		if(debug_say)	to_debug_listeners("[src] hear_say() exit 4")
 		return
 
 	//non-verbal languages are garbled if you can't see the speaker. Yes, this includes if they are inside a closet.

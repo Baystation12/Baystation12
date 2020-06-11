@@ -26,6 +26,7 @@
 	var/list/decals
 
 	var/movement_delay = 0
+	var/can_build_wall = FALSE
 
 /turf/New()
 	..()

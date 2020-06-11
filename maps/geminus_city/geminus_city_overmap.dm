@@ -9,6 +9,7 @@
 	map_bounds = list(1,160,175,1)
 
 	overmap_spawn_near_me = list(/obj/effect/overmap/ship/unsc_odp_cassius)
+	overmap_spawn_in_me = list(/obj/effect/overmap/complex046)
 
 	faction = "Human Colony"
 	base = 1
@@ -21,9 +22,3 @@
 /obj/effect/overmap/sector/geminus_city/New()
 	. = ..()
 	//loot_distributor.loot_list["artifactRandom"] = list(/obj/machinery/artifact/forerunner_artifact,null,null,null,null,null,null,null,null,null)
-
-/obj/effect/loot_marker/artifact_spawn
-	loot_type = "artifactRandom"
-
-/obj/effect/landmark/artifact_spawn
-	name = "Post-Scan Artifact Spawn"

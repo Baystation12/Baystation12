@@ -78,15 +78,18 @@
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	name = "Jiralhanae Helm (Minor)"
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "minorhelm"
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/major
 	name = "Jiralhanae Helm (Major)"
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "majorhelm"
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
 	name = "Jiralhanae Helm (Captain)"
 	desc = "This modified helmet is of some significance to Jiralhanae clans. It is a mark of importance, however now diminished by the covenant hierarchy."
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainhelm"
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/EVA
@@ -190,15 +193,18 @@
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/minor
 	name = "Jiralhanae Armor (Minor)"
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "minorchest"
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/major
 	name = "Jiralhanae Armor (Major)"
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "majorchest"
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
 	name = "Jiralhanae Armor (Captain)"
 	desc = "This modified armor used to be a mark of importance to a Jiralhanae clan. The Covenant hierarchy has diminished it's power."
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainchest"
 
 /* SHOES */
@@ -224,14 +230,17 @@
 
 /obj/item/clothing/shoes/jiralhanae/covenant/minor
 	name = "Jiralhanae Greaves (Minor)"
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "minorfeet"
 
 /obj/item/clothing/shoes/jiralhanae/covenant/major
 	name = "Jiralhanae Greaves (Major)"
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "majorfeet"
 
 /obj/item/clothing/shoes/jiralhanae/covenant/captain
 	name = "Jiralhanae Greaves (Captain)"
+	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainfeet"
 
 

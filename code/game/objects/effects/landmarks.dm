@@ -84,6 +84,7 @@
 	icon_state = "x"
 	anchored = 1.0
 	invisibility = 101
+	var/spawn_type
 
 /obj/effect/landmark/start/New()
 	..()
@@ -93,6 +94,15 @@
 
 /obj/effect/landmark/start/joinlate
 	name = "JoinLate"
+
+/obj/effect/landmark/start/Destroy()
+
+	if(spawn_type)
+		var/datum/spawnpoint/my_spawn = locate(spawn_type)
+		if(my_spawn)
+			my_spawn.try_destroy(src)
+
+	. = ..()
 
 //Costume spawner landmarks
 /obj/effect/landmark/costume
