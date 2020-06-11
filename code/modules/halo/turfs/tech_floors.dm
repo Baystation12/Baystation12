@@ -85,27 +85,27 @@
 	name = "steel floor"
 	icon = 'code/modules/halo/turfs/floor_tech.dmi'
 	icon_state = "techfloor_gray"
-	flooring = /decl/flooring/tiling/tech
+	initial_flooring = /decl/flooring/tiling/tech
 
 /turf/simulated/floor/tech/white
 	icon_state = "techfloor_white"
-	flooring = /decl/flooring/tiling/tech/white
+	initial_flooring = /decl/flooring/tiling/tech/white
 
 /turf/simulated/floor/tech/gray
 	icon_state = "techfloor_grid"
-	flooring = /decl/flooring/tiling/tech/grid
+	initial_flooring = /decl/flooring/tiling/tech/grid
 
 /turf/simulated/floor/tech/steel
 	icon_state = "steel_grid"
-	flooring = /decl/flooring/tiling/tech/steel
+	initial_flooring = /decl/flooring/tiling/tech/steel
 
 /turf/simulated/floor/tech/ridged
 	icon_state = "steel_ridged"
-	flooring = /decl/flooring/tiling/tech/ridged
+	initial_flooring = /decl/flooring/tiling/tech/ridged
 
 /turf/simulated/floor/tech/maint
 	icon_state = "techmaint"
-	flooring = /decl/flooring/tiling/tech/maint
+	initial_flooring = /decl/flooring/tiling/tech/maint
 
 //not buildable ingame
 
