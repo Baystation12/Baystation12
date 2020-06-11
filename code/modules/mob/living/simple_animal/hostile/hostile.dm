@@ -236,7 +236,7 @@
 	var/obj/item/weapon/grenade/nade = new nadetype (spawn_turf)
 	visible_message("<span class = 'danger'>[src] throws [nade]!</span>")
 	nade.activate(src)
-	nade.det_time = max(10,det_time-10)
+	nade.det_time = max(10,nade.det_time-10)
 	nade.throw_at(atk_trf, nade.throw_range, nade.throw_speed, src)
 
 /mob/living/simple_animal/hostile/RangedAttack(var/atom/attacked)
