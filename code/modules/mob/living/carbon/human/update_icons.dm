@@ -799,14 +799,18 @@ var/global/list/damage_icon_parts = list()
 /mob/living/carbon/human/proc/reapply_offsets()
 	for(var/i = 1 to overlays_standing.len)
 		var/image/img = overlays_standing[i]
-		if(!istype(img) || img.pixel_x == 0 && img.pixel_y == 0)
+		if(!istype(img) || (img.pixel_x == 0 && img.pixel_y == 0))
 			continue
-		var/is_hand = 0
-		if(i == L_HAND_LAYER || i == R_HAND_LAYER)
-			is_hand = 1
-		var/list/offsets = get_mob_offset_for(img,is_hand)
+		img.pixel_x = 0
+		img.pixel_y = 0
+		var/list/offsets = get_mob_offset_for(img,0)
 		img.pixel_x = offsets[1]
 		img.pixel_y = offsets[2]
+		if(i == L_HAND_LAYER)
+			apply_hand_offsets(img,0)
+		else if(i == R_HAND_LAYER)
+			apply_hand_offsets(img,1)
+	update_icons()
 
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
