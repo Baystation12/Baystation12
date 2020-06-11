@@ -1,4 +1,4 @@
-/datum/job/unsc_ship_ai
+/datum/job/unsc_ai
 	title = "UNSC AI"
 	spawn_faction = "UNSC"
 	total_positions = 1

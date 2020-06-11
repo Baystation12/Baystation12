@@ -165,7 +165,7 @@ obj/machinery/airlock_sensor
 
 	var/id_tag
 	var/master_tag
-	var/frequency = 1379
+	var/frequency = AIRLOCK_FREQ
 	var/command = "cycle"
 
 	var/datum/radio_frequency/radio_connection
@@ -305,9 +305,9 @@ obj/machinery/access_button/Destroy()
 	return ..()
 
 obj/machinery/access_button/airlock_interior
-	frequency = 1379
+	frequency = AIRLOCK_FREQ
 	command = "cycle_interior"
 
 obj/machinery/access_button/airlock_exterior
-	frequency = 1379
+	frequency = AIRLOCK_FREQ
 	command = "cycle_exterior"

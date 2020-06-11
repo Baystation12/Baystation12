@@ -84,6 +84,9 @@
 	power_channel = EQUIP
 	power_rating = 15000	//15 kW ~ 20 HP
 
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock
+	frequency = AIRLOCK_FREQ
+
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
@@ -256,8 +259,13 @@
 		id_tag = num2text(uid)
 
 	//some vents work his own special way
-	radio_filter_in = frequency==1439?(RADIO_FROM_AIRALARM):null
-	radio_filter_out = frequency==1439?(RADIO_TO_AIRALARM):null
+	if(frequency == 1439)
+		radio_filter_in = RADIO_FROM_AIRALARM
+		radio_filter_out = RADIO_TO_AIRALARM
+	else if(frequency == AIRLOCK_FREQ)
+		radio_filter_in = RADIO_AIRLOCK
+		radio_filter_out = RADIO_AIRLOCK
+
 	if(frequency)
 		radio_connection = register_radio(src, frequency, frequency, radio_filter_in)
 		src.broadcast_status()
