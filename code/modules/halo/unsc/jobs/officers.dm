@@ -3,6 +3,7 @@
 	title = "UNSC Commanding Officer"
 	total_positions = 1
 	spawn_positions = 1
+	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/job/unsc/commanding_officer
 	economic_modifier = 2.5
 	faction_whitelist = "UNSC"
@@ -29,6 +30,7 @@
 	title = "UNSC Executive Officer"
 	total_positions = 1
 	spawn_positions = 1
+	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/job/unsc/executive_officer
 	economic_modifier = 2
 	access = list(\

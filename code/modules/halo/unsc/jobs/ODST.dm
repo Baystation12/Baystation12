@@ -19,6 +19,7 @@
 
 /datum/job/unsc/odst/squad_leader
 	title = "Orbital Drop Shock Trooper Officer"
+	department_flag = COM
 	total_positions = 1
 	spawn_positions = 1
 	is_whitelisted = 1

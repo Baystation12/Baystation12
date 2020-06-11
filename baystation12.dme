@@ -3043,6 +3043,7 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\_map_include.dm"
+#include "maps\_gamemodes\_popbalance.dm"
 #include "maps\geminus_city\geminus_city.dm"
 #include "maps\geminus_city\innie_quest\file_comms.dm"
 #include "maps\geminus_city\innie_quest\file_coord.dm"

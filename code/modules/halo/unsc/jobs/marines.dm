@@ -32,6 +32,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	spawn_positions = 1.5
+	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/job/unsc/marine/e5
 	alt_titles = list(\
 		"Marine Staff Sergeant" = /decl/hierarchy/outfit/job/unsc/marine/e6,\
