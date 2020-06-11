@@ -251,6 +251,7 @@
 			broadcast_hit()
 
 	if(add_proj && hull <=0) // So we don't delete the ship from damage when it's loaded in.
+		new /obj/effect/explosion(src.loc)
 		lose_to_space()
 
 /obj/effect/overmap/ship/npc_ship/proc/pick_ship_datum()

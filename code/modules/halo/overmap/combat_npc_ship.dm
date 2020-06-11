@@ -129,10 +129,10 @@
 	. = ..()
 
 /obj/item/projectile/overmap/mac/npc
-	damage = 250 //1/4 the damage of the bertels' MAC
+	damage = 1000
 
 /obj/item/projectile/overmap/beam/npc
-	damage = 500
+	damage = 1000
 
 //UNSC//
 /obj/effect/overmap/ship/npc_ship/combat/unsc
@@ -147,10 +147,12 @@
 	name = "UNSC [name]"
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed
+	hull = 2000
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/corvette.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/unsc/heavily_armed
+	hull = 2500
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/Cruiser.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 2 SECONDS, /obj/item/projectile/overmap/mac/npc = 15 SECONDS)
 
@@ -172,9 +174,11 @@
 		. = ..()
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed
+	hull = 2000
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.1 SECONDS,/obj/item/projectile/overmap/missile = 1 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/innie/heavily_armed
+	hull = 2500
 	projectiles_to_fire = list(/obj/item/projectile/overmap/deck_gun_proj = 0.2 SECONDS,/obj/item/projectile/overmap/missile = 0.5 SECONDS, /obj/item/projectile/overmap/mac/npc = 20 SECONDS)
 
 //COVENANT//
@@ -216,10 +220,12 @@
 	available_ship_requests = newlist(/datum/npc_ship_request/halt/cov,/datum/npc_ship_request/fire_on_target/cov,/datum/npc_ship_request/control_fleet/cov,/datum/npc_ship_request/add_to_fleet/cov,/datum/npc_ship_request/give_control/cov)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed
+	hull = 2000
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed
+	hull = 2500
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/SDV.dmi')
 	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.1 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 20 SECONDS)
 
