@@ -519,7 +519,7 @@ datum/unit_test/ladder_check/start_test()
 //=======================================================================================
 
 /datum/unit_test/open_space_above_stairs
-	name = "MAP: Open space above stairs/ladders"
+	name = "MAP: Open space above stairs"
 
 /datum/unit_test/open_space_above_stairs/start_test()
 

@@ -29,4 +29,11 @@
 	var/datum/game_mode/outer_colonies/gm = ticker.mode
 	if(istype(gm))
 		gm.allow_scan = 1
+
+		//unlock a spartan slot after a short delay
+		spawn(100)
+			var/datum/job/special_job = job_master.occupations_by_title[/datum/job/unsc/spartan_two]
+			if(special_job)
+				special_job.total_positions += 1
+				GLOB.UNSC.AnnounceCommand("Spartan IIs have been deployed to the battlefront.")
 	. = ..()

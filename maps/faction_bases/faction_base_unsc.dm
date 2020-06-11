@@ -14,6 +14,7 @@ GLOBAL_LIST_EMPTY(unsc_base_spawns)
 /datum/spawnpoint/unsc_base
 	display_name = "UNSC Base Spawns"
 	restrict_job_type = list(\
+	/datum/job/unsc/spartan_two,\
 	/datum/job/unsc/crew,\
 	/datum/job/unsc/medical,\
 	/datum/job/unsc/marine,\
@@ -51,6 +52,7 @@ GLOBAL_LIST_EMPTY(unsc_base_fallback_spawns)
 /datum/spawnpoint/unsc_base_fallback
 	display_name = "UNSC Base Fallback Spawns"
 	restrict_job_type = list(\
+	/datum/job/unsc/spartan_two,\
 	/datum/job/unsc/marine,\
 	/datum/job/unsc/marine/specialist,\
 	/datum/job/unsc/marine/squad_leader,\
