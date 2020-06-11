@@ -729,6 +729,7 @@ decl/hierarchy/outfit/Jul
 	name = "Loafe's Armor"
 	icon_state = "loafe-armor_obj"
 	item_state = "loafe-armor_worn"
+	flags_inv = HIDETAIL
 
 /obj/item/weapon/storage/backpack/odst/loafe
 	icon = ITEM_INHAND
@@ -737,14 +738,23 @@ decl/hierarchy/outfit/Jul
 	item_state = "loafe-backpack_worn"
 	icon_state = "loafe-backpack_obj"
 
+/obj/item/clothing/under/unsc/marine_fatigues/loafe
+	icon = ITEM_INHAND
+	icon_override = ODST_OVERRIDE
+	icon_state = "Jumpsuit"
+	item_state = "loafe_jumpsuit"
+	worn_state = "loafe_jumpsuit"
+
 /obj/item/weapon/storage/box/large/donator/loafe
 	startswith = list(/obj/item/clothing/head/helmet/odst/donator/loafe,
 					/obj/item/clothing/suit/armor/special/odst/donator/loafe,
-					/obj/item/weapon/storage/backpack/odst/loafe
+					/obj/item/weapon/storage/backpack/odst/loafe,
+					/obj/item/clothing/under/unsc/marine_fatigues/loafe
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/odst/donator/loafe,
 					/obj/item/clothing/suit/armor/special/odst/donator/loafe,
-					/obj/item/weapon/storage/backpack/odst/loafe
+					/obj/item/weapon/storage/backpack/odst/loafe,
+					/obj/item/clothing/under/unsc/marine_fatigues/loafe
 					)
 
 /obj/item/clothing/head/helmet/spartan/loafe
@@ -768,6 +778,48 @@ decl/hierarchy/outfit/Jul
 	head = /obj/item/clothing/head/helmet/odst/donator/loafe
 	suit = /obj/item/clothing/suit/armor/special/odst/donator/loafe
 	back = /obj/item/weapon/storage/backpack/odst/loafe
+
+/obj/item/clothing/under/unsc/marine_fatigues/loafe_co
+	desc = "This armour belongs to a member of the old, forgotten UNSC Inquisitorial Branch. Rumours say they were tasked with inter-colony peacekeeping and showed brutal efficiency."
+	item_state = "loafe_co_uniform"
+	icon_state = "uniform_obj"
+	worn_state = "loafe_co_uniform"
+
+/obj/item/clothing/head/helmet/marine/loafe_co
+	desc = "This armour belongs to a member of the old, forgotten UNSC Inquisitorial Branch. Rumours say they were tasked with inter-colony peacekeeping and showed brutal efficiency."
+	item_state = "loafe_co_hood"
+	icon_state = "helmet_novisor"
+
+/obj/item/clothing/suit/storage/marine/loafe_co
+	desc = "This armour belongs to a member of the old, forgotten UNSC Inquisitorial Branch. Rumours say they were tasked with inter-colony peacekeeping and showed brutal efficiency."
+	item_state = "loafe_co_armor"
+	icon_state = "M52B Body Armor regular_obj"
+	flags_inv = HIDETAIL
+
+/obj/item/clothing/gloves/thick/unsc/loafe_co
+	desc = "This armour belongs to a member of the old, forgotten UNSC Inquisitorial Branch. Rumours say they were tasked with inter-colony peacekeeping and showed brutal efficiency."
+	item_state = "loafe_co_gloves"
+
+/obj/item/clothing/shoes/marine/loafe_co
+	desc = "This armour belongs to a member of the old, forgotten UNSC Inquisitorial Branch. Rumours say they were tasked with inter-colony peacekeeping and showed brutal efficiency."
+	item_state = "loafe_co_boots"
+	icon_state = "boots"
+
+/obj/item/weapon/storage/box/large/donator/loafe/co
+	startswith = list(/obj/item/clothing/under/unsc/marine_fatigues/loafe_co,
+	/obj/item/clothing/head/helmet/marine/loafe_co,
+	/obj/item/clothing/suit/storage/marine/loafe_co,
+	/obj/item/clothing/gloves/thick/unsc/loafe_co,
+	/obj/item/clothing/shoes/marine/loafe_co
+	)
+	can_hold = list(/obj/item/clothing/under/unsc/marine_fatigues/loafe_co,
+	/obj/item/clothing/head/helmet/marine/loafe_co,
+	/obj/item/clothing/suit/storage/marine/loafe_co,
+	/obj/item/clothing/gloves/thick/unsc/loafe_co,
+	/obj/item/clothing/shoes/marine/loafe_co
+	)
+
+////////////////////
 
 //Spartan
 
