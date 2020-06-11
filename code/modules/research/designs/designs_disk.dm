@@ -23,5 +23,5 @@ datum/design/item/disk/flora
 	name = "flora data"
 	desc = "Produce additional disks for storing flora genetic data."
 	id = "flora_disk"
-	req_tech = list(TECH_DATA = 1, TECH_BIO = 3)
+	req_tech = list(TECH_DATA = 1)
 	build_path = /obj/item/weapon/disk/botany
