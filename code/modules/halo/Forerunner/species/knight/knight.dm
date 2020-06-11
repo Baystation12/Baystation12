@@ -89,7 +89,7 @@
 
 /datum/species/knight/handle_death(var/mob/living/carbon/human/H)
 	H.visible_message("<span class = 'danger'>[H] begins to disintegrate as it starts an emergency translocation jump...</span>")
-	H.stun(KNIGHT_DEATH_TP_DELAY)
+	H.Stun(KNIGHT_DEATH_TP_DELAY)
 	sleep(KNIGHT_DEATH_TP_DELAY)
 	H.do_tele_evac(null)
 
