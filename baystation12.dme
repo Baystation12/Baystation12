@@ -1691,6 +1691,7 @@
 #include "code\modules\halo\flood\flood_spawn_proxy.dm"
 #include "code\modules\halo\flood\ghost_role.dm"
 #include "code\modules\halo\floorsigns\floorsigns.dm"
+#include "code\modules\halo\Forerunner\knight.dm"
 #include "code\modules\halo\Forerunner\monitor.dm"
 #include "code\modules\halo\Forerunner\sentinel.dm"
 #include "code\modules\halo\Forerunner\sentinel_kit.dm"
