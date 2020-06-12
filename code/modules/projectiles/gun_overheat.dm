@@ -1,19 +1,14 @@
 
 /obj/item/weapon/gun
-	//Fire delay is modified by this, then used to determine the time after last firing to count as the weapon
-	//recovering from all the overheat it has accumulated
-	//Example: fire_delay 10 with a fullclear_mod of 2 means the player must wait for 20 before firing for the heat to
-	//be cleared.
 	var/overheat_fullclear_delay = 3 SECONDS
 	var/overheat_fullclear_at = 0
 	var/overheat_sfx = null
-	var/overheat_capacity = -1 //If set above -1, a weapon will decrement this counter per-shot until it hits 0.
+	var/overheat_capacity = -1
 	var/heat_current = 0
 	var/datum/progressbar/heat_bar
 	var/heat_per_shot = 1
 
 /obj/item/weapon/gun/process()
-	world << "[src.type]/process()"
 
 	if(process_heat())
 		return
@@ -21,7 +16,6 @@
 	return PROCESS_KILL
 
 /obj/item/weapon/gun/proc/process_heat()
-	world << "/obj/item/weapon/gun/proc/process_heat()"
 	if(heat_current > 0)
 		//cool down slightly
 		add_heat(-1)
@@ -32,9 +26,9 @@
 				clear_overheat()
 				color = initial(color)
 			else
-				//flash red and white
+				//flash red and yellow
 				if(color == "#ff0000")
-					color = "#ffff00"
+					color = "#ffa500"
 				else
 					color = "#ff0000"
 
@@ -45,7 +39,6 @@
 	return 0
 
 /obj/item/weapon/gun/proc/add_heat(var/new_val)
-	world << "/obj/item/weapon/gun/proc/add_heat([new_val])"
 	heat_current = heat_current + new_val
 
 	if(heat_current > 0)
