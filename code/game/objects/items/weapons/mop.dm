@@ -14,7 +14,6 @@
 	var/mopspeed = 40
 	var/list/moppable_types = list(
 		/obj/effect/decal/cleanable,
-		/obj/effect/overlay,
 		/obj/effect/rune,
 		/obj/structure/catwalk
 		)
