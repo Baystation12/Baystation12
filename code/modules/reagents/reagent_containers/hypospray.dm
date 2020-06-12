@@ -58,7 +58,7 @@
 
 	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
 	user.do_attack_animation(M)
-	if(istype(H) && has_been_refilled())
+	if(istype(H) && user.faction != M.faction && has_been_refilled())
 		if(M.run_armor_check(H.get_organ(user.zone_sel.selecting), "melee") >= 100)
 			user.visible_message("<span class = 'warning'>The modified [src] bounces off of [M]'s armor!</span>")
 			return
