@@ -6,7 +6,6 @@
 	Obviously not compatible with variables that take a null value. If a setting is not present, then the corresponding var will not be modified.
 */
 #define BASE_MOVEDELAY_MOD_APPLYFOR_TIME 1 SECOND
-#define FULLCLEAR_MOD_OVERHEAT_MODIFIER 2
 
 /datum/firemode
 	var/name = "default"
@@ -101,15 +100,6 @@
 	var/is_heavy = 0 //Set this to anything above 0, and all species that aren't elites/brutes/spartans/orions have to two-hand it
 	var/advanced_covenant = 0
 
-	//Fire delay is modified by this, then used to determine the time after last firing to count as the weapon
-	//recovering from all the overheat it has accumulated
-	//Example: fire_delay 10 with a fullclear_mod of 2 means the player must wait for 20 before firing for the heat to
-	//be cleared.
-	var/overheat_fullclear_delay = 15
-	var/overheat_fullclear_at = -1
-	var/overheat_sfx = null
-	var/overheat_capacity = -1 //If set above -1, a weapon will decrement this counter per-shot until it hits 0.
-
 	//"Channeled" weapons, aka longfire beam sustained types (sentinel beam)//
 
 	var/sustain_delay = -1 //Set this to the delay between "firing" whilst channeled.Set the weapon tracer to match this value.
@@ -132,25 +122,6 @@
 		if(!istype(attachment))
 			continue
 		attachment.attach_to(src)
-
-/obj/item/weapon/gun/proc/check_reset_overheat()
-	if(overheat_capacity != -1 && world.time >= overheat_fullclear_at)
-		overheat_capacity = initial(overheat_capacity)
-
-/obj/item/weapon/gun/proc/calc_overheat_clear_at(var/mob/user,var/alt_overheat_message = 0)//An alternate "we've already warned you esque" overheat message.
-	overheat_capacity = max(overheat_capacity-1,0)
-	var/modifier = 1
-	if(overheat_capacity == 0)
-		modifier = FULLCLEAR_MOD_OVERHEAT_MODIFIER
-		var/msg = "[src] reaches its thermal limit and quickly starts ventilating heat, disabling their firing mechanism!"
-		if(alt_overheat_message)
-			msg = "[src] clunks as you pull the trigger, it has overheated and needs to ventilate heat..."
-		visible_message("<span class = 'warning'>[msg]</span>")
-
-		if(overheat_sfx)
-			playsound(user,overheat_sfx,100,1)
-
-	overheat_fullclear_at = world.time + overheat_fullclear_delay*modifier
 
 /obj/item/weapon/gun/proc/get_attachments(var/names_only = 0)
 	var/list/attachments = list()
@@ -358,7 +329,8 @@
 		if(!check_z_compatible(target,user)) return
 
 	add_fingerprint(user)
-	check_reset_overheat()
+	if(check_overheat())
+		return
 
 	var/list/attachments = get_attachments()
 	if(attachments.len > 0)
@@ -373,18 +345,15 @@
 	if(!special_check(user))
 		return
 
-	if(overheat_capacity == 0)
-		calc_overheat_clear_at(user,1)
-		return
-
 	if(stored_targ)
 		stored_targ = target
 		visible_message("<span class = 'notice'>[user] refocuses their aim on [target]</span>")
 		return
 
 	if(world.time < next_fire_time)
-		if (world.time % 3) //to prevent spam
+		/*if (world.time % 3) //to prevent spam
 			to_chat(user, "<span class='warning'>[src] is not ready to fire again!</span>")
+			*/
 		return
 
 	var/held_twohanded = (user.can_wield_item(src) && src.is_held_twohanded(user))
@@ -412,11 +381,13 @@
 		stored_targ = target
 		use_targ = stored_targ
 	. = 1
+	/*
 	user.visible_message(
 	"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
 	"<span class='warning'>You fire \the [src]!</span>",
 	"You hear a [fire_sound_text]!"
 	)
+	*/
 	for(var/i in 1 to burst)
 		if(!pershot_check(user))
 			break
@@ -437,8 +408,6 @@
 			handle_click_empty(user)
 			. = 0
 			break
-		if(overheat_capacity != -1)
-			calc_overheat_clear_at(user)
 
 		if(istype(projectile,/obj/item/projectile))
 			var/obj/item/projectile/proj_obj = projectile
@@ -464,9 +433,17 @@
 		else
 			target_zone = "chest"
 
-		if(process_projectile(projectile, user, use_targ, target_zone, clickparams))
+		var/result = process_projectile(projectile, user, use_targ, target_zone, clickparams)
+
+		if(overheat_capacity > 0)
+			add_heat(heat_per_shot)
+
+		if(result)
 			handle_post_fire(user, use_targ, pointblank, reflex)
 			update_icon()
+
+		if(heat_current >= overheat_capacity)
+			break
 
 		if(i < burst)
 			sleep(burst_delay)
@@ -505,6 +482,7 @@
 
 //called after successfully firing
 /obj/item/weapon/gun/proc/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+	/*
 	if(!silenced)
 		if(reflex)
 			user.visible_message(
@@ -518,6 +496,7 @@
 				,
 				"You hear a [fire_sound_text]!"
 				)
+				*/
 
 	if(one_hand_penalty)
 		if(!src.is_held_twohanded(user))
@@ -782,12 +761,11 @@
 		for(var/name in attachments_names)
 			to_chat(user,"\n[name]")
 
-	if(overheat_capacity == 0)
-		check_reset_overheat()
-		to_chat(user,"[src] is overheating and needs to ventilate heat.")
-	else if(overheat_capacity != -1)
-		check_reset_overheat()
-		to_chat(user,"[src] has [overheat_capacity]/[initial(overheat_capacity)] shots left until overheat.")
+	if(overheat_capacity > 0)
+		if(heat_current < overheat_capacity)
+			to_chat(user,"[src] has [heat_current]/[overheat_capacity] shots left until overheat.")
+		else
+			to_chat(user,"[src] is overheating and needs to ventilate heat.")
 
 /obj/item/weapon/gun/proc/switch_firemodes()
 	if(firemodes.len <= 1)
