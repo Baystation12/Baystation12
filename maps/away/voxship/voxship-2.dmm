@@ -599,7 +599,7 @@
 /area/voxship/thrusters)
 "by" = (
 /obj/effect/decal/cleanable/blood/oil,
-/obj/machinery/atmospherics/valve{
+/obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
 /turf/simulated/floor/plating/vox,
