@@ -17,6 +17,16 @@
 		TAG_CULTURE = CULTURE_ALIUM
 	)
 
+	exertion_effect_chance = 10
+	exertion_hydration_scale = 1
+	exertion_reagent_scale = 5
+	exertion_reagent_path = /datum/reagent/lactate
+	exertion_emotes_biological = list(
+		/decl/emote/exertion/biological,
+		/decl/emote/exertion/biological/breath,
+		/decl/emote/exertion/biological/pant
+	)
+
 /datum/species/alium/New()
 	//Coloring
 	blood_color = RANDOM_RGB

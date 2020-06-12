@@ -134,22 +134,8 @@
 /mob/living/carbon/human/Move()
 	. = ..()
 	if(.) //We moved
-		handle_exertion()
+		species.handle_exertion(src)
 		handle_leg_damage()
-
-/mob/living/carbon/human/proc/handle_exertion()
-	if(isSynthetic() || (species.species_flags & (SPECIES_FLAG_IS_PLANT|SPECIES_FLAG_NO_PAIN)))
-		return
-	
-	var/lac_chance =  10 * encumbrance()
-	if(lac_chance && prob(skill_fail_chance(SKILL_HAULING, lac_chance)))
-		make_reagent(1, /datum/reagent/lactate)
-		adjust_hydration(-DEFAULT_THIRST_FACTOR)
-		switch(rand(1,20))
-			if(1)
-				visible_message("<span class='notice'>\The [src] is sweating heavily!</span>", "<span class='notice'>You are sweating heavily!</span>")
-			if(2)
-				visible_message("<span class='notice'>\The [src] looks out of breath!</span>", "<span class='notice'>You are out of breath!</span>")
 
 /mob/living/carbon/human/proc/handle_leg_damage()
 	if(!can_feel_pain())
