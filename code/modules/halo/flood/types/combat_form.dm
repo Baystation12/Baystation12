@@ -111,10 +111,10 @@
 
 /mob/living/simple_animal/hostile/flood/combat_form/Move()
 	. = ..()
+	if(stat == DEAD)
+		return
 	if(health <= 0)
 		death()
-		return
-	if(stat == DEAD)
 		return
 	if(ckey || client)
 		return

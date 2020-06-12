@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(live_flood_simplemobs)
 
 /mob/living/simple_animal/hostile/flood/Life()
 	..()
-	if(stat != DEAD)
+	if(stat != DEAD && health < maxHealth)
 		health += 1
 	if(client || ckey)
 		target_mob = null
