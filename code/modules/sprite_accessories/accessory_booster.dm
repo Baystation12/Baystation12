@@ -23,6 +23,14 @@
 	icon_state = "ears_bun"
 	name = "Ear Biomods (Rabbit)"
 
+/datum/sprite_accessory/marking/booster/ears/dog
+	icon_state = "ears_dog"
+	name = "Ear Biomods (Dog)"
+	
+/datum/sprite_accessory/marking/booster/horns/bat
+	icon_state = "wings_bat"
+	name = "Horn Biomods (Bat Wings)"
+
 /datum/sprite_accessory/marking/booster/horns/ram
 	icon_state = "horns_ram"
 	name = "Horn Biomods (Ram)"
