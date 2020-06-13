@@ -251,6 +251,34 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		M.antagHUD = 1
 		to_chat(src, SPAN_NOTICE("AntagHUD Enabled"))
+		
+/mob/observer/ghost/verb/cmd_analyse_health_panel()
+	set category = "Ghost"
+	set name = "Analyse Health"
+	set desc = "Get an advanced health reading on a human mob."
+
+	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in GLOB.human_mob_list
+	if(!H)	return
+
+	cmd_analyse_health(H)
+
+/mob/observer/ghost/verb/cmd_analyse_health(var/mob/living/carbon/human/H)
+	set category = null
+	set name = "Analyse Human Health"
+
+	if(!client)
+		return
+	if(!ishuman(H))	return
+	cmd_analyse_health(H)
+	if(!client)
+		return
+
+	if(!H)	return
+
+	var/dat = display_medical_data(H.get_raw_medical_data(), SKILL_MAX)
+
+	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
+	show_browser(usr, dat, "window=scanconsole;size=430x600")
 
 /mob/observer/ghost/verb/dead_tele(A in area_repository.get_areas_by_z_level())
 	set category = "Ghost"
@@ -294,15 +322,38 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	stop_following()
 	forceMove(target_turf)
 
+<<<<<<< dev
 /mob/observer/ghost/start_following(var/atom/a)
 	..()
+=======
+// This is the ghost's follow verb with an argument
+/mob/observer/ghost/proc/ManualFollow(var/atom/movable/target)
+	if(!target || target == following || target == src)
+		return
+
+	stop_following()
+	following = target
+	verbs |= /mob/observer/ghost/verb/scan_target
+	GLOB.moved_event.register(following, src, /atom/movable/proc/move_to_turf)
+	GLOB.dir_set_event.register(following, src, /atom/proc/recursive_dir_set)
+	GLOB.destroyed_event.register(following, src, /mob/observer/ghost/proc/stop_following)
+
+>>>>>>> changes 'proc' in reference to scan_target to 'verb' adds body scan verbs to ghost verbs menu, previously in debug removes body scan verbs from the debug menu removes a couple of verbs from the debug list couple of tweaks as well as an addition to a verb definition small tweak small tweak to health bodyscan verb
 	to_chat(src, "<span class='notice'>Now following \the [following].</span>")
 
 /mob/observer/ghost/stop_following()
 	if(following)
 		to_chat(src, "<span class='notice'>No longer following \the [following]</span>")
+<<<<<<< dev
 		verbs -= /mob/observer/ghost/proc/scan_target
 	..()
+=======
+		GLOB.moved_event.unregister(following, src)
+		GLOB.dir_set_event.unregister(following, src)
+		GLOB.destroyed_event.unregister(following, src)
+		following = null
+		verbs -= /mob/observer/ghost/verb/scan_target
+>>>>>>> changes 'proc' in reference to scan_target to 'verb' adds body scan verbs to ghost verbs menu, previously in debug removes body scan verbs from the debug menu removes a couple of verbs from the debug list couple of tweaks as well as an addition to a verb definition small tweak small tweak to health bodyscan verb
 
 /mob/observer/ghost/keep_following(var/atom/movable/am, var/old_loc, var/new_loc)
 	var/turf/T = get_turf(new_loc)
@@ -338,7 +389,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/rads = SSradiation.get_rads_at_turf(t)
 		to_chat(src, "<span class='notice'>Radiation level: [rads ? rads : "0"] Roentgen.</span>")
 
-/mob/observer/ghost/proc/scan_target()
+/mob/observer/ghost/verb/scan_target()
 	set name = "Scan Target"
 	set category = "Ghost"
 	set desc = "Analyse whatever you are following."
