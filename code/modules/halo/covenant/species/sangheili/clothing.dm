@@ -373,7 +373,7 @@
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	species_restricted = list("Sangheili")
 	body_parts_covered = HEAD | FACE
-	item_flags = THICKMATERIAL
+	item_flags = THICKMATERIAL | FLASH_PROTECTION_MAJOR
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|BLOCKHAIR
 	body_parts_covered = HEAD|FACE
@@ -392,16 +392,22 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	allowed = list(/obj/item/weapon/tank)
 
-/obj/item/clothing/shoes/sangheili/ranger
+//It has to be this way to minimize code replication. magboots.dm is quite expansive.
+/obj/item/clothing/shoes/magboots/sangheili
 	name = "Sanghelli Leg Armour (Ranger)"
 	desc = "Leg armour, to be used with the Sangheili Combat Harness."
 	icon = SANGHEILI_ARMOUR_ICON
 	icon_state = "ranger_legs_obj"
 	item_state = "ranger_legs"
-	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
+	icon_base = null
+	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
+	species_restricted = list("Sangheili")
 	body_parts_covered = LEGS|FEET
 	cold_protection = LEGS|FEET
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	armor = list(melee = 60, bullet = 45, laser = 35,energy = 35, bomb = 30, bio = 35, rad = 35)
+	armor_thickness = 20
+	overshoes = 0
 
 /obj/item/clothing/gloves/thick/sangheili/ranger
 	name = "Sanghelli Combat Gauntlets (Ranger)"

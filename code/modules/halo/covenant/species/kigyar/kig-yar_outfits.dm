@@ -71,7 +71,9 @@
 	name = "Kig-Yar Ranger"
 
 	l_ear = /obj/item/device/radio/headset/covenant
+	uniform = /obj/item/clothing/under/kigyar
 	belt = /obj/item/weapon/gun/energy/plasmapistol
+	shoes = /obj/item/clothing/shoes/magboots/ranger_kigyar
 
 	suit = /obj/item/clothing/suit/armor/ranger_kigyar
 	head = /obj/item/clothing/head/helmet/ranger_kigyar

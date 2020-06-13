@@ -22,6 +22,23 @@
 		)
 	armor_thickness = 15
 
+/obj/item/clothing/shoes/magboots/ranger_kigyar
+	name = "Kig-yar ranger magboots"
+	desc = "A pair of boots made for ranger kig-yars. Useful in harsh, low gravity enviroments.Allows the user to remain fixed to a spacecraft without the use of artificial gravity."
+	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
+	icon = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi'
+	icon_state = "ranger_boots_obj"
+	item_state = "ranger_boots"
+	sprite_sheets = list("Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_kigyar.dmi',"Tvaoan Kig-Yar" = 'code/modules/halo/covenant/species/kigyar/ranger_tvoan.dmi')
+	icon_base = null
+	armor = list(melee = 40, bullet = 35, laser = 35, energy = 35, bomb = 20, bio = 100, rad = 35)
+	body_parts_covered = LEGS|FEET
+	cold_protection = LEGS|FEET
+	heat_protection = LEGS|FEET
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
+	armor_thickness = 15
+
 /obj/item/clothing/head/helmet/ranger_kigyar
 	name = "Kig-yar ranger helmet"
 	desc = "A helmet made for ranger kig-yars. Useful in harsh, low gravity enviroments.  Requires a sealed bodysuit and armour to be functional."

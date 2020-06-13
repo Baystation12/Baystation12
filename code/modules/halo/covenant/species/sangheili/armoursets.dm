@@ -41,6 +41,6 @@
 /obj/effect/armoursets/SangheiliRanger/New()
 	new /obj/item/clothing/under/covenant/sangheili (src.loc)
 	new /obj/item/clothing/suit/armor/special/combatharness/ranger (src.loc)
-	new /obj/item/clothing/shoes/sangheili/ranger (src.loc)
+	new /obj/item/clothing/shoes/magboots/sangheili/ (src.loc)
 	new /obj/item/clothing/head/helmet/sangheili/ranger (src.loc)
 	new /obj/item/clothing/gloves/thick/sangheili/ranger (src.loc)

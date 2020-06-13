@@ -99,7 +99,7 @@
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/storage/backpack/sangheili = 10,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5
 		,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/clothing/head/helmet/sangheili/ranger = 4,/obj/item/clothing/suit/armor/special/combatharness/ranger = 4
-		,/obj/item/clothing/shoes/sangheili/ranger = 4, /obj/item/clothing/gloves/thick/sangheili/ranger = 4,/obj/item/weapon/tank/air/covenant = 9,/obj/item/clothing/mask/breath = 7
+		,/obj/item/clothing/shoes/magboots/sangheili = 4, /obj/item/clothing/gloves/thick/sangheili/ranger = 4,/obj/item/weapon/tank/air/covenant = 9,/obj/item/clothing/mask/breath = 7
 		,/obj/item/weapon/pickaxe/plasma_drill = 1,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 3,/obj/item/dumb_ai_chip/cov = 2)
 
 /obj/machinery/vending/armory/covenant/sangheili/heavy // Sangheili Heavy Weapons
@@ -123,7 +123,7 @@
 	desc = "Storage for Covenant Jiralhanae weapons and ammo"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/EVA = 4,/obj/item/clothing/suit/armor/jiralhanae/covenant/EVA = 4,/obj/item/weapon/tank/air/covenant = 7
+	products = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/EVA = 4,/obj/item/clothing/suit/armor/jiralhanae/covenant/EVA = 4,/obj/item/clothing/shoes/magboots/jiralhanaeEVA = 4,/obj/item/weapon/tank/air/covenant = 7
 		,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,	/obj/item/weapon/storage/belt/utility/full = 5,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 1,/obj/item/dumb_ai_chip/cov = 2)
 
 /obj/machinery/vending/armory/covenant/jiralhanae/heavy // Equipment for Jiralhanae
@@ -166,7 +166,7 @@
 	desc = "Storage for Covenant Kig-Yar ranger equipment"
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
-	products = list(/obj/item/clothing/head/helmet/ranger_kigyar = 4, /obj/item/clothing/suit/armor/ranger_kigyar = 4
+	products = list(/obj/item/clothing/head/helmet/ranger_kigyar = 4, /obj/item/clothing/suit/armor/ranger_kigyar = 4,/obj/item/clothing/shoes/magboots/ranger_kigyar = 4
 		,/obj/item/weapon/tank/air/covenant = 8,/obj/item/clothing/mask/breath = 8)
 
 /obj/machinery/vending/armory/covenant/unggoy/weapon // Both ammo, and guns!
