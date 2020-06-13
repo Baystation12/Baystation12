@@ -442,8 +442,9 @@
 			handle_post_fire(user, use_targ, pointblank, reflex)
 			update_icon()
 
-		if(heat_current >= overheat_capacity)
-			break
+		if(overheat_capacity > 0)
+			if(heat_current >= overheat_capacity)
+				break
 
 		if(i < burst)
 			sleep(burst_delay)
