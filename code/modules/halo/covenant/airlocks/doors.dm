@@ -1,8 +1,6 @@
 
 /obj/machinery/door/airlock/covenant
 	icon = 'code/modules/halo/covenant/airlocks/door32.dmi'
-	welded_file = 'code/modules/halo/covenant/airlocks/door32.dmi'
-	opacity = 0
 	var/covenant_secure = 0
 	fill_file = null
 
