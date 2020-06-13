@@ -65,10 +65,6 @@
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
-	return
-
-/obj/machinery/door/Initialize()
-	. = ..()
 	SetBounds()
 
 /obj/machinery/door/Destroy()
