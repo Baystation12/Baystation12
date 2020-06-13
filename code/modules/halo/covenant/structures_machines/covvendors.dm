@@ -99,7 +99,7 @@
 	icon_deny = "covendor-deny"
 	products = list(/obj/item/weapon/storage/backpack/sangheili = 10,/obj/item/weapon/storage/belt/covenant_medic = 5,/obj/item/weapon/storage/belt/covenant_ammo = 5,/obj/item/weapon/storage/belt/utility/full = 5
 		,/obj/item/clothing/accessory/storage/bandolier/covenant = 6,/obj/item/clothing/head/helmet/sangheili/ranger = 4,/obj/item/clothing/suit/armor/special/combatharness/ranger = 4
-		,/obj/item/clothing/shoes/sangheili/ranger = 4, /obj/item/clothing/gloves/thick/sangheili/ranger = 4,/obj/item/weapon/tank/air/covenant = 9,/obj/item/clothing/mask/breath = 7
+		,/obj/item/clothing/shoes/magboots/sangheili = 4, /obj/item/clothing/gloves/thick/sangheili/ranger = 4,/obj/item/weapon/tank/air/covenant = 9,/obj/item/clothing/mask/breath = 7
 		,/obj/item/weapon/pickaxe/plasma_drill = 1,/obj/item/weapon/plastique/covenant = 4,/obj/item/weapon/armor_patch/cov = 6,/obj/item/weapon/pinpointer/artifact = 3,/obj/item/dumb_ai_chip/cov = 2)
 
 /obj/machinery/vending/armory/covenant/sangheili/heavy // Sangheili Heavy Weapons

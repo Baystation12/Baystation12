@@ -130,7 +130,7 @@
 	back = /obj/item/weapon/gun/energy/plasmarifle
 	belt = /obj/item/weapon/gun/energy/plasmapistol
 	gloves = /obj/item/clothing/gloves/thick/sangheili/ranger
-	shoes = /obj/item/clothing/shoes/sangheili/ranger
+	shoes = /obj/item/clothing/shoes/magboots/sangheili
 	head = /obj/item/clothing/head/helmet/sangheili/ranger
 	l_pocket = /obj/item/weapon/grenade/plasma
 	r_pocket = /obj/item/weapon/grenade/plasma
