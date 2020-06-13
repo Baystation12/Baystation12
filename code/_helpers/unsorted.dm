@@ -1100,7 +1100,8 @@ var/list/WALLITEMS = list(
 GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 
 //Version of view() which ignores darkness, because BYOND doesn't have it.
-/proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
+/proc/dview(var/range = world.view, var/center, var/invis_flags = 0, var/dview_debug = 0)
+	if(dview_debug)	to_debug_listeners("dview([range], [center], [invis_flags])")
 	if(!center)
 		return
 
@@ -1108,6 +1109,11 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	GLOB.dview_mob.see_invisible = invis_flags
 	. = view(range, GLOB.dview_mob)
 	GLOB.dview_mob.loc = null
+
+	if(dview_debug)
+		var/list/L = .
+		to_debug_listeners("	dview() [L]")
+		to_debug_listeners("	dview() [L.len]")
 
 /mob/dview
 	invisibility = 101
