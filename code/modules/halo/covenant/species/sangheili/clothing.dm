@@ -409,18 +409,6 @@
 	armor_thickness = 20
 	overshoes = 0
 
-//This is still here for now
-/*/obj/item/clothing/shoes/sangheili/ranger
-	name = "Sanghelli Leg Armour (Ranger)"
-	desc = "Leg armour, to be used with the Sangheili Combat Harness."
-	icon = SANGHEILI_ARMOUR_ICON
-	icon_state = "ranger_legs_obj"
-	item_state = "ranger_legs"
-	item_flags = STOPPRESSUREDAMAGE|THICKMATERIAL|AIRTIGHT
-	body_parts_covered = LEGS|FEET
-	cold_protection = LEGS|FEET
-	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE*/
-
 /obj/item/clothing/gloves/thick/sangheili/ranger
 	name = "Sanghelli Combat Gauntlets (Ranger)"
 	desc = "Hand armour, to be used with the Sangheili Combat Harness."
