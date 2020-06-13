@@ -243,6 +243,20 @@
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainfeet"
 
+/obj/item/clothing/shoes/magboots/jiralhanaeEVA
+	name = "Jiralhanae Maggreaves"
+	desc = "Magboots fitted to Jiralhanae size."
+	species_restricted = list("Jiralhanae")
+	icon = JIRALHANAE_ICON_PATH_OBJ
+	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
+	icon_state = "maggreaves"
+	item_state = "maggreaves"
+	icon_base = null
+	cold_protection = LEGS|FEET
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
+	armor = list(melee = 40, bullet = 30, laser = 10, energy = 10, bomb = 25, bio = 100, rad = 100)
+	body_parts_covered = LEGS|FEET
 
 /* FLAGS */
 
