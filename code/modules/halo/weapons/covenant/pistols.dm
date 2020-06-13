@@ -33,7 +33,7 @@
 
 /obj/item/weapon/gun/energy/plasmapistol/New()
 	. = ..()
-	overcharge_cost = initial(charge_cost)*4
+	overcharge_cost = max_shots / 4
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(power_supply.charge >= overcharge_cost)
@@ -46,10 +46,10 @@
 			update_icon()
 			return 1
 
-/obj/item/weapon/gun/energy/plasmapistol/proc/set_overcharge(var/new_overcharge = 1, var/mob/user = null)
+/obj/item/weapon/gun/energy/plasmapistol/proc/set_overcharge(var/new_overcharge = 1, var/mob/user = null, var/silent = 0)
 	if(new_overcharge != overcharge)
 		if(new_overcharge)
-			if(user)
+			if(user && !silent)
 				visible_message("<span class='notice'>[user.name]'s [src]'s lights brighten</span>","<span class='notice'>You activate your [src]'s overcharge</span>")
 			projectile_type = overcharge_type
 			charge_cost = overcharge_cost
@@ -58,8 +58,9 @@
 			set_light(3, 1, "66FF00")
 			burst = 1
 			fire_delay = initial(fire_delay) * 3 //triples the fire delay.
+			heat_per_shot = overheat_capacity
 		else
-			if(user)
+			if(user && !silent)
 				visible_message("<span class='notice'>[user.name]'s [src]'s lights darken</span>","<span class='notice'>You deactivate your [src]'s overcharge</span>")
 			projectile_type = initial(projectile_type)
 			overcharge = 0
@@ -68,6 +69,13 @@
 			set_light(0, 0, "66FF00")
 			burst = initial(burst)
 			fire_delay = initial(fire_delay)
+			heat_per_shot = initial(heat_per_shot)
+
+/obj/item/weapon/gun/energy/plasmapistol/handle_post_fire(mob/user, atom/target, var/pointblank=0, var/reflex=0)
+	. = ..()
+
+	//disable overcharge
+	set_overcharge(0,null,0)
 
 /obj/item/weapon/gun/energy/plasmapistol/disabled
 	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact. This one appears to be disabled"
