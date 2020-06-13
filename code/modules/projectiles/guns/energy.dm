@@ -43,6 +43,13 @@
 	return ..()
 
 /obj/item/weapon/gun/energy/process()
+	. = PROCESS_KILL
+	. = ..()
+	if(process_self_recharge())
+		return 0
+	return .
+
+/obj/item/weapon/gun/energy/proc/process_self_recharge()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the cyborg
 		charge_tick++
 		if(charge_tick < recharge_time) return 0
@@ -58,12 +65,14 @@
 
 		power_supply.give(charge_cost) //... to recharge the shot
 		update_icon()
-	return 1
+		return 1
 
 /obj/item/weapon/gun/energy/consume_next_projectile()
 	if(!power_supply) return null
 	if(!ispath(projectile_type)) return null
 	if(!power_supply.checked_use(charge_cost)) return null
+	if(self_recharge)
+		GLOB.processing_objects.Add(src)
 	return new projectile_type(src)
 
 /obj/item/weapon/gun/energy/proc/get_external_power_supply()

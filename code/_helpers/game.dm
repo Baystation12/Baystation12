@@ -255,12 +255,15 @@
 					.[M] = radios[1]	//slightly hacky but this should be fine
 	return .
 
-/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/checkghosts = null)
+/proc/get_mobs_and_objs_in_view_fast(var/turf/T, var/range, var/list/mobs, var/list/objs, var/checkghosts = null, var/do_debug = 0)
 
-	var/list/hear = dview(range,T,INVISIBILITY_MAXIMUM)
+	if(do_debug)	to_debug_listeners("get_mobs_and_objs_in_view_fast()")
+	var/list/hear = dview(range,T,INVISIBILITY_MAXIMUM, do_debug)
+	if(do_debug)	to_debug_listeners("	hear.len:[hear.len]")
 	var/list/hearturfs = list()
 
 	for(var/atom/movable/AM in hear)
+		if(do_debug)	to_debug_listeners("AM.type:[AM.type]")
 		if(ismob(AM))
 			mobs += AM
 			hearturfs += get_turf(AM)

@@ -158,7 +158,7 @@
 			for(var/obj/I in embedded_shards)
 				var/obj/item/weapon/material/shard/shrapnel/needleshrap/needle = I
 				if(istype(needle))
-					needle.our_dam *= 1.5
+					needle.our_dam *= 2
 					needle.die_at = 0
 					needle.process()
 				else
