@@ -489,31 +489,42 @@
 	damage = 60 //it's less dangerous than a shotgun slug with its low AP, but 40mm grenades do obliterate unarmoured flesh
 	armor_penetration = 5
 	step_delay = 0.9
+	var/arming_range = 0
+
+/obj/item/projectile/bullet/g40mm/on_impact(var/atom/target)
+	if(arming_range && get_dist(starting,loc) <= arming_range)
+		return 0
+	return 1
 
 /obj/item/projectile/bullet/g40mm/he
 	damage = 20 //explosive is lower mass than a chunk of practice ammo
 	armor_penetration = 0 //likewise no room for AP in a regular old bomb
 	shield_damage = 100 //less than half minor shields but the explosion will put it pretty low
 	check_armour = "bomb"
+	arming_range = 2
 
 /obj/item/projectile/bullet/g40mm/he/on_impact(var/atom/target)
-	if (get_dist(starting, loc)>1)
+	. = ..()
+	if (.)
 		explosion(target, -1, 0, 2, 3, 1) //adminlog for testing purposes
-	..()
+		qdel(src)
 
 /obj/item/projectile/bullet/g40mm/frag
 	damage = 5 //this thing will be releasing a load of shrapnel anyway so damage should be appropriately low
 	armor_penetration = 0
+	arming_range = 2
 
 /obj/item/projectile/bullet/g40mm/frag/on_impact(var/atom/target)
-	if (get_dist(starting, loc)>1)
+	. = ..()
+	if (.)
 		playsound(src.loc, 'sound/effects/explosion1.ogg', 30, 1, -3)
 		src.fragmentate(get_turf(target), 50, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1))
-	..()
+		qdel(src)
 
 /obj/item/projectile/bullet/g40mm/smoke
 	damage = 30
 	armor_penetration = 5
+	arming_range = 1
 
 /obj/item/projectile/bullet/g40mm/smoke/on_impact(var/atom/target)
 	var/datum/effect/effect/system/smoke_spread/bad/smoke
@@ -533,4 +544,4 @@
 
 //this is empty for now
 /obj/item/projectile/bullet/g40mm/illumination/on_impact(var/atom/target)
-	..()
+	. = ..()

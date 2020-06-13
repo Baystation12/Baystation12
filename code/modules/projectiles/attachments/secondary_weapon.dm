@@ -35,6 +35,7 @@
 		to_chat(user,"<span class = 'notice'>[name] clicks. It's empty.</span>")
 		playsound(src.loc, 'sound/weapons/empty.ogg', 100, 1)
 		return
+	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN + fire_delay)
 	//puts a round in the chamber if we're not empty
 	chambered = int_mag[1]
 	// removes chambered from the internal magazine
@@ -57,7 +58,6 @@
 	visible_message("<span class = 'danger'>[user] fires [src] at [target].</span>")
 
 	post_fire_handling(chambered, ejection)
-	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN + fire_delay)
 	return 1
 
 /obj/item/weapon_attachment/secondary_weapon/proc/load_attachment(var/obj/item/A, var/mob/user)

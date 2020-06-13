@@ -16,7 +16,6 @@
 	dispersion = list(0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 0.8, 1.0, 1.0, 1.0, 1.2, 1.2, 1.2, 1.4, 1.4, 1.4, 1.6, 1.6, 1.6, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8, 1.8)
 	w_class = ITEM_SIZE_HUGE
 	irradiate_non_cov = 7
-	advanced_covenant = 1
 	move_delay_malus = 1.5
 	slowdown_general = 1
 	item_icons = list(
