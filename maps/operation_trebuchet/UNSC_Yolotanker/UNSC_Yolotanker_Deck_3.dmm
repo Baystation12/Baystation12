@@ -106,7 +106,7 @@
 "cb" = (/obj/machinery/light,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/cargo5)
 "cc" = (/obj/structure/cable/blue{dir = 2; icon_state = "1-2"},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/cargo5)
 "cd" = (/obj/machinery/light,/obj/structure/cable/blue,/obj/machinery/power/apc{dir = 2; name = "APC"; pixel_y = -24},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/cargo5)
-"ce" = (/obj/machinery/door/airlock/halo_maint{name = "SOEIV Deployment Rack"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/soeiv)
+"ce" = (/obj/machinery/door/airlock/halo/maint{name = "SOEIV Deployment Rack"; req_access = list(309)},/obj/machinery/door/firedoor,/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/soeiv)
 "cf" = (/obj/structure/cable/blue{icon_state = "2-4"},/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck3/starboardumbilical)
 "cg" = (/obj/structure/closet/walllocker/emerglocker/north,/turf/simulated/floor/tiled,/area/corvette/unscbertels/deck3/centralhallway)
 "ch" = (/obj/structure/closet/crate,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/plating,/area/corvette/unscbertels/deck3/cargo4)

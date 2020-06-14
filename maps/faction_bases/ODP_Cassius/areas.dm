@@ -106,3 +106,7 @@
 /area/faction_base/unsc/odp/interior/deck2/morgue
 	name = "ODP Cassius Morgue"
 	icon_state = "morgue"
+
+/area/faction_base/unsc/odp/interior/deck2/aicore
+	name = "ODP Cassius AI Core"
+	icon_state = "ai"

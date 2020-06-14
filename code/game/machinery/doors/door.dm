@@ -35,6 +35,7 @@
 	//Multi-tile doors
 	dir = SOUTH
 	var/width = 1
+	var/list/sight_blockers = list()
 
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
@@ -59,25 +60,18 @@
 		layer = open_layer
 		explosion_resistance = 0
 
-
-	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
-
 	health = maxhealth
 	update_connections(1)
 	update_icon()
 
 	update_nearby_tiles(need_rebuild=1)
-	return
+	SetBounds()
 
 /obj/machinery/door/Destroy()
 	set_density(0)
 	update_nearby_tiles()
+	for(var/atom/movable/A in sight_blockers)
+		qdel(A)
 	. = ..()
 
 /obj/machinery/door/process()
@@ -466,13 +460,8 @@
 	update_nearby_tiles()
 
 	. = ..()
-	if(width > 1)
-		if(dir in list(EAST, WEST))
-			bound_width = width * world.icon_size
-			bound_height = world.icon_size
-		else
-			bound_width = world.icon_size
-			bound_height = width * world.icon_size
+
+	SetBounds()
 
 	if(.)
 		deconstruct(null, TRUE)
@@ -515,3 +504,32 @@
 		if(success)
 			dirs |= direction
 	connections = dirs
+
+/obj/machinery/door/set_opacity(new_opacity)
+	for(var/atom/movable/A in sight_blockers)
+		A.opacity = new_opacity
+	. = ..()
+
+/obj/machinery/door/proc/SetBounds()
+	if(width > 1)
+		//set the collision
+		if(dir in list(NORTH, SOUTH))
+			bound_width = width * world.icon_size
+			bound_height = world.icon_size
+		else
+			bound_width = world.icon_size
+			bound_height = width * world.icon_size
+
+		//clear out the old sight blockers
+		for(var/atom/movable/A in sight_blockers)
+			qdel(A)
+		sight_blockers = list()
+
+		//create new sight blockers
+		if(opacity)
+			for(var/turf/T in locs)
+				var/atom/movable/A = new(T)
+				A.opacity = 1
+				A.name = "sight blocker"
+				A.invisibility  = 101
+				sight_blockers.Add(A)
