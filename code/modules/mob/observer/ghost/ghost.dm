@@ -224,6 +224,34 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	else
 		medHUD = 1
 		to_chat(src, "<span class='notice'>Medical HUD Enabled</span>")
+		
+/mob/observer/ghost/verb/cmd_analyse_health_panel()
+	set category = "Ghost"
+	set name = "Analyse Health"
+	set desc = "Get an advanced health reading on a human mob."
+
+	var/mob/living/carbon/human/H = input("Select mob.", "Analyse Health") as null|anything in GLOB.human_mob_list
+	if(!H)	return
+
+	cmd_analyse_health(H)
+
+/mob/observer/ghost/verb/cmd_analyse_health(var/mob/living/carbon/human/H)
+	set category = null
+	set name = "Analyse Human Health"
+
+	if(!client)
+		return
+	if(!ishuman(H))	return
+	cmd_analyse_health(H)
+	if(!client)
+		return
+
+	if(!H)	return
+
+	var/dat = display_medical_data(H.get_raw_medical_data(), SKILL_MAX)
+
+	dat += text("<BR><A href='?src=\ref[];mach_close=scanconsole'>Close</A>", usr)
+	show_browser(usr, dat, "window=scanconsole;size=430x600")
 
 /mob/observer/ghost/verb/toggle_antagHUD()
 	set category = "Ghost"
@@ -301,7 +329,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/stop_following()
 	if(following)
 		to_chat(src, "<span class='notice'>No longer following \the [following]</span>")
-		verbs -= /mob/observer/ghost/proc/scan_target
 	..()
 
 /mob/observer/ghost/keep_following(var/atom/movable/am, var/old_loc, var/new_loc)
@@ -338,7 +365,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/rads = SSradiation.get_rads_at_turf(t)
 		to_chat(src, "<span class='notice'>Radiation level: [rads ? rads : "0"] Roentgen.</span>")
 
-/mob/observer/ghost/proc/scan_target()
+/mob/observer/ghost/verb/scan_target()
 	set name = "Scan Target"
 	set category = "Ghost"
 	set desc = "Analyse whatever you are following."
