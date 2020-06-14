@@ -48,6 +48,13 @@
 	cost = 50
 	containertype = /obj/structure/largecrate/animal/corgi
 	containername = "corgi crate"
+	
+/decl/hierarchy/supply_pack/livecargo/cat
+	name = "Live - Cat"
+	contains = list()
+	cost = 50
+	containertype = /obj/structure/largecrate/animal/cat
+	containername = "cat crate"
 
 //farm animals - useless and annoying, but potentially a good source of food. expensive because they're live animals and their produce is available cheaper
 /decl/hierarchy/supply_pack/livecargo/cow
