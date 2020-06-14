@@ -1,0 +1,4 @@
+author: "lorwp"
+delete-after: True
+changes: 
+  - maptweak: "The SM's filters now by default start set to Hydrogen"
