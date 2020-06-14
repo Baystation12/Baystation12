@@ -18,7 +18,7 @@
 /obj/item/weapon/gun/proc/process_heat()
 	if(heat_current > 0)
 		//cool down slightly
-		add_heat(-1)
+		add_heat(-2) //using 2 because process ticks occur about every 2 seconds iirc
 
 		//are we overheated?
 		if(overheat_fullclear_at)
@@ -55,7 +55,7 @@
 		GLOB.processing_objects.Remove(src)
 
 /obj/item/weapon/gun/proc/do_overheat()
-	overheat_fullclear_at = world.time + overheat_fullclear_delay + overheat_capacity * 0.5 SECONDS
+	overheat_fullclear_at = world.time + overheat_fullclear_delay * 1.5
 	var/mob/M = src.loc
 	visible_message("\icon[src] <span class = 'warning'>[M]'s [src] overheats!</span>",\
 		"\icon[src] <span class = 'warning'>Your [src] overheats!</span>",)
