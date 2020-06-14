@@ -118,6 +118,11 @@
 	description = "A work visa issued by the Sol Central Government for the purpose of work."
 	path = /obj/item/weapon/paper/workvisa
 
+/datum/gear/travelvisa
+	display_name = "travel visa"
+	description = "A travel visa issued by the Sol Central Government for the purpose of recreation."
+	path = /obj/item/weapon/paper/travelvisa
+
 /datum/gear/mirror/
 	display_name = "handheld mirror"
 	sort_category = "Cosmetics"

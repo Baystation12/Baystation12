@@ -155,7 +155,36 @@ Passports
 	w_class = ITEM_SIZE_SMALL
 	attack_verb = list("whipped")
 	hitsound = 'sound/weapons/towelwhip.ogg'
-	desc = "A passport. Its origin seems unkown."
+	desc = "A passport. Its origin seems unknown."
+	var/info //Everything inside. You can only see this if you open the passport by yourself.
+	var/fingerprint_hash //Kinda identification.
+
+/obj/item/weapon/passport/Initialize()
+	. = ..()
+	var/mob/living/carbon/human/H
+	H = get_holder_of_type(src, /mob/living/carbon/human)
+	if(H)
+		set_info(H)
+
+/obj/item/weapon/passport/proc/set_info(var/mob/living/carbon/human/H)
+	if(!istype(H))
+		return
+	var/decl/cultural_info/culture = H.get_cultural_value(TAG_HOMEWORLD)
+	var/pob = culture ? culture.name : "Unset"
+	if(H.dna)
+		fingerprint_hash = md5(H.dna.uni_identity)
+	else
+		fingerprint_hash = "N/A"
+	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint_hash]"
+
+/obj/item/weapon/passport/attack_self(mob/user as mob)
+	user.visible_message(SPAN_NOTICE("[user] opens and checks [src]."), \
+		SPAN_NOTICE("You open [src] and check for some main information."), \
+		SPAN_ITALIC("You hear the faint rustle of pages."))
+	if(info)
+		to_chat(user, "[info].")
+	else
+		to_chat(user, SPAN_WARNING("[src] is completely blank!"))
 
 /obj/item/weapon/passport/scg
 	name = "\improper SCG passport"
