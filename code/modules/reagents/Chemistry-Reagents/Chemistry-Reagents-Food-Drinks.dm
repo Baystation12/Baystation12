@@ -2752,7 +2752,7 @@
 	description = "A blend of teas from Moghes, commonly drank by Unathi."
 	taste_description = "bitter energising tea"
 	color = "#0e0900"
-	glass_name = "skiranhi tea"
+	glass_name = "skrianhi tea"
 	glass_desc = "A blend of teas from Moghes, commonly drank by Unathi."
 
 // Non-Alcoholic Drinks
