@@ -45,7 +45,6 @@
 	item_state = "machete"
 	applies_material_colour = FALSE
 	lunge_dist = 3
-	parry_projectiles = 1
 
 //Humbler Baton
 /obj/item/weapon/melee/baton/humbler

@@ -18,6 +18,7 @@
 	var/use_external_power = 0 //if set, the weapon will look for an external power source to draw from, otherwise it recharges magically
 	var/recharge_time = 4
 	var/charge_tick = 0
+	var/alt_charge_method = 0 //If set, we use an alternate charging method and disallow wallcharging (cov guns)
 
 /obj/item/weapon/gun/energy/switch_firemodes()
 	. = ..()

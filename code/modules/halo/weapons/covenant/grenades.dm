@@ -8,14 +8,13 @@
 	det_time = 50
 	can_adjust_timer = 0
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
-	alt_explosion_range = 1
-	alt_explosion_damage_max = 80
+	alt_explosion_range = 2
+	alt_explosion_damage_max = 65
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
 	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))
 		playsound(h.loc, 'code/modules/halo/sounds/unggoy_grenade_throw.ogg', 100, 1)
 	. = ..()
-
 
 /obj/item/weapon/grenade/plasma/throw_impact(var/atom/A)
 	. = ..()

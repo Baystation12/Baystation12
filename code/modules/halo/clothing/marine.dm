@@ -255,14 +255,14 @@
 	item_state_slots = list(slot_l_hand_str = "syndicate-orange", slot_r_hand_str = "syndicate-orange")
 	w_class = ITEM_SIZE_HUGE
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 60, bullet = 30, laser = 60, energy = 25, bomb = 30, bio = 100, rad = 100)
+	armor = list(melee = 45, bullet = 35, laser = 45, energy = 35, bomb = 30, bio = 25, rad = 25)
 
 /obj/item/clothing/head/helmet/space/void/unsc
 	name = "\improper Salvage Helmet"
 	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	armor = list(melee = 30, bullet = 10, laser = 20, energy = 5, bomb = 30, bio = 100, rad = 50)
+	armor = list(melee = 40, bullet = 20, laser = 40,energy = 10, bomb = 15, bio = 15, rad = 15)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	icon_state = "rig0-salvage"
 	item_state = "rig0-salvage"

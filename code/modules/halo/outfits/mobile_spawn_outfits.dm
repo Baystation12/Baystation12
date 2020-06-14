@@ -124,7 +124,6 @@
 	desc = "This mop ssems to have been reinforced and modified to provide it with... A sharp edge?"
 	edge = 1
 	force = 30
-	parry_projectiles = 1
 
 /obj/item/weapon/storage/belt/marine_ammo/mobilespawn_janitor
 	name = "Cleanliness Storage Belt"

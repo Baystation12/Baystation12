@@ -66,6 +66,7 @@
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
 
 	var/scan_id = 1
+	var/nohack = 0 //Disallows hacking bypassing of access
 	var/obj/item/weapon/coin/coin
 	var/datum/wires/vending/wires = null
 
@@ -324,7 +325,7 @@
 	vendor_account.do_transaction(T)
 
 /obj/machinery/vending/allowed(var/mob/m)
-	if(emagged || !scan_id)
+	if(!nohack && (emagged || !scan_id))
 		return 1
 	. = ..()
 
@@ -340,7 +341,7 @@
 			return
 
 	wires.Interact(user)
-	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
+	if((!allowed(usr)))	//For SECURE VENDING MACHINES YEAH
 		to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
 	else
 		ui_interact(user)

@@ -2,7 +2,6 @@
 	name = "weapon"
 	icon = 'icons/obj/weapons.dmi'
 	hitsound = "swing_hit"
-	var/parry_projectiles = 0
 
 /obj/item/weapon/Bump(mob/M as mob)
 	spawn(0)
@@ -13,7 +12,7 @@
 	var/obj/item/damage_source = dam_source
 	if(isnull(damage_source))
 		return 0
-	if(istype(damage_source,/obj/item/projectile) && !parry_projectiles)
+	if(istype(damage_source,/obj/item/projectile))
 		return 0
 	//Checks done, Parrycode starts here.//
 	if(attacker && istype(attacker,/mob/living) && damage < 5 && (attacker.a_intent == "help" || attacker.a_intent == "grab")) //We don't need to block helpful actions. (Or grabs)

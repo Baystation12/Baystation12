@@ -31,6 +31,8 @@
 	sustain_time = 4.5 SECONDS
 	sustain_delay = 1.5
 
+	alt_charge_method = 1
+
 
 /obj/item/weapon/gun/energy/plasmarepeater/proc/cov_plasma_recharge_tick()
 	if(max_shots > 0)
