@@ -11,7 +11,7 @@
 	name = "tendril"
 	desc = "A large mucus covered tentacle"
 	icon_state = "growth_tendril"
-	health = 30
+	health = 100
 	gives_sight = FALSE
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2

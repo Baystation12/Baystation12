@@ -7,7 +7,7 @@
 	..(newloc)
 	controller = chorus
 	controller.shape_implant(src)
-	GLOB.destroyed_event.register(controller, .proc/deity_dead, src)
+	GLOB.death_event.register(controller, .proc/deity_dead, src)
 
 /obj/item/weapon/implant/chorus_loyalty/implant_in_mob(var/mob/M, var/target_zone)
 	. = ..()
@@ -26,10 +26,10 @@
 /obj/item/weapon/implant/chorus_loyalty/proc/deity_dead()
 	controller = null
 	to_chat(imp_in, "<span class='notice'>You feel weird. As if something has lost control of you.</span>")
-	GLOB.destroyed_event.unregister(controller, src)
+	GLOB.death_event.unregister(controller, src)
 
 /obj/item/weapon/implant/chorus_loyalty/Destroy()
-	GLOB.destroyed_event.unregister(controller, src)
+	GLOB.death_event.unregister(controller, src)
 	. = ..()
 
 /mob/living/chorus/proc/give_implant(var/mob/living/L)
@@ -85,7 +85,7 @@
 		chorus_net.remove_source(L)
 		update_buildings_followers()
 		if(L.mind in GLOB.godcult.current_antagonists)
-			GLOB.godcult.remove_cultist(L.mind, src)
+			GLOB.godcult.remove_antagonist(L.mind)
 		var/obj/item/weapon/implant/chorus_loyalty/imp = get_implant(L)
 		if(imp) //Do all the remove steps if it isn't removed already and delete the implant
 			imp.part.implants -= imp

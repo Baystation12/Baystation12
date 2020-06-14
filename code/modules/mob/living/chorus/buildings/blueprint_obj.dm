@@ -12,6 +12,7 @@
 	name = "[cb.get_name()] (blueprint)"
 	icon_state = cb.get_icon_state()
 	owner = constructor
+	overlays += image('icons/obj/items.dmi', src, "blueprints")
 	construct_max = cb.build_time
 	construct_left = cb.build_time
 

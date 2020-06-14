@@ -309,3 +309,8 @@
 	conductive = 0
 	construction_difficulty = 10
 	hidden_from_codex = TRUE
+
+/material/growth/place_dismantled_girder(var/turf/target)
+	for(var/i = 0; i < 4; i++)
+		var/obj/item/weapon/reagent_containers/food/snacks/meat/M = new(target)
+		M.reagents.add_reagent(/datum/reagent/toxin/fertilizer, 5)
