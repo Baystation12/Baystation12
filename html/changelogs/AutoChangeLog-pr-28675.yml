@@ -1,7 +1,0 @@
-author: "AshtonFox"
-delete-after: True
-changes: 
-  - rscadd: "Passports now allow you to view basic information about their owner if used in the active hand."
-  - rscadd: "Added Sol travel visas in loadout."
-  - imageadd: "Added travel visa sprite."
-  - spellcheck: "Fixed a typo in the description of the basic passport. Probably not to be seen in game."

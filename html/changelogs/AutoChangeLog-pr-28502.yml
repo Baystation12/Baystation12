@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - tweak: "You now have a chance to stumble and fall to the ground if the OFD fires and you are not laying down or buckled to something. You have a 75% chance to stumble if you are either actively running or it's less than 5 seconds since you stopped running, 50% chance if you are actively walking or it's less than 3 seconds since you stopped walking, and 20% chance if you are standing completely still."
