@@ -33,6 +33,7 @@
 		)
 
 	irradiate_non_cov = 10
+	alt_charge_method = 1
 
 /obj/item/weapon/gun/energy/plasmarifle/can_use_when_prone()
 	return 1

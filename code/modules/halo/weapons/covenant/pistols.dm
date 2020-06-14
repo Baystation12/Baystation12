@@ -21,6 +21,7 @@
 	overheat_capacity = 12
 	overheat_fullclear_delay = 25
 	overheat_sfx = 'code/modules/halo/sounds/plaspistol_overheat.ogg'
+	alt_charge_method = 1
 
 	item_state = "plasmapistol"
 	item_icons = list(

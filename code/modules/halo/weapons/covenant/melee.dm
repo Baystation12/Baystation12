@@ -24,7 +24,6 @@
 	sharp = 0
 	var/failsafe = 0
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
-	parry_projectiles = 1
 
 	lunge_dist = ESWORD_LEAP_DIST
 
@@ -131,7 +130,6 @@
 	armor_penetration = 35
 	edge = 0
 	sharp = 0
-	parry_projectiles = 0
 
 	lunge_dist = 2
 
@@ -176,7 +174,6 @@
 	//active_force = 60
 	throwforce = 10
 	damtype = PAIN
-	parry_projectiles = 1
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
@@ -228,13 +225,11 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	if(active)
 		force = initial(force)
 		throwforce = initial(throwforce)
-		parry_projectiles = initial(parry_projectiles)
 		lunge_dist = initial(lunge_dist)
 		armor_penetration = initial(armor_penetration)
 	else
 		force = 5
 		throwforce = 5
-		parry_projectiles = 0
 		armor_penetration = 0
 		lunge_dist = 0
 

@@ -52,6 +52,11 @@ obj/machinery/recharger/attackby(obj/item/weapon/G as obj, mob/user as mob)
 			if(!RG.cell)
 				to_chat(user, "This device does not have a battery installed.")
 				return
+		if(istype(G,/obj/item/weapon/gun/energy))
+			var/obj/item/weapon/gun/energy/e = G
+			if(e.alt_charge_method)
+				to_chat(user,"This weapon does not support standard charging methods.")
+				return
 
 		if(user.unEquip(G))
 			G.forceMove(src)
