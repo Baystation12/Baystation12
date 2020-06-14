@@ -1,0 +1,4 @@
+author: "lorwp"
+delete-after: True
+changes: 
+  - rscdel: "Traitors no longer get a list of potential collaborators, nor do the collaborations get told there is a traitor"
