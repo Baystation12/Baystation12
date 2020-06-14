@@ -439,7 +439,7 @@
 "iw" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/achlys/six/z3sciencemain)
 "ix" = (/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/obj/machinery/auto_cloner,/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "iy" = (/obj/random/achlock,/turf/simulated/floor/plating,/area/achlys/six/z3armory)
-"iz" = (/obj/machinery/door/airlock/halo_maint,/turf/simulated/floor/plating,/area/achlys/three/z3sciencehalls)
+"iz" = (/obj/machinery/door/airlock/halo/maint,/turf/simulated/floor/plating,/area/achlys/three/z3sciencehalls)
 "iA" = (/turf/simulated/wall/strong,/area/achlys/three/z3sciencehalls)
 "iB" = (/obj/machinery/door/airlock/science{req_access = list(510)},/obj/effect/floor_decal/corner/paleblue/diagonal{icon_state = "corner_white_diagonal"; dir = 8},/turf/simulated/floor/tiled/white,/area/achlys/six/z3sciencemain)
 "iC" = (/obj/effect/floor_decal/corner/grey/diagonal,/obj/structure/bed/chair/office/light{tag = "icon-officechair_white_preview (NORTH)"; icon_state = "officechair_white_preview"; dir = 1},/turf/simulated/floor/tiled,/area/achlys/nine/z3sciencecubicles)
