@@ -86,22 +86,7 @@ GLOBAL_DATUM_INIT(traitors, /datum/antagonist/traitor, new)
 	give_intel(traitor_mob)
 
 /datum/antagonist/traitor/proc/give_intel(mob/living/traitor_mob)
-	give_collaborators(traitor_mob)
 	give_codewords(traitor_mob)
-
-/datum/antagonist/traitor/proc/give_collaborators(mob/living/traitor_mob)
-	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in GLOB.player_list)
-		if(man.client)
-			var/decl/cultural_info/culture = man.get_cultural_value(TAG_FACTION)
-			if(culture && prob(culture.subversive_potential))
-				dudes += man
-		dudes -= traitor_mob
-	if(LAZYLEN(dudes))
-		var/mob/living/carbon/human/M = pick(dudes)
-		to_chat(traitor_mob, "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them.")
-		traitor_mob.StoreMemory("<b>Potential Collaborator</b>: [M.real_name]", /decl/memory_options/system)
-		to_chat(M, "<span class='warning'>The subversive potential of your faction has been noticed, and you may be contacted for assistance soon...</span>")
 
 /datum/antagonist/traitor/proc/give_codewords(mob/living/traitor_mob)
 	to_chat(traitor_mob, "<u><b>Your employers provided you with the following information on how to identify possible allies:</b></u>")
