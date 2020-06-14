@@ -3567,13 +3567,6 @@
 "hr" = (
 /turf/simulated/floor/tiled/dark,
 /area/engineering/storage)
-"hu" = (
-/obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/engineering/engine_room)
 "hw" = (
 /obj/structure/bed/chair/shuttle{
 	tag = "icon-shuttle_chair_preview (NORTH)";
@@ -5266,8 +5259,8 @@
 "lq" = (
 /obj/structure/railing/mapped,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/open,
 /area/hallway/primary/seconddeck/center)
@@ -6317,8 +6310,8 @@
 /area/engineering/engine_room)
 "ok" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/atmospherics/pipe/cap/visible/fuel,
@@ -8356,8 +8349,8 @@
 	dir = 10
 	},
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -14051,8 +14044,8 @@
 	},
 /obj/structure/ladder/up,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/engineering/foyer)
@@ -15714,8 +15707,8 @@
 	dir = 4
 	},
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
@@ -16125,7 +16118,7 @@
 "Qn" = (
 /obj/machinery/atmospherics/omni/filter{
 	tag_east = 2;
-	tag_south = 5;
+	tag_south = 8;
 	tag_west = 1
 	},
 /obj/effect/engine_setup/filter,
@@ -16692,8 +16685,8 @@
 /area/vacant/prototype/engine)
 "Sf" = (
 /obj/structure/bed/chair/padded/yellow{
-	icon_state = "chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "chair_preview"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/vacant/prototype/control)
@@ -17172,8 +17165,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/corner/yellow,
 /turf/simulated/floor/tiled,
@@ -17821,9 +17814,8 @@
 /area/engineering/bluespace)
 "Wn" = (
 /obj/machinery/atmospherics/omni/filter{
-	tag_east = 5;
+	tag_east = 8;
 	tag_north = 1;
-	tag_south = 0;
 	tag_west = 2
 	},
 /obj/effect/engine_setup/filter,
@@ -45458,7 +45450,7 @@ ox
 gz
 PY
 mN
-hu
+mS
 ih
 jg
 jO
