@@ -532,7 +532,9 @@ datum/unit_test/ladder_check/start_test()
 		if(O)
 			if(!istype(O))
 				failed = TRUE
-				log_bad("[S] ([S.type]) in [A] ([A.type]) at ([S.x],[S.y],[S.z]) has no open space above")
+				var/area/above_area = get_area(O)
+				log_bad("[S] ([S.type]) in [A] ([A.type]) at ([S.x],[S.y],[S.z]) has above: \
+					[O] ([O.type]) in [above_area] ([above_area.type]) at ([O.x],[O.y],[O.z])")
 		else
 			log_debug("[S] ([S.type]) in [A] ([A.type]) at ([S.x],[S.y],[S.z]) has no zlevel above")
 
