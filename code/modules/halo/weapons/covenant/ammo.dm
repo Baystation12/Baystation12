@@ -309,7 +309,6 @@
 	name = "fuel rod"
 	check_armour = "bomb"
 	step_delay = 1.2
-	dispersion = 5	//random offset of 4.5 tiles
 	kill_count = 15
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
