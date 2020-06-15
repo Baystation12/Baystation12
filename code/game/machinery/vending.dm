@@ -533,7 +533,7 @@
 		src.speak(slogan)
 		src.last_slogan = world.time
 
-	if(src.shoot_inventory && prob(2))
+	if(!nohack && src.shoot_inventory && prob(2))
 		src.throw_item()
 
 	return
