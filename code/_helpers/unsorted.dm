@@ -1104,6 +1104,8 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 	if(dview_debug)	to_debug_listeners("dview([range], [center], [invis_flags])")
 	if(!center)
 		return
+	if(!GLOB.dview_mob)
+		GLOB.dview_mob = new /mob/dview
 
 	GLOB.dview_mob.loc = center
 	GLOB.dview_mob.see_invisible = invis_flags
