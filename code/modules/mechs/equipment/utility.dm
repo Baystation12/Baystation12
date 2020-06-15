@@ -47,7 +47,7 @@
 				return
 
 			owner.visible_message(SPAN_NOTICE("\The [owner] begins loading \the [O]."))
-			if(do_after(owner, 20, O, 0, 1))
+			if(do_after(owner, 20, O, do_flags = DO_DEFAULT ^ DO_USER_SAME_HAND))
 				if(O in carrying || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
 					return
 				if(length(carrying) >= carrying_capacity)

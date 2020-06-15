@@ -61,7 +61,7 @@
 			else
 				user.visible_message("<span class='warning'>[user] begins to do [H]'s lips with \the [src].</span>", \
 									 "<span class='notice'>You begin to apply \the [src].</span>")
-				if(do_after(user, 20, H) && do_after(H, 20, needhand = 0, progress = 0, incapacitation_flags = INCAPACITATION_NONE))	//user needs to keep their active hand, H does not.
+				if(do_after(user, 4 SECONDS, H, do_flags = DO_DEFAULT ^ DO_SHOW_PROGRESS))
 					user.visible_message("<span class='notice'>[user] does [H]'s lips with \the [src].</span>", \
 										 "<span class='notice'>You apply \the [src].</span>")
 					H.lip_style = colour

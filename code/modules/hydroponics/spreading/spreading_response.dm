@@ -55,7 +55,7 @@
 			"<span class='danger'>\The [user] attempts to get free from [src]!</span>",
 			"<span class='warning'>You attempt to get free from [src].</span>")
 
-		if(do_after(user, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+		if(do_after(user, breakouttime, incapacitation_flags = INCAPACITATION_DEFAULT ^ INCAPACITATION_RESTRAINED))
 			if(unbuckle_mob())
 				user.visible_message(
 					"<span class='danger'>\The [user] manages to escape [src]!</span>",
