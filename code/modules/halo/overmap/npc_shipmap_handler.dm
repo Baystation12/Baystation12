@@ -29,10 +29,19 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	var/list/z_level_toclear = block(locate(1,1,z_level),locate(255,255,z_level))
 	for(var/turf/to_clear in z_level_toclear)
 		for(var/atom/movable/obj_to_clear in to_clear.contents)
-			obj_to_clear.loc = null
-			GLOB.processing_objects -= obj_to_clear
-			qdel(obj_to_clear)
-		new /turf/space (to_clear)
+			var/del_me = 0
+			if(isliving(obj_to_clear))
+				del_me = 1
+			else if(isobserver(obj_to_clear))
+				del_me = 1
+			else if(isobj(obj_to_clear))
+				del_me = 1
+
+			if(del_me)
+				obj_to_clear.loc = null
+				GLOB.processing_objects -= obj_to_clear
+				qdel(obj_to_clear)
+		to_clear.ChangeTurf(/turf/space)
 
 /datum/npc_ship_map_handler/proc/un_free_map(var/z_to_un_free)
 	if(z_to_un_free in free_ship_map_zs)
