@@ -121,6 +121,11 @@
 	for(var/i = 0; i < max(sprint, initial); i += 20)
 		var/turf/step = get_turf(get_step(src, direct))
 		if(step)
+			//We do this specifically as they have special conditions
+			if(direct == UP && !HasAbove(z))
+				return FALSE
+			if(direct == DOWN && !HasBelow(z))
+				return FALSE
 			setLoc(step)
 
 	cooldown = world.time + 5
@@ -128,24 +133,4 @@
 		sprint = min(sprint + 0.5, max_sprint)
 	else
 		sprint = initial
-	return 1
-
-/mob/verb/northeast()
-	set name = ".northeast"
-	if(!eyeobj || !HasAbove(eyeobj.z))
-		return
-	EyeMove(UP)
-
-/mob/observer/northeast()
-	if(HasAbove(z))
-		forceMove(get_step(src, UP))
-
-/mob/verb/southeast()
-	set name = ".southeast"
-	if(!eyeobj || !HasBelow(eyeobj.z))
-		return
-	EyeMove(DOWN)
-
-/mob/observer/southeast()
-	if(HasBelow(z))
-		forceMove(get_step(src, DOWN))
+	return TRUE
