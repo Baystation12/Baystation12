@@ -33,5 +33,11 @@
 /datum/fabricator_recipe/drinkingglass/coffecup
 	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup
 
-/datum/fabricator_recipe/drinkingglass/metalcoffecup
-	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/metal
+/datum/fabricator_recipe/drinkingglass/cognac
+	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/cognac
+
+/datum/fabricator_recipe/drinkingglass/goblet
+	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/goblet
+
+/datum/fabricator_recipe/drinkingglass/coffeecup/glass
+	path = /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/glass

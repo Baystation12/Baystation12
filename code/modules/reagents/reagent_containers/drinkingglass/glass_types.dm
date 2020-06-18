@@ -222,17 +222,6 @@
 	icon_state = "coffeecup_brit"
 	base_name = "british cup"
 
-/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/tall
-	name = "tall coffee cup"
-	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning."
-	icon = 'icons/obj/drink_glasses/coffecup_tall.dmi'
-	icon_state = "coffeecup_tall"
-	volume = 60
-	center_of_mass = "x=15;y=19"
-	filling_states = "50;70;90;100"
-	base_name = "tall cup"
-	base_icon = "coffeecup_tall"
-
 /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/dais
 	name = "\improper DAIS coffee cup"
 	desc = "A coffee cup imprinted with the stylish logo of Deimos Advanced Information Systems."
@@ -279,3 +268,62 @@
 	volume = 30
 	possible_transfer_amounts = "5;10;15;30"
 	rim_pos = "y=23;x_left=13;x_right=20"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/cognac
+	name = "snifter glass"
+	desc = "A snitfer, also known as a cognac glass, made for serving aged spirits."
+	base_name = "glass"
+	base_icon = "cognac"
+	icon = 'icons/obj/drink_glasses/cognac.dmi'
+	filling_states = "25;50;75;100"
+	volume = 20
+	possible_transfer_amounts = "5;10;20"
+	rim_pos = "y=22;x_left=14;x_right=22"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/goblet
+	name = "goblet"
+	desc = "A glass goblet, used to deliver alcohol to the upper class since ancient times."
+	base_name = "goblet"
+	base_icon = "goblet"
+	icon = 'icons/obj/drink_glasses/goblet.dmi'
+	filling_states = "20;40;60;80;100"
+	volume = 25
+	possible_transfer_amounts = "5;10;15;25"
+	rim_pos = "y=24;x_left=14;x_right=20"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/glass
+	name = "glass coffee cup"
+	desc = "A glass coffee cup, using space age technology to keep it cool for use."
+	icon_state = "glasscoffeecup"
+	item_state = "glasscoffeecup"
+	base_name = "glass cup"
+	base_icon = "glasscoffeecup"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/tall
+	name = "tall coffee cup"
+	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning."
+	icon = 'icons/obj/drink_glasses/coffecup_tall.dmi'
+	icon_state = "coffeecup_tall"
+	volume = 60
+	center_of_mass = "x=15;y=19"
+	filling_states = "50;70;90;100"
+	base_name = "tall cup"
+	base_icon = "coffeecup_tall"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/tall/black
+	name = "tall black coffee cup"
+	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning. This one is black."
+	icon_state = "coffeecup_tall_black"
+	base_name = "tall black cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/tall/metal
+	name = "tall metal coffee cup"
+	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning. This one is made of metal."
+	icon_state = "coffeecup_tall_metal"
+	base_name = "tall metal cup"
+
+/obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/tall/rainbow
+	name = "tall rainbow coffee cup"
+	desc = "An unreasonably tall coffee cup, for when you really need to wake up in the morning. This one is rainbow colored."
+	icon_state = "coffeecup_tall_rainbow"
+	base_name = "tall rainbow cup"
