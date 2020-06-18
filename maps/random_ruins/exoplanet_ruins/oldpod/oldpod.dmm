@@ -92,7 +92,6 @@
 /area/map_template/oldpod)
 "ao" = (
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (WEST)";
 	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
@@ -104,7 +103,6 @@
 /area/map_template/oldpod)
 "ap" = (
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 4
 	},

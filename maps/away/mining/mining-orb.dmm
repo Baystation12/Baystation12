@@ -60,7 +60,6 @@
 /area/mine/explored)
 "as" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	tag = "icon-spline_fancy (NORTHEAST)";
 	icon_state = "spline_fancy";
 	dir = 5
 	},
@@ -140,8 +139,6 @@
 /area/mine/explored)
 "aV" = (
 /obj/effect/floor_decal/spline/fancy/wood{
-	tag = "icon-spline_fancy (NORTHEAST)";
-	icon_state = "spline_fancy";
 	dir = 5
 	},
 /turf/simulated/floor/exoplanet/water/shallow,

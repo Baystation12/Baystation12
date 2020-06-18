@@ -2345,8 +2345,7 @@
 "eG" = (
 /obj/machinery/door/blast/shutters{
 	id_tag = "colsen";
-	name = "Hard Storage Shutter";
-	tag = ""
+	name = "Hard Storage Shutter"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/colony/command)
@@ -3790,8 +3789,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -3804,13 +3802,11 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
-	id_tag = "playablecolonymain_pump_out_external";
-	tag = "playablecolonymain_pump"
+	id_tag = "playablecolonymain_pump_out_external"
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /obj/effect/floor_decal/industrial/hatch/orange,
@@ -4076,8 +4072,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/exoplanet/concrete,
 /area/template_noop)
@@ -6344,8 +6339,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/exoplanet/concrete,
 /area/map_template/colony/mineralprocessing)
@@ -6427,8 +6421,7 @@
 "li" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/conveyor_switch{
 	id = "colonymine"
@@ -6587,8 +6580,7 @@
 "lz" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/computer/mining,
 /obj/structure/table/steel_reinforced,
@@ -6694,7 +6686,6 @@
 	frequency = 1380;
 	id_tag = "playablecolonymain";
 	pixel_y = 28;
-	tag = "playablecolonymain";
 	tag_airpump = "playablecolonymain_pump";
 	tag_chamber_sensor = "playablecolonymain_sensor_chamber";
 	tag_exterior_door = "playablecolonymain_exterior_door";
@@ -6705,8 +6696,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "playablecolonymain_pump";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
+	power_rating = 25000
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -6739,8 +6729,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "playablecolonymain_pump";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
+	power_rating = 25000
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -7047,8 +7036,7 @@
 "mk" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/exoplanet/concrete,
@@ -7084,13 +7072,11 @@
 "mn" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -7242,8 +7228,7 @@
 /obj/machinery/button/blast_door{
 	id_tag = "colsen";
 	name = "Hard Equipment Storage";
-	pixel_y = 28;
-	tag = ""
+	pixel_y = 28
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -7443,8 +7428,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/recharge_station,
 /turf/simulated/floor/exoplanet/concrete,
@@ -8017,8 +8001,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "playablecolonymain_pump_out_internal";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
+	power_rating = 25000
 	},
 /obj/item/device/radio/intercom{
 	dir = 4;
@@ -8084,8 +8067,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "playablecolonymain_pump";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
+	power_rating = 25000
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -8110,8 +8092,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 1;
 	id_tag = "playablecolonymain_pump";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
+	power_rating = 25000
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -8336,8 +8317,7 @@
 "ol" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -8375,8 +8355,7 @@
 "on" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -8521,8 +8500,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "playablecolonymain_pump_out_internal";
-	power_rating = 25000;
-	tag = "playablecolonymain_pump"
+	power_rating = 25000
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/colony/airlock)
@@ -8699,8 +8677,7 @@
 "vk" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -8825,8 +8802,7 @@
 "JN" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -8905,8 +8881,7 @@
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/exoplanet/concrete,

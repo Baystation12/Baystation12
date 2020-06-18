@@ -1216,7 +1216,6 @@
 /area/map_template/skipjack_station/start)
 "cL" = (
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (WEST)";
 	icon_state = "shuttle_chair_preview";
 	dir = 8
 	},
@@ -1266,8 +1265,7 @@
 	req_access = list("ACCESS_SYNDICATE")
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
-	dir = 4
-	id_tag = "skipjack_shuttle_pump"
+	dir = 4id_tag = "skipjack_shuttle_pump"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/skipjack_station/start)
