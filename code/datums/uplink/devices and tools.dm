@@ -4,6 +4,12 @@
 /datum/uplink_item/item/tools
 	category = /datum/uplink_category/tools
 
+/datum/uplink_item/item/tools/personal_shield
+	name = "Personal Shield"
+	desc = "A very expensive device that uses energy to block bullets and lasers from tearing you a new hole."
+	item_cost = 60
+	path = /obj/item/device/personal_shield
+
 /datum/uplink_item/item/tools/toolbox
 	name = "Fully Loaded Toolbox"
 	desc = "A hefty toolbox filled with all the equipment you need to get past any construction or electrical issues. \
