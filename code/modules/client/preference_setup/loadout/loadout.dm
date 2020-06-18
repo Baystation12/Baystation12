@@ -350,7 +350,8 @@ var/list/gear_datums = list()
 	var/list/allowed_skills //Skills required to spawn with this item.
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
-	var/flags              //Special tweaks in new
+	var/flags              //Special tweaks in New
+	var/custom_setup_proc  //Special tweak in New
 	var/category
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 
@@ -366,6 +367,8 @@ var/list/gear_datums = list()
 		gear_tweaks += new/datum/gear_tweak/path/type(path)
 	if(flags & GEAR_HAS_SUBTYPE_SELECTION)
 		gear_tweaks += new/datum/gear_tweak/path/subtype(path)
+	if(custom_setup_proc)
+		gear_tweaks += new/datum/gear_tweak/custom_setup(custom_setup_proc)
 
 /datum/gear/proc/get_description(var/metadata)
 	. = description

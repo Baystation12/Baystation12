@@ -37,6 +37,7 @@
 /datum/gear/accessory/tags
 	display_name = "dog tags"
 	path = /obj/item/clothing/accessory/badge/solgov/tags
+	custom_setup_proc = /obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup
 
 /datum/gear/accessory/ec_scarf
 	display_name = "Expeditionary Corps scarf"
@@ -294,3 +295,4 @@
 	description = "A selection of passports."
 	path = /obj/item/weapon/passport
 	flags = GEAR_HAS_SUBTYPE_SELECTION
+	custom_setup_proc = /obj/item/weapon/passport/proc/set_info
