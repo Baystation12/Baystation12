@@ -13,7 +13,7 @@
 	magazine_type = /obj/item/ammo_magazine/spnkr
 	fire_delay = 8
 	one_hand_penalty = -1
-	dispersion = list(2.6)
+	dispersion = list(1.4)
 	caliber = "spnkr"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE

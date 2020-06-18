@@ -36,6 +36,7 @@ mob/living/simple_animal/hostile/apply_difficulty_setting()
 			melee_damage_lower += 20
 			melee_damage_upper += 20
 			resistance = min(resistance + 5, 25)
+			possible_grenades += /obj/item/weapon/grenade/flashbang
 			if(burst_size > 1)
 				burst_size += 2
 

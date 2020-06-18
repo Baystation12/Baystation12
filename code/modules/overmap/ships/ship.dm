@@ -1,4 +1,6 @@
 
+#define DROPSHIP_MARKER_PADDING 2
+
 /obj/effect/overmap/ship
 	name = "generic ship"
 	desc = "Space faring vessel."
@@ -90,14 +92,14 @@
 				midpoint = (map_bounds[2] + map_bounds[4]) /2
 			if(use_opposite_side) //EAST/SOUTH
 				if(using_axis_x)
-					point_at = locate(midpoint,map_bounds[4],z_level)
+					point_at = locate(midpoint,map_bounds[4] + DROPSHIP_MARKER_PADDING,z_level)
 				else
-					point_at = locate(map_bounds[3],midpoint,z_level)
+					point_at = locate(map_bounds[3] - DROPSHIP_MARKER_PADDING,midpoint,z_level)
 			else
 				if(using_axis_x)
-					point_at = locate(midpoint,map_bounds[2],z_level)
+					point_at = locate(midpoint,map_bounds[2] - DROPSHIP_MARKER_PADDING,z_level)
 				else
-					point_at = locate(map_bounds[1],midpoint,z_level)
+					point_at = locate(map_bounds[1] + DROPSHIP_MARKER_PADDING,midpoint,z_level)
 			if(point_at)
 				var/obj/point = new /obj/effect/landmark/dropship_land_point (point_at)
 				point.name = "Level [i] - [n]"
@@ -310,3 +312,5 @@
 		return 0
 	for(var/datum/ship_engine/E in engines)
 		. |= E.can_burn()
+
+#undef DROPSHIP_MARKER_PADDING
