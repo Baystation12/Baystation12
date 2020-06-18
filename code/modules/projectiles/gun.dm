@@ -200,7 +200,7 @@
 		return
 
 	if(safety())
-		if(user.a_intent == I_HURT && !user.skill_fail_prob(SKILL_WEAPONS, 100, SKILL_EXPERT, 0.5)) //reflex un-safeying
+		if(user.a_intent == I_HURT && user.skill_check(SKILL_WEAPONS, SKILL_EXPERT)) //reflex un-safeying
 			toggle_safety(user)
 		else
 			handle_click_safety(user)
