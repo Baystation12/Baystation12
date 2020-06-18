@@ -53,7 +53,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#FF8000"
-	overdose = REAGENTS_OVERDOSE * 1.25
+	overdose = REAGENTS_OVERDOSE * 1.33
 	scannable = 1
 	flags = IGNORE_MOB_SIZE
 
