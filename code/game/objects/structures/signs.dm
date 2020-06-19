@@ -60,6 +60,11 @@
 		qdel(src)
 	else ..()
 
+/obj/item/sign/ntplague
+	name = "Plague"
+	desc = "A plague, dedicated to the founder of NT."
+	icon_state = 'lightplaquealt'
+
 /obj/structure/sign/double/map
 	name = "map"
 	desc = "A framed map."
@@ -73,6 +78,14 @@
 
 /obj/structure/sign/double/map/right
 	icon_state = "map-right"
+
+/obj/structure/sign/double/map/eternisright
+	desc = "A framed map of the Eternis Research Facility"
+	icon_state = "mapeternis-left
+
+/obj/structure/sign/double/map/eternisleft
+	desc = "A framed map of the Eternis Research Facility"
+	icon_state = "mapeternis-right"
 
 /obj/structure/sign/monkey_painting
 	name = "\improper Mr. Deempisi portrait"

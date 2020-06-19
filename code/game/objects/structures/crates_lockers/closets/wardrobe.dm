@@ -339,7 +339,7 @@
 	new /obj/item/clothing/accessory/toggleable/hawaii/random(src)
 
 /obj/structure/closet/wardrobe/tactical
-	name = "tactical equipment"
+	name = "Tactical Equipment"
 	closet_appearance = /decl/closet_appearance/tactical
 
 /obj/structure/closet/wardrobe/tactical/New()
@@ -352,6 +352,18 @@
 	new /obj/item/weapon/storage/belt/holster/security/tactical(src)
 	new /obj/item/clothing/shoes/tactical(src)
 	new /obj/item/clothing/gloves/tactical(src)
+
+/obj/structure/closet/wardrobe/tactical_noarmor
+	name = "Tactical Equipment"
+	closet_appearance = /decl/closet_appearance/tactical
+
+/obj/structure/closet/wardrobe/tactical_noarmor/New()
+	..()
+	new /obj/item/clothing/under/tactical(src)
+	new /obj/item/weapon/storage/belt/holster/security/tactical(src)
+	new /obj/item/clothing/shoes/tactical(src)
+	new /obj/item/clothing/gloves/tactical(src)
+
 
 /obj/structure/closet/wardrobe/suit
 	name = "formal clothing locker"
