@@ -132,7 +132,7 @@
 		else
 			O = new recipe.result_type(user.loc)
 		O.set_dir(user.dir)
-		O.add_fingerprint(user)
+		O.add_fingerprint(user, log_note = "made using stack_recipe")
 
 		if (recipe.goes_in_hands)
 			user.put_in_hands(O)
