@@ -13,7 +13,7 @@ atom/var/var/list/fingerprints
 atom/var/var/list/fingerprintshidden
 atom/var/var/fingerprintslast = null
 
-/atom/proc/add_hiddenprint(mob/M)
+/atom/proc/add_hiddenprint(mob/M, var/log_note)
 	if(!M || !M.key)
 		return
 	if(fingerprintslast == M.key)
@@ -24,19 +24,21 @@ atom/var/var/fingerprintslast = null
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if (H.gloves)
-			src.fingerprintshidden += "\[[time_stamp()]\] (Wearing gloves). Real name: [H.real_name], Key: [H.key]"
+			src.fingerprintshidden += "\[[time_stamp()]\] (Wearing gloves). Real name: [H.real_name], Key: [H.key]\
+				[log_note ? ", " + log_note : ""]"
 			return 0
 
-	src.fingerprintshidden += "\[[time_stamp()]\] Real name: [M.real_name], Key: [M.key]"
+	src.fingerprintshidden += "\[[time_stamp()]\] Real name: [M.real_name], Key: [M.key]\
+		[log_note ? ", " + log_note : ""]"
 	return 1
 
-/atom/proc/add_fingerprint(mob/M, ignoregloves)
+/atom/proc/add_fingerprint(mob/M, ignoregloves, var/log_note)
 	if(isnull(M)) return
 	if(isAI(M)) return
 	if(!M || !M.key)
 		return
 
-	add_hiddenprint(M)
+	add_hiddenprint(M, log_note)
 	add_fibers(M)
 
 	if(!fingerprints)

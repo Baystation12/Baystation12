@@ -51,8 +51,8 @@
 					/obj/item/weapon/gun/projectile/srs99_sniper = 1,
 					/obj/item/weapon/gun/projectile/m41 = 1,
 					/obj/item/weapon/storage/box/spnkr = 2,
-					/obj/item/turret_deploy_kit/HMG = 3,
-					/obj/item/turret_deploy_kit/chaingun = 3,
+					/obj/item/turret_deploy_kit/HMG = 1,
+					/obj/item/turret_deploy_kit/chaingun = 1,
 					/obj/item/weapon/plastique = 6,
 					/obj/item/weapon/armor_patch = 2)
 
