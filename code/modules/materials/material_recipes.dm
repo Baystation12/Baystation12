@@ -82,10 +82,7 @@
 		new/datum/stack_recipe("modular tablet frame", /obj/item/modular_computer/tablet, 5),\
 	))
 
-/material/steel/generate_recipes()
-	..()
-
-	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/destructible/barrel, 4, time = 50, one_per_turf = 1)
+	recipes += new/datum/stack_recipe("metal barrel", /obj/structure/destructible/barrel, 4, time = 50, one_per_turf = 1, on_floor = 1)
 	recipes += new/datum/stack_recipe("barbed wire coil", /obj/item/stack/barbedwire, 2, time = 30)
 	recipes += new/datum/stack_recipe("tank trap", /obj/structure/destructible/tanktrap, 4, one_per_turf = 1, on_floor = 1, time = 50)
 	recipes += new/datum/stack_recipe("Combat barricade", /obj/structure/destructible/steel_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
