@@ -112,9 +112,17 @@
 			to_chat(user, "<span class='warning'>You haven't got enough [src] to build \the [recipe.title]!</span>")
 		return
 
-	if (recipe.one_per_turf && (locate(recipe.result_type) in user.loc))
-		to_chat(user, "<span class='warning'>There is another [recipe.title] here!</span>")
-		return
+	var/build_dir = user.dir
+	if (recipe.one_per_turf)
+		var/atom/blocker = locate(recipe.result_type) in user.loc
+		if(blocker)
+			if(recipe.one_per_turf == 1)
+				to_chat(user, "<span class='warning'>There is another [recipe.title] here!</span>")
+				return
+			else if(recipe.one_per_turf == 2)
+				if(blocker.dir == build_dir)
+					to_chat(user, "<span class='warning'>There is another [recipe.title] in that direction!</span>")
+					return
 
 	if (recipe.on_floor && !isfloor(user.loc))
 		to_chat(user, "<span class='warning'>\The [recipe.title] must be constructed on the floor!</span>")
@@ -131,7 +139,7 @@
 			O = new recipe.result_type(user.loc, recipe.use_material)
 		else
 			O = new recipe.result_type(user.loc)
-		O.set_dir(user.dir)
+		O.set_dir(build_dir)
 		O.add_fingerprint(user, log_note = "made using stack_recipe")
 
 		if (recipe.goes_in_hands)
