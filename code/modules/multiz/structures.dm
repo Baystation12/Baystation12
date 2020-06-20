@@ -57,6 +57,8 @@
 	..()
 
 /obj/structure/ladder/hitby(obj/item/I)
+	if (istype(src, /obj/structure/ladder/up))
+		return
 	var/area/room = get_area(src)
 	if(!room.has_gravity())
 		return
