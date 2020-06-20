@@ -1,0 +1,4 @@
+author: "Kearel"
+delete-after: True
+changes: 
+  - bugfix: "Chorus can no longer regenerate health when it should be dead."
