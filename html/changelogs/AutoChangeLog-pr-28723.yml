@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - bugfix: "Chorus is now appropriately titled in some contexts."
