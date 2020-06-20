@@ -3433,7 +3433,7 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 9)
 	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
-	reagents.add_reagent(/datum/reagent/sugar, 4)
+	reagents.add_reagent(/datum/reagent/nutriment/coco, 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/donor
 	name = "donor candy"
