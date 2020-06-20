@@ -792,7 +792,7 @@
 /obj/item/clothing/under/savage_hunter/female,
 /obj/item/clothing/under/wetsuit,
 /obj/effect/decal/cleanable/dirt,
-/obj/item/trash/candy/proteinbar,
+/obj/item/trash/proteinbar,
 /obj/item/trash/liquidfood,
 /obj/item/weapon/stock_parts/matter_bin/super,
 /obj/item/weapon/stock_parts/circuitboard/biogenerator,

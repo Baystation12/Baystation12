@@ -29,7 +29,7 @@
 	name = "candy"
 	icon_state = "candy"
 
-/obj/item/trash/candy/proteinbar
+/obj/item/trash/proteinbar
 	name = "protein bar"
 	icon_state = "proteinbar"
 
