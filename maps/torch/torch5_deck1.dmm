@@ -10671,7 +10671,7 @@
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /obj/effect/floor_decal/industrial/outline/grey,
 /turf/simulated/floor/tiled/techfloor,
-/area/security/brig)
+/area/maintenance/firstdeck/foreport)
 "aMT" = (
 /turf/simulated/wall/prepainted,
 /area/security/storage)
@@ -45747,7 +45747,7 @@ aGY
 jTV
 aJG
 aKR
-aGP
+aBb
 aMS
 aMS
 jTV
