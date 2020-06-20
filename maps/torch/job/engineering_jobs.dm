@@ -199,7 +199,7 @@
 	                    SKILL_ANATOMY      = SKILL_EXPERT)
 	skill_points = 20
 
-	access = list(access_robotics, access_robotics_engineering, access_engine, access_solgov_crew)
+	access = list(access_robotics, access_engine, access_solgov_crew)
 	minimal_access = list()
 
 /datum/job/roboticist/get_description_blurb()
