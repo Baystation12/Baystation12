@@ -229,7 +229,10 @@
 	TLV[GAS_NITROGEN] = list(16, 19, 135, 140) // Partial pressure, kpa
 
 /obj/machinery/power/smes/buildable/preset/voxship/ship
-	uncreated_component_parts = list(/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1)
+	uncreated_component_parts = list(
+		/obj/item/weapon/stock_parts/smes_coil/super_capacity = 1,
+		/obj/item/weapon/stock_parts/smes_coil/super_io = 1
+	)
 	_input_maxed = TRUE
 	_output_maxed = TRUE
 	_input_on = TRUE
