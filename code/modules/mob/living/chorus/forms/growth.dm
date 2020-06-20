@@ -32,6 +32,7 @@
 			/datum/chorus_building/set_to_turf/growth/womb
 	)
 	var/released_eggs = 0 //Growth's win condition.
+	damage_color = "#ff0000"
 
 /datum/chorus_form/growth/setup_form(var/mob/living/chorus/c)
 	..()

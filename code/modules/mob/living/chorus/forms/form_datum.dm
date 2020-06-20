@@ -7,6 +7,7 @@
 	var/leave_message = "You are no longer under the control of"
 	var/implant_name = "curious object"
 	var/implant_state = "implant"
+	var/damage_color = "#ffffff"
 	var/list/buildings = list() //All possible buildings
 	var/list/resources = list()
 

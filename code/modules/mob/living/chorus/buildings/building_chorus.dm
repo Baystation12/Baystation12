@@ -7,6 +7,8 @@
 	var/click_cooldown = 10
 	var/activation_cost_resource
 	var/activation_cost_amount
+	var/image/damage_overlay
+	appearance_flags = KEEP_TOGETHER
 	density = 1
 	anchored = 1
 
@@ -15,6 +17,11 @@
 	if(o)
 		owner = o
 		owner.add_building(src)
+		damage_overlay = image(icon = 'icons/obj/cult.dmi', icon_state = "damage_overlay")
+		damage_overlay.color = owner.form.damage_color
+		damage_overlay.blend_mode = BLEND_INSET_OVERLAY
+		damage_overlay.alpha = 0
+		overlays += damage_overlay
 
 /obj/structure/chorus/Destroy()
 	owner.remove_building(src)
@@ -51,9 +58,18 @@
 
 /obj/structure/chorus/take_damage(var/amount)
 	health -= amount
+	update_icon()
 	if(health < 0)
 		src.visible_message("\The [src] crumbles!")
 		qdel(src)
 
 /obj/structure/chorus/bullet_act(var/obj/item/projectile/P)
 	take_damage(P.damage)
+
+/obj/structure/chorus/on_update_icon()
+	. = ..()
+	if(health < initial(health))
+		var/perc = health/initial(health)
+		damage_overlay.alpha = 255 - 255*perc
+		overlays.Cut()
+		overlays += damage_overlay //Have to refresh it for whatever fucking reason
