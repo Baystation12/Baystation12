@@ -610,6 +610,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/hellshenpa = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/gingerbeer = 15,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/speer = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/ale = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 5,
