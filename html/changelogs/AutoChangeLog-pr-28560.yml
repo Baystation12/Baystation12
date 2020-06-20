@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Vox shuttle default SMES I/O improved in line with some other shuttles."
