@@ -1,0 +1,4 @@
+author: "SparklySheep"
+delete-after: True
+changes: 
+  - rscadd: "Buffs powersinks so they can disable power networks as intended"
