@@ -1,18 +1,12 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "aa" = (
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/scavship)
 "ab" = (
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "ac" = (
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/engineering)
 "ad" = (
 /obj/machinery/portable_atmospherics/canister/empty,
@@ -23,9 +17,7 @@
 	icon_state = "intact";
 	dir = 6
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "af" = (
 /obj/machinery/atmospherics/unary/engine{
@@ -58,12 +50,10 @@
 /area/voxship/thrusters)
 "aj" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/fuel,
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "ak" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced/hull/vox,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -86,7 +76,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/scavship)
 "al" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced/hull/vox,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -107,7 +97,7 @@
 /turf/simulated/floor/plating/vox,
 /area/voxship/scavship)
 "am" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced/hull/vox,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -146,9 +136,7 @@
 /turf/simulated/wall/prepainted,
 /area/voxship/scavship)
 "at" = (
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/fore)
 "au" = (
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -433,9 +421,7 @@
 /area/voxship/thrusters)
 "bd" = (
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/fuel,
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "be" = (
 /turf/simulated/floor/reinforced/airless,
@@ -645,9 +631,7 @@
 	icon_state = "intact";
 	dir = 5
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "bF" = (
 /obj/machinery/shipsensors,
@@ -1274,7 +1258,7 @@
 /turf/simulated/floor/reinforced/airless,
 /area/voxship/fore)
 "cT" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced/hull/vox,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -1761,18 +1745,14 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "dO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	icon_state = "map_universal";
 	dir = 4
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "dP" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume{
@@ -1952,9 +1932,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "el" = (
 /obj/structure/bed,
@@ -2201,9 +2179,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "eN" = (
 /obj/structure/extinguisher_cabinet,
@@ -2270,9 +2246,7 @@
 /area/voxship/fore)
 "eU" = (
 /obj/machinery/computer/mining,
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/scavship)
 "eV" = (
 /obj/structure/window/reinforced,
@@ -2554,9 +2528,7 @@
 	icon_state = "intact";
 	dir = 10
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/engineering)
 "fC" = (
 /obj/machinery/light/small{
@@ -2570,14 +2542,12 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "fD" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced/hull/vox,
 /turf/simulated/floor/airless,
 /area/voxship/scavship)
 "fE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black,
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/engineering)
 "fF" = (
 /obj/structure/cable,
@@ -2721,9 +2691,7 @@
 	icon_state = "map";
 	dir = 1
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/thrusters)
 "gc" = (
 /obj/machinery/power/port_gen/pacman/super/potato,
@@ -2736,9 +2704,7 @@
 /area/space)
 "ge" = (
 /obj/structure/fuel_port,
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/engineering)
 "gf" = (
 /obj/structure/cable{
@@ -2820,13 +2786,11 @@
 	icon_state = "map_universal";
 	dir = 4
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/engineering)
 "gn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced/hull/vox,
 /obj/machinery/door/blast/shutters{
 	density = 0;
 	dir = 2;
@@ -2845,7 +2809,7 @@
 /turf/simulated/floor/tiled/techmaint/vox,
 /area/voxship/engineering)
 "gp" = (
-/obj/effect/wallframe_spawn/reinforced/hull,
+/obj/effect/wallframe_spawn/reinforced/hull/vox,
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	icon_state = "map_universal";
 	dir = 4
@@ -2870,22 +2834,16 @@
 	icon_state = "map_universal";
 	dir = 4
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/shuttle)
 "gy" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 10
 	},
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/shuttle)
 "gz" = (
-/turf/simulated/wall/r_wall/hull{
-	initial_gas = list("nitrogen" = 101.38)
-	},
+/turf/simulated/wall/r_wall/hull/vox,
 /area/voxship/shuttle)
 "gA" = (
 /obj/machinery/door/airlock/hatch/voxship,
