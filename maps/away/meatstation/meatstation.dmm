@@ -4626,7 +4626,6 @@
 /area/meatstation/mess)
 "kr" = (
 /obj/structure/bed/chair/office/comfy/black{
-	tag = "icon-comfyofficechair_preview (EAST)";
 	icon_state = "comfyofficechair_preview";
 	dir = 4
 	},
@@ -5199,7 +5198,6 @@
 /area/meatstation/dorm)
 "lL" = (
 /obj/structure/bed/chair/office/comfy/black{
-	tag = "icon-comfyofficechair_preview (EAST)";
 	icon_state = "comfyofficechair_preview";
 	dir = 4
 	},

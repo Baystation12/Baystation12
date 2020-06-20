@@ -2772,7 +2772,6 @@
 "gS" = (
 /obj/effect/wingrille_spawn/reinforced_phoron/full,
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow{
-	tag = "icon-map (EAST)";
 	icon_state = "map";
 	dir = 4
 	},

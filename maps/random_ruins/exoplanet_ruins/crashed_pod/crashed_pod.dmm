@@ -71,8 +71,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
 	id_tag = "crashedpodWest_pump_out_internal";
-	power_rating = 25000;
-	tag = "crashedpodWest_pump"
+	power_rating = 25000
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	cycle_to_external_air = 1;
@@ -81,7 +80,6 @@
 	id_tag = "crashedpodWest";
 	pixel_x = 0;
 	pixel_y = 26;
-	tag = "crashedpodWest";
 	tag_airpump = "crashedpodWest_pump";
 	tag_chamber_sensor = "crashedpodWest_sensor_chamber";
 	tag_exterior_door = "crashedpodWest_exterior_door";
@@ -136,8 +134,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "crashedpodEast_pump_out_internal";
-	power_rating = 25000;
-	tag = "crashedpodEast_pump_out_internal"
+	power_rating = 25000
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	cycle_to_external_air = 1;
@@ -146,7 +143,6 @@
 	id_tag = "crashedpodEast";
 	pixel_x = 0;
 	pixel_y = 26;
-	tag = "crashedpodEast";
 	tag_airpump = "crashedpodEast_pump";
 	tag_chamber_sensor = "crashedpodEast_sensor_chamber";
 	tag_exterior_door = "crashedpodEast_exterior_door";
@@ -190,8 +186,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "crashedpodWest_pump";
-	power_rating = 25000;
-	tag = "crashedpodWest_pump"
+	power_rating = 25000
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
@@ -241,8 +236,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 2;
 	id_tag = "crashedpodEast_pump";
-	power_rating = 25000;
-	tag = "crashedpodEast_pump"
+	power_rating = 25000
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
@@ -454,8 +448,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -516,8 +509,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -537,8 +529,7 @@
 /obj/machinery/atmospherics/pipe/manifold/visible/red,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -558,8 +549,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -589,8 +579,7 @@
 /obj/machinery/power/terminal,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -616,8 +605,7 @@
 /obj/random/powercell,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -651,8 +639,7 @@
 /obj/random/powercell,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/item/weapon/book/manual/engineering_construction,
 /obj/item/weapon/stock_parts/circuitboard/engine,
@@ -724,8 +711,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/item/weapon/stock_parts/circuitboard/solar_control,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -745,8 +731,7 @@
 /obj/machinery/power/smes/batteryrack,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -812,8 +797,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -838,8 +822,7 @@
 /obj/machinery/fabricator,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -863,8 +846,7 @@
 /obj/machinery/light/spot,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -905,8 +887,7 @@
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -942,8 +923,7 @@
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -998,8 +978,7 @@
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -1199,8 +1178,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 4;
 	id_tag = "crashedpodWest_pump_out_external";
-	power_rating = 25000;
-	tag = "null"
+	power_rating = 25000
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
@@ -1220,8 +1198,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;
 	id_tag = "crashedpodEast_pump_out_external";
-	power_rating = 25000;
-	tag = "crashedpodEast_pump_out_internal"
+	power_rating = 25000
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)

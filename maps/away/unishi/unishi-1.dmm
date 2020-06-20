@@ -758,8 +758,7 @@
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 4;
-	icon_state = "intact";
-	tag = "icon-intact (WEST)"
+	icon_state = "intact"
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)

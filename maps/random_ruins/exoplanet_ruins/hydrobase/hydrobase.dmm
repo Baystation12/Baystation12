@@ -1794,7 +1794,6 @@
 /area/template_noop)
 "eu" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	tag = "icon-warningcorner (WEST)";
 	icon_state = "warningcorner";
 	dir = 8
 	},
@@ -2031,7 +2030,6 @@
 	id = "hydrosolar"
 	},
 /obj/structure/cable{
-	tag = "icon-0-1 (EAST)";
 	icon_state = "0-1";
 	dir = 4
 	},
@@ -2230,7 +2228,6 @@
 /area/template_noop)
 "fg" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	tag = "icon-warningcorner (NORTH)";
 	icon_state = "warningcorner";
 	dir = 1
 	},

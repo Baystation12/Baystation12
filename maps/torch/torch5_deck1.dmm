@@ -1959,8 +1959,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/forestarboard)
@@ -3200,8 +3199,7 @@
 /obj/effect/decal/cleanable/cobweb2,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
@@ -3552,8 +3550,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
@@ -3893,8 +3890,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -4091,8 +4087,7 @@
 /obj/structure/bed/chair/padded/blue,
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "bottom-left";
-	tag = "icon-bottom-left"
+	icon_state = "bottom-left"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -4100,8 +4095,7 @@
 /obj/structure/bed/chair/padded/blue,
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "top-left";
-	tag = "icon-top-left"
+	icon_state = "top-left"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -4206,8 +4200,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
@@ -4372,8 +4365,7 @@
 	},
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "center-right";
-	tag = "icon-center-right"
+	icon_state = "center-right"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -4385,8 +4377,7 @@
 /obj/structure/bed/chair/padded/blue,
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "bottom-center";
-	tag = "icon-bottom-center"
+	icon_state = "bottom-center"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -4455,8 +4446,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
@@ -4622,16 +4612,14 @@
 "amg" = (
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "bottom-right";
-	tag = "icon-bottom-right"
+	icon_state = "bottom-right"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
 "amh" = (
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "top-right";
-	tag = "icon-top-right"
+	icon_state = "top-right"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -4832,8 +4820,7 @@
 "anp" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/firstdeck/centralstarboard)
@@ -4963,8 +4950,7 @@
 "aol" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
 /turf/simulated/open,
@@ -6354,8 +6340,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/hallway/primary/firstdeck/fore)
@@ -8137,8 +8122,7 @@
 "aBM" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
@@ -8622,16 +8606,14 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
 "aEb" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -8906,8 +8888,7 @@
 /obj/machinery/atmospherics/valve/shutoff,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -8968,8 +8949,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
@@ -9171,8 +9151,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -9221,8 +9200,7 @@
 /obj/machinery/atmospherics/valve/shutoff,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -9403,8 +9381,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -9765,8 +9742,7 @@
 /obj/machinery/atmospherics/valve/shutoff,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
@@ -10392,8 +10368,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -10714,8 +10689,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -11106,8 +11080,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -11284,8 +11257,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -11609,8 +11581,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -11787,8 +11758,7 @@
 /obj/structure/lattice,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 6
@@ -12242,7 +12212,6 @@
 /area/maintenance/firstdeck/centralport)
 "aRX" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -12270,8 +12239,7 @@
 "aSe" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/valve/shutoff,
 /turf/simulated/open,
@@ -12279,8 +12247,7 @@
 "aSf" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
@@ -12424,8 +12391,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
@@ -12802,8 +12768,7 @@
 "aTH" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -14596,7 +14561,6 @@
 	pixel_y = 0
 	},
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
@@ -14617,7 +14581,6 @@
 	pixel_y = 0
 	},
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
@@ -14632,7 +14595,6 @@
 	pixel_y = 24
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTH)";
 	icon_state = "corner_white";
 	dir = 1
 	},
@@ -14644,7 +14606,6 @@
 	pixel_y = 0
 	},
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
@@ -14668,7 +14629,6 @@
 	tag_door = "escape_pod_12_hatch"
 	},
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
@@ -14689,7 +14649,6 @@
 	tag_door = "escape_pod_13_hatch"
 	},
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
@@ -14710,7 +14669,6 @@
 	tag_door = "escape_pod_14_hatch"
 	},
 /obj/structure/bed/chair/shuttle{
-	tag = "icon-shuttle_chair_preview (NORTH)";
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
@@ -15402,8 +15360,7 @@
 	dir = 10
 	},
 /obj/machinery/body_scan_display{
-	pixel_y = 24;
-	tag = "med_or_display"
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -16110,7 +16067,6 @@
 /area/engineering/auxpower)
 "dlf" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -16291,7 +16247,6 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -16458,8 +16413,7 @@
 "dIA" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /obj/machinery/atmospherics/valve/shutoff{
@@ -17500,8 +17454,7 @@
 	dir = 1
 	},
 /obj/machinery/body_scan_display{
-	pixel_y = 24;
-	tag = "rob_or_display1"
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
 /area/medical/surgery2)
@@ -17922,7 +17875,6 @@
 "flB" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -18832,8 +18784,7 @@
 /obj/structure/bed/chair/padded/blue,
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "top-center";
-	tag = "icon-top-center"
+	icon_state = "top-center"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -19083,7 +19034,6 @@
 	icon_state = "pipe-c"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -19483,8 +19433,7 @@
 "gZT" = (
 /obj/effect/floor_decal/scglogo{
 	dir = 8;
-	icon_state = "center-left";
-	tag = "icon-center-left"
+	icon_state = "center-left"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/command/conference)
@@ -20247,8 +20196,7 @@
 "hMb" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/assembly/robotics)
@@ -21173,7 +21121,6 @@
 	},
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -21185,7 +21132,6 @@
 	icon_state = "pipe-c"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -21480,7 +21426,6 @@
 	pixel_y = -22
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -21562,7 +21507,6 @@
 /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG,
 /obj/item/weapon/reagent_containers/food/drinks/glass2/coffeecup/SCG,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -21755,7 +21699,6 @@
 	},
 /obj/random_multi/single_item/boombox,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -21807,7 +21750,6 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -21831,7 +21773,6 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -21848,7 +21789,6 @@
 /area/thruster/d1starboard)
 "jGb" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -21863,7 +21803,6 @@
 /area/rnd/locker)
 "jHb" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -21877,7 +21816,6 @@
 	pixel_y = 8
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -21911,7 +21849,6 @@
 	pixel_y = 0
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -21942,7 +21879,6 @@
 "jMb" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -21961,7 +21897,6 @@
 "jNb" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -22011,7 +21946,6 @@
 	pixel_y = 32
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -22029,7 +21963,6 @@
 /area/command/armoury)
 "jQb" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTH)";
 	icon_state = "corner_white";
 	dir = 1
 	},
@@ -22063,7 +21996,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (EAST)";
 	icon_state = "corner_white";
 	dir = 4
 	},
@@ -22071,7 +22003,6 @@
 /area/rnd/research)
 "jSb" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -22079,7 +22010,6 @@
 /area/rnd/research)
 "jTb" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (EAST)";
 	icon_state = "corner_white";
 	dir = 4
 	},
@@ -22097,7 +22027,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -22110,7 +22039,6 @@
 "jWb" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (EAST)";
 	icon_state = "corner_white";
 	dir = 4
 	},
@@ -22144,7 +22072,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -22266,8 +22193,7 @@
 	},
 /obj/machinery/body_scan_display{
 	pixel_x = 0;
-	pixel_y = 24;
-	tag = "rob_or_display2"
+	pixel_y = 24
 	},
 /turf/simulated/floor/tiled/dark,
 /area/assembly/robotics/surgery)
@@ -22379,7 +22305,6 @@
 /area/rnd/xenobiology)
 "kkN" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -23573,7 +23498,6 @@
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -23767,8 +23691,7 @@
 "mav" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralport)
@@ -23995,7 +23918,6 @@
 "mmP" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -24042,7 +23964,6 @@
 /area/medical/infirmreception)
 "mpq" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (WEST)";
 	icon_state = "corner_white";
 	dir = 8
 	},
@@ -24430,8 +24351,7 @@
 "mKw" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -24534,7 +24454,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -25191,7 +25110,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/torchltdlogo{
-	tag = "icon-topleft";
 	icon_state = "topleft"
 	},
 /turf/simulated/floor/tiled,
@@ -25206,7 +25124,6 @@
 /area/security/wing)
 "nKb" = (
 /obj/effect/floor_decal/torchltdlogo{
-	tag = "icon-topright";
 	icon_state = "topright"
 	},
 /turf/simulated/floor/tiled,
@@ -25304,7 +25221,6 @@
 /area/rnd/entry)
 "nSb" = (
 /obj/effect/floor_decal/torchltdlogo{
-	tag = "icon-bottomright";
 	icon_state = "bottomright"
 	},
 /turf/simulated/floor/tiled,
@@ -25388,7 +25304,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -25604,7 +25519,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (WEST)";
 	icon_state = "corner_white";
 	dir = 8
 	},
@@ -25975,8 +25889,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -25993,7 +25906,6 @@
 "oAp" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26281,7 +26193,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/hologram/holopad,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26298,7 +26209,6 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26357,7 +26267,6 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26430,7 +26339,6 @@
 	icon_state = "pipe-c"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26460,7 +26368,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (WEST)";
 	icon_state = "corner_white";
 	dir = 8
 	},
@@ -26601,7 +26508,6 @@
 /area/medical/sleeper)
 "pqb" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26621,7 +26527,6 @@
 /area/rnd/locker)
 "prb" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26636,7 +26541,6 @@
 "psb" = (
 /obj/structure/closet/secure_closet/secure_closet/xenoarchaeologist_torch,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26666,7 +26570,6 @@
 	pixel_y = -24
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26681,7 +26584,6 @@
 	},
 /obj/machinery/lapvend,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -26776,8 +26678,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
 /turf/simulated/floor/plating,
@@ -26936,7 +26837,6 @@
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -27186,7 +27086,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHEAST)";
 	icon_state = "corner_white";
 	dir = 6
 	},
@@ -27315,7 +27214,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -27483,8 +27381,7 @@
 /obj/random/maintenance/solgov,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
@@ -27549,7 +27446,6 @@
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHEAST)";
 	icon_state = "corner_white";
 	dir = 6
 	},
@@ -27706,7 +27602,6 @@
 	pixel_y = 0
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -28006,7 +27901,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHEAST)";
 	icon_state = "corner_white";
 	dir = 6
 	},
@@ -28116,7 +28010,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -28467,7 +28360,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHEAST)";
 	icon_state = "corner_white";
 	dir = 6
 	},
@@ -28497,7 +28389,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -28512,7 +28403,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -28523,7 +28413,6 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -28560,7 +28449,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -28737,7 +28625,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHEAST)";
 	icon_state = "corner_white";
 	dir = 6
 	},
@@ -28810,7 +28697,6 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -28966,7 +28852,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHEAST)";
 	icon_state = "corner_white";
 	dir = 6
 	},
@@ -29214,7 +29099,6 @@
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 9
 	},
@@ -29296,7 +29180,6 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -29314,12 +29197,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (EAST)";
 	icon_state = "corner_white";
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (EAST)";
 	icon_state = "corner_white";
 	dir = 4
 	},
@@ -29388,8 +29269,7 @@
 "sww" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -29561,8 +29441,7 @@
 "sCu" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/valve/shutoff,
 /turf/simulated/floor/plating,
@@ -30080,8 +29959,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
@@ -30107,8 +29985,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -30137,7 +30014,6 @@
 /area/rnd/xenobiology)
 "tiz" = (
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 10
 	},
@@ -30467,8 +30343,7 @@
 "tRX" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -30658,8 +30533,7 @@
 "usV" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 9
@@ -30754,8 +30628,7 @@
 /obj/structure/lattice,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/machinery/atmospherics/pipe/zpipe/down/fuel{
 	dir = 8
@@ -31717,8 +31590,7 @@
 "xcW" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -31797,8 +31669,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
@@ -31836,8 +31707,7 @@
 "xBk" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)

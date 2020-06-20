@@ -621,7 +621,6 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -1196,7 +1195,6 @@
 	icon_state = "2-8"
 	},
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -1569,8 +1567,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
@@ -2068,8 +2065,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
@@ -2590,8 +2586,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
@@ -3646,7 +3641,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/corner/b_green{
-	tag = "icon-corner_white (SOUTHWEST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -3715,7 +3709,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -5969,7 +5962,6 @@
 /area/hallway/primary/bridge/aft)
 "lS" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "bottom-right";
 	dir = 4
 	},
@@ -7820,7 +7812,6 @@
 /area/aquila/medical)
 "qf" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-top-right";
 	icon_state = "top-right"
 	},
 /obj/structure/cable/green{
@@ -7861,7 +7852,6 @@
 /area/hallway/primary/bridge/fore)
 "qh" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-bottom-right";
 	icon_state = "bottom-right"
 	},
 /obj/structure/cable/green{
@@ -8438,7 +8428,6 @@
 /area/bridge/storage)
 "rA" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "bottom-left";
 	dir = 4
 	},
@@ -9515,7 +9504,6 @@
 /area/bridge/disciplinary_board_room)
 "up" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "top-right";
 	dir = 4
 	},
@@ -9523,7 +9511,6 @@
 /area/bridge/disciplinary_board_room)
 "uq" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "center-right";
 	dir = 4
 	},
@@ -9770,7 +9757,6 @@
 /area/bridge/disciplinary_board_room)
 "uU" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "top-center";
 	dir = 4
 	},
@@ -9837,7 +9823,6 @@
 /area/shield/bridge)
 "vf" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-top-center";
 	icon_state = "top-center"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -10293,8 +10278,7 @@
 /obj/structure/lattice,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
@@ -10915,8 +10899,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
 /turf/simulated/open,
@@ -11006,8 +10989,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
 /turf/simulated/open,
@@ -11045,8 +11027,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/foreport)
@@ -11111,7 +11092,6 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/corner/b_green{
-	tag = "icon-corner_white (WEST)";
 	icon_state = "corner_white";
 	dir = 1
 	},
@@ -11228,7 +11208,6 @@
 /area/crew_quarters/heads/office/xo)
 "yh" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-bottom-center";
 	icon_state = "bottom-center"
 	},
 /turf/simulated/floor/tiled/dark,
@@ -11585,8 +11564,7 @@
 "zQ" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
@@ -12043,8 +12021,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/lattice,
 /turf/simulated/open,
@@ -12197,7 +12174,6 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "center-left"
 	},
 /obj/structure/cable/green{
@@ -12871,7 +12847,6 @@
 /area/crew_quarters/heads/office/co)
 "Fn" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "bottom-center";
 	dir = 4
 	},
@@ -13104,8 +13079,7 @@
 "GI" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -13427,7 +13401,6 @@
 /area/crew_quarters/heads/office/cl)
 "HH" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-top-left";
 	icon_state = "top-left"
 	},
 /obj/structure/cable/green{
@@ -14121,7 +14094,6 @@
 /area/bridge/storage)
 "Kt" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-bottom-left";
 	icon_state = "bottom-left"
 	},
 /obj/structure/cable/green{
@@ -14375,7 +14347,6 @@
 /obj/item/weapon/book/manual/nt_regs,
 /obj/item/weapon/stamp/rd,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHEAST)";
 	icon_state = "corner_white";
 	dir = 5
 	},
@@ -14506,7 +14477,6 @@
 /area/crew_quarters/heads/office/co)
 "Mh" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "top-left";
 	dir = 4
 	},
@@ -14743,8 +14713,7 @@
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/aftport)
@@ -14758,8 +14727,7 @@
 "Ns" = (
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -15055,8 +15023,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
@@ -15302,7 +15269,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/effect/floor_decal/corner/b_green{
-	tag = "icon-corner_white (WEST)";
 	icon_state = "corner_white";
 	dir = 4
 	},
@@ -15326,7 +15292,6 @@
 /area/crew_quarters/safe_room/bridge)
 "Qg" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "center";
 	dir = 4
 	},
@@ -15539,8 +15504,7 @@
 "QY" = (
 /obj/structure/railing/mapped{
 	dir = 8;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/forestarboard)
@@ -16578,7 +16542,6 @@
 /area/crew_quarters/heads/office/cl/backroom)
 "Vf" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-left";
 	icon_state = "center-left";
 	dir = 4
 	},
@@ -16649,7 +16612,6 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/floor_decal/corner/research{
-	tag = "icon-corner_white (NORTHWEST)";
 	icon_state = "corner_white";
 	dir = 4
 	},
@@ -17432,8 +17394,7 @@
 	},
 /obj/structure/railing/mapped{
 	dir = 4;
-	icon_state = "railing0-1";
-	tag = "icon-railing0 (EAST)"
+	icon_state = "railing0-1"
 	},
 /turf/simulated/open,
 /area/maintenance/bridge/forestarboard)
@@ -17549,7 +17510,6 @@
 /area/crew_quarters/heads/office/sgr)
 "Zg" = (
 /obj/effect/floor_decal/scglogo{
-	tag = "icon-center-right";
 	icon_state = "center-right"
 	},
 /obj/structure/cable/green{

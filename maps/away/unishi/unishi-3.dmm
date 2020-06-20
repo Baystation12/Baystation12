@@ -362,7 +362,6 @@
 "bo" = (
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
-	tag = "icon-railing0 (WEST)";
 	icon_state = "railing0";
 	dir = 8
 	},

@@ -89,7 +89,6 @@
 /area/template_noop)
 "p" = (
 /obj/structure/bed/chair/wood{
-	tag = "icon-wooden_chair_preview (WEST)";
 	icon_state = "wooden_chair_preview";
 	dir = 8
 	},
@@ -175,7 +174,6 @@
 /area/template_noop)
 "D" = (
 /obj/structure/bed/chair/wood{
-	tag = "icon-wooden_chair_preview (WEST)";
 	icon_state = "wooden_chair_preview";
 	dir = 8
 	},
