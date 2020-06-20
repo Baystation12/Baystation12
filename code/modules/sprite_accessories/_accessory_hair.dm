@@ -773,7 +773,7 @@
 	icon_state = "hair_himecut_ponytail_up"
 	flags = HAIR_TIEABLE
 
-/datum/sprite_accessory/hair/himecut
+/datum/sprite_accessory/hair/himecutshort
 	name = "Himecut Short"
 	icon_state = "hair_himecut_short"
 
