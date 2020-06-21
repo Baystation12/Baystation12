@@ -172,7 +172,8 @@
 	selection_color = "#5b4d20"
 	economic_power = 6
 	alt_titles = list(
-		"Mechsuit Technician")
+		"Mechsuit Technician"
+		"Biomechanical Engineer")
 	outfit_type = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticist
 	allowed_branches = list(
 		/datum/mil_branch/expeditionary_corps = /decl/hierarchy/outfit/job/torch/crew/engineering/roboticistec,
@@ -188,6 +189,7 @@
 	                    SKILL_DEVICES		= SKILL_ADEPT,
 	                    SKILL_EVA           = SKILL_ADEPT,
 	                    SKILL_ANATOMY       = SKILL_ADEPT,
+	                    SKILL_MEDICAL       = SKILL_BASIC,
 	                    SKILL_MECH          = HAS_PERK)
 
 	max_skill = list(   SKILL_CONSTRUCTION = SKILL_MAX,
