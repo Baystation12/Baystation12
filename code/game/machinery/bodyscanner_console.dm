@@ -45,7 +45,7 @@
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
 	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
-		if (D.z == z)
+		if (AreConnectedZLevels(D.z, z))
 			connected_displays += D
 			GLOB.destroyed_event.register(D, src, .proc/remove_display)
 	return !!connected_displays.len
