@@ -735,6 +735,15 @@
 	glass_name = "pear juice"
 	glass_desc = "Delicious juice made from pears."
 
+/datum/reagent/drink/juice/cabbage
+	name = "Cabbage Juice"
+	description = "It's a health drink, apparently."
+	taste_description = "cabbage"
+	color = "#1fb848"
+
+	glass_name = "cabbage juice"
+	glass_desc = "It's a health drink, apparently."
+
 // Everything else
 
 /datum/reagent/drink/milk
