@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Objects colliding with upward ladders no longer fall through reality."
