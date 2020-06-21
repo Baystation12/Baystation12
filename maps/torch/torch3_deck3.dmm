@@ -2729,23 +2729,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/starboard)
-"fI" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/machinery/light/small{
-	dir = 8
-	},
-/obj/structure/ladder/up,
-/turf/simulated/floor/tiled/techfloor,
-/area/maintenance/thirddeck/starboard)
-"fJ" = (
-/obj/machinery/door/firedoor,
-/obj/machinery/door/airlock/maintenance{
-	autoset_access = 0;
-	name = "Expedition Storage Maintenance";
-	req_access = list(list("ACCESS_MINING","ACCESS_XENOARCH"),"ACCESS_MAINT")
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/maintenance/thirddeck/starboard)
 "fK" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -41008,7 +40991,7 @@ Pd
 Gz
 EF
 cl
-cl
+dD
 cl
 cl
 OE
@@ -41210,7 +41193,7 @@ WZ
 VR
 oH
 cl
-fI
+cl
 Wb
 Wb
 Wb
@@ -41412,7 +41395,7 @@ ck
 VR
 Uv
 cl
-fJ
+dD
 Wb
 Rf
 Rf

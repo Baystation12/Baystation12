@@ -119,16 +119,6 @@ area/space/atmosalert()
 /area/medical
 	req_access = list(access_medical)
 
-/area/medical/virology
-	name = "\improper Virology"
-	icon_state = "virology"
-	req_access = list(access_virology)
-
-/area/medical/virologyaccess
-	name = "\improper Virology Access"
-	icon_state = "virology"
-	req_access = list() // This is like the lobby, needs low access to allow passing through in a different direction.
-
 /area/security
 	req_access = list(access_sec_doors)
 

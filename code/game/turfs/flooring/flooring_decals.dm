@@ -1124,6 +1124,18 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/sign/p
 	icon_state = "white_p"
 
+/obj/effect/floor_decal/sign/or1
+	icon_state = "white_or1"
+
+/obj/effect/floor_decal/sign/or2
+	icon_state = "white_or2"
+
+/obj/effect/floor_decal/sign/tr
+	icon_state = "white_tr"
+
+/obj/effect/floor_decal/sign/pop
+	icon_state = "white_pop"
+
 /obj/effect/floor_decal/solarpanel
 	icon_state = "solarpanel"
 
