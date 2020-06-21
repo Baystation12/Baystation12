@@ -7099,8 +7099,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/body_scanconsole{
-	dir = 1;
-	display_tags = list("med_or_display","rob_or_display1","rob_or_display2")
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -7114,8 +7113,7 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/body_scanconsole{
-	dir = 1;
-	display_tags = list("med_or_display","rob_or_display1","rob_or_display2")
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1

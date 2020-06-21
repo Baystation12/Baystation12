@@ -16675,7 +16675,6 @@
 "dYb" = (
 /obj/machinery/body_scanconsole{
 	dir = 1;
-	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
 	icon_state = "body_scannerconsole"
 	},
 /obj/effect/floor_decal/corner/pink{
@@ -24158,7 +24157,6 @@
 "mzb" = (
 /obj/machinery/body_scanconsole{
 	dir = 4;
-	display_tags = list("med_or_display","rob_or_display1","rob_or_display2");
 	icon_state = "body_scannerconsole"
 	},
 /turf/simulated/floor/tiled/white,

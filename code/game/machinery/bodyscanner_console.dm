@@ -9,7 +9,6 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 	uncreated_component_parts = null
 	stat_immune = 0
-	var/list/display_tags = list()
 	var/list/connected_displays = list()
 	var/list/data = list()
 	var/scan_data
@@ -46,7 +45,7 @@
 
 /obj/machinery/body_scanconsole/proc/FindDisplays()
 	for(var/obj/machinery/body_scan_display/D in SSmachines.machinery)
-		if(D.tag in display_tags)
+		if (D.z == z)
 			connected_displays += D
 			GLOB.destroyed_event.register(D, src, .proc/remove_display)
 	return !!connected_displays.len

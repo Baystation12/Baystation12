@@ -1731,8 +1731,7 @@
 /area/map_template/oldlab/station/xenobio)
 "CX" = (
 /obj/machinery/body_scanconsole{
-	dir = 1;
-	display_tags = list("med_or_display","rob_or_display1","rob_or_display2")
+	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
