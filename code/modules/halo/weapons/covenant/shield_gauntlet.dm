@@ -16,7 +16,7 @@
 	var/list/shield_colour_values = list("#0000FF","#00FFFF","#FFFF00","#FFA500","#FF2600")		//highest charge to lowest charge
 	var/shield_recharge_delay = 6 SECONDS //The delay between taking damage and starting to recharge, in ticks.
 	var/shield_next_charge
-	var/active_slowdown_amount = 5
+	var/active_slowdown_amount = 1.5 //Bracing to hide behind the shield. Using value of an active, firing LMG
 	var/overloaded = 0
 
 	var/obj/item/weapon/gauntlet_shield/connected_shield
