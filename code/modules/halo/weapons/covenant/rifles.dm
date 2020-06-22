@@ -20,7 +20,7 @@
 	accuracy = 1
 	one_hand_penalty = 2
 
-	overheat_capacity = 24 //6 clicks/bursts
+	overheat_capacity = 48
 	overheat_fullclear_delay = 30
 	overheat_sfx = 'code/modules/halo/sounds/plasrifle_overheat.ogg'
 
