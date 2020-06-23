@@ -67,6 +67,12 @@
 		to_chat(communicator, "<span class='danger'>Guests may not use the [name] channel.</span>")
 		return FALSE
 
+	if (config.forbidden_message_regex && !check_rights(R_INVESTIGATE, 0, communicator) && findtext(message, config.forbidden_message_regex))
+		log_and_message_admins("attempted to send a forbidden message in [name]: [message]", user = C)
+		if (C)
+			to_chat(C, "<B>Your message matched a filter and has not been sent.</B>")
+		return FALSE
+
 	return TRUE
 
 /decl/communication_channel/proc/do_communicate(var/communicator, var/message)

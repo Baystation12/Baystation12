@@ -421,6 +421,10 @@ RADIATION_LOWER_LIMIT 0.15
 ## Clients will be unable to connect unless their build is equal to or higher than this (a number, e.g. 1000)
 #MINIMUM_BYOND_BUILD
 
+## Prevents matching messages from being sent on any communication channel
+## The provided example forbids byond:// and http/https:// unless followed by a permitted domain.
+#FORBIDDEN_MESSAGE_REGEX /((https?)|(byond)):\/\/(?!(.*\.)?baystation12\.net)/i
+
 ## Direct clients to preload the server resource file from a URL pointing to a .rsc file. NOTE: At this time (byond 512),
 ## the client/resource_rsc var does not function as one would expect. See client_defines.dm, the "preload_rsc" var's
 ## comments on how to use it properly. If you use a resource URL, you must set preload_rsc to 0 at compile time or
