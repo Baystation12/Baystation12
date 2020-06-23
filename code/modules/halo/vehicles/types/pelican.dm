@@ -102,7 +102,7 @@
 
 	occupants = list(13,1)
 
-	exposed_positions = list("driver" = 10)//Passengers could technically be hit by bullets through the troop bay.
+	exposed_positions = list("driver" = 0)//Passengers could technically be hit by bullets through the troop bay.
 
 	light_color = "#E1FDFF"
 

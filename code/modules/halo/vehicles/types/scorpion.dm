@@ -14,7 +14,7 @@
 
 	ammo_containers = newlist(/obj/item/ammo_magazine/scorp_coax,/obj/item/ammo_magazine/scorp_shell)
 
-	exposed_positions = list("passenger" = 30)
+	exposed_positions = list("passenger" = 15)
 
 	occupants = list(4,1)
 

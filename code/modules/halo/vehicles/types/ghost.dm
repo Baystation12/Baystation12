@@ -13,7 +13,7 @@
 	sprite_offsets = list("1" = list(16,2),"2" = list(16,2),"4" = list(10,2),"8" = list(22,2))
 
 	occupants = list(0,0)
-	exposed_positions = list("driver" = 10)
+	exposed_positions = list("driver" = 0)
 
 	pixel_x = -16
 
