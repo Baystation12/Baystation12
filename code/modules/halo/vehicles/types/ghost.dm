@@ -75,8 +75,10 @@
 	name = "Internal Plasma Storage"
 
 	max_ammo = 200
+	caliber = "ghostPlas"
 	ammo_type = /obj/item/ammo_casing/ghost_round
 
 /obj/item/ammo_casing/ghost_round
 	name = "ghost casing"
+	caliber = "ghostPlas"
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
