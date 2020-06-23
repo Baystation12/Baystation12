@@ -156,7 +156,7 @@
 		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
-			explosion(L.loc,-1,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
+			explosion(L.loc,-1,-1,3,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
 			for(var/obj/I in embedded_shards)
 				var/obj/item/weapon/material/shard/shrapnel/needleshrap/needle = I
 				if(istype(needle))
