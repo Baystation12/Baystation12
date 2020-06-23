@@ -65,6 +65,7 @@
 	var/mob/user = src.loc
 	if(istype(user))
 		connected_shield = new(user, src)
+		connected_shield.slowdown_general = active_slowdown_amount
 		if(!user.put_in_inactive_hand(connected_shield))
 			if(!user.put_in_active_hand(connected_shield))
 				qdel(connected_shield)
