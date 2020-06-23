@@ -1,9 +1,0 @@
-author: "Albens"
-delete-after: True
-changes: 
-  - maptweak: "Medical has been remapped."
-  - maptweak: "Robotics has been remapped."
-  - maptweak: "Counselor's office is now where Sci breakroom and Old D1 Checkpoint use to be."
-  - maptweak: "Deck 2 maintenance, Starboard midship to Aft has been changed."
-  - maptweak: "Bridge Saferoom has been updated to be in line with the new THERA Safe Room."
-  - maptweak: "Sci now has a Paperwork office to account for their lost breakroom."

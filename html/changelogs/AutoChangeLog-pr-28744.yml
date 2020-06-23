@@ -1,4 +1,0 @@
-author: "Rowtree"
-delete-after: True
-changes: 
-  - tweak: "Allows chef to spawn with semi and formal loadout options."

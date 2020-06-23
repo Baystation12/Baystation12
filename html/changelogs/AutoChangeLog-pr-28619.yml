@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - admin: "Configuration now permits setting a regular expression to test against all communications, preventing them on match, and circumvented by R_INVESTIGATE."
