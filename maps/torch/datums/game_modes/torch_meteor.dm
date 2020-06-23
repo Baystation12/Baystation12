@@ -33,7 +33,7 @@
 		if((get_z(H) in GLOB.using_map.station_levels) && !(H.stat & BROKEN))
 			nav_status = TRUE
 	var/bsd_status = FALSE
-	var/area/A = locate(/area/engineering/bluespace/containment) in world
+	var/area/A = locate(/area/engineering/bluespace) in world
 	if(A && A.powered(EQUIP)) //There's no actual machines to check
 		bsd_status = TRUE
 
