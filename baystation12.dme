@@ -81,6 +81,7 @@
 #include "code\__defines\ZAS.dm"
 #include "code\__defines\zmimic.dm"
 #include "code\_global_vars\configuration.dm"
+#include "code\_global_vars\edible.dm"
 #include "code\_global_vars\logging.dm"
 #include "code\_global_vars\mapping.dm"
 #include "code\_global_vars\misc.dm"

@@ -155,7 +155,7 @@ MRE Stuff
 	icon_state = "meatmre"
 	main_meal = /obj/item/weapon/storage/mrebag/menu10
 	startswith = list(
-		/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
+		/obj/item/weapon/reagent_containers/food/snacks/proteinbar,
 		/obj/item/weapon/reagent_containers/food/condiment/small/packet/protein,
 		/obj/random/mre/sauce/sugarfree,
 		/obj/item/weapon/material/kitchen/utensil/fork/plastic

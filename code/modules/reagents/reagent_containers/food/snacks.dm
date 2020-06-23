@@ -3423,18 +3423,6 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/sugar, 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
-	name = "protein bar"
-	desc = "SwoleMAX brand protein bars, guaranteed to get you feeling perfectly overconfident."
-	icon_state = "proteinbar"
-	trash = /obj/item/trash/candy/proteinbar
-	bitesize = 6
-/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar/Initialize()
-	.=..()
-	reagents.add_reagent(/datum/reagent/nutriment, 9)
-	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
-	reagents.add_reagent(/datum/reagent/sugar, 4)
-
 /obj/item/weapon/reagent_containers/food/snacks/candy/donor
 	name = "donor candy"
 	desc = "A little treat for blood donors."
@@ -3445,6 +3433,26 @@
 	.=..()
 	reagents.add_reagent(/datum/reagent/nutriment, 10)
 	reagents.add_reagent(/datum/reagent/sugar, 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/proteinbar
+	name = "protein bar"
+	desc = "SwoleMAX brand protein bars, guaranteed to get you feeling perfectly overconfident."
+	icon_state = "proteinbar"
+	trash = /obj/item/trash/proteinbar
+	bitesize = 6
+/obj/item/weapon/reagent_containers/food/snacks/proteinbar/Initialize()
+	.=..()
+	reagents.add_reagent(/datum/reagent/nutriment, 9)
+	reagents.add_reagent(/datum/reagent/nutriment/protein, 4)
+	var/flavor = pick(GLOB.proteinbar_flavors)
+	var/flavor_type = GLOB.proteinbar_flavors[flavor]
+	var/count = length(flavor_type)
+	if (count)
+		for (var/type in flavor_type)
+			reagents.add_reagent(type, round(4 / count, 0.1))
+	else
+		reagents.add_reagent(flavor_type, 4)
+	name = "[flavor] [name]"
 
 /obj/item/weapon/reagent_containers/food/snacks/candy_corn
 	name = "candy corn"
