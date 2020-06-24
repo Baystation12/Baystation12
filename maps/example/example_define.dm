@@ -3,7 +3,8 @@
 	full_name = "The Example"
 	path = "example"
 
-	lobby_screens = list('maps/example/lobby.png')
+	lobby_screens = list("lobby")
+	lobby_icon = 'maps/example/example_title.dmi'
 	lobby_tracks = list(/music_track/absconditus)
 
 	station_levels = list(1, 2, 3)

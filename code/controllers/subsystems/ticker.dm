@@ -268,7 +268,7 @@ Helpers
 	for(var/mob/new_player/player in GLOB.player_list)
 		if(player && player.ready && player.mind)
 			if(player.mind.assigned_role=="AI")
-				player.close_spawn_windows()
+				close_browser(player, "window=latechoices") //closes late choices window
 				player.AIize()
 			else if(!player.mind.assigned_role)
 				continue
@@ -418,7 +418,7 @@ Helpers
 		if(istype(robo,/mob/living/silicon/robot/drone))
 			dronecount++
 			continue
-			
+
 		if (!robo.connected_ai)
 			if (robo.stat != 2)
 				to_world("<b>[robo.name] [(robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW) ? "(Played by: [robo.key])" : ""] survived as an AI-less synthetic! Its laws were:</b>")

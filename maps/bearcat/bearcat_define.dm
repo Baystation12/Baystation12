@@ -16,7 +16,8 @@
 	default_law_type = /datum/ai_laws/corporate
 
 	evac_controller_type = /datum/evacuation_controller/lifepods
-	lobby_screens = list('maps/bearcat/lobby/bloodmoney.png','maps/bearcat/lobby/vapormoney.png')
+	lobby_screens = list("bloodmoney","vapormoney")
+	lobby_icon = 'maps/bearcat/lobby/bearcat_title.dmi'
 
 	allowed_spawns = list("Cryogenic Storage")
 	default_spawn = "Cryogenic Storage"

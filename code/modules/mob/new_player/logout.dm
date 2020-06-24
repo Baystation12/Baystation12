@@ -3,7 +3,6 @@
 
 	// see login.dm
 	if(my_client)
-		GLOB.using_map.hide_titlescreen(my_client)
 		my_client = null
 
 	..()

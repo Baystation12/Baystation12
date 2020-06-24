@@ -8,6 +8,7 @@
 	var/datum/browser/panel
 	var/show_invalid_jobs = 0
 	universal_speak = TRUE
+	hud_type = /datum/hud/new_player
 
 	invisibility = 101
 
@@ -22,54 +23,6 @@
 /mob/new_player/New()
 	..()
 	verbs += /mob/proc/toggle_antag_pool
-
-/mob/new_player/proc/new_player_panel(force = FALSE)
-	if(!SScharacter_setup.initialized && !force)
-		return // Not ready yet.
-	var/output = list()
-	output += "<div align='center'>"
-	output += "<i>[GLOB.using_map.get_map_info()]</i>"
-	output +="<hr>"
-	output += "<a href='byond://?src=\ref[src];show_preferences=1'>Setup Character</A> "
-
-	if(GAME_STATE > RUNLEVEL_LOBBY)
-		output += "<a href='byond://?src=\ref[src];manifest=1'>View the Crew Manifest</A> "
-
-	output += "<a href='byond://?src=\ref[src];observe=1'>Observe</A> "
-
-	if(!IsGuestKey(src.key))
-		establish_db_connection()
-		if(dbcon.IsConnected())
-			var/isadmin = 0
-			if(src.client && src.client.holder)
-				isadmin = 1
-			var/DBQuery/query = dbcon.NewQuery("SELECT id FROM erro_poll_question WHERE [(isadmin ? "" : "adminonly = false AND")] Now() BETWEEN starttime AND endtime AND id NOT IN (SELECT pollid FROM erro_poll_vote WHERE ckey = \"[ckey]\") AND id NOT IN (SELECT pollid FROM erro_poll_textreply WHERE ckey = \"[ckey]\")")
-			query.Execute()
-			var/newpoll = 0
-			while(query.NextRow())
-				newpoll = 1
-				break
-
-			if(newpoll)
-				output += "<b><a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> (NEW!)</b> "
-			else
-				output += "<a href='byond://?src=\ref[src];showpoll=1'>Show Player Polls</A> "
-
-	output += "<hr>Current character: <b>[client.prefs.real_name]</b>[client.prefs.job_high ? ", [client.prefs.job_high]" : null]<br>"
-	if(GAME_STATE <= RUNLEVEL_LOBBY)
-		if(ready)
-			output += "<a class='linkOn' href='byond://?src=\ref[src];ready=0'>Un-Ready</a>"
-		else
-			output += "<a href='byond://?src=\ref[src];ready=1'>Ready Up</a>"
-	else
-		output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A>"
-
-	output += "</div>"
-
-	panel = new(src, "Welcome","Welcome to [GLOB.using_map.full_name]", 560, 280, src)
-	panel.set_window_options("can_close=0")
-	panel.set_content(JOINTEXT(output))
-	panel.open()
 
 /mob/new_player/Stat()
 	. = ..()
@@ -95,77 +48,71 @@
 				totalPlayers++
 				if(player.ready)totalPlayersReady++
 
+
+//Procs used in the new main menu (former hrefs)
+/mob/new_player/proc/observe(href, href_list)
+	if(GAME_STATE < RUNLEVEL_LOBBY)
+		to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
+		return
+
+	if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
+		if(!client)	return TRUE
+		var/mob/observer/ghost/observer = new()
+
+		spawning = TRUE
+		sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
+
+
+		observer.started_as_observer = TRUE
+		close_browser(src, "window=latechoices") //closes late choices window
+		var/obj/O = locate("landmark*Observer-Start")
+		if(istype(O))
+			to_chat(src, "<span class='notice'>Now teleporting.</span>")
+			observer.forceMove(O.loc)
+		else
+			to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
+		observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
+
+		if(isnull(client.holder))
+			announce_ghost_joinleave(src)
+
+		var/mob/living/carbon/human/dummy/mannequin = new()
+		client.prefs.dress_preview_mob(mannequin)
+		observer.set_appearance(mannequin)
+		qdel(mannequin)
+
+		if(client.prefs.be_random_name)
+			client.prefs.real_name = random_name(client.prefs.gender)
+		observer.real_name = client.prefs.real_name
+		observer.SetName(observer.real_name)
+		if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
+			observer.verbs -= /mob/observer/ghost/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
+		observer.key = key
+		qdel(src)
+
+		return TRUE
+
+/mob/new_player/proc/join_game(href, href_list)
+	if(GAME_STATE != RUNLEVEL_GAME)
+		to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
+		return
+	LateChoices() //show the latejoin job selection menu
+
+/mob/new_player/proc/setupcharacter(href, href_list)
+	client.prefs.ShowChoices(src)
+	return TRUE
+
+/mob/new_player/proc/ready(href, href_list)
+	if(GAME_STATE <= RUNLEVEL_LOBBY) // Make sure we don't ready up after the round has started
+		ready = text2num(ready())
+	else
+		ready = FALSE
+
 /mob/new_player/Topic(href, href_list) // This is a full override; does not call parent.
 	if(usr != src)
 		return TOPIC_NOACTION
 	if(!client)
 		return TOPIC_NOACTION
-
-	if(href_list["show_preferences"])
-		client.prefs.ShowChoices(src)
-		return 1
-
-	if(href_list["ready"])
-		if(GAME_STATE <= RUNLEVEL_LOBBY) // Make sure we don't ready up after the round has started
-			ready = text2num(href_list["ready"])
-		else
-			ready = 0
-
-	if(href_list["refresh"])
-		panel.close()
-		new_player_panel()
-
-	if(href_list["observe"])
-		if(GAME_STATE < RUNLEVEL_LOBBY)
-			to_chat(src, "<span class='warning'>Please wait for server initialization to complete...</span>")
-			return
-
-		if(!config.respawn_delay || client.holder || alert(src,"Are you sure you wish to observe? You will have to wait [config.respawn_delay] minute\s before being able to respawn!","Player Setup","Yes","No") == "Yes")
-			if(!client)	return 1
-			var/mob/observer/ghost/observer = new()
-
-			spawning = 1
-			sound_to(src, sound(null, repeat = 0, wait = 0, volume = 85, channel = GLOB.lobby_sound_channel))// MAD JAMS cant last forever yo
-
-
-			observer.started_as_observer = 1
-			close_spawn_windows()
-			var/obj/O = locate("landmark*Observer-Start")
-			if(istype(O))
-				to_chat(src, "<span class='notice'>Now teleporting.</span>")
-				observer.forceMove(O.loc)
-			else
-				to_chat(src, "<span class='danger'>Could not locate an observer spawn point. Use the Teleport verb to jump to the map.</span>")
-			observer.timeofdeath = world.time // Set the time of death so that the respawn timer works correctly.
-
-			if(isnull(client.holder))
-				announce_ghost_joinleave(src)
-
-			var/mob/living/carbon/human/dummy/mannequin = new()
-			client.prefs.dress_preview_mob(mannequin)
-			observer.set_appearance(mannequin)
-			qdel(mannequin)
-
-			if(client.prefs.be_random_name)
-				client.prefs.real_name = random_name(client.prefs.gender)
-			observer.real_name = client.prefs.real_name
-			observer.SetName(observer.real_name)
-			if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
-				observer.verbs -= /mob/observer/ghost/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
-			observer.key = key
-			qdel(src)
-
-			return 1
-
-	if(href_list["late_join"])
-
-		if(GAME_STATE != RUNLEVEL_GAME)
-			to_chat(usr, "<span class='warning'>The round is either not ready, or has already finished...</span>")
-			return
-		LateChoices() //show the latejoin job selection menu
-
-	if(href_list["manifest"])
-		ViewManifest()
 
 	if(href_list["SelectedJob"])
 		var/datum/job/job = SSjobs.get_by_title(href_list["SelectedJob"])
@@ -221,8 +168,6 @@
 	if(!ready && href_list["preference"])
 		if(client)
 			client.prefs.process_link(src, href_list)
-	else if(!href_list["late_join"])
-		new_player_panel()
 
 	if(href_list["showpoll"])
 
@@ -440,7 +385,7 @@
 
 /mob/new_player/proc/create_character(var/turf/spawn_turf)
 	spawning = 1
-	close_spawn_windows()
+	close_browser(src, "window=latechoices") //closes late choices window
 
 	var/mob/living/carbon/human/new_character
 
@@ -517,10 +462,6 @@
 
 /mob/new_player/Move()
 	return 0
-
-/mob/new_player/proc/close_spawn_windows()
-	close_browser(src, "window=latechoices") //closes late choices window
-	panel.close()
 
 /mob/new_player/proc/check_species_allowed(datum/species/S, var/show_alert=1)
 	if(!S.is_available_for_join() && !has_admin_rights())
