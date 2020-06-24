@@ -34,3 +34,11 @@
 	result = /datum/reagent/ketoprofen
 	required_reagents = list(/datum/reagent/tramadol = 1, /datum/reagent/leporazine = 1)
 	result_amount = 2
+
+//Stacking dermaline/kelotane allows for a much faster regen speed of burns than regeneration of brute.//
+//Don't want to highly punish people for trying an obvious mix idea, so we let them keep the higher tier chem.//
+/datum/chemical_reaction/dermaline_kelostack_prevent
+	name = "Dermaline/Kelotane Mix"
+	result = /datum/reagent/dermaline
+	required_reagents = list(/datum/reagent/kelotane = 1,/datum/reagent/dermaline = 1)
+	result_amount = 1
