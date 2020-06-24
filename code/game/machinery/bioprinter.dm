@@ -193,6 +193,10 @@
 
 	var/amount_per_slab = 50
 
+/obj/machinery/organ_printer/flesh/mapped
+	stored_matter = 1000
+	max_stored_matter = 1000
+
 /obj/machinery/organ_printer/flesh/mapped/Initialize()
 	. = ..()
 	stored_matter = max_stored_matter
