@@ -159,14 +159,7 @@ Passports
 	var/info //Everything inside. You can only see this if you open the passport by yourself.
 	var/fingerprint_hash //Kinda identification.
 
-/obj/item/weapon/passport/Initialize()
-	. = ..()
-	var/mob/living/carbon/human/H
-	H = get_holder_of_type(src, /mob/living/carbon/human)
-	if(H)
-		set_info(H)
-
-/obj/item/weapon/passport/proc/set_info(var/mob/living/carbon/human/H)
+/obj/item/weapon/passport/proc/set_info(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 	var/decl/cultural_info/culture = H.get_cultural_value(TAG_HOMEWORLD)

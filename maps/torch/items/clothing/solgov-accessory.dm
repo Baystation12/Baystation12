@@ -273,15 +273,11 @@ badges
 	var/owner_name
 	var/owner_branch
 
-/obj/item/clothing/accessory/badge/solgov/tags/Initialize()
-	. = ..()
-	var/mob/living/carbon/human/H
-	H = get_holder_of_type(src, /mob/living/carbon/human)
-	if(H)
-		set_name(H.real_name)
-		set_desc(H)
+/obj/item/clothing/accessory/badge/solgov/tags/proc/loadout_setup(mob/M)
+	set_name(M.real_name)
+	set_desc(M)
 
-/obj/item/clothing/accessory/badge/solgov/tags/set_desc(var/mob/living/carbon/human/H)
+/obj/item/clothing/accessory/badge/solgov/tags/set_desc(mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 	owner_rank = H.char_rank && H.char_rank.name

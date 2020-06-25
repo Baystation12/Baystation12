@@ -10,7 +10,7 @@
 /datum/gear_tweak/proc/tweak_gear_data(var/metadata, var/datum/gear_data)
 	return
 
-/datum/gear_tweak/proc/tweak_item(var/obj/item/I, var/metadata)
+/datum/gear_tweak/proc/tweak_item(var/user, var/obj/item/I, var/metadata)
 	return
 
 /datum/gear_tweak/proc/tweak_description(var/description, var/metadata)
@@ -38,7 +38,7 @@
 		return input(user, "Choose a color.", title, metadata) as null|anything in valid_colors
 	return input(user, "Choose a color.", title, metadata) as color|null
 
-/datum/gear_tweak/color/tweak_item(var/obj/item/I, var/metadata)
+/datum/gear_tweak/color/tweak_item(var/user, var/obj/item/I, var/metadata)
 	if(valid_colors && !(metadata in valid_colors))
 		return
 	I.color = sanitize_hexcolor(metadata, I.color)
@@ -129,7 +129,7 @@
 		else
 			return metadata
 
-/datum/gear_tweak/contents/tweak_item(var/obj/item/I, var/list/metadata)
+/datum/gear_tweak/contents/tweak_item(var/owner, var/obj/item/I, var/list/metadata)
 	if(length(metadata) != length(valid_contents))
 		return
 	for(var/i = 1 to valid_contents.len)
@@ -169,7 +169,7 @@
 	if(!.)
 		return metadata
 
-/datum/gear_tweak/reagents/tweak_item(var/obj/item/I, var/list/metadata)
+/datum/gear_tweak/reagents/tweak_item(var/user, var/obj/item/I, var/list/metadata)
 	if(metadata == "None")
 		return
 	var/reagent
@@ -179,6 +179,23 @@
 		reagent = valid_reagents[metadata]
 	if(reagent)
 		return I.reagents.add_reagent(reagent, I.reagents.get_free_space())
+
+/*
+* Custom Setup
+*/
+/datum/gear_tweak/custom_setup
+	var/custom_setup_proc
+
+/datum/gear_tweak/custom_setup/New(custom_setup_proc)
+	src.custom_setup_proc = custom_setup_proc
+	..()
+
+/datum/gear_tweak/custom_setup/tweak_item(var/user, var/item)
+	call(item, custom_setup_proc)(user)
+
+/*
+* Tablet Stuff
+*/
 
 /datum/gear_tweak/tablet
 	var/list/ValidProcessors = list(/obj/item/weapon/stock_parts/computer/processor_unit/small)
@@ -325,7 +342,7 @@
 	for(var/i in 1 to TWEAKABLE_COMPUTER_PART_SLOTS)
 		. += 1
 
-/datum/gear_tweak/tablet/tweak_item(var/obj/item/modular_computer/tablet/I, var/list/metadata)
+/datum/gear_tweak/tablet/tweak_item(var/user, var/obj/item/modular_computer/tablet/I, var/list/metadata)
 	if(length(metadata) < TWEAKABLE_COMPUTER_PART_SLOTS)
 		return
 	if(ValidProcessors[metadata[1]])
