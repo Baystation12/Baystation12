@@ -2424,8 +2424,8 @@
 /area/engineering/atmos/aux)
 "fe" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	icon_state = "warning";
@@ -5935,8 +5935,8 @@
 /area/crew_quarters/safe_room/thirddeck)
 "lH" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /obj/machinery/meter,
 /obj/effect/wallframe_spawn/reinforced_phoron,
@@ -11703,6 +11703,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/command/disperser)
+"zl" = (
+/obj/random_multi/single_item/skelestand/maint,
+/turf/simulated/floor/plating,
+/area/maintenance/thirddeck/foreport)
 "zn" = (
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Computer Lab";
@@ -15594,8 +15598,8 @@
 	icon_state = "1-2"
 	},
 /obj/structure/disposalpipe/junction{
-	icon_state = "pipe-j2";
-	dir = 1
+	dir = 1;
+	icon_state = "pipe-j2"
 	},
 /obj/structure/cable/green{
 	d1 = 4;
@@ -30108,7 +30112,7 @@ qx
 qx
 qx
 BV
-BX
+zl
 BX
 BX
 BX
