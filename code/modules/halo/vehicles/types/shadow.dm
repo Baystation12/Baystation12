@@ -14,7 +14,7 @@
 
 	ammo_containers = newlist(/obj/item/ammo_magazine/shadow_cannon)
 
-	exposed_positions = list("passenger" = 15,"driver" = 5,"gunner" = 10)
+	exposed_positions = list("passenger" = 5,"driver" = 0,"gunner" = 5)
 
 	occupants = list(4,1)
 

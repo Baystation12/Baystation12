@@ -29,7 +29,7 @@
 
 	light_color = "#C1CEFF"
 	spawn_datum = /datum/mobile_spawn/covenant
-	ammo_containers = list(/obj/item/ammo_magazine/spirit_cannon)
+	ammo_containers = newlist(/obj/item/ammo_magazine/spirit_cannon)
 
 	min_speed = 17.25
 	max_speed = 2.25

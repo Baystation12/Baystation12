@@ -16,7 +16,7 @@
 
 
 	occupants = list(4,1)
-	exposed_positions = list("driver" = 5,"gunner" = 5)
+	exposed_positions = list("driver" = 0,"gunner" = 0)
 
 	vehicle_carry_size = ITEM_SIZE_VEHICLE_SMALL
 	capacity_flag = ITEM_SIZE_VEHICLE

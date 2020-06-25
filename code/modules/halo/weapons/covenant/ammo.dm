@@ -75,7 +75,6 @@
 	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1.5 SECONDS
-	penetrating = 5
 	invisibility = 101
 	shield_damage = 210
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
@@ -157,7 +156,7 @@
 		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
-			explosion(L.loc,-1,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
+			explosion(L.loc,-1,-1,3,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
 			for(var/obj/I in embedded_shards)
 				var/obj/item/weapon/material/shard/shrapnel/needleshrap/needle = I
 				if(istype(needle))

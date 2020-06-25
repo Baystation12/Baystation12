@@ -697,4 +697,4 @@
 		remove_self(M.species.adrenal_break_threshold) //And your body consumes the adrenaline for that last final push
 
 /datum/reagent/adrenaline/overdose(var/mob/living/carbon/M, var/alien)
-	M.adjustToxLoss(REM*volume)
+	M.adjustToxLoss(REM)

@@ -12,7 +12,6 @@
 		slot_l_hand_str = SHIELD_GAUNTLET_ICON_INHAND_L,
 		slot_r_hand_str = SHIELD_GAUNTLET_ICON_INHAND_R)
 
-	slowdown_general = 5
 	canremove = 0
 	var/obj/item/clothing/gloves/shield_gauntlet/creator_gauntlet
 

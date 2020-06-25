@@ -97,7 +97,7 @@
 
 /datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien) // Overdose effect.
 	M.add_chemical_effect(CE_TOXIN, 1)
-	M.adjustToxLoss(REM*volume)
+	M.adjustToxLoss(REM*overdose)
 	remove_self(volume)
 	if(istype(M,/mob/living/carbon/human))
 		var/mob/living/carbon/human/h = M

@@ -99,6 +99,7 @@
 					/obj/item/clothing/gloves/thick/unsc = 8,
 					/obj/item/clothing/gloves/thick/unsc/brown = 8,
 					/obj/item/weapon/armor_patch = 10,
+					/obj/item/clothing/accessory/storage/bandolier = 15,
 					/obj/item/weapon/storage/backpack/marine = 6,
 					/obj/item/weapon/storage/backpack/marine/brown = 6)
 

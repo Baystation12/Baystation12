@@ -34,7 +34,6 @@
 	src.cloak_disrupted = 1
 	deactivate_cloak(0)
 	spawn(disrupt_time SECONDS)
-		activate_cloak(0)
 		src.cloak_disrupted = 0
 
 /datum/armourspecials/cloaking/try_item_action()
