@@ -70,6 +70,18 @@
 	has_hardpoints = list(HARDPOINT_BACK)
 
 /obj/item/mech_component/chassis/heavy/prebuild()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 9,  "y" = 2),
+			"[EAST]"  = list("x" = 4,  "y" = 8),
+			"[WEST]"  = list("x" = 12, "y" = 8)
+		)
+	)
+
+	. = ..()
+		
+/obj/item/mech_component/chassis/heavy/prebuild()
 	. = ..()
 	m_armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
 

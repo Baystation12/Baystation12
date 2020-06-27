@@ -68,7 +68,7 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 	if(update_overlays && LAZYLEN(pilot_overlays))
 		overlays -= pilot_overlays
 	pilot_overlays = null
-	if(!body || ((body.pilot_coverage < 100 || body.transparent_cabin) && !body.hide_pilot))
+	if(body && !(body.hide_pilot))
 		for(var/i = 1 to LAZYLEN(pilots))
 			var/mob/pilot = pilots[i]
 			var/image/draw_pilot = new
@@ -76,6 +76,7 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 			var/rel_pos = dir == NORTH ? -1 : 1
 			draw_pilot.layer = MECH_PILOT_LAYER + (body ? ((LAZYLEN(body.pilot_positions)-i)*0.001 * rel_pos) : 0)
 			draw_pilot.plane = FLOAT_PLANE
+			draw_pilot.appearance_flags = KEEP_TOGETHER
 			if(body && i <= LAZYLEN(body.pilot_positions))
 				var/list/offset_values = body.pilot_positions[i]
 				var/list/directional_offset_values = offset_values["[dir]"]
@@ -83,6 +84,13 @@ proc/get_mech_images(var/list/components = list(), var/overlay_layer = FLOAT_LAY
 				draw_pilot.pixel_y = pilot.default_pixel_y + directional_offset_values["y"]
 				draw_pilot.pixel_z = 0
 				draw_pilot.transform = null
+
+			//Mask pilots!
+			//Masks are 48x48 and pilots 32x32 (in theory at least) so some math is required for centering
+			var/diff_x = 8 - draw_pilot.pixel_x
+			var/diff_y = 8 - draw_pilot.pixel_y
+			draw_pilot.filters = filter(type = "alpha", icon = icon(body.on_mech_icon, "[body.icon_state]_pilot_mask[hatch_closed ? "" : "_open"]", dir), x = diff_x, y = diff_y)
+			
 			LAZYADD(pilot_overlays, draw_pilot)
 		if(update_overlays && LAZYLEN(pilot_overlays))
 			overlays += pilot_overlays
