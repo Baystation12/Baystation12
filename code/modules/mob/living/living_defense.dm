@@ -47,11 +47,10 @@
 
 //Adds two armor values together.
 //If armor_a and armor_b are between 0-100 the result will always also be between 0-100.
+//Above comment incorrect. System previously functioned like this, but this made armour thickness boosting
+//of deflect chances useless when faced with any AP at all.
 /proc/add_armor(var/armor_a, var/armor_b)
-
-	var/protection_a = 1/(blocked_mult(armor_a)) - 1
-	var/protection_b = 1/(blocked_mult(armor_b)) - 1
-	return 100 - 1/(protection_a + protection_b + 1)*100
+	return armor_a + armor_b
 
 //if null is passed for def_zone, then this should return something appropriate for all zones (e.g. area effect damage)
 /mob/living/proc/getarmor(var/def_zone, var/type)

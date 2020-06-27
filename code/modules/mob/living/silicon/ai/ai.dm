@@ -108,11 +108,7 @@ var/list/ai_verbs_default = list(
 	/datum/cyberwarfare_command/ai_hide,
 	/datum/cyberwarfare_command/disconnect_protect,
 	/datum/cyberwarfare_command/switch_terminal,
-	/datum/cyberwarfare_command/switch_terminal/stealth,
-	/datum/cyberwarfare_command/designate_build/wall,
-	/datum/cyberwarfare_command/designate_build/floor,
-	/datum/cyberwarfare_command/designate_build/window,
-	/datum/cyberwarfare_command/designate_build/door
+	/datum/cyberwarfare_command/switch_terminal/stealth
 	)
 
 /mob/living/silicon/ai/proc/add_ai_verbs()
