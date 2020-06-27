@@ -47,8 +47,8 @@
 
 //Adds two armor values together.
 //If armor_a and armor_b are between 0-100 the result will always also be between 0-100.
-//Above comment incorrect. System previously functioned like this, but this made armour thickness boosting of deflect chances useless
-//when faced with any AP at all.
+//Above comment incorrect. System previously functioned like this, but this made armour thickness boosting
+//of deflect chances useless when faced with any AP at all.
 /proc/add_armor(var/armor_a, var/armor_b)
 	return armor_a + armor_b
 
