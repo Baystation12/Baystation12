@@ -292,6 +292,9 @@ else if(##equipment_var) {\
 			return
 		if(tank)
 			to_chat(user, "\The [src] already has an airtank installed.")
+		if (istype(W, /obj/item/weapon/tank/scrubber))
+			to_chat(user, SPAN_WARNING("\The [W] is far too large to attach to \the [src]."))
+			return
 		else
 			if(!user.unEquip(W, src))
 				return
