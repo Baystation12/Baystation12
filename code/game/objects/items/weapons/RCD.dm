@@ -167,7 +167,7 @@
 
 
 /obj/item/weapon/rcd/mounted/useResource(var/amount, var/mob/user)
-	var/cost = amount*70 //Arbitary number that hopefully gives it as many uses as a plain RCD.
+	var/cost = amount*35 // About 9 deconstructions of walls on a good cell, less if it involves airlocks.
 	var/obj/item/weapon/cell/cell
 	if(istype(loc,/obj/item/rig_module))
 		var/obj/item/rig_module/module = loc
