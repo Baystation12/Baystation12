@@ -17,6 +17,11 @@
 		body.MouseDrop_T(dropping, user)
 	else . = ..()
 
+/mob/living/exosuit/MouseDrop(mob/living/carbon/human/over_object) //going from assumption none of previous options are relevant to exosuit
+	if(body)
+		if(!body.MouseDrop(over_object))
+			return ..()
+	
 /mob/living/exosuit/RelayMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, var/mob/user)
 	if(user && (user in pilots) && user.loc == src)
 		return OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params, user)

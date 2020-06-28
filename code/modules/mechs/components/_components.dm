@@ -88,7 +88,16 @@
 /obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
 	if(isScrewdriver(thing))
 		if(contents.len)
-			var/obj/item/removed = pick(contents)
+			//Filter non movables
+			var/list/valid_contents = list()
+			for(var/atom/movable/A in contents)
+				if(!A.anchored)
+					valid_contents += A
+			if(!valid_contents.len)
+				return
+			var/obj/item/removed = pick(valid_contents)
+			if(!(removed in contents))
+				return
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [removed] from \the [src]."))
 			removed.forceMove(user.loc)
 			playsound(user.loc, 'sound/effects/pop.ogg', 50, 0)

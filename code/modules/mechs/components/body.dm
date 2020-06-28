@@ -1,3 +1,22 @@
+/obj/item/weapon/storage/mech
+	w_class = ITEM_SIZE_NO_CONTAINER
+	max_w_class = ITEM_SIZE_LARGE
+	storage_slots = 4
+	use_sound = 'sound/effects/storage/toolbox.ogg'
+	anchored = 1
+
+/obj/item/mech_component/chassis/Adjacent(var/atom/neighbor, var/recurse = 1) //For interaction purposes we consider body to be adjacent to whatever holder mob is adjacent
+	var/mob/living/exosuit/E = loc
+	if(istype(E))
+		. = E.Adjacent(neighbor, recurse)
+	return . || ..()
+
+/obj/item/weapon/storage/mech/Adjacent(var/atom/neighbor, var/recurse = 1) //in order to properly retrieve items
+	var/obj/item/mech_component/chassis/C = loc
+	if(istype(C))
+		. = C.Adjacent(neighbor, recurse-1)
+	return . || ..()
+
 /obj/item/mech_component/chassis
 	name = "body"
 	icon_state = "loader_body"
@@ -8,6 +27,7 @@
 	var/obj/item/robot_parts/robot_component/diagnosis_unit/diagnostics
 	var/obj/item/robot_parts/robot_component/armour/exosuit/m_armour
 	var/obj/machinery/portable_atmospherics/canister/air_supply
+	var/obj/item/weapon/storage/mech/storage_compartment
 	var/datum/gas_mixture/cockpit
 	var/transparent_cabin = FALSE
 	var/hide_pilot =        FALSE
@@ -36,6 +56,7 @@
 	QDEL_NULL(diagnostics)
 	QDEL_NULL(m_armour)
 	QDEL_NULL(air_supply)
+	QDEL_NULL(storage_compartment)
 	. = ..()
 
 /obj/item/mech_component/chassis/update_components()
@@ -43,6 +64,7 @@
 	cell =        locate() in src
 	m_armour =    locate() in src
 	air_supply =  locate() in src
+	storage_compartment = locate() in src
 
 /obj/item/mech_component/chassis/show_missing_parts(var/mob/user)
 	if(!cell)
@@ -60,6 +82,7 @@
 		if(air)
 			cockpit.equalize(air)
 	air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
+	storage_compartment = new(src)
 
 /obj/item/mech_component/chassis/proc/update_air(var/take_from_supply)
 
@@ -111,7 +134,9 @@
 
 /obj/item/mech_component/chassis/MouseDrop_T(atom/dropping, mob/user)
 	var/obj/machinery/portable_atmospherics/canister/C = dropping
-	if(istype(C) && do_after(user, 5, src))
+	if(istype(C) && !C.anchored && do_after(user, 5, src))
+		if(C.anchored)
+			return
 		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))
 		if(air_supply)
 			air_supply.forceMove(get_turf(src))
@@ -119,5 +144,13 @@
 		C.forceMove(src)
 		update_components()
 	else . = ..()
+
+obj/item/mech_component/chassis/MouseDrop(atom/over)
+	if(!usr || !over) return
+	if(!Adjacent(usr) || !over.Adjacent(usr)) return
+
+	if(storage_compartment)
+		return storage_compartment.MouseDrop(over)
+
 
 
