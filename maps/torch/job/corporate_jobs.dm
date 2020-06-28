@@ -22,7 +22,7 @@
 	                    SKILL_FINANCE		= SKILL_BASIC)
 	skill_points = 20
 	access = list(access_liaison, access_bridge, access_solgov_crew,
-						access_nanotrasen, access_commissary)
+						access_nanotrasen, access_commissary, access_research, access_xenobiology , access_petrov, access_petrov_phoron, access_petrov_chemistry, access_keycard_auth, access_petrov_analysis, access_petrov_rd)
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
 /datum/job/liaison/get_description_blurb()

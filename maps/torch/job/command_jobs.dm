@@ -301,7 +301,7 @@
 	minimum_character_age = list(SPECIES_HUMAN = 27)
 
 	access = list(access_representative, access_security, access_medical,
-			            access_bridge, access_cargo, access_solgov_crew, access_hangar)
+			            access_bridge, access_cargo, access_solgov_crew, access_hangar, access_keycard_auth)
 
 	software_on_spawn = list(/datum/computer_file/program/reports)
 
