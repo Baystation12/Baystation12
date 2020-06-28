@@ -38,7 +38,7 @@
 		)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.3
-	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC)
+	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_IPC, SPECIES_VOX)
 
 /obj/item/clothing/suit/space/void/merc/New()
 	..()
@@ -48,3 +48,13 @@
 	helmet = /obj/item/clothing/head/helmet/space/void/merc
 	boots = /obj/item/clothing/shoes/magboots
 	tank = /obj/item/weapon/tank/oxygen
+
+/obj/item/clothing/suit/space/void/merc/prepared/vox
+	name = "adjusted blood-red voidsuit"
+	desc = "An advanced voidsuit designed for work in special operations. Property of Gorlex Marauders. This one has been fitted to a small, vaguely reptilian form."
+	icon_state = "vox-merc"
+	sprite_sheets = list(SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi')
+	helmet = /obj/item/clothing/head/helmet/space/vox/merc
+	boots = /obj/item/clothing/shoes/magboots/vox
+	tank = /obj/item/weapon/tank/nitrogen
+	species_restricted = list(SPECIES_VOX)
