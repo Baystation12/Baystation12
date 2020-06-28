@@ -1,5 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - rscadd: "Added scrubber packs & scrubber tanks. Scrubber packs use a cell and a tank to scrub air. Atmospherics skill affects remove time for cell & tank - 5/4/4/3/3. Scrubber tanks are very large, but can't be worn on back or attached to suits. Basic atmospherics and basic electrical engineering affect whether a raw percentage or fluffy estimate are shown for tank pressure and cell charge."
-  - tweak: "Added 2 packs and 4 tanks to each atmospherics locker. Added 1 pack to each firefighting equipment supply box. Added 2 packs and 4 tanks to each atmospherics emergency equipment supply box."
