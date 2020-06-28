@@ -51,10 +51,11 @@
 
 /obj/item/clothing/suit/space/void/merc/prepared/vox
 	name = "adjusted blood-red voidsuit"
-	desc = "An advanced helmet designed for work in special operations. Property of Gorlex Marauders. This one has been fitted to a small, vaguely reptilian form."
+	desc = "An advanced voidsuit designed for work in special operations. Property of Gorlex Marauders. This one has been fitted to a small, vaguely reptilian form."
 	icon_state = "vox-merc"
 	sprite_sheets = list(SPECIES_VOX = 'icons/mob/species/vox/onmob_suit_vox.dmi')
 	helmet = /obj/item/clothing/head/helmet/space/vox/merc
 	boots = /obj/item/clothing/shoes/magboots/vox
 	tank = /obj/item/weapon/tank/nitrogen
 	species_restricted = list(SPECIES_VOX)
+	
