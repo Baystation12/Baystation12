@@ -59,9 +59,9 @@
 		if(H) H.update_system_info()
 	handle_hud_icons_health()
 	var/obj/item/weapon/cell/C = get_cell()
-	if(istype(C))
-		hud_power.maptext = "[round(get_cell().charge)]/[round(get_cell().maxcharge)]"
-	else hud_power.maptext = "CHECK POWER"
+	if(istype(C)) 
+		hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;",  "[round(get_cell().charge)]/[round(get_cell().maxcharge)]")
+	else hud_power.maptext = SPAN_STYLE("font-family: 'Small Fonts'; -dm-text-outline: 1 black; font-size: 7px;", "CHECK POWER")
 	refresh_hud()
 
 /mob/living/exosuit/handle_hud_icons_health()
@@ -101,3 +101,18 @@
 					I.color = "#f5f5f0"
 			GLOB.mech_damage_overlay_cache["[part]-[state]"] = I
 		hud_health.overlays |= GLOB.mech_damage_overlay_cache["[part]-[state]"]
+
+/mob/living/exosuit/proc/reset_hardpoint_color()
+	for(var/hardpoint in hardpoint_hud_elements)
+		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+		if(H)
+			H.color = COLOR_WHITE
+
+/mob/living/exosuit/setClickCooldown(var/timeout)
+	. = ..()
+	for(var/hardpoint in hardpoint_hud_elements)
+		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+		if(H)
+			H.color = "#a03b3b"
+			animate(H, color = COLOR_WHITE, time = timeout, easing = CUBIC_EASING | EASE_IN)	
+	addtimer(CALLBACK(src, .proc/reset_hardpoint_color), timeout)
