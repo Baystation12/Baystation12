@@ -4,12 +4,12 @@
 	w_class = ITEM_SIZE_NORMAL
 	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/tank)
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SMALL, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
 	siemens_coefficient = 0.6
@@ -23,18 +23,24 @@
 
 /obj/item/clothing/head/helmet/space/vox
 	armor = list(
-		melee = ARMOR_MELEE_MAJOR, 
-		bullet = ARMOR_BALLISTIC_PISTOL, 
+		melee = ARMOR_MELEE_MAJOR,
+		bullet = ARMOR_BALLISTIC_PISTOL,
 		laser = ARMOR_LASER_HANDGUNS,
-		energy = ARMOR_ENERGY_MINOR, 
-		bomb = ARMOR_BOMB_PADDED, 
-		bio = ARMOR_BIO_SMALL, 
+		energy = ARMOR_ENERGY_MINOR,
+		bomb = ARMOR_BOMB_PADDED,
+		bio = ARMOR_BIO_SMALL,
 		rad = ARMOR_RAD_MINOR
 		)
 	siemens_coefficient = 0.6
 	item_flags = 0
 	flags_inv = 0
 	species_restricted = list(SPECIES_VOX, SPECIES_VOX_ARMALIS)
+
+/obj/item/clothing/head/helmet/space/vox/merc
+	name = "adjusted crimson voidsuit helmet"
+	icon_state = "vox-merc"
+	desc = "An advanced helmet designed for work in special operations. Property of Gorlex Marauders. It's custom fitted for a beaked face."
+	light_overlay = "invis_light"
 
 /obj/item/clothing/head/helmet/space/vox/pressure
 	name = "alien helmet"
