@@ -2,7 +2,7 @@
 /obj/item/weapon/gun/projectile/type51carbine
 	name = "Type-51 Carbine"
 	desc = "One of the few covenant weapons that utilise magazines."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "type 51"
 	item_state = "carbine"
 	w_class = ITEM_SIZE_LARGE
@@ -51,7 +51,7 @@
 /obj/item/weapon/gun/energy/beam_rifle
 	name = "Type-27 Special Application Sniper Rifle"
 	desc = "Fires a short-lived but powerful lance of plasma, repeated quick firing will overheat the weapon and leave it unsuable for a short while."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "beam rifle"
 	item_state = "beamrifle"
 	w_class = ITEM_SIZE_HUGE
@@ -100,7 +100,7 @@
 /obj/item/weapon/gun/projectile/type31needlerifle
 	name = "Type-31 Needle Rifle"
 	desc = "A unique combination of the Type-33 and Type-51."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Needle rifle"
 	item_state = "needlerifle"
 	w_class = ITEM_SIZE_LARGE
