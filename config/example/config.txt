@@ -100,6 +100,9 @@ PROBABILITY CHANGELING 1
 PROBABILITY CULT 1
 PROBABILITY EXTEND-A-TRAITORMONGOUS 6
 
+## if possible round types will be hidden from players for secret rounds
+#SECRET_HIDE_POSSIBILITIES
+
 ## Hash out to disable random events during the round.
 ALLOW_RANDOM_EVENTS
 
