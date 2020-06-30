@@ -33,6 +33,7 @@
 		/obj/item/device/scanner/mining,
 		/obj/item/weapon/extinguisher,
 		/obj/item/weapon/gun/launcher/net/borg,
+		/obj/item/device/gps,
 		/obj/item/weapon/weldingtool/largetank,
 		/obj/item/weapon/screwdriver,
 		/obj/item/weapon/wrench,
