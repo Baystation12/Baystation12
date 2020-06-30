@@ -330,16 +330,15 @@
 		/datum/mil_rank/fleet/e9
 	)
 	min_skill = list(   SKILL_EVA        = SKILL_BASIC,
-	                    SKILL_COMBAT     = SKILL_BASIC,
 	                    SKILL_WEAPONS    = SKILL_ADEPT)
 
-	max_skill = list(   SKILL_COMBAT       = SKILL_MAX,
-	                    SKILL_WEAPONS      = SKILL_MAX,
+	max_skill = list(	SKILL_WEAPONS      = SKILL_MAX,
 	                    SKILL_PILOT        = SKILL_MAX,
 	                    SKILL_CONSTRUCTION = SKILL_MAX,
 	                    SKILL_ELECTRICAL   = SKILL_MAX,
 	                    SKILL_ENGINES      = SKILL_MAX,
-	                    SKILL_ATMOS        = SKILL_MAX)
+	                    SKILL_ATMOS        = SKILL_MAX,
+						SKILL_MEDICAL      = SKILL_MAX)
 	skill_points = 24
 
 
