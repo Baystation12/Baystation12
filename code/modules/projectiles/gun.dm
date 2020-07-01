@@ -265,6 +265,11 @@
 		to_chat(user,"<span class = 'notice'>This weapon is far too heavy for you to fire with just one hand!</span>")
 		return
 
+
+	if(A.elevation != last_elevation && (istype(A,/obj/vehicles) || istype(A,/mob/living)))
+		last_elevation = A.elevation
+		visible_message("<span class = 'danger'>[user.name] changes their firing elevation to target [A.name]</span>")
+
 	if(user && user.a_intent == I_HELP) //regardless of what happens, refuse to shoot if help intent is on
 		if(get_lunge_dist() > 0) //If we're on help intent and we have a lunge, do the lunge.
 			return ..()
@@ -308,9 +313,6 @@
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
 	if(!user || !target) return
-	if(target.elevation != last_elevation && (istype(target,/obj/vehicles) || istype(target,/mob/living)))
-		last_elevation = target.elevation
-		visible_message("<span class = 'danger'>[user.name] changes their firing elevation to target [target.name]</span>")
 	var/list/rounds_nosuppress = list()
 	if(istype(user.loc,/obj/vehicles))
 		var/obj/vehicles/V = user.loc
