@@ -516,7 +516,7 @@
 	. = ..()
 	if (.)
 		playsound(src.loc, 'sound/effects/explosion1.ogg', 30, 1, -3)
-		src.fragmentate(get_turf(target), 50, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1))
+		src.fragmentate(get_turf(loc), 50, 7, list(/obj/item/projectile/bullet/pellet/fragment = 1)) //Loc not target, we don't explode *in* them we explode *on* them
 		qdel(src)
 
 /obj/item/projectile/bullet/g40mm/smoke
