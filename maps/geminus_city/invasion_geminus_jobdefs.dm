@@ -12,6 +12,7 @@
 		/datum/job/unsc/commanding_officer,\
 		/datum/job/unsc/executive_officer,\
 		/datum/job/unsc/oni/research,\
+		/datum/job/unsc/oni/research/director,\
 		/datum/job/unsc_ai,\
 		/datum/job/colonist,\
 		/datum/job/colonist/mayor,\
