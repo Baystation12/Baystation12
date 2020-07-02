@@ -10,6 +10,8 @@
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 	alt_explosion_range = 2
 	alt_explosion_damage_max = 65
+	matter = list("nanolaminate" = 1, "kemocite" = 1)
+	salvage_components = list(/obj/item/plasma_core)
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
 	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))

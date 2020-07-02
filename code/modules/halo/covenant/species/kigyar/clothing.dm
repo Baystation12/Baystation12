@@ -12,6 +12,7 @@
 	flags_inv = null
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/under/kigyar
 	name = "Kig-Yar Body-Suit"
@@ -25,6 +26,7 @@
 	species_restricted = list("Kig-Yar","Tvaoan Kig-Yar")
 	armor =  list(melee = 10, bullet = 10, laser = 0, energy = 10, bomb = 0, bio = 0, rad = 0)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	matter = list("cloth" = 1)
 
 /obj/item/clothing/under/kigyar/armless //Purposefully a visual change only so their armour still applies.
 	icon_state = "jackal_bodysuit_armless_obj"
@@ -44,6 +46,7 @@
 	armor = list(melee = 55, bullet = 50, laser = 55, energy = 50, bomb = 40, bio = 25, rad = 25)
 	armor_thickness_modifiers = list()
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	matter = list("nanolaminate" = 1)
 
 //First Contact Variant
 /obj/item/clothing/head/helmet/kigyar/first_contact

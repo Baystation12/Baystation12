@@ -23,6 +23,7 @@
 	num_fragments = 250 //50 more than a high yield frag bomb
 
 	lunge_dist = 3
+	matter = list("nanolaminate" = 1)
 
 /obj/item/weapon/grenade/frag/spike/can_embed()
 	return 0
@@ -70,6 +71,7 @@
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 	lunge_dist = 3
+	matter = list("nanolaminate" = 1)
 
 /obj/item/weapon/gun/projectile/spiker/update_icon()
 	if(ammo_magazine)
@@ -92,6 +94,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	caliber = "spiker"
 	max_ammo = 30
+	matter = list("nanolaminate" = 1)
 
 /obj/item/ammo_casing/spiker
 	desc = "A spike round casing."
@@ -142,6 +145,7 @@
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 	lunge_dist = 3
+	matter = list("nanolaminate" = 1)
 
 /obj/item/weapon/gun/projectile/mauler/update_icon()
 	if(ammo_magazine)
@@ -163,6 +167,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 600)
 	caliber = "mauler"
 	max_ammo = 5
+	matter = list("nanolaminate" = 1)
 
 /obj/item/ammo_casing/mauler
 	desc = "A mauler round casing."
@@ -197,6 +202,7 @@
 	armor_penetration = 35
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
 	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer", slot_back_str = "back_hammer")
+	matter = list("nanolaminate" = 5)
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
 	if(get_dist(A,user) > 1)
@@ -243,6 +249,7 @@
 	armor_penetration = 35
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
 	advanced_covenant = 1
+	matter = list("nanolaminate" = 2, "kemocite" = 1)
 
 	whitelisted_grenades = list(/obj/item/weapon/grenade/brute_shot)
 
@@ -298,6 +305,7 @@
 	arm_sound = null
 	var/amount = 12
 	var/max_amount = 12
+	matter = list("kemocite" = 1)
 
 /obj/item/weapon/grenade/brute_shot/single
 	amount = 1
@@ -392,6 +400,7 @@
 	icon_state = "banana"
 	item_state = "grenade"
 	desc = "A chemical smoke grenade made from gasses toxic to carbon based lifeforms."
+	matter = list("steel" = 1)
 
 /obj/item/weapon/grenade/toxic_gas/New()
 	. = ..()

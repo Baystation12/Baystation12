@@ -1,5 +1,5 @@
 /obj/item/weapon/gun/energy/railrifle
-	name = " Asymmetric Recoilless Carbine-920"
+	name = "Asymmetric Recoilless Carbine-920"
 	desc = "An Hesphaistos Industries G40E carbine, designed to kill with concentrated energy blasts."
 	icon_state = "phantom"
 	item_state = "phantom"
@@ -14,7 +14,7 @@
 	projectile_type = /obj/effect/projectile/laser_blue/impact
 
 /obj/item/weapon/gun/energy/railrifle/innie
-	name = " Asymmetric Recoilless Carbine-920"
+	name = "Asymmetric Recoilless Carbine-920"
 	desc = "A compact-channel linear accelerator that fires a high-explosive round at incredible speed. The UNSC logo is scratched out and besides it reads 'UNSC SUKS DIKS'"
 	icon_state = "spartanlaser"
 	item_state = "spartanlaser"

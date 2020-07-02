@@ -21,6 +21,7 @@
 		slot_r_hand_str = null,
 		)
 	armor_thickness = 15
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/shoes/magboots/ranger_kigyar
 	name = "Kig-yar ranger magboots"
@@ -38,6 +39,7 @@
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	armor_thickness = 15
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/head/helmet/ranger_kigyar
 	name = "Kig-yar ranger helmet"
@@ -63,3 +65,4 @@
 	armor_thickness = 15
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/kigyar_nv
+	matter = list("nanolaminate" = 1)

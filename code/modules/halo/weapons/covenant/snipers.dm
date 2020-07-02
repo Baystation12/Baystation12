@@ -20,6 +20,7 @@
 	accuracy = 1
 	wielded_item_state = "carbine-wielded"
 	advanced_covenant = 1
+	matter = list("nanolaminate" = 1)
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -72,6 +73,8 @@
 	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
 	overheat_fullclear_delay = 40
 	alt_charge_method = 1
+	matter = list("nanolaminate" = 1)
+	salvage_components = list(/obj/item/plasma_core)
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -115,6 +118,7 @@
 	dispersion = list(0.26)
 	accuracy = 2
 	wielded_item_state = "needlerifle-wielded"
+	matter = list("nanolaminate" = 1)
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
