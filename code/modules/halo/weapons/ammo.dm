@@ -261,7 +261,6 @@
 /obj/item/projectile/bullet/a145_ap
 	damage = 55
 	armor_penetration = 60
-	step_delay = 0
 	tracer_type = /obj/effect/projectile/srs99
 	tracer_delay_time = 2 SECONDS
 	shield_damage = 210

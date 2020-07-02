@@ -57,3 +57,33 @@
 	fire_delay = 6
 	burst_delay = 1.8
 	irradiate_non_cov = 8
+
+/obj/item/weapon/gun/projectile/concussion_rifle
+	name = "Type-50 Directed Energy Rifle / Heavy"
+	desc = "Firing large bolts of superheated plasma, with no magnetic guidance field, this weapon's rounds have minor concussive knockback around the point of contact, alongside doing large amounts of damage to directly hit hostiles."
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
+	icon_state = "concussion_rifle"
+	item_state = "concussion_rifle"
+	fire_sound = 'code/modules/halo/sounds/conc_rifle_fire.ogg'
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/concussion_rifle
+	one_hand_penalty = -1
+	dispersion = list(0.73)
+	caliber = "plasConcRifle"
+	handle_casings = CASELESS
+	w_class = ITEM_SIZE_HUGE
+	slot_flags = SLOT_BACK|SLOT_BELT
+	item_icons = list(
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
+		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
+		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
+		)
+	wielded_item_state = "concussion_rifle"
+
+/obj/item/weapon/gun/projectile/concussion_rifle/update_icon()
+	if(ammo_magazine)
+		icon_state = "concussion_rifle"
+	else
+		icon_state = "concussion_rifle_unloaded"
+	. = ..()
