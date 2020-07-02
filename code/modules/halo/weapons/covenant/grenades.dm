@@ -2,7 +2,7 @@
 /obj/item/weapon/grenade/plasma
 	name = "Type-1 Antipersonnel Grenade"
 	desc = "When activated, the coating of this grenade becomes a powerful adhesive, sticking to anyone it is thrown at."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "plasmagrenade"
 	throw_speed = 0 //sleep each tick
 	det_time = 50

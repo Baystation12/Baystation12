@@ -1,7 +1,7 @@
 /obj/item/weapon/gun/energy/plasmarifle
 	name = "Type-25 Directed Energy Rifle"
 	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Rifle"
 	item_state = "plasmarifle"
 	slot_flags = SLOT_BELT|SLOT_BACK

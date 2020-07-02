@@ -14,7 +14,6 @@
 		slot_l_hand_str = null,
 		slot_r_hand_str = null,
 		)
-	armor = list(melee = 10, bullet = 10, laser = 0, energy = 10, bomb = 0, bio = 0, rad = 0)
 
 //NEW  CLOTHES
 /obj/item/clothing/under/unsc/grey
