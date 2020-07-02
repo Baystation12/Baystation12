@@ -12318,6 +12318,9 @@
 /turf/simulated/wall/r_wall/prepainted,
 /area/crew_quarters/safe_room/thirddeck)
 "Bp" = (
+/obj/effect/landmark/start{
+	name = "Stowaway"
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
 	d1 = 1;

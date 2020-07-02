@@ -32,6 +32,20 @@
 	pda_type = /obj/item/modular_computer/pda
 	id_type = /obj/item/weapon/card/id/torch/merchant
 
+/decl/hierarchy/outfit/job/torch/stowaway
+	name = OUTFIT_JOB_NAME("Stowaway - Torch")
+	id_type = null
+	pda_type = null
+	l_ear = null
+	l_pocket = /obj/item/weapon/wrench
+	r_pocket = /obj/item/weapon/crowbar
+
+/decl/hierarchy/outfit/job/torch/stowaway/post_equip(var/mob/living/carbon/human/H)
+	..()
+	var/obj/item/weapon/card/id/torch/stowaway/ID = new(H.loc)
+	H.put_in_hands(ID)
+
+
 /decl/hierarchy/outfit/job/torch/ert
 	name = OUTFIT_JOB_NAME("ERT - Torch")
 	uniform = /obj/item/clothing/under/solgov/utility/fleet/combat

@@ -7083,6 +7083,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/fifthdeck/aft)
 "px" = (
+/obj/effect/landmark/start{
+	name = "Stowaway"
+	},
 /obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
@@ -7633,6 +7636,9 @@
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "qI" = (
+/obj/effect/landmark/start{
+	name = "Stowaway"
+	},
 /obj/effect/catwalk_plated,
 /obj/structure/cable/green{
 	d1 = 2;
