@@ -52,6 +52,19 @@
 /obj/item/stack/material/nanolaminate/fifty
 	amount = 50
 
+//techwalled
+/*
+/datum/alloy/nanolaminate
+	metaltag = "nanolaminate"
+	requires = list(
+		"corundum" = 1,
+		"carbon" = 1,
+		"mhydrogen" = 1
+		)
+	product_mod = 0.3
+	product = /obj/item/stack/material/nanolaminate
+	*/
+
 
 
 /* DURIDIUM */
@@ -97,6 +110,18 @@
 /obj/item/stack/material/duridium/fifty
 	amount = 50
 
+//techwalled
+/*
+/datum/alloy/duridium
+	metaltag = "duridium"
+	requires = list(
+		"duridium" = 1,
+		"carbon" = 1,
+		"iron" = 1
+		)
+	product_mod = 0.5
+	product = /obj/item/stack/material/duridium
+*/
 
 
 /* KEMOCITE */
