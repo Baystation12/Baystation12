@@ -18,7 +18,6 @@
 		if(Master.current_runlevel > RUNLEVEL_INIT)
 			LateInitialize()
 		else
-			//world << "FUCK /datum/computer_file/research_db/New()"
 			GLOB.tech_lateloaders.Add(src)
 
 /datum/computer_file/research_db/proc/LateInitialize()
