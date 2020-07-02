@@ -49,8 +49,6 @@
 /datum/computer_file/research_db/proc/build_tree(var/list/source_list)
 	var/list/working_list = source_list.Copy()
 
-	//to_debug_listeners("/datum/computer_file/research_db/proc/build_tree([english_list(working_list)])")
-
 	var/list/bonus_techs = list()
 	. = bonus_techs
 
