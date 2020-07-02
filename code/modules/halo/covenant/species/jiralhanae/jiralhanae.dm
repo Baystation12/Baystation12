@@ -39,9 +39,10 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	total_health = 200 //Not quite elites, but their adrenline makes up for it
 	radiation_mod = 0.6
 	spawn_flags = SPECIES_CAN_JOIN
-	brute_mod = 1
-	pain_mod = 1
-	burn_mod = 1
+	brute_mod = 0.9
+	burn_mod = 0.9
+	pain_mod = 0.75
+	//ABOVE MODIFIERS ARE PLACEHOLDERS TO START BALANCING FROM.//
 	slowdown = -0.1 //A miniscule amount faster than most.
 	adrenal_break_threshold = 23 //at this threshold of adrenaline (which is generated through taking damage, damage/5)
 	//, the body consumes the adrenaline and creates a short-lived 120 painkill
