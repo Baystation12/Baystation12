@@ -27,4 +27,4 @@
 	set name = "Toggle Flight"
 	set desc = "Toggles your flight"
 
-	take_flight(-1,"<span class = 'danger>[src.name] takes flight!</span>","<span class = 'danger'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")
+	take_flight(-1,"<span class = 'danger'>[src.name] takes flight!</span>","<span class = 'danger'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")
