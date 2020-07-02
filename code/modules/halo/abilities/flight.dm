@@ -19,10 +19,12 @@
 		change_elevation(-2)
 		if(message_land)
 			visible_message("[message_land]")
+		if(istype(loc,/turf/simulated/open))
+			fall()
 
 /mob/living/carbon/human/proc/yanmee_flight_ability()
 	set category = "Abilities"
 	set name = "Toggle Flight"
 	set desc = "Toggles your flight"
 
-	take_flight(-1,"[src.name] takes flight!","[src.name] slows, then stops flapping their wings, bringing them to the ground.")
+	take_flight(-1,"<span class = 'danger>[src.name] takes flight!</span>","<span class = 'danger'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")

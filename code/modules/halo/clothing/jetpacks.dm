@@ -72,8 +72,6 @@
 	slowdown_general = initial(slowdown_general)
 	if(user.elevation > 0)
 		user.take_flight(0,(output_msg ? "<span class = 'warning'>[user.name][takeoff_msg]</span>" : null),(output_msg ? "<span class = 'warning'>[user.name][land_msg]</span>" : null))
-	if(istype(user.loc,/turf/simulated/open))
-		user.fall()
 	GLOB.processing_objects += src
 	update_icon()
 
