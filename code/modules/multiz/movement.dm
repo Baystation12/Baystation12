@@ -67,8 +67,12 @@
 /mob/proc/can_overcome_gravity()
 	return FALSE
 
+/mob/living/can_overcome_gravity()
+	return flight_ticks_remain != 0
+
 /mob/living/carbon/human/can_overcome_gravity()
-	return species && species.can_overcome_gravity(src)
+	if(!.)
+		return species && species.can_overcome_gravity(src)
 
 /mob/observer/zMove(direction)
 	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
