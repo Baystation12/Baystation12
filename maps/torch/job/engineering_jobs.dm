@@ -168,7 +168,7 @@
 	spawn_positions = 2
 	minimal_player_age = 0
 	minimum_character_age = list(SPECIES_HUMAN = 25)
-	supervisors = "the Chief Engineer."
+	supervisors = "the Chief Engineer"
 	selection_color = "#5b4d20"
 	economic_power = 6
 	alt_titles = list(

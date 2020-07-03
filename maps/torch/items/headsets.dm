@@ -161,3 +161,10 @@
 	name = "pilot's bowman headset"
 	icon_state = "pilot_headset_alt"
 	item_state = "pilot_headset_alt"
+
+/obj/item/device/radio/headset/torchroboticist
+	name = "roboticist's headset"
+	desc = "A headset with access to the engineering and medical channels."
+	icon_state = "eng_headset"
+	item_state = "headset"
+	ks2type = /obj/item/device/encryptionkey/headset_torchroboticist
