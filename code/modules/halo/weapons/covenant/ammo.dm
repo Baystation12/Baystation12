@@ -376,7 +376,7 @@
 			lastloc = newloc
 		var/mob/living/mob = m
 		if(istype(mob))
-			mob.adjustFireLoss(10)
+			mob.adjustFireLoss(5)
 		spawn()
 			m.throw_at(lastloc, world.view,1,firer)
 	. = ..()
