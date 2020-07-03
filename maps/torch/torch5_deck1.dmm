@@ -528,6 +528,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
+"abf" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/machinery/pager/robotics{
+	pixel_y = 30;
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/firstdeck/center)
 "abi" = (
 /obj/effect/floor_decal/floordetail/edgedrain{
 	icon_state = "edge";
@@ -49147,7 +49156,7 @@ atK
 apo
 kdb
 oJb
-ycz
+abf
 ayg
 azq
 aAr
