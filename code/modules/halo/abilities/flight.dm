@@ -35,6 +35,6 @@
 	set name = "Toggle Flight"
 	set desc = "Toggles your flight"
 
-	take_flight(YANMEE_FLIGHT_TICKS,"<span class = 'danger'>[src.name] takes flight!</span>","<span class = 'danger'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")
+	take_flight(YANMEE_FLIGHT_TICKS,"<span class = 'warning'>[src.name] takes flight!</span>","<span class = 'warning'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")
 
 #undef YANMEE_FLIGHT_TICKS

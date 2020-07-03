@@ -92,7 +92,7 @@
 	return 1
 
 /mob/living/proc/handle_flight_failure()
-	visible_message("[name] is unable to support their flight and falls to the ground!")
+	visible_message("<span class = 'warning'>[name] is unable to support their flight and falls to the ground!</span")
 	if(!isspace(loc))
 		adjustBruteLoss(65)
 	if(flight_item)

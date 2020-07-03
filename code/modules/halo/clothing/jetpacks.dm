@@ -62,7 +62,8 @@
 	user.take_flight(flight_ticks_curr,"<span class = 'warning'>[user.name][takeoff_msg]</span>","<span class = 'warning'>[user.name][land_msg]</span>")
 	GLOB.processing_objects -= src
 	update_icon()
-	flight_bar = new(user,flight_ticks_max,src)
+	if(!flight_bar)
+		flight_bar = new(user,flight_ticks_max,src)
 
 /obj/item/flight_item/proc/deactivate(var/mob/living/user,var/output_msg = 1)
 	if(!istype(user))
