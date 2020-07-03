@@ -12,6 +12,7 @@
 	var/mob/living/cached_user
 	var/active = 0
 	var/flight_sound = 'code/modules/halo/sounds/jetpack_move.ogg'
+	var/datum/progressbar/flight_bar
 
 	slowdown_general = 0.1
 	action_button_name = "Activate Jump-Jet"
@@ -61,6 +62,7 @@
 	user.take_flight(flight_ticks_curr,"<span class = 'warning'>[user.name][takeoff_msg]</span>","<span class = 'warning'>[user.name][land_msg]</span>")
 	GLOB.processing_objects -= src
 	update_icon()
+	flight_bar = new(user,flight_ticks_max,src)
 
 /obj/item/flight_item/proc/deactivate(var/mob/living/user,var/output_msg = 1)
 	if(!istype(user))
@@ -92,6 +94,7 @@
 
 /obj/item/flight_item/process()
 	flight_ticks_curr = min(flight_ticks_max, flight_ticks_curr + flight_ticks_max /20)
+	flight_bar.update(flight_ticks_curr)
 	if(flight_ticks_curr == flight_ticks_max)
 		GLOB.processing_objects -= src
 

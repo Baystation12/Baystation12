@@ -42,7 +42,7 @@
 		handle_flight_failure()
 
 	if(flight_ticks_remain > 0)
-		flight_ticks_remain = max(flight_ticks_remain - 1,0)
+		decrement_flight_ticks()
 
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
