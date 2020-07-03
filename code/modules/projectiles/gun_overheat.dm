@@ -39,7 +39,7 @@
 	return 0
 
 /obj/item/weapon/gun/proc/add_heat(var/new_val)
-	heat_current = heat_current + new_val
+	heat_current = min(overheat_capacity,heat_current + new_val)
 
 	if(heat_current > 0)
 		if(!heat_bar)

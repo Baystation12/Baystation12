@@ -355,6 +355,7 @@
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "heavy_plas_cannon"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
+	var/aoe_damage = 5
 
 /obj/item/projectile/bullet/covenant/concussion_rifle/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
 	. = ..()
@@ -376,11 +377,23 @@
 			lastloc = newloc
 		var/mob/living/mob = m
 		if(istype(mob))
-			mob.adjustFireLoss(5)
+			mob.adjustFireLoss(aoe_damage)
 		spawn()
 			m.throw_at(lastloc, world.view,1,firer)
 	. = ..()
 	qdel(src)
+
+/obj/item/ammo_magazine/concussion_rifle/jumper_mag
+	ammo_type = /obj/item/ammo_casing/concussion_rifle/jumper
+
+/obj/item/ammo_casing/concussion_rifle/jumper
+	projectile_type = /obj/item/projectile/bullet/covenant/concussion_rifle/jumper
+
+/obj/item/projectile/bullet/covenant/concussion_rifle/jumper
+	damage = 0
+	armor_penetration = 0
+	shield_damage = 0
+	aoe_damage = 0
 
 #undef FUEL_ROD_IRRADIATE_RANGE
 #undef FUEL_ROD_IRRADIATE_AMOUNT
