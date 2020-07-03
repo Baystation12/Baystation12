@@ -11,6 +11,7 @@
 		flight_ticks_remain = max(flight_ticks_remain - 1,0)
 
 /mob/living/proc/take_flight(var/ticks_flight_apply,var/message_flight,var/message_land)
+	stun(3)
 	if(elevation <= 0)
 		flight_ticks_remain = ticks_flight_apply
 		change_elevation(2)

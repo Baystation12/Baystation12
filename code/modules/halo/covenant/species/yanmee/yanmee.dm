@@ -76,7 +76,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	return "Yanme\'e [rand(1,999)] \"[to_format_name]\""
 
 /datum/species/yanmee/handle_flight_failure(var/mob/living/carbon/human/H)
-	H.visible_message("[name] is unable to support their flight and falls to the ground!")
+	H.visible_message("[name] is unable to support their flight and falls to the ground, reflexively slowing their fall with their wings!")
 	if(H.flight_item)
 		H.flight_item.deactivate(H,0)
 	else
