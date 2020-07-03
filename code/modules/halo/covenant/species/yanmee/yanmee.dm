@@ -81,6 +81,8 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 		H.flight_item.deactivate(H,0)
 	else
 		H.change_elevation(-H.elevation)
+	if(istype(H.loc,/turf/simulated/open))
+		H.fall()
 	return 1
 
 /mob/living/carbon/human/covenant/yanmee/New(var/new_loc)

@@ -68,9 +68,10 @@
 	return FALSE
 
 /mob/living/can_overcome_gravity()
-	return flight_ticks_remain != 0
+	return (flight_ticks_remain != 0)
 
 /mob/living/carbon/human/can_overcome_gravity()
+	. = ..()
 	if(!.)
 		return species && species.can_overcome_gravity(src)
 

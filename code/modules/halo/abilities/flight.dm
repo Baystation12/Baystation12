@@ -1,4 +1,6 @@
 
+#define YANMEE_FLIGHT_TICKS 30
+
 /mob/living
 	var/flight_ticks_remain = 0 //Movement and life() ticks degrade this. Set by Yanme'e flight and jump-packs
 	var/obj/item/flight_item/flight_item
@@ -27,4 +29,6 @@
 	set name = "Toggle Flight"
 	set desc = "Toggles your flight"
 
-	take_flight(-1,"<span class = 'danger'>[src.name] takes flight!</span>","<span class = 'danger'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")
+	take_flight(YANMEE_FLIGHT_TICKS,"<span class = 'danger'>[src.name] takes flight!</span>","<span class = 'danger'>[src.name] slows, then stops flapping their wings, bringing them to the ground.</span>")
+
+#undef YANMEE_FLIGHT_TICKS

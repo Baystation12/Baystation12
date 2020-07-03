@@ -93,12 +93,13 @@
 
 /mob/living/proc/handle_flight_failure()
 	visible_message("[name] is unable to support their flight and falls to the ground!")
-	adjustBruteLoss(65)
+	if(!isspace(loc))
+		adjustBruteLoss(65)
 	if(flight_item)
 		flight_item.deactivate(src,0)
 	else
 		change_elevation(-elevation)
-	if(istype(src,/turf/simulated/open))
+	if(istype(src.loc,/turf/simulated/open))
 		fall()
 
 /mob/living/proc/update_pulling()
