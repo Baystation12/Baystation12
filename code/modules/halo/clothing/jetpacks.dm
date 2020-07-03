@@ -91,7 +91,7 @@
 		activate(usr)
 
 /obj/item/flight_item/process()
-	flight_ticks_curr = min(flight_ticks_max, flight_ticks_curr + flight_ticks_max /10)
+	flight_ticks_curr = min(flight_ticks_max, flight_ticks_curr + flight_ticks_max /20)
 	if(flight_ticks_curr == flight_ticks_max)
 		GLOB.processing_objects -= src
 
