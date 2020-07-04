@@ -62,6 +62,7 @@
 	user.take_flight(flight_ticks_curr,"<span class = 'warning'>[user.name][takeoff_msg]</span>","<span class = 'warning'>[user.name][land_msg]</span>")
 	GLOB.processing_objects -= src
 	update_icon()
+	user.update_icon()
 	if(!flight_bar)
 		flight_bar = new(user,flight_ticks_max,src)
 
@@ -77,6 +78,7 @@
 		user.take_flight(0,(output_msg ? "<span class = 'warning'>[user.name][takeoff_msg]</span>" : null),(output_msg ? "<span class = 'warning'>[user.name][land_msg]</span>" : null))
 	GLOB.processing_objects += src
 	update_icon()
+	user.update_icon()
 
 /obj/item/flight_item/ui_action_click()
 	if(usr != loc)
