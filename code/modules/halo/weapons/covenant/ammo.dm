@@ -369,12 +369,15 @@
 		var/turf/lastloc = loc
 		var/dir_move = get_dir(loc,m)
 		if(A.loc == m.loc || loc == m.loc)
-			dir_move = pick(list(NORTH,SOUTH,EAST,WEST))
-		for(var/i = 0 to world.view)
-			var/turf/newloc = get_step(lastloc,dir_move)
-			if(newloc.density == 1)
-				break
-			lastloc = newloc
+			dir_move = GLOB.cardinal
+		if(dir_move in GLOB.cardinal)
+			lastloc = get_edge_target_turf(m, dir_move)
+		else
+			for(var/i = 0 to world.view)
+				var/turf/newloc = get_step(lastloc,dir_move)
+				if(newloc.density == 1)
+					break
+				lastloc = newloc
 		var/mob/living/mob = m
 		if(istype(mob))
 			mob.adjustFireLoss(aoe_damage)
