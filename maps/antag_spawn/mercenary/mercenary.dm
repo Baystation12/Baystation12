@@ -19,7 +19,7 @@
 
 /obj/effect/overmap/visitable/ship/landable/merc
 	name = "Desperado"
-	desc = "A military gunship of ICCG design. Scanner detects heavy modification to the framework of the vessel and no designation."
+	desc = "A military gunship of unknown design. Scanner detects heavy modification to the framework of the vessel and no designation."
 	shuttle = "Desperado"
 	fore_dir = NORTH
 	vessel_size = SHIP_SIZE_SMALL
