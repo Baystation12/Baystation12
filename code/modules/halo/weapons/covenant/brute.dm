@@ -191,14 +191,21 @@
 	item_state = "blank"
 	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK
-	force = 65
+	force = 50 //Less than sword due to afterattack ability
 	edge = 0
 	sharp = 0
 	armor_penetration = 35
+	lunge_dist = 2
 	hitsound = 'code/modules/halo/sounds/gravhammer.ogg'
+	sprite_sheets = list(
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi',
+	)
 	item_state_slots = list(slot_l_hand_str = "gravhammer", slot_r_hand_str = "gravhammer", slot_back_str = "back_hammer")
+	var/special_afterattack = 1
 
 /obj/item/weapon/grav_hammer/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
+	if(!special_afterattack)
+		return
 	if(get_dist(A,user) > 1)
 		return
 
@@ -222,6 +229,11 @@
 			victim.hit_with_weapon(src, user, force/2)
 
 
+/obj/item/weapon/grav_hammer/gravless
+	name = "Type-2 Energy Weapon/Hammer, Depowered"
+	desc = "A long haft and a heavy head with a tungsten-alloy blade on the reverse end. The short-range gravity field in the head of the weapon has been disabled."
+	force = 45
+	special_afterattack = 0
 
 /* BRUTE SHOT */
 

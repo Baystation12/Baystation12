@@ -155,6 +155,7 @@
 	/obj/item/weapon/grenade/frag/spike = 12,
 	/obj/,/obj/item/ammo_magazine/spiker = 40,
 	/obj/item/ammo_magazine/mauler = 40,
+	/obj/item/weapon/grav_hammer/gravless = 6,
 	/obj/item/weapon/grenade/smokebomb/covenant = 12
 	)
 
