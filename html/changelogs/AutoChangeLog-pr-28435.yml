@@ -1,0 +1,7 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "Firedoors will no longer refuse to close if something is on top of their tile."
+  - tweak: "Firedoors will now give two seconds of warning before closing if a mob is on its tile when it tries to close."
+  - soundadd: "Firedoors will play a warning beep if a mob is on its tile when it tries to close."
+  - tweak: "If a mob does not move from a firedoor after two seconds, it will push the mob out of the way. This deals a slight amount of damage due to the force of the push. The firedoor will try to move the mob to the safe side of itself."
