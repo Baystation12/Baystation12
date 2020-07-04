@@ -1,0 +1,4 @@
+author: "RustingWithYou"
+delete-after: True
+changes: 
+  - tweak: "Makes the biological demoleculariser actually craftable by fixing the mutagen requirement in the recipe."
