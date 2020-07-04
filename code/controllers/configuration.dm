@@ -53,6 +53,7 @@ var/list/gamemode_cache = list()
 	var/list/modes = list()				// allowed modes
 	var/list/votable_modes = list()		// votable modes
 	var/list/probabilities = list()		// relative probability of each mode
+	var/secret_hide_possibilities = FALSE // Whether or not secret modes show list of possible round types
 	var/humans_need_surnames = 0
 	var/allow_random_events = 0			// enables random events mid-round when set to 1
 	var/allow_ai = 1					// allow ai job
@@ -571,6 +572,9 @@ var/list/gamemode_cache = list()
 					config.antag_hud_allowed = 1
 				if("antag_hud_restricted")
 					config.antag_hud_restricted = 1
+
+				if("secret_hide_possibilities")
+					secret_hide_possibilities = TRUE
 
 				if("humans_need_surnames")
 					humans_need_surnames = 1
