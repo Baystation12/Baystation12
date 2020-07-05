@@ -265,7 +265,7 @@
 	if (stack)
 		stack.do_backup()
 
-/obj/item/organ/internal/brain
+/obj/item/organ/internal/brain/vox
 	name = "underdeveloped brain"
 	icon = 'icons/mob/species/vox/organs.dmi'
 	icon_state = "vox-brain"
