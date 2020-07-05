@@ -1,23 +1,26 @@
 //vox got different organs within. This will also help with regular surgeons knowing the organs within an alien as alien as vox.
 /obj/item/organ/internal/heart/vox
-	icon_state = "vox heart"
+	icon = 'icons/mob/species/vox/organs.dmi'
+	icon_state = "vox-heart"
 	dead_icon = null
 	parent_organ = BP_GROIN
 
 /obj/item/organ/internal/lungs/vox
 	name = "air capillary sack" //Like birds, Vox absorb gas via air capillaries.
-	icon_state = "vox lung"
+	icon = 'icons/mob/species/vox/organs.dmi'
+	icon_state = "vox-lungs"
 
 /obj/item/organ/internal/kidneys/vox
 	name = "filtration bladder"
-	icon_state = "lungs" //wow are vox kidneys fat.
-	color = "#99ccff"
+	icon = 'icons/mob/species/vox/organs.dmi'
+	icon_state = "vox-kidney"
 	parent_organ = BP_CHEST
 
 /obj/item/organ/internal/liver/vox
 	name = "waste tract"
 	parent_organ = BP_CHEST
-	color = "#0033cc"
+	icon = 'icons/mob/species/vox/organs.dmi'
+	icon_state = "vox-liver"
 
 /obj/item/organ/internal/eyes/vox
 	eye_icon = 'icons/mob/human_races/species/vox/eyes.dmi'
@@ -144,7 +147,7 @@
 						mat_stack.set_amount(mat_stack.amount + taking_sheets)
 						sheets -= taking_sheets
 						updated_stacks = TRUE
-						
+
 				// Create new stacks if needed.
 				while(sheets > 0)
 					var/obj/item/stack/material/mat_stack = new M.stack_type(src)
@@ -261,3 +264,9 @@
 	var/obj/item/organ/internal/voxstack/stack = H.get_organ(BP_STACK)
 	if (stack)
 		stack.do_backup()
+
+/obj/item/organ/internal/brain
+	name = "underdeveloped brain"
+	icon = 'icons/mob/species/vox/organs.dmi'
+	icon_state = "vox-brain"
+	parent_organ = BP_HEAD
