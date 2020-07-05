@@ -366,6 +366,8 @@
 	for(var/atom/movable/m in range(1,loc) + range(1,A))
 		if(m.anchored)
 			continue
+		if(istype(m,/obj/effect))
+			continue
 		var/turf/lastloc = loc
 		var/dir_move = get_dir(loc,m)
 		if(A.loc == m.loc || loc == m.loc)

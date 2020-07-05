@@ -71,7 +71,6 @@
 	dispersion = list(0.73)
 	caliber = "plasConcRifle"
 	handle_casings = CASELESS
-	w_class = ITEM_SIZE_HUGE
 	slot_flags = SLOT_BACK|SLOT_BELT
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
