@@ -79,7 +79,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
 					var/atom/movable/AM = atom_movable
 					if(AM && AM.simulated && !T.protects_atom(AM))
-						AM.ex_act(dist)
+						AM.ex_act(dist,epicenter)
 		if(guaranteed_damage_range > 0)
 			for(var/mob/living/m in range(guaranteed_damage_range,epicenter))
 				var/mob/living/carbon/human/h = m
