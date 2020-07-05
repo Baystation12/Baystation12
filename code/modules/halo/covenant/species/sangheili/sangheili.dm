@@ -50,7 +50,7 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	BP_EYES =     /obj/item/organ/internal/eyes
 	)
 
-	equipment_slowdown_multiplier = 0.3
+	equipment_slowdown_multiplier = 0.7
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/elitescream_1.ogg',

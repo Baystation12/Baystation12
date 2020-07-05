@@ -58,7 +58,7 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 	inherent_verbs = list()
 
-	equipment_slowdown_multiplier = 0.3
+	equipment_slowdown_multiplier = 0.7
 
 	pain_scream_sounds = list(\
 	'code/modules/halo/sounds/species_pain_screams/brutescream1.ogg',

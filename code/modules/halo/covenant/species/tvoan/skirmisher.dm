@@ -23,10 +23,10 @@
 
 	pain_mod = 0.9
 	brute_mod = 1.1
-	burn_mod = 1.1
+	burn_mod = 1.
 	slowdown = -1.0
 
-	equipment_slowdown_multiplier = 0.3
+	equipment_slowdown_multiplier = 0.7
 
 	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 
