@@ -230,6 +230,9 @@
 	name = "Type-2 Energy Weapon/Hammer, Depowered"
 	desc = "A long haft and a heavy head with a tungsten-alloy blade on the reverse end. The short-range gravity field in the head of the weapon has been disabled."
 	force = 45
+	hitsound = "swing_hit"
+	item_state_slots = list(slot_l_hand_str = "gravlesshammer", slot_r_hand_str = "gravlesshammer", slot_back_str = "back_hammer")
+
 
 /obj/item/weapon/grav_hammer/gravless/afterattack(atom/A as mob|obj|turf|area, mob/user, proximity)
 	return

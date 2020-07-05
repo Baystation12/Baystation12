@@ -143,9 +143,9 @@
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 15,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 60,120*species.explosion_effect_mod)
-			Weaken(1)
+			Weaken(2)
 			throw_mob = TRUE
-			throw_range = world.view - 2
+			throw_range = world.view - 1
 
 	// factor in armour / degrade armor
 	var/protection = blocked_mult(getarmor(null, "bomb"))

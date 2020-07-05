@@ -43,7 +43,7 @@
 			if(dist <= round(alt_explosion_range + world.view - 2, 1))
 				M.playsound_local(epicenter, 'code/modules/halo/sounds/Plasmanadedetonate.ogg', 100, 1)
 	var/mob/living/carbon/human/mob_containing = loc
-	do_alt_explosion()
+	do_alt_explosion(1)
 	if(istype(mob_containing))
 		mob_containing.contents -= src
 	loc = null

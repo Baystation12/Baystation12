@@ -214,6 +214,7 @@
 	icon_state = "[initial(icon_state)]_destroyed"
 	if(spawn_datum)
 		spawn_datum.is_spawn_active = 0
+	fall()
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
@@ -353,8 +354,8 @@
 	update_object_sprites()
 
 /obj/vehicles/fall()
-	if(can_traverse_zs && active)
-		return
+	if(can_traverse_zs && !movement_destroyed != 0 && active)
+		return 0
 	. = ..()
 
 /obj/vehicles/proc/collide_with_obstacle(var/atom/obstacle)
