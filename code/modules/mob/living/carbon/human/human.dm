@@ -120,7 +120,7 @@
 				gib()
 				return
 			else
-				Weaken(1.5 SECONDS)
+				Weaken(5)
 				throw_mob = TRUE
 				throw_range = 200 //Be happy you survived the bomb's gibbing
 			//return
@@ -134,7 +134,7 @@
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 30,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 120,120*species.explosion_effect_mod)
-			Weaken(0.6 SECONDS)
+			Weaken(3)
 			throw_mob = TRUE
 			throw_range = world.view + 3
 
