@@ -6,11 +6,11 @@
 	slot_flags = SLOT_BACK
 
 	var/flight_ticks_max = 65
-	var/flight_ticks_curr
+	var/flight_ticks_curr = 0
 	var/takeoff_msg = "takes off!"
 	var/land_msg = "lands"
 	var/mob/living/cached_user
-	var/active = 0
+	var/active = FALSE
 	var/flight_sound = 'code/modules/halo/sounds/jetpack_move.ogg'
 	var/datum/progressbar/flight_bar
 
@@ -55,7 +55,7 @@
 	if(!istype(user))
 		return
 	cached_user = user
-	active = 1
+	active = TRUE
 	user.flight_ticks_remain = flight_ticks_curr
 	slowdown_general = -0.1
 	user.flight_item = src
@@ -69,7 +69,7 @@
 /obj/item/flight_item/proc/deactivate(var/mob/living/user,var/output_msg = 1)
 	if(!istype(user))
 		return
-	active = 0
+	active = FALSE
 	cached_user = null
 	flight_ticks_curr = user.flight_ticks_remain
 	user.flight_item = null

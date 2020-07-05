@@ -27,7 +27,6 @@
 
 	var/movement_delay = 0
 	var/can_build_wall = FALSE
-	var/natural_elevation_mod = 0 //People stepping on this turf just get their elevation modified by this amount.
 	var/list/elevation_impacters = list() //A list of items that impact elevation, present on this tile.
 
 /turf/New()
@@ -136,7 +135,7 @@ var/const/enterloopsanity = 100
 	if(A.elevation <= BASE_ELEVATION)
 		if(A.elevation != BASE_ELEVATION)
 			A.change_elevation(-A.elevation)//Reset elevation before we do any more messing around with it
-		var/targ_elev = natural_elevation_mod
+		var/targ_elev = BASE_ELEVATION
 		for(var/a in elevation_impacters)
 			var/atom/movable/impacter = a
 			targ_elev = impacter.check_elevation_impact(A)

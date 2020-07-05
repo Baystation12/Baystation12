@@ -86,7 +86,6 @@
 		icon_state = "concussion_rifle"
 	else
 		icon_state = "concussion_rifle_unloaded"
-	. = ..()
 
 /obj/item/weapon/gun/projectile/concussion_rifle/jumper
 	name = "Type-50 Directed Energy Rifle / Heavy. Jumper Variant"
@@ -98,4 +97,3 @@
 		icon_state = "concussion_jumper"
 	else
 		icon_state = "concussion_jumper_unloaded"
-	. = ..()
