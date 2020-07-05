@@ -56,7 +56,7 @@
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/m26
 	fire_delay = 8
-	dispersion = list(2.6)
+	dispersion = list(0.73)
 	one_hand_penalty = -1
 	caliber = "m26"
 	handle_casings = CASELESS
