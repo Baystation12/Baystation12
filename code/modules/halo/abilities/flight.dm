@@ -1,5 +1,5 @@
 
-#define YANMEE_FLIGHT_TICKS 30
+#define YANMEE_FLIGHT_TICKS 40
 
 /mob/living
 	var/flight_ticks_remain = 0 //Movement and life() ticks degrade this. Set by Yanme'e flight and jump-packs
