@@ -1,0 +1,4 @@
+author: "Myphicbowser"
+delete-after: True
+changes: 
+  - bugfix: "Boiled slime cores are no longer invisible."
