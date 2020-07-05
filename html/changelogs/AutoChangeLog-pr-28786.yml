@@ -1,4 +1,0 @@
-author: "Slywater"
-delete-after: True
-changes: 
-  - bugfix: "Players cannot climb onto low walls with windows."
