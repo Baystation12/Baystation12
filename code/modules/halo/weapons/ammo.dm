@@ -379,7 +379,7 @@
 	shield_damage = 200 //just below elite minor shields, meaning subsequent explosion and guaranteed damage will collapse it.
 
 /obj/item/projectile/bullet/ssr/on_impact(var/atom/target)
-	explosion(get_turf(target), 0, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
+	explosion(get_turf(target), 1, 1, 2, 4,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	..()
 
 /obj/item/weapon/storage/box/spnkr

@@ -50,7 +50,7 @@
 		comps_to_dam = vital_components
 	for(var/obj/item/vehicle_component/component in comps_to_dam)
 		var/comp_resistance = component.get_resistance_for("bomb")/100
-		component.damage_integrity((600/ex_severity) * (1- comp_resistance))
+		component.damage_integrity((500/ex_severity) * (1- comp_resistance))
 
 /datum/component_profile/proc/give_gunner_weapons(var/obj/vehicles/source_vehicle)
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)
