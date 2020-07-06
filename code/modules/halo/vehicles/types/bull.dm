@@ -40,7 +40,7 @@
 
 /obj/item/vehicle_component/health_manager/bull
 	integrity = 500
-	resistances = list("brute"=80,"burn"=80,"emp"=30,"bomb"=50)
+	resistances = list("bullet"=80,"energy"=80,"emp"=30,"bomb"=50)
 
 /datum/component_profile/bull
 	pos_to_check = "gunner"

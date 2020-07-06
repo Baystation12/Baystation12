@@ -41,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/shadow
 	integrity = 650
-	resistances = list("brute"=80,"burn"=80,"emp"=20,"bomb"=50)
+	resistances = list("bullet"=80,"energy"=80,"emp"=20,"bomb"=50)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/shadow
@@ -81,5 +81,5 @@
 	icon_state = "Plasmarifle Shot"
 
 /obj/item/projectile/bullet/covenant/shadow_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,-1,0,0,adminlog = 0,guaranteed_damage = 15,guaranteed_damage_range = 2)
+	explosion(get_turf(impacted),-1,-1,1,0,adminlog = 0,guaranteed_damage = 15,guaranteed_damage_range = 2)
 	. = ..()

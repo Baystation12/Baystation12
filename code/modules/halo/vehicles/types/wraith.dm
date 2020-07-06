@@ -40,7 +40,7 @@
 
 /obj/item/vehicle_component/health_manager/wraith
 	integrity = 700
-	resistances = list("brute"=90,"burn"=90,"emp"=40,"bomb"=65)
+	resistances = list("bullet"=90,"energy"=90,"emp"=40,"bomb"=65)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/wraith
@@ -112,7 +112,7 @@
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/setup_trajectory()
 	. = ..()
-	kill_count = get_dist(loc,get_turf(original)) + rand(-dispersion,dispersion)
+	kill_count = get_dist(loc,get_turf(original)) + rand(-dispersion[1],dispersion[1])
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
@@ -127,5 +127,5 @@
 	return ..()
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,0,2,2,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
+	explosion(get_turf(impacted),0,2,2,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
 	. = ..()

@@ -46,7 +46,7 @@
 
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 350
-	resistances = list("brute"=85,"burn"=85,"emp"=15,"bomb" = 0)
+	resistances = list("bullet"=85,"energy"=85,"emp"=15,"bomb" = 0)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/ghost

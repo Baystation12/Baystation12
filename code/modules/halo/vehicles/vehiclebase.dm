@@ -208,7 +208,7 @@
 	. = ..()
 
 /obj/vehicles/proc/on_death()
-	explosion(loc,-1,-1,2,5)
+	explosion(get_turf(loc),-1,-1,2,5)
 	movement_destroyed = 1
 	guns_disabled = 1
 	icon_state = "[initial(icon_state)]_destroyed"
@@ -428,14 +428,14 @@
 		var/should_continue = damage_occupant(pos_to_dam,P)
 		if(!should_continue)
 			return
-	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
+	comp_prof.take_component_damage(P.get_structure_damage(),P.check_armour)
 	visible_message("<span class = 'danger'>[P] hits [src]!</span>")
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
 	for(var/position in exposed_positions)
 		for(var/mob/living/m in get_occupants_in_position(position))
-			m.apply_damage((250/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
+			m.apply_damage((250/severity)),BRUTE,,m.run_armor_check(null,"bomb"))
 
 /obj/vehicles/relaymove(var/mob/user, var/direction)
 	if(world.time < next_move_input_at)

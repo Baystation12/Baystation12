@@ -41,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/throne
 	integrity = 500
-	resistances = list("brute"=85,"burn"=85,"emp"=15,"bomb" = 0)
+	resistances = list("bullet"=85,"energy"=85,"emp"=15,"bomb" = 0)
 
 /datum/component_profile/throne
 	gunner_weapons = list()
@@ -93,7 +93,7 @@
 /obj/item/projectile/bullet/covenant/gravity_cannon/on_impact(var/atom/A)
 	. = ..()
 	new /obj/effect/plasma_explosion/green(get_turf(src))
-	explosion(A,-1,-1,1,5,guaranteed_damage = 60, guaranteed_damage_range = 1)
+	explosion(get_turf(A),-1,-1,1,5,guaranteed_damage = 60, guaranteed_damage_range = 1)
 
 /datum/component_profile/throne/armed
 	pos_to_check = "driver"

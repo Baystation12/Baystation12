@@ -32,7 +32,7 @@
 
 /obj/item/vehicle_component/health_manager/scorpion
 	integrity = 750
-	resistances = list("brute"=90,"burn"=90,"emp"=40,"bomb"=65)
+	resistances = list("bullet"=90,"energy"=90,"emp"=40,"bomb"=65)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/scorpion
@@ -96,7 +96,7 @@
 	shield_damage = 240
 
 /obj/item/projectile/bullet/scorp_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,0,1,3,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
+	explosion(get_turf(impacted),0,1,3,5,guaranteed_damage = 50,guaranteed_damage_range = 2)
 	. = ..()
 
 /obj/item/projectile/bullet/scorp_cannon/attack_mob()
