@@ -1,6 +1,7 @@
 /datum/job/unsc_ai
 	title = "UNSC AI"
 	spawn_faction = "UNSC"
+	selection_color = "#0A0A95"
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/halo_ai_smart

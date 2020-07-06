@@ -1,6 +1,5 @@
 
 /datum/job/unsc/oni
-	selection_color = "#008000"
 	access = list(access_unsc,access_unsc_oni)
 	spawnpoint_override = null
 	fallback_spawnpoint = null
