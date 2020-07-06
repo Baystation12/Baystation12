@@ -101,7 +101,8 @@
 					/obj/item/weapon/armor_patch = 10,
 					/obj/item/clothing/accessory/storage/bandolier = 15,
 					/obj/item/weapon/storage/backpack/marine = 6,
-					/obj/item/weapon/storage/backpack/marine/brown = 6)
+					/obj/item/weapon/storage/backpack/marine/brown = 6,
+					/obj/item/flight_item/bullfrog_pack = 1)
 
 /obj/machinery/vending/armory/oni
 	name = "ONI Vendor"

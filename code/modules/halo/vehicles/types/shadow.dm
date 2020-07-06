@@ -25,8 +25,8 @@
 
 	light_color = "#C1CEFF"
 
-	min_speed = 8
-	max_speed = 3
+	min_speed = 8.25
+	max_speed = 2.75
 
 /obj/vehicles/shadow/update_object_sprites()
 	. = ..()

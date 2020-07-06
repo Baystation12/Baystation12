@@ -67,8 +67,13 @@
 /mob/proc/can_overcome_gravity()
 	return FALSE
 
+/mob/living/can_overcome_gravity()
+	return (flight_ticks_remain != 0)
+
 /mob/living/carbon/human/can_overcome_gravity()
-	return species && species.can_overcome_gravity(src)
+	. = ..()
+	if(!.)
+		return species && species.can_overcome_gravity(src)
 
 /mob/observer/zMove(direction)
 	var/turf/destination = (direction == UP) ? GetAbove(src) : GetBelow(src)
@@ -177,8 +182,15 @@
 	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up in below))
 		return FALSE
 
+/mob/living/can_fall()
+	. = ..()
+	if(.)
+		if(flight_ticks_remain != 0)
+			return 0
+
 /mob/living/carbon/human/can_fall()
-	if(..())
+	. = ..()
+	if(.)
 		return species.can_fall(src)
 
 /atom/movable/proc/handle_fall(var/turf/landing)

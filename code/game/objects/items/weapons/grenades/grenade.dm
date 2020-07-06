@@ -115,7 +115,7 @@
 	..()
 	return
 
-/obj/item/weapon/grenade/proc/do_alt_explosion()
+/obj/item/weapon/grenade/proc/do_alt_explosion(var/apply_ex_act = 0) //ex act is for plasnades
 	if(alt_explosion_range == -1)
 		return 0
 
@@ -124,6 +124,8 @@
 		if(get_dist(m,loc) > 0)
 			mult = multiplier_non_direct
 		m.adjustFireLoss(alt_explosion_damage_max*mult)
+		if(apply_ex_act)
+			m.ex_act(3)
 	return 1
 
 /obj/item/weapon/grenade/attack_hand()

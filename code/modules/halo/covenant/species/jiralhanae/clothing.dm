@@ -98,7 +98,7 @@
 	name = "Jiralhanae Softsuit Helmet"
 	desc = "This helmet was designed to keep Jiralhanae alive during EVA activity."
 	icon_state = "helm_soft"
-	armor = list(melee = 0, bullet = 0, laser = 15, energy = 0, bomb = 15, bio = 100, rad = 100)
+	armor = list(melee = 50, bullet = 30, laser = 20,energy = 20, bomb = 15, bio = 20, rad = 20)
 	item_flags = STOPPRESSUREDAMAGE | THICKMATERIAL | AIRTIGHT
 	body_parts_covered = HEAD|FACE
 	cold_protection = HEAD|FACE
@@ -183,7 +183,7 @@
 	name = "Jiralhanae Softsuit"
 	desc = "This softsuit was designed to keep Jiralhanae alive during EVA activity."
 	icon_state = "armour_soft"
-	armor = list(melee = 30, bullet = 10, laser = 20, energy = 10, bomb = 25, bio = 100, rad = 100)
+	armor = list(melee = 45, bullet = 40, laser = 45, energy = 35, bomb = 30, bio = 15, rad = 15)
 	allowed = list(\
 		/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/frag/spike,/obj/item/weapon/grenade/brute_shot,/obj/item/weapon/grenade/toxic_gas,\
 		/obj/item/weapon/gun/projectile/spiker,/obj/item/weapon/gun/projectile/mauler,\
@@ -259,7 +259,7 @@
 	cold_protection = LEGS|FEET
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
-	armor = list(melee = 40, bullet = 30, laser = 10, energy = 10, bomb = 25, bio = 100, rad = 100)
+	armor = list(melee = 45, bullet = 35, laser = 0, energy = 0, bomb = 35, bio = 0, rad = 0)
 	body_parts_covered = LEGS|FEET
 	matter = list("nanolaminate" = 1)
 

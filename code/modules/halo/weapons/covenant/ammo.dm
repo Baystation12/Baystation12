@@ -72,7 +72,6 @@
 	armor_penetration = 60
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
-	step_delay = 0
 	tracer_type = /obj/effect/projectile/beam_rifle
 	tracer_delay_time = 1.5 SECONDS
 	invisibility = 101
@@ -309,6 +308,7 @@
 	check_armour = "bomb"
 	step_delay = 1.2
 	kill_count = 15
+	shield_damage = 100
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "Overcharged_Plasmapistol shot"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_green
@@ -317,8 +317,8 @@
 	//kill count is the number of turfs the bullet travels, at the end it automatically calls on_impact()
 	//we want the fuel rod to not fly off into the distance if it misses
 	//add a bit of randomness
-	kill_count += world.view + (rand(0, FUEL_ROD_MAX_OVERSHOOT * 2) - FUEL_ROD_MAX_OVERSHOOT)
 	. = ..()
+	kill_count = world.view + (rand(0, FUEL_ROD_MAX_OVERSHOOT * 2) - FUEL_ROD_MAX_OVERSHOOT)
 
 /obj/item/projectile/bullet/fuel_rod/throw_impact(atom/hit_atom)
 	return on_impact(hit_atom)
@@ -328,7 +328,77 @@
 	explosion(A,-1,1,2,4,guaranteed_damage = 30, guaranteed_damage_range = 2)
 	for(var/mob/living/l in range(FUEL_ROD_IRRADIATE_RANGE,loc))
 		l.rad_act(FUEL_ROD_IRRADIATE_AMOUNT)
+	. = ..()
 	qdel(src)
+
+/obj/item/ammo_magazine/concussion_rifle
+	name = "Type-50 Directed Energy Rifle / Heavy Magazine"
+	desc = "Contains a maximum of 6 shots."
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
+	icon_state = "concussion_mag"
+	mag_type = MAGAZINE
+	ammo_type = /obj/item/ammo_casing/concussion_rifle
+	caliber = "plasConcRifle"
+	max_ammo = 6
+
+/obj/item/ammo_casing/concussion_rifle
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
+	icon_state = "concussion_casing"
+	caliber = "plasConcRifle"
+	projectile_type = /obj/item/projectile/bullet/covenant/concussion_rifle
+
+/obj/item/projectile/bullet/covenant/concussion_rifle
+	name = "heavy plasma round"
+	damage = 50
+	armor_penetration = 30
+	shield_damage = 150
+	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
+	icon_state = "heavy_plas_cannon"
+	muzzle_type = /obj/effect/projectile/muzzle/cov_red
+	var/aoe_damage = 5
+
+/obj/item/projectile/bullet/covenant/concussion_rifle/launch(atom/target, var/target_zone, var/x_offset=0, var/y_offset=0, var/angle_offset=0)
+	. = ..()
+	kill_count = get_dist(loc,target)
+
+/obj/item/projectile/bullet/covenant/concussion_rifle/on_impact(var/atom/A)
+	playsound(A, 'code/modules/halo/sounds/conc_rifle_explode.ogg', 100, 1)
+	for(var/atom/movable/m in range(1,loc) + range(1,A))
+		if(m.anchored)
+			continue
+		if(istype(m,/obj/effect))
+			continue
+		var/turf/lastloc = loc
+		var/dir_move = get_dir(loc,m)
+		if(A.loc == m.loc || loc == m.loc)
+			dir_move = pick(GLOB.cardinal)
+		if(dir_move in GLOB.cardinal)
+			lastloc = get_edge_target_turf(m, dir_move)
+		else
+			for(var/i = 0 to world.view)
+				var/turf/newloc = get_step(lastloc,dir_move)
+				if(newloc.density == 1)
+					break
+				lastloc = newloc
+		var/mob/living/mob = m
+		if(istype(mob))
+			mob.adjustFireLoss(aoe_damage)
+		spawn()
+			m.throw_at(lastloc, world.view,1,firer)
+	. = ..()
+	qdel(src)
+
+/obj/item/ammo_magazine/concussion_rifle/jumper_mag
+	ammo_type = /obj/item/ammo_casing/concussion_rifle/jumper
+
+/obj/item/ammo_casing/concussion_rifle/jumper
+	projectile_type = /obj/item/projectile/bullet/covenant/concussion_rifle/jumper
+
+/obj/item/projectile/bullet/covenant/concussion_rifle/jumper
+	damage = 0
+	armor_penetration = 0
+	shield_damage = 0
+	aoe_damage = 0
 
 #undef FUEL_ROD_IRRADIATE_RANGE
 #undef FUEL_ROD_IRRADIATE_AMOUNT

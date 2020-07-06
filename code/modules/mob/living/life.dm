@@ -38,9 +38,11 @@
 
 		. = 1
 
-	if(stat != 0 && elevation > 0)
-		visible_message("[name] is unable to support their flight and falls to the ground!")
-		change_elevation(-elevation)
+	if(elevation > 0 && !check_can_fly())
+		handle_flight_failure()
+
+	if(flight_ticks_remain > 0)
+		decrement_flight_ticks()
 
 	//Handle temperature/pressure differences between body and environment
 	if(environment)
@@ -83,6 +85,22 @@
 
 /mob/living/proc/handle_stomach()
 	return
+
+/mob/living/proc/check_can_fly()
+	if(stat != 0 || flight_ticks_remain == 0)
+		return 0
+	return 1
+
+/mob/living/proc/handle_flight_failure()
+	visible_message("<span class = 'warning'>[name] is unable to support their flight and falls to the ground!</span>")
+	if(!isspace(loc))
+		adjustBruteLoss(65)
+	if(flight_item)
+		flight_item.deactivate(src,0)
+	else
+		change_elevation(-elevation)
+	if(istype(src.loc,/turf/simulated/open))
+		fall()
 
 /mob/living/proc/update_pulling()
 	if(pulling)
@@ -231,3 +249,9 @@
 
 /mob/living/proc/handle_hud_icons_health()
 	return
+
+/mob/living/Stat()
+	. = ..()
+	if(statpanel("Status"))
+		if(flight_ticks_remain > 0)
+			stat("Flight Ticks Remaining: [flight_ticks_remain]")

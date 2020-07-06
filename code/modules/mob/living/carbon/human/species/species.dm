@@ -387,6 +387,9 @@
 /datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
 	return
 
+/datum/species/proc/handle_flight_failure(var/mob/living/carbon/human/H)
+	return 0
+
 /datum/species/proc/handle_vision(var/mob/living/carbon/human/H)
 	H.update_sight()
 	H.set_sight(H.sight|get_vision_flags(H)|H.equipment_vision_flags)

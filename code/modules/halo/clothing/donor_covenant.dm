@@ -10,6 +10,10 @@
 /obj/item/clothing/shoes/jiralhanae/covenant/boltersam
 	icon_state = "bolter_greaves"
 
+/obj/item/weapon/grav_hammer/gravless/boltersam
+	icon_state = "goremaul"
+	item_state_slots = list(slot_l_hand_str = "goremaul", slot_r_hand_str = "goremaul", slot_back_str = "back_maul")
+
 /obj/item/weapon/grav_hammer/boltersam
 	icon_state = "goremaul"
 	item_state_slots = list(slot_l_hand_str = "goremaul", slot_r_hand_str = "goremaul", slot_back_str = "back_maul")
@@ -18,10 +22,24 @@
 	startswith = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
 					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
 					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
+					/obj/item/weapon/grav_hammer/gravless/boltersam
 					)
 	can_hold = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
 					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
 					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
+					/obj/item/weapon/grav_hammer/gravless/boltersam
+					)
+
+/obj/item/weapon/storage/box/large/donator/boltersam/captain
+	startswith = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
+					/obj/item/weapon/grav_hammer/boltersam
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam,
+					/obj/item/clothing/shoes/jiralhanae/covenant/boltersam,
+					/obj/item/weapon/grav_hammer/boltersam
 					)
 
 /decl/hierarchy/outfit/boltersam_jiralhanae
@@ -29,7 +47,30 @@
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant/boltersam
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant/boltersam
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant/boltersam
-	back = /obj/item/weapon/grav_hammer/boltersam
+	back = /obj/item/weapon/grav_hammer/gravless/boltersam
+
+///////billymom2///////////
+
+/obj/item/clothing/head/helmet/jiralhanae/covenant/billymom2
+	icon_state = "billymom2_helm"
+
+/obj/item/clothing/suit/armor/jiralhanae/covenant/billymom2
+	icon_state = "billymom2_armour"
+
+/obj/item/clothing/shoes/jiralhanae/covenant/billymom2
+	icon_state = " "
+
+/obj/item/weapon/storage/box/large/donator/billymom2
+	startswith = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/billymom2,
+					/obj/item/clothing/suit/armor/jiralhanae/covenant/billymom2,
+					/obj/item/clothing/shoes/jiralhanae/covenant/billymom2,
+					/obj/item/weapon/grav_hammer/gravless
+					)
+	can_hold = list(/obj/item/clothing/head/helmet/jiralhanae/covenant/billymom2,
+					/obj/item/clothing/suit/armor/jiralhanae/covenant/billymom2,
+					/obj/item/clothing/shoes/jiralhanae/covenant/billymom2,
+					/obj/item/weapon/grav_hammer/gravless
+					)
 
 
 ///////MAGNUM\\\\\\\\
