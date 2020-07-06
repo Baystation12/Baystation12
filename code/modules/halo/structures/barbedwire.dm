@@ -22,7 +22,7 @@
 
 /obj/structure/bardbedwire/Crossed(atom/movable/AM)
 	. = 1
-	if(isliving(AM))
+	if(isliving(AM) && AM.elevation == elevation)
 		var/mob/living/L = AM
 		L.adjustBruteLoss(damage)
 		if(L && prob(25))
