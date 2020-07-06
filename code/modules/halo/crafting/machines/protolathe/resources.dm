@@ -37,7 +37,7 @@
 	//check components
 	for(var/check_type in D.required_objs)
 		//special handling
-		consume_obj(check_type, D.required_objs[check_type])
+		consume_obj(check_type, 1)
 
 	//only update the ui if we have to
 	if(D.required_materials)
