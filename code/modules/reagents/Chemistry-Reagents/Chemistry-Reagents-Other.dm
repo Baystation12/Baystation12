@@ -397,6 +397,13 @@
 	reagent_state = SOLID
 	color = WOOD_COLOR_PALE2
 
+/datum/reagent/resinpulp
+	name = "Resin Pulp"
+	description = "A mass of goopy resin."
+	taste_description = "gooey"
+	reagent_state = SOLID
+	color = "#3A4E1B"
+
 /datum/reagent/luminol
 	name = "Luminol"
 	description = "A compound that interacts with blood on the molecular level."

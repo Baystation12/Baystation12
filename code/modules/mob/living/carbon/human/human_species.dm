@@ -51,6 +51,12 @@
 	h_style = "Long Vox Quills"
 	..(new_loc, SPECIES_VOX)
 
+/mob/living/carbon/human/vox/stackless/New(var/new_loc)
+	h_style = "Long Vox Quills"
+	..(new_loc, SPECIES_VOX)
+	var/obj/item/organ/internal/voxstack/stack = internal_organs_by_name[BP_STACK]
+	stack.Destroy()
+
 /mob/living/carbon/human/diona/New(var/new_loc)
 	..(new_loc, SPECIES_DIONA)
 

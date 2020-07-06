@@ -1265,6 +1265,50 @@
 	set_trait(TRAIT_IDEAL_LIGHT, 6)
 	set_trait(TRAIT_WATER_CONSUMPTION, 6)
 
+/datum/seed/resin
+	name = "resinplant"
+	seed_name = "resin plant"
+	display_name = "resin plant"
+	chems = list(/datum/reagent/resinpulp = list(6,1))
+	mutants = null
+	exude_gasses = list(null)
+
+/datum/seed/resin/New()
+	..()
+	set_trait(TRAIT_HARVEST_REPEAT,1)
+	set_trait(TRAIT_MATURATION,5)
+	set_trait(TRAIT_PRODUCTION,1)
+	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_POTENCY,1)
+	set_trait(TRAIT_PRODUCT_COLOUR,"#3A4E1B")
+	set_trait(TRAIT_PLANT_COLOUR,"#5e41be")
+	set_trait(TRAIT_PRODUCT_ICON,"resin")
+	set_trait(TRAIT_PLANT_ICON,"resin")
+	set_trait(TRAIT_IDEAL_LIGHT, 6)
+	set_trait(TRAIT_WATER_CONSUMPTION, 6)
+
+/datum/seed/breather
+	name = "breather"
+	seed_name = "breather"
+	display_name = "breather"
+	chems = list(
+		/datum/reagent/nutriment = list(2,12),
+		/datum/reagent/ammonia = list(3,8)
+	)
+	exude_gasses = list(GAS_NITROGEN = 3)
+
+/datum/seed/breather/New()
+	..()
+	set_trait(TRAIT_MATURATION,6)
+	set_trait(TRAIT_PRODUCTION,5)
+	set_trait(TRAIT_YIELD,4)
+	set_trait(TRAIT_POTENCY,10)
+	set_trait(TRAIT_PRODUCT_ICON,"breather")
+	set_trait(TRAIT_PLANT_ICON,"breather")
+	set_trait(TRAIT_WATER_CONSUMPTION, 4)
+	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 1)
+	set_trait(TRAIT_LIGHT_TOLERANCE, 6)
+
 // Fruit Expansion
 
 /datum/seed/melon

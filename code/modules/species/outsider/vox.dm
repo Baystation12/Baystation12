@@ -40,10 +40,10 @@
 	cold_level_1 = 80
 	cold_level_2 = 50
 	cold_level_3 = -1
-	
+
 	min_age = 1
 	max_age = 100
-	
+
 	gluttonous = GLUT_TINY|GLUT_ITEM_NORMAL
 	stomach_capacity = 12
 
@@ -136,7 +136,7 @@
 /datum/species/vox/disfigure_msg(var/mob/living/carbon/human/H)
 	var/datum/gender/T = gender_datums[H.get_gender()]
 	return "<span class='danger'>[T.His] beak-segments are cracked and chipped! [T.He] [T.is] not even recognizable.</span>\n"
-	
+
 /datum/species/vox/skills_from_age(age)
 	. = 8
 
@@ -152,11 +152,33 @@
 	blood_mask =      'icons/mob/human_races/species/vox/blood_mask_armalis.dmi'
 
 	slowdown = 1
-	hidden_from_codex = TRUE
+	description = "Vox Armalis are a larger, more powerful subspecies of Vox, produced in lesser numbers\
+	 by the Apex for usage in heavy labor, or as shock troops. They are larger, more powerful, and \
+	 tougher than Primalis, but much slower, and have less of an iron immune system compared to their\
+	 smaller kin."
+	codex_description = "The Vox are a hostile, deeply untrustworthy species from the edges of human space. They prey \
+	on isolated stations, ships or settlements without any apparent logic or reason, and tend to refuse communications \
+	or negotiations except when their backs are to the wall or they are in dire need of resources. There seems to be a \
+	subspecies of Vox that differ from their compatriots via larger size and heavier build. Any pictures or additional \
+	data about them can be sent to the Codex offices, Venus orbit, for monetary reward."
+	hidden_from_codex = FALSE
+
+	speech_sounds = list('sound/voice/ashriek.ogg')
+	speech_chance = 10
+
+
 	spawn_flags = SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION
-	brute_mod = 0.8
-	burn_mod = 0.8
+	brute_mod = 0.75
+	burn_mod = 0.75
+	toxins_mod = 1.5
+	mob_size = MOB_LARGE
 	strength = STR_HIGH
+
+	bump_flag = HEAVY
+	push_flags = ALLMOBS
+	swap_flags = ALLMOBS
+
+	species_flags = SPECIES_FLAG_NO_MINOR_CUT
 
 	override_organ_types = list(BP_EYES = /obj/item/organ/internal/eyes/vox/armalis)
 
@@ -172,5 +194,9 @@
 		slot_l_hand_str = list("[NORTH]" = list("x" = 0, "y" = 4), "[EAST]" = list("x" = -3, "y" = 4), "[SOUTH]" = list("x" = 0, "y" = 4), "[WEST]" = list("x" =  3, "y" = 4)),
 		slot_r_hand_str = list("[NORTH]" = list("x" = 0, "y" = 4), "[EAST]" = list("x" =  3, "y" = 4), "[SOUTH]" = list("x" = 0, "y" = 4), "[WEST]" = list("x" = -3, "y" = 4)),
 		slot_back_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -3, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  3, "y" = 8)),
-		slot_belt_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -4, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  4, "y" = 8))
+		slot_belt_str =   list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" = -4, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  4, "y" = 8)),
+		slot_l_ear_str =  list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" =  6, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  8, "y" = 8)),
+		slot_r_ear_str =  list("[NORTH]" = list("x" = 0, "y" = 8), "[EAST]" = list("x" =  8, "y" = 8), "[SOUTH]" = list("x" = 0, "y" = 8), "[WEST]" = list("x" =  6, "y" = 8))
+
 	)
+
