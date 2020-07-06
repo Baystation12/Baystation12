@@ -13,9 +13,12 @@
 
 /obj/structure/invasion_scanner/ex_act(var/severity)
 	explosive_hits -= (round(3/severity))
-	if(regen_at == 0)
-		GLOB.processing_objects += src
-	regen_at = world.time + HIT_REGEN_TIME
+	if(explosive_hits <= 0)
+		qdel(src)
+	else
+		if(regen_at == 0)
+			GLOB.processing_objects += src
+		regen_at = world.time + HIT_REGEN_TIME
 
 /obj/structure/invasion_scanner/process()
 	if(world.time >= regen_at)
