@@ -34,7 +34,7 @@
 
 /obj/item/vehicle_component/health_manager/warthog
 	integrity = 500
-	resistances = list("bullet"=80,"energy"=80,"emp"=25,"bomb"=50)
+	resistances = list("bullet"=65,"energy"=65,"emp"=25,"bomb"=45)
 
 /datum/component_profile/warthog
 	pos_to_check = "gunner"

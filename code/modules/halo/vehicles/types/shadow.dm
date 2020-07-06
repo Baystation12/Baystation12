@@ -41,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/shadow
 	integrity = 650
-	resistances = list("bullet"=80,"energy"=80,"emp"=20,"bomb"=50)
+	resistances = list("bullet"=65,"energy"=65,"emp"=20,"bomb"=45)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/shadow

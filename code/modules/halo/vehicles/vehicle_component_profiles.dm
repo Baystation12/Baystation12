@@ -36,8 +36,8 @@
 			comp_to_dam = pick(components)
 		else if(prob(100 - max_comp_coverage))
 			comp_to_dam = pick(vital_components)
-	var/comp_resistance = comp_to_dam.get_resistance_for(proj_damtype)
-	comp_to_dam.damage_integrity(proj_damage*(1 - comp_resistance/100))
+	var/comp_resistance = comp_to_dam.get_resistance_for(proj_damtype)/100
+	comp_to_dam.damage_integrity(proj_damage*(1 - comp_resistance))
 
 /datum/component_profile/proc/take_comp_explosion_dam(var/ex_severity)
 	var/max_comp_coverage = get_coverage_sum()
@@ -50,7 +50,7 @@
 		comps_to_dam = vital_components
 	for(var/obj/item/vehicle_component/component in comps_to_dam)
 		var/comp_resistance = component.get_resistance_for("bomb")/100
-		component.damage_integrity((400/ex_severity) * (1- comp_resistance))
+		component.damage_integrity((600/ex_severity) * (1- comp_resistance))
 
 /datum/component_profile/proc/give_gunner_weapons(var/obj/vehicles/source_vehicle)
 	var/list/gunners = source_vehicle.get_occupants_in_position(pos_to_check)

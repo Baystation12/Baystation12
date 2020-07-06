@@ -41,7 +41,7 @@
 
 /obj/item/vehicle_component/health_manager/throne
 	integrity = 500
-	resistances = list("bullet"=85,"energy"=85,"emp"=15,"bomb" = 0)
+	resistances = list("bullet"=70,"energy"=70,"emp"=15,"bomb" = 0)
 
 /datum/component_profile/throne
 	gunner_weapons = list()
