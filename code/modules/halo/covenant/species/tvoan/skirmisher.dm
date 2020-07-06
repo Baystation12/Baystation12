@@ -27,6 +27,8 @@
 	slowdown = -1.0
 
 	equipment_slowdown_multiplier = 0.3
+	gibbed_anim = null
+	dusted_anim = null
 
 	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 

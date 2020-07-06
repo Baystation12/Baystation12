@@ -25,6 +25,8 @@ GLOBAL_LIST_INIT(sanshyuum_titles, world.file2list('code/modules/halo/covenant/s
 	burn_mod = 1.2
 	equipment_slowdown_multiplier = 2
 	default_faction = "Covenant"
+	gibbed_anim = null
+	dusted_anim = null
 
 /datum/species/sanshyuum/get_random_name(var/gender)
 	var/newname = "[pick(GLOB.sanshyuum_titles)] of [pick(GLOB.sanshyuum_virtues)]"
