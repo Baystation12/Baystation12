@@ -41,8 +41,9 @@
 	ui_SelectDesign()
 
 /obj/machinery/research/protolathe/Initialize()
-	..()
+	. = ..()
 
+	//we are going to manually call late initialize so that the techprints and designs have been initialized properly
 	if(Master.current_runlevel > RUNLEVEL_INIT)
 		LateInitialize()
 	else
