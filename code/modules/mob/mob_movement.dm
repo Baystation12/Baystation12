@@ -417,6 +417,12 @@
 
 	return -1
 
+/mob/living/Allow_Spacemove(var/check_drift)
+	. = ..()
+	if(. != 1)
+		if(flight_ticks_remain != 0)
+			return 1
+
 //Checks if a mob has solid ground to stand on
 //If there's no gravity then there's no up or down so naturally you can't stand on anything.
 //For the same reason lattices in space don't count - those are things you grip, presumably.

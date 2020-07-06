@@ -220,4 +220,4 @@
 
 /obj/item/weapon/storage/belt/waistpack/big/New()
 	..()
-	slowdown_per_slot[slot_belt] = 3
+	slowdown_per_slot[slot_belt] = 0.5

@@ -214,6 +214,7 @@
 	icon_state = "[initial(icon_state)]_destroyed"
 	if(spawn_datum)
 		spawn_datum.is_spawn_active = 0
+	fall()
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 
@@ -353,8 +354,8 @@
 	update_object_sprites()
 
 /obj/vehicles/fall()
-	if(can_traverse_zs && active)
-		return
+	if(can_traverse_zs && movement_destroyed != 0 && active)
+		return 0
 	. = ..()
 
 /obj/vehicles/proc/collide_with_obstacle(var/atom/obstacle)
@@ -363,6 +364,7 @@
 		playsound(loc,collision_sound,100,0,4)
 		hit_mob.Weaken(2) //No damage for now, let's just knock them over.
 	else
+		next_move_input_at = world.time + min_speed
 		moving_x = 0
 		moving_y = 0
 		last_moved_axis = 0
@@ -375,39 +377,39 @@
 	. = collide_with_obstacle(obstacle)
 
 /obj/vehicles/proc/movement_loop(var/speed_index_target = 1)
-	set background = 1
 	switch(speed_index_target)
 		if(1)
 			moving_x = 1
 		if(2)
 			moving_y = 1
-	while (speed[speed_index_target] != 0)
-		sleep(max(min_speed - (abs(speed[speed_index_target]) + abs(speed[speed_index_target==1?2:1])/2),max_speed)) //Our delay is the average of both.
-		if(speed[speed_index_target] > 0)
-			switch(speed_index_target)
-				if(1)
-					. = Move(get_step(loc,EAST),EAST)
-				if(2)
-					. = Move(get_step(loc,NORTH),NORTH)
-		else
-			switch(speed_index_target)
-				if(1)
-					. = Move(get_step(loc,WEST),WEST)
-				if(2)
-					. = Move(get_step(loc,SOUTH),SOUTH)
-		if(last_moved_axis != speed_index_target)
+	spawn()
+		while (speed[speed_index_target] != 0)
+			sleep(max(min_speed - (abs(speed[speed_index_target]) + abs(speed[speed_index_target==1?2:1])/2),max_speed)) //Our delay is the average of both.
 			if(speed[speed_index_target] > 0)
-				speed[speed_index_target] = max(speed[speed_index_target] - drag,0)
+				switch(speed_index_target)
+					if(1)
+						. = Move(get_step(loc,EAST),EAST)
+					if(2)
+						. = Move(get_step(loc,NORTH),NORTH)
 			else
-				speed[speed_index_target] = min(speed[speed_index_target] + drag,0)
-		if(world.time >= next_move_input_at)
-			last_moved_axis = 0
-		if(move_sound)
-			playsound(loc,move_sound,75,0,4)
-	if(speed_index_target == 1)
-		moving_x = 0
-	else
-		moving_y = 0
+				switch(speed_index_target)
+					if(1)
+						. = Move(get_step(loc,WEST),WEST)
+					if(2)
+						. = Move(get_step(loc,SOUTH),SOUTH)
+			if(last_moved_axis != speed_index_target)
+				if(speed[speed_index_target] > 0)
+					speed[speed_index_target] = max(speed[speed_index_target] - drag,0)
+				else
+					speed[speed_index_target] = min(speed[speed_index_target] + drag,0)
+			if(world.time >= next_move_input_at)
+				last_moved_axis = 0
+			if(move_sound)
+				playsound(loc,move_sound,75,0,4)
+		if(speed_index_target == 1)
+			moving_x = 0
+		else
+			moving_y = 0
 
 /obj/vehicles/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	var/pos_to_dam = should_damage_occ()
@@ -447,6 +449,7 @@
 	if(!active)
 		to_chat(user,"<span class = 'notice'>[src] needs to be active to move!</span>")
 		return 0
+	next_move_input_at = world.time + max(max_speed,min_speed - (abs(speed[1]) + abs(speed[2])))
 	var/list/driver_list = get_occupants_in_position("driver")
 	var/is_driver = FALSE
 	for(var/mob/driver in driver_list)
@@ -479,14 +482,10 @@
 	if(braking_mode == 1) //If we're braking, we don't get the leeway in movement.
 		last_moved_axis = 0
 
-
 	if(speed[1] != 0 && !moving_x)
-		spawn()
-			movement_loop(1)
+		movement_loop(1)
 	else if(speed[2] != 0 && !moving_y)
-		spawn()
-			movement_loop(2)
-	next_move_input_at = world.time + acceleration
+		movement_loop(2)
 	return 1
 
 /obj/vehicles/verb/verb_inspect_components()

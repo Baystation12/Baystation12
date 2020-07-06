@@ -18,7 +18,7 @@
 /obj/mecha/combat/hrunting/add_cell()
 	cell = new /obj/item/weapon/cell/hyper(src)
 
-/obj/mecha/combat/hrunting/verb/overload()
+/obj/mecha/combat/hrunting/proc/overload()
 	set category = "Exosuit Interface"
 	set name = "Toggle leg actuators overload"
 	set src = usr.loc
@@ -49,7 +49,7 @@
 			src.occupant_message("<font color='red'>Leg actuators damage threshold exceded. Disabling overload.</font>")
 	return
 
-
+/*
 /obj/mecha/combat/hrunting/get_stats_part()
 	var/output = ..()
 	output += "<b>Leg actuators overload: [overload?"on":"off"]</b>"
@@ -65,7 +65,7 @@
 						"}
 	output += ..()
 	return output
-
+*/
 /obj/mecha/combat/hrunting/Topic(href, href_list)
 	..()
 	if (href_list["toggle_leg_overload"])

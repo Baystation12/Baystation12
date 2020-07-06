@@ -206,3 +206,6 @@
 
 //Request Lib
 #define REQUEST_LIBRARY_LOCATION (world.system_type == MS_WINDOWS ? "lib/gotbyond.dll" : "lib/gotbyond.so")
+
+//Elevation Defines//
+#define BASE_ELEVATION 0

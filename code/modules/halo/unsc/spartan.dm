@@ -70,7 +70,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/augmented)
 		)
 
-	equipment_slowdown_multiplier = 0.3
+	equipment_slowdown_multiplier = 0.6
 
 	roll_distance = 3
 	per_roll_delay = 1.5 //Slightly faster than a human's dodge roll

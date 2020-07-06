@@ -3,7 +3,7 @@
 	name = "Type-51 Carbine"
 	desc = "One of the few covenant weapons that utilise magazines."
 	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
-	icon_state = "type 51"
+	icon_state = "type51"
 	item_state = "carbine"
 	w_class = ITEM_SIZE_LARGE
 	slot_flags = SLOT_BACK
@@ -47,6 +47,13 @@
 		to_chat(user,"<span class = 'notice'>The automatic reload mechanism of [src.name] is locked, use a magazine on it to attempt a reload.</span>")
 	if(allow_dump)
 		. = ..()
+
+/obj/item/weapon/gun/projectile/type51carbine/update_icon()
+	if(ammo_magazine)
+		icon_state = "type51"
+	else
+		icon_state = "type51_unloaded"
+	. = ..()
 
 /obj/item/weapon/gun/energy/beam_rifle
 	name = "Type-27 Special Application Sniper Rifle"

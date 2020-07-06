@@ -104,12 +104,14 @@
 		if(istype(gun_r) && gun_r.overheat_capacity > 0)
 			stat("[gun_r] Heat: [round(100 * gun_r.heat_current / gun_r.overheat_capacity)]%")
 
-/mob/living/carbon/human/ex_act(severity)
+/mob/living/carbon/human/ex_act(var/severity,var/turf/epicenter)
 	if(!blinded)
 		flash_eyes()
 
 	var/b_loss = null
 	var/f_loss = null
+	var/throw_mob = FALSE
+	var/throw_range = 0
 	switch (severity)
 		if (1.0)
 			b_loss = 400
@@ -118,8 +120,9 @@
 				gib()
 				return
 			else
-				var/atom/target = get_edge_target_turf(src, get_dir(src, get_step_away(src, src)))
-				throw_at(target, 200, 4)
+				Weaken(5)
+				throw_mob = TRUE
+				throw_range = 200 //Be happy you survived the bomb's gibbing
 			//return
 	//			var/atom/target = get_edge_target_turf(user, get_dir(src, get_step_away(user, src)))
 				//user.throw_at(target, 200, 4)
@@ -131,17 +134,18 @@
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 30,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 120,120*species.explosion_effect_mod)
-			if (prob(70))
-				confused = min(confused + 10,30*species.explosion_effect_mod)
+			Weaken(3)
+			throw_mob = TRUE
+			throw_range = world.view + 3
 
 		if(3.0)
 			b_loss = 30
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 15,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 60,120*species.explosion_effect_mod)
-			if (prob(50))
-				confused = min(confused + 10,30*species.explosion_effect_mod)
-
+			Weaken(2)
+			throw_mob = TRUE
+			throw_range = world.view - 1
 
 	// factor in armour / degrade armor
 	var/protection = blocked_mult(getarmor(null, "bomb"))
@@ -171,6 +175,20 @@
 		temp.take_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
 		degrade_affected_armor(b_loss*loss_val,BRUTE,temp)
 		degrade_affected_armor(f_loss*loss_val,BURN,temp)
+
+	if(throw_mob)
+		var/throw_in = NORTH //Just a default, in case anything breaks
+		if(get_turf(src) == epicenter)
+			throw_in = pick(GLOB.cardinal)
+		else
+			throw_in = get_dir(epicenter,get_turf(src))
+			if(!(throw_in in GLOB.cardinal)) //the proc we're using to grab a dir to throw in only supports cardinals, so coerce this into one.
+				if(prob(50))
+					throw_in = turn(throw_in,-45)
+				else
+					throw_in = turn(throw_in,45)
+		var/target_turf = get_edge_target_turf(get_turf(loc),throw_in)
+		throw_at(target_turf,throw_range,1)
 
 /mob/living/carbon/human/proc/implant_loyalty(mob/living/carbon/human/M, override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.

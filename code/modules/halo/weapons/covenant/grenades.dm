@@ -9,7 +9,7 @@
 	can_adjust_timer = 0
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 	alt_explosion_range = 2
-	alt_explosion_damage_max = 65
+	alt_explosion_damage_max = 75
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
 	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))
@@ -43,7 +43,7 @@
 			if(dist <= round(alt_explosion_range + world.view - 2, 1))
 				M.playsound_local(epicenter, 'code/modules/halo/sounds/Plasmanadedetonate.ogg', 100, 1)
 	var/mob/living/carbon/human/mob_containing = loc
-	do_alt_explosion()
+	do_alt_explosion(1)
 	if(istype(mob_containing))
 		mob_containing.contents -= src
 	loc = null
