@@ -5,6 +5,9 @@
 /datum/fabricator_recipe/tool/prybar
 	path = /obj/item/weapon/crowbar/prybar
 
+/datum/fabricator_recipe/tool/rescuetool
+	path = /obj/item/weapon/crowbar/emergency_forcing_tool
+
 /datum/fabricator_recipe/tool/int_wirer
 	path = /obj/item/device/integrated_electronics/wirer
 
