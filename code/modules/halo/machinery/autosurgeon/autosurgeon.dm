@@ -9,6 +9,7 @@
 	var/icon_state_base = "autosurgeon"
 	var/botch_surgery = 0
 	var/active = 0
+	var/do_autopsy = FALSE
 	var/autosurgeon_stage = AUTOSURGEON_START
 	var/obj/item/stack/medical/bruise_pack/internal_bruise_pack = new()
 	var/obj/item/stack/medical/ointment/internal_ointment = new()
@@ -45,6 +46,12 @@
 
 /obj/machinery/autosurgeon/proc/set_active(var/new_active)
 	if(new_active && !active)
+
+		if(do_autopsy && buckled_mob && buckled_mob.stat != 2)
+			var/result = alert("Warning, living subject detected. Proceed with live autopsy?","Live autopsy",\
+				"Continue","Cancel")
+			if(result == "Cancel")
+				return
 		active = 1
 
 		//startup delay

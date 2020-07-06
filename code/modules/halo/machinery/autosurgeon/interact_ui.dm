@@ -16,6 +16,10 @@
 			data["species"] = "[H.species.name]"
 		else
 			data["species"] = "Unknown"
+
+		if(allowed_species.len)
+			if(!ishuman(buckled_mob) || !buckled_mob:species || !(buckled_mob:species.type in allowed_species))
+				data["species"] += " (Insufficient data for medical tending)"
 		//
 		data["fire_loss"] = buckled_mob.getFireLoss()
 		data["brute_loss"] = buckled_mob.getBruteLoss()
@@ -26,6 +30,7 @@
 	data["active"] = active
 	data["autosurgeon_stage"] = autosurgeon_stage
 	data["buckled_mob"] = buckled_mob ? 1 : 0
+	data["autopsy"] = do_autopsy
 	//
 	if(internal_bruise_pack)
 		data["bruisepack_amount"] = internal_bruise_pack.amount
