@@ -59,6 +59,10 @@
 		if(speaking.name == L.name)
 			return 1
 
+	for(var/datum/language/L in src.languages_understand)
+		if(speaking.name == L.name)
+			return 1
+
 	return 0
 
 /mob/proc/say_quote(var/message, var/datum/language/speaking = null)
