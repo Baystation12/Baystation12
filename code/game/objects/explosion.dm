@@ -69,7 +69,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			for(var/turf/T in trange(max_range, epicenter))
 				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 
-				if(dist < devastation_range || (devastation_range == 0 && T == epicenter))		dist = 1
+				if(dist < devastation_range)		dist = 1
 				else if(dist < heavy_impact_range)	dist = 2
 				else if(dist < light_impact_range)	dist = 3
 				else								continue
