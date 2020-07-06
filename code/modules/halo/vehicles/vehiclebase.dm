@@ -17,7 +17,7 @@
 	var/moving_y = 0
 	var/last_moved_axis = 0 //1 = X axis, 2 = Y axis.
 	var/list/speed = list(0,0) //The delay on movement in these directions.
-	var/drag = 1 //How much do we slow down per tick if no input is applied in a direction?
+	var/drag = 2 //How much do we slow down per tick if no input is applied in a direction?
 	var/min_speed = 5 //What's the highest delay we can have?
 	var/max_speed = 1//What's the lowest number we can go to in terms of delay?
 	var/acceleration = 1 //By how much does our speed change per input?

@@ -31,7 +31,7 @@
 	min_speed = 17.25
 	max_speed = 2.25
 	acceleration = 6
-	drag = 3.5
+	drag = 7
 	internal_air = new
 
 /obj/vehicles/air/pelican/update_object_sprites()
@@ -109,7 +109,7 @@
 	min_speed = 17.25
 	max_speed = 2.25
 	acceleration = 6
-	drag = 3.5
+	drag = 7
 
 	internal_air = new
 

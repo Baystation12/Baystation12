@@ -28,7 +28,7 @@
 
 	min_speed = 6.25
 	max_speed = 2.25
-	drag = 1.25
+	drag = 2.25
 
 /obj/vehicles/ghost/update_object_sprites()
 	. = ..()

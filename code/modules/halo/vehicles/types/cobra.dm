@@ -29,7 +29,7 @@
 
 	min_speed = 12.5
 	max_speed = 4.5
-	drag = 2
+	drag = 3
 
 	var/lockdown = 0
 	var/zoomed = 0
