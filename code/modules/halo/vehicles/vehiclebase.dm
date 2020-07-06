@@ -435,7 +435,7 @@
 	comp_prof.take_comp_explosion_dam(severity)
 	for(var/position in exposed_positions)
 		for(var/mob/living/m in get_occupants_in_position(position))
-			m.apply_damage((250/severity)),BRUTE,,m.run_armor_check(null,"bomb"))
+			m.apply_damage(250/severity,BRUTE,,m.run_armor_check(null,"bomb"))
 
 /obj/vehicles/relaymove(var/mob/user, var/direction)
 	if(world.time < next_move_input_at)
