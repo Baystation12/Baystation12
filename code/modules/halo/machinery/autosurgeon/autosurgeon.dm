@@ -32,7 +32,7 @@
 	var/obj/item/organ/external/surgery_target_ext
 	var/obj/item/organ/internal/surgery_target_int
 
-	var/list/allowed_species = list(/datum/species/human)
+	var/list/allowed_species = list(/datum/species/human, /datum/species/spartan)
 
 /obj/machinery/autosurgeon/New()
 	. = ..()
