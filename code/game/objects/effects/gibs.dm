@@ -14,11 +14,12 @@
 	icon_state = "x"
 
 	New(location, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
-		..()
 
 		if(fleshcolor) src.fleshcolor = fleshcolor
 		if(bloodcolor) src.bloodcolor = bloodcolor
 		if(MobDNA)     src.MobDNA = MobDNA
+
+		. = ..()
 
 	Initialize()
 		..()
