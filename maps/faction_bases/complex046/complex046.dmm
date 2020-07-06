@@ -33,7 +33,7 @@
 "aG" = (/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (EAST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 4},/area/faction_base/oni/cryodorms)
 "aH" = (/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (WEST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 8},/area/faction_base/oni/cryodorms)
 "aI" = (/obj/machinery/light{dir = 1; icon_state = "tube1"},/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
-"aJ" = (/obj/effect/landmark/start{name = "ONI Researcher"},/turf/simulated/floor/tech/white,/area/faction_base/oni/cryodorms)
+"aJ" = (/obj/effect/landmark/start{name = "ONI Research Director"},/obj/effect/landmark/start{name = "ONI Researcher"},/turf/simulated/floor/tech/white,/area/faction_base/oni/cryodorms)
 "aK" = (/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "aL" = (/obj/structure/closet{icon_closed = "toolcloset"; icon_opened = "toolclosetopen"; icon_state = "toolcloset"},/obj/item/weapon/wrench,/obj/item/weapon/crowbar,/obj/item/weapon/screwdriver,/obj/item/weapon/weldingtool/hugetank,/obj/item/weapon/wirecutters,/obj/item/device/multitool,/obj/item/device/analyzer,/obj/item/stack/cable_coil,/obj/item/clothing/gloves/insulated,/obj/item/clothing/glasses/welding,/obj/machinery/camera/autoname/invis/odp_cassius,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "aM" = (/obj/machinery/autolathe/ammo_fabricator/oni_fab,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
@@ -231,6 +231,7 @@
 "ew" = (/obj/machinery/light/colored/blue,/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ex" = (/obj/machinery/research/component_dissembler,/obj/machinery/light/colored/blue{icon_state = "blue1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ey" = (/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
+"ez" = (/obj/effect/landmark/start{name = "ONI Researcher"},/obj/effect/landmark/start{name = "ONI Research Director"},/turf/simulated/floor/tech/white,/area/faction_base/oni/cryodorms)
 "eA" = (/obj/effect/floor_decal/industrial/hatch/yellow,/obj/vehicles/mongoose,/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "eB" = (/obj/structure/ai_terminal/unsc/odp_cassius,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
 "eC" = (/obj/machinery/light,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
@@ -328,7 +329,7 @@ aafoacacayafafafaffVafafafahfnabfWaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaasatauasaUfZfZfZasasasasasasaDaDaDaDaeaeaeaeaeaeaeaeaeaeaeaeaeaDaDaDaDaDaDaDaDaDaDaDaDaaaaaaaaaaaaaa
 aaasbgbqbPaWaWaWaWcicjcjcjcjfIaEaIaKaLaeaeamaoapavazapavapapapaAaDaMaNaNaOaPbdaPaKaKflaDaaaaaaaaaaaaaa
 aaasckbqaWaWaWaWaWdDcjdDcjdDcjaQaKaKaSaeaBaCaFaCaFaCaFaCaFaCaFaGaDaPaPaPaPbeaPaPaKaKaKaDaaaaaaaaaaaaaa
-aaasbqbqaWaWaWaWaWaWaWaWaWaWaWaTaKaKaXaeaHaJfmaJfmaJfmaJfmaJfmaGaDbLaPaKaKaKaPaPaKaKcfaDaaaaaaaaaaaaaa
+aaasbqbqaWaWaWaWaWaWaWaWaWaWaWaTaKaKaXaeaHaJfmezfmezfmezfmezfmaGaDbLaPaKaKaKaPaPaKaKcfaDaaaaaaaaaaaaaa
 aaasbqcmcjcjcjaWaWaWaWaWaWaWaWcaaKaKcxaeaRaVaVaVaYaZaVaVbabbaVbcaDaPaPaKaKaKaPaPaKaKaKaDaaaaaaaaaaaaaa
 aaasbqbqcjcjcjaWaWaWaWcjeAeAeDaDdbdbdcaeaeaeaeaeaeaecIddaeaeaeaeaDdedlaDaDaDdQdTaDaDaDaDaaaaaaaaaaaaaa
 aaasbqbqeGcjcjaWaWaWaWcjcjcjcjasdbdbdRdHdIdIdIdIdIdSdbdbdKaKaKaIaKaPaPdLdFdFdFdFdJdFdFaDaaaaaaaaaaaaaa
