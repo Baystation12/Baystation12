@@ -404,7 +404,7 @@
 					speed[speed_index_target] = min(speed[speed_index_target] + drag,0)
 			if(world.time >= next_move_input_at)
 				last_moved_axis = 0
-			if(move_sound)
+			if(move_sound && world.time % 2 == 0)
 				playsound(loc,move_sound,75,0,4)
 		if(speed_index_target == 1)
 			moving_x = 0
