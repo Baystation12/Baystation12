@@ -12,6 +12,7 @@
 	icon = 'code/modules/halo/doors/airlockblastdouble/airlockblastdouble_iso.dmi'
 	opacity = 0
 	glass = 1
+	glass_file = null
 
 /obj/machinery/door/airlock/multi_tile/halo/secure
 	name = "Secure Airlock"
@@ -19,3 +20,4 @@
 	deny_file = 'code/modules/halo/doors/Secure2x1.dmi'
 	opacity = 0
 	glass = 1
+	glass_file = null
