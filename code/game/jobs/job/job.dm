@@ -207,7 +207,7 @@
 					var/total_faction_players = 0
 					for(var/faction_type in ticker.mode.faction_balance)
 						var/datum/faction/F = GLOB.factions_by_type[faction_type]
-						total_faction_players += F.living_minds.len
+						total_faction_players += F.players_alive()
 
 					//only try balancing if people have actually joined
 					if(debug_pop_balance)	to_debug_listeners("[total_faction_players] active")
@@ -217,7 +217,7 @@
 						max_ratio += max_ratio * GLOB.max_overpop
 
 						//how many players do we have?
-						var/my_faction_players = my_faction.living_minds.len
+						var/my_faction_players = my_faction.players_alive()
 						var/my_ratio = my_faction_players / total_faction_players
 
 						//are we overpopped?

@@ -1,7 +1,7 @@
 /obj/item/weapon/gun/energy/plasmarifle
 	name = "Type-25 Directed Energy Rifle"
 	desc = "Also known as the \"Plasma Rifle\", this weapon fires 3-shot bursts of superheated plasma."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Rifle"
 	item_state = "plasmarifle"
 	slot_flags = SLOT_BELT|SLOT_BACK
@@ -22,7 +22,7 @@
 	accuracy = 1
 	one_hand_penalty = 2
 
-	overheat_capacity = 24 //6 clicks/bursts
+	overheat_capacity = 48
 	overheat_fullclear_delay = 30
 	overheat_sfx = 'code/modules/halo/sounds/plasrifle_overheat.ogg'
 

@@ -16,7 +16,7 @@
 
 
 	occupants = list(1,1)
-	exposed_positions = list("driver" = 10,"passenger" = 10,"gunner" = 10)
+	exposed_positions = list("driver" = 0,"passenger" = 5,"gunner" = 5)
 
 	vehicle_size = ITEM_SIZE_VEHICLE
 	capacity_flag = ITEM_SIZE_NORMAL
@@ -72,7 +72,6 @@
 	capacity_flag = ITEM_SIZE_LARGE
 
 	occupants = list(2,0)
-	exposed_positions = list("driver" = 10,"passenger" = 10)
 
 /obj/vehicles/warthog/troop
 	name = "M12 Warthog LRV Troop Transport Modified"
@@ -84,7 +83,7 @@
 	max_speed = 2.4
 
 	occupants = list(6,0)
-	exposed_positions = list("driver" = 10,"passenger" = 15)
+	exposed_positions = list("driver" = 0,"passenger" = 10)
 
 /obj/vehicles/warthog/troop/police
 	name = "M12 Warthog LRV Police Modified"

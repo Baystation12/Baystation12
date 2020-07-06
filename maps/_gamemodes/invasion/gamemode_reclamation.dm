@@ -26,6 +26,8 @@
 		/datum/job/colonist/mayor,\
 		/datum/job/colony_ai)
 
+	votable = 1
+
 /datum/game_mode/outer_colonies/reclamation/setup_objectives()
 	. = ..()
 

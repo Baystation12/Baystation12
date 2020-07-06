@@ -10,7 +10,7 @@
 /obj/item/weapon/melee/energy/elite_sword
 	name = "Type-1 Energy Weapon"
 	desc = "A small handle conceals the equipment required to generate a long shimmering blade of shaped plasma, capable of burning through most armor with ease."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "T1EW Handle"
 	var/icon_state_deployed = "T1EW-deployed"
 	var/inhand_icon_state = "Energy sword_inhand Human" // " l" or " r" is added after this to make the variants
@@ -122,7 +122,7 @@
 /obj/item/weapon/melee/energy/elite_sword/dagger
 	name = "Energy Dagger"
 	desc = "Utilising the same technology as the type-1 energy weapon, this dagger projects blades of plasma."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "en_dag_handle"
 	icon_state_deployed = "en_dag_deploy"
 	w_class = ITEM_SIZE_SMALL
@@ -164,7 +164,7 @@
 /obj/item/weapon/melee/energy/elite_sword/honour_staff
 	name = "Honour Guard Staff"
 	desc = "A ceremonial staff typically wielded by Sangheili Honour Guards. While not fit for a true battle, it serves well for beating unruly unngoy."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "honourstaff"
 	//icon_state_deployed = "honourstaff-active"
 	w_class = ITEM_SIZE_HUGE
@@ -321,7 +321,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 /obj/item/weapon/melee/baton/humbler/covenant
 	name = "Type-12 Antipersonnel Incapacitator"
 	desc = "A retractable baton capable of inducing a large amount of pain via electrical shocks."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Type-12 Antipersonnel Incapacitator"
 	item_state = "telebaton_0"
 	matter = list("nanolaminate" = 1)

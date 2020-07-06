@@ -14,7 +14,7 @@
 
 	ammo_containers = newlist(/obj/item/ammo_magazine/wraith_coax,/obj/item/ammo_magazine/wraith_cannon)
 
-	exposed_positions = list("gunner" = 5)
+	exposed_positions = list("gunner" = 0)
 
 	occupants = list(0,1)
 

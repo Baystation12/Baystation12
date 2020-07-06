@@ -2,7 +2,7 @@
 /obj/item/weapon/gun/energy/plasmapistol
 	name = "Type-25 Directed Energy Pistol"
 	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Plasma Pistol"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER|SLOT_POCKET|SLOT_BACK
 	fire_sound = 'code/modules/halo/sounds/haloplasmapistol.ogg'
@@ -36,7 +36,7 @@
 
 /obj/item/weapon/gun/energy/plasmapistol/New()
 	. = ..()
-	overcharge_cost = max_shots / 4
+	overcharge_cost = charge_cost * 4
 
 /obj/item/weapon/gun/energy/plasmapistol/attack_self(var/mob/user)
 	if(power_supply.charge >= overcharge_cost)
@@ -90,7 +90,7 @@
 /obj/item/weapon/gun/energy/plasmapistol/trainingpistol
 	name = "Type-25B Directed Energy (Training) Pistol"
 	desc = "A dual funtionality pistol: It fires bolts of plasma, and when overcharged is capable of emitting a small emp burst at the point of impact. This one appears to be modified to fire very weak bolts of energy."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Training Pistol"
 	projectile_type = /obj/item/projectile/bullet/covenant/trainingpistol
 
@@ -122,7 +122,7 @@
 /obj/item/weapon/gun/projectile/needler // Uses "magazines" to reload rather than inbuilt cells.
 	name = "Type-33 Guided Munitions Launcher"
 	desc = "This weapon fire razor-sharp crystalline shards which can explode violently when embedded into targets."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Needler"
 	item_state = "needler"
 	slot_flags = SLOT_BELT||SLOT_HOLSTER

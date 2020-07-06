@@ -85,6 +85,14 @@
 		var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 		if(L)
 			return
+
+		//don't build over stairs
+		var/turf/T = GetBelow(src)
+		var/obj/structure/stairs/S = locate() in T.contents
+		if(istype(S))
+			to_chat(user,"\icon[S] <span class='warning'>You cannot build a lattice over [S]!</span>")
+			return
+
 		var/obj/item/stack/rods/R = C
 		if (R.use(1))
 			to_chat(user, "<span class='notice'>You lay down the support lattice.</span>")

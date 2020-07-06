@@ -148,7 +148,7 @@
 	name = "Internal Energy Dagger"
 	desc = "A wrist-mounted Energy Dagger that extends from sangheili combat gauntlets"
 
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "en_dag_deploy"
 	w_class = ITEM_SIZE_NORMAL
 	force = 30

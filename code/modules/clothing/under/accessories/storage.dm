@@ -134,11 +134,11 @@
 		/obj/item/weapon/reagent_containers/hypospray,
 		/obj/item/weapon/reagent_containers/hypospray/autoinjector,
 		/obj/item/weapon/syringe_cartridge,
-		/obj/item/weapon/plastique,
 		/obj/item/clothing/mask/smokable,
 		/obj/item/weapon/screwdriver,
 		/obj/item/device/multitool,
 		/obj/item/weapon/magnetic_ammo,
-		/obj/item/ammo_magazine
+		/obj/item/ammo_magazine,
+		/obj/item/weapon/grenade/smokebomb
 	)
 

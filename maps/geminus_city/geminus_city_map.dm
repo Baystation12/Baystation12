@@ -24,3 +24,4 @@
 	overmap_event_tokens = 50
 
 	use_overmap = 1
+	allowed_gamemodes = list("reclamation")

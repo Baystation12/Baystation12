@@ -13,7 +13,7 @@
 	comp_prof = /datum/component_profile/mongoose
 
 	occupants = list(1,0)
-	exposed_positions = list("driver" = 40,"passenger" = 40)
+	exposed_positions = list("driver" = 5,"passenger" = 15)
 
 	sprite_offsets = list("1" = list(0,3),"2" = list(0,3),"4" = list(0,3),"8" = list(0,3))
 

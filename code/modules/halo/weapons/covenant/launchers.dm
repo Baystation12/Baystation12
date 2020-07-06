@@ -10,7 +10,7 @@
 	magazine_type = /obj/item/ammo_magazine/fuel_rod
 	fire_delay = 10 //Slightly higher due to higher magsize
 	one_hand_penalty = -1
-	dispersion = list(1.4)
+	dispersion = list(0.73)
 	caliber = "fuel rod"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE

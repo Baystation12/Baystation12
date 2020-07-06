@@ -2,7 +2,7 @@
 /obj/item/weapon/gun/energy/plasmarepeater
 	name = "Type-51 Directed Energy Rifle"
 	desc = "Also known as the \"Plasma Repeater\", this weapon fires long bursts of superheated plasma. A unique ventilation and cooling system gives it a reversed dispersion and accuracy profile."
-	icon = 'code/modules/halo/icons/Covenant Weapons.dmi'
+	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "plasmarepeater"
 	item_state = "repeater"
 	w_class = ITEM_SIZE_HUGE

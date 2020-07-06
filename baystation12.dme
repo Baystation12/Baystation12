@@ -1798,6 +1798,7 @@
 #include "code\modules\halo\machinery\ammo_fabricator_datums.dm"
 #include "code\modules\halo\machinery\atmos_blastdoor.dm"
 #include "code\modules\halo\machinery\boarding_beacon_launcher.dm"
+#include "code\modules\halo\machinery\generic_door_subtype_defines.dm"
 #include "code\modules\halo\machinery\npc_comms.dm"
 #include "code\modules\halo\machinery\scanning_console.dm"
 #include "code\modules\halo\machinery\autosurgeon\_defines.dm"
