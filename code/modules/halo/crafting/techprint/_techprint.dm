@@ -35,12 +35,13 @@
 	//an approximate indicator of how "complete" a techprint is
 	consumables_max = required_reagents.len + required_materials.len + required_objs.len
 
-	if(Master.current_runlevel > RUNLEVEL_INIT)
-		LateInitialize()
-	else
-		//this isnt good coding practice but also
-		//i fucked your mum last night
-		GLOB.tech_lateloaders.Add(src)
+	if(!is_category())
+		if(Master.current_runlevel > RUNLEVEL_INIT)
+			LateInitialize()
+		else
+			//this isnt good coding practice but also
+			//i fucked your mum last night
+			GLOB.tech_lateloaders.Add(src)
 
 /datum/techprint/proc/LateInitialize()
 	InitializeDependencies()
@@ -55,7 +56,7 @@
 			src.required_for = template.required_for.Copy()
 		else
 			to_debug_listeners("TECH ERROR (critical): no global template for [src.type] yet still trying to initialize deps!")
-			CRASH("TECH ERROR (critical)")
+			//CRASH("TECH ERROR (critical)")
 
 /datum/techprint/proc/clone()
 	//create it

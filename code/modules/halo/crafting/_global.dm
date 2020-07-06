@@ -40,7 +40,11 @@ GLOBAL_LIST_EMPTY(tech_lateloaders)
 		for(var/req_type in new_techprint.tech_req_one + new_techprint.tech_req_all)
 			//grab that template, and tell it we need it
 			var/datum/techprint/req_tech = GLOB.techprints_by_type[req_type]
-			req_tech.required_for |= new_techprint.type
+			if(req_tech)
+				req_tech.required_for |= new_techprint.type
+			else
+				to_debug_listeners("TECH ERROR: tech dependency [req_type] for [new_techprint.type] \
+					does not exist")
 
 		//as these are templates, it replaces the standard dependency initialization
 		new_techprint.init_deps = TRUE
