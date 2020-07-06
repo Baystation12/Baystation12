@@ -60,12 +60,6 @@
 					else
 						ui_SetProgress(check_index, 100)
 
-					//update the sprite
-					if(design_queue.len)
-						craft_status = 2
-					else
-						craft_status = 0
-
 					//one less parallel crafting
 					crafts_left -= 1
 
@@ -78,6 +72,12 @@
 						var/cancel_index = design_queue.Find(E)
 						design_queue.Cut(cancel_index, cancel_index + 1)
 						ui_UnQueue(cancel_index)
+
+					//update the sprite
+					if(design_queue.len)
+						craft_status = 2
+					else
+						craft_status = 0
 
 			else
 				//set the ui entry to clear

@@ -43,18 +43,23 @@
 /obj/machinery/research/protolathe/Initialize()
 	..()
 
-	return INITIALIZE_HINT_LATELOAD
+	if(Master.current_runlevel > RUNLEVEL_INIT)
+		LateInitialize()
+	else
+		GLOB.tech_lateloaders.Add(src)
 
 /obj/machinery/research/protolathe/LateInitialize()
 
-	/*
-	//for testing
-	all_designs = GLOB.all_designs.Copy()
-	designs_by_name = GLOB.designs_by_name.Copy()
-	*/
+	//grab the base list of craftable stuff
+	for(var/design_type in GLOB.UNSC.get_base_designs())
+		//get the template
+		var/datum/research_design/D = GLOB.designs_by_type[design_type]
 
-	//setup the UI
-	for(var/datum/research_design/D in all_designs)
+		//start tracking it
+		all_designs.Add(D)
+		designs_by_name[D.name] = D
+
+		//add a ui entry
 		ui_AddDesign(D)
 
 /obj/machinery/research/protolathe/RefreshParts()

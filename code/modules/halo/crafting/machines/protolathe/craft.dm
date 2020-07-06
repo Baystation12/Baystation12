@@ -31,8 +31,6 @@
 
 	//tell the player
 	if(resourced)
-		//use the resources now
-		use_resources(D)
 		to_chat(user, "<span class='info'>You add [D.name] to [src]'s production queue.</span>")
 	else
 		to_chat(user, "<span class='notice'>Insufficient resources to craft [D.name], please insert more.</span>")

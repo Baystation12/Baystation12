@@ -19,10 +19,11 @@
 	//check components
 	for(var/check_type in D.required_objs)
 		var/amount = stored_components[check_type]
-		if(!amount || amount < D.required_objs[check_type])
+		if(!amount)
 			return FALSE
 
 /obj/machinery/research/protolathe/proc/use_resources(var/datum/research_design/D)
+	//to_debug_listeners("/obj/machinery/research/protolathe/proc/use_resources([D.type])")
 
 	//check materials
 	for(var/check_name in D.required_materials)

@@ -12,7 +12,9 @@
 		/obj/item/device/assembly/timer,\
 		/obj/item/device/assembly/igniter,\
 		/datum/autolathe/recipe/sensor_prox,\
-		/datum/autolathe/recipe/sensor_infra)
+		/datum/autolathe/recipe/sensor_infra,\
+		/obj/item/dumb_ai_chip,\
+		/obj/item/weapon/reagent_containers/syringe)
 
 /obj/machinery/research/protolathe/proc/attempt_load_obj(var/obj/item/I, var/mob/user as mob)
 
