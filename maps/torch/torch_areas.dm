@@ -1038,21 +1038,21 @@
 	name = "\improper Security Wing"
 	icon_state = "security"
 
-/area/security/bridgecheck
+/area/security/checkpoint
+	icon_state = "checkpoint"
+	req_access = list(list(access_sec_doors, access_bridge))
+
+/area/security/checkpoint/bridgecheck
 	name = "\improper Bridge Deck Security Checkpoint"
-	icon_state = "checkpoint"
 
-/area/security/opscheck
+/area/security/checkpoint/opscheck
 	name = "\improper First Deck Security Checkpoint"
-	icon_state = "checkpoint"
 
-/area/security/habcheck
+/area/security/checkpoint/habcheck
 	name = "\improper Third Deck Security Checkpoint"
-	icon_state = "checkpoint"
 
-/area/security/hangcheck
+/area/security/checkpoint/hangcheck
 	name = "\improper Fourth Deck Security Checkpoint"
-	icon_state = "checkpoint"
 
 // AI
 /area/turret_protected/ai_foyer
