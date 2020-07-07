@@ -9,6 +9,7 @@ var/const/SRV               =(1<<7)
 var/const/SUP               =(1<<8)
 var/const/SPT               =(1<<9)
 var/const/EXP               =(1<<10)
+var/const/ROB               =(1<<11)
 
 SUBSYSTEM_DEF(jobs)
 	name = "Jobs"

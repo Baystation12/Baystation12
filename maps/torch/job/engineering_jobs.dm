@@ -162,7 +162,7 @@
 /datum/job/roboticist
 	title = "Roboticist"
 	department = "Engineering"
-	department_flag = ENG
+	department_flag = ENG|ROB
 
 	total_positions = 2
 	spawn_positions = 2
