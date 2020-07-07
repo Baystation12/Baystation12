@@ -2,7 +2,7 @@
 /obj/machinery/research/component_dissembler
 	name = "component dissembler"
 	desc = "Breaks things down into their components."
-	icon = 'code/modules/halo/crafting/machines/heavy_lathe.dmi'
+	icon = 'code/modules/halo/research/machines/heavy_lathe.dmi'
 	icon_state = "h_lathe"
 	bound_width = 64	//long boy
 

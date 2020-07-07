@@ -1,6 +1,6 @@
 
 /obj/machinery/research
-	icon = 'code/modules/halo/crafting/machines/research.dmi'
+	icon = 'code/modules/halo/research/machines/research.dmi'
 	anchored = 1
 	density = 1
 	use_power = 1
