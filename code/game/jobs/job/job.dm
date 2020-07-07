@@ -186,7 +186,7 @@
 
 
 	//is this gamemode trying to balance the faction population?
-	var/num_balancing_factions = ticker.mode.faction_balance.len
+	var/num_balancing_factions = ticker.mode ? ticker.mode.faction_balance.len : 0
 	if(num_balancing_factions >= 2)
 		if(debug_pop_balance)	to_debug_listeners("Checking gamemode balance for [src.title]...")
 

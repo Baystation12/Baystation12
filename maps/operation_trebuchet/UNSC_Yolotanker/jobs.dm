@@ -6,7 +6,7 @@
 
 	supervisors = "the Squad Leader and Commander"
 
-	outfit_type = /decl/hierarchy/outfit/job/UNSC_Assault
+	outfit_type = /decl/hierarchy/outfit/job/unsc/odst/e5
 	whitelisted_species = list(/datum/species/human)
 
 	latejoin_at_spawnpoints = TRUE
@@ -18,6 +18,7 @@
 	total_positions = 2
 	spawn_positions = 2
 	selection_color = "#000000"
+	outfit_type = /decl/hierarchy/outfit/job/unsc/odst
 
 	supervisors = "the Commander"
 
@@ -27,6 +28,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	department_flag = COM
+	outfit_type = /decl/hierarchy/outfit/job/unsc/odst/e8
 
 	supervisors = "UNSC HIGHCOM"
 
