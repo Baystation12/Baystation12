@@ -87,6 +87,18 @@
 
 			working_list.Add(child_type)
 
+	//this is so it can properly hide techs in the reqs string
+	for(var/datum/techprint/new_techprint in bonus_techs)
+		new_techprint.UpdateReqsString(src)
+
+		//unhide this one from the requirements if we have it
+		for(var/update_type in new_techprint.required_for)
+			var/datum/techprint/update_techprint = src.techprints_by_type[update_type]
+
+			//some of it's future techs might be hidden as well
+			if(update_techprint)
+				update_techprint.UpdateReqsString(src)
+
 /datum/computer_file/research_db/proc/add_techprint(var/techprint_type)
 	var/datum/techprint/new_techprint = new techprint_type()
 

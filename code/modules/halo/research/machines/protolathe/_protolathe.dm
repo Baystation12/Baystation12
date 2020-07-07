@@ -56,6 +56,9 @@
 		//get the template
 		var/datum/research_design/D = GLOB.designs_by_type[design_type]
 
+		if(D.build_type != PROTOLATHE)
+			continue
+
 		//start tracking it
 		all_designs.Add(D)
 		designs_by_name[D.name] = D

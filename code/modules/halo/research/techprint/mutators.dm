@@ -40,6 +40,7 @@
 
 /datum/techprint/proc/GetReqsString()
 	if(!reqs_string)
+		to_debug_listeners("TECH WARNING: [src.type]/proc/GetReqsString_test() called when var/reqs_string was null")
 		UpdateReqsString()
 	return reqs_string
 
