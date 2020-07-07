@@ -1,0 +1,4 @@
+author: "ozwe11"
+delete-after: True
+changes: 
+  - tweak: "Makes adjustments to fix the Scan Target ghost verb, allowing ghosts to perform a basic health scan on mobs they are following."
