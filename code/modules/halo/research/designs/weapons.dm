@@ -5,7 +5,7 @@
 	build_type = PROTOLATHE
 	required_materials = list("osmium-carbide plasteel" = 60)
 	required_reagents = list(/datum/reagent/mercury = 60, /datum/reagent/radium = 60)
-	complexity = 20
+	complexity = 100
 
 /datum/research_design/railgun
 	name = "Asymmetric Recoilless Carbine-920"
@@ -13,4 +13,4 @@
 	build_type = PROTOLATHE
 	required_materials = list("osmium-carbide plasteel" = 40)
 	required_reagents = list(/datum/reagent/mercury = 40, /datum/reagent/radium = 40)
-	complexity = 15
+	complexity = 75
