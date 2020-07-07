@@ -301,7 +301,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/ghost/stop_following()
 	if(following)
 		to_chat(src, "<span class='notice'>No longer following \the [following]</span>")
-		verbs -= /mob/observer/ghost/proc/scan_target
 	..()
 
 /mob/observer/ghost/keep_following(var/atom/movable/am, var/old_loc, var/new_loc)
@@ -338,7 +337,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		var/rads = SSradiation.get_rads_at_turf(t)
 		to_chat(src, "<span class='notice'>Radiation level: [rads ? rads : "0"] Roentgen.</span>")
 
-/mob/observer/ghost/proc/scan_target()
+/mob/observer/ghost/verb/scan_target()
 	set name = "Scan Target"
 	set category = "Ghost"
 	set desc = "Analyse whatever you are following."
