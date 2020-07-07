@@ -128,9 +128,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
-"aw" = (
-/turf/simulated/floor/plating,
-/area/miningstation/hangar)
 "ax" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
@@ -184,8 +181,7 @@
 /area/miningstation/hangar)
 "aE" = (
 /obj/structure/lattice,
-/turf/space,
-/area/miningstation/power)
+/turf/space)
 "aF" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -337,13 +333,13 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 5
-	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "aX" = (
@@ -411,6 +407,7 @@
 	icon_state = "warning";
 	pixel_y = 6
 	},
+/obj/machinery/light,
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "bg" = (
@@ -441,6 +438,7 @@
 	dir = 4
 	},
 /obj/structure/catwalk,
+/obj/machinery/light,
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "bi" = (
@@ -475,8 +473,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/structure/catwalk,
-/turf/simulated/floor/plating,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangar)
 "bl" = (
 /obj/machinery/power/terminal{
@@ -604,10 +603,6 @@
 /obj/machinery/mining/brace,
 /turf/simulated/floor/tiled/monotile,
 /area/miningstation/hangar)
-"bx" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/power)
 "by" = (
 /obj/machinery/door/airlock/external/bolted,
 /obj/structure/cable{
@@ -623,27 +618,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/power)
-"bz" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 9
-	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/cryo)
-"bA" = (
-/obj/machinery/light,
-/turf/simulated/floor/tiled/monotile,
-/area/miningstation/hangar)
-"bB" = (
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
-/obj/machinery/light,
-/turf/simulated/floor/tiled/monotile,
-/area/miningstation/hangar)
 "bC" = (
 /obj/structure/catwalk,
 /obj/machinery/mining/drill,
@@ -692,46 +666,30 @@
 /turf/simulated/floor/reinforced/airless,
 /area/miningstation/power)
 "bI" = (
-/obj/machinery/door/airlock/multi_tile/civilian,
-/obj/machinery/door/firedoor,
-/obj/effect/decal/cleanable/blood/tracks/body,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangar)
-"bJ" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
 	},
-/obj/machinery/door/firedoor,
-/turf/space,
-/area/miningstation/hangar)
-"bK" = (
-/obj/machinery/door/airlock/multi_tile/civilian,
-/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangar)
+/area/miningstation/hangarhall)
 "bM" = (
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/door/firedoor,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangar)
-"bN" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/prep2)
+/area/miningstation/hangarhall)
 "bO" = (
 /obj/structure/catwalk,
 /turf/simulated/floor/airless/ceiling,
 /area/miningstation/power)
-"bP" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/hangarhall)
 "bQ" = (
 /obj/structure/closet/firecloset,
 /obj/effect/floor_decal/industrial/hatch,
@@ -745,6 +703,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "bS" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "bT" = (
@@ -755,16 +716,11 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
-"bU" = (
-/obj/machinery/light{
-	dir = 1;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
 "bV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "bW" = (
@@ -792,15 +748,13 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/power)
 "cb" = (
 /obj/machinery/firealarm,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
-"cc" = (
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
 "cd" = (
 /obj/structure/dispenser/oxygen,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -836,10 +790,14 @@
 /area/miningstation/cryo)
 "cj" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/firedoor,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangar)
+/area/miningstation/hangarhall)
 "ck" = (
 /obj/structure/fireaxecabinet,
 /obj/effect/paint/black,
@@ -856,13 +814,6 @@
 /obj/random/trash,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
-"cn" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
 "co" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
@@ -876,6 +827,8 @@
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "cq" = (
@@ -950,6 +903,9 @@
 	icon_state = "2-4"
 	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "cD" = (
@@ -971,6 +927,7 @@
 	icon_state = "warning";
 	pixel_y = 6
 	},
+/obj/machinery/light,
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
 "cF" = (
@@ -1018,17 +975,6 @@
 /obj/structure/mech_wreckage,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
-"cL" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/mob/living/simple_animal/hostile/meat/abomination,
-/turf/simulated/floor/tiled/white,
-/area/miningstation/intensive)
 "cM" = (
 /obj/machinery/door/airlock/civilian,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -1047,10 +993,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
-"cO" = (
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
 "cP" = (
 /obj/structure/table/rack,
 /obj/structure/catwalk,
@@ -1073,6 +1015,9 @@
 	icon_state = "1-8"
 	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "cT" = (
@@ -1087,6 +1032,7 @@
 	icon_state = "1-2"
 	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "cU" = (
@@ -1140,13 +1086,9 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/random/trash,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "da" = (
@@ -1245,12 +1187,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 1
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 1
-	},
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "dl" = (
@@ -1276,7 +1214,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
-/obj/effect/landmark/corpse/miningstation/deadminersuit,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
 "dn" = (
@@ -1327,19 +1264,18 @@
 /obj/structure/bed/chair/office{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "dt" = (
 /obj/structure/catwalk,
 /obj/structure/table/steel,
 /obj/item/weapon/paper_bin,
-/obj/item/weapon/paper/miner_note_6_2,
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "du" = (
 /obj/structure/catwalk,
 /obj/machinery/atmospherics/unary/vent_pump/on,
+/mob/living/simple_animal/hostile/meat/strippedhuman,
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "dv" = (
@@ -1354,7 +1290,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
-/mob/living/simple_animal/hostile/meat/horrorminer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
 "dw" = (
@@ -1390,7 +1325,7 @@
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/mob/living/simple_animal/hostile/meat/horrorminer,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "dz" = (
@@ -1561,14 +1496,6 @@
 /obj/item/weapon/inflatable_dispenser,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
-"dM" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
 "dN" = (
 /obj/machinery/door/airlock/civilian,
 /obj/structure/cable{
@@ -1622,9 +1549,6 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 9
-	},
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -25
@@ -1633,6 +1557,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "dR" = (
@@ -1645,6 +1570,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "dS" = (
@@ -1654,6 +1582,7 @@
 	icon_state = "1-4"
 	},
 /obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/plating,
 /area/miningstation/power)
 "dT" = (
@@ -1700,10 +1629,6 @@
 /obj/machinery/photocopier/faxmachine,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
-"dY" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/prep)
 "dZ" = (
 /obj/machinery/door/airlock/multi_tile/civilian,
 /obj/machinery/door/firedoor,
@@ -1719,11 +1644,6 @@
 /obj/machinery/door/firedoor,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep)
-"eb" = (
-/obj/structure/fireaxecabinet,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
 /area/miningstation/prep)
 "ec" = (
 /obj/machinery/door/airlock/multi_tile/civilian,
@@ -2008,10 +1928,6 @@
 /obj/machinery/door/blast/regular,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
-"eL" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/vault)
 "eM" = (
 /obj/machinery/power/terminal{
 	dir = 8
@@ -2130,7 +2046,6 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/obj/effect/landmark/corpse/miningstation/deadminersuit,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
 "eW" = (
@@ -2158,22 +2073,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
-"eY" = (
-/obj/machinery/power/terminal{
-	dir = 1
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24;
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
-	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
 "eZ" = (
 /obj/structure/table/rack,
 /obj/random/technology_scanner,
@@ -2196,14 +2095,7 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/vault)
-"fd" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
+/mob/living/simple_animal/hostile/meat/abomination,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
 "fe" = (
@@ -2218,13 +2110,11 @@
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
-"fg" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/vault)
 "fh" = (
 /obj/machinery/light{
 	dir = 1
 	},
+/mob/living/simple_animal/hostile/meat/abomination,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
 "fi" = (
@@ -2277,10 +2167,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
-"fo" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/cryo)
 "fq" = (
 /obj/machinery/mech_recharger,
 /obj/structure/mech_wreckage,
@@ -2368,9 +2254,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/prep2)
 "fB" = (
-/obj/random/trash,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/walkin)
 "fD" = (
 /turf/simulated/wall/titanium,
 /area/miningstation/fix)
@@ -2381,25 +2267,8 @@
 /obj/random/projectile,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
-"fF" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/vault)
 "fG" = (
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/vault)
-"fH" = (
-/obj/random/trash,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/vault)
-"fI" = (
-/obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
 "fJ" = (
@@ -2472,9 +2341,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/vault)
 "fS" = (
-/obj/structure/lattice,
-/turf/space,
-/area/miningstation/hangarhall)
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "fT" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/effect/floor_decal/industrial/warning{
@@ -2549,15 +2420,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
-"gg" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
 "gh" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector{
@@ -2566,10 +2428,6 @@
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor/plating,
 /area/miningstation/fix)
-"gi" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/bridge)
 "gj" = (
 /obj/structure/noticeboard,
 /obj/effect/paint/black,
@@ -2595,15 +2453,11 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
-"gm" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/bathroom)
 "gn" = (
 /obj/structure/sign/warning/secure_area,
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/vault)
+/area/miningstation/operationshall2)
 "go" = (
 /obj/machinery/door/airlock/vault/bolted,
 /obj/structure/cable{
@@ -2613,12 +2467,12 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor,
-/area/miningstation/vault)
+/area/miningstation/operationshall2)
 "gp" = (
 /obj/machinery/door/airlock/vault/bolted,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled/techfloor,
-/area/miningstation/vault)
+/area/miningstation/operationshall2)
 "gq" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -2630,16 +2484,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
-/area/miningstation/bathroom)
-"gr" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/atmos)
-"gs" = (
-/obj/structure/fireaxecabinet,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/atmos)
+/area/miningstation/operationshall2)
 "gt" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 1
@@ -2655,34 +2500,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
-"gu" = (
-/obj/item/device/radio/intercom,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/operationshall)
-"gv" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/intensive)
-"gw" = (
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
-"gx" = (
-/obj/structure/closet/firecloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
 "gy" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
-"gz" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
+/area/miningstation/dormhall)
 "gA" = (
 /obj/machinery/light{
 	dir = 1
@@ -2703,7 +2524,6 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
-/obj/item/weapon/paper/miner_note_4,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "gC" = (
@@ -2717,26 +2537,23 @@
 /obj/structure/filingcabinet/filingcabinet,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
-"gE" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/bridge)
 "gF" = (
 /obj/structure/cable{
 	d1 = 2;
 	d2 = 4;
 	icon_state = "2-4"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
 /obj/structure/catwalk,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1;
 	icon_state = "warning";
 	pixel_y = 6
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 1
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 1
 	},
 /turf/simulated/floor/plating,
 /area/miningstation/hangar)
@@ -2757,28 +2574,14 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
-"gJ" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
-"gK" = (
-/obj/random/trash,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
 "gL" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
+/obj/machinery/light/small{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/miningstation/atmos)
-"gM" = (
-/obj/machinery/alarm,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
 "gN" = (
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled/monotile,
@@ -2808,10 +2611,6 @@
 "gR" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
 /turf/simulated/floor/plating,
 /area/miningstation/atmos)
 "gS" = (
@@ -2832,6 +2631,7 @@
 	icon_state = "4-8"
 	},
 /obj/structure/catwalk,
+/mob/living/simple_animal/hostile/meat/strippedhuman,
 /turf/simulated/floor/plating,
 /area/miningstation/atmos)
 "gU" = (
@@ -2855,27 +2655,22 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
-"gW" = (
-/obj/machinery/firealarm,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
-"gX" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
 "gY" = (
+/obj/machinery/power/terminal{
+	dir = 1
+	},
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
+/area/miningstation/operationshall)
 "gZ" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -2891,21 +2686,11 @@
 /obj/machinery/door/airlock/civilian,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/bridge)
+/area/miningstation/operationshall)
 "ha" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/bridge)
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/dormhall)
 "hb" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -3072,18 +2857,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
-"hl" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/mob/living/simple_animal/hostile/meat/humansecurity,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
-"hm" = (
-/obj/structure/catwalk,
-/obj/machinery/computer/atmos_alert,
-/turf/simulated/floor/plating,
-/area/miningstation/atmos)
 "hn" = (
 /obj/machinery/door/airlock/civilian,
 /obj/structure/cable{
@@ -3098,7 +2871,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/wall/r_titanium,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/atmos)
 "ho" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -3145,22 +2918,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"hr" = (
-/obj/machinery/power/terminal{
-	dir = 1
-	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	pixel_y = 24;
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
-	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
 "hs" = (
 /obj/structure/broken_cryo,
 /obj/effect/floor_decal/industrial/warning{
@@ -3211,10 +2968,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
-"hw" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/janitorcloset)
 "hx" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -3233,7 +2986,6 @@
 	dir = 8;
 	icon_state = "tube1"
 	},
-/obj/item/weapon/paper/miner_note_2,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "hA" = (
@@ -3323,11 +3075,8 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "hJ" = (
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/miningstation/atmos)
 "hK" = (
@@ -3342,7 +3091,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
+/obj/machinery/light/small{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/miningstation/atmos)
 "hM" = (
@@ -3351,10 +3102,6 @@
 	},
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/atmos)
-"hN" = (
-/obj/structure/lattice,
-/turf/space,
 /area/miningstation/atmos)
 "hO" = (
 /obj/structure/cable{
@@ -3397,9 +3144,6 @@
 /area/miningstation/operationshall)
 "hS" = (
 /obj/structure/closet/l3closet/janitor,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/janitorcloset)
-"hT" = (
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/janitorcloset)
 "hU" = (
@@ -3533,6 +3277,7 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/mob/living/simple_animal/hostile/meat/horrorminer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "ij" = (
@@ -3603,10 +3348,6 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/gibspawner/human,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms)
-"ir" = (
 /obj/effect/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
@@ -3699,14 +3440,7 @@
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
-"iB" = (
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
+/area/miningstation/physician1)
 "iC" = (
 /obj/item/weapon/storage/toolbox/electrical,
 /obj/machinery/power/terminal{
@@ -3724,12 +3458,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
-"iD" = (
-/obj/effect/floor_decal/corner/blue{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/intensive)
 "iE" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
@@ -3790,7 +3518,7 @@
 	pixel_x = -32
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "iJ" = (
 /obj/machinery/power/terminal,
 /obj/effect/floor_decal/corner/blue{
@@ -3809,7 +3537,7 @@
 	},
 /obj/structure/cable,
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "iK" = (
 /obj/machinery/power/apc{
 	dir = 1;
@@ -3832,21 +3560,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
-"iL" = (
-/obj/machinery/power/terminal{
-	dir = 4
-	},
-/obj/machinery/power/apc{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/obj/structure/cable{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/miningstation/walkin)
 "iM" = (
 /obj/machinery/power/terminal,
 /obj/machinery/power/apc{
@@ -3892,16 +3605,11 @@
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/bathroom)
-"iR" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
 "iS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/effect/gibspawner/human,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/bathroom)
 "iT" = (
@@ -3926,24 +3634,12 @@
 /obj/machinery/light/small,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/bathroom)
-"iV" = (
-/obj/effect/floor_decal/corner/blue{
-	dir = 9
-	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/intensive)
 "iW" = (
 /obj/structure/curtain/open/privacy,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "iX" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/intensive)
-"iY" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
@@ -4021,16 +3717,11 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
-"jh" = (
-/obj/structure/filingcabinet/wallcabinet,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/chief2)
 "ji" = (
 /obj/machinery/body_scan_display,
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/surgery)
+/area/miningstation/intensive)
 "jj" = (
 /obj/structure/sign/bluecross_2,
 /obj/effect/paint/black,
@@ -4046,12 +3737,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
-/turf/simulated/wall/r_titanium,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/intensive)
-"jl" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/physician2)
 "jm" = (
 /obj/structure/hygiene/shower{
 	dir = 4
@@ -4096,15 +3783,6 @@
 /obj/machinery/vending/lavatory,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
-"js" = (
-/obj/machinery/power/terminal,
-/obj/machinery/power/apc{
-	name = "south bump";
-	pixel_y = -28
-	},
-/obj/structure/cable,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms)
 "jt" = (
 /obj/machinery/door/airlock/civilian,
 /obj/structure/cable{
@@ -4161,11 +3839,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
-"jy" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/corpse/zombiescience,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
 "jz" = (
 /obj/machinery/vitals_monitor,
 /obj/effect/floor_decal/corner/blue{
@@ -4229,7 +3902,7 @@
 /obj/structure/sign/directions/examroom,
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "jE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -4256,7 +3929,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "jH" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/corner/blue{
@@ -4264,7 +3937,7 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "jI" = (
 /obj/machinery/computer/modular/preset/medical,
 /obj/effect/floor_decal/corner/blue,
@@ -4272,12 +3945,13 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "jJ" = (
 /obj/machinery/light{
 	dir = 8;
 	icon_state = "tube1"
 	},
+/mob/living/simple_animal/hostile/meat/strippedhuman,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
 "jK" = (
@@ -4302,14 +3976,9 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
-"jN" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/landmark/corpse/miner,
-/obj/effect/gibspawner/human,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
 "jO" = (
 /obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/landmark/corpse/miningstation/deadminer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "jP" = (
@@ -4376,24 +4045,9 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
 "jW" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
-"jX" = (
-/obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
-"jY" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
+/obj/structure/bed/chair/office,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief)
 "jZ" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor,
@@ -4407,9 +4061,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
 "kb" = (
-/obj/structure/bed/chair/office,
+/obj/machinery/light,
+/mob/living/simple_animal/hostile/meat/strippedhuman,
 /turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief)
+/area/miningstation/bridge)
 "kc" = (
 /obj/machinery/alarm{
 	dir = 8;
@@ -4425,10 +4080,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
-"ke" = (
-/obj/effect/gibspawner/human,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief)
 "kf" = (
 /obj/structure/bed/chair/office,
 /obj/structure/cable{
@@ -4447,9 +4098,6 @@
 /obj/random/toolbox,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
-"kh" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief2)
 "ki" = (
 /obj/structure/table/steel,
 /obj/item/weapon/storage/bible,
@@ -4465,18 +4113,11 @@
 /obj/item/weapon/paper_bin,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
-"kl" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief)
 "km" = (
 /obj/item/weapon/storage/fancy/cigar{
 	pixel_x = 31;
 	pixel_y = 7
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief2)
-"kn" = (
-/obj/structure/table/steel,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
 "ko" = (
@@ -4486,52 +4127,28 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
-"kp" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/dormhall)
 "kq" = (
-/obj/machinery/door/airlock/multi_tile/civilian,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/door/airlock/multi_tile/civilian,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
-"kr" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"ks" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/dorms3)
 "kt" = (
 /obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
 "ku" = (
-/obj/structure/bed/chair/office,
 /obj/machinery/light,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief2)
-"kv" = (
-/obj/machinery/computer/modular/preset/engineering{
-	dir = 8;
-	icon_state = "console"
+/obj/structure/bed/chair/office{
+	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief)
-"kw" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
+/area/miningstation/chief2)
 "kx" = (
-/obj/structure/bed/chair/office,
+/obj/structure/bed/chair/office{
+	dir = 1
+	},
 /obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
@@ -4542,54 +4159,11 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief2)
-"kz" = (
-/obj/structure/closet/emcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kA" = (
-/obj/structure/closet/firecloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "kB" = (
 /obj/machinery/firealarm,
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kC" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kD" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kE" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kF" = (
-/obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "kG" = (
@@ -4605,21 +4179,9 @@
 /obj/random/contraband,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
-"kJ" = (
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kK" = (
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "kL" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms)
 "kM" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -4627,13 +4189,6 @@
 	icon_state = "1-2"
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kN" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "kO" = (
@@ -4659,7 +4214,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/gibspawner/human,
-/obj/effect/landmark/corpse/miningstation/deadmineroverallsf,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "kQ" = (
@@ -4669,20 +4223,13 @@
 	dir = 8;
 	pixel_x = 21
 	},
-/mob/living/simple_animal/hostile/meat/horrorminer,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
-"kR" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	level = 2
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "kS" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/mob/living/simple_animal/hostile/meat/horrorminer,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "kT" = (
@@ -4702,18 +4249,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"kW" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
@@ -4759,44 +4294,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
-"lb" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/random/trash,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"lc" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "ld" = (
 /obj/structure/closet/toolcloset,
 /obj/effect/floor_decal/industrial/hatch,
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
-"le" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms3)
-"lf" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
-"lg" = (
-/obj/random/trash,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "lh" = (
 /obj/random/clipboard,
 /obj/machinery/light{
@@ -4889,14 +4392,15 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "lp" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
+/area/miningstation/hangarhall)
 "lq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5001,25 +4505,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/physician1)
 "lD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
 /obj/machinery/alarm,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
-"lE" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "lF" = (
@@ -5036,7 +4528,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "lG" = (
 /obj/structure/bed/chair/office,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -5046,7 +4538,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "lH" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -5063,6 +4555,7 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/machinery/light,
+/mob/living/simple_animal/hostile/meat/horror,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "lJ" = (
@@ -5246,10 +4739,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
-"lX" = (
-/obj/machinery/light,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "lY" = (
 /obj/structure/closet/crate/trashcart,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -5271,10 +4760,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
-"mb" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/dorms2)
 "mc" = (
 /obj/machinery/door/airlock/civilian,
 /obj/structure/cable{
@@ -5300,14 +4785,23 @@
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
 "me" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/dorms)
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
 "mf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},
-/mob/living/simple_animal/hostile/meat/horror,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
 "mg" = (
@@ -5330,12 +4824,8 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor,
-/turf/simulated/wall/r_titanium,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dorms)
-"mi" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/mess)
 "mj" = (
 /obj/structure/hygiene/sink{
 	dir = 4;
@@ -5344,19 +4834,6 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
-"mk" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
-/mob/living/simple_animal/hostile/meat/abomination,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/bridge)
 "ml" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
@@ -5382,11 +4859,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/miningstation/mess)
-"mn" = (
-/obj/item/device/radio/intercom,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/janitorcloset)
 "mo" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -5411,22 +4883,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/miningstation/mess)
-"mr" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/kitchen)
-"ms" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/airlock/civilian,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/plating,
-/area/miningstation/kitchen)
 "mt" = (
 /obj/structure/table/steel,
 /obj/item/stack/medical/ointment,
@@ -5441,10 +4897,6 @@
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/kitchen)
-"mv" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/walkin)
 "mw" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
@@ -5469,33 +4921,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
-"mz" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/recroom)
-"mA" = (
-/obj/machinery/door/airlock/multi_tile/civilian,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/wood/walnut,
-/area/miningstation/recroom)
-"mB" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/firedoor,
-/turf/simulated/floor/wood/walnut,
-/area/miningstation/recroom)
-"mC" = (
-/obj/structure/closet/toolcloset,
-/obj/effect/floor_decal/industrial/hatch,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms2)
+/area/miningstation/physician1)
 "mD" = (
 /obj/machinery/light,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
@@ -5518,16 +4944,6 @@
 /obj/effect/floor_decal/asteroid,
 /turf/simulated/mineral,
 /area/space)
-"mG" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms2)
 "mH" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/brown,
@@ -5564,20 +4980,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
-"mM" = (
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms)
-"mN" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms)
 "mO" = (
 /obj/machinery/alarm,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "mP" = (
 /obj/item/device/radio/intercom,
-/mob/living/simple_animal/hostile/meat/horror,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "mQ" = (
@@ -5622,11 +5030,6 @@
 /obj/random/trash,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/bathroom)
-"mW" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
 "mX" = (
 /obj/item/weapon/storage/mirror{
 	icon_state = "mirror_broke";
@@ -5635,10 +5038,6 @@
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/bathroom)
-"mY" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/surgery)
 "mZ" = (
 /obj/structure/lattice,
 /turf/simulated/floor/asteroid,
@@ -5653,8 +5052,8 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/intensive)
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/surgery)
 "nb" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/blue{
@@ -5665,7 +5064,7 @@
 	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "nc" = (
 /obj/structure/iv_drip,
 /obj/effect/floor_decal/corner/blue{
@@ -5767,7 +5166,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/miningstation/kitchen)
+/area/miningstation/mess)
 "nr" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
@@ -6021,7 +5420,7 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "nV" = (
 /obj/machinery/portable_atmospherics/powered/pump,
 /obj/structure/catwalk,
@@ -6061,7 +5460,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "oa" = (
@@ -6085,7 +5483,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/miningstation/kitchen)
+/area/miningstation/mess)
 "oc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -6202,9 +5600,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
-"oj" = (
-/turf/simulated/floor/tiled/freezer,
-/area/miningstation/walkin)
 "ok" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -6212,14 +5607,6 @@
 	icon_state = "2-4"
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/turf/simulated/floor/tiled/freezer,
-/area/miningstation/walkin)
-"ol" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
 "om" = (
@@ -6246,6 +5633,8 @@
 /turf/simulated/floor/carpet,
 /area/miningstation/recroom)
 "oo" = (
+/obj/effect/landmark/corpse/miningstation/deadmineroverallsf,
+/obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/carpet,
 /area/miningstation/recroom)
 "op" = (
@@ -6262,6 +5651,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/effect/gibspawner/human,
 /turf/simulated/floor/carpet,
 /area/miningstation/recroom)
 "os" = (
@@ -6292,7 +5682,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/mob/living/simple_animal/hostile/meat/horror,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms2)
 "ov" = (
@@ -6318,14 +5707,6 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
-"ox" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms)
 "oy" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -6364,10 +5745,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
-"oC" = (
-/obj/structure/table/steel,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
 "oD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/bed/chair{
@@ -6385,19 +5762,9 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/miningstation/kitchen)
+/area/miningstation/mess)
 "oF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/floor_decal/corner/blue{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/blue{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/kitchen)
-"oG" = (
-/obj/structure/table/marble,
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
 	},
@@ -6454,7 +5821,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
-/area/miningstation/walkin)
+/area/miningstation/kitchen)
 "oK" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -6499,7 +5866,6 @@
 /area/miningstation/recroom)
 "oQ" = (
 /obj/structure/table/woodentable/maple,
-/obj/item/weapon/paper/miner_note_6_1,
 /turf/simulated/floor/carpet,
 /area/miningstation/recroom)
 "oR" = (
@@ -6582,8 +5948,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/turf/simulated/wall/r_titanium,
-/area/miningstation/physician1)
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/physician2)
 "oY" = (
 /obj/structure/closet/wardrobe/engineering_yellow,
 /obj/machinery/light,
@@ -6626,7 +5992,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/miningstation/kitchen)
+/area/miningstation/mess)
 "pg" = (
 /obj/structure/table/marble,
 /obj/item/weapon/material/knife/kitchen/cleaver/bronze,
@@ -6683,7 +6049,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "pm" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -6691,19 +6057,15 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
-"pn" = (
-/obj/structure/table/steel,
-/obj/random/mre,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "po" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/meat/humansecurity,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "pp" = (
 /obj/structure/table/marble,
 /obj/effect/floor_decal/corner/blue{
@@ -6713,7 +6075,7 @@
 	dir = 8
 	},
 /turf/simulated/floor/plating,
-/area/miningstation/kitchen)
+/area/miningstation/mess)
 "pq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 5
@@ -6768,18 +6130,10 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
-"pv" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "pw" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
-"px" = (
-/obj/random/trash,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "py" = (
@@ -7003,16 +6357,6 @@
 /obj/effect/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
-"pU" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/physician1)
-"pV" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
 "pW" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -7037,7 +6381,7 @@
 /obj/effect/floor_decal/sign/cmo,
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "qa" = (
 /obj/structure/table/steel,
 /obj/item/weapon/paper_bin,
@@ -7048,12 +6392,12 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "qb" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/black,
-/turf/space,
-/area/miningstation/physician1)
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/physician2)
 "qc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -7171,7 +6515,7 @@
 /obj/machinery/light_switch{
 	pixel_y = 32
 	},
-/obj/effect/landmark/corpse/miningstation/deadmineroveralls,
+/obj/effect/landmark/corpse/miningstation/deadminerf,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms)
 "ql" = (
@@ -7194,11 +6538,11 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "qn" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/effect/paint/black,
-/turf/space,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "qo" = (
 /obj/item/device/radio/intercom{
@@ -7313,10 +6657,9 @@
 /turf/simulated/floor/tiled/white,
 /area/miningstation/intensive)
 "qx" = (
-/obj/structure/sign/directions/examroom,
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/physician1)
+/area/miningstation/power)
 "qy" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/blue{
@@ -7333,7 +6676,7 @@
 	pixel_x = 28
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician2)
+/area/miningstation/physician1)
 "qz" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/blue{
@@ -7344,7 +6687,7 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "qA" = (
 /obj/machinery/computer/modular/preset/medical{
 	dir = 8
@@ -7357,7 +6700,7 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
+/area/miningstation/physician2)
 "qB" = (
 /obj/machinery/door/airlock/civilian,
 /obj/structure/cable{
@@ -7371,39 +6714,19 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bathroom)
-"qC" = (
-/obj/structure/sign/bluecross_2,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/physician1)
 "qD" = (
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
 /obj/effect/paint/black,
-/turf/space,
+/turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
 "qE" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/turf/simulated/floor/tiled/monotile,
-/area/miningstation/hangar)
-"qF" = (
-/obj/item/device/radio/intercom,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/chief2)
-"qG" = (
-/obj/effect/decal/cleanable/blood/tracks/body,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
-"qH" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
 	},
-/obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
+/area/miningstation/hangar)
 "qI" = (
 /obj/machinery/cryopod{
 	dir = 2
@@ -7432,32 +6755,20 @@
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /obj/machinery/door/firedoor,
 /obj/effect/paint/black,
-/turf/space,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/recroom)
 "qL" = (
 /obj/machinery/vending/wallmed1,
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/intensive)
-"qM" = (
-/obj/machinery/vending/wallmed1,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/physician1)
+/area/miningstation/surgery)
 "qN" = (
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
-/area/miningstation/physician1)
-"qO" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/obj/effect/gibspawner/human,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
+/area/miningstation/physician2)
 "qP" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -7531,23 +6842,12 @@
 /obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
-"qW" = (
-/obj/item/device/radio/intercom,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/chief)
 "qX" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
-"qY" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief2)
 "qZ" = (
 /obj/structure/closet/crate/secure/biohazard/alt,
 /obj/effect/floor_decal/corner/blue{
@@ -7579,20 +6879,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/dorms3)
-"rc" = (
-/obj/item/device/radio/intercom,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/dormhall)
-"rd" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/gibspawner/human,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "re" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -7613,10 +6899,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
-"rg" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
 "ri" = (
 /obj/machinery/power/terminal{
 	dir = 1
@@ -7642,6 +6924,7 @@
 /obj/structure/bed/chair/office{
 	dir = 1
 	},
+/obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/miningstation/atmos)
 "rl" = (
@@ -7700,9 +6983,22 @@
 /area/miningstation/power)
 "rp" = (
 /obj/structure/table/steel,
-/obj/item/weapon/paper/miner_note_1,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/chief)
+"rq" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/prep2)
+"rr" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/meat/horror,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
 "rs" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -7785,9 +7081,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "rD" = (
-/obj/item/device/radio/beacon/anchored{
-	level = 1
-	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
@@ -7836,10 +7129,6 @@
 /obj/effect/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
-"rI" = (
-/obj/effect/gibspawner/human,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
 "rJ" = (
 /obj/machinery/cryopod/robot,
 /obj/effect/floor_decal/corner/blue{
@@ -7869,15 +7158,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"sL" = (
+"si" = (
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/freezer,
+/area/miningstation/bathroom)
+"sn" = (
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/mob/living/simple_animal/hostile/meat/horrorsmall,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms)
+/turf/simulated/floor/tiled/freezer,
+/area/miningstation/walkin)
 "sZ" = (
 /obj/machinery/power/apc{
 	dir = 8;
@@ -7889,31 +7181,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"tc" = (
-/mob/living/simple_animal/hostile/meat/humansecurity,
+"tb" = (
+/obj/machinery/alarm,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
+/area/miningstation/operationshall2)
 "tf" = (
 /obj/item/stack/material/rods,
 /turf/simulated/floor/asteroid,
 /area/space)
-"tj" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/mob/living/simple_animal/hostile/meat/horrorminer,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/mess)
-"tn" = (
-/mob/living/simple_animal/hostile/meat/strippedhuman,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/chief)
+"tl" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/cryo)
 "tB" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/yellow{
@@ -7923,23 +7202,69 @@
 /obj/random/tool,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
-"tD" = (
-/obj/effect/floor_decal/corner/blue{
-	dir = 6
+"tG" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
 	},
-/mob/living/simple_animal/hostile/meat/horror,
-/turf/simulated/floor/tiled/white,
-/area/miningstation/cryo)
-"tN" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"tK" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/prep2)
+"tW" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"uj" = (
 /obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"uk" = (
+/obj/machinery/power/terminal{
 	dir = 4
 	},
-/mob/living/simple_animal/hostile/meat/humansecurity,
+/obj/machinery/power/apc{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/miningstation/walkin)
+"uu" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4;
+	level = 2
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"uC" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms)
+"uD" = (
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief)
+"uH" = (
+/obj/structure/closet/toolcloset,
+/obj/effect/floor_decal/industrial/hatch,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms2)
+"uQ" = (
+/obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "uR" = (
@@ -7948,20 +7273,31 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"vy" = (
-/mob/living/simple_animal/hostile/meat/strippedhuman,
+"vt" = (
+/obj/structure/janitorialcart,
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -25
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
+/area/miningstation/janitorcloset)
+"vw" = (
+/mob/living/simple_animal/hostile/meat/horror,
+/turf/simulated/floor/carpet,
+/area/miningstation/recroom)
 "vE" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "vH" = (
 /turf/simulated/mineral,
 /area/miningstation/fix)
+"vK" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "vM" = (
 /obj/structure/table/marble,
 /obj/effect/floor_decal/corner/blue{
@@ -7970,23 +7306,42 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
 	},
-/obj/item/weapon/paper/miner_note_5,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/kitchen)
-"vT" = (
-/obj/item/device/radio/intercom,
+"vN" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning";
+	pixel_y = 6
+	},
+/turf/simulated/floor/plating,
+/area/miningstation/hangar)
+"vP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"vZ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"wi" = (
+/obj/structure/table/steel,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief2)
+"wr" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/prep)
-"wa" = (
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/mob/living/simple_animal/hostile/meat/horrorminer,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/hangarhall)
+/area/miningstation/dorms2)
+"wy" = (
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
 "wF" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/corner/blue{
@@ -7998,6 +7353,13 @@
 /obj/effect/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"wV" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangar)
 "xe" = (
 /obj/machinery/vending/engineering,
 /obj/effect/floor_decal/corner/yellow{
@@ -8008,8 +7370,34 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
-"xi" = (
-/mob/living/simple_animal/hostile/meat/humansecurity,
+"xg" = (
+/obj/structure/filingcabinet/wallcabinet,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/chief2)
+"xk" = (
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief)
+"xw" = (
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
+"xy" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/janitorcloset)
+"xA" = (
+/obj/structure/closet/firecloset,
+/obj/effect/floor_decal/industrial/hatch,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"xK" = (
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/vault)
+"xU" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/industrial/hatch,
+/obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "xV" = (
@@ -8027,6 +7415,52 @@
 /obj/effect/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"yj" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"yt" = (
+/obj/machinery/power/terminal,
+/obj/machinery/power/apc{
+	name = "south bump";
+	pixel_y = -28
+	},
+/obj/structure/cable,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms)
+"yw" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"yK" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms3)
+"yM" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"yN" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/bathroom)
+"ze" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
 "zi" = (
 /obj/machinery/vending/engivend,
 /obj/effect/floor_decal/corner/yellow{
@@ -8037,21 +7471,59 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
-"zI" = (
+"zl" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/prep2)
+"zH" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
+/area/miningstation/janitorcloset)
+"zL" = (
+/obj/structure/fireaxecabinet,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/atmos)
+"zM" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
 "zP" = (
 /obj/structure/reagent_dispensers/water_cooler,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
-"AL" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
+"Ab" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/prep)
+"Ag" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"An" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
 /area/miningstation/operationshall2)
+"As" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/mess)
+"AI" = (
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 9
+	},
+/turf/simulated/floor/airless/ceiling,
+/area/miningstation/power)
 "AQ" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -8060,20 +7532,27 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
-"AW" = (
-/obj/structure/cable{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 6
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 6
-	},
+"Bc" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/landmark/corpse/miningstation/deadmineroveralls,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
+/area/miningstation/dormhall)
+"Bh" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"Bj" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/dorms3)
+"Bm" = (
+/obj/structure/fireaxecabinet,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/prep)
 "Bp" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 1
@@ -8084,7 +7563,7 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 8
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
+/obj/effect/gibspawner/human,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Bt" = (
@@ -8093,10 +7572,51 @@
 	},
 /turf/simulated/floor/wood/walnut,
 /area/miningstation/recroom)
-"BG" = (
+"BA" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/chief2)
+/area/miningstation/dorms)
+"BD" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"BS" = (
+/turf/simulated/floor/plating,
+/area/miningstation/hangar)
+"BU" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"Cv" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/airless/ceiling,
+/area/miningstation/power)
+"Cx" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms)
 "CB" = (
 /obj/structure/table/steel,
 /obj/effect/floor_decal/corner/blue{
@@ -8110,6 +7630,11 @@
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
 /area/miningstation/intensive)
+"CU" = (
+/obj/item/device/radio/intercom,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/chief)
 "Da" = (
 /obj/machinery/light{
 	dir = 4;
@@ -8128,6 +7653,33 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
+"Dc" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/physician1)
+"Dg" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"Di" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"Dr" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/meat/horrorminer,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
 "DD" = (
 /obj/structure/broken_cryo,
 /obj/effect/floor_decal/industrial/warning{
@@ -8136,22 +7688,31 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"DF" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/dormhall)
 "DO" = (
 /obj/structure/table/marble,
 /obj/random/projectile,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
+"DP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"DR" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"DZ" = (
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
+"Ea" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
 "Ee" = (
 /obj/effect/gibspawner/human,
 /obj/effect/floor_decal/corner/blue{
@@ -8159,19 +7720,20 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"Ex" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/kitchen)
+"EC" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
 "EJ" = (
 /obj/structure/broken_cryo,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10;
 	icon_state = "warning"
 	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/cryo)
-"EQ" = (
-/obj/effect/floor_decal/corner/blue{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
 "Fa" = (
@@ -8182,17 +7744,66 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
+"Fe" = (
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 4;
+	icon_state = "2-4"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
+"Fk" = (
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief2)
+"Fm" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/miningstation/bathroom)
+"Fw" = (
+/obj/machinery/firealarm,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
 "Fy" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"FE" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/operationshall)
+"Ge" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "Gv" = (
 /obj/effect/paint/black,
 /obj/effect/wallframe_spawn/reinforced/titanium,
 /turf/space,
-/area/miningstation/bridge)
+/area/miningstation/operationshall)
+"GD" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
+/turf/simulated/floor/plating,
+/area/miningstation/hangar)
 "GQ" = (
 /obj/effect/floor_decal/corner/blue,
 /obj/effect/floor_decal/corner/blue{
@@ -8200,28 +7811,58 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"Hr" = (
+/obj/effect/paint/black,
+/obj/effect/wallframe_spawn/reinforced/titanium,
+/turf/space,
+/area/miningstation/bridge)
+"Ht" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "Hw" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"HK" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
+"HM" = (
+/obj/machinery/power/terminal{
+	dir = 1
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24;
+	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
+"HZ" = (
+/obj/item/device/radio/intercom,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/operationshall)
+"If" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/chief2)
+"Ik" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/white,
-/area/miningstation/intensive)
-"HP" = (
-/mob/living/simple_animal/hostile/meat/horrorminer,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/meat/humansecurity,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
+/area/miningstation/dormhall)
 "Ip" = (
 /obj/structure/cable{
 	icon_state = "2-8"
@@ -8234,10 +7875,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
-"Iv" = (
-/obj/effect/shuttle_landmark/automatic,
-/turf/simulated/floor/plating,
-/area/miningstation/hangar)
+"Ix" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
 "ID" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/light_switch{
@@ -8245,6 +7888,22 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
+"IH" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
+"II" = (
+/obj/structure/closet/emcloset,
+/obj/effect/floor_decal/industrial/hatch,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"Ja" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "Jd" = (
 /obj/effect/paint/black,
 /obj/structure/reagent_dispensers/acid,
@@ -8256,6 +7915,15 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"Js" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
+"Jw" = (
+/obj/effect/landmark/corpse/miningstation/deadminersuit,
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/prep2)
 "JC" = (
 /obj/structure/broken_cryo,
 /obj/effect/floor_decal/industrial/warning{
@@ -8264,63 +7932,151 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"Kc" = (
+"JK" = (
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
-	},
-/mob/living/simple_animal/hostile/meat/horrorminer,
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall2)
-"KL" = (
+/obj/structure/catwalk,
+/obj/machinery/light,
+/turf/simulated/floor/plating,
+/area/miningstation/hangar)
+"JT" = (
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/recroom)
+"JW" = (
+/obj/machinery/light{
+	dir = 8;
+	icon_state = "tube1"
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
-"Lf" = (
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/chief)
+"JY" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"Kr" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"Ku" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/vault)
+"KK" = (
+/mob/living/simple_animal/hostile/meat/horrorminer,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"KQ" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/mob/living/simple_animal/hostile/meat/abomination,
+/turf/simulated/floor/tiled/white,
+/area/miningstation/cryo)
 "Li" = (
 /obj/effect/gibspawner/human,
 /obj/structure/table/rack,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"Lq" = (
+"Lp" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"LA" = (
+/obj/structure/catwalk,
+/obj/machinery/computer/atmos_alert,
+/turf/simulated/floor/plating,
+/area/miningstation/atmos)
+"LG" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/mob/living/simple_animal/hostile/meat/horror,
 /turf/simulated/floor/tiled/white,
-/area/miningstation/cryo)
-"Ly" = (
-/obj/structure/sign/bluecross_2,
-/obj/effect/paint/black,
-/turf/simulated/wall/r_titanium,
-/area/miningstation/physician2)
-"Lz" = (
-/obj/structure/lattice,
-/turf/space,
-/area/miningstation/operationshall)
+/area/miningstation/intensive)
+"LL" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/mob/living/simple_animal/hostile/meat/strippedhuman,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/bridge)
 "LT" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 4
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
-/obj/effect/landmark/corpse/miningstation/deadminerf,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"Ma" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"Ms" = (
+/mob/living/simple_animal/hostile/meat/strippedhuman,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief)
+"Mu" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/mob/living/simple_animal/hostile/meat/horrorminer,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/prep2)
+"MA" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
 "MD" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -8338,12 +8094,79 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"Nz" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
+"MQ" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/alarm{
+	dir = 1;
+	pixel_y = -25
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall)
+"MZ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangar)
+"Nd" = (
+/obj/structure/table/steel,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
+"Nf" = (
+/obj/structure/sign/bluecross_2,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/physician2)
+"Np" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
+"Nr" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangar)
+"NL" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/bridge)
+"NN" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/prep2)
+"NP" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"NT" = (
+/obj/machinery/computer/modular/preset/engineering{
+	dir = 8;
+	icon_state = "console"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief)
 "NU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -8351,9 +8174,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/mob/living/simple_animal/hostile/meat/abomination,
+/mob/living/simple_animal/hostile/meat/humansecurity,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"NY" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/physician2)
 "Oa" = (
 /obj/machinery/cryopod{
 	dir = 2
@@ -8364,16 +8191,43 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"Or" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/plating,
+/area/miningstation/kitchen)
+"Ot" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/bridge)
 "Oy" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/monotile,
 /area/miningstation/hangar)
 "OA" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4;
-	level = 2
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
 	},
-/mob/living/simple_animal/hostile/meat/strippedhuman,
+/obj/effect/gibspawner/human,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/dormhall)
 "OI" = (
@@ -8386,10 +8240,42 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"OL" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
 "OZ" = (
 /obj/effect/gibspawner/human,
 /turf/simulated/floor/tiled/freezer,
 /area/miningstation/walkin)
+"Pf" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms2)
+"Pm" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "Pr" = (
 /obj/structure/cable{
 	d1 = 2;
@@ -8405,19 +8291,82 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
 "Px" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/prep2)
+"Py" = (
 /obj/effect/paint/black,
 /turf/simulated/wall/r_titanium,
-/area/miningstation/operationshall)
+/area/miningstation/vault)
+"PC" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/intensive)
+"PF" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 6
+	},
+/mob/living/simple_animal/hostile/meat/humansecurity,
+/turf/simulated/floor/tiled/white,
+/area/miningstation/cryo)
+"PJ" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"PP" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 9
+	},
+/mob/living/simple_animal/hostile/meat/abomination,
+/turf/simulated/floor/tiled/white,
+/area/miningstation/cryo)
+"PU" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/monotile,
+/area/miningstation/hangar)
+"PY" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
 "Qf" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"Rh" = (
-/mob/living/simple_animal/hostile/meat/horrorminer,
+"QH" = (
+/obj/machinery/door/airlock/multi_tile/civilian,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/recroom)
+"QP" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/mess)
+"Re" = (
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms)
+"Rg" = (
+/obj/structure/closet/firecloset,
+/obj/effect/floor_decal/industrial/hatch,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
 "Rv" = (
 /obj/structure/broken_cryo,
 /obj/effect/floor_decal/industrial/warning{
@@ -8433,13 +8382,29 @@
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
-/mob/living/simple_animal/hostile/meat/horror,
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"RI" = (
+/obj/machinery/vending/wallmed1,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/physician2)
+"RS" = (
+/obj/machinery/door/airlock/multi_tile/civilian,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangar)
+"Sd" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/atmos)
 "Se" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/prep)
+"Sh" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/recroom)
 "Sn" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/industrial/hatch,
@@ -8447,6 +8412,10 @@
 /obj/item/weapon/gun/projectile/pistol/throwback,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/hangarhall)
+"Sw" = (
+/obj/structure/lattice,
+/turf/space,
+/area/miningstation/power)
 "SA" = (
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 4;
@@ -8457,6 +8426,51 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"SG" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
+"SN" = (
+/obj/item/device/radio/intercom,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/prep)
+"Ta" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/mob/living/simple_animal/hostile/meat/humansecurity,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/dorms)
+"Tc" = (
+/obj/item/device/radio/intercom,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/chief2)
+"Ti" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/hangarhall)
+"Ub" = (
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 2;
+	icon_state = "1-2"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/miningstation/intensive)
+"Uw" = (
+/obj/machinery/atmospherics/unary/vent_pump/on,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/vault)
 "UB" = (
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 8;
@@ -8468,33 +8482,70 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/miningstation/bridge)
-"UJ" = (
+"UC" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
+"UG" = (
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/mob/living/simple_animal/hostile/meat/horror,
-/turf/simulated/floor/tiled/freezer,
-/area/miningstation/bathroom)
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall)
+"UJ" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/miningstation/cryo)
+"UT" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/surgery)
 "UW" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"VE" = (
+"Vc" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/vault)
+"Ve" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangar)
+"Vl" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/prep2)
+"Vu" = (
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 4
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/mob/living/simple_animal/hostile/meat/horrorminer,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/prep2)
+/area/miningstation/hangar)
+"VA" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/chief)
+"VI" = (
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/bridge)
 "VL" = (
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
@@ -8504,6 +8555,11 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"We" = (
+/obj/structure/sign/directions/examroom,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/physician2)
 "Wf" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -8524,45 +8580,121 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
-"XC" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 4
+"Wy" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 8
 	},
+/obj/effect/floor_decal/corner/blue,
+/turf/simulated/floor/tiled/white,
+/area/miningstation/cryo)
+"WL" = (
+/obj/item/device/radio/intercom,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/dormhall)
+"WT" = (
+/obj/machinery/door/airlock/multi_tile/civilian,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"Xh" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning";
+	pixel_y = 6
+	},
+/turf/simulated/floor/plating,
+/area/miningstation/hangar)
+"Xz" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/meat/horror,
 /turf/simulated/floor/tiled/white,
-/area/miningstation/cryo)
+/area/miningstation/intensive)
+"XB" = (
+/obj/item/device/radio/intercom,
+/obj/effect/paint/black,
+/turf/simulated/wall/r_titanium,
+/area/miningstation/janitorcloset)
+"XL" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/meat/horrorminer,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"XO" = (
+/obj/vehicle/train/cargo/trolley,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/hangarhall)
+"XT" = (
+/obj/structure/ore_box,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/dormhall)
+"Yc" = (
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/bridge)
+"Yh" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/mess)
+"Ys" = (
+/turf/simulated/floor/tiled/freezer,
+/area/miningstation/walkin)
 "YE" = (
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/operationshall2)
+"YG" = (
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
 "YP" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/miningstation/fix)
-"YV" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
-	},
+"Zf" = (
+/mob/living/simple_animal/hostile/meat/horrorminer,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/miningstation/operationshall)
-"Zc" = (
+/area/miningstation/prep2)
+"Zk" = (
+/obj/structure/table/rack,
+/turf/simulated/floor/tiled/white,
+/area/miningstation/cryo)
+"Zl" = (
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/mob/living/simple_animal/hostile/meat/horror,
-/turf/simulated/floor/tiled/techfloor,
-/area/miningstation/dorms)
-"Zk" = (
-/obj/structure/table/rack,
-/turf/simulated/floor/tiled/white,
-/area/miningstation/cryo)
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/airlock/civilian,
+/obj/machinery/door/firedoor,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/bridge)
 "ZF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -8572,6 +8704,34 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/miningstation/cryo)
+"ZH" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/vault)
+"ZL" = (
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/miningstation/operationshall2)
+"ZO" = (
+/obj/effect/floor_decal/corner/blue{
+	dir = 5
+	},
+/obj/effect/gibspawner/human,
+/turf/simulated/floor/tiled/white,
+/area/miningstation/intensive)
+"ZZ" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/miningstation/chief2)
 
 (1,1,1) = {"
 aa
@@ -14737,13 +14897,13 @@ cr
 cr
 fW
 fW
-fo
-fo
-fo
-fo
-fo
-fo
-fo
+tl
+tl
+tl
+tl
+tl
+tl
+tl
 fW
 fW
 cr
@@ -14878,35 +15038,35 @@ cr
 cr
 cr
 jR
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
 rJ
 sZ
 SA
 wF
 CB
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
 cr
 fW
 fW
@@ -15030,7 +15190,7 @@ jR
 cr
 cr
 cr
-fo
+tl
 VL
 Rz
 Qf
@@ -15040,7 +15200,7 @@ Qf
 Qf
 Qf
 Qf
-bz
+Rz
 Qf
 Bp
 vE
@@ -15049,16 +15209,16 @@ Hw
 Br
 Qf
 rL
-Lq
 Qf
 Qf
 Qf
 Qf
+PP
 Qf
 rL
 Qf
 yc
-fo
+tl
 cr
 fW
 fW
@@ -15182,7 +15342,7 @@ fW
 fW
 fW
 fW
-fo
+tl
 Fy
 hq
 qI
@@ -15209,8 +15369,8 @@ qI
 qI
 DD
 EJ
-EQ
-fo
+Wy
+tl
 cr
 fW
 fW
@@ -15334,7 +15494,7 @@ fW
 fW
 fW
 fW
-fo
+tl
 Fy
 hs
 Wg
@@ -15348,7 +15508,7 @@ Wg
 Rv
 ci
 Zk
-XC
+UJ
 Zk
 ci
 hs
@@ -15361,8 +15521,8 @@ Wg
 Wg
 OI
 Oa
-EQ
-fo
+Wy
+tl
 cr
 fW
 fW
@@ -15486,21 +15646,21 @@ fW
 fW
 fW
 fW
-fo
+tl
 nx
 hI
 uR
 uR
+KQ
 uR
 uR
-tD
 uR
 uR
 hI
-uR
+PF
 LT
 Li
-XC
+UJ
 Zk
 wU
 uR
@@ -15510,11 +15670,11 @@ uR
 MJ
 uR
 uR
-tD
+uR
 hI
 uR
 fP
-fo
+tl
 cr
 fW
 fW
@@ -15638,35 +15798,35 @@ fW
 fW
 fW
 fW
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
 Fy
 Zk
-XC
+UJ
 Zk
 GQ
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
-fo
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
+tl
 ao
 fW
 fW
@@ -15804,7 +15964,7 @@ cr
 qU
 xV
 uR
-XC
+UJ
 uR
 fP
 qU
@@ -15941,42 +16101,42 @@ co
 co
 co
 co
-bP
-bP
-bP
-bP
-bP
-bP
-bP
-bP
-bP
-bP
-bP
-fS
-fo
-fo
-fo
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+aE
+tl
+tl
+tl
 ij
-fo
-fo
-fo
+tl
+tl
+tl
 ao
 ao
 ao
-kp
-kp
-kp
-kp
-kp
-kp
-kp
-kp
-kp
-mz
-mz
-mz
-mz
-mz
+ha
+ha
+ha
+ha
+ha
+ha
+ha
+ha
+ha
+Sh
+Sh
+Sh
+Sh
+Sh
 fW
 fW
 cr
@@ -16092,7 +16252,7 @@ ag
 aH
 ag
 gN
-co
+Ti
 bQ
 cl
 bp
@@ -16103,32 +16263,32 @@ dx
 ez
 dx
 dx
-bP
-bP
-Px
-gx
+Ti
+Ti
+FE
+Rg
 hP
 hQ
 jU
-jX
-Px
-Lz
+II
+FE
 ao
 ao
-kp
-kz
-kJ
-kK
+ao
+ha
+xU
+JW
+yM
 la
-kJ
-kK
-kK
-kK
-mz
+JW
+yM
+yM
+yM
+Sh
 nz
 on
 oO
-mz
+Sh
 fW
 cr
 jR
@@ -16244,39 +16404,39 @@ ag
 aL
 ag
 gN
-co
+Ti
 Sn
-bS
+Ea
 dz
-bS
+Ea
 dx
 dx
 dx
 dx
 dx
 dx
-bP
-bP
-Px
-lf
-gw
+Ti
+Ti
+FE
+yw
+NP
 hQ
-gw
-gw
-Px
-Px
-kp
-kp
-kp
-kA
-kK
-kR
-pv
-kK
-OA
+NP
+NP
+FE
+FE
+ha
+ha
+ha
+xA
+yM
+uu
+gy
+yM
+uu
 qP
 qT
-mz
+Sh
 nA
 oo
 oP
@@ -16393,42 +16553,42 @@ ag
 gN
 gN
 ag
-aL
-ag
-bA
+JK
 co
-bS
+co
+Ti
+Ti
+Ti
+dz
+Ea
+Ea
+Ea
+Ea
+Ea
 cm
-wa
-bS
-bS
-bS
-bS
-vy
-cm
-bS
+Ea
 cl
-bS
-Px
+Ea
+FE
 gA
-gw
+NP
 hQ
-gw
-Nz
+NP
+Dr
 rx
-Px
+FE
 ry
-lX
-kp
+uQ
+ha
 kB
-kK
+yM
 kS
-kK
-kK
-kS
+yM
+yM
+po
 qQ
-kK
-mz
+yM
+Sh
 nB
 op
 oQ
@@ -16546,41 +16706,41 @@ ag
 ag
 ak
 aL
-ag
+RS
 qE
 bI
-qG
-qG
+BD
+WT
 bu
 cY
-bV
-bV
+Ag
+Ag
 pO
-bV
-bV
-bV
-bV
-bV
+Ag
+Ag
+Ag
+Ag
+Ag
 ge
 gU
 ht
 ii
 jV
-YV
-jY
+yj
+vZ
 ge
 rz
-kL
+DP
 kq
-kC
-kL
+Ge
+DP
 kT
-lb
-kL
+Ht
+DP
 ln
 qR
-kL
-mA
+DP
+QH
 nC
 oq
 oR
@@ -16699,44 +16859,44 @@ ap
 aB
 aW
 bk
-bk
-bJ
-qH
-bT
+Vu
+bM
+BU
+lp
 cp
 cZ
 dy
-bT
-bT
-bT
-bT
-bT
-bT
-bT
-gg
+Kr
+Kr
+Kr
+Kr
+Kr
+Kr
+Ma
+UG
 gV
 hu
 rA
-jW
-jW
-jW
-gg
-DF
-KL
-kr
-kD
+DR
+DR
+DR
+UG
+JY
+OA
+Di
+Pm
 kM
 kU
-rd
-lc
+OA
+uj
 lo
 qS
 lZ
-mB
+JT
 nD
 or
 oS
-mz
+Sh
 fW
 cr
 cr
@@ -16850,45 +17010,45 @@ av
 av
 bb
 am
-ag
-bA
 co
-bS
-cn
+co
+Ti
+Ti
+Ti
 Pr
 Da
 AQ
-bS
+Ea
 cm
-cn
+tG
+Ea
+Ea
+tG
 bS
-vy
-cn
-bS
-Px
+FE
 gA
-gX
-iR
-gw
-gw
+me
+Bh
+NP
+NP
 rx
-Px
+FE
 rB
-lX
-kp
-kE
-kK
-kV
-pv
-lg
-lp
+uQ
+ha
+tW
+yM
+fS
+Bc
+vK
+Ik
 pR
-kK
-mz
+yM
+Sh
 Bt
-oo
+vw
 oP
-mz
+Sh
 fW
 fW
 cr
@@ -16979,68 +17139,68 @@ aa
 ad
 ag
 ag
-ag
-am
+PU
+GD
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 bf
-qE
-gN
 co
-bP
-bP
+co
+Ti
+Ti
+Ti
 cJ
-bP
-bP
-dY
-dY
-dY
-dY
-dY
-dY
-bP
-Px
-gW
-gX
-hw
-hw
-hw
-hw
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+Ti
+FE
+Fw
+me
+FE
+FE
+FE
+FE
 ab
 ab
 ab
-kp
-kF
-kK
-kW
-kK
-xi
+ha
+XT
+yM
+Ja
+yM
+yM
 lq
 lK
-kK
-mz
+yM
+Sh
 nE
 op
 ru
-mz
+Sh
 ao
 fW
 fW
@@ -17134,65 +17294,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-bf
-ag
-bB
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+Xh
 co
-bU
-cl
+co
+Ti
+Ti
+Ti
 Ip
 dd
 Fa
-dY
+Ab
 ej
 eA
 eM
 fj
-dY
+Ab
 ab
-Px
-gw
-gX
-hw
+FE
+NP
+MQ
+zH
 hS
 hS
-hw
+zH
 fW
 fW
 fW
-kp
-kF
-kN
-kK
-kK
+ha
+XT
+PJ
+KK
+yM
 lh
-kS
+vP
 lK
 ma
-mz
+Sh
 nF
 os
 oT
-mz
+Sh
 ao
 ao
 fW
@@ -17286,65 +17446,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-bf
-ag
-gN
-bK
-bS
-bS
-bS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+Xh
+RS
+MZ
+bI
+BD
+WT
+Ea
 de
 dB
-dY
+Ab
 ek
 eB
 eN
 tB
-dY
+Ab
 ao
-Px
-gw
-gX
-hw
-hT
+FE
+NP
+me
+zH
+xy
 il
-hw
+zH
 fW
 mZ
 fW
-ks
-ks
-ks
-ks
-ks
-ks
-kS
+Bj
+Bj
+Bj
+Bj
+Bj
+ha
+vP
 lK
-mb
-mb
-mb
-mb
-mb
-mb
+wr
+Sh
+Sh
+Sh
+Sh
+Sh
 ao
 cr
 fW
@@ -17438,32 +17598,32 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 bg
-ap
-ap
+Ve
+wV
 cj
 bV
-bV
-bV
+Ag
+Ag
 df
 dC
 dZ
@@ -17471,32 +17631,32 @@ el
 eB
 eN
 fl
-dY
+Ab
 ao
-Px
+FE
 gA
-gX
-hw
+me
+zH
 hU
 im
-hw
+zH
 fW
 mZ
 fW
-ks
+Bj
 kG
 kO
 kX
 ld
-ks
+Bj
 lr
 lL
-mb
-mC
+wr
+uH
 nG
 ot
 oU
-mb
+wr
 ao
 cr
 cr
@@ -17587,35 +17747,35 @@ aa
 ad
 ag
 ag
-ag
-am
+PU
+GD
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 cE
-ag
-bA
 co
-bU
-bS
-bS
+co
+Ti
+Ti
+Ti
+Ea
 dg
 dD
 ea
@@ -17623,32 +17783,32 @@ em
 eC
 eO
 fm
-dY
+Ab
 ao
-Px
-hr
+FE
+gY
 hO
 hx
 hV
 hH
-hw
+zH
 ao
 ao
 ao
-ks
+Bj
 iC
 ik
 kY
-le
+yK
 li
 ls
 lM
 mc
-mG
+Pf
 kP
 ou
 iM
-mb
+wr
 ao
 cr
 cr
@@ -17742,65 +17902,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-cE
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+vN
 ag
 Oy
-co
+Ti
 bQ
-bS
+Ea
 cK
 de
 dB
-dY
+Ab
 xe
 eD
 eP
 fn
-dY
+Ab
 ao
-Px
-gw
-gX
-hw
+FE
+NP
+me
+zH
 hW
 ip
-hw
+zH
 cr
 ao
 fW
-ks
+Bj
 kI
 kQ
 kZ
 rb
-ks
+Bj
 lr
 lL
-mb
+wr
 mH
 nI
 ov
 mH
-mb
+wr
 ao
 fW
 fW
@@ -17894,65 +18054,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 fe
 bv
 ag
-co
+Ti
 bR
-bS
-bS
+Ea
+Ea
 de
 dz
-dY
+Ab
 en
 eB
 eR
 fv
-dY
+Ab
 ao
-gu
-gw
-gX
-mn
-hT
-ip
-hw
+HZ
+NP
+me
+XB
+xy
+vt
+zH
 fW
 ao
 fW
-ks
-ks
-ks
-ks
-ks
-ks
-kS
+Bj
+Bj
+Bj
+Bj
+Bj
+Bj
+vP
 lK
-mb
-mb
-mb
-mb
-mb
-mb
+wr
+wr
+wr
+wr
+wr
+wr
 ao
 fW
 fW
@@ -18046,48 +18206,48 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-cE
-gN
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+vN
 ag
-co
+gN
+Ti
 bX
-bS
+Ea
 cH
 dh
 dz
-dY
+Ab
 eo
 eB
 eR
 fq
-dY
+Ab
 ao
-Px
-gw
-gX
-hw
-hT
+FE
+NP
+me
+zH
+xy
 il
-hw
+zH
 fW
 ao
 cr
@@ -18096,15 +18256,15 @@ cr
 cr
 ao
 fW
-rc
-kS
+WL
+vP
 lK
-me
-me
-me
-me
-me
-me
+BA
+BA
+BA
+BA
+BA
+BA
 fW
 fW
 fW
@@ -18198,48 +18358,48 @@ ag
 ah
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-cE
-gN
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+vN
+ag
 kj
-co
+Ti
 bY
-bS
+Ea
 jO
 di
 dE
-dY
+Ab
 ep
 eE
 eR
 kg
-dY
+Ab
 ao
-Px
-gw
-gX
-hw
+FE
+NP
+me
+zH
 hX
 hX
-hw
+zH
 fW
 ao
 cr
@@ -18248,15 +18408,15 @@ cr
 cr
 ao
 fW
-kp
-kS
+ha
+vP
 lK
-me
+BA
 mI
 mI
 mI
 mI
-me
+BA
 fW
 fW
 fW
@@ -18347,68 +18507,68 @@ aa
 af
 ag
 ag
-ag
-am
+PU
+GD
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-cE
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+vN
 ag
 ag
-co
-bY
-bS
-bS
+Ti
+XO
+Ea
+Ea
 de
 dF
-dY
+Ab
 eo
 eB
 eT
 fq
-dY
+Ab
 ao
-gi
+FE
 Gv
 gZ
-hw
-hw
-hw
-hw
-Lf
-Lf
-Lf
-Lf
-Lf
+zH
+zH
+zH
+VA
+VA
+VA
+VA
+VA
+VA
 ao
 ao
 ao
-kp
+ha
 lt
 lN
 mg
 iq
 nJ
 qJ
-js
-me
+yt
+BA
 fW
 fW
 fW
@@ -18502,65 +18662,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-Iv
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-cE
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+vN
 ag
 ag
-co
+Ti
 bY
-bS
-bS
+Ea
+Ea
 de
 dG
-vT
+SN
 eq
 eB
 eU
 fs
-dY
+Ab
 ao
-gi
+VI
 gD
-ha
+Ot
 hz
 hY
 is
-Lf
+VA
 jv
 ic
-ke
-kl
-Lf
+uD
+xk
+VA
 fW
 ao
 cr
 qn
-kS
+vP
 lK
-me
+BA
 mK
 nK
 rE
 nQ
-me
+BA
 fW
 fW
 fW
@@ -18654,32 +18814,32 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 fe
 bv
 ag
-co
+Ti
 bZ
-bS
-bS
+Ea
+Ea
 de
 MD
 Jd
@@ -18687,32 +18847,32 @@ er
 eF
 eV
 ft
-dY
+Ab
 ao
-gi
+VI
 gD
 hb
 hA
 hE
-hE
+LL
 jg
 jw
 ka
 ki
-tn
-Lf
+Ms
+VA
 fW
 ao
 cr
 qn
-kS
+vP
 lK
-me
+BA
 mL
 nL
-ox
+Cx
 oY
-me
+BA
 fW
 fW
 fW
@@ -18803,68 +18963,68 @@ aa
 af
 ag
 ag
-ag
-am
+PU
+GD
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-cE
-ag
-ag
-co
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+vN
+gN
+gN
+Ti
 bl
 bT
 bT
 cN
 dK
-dY
+Ab
 es
 Se
 Wf
 fu
-dY
+Ab
 ao
 gj
 gG
-ha
+Ot
 hB
 hZ
 kt
 ju
 jE
-kb
+jW
 rp
 kx
-Lf
+VA
 fW
 ao
 cr
 qn
 lu
 lO
-me
-mM
+BA
+uC
 nN
-sL
+Cx
 nP
-me
+BA
 fW
 fW
 fW
@@ -18958,65 +19118,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 cE
-ag
-bA
 co
-bS
-bS
-bS
+co
+Ti
+Ti
+Ti
+Ea
 de
 dz
-eb
+Bm
 eq
 eE
 eR
 fn
-dY
+Ab
 ao
-gi
+VI
 dX
-mk
+NL
 hC
 hC
 hC
-qW
+CU
 qX
 kc
 kk
-kv
-Lf
+NT
+VA
 fW
 ao
 cr
-kp
+ha
 lv
 lP
-me
-ir
+BA
+Re
 nO
-Zc
+Ta
 nO
-me
+BA
 fW
 fW
 fW
@@ -19110,65 +19270,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-cE
-ag
-ag
-bK
-bS
-jy
-bS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+vN
+RS
+MZ
+bI
+BD
+WT
+Ea
 de
 dz
-dY
+Ab
 eo
 eB
 eU
 fv
-dY
+Ab
 ao
-gi
+VI
 gB
 hc
 hD
 hD
 hD
-BG
-BG
-BG
-BG
-BG
-BG
+VA
+VA
+VA
+VA
+VA
+VA
 ao
 ao
 ao
-kp
+ha
 lr
 lL
-me
+BA
 mO
 nP
-ox
+Cx
 oZ
-me
+BA
 fW
 fW
 fW
@@ -19262,65 +19422,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 gt
-ap
-ap
-cj
-bV
-bV
-bV
+Ve
+wV
+ze
+Dg
+Ag
+Ag
 dj
 dB
-dY
+Ab
 eo
 eB
 eT
 ft
-dY
+Ab
 ao
-gi
+VI
 gQ
-ha
+Ot
 hd
 ib
 ix
-BG
+If
 jQ
 kd
 km
-kh
-BG
+Fk
+If
 cr
 ao
 cr
-kp
+ha
 lw
 lK
-me
-mN
+BA
+kL
 nO
 nH
 nO
-me
+BA
 fW
 fW
 fW
@@ -19411,45 +19571,45 @@ aa
 af
 ag
 ag
-ag
-am
+PU
+GD
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 bf
-ag
-bA
 co
-bS
-bS
-bS
+co
+Ti
+Ti
+Ti
+Ea
 de
 dz
-dY
+Ab
 ep
 jZ
 eR
 fx
-dY
+Ab
 ao
-gi
+VI
 gH
 he
 hE
@@ -19458,21 +19618,21 @@ iy
 jt
 jS
 ig
-kn
-kh
-BG
+wi
+Fk
+If
 cr
 ao
 cr
 qn
 lx
 lQ
-me
+BA
 mP
 nQ
-sL
+Cx
 pa
-me
+BA
 fW
 fW
 fW
@@ -19566,65 +19726,65 @@ ag
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 bf
-qE
-bB
 co
-bS
-cm
-bS
+co
+Ti
+Ti
+Ti
+Ea
 de
 dz
-dY
+Ab
 eu
 eB
 eR
 ft
-dY
+Ab
 ao
-gi
+VI
 zP
-ha
-gE
+Ot
+Yc
 hZ
-kt
-jh
+kb
+xg
 jT
 kf
-kn
+wi
 ku
-BG
+If
 cr
 ao
 cr
 qn
-kS
+vP
 lK
-me
+BA
 mQ
 nR
 oy
 oY
-me
+BA
 fW
 fW
 fW
@@ -19718,65 +19878,65 @@ ah
 ag
 am
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-bf
-ag
-ag
-bK
-bS
-bS
-bS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+Xh
+RS
+MZ
+bI
+BD
+WT
+Ea
 de
 dB
-dY
+Ab
 eu
 eD
 eP
 fv
-dY
+Ab
 ao
-gi
+VI
 gI
-ha
+Ot
 hF
 UB
 hC
-qF
-qY
+Tc
+ZZ
 in
 ko
 ky
-BG
+If
 cr
 ao
 cr
 qn
-kS
+vP
 lK
-me
+BA
 qk
 nS
-ox
+Cx
 pb
-me
+BA
 ao
 ao
 fW
@@ -19867,35 +20027,35 @@ aa
 af
 ag
 ag
-ag
-am
+PU
+GD
 at
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
-aw
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
+BS
 gF
-bk
-bk
+Nr
+Vu
 bM
-bT
-bT
-bT
+BU
+OL
+OL
 dk
 dH
 ec
@@ -19903,24 +20063,24 @@ ev
 eG
 eW
 fm
-dY
+Ab
 ao
-gi
-Gv
-gZ
-gi
-gi
-gi
-BG
-BG
-BG
-BG
-BG
-BG
+VI
+Hr
+Zl
+VI
+VI
+VI
+If
+If
+If
+If
+If
+If
 ao
 ao
 ao
-kp
+ha
 lr
 qj
 mh
@@ -19928,7 +20088,7 @@ ql
 nT
 oz
 bW
-me
+BA
 ao
 ao
 fW
@@ -20042,12 +20202,12 @@ ax
 ax
 bd
 bh
-ag
-bA
 co
-bS
-jN
-bS
+co
+Ti
+Ti
+Ti
+Ea
 di
 dI
 ed
@@ -20055,12 +20215,12 @@ ew
 eH
 eX
 fy
-dY
+Ab
 ao
-zI
-iB
+An
+zM
 hv
-ab
+An
 ab
 ab
 ab
@@ -20072,15 +20232,15 @@ aa
 aa
 ao
 aa
-kp
-kS
-lK
-me
+ha
+vP
+XL
+BA
 mI
 mI
 mI
 mI
-me
+BA
 ao
 ao
 fW
@@ -20196,46 +20356,46 @@ aG
 bi
 bw
 bw
-co
+Ti
 cb
-bS
+Ea
 cH
 dh
 dB
-dY
+Ab
 zi
 eB
 eB
 fk
-dY
+Ab
 ao
-zI
-gY
+An
+YG
 mR
-gm
-gm
-gm
-gm
-gm
-gm
-gm
-gm
-gm
-gm
-gm
-gm
-gm
-kS
+An
+yN
+yN
+yN
+yN
+yN
+yN
+yN
+yN
+yN
+yN
+yN
+yN
+vP
 lS
-mi
-mi
-mi
-mi
-mi
-mi
-mi
-mi
-mi
+As
+As
+As
+As
+As
+As
+As
+As
+As
 fW
 fW
 fW
@@ -20348,46 +20508,46 @@ aq
 aL
 bw
 bw
-co
-bS
-cn
-bS
+Ti
+Ea
+tG
+Ea
 db
 dz
-dY
+Ab
 ex
 eI
 dV
 fz
-dY
+Ab
 ab
-zI
-gY
+An
+YG
 hv
-gm
+An
 ia
 iP
-gm
+yN
 jm
-gm
+yN
 jm
-gm
+yN
 nf
-gm
+yN
 nf
-gm
-gm
+yN
+yN
 lr
 lL
-mi
+As
 mS
 qc
 ID
 pc
 jx
 rH
-oC
-mi
+Nd
+As
 fW
 fW
 fW
@@ -20500,46 +20660,46 @@ ag
 aL
 ag
 bC
-co
-bP
-bP
+Ti
+Ti
+Ti
 cM
 dc
 dA
-dY
-dY
-dY
-dY
-dY
-dY
+Ab
+Ab
+Ab
+Ab
+Ab
+Ab
 ab
-zI
-gY
+An
+YG
 hv
-gm
+An
 ia
 iQ
-gm
+yN
 jn
-gm
+yN
 jn
-gm
+yN
 jn
-gm
+yN
 jn
-gm
-gm
+yN
+yN
 ly
 lK
 mm
 mT
 mJ
 oB
-tj
+oB
 pm
 pw
 pC
-mi
+As
 fW
 fW
 fW
@@ -20652,10 +20812,10 @@ ag
 bj
 ag
 bC
-bN
+rq
 bm
 bn
-cc
+Vl
 dl
 dJ
 ee
@@ -20665,33 +20825,33 @@ ee
 ey
 fL
 fT
-zI
+An
 lj
 hv
-gm
+An
 ih
 iS
-gm
+yN
 jo
 jJ
 lV
-jJ
+Fm
 lV
-jJ
+Fm
 mV
 qo
-gm
+yN
 lz
 lT
 mq
-mW
+QP
 nW
-oC
+Nd
 pd
-oC
-rg
+wy
+EC
 nk
-mi
+As
 fW
 fW
 fW
@@ -20804,7 +20964,7 @@ co
 co
 co
 co
-bN
+rq
 cd
 bo
 cq
@@ -20813,12 +20973,12 @@ hj
 ef
 ef
 ef
-VE
 ef
 ef
+Mu
 ef
 gk
-gJ
+MA
 hf
 gq
 io
@@ -20829,21 +20989,21 @@ jK
 md
 mE
 ng
-UJ
+mE
 mE
 qp
 qB
 lB
 lU
-mi
+As
 ni
 nX
-oC
-oC
-oC
-rg
+Nd
+Nd
+wy
+EC
 pD
-mi
+As
 fW
 fW
 fW
@@ -20941,25 +21101,25 @@ aa
 aa
 aa
 aK
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-bN
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+rq
 cd
 ct
-cO
+NN
 dn
 dL
 eg
@@ -20967,35 +21127,35 @@ eh
 eh
 eZ
 fA
-cc
-fB
-gY
-gY
-Kc
-gm
+Vl
+Px
+YG
+YG
+hv
+An
 it
 iU
-gm
+yN
 jr
 jL
 mf
 mV
 nh
-lV
+si
 lV
 qq
-gm
-kS
-lK
-mi
+yN
+vP
+PY
+As
 nj
 nX
 nm
 nm
+wy
+Js
 nm
-px
-nm
-mi
+As
 ao
 fW
 fW
@@ -21093,7 +21253,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aM
 aM
 aM
@@ -21106,28 +21266,28 @@ aM
 aM
 aM
 aM
-aE
-aE
-bN
+Sw
+Sw
+rq
 cd
 cv
-cc
+Vl
 do
-dM
+zl
 fr
 eh
 eh
 fa
-kw
-kw
-HP
-zI
+tK
+tK
+Vl
+An
 iG
 hv
-gm
-gm
-gm
-gm
+An
+yN
+yN
+yN
 ie
 jM
 mj
@@ -21136,18 +21296,18 @@ mj
 mj
 mj
 qr
-gm
-kS
+yN
+vP
 aF
-mi
+As
 nk
-nX
+rr
 nk
 nk
-qO
-po
+wy
+wy
 pE
-mi
+As
 ao
 cr
 fW
@@ -21245,7 +21405,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aM
 aU
 aU
@@ -21258,46 +21418,46 @@ aU
 aU
 aU
 aM
-aE
-aE
-bN
+Sw
+Sw
+rq
 cd
-tc
-cc
+Vl
+Jw
 dp
 dv
-cc
-cc
-cc
-cc
-kw
-bN
-bN
-zI
-gY
+Vl
+Vl
+Vl
+Zf
+tK
+rq
+rq
+An
+YG
 hv
 CD
 iu
-iV
-gm
-gm
-gm
-gm
+LG
+yN
+yN
+yN
+yN
 mX
-gm
-gm
+yN
+yN
 mX
-gm
-gm
-kS
+yN
+yN
+vP
 lK
-mi
+As
 nl
 nY
-oC
-oC
-oC
-Rh
+Nd
+Nd
+wy
+wy
 pD
 qD
 ao
@@ -21397,7 +21557,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aN
 aV
 aV
@@ -21410,9 +21570,9 @@ aV
 aV
 aV
 bq
-aE
-aE
-bN
+Sw
+Sw
+rq
 ce
 cw
 cw
@@ -21422,16 +21582,16 @@ ei
 ey
 ey
 ei
-fB
-bN
-bN
-zI
-eY
+Px
+rq
+rq
+An
+HM
 hg
 CD
 iv
 iW
-mY
+PC
 if
 nv
 qZ
@@ -21440,16 +21600,16 @@ iH
 oK
 qd
 qs
-gv
+PC
 lr
 lL
-mi
+As
 nm
 nX
-oC
-oC
-pn
-po
+Nd
+Nd
+wy
+wy
 nm
 qD
 ao
@@ -21549,7 +21709,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aO
 cD
 cD
@@ -21562,23 +21722,23 @@ cD
 cD
 cD
 aO
-aE
-aE
-bN
-bx
+Sw
+Sw
+rq
+qx
 cx
-bx
-bx
+qx
+qx
 dN
-bx
-bN
-bN
-bN
-bN
-bN
-bN
-zI
-gM
+qx
+rq
+rq
+rq
+rq
+rq
+rq
+An
+tb
 iZ
 CD
 lJ
@@ -21592,17 +21752,17 @@ pP
 pW
 qe
 qt
-gv
+PC
 lu
 lO
-mi
+As
 nn
 nZ
 oD
 oD
-oD
+UC
 pw
-rI
+DZ
 qD
 ao
 cr
@@ -21701,7 +21861,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aP
 aV
 aV
@@ -21714,48 +21874,48 @@ aV
 aV
 aV
 br
-aE
-aE
+Sw
+Sw
 ao
 ck
 cy
 cP
 dr
 dO
-bx
+qx
 ao
 ao
 ao
 ao
 ao
 ao
-zI
-gK
+An
+IH
 hv
 CD
-iD
-iY
-mY
+ZO
+Xz
+PC
 jz
 jP
 ra
-gv
+UT
 pQ
 pX
 qf
 qu
-gv
-kS
-tN
-mi
-pV
+PC
+vP
+lK
+As
+Yh
 oa
 oA
 pc
-po
-po
+wy
+wy
 qV
-mi
+As
 ao
 fW
 fW
@@ -21853,7 +22013,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aO
 dT
 dT
@@ -21866,40 +22026,40 @@ dT
 dT
 dT
 aO
-aE
-aE
+Sw
+Sw
 ao
-bx
+qx
 cz
 cR
 ds
 dP
-bx
+qx
 ao
-eL
-eL
-eL
-eL
-eL
-eL
-gz
+Py
+Py
+Py
+Py
+Py
+An
+SG
 hh
 gC
 iE
 mD
-mY
-mY
-mY
-mY
-gv
+PC
+UT
+UT
+UT
+UT
 ow
 pX
 qg
 qv
-gv
+PC
 lD
 lK
-mr
+As
 nq
 ob
 oE
@@ -21907,7 +22067,7 @@ pf
 pp
 pp
 pp
-mr
+As
 ao
 fW
 fW
@@ -22005,7 +22165,7 @@ aa
 aa
 aI
 aK
-aE
+Sw
 aP
 aV
 aV
@@ -22018,28 +22178,28 @@ aV
 aV
 aV
 rs
-bx
+qx
 bD
-bx
+qx
 cA
 cy
 cG
 du
 dQ
-bx
+qx
 ao
-eL
+Py
 fM
 fE
 fM
 fV
 gn
-gY
+YG
 hi
 CD
 iF
 ja
-gv
+PC
 jA
 lk
 mo
@@ -22048,10 +22208,10 @@ rF
 pY
 qh
 qu
-gv
+PC
 lx
 lQ
-mr
+Ex
 nr
 oc
 nr
@@ -22059,7 +22219,7 @@ nr
 nr
 rG
 pF
-mr
+Ex
 ao
 fW
 fW
@@ -22170,7 +22330,7 @@ dT
 dT
 dT
 aO
-bx
+qx
 bE
 bO
 cf
@@ -22178,15 +22338,15 @@ cB
 cT
 dS
 dR
-bx
+qx
 ao
-eL
+Py
 fc
-fF
+Ku
 fO
 fX
 go
-gJ
+MA
 lH
 CD
 mw
@@ -22196,14 +22356,14 @@ jB
 ll
 mp
 nd
-HK
-cL
+Ub
+mp
 qi
 qu
 jj
-kS
+vP
 lL
-mr
+Ex
 ns
 od
 oF
@@ -22211,7 +22371,7 @@ oF
 pq
 nr
 pG
-mr
+Ex
 ao
 fW
 fW
@@ -22324,23 +22484,23 @@ aV
 aV
 by
 bF
-bF
+Cv
 ca
 cS
 cV
 ri
 rn
-bx
+qx
 ao
-eL
-fd
+Py
+ZH
 fG
 fG
 fG
 gn
-AW
+Fe
 hk
-gv
+PC
 iN
 jc
 jk
@@ -22353,9 +22513,9 @@ ne
 oV
 qw
 jk
-lE
+Lp
 lW
-ms
+Or
 nt
 oe
 vM
@@ -22363,7 +22523,7 @@ pg
 oc
 nr
 pH
-mr
+Ex
 mU
 fW
 fW
@@ -22474,48 +22634,48 @@ dT
 dT
 dT
 aO
-bx
+qx
 bG
-bO
+AI
 jF
 cy
 cW
 rj
 ro
-bx
+qx
 ao
-eL
+Py
 dW
-fH
+Vc
 pS
-fg
-eL
+xK
+An
 hv
-hl
-gv
+Ix
+PC
 iO
 jd
-Ly
+jj
 jD
 lC
-jl
-jl
-pU
+Dc
+Dc
+NY
 pZ
 oX
-qx
-qC
-kK
-lX
-mr
+We
+Nf
+yM
+uQ
+Ex
 nu
 of
-oG
-oG
+vM
+vM
 pr
 py
 pI
-mr
+Ex
 mU
 fW
 fW
@@ -22613,7 +22773,7 @@ aa
 aa
 aI
 aK
-aE
+Sw
 aP
 aV
 aV
@@ -22626,40 +22786,40 @@ aV
 aV
 aV
 rt
-bx
-bx
-bx
-bx
+qx
+qx
+qx
+qx
 cF
 cU
 dt
 rm
-bx
+qx
 ao
-eL
-fg
+Py
+xK
 fG
 fG
 fG
 gn
 hv
-gy
-zI
-zI
-zI
-jl
+Np
+PC
+PC
+PC
+PC
 jG
 lF
 iA
-jl
-pU
+Dc
+NY
 iI
 pl
 iJ
-pU
-kK
-lg
-mr
+NY
+yM
+vK
+Ex
 iK
 og
 oH
@@ -22667,7 +22827,7 @@ ph
 oc
 nr
 pJ
-mr
+Ex
 mU
 fW
 fW
@@ -22765,7 +22925,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aO
 dT
 dT
@@ -22778,19 +22938,19 @@ dT
 dT
 dT
 aO
-aE
-aE
+Sw
+Sw
 ao
-bx
-bx
-bx
-bx
-bx
-bx
+qx
+qx
+qx
+qx
+qx
+qx
 ao
-eL
+Py
 fh
-fI
+Uw
 fQ
 fQ
 gp
@@ -22798,19 +22958,19 @@ lR
 gO
 hG
 YE
-gY
-jl
+xw
+Dc
 jH
 lG
 my
-jl
-qM
+Dc
+RI
 qN
 qm
 qz
-pU
-kK
-kK
+NY
+yM
+yM
 mu
 nr
 oh
@@ -22819,7 +22979,7 @@ pi
 ps
 pz
 pK
-mr
+Ex
 mU
 mU
 fW
@@ -22917,7 +23077,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aP
 aV
 aV
@@ -22930,8 +23090,8 @@ aV
 aV
 aV
 bs
-aE
-aE
+Sw
+Sw
 ao
 ao
 ao
@@ -22940,38 +23100,38 @@ ao
 ao
 ao
 ao
-eL
+Py
 fi
 fK
 fR
 fV
 gn
 gP
-AL
+ZL
 hv
-AL
+ZL
 iz
-jl
+Dc
 jI
 nb
 qy
-jl
-pU
+Dc
+NY
 qa
 nU
 qA
-pU
-kA
+NY
+xA
 lY
-mr
+Ex
 nw
 oi
 of
-oG
+vM
 pt
 pA
 pL
-mr
+Ex
 mU
 mU
 fW
@@ -23069,7 +23229,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aO
 dT
 dT
@@ -23082,8 +23242,8 @@ dT
 dT
 dT
 aO
-aE
-aE
+Sw
+Sw
 ao
 ao
 ao
@@ -23092,38 +23252,38 @@ ao
 ao
 ao
 ao
-eL
-eL
-eL
-eL
-eL
-eL
-gr
-gr
+Py
+Py
+Py
+Py
+Py
+Sd
+Sd
+Sd
 hn
-gr
-gr
-jl
-jl
-jl
-jl
-jl
-pU
+Sd
+Sd
+Dc
+Dc
+Dc
+Dc
+Dc
+NY
 qb
 qb
 qb
-pU
-kp
-kp
-mv
-mv
-mv
+NY
+ha
+ha
+Ex
+Ex
+Ex
 oJ
-mv
-mv
-mv
-mv
-mv
+Ex
+Ex
+Ex
+Ex
+Ex
 mU
 mU
 fW
@@ -23221,7 +23381,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aP
 aV
 aV
@@ -23234,8 +23394,8 @@ aV
 aV
 aV
 bs
-aE
-aE
+Sw
+Sw
 ao
 ao
 ao
@@ -23249,13 +23409,13 @@ ao
 ao
 ao
 ao
-gr
+Sd
 gS
 gR
 gT
 hJ
 nV
-gr
+Sd
 fW
 fW
 fW
@@ -23267,15 +23427,15 @@ ao
 aa
 aa
 ao
-mv
+fB
 pM
-oj
+Ys
 re
 rf
-oj
-oj
+Ys
+Ys
 pM
-mv
+fB
 fW
 fW
 fW
@@ -23373,7 +23533,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aO
 cD
 cD
@@ -23386,8 +23546,8 @@ cD
 cD
 cD
 aO
-aE
-aE
+Sw
+Sw
 aa
 aa
 ao
@@ -23401,13 +23561,13 @@ ao
 ao
 ao
 aa
-gr
-hm
+Sd
+LA
 rk
 ho
 hK
 rl
-gr
+Sd
 fW
 cr
 cr
@@ -23419,15 +23579,15 @@ ao
 ao
 ao
 ao
-mv
+fB
 pM
 ok
 oL
 pj
 pu
-oj
+Ys
 pM
-mv
+fB
 fW
 fW
 fW
@@ -23525,7 +23685,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aR
 aV
 aV
@@ -23538,8 +23698,8 @@ aV
 aV
 aV
 bt
-aE
-aE
+Sw
+Sw
 aa
 ao
 ao
@@ -23553,13 +23713,13 @@ ao
 ao
 aa
 aa
-gr
+Sd
 gS
 gL
 hp
 hL
 rK
-gr
+Sd
 fW
 cr
 fW
@@ -23573,13 +23733,13 @@ aa
 aa
 mx
 ny
-ol
+sn
 oM
 DO
 oM
-oj
+Ys
 pN
-mv
+fB
 fW
 fW
 fW
@@ -23677,7 +23837,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aM
 cD
 cD
@@ -23690,8 +23850,8 @@ cD
 cD
 cD
 aM
-aE
-aE
+Sw
+Sw
 ao
 ao
 ao
@@ -23705,13 +23865,13 @@ ao
 ao
 ao
 ao
-gr
-gr
-gs
-gr
-gr
+Sd
+Sd
+zL
+Sd
+Sd
 hM
-gr
+Sd
 fW
 cr
 cr
@@ -23723,15 +23883,15 @@ ao
 ao
 ao
 ao
-mv
+fB
 pM
-ol
+sn
 OZ
-oj
-oj
-oj
+Ys
+Ys
+Ys
 pM
-mv
+fB
 fW
 fW
 fW
@@ -23829,7 +23989,7 @@ aa
 aa
 aa
 aK
-aE
+Sw
 aM
 aM
 aM
@@ -23842,8 +24002,8 @@ aM
 aM
 aM
 aM
-aE
-aE
+Sw
+Sw
 aa
 aa
 ao
@@ -23863,7 +24023,7 @@ ao
 ao
 iw
 fJ
-hN
+ao
 mU
 cr
 cr
@@ -23875,15 +24035,15 @@ ao
 aa
 ao
 aa
-mv
+fB
 pM
-iL
+uk
 oN
 pk
 oN
 pB
 pM
-mv
+fB
 fW
 fW
 fW
@@ -23981,21 +24141,21 @@ aa
 aa
 aa
 aK
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
-aE
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
+Sw
 aa
 aa
 ao
@@ -24027,15 +24187,15 @@ ao
 ao
 ao
 ao
-mv
-mv
-mv
-mv
-mv
-mv
-mv
-mv
-mv
+fB
+fB
+fB
+fB
+fB
+fB
+fB
+fB
+fB
 fW
 fW
 fW
