@@ -2,7 +2,7 @@
 /datum/techprint/holo
 	name = "Holographic Projectors"
 	desc = "Realistic holographic projectors able to fool the naked eye."
-	tech_req_all = list(/datum/techprint/energy)
+	tech_req_all = list(/datum/techprint/sensors)
 	required_materials = list("glass" = 20)
 	ticks_max = 50
 /*

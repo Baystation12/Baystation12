@@ -12,6 +12,7 @@ protolathe: uses materials and components (objects)
 /datum/research_design
 	var/name
 	var/product_type
+	var/desc
 	var/required_reagents = list()
 	var/required_materials = list()
 	var/required_objs = list()

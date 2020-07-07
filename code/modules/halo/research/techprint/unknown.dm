@@ -1,7 +1,7 @@
 
 /datum/techprint/unknown
 	name = "Alien Analysis"
-	desc = "Analyze strange alien technology."
+	desc = "Analyze strange alien technology to potentially find a hidden techprint."
 
 /datum/techprint/unknown/can_destruct_obj(var/obj/item/I)
 	//deconstruct anything and it might reveal a hidden techprint

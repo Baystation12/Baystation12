@@ -1,4 +1,5 @@
 /*
+//meme machine is working on sprites for these... have a human sprite now need a spartan 2 sprite
 /datum/techprint/spi_armour_one
 	name = "Semi-Powered Infiltration Armour I"
 	desc = "Next generation stealth armour with the cost saving benefit of reduced protectiveness."
@@ -15,4 +16,15 @@
 		/datum/techprint/ablative_patch,\
 		/datum/techprint/liquid_nanocrystal)
 	ticks_max = 250
+*/
+
+/*
+//superseded by other techprints
+/datum/techprint/liquid_nanocrystal
+	name = "Liquid nanocrystals"
+	desc = "Improved carbon nanotubing for stronger, lighter materials."
+	required_materials = list("steel" = 10, "glass" = 10)
+	required_reagents = list(/datum/reagent/carbon = 50)
+	ticks_max = 75
+	tech_rech_all = list(/datum/techprint/compression_three)
 */
