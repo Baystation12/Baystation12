@@ -53,9 +53,7 @@
 	name = "spartan laser"
 	icon_state = "heavylaser"
 	damage = 100
-	shield_damage = 500 //No shields for you
-	damage_type = "bomb"
-	damtype = "bomb"
+	shield_damage = 100 //No shields for you
 	armor_penetration = 100
 
 	fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
@@ -63,8 +61,3 @@
 	muzzle_type = /obj/effect/projectile/laser_heavy/muzzle
 	tracer_type = /obj/effect/projectile/laser_heavy/tracer
 	impact_type = /obj/effect/projectile/laser_heavy/impact
-
-/obj/item/projectile/beam/spartan/attack_mob()
-	damage_type = BURN
-	damtype = BURN
-	return ..()
