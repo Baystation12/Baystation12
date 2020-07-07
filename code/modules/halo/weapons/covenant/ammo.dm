@@ -57,7 +57,7 @@
 /obj/item/projectile/bullet/covenant/plasmarepeater
 	damage = 30 //The repeater does enough, thank you.
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
-	icon_state = "Plasmarifle Shot"
+	icon_state = "plasma_repeater"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
 
 /obj/item/projectile/bullet/covenant/plasmarifle/brute
@@ -353,7 +353,7 @@
 	armor_penetration = 30
 	shield_damage = 150
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
-	icon_state = "heavy_plas_cannon"
+	icon_state = "pulse0"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 	var/aoe_damage = 5
 
