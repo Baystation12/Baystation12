@@ -121,7 +121,7 @@
 
 	for(var/mob/living/m in range(alt_explosion_range,loc))
 		var/mult = 1
-		if(get_dist(m,loc) > 0)
+		if(m.loc != loc)
 			mult = multiplier_non_direct
 		m.adjustFireLoss(alt_explosion_damage_max*mult)
 		if(apply_ex_act)
