@@ -26,22 +26,22 @@
 /datum/category_item/player_setup_item/physical/equipment/load_character(var/savefile/S)
 	var/load_backbag
 
-	from_file(S["all_underwear"], pref.all_underwear)
-	from_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	from_file(S["backpack"], load_backbag)
-	from_file(S["backpack_metadata"], pref.backpack_metadata)
-	from_file(S["sensor_setting"], pref.sensor_setting)
-	from_file(S["sensors_locked"], pref.sensors_locked)
+	from_save(S["all_underwear"], pref.all_underwear)
+	from_save(S["all_underwear_metadata"], pref.all_underwear_metadata)
+	from_save(S["backpack"], load_backbag)
+	from_save(S["backpack_metadata"], pref.backpack_metadata)
+	from_save(S["sensor_setting"], pref.sensor_setting)
+	from_save(S["sensors_locked"], pref.sensors_locked)
 
 	pref.backpack = backpacks_by_name[load_backbag] || get_default_outfit_backpack()
 
 /datum/category_item/player_setup_item/physical/equipment/save_character(var/savefile/S)
-	to_file(S["all_underwear"], pref.all_underwear)
-	to_file(S["all_underwear_metadata"], pref.all_underwear_metadata)
-	to_file(S["backpack"], pref.backpack.name)
-	to_file(S["backpack_metadata"], pref.backpack_metadata)
-	to_file(S["sensor_setting"], pref.sensor_setting)
-	to_file(S["sensors_locked"], pref.sensors_locked)
+	to_save(S["all_underwear"], pref.all_underwear)
+	to_save(S["all_underwear_metadata"], pref.all_underwear_metadata)
+	to_save(S["backpack"], pref.backpack.name)
+	to_save(S["backpack_metadata"], pref.backpack_metadata)
+	to_save(S["sensor_setting"], pref.sensor_setting)
+	to_save(S["sensors_locked"], pref.sensors_locked)
 
 /datum/category_item/player_setup_item/physical/equipment/sanitize_character()
 	if(!istype(pref.all_underwear))
@@ -210,12 +210,12 @@
 		)
 
 		var/old_index
-		from_file(character["backbag"], old_index)
+		from_save(character["backbag"], old_index)
 
 		if(old_index > 0 && old_index <= old_index_to_backpack_type.len)
 			pref.backpack = decls_repository.get_decl(old_index_to_backpack_type[old_index])
 		else
 			pref.backpack = get_default_outfit_backpack()
 
-		to_file(character["backpack"], pref.backpack.name)
+		to_save(character["backpack"], pref.backpack.name)
 		return 1

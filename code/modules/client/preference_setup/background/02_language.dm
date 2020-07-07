@@ -10,10 +10,10 @@
 	var/list/free_languages
 
 /datum/category_item/player_setup_item/background/languages/load_character(var/savefile/S)
-	from_file(S["language"], pref.alternate_languages)
+	from_save(S["language"], pref.alternate_languages)
 
 /datum/category_item/player_setup_item/background/languages/save_character(var/savefile/S)
-	to_file(S["language"],   pref.alternate_languages)
+	to_save(S["language"],   pref.alternate_languages)
 
 /datum/category_item/player_setup_item/background/languages/sanitize_character()
 	if(!islist(pref.alternate_languages))

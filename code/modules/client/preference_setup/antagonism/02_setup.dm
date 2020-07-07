@@ -14,8 +14,8 @@
 
 /datum/category_item/player_setup_item/antagonism/basic/load_character(var/savefile/S)
 	var/list/uplink_order
-	from_file(S["uplink_sources"], uplink_order)
-	from_file(S["exploit_record"], pref.exploit_record)
+	from_save(S["uplink_sources"], uplink_order)
+	from_save(S["exploit_record"], pref.exploit_record)
 
 	if(istype(uplink_order))
 		pref.uplink_sources = list()
@@ -30,8 +30,8 @@
 		var/decl/uplink_source/UL = entry
 		uplink_order += UL.name
 
-	to_file(S["uplink_sources"], uplink_order)
-	to_file(S["exploit_record"], pref.exploit_record)
+	to_save(S["uplink_sources"], uplink_order)
+	to_save(S["exploit_record"], pref.exploit_record)
 
 /datum/category_item/player_setup_item/antagonism/basic/sanitize_character()
 	if(!istype(pref.uplink_sources))

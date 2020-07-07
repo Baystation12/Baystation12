@@ -13,7 +13,7 @@
 
 /datum/category_item/player_setup_item/player_global/prefixes/load_preferences(var/savefile/S)
 	var/list/prefix_keys_by_name
-	from_file(S["prefix_keys"], prefix_keys_by_name)
+	from_save(S["prefix_keys"], prefix_keys_by_name)
 
 	if(istype(prefix_keys_by_name))
 		pref.prefix_keys_by_type = list()
@@ -28,7 +28,7 @@
 		var/decl/prefix/prefix_instance = decls_repository.get_decl(prefix_type)
 		prefix_keys_by_name[prefix_instance.name] = pref.prefix_keys_by_type[prefix_type]
 
-	to_file(S["prefix_keys"], prefix_keys_by_name)
+	to_save(S["prefix_keys"], prefix_keys_by_name)
 
 /datum/category_item/player_setup_item/player_global/prefixes/sanitize_preferences()
 	if(!istype(pref.prefix_keys_by_type))
