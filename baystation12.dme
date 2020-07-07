@@ -1890,6 +1890,7 @@
 #include "code\modules\halo\research\designs\ai.dm"
 #include "code\modules\halo\research\designs\armour_upgrade.dm"
 #include "code\modules\halo\research\designs\explosives.dm"
+#include "code\modules\halo\research\designs\glasses_huds.dm"
 #include "code\modules\halo\research\designs\grenade.dm"
 #include "code\modules\halo\research\designs\implants.dm"
 #include "code\modules\halo\research\designs\language.dm"
