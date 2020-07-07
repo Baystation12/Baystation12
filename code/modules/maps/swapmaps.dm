@@ -591,7 +591,7 @@ proc/SwapMaps_CreateFromTemplate(template_id)
 		S=new
 		S.ImportText("/",file("map_[template_id].txt"))
 	/*
-		This hacky workaround is needed because S >> M will create a brand new
+		This hacky workaround is needed because reading S to M will create a brand new
 		M to fill with data. There's no way to control the Read() process
 		properly otherwise. The //.0 path should always match the map, however.
 	 */
@@ -618,7 +618,7 @@ proc/SwapMaps_LoadChunk(chunk_id,turf/locorner)
 		S=new
 		S.ImportText("/",file("map_[chunk_id].txt"))
 	/*
-		This hacky workaround is needed because S >> M will create a brand new
+		This hacky workaround is needed because reading S to M will create a brand new
 		M to fill with data. There's no way to control the Read() process
 		properly otherwise. The //.0 path should always match the map, however.
 	 */

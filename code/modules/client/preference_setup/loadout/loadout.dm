@@ -127,7 +127,7 @@ var/list/gear_datums = list()
 		fcolor = "#e67300"
 	. += "<table align = 'center' width = 100%>"
 	. += "<tr><td colspan=3><center>"
-	. += "<a href='?src=\ref[src];prev_slot=1'>\<\<</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>\>\></a>"
+	. += "<a href='?src=\ref[src];prev_slot=1'>\<=</a><b><font color = '[fcolor]'>\[[pref.gear_slot]\]</font> </b><a href='?src=\ref[src];next_slot=1'>=\></a>"
 
 	if(config.max_gear_cost < INFINITY)
 		. += "<b><font color = '[fcolor]'>[total_cost]/[config.max_gear_cost]</font> loadout points spent.</b>"

@@ -187,7 +187,6 @@
 
 	//Figure out the target pressure difference
 	var/pressure_delta = get_pressure_delta(environment)
-	//src.visible_message("DEBUG >>> [src]: pressure_delta = [pressure_delta]")
 
 	if((environment.temperature || air_contents.temperature) && pressure_delta > 0.5)
 		if(pump_direction) //internal -> external
