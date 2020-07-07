@@ -119,13 +119,15 @@
 	if(alt_explosion_range == -1)
 		return 0
 
-	for(var/mob/living/m in range(alt_explosion_range,loc))
-		var/mult = 1
-		if(m.loc != loc)
-			mult = multiplier_non_direct
-		m.adjustFireLoss(alt_explosion_damage_max*mult)
+	for(var/atom/movable/a in range(alt_explosion_range,loc))
+		var/mob/living/m = a
+		if(istype(m))
+			var/mult = 1
+			if(m.loc != loc)
+				mult = multiplier_non_direct
+			m.adjustFireLoss(alt_explosion_damage_max*mult)
 		if(apply_ex_act)
-			m.ex_act(3)
+			a.ex_act(3)
 	return 1
 
 /obj/item/weapon/grenade/attack_hand()
