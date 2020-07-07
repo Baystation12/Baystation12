@@ -1894,7 +1894,7 @@
 #include "code\modules\halo\research\designs\weapons.dm"
 #include "code\modules\halo\research\machines\_research.dm"
 #include "code\modules\halo\research\machines\computer.dm"
-#include "code\modules\halo\research\machines\destructive_analyzer.dm"
+#include "code\modules\halo\research\machines\destructive.dm"
 #include "code\modules\halo\research\machines\dissembler.dm"
 #include "code\modules\halo\research\machines\protolathe\_protolathe.dm"
 #include "code\modules\halo\research\machines\protolathe\components.dm"
