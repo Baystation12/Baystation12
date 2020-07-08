@@ -33,7 +33,7 @@
 /material/nanolaminate/generate_recipes()
 	..()
 	recipes += new/datum/stack_recipe("nanolaminate floor tile", /obj/item/stack/tile/covenant, 1, 4, 20)
-	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/covenant_barricade, 5, one_per_turf = 1, on_floor = 1, time = 50)
+	recipes += new/datum/stack_recipe("[display_name] barricade", /obj/structure/destructible/covenant_barricade, 5, one_per_turf = 2, on_floor = 1, time = 50)
 
 /obj/item/stack/material/nanolaminate
 	name = "nanolaminate"
@@ -51,6 +51,19 @@
 
 /obj/item/stack/material/nanolaminate/fifty
 	amount = 50
+
+//techwalled
+/*
+/datum/alloy/nanolaminate
+	metaltag = "nanolaminate"
+	requires = list(
+		"corundum" = 1,
+		"carbon" = 1,
+		"mhydrogen" = 1
+		)
+	product_mod = 0.3
+	product = /obj/item/stack/material/nanolaminate
+	*/
 
 
 
@@ -97,6 +110,18 @@
 /obj/item/stack/material/duridium/fifty
 	amount = 50
 
+//techwalled
+/*
+/datum/alloy/duridium
+	metaltag = "duridium"
+	requires = list(
+		"duridium" = 1,
+		"carbon" = 1,
+		"iron" = 1
+		)
+	product_mod = 0.5
+	product = /obj/item/stack/material/duridium
+*/
 
 
 /* KEMOCITE */

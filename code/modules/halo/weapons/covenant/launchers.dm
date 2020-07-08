@@ -23,6 +23,8 @@
 		)
 	slowdown_general = 2
 	wielded_item_state = "fuelrod-wielded"
+	salvage_components = list(/obj/item/plasma_core)
+	matter = list("nanolaminate" = 2, "kemocite" = 1)
 
 /obj/item/weapon/gun/projectile/fuel_rod/update_icon()
 	if(ammo_magazine)

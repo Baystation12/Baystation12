@@ -6,6 +6,7 @@
 	icon_state = "minorhelmet"
 	item_state = "minorhelmet_worn"
 	species_restricted = list("Tvaoan Kig-Yar")
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/head/helmet/kigyar/skirmisher/major
 	name = "T\'Vaoan Major helmet"

@@ -1,6 +1,5 @@
 
 /datum/job/unsc/oni
-	selection_color = "#008000"
 	access = list(access_unsc,access_unsc_oni)
 	spawnpoint_override = null
 	fallback_spawnpoint = null
@@ -8,8 +7,8 @@
 /datum/job/unsc/oni/research
 	title = "ONI Researcher"
 	supervisors = "the ONI Research Director"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/job/unsc/oni/research
 	alt_titles = list("ONI Doctor","ONI Physicist","ONI Botanist","ONI Chemist","ONI Weapons Researcher","ONI Surgeon","ONI Geneticist")
 

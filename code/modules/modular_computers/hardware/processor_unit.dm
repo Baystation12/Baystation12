@@ -20,25 +20,43 @@
 	hardware_size = 1
 	power_usage = 25
 	max_idle_programs = 1
-	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
+	origin_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 2)
+
+/obj/item/weapon/computer_hardware/processor_unit/quantum
+	name = "quantum processor"
+	desc = "An advanced CPU that uses quantum core instead of regular circuitry. It can run up to four programs simultaneously"
+	icon_state = "cpu_normal_photonic"
+	hardware_size = 2
+	power_usage = 250
+	max_idle_programs = 3
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+
+/obj/item/weapon/computer_hardware/processor_unit/quantum/small
+	name = "quantum microprocessor"
+	desc = "An advanced miniaturised CPU for use in portable devices. It uses a quantum core instead of regular circuitry. It can run up to three programs simultaneously."
+	icon_state = "cpu_small_photonic"
+	hardware_size = 1
+	power_usage = 75
+	max_idle_programs = 2
+	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
 
 /obj/item/weapon/computer_hardware/processor_unit/photonic
 	name = "photonic processor"
 	desc = "An advanced experimental CPU that uses photonic core instead of regular circuitry. It can run up to five programs simultaneously, but uses a lot of power."
 	icon_state = "cpu_normal_photonic"
 	hardware_size = 2
-	power_usage = 250
+	power_usage = 500
 	max_idle_programs = 4
 	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/computer_hardware/processor_unit/photonic/small
 	name = "photonic microprocessor"
-	desc = "An advanced miniaturised CPU for use in portable devices. It uses photonic core instead of regular circuitry. It can run up to three programs simultaneously."
+	desc = "An advanced miniaturised CPU for use in portable devices. It uses photonic core instead of regular circuitry. It can run up to four programs simultaneously."
 	icon_state = "cpu_small_photonic"
 	hardware_size = 1
-	power_usage = 75
-	max_idle_programs = 2
-	origin_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 3)
+	power_usage = 150
+	max_idle_programs = 3
+	origin_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/computer_hardware/processor_unit/Destroy()
 	if(holder2 && (holder2.processor_unit == src))

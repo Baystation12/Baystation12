@@ -17,6 +17,7 @@
 	var/shieldstrength = 1
 	var/totalshields = 1
 	var/intercept_chance = 100	//A 100% chance to block only a single bullet.
+	matter = list("nanolaminate" = 1)
 
 /obj/effect/overlay/shields/tvoan
 	icon = SKIRMISHER_CLOTHING_PATH

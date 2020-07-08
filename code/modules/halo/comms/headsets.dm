@@ -128,6 +128,7 @@
 	name = "Battlenet headset"
 	icon = 'code/modules/halo/comms/comms.dmi'
 	dongles = list(/obj/item/device/channel_dongle/battlenet)
+	matter = list("nanolaminate" = 1)
 
 /obj/item/device/radio/headset/covenant/attackby()
 	return

@@ -7,6 +7,7 @@
 	var/product_mod = 1
 	var/product
 	var/metaltag
+	var/priority_weight = 1
 
 /datum/alloy/plasteel
 	metaltag = "plasteel"
@@ -17,6 +18,7 @@
 		)
 	product_mod = 0.3
 	product = /obj/item/stack/material/plasteel
+	priority_weight = 2
 
 /datum/alloy/ocp
 	metaltag = "osmium-carbide plasteel"
@@ -28,26 +30,7 @@
 		)
 	product_mod = 0.3
 	product = /obj/item/stack/material/ocp
-
-/datum/alloy/duridium
-	metaltag = "duridium"
-	requires = list(
-		"duridium" = 1,
-		"carbon" = 1,
-		"iron" = 1
-		)
-	product_mod = 0.5
-	product = /obj/item/stack/material/duridium
-
-/datum/alloy/nanolaminate
-	metaltag = "nanolaminate"
-	requires = list(
-		"corundum" = 1,
-		"carbon" = 1,
-		"mhydrogen" = 1
-		)
-	product_mod = 0.3
-	product = /obj/item/stack/material/nanolaminate
+	priority_weight = 3
 
 /datum/alloy/steel
 	metaltag = DEFAULT_WALL_MATERIAL

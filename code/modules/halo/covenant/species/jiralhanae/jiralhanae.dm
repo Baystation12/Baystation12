@@ -57,6 +57,8 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	inter_hand_dist = 15
 	unarmed_types = list(/datum/unarmed_attack/brute_punch)
 	inherent_verbs = list()
+	gibbed_anim = null
+	dusted_anim = null
 
 	equipment_slowdown_multiplier = 0.7
 

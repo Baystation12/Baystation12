@@ -12,6 +12,7 @@
 	body_parts_covered = FEET|LEGS
 	species_restricted = list("Tvaoan Kig-Yar")
 	sprite_sheets = list("Tvaoan Kig-Yar" = SKIRMISHER_CLOTHING_PATH)
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/shoes/skirmisher/major
 	name = "T\'Vaoan Major greaves"

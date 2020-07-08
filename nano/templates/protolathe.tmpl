@@ -1,0 +1,84 @@
+<!-- 
+Title: HaloStation13 Protolathe UI
+Used In File(s): \code\modules\halo\crafting\machines\protolathe\_protolathe.dm
+ -->
+
+<div class='block'>
+	<h3>Stored Resources: {{:data.resources}}</h3>
+	<div class="item">
+		<div class="itemLabelNarrow">Materials: </div>
+		{{for data.materials}}
+			{{:helper.link(value.info, '', { 'eject_mat' : value.matname })}}
+		{{empty}}
+				None
+		{{/for}}
+	</div>
+	<div class="item">
+	<div class="itemLabelNarrow">{{:helper.link(data.accepting_reagents ? 'Accepting' : 'Ejecting', '', { 'toggle_reagent' : 1})}} Reagents: </div>
+		<div class="itemContent">{{:data.reagents}}</div>
+	</div>
+	<div class="item">
+	<div class="itemLabelNarrow">Components: </div>
+	<div class="itemContent">
+	{{for data.components}}
+		{{:helper.link(value.info, '', { 'eject_comp' : value.type})}}
+	{{/for}}
+	</div>
+	</div>
+</div>
+
+<div style="float:left;width:60%">
+	<div class='block'>
+		<div class='item'>
+			{{if data.name == 0}}
+				<div style="width:85%;float:left"><h3>Select a design to learn more</h3></div>
+				<div style="width:15%;float:right">{{:helper.link('Craft', '', { 'craft' : data.name }, 'disabled')}}</div>
+				<br>
+				<br>
+				<br>
+				<br>
+			{{else}}
+				<div style="width:85%;float:left"><h3>Selected Design</h3></div>
+				<div style="width:15%;float:right">{{:helper.link('Craft', '', { 'craft' : data.name })}}</div>
+				<div class='itemLabel' style="width:100%">{{:data.name}}</div><br>
+				Complexity: {{:data.complexity == 0 ? "Instant" : data.complexity + " cycles"}}<br>
+				Requires: {{:data.consume}}<br>
+			{{/if}}
+		</div>
+	</div>
+	<div class='block'>
+		<h3>Available Designs</h3>
+		{{for data.avail_designs}}
+			<div class='item'>
+				{{:helper.link('View', '', { 'view' : value.name })}}
+				{{:helper.link('Craft', '', { 'craft' : value.name })}}&nbsp;
+				{{:value.name}}
+			</div>
+		{{empty}}
+			No designs available.<br>
+		{{/for}}
+		</div>
+	</div>
+</div>
+
+<div style="float:right;width:40%">
+	<div class='block'>
+		<h3>Production Queue</h3>
+		{{for data.design_queue}}
+			<div class='item'>
+				{{:helper.link('Cancel', '', { 'cancel' : value.index })}}
+				{{if value.status == 2}}
+					<div style="background-color:green">
+				{{else value.status == 0}}
+					<div style="background-color:red">
+				{{else}}
+					<div>
+				{{/if}}
+				{{:value.name}} {{:value.progress}}%</div>
+			</div>
+		{{empty}}
+			Production queue is empty.<br>
+		{{/for}}
+		</div>
+	</div>
+</div>
