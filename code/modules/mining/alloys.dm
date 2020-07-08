@@ -7,6 +7,7 @@
 	var/product_mod = 1
 	var/product
 	var/metaltag
+	var/priority_weight = 1
 
 /datum/alloy/plasteel
 	metaltag = "plasteel"
@@ -17,6 +18,7 @@
 		)
 	product_mod = 0.3
 	product = /obj/item/stack/material/plasteel
+	priority_weight = 2
 
 /datum/alloy/ocp
 	metaltag = "osmium-carbide plasteel"
@@ -28,6 +30,7 @@
 		)
 	product_mod = 0.3
 	product = /obj/item/stack/material/ocp
+	priority_weight = 3
 
 /datum/alloy/steel
 	metaltag = DEFAULT_WALL_MATERIAL

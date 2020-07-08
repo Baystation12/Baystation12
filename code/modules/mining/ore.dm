@@ -64,6 +64,9 @@
 	ore = /ore/diamond
 
 /obj/item/weapon/ore/osmium
+	ore = /ore/osmium
+
+/obj/item/weapon/ore/platinum
 	ore = /ore/platinum
 
 /obj/item/weapon/ore/hydrogen

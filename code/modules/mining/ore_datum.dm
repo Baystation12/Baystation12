@@ -85,6 +85,8 @@ var/global/list/ores_by_type = list()
 	icon_tag = "glass"
 	smelts_to = "glass"
 	alloy = 1
+	result_amount = 5
+	spread_chance = 25
 	compresses_to = "sandstone"
 	ore = /obj/item/weapon/ore/glass //Technically not needed since there's no glass ore vein, but consistency is nice
 
@@ -146,7 +148,16 @@ var/global/list/ores_by_type = list()
 /ore/platinum
 	name = "platinum"
 	display_name = "raw platinum"
-	smelts_to = "platinum"
+	compresses_to = "platinum"
+	alloy = 1
+	result_amount = 2
+	spread_chance = 25
+	ore = /obj/item/weapon/ore/platinum
+	scan_icon = "mineral_rare"
+
+/ore/osmium
+	name = "osmium"
+	display_name = "raw osmium"
 	compresses_to = "osmium"
 	alloy = 1
 	result_amount = 2
@@ -166,7 +177,7 @@ var/global/list/ores_by_type = list()
 
 /ore/corundum
 	name = "corundum"
-	display_name = "corundum"
+	display_name = "corundite"
 	alloy = 1
 	result_amount = 1
 	spread_chance = 20
@@ -185,6 +196,7 @@ var/global/list/ores_by_type = list()
 /ore/duridium
 	name = "duridium"
 	display_name = "duridium"
+	smelts_to = "duridium"
 	alloy = 1
 	ore = /obj/item/weapon/ore/duridium
 	scan_icon = "mineral_uncommon"
