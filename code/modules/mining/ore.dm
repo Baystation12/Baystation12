@@ -78,6 +78,9 @@
 /obj/item/weapon/ore/corundum
 	ore = /ore/corundum
 
+/obj/item/weapon/ore/osmium
+	ore = /ore/osmium
+
 /obj/item/weapon/ore/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/core_sampler))
 		var/obj/item/device/core_sampler/C = W
