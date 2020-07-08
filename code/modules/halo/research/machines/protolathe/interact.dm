@@ -17,7 +17,7 @@
 
 	ui = GLOB.nanomanager.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if (!ui)
-		ui = new(user, src, ui_key, "protolathe.tmpl", "Protolathe", 800, 600)
+		ui = new(user, src, ui_key, "protolathe.tmpl", "[src.name]", 800, 600)
 		ui.set_initial_data(data)
 		ui.open()
 		ui.set_auto_update(1)
@@ -63,7 +63,7 @@
 /obj/machinery/research/protolathe/verb/cycle_output_dir()
 	set src in view(1)
 	set category = "Object"
-	set name = "Cycle Protolathe output direction"
+	set name = "Cycle product output direction"
 
 	if(output_dir)
 		output_dir *= 2

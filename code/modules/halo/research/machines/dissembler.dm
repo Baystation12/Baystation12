@@ -140,7 +140,7 @@
 /obj/machinery/research/component_dissembler/verb/cycle_output_dir()
 	set src in view(1)
 	set category = "Object"
-	set name = "Cycle Component Dissembler output direction"
+	set name = "Cycle dissembly output direction"
 
 	output_dir *= 2
 	var/dir_text

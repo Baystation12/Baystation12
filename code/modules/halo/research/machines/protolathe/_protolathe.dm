@@ -2,9 +2,11 @@
 /obj/machinery/research/protolathe
 	name = "\improper protolathe"
 	icon_state = "protolathe"
-	flags = OPENCONTAINER
+	var/icon_base = "protolathe"
 
+	flags = OPENCONTAINER
 	var/max_storage = 100000
+	var/design_build_flag = PROTOLATHE
 
 	var/list/design_queue = list()
 
@@ -56,7 +58,7 @@
 		//get the template
 		var/datum/research_design/D = GLOB.designs_by_type[design_type]
 
-		if(D.build_type != PROTOLATHE)
+		if(D.build_type != design_build_flag)
 			continue
 
 		//start tracking it
