@@ -161,7 +161,9 @@
 /obj/vehicles/proc/display_ammo_status(var/mob/user)
 	for(var/m in ammo_containers)
 		var/obj/item/ammo_magazine/mag = m
-		var/msg = "is full!"
+		var/msg = "is empty!"
+		if(mag.stored_ammo.len == mag.initial_ammo)
+			msg = "is full!"
 		if(mag.stored_ammo.len >= mag.initial_ammo * 0.75)
 			msg = "is about 3 quarters full."
 		else if(mag.stored_ammo.len > mag.initial_ammo * 0.5)
