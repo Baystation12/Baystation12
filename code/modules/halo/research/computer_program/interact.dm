@@ -32,6 +32,11 @@
 			load_progress = min(load_progress, 100)
 
 		if(SCREEN_TECH)
+
+			if(selected_techprint && selected_techprint.cheat_finish)
+				to_debug_listeners("NOTICE: cheating finish for [selected_techprint.type]")
+				finalise_research(selected_techprint)
+
 			data += uiData_SelectedTech()
 			data += uiData_TechTreeAvailable()
 			data += uiData_TechTreeLocked()
