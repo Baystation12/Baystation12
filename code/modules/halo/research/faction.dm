@@ -16,6 +16,7 @@
 		/datum/techprint/data,
 		/datum/techprint/processing,
 		//,
+		/datum/techprint/biology,
 		/datum/techprint/miniaturisation,
 		/datum/techprint/energy,
 		/datum/techprint/compression,
