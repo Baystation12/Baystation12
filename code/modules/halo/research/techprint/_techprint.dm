@@ -7,6 +7,8 @@
 	var/hidden = FALSE
 	var/init_deps = FALSE
 
+	var/cheat_finish = FALSE
+
 	var/list/design_unlocks = list()	//"design name" = design type
 	var/list/required_for = list()		//this is autoset, dont touch it
 
@@ -36,7 +38,7 @@
 	consumables_max = required_reagents.len + required_materials.len + required_objs.len
 
 	if(!is_category())
-		if(Master.current_runlevel > RUNLEVEL_INIT)
+		if(GLOB.all_techprints.len)
 			LateInitialize()
 		else
 			//this isnt good coding practice but also

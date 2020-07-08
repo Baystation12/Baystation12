@@ -15,7 +15,7 @@
 	. = ..()
 
 	if(initialize_default)
-		if(Master.current_runlevel > RUNLEVEL_INIT)
+		if(GLOB.all_techprints.len)
 			LateInitialize()
 		else
 			GLOB.tech_lateloaders.Add(src)

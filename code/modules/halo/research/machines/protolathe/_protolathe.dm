@@ -46,7 +46,7 @@
 	. = ..()
 
 	//we are going to manually call late initialize so that the techprints and designs have been initialized properly
-	if(Master.current_runlevel > RUNLEVEL_INIT)
+	if(GLOB.all_designs.len)
 		LateInitialize()
 	else
 		GLOB.tech_lateloaders.Add(src)
