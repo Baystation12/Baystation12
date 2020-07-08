@@ -2,6 +2,7 @@
 /datum/techprint/energy_shielding_one
 	name = "Energy Shielding I"
 	desc = "Theoretical shield design based off Covenant energy shield generators."
+	hidden = TRUE
 	tech_req_one = list(\
 		/datum/techprint/sangheili_bodysuit,\
 		/datum/techprint/kigyar_gauntlet,\
