@@ -20,7 +20,7 @@
 			C.verbs += /client/proc/direct_destinations
 
 /datum/job/opredflag_cov/skirmisher
-	title = "T-Voan Skirmisher"
+	title = "T-Vaoan Skirmisher"
 	supervisors = "the Elites"
 	selection_color = "#9900ff"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_minor
@@ -29,17 +29,17 @@
 	track_players = 1
 
 /datum/job/opredflag_cov/skirmisher/major
-	title = "T-Voan Skirmisher Major"
+	title = "T-Vaoan Skirmisher Major"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_major
 
 /datum/job/opredflag_cov/skirmisher/murmillo
-	title = "T-Voan Skirmisher Murmillo"
+	title = "T-Vaoan Skirmisher Murmillo"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo
 
 /datum/job/opredflag_cov/skirmisher/commando
-	title = "T-Voan Skirmisher Commando"
+	title = "T-Vaoan Skirmisher Commando"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_commando
 
 /datum/job/opredflag_cov/skirmisher/champion
-	title = "T-Voan Skirmisher Champion"
+	title = "T-Vaoan Skirmisher Champion"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_champion

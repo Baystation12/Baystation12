@@ -19,7 +19,7 @@ GLOBAL_LIST_EMPTY(kigyar_corvette_spawns)
 
 /datum/spawnpoint/kigyar_corvette
 	display_name =  "Kig-Yar Corvette Spawn"
-	restrict_job = list("Kig-Yar - Minor","Kig-Yar - Major","Kig-Yar - Shipmistress","T-Voan - Major","T-Voan - Minor","T-Voan - Murmillo")
+	restrict_job = list("Kig-Yar - Minor","Kig-Yar - Major","Kig-Yar - Shipmistress","T-Vaoan - Major","T-Vaoan - Minor","T-Vaoan - Murmillo")
 
 /datum/spawnpoint/kigyar_corvette/New()
 	..()

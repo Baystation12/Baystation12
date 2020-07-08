@@ -54,7 +54,7 @@
 
 
 
-/***** TVOAN *****/
+/***** T'VAOAN *****/
 
 /obj/item/weapon/card/id/skirmisher_minor
 	name = "Tvoan Minor identification card"

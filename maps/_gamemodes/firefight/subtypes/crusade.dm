@@ -17,7 +17,7 @@
 
 	special_job_titles = list(\
 		"Sangheili Zealot",\
-		"T-Voan Champion")
+		"T-Vaoan Champion")
 
 	wave_spawns = list(\
 		list(\

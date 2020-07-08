@@ -47,7 +47,7 @@ Skirmisher Mercenaries
 */
 
 /datum/job/packwar_merc/skirmisher
-	title = "Boulder Clan Mercenary - T-Voan Murmillo"
+	title = "Boulder Clan Mercenary - T-Vaoan Murmillo"
 	supervisors = "Boulder Clan Captains and the Chieftain"
 	selection_color = "#993300"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo/merc_boulder
@@ -65,14 +65,14 @@ Skirmisher Mercenaries
 	current_merc_price = 300
 
 /datum/job/packwar_merc/skirmisher/ram
-	title = "Ram Clan Mercenary - T-Voan Murmillo"
+	title = "Ram Clan Mercenary - T-Vaoan Murmillo"
 	supervisors = "Ram Clan Captains and the Chieftain"
 	selection_color = "#337700"
 	spawn_controller_type = /obj/effect/landmark/mercspawn/ram
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo/merc_ram
 
 /datum/job/packwar_merc/skirmisher/champion
-	title = "Boulder Clan Mercenary - T-Voan Champion"
+	title = "Boulder Clan Mercenary - T-Vaoan Champion"
 	supervisors = "Boulder Clan Captains and the Chieftain"
 	selection_color = "#993300"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_champion/merc_boulder
@@ -80,7 +80,7 @@ Skirmisher Mercenaries
 	current_merc_price = 400
 
 /datum/job/packwar_merc/skirmisher/champion/ram
-	title = "Ram Clan Mercenary - T-Voan Champion"
+	title = "Ram Clan Mercenary - T-Vaoan Champion"
 	supervisors = "Ram Clan Captains and the Chieftain"
 	selection_color = "#337700"
 	spawn_controller_type = /obj/effect/landmark/mercspawn/ram
