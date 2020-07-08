@@ -476,7 +476,7 @@ default behaviour is:
 
 /mob/living/proc/update_occupied_sector(var/new_z)
 	var/obj/om_obj_old = map_sectors["[last_z]"]
-	var/obj/om_obj_new = map_sectors["[z]"]
+	var/obj/om_obj_new = map_sectors["[new_z]"]
 	if(om_obj_old == om_obj_new) //Some overmap objects span multiple z's.
 		return
 	if(om_obj_old)
