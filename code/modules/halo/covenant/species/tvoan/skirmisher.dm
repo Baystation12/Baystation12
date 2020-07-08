@@ -1,7 +1,7 @@
 
 /datum/species/kig_yar_skirmisher
-	name = "T\'vaoan Kig-Yar"
-	name_plural = "T\'vaoan Kig-Yar"
+	name = "Tvaoan Kig-Yar"
+	name_plural = "Tvaoan Kig-Yar"
 	spawn_flags = SPECIES_CAN_JOIN
 	blurb = "T'vaoan Skirmishers are the same species as the more common, lightly-built Ruutian Jackals, but \
 		they are subspecies that is faster, stronger, can jump higher and are more agile than any ordinary Kig-Yar. In addition, \
