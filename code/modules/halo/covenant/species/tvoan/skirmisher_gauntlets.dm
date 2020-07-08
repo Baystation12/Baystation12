@@ -1,7 +1,7 @@
 #define SKIRMISHER_CLOTHING_PATH 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi'
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets
-	name = "T'Voan Murmillo shield gauntlets"
+	name = "T\'Vaoan Murmillo shield gauntlets"
 	desc = "Point defence gauntlets with twin energy shields for deflecting fire."
 	icon = SKIRMISHER_CLOTHING_PATH
 	icon_override = SKIRMISHER_CLOTHING_PATH
@@ -53,14 +53,14 @@
 //variants
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/commando
-	name = "T'Voan Commando shield gauntlets"
+	name = "T\'Vaoan Commando shield gauntlets"
 	item_state = "commandoshield"
 	icon_state = "commandoglove"
 	shieldstrength = 0
 	totalshields = 0
 
 /obj/item/clothing/gloves/skirmisher_shield_gauntlets/champion
-	name = "T'Voan Champion shield gauntlets"
+	name = "T\'Vaoan Champion shield gauntlets"
 	item_state = "championshield"
 	icon_state = "championglove"
 	shieldstrength = 90

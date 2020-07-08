@@ -1,6 +1,6 @@
 
 /obj/item/clothing/suit/armor/special/skirmisher
-	name = "T'Voan Skirmisher harness"
+	name = "T\'Vaoan Skirmisher harness"
 	desc = "A protective harness for use during combat by  T'voan Kig'Yar."
 	icon = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi'
 	icon_state = "minor_obj"
@@ -12,23 +12,23 @@
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
 
 /obj/item/clothing/suit/armor/special/skirmisher/major
-	name = "T'Voan Major harness"
+	name = "T\'Vaoan Major harness"
 	icon_state = "major_obj"
 	item_state = "major"
 
 /obj/item/clothing/suit/armor/special/skirmisher/murmillo
-	name = "T'Voan Murmillo harness"
+	name = "T\'Vaoan Murmillo harness"
 	icon_state = "murmillo_obj"
 	item_state = "murmillo"
 
 /obj/item/clothing/suit/armor/special/skirmisher/commando
-	name = "T'Voan Commando harness"
+	name = "T\'Vaoan Commando harness"
 	icon_state = "commando_obj"
 	item_state = "commando"
 	specials = list(/datum/armourspecials/holo_decoy)
 
 /obj/item/clothing/suit/armor/special/skirmisher/champion
-	name = "T'Voan Champion harness"
+	name = "T\'Vaoan Champion harness"
 	icon_state = "champion_obj"
 	item_state = "champion"
 	specials = list(/datum/armourspecials/holo_decoy)
