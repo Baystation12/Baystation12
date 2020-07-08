@@ -6,9 +6,9 @@
 /obj/item/weapon/grenade/frag/spike
 	name = "spike grenade"
 	desc = "This device embeds itself into soft targets and explodes into a hail of deadly shards. Works well as a melee weapon."
-	icon = 'code/modules/halo/weapons/icons/jiralhanae_obj.dmi'
+	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
 	icon_state = "spikegren0"
-	icon_override = 'code/modules/halo/weapons/icons/jiralhanae_gear.dmi'
+	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
 	item_state = "spikegren1"
 	item_state_slots = list(slot_l_hand_str = "spnade", slot_r_hand_str = "spnade")
 
@@ -47,8 +47,8 @@
 /obj/item/weapon/gun/projectile/spiker
 	name = "Type-25 Spiker Carbine"
 	desc = "A sidearm with two wicked blades curving out from under the barrel."
-	icon = 'code/modules/halo/weapons/icons/jiralhanae_obj.dmi'
-	icon_override = 'code/modules/halo/weapons/icons/jiralhanae_gear.dmi'
+	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
+	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
 	icon_state = "spiker"
 	item_state = "blank"
 	slot_flags = SLOT_BACK | SLOT_BELT
@@ -84,7 +84,7 @@
 /obj/item/ammo_magazine/spiker
 	name = "spiker magazine"
 	desc = "A 30 round magazine for the Jiralhanae spiker"
-	icon = 'code/modules/halo/weapons/icons/jiralhanae_obj.dmi'
+	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
 	icon_state = "spiker_mag"
 	item_state = "blank"
 	mag_type = MAGAZINE
@@ -121,8 +121,8 @@
 /obj/item/weapon/gun/projectile/mauler
 	name = "Type-52 \"Mauler\""
 	desc = "A single shot, short range Jiralhanae sidearm with a powerful punch. Has a blade underneath."
-	icon = 'code/modules/halo/weapons/icons/jiralhanae_obj.dmi'
-	icon_override = 'code/modules/halo/weapons/icons/jiralhanae_gear.dmi'
+	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
+	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
 	icon_state = "mauler"
 	item_state = "blank"
 	slot_flags = SLOT_BACK | SLOT_BELT
@@ -156,7 +156,7 @@
 /obj/item/ammo_magazine/mauler
 	name = "mauler magazine"
 	desc = "A 5 round magazine for the Jiralhanae mauler"
-	icon = 'code/modules/halo/weapons/icons/jiralhanae_obj.dmi'
+	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
 	icon_state = "mauler_mag"
 	mag_type = MAGAZINE
 	ammo_type = /obj/item/ammo_casing/mauler
@@ -229,6 +229,7 @@
 /obj/item/weapon/grav_hammer/gravless
 	name = "Type-2 Energy Weapon/Hammer, Depowered"
 	desc = "A long haft and a heavy head with a tungsten-alloy blade on the reverse end. The short-range gravity field in the head of the weapon has been disabled."
+	icon_state = "gravlesshammer"
 	force = 45
 	hitsound = "swing_hit"
 	item_state_slots = list(slot_l_hand_str = "gravlesshammer", slot_r_hand_str = "gravlesshammer", slot_back_str = "back_hammer")
@@ -305,7 +306,7 @@
 /obj/item/weapon/grenade/brute_shot
 	name = "belt of type-25 antipersonnel grenades"
 	desc = "A small explosive device designed to be propelled out of the type-25 grenade launcher. Can also be thrown manually."
-	icon = 'code/modules/halo/weapons/icons/jiralhanae_obj.dmi'
+	icon = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi'
 	icon_state = "bruteshot_belt"
 	var/fire_sound = null
 	det_time = 50
@@ -390,7 +391,7 @@
 	while(grensleft > 0)
 
 		//create an image of a grenade and tweak it a bit
-		var/image/gren = image('code/modules/halo/weapons/icons/jiralhanae_obj.dmi', "bruteshot_gren")
+		var/image/gren = image('code/modules/halo/covenant/species/jiralhanae/jiralhanae_obj.dmi', "bruteshot_gren")
 		var/matrix/M = matrix()
 		M.Translate(rand(-8, 8), rand(-8, 8))
 		M.Turn(pick(0,45))

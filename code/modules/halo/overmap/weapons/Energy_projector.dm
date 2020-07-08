@@ -134,7 +134,7 @@
 	. = ..()
 	if(isnull(glass_effect_beam))
 		glass_effect_beam = new
-	explosion(a,-1,-1,2,5, adminlog = 0)
+	explosion(get_turf(a),-1,-1,2,5, adminlog = 0)
 	glass_effect_beam.do_glassing_effect(a,1,/turf/unsimulated/floor/lava/glassed_turf/to_space)
 	if(!warned)
 		warned = 1

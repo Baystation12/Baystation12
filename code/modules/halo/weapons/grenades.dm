@@ -12,7 +12,7 @@
 
 /obj/item/weapon/grenade/frag/m9_hedp/on_explosion(var/turf/O)
 	if(explosion_size)
-		explosion(O, -1, -1,explosion_size, round(explosion_size*2))
+		explosion(get_turf(O), -1, -1,explosion_size, round(explosion_size*2))
 	do_alt_explosion()
 
 /obj/item/weapon/storage/box/m9_frag

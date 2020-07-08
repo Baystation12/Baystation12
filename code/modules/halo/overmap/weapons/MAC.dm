@@ -218,7 +218,7 @@
 	return
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/proc/bombard_impact(var/atom/hit_turf)
-	explosion(hit_turf,4,6,7,20, adminlog = 0)
+	explosion(get_turf(hit_turf),4,6,7,20, adminlog = 0)
 
 /obj/machinery/overmap_weapon_console/mac/orbital_bombard/fire(var/atom/target,var/mob/user)
 	if(!do_power_check(user))
@@ -262,7 +262,7 @@
 		increase_from_damage -= 2
 		increase_from_damage = round(increase_from_damage * 0.5)
 		increase_from_damage += 2
-	explosion(impacted,0 + increase_from_damage,2 + increase_from_damage,3 + increase_from_damage,4 + increase_from_damage, adminlog = 0)
+	explosion(get_turf(impacted),0 + increase_from_damage,2 + increase_from_damage,3 + increase_from_damage,4 + increase_from_damage, adminlog = 0)
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

@@ -200,7 +200,7 @@
 	icon = 'code/modules/halo/overmap/icons/slipspace_drive_cov.dmi'
 	icon_state = "slipspace"
 	bounds = "64,64"
-	core_to_spawn = /obj/payload/slipspace_core/cov
+	//core_to_spawn = /obj/payload/slipspace_core/cov //Removed for Reclamation
 	precise_jump = 1
 
 /*
@@ -219,7 +219,7 @@
 	icon = 'code/modules/halo/overmap/icons/slipspace_drive_human.dmi'
 	icon_state = "slipspace"
 	bounds = "64,64"
-	core_to_spawn = /obj/payload/slipspace_core/human
+	//core_to_spawn = /obj/payload/slipspace_core/human //Ditto
 
 //CORE PAYLOADS//
 /obj/payload/slipspace_core

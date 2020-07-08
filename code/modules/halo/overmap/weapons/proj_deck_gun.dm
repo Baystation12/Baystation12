@@ -183,7 +183,7 @@
 /obj/item/projectile/deck_gun_damage_proj/on_impact(var/atom/a)
 	. = ..()
 	if(!istype(a,/obj/effect/shield))
-		explosion(a,-1,0,2,4, adminlog = 0)
+		explosion(get_turf(a),-1,0,2,4, adminlog = 0)
 
 /obj/item/projectile/overmap/deck_gun_proj
 	name = "deck gun round"

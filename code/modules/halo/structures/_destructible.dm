@@ -148,10 +148,6 @@
 		if(mover.throwing)
 			return climbable
 
-		//we are something small enough to slip around obstacles, but not a bullet
-		if(mover.checkpass(PASSTABLE))
-			return 1
-
 		return 0
 
 	else

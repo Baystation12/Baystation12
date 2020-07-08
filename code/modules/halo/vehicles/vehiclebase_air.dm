@@ -135,6 +135,6 @@
 	land_vehicle(1)
 	if(crash_sound)
 		playsound(src,crash_sound,100,0)
-	explosion(src.loc,-1,3,4,7)
+	explosion(get_turf(src),-1,3,4,7)
 
 #undef VEHICLE_CONNECT_DELAY

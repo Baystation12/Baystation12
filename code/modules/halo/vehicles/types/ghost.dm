@@ -28,7 +28,7 @@
 
 	min_speed = 6.25
 	max_speed = 2.25
-	drag = 1.25
+	drag = 2.25
 
 /obj/vehicles/ghost/update_object_sprites()
 	. = ..()
@@ -46,7 +46,7 @@
 
 /obj/item/vehicle_component/health_manager/ghost
 	integrity = 350
-	resistances = list("brute"=85,"burn"=85,"emp"=15,"bomb" = 0)
+	resistances = list("bullet"=65,"energy"=65,"emp"=15,"bomb" = 0)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/ghost

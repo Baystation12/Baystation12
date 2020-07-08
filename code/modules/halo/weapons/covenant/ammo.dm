@@ -155,7 +155,7 @@
 		if(shard.name == shard_name)
 			embedded_shards += shard
 		if(embedded_shards.len >=shards_to_explode)
-			explosion(L.loc,-1,-1,3,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
+			explosion(get_turf(L),-1,-1,3,5,guaranteed_damage = 100,guaranteed_damage_range = 1)
 			for(var/obj/I in embedded_shards)
 				var/obj/item/weapon/material/shard/shrapnel/needleshrap/needle = I
 				if(istype(needle))
@@ -325,7 +325,7 @@
 
 /obj/item/projectile/bullet/fuel_rod/on_impact(var/atom/A)
 	new /obj/effect/plasma_explosion/green(get_turf(src))
-	explosion(A,-1,1,2,4,guaranteed_damage = 30, guaranteed_damage_range = 2)
+	explosion(get_turf(A),-1,1,2,4,guaranteed_damage = 30, guaranteed_damage_range = 2)
 	for(var/mob/living/l in range(FUEL_ROD_IRRADIATE_RANGE,loc))
 		l.rad_act(FUEL_ROD_IRRADIATE_AMOUNT)
 	. = ..()
@@ -349,7 +349,7 @@
 
 /obj/item/projectile/bullet/covenant/concussion_rifle
 	name = "heavy plasma round"
-	damage = 50
+	damage = 35 //Same as plasma rifle, but it has AP!
 	armor_penetration = 30
 	shield_damage = 150
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
