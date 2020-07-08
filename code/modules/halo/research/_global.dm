@@ -66,3 +66,10 @@ GLOBAL_LIST_EMPTY(designs_by_name)
 		GLOB.all_designs.Add(D)
 		GLOB.designs_by_type[D.type] = D
 		GLOB.designs_by_name[D.name] = D
+
+//for testing
+/obj/item/weapon/reagent_containers/glass/silicate/New()
+	. = ..()
+
+	reagents.add_reagent(/datum/reagent/silicate, 10)
+	update_icon()
