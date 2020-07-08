@@ -29,7 +29,7 @@
 
 	min_speed = 12.5
 	max_speed = 4.5
-	drag = 2
+	drag = 3
 
 	var/lockdown = 0
 	var/zoomed = 0
@@ -110,7 +110,7 @@
 
 /obj/item/vehicle_component/health_manager/cobra
 	integrity = 500
-	resistances = list("brute"=75,"burn"=75,"emp"=25,"bomb"=65)
+	resistances = list("bullet"=75,"energy"=75,"emp"=25,"bomb"=70)
 	repair_materials = list("plasteel")
 
 /datum/component_profile/cobra

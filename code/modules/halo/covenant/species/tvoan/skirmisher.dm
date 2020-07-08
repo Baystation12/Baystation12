@@ -1,7 +1,7 @@
 
 /datum/species/kig_yar_skirmisher
-	name = "Tvaoan Kig-Yar"
-	name_plural = "Tvaoan Kig-Yar"
+	name = "T\'vaoan Kig-Yar"
+	name_plural = "T\'vaoan Kig-Yar"
 	spawn_flags = SPECIES_CAN_JOIN
 	blurb = "T'vaoan Skirmishers are the same species as the more common, lightly-built Ruutian Jackals, but \
 		they are subspecies that is faster, stronger, can jump higher and are more agile than any ordinary Kig-Yar. In addition, \
@@ -13,7 +13,7 @@
 	blood_color = "#532476"
 	default_language = "Sangheili"
 	language = "Sangheili"
-	additional_langs = list("Tvoai")
+	additional_langs = list("T\'voai")
 	icobase = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	deform = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_template = 'code/modules/halo/covenant/species/tvoan/r_skirmisher_template.dmi'
@@ -24,7 +24,7 @@
 	pain_mod = 0.9
 	brute_mod = 1.1
 	burn_mod = 1.
-	slowdown = -1.0
+	slowdown = -0.7 //Just like how spartans are .2 greater than elites, skirms are .2 greater than spartans. Tweak all to .1 greater if this proves too high
 
 	equipment_slowdown_multiplier = 0.7
 	gibbed_anim = null
@@ -63,21 +63,21 @@
 	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_state = "tvoanhair1"
 	name = "Long Feathers"
-	species_allowed = list("Tvaoan Kig-Yar")
+	species_allowed = list("T\'vaoan Kig-Yar")
 
 /datum/sprite_accessory/hair/skirmisherquills/two
 	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_state = "tvoanhair2"
 	name = "Short Feathers"
-	species_allowed = list("Tvaoan Kig-Yar")
+	species_allowed = list("T\'vaoan Kig-Yar")
 
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
-	. = ..(new_loc,"Tvaoan Kig-Yar")
+	. = ..(new_loc,"T\'vaoan Kig-Yar")
 	faction = "Covenant"
 
 /datum/language/tvoai
-	name = "Tvoai"
-	desc = "The language of the Tvaoan KigYar"
+	name = "T\'voai"
+	desc = "The language of the T\'vaoan KigYar"
 	native = 1
 	colour = "tvaoan"
 	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")

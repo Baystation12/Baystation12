@@ -34,7 +34,7 @@
 	min_speed = 17.25
 	max_speed = 2.25
 	acceleration = 6
-	drag = 3.5
+	drag = 7
 
 	internal_air = new
 
@@ -47,8 +47,8 @@
 
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/spirit
-	integrity = 750
-	resistances = list("brute"=50,"burn"=40,"emp"=40,"bomb"=50)
+	integrity = 600
+	resistances = list("bullet"=70,"energy"=70,"emp"=50,"bomb"=50)
 	repair_materials = list("nanolaminate")
 
 /datum/component_profile/spirit
@@ -86,4 +86,4 @@
 	icon_state = "heavy_plas_cannon"
 
 /obj/item/projectile/bullet/covenant/spirit_cannon/on_impact(var/atom/impacted)
-	explosion(impacted,-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1,adminwarn = 0)
+	explosion(get_turf(impacted),-1,-1,0,1,guaranteed_damage = 25,guaranteed_damage_range = 1,adminwarn = 0)

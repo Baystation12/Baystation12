@@ -65,6 +65,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			var/power = devastation_range * 2 + heavy_impact_range + light_impact_range //The ranges add up, ie light 14 includes both heavy 7 and devestation 3. So this calculation means devestation counts for 4, heavy for 2 and light for 1 power, giving us a cap of 27 power.
 			explosion_rec(epicenter, power, shaped)
 		else
+			var/list/exploded = list()
 			for(var/turf/T in trange(max_range, epicenter))
 				var/dist = sqrt((T.x - x0)**2 + (T.y - y0)**2)
 
@@ -76,10 +77,14 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				T.ex_act(dist)
 				if(!T)
 					T = locate(x0,y0,z0)
+				//This method means an item can be hit multiple times by a single explosion.
 				for(var/atom_movable in T.contents)	//bypass type checking since only atom/movable can be contained by turfs anyway
+					if(atom_movable in exploded)
+						continue
 					var/atom/movable/AM = atom_movable
 					if(AM && AM.simulated && !T.protects_atom(AM))
 						AM.ex_act(dist,epicenter)
+						exploded += AM
 		if(guaranteed_damage_range > 0)
 			for(var/mob/living/m in range(guaranteed_damage_range,epicenter))
 				var/mob/living/carbon/human/h = m

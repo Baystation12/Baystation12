@@ -31,7 +31,7 @@
 	min_speed = 17.25
 	max_speed = 2.25
 	acceleration = 6
-	drag = 3.5
+	drag = 7
 	internal_air = new
 
 /obj/vehicles/air/pelican/update_object_sprites()
@@ -39,7 +39,7 @@
 //Pelican component profile define//
 /obj/item/vehicle_component/health_manager/pelican
 	integrity = 600
-	resistances = list("brute"=45,"burn"=45,"emp"=50,"bomb" = 50)
+	resistances = list("bullet"=70,"energy"=70,"emp"=50,"bomb" = 50)
 
 /datum/component_profile/pelican
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon)
@@ -109,7 +109,7 @@
 	min_speed = 17.25
 	max_speed = 2.25
 	acceleration = 6
-	drag = 3.5
+	drag = 7
 
 	internal_air = new
 
@@ -138,7 +138,6 @@
 	overlays += image(icon,"innie_overlay")
 
 /obj/item/vehicle_component/health_manager/pelican/urf
-	resistances = list("brute"=25,"burn"=20,"emp"=35)
 
 /datum/component_profile/pelican/urf
 	gunner_weapons = list(/obj/item/weapon/gun/vehicle_turret/pelican_autocannon_innie)
@@ -170,7 +169,7 @@
 	comp_prof = /datum/component_profile/pelican/civ
 
 /obj/item/vehicle_component/health_manager/pelican/civ
-	resistances = list("brute"=15,"burn"=10,"emp"=20)
+	resistances = list("bullet"=15,"energy"=10,"emp"=20)
 
 /datum/component_profile/pelican/civ
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/pelican/civ)

@@ -50,7 +50,7 @@
 						if(m_kill == our_mob)
 							continue
 						m_kill.dust()
-					explosion(our_mob.loc,1,2,2,7,guaranteed_damage = 77,guaranteed_damage_range = 2)
+					explosion(get_turf(our_mob),1,2,2,7,guaranteed_damage = 77,guaranteed_damage_range = 2)
 					our_mob.ghostize()
 					our_mob.loc = null
 					qdel(our_mob)

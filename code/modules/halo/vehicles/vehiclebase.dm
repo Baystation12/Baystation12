@@ -17,7 +17,7 @@
 	var/moving_y = 0
 	var/last_moved_axis = 0 //1 = X axis, 2 = Y axis.
 	var/list/speed = list(0,0) //The delay on movement in these directions.
-	var/drag = 1 //How much do we slow down per tick if no input is applied in a direction?
+	var/drag = 2 //How much do we slow down per tick if no input is applied in a direction?
 	var/min_speed = 5 //What's the highest delay we can have?
 	var/max_speed = 1//What's the lowest number we can go to in terms of delay?
 	var/acceleration = 1 //By how much does our speed change per input?
@@ -208,7 +208,7 @@
 	. = ..()
 
 /obj/vehicles/proc/on_death()
-	explosion(loc,-1,-1,2,5)
+	explosion(get_turf(loc),-1,-1,2,5)
 	movement_destroyed = 1
 	guns_disabled = 1
 	icon_state = "[initial(icon_state)]_destroyed"
@@ -354,7 +354,7 @@
 	update_object_sprites()
 
 /obj/vehicles/fall()
-	if(can_traverse_zs && movement_destroyed != 0 && active)
+	if(can_traverse_zs && !movement_destroyed && active)
 		return 0
 	. = ..()
 
@@ -404,7 +404,7 @@
 					speed[speed_index_target] = min(speed[speed_index_target] + drag,0)
 			if(world.time >= next_move_input_at)
 				last_moved_axis = 0
-			if(move_sound)
+			if(move_sound && world.time % 2 == 0)
 				playsound(loc,move_sound,75,0,4)
 		if(speed_index_target == 1)
 			moving_x = 0
@@ -428,14 +428,14 @@
 		var/should_continue = damage_occupant(pos_to_dam,P)
 		if(!should_continue)
 			return
-	comp_prof.take_component_damage(P.get_structure_damage(),P.damtype)
+	comp_prof.take_component_damage(P.get_structure_damage(),P.check_armour)
 	visible_message("<span class = 'danger'>[P] hits [src]!</span>")
 
 /obj/vehicles/ex_act(var/severity)
 	comp_prof.take_comp_explosion_dam(severity)
 	for(var/position in exposed_positions)
 		for(var/mob/living/m in get_occupants_in_position(position))
-			m.apply_damage((250/severity)*(exposed_positions[position]/100),BRUTE,,m.run_armor_check(null,"bomb"))
+			m.apply_damage(250/severity,BRUTE,,m.run_armor_check(null,"bomb"))
 
 /obj/vehicles/relaymove(var/mob/user, var/direction)
 	if(world.time < next_move_input_at)

@@ -1,3 +1,4 @@
+#define HIT_REGEN_TIME 5 MINUTES
 
 /obj/structure/invasion_scanner
 	name = "Forerunner Scanning Device"
@@ -7,6 +8,23 @@
 	density = 1
 	anchored = 0
 	var/datum/game_mode/outer_colonies/gm
+	var/explosive_hits = 5
+	var/regen_at = 0
+
+/obj/structure/invasion_scanner/ex_act(var/severity)
+	explosive_hits -= (round(3/severity))
+	if(explosive_hits <= 0)
+		qdel(src)
+	else
+		if(regen_at == 0)
+			GLOB.processing_objects += src
+		regen_at = world.time + HIT_REGEN_TIME
+
+/obj/structure/invasion_scanner/process()
+	if(world.time >= regen_at)
+		explosive_hits = initial(explosive_hits)
+		regen_at = 0
+		GLOB.processing_objects -= src
 
 /obj/structure/invasion_scanner/examine(var/mob/user)
 	. = ..()
