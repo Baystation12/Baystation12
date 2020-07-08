@@ -118,6 +118,11 @@
 	if(mover.elevation != elevation)
 		return 1
 
+	//never block movement from another zlevel
+	//this is to prevent exploits blocking off stairs and ladders
+	if(mover.z != src.z)
+		return 1
+
 	//we're not blocking anything so skip the processing later
 	if(!density)
 		return 1
@@ -329,7 +334,7 @@
 /obj/structure/destructible/proc/verb_climb()
 	set name = "Climb over structure"
 	set category = "Object"
-	set src = view(1)
+	set src in view(1)
 
 	structure_climb(usr)
 

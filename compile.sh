@@ -39,6 +39,9 @@ if [[ $DM == "" ]]; then
     exit 3
 fi
 
+#compile the initial dmb
+"$DM" "baystation12.dme"
+
 #wipe the existing list of precompiled maps 
 if [ -f switchable_maps ]
 then

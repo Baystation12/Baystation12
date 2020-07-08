@@ -53,7 +53,7 @@
 
 	else
 		to_chat(user,"<span class = 'notice'>You fully repair [c].</span>")
-		c.armor_thickness = initial(c.armor_thickness)
+		c.armor_thickness = c.armor_thickness_max
 		repair_supplies -= armor_damage_taken
 
 	c.update_damage_description()

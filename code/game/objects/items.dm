@@ -45,8 +45,6 @@
 	var/slowdown_per_slot[slot_last] // How much clothing is slowing you down. Negative values speeds you up. This is an associative list: item slot - slowdown
 	var/canremove = 1 //Mostly for Ninja code at this point but basically will not allow the item to be removed if set to 0. /N
 	var/list/armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) //This is the lower bound for armor values. Take this and multiply by (armor thickness /10)+1 for effective max values.
-	var/armor_thickness = 20 //The thickness of the armor, in mm. Keep null to opt-out usage of system for item. This value, set at compile time is the maximum value of thickness for this item. Armor can only lose 10% of this value per-hit.
-	var/list/armor_thickness_modifiers = list()//A list containing the weaknesses of the armor, used when performing armor-thickness depletion. Format: damage_type - multiplier
 	var/list/allowed = null //suit storage stuff.
 	var/max_suitstore_w_class = ITEM_SIZE_LARGE //suitstore stuff
 	var/obj/item/device/uplink/hidden_uplink = null // All items can have an uplink hidden inside, just remember to add the triggers.
@@ -78,7 +76,6 @@
 	// Species-specific sprite sheets for inventory sprites
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
-	var/dam_desc = ""
 
 	var/parry_slice_objects = 0 //Does this melee weapon, when parried, slice through the object?
 
@@ -231,7 +228,6 @@
 		if(ITEM_SIZE_HUGE + 1 to INFINITY)
 			size = "huge"
 	. = ..(user, distance, "", "It is a [size] item.")
-	to_chat(user,dam_desc)
 
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
@@ -761,39 +757,6 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	else
 		mob_icon = default_onmob_icons[slot]
 	return overlay_image(mob_icon,mob_state,color,RESET_COLOR,offset_to_apply)
-
-#define ARMOR_DESTROYED 1
-#define ARMOR_DAMAGED 0
-
-/obj/item/proc/degrade_armor_thickness(var/damage,var/damage_type)
-	damage /= 10
-	var/thickness_dam_cap = ARMOUR_THICKNESS_DAMAGE_CAP
-	if(damage_type in armor_thickness_modifiers)
-		thickness_dam_cap /= armor_thickness_modifiers[damage_type]
-	var/new_thickness = (armor_thickness - min(damage,thickness_dam_cap))
-	if(new_thickness < 0)
-		armor_thickness = 0
-		update_damage_description()
-		return ARMOR_DESTROYED
-	else
-		armor_thickness = round(new_thickness)
-		update_damage_description()
-		return ARMOR_DAMAGED
-
-#undef ARMOR_DESTROYED
-#undef ARMOR_DAMAGED
-
-/obj/item/proc/update_damage_description(var/damage_type = BRUTE)
-	var/desc_addition_to_apply = " "
-	if(armor_thickness < initial(armor_thickness) * 0.75)
-		desc_addition_to_apply = "<span class = 'warning'> It is [damage_type == BURN ? "slightly scorched" : "partially damaged"].</span>"
-	if(armor_thickness < initial(armor_thickness) * 0.5)
-		desc_addition_to_apply = "<span class = 'warning'> It is [damage_type == BURN ? "half-melted" : "scarred and cracked"].</span>"
-	if(armor_thickness < initial(armor_thickness) * 0.25)
-		desc_addition_to_apply = "<span class = 'warning'> It is [damage_type == BURN ? "mostly melted" : "scarred and shattered"].</span>"
-	if(armor_thickness <= 0)
-		desc_addition_to_apply = "<span class = 'warning'> It has [damage_type == BURN ? "melted away" : "become scarred and deformed"].</span>"
-	dam_desc = desc_addition_to_apply
 
 /obj/item/proc/can_use_when_prone()
 	return (w_class <= ITEM_SIZE_NORMAL)

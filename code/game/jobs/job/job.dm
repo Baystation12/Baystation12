@@ -190,7 +190,7 @@
 
 
 	//is this gamemode trying to balance the faction population?
-	var/num_balancing_factions = ticker.mode.faction_balance.len
+	var/num_balancing_factions = ticker.mode ? ticker.mode.faction_balance.len : 0
 	if(num_balancing_factions >= 2)
 		if(debug_pop_balance)	to_debug_listeners("Checking gamemode balance for [src.title]...")
 
@@ -211,7 +211,7 @@
 					var/total_faction_players = 0
 					for(var/faction_type in ticker.mode.faction_balance)
 						var/datum/faction/F = GLOB.factions_by_type[faction_type]
-						total_faction_players += F.living_minds.len
+						total_faction_players += F.players_alive()
 
 					//only try balancing if people have actually joined
 					if(debug_pop_balance)	to_debug_listeners("[total_faction_players] active")

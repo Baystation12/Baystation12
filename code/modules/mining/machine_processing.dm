@@ -123,7 +123,21 @@
 	if(!alloy_data)
 		alloy_data = list()
 		for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
-			alloy_data += new alloytype()
+			var/datum/alloy/new_alloy = new alloytype()
+
+			//sort by priority
+			var/success = FALSE
+			for(var/index = 1, index <= alloy_data.len, index++)
+
+				var/datum/alloy/check_alloy = alloy_data[index]
+				if(check_alloy.priority_weight < new_alloy.priority_weight)
+					alloy_data.Insert(index, new_alloy)
+					success = TRUE
+					break
+
+			//just put it at the end
+			if(!success)
+				alloy_data += new_alloy
 
 	ensure_ore_data_initialised()
 	for(var/ore in ore_data)
@@ -172,6 +186,9 @@
 
 		if(sheets >= sheets_per_tick) break
 
+		if(tick_alloys.len)
+			break
+
 		if(ores_stored[metal] > 0 && ores_processing[metal] != 0)
 
 			var/ore/O = ore_data[metal]
@@ -210,6 +227,9 @@
 
 						for(var/i=0,i<total,i++)
 							new A.product(output.loc)
+
+						//only one type of alloy per tick
+						break
 
 			else if(ores_processing[metal] == 2 && O.compresses_to) //Compressing.
 

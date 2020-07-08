@@ -64,6 +64,9 @@
 	ore = /ore/diamond
 
 /obj/item/weapon/ore/osmium
+	ore = /ore/osmium
+
+/obj/item/weapon/ore/platinum
 	ore = /ore/platinum
 
 /obj/item/weapon/ore/hydrogen
@@ -76,7 +79,11 @@
 	ore = /ore/duridium
 
 /obj/item/weapon/ore/corundum
+	name = "corundite"	//this name is needed here so it works with research
 	ore = /ore/corundum
+
+/obj/item/weapon/ore/osmium
+	ore = /ore/osmium
 
 /obj/item/weapon/ore/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/device/core_sampler))

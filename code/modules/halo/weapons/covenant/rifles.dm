@@ -11,6 +11,8 @@
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
 	screen_shake = 0
 	is_heavy = 1
+	salvage_components = list(/obj/item/plasma_core)
+	matter = list("nanolaminate" = 1)
 
 	//MA5 Counterpart. One less in burst, with overheat tracking, with an accuracy boon.
 	fire_delay = 6

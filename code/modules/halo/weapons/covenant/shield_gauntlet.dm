@@ -20,6 +20,7 @@
 	var/overloaded = 0
 
 	var/obj/item/weapon/gauntlet_shield/connected_shield
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/gloves/shield_gauntlet/examine(var/mob/user)
 	. = ..()

@@ -11,7 +11,7 @@
 	if(!do_after(user,ITEM_REPAIR_DELAY/2,src,1,1,,1))
 		return
 	user.visible_message("[user] fully repairs [c].")
-	c.armor_thickness = initial(c.armor_thickness)
+	c.armor_thickness = c.armor_thickness_max
 	c.update_damage_description()
 
 /obj/structure/repair_bench/attackby(obj/item/I, mob/user)

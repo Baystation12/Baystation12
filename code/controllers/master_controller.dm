@@ -93,6 +93,9 @@ datum/controller/game_controller/proc/setup_objects()
 	report_progress("Initializing lathe recipes")
 	populate_lathe_recipes()
 
+	report_progress("Initializing tech dependencies")
+	init_global_techprints()
+
 #undef CHECK_SLEEP_MASTER
 
 /proc/report_progress(var/progress_message)

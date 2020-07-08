@@ -35,9 +35,10 @@
 
 /obj/item/plasma_core
 	name = "plasma core"
-	desc = "A component used in product of weapons and devices."
+	desc = "A component used in product of Covenant weapons and devices."
 	icon = 'tools.dmi'
 	icon_state = "core"
+	matter = list("nanolaminate" = 1)
 
 /obj/item/em_module
 	name = "electromagnetic module"
