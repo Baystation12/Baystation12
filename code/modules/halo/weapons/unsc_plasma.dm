@@ -11,10 +11,13 @@
 	cell_type = /obj/item/unsc_plasma_cell/light_rounds
 	projectile_type = /obj/item/projectile/energy/unsc_plasma_light
 	fire_sound = 'code/modules/halo/sounds/laserAR660rpm2.wav'
+	var/reload_sound = 'code/modules/halo/sounds/Assault_Rifle_Reload_New.wav'
+	slot_flags = SLOT_BACK
+
+	//obj sprites
 	var/full_state = "ma5p"
 	var/dry_state = "ma5p_dry"
 	var/unloaded_state = "ma5p_unloaded"
-	var/reload_sound = 'code/modules/halo/sounds/Assault_Rifle_Reload_New.wav'
 
 	//default stuff
 	icon = 'code/modules/halo/weapons/icons/Weapon Sprites.dmi'
@@ -29,6 +32,8 @@
 	dispersion = list(0.0,0.2,0.3,0.5,0.73)
 
 	//mob sprites
+	var/item_state_full = "ma5p"
+	var/item_state_dry = "ma5b"
 	item_state = "ma5b"
 	wielded_item_state = "ma5b-wielded"
 	item_icons = list(
@@ -38,13 +43,38 @@
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
 
+/obj/item/weapon/gun/energy/unsc_plasma/update_icon()
+
+	var/old_state = icon_state
+	if(power_supply)
+		if(power_supply.charge)
+			icon_state = full_state
+			item_state = item_state_full
+			wielded_item_state = "[item_state_full]-wielded"
+		else
+			icon_state = dry_state
+			item_state = item_state_dry
+			wielded_item_state = "[item_state_dry]-wielded"
+	else
+		icon_state = unloaded_state
+		item_state = item_state_dry
+		wielded_item_state = "[item_state_dry]-wielded"
+
+	. = ..()
+
+	var/mob/M = src.loc
+	if(istype(M))
+		if(old_state != icon_state)
+
+			if(M.l_hand == src)
+				M.update_inv_l_hand()
+			else if(M.r_hand == src)
+				M.update_inv_r_hand()
+
 /obj/item/weapon/gun/energy/unsc_plasma/attack_hand(mob/user)
-	if(src.loc == user)
+	if(src.loc == user && user.get_inactive_hand() == src)
 		//unloading
 		if(power_supply)
-			//update icon states
-			icon_state = unloaded_state
-
 			//tell the user
 			to_chat(user,"<span class='info'>You remove [power_supply] from [src].</span>")
 			playsound(src, reload_sound, 100, 1)
@@ -53,6 +83,9 @@
 			if(!user.put_in_hands(power_supply))
 				power_supply.forceMove(get_turf(power_supply))
 			power_supply = null
+
+			//update the sprite
+			update_icon()
 
 		else
 			to_chat(user,"<span class='info'>[src] has no plasma power cell inserted.</span>")
@@ -71,10 +104,7 @@
 			power_supply = I
 
 			//update the sprite
-			if(power_supply.charge)
-				icon_state = full_state
-			else
-				icon_state = dry_state
+			update_icon()
 
 			//tell the user
 			to_chat(user,"<span class='info'>You load [I] into [src].</span>")
@@ -89,7 +119,7 @@
 /obj/item/weapon/gun/energy/unsc_plasma/consume_next_projectile()
 	. = ..()
 	if(power_supply && !power_supply.charge)
-		icon_state = dry_state
+		update_icon()
 
 /obj/item/unsc_plasma_cell/light_rounds
 	name = "UNSC light plasma magazine"
@@ -106,11 +136,12 @@
 
 /obj/item/weapon/gun/energy/unsc_plasma/full
 	icon_state = "ma5p"
-	cell_type = /obj/item/unsc_plasma_cell/light_rounds/full
+	item_state = "ma5p"
+	wielded_item_state = "ma5p-wielded"
 
-/obj/item/unsc_plasma_cell/light_rounds/full
-	icon_state = "plasma_mag_light1"
-	charge = 200
+/obj/item/weapon/gun/energy/unsc_plasma/full/Initialize()
+	. = ..()
+	power_supply.give(power_supply.maxcharge)
 
 
 
@@ -123,10 +154,19 @@
 	cell_type = /obj/item/unsc_plasma_cell/heavy_rounds
 	projectile_type = /obj/item/projectile/energy/unsc_plasma_heavy
 	fire_sound = 'code/modules/halo/sounds/WPN_Rifle_Laser_Fire_Player_03.wav'
+	reload_sound = 'code/modules/halo/sounds/DMR_Reload_New.wav'
+
+	//obj sprites
 	full_state = "m414"
 	dry_state = "m414_dry"
 	unloaded_state = "m414_unloaded"
-	reload_sound = 'code/modules/halo/sounds/DMR_Reload_New.wav'
+
+	//mob sprites
+	item_state_full = "m414"
+	item_state_dry = "m392"
+	//
+	item_state = "m392"
+	wielded_item_state = "m392-wielded"
 
 	//fire settings
 	accuracy = 2
@@ -136,13 +176,13 @@
 
 	//mob sprites
 	item_state = "m392"
+	wielded_item_state = "m392-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		slot_back_str = 'code/modules/halo/weapons/icons/Back_Weapons.dmi',
 		slot_s_store_str = 'code/modules/halo/weapons/icons/Armor_Weapons.dmi',
 		)
-	wielded_item_state = "m392-wielded"
 
 /obj/item/unsc_plasma_cell/heavy_rounds
 	name = "UNSC heavy plasma magazine"
@@ -160,8 +200,9 @@
 
 /obj/item/weapon/gun/energy/unsc_plasma/marksman/full
 	icon_state = "m414"
-	cell_type = /obj/item/unsc_plasma_cell/heavy_rounds/full
+	item_state = "m414"
+	wielded_item_state = "m414-wielded"
 
-/obj/item/unsc_plasma_cell/heavy_rounds/full
-	icon_state = "plasma_mag_heavy1"
-	charge = 75
+/obj/item/weapon/gun/energy/unsc_plasma/marksman/full/Initialize()
+	. = ..()
+	power_supply.give(power_supply.maxcharge)
