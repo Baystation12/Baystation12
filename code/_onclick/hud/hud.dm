@@ -273,7 +273,9 @@ datum/hud/New(mob/owner)
 		client.void = create_click_catcher()
 	if(!client.screen)
 		client.screen = list()
-	client.screen |= client.void
+
+	//this appears to be runtiming, but
+	//client.screen |= client.void
 
 /mob/new_player/add_click_catcher()
 	return
