@@ -139,6 +139,7 @@
 	is_heavy = 1
 	irradiate_non_cov = 5
 	slowdown_general = 0
+	matter = list("nanolaminate" = 1)
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

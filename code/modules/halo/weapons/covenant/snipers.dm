@@ -80,7 +80,7 @@
 	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
 	overheat_fullclear_delay = 40
 	alt_charge_method = 1
-	matter = list("nanolaminate" = 1)
+	matter = list("nanolaminate" = 2)
 	salvage_components = list(/obj/item/plasma_core)
 
 	item_icons = list(
