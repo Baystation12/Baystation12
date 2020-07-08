@@ -38,6 +38,8 @@ GLOBAL_LIST_INIT(last_names_sangheili, world.file2list('code/modules/halo/covena
 	inherent_verbs = list()
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/elite_punch)
+	gibbed_anim = null
+	dusted_anim = null
 
 	has_organ = list(
 	BP_HEART =    /obj/item/organ/internal/heart,

@@ -17,6 +17,7 @@
 	sprite_sheets = list("Sangheili" = SANGHEILI_ARMOUR_ICON)
 	species_restricted = list("Sangheili")
 	body_parts_covered = UPPER_TORSO | LOWER_TORSO | ARMS | LEGS
+	matter = list("cloth" = 1)
 
 /obj/item/clothing/head/helmet/sangheili
 	name = "Sangheili Helmet"
@@ -29,6 +30,7 @@
 	item_flags = THICKMATERIAL
 	unacidable = 1
 	armor = list(melee = 60, bullet = 40, laser = 30,energy = 30, bomb = 25, bio = 30, rad = 30) //Spartan tier helms.
+	matter = list("nanolaminate" = 1)
 
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
 
@@ -45,6 +47,7 @@
 	armor_thickness_modifiers = list()
 	unacidable = 1
 	max_suitstore_w_class = ITEM_SIZE_HUGE
+	matter = list("nanolaminate" = 2)
 
 /obj/item/clothing/shoes/sangheili
 	name = "Sanghelli Leg Armour"
@@ -56,6 +59,7 @@
 	body_parts_covered = LEGS|FEET
 	armor = list(melee = 60, bullet = 45, laser = 35,energy = 35, bomb = 30, bio = 35, rad = 35)
 	armor_thickness = 20
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/gloves/thick/sangheili
 	name = "Sangheili Combat Gauntlets"
@@ -73,6 +77,7 @@
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS
 	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
+	matter = list("nanolaminate" = 1)
 
 //Code for in guantlet energy daggers + the weapon itself ( edited dagger)
 

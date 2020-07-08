@@ -97,6 +97,8 @@
 			. -= 10
 		else if(locate(/obj/effect/rune/, T))
 			. -= 10
+		else
+			. -= 20
 	. = max(., 0)
 
 /proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)

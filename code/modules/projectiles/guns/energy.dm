@@ -92,9 +92,16 @@
 
 /obj/item/weapon/gun/energy/examine(mob/user)
 	. = ..(user)
-	var/shots_remaining = round(power_supply.charge / charge_cost)
-	to_chat(user, "Has [shots_remaining] shot\s remaining.")
-	return
+	var/extra_desc
+	if(power_supply)
+		extra_desc = "It has [round(100 * power_supply.charge / power_supply.maxcharge)]% charge left \
+			([power_supply.charge/charge_cost]/[power_supply.maxcharge/charge_cost] shots)."
+	else if(cell_type)
+		var/obj/item/weapon/cell/P = cell_type
+		extra_desc = "Accepts [initial(P.name)], but none are currently inserted."
+
+	if(extra_desc)
+		to_chat(user, extra_desc)
 
 /obj/item/weapon/gun/energy/update_icon()
 	..()

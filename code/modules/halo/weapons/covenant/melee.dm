@@ -24,6 +24,7 @@
 	sharp = 0
 	var/failsafe = 0
 	activate_sound = 'code/modules/halo/sounds/Energysworddeploy.ogg'
+	matter = list("nanolaminate" = 1)
 
 	lunge_dist = ESWORD_LEAP_DIST
 
@@ -172,6 +173,7 @@
 	armor_penetration = 40
 	hits_burn_mobs = 0
 	//active_force = 60
+	matter = list("nanolaminate" = 5)
 	throwforce = 10
 	damtype = PAIN
 	item_icons = list(
@@ -207,6 +209,7 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	edge = 1
 	sharp = 1
 	armor_penetration = 35
+	matter = list("nanolaminate" = 1)
 	var/explode_delay = 10 SECONDS
 	var/explode_at = -1
 	var/regen_delay = 2 MINUTES
@@ -321,3 +324,4 @@ Luckily, this isn't a downside due to the explosive properties of such a large a
 	icon = 'code/modules/halo/weapons/icons/Covenant Weapons.dmi'
 	icon_state = "Type-12 Antipersonnel Incapacitator"
 	item_state = "telebaton_0"
+	matter = list("nanolaminate" = 1)

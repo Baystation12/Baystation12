@@ -17,6 +17,8 @@
 	screen_shake = 0
 	irradiate_non_cov = 10
 	var/overcharge_cost = 1
+	salvage_components = list(/obj/item/plasma_core)
+	matter = list("nanolaminate" = 1)
 
 	overheat_capacity = 12
 	overheat_fullclear_delay = 25
@@ -137,6 +139,7 @@
 	is_heavy = 1
 	irradiate_non_cov = 5
 	slowdown_general = 0
+	matter = list("nanolaminate" = 1)
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

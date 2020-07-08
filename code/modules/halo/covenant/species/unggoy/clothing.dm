@@ -17,6 +17,7 @@
 
 	allowed = list(/obj/item/weapon/tank)
 	species_restricted = list("Unggoy")
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/mask/rebreather
 	name = "Unggoy Rebreather Mask"
@@ -36,6 +37,7 @@
 	unacidable = 1
 
 	var/rebreath_efficiency = 50 //Rebreather efficiency: Percentile
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/mask/rebreather/small
 	name = "Small Unggoy Rebreather Mask"
@@ -69,6 +71,7 @@
 	item_state_slots = list(slot_back_str = "methanetank_green_back", slot_l_hand_str = "methanetank_green", slot_r_hand_str = "methanetank_green")
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
 	var/starting_pressure = 1
+	matter = list("nanolaminate" = 1)
 
 /obj/item/weapon/tank/methane/empty
 	starting_pressure = 0
@@ -131,6 +134,7 @@
 	item_state_slots = list(slot_l_hand_str = "armor", slot_r_hand_str = "armor")
 	species_restricted = list("Unggoy")
 	armor = list(melee = 5, bullet = 5, laser = 5, energy = 5, bomb = 5, bio = 0, rad = 0)
+	matter = list("cloth" = 1)
 
 /obj/item/clothing/under/unggoy_thrall
 	name = "Unggoy thrall robe"

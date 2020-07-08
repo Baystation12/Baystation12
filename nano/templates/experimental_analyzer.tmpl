@@ -1,0 +1,141 @@
+<!-- 
+Title: HaloStation13 Autosurgeon UI
+Used In File(s): \code\modules\halo\crafting\computer_program\_experimental_analyzer.dm
+ -->
+ 
+{{if data.screen == 0}}
+	<h3>Please Wait</h3>
+	{{:data.load_message}} research database...<br>
+	{{:helper.displayBar(data.load_progress, 0, 100, '', data.load_progress + '%')}}
+{{else}}
+	{{:helper.link('File Menu', '', { 'set_screen' : 6 }, data.screen == 6 ? 'selected' : null)}}
+	{{:helper.link('Available Techprints', '', { 'set_screen' : 1 }, data.db_loaded ? (data.screen == 1 ? 'selected' : null) : 'disabled')}}
+	{{:helper.link('Researched Techprints', '', { 'set_screen' : 2 }, data.db_loaded ? (data.screen == 2 ? 'selected' : null) : 'disabled')}}
+	<b>{{:data.db_loaded ? data.db_name : ""}}</b>
+{{/if}}
+<br>
+{{if data.screen == 6}}
+	<h3>File Menu</h3>
+	{{:helper.link('New database', '', { 'file_new' : 1 })}}<br>
+	<br>
+	{{:helper.link('Save database as', '', { 'file_save_as' : 1 })}}<br>
+	<br>
+	{{:helper.link('Load database from file', '', { 'file_load' : 1 })}}<br>
+	<br>
+	{{:helper.link('Autoload database from file', '', { 'file_load_auto' : 1 })}}<br>
+	<br>
+	{{:helper.link('Merge database file in', '', { 'file_merge' : 1 }, data.db_loaded ? null : 'disabled')}}<br>
+	<br>
+	{{:helper.link('Unload database', '', { 'file_unload' : 1 }, data.db_loaded ? null : 'disabled')}}<br>
+	<br>
+	<b>Tips</b><br>
+	Database file format is "xxxx.RDB"<br>
+	Check your root directory for a pre-existing database before creating a new empty one.<br>
+	Remember to take a backup of your database on external storage.<br>
+	If you have a remote server try uploading a backup there.<br>
+	The "autoload" command finds the first valid database on your hard drive.<br>
+	Every change is autosaved to your hard drive.<br>
+	Wiping a database from RAM does not delete the file from your hard drive.<br>
+
+{{else data.screen == 1}}
+	{{if data.db_loaded == 1}}
+	
+		<div style="float:left;width:60%">
+			<h3>Selected Techprint</h3>
+			<div class='block'>
+			{{if data.selected == "None"}}
+				Select a techprint to learn more about it.<br>
+			{{else}}
+				<span><b>{{:data.selected}}</b></span>
+				<span style="float:right">{{:helper.displayBar(data.percent, 0, 100, '', data.percent + '%')}}</span>
+				<br>
+				{{:data.desc}}<br>
+				<div class='item'><div class='itemLabel'>Designs:</div><div class='itemContent'>{{:data.design_unlocks}}</div></div>
+				<div class='item'><div class='itemLabel'>Consumes:</div><div class='itemContent'>{{:data.consumables}}</div></div>
+				<div class='item'><div class='itemLabel'>Research:</div><div class='itemContent'>{{:data.reqs}}</div></div>
+				<div class='item'>
+					<div class='itemLabel'>Time:</div>
+					<div class='itemContent'>
+						<span style="float:left;">{{:data.time ? data.time + " cycles" : "Instant"}}</span>
+						<span style="float:right;">{{:helper.link('Research', '', { 'start_research' : 1 }, data.can_research ? null : 'disabled')}}</span>
+					</div>
+				</div>
+			{{/if}}
+			</div>
+		</div>
+		<div style="float:right;width:40%">
+			<h3>Destructive Analyzer</h3>
+			<div class='block'>
+				{{if data.destruct_connected}}
+					{{:helper.link('Analyze Item', '', { 'do_destruct' : 1 }, data.can_destruct ? null : "disabled")}}
+					{{:helper.link('Eject Item', '', { 'eject_destruct' : 1 }, data.destruct_name == "None" ? 'disabled' : null)}}
+					<div class='item'><div class='itemLabelNarrow'>Loaded:</div>
+					<div class='itemContent'>{{:data.destruct_name}}</div></div>
+					<div class='item'><div class='itemLabelNarrow'>Needed:</div>
+					<div class='itemContent'>{{:data.can_destruct ? "True" : "False"}}</div></div>
+				{{else}}
+					{{:helper.link('Locate Destructive Analyzer', '', { 'link_destructer' : 1 })}}<br>
+				{{/if}}
+			</div>
+		</div>
+
+		<h3>Available Techprints</h3>
+		<div class='block'>
+		{{for data.TechTreeAvail}}
+			<div class='item'>
+			{{:value.percent}}% {{:value.name}}
+			{{:helper.link('Select', '', { 'select_tech' : value.name }, data.selected == value.name ? 'selected' : null)}}
+			</div>
+		{{empty}}
+			No more techprints.<br>
+		{{/for}}
+		</div>
+		
+		<h3>Research prerequisites not met</h3>
+		<div class='block'>
+		{{for data.TechTreeLocked}}
+			<div class='item'>
+			{{:helper.link('Select', '', { 'select_tech_future' : value.name }, data.selected == value.name ? 'selected' : null)}}
+			{{:value.name}}
+			</div>
+		{{empty}}
+			No more techprints.<br>
+		{{/for}}
+		</div>
+	
+	{{else}}
+		<br>No research database loaded.<br>
+	{{/if}}
+
+{{else data.screen == 2}}
+	<div style="float:left;width:60%">
+		<h3>Researched Techprints</h3>
+	</div>
+	<div style="float:right;width:40%">
+		{{:helper.link('Transmit designs to nearby protolathes', '', { 'transmit_designs' : 1 })}}
+	</div>
+	<br>
+	<br>
+	{{if data.db_loaded == 1}}
+		<div class='block'>
+		{{for data.TechTreeFinished}}
+			<div class='item'>
+			<div class='itemLabel'>{{:value.name}}</div>
+			<div class='itemContent'>Designs: {{:value.unlocks}}</div>
+			</div>
+		{{empty}}
+			No techprints have been completed.<br>
+		{{/for}}
+		</div>
+	{{else}}
+		No research database loaded.<br>
+	{{/if}}
+	
+{{else data.screen == 4}}
+	<h3>Circuit Imprinter</h3>
+	{{:helper.link('Print Circuit', '', { 'circuit_imprinter' : 1 })}}
+	
+{{else data.screen == 5}}
+	<h3>Protolathe</h3>
+	{{:helper.link('Activate Protolathe', '', { 'protolathe' : 1 })}}
+{{/if}}

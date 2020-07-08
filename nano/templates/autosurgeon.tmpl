@@ -29,6 +29,10 @@ Used In File(s): \code\modules\halo\machinery\autosurgeon.dm
 {{:helper.link(data.buckled_mob ? 'Release patient' : 'No patient detected', 'arrowthickstop-1-e', {'release_patient' : 1, 'user' : data.user}, data.buckled_mob ? null : 'disabled')}}
 <br>
 <br>
+{{:helper.link('Do autopsy', 'search', {'autopsy' : 1, 'user' : data.user}, data.autopsy ? 'selected' : null)}}
+{{:helper.link('Cancel autopsy', 'search', {'autopsy' : 1, 'user' : data.user}, data.autopsy ? null : 'disabled')}}
+<br>
+<br>
 <div class='block'>
 	<div class="itemLabel">Internal bruise pack stock: </div>
 	<div class="itemContent">{{:data.bruisepack_amount}}</div>

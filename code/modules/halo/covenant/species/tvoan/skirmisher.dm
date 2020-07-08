@@ -27,6 +27,8 @@
 	slowdown = -0.7 //Just like how spartans are .2 greater than elites, skirms are .2 greater than spartans. Tweak all to .1 greater if this proves too high
 
 	equipment_slowdown_multiplier = 0.7
+	gibbed_anim = null
+	dusted_anim = null
 
 	item_icon_offsets = list(list(0,0),list(0,0),null,list(0,0),null,null,null,list(0,0),null)
 

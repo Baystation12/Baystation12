@@ -644,6 +644,14 @@ BLIND     // can't see anything
 		var/image/I = image(C, icon_state)
 		I.color = color
 		return I
+
+/obj/item/clothing/suit/examine(var/mob/user)
+	. = ..()
+
+	//see code/modules/halo/clothing/armour_patch.dm
+	if(patch)
+		to_chat(user,"<span class='info'>It has a [patch] applied: [patch.desc]</span>")
+
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
 /obj/item/clothing/under

@@ -19,3 +19,9 @@
 		if(buckled_mob)
 			src.visible_message("<span class='info'>[buckled_mob] has been released from [src].</span>")
 			unbuckle_mob()
+
+	if(href_list["autopsy"])
+		if(active)
+			to_chat(usr,"<span class='info'>[src] cannot switch autopsy mode while active.</span>")
+		else
+			do_autopsy = !do_autopsy

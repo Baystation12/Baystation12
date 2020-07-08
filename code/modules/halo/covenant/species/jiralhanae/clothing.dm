@@ -20,6 +20,7 @@
 	species_restricted = list("Jiralhanae")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	armor = list(melee = 3, bullet = 3, laser = 3, energy = 3, bomb = 3, bio = 0, rad = 0)
+	matter = list("cloth" = 1)
 
 /obj/item/clothing/under/covenant/jiralhanae/red
 	icon_state = "bodysuit_red"
@@ -46,6 +47,7 @@
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
 	armor = list(melee = 30, bullet = 20, laser = 10,energy = 10, bomb = 10, bio = 0, rad = 0)
 	species_restricted = list("Jiralhanae")
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/head/helmet/jiralhanae/major
 	name = "Jiralhanae Major Helm"
@@ -116,6 +118,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	armor = list(melee = 30, bullet = 20, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	armor_thickness = 20
+	matter = list("nanolaminate" = 2)
 	allowed = list(\
 		/obj/item/weapon/grenade/plasma,/obj/item/weapon/grenade/frag/spike,/obj/item/weapon/grenade/brute_shot,/obj/item/weapon/grenade/toxic_gas,\
 		/obj/item/weapon/gun/projectile/spiker,/obj/item/weapon/gun/projectile/mauler,\
@@ -220,6 +223,7 @@
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
 	armor = list(melee = 30, bullet = 20, laser = 10, energy = 10, bomb = 10, bio = 0, rad = 0)
 	body_parts_covered = LEGS|FEET
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/shoes/jiralhanae/covenant
 	name = "Jiralhanae Greaves"
@@ -257,6 +261,7 @@
 	sprite_sheets = list("Jiralhanae" = JIRALHANAE_ICON_PATH_MOB)
 	armor = list(melee = 45, bullet = 35, laser = 0, energy = 0, bomb = 35, bio = 0, rad = 0)
 	body_parts_covered = LEGS|FEET
+	matter = list("nanolaminate" = 1)
 
 /* FLAGS */
 
@@ -274,6 +279,7 @@
 	item_state_slots = list(
 		slot_l_hand_str = "flag_red_left",
 		slot_r_hand_str = "flag_red_right" )
+	matter = list("cloth" = 1, "wood" = 1)
 
 /obj/item/clothing/jiralhanae_flag_ram
 	name = "Ram Clan Flag"
@@ -289,6 +295,7 @@
 	item_state_slots = list(
 		slot_l_hand_str = "flag_blue_left",
 		slot_r_hand_str = "flag_blue_right" )
+	matter = list("cloth" = 1, "wood" = 1)
 
 /obj/item/clothing/jiralhanae_flag_random
 	name = "Jiralhanae Clan Flag"
@@ -299,6 +306,7 @@
 	species_restricted = list("Jiralhanae")
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_override = JIRALHANAE_ICON_PATH_MOB
+	matter = list("cloth" = 1, "wood" = 1)
 
 /obj/item/clothing/jiralhanae_flag_random/Initialize()
 	. = ..()

@@ -10,6 +10,7 @@
 	armor = list(melee = 50, bullet = 60, laser = 55, energy = 45, bomb = 35, bio = 25, rad = 20) //ODST But with buffed bullet and worse everything else.
 	armor_thickness_modifiers = list()
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
+	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/suit/armor/special/skirmisher/major
 	name = "T'Voan Major harness"

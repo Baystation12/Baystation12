@@ -41,6 +41,8 @@
 	'code/modules/halo/sounds/species_pain_screams/gruntscream_7.ogg')
 
 	roll_distance = 1 //Stubby legs mean no long roll
+	gibbed_anim = null
+	dusted_anim = null
 
 /datum/species/unggoy/create_organs(var/mob/living/carbon/human/H)
 	. = ..()

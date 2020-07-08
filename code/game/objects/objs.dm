@@ -2,6 +2,7 @@
 	layer = OBJ_LAYER
 	//Used to store information about the contents of the object.
 	var/list/matter
+	var/list/salvage_components
 	var/w_class // Size of the object.
 	var/unacidable = 0 //universal "unacidabliness" var, here so you can use it in any obj.
 	animate_movement = 2
@@ -12,6 +13,7 @@
 	var/damtype = "brute"
 	var/armor_penetration = 0
 	ai_access_level = 1
+
 /obj/Destroy()
 	GLOB.processing_objects -= src
 	return ..()

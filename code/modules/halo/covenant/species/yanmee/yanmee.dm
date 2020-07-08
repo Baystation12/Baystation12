@@ -49,6 +49,8 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	item_icon_offsets = list(list(1,0),list(1,0),null,list(1,0),null,null,null,list(-1,0),null)
 
 	roll_distance = 3
+	gibbed_anim = null
+	dusted_anim = null
 
 	pain_scream_sounds = list(\
 		'code/modules/halo/sounds/species_pain_screams/kiggyscream_1.ogg',

@@ -26,6 +26,8 @@
 	total_health = 200
 	default_faction = "Covenant"
 	unarmed_types = list(/datum/unarmed_attack/bird_punch)
+	gibbed_anim = null
+	dusted_anim = null
 
 	has_limbs = list(
 		BP_CHEST =  list("path" = /obj/item/organ/external/chest),
