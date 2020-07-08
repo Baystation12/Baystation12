@@ -99,6 +99,7 @@
 //SELF DESTRUCT PAYLOAD DOES NOT MOVE//
 /obj/payload/self_destruct
 	anchored = 1
+	free_explode = 1
 
 /obj/payload/self_destruct/set_anchor(var/onoff)
 	return
