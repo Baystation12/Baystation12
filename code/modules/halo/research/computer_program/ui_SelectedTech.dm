@@ -15,7 +15,7 @@
 		ui_SelectedTech["reqs"] = selected_techprint.GetReqsString()
 		ui_SelectedTech["can_research"] = can_research \
 			&& selected_techprint.consumables_satisfied() \
-			&& selected_techprint.prereqs_satisfied()
+			&& selected_techprint.prereqs_satisfied(loaded_research)
 		ui_SelectedTech["time"] = selected_techprint.ticks_max
 
 	else
