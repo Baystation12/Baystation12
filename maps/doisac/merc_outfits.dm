@@ -26,7 +26,7 @@
 /* TVOAN MERCS */
 
 /decl/hierarchy/outfit/skirmisher_murmillo/merc_boulder
-	name = "Boulder Clan T'Voan Skirmisher Murmillo Mercenary"
+	name = "Boulder Clan T\'Vaoan Skirmisher Murmillo Mercenary"
 	l_ear = /obj/item/device/radio/headset/brute_boulderclan
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/murmillo_boulder
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/murmillo_boulder
@@ -35,7 +35,7 @@
 	l_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/skirmisher_champion/merc_boulder
-	name = "Boulder Clan T'Voan Skirmisher Champion Mercenary"
+	name = "Boulder Clan T\'Vaoan Skirmisher Champion Mercenary"
 	l_ear = /obj/item/device/radio/headset/brute_boulderclan
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/champion_boulder
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/champion_boulder
@@ -45,7 +45,7 @@
 	r_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/skirmisher_murmillo/merc_ram
-	name = "Ram Clan T'Voan Skirmisher Murmillo Mercenary"
+	name = "Ram Clan T\'Vaoan Skirmisher Murmillo Mercenary"
 	l_ear = /obj/item/device/radio/headset/brute_ramclan
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/murmillo_ram
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/murmillo_ram
@@ -54,7 +54,7 @@
 	l_pocket = /obj/item/weapon/grenade/plasma
 
 /decl/hierarchy/outfit/skirmisher_champion/merc_ram
-	name = "Ram Clan T'Voan Skirmisher Champion Mercenary"
+	name = "Ram Clan T\'Vaoan Skirmisher Champion Mercenary"
 	l_ear = /obj/item/device/radio/headset/brute_ramclan
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/champion_ram
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/champion_ram
