@@ -21,7 +21,7 @@
 	designs_string = "Unknown"
 
 /datum/techprint/unknown/UpdateConsumablesString()
-	reqs_string = "Anything"
+	consumables_string = "Anything"
 
 /datum/techprint/unknown/consumables_satisfied()
 	return FALSE
