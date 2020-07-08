@@ -228,7 +228,7 @@
 "et" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "ONI Research"; req_access = list(315)},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "eu" = (/obj/structure/table/rack,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ev" = (/obj/structure/curtain/medical,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
-"ew" = (/obj/machinery/light/colored/blue,/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
+"ew" = (/obj/machinery/autolathe,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ex" = (/obj/machinery/research/component_dissembler,/obj/machinery/light/colored/blue{icon_state = "blue1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ey" = (/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
 "ez" = (/obj/effect/landmark/start{name = "ONI Researcher"},/obj/effect/landmark/start{name = "ONI Research Director"},/turf/simulated/floor/tech/white,/area/faction_base/oni/cryodorms)
@@ -242,6 +242,7 @@
 "eH" = (/obj/machinery/research/protolathe/circuits,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "eI" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "Hangar"; req_access = list(142)},/turf/simulated/floor/tech/maint,/area/faction_base/oni/garage)
 "eJ" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; name = "Barracks"; req_access = list(142)},/turf/simulated/floor/tech/maint,/area/faction_base/oni/barracks)
+"eK" = (/obj/machinery/autolathe,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "eL" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/stack/nanopaste,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eM" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; name = "Forerunner Digsite"},/turf/simulated/floor/tech/ridged,/area/faction_base/oni/digsite)
 "eN" = (/turf/simulated/floor/tech/ridged,/area/faction_base/oni/digsite)
@@ -255,6 +256,7 @@
 "eV" = (/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eW" = (/obj/structure/morgue,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "eX" = (/obj/item/device/radio/intercom{dir = 8; icon_state = "intercom"; name = "intercom"; pixel_x = 25; pixel_y = 0; tag = "icon-intercom (WEST)"},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
+"eY" = (/obj/machinery/light/colored/blue,/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "eZ" = (/obj/machinery/light,/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 1},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fa" = (/obj/structure/morgue,/obj/machinery/light{icon_state = "tube1"; dir = 8},/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
 "fb" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 4},/turf/simulated/floor/tech/white,/area/faction_base/oni/hangar)
@@ -328,7 +330,7 @@ aaabacacadafafafafafafafafahacacacaiawawawawawawawawawawawawawawawawawawawawawaw
 aaabacacadafafafafafafafafahacacacaiawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawaa
 aafoacacayafafafaffVafafafahfnabfWaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaasatauasaUfZfZfZasasasasasasaDaDaDaDaeaeaeaeaeaeaeaeaeaeaeaeaeaDaDaDaDaDaDaDaDaDaDaDaDaaaaaaaaaaaaaa
-aaasbgbqbPaWaWaWaWcicjcjcjcjfIaEaIaKaLaeaeamaoapavazapavapapapaAaDaMaNaNaOaPbdaPaKaKflaDaaaaaaaaaaaaaa
+aaasbgbqbPaWaWaWaWcicjcjcjcjfIaEaIaKaLaeaeamaoapavazapavapapapaAaDaMaNaNaOeKbdaPaKaKflaDaaaaaaaaaaaaaa
 aaasckbqaWaWaWaWaWdDcjdDcjdDcjaQaKaKaSaeaBaCaFaCaFaCaFaCaFaCaFaGaDaPaPaPaPbeaPaPaKaKaKaDaaaaaaaaaaaaaa
 aaasbqbqaWaWaWaWaWaWaWaWaWaWaWaTaKaKaXaeaHaJfmezfmezfmezfmezfmaGaDbLaPaKaKaKaPaPaKaKcfaDaaaaaaaaaaaaaa
 aaasbqcmcjcjcjaWaWaWaWaWaWaWaWcaaKaKcxaeaRaVaVaVaYaZaVaVbabbaVbcaDaPaPaKaKaKaPaPaKaKaKaDaaaaaaaaaaaaaa
@@ -349,11 +351,11 @@ aabfbfcTbhbhcUdabhbmbfcVbhbhcVbfbxdgcWcWbCbCbCevbCcXbxbCbCcYbxbFcccZcccZcccZccfF
 aabfbfdfbhbhbhdqbhbnbfcVbhbhcVbfbxdmbCbCbCbCbCevdhbCbxbCbCdibxbFfLdjccccccccccfMfNbFbJfOfPeEeEeEeEeEeE
 aabfbfcTbhbhdrdabhbmbfcVbhbhcVbfbxdnbCbCdtducXbxevevbxbCbCdobxbFbFbFbFetbObFbFbFbFbFdkfOfPeEeFeFeFeFeE
 aabfbfdsbhbhfBfCfDcSbfcVbRbhcVbfbxdvbCbCdBdCbCevbCcXbxbCbCdwbxbFdxdydzbJbJbJbJbObJdzbJfOfPeEeFeFeFeFeE
-aabfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxdEbCbCeeefbCevdhbCbxdGbCdYbxbFeibJbJbJbJbJbJgbbJbJbJfOfPeEeFeFeFeFeE
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekbCbCereTbCbxevevbxbxelbxbxbFexbJbJebeHbJdAbFgagabFfPfPeEeFeFeFeFeE
+aabfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxdEbCbCeeefbCevdhbCbxdGbCdYbxbFeibJbJebeHbJbJgbbJbJbJfOfPeEeFeFeFeFeE
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekbCbCereTbCbxevevbxbxelbxbxbFexbJbJewebbJdAbFgagabFfPfPeEeFeFeFeFeE
 aaajajajajajajajajajajajajajajaabxgfbCbCbCbCbCbCbCbCbCbCbCbCbCbObJbJbJebecbJenepeMeNepeOeOeOeEeFeFeFeE
 aaajajajajajajajajajajajajajajaabxggbCesbCbCbCdGbCbCbCbCdGbCbCgbbJbJbJbJbJbJeoepePePePePePeQeOeOeOeFeE
-aaajajajajajajajajajajajajajajaabxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFejehehejewbJeuepePePePePePePePeReOeOeE
+aaajajajajajajajajajajajajajajaabxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFejehehejeYbJeuepePePePePePePePeReOeOeE
 aaajajajajajajajajajajajajajajaabxeLbCfQbxeLbCfQbxeUbCeVbxbxbxbFbFbFbFbFbFfubFepePePePePePePePePePeOeE
 aaajajajajajajajajajajajajajajaabxfRbCbCbxfRbCbCbxeWbCeXbxbxbxeEeEeEeEbFaxaxbFeOeRePePePePePePePePeOeE
 aaajajajajajajajajajajajajajajaabxbCfSeZbxbCfSeZbxfafxfcbxbxbxeEeEeEeEbFfefvbFeEeOePePePePePePePePeOeE
