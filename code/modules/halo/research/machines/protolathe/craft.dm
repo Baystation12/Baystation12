@@ -19,9 +19,9 @@
 	if(!design_queue.len)
 		if(resourced)
 			//success
-			icon_state = "protolathe_n"
+			icon_state = "[icon_base]_n"
 		else
-			icon_state = "protolathe_f"
+			icon_state = "[icon_base]_f"
 
 	//add it to the queue for later processing
 	var/datum/craft_entry/E = new()
@@ -57,7 +57,7 @@
 
 	//is the queue empty?
 	if(!design_queue.len)
-		icon_state = "protolathe"
+		icon_state = icon_base
 
 	//spawn thing
 	var/obj/O = new D.product_type(src.loc)
@@ -78,7 +78,7 @@
 
 	//is the queue empty?
 	if(!design_queue.len)
-		icon_state = "protolathe"
+		icon_state = icon_base
 
 	//has it consumed some resources?
 	if(E.started)

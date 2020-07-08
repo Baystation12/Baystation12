@@ -5,6 +5,9 @@
 		//grab the global template
 		var/datum/research_design/D = GLOB.designs_by_type[design_type]
 
+		if(D.build_type != src.design_build_flag)
+			continue
+
 		if(!all_designs.Find(D))
 			new_designs_added = TRUE
 

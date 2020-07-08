@@ -86,11 +86,11 @@
 		//update our sprite
 		switch(craft_status)
 			if(1)
-				icon_state = "protolathe_f"
+				icon_state = "[icon_base]_f"
 			if(2)
-				icon_state = "protolathe_n"
+				icon_state = "[icon_base]_n"
 			else
-				icon_state = "protolathe"
+				icon_state = icon_base
 
 	else
 		instant_ready = TRUE

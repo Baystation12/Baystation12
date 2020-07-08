@@ -239,6 +239,7 @@
 "eE" = (/turf/unsimulated/mineral,/area/faction_base/oni)
 "eF" = (/turf/simulated/mineral,/area/faction_base/oni)
 "eG" = (/obj/vehicles/scorpion_tank,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
+"eH" = (/obj/machinery/research/protolathe/circuits,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "eI" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "Hangar"; req_access = list(142)},/turf/simulated/floor/tech/maint,/area/faction_base/oni/garage)
 "eJ" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 1; name = "Barracks"; req_access = list(142)},/turf/simulated/floor/tech/maint,/area/faction_base/oni/barracks)
 "eL" = (/obj/structure/table/glass/white,/obj/item/weapon/storage/firstaid/surgery,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the Space from Space Cleaner and written in Surgery. 'Do not remove under punishment of death!!!' is scrawled on the back."; name = "Surgery Cleaner"},/obj/item/stack/nanopaste,/turf/simulated/floor/tiled/white,/area/faction_base/oni/medbay)
@@ -349,7 +350,7 @@ aabfbfdfbhbhbhdqbhbnbfcVbhbhcVbfbxdmbCbCbCbCbCevdhbCbxbCbCdibxbFfLdjccccccccccfM
 aabfbfcTbhbhdrdabhbmbfcVbhbhcVbfbxdnbCbCdtducXbxevevbxbCbCdobxbFbFbFbFetbObFbFbFbFbFdkfOfPeEeFeFeFeFeE
 aabfbfdsbhbhfBfCfDcSbfcVbRbhcVbfbxdvbCbCdBdCbCevbCcXbxbCbCdwbxbFdxdydzbJbJbJbJbObJdzbJfOfPeEeFeFeFeFeE
 aabfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxdEbCbCeeefbCevdhbCbxdGbCdYbxbFeibJbJbJbJbJbJgbbJbJbJfOfPeEeFeFeFeFeE
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekbCbCereTbCbxevevbxbxelbxbxbFexbJbJebecbJdAbFgagabFfPfPeEeFeFeFeFeE
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekbCbCereTbCbxevevbxbxelbxbxbFexbJbJebeHbJdAbFgagabFfPfPeEeFeFeFeFeE
 aaajajajajajajajajajajajajajajaabxgfbCbCbCbCbCbCbCbCbCbCbCbCbCbObJbJbJebecbJenepeMeNepeOeOeOeEeFeFeFeE
 aaajajajajajajajajajajajajajajaabxggbCesbCbCbCdGbCbCbCbCdGbCbCgbbJbJbJbJbJbJeoepePePePePePeQeOeOeOeFeE
 aaajajajajajajajajajajajajajajaabxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFejehehejewbJeuepePePePePePePePeReOeOeE
