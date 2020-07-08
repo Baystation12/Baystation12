@@ -47,7 +47,7 @@
 	armor_thickness_modifiers = list()
 	unacidable = 1
 	max_suitstore_w_class = ITEM_SIZE_HUGE
-	matter = list("nanolaminate" = 1)
+	matter = list("nanolaminate" = 2)
 
 /obj/item/clothing/shoes/sangheili
 	name = "Sanghelli Leg Armour"
