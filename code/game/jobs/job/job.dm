@@ -51,6 +51,10 @@
 	var/poplock_divisor = 1
 	var/poplock_max = 1
 
+	//Seperate from the pop-lock system, this controls how many players this role counts as when present in-game to
+	//stop one faction from being heavily overpopulated
+	var/pop_balance_mult = 1
+
 	var/lace_access = 0 //Forces the job to have a neural lace, so we can store the access in it instead of in the ID..
 
 /datum/job/New()
@@ -217,7 +221,13 @@
 						max_ratio += max_ratio * GLOB.max_overpop
 
 						//how many players do we have?
-						var/my_faction_players = my_faction.living_minds.len
+						//var/my_faction_players = my_faction.living_minds.len
+						var/my_faction_players = 0
+						for(var/datum/mind/player in my_faction.living_minds)
+							var/add_as_players = 1
+							if(player.assigned_job)
+								add_as_players = player.assigned_job.pop_balance_mult
+							my_faction_players += add_as_players
 						var/my_ratio = my_faction_players / total_faction_players
 
 						//are we overpopped?

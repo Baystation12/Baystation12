@@ -6,6 +6,7 @@
 	selection_color = "#800080"
 	outfit_type = /decl/hierarchy/outfit/unggoy
 	whitelisted_species = list(/datum/species/unggoy)
+	pop_balance_mult = 0.5
 
 /datum/job/covenant/unggoy_major
 	title = "Unggoy Major"
@@ -14,6 +15,7 @@
 	open_slot_on_death = 1
 	outfit_type = /decl/hierarchy/outfit/unggoy/major
 	whitelisted_species = list(/datum/species/unggoy)
+	pop_balance_mult = 0.5
 
 /datum/job/covenant/unggoy_ultra
 	title = "Unggoy Ultra"
@@ -22,6 +24,7 @@
 	outfit_type = /decl/hierarchy/outfit/unggoy/ultra
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
+	pop_balance_mult = 0.5
 
 /datum/job/covenant/unggoy_deacon
 	title = "Unggoy Deacon"
@@ -30,6 +33,7 @@
 	outfit_type = /decl/hierarchy/outfit/unggoy/deacon
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
+	pop_balance_mult = 0.5
 
 
 
