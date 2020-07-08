@@ -5,7 +5,7 @@
 /datum/techprint/proc/check_reagents(var/obj/item/I, var/update_progress = FALSE)
 	. = FALSE
 
-	if(debug_reagents)	to_debug_listeners("/datum/techprint/proc/check_reagents([I.type], [update_progress])")
+	if(debug_reagents)	to_debug_listeners("/techprint/proc/check_reagents([I.type], [update_progress])")
 
 	if(required_reagents.len)
 		//grab the reagents datum... the holder can be anything eg different beakers or syringes

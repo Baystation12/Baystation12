@@ -172,7 +172,7 @@
 			return 0
 
 /datum/reagents/proc/has_reagent(var/reagent_type, var/amount = null, var/do_debug = FALSE)
-	if(do_debug)	to_debug_listeners("/datum/reagents/proc/has_reagent([reagent_type], [amount], [do_debug])")
+	if(do_debug)	to_debug_listeners("reagents/proc/has_reagent([reagent_type], [amount], [do_debug])")
 	for(var/datum/reagent/current in reagent_list)
 		if(current.type == reagent_type)
 			if(do_debug)	to_debug_listeners("	has_reagent() [reagent_type] current.volume:[current.volume] amount:[amount]")
