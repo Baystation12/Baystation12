@@ -8,7 +8,7 @@
 	use_power = POWER_USE_IDLE
 	idle_power_usage = 100 //Watts, I hope.  Just enough to do the computer and display things.
 
-	var/max_power = 500000
+	var/max_power = 1500000
 	var/thermal_efficiency = 0.65
 
 	var/obj/machinery/atmospherics/binary/circulator/circ1
