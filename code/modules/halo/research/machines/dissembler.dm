@@ -98,6 +98,9 @@
 		for(var/mat_name in loaded_item.matter)
 			//create the materials object
 			var/stack_type = accepted_materials_stacks[mat_name]
+			if(!stack_type)
+				to_debug_listeners("DISSEMBLY ERROR: invalid material id in var/matter for [loaded_item.type]: \'[mat_name]\'")
+				continue
 			var/obj/item/stack/S = new stack_type(src)
 
 			//by default it has 1, so add (amount - 1)
