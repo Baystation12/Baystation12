@@ -111,7 +111,14 @@
 /obj/machinery/research/destructive_analyzer/proc/finish_destruct()
 	if(controller)
 		controller.obj_destruct(loaded_item)
-		qdel(loaded_item)
+
+		//if it's a container, empty it and eject it for reuse
+		var/obj/item/weapon/reagent_containers/R = loaded_item
+		if(istype(R))
+			R.reagents.clear_reagents()
+			R.loc = src.loc
+		else
+			qdel(loaded_item)
 		loaded_item = null
 	else
 		eject_item()
