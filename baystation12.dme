@@ -1554,6 +1554,7 @@
 #include "code\modules\halo\covenant\species\huragok\robot_modules.dm"
 #include "code\modules\halo\covenant\species\jiralhanae\clothing.dm"
 #include "code\modules\halo\covenant\species\jiralhanae\jiralhanae.dm"
+#include "code\modules\halo\covenant\species\jiralhanae\jiralhanae_hair.dm"
 #include "code\modules\halo\covenant\species\jiralhanae\jiralhanae_outfit.dm"
 #include "code\modules\halo\covenant\species\kigyar\clothing.dm"
 #include "code\modules\halo\covenant\species\kigyar\kig-yar.dm"
