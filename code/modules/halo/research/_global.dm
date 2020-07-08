@@ -68,7 +68,7 @@ GLOBAL_LIST_EMPTY(designs_by_name)
 		GLOB.designs_by_name[D.name] = D
 
 //for testing
-/obj/item/weapon/reagent_containers/glass/silicate/New()
+/obj/item/weapon/reagent_containers/glass/beaker/silicate/New()
 	. = ..()
 
 	reagents.add_reagent(/datum/reagent/silicate, 10)
