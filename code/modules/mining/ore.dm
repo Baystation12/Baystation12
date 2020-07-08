@@ -79,6 +79,7 @@
 	ore = /ore/duridium
 
 /obj/item/weapon/ore/corundum
+	name = "corundite"	//this name is needed here so it works with research
 	ore = /ore/corundum
 
 /obj/item/weapon/ore/osmium
