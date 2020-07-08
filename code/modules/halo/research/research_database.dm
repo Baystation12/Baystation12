@@ -20,8 +20,8 @@
 		else
 			GLOB.tech_lateloaders.Add(src)
 
-/datum/computer_file/research_db/proc/LateInitialize()
-	build_tree(GLOB.UNSC.get_base_techprints())
+/datum/computer_file/research_db/proc/LateInitialize(var/round_start_init = FALSE)
+	build_tree(GLOB.UNSC.get_base_techprints(), round_start_init)
 
 /datum/computer_file/research_db/clone()
 	var/datum/computer_file/research_db/temp = ..()
@@ -46,30 +46,30 @@
 		var/datum/techprint/child = temp.techprints_by_type[parent.type]
 		temp.completed_techprints.Add(child)
 
-/datum/computer_file/research_db/proc/build_tree(var/list/source_list)
+/datum/computer_file/research_db/proc/build_tree(var/list/source_list, var/do_debug = FALSE)
 	var/list/working_list = source_list.Copy()
 
 	var/list/bonus_techs = list()
 	. = bonus_techs
 
 	while(working_list.len)
-		var/check_type = working_list[1]
-		working_list -= check_type
+		var/new_type = working_list[1]
+		working_list -= new_type
 
-		if(check_type in techprints_by_type)
+		if(new_type in techprints_by_type)
 			continue
 
-		var/datum/techprint/T = GLOB.techprints_by_type[check_type]
-		if(T.is_category())
+		var/datum/techprint/parent_template = GLOB.techprints_by_type[new_type]
+		if(parent_template.is_category())
 			continue
 
 		//create this techprint, add it to tree, create its ui etc
-		var/datum/techprint/new_techprint = add_techprint(check_type)
+		var/datum/techprint/new_techprint = add_techprint(new_type)
 		bonus_techs.Add(new_techprint)
 
 		//add all techs which are unlocked by this one
-		for(var/child_type in new_techprint.required_for)
-			var/datum/techprint/template_techprint = GLOB.techprints_by_type[child_type]
+		for(var/child_type in parent_template.required_for)
+			var/datum/techprint/template_techprint = GLOB.techprints_by_type[new_type]
 
 			if(template_techprint.hidden)
 				continue

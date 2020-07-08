@@ -171,13 +171,17 @@
 				my_atom.on_reagent_change()
 			return 0
 
-/datum/reagents/proc/has_reagent(var/reagent_type, var/amount = null)
+/datum/reagents/proc/has_reagent(var/reagent_type, var/amount = null, var/do_debug = FALSE)
+	if(do_debug)	to_debug_listeners("/datum/reagents/proc/has_reagent([reagent_type], [amount], [do_debug])")
 	for(var/datum/reagent/current in reagent_list)
 		if(current.type == reagent_type)
-			if((isnull(amount) && current.volume > 0) || current.volume >= amount)
+			if(do_debug)	to_debug_listeners("	has_reagent() [reagent_type] current.volume:[current.volume] amount:[amount]")
+			if(isnull(amount) && current.volume > 0)
 				return 1
-			else
-				return 0
+			if(current.volume >= amount)
+				return 1
+
+			return 0
 	return 0
 
 /datum/reagents/proc/has_any_reagent(var/list/check_reagents)

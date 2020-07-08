@@ -1,6 +1,11 @@
 
+/datum/techprint
+	var/debug_reagents = FALSE
+
 /datum/techprint/proc/check_reagents(var/obj/item/I, var/update_progress = FALSE)
 	. = FALSE
+
+	if(debug_reagents)	to_debug_listeners("/datum/techprint/proc/check_reagents([I.type], [update_progress])")
 
 	if(required_reagents.len)
 		//grab the reagents datum... the holder can be anything eg different beakers or syringes
@@ -9,7 +14,10 @@
 			var/success = FALSE
 			//loop over the needed chemicals
 			for(var/reagent_type in required_reagents)
-				if(R.has_reagent(reagent_type, required_reagents[reagent_type]))
+				if(debug_reagents)	to_debug_listeners("	check_reagents() [reagent_type]")
+				var/result = R.has_reagent(reagent_type, required_reagents[reagent_type], debug_reagents)
+				if(debug_reagents)	to_debug_listeners("	check_reagents() result: [result]")
+				if(result)
 					if(update_progress)
 						//potentially has more than one
 						required_reagents -= reagent_type
