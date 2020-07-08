@@ -4,6 +4,7 @@
 	desc = "The AV-22 is armed with twin-linked autocannons, with the original nose mounted spartan laser omitted in the place of two rocket pods."
 	icon = 'code/modules/halo/vehicles/types/sparrowhawk.dmi'
 	icon_state = "sparrowhawk"
+	faction = "unsc"
 	anchored = 1
 
 	bound_height = 64
