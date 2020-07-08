@@ -532,9 +532,19 @@ datum/unit_test/ladder_check/start_test()
 		if(O)
 			if(!istype(O))
 				failed = TRUE
+
+				//grab some hopefully useful info
 				var/area/above_area = get_area(O)
+				var/obj/effect/overmap/omap = map_sectors["[S.z]"]
+				var/obj/effect/landmark/map_data/M
+				for(var/obj/effect/landmark/map_data/check_data in omap.map_z_data)
+					if(check_data.z == S.z)
+						M = check_data
+						break
+
 				log_bad("[S] ([S.type]) in [A] ([A.type]) at ([S.x],[S.y],[S.z]) has above: \
-					[O] ([O.type]) in [above_area] ([above_area.type]) at ([O.x],[O.y],[O.z])")
+					[O] ([O.type]) in [above_area] ([above_area.type]) at ([O.x],[O.y],[O.z]) \
+					with overmap object [omap.type] ([omap.x],[omap.y],[omap.z]) and map_data [M.type] ([M.x],[M.y],[M.z])")
 		else
 			log_debug("[S] ([S.type]) in [A] ([A.type]) at ([S.x],[S.y],[S.z]) has no zlevel above")
 
