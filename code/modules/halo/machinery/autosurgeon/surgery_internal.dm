@@ -75,7 +75,7 @@
 					break
 
 			//we didnt get anything, so do a second pass
-			if(!surgery_target_int)
+			if(do_autopsy && !surgery_target_int)
 				for(var/obj/item/organ/internal/internal in buckled_mob:internal_organs)
 					surgery_target_int = internal
 					src.visible_message("<span class='notice'>[src] has located something vital in [buckled_mob]: [surgery_target_int].</span>")

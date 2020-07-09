@@ -89,3 +89,20 @@
 		to_chat(user,"<span class='info'>It has been used recently.</span>")
 	else
 		to_chat(user,"<span class='info'>It is sparkling clean.</span>")
+
+	if(botch_surgery)
+		to_chat(user,"<span class='danger'>Its instruments have been misaligned and will do terrible damage to anyone placed on it!</span>")
+
+/obj/machinery/autosurgeon/verb/align(var/mob/user)
+	set src in view(1)
+	set category = "Object"
+	set name = "Align autosurgeon instruments"
+
+	botch_surgery = !botch_surgery
+
+	if(botch_surgery)
+		to_chat(usr, "\icon[src] <span class='info'>You misalign the instruments on [src]. \
+			It will do terrible damage to anyone it operates on instead of healing them!.</span>")
+	else
+		to_chat(usr, "\icon[src] <span class='info'>You align the instruments on [src]. \
+			It should now be safe to use.</span>")
