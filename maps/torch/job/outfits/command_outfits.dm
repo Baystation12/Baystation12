@@ -96,7 +96,7 @@
 	backpack_contents = list(/obj/item/clothing/accessory/badge/nanotrasen = 1)
 
 /decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard
-	name = OUTFIT_JOB_NAME("Loss Prevention Associate")
+	name = OUTFIT_JOB_NAME("Executive Assistant")
 	l_ear =    /obj/item/device/radio/headset/heads/torchcorp
 	uniform =  /obj/item/clothing/under/suit_jacket/corp
 	shoes =    /obj/item/clothing/shoes/laceup
