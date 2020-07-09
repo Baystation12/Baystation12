@@ -16,7 +16,7 @@
 		//should we update the ui?
 		UpdateConsumablesString()
 
-/datum/techprint/proc/can_destruct_obj(var/obj/item/I)
+/datum/techprint/proc/can_destruct_obj(var/obj/item/I, var/datum/computer_file/research_db/check_research)
 	//will this item help us progress?
 	. = FALSE
 
