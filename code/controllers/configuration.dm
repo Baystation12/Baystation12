@@ -62,6 +62,7 @@ var/list/gamemode_cache = list()
 	var/allow_ai = 1					// allow ai job
 	var/hostedby = null
 	var/respawn_delay = 10
+	var/max_overpop = 0.5
 	var/guest_jobban = 1
 	var/usewhitelist = 1
 	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
@@ -434,6 +435,9 @@ var/list/gamemode_cache = list()
 				if ("respawn_delay")
 					config.respawn_delay = text2num(value)
 					config.respawn_delay = config.respawn_delay > 0 ? config.respawn_delay : 0
+
+				if ("max_overpop")
+					config.max_overpop = text2num(value)
 
 				if ("servername")
 					config.server_name = value
