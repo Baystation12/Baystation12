@@ -74,6 +74,12 @@
 //Framed window tiles do not change.
 	return
 
+/obj/structure/window/framed/external/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	. = ..()
+	if(!.)
+		if(mover.elevation > elevation)
+			return 1
+
 /obj/structure/grille/frame
 	name = "frame"
 	icon = 'maps/geminus_city/citymap_icons/structures.dmi'
