@@ -78,7 +78,7 @@
 	var/last_damage = 0
 	var/recharging = 0
 
-/obj/item/weapon/gun/energy/charged/spartanlaser/npc
+/obj/item/weapon/gun/energy/spartanlaser/npc
 	fire_sound = 'code/modules/halo/sounds/Spartan_Laser_Beam_Shot_Sound_Effect.ogg'
 
 /mob/living/simple_animal/hostile/unsc/spartan_two/adjustBruteLoss(damage)
@@ -150,7 +150,7 @@ mob/living/simple_animal/hostile/unsc/spartan_two/apply_difficulty_setting()
 				shield_max += 50
 		if(DIFFICULTY_LEGENDARY)
 			possible_weapons = list(
-				/obj/item/weapon/gun/energy/charged/spartanlaser/npc,\
+				/obj/item/weapon/gun/energy/spartanlaser/npc,\
 				/obj/item/weapon/gun/projectile/shotgun/pump/m90_ts,\
 				/obj/item/weapon/gun/projectile/m739_lmg)
 			if(shield_max)

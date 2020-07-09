@@ -24,5 +24,6 @@
 	total_positions = -1
 	spawn_positions = -1
 	outfit_type = /decl/hierarchy/outfit/jiralhanae/covenant/minor
+	faction_whitelist = "Covenant"
 	access = list(240,250)
 	whitelisted_species = list(/datum/species/brutes)

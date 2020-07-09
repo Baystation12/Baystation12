@@ -15,7 +15,7 @@
 	. = ..()
 
 	if(initialize_default)
-		if(GLOB.all_techprints.len)
+		if(GLOB.tech_initialized)
 			LateInitialize()
 		else
 			GLOB.tech_lateloaders.Add(src)

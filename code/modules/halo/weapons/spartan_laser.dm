@@ -17,7 +17,7 @@
 	self_recharge = 1
 	recharge_time = 20
 	max_shots = 4
-	is_charged_weapon
+	is_charged_weapon = TRUE
 
 	arm_time = 10 //Deciseconds
 	charge_meter = 0

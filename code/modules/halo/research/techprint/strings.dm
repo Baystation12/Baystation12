@@ -19,6 +19,7 @@
 
 	if(!R)
 		to_debug_listeners("TECH ERROR: [src.type]/proc/UpdateReqsString() was passed a null research database")
+		return
 
 	reqs_string = ""
 
@@ -31,7 +32,7 @@
 			req_one += "undiscovered techprint"
 
 	if(req_one.len)
-		reqs_string += "<em>One of:</em> [english_list(req_one)]"
+		reqs_string += "<em>One of:</em> [english_list(req_one, and_text = "or")]"
 
 	var/list/req_all = list()
 	for(var/techprint_type in tech_req_all)

@@ -1,7 +1,7 @@
 
 /datum/research_design/splaser
 	name = "M6 Grindell/Galilean Nonlinear Rifle"
-	product_type = /obj/item/weapon/gun/energy/charged/spartanlaser
+	product_type = /obj/item/weapon/gun/energy/spartanlaser
 	build_type = PROTOLATHE
 	required_materials = list("osmium-carbide plasteel" = 60)
 	required_reagents = list(/datum/reagent/mercury = 60, /datum/reagent/radium = 60)

@@ -60,7 +60,7 @@
 	name = "M6 Nonlinear Rifle Capsule"
 
 /obj/structure/closet/crate/random/unsc_splaser/WillContain()
-	return list(/obj/item/weapon/gun/energy/charged/spartanlaser)
+	return list(/obj/item/weapon/gun/energy/spartanlaser)
 
 /obj/structure/closet/crate/random/unsc_sniper
 	name = "Marksman Capsule"
