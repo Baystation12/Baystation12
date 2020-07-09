@@ -8,7 +8,7 @@
 	det_time = 50
 	can_adjust_timer = 0
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
-	alt_explosion_range = 2
+	alt_explosion_range = 1
 	alt_explosion_damage_max = 75
 	matter = list("nanolaminate" = 1, "kemocite" = 1)
 	salvage_components = list(/obj/item/plasma_core)
