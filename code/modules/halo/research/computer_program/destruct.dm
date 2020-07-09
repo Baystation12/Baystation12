@@ -43,12 +43,14 @@
 
 	if(selected_techprint)
 		//do we need this for our currently researching technology?
-		return selected_techprint.can_destruct_obj(I)
+		return selected_techprint.can_destruct_obj(I, loaded_research)
 
 	return FALSE
 
 /datum/nano_module/program/experimental_analyzer/proc/can_destruct_current()
-	if(linked_destroy && linked_destroy.loaded_item)
+
+	if(linked_destroy && linked_destroy.loaded_item && \
+		selected_techprint && selected_techprint.prereqs_satisfied(loaded_research))
 		return can_destruct_object(linked_destroy.loaded_item)
 
 	return FALSE
