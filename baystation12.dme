@@ -1635,6 +1635,7 @@
 #include "code\modules\halo\doors\blast_multitile.dm"
 #include "code\modules\halo\doors\halo_doors.dm"
 #include "code\modules\halo\doors\halo_multitile.dm"
+#include "code\modules\halo\elevation_overrides\atom.dm"
 #include "code\modules\halo\events\_ship.dm"
 #include "code\modules\halo\events\gravity_failure.dm"
 #include "code\modules\halo\events\grid_check.dm"

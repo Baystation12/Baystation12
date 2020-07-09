@@ -48,12 +48,13 @@
 
 /datum/job/covenant/sangheili_minor
 	title = "Sangheili Minor"
-	total_positions = 4
-	spawn_positions = 4
+	total_positions = 2
+	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
 	access = list(access_covenant, access_covenant_command)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
+	open_slot_on_death = 1 //just like brutes, lowest rank of a leader caste can respawn indefinitely although still capped low
 	pop_balance_mult = 2
 
 
