@@ -10,7 +10,7 @@
 	var/cheat_finish = FALSE
 
 	var/list/design_unlocks = list()	//"design name" = design type
-	var/list/required_for = list()		//this is autoset, dont touch it
+	var/list/required_for// = list()		//this is autoset, dont touch it
 
 	//stuff that has to be broken down in the destructive analyser
 	var/list/required_reagents = list()		//"reagent name" = amount (checks anything that can hold reagents)
@@ -38,7 +38,7 @@
 	consumables_max = required_reagents.len + required_materials.len + required_objs.len
 
 	if(!is_category())
-		if(GLOB.all_techprints.len)
+		if(GLOB.tech_initialized)
 			LateInitialize()
 		else
 			//this isnt good coding practice but also
@@ -49,7 +49,9 @@
 	InitializeDependencies()
 
 /datum/techprint/proc/InitializeDependencies()
-	if(!init_deps)
+	if(init_deps)
+		to_debug_listeners("TECH WARNING: attempting to initialize deps for [src.type] but they are already initialized.")
+	else
 		//she loves you a lot bro you should call her
 		init_deps = TRUE
 
