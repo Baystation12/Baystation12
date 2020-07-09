@@ -1,7 +1,7 @@
 
 /turf/unsimulated/floor/lava/glassed_turf
 	var/cool_at = 0
-	var/cooling_delay = 5 MINUTES
+	var/cooling_delay = 2.5 MINUTES
 	var/turf_replacewith = /turf/unsimulated/floor/scorched
 
 /turf/unsimulated/floor/lava/glassed_turf/New()
@@ -135,7 +135,7 @@
 	if(isnull(glass_effect_beam))
 		glass_effect_beam = new
 	explosion(get_turf(a),-1,-1,2,5, adminlog = 0)
-	glass_effect_beam.do_glassing_effect(a,1,/turf/unsimulated/floor/lava/glassed_turf/to_space)
+	glass_effect_beam.do_glassing_effect(a,3,/turf/unsimulated/floor/lava/glassed_turf/to_space)//Value of 3 chosen due to min light damage radius of MACs
 	if(!warned)
 		warned = 1
 		var/obj/effect/overmap/sector/S = map_sectors["[src.z]"]

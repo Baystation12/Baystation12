@@ -222,12 +222,12 @@
 /obj/effect/overmap/ship/npc_ship/combat/covenant/medium_armed
 	hull = 2000
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/kig_missionary.dmi')
-	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/plas_torp = 0.5 SECONDS)
+	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.2 SECONDS,/obj/item/projectile/overmap/missile/plas_torp = 0.5 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/covenant/heavily_armed
 	hull = 2500
 	icons_pickfrom_list = list('code/modules/halo/icons/overmap/SDV.dmi')
-	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.1 SECONDS,/obj/item/projectile/overmap/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 20 SECONDS)
+	projectiles_to_fire = list(/obj/item/projectile/overmap/pulse_laser = 0.1 SECONDS,/obj/item/projectile/overmap/missile/plas_torp = 1 SECONDS, /obj/item/projectile/overmap/beam/npc = 20 SECONDS)
 
 /obj/effect/overmap/ship/npc_ship/combat/flood
 	messages_on_hit = list("... / - -","- / .... / -","..",".","....")
