@@ -13,6 +13,9 @@
 	desc = "Fires at air vehicles within its range."
 	icon = 'code/modules/halo/weapons/icons/automated_anti_air.dmi'
 	icon_state = "flakthurm"
+	plane = ABOVE_HUMAN_PLANE
+	layer = ABOVE_HUMAN_LAYER
+	anchored = 1
 
 	var/list/targets_tracking = list() //target = first detected time
 	var/list/our_triggers = list()
@@ -25,6 +28,15 @@
 	var/max_lockon_time = 7.5 SECONDS
 	var/active = 1
 	var/processing = 0
+
+/obj/structure/automated_anti_air/unsc
+	name = "Automated Anti-Air Emplacement"
+	desc = "Fires at air vehicles within its range."
+	icon = 'code/modules/halo/weapons/icons/automated_anti_air.dmi'
+	icon_state = "flakthurm"
+	fire_anim_state = "flakthurm_active"
+	faction_nofire = "unsc"
+	pixel_x = -7
 
 /obj/structure/automated_anti_air/Initialize()
 	. = ..()
