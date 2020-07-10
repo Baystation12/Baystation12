@@ -151,30 +151,31 @@
 	var/protection = blocked_mult(getarmor(null, "bomb"))
 
 	// focus most of the blast on one organ
-	var/obj/item/organ/external/take_blast = pick(organs)
-	degrade_affected_armor(b_loss,BRUTE,take_blast)
-	degrade_affected_armor(f_loss,BURN,take_blast)
-	b_loss *= protection
-	f_loss *= protection
+	if(src && src.organs)
+		var/obj/item/organ/external/take_blast = pick(organs)
+		degrade_affected_armor(b_loss,BRUTE,take_blast)
+		degrade_affected_armor(f_loss,BURN,take_blast)
+		b_loss *= protection
+		f_loss *= protection
 
-	take_blast.take_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
+		take_blast.take_damage(b_loss * 0.7, f_loss * 0.7, used_weapon = "Explosive blast")
 
-	// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
-	b_loss *= 0.3
-	f_loss *= 0.3
+		// distribute the remaining 30% on all limbs equally (including the one already dealt damage)
+		b_loss *= 0.3
+		f_loss *= 0.3
 
-	var/weapon_message = "Explosive Blast"
-	for(var/obj/item/organ/external/temp in organs)
-		var/loss_val
-		if(temp.organ_tag  == BP_HEAD)
-			loss_val = 0.2
-		else if(temp.organ_tag == BP_CHEST)
-			loss_val = 0.4
-		else
-			loss_val = 0.05
-		temp.take_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
-		degrade_affected_armor(b_loss*loss_val,BRUTE,temp)
-		degrade_affected_armor(f_loss*loss_val,BURN,temp)
+		var/weapon_message = "Explosive Blast"
+		for(var/obj/item/organ/external/temp in organs)
+			var/loss_val
+			if(temp.organ_tag  == BP_HEAD)
+				loss_val = 0.2
+			else if(temp.organ_tag == BP_CHEST)
+				loss_val = 0.4
+			else
+				loss_val = 0.05
+			temp.take_damage(b_loss * loss_val, f_loss * loss_val, used_weapon = weapon_message)
+			degrade_affected_armor(b_loss*loss_val,BRUTE,temp)
+			degrade_affected_armor(f_loss*loss_val,BURN,temp)
 
 	if(throw_mob)
 		var/throw_in = NORTH //Just a default, in case anything breaks

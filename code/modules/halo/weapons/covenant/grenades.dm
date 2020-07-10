@@ -48,6 +48,7 @@
 	do_alt_explosion(1)
 	if(istype(mob_containing))
 		mob_containing.contents -= src
+		mob_containing.embedded -= src
 	loc = null
 	qdel(src)
 

@@ -126,6 +126,8 @@
 			if(m.loc != loc)
 				mult = multiplier_non_direct
 			m.adjustFireLoss(alt_explosion_damage_max*mult)
+			m.updatehealth()
+			m.UpdateAppearance()
 		if(apply_ex_act)
 			a.ex_act(3)
 	return 1
