@@ -245,6 +245,10 @@ var/list/gamemode_cache = list()
 	var/do_sql_connection = 1
 
 /datum/configuration/New()
+	if(!gamemode_cache.len)
+		instantiate_gamemodes()
+
+/datum/configuration/proc/instantiate_gamemodes()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
 	for (var/T in L)
 		// I wish I didn't have to instance the game modes in order to look up

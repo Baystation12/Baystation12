@@ -164,7 +164,8 @@ var/list/admin_verbs_server = list(
 	/client/proc/nanomapgen_DumpImage,
 	/client/proc/reload_whitelists,
 	/client/proc/adminmapswitch,
-	/client/proc/panic_bunker
+	/client/proc/panic_bunker,
+	/client/proc/reload_config
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/getruntimelog,                     // allows us to access runtime logs to somebody,
@@ -973,4 +974,14 @@ var/list/admin_verbs_mentor = list(
 
 	feedback_add_details("admin_verb","RWL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 	log_and_message_admins("reloaded all whitelists.")
+	return
+
+/client/proc/reload_config()
+	set name = "Reload Config"
+	set category = "Server"
+
+	load_configuration()
+
+	feedback_add_details("admin_verb","RCF")
+	log_and_message_admins("reloaded all config files and recreated datum/config.")
 	return
