@@ -57,6 +57,13 @@
 	renamed = 1
 	icon_changed = 1
 
+/obj/item/weapon/storage/bible/guru
+	name = "\improper Guru Granth Sahib"
+	desc = "The central religious text of the Sikh Faith."
+	icon_state = "guru"
+	renamed = 1
+	icon_changed = 1
+
 /obj/item/weapon/storage/bible/attack(mob/living/carbon/human/M, mob/living/carbon/human/user)
 	if(user == M || !ishuman(user) || !ishuman(M))
 		return
