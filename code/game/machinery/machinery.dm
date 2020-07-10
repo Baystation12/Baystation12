@@ -97,6 +97,7 @@ Class Procs:
 	name = "machinery"
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEM_SIZE_NO_CONTAINER
+	layer = BELOW_OBJ_LAYER
 
 	var/stat = 0
 	var/emagged = 0
@@ -109,6 +110,7 @@ Class Procs:
 	var/active_power_usage = 0
 	var/power_channel = EQUIP //EQUIP, ENVIRON or LIGHT
 	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
+	var/obj/item/weapon/circuitboard/circuit
 	var/uid
 	var/panel_open = 0
 	var/global/gl_uid = 1
@@ -344,10 +346,22 @@ Class Procs:
 	playsound(loc, 'sound/items/Crowbar.ogg', 50, 1)
 	var/obj/machinery/constructable_frame/machine_frame/M = new /obj/machinery/constructable_frame/machine_frame(get_turf(src))
 	M.set_dir(src.dir)
-	M.state = 2
+	M.state = CONSTRUCT_BOARD
 	M.icon_state = "box_1"
-	for(var/obj/I in component_parts)
-		I.forceMove(get_turf(src))
+
+	//eject the circuit if there is one
+	if(circuit)
+		circuit.forceMove(get_turf(src))
+
+	//now eject the components if there are any
+	if(component_parts)
+		for(var/obj/I in component_parts)
+			I.forceMove(get_turf(src))
+
+	//there shouldn't be anything left, but sometimes there might be...
+	//we'll just need to track it down and fix it on a per-item basis
+	if(contents.len)
+		to_debug_listeners("NOTICE: [src.type]/dismantle() completed and there is still contents: [english_list(contents)]")
 
 	qdel(src)
 	return 1
