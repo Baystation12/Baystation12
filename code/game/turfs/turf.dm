@@ -132,14 +132,14 @@ var/const/enterloopsanity = 100
 		return
 
 	var/atom/movable/A = atom
-	if(A.elevation <= BASE_ELEVATION)
+	/*if(A.elevation <= BASE_ELEVATION)
 		if(A.elevation != BASE_ELEVATION)
 			A.change_elevation(-A.elevation)//Reset elevation before we do any more messing around with it
 		var/targ_elev = BASE_ELEVATION
 		for(var/a in elevation_impacters)
 			var/atom/movable/impacter = a
 			targ_elev = impacter.check_elevation_impact(A)
-		A.change_elevation(targ_elev)
+		A.change_elevation(targ_elev)*/
 
 	if(ismob(A))
 		var/mob/M = A
