@@ -6,22 +6,22 @@
 /datum/research_design/basic_capacitor
 	name = "basic capacitor"
 	build_type = PROTOLATHE
-	required_materials = list("steel" = 50, "glass" = 10)
+	required_materials = list("steel" = 40, "glass" = 10)
 	required_reagents = list(/datum/reagent/lithium = 10)
 	product_type = /obj/item/weapon/stock_parts/capacitor
 
 /datum/research_design/adv_capacitor
 	name = "advanced capacitor"
 	build_type = PROTOLATHE
-	required_materials = list("steel" = 40, "plasteel" = 10, "glass" = 5, "phglass" = 5, "phoron" = 5)
-	required_reagents = list(/datum/reagent/lithium = 10)
+	required_materials = list("steel" = 40, "plasteel" = 10, "glass" = 5, "phglass" = 5)
+	required_reagents = list(/datum/reagent/lithium = 10, /datum/reagent/toxin/phoron = 10)
 	product_type = /obj/item/weapon/stock_parts/capacitor/adv
 
 /datum/research_design/super_capacitor
 	name = "super capacitor"
 	build_type = PROTOLATHE
-	required_materials = list("steel" = 30, "plasteel" = 10, "mhydrogen" = 10, "phglass" = 10, "phoron" = 5, "kemocite" = 5)
-	required_reagents = list(/datum/reagent/lithium = 10)
+	required_materials = list("steel" = 40, "plasteel" = 10, "mhydrogen" = 10, "phglass" = 10, "kemocite" = 5)
+	required_reagents = list(/datum/reagent/lithium = 10, /datum/reagent/toxin/phoron = 10)
 	product_type = /obj/item/weapon/stock_parts/capacitor/super
 
 
@@ -53,21 +53,21 @@
 /datum/research_design/basic_matter_bin
 	name = "basic matter bin"
 	build_type = PROTOLATHE
-	required_materials = list("steel" = 80)
+	required_materials = list("steel" = 40)
 	required_reagents = list(/datum/reagent/mercury = 10)
 	product_type = /obj/item/weapon/stock_parts/matter_bin
 
 /datum/research_design/adv_matter_bin
 	name = "advanced matter bin"
 	build_type = PROTOLATHE
-	required_materials = list("plasteel" = 70, "mhydrogen" = 10)
+	required_materials = list("plasteel" = 40, "mhydrogen" = 10)
 	required_reagents = list(/datum/reagent/mercury = 10)
 	product_type = /obj/item/weapon/stock_parts/matter_bin/adv
 
 /datum/research_design/super_matter_bin
 	name = "super matter bin"
 	build_type = PROTOLATHE
-	required_materials = list("osmium-carbide plasteel" = 60, "mhydrogen" = 10, "duridium" = 10)
+	required_materials = list("osmium-carbide plasteel" = 30, "mhydrogen" = 10, "duridium" = 10)
 	required_reagents = list(/datum/reagent/mercury = 10)
 	product_type = /obj/item/weapon/stock_parts/matter_bin/super
 
