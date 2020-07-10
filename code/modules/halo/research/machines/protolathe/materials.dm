@@ -2,32 +2,8 @@
 /obj/machinery/research/protolathe
 	var/list/stored_materials = list()
 	var/material_storage_used = 0
-	var/list/accepted_materials_stacks = list(\
-		"steel" = /obj/item/stack/material/steel,\
-		"plasteel" = /obj/item/stack/material/plasteel,\
-		"gold" = /obj/item/stack/material/gold,\
-		"phoron" = /obj/item/stack/material/phoron,\
-		"iron" = /obj/item/stack/material/iron,\
-		"diamond" = /obj/item/stack/material/diamond,\
-		"uranium" = /obj/item/stack/material/uranium,\
-		"plastic" = /obj/item/stack/material/plastic,\
-		"uranium" = /obj/item/stack/material/platinum,\
-		"osmium-carbide plasteel" = /obj/item/stack/material/ocp,\
-		"glass" = /obj/item/stack/material/glass,\
-		"rglass" = /obj/item/stack/material/glass/reinforced,\
-		"phglass" = /obj/item/stack/material/glass/phoronglass,\
-		"rphglass" = /obj/item/stack/material/glass/phoronrglass,\
-		"nanolaminate" = /obj/item/stack/material/nanolaminate,\
-		"duridium" = /obj/item/stack/material/duridium,\
-		"kemocite" = /obj/item/stack/material/kemocite,\
-		"silver" = /obj/item/stack/material/silver)
 
 /obj/machinery/research/protolathe/proc/load_material(var/obj/item/stack/material/M, var/mob/user as mob)
-
-	//is this an accepted material?
-	if(!accepted_materials_stacks.Find(M.default_type))
-		to_chat(user, "<span class='info'>[src] does not accept [M].</span>")
-		return
 
 	//check for free space here
 	var/free_storage = get_free_storage()
@@ -63,6 +39,8 @@
 	spawn(10)
 		overlays -= "protolathe_metal"
 
+	return TRUE
+
 /obj/machinery/research/protolathe/proc/consume_material(var/mat_name, var/amount)
 	stored_materials[mat_name] -= amount
 	material_storage_used -= amount
@@ -79,7 +57,10 @@
 	var/eject_max = stored_materials[mat_name]
 
 	//how much does the user want to eject?
-	var/eject_amount = input("Choose the amount to eject (0-[eject_max]). Enter [round(eject_max) + 1] to dump any leftovers.",\
+	var/eject_amount = eject_max
+
+	if(user)
+		eject_amount = input("Choose the amount to eject (0-[eject_max]). Enter [round(eject_max) + 1] to dump any leftovers.",\
 		"Ejecting [mat_name]",10) as num|null
 
 	if(eject_amount)
@@ -91,8 +72,9 @@
 			eject_amount = round(eject_amount)
 
 		//create the stack item for the material
-		var/stack_type = accepted_materials_stacks[mat_name]
-		var/obj/item/stack/material/M = new stack_type(src.loc)
+		var/material/mat = get_material_by_name(mat_name)
+		var/obj/item/stack/material/M = new mat.stack_type(src.loc)
+		M.amount = 0
 
 		//stacks have an inherent size limit
 		//will we max out the stack? dont eject any more than that
@@ -103,7 +85,7 @@
 		eject_amount = min(eject_amount, eject_max)
 
 		//increase the stack size
-		M.add(round(eject_amount) - 1)
+		M.add(round(eject_amount))
 
 		//move it out from the protolathe's tile
 		if(output_dir)

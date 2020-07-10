@@ -22,43 +22,20 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/machinery/research/protolathe/attackby(obj/item/weapon/W as obj, var/mob/user as mob)
-	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
+/obj/machinery/research/protolathe/attempt_load_item(var/obj/item/I, var/mob/user as mob)
+	. = FALSE
 
-	if(W.is_open_container())
-		if(accepting_reagents)
-			//call afterattack() so that the beaker transfers reagents to us
-			do_reagents_update = TRUE
-			return 0
+	if(can_load_item(I, user))
+		//do we have custom handling for reagent containers?
+		if(I.is_open_container())
+			return attempt_load_reagent_container(I, user)
+
 		else
-			//dont call afterattack()
-			//we will now attempt to eject reagents to the beaker
-			if(W.reagents.get_free_space())
-				if(reagents.total_volume)
-					var/target_amount = 10
-					if(istype(W,/obj/item/weapon/reagent_containers))
-						var/obj/item/weapon/reagent_containers/R = W
-						target_amount = R.amount_per_transfer_from_this
-					var/amount = reagents.trans_to_holder(W.reagents, target_amount)
-					if(amount)
-						do_reagents_update = TRUE
-					to_chat(user, "<span class='notice'>You remove [amount] units of reagents from [src] to [W].</span>")
-				else
-					to_chat(user, "<span class='notice'>There are no reagents left in [src].</span>")
+			if(istype(I, /obj/item/stack/material))
+				return load_material(I, user)
+
 			else
-				to_chat(user, "<span class='notice'>There is no space left in [W].</span>")
-
-			return 1
-
-	if(istype(W, /obj/item/stack/material))
-		load_material(W, user)
-		return TRUE
-
-	else
-		attempt_load_obj(W, user)
-		return TRUE
-
-	. = ..()
+				return attempt_load_component(I, user)
 
 /obj/machinery/research/protolathe/verb/cycle_output_dir()
 	set src in view(1)
@@ -78,3 +55,17 @@
 		dir_text = "the [dir2text(output_dir)]"
 
 	to_chat(usr, "\icon[src] <span class='info'>[src] will now try to output finished products to [dir_text].</span>")
+
+/obj/machinery/research/protolathe/examine(var/mob/user)
+	. = ..()
+	var/out_text = ""
+	if(output_dir)
+		out_text += "It is set to output to the [dir2text(output_dir)]. "
+	else
+		out_text += "It is set to output to it's own tile. "
+
+	out_text += "It has a crafting speed of [round(100 * speed)]%. "
+	out_text += "It can craft [craft_parallel] items in parallel. "
+	out_text += "Its material consumption rate is [round(100 * mat_efficiency)]%. "
+
+	to_chat(user,"<span class='info'>[out_text]</span>")
