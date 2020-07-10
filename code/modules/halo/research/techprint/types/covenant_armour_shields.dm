@@ -12,14 +12,14 @@
 	required_objs = list(/obj/item/clothing/suit/armor/special/combatharness/specops = "Sangheili SpecOps combat harness")
 
 /datum/techprint/kigyar_gauntlet
-	name = "KigYar shield gauntlet"
-	desc = "Analysis of a Covenant KigYar shield gauntlet."
+	name = "Kig-Yar shield gauntlet"
+	desc = "Analysis of a Covenant Kig-Yar shield gauntlet."
 	hidden = TRUE
-	required_objs = list(/obj/item/clothing/gloves/shield_gauntlet = "Kig\'Yar Ruuhtian Shield Gauntlet")
+	required_objs = list(/obj/item/clothing/gloves/shield_gauntlet/kigyar = "Kig\'Yar Ruuhtian Shield Gauntlet")
 
 /datum/techprint/tvoan_gauntlet
-	name = "TVoan shield gauntlet"
-	desc = "Analysis of a Covenant TVoan shield gauntlet."
+	name = "T\'Vaoan shield gauntlet"
+	desc = "Analysis of a Covenant T\'Vaoan shield gauntlet."
 	hidden = TRUE
 	required_objs = list(/obj/item/clothing/gloves/skirmisher_shield_gauntlets = "Kig\'Yar T\'Voan Wrist Gauntlets")
 
