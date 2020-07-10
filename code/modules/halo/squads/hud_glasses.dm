@@ -66,7 +66,7 @@
 			pointer.plane = HUD_PLANE
 			pointer.layer = HUD_ABOVE_ITEM_LAYER
 			waypoint_pointers[waypoint] = pointer
-			user << pointer
+			to_chat(user,pointer)
 
 /obj/item/clothing/glasses/hud/tactical/proc/process_visible_marker(var/obj/effect/waypoint_holder/waypoint,var/mob/user) //This is for waypoints the player can currently see on-screen
 	if(waypoint_pointers[waypoint])
@@ -76,7 +76,7 @@
 	pointer.plane = HUD_PLANE
 	pointer.layer = HUD_ABOVE_ITEM_LAYER
 	waypoint_pointers[waypoint] = pointer
-	user << pointer
+	to_chat(user,pointer)
 
 /obj/item/clothing/glasses/hud/tactical/process_hud()
 	process_hud_pointers()
