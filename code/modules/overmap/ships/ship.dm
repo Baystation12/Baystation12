@@ -100,8 +100,9 @@
 					point_at = locate(midpoint,map_bounds[2] - DROPSHIP_MARKER_PADDING,z_level)
 				else
 					point_at = locate(map_bounds[1] + DROPSHIP_MARKER_PADDING,midpoint,z_level)
-			if(point_at.x || point_at.y <= world.view) //Exclude these points if they'd just instantly TP players to a different Z.
-			if(point_at && isspace(get_area(point_at.loc)))
+			if(point_at.x <= world.view || point_at.y <= world.view) //Exclude these points if they'd just instantly TP players to a different Z.
+				continue
+			if(point_at && isspace(point_at.loc))
 				var/obj/point = new /obj/effect/landmark/dropship_land_point (point_at)
 				point.name = "[src] - Level [i] - [n]"
 /*
