@@ -123,7 +123,7 @@
 		var/mob/living/m = a
 		if(istype(m))
 			var/mult = 1
-			if(m.loc != loc)
+			if(get_turf(m) != get_turf(loc))
 				mult = multiplier_non_direct
 			m.adjustFireLoss(alt_explosion_damage_max*mult)
 			m.updatehealth()
