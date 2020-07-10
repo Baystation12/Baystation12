@@ -100,7 +100,7 @@
 					point_at = locate(midpoint,map_bounds[2] - DROPSHIP_MARKER_PADDING,z_level)
 				else
 					point_at = locate(map_bounds[1] + DROPSHIP_MARKER_PADDING,midpoint,z_level)
-			if(point_at && isspace(point_at))
+			if(point_at && isspace(get_area(point_at.loc)))
 				var/obj/point = new /obj/effect/landmark/dropship_land_point (point_at)
 				point.name = "[src] - Level [i] - [n]"
 /*
