@@ -61,6 +61,9 @@
 		if(!A.CanPass(to_move, start, 1.5, 0))
 			to_chat(src, "<span class='warning'>\The [A] blocks you.</span>")
 			return 0
+	visible_message("<span class = 'notice'>[src] starts moving [direction == UP ? "upwards" : "downwards"].</span>")
+	if(!do_after(src,2.5 SECONDS))
+		return
 	to_move.Move(destination)
 	return 1
 
