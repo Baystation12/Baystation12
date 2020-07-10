@@ -32,3 +32,13 @@
 							/obj/item/weapon/stock_parts/matter_bin = 1,
 							/obj/item/weapon/stock_parts/capacitor = 2,
 							/obj/item/weapon/stock_parts/manipulator = 1)
+
+/obj/item/weapon/stock_parts/circuitboard/unary_atmos/phoroncondenser
+	name = T_BOARD("phoron condenser")
+	build_path = /obj/machinery/atmospherics/unary/phoroncondenser
+	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_PHORON = 2)
+	req_components = list(
+							/obj/item/stack/cable_coil = 2,
+							/obj/item/weapon/stock_parts/matter_bin = 1,
+							/obj/item/weapon/stock_parts/capacitor = 2,
+							/obj/item/weapon/stock_parts/manipulator = 1)

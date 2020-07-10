@@ -464,6 +464,13 @@
 	build_path = /obj/item/weapon/stock_parts/circuitboard/pipedispensor/disposal
 	sort_string = "JCAAH"
 
+/datum/design/circuit/phoroncondenser
+	name = "phoron condenser"
+	id = "phorcond"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_PHORON = 2)
+	build_path = /obj/item/weapon/stock_parts/circuitboard/unary_atmos/phoroncondenser
+	sort_string = "JCAAI"
+
 /datum/design/circuit/secure_airlock
 	name = "secure airlock electronics"
 	desc =  "Allows for the construction of a tamper-resistant airlock electronics."

@@ -3788,6 +3788,12 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/storage)
+"iM" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "iO" = (
 /obj/structure/table/steel,
 /obj/item/weapon/paper_bin{
@@ -7178,6 +7184,13 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
+"pJ" = (
+/obj/machinery/atmospherics/unary/phoroncondenser{
+	dir = 8;
+	initialize_directions = 1
+	},
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "pK" = (
 /obj/structure/table/steel,
 /obj/machinery/alarm{
@@ -10227,6 +10240,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/fore)
+"xb" = (
+/obj/machinery/atmospherics/binary/pump{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "xd" = (
 /obj/structure/bed/chair/office/comfy/red{
 	icon_state = "comfyofficechair_preview";
@@ -12490,9 +12509,6 @@
 /area/shuttle/petrov/equipment)
 "Ff" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/binary/pump{
-	dir = 1
-	},
 /obj/machinery/light{
 	dir = 8
 	},
@@ -13020,12 +13036,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/maint)
-"Ht" = (
-/obj/machinery/air_sensor{
-	id_tag = "phoron_sensor"
-	},
-/turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
 "Hu" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/firedoor,
@@ -13503,7 +13513,6 @@
 /turf/space,
 /area/space)
 "IY" = (
-/obj/machinery/atmospherics/portables_connector,
 /obj/machinery/newscaster{
 	pixel_x = 32;
 	pixel_y = 0
@@ -13840,6 +13849,13 @@
 /obj/effect/paint/silver,
 /turf/simulated/floor/plating,
 /area/shuttle/petrov/rd)
+"Kg" = (
+/obj/machinery/atmospherics/pipe/simple/visible{
+	icon_state = "intact";
+	dir = 5
+	},
+/turf/simulated/floor/reinforced,
+/area/shuttle/petrov/phoron)
 "Kh" = (
 /obj/structure/table/standard,
 /obj/item/weapon/folder/nt,
@@ -14681,7 +14697,6 @@
 /obj/effect/wallframe_spawn/reinforced_phoron/titanium,
 /obj/machinery/door/firedoor,
 /obj/effect/paint/silver,
-/obj/machinery/atmospherics/pipe/simple/visible,
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "Nh" = (
@@ -15878,16 +15893,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
-"RB" = (
-/obj/machinery/atmospherics/unary/outlet_injector{
-	dir = 1;
-	frequency = 1441;
-	icon_state = "map_injector";
-	id = "phoron_in";
-	use_power = 1
-	},
-/turf/simulated/floor/reinforced,
-/area/shuttle/petrov/phoron)
 "RE" = (
 /obj/machinery/suit_storage_unit/science,
 /obj/machinery/light{
@@ -16253,7 +16258,6 @@
 /area/quartermaster/hangar)
 "Tc" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/binary/pump,
 /obj/machinery/light{
 	dir = 4
 	},
@@ -17105,32 +17109,11 @@
 /turf/simulated/floor/lino,
 /area/shuttle/petrov/rd)
 "Wy" = (
+/obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/phoron,
-/obj/machinery/atmospherics/unary/vent_pump/tank{
-	dir = 1;
-	external_pressure_bound = 0;
-	external_pressure_bound_default = 0;
-	icon_state = "map_vent_in";
-	id_tag = "phoron_out";
-	initialize_directions = 1;
-	internal_pressure_bound = 4000;
-	internal_pressure_bound_default = 4000;
-	pressure_checks = 2;
-	pressure_checks_default = 2;
-	pump_direction = 0;
-	use_power = 0
-	},
 /turf/simulated/floor/reinforced,
 /area/shuttle/petrov/phoron)
 "Wz" = (
-/obj/machinery/computer/air_control{
-	dir = 2;
-	input_tag = "phoron_in";
-	name = "Test Chamber Gas Monitor";
-	output_tag = "phoron_out";
-	sensor_tag = "phoron_sensor";
-	sensor_name = "Test Chamber"
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/phoron)
 "WD" = (
@@ -17432,10 +17415,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/shuttle/petrov/maint)
-"XQ" = (
-/obj/machinery/atmospherics/portables_connector,
-/turf/simulated/floor/tiled/white,
-/area/shuttle/petrov/phoron)
 "XS" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
 	icon_state = "intact";
@@ -45255,11 +45234,11 @@ Yk
 IR
 Dt
 EJ
-XQ
+YJ
 Ff
 Ng
 Wy
-Dv
+Kg
 XG
 Yk
 aa
@@ -45461,7 +45440,7 @@ LI
 WG
 CH
 Dv
-Dv
+xb
 XG
 Yk
 aa
@@ -45662,8 +45641,8 @@ YJ
 YJ
 WG
 Rc
-Ht
 Dv
+iM
 XG
 Yk
 aa
@@ -45864,8 +45843,8 @@ OC
 IY
 Tc
 Ng
-RB
 Dv
+pJ
 XG
 Yk
 aa
