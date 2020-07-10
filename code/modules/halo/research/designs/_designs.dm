@@ -19,6 +19,10 @@ protolathe: uses materials and components (objects)
 	var/build_type = 0
 	var/complexity = 0
 	var/consumables_string
+	var/category_type = /datum/research_design
+
+/datum/research_design/proc/is_category()
+	return src.type == category_type
 
 /datum/research_design/proc/GetConsumablesString(var/efficiency)
 	if(!consumables_string)
