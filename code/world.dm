@@ -564,6 +564,8 @@ var/world_topic_spam_protect_time = world.timeofday
 
 
 /proc/load_configuration()
+	if(config)
+		qdel(config)
 	config = new /datum/configuration()
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
