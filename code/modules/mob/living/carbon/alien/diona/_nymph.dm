@@ -148,3 +148,52 @@
 
 	donor.visible_message("<span class='warning'>\The [donor] quivers slightly, then splits apart with a wet slithering noise.</span>")
 	qdel(donor)
+
+	/proc/count_nymphs()
+		var/nymphs = 0
+		for(var/mob/living/carbon/alien/diona/h in world)
+			if(h.key && h.client)
+				nymphs++
+		return nymphs
+
+	/mob/observer/ghost/verb/become_nymph()
+		set name = "Become nymph"
+		set category = "Ghost"
+	/*
+		if(config.disable_player_nymphs)
+			to_chat(src, "<span class='warning'>Spawning as a nymph is currently disabled.</span>") //uncomment this chunk if you've added var/disable_player_nymphs to the config and want to disable them without deleting the .dm
+			return
+	*/
+		if(!MayRespawn(1, ANIMAL_SPAWN_DELAY))
+			return
+
+		if(config.use_age_restriction_for_jobs && isnum(user.client.player_age))
+			if(user.client.player_age <= 3)
+				to_chat(user, "<span class='danger'> Your account is not old enough to spawn as a diona nymph in this manner.</span>")
+				return
+
+		if(jobban_isbanned(user,"Nymph"))
+			to_chat(user, "<span class='danger'>You are banned from spawning as a diona nymph in this manner.</span>")
+			return
+
+		var/response = alert(src, "Are you sure you want to become a nymph?","Are you sure you want to chirp?","Chirp!","Nope!")
+		if(response != "Chirp!") return
+
+		//find a viable nymph candidate using active whitelisted diona players
+		var/mob/living/carbon/alien/diona/host
+		var/mob/living/carbon/human/diona/diona_found
+		var/list/found_diona = list()
+		for(var/mob/living/carbon/human/diona/dg in SSmobs.mob_list)
+			if(count_nymphs() < 10)
+				found_diona.Add(dg)
+		if(found_diona.len)
+			diona_found	= input(src,"Which gestalt do you wish to use?") as null|anything in found_diona
+			host = new /mob/living/carbon/alien/diona(diona_found.loc)
+		else
+			to_chat(src, "<span class='warning'>Unable to find any compatible gestalts to split from.</span>")
+		if(host)
+			alert(diona_found, "A stray nymph plops away from your biomass")
+			announce_ghost_joinleave(src, 0, "They are now a diona nymph.")
+			host.ckey = src.ckey
+			host.status_flags |= NO_ANTAG
+			to_chat(host, "<span class='info'>You are now a diona nymph. Go forth and seek knowledge.</span>")
