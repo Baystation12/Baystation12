@@ -77,7 +77,7 @@
 /obj/structure/window/framed/external/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	. = ..()
 	if(!.)
-		if(mover.elevation > elevation)
+		if(mover && mover.elevation > elevation)
 			return 1
 
 /obj/structure/grille/frame
