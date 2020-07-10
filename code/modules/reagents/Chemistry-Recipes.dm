@@ -1647,6 +1647,8 @@
 	result = /datum/reagent/ethanol/moonshine
 	required_reagents = list(/datum/reagent/nutriment = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
+	minimum_temperature = 70 CELSIUS
+	maximum_temperature = (70 CELSIUS) + 100
 	result_amount = 10
 	mix_message = "The solution exudes the powerful reek of raw alcohol."
 
