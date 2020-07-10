@@ -16,7 +16,7 @@
 		/obj/item/dumb_ai_chip,\
 		/obj/item/weapon/reagent_containers/syringe)
 
-/obj/machinery/research/protolathe/proc/attempt_load_obj(var/obj/item/I, var/mob/user as mob)
+/obj/machinery/research/protolathe/proc/attempt_load_component(var/obj/item/I, var/mob/user as mob)
 
 	//do we accept this thing?
 	var/base_type
@@ -57,6 +57,8 @@
 
 	//update the ui
 	UpdateComponentsString()
+
+	return TRUE
 
 /obj/machinery/research/protolathe/proc/consume_obj(var/consume_type, var/amount)
 	//decrement the stock

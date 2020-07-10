@@ -45,3 +45,10 @@
 
 
 	//components_string = english_list(components_strings, nothing_text = "None")
+
+/obj/machinery/research/protolathe/proc/ui_UpdateDesignEfficiencies()
+
+	for(var/datum/research_design/D in all_designs)
+		//only update strings if we have to
+		if(D.consumables_string)
+			D.UpdateConsumablesString(mat_efficiency)

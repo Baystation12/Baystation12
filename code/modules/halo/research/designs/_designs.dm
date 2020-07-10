@@ -19,18 +19,22 @@ protolathe: uses materials and components (objects)
 	var/build_type = 0
 	var/complexity = 0
 	var/consumables_string
+	var/category_type = /datum/research_design
 
-/datum/research_design/proc/GetConsumablesString()
+/datum/research_design/proc/is_category()
+	return src.type == category_type
+
+/datum/research_design/proc/GetConsumablesString(var/efficiency)
 	if(!consumables_string)
-		UpdateConsumablesString()
+		UpdateConsumablesString(efficiency)
 	return consumables_string
 
-/datum/research_design/proc/UpdateConsumablesString()
+/datum/research_design/proc/UpdateConsumablesString(var/efficiency)
 	var/list/consumables = list()
 	consumables_string = "NA"
 
-	consumables += format_materials_list(required_materials)
-	consumables += format_reagents_list(required_reagents)
+	consumables += format_materials_list(required_materials, efficiency)
+	consumables += format_reagents_list(required_reagents, efficiency)
 
 	//we just put in a custom obj name here so its east
 	for(var/entry in required_objs)

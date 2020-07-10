@@ -3,80 +3,52 @@
 	name = "destructive analyzer"
 	desc = "Assists technology research by destroying things."
 	icon_state = "d_analyzer"
+	state_base = "d_analyzer"
+	state_loaded = "d_analyzer_l"
+	state_loading = "d_analyzer_la"
+	active_power_usage = 10000
+	idle_power_usage = 100
 
-	var/obj/item/weapon/loaded_item = null
+	var/recycle_rate = 0
 	var/busy = FALSE
 
-/obj/machinery/research/destructive_analyzer/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/destructive_analyzer(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	RefreshParts()
-
-	/*
-/obj/machinery/research/destructive_analyzer/RefreshParts()
+/obj/machinery/research/destructive_analyzer/examine(var/mob/user)
 	. = ..()
-	var/T = 0
-	for(var/obj/item/weapon/stock_parts/S in src)
-		T += S.rating
-	decon_mod = T * 0.1
-	*/
+	var/out_text = ""
+	out_text += "It has a matter recycling rate of [round(100 * recycle_rate)]%. "
+	to_chat(user,"<span class='info'>[out_text]</span>")
 
-/obj/machinery/research/destructive_analyzer/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	user.setClickCooldown(DEFAULT_QUICK_COOLDOWN)
-	attempt_load_item(O, user)
-	return 1
-
-/obj/machinery/research/destructive_analyzer/attempt_load_item(var/obj/item/O as obj, var/mob/user as mob)
-	/*if(!controller)
-		to_chat(user,"\icon[src] <span class='warning'>[src] cannot accept anything until it is connected to control software.</span>")
-		return*/
-
-	. = TRUE
-
-	if(loaded_item)
-		to_chat(user,"\icon[src] <span class='warning'>[src] already has something loaded.</span>")
-		return
+/obj/machinery/research/destructive_analyzer/can_load_item(var/obj/item/I, var/mob/user as mob)
 
 	if(busy)
 		to_chat(user,"\icon[src] <span class='warning'>[src] is busy right now.</span>")
-		return
+		return FALSE
 
-	if(item_wanted(O))
-		if(user)
-			user.drop_item()
-		load_item(O)
-		to_chat(user, "<span class='notice'>You add \the [O] to \the [src].</span>")
-	else
-		to_chat(user,"\icon[src] <span class='warning'>[src] does not want that right now.</span>")
-
-/obj/machinery/research/destructive_analyzer/proc/item_wanted(var/obj/item/O as obj)
 	//automation is a hardware upgrade, but we still need the control software for it to work
 	if(automated && controller)
-		return controller.can_destruct_object(O)
+		if(controller.can_destruct_object(I))
+			return TRUE
 
-	//accept anything
+		to_chat(user,"\icon[src] <span class='warning'>[src] does not want that right now.</span>")
+		return FALSE
+
 	return TRUE
 
-/obj/machinery/research/destructive_analyzer/proc/load_item(var/obj/item/O as obj)
-	loaded_item = O
-	O.loc = src
-	icon_state = "d_analyzer_l"
-	flick("d_analyzer_la", src)
-	busy = TRUE
-	playsound(src, 'sound/machines/BoltsUp.ogg', 100, 1)
+/obj/machinery/research/destructive_analyzer/attempt_load_item(var/obj/item/I, var/mob/user as mob)
+	. = ..()
 
-	//give time for the loading animation to finish
-	spawn(10)
-		busy = FALSE
+	if(.)
+		busy = TRUE
+		playsound(src, 'sound/machines/BoltsUp.ogg', 100, 1)
 
-		//automation is a hardware upgrade, but we still need the control software for it to work
-		if(automated && controller)
-			//tell the controller to activate us
-			controller.activate_destruct()
+		//give time for the loading animation to finish
+		spawn(10)
+			busy = FALSE
+
+			//automation is a hardware upgrade, but we still need the control software for it to work
+			if(automated && controller)
+				//tell the controller to activate us
+				controller.activate_destruct()
 
 /obj/machinery/research/destructive_analyzer/attack_hand(var/mob/user)
 	if(busy)
@@ -118,8 +90,66 @@
 			R.reagents.clear_reagents()
 			R.loc = src.loc
 		else
+			//chance to recycle some materials
+			if(recycle_rate && loaded_item.matter && loaded_item.matter.len)
+				//grab a random material for recycling
+				var/mat_name = pick(loaded_item.matter)
+
+				//get the materials datum
+				var/material/M = get_material_by_name(mat_name)
+				if(!M)
+					to_debug_listeners("TECH ERROR: invalid material id in var/matter for [loaded_item.type]: \'[mat_name]\'\
+						in [src.type]")
+				else
+					//work out how much we are going to recycle
+					var/recycle_amount = loaded_item.matter[mat_name]
+
+					//material stacks have different amount handling
+					if(istype(loaded_item, /obj/item/stack))
+						var/obj/item/stack/old = loaded_item
+						recycle_amount = old.amount
+
+					//a chance to fail recycling
+					//higher amounts of matter = higher chance of recycling
+					var/recycle_chance = recycle_amount * 10
+					recycle_chance += 100 * recycle_rate
+					if(prob(recycle_chance))
+						//create the material stack
+						var/obj/item/stack/S = new M.stack_type(get_turf(src))
+						S.amount = 0
+
+						//return a portion
+						recycle_amount *= recycle_rate
+						recycle_amount = max(round(recycle_amount), 1)
+						S.add(recycle_amount)
+						visible_message("<span class='info'>[src] recycles \icon[S] [S] x [S.amount].</span>")
+
 			qdel(loaded_item)
 		loaded_item = null
 	else
 		eject_item()
 		visible_message("\icon[src] <span class='notice'>Contact lost with control software.</span>")
+
+/obj/machinery/research/destructive_analyzer/RefreshParts()
+	. = ..()
+
+	recycle_rate = 0
+	for(var/obj/item/weapon/stock_parts/scanning_module/M in component_parts)
+		recycle_rate += M.rating
+	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts)
+		recycle_rate += M.rating
+
+	//average of these parts... there should be exactly 3 total
+	recycle_rate /= 3
+
+	//dont recycle anything with stock parts
+	recycle_rate -= 1
+	recycle_rate = max(recycle_rate, 0)
+
+	//change to a %
+	recycle_rate /= 100
+
+	//having max tier stock parts results in a recycle rate of 3% so lets boost that a bit
+	recycle_rate *= 10
+
+	recycle_rate = round(recycle_rate, 0.01)

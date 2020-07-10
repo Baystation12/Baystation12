@@ -3,11 +3,19 @@
 	var/obj/machinery/research/destructive_analyzer/linked_destroy
 
 /datum/nano_module/program/experimental_analyzer/proc/autolink_destruct()
+	//this proc will connect to the closest destructive analyzer with appropriate safety checks
+
 	//safely disconnect any previous links
 	if(linked_destroy)
+		//this should call back to us
 		if(linked_destroy.controller)
-			linked_destroy.controller.unlink_destruct()
-		linked_destroy = null
+			linked_destroy.controller.unlink_machine(linked_destroy)
+
+		//but in case it doesnt...
+		if(linked_destroy)
+			to_debug_listeners("WARNING: [src.type] is unlinking a [linked_destroy.type] \
+				which was connected to a different controller")
+			unlink_machine(linked_destroy)
 
 	//find new one
 	var/obj/host = nano_host()
@@ -29,13 +37,13 @@
 	if(linked_destroy)
 		//tell it to unlink if it is already linked
 		if(linked_destroy.controller)
-			linked_destroy.controller.unlink_destruct()
+			linked_destroy.controller.unlink_machine(linked_destroy)
 
 		//you are mine now
 		linked_destroy.controller = src
 
-/datum/nano_module/program/experimental_analyzer/proc/unlink_destruct()
-	if(linked_destroy)
+/datum/nano_module/program/experimental_analyzer/proc/unlink_machine(var/obj/machinery/research/R)
+	if(linked_destroy && R == linked_destroy)
 		linked_destroy.controller = null
 		linked_destroy = null
 
@@ -69,11 +77,16 @@
 		//special handling for exploratory analysis
 		if(analyzing_techprint.type == /datum/techprint/unknown)
 			var/obj/host = nano_host()
-			if(result)
-				//result here is the newly discovered techprint type
-				var/datum/techprint/template = result
+			//any newly discovered techprints
+			var/success = FALSE
+			var/list/results = result
+			for(var/datum/techprint/template in results)
+				//check if we have already discovered it
+				if(loaded_research.techprints_by_type.Find(template.type))
+					continue
 
 				//tell the user
+				success = TRUE
 				host.visible_message("\icon[host] <span class='info'>New techprint discovered: [template.name]</span>")
 				//playsound(get_turf(host), 'sound/machines/chime.ogg', 100, 1)
 
@@ -85,7 +98,7 @@
 				analyzing_techprint = new_print
 				obj_destruct(I)
 
-			else
+			if(!success)
 				//rip
 				host.visible_message("\icon[host] <span class='notice'>No new techprints have been discovered.</span>")
 				playsound(get_turf(host), 'sound/machines/buzz-sigh.ogg', 100, 1)

@@ -13,7 +13,7 @@
 	density = 1
 	anchored = 1
 	use_power = 0
-	var/obj/item/weapon/circuitboard/circuit = null
+	//var/obj/item/weapon/circuitboard/circuit = null //now a machinery level var
 	var/list/components = null
 	var/list/req_components = null
 	var/list/req_component_names = null
@@ -129,6 +129,7 @@
 								circuit.loc = new_machine
 							else
 								circuit.loc = null
+							new_machine.circuit = circuit
 
 							new_machine.RefreshParts()
 							qdel(src)
@@ -163,7 +164,3 @@
 							to_chat(user, desc)
 							if(P && P.loc != src && !success)
 								to_chat(user, "<span class='warning'>You cannot add that component to the machine!</span>")
-
-#undef CONSTRUCT_CABLE
-#undef CONSTRUCT_BOARD
-#undef CONSTRUCT_COMPS

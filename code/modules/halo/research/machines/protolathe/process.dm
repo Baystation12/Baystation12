@@ -86,11 +86,11 @@
 		//update our sprite
 		switch(craft_status)
 			if(1)
-				icon_state = "[icon_base]_f"
+				icon_state = "[state_base]_f"
 			if(2)
-				icon_state = "[icon_base]_n"
+				icon_state = "[state_base]_n"
 			else
-				icon_state = icon_base
+				icon_state = state_base
 
 	else
 		instant_ready = TRUE

@@ -12,7 +12,11 @@
 
 /datum/techprint/unknown/obj_destructed(var/obj/item/I)
 	//return if there are any hidden things unlocked by it
-	return GLOB.techprints_hidden[I.type]
+	var/list/results = list()
+	. = results
+	for(var/check_type in GLOB.techprints_hidden)
+		if(ispath(I.type, check_type))
+			results += GLOB.techprints_hidden[check_type]
 
 /datum/techprint/unknown/UpdateReqsString()
 	reqs_string = "None"
