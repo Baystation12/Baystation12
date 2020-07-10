@@ -197,7 +197,7 @@
 	projectile_type = /obj/item/projectile/bullet/m95_sap
 
 /obj/item/projectile/bullet/m95_sap //it fires 3 of these in functionally a straight line, so individual damage is lower
-	damage = 15
+	damage = 20
 	shield_damage = 5
 
 /obj/item/weapon/storage/box/m95_sap
