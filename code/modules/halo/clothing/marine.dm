@@ -122,7 +122,7 @@
 /obj/item/clothing/suit/storage/marine/military_police
 	name = "M52A Body Armor NavSec"
 	desc = "An armored protective vest worn by the members of the UNSC Marine Corps. This one is modified for the use of naval security officers."
-	armor = list(melee = 50, bullet = 50, laser = 40, energy = 40, bomb = 35, bio = 0, rad = 0)
+	armor = list(melee = 30, bullet = 30, laser = 10, energy = 10, bomb = 45, bio = 0, rad = 0)
 	armor_thickness = 20
 
 /obj/item/clothing/suit/storage/marine/medic
@@ -362,7 +362,7 @@
 	icon_base = null
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
 	can_hold_knife = 1
-	armor = list(melee = 45, bullet = 35, laser = 10, energy = 25, bomb = 30, bio = 100, rad = 50)
+	armor = list(melee = 40, bullet = 40, laser = 5, energy = 30, bomb = 15, bio = 0, rad = 0)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/weapon/card/id/unsc
@@ -393,15 +393,8 @@
 	item_state = "unsc gloves"
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	siemens_coefficient = 0.5
-	permeability_coefficient = 0.05
 	item_state_slots = list(slot_l_hand_str = "gloves", slot_r_hand_str = "gloves")
-	body_parts_covered = HANDS
 	armor = list(melee = 30, bullet = 40, laser = 10, energy = 25, bomb = 15, bio = 0, rad = 0)
-	cold_protection = HANDS
-	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
-	heat_protection = HANDS
-	max_heat_protection_temperature = GLOVES_MAX_HEAT_PROTECTION_TEMPERATURE
 
 /obj/item/clothing/gloves/thick/unsc/brown
 	desc = "Standard Issue UNSC Marine Gloves."
