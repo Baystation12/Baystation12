@@ -24,10 +24,12 @@
 		/datum/techprint/sensors)
 
 	base_designs = list(\
-		/datum/research_design/portable_drive,
-		//,
-		/datum/research_design/recharger,
-		/datum/research_design/cell_charger,
+		/datum/research_design/circuit/recharger,
+		/datum/research_design/circuit/cell_charger,
+		/datum/research_design/circuit/cell_charger,
+		/datum/research_design/circuit/cell_charger,
+		/datum/research_design/circuit/cell_charger,
+		/datum/research_design/circuit/cell_charger,
 		//,
 		/datum/research_design/implanter,
 		//,
