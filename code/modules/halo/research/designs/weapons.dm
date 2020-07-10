@@ -5,6 +5,7 @@
 	build_type = PROTOLATHE
 	required_materials = list("osmium-carbide plasteel" = 60)
 	required_reagents = list(/datum/reagent/mercury = 60, /datum/reagent/radium = 60)
+	required_objs = list(/obj/item/crystal/pink)
 	complexity = 100
 
 /datum/research_design/railgun

@@ -56,6 +56,37 @@
 
 
 
+/* PORTABLE HARD DRIVES */
+
+/datum/techprint/drive_portable
+	name = "basic data crystal"
+	desc = "Small crystal with imprinted photonic circuits that can be used to store data. Its capacity is 16 GQ."
+	required_materials = list("steel" = 1, "glass" = 1, "plastic" = 5)
+	required_reagents = list(/datum/reagent/acid = 20)
+	ticks_max = 60
+	design_unlocks = list(/datum/research_design/portable_drive)
+	tech_req_all = list(/datum/techprint/miniaturisation, /datum/techprint/data)
+
+/datum/techprint/drive_portable_advanced
+	name = "advanced data crystal"
+	desc = "Small crystal with imprinted high-density photonic circuits that can be used to store data. Its capacity is 64 GQ."
+	required_materials = list("plasteel" = 1, "rglass" = 1, "plastic" = 5)
+	required_reagents = list(/datum/reagent/acid/hydrochloric = 20)
+	ticks_max = 120
+	design_unlocks = list(/datum/research_design/portable_drive_advanced)
+	tech_req_all = list(/datum/techprint/miniaturisation_two, /datum/techprint/data_two)
+
+/datum/techprint/drive_portable_super
+	name = "super data crystal"
+	desc = "Small crystal with imprinted ultra-density photonic circuits that can be used to store data. Its capacity is 256 GQ."
+	required_materials = list("osmium-carbide plasteel" = 1, "phglass" = 1, "plastic" = 5)
+	required_reagents = list(/datum/reagent/nitric_acid = 20)
+	ticks_max = 200
+	design_unlocks = list(/datum/research_design/portable_drive_super)
+	tech_req_all = list(/datum/techprint/miniaturisation_three, /datum/techprint/data_three)
+
+
+
 /* REVERSE ENGINEERED TECH */
 
 /datum/techprint/drive_cluser

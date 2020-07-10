@@ -4,6 +4,7 @@
 	desc = "Using the meson-scanning technology those glasses allow you to see through walls, floor or anything else."
 	build_type = PROTOLATHE
 	required_materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50, "silver" = 10)
+	required_objs = list(/obj/item/crystal/orange)
 	product_type = /obj/item/clothing/glasses/meson
 	complexity = 15
 
@@ -12,6 +13,7 @@
 	desc = "See in low light conditions."
 	build_type = PROTOLATHE
 	required_materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50, "silver" = 10)
+	required_objs = list(/obj/item/crystal/orange)
 	product_type = /obj/item/clothing/glasses/night
 	complexity = 15
 
@@ -20,6 +22,7 @@
 	desc = "Display heat signatures of living organisms through walls."
 	build_type = PROTOLATHE
 	required_materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50, "silver" = 10)
+	required_objs = list(/obj/item/crystal/orange)
 	product_type = /obj/item/clothing/glasses/thermal
 	complexity = 15
 
@@ -28,5 +31,6 @@
 	desc = "Observe small items around you through walls."
 	build_type = PROTOLATHE
 	required_materials = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50, "silver" = 10)
+	required_objs = list(/obj/item/crystal/orange)
 	product_type = /obj/item/clothing/glasses/material
 	complexity = 15

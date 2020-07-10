@@ -22,5 +22,6 @@
 	tech_req_all = list(/datum/techprint/processing_two)
 	required_materials = list("gold" = 30, "osmium" = 5)
 	required_reagents = list(/datum/reagent/silicate = 30, /datum/reagent/copper = 15, /datum/reagent/acid = 10)
+	required_objs = list(/obj/item/crystal/pink)
 	ticks_max = 300
 	design_unlocks = list(/datum/research_design/processor_photonic)
