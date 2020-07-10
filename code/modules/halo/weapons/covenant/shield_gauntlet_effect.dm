@@ -19,6 +19,13 @@
 	. = ..()
 	creator_gauntlet = created_by
 
+/obj/item/weapon/gauntlet_shield/equipped(var/mob/living/carbon/human/user)
+	if(istype(user) && user.gloves != creator_gauntlet)
+		user.drop_from_inventory(src)
+		qdel(src)
+	else
+		. = ..()
+
 /obj/item/weapon/gauntlet_shield/dropped()
 	creator_gauntlet.hand_dropped()
 	. = ..()
