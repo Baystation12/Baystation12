@@ -77,11 +77,11 @@
 			switch(n)
 				if("North")
 					using_axis_x = 1
-					use_opposite_side = 1
 				if("East")
 					use_opposite_side = 1
 				if("South")
 					using_axis_x = 1
+					use_opposite_side = 1
 
 			var/turf/point_at
 			var/z_level = map_z[i]
