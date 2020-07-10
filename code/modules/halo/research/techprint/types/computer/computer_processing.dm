@@ -5,7 +5,7 @@
 	required_materials = list("gold" = 10)
 	required_reagents = list(/datum/reagent/silicate = 10, /datum/reagent/copper = 5, /datum/reagent/acid = 5)
 	ticks_max = 60
-	design_unlocks = list()
+	design_unlocks = list(/datum/research_design/processor)
 
 /datum/techprint/processing_two
 	name = "Digital Processing II"
