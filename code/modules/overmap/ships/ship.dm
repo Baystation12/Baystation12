@@ -1,5 +1,5 @@
 
-#define DROPSHIP_MARKER_PADDING 10
+#define DROPSHIP_MARKER_PADDING 0
 
 /obj/effect/overmap/ship
 	name = "generic ship"
