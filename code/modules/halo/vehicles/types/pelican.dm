@@ -5,6 +5,7 @@
 	icon = 'code/modules/halo/shuttles/pelican.dmi'
 	icon_state = "base"
 
+	can_space_move = 1
 	density = 1
 
 	bound_height = 128
@@ -79,6 +80,7 @@
 	icon = 'code/modules/halo/shuttles/pelican.dmi'
 	icon_state = "base"
 
+	can_space_move = 1
 	density = 1
 
 	bound_height = 128

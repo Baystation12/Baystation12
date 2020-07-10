@@ -5,6 +5,7 @@
 	icon = 'code/modules/halo/vehicles/types/spirit.dmi'
 	icon_state = "base"
 	faction = "covenant"
+	can_space_move = 1
 	density = 1
 
 	bound_height = 128

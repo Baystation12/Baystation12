@@ -285,4 +285,22 @@
 	dir = WEST
 	pixel_x = -96
 
+/obj/docking_umbilical/one_way/covenant
+	icon = 'code/modules/halo/icons/overmap/umbilical_covenant.dmi'
+
+/obj/docking_umbilical/one_way/covenant/north
+	dir = NORTH
+
+/obj/docking_umbilical/one_way/covenant/south
+	dir = SOUTH
+	pixel_y = -96
+
+/obj/docking_umbilical/one_way/covenant/east
+	dir = EAST
+	pixel_x = 0
+
+/obj/docking_umbilical/one_way/covenant/west
+	dir = WEST
+	pixel_x = -96
+
 #undef UMBI_CROSS_DELAY

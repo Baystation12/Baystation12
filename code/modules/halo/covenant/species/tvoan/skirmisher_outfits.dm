@@ -1,6 +1,6 @@
 
 /decl/hierarchy/outfit/skirmisher_minor
-	name = "T'Voan Skirmisher Minor"
+	name = "T\'Vaoan Skirmisher Minor"
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher
@@ -15,7 +15,7 @@
 	id_slot = slot_wear_id
 
 /decl/hierarchy/outfit/skirmisher_major
-	name = "T'Voan Skirmisher Major"
+	name = "T\'Vaoan Skirmisher Major"
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/major
@@ -30,7 +30,7 @@
 	id_slot = slot_wear_id
 
 /decl/hierarchy/outfit/skirmisher_murmillo
-	name = "T'Voan Skirmisher Murmillo"
+	name = "T\'Vaoan Skirmisher Murmillo"
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/murmillo
@@ -45,7 +45,7 @@
 	id_slot = slot_wear_id
 
 /decl/hierarchy/outfit/skirmisher_commando
-	name = "T'Voan Skirmisher Commando"
+	name = "T\'Vaoan Skirmisher Commando"
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/commando
@@ -61,7 +61,7 @@
 	id_slot = slot_wear_id
 
 /decl/hierarchy/outfit/skirmisher_champion
-	name = "T'Voan Skirmisher Champion"
+	name = "T\'Vaoan Skirmisher Champion"
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/champion

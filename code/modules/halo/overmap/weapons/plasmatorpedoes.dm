@@ -32,8 +32,8 @@
 	fire_sound = 'code/modules/halo/sounds/plasma_torpedoes_fire.ogg'
 	fired_projectile = /obj/item/projectile/overmap/missile/plas_torp
 	round_reload_time = 10 SECONDS
-	rounds_loaded = 1
-	max_rounds_loadable = 1
+	rounds_loaded = 2
+	max_rounds_loadable = 2
 	tag_prefix = "plastorp_control"
 
 /obj/machinery/deck_gun/missile_pod/plasma_torpedo/return_list_addto()
@@ -49,9 +49,6 @@
 	ship_hit_sound = 'code/modules/halo/sounds/plasma_torpedoes_impact.ogg'
 	penetrating = 1
 	damage = 100
-	step_delay = 0.5 SECOND
-
-/obj/item/projectile/overmap/plas_torp/sector_hit_effects(var/z_level,var/obj/effect/overmap/hit,var/list/hit_bounds)
 
 /obj/item/projectile/plas_torp_damage_proj
 	name = "plasma torpedo"

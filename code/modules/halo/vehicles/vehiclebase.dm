@@ -161,7 +161,9 @@
 /obj/vehicles/proc/display_ammo_status(var/mob/user)
 	for(var/m in ammo_containers)
 		var/obj/item/ammo_magazine/mag = m
-		var/msg = "is full!"
+		var/msg = "is empty!"
+		if(mag.stored_ammo.len == mag.initial_ammo)
+			msg = "is full!"
 		if(mag.stored_ammo.len >= mag.initial_ammo * 0.75)
 			msg = "is about 3 quarters full."
 		else if(mag.stored_ammo.len > mag.initial_ammo * 0.5)
@@ -487,6 +489,16 @@
 	else if(speed[2] != 0 && !moving_y)
 		movement_loop(2)
 	return 1
+
+/obj/vehicles/proc/update_occupant_z_level(var/new_z)
+	for(var/mob/living/occupant in occupants)
+		occupant.update_occupied_sector(new_z)
+
+/obj/vehicles/forceMove(var/atom/destination)
+	var/turf/turf_to = get_turf(destination)
+	if(turf_to)
+		update_occupant_z_level(turf_to.z)
+	. = ..()
 
 /obj/vehicles/verb/verb_inspect_components()
 	set name = "Inspect Components"
