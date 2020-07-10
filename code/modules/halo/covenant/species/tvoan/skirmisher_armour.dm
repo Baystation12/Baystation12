@@ -1,7 +1,7 @@
 
 /obj/item/clothing/suit/armor/special/skirmisher
-	name = "T'Voan Skirmisher harness"
-	desc = "A protective harness for use during combat by  T'voan Kig'Yar."
+	name = "T\'Vaoan Skirmisher harness"
+	desc = "A protective harness for use during combat by  T\'vaoan Kig'Yar."
 	icon = 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi'
 	icon_state = "minor_obj"
 	item_state = "minor"
@@ -10,26 +10,25 @@
 	armor = list(melee = 50, bullet = 60, laser = 55, energy = 45, bomb = 35, bio = 25, rad = 20) //ODST But with buffed bullet and worse everything else.
 	armor_thickness_modifiers = list()
 	body_parts_covered = ARMS|UPPER_TORSO|LOWER_TORSO|LEGS|ARMS|HANDS|FEET
-	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/suit/armor/special/skirmisher/major
-	name = "T'Voan Major harness"
+	name = "T\'Vaoan Major harness"
 	icon_state = "major_obj"
 	item_state = "major"
 
 /obj/item/clothing/suit/armor/special/skirmisher/murmillo
-	name = "T'Voan Murmillo harness"
+	name = "T\'Vaoan Murmillo harness"
 	icon_state = "murmillo_obj"
 	item_state = "murmillo"
 
 /obj/item/clothing/suit/armor/special/skirmisher/commando
-	name = "T'Voan Commando harness"
+	name = "T\'Vaoan Commando harness"
 	icon_state = "commando_obj"
 	item_state = "commando"
 	specials = list(/datum/armourspecials/holo_decoy)
 
 /obj/item/clothing/suit/armor/special/skirmisher/champion
-	name = "T'Voan Champion harness"
+	name = "T\'Vaoan Champion harness"
 	icon_state = "champion_obj"
 	item_state = "champion"
 	specials = list(/datum/armourspecials/holo_decoy)

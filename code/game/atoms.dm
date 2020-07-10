@@ -543,10 +543,5 @@ its easier to just keep the beam vertical.
 	else
 		return ..()
 
-/atom/proc/change_elevation(var/amount = 1)
-	var/new_alpha = alpha - (50 * amount)
-	animate(src,alpha = new_alpha,time = 2 SECONDS)
-	elevation += amount
-
 /atom/proc/get_color()
 	return color

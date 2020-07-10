@@ -1,7 +1,7 @@
 
 /datum/species/kig_yar_skirmisher
-	name = "T\'vaoan Kig-Yar"
-	name_plural = "T\'vaoan Kig-Yar"
+	name = "Tvaoan Kig-Yar"
+	name_plural = "Tvaoan Kig-Yar"
 	spawn_flags = SPECIES_CAN_JOIN
 	blurb = "T'vaoan Skirmishers are the same species as the more common, lightly-built Ruutian Jackals, but \
 		they are subspecies that is faster, stronger, can jump higher and are more agile than any ordinary Kig-Yar. In addition, \
@@ -63,16 +63,16 @@
 	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_state = "tvoanhair1"
 	name = "Long Feathers"
-	species_allowed = list("T\'vaoan Kig-Yar")
+	species_allowed = list("Tvaoan Kig-Yar")
 
 /datum/sprite_accessory/hair/skirmisherquills/two
 	icon = 'code/modules/halo/covenant/species/tvoan/r_skirmishers.dmi'
 	icon_state = "tvoanhair2"
 	name = "Short Feathers"
-	species_allowed = list("T\'vaoan Kig-Yar")
+	species_allowed = list("Tvaoan Kig-Yar")
 
 /mob/living/carbon/human/covenant/tvoan/New(var/new_loc)
-	. = ..(new_loc,"T\'vaoan Kig-Yar")
+	. = ..(new_loc,"Tvaoan Kig-Yar")
 	faction = "Covenant"
 
 /datum/language/tvoai

@@ -2,10 +2,9 @@
 /obj/machinery/research/protolathe
 	name = "\improper protolathe"
 	icon_state = "protolathe"
-	var/icon_base = "protolathe"
+	state_base = "protolathe"
 
 	flags = OPENCONTAINER
-	var/max_storage = 100000
 	var/design_build_flag = PROTOLATHE
 
 	var/list/design_queue = list()
@@ -21,23 +20,13 @@
 	var/speed = 1
 	var/craft_parallel = 1
 	var/instant_ready = TRUE
+	var/max_storage = 60
 
 /obj/machinery/research/protolathe/New()
 	. = ..()
 
-	//internal components
-	//todo: make this buildable (override the protolathe circuitboard)
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/protolathe(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-
-	//update the stats
-	RefreshParts()
+	//default value
+	create_reagents(120)
 
 	//initialize the ui
 	ui_SelectDesign()
@@ -79,20 +68,27 @@
 	//work out material storage
 	max_storage = 0
 	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
-		max_storage += M.rating * 30
+		max_storage += M.rating * 40
 
 	//work out the speed and efficiency
 	var/manipulation = 0
-	craft_parallel = 0
+	var/old_efficiency = mat_efficiency
+	mat_efficiency = 1.2	//this will go down to 1 with basic parts
+
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+
 		manipulation += M.rating
-		craft_parallel += M.rating / 2
-	mat_efficiency = 1 - (manipulation - 2) / 8
+
+		//consume less resources here
+		mat_efficiency -= M.rating / 10
+
+		//cap it so there is still some mats required
+		mat_efficiency = max(mat_efficiency, 0.1)
+
+	//better manipulation improves both crafting speed and parallel crafting
+	craft_parallel = manipulation / 2
 	speed = manipulation / 2
 
-/obj/machinery/research/protolathe/examine(var/mob/user)
-	. = ..()
-	if(output_dir)
-		to_chat(user,"<span class='info'>It is set to output to the [dir2text(output_dir)]</span>")
-	else
-		to_chat(user,"<span class='info'>It is set to output to it's own tile.</span>")
+	//only update ui strings if our efficiency has changed
+	if(mat_efficiency != old_efficiency)
+		ui_UpdateDesignEfficiencies()

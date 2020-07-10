@@ -1,5 +1,5 @@
 
-#define DROPSHIP_MARKER_PADDING 2
+#define DROPSHIP_MARKER_PADDING 10
 
 /obj/effect/overmap/ship
 	name = "generic ship"
@@ -100,9 +100,9 @@
 					point_at = locate(midpoint,map_bounds[2] - DROPSHIP_MARKER_PADDING,z_level)
 				else
 					point_at = locate(map_bounds[1] + DROPSHIP_MARKER_PADDING,midpoint,z_level)
-			if(point_at)
+			if(point_at && isspace(point_at))
 				var/obj/point = new /obj/effect/landmark/dropship_land_point (point_at)
-				point.name = "Level [i] - [n]"
+				point.name = "[src] - Level [i] - [n]"
 /*
 /obj/effect/overmap/ship/proc/assign_fleet(var/assign)
 	if(our_fleet == assign)

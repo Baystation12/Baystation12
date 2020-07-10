@@ -19,7 +19,6 @@
 	active = 0
 
 	can_traverse_zs = 1
-	can_space_move = 1
 
 	var/faction = null //The faction this vehicle belongs to. Setting this will restrict landing to faction-owned and Civilian points only
 
@@ -91,7 +90,9 @@
 /obj/vehicles/air/proc/perform_move_sequence(var/obj/move_to_obj)
 	if(isnull(move_to_obj))
 		return
-	var/move_to_loc = move_to_obj.loc
+	var/move_to_loc = get_turf(move_to_obj)
+	if(move_to_loc)
+		update_occupant_z_level(move_to_obj.z)
 	loc = move_to_loc
 
 /obj/vehicles/air/proc/proc_fly_to_waypoint()

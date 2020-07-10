@@ -21,4 +21,5 @@
 	build_type = IMPRINTER
 	required_materials = list("steel" = 1, "glass" = 1)
 	required_reagents = list(/datum/reagent/acid = 20)
+	required_objs = list(/obj/item/crystal/pink)
 	complexity = 30

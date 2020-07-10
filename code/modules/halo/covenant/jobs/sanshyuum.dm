@@ -9,6 +9,7 @@
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sanshyuum)
 	access = list(access_covenant, access_covenant_command)
+	pop_balance_mult = 0.5
 
 /datum/job/covenant/lesser_prophet/equip()
 	.=..()

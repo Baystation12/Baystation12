@@ -77,7 +77,7 @@
 /obj/item/projectile/pulse_laser_damage_proj/on_impact(var/atom/impacted)
 	. = ..()
 	if(!istype(impacted,/obj/effect/shield))
-		explosion(get_turf(impacted),-1,-1,1,3, adminlog = 0)
+		explosion(get_turf(impacted),-1,1,1,3, adminlog = 0)
 
 /obj/effect/projectile/pulse_laser_dam_proj
 	icon = 'code/modules/halo/overmap/weapons/pulse_turret_tracers.dmi'

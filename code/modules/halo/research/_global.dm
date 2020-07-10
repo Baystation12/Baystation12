@@ -85,8 +85,14 @@ GLOBAL_LIST_EMPTY(designs_by_type)
 GLOBAL_LIST_EMPTY(designs_by_name)
 
 /proc/init_global_designs()
-	for(var/new_type in typesof(/datum/research_design) - /datum/research_design)
+	for(var/new_type in typesof(/datum/research_design))
 		var/datum/research_design/D = new new_type()
+
+		//is this a category? skip it
+		if(D.is_category())
+			//dont track this one
+			qdel(D)
+			continue
 
 		GLOB.all_designs.Add(D)
 		GLOB.designs_by_type[D.type] = D

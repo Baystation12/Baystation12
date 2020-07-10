@@ -1,5 +1,5 @@
 
-/proc/format_materials_list(var/list/materials)
+/proc/format_materials_list(var/list/materials, var/efficiency = 1)
 	var/list/strings = list()
 	. = list("ERROR")
 
@@ -10,7 +10,7 @@
 				materials[mat_name] = 0
 				//to_debug_listeners("ERROR (minor): empty amount of material id \'[mat_name]\'")
 			var/descriptor = materials[mat_name] == 1 ? M.sheet_singular_name : M.sheet_plural_name
-			strings += "[M.display_name] ([materials[mat_name]] [descriptor])"
+			strings += "[M.display_name] ([materials[mat_name] * efficiency] [descriptor])"
 		else
 			var/errormsg = "(MAJOR): unable to find material id \'[mat_name]\'"
 			//to_debug_listeners(errormsg)
@@ -18,7 +18,7 @@
 
 	return strings
 
-/proc/format_reagents_list(var/list/reagents_list)
+/proc/format_reagents_list(var/list/reagents_list, var/efficiency = 1)
 	var/list/strings = list()
 	. = list("ERROR")
 
@@ -26,7 +26,7 @@
 	for(var/reagent_type in reagents_list)
 		var/datum/reagent/R = GLOB.chemical_reagents_list[reagent_type]
 		if(R)
-			strings += "[R.name] ([reagents_list[reagent_type]]u)"
+			strings += "[R.name] ([reagents_list[reagent_type] * efficiency]u)"
 		else
 			var/errormsg = "unable to find reagent type [reagent_type]"
 			//to_debug_listeners(errormsg)

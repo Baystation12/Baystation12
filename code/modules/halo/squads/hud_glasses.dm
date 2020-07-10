@@ -25,13 +25,18 @@
 	known_waypoints = new_waypoint_list.Copy()
 	process_hud()
 
+/obj/item/clothing/glasses/hud/tactical/proc/remove_pointer(var/mob/user,var/waypoint)
+	var/pointer = waypoint_pointers[waypoint]
+	waypoint_pointers -= waypoint
+	if(user && user.client && user.client.screen)
+		user.client.screen -= pointer
+	qdel(pointer)
+
 /obj/item/clothing/glasses/hud/tactical/proc/remove_all_pointers(var/mob/user)
 	if(!user.client)
 		return
-	for(var/pointer in waypoint_pointers)
-		waypoint_pointers -= pointer
-		user.client.screen -= pointer
-		qdel(pointer)
+	for(var/point in waypoint_pointers)
+		remove_pointer(user,point)
 
 /obj/item/clothing/glasses/hud/tactical/proc/process_hud_pointers() //This is for directional pointers around the character, for waypoints off-screen.
 	if(!isnull(last_user))
@@ -49,20 +54,29 @@
 			continue
 		var/dir_to_point = get_dir(get_loc_used(),waypoint)
 		var/turf/waypoint_render_loc = get_step(get_loc_used(),dir_to_point)
-		var/image/pointer = image(waypoint.icon,waypoint_render_loc,waypoint.waypoint_icon,,dir_to_point)
-		pointer.name = waypoint.waypoint_name
-		pointer.plane = HUD_PLANE
-		pointer.layer = HUD_ABOVE_ITEM_LAYER
-		waypoint_pointers += pointer
-		user << pointer
+		var/image/pointer = waypoint_pointers[waypoint]
+		if(pointer)
+			pointer.loc = waypoint_render_loc
+			pointer.dir = dir_to_point
+		else
+			pointer = image(waypoint.icon,waypoint_render_loc,waypoint.waypoint_icon,,dir_to_point)
+			pointer.name = waypoint.waypoint_name
+			pointer.mouse_opacity = 0
+			pointer.alpha = 150
+			pointer.plane = HUD_PLANE
+			pointer.layer = HUD_ABOVE_ITEM_LAYER
+			waypoint_pointers[waypoint] = pointer
+			to_chat(user,pointer)
 
 /obj/item/clothing/glasses/hud/tactical/proc/process_visible_marker(var/obj/effect/waypoint_holder/waypoint,var/mob/user) //This is for waypoints the player can currently see on-screen
+	if(waypoint_pointers[waypoint])
+		remove_pointer(waypoint)
 	var/image/pointer = image(waypoint.icon,waypoint.loc,"[waypoint.waypoint_icon]_onscreen")
 	pointer.name = waypoint.waypoint_name
 	pointer.plane = HUD_PLANE
 	pointer.layer = HUD_ABOVE_ITEM_LAYER
-	waypoint_pointers += pointer
-	user << pointer
+	waypoint_pointers[waypoint] = pointer
+	to_chat(user,pointer)
 
 /obj/item/clothing/glasses/hud/tactical/process_hud()
 	process_hud_pointers()

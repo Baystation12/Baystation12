@@ -1,8 +1,8 @@
 #define SKIRMISHER_CLOTHING_PATH 'code/modules/halo/covenant/species/tvoan/skirm_clothing.dmi'
 
 /obj/item/clothing/shoes/skirmisher
-	name = "T'Voan Skirmisher greaves"
-	desc = "T'voan Kig'Yar greaves for lower limb protection."
+	name = "T\'Vaoan Skirmisher greaves"
+	desc = "T\'vaoan Kig'Yar greaves for lower limb protection."
 	icon = SKIRMISHER_CLOTHING_PATH
 	icon_state = "minorboot"
 	item_state = "minor_greaves"
@@ -15,22 +15,22 @@
 	matter = list("nanolaminate" = 1)
 
 /obj/item/clothing/shoes/skirmisher/major
-	name = "T'Voan Major greaves"
+	name = "T\'Vaoan Major greaves"
 	icon_state = "majorboot"
 	item_state = "major_greaves"
 
 /obj/item/clothing/shoes/skirmisher/murmillo
-	name = "T'Voan Murmillo greaves"
+	name = "T\'Vaoan Murmillo greaves"
 	icon_state = "murmilloboot"
 	item_state = "murmillo_greaves"
 
 /obj/item/clothing/shoes/skirmisher/commando
-	name = "T'Voan Commando greaves"
+	name = "T\'Vaoan Commando greaves"
 	icon_state = "commandoboot"
 	item_state = "commando_greaves"
 
 /obj/item/clothing/shoes/skirmisher/champion
-	name = "T'Voan Champion greaves"
+	name = "T\'Vaoan Champion greaves"
 	icon_state = "championboot"
 	item_state = "champion_greaves"
 

@@ -3,7 +3,6 @@
 	var/list/uiData_Queue = list()
 	var/list/uiData_Designs = list()
 	var/list/uiData_SelectedDesign = list()
-	var/do_reagents_update = FALSE
 
 /obj/machinery/research/protolathe/proc/ui_AddDesign(var/datum/research_design/D)
 
@@ -60,7 +59,7 @@
 		uiData_SelectedDesign = list(\
 			"name" = D.name,\
 			"complexity" = D.complexity,\
-			"consume" = D.GetConsumablesString())
+			"consume" = D.GetConsumablesString(mat_efficiency))
 
 	else
 		uiData_SelectedDesign["name"] = 0

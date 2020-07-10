@@ -10,6 +10,7 @@
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command)
+	pop_balance_mult = 3
 
 /datum/job/covenant/sangheili_ultra
 	title = "Sangheili Ultra"
@@ -20,6 +21,7 @@
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command)
+	pop_balance_mult = 3
 
 /datum/job/covenant/sangheili_honour_guard
 	title = "Sangheili Honour Guard"
@@ -30,6 +32,7 @@
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command)
+	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_major
 	title = "Sangheili Major"
@@ -41,16 +44,18 @@
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command)
+	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_minor
 	title = "Sangheili Minor"
-	total_positions = -1
-	spawn_positions = -1
+	total_positions = 2
+	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
 	access = list(access_covenant, access_covenant_command)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-
+	open_slot_on_death = 1 //just like brutes, lowest rank of a leader caste can respawn indefinitely although still capped low
+	pop_balance_mult = 2
 
 
 /* Not available during standard play */
@@ -64,6 +69,7 @@
 	spawn_positions = 1
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
+	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_specops
 	title = "Special Operations Sangheili"
@@ -75,6 +81,7 @@
 	total_positions = 0
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
+	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_zealot
 	title = "Sangheili Zealot"
@@ -84,3 +91,4 @@
 	outfit_type = /decl/hierarchy/outfit/sangheili/zealot
 	whitelisted_species = list(/datum/species/sangheili)
 	access = list(access_covenant, access_covenant_command)
+	pop_balance_mult = 2

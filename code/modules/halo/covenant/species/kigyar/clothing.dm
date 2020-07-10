@@ -16,7 +16,7 @@
 
 /obj/item/clothing/under/kigyar
 	name = "Kig-Yar Body-Suit"
-	desc = "A Kig-Yar body suit for Ruuhtians and T-Voans. Meant to be worn underneath a combat harness"
+	desc = "A Kig-Yar body suit for Ruuhtians and T\'vaoans. Meant to be worn underneath a combat harness"
 	icon = KIGYAR_CLOTHING_PATH
 	icon_state = "jackal_bodysuit_obj"
 	worn_state = "jackal_bodysuit"
