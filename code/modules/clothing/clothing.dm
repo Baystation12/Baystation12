@@ -466,6 +466,7 @@ BLIND     // can't see anything
 		var/mob/M = src.loc
 		M.update_inv_wear_mask()
 
+/*
 /obj/item/clothing/mask/get_mob_overlay(mob/user_mob, slot)
 	var/image/ret = ..()
 
@@ -477,6 +478,7 @@ BLIND     // can't see anything
 	else
 		ret.icon_state = icon_state
 	return ret
+*/
 
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
