@@ -11,6 +11,9 @@
 	mask = /obj/item/clothing/mask/rebreather
 	r_pocket = /obj/item/weapon/grenade/plasma
 	//
+	gloves = /obj/item/clothing/gloves/thick/grunt_gloves
+	shoes = /obj/item/clothing/shoes/grunt_boots
+	//
 	id_type = /obj/item/weapon/card/id/grunt_minor
 	id_slot = slot_wear_id
 
@@ -45,17 +48,23 @@
 	back = /obj/item/weapon/tank/methane/unggoy_internal/red
 	//
 	id_type = /obj/item/weapon/card/id/grunt_major
-	id_slot = slot_wear_id
+
+/decl/hierarchy/outfit/unggoy/heavy
+	name = "Unggoy (Heavy)"
+
+	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/heavy
+	mask = /obj/item/clothing/mask/rebreather/unggoy_heavy
+	back = /obj/item/weapon/tank/methane/unggoy_internal/green
+	//
+	id_type = /obj/item/weapon/card/id/grunt_heavy
 
 /decl/hierarchy/outfit/unggoy/ultra
 	name = "Unggoy (Ultra)"
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/ultra
-	l_hand = /obj/item/language_learner/unggoy_to_common
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 	//
 	id_type = /obj/item/weapon/card/id/grunt_ultra
-	id_slot = slot_wear_id
 
 /decl/hierarchy/outfit/unggoy/specops
 	name = "Unggoy (Spec-Ops)"
@@ -65,7 +74,6 @@
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 	//
 	id_type = /obj/item/weapon/card/id/grunt_specops
-	id_slot = slot_wear_id
 
 /decl/hierarchy/outfit/unggoy/deacon
 	name = "Unggoy (Deacon)"
@@ -76,4 +84,3 @@
 	back = /obj/item/weapon/tank/methane/unggoy_internal/blue
 	//
 	id_type = /obj/item/weapon/card/id/grunt_deacon
-	id_slot = slot_wear_id
