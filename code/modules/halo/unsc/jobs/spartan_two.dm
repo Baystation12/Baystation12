@@ -24,3 +24,4 @@
 		access_unsc_odst,\
 		access_unsc_specialist)
 	whitelisted_species = list(/datum/species/spartan)
+	pop_balance_mult = 3

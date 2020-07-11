@@ -1,6 +1,6 @@
 //TODO: Flash range does nothing currently
 
-proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped,guaranteed_damage = 0,guaranteed_damage_range = 0)
+proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range, adminlog = 1, z_transfer = UP|DOWN, shaped,guaranteed_damage = 0,guaranteed_damage_range = 0,effect_datum_override = null)
 	var/multi_z_scalar = 0.35
 	src = null	//so we don't abort once src is deleted
 	spawn(0)
@@ -48,13 +48,18 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
 			log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ")
 
-		var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
+		var/approximate_intensity = (max(0,devastation_range) * 3) + (max(0,heavy_impact_range) * 2) + max(0,light_impact_range)
 		// Large enough explosion. For performance reasons, powernets will be rebuilt manually
 		if(!defer_powernet_rebuild && (approximate_intensity > 25))
 			defer_powernet_rebuild = 1
 
-		if(heavy_impact_range > 1)
-			var/datum/effect/system/explosion/E = new/datum/effect/system/explosion()
+		if(approximate_intensity >= 2)
+			if(isnull(effect_datum_override))
+				if(approximate_intensity >= 4)
+					effect_datum_override = /datum/effect/system/explosion/has_smoke
+				else
+					effect_datum_override = /datum/effect/system/explosion
+			var/datum/effect/system/explosion/E = new effect_datum_override()
 			E.set_up(epicenter)
 			E.start()
 

@@ -7,3 +7,4 @@
 	outfit_type = /decl/hierarchy/outfit/halo_ai_smart
 	//faction_whitelist = "UNSC" //Uncomment this once testing is done.
 	whitelisted_species = list()
+	pop_balance_mult = 0.5

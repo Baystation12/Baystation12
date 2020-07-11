@@ -87,6 +87,11 @@
 	return 0
 
 /obj/vehicles/proc/enter_as_position(var/mob/user,var/position = "passenger")
+	var/list/drivers = get_occupants_in_position("driver")
+	for(var/mob/living/driver in drivers)
+		if(user.faction != driver.faction)
+			to_chat(user,"<span class = 'notice'>[src] is currently occupied by the [driver.faction] faction, and disallows your entry!</span>")
+			return
 	if(check_position_blocked(position))
 		to_chat(user,"<span class = 'notice'>No [position] spaces in [src]</span>")
 		return 0

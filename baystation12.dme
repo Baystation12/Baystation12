@@ -2083,6 +2083,7 @@
 #include "code\modules\halo\vehicles\~undefs\~undefs.dm"
 #include "code\modules\halo\weapons\ammo.dm"
 #include "code\modules\halo\weapons\ammo_boxes.dm"
+#include "code\modules\halo\weapons\automated_AA.dm"
 #include "code\modules\halo\weapons\autoturret.dm"
 #include "code\modules\halo\weapons\drop_pod_beacon.dm"
 #include "code\modules\halo\weapons\dual_wielding.dm"

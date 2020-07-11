@@ -1,6 +1,4 @@
 
-
-
 //MA5B assault rifle
 
 /obj/item/weapon/gun/projectile/ma5b_ar

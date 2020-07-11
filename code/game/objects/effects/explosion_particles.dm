@@ -64,6 +64,9 @@
 	var/datum/effect/system/expl_particles/P = new/datum/effect/system/expl_particles()
 	P.set_up(10,location)
 	P.start()
+
+/datum/effect/system/explosion/has_smoke/start()
+	. = ..()
 	spawn(5)
 		var/datum/effect/effect/system/smoke_spread/S = new/datum/effect/effect/system/smoke_spread()
 		S.set_up(5,0,location,null)
