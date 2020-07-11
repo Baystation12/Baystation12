@@ -10,7 +10,11 @@
 	flags_inv = HIDESUITSTORAGE|HIDEBACK
 	armor_thickness_modifiers = list()
 	unacidable = 1
-	allowed = list(/obj/item/weapon/tank)
+	allowed = list(\
+		/obj/item/weapon/grenade/plasma,\
+		/obj/item/weapon/gun/energy/plasmapistol,\
+		/obj/item/ammo_magazine/needles,\
+		/obj/item/weapon/gun/projectile/needler)
 	species_restricted = list("Unggoy")
 	matter = list("nanolaminate" = 1)
 
