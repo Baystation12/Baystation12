@@ -1647,8 +1647,8 @@
 	result = /datum/reagent/ethanol/moonshine
 	required_reagents = list(/datum/reagent/nutriment = 10)
 	catalysts = list(/datum/reagent/enzyme = 5)
-	minimum_temperature = 70 CELSIUS
-	maximum_temperature = (70 CELSIUS) + 100
+	minimum_temperature = 50 CELSIUS
+	maximum_temperature = (50 CELSIUS) + 100
 	result_amount = 10
 	mix_message = "The solution exudes the powerful reek of raw alcohol."
 
@@ -2754,8 +2754,8 @@
 	result = /datum/reagent/drink/coconut/milk
 	required_reagents = list(/datum/reagent/drink/coconut = 2, /datum/reagent/nutriment = 1)
 	result_amount = 3
-	minimum_temperature = 50 CELSIUS
-	maximum_temperature = (50 CELSIUS) + 100
+	minimum_temperature = 40 CELSIUS
+	maximum_temperature = (40 CELSIUS) + 100
 	catalysts = list(/datum/reagent/enzyme = 5)
 	mix_message = "The water dilutes into delicious looking milk"
 
