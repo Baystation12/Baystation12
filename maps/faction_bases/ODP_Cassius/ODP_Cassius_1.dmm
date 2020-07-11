@@ -116,7 +116,7 @@
 "cl" = (/obj/machinery/door/airlock/halo{dir = 4; name = "Bathroom"; req_access = list(142)},/obj/machinery/door/firedoor,/turf/simulated/floor/tech/ridged,/area/faction_base/unsc/odp/interior/deck2/hallway)
 "cm" = (/turf/simulated/floor/bluegrid,/area/faction_base/unsc/odp/interior/deck2/aicore)
 "cn" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck2/aicore)
-"co" = (/obj/machinery/door/airlock/halo{dir = 4; name = "Self Destruct"; req_access = list(142)},/turf/simulated/wall/r_wall,/area/faction_base/unsc/odp/interior/deck2/selfdestruct)
+"co" = (/obj/machinery/door/airlock/halo{dir = 4; name = "Self Destruct"; req_access = list(142)},/turf/simulated/floor/reinforced,/area/faction_base/unsc/odp/interior/deck2/selfdestruct)
 "cp" = (/turf/simulated/wall/r_wall,/area/faction_base/unsc/odp/interior/deck2/morgue)
 "cq" = (/obj/structure/sign/deck/bridge,/turf/simulated/wall/r_wall,/area/faction_base/unsc/odp/interior/deck2/hallway)
 "cr" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 4},/turf/simulated/floor/plating,/area/faction_base/unsc/odp/interior/deck2/hallway)
