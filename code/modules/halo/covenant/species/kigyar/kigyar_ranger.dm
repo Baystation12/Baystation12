@@ -22,6 +22,12 @@
 		)
 	armor_thickness = 15
 	matter = list("nanolaminate" = 1)
+	allowed = list(
+		/obj/item/weapon/tank,\
+		/obj/item/weapon/grenade/plasma,\
+		/obj/item/weapon/gun/energy/plasmapistol,\
+		/obj/item/ammo_magazine/needles,\
+		/obj/item/weapon/gun/projectile/needler)
 
 /obj/item/clothing/shoes/magboots/ranger_kigyar
 	name = "Kig-yar ranger magboots"

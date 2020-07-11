@@ -7,6 +7,7 @@
 	#include "geminus_city_overmap.dm"
 	#include "geminus_city_map.dm"
 
+	/*
 	#include "innie_quest/transport_area.dm"
 	#include "innie_quest/computer_comms.dm"
 	#include "innie_quest/computer_shuttle.dm"
@@ -20,6 +21,7 @@
 	#include "innie_supply/computer.dm"
 	#include "innie_supply/supply_program.dm"
 	#include "innie_supply/supply_shuttle.dm"
+	*/
 
 	//#include "geminus_city_jobdefs.dm"
 	#include "ai_items.dm"
