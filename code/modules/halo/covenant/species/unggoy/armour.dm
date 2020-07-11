@@ -21,6 +21,9 @@
 	name = "Unggoy Combat Harness (Major)"
 	icon_state = "combatharness_major"
 	item_state = "combatharness_major"
+	//
+	//3 less all-round protection compared to marines and high ranking grunts
+	armor = list(melee = 52, bullet = 47, laser = 52, energy = 42, bomb = 37, bio = 25, rad = 25)
 
 /obj/item/clothing/suit/armor/special/unggoy_combat_harness/heavy
 	name = "Unggoy Combat Harness (Heavy)"
