@@ -42,12 +42,12 @@
 /datum/category_item/player_setup_item/background/culture/load_character(var/savefile/S)
 	for(var/token in tokens)
 		var/load_val
-		from_file(S[token], load_val)
+		from_save(S[token], load_val)
 		pref.cultural_info[token] = load_val
 
 /datum/category_item/player_setup_item/background/culture/save_character(var/savefile/S)
 	for(var/token in tokens)
-		to_file(S[token], pref.cultural_info[token])
+		to_save(S[token], pref.cultural_info[token])
 
 /datum/category_item/player_setup_item/background/culture/content()
 	. = list()

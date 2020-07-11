@@ -401,18 +401,16 @@ Helpers
 	to_world("<br>")
 
 	for(var/mob/living/silicon/ai/aiPlayer in SSmobs.mob_list)
-		if(aiPlayer.stat != 2)
-			to_world("<b>[aiPlayer.name] [(aiPlayer.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW) ? "(Played by: [aiPlayer.key])\'s" : ""] laws at the end of the round were:</b>")
-		else
-			to_world("<b>[aiPlayer.name] [(aiPlayer.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW) ? "(Played by: [aiPlayer.key])\'s" : ""] laws when it was deactivated were:</b>")
-
+		var/show_ai_key = aiPlayer.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
+		to_world("<b>[aiPlayer.name][show_ai_key ? " (played by [aiPlayer.key])" : ""]'s laws at the [aiPlayer.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
 		aiPlayer.show_laws(1)
 
 		if (aiPlayer.connected_robots.len)
-			var/robolist = "<b>The AI's loyal minions were:</b> "
+			var/minions = "<b>[aiPlayer.name]'s loyal minions were:</b>"
 			for(var/mob/living/silicon/robot/robo in aiPlayer.connected_robots)
-				robolist += "[robo.name][robo.stat ? " (Deactivated)" : ""] [(robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW) ? "(Played by: [robo.key])" : ""],"
-			to_world("[robolist]")
+				var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
+				minions += " [robo.name][show_robot_key ? "(played by: [robo.key])" : ""][robo.stat ? " (deactivated)" : ""],"
+			to_world(minions)
 
 	var/dronecount = 0
 
@@ -423,12 +421,8 @@ Helpers
 			continue
 
 		if (!robo.connected_ai)
-			if (robo.stat != 2)
-				to_world("<b>[robo.name] [(robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW) ? "(Played by: [robo.key])" : ""] survived as an AI-less synthetic! Its laws were:</b>")
-
-			else
-				to_world("<b>[robo.name] [(robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW) ? "(Played by: [robo.key])" : ""] was unable to survive the rigors of being a synthetic without an AI. Its laws were:</b>")
-
+			var/show_robot_key = robo.get_preference_value(/datum/client_preference/show_ckey_credits) == GLOB.PREF_SHOW
+			to_world("<b>[robo.name][show_robot_key ? " (played by [robo.key])" : ""]'s individual laws at the [robo.stat == 2 ? "time of their deactivation" : "end of round"] were:</b>")
 
 			if(robo) //How the hell do we lose robo between here and the world messages directly above this?
 				robo.laws.show_laws(world)

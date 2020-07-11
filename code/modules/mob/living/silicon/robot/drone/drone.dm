@@ -214,7 +214,10 @@ var/list/mob_hat_cache = list()
 				to_chat(user, "<span class='danger'>Access denied.</span>")
 				return
 
-			user.visible_message("<span class='danger'>\The [user] swipes \his ID card through \the [src], attempting to reboot it.</span>", "<span class='danger'>>You swipe your ID card through \the [src], attempting to reboot it.</span>")
+			user.visible_message(
+				SPAN_DANGER("\The [user] swipes \his ID card through \the [src], attempting to reboot it."),
+				SPAN_DANGER("You swipe your ID card through \the [src], attempting to reboot it.")
+			)
 			request_player()
 			return
 

@@ -31,7 +31,7 @@
 			if(viewer != usr && GLOB.thralls.is_antagonist(mind) && ishuman(viewer))
 				var/mob/living/H = viewer
 				if(H.psi && H.psi.get_rank(PSI_REDACTION) >= PSI_RANK_GRANDMASTER)
-					dat += "<font color='#FF0000'><b>Their mind has been cored like an apple, and enslaved by another operant psychic.</b></font>" // <A href='?src=\ref[H.psi];clear_thralldom=\ref[psi]'>>Attempt to remove</a>"
+					dat += "<font color='#FF0000'><b>Their mind has been cored like an apple, and enslaved by another operant psychic.</b></font>"
 
 		if(!use_rating)
 			switch(effective_rating)

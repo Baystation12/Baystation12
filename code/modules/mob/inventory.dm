@@ -183,7 +183,7 @@ var/list/slot_equipment_priority = list( \
 	Removes the object from any slots the mob might have, calling the appropriate icon update proc.
 	Does nothing else.
 
-	>>>> *** DO NOT CALL THIS PROC DIRECTLY *** <<<<
+	*** DO NOT CALL THIS PROC DIRECTLY ***
 
 	It is meant to be called only by other inventory procs.
 	It's probably okay to use it if you are transferring the item between slots on the same mob,

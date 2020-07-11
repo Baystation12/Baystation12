@@ -7,12 +7,12 @@
 	sort_order = 1
 
 /datum/category_item/player_setup_item/relations/load_character(var/savefile/S)
-	S["relations"]	>> pref.relations
-	S["relations_info"]	>> pref.relations_info
+	from_save(S["relations"], pref.relations)
+	from_save(S["relations_info"], pref.relations_info)
 
 /datum/category_item/player_setup_item/relations/save_character(var/savefile/S)
-	S["relations"]	<< pref.relations
-	S["relations_info"]	<< pref.relations_info
+	to_save(S["relations"], pref.relations)
+	to_save(S["relations_info"], pref.relations_info)
 
 /datum/category_item/player_setup_item/relations/sanitize_character()
 	if(!pref.relations)

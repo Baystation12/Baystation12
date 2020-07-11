@@ -27,7 +27,7 @@
 				return
 		if( findtext(memo,"<script",1,0) )
 			return
-		F[ckey] << "[key] on [time2text(world.realtime,"(DDD) DD MMM hh:mm")]<br>[memo]"
+		to_save(F[ckey], "[key] on [time2text(world.realtime,"(DDD) DD MMM hh:mm")]<br>[memo]")
 		message_admins("[key] set an admin memo:<br>[memo]")
 
 //show all memos

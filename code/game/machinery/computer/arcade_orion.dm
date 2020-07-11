@@ -445,7 +445,7 @@
 			to_chat(usr, "<span class='danger'><font size=3>You're never going to make it to Orion...</font></span>")
 			var/mob/living/M = usr
 			M.visible_message("\The [M] starts rapidly deteriorating.")
-			M << browse (null,"window=arcade")
+			close_browser(M, "window=arcade")
 			for(var/i=0;i<10;i++)
 				sleep(10)
 				M.Stun(5)

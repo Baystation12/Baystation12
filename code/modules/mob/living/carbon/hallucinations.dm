@@ -164,7 +164,7 @@
 			to_chat(holder,"<span class='game say'><span class='name'>[talker.name]</span> says something softly.</span>")
 		var/image/speech_bubble = image('icons/mob/talk.dmi',talker,"h[holder.say_test(message)]")
 		spawn(30) qdel(speech_bubble)
-		show_image(holder,speech_bubble)
+		image_to(holder,speech_bubble)
 		sanity-- //don't spam them in very populated rooms.
 		if(!sanity)
 			return

@@ -184,7 +184,7 @@
 		ping_image.layer = BEAM_PROJECTILE_LAYER
 		ping_image.pixel_x = (T.x - src.x) * WORLD_ICON_SIZE
 		ping_image.pixel_y = (T.y - src.y) * WORLD_ICON_SIZE
-		show_image(src, ping_image)
+		image_to(src, ping_image)
 		spawn(8)
 			qdel(ping_image)
 		var/feedback = list("<span class='notice'>There are noises of movement ")
