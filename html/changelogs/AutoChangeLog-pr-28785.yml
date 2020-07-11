@@ -1,5 +1,0 @@
-author: "AshtonFox"
-delete-after: True
-changes: 
-  - bugfix: "The \\:admin\\: tag icon will no longer be blank in the changelog."
-  - bugfix: "Removed an extra pixel in the \\\"Orbital Orange\\\" can's sprite."
