@@ -90,7 +90,7 @@
 	name = "Unggoy (Honour Guard)"
 
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness/honour_guard
-	mask = /obj/item/clothing/mask/rebreather/honour_guard
+	mask = /obj/item/clothing/mask/rebreather/unggoy_honour_guard
 	back = /obj/item/weapon/tank/methane/unggoy_internal/red
 	//
 	id_type = /obj/item/weapon/card/id/grunt_honour_guard

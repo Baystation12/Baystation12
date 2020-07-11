@@ -64,7 +64,7 @@
 	item_state = "rebreather_heavy"
 	rebreath_efficiency = 75
 
-/obj/item/clothing/mask/rebreather/unggoy_honour
+/obj/item/clothing/mask/rebreather/unggoy_honour_guard
 	name = "Unggoy Rebreather Mask (Honour Guard)"
 	icon_state = "mask_red"
 	item_state = "rebreather_honour"
