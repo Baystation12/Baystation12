@@ -33,6 +33,11 @@
 	icon = 'code/modules/halo/covenant/items/Cards.dmi'
 	icon_state = "gruntdeacon_id"
 
+/obj/item/weapon/card/id/grunt_honour_guard
+	name = "Unggoy Honour Guard identification card"
+	icon = 'code/modules/halo/covenant/items/Cards.dmi'
+	icon_state = "grunthg_id"
+
 
 
 /***** KIGYAR *****/

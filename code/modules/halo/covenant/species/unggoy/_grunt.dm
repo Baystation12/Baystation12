@@ -1,3 +1,4 @@
+#define GRUNT_GEAR_ICON 'code/modules/halo/covenant/species/unggoy/grunt_gear.dmi'
 
 /datum/species/unggoy
 	name = "Unggoy"
@@ -48,7 +49,7 @@
 	. = ..()
 	//I guess their leg-boots are kinda organs.
 	H.equip_to_slot(new /obj/item/clothing/shoes/grunt_boots,slot_shoes)
-	H.equip_to_slot(new /obj/item/clothing/shoes/grunt_gloves,slot_gloves)
+	H.equip_to_slot(new /obj/item/clothing/gloves/thick/grunt_gloves,slot_gloves)
 
 /datum/species/unggoy/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 1)
 	//unggoy have special breathing equipment handling via job outfits
@@ -90,21 +91,3 @@
 	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
 	key = "B"
 	flags = RESTRICTED
-
-/obj/item/clothing/shoes/grunt_boots
-	name = "Natural Armor"
-	desc = "The natural armor on your legs provides a small amount of protection against the elements."
-	icon = 'code/modules/halo/covenant/species/unggoy/grunt_gear.dmi'
-	icon_state = "naturallegarmor"
-	item_state = "blank"
-
-	canremove = 0
-
-/obj/item/clothing/shoes/grunt_gloves
-	name = "Natural Armor"
-	desc = "The natural armor on your arms provides a small amount of protection against the elements."
-	icon = 'code/modules/halo/covenant/species/unggoy/grunt_gear.dmi'
-	icon_state = "naturalhandarmor"
-	item_state = "blank"
-
-	canremove = 0

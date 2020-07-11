@@ -81,6 +81,11 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenan
 	canremove = 0
 	unacidable = 1
 
+/obj/item/clothing/shoes/ruutian_boots/dropped(mob/user as mob)
+	. = ..()
+	if(isnull(src.gc_destroyed))
+		qdel(src)
+
 /datum/species/kig_yar/get_random_name(var/gender)
 	return pick(GLOB.first_names_kig_yar)
 

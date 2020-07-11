@@ -19,9 +19,19 @@
 
 /datum/job/covenant/unggoy_ultra
 	title = "Unggoy Ultra"
-	total_positions = 2
-	spawn_positions = 2
+	total_positions = 1
+	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/unggoy/ultra
+	faction_whitelist = "Covenant"
+	whitelisted_species = list(/datum/species/unggoy)
+	pop_balance_mult = 0.5
+
+/datum/job/covenant/unggoy_heavy
+	title = "Unggoy Heavy"
+	total_positions = 1
+	spawn_positions = 1
+	open_slot_on_death = 1
+	outfit_type = /decl/hierarchy/outfit/unggoy/heavy
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/unggoy)
 	pop_balance_mult = 0.5
@@ -43,6 +53,14 @@
 	title = "Special Operations Unggoy"
 	supervisors = "the Elites"
 	outfit_type = /decl/hierarchy/outfit/unggoy/specops
+	spawn_positions = 0
+	total_positions = 0
+	faction_whitelist = "Covenant"
+
+/datum/job/covenant/unggoy_honour_guard
+	title = "Honour Guard Unggoy"
+	supervisors = "the Elites"
+	outfit_type = /decl/hierarchy/outfit/unggoy/honour_guard
 	spawn_positions = 0
 	total_positions = 0
 	faction_whitelist = "Covenant"

@@ -112,7 +112,7 @@
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/setup_trajectory()
 	. = ..()
-	kill_count = get_dist(loc,get_turf(original)) + rand(-dispersion[1],dispersion[1])
+	kill_count = get_dist(loc, original) - 2 + rand(0,4)
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/Move(var/newloc,var/dir)
 	if(get_dist(loc,original) > (get_dist(starting,original)/2))
@@ -127,5 +127,8 @@
 	return ..()
 
 /obj/item/projectile/bullet/covenant/wraith_cannon/on_impact(var/atom/impacted)
-	explosion(get_turf(impacted),0,2,2,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
+	var/obj/effect/plasma_explosion/P = new(get_turf(src))
+	P.pixel_x += src.pixel_x
+	P.pixel_y += src.pixel_y
+	explosion(get_turf(impacted),0,1,2,5,guaranteed_damage = 100,guaranteed_damage_range = 3)
 	. = ..()
