@@ -362,8 +362,8 @@
 "bo" = (
 /obj/structure/railing/mapped,
 /obj/structure/railing/mapped{
-	icon_state = "railing0";
-	dir = 8
+	dir = 8;
+	icon_state = "railing0"
 	},
 /turf/simulated/open,
 /area/unishi/living)
@@ -518,8 +518,8 @@
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/brown{
-	icon_state = "corner_white";
-	dir = 8
+	dir = 8;
+	icon_state = "corner_white"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -691,8 +691,8 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor,
 /area/unishi/bridge)
@@ -758,8 +758,8 @@
 /area/unishi/living)
 "cm" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -796,8 +796,8 @@
 	req_access = newlist()
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/wood,
 /area/unishi/lounge)
@@ -808,8 +808,8 @@
 	icon_state = "1-8"
 	},
 /obj/machinery/bodyscanner{
-	icon_state = "body_scanner_0";
-	dir = 4
+	dir = 4;
+	icon_state = "body_scanner_0"
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
@@ -875,8 +875,8 @@
 /obj/structure/iv_drip,
 /obj/random/medical/lite,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/power/apc{
 	dir = 2;
@@ -886,8 +886,8 @@
 	req_access = newlist()
 	},
 /obj/machinery/body_scanconsole{
-	icon_state = "body_scannerconsole";
-	dir = 4
+	dir = 4;
+	icon_state = "body_scannerconsole"
 	},
 /turf/simulated/floor/tiled/white,
 /area/unishi/med)
@@ -926,8 +926,8 @@
 "cC" = (
 /obj/structure/bed/chair/padded/brown,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/corner/brown{
 	dir = 9
@@ -1188,8 +1188,8 @@
 	icon_state = "0-8"
 	},
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/kitchen)
@@ -1302,8 +1302,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/civilian{
-	icon_state = "closed";
-	dir = 8
+	dir = 8;
+	icon_state = "closed"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/kitchen)
@@ -1326,8 +1326,8 @@
 "dy" = (
 /obj/item/weapon/mop,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/structure/closet/crate/bin,
 /turf/simulated/floor/tiled,
@@ -1385,8 +1385,8 @@
 "dI" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/unishi/kitchen)
@@ -1455,8 +1455,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1557,8 +1557,8 @@
 /obj/item/weapon/bedsheet/orange,
 /obj/machinery/light/small,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1590,8 +1590,8 @@
 	dir = 4
 	},
 /obj/machinery/door/airlock/civilian{
-	icon_state = "closed";
-	dir = 8
+	dir = 8;
+	icon_state = "closed"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1671,8 +1671,8 @@
 	dir = 4
 	},
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
@@ -1822,8 +1822,8 @@
 "eK" = (
 /obj/structure/bed/chair/office,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/wood,
 /area/unishi/living)
@@ -1945,8 +1945,8 @@
 /area/unishi/living)
 "fa" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/wood,
 /area/unishi/living)
@@ -1999,8 +1999,8 @@
 	dir = 4
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)

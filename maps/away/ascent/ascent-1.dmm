@@ -5,9 +5,6 @@
 "ab" = (
 /turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/shuttle_starboard)
-"ac" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/fore_starboard_prow)
 "ad" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /turf/simulated/floor/ascent,
@@ -20,9 +17,6 @@
 /obj/item/weapon/material/knife/kitchen/cleaver/ascent,
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_port_prow)
-"ag" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/wing_starboard)
 "ah" = (
 /turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/fore_starboard_prow)
@@ -70,9 +64,6 @@
 "as" = (
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_starboard_prow)
-"av" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/hydroponics_starboard)
 "aw" = (
 /obj/machinery/atmospherics/portables_connector,
 /obj/machinery/portable_atmospherics/canister/oxygen,
@@ -222,9 +213,6 @@
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_spike)
-"aQ" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/habitation)
 "aR" = (
 /obj/effect/catwalk_plated/ascent,
 /obj/machinery/light/ascent{
@@ -232,9 +220,6 @@
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_jut)
-"aS" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/fore_port_prow)
 "aT" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on/ascent{
 	dir = 8
@@ -367,9 +352,6 @@
 /obj/machinery/computer/ship/engines/ascent,
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
-"bn" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/engineering)
 "bo" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
@@ -620,9 +602,6 @@
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/bridge)
-"bP" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/wing_port)
 "bQ" = (
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/wing_port)
@@ -964,9 +943,6 @@
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/habitation)
-"cA" = (
-/turf/simulated/wall/r_wall/ascent,
-/area/ship/ascent/hydroponics_port)
 "cB" = (
 /obj/structure/cable/cyan{
 	d1 = 4;
@@ -2690,8 +2666,8 @@
 /area/ship/ascent/hydroponics_port)
 "gq" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/black{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/wall/r_wall/ascent,
 /area/ship/ascent/shuttle_starboard)
@@ -4474,8 +4450,8 @@
 	pixel_y = 32
 	},
 /obj/structure/railing/mapped{
-	icon_state = "railing0-1";
-	dir = 4
+	dir = 4;
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_starboard_prow)
@@ -4515,8 +4491,8 @@
 /area/ship/ascent/shuttle_starboard)
 "vY" = (
 /obj/structure/railing/mapped{
-	icon_state = "railing0-1";
-	dir = 4
+	dir = 4;
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
@@ -4706,8 +4682,8 @@
 	name = "heavy duty box"
 	},
 /obj/structure/railing/mapped{
-	icon_state = "railing0-1";
-	dir = 8
+	dir = 8;
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/fore_starboard_prow)
@@ -4810,8 +4786,8 @@
 "IQ" = (
 /obj/effect/wallframe_spawn/reinforced_phoron/hull,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/ascent,
 /area/ship/ascent/shuttle_starboard)
@@ -5050,8 +5026,8 @@
 /area/ship/ascent/fore_starboard_jut)
 "QT" = (
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 1
+	dir = 1;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_hallway)
@@ -5107,8 +5083,8 @@
 /area/ship/ascent/shuttle_starboard)
 "TO" = (
 /obj/structure/hygiene/shower/ascent{
-	icon_state = "shower";
-	dir = 8
+	dir = 8;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_hallway)
@@ -5166,8 +5142,8 @@
 /area/ship/ascent/habitation)
 "Vx" = (
 /obj/structure/railing/mapped{
-	icon_state = "railing0-1";
-	dir = 4
+	dir = 4;
+	icon_state = "railing0-1"
 	},
 /turf/simulated/floor/tiled/ascent,
 /area/ship/ascent/fore_starboard_prow)
@@ -9976,12 +9952,12 @@ aa
 aa
 aa
 aa
-ac
-ac
-ac
+ah
+ah
+ah
 cE
-ac
-ac
+ah
+ah
 aa
 jT
 jT
@@ -9989,12 +9965,12 @@ dD
 jT
 jT
 aa
-aS
-aS
+cy
+cy
 hG
-aS
-aS
-aS
+cy
+cy
+cy
 aa
 aa
 aa
@@ -10097,13 +10073,13 @@ aa
 aa
 aa
 aa
-ac
-ac
+ah
+ah
 vz
 aF
 dC
 dL
-ac
+ah
 bX
 jT
 em
@@ -10111,13 +10087,13 @@ el
 gr
 jT
 dN
-aS
+cy
 fO
 hb
 hn
 hE
-aS
-aS
+cy
+cy
 aa
 aa
 aa
@@ -10225,7 +10201,7 @@ as
 as
 as
 dM
-ac
+ah
 cH
 ah
 bD
@@ -10233,7 +10209,7 @@ gB
 cx
 cy
 ee
-aS
+cy
 fP
 cv
 cv
@@ -10726,8 +10702,8 @@ cv
 cv
 cv
 hK
-aS
-aS
+cy
+cy
 aa
 aa
 aa
@@ -10830,7 +10806,7 @@ aa
 mg
 mY
 mY
-ac
+ah
 uk
 Vx
 as
@@ -10848,7 +10824,7 @@ cv
 cv
 cv
 cv
-aS
+cy
 aa
 aa
 aa
@@ -10952,7 +10928,7 @@ mY
 mY
 mY
 mY
-ac
+ah
 AI
 vY
 as
@@ -11074,7 +11050,7 @@ nE
 CV
 tz
 nE
-ac
+ah
 qI
 mN
 as
@@ -11196,7 +11172,7 @@ tz
 QJ
 tz
 JZ
-ac
+ah
 Pv
 EB
 ZK
@@ -11318,7 +11294,7 @@ wd
 zB
 wd
 yP
-ac
+ah
 sM
 mN
 Ap
@@ -11440,25 +11416,25 @@ Zh
 Zh
 Zh
 Zh
-ac
+ah
 OZ
 Es
 Ap
 as
 ER
 ah
-aQ
-aQ
+bz
+bz
 dP
-aQ
-aQ
+bz
+bz
 cy
 cR
 cv
 cv
 hK
-aS
-aS
+cy
+cy
 aa
 cN
 WI
@@ -11562,7 +11538,7 @@ re
 Ex
 tw
 Jp
-ac
+ah
 lk
 lk
 Ap
@@ -11684,12 +11660,12 @@ aR
 yx
 qG
 Xk
-ac
+ah
 as
 as
 Ap
 as
-aQ
+bz
 pp
 bt
 bN
@@ -11697,7 +11673,7 @@ bU
 bN
 cz
 JE
-aQ
+bz
 cv
 cv
 hc
@@ -11928,12 +11904,12 @@ mY
 mY
 Ou
 wW
-ac
+ah
 as
 as
 as
 as
-aQ
+bz
 lG
 br
 bu
@@ -11941,12 +11917,12 @@ bz
 fJ
 br
 vt
-aQ
+bz
 cv
 cv
 hK
-aS
-aS
+cy
+cy
 aa
 ik
 WI
@@ -12050,12 +12026,12 @@ aa
 mY
 mY
 mY
-ac
+ah
 as
 as
 aX
 ah
-aQ
+bz
 As
 bE
 bK
@@ -12063,7 +12039,7 @@ bA
 gR
 fA
 uV
-aQ
+bz
 cy
 cv
 hc
@@ -12172,7 +12148,7 @@ ab
 Qz
 aa
 aa
-ac
+ah
 as
 as
 as
@@ -12190,7 +12166,7 @@ cy
 cv
 hc
 ic
-aS
+cy
 cN
 cN
 cN
@@ -12294,7 +12270,7 @@ ab
 ab
 Qz
 aa
-ac
+ah
 as
 as
 as
@@ -12312,7 +12288,7 @@ cy
 cv
 hc
 hY
-aS
+cy
 cN
 jN
 fj
@@ -12416,7 +12392,7 @@ eN
 ab
 Qz
 Fg
-ac
+ah
 as
 as
 as
@@ -12434,7 +12410,7 @@ cy
 cv
 cv
 cv
-aS
+cy
 cN
 jO
 iH
@@ -12538,8 +12514,8 @@ ab
 ab
 ab
 gq
-ac
-ac
+ah
+ah
 iQ
 ah
 ah
@@ -12555,8 +12531,8 @@ dF
 cy
 cy
 ce
-aS
-aS
+cy
+cy
 cN
 ej
 iO
@@ -12663,7 +12639,7 @@ ie
 iE
 fv
 jq
-ag
+aj
 bb
 bb
 az
@@ -12675,7 +12651,7 @@ az
 az
 bb
 bb
-bP
+bW
 do
 fh
 ey
@@ -12785,7 +12761,7 @@ it
 iG
 fg
 jr
-ag
+aj
 az
 az
 az
@@ -12797,7 +12773,7 @@ be
 az
 az
 az
-bP
+bW
 dW
 fi
 eF
@@ -12907,7 +12883,7 @@ Xa
 iE
 fv
 js
-ag
+aj
 az
 ck
 fL
@@ -12919,7 +12895,7 @@ be
 fL
 ck
 az
-bP
+bW
 dX
 bW
 bW
@@ -13759,7 +13735,7 @@ GZ
 JC
 CW
 aj
-ag
+aj
 cj
 az
 az
@@ -14003,7 +13979,7 @@ Fd
 If
 NR
 aj
-ag
+aj
 aC
 bJ
 az
@@ -14246,18 +14222,18 @@ Of
 wM
 lJ
 RK
-ag
+aj
 Zn
 bI
 aO
 aZ
 ak
 jf
-ag
+aj
 bf
 ci
 ca
-bP
+bW
 jg
 bQ
 cd
@@ -14501,7 +14477,7 @@ aj
 dt
 en
 dv
-bP
+bW
 jB
 bQ
 bQ
@@ -14618,12 +14594,12 @@ dr
 ax
 ak
 jy
-ag
-ag
+aj
+aj
 dO
 en
 ji
-bP
+bW
 hw
 bQ
 bQ
@@ -14738,17 +14714,17 @@ aj
 aj
 gQ
 ay
-ag
-ag
+aj
+aj
 BX
 BX
 BX
 eu
-bn
 BX
-bP
-bP
-bP
+BX
+bW
+bW
+bW
 dd
 dQ
 bW
@@ -14861,7 +14837,7 @@ QY
 oL
 aD
 bY
-bn
+BX
 gL
 db
 eg
@@ -14874,7 +14850,7 @@ jw
 cD
 Av
 ng
-cA
+Aj
 aa
 aa
 aa
@@ -14978,12 +14954,12 @@ lW
 KO
 KO
 KO
-av
+kq
 oV
 oL
 aE
 ef
-bn
+BX
 gL
 df
 ds
@@ -14996,7 +14972,7 @@ jh
 cX
 Av
 Js
-cA
+Aj
 aa
 aa
 aa
@@ -15100,7 +15076,7 @@ aa
 aa
 aa
 aa
-av
+kq
 Ew
 oL
 aH
@@ -15118,7 +15094,7 @@ ga
 dh
 Av
 Qs
-cA
+Aj
 aa
 aa
 aa
@@ -15222,7 +15198,7 @@ aa
 aa
 aa
 aa
-av
+kq
 aq
 aJ
 aT
@@ -15240,7 +15216,7 @@ gk
 dp
 he
 gZ
-cA
+Aj
 aa
 aa
 aa
@@ -15344,7 +15320,7 @@ aa
 aa
 aa
 aa
-av
+kq
 aq
 dS
 hL
@@ -15362,7 +15338,7 @@ gl
 hM
 hf
 gZ
-cA
+Aj
 aa
 aa
 aa
@@ -15466,8 +15442,8 @@ aa
 aa
 aa
 aa
-av
-av
+kq
+kq
 gY
 de
 fY
@@ -15483,8 +15459,8 @@ cV
 gk
 ge
 hg
-cA
-cA
+Aj
+Aj
 aa
 aa
 aa
@@ -15588,7 +15564,7 @@ aa
 aa
 aa
 aa
-av
+kq
 aq
 dS
 cC
@@ -15606,7 +15582,7 @@ gm
 go
 hf
 gZ
-cA
+Aj
 aa
 aa
 aa
@@ -15710,7 +15686,7 @@ aa
 aa
 aa
 aa
-av
+kq
 aq
 gP
 dj
@@ -15728,7 +15704,7 @@ gn
 gp
 hh
 gZ
-cA
+Aj
 aa
 aa
 aa
@@ -15832,9 +15808,9 @@ aa
 aa
 aa
 aa
-av
-av
-av
+kq
+kq
+kq
 dz
 gc
 kq
@@ -15848,9 +15824,9 @@ BX
 Aj
 jm
 gf
-cA
-cA
-cA
+Aj
+Aj
+Aj
 aa
 aa
 aa
@@ -15956,7 +15932,7 @@ aa
 aa
 aa
 aa
-av
+kq
 dz
 gc
 kq
@@ -15970,7 +15946,7 @@ hd
 Aj
 jm
 gf
-cA
+Aj
 aa
 aa
 aa
@@ -16078,7 +16054,7 @@ aa
 aa
 aa
 aa
-av
+kq
 fZ
 gc
 kq
@@ -16092,7 +16068,7 @@ aa
 Aj
 jm
 iK
-cA
+Aj
 aa
 aa
 aa
@@ -16200,7 +16176,7 @@ aa
 aa
 aa
 aa
-av
+kq
 hL
 GB
 kq
@@ -16214,7 +16190,7 @@ aa
 Aj
 zt
 hM
-cA
+Aj
 aa
 aa
 aa
@@ -16322,7 +16298,7 @@ aa
 aa
 aa
 aa
-av
+kq
 hL
 hL
 kq
@@ -16336,7 +16312,7 @@ aa
 Aj
 hM
 hM
-cA
+Aj
 aa
 aa
 aa
@@ -16445,7 +16421,7 @@ aa
 aa
 aa
 ha
-av
+kq
 GB
 kq
 aa
@@ -16457,7 +16433,7 @@ aa
 aa
 Aj
 zt
-cA
+Aj
 ar
 aa
 aa
@@ -16568,7 +16544,7 @@ aa
 aa
 aa
 ha
-av
+kq
 kq
 aa
 aa
@@ -16578,7 +16554,7 @@ aa
 aa
 aa
 Aj
-cA
+Aj
 ar
 aa
 aa

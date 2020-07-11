@@ -10,26 +10,26 @@
 /area/map_template/rescue_base/base)
 "ae" = (
 /obj/machinery/computer/teleporter{
-	icon_state = "computer";
-	dir = 2
+	dir = 2;
+	icon_state = "computer"
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "af" = (
 /obj/machinery/teleport/station,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ag" = (
 /obj/machinery/teleport/hub,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ah" = (
@@ -79,8 +79,8 @@
 /area/map_template/rescue_base/base)
 "ao" = (
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ap" = (
@@ -89,8 +89,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aq" = (
@@ -120,18 +120,18 @@
 	pixel_y = 16
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "av" = (
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "aw" = (
@@ -140,8 +140,8 @@
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "ax" = (
@@ -170,8 +170,8 @@
 /area/map_template/rescue_base/base)
 "aB" = (
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "aC" = (
@@ -186,8 +186,8 @@
 /obj/item/weapon/aiModule/solgov,
 /obj/item/weapon/aiModule/solgov_aggressive,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aD" = (
@@ -202,8 +202,8 @@
 /obj/item/weapon/plastique,
 /obj/item/weapon/plastique,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aE" = (
@@ -215,8 +215,8 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aF" = (
@@ -230,8 +230,8 @@
 /obj/item/weapon/storage/box/ammo/shotgunshells,
 /obj/item/weapon/storage/box/ammo/shotgunshells,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aG" = (
@@ -241,8 +241,8 @@
 /obj/item/weapon/gun/energy/gun/nuclear,
 /obj/item/weapon/gun/energy/gun/nuclear,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aH" = (
@@ -339,8 +339,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "aR" = (
@@ -353,8 +353,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "aT" = (
@@ -364,8 +364,8 @@
 /obj/item/ammo_magazine/box/machinegun,
 /obj/item/ammo_magazine/box/machinegun,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aU" = (
@@ -374,8 +374,8 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aV" = (
@@ -386,8 +386,8 @@
 	pixel_y = -3
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aW" = (
@@ -396,8 +396,8 @@
 /obj/item/weapon/gun/projectile/automatic/sec_smg,
 /obj/item/weapon/gun/projectile/automatic/sec_smg,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "aX" = (
@@ -434,8 +434,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "bc" = (
@@ -444,16 +444,16 @@
 	pixel_y = 16
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/rescue_base/base)
 "bd" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/projectile/automatic/l6_saw,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "be" = (
@@ -471,8 +471,8 @@
 /obj/item/clothing/suit/armor/laserproof,
 /obj/item/clothing/suit/armor/laserproof,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bf" = (
@@ -487,8 +487,8 @@
 /obj/item/ammo_magazine/smg_top/rubber,
 /obj/item/ammo_magazine/smg_top/rubber,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bg" = (
@@ -552,8 +552,8 @@
 /obj/item/weapon/rig/ert/assetprotection,
 /obj/item/weapon/rig/ert/assetprotection,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bo" = (
@@ -571,8 +571,8 @@
 /obj/item/clothing/suit/armor/bulletproof,
 /obj/item/clothing/suit/armor/bulletproof,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bp" = (
@@ -588,8 +588,8 @@
 /obj/item/ammo_magazine/smg_top,
 /obj/item/ammo_magazine/smg_top,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bq" = (
@@ -609,8 +609,8 @@
 /area/map_template/rescue_base/base)
 "bs" = (
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 9
+	dir = 9;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bt" = (
@@ -716,8 +716,8 @@
 /obj/item/weapon/gun/projectile/automatic/bullpup_rifle,
 /obj/item/weapon/gun/projectile/automatic/bullpup_rifle,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bE" = (
@@ -732,8 +732,8 @@
 	p_open = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bF" = (
@@ -742,8 +742,8 @@
 /obj/item/weapon/storage/box/smokes,
 /obj/item/weapon/storage/box/flashbangs,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bG" = (
@@ -791,16 +791,16 @@
 /obj/item/ammo_magazine/mil_rifle,
 /obj/item/ammo_magazine/mil_rifle,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bM" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/launcher/grenade,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bN" = (
@@ -811,8 +811,8 @@
 /obj/item/weapon/storage/box/emps,
 /obj/item/weapon/storage/box/frags,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bO" = (
@@ -823,16 +823,16 @@
 /obj/item/clothing/head/solgov/utility/fleet,
 /obj/item/clothing/accessory/badge/solgov/tags,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bP" = (
 /obj/structure/bed/padded,
 /obj/item/weapon/bedsheet/captain,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bQ" = (
@@ -843,8 +843,8 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bR" = (
@@ -852,8 +852,8 @@
 	prices = list()
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bS" = (
@@ -868,8 +868,8 @@
 	p_open = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bT" = (
@@ -884,8 +884,8 @@
 "bU" = (
 /obj/machinery/acting/changer,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bV" = (
@@ -893,8 +893,8 @@
 	name = "Response Team"
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bW" = (
@@ -918,8 +918,8 @@
 "bY" = (
 /obj/structure/undies_wardrobe,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "bZ" = (
@@ -938,8 +938,8 @@
 	pixel_y = 4
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cb" = (
@@ -948,8 +948,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cc" = (
@@ -975,8 +975,8 @@
 /obj/item/taperoll/police,
 /obj/item/taperoll/police,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cd" = (
@@ -988,8 +988,8 @@
 /obj/item/clothing/glasses/tacgoggles,
 /obj/item/clothing/glasses/tacgoggles,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ce" = (
@@ -999,8 +999,8 @@
 /obj/item/weapon/storage/belt/holster/security/tactical,
 /obj/item/weapon/storage/belt/holster/security/tactical,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cf" = (
@@ -1008,8 +1008,8 @@
 /obj/item/weapon/gun/energy/gun/nuclear,
 /obj/item/weapon/gun/energy/gun/nuclear,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cg" = (
@@ -1023,8 +1023,8 @@
 /obj/item/clothing/head/helmet,
 /obj/item/clothing/head/helmet,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ch" = (
@@ -1034,8 +1034,8 @@
 /obj/item/clothing/head/helmet,
 /obj/item/clothing/head/helmet,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ci" = (
@@ -1043,8 +1043,8 @@
 /obj/item/weapon/gun/energy/gun,
 /obj/item/weapon/gun/energy/gun,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cj" = (
@@ -1056,8 +1056,8 @@
 /obj/item/weapon/storage/belt/medical/emt,
 /obj/item/weapon/storage/belt/medical/emt,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ck" = (
@@ -1070,8 +1070,8 @@
 /obj/item/weapon/storage/box/gloves,
 /obj/item/weapon/storage/box/masks,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cl" = (
@@ -1097,8 +1097,8 @@
 /obj/item/weapon/gun/launcher/syringe/rapid,
 /obj/item/weapon/gun/launcher/syringe/rapid,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cm" = (
@@ -1114,8 +1114,8 @@
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,
 /obj/item/weapon/reagent_containers/glass/bottle/inaprovaline,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cn" = (
@@ -1128,8 +1128,8 @@
 	dir = 8
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "co" = (
@@ -1139,8 +1139,8 @@
 	dir = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cp" = (
@@ -1162,8 +1162,8 @@
 	dir = 4
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cq" = (
@@ -1179,15 +1179,15 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cr" = (
 /obj/structure/table/rack,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cs" = (
@@ -1213,8 +1213,8 @@
 	dir = 8
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ct" = (
@@ -1224,8 +1224,8 @@
 	dir = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cu" = (
@@ -1238,8 +1238,8 @@
 	dir = 4
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cv" = (
@@ -1283,8 +1283,8 @@
 	pixel_y = 2
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cx" = (
@@ -1294,16 +1294,16 @@
 /obj/item/weapon/gun/energy/laser,
 /obj/item/weapon/gun/energy/laser,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cy" = (
 /obj/machinery/chemical_dispenser/ert,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cz" = (
@@ -1316,8 +1316,8 @@
 /obj/structure/table/rack,
 /obj/item/weapon/rig/ert/janitor,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cA" = (
@@ -1344,8 +1344,8 @@
 "cD" = (
 /obj/machinery/fabricator/hacked,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cE" = (
@@ -1353,8 +1353,8 @@
 /obj/item/weapon/gun/energy/ionrifle,
 /obj/item/weapon/gun/energy/ionrifle,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cF" = (
@@ -1372,8 +1372,8 @@
 /obj/item/weapon/shield/riot,
 /obj/item/weapon/shield/riot,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cG" = (
@@ -1395,8 +1395,8 @@
 /obj/item/bodybag/cryobag,
 /obj/item/weapon/defibrillator/compact/loaded,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cH" = (
@@ -1408,8 +1408,8 @@
 /obj/item/roller,
 /obj/item/roller,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cI" = (
@@ -1431,8 +1431,8 @@
 "cJ" = (
 /obj/machinery/chem_master,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cK" = (
@@ -1443,8 +1443,8 @@
 /obj/structure/table/rack,
 /obj/item/weapon/rig/ert/janitor,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cL" = (
@@ -1456,8 +1456,8 @@
 /obj/item/device/paicard,
 /obj/item/device/paicard,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cM" = (
@@ -1467,8 +1467,8 @@
 /obj/item/weapon/gun/energy/gun,
 /obj/item/weapon/gun/energy/gun,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cN" = (
@@ -1478,16 +1478,16 @@
 /obj/item/weapon/shield/riot/metal,
 /obj/item/weapon/shield/riot/metal,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cO" = (
 /obj/machinery/chemical_dispenser/full,
 /obj/item/weapon/reagent_containers/glass/beaker/large,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cP" = (
@@ -1510,8 +1510,8 @@
 	pixel_x = 32
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cR" = (
@@ -1527,15 +1527,15 @@
 /obj/item/clothing/head/beret/solgov/fleet/security,
 /obj/item/clothing/head/beret/solgov/fleet/security,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cS" = (
 /obj/structure/iv_drip,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cT" = (
@@ -1550,8 +1550,8 @@
 /obj/item/device/flashlight/pen,
 /obj/item/device/flashlight/pen,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cU" = (
@@ -1566,8 +1566,8 @@
 /obj/item/weapon/storage/firstaid/o2,
 /obj/item/weapon/storage/firstaid/o2,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cV" = (
@@ -1582,15 +1582,15 @@
 /obj/item/weapon/storage/firstaid/combat,
 /obj/item/weapon/storage/firstaid/combat,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cW" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cX" = (
@@ -1601,8 +1601,8 @@
 	dir = 8
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cY" = (
@@ -1615,8 +1615,8 @@
 	dir = 4
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "cZ" = (
@@ -1638,8 +1638,8 @@
 	dir = 8
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "da" = (
@@ -1647,8 +1647,8 @@
 /obj/structure/table/rack,
 /obj/item/weapon/rig/ert/engineer,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "db" = (
@@ -1659,8 +1659,8 @@
 	dir = 4
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dc" = (
@@ -1680,8 +1680,8 @@
 "de" = (
 /obj/structure/table/reinforced,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "df" = (
@@ -1694,8 +1694,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dh" = (
@@ -1704,8 +1704,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "di" = (
@@ -1728,8 +1728,8 @@
 	p_open = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dl" = (
@@ -1738,8 +1738,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dm" = (
@@ -1748,8 +1748,8 @@
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dn" = (
@@ -1758,17 +1758,17 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "do" = (
 /turf/unsimulated/wall{
 	desc = "A secure airlock. Doesn't look like you can get through easily.";
+	dir = 4;
 	icon = 'icons/obj/doors/centcomm/door.dmi';
 	icon_state = "closed";
-	name = "Delta Barracks";
-	dir = 4
+	name = "Delta Barracks"
 	},
 /area/map_template/rescue_base/base)
 "dp" = (
@@ -1786,15 +1786,15 @@
 /obj/item/modular_computer/tablet/lease/preset/command,
 /obj/item/modular_computer/tablet/lease/preset/command,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dr" = (
 /obj/machinery/recharge_station,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ds" = (
@@ -1806,8 +1806,8 @@
 /obj/item/clothing/accessory/storage/white_vest,
 /obj/item/clothing/accessory/storage/white_vest,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dt" = (
@@ -1819,8 +1819,8 @@
 /obj/item/clothing/accessory/storage/black_vest,
 /obj/item/clothing/accessory/storage/black_vest,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "du" = (
@@ -1832,8 +1832,8 @@
 /obj/item/clothing/accessory/storage/brown_vest,
 /obj/item/clothing/accessory/storage/brown_vest,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dv" = (
@@ -1845,8 +1845,8 @@
 /obj/item/clothing/accessory/storage/holster/thigh,
 /obj/item/clothing/accessory/storage/holster/thigh,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dw" = (
@@ -1855,8 +1855,8 @@
 	pixel_y = -22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dx" = (
@@ -1867,8 +1867,8 @@
 	pixel_y = -25
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dy" = (
@@ -1877,8 +1877,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dz" = (
@@ -1887,8 +1887,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dA" = (
@@ -1897,8 +1897,8 @@
 	opacity = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dB" = (
@@ -1912,8 +1912,8 @@
 	name = "Landing Pad"
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dD" = (
@@ -1921,16 +1921,16 @@
 /obj/item/weapon/storage/box/trackimp,
 /obj/item/weapon/storage/box/cdeathalarm_kit,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dE" = (
 /obj/structure/table/reinforced,
 /obj/prefab/hand_teleporter,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dF" = (
@@ -1942,8 +1942,8 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dG" = (
@@ -1951,29 +1951,29 @@
 /obj/machinery/cell_charger,
 /obj/item/weapon/cell/hyper,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dH" = (
 /obj/machinery/vending/engivend,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dI" = (
 /obj/machinery/vending/tool,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dJ" = (
 /obj/machinery/vending/assist,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dK" = (
@@ -1983,15 +1983,15 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dL" = (
 /obj/machinery/pipedispenser/disposal,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dM" = (
@@ -2007,8 +2007,8 @@
 /obj/item/clothing/head/beret/solgov/fleet/engineering,
 /obj/item/clothing/head/beret/solgov/fleet/engineering,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dN" = (
@@ -2020,14 +2020,14 @@
 "dO" = (
 /obj/structure/bed/chair/office/dark,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dP" = (
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dQ" = (
@@ -2052,8 +2052,8 @@
 	p_open = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dS" = (
@@ -2091,22 +2091,22 @@
 "dW" = (
 /obj/structure/reagent_dispensers/watertank,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dX" = (
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dY" = (
 /obj/machinery/shieldgen,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "dZ" = (
@@ -2130,15 +2130,15 @@
 	pixel_y = -4
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ec" = (
 /obj/structure/table/reinforced,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ed" = (
@@ -2148,16 +2148,16 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ee" = (
 /obj/structure/table/reinforced,
 /obj/machinery/cell_charger,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ef" = (
@@ -2171,8 +2171,8 @@
 	dir = 4
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eh" = (
@@ -2182,8 +2182,8 @@
 /obj/item/weapon/storage/box/handcuffs,
 /obj/item/weapon/melee/baton/loaded,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ei" = (
@@ -2191,8 +2191,8 @@
 /obj/item/clothing/mask/gas,
 /obj/item/clothing/glasses/tacgoggles,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ej" = (
@@ -2200,16 +2200,16 @@
 /obj/item/weapon/storage/backpack/ert/commander,
 /obj/item/weapon/storage/belt/holster/security/tactical,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ek" = (
 /obj/structure/table/rack,
 /obj/item/weapon/gun/energy/gun,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "el" = (
@@ -2217,22 +2217,22 @@
 /obj/item/clothing/suit/armor/pcarrier/medium/command,
 /obj/item/clothing/head/helmet/solgov/command,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "em" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "en" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eo" = (
@@ -2252,8 +2252,8 @@
 	p_open = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eq" = (
@@ -2262,8 +2262,8 @@
 /area/map_template/rescue_base/base)
 "er" = (
 /obj/item/clothing/head/solgov/dress/fleet/command{
-	icon_state = "console";
-	dir = 4
+	dir = 4;
+	icon_state = "console"
 	},
 /obj/item/weapon/card/id/centcom,
 /turf/unsimulated/floor{
@@ -2273,8 +2273,8 @@
 "es" = (
 /obj/structure/closet/secure_closet/cos,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "et" = (
@@ -2282,15 +2282,15 @@
 /obj/item/weapon/storage/secure/briefcase,
 /obj/item/clothing/head/beret/centcom/captain,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eu" = (
 /obj/machinery/power/emitter,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ev" = (
@@ -2304,8 +2304,8 @@
 	pixel_y = 4
 	},
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/rescue_base/base)
 "ew" = (
@@ -2317,8 +2317,8 @@
 	frequency = 1345
 	},
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/rescue_base/base)
 "ex" = (
@@ -2332,8 +2332,8 @@
 	pixel_y = 4
 	},
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/rescue_base/base)
 "ey" = (
@@ -2347,8 +2347,8 @@
 /obj/item/clothing/gloves/insulated,
 /obj/item/clothing/gloves/insulated,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "ez" = (
@@ -2360,8 +2360,8 @@
 /obj/item/clothing/glasses/welding/superior,
 /obj/item/clothing/glasses/welding/superior,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eA" = (
@@ -2399,8 +2399,8 @@
 	pixel_y = 3
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eB" = (
@@ -2420,8 +2420,8 @@
 /obj/item/weapon/cell/high,
 /obj/item/weapon/cell/high,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eC" = (
@@ -2443,8 +2443,8 @@
 /obj/item/weapon/rcd,
 /obj/item/weapon/rcd,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eD" = (
@@ -2530,8 +2530,8 @@
 	amount = 20
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eE" = (
@@ -2545,15 +2545,15 @@
 /obj/item/weapon/stock_parts/smes_coil/super_io,
 /obj/item/weapon/stock_parts/smes_coil/super_io,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eF" = (
 /obj/machinery/portable_atmospherics/canister/air,
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 1
+	dir = 1;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eG" = (
@@ -2572,8 +2572,8 @@
 /obj/item/weapon/material/ashtray/bronze,
 /obj/item/trash/cigbutt/cigarbutt,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/rescue_base/base)
 "eI" = (
@@ -2581,8 +2581,8 @@
 	dir = 1
 	},
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/rescue_base/base)
 "eJ" = (
@@ -2591,8 +2591,8 @@
 	},
 /obj/item/clothing/head/beret/solgov/marcom,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/rescue_base/base)
 "eK" = (
@@ -2607,8 +2607,8 @@
 	p_open = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "vault";
-	dir = 8
+	dir = 8;
+	icon_state = "vault"
 	},
 /area/map_template/rescue_base/base)
 "eL" = (
@@ -2809,8 +2809,8 @@
 /area/map_template/rescue_base/start)
 "fj" = (
 /obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 4
+	dir = 4;
+	icon_state = "handrail"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
@@ -2827,15 +2827,15 @@
 	pixel_y = -4
 	},
 /obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 8
+	dir = 8;
+	icon_state = "handrail"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
 "fm" = (
 /obj/machinery/computer/modular/preset/medical{
-	icon_state = "console";
-	dir = 4
+	dir = 4;
+	icon_state = "console"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
@@ -2848,8 +2848,8 @@
 /area/map_template/rescue_base/start)
 "fp" = (
 /obj/machinery/computer/modular/preset/engineering{
-	icon_state = "console";
-	dir = 8
+	dir = 8;
+	icon_state = "console"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
@@ -2860,8 +2860,8 @@
 	pixel_y = 0
 	},
 /obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 8
+	dir = 8;
+	icon_state = "handrail"
 	},
 /turf/simulated/floor/plating,
 /area/map_template/rescue_base/start)
@@ -2877,8 +2877,8 @@
 /area/map_template/rescue_base/start)
 "fs" = (
 /obj/machinery/computer/modular/preset/security{
-	icon_state = "console";
-	dir = 8
+	dir = 8;
+	icon_state = "console"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
@@ -3078,8 +3078,8 @@
 /area/map_template/rescue_base/start)
 "fR" = (
 /obj/structure/handrai{
-	icon_state = "handrail";
-	dir = 1
+	dir = 1;
+	icon_state = "handrail"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/rescue_base/start)
@@ -3421,8 +3421,8 @@
 	dir = 1
 	},
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
+	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},

@@ -38,8 +38,8 @@
 /area/yacht/bridge)
 "aj" = (
 /obj/machinery/computer/ship/sensors{
-	icon_state = "computer";
-	dir = 4
+	dir = 4;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
@@ -52,8 +52,8 @@
 /area/yacht/bridge)
 "al" = (
 /obj/machinery/computer/ship/engines{
-	icon_state = "computer";
-	dir = 8
+	dir = 8;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/wood/walnut,
 /area/yacht/bridge)
@@ -655,8 +655,8 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -806,8 +806,8 @@
 /area/yacht/engine)
 "cn" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
-	dir = 4
+	dir = 4;
+	icon_state = "map_universal"
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,
@@ -822,11 +822,11 @@
 /area/yacht/engine)
 "cp" = (
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2";
+	pixel_y = 0
 	},
 /obj/effect/decal/cleanable/ash,
 /obj/effect/decal/cleanable/blood/oil/streak,
@@ -961,8 +961,8 @@
 /area/yacht/engine)
 "cJ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/wall/titanium,
 /area/yacht/engine)
@@ -1161,8 +1161,7 @@
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/meter,
 /obj/machinery/light/small{
-	dir = 8;
-	
+	dir = 8
 	},
 /turf/simulated/floor/plating,
 /area/yacht/engine)
@@ -1281,8 +1280,8 @@
 /area/yacht/engine)
 "hb" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
+	dir = 1;
+	icon_state = "term"
 	},
 /obj/structure/cable{
 	d2 = 2;
@@ -1429,8 +1428,8 @@
 	dir = 1
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/plating,

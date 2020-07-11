@@ -95,8 +95,8 @@
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/door/blast/regular,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/airless,
 /area/smugglers/base)
@@ -155,8 +155,8 @@
 	},
 /obj/item/stack/cable_coil,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -172,8 +172,8 @@
 "az" = (
 /obj/machinery/power/port_gen/pacman,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/black{
 	dir = 4
@@ -225,8 +225,8 @@
 /area/smugglers/base)
 "aD" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/black{
-	icon_state = "map";
-	dir = 1
+	dir = 1;
+	icon_state = "map"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -372,11 +372,11 @@
 	icon_state = "32-4"
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2";
+	pixel_y = 0
 	},
 /obj/structure/cable{
 	d2 = 8;
@@ -444,8 +444,7 @@
 /area/smugglers/base)
 "aX" = (
 /obj/structure/table/rack{
-	dir = 8;
-	
+	dir = 8
 	},
 /obj/item/clothing/mask/breath,
 /turf/simulated/floor,
@@ -497,8 +496,7 @@
 /area/smugglers/base)
 "bf" = (
 /obj/structure/table/rack{
-	dir = 8;
-	
+	dir = 8
 	},
 /obj/item/weapon/tank/air{
 	pixel_x = 5
@@ -530,8 +528,8 @@
 /obj/random/smokes,
 /obj/random/smokes,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
@@ -546,8 +544,7 @@
 /area/smugglers/base)
 "bm" = (
 /obj/structure/table/rack{
-	dir = 8;
-	
+	dir = 8
 	},
 /obj/random/voidsuit,
 /obj/random/voidhelmet,
@@ -619,8 +616,8 @@
 /area/smugglers/base)
 "bt" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
@@ -729,8 +726,8 @@
 /area/smugglers/office)
 "bF" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/smugglers/base)
@@ -777,8 +774,8 @@
 	dir = 8
 	},
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/smugglers/office)

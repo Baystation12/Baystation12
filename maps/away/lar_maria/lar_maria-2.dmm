@@ -332,8 +332,8 @@
 	},
 /obj/machinery/power/terminal,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/access_button/airlock_interior{
 	frequency = 1439;
@@ -548,8 +548,8 @@
 "aX" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/solar_control)
@@ -820,8 +820,8 @@
 /area/lar_maria/atmos)
 "bK" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
-	dir = 1
+	dir = 1;
+	icon_state = "map"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
@@ -834,16 +834,16 @@
 "bN" = (
 /obj/machinery/portable_atmospherics/powered/pump,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "bO" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
@@ -940,8 +940,8 @@
 /area/lar_maria/library)
 "cg" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
@@ -951,15 +951,15 @@
 /area/lar_maria/atmos)
 "ci" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "cj" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/cable{
@@ -971,16 +971,16 @@
 /area/lar_maria/atmos)
 "ck" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
 "cl" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 10
+	dir = 10;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
@@ -1047,8 +1047,8 @@
 /area/lar_maria/library)
 "cz" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
-	dir = 4
+	dir = 4;
+	icon_state = "map"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/atmos)
@@ -1235,8 +1235,8 @@
 /area/lar_maria/dorms)
 "db" = (
 /obj/structure/bed/chair/comfy/black{
-	icon_state = "comfychair_preview";
-	dir = 1
+	dir = 1;
+	icon_state = "comfychair_preview"
 	},
 /turf/simulated/floor/wood,
 /area/lar_maria/dorms)
@@ -1281,15 +1281,15 @@
 /area/lar_maria/library)
 "dj" = (
 /obj/structure/bed/chair/office/light{
-	icon_state = "officechair_white_preview";
-	dir = 4
+	dir = 4;
+	icon_state = "officechair_white_preview"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/library)
 "dk" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/computer/modular{
 	dir = 8
@@ -1796,8 +1796,8 @@
 /area/lar_maria/office)
 "eQ" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/structure/table/standard,
 /obj/item/weapon/storage/firstaid/surgery,
@@ -1925,8 +1925,8 @@
 /area/lar_maria/office)
 "fn" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/decal/cleanable/blood,
@@ -2561,8 +2561,8 @@
 /area/lar_maria/hallway)
 "hh" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/open,
 /area/lar_maria/hallway)
@@ -2657,8 +2657,8 @@
 /area/lar_maria/hallway)
 "hw" = (
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -3540,8 +3540,8 @@
 "ub" = (
 /obj/machinery/portable_atmospherics/canister/oxygen,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/light/small,
 /turf/simulated/floor/plating,
@@ -3578,8 +3578,8 @@
 /area/lar_maria/head_m)
 "xb" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
+	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},

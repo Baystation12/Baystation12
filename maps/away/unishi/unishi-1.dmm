@@ -41,8 +41,8 @@
 	},
 /obj/structure/closet/crate/uranium,
 /obj/structure/cable{
-	icon_state = "0-8";
-	dir = 4
+	dir = 4;
+	icon_state = "0-8"
 	},
 /obj/structure/cable/yellow{
 	d1 = 2;
@@ -133,22 +133,22 @@
 /area/unishi/engineering)
 "ar" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
-	dir = 4
+	dir = 4;
+	icon_state = "map_universal"
 	},
 /turf/simulated/wall/titanium,
 /area/unishi/engineering)
 "as" = (
 /obj/machinery/atmospherics/pipe/vent/high_volume{
-	icon_state = "intact";
-	dir = 8
+	dir = 8;
+	icon_state = "intact"
 	},
 /turf/space,
 /area/unishi/engineering)
 "at" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
-	dir = 10
+	dir = 10;
+	icon_state = "intact"
 	},
 /obj/structure/sign/warning/airlock,
 /obj/effect/wallframe_spawn/reinforced,
@@ -210,8 +210,8 @@
 /area/unishi/engineroom)
 "aC" = (
 /obj/machinery/atmospherics/portables_connector{
-	icon_state = "map_connector";
-	dir = 4
+	dir = 4;
+	icon_state = "map_connector"
 	},
 /obj/machinery/portable_atmospherics/canister/air/airlock,
 /turf/simulated/floor,
@@ -224,8 +224,8 @@
 	},
 /obj/machinery/vending/wallmed1,
 /obj/structure/sign/warning/high_voltage{
-	icon_state = "shock";
-	dir = 4
+	dir = 4;
+	icon_state = "shock"
 	},
 /turf/simulated/wall/r_wall,
 /area/unishi/engineroom)
@@ -324,8 +324,8 @@
 	},
 /obj/structure/table/standard,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -336,8 +336,8 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -349,8 +349,8 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor,
 /area/unishi/engineroom)
@@ -426,8 +426,8 @@
 /area/unishi/engineroom)
 "be" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
+	dir = 1;
+	icon_state = "term"
 	},
 /obj/structure/cable/yellow{
 	d2 = 8;

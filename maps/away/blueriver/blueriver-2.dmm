@@ -575,8 +575,8 @@
 	pixel_x = -24
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
@@ -621,8 +621,8 @@
 	},
 /obj/structure/cable,
 /obj/machinery/power/smes/buildable{
-	charge = 0;
-	RCon_tag = "Solar - Port"
+	RCon_tag = "Solar - Port";
+	charge = 0
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bluespaceriver/ship)
@@ -634,8 +634,8 @@
 /area/bluespaceriver/ship)
 "bV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
-	dir = 4
+	dir = 4;
+	icon_state = "map_universal"
 	},
 /turf/simulated/wall/titanium,
 /area/bluespaceriver/ship)

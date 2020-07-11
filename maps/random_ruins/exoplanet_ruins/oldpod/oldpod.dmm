@@ -31,8 +31,8 @@
 /area/map_template/oldpod)
 "ag" = (
 /obj/structure/shuttle/engine/heater{
-	icon_state = "heater";
-	dir = 1
+	dir = 1;
+	icon_state = "heater"
 	},
 /obj/effect/wallframe_spawn/reinforced/hull,
 /turf/simulated/floor/plating,
@@ -92,8 +92,8 @@
 /area/map_template/oldpod)
 "ao" = (
 /obj/structure/bed/chair/shuttle{
-	icon_state = "shuttle_chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "shuttle_chair_preview"
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -103,8 +103,8 @@
 /area/map_template/oldpod)
 "ap" = (
 /obj/structure/bed/chair/shuttle{
-	icon_state = "shuttle_chair_preview";
-	dir = 4
+	dir = 4;
+	icon_state = "shuttle_chair_preview"
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -327,8 +327,8 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
+	dir = 5;
+	icon_state = "warning"
 	},
 /obj/machinery/power/smes/buildable/power_shuttle,
 /turf/simulated/floor/plating,
@@ -339,8 +339,8 @@
 /area/map_template/oldpod)
 "aR" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 9
+	dir = 9;
+	icon_state = "warning"
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -366,8 +366,8 @@
 /area/map_template/oldpod)
 "aT" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 5
+	dir = 5;
+	icon_state = "warning"
 	},
 /obj/structure/window/reinforced{
 	dir = 1
@@ -398,8 +398,8 @@
 /area/map_template/oldpod)
 "aW" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
+	dir = 1;
+	icon_state = "term"
 	},
 /obj/structure/cable/cyan{
 	d2 = 2;
@@ -473,8 +473,8 @@
 /area/map_template/oldpod)
 "be" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /obj/structure/window/reinforced{
 	dir = 8
@@ -499,8 +499,8 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 6
+	dir = 6;
+	icon_state = "warning"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,

@@ -19,8 +19,8 @@
 /obj/item/weapon/storage/med_pouch/radiation,
 /obj/item/weapon/storage/pill_bottle/assorted,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/structure/railing/mapped{
@@ -51,11 +51,11 @@
 	pixel_y = 32
 	},
 /obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "crashedpodWest";
 	pixel_x = 0;
 	pixel_y = 20;
-	pixel_z = 1;
-	master_tag = "crashedpodWest";
-	frequency = 1380
+	pixel_z = 1
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
@@ -96,15 +96,15 @@
 	pixel_x = 22
 	},
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
 "bn" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 10
+	dir = 10;
+	icon_state = "intact"
 	},
 /turf/simulated/wall/r_wall,
 /area/map_template/crashed_pod)
@@ -174,11 +174,11 @@
 	pixel_y = 32
 	},
 /obj/machinery/access_button/airlock_exterior{
+	frequency = 1380;
+	master_tag = "crashedpodEast";
 	pixel_x = 0;
 	pixel_y = 20;
-	pixel_z = 1;
-	master_tag = "crashedpodEast";
-	frequency = 1380
+	pixel_z = 1
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/crashed_pod)
@@ -279,8 +279,8 @@
 /area/map_template/crashed_pod)
 "cc" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
-	icon_state = "map";
-	dir = 4
+	dir = 4;
+	icon_state = "map"
 	},
 /obj/machinery/space_heater,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -324,8 +324,8 @@
 /area/map_template/crashed_pod)
 "en" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
-	icon_state = "map";
-	dir = 1
+	dir = 1;
+	icon_state = "map"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -350,15 +350,15 @@
 	pixel_y = 22
 	},
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
-	icon_state = "map";
-	dir = 4
+	dir = 4;
+	icon_state = "map"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
 "eB" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 6
+	dir = 6;
+	icon_state = "intact"
 	},
 /obj/structure/sign/warning/nosmoking_burned{
 	dir = 1;
@@ -368,8 +368,8 @@
 /area/map_template/crashed_pod)
 "eC" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -379,8 +379,8 @@
 /area/map_template/crashed_pod)
 "eE" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 6
+	dir = 6;
+	icon_state = "intact"
 	},
 /turf/simulated/wall/r_wall,
 /area/map_template/crashed_pod)
@@ -401,8 +401,8 @@
 /area/map_template/crashed_pod)
 "eI" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -413,8 +413,8 @@
 /area/map_template/crashed_pod)
 "eU" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
-	dir = 8
+	dir = 8;
+	icon_state = "map"
 	},
 /obj/structure/closet/hydrant{
 	pixel_x = -27
@@ -442,9 +442,9 @@
 /obj/item/solar_assembly,
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/structure/cable{
+	d2 = 2;
 	icon_state = "0-2";
-	pixel_y = 1;
-	d2 = 2
+	pixel_y = 1
 	},
 /obj/structure/railing/mapped{
 	dir = 8;
@@ -500,8 +500,8 @@
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/item/weapon/tank/emergency/oxygen/double,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 5
+	dir = 5;
+	icon_state = "intact"
 	},
 /obj/structure/railing/mapped{
 	dir = 1;
@@ -555,8 +555,8 @@
 /area/map_template/crashed_pod)
 "fc" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/blue{
-	icon_state = "map";
-	dir = 4
+	dir = 4;
+	icon_state = "map"
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/crashed_pod)
@@ -674,8 +674,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/power/terminal,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -725,8 +725,8 @@
 /obj/effect/floor_decal/industrial/hatch/orange,
 /obj/machinery/light/spot,
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/power/smes/batteryrack,
 /obj/structure/railing/mapped{
@@ -745,8 +745,8 @@
 	req_access = list()
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/portable_atmospherics/canister/carbon_dioxide,
 /obj/effect/floor_decal/industrial/hatch/orange,
@@ -942,8 +942,8 @@
 /area/map_template/crashed_pod)
 "ge" = (
 /obj/structure/bed/chair/shuttle/black{
-	icon_state = "shuttle_chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "shuttle_chair_preview"
 	},
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -984,8 +984,8 @@
 /area/map_template/crashed_pod)
 "gh" = (
 /obj/structure/bed/chair/shuttle/black{
-	icon_state = "shuttle_chair_preview";
-	dir = 4
+	dir = 4;
+	icon_state = "shuttle_chair_preview"
 	},
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
 /turf/simulated/floor/tiled/dark/monotile,
@@ -1018,8 +1018,8 @@
 /area/map_template/crashed_pod)
 "gy" = (
 /obj/structure/bed/chair/shuttle/black{
-	icon_state = "shuttle_chair_preview";
-	dir = 4
+	dir = 4;
+	icon_state = "shuttle_chair_preview"
 	},
 /obj/effect/decal/cleanable/vomit,
 /obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
@@ -1033,8 +1033,8 @@
 /area/map_template/crashed_pod)
 "gC" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 5
+	dir = 5;
+	icon_state = "intact"
 	},
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/alarm{
@@ -1095,12 +1095,12 @@
 /area/map_template/crashed_pod)
 "gK" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /obj/machinery/light/spot{
-	icon_state = "tube_map";
-	dir = 4
+	dir = 4;
+	icon_state = "tube_map"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
@@ -1136,8 +1136,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/computer/ship/sensors{
-	icon_state = "computer";
-	dir = 4
+	dir = 4;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
