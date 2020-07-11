@@ -99,6 +99,9 @@ var/list/gamemode_cache = list()
 	var/issuereporturl
 
 	var/forbidden_message_regex
+	var/forbidden_message_warning = "<B>Your message matched a filter and has not been sent.</B>"
+	var/forbidden_message_no_notifications = FALSE
+	var/forbidden_message_hide_details = FALSE
 
 	var/forbid_singulo_possession = 0
 
@@ -772,6 +775,15 @@ var/list/gamemode_cache = list()
 						config.forbidden_message_regex = flags ? regex(matcher, flags) : regex(matcher)
 					catch(var/exception/ex)
 						log_error("Invalid regex '[value]' supplied to '[name]': [ex]")
+
+				if ("forbidden_message_warning")
+					config.forbidden_message_warning = length(value) ? value : FALSE
+
+				if ("forbidden_message_no_notifications")
+					config.forbidden_message_no_notifications = TRUE
+
+				if ("forbidden_message_hide_details")
+					config.forbidden_message_hide_details = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

@@ -428,6 +428,18 @@ RADIATION_LOWER_LIMIT 0.15
 ## The provided example forbids byond:// and http/https:// unless followed by a permitted domain.
 #FORBIDDEN_MESSAGE_REGEX /((https?)|(byond)):\/\/(?!(.*\.)?baystation12\.net)/i
 
+## The text to send to a user when their message matches FORBIDDEN_MESSAGE_REGEX
+## Defaults to <B>Your message matched a filter and has not been sent.</B>
+## Can be disabled by setting an empty message here
+#FORBIDDEN_MESSAGE_WARNING <B>Your message matched a filter and has not been sent.</B>
+
+## Uncomment this to prevent admins from being notified of of FORBIDDEN_MESSAGE_REGEX matches
+#FORBIDDEN_MESSAGE_NO_NOTIFICATIONS
+
+## Uncomment this to not show the content of forbidden messages in admin notifications
+## Only used when FORBIDDEN_MESSAGE_NO_NOTIFICATIONS is not active
+#FORBIDDEN_MESSAGE_HIDE_DETAILS
+
 ## Direct clients to preload the server resource file from a URL pointing to a .rsc file. NOTE: At this time (byond 512),
 ## the client/resource_rsc var does not function as one would expect. See client_defines.dm, the "preload_rsc" var's
 ## comments on how to use it properly. If you use a resource URL, you must set preload_rsc to 0 at compile time or
