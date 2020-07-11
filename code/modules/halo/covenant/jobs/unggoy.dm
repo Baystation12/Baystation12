@@ -56,3 +56,11 @@
 	spawn_positions = 0
 	total_positions = 0
 	faction_whitelist = "Covenant"
+
+/datum/job/covenant/unggoy_honour_guard
+	title = "Honour Guard Unggoy"
+	supervisors = "the Elites"
+	outfit_type = /decl/hierarchy/outfit/unggoy/honour_guard
+	spawn_positions = 0
+	total_positions = 0
+	faction_whitelist = "Covenant"
