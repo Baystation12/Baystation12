@@ -12,11 +12,22 @@
 	alt_explosion_damage_max = 75
 	matter = list("nanolaminate" = 1, "kemocite" = 1)
 	salvage_components = list(/obj/item/plasma_core)
+	item_state_slots = list(slot_l_hand_str = "plasma_nade_off", slot_r_hand_str = "plasma_nade_off")
+	item_icons = list(\
+		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi', \
+		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi')
 
 /obj/item/weapon/grenade/plasma/activate(var/mob/living/carbon/human/h)
-	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(1))
+	item_state_slots = list(slot_l_hand_str = "plasma_nade_on", slot_r_hand_str = "plasma_nade_on")
+	if(istype(h) && istype(h.species,/datum/species/unggoy) && prob(5))
 		playsound(h.loc, 'code/modules/halo/sounds/unggoy_grenade_throw.ogg', 100, 1)
 	. = ..()
+
+	if(istype(h))
+		if(h.l_hand == src)
+			h.update_inv_l_hand()
+		else if(h.r_hand == src)
+			h.update_inv_r_hand()
 
 /obj/item/weapon/grenade/plasma/throw_impact(var/atom/A)
 	. = ..()
