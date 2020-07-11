@@ -1,0 +1,4 @@
+author: "Anfortas"
+delete-after: True
+changes: 
+  - bugfix: "Flavour text should respect line breaks again."
