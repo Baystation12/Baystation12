@@ -206,33 +206,38 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
 "at" = (
-/obj/machinery/button/mass_driver{
-	desc = "A remote switch to eject the engine core. WARNING: Vent must be opened for proper ejection.";
-	id_tag = "enginecore";
-	name = "Emergency Core Eject";
-	pixel_x = 0;
-	pixel_y = -24
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/window/reinforced{
 	dir = 4
 	},
 /obj/machinery/door/window/brigdoor/northleft{
-	name = "emergency core eject"
+	name = "Specialty Engine Controls"
 	},
 /obj/machinery/button/blast_door{
-	desc = "A remote switch to open the engine core vent to space.";
+	desc = "A switch made to open the vent from the core into space. Use to vent all gasses from the engine core.";
 	id_tag = "EngineVent";
 	name = "Emergency Core Vent Control";
 	pixel_x = -24;
-	pixel_y = 6
+	pixel_y = 9
 	},
 /obj/machinery/button/blast_door{
-	desc = "A remote control switch for venting the engine room. Push in case of engine room fire.";
+	desc = "A switch designed to vent all gasses from the engine room into space. Press it if there is a fire in the engine room.";
 	id_tag = "engineroomvent";
 	name = "Emergency Engine Room Vents";
 	pixel_x = -24;
-	pixel_y = -6
+	pixel_y = -9
+	},
+/obj/effect/floor_decal/industrial/hatch/red,
+/obj/machinery/button/mass_driver{
+	desc = "A switch used to remotely eject the engine core into space. The vent must be opened to eject the core, otherwise it will explode while still in the ship, causing monumental damage. Only press if core is about to explode.";
+	id_tag = "enginecore";
+	name = "Emergency Core Eject";
+	pixel_x = -24
+	},
+/obj/structure/sign/warning{
+	desc = "A warning sign that indicates 'Trained Personnel Operational Only'.  It implies that if you do not know what these buttons do, you should not touch them.";
+	dir = 1;
+	name = "\improper TRAINED PERSONNEL OPERATION ONLY";
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/engineering/engine_monitoring)
@@ -9824,9 +9829,15 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "wM" = (
-/obj/structure/sign/warning/secure_area,
-/turf/simulated/wall/r_wall/prepainted,
-/area/engineering/atmos)
+/obj/machinery/atmospherics/pipe/simple/visible/fuel{
+	dir = 4
+	},
+/obj/structure/catwalk,
+/obj/structure/sign/warning/secure_area{
+	pixel_y = 24
+	},
+/turf/simulated/floor/plating,
+/area/maintenance/seconddeck/aftport)
 "wN" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
 	dir = 4;
@@ -12300,6 +12311,10 @@
 	dir = 1;
 	icon_state = "freezer"
 	},
+/obj/structure/sign/warning/secure_area{
+	dir = 1;
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
 "DH" = (
@@ -12557,6 +12572,9 @@
 	dir = 1
 	},
 /obj/structure/catwalk,
+/obj/structure/sign/warning/secure_area{
+	pixel_y = 24
+	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
 "Es" = (
@@ -12926,6 +12944,10 @@
 /obj/machinery/camera/network/engineering{
 	c_tag = "Atmospherics - West";
 	dir = 1
+	},
+/obj/structure/sign/warning/secure_area{
+	dir = 1;
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
@@ -13446,6 +13468,9 @@
 /obj/structure/catwalk,
 /obj/structure/disposalpipe/segment{
 	dir = 4
+	},
+/obj/structure/sign/warning/secure_area{
+	pixel_y = 24
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftport)
@@ -15447,13 +15472,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/engineering/locker_room)
-"Nr" = (
-/obj/machinery/atmospherics/pipe/simple/visible/black{
-	dir = 4
-	},
-/obj/structure/sign/warning/secure_area,
-/turf/simulated/wall/r_wall/prepainted,
-/area/engineering/atmos)
 "Nz" = (
 /obj/effect/floor_decal/corner/green,
 /turf/simulated/floor/tiled,
@@ -18846,6 +18864,9 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/atmospherics/unary/tank,
+/obj/structure/sign/warning/secure_area{
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/engineering/atmos)
 "YV" = (
@@ -18913,6 +18934,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9;
 	pixel_y = 0
+	},
+/obj/structure/sign/warning/secure_area{
+	dir = 1;
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/atmos)
@@ -41307,7 +41332,7 @@ wc
 yB
 WI
 Fd
-wM
+sZ
 GC
 yt
 CJ
@@ -43127,8 +43152,8 @@ Oc
 II
 II
 Ze
-Nr
-Ec
+Qu
+wM
 Fp
 Oo
 Oo
@@ -43734,7 +43759,7 @@ Sc
 Zb
 DG
 Qu
-Ec
+wM
 Fp
 Fp
 Fp
