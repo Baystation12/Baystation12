@@ -50,12 +50,6 @@
 		'code/modules/halo/sounds/species_pain_screams/kiggyscream_4.ogg',
 		'code/modules/halo/sounds/species_pain_screams/kiggyscream_5.ogg')
 
-/datum/species/kig_yar/create_organs(var/mob/living/carbon/human/H)
-	. = ..()
-
-	H.equip_to_slot(new /obj/item/clothing/shoes/ruutian_boots,slot_shoes)
-
-
 GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenant/species/kigyar/first_kig-yar.txt'))
 
 /mob/living/carbon/human/covenant/kigyar/New(var/new_loc)
@@ -69,17 +63,6 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenan
 	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
 	key = "R"
 	flags = RESTRICTED
-
-/obj/item/clothing/shoes/ruutian_boots
-	name = "Ruutian leg armour"
-	desc = "The natural armor on your legs provides a small amount of protection against the elements."
-	icon = KIGYAR_CLOTHING_PATH
-	icon_state = "naturallegarmor"
-	item_state = " "
-	armor = list(melee = 35, bullet = 35, laser = 5, energy = 25, bomb = 15, bio = 0, rad = 0)
-
-	canremove = 0
-	unacidable = 1
 
 /obj/item/clothing/shoes/ruutian_boots/dropped(mob/user as mob)
 	. = ..()
