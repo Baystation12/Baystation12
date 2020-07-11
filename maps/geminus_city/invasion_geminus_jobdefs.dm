@@ -29,6 +29,7 @@
 		/datum/job/covenant/unggoy_major,\
 		/datum/job/covenant/unggoy_ultra,\
 		/datum/job/covenant/unggoy_deacon,\
+		/datum/job/covenant/unggoy_heavy,\
 		/datum/job/covenant/skirmmurmillo,\
 		/datum/job/covenant/skirmcommando,\
 		/datum/job/covenant/brute_minor,\
