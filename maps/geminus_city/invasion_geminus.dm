@@ -9,16 +9,16 @@
 #include "../Admin Planet/includes.dm"
 
 #include "../faction_bases/ODP_Cassius/ODP_Cassius.dm"
-
+/*
 #include "../SOE_Argentum/jobs.dm"
 #include "../SOE_Argentum/outfits.dm"
 #include "../SOE_Argentum/spawns.dm"
 
-#include "../Asteroid Listening Post/includes.dm"
-
-#include "../CRS_Unyielding_Transgression/includes.dm"
-
 #include "../urf_flagship/includes.dm"
+
+#include "../Asteroid Listening Post/includes.dm"
+*/
+#include "../CRS_Unyielding_Transgression/includes.dm"
 
 #include "invasion_geminus_jobdefs.dm"
 #include "invasion_geminus_unit_tests.dm"

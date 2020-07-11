@@ -1726,6 +1726,8 @@
 #include "code\modules\halo\insurrection\orion.dm"
 #include "code\modules\halo\insurrection\orion_gear.dm"
 #include "code\modules\halo\insurrection\simple_mobs.dm"
+#include "code\modules\halo\insurrection\soe_jobs.dm"
+#include "code\modules\halo\insurrection\soe_outfits.dm"
 #include "code\modules\halo\insurrection\x52_jobs.dm"
 #include "code\modules\halo\insurrection\x52_outfits.dm"
 #include "code\modules\halo\insurrection\x52_spawns.dm"
