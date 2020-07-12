@@ -3168,6 +3168,8 @@
 #include "maps\random_ruins\exoplanet_ruins\oasis\oasis.dm"
 #include "maps\random_ruins\exoplanet_ruins\oldlab\oldlab.dm"
 #include "maps\random_ruins\exoplanet_ruins\oldpod\oldpod.dm"
+#include "maps\random_ruins\exoplanet_ruins\playablecolony\playablecolony.dm"
+#include "maps\random_ruins\exoplanet_ruins\playablecolony2\playablecolony2.dm"
 #include "maps\random_ruins\exoplanet_ruins\radshrine\radshrine.dm"
 #include "maps\random_ruins\exoplanet_ruins\spider_nest\spider_nest.dm"
 #include "maps\random_ruins\exoplanet_ruins\tar_anomaly\tar_anomaly.dm"
