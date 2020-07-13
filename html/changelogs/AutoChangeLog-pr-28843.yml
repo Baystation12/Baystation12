@@ -1,0 +1,4 @@
+author: "zkxs"
+delete-after: True
+changes: 
+  - bugfix: "RFID broadcaster and card slot stock parts can now be repaired."
