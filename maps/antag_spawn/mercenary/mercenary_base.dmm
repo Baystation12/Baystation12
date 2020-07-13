@@ -1909,9 +1909,6 @@
 	icon_state = "intact-supply";
 	dir = 5
 	},
-/obj/effect/landmark{
-	name = "Nuclear-Bomb"
-	},
 /obj/structure/railing/mapped{
 	icon_state = "railing0-1";
 	dir = 8
@@ -2518,9 +2515,6 @@
 /area/map_template/merc_spawn)
 "uV" = (
 /obj/structure/table/standard,
-/obj/effect/landmark{
-	name = "Nuclear-Code"
-	},
 /turf/simulated/floor/tiled,
 /area/map_template/merc_spawn)
 "va" = (
