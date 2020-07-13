@@ -2,10 +2,6 @@
 "aa" = (
 /turf/template_noop,
 /area/template_noop)
-"ab" = (
-/obj/effect/decal/cleanable/blood/drip,
-/turf/template_noop,
-/area/template_noop)
 "ac" = (
 /obj/item/stack/material/rods,
 /turf/template_noop,
@@ -795,7 +791,7 @@ ai
 ai
 ai
 ai
-ab
+aa
 aa
 aa
 aa
@@ -981,7 +977,7 @@ aa
 aa
 aa
 aa
-ab
+aa
 aa
 aa
 aa
@@ -1134,7 +1130,7 @@ aa
 "}
 (24,1,1) = {"
 aa
-ab
+aa
 aa
 aa
 aa
