@@ -1,0 +1,4 @@
+author: "purplemontart"
+delete-after: True
+changes: 
+  - rscadd: "Lets you select the Sikh holy book, Guru Granth Sahib, in loadout."
