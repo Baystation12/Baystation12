@@ -71,15 +71,15 @@
 /obj/structure/catwalk,
 /obj/item/seeds/random,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growX)
 "ao" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/structure/catwalk,
 /obj/machinery/portable_atmospherics/hydroponics,
@@ -169,8 +169,8 @@
 "aB" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/ambrosiavulgarisseed,
@@ -232,12 +232,12 @@
 	icon_state = "2-4"
 	},
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 4
+	dir = 4;
+	icon_state = "warningcorner"
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growF)
@@ -251,8 +251,8 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growF)
@@ -267,8 +267,8 @@
 	icon_state = "1-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growF)
@@ -344,8 +344,8 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/map_template/hydrobase/station/growF)
@@ -357,8 +357,8 @@
 	icon_state = "1-2"
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growF)
@@ -419,8 +419,8 @@
 	icon_state = "1-2"
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growF)
@@ -439,8 +439,8 @@
 /area/map_template/hydrobase/station/growD)
 "bj" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growD)
@@ -527,8 +527,8 @@
 /area/map_template/hydrobase/station/growA)
 "bt" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growA)
@@ -547,8 +547,8 @@
 "bw" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/tobaccoseed,
@@ -631,8 +631,8 @@
 "bE" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/whitebeetseed,
@@ -641,8 +641,8 @@
 "bF" = (
 /obj/machinery/mech_recharger,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro,
 /turf/simulated/floor/bluegrid,
@@ -908,8 +908,8 @@
 /area/map_template/hydrobase/station/growA)
 "cp" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -1023,19 +1023,19 @@
 	start_pressure = 740.5
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+	dir = 1;
+	icon_state = "phoronrwindow"
 	},
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/growF)
 "cF" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
-	icon_state = "map";
-	dir = 1
+	dir = 1;
+	icon_state = "map"
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+	dir = 1;
+	icon_state = "phoronrwindow"
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/fixed/alium,
@@ -1045,8 +1045,8 @@
 	dir = 4
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+	dir = 1;
+	icon_state = "phoronrwindow"
 	},
 /obj/structure/catwalk,
 /obj/random/toolbox,
@@ -1056,12 +1056,12 @@
 /area/map_template/hydrobase/station/growF)
 "cH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
-	dir = 4
+	dir = 4;
+	icon_state = "map_universal"
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+	dir = 1;
+	icon_state = "phoronrwindow"
 	},
 /obj/structure/window/phoronreinforced{
 	dir = 4
@@ -1102,11 +1102,11 @@
 	},
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2";
+	pixel_y = 0
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/map_template/hydrobase/solars)
@@ -1188,8 +1188,8 @@
 	},
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/puretobaccoseed,
@@ -1204,8 +1204,8 @@
 /area/map_template/hydrobase/station/growF)
 "da" = (
 /obj/machinery/atmospherics/pipe/simple/visible/cyan{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /obj/machinery/light,
 /obj/structure/catwalk,
@@ -1502,8 +1502,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/puretobaccoseed,
@@ -1515,8 +1515,8 @@
 "dK" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/machinery/reagentgrinder/juicer,
 /obj/structure/table/glass/pglass,
@@ -1540,8 +1540,8 @@
 "dN" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/machinery/smartfridge/drying_rack,
 /turf/simulated/floor/fixed/alium,
@@ -1566,8 +1566,8 @@
 	pixel_y = 32
 	},
 /obj/structure/bed/chair/office/light{
-	icon_state = "officechair_white_preview";
-	dir = 4
+	dir = 4;
+	icon_state = "officechair_white_preview"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
@@ -1587,8 +1587,8 @@
 	track = 2
 	},
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /obj/structure/cable,
 /obj/structure/catwalk,
@@ -1715,8 +1715,8 @@
 /area/map_template/hydrobase/station/processing)
 "ei" = (
 /obj/structure/bed/chair/office/light{
-	icon_state = "officechair_white_preview";
-	dir = 1
+	dir = 1;
+	icon_state = "officechair_white_preview"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
@@ -1754,8 +1754,8 @@
 "eo" = (
 /obj/structure/closet/toolcloset,
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /obj/structure/window/phoronreinforced,
 /obj/structure/catwalk,
@@ -1794,8 +1794,8 @@
 /area/template_noop)
 "eu" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 8
+	dir = 8;
+	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/template_noop)
@@ -1853,8 +1853,8 @@
 /area/map_template/hydrobase/station/processing)
 "eB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
-	icon_state = "map_universal";
-	dir = 4
+	dir = 4;
+	icon_state = "map_universal"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
@@ -1867,12 +1867,12 @@
 /area/map_template/hydrobase/station/processing)
 "eD" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden{
-	icon_state = "map";
-	dir = 1
+	dir = 1;
+	icon_state = "map"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /obj/machinery/access_button{
 	command = "cycle_interior";
@@ -1920,8 +1920,8 @@
 	icon_state = "intact"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1380;
@@ -1951,8 +1951,8 @@
 /area/map_template/hydrobase/station/solarlock)
 "eG" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
@@ -1980,8 +1980,8 @@
 /area/map_template/hydrobase/station/solarlock)
 "eI" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/access_button{
 	command = "cycle_exterior";
@@ -1997,11 +1997,11 @@
 	icon_state = "1-2"
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2";
+	pixel_y = 0
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/map_template/hydrobase/solars)
@@ -2020,8 +2020,8 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 4
+	dir = 4;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/template_noop)
@@ -2030,15 +2030,15 @@
 	id = "hydrosolar"
 	},
 /obj/structure/cable{
-	icon_state = "0-1";
-	dir = 4
+	dir = 4;
+	icon_state = "0-1"
 	},
 /turf/simulated/floor/exoplanet/concrete,
 /area/template_noop)
 "eM" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/template_noop)
@@ -2059,8 +2059,8 @@
 "eQ" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/amanitamycelium,
@@ -2141,8 +2141,8 @@
 "eX" = (
 /obj/structure/closet/l3closet/general/multi,
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /turf/simulated/floor/tiled,
 /area/map_template/hydrobase/station/processing)
@@ -2180,8 +2180,8 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /obj/item/weapon/material/shard/phoron,
 /turf/simulated/floor/fixed/alium,
@@ -2204,8 +2204,8 @@
 	},
 /obj/structure/catwalk,
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 1
+	dir = 1;
+	icon_state = "phoronrwindow"
 	},
 /turf/simulated/floor/fixed/alium,
 /area/map_template/hydrobase/station/processing)
@@ -2215,8 +2215,8 @@
 /area/map_template/hydrobase/station/solarlock)
 "fe" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 4
+	dir = 4;
+	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/template_noop)
@@ -2228,8 +2228,8 @@
 /area/template_noop)
 "fg" = (
 /obj/effect/floor_decal/industrial/warning/corner{
-	icon_state = "warningcorner";
-	dir = 1
+	dir = 1;
+	icon_state = "warningcorner"
 	},
 /turf/simulated/floor/fixed/alium/airless,
 /area/template_noop)
@@ -2339,8 +2339,8 @@
 "ft" = (
 /obj/machinery/light,
 /obj/structure/window/phoronreinforced{
-	icon_state = "phoronrwindow";
-	dir = 8
+	dir = 8;
+	icon_state = "phoronrwindow"
 	},
 /obj/structure/table/rack,
 /obj/item/ammo_casing/shotgun/emp,
@@ -2442,11 +2442,11 @@
 	},
 /obj/effect/floor_decal/solarpanel,
 /obj/structure/cable{
-	icon_state = "0-2";
-	dir = 4;
-	pixel_y = 0;
 	d1 = 16;
-	d2 = 0
+	d2 = 0;
+	dir = 4;
+	icon_state = "0-2";
+	pixel_y = 0
 	},
 /obj/structure/cable{
 	d1 = 4;
@@ -2493,8 +2493,8 @@
 "fL" = (
 /obj/structure/catwalk,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/portable_atmospherics/hydroponics,
 /obj/item/seeds/finetobaccoseed,
@@ -2561,8 +2561,8 @@
 "fR" = (
 /obj/structure/curtain/open/shower,
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 8
+	dir = 8;
+	icon_state = "shower"
 	},
 /obj/item/weapon/bikehorn/rubberducky,
 /turf/simulated/floor/tiled/freezer,
@@ -2581,8 +2581,8 @@
 /area/map_template/hydrobase/station/growB)
 "fU" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/map_template/hydrobase/station/growB)
@@ -2591,8 +2591,8 @@
 	dir = 4
 	},
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /mob/living/simple_animal/hostile/retaliate/malf_drone/hydro,
 /turf/simulated/floor/bluegrid,
@@ -2754,8 +2754,8 @@
 "gk" = (
 /obj/structure/curtain/open/shower,
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 8
+	dir = 8;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/map_template/hydrobase/station/shower)
@@ -2826,8 +2826,8 @@
 /area/map_template/hydrobase/station/growB)
 "gu" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /obj/machinery/airlock_sensor{
 	frequency = 1380;
@@ -2849,8 +2849,8 @@
 /area/map_template/hydrobase/station/dockport)
 "gv" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /obj/structure/cable/yellow{
 	d1 = 1;
@@ -2865,8 +2865,8 @@
 /area/map_template/hydrobase/station/dockport)
 "gw" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
 	dir = 8;

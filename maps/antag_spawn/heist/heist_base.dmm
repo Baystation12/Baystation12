@@ -205,8 +205,8 @@
 	},
 /obj/item/weapon/soap,
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aI" = (
@@ -214,8 +214,8 @@
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aJ" = (
@@ -224,8 +224,8 @@
 	},
 /obj/random/trash,
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aK" = (
@@ -321,15 +321,15 @@
 /area/map_template/syndicate_mothership/raider_base)
 "aS" = (
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aT" = (
 /obj/effect/decal/cleanable/blood,
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "aU" = (
@@ -390,8 +390,8 @@
 /area/map_template/syndicate_mothership/raider_base)
 "ba" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
+	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},
@@ -400,8 +400,8 @@
 	pixel_y = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bb" = (
@@ -507,8 +507,8 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bl" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
+	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},
@@ -518,8 +518,8 @@
 	pixel_y = 0
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bm" = (
@@ -536,8 +536,8 @@
 	dir = 1
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/syndicate_mothership/raider_base)
 "bo" = (
@@ -590,8 +590,8 @@
 /area/map_template/syndicate_mothership/raider_base)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
-	icon_state = "intact";
-	dir = 6
+	dir = 6;
+	icon_state = "intact"
 	},
 /turf/unsimulated/floor{
 	icon_state = "plating";
@@ -1189,13 +1189,13 @@
 /area/map_template/skipjack_station/start)
 "cJ" = (
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	tag_airpump = "vox_west_vent";
-	tag_exterior_door = "vox_northwest_lock";
 	frequency = 1331;
 	id_tag = "vox_west_control";
-	tag_interior_door = "vox_southwest_lock";
 	pixel_x = 24;
-	tag_chamber_sensor = "vox_west_sensor"
+	tag_airpump = "vox_west_vent";
+	tag_chamber_sensor = "vox_west_sensor";
+	tag_exterior_door = "vox_northwest_lock";
+	tag_interior_door = "vox_southwest_lock"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/shuttle{
 	dir = 8;
@@ -1209,15 +1209,15 @@
 	dir = 8
 	},
 /obj/machinery/computer/station_alert/all{
-	icon_state = "computer";
-	dir = 4
+	dir = 4;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
 "cL" = (
 /obj/structure/bed/chair/shuttle{
-	icon_state = "shuttle_chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "shuttle_chair_preview"
 	},
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -1250,8 +1250,8 @@
 "cO" = (
 /obj/machinery/constructable_frame/computerframe,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -1393,8 +1393,8 @@
 /obj/random/voidhelmet,
 /obj/random/maintenance,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/shuttle/red,
 /area/map_template/skipjack_station/start)
@@ -1662,8 +1662,8 @@
 /area/map_template/skipjack_station/start)
 "dP" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
+	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},

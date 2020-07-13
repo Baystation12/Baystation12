@@ -907,12 +907,12 @@
 	pixel_x = -6
 	},
 /obj/item/weapon/reagent_containers/glass/beaker/large{
-	pixel_y = 11;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = 11
 	},
 /obj/item/weapon/reagent_containers/glass/beaker/large{
-	pixel_y = 11;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = 11
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
@@ -928,16 +928,16 @@
 "do" = (
 /obj/structure/table/glass,
 /obj/item/bodybag/cryobag{
-	pixel_y = -1;
-	pixel_x = 4
+	pixel_x = 4;
+	pixel_y = -1
 	},
 /obj/item/bodybag/cryobag{
-	pixel_y = -8;
-	pixel_x = 4
+	pixel_x = 4;
+	pixel_y = -8
 	},
 /obj/item/bodybag/cryobag{
-	pixel_y = -5;
-	pixel_x = -5
+	pixel_x = -5;
+	pixel_y = -5
 	},
 /obj/item/weapon/storage/box/bodybags{
 	pixel_y = 13
@@ -1147,8 +1147,8 @@
 /obj/structure/table/glass,
 /obj/item/auto_cpr,
 /obj/item/weapon/reagent_containers/glass/beaker/cryoxadone{
-	pixel_y = 11;
-	pixel_x = -7
+	pixel_x = -7;
+	pixel_y = 11
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
@@ -1173,12 +1173,12 @@
 "ec" = (
 /obj/structure/table/glass,
 /obj/item/weapon/storage/firstaid/adv{
-	pixel_y = 6;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = 6
 	},
 /obj/item/weapon/storage/box/gloves{
-	pixel_y = -3;
-	pixel_x = 7
+	pixel_x = 7;
+	pixel_y = -3
 	},
 /turf/simulated/floor/tiled/skrell/white,
 /area/ship/skrellscoutship/crew/medbay)
@@ -1560,8 +1560,8 @@
 	},
 /obj/structure/table/rack,
 /obj/item/weapon/storage/box/lights/tubes/skrell{
-	pixel_y = -5;
-	pixel_x = 8
+	pixel_x = 8;
+	pixel_y = -5
 	},
 /obj/item/weapon/storage/toolbox/electrical{
 	pixel_y = 6
@@ -1871,8 +1871,8 @@
 /area/ship/skrellscoutship/hangar)
 "gl" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 1
+	dir = 1;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
@@ -2039,12 +2039,12 @@
 	pixel_x = -6
 	},
 /obj/item/weapon/pen/blue{
-	pixel_y = 7;
-	pixel_x = 9
+	pixel_x = 9;
+	pixel_y = 7
 	},
 /obj/item/weapon/paper_bin{
-	pixel_y = 4;
-	pixel_x = 5
+	pixel_x = 5;
+	pixel_y = 4
 	},
 /turf/simulated/floor/tiled/skrell/blue,
 /area/ship/skrellscoutship/crew/rec)
@@ -2058,12 +2058,12 @@
 "gE" = (
 /obj/structure/table/standard,
 /obj/item/weapon/paper_bin{
-	pixel_y = 5;
-	pixel_x = -1
+	pixel_x = -1;
+	pixel_y = 5
 	},
 /obj/item/weapon/pen{
-	pixel_y = 7;
-	pixel_x = 1
+	pixel_x = 1;
+	pixel_y = 7
 	},
 /obj/structure/window/reinforced{
 	dir = 4
@@ -2292,8 +2292,8 @@
 "hm" = (
 /obj/structure/table/woodentable/walnut,
 /obj/item/weapon/deck/cards{
-	pixel_y = -3;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = -3
 	},
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle{
 	pixel_x = 5
@@ -2486,8 +2486,8 @@
 	pixel_x = 7
 	},
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle{
-	pixel_y = 9;
-	pixel_x = -5
+	pixel_x = -5;
+	pixel_y = 9
 	},
 /obj/item/weapon/reagent_containers/food/drinks/glass2/pint,
 /turf/simulated/floor/tiled/skrell/red,
@@ -3180,8 +3180,8 @@
 	pixel_y = 10
 	},
 /obj/item/weapon/storage/firstaid/adv{
-	pixel_y = -2;
-	pixel_x = -9
+	pixel_x = -9;
+	pixel_y = -2
 	},
 /obj/item/weapon/storage/firstaid/adv{
 	pixel_x = -9;
@@ -3476,8 +3476,8 @@
 /obj/machinery/light/skrell,
 /obj/structure/table/glass,
 /obj/item/weapon/paper_bin{
-	pixel_y = 4;
-	pixel_x = 5
+	pixel_x = 5;
+	pixel_y = 4
 	},
 /obj/item/weapon/pen,
 /turf/simulated/floor/tiled/skrell/red,
@@ -4500,8 +4500,8 @@
 /area/ship/skrellscoutship/crew/rec)
 "CH" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 8
@@ -4648,8 +4648,8 @@
 /area/ship/skrellscoutship/hangar)
 "FR" = (
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/tiled/skrell/red,
@@ -4829,12 +4829,12 @@
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
 /obj/item/weapon/cell/hyper{
-	pixel_y = -5;
-	pixel_x = 6
+	pixel_x = 6;
+	pixel_y = -5
 	},
 /obj/item/weapon/cell/hyper{
-	pixel_y = 5;
-	pixel_x = 7
+	pixel_x = 7;
+	pixel_y = 5
 	},
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -5118,8 +5118,8 @@
 	pixel_x = -10
 	},
 /obj/item/weapon/storage/firstaid/combat{
-	pixel_y = 8;
-	pixel_x = 1
+	pixel_x = 1;
+	pixel_y = 8
 	},
 /obj/item/weapon/storage/firstaid/combat{
 	pixel_x = 2
@@ -5132,16 +5132,16 @@
 	},
 /obj/structure/table/woodentable/walnut,
 /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks{
-	pixel_y = -3;
-	pixel_x = 3
+	pixel_x = 3;
+	pixel_y = -3
 	},
 /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks{
-	pixel_y = 6;
-	pixel_x = -6
+	pixel_x = -6;
+	pixel_y = 6
 	},
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle{
-	pixel_y = 12;
-	pixel_x = 7
+	pixel_x = 7;
+	pixel_y = 12
 	},
 /turf/simulated/floor/carpet/purple,
 /area/ship/skrellscoutship/crew/rec)
@@ -5214,8 +5214,8 @@
 	dir = 8
 	},
 /obj/item/weapon/storage/box/glasses/pint{
-	pixel_y = 9;
-	pixel_x = -5
+	pixel_x = -5;
+	pixel_y = 9
 	},
 /obj/item/weapon/storage/box/glasses/mug{
 	pixel_x = 4
@@ -5289,9 +5289,9 @@
 /area/ship/skrellscoutship/wings/starboard)
 "PC" = (
 /obj/structure/hygiene/sink{
-	pixel_y = 2;
 	dir = 8;
-	pixel_x = -7
+	pixel_x = -7;
+	pixel_y = 2
 	},
 /obj/machinery/light/skrell{
 	dir = 8;

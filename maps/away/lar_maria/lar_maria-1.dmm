@@ -32,8 +32,8 @@
 /area/lar_maria/vir_main)
 "ai" = (
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
 	color = "#ff0000";
@@ -220,9 +220,6 @@
 /obj/machinery/smartfridge/chemistry/virology,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
-"az" = (
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_main)
 "aA" = (
 /obj/structure/table/glass,
 /obj/item/weapon/paper,
@@ -243,18 +240,6 @@
 	pixel_x = 0;
 	pixel_y = 24
 	},
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_main)
-"aC" = (
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_main)
-"aD" = (
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_main)
-"aE" = (
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_main)
-"aF" = (
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "aG" = (
@@ -446,8 +431,8 @@
 /area/lar_maria/morgue)
 "bk" = (
 /obj/structure/morgue{
-	icon_state = "morgue1";
-	dir = 8
+	dir = 8;
+	icon_state = "morgue1"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/morgue)
@@ -468,8 +453,8 @@
 	health = 1e+006
 	},
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /obj/effect/landmark/corpse/lar_maria/virologist,
 /obj/effect/decal/cleanable/blood,
@@ -510,10 +495,6 @@
 "bt" = (
 /obj/structure/table/glass,
 /obj/item/device/flashlight/pen,
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_main)
-"bu" = (
-/obj/structure/closet/crate/freezer,
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
 "bv" = (
@@ -600,8 +581,8 @@
 	health = 1e+006
 	},
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -710,8 +691,8 @@
 	pixel_x = -24
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_main)
@@ -758,8 +739,8 @@
 /area/lar_maria/morgue)
 "cg" = (
 /obj/structure/morgue{
-	icon_state = "morgue1";
-	dir = 8
+	dir = 8;
+	icon_state = "morgue1"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/machinery/alarm{
@@ -860,8 +841,8 @@
 /area/lar_maria/vir_main)
 "cs" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
+	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},
@@ -935,8 +916,8 @@
 	pixel_y = -24
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1329,9 +1310,6 @@
 "dr" = (
 /turf/simulated/wall/r_wall,
 /area/lar_maria/vir_aux)
-"ds" = (
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_aux)
 "dt" = (
 /obj/structure/closet/secure_closet/personal/patient,
 /obj/machinery/light{
@@ -1690,8 +1668,8 @@
 "ex" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/button/blast_door{
 	id_tag = "Cells_ld_BD";
@@ -1835,8 +1813,8 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/effect/landmark/corpse/lar_maria/zhp_guard/dark,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -1863,8 +1841,8 @@
 	pixel_y = -24
 	},
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_ward)
@@ -1920,9 +1898,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_hallway)
-"eW" = (
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_aux)
 "eX" = (
 /obj/machinery/smartfridge/chemistry/virology,
 /obj/machinery/light,
@@ -1990,8 +1965,8 @@
 /obj/item/weapon/shield/riot,
 /obj/item/weapon/storage/box/ammo/shotgunammo,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -2067,8 +2042,8 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/machinery/computer/modular,
 /turf/simulated/floor/tiled/white,
@@ -2098,8 +2073,8 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
 /area/lar_maria/cells)
@@ -2231,9 +2206,6 @@
 	health = 1e+006
 	},
 /obj/machinery/door/window/eastright,
-/turf/simulated/floor/tiled/white,
-/area/lar_maria/vir_aux)
-"fF" = (
 /turf/simulated/floor/tiled/white,
 /area/lar_maria/vir_aux)
 "fG" = (
@@ -2755,8 +2727,8 @@
 /area/lar_maria/vir_access)
 "gy" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/embedded_controller/radio/airlock/airlock_controller{
 	frequency = 1039;
@@ -2796,8 +2768,8 @@
 /area/lar_maria/cells)
 "gD" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2819,8 +2791,8 @@
 /area/lar_maria/vir_access)
 "gG" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3103,8 +3075,8 @@
 	pixel_x = 24
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/vir_access)
@@ -3348,8 +3320,8 @@
 "hX" = (
 /obj/structure/table/rack,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/lar_maria/sec_wing)
@@ -3376,8 +3348,8 @@
 /area/lar_maria/vir_access)
 "ia" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/structure/cable{
 	d1 = 1;
@@ -3678,8 +3650,8 @@
 /area/lar_maria/sec_wing)
 "iD" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/structure/table/steel_reinforced,
 /obj/item/weapon/gun/energy/taser,
@@ -26921,7 +26893,7 @@ aa
 aa
 ag
 ag
-az
+aS
 aR
 bo
 bJ
@@ -27527,7 +27499,7 @@ aa
 aa
 ag
 ag
-aC
+aS
 aS
 br
 bL
@@ -27729,7 +27701,7 @@ aa
 aa
 ag
 ag
-aD
+aS
 aS
 bq
 bM
@@ -27931,7 +27903,7 @@ aa
 aa
 ag
 ag
-aE
+aS
 aS
 bs
 bN
@@ -27939,15 +27911,15 @@ aS
 co
 cI
 ag
-ds
-ds
+fG
+fG
 dZ
-ds
+fG
 eE
-eW
+fG
 dr
 fC
-ds
+fG
 dr
 gx
 gQ
@@ -28133,7 +28105,7 @@ aa
 aa
 ag
 ag
-aF
+aS
 aS
 bq
 bO
@@ -28144,8 +28116,8 @@ ag
 dt
 dM
 du
-ds
-ds
+fG
+fG
 eX
 dr
 fB
@@ -28347,11 +28319,11 @@ du
 du
 du
 em
-ds
+fG
 eY
 fq
 fD
-ds
+fG
 dr
 gz
 gz
@@ -28545,11 +28517,11 @@ aS
 aS
 aS
 ag
-ds
-ds
+fG
+fG
 dZ
-ds
-ds
+fG
+fG
 eZ
 fr
 fE
@@ -28741,20 +28713,20 @@ ah
 ah
 aI
 aS
-bu
 bP
-bu
+bP
+bP
 aS
 aS
 ag
 dv
 dM
 du
-ds
-ds
-ds
-ds
-ds
+fG
+fG
+fG
+fG
+fG
 gd
 dr
 dr
@@ -28956,8 +28928,8 @@ dN
 eF
 eY
 fs
-fF
-ds
+fG
+fG
 dr
 dr
 aa
@@ -29157,8 +29129,8 @@ ea
 dN
 dN
 fa
-ds
-ds
+fG
+fG
 ge
 dr
 dr
@@ -29361,7 +29333,7 @@ eG
 fb
 ft
 fG
-ds
+fG
 dr
 dr
 aa
