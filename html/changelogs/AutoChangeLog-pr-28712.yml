@@ -1,5 +1,0 @@
-author: "Archemagus / Laxesh"
-delete-after: True
-changes: 
-  - rscadd: "Hull shields animate, flowing backward relative to ship facing."
-  - rscadd: "Hull shields ripple out from the contact tile on touch or attack."

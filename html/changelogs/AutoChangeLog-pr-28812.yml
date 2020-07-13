@@ -1,4 +1,0 @@
-author: "Anfortas"
-delete-after: True
-changes: 
-  - bugfix: "Ghosts should once again be able to view flavour text."
