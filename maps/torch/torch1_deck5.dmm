@@ -1904,7 +1904,8 @@
 /obj/machinery/power/apc/hyper{
 	dir = 4;
 	name = "east bump";
-	pixel_x = 24
+	pixel_x = 24;
+	req_access = list()
 	},
 /obj/structure/cable/cyan{
 	d2 = 8;
