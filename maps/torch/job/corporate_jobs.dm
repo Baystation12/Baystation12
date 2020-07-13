@@ -29,15 +29,15 @@
 	return "You are the Workplace Liaison. You are a civilian employee of EXO, the Expeditionary Corps Organisation, the government-owned corporate conglomerate that partially funds the Torch. You are on board the vessel to promote corporate interests and protect the rights of the contractors on board as their union leader. You are not internal affairs. You advise command on corporate and union matters and contractors on their rights and obligations. Maximise profit. Be the shady corporate shill you always wanted to be."
 
 /datum/job/liaison/post_equip_rank(var/mob/person, var/alt_title)
-	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Loss Prevention Associate")]"]"
+	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Executive Assistant")]"]"
 	for(var/mob/M in GLOB.player_list)
 		if(M.client && M.mind)
-			if(M.mind.assigned_role == "Loss Prevention Associate")
+			if(M.mind.assigned_role == "Executive Assistant")
 				to_chat(M, SPAN_NOTICE("<b>One of your employers, [my_title] named [person.real_name], is present on [GLOB.using_map.full_name].</b>"))
 	..()
 
 /datum/job/bodyguard
-	title = "Loss Prevention Associate"
+	title = "Executive Assistant"
 	department = "Support"
 	department_flag = SPT
 	total_positions = 1
@@ -60,7 +60,7 @@
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	alt_titles = list(
 		"Union Enforcer" = /decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard/union,
-		"Executive Assistant",
+		"Loss Prevention Associate",
 		"Asset Protection Agent"
 	)
 	skill_points = 20
@@ -77,10 +77,10 @@
 	return FALSE
 
 /datum/job/bodyguard/get_description_blurb()
-	return "You are the Loss Prevention Associate. You are an employee of one of the corporations that make up the Expeditionary Corps Organisation, and your job is to prevent the loss of the Liason's life - even at the cost of your own. Good luck."
+	return "You are the Executive Assistant. You are an employee of one of the corporations that make up the Expeditionary Corps Organisation, and your job is to assist the Liason in corporate affairs. You are also expected to protect the Liason's life, though not in any way that breaks the law."
 
 /datum/job/bodyguard/post_equip_rank(var/mob/person, var/alt_title)
-	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Loss Prevention Associate")]"]"
+	var/my_title = "\a ["\improper [(person.mind ? (person.mind.role_alt_title ? person.mind.role_alt_title : person.mind.assigned_role) : "Executive Assistant")]"]"
 	for(var/mob/M in GLOB.player_list)
 		if(M.client && M.mind)
 			if(M.mind.assigned_role == "Workplace Liaison")
