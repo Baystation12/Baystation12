@@ -233,6 +233,7 @@
 	books["Quran"] = /obj/item/weapon/storage/bible/quran
 	books["Kitab-i-Aqdas"] = /obj/item/weapon/storage/bible/aqdas
 	books["Kojiki"] = /obj/item/weapon/storage/bible/kojiki
+	books["Guru Granth Sahib"] = /obj/item/weapon/storage/bible/guru
 	gear_tweaks += new/datum/gear_tweak/path(books)
 
 /datum/gear/swiss
