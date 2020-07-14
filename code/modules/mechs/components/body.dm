@@ -76,11 +76,20 @@
 
 /obj/item/mech_component/chassis/Initialize()
 	. = ..()
-	cockpit = new(20)
+	cockpit = new
+	cockpit.volume = 200
 	if(loc)
 		var/datum/gas_mixture/air = loc.return_air()
 		if(air)
-			cockpit.equalize(air)
+			//Essentially at this point its like we created a vacuum, but realistically making a bottle doesnt actually increase volume of a room and neither should a mech
+			for(var/g in air.gas)
+				var/amount = air.gas[g]
+				amount/= air.volume
+				cockpit.gas[g] = amount * cockpit.volume
+
+			cockpit.temperature = air.temperature
+			cockpit.update_values()
+
 	air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
 	storage_compartment = new(src)
 
@@ -96,11 +105,30 @@
 	else if(air_supply)
 		var/env_pressure = cockpit.return_pressure()
 		var/pressure_delta = air_supply.release_pressure - env_pressure
-		if((air_supply.air_contents.temperature > 0) && (pressure_delta > 0))
-			var/transfer_moles = calculate_transfer_moles(air_supply.air_contents, cockpit, pressure_delta)
-			transfer_moles = min(transfer_moles, (air_supply.release_flow_rate/air_supply.air_contents.volume)*air_supply.air_contents.total_moles)
-			pump_gas_passive(air_supply, air_supply.air_contents, cockpit, transfer_moles)
-			changed = TRUE
+		if(pressure_delta > 0)
+			if(air_supply.air_contents.temperature > 0)
+				var/transfer_moles = calculate_transfer_moles(air_supply.air_contents, cockpit, pressure_delta)
+				transfer_moles = min(transfer_moles, (air_supply.release_flow_rate/air_supply.air_contents.volume)*air_supply.air_contents.total_moles)
+				pump_gas_passive(air_supply, air_supply.air_contents, cockpit, transfer_moles)
+				changed = TRUE
+		else if(pressure_delta < 0) //Release overpressure.
+			var/turf/T = get_turf(src)
+			if(!T)
+				return
+			var/datum/gas_mixture/t_air = T.return_air()
+			if(t_air)
+				pressure_delta = min(env_pressure - t_air.return_pressure(), pressure_delta)
+			if(pressure_delta > 0) //Location is at a lower pressure (so we can vent into it)
+				var/transfer_moles = calculate_transfer_moles(cockpit, t_air, pressure_delta)
+				var/datum/gas_mixture/removed = cockpit.remove(transfer_moles)
+				if(!removed)
+					return
+				if(t_air)
+					t_air.merge(removed)
+				else //just delete the cabin gas, we are somewhere with invalid air, so they wont mind the additional nothingness
+					qdel(removed)
+				changed = TRUE
+
 	if(changed)
 		cockpit.react()
 
