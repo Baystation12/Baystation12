@@ -30,7 +30,7 @@
 
 	var/launch_arm_time = 2.5 SECONDS
 
-	var/pod_range = 7 //Range of pod in overmap tiles
+	var/pod_range = 14 //Range of pod in overmap tiles
 	var/obj/effect/overmap/om_targ
 
 /obj/vehicles/drop_pod/on_death()
@@ -69,21 +69,11 @@
 		visible_message("<span class = 'warning'>[src] blurts a warning: ERROR: NO AVAILABLE DROP-TARGETS.</span>")
 		return
 	var/list/valid_points = list()
-	for(var/turf/l in range(drop_point,drop_accuracy))
+	for(var/turf/l in view(drop_point,drop_accuracy))
 		if(istype(l,/turf/simulated/floor))
 			valid_points += l
 		if(istype(l,/turf/unsimulated/floor))
 			valid_points += l
-	for(var/turf/t in view(drop_point,drop_accuracy))
-		if(istype(t,/turf/simulated/wall))
-			continue
-		if(istype(t,/turf/simulated/mineral))
-			continue
-		if(istype(t,/turf/unsimulated/wall))
-			continue
-		if(istype(t,/turf/unsimulated/floor/rock2)) //No spawning in rock walls, even if they are subtypes of /floor/
-			continue
-		valid_points += t
 	if(isnull(valid_points) || valid_points.len == 0)
 		error("DROP POD FAILED TO LAUNCH: COULD NOT FIND ANY VALID DROP-POINTS")
 		return
@@ -146,10 +136,15 @@
 			post_drop_effects(drop_turf)
 
 /obj/vehicles/drop_pod/proc/post_drop_effects(var/turf/drop_turf)
+
 	if(prob(POD_FAIL_CHANCE))
 		on_death()//do death effects
 		return
-	explosion(drop_turf,-1,0,2,5)
+	//explosion(drop_turf,-1,0,2,5)
+	playsound(src, 'sound/effects/bamf.ogg', 100, 1)
+
+	for(var/turf/simulated/floor/F in src.locs)
+		F.break_tile_to_plating()
 
 /obj/vehicles/drop_pod/relaymove() //We're a drop pod, we don't move normally.
 	return
@@ -168,7 +163,7 @@
 
 	var/list/potential_om_targ = get_overmap_targets()
 	if(isnull(potential_om_targ) || potential_om_targ.len == 0)
-		to_chat(usr,"<span class = 'notice'>No valid overmap targets in range.</span>")
+		to_chat(usr,"<span class = 'notice'>No valid overmap targets in range ([pod_range] tiles).</span>")
 		return
 	var/om_user_choice = input("Select Target Object","Target Object Selection","Cancel") as null|anything in potential_om_targ
 	if(!om_user_choice || om_user_choice == "Cancel")
@@ -203,11 +198,33 @@
 			valid_points += b.loc
 	if(valid_points.len > 0)
 		return pick(valid_points)
-	var/list/chosen_area = om_targ.map_bounds
-	if(om_targ.targeting_locations.len > 0)
-		var/chosen_loc_name = input(user,"Pick a location to land the [name]","[name] Landing Selection","Cancel") in om_targ.targeting_locations + list("Cancel")
-		chosen_area = om_targ.targeting_locations[chosen_loc_name]
-	return locate(rand(chosen_area[1],chosen_area[3]),rand(chosen_area[2],chosen_area[4]),pick(om_targ.map_z))
+
+	//does this overmap object have predefined drop pod locations?
+	for(var/obj/effect/landmark/drop_pod_landing/D in world)
+		if(!(D.loc.z  in om_targ.map_z))
+			continue
+		var/area/A = get_area(D)
+		var/entry_name = A.name
+		var/entry_num = 1
+		while(valid_points[entry_name])
+			entry_num++
+			entry_name = "[A.name] ([entry_num])"
+		valid_points[entry_name] = get_turf(D)
+
+	var/turf/target_turf
+	if(valid_points.len)
+		var/chosen_name = input(user,"Pick a location to land the [name]","[name] Landing Selection") as null|anything in valid_points
+		if(chosen_name)
+			target_turf = get_turf(valid_points[chosen_name])
+	else
+		//choose from the standard list of targettable areas
+		var/list/chosen_area = om_targ.map_bounds
+		if(om_targ.targeting_locations.len > 0)
+			var/chosen_loc_name = input(user,"Pick a location to land the [name]","[name] Landing Selection") as null|anything in om_targ.targeting_locations
+			chosen_area = om_targ.targeting_locations[chosen_loc_name]
+		target_turf = locate(rand(chosen_area[1],chosen_area[3]),rand(chosen_area[2],chosen_area[4]),pick(om_targ.map_z))
+
+	return target_turf
 
 /obj/vehicles/drop_pod/overmap/post_drop_effects(var/turf/drop_turf)
 	var/obj/effect/overmap/our_om_obj = map_sectors["[drop_turf.z]"]
