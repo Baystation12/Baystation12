@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Supermatter reading thresholds (The point at which the numbers turn yellow and red) can now be configured. The configuration is stored per supermatter crystal and syncs between all programs/subsystems looking at that supermatter. This applies to EER, Temperature, Pressure, and EPR readings. Does not apply to integrity, icon state, or the delamination radio broadcast."
