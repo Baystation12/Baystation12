@@ -93,7 +93,7 @@
 	/obj/item/weapon/gun/energy/plasmapistol = 15,
 	/obj/item/weapon/gun/energy/plasmarifle = 5,
 	/obj/item/weapon/gun/projectile/type31needlerifle = 3,
-	/obj/item/weapon/gun/projectile/needler = 3,
+	/obj/item/weapon/gun/projectile/needler = 6,
 	/obj/item/ammo_magazine/needles = 32,
 	/obj/item/weapon/gun/projectile/type51carbine = 3,
 	/obj/item/ammo_magazine/rifleneedlepack = 30,

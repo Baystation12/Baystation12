@@ -12,6 +12,7 @@
 	head = /obj/item/clothing/head/helmet/kigyar
 	l_pocket = null
 	r_pocket = null
+	shoes = /obj/item/clothing/shoes/skirmisher
 	//
 	id_type = /obj/item/weapon/card/id/jackal_minor
 	id_slot = slot_wear_id
@@ -24,6 +25,7 @@
 	gloves = null
 	l_pocket = /obj/item/ammo_magazine/type51mag
 	r_pocket = /obj/item/ammo_magazine/type51mag
+	shoes = /obj/item/clothing/shoes/skirmisher
 	//
 	id_type = /obj/item/weapon/card/id/jackal_major
 	id_slot = slot_wear_id
@@ -33,6 +35,7 @@
 	gloves = null
 
 	back = /obj/item/weapon/gun/energy/beam_rifle
+	shoes = /obj/item/clothing/shoes/skirmisher
 
 	id_type = /obj/item/weapon/card/id/jackal_major
 	id_slot = slot_wear_id
@@ -45,6 +48,7 @@
 	suit = /obj/item/clothing/suit/armor/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
+	shoes = /obj/item/clothing/shoes/skirmisher
 	//
 	id_type = /obj/item/weapon/card/id/jackal_minor
 	id_slot = slot_wear_id
@@ -63,6 +67,7 @@
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	r_hand = /obj/item/weapon/melee/energy/sword/pirate
+	shoes = /obj/item/clothing/shoes/skirmisher/major
 	//
 	id_type = /obj/item/weapon/card/id/jackal_zealot
 	id_slot = slot_wear_id

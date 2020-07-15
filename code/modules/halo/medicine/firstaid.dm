@@ -8,15 +8,24 @@
 	max_w_class = ITEM_SIZE_NORMAL
 	max_storage_space = 20
 
+	can_hold = list(\
+		/obj/item/weapon/crowbar,\
+		/obj/item/device/flashlight,\
+		/obj/item/weapon/storage/pill_bottle,\
+		/obj/item/weapon/tank/emergency,\
+		/obj/item/inflatable,\
+		/obj/item/clothing/mask,\
+		/obj/item/clothing/head/helmet/space,\
+		/obj/item/clothing/suit/space)
+
 	startswith = list(
-		/obj/item/weapon/crowbar,
-		/obj/item/device/flashlight/unsc,
-		/obj/item/weapon/storage/pill_bottle/dexalin,
-		/obj/item/weapon/tank/emergency/oxygen/unsc,
-		/obj/item/clothing/mask/gas/unsc,
-		/obj/item/clothing/head/helmet/space/emergency,
-		/obj/item/clothing/suit/space/emergency
-		)
+		/obj/item/weapon/crowbar,\
+		/obj/item/device/flashlight/unsc,\
+		/obj/item/weapon/storage/pill_bottle/dexalin,\
+		/obj/item/weapon/tank/emergency/oxygen/unsc,\
+		/obj/item/clothing/mask/gas/unsc,\
+		/obj/item/clothing/head/helmet/space/emergency,\
+		/obj/item/clothing/suit/space/emergency)
 
 /obj/item/weapon/storage/firstaid/unsc
 	name = "UNSC medkit"

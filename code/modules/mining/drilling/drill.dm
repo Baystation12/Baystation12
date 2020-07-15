@@ -92,7 +92,11 @@
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
-			harvesting = pick(resource_field)
+			
+			if(!resource_field.len)
+				harvesting = null
+			else
+				harvesting = pick(resource_field)
 
 		if(!harvesting) return
 
