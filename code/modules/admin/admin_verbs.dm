@@ -165,7 +165,8 @@ var/list/admin_verbs_server = list(
 	/client/proc/reload_whitelists,
 	/client/proc/adminmapswitch,
 	/client/proc/panic_bunker,
-	/client/proc/reload_config
+	/client/proc/reload_config,
+	/client/proc/reload_custom_items
 	)
 var/list/admin_verbs_debug = list(
 	/client/proc/getruntimelog,                     // allows us to access runtime logs to somebody,
@@ -984,4 +985,14 @@ var/list/admin_verbs_mentor = list(
 
 	feedback_add_details("admin_verb","RCF")
 	log_and_message_admins("reloaded all config files and recreated datum/config.")
+	return
+
+/client/proc/reload_custom_items()
+	set name = "Reload Custom Items"
+	set category = "Server"
+
+	load_custom_items()
+
+	feedback_add_details("admin_verb","RCI")
+	log_and_message_admins("reloaded all custom items from config/custom_items.")
 	return

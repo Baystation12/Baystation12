@@ -139,7 +139,10 @@
 	return t_icon
 
 // Parses the config file into the custom_items list.
-/hook/startup/proc/load_custom_items()
+/hook/startup/proc/startup_load_custom_items()
+	load_custom_items()
+
+/proc/load_custom_items()
 
 	var/datum/custom_item/current_data
 	for(var/line in splittext(file2text("config/custom_items.txt"), "\n"))
