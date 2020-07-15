@@ -82,7 +82,7 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.radiation += 10
+	L.rad_act(10)
 	. = ..()
 
 /obj/effect/projectile/beam_rifle
@@ -240,7 +240,7 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.radiation += 7
+	L.rad_act(7)
 	. = ..()
 
 /obj/effect/projectile/type51carbine

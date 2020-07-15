@@ -1,4 +1,6 @@
 
+GLOBAL_LIST_INIT(om_base_sectors, list())
+
 #define NPC_SHIP_LOSE_DELAY 10 MINUTES
 #define ON_PROJECTILE_HIT_MESSAGES list(\
 "We're taking fire. Requesting assistance from nearby ships! Repeat; Taking fire!",\
@@ -78,7 +80,7 @@
 	map_z.Cut()
 	if(!isnull(start_turf))
 		forceMove(start_turf)
-	pick_target_loc()
+	target_loc = loc
 
 /obj/effect/overmap/ship/npc_ship/proc/cargo_init()
 	if(cargo_containers.len == 0 || cargo_contained.len == 0)
@@ -170,14 +172,17 @@
 			target_loc  = pick(trange(FLEET_STICKBY_RANGE,our_fleet.fleet_target))
 			return
 
-	var/list/sectors_onmap = list()
-	for(var/type in typesof(/obj/effect/overmap/sector) - /obj/effect/overmap/sector)
-		var/obj/effect/overmap/om_obj = locate(type)
-		if(om_obj && !isnull(om_obj.loc) && om_obj.base && my_faction && !(om_obj.get_faction() in my_faction.enemy_faction_names)) //Only even try going if it's a "base" object
-			sectors_onmap += om_obj
+	var/list/sectors_onmap = GLOB.om_base_sectors.Copy()
 	if(sectors_onmap.len == 0)
 		target_loc = pick(GLOB.overmap_tiles_uncontrolled)
 	else
+		for(var/om_base in sectors_onmap)
+			var/obj/effect/overmap/om_obj = om_base
+			if(!om_base)
+				GLOB.om_base_sectors -= om_base //If it's null, cull it from the list for everyone.
+				continue
+			if(isnull(om_obj.loc) || isnull(my_faction) || om_obj.get_faction() in my_faction.enemy_faction_names)
+				sectors_onmap -= om_obj
 		var/obj/chosen = pick(sectors_onmap)
 		var/list/turfs_nearobj = trange(7,chosen)
 		for(var/t in turfs_nearobj)
