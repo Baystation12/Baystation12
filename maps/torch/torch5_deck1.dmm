@@ -14725,7 +14725,7 @@
 	dir = 8
 	},
 /obj/item/weapon/storage/box/mousetraps,
-/obj/item/weapon/storage/box/lights,
+/obj/item/weapon/storage/box/lights/mixed,
 /obj/item/weapon/hand_labeler,
 /obj/item/stack/package_wrap/twenty_five,
 /obj/item/weapon/reagent_containers/spray/cleaner{
