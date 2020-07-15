@@ -110,6 +110,7 @@
 
 /obj/item/organ/internal/eyes/robot
 	name = "optical sensor"
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/internal/eyes/robot/New()
 	..()
@@ -126,6 +127,7 @@
 	flash_mod = 1
 	darksight_range = 2
 	darksight_tint = DARKTINT_NONE
+	status = ORGAN_ROBOTIC
 
 /obj/item/organ/internal/eyes/get_mechanical_assisted_descriptor()
 	return "retinal overlayed [name]"

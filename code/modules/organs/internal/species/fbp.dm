@@ -5,6 +5,7 @@
 	dead_icon = "cell_bork"
 	organ_tag = BP_CELL
 	parent_organ = BP_CHEST
+	status = ORGAN_ROBOTIC
 	vital = 1
 	var/open
 	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/hyper
