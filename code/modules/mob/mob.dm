@@ -100,6 +100,10 @@
 		if (exclude_mobs?.len && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
+		
+		if (M.invisibility < src.invisibility) //M is invisible to the source of the visible message
+			continue
+		
 		var/mob_message = message
 
 		if(isghost(M))
