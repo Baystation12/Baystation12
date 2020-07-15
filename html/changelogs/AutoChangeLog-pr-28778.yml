@@ -1,5 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Adds flaregun. Shoots shotgun flare shells. Do not try to use other shells."
-  - rscadd: "Adds flaregun and shells to exploration department."

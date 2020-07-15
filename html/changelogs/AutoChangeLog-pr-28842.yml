@@ -1,4 +1,0 @@
-author: "NullSnapshot"
-delete-after: True
-changes: 
-  - bugfix: "Species descriptions will now correctly show that non-breathing species do not inhale or exhale gasses."

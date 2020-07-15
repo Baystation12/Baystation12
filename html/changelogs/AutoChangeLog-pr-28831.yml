@@ -1,5 +1,0 @@
-author: "NullSnapshot"
-delete-after: True
-changes: 
-  - tweak: "Visible messages now respect whether the source is invisible to the recipient or not."
-  - bugfix: "Living mobs can no longer see ghosts pointing unless the ghost is visible to them."

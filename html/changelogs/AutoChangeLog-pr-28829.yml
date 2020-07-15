@@ -1,5 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - bugfix: "Prying open a firedoor with a crowbar-like tool once again causes it to remain open until it is closed manually or by a new alarm."
-  - tweak: "Doubled automatic closing time for firedoors opened by hand during an alarm."

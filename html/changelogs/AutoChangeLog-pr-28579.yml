@@ -1,5 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "0 can be entered on helm acceleration and speed limit."
-  - bugfix: "Helm acceleration and speed limits correctly impose input limits."

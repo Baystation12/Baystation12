@@ -1,4 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - rscdel: "Removed matchmaking system (the preferences random relationship tab)."
