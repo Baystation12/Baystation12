@@ -260,8 +260,8 @@
 	icon_deny = "covendor-deny"
 	products = list(
 	/obj/item/weapon/gun/energy/plasmapistol = 15,
-	/obj/item/weapon/gun/projectile/needler = 4,
-	/obj/item/ammo_magazine/needles = 32,
+	/obj/item/weapon/gun/projectile/needler = 8,
+	/obj/item/ammo_magazine/needles = 48,
 	/obj/item/weapon/grenade/plasma = 12,
 	/obj/item/weapon/melee/energy/elite_sword/dagger = 12,
 	/obj/item/weapon/grenade/smokebomb/covenant = 12
@@ -351,8 +351,9 @@
 	icon_state ="covendor" // SPRITES
 	icon_deny = "covendor-deny"
 	products = list(
+	/obj/item/weapon/gun/energy/plasmarifle = 2,
 	/obj/item/weapon/gun/energy/plasmapistol = 15,
-	/obj/item/weapon/gun/projectile/needler = 4,
+	/obj/item/weapon/gun/projectile/needler = 6,
 	/obj/item/ammo_magazine/needles = 32,
 	/obj/item/weapon/grenade/plasma = 12,
 	/obj/item/weapon/melee/energy/elite_sword/dagger = 12,
