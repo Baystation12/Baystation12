@@ -5,7 +5,7 @@
 	density = 1
 	anchored = 1
 	launch_arm_time = 5 SECONDS
-	drop_accuracy = 5
+	drop_accuracy = 0
 	occupants = list(8,0)
 	pod_range = 14
 	internal_air = new
