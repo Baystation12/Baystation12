@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscadd: "SAARE is now a selectable background faction in character setup."
+  - rscadd: "SAARE and PCRC berets are now available loadout options."
