@@ -21,6 +21,8 @@
 			to_chat(user, SPAN_WARNING("\The [src] needs to be open first."))
 		else if(power)
 			to_chat(user, SPAN_WARNING("\The [src] already has a battery."))
+		else if (istype(W, /obj/item/weapon/cell/infinite))
+			to_chat(user, SPAN_WARNING("\The [src] can't fit \the [W]."))
 		else if(user.unEquip(W, src))
 			user.visible_message("\The [user] installs \the [W] into \the [src].")
 			power = W
