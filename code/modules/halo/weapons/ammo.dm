@@ -388,7 +388,7 @@
 	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
 	icon_state = "ssrcrate"
 	max_storage_space = base_storage_capacity(12)
-	startswith = list(/obj/item/ammo_magazine/spnkr = 4)
+	startswith = list(/obj/item/ammo_magazine/spnkr = 3)
 	can_hold = list(/obj/item/ammo_magazine/spnkr)
 	slot_flags = SLOT_BACK | SLOT_BELT
 	max_w_class = ITEM_SIZE_HUGE
