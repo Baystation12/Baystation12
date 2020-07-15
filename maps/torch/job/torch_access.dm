@@ -141,9 +141,11 @@
 /datum/access/qm
 	desc = "Deck Chief"
 
-/************
-* SEV Torch *
-************/
+/var/const/access_torch_fax = "ACCESS_TORCH_FAX"
+/datum/access/torch_fax
+	id = access_torch_fax
+	desc = "Fax Machines"
+	region = ACCESS_REGION_COMMAND
 
 /datum/access/robotics
 	region = ACCESS_REGION_ENGINEERING

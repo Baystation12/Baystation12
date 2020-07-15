@@ -3005,8 +3005,8 @@
 	pixel_y = -6
 	},
 /obj/structure/table/standard,
-/obj/machinery/photocopier/faxmachine{
-	department = "Pathfinder"
+/obj/machinery/photocopier/faxmachine/torch{
+	department = "Torch - Pathfinder"
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/command/pathfinder)
@@ -13438,8 +13438,8 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/machinery/photocopier/faxmachine{
-	department = "Quartermaster's Office"
+/obj/machinery/photocopier/faxmachine/torch{
+	department = "Torch - Deck Chief"
 	},
 /obj/machinery/camera/network/supply{
 	c_tag = "Supply Office - Deck Officer";
