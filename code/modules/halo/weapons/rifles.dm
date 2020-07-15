@@ -137,7 +137,6 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 1.2
-	fire_delay = 8
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.26, 0.26, 0.26) //About a third of a tile at 7 tile range.
 	item_icons = list(
@@ -175,7 +174,6 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 1.2
-	fire_delay = 8
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.26, 0.26, 0.26)
 	wielded_item_state = "br55-wielded"

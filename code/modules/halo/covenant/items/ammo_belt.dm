@@ -32,6 +32,7 @@
 		"Tvaoan Kig-Yar" = null,\
 		"Sangheili" = null\
 		)
+	storage_slots = 5
 
 	can_hold = list(/obj/item/weapon/storage/firstaid/unsc,\
 	/obj/item/weapon/storage/firstaid/erk,\

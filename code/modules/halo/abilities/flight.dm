@@ -16,7 +16,7 @@
 		decrement_flight_ticks()
 
 /mob/living/proc/take_flight(var/ticks_flight_apply,var/message_flight,var/message_land)
-	Stun(1)
+	Stun(2)
 	if(elevation <= 0)
 		flight_ticks_remain = ticks_flight_apply
 		change_elevation(2)
