@@ -474,6 +474,7 @@ var/list/worths = list(
 					/obj/item/clothing/under/grimhoodie = 20,
 					/obj/item/clothing = 50,
 //DEVICES,
+					/obj/item/device/personal_shield = 6600,
 					/obj/item/device/dociler = 490,
 					/obj/item/device/bot_controller = 50,
 					/obj/item/device/mmi = 1200,

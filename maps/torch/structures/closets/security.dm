@@ -95,6 +95,7 @@
 		/obj/item/device/taperecorder,
 		/obj/item/weapon/hand_labeler,
 		/obj/item/weapon/material/knife/folding/swiss/officer,
+		/obj/item/device/personal_shield,
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/security, /obj/item/weapon/storage/backpack/satchel/sec)),
 		new /datum/atom_creator/weighted(list(/obj/item/weapon/storage/backpack/dufflebag/sec, /obj/item/weapon/storage/backpack/messenger/sec))
 	)
