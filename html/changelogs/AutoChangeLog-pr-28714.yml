@@ -1,0 +1,4 @@
+author: "Kearel"
+delete-after: True
+changes: 
+  - rscadd: "Implements personal shield belts, which protect the wearer against 1 to 3 projectiles depending on the battery powering them."
