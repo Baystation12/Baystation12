@@ -406,6 +406,8 @@ var/list/points_of_interest = list()
 	GLOB.processing_objects += src
 	for(var/obj/machinery/computer/helm/H in GLOB.machines)
 		H.get_known_sectors()
+	if(base)
+		GLOB.om_base_sectors += src
 
 /obj/effect/overmap/proc/adminwarn_attack(var/attacker)
 	if(world.time > last_adminwarn_attack + 1 MINUTE)
