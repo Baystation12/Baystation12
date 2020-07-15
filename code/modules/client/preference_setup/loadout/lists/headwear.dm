@@ -166,3 +166,14 @@
 /datum/gear/tactical/balaclava
 	display_name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava
+
+/datum/gear/head/beret/corporate
+	display_name = "corporate beret selection"
+	path = /obj/item/clothing/head/beret
+
+/datum/gear/head/beret/corporate/New()
+	..()
+	var/list/options = list()
+	options += /obj/item/clothing/head/beret/pcrc
+	options += /obj/item/clothing/head/beret/saare
+	gear_tweaks += new/datum/gear_tweak/path/specified_types_list(options)
