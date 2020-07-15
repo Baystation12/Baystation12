@@ -39,6 +39,7 @@
 
 	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated())
 		if(over_object == usr && Adjacent(usr)) // this must come before the screen objects only block
+			src.add_fingerprint(usr)
 			src.open(usr)
 			return TRUE
 
@@ -57,6 +58,15 @@
 				if(BP_L_HAND)
 					usr.put_in_l_hand(src)
 
+/obj/item/weapon/storage/AltClick(var/mob/usr)
+
+	if(!canremove)
+		return
+
+	if ((ishuman(usr) || isrobot(usr) || issmall(usr)) && !usr.incapacitated() && Adjacent(usr))
+		src.add_fingerprint(usr)
+		src.open(usr)
+		return TRUE
 
 /obj/item/weapon/storage/proc/return_inv()
 
