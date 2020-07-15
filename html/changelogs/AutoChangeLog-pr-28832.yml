@@ -1,0 +1,4 @@
+author: "NullSnapshot"
+delete-after: True
+changes: 
+  - bugfix: "Fixes issue where ghosts could enter body scanners, bugging them out in the process"
