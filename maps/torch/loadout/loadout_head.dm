@@ -113,3 +113,6 @@
 	berets["field operation beret"] = /obj/item/clothing/head/beret/solgov/expedition/branch
 	berets["observatory beret"] = /obj/item/clothing/head/beret/solgov/expedition/branch/observatory
 	gear_tweaks += new/datum/gear_tweak/path(berets)
+
+/datum/gear/head/corporateberet
+	allowed_branches = CIVILIAN_BRANCHES

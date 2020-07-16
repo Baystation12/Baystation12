@@ -167,11 +167,11 @@
 	display_name = "balaclava"
 	path = /obj/item/clothing/mask/balaclava
 
-/datum/gear/head/beret/corporate
+/datum/gear/head/corporateberet
 	display_name = "corporate beret selection"
 	path = /obj/item/clothing/head/beret
 
-/datum/gear/head/beret/corporate/New()
+/datum/gear/head/corporateberet/New()
 	..()
 	var/list/options = list()
 	options += /obj/item/clothing/head/beret/pcrc
