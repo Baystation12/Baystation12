@@ -225,8 +225,8 @@
 /obj/item/weapon/cell/infinite/check_charge()
 	return 1
 
-/obj/item/weapon/cell/infinite/use()
-	return 1
+/obj/item/weapon/cell/infinite/use(amount)
+	return amount
 
 
 /obj/item/weapon/cell/potato

@@ -5,25 +5,56 @@
 	icon_state = "battereroff"
 	slot_flags = SLOT_BELT
 	var/open = FALSE
-	var/obj/item/weapon/cell/power = /obj/item/weapon/cell
+	var/obj/item/weapon/cell/power_cell = /obj/item/weapon/cell
 	var/shield_type = /obj/aura/personal_shield/device
 	var/shield_power_cost = 1000
 	var/obj/aura/personal_shield/device/shield
 
+	VAR_PRIVATE/currently_stored_power = 0
+	VAR_PRIVATE/max_stored_power = 3000
+	VAR_PRIVATE/restored_power_per_tick = 5
+	VAR_PRIVATE/enable_when_powered = FALSE
+
 /obj/item/device/personal_shield/Initialize()
 	. = ..()
-	if(ispath(power))
-		power = new power(src)
+	if(ispath(power_cell))
+		power_cell = new power_cell(src)
+		currently_stored_power = power_cell.use(max_stored_power)
+
+/obj/item/device/personal_shield/Destroy()
+	QDEL_NULL(shield)
+	if(!ispath(power_cell))
+		QDEL_NULL(power_cell)
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
+/obj/item/device/personal_shield/Process(wait)
+	if(!power_cell?.charge || currently_stored_power >= max_stored_power)
+		return PROCESS_KILL
+	var/amount_to_restore = min(restored_power_per_tick * wait, max_stored_power - currently_stored_power)
+	currently_stored_power += power_cell.use(amount_to_restore)
+
+	if(enable_when_powered && currently_stored_power >= shield_power_cost)
+		turn_on(get_holder_of_type(src, /mob))
+
+/obj/item/device/personal_shield/examine(mob/user, distance)
+	. = ..()
+	if(power_cell)
+		power_cell.examine(user, distance)
+	else
+		to_chat(user, "There is no cell in \the [src].")
+	to_chat(user, "The internal capacitor currently has [round(currently_stored_power/max_stored_power)]% charge.")
 
 /obj/item/device/personal_shield/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/cell))
 		if(!open)
 			to_chat(user, SPAN_WARNING("\The [src] needs to be open first."))
-		else if(power)
+		else if(power_cell)
 			to_chat(user, SPAN_WARNING("\The [src] already has a battery."))
 		else if(user.unEquip(W, src))
 			user.visible_message("\The [user] installs \the [W] into \the [src].")
-			power = W
+			power_cell = W
+			START_PROCESSING(SSobj, src)
 			update_icon()
 	if(isScrewdriver(W))
 		playsound(src, 'sound/items/Screwdriver.ogg', 15, 1)
@@ -33,10 +64,13 @@
 
 /obj/item/device/personal_shield/attack_self(var/mob/living/user)
 	if(open)
-		if(power)
-			to_chat(user, SPAN_NOTICE("You remove \the [power] from \the [src]"))
-			user.put_in_hands(power)
-			power = null
+		if(power_cell)
+			to_chat(user, SPAN_NOTICE("You remove \the [power_cell] from \the [src]."))
+			turn_off()	
+			user.put_in_hands(power_cell)
+			power_cell = null
+			currently_stored_power = 0
+			enable_when_powered = FALSE
 			update_icon()
 		else
 			to_chat(user, SPAN_WARNING("There's no battery in \the [src]."))
@@ -53,22 +87,23 @@
 	. = ..()
 
 /obj/item/device/personal_shield/emp_act(severity)
-	if(power)
-		var/turf/T = get_turf(src)
-		power.emp_act(severity)
+	if(power_cell)
+		power_cell.emp_act(severity)
 		if(shield)
 			visible_message(SPAN_DANGER("\The [src] explodes!"))
-			power.forceMove(T)
-			explosion(T, -1, -1, 1, 2)
+			power_cell.dropInto(loc)
+			power_cell = null
+			explosion(src, -1, -1, 1, 2)
 			qdel(src)
 	else
 		..()
 
 
 /obj/item/device/personal_shield/proc/turn_on(var/mob/user)
-	if(shield || open)
+	enable_when_powered = FALSE
+	if(shield || open || !user)
 		return
-	if(!power)
+	if(!power_cell)
 		to_chat(user, SPAN_WARNING("\The [src] doesn't have a power supply."))
 		return
 	shield = new shield_type(user, src)
@@ -93,9 +128,18 @@
 	return TRUE
 
 /obj/item/device/personal_shield/proc/actual_take_charge()
-	if(!power)
+	if(!power_cell)
 		return FALSE
-	return power.checked_use(shield_power_cost)
+	if(currently_stored_power < shield_power_cost)
+		return FALSE
+
+	currently_stored_power -= shield_power_cost
+	START_PROCESSING(SSobj, src)
+	
+	if(currently_stored_power < shield_power_cost)
+		enable_when_powered = TRUE
+		return FALSE
+	return TRUE
 
 /obj/item/device/personal_shield/on_update_icon()
 	..()
@@ -103,10 +147,6 @@
 		icon_state = "batterer"
 	else
 		if(open)
-			icon_state = "battereropen[power ? "full" : "empty"]"
+			icon_state = "battereropen[power_cell ? "full" : "empty"]"
 		else
 			icon_state = "battereroff"
-
-/obj/item/device/personal_shield/Destroy()
-	QDEL_NULL(shield)
-	return ..()
