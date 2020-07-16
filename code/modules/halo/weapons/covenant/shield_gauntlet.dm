@@ -2,6 +2,8 @@
 #define SHIELD_GAUNTLET_ICON 'code/modules/halo/weapons/covenant/shield_gauntlet.dmi'
 #define SHIELD_GAUNTLET_ICON_INHAND_L 'code/modules/halo/weapons/covenant/shield_gauntlet_lefthand.dmi'
 #define SHIELD_GAUNTLET_ICON_INHAND_R 'code/modules/halo/weapons/covenant/shield_gauntlet_righthand.dmi'
+#define GAUNTLET_WARNING_DELAY 2 SECONDS
+
 /obj/item/clothing/gloves/shield_gauntlet
 	name = "Shield Gauntlet"
 	desc = "Shield Gauntlet"
@@ -21,6 +23,7 @@
 
 	var/obj/item/weapon/gauntlet_shield/connected_shield
 	matter = list("nanolaminate" = 1)
+	var/time_next_warning = 0
 
 /obj/item/clothing/gloves/shield_gauntlet/examine(var/mob/user)
 	. = ..()
@@ -119,12 +122,15 @@
 	if(get_dir(src, starting) in get_allowed_attack_dirs())
 		return 0
 
+	//did our shield absorb the shot?
 	if(drain_shield(damage))
-		//did our shield absorb the shot?
-		if(istype(attacker))
-			to_chat(user,"<span class = 'warning'>[attacker]'s attack is absorbed by the [src].</span>")
-		else
-			to_chat(user,"<span class = 'warning'>[damage_source] is absorbed by the [src].</span>")
+		//put a chatlog delay on warning the user
+		if(world.time >= time_next_warning)
+			time_next_warning = world.time + GAUNTLET_WARNING_DELAY
+			if(istype(attacker))
+				to_chat(user,"<span class = 'warning'>[attacker]'s attack is absorbed by the [src].</span>")
+			else
+				to_chat(user,"<span class = 'warning'>[damage_source] is absorbed by the [src].</span>")
 		return -1
 
 	return 0
@@ -245,6 +251,8 @@
 			to_chat(M,"\icon[connected_shield] <span class='info'>[src] is now at [shield_charge_string()].</span>")
 
 
+
+#undef GAUNTLET_WARNING_DELAY
 
 //shield subtype defines//
 

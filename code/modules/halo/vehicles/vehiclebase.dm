@@ -195,15 +195,27 @@
 
 /obj/vehicles/proc/pick_valid_exit_loc()
 	var/list/valid_exit_locs = list()
+
+	//check for atmos safe turfs
 	for(var/turf/t in locs)
 		for(var/turf/t_2 in range(1,t))
-			if(!(t_2 in locs) && t_2.density == 0)
+			if(!(t_2 in locs) && t_2.density == 0 && !IsTurfAtmosUnsafe(t_2))
 				valid_exit_locs |= t
 				break
+
+	//try again for anny turfs
+	if(valid_exit_locs.len == 0)
+		for(var/turf/t in locs)
+			for(var/turf/t_2 in range(1,t))
+				if(!(t_2 in locs) && t_2.density == 0)
+					valid_exit_locs |= t
+					break
+
 	if(valid_exit_locs.len == 0)
 		return null
-	return pick(valid_exit_locs)
 
+	return pick(valid_exit_locs)
+//
 /obj/vehicles/Destroy()
 	GLOB.processing_objects -= src
 	kick_occupants()

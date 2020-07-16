@@ -8,27 +8,29 @@
 	var/armor_thickness_max = 20
 	var/list/armor_thickness_modifiers = list()//A list containing the weaknesses of the armor, used when performing armor-thickness depletion. Format: damage_type - multiplier
 	var/dam_desc = ""
+	var/next_warning_time = 0
 
-#define ARMOR_DESTROYED 1
-#define ARMOR_DAMAGED 0
+#define WARNING_DELAY 2 SECONDS
 
 /obj/item/clothing/proc/degrade_armor_thickness(var/damage,var/damage_type)
 	damage /= 10
 	var/thickness_dam_cap = ARMOUR_THICKNESS_DAMAGE_CAP
 	if(damage_type in armor_thickness_modifiers)
 		thickness_dam_cap /= armor_thickness_modifiers[damage_type]
-	var/new_thickness = (armor_thickness - min(damage,thickness_dam_cap))
-	if(new_thickness < 0)
-		armor_thickness = 0
-		update_damage_description()
-		return ARMOR_DESTROYED
-	else
-		armor_thickness = round(new_thickness)
-		update_damage_description()
-		return ARMOR_DAMAGED
 
-#undef ARMOR_DESTROYED
-#undef ARMOR_DAMAGED
+	var/new_thickness = round(armor_thickness - min(damage,thickness_dam_cap))
+	new_thickness = max(0, new_thickness)
+	armor_thickness = new_thickness
+	update_damage_description()
+
+	var/mob/user = src.loc
+	if(istype(user))
+		if(new_thickness < 0)
+			visible_message("<span class = 'warning'>Your [name]'s armor plating is [damage_type == BURN ? "melted away" : "destroyed"]! </span>")
+
+		else if(istype(user) && world.time >= next_warning_time)
+			next_warning_time = world.time + WARNING_DELAY
+			visible_message("<span class = 'warning'>Your [name]'s armor plating is [damage_type == BURN ? "scorched" : "damaged"]! </span>")
 
 /obj/item/clothing/proc/update_damage_description(var/damage_type = BRUTE)
 	var/desc_addition_to_apply = " "

@@ -317,8 +317,9 @@ cloak disrupt override
 		var/zone
 		if (istype(O.thrower, /mob/living))
 			var/mob/living/L = O.thrower
-			zone = check_zone(L.zone_sel.selecting)
-		else
+			if(L.zone_sel)
+				zone = check_zone(L.zone_sel.selecting)
+		if(!zone)
 			zone = ran_zone(BP_CHEST,75)	//Hits a random part of the body, geared towards the chest
 
 		//check if we hit

@@ -371,6 +371,8 @@
 /mob/living/simple_animal/hostile/proc/retaliate(var/mob/aggressor)
 	if(incapacitated(INCAPACITATION_KNOCKOUT))
 		return
+	if(!istype(aggressor))
+		return
 	if(aggressor.faction == faction)
 		return
 	if(client)

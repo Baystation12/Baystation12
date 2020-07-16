@@ -95,7 +95,7 @@ var/list/name_to_material
 	var/melting_point = 1800     // K, walls will take damage if they're next to a fire hotter than this
 	var/brute_armor = 2	 		 // Brute damage to a wall is divided by this value if the wall is reinforced by this material.
 	var/burn_armor				 // Same as above, but for Burn damage type. If blank brute_armor's value is used.
-	var/integrity = 150          // General-use HP value for products.
+	var/integrity = 450          // General-use HP value for products.
 	var/opacity = 1              // Is the material transparent? 0.5< makes transparent walls/doors.
 	var/explosion_resistance = 5 // Only used by walls currently.
 	var/conductive = 1           // Objects with this var add CONDUCTS to flags on spawn.
@@ -263,7 +263,7 @@ var/list/name_to_material
 	icon_colour = "#EDD12F"
 	weight = 25
 	hardness = 25
-	integrity = 100
+	integrity = 300
 	stack_origin_tech = list(TECH_MATERIAL = 4)
 	sheet_singular_name = "ingot"
 	sheet_plural_name = "ingots"
@@ -346,13 +346,13 @@ var/list/name_to_material
 	weight = 26
 	hardness = 60
 	brute_armor = 3
-	integrity = 201 //hack to stop kitchen benches being flippable, todo: refactor into weight system
+	integrity = 600
 	stack_type = /obj/item/stack/material/marble
 
 /material/steel
 	name = DEFAULT_WALL_MATERIAL
 	stack_type = /obj/item/stack/material/steel
-	integrity = 250
+	integrity = 750
 	brute_armor = 5
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -363,7 +363,7 @@ var/list/name_to_material
 	name = "biomass"
 	icon_colour = null
 	stack_type = null
-	integrity = 600
+	integrity = 1800
 	icon_base = "diona"
 	icon_reinf = "noreinf"
 	hitsound = 'sound/effects/attackblob.ogg'
@@ -382,7 +382,7 @@ var/list/name_to_material
 /material/plasteel
 	name = "plasteel"
 	stack_type = /obj/item/stack/material/plasteel
-	integrity = 400
+	integrity = 1200
 	melting_point = 6000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -399,7 +399,7 @@ var/list/name_to_material
 	name = "titanium"
 	brute_armor = 10
 	burn_armor = 8
-	integrity = 300
+	integrity = 900
 	melting_point = 3000
 	stack_type = null
 	icon_base = "metal"
@@ -410,7 +410,7 @@ var/list/name_to_material
 /material/plasteel/ocp
 	name = "osmium-carbide plasteel"
 	stack_type = /obj/item/stack/material/ocp
-	integrity = 300
+	integrity = 900
 	melting_point = 12000
 	icon_base = "solid"
 	icon_reinf = "reinf_over"
@@ -665,7 +665,7 @@ var/list/name_to_material
 	adjective_name = "wooden"
 	stack_type = /obj/item/stack/material/wood
 	icon_colour = "#824B28"
-	integrity = 51
+	integrity = 150
 	icon_base = "solid"
 	explosion_resistance = 2
 	shard_type = SHARD_SPLINTER
