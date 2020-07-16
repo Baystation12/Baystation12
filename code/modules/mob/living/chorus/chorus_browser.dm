@@ -36,3 +36,6 @@
 
 /mob/living/chorus/proc/update_nano_resource(var/datum/chorus_resource/resource)
 	nano_data["resources"][resource.index]["amount"] = resource.get_amount()
+
+/mob/living/chorus/self_can_use_topic(var/src_object)
+	return STATUS_INTERACTIVE

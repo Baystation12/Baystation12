@@ -9,6 +9,10 @@
 	name = "ammunition (shotgun, blank)"
 	path = /obj/item/ammo_casing/shotgun/blank
 
+/datum/fabricator_recipe/arms_ammo/flaregun
+	name = "flare gun"
+	path = /obj/item/weapon/gun/projectile/flare
+
 /datum/fabricator_recipe/arms_ammo/hidden
 	path = /obj/item/weapon/material/hatchet/machete/steel
 	hidden = TRUE
@@ -17,7 +21,7 @@
 	name = "ammunition (shotgun, beanbag)"
 	path = /obj/item/ammo_casing/shotgun/beanbag
 
-/datum/fabricator_recipe/arms_ammo/hidden/shotgun_flash
+/datum/fabricator_recipe/arms_ammo/shotgun_flash
 	name = "ammunition (shotgun, flash)"
 	path = /obj/item/ammo_casing/shotgun/flash
 

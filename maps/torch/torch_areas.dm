@@ -1082,12 +1082,12 @@
 /area/medical/foyer
 	name = "\improper Medical Foyer"
 	icon_state = "medbay"
-	req_access = list(list(access_medical,access_morgue))
+	req_access = list(list(access_medical,access_morgue,access_forensics_lockers))
 
 /area/medical/foyer/storeroom
 	name = "\improper Medical Storage Room"
 	icon_state = "medbay"
-	req_access = list(list(access_medical,access_morgue))
+	req_access = list(list(access_medical,access_morgue,access_forensics_lockers))
 
 /area/medical/locker
 	name = "\improper Medical Locker Room"
@@ -1095,7 +1095,7 @@
 	req_access = list(access_medical_equip)
 
 /area/medical/physicianoffice
-	name = "\improper Physicians Office"
+	name = "\improper Physician's Paperwork Office"
 	icon_state = "locker"
 	req_access = list(access_senmed)
 
@@ -1148,7 +1148,7 @@
 	name = "\improper Morgue"
 	icon_state = "morgue"
 	ambience = list('sound/ambience/ambimo1.ogg','sound/ambience/ambimo2.ogg','sound/music/main.ogg')
-	req_access = list(access_morgue)
+	req_access = list(list(access_morgue,access_forensics_lockers))
 
 /area/medical/morgue/autopsy
 	name = "\improper Autopsy"

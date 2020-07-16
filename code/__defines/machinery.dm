@@ -115,6 +115,11 @@ var/list/restricted_camera_networks = list(NETWORK_ERT, NETWORK_MERCENARY, NETWO
 #define SUPERMATTER_EMERGENCY 5		// Integrity < 25%
 #define SUPERMATTER_DELAMINATING 6	// Pretty obvious.
 
+#define SUPERMATTER_DATA_EER         "Relative EER"
+#define SUPERMATTER_DATA_TEMPERATURE "Temperature"
+#define SUPERMATTER_DATA_PRESSURE    "Pressure"
+#define SUPERMATTER_DATA_EPR         "Chamber EPR"
+
 // Scrubber modes
 #define SCRUBBER_SIPHON   "siphon"
 #define SCRUBBER_SCRUB    "scrub"

@@ -1136,6 +1136,16 @@ var/list/multi_point_spawns
 	id = "Captain's spare id"
 	item_path = /obj/item/weapon/card/id/captains_spare
 
+/obj/random_multi/single_item/skelestand
+	name = "Multi Point - Medical Skeleton"
+	id = "Medical Skeleton"
+	item_path = /obj/structure/skele_stand
+
+/obj/random_multi/single_item/skelestand/maint
+	name = "Multi Point - Maintenance Skeleton"
+	id = "Maint Skeleton"
+	item_path = /obj/structure/skele_stand/maint
+
 var/list/random_junk_
 var/list/random_useful_
 /proc/get_random_useful_type()

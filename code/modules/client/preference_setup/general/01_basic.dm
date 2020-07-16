@@ -11,20 +11,20 @@ datum/preferences
 	sort_order = 1
 
 /datum/category_item/player_setup_item/physical/basic/load_character(var/savefile/S)
-	from_file(S["gender"],                pref.gender)
-	from_file(S["age"],                   pref.age)
-	from_file(S["spawnpoint"],            pref.spawnpoint)
-	from_file(S["OOC_Notes"],             pref.metadata)
-	from_file(S["real_name"],             pref.real_name)
-	from_file(S["name_is_always_random"], pref.be_random_name)
+	from_save(S["gender"],                pref.gender)
+	from_save(S["age"],                   pref.age)
+	from_save(S["spawnpoint"],            pref.spawnpoint)
+	from_save(S["OOC_Notes"],             pref.metadata)
+	from_save(S["real_name"],             pref.real_name)
+	from_save(S["name_is_always_random"], pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/save_character(var/savefile/S)
-	to_file(S["gender"],                  pref.gender)
-	to_file(S["age"],                     pref.age)
-	to_file(S["spawnpoint"],              pref.spawnpoint)
-	to_file(S["OOC_Notes"],               pref.metadata)
-	to_file(S["real_name"],               pref.real_name)
-	to_file(S["name_is_always_random"],   pref.be_random_name)
+	to_save(S["gender"],                  pref.gender)
+	to_save(S["age"],                     pref.age)
+	to_save(S["spawnpoint"],              pref.spawnpoint)
+	to_save(S["OOC_Notes"],               pref.metadata)
+	to_save(S["real_name"],               pref.real_name)
+	to_save(S["name_is_always_random"],   pref.be_random_name)
 
 /datum/category_item/player_setup_item/physical/basic/sanitize_character()
 	var/datum/species/S = all_species[pref.species ? pref.species : SPECIES_HUMAN]

@@ -244,8 +244,8 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 9
+	dir = 9;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_starboard)
@@ -269,8 +269,8 @@
 /area/errant_pisces/bow_starboard)
 "aJ" = (
 /obj/machinery/atmospherics/unary/heater{
-	icon_state = "heater_0";
-	dir = 1
+	dir = 1;
+	icon_state = "heater_0"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_starboard)
@@ -282,8 +282,8 @@
 /area/errant_pisces/bow_starboard)
 "aL" = (
 /obj/machinery/atmospherics/valve{
-	icon_state = "map_valve0";
-	dir = 8
+	dir = 8;
+	icon_state = "map_valve0"
 	},
 /obj/machinery/door/airlock,
 /obj/machinery/door/firedoor,
@@ -297,8 +297,8 @@
 /area/errant_pisces/bow_port)
 "aN" = (
 /obj/machinery/atmospherics/unary/heater{
-	icon_state = "heater_0";
-	dir = 1
+	dir = 1;
+	icon_state = "heater_0"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_port)
@@ -307,8 +307,8 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 9
+	dir = 9;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_port)
@@ -580,8 +580,8 @@
 /area/errant_pisces/atmos)
 "bC" = (
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
-	icon_state = "intact";
-	dir = 5
+	dir = 5;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -805,8 +805,8 @@
 /area/errant_pisces/atmos)
 "cj" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	icon_state = "intact";
-	dir = 6
+	dir = 6;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -827,8 +827,8 @@
 /area/errant_pisces/atmos)
 "cm" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/red{
-	icon_state = "map";
-	dir = 8
+	dir = 8;
+	icon_state = "map"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -878,8 +878,8 @@
 /area/errant_pisces/atmos)
 "cv" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/atmos)
@@ -892,8 +892,8 @@
 "cx" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	icon_state = "intact";
-	dir = 6
+	dir = 6;
+	icon_state = "intact"
 	},
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
@@ -991,8 +991,8 @@
 /area/errant_pisces/atmos)
 "cN" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
-	icon_state = "intact";
-	dir = 9
+	dir = 9;
+	icon_state = "intact"
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -1424,8 +1424,8 @@
 "dB" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -1437,8 +1437,8 @@
 "dC" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/machinery/atmospherics/pipe/simple/visible/red{
-	icon_state = "intact";
-	dir = 4
+	dir = 4;
+	icon_state = "intact"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/bow_maint)
@@ -2011,8 +2011,8 @@
 /area/errant_pisces/solar_starboard)
 "eI" = (
 /obj/structure/hygiene/shower{
-	icon_state = "shower";
-	dir = 4
+	dir = 4;
+	icon_state = "shower"
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
@@ -2054,12 +2054,12 @@
 /area/errant_pisces/smes_room)
 "eN" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
+	dir = 1;
+	icon_state = "term"
 	},
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /obj/structure/cable/yellow{
 	d1 = 4;
@@ -2111,8 +2111,8 @@
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 9
+	dir = 9;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
@@ -2179,8 +2179,8 @@
 "eX" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_starboard)
@@ -2210,8 +2210,8 @@
 /area/errant_pisces/head_f)
 "fb" = (
 /obj/structure/cable{
-	icon_state = "0-4";
-	d2 = 4
+	d2 = 4;
+	icon_state = "0-4"
 	},
 /obj/machinery/power/smes/buildable,
 /turf/simulated/floor/plating,
@@ -2264,8 +2264,8 @@
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 8
+	dir = 8;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
@@ -2303,8 +2303,8 @@
 "fk" = (
 /obj/machinery/power/smes/buildable,
 /obj/structure/cable{
-	icon_state = "0-2";
-	d2 = 2
+	d2 = 2;
+	icon_state = "0-2"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/solar_port)
@@ -2357,8 +2357,8 @@
 /area/errant_pisces/solar_starboard)
 "fp" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
+	dir = 1;
+	icon_state = "term"
 	},
 /obj/structure/cable/yellow{
 	d2 = 8;
@@ -2443,8 +2443,8 @@
 	icon_state = "0-8"
 	},
 /obj/effect/floor_decal/industrial/warning{
-	icon_state = "warning";
-	dir = 10
+	dir = 10;
+	icon_state = "warning"
 	},
 /turf/simulated/floor/plating,
 /area/errant_pisces/smes_room)
@@ -2482,8 +2482,8 @@
 /area/errant_pisces/solar_port)
 "fC" = (
 /obj/machinery/power/terminal{
-	icon_state = "term";
-	dir = 1
+	dir = 1;
+	icon_state = "term"
 	},
 /obj/structure/cable/yellow{
 	d2 = 4;
@@ -2668,8 +2668,8 @@
 	dir = 1
 	},
 /obj/machinery/power/solar_control{
-	icon_state = "solar";
 	dir = 1;
+	icon_state = "solar";
 	id = "XynergySolarPort"
 	},
 /turf/simulated/floor/plating,
@@ -2722,8 +2722,8 @@
 /area/errant_pisces/hallway)
 "fY" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled,
@@ -2816,8 +2816,8 @@
 /area/errant_pisces/hallway)
 "gh" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled,
@@ -2900,8 +2900,8 @@
 /area/errant_pisces/rooms)
 "gu" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/machinery/media/jukebox,
 /turf/simulated/floor/wood,
@@ -2966,8 +2966,8 @@
 "gD" = (
 /obj/machinery/vending/fitness,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/dorms)
@@ -3018,8 +3018,8 @@
 "gL" = (
 /obj/structure/bed/chair/comfy/green,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
@@ -3036,8 +3036,8 @@
 "gO" = (
 /obj/structure/bed/chair/comfy/teal,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
@@ -3296,8 +3296,8 @@
 /area/errant_pisces/rooms)
 "hy" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/wood,
 /area/errant_pisces/rooms)
@@ -3370,8 +3370,8 @@
 /area/errant_pisces/infirmary)
 "hK" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
@@ -3385,8 +3385,8 @@
 /area/errant_pisces/infirmary)
 "hM" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/hallway)
@@ -3396,8 +3396,8 @@
 /area/errant_pisces/dorms)
 "hO" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/structure/closet/emcloset,
 /turf/simulated/floor/tiled,
@@ -3424,8 +3424,8 @@
 /area/errant_pisces/infirmary)
 "hT" = (
 /obj/machinery/computer/operating{
-	icon_state = "computer";
-	dir = 4
+	dir = 4;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/infirmary)
@@ -3478,8 +3478,8 @@
 /area/errant_pisces/infirmary)
 "id" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
@@ -3707,8 +3707,8 @@
 /area/errant_pisces/infirmary)
 "iT" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /obj/machinery/alarm{
 	dir = 1;
@@ -3784,8 +3784,8 @@
 "ja" = (
 /obj/machinery/body_scanconsole,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/infirmary)
@@ -4212,8 +4212,8 @@
 /area/errant_pisces/cryo)
 "kl" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 1
+	dir = 1;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
@@ -4311,8 +4311,8 @@
 	dir = 5
 	},
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4659,8 +4659,8 @@
 /obj/item/clothing/suit/storage/toggle/labcoat/xyn_machine,
 /obj/random/advdevice,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 8
+	dir = 8;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
@@ -4680,8 +4680,8 @@
 /obj/item/clothing/suit/apron/overalls,
 /obj/random/glasses,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/cryo)
@@ -4916,8 +4916,8 @@
 	req_access = newlist()
 	},
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/science_wing)
@@ -4957,8 +4957,8 @@
 	icon_state = "tube1"
 	},
 /obj/machinery/computer/operating{
-	icon_state = "computer";
-	dir = 8
+	dir = 8;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled/white,
 /area/errant_pisces/science_wing)
@@ -6312,8 +6312,8 @@
 /area/errant_pisces/bridge)
 "pi" = (
 /obj/machinery/computer/ship/navigation{
-	icon_state = "computer";
-	dir = 1
+	dir = 1;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
@@ -6600,8 +6600,8 @@
 /area/space)
 "qa" = (
 /obj/machinery/computer/ship/sensors{
-	icon_state = "computer";
-	dir = 4
+	dir = 4;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
@@ -6635,15 +6635,15 @@
 /area/errant_pisces/bridge)
 "qg" = (
 /obj/machinery/computer/ship/helm{
-	icon_state = "computer";
-	dir = 1
+	dir = 1;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
 "qh" = (
 /obj/machinery/computer/ship/engines{
-	icon_state = "computer";
-	dir = 1
+	dir = 1;
+	icon_state = "computer"
 	},
 /turf/simulated/floor/tiled,
 /area/errant_pisces/bridge)
@@ -6691,8 +6691,8 @@
 /area/errant_pisces/fishing_wing)
 "qp" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/machinery/suit_storage_unit/standard_unit,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -6721,8 +6721,8 @@
 /area/errant_pisces/fishing_wing)
 "qt" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/random/contraband,
 /obj/structure/closet/l3closet/janitor,
@@ -6791,8 +6791,8 @@
 /area/errant_pisces/fishing_wing)
 "qG" = (
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/machinery/suit_storage_unit/standard_unit,
 /turf/simulated/floor/plating,
@@ -6814,8 +6814,8 @@
 "qJ" = (
 /obj/structure/closet,
 /obj/machinery/light/small{
-	icon_state = "bulb1";
-	dir = 4
+	dir = 4;
+	icon_state = "bulb1"
 	},
 /obj/random/gloves,
 /turf/simulated/floor/plating,
@@ -6969,8 +6969,8 @@
 /area/space)
 "sb" = (
 /obj/structure/hygiene/sink{
-	icon_state = "sink";
 	dir = 8;
+	icon_state = "sink";
 	pixel_x = -12;
 	pixel_y = 2
 	},

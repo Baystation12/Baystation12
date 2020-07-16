@@ -15,6 +15,7 @@ They should also be used for when you want to effect the ENTIRE mob, like having
 /obj/aura/Destroy()
 	if(user)
 		user.remove_aura(src)
+		removed()
 	return ..()
 
 /obj/aura/proc/added_to(var/mob/living/target)

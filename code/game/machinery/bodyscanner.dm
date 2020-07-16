@@ -39,6 +39,7 @@
 
 	if(!user_can_move_target_inside(usr,usr))
 		return
+	move_target_inside(usr,usr)
 	usr.pulling = null
 	usr.client.perspective = EYE_PERSPECTIVE
 	usr.client.eye = src
@@ -70,12 +71,17 @@
 		var/mob/M = G.affecting
 		if(!user_can_move_target_inside(M, user))
 			return
+		move_target_inside(M,user)
 		qdel(G)
 		return TRUE
 	return ..()
 
 /obj/machinery/bodyscanner/proc/user_can_move_target_inside(var/mob/target, var/mob/user)
 	if(!istype(user) || !istype(target))
+		return FALSE
+	if(user.incapacitated())
+		return FALSE
+	if(!target.simulated)
 		return FALSE
 	if(occupant)
 		to_chat(user, "<span class='warning'>The scanner is already occupied!</span>")
@@ -86,7 +92,9 @@
 	if(target.buckled)
 		to_chat(user, "<span class='warning'>Unbuckle the subject before attempting to move them.</span>")
 		return FALSE
+	return TRUE
 
+/obj/machinery/bodyscanner/proc/move_target_inside(var/mob/target, var/mob/user)
 	target.forceMove(src)
 	src.occupant = target
 
@@ -96,7 +104,6 @@
 	SetName("[name] ([occupant])")
 
 	src.add_fingerprint(user)
-	return TRUE
 
 /obj/machinery/bodyscanner/on_update_icon()
 	if(!occupant)
@@ -110,11 +117,12 @@
 /obj/machinery/bodyscanner/MouseDrop_T(var/mob/target, var/mob/user)
 	if(!CanMouseDrop(target, user) || !istype(target))
 		return FALSE
+	if(!user_can_move_target_inside(target, user))
+		return
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
 	if(!do_after(user, 30, src))
 		return
-	if(!user_can_move_target_inside(target, user))
-		return
+	move_target_inside(target,user)
 
 /obj/machinery/bodyscanner/ex_act(severity)
 	switch(severity)

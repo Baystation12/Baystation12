@@ -506,6 +506,7 @@
 /obj/machinery/alarm{
 	pixel_y = 24
 	},
+/obj/random_multi/single_item/skelestand,
 /turf/simulated/floor/tiled/dark,
 /area/medical/morgue)
 "aT" = (
@@ -2633,12 +2634,23 @@
 /obj/item/device/radio,
 /obj/item/device/radio,
 /obj/item/device/radio,
-/obj/item/weapon/storage/box/bodybags,
 /obj/item/weapon/crowbar/prybar,
 /obj/item/weapon/crowbar/prybar,
 /obj/item/weapon/crowbar/prybar,
 /obj/item/bodybag,
 /obj/item/bodybag,
+/obj/item/weapon/storage/box/bodybags{
+	pixel_x = 1;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/bodybags{
+	pixel_x = 1;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/bodybags{
+	pixel_x = 1;
+	pixel_y = 2
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
 "eR" = (
@@ -2647,9 +2659,6 @@
 /obj/item/device/integrated_electronics/wirer,
 /obj/item/device/integrated_electronics/debugger,
 /obj/structure/table/steel,
-/obj/structure/reagent_dispensers/acid{
-	pixel_x = -32
-	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
@@ -17455,6 +17464,9 @@
 "TD" = (
 /obj/machinery/computer/rdconsole/robotics,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/reagent_dispensers/acid{
+	pixel_x = 32
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "TG" = (

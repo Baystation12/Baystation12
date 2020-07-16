@@ -1,6 +1,7 @@
 /obj/structure/skele_stand
 	name = "hanging skeleton model"
 	density = 1
+	anchored = 0
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hangskele"
 	desc = "It's an anatomical model of a human skeletal system made of plaster."
@@ -83,3 +84,8 @@
 	for(var/slot in swag)
 		var/obj/item/I = swag[slot]
 		overlays += I.get_mob_overlay(null, slot)
+
+/obj/structure/skele_stand/maint
+	name = "decayed skeleton model"
+	icon_state = "hangskelemaint"
+	desc = "It's an anatomical model of a human skeletal system made of plaster. The plaster on this one is a bit decayed, due to repeated clothing swapping."

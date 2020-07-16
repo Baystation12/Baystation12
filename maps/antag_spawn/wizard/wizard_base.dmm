@@ -7,8 +7,8 @@
 /area/map_template/wizard_station)
 "ac" = (
 /turf/unsimulated/wall/fakeglass{
-	icon_state = "fakewindows";
-	dir = 8
+	dir = 8;
+	icon_state = "fakewindows"
 	},
 /area/map_template/wizard_station)
 "ad" = (
@@ -179,8 +179,8 @@
 	pixel_y = 32
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aC" = (
@@ -188,8 +188,8 @@
 	pixel_y = 8
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aD" = (
@@ -206,8 +206,8 @@
 /area/map_template/wizard_station)
 "aE" = (
 /obj/structure/bed/chair/wood/wings{
-	icon_state = "wooden_chair_wings";
-	dir = 4
+	dir = 4;
+	icon_state = "wooden_chair_wings"
 	},
 /turf/unsimulated/floor{
 	dir = 8;
@@ -224,8 +224,8 @@
 /area/map_template/wizard_station)
 "aG" = (
 /obj/structure/bed/chair/wood/wings{
-	icon_state = "wooden_chair_wings";
-	dir = 8
+	dir = 8;
+	icon_state = "wooden_chair_wings"
 	},
 /turf/unsimulated/floor{
 	dir = 8;
@@ -281,8 +281,8 @@
 /area/map_template/wizard_station)
 "aM" = (
 /turf/unsimulated/wall/fakeglass{
-	icon_state = "fakewindows2";
-	dir = 1
+	dir = 1;
+	icon_state = "fakewindows2"
 	},
 /area/map_template/wizard_station)
 "aN" = (
@@ -290,21 +290,21 @@
 	dir = 8
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aO" = (
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aP" = (
 /obj/machinery/door/unpowered/simple/iron,
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aQ" = (
@@ -363,8 +363,8 @@
 	pixel_y = -22
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aY" = (
@@ -378,8 +378,8 @@
 	pixel_x = 32
 	},
 /turf/unsimulated/floor{
-	icon_state = "freezerfloor";
-	dir = 2
+	dir = 2;
+	icon_state = "freezerfloor"
 	},
 /area/map_template/wizard_station)
 "aZ" = (
@@ -510,14 +510,14 @@
 "bn" = (
 /obj/structure/closet/coffin,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bo" = (
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bp" = (
@@ -525,35 +525,35 @@
 	pixel_y = 22
 	},
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bq" = (
 /obj/structure/cult/pylon,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "br" = (
 /obj/structure/kitchenspike,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bs" = (
 /obj/item/remains/human,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "lava"
+	icon_state = "lava";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bt" = (
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "lava"
+	icon_state = "lava";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bu" = (
@@ -574,31 +574,31 @@
 	name = "Experiment 35b"
 	},
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "lava"
+	icon_state = "lava";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bx" = (
 /obj/structure/cult/talisman,
 /obj/item/weapon/material/knife/ritual,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "by" = (
 /obj/effect/gateway/active/cult,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bz" = (
 /obj/structure/table/marble,
 /obj/item/device/flashlight/slime,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bA" = (
@@ -620,16 +620,16 @@
 "bC" = (
 /obj/structure/flora/pottedplant/unusual,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bD" = (
 /obj/structure/table/woodentable,
 /obj/item/xenos_claw,
 /turf/unsimulated/floor{
-	name = "plating";
-	icon_state = "cult"
+	icon_state = "cult";
+	name = "plating"
 	},
 /area/map_template/wizard_station)
 "bE" = (

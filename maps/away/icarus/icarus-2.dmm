@@ -75,8 +75,8 @@
 "as" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -117,8 +117,8 @@
 /area/icarus/open)
 "aA" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "chair_preview"
 	},
 /obj/effect/landmark/corpse/bridgeofficer,
 /turf/simulated/floor/tiled,
@@ -203,8 +203,8 @@
 /area/icarus/vessel)
 "aR" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "chair_preview"
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -247,8 +247,8 @@
 /area/icarus/vessel)
 "aX" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /turf/simulated/floor/tiled,
 /area/icarus/vessel)
@@ -358,8 +358,8 @@
 /area/icarus/vessel)
 "bm" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled,
@@ -612,8 +612,8 @@
 /area/icarus/vessel)
 "cf" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "chair_preview"
 	},
 /obj/effect/landmark/corpse/engineer,
 /obj/effect/decal/cleanable/blood,
@@ -854,8 +854,8 @@
 /area/icarus/vessel)
 "cO" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1134,8 +1134,8 @@
 /area/icarus/vessel)
 "dB" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/tiled,
@@ -1222,8 +1222,8 @@
 /area/icarus/vessel)
 "dN" = (
 /obj/machinery/light{
-	icon_state = "tube1";
-	dir = 4
+	dir = 4;
+	icon_state = "tube1"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -1414,14 +1414,14 @@
 /area/icarus/open)
 "er" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_straight";
-	dir = 4
+	dir = 4;
+	icon_state = "swall_straight"
 	},
 /area/icarus/vessel)
 "es" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_t";
-	dir = 1
+	dir = 1;
+	icon_state = "swall_t"
 	},
 /area/icarus/vessel)
 "et" = (
@@ -1445,8 +1445,8 @@
 /area/icarus/vessel)
 "ew" = (
 /obj/structure/shuttle/engine/propulsion{
-	icon_state = "propulsion_l";
-	dir = 8
+	dir = 8;
+	icon_state = "propulsion_l"
 	},
 /turf/simulated/shuttle/wall,
 /area/icarus/vessel)
@@ -1467,8 +1467,8 @@
 /area/icarus/vessel)
 "eA" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall";
-	dir = 1
+	dir = 1;
+	icon_state = "swall"
 	},
 /area/icarus/vessel)
 "eB" = (
@@ -1521,8 +1521,8 @@
 /area/icarus/open)
 "eK" = (
 /obj/structure/bed/chair{
-	icon_state = "chair_preview";
-	dir = 8
+	dir = 8;
+	icon_state = "chair_preview"
 	},
 /turf/simulated/floor/shuttle/white,
 /area/icarus/vessel)
@@ -1601,14 +1601,14 @@
 /area/icarus/vessel)
 "eY" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_straight";
-	dir = 4
+	dir = 4;
+	icon_state = "swall_straight"
 	},
 /area/icarus/open)
 "eZ" = (
 /turf/simulated/shuttle/wall{
-	icon_state = "swall_t";
-	dir = 2
+	dir = 2;
+	icon_state = "swall_t"
 	},
 /area/icarus/open)
 "fa" = (
@@ -1630,8 +1630,8 @@
 /area/icarus/vessel)
 "fc" = (
 /obj/structure/shuttle/engine/propulsion{
-	icon_state = "propulsion_l";
-	dir = 8
+	dir = 8;
+	icon_state = "propulsion_l"
 	},
 /turf/simulated/shuttle/wall,
 /area/icarus/open)
