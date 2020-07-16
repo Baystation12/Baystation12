@@ -39,7 +39,8 @@
 		var/obj_name = components_types_names[obj_type]
 
 		//now add the item to the ui list
-		var/list/entry = list("info" = "[obj_name] x [stored_components[obj_type]]", "type" = obj_type)
+		var/atom/A = obj_type
+		var/list/entry = list("info" = "[obj_name] x [initial(A.name)]", "type" = obj_type)
 		ui_components.len++
 		ui_components[ui_components.len] = entry
 
