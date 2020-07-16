@@ -79,7 +79,3 @@
 	damage = 40
 	icon = 'code/modules/halo/icons/Covenant_Projectiles.dmi'
 	icon_state = "Plasmarifle Shot"
-
-/obj/item/projectile/bullet/covenant/shadow_cannon/on_impact(var/atom/impacted)
-	explosion(get_turf(impacted),-1,-1,1,0,adminlog = 0,guaranteed_damage = 15,guaranteed_damage_range = 2)
-	. = ..()
