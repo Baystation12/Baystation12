@@ -59,7 +59,7 @@
 	name = "Mounted Rocket Launchers"
 	desc = "A set of mounted rocket launchers, used for anti-vehicle and anti-group purposes."
 	burst_size = 1
-	fire_delay = 20
+	fire_delay = 30
 	dispersion = list(3)
 	fire_sound = 'code/modules/halo/sounds/Rocket_Launcher_Fire_New.wav'
 	mag_used = /obj/item/ammo_magazine/hawk_rockets
@@ -91,7 +91,7 @@
 /obj/item/ammo_magazine/hawk_rockets
 	name = "Internal Sparrowhawk Rocket Storage"
 	caliber = "hawkRockets"
-	max_ammo = 20
+	max_ammo = 10
 	ammo_type = /obj/item/ammo_casing/hawk_rocket
 
 /obj/item/ammo_casing/hawk_rocket
