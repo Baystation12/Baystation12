@@ -140,7 +140,7 @@
 
 // Parses the config file into the custom_items list.
 /hook/startup/proc/startup_load_custom_items()
-	load_custom_items()
+	return load_custom_items()
 
 /proc/load_custom_items()
 
@@ -202,7 +202,7 @@
 				current_data.replace_existing = text2num(field_data)
 			if("additional_data")
 				current_data.additional_data = field_data
-	return 1
+	return TRUE
 
 //gets the relevant list for the key from the listlist if it exists, check to make sure they are meant to have it and then calls the giving function
 /proc/equip_custom_items(mob/living/carbon/human/M, var/before_job = 0, var/target_slot)
