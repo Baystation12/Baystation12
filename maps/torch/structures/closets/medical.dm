@@ -107,6 +107,7 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/weapon/tank/emergency/oxygen/engi,
 		/obj/item/weapon/storage/box/autoinjectors,
+		/obj/item/device/gps,
 		/obj/item/device/scanner/health,
 		/obj/item/clothing/glasses/hud/health,
 		/obj/item/weapon/storage/firstaid/adv,
