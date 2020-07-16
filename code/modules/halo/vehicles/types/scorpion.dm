@@ -26,8 +26,8 @@
 
 	light_color = "#E1FDFF"
 
-	min_speed = 14
-	max_speed = 6
+	min_speed = 13
+	max_speed = 4
 	acceleration = 4
 	drag = 7
 
