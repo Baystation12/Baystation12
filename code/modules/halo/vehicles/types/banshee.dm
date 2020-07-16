@@ -18,7 +18,7 @@
 
 	occupants = list(0,0)
 
-	vehicle_size = ITEM_SIZE_VEHICLE
+	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
 
 	move_sound = null
 
