@@ -28,6 +28,7 @@
 
 	min_speed = 13.75
 	max_speed = 5.75
+	acceleration = 4
 	drag = 3
 
 /obj/vehicles/wraith/update_object_sprites()

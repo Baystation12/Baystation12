@@ -28,6 +28,7 @@
 
 	min_speed = 14
 	max_speed = 6
+	acceleration = 4
 	drag = 7
 
 /obj/item/vehicle_component/health_manager/scorpion
