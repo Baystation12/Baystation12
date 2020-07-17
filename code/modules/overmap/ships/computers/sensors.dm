@@ -4,6 +4,7 @@
 	icon_screen = "teleport"
 	light_color = "#77fff8"
 	extra_view = 4
+	silicon_restriction = STATUS_UPDATE
 	var/obj/machinery/shipsensors/sensors
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
@@ -27,6 +28,7 @@
 	var/data[0]
 
 	data["viewing"] = viewing_overmap(user)
+	data["viewing_silicon"] = issilicon(user)
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
@@ -74,7 +76,7 @@
 		return TOPIC_NOACTION
 
 	if (href_list["viewing"])
-		if(user && !isAI(user))
+		if(user)
 			viewing_overmap(user) ? unlook(user) : look(user)
 		return TOPIC_REFRESH
 

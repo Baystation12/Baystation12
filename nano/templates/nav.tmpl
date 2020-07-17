@@ -1,4 +1,14 @@
 <h3>Navigation</h3>
+{{if data.viewing_silicon}}
+	<div class="block">
+		<div class="item">
+			<div class="itemContent bad">
+				Remote AI systems detected. Firewall protections forbid remote AI control.
+			</div>
+		</div>
+	</div>
+{{/if}}
+
 <div class='block'>
 	<div class='item'>
 		<div class="itemContent">
@@ -10,7 +20,7 @@
 	</div>
 </div>
 <div style="float:left;width:50%">
-	<h3>Sector information</h3> 
+	<h3>Sector information</h3>
 	<div class='block'>
 		{{:data.sector}}
 		<br>
@@ -21,7 +31,7 @@
 </div>
 
 <div style="float:right;width:50%">
-	<h3>Flight data</h3> 
+	<h3>Flight data</h3>
 	<div class='block'>
 		<div class='item'>
 			<div class="itemLabel">
@@ -54,6 +64,6 @@
 			<div style="float:right">
 				{{:data.heading}}&deg;
 			</div>
-		</div> 
+		</div>
 	</div>
 </div>
