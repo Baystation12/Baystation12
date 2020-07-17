@@ -1,6 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - maptweak: "Added a fax machine to the forensics office and research paperwork office."
-  - tweak: "Access to torch fax machines is now assignable as \"Fax Machines\" under Command in the ID editor program."
-  - tweak: "Renamed all torch fax machines for ease of sorting and comprehension."
