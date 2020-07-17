@@ -15284,13 +15284,13 @@
 /area/security/brig)
 "bSD" = (
 /obj/structure/table/standard,
-/obj/item/weapon/hand_labeler,
-/obj/item/stack/package_wrap/twenty_five,
-/obj/item/device/destTagger,
 /obj/machinery/newscaster{
 	pixel_x = -32
 	},
 /obj/effect/floor_decal/corner/research/mono,
+/obj/machinery/photocopier/faxmachine/torch{
+	department = "Torch - Research Paperwork Office"
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "bTb" = (
@@ -15853,6 +15853,9 @@
 /obj/item/weapon/pen/crayon/yellow{
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose. This one is labeled 'Canary Yellow.'"
 	},
+	/obj/item/weapon/hand_labeler,
+	/obj/item/stack/package_wrap/twenty_five,
+	/obj/item/device/destTagger,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "cBU" = (
@@ -22851,6 +22854,9 @@
 	pixel_y = 0
 	},
 /obj/item/device/camera,
+/obj/item/device/taperecorder{
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
 "mvl" = (
@@ -23713,8 +23719,8 @@
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
-/obj/item/device/taperecorder{
-	pixel_y = 0
+/obj/machinery/photocopier/faxmachine{
+	department = "Torch - Investigations Office"
 	},
 /turf/simulated/floor/tiled,
 /area/security/detectives_office)
@@ -23869,8 +23875,8 @@
 /area/teleporter/firstdeck)
 "nFh" = (
 /obj/structure/table/steel,
-/obj/machinery/photocopier/faxmachine{
-	department = "Brig Chief's Office"
+/obj/machinery/photocopier/faxmachine/torch{
+	department = "Torch - Brig Chief"
 	},
 /obj/machinery/camera/network/security{
 	c_tag = "Security Wing - Brig Chief";
