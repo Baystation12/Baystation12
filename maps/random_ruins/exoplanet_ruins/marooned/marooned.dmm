@@ -368,12 +368,6 @@
 /obj/effect/landmark/clear,
 /turf/template_noop,
 /area/template_noop)
-"aZ" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/landmark/scorcher,
-/obj/effect/landmark/clear,
-/turf/template_noop,
-/area/template_noop)
 "hi" = (
 /obj/effect/landmark/scorcher,
 /obj/effect/landmark/clear,
@@ -731,7 +725,7 @@ hi
 hi
 hi
 aX
-aZ
+hi
 hi
 aa
 aa
