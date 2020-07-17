@@ -40,7 +40,8 @@ GLOBAL_DATUM_INIT(default_state, /datum/topic_state/default, new)
 	// Prevents the AI from using Topic on admin levels (by for example viewing through the court/thunderdome cameras)
 	// unless it's on the same level as the object it's interacting with.
 	var/turf/T = get_turf(src_object)
-	if(!T || !(z == T.z || (T.z in GLOB.using_map.player_levels)))
+	var/turf/A = get_turf(src)
+	if(!A || !T || !AreConnectedZLevels(A.z, T.z))
 		return STATUS_CLOSE
 
 	// If an object is in view then we can interact with it
