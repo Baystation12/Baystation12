@@ -568,8 +568,8 @@
 /obj/item/weapon/storage/box/cola/drgibb
 	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 7)
 
-/obj/item/weapon/storage/box/cola/starkist
-	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/starkist = 7)
+/obj/item/weapon/storage/box/cola/ionbru
+	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru = 7)
 
 /obj/item/weapon/storage/box/cola/spaceup
 	startswith = list(/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 7)

@@ -50,17 +50,26 @@ var/list/lunchables_snacks_ = list(
 
 var/list/lunchables_drinks_ = list(
 									/obj/item/weapon/reagent_containers/food/drinks/cans/cola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/vanillacola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/cherrycola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/orangecola,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/coffeecola,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb,
-									/obj/item/weapon/reagent_containers/food/drinks/cans/starkist,
+									/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/space_up,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/tonic,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/sodawater,
-									/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet,
 									/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer
 								   )
 
