@@ -13,10 +13,6 @@
 	var/turf/T = get_turf(target)
 	if (!user.TurfAdjacent(T))
 		return
-	var/obstruction = T.get_obstruction()
-	if (obstruction)
-		to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
-		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] starts inflating \an [src]."),
 		SPAN_ITALIC("You start inflating \the [src]."),
@@ -24,10 +20,6 @@
 		range = 5
 	)
 	if (!do_after(user, 1 SECOND))
-		return
-	obstruction = T.get_obstruction()
-	if (obstruction)
-		to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
 		return
 	user.visible_message(
 		SPAN_ITALIC("\The [user] finishes inflating \an [src]."),
@@ -281,13 +273,6 @@
 	isSwitchingStates = 0
 
 /obj/structure/inflatable/door/proc/Close()
-	// If the inflatable is blocked, don't close
-	for(var/turf/A in locs)
-		var/turf/T = A
-		var/obstruction = T.get_obstruction()
-		if (obstruction)
-			return
-
 	isSwitchingStates = 1
 	flick("door_closing",src)
 	sleep(10)

@@ -387,16 +387,6 @@
 		if (active_mode ? (!stored_doors) : (!stored_walls))
 			to_chat(user, SPAN_WARNING("\The [src] is out of [active_mode ? "doors" : "walls"]."))
 			return
-		var/obstruction = T.get_obstruction()
-		if (obstruction)
-			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
-			return
-		if (!do_after(user, 0.5 SECONDS))
-			return
-		obstruction = T.get_obstruction()
-		if (obstruction)
-			to_chat(user, SPAN_WARNING("\The [english_list(obstruction)] is blocking that spot."))
-			return
 		var/placed
 		if (active_mode)
 			placed = new /obj/structure/inflatable/door(T)

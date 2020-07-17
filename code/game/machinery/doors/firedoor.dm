@@ -39,7 +39,6 @@
 	var/list/areas_added
 	var/list/users_to_open = new
 	var/next_process_time = 0
-	var/closing = 0
 	var/hatch_open = 0
 
 	power_channel = ENVIRON
@@ -357,49 +356,10 @@
 	return
 
 /obj/machinery/door/firedoor/close()
-	if(closing || locked)
+	if(locked)
 		return
 
-	closing = 1
 	latetoggle()
-	var/list/people = list()
-	for(var/turf/turf in locs)
-		for(var/mob/living/M in turf)
-			people += M
-	if(length(people))
-		visible_message(SPAN_DANGER("\The [src] beeps ominously, get out of the way!"), SPAN_DANGER("You hear some beeping coming from the ceiling."), 3)
-		playsound(src, "sound/machines/firedoor.ogg", 50)
-		sleep(2 SECONDS)
-		for(var/turf/turf in locs)
-			for(var/mob/living/M in turf)
-				var/direction
-				for(var/d in GLOB.cardinal)
-					var/turf/T = get_step(src, d)
-					var/area/A = get_area(T)
-					if(istype(A) && !A.atmosalm && !turf_contains_dense_objects(T))
-						direction = d
-					if(!direction)
-						T = get_step_away(src, d)
-						A = get_area(T)
-						if(istype(A) && !A.atmosalm && !turf_contains_dense_objects(T))
-							direction = d
-				if(!direction) //Let's try again but this time ignore atmos alarms
-					for(var/d in GLOB.cardinal)
-						var/turf/T = get_step(src, d)
-						var/area/A = get_area(T)
-						if(istype(A) && !turf_contains_dense_objects(T))
-							direction = d
-						if(!direction)
-							T = get_step_away(src, d)
-							A = get_area(T)
-							if(istype(A) && !turf_contains_dense_objects(T))
-								direction = d
-
-				M.visible_message(SPAN_DANGER("\The [src] knocks [M.name] out of the way!"), SPAN_DANGER("\The [src] knocks you out of the way!"))
-				M.apply_damage(10, BRUTE, used_weapon = src)
-				if(direction) 
-					M.Move(get_step(src, direction))
-	closing = 0
 	return ..()
 
 /obj/machinery/door/firedoor/open(var/forced = 0)
