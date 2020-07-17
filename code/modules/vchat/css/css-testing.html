@@ -1,0 +1,110 @@
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="semantic.min.css" />
+	<link rel="stylesheet" type="text/css" href="vchat-font-embedded.css" />
+	<link rel="stylesheet" type="text/css" href="ss13styles.css" />
+</head>
+
+<body>
+	<div class="ui top fixed pointing menu">
+		<div class="item">
+			Main
+		</div>
+		<div class="item">
+			OOC
+			<div class="ui top right attached red label">15</div>
+		</div>
+		
+		<div class="right menu">
+			<div class="item" style="cursor: pointer;" title="New Tab"><i class="icon-folder-add"></i></div>
+			<div class="item" style="cursor: pointer;" title="Pause Autoscroll">
+				<i class="icon-pause-outline" :class="{ blinkwarn: paused }"></i>
+			</div>
+			<div class="item" style="cursor: pointer;" title="Edit Mode">
+				<i class="icon-cog-outline" :class="{ blinkwarn: editing }"></i>
+			</div>
+			<div class="item" style="padding-left: 0px !important;"><span class="ui circular label" title="VChat Latency (Not exactly network latency)" :class="ping_classes">{{latency}}ms</span></div>
+		</div>
+		
+	</div>
+
+	<div id="contentbox">
+		<div class="ui segment">
+			<span class='game say'><b>Test Person</b> says, "Testing say message."</span><br>
+			<span class='notice'>Testing notice message.</span><br>
+			<span class='danger'>Testing danger message.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message."</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message.</span></span><br>
+			<span class='admin_channel'>Testing asay message.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 2."</span><br>
+			<span class='notice'>Testing notice message 2.</span><br>
+			<span class='danger'>Testing danger message 2.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 2".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 2.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 2.</span></span><br>
+			<span class='admin_channel'>Testing asay message 2.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 3."</span><br>
+			<span class='notice'>Testing notice message 3.</span><br>
+			<span class='danger'>Testing danger message 3.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 3".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 3.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 3.</span></span><br>
+			<span class='admin_channel'>Testing asay message 3.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 4."</span><br>
+			<span class='notice'>Testing notice message 4.</span><br>
+			<span class='danger'>Testing danger message 4.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 4".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 4.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 4.</span></span><br>
+			<span class='admin_channel'>Testing asay message 4.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 5."</span><br>
+			<span class='notice'>Testing notice message 5.</span><br>
+			<span class='danger'>Testing danger message 5.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 5".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 5.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 5.</span></span><br>
+			<span class='admin_channel'>Testing asay message 5.</span><br>
+		</div>
+		<div class="ui segment inverted">
+			<span class='game say'><b>Test Person</b> says, "Testing say message."</span><br>
+			<span class='notice'>Testing notice message.</span><br>
+			<span class='danger'>Testing danger message.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message."</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message.</span></span><br>
+			<span class='admin_channel'>Testing asay message.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 2."</span><br>
+			<span class='notice'>Testing notice message 2.</span><br>
+			<span class='danger'>Testing danger message 2.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 2".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 2.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 2.</span></span><br>
+			<span class='admin_channel'>Testing asay message 2.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 3."</span><br>
+			<span class='notice'>Testing notice message 3.</span><br>
+			<span class='danger'>Testing danger message 3.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 3".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 3.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 3.</span></span><br>
+			<span class='admin_channel'>Testing asay message 3.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 4."</span><br>
+			<span class='notice'>Testing notice message 4.</span><br>
+			<span class='danger'>Testing danger message 4.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 4".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 4.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 4.</span></span><br>
+			<span class='admin_channel'>Testing asay message 4.</span><br>
+			<span class='game say'><b>Test Person</b> says, "Testing say message 5."</span><br>
+			<span class='notice'>Testing notice message 5.</span><br>
+			<span class='danger'>Testing danger message 5.</span><br>
+			<span class='secradio'>[Security] <b>Secu Person</b> says, "Testing radio message 5".</span><br>
+			<span class='ooc'><span class='everyone'>Testing OOC message 5.</span></span><br>
+			<span class='ooc'><span class='looc'>Testing LOOC message 5.</span></span><br>
+			<span class='admin_channel'>Testing asay message 5.</span><br>
+		</div>
+	</div>
+</body>
+
+</html>

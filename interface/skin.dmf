@@ -1053,16 +1053,45 @@ window "outputwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
-	elem "output"
+	elem "chatloadlabel"
+		type = LABEL
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "sans-serif"
+		font-size = 24
+		font-style = "bold"
+		text-color = #ffffff
+		background-color = #222222
+		is-visible = true
+		saved-params = ""
+		text = "Chat is loading.\nIf nothing happens after 20s,\nuse OOC > \"Reload VChat\"."
+	elem "htmloutput"
+		type = BROWSER
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = none
+		is-visible = false
+		saved-params = ""
+		auto-format = false
+	elem "oldoutput"
 		type = OUTPUT
 		pos = 0,0
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
+		background-color = none
+		text-color = #000000
+		background-color = #ffffff
+		is-visible = false
 		is-default = true
-		saved-params = "max-lines"
-		style = ".system {color:#ff0000;}"
+		style = ".system {color:#FF0000;}"
 		max-lines = 0
+		saved-params = ""
+		enable-http-images = true
 
 window "rpane"
 	elem "rpane"

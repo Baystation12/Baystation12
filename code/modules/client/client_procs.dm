@@ -87,7 +87,12 @@
 		if("usr")		hsrc = mob
 		if("prefs")		return prefs.process_link(usr,href_list)
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
+		if("chat")		return chatOutput.Topic(href, href_list)
 
+	switch(href_list["action"])
+		if("openLink")
+			src << link(href_list["link"])
+	
 	if(codex_topic(href, href_list))
 		return
 
@@ -143,6 +148,7 @@
 		alert(src,"This server doesn't allow guest accounts to play. Please go to http://www.byond.com/ and register for a key.","Guest","OK")
 		qdel(src)
 		return
+	
 
 	if(config.player_limit != 0)
 		if((GLOB.clients.len >= config.player_limit) && !(ckey in admin_datums))
@@ -178,6 +184,10 @@
 	apply_fps(prefs.clientfps)
 
 	. = ..()	//calls mob.Login()
+
+	chatOutput = new /datum/chatOutput(src) //vchat
+	chatOutput.send_resources()
+	chatOutput.start()
 
 	GLOB.using_map.map_info(src)
 
