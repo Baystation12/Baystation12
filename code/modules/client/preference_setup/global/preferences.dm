@@ -223,6 +223,17 @@ var/list/_client_preferences_by_type
 	description = "Use Goon Chat"
 	key = "USE_GOONCHAT"
 
+/datum/client_preference/goonchat/changed(var/mob/preference_mob, var/new_value)
+	if(preference_mob && preference_mob.client)
+		var/client/C = preference_mob.client
+		if(new_value == GLOB.PREF_YES)
+			C.chatOutput.loaded = FALSE
+			C.chatOutput.start()
+		else
+			C.force_white_theme()
+			winset(C, "output", "is-visible=true;is-disabled=false")
+			winset(C, "browseroutput", "is-visible=false")
+
 /********************
 * General Staff Preferences *
 ********************/

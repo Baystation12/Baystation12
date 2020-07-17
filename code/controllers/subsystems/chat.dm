@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(chat)
 	name = "Chat"
-	flags = SS_TICKER
 	wait = 1
+	runlevels = RUNLEVELS_DEFAULT | RUNLEVEL_LOBBY
 	priority = SS_PRIORITY_CHAT
 	init_order = SS_INIT_CHAT
 	var/list/payload = list()
@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(chat)
 /datum/controller/subsystem/chat/fire()
 	for(var/i in payload)
 		var/client/C = i
-		C << output(payload[C], "browseroutput:output")
+		to_target(C, output(payload[C], "browseroutput:output"))
 		payload -= C
 
 		if(MC_TICK_CHECK)
@@ -21,7 +21,6 @@ SUBSYSTEM_DEF(chat)
 
 	if(!istext(message))
 		CRASH("to_chat called with invalid input type")
-		return
 
 	if(target == world)
 		target = GLOB.clients

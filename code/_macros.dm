@@ -107,7 +107,6 @@
 #define legacy_chat(target, message)          to_target(target, message)
 #define to_world(message)                     to_chat(world, message)
 #define to_world_log(message)                 to_target(world.log, message)
-//#define to_chat(target, message)              to_target(target, message)
 #define sound_to(target, sound)               to_target(target, sound)
 #define image_to(target, image)               to_target(target, image)
 #define show_browser(target, content, title)  to_target(target, browse(content, title))
