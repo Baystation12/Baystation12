@@ -13,7 +13,7 @@
 	caliber = "cov_carbine"
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_carbine_reload.ogg'
-	fire_delay = 5 //Doesn't have the 3rnd burst of the counterpart BR
+	fire_delay = 4 //Doesn't have the 3rnd burst of the counterpart BR
 	dispersion = list(0.26)
 	one_hand_penalty = -1
 	irradiate_non_cov = 12

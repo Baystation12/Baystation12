@@ -1,7 +1,7 @@
 #define NEEDLER_EMBED_PROB 66
 #define NEEDLER_SHARD_DET_TIME 10 SECONDS
 #define FUEL_ROD_IRRADIATE_RANGE 2
-#define FUEL_ROD_IRRADIATE_AMOUNT 15
+#define FUEL_ROD_IRRADIATE_AMOUNT 10
 #define FUEL_ROD_MAX_OVERSHOOT 3
 
  // need icons for all projectiles and magazines
@@ -82,7 +82,7 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.rad_act(10)
+	L.rad_act(6)
 	. = ..()
 
 /obj/effect/projectile/beam_rifle
@@ -224,7 +224,8 @@
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
-	damage = 40
+	damage = 20
+	shield_damage = 5
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
@@ -240,7 +241,7 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.rad_act(7)
+	L.rad_act(3)
 	. = ..()
 
 /obj/effect/projectile/type51carbine
