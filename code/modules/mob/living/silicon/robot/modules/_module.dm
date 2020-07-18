@@ -10,11 +10,21 @@
 	var/channels = list()
 	var/networks = list()
 	var/languages = list(
-		LANGUAGE_HUMAN_EURO = 1,
-		LANGUAGE_UNATHI_SINTA = 0,
-		LANGUAGE_SKRELLIAN = 0,
-		LANGUAGE_SIGN = 0,
-		LANGUAGE_HUMAN_RUSSIAN = 1
+		LANGUAGE_HUMAN_EURO = TRUE,
+		LANGUAGE_HUMAN_CHINESE = TRUE,
+		LANGUAGE_HUMAN_ARABIC = TRUE,
+		LANGUAGE_HUMAN_INDIAN = TRUE,
+		LANGUAGE_HUMAN_IBERIAN = TRUE,
+		LANGUAGE_HUMAN_RUSSIAN = TRUE,
+		LANGUAGE_HUMAN_SELENIAN = TRUE,
+		LANGUAGE_GUTTER = TRUE,
+		LANGUAGE_LEGALESE = TRUE,
+		LANGUAGE_SPACER = TRUE,
+		LANGUAGE_EAL = TRUE,
+
+		LANGUAGE_UNATHI_SINTA = FALSE,
+		LANGUAGE_SKRELLIAN = FALSE,
+		LANGUAGE_SIGN = FALSE
 		)
 	var/sprites = list()
 	var/can_be_pushed = 1
@@ -79,7 +89,7 @@
 			var/obj/item/I = thing
 			I.forceMove(src)
 			created_equipment |= I
-		else 
+		else
 			log_debug("Invalid var type in [type] equipment creation - [thing]")
 	equipment = created_equipment
 
@@ -97,7 +107,7 @@
 				created_synths += new thing
 		else if(istype(thing, /datum/matter_synth))
 			created_synths |= thing
-		else 
+		else
 			log_debug("Invalid var type in [type] synth creation - [thing]")
 	synths = created_synths
 

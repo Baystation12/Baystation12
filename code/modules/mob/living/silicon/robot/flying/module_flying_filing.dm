@@ -2,20 +2,8 @@
 	name = "filing drone module"
 	display_name = "Filing"
 	channels = list(
-		"Service" = TRUE, 
+		"Service" = TRUE,
 		"Supply" = TRUE
-		)
-	languages = list(
-		LANGUAGE_HUMAN_EURO     = TRUE,
-		LANGUAGE_HUMAN_ARABIC   = TRUE,
-		LANGUAGE_HUMAN_INDIAN   = TRUE,
-		LANGUAGE_HUMAN_CHINESE  = TRUE,
-		LANGUAGE_HUMAN_IBERIAN  = TRUE,
-		LANGUAGE_HUMAN_RUSSIAN  = TRUE,
-		LANGUAGE_HUMAN_SELENIAN = TRUE,
-		LANGUAGE_UNATHI_SINTA   = TRUE,
-		LANGUAGE_SKRELLIAN      = TRUE,
-		LANGUAGE_SPACER         = TRUE
 		)
 	sprites = list("Drone" = "drone-service")
 	equipment = list(
