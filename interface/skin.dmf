@@ -1064,7 +1064,7 @@ window "outputwindow"
 		font-style = "bold"
 		text-color = #ffffff
 		background-color = #222222
-		is-visible = true
+		is-visible = false
 		saved-params = ""
 		text = "Chat is loading.\nIf nothing happens after 20s,\nuse OOC > \"Reload VChat\"."
 	elem "htmloutput"
@@ -1086,7 +1086,7 @@ window "outputwindow"
 		background-color = none
 		text-color = #000000
 		background-color = #ffffff
-		is-visible = false
+		is-visible = true
 		is-default = true
 		style = ".system {color:#FF0000;}"
 		max-lines = 0

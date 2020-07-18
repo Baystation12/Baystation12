@@ -7,8 +7,14 @@ SUBSYSTEM_DEF(chat)
 
 	var/list/msg_queue = list()
 
+/datum/controller/subsystem/chat/PreInit()
+	spawn(0)
+		init_vchat()
+	. = ..()
+	
+
 /datum/controller/subsystem/chat/Initialize(timeofday)
-	init_vchat()
+	//init_vchat()
 	..()
 
 /datum/controller/subsystem/chat/fire()
@@ -18,7 +24,7 @@ SUBSYSTEM_DEF(chat)
 		var/list/messages = msg_queue[C]
 		msg_queue -= C
 		if (C)
-			C << output(jsEncode(messages), "htmloutput:putmessage")
+			to_target(C, output(jsEncode(messages), "htmloutput:putmessage"))
 
 		if(MC_TICK_CHECK)
 			return
@@ -53,20 +59,22 @@ SUBSYSTEM_DEF(chat)
 			var/client/C = CLIENT_FROM_VAR(I) //Grab us a client if possible
 
 			if(!C)
-				return
+				continue // No client? No care.
+			
+			legacy_chat(C, original_message)
 
 			if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
 				//Send it to the old style output window.
 				to_target(C, original_message)
 				continue
 
-			// // Client still loading, put their messages in a queue - Actually don't, logged already in database.
-			// if(!C.chatOutput.loaded && C.chatOutput.message_queue && islist(C.chatOutput.message_queue))
-			// 	C.chatOutput.message_queue[++C.chatOutput.message_queue.len] = messageStruct
-			// 	continue
-
+			// Client still loading, put their messages in a queue - Actually don't, logged already in database.
+			 if(!C.chatOutput.loaded && C.chatOutput.message_queue && islist(C.chatOutput.message_queue))
+			 	C.chatOutput.message_queue[++C.chatOutput.message_queue.len] = messageStruct
+				continue
+			
 			LAZYINITLIST(msg_queue[C])
-			msg_queue[C][++msg_queue[C].len] = messageStruct
+			msg_queue[C] += list(messageStruct)
 	else
 		var/client/C = CLIENT_FROM_VAR(target) //Grab us a client if possible
 
@@ -74,13 +82,8 @@ SUBSYSTEM_DEF(chat)
 			return
 
 		if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
-			to_target(C, original_message)
+			legacy_chat(C, original_message)
 			return
 
-		// // Client still loading, put their messages in a queue - Actually don't, logged already in database.
-		// if(!C.chatOutput.loaded && C.chatOutput.message_queue && islist(C.chatOutput.message_queue))
-		// 	C.chatOutput.message_queue[++C.chatOutput.message_queue.len] = messageStruct
-		// 	return
-
 		LAZYINITLIST(msg_queue[C])
-		msg_queue[C][++msg_queue[C].len] = messageStruct
+		msg_queue[C] += list(messageStruct)

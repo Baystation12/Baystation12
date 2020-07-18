@@ -125,6 +125,8 @@
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
 
+	chatOutput = new /datum/chatOutput(src) //vchat
+
 	switch (connection)
 		if ("seeker", "web") // check for invalid connection type. do nothing if valid
 		else return null
@@ -185,9 +187,8 @@
 
 	. = ..()	//calls mob.Login()
 
-	chatOutput = new /datum/chatOutput(src) //vchat
+	
 	chatOutput.send_resources()
-	chatOutput.start()
 
 	GLOB.using_map.map_info(src)
 
@@ -196,6 +197,8 @@
 		to_chat(src, "<h2 class='alert'>A custom event is taking place. OOC Info:</h2>")
 		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
 		to_chat(src, "<br>")
+	
+	chatOutput.start()
 
 	if(holder)
 		add_admin_verbs()

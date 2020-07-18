@@ -24,7 +24,7 @@ GLOBAL_DATUM(vchatdb, /database)
 //For INSERT/CREATE/DELETE, etc that return a RowsAffected.
 /proc/vchat_exec_update(var/query)
 	if(!check_vchat())
-		log_world("There's no vchat database open but you tried to query it with: [query]")
+		log_world("There's no vchat database open but you tried to query update it with: [query]")
 		return FALSE
 
 	//Solidify our query

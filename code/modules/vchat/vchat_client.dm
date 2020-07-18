@@ -12,18 +12,20 @@ GLOBAL_LIST_INIT(vchatFiles, list(
 
 // The to_chat() macro calls this proc
 /proc/to_chat(var/target, var/message)
-	// First do logging in database
-	if(isclient(target))
-		var/client/C = target
-		vchat_add_message(C.ckey, message)
-	else if(ismob(target))
-		var/mob/M = target
-		if(M.ckey)
-			vchat_add_message(M.ckey, message)
-	else if(target == world)
-		for(var/client/C in GLOB.clients)
-			if(!QDESTROYING(C)) // Might be necessary?
-				vchat_add_message(C.ckey, message)
+	//We attempt to log first. We cannot log unless SSchat is initialized.
+	if(check_vchat())
+		// First do logging in database
+		if(isclient(target))
+			var/client/C = target
+			vchat_add_message(C.ckey, message)
+		else if(ismob(target))
+			var/mob/M = target
+			if(M.ckey)
+				vchat_add_message(M.ckey, message)
+		else if(target == world)
+			for(var/client/C in GLOB.clients)
+				if(!QDESTROYING(C)) // Might be necessary?
+					vchat_add_message(C.ckey, message)
 
 	// Now lets either queue it for sending, or send it right now
 	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
@@ -131,10 +133,17 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	broken = FALSE
 	owner.chatOutputLoadedAt = world.time
 
+	for(var/message in message_queue)
+		to_chat(owner, message)
+
+	//message_queue = null
 	//update_vis() //It does it's own winsets
 	ping_cycle()
 	send_playerinfo()
-	load_database()
+	if(check_vchat()) // Clients connecting right at server start may be done before we've initialized the db.
+		load_database()
+	else
+		testing("[owner.ckey] Has completed loading but the vchat database is not ready!")
 
 	owner.verbs += /client/proc/vchat_export_log
 
@@ -340,25 +349,6 @@ var/to_chat_src
 //This proc is only really used if the SSchat subsystem is unavailable (not started yet)
 /proc/to_chat_immediate(target, time, message)
 	if(!is_valid_tochat_message(message) || !is_valid_tochat_target(target))
-		target << message
-
-		// Info about the "message"
-		if(isnull(message))
-			message = "(null)"
-		else if(istype(message, /datum))
-			var/datum/D = message
-			message = "([D.type]): '[D]'"
-		else if(!is_valid_tochat_message(message))
-			message = "(bad message) : '[message]'"
-
-		// Info about the target
-		var/targetstring = "'[target]'"
-		if(istype(target, /datum))
-			var/datum/D = target
-			targetstring += ", [D.type]"
-
-		// The final output
-		log_debug("to_chat called with invalid message/target: [to_chat_filename], [to_chat_line], [to_chat_src], Message: '[message]', Target: [targetstring]")
 		return
 
 	else if(is_valid_tochat_message(message))
@@ -377,14 +367,19 @@ var/to_chat_src
 		var/client/C = CLIENT_FROM_VAR(target)
 		if(!C)
 			return // No client? No care.
-		else if(C.chatOutput.broken)
-			to_target(C, original_message)
+
+		// Send to the old output window
+		legacy_chat(C, original_message)
+
+		if(!C.chatOutput || C.chatOutput.broken) // Player who's skin isn't updated or fully intialized
 			return
-		else if(!C.chatOutput.loaded)
-			return // If not loaded yet, do nothing and history-sending on load will get it.
+
+		if(!C.chatOutput.loaded && !check_vchat()) // Catch and handle unintialized chat messages
+			C.chatOutput.message_queue += message
+			return
 
 		var/list/tojson = list("time" = time, "message" = message);
-		target << output(jsEncode(tojson), "htmloutput:putmessage")
+		to_target(target, output(jsEncode(tojson), "htmloutput:putmessage"))
 
 /client/proc/vchat_export_log()
 	set name = "Export chatlog"
