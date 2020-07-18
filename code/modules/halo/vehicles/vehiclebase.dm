@@ -336,7 +336,7 @@
 	if(toggler)
 		to_chat(toggler,"<span class = 'notice'>[message]</span>")
 
-/obj/vehicles/Move(var/newloc,var/newdir)
+/obj/vehicles/Move(var/turf/newloc,var/newdir)
 	if(abs(speed[1]) > abs(speed[2]))
 		if(speed[1] > 0)
 			newdir = EAST
@@ -353,6 +353,7 @@
 		anchored = 1
 	else
 		. = ..()
+	update_occupant_z_level(newloc.z)
 	update_object_sprites()
 
 /obj/vehicles/fall()
