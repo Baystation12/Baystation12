@@ -38,6 +38,7 @@ protolathe: uses materials and components (objects)
 
 	//we just put in a custom obj name here so its east
 	for(var/entry in required_objs)
-		consumables += required_objs[entry]
+		var/atom/A = entry
+		consumables += initial(A.name)
 
 	consumables_string = english_list(consumables, nothing_text = "None")
