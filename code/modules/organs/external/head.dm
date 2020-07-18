@@ -64,7 +64,7 @@
 
 		penman.visible_message("<span class='warning'>[penman] begins writing something on [head_name]!</span>", "You begin writing something on [head_name].")
 
-		if(do_after(penman, 3 SECONDS, target))
+		if(!do_after(penman, 3 SECONDS, target))
 			if(owner && owner.check_head_coverage())
 				to_chat(penman, "<span class='notice'>[head_name] is covered up.</span>")
 				return

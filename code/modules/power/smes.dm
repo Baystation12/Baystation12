@@ -242,7 +242,7 @@
 		if(!damage)
 			to_chat(user, "\The [src] is already fully repaired.")
 			return TRUE
-		if(WT.remove_fuel(0,user) && do_after(user, damage, src))
+		if(WT.remove_fuel(0,user) && !do_after(user, damage, src))
 			to_chat(user, "You repair all structural damage to \the [src]")
 			damage = 0
 		return TRUE

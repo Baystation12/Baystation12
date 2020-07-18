@@ -169,18 +169,26 @@ proc/age2agedescription(age)
 #define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
 #define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN)
 
+#define DO_MISSING_USER      (-1)
+#define DO_MISSING_TARGET    (-2)
+#define DO_INCAPACITATED     (-3)
+#define DO_TARGET_TYPE       (-4)
+
+
 /proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
 	if (!delay)
-		return TRUE
-	if (!user || user.do_active_user && (do_flags & DO_USER_UNIQUE_ACT))
 		return FALSE
-	if (target?.do_active_target && (do_flags & DO_TARGET_UNIQUE_ACT))
-		return FALSE
+	if (!user)
+		return DO_MISSING_USER
+	if (user.do_active_user)
+		return DO_USER_UNIQUE_ACT
+	if (target?.do_active_target)
+		return DO_TARGET_UNIQUE_ACT
 
 	if (do_flags & DO_USER_UNIQUE_ACT)
 		user.do_active_user = TRUE
 	if (target && (do_flags & DO_TARGET_UNIQUE_ACT))
-		target.do_active_target = TRUE
+		target.do_active_target = user
 
 	var/atom/user_loc = do_flags & DO_USER_CAN_MOVE ? null : user.loc
 	var/user_dir = do_flags & DO_USER_CAN_TURN ? null : user.dir
@@ -195,25 +203,46 @@ proc/age2agedescription(age)
 	var/start_time = world.time
 	var/end_time = start_time + delay
 
-	. = TRUE
+	. = FALSE
 
 	for (var/time = world.time, time < end_time, time = world.time)
 		sleep(1)
 		if (bar)
 			bar.update(time - start_time)
-		if (QDELETED(user) || user.incapacitated(incapacitation_flags) || user_loc && user_loc != user.loc || user_dir && user_dir != user.dir || user_hand && user_hand != user.get_active_hand())
-			. = FALSE
+		if (QDELETED(user))
+			. = DO_MISSING_USER
 			break
-		if (target_type && (QDELETED(target) || target_loc && target_loc != target.loc || target_dir && target_dir != target.dir || target_type != target.type))
-			. = FALSE
+		if (target_type && QDELETED(target))
+			. = DO_MISSING_TARGET
+			break
+		if (user.incapacitated(incapacitation_flags))
+			. = DO_INCAPACITATED
+			break
+		if (user_loc && user_loc != user.loc)
+			. = DO_USER_CAN_MOVE
+			break
+		if (target_loc && target_loc != target.loc)
+			. = DO_TARGET_CAN_MOVE
+			break
+		if (user_dir && user_dir != user.dir)
+			. = DO_USER_CAN_TURN
+			break
+		if (target_dir && target_dir != target.dir)
+			. = DO_TARGET_CAN_TURN
+			break
+		if (user_hand && user_hand != user.get_active_hand())
+			. = DO_USER_SAME_HAND
+			break
+		if (target_type != target.type)
+			. = DO_TARGET_TYPE
 			break
 
 	if (bar)
 		qdel(bar)
-	if (!QDELETED(user) && user.do_active_user && (do_flags & DO_USER_UNIQUE_ACT))
+	if (!QDELETED(user) && (do_flags & DO_USER_UNIQUE_ACT))
 		user.do_active_user = FALSE
-	if (!QDELETED(target) && target.do_active_target && (do_flags & DO_TARGET_UNIQUE_ACT))
-		target.do_active_target = FALSE
+	if (target_type && !QDELETED(target) && (do_flags & DO_TARGET_UNIQUE_ACT))
+		target.do_active_target = null
 
 
 /proc/able_mobs_in_oview(var/origin)

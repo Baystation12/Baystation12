@@ -133,7 +133,7 @@
 			else
 				user.visible_message("<span class='warning'>[user] begins to wipe [H]'s lipstick off with \the [src].</span>", \
 								 	 "<span class='notice'>You begin to wipe off [H]'s lipstick.</span>")
-				if(do_after(user, 2 SECONDS, H, do_flags = DO_DEFAULT ^ DO_BOTH_CAN_TURN))
+				if(!do_after(user, 2 SECONDS, H, do_flags = DO_DEFAULT ^ DO_BOTH_CAN_TURN))
 					user.visible_message("<span class='notice'>[user] wipes [H]'s lipstick off with \the [src].</span>", \
 										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
 					H.lip_style = null

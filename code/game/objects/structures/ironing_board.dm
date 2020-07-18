@@ -89,7 +89,7 @@
 			var/parsed = parse_zone(zone)
 
 			visible_message("<span class='danger'>[user] begins ironing [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You begin ironing [buckled_mob]'s [parsed]!</span>")
-			if(!do_after(user, 40, src))
+			if(do_after(user, 40, src))
 				return
 			visible_message("<span class='danger'>[user] irons [src.buckled_mob]'s [parsed]!</span>", "<span class='danger'>You iron [buckled_mob]'s [parsed]!</span>")
 
@@ -108,7 +108,7 @@
 			return
 
 		visible_message("[user] begins ironing [cloth].")
-		if(!do_after(user, 40, src))
+		if(do_after(user, 40, src))
 			return
 
 		visible_message("[user] finishes ironing [cloth].")

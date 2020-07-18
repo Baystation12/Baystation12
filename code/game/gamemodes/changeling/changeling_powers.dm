@@ -285,7 +285,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	else
 		src.visible_message("<span class='warning'>[src]'s body begins to twist, changing rapidly!</span>")
 
-	if(!do_after(src, changeTime))
+	if(do_after(src, changeTime))
 		to_chat(src, "<span class='notice'>You fail to change shape.</span>")
 		return
 	handle_changeling_transform(chosen_dna)

@@ -38,7 +38,7 @@
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
 			sleep(5)
 			playsound(loc, 'sound/effects/plunger.ogg', 75, 1)
-		if(do_after(user, 45, src) && clogged > 0)
+		if(!do_after(user, 45, src) && clogged > 0)
 			visible_message("<span class='notice'>With a loud gurgle, \the [src] begins flowing more freely.</span>")
 			playsound(loc, pick(SSfluids.gurgles), 100, 1)
 			clogged--
@@ -136,7 +136,7 @@
 	if(isCrowbar(I))
 		to_chat(user, "<span class='notice'>You start to [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"].</span>")
 		playsound(loc, 'sound/effects/stonedoor_openclose.ogg', 50, 1)
-		if(do_after(user, 30, src))
+		if(!do_after(user, 30, src))
 			user.visible_message("<span class='notice'>[user] [cistern ? "replaces the lid on the cistern" : "lifts the lid off the cistern"]!</span>", "<span class='notice'>You [cistern ? "replace the lid on the cistern" : "lift the lid off the cistern"]!</span>", "You hear grinding porcelain.")
 			cistern = !cistern
 			update_icon()
@@ -153,7 +153,7 @@
 			if(open && !swirlie)
 				user.visible_message("<span class='danger'>\The [user] starts jamming \the [GM]'s face into \the [src]!</span>")
 				swirlie = GM
-				if(do_after(user, 30, src))
+				if(!do_after(user, 30, src))
 					user.visible_message("<span class='danger'>\The [user] gives [GM.name] a swirlie!</span>")
 					GM.adjustOxyLoss(5)
 				swirlie = null
@@ -247,7 +247,7 @@
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
 		to_chat(user,"<span class='notice'>You begin to adjust the temperature valve with \the [I].</span>")
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
-		if(do_after(user, 50, src))
+		if(!do_after(user, 50, src))
 			watertemp = newtemp
 			user.visible_message("<span class='notice'>\The [user] adjusts \the [src] with \the [I].</span>", "<span class='notice'>You adjust the shower with \the [I].</span>")
 			add_fingerprint(user)
@@ -383,7 +383,7 @@
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
+	if(do_after(user, 40, src))
 		busy = 0
 		return TRUE
 	busy = 0
@@ -443,7 +443,7 @@
 	playsound(loc, 'sound/effects/sink_long.ogg', 75, 1)
 
 	busy = 1
-	if(!do_after(user, 40, src))
+	if(do_after(user, 40, src))
 		busy = 0
 		return TRUE
 	busy = 0
@@ -487,7 +487,7 @@
 	if (clogged)
 		to_chat(user, SPAN_WARNING("\The [src] is already clogged."))
 		return
-	if (!do_after(user, 3 SECONDS, src))
+	if (do_after(user, 3 SECONDS, src))
 		to_chat(user, SPAN_WARNING("You must stay still to clog \the [src]."))
 		return
 	if (clogged || QDELETED(I) || !user.unEquip(I))

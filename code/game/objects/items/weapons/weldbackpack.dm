@@ -221,7 +221,7 @@
 			range = 5
 		)
 		var/time_cost = 5 - round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
-		if (!do_after(user, time_cost SECONDS, src))
+		if (do_after(user, time_cost SECONDS, src))
 			interacting = null
 			return TRUE
 		var/removed

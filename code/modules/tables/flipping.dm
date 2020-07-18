@@ -73,7 +73,7 @@
 	if( !straight_table_check(turn(direction,90)) || !straight_table_check(turn(direction,-90)) )
 		return FALSE
 
-	if(!do_after(usr, 1 SECOND, src))
+	if(do_after(usr, 1 SECOND, src))
 		return FALSE
 	verbs -=/obj/structure/table/verb/do_flip
 	verbs +=/obj/structure/table/proc/do_put
@@ -101,7 +101,7 @@
 	return TRUE
 
 /obj/structure/table/proc/unflip()
-	if(!do_after(usr, 1 SECOND, src))
+	if(do_after(usr, 1 SECOND, src))
 		return FALSE
 	verbs -=/obj/structure/table/proc/do_put
 	verbs +=/obj/structure/table/verb/do_flip

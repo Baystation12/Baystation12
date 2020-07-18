@@ -45,7 +45,7 @@
 		return
 	if(open && istype(O, /obj/item/weapon/nuclear_cylinder) && (length(cylinders) < 6))
 		user.visible_message("[user] begins inserting \the [O] into storage.", "You begin inserting \the [O] into storage.")
-		if(do_after(user, 80, src) && open && (length(cylinders) < 6) && user.unEquip(O, src))
+		if(!do_after(user, 80, src) && open && (length(cylinders) < 6) && user.unEquip(O, src))
 			user.visible_message("[user] places \the [O] into storage.", "You place \the [O] into storage.")
 			cylinders.Add(O)
 			update_icon()
@@ -56,7 +56,7 @@
 		return
 	if(over == usr && open && length(cylinders))
 		usr.visible_message("[usr] begins to extract \the [cylinders[1]].", "You begin to extract \the [cylinders[1]].")
-		if(do_after(usr, 70, src) && open && length(cylinders))
+		if(!do_after(usr, 70, src) && open && length(cylinders))
 			usr.visible_message("[usr] picks up \the [cylinders[1]].", "You pick up \the [cylinders[1]].")
 			usr.put_in_hands(cylinders[length(cylinders)])
 			cylinders.Cut(length(cylinders))

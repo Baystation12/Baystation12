@@ -92,7 +92,7 @@
 		var/obj/item/stack/material/rods/R = W
 		to_chat(user, "<span class='notice'> You start to stick [R.singular_name] into rotating hands to make them stuck.</span>")
 		being_stopped = 1
-		if (!do_after(user, 100, src))
+		if (do_after(user, 100, src))
 			to_chat(user, "<span class='notice'> You pull back [R.singular_name].</span>")
 			being_stopped = 0
 			return
