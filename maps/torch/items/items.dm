@@ -168,7 +168,7 @@ Passports
 		fingerprint_hash = md5(H.dna.uni_identity)
 	else
 		fingerprint_hash = "N/A"
-	info = "\icon[src] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint_hash]"
+	info = "[bicon(src)] [src]:\nName: [H.real_name]\nSpecies: [H.get_species()]\nGender: [gender2text(H.gender)]\nAge: [H.age]\nPlace of Birth: [pob]\nFingerprint: [fingerprint_hash]"
 
 /obj/item/weapon/passport/attack_self(mob/user as mob)
 	user.visible_message(SPAN_NOTICE("[user] opens and checks [src]."), \

@@ -310,18 +310,20 @@ GLOBAL_LIST_EMPTY(bicon_cache) // Cache of the <img> tag results, not the icons
 	// Non-human atom, no cache
 	if(!base64) // Doesn't exist, make it.
 		var/icon/I = icon(A.icon, A.icon_state, SOUTH, 1)
-		if (ishuman(A)) // Shitty workaround for a BYOND issue.
-			var/icon/temp = I
-			I = icon()
-			I.Insert(temp, dir = SOUTH)
+		//if (ishuman(A)) // Shitty workaround for a BYOND issue.
+		//	var/icon/temp = I
+		//	I = icon()
+		//	I.Insert(temp, dir = SOUTH)
 
 		GLOB.bicon_cache[key] = icon2base64(I, key)
+		base64 = GLOB.bicon_cache[key]
 
 	// May add a class to the img tag created by bicon
 	if(use_class)
 		class = "class='icon [A.icon_state] [custom_classes]'"
 
 	return "<img [class] src='data:image/png;base64,[base64]'>"
+	
 
 //Checks if the message content is a valid to_chat message
 /proc/is_valid_tochat_message(message)
