@@ -18,7 +18,7 @@
 
 	occupants = list(0,0)
 
-	vehicle_size = ITEM_SIZE_VEHICLE
+	vehicle_size = ITEM_SIZE_VEHICLE_LARGE
 
 	move_sound = null
 
@@ -62,7 +62,7 @@
 	name = "Mounted Fuel Rod Cannon"
 	desc = "A higher-power fuel rod cannon, mounted on a vehicle. Used for anti-vehicle and anti-group attacks."
 	burst_size = 1
-	fire_delay = 20
+	fire_delay = 30
 	dispersion = list(3)
 	fire_sound = 'code/modules/halo/sounds/wraith_cannon_fire.ogg'
 	mag_used = /obj/item/ammo_magazine/banshee_fuel
@@ -93,7 +93,7 @@
 /obj/item/ammo_magazine/banshee_fuel
 	name = "Internal Fuel Rod Storage"
 	caliber = "bansheeFuel"
-	max_ammo = 20
+	max_ammo = 10
 	ammo_type = /obj/item/ammo_casing/banshee_fuel
 
 /obj/item/ammo_casing/banshee_fuel

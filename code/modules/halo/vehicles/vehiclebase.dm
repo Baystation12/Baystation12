@@ -381,9 +381,11 @@
 		next_move_input_at = world.time + min_speed
 		moving_x = 0
 		moving_y = 0
+		if(last_move == EAST || last_move == WEST)
+			speed[1] = 0
+		else if(last_move == NORTH || last_move == SOUTH)
+			speed[2] = 0
 		last_moved_axis = 0
-		speed[1] = 0
-		speed[2] = 0
 	visible_message("<span class = 'notice'>[src] collides wth [obstacle]</span>")
 
 /obj/vehicles/Bump(var/atom/obstacle)
@@ -402,14 +404,18 @@
 			if(speed[speed_index_target] > 0)
 				switch(speed_index_target)
 					if(1)
+						last_move = EAST
 						. = Move(get_step(loc,EAST),EAST)
 					if(2)
+						last_move = NORTH
 						. = Move(get_step(loc,NORTH),NORTH)
 			else
 				switch(speed_index_target)
 					if(1)
+						last_move = WEST
 						. = Move(get_step(loc,WEST),WEST)
 					if(2)
+						last_move = SOUTH
 						. = Move(get_step(loc,SOUTH),SOUTH)
 			if(last_moved_axis != speed_index_target)
 				if(speed[speed_index_target] > 0)

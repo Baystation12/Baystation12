@@ -105,13 +105,11 @@
 			stat("[gun_r] Heat: [round(100 * gun_r.heat_current / gun_r.overheat_capacity)]%")
 
 /mob/living/carbon/human/ex_act(var/severity,var/turf/epicenter)
-	if(!blinded)
-		flash_eyes()
-
 	var/b_loss = null
 	var/f_loss = null
 	var/throw_mob = FALSE
 	var/throw_range = 0
+	var/eyeflash_duration = 20
 	switch (severity)
 		if (1.0)
 			b_loss = 400
@@ -130,22 +128,27 @@
 		if (2.0)
 			b_loss = 60
 			f_loss = 60
+			eyeflash_duration = 10
 
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 30,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 120,120*species.explosion_effect_mod)
 			Weaken(3)
 			throw_mob = TRUE
-			throw_range = world.view + 3
+			throw_range = world.view + 2
 
 		if(3.0)
 			b_loss = 30
+			eyeflash_duration = 5
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 15,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 60,120*species.explosion_effect_mod)
 			Weaken(2)
 			throw_mob = TRUE
-			throw_range = world.view - 1
+			throw_range = world.view - 2
+
+	if(!blinded)
+		flash_eyes(duration = eyeflash_duration)
 
 	// factor in armour / degrade armor
 	var/protection = blocked_mult(getarmor(null, "bomb"))

@@ -26,9 +26,10 @@
 
 	light_color = "#C1CEFF"
 
-	min_speed = 13.75
-	max_speed = 5.75
-	drag = 3
+	min_speed = 13
+	max_speed = 4
+	acceleration = 4
+	drag = 5 //Hovertech = less drag
 
 /obj/vehicles/wraith/update_object_sprites()
 	. = ..()
