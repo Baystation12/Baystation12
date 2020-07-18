@@ -90,10 +90,8 @@
 /obj/vehicles/air/proc/perform_move_sequence(var/obj/move_to_obj)
 	if(isnull(move_to_obj))
 		return
-	var/move_to_loc = get_turf(move_to_obj)
-	if(move_to_loc)
-		update_occupant_z_level(move_to_obj.z)
-	loc = move_to_loc
+
+	forceMove(move_to_loc)
 
 /obj/vehicles/air/proc/proc_fly_to_waypoint()
 	var/selected_landing_point = input("Choose a landing point.","Landing Point Selection","Cancel") in create_waypoint_list() + list("Cancel")
