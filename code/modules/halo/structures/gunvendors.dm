@@ -7,7 +7,8 @@
 /obj/machinery/vending/armory/attackby(var/atom/A,var/mob/user)
 	if(A in products)
 		products[A] = products[A] + 1
-	return ..()
+	else
+		return ..()
 
 /obj/machinery/vending/armory/hybrid // Both ammo, and guns!
 	name = "UNSC Weapon and Ammunition Rack"
