@@ -175,34 +175,6 @@ var/global/list/ores_by_type = list()
 	ore = /obj/item/weapon/ore/hydrogen
 	scan_icon = "mineral_uncommon"
 
-/ore/corundum
-	name = "corundum"
-	display_name = "corundite"
-	alloy = 1
-	result_amount = 1
-	spread_chance = 20
-	ore = /obj/item/weapon/ore/corundum
-	scan_icon = "mineral_rare"
-
-/ore/kemocite
-	name = "kemocite"
-	display_name = "kemocite"
-	compresses_to = "kemocite"
-	result_amount = 2
-	spread_chance = 10
-	ore = /obj/item/weapon/ore/kemocite
-	scan_icon = "mineral_rare"
-
-/ore/duridium
-	name = "duridium"
-	display_name = "duridium"
-	smelts_to = "duridium"
-	alloy = 1
-	ore = /obj/item/weapon/ore/duridium
-	scan_icon = "mineral_uncommon"
-	result_amount = 2
-	spread_chance = 10
-
 /ore/osmium
 	name = "osmium"
 	display_name = "osmium"
