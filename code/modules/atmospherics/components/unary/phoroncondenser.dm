@@ -20,7 +20,7 @@
 	var/carbon_efficiency = 0.5
 	var/intake_power_efficiency = 1
 	var/const/phoron_moles_per_piece = 50 //One 12g per mole * 50 = 600 g chunk of coal
-	var/phase = "filling"//"filling", "processing", "releasing"
+	var/phase = "filling"//"filling", "processing"
 	var/datum/gas_mixture/inner_tank = new
 	var/tank_volume = 400//Litres
 
@@ -42,20 +42,12 @@
 	power_rating *= initial(power_rating)
 	..()
 
-/obj/machinery/atmospherics/unary/phoroncondenser/examine(user)
-	. = ..()
-
 /obj/machinery/atmospherics/unary/phoroncondenser/atmos_init()
 	if(node)
 		return
 
 	var/node_connect = dir
-
-	for(var/obj/machinery/atmospherics/target in get_step(src, node_connect))
-		if(target.initialize_directions & get_dir(target, src))
-			node = target
-			break
-
+	..()
   		// Copied from freezer code, should initialise a one direction machine as they work.
 		//check that there are no incompatible pipes/machinery in our own location
 	for(var/obj/machinery/atmospherics/M in src.loc)
@@ -63,7 +55,7 @@
 			node = null
 			break
 
-		update_icon()
+	update_icon()
 
 /obj/machinery/atmospherics/unary/phoroncondenser/Process(var/delay)
 	..()
