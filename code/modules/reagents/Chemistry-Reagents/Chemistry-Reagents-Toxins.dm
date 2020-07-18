@@ -412,6 +412,7 @@
 	metabolism = REM * 0.5
 	overdose = REAGENTS_OVERDOSE
 	value = 2.5
+	scannable = TRUE
 
 /datum/reagent/soporific/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
