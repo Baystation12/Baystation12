@@ -38,9 +38,9 @@ Used In File(s): \code\modules\halo\crafting\machines\protolathe\_protolathe.dm
 				<br>
 				<br>
 			{{else}}
-				<div style="width:85%;float:left"><h3>Selected Design</h3></div>
+				<div style="width:85%;float:left"><h3>{{:data.name}}</h3></div>
 				<div style="width:15%;float:right">{{:helper.link('Craft', '', { 'craft' : data.name })}}</div>
-				<div class='itemLabel' style="width:100%">{{:data.name}}</div><br>
+				<div class='itemLabelWide' style="width:100%">{{:data.desc}}</div>
 				Complexity: {{:data.complexity == 0 ? "Instant" : data.complexity + " cycles"}}<br>
 				Requires: {{:data.consume}}<br>
 			{{/if}}

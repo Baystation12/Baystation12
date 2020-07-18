@@ -67,6 +67,9 @@
 		new/datum/stack_recipe("multi-tile airlock assembly", /obj/structure/door_assembly/multi_tile, 4, time = 50, one_per_turf = 1, on_floor = 1), \
 		))
 
+	recipes += new/datum/stack_recipe("shovel", /obj/item/weapon/shovel, 5)
+	recipes += new/datum/stack_recipe("steel pickaxe", /obj/item/weapon/pickaxe/steel, 5)
+
 	recipes += new/datum/stack_recipe("grenade casing", /obj/item/weapon/grenade/chem_grenade)
 	recipes += new/datum/stack_recipe("landmine shell", /obj/item/device/landmine, 10)
 	recipes += new/datum/stack_recipe("light fixture frame", /obj/item/frame/light, 2)
@@ -150,3 +153,28 @@
 	recipes = list()
 
 	recipes += new/datum/stack_recipe("empty sandbags", /obj/item/empty_sandbags, 1, time = 30)
+
+/material/silver/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("silver pickaxe", /obj/item/weapon/pickaxe/silver, 5)
+
+/material/gold/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("gold pickaxe", /obj/item/weapon/pickaxe/gold, 5)
+
+/material/phoron/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("phoron pickaxe", /obj/item/weapon/pickaxe/phoron, 5)
+
+/material/uranium/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("uranium pickaxe", /obj/item/weapon/pickaxe/uranium, 5)
+
+/material/diamond/generate_recipes()
+	recipes = list()
+
+	recipes += new/datum/stack_recipe("diamond pickaxe", /obj/item/weapon/pickaxe/diamond, 5)

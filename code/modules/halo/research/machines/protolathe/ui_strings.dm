@@ -36,13 +36,13 @@
 
 	//we just put in a custom obj name here so its east
 	for(var/obj_type in stored_components)
-		var/obj_name = components_types_names[obj_type]
 
 		//now add the item to the ui list
-		var/list/entry = list("info" = "[obj_name] x [stored_components[obj_type]]", "type" = obj_type)
+		var/atom/A = obj_type
+		var/list/L = stored_components[obj_type]
+		var/list/entry = list("info" = "[initial(A.name)] x [L.len]", "type" = obj_type)
 		ui_components.len++
 		ui_components[ui_components.len] = entry
-
 
 	//components_string = english_list(components_strings, nothing_text = "None")
 

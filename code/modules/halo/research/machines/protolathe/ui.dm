@@ -59,6 +59,7 @@
 		uiData_SelectedDesign = list(\
 			"name" = D.name,\
 			"complexity" = D.complexity,\
+			"desc" = D.desc ? D.desc : "",\
 			"consume" = D.GetConsumablesString(mat_efficiency))
 
 	else

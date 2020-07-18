@@ -4,7 +4,6 @@
 /obj/machinery/research/protolathe
 	var/list/stored_components = list()
 	var/components_storage_used = 0
-	var/list/components_types_names = list()
 	var/list/accepted_objs = list(\
 		/obj/item/plasma_core,\
 		/obj/item/weapon/cell/device/standard,\
@@ -14,7 +13,10 @@
 		/datum/autolathe/recipe/sensor_prox,\
 		/datum/autolathe/recipe/sensor_infra,\
 		/obj/item/dumb_ai_chip,\
-		/obj/item/weapon/reagent_containers/syringe)
+		/obj/item/weapon/reagent_containers/syringe,\
+		/obj/item/weapon/stock_parts,\
+		/obj/item/weapon/pickaxe,\
+		/obj/item/device/flashlight)
 
 /obj/machinery/research/protolathe/proc/attempt_load_component(var/obj/item/I, var/mob/user as mob)
 
@@ -37,53 +39,52 @@
 	//might not always be a user trying to load something
 	if(user)
 		user.drop_item()
+		I.forceMove(src)
 		to_chat(user, "<span class='info'>You insert \icon[I] [I] into [src].</span>")
 
-	//convert it to the base type
-	var/insert_name = components_types_names[base_type]
-	if(!insert_name)
-		components_types_names[base_type] = initial(I.name)
-
 	//safety check here
-	if(!stored_components[base_type])
-		stored_components[base_type] = 0
+	var/list/L = stored_components[I.type]
+	if(!L)
+		L = list()
+		stored_components[I.type] = L
 
 	//increment the stock
-	stored_components[base_type] += 1
+	L.Add(I)
 	components_storage_used += SPACE_PER_COMPONENT
-
-	//delete the thing
-	qdel(I)
 
 	//update the ui
 	UpdateComponentsString()
 
 	return TRUE
 
-/obj/machinery/research/protolathe/proc/consume_obj(var/consume_type, var/amount)
-	//decrement the stock
-	stored_components[consume_type] -= amount
-	components_storage_used -= SPACE_PER_COMPONENT
+/obj/machinery/research/protolathe/proc/consume_obj(var/consume_type, var/amount, var/do_eject = FALSE)
+	var/list/L = stored_components[consume_type]
+
+	if(L)
+		//decrement the stock
+		while(L.len && amount > 0)
+			amount--
+			var/atom/movable/A = pop(L)
+			components_storage_used -= SPACE_PER_COMPONENT
+
+			if(do_eject)
+				//move it onto the turf
+				A.forceMove(src.loc)
+
+				//move it out from the protolathe's tile
+				if(output_dir)
+					spawn(5)
+						if(A && A.loc == src.loc)
+							var/turf/target_turf = get_step(src, output_dir)
+							A.Move(target_turf)
+			else
+				qdel(A)
 
 	//forget about it
-	if(!stored_components[consume_type])
+	if(!L || !L.len)
 		stored_components -= consume_type
-		components_types_names -= consume_type
 
 	//update the ui
 	UpdateComponentsString()
-
-/obj/machinery/research/protolathe/proc/eject_obj(var/obj_type)
-	//to_debug_listeners("Ejecting \'[obj_name]\' from protolathe")
-	var/obj/M = new obj_type(src.loc)
-	consume_obj(M.type, 1)
-
-
-	//move it out from the protolathe's tile
-	if(output_dir)
-		spawn(5)
-			if(M && M.loc == src.loc)
-				var/turf/target_turf = get_step(src, output_dir)
-				M.Move(target_turf)
 
 #undef SPACE_PER_COMPONENT

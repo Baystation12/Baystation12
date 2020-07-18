@@ -4,6 +4,8 @@
 	desc = "Theoretical shield design based off Covenant energy shield generators."
 	hidden = TRUE
 	tech_req_one = list(\
+		/datum/techprint/unggoy_harness_ultra,\
+		/datum/techprint/unggoy_harness_deacon,\
 		/datum/techprint/sangheili_bodysuit,\
 		/datum/techprint/kigyar_gauntlet,\
 		/datum/techprint/tvoan_gauntlet,\

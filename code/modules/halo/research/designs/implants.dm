@@ -5,6 +5,7 @@
 
 /datum/research_design/implanter
 	name = "Implanter device"
+	desc = "A tool for inserting different kinds of implants into a person."
 	product_type = /obj/item/weapon/implanter
 	required_materials = list("plasteel" = 5, "steel" = 10, "glass" = 5)
 	build_type = PROTOLATHE
@@ -84,6 +85,7 @@
 
 /datum/research_design/implant_english
 	name = "English language implant"
+	name = "Allows the recipient to understand English, but not speak it."
 	product_type = /obj/item/weapon/implantcase/language_english
 	required_materials = list("osmium-carbide plasteel" = 1, "glass" = 5, "plastic" = 5, "gold" = 1)
 	required_objs = list(/obj/item/dumb_ai_chip = "dumb AI chip")

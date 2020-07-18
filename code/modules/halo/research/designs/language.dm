@@ -4,6 +4,7 @@
 
 /datum/research_design/language_learner_english
 	name = "Language learner: English"
+	name = "A single use education device to teach the reader how to speak English."
 	product_type = /obj/item/language_learner/english
 	required_materials = list("diamond" = 1, "uranium" = 1)
 	required_objs = list(/obj/item/dumb_ai_chip = "dumb AI chip")
