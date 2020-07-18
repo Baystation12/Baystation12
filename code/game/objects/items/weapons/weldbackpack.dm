@@ -97,7 +97,6 @@
 	var/obj/item/weapon/tank/tank
 	var/obj/item/weapon/cell/cell
 	var/tank_permit
-	var/mob/interacting
 	var/list/scrub_names
 	var/charge_cost
 	var/volume_rate
@@ -160,7 +159,7 @@
 /obj/item/weapon/scrubpack/attackby(obj/item/weapon/W, mob/user)
 	if (istype(W, /obj/item/weapon/cell))
 		if (cell)
-			to_chat(user, SPAN_WARNING("\The [src] already has \an [cell]."))
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [cell]."))
 			return TRUE
 		if (istype(W, /obj/item/weapon/cell/device))
 			to_chat(user, SPAN_WARNING("\The [W] is too small for \the [src]."))
@@ -168,8 +167,8 @@
 		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
-			SPAN_ITALIC("\The [user] fits \the [W] to \the [src]."),
-			SPAN_ITALIC("You fit \the [W] to \the [src]."),
+			SPAN_ITALIC("\The [user] fits \the [W] into \the [src]."),
+			SPAN_ITALIC("You fit \the [W] into \the [src]."),
 			SPAN_ITALIC("You can hear metal scratching on metal."),
 			range = 5
 		)
@@ -178,7 +177,7 @@
 
 	if (istype(W, /obj/item/weapon/tank))
 		if (tank)
-			to_chat(user, SPAN_WARNING("\The [src] already has \an [tank]."))
+			to_chat(user, SPAN_WARNING("\The [src] already has \a [W]."))
 			return TRUE
 		if (!istype(W, tank_permit))
 			to_chat(user, SPAN_WARNING("\The [src] can't fit \a [W]."))
@@ -186,8 +185,8 @@
 		if (!user.unEquip(W, src))
 			return
 		user.visible_message(
-			SPAN_ITALIC("\The [user] fits \the [W] to \the [src]."),
-			SPAN_ITALIC("You fit \the [W] to \the [src]."),
+			SPAN_ITALIC("\The [user] fits \the [W] into \the [src]."),
+			SPAN_ITALIC("You fit \the [W] into \the [src]."),
 			SPAN_ITALIC("You can hear metal scratching on metal."),
 			range = 5
 		)
@@ -206,23 +205,16 @@
 			options += "cell"
 		if (tank)
 			options += "tank"
-		if (interacting)
-			to_chat(user, SPAN_WARNING("\The [interacting] is already using \the [src]."))
-			return TRUE
-		interacting = user
 		var/selection = input("Which would you like to remove?") as null|anything in options
 		if (!selection)
-			interacting = null
 			return TRUE
-		user.visible_message(
-			SPAN_ITALIC("\The [user] starts to use \the [W] on \the [src]."),
-			SPAN_ITALIC("You start to remove the [selection] from \the [src]."),
-			SPAN_ITALIC("You can hear metal scratching on metal."),
-			range = 5
-		)
 		var/time_cost = 5 - round(user.get_skill_value(SKILL_ATMOS) * 0.5) //0,1,1,2,2
-		if (do_after(user, time_cost SECONDS, src))
-			interacting = null
+		var/failed = do_after(user, time_cost SECONDS, src, do_flags = DO_DEFAULT | DO_BOTH_UNIQUE_ACT)
+		if (failed)
+			if (failed == DO_USER_UNIQUE_ACT)
+				to_chat(user, SPAN_WARNING("You're already busy with something."))
+			else if (failed == DO_TARGET_UNIQUE_ACT)
+				to_chat(user, SPAN_WARNING("\The [do_active_target] is already busy with \the [src]."))
 			return TRUE
 		var/removed
 		if (selection == "cell")
@@ -233,8 +225,12 @@
 			user.put_in_hands(tank)
 			removed = tank
 			tank = null
-		interacting = null
-		to_chat(user, SPAN_NOTICE("You finish removing \the [removed]."))
+		user.visible_message(
+			SPAN_ITALIC("\The [user] removes \the [removed] from \the [src]."),
+			SPAN_ITALIC("You remove the [selection] from \the [src]."),
+			SPAN_ITALIC("You can hear metal scratching on metal."),
+			range = 5
+		)
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		return TRUE
 
