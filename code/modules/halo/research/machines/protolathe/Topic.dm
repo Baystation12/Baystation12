@@ -18,7 +18,6 @@
 		return 1
 
 	if(href_list["eject_mat"])
-		//to_debug_listeners("href_list\[\"eject_mat\"\] [href_list["eject_mat"]]")
 		eject_materials(href_list["eject_mat"], usr)
 		return 1
 
@@ -27,5 +26,5 @@
 		return 1
 
 	if(href_list["eject_comp"])
-		eject_obj(href_list["eject_comp"])
+		consume_obj(href_list["eject_comp"], 1, TRUE)
 		return 1
