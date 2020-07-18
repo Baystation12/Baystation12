@@ -39,10 +39,14 @@
 			return global.SSantags;
 		if("SSao")
 			return global.SSao;
+		if("SSassets")
+			return global.SSassets;
 		if("SSatoms")
 			return global.SSatoms;
 		if("SScharacter_setup")
 			return global.SScharacter_setup;
+		if("SSchat")
+			return global.SSchat;
 		if("SSchemistry")
 			return global.SSchemistry;
 		if("SScircuit")
@@ -948,10 +952,14 @@
 			global.SSantags=newval;
 		if("SSao")
 			global.SSao=newval;
+		if("SSassets")
+			global.SSassets=newval;
 		if("SSatoms")
 			global.SSatoms=newval;
 		if("SScharacter_setup")
 			global.SScharacter_setup=newval;
+		if("SSchat")
+			global.SSchat=newval;
 		if("SSchemistry")
 			global.SSchemistry=newval;
 		if("SScircuit")
@@ -1837,8 +1845,10 @@
 	"SSalarm",
 	"SSantags",
 	"SSao",
+	"SSassets",
 	"SSatoms",
 	"SScharacter_setup",
+	"SSchat",
 	"SSchemistry",
 	"SScircuit",
 	"SScircuit_components",

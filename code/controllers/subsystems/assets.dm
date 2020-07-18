@@ -1,9 +1,9 @@
 SUBSYSTEM_DEF(assets)
-    name = "Assets"
-    init_order = SS_INIT_ASSETS
-    flags = SS_NO_FIRE
-    var/list/cache = list()
-    var/list/preload = list()
+	name = "Assets"
+	init_order = SS_INIT_ASSETS
+	flags = SS_NO_FIRE
+	var/list/cache = list()
+	var/list/preload = list()
 
 /datum/controller/subsystem/assets/Initialize(timeofday)
 	for(var/type in typesof(/datum/asset) - list(/datum/asset, /datum/asset/simple))

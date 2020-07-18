@@ -70,7 +70,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 //Shove all the assets at them
 /datum/chatOutput/proc/send_resources()
 	for(var/filename in GLOB.vchatFiles)
-		//owner << browse_rsc(file(filename))
 		send_rsc(owner, file(filename), filename)
 	resources_sent = TRUE
 
@@ -194,7 +193,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 
 //Send a side-channel event to the chat window
 /datum/chatOutput/proc/send_event(var/event, var/client/C = owner)
-	C << output(jsEncode(event), "htmloutput:get_event")
+	to_target(C, output(jsEncode(event), "htmloutput:get_event"))
 
 //Looping sleeping proc that just pings the client and dies when we die
 /datum/chatOutput/proc/ping_cycle()
@@ -284,7 +283,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 /proc/icon2base64(var/icon/icon, var/iconKey = "misc")
 	if (!isicon(icon)) return FALSE
 
-	GLOB.iconCache[iconKey] << icon
+	image_to(GLOB.iconCache[iconKey], icon)
 	var/iconData = GLOB.iconCache.ExportText(iconKey)
 	var/list/partial = splittext(iconData, "{")
 	return replacetext(copytext(partial[2], 3, -5), "\n", "")
@@ -342,10 +341,6 @@ GLOBAL_LIST_EMPTY(bicon_cache) // Cache of the <img> tag results, not the icons
 /proc/is_valid_tochat_target(target)
 	return !istype(target, /savefile) && (ismob(target) || islist(target) || isclient(target) || target == world)
 
-var/to_chat_filename
-var/to_chat_line
-var/to_chat_src
-
 //This proc is only really used if the SSchat subsystem is unavailable (not started yet)
 /proc/to_chat_immediate(target, time, message)
 	if(!is_valid_tochat_message(message) || !is_valid_tochat_target(target))
@@ -402,18 +397,18 @@ var/to_chat_src
 	o_file = file(o_file)
 
 	// Write the CSS file to the log
-	o_file << "<html><head><style>"
-	o_file << file2text(file("code/modules/vchat/css/ss13styles.css"))
-	o_file << "</style></head><body>"
+	to_file(o_file, "<html><head><style>")
+	to_file(o_file, file2text(file("code/modules/vchat/css/ss13styles.css")))
+	to_file(o_file, "</style></head><body>")
 
 	// Write the messages to the log
 	for(var/list/result in results)
-		o_file << "[result["message"]]<br>"
+		to_file(o_file, "[result["message"]]<br>")
 
-	o_file << "</body></html>"
+	to_file(o_file, "</body></html>")
 
 	// Send the log to the client
-	src << ftp(o_file, "log_[time2text(world.timeofday, "YYYY_MM_DD_(hh_mm)")].html")
+	to_target(src, ftp(o_file, "log_[time2text(world.timeofday, "YYYY_MM_DD_(hh_mm)")].html"))
 
 	// clean up the file on our end
 	spawn(10 SECONDS)
