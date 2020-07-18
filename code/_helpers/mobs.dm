@@ -152,8 +152,10 @@ proc/age2agedescription(age)
 	if (progbar)
 		qdel(progbar)
 
-/atom/var/do_active_user
-/atom/var/do_active_target
+
+var/global/do_unique_user_inc = 0
+/mob/var/do_unique_user_handle = 0
+/atom/var/do_unique_target_user
 
 #define DO_USER_CAN_MOVE     0x1
 #define DO_USER_CAN_TURN     0x2
@@ -178,17 +180,21 @@ proc/age2agedescription(age)
 /proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
 	if (!delay)
 		return FALSE
+
 	if (!user)
 		return DO_MISSING_USER
-	if (user.do_active_user)
-		return DO_USER_UNIQUE_ACT
-	if (target?.do_active_target)
+
+	var/initial_handle
+	if (do_flags & DO_USER_UNIQUE_ACT)
+		do_unique_user_inc = (do_unique_user_inc & 0x7FFF) + 1
+		user.do_unique_user_handle = do_unique_user_inc
+		initial_handle = user.do_unique_user_handle
+
+	if (target?.do_unique_target_user)
 		return DO_TARGET_UNIQUE_ACT
 
-	if (do_flags & DO_USER_UNIQUE_ACT)
-		user.do_active_user = TRUE
 	if (target && (do_flags & DO_TARGET_UNIQUE_ACT))
-		target.do_active_target = user
+		target.do_unique_target_user = user
 
 	var/atom/user_loc = do_flags & DO_USER_CAN_MOVE ? null : user.loc
 	var/user_dir = do_flags & DO_USER_CAN_TURN ? null : user.dir
@@ -233,17 +239,19 @@ proc/age2agedescription(age)
 		if (user_hand && user_hand != user.get_active_hand())
 			. = DO_USER_SAME_HAND
 			break
+		if (initial_handle && initial_handle != user.do_unique_user_handle)
+			. = DO_USER_UNIQUE_ACT
+			break
 		if (target_type != target.type)
 			. = DO_TARGET_TYPE
 			break
 
 	if (bar)
 		qdel(bar)
-	if (!QDELETED(user) && (do_flags & DO_USER_UNIQUE_ACT))
-		user.do_active_user = FALSE
+	if (do_flags & DO_USER_UNIQUE_ACT)
+		user.do_unique_user_handle = 0
 	if (target_type && !QDELETED(target) && (do_flags & DO_TARGET_UNIQUE_ACT))
-		target.do_active_target = null
-
+		target.do_unique_target_user = null
 
 /proc/able_mobs_in_oview(var/origin)
 	var/list/mobs = list()

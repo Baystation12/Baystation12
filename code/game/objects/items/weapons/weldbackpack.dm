@@ -214,7 +214,7 @@
 			if (failed == DO_USER_UNIQUE_ACT)
 				to_chat(user, SPAN_WARNING("You're already busy with something."))
 			else if (failed == DO_TARGET_UNIQUE_ACT)
-				to_chat(user, SPAN_WARNING("\The [do_active_target] is already busy with \the [src]."))
+				to_chat(user, SPAN_WARNING("\The [do_unique_target_user] is already busy with \the [src]."))
 			return TRUE
 		var/removed
 		if (selection == "cell")
