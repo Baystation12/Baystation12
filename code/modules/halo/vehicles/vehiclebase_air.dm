@@ -91,7 +91,7 @@
 	if(isnull(move_to_obj))
 		return
 
-	forceMove(move_to_loc)
+	forceMove(get_turf(move_to_obj))
 
 /obj/vehicles/air/proc/proc_fly_to_waypoint()
 	var/selected_landing_point = input("Choose a landing point.","Landing Point Selection","Cancel") in create_waypoint_list() + list("Cancel")
