@@ -18,7 +18,7 @@
 	var/speed = 1
 	var/craft_parallel = 1
 	var/instant_ready = TRUE
-	var/max_storage = 60
+	var/max_storage = 80
 
 /obj/machinery/research/protolathe/New()
 	. = ..()
