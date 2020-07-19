@@ -1,42 +1,49 @@
 #define TRACKING_POSSIBLE 0
-#define TRACKING_NO_COVERAGE 1
-#define TRACKING_TERMINATE 2
+#define TRACKING_TERMINATE 1
+#define TRACKING_NO_SENSORS 2
+#define TRACKING_NO_CAMERA 3
+#define TRACKING_OUT_OF_RANGE 4
+
 
 /mob/living/silicon/ai/var/max_locations = 10
 /mob/living/silicon/ai/var/stored_locations[0]
 
+
 /proc/InvalidPlayerTurf(turf/T as turf)
 	return !(T && (T.z in GLOB.using_map.player_levels))
 
+
 /mob/living/silicon/ai/proc/get_camera_list()
-	if(src.stat == 2)
+	if(stat != CONSCIOUS)
 		return
 
-	var/list/T = list()
-	for (var/obj/machinery/camera/C in cameranet.cameras)
-		var/list/tempnetwork = C.network&src.network
-		if (tempnetwork.len)
-			T[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
-
 	track = new()
-	track.cameras = T
-	return T
+	for (var/obj/machinery/camera/C in cameranet.cameras)
+		if (!AreConnectedZLevels(src.z, C.z))
+			continue
+
+		var/list/tempnetwork = C.network & network
+		if (tempnetwork.len)
+			track.cameras[text("[][]", C.c_tag, (C.can_use() ? null : " (Deactivated)"))] = C
+
+	return track.cameras
 
 
 /mob/living/silicon/ai/proc/ai_camera_list(var/camera in get_camera_list())
 	set category = "Silicon Commands"
 	set name = "Show Camera List"
 
-	if(check_unable())
+	if(check_unable(0, TRUE))
 		return
 
 	if (!camera)
 		return 0
 
 	var/obj/machinery/camera/C = track.cameras[camera]
-	src.eyeobj.setLoc(C)
+	eyeobj.setLoc(C)
 
 	return
+
 
 /mob/living/silicon/ai/proc/ai_store_location(loc as text)
 	set category = "Silicon Commands"
@@ -45,27 +52,29 @@
 
 	loc = sanitize(loc)
 	if(!loc)
-		to_chat(src, "<span class='warning'>Must supply a location name</span>")
+		to_chat(src, SPAN_WARNING("Must supply a location name"))
 		return
 
 	if(stored_locations.len >= max_locations)
-		to_chat(src, "<span class='warning'>Cannot store additional locations. Remove one first</span>")
+		to_chat(src, SPAN_WARNING("Cannot store additional locations. Remove one first"))
 		return
 
 	if(loc in stored_locations)
-		to_chat(src, "<span class='warning'>There is already a stored location by this name</span>")
+		to_chat(src, SPAN_WARNING("There is already a stored location by this name"))
 		return
 
-	var/L = src.eyeobj.getLoc()
+	var/L = eyeobj.getLoc()
 	if (InvalidPlayerTurf(get_turf(L)))
-		to_chat(src, "<span class='warning'>Unable to store this location</span>")
+		to_chat(src, SPAN_WARNING("Unable to store this location"))
 		return
 
 	stored_locations[loc] = L
 	to_chat(src, "Location '[loc]' stored")
 
+
 /mob/living/silicon/ai/proc/sorted_stored_locations()
 	return sortList(stored_locations)
+
 
 /mob/living/silicon/ai/proc/ai_goto_location(loc in sorted_stored_locations())
 	set category = "Silicon Commands"
@@ -73,11 +82,12 @@
 	set desc = "Returns to the selected camera location"
 
 	if (!(loc in stored_locations))
-		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
+		to_chat(src, SPAN_WARNING("Location [loc] not found"))
 		return
 
 	var/L = stored_locations[loc]
-	src.eyeobj.setLoc(L)
+	eyeobj.setLoc(L)
+
 
 /mob/living/silicon/ai/proc/ai_remove_location(loc in sorted_stored_locations())
 	set category = "Silicon Commands"
@@ -85,11 +95,12 @@
 	set desc = "Deletes the selected camera location"
 
 	if (!(loc in stored_locations))
-		to_chat(src, "<span class='warning'>Location [loc] not found</span>")
+		to_chat(src, SPAN_WARNING("Location [loc] not found"))
 		return
 
 	stored_locations.Remove(loc)
 	to_chat(src, "Location [loc] removed")
+
 
 // Used to allow the AI is write in mob names/camera name from the CMD line.
 /datum/trackable
@@ -99,15 +110,16 @@
 	var/list/others = list()
 	var/list/cameras = list()
 
+
 /mob/living/silicon/ai/proc/trackable_mobs()
-	if(usr.stat == 2)
+	if(usr.stat != CONSCIOUS)
 		return list()
 
 	var/datum/trackable/TB = new()
 	for(var/mob/living/M in SSmobs.mob_list)
 		if(M == usr)
 			continue
-		if(M.tracking_status() != TRACKING_POSSIBLE)
+		if(M.tracking_status(src) != TRACKING_POSSIBLE)
 			continue
 
 		var/name = M.name
@@ -117,6 +129,7 @@
 		else
 			TB.names.Add(name)
 			TB.namecounts[name] = 1
+
 		if(istype(M, /mob/living/carbon/human))
 			TB.humans[name] = M
 		else
@@ -126,22 +139,24 @@
 	src.track = TB
 	return targets
 
-/mob/living/silicon/ai/proc/ai_camera_track(var/target_name in trackable_mobs())
+
+/mob/living/silicon/ai/proc/ai_camera_track(target_name in trackable_mobs())
 	set category = "Silicon Commands"
 	set name = "Follow With Camera"
 	set desc = "Select who you would like to track."
 
-	if(src.stat == 2)
-		to_chat(src, "You can't follow [target_name] with cameras because you are dead!")
+	if(stat != CONSCIOUS)
+		to_chat(src, SPAN_WARNING("You can't follow [target_name] with cameras because you're not conscious!"))
 		return
 	if(!target_name)
-		src.cameraFollow = null
+		cameraFollow = null
 
 	var/mob/target = (isnull(track.humans[target_name]) ? track.others[target_name] : track.humans[target_name])
-	src.track = null
+	track = null
 	ai_actual_track(target)
 
-/mob/living/silicon/ai/proc/ai_cancel_tracking(var/forced = 0)
+
+/mob/living/silicon/ai/proc/ai_cancel_tracking(forced = FALSE)
 	if(!cameraFollow)
 		return
 
@@ -149,50 +164,63 @@
 	cameraFollow.tracking_cancelled()
 	cameraFollow = null
 
-/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
-	if(!istype(target))	return
-	var/mob/living/silicon/ai/U = usr
 
-	if(target == U.cameraFollow)
+/mob/living/silicon/ai/proc/ai_actual_track(mob/living/target as mob)
+	if(!istype(target))
 		return
 
-	if(U.cameraFollow)
-		U.ai_cancel_tracking()
-	U.cameraFollow = target
-	to_chat(U, "Tracking target...")
+	if(target == cameraFollow)
+		return
+
+	if(cameraFollow)
+		ai_cancel_tracking()
+	cameraFollow = target
+	to_chat(src, "Tracking target...")
 	target.tracking_initiated()
 
 	spawn (0)
-		while (U.cameraFollow == target)
-			if (U.cameraFollow == null)
+		while (cameraFollow == target)
+			if (cameraFollow == null)
 				return
 
-			switch(target.tracking_status())
-				if(TRACKING_NO_COVERAGE)
-					to_chat(U, "Target is not near any active cameras.")
-					sleep(100)
-					continue
-				if(TRACKING_TERMINATE)
-					U.ai_cancel_tracking(1)
+			switch(target.tracking_status(src))
+				if (TRACKING_NO_SENSORS)
+					to_chat(src, "Target does not have suit sensors set to tracking.")
+					ai_cancel_tracking(TRUE)
 					return
 
-			if(U.eyeobj)
-				U.eyeobj.setLoc(get_turf(target), 0)
+				if (TRACKING_NO_CAMERA)
+					to_chat(src, "Target does not have their remote camera enabled.")
+					ai_cancel_tracking(TRUE)
+					return
+
+				if (TRACKING_OUT_OF_RANGE)
+					to_chat(src, "Target is not in network range.")
+					ai_cancel_tracking(TRUE)
+					return
+
+				if (TRACKING_TERMINATE)
+					to_chat(src, "Tracking failed for an unknown reason.")
+					ai_cancel_tracking(TRUE)
+					return
+
+			if(eyeobj)
+				eyeobj.setLoc(get_turf(target), 0)
 			else
 				view_core()
 				return
 			sleep(10)
 
-/obj/machinery/camera/attack_ai(var/mob/living/silicon/ai/user as mob)
-	if (!istype(user))
-		return
-	if (!src.can_use())
+
+/obj/machinery/camera/attack_ai(mob/living/silicon/ai/user as mob)
+	if (!istype(user) || !can_use())
 		return
 	user.eyeobj.setLoc(get_turf(src))
 
 
-/mob/living/silicon/ai/attack_ai(var/mob/user as mob)
+/mob/living/silicon/ai/attack_ai(mob/user as mob)
 	ai_camera_list()
+
 
 /proc/camera_sort(list/L)
 	var/obj/machinery/camera/a
@@ -211,64 +239,60 @@
 	return L
 
 
-mob/living/proc/near_camera()
-	if (!isturf(loc))
-		return 0
-	else if(!cameranet.is_visible(src))
-		return 0
-	return 1
+/mob/living/proc/near_camera()
+	if (!isturf(loc) || !cameranet.is_visible(src))
+		return FALSE
+	return TRUE
 
-/mob/living/proc/tracking_status()
-	// Easy checks first.
-	var/obj/item/weapon/card/id/id = GetIdCard()
-	if(id && id.prevent_tracking())
-		return TRACKING_TERMINATE
-	if(InvalidPlayerTurf(get_turf(src)))
-		return TRACKING_TERMINATE
-	if(invisibility >= INVISIBILITY_LEVEL_ONE) //cloaked
-		return TRACKING_TERMINATE
-	if(digitalcamo)
-		return TRACKING_TERMINATE
-	if(istype(loc,/obj/effect/dummy))
-		return TRACKING_TERMINATE
 
-	 // Now, are they viewable by a camera? (This is last because it's the most intensive check)
-	return near_camera() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
+/mob/living/proc/tracking_status(atom/tracker)
+	return TRACKING_TERMINATE
 
-/mob/living/silicon/robot/tracking_status()
-	. = ..()
-	if(. == TRACKING_NO_COVERAGE)
-		return camera && camera.can_use() ? TRACKING_POSSIBLE : TRACKING_NO_COVERAGE
 
-/mob/living/carbon/human/tracking_status()
-	if(is_cloaked())
-		. = TRACKING_TERMINATE
-	else
-		. = ..()
+/mob/living/silicon/robot/tracking_status(atom/tracker)
+	var/turf/tracker_turf = get_turf(tracker)
+	var/turf/target_turf = get_turf(src)
+	if (!tracker || !AreConnectedZLevels(tracker_turf.z, target_turf.z))
+		return TRACKING_OUT_OF_RANGE
 
-	if(. == TRACKING_TERMINATE)
-		return
+	if (!camera || !camera.can_use())
+		return TRACKING_NO_CAMERA
 
-	if(. == TRACKING_NO_COVERAGE)
-		var/turf/T = get_turf(src)
-		if(T && (T.z in GLOB.using_map.station_levels) && hassensorlevel(src, SUIT_SENSOR_TRACKING))
-			return TRACKING_POSSIBLE
+	return TRACKING_POSSIBLE
 
-mob/living/proc/tracking_initiated()
 
-mob/living/silicon/robot/tracking_initiated()
+/mob/living/carbon/human/tracking_status(atom/tracker)
+	var/turf/tracker_turf = get_turf(tracker)
+	var/turf/target_turf = get_turf(src)
+	if (!tracker || !AreConnectedZLevels(tracker_turf.z, target_turf.z))
+		return TRACKING_OUT_OF_RANGE
+
+	if (!hassensorlevel(src, SUIT_SENSOR_TRACKING))
+		return TRACKING_NO_SENSORS
+
+	return TRACKING_POSSIBLE
+
+
+/mob/living/proc/tracking_initiated()
+
+
+/mob/living/silicon/robot/tracking_initiated()
 	tracking_entities++
-	if(tracking_entities == 1 && has_zeroth_law())
+	if(tracking_entities == 1)
 		to_chat(src, "<span class='warning'>Internal camera is currently being accessed.</span>")
 
-mob/living/proc/tracking_cancelled()
 
-mob/living/silicon/robot/tracking_cancelled()
+/mob/living/proc/tracking_cancelled()
+
+
+/mob/living/silicon/robot/tracking_cancelled()
 	tracking_entities--
-	if(!tracking_entities && has_zeroth_law())
+	if(!tracking_entities)
 		to_chat(src, "<span class='notice'>Internal camera is no longer being accessed.</span>")
 
 
 #undef TRACKING_POSSIBLE
-#undef TRACKING_NO_COVERAGE
 #undef TRACKING_TERMINATE
+#undef TRACKING_NO_SENSORS
+#undef TRACKING_NO_CAMERA
+#undef TRACKING_OUT_OF_RANGE
