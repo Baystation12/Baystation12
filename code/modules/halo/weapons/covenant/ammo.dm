@@ -268,8 +268,8 @@
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
-	damage = 30
-	shield_damage = 5
+	damage = 20
+	shield_damage = 10
 	shards_to_explode = 3
 	shard_name = "Rifle Needle shrapnel"
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
@@ -279,7 +279,6 @@
 	armor_penetration = 20
 	max_track_steps = 2
 	shrapnel_damage = 10
-	shield_damage = 50
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
