@@ -1,3 +1,8 @@
+	/* -----------------------------------------------------------------------
+	HOLD UP THERE! If you're going to change any of the entries in this file
+	be sure to update code/modules/vchat/css/ss13styles.css as well!
+	----------------------------------------------------------------------- */
+
 client/script = {"<style>
 body					{font-family: Verdana, sans-serif;}
 
@@ -76,10 +81,10 @@ h1.alert, h2.alert		{color: #000000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
-.italic				{font-style: italic;}
+.italic					{font-style: italic;}
 .bold					{font-weight: bold;}
 .danger					{color: #ff0000; font-weight: bold;}
-.bigdanger					{color: #ff0000; font-weight: bold; font-size: 115%;}
+.bigdanger				{color: #ff0000; font-weight: bold; font-size: 115%;}
 .warning				{color: #ff0000; font-style: italic;}
 .bigwarning				{color: #ff0000; font-style: italic; font-size: 115%;}
 .boldannounce			{color: #ff0000; font-weight: bold;}
@@ -114,7 +119,7 @@ h1.alert, h2.alert		{color: #000000;}
 .russian				{color: #9c250b;}
 .arabic					{color: #128b11;}
 .spacer					{color: #9c660b;}
-.selenian       {color: #22228b;}
+.selenian				{color: #22228b;}
 
 .interface				{color: #330033;}
 

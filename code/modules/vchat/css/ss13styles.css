@@ -1,6 +1,6 @@
 /* VChat Styles */
 body.inverted {
-	background-color: #111111;
+	background-color: #171717;
 }
 
 #topmenu {
@@ -51,6 +51,11 @@ body.inverted {
 	}
 }
 
+	/* ---------------------------------------------------------------
+	HOLD UP THERE! If you're going to change any of the below 
+	entries in this file be sure to update code/stylesheet.dm as well!
+	--------------------------------------------------------------- */
+	
 /* SS13 Styles */
 #messagebox				{font-family: Verdana, sans-serif;}
 
@@ -73,16 +78,16 @@ body.inverted {
 .ooc					{font-weight: bold;}
 .ooc img.text_tag		{width: 32px; height: 10px;}
 
-.ooc .everyone			{color: #002eb8;}
-.inverted .ooc .everyone {color: #004ed8;} /* Dark mode */
-.looc				    {color: #3A9696;}
-.ooc .elevated			{color: #2e78d9;}
-.ooc .moderator			{color: #184880;}
-.ooc .developer			{color: #1b521f;}
-.ooc .admin				{color: #b82e00;}
-.ooc .event_manager		{color: #660033;}
-.ooc .aooc				{color: #960018;}
+.ooc .everyone				{color: #002eb8;}
+.inverted .ooc .everyone 	{color: #004ed8;} /* Dark mode */
+.ooc .looc					{color: #3A9696;}
+.ooc .elevated				{color: #2e78d9;}
+.ooc .moderator				{color: #184880;}
+.ooc .developer				{color: #1b521f;}
+.ooc .admin					{color: #b82e00;}
+.ooc .aooc					{color: #960018;}
 
+.staffwarn				{color: #ff0000; font-weight:bold; font-size: 150%;}
 /* Admin: Private Messages */
 .pm  .howto				{color: #ff0000; font-weight: bold; font-size: 200%;}
 .pm  .in				{color: #ff0000;}
@@ -93,38 +98,39 @@ body.inverted {
 .mod_channel			{color: #735638; font-weight: bold;}
 .mod_channel .admin		{color: #b82e00; font-weight: bold;}
 .admin_channel			{color: #9611D4; font-weight: bold;}
-.event_channel			{color: #cc3399; font-weight: bold;}
 
 /* Radio: Misc */
 .deadsay				{color: #530FAD;}
 .inverted .deadsay		{color: #732FCD;} /* Dark mode */
-.radio					{color: #008000;}
+.radio					{color: #408010;}
 .deptradio				{color: #ff00ff;}	/* when all other department colors fail */
 .newscaster				{color: #750000;}
 
 /* Radio Channels */
-.comradio				{color: #193A7A;}
+.comradio				{color: #204090;}
 .inverted .comradio		{color: #395A9A;} /* Dark mode */
 .syndradio				{color: #6D3F40;}
 .centradio				{color: #5C5C8A;}
 .airadio				{color: #FF00FF;}
-.entradio				{color: #339966;}
+.entradio				{color: #666666;}
 
-.secradio				{color: #A30000;}
+.secradio				{color: #930000;}
 .engradio				{color: #A66300;}
-.medradio				{color: #008160;}
+.medradio				{color: #009190;}
 .sciradio				{color: #993399;}
-.supradio				{color: #5F4519;}
-.srvradio				{color: #6eaa2c;}
-.expradio				{color: #555555;}
+.supradio				{color: #7F6539;}
+.srvradio				{color: #709B00;}
+.expradio				{color: #929820;}
+.seciradio				{color: #935050;}
+.mediradio				{color: #509190;}
 
 /* Miscellaneous */
 .name					{font-weight: bold;}
 .say					{}
-.emote					{}
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}
-.nif					{} /* VOREStation Add */
+
+.emote					{font-style: italic;}
 
 /* Game Messages */
 
@@ -133,44 +139,53 @@ h1.alert, h2.alert		{color: #000000;}
 .disarm					{color: #990000;}
 .passive				{color: #660000;}
 
-.critical				{color: #ff0000; font-weight: bold; font-size: 150%;}
+.italic					{font-style: italic;}
+.bold					{font-weight: bold;}
 .danger					{color: #ff0000; font-weight: bold;}
+.bigdanger				{color: #ff0000; font-weight: bold; font-size: 115%;}
 .warning				{color: #ff0000; font-style: italic;}
+.bigwarning				{color: #ff0000; font-style: italic; font-size: 115%;}
+.boldannounce			{color: #ff0000; font-weight:bold;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .inverted .info			{color: #6060c9;} /* Dark mode */
 .notice					{color: #000099;}
+.subtle					{color: #000099; font-size: 75%; font-style: italic;}
 .inverted .notice		{color: #6060c9;} /* Dark mode */
 .alium					{color: #00ff00;}
 .cult					{color: #800080; font-weight: bold; font-style: italic;}
+.cultannounce			{color: #800080; font-style: italic; font-size: 175%;}
+.mfauna					{color: #884422; font-weight: bold; font-size: 125%;}
+.antagdesc				{color: #ff0033; font-size: 125%}
 
 .reflex_shoot			{color: #000099; font-style: italic;}
 
 /* Languages */
 
 .alien					{color: #543354;}
-.tajaran				{color: #803B56;}
-.tajaran_signlang		{color: #941C1C;}
-.akhani					{color: #AC398C;}
-.skrell					{color: #00B0B3;}
-.skrellfar				{color: #70FCFF;}
-.soghun					{color: #228B22;}
-.solcom					{color: #22228B;}
+.skrell					{color: #00ced1;}
+.soghun					{color: #228b22;}
+.yeosa					{color: #218b89;}
+.nabber_lang			{color: #525252;}
 .changeling				{color: #800080;}
-.sergal					{color: #0077FF;}
-.birdsongc				{color: #CC9900;}
-.vulpkanin				{color: #B97A57;}
-.enochian				{color: #848A33; letter-spacing:-1pt; word-spacing:4pt; font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;}
-.daemon					{color: #5E339E; letter-spacing:-1pt; word-spacing:0pt; font-family: "Courier New", Courier, monospace;}
-.bug					{color: #9e9e39;}
-.vox					{color: #AA00AA;}
-.promethean				{color: #5A5A5A; font-family:"Comic Sans MS","Comic Sans",cursive;}
-.inverted .promethean			{color: #A5A5A5; font-family:"Comic Sans MS","Comic Sans",cursive;}
-.zaddat					{color: #941C1C;}
+.vox					{color: #aa00aa;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
-.terminus				{font-family: "Times New Roman", Times, serif, sans-serif}
+.adherent				{color: #526c7a;}
+
+.chinese				{color: #d4a52a;}
+.indian					{color: #422863;}
+.iberian				{color: #ff6600;}
+.russian				{color: #9c250b;}
+.arabic					{color: #128b11;}
+.spacer					{color: #9c660b;}
+.selenian				{color: #22228b;}
+
 .interface				{color: #330033;}
+
+.good                   {color: #4f7529; font-weight: bold;}
+.bad                    {color: #ee0000; font-weight: bold;}
+
 
 .black					{color: #000000;}
 .darkgray				{color: #808080;}
@@ -220,19 +235,4 @@ img.icon.bigicon		{max-height: 32px;}
 .msgsanim-enter {
 	opacity: 0;
 	transform: translateX(15px);
-}
-
-/* Dog mode */
-.woof {
-	background-color: rgba(255,255,255,0) !important;
-	background-image: url('dog.gif') !important;
-	background-size: cover !important;
-
-	transition: background-color 15s;
-}
-
-.woof div, .woof span {
-	background-color: rgba(0,0,0,0) !important;
-
-	transition: background-color 15s;
 }
