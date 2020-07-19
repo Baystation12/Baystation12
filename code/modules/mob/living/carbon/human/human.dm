@@ -119,7 +119,7 @@
 				f_loss = 150
 				return
 			else
-				Weaken(5)
+				Weaken(3)
 				throw_mob = TRUE
 				throw_range = 200 //Be happy you survived the bomb's gibbing
 			//return
@@ -134,7 +134,7 @@
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 30,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 120,120*species.explosion_effect_mod)
-			Weaken(3)
+			Weaken(2)
 			throw_mob = TRUE
 			throw_range = world.view + 2
 
@@ -144,7 +144,7 @@
 			if (!istype(l_ear, /obj/item/clothing/ears/earmuffs) && !istype(r_ear, /obj/item/clothing/ears/earmuffs))
 				ear_damage = min(ear_damage + 15,50*species.explosion_effect_mod)
 				ear_deaf = min(ear_damage + 60,120*species.explosion_effect_mod)
-			Weaken(2)
+			Weaken(1)
 			throw_mob = TRUE
 			throw_range = world.view - 2
 
