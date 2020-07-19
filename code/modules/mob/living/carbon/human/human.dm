@@ -112,10 +112,11 @@
 	var/eyeflash_duration = 20
 	switch (severity)
 		if (1.0)
-			b_loss = 400
-			f_loss = 100
+			b_loss = 70
+			f_loss = 70
 			if (!prob(getarmor(null, "bomb")))
-				gib()
+				b_loss = 100
+				f_loss = 100
 				return
 			else
 				Weaken(5)
