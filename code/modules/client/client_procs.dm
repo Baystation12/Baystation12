@@ -198,7 +198,8 @@
 		to_chat(src, "<span class='alert'>[custom_event_msg]</span>")
 		to_chat(src, "<br>")
 	
-	chatOutput.start()
+	if(get_preference_value(/datum/client_preference/vchat) == GLOB.PREF_YES)
+		chatOutput.start()
 
 	if(holder)
 		add_admin_verbs()

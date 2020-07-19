@@ -49,6 +49,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	var/last_topic_time = 0
 	var/too_many_topics = 0
 	var/topic_spam_limit = 10 //Just enough to get over the startup and such
+	var/user_prefers_legacy = FALSE
 
 /datum/chatOutput/New(client/C)
 	. = ..()
@@ -135,7 +136,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	for(var/message in message_queue)
 		to_chat(owner, message)
 
-	//message_queue = null
+	message_queue = null
 	//update_vis() //It does it's own winsets
 	ping_cycle()
 	send_playerinfo()
@@ -172,7 +173,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	update_vis()
 
 	spawn()
-		alert(owner,"VChat didn't load after some time. Switching to use oldchat as a fallback. Try using 'Reload VChat' verb in OOC verbs, or reconnecting to try again.")
+		if(!user_prefers_legacy) // We got here due to a failure
+			alert(owner,"VChat didn't load after some time. Switching to use oldchat as a fallback. Try using 'Reload VChat' verb in OOC verbs, or reconnecting to try again.")
 
 //Provide the JS with who we are
 /datum/chatOutput/proc/send_playerinfo()
