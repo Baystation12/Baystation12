@@ -8,17 +8,11 @@ SUBSYSTEM_DEF(chat)
 	var/list/msg_queue = list()
 
 /datum/controller/subsystem/chat/PreInit()
-	spawn(0)
+	spawn(0) // init_vchat() does some fileops so we're spawning it off so it can break off the stack during load.
 		init_vchat()
-	. = ..()
-	
-
-/datum/controller/subsystem/chat/Initialize(timeofday)
-	//init_vchat()
-	..()
 
 /datum/controller/subsystem/chat/fire()
-	var/list/msg_queue = src.msg_queue // Local variable for sanic speed.
+	var/list/msg_queue = src.msg_queue
 	for(var/i in msg_queue)
 		var/client/C = i
 		var/list/messages = msg_queue[C]
@@ -54,37 +48,26 @@ SUBSYSTEM_DEF(chat)
 
 	var/list/messageStruct = list("time" = time, "message" = message);
 
-	if(islist(target))
-		for(var/I in target)
-			var/client/C = CLIENT_FROM_VAR(I) //Grab us a client if possible
 
-			if(!C)
-				continue // No client? No care.
-			
-			legacy_chat(C, original_message)
-
-			if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
-				//Send it to the old style output window.
-				to_target(C, original_message)
-				continue
-
-			// Client still loading, put their messages in a queue - Actually don't, logged already in database.
-			 if(!C.chatOutput.loaded && C.chatOutput.message_queue && islist(C.chatOutput.message_queue))
-			 	C.chatOutput.message_queue[++C.chatOutput.message_queue.len] = messageStruct
-				continue
-			
-			LAZYINITLIST(msg_queue[C])
-			msg_queue[C] += list(messageStruct)
-	else
-		var/client/C = CLIENT_FROM_VAR(target) //Grab us a client if possible
+	var/list/alltargets = list()
+	alltargets += target //Might as well use a list so we don't repeat code for just one target
+	for(var/I in alltargets)
+		var/client/C = CLIENT_FROM_VAR(I) //Grab us a client if possible
 
 		if(!C)
-			return
+			continue // No client? No care.
 		
 		legacy_chat(C, original_message)
 
 		if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
-			return
+			//Send it to the old style output window.
+			to_target(C, original_message)
+			continue
 
+		// Client still loading, put their messages in a queue - Actually don't, logged already in database.
+			if(!C.chatOutput.loaded && C.chatOutput.message_queue && islist(C.chatOutput.message_queue))
+				C.chatOutput.message_queue[++C.chatOutput.message_queue.len] = messageStruct
+				continue
+		
 		LAZYINITLIST(msg_queue[C])
 		msg_queue[C] += list(messageStruct)

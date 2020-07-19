@@ -355,7 +355,6 @@ proc/TextPreview(var/string,var/len=40)
 	if(!GLOB.text_tag_cache[tagname])
 		GLOB.text_tag_cache[tagname] = bicon(icon('./icons/chattags.dmi', tagname), TRUE, "text_tag")
 	return GLOB.text_tag_cache[tagname]
-	//return "<IMG src='\ref['./icons/chattags.dmi']' class='text_tag' iconstate='[tagname]'" + (tagdesc ? " alt='[tagdesc]'" : "") + ">"
 
 /proc/contains_az09(var/input)
 	for(var/i=1, i<=length(input), i++)

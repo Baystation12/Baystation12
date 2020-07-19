@@ -24,8 +24,7 @@ GLOBAL_LIST_INIT(vchatFiles, list(
 				vchat_add_message(M.ckey, message)
 		else if(target == world)
 			for(var/client/C in GLOB.clients)
-				if(!QDESTROYING(C)) // Might be necessary?
-					vchat_add_message(C.ckey, message)
+				vchat_add_message(C.ckey, message)
 
 	// Now lets either queue it for sending, or send it right now
 	if(Master.current_runlevel == RUNLEVEL_INIT || !SSchat?.initialized)
@@ -40,7 +39,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 /datum/chatOutput
 	var/client/owner = null // client ref
 	var/loaded = FALSE // Has the client been loaded?
-	var/list/message_queue = list() // If they haven't loaded yet, this is where messages go until they do.
+	var/list/message_queue // If they haven't loaded yet, this is where messages go until they do.
 	var/broken = FALSE
 	var/resources_sent = FALSE // Indicates if the client has received all resources.
 
@@ -55,6 +54,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	. = ..()
 
 	owner = C
+	message_queue = list()
 
 /datum/chatOutput/Destroy()
 	owner = null
@@ -65,8 +65,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 		winset(owner, null, "outputwindow.htmloutput.is-visible=false;outputwindow.oldoutput.is-visible=false;outputwindow.chatloadlabel.is-visible=true")
 	else if(broken)
 		winset(owner, null, "outputwindow.htmloutput.is-visible=false;outputwindow.oldoutput.is-visible=true;outputwindow.chatloadlabel.is-visible=false")
-	else if(loaded)
-		return //It can do it's own winsets from inside the JS if it's working.
+	//system has to be working at this point.
+	return //It can do it's own winsets from inside the JS if it's working.
 
 //Shove all the assets at them
 /datum/chatOutput/proc/send_resources()
@@ -86,10 +86,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 		become_broken()
 		return FALSE
 
-	//if(!owner.is_preference_enabled(/datum/client_preference/vchat_enable))
-	//	become_broken()
-	//	return FALSE
-
 	//Could be loaded from a previous round, are you still there?
 	if(winget(owner,"outputwindow.htmloutput","is-visible") == "true") //Winget returns strings
 		send_event(event = list("evttype" = "availability"))
@@ -107,14 +103,13 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 
 	return TRUE
 
-
 //Attempts to actually load the HTML page into the client's UI
 /datum/chatOutput/proc/load()
 	if(!owner)
 		qdel(src)
 		return
 
-	show_browser(owner, file2text("code/modules/vchat/html/vchat.html"), "window=htmloutput")
+	show_browser(owner, file("code/modules/vchat/html/vchat.html"), "window=htmloutput")
 
 	//Check back later
 	spawn(15 SECONDS)
@@ -172,8 +167,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 
 	update_vis()
 
-	spawn()
-		if(!user_prefers_legacy) // We got here due to a failure
+	if(!user_prefers_legacy) // We got here due to a failure
+		spawn()
 			alert(owner,"VChat didn't load after some time. Switching to use oldchat as a fallback. Try using 'Reload VChat' verb in OOC verbs, or reconnecting to try again.")
 
 //Provide the JS with who we are
@@ -186,12 +181,12 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	send_event(playerinfo)
 
 //Ugh byond doesn't handle UTF-8 well so we have to do this.
-/proc/jsEncode(var/list/message) {
+/proc/jsEncode(var/list/message)
 	if(!islist(message))
 		CRASH("Passed a non-list to encode.")
 
 	return url_encode(url_encode(json_encode(message)))
-}
+
 
 //Send a side-channel event to the chat window
 /datum/chatOutput/proc/send_event(var/event, var/client/C = owner)

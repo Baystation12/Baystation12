@@ -220,7 +220,7 @@ var/list/_client_preferences_by_type
 	options = list(GLOB.PREF_SHOW, GLOB.PREF_HIDE)
 
 /datum/client_preference/vchat
-	description = "Use VChat"
+	description = "Use Fancy Chat"
 	key = "USE_VCHAT"
 
 /datum/client_preference/vchat/changed(var/mob/preference_mob, var/new_value)

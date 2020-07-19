@@ -16,10 +16,7 @@ GLOBAL_DATUM(vchatdb, /database)
 
 //Check to see if it's init
 /proc/check_vchat()
-	if(istype(GLOB.vchatdb))
-		return TRUE
-	else
-		return FALSE
+	. = istype(GLOB.vchatdb)
 
 //For INSERT/CREATE/DELETE, etc that return a RowsAffected.
 /proc/vchat_exec_update(var/query)
