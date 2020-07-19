@@ -145,7 +145,7 @@ function start_vue() {
 					admin: false
 				},
 				{
-					matches: ".filter_radio, .alert, .syndradio, .centradio, .airadio, .entradio, .comradio, .secradio, .engradio, .medradio, .sciradio, .supradio, .srvradio, .expradio, .radio, .deptradio, .newscaster",
+					matches: ".filter_radio, .alert, .syndradio, .centradio, .airadio, .entradio, .comradio, .secradio, .seciradio, .engradio, .medradio, .mediradio, .sciradio, .supradio, .srvradio, .expradio, .radio, .deptradio, .newscaster",
 					becomes: "vc_radio",
 					pretty: "Radio Comms",
 					tooltip: "All departments of radio messages",
@@ -161,7 +161,7 @@ function start_vue() {
 					admin: false
 				},
 				{
-					matches: ".filter_warning, .warning:not(.pm), .critical, .userdanger, .italics",
+					matches: ".filter_warning, .warning:not(.pm), .bigwarning:not(.pm), .danger, .bigdanger .italics",
 					becomes: "vc_warnings",
 					pretty: "Warnings",
 					tooltip: "Urgent messages from the game and items",
@@ -184,16 +184,6 @@ function start_vue() {
 					required: false,
 					admin: false
 				},
-				//VOREStation Add Start
-				{
-					matches: ".nif",
-					becomes: "vc_nif",
-					pretty: "NIF Messages",
-					tooltip: "Messages from the NIF itself and people inside",
-					required: false,
-					admin: false
-				},
-				//VOREStation Add End
 				{
 					matches: ".filter_pm, .pm",
 					becomes: "vc_adminpm",
@@ -219,15 +209,7 @@ function start_vue() {
 					admin: true
 				},
 				{
-					matches: ".filter_ESAY, .event_channel",
-					becomes: "vc_eventchat",
-					pretty: "Event Chat",
-					tooltip: "ESAY messages",
-					required: false,
-					admin: true
-				},
-				{
-					matches: ".filter_combat, .danger",
+					matches: ".filter_combat, .attack, .moderate, .disarm, .passive",
 					becomes: "vc_combat",
 					pretty: "Combat Logs",
 					tooltip: "Urist McTraitor has stabbed you with a knife!",
