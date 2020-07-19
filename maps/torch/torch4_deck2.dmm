@@ -1104,8 +1104,6 @@
 /obj/item/organ/internal/posibrain,
 /obj/item/organ/internal/posibrain,
 /obj/item/weapon/aicard,
-/obj/item/clothing/gloves/insulated,
-/obj/item/clothing/gloves/insulated,
 /obj/item/device/multitool{
 	pixel_x = 3
 	},
@@ -1374,7 +1372,6 @@
 	amount = 20
 	},
 /obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/plastic/ten,
 /obj/structure/closet/crate/plastic,
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
@@ -1382,6 +1379,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 32
 	},
+/obj/item/stack/material/plastic/fifty,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "cs" = (
