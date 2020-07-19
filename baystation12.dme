@@ -1773,6 +1773,7 @@
 #include "code\modules\halo\misc\chasm.dm"
 #include "code\modules\halo\misc\comms_bypass_key.dm"
 #include "code\modules\halo\misc\conversion_contracts.dm"
+#include "code\modules\halo\misc\equipment_loadouts.dm"
 #include "code\modules\halo\misc\explosion_cratering.dm"
 #include "code\modules\halo\misc\faction_banner.dm"
 #include "code\modules\halo\misc\faction_whitelist.dm"
