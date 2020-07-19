@@ -80,9 +80,10 @@ SUBSYSTEM_DEF(chat)
 
 		if(!C)
 			return
+		
+		legacy_chat(C, original_message)
 
 		if(!C?.chatOutput || C.chatOutput.broken) //A player who hasn't updated his skin file.
-			legacy_chat(C, original_message)
 			return
 
 		LAZYINITLIST(msg_queue[C])
