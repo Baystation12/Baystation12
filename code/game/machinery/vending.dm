@@ -455,7 +455,7 @@
 	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		to_chat(usr, "<span class='warning'>Access denied.</span>")//Unless emagged of course
 		flick(src.icon_deny,src)
-		return
+		return 0
 	src.vend_ready = 0 //One thing at a time!!
 	src.status_message = "Vending..."
 	src.status_error = 0
@@ -464,7 +464,7 @@
 	if (R.category & CAT_COIN)
 		if(!coin)
 			to_chat(user, "<span class='notice'>You need to insert a coin to get this item.</span>")
-			return
+			return 0
 		if(coin.string_attached)
 			if(prob(50))
 				to_chat(user, "<span class='notice'>You successfully pull the coin out before \the [src] could swallow it.</span>")
@@ -499,6 +499,7 @@
 		src.vend_ready = 1
 		currently_vending = null
 		GLOB.nanomanager.update_uis(src)
+	return 1
 
 /**
  * Add item to the machine

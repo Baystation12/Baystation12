@@ -7,7 +7,7 @@
 	suit = /obj/item/clothing/suit/armor/kigyar
 	back = null
 	l_hand = /obj/item/weapon/melee/blamite/dagger
-	belt = /obj/item/weapon/gun/energy/plasmapistol
+	belt = null
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	l_pocket = null
@@ -59,11 +59,11 @@
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/kigyar
-	suit_store = /obj/item/weapon/gun/energy/plasmapistol
-	back = /obj/item/weapon/gun/projectile/type51carbine
+	suit_store = null
+	back = null
 	l_pocket = /obj/item/weapon/paper/heresy_waiver
-	r_pocket = /obj/item/ammo_magazine/type51mag
-	belt = /obj/item/ammo_magazine/type51mag
+	r_pocket = null
+	belt = null
 	gloves = /obj/item/clothing/gloves/shield_gauntlet/kigyar
 	head = /obj/item/clothing/head/helmet/kigyar
 	r_hand = /obj/item/weapon/melee/energy/sword/pirate

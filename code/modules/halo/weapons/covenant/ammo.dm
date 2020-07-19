@@ -61,7 +61,7 @@
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
 
 /obj/item/projectile/bullet/covenant/plasmarifle/brute
-	damage = 30
+	damage = 25
 	icon_state = "heavy_plas_cannon"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
