@@ -1,6 +1,6 @@
 
 #define SCANNER_TICK_DELAY 10 SECONDS
-#define BASE_SCANNER_DESTROYABLE_AMOUNT 3
+#define BASE_SCANNER_DESTROYABLE_AMOUNT 4
 #define SCAN_JAM_LOC_NAME "Orbital Defense Platform"
 
 // OC + variant specific objective, GM linked//
