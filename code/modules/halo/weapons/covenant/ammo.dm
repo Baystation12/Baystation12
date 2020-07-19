@@ -224,8 +224,8 @@
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
-	damage = 20
-	shield_damage = 5
+	damage = 25 //A lot less rounds in a mag than the counterpart BR.
+	shield_damage = 10
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
