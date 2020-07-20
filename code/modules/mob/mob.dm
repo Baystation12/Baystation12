@@ -101,9 +101,6 @@
 			exclude_mobs -= M
 			continue
 		
-		if (M.invisibility < src.invisibility) //M is invisible to the source of the visible message
-			continue
-		
 		var/mob_message = message
 
 		if(isghost(M))
@@ -115,7 +112,7 @@
 			M.show_message(self_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
-		if(!M.is_blind() || narrate)
+		if((!M.is_blind() && M.see_invisible >= src.invisibility) || narrate)
 			M.show_message(mob_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
 			continue
 
