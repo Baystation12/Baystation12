@@ -1,5 +1,0 @@
-author: "SimpleMaroon"
-delete-after: True
-changes: 
-  - bugfix: "SAARE is now properly selectable as a faction under character setup."
-  - bugfix: "Corporate berets are no longer colorable."

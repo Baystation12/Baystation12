@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "Brig cell timer stop buttons are now clickable."

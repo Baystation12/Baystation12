@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - rscdel: "AI can no longer access objects in a non-connected z-level, including shuttles at away sites. Distant holopads are still accessible."

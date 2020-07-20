@@ -1,4 +1,0 @@
-author: "thasc"
-delete-after: True
-changes: 
-  - bugfix: "Slimes should no longer electrocute themselves on a grille unless the window around it is broken."

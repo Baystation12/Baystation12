@@ -1,6 +1,0 @@
-author: "PsiOmegaDelta"
-delete-after: True
-changes: 
-  - tweak: "Replaces some premium items in vending machines, due to how prevalent coins have become."
-  - tweak: "Besides hacking, emagging now also allows access to contraband items in vending machines.
-spelling: Fixes grammar issues with uppercase vending machine names."
