@@ -104,7 +104,7 @@
 #define from_target(target, receiver)         target >> (receiver)
 
 /// Common use
-#define legacy_chat(target, message)		  to_target(target, message)
+#define legacy_chat(target, message)          to_target(target, message)
 #define to_world(message)                     to_chat(world, message)
 #define to_world_log(message)                 to_target(world.log, message)
 #define sound_to(target, sound)               to_target(target, sound)

@@ -48,7 +48,7 @@
 /obj/item/weapon/extinguisher/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 0)
-		to_chat(user, text("[bicon(src)] [] contains [] units of water left!", src.name, src.reagents.total_volume))
+		to_chat(user, text("[bicon(src)] [] contains [] units of water left!", src, src.reagents.total_volume))
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
 	safety = !safety
