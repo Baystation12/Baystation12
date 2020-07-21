@@ -254,15 +254,15 @@
 	item_state = "salvage_void"
 	item_state_slots = list(slot_l_hand_str = "syndicate-orange", slot_r_hand_str = "syndicate-orange")
 	w_class = ITEM_SIZE_HUGE
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 45, bullet = 35, laser = 45, energy = 35, bomb = 30, bio = 25, rad = 25)
+	allowed = list(/obj/item/weapon/tank)
+	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20) //Same armour as marines, but innate spacesuit slowdown and limited choice of suitstore
 
 /obj/item/clothing/head/helmet/space/void/unsc
 	name = "\improper Salvage Helmet"
 	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	armor = list(melee = 40, bullet = 20, laser = 40,energy = 10, bomb = 15, bio = 15, rad = 15)
+	armor = list(melee = 45, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 10, rad = 10)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	icon_state = "rig0-salvage"
 	item_state = "rig0-salvage"
@@ -342,7 +342,6 @@
 	icon_state = "eva"
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
 	armor = list(melee = 45, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 10, rad = 10)
-	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"
