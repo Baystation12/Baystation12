@@ -60,9 +60,8 @@
 	)
 	allowed_ranks = list(
 		/datum/mil_rank/civ/contractor = /decl/hierarchy/outfit/job/torch/passenger/research/nt_pilot,
-		/datum/mil_rank/ec/e7,
-		/datum/mil_rank/fleet/e6,
-		/datum/mil_rank/fleet/e7
+		/datum/mil_rank/ec/o1,
+		/datum/mil_rank/fleet/o1
 	)
 
 	access = list(
