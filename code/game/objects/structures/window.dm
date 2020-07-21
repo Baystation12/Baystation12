@@ -577,4 +577,4 @@
 	if(severity > 1) //Anything other than a direct epicenter hit just damages the window.
 		take_damage(50)
 	else
-		take_damage(200)
+		take_damage(150)
