@@ -14,8 +14,6 @@
 		/////////
 	var/datum/preferences/prefs = null
 	var/adminobs		= null
-	var/datum/chatOutput/chatOutput
-	var/chatOutputLoadedAt
 
 	var/adminhelped = 0
 

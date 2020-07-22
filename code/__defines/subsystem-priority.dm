@@ -15,7 +15,6 @@
 #define SS_PRIORITY_MACHINERY      95  // Machinery + powernet ticks.
 #define SS_PRIORITY_AIR            80  // ZAS processing.
 #define SS_PRIORITY_CHEMISTRY      60  // Multi-tick chemical reactions.
-#define SS_PRIORITY_CHAT           40  // Chat
 #define SS_PRIORITY_ALARM          20  // Alarm processing.
 #define SS_PRIORITY_EVENT          20  // Event processing and queue handling.
 #define SS_PRIORITY_SHUTTLE        20  // Shuttle movement.

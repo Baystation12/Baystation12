@@ -96,7 +96,7 @@
 		ntnet_global.add_log("Manual override: Network blacklist cleared.")
 		return 1
 	else if(href_list["eject_drive"] && uninstall_component(/obj/item/weapon/stock_parts/computer/hard_drive/portable))
-		visible_message("[bicon(src)] [src] beeps and ejects its portable disk.")
+		visible_message("\icon[src] [src] beeps and ejects its portable disk.")
 
 /obj/machinery/ntnet_relay/New()
 	uid = gl_uid
