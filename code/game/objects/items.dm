@@ -808,9 +808,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/get_examine_line()
 	if(blood_color)
-		. = SPAN_WARNING("\icon[src] [gender==PLURAL?"some":"a"] <font color='[blood_color]'>stained</font> [src]")
+		. = SPAN_WARNING("[bicon(src)] [gender==PLURAL?"some":"a"] <font color='[blood_color]'>stained</font> [src]")
 	else
-		. = "\icon[src] \a [src]"
+		. = "[bicon(src)] \a [src]"
 	var/ID = GetIdCard()
 	if(ID)
 		. += "  <a href='?src=\ref[ID];look_at_id=1'>\[Look at ID\]</a>"

@@ -109,7 +109,7 @@ GLOBAL_DATUM_INIT(temp_reagents_holder, /obj, new)
 
 			if(my_atom)
 				if(replace_message)
-					my_atom.visible_message("<span class='notice'>\icon[my_atom] [replace_message]</span>")
+					my_atom.visible_message("<span class='notice'>[bicon(my_atom)] [replace_message]</span>")
 				if(replace_sound)
 					playsound(my_atom, replace_sound, 80, 1)
 

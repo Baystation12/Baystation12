@@ -274,3 +274,5 @@
 #ifndef HTTP_POST_DLL_LOCATION
 #define HTTP_POST_DLL_LOCATION (world.system_type == MS_WINDOWS ? WINDOWS_HTTP_POST_DLL_LOCATION : UNIX_HTTP_POST_DLL_LOCATION)
 #endif
+
+#define CLIENT_FROM_VAR(I) (ismob(I) ? I:client : (isclient(I) ? I : (istype(I, /datum/mind) ? I:current?:client : null)))
