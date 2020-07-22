@@ -32,6 +32,11 @@
 	path = /obj/item/clothing/head/flatcap
 	flags = GEAR_HAS_COLOR_SELECTION
 
+/datum/gear/head/mariner
+	display_name = "mariner's cap, colour select"
+	path = /obj/item/clothing/head/mariner
+	flags = GEAR_HAS_COLOR_SELECTION
+
 /datum/gear/head/cap
 	display_name = "cap selection"
 	path = /obj/item/clothing/head
