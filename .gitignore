@@ -1,7 +1,5 @@
 # ignore misc BYOND files
 Thumbs.db
-vchat.db
-vchat.db*
 *.log
 *.int
 *.rsc

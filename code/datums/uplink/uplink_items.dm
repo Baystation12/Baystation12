@@ -146,7 +146,7 @@ datum/uplink_item/dd_SortValue()
 
 /datum/uplink_item/item/log_icon()
 	var/obj/I = path
-	return "[bicon(I)]"
+	return "\icon[I]"
 
 /****************
 * Support procs *

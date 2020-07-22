@@ -42,7 +42,6 @@
 #define SS_INIT_AIR             -1
 #define SS_INIT_MISC_LATE       -2
 #define SS_INIT_MISC_CODEX      -3
-#define SS_INIT_ASSETS          -3
 #define SS_INIT_ALARM           -4
 #define SS_INIT_SHUTTLE         -5
 #define SS_INIT_GOALS           -5
@@ -51,7 +50,6 @@
 #define SS_INIT_XENOARCH        -10
 #define SS_INIT_BAY_LEGACY      -12
 #define SS_INIT_TICKER          -20
-#define SS_INIT_CHAT            -90 //Should be last to ensure chat remains smooth during init 
 #define SS_INIT_UNIT_TESTS      -100
 
 // SS runlevels
