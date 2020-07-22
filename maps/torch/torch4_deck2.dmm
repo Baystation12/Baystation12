@@ -255,7 +255,7 @@
 /obj/machinery/conveyor_switch/oneway{
 	convdir = -1;
 	id = "garbage";
-	name = "disposal coveyor"
+	name = "disposal conveyor"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/railing/mapped{
@@ -13475,7 +13475,7 @@
 /obj/machinery/conveyor_switch/oneway{
 	convdir = -1;
 	id = "garbage2";
-	name = "disposal coveyor"
+	name = "disposal conveyor"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/railing/mapped{
