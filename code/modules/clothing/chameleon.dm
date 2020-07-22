@@ -49,6 +49,19 @@
 			.[name] = typepath
 	return sortAssoc(.)
 
+/obj/item/chameleon_outfit/proc/initialize_outfits()
+	var/static/list/standard_outfit_options
+	if(!standard_outfit_options)
+		standard_outfit_options = list()
+		for(var/path in subtypesof(/datum/outfit/job))
+			var/datum/outfit/O = path
+			if(initial(O.can_be_admin_equipped))
+				standard_outfit_options[initial(O.name)] = path
+		sortTim(standard_outfit_options, /proc/cmp_text_asc)
+	outfit_options = standard_outfit_options
+
+
+
 //starts off as a jumpsuit
 /obj/item/clothing/under/chameleon
 	name = "jumpsuit"
