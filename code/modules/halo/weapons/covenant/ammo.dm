@@ -351,7 +351,7 @@
 	name = "heavy plasma round"
 	damage = 35 //Same as plasma rifle, but it has AP!
 	armor_penetration = 30
-	shield_damage = 150
+	shield_damage = 50
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "pulse0"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
