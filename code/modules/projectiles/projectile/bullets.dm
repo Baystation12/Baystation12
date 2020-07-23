@@ -158,6 +158,7 @@
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 25
+	shield_damage = 5
 	pellets = 8
 	range_step = 1
 	spread_step = 15
