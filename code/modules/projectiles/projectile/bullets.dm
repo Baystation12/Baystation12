@@ -137,11 +137,10 @@
 	sharp = 0
 
 /* shotgun projectiles */
-
 /obj/item/projectile/bullet/shotgun
 	name = "slug"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
-	damage = 60
+	damage = 55
 	armor_penetration = 10
 
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
@@ -158,10 +157,11 @@
 	name = "shrapnel"
 	fire_sound = 'sound/weapons/gunshot/shotgun.ogg'
 	damage = 25
+	armor_penetration = 10
 	shield_damage = 5
 	pellets = 8
 	range_step = 1
-	spread_step = 15
+	spread_step = 5
 
 /* "Rifle" rounds */
 
