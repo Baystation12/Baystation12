@@ -394,6 +394,9 @@ var/list/ai_verbs_default = list(
 /mob/living/silicon/ai/restrained()
 	return 0
 
+/mob/living/silicon/ai/can_be_floored()
+	return FALSE
+
 /mob/living/silicon/ai/emp_act(severity)
 	if (prob(30))
 		view_core()
