@@ -172,6 +172,10 @@
 			for(var/mob/O in viewers(4, user))
 				O.show_message("<span class='notice'>[user] takes a blood sample from [target].</span>", 1)
 
+			if(ishuman(target))
+				var/mob/living/carbon/human/H = target
+				H.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, H.get_organ(user.zone_sel.selecting))
+
 	else //if not mob
 		if(!target.reagents.total_volume)
 			to_chat(user, "<span class='notice'>[target] is empty.</span>")
@@ -261,6 +265,10 @@
 		user.visible_message("<span class='warning'>\the [user] injects \the [target] with [visible_name]!</span>", "<span class='notice'>You inject \the [target] with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")
 	else
 		to_chat(user, "<span class='notice'>You inject yourself with [trans] units of the solution. \The [src] now contains [src.reagents.total_volume] units.</span>")
+
+	if(ishuman(target))
+		var/mob/living/carbon/human/T = target
+		T.custom_pain(SPAN_WARNING("The needle stings a bit."), 2, TRUE, T.get_organ(user.zone_sel.selecting))
 
 	if(reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
 		mode = SYRINGE_DRAW
