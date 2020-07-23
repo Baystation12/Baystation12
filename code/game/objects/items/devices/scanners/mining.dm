@@ -29,7 +29,7 @@
 		scan_data = scan_results[1]
 	else
 		scan_data += "<hr>[scan_results[1]]"
-	to_chat(user, "\icon[src] <span class='notice'>\The [src] displays a readout.</span>")
+	to_chat(user, "[icon2html(src, user)] <span class='notice'>\The [src] displays a readout.</span>")
 	to_chat(user, scan_results[1])
 
 	if(scan_results[2])

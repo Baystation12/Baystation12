@@ -49,7 +49,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 		update_icon()
 	else
 		if(busy)
-			visible_message("<span class='notice'>\icon [src] flashes: insufficient materials: [getLackingMaterials(D)].</span>")
+			visible_message("<span class='notice'>[icon2html(src, viewers(src))] [src] flashes: insufficient materials: [getLackingMaterials(D)].</span>")
 			busy = 0
 			update_icon()
 

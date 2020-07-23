@@ -93,10 +93,10 @@
 /obj/machinery/body_scanconsole/OnTopic(mob/user, href_list)
 	if(href_list["scan"])
 		if (!connected.occupant)
-			to_chat(user, "\icon[src]<span class='warning'>The body scanner is empty.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>The body scanner is empty.</span>")
 			return TOPIC_REFRESH
 		if (!istype(connected.occupant))
-			to_chat(user, "\icon[src]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>The body scanner cannot scan that lifeform.</span>")
 			return TOPIC_REFRESH
 		data["printEnabled"] = TRUE
 		data["eraseEnabled"] = TRUE
@@ -113,7 +113,7 @@
 
 	if (href_list["print"])
 		if (!data["scan"])
-			to_chat(user, "\icon[src]<span class='warning'>Error: No scan stored.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>Error: No scan stored.</span>")
 			return TOPIC_REFRESH
 		var/list/scan = data["scan"]
 		new /obj/item/weapon/paper/bodyscan(loc, "Printout error.", "Body scan report - [stored_scan_subject]", scan.Copy())
@@ -121,7 +121,7 @@
 
 	if(href_list["push"])		
 		if(!connected_displays.len && !FindDisplays())
-			to_chat(user, "\icon[src]<span class='warning'>Error: No configured displays detected.</span>")
+			to_chat(user, "[icon2html(src, user)]<span class='warning'>Error: No configured displays detected.</span>")
 			return TOPIC_REFRESH
 		for(var/obj/machinery/body_scan_display/D in connected_displays)
 			D.add_new_scan(data["scan"])
