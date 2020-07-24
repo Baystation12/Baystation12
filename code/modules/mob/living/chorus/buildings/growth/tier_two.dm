@@ -124,3 +124,54 @@
 	gives_sight = TRUE
 	density = TRUE
 	turf_type_to_add = /turf/simulated/floor/scales
+
+/datum/chorus_building/set_to_turf/growth/bone_shooter
+	desc = "Automatically shoots bone fragments at enemies"
+	building_type_to_build = /obj/structure/chorus/processor/sentry/bone_shooter
+	build_time = 60
+	build_level = 2
+	range = 0
+	resource_cost = list(
+		/datum/chorus_resource/growth_meat = 5,
+		/datum/chorus_resource/growth_bones = 3
+	)
+
+/obj/structure/chorus/processor/sentry/bone_shooter
+	name = "bone spitter"
+	desc = "A group of meat fashioned together into a form not unsimilar to a turret"
+	icon_state = "growth_bone_shooter"
+	health = 20
+	range = 7
+	gives_sight = FALSE
+	activation_cost_resource = /datum/chorus_resource/growth_bones
+	activation_cost_amount = 1
+	click_cooldown = 8 SECONDS
+
+/obj/structure/chorus/processor/sentry/bone_shooter/trigger_effect(var/list/targets)
+	var/mob/living/T = get_atom_closest_to_atom(src, targets)
+	var/obj/item/projectile/bone_shard/bs = new(get_turf(src), owner)
+	set_dir(get_dir(src, T))
+	visible_message("<b>\The [src]</b> fires a small dart at \the [T]")
+	bs.firer = src
+	bs.launch(T, BP_CHEST)
+
+/obj/item/projectile/bone_shard
+	name = "bone shard"
+	damage = 10
+	embed = TRUE
+	weaken = 3
+	icon_state = "sliver"
+	damage_type = BRUTE
+	damage_flags = 0
+	var/mob/living/chorus/ignore
+
+/obj/item/projectile/bone_shard/Initialize(var/maploading, var/ignoring)
+	..()
+	ignore = ignoring
+
+/obj/item/projectile/bone_shard/Bump(atom/A as mob|obj|turf|area, forced=0)
+	if(istype(A, /obj/structure/chorus))
+		var/obj/structure/chorus/c = A
+		if(c.owner == ignore)
+			return FALSE
+	. = ..()
