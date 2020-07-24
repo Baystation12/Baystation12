@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - rscadd: "Adds non-holster belt variants to security lockers that didn't have them (Forensics, COS, Brig Chief)"
-  - tweak: "Forensics belt can now carry CSI markers and the reagent/spectrometer scanners"
-  - tweak: "CSI kit can now carry the reagent/spectrometer scanners"

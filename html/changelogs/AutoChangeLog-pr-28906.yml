@@ -1,6 +1,0 @@
-author: "Imienny1"
-delete-after: True
-changes: 
-  - bugfix: "High lung damage no longer indefinitely increases the time the mob that contains them cannot breathe for."
-  - tweak: "CPR that causes a breath now allows healthy lungs to immediately breathe again."
-  - tweak: "Added option to shake someone with breathing problems by aiming at arms."
