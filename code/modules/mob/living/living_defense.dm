@@ -13,15 +13,11 @@
 /mob/living/proc/run_armor_check(var/def_zone = null, var/attack_flag = "melee", var/armour_pen = 0, var/absorb_text = null, var/soften_text = null)
 
 	var/armor = getarmor(def_zone, attack_flag)
-	world << "GETARMOR PROC GOT [armor] for [src], [def_zone] aimed at"
-
 	if(armour_pen >= armor)
 		return 0 //effective_armor is going to be 0, fullblock is going to be 0, blocked is going to 0, let's save ourselves the trouble
 
 	var/effective_armor = (armor - armour_pen)/100
-	world << "Effective armour is [effective_armor]"
 	var/fullblock = (effective_armor*effective_armor) * ARMOR_BLOCK_CHANCE_MULT
-	world << "Fullblock is [fullblock]"
 
 	if(fullblock >= 1 || prob(fullblock*100))
 		if(absorb_text)

@@ -1,4 +1,13 @@
 
+/area/exo_ice_facility/interior/salvage_cov
+	name = "KS7 - Covenant Salvage, Left"
+
+/area/exo_ice_facility/interior/salvage_cov2
+	name = "KS7 - Covenant Salvage, Middle"
+
+/area/exo_ice_facility/interior/salvage_unsc
+	name = "KS7 - UNSC Salvage"
+
 /obj/machinery/door/airlock/covenant/covScrap
 
 /obj/machinery/door/airlock/humanScrap

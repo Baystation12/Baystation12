@@ -20,7 +20,7 @@
 
 	occupy_range = 28
 
-/obj/effect/overmap/sector/exo_depot/Initialize()
+/obj/effect/overmap/sector/exo_depot/New()
 	. = ..()
 	loot_distributor.loot_list["scanRandom"] = list(\
 	/obj/effect/landmark/scanning_point,
