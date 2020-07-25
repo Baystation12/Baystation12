@@ -39,6 +39,7 @@
 
 /area/exo_ice_facility/exterior/caves/underground
 	name = "KS7 - Underground"
+	requires_power = 0
 
 /area/exo_ice_facility/exterior/caves/volcano
 	name = "Volcano"
