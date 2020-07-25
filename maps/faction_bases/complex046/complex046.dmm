@@ -8,6 +8,7 @@
 "ah" = (/turf/simulated/floor/pavement{tag = "icon-pavement (WEST)"; icon_state = "pavement"; dir = 8},/area/faction_base/oni)
 "ai" = (/obj/structure/grille/smallfence,/turf/simulated/floor/pavement/empty,/area/faction_base/oni)
 "aj" = (/turf/unsimulated/floor/grass2,/area/faction_base/oni)
+"ak" = (/obj/structure/rearm_repair_station/human{dir = 1},/turf/simulated/floor/tech/steel,/area/faction_base/oni/garage)
 "al" = (/turf/simulated/floor/pavement,/area/faction_base/oni)
 "am" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTHWEST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 9},/area/faction_base/oni/cryodorms)
 "an" = (/obj/structure/grille,/obj/structure/window/reinforced/treated,/obj/structure/window/reinforced/treated{dir = 1},/turf/simulated/floor/plating,/area/faction_base/oni/research)
@@ -21,7 +22,7 @@
 "av" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTH)"; icon_state = "techfloor_orangefulltwogrid"; dir = 1},/area/faction_base/oni/cryodorms)
 "aw" = (/turf/simulated/floor/water,/area/faction_base/oni)
 "ax" = (/turf/simulated/floor/reinforced,/area/faction_base/oni/research)
-"ay" = (/obj/machinery/button/remote/airlock{id = "oni_geminus_garage_outer"; name = "Garage Blast Door Control"; pixel_y = -24},/turf/simulated/floor/pavement{tag = "icon-pavement (EAST)"; icon_state = "pavement"; dir = 4},/area/faction_base/oni)
+"ay" = (/obj/machinery/button/remote/blast_door{id = "oni_geminus_garage_outer"; pixel_y = -24; req_access = list(142)},/turf/simulated/floor/pavement{tag = "icon-pavement (EAST)"; icon_state = "pavement"; dir = 4},/area/faction_base/oni)
 "az" = (/obj/machinery/camera/autoname/invis/odp_cassius,/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTH)"; icon_state = "techfloor_orangefulltwogrid"; dir = 1},/area/faction_base/oni/cryodorms)
 "aA" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTHEAST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 5},/area/faction_base/oni/cryodorms)
 "aB" = (/obj/machinery/computer/cryopod{pixel_y = 32},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTHWEST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 9},/area/faction_base/oni/cryodorms)
@@ -43,7 +44,7 @@
 "aR" = (/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (SOUTHWEST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 10},/area/faction_base/oni/cryodorms)
 "aS" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Glass Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/fifty,/obj/item/stack/material/glass/reinforced/fifty,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "aT" = (/obj/structure/closet/crate/large{icon_state = "secgearcrate"; name = "Metal Crate"; tag = "icon-secgearcrate"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/obj/structure/window/reinforced{color = ""; dir = 8; health = 1e+007; name = "reinforced window"},/obj/item/stack/material/steel/fifty,/obj/item/stack/material/steel/fifty,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
-"aU" = (/obj/machinery/door/blast/regular/quadruple{id = "oni_geminus_garage_outer"; name = "Complex 046 Garage Blast Doors"},/turf/simulated/floor/tech/ridged,/area/faction_base/oni/garage)
+"aU" = (/obj/machinery/door/blast/regular/quadruple{id = "oni_geminus_garage_outer"; name = "Complex 046 Garage Blast Doors"},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "aV" = (/turf/simulated/floor/tech/orange,/area/faction_base/oni/cryodorms)
 "aW" = (/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "aX" = (/obj/structure/closet/crate/large{icon_opened = "densecrate"; icon_state = "densecrate"; tag = "icon-densecrate"},/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
@@ -90,7 +91,7 @@
 "bM" = (/obj/machinery/door/airlock/multi_tile/halo/blast{name = "Conference Room"; req_access = list(142)},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "bN" = (/turf/simulated/wall/r_wall,/area/faction_base/oni/blacksite)
 "bO" = (/turf/simulated/floor/tech,/area/faction_base/oni/research)
-"bP" = (/obj/machinery/button/remote/airlock{id = "oni_geminus_garage_outer"; name = "Garage Blast Door Control"; pixel_y = 24},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
+"bP" = (/obj/machinery/button/remote/blast_door{id = "oni_geminus_garage_outer"; pixel_y = 24; req_access = list(142)},/turf/simulated/floor/road{tag = "icon-road_empty (NORTH)"; icon_state = "road_empty"; dir = 1},/area/faction_base/oni/garage)
 "bQ" = (/obj/structure/sign/halo_floorsign/armory,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "bR" = (/obj/machinery/light,/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 1},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "bS" = (/obj/machinery/vending/coffee,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
@@ -308,7 +309,6 @@
 "fW" = (/obj/machinery/light,/turf/simulated/floor/pavement/empty,/area/faction_base/oni)
 "fX" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "fY" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 8},/turf/simulated/floor/tech/white,/area/faction_base/oni/hangar)
-"fZ" = (/turf/simulated/floor/tech/ridged,/area/faction_base/oni/garage)
 "ga" = (/turf/simulated/floor/tech/steel,/area/faction_base/oni/research)
 "gb" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "ONI Research"; req_access = list(315)},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "gc" = (/obj/structure/curtain/medical,/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
@@ -333,7 +333,7 @@ aaabacacfiafafafafafarararfjacacacaiajajajajajajajajajajajajajajajajajajajajajaj
 aaabacacadafafafafafafafafahacacacaiawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawaa
 aaabacacadafafafafafafafafahacacacaiawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawaa
 aafoacacayafafafaffVafafafahfnabfWaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaasatauasaUfZfZfZasasasasasasaDaDaDaDaeaeaeaeaeaeaeaeaeaeaeaeaeaDaDaDaDaDaDaDaDaDaDaDaDaaaaaaaaaaaaaa
+aaasatauasaUaWaWaWasasasasasasaDaDaDaDaeaeaeaeaeaeaeaeaeaeaeaeaeaDaDaDaDaDaDaDaDaDaDaDaDaaaaaaaaaaaaaa
 aaasbgbqbPaWaWaWaWcicjcjcjcjfIaEaIaKaLaeaeamaoapavazapavapapapaAaDaMaNaNaOeKbdaPaKaKflaDaaaaaaaaaaaaaa
 aaasckbqaWaWaWaWaWdDcjdDcjdDcjaQaKaKaSaeaBaCaFaCaFaCaFaCaFaCaFaGaDaPaPaPaPbeaPaPaKaKaKaDaaaaaaaaaaaaaa
 aaasbqbqaWaWaWaWaWaWaWaWaWaWaWaTaKaKaXaeaHaJfmezfmezfmezfmezfmaGaDbLaPaKaKaKaPaPaKaKcfaDaaaaaaaaaaaaaa
@@ -341,7 +341,7 @@ aaasbqcmcjcjcjaWaWaWaWaWaWaWaWcaaKaKcxaeaRaVaVaVaYaZaVaVbabbaVbcaDaPaPaKaKaKaPaP
 aaasbqbqcjcjcjaWaWaWaWcjeAeAeDaDdbdbdcaeaeaeaeaeaeaecIddaeaeaeaeaDdedlaDaDaDdQdTaDaDaDaDaaaaaaaaaaaaaa
 aaasbqbqeGcjcjaWaWaWaWcjcjcjcjasdbdbdRdHdIdIdIdIdIdSdbdbdKaKaKaIaKaPaPdLdFdFdFdFdJdFdFaDaaaaaaaaaaaaaa
 aaasckbqbqbqbqbqbqbqbqbqbqbqbqaudbdbdMdNdNdNdNdNdNdOdbdbdKaKaKaKaKaPaPdLdFdFdFdFdFdFdFaDaaaaaaaaaaaaaa
-aaasbqbqbqbqcnbqbqbqbqbqbqcnbqeIdbdbdMdNdPdPdPdPdNdOfsdbdKaKaPaPaPeafbdFdFdFdFdFdFdFdFaDaaaaaaaaaaaaaa
+aaasbqbqbqakcnbqbqbqakbqbqcnbqeIdbdbdMdNdPdPdPdPdNdOfsdbdKaKaPaPaPeafbdFdFdFdFdFdFdFdFaDaaaaaaaaaaaaaa
 aabfbfeJfrbfbfbfbfbfbfeJfrbfbfbfdbdbdMdNdPdPdPdPdNdOdbfgdKaKaPaPaPfHfYdFdFdFdFdFdFdFdFaDaaaaaaaaaaaaaa
 aabfbibhbhbhbjbhbkbhbhbhbhfTfUbfdbdbdMfqdUdNdNdNdNdOdbdbdVaKaPaPaKaKcfdLdFdFdFdFdFdFdFaDaaaaaaaaaaaaaa
 aabfblbhbhbmbnbmbhbmbnbmbhbhbhfrdbdbdRdWdWdWdWdWdWdRdbdbdXdZfXfXdZdZdZemeqeqdFdFeqeqeqboboboboboboboaa
