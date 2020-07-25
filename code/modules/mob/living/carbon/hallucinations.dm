@@ -301,4 +301,4 @@
 	min_power = 30
 
 /datum/hallucination/fakeattack/hypo/start()
-	to_chat(holder, "<span class='notice'>You feel a tiny prick!</span>")
+	holder.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE)
