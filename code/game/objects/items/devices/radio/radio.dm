@@ -28,7 +28,7 @@
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
-	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/device
+	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device/standard
 	var/power_usage = 2800
 
 	var/datum/radio_frequency/radio_connection
