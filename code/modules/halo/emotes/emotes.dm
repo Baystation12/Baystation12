@@ -1,7 +1,7 @@
 
 /decl/emote/audible/species_sound/wort
 	key = "wort"
-	emote_message_3p = "USER worts, three times.!"
+	emote_message_3p = "USER worts, three times!"
 	species_sounds = list(/datum/species/sangheili = 'code/modules/halo/sounds/worting.ogg')
 
 /decl/emote/audible/species_sound/wort/do_extra(var/atom/user, var/atom/target)
