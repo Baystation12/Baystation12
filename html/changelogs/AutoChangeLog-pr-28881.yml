@@ -1,0 +1,8 @@
+author: "PsiOmegaDelta"
+delete-after: True
+changes: 
+  - rscadd: "Personal shields now have an internal charge, refilled by the installed power cell"
+  - rscadd: "Personal shields shut down when the internal charge level is insufficient to protect the user"
+  - rscadd: "Personal shields automatically turn back on once the charge level is sufficient, if they shut down for the above reason"
+  - rscadd: "Personal shields can be examined to see both cell and charge levels"
+  - bugfix: "Personal shields turn off when the power cell is removed"
