@@ -1,4 +1,0 @@
-author: "MrKicker"
-delete-after: True
-changes: 
-  - admin: "Staff can re-edit admin-faxes instead of re-writing the whole thing."

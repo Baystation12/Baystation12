@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - tweak: "Handheld radios now use device power cells instead of regular cells. As a byproduct, they now have considerably less charge—about 60 messages on a full battery. Use it well!"

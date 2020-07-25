@@ -1,6 +1,0 @@
-author: "SimpleMaroon"
-delete-after: True
-changes: 
-  - maptweak: "Robotics has 50 sheets of plastic, up from 10."
-  - maptweak: "The Robotics Workshop has a welding fuel tank."
-  - bugfix: "The biohazard cart in Robotics Surgery is accessible to Roboticists."
