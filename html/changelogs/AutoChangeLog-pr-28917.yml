@@ -1,0 +1,5 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - tweak: "Injecting or drawing blood from someone with a syringe now causes a bit of pain."
+  - tweak: "Injecting someone with a hypospray causes a bit of pain, but less than the syringe. By extension, autoinjectors work the same way."
