@@ -29,7 +29,7 @@
 	var/list/internal_channels
 
 	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device/standard
-	var/power_usage = 2800
+	var/power_usage = 700
 
 	var/datum/radio_frequency/radio_connection
 	var/list/datum/radio_frequency/secure_radio_connections = new
@@ -45,7 +45,7 @@
 	. = ..()
 	wires = new(src)
 	if(ispath(cell))
-		cell = new(src)
+		cell = new cell(src)
 	internal_channels = GLOB.using_map.default_internal_channels()
 	GLOB.listening_objects += src
 
@@ -554,6 +554,8 @@
 			to_chat(user, "<span class='notice'>\The [src] can be attached and modified!</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] can not be modified or attached!</span>")
+		if (power_usage && cell)
+			to_chat(user, "<span class='notice'>\The [src] charge meter reads [round(cell.percent(), 0.1)]%.</span>")
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
