@@ -30,6 +30,7 @@
 "aD" = (/obj/machinery/light/colored{tag = "icon-yellow1 (NORTH)"; icon_state = "yellow1"; dir = 1},/obj/machinery/bookbinder,/turf/simulated/floor/lino,/area/exo_ice_facility/interior/museum_library)
 "aE" = (/obj/machinery/papershredder,/turf/simulated/floor/lino,/area/exo_ice_facility/interior/museum_library)
 "aF" = (/obj/structure/window/framed,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/museum_library)
+"aG" = (/obj/structure/table/standard,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; dir = 2; id = "barShutter"; layer = 3.1; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "aH" = (/obj/docking_umbilical/west{name = "NE Umbilical 2"},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/umbi_east)
 "aI" = (/turf/simulated/wall/tech,/area/exo_ice_facility/interior/housing)
 "aJ" = (/obj/structure/window/framed,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
@@ -377,13 +378,13 @@
 "hn" = (/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "ho" = (/mob/living/simple_animal/npc/colonist/organlegger,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "hp" = (/obj/machinery/light{dir = 1},/mob/living/simple_animal/npc/colonist/mineral_trader,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/bar)
-"hq" = (/obj/structure/table/standard,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
-"hr" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/donkpockets,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"hq" = (/obj/structure/table/standard,/obj/item/weapon/storage/box/donkpockets,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; dir = 2; id = "barShutter"; layer = 3.1; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"hr" = (/obj/structure/table/standard,/obj/item/weapon/spacecash/bundle/credits1,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; dir = 2; id = "barShutter"; layer = 3.1; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "hs" = (/obj/structure/table/woodentable,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/item/ammo_magazine/a357,/obj/machinery/button/windowtint/casino_window,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/casino)
 "ht" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "hu" = (/obj/machinery/atmospherics/pipe/tank/nitrous_oxide,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
 "hv" = (/obj/structure/table/standard,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/drugs,/obj/item/weapon/reagent_containers/syringe/steroid,/obj/item/weapon/reagent_containers/syringe/steroid,/turf/simulated/floor/plating,/area/exo_ice_facility/interior/organlegger_den)
-"hw" = (/obj/structure/table/standard,/obj/item/weapon/spacecash/bundle/credits1,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
+"hw" = (/obj/structure/table/standard,/obj/random/smokes,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; dir = 2; id = "barShutter"; layer = 3.1; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "hx" = (/obj/structure/table/steel,/obj/item/weapon/card/id/building_key/living_quarters1,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "hy" = (/obj/structure/table/steel,/obj/item/weapon/card/id/building_key/living_quarters2,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
 "hz" = (/obj/structure/table/steel,/obj/item/weapon/card/id/building_key/living_quarters3,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/hospital)
@@ -742,7 +743,6 @@
 "oo" = (/obj/machinery/light/invis,/turf/simulated/floor/carpet,/area/exo_ice_facility/interior/casino)
 "op" = (/turf/simulated/floor/road/empty,/area/exo_ice_facility/interior/police)
 "oq" = (/obj/effect/wingrille_spawn/reinforced/full,/turf/simulated/floor/decor{tag = "icon-techfloor_white"; icon_state = "techfloor_white"},/area/exo_ice_facility/interior/pirate_camp/right)
-"or" = (/obj/structure/table/standard,/obj/random/smokes,/obj/machinery/door/blast/shutters{_wifi_id = "barShutter"; name = "Bar Shutters"},/turf/simulated/floor/wood,/area/exo_ice_facility/interior/bar)
 "os" = (/obj/machinery/chemical_dispenser/bar_soft/full,/obj/structure/table/woodentable,/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/exo_ice_facility/interior/casino)
 "ot" = (/obj/effect/loot_marker/scanpoints_random,/turf/simulated/floor/tiled,/area/exo_ice_facility/interior/housing)
 "ou" = (/turf/simulated/floor/pavement,/area/exo_ice_facility/exterior/autolight)
@@ -924,7 +924,7 @@ aZaZqjqjqjqjqjqjqjqjqjqjqjlTqjqjeFqjadqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjqjgaqjqjqj
 aZaZaZqjqjqjqjqjqjqjqjbgbgbgbgbgeFqjqjqjqjqjqjqjfNqjqjqjqjgagagaqjqjqjqjgagaqjqjqjqjqjfufufuqjqjqjqjqjqjfufufufuqjqjbcqjqjqjnJnJofnJnJqjqjqjadaddAdAdAdAfjfjfjfjfvfvfvfvfJfvfvfvfvfvfvfvfvfjfjfjfjfjfjdAdAbcbcbccZcZoRoJiTofnJnJofkIqOgLgMgNgOkIkIkIkInwcZcZcZcZcZcZcZcZcZcZqjqjqjqjqjqjqjqjqjqjqjdxdxdxdxaZ
 aZaZaZaZqjqjqjqjqjqjcmqjqjqjqjqjqjadqjqjqjqjahfHqjqjqjqjqjqjgagagagaapgagagagaqjqjqjqjqjqjqjqjqjqjqjqjqjfufufufuqjqjbcbcqjfWnJnJofnJnJqjqjbcadbcdAdAfjfjfjfjfjfvfvfvdAnCnDfJfvnCfvfvfvfvfvfvfvfvfvfjfjdAdAbcbcbcqjcZcZcZiTofnJnJofkIobpQpQpQpQgQgRgSkIgKgKgTgTgKgKgTgTgKcZcZqjqjqjqjqjqjqjqjqjqjqjqjdxdxdxaZ
 aZaZaZaZaZaZqjqjqjqjqjqjqjqjqjqjqjadadqjqjqjgagagagaqjqjqjqjqjgagagagagagagagagagaqjqjqjqjqjqjqjqjqjqjqjqjfufufuqjqjbcqjqjqjnJnJofnJnJqjqjbcbcaddAdAfjfjfjfjfvfvfvdAdAnCnCnEnCnCnCdAdAfvfvfvfvfvfvfvfjfjdAdAbcbcqjqjcZcZiTofnJnJofkIgVpQmepUgXkImepRkIgKgKheiRhphekbhlgTcZcZcZqjqjqjqjqjqjqjqjqjdxdxdxdxdxaZ
-aZaZaZaZaZqjqjqjqjqjqjqjahqjqjqjqjadqjqjqjqjqjgagagagagaqjgagagagagagagagagagagagagagaqjgaqjqjqjqjqjqjqjqjfufufuqjqjqjqjqjqjnJnJofnJnJqjqjbcbcbcdAfjfjfjfjfvfvfvfvdAnCnCgHgYgYgHnCnCdAdAfvfvfvfvfvfvfjfjdAdAbcbcqjqjadcZoPgKgKgKgKkIhqhrhwhqorkIgQkIkIgKpTheqQpTpThehegTcZcZcZqjqjqjqjqjqjqjqjdxdxdxdxdxdxaZ
+aZaZaZaZaZqjqjqjqjqjqjqjahqjqjqjqjadqjqjqjqjqjgagagagagaqjgagagagagagagagagagagagagagaqjgaqjqjqjqjqjqjqjqjfufufuqjqjqjqjqjqjnJnJofnJnJqjqjbcbcbcdAfjfjfjfjfvfvfvfvdAnCnCgHgYgYgHnCnCdAdAfvfvfvfvfvfvfjfjdAdAbcbcqjqjadcZoPgKgKgKgKkIaGhqhraGhwkIgQkIkIgKpTheqQpTpThehegTcZcZcZqjqjqjqjqjqjqjqjdxdxdxdxdxdxaZ
 aZaZaZqjqjqjqjqjqjqjqjqjqjqjqjqjqjeFqjqjqjqjqjqjqjgagagagagagagagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjfufuqjqjqjqjqjqjnJnJofnJnJqjqjqjbcbcfjfjfjfjfjfvfvfvfvfvnCgHgHgHgYgHgHnCnCdAdAfvfvfvfvfvfjfjdAdAbcbcqjqjqjcZcZgKeLjfjhhBpUpUpUpUpUjipQpQpQjkpTpTmlpTpTpTpTgKcZcZcZcZqjqjqjqjqjqjqjqjdxdxdxdxdxaZ
 aZaZqjqjqjqjqjqjqjqjbgbgqjqjqjqjeFbgqjqjqjqjqjgagagagagagagagagagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjfufuqjbcbcbcqjqjnJnJofnJnJqjqjqjbcbcbcdAfjfjfjfjfvfvfvfvnFnEgYgHgYgYgHgHnCnEdAfvfvfvfvfvfjfjdAdAbcbcqjqjqjcZcZgKpQpQjlpQpQpQpQpQpQlypQpQpQgKgKjojojojrgKgKkIkIkIcZcZqjqjapqjqjqjqjqjqjdxdxdxdxaZ
 aZqjqjqjqjqjqjqjqjqjqjqjqjqjqjadeFqjqjqjgagagagagagagagagagagagagagagagagagagagagagagagagagaqjqjqjqjqjqjqjqjfufufuqjqjbcqjqjqjnJofnJqjqjqjqjqjbcbcdAdAfjfjfvfvfvfvfvfvnEgYgYgYgYgYgYgYnEnEfvfvfvfvfvfjfjdAdAdAbcbcqjqjcZcZjkpQpQpQpQpQjspQpQqypQjtpQpQgKgKjwjxjzgKgKgKjAjBkIcZcZqjqjqjqjqjqjqjqjqjqjqjdxdxaZ

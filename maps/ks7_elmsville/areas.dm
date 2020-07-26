@@ -24,6 +24,7 @@
 				if(ctr >= AUTOLIGHT_LIGHTINIT_CAP)
 					ctr = 0
 					sleep(AUTOLIGHT_LIGHTINIT_SLEEPTIME)
+				break
 	qdel(src)
 
 /area/exo_ice_facility
