@@ -1,22 +1,30 @@
+#define AUTOLIGHT_LIGHTINIT_CAP 500
+#define AUTOLIGHT_LIGHTINIT_SLEEPTIME 20
+/obj/daylight_mark/New()
+	. = ..()
+	set_light(10,8)
+
 /obj/autolight_init
 	var/targ_area = /area/exo_ice_facility/exterior/autolight
-	var/light_type = /obj/machinery/light/invis
+	var/light_type = /obj/daylight_mark
 
 /obj/autolight_init/Initialize()
-	..()
+	. = ..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/autolight_init/New()
+/obj/autolight_init/LateInitialize()
 	var/area/found = locate(targ_area)
+	var/ctr = 0
 	for(var/turf/create_at in found.contents)
 		for(var/t in trange(1,create_at))
 			var/turf/adj_turf = t
-			if(adj_turf.loc != src)
-				var/obj/machinery/light/l = new light_type (create_at)
-				l.process()
-				GLOB.processing_objects -= l
-				break
-	return INITIALIZE_HINT_QDEL
+			if(!istype(adj_turf.loc,targ_area) && adj_turf.density == 0)
+				new light_type (t)
+				ctr++
+				if(ctr >= AUTOLIGHT_LIGHTINIT_CAP)
+					ctr = 0
+					sleep(AUTOLIGHT_LIGHTINIT_SLEEPTIME)
+	qdel(src)
 
 /area/exo_ice_facility
 	name =  "KS7-535 \"New Pompeii\""
