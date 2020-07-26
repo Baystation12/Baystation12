@@ -209,6 +209,9 @@
 	if(air_group) return 1
 	return ..()
 
+/obj/machinery/door/blast/do_simple_ranged_interaction(var/mob/user)
+	return TRUE
+
 // Used with mass drivers to time the close.
 /obj/machinery/door/blast/proc/delayed_close()
 	set waitfor = FALSE
@@ -267,8 +270,8 @@
 /obj/machinery/door/blast/regular/escape_pod
 	name = "Escape Pod release Door"
 
-/obj/machinery/door/blast/regular/escape_pod/Process()	
-	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)		
+/obj/machinery/door/blast/regular/escape_pod/Process()
+	if(evacuation_controller.emergency_evacuation && evacuation_controller.state >= EVAC_LAUNCHING && src.icon_state == icon_state_closed)
 		src.force_open()
 	. = ..()
 
