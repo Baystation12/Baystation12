@@ -1045,6 +1045,24 @@
 /obj/structure/cable/green,
 /turf/simulated/floor/plating,
 /area/crew_quarters/heads/office/cl)
+"bW" = (
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 8
+	},
+/obj/structure/table/steel_reinforced,
+/obj/random/toolbox,
+/obj/machinery/power/apc/shuttle/aquila{
+	dir = 4;
+	name = "east bump";
+	pixel_x = 24
+	},
+/obj/structure/cable/cyan{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/obj/item/device/radio/highcapacity,
+/turf/simulated/floor/tiled/dark,
+/area/aquila/cockpit)
 "bX" = (
 /obj/machinery/door/blast/shutters{
 	density = 0;
@@ -2417,6 +2435,17 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge)
+"dX" = (
+/obj/structure/table/glass,
+/obj/effect/floor_decal/corner/blue/mono,
+/obj/structure/cable/green{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/item/device/radio/highcapacity,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/bridge)
 "dY" = (
 /turf/simulated/wall/r_wall/hull,
 /area/shield/bridge)
@@ -3604,6 +3633,14 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
+"fZ" = (
+/obj/structure/table/rack,
+/obj/effect/floor_decal/industrial/outline/grey,
+/obj/item/device/radio/highcapacity,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/device/binoculars,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/crew_quarters/heads/office/cos)
 "ga" = (
 /obj/machinery/door/firedoor,
 /obj/structure/cable/green{
@@ -3617,6 +3654,11 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/fore)
+"gb" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/device/radio/highcapacity,
+/turf/simulated/floor/tiled/monotile,
+/area/aquila/storage)
 "gc" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -3784,24 +3826,6 @@
 	icon_state = "shuttle_chair_preview";
 	dir = 1
 	},
-/turf/simulated/floor/tiled/dark,
-/area/aquila/cockpit)
-"gs" = (
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/structure/table/steel_reinforced,
-/obj/random/toolbox,
-/obj/machinery/power/apc/shuttle/aquila{
-	dir = 4;
-	name = "east bump";
-	pixel_x = 24
-	},
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/item/device/radio,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
 "gt" = (
@@ -7386,11 +7410,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aux_eva)
-"oZ" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/device/radio,
-/turf/simulated/floor/tiled/monotile,
-/area/aquila/storage)
 "pa" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/emcloset,
@@ -12260,17 +12279,6 @@
 /obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/aquila/airlock)
-"CE" = (
-/obj/structure/table/glass,
-/obj/effect/floor_decal/corner/blue/mono,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/item/device/radio,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/bridge)
 "CH" = (
 /obj/structure/sign/directions/bridge{
 	dir = 8;
@@ -12752,14 +12760,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/aquila/airlock)
-"Ff" = (
-/obj/structure/table/rack,
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/device/radio,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/device/binoculars,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/crew_quarters/heads/office/cos)
 "Fg" = (
 /obj/structure/bed/chair/comfy/captain{
 	icon_state = "capchair_preview";
@@ -25188,7 +25188,7 @@ TB
 sm
 HE
 Ra
-CE
+dX
 BE
 QW
 Rq
@@ -29031,7 +29031,7 @@ dF
 dL
 mE
 mG
-Ff
+fZ
 lq
 py
 qm
@@ -35092,7 +35092,7 @@ Xp
 Vg
 CD
 QL
-oZ
+gb
 pS
 qD
 rv
@@ -36900,7 +36900,7 @@ ec
 SA
 SA
 ec
-gs
+bW
 ec
 hO
 iy

@@ -471,6 +471,17 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/shuttle/petrov/analysis)
+"aV" = (
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/intercom{
+	dir = 1;
+	pixel_y = -28
+	},
+/obj/machinery/computer/ship/engines{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/exploration_shuttle/cockpit)
 "aW" = (
 /turf/simulated/wall/prepainted,
 /area/maintenance/fifthdeck/aftstarboard)
@@ -504,6 +515,21 @@
 /obj/machinery/space_heater,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
+"be" = (
+/obj/structure/table/rack,
+/obj/item/device/flashlight,
+/obj/item/device/radio/highcapacity,
+/obj/item/weapon/crowbar,
+/obj/structure/cable/cyan{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/item/device/radio/intercom{
+	pixel_y = 23
+	},
+/turf/simulated/floor/tiled/dark,
+/area/shuttle/petrov/security)
 "bf" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -549,6 +575,26 @@
 /obj/effect/paint/hull,
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/crew)
+"bl" = (
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 21
+	},
+/obj/structure/table/rack,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/machinery/alarm{
+	pixel_y = 32
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/item/device/spaceflare,
+/obj/item/device/spaceflare,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/dark/monotile,
+/area/exploration_shuttle/airlock)
 "bm" = (
 /obj/effect/floor_decal/industrial/loading{
 	icon_state = "loadingarea";
@@ -561,6 +607,24 @@
 /obj/structure/handrai,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/exploration_shuttle/cargo)
+"bn" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/cell_charger,
+/obj/item/device/radio/highcapacity,
+/obj/random_multi/single_item/boombox,
+/obj/item/device/radio/highcapacity,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/cable/cyan{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/obj/item/device/radio/intercom{
+	dir = 4;
+	pixel_x = -21
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/guppy_hangar/start)
 "bo" = (
 /obj/machinery/light/spot{
 	pixel_y = 32
@@ -604,6 +668,17 @@
 	},
 /turf/simulated/floor/plating,
 /area/guppy_hangar/start)
+"bs" = (
+/obj/structure/table/reinforced,
+/obj/machinery/button/blast_door{
+	id_tag = "PetrovShield";
+	name = "Blast Shutter Control";
+	pixel_x = 5;
+	pixel_y = -3
+	},
+/obj/item/device/radio/highcapacity,
+/turf/simulated/floor/tiled/white/monotile,
+/area/shuttle/petrov/cockpit)
 "bt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/cyan{
@@ -1056,17 +1131,6 @@
 /obj/effect/paint/hull,
 /turf/simulated/wall/titanium,
 /area/guppy_hangar/start)
-"cl" = (
-/obj/item/device/radio,
-/obj/item/device/radio/intercom{
-	dir = 1;
-	pixel_y = -28
-	},
-/obj/machinery/computer/ship/engines{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/monotile,
-/area/exploration_shuttle/cockpit)
 "cm" = (
 /obj/machinery/light,
 /obj/structure/cable/cyan,
@@ -1451,26 +1515,6 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/monotile,
-/area/exploration_shuttle/airlock)
-"cS" = (
-/obj/item/device/radio/intercom{
-	dir = 8;
-	pixel_x = 21
-	},
-/obj/structure/table/rack,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/machinery/alarm{
-	pixel_y = 32
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/obj/item/device/spaceflare,
-/obj/item/device/spaceflare,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/airlock)
 "cT" = (
 /obj/structure/bed/chair/shuttle/blue{
@@ -1872,24 +1916,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/exploration_shuttle/airlock)
-"dE" = (
-/obj/structure/table/steel_reinforced,
-/obj/machinery/cell_charger,
-/obj/item/device/radio,
-/obj/random_multi/single_item/boombox,
-/obj/item/device/radio,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/item/device/radio/intercom{
-	dir = 4;
-	pixel_x = -21
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/guppy_hangar/start)
 "dF" = (
 /obj/structure/bed/chair/shuttle/blue,
 /obj/structure/cable/cyan{
@@ -10890,17 +10916,6 @@
 /obj/structure/largecrate,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/fifthdeck/aftport)
-"zo" = (
-/obj/structure/table/reinforced,
-/obj/machinery/button/blast_door{
-	id_tag = "PetrovShield";
-	name = "Blast Shutter Control";
-	pixel_x = 5;
-	pixel_y = -3
-	},
-/obj/item/device/radio,
-/turf/simulated/floor/tiled/white/monotile,
-/area/shuttle/petrov/cockpit)
 "zp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -14258,21 +14273,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/fifthdeck/aftstarboard)
-"LC" = (
-/obj/structure/table/rack,
-/obj/item/device/flashlight,
-/obj/item/device/radio,
-/obj/item/weapon/crowbar,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/item/device/radio/intercom{
-	pixel_y = 23
-	},
-/turf/simulated/floor/tiled/dark,
-/area/shuttle/petrov/security)
 "LE" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
@@ -34342,7 +34342,7 @@ ee
 bg
 bw
 bS
-cl
+aV
 bh
 cJ
 dd
@@ -36162,7 +36162,7 @@ bE
 cb
 cv
 bj
-cS
+bl
 dm
 dD
 eF
@@ -37780,7 +37780,7 @@ Zn
 cF
 cT
 do
-dE
+bn
 dM
 cj
 fS
@@ -42436,7 +42436,7 @@ Nb
 Fx
 zB
 MD
-zo
+bs
 xh
 aa
 aa
@@ -42827,7 +42827,7 @@ aa
 bP
 bP
 bP
-LC
+be
 NI
 zC
 Xe

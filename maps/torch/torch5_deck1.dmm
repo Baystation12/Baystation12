@@ -77,6 +77,28 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/engineering/fuelbay/aux)
+"aal" = (
+/obj/effect/floor_decal/industrial/outline/yellow,
+/obj/structure/table/rack,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/structure/reagent_dispensers/peppertank{
+	pixel_x = -30
+	},
+/obj/effect/floor_decal/corner/red/mono,
+/obj/effect/floor_decal/industrial/outline/yellow,
+/turf/simulated/floor/tiled/monotile,
+/area/security/locker)
 "aam" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -517,7 +539,7 @@
 	dir = 5
 	},
 /obj/machinery/pager/robotics{
-	pixel_y = 30;
+	pixel_y = 30
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
@@ -15853,9 +15875,9 @@
 /obj/item/weapon/pen/crayon/yellow{
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose. This one is labeled 'Canary Yellow.'"
 	},
-	/obj/item/weapon/hand_labeler,
-	/obj/item/stack/package_wrap/twenty_five,
-	/obj/item/device/destTagger,
+/obj/item/weapon/hand_labeler,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/device/destTagger,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "cBU" = (
@@ -26917,28 +26939,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/misc_lab)
-"rnp" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/structure/table/rack,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
-/obj/structure/reagent_dispensers/peppertank{
-	pixel_x = -30
-	},
-/obj/effect/floor_decal/corner/red/mono,
-/obj/effect/floor_decal/industrial/outline/yellow,
-/turf/simulated/floor/tiled/monotile,
-/area/security/locker)
 "rob" = (
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -32
@@ -39212,7 +39212,7 @@ kVi
 oDg
 goa
 frA
-rnp
+aal
 ehZ
 kiR
 dZx

@@ -64,7 +64,7 @@
 
 /obj/structure/closet/secure_closet/explorer/WillContain()
 	return list(
-		/obj/item/device/radio,
+		/obj/item/device/radio/highcapacity,
 		/obj/item/device/gps,
 		/obj/item/taperoll/research,
 		/obj/item/weapon/storage/belt/holster/machete,
@@ -89,7 +89,7 @@
 
 /obj/structure/closet/secure_closet/pilot/WillContain()
 	return list(
-		/obj/item/device/radio,
+		/obj/item/device/radio/highcapacity,
 		/obj/item/device/gps,
 		/obj/item/weapon/storage/belt/utility/full,
 		/obj/item/device/spaceflare,

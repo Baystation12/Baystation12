@@ -574,6 +574,13 @@
 /obj/item/device/radio/proc/recalculateChannels()
 	return
 
+/obj/item/device/radio/highcapacity
+	name = "high capacity shortwave radio"
+	cell = /obj/item/weapon/cell/device/high
+
+	icon_state = "walkietalkieh"
+	item_state = "walkietalkieh"
+
 ///////////////////////////////
 //////////Borg Radios//////////
 ///////////////////////////////

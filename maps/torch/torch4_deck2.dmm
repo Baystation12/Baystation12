@@ -1391,6 +1391,33 @@
 /obj/item/weapon/stock_parts/circuitboard/arcade/orion_trail,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/storage/tech)
+"ct" = (
+/obj/structure/table/rack,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/flashlight,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/device/radio/highcapacity,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/weapon/crowbar/prybar,
+/obj/item/bodybag,
+/obj/item/bodybag,
+/obj/item/weapon/storage/box/bodybags{
+	pixel_x = 1;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/bodybags{
+	pixel_x = 1;
+	pixel_y = 2
+	},
+/obj/item/weapon/storage/box/bodybags{
+	pixel_x = 1;
+	pixel_y = 2
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "cu" = (
 /obj/machinery/door/window/brigdoor/northleft{
 	name = "Weapons locker"
@@ -2624,33 +2651,6 @@
 /turf/simulated/floor/plating,
 /area/maintenance/substation/seconddeck)
 "eP" = (
-/turf/simulated/floor/tiled/techfloor,
-/area/storage/medical)
-"eQ" = (
-/obj/structure/table/rack,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/device/radio,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/weapon/crowbar/prybar,
-/obj/item/bodybag,
-/obj/item/bodybag,
-/obj/item/weapon/storage/box/bodybags{
-	pixel_x = 1;
-	pixel_y = 2
-	},
-/obj/item/weapon/storage/box/bodybags{
-	pixel_x = 1;
-	pixel_y = 2
-	},
-/obj/item/weapon/storage/box/bodybags{
-	pixel_x = 1;
-	pixel_y = 2
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/medical)
 "eR" = (
@@ -43289,7 +43289,7 @@ Nn
 cC
 Lk
 eq
-eQ
+ct
 Lk
 hq
 WK
