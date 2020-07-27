@@ -11,6 +11,9 @@
 	icon_override = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
 	item_state = "spikegren1"
 	item_state_slots = list(slot_l_hand_str = "spnade", slot_r_hand_str = "spnade")
+	sprite_sheets = list(\
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	)
 
 	force = 35
 	armor_penetration = 35
@@ -70,6 +73,9 @@
 	dispersion = list(0.2,0.3,0.5)
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
+	sprite_sheets = list(\
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	)
 	lunge_dist = 3
 	matter = list("duridium" = 1)
 
@@ -144,6 +150,9 @@
 	dispersion = list(0.45)
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
+	sprite_sheets = list(\
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	)
 	lunge_dist = 3
 	matter = list("duridium" = 1)
 
@@ -263,6 +272,9 @@
 	edge = 1
 	armor_penetration = 35
 	item_state_slots = list(slot_l_hand_str = "bruteshot", slot_r_hand_str = "bruteshot", slot_back_str = "bruteshot back")
+	sprite_sheets = list(\
+	"Jiralhanae" = 'code/modules/halo/covenant/species/jiralhanae/jiralhanae_gear.dmi'
+	)
 	advanced_covenant = 1
 	matter = list("nanolaminate" = 2, "kemocite" = 1, "duridium" = 1)
 
