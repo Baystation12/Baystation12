@@ -517,7 +517,7 @@
 	dir = 5
 	},
 /obj/machinery/pager/robotics{
-	pixel_y = 30;
+	pixel_y = 30
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
@@ -3266,9 +3266,6 @@
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/structure/table/reinforced,
 /obj/machinery/cell_charger,
-/obj/item/modular_computer/telescreen/preset/medical{
-	pixel_y = 32
-	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/staging)
 "afI" = (
@@ -15853,9 +15850,9 @@
 /obj/item/weapon/pen/crayon/yellow{
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose. This one is labeled 'Canary Yellow.'"
 	},
-	/obj/item/weapon/hand_labeler,
-	/obj/item/stack/package_wrap/twenty_five,
-	/obj/item/device/destTagger,
+/obj/item/weapon/hand_labeler,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/device/destTagger,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "cBU" = (
