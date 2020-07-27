@@ -1,4 +1,0 @@
-author: "NullSnapshot"
-delete-after: True
-changes: 
-  - rscadd: "Cell powered radios now show their current charge remaining in their examine text."

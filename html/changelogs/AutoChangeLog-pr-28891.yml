@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Long-distance holopad calls now require both holopads to be long-range instead of just the calling pad. Also means AI cannot do long distance holopadding unless it's on a long-range pad."
