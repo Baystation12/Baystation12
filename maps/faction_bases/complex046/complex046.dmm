@@ -309,6 +309,7 @@
 "fW" = (/obj/machinery/light,/turf/simulated/floor/pavement/empty,/area/faction_base/oni)
 "fX" = (/obj/effect/floor_decal/industrial/warning,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "fY" = (/obj/effect/floor_decal/industrial/loading{icon_state = "loadingarea"; dir = 8},/turf/simulated/floor/tech/white,/area/faction_base/oni/hangar)
+"fZ" = (/obj/machinery/recharger/wallcharger{pixel_x = 32},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 "ga" = (/turf/simulated/floor/tech/steel,/area/faction_base/oni/research)
 "gb" = (/obj/machinery/door/airlock/multi_tile/halo/blast{dir = 4; name = "ONI Research"; req_access = list(315)},/turf/simulated/floor/tech,/area/faction_base/oni/research)
 "gc" = (/obj/structure/curtain/medical,/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
@@ -319,6 +320,8 @@
 "gh" = (/obj/structure/sofa/corner{icon_state = "sofacorner"; dir = 8},/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "gi" = (/obj/machinery/camera/autoname/invis/odp_cassius{icon_state = "camera"; dir = 1},/obj/structure/sign/halo_floorsign/armory,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
 "gj" = (/obj/machinery/door/airlock/halo{name = "Armory"; req_access = list(142)},/turf/simulated/floor/tech/maint,/area/faction_base/oni/barracks)
+"gk" = (/obj/structure/table/standard,/obj/machinery/recharger,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
+"gl" = (/obj/structure/table/standard,/obj/machinery/cell_charger,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/research)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -356,16 +359,16 @@ aabfbfdfbhbhbhbhdqfDbfcVbhbhcVbfbxdmbCbCbCbCbCevdhbCbxbCbCdibxbFfLdjccccccccccfM
 aabfbfcTbhbhbhdrfEghbfcVbhbhcVbfbxdnbCbCdtducXbxevevbxbCbCdobxbFbFbFbFetbObFbFbFbFbFdkfOfPeEeFeFeFeFeE
 aabfbfdsbhbhbhfBfCcSbfcVbRbhcVbfbxdvbCbCdBdCbCevbCcXbxbCbCdwbxbFdxdydzbJbJbJbJbObJdzbJfOfPeEeFeFeFeFeE
 aabfbfbfbfbfbfbfbfbfbfbfbfbfbfbfbxdEbCbCeeefbCevdhbCbxdGbCdYbxbFeibJbJebeHbJbJgbbJbJbJfOfPeEeFeFeFeFeE
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekbCbCereTbCbxevevbxbxelbxbxbFexbJbJewebbJdAbFgagabFfPfPeEeFeFeFeFeE
-aaajajajajajajajajajajajajajajaabxgfbCbCbCbCbCbCbCbCbCbCbCbCbCbObJbJbJebecbJenepeMeNepeOeOeOeEeFeFeFeE
-aaajajajajajajajajajajajajajajaabxggbCesbCbCbCdGbCbCbCbCdGbCbCgbbJbJbJbJbJbJeoepePePePePePeQeOeOeOeFeE
-aaajajajajajajajajajajajajajajaabxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFejehehejeYbJeuepePePePePePePePeReOeOeE
-aaajajajajajajajajajajajajajajaabxeLbCfQbxeLbCfQbxeUbCeVbxbxbxbFbFbFbFbFbFfubFepePePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxfRbCbCbxfRbCbCbxeWbCeXbxbxbxeEeEeEeEbFaxaxbFeOeRePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxbCfSeZbxbCfSeZbxfafxfcbxbxbxeEeEeEeEbFfefvbFeEeOePePePePePePePePeOeE
-aaajajajajajajajajajajajajajajaabxbxbxbxbxbxbxbxbxbxbxbxbxbxbxeEeEeEeEbFfwaxbFeEeOeSfdfdfdfdfdfdfdeSaa
-aaajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeEeEeEeEbFbFbFbFeEeOeSfdfdfdfdfdfdfdeSaa
-aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxekbCbCereTbCbxevevbxbxelbxbxbFexbJbJewebbJfZbFgagabFfPfPeEeFeFeFeFeE
+aaajajajajajajajajajajajajajajaabxgfbCbCbCbCbCbCbCbCbCbCbCbCbCbObJbJbJebecbJdAepeMeNepeOeOeOeEeFeFeFeE
+aaajajajajajajajajajajajajajajaabxggbCesbCbCbCdGbCbCbCbCdGbCbCgbbJbJbJbJbJbJenepePePePePePeQeOeOeOeFeE
+aaajajajajajajajajajajajajajajaabxbxgcbxbxbxgcbxbxbxgcbxbxbxbxbFbJbJbJbJbJbJeoepePePePePePePePeReOeOeE
+aaajajajajajajajajajajajajajajaabxeLbCfQbxeLbCfQbxeUbCeVbxbxbxbFejehgkgleYbJeuepePePePePePePePePePeOeE
+aaajajajajajajajajajajajajajajaabxfRbCbCbxfRbCbCbxeWbCeXbxbxbxfPfPfPfPbFbFfubFepeRePePePePePePePePeOeE
+aaajajajajajajajajajajajajajajaabxbCfSeZbxbCfSeZbxfafxfcbxbxbxeEeEeEeEbFaxaxbFeEeOePePePePePePePePeOeE
+aaajajajajajajajajajajajajajajaabxbxbxbxbxbxbxbxbxbxbxbxbxbxbxeEeEeEeEbFfefvbFeEeOeSfdfdfdfdfdfdfdeSaa
+aaajajajajajajajajajajajajajajaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeEeEeEeEbFfwaxbFeEeOeSfdfdfdfdfdfdfdeSaa
+aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEfPfPfPfPeEeOeSffffffffffffffeSaa
 aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
 aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
 aaajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajeEeEeEeEeEeEeEeEeEeOeSffffffffffffffeSaa
