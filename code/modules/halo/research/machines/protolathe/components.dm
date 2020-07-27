@@ -5,6 +5,7 @@
 	var/list/stored_components = list()
 	var/components_storage_used = 0
 	var/list/accepted_objs = list(\
+		/obj/item/crystal,\
 		/obj/item/plasma_core,\
 		/obj/item/weapon/cell/device/standard,\
 		/obj/item/device/assembly/signaler,\
