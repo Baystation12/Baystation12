@@ -278,9 +278,9 @@ GLOBAL_LIST_EMPTY(diversion_junctions)
 	if(user.loc == src)
 		to_chat(user, "<span class='warning'>You cannot reach the controls from inside.</span>")
 		return STATUS_CLOSE
-	if(isAI(user) && (href_list["handle"] || href_list["eject"]))
+	if(isAI(user) && href_list && (href_list["handle"] || href_list["eject"]))
 		return min(STATUS_UPDATE, ..())
-	if(mode==-1 && !href_list["eject"]) // only allow ejecting if mode is -1
+	if(mode==-1 && href_list && !href_list["eject"]) // only allow ejecting if mode is -1
 		to_chat(user, "<span class='warning'>The disposal units power is disabled.</span>")
 		return min(STATUS_UPDATE, ..())
 	if(flushing)

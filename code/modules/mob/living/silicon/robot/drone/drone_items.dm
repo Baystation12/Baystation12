@@ -269,7 +269,8 @@
 /obj/item/weapon/gripper/proc/finish_using(var/atom/target, var/mob/living/user, params, force_holder, resolved)
 
 	if(QDELETED(wrapped))
-		wrapped.forceMove(null)
+		if (wrapped)
+			wrapped.forceMove(null)
 		wrapped = null
 		return
 

@@ -17,7 +17,8 @@
 	<b>Integrity:</b> Implant will last so long as the nanobots are inside the bloodstream."}
 
 /obj/item/weapon/implant/loyalty/implanted(mob/M)
-	if(!istype(M, /mob/living/carbon/human))	return FALSE
+	if(!M.mind || !istype(M, /mob/living/carbon/human))
+		return FALSE
 	var/mob/living/carbon/human/H = M
 	var/datum/antagonist/antag_data = get_antag_data(H.mind.special_role)
 	if(antag_data && (antag_data.flags & ANTAG_IMPLANT_IMMUNE))
