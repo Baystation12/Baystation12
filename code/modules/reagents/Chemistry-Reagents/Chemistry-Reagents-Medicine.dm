@@ -295,6 +295,9 @@
 		if(E && istype(E))
 			if(E.damage > 0)
 				E.damage = max(E.damage - 5 * removed, 0)
+			else if(E.status & ORGAN_BROKEN)
+				E.status &= ~ORGAN_BROKEN
+				to_chat(H,"<span class='info'>Your vision returns.</span>")
 
 /datum/reagent/otomax
 	name = "Otomax"
