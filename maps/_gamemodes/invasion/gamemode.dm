@@ -215,9 +215,15 @@
 	if(.)
 		round_end_reasons += "an early round end was voted for"
 		return .
+	var/extra_pts = 0 //Extra "round end reason" points assigned by some factors
 
 	if(scan_percent < 100 && scanner_destructions_left == 0 && !scanners_active)
 		round_end_reasons += "the Covenant scanning devices were destroyed"
+		extra_pts += 1
+
+	if(GLOB.UNSC.fleet_spawn_at > 0 && world.time > GLOB.UNSC.fleet_spawn_at && GLOB.COVENANT.flagship_slipspaced != 0)
+		round_end_reasons += "the UNSC fleet has taken control of the sector in the absence of the Covenant"
+		extra_pts += 1
 
 	for(var/datum/faction/F in factions)
 
@@ -228,6 +234,7 @@
 				if(!flagship.loc)
 					if(F.flagship_slipspaced || flagship.slipspace_status == 2)
 						round_end_reasons += "the [F.name] ship has gone to slipspace and left the system"
+						extra_pts += 1
 						/*var/datum/faction/covenant/C = locate() in factions
 						C.ignore_players_dead = 1*/
 					else if(!flagship.slipspace_status)
@@ -274,7 +281,7 @@
 		*/
 
 	//if 2 or more end conditions are met, end the game
-	return (round_end_reasons.len >= end_conditions_required)
+	return (round_end_reasons.len + extra_pts >= end_conditions_required)
 
 /datum/game_mode/outer_colonies/declare_completion()
 	if(round_end_reasons.len == 0)

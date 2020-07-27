@@ -1,5 +1,5 @@
 
-#define FLEET_BASE_AMOUNT 3
+#define FLEET_BASE_AMOUNT 5
 #define FLEET_SCALING_AMOUNT 1
 #define FLEET_PERFACTION_MAXSIZE 30
 
@@ -26,7 +26,7 @@
 
 	var/fleetname = pick("1st","2nd","3rd","4th","5th","6th","7th","8th","9th")
 	GLOB.UNSC.AnnounceCommand("Reinforcements from the [fleetname] Fleet have arrived in the system. Hold out for just a little longer, marines.")
-	GLOB.COVENANT.AnnounceCommand("An overwhelming human fleet has jumped insystem. You have failed to achieve your objectives in time.")
+	GLOB.COVENANT.AnnounceCommand("An overwhelming human fleet has jumped insystem. You have failed to achieve your objectives in time. Slipspacing now will allow hostile forces to obtain control over the sector.")
 
 	//unlock a spartan slot after a short delay
 	spawn(100)
