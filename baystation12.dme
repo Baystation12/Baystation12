@@ -2038,6 +2038,7 @@
 #include "code\modules\halo\unsc\spartan_hardsuits.dm"
 #include "code\modules\halo\unsc\jobs\_base.dm"
 #include "code\modules\halo\unsc\jobs\ai.dm"
+#include "code\modules\halo\unsc\jobs\colonist.dm"
 #include "code\modules\halo\unsc\jobs\crew.dm"
 #include "code\modules\halo\unsc\jobs\crew_outfits.dm"
 #include "code\modules\halo\unsc\jobs\marines.dm"
