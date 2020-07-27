@@ -85,7 +85,10 @@
 /obj/vehicles/proc/set_mobile_spawn_deploy(var/set_to)
 	spawn_datum.is_spawn_active = set_to
 	visible_message("<span class = 'notice'>[src] [spawn_datum.is_spawn_active ? "locks down" : "unlocks and readies for operation"]</span>")
-	icon_state = "[initial(icon_state)]_deployed"
+	if(spawn_datum.is_spawn_active)
+		icon_state = "[initial(icon_state)]_deployed"
+	else
+		icon_state = "[initial(icon_state)]"
 	if(spawn_datum.is_spawn_active)
 		active = 0
 	else
