@@ -62,7 +62,8 @@
 	device.do_eject_ai(user)
 
 /obj/item/weapon/stock_parts/computer/ai_slot/proc/do_eject_ai(mob/user)
-	stored_card.dropInto(loc)
+	if (stored_card)
+		stored_card.dropInto(get_turf(loc))
 	stored_card = null
 
 	loc.verbs -= /obj/item/weapon/stock_parts/computer/ai_slot/verb/eject_ai
@@ -70,6 +71,8 @@
 	update_power_usage()
 
 /obj/item/weapon/stock_parts/computer/ai_slot/proc/do_insert_ai(mob/user, obj/item/weapon/aicard/card)
+	if (stored_card)
+		do_eject_ai(user)
 	stored_card = card
 
 	if(isobj(loc))

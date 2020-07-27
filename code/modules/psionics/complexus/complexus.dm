@@ -79,7 +79,7 @@
 	if(owner)
 		cancel()
 		if(owner.client)
-			owner.client.screen -= list(ui, ui.components)
+			owner.client.screen -= list(ui, ui?.components)
 			for(var/thing in SSpsi.all_aura_images)
 				owner.client.images -= thing
 		QDEL_NULL(ui)

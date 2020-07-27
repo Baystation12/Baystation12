@@ -181,13 +181,14 @@ SUBSYSTEM_DEF(throwing)
 		var/mob/M = thrownthing
 		M.inertia_dir = init_dir
 
-	if(t_target)
+	if(t_target && !QDELETED(thrownthing))
 		thrownthing.throw_impact(t_target, src)
 
 	if (callback)
 		callback.Invoke()
 
-	thrownthing.fall()
+	if (!QDELETED(thrownthing))
+		thrownthing.fall()
 
 	qdel(src)
 

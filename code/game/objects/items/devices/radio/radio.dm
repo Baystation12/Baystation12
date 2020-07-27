@@ -494,24 +494,12 @@
 			talk_into(M, msg,null,verb,speaking)
 
 
-/*
-/obj/item/device/radio/proc/accept_rad(obj/item/device/radio/R as obj, message)
-
-	if ((R.frequency == frequency && message))
-		return 1
-	else if
-
-	else
-		return null
-	return
-*/
-
-
 /obj/item/device/radio/proc/receive_range(freq, level)
 	// check if this radio can receive on the given frequency, and if so,
 	// what the range is in which mobs will hear the radio
 	// returns: -1 if can't receive, range otherwise
-
+	if (!wires)
+		return -1
 	if (wires.IsIndexCut(WIRE_RECEIVE))
 		return -1
 	if(!listening)

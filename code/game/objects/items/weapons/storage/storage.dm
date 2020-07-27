@@ -128,7 +128,7 @@
 /obj/item/weapon/storage/proc/can_be_inserted(obj/item/W, mob/user, stop_messages = 0)
 	if(!istype(W)) return //Not an item
 
-	if(user && !user.canUnEquip(W))
+	if(!user?.canUnEquip(W))
 		return 0
 
 	if(src.loc == W)
@@ -141,7 +141,7 @@
 	if(W.anchored)
 		return 0
 
-	if(can_hold.len)
+	if(length(can_hold))
 		if(!is_type_in_list(W, can_hold))
 			if(!stop_messages && ! istype(W, /obj/item/weapon/hand_labeler))
 				to_chat(user, "<span class='notice'>\The [src] cannot hold \the [W].</span>")

@@ -791,12 +791,13 @@
 		wearer = null
 
 /obj/item/weapon/rig/proc/deselect_module()
-	if(selected_module.suit_overlay_inactive)
-		selected_module.suit_overlay = selected_module.suit_overlay_inactive
-	else
-		selected_module.suit_overlay = null
-	selected_module = null
-	update_icon()
+	if (selected_module)
+		if(selected_module.suit_overlay_inactive)
+			selected_module.suit_overlay = selected_module.suit_overlay_inactive
+		else
+			selected_module.suit_overlay = null
+		selected_module = null
+		update_icon()
 
 //Todo
 /obj/item/weapon/rig/proc/malfunction()
