@@ -78,7 +78,7 @@ GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,5 MINUTES)
 /datum/mobile_spawn/unsc
 	spawn_faction = "UNSC"
 	access_list = list(access_unsc,144,192)
-	species_outfits = list("Human" = list(/decl/hierarchy/outfit/job/mobilespawn_marine,/decl/hierarchy/outfit/job/mobilespawn_marine/engineer,/decl/hierarchy/outfit/job/mobilespawn_marine/medic,/decl/hierarchy/outfit/job/mobilespawn_janitor))
+	species_outfits = list("Human" = list(/decl/hierarchy/outfit/job/mobilespawn_marine,/decl/hierarchy/outfit/job/mobilespawn_marine/engineer,/decl/hierarchy/outfit/job/mobilespawn_marine/medic))
 
 /datum/mobile_spawn/innie
 	spawn_faction = "Insurrection"

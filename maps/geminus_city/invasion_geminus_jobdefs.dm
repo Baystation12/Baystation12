@@ -14,11 +14,7 @@
 		/datum/job/unsc/oni/research,\
 		/datum/job/unsc/oni/research/director,\
 		/datum/job/unsc_ai,\
-		/datum/job/colonist,\
-		/datum/job/colonist/mayor,\
-		/datum/job/colonist/police,\
-		/datum/job/colonist/police/chief,\
-		/datum/job/covenant/huragok,\
+		/datum/job/colonist/unsc,\
 		/datum/job/covenant/AI,\
 		/datum/job/covenant/sangheili_minor,\
 		/datum/job/covenant/sangheili_major,\
