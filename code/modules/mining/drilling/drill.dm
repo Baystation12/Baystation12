@@ -31,7 +31,6 @@
 		"carbonaceous rock" = /obj/item/weapon/ore/coal,
 		"duridium" = /obj/item/weapon/ore/duridium,
 		"kemocite" =/obj/item/weapon/ore/kemocite,
-		"corundum" = /obj/item/weapon/ore/corundum,
 		"platinum" =/obj/item/weapon/ore/platinum
 		)
 
