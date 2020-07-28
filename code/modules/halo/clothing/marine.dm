@@ -281,32 +281,34 @@
 /obj/item/clothing/head/helmet/marine/winter
 	name = "Winter Camo CH252 Helmet"
 	desc = "The standard issue winter camo combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "UNSCMarineHelmetNoVisor"
-	icon_state = "UNSCMarineHelmetNoVisor"
+	item_state = "snowhelmet"
+	icon_state = "snowhelmet"
 
-/obj/item/clothing/head/helmet/marine/wintervisor
-	name = "Winter Camo CH252-V Helmet"
-	desc = "The standard issue winter camo combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "UNSCWinterMarineHelmetVisor"
-	icon_state = "UNSCWinterMarineHelmetVisor"
+/obj/item/clothing/head/helmet/marine/medic/winter
+item_state = "snowhelmetmedic"
+	icon_state = "snowhelmetmedic"
 
 /obj/item/clothing/suit/storage/marine/winter
 	name = "M52B Winter Body Armor"
 	desc = "The standard issue winter camo combat armor worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "UNSCMarineArmor"
-	icon_state = "UNSCMarineArmor"
+	item_state = "snowarmor"
+	icon_state = "snowarmor"
+
+/obj/item/clothing/suit/storage/marine/medic/winter
+	item_state = "snowarmormedic"
+	icon_state = "snowarmormedic"
 
 /obj/item/clothing/shoes/marine/winter
 	name = "VZG7 Armored Winter Boots"
 	desc = "Standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
-	item_state = "UNSCMarineBoots"
-	icon_state = "UNSCMarineBoots"
+	item_state = "snowboots"
+	icon_state = "snowboots"
 
 /obj/item/clothing/gloves/thick/unsc/winter //Combined effect of SWAT gloves and insulated gloves
 	name = "UNSC Winter Combat gloves"
 	desc = "Standard Issue UNSC Marine Winter Gloves."
-	icon_state = "UNSCMarineGloves"
-	item_state = "UNSCMarineGloves"
+	icon_state = "snowgloves"
+	item_state = "snowgloves"
 
 /obj/item/clothing/under/unsc/marine_fatigues/winter
 	name = "UNSC Marine Winter fatigues"
