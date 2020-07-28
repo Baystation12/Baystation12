@@ -285,7 +285,7 @@
 	icon_state = "snowhelmet"
 
 /obj/item/clothing/head/helmet/marine/medic/winter
-item_state = "snowhelmetmedic"
+	item_state = "snowhelmetmedic"
 	icon_state = "snowhelmetmedic"
 
 /obj/item/clothing/suit/storage/marine/winter
