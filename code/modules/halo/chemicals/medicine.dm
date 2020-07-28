@@ -151,7 +151,7 @@
 	H.adjustToxLoss(1)
 	if(prob(10))
 		H.emote(pick("twitch", "blink_r", "shiver"))
-	H.add_chemical_effect(CE_SPEEDBOOST, 1)
+	H.add_chemical_effect(CE_SPEEDBOOST, 0.5)
 	H.add_chemical_effect(CE_PULSE, 2)
 
 /datum/reagent/hyperzine_concentrated/overdose(var/mob/living/carbon/human/H)
