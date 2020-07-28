@@ -471,23 +471,28 @@
 		if(prob(50))
 			dirturn = -45
 		direction = turn(direction,dirturn)
+	var/oldspeed = null
 	switch(direction)
 		if(NORTH)
 			last_moved_axis = 2
+			oldspeed = speed[2]
 			speed[2] = min(speed[2] + acceleration,min_speed)
 
 		if(SOUTH)
 			last_moved_axis = 2
+			oldspeed = speed[2]
 			speed[2] = max(speed[2] - acceleration,-min_speed)
 
 		if(EAST)
 			last_moved_axis = 1
+			oldspeed = speed[1]
 			speed[1] = min(speed[1] + acceleration,min_speed)
 
 		if(WEST)
 			last_moved_axis = 1
+			oldspeed = speed[1]
 			speed[1] = max(speed[1] - acceleration,-min_speed)
-	if(braking_mode == 1) //If we're braking, we don't get the leeway in movement.
+	if(braking_mode == 1 || (!isnull(oldspeed) && oldspeed == 0)) //If we're braking, we don't get the leeway in movement.
 		last_moved_axis = 0
 
 	if(speed[1] != 0 && !moving_x)
