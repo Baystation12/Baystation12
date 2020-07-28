@@ -2021,6 +2021,7 @@
 #include "code\modules\halo\turfs\cityprops.dm"
 #include "code\modules\halo\turfs\interiorobjs.dm"
 #include "code\modules\halo\turfs\interiorstructures.dm"
+#include "code\modules\halo\turfs\mineral_field.dm"
 #include "code\modules\halo\turfs\road_and_pavements.dm"
 #include "code\modules\halo\turfs\signs.dm"
 #include "code\modules\halo\turfs\streetobjs.dm"
