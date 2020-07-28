@@ -78,6 +78,7 @@
 	else
 		icon_state = "meter4"
 
+
 /obj/machinery/meter/examine(mob/user, distance)
 	. = ..()
 
@@ -95,6 +96,12 @@
 			to_chat(user, "The sensor error light is blinking.")
 	else
 		to_chat(user, "The connect error light is blinking.")
+
+
+/obj/machinery/meter/interface_interact(mob/user)
+	var/datum/gas_mixture/environment = target.return_air()
+	to_chat(user, "The pressure gauge reads [round(environment.return_pressure(), 0.01)] kPa; [round(environment.temperature,0.01)]K ([round(environment.temperature-T0C,0.01)]&deg;C)")
+	return TRUE
 
 // turf meter -- prioritizes turfs over pipes for target acquisition
 
