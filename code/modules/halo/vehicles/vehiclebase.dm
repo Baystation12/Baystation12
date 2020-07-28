@@ -353,7 +353,6 @@
 		anchored = 1
 	else
 		. = ..()
-	update_occupant_z_level(newloc.z)
 	update_object_sprites()
 
 /obj/vehicles/fall()
