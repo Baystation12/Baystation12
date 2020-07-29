@@ -6,11 +6,11 @@
 	name = "Mineral Field"
 	desc = "A sparkling field that marks a high concentration of minerals in the ground. A ground penetrating drill should be able to reach the hidden riches."
 	icon = 'icons/turf/flooring/asteroid.dmi'
-	icon_state = "asteroid"
-	base_name = "sand"
+	icon_state = "mineralturf"
+	base_name = "Mineral Field"
 	base_desc = "Gritty and unpleasant."
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
-	base_icon_state = "asteroid"
+	base_icon_state = "mineralturf"
 
 	initial_flooring = null
 	initial_gas = null
