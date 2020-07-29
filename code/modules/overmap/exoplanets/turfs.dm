@@ -10,7 +10,7 @@
 /turf/simulated/floor/exoplanet/can_engrave()
 	return FALSE
 
-/turf/simulated/floor/exoplanet/New()
+/turf/simulated/floor/exoplanet/Initialize(var/ml)
 	if(GLOB.using_map.use_overmap)
 		var/obj/effect/overmap/visitable/sector/exoplanet/E = map_sectors["[z]"]
 		if(istype(E))
@@ -24,7 +24,7 @@
 			set_light(E.lightlevel, 0.1, 2)
 			if(E.planetary_area && istype(loc, world.area))
 				ChangeArea(src, E.planetary_area)
-	..()
+	. = ..()
 
 /turf/simulated/floor/exoplanet/attackby(obj/item/C, mob/user)
 	if(diggable && istype(C,/obj/item/weapon/shovel))

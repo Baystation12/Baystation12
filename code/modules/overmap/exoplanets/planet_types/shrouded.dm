@@ -61,6 +61,6 @@
 	desc = "Sand that has been packed in to solid earth."
 	dirt_color = "#3e3960"
 
-/turf/simulated/floor/exoplanet/shrouded/New()
+/turf/simulated/floor/exoplanet/shrouded/Initialize(var/ml)
+	. = ..()
 	icon_state = "shrouded[rand(0,8)]"
-	..()
