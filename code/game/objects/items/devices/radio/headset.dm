@@ -246,13 +246,6 @@
 	item_state = "headset"
 	ks1type = /obj/item/device/encryptionkey/headset_service
 
-/obj/item/device/radio/headset/ert
-	name = "emergency response team radio headset"
-	desc = "The headset of the boss's boss."
-	icon_state = "com_headset"
-	item_state = "headset"
-	ks1type = /obj/item/device/encryptionkey/ert
-
 /obj/item/device/radio/headset/foundation
 	name = "\improper Foundation radio headset"
 	desc = "The headeset of the occult cavalry."

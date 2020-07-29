@@ -1483,8 +1483,7 @@
 	},
 /area/map_template/rescue_base/base)
 "cO" = (
-/obj/machinery/chemical_dispenser/full,
-/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/machinery/reagentgrinder,
 /turf/unsimulated/floor{
 	dir = 1;
 	icon_state = "vault"
@@ -3594,6 +3593,10 @@
 	icon_state = "asteroidfloor"
 	},
 /area/map_template/rescue_base/base)
+"Es" = (
+/obj/machinery/telecomms/allinone/ert,
+/turf/simulated/floor/plating,
+/area/map_template/rescue_base/start)
 
 (1,1,1) = {"
 ab
@@ -5247,7 +5250,7 @@ eU
 gu
 gu
 gK
-gt
+Es
 gY
 hf
 eQ

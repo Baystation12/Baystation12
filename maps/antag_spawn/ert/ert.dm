@@ -56,3 +56,25 @@
 	name = "\improper Response Team Base"
 	icon_state = "shuttlered"
 	base_turf = /turf/unsimulated/floor/rescue_base
+
+//Objects
+
+/obj/item/device/radio/headset/ert
+	name = "emergency response team radio headset"
+	desc = "The headset of the boss's boss."
+	icon_state = "com_headset"
+	item_state = "headset"
+	ks1type = /obj/item/device/encryptionkey/ert
+
+/obj/item/device/radio/headset/ert/Initialize()
+	. = ..()
+	set_frequency(ERT_FREQ)
+
+/obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/ert
+	build_path = /obj/machinery/telecomms/allinone/ert
+
+/obj/machinery/telecomms/allinone/ert
+	listening_freqs = list(ERT_FREQ)
+	channel_color = COMMS_COLOR_CENTCOMM
+	channel_name = "Response Team"
+	circuitboard = /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/ert
