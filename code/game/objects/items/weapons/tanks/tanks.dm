@@ -487,7 +487,7 @@ var/list/global/tank_gauge_cache = list()
 				return
 			T.assume_air(air_contents)
 			playsound(get_turf(src), 'sound/weapons/gunshot/shotgun.ogg', 20, 1)
-			visible_message("\icon[src] <span class='danger'>\The [src] flies apart!</span>", "<span class='warning'>You hear a bang!</span>")
+			visible_message("[icon2html(src, viewers(src))] <span class='danger'>\The [src] flies apart!</span>", "<span class='warning'>You hear a bang!</span>")
 			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 			var/strength = 1+((pressure-TANK_LEAK_PRESSURE)/TANK_FRAGMENT_SCALE)
@@ -518,7 +518,7 @@ var/list/global/tank_gauge_cache = list()
 
 			T.assume_air(leaked_gas)
 			if(!GET_FLAGS(tank_flags, TANK_FLAG_LEAKING))
-				visible_message("\icon[src] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
+				visible_message("[icon2html(src, viewers(src))] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
 				playsound(loc, 'sound/effects/spray.ogg', 10, 1, -3)
 				SET_FLAGS(tank_flags, TANK_FLAG_LEAKING)
 				#ifdef FIREDBG

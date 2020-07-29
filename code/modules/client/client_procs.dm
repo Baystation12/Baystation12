@@ -87,6 +87,11 @@
 		if("usr")		hsrc = mob
 		if("prefs")		return prefs.process_link(usr,href_list)
 		if("vars")		return view_var_Topic(href,href_list,hsrc)
+		if("chat")		return chatOutput.Topic(href, href_list)
+
+	switch(href_list["action"])
+		if("openLink")
+			send_link(src, href_list["link"])
 
 	if(codex_topic(href, href_list))
 		return
@@ -119,6 +124,9 @@
 	///////////
 /client/New(TopicData)
 	TopicData = null							//Prevent calls to client.Topic from connect
+
+	// Load goonchat
+	chatOutput = new(src)
 
 	switch (connection)
 		if ("seeker", "web") // check for invalid connection type. do nothing if valid
@@ -216,8 +224,12 @@
 	if(!winexists(src, "asset_cache_browser")) // The client is using a custom skin, tell them.
 		to_chat(src, "<span class='warning'>Unable to access asset cache browser, if you are using a custom skin file, please allow DS to download the updated version, if you are not, then make a bug report. This is not a critical issue but can cause issues with resource downloading, as it is impossible to know when extra resources arrived to you.</span>")
 
+	if(get_preference_value(/datum/client_preference/goonchat) == GLOB.PREF_YES)
+		chatOutput.start()
+
 	if(holder)
 		src.control_freak = 0 //Devs need 0 for profiler access
+
 	//////////////
 	//DISCONNECT//
 	//////////////
@@ -404,3 +416,72 @@ client/verb/character_setup()
 	var/mob/living/M = mob
 	if(istype(M))
 		M.OnMouseDrag(src_object, over_object, src_location, over_location, src_control, over_control, params)
+
+/client/verb/toggle_fullscreen()
+	set name = "Toggle Fullscreen"
+	set category = "OOC"
+
+	fullscreen = !fullscreen
+
+	if (fullscreen)
+		winset(usr, "mainwindow", "titlebar=false")
+		winset(usr, "mainwindow", "can-resize=false")
+		winset(usr, "mainwindow", "is-maximized=false")
+		winset(usr, "mainwindow", "is-maximized=true")
+		winset(usr, "mainwindow", "statusbar=false")
+		winset(usr, "mainwindow", "menu=")
+//		winset(usr, "mainwindow.mainvsplit", "size=0x0")
+	else
+		winset(usr, "mainwindow", "is-maximized=false")
+		winset(usr, "mainwindow", "titlebar=true")
+		winset(usr, "mainwindow", "can-resize=true")
+		winset(usr, "mainwindow", "statusbar=true")
+		winset(usr, "mainwindow", "menu=menu")
+
+	fit_viewport()
+
+/client/verb/fit_viewport()
+	set name = "Fit Viewport"
+	set category = "OOC"
+	set desc = "Fit the width of the map window to match the viewport"
+
+	// Fetch aspect ratio
+	var/view_size = getviewsize(view)
+	var/aspect_ratio = view_size[1] / view_size[2]
+
+	// Calculate desired pixel width using window size and aspect ratio
+	var/sizes = params2list(winget(src, "mainwindow.mainvsplit;mapwindow", "size"))
+	var/map_size = splittext(sizes["mapwindow.size"], "x")
+	var/height = text2num(map_size[2])
+	var/desired_width = round(height * aspect_ratio)
+	if (text2num(map_size[1]) == desired_width)
+		// Nothing to do
+		return
+
+	var/split_size = splittext(sizes["mainwindow.mainvsplit.size"], "x")
+	var/split_width = text2num(split_size[1])
+
+	// Calculate and apply a best estimate
+	// +4 pixels are for the width of the splitter's handle
+	var/pct = 100 * (desired_width + 4) / split_width
+	winset(src, "mainwindow.mainvsplit", "splitter=[pct]")
+
+	// Apply an ever-lowering offset until we finish or fail
+	var/delta
+	for(var/safety in 1 to 10)
+		var/after_size = winget(src, "mapwindow", "size")
+		map_size = splittext(after_size, "x")
+		var/got_width = text2num(map_size[1])
+
+		if (got_width == desired_width)
+			// success
+			return
+		else if (isnull(delta))
+			// calculate a probable delta value based on the difference
+			delta = 100 * (desired_width - got_width) / split_width
+		else if ((delta > 0 && got_width > desired_width) || (delta < 0 && got_width < desired_width))
+			// if we overshot, halve the delta and reverse direction
+			delta = -delta/2
+
+		pct += delta
+		winset(src, "mainwindow.mainvsplit", "splitter=[pct]")

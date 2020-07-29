@@ -58,7 +58,7 @@ var/global/list/rad_collectors = list()
 			if(last_rads > max_rads)
 				if(world.time > end_time)
 					end_time = world.time + alert_delay
-					visible_message("\icon[src] \the [src] beeps loudly as the radiation reaches dangerous levels, indicating imminent damage.")
+					visible_message("[icon2html(src, viewers(src))] \the [src] beeps loudly as the radiation reaches dangerous levels, indicating imminent damage.")
 					playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
 			receive_pulse(12.5*(last_rads/max_rads)/(0.3+(last_rads/max_rads)))
 

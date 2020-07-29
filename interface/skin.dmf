@@ -6,6 +6,9 @@ macro "borghotkeymode"
 		name = "Center+REP"
 		command = ".center"
 	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
+	elem 
 		name = "Northeast"
 		command = ".northeast"
 	elem 
@@ -229,9 +232,12 @@ macro "macro"
 	elem 
 		name = "Tab"
 		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
-	elem 
+	elem
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -405,9 +411,12 @@ macro "hotkeymode"
 	elem 
 		name = "Tab"
 		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
-	elem 
+	elem
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -653,6 +662,9 @@ macro "borgmacro"
 	elem 
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -943,8 +955,8 @@ menu "menu"
 window "mainwindow"
 	elem "mainwindow"
 		type = MAIN
-		pos = 281,0
-		size = 640x440
+		pos = 372,0
+		size = 1001x720
 		anchor1 = none
 		anchor2 = none
 		is-default = true
@@ -961,45 +973,15 @@ window "mainwindow"
 		anchor2 = none
 		is-visible = false
 		saved-params = ""
-	elem "hotkey_toggle"
-		type = BUTTON
-		pos = 560,420
-		size = 80x20
-		anchor1 = 100,100
-		anchor2 = none
-		saved-params = ""
-		text = "Hotkey Toggle"
-		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5 : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
-		button-type = pushbox
 	elem "mainvsplit"
 		type = CHILD
-		pos = 3,0
-		size = 634x416
+		pos = 0,0
+		size = 1001x720
 		anchor1 = 0,0
 		anchor2 = 100,100
 		saved-params = "splitter"
 		right = "rpane"
 		is-vert = true
-	elem "input"
-		type = INPUT
-		pos = 3,420
-		size = 517x20
-		anchor1 = 0,100
-		anchor2 = 100,100
-		background-color = #d3b5b5
-		is-default = true
-		border = sunken
-		saved-params = "command"
-	elem "saybutton"
-		type = BUTTON
-		pos = 520,420
-		size = 40x20
-		anchor1 = 100,100
-		anchor2 = none
-		saved-params = "is-checked"
-		text = "Chat"
-		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
-		button-type = pushbox
 
 window "mapwindow"
 	elem "mapwindow"
@@ -1033,7 +1015,6 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
@@ -1042,10 +1023,11 @@ window "mapwindow"
 window "outputwindow"
 	elem "outputwindow"
 		type = MAIN
-		pos = 281,0
+		pos = 372,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1053,21 +1035,59 @@ window "outputwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+	elem "browseroutput"
+		type = BROWSER
+		pos = 0,0
+		size = 640x456
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #ffffff
+		is-visible = false
+		saved-params = ""
+		auto-format = false
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
-		size = 640x480
+		size = 640x460
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
-		saved-params = "max-lines"
-		style = ".system {color:#ff0000;}"
-		max-lines = 0
+		saved-params = ""
+	elem "saybutton"
+		type = BUTTON
+		pos = 519,459
+		size = 40x20
+		anchor1 = 100,100
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Chat"
+		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
+		button-type = pushbox
+	elem "input"
+		type = INPUT
+		pos = 1,459
+		size = 517x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		background-color = #d3b5b5
+		is-default = true
+		border = sunken
+		saved-params = "command"
+	elem "hotkey_toggle"
+		type = BUTTON
+		pos = 560,459
+		size = 80x20
+		anchor1 = 100,100
+		anchor2 = none
+		saved-params = ""
+		text = "Hotkey Toggle"
+		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
+		button-type = pushbox
 
 window "rpane"
 	elem "rpane"
 		type = MAIN
-		pos = 281,0
+		pos = 418,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
@@ -1197,4 +1217,3 @@ window "infowindow"
 		highlight-color = #00aa00
 		on-show = ".winset\"rpane.infob.is-visible=true;rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
-

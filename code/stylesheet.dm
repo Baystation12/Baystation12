@@ -65,7 +65,7 @@ em						{font-style: normal;font-weight: bold;}
 .name					{font-weight: bold;}
 .say					{}
 .alert					{color: #ff0000;}
-h1.alert, h2.alert		{color: #000000;}
+h1.alert, h2.alert		{color: #000080;}
 
 .emote					{font-style: italic;}
 

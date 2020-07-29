@@ -484,6 +484,11 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	Master.Shutdown()
 
+	var/datum/chatOutput/co
+	for(var/client/C in GLOB.clients)
+		co = C.chatOutput
+		if(co)
+			co.ehjax_send(data = "roundrestart")
 	if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 		for(var/client/C in GLOB.clients)
 			send_link(C, "byond://[config.server]")
