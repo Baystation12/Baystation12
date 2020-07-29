@@ -1,6 +1,6 @@
 /datum/map/torch
-	name = "Torch"
-	full_name = "SEV Torch"
+	name = "\improper Torch"
+	full_name = "\improper SEV Torch"
 	path = "torch"
 	flags = MAP_HAS_BRANCH | MAP_HAS_RANK
 	config_path = "config/torch_config.txt"
@@ -15,8 +15,8 @@
 	allowed_spawns = list("Cryogenic Storage", "Cyborg Storage")
 	default_spawn = "Cryogenic Storage"
 
-	station_name  = "SEV Torch"
-	station_short = "Torch"
+	station_name  = "\improper SEV Torch"
+	station_short = "\improper Torch"
 	dock_name     = "TBD"
 	boss_name     = "Expeditionary Command"
 	boss_short    = "Command"

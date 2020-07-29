@@ -3,8 +3,8 @@
 	full_name = "Bearcat"
 	path = "overmap_example"
 
-	station_name  = "FTV Bearcat"
-	station_short = "Bearcat"
+	station_name  = "\improper FTV Bearcat"
+	station_short = "\improper Bearcat"
 
 	dock_name     = "FTS Capitalist's Rest"
 	boss_name     = "FTU Merchant Navy"
@@ -36,7 +36,7 @@
 	salary_modifier = 0.2
 
 /datum/map/bearcat/get_map_info()
-	return "You're aboard the <b>[station_name],</b> an independent vessel affiliated with Free Trade Union, on a SPACE FRONTIER. \
+	return "You're aboard \the <b>[station_name],</b> an independent vessel affiliated with Free Trade Union, on a SPACE FRONTIER. \
 	No major corporation or government has laid claim on the planets in this sector, so their exploitation is entirely up to you - mine, poach and deforest all you want."
 
 /datum/map/bearcat/setup_map()
