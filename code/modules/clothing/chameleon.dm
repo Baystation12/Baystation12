@@ -33,6 +33,8 @@
 /obj/item/proc/OnDisguise(var/obj/item/copy, var/mob/user)
 	return
 
+
+
 /proc/generate_chameleon_choices(var/basetype)
 	. = list()
 
@@ -49,16 +51,16 @@
 			.[name] = typepath
 	return sortAssoc(.)
 
+
 /obj/item/chameleon_outfit/proc/initialize_outfits()
-	var/static/list/standard_outfit_options
-	if(!standard_outfit_options)
+	var/global/list/standard_outfit_options
+	if(!standard_outfit_options)	
 		standard_outfit_options = list()
-		for(var/path in subtypesof(/datum/outfit/job))
-			var/datum/outfit/O = path
-			if(initial(O.can_be_admin_equipped))
-				standard_outfit_options[initial(O.name)] = path
+		for(var/path in subtypesof(/decl/hierarchy/outfit/job))
+			var/decl/hierarchy/outfit/job/J = path
+			standard_outfit_options[initial(J.name)] = path
 		sortTim(standard_outfit_options, /proc/cmp_text_asc)
-	outfit_options = standard_outfit_options
+	return standard_outfit_options
 
 
 
@@ -78,6 +80,10 @@
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
 
+/obj/item/clothing/under/chameleon/verb/change_outfit()
+	/obj/item/chameleon_outfit/proc/initialize_outfits
+	input(usr, "What will you choose?", "window name") as null|standard_outfit_options
+
 /obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
 	set category = "Chameleon Items"
@@ -89,6 +95,7 @@
 
 		disguise(clothing_choices[picked], usr)
 		update_clothing_icon()	//so our overlays update.
+
 
 //*****************
 //**Chameleon Hat**
