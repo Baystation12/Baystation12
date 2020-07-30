@@ -564,16 +564,14 @@
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
 						continue
 
-				M.flash_eyes()
-				M.Weaken(15)
+				M.flash_eyes(50)
 
 			if(4 to 5)
 				if(hasvar(M, "glasses"))
 					if(istype(M:glasses, /obj/item/clothing/glasses/sunglasses))
 						continue
 
-				M.flash_eyes()
-				M.Stun(5)
+				M.flash_eyes(35)
 
 /datum/chemical_reaction/emp_pulse
 	name = "EMP Pulse"
