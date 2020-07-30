@@ -51,6 +51,12 @@ var/global/floorIsLava = 0
 	if(M.client)
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
+		body += "<br><br><b>CentCom Galactic Ban DB: </b> "
+		if(config.centcom_ban_db)
+			body += "<a href='?_src_=holder;centcomlookup=[M.client.ckey]'>Search</a>"
+		else
+			body += "<i>Disabled</i>"
+		body += "<br><br>"
 
 	if(istype(M, /mob/new_player))
 		body += " <B>Hasn't Entered Game</B> "
@@ -1171,7 +1177,7 @@ var/global/floorIsLava = 0
 		out += "<b>Autotraitor <a href='?src=\ref[ticker.mode];toggle=autotraitor'>disabled</a></b>.<br/>"
 
 	out += "<b>All antag ids:</b>"
-	if(ticker.mode.antag_templates && ticker.mode.antag_templates.len).
+	if(ticker.mode.antag_templates && ticker.mode.antag_templates.len)
 		for(var/datum/antagonist/antag in ticker.mode.antag_templates)
 			antag.update_current_antag_max()
 			out += " <a href='?src=\ref[ticker.mode];debug_antag=[antag.id]'>[antag.id]</a>"

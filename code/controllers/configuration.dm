@@ -244,6 +244,8 @@ var/list/gamemode_cache = list()
 
 	var/do_sql_connection = 1
 
+	var/centcom_ban_db = "https://centcom.melonmesa.com/ban/search"
+
 /datum/configuration/New()
 	if(!gamemode_cache.len)
 		instantiate_gamemodes()
@@ -810,6 +812,9 @@ var/list/gamemode_cache = list()
 					error_silence_time = text2num(value)
 				if("error_msg_delay")
 					error_msg_delay = text2num(value)
+
+				if("centcom_ban_db")
+					config.centcom_ban_db = value
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
