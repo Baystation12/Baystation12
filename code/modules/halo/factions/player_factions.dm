@@ -61,11 +61,13 @@
 		/mob/living/simple_animal/hostile/battledog/odst = 1,\
 		/mob/living/simple_animal/hostile/unsc/spartan_two = 1)
 	default_radio_channel = RADIO_SQUAD
+	income = 1000
+	income_delay = 15 MINUTES
 
 /datum/faction/unsc/Initialize()
 	. = ..()
 	leader_name = "[pick("Vice Admiral","Rear Admiral","Admiral","Fleet Admiral")] [leader_name]"
-	money_account = create_account("UNSC", 1000000000)		//1 billion credits muahahahaha
+	money_account = create_account("UNSC", 1000)
 
 /datum/faction/unsc/get_commander(var/datum/mind/check_mind)
 
@@ -83,6 +85,12 @@
 		/mob/living/simple_animal/hostile/battledog/odst = 1,\
 		/mob/living/simple_animal/hostile/unsc/spartan_two = 1)
 	default_radio_channel = RADIO_ONI
+	income = 1000
+	income_delay = 15 MINUTES
+
+/datum/faction/oni/Initialize()
+	. = ..()
+	money_account = create_account("ONI", 1000)
 
 
 

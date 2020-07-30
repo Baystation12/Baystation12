@@ -1655,6 +1655,7 @@
 #include "code\modules\halo\factions\announce.dm"
 #include "code\modules\halo\factions\fleet_handling.dm"
 #include "code\modules\halo\factions\hails.dm"
+#include "code\modules\halo\factions\income.dm"
 #include "code\modules\halo\factions\job.dm"
 #include "code\modules\halo\factions\npc_fleet.dm"
 #include "code\modules\halo\factions\objectives.dm"
