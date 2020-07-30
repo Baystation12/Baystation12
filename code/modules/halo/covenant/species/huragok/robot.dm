@@ -56,5 +56,6 @@
 	add_language(LANGUAGE_SIGN, 1)
 	//add_language("Sangheili",1)
 	default_language = all_languages[LANGUAGE_SIGN]
+	radio.create_channel_dongle(RADIO_COV)
 
 #undef HURAGOK_REGEN

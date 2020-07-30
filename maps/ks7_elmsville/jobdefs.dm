@@ -25,6 +25,8 @@
 	/datum/job/unsc/oni/research,
 	/datum/job/unsc/oni/research/director,
 	/datum/job/unsc_ai,
+	/datum/job/covenant/huragok,
+	/datum/job/covenant/AI,
 	/datum/job/covenant/sangheili_minor,
 	/datum/job/covenant/sangheili_major,
 	/datum/job/covenant/sangheili_ultra,
@@ -47,9 +49,9 @@
 	)
 
 	allowed_spawns = list(\
-		DEFAULT_SPAWNPOINT_ID,
-		"UNSC Base Spawns",
-		"UNSC Base Fallback Spawns"
+		DEFAULT_SPAWNPOINT_ID,\
+		"UNSC Base Spawns",\
+		"UNSC Base Fallback Spawns"\
 		)
 
 	default_spawn = DEFAULT_SPAWNPOINT_ID

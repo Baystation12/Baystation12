@@ -54,9 +54,10 @@
 	var/obj/item/W = get_active_hand()
 
 	// Cyborgs have no range-checking unless there is item use
-	if(!W && loc.Adjacent(A))
-		A.add_hiddenprint(src)
-		A.attack_robot(src)
+	if(!W)
+		if(loc.Adjacent(A))
+			A.add_hiddenprint(src)
+			A.attack_robot(src)
 		return
 
 	// buckled cannot prevent machine interlinking but stops arm movement
