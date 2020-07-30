@@ -3169,6 +3169,7 @@
 #include "maps\random_ruins\exoplanet_ruins\monoliths\monoliths.dm"
 #include "maps\random_ruins\exoplanet_ruins\oasis\oasis.dm"
 #include "maps\random_ruins\exoplanet_ruins\oldlab\oldlab.dm"
+#include "maps\random_ruins\exoplanet_ruins\oldlab2\oldlab2.dm"
 #include "maps\random_ruins\exoplanet_ruins\oldpod\oldpod.dm"
 #include "maps\random_ruins\exoplanet_ruins\radshrine\radshrine.dm"
 #include "maps\random_ruins\exoplanet_ruins\spider_nest\spider_nest.dm"
