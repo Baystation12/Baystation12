@@ -52,13 +52,14 @@
 	return sortAssoc(.)
 
 
-/obj/item/chameleon_outfit/proc/initialize_outfits()
+obj/item/clothing/under/chameleon/proc/initialize_outfits()
 	var/global/list/standard_outfit_options
 	if(!standard_outfit_options)	
 		standard_outfit_options = list()
 		for(var/path in subtypesof(/decl/hierarchy/outfit/job))
 			var/decl/hierarchy/outfit/job/J = path
-			standard_outfit_options[initial(J.name)] = path
+			if(initial(J.chameleon))
+				standard_outfit_options[initial(J.name)] = path
 		sortTim(standard_outfit_options, /proc/cmp_text_asc)
 	return standard_outfit_options
 
@@ -81,8 +82,12 @@
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
 
 /obj/item/clothing/under/chameleon/verb/change_outfit()
-	/obj/item/chameleon_outfit/proc/initialize_outfits
-	input(usr, "What will you choose?", "window name") as null|standard_outfit_options
+	if(usr.incapacitated())
+		return FALSE
+	set name = "Change Chameleon Outfit"
+	var/list/outfits = initialize_outfits()
+	var/selected = input(usr, "Choose an Outfit", "Chameleon Outfit") as null|anything in outfits
+
 
 /obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
