@@ -20,12 +20,12 @@
 	. = __rust_g
 	if (!.)
 		if (world.system_type == UNIX)
-			if (fexists("./librust_g.so"))
+			if (fexists("./lib/rust_g/librust_g.so"))
 				// No need for LD_LIBRARY_PATH badness.
-				. = __rust_g = "./librust_g.so"
-			else if (fexists("./rust_g"))
+				. = __rust_g = "./lib/rust_g/librust_g.so"
+			else if (fexists("./lib/rust_g/rust_g"))
 				// Old dumb filename.
-				. = __rust_g = "./rust_g"
+				. = __rust_g = "./lib/rust_g/rust_g"
 			else if (fexists("[world.GetConfig("env", "HOME")]/.byond/bin/rust_g"))
 				// Old dumb filename in `~/.byond/bin`.
 				. = __rust_g = "rust_g"
@@ -33,7 +33,7 @@
 				// It's not in the current directory, so try others
 				. = __rust_g = "librust_g.so"
 		else
-			. = __rust_g = "rust_g"
+			. = __rust_g = "lib/rust_g/rust_g"
 
 #define RUST_G __detect_rust_g()
 #endif

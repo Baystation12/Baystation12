@@ -86,8 +86,7 @@
 			to_chat(usr, "<span class='warning'>Centcom Galactic Ban DB is disabled!</span>")
 			return
 
-		//var/ckey = href_list["centcomlookup"]
-		var/ckey = "patriotwasp"
+		var/ckey = href_list["centcomlookup"]
 
 		// Make the request
 		var/datum/http_request/request = new()
