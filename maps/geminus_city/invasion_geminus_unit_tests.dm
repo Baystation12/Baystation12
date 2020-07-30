@@ -44,5 +44,7 @@
 		/area/exoplanet,
 		/area/exoplanet/desert,
 		/area/exoplanet/grass,
-		/area/exoplanet/snow
+		/area/exoplanet/snow,
+		/area/shuttle/unsc_onsite_supply,
+		/area/shuttle/oni_onsite_supply
 	)

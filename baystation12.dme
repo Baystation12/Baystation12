@@ -2000,8 +2000,6 @@
 #include "code\modules\halo\structures\supersmes.dm"
 #include "code\modules\halo\structures\tanktrap.dm"
 #include "code\modules\halo\structures\thrusters.dm"
-#include "code\modules\halo\supply\oni.dm"
-#include "code\modules\halo\supply\unsc.dm"
 #include "code\modules\halo\supply\program\_program.dm"
 #include "code\modules\halo\supply\program\mutators.dm"
 #include "code\modules\halo\supply\program\print.dm"

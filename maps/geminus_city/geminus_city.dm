@@ -23,6 +23,9 @@
 	#include "innie_supply/supply_shuttle.dm"
 	*/
 
+	#include "../../code/modules/halo/supply/unsc.dm"
+	#include "../../code/modules/halo/supply/oni.dm"
+
 	//#include "geminus_city_jobdefs.dm"
 	#include "ai_items.dm"
 	#include "invasion_geminus.dm"
