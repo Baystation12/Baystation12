@@ -1647,6 +1647,7 @@
 #include "code\modules\halo\events\magnetic_storm.dm"
 #include "code\modules\halo\events\power_failure.dm"
 #include "code\modules\halo\events\spacevine.dm"
+#include "code\modules\halo\events\ueg_money_bonus.dm"
 #include "code\modules\halo\events\wallrot.dm"
 #include "code\modules\halo\factions\__defs.dm"
 #include "code\modules\halo\factions\_controller.dm"
