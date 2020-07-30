@@ -2002,6 +2002,7 @@
 #include "code\modules\halo\structures\thrusters.dm"
 #include "code\modules\halo\trade\_trade_controller.dm"
 #include "code\modules\halo\trade\export.dm"
+#include "code\modules\halo\trade\objs.dm"
 #include "code\modules\halo\trade\shuttle_buy.dm"
 #include "code\modules\halo\trade\shuttle_sell.dm"
 #include "code\modules\halo\trade\trade_category.dm"
