@@ -87,13 +87,14 @@ obj/item/clothing/under/chameleon/proc/initialize_outfits()
 	set name = "Change Chameleon Outfit"
 	var/list/outfits = initialize_outfits()
 	var/selected_key = input(usr, "Choose an Outfit", "Chameleon Outfit") as null|anything in outfits
-	var/decl/hierarchy/outfit/selected = initial(outfits[selected_key])
+	var/decl/hierarchy/outfit/selected = outfits[selected_key]
 	if(!ishuman(usr))
 		return FALSE
 	var/mob/living/carbon/human/user = usr
 	if(istype(user.w_uniform, /obj/item/clothing/under/chameleon))
-		if(selected.uniform != null)
-			disguise(clothing_choices[selected.uniform],usr)
+		to_chat(world, initial(selected.uniform))
+		if(initial(selected.uniform) != null)
+			disguise(clothing_choices[initial(selected.uniform)	],usr)
 	if(istype(user.head, /obj/item/clothing/head/chameleon))
 		if(selected.head != null)
 			disguise(clothing_choices[selected.head],usr)
