@@ -23,7 +23,7 @@
 			transaction_desc = "Funding Grant"
 		if(EVENT_LEVEL_MAJOR)
 			amount = 500 * rand(3,10)
-			announce_text = "CENTCOMM has declared your system a priority defence and increased the local \
+			announce_text = "HIGHCOM has declared your system a priority defence and increased the local \
 				[affecting_faction.name] operations budget accordingly"
 			transaction_desc = "Priority Defence Allocation"
 
