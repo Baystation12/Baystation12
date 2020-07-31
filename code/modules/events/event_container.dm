@@ -137,7 +137,8 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Vermin Infestation", 	/datum/event/infestation, 				1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Space Cold",		 	/datum/event/space_cold, 				1),
 		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Gravity Failure",		/datum/event/ship/gravity_failure,		1),
-		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Electrical Storm",		/datum/event/electrical_storm, 			1)
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"Electrical Storm",		/datum/event/electrical_storm, 			1),
+		new /datum/event_meta(EVENT_LEVEL_MUNDANE,	"UEG Money Bonus",		/datum/event/ueg_money_bonus, 		1)
 	)
 
 /datum/event_container/moderate
@@ -151,7 +152,8 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Radiation Storm",		/datum/event/radiation_storm,			1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Appendicitis",			/datum/event/spontaneous_appendicitis,	1),
 		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Gravity Failure",		/datum/event/ship/gravity_failure,		1),
-		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Electrical Storm",		/datum/event/electrical_storm, 			1)
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"Electrical Storm",		/datum/event/electrical_storm, 			1),
+		new /datum/event_meta(EVENT_LEVEL_MODERATE,	"UEG Money Bonus",		/datum/event/ueg_money_bonus,			1)
 	)
 
 /datum/event_container/major
@@ -162,7 +164,8 @@ var/global/list/severity_to_string = list(EVENT_LEVEL_MUNDANE = "Mundane", EVENT
 		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Space Vines",			/datum/event/ship/spacevines,			1),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Magnetic Storm",		/datum/event/magnetic_storm,			1),
 		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Ion Storm",			/datum/event/ion_storm,					1),
-		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Electrical Storm",		/datum/event/electrical_storm, 			1)
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"Electrical Storm",		/datum/event/electrical_storm, 			1),
+		new /datum/event_meta(EVENT_LEVEL_MAJOR,	"UEG Money Bonus",		/datum/event/ueg_money_bonus,			1)
 	)
 
 

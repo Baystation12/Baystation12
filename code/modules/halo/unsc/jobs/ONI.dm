@@ -1,6 +1,6 @@
 
 /datum/job/unsc/oni
-	access = list(access_unsc,access_unsc_oni)
+	access = list(access_unsc, access_unsc_oni, access_unsc_cargo)
 	spawnpoint_override = null
 	fallback_spawnpoint = null
 

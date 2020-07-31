@@ -1,0 +1,137 @@
+
+{{if data.screen == 0}}
+	You must be authorised to continue<br>
+	{{:helper.link('Biometric scan', 'locked', {'login' : 0})}}
+{{else}}
+	You are authenticated. You may access all functions of this program.
+	<div class="item">
+		{{:helper.link('Logout', 'unlocked', {'set_screen' : 0})}}
+		{{:helper.link('Browse Goods', 'cart', {'set_screen' : 1}, data.screen == 1 ? 'selected' : null)}}
+		{{:helper.link('View Statistics', 'calculator', {'set_screen' : 2}, data.screen == 2 ? 'selected' : null)}}
+		{{:helper.link('Shuttle Control', 'key', {'set_screen' : 3}, data.screen == 3 ? 'selected' : null)}}
+		{{:helper.link('Browse Orders', 'check', {'set_screen' : 4}, data.screen == 4 ? 'selected' : null)}}
+	</div>
+	<hr>
+	<span>
+		Account number: #{{:data.account_num}} | Account name: {{:data.account_owner}} | Account balance: {{:data.account_credits}} Credits |
+		 Income: {{:data.income}} Credits | Next payment: {{:data.payment_time}}
+	</span>
+	<hr>
+	{{if data.screen == 1}}
+		{{for data.categories}}
+			{{:helper.link(value, null, {'select_category' : value}, data.category == value ? 'selected' : null)}}
+		{{/for}}
+		{{if data.category}}
+			<table style="width:100%">
+				<tr><th style="width:70%">Item<th style="width:20%">Cost<th style="width:10%">Order
+				{{for data.possible_purchases}}
+					<tr>
+					<td>{{:value.name}}
+					<td>{{:value.cost}} Credits
+					<td>{{:helper.link('Order', null, {'order' : value.ref})}}
+				{{/for}}
+			</table>
+		{{/if}}
+	{{else data.screen == 2}}
+		<div class="item">
+			<div class="itemLabel">
+				Total credits generated today:
+			</div>
+			<div class="itemContent">
+				{{:data.total_credits}} Cr.
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Withdraw credits from account:
+			</div>
+				<div class="itemContent">
+					{{:helper.link('Make withdrawal', 'mail-open', {'withdraw_credits' : 1}, null)}}
+				</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Deposit credits into account:
+			</div>
+			<div class="itemContent">
+				{{:helper.link('Make deposit', 'mail-closed', {'deposit_credits' : 1}, null)}}
+			</div>
+		</div>
+		<table style="width:100%">
+			<tr><th style="width:20%">Shipment time<th style="width:20%">Unit Name<th style="width:20%">Unit Price<th style="width:20%">Quantity<th style="width:20%">Authorised
+			{{for data.exports}}
+				<tr>
+				<td>{{:value.time}}
+				<td>{{:value.name}}
+				<td>{{:value.unit_price}} Credits
+				<td>{{:value.quantity}}
+				<td>{{:value.authorised}}
+			{{/for}}
+		</table>
+		<div class="item">
+			<div class="itemLabel">
+				Options:
+			</div>
+			<div class="itemContent">
+				{{:helper.link('Print', 'print', {'print_summary' : 1}, data.can_print ? null : 'disabled')}}
+			</div>
+		</div>
+	{{else data.screen == 3}}
+		<div class="item">
+			<div class="itemLabel">
+				Current shuttle location:
+			</div>
+			<div class="itemContent">
+				{{:data.shuttle_location}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Current shuttle status:
+			</div>
+			<div class="itemContent">
+				{{:data.shuttle_status}}
+			</div>
+		</div>
+		<div class="item">
+			<div class="itemLabel">
+				Commands:
+			</div>
+			<div class="itemContent">
+				{{:helper.link('Launch', 'check', {'launch_shuttle' : 1}, data.shuttle_can_control ? null : 'disabled')}}
+			</div>
+		</div>
+	{{else data.screen == 4}}
+		<div class="item">
+			<center><h3>Pending orders</h3></span>
+			<table style="width:100%">
+				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">Options
+				{{for data.requests}}
+					<tr>
+					<td>{{:value.id}}
+					<td>{{:value.object}}
+					<td>{{:value.orderer}}
+					<td>{{:value.reason}}
+					<td>{{:value.cost}} Cr.
+					<td>{{:helper.link('Approve', 'check', {'approve_order' : value.id}, value.cost > data.account_credits ? 'disabled' : null )}}{{:helper.link('Deny', 'cancel', {'deny_order' : value.id})}}
+				{{/for}}
+			</table>
+		</div>
+		<hr>
+		<div class="item">
+			<center><h3>Approved orders</h3></span>
+			<table style="width:100%">
+				<tr><th style="width:10%">ID<th style="width:25%">Requested item<th style="width:20%">Requested by<th style="width:20%">Reason<th style="width:10%">Cost<th style="width:15%">Options
+				{{for data.cart}}
+					<tr>
+					<td>{{:value.id}}
+					<td>{{:value.object}}
+					<td>{{:value.orderer}}
+					<td>{{:value.reason}}
+					<td>{{:value.cost}} Cr.
+					<td>{{:helper.link('Cancel', 'cancel', {'cancel_order' : value.id})}}
+				{{/for}}
+			</table>
+		</div>
+	{{/if}}
+{{/if}}

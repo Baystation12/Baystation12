@@ -30,3 +30,10 @@
 		"ODST Staff Sergeant" = /decl/hierarchy/outfit/job/unsc/odst/e6,\
 		"ODST Gunnery Sergeant" = /decl/hierarchy/outfit/job/unsc/odst/e7,\
 		"ODST Master Sergeant" = /decl/hierarchy/outfit/job/unsc/odst/e8)
+	access = list(\
+		access_unsc,\
+		access_unsc_armoury,\
+		access_unsc_marine,\
+		access_unsc_odst,\
+		access_unsc_specialist,\
+		access_unsc_cargo)
