@@ -86,8 +86,29 @@ obj/item/clothing/under/chameleon/proc/initialize_outfits()
 		return FALSE
 	set name = "Change Chameleon Outfit"
 	var/list/outfits = initialize_outfits()
-	var/selected = input(usr, "Choose an Outfit", "Chameleon Outfit") as null|anything in outfits
-
+	var/selected_key = input(usr, "Choose an Outfit", "Chameleon Outfit") as null|anything in outfits
+	var/decl/hierarchy/outfit/selected = initial(outfits[selected_key])
+	if(!ishuman(usr))
+		return FALSE
+	var/mob/living/carbon/human/user = usr
+	if(istype(user.w_uniform, /obj/item/clothing/under/chameleon))
+		if(selected.uniform != null)
+			disguise(clothing_choices[selected.uniform],usr)
+	if(istype(user.head, /obj/item/clothing/head/chameleon))
+		if(selected.head != null)
+			disguise(clothing_choices[selected.head],usr)
+	if(istype(user.wear_suit, /obj/item/clothing/suit/chameleon))
+		if(selected.suit != null)
+			disguise(clothing_choices[selected.suit],usr)
+	if(istype(user.shoes, /obj/item/clothing/shoes/chameleon))
+		if(selected.shoes != null)
+			disguise(clothing_choices[selected.shoes], usr)
+	if(istype(user.back, /obj/item/weapon/storage/backpack/chameleon))
+		if(selected.back != null)
+			disguise(clothing_choices[selected.back],usr)
+	if(istype(user.glasses, /obj/item/clothing/glasses/chameleon))
+		if(selected.glasses != null)
+			disguise(clothing_choices[selected.glasses],usr)
 
 /obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
