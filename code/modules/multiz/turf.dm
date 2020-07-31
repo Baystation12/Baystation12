@@ -61,7 +61,7 @@
 
 /turf/simulated/open/update_icon()
 	if(below)
-		underlays = list(image(icon = below.icon, icon_state = below.icon_state))
+		underlays = list(image(icon = below.icon, icon_state = below.icon_state,dir = below.dir))
 
 	var/list/noverlays = list()
 	if(!istype(below,/turf/space))

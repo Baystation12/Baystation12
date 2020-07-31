@@ -562,9 +562,10 @@
 
 /obj/structure/window/reinforced/projresist
 	name = "coated window"
-	desc = "A thin sheen covers this window. It looks incredibly hard to destroy with guns."
+	desc = "A thin sheen covers this window. It looks incredibly hard to destroy with gunfire."
 	icon_state = "rwindow"
 	basestate = "rwindow"
+	maxhealth = 400
 	reinf = 1
 	damage_per_fire_tick = 0
 	glasstype = /obj/item/stack/material/glass/reinforced
@@ -574,8 +575,6 @@
 
 /obj/structure/window/reinforced/projresist/ex_act(var/severity)
 	if(severity > 1) //Anything other than a direct epicenter hit just damages the window.
-		take_damage(100)
-	else if(prob(25))
-		shatter(0)
+		take_damage(50)
 	else
-		take_damage(300)
+		take_damage(150)

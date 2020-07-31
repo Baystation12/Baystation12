@@ -13,7 +13,7 @@
 	icon = 'code/modules/halo/icons/overmap/faction_misc.dmi'
 	icon_state = "SMAC"
 	faction = "UNSC"
-	overmap_spawn_near_me = list(/obj/effect/overmap/sector/geminus_city)
+	overmap_spawn_near_me = list()
 	base = 1
 	block_slipspace = 1
 	fore_dir = WEST

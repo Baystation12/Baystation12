@@ -261,7 +261,11 @@ var/list/points_of_interest = list()
 	//for(var/zlevel in map_z)
 	map_sectors["[z]"] = src
 	if(GLOB.using_map.use_overmap)
-		var/turf/move_to_loc = pick(GLOB.overmap_tiles_uncontrolled)
+		var/turf/move_to_loc = null
+		if(GLOB.overmap_tiles_uncontrolled.len > 0)
+			move_to_loc = pick(GLOB.overmap_tiles_uncontrolled)
+		else
+			move_to_loc = loc
 
 		forceMove(move_to_loc)
 

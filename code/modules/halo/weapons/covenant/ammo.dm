@@ -1,7 +1,7 @@
 #define NEEDLER_EMBED_PROB 66
 #define NEEDLER_SHARD_DET_TIME 10 SECONDS
 #define FUEL_ROD_IRRADIATE_RANGE 2
-#define FUEL_ROD_IRRADIATE_AMOUNT 15
+#define FUEL_ROD_IRRADIATE_AMOUNT 10
 #define FUEL_ROD_MAX_OVERSHOOT 3
 
  // need icons for all projectiles and magazines
@@ -61,7 +61,7 @@
 	muzzle_type = /obj/effect/projectile/muzzle/cov_cyan
 
 /obj/item/projectile/bullet/covenant/plasmarifle/brute
-	damage = 30
+	damage = 25
 	icon_state = "heavy_plas_cannon"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
@@ -82,7 +82,7 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.rad_act(10)
+	L.rad_act(6)
 	. = ..()
 
 /obj/effect/projectile/beam_rifle
@@ -224,7 +224,8 @@
 /obj/item/projectile/bullet/covenant/type51carbine
 	name = "Glowing Projectile"
 	desc = "This projectile leaves a green trail in its wake."
-	damage = 40
+	damage = 25 //A lot less rounds in a mag than the counterpart BR.
+	shield_damage = 10
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "carbine_casing"
 	check_armour = "energy"
@@ -240,7 +241,7 @@
 	if(!istype(L))
 		. = ..()
 		return
-	L.rad_act(7)
+	L.rad_act(3)
 	. = ..()
 
 /obj/effect/projectile/type51carbine
@@ -267,8 +268,8 @@
 
 /obj/item/projectile/bullet/covenant/needles/rifleneedle
 	name = "Rifle Needle"
-	damage = 30
-	shield_damage = 5
+	damage = 20
+	shield_damage = 10
 	shards_to_explode = 3
 	shard_name = "Rifle Needle shrapnel"
 	tracer_type = /obj/effect/projectile/bullet/covenant/needles/rifleneedle
@@ -278,7 +279,6 @@
 	armor_penetration = 20
 	max_track_steps = 2
 	shrapnel_damage = 10
-	shield_damage = 50
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red
 
 /obj/effect/projectile/bullet/covenant/needles/rifleneedle
@@ -351,7 +351,7 @@
 	name = "heavy plasma round"
 	damage = 35 //Same as plasma rifle, but it has AP!
 	armor_penetration = 30
-	shield_damage = 150
+	shield_damage = 50
 	icon = 'code/modules/halo/weapons/icons/Covenant_Projectiles.dmi'
 	icon_state = "pulse0"
 	muzzle_type = /obj/effect/projectile/muzzle/cov_red

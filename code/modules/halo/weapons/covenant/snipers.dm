@@ -13,7 +13,7 @@
 	caliber = "cov_carbine"
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_carbine_reload.ogg'
-	fire_delay = 5 //Doesn't have the 3rnd burst of the counterpart BR
+	fire_delay = 3 //Doesn't have the 3rnd burst of the counterpart BR
 	dispersion = list(0.26)
 	one_hand_penalty = -1
 	irradiate_non_cov = 12
@@ -122,6 +122,7 @@
 	load_method = MAGAZINE
 	reload_sound = 'code/modules/halo/sounds/cov_needlerifle_reload.ogg'
 	one_hand_penalty = -1
+	fire_delay = 10
 	dispersion = list(0.26)
 	accuracy = 2
 	wielded_item_state = "needlerifle-wielded"

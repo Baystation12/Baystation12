@@ -224,6 +224,8 @@
 						//var/my_faction_players = my_faction.living_minds.len
 						var/my_faction_players = 0
 						for(var/datum/mind/player in my_faction.living_minds)
+							if(!istype(player.current,/mob/living) || player.current.stat == DEAD)
+								continue
 							var/add_as_players = 1
 							if(player.assigned_job)
 								add_as_players = player.assigned_job.pop_balance_mult

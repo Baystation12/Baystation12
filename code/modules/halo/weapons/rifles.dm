@@ -144,6 +144,9 @@
 		slot_r_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_right.dmi',
 		)
 
+/obj/item/weapon/gun/projectile/br85/can_use_when_prone()
+	return 1
+
 /obj/item/weapon/gun/projectile/br85/verb/scope()
 	set category = "Weapon"
 	set name = "Use Scope"
@@ -185,6 +188,9 @@
 		)
 	attachment_slots = list("barrel","underbarrel rail","upper rail","upper stock")
 	attachments_on_spawn = list(/obj/item/weapon_attachment/barrel/br55,/obj/item/weapon_attachment/br55_stock_cheekrest,/obj/item/weapon_attachment/br55_bottom,/obj/item/weapon_attachment/br55_upper,/obj/item/weapon_attachment/sight/br55_scope)
+
+/obj/item/weapon/gun/projectile/br55/can_use_when_prone()
+	return 1
 
 /obj/item/weapon/gun/projectile/br55/update_icon()
 	if(ammo_magazine)

@@ -83,8 +83,8 @@
 	create_pain_screams()
 
 /mob/living/simple_animal/verb/verb_set_leader()
-	set name = "Follow Me"
-	set category = "AI Command"
+	set name = "AI Command - Follow Me"
+	set category = "IC"
 	set src in range(7)
 
 	var/mob/living/user = usr
@@ -103,8 +103,8 @@
 		set_leader(user)
 
 /mob/living/simple_animal/verb/verb_hold_fire()
-	set name = "Hold Fire"
-	set category = "AI Command"
+	set name = "AI Command - Hold Fire"
+	set category = "IC"
 	set src in range(7)
 
 	var/mob/living/user = usr
