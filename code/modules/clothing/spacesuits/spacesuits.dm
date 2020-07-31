@@ -91,4 +91,4 @@
 
 /obj/item/clothing/suit/space/New()
 	..()
-	slowdown_per_slot[slot_wear_suit] = 1
+	slowdown_per_slot[slot_wear_suit] = 0.5

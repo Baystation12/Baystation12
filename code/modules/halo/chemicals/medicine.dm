@@ -135,6 +135,20 @@
 			to_chat(M,"<span class ='userdanger'>You feel [dam ? "your [O.name] collapse" : "immense pressure on your [O.name]" ].</span>")
 			holder.remove_reagent("biofoam",volume)
 
+/datum/reagent/hyperzine
+	name = "Hyperzine"
+	description = "A light stimulant often used to dampen or negate the impact to speed and reaction-time caused by heavy equipment loads or light wounds."
+	taste_description = "acid"
+	reagent_state = LIQUID
+	color = "#FF3300"
+	metabolism = REM * 0.15
+	overdose = REAGENTS_OVERDOSE * 0.5
+
+/datum/reagent/hyperzine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	M.adjustToxLoss(1)
+	M.add_chemical_effect(CE_SLOWREMOVE, 1)
+	M.add_chemical_effect(CE_PULSE, 2)
+
 /datum/reagent/hyperzine_concentrated
 	name = "Concentrated Hyperzine"
 	description = "A long-lasting, powerful muscle stimulant. A concentrated version of Hyperzine, forgoing safety to provide a considerable boost the the user's speed and reaction time."

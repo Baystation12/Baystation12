@@ -132,10 +132,10 @@
 	caliber = "needler"
 	load_method = MAGAZINE
 	one_hand_penalty = 1
-	burst = 6
+	burst = 4
 	burst_delay = 1.5
 	burst_accuracy = list(0,0,0,-1,-1,-1)
-	dispersion = list(0.3, 0.5, 0.7, 0.9, 1.1,1.4)
+	dispersion = list(0.7, 0.9, 1.1,1.4)
 	is_heavy = 1
 	irradiate_non_cov = 5
 	slowdown_general = 0

@@ -184,3 +184,18 @@
 		coil.turf_place(src, user)
 		return
 	return ..()
+
+/turf/simulated/proc/remove_resources(var/res, var/count)
+	if(!resources || !resources.len)
+		return 0
+
+	if(resources[res] <= 0)
+		return 0
+
+	resources[res] -= count
+
+	if(resources[res] <= 0)
+		has_resources = 0
+		return count + resources[res]
+	else
+		return count

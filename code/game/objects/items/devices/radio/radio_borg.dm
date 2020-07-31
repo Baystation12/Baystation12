@@ -8,6 +8,7 @@
 	var/mob/living/silicon/robot/myborg = null // Cyborg which owns this radio. Used for power checks
 	var/obj/item/device/encryptionkey/keyslot = null//Borg radios can handle a single encryption key
 	var/shut_up = 1
+	dongles = list(/obj/item/device/channel_dongle/human_civ)
 	icon = 'icons/obj/robot_component.dmi' // Cyborgs radio icons should look like the component.
 	icon_state = "radio"
 	canhear_range = 0

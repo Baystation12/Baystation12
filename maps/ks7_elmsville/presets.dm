@@ -305,23 +305,28 @@
 	name = "Key (Master Governmental)"
 	access = list(7782,6668,8076,7280,8072,7776,6568)
 
+/obj/machinery/door/airlock/shopdoor
+	name = "Apartment Store Backroom"
+	req_access = list(8380)
+	secured_wires = 1
+
+/obj/item/weapon/card/id/building_key/shopdoor//"SP"
+	name = "Key (Apartment Store)"
+	access = list(8380)
+
+/obj/machinery/door/airlock/apartmentmanager
+	name = "Apartment Manager"
+	req_access = list(6577)
+	secured_wires = 1
+
+/obj/item/weapon/card/id/building_key/apartmentmanager//"AM"
+	name = "Key (Apartment Manager)"
+	access = list(6577)
+
 /obj/machinery/door/airlock/mayor_only
 	name = "Mayor-Only"
 	door_color = "#6a97b0"
 	req_access = list(7782)
-
-/obj/machinery/door/airlock/covenant/covScrap
-
-/obj/machinery/door/airlock/humanScrap
-
-/obj/item/weapon/card/id/building_key/pirateVault //"PV"
-	name = "Key (Vault)"
-	access = list(8086)
-
-/obj/machinery/door/airlock/pirate_vault
-	name = "Armory Door"
-	secured_wires = 1
-	req_access = list(8086)
 
 /obj/machinery/button/remote/blast_door/aerodrome_exit
 	name = "Aedrodrome Exit Shutters"
@@ -352,105 +357,6 @@
 	id = "barShutter"
 	req_access = list(6682)
 
-
-/obj/machinery/autolathe/ammo_fabricator/police_station
-	machine_recipes = newlist(\
-	/datum/autolathe/recipe/m255_sap_he,
-	/datum/autolathe/recipe/m255_sap_hp,
-	/datum/autolathe/recipe/m443_fmj
-	)
-
-/obj/structure/closet/secure_closet/ks7_unsc
-	name = "Crewman - Envoy Armour"
-	desc = "Armour worn by personnel acting as diplomatic envoys to far-flung colonies. Often, no other armour is present on these vessels to reduce insurrectionist ability to frame the unsc."
-	icon = 'icons/obj/guncabinet.dmi'
-	icon_broken = "closed_full"
-	icon_closed = "closed_full"
-	icon_locked = "closed_full"
-	icon_off = "closed_full"
-	icon_opened = "open_full"
-	icon_state = "closed_full"
-
-/obj/structure/closet/secure_closet/ks7_unsc/WillContain()
-	return list(\
-	/obj/item/clothing/head/helmet/crewman,
-	/obj/item/clothing/suit/storage/marine/crewman,
-	/obj/item/clothing/shoes/marine/crewman,
-	/obj/item/clothing/gloves/thick/unsc/crewman,
-	/obj/item/weapon/storage/belt/marine_ammo,
-	/obj/item/weapon/gun/projectile/m6d_magnum,
-	/obj/item/weapon/gun/projectile/m7_smg,
-	/obj/item/weapon/storage/backpack/marine
-	)
-
-/obj/structure/closet/secure_closet/ks7_unsc/ammo
-	name = "Crewman - Ammunition"
-	desc = "Ammunition for weapons provided as part of a crewman's self-defense kit"
-	icon = 'icons/obj/closet.dmi'
-	icon_broken = "hossecurebroken"
-	icon_closed = "hossecure"
-	icon_locked = "hossecure1"
-	icon_off = "hossecureoff"
-	icon_opened = "hossecureopen"
-	icon_state = "hossecure1"
-
-/obj/structure/closet/secure_closet/ks7_unsc/ammo/WillContain()
-	return list(\
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	)
-
-/obj/structure/closet/secure_closet/ks7_innie
-	name = "Insurrectionist Salvaged Gear"
-	desc = "Gear salvaged from a lightly-armed unsc wreck. Looks like it was for unsc crewmen."
-	icon = 'icons/obj/guncabinet.dmi'
-	icon_broken = "closed_full"
-	icon_closed = "closed_full"
-	icon_locked = "closed_full"
-	icon_off = "closed_full"
-	icon_opened = "open_full"
-	icon_state = "closed_full"
-
-/obj/structure/closet/secure_closet/ks7_innie/WillContain()
-	return list(\
-	/obj/item/clothing/head/helmet/crewman,
-	/obj/item/clothing/suit/storage/marine/crewman,
-	/obj/item/clothing/shoes/marine/crewman,
-	/obj/item/clothing/gloves/thick/unsc/crewman,
-	/obj/item/weapon/storage/belt/marine_ammo,
-	/obj/item/weapon/gun/projectile/m6d_magnum,
-	/obj/item/weapon/gun/projectile/m7_smg,
-	/obj/item/weapon/storage/backpack/marine
-	)
-
-/obj/structure/closet/secure_closet/ks7_innie/ammo
-	name = "Insurrectionist Salvaged Ammunition"
-	desc = "Ammo salvaged from a lightly-armed unsc wreck."
-	icon = 'icons/obj/closet.dmi'
-	icon_broken = "hossecurebroken"
-	icon_closed = "hossecure"
-	icon_locked = "hossecure1"
-	icon_off = "hossecureoff"
-	icon_opened = "hossecureopen"
-	icon_state = "hossecure1"
-
-/obj/structure/closet/secure_closet/ks7_innie/ammo/WillContain()
-	return list(\
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,/obj/item/ammo_magazine/m5,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
-	)
 
 /obj/structure/closet/secure_closet/ks7_police
 	name = "Police Patrol Gear Locker"
@@ -516,4 +422,12 @@
 	/obj/item/clothing/suit/storage/marine/emsville_marshall/civ,
 	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe,
 	/obj/item/ammo_magazine/m127_saphe,/obj/item/ammo_magazine/m127_saphe
+	)
+
+
+/obj/machinery/autolathe/ammo_fabricator/police_station
+	machine_recipes = newlist(\
+	/datum/autolathe/recipe/m255_sap_he,
+	/datum/autolathe/recipe/m255_sap_hp,
+	/datum/autolathe/recipe/m443_fmj
 	)

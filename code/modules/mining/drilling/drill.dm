@@ -28,7 +28,10 @@
 		"osmium" = /obj/item/weapon/ore/osmium,
 		"hydrogen" = /obj/item/weapon/ore/hydrogen,
 		"silicates" = /obj/item/weapon/ore/glass,
-		"carbonaceous rock" = /obj/item/weapon/ore/coal
+		"carbonaceous rock" = /obj/item/weapon/ore/coal,
+		"duridium" = /obj/item/weapon/ore/duridium,
+		"kemocite" =/obj/item/weapon/ore/kemocite,
+		"platinum" =/obj/item/weapon/ore/platinum
 		)
 
 	//Upgrades
@@ -92,7 +95,7 @@
 			harvesting.has_resources = 0
 			harvesting.resources = null
 			resource_field -= harvesting
-			
+
 			if(!resource_field.len)
 				harvesting = null
 			else
@@ -120,15 +123,8 @@
 
 				found_resource  = 1
 
-				var/create_ore = 0
-				if(harvesting.resources[metal] >= total_harvest)
-					harvesting.resources[metal] -= total_harvest
-					create_ore = total_harvest
-					total_harvest = 0
-				else
-					total_harvest -= harvesting.resources[metal]
-					create_ore = harvesting.resources[metal]
-					harvesting.resources[metal] = 0
+				var/create_ore = harvesting.remove_resources(metal, total_harvest)
+				total_harvest -= create_ore
 
 				for(var/i=1, i <= create_ore, i++)
 					var/oretype = ore_types[metal]
@@ -267,7 +263,7 @@
 	for(var/iy = 0,iy < 5, iy++)
 		for(var/ix = 0, ix < 5, ix++)
 			mine_turf = locate(tx + ix, ty + iy, T.z)
-			if(mine_turf && mine_turf.has_resources)
+			if(istype(mine_turf) && mine_turf.has_resources)
 				resource_field += mine_turf
 
 	if(!resource_field.len)

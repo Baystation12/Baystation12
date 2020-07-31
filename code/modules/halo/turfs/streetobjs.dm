@@ -104,10 +104,13 @@
 	name = "Invisible Light"
 	use_power = 0
 	on = 1
-	invisibility = 101
+	invisibility = 100
 	opacity = 0
 	brightness_range = 8
 	brightness_power = 10
+
+/obj/machinery/light/invis/powered()
+	return 1
 
 /obj/structure/grille/smallfence/
 	icon = 'maps/geminus_city/citymap_icons/structures.dmi'

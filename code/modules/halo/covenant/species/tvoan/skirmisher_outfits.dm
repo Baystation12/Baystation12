@@ -34,7 +34,7 @@
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/murmillo
-	belt = /obj/item/weapon/gun/energy/plasmapistol
+	belt = null
 	l_hand = /obj/item/weapon/melee/blamite/dagger
 	l_pocket = /obj/item/language_learner/unggoy_to_common
 	head = /obj/item/clothing/head/helmet/kigyar/skirmisher/murmillo
@@ -49,7 +49,7 @@
 	l_ear = /obj/item/device/radio/headset/covenant
 	uniform = /obj/item/clothing/under/kigyar
 	suit = /obj/item/clothing/suit/armor/special/skirmisher/commando
-	belt = /obj/item/weapon/gun/energy/plasmapistol
+	belt = null
 	l_hand = /obj/item/language_learner/unggoy_to_common
 	r_hand = /obj/item/weapon/melee/blamite/cutlass
 	l_pocket = /obj/item/weapon/melee/energy/elite_sword/dagger

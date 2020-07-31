@@ -22,7 +22,7 @@
 	max_w_class = ITEM_SIZE_LARGE
 	max_storage_space = DEFAULT_BACKPACK_STORAGE
 	use_dynamic_slowdown = 1
-	cant_hold = list()
+	cant_hold = list(/obj/item/weapon/gun)
 
 /obj/item/weapon/storage/backpack/equipped()
 	if(!has_extension(src, /datum/extension/appearance))

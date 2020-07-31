@@ -1,5 +1,8 @@
 
+#include "mapdef.dm"
+#include "jobdefs.dm"
 #include "presets.dm"
+#include "presets_fc_additions.dm"
 #include "overmap.dm"
 #include "areas.dm"
 

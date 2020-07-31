@@ -1,19 +1,20 @@
 
 /obj/machinery/vending/armory
 	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
+	icon_state ="ironhammer"
+	icon_deny = "ironhammer-deny"
 	ai_access_level = 3
 	nohack = 1
 
 /obj/machinery/vending/armory/attackby(var/atom/A,var/mob/user)
 	if(A in products)
 		products[A] = products[A] + 1
-	return ..()
+	else
+		return ..()
 
 /obj/machinery/vending/armory/hybrid // Both ammo, and guns!
 	name = "UNSC Weapon and Ammunition Rack"
 	desc = "Storage for basic weapons and ammunition"
-	icon_state ="ironhammer" // SPRITES
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_unsc_armoury)
 	products = list(/obj/item/ammo_magazine/m127_saphe =20,
 					/obj/item/ammo_magazine/m127_saphp =20,
@@ -42,8 +43,6 @@
 /obj/machinery/vending/armory/heavy // HEAVY WEAPONS
 	name = "UNSC Heavy Weapons Rack"
 	desc = "Storage for advanced weapons and ammunition"
-	icon_state = "ironhammer" //SPRITES
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_unsc_armoury, access_unsc_specialist)
 	products = list(/obj/item/ammo_magazine/m145_ap = 4,
 					/obj/item/ammo_magazine/a762_box_ap = 6,
@@ -59,8 +58,6 @@
 /obj/machinery/vending/armory/police
 	name = "Shell Vendor"
 	desc = "A locker for different kinds of shotgun shells."
-	icon_state ="ironhammer" // SPRITES
-	icon_deny = "ironhammer-deny"
 	vend_delay = 6
 	products = list(/obj/item/ammo_box/shotgun = 4,
 					/obj/item/ammo_box/shotgun/slug = 4,
@@ -71,24 +68,29 @@
 /obj/machinery/vending/armory/armor
 	name = "UNSC Armor Vendor"
 	desc = "A machine full of spare UNSC armor and equipment"
-	icon_state ="ironhammer"
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_unsc_marine)
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues = 12,
 					/obj/item/clothing/head/helmet/marine = 8,
-					/obj/item/clothing/head/helmet/marine/brown = 8,
 					/obj/item/clothing/head/helmet/marine/medic = 6,
-					/obj/item/clothing/head/helmet/marine/medic/brown = 6,
 					/obj/item/clothing/head/helmet/marine/medic/visor = 6,
-					/obj/item/clothing/head/helmet/marine/medic/brownvisor = 6,
 					/obj/item/clothing/head/helmet/marine/visor = 8,
-					/obj/item/clothing/head/helmet/marine/brownvisor = 8,
 					/obj/item/clothing/suit/storage/marine = 5,
-					/obj/item/clothing/suit/storage/marine/brown = 5,
 					/obj/item/clothing/suit/storage/marine/medic = 3,
-					/obj/item/clothing/suit/storage/marine/medic/brown = 3,
 					/obj/item/clothing/shoes/marine = 8,
+					/obj/item/clothing/head/helmet/marine/brown = 8,
+					/obj/item/clothing/head/helmet/marine/medic/brown = 6,
+					/obj/item/clothing/head/helmet/marine/medic/brownvisor = 6,
+					/obj/item/clothing/head/helmet/marine/brownvisor = 8,
+					/obj/item/clothing/suit/storage/marine/brown = 5,
+					/obj/item/clothing/suit/storage/marine/medic/brown = 3,
 					/obj/item/clothing/shoes/marine/brown = 8,
+					/obj/item/clothing/under/unsc/marine_fatigues/winter = 8,
+					/obj/item/clothing/head/helmet/marine/winter = 8,
+					/obj/item/clothing/head/helmet/marine/medic/winter = 6,
+					/obj/item/clothing/suit/storage/marine/winter = 8,
+					/obj/item/clothing/suit/storage/marine/medic/winter = 6,
+					/obj/item/clothing/shoes/marine/winter = 8,
+					/obj/item/clothing/gloves/thick/unsc/winter = 8,
 					/obj/item/clothing/mask/marine = 5,
 					/obj/item/clothing/suit/spaceeva/eva = 3,
 					/obj/item/clothing/head/helmet/eva/marine = 3,
@@ -107,8 +109,6 @@
 /obj/machinery/vending/armory/oni
 	name = "ONI Vendor"
 	desc = "A machine full of spare ONI guard equipment."
-	icon_state = "ironhammer"
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_unsc_oni)
 	products = list(/obj/item/clothing/under/unsc/marine_fatigues/oni_uniform = 12,
 					/obj/item/clothing/head/helmet/oni_guard = 8,
@@ -123,8 +123,6 @@
 /obj/machinery/vending/armory/attachment
 	name = "UNSC Attachment Vendor"
 	desc = "A vendor full of attachments for the MA5B."
-	icon_state ="ironhammer"
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_unsc_armoury)
 	products = list(/obj/item/weapon_attachment/ma5_stock_butt/extended = 5,
 					/obj/item/weapon_attachment/ma5_upper_railed =5,
@@ -145,9 +143,7 @@
 /obj/machinery/vending/armory/attachment/soe
 	name = "SOE Attachments Vendor"
 	desc = "A vendor full? of attachments *the rest is scratched off*."
-	icon_state ="ironhammer"
 	product_ads = "ME WANT ATTACHMENTS!"
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_soe)
 	products = list(/obj/item/weapon_attachment/barrel/suppressor = 5,
 					/obj/item/weapon_attachment/light/flashlight = 5,
@@ -166,9 +162,6 @@
 	name = "Armtech 5530 Weaponry"
 	desc = "Cold, dark, and slightly depressed. Basically an ODST in vending machine form."
 	product_ads = "Life is woe;Suspect, Investigate, Terminate;CAUTION SHIP SELF DESTRUCT ACTIVATED! Just kidding."
-	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
-	icon_state = "ironhammer"
-	icon_deny = "ironhammer-deny"
 	color = COLOR_DARK_GRAY
 	req_access = list(access_unsc_odst)
 	products = list(/obj/item/weapon/material/knife/combat_knife = 4,
@@ -225,9 +218,6 @@
 /obj/machinery/vending/armory/spartanvend
 	name = "Armtech 6500"
 	desc  = "A prototype Armtech vendor filled with things... that stop certain super-soldiers from dying.."
-	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
-	icon_state = "ironhammer"
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_spartan)
 	color = COLOR_DARK_GRAY
 	products = list(/obj/item/clothing/under/spartan_internal = 1,
@@ -277,9 +267,6 @@
 	name = "Stolen Armtech 5530"
 	desc = "An Armtech vendor with damaged fastenings. Many products appear to be missing and have makeshift product names taped over them."
 	product_ads = "URF! URF!"
-	icon = 'code/modules/halo/icons/machinery/gunvend.dmi'
-	icon_state = "ironhammer"
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_soe)
 	products = list(/obj/item/weapon/gun/projectile/heavysniper = 1,
 					/obj/item/weapon/gun/projectile/br55 = 2,
@@ -343,8 +330,6 @@
 /obj/machinery/vending/armory/medical
 	name = "UNSC Medical Vendor"
 	desc = "A vendor that supplies medical equipment"
-	icon_state ="ironhammer" // SPRITES
-	icon_deny = "ironhammer-deny"
 	req_access = list(access_unsc)
 	products = list(/obj/item/bodybag/cryobag = 3,
 					/obj/item/weapon/storage/firstaid/unsc = 10,
