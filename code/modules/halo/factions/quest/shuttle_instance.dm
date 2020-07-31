@@ -2,7 +2,10 @@
 /obj/effect/shuttle_instance/proc/clear_instance()
 	GLOB.factions_controller.loaded_quest_instance = null
 	var/area/instance_area = get_area(src)
-	var/area/shuttle_area = locate(/area/shuttle/offsite_berth_transport) in world
+	if(!offsite_shuttle_area_type)
+		to_debug_listeners("ERROR: null offsite_shuttle_area_type")
+		return
+	var/area/shuttle_area = locate(offsite_shuttle_area_type) in world
 	for(var/area/cur_area in list(instance_area, shuttle_area))
 		for(var/atom/movable/A in cur_area)
 			if(istype(A, /obj/effect/shuttle_instance))
@@ -45,9 +48,16 @@
 	unacidable = 1
 	simulated = 0
 	invisibility = 101
+	var/offsite_shuttle_area_type
 
+//important! uncomment this when you need it
+/*
 /area/planets/Geminus/indoor/quest_instance
 	name = "Geminus Outskirts"
+
+/obj/effect/shuttle_instance/innie_quest
+	offsite_shuttle_area_type = /area/shuttle/offsite_berth_transport
+*/
 
 /obj/effect/landmark/instance_defender
 	icon = 'icons/mob/screen1.dmi'

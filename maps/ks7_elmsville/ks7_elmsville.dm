@@ -3,6 +3,8 @@
 
 	#define using_map_DATUM /datum/map/ks7_elmsville
 
+	#include "unit_tests.dm"
+
 	#include "../../code/modules/halo/covenant/invasion_scanner.dm"
 
 	#include "../npc_ships/om_ship_areas.dm"
@@ -20,6 +22,9 @@
 	#include "../_gamemodes/invasion/gamemode.dm"
 	#include "../_gamemodes/invasion/gamemode_revolution.dm"
 	#include "../_gamemodes/invasion/gamemode_reclamation.dm"
+
+	#include "../../code/modules/halo/supply/unsc.dm"
+	#include "../../code/modules/halo/supply/oni.dm"
 
 	#include "includes_pvp.dm"
 

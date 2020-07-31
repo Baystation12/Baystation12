@@ -1,12 +1,5 @@
 
 /datum/map/geminus_city/area_usage_test_exempted_areas = list(
-		/area/shuttle/offsite_berth_transport,\
-		/area/shuttle/innie_berth_transport,\
-		/area/shuttle/innie_shuttle_transport,\
-		/area/planets/Geminus/indoor/quest_instance,\
-		/area/planets/Geminus/indoor/npc_factory,
-		/area/planets/Geminus/indoor,
-		/area/planets/Geminus,
 		/area/planets,
 		/area/beach,
 		/area/centcom,
