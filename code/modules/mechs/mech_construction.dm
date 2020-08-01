@@ -47,7 +47,7 @@
 
 	GLOB.destroyed_event.unregister(module_to_forget, src, .proc/forget_module)
 
-	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[target]
+	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[target]
 	H.holding = null
 
 	hud_elements -= module_to_forget
@@ -98,7 +98,7 @@
 	system.forceMove(src)
 	hardpoints[system_hardpoint] = system
 
-	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
+	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
 	H.holding = system
 
 	system.screen_loc = H.screen_loc
@@ -136,7 +136,7 @@
 	system.layer = initial(system.layer)
 	GLOB.destroyed_event.unregister(system, src, .proc/forget_module)
 
-	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
+	var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
 	H.holding = null
 
 	for(var/thing in pilots)

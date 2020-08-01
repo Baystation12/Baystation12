@@ -66,9 +66,9 @@
 	// Interface stuff.
 	var/list/hud_elements = list()
 	var/list/hardpoint_hud_elements = list()
-	var/obj/screen/movable/exosuit/health/hud_health
-	var/obj/screen/movable/exosuit/toggle/hatch_open/hud_open
-	var/obj/screen/movable/exosuit/power/hud_power
+	var/obj/screen/exosuit/health/hud_health
+	var/obj/screen/exosuit/toggle/hatch_open/hud_open
+	var/obj/screen/exosuit/power/hud_power
 
 /mob/living/exosuit/is_flooded(lying_mob, absolute)
 	. = (body && body.pilot_coverage >= 100 && hatch_closed) ? FALSE : ..()
@@ -151,7 +151,7 @@
 	QDEL_NULL(body)
 
 	for(var/hardpoint in hardpoint_hud_elements)
-		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		H.owner = null
 		H.holding = null
 		qdel(H)

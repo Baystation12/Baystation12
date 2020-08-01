@@ -152,5 +152,15 @@ obj/item/mech_component/chassis/MouseDrop(atom/over)
 	if(storage_compartment)
 		return storage_compartment.MouseDrop(over)
 
+/obj/item/mech_component/chassis/return_diagnostics(mob/user)
+	..()
+	if(diagnostics)
+		to_chat(user, SPAN_NOTICE(" Diagnostics Unit Integrity: <b>[round((((diagnostics.max_dam - diagnostics.total_dam) / diagnostics.max_dam)) * 100)]%</b>"))
+	else
+		to_chat(user, SPAN_WARNING(" Diagnostics Unit Missing or Non-functional."))
+	if(m_armour)
+		to_chat(user, SPAN_NOTICE(" Armor Integrity: <b>[round((((m_armour.max_dam - m_armour.total_dam) / m_armour.max_dam)) * 100)]%</b>"))
+	else
+		to_chat(user, SPAN_WARNING(" Armor Missing or Non-functional."))
 
 
