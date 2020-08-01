@@ -529,14 +529,14 @@
 	/obj/item/weapon/gun/projectile/mauler,
 	/obj/item/equipment_paper/ammo_mauler,
 	/obj/item/weapon/storage/belt/covenant_ammo,
-	/obj/item/weapon/gun/energy/plasmarifle,
+	/obj/item/weapon/gun/energy/plasmarifle/brute,
 	/obj/item/equipment_paper/spikenade/small
 	)
 	startswith = list(\
 	/obj/item/weapon/gun/projectile/mauler,
 	/obj/item/equipment_paper/ammo_mauler,
 	/obj/item/weapon/storage/belt/covenant_ammo,
-	/obj/item/weapon/gun/energy/plasmarifle,
+	/obj/item/weapon/gun/energy/plasmarifle/brute,
 	/obj/item/equipment_paper/spikenade/small
 	)
 
