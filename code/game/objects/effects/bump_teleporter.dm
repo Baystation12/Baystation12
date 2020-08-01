@@ -11,6 +11,7 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 	density = 1
 	opacity = 0
 	var/faction_restrict
+	var/list/blocked_types = list()
 
 /obj/effect/bump_teleporter/New()
 	..()
@@ -41,6 +42,13 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 					break
 			if(!success)
 				return
+
+	if(blocked_types.len)
+		for(var/atom/movable/M in user.contents + user)
+			for(var/check_type in blocked_types)
+				if(istype(M, check_type))
+					to_chat(usr, "<span class='notice'>You cannot take [M] through there!</span>")
+					return
 
 	for(var/obj/effect/bump_teleporter/BT in BUMP_TELEPORTERS)
 		if(BT.id == src.id_target)
