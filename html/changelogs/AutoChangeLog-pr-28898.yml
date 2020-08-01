@@ -1,6 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "Languages across all borg modules are now standardized: All non-alien borgs understand and speak all human languages, and can understand but not speak sinta, skrellian, and sign language."
-  - tweak: "Maintenance drones can understand ZAC but cannot speak it."
-  - rscdel: "Mech piloting skill has been removed from all borg modules except the ascent drone."
