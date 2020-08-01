@@ -274,7 +274,7 @@
 "fn" = (/obj/structure/faction_banner/unsc{name = "ONI Complex 046"; pixel_y = -32},/turf/simulated/floor/pavement/empty,/area/faction_base/oni)
 "fo" = (/obj/structure/faction_banner/unsc{name = "ONI Complex 046"; pixel_y = -32},/obj/machinery/light,/turf/simulated/floor/pavement/empty,/area/faction_base/oni)
 "fp" = (/obj/structure/billboard,/turf/simulated/floor/pavement,/area/faction_base/oni)
-"fq" = (/obj/effect/landmark/dropship_land_point/unsc{name = "ONI Complex 046 (Geminus)"},/turf/simulated/floor/light/tech_neon/tech_white,/area/faction_base/oni/hangar)
+"fq" = (/obj/effect/landmark/dropship_land_point/unsc/no_artifact{name = "ONI Complex 046 (Geminus)"},/turf/simulated/floor/light/tech_neon/tech_white,/area/faction_base/oni/hangar)
 "fr" = (/turf/simulated/floor/tech/maint,/area/faction_base/oni/barracks)
 "fs" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tiled/dark,/area/faction_base/oni/hangar)
 "ft" = (/obj/structure/sofa/corner,/turf/simulated/floor/tech/gray,/area/faction_base/oni/barracks)
