@@ -195,12 +195,28 @@
 	if(zone == BP_MOUTH && target.can_eat())
 		user.visible_message("<span class='notice'>[user] pops a pill from \the [src].</span>")
 		playsound(get_turf(src), 'sound/effects/peelz.ogg', 50)
-		var/list/peelz = filter_list(contents,/obj/item/weapon/reagent_containers/pill/)
+		var/list/peelz = filter_list(contents,/obj/item/weapon/reagent_containers/pill)
 		if(peelz.len)
 			var/obj/item/weapon/reagent_containers/pill/P = pick(peelz)
 			remove_from_storage(P)
 			P.attack(target,user)
 			return 1
+
+/obj/item/weapon/storage/pill_bottle/afterattack(obj/target, mob/living/user, proximity)
+	if(!proximity)
+		return
+	if(target.is_open_container() && target.reagents)
+		if(!target.reagents.total_volume)
+			to_chat(user, SPAN_NOTICE("[target] is empty. Can't dissolve a pill."))
+			return
+
+		var/list/peelz = filter_list(contents,/obj/item/weapon/reagent_containers/pill)
+		if(peelz.len)
+			var/obj/item/weapon/reagent_containers/pill/P = pick(peelz)
+			remove_from_storage(P)
+			P.afterattack(target, user, proximity)
+	return
+
 
 /obj/item/weapon/storage/pill_bottle/attack_self(mob/living/user)
 	if(user.get_inactive_hand())
