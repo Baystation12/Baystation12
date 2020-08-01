@@ -177,6 +177,7 @@
 	belt = /obj/item/weapon/storage/belt/utility/full
 	r_pocket = /obj/item/device/radio
 	l_pocket = /obj/item/weapon/crowbar/prybar
+	chameleon = FALSE
 
 /obj/effect/submap_landmark/spawnpoint/voxship_crew
 	name = "Shoal Scavenger"

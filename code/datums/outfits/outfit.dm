@@ -45,6 +45,7 @@ var/list/outfits_decls_by_type_
 	var/id_type
 	var/id_desc
 	var/id_slot
+	var/chameleon = TRUE // If this is set to true, the chameleon suit can select this outfit
 
 	var/pda_type
 	var/pda_slot
