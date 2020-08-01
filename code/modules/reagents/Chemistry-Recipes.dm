@@ -2196,12 +2196,6 @@
 	required_reagents = list(/datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/sodawater = 1)
 	result_amount = 3
 
-/datum/chemical_reaction/brownstar
-	name = "Brown Star"
-	result = /datum/reagent/drink/brownstar
-	required_reagents = list(/datum/reagent/drink/juice/orange = 2, /datum/reagent/drink/space_cola = 1)
-	result_amount = 3
-
 /datum/chemical_reaction/milkshake
 	name = "Milkshake"
 	result = /datum/reagent/drink/milkshake
@@ -2569,7 +2563,7 @@
 /datum/chemical_reaction/nevadan_gold
 	name = "Nevadan Gold Whiskey"
 	result = /datum/reagent/ethanol/nevadan_gold
-	required_reagents = list(/datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/ethanol/goldschlager = 1, /datum/reagent/ethanol/coffee/irishcoffee = 1,)
+	required_reagents = list(/datum/reagent/ethanol/specialwhiskey = 1, /datum/reagent/ethanol/goldschlager = 1, /datum/reagent/ethanol/irish_cream = 1,)
 	result_amount = 3
 
 /datum/chemical_reaction/arak
@@ -2750,11 +2744,11 @@
 /datum/chemical_reaction/coconutmilk
 	name = "Coconut Milk"
 	result = /datum/reagent/drink/coconut/milk
-	required_reagents = list(/datum/reagent/drink/coconut = 2, /datum/reagent/nutriment = 1)
+	required_reagents = list(/datum/reagent/drink/coconut = 2)
 	result_amount = 3
 	minimum_temperature = 50 CELSIUS
 	maximum_temperature = (50 CELSIUS) + 100
-	catalysts = list(/datum/reagent/enzyme = 5)
+	catalysts = list(/datum/reagent/nutriment = 5)
 	mix_message = "The water dilutes into delicious looking milk"
 
 /datum/chemical_reaction/pinacolada
@@ -2770,3 +2764,174 @@
 	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/milk/cream = 1, /datum/reagent/cinnamon = 1, /datum/reagent/drink/syrup_vanilla = 1)
 	result_amount = 5
 	mix_message = "The liquid froths up into a rich, cool mixture"
+
+/datum/chemical_reaction/apple_soda
+	name = "Apple Soda"
+	result = /datum/reagent/drink/apple_soda
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/apple = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/orange_soda
+	name = "Fizzy Orange"
+	result = /datum/reagent/drink/orange_soda
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/drink/juice/orange = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/pork_soda
+	name = "Pork Soda"
+	result = /datum/reagent/drink/porksoda
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/nutriment/protein = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/strawberry_soda
+	name = "Strawberry Soda"
+	result = /datum/reagent/drink/strawberry_soda
+	required_reagents = list(/datum/reagent/drink/sodawater = 2, /datum/reagent/nutriment/cherryjelly = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/vanilla_cola
+	name = "Vanilla Cola"
+	result = /datum/reagent/drink/vanilla_cola
+	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/syrup_vanilla = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/orange_cola
+	name = "Orange Cola"
+	result = /datum/reagent/drink/orange_cola
+	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/juice/orange = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/cherry_cola
+	name = "Cherry Cola"
+	result = /datum/reagent/drink/cherry_cola
+	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/juice/berry = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/coffee_cola
+	name = "Coffee Cola"
+	result = /datum/reagent/drink/coffee/coffee_cola
+	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/drink/coffee = 1)
+	result_amount = 3
+	mix_message = "The liquid blends together smoothly"
+
+/datum/chemical_reaction/diet_cola
+	name = "Diet Cola"
+	result = /datum/reagent/drink/diet_cola
+	required_reagents = list(/datum/reagent/drink/space_cola = 2, /datum/reagent/lipozine = 1)
+	result_amount = 3
+	mix_message = "The cola ceases fizzing"
+
+/datum/chemical_reaction/cola_float
+	name = "Cola Float"
+	result = /datum/reagent/drink/milkshake/float
+	required_reagents = list(/datum/reagent/drink/milkshake = 2, /datum/reagent/drink/space_cola = 1)
+	result_amount = 3
+	mix_message = "The cola turns the milkshake a dark black colour"
+
+/datum/chemical_reaction/posset
+	name = "Posset"
+	result = /datum/reagent/ethanol/posset
+	required_reagents = list(/datum/reagent/drink/milk = 2, /datum/reagent/drink/juice/lemon = 1, /datum/reagent/ethanol/ale = 1)
+	result_amount = 4
+	mix_message = "The milk curdles sweetly"
+
+/datum/chemical_reaction/posca
+	name = "Posca"
+	result = /datum/reagent/drink/posca
+	required_reagents = list(/datum/reagent/nutriment/vinegar = 1, /datum/reagent/water = 1, /datum/reagent/drink/beastenergy = 1)
+	result_amount = 3
+	mix_message = "The mixture turns a dilute brown"
+
+/datum/chemical_reaction/alcoholfreebeer
+	name = "Alcohol-Free Beer"
+	result = /datum/reagent/drink/alcoholfreebeer
+	required_reagents = list(/datum/reagent/ethanol/beer = 2, /datum/reagent/ethylredoxrazine = 1)
+	result_amount = 3
+	mix_message = "The liquid ceases bubbling"
+
+/datum/chemical_reaction/oldfashioned
+	name = "Old Fashioned"
+	result = /datum/reagent/ethanol/oldfashioned
+	required_reagents = list(/datum/reagent/ethanol/whiskey = 2, /datum/reagent/sugar = 1, /datum/reagent/ethanol/herbal = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/daiquiri
+	name = "Daiquiri"
+	result = /datum/reagent/ethanol/daiquiri
+	required_reagents = list(/datum/reagent/ethanol/rum = 2, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/affelerin = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/sidecar
+	name = "Sidecar"
+	result = /datum/reagent/ethanol/sidecar
+	required_reagents = list(/datum/reagent/ethanol/cognac = 2, /datum/reagent/drink/juice/lemon = 1, /datum/reagent/ethanol/bluecuracao = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/caesar
+	name = "Caesar"
+	result = /datum/reagent/ethanol/caesar
+	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/drink/juice/tomato = 1, /datum/reagent/capsaicin = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/caipirinha
+	name = "Caipirinha"
+	result = /datum/reagent/ethanol/caipirinha
+	required_reagents = list(/datum/reagent/ethanol/cachaca = 2, /datum/reagent/drink/juice/lime = 1, /datum/reagent/sugar = 1)
+	result_amount = 4
+
+/datum/chemical_reaction/sangria
+	name = "Sangria"
+	result = /datum/reagent/ethanol/sangria
+	required_reagents = list(/datum/reagent/ethanol/wine = 2, /datum/reagent/drink/juice/orange = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/baijiu
+	name = "Baijiu"
+	result = /datum/reagent/ethanol/baijiu
+	required_reagents = list(/datum/reagent/ethanol/moonshine = 2, /datum/reagent/nutriment/rice = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/doogh
+	name = "Doogh"
+	result = /datum/reagent/drink/doogh
+	required_reagents = list(/datum/reagent/drink/milk/cream = 1, /datum/reagent/water = 1, /datum/reagent/nutriment/mint = 1)
+	result_amount = 3
+	mix_message = "The mixture becomes soft and easy to stir"
+
+/datum/chemical_reaction/honeywine
+	name = "Honey Wine"
+	result = /datum/reagent/ethanol/honeywine
+	required_reagents = list(/datum/reagent/nutriment/honey = 2, /datum/reagent/ethanol/hellshenpa = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/dawa
+	name = "Dawa"
+	result = /datum/reagent/ethanol/dawa
+	required_reagents = list(/datum/reagent/ethanol/vodka = 2, /datum/reagent/nutriment/honey = 1, /datum/reagent/drink/juice/lime = 1 )
+	result_amount = 4
+
+/datum/chemical_reaction/rakia
+	name = "Rakia"
+	result = /datum/reagent/ethanol/rakia
+	required_reagents = list(/datum/reagent/ethanol/lunabrandy = 2, /datum/reagent/drink/juice/grape/green = 1)
+	result_amount = 4
+	catalysts = list(/datum/reagent/enzyme = 5)
+
+/datum/chemical_reaction/ironbru
+	name = "Iron-Bru"
+	result = /datum/reagent/drink/ironbru
+	required_reagents = list(/datum/reagent/drink/ionbru = 2, /datum/reagent/iron = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/eggnog
+	name = "Eggnog"
+	result = /datum/reagent/drink/eggnog
+	required_reagents = list(/datum/reagent/nutriment/protein/egg = 1, /datum/reagent/drink/milk/ = 1, /datum/reagent/sugar = 1)
+	result_amount = 3

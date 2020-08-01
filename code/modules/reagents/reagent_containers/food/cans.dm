@@ -62,15 +62,6 @@
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/dr_gibb, 30)
 
-/obj/item/weapon/reagent_containers/food/drinks/cans/starkist
-	name = "\improper Star-kist"
-	desc = "The taste of a star in liquid form. And, a bit of tuna...?"
-	icon_state = "starkist"
-	center_of_mass = "x=16;y=10"
-/obj/item/weapon/reagent_containers/food/drinks/cans/starkist/Initialize()
-	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/brownstar, 30)
-
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up
 	name = "\improper Space-Up"
 	desc = "Tastes like a hull breach in your mouth."
@@ -237,7 +228,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/space_cola, 30)
+	reagents.add_reagent(/datum/reagent/drink/diet_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer
 	name = "\improper Rocket Root Beer"
@@ -255,7 +246,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/apple_cola, 30)
+	reagents.add_reagent(/datum/reagent/drink/apple_soda, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange
 	name = "\improper Orbital Orange"
@@ -264,7 +255,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange/Initialize()
 	. = ..()
-	reagents.add_reagent(/datum/reagent/drink/orange_cola, 30)
+	reagents.add_reagent(/datum/reagent/drink/orange_soda, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape
 	name = "\improper Gravity Grape"
@@ -301,3 +292,55 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola_pork/Initialize()
 	. = ..()
 	reagents.add_reagent(/datum/reagent/drink/porksoda, 30)
+
+// Cola
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/vanillacola
+	name = "Vanilla Cola"
+	desc = "Delicious vanilla cola in a can."
+	icon_state = "vcola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/vanillacola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/vanilla_cola, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/cherrycola
+	name = "Cherry Cola"
+	desc = "Delicious cherry cola in a can."
+	icon_state = "ccola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/cherrycola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/cherry_cola, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/orangecola
+	name = "Orange Cola"
+	desc = "Delicious orange cola in a can."
+	icon_state = "ocola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/orangecola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/orange_cola, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/coffeecola
+	name = "Coffee Cola"
+	desc = "Delicious coffee cola in a can."
+	icon_state = "ccola"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/coffeecola/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/coffee/coffee_cola, 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru
+	name = "Ion-Bru"
+	desc = "Ion-Bru, the drink of all true scotsmen."
+	icon_state = "ionbru"
+	center_of_mass = "x=16;y=6"
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru/Initialize()
+	. = . = ..()
+	reagents.add_reagent(/datum/reagent/drink/ionbru, 30)

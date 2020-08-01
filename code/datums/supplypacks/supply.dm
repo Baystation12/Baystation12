@@ -73,7 +73,7 @@
 	contains = list(/obj/item/weapon/storage/box/cola,
 					/obj/item/weapon/storage/box/cola/spacewind,
 					/obj/item/weapon/storage/box/cola/drgibb,
-					/obj/item/weapon/storage/box/cola/starkist,
+					/obj/item/weapon/storage/box/cola/ionbru,
 					/obj/item/weapon/storage/box/cola/spaceup,
 					/obj/item/weapon/storage/box/cola/lemonlime,
 					/obj/item/weapon/storage/box/cola/icedtea,
