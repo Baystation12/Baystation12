@@ -59,6 +59,7 @@
 	var/last_reply = 0
 	var/last_slogan = 0 //When did we last pitch?
 	var/slogan_delay = 6000 //How long until we can pitch again?
+	var/show_product_desc_pre_purchase = 0
 
 	// Things that can go wrong
 	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
@@ -483,12 +484,26 @@
 			src.speak(src.vend_reply)
 			src.last_reply = world.time
 
+	var/turf/ourfloor = get_turf(src)
+	var/atom/movable/prod =	R.get_product(ourfloor)
+	prod.loc = null
+	if(show_product_desc_pre_purchase)
+		prod.examine(user)
+		if(alert(user,"Would you like to vend this loadout?","Confirm Loadout Vend","Yes","No")  == "No")
+			R.instances.Add(prod)
+			src.status_message = ""
+			src.status_error = 0
+			src.vend_ready = 1
+			currently_vending = null
+			GLOB.nanomanager.update_uis(src)
+			return 0
+
 	use_power(vend_power_usage)	//actuators and stuff
 	if (src.icon_vend) //Show the vending animation if needed
 		flick(src.icon_vend,src)
 	spawn(src.vend_delay) //Time to vend
-		R.get_product(get_turf(src))
 		src.visible_message("\The [src] whirs as it vends \the [R.item_name].")
+		prod.loc = ourfloor
 		if(prob(1)) //The vending gods look favorably upon you
 			sleep(3)
 			if(R.get_product(get_turf(src)))
