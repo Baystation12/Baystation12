@@ -65,6 +65,21 @@
 		to_chat(user, "You add the pill bottle into the dispenser slot!")
 		src.updateUsrDialog()
 
+/obj/machinery/chem_master/proc/eject_beaker(mob/user)
+	if(!beaker)
+		return
+	var/obj/item/weapon/reagent_containers/B = beaker
+	user.put_in_hands(B)
+	beaker = null
+	reagents.clear_reagents()
+	icon_state = "mixer0"
+
+/obj/machinery/chem_master/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		eject_beaker(user)
+	else
+		..()
+
 /obj/machinery/chem_master/Topic(href, href_list, state)
 	if(..())
 		return 1
@@ -144,10 +159,7 @@
 			interact(user)
 			return
 		else if (href_list["eject"])
-			beaker.forceMove(loc)
-			beaker = null
-			reagents.clear_reagents()
-			icon_state = "mixer0"
+			eject_beaker(user)
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
 			var/count = 1
 
@@ -236,9 +248,6 @@
 	P.icon_state = bottlesprite
 	reagents.trans_to_obj(P,60)
 	P.update_icon()
-
-/obj/machinery/chem_master/DefaultTopicState()
-	return GLOB.physical_state
 
 /obj/machinery/chem_master/interface_interact(mob/user)
 	interact(user)

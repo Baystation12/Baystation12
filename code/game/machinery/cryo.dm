@@ -272,14 +272,25 @@
 		occupant.client.eye = occupant.client.mob
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.forceMove(get_step(loc, SOUTH))
-	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70) 
-		occupant.bodytemperature = 261									  
+	if (occupant.bodytemperature < 261 && occupant.bodytemperature >= 70)
+		occupant.bodytemperature = 261
 	occupant = null
 	current_heat_capacity = initial(current_heat_capacity)
 	update_use_power(POWER_USE_IDLE)
 	update_icon()
 	SetName(initial(name))
 	return
+
+/obj/machinery/atmospherics/unary/cryo_cell/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		go_out()
+	else
+		..()
+
+/obj/machinery/atmospherics/unary/cryo_cell/CtrlClick(mob/user)
+	if(CanDefaultInteract(user))
+		on = !on
+		update_icon()
 
 /obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
 	if (stat & (NOPOWER|BROKEN))
@@ -383,3 +394,4 @@
 
 /datum/data/function/proc/display()
 	return
+
