@@ -12,13 +12,17 @@ var/list/floor_decals = list()
 	var/detail_overlay
 	var/detail_color
 
-/obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour, var/newappearance)
+/obj/effect/floor_decal/New(newloc, newdir, newcolour, newappearance)
+	..()
+
+/obj/effect/floor_decal/Initialize(mapload, newdir, newcolour, newappearance)
+	. = ..()
 	supplied_dir = newdir
 	if(newappearance) appearance = newappearance
 	if(newcolour) color = newcolour
-	..(newloc)
+	return INITIALIZE_HINT_LATELOAD
 
-/obj/effect/floor_decal/Initialize()
+/obj/effect/floor_decal/LateInitialize()
 	if(supplied_dir) set_dir(supplied_dir)
 	var/turf/T = get_turf(src)
 	if(istype(T, /turf/simulated/floor) || istype(T, /turf/unsimulated/floor))
@@ -44,7 +48,7 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/reset
 	name = "reset marker"
 
-/obj/effect/floor_decal/reset/Initialize()
+/obj/effect/floor_decal/reset/LateInitialize()
 	var/turf/T = get_turf(src)
 	T.remove_decals()
 	T.update_icon()
@@ -1018,9 +1022,9 @@ var/list/floor_decals = list()
 /obj/effect/floor_decal/beach/corner
 	icon_state = "beachbordercorner"
 
-/obj/effect/floor_decal/asteroid/New()
+/obj/effect/floor_decal/asteroid/Initialize(mapload, newdir, newcolour, newappearance)
+	. = ..()
 	icon_state = "asteroid[rand(0,9)]"
-	..()
 
 /obj/effect/floor_decal/chapel
 	name = "chapel"
@@ -1149,9 +1153,9 @@ var/list/floor_decals = list()
 	icon_state = "manydot"
 	appearance_flags = 0
 
-/obj/effect/floor_decal/floordetail/New(var/newloc, var/newdir, var/newcolour)
+/obj/effect/floor_decal/floordetail/Initialize(mapload, newdir, newcolour, newappearance)
+	. = ..()
 	color = null //color is here just for map preview, if left it applies both our and tile colors.
-	..()
 
 /obj/effect/floor_decal/floordetail/tiled
 	icon_state = "manydot_tiled"
