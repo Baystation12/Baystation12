@@ -176,12 +176,19 @@
 		for(var/mind in commander_job.assigned_players)
 			return mind
 
-/datum/faction/proc/get_objective_delivery_areas()
-	var/list/found_areas = list()
+/datum/faction
+	var/obj/effect/overmap/delivery_target
+
+/datum/faction/proc/find_objective_delivery_target()
 	var/obj/effect/overmap/delivery_target = get_base()
 	if(!delivery_target)
 		delivery_target = get_flagship()
 
+/datum/faction/proc/get_objective_delivery_areas()
+	if(!delivery_target)
+		find_objective_delivery_target()
+
+	var/list/found_areas = list()
 	if(delivery_target)
 		for(var/cur_area in typesof(delivery_target.parent_area_type) - delivery_target.parent_area_type)
 			var/area/A = locate(cur_area)

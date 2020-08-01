@@ -342,10 +342,15 @@
 			winning_faction = faction
 		else if(!second_faction && winning_faction != faction)
 			second_faction = faction
+		if(faction.max_points)
+			to_debug_listeners("faction [faction.name] has max_points: [faction.max_points] prior to being reset at round end")
+		faction.max_points = 0
+
 		for(var/datum/objective/objective in faction.all_objectives)
 			if(objective.fake)
 				continue
 			var/result = objective.check_completion()
+			faction.max_points += objective.get_win_points()
 			if(result == 1)
 				text += "<span class='good'>Completed (+[objective.get_win_points()]): [objective.short_text]</span><br>"
 				faction.points += objective.get_win_points()
@@ -366,14 +371,19 @@
 		text += "<h4>Total [faction.name] Score: [faction.points] points</h4><br>"
 
 	//these victory tiers will need balancing depending on objectives and points
-	var/win_ratio
+	var/win_ratio = 0
 	if(second_faction.points == winning_faction.points)
 		text += "<h2>Tie! [winning_faction.name] and [second_faction.name] ([winning_faction.points] points)</h2>"
 	else if(all_points <= 0)
 		text += "<h2>Stalemate! All factions failed in their objectives.</h2>"
 	else
+		/*
 		//calculate the win type based on whether other faction scored points and how many of the winning faction objectives are completed
 		win_ratio = (winning_faction.points) / (all_points + winning_faction.max_points - winning_faction.points)
+		*/
+
+		//calculate points based on how many of their own objectives were completed
+		win_ratio = winning_faction.points / winning_faction.max_points
 
 		var/win_type = "Pyrrhic"
 		if(win_ratio <= 0.34)

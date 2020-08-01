@@ -136,7 +136,7 @@
 	var/points_per_item = 50
 	win_points = 0
 	var/items_retrieved = 0
-	var/list/delivery_areas
+	var/list/delivery_areas = list()
 	var/list/retrieved_items = list()
 
 /datum/objective/retrieve/artifact/find_target()
