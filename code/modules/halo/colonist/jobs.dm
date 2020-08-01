@@ -13,7 +13,7 @@
 	latejoin_at_spawnpoints = FALSE
 	outfit_type = /decl/hierarchy/outfit/job/colonist
 	//access = list(access_janitor, access_maint_tunnels, access_research)
-	alt_titles = list("Miner","Doctor","Nurse","Warehouse Worker","Construction Worker","Surgeon","Store Owner","Nightclub Owner","Secretary","Cargo Worker","Bartender","Cook","Chef","Farmer","Judge","Cargo Dock Worker","Lawyer","EMT","Paramedic","Bodyguard","Janitor")
+	alt_titles = list("Miner","Doctor","Construction Worker","Trader","Bartender","Chef","Farmer","Spacedock Worker")
 
 /datum/job/colonist/get_email_domain()
 	return "geminus.net"

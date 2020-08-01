@@ -76,20 +76,23 @@
 		return
 	if(!mobile_spawn_check(user))
 		return
-	visible_message("<span class = 'notice'>[user] starts preparing [src] to act as a mobile respawn point</span>")
-	if(!do_after(user,10 SECONDS))
+	if(active)
+		to_chat(usr, "<span class = 'notice'>You cannot do that while [src] is flying.</span>")
 		return
-	visible_message("<span class = 'notice'>[user] prepares [src] to act as a mobile respawn point</span>")
+	visible_message("<span class = 'notice'>[user] starts preparing [src] to act as a mobile respawn point.</span>")
+	if(!do_after(user,10 SECONDS, src))
+		return
+	visible_message("<span class = 'notice'>[user] prepares [src] to act as a mobile respawn point.</span>")
 	set_mobile_spawn_deploy(!spawn_datum.is_spawn_active)
 
 /obj/vehicles/proc/set_mobile_spawn_deploy(var/set_to)
 	spawn_datum.is_spawn_active = set_to
 	visible_message("<span class = 'notice'>[src] [spawn_datum.is_spawn_active ? "locks down" : "unlocks and readies for operation"]</span>")
-	icon_state = "[initial(icon_state)]_deployed"
 	if(spawn_datum.is_spawn_active)
-		active = 0
+		icon_state = "[initial(icon_state)]_deployed"
 	else
-		active = 1
+		icon_state = "[initial(icon_state)]"
+	if(spawn_datum.is_spawn_active)
 		communicate(/decl/communication_channel/dsay, src, "A [spawn_datum.spawn_faction] mobile respawn point within [src] has just been activated at ([x],[y],[z]), [get_area(src)]", /decl/dsay_communication/direct)
 
 /obj/vehicles/verb/toggle_headlights()
@@ -195,15 +198,27 @@
 
 /obj/vehicles/proc/pick_valid_exit_loc()
 	var/list/valid_exit_locs = list()
+
+	//check for atmos safe turfs
 	for(var/turf/t in locs)
 		for(var/turf/t_2 in range(1,t))
-			if(!(t_2 in locs) && t_2.density == 0)
+			if(!(t_2 in locs) && t_2.density == 0 && !IsTurfAtmosUnsafe(t_2))
 				valid_exit_locs |= t
 				break
+
+	//try again for anny turfs
+	if(valid_exit_locs.len == 0)
+		for(var/turf/t in locs)
+			for(var/turf/t_2 in range(1,t))
+				if(!(t_2 in locs) && t_2.density == 0)
+					valid_exit_locs |= t
+					break
+
 	if(valid_exit_locs.len == 0)
 		return null
-	return pick(valid_exit_locs)
 
+	return pick(valid_exit_locs)
+//
 /obj/vehicles/Destroy()
 	GLOB.processing_objects -= src
 	kick_occupants()
@@ -217,6 +232,36 @@
 	if(spawn_datum)
 		spawn_datum.is_spawn_active = 0
 	fall()
+
+	//get a viable list of places to eject our cargo
+	density = 0
+	var/list/turfs_base = list()
+	for(var/turf/T in src.locs)
+		if(not_turf_contains_dense_objects(T))
+			turfs_base.Add(T)
+	if(!turfs_base.len)
+		turfs_base = src.locs.Copy()
+	var/list/free_turfs = turfs_base.Copy()
+
+	//reset the vehicle density
+	density = 1
+
+	while(cargo_contents.len)
+
+		//remove it from the list
+		var/atom/movable/A = cargo_contents[1]
+		cargo_contents -= A
+
+		//get a random turf
+		var/turf/T = pick(free_turfs)
+
+		//dont double up turfs
+		free_turfs -= T
+		if(!free_turfs.len)
+			free_turfs = turfs_base.Copy()
+
+		//eject it
+		eject_cargo_item(A, T)
 
 /obj/vehicles/proc/inactive_pilot_effects() //Overriden on a vehicle-by-vehicle basis.
 

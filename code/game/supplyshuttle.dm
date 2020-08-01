@@ -175,6 +175,9 @@ var/list/point_source_descriptions = list(
 			if(.(B))
 				return 1
 
+	proc/forbidden_atoms_string()
+		return english_list(list("nuclear disks","nuclear explosives","radio beacons"), and_text = " or ")
+
 	//Sellin
 	proc/sell()
 		var/phoron_count = 0

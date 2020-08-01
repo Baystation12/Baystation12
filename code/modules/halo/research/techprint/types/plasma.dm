@@ -32,4 +32,5 @@
 	desc = "Magnetic field manipulation to shape and direct plasma bursts."
 	tech_req_one = list(/datum/techprint/plasmarifle, /datum/techprint/plasmapistol)
 	required_objs = list(/obj/item/plasma_core = "plasma core")
+	design_unlocks = list(/datum/research_design/plasmacutter)
 	ticks_max = 100

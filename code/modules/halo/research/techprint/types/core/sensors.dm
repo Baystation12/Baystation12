@@ -2,7 +2,7 @@
 /datum/techprint/sensors
 	name = "Sensors I"
 	desc = "Detection of exotic energy and matter."
-	required_materials = list("silver" = 10)
+	required_materials = list("silver" = 5)
 	required_reagents = list(/datum/reagent/tungsten = 10, /datum/reagent/sodium = 10)
 	required_objs = list(/obj/item/crystal/orange)
 	ticks_max = 60
@@ -12,7 +12,7 @@
 	name = "Sensors II"
 	desc = "Detection of exotic energy and matter."
 	tech_req_all = list(/datum/techprint/sensors)
-	required_materials = list("silver" = 20)
+	required_materials = list("silver" = 10)
 	required_reagents = list(/datum/reagent/tungsten = 20, /datum/reagent/sodium = 20)
 	required_objs = list(/obj/item/crystal/orange)
 	ticks_max = 120
@@ -22,7 +22,7 @@
 	name = "Sensors III"
 	desc = "Detection of exotic energy and matter."
 	tech_req_all = list(/datum/techprint/sensors_two)
-	required_materials = list("silver" = 30, "platinum" = 5)
+	required_materials = list("silver" = 15, "platinum" = 5)
 	required_reagents = list(/datum/reagent/tungsten = 30, /datum/reagent/sodium = 30)
 	required_objs = list(/obj/item/crystal/orange)
 	ticks_max = 300

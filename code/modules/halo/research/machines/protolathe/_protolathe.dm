@@ -14,13 +14,11 @@
 
 	var/output_dir = 0
 
-	var/datum/research_design/currently_selected
-
 	var/mat_efficiency = 1
 	var/speed = 1
 	var/craft_parallel = 1
 	var/instant_ready = TRUE
-	var/max_storage = 60
+	var/max_storage = 80
 
 /obj/machinery/research/protolathe/New()
 	. = ..()

@@ -57,6 +57,9 @@
 	set category = "Vehicle"
 	set src in range(1)
 
+	if(spawn_datum && spawn_datum.is_spawn_active)
+		to_chat(usr,"<span class = 'notice'>Not while [src] is deployed in spawn mode.</span>")
+		return
 	if(movement_destroyed)
 		to_chat(usr,"<span class = 'notice'>[src]'s engines have been damaged beyond use!</span>")
 		return

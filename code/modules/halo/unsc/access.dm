@@ -89,6 +89,11 @@
 	id = access_unsc_specialist
 	desc = "Specialist Access"
 
+/var/const/access_unsc_cargo = 317
+/datum/access/access_unsc_cargo
+	id = access_unsc_cargo
+	desc = "UNSC Cargo Access"
+
 /var/const/access_spartan = 117
 /datum/access/spartan
 	id = access_spartan

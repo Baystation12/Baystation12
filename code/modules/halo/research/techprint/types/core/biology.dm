@@ -2,7 +2,7 @@
 /datum/techprint/biology
 	name = "Xenobiology I"
 	desc = "Alien organisms, organic chemistry and strange new lifeforms."
-	required_materials = list("uranium" = 5)
+	required_materials = list("uranium" = 1)
 	required_objs = list(/obj/item/weapon/ore/corundum)
 	required_reagents = list(/datum/reagent/phosphorus = 5, /datum/reagent/ethanol = 5, /datum/reagent/potassium = 5)
 	ticks_max = 60
@@ -18,7 +18,7 @@
 	name = "Xenobiology II"
 	desc = "Alien organisms, organic chemistry and strange new lifeforms."
 	tech_req_all = list(/datum/techprint/biology)
-	required_materials = list("uranium" = 10)
+	required_materials = list("uranium" = 3)
 	required_objs = list(/obj/item/weapon/ore/corundum)
 	required_reagents = list(/datum/reagent/phosphorus = 10, /datum/reagent/ethanol = 10, /datum/reagent/potassium = 10)
 	ticks_max = 120
@@ -31,7 +31,7 @@
 	name = "Xenobiology III"
 	desc = "Alien organisms, organic chemistry and strange new lifeforms."
 	tech_req_all = list(/datum/techprint/biology_two)
-	required_materials = list("uranium" = 20)
+	required_materials = list("uranium" = 5)
 	required_objs = list(/obj/item/weapon/ore/corundum)
 	required_reagents = list(/datum/reagent/phosphorus = 20, /datum/reagent/ethanol = 20, /datum/reagent/potassium = 20)
 	ticks_max = 300

@@ -240,13 +240,7 @@ GLOBAL_LIST_EMPTY(all_radios)
 			ToggleReception()
 		else
 			var/obj/item/device/channel_dongle/dongle = channels_dongles[chan_name]
-			dongle.listening = !dongle.listening
-			if(dongle.listening)
-				dongles_connections[dongle] = radio_controller.add_object(src, dongle.cipher.frequency,  RADIO_CHAT)
-			else
-				dongles_connections -= dongle
-				radio_controller.remove_object(src, dongle.cipher.frequency,  RADIO_CHAT)
-			update_ui_channels()
+			toggle_dongle(dongle)
 		. = 1
 	/*else if(href_list["spec_freq"])
 		var freq = href_list["spec_freq"]
@@ -258,6 +252,15 @@ GLOBAL_LIST_EMPTY(all_radios)
 
 	if(.)
 		GLOB.nanomanager.update_uis(src)
+
+/obj/item/device/radio/proc/toggle_dongle(var/obj/item/device/channel_dongle/dongle)
+	dongle.listening = !dongle.listening
+	if(dongle.listening)
+		dongles_connections[dongle] = radio_controller.add_object(src, dongle.cipher.frequency,  RADIO_CHAT)
+	else
+		dongles_connections -= dongle
+		radio_controller.remove_object(src, dongle.cipher.frequency,  RADIO_CHAT)
+	update_ui_channels()
 
 /obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/language_name)
 
@@ -494,7 +497,8 @@ GLOBAL_LIST_EMPTY(all_radios)
 	broadcasting = 0
 	listening = 0
 	for(var/obj/item/device/channel_dongle/dongle in dongles_connections)
-		dongle.listening = 0
+		if(dongle.listening)
+			toggle_dongle(dongle)
 	. = ..()
 /*
 /obj/item/device/radio/proc/config(op)

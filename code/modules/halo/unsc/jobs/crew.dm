@@ -3,8 +3,11 @@
 	title = "UNSC Station Crew"
 	fallback_spawnpoint = null
 	outfit_type = /decl/hierarchy/outfit/job/unsc
+	access = list(access_unsc,access_unsc_armoury,access_unsc_cargo)
+	total_positions = 1
+	spawn_positions = 1
+	open_slot_on_death = 1
 	alt_titles = list(\
-	"UNSC Janitor" = /decl/hierarchy/outfit/job/unsc/janitor,
 	"UNSC Logistics" = /decl/hierarchy/outfit/job/unsc/logistics,
 	"UNSC Technician" = /decl/hierarchy/outfit/job/unsc/technician,
 	"UNSC Gunner" = /decl/hierarchy/outfit/job/unsc/gunner,

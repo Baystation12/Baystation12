@@ -52,6 +52,15 @@
 /obj/item/stack/material/nanolaminate/fifty
 	amount = 50
 
+/ore/corundum
+	name = "corundum"
+	display_name = "corundite"
+	alloy = 1
+	result_amount = 1
+	spread_chance = 20
+	ore = /obj/item/weapon/ore/corundum
+	scan_icon = "mineral_rare"
+
 //techwalled
 /*
 /datum/alloy/nanolaminate
@@ -97,18 +106,24 @@
 
 /obj/item/stack/material/duridium
 	name = "refined duridium"
-	singular_name = "refined duridium sheets"
 	icon = 'code/modules/halo/covenant/materials.dmi'
-	amount = 1
-	max_amount = 50
-	material = /material/duridium
-	stacktype = /obj/item/stack/material/duridium
+	icon_state = "duridium"
+	default_type = "duridium"
 
 /obj/item/stack/material/duridium/ten
 	amount = 10
 
 /obj/item/stack/material/duridium/fifty
 	amount = 50
+
+/ore/duridium
+	name = "duridium"
+	display_name = "duridium"
+	smelts_to = "duridium"
+	ore = /obj/item/weapon/ore/duridium
+	scan_icon = "mineral_uncommon"
+	result_amount = 2
+	spread_chance = 10
 
 //techwalled
 /*
@@ -152,6 +167,15 @@
 
 /obj/item/stack/material/kemocite/fifty
 	amount = 50
+
+/ore/kemocite
+	name = "kemocite"
+	display_name = "kemocite"
+	compresses_to = "kemocite"
+	result_amount = 2
+	spread_chance = 10
+	ore = /obj/item/weapon/ore/kemocite
+	scan_icon = "mineral_rare"
 
 
 

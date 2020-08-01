@@ -9,6 +9,7 @@
 	faction_whitelist = "UNSC"
 	access = list(\
 		access_unsc,\
+		access_unsc_cargo,\
 		access_unsc_bridge,\
 		access_unsc_tech,\
 		access_unsc_crew,\
@@ -35,6 +36,7 @@
 	economic_modifier = 2
 	access = list(\
 		access_unsc,\
+		access_unsc_cargo,\
 		access_unsc_bridge,\
 		access_unsc_tech,\
 		access_unsc_crew,\

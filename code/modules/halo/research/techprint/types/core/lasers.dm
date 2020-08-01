@@ -22,7 +22,7 @@
 	name = "Directed Energy III"
 	desc = "The technology to channel high power laser beams."
 	tech_req_all = list(/datum/techprint/lasers_two)
-	required_materials = list("phglass" = 20, "diamond" = 5)
+	required_materials = list("phglass" = 20, "diamond" = 3)
 	required_reagents = list(/datum/reagent/phosphorus = 30, /datum/reagent/silicate = 30)
 	required_objs = list(/obj/item/crystal/pink)
 	ticks_max = 300

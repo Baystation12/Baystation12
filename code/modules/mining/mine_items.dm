@@ -49,15 +49,15 @@
 	icon_state = "pickaxe"
 	item_state = "jackhammer"
 	w_class = ITEM_SIZE_HUGE
-	matter = list(DEFAULT_WALL_MATERIAL = 3750)
+	matter = list(DEFAULT_WALL_MATERIAL = 16000, "plasteel" = 8000)
 	var/digspeed = 40 //moving the delay to an item var so R&D can make improved picks. --NEO
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
 	attack_verb = list("hit", "pierced", "sliced", "attacked")
 	var/drill_sound = 'sound/weapons/Genhit.ogg'
 	var/drill_verb = "drilling"
 	sharp = 1
-	var/durability = 50
-	var/max_durability = 50
+	var/durability = 40
+	var/max_durability = 40
 	var/durability_per_hit = 1
 	var/repair_material = /obj/item/stack/material/steel
 	var/repair_name = "steel"
@@ -99,21 +99,73 @@
 	name = "steel pickaxe"
 	icon_state = "spickaxe"
 	item_state = "spickaxe"
-	digspeed = 45
-	durability = 20
-	max_durability = 20
+	durability = 30
+	max_durability = 30
+	matter = list(DEFAULT_WALL_MATERIAL = 8000)
 
 /obj/item/weapon/pickaxe/silver
 	name = "silver pickaxe"
 	icon_state = "spickaxe"
 	item_state = "spickaxe"
-	digspeed = 35
 	origin_tech = list(TECH_MATERIAL = 3)
 	desc = "This makes no metallurgic sense."
 	repair_material = /obj/item/stack/material/silver
 	repair_name = "silver"
-	durability = 40
-	max_durability = 40
+	durability = 30
+	max_durability = 30
+	matter = list("silver" = 8000)
+
+/obj/item/weapon/pickaxe/gold
+	name = "golden pickaxe"
+	icon_state = "gpickaxe"
+	item_state = "gpickaxe"
+	//digspeed = 20
+	origin_tech = list(TECH_MATERIAL = 4)
+	desc = "This makes no metallurgic sense."
+	drill_verb = "picking"
+	repair_material = /obj/item/stack/material/gold
+	repair_name = "gold"
+	durability = 30
+	max_durability = 30
+	matter = list("gold" = 8000)
+
+/obj/item/weapon/pickaxe/uranium
+	name = "uranium pickaxe"
+	icon_state = "upickaxe"
+	item_state = "upickaxe"
+	desc = "This makes no metallurgic sense."
+	drill_verb = "picking"
+	repair_material = /obj/item/stack/material/uranium
+	digspeed = 30
+	durability = 80
+	max_durability = 80
+	matter = list("uranium" = 8000)
+
+/obj/item/weapon/pickaxe/phoron
+	name = "phoron pickaxe"
+	icon_state = "ppickaxe"
+	item_state = "ppickaxe"
+	desc = "This makes no metallurgic sense."
+	drill_verb = "picking"
+	repair_material = /obj/item/stack/material/phoron
+	digspeed = 30
+	durability = 80
+	max_durability = 80
+	matter = list("phoron" = 8000)
+
+/obj/item/weapon/pickaxe/diamond
+	name = "diamond pickaxe"
+	icon_state = "dpickaxe"
+	item_state = "dpickaxe"
+	digspeed = 30
+	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
+	desc = "A pickaxe with a diamond pick head."
+	drill_verb = "picking"
+	repair_material = /obj/item/stack/material/diamond
+	repair_name = "diamond"
+	durability = 80
+	max_durability = 80
+	matter = list("diamond" = 8000)
 
 /obj/item/weapon/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
@@ -121,10 +173,28 @@
 	item_state = "jackhammer"
 	digspeed = 30
 	origin_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
+	matter = list("plasteel" = 16000, "osmium-carbide plasteel" = 8000)
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 	durability = 75
 	max_durability = 75
+	repair_material = /obj/item/stack/material/plasteel
+	drill_sound = 'sound/weapons/circsawhit.ogg'
+
+/obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
+	name = "diamond mining drill"
+	icon_state = "diamonddrill"
+	item_state = "jackhammer"
+	digspeed = 10 //Digs through walls, girders, and can dig up sand
+	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
+	desc = "Yours is the drill that will pierce the heavens!"
+	drill_sound = 'sound/weapons/circsawhit.ogg'
+	drill_verb = "drilling"
+	repair_material = /obj/item/stack/material/ocp
+	repair_name = "duridium"
+	durability = 125
+	max_durability = 125
+	matter = list("osmium-carbide plasteel" = 16000, "diamond" = 8000)
 
 /obj/item/weapon/pickaxe/jackhammer
 	name = "sonic jackhammer"
@@ -134,35 +204,23 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
-	repair_material = /obj/item/stack/material/plasteel
+	repair_material = /obj/item/stack/material/duridium
 	repair_name = "plasteel"
 	durability = 100
 	max_durability = 100
-
-/obj/item/weapon/pickaxe/gold
-	name = "golden pickaxe"
-	icon_state = "gpickaxe"
-	item_state = "gpickaxe"
-	digspeed = 20
-	origin_tech = list(TECH_MATERIAL = 4)
-	desc = "This makes no metallurgic sense."
-	drill_verb = "picking"
-	repair_material = /obj/item/stack/material/gold
-	repair_name = "gold"
-	durability = 60
-	max_durability = 60
+	matter = list("duridium" = 16000)
 
 /obj/item/weapon/pickaxe/plasmacutter
 	name = "plasma cutter"
 	icon_state = "plasmacutter"
-	item_state = "gun"
+	item_state = "laser"
 	w_class = ITEM_SIZE_NORMAL //it is smaller than the pickaxe
 	damtype = "fire"
-	digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
+	digspeed = 10 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
 	origin_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
-	drill_sound = 'sound/items/Welder.ogg'
+	drill_sound = 'sound/weapons/blade1.ogg'
 	sharp = 1
 	edge = 1
 	repair_material = /obj/item/stack/material/duridium
@@ -172,6 +230,8 @@
 	var/charge_level = 100
 	var/charge_max = 100
 	var/charge_per_hit = 1
+	matter = list("duridium" = 16000, "nanolaminate" = 8000)
+	salvage_components = list(/obj/item/plasma_core)
 
 /obj/item/weapon/pickaxe/plasmacutter/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	. = ..()
@@ -186,32 +246,6 @@
 	. = ..()
 	to_chat(user,"<span class='info'>It has [charge_level]/[charge_max] battery charge remaining.</span>")
 
-/obj/item/weapon/pickaxe/diamond
-	name = "diamond pickaxe"
-	icon_state = "dpickaxe"
-	item_state = "dpickaxe"
-	digspeed = 10
-	origin_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 4)
-	desc = "A pickaxe with a diamond pick head."
-	drill_verb = "picking"
-	repair_material = /obj/item/stack/material/diamond
-	repair_name = "diamond"
-	durability = 80
-	max_durability = 80
-
-/obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
-	name = "diamond mining drill"
-	icon_state = "diamonddrill"
-	item_state = "jackhammer"
-	digspeed = 5 //Digs through walls, girders, and can dig up sand
-	origin_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 5)
-	desc = "Yours is the drill that will pierce the heavens!"
-	drill_verb = "drilling"
-	repair_material = /obj/item/stack/material/duridium
-	repair_name = "duridium"
-	durability = 125
-	max_durability = 125
-
 /obj/item/weapon/pickaxe/borgdrill
 	name = "cyborg mining drill"
 	icon_state = "diamonddrill"
@@ -219,6 +253,7 @@
 	digspeed = 15
 	desc = ""
 	drill_verb = "drilling"
+	drill_sound = 'sound/weapons/circsawhit.ogg'
 
 /*****************************Shovel********************************/
 

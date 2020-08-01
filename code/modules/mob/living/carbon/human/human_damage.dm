@@ -381,11 +381,7 @@ This function restores all organs.
 			if(C.body_parts_covered & def_zone.body_part)
 				if(C.armor_thickness == 0 || isnull(C.armor_thickness))
 					return
-				if(C.degrade_armor_thickness(damage,damage_type))
-					C.visible_message("<span class = 'warning'>[src]'s [C.name]'s armor plating is [damage_type == BURN ? "melted away" : "destroyed"]! </span>")
-				else
-					C.visible_message("<span class = 'warning'>[src]'s [C.name]'s armor plating is [damage_type == BURN ? "scorched" : "damaged"]! </span>")
-				C.update_damage_description(damage_type)
+				C.degrade_armor_thickness(damage,damage_type)
 
 /mob/living/carbon/human/apply_damage(var/damage = 0, var/damagetype = BRUTE, var/def_zone = null, var/blocked = 0, var/damage_flags = 0, var/obj/used_weapon = null)
 	if(status_flags & GODMODE) return
