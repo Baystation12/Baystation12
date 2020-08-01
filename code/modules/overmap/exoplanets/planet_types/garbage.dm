@@ -219,8 +219,8 @@
 /turf/simulated/wall/containment
 	paint_color = COLOR_GRAY20
 
-/turf/simulated/wall/containment/New(var/newloc)
-	..(newloc,MATERIAL_CONCRETE, MATERIAL_ALIENALLOY)
+/turf/simulated/wall/containment/Initialize(var/ml)
+	. = ..(ml, MATERIAL_CONCRETE, MATERIAL_ALIENALLOY)
 
 /datum/random_map/maze/lab
 	wall_type =  /turf/simulated/wall/containment
@@ -284,6 +284,6 @@
 			new/obj/structure/rubble/lab(T)
 		if(prob(20))
 			new/obj/item/remains/xeno/charred(T)
-	
+
 
 #undef TRANSLATE_COORD
