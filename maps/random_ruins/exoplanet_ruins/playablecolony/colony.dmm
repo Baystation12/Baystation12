@@ -4365,9 +4365,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/casino/roulette_chart{
-	density = 1
-	},
+/obj/structure/table/gamblingtable,
 /turf/simulated/floor/wood,
 /area/map_template/colony/commons)
 "hT" = (
@@ -5351,9 +5349,7 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
-/obj/structure/casino/roulette{
-	density = 1
-	},
+/obj/structure/table/gamblingtable,
 /obj/effect/floor_decal/spline/fancy/wood{
 	dir = 4
 	},
@@ -6048,7 +6044,7 @@
 	dir = 5;
 	icon_state = "techfloor_edges"
 	},
-/obj/structure/closet/secure_closet/hydroponics_torch,
+/obj/structure/closet/crate/hydroponics/prespawned,
 /obj/item/weapon/reagent_containers/glass/bucket,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/colony/hydroponics)
