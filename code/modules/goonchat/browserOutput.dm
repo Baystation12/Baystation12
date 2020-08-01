@@ -40,7 +40,8 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //Cache o
 		alert(owner.mob, "Updated chat window does not exist. If you are using a custom skin file please allow the game to update.")
 		return
 
-	if(winget(owner, "browseroutput", "is-visible") == "true") //Already setup
+	//It seems if someone disconnects while loading this can runtime, so we have to check for owner again
+	if(owner && winget(owner, "browseroutput", "is-visible") == "true") //Already setup
 		doneLoading()
 
 	else //Not setup
@@ -101,7 +102,6 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/tmp/iconCache.sav")) //Cache o
 	if(loaded)
 		return
 
-	testing("Chat loaded for [owner.ckey]")
 	loaded = TRUE
 	showChat()
 
