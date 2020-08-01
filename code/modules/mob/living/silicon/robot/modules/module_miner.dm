@@ -35,7 +35,6 @@
 	skills = list(
 		SKILL_PILOT        = SKILL_EXPERT,
 		SKILL_EVA          = SKILL_PROF,
-		SKILL_MECH         = HAS_PERK,
 		SKILL_CONSTRUCTION = SKILL_EXPERT
 	)
 

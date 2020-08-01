@@ -5,6 +5,9 @@
 	networks = list(
 		NETWORK_ENGINEERING
 	)
+	languages = list(
+		LANGUAGE_HUMAN_EURO = FALSE
+	)
 	equipment = list(
 		/obj/item/weapon/weldingtool,
 		/obj/item/weapon/screwdriver,
@@ -112,10 +115,6 @@
 /obj/item/weapon/robot_module/drone/construction
 	name = "construction drone module"
 	hide_on_manifest = 1
-	channels = list(
-		"Engineering" = 1
-	)
-	languages = list()
 
 /obj/item/weapon/robot_module/drone/construction/Initialize()
 	equipment += /obj/item/weapon/rcd/borg
