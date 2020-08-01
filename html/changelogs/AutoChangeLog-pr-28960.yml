@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - maptweak: "Added medical intercoms to medbay"
+  - tweak: "Security intercoms can now be set to the Security channel - Setting intercoms to this channel has the same access restriction as setting a handheld radio."
