@@ -100,7 +100,7 @@
 		if (exclude_mobs?.len && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
-		
+
 		var/mob_message = message
 
 		if(isghost(M))
@@ -282,6 +282,11 @@
 
 /mob/proc/restrained()
 	return
+
+/mob/proc/can_be_floored()
+	if (buckled || lying || can_overcome_gravity())
+		return FALSE
+	return TRUE
 
 /mob/proc/reset_view(atom/A)
 	if (client)
