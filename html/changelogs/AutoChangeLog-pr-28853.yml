@@ -1,0 +1,5 @@
+author: "DeadmonWonderland"
+delete-after: True
+changes: 
+  - maptweak: "Various minor changes to Orbital Mining Station."
+  - tweak: "Orbital Mining Station meat mobs do edged damage and have natural armor."
