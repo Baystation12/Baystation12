@@ -7,9 +7,9 @@
 	suit = /obj/item/clothing/suit/armor/special/unggoy_combat_harness
 	back = /obj/item/weapon/tank/methane/unggoy_internal
 	uniform = /obj/item/clothing/under/unggoy_internal
-	belt = /obj/item/weapon/gun/energy/plasmapistol
+	belt = null
 	mask = /obj/item/clothing/mask/rebreather
-	r_pocket = /obj/item/weapon/grenade/plasma
+	r_pocket = null
 	//
 	gloves = /obj/item/clothing/gloves/thick/grunt_gloves
 	shoes = /obj/item/clothing/shoes/grunt_boots

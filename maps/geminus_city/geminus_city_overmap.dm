@@ -1,4 +1,8 @@
 
+/obj/effect/overmap/ship/unsc_odp_cassius //Predef so no compile errors
+
+/obj/effect/overmap/complex046
+
 /obj/effect/overmap/sector/geminus_city
 	name = "Geminus Colony"
 	icon = 'maps/geminus_city/sector_icon.dmi'

@@ -54,7 +54,7 @@
 
 	head = /obj/item/clothing/head/helmet/jiralhanae/covenant
 	l_ear = /obj/item/device/radio/headset/covenant
-	r_hand = /obj/item/weapon/grenade/frag/spike
+	r_hand = null
 	shoes = /obj/item/clothing/shoes/jiralhanae/covenant
 	suit = /obj/item/clothing/suit/armor/jiralhanae/covenant
 	//

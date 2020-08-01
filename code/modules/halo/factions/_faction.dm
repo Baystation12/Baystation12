@@ -48,6 +48,10 @@
 	var/default_radio_channel = RADIO_HUMAN
 	var/default_language = LANGUAGE_GALCOM
 
+	var/income = 0	//credits
+	var/income_delay = 15 MINUTES
+	var/next_income = 0
+
 	var/list/listening_programs = list()
 
 /datum/faction/New()
@@ -79,6 +83,11 @@
 		var/datum/faction/F = GLOB.factions_by_name[faction_name]
 		if(F)
 			enemy_factions.Add(F)
+
+	generate_supply_categories()
+
+	if(income)
+		start_processing()
 
 /datum/faction/proc/add_faction_reputation(var/faction_name, var/new_rep)
 	if(!faction_reputation.Find(faction_name))

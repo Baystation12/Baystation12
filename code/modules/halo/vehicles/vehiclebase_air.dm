@@ -96,11 +96,9 @@
 /obj/vehicles/air/proc/perform_move_sequence(var/obj/move_to_obj)
 	if(isnull(move_to_obj))
 		return
-	var/move_to_loc = get_turf(move_to_obj)
-	if(move_to_loc)
-		update_occupant_z_level(move_to_obj.z)
-	loc = move_to_loc
 /*
+	forceMove(get_turf(move_to_obj))
+
 /obj/vehicles/air/proc/proc_fly_to_waypoint()
 */
 /obj/vehicles/air/verb/fly_to_waypoint()

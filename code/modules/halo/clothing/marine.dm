@@ -254,15 +254,15 @@
 	item_state = "salvage_void"
 	item_state_slots = list(slot_l_hand_str = "syndicate-orange", slot_r_hand_str = "syndicate-orange")
 	w_class = ITEM_SIZE_HUGE
-	allowed = list(/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/weapon/tank)
-	armor = list(melee = 45, bullet = 35, laser = 45, energy = 35, bomb = 30, bio = 25, rad = 25)
+	allowed = list(/obj/item/weapon/tank)
+	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20) //Same armour as marines, but innate spacesuit slowdown and limited choice of suitstore
 
 /obj/item/clothing/head/helmet/space/void/unsc
 	name = "\improper Salvage Helmet"
 	desc = "A universally used helmet to protect one's head against the vacuum when doing EVA."
 	icon = ITEM_INHAND
 	icon_override = MARINE_OVERRIDE
-	armor = list(melee = 40, bullet = 20, laser = 40,energy = 10, bomb = 15, bio = 15, rad = 15)
+	armor = list(melee = 45, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 10, rad = 10)
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	icon_state = "rig0-salvage"
 	item_state = "rig0-salvage"
@@ -281,32 +281,34 @@
 /obj/item/clothing/head/helmet/marine/winter
 	name = "Winter Camo CH252 Helmet"
 	desc = "The standard issue winter camo combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "UNSCMarineHelmetNoVisor"
-	icon_state = "UNSCMarineHelmetNoVisor"
+	item_state = "snowhelmet"
+	icon_state = "snowhelmet"
 
-/obj/item/clothing/head/helmet/marine/wintervisor
-	name = "Winter Camo CH252-V Helmet"
-	desc = "The standard issue winter camo combat helmet worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "UNSCWinterMarineHelmetVisor"
-	icon_state = "UNSCWinterMarineHelmetVisor"
+/obj/item/clothing/head/helmet/marine/medic/winter
+	item_state = "snowhelmetmedic"
+	icon_state = "snowhelmetmedic"
 
 /obj/item/clothing/suit/storage/marine/winter
 	name = "M52B Winter Body Armor"
 	desc = "The standard issue winter camo combat armor worn by the members of the UNSC Marine Corps, UNSC Army, and UNSC Air Force."
-	item_state = "UNSCMarineArmor"
-	icon_state = "UNSCMarineArmor"
+	item_state = "snowarmor"
+	icon_state = "snowarmor"
+
+/obj/item/clothing/suit/storage/marine/medic/winter
+	item_state = "snowarmormedic"
+	icon_state = "snowarmormedic"
 
 /obj/item/clothing/shoes/marine/winter
 	name = "VZG7 Armored Winter Boots"
 	desc = "Standard issue combat boots for the UNSC Marines, worn as a part of the Marine BDU."
-	item_state = "UNSCMarineBoots"
-	icon_state = "UNSCMarineBoots"
+	item_state = "snowboots"
+	icon_state = "snowboots"
 
 /obj/item/clothing/gloves/thick/unsc/winter //Combined effect of SWAT gloves and insulated gloves
 	name = "UNSC Winter Combat gloves"
 	desc = "Standard Issue UNSC Marine Winter Gloves."
-	icon_state = "UNSCMarineGloves"
-	item_state = "UNSCMarineGloves"
+	icon_state = "snowgloves"
+	item_state = "snowgloves"
 
 /obj/item/clothing/under/unsc/marine_fatigues/winter
 	name = "UNSC Marine Winter fatigues"
@@ -342,7 +344,6 @@
 	icon_state = "eva"
 	item_flags = STOPPRESSUREDAMAGE|AIRTIGHT
 	armor = list(melee = 45, bullet = 25, laser = 45,energy = 15, bomb = 20, bio = 10, rad = 10)
-	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 
 	action_button_name = "Toggle Helmet Light"
 	light_overlay = "helmet_light"

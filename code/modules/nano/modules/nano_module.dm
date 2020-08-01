@@ -25,14 +25,7 @@
 	if(!istype(user))
 		return 0
 
-	var/obj/item/weapon/card/id/I = user.GetIdCard()
-	if(!I)
-		return 0
-
-	if(access in I.access)
-		return 1
-
-	return 0
+	return has_access(list(access), list(), user.GetAccess())
 
 /datum/nano_module/Topic(href, href_list)
 	if(topic_manager && topic_manager.Topic(href, href_list))

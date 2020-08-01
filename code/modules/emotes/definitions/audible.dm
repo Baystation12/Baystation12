@@ -182,13 +182,3 @@
 	playsound(user.loc, scream_sound,50,0,7)
 	h.next_scream_at = world.time + SCREAM_COOLDOWN
 	return
-
-/decl/emote/audible/species_sound/wort
-	key = "wort"
-	emote_message_3p = "USER worts, three times.!"
-	species_sounds = list(/datum/species/sangheili = 'code/modules/halo/sounds/worting.ogg')
-
-/decl/emote/audible/species_sound/need_weapon
-	key = "weapon"
-	emote_message_3p = "USER exclaims their need for a weapon!"
-	species_sounds = list(/datum/species/spartan = 'code/modules/halo/sounds/need_weapon.ogg')

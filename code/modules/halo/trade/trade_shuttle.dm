@@ -20,7 +20,7 @@
 	var/list/requestlist = list()
 	var/list/shoppinglist = list()
 	//
-	var/spawn_trader_type = /mob/living/simple_animal/npc/colonist/weapon_smuggler
+	var/spawn_trader_type
 
 /datum/shuttle/autodock/ferry/trade/proc/at_station()
 	return (!location)
@@ -52,6 +52,9 @@
 		if(.(B))
 			return 1
 
+/datum/shuttle/autodock/ferry/trade/proc/forbidden_atoms_string()
+	return supply_controller.forbidden_atoms_string()
+
 //returns the ETA in minutes
 /datum/shuttle/autodock/ferry/trade/proc/eta_minutes()
 	var/ticksleft = arrive_time - world.time
@@ -68,6 +71,12 @@
 
 	if(isnull(location))
 		return
+
+	//play a sound effect
+	if(sound_takeoff)
+		playsound(current_location, sound_takeoff, 100, 20, 15)
+	if(sound_landing && next_location)
+		playsound(next_location, sound_landing, 100, 20, 15)
 
 	//it would be cool to play a sound here
 	moving_status = SHUTTLE_WARMUP

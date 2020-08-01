@@ -21,7 +21,7 @@
 		clear_turfs.Cut(i,i+1)
 		new spawn_trader_type(pickedloc)
 
-	var/datum/transaction/T = new("Geminus System Black market", "Rabbit Hole Base import goods", 0, "Black Market Terminal #B[rand(100000,999999)]")
+	var/datum/transaction/T = new("Trade market", "[src.name] import goods", 0, "System Terminal #B[rand(100000,999999)]")
 	money_account.transaction_log.Add(T)
 
 	for(var/S in shoppinglist)
@@ -48,7 +48,7 @@
 		slip = new /obj/item/weapon/paper/manifest(A)
 		slip.name = "Shipping Manifest Order #[SO.ordernum]"
 		slip.is_copy = 0
-		slip.info = "<h3>Black Market Shipping Manifest</h3><hr><br>"
+		slip.info = "<h3>Market Shipping Manifest</h3><hr><br>"
 		slip.info +="Order #[SO.ordernum]<br>"
 		slip.info +="Destination: [GLOB.using_map.station_name]<br>"
 		slip.info +="[shoppinglist.len] PACKAGES IN THIS SHIPMENT<br>"

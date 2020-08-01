@@ -53,4 +53,7 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 	for(var/obj/effect/bump_teleporter/BT in BUMP_TELEPORTERS)
 		if(BT.id == src.id_target)
 			user.forceMove(BT.loc)	//Teleport to location with correct id.
+			var/obj/vehicles/v = user
+			if(istype(v))
+				v.update_occupant_z_level(BT.loc.z)
 			return

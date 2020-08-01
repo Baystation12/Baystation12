@@ -60,6 +60,6 @@
 	all_exports += new_exports
 	export_credits += sale_credits
 	//
-	var/datum/transaction/T = new("Geminus System Black market", "Rabbit Hole Base export goods", sale_credits, "Geminus Terminal #G[rand(100000,999999)]")
+	var/datum/transaction/T = new("Trade Market", "[src.name] export goods", sale_credits, "System Terminal #G[rand(100000,999999)]")
 	money_account.transaction_log.Add(T)
 	money_account.money += sale_credits

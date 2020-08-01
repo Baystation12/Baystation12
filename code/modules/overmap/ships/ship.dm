@@ -287,9 +287,13 @@
 	break_umbilicals(1)
 	. = ..()
 
-/obj/effect/overmap/ship/Crossed(var/obj/item/projectile/crosser)
+/obj/effect/overmap/ship/Crossed(var/obj/item/projectile/overmap/crosser)
 	if(istype(crosser))
-		crosser.Bump(src)
+		var/proj_faction = null
+		if(crosser.overmap_fired_by)
+			proj_faction = crosser.overmap_fired_by.get_faction()
+		if(crosser.overmap_fired_by != src && proj_faction != get_faction())
+			crosser.Bump(src)
 	. = ..()
 
 /*
