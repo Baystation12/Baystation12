@@ -132,12 +132,12 @@
 					/obj/item/weapon_attachment/secondary_weapon/underslung_shotgun = 2,
 					/obj/item/weapon_attachment/barrel/suppressor = 3,
 					/obj/item/weapon_attachment/vertical_grip = 5,
-					/obj/item/weapon_attachment/secondary_weapon/underslung_grenadelauncher = 2,
-					/obj/item/ammo_casing/g40mm = 12,
-					/obj/item/ammo_casing/g40mm/he = 8,
-					/obj/item/ammo_casing/g40mm/frag = 8,
-					/obj/item/ammo_casing/g40mm/smoke = 8,
-					/obj/item/ammo_casing/g40mm/illumination = 8)
+					/obj/item/weapon_attachment/secondary_weapon/underslung_grenadelauncher = 1,
+					/obj/item/ammo_casing/g40mm = 6,
+					/obj/item/ammo_casing/g40mm/he = 4,
+					/obj/item/ammo_casing/g40mm/frag = 4,
+					/obj/item/ammo_casing/g40mm/smoke = 4,
+					/obj/item/ammo_casing/g40mm/illumination = 4)
 	//products = list(/obj/item/weapon_attachment/sight/acog = 2, /obj/item/weapon_attachment/sight/rds = 6)
 
 /obj/machinery/vending/armory/attachment/soe
