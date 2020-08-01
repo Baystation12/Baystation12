@@ -653,7 +653,7 @@
 "mC" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/unggoyquarters)
 "mD" = (/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 8},/obj/machinery/vending/armory/equip_req/cov/yanmee,/turf/simulated/floor/drone_biomass,/area/covenant_light_cruiser/unggoyquarters)
 "mE" = (/obj/machinery/light/covenant/west,/obj/effect/landmark/start{name = "Yanme e Leader"},/turf/simulated/floor/drone_biomass,/area/covenant_light_cruiser/unggoyquarters)
-"mF" = (/obj/machinery/light/covenant/east,/turf/simulated/floor/drone_biomass,/area/covenant_light_cruiser/unggoyquarters)
+"mF" = (/obj/machinery/light/covenant/east,/obj/machinery/vending/armory/covenant/yanmee/equipment,/turf/simulated/floor/drone_biomass,/area/covenant_light_cruiser/unggoyquarters)
 "mG" = (/obj/structure/drop_pod_launchbay/covenant,/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/north,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/porthangar)
 "mH" = (/obj/structure/drop_pod_launchbay/covenant,/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/north{icon_state = "cov_boarding"; dir = 2},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/porthangar)
 "mI" = (/obj/machinery/light/invis,/obj/structure/supply_pod_dispenser/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardhangar)
