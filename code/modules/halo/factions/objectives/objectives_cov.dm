@@ -23,7 +23,7 @@
 	explanation_text = "Your ship is your only route back to Covenant space. Do not allow it to be destroyed."
 	slipspace_affected = 1
 	target_faction_name = "Covenant"
-	lose_points = 150
+	lose_points = 50
 
 /datum/objective/retrieve/steal_ai
 	short_text = "Capture human construct"
@@ -85,7 +85,7 @@
 /datum/objective/glass_colony
 	short_text = "Glass the human colony"
 	explanation_text = "These humans cannot be allowed to live. The surface of their worlds must burn until they are glass!"
-	win_points = 10
+	win_points = 50
 	slipspace_affected = 1
 
 /datum/objective/glass_colony/check_completion()

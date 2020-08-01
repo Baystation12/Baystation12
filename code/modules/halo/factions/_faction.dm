@@ -23,8 +23,8 @@
 	var/list/available_quests = list()
 	var/list/processing_quests = list()
 
-	var/datum/job/commander_job		//this needs to be set in the gamemode code
-	var/commander_titles = list()	//checks in order of priority for objective purposes
+	var/datum/job/commander_job			//this needs to be set in the gamemode code
+	var/commander_job_types = list()	//checks in order of priority for objective purposes
 	var/has_flagship = 0
 	var/flagship_slipspaced = 0
 	var/has_base = 0
@@ -175,13 +175,18 @@
 	return archived_base_name
 
 /datum/faction/proc/get_commander(var/datum/mind/check_mind)
-	if(!commander_job)
-		for(var/title in commander_titles)
-			commander_job = job_master.occupations_by_title[title]
-			if(commander_job)
-				break
+
+	commander_job = null
+	for(var/job_type in commander_job_types)
+		commander_job = job_master.occupations_by_type[job_type]
+		if(commander_job)
+			break
 
 	if(commander_job)
+		//if(!. && check_mind && check_mind.assigned_role == "UNSC Bertels Commanding Officer")
+		if(check_mind && check_mind in commander_job.assigned_players)
+			return check_mind
+
 		for(var/mind in commander_job.assigned_players)
 			return mind
 

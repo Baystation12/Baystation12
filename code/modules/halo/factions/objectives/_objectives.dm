@@ -139,7 +139,7 @@
 	var/list/delivery_areas = list()
 	var/list/retrieved_items = list()
 
-/datum/objective/retrieve/artifact/find_target()
+/datum/objective/retrieve/find_target()
 	if(!delivery_areas)
 		delivery_areas = my_faction.get_objective_delivery_areas()
 	return delivery_areas.len

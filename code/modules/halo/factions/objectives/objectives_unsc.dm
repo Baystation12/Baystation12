@@ -103,7 +103,7 @@
 
 /datum/objective/overmap/unsc_odp
 	short_text = "Protect the Orbital Defence Platform"
-	explanation_text = "Its automated Super MAC gun can put a round clean through a Covenant capital ship."
+	explanation_text = "The ODP's automated Super MAC gun can put a round clean through a Covenant capital ship. Keep it firing."
 	target_faction_name = "UNSC"
 	overmap_type = 0
 	lose_points = 50
