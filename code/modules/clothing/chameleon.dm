@@ -25,9 +25,10 @@
 	if(copy.sprite_sheets)
 		sprite_sheets = copy.sprite_sheets.Copy()
 	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
-
+	copy.update_icon()
 	OnDisguise(copy, user)
-	qdel(copy)
+	
+	
 
 // Subtypes shall override this, not /disguise()
 /obj/item/proc/OnDisguise(var/obj/item/copy, var/mob/user)
@@ -118,6 +119,7 @@ obj/item/clothing/under/chameleon/proc/initialize_outfits()
 	if(istype(user.l_ear, /obj/item/device/radio/headset/chameleon))
 		if(initial(selected.l_ear) != null)
 			user.l_ear.disguise(initial(selected.l_ear),usr)
+	user.regenerate_icons()
 	
 
 /obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
