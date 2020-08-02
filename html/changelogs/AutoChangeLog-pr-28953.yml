@@ -1,0 +1,9 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - admin: "Admins can now specify a reason when dispatching an Emergency Response Team that will be shown to the team when they spawn in."
+  - rscadd: "The Emergency Response Team channel has its own key now: \"O\"/\"o\"."
+  - tweak: "The Emergency Response Team welcome text has been modified to be more clear on who the leader is and your role in the game. It also includes the reason specified by the admin that dispatched it."
+  - maptweak: "Added an all-in-one telecomms machine to the ERT shuttle that allows them to speak on their own private frequency at the base, in transit, and on the Torch (or anywhere their shuttle is). It is not advised to mess with it even if you have the tools to do so."
+  - tweak: "Emergency Response Team headsets now have their default channel set to their private frequency. This can be manually changed back to the common frequency, but doing so is irreversible!"
+  - maptweak: "Added a reagent grinder to the medical section of the Emergency Response Team base."
