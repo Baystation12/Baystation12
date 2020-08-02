@@ -89,8 +89,7 @@
 	name = "reinforced holofloor"
 	icon_state = "reinforced"
 
-/turf/simulated/floor/holofloor/space/Initialize()
-	. = ..()
+/turf/simulated/floor/holofloor/space/New()
 	icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
 
 /turf/simulated/floor/holofloor/beach
@@ -127,8 +126,8 @@
 	base_icon = 'icons/turf/flooring/asteroid.dmi'
 	initial_flooring = null
 
-/turf/simulated/floor/holofloor/desert/Initialize(var/ml)
-	. = ..()
+/turf/simulated/floor/holofloor/desert/New()
+	..()
 	if(prob(10))
 		overlays += "asteroid[rand(0,9)]"
 

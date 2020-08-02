@@ -18,8 +18,8 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
 
-/obj/item/weapon/stool/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
-	. = ..(mapload)
+/obj/item/weapon/stool/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL, new_padding_material)
+	..(newloc)
 	material = SSmaterials.get_material_by_name(new_material)
 	if(new_padding_material)
 		padding_material = SSmaterials.get_material_by_name(new_padding_material)
@@ -29,8 +29,8 @@ var/global/list/stool_cache = list() //haha stool
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
-/obj/item/weapon/stool/padded/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, new_material, MATERIAL_CARPET)
+/obj/item/weapon/stool/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, new_material, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/bar
 	name = "bar stool"
@@ -41,8 +41,8 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/bar/padded
 	icon_state = "bar_stool_padded_preview"
 
-/obj/item/weapon/stool/bar/padded/Initialize(mapload, new_material = DEFAULT_FURNITURE_MATERIAL)
-	. = ..(mapload, new_material, MATERIAL_CARPET)
+/obj/item/weapon/stool/bar/padded/New(newloc, new_material = DEFAULT_FURNITURE_MATERIAL)
+	..(newloc, new_material, MATERIAL_CARPET)
 
 /obj/item/weapon/stool/on_update_icon()
 	// Prep icon.
@@ -158,5 +158,6 @@ var/global/list/stool_cache = list() //haha stool
 		..()
 
 //Generated subtypes for mapping porpoises
-/obj/item/weapon/stool/wood/Initialize(mapload)
-	. = ..(mapload, MATERIAL_WOOD)
+
+/obj/item/weapon/stool/wood/New(var/newloc)
+	..(newloc,MATERIAL_WOOD)

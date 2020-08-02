@@ -23,7 +23,7 @@
 	icon_state = "gcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit/green
 	light_outer_range = 2
-	light_max_bright = 1
+	light_max_bright = 3
 	light_color = COLOR_GREEN
 
 /turf/simulated/floor/blackgrid
@@ -32,7 +32,7 @@
 	icon_state = "rcircuit"
 	initial_flooring = /decl/flooring/reinforced/circuit/red
 	light_outer_range = 2
-	light_max_bright = 1
+	light_max_bright = 2
 	light_color = COLOR_RED
 
 /turf/simulated/floor/greengrid/airless
@@ -350,9 +350,9 @@
 	icon = 'icons/turf/snow.dmi'
 	icon_state = "snow"
 
-/turf/simulated/floor/snow/Initialize()
-	. = ..()
+/turf/simulated/floor/snow/New()
 	icon_state = pick("snow[rand(1,12)]","snow0")
+	..()
 
 /turf/simulated/floor/light
 /turf/simulated/floor/airless/ceiling
@@ -369,9 +369,9 @@
 	icon_state = "desert"
 	has_resources = 1
 
-/turf/simulated/floor/beach/sand/desert/Initialize()
-	. = ..()
+/turf/simulated/floor/beach/sand/desert/New()
 	icon_state = "desert[rand(0,5)]"
+	..()
 
 /turf/simulated/floor/beach/coastline
 	name = "coastline"
@@ -393,8 +393,8 @@
 /turf/simulated/floor/beach/water/ocean
 	icon_state = "seadeep"
 
-/turf/simulated/floor/beach/water/Initialize()
-	. = ..()
+/turf/simulated/floor/beach/water/New()
+	..()
 	overlays += image("icon"='icons/misc/beach.dmi',"icon_state"="water5","layer"=MOB_LAYER+0.1)
 
 /turf/simulated/floor/crystal

@@ -34,8 +34,8 @@
 		return
 	return ..()
 
-/turf/simulated/floor/fixed/alium/Initialize()
-	. = ..()
+/turf/simulated/floor/fixed/alium/New()
+	..()
 	var/material/A = SSmaterials.get_material_by_name(MATERIAL_ALIENALLOY)
 	if(!A)
 		return
