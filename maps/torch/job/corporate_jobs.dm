@@ -11,7 +11,7 @@
 	minimum_character_age = list(SPECIES_HUMAN = 25)
 	alt_titles = list(
 		"Corporate Liaison",
-		"Union Representative" = /decl/hierarchy/outfit/job/torch/passenger/workplace_liaison/union_rep,
+		"Union Representative",
 		"Corporate Representative",
 		"Corporate Executive"
 		)
@@ -59,7 +59,7 @@
 	                    SKILL_WEAPONS     = SKILL_MAX,
 	                    SKILL_FORENSICS   = SKILL_MAX)
 	alt_titles = list(
-		"Union Enforcer" = /decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard/union,
+		"Union Enforcer",
 		"Loss Prevention Associate",
 		"Asset Protection Agent"
 	)

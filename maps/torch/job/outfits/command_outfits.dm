@@ -103,16 +103,6 @@
 	id_type =  /obj/item/weapon/card/id/torch/passenger/corporate
 	pda_type = /obj/item/modular_computer/pda/heads/paperpusher
 
-/decl/hierarchy/outfit/job/torch/passenger/corporate_bodyguard/union
-	name = OUTFIT_JOB_NAME("Union Enforcer")
-	l_pocket = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
-	r_pocket = /obj/item/weapon/flame/lighter/zippo
-
-/decl/hierarchy/outfit/job/torch/passenger/workplace_liaison/union_rep
-	name = OUTFIT_JOB_NAME("Union Representative")
-	l_pocket = /obj/item/clothing/mask/smokable/cigarette/cigar/cohiba
-	r_pocket = /obj/item/weapon/flame/lighter/zippo
-
 /decl/hierarchy/outfit/job/torch/crew/representative
 	name = OUTFIT_JOB_NAME("SolGov Representative")
 	l_ear = /obj/item/device/radio/headset/headset_com

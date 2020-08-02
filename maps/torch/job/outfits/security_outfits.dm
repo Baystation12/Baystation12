@@ -28,9 +28,7 @@
 
 /decl/hierarchy/outfit/job/torch/crew/security/forensic_tech/contractor
 	name = OUTFIT_JOB_NAME("Forensic Technician - Contractor")
-	head = /obj/item/clothing/head/det
 	uniform = /obj/item/clothing/under/det
-	suit = /obj/item/clothing/suit/storage/det_trench/ft
 	shoes = /obj/item/clothing/shoes/laceup
 	backpack_contents = list(/obj/item/clothing/accessory/badge/PI = 1)
 
