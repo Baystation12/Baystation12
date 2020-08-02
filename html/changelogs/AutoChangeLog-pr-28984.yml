@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Broken decals, turfs, wall-mounted objects, furniture, etc should no longer be broken."
