@@ -57,10 +57,11 @@ obj/item/clothing/under/chameleon/proc/initialize_outfits()
 	var/global/list/standard_outfit_options
 	if(!standard_outfit_options)	
 		standard_outfit_options = list()
-		for(var/path in subtypesof(/decl/hierarchy/outfit/job))
-			var/decl/hierarchy/outfit/job/J = path
-			if(initial(J.chameleon))
-				standard_outfit_options[initial(J.name)] = path
+		for(var/path in typesof(/decl/hierarchy/outfit/job))
+			for(var/subpath in typesof(path))
+				var/decl/hierarchy/outfit/job/J = subpath
+				if(initial(J.chameleon))
+					standard_outfit_options[initial(J.name)] = subpath
 		sortTim(standard_outfit_options, /proc/cmp_text_asc)
 	return standard_outfit_options
 
