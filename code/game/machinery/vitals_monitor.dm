@@ -1,4 +1,3 @@
-
 /obj/machinery/vitals_monitor
 	name = "vitals monitor"
 	desc = "A bulky yet mobile machine, showing some odd graphs."
@@ -13,7 +12,16 @@
 	construct_state = /decl/machine_construction/default/panel_closed
 
 	var/mob/living/carbon/human/victim
+	var/obj/machinery/optable/connected_optable = null
 	var/beep = TRUE
+
+/obj/machinery/vitals_monitor/Initialize()
+	. = ..()
+	for(dir in list(NORTH,EAST,SOUTH,WEST))
+		connected_optable = locate(/obj/machinery/optable, get_step(src, dir))
+		if (connected_optable)
+			connected_optable.connected_monitor = src
+			break
 
 /obj/machinery/vitals_monitor/Destroy()
 	victim = null
@@ -52,28 +60,43 @@
 				breathing = "shallow"
 		
 		to_chat(user, SPAN_NOTICE("Breathing: [breathing]"))
+	if(connected_optable)
+		to_chat(user, SPAN_NOTICE("Connected to adjacent [connected_optable]."))
 
 /obj/machinery/vitals_monitor/Process()
 	if(QDELETED(victim))
-		victim = null
+		update_victim(null)
 	if(victim && !Adjacent(victim))
-		victim = null
-		update_use_power(POWER_USE_IDLE)
+		update_victim(null)
+	if(connected_optable && !Adjacent(connected_optable))
+		update_victim(null)
+		connected_optable.connected_monitor = null
+		connected_optable = null
 	if(victim)
 		update_icon()
 	if(beep && victim && victim.pulse())
-		playsound(src, 'sound/machines/quiet_beep.ogg')
+		playsound(src, 'sound/machines/quiet_beep.ogg', 40)
+
+/obj/machinery/vitals_monitor/proc/update_victim(var/newvictim)
+	victim = newvictim
+	update_use_power(isnull(victim)? POWER_USE_IDLE : POWER_USE_ACTIVE)
+	update_icon()
 	
 /obj/machinery/vitals_monitor/MouseDrop(over_object, src_location, over_location)
 	if(!CanMouseDrop(over_object))
 		return
+	if(connected_optable) // clear out connections because we're doing a new connection
+		connected_optable.connected_monitor = null
+		connected_optable = null
 	if(victim)
-		victim = null
-		update_use_power(POWER_USE_IDLE)
+		update_victim(null)
 	else if(ishuman(over_object))
-		victim = over_object
-		update_use_power(POWER_USE_ACTIVE)
+		update_victim(over_object)	
 		visible_message(SPAN_NOTICE("\The [src] is now showing data for [victim]."))
+	else if(istype(over_object, /obj/machinery/optable/))
+		connected_optable = over_object
+		connected_optable.connected_monitor = src
+		visible_message(SPAN_NOTICE("\The [src] is now relaying information from the [connected_optable]"))
 
 /obj/machinery/vitals_monitor/on_update_icon()
 	overlays.Cut()

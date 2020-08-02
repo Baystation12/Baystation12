@@ -16,6 +16,7 @@
 	var/mob/living/carbon/human/victim = null
 	var/strapped = 0.0
 	var/obj/machinery/computer/operating/computer = null
+	var/obj/machinery/vitals_monitor/connected_monitor = null
 
 /obj/machinery/optable/Initialize()
 	. = ..()
@@ -103,10 +104,14 @@
 	if(!victim || !victim.lying || victim.loc != loc)
 		suppressing = FALSE
 		victim = null
+		if(connected_monitor)
+			connected_monitor.update_victim(null)
 		if(locate(/mob/living/carbon/human) in loc)
 			for(var/mob/living/carbon/human/H in loc)
 				if(H.lying)
 					victim = H
+					if(connected_monitor)
+						connected_monitor.update_victim(H)
 					break
 	icon_state = (victim && victim.pulse()) ? "table2-active" : "table2-idle"
 	if(victim)
@@ -132,6 +137,8 @@
 	if(ishuman(C))
 		var/mob/living/carbon/human/H = C
 		src.victim = H
+		if(connected_monitor)
+			connected_monitor.update_victim(H)
 		icon_state = H.pulse() ? "table2-active" : "table2-idle"
 	else
 		icon_state = "table2-idle"
