@@ -192,6 +192,8 @@
 	//We're good to toggle state
 	on = !on
 	if(on)
+		if(ismob(src.loc))
+			playsound(src.loc, 'sound/effects/walkieon.ogg', 40, 0, -1)
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj, src)
