@@ -1,0 +1,11 @@
+author: "Rowtree"
+delete-after: True
+changes: 
+  - tweak: "Adds more drinks to the lunchbox selection."
+  - tweak: "Adds Lemon Juice to the Booze-O-Mat"
+  - tweak: "Coconut Milk no longer requires Nutriment."
+  - tweak: "Removes Brown Star, as it was redundant with the addition of Orange Cola"
+  - tweak: "Replaces Starkist cans, which were Brown Star with Irn Bru."
+  - tweak: "Nevadan Gold Whiskey no longer requires Irish Coffee, instead uses Irish Cream as intended."
+  - tweak: "Tweaked Booze-O-Mat Layout and in some cases, added the alcohol type to the bottle name."
+  - tweak: "Lowered the amount of juice cartons to encourage botany play."
