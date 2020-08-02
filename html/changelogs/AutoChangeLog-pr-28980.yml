@@ -1,0 +1,7 @@
+author: "Devildabeast"
+delete-after: True
+changes: 
+  - tweak: "The Union Enforcer and Union Representative now start with empty pockets."
+  - tweak: "The contractor Shuttle Pilot no longer spawns with a jacket."
+  - tweak: "The contractor Forensic Technician no longer spawns with a coat and hat."
+  - tweak: "The Paramedic alternate title no longer gets an EMT belt."
