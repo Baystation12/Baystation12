@@ -66,7 +66,6 @@
 	uniform = /obj/item/clothing/under/rank/medical/paramedic
 	suit = /obj/item/clothing/suit/storage/toggle/fr_jacket
 	shoes = /obj/item/clothing/shoes/jackboots
-	belt = /obj/item/weapon/storage/belt/medical/emt
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL
 
 /decl/hierarchy/outfit/job/torch/crew/medical/contractor/chemist
