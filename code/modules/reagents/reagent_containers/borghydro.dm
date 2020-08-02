@@ -68,7 +68,9 @@
 			if(!user.do_skilled(INJECTION_PORT_DELAY, SKILL_MEDICAL, M))
 				return
 		to_chat(user, "<span class='notice'>You inject [M] with the injector.</span>")
-		to_chat(M, "<span class='notice'>You feel a tiny prick!</span>")
+		if(ishuman(M))
+			var/mob/living/carbon/human/H = M
+			H.custom_pain(SPAN_WARNING("You feel a tiny prick!"), 1, TRUE, H.get_organ(user.zone_sel.selecting))
 
 		if(M.reagents)
 			var/t = min(amount_per_transfer_from_this, reagent_volumes[reagent_ids[mode]])

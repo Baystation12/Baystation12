@@ -1,9 +1,16 @@
-
-
+{{if data.viewing_silicon}}
+	<div class="block">
+		<div class="item">
+			<div class="itemContent bad">
+				Remote AI systems detected. Firewall protections forbid remote AI control.
+			</div>
+		</div>
+	</div>
+{{/if}}
 
 <div style="float:left;width:45%;">
 	<fieldset style="min-height:180px;background-color: #202020;">
-		<legend style="text-align:center">Flight data</legend> 
+		<legend style="text-align:center">Flight data</legend>
 		<div class='item'>
 			<div class="itemLabelWider">
 				ETA to next grid:
@@ -35,7 +42,7 @@
 			<div style="float:right">
 				{{:data.heading}}&deg;
 			</div>
-		</div> 
+		</div>
 		<div class='item'>
 			<div class="itemLabelWider">
 				Acceleration limiter:
@@ -43,10 +50,10 @@
 			<div style="float:right">
 				{{:helper.link(data.accellimit, null, { 'accellimit' : 1}, null, null)}} Gm/h
 			</div>
-		</div> 
+		</div>
 	</fieldset>
 </div>
-	
+
 <div style="float:left;width:25%">
 <fieldset style="min-height:180px;background-color: #202020;">
 	<legend style="text-align:center">Manual control</legend>
@@ -75,7 +82,7 @@
 	</div>
 </fieldset>
 </div>
-	
+
 <div style="float:left;width:30%">
 <fieldset style="min-height:180px;background-color: #202020;">
 	<legend style="text-align:center">Autopilot</legend>
@@ -90,7 +97,7 @@
 				{{:helper.link('None', null, { 'sety' : 1, 'setx' : 1 }, null, null)}}
 			{{/if}}
 		</div>
-	</div> 
+	</div>
 	<div class='item'>
 		<div class="itemLabelWide">
 			Speed limit:
@@ -98,13 +105,13 @@
 		<div class="itemContent">
 			{{:helper.link(data.speedlimit, null, { 'speedlimit' : 1 }, null, null)}} Gm/h
 		</div>
-	</div> 
+	</div>
 	<div class="item">
 		{{:helper.link(data.autopilot ? 'Engaged' : 'Disengaged', 'gear', { 'apilot' : 1 }, data.dest ? null : 'disabled', data.autopilot ? 'selected' : null)}}
 	</div>
 </fieldset>
 </div>
-	
+
 	<div class='block' style='clear: both;'>
 		<h3>Navigation data</h3>
 		<div class='item'>
@@ -155,5 +162,3 @@
 		</table>
 	</div>
 	</div>
-	
-	

@@ -126,7 +126,7 @@
 	if(!(..()))
 		return
 
-	if(!owner.hatch_closed)
+	if(!owner?.hatch_closed)
 		to_chat(usr, SPAN_WARNING("Error: Hardpoint interface disabled while [owner.body.hatch_descriptor] is open."))
 		return
 
@@ -222,6 +222,8 @@
 	icon_state = "hatch_status"
 
 /obj/screen/movable/exosuit/toggle/hatch_open/toggled()
+	if (!owner)
+		return
 	if(owner.hatch_locked && owner.hatch_closed)
 		to_chat(usr, SPAN_WARNING("You cannot open the hatch while it is locked."))
 		return

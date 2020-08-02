@@ -45,7 +45,7 @@
 /obj/structure/bed/roller/ironingboard/examine(mob/user)
 	. = ..()
 	if(cloth)
-		to_chat(user, "<span class='notice'>\The \icon[cloth] [cloth] lies on it.</span>")
+		to_chat(user, "<span class='notice'>\The [icon2html(cloth, user)] [cloth] lies on it.</span>")
 
 /obj/structure/bed/roller/ironingboard/on_update_icon()
 	if(density)

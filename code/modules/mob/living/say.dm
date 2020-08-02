@@ -242,7 +242,7 @@ proc/get_radio_key_from_channel(var/channel)
 		if(speaking)
 			message_range = speaking.get_talkinto_msg_range(message)
 		if(!speaking || !(speaking.flags & NO_TALK_MSG))
-			src.visible_message(SPAN_NOTICE("\The [src] talks into \the [used_radios[1]]."), SPAN_NOTICE("You hear someone talk into their headset."), 5, exclude_mobs = list(src))
+			src.visible_message(SPAN_NOTICE("\The [src] talks into \the [used_radios[1]]."), blind_message = SPAN_NOTICE("You hear someone talk into their headset."), range = 5, exclude_mobs = list(src))
 			if (speech_sound)
 				sound_vol *= 0.5
 

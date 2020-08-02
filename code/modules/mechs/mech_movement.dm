@@ -113,7 +113,7 @@
 	for(var/atom/movable/AM in contents)
 		if(!AM.lost_in_space())
 			return FALSE
-	return !pilots.len
+	return !length(pilots)
 
 /mob/living/exosuit/fall_damage()
 	return 100 //Exosuits are big and heavy

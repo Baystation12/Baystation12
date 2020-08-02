@@ -229,22 +229,25 @@
 	return ..()
 
 /obj/structure/stairs/Bumped(atom/movable/A)
-	var/turf/target = get_step(GetAbove(A), dir)
-	var/turf/source = A.loc
 	var/turf/above = GetAbove(A)
-	if(above.CanZPass(source, UP) && target.Enter(A, src))
-		A.forceMove(target)
-		if(isliving(A))
-			var/mob/living/L = A
-			if(L.pulling)
-				L.pulling.forceMove(target)
-		if(ishuman(A))
-			var/mob/living/carbon/human/H = A
-			if(H.has_footsteps())
-				playsound(source, 'sound/effects/stairs_step.ogg', 50)
-				playsound(target, 'sound/effects/stairs_step.ogg', 50)
+	if (above)
+		var/turf/target = get_step(above, dir)
+		var/turf/source = A.loc
+		if(above.CanZPass(source, UP) && target.Enter(A, src))
+			A.forceMove(target)
+			if(isliving(A))
+				var/mob/living/L = A
+				if(L.pulling)
+					L.pulling.forceMove(target)
+			if(ishuman(A))
+				var/mob/living/carbon/human/H = A
+				if(H.has_footsteps())
+					playsound(source, 'sound/effects/stairs_step.ogg', 50)
+					playsound(target, 'sound/effects/stairs_step.ogg', 50)
+		else
+			to_chat(A, "<span class='warning'>Something blocks the path.</span>")
 	else
-		to_chat(A, "<span class='warning'>Something blocks the path.</span>")
+		to_chat(A, SPAN_NOTICE("There is nothing of interest in this direction."))
 
 /obj/structure/stairs/proc/upperStep(var/turf/T)
 	return (T == loc)

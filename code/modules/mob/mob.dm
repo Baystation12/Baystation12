@@ -100,7 +100,7 @@
 		if (exclude_mobs?.len && (M in exclude_mobs))
 			exclude_mobs -= M
 			continue
-		
+
 		var/mob_message = message
 
 		if(isghost(M))
@@ -283,6 +283,11 @@
 /mob/proc/restrained()
 	return
 
+/mob/proc/can_be_floored()
+	if (buckled || lying || can_overcome_gravity())
+		return FALSE
+	return TRUE
+
 /mob/proc/reset_view(atom/A)
 	if (client)
 		A = A ? A : eyeobj
@@ -307,7 +312,7 @@
 	set name = "Examine"
 	set category = "IC"
 
-	if((is_blind(src) || usr.stat) && !isobserver(src))
+	if((is_blind(src) || usr && usr.stat) && !isobserver(src))
 		to_chat(src, "<span class='notice'>Something is there but you can't see it.</span>")
 		return 1
 

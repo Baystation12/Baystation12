@@ -1,4 +1,14 @@
 <h3>Sensors control console</h3>
+{{if data.viewing_silicon}}
+	<div class="block">
+		<div class="item">
+			<div class="itemContent bad">
+				Remote AI systems detected. Firewall protections forbid remote AI control.
+			</div>
+		</div>
+	</div>
+{{/if}}
+
 <div class='block'>
 	{{:helper.link(data.on ? 'Switch off' : 'Switch on', 'gear', { 'toggle' : 1 }, data.status != 'MISSING' ? null : 'disabled', data.on ? 'selected' : null)}}
 	<div class='item'>

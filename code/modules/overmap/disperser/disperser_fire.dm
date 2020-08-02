@@ -46,7 +46,7 @@
 		if(!isdeaf(M))
 			sound_to(M, sound('sound/effects/explosionfar.ogg', volume=10))
 
-		if(!M.buckled && !M.lying)
+		if(M.can_be_floored())
 			var/shouldstumble = FALSE
 			var/sincelastmove = world.time - M.l_move_time
 

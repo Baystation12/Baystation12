@@ -19,6 +19,8 @@
 	var/logo_list = list("sollogo.png","eclogo.png","fleetlogo.png","exologo.png","ntlogo.png","daislogo.png","xynlogo.png","terralogo.png", "sfplogo.png")
 	var/logo = ""
 
+	var/unformatedText = ""
+
 /obj/item/weapon/paper/admin/New()
 	..()
 	generateInteractions()
@@ -78,16 +80,15 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 /obj/item/weapon/paper/admin/Topic(href, href_list)
 	if(href_list["write"])
 		var/id = href_list["write"]
-		if(free_space <= 0)
-			to_chat(usr, "<span class='info'>There isn't enough space left on \the [src] to write anything.</span>")
-			return
 
-		var/t =  sanitize(input("Enter what you want to write:", "Write", null, null) as message, free_space, extra = 0)
+		var/t =  sanitize(input("Enter what you want to write:", "Write", unformatedText, null) as message, MAX_PAPER_MESSAGE_LEN, extra = 0)
 
 		if(!t)
 			return
 
 		var last_fields_value = fields
+
+		unformatedText = t
 
 		//t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
@@ -102,10 +103,11 @@ obj/item/weapon/paper/admin/proc/updateDisplay()
 		if(id!="end")
 			addtofield(text2num(id), t) // He wants to edit a field, let him.
 		else
-			info += t // Oh, he wants to edit to the end of the file, let him.
+			info = t // set the file to the new text
 			updateinfolinks()
 
-		update_space(t)
+		//manualy set freespace
+		free_space = MAX_PAPER_MESSAGE_LEN - length(strip_html_properly(t))
 
 		updateDisplay()
 

@@ -81,7 +81,8 @@
 /obj/item/weapon/storage/belt/holster/examine(mob/user)
 	. = ..()
 	var/datum/extension/holster/H = get_extension(src, /datum/extension/holster)
-	H.examine_holster(user)
+	if (!QDELETED(H))
+		H.examine_holster(user)
 
 /obj/item/weapon/storage/belt/holster/on_update_icon()
 	if (ismob(src.loc))
@@ -355,7 +356,7 @@
 		)
 
 /obj/item/weapon/storage/belt/holster/forensic
-	name = "forensic belt"
+	name = "forensic holster belt"
 	desc = "Can hold forensic gear like fingerprint powder and luminol."
 	icon_state = "forensicbelt"
 	item_state = "forensic"
@@ -377,7 +378,36 @@
 		/obj/item/weapon/forensics/sample_kit,
 		/obj/item/device/camera,
 		/obj/item/device/taperecorder,
-		/obj/item/device/tape
+		/obj/item/device/tape,
+		/obj/item/weapon/storage/csi_markers,
+		/obj/item/device/scanner
+		)
+
+/obj/item/weapon/storage/belt/forensic
+	name = "forensic belt"
+	desc = "Can hold forensic gear like fingerprint powder and luminol."
+	icon_state = "forensicbelt"
+	item_state = "forensic"
+	storage_slots = 8
+	can_hold = list(
+		/obj/item/weapon/reagent_containers/spray/luminol,
+		/obj/item/device/uv_light,
+		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/weapon/forensics/swab,
+		/obj/item/weapon/sample/print,
+		/obj/item/weapon/sample/fibers,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape,
+		/obj/item/clothing/gloves/latex,
+		/obj/item/clothing/gloves/forensic,
+		/obj/item/weapon/folder,
+		/obj/item/weapon/paper,
+		/obj/item/weapon/forensics/sample_kit,
+		/obj/item/device/camera,
+		/obj/item/device/taperecorder,
+		/obj/item/device/tape,
+		/obj/item/weapon/storage/csi_markers,
+		/obj/item/device/scanner
 		)
 
 /obj/item/weapon/storage/belt/holster/machete

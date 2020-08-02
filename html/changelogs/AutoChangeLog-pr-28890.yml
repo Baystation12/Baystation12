@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscdel: "AI and borgs are no longer permitted to access helm and navigational consoles, to bring mechanics in line with current staff ruling. Shuttle control consoles are still accessible."

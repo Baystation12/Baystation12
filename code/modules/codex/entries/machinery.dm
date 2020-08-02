@@ -15,7 +15,7 @@
 
 /datum/codex_entry/conveyor_construct
 	associated_paths = list(/obj/machinery/conveyor, /obj/item/conveyor_construct)
-	mechanics_text = "This device must be connected to a switch assembly before placement by clicking the switch on the conveyor belt assembly. When active it will move objects on top of it to the adjacent space based on its direction and if it is runnnig in forward or reverse mode. Can be removed with a crowbar."
+	mechanics_text = "This device must be connected to a switch assembly before placement by clicking the switch on the conveyor belt assembly. When active it will move objects on top of it to the adjacent space based on its direction and if it is running in forward or reverse mode. Can be removed with a crowbar."
 
 /datum/codex_entry/conveyor_construct
 	associated_paths = list(/obj/machinery/conveyor_switch,/obj/machinery/conveyor_switch/oneway,/obj/item/conveyor_switch_construct,/obj/item/conveyor_switch_construct/oneway)

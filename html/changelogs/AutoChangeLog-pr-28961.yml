@@ -1,0 +1,4 @@
+author: "NullSnapshot"
+delete-after: True
+changes: 
+  - tweak: "Moves the input bar on the interface back to its original position"

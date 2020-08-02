@@ -371,7 +371,7 @@ datum/gas_mixture/proc/check_recombustability(list/fuel_objs)
 	var/total_combustables = (total_fuel + total_oxidizers)
 	var/active_combustables = (FIRE_REACTION_OXIDIZER_AMOUNT/FIRE_REACTION_FUEL_AMOUNT + 1)*reaction_limit
 
-	if(total_combustables > 0)
+	if(total_moles && total_combustables > 0)
 		//slows down the burning when the concentration of the reactants is low
 		var/damping_multiplier = min(1, active_combustables / (total_moles/group_multiplier))
 

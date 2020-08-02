@@ -223,23 +223,14 @@
 	update_icon()
 
 /obj/machinery/mining/drill/proc/get_resource_field()
-
 	resource_field = list()
 	need_update_field = 0
 
-	var/turf/T = get_turf(src)
-	if(!istype(T)) return
+	for (var/turf/simulated/T in range(2, src))
+		if (T.has_resources)
+			resource_field += T
 
-	var/tx = T.x - 2
-	var/ty = T.y - 2
-	var/turf/simulated/mine_turf
-	for(var/iy = 0,iy < 5, iy++)
-		for(var/ix = 0, ix < 5, ix++)
-			mine_turf = locate(tx + ix, ty + iy, T.z)
-			if(mine_turf && mine_turf.has_resources)
-				resource_field += mine_turf
-
-	if(!resource_field.len)
+	if (!length(resource_field))
 		system_error("resources depleted")
 
 /obj/machinery/mining/drill/verb/unload()

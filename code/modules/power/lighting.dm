@@ -602,7 +602,7 @@
 
 /obj/item/weapon/light/examine(mob/user)
 	. = ..()
-	if (reagents.total_volume && Adjacent(user))
+	if (reagents?.total_volume && Adjacent(user))
 		to_chat(user, SPAN_WARNING("There's some sort of fluid inside [src]."))
 
 /obj/item/weapon/light/tube

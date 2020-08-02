@@ -93,10 +93,9 @@
 		return
 
 	var/datum/reagents/R = new/datum/reagents(100, GLOB.temp_reagents_holder)
-	if(chems.len)
-		for(var/rid in chems)
-			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
-			R.add_reagent(rid,injecting)
+	for(var/rid in chems)
+		var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
+		R.add_reagent(rid,injecting)
 
 	var/datum/effect/effect/system/smoke_spread/chem/spores/S = new(name)
 	S.attach(T)
@@ -152,15 +151,18 @@
 	if(!get_trait(TRAIT_STINGS))
 		return
 
-	if(chems && chems.len && target.reagents && length(target.organs))
+	if(length(chems) && target.reagents && length(target.organs))
 
 		var/obj/item/organ/external/affecting = pick(target.organs)
+		if (!affecting)
+			return
 
 		for(var/obj/item/clothing/C in list(target.head, target.wear_mask, target.wear_suit, target.w_uniform, target.gloves, target.shoes))
 			if(C && (C.body_parts_covered & affecting.body_part) && (C.item_flags & ITEM_FLAG_THICKMATERIAL))
 				affecting = null
 
-		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))	affecting = null
+		if(!(target.species && target.species.species_flags & (SPECIES_FLAG_NO_EMBED|SPECIES_FLAG_NO_MINOR_CUT)))
+			affecting = null
 
 		if(affecting)
 			to_chat(target, "<span class='danger'>You are stung by \the [fruit] in your [affecting.name]!</span>")
@@ -627,7 +629,7 @@
 			for(var/trait in list(TRAIT_YIELD, TRAIT_ENDURANCE))
 				if(get_trait(trait) > 0) set_trait(trait,get_trait(trait),null,1,0.85)
 
-			if(!chems) chems = list()
+			LAZYINITLIST(chems)
 
 			var/list/gene_value = gene.values["[TRAIT_CHEMS]"]
 			for(var/rid in gene_value)

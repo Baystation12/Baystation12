@@ -42,12 +42,12 @@
 			victim.disabilities |= pick(disabilities)
 
 	if(victim.psi)
-		to_chat(victim, SPAN_DANGER("A hauntingly familiar sound hisses from \icon[source] \the [source], and your vision flickers!"))
+		to_chat(victim, SPAN_DANGER("A hauntingly familiar sound hisses from [icon2html(source, victim)] \the [source], and your vision flickers!"))
 		victim.psi.backblast(rand(5,15))
 		victim.Paralyse(5)
 		victim.make_jittery(100)
 	else
-		to_chat(victim, SPAN_DANGER("An indescribable, brain-tearing sound hisses from \icon[source] \the [source], and you collapse in a seizure!"))
+		to_chat(victim, SPAN_DANGER("An indescribable, brain-tearing sound hisses from [icon2html(source, victim)] \the [source], and you collapse in a seizure!"))
 		victim.seizure()
 		var/new_latencies = rand(2,4)
 		var/list/faculties = list(PSI_COERCION, PSI_REDACTION, PSI_ENERGISTICS, PSI_PSYCHOKINESIS)

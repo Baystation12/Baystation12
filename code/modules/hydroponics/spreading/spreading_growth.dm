@@ -68,7 +68,7 @@
 	//Growing up
 	if(health < max_health)
 		adjust_health(1)
-		if(growth_threshold && !(health % growth_threshold))
+		if(round(growth_threshold) && !(health % growth_threshold))
 			update_icon()
 
 	if(is_mature())

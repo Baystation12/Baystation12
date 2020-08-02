@@ -25,8 +25,8 @@
 
 	for(var/client/target in GLOB.clients)
 		if(target.holder)
-			receive_communication(C, target, "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", target)] <EM>[get_options_bar(C, 0, 1, 1)]:</EM> <span class='message'>[message]</span></span></span>")
+			receive_communication(C, target, "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", target)] <EM>[get_options_bar(C, 0, 1, 1)]:</EM> <span class='message linkify'>[message]</span></span></span>")
 		else if(target.mob && target.mob.mind && target.mob.mind.special_role)
 			var/display_name = C.key
 			var/player_display = holder ? "[display_name]([usr.client.holder.rank])" : display_name
-			receive_communication(C, target, "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", target)] <EM>[player_display]:</EM> <span class='message'>[message]</span></span></span>")
+			receive_communication(C, target, "<span class='ooc'><span class='aooc'>[create_text_tag("aooc", "Antag-OOC:", target)] <EM>[player_display]:</EM> <span class='message linkify'>[message]</span></span></span>")

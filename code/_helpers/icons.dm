@@ -926,4 +926,3 @@ proc/generate_image(var/tx as num, var/ty as num, var/tz as num, var/range as nu
 				cap.Blend(img, blendMode2iconMode(A.blend_mode),  A.pixel_x + xoff, A.pixel_y + yoff)
 
 	return cap
-

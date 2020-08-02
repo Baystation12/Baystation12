@@ -6,6 +6,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	icon_screen = "helm"
 	light_color = "#7faaff"
 	core_skill = SKILL_PILOT
+	silicon_restriction = STATUS_UPDATE
 	var/autopilot = 0
 	var/list/known_sectors = list()
 	var/dx		//desitnation
@@ -70,6 +71,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	else
 		var/turf/T = get_turf(linked)
 		var/obj/effect/overmap/visitable/sector/current_sector = locate() in T
+
+		data["viewing_silicon"] = issilicon(user)
 
 		data["sector"] = current_sector ? current_sector.name : "Deep Space"
 		data["sector_info"] = current_sector ? current_sector.desc : "Not Available"
@@ -212,6 +215,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 	name = "navigation console"
 	icon_keyboard = "generic_key"
 	icon_screen = "helm"
+	silicon_restriction = STATUS_UPDATE
 
 /obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
@@ -223,6 +227,8 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 	var/turf/T = get_turf(linked)
 	var/obj/effect/overmap/visitable/sector/current_sector = locate() in T
+
+	data["viewing_silicon"] = issilicon(user)
 
 	data["sector"] = current_sector ? current_sector.name : "Deep Space"
 	data["sector_info"] = current_sector ? current_sector.desc : "Not Available"

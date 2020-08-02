@@ -22,11 +22,6 @@
 		/obj/item/weapon/weldingtool
 	)
 	emag = /obj/item/weapon/reagent_containers/spray
-	skills = list(
-		SKILL_EVA    = SKILL_MAX,
-		SKILL_MECH   = HAS_PERK,
-		SKILL_BOTANY = SKILL_MAX
-	) // lol, idk
 
 /obj/item/weapon/robot_module/janitor/finalize_emag()
 	. = ..()

@@ -517,7 +517,7 @@
 	dir = 5
 	},
 /obj/machinery/pager/robotics{
-	pixel_y = 30;
+	pixel_y = 30
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/firstdeck/center)
@@ -659,6 +659,10 @@
 /obj/effect/floor_decal/floordetail/edgedrain,
 /obj/effect/floor_decal/corner/red{
 	dir = 5
+	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 8;
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue/autopsy)
@@ -3217,6 +3221,11 @@
 /obj/effect/floor_decal/spline/plain/blue{
 	icon_state = "spline_plain";
 	dir = 5
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
@@ -6907,6 +6916,10 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/locker)
 "atn" = (
@@ -7382,6 +7395,10 @@
 	c_tag = "Infirmary - Examination Room";
 	dir = 1
 	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/exam_room)
 "avq" = (
@@ -7420,6 +7437,10 @@
 	},
 /obj/machinery/computer/modular/preset/medical{
 	dir = 1
+	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 1;
+	pixel_y = -28
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/physicianoffice)
@@ -14644,6 +14665,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/item/device/radio/intercom/department/medbay{
+	pixel_y = 23
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/foyer)
 "bhL" = (
@@ -15678,6 +15702,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery2)
 "cub" = (
@@ -15853,9 +15881,9 @@
 /obj/item/weapon/pen/crayon/yellow{
 	desc = "A colourful crayon. Please refrain from eating it or putting it in your nose. This one is labeled 'Canary Yellow.'"
 	},
-	/obj/item/weapon/hand_labeler,
-	/obj/item/stack/package_wrap/twenty_five,
-	/obj/item/device/destTagger,
+/obj/item/weapon/hand_labeler,
+/obj/item/stack/package_wrap/twenty_five,
+/obj/item/device/destTagger,
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/office)
 "cBU" = (
@@ -16934,6 +16962,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
+/obj/item/device/radio/intercom{
+	dir = 8;
+	pixel_x = 21
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/medicalhallway)
 "dYb" = (
@@ -17033,9 +17065,9 @@
 	dir = 9;
 	icon_state = "intact"
 	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 21
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 8;
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
@@ -19088,6 +19120,13 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/armoury)
+"hzT" = (
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 1;
+	pixel_y = -28
+	},
+/turf/simulated/floor/tiled/dark,
+/area/medical/foyer/storeroom)
 "hAb" = (
 /obj/item/device/radio/intercom{
 	pixel_y = 23
@@ -19164,6 +19203,10 @@
 	name = "plastic table frame"
 	},
 /obj/item/modular_computer/laptop/preset/custom_loadout/standard,
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/crew_quarters/safe_room/medical)
 "hEU" = (
@@ -20572,13 +20615,12 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/locker)
 "jul" = (
-/obj/machinery/button/alternate/door{
-	id_tag = "inf_stage";
-	name = "Infirmary Staging Exit";
-	pixel_y = -23
-	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 1;
+	pixel_y = -28
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/staging)
@@ -21769,6 +21811,10 @@
 /obj/item/auto_cpr,
 /obj/effect/floor_decal/corner/paleblue/mono,
 /obj/effect/floor_decal/industrial/outline/yellow,
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/equipstorage)
 "kUb" = (
@@ -24696,6 +24742,16 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/security/armoury)
+"oLK" = (
+/obj/effect/floor_decal/corner/paleblue{
+	dir = 5
+	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 1;
+	pixel_y = -28
+	},
+/turf/simulated/floor/tiled/white,
+/area/medical/staging)
 "oMb" = (
 /obj/machinery/door/window/brigdoor/eastleft{
 	dir = 2;
@@ -24733,6 +24789,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
+	},
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 4;
+	pixel_x = -24
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
@@ -29520,6 +29580,10 @@
 	dir = 4
 	},
 /obj/structure/bed/roller,
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 4;
+	pixel_x = -24
+	},
 /turf/simulated/floor/tiled/white,
 /area/medical/sleeper)
 "uoC" = (
@@ -29783,6 +29847,10 @@
 	name = "Chemistry Cleaner"
 	},
 /obj/effect/floor_decal/corner/beige/mono,
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 8;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/medical/chemistry)
 "uVf" = (
@@ -50309,7 +50377,7 @@ qnz
 qnz
 nDx
 kCb
-gkb
+kCb
 gkb
 ePb
 gkb
@@ -51323,7 +51391,7 @@ anL
 adH
 dZb
 afB
-gyV
+lHO
 agj
 aGx
 agY
@@ -51730,8 +51798,8 @@ afK
 gyV
 agH
 agx
-agY
-ahc
+oLK
+leb
 ivT
 hgb
 flB
@@ -54140,7 +54208,7 @@ uXe
 adw
 kZb
 cXb
-xuW
+hzT
 rAu
 rAu
 rAu

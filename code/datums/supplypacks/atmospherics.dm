@@ -34,7 +34,7 @@
 
 /decl/hierarchy/supply_pack/atmospherics/rpd
 	name = "Equipment - Rapid Piping Device"
-	contains = list(/obj/item/weapon/rpd)
+	contains = list(/obj/item/weapon/rpd = 2)
 	cost = 100
 	containertype = /obj/structure/closet/crate/secure
 	access = access_atmospherics

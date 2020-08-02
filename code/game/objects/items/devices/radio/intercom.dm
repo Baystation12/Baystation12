@@ -65,6 +65,7 @@
 	. = ..()
 	internal_channels = list(
 		num2text(PUB_FREQ) = list(),
+		num2text(SEC_FREQ) = list(access_security),
 		num2text(SEC_I_FREQ) = list(access_security)
 	)
 

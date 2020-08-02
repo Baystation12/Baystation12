@@ -42,7 +42,8 @@
 	deltimer(timer_handle)
 
 /datum/click_handler/build_mode/proc/TimerEvent()
-	current_build_mode.TimerEvent()
+	if (!QDELETED(current_build_mode))
+		current_build_mode.TimerEvent()
 
 /datum/click_handler/build_mode/Enter()
 	user.client.show_popup_menus = FALSE

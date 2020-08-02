@@ -28,8 +28,8 @@
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
-	var/obj/item/weapon/cell/cell = /obj/item/weapon/cell/device
-	var/power_usage = 2800
+	var/obj/item/weapon/cell/device/cell = /obj/item/weapon/cell/device/standard
+	var/power_usage = 700
 
 	var/datum/radio_frequency/radio_connection
 	var/list/datum/radio_frequency/secure_radio_connections = new
@@ -45,7 +45,7 @@
 	. = ..()
 	wires = new(src)
 	if(ispath(cell))
-		cell = new(src)
+		cell = new cell(src)
 	internal_channels = GLOB.using_map.default_internal_channels()
 	GLOB.listening_objects += src
 
@@ -494,24 +494,12 @@
 			talk_into(M, msg,null,verb,speaking)
 
 
-/*
-/obj/item/device/radio/proc/accept_rad(obj/item/device/radio/R as obj, message)
-
-	if ((R.frequency == frequency && message))
-		return 1
-	else if
-
-	else
-		return null
-	return
-*/
-
-
 /obj/item/device/radio/proc/receive_range(freq, level)
 	// check if this radio can receive on the given frequency, and if so,
 	// what the range is in which mobs will hear the radio
 	// returns: -1 if can't receive, range otherwise
-
+	if (!wires)
+		return -1
 	if (wires.IsIndexCut(WIRE_RECEIVE))
 		return -1
 	if(!listening)
@@ -554,6 +542,8 @@
 			to_chat(user, "<span class='notice'>\The [src] can be attached and modified!</span>")
 		else
 			to_chat(user, "<span class='notice'>\The [src] can not be modified or attached!</span>")
+		if (power_usage && cell)
+			to_chat(user, "<span class='notice'>\The [src] charge meter reads [round(cell.percent(), 0.1)]%.</span>")
 
 /obj/item/device/radio/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()

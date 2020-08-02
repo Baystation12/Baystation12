@@ -6,6 +6,9 @@ macro "borghotkeymode"
 		name = "Center+REP"
 		command = ".center"
 	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
+	elem 
 		name = "Northeast"
 		command = ".northeast"
 	elem 
@@ -229,9 +232,12 @@ macro "macro"
 	elem 
 		name = "Tab"
 		command = ".winset \"mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
-	elem 
+	elem
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -405,9 +411,12 @@ macro "hotkeymode"
 	elem 
 		name = "Tab"
 		command = ".winset \"mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5\""
-	elem 
+	elem
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -653,6 +662,9 @@ macro "borgmacro"
 	elem 
 		name = "Center+REP"
 		command = ".center"
+	elem 
+		name = "ALT+Return"
+		command = "Toggle-Fullscreen"
 	elem 
 		name = "Northeast"
 		command = ".northeast"
@@ -969,7 +981,7 @@ window "mainwindow"
 		anchor2 = none
 		saved-params = ""
 		text = "Hotkey Toggle"
-		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true input.background-color=#d3b5b5 : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true input.background-color=#f0f0f0\""
+		command = ".winset \"mainwindow.macro!=macro ? mainwindow.macro=macro hotkey_toggle.is-checked=false input.focus=true : mainwindow.macro=hotkeymode hotkey_toggle.is-checked=true mapwindow.map.focus=true\""
 		button-type = pushbox
 	elem "mainvsplit"
 		type = CHILD
@@ -1000,6 +1012,7 @@ window "mainwindow"
 		text = "Chat"
 		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
 		button-type = pushbox
+
 
 window "mapwindow"
 	elem "mapwindow"
@@ -1033,7 +1046,6 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		background-color = none
 		is-visible = false
 		is-disabled = true
 		saved-params = ""
@@ -1046,6 +1058,7 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
+		background-color = none
 		saved-params = "pos;size;is-minimized;is-maximized"
 		titlebar = false
 		statusbar = false
@@ -1053,6 +1066,16 @@ window "outputwindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+	elem "browseroutput"
+		type = BROWSER
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #ffffff
+		is-visible = false
+		saved-params = ""
+		auto-format = false
 	elem "output"
 		type = OUTPUT
 		pos = 0,0
@@ -1060,14 +1083,13 @@ window "outputwindow"
 		anchor1 = 0,0
 		anchor2 = 100,100
 		is-default = true
-		saved-params = "max-lines"
-		style = ".system {color:#ff0000;}"
-		max-lines = 0
+		saved-params = ""
+	
 
 window "rpane"
 	elem "rpane"
 		type = MAIN
-		pos = 281,0
+		pos = 418,0
 		size = 640x480
 		anchor1 = none
 		anchor2 = none
@@ -1197,4 +1219,3 @@ window "infowindow"
 		highlight-color = #00aa00
 		on-show = ".winset\"rpane.infob.is-visible=true;rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
-

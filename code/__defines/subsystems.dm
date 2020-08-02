@@ -50,6 +50,7 @@
 #define SS_INIT_XENOARCH        -10
 #define SS_INIT_BAY_LEGACY      -12
 #define SS_INIT_TICKER          -20
+#define SS_INIT_CHAT            -90 // Should be lower to ensure chat remains smooth during init.
 #define SS_INIT_UNIT_TESTS      -100
 
 // SS runlevels

@@ -3,17 +3,32 @@
 
 /obj/effect/overmap/visitable/sector/miningstation
 	name = "Orbital Mining Station"
-	desc = "Sensors detect an orbital station with low energy profile."
+	desc = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station. It is emitting a active distress beacon."
 	icon_state = "object"
 	known = 0
+	initial_generic_waypoints = list(
+		"nav_miningstation_hangar",
+		"nav_miningstation_exterior",
+	)
 
 /datum/map_template/ruin/away_site/miningstation
 	name = "Mining Station"
 	id = "awaysite_miningstation"
 	description = "An orbital Mining Station bearing authentication codes from Grayson Mining Industries, sensors show inconsistant lifesigns aboard the station."
 	suffixes = list("miningstation/miningstation.dmm")
-	cost = 2
+	cost = 1
 	area_usage_test_exempted_root_areas = list(/area/miningstation)
+
+/obj/effect/shuttle_landmark/nav_miningstation/hangar
+	name = "Hangar"
+	landmark_tag = "nav_miningstation_hangar"
+	base_area = /area/miningstation/hangar
+	base_turf = /turf/simulated/floor/plating
+
+/obj/effect/shuttle_landmark/nav_miningstation/exterior
+	name = "Near the orbital station"
+	landmark_tag = "nav_miningstation_exterior"
+
 
 ///////////////////////////////////crew
 /decl/hierarchy/outfit/corpse
@@ -105,7 +120,7 @@
 	health = 250
 	melee_damage_lower = 20
 	melee_damage_upper = 25
-	melee_damage_flags = DAM_SHARP
+	melee_damage_flags = DAM_SHARP | DAM_EDGE
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 0
 	attacktext = "mauls and slashes"
@@ -117,6 +132,12 @@
 	break_stuff_probability = 25
 	pry_time = 4 SECONDS
 	pry_desc = "clawing"
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 /mob/living/simple_animal/hostile/meat/abomination
 	name = "Abomination"
@@ -138,7 +159,7 @@
 	health = 250
 	melee_damage_lower = 20
 	melee_damage_upper = 25
-	melee_damage_flags = DAM_SHARP
+	melee_damage_flags = DAM_SHARP | DAM_EDGE
 	heat_damage_per_tick = 20
 	cold_damage_per_tick = 0
 	attacktext = "mauls and slashes"
@@ -150,6 +171,12 @@
 	break_stuff_probability = 25
 	pry_time = 4 SECONDS
 	pry_desc = "clawing"
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 /mob/living/simple_animal/hostile/meat/horror
 	name = "Horror"
@@ -171,7 +198,7 @@
 	health = 150
 	melee_damage_lower = 10
 	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP
+	melee_damage_flags = DAM_SHARP | DAM_EDGE
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
 	faction = "meat"
@@ -182,6 +209,12 @@
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 /mob/living/simple_animal/hostile/meat/strippedhuman
 	name = "Turned Human"
@@ -203,7 +236,7 @@
 	health = 100
 	melee_damage_lower = 5
 	melee_damage_upper = 10
-	melee_damage_flags = DAM_SHARP
+	melee_damage_flags = DAM_SHARP | DAM_EDGE
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
 	attacktext = "mauls"
@@ -215,6 +248,12 @@
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 /mob/living/simple_animal/hostile/meat/humansecurity
 	name = "Turned Security"
@@ -236,7 +275,7 @@
 	health = 200
 	melee_damage_lower = 10
 	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP
+	melee_damage_flags = DAM_SHARP | DAM_EDGE
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
 	attacktext = "slashes"
@@ -248,6 +287,12 @@
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 /mob/living/simple_animal/hostile/meat/horrorminer
 	name = "Turned Miner"
@@ -269,7 +314,7 @@
 	health = 150
 	melee_damage_lower = 10
 	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP
+	melee_damage_flags = DAM_SHARP | DAM_EDGE
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
 	attacktext = "slashes"
@@ -281,6 +326,12 @@
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 /mob/living/simple_animal/hostile/meat/horrorsmall
 	name = "Smaller Horror"
@@ -303,7 +354,7 @@
 	health = 50
 	melee_damage_lower = 10
 	melee_damage_upper = 15
-	melee_damage_flags = DAM_SHARP
+	melee_damage_flags = DAM_SHARP | DAM_EDGE
 	heat_damage_per_tick = 100
 	cold_damage_per_tick = 0
 	faction = "meat"
@@ -314,6 +365,12 @@
 	break_stuff_probability = 25
 	pry_time = 8 SECONDS
 	pry_desc = "clawing"
+	min_gas = null
+	max_gas = null
+	minbodytemp = 0
+	natural_armor = list(
+		melee = ARMOR_MELEE_KNIVES
+		)
 
 ////////////////////////////Notes and papers
 

@@ -7,7 +7,7 @@
 	such as fire, radiation, vacuum, and more. Ghosts can join the round as a maintenance drone by using the appropriate verb in the 'ghost' tab. \
 	An inactive drone can be rebooted by swiping an ID card on it with engineering or robotics access, and an active drone can be shut down in the same manner. \
 	Maintenance drone presence can be requested to specific areas from any maintenance drone control console."
-	antag_text = "A crypotgraphic sequencer, available via a traitor uplink, can be used to subvert the drone to your cause."
+	antag_text = "A cryptographic sequencer, available via a traitor uplink, can be used to subvert the drone to your cause."
 
 /datum/codex_entry/uncertified_module
 	associated_paths = list(/obj/item/borg/upgrade/uncertified)

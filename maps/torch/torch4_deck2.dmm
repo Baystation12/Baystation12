@@ -255,7 +255,7 @@
 /obj/machinery/conveyor_switch/oneway{
 	convdir = -1;
 	id = "garbage";
-	name = "disposal coveyor"
+	name = "disposal conveyor"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/railing/mapped{
@@ -778,6 +778,10 @@
 "bz" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/up,
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 1;
+	pixel_y = -28
+	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/medical/morgue)
 "bA" = (
@@ -1374,7 +1378,6 @@
 	amount = 20
 	},
 /obj/item/stack/material/aluminium/fifty,
-/obj/item/stack/material/plastic/ten,
 /obj/structure/closet/crate/plastic,
 /obj/machinery/recharger/wallcharger{
 	pixel_y = 24
@@ -1382,6 +1385,7 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_x = 32
 	},
+/obj/item/stack/material/plastic/fifty,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "cs" = (
@@ -3022,12 +3026,11 @@
 /turf/simulated/floor/plating,
 /area/engineering/engineering_bay)
 "fK" = (
-/obj/structure/table/steel,
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = -28
 	},
-/obj/machinery/cell_charger,
+/obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/assembly/robotics)
 "fL" = (
@@ -13475,7 +13478,7 @@
 /obj/machinery/conveyor_switch/oneway{
 	convdir = -1;
 	id = "garbage2";
-	name = "disposal coveyor"
+	name = "disposal conveyor"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/railing/mapped{
@@ -17507,6 +17510,13 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
 /area/storage/cargo)
+"TW" = (
+/obj/item/device/radio/intercom/department/medbay{
+	dir = 1;
+	pixel_y = -28
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/storage/medical)
 "TX" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -18324,7 +18334,9 @@
 /obj/effect/floor_decal/corner/yellow{
 	dir = 4
 	},
-/obj/structure/closet/crate/secure/biohazard/alt,
+/obj/structure/closet/crate/secure/biohazard/alt{
+	req_access = list("ACCESS_ROBOTICS")
+	},
 /obj/machinery/light_switch{
 	pixel_y = -24
 	},
@@ -35826,7 +35838,7 @@ eR
 QA
 su
 fy
-fD
+ee
 XP
 ge
 gD
@@ -42076,7 +42088,7 @@ bW
 Lk
 eP
 eP
-eP
+TW
 Lk
 MD
 gs

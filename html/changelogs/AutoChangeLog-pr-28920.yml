@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "The OFD no longer has a chance to knock over flying mobs or the AI."

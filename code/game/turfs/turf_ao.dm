@@ -74,13 +74,13 @@
 	}
 
 #define CUT_AO(TARGET, AO_LIST) \
-	if (AO_LIST) { \
+	if (TARGET && AO_LIST) { \
 		TARGET.overlays -= AO_LIST; \
 		AO_LIST.Cut(); \
 	}
 
 #define REGEN_AO(TARGET, AO_LIST, NEIGHBORS) \
-	if (permit_ao && NEIGHBORS != AO_ALL_NEIGHBORS) { \
+	if (permit_ao && TARGET && NEIGHBORS != AO_ALL_NEIGHBORS) { \
 		var/corner;\
 		PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, 1, NORTHWEST); \
 		PROCESS_AO_CORNER(AO_LIST, NEIGHBORS, 2, SOUTHEAST); \
