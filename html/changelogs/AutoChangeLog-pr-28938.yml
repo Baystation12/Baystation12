@@ -1,0 +1,5 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Crew Monitor now sorts properly by name instead of by deck."
+  - tweak: "Crew Monitor now reads off connected z_levels. Might affect how sensors work on off-ship z_levels."
