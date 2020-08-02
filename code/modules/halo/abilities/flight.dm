@@ -5,6 +5,12 @@
 	var/flight_ticks_remain = 0 //Movement and life() ticks degrade this. Set by Yanme'e flight and jump-packs
 	var/obj/item/flight_item/flight_item
 
+/mob/living/Stat()
+	. = ..()
+	if(statpanel("Status"))
+		if(flight_ticks_remain > 0)
+			stat("Flight Ticks Remaining: [flight_ticks_remain]")
+
 /mob/living/proc/decrement_flight_ticks()
 	flight_ticks_remain = max(flight_ticks_remain - 1,0)
 	if(flight_item && flight_item.flight_bar)

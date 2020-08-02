@@ -249,9 +249,3 @@
 
 /mob/living/proc/handle_hud_icons_health()
 	return
-
-/mob/living/Stat()
-	. = ..()
-	if(statpanel("Status"))
-		if(flight_ticks_remain > 0)
-			stat("Flight Ticks Remaining: [flight_ticks_remain]")
