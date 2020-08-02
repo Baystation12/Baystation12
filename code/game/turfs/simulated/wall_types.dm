@@ -8,8 +8,8 @@
 /turf/simulated/wall/r_wall
 	icon_state = "r_generic"
 
-/turf/simulated/wall/r_wall/Initialize(var/ml)
-	. = ..(ml, MATERIAL_PLASTEEL,MATERIAL_PLASTEEL) //3strong
+/turf/simulated/wall/r_wall/New(var/newloc)
+	..(newloc, MATERIAL_PLASTEEL,MATERIAL_PLASTEEL) //3strong
 
 /turf/simulated/wall/r_wall/hull
 	name = "hull"
@@ -44,112 +44,112 @@
 /turf/simulated/wall/titanium
 	icon_state = "titanium"
 
-/turf/simulated/wall/titanium/Initialize(var/ml)
-	. = ..(ml,MATERIAL_TITANIUM)
+/turf/simulated/wall/titanium/New(var/newloc)
+	..(newloc,MATERIAL_TITANIUM)
 
 /turf/simulated/wall/r_titanium
 	icon_state = "r_titanium"
 
-/turf/simulated/wall/r_titanium/Initialize(var/ml)
-	. = ..(ml, MATERIAL_TITANIUM, MATERIAL_TITANIUM)
+/turf/simulated/wall/r_titanium/New(var/newloc)
+	..(newloc, MATERIAL_TITANIUM,MATERIAL_TITANIUM)
 
 /turf/simulated/wall/ocp_wall
 	icon_state = "r_ocp"
 
-/turf/simulated/wall/ocp_wall/Initialize(var/ml)
-	. = ..(ml, MATERIAL_OSMIUM_CARBIDE_PLASTEEL, MATERIAL_OSMIUM_CARBIDE_PLASTEEL)
+/turf/simulated/wall/ocp_wall/New(var/newloc)
+	..(newloc, MATERIAL_OSMIUM_CARBIDE_PLASTEEL, MATERIAL_OSMIUM_CARBIDE_PLASTEEL)
 
 //Material walls
 
-/turf/simulated/wall/r_wall/rglass_wall/Initialize(var/ml)
-	. = ..(ml, MATERIAL_GLASS, MATERIAL_STEEL)
+/turf/simulated/wall/r_wall/rglass_wall/New(var/newloc)
+	..(newloc, MATERIAL_GLASS, MATERIAL_STEEL)
 	icon_state = "r_generic"
 
-/turf/simulated/wall/iron/Initialize(var/ml)
-	. = ..(ml,MATERIAL_IRON)
+/turf/simulated/wall/iron/New(var/newloc)
+	..(newloc,MATERIAL_IRON)
 
-/turf/simulated/wall/uranium/Initialize(var/ml)
-	. = ..(ml,MATERIAL_URANIUM)
+/turf/simulated/wall/uranium/New(var/newloc)
+	..(newloc,MATERIAL_URANIUM)
 
-/turf/simulated/wall/diamond/Initialize(var/ml)
-	. = ..(ml,MATERIAL_DIAMOND)
+/turf/simulated/wall/diamond/New(var/newloc)
+	..(newloc,MATERIAL_DIAMOND)
 
-/turf/simulated/wall/gold/Initialize(var/ml)
-	. = ..(ml,MATERIAL_GOLD)
+/turf/simulated/wall/gold/New(var/newloc)
+	..(newloc,MATERIAL_GOLD)
 
-/turf/simulated/wall/silver/Initialize(var/ml)
-	. = ..(ml,MATERIAL_SILVER)
+/turf/simulated/wall/silver/New(var/newloc)
+	..(newloc,MATERIAL_SILVER)
 
-/turf/simulated/wall/phoron/Initialize(var/ml)
-	. = ..(ml,MATERIAL_PHORON)
+/turf/simulated/wall/phoron/New(var/newloc)
+	..(newloc,MATERIAL_PHORON)
 
-/turf/simulated/wall/sandstone/Initialize(var/ml)
-	. = ..(ml,MATERIAL_SANDSTONE)
+/turf/simulated/wall/sandstone/New(var/newloc)
+	..(newloc,MATERIAL_SANDSTONE)
 
-/turf/simulated/wall/rutile/Initialize(var/ml)
-	. = ..(ml,MATERIAL_RUTILE)
+/turf/simulated/wall/rutile/New(var/newloc)
+	..(newloc,MATERIAL_RUTILE)
 
 /turf/simulated/wall/wood
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
-/turf/simulated/wall/wood/Initialize(var/ml)
-	. = ..(ml,MATERIAL_WOOD)
+/turf/simulated/wall/wood/New(var/newloc)
+	..(newloc,MATERIAL_WOOD)
 
 /turf/simulated/wall/mahogany
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
-/turf/simulated/wall/mahogany/Initialize(var/ml)
-	. = ..(ml,MATERIAL_MAHOGANY)
+/turf/simulated/wall/mahogany/New(var/newloc)
+	..(newloc,MATERIAL_MAHOGANY)
 
 /turf/simulated/wall/maple
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
-/turf/simulated/wall/maple/Initialize(var/ml)
-	. = ..(ml,MATERIAL_MAPLE)
+/turf/simulated/wall/maple/New(var/newloc)
+	..(newloc,MATERIAL_MAPLE)
 
 /turf/simulated/wall/ebony
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
-/turf/simulated/wall/ebony/Initialize(var/ml)
-	. = ..(ml,MATERIAL_EBONY)
+/turf/simulated/wall/ebony/New(var/newloc)
+	..(newloc,MATERIAL_EBONY)
 
 /turf/simulated/wall/walnut
 	blend_turfs = list(/turf/simulated/wall/cult, /turf/simulated/wall)
 	icon_state = "woodneric"
 
-/turf/simulated/wall/walnut/Initialize(var/ml)
-	. = ..(ml,MATERIAL_WALNUT)
+/turf/simulated/wall/walnut/New(var/newloc)
+	..(newloc,MATERIAL_WALNUT)
 
-/turf/simulated/wall/ironphoron/Initialize(var/ml)
-	. = ..(ml,MATERIAL_IRON,MATERIAL_PHORON)
+/turf/simulated/wall/ironphoron/New(var/newloc)
+	..(newloc,MATERIAL_IRON,MATERIAL_PHORON)
 
-/turf/simulated/wall/golddiamond/Initialize(var/ml)
-	. = ..(ml,MATERIAL_GOLD,MATERIAL_DIAMOND)
+/turf/simulated/wall/golddiamond/New(var/newloc)
+	..(newloc,MATERIAL_GOLD,MATERIAL_DIAMOND)
 
-/turf/simulated/wall/silvergold/Initialize(var/ml)
-	. = ..(ml,MATERIAL_SILVER,MATERIAL_GOLD)
+/turf/simulated/wall/silvergold/New(var/newloc)
+	..(newloc,MATERIAL_SILVER,MATERIAL_GOLD)
 
-/turf/simulated/wall/sandstonediamond/Initialize(var/ml)
-	. = ..(ml,MATERIAL_SANDSTONE,MATERIAL_DIAMOND)
+/turf/simulated/wall/sandstonediamond/New(var/newloc)
+	..(newloc,MATERIAL_SANDSTONE,MATERIAL_DIAMOND)
 
-/turf/simulated/wall/crystal/Initialize(var/ml)
-	. = ..(ml,MATERIAL_CRYSTAL)
+/turf/simulated/wall/crystal/New(var/newloc)
+	..(newloc,MATERIAL_CRYSTAL)
 
-/turf/simulated/wall/voxshuttle/Initialize(var/ml)
-	. = ..(ml, MATERIAL_VOX)
+/turf/simulated/wall/voxshuttle/New(var/newloc)
+	..(newloc, MATERIAL_VOX)
 
 /turf/simulated/wall/voxshuttle/attackby()
 	return
 
-/turf/simulated/wall/growth/Initialize(var/ml)
-	. = ..(ml, MATERIAL_GROWTH)
+/turf/simulated/wall/growth/New(var/newloc)
+	..(newloc, MATERIAL_GROWTH)
 
-/turf/simulated/wall/concrete/Initialize(var/ml)
-	. = ..(ml,MATERIAL_CONCRETE)
+/turf/simulated/wall/concrete/New(var/newloc)
+	..(newloc,MATERIAL_CONCRETE)
 
 //Alien metal walls
 /turf/simulated/wall/alium
@@ -157,8 +157,8 @@
 	floor_type = /turf/simulated/floor/fixed/alium
 	list/blend_objects = newlist()
 
-/turf/simulated/wall/alium/Initialize(var/ml)
-	. = ..(ml, MATERIAL_ALIENALLOY)
+/turf/simulated/wall/alium/New(var/newloc)
+	..(newloc,MATERIAL_ALIENALLOY)
 
 /turf/simulated/wall/alium/ex_act(severity)
 	if(prob(explosion_resistance))
@@ -170,11 +170,11 @@
 	icon_state = "cult"
 	blend_turfs = list(/turf/simulated/wall)
 
-/turf/simulated/wall/cult/Initialize(var/ml, var/reinforce = 0)
-	. = ..(ml, MATERIAL_CULT, reinforce ? MATERIAL_REINFORCED_CULT : null)
+/turf/simulated/wall/cult/New(var/newloc, var/reinforce = 0)
+	..(newloc, MATERIAL_CULT, reinforce ? MATERIAL_REINFORCED_CULT : null)
 
-/turf/simulated/wall/cult/reinf/Initialize(var/ml)
-	. = ..(ml, 1)
+/turf/simulated/wall/cult/reinf/New(var/newloc)
+	..(newloc, 1)
 
 /turf/simulated/wall/cult/dismantle_wall()
 	GLOB.cult.remove_cultiness(CULTINESS_PER_TURF)

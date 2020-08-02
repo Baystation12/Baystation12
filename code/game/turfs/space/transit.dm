@@ -37,8 +37,8 @@
 	pushdirection = WEST
 	var/static/list/phase_shift_by_y
 
-/turf/space/transit/east/Initialize(var/ml)
-	. = ..()
+/turf/space/transit/east/New()
+	..()
 	if(!phase_shift_by_y)
 		phase_shift_by_y = get_cross_shift_list(15)
 
