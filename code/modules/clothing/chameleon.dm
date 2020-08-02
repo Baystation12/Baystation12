@@ -25,8 +25,8 @@
 	if(copy.sprite_sheets)
 		sprite_sheets = copy.sprite_sheets.Copy()
 	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
-	copy.update_icon()
 	OnDisguise(copy, user)
+	qdel(copy)
 	
 	
 
@@ -83,42 +83,33 @@ obj/item/clothing/under/chameleon/proc/initialize_outfits()
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
 
 /obj/item/clothing/under/chameleon/verb/change_outfit()
-	if(usr.incapacitated())
-		return FALSE
 	set name = "Change Chameleon Outfit"
+	if(usr.incapacitated() || !ishuman(usr))
+		return FALSE
 	var/list/outfits = initialize_outfits()
 	var/selected_key = input(usr, "Choose an Outfit", "Chameleon Outfit") as null|anything in outfits
-	var/decl/hierarchy/outfit/selected = outfits[selected_key]
-	if(!ishuman(usr))
+	if (!selected_key)
 		return FALSE
+	var/decl/hierarchy/outfit/selected = outfits[selected_key]
 	var/mob/living/carbon/human/user = usr
-	if(istype(user.w_uniform, /obj/item/clothing/under/chameleon))
-		if(initial(selected.uniform) != null)
-			disguise(initial(selected.uniform),usr)
-	if(istype(user.head, /obj/item/clothing/head/chameleon))
-		if(initial(selected.head) != null)
-			user.head.disguise(initial(selected.head),usr)
-	if(istype(user.wear_suit, /obj/item/clothing/suit/chameleon))
-		if(initial(selected.suit) != null)
-			user.wear_suit.disguise(initial(selected.suit),usr)
-	if(istype(user.shoes, /obj/item/clothing/shoes/chameleon))
-		if(initial(selected.shoes) != null)
-			user.shoes.disguise(initial(selected.shoes), usr)
-	if(istype(user.back, /obj/item/weapon/storage/backpack/chameleon))
-		if(initial(selected.back) != null)
-			user.back.disguise(initial(selected.back),usr)
-	if(istype(user.glasses, /obj/item/clothing/glasses/chameleon))
-		if(initial(selected.glasses) != null)
-			user.glasses.disguise(initial(selected.glasses),usr)
-	if(istype(user.gloves, /obj/item/clothing/gloves/chameleon))
-		if(initial(selected.gloves) != null)
-			user.gloves.disguise(initial(selected.gloves),usr)
-	if(istype(user.wear_mask, /obj/item/clothing/mask/chameleon))
-		if(initial(selected.mask) != null)
-			user.wear_mask.disguise(initial(selected.mask),usr)
-	if(istype(user.l_ear, /obj/item/device/radio/headset/chameleon))
-		if(initial(selected.l_ear) != null)
-			user.l_ear.disguise(initial(selected.l_ear),usr)
+	if(istype(user.w_uniform, /obj/item/clothing/under/chameleon) && initial(selected.uniform))
+		disguise(initial(selected.uniform),usr)
+	if(istype(user.head, /obj/item/clothing/head/chameleon) && initial(selected.head))
+		user.head.disguise(initial(selected.head),usr)
+	if(istype(user.wear_suit, /obj/item/clothing/suit/chameleon) && initial(selected.suit))
+		user.wear_suit.disguise(initial(selected.suit),usr)
+	if(istype(user.shoes, /obj/item/clothing/shoes/chameleon) && initial(selected.shoes))
+		user.shoes.disguise(initial(selected.shoes), usr)
+	if(istype(user.back, /obj/item/weapon/storage/backpack/chameleon) && initial(selected.back))
+		user.back.disguise(initial(selected.back),usr)
+	if(istype(user.glasses, /obj/item/clothing/glasses/chameleon) && initial(selected.glasses))
+		user.glasses.disguise(initial(selected.glasses),usr)
+	if(istype(user.gloves, /obj/item/clothing/gloves/chameleon) && initial(selected.gloves))
+		user.gloves.disguise(initial(selected.gloves),usr)
+	if(istype(user.wear_mask, /obj/item/clothing/mask/chameleon) && initial(selected.mask))
+		user.wear_mask.disguise(initial(selected.mask),usr)
+	if(istype(user.l_ear, /obj/item/device/radio/headset/chameleon) && initial(selected.l_ear))
+		user.l_ear.disguise(initial(selected.l_ear),usr)
 	user.regenerate_icons()
 	
 

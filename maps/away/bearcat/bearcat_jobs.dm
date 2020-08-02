@@ -30,7 +30,6 @@
 /decl/hierarchy/outfit/job/bearcat/crew
 	name = BEARCAT_OUTFIT_JOB_NAME("Crew")
 	id_type = /obj/item/weapon/card/id/bearcat
-	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/bearcat/captain
 	name = BEARCAT_OUTFIT_JOB_NAME("Captain")
@@ -38,7 +37,6 @@
 	shoes = /obj/item/clothing/shoes/black
 	pda_type = /obj/item/modular_computer/pda/captain
 	id_type = /obj/item/weapon/card/id/bearcat_captain
-	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/bearcat/captain/post_equip(var/mob/living/carbon/human/H)
 	..()

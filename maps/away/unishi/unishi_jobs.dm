@@ -33,7 +33,6 @@
 	r_pocket = /obj/item/device/radio
 	shoes = /obj/item/clothing/shoes/black
 	belt = /obj/item/weapon/storage/belt/utility/full
-	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/unishi/researcher
 	name = UNISHI_OUTFIT_JOB_NAME("Researcher")
@@ -42,7 +41,6 @@
 	shoes = /obj/item/clothing/shoes/black
 	r_pocket = /obj/item/device/radio
 	l_pocket = /obj/item/weapon/crowbar/prybar
-	chameleon = FALSE
 
 /obj/effect/submap_landmark/spawnpoint/unishi_crew
 	name = "Unishi Crew"

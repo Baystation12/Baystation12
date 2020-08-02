@@ -13,12 +13,10 @@
 /decl/hierarchy/outfit/job/ascent/attendant
 	name = "Ascent - Attendant"
 	back = /obj/item/weapon/rig/mantid
-	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/ascent/tech
 	name = "Ascent - Technician"
 	suit = /obj/item/clothing/suit/storage/ascent
-	chameleon = FALSE
 
 /obj/item/clothing/mask/gas/ascent
 	name = "mantid facemask"
