@@ -1,5 +1,0 @@
-author: "TheLordME"
-delete-after: True
-changes: 
-  - rscadd: "Meters can now be clicked directly to read the value, instead of haveing to examin them. Works only from adjacent tiles for Non-Cyborgs."
-  - rscadd: "AIs can now read Meters by clicking on them."

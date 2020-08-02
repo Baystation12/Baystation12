@@ -1,7 +1,0 @@
-author: "Kearel"
-delete-after: True
-changes: 
-  - tweak: "Tendrils now penetrate armor and deal more damage."
-  - tweak: "Biters are now a tier 1 item."
-  - tweak: "Shooters have more range and their projectiles weaken and embed. They are now a tier 2 item."
-  - tweak: "Doubled the number of resources nutrient siphons give."
