@@ -386,8 +386,8 @@
 /obj/item/weapon/storage/belt/forensic
 	name = "forensic belt"
 	desc = "Can hold forensic gear like fingerprint powder and luminol."
-	icon_state = "forensicbelt"
-	item_state = "forensic"
+	icon_state = "basicforensicbelt"
+	item_state = "basicforensic"
 	storage_slots = 8
 	can_hold = list(
 		/obj/item/weapon/reagent_containers/spray/luminol,
