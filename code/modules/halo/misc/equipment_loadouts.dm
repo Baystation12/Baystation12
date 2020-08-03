@@ -136,6 +136,14 @@
 	startswith = list()
 	can_hold = list()
 
+/obj/item/weapon/storage/box/large/equipment_box/examine(var/mob/user)
+	. = ..()
+	var/msg = "Items In Loadout:\n"
+	for(var/i in contents)
+		var/atom/movable/item = i
+		msg += "--\n[item.name]\n--\n[item.desc]\n--\n"
+	to_chat(user,msg)
+
 //YANMEE//
 
 /obj/item/weapon/storage/box/large/equipment_box/yanmee_sharpshooter
@@ -521,14 +529,14 @@
 	/obj/item/weapon/gun/projectile/mauler,
 	/obj/item/equipment_paper/ammo_mauler,
 	/obj/item/weapon/storage/belt/covenant_ammo,
-	/obj/item/weapon/gun/energy/plasmarifle,
+	/obj/item/weapon/gun/energy/plasmarifle/brute,
 	/obj/item/equipment_paper/spikenade/small
 	)
 	startswith = list(\
 	/obj/item/weapon/gun/projectile/mauler,
 	/obj/item/equipment_paper/ammo_mauler,
 	/obj/item/weapon/storage/belt/covenant_ammo,
-	/obj/item/weapon/gun/energy/plasmarifle,
+	/obj/item/weapon/gun/energy/plasmarifle/brute,
 	/obj/item/equipment_paper/spikenade/small
 	)
 
@@ -594,6 +602,7 @@ Squad Leader - Comes with req papers for a variety of higher tier guns.
 /obj/machinery/vending/armory/equip_req
 	name = "Equipment Requisition Vendor"
 	desc = "Requisition an equipment pack from this, or insert an equipment requisition paper to provide a related item."
+	show_product_desc_pre_purchase = 1
 	var/vendor_faction = null
 	var/list/prev_users = list()
 	var/list/species_lock = list()

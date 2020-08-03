@@ -204,7 +204,7 @@
 /obj/item/nav_data_chip/covenant
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "Covenant"
-	known_sectors = list("Vanguard's Mantle","VT9-042","Northwind","Geminus Colony")
+	known_sectors = list("Vanguard's Mantle","VT9-042","KS7-535","Northwind","Geminus Colony")
 
 /obj/item/nav_data_chip/innie
 	chip_faction = "Insurrection"
@@ -223,7 +223,7 @@
 	name = "Fragmented Nav Data Chip"
 	icon_state = "nav_data_chip_cov"
 	chip_faction = "Covenant"
-	known_sectors = list("Vanguard's Mantle","VT9-042","Northwind")
+	known_sectors = list("Vanguard's Mantle","VT9-042","KS7-535","Northwind")
 
 /obj/item/nav_data_chip/fragmented/covenant/kig_yar
 	known_sectors = list("Vanguard's Mantle","Asteroid","KS7-535","Geminus Colony")

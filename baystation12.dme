@@ -1824,6 +1824,7 @@
 #include "code\modules\halo\mobs\converter.dm"
 #include "code\modules\halo\mobs\faction_builders.dm"
 #include "code\modules\halo\mobs\hostile.dm"
+#include "code\modules\halo\mobs\human_movement_delay.dm"
 #include "code\modules\halo\mobs\movement_sfx.dm"
 #include "code\modules\halo\mobs\simple_mob_ai.dm"
 #include "code\modules\halo\NPC\npc.dm"
