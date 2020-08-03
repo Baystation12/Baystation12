@@ -26,14 +26,13 @@
 
 	var/fleetname = pick("1st","2nd","3rd","4th","5th","6th","7th","8th","9th")
 	GLOB.UNSC.AnnounceCommand("Reinforcements from the [fleetname] Fleet have arrived in the system. Hold out for just a little longer, marines.")
-	GLOB.COVENANT.AnnounceCommand("An overwhelming human fleet has jumped insystem. You have failed to achieve your objectives in time. Slipspacing now will allow hostile forces to obtain control over the sector.")
+	GLOB.COVENANT.AnnounceCommand("An overwhelming human fleet has jumped insystem. Survival is not guaranteed.")
 
-	//unlock a spartan slot after a short delay
-	spawn(100)
-		var/datum/job/special_job = job_master.occupations_by_type[/datum/job/unsc/spartan_two]
-		if(special_job)
-			special_job.total_positions += 1
-			GLOB.UNSC.AnnounceCommand("A Spartan II is being deployed to the battlefront.")
+	//unlock some new job slots after a short delay
+	spawn(30)
+		GLOB.UNSC.unlock_special_job()
+		GLOB.COVENANT.unlock_special_job()
+
 	. = ..()
 
 /datum/faction/proc/set_endless_fleets()

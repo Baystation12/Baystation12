@@ -27,10 +27,19 @@
 		/mob/living/simple_animal/hostile/covenant/elite/ultra = 2,\
 		/mob/living/simple_animal/hostile/covenant/elite/zealot = 1)
 	default_radio_channel = RADIO_COV
+	special_jobs = list(/datum/job/covenant/brute_captain,\
+		/datum/job/covenant/skirmchampion,\
+		/datum/job/covenant/sangheili_zealot)
 
 /datum/faction/covenant/New()
 	. = ..()
 	leader_name = "[pick(GLOB.sanshyuum_titles)] of [pick(GLOB.sanshyuum_virtues)]"
+
+/datum/faction/covenant/unlock_special_job()
+	. = ..()
+	var/datum/job/special_job = .
+	GLOB.COVENANT.AnnounceCommand("The heirarchs have dispatched a [special_job.title] to the system.")
+
 /*
 /datum/faction/covenant/get_commander(var/datum/mind/check_mind)
 
@@ -63,11 +72,18 @@
 	default_radio_channel = RADIO_SQUAD
 	income = 1000
 	income_delay = 15 MINUTES
+	special_jobs = list(/datum/job/unsc/spartan_two)
 
 /datum/faction/unsc/Initialize()
 	. = ..()
 	leader_name = "[pick("Vice Admiral","Rear Admiral","Admiral","Fleet Admiral")] [leader_name]"
 	money_account = create_account("UNSC", 1000)
+
+/datum/faction/unsc/unlock_special_job()
+	. = ..()
+	var/datum/job/special_job = .
+	GLOB.UNSC.AnnounceCommand("A [special_job.title] is being deployed to the battlefront.")
+
 /*
 /datum/faction/unsc/get_commander(var/datum/mind/check_mind)
 
