@@ -140,6 +140,7 @@
 	l_ear = /obj/item/device/radio/headset/skrellian
 	id_type = /obj/item/weapon/card/id/skrellscoutship
 	l_pocket = /obj/item/clothing/accessory/badge/tags/skrell
+	chameleon = FALSE
 
 /obj/item/weapon/stock_parts/circuitboard/telecomms/allinone/skrellscoutship
 	build_path = /obj/machinery/telecomms/allinone/skrellscoutship

@@ -25,13 +25,16 @@
 	if(copy.sprite_sheets)
 		sprite_sheets = copy.sprite_sheets.Copy()
 	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
-
 	OnDisguise(copy, user)
 	qdel(copy)
+	
+	
 
 // Subtypes shall override this, not /disguise()
 /obj/item/proc/OnDisguise(var/obj/item/copy, var/mob/user)
 	return
+
+
 
 /proc/generate_chameleon_choices(var/basetype)
 	. = list()
@@ -49,6 +52,21 @@
 			.[name] = typepath
 	return sortAssoc(.)
 
+
+obj/item/clothing/under/chameleon/proc/initialize_outfits()
+	var/global/list/standard_outfit_options
+	if(!standard_outfit_options)	
+		standard_outfit_options = list()
+		for(var/path in typesof(/decl/hierarchy/outfit/job))
+			for(var/subpath in typesof(path))
+				var/decl/hierarchy/outfit/job/J = subpath
+				if(initial(J.chameleon))
+					standard_outfit_options[initial(J.name)] = subpath
+		sortTim(standard_outfit_options, /proc/cmp_text_asc)
+	return standard_outfit_options
+
+
+
 //starts off as a jumpsuit
 /obj/item/clothing/under/chameleon
 	name = "jumpsuit"
@@ -65,6 +83,37 @@
 	if(!clothing_choices)
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/under)
 
+/obj/item/clothing/under/chameleon/verb/change_outfit()
+	set name = "Change Chameleon Outfit"
+	if(usr.incapacitated() || !ishuman(usr))
+		return FALSE
+	var/list/outfits = initialize_outfits()
+	var/selected_key = input(usr, "Choose an Outfit", "Chameleon Outfit") as null|anything in outfits
+	if (!selected_key)
+		return FALSE
+	var/decl/hierarchy/outfit/selected = outfits[selected_key]
+	var/mob/living/carbon/human/user = usr
+	if(istype(user.w_uniform, /obj/item/clothing/under/chameleon) && initial(selected.uniform))
+		disguise(initial(selected.uniform),usr)
+	if(istype(user.head, /obj/item/clothing/head/chameleon) && initial(selected.head))
+		user.head.disguise(initial(selected.head),usr)
+	if(istype(user.wear_suit, /obj/item/clothing/suit/chameleon) && initial(selected.suit))
+		user.wear_suit.disguise(initial(selected.suit),usr)
+	if(istype(user.shoes, /obj/item/clothing/shoes/chameleon) && initial(selected.shoes))
+		user.shoes.disguise(initial(selected.shoes), usr)
+	if(istype(user.back, /obj/item/weapon/storage/backpack/chameleon) && initial(selected.back))
+		user.back.disguise(initial(selected.back),usr)
+	if(istype(user.glasses, /obj/item/clothing/glasses/chameleon) && initial(selected.glasses))
+		user.glasses.disguise(initial(selected.glasses),usr)
+	if(istype(user.gloves, /obj/item/clothing/gloves/chameleon) && initial(selected.gloves))
+		user.gloves.disguise(initial(selected.gloves),usr)
+	if(istype(user.wear_mask, /obj/item/clothing/mask/chameleon) && initial(selected.mask))
+		user.wear_mask.disguise(initial(selected.mask),usr)
+	if(istype(user.l_ear, /obj/item/device/radio/headset/chameleon) && initial(selected.l_ear))
+		user.l_ear.disguise(initial(selected.l_ear),usr)
+	user.regenerate_icons()
+	
+
 /obj/item/clothing/under/chameleon/verb/change(picked in clothing_choices)
 	set name = "Change Jumpsuit Appearance"
 	set category = "Chameleon Items"
@@ -76,6 +125,7 @@
 
 		disguise(clothing_choices[picked], usr)
 		update_clothing_icon()	//so our overlays update.
+
 
 //*****************
 //**Chameleon Hat**

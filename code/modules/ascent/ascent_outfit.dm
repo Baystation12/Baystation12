@@ -8,6 +8,7 @@
 	pda_type = null
 	pda_slot = 0
 	flags =    0
+	chameleon = FALSE
 	
 /decl/hierarchy/outfit/job/ascent/attendant
 	name = "Ascent - Attendant"

@@ -25,6 +25,7 @@
 	r_pocket = /obj/item/device/radio
 	l_ear = null
 	r_ear = null
+	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/bearcat/crew
 	name = BEARCAT_OUTFIT_JOB_NAME("Crew")
