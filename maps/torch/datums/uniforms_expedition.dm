@@ -84,6 +84,7 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/engineering
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/beret/solgov/expedition/engineering,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
@@ -138,6 +139,7 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/security
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/beret/solgov/expedition/security,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
@@ -192,6 +194,7 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/medical
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/beret/solgov/expedition/medical,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
@@ -246,6 +249,7 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/supply
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/beret/solgov/expedition/supply,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
@@ -295,6 +299,7 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/service
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/beret/solgov/expedition/service,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
@@ -345,6 +350,7 @@
 
 	utility_under = /obj/item/clothing/under/solgov/utility/expeditionary/officer/exploration
 	utility_extra = list(/obj/item/clothing/head/beret/solgov/expedition/command,
+						 /obj/item/clothing/head/beret/solgov/expedition/exploration,
 						 /obj/item/clothing/head/ushanka/solgov,
 						 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov,
 						 /obj/item/clothing/shoes/jackboots/unathi,
