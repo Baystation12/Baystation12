@@ -1,5 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Multitool can now toggle the power of injectors."
-  - bugfix: "Sprites of injectors will now update accordingly again."

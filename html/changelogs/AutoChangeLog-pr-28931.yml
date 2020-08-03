@@ -1,8 +1,0 @@
-author: "Kathy Ryals"
-delete-after: True
-changes: 
-  - tweak: "You can now Alt Click to eject people from scanners, cryotubes, or sleepers."
-  - tweak: "You can now Alt Click to eject a beaker from a chem master, dispenser, grinder, heater, or cooler."
-  - tweak: "You can now Ctrl Click a cryotube to turn it on and off."
-  - tweak: "You can now Ctrl Click a grinder to grind."
-  - tweak: "You can now CtrlAlt Click a grinder to eject the contents."

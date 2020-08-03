@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - bugfix: "The Discord !status command and the character setup map info blurb will no longer display malformed characters."

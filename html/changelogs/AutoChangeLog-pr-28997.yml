@@ -1,4 +1,0 @@
-author: "NullSnapshot"
-delete-after: True
-changes: 
-  - bugfix: "Icons should now display correctly in fancy chat!"

@@ -1,5 +1,0 @@
-author: "NullSnapshot"
-delete-after: True
-changes: 
-  - tweak: "Shortwave radios now consume power over time instead of with every transmission. They have been balanced to last for approximately an hour between charges."
-  - rscadd: "Shortwave radios can now be turned on and off. While turned off, they will not receive or allow transmission of any messages. Shortwave radios start turned off."

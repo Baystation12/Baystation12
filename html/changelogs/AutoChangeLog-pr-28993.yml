@@ -1,5 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Adds toolboxes to autolathes."
-  - tweak: "Toolboxes now have matter"
