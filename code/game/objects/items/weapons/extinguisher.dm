@@ -23,7 +23,7 @@
 	var/sprite_name = "fire_extinguisher"
 
 /obj/item/weapon/extinguisher/mini
-	name = "fire extinguisher"
+	name = "mini fire extinguisher"
 	desc = "A light and compact fibreglass-framed model fire extinguisher."
 	icon_state = "miniFE0"
 	item_state = "miniFE"
@@ -35,6 +35,7 @@
 	starting_water = 1000
 	max_water = 1000
 	sprite_name = "miniFE"
+	matter = list(MATERIAL_STEEL = 30, MATERIAL_GLASS = 30)
 
 /obj/item/weapon/extinguisher/Initialize()
 	. = ..()
@@ -43,6 +44,9 @@
 		reagents.add_reagent(/datum/reagent/water, starting_water)
 
 /obj/item/weapon/extinguisher/empty
+	starting_water = 0
+
+/obj/item/weapon/extinguisher/mini/empty
 	starting_water = 0
 
 /obj/item/weapon/extinguisher/examine(mob/user, distance)
