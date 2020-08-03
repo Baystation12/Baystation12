@@ -261,13 +261,13 @@
 		return TRUE
 
 	if (src.active)
-		user.visible_message("<span class='notice'>[icon2html(src, viewers(src))] [user] deactivated the shield generator.</span>", \
+		user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] deactivated the shield generator.</span>", \
 			"<span class='notice'>[icon2html(src,user)] You deactivate the shield generator.</span>", \
 			"You hear heavy droning fade out.")
 		src.shields_down()
 	else
 		if(anchored)
-			user.visible_message("<span class='notice'>[icon2html(src, viewers(src))] [user] activated the shield generator.</span>", \
+			user.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [user] activated the shield generator.</span>", \
 				"<span class='notice'>[icon2html(src, user)] You activate the shield generator.</span>", \
 				"You hear heavy droning.")
 			src.shields_up()

@@ -22,7 +22,7 @@
 /obj/structure/janitorialcart/examine(mob/user, distance)
 	. = ..()
 	if(distance <= 1)
-		to_chat(user, "[src] [icon2html(src, viewers(src))] contains [reagents.total_volume] unit\s of liquid!")
+		to_chat(user, "[src] [icon2html(src, viewers(get_turf(src)))] contains [reagents.total_volume] unit\s of liquid!")
 
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)

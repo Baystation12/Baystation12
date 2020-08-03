@@ -132,7 +132,7 @@
 						E.worth -= transaction_amount
 
 						playsound(src, 'sound/machines/chime.ogg', 50, 1)
-						src.visible_message("[icon2html(src, viewers(src))] \The [src] chimes.")
+						src.visible_message("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes.")
 						transaction_paid = 1
 					else
 						to_chat(usr, "[icon2html(src, usr)]<span class='warning'>Transaction failed! Please try again.</span>")
@@ -239,7 +239,7 @@
 						//transfer the money
 						if(D.transfer(linked_account, transaction_amount, "[transaction_purpose] (via [eftpos_name]/[machine_id])"))
 							playsound(src, 'sound/machines/chime.ogg', 50, 1)
-							src.visible_message("[icon2html(src, viewers(src))] \The [src] chimes.")
+							src.visible_message("[icon2html(src, viewers(get_turf(src)))] \The [src] chimes.")
 							transaction_paid = 1
 						else
 							to_chat(usr, "[icon2html(src, usr)]<span class='warning'>Transaction failed! Please try again.</span>")
