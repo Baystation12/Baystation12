@@ -1,0 +1,4 @@
+author: "TheLordME"
+delete-after: True
+changes: 
+  - tweak: "Weapon force affects APC cover knockdown chance. Crowbars can hit APCs on harm."
