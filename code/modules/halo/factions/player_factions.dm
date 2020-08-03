@@ -5,7 +5,7 @@
 	name = "Covenant"
 	var/list/objective_types = list()
 	enemy_faction_names = list("UNSC","Insurrection", "Human Colony","Flood")
-	commander_titles = list("Sangheili Shipmaster")
+	commander_job_types = list(/datum/job/covenant/sangheili_shipmaster)
 	default_language = LANGUAGE_SANGHEILI
 	ship_types = list(\
 		/obj/effect/overmap/ship/npc_ship/combat/covenant,\
@@ -31,14 +31,14 @@
 /datum/faction/covenant/New()
 	. = ..()
 	leader_name = "[pick(GLOB.sanshyuum_titles)] of [pick(GLOB.sanshyuum_virtues)]"
-
+/*
 /datum/faction/covenant/get_commander(var/datum/mind/check_mind)
 
 	if(!. && check_mind && check_mind.assigned_role == "Sangheili - Shipmaster")
 		return check_mind
 
 	. = ..()
-
+*/
 
 
 /* UNSC */
@@ -47,7 +47,7 @@
 	name = "UNSC"
 	contraband_gear = "UNSC"
 	enemy_faction_names = list("Covenant","Insurrection","Flood")
-	commander_titles = list("UNSC Bertels Commanding Officer")
+	commander_job_types = list(/datum/job/unsc/commanding_officer)
 	ship_types = list(\
 		/obj/effect/overmap/ship/npc_ship/combat/unsc,\
 		/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,\
@@ -68,14 +68,14 @@
 	. = ..()
 	leader_name = "[pick("Vice Admiral","Rear Admiral","Admiral","Fleet Admiral")] [leader_name]"
 	money_account = create_account("UNSC", 1000)
-
+/*
 /datum/faction/unsc/get_commander(var/datum/mind/check_mind)
 
 	if(!. && check_mind && check_mind.assigned_role == "UNSC Bertels Commanding Officer")
 		return check_mind
 
 	. = ..()
-
+*/
 /datum/faction/oni
 	name = "ONI"
 	contraband_gear = "UNSC"
@@ -100,7 +100,7 @@
 	name = "Insurrection"
 	contraband_gear = "Insurrection"
 	enemy_faction_names = list("UNSC","Covenant","Flood")
-	commander_titles = list("Insurrectionist Commander")
+	commander_job_types = list(/datum/job/geminus_innie/commander)
 	ship_types = list(\
 		/obj/effect/overmap/ship/npc_ship/combat/innie,\
 		/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,\

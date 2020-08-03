@@ -29,6 +29,7 @@
 	votable = 1
 
 /datum/game_mode/outer_colonies/reclamation/setup_objectives()
+	/*
 	. = ..()
 
 	//in rev and rec, UNSC keep some objectives but they aren't tracked as the faction doesnt exist
@@ -42,3 +43,25 @@
 	for(var/datum/objective/obj in GLOB.UNSC.all_objectives)
 		if(fake_objective_types.Find(obj.type))
 			obj.fake = 1
+	*/
+
+	//setup covenant objectives
+	var/list/objective_types = list(\
+		/datum/objective/protect/leader,\
+		/datum/objective/overmap/covenant_ship,\
+		/datum/objective/overmap/covenant_odp,\
+		/datum/objective/phase2_scan,\
+		/datum/objective/retrieve/artifact,\
+		/datum/objective/glass_colony)
+	GLOB.COVENANT.setup_faction_objectives(objective_types)
+	GLOB.COVENANT.has_flagship = TRUE
+
+	//setup unsc objectives
+	objective_types = list(\
+		/datum/objective/protect/leader,\
+		/datum/objective/overmap/unsc_cov_ship,\
+		/datum/objective/overmap/unsc_odp,\
+		/datum/objective/phase2_scan_unsc,\
+		/datum/objective/protect_colony)
+	GLOB.UNSC.setup_faction_objectives(objective_types)
+	GLOB.UNSC.has_base = TRUE

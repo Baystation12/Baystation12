@@ -11,7 +11,7 @@
 	var/spread_dir = EAST
 	opacity = 1
 
-/obj/structure/bumpstairs/road/New(var/loc, var/new_spread_dir = spread_dir, var/new_spread_max = spread_max, var/new_dir = dir, var/number = 1)
+/obj/structure/bumpstairs/road/New(var/loc, var/new_spread_dir = spread_dir, var/new_spread_max = spread_max, var/new_dir = dir, var/number = 1, var/list/new_blocked_types)
 	id_self = "[id_self][number]"
 	id_target = "[id_target][number]"
 
@@ -20,6 +20,9 @@
 
 	dir = new_dir
 
+	if(new_blocked_types && new_blocked_types.len)
+		blocked_types = new_blocked_types
+
 	//setup the bump tele linking
 	. = ..()
 
@@ -27,4 +30,4 @@
 		var/turf/cur_turf = get_turf(src)
 		var/turf/next_turf = get_step(cur_turf, spread_dir)
 		if(next_turf)
-			new src.type(next_turf, new_spread_dir, new_spread_max, dir, number + 1)
+			new src.type(next_turf, new_spread_dir, new_spread_max, dir, number + 1, blocked_types)
