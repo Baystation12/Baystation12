@@ -133,7 +133,7 @@
 				src.loc.visible_message("<span class='notice'>[icon2html(src, viewers(src.loc))] [src] chimes.</span>", "<span class='notice'>[icon2html(src, src.loc)] You hear something chime.</span>")
 				shutdown_emission()
 		else
-			src.visible_message("<span class='notice'>[icon2html(src, viewers(src))] [src] buzzes.</span>", "<span class='notice'>[icon2html(src, src)] You hear something buzz.</span>")
+			src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [src] buzzes.</span>", "<span class='notice'>[icon2html(src, src)] You hear something buzz.</span>")
 			shutdown_emission()
 		last_process = world.time
 
@@ -166,7 +166,7 @@
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			activated = 1
 			last_process = world.time
-			src.visible_message("<span class='notice'>[icon2html(src, viewers(src))] [src] whirrs.</span>", "<span class='notice'>[icon2html(src, src)] You hear something whirr.</span>")
+			src.visible_message("<span class='notice'>[icon2html(src, viewers(get_turf(src)))] [src] whirrs.</span>", "<span class='notice'>[icon2html(src, src)] You hear something whirr.</span>")
 			if(!inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate(1)
 			time_end = world.time + duration
