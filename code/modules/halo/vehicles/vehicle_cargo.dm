@@ -94,6 +94,10 @@
 	if(!istype(user) || user.incapacitated())
 		return
 
+	if(user.loc == src)
+		to_chat(user, "<span class='notice'>You cannot retrieve cargo while inside [src].</span>")
+		return
+
 	var/list/cargo_list_names = list("Cancel")
 	for(var/obj/item in cargo_contents)
 		cargo_list_names += item.name
