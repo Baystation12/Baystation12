@@ -1,0 +1,8 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - rscadd: "Adds a couple sounds to exosuits."
+  - rscadd: "Robot analyzers now work on exosuits."
+  - rscadd: "Clicking exosuit health icon will now give a reading of its status."
+  - tweak: "Exosuit hud buttons are no longer movable. It only seems to cause problems."
+  - bugfix: "Exosuits with opaque cockpits and destroyed cameras now allow vision if the cockpit is open."
