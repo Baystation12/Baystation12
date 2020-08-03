@@ -110,7 +110,7 @@
 	if(istype(folded) && my_tank)
 		my_tank.air_contents.merge(atmo)
 		folded.airtank = my_tank
-		airtank.forceMove(folded)
+		my_tank.forceMove(folded)
 
 /obj/structure/closet/body_bag/rescue/Process()
 	if(!airtank)

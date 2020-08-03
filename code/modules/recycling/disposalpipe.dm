@@ -96,6 +96,10 @@ obj/structure/disposalpipe/Destroy()
 	if(!istype(H))
 		return
 
+	if (!T) //panic!
+		qdel(H)
+		return
+
 	// Empty the holder if it is expelled into a dense turf.
 	// Leaving it intact and sitting in a wall is stupid.
 	if(T.density)

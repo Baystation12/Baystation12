@@ -190,7 +190,8 @@
 		return 0
 
 /obj/item/grab/proc/action_used()
-	assailant.remove_cloaking_source(assailant.species)
+	if (assailant)
+		assailant.remove_cloaking_source(assailant.species)
 	last_action = world.time
 	leave_forensic_traces()
 

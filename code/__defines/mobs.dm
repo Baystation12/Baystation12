@@ -241,13 +241,13 @@
 #define BP_BY_DEPTH list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_CHEST)
 
 // Prosthetic helpers.
-#define BP_IS_ROBOTIC(org)  (org.status & ORGAN_ROBOTIC)
-#define BP_IS_ASSISTED(org) (org.status & ORGAN_ASSISTED)
-#define BP_IS_BRITTLE(org)  (org.status & ORGAN_BRITTLE)
-#define BP_IS_CRYSTAL(org)  (org.status & ORGAN_CRYSTAL)
+#define BP_IS_ROBOTIC(org)  ((org) && ((org).status & ORGAN_ROBOTIC))
+#define BP_IS_ASSISTED(org) ((org) && ((org).status & ORGAN_ASSISTED))
+#define BP_IS_BRITTLE(org)  ((org) && ((org).status & ORGAN_BRITTLE))
+#define BP_IS_CRYSTAL(org)  ((org) && ((org).status & ORGAN_CRYSTAL))
 
 // Limb flag helpers
-#define BP_IS_DEFORMED(org) (org.limb_flags & ORGAN_FLAG_DEFORMED)
+#define BP_IS_DEFORMED(org) ((org) && ((org).limb_flags & ORGAN_FLAG_DEFORMED))
 
 #define SYNTH_BLOOD_COLOUR "#030303"
 #define SYNTH_FLESH_COLOUR "#575757"

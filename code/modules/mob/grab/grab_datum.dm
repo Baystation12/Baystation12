@@ -99,8 +99,9 @@
 		return
 
 /datum/grab/proc/let_go(var/obj/item/grab/G)
-	let_go_effect(G)
-	G.force_drop()
+	if (G)
+		let_go_effect(G)
+		G.force_drop()
 
 /datum/grab/proc/on_target_change(var/obj/item/grab/G, old_zone, new_zone)
 	G.special_target_functional = check_special_target(G)

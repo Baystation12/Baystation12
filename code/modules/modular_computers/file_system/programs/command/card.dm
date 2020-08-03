@@ -109,10 +109,13 @@
 		return 1
 
 	var/mob/user = usr
-	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
-	var/obj/item/weapon/card/id/id_card = computer.get_inserted_id()
-
+	var/obj/item/weapon/card/id/user_id_card = user?.GetIdCard()
+	var/obj/item/weapon/card/id/id_card = computer?.get_inserted_id()
 	var/datum/nano_module/program/card_mod/module = NM
+
+	if (!user_id_card || !id_card || !module)
+		return
+
 	switch(href_list["action"])
 		if("switchm")
 			if(href_list["target"] == "mod")

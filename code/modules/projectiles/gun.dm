@@ -288,43 +288,44 @@
 	if(fire_anim)
 		flick(fire_anim, src)
 
-	if(!silenced)
-		if(reflex)
-			user.visible_message(
-				"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
-				"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
-				"You hear a [fire_sound_text]!"
-			)
-		else
-			user.visible_message(
-				"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
-				"<span class='warning'>You fire \the [src]!</span>",
-				"You hear a [fire_sound_text]!"
+	if (user)
+		if(!silenced)
+			if(reflex)
+				user.visible_message(
+					"<span class='reflex_shoot'><b>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""] by reflex!</b></span>",
+					"<span class='reflex_shoot'>You fire \the [src] by reflex!</span>",
+					"You hear a [fire_sound_text]!"
 				)
+			else
+				user.visible_message(
+					"<span class='danger'>\The [user] fires \the [src][pointblank ? " point blank at \the [target]":""]!</span>",
+					"<span class='warning'>You fire \the [src]!</span>",
+					"You hear a [fire_sound_text]!"
+					)
 
-	if(one_hand_penalty)
-		if(!src.is_held_twohanded(user))
-			switch(one_hand_penalty)
-				if(4 to 6)
-					if(prob(50)) //don't need to tell them every single time
-						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
-				if(6 to 8)
-					to_chat(user, "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>")
-				if(8 to INFINITY)
-					to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
-		else if(!user.can_wield_item(src))
-			switch(one_hand_penalty)
-				if(4 to 6)
-					if(prob(50)) //don't need to tell them every single time
-						to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
-				if(6 to 8)
-					to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
-				if(8 to INFINITY)
-					to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
+		if(one_hand_penalty)
+			if(!src.is_held_twohanded(user))
+				switch(one_hand_penalty)
+					if(4 to 6)
+						if(prob(50)) //don't need to tell them every single time
+							to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
+					if(6 to 8)
+						to_chat(user, "<span class='warning'>You have trouble keeping \the [src] on target with just one hand.</span>")
+					if(8 to INFINITY)
+						to_chat(user, "<span class='warning'>You struggle to keep \the [src] on target with just one hand!</span>")
+			else if(!user.can_wield_item(src))
+				switch(one_hand_penalty)
+					if(4 to 6)
+						if(prob(50)) //don't need to tell them every single time
+							to_chat(user, "<span class='warning'>Your aim wavers slightly.</span>")
+					if(6 to 8)
+						to_chat(user, "<span class='warning'>You have trouble holding \the [src] steady.</span>")
+					if(8 to INFINITY)
+						to_chat(user, "<span class='warning'>You struggle to hold \the [src] steady!</span>")
 
-	if(screen_shake)
-		spawn()
-			shake_camera(user, screen_shake+1, screen_shake)
+		if(screen_shake)
+			spawn()
+				shake_camera(user, screen_shake+1, screen_shake)
 
 	if(combustion)
 		var/turf/curloc = get_turf(src)

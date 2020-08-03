@@ -283,7 +283,8 @@
 
 
 /obj/item/device/synthesized_instrument/ui_interact(mob/user, ui_key = "instrument", var/datum/nanoui/ui = null, var/force_open = 0)
-	real_instrument.ui_call(user,ui_key,ui,force_open)
+	if (real_instrument)
+		real_instrument.ui_call(user,ui_key,ui,force_open)
 
 
 /obj/item/device/synthesized_instrument/proc/shouldStopPlaying(mob/user)
