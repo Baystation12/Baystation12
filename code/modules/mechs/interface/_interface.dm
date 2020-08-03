@@ -14,28 +14,28 @@
 	if(!LAZYLEN(hud_elements))
 		var/i = 1
 		for(var/hardpoint in hardpoints)
-			var/obj/screen/movable/exosuit/hardpoint/H = new(src, hardpoint)
+			var/obj/screen/exosuit/hardpoint/H = new(src, hardpoint)
 			H.screen_loc = "1:6,[15-i]" //temp
 			hud_elements |= H
 			hardpoint_hud_elements[hardpoint] = H
 			i++
 
 		var/list/additional_hud_elements = list(
-			/obj/screen/movable/exosuit/toggle/maint,
-			/obj/screen/movable/exosuit/eject,
-			/obj/screen/movable/exosuit/toggle/hardpoint,
-			/obj/screen/movable/exosuit/toggle/hatch,
-			/obj/screen/movable/exosuit/toggle/hatch_open,
-			/obj/screen/movable/exosuit/radio,
-			/obj/screen/movable/exosuit/rename,
-			/obj/screen/movable/exosuit/toggle/camera
+			/obj/screen/exosuit/toggle/maint,
+			/obj/screen/exosuit/eject,
+			/obj/screen/exosuit/toggle/hardpoint,
+			/obj/screen/exosuit/toggle/hatch,
+			/obj/screen/exosuit/toggle/hatch_open,
+			/obj/screen/exosuit/radio,
+			/obj/screen/exosuit/rename,
+			/obj/screen/exosuit/toggle/camera
 			)
 		if(body && body.pilot_coverage >= 100)
-			additional_hud_elements += /obj/screen/movable/exosuit/toggle/air
+			additional_hud_elements += /obj/screen/exosuit/toggle/air
 		i = 0
 		var/pos = 7
 		for(var/additional_hud in additional_hud_elements)
-			var/obj/screen/movable/exosuit/M = new additional_hud(src)
+			var/obj/screen/exosuit/M = new additional_hud(src)
 			M.screen_loc = "1:6,[pos]:[i * -12]"
 			hud_elements |= M
 			i++
@@ -43,11 +43,11 @@
 				pos--
 				i = 0
 
-		hud_health = new /obj/screen/movable/exosuit/health(src)
+		hud_health = new /obj/screen/exosuit/health(src)
 		hud_health.screen_loc = "EAST-1:28,CENTER-3:11"
 		hud_elements |= hud_health
-		hud_open = locate(/obj/screen/movable/exosuit/toggle/hatch_open) in hud_elements
-		hud_power = new /obj/screen/movable/exosuit/power(src)
+		hud_open = locate(/obj/screen/exosuit/toggle/hatch_open) in hud_elements
+		hud_power = new /obj/screen/exosuit/power(src)
 		hud_power.screen_loc = "EAST-1:12,CENTER-4:25"
 		hud_elements |= hud_power
 
@@ -55,7 +55,7 @@
 
 /mob/living/exosuit/handle_hud_icons()
 	for(var/hardpoint in hardpoint_hud_elements)
-		var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
+		var/obj/screen/exosuit/hardpoint/H = hardpoint_hud_elements[hardpoint]
 		if(H) H.update_system_info()
 	handle_hud_icons_health()
 	var/obj/item/weapon/cell/C = get_cell()

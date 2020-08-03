@@ -52,7 +52,13 @@
 /obj/item/mech_component/proc/update_health()
 	total_damage = brute_damage + burn_damage
 	if(total_damage > max_damage) total_damage = max_damage
+	var/prev_state = damage_state
 	damage_state = Clamp(round((total_damage/max_damage) * 4), MECH_COMPONENT_DAMAGE_UNDAMAGED, MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
+	if(damage_state > prev_state)
+		if(damage_state == MECH_COMPONENT_DAMAGE_DAMAGED_BAD)
+			playsound(src.loc, 'sound/mecha/internaldmgalarm.ogg', 40, 1)
+		if(damage_state == MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
+			playsound(src.loc, 'sound/mecha/critdestr.ogg', 50)
 
 /obj/item/mech_component/proc/ready_to_install()
 	return 1
@@ -111,6 +117,10 @@
 	if(isCoil(thing))
 		repair_burn_generic(thing, user)
 		return
+	if(istype(thing, /obj/item/device/robotanalyzer))
+		to_chat(user, SPAN_NOTICE("Diagnostic Report for \the [src]:"))
+		return_diagnostics(user)
+		return
 
 	return ..()
 
@@ -167,3 +177,7 @@
 		if(MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
 			return FONT_COLORED(COLOR_RED, "almost destroyed")
 	return FONT_COLORED(COLOR_RED, "destroyed")
+
+/obj/item/mech_component/proc/return_diagnostics(var/mob/user)
+	to_chat(user, SPAN_NOTICE("[capitalize(src.name)]:"))
+	to_chat(user, SPAN_NOTICE(" - Integrity: <b>[round((((max_damage - total_damage) / max_damage)) * 100)]%</b>" ))

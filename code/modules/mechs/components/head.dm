@@ -74,6 +74,24 @@
 	else
 		return ..()
 
+/obj/item/mech_component/sensors/return_diagnostics(mob/user)
+	..()
+	if(software)
+		to_chat(user, SPAN_NOTICE(" Installed Software"))
+		for(var/exosystem_software in software.installed_software)
+			to_chat(user, SPAN_NOTICE(" - <b>[capitalize(exosystem_software)]</b>"))
+	else
+		to_chat(user, SPAN_WARNING(" Control Module Missing or Non-functional."))
+	if(radio)
+		to_chat(user, SPAN_NOTICE(" Radio Integrity: <b>[round((((radio.max_dam - radio.total_dam) / radio.max_dam)) * 100)]%</b>"))
+	else
+		to_chat(user, SPAN_WARNING(" Radio Missing or Non-functional."))
+	if(camera)
+		to_chat(user, SPAN_NOTICE(" Camera Integrity: <b>[round((((camera.max_dam - camera.total_dam) / camera.max_dam)) * 100)]%</b>"))
+	else
+		to_chat(user, SPAN_WARNING(" Camera Missing or Non-functional."))
+
+
 /obj/item/mech_component/control_module
 	name = "exosuit control module"
 	desc = "A clump of circuitry and software chip docks, used to program exosuits."

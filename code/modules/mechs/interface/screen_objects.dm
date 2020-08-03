@@ -1,32 +1,32 @@
 // Screen objects hereon out.
-/obj/screen/movable/exosuit
+/obj/screen/exosuit
 	name = "hardpoint"
 	icon = 'icons/mecha/mech_hud.dmi'
 	icon_state = "hardpoint"
 	var/mob/living/exosuit/owner
 
-/obj/screen/movable/exosuit/radio
+/obj/screen/exosuit/radio
 	name = "radio"
 	icon_state = "radio"
 
-/obj/screen/movable/exosuit/radio/Click()
+/obj/screen/exosuit/radio/Click()
 	if(..())
 		if(owner.radio)
 			owner.radio.attack_self(usr)
 		else
 			to_chat(usr, SPAN_WARNING("There is no radio installed."))
 
-/obj/screen/movable/exosuit/Initialize()
+/obj/screen/exosuit/Initialize()
 	. = ..()
 	var/mob/living/exosuit/newowner = loc
 	if(!istype(newowner))
 		return qdel(src)
 	owner = newowner
 
-/obj/screen/movable/exosuit/Click()
+/obj/screen/exosuit/Click()
 	return (!owner || !usr.incapacitated() && (usr == owner || usr.loc == owner))
 
-/obj/screen/movable/exosuit/hardpoint
+/obj/screen/exosuit/hardpoint
 	name = "hardpoint"
 	var/hardpoint_tag
 	var/obj/item/holding
@@ -35,11 +35,11 @@
 	maptext_y = 3
 	maptext_width = 72
 
-/obj/screen/movable/exosuit/hardpoint/MouseDrop()
+/obj/screen/exosuit/hardpoint/MouseDrop()
 	..()
 	if(holding) holding.screen_loc = screen_loc
 
-/obj/screen/movable/exosuit/hardpoint/proc/update_system_info()
+/obj/screen/exosuit/hardpoint/proc/update_system_info()
 
 	// No point drawing it if we have no item to use or nobody to see it.
 	if(!holding || !owner)
@@ -116,12 +116,12 @@
 			new_overlays += GLOB.hardpoint_bar_cache[i]
 	overlays = new_overlays
 
-/obj/screen/movable/exosuit/hardpoint/Initialize(mapload, var/newtag)
+/obj/screen/exosuit/hardpoint/Initialize(mapload, var/newtag)
 	. = ..()
 	hardpoint_tag = newtag
 	name = "hardpoint ([hardpoint_tag])"
 
-/obj/screen/movable/exosuit/hardpoint/Click(var/location, var/control, var/params)
+/obj/screen/exosuit/hardpoint/Click(var/location, var/control, var/params)
 
 	if(!(..()))
 		return
@@ -148,80 +148,80 @@
 		if(owner.set_hardpoint(hardpoint_tag))
 			icon_state = "hardpoint_selected"
 
-/obj/screen/movable/exosuit/eject
+/obj/screen/exosuit/eject
 	name = "eject"
 	icon_state = "eject"
 
-/obj/screen/movable/exosuit/eject/Click()
+/obj/screen/exosuit/eject/Click()
 	if(..())
 		owner.eject(usr)
 
-/obj/screen/movable/exosuit/rename
+/obj/screen/exosuit/rename
 	name = "rename"
 	icon_state = "rename"
 
-/obj/screen/movable/exosuit/power
+/obj/screen/exosuit/power
 	name = "power"
 	icon_state = null
 
 	maptext_width = 64
 
-/obj/screen/movable/exosuit/rename/Click()
+/obj/screen/exosuit/rename/Click()
 	if(..())
 		owner.rename(usr)
 
-/obj/screen/movable/exosuit/toggle
+/obj/screen/exosuit/toggle
 	name = "toggle"
 	var/toggled
 
-/obj/screen/movable/exosuit/toggle/Click()
+/obj/screen/exosuit/toggle/Click()
 	if(..()) toggled()
 
-/obj/screen/movable/exosuit/toggle/proc/toggled()
+/obj/screen/exosuit/toggle/proc/toggled()
 	toggled = !toggled
 	icon_state = "[initial(icon_state)][toggled ? "_enabled" : ""]"
 	return toggled
 
-/obj/screen/movable/exosuit/toggle/air
+/obj/screen/exosuit/toggle/air
 	name = "air"
 	icon_state = "air"
 
-/obj/screen/movable/exosuit/toggle/air/toggled()
+/obj/screen/exosuit/toggle/air/toggled()
 	owner.use_air = ..()
 	to_chat(usr, SPAN_NOTICE("Auxiliary atmospheric system [owner.use_air ? "enabled" : "disabled"]."))
 
-/obj/screen/movable/exosuit/toggle/maint
+/obj/screen/exosuit/toggle/maint
 	name = "toggle maintenance protocol"
 	icon_state = "maint"
 
-/obj/screen/movable/exosuit/toggle/maint/toggled()
+/obj/screen/exosuit/toggle/maint/toggled()
 	owner.maintenance_protocols = ..()
 	to_chat(usr, SPAN_NOTICE("Maintenance protocols [owner.maintenance_protocols ? "enabled" : "disabled"]."))
 
-/obj/screen/movable/exosuit/toggle/hardpoint
+/obj/screen/exosuit/toggle/hardpoint
 	name = "toggle hardpoint lock"
 	icon_state = "hardpoint_lock"
 
-/obj/screen/movable/exosuit/toggle/hardpoint/toggled()
+/obj/screen/exosuit/toggle/hardpoint/toggled()
 	owner.hardpoints_locked = ..()
 	to_chat(usr, SPAN_NOTICE("Hardpoint system access is now [owner.hardpoints_locked ? "disabled" : "enabled"]."))
 
-/obj/screen/movable/exosuit/toggle/hatch
+/obj/screen/exosuit/toggle/hatch
 	name = "toggle hatch lock"
 	icon_state = "hatch_lock"
 
-/obj/screen/movable/exosuit/toggle/hatch/toggled()
+/obj/screen/exosuit/toggle/hatch/toggled()
 	if(!owner.hatch_locked && !owner.hatch_closed)
 		to_chat(usr, SPAN_WARNING("You cannot lock the hatch while it is open."))
 		return
 	owner.hatch_locked = ..()
 	to_chat(usr, SPAN_NOTICE("The [owner.body.hatch_descriptor] is [owner.hatch_locked ? "now" : "no longer" ] locked."))
 
-/obj/screen/movable/exosuit/toggle/hatch_open
+/obj/screen/exosuit/toggle/hatch_open
 	name = "open or close hatch"
 	icon_state = "hatch_status"
 
-/obj/screen/movable/exosuit/toggle/hatch_open/toggled()
+/obj/screen/exosuit/toggle/hatch_open/toggled()
 	if (!owner)
 		return
 	if(owner.hatch_locked && owner.hatch_closed)
@@ -232,16 +232,24 @@
 	owner.update_icon()
 
 // This is basically just a holder for the updates the exosuit does.
-/obj/screen/movable/exosuit/health
+/obj/screen/exosuit/health
 	name = "exosuit integrity"
 	icon_state = "health"
 
+/obj/screen/exosuit/health/Click()
+	if(..())
+		if(owner && owner.body && owner.body.diagnostics?.is_functional())
+			to_chat(usr, SPAN_NOTICE("The diagnostics panel blinks several times as it updates:"))
+			for(var/obj/item/mech_component/MC in list(owner.arms, owner.legs, owner.body, owner.head))
+				if(MC)
+					MC.return_diagnostics(usr)	
+
 //Controls if cameras set the vision flags
-/obj/screen/movable/exosuit/toggle/camera
+/obj/screen/exosuit/toggle/camera
 	name = "toggle camera matrix"
 	icon_state = "camera"
 
-/obj/screen/movable/exosuit/toggle/camera/toggled()
+/obj/screen/exosuit/toggle/camera/toggled()
 	if(!owner.head)
 		to_chat(usr, SPAN_WARNING("I/O Error: Camera systems not found."))
 		return
