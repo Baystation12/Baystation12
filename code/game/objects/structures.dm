@@ -164,7 +164,7 @@
 					if(istype(O, b_type))
 						success = 1
 						for(var/obj/structure/S in T)
-							if(istype(S, src))
+							if(can_visually_connect_to(S))
 								success = 0
 						for(var/nb_type in noblend_objects)
 							if(istype(O, nb_type))
