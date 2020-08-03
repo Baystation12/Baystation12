@@ -21,28 +21,6 @@
 	else
 		icon_state = "implanter0"
 
-/obj/item/weapon/implanter/verb/remove_implant()
-	set category = "Object"
-	set name = "Remove implant"
-	set src in usr
-
-	if(issilicon(usr))
-		return
-
-	if(can_use(usr))
-		if(!imp)
-			to_chat(usr, "<span class='notice'>There is no implant to remove.</span>")
-			return
-		imp.forceMove(get_turf(src))
-		usr.put_in_hands(imp)
-		to_chat(usr, "<span class='notice'>You remove \the [imp] from \the [src].</span>")
-		name = "implanter"
-		imp = null
-		update_icon()
-		return
-	else
-		to_chat(usr, "<span class='notice'>You cannot do this in your current condition.</span>")
-
 /obj/item/weapon/implanter/proc/can_use()
 
 	if(!ismob(loc))
