@@ -1,0 +1,5 @@
+author: "CrimsonShrike"
+delete-after: True
+changes: 
+  - bugfix: "Mech extinguishers start with water."
+  - tweak: "Mini extinguishers are craftable."
