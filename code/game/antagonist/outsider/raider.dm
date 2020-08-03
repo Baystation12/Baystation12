@@ -197,16 +197,14 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 		if(!(primary.slot_flags & SLOT_HOLSTER))
 			holster = new new_holster(T)
 			var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
-			H.holstered = secondary
-			secondary.forceMove(holster)
+			H.holster(secondary, player)
 		else
 			player.equip_to_slot_or_del(secondary, slot_belt)
 
 	if(primary.slot_flags & SLOT_HOLSTER)
 		holster = new new_holster(T)
 		var/datum/extension/holster/H = get_extension(holster, /datum/extension/holster)
-		H.holstered = primary
-		primary.forceMove(holster)
+		H.holster(primary, player)
 	else if(!player.belt && (primary.slot_flags & SLOT_BELT))
 		player.equip_to_slot_or_del(primary, slot_belt)
 	else if(!player.back && (primary.slot_flags & SLOT_BACK))
@@ -251,7 +249,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 	player.equip_to_slot_or_del(new /obj/item/weapon/tank/nitrogen(player), slot_back)
 	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
 	player.equip_to_slot_or_del(new new_glasses(player),slot_glasses)
-	
+
 	var/obj/item/clothing/accessory/storage/holster/holster = new new_holster
 	if(holster)
 		var/obj/item/clothing/under/uniform = player.w_uniform
@@ -259,7 +257,7 @@ GLOBAL_DATUM_INIT(raiders, /datum/antagonist/raider, new)
 			uniform.attackby(holster, player)
 		else
 			player.put_in_any_hand_if_possible(holster)
-	
+
 	player.set_internals(locate(/obj/item/weapon/tank) in player.contents)
 	return 1
 
