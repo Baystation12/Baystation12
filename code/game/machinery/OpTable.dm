@@ -26,6 +26,13 @@
 			computer.table = src
 			break
 
+/obj/machinery/optable/Destroy()
+	victim = null
+	if(connected_monitor)
+		connected_monitor.update_victim()
+		connected_monitor.update_optable()
+	. = ..()
+	
 /obj/machinery/optable/examine(mob/user)
 	. = ..()
 	to_chat(user, "<span class='notice'>The neural suppressors are switched [suppressing ? "on" : "off"].</span>")
@@ -105,7 +112,7 @@
 		suppressing = FALSE
 		victim = null
 		if(connected_monitor)
-			connected_monitor.update_victim(null)
+			connected_monitor.update_victim()
 		if(locate(/mob/living/carbon/human) in loc)
 			for(var/mob/living/carbon/human/H in loc)
 				if(H.lying)
