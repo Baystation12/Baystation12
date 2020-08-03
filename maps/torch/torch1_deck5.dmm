@@ -3299,6 +3299,7 @@
 /area/quartermaster/expedition/storage)
 "hl" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/quartermaster/exploration)
 "hm" = (
@@ -3624,6 +3625,7 @@
 /area/quartermaster/expedition/storage)
 "iy" = (
 /obj/effect/wallframe_spawn/no_grille,
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/plating,
 /area/command/pilot)
 "iz" = (
@@ -4088,6 +4090,7 @@
 	id_tag = "mine_warehouse";
 	name = "Storage Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/steel_ridged,
 /area/quartermaster/expedition/storage)
 "jt" = (
@@ -5289,6 +5292,7 @@
 	id_tag = "hanger_atmos_storage";
 	name = "Storage Shutters"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "mc" = (
@@ -6805,6 +6809,10 @@
 	dir = 8;
 	icon_state = "Cola_Machine"
 	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/aft)
 "oS" = (
@@ -7658,6 +7666,10 @@
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/closet/firecloset,
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/fifthdeck/fore)
 "qK" = (
@@ -7749,6 +7761,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/dark,
 /area/quartermaster/expedition/atmos)
 "qR" = (
@@ -9124,6 +9137,11 @@
 /obj/machinery/camera/network/fifth_deck{
 	c_tag = "Fifth Deck Hallway - Aft";
 	dir = 1
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_x = 0;
+	pixel_y = -24
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fifthdeck/aft)
@@ -12700,6 +12718,10 @@
 /obj/machinery/atmospherics/binary/pump/high_power{
 	dir = 1;
 	name = "CO2 to Hangar"
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/quartermaster/shuttlefuel)
