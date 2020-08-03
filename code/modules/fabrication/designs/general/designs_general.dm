@@ -89,3 +89,6 @@
 
 /datum/fabricator_recipe/plunger
 	path = /obj/item/clothing/mask/plunger
+
+/datum/fabricator_recipe/toolbox
+	path = /obj/item/weapon/storage/toolbox
