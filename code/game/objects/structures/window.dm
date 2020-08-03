@@ -61,7 +61,10 @@
 
 	health = maxhealth
 
-	set_anchored(!constructed)
+	if (constructed)
+		set_anchored(FALSE)
+		construction_state = 0
+
 	update_connections(1)
 	update_icon()
 	update_nearby_tiles(need_rebuild=1)
