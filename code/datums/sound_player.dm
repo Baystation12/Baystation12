@@ -27,13 +27,13 @@ var/decl/sound_player/sound_player = new()
 	taken_channels = list()
 	source_id_uses = list()
 
-/decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff, var/prefer_mute)
+/decl/sound_player/proc/PlayLoopingSound(var/atom/source, var/sound_id, var/sound, var/volume, var/range, var/falloff, var/prefer_mute, var/respect_visibility = TRUE)
 	var/channel = PrivGetChannel(sound_id)
 	if(!channel)
 		log_warning("All available sound channels are in active use.")
 		return
 
-	return new/datum/sound_token(source, sound_id, sound, volume, channel, range, falloff, prefer_mute)
+	return new/datum/sound_token(source, sound_id, sound, volume, channel, range, falloff, prefer_mute, respect_visibility)
 
 /decl/sound_player/proc/PrivStopSound(var/datum/sound_token/sound_token)
 	var/channel = sound_token.channel
@@ -84,7 +84,7 @@ var/decl/sound_player/sound_player = new()
 	var/datum/proximity_trigger/square/proxy_listener
 	var/list/can_be_heard_from
 
-/datum/sound_token/New(var/atom/source, var/sound_id, var/sound, var/volume, var/channel, var/range = 4, var/falloff = 1, var/prefer_mute = FALSE)
+/datum/sound_token/New(var/atom/source, var/sound_id, var/sound, var/volume = 100, var/channel, var/range = 4, var/falloff = 1, var/prefer_mute = FALSE, var/respect_visibility = TRUE)
 	..()
 	listeners = list()
 	listener_status = list()
@@ -101,7 +101,7 @@ var/decl/sound_player/sound_player = new()
 	GLOB.destroyed_event.register(source, src, /datum/sound_token/proc/Stop)
 
 	if(ismovable(source))
-		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src)
+		proxy_listener = new(source, /datum/sound_token/proc/PrivAddListener, /datum/sound_token/proc/PrivLocateListeners, range, proc_owner = src, do_respect_visibility = respect_visibility)
 		proxy_listener.register_turfs()
 
 /datum/sound_token/Destroy()
@@ -188,7 +188,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	GLOB.moved_event.register(listener, src, /datum/sound_token/proc/PrivUpdateListenerLoc)
 	GLOB.destroyed_event.register(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 
-	PrivUpdateListenerLoc(listener)
+	PrivUpdateListenerLoc(listener, FALSE)
 
 /datum/sound_token/proc/PrivRemoveListener(var/atom/listener, var/sound/null_sound)
 	if(!null_sound)
@@ -198,7 +198,7 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	GLOB.destroyed_event.unregister(listener, src, /datum/sound_token/proc/PrivRemoveListener)
 	listeners -= listener
 
-/datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener)
+/datum/sound_token/proc/PrivUpdateListenerLoc(var/atom/listener, var/update_sound = TRUE)
 	var/sound/S = listeners[listener]
 
 	var/turf/source_turf = get_turf(source)
@@ -220,16 +220,18 @@ datum/sound_token/proc/PrivAddListener(var/atom/listener)
 	// Far as I can tell from testing, sound priority just doesn't work.
 	// Sounds happily steal channels from each other no matter what.
 	S.priority = Clamp(255 - distance, 0, 255)
-	PrivUpdateListener(listener)
+	PrivUpdateListener(listener, update_sound)
 
 /datum/sound_token/proc/PrivUpdateListeners()
 	for(var/listener in listeners)
 		PrivUpdateListener(listener)
 
-/datum/sound_token/proc/PrivUpdateListener(var/listener)
+/datum/sound_token/proc/PrivUpdateListener(var/atom/listener, var/update_sound = TRUE)
 	var/sound/S = listeners[listener]
 	S.volume = volume
-	S.status = status|listener_status[listener]|SOUND_UPDATE
+	S.status = status|listener_status[listener]
+	if(update_sound)
+		S.status |= SOUND_UPDATE
 	sound_to(listener, S)
 
 /obj/sound_test
