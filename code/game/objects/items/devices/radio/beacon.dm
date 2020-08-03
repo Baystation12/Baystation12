@@ -4,6 +4,8 @@
 	icon_state = "beacon"
 	item_state = "signaler"
 	origin_tech = list(TECH_BLUESPACE = 1)
+	cell = null
+	power_usage = 0
 
 	var/code = "electronic"
 	var/functioning = TRUE

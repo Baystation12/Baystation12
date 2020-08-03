@@ -27,6 +27,18 @@ Used In File(s): /code/game/objects/item/devices/radio/radio.dm
 	{{:helper.syndicateMode()}}
 {{/if}}
 
+{{if data.charge}}
+	<div class="item">
+		<div class="itemLabelWide">
+			Power
+		</div>
+		<div class="itemContentMedium">
+			{{:helper.link('On', null, {'power' : 0}, data.power ? 'selected' : null)}}
+			{{:helper.link('Off', null, {'power' : 1}, data.power ? null : 'selected')}}
+		</div>
+	</div>
+{{/if}}
+
 <div class="item">
 	<div class="itemLabelWide">
 		Microphone
