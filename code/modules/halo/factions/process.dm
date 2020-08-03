@@ -44,3 +44,8 @@
 	if(!keep_processing)
 		GLOB.factions_controller.processing_factions.Remove(src)
 		is_processing = 0
+
+	if(next_special_job)
+		if(world.time > next_special_job)
+			next_special_job = 0
+			unlock_special_job()

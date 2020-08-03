@@ -51,6 +51,8 @@
 	var/income = 0	//credits
 	var/income_delay = 15 MINUTES
 	var/next_income = 0
+	var/list/special_jobs = list()
+	var/next_special_job = 0
 
 	var/list/listening_programs = list()
 
@@ -209,3 +211,13 @@
 			found_areas.Add(A)
 
 	return found_areas
+
+/datum/faction/proc/unlock_special_job()
+	//override this in children for faction announcements
+	if(special_jobs.len)
+		var/datum/job/special_job = job_master.occupations_by_type[pick(special_jobs)]
+		if(special_job)
+			special_job.total_positions += 1
+			. = special_job
+	else
+		log_and_message_admins("Warning, attempted to unlock a special job slot for [src.name] but none were listed!")
