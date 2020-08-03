@@ -81,7 +81,7 @@
 
 		src.updateUsrDialog()
 		return 0
-	
+
 	if(O.w_class > item_size_limit)
 		to_chat(user, SPAN_NOTICE("\The [src] cannot fit \the [O]."))
 		return
@@ -113,9 +113,6 @@
 /obj/machinery/reagentgrinder/interface_interact(mob/user)
 	interact(user)
 	return TRUE
-
-/obj/machinery/reagentgrinder/DefaultTopicState()
-	return GLOB.physical_state
 
 /obj/machinery/reagentgrinder/interact(mob/user as mob) // The microwave Menu
 	if(inoperable())
@@ -172,21 +169,21 @@
 			if("eject")
 				eject()
 			if ("detach")
-				detach()
+				detach(user)
 		interact(user)
 		return TOPIC_REFRESH
 
-/obj/machinery/reagentgrinder/proc/detach()
-	if (!beaker)
+/obj/machinery/reagentgrinder/proc/detach(mob/user)
+	if(!beaker)
 		return
-	beaker.dropInto(loc)
+	var/obj/item/weapon/reagent_containers/B = beaker
+	user.put_in_hands(B)
 	beaker = null
 	update_icon()
 
 /obj/machinery/reagentgrinder/proc/eject()
 	if (!holdingitems || holdingitems.len == 0)
 		return
-
 	for(var/obj/item/O in holdingitems)
 		O.dropInto(loc)
 		holdingitems -= O
@@ -245,6 +242,24 @@
 				qdel(O)
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
+
+/obj/machinery/reagentgrinder/AltClick(mob/user)
+	if(CanDefaultInteract(user))
+		detach(user)
+	else
+		..()
+
+/obj/machinery/reagentgrinder/CtrlClick(mob/user)
+	if(CanDefaultInteract(user))
+		grind(user)
+	else
+		..()
+
+/obj/machinery/reagentgrinder/CtrlAltClick(mob/user)
+	if(CanDefaultInteract(user))
+		eject(user)
+	else
+		..()
 
 /obj/machinery/reagentgrinder/proc/reset_machine(mob/user)
 	inuse = 0
