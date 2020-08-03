@@ -120,7 +120,7 @@
 	if(!user_can_move_target_inside(target, user))
 		return
 	user.visible_message("<span class='notice'>\The [user] begins placing \the [target] into \the [src].</span>", "<span class='notice'>You start placing \the [target] into \the [src].</span>")
-	if(!do_after(user, 30, src) || !user_can_move_target_inside(target, user))
+	if(do_after(user, 30, src) || !user_can_move_target_inside(target, user))
 		return
 	move_target_inside(target,user)
 

@@ -19,7 +19,7 @@
 			var/obj/chosen_obj = input(user, "Choose an object to grab.", "Clamp Claw") as null|anything in carrying
 			if(!chosen_obj)
 				return
-			if(!do_after(user, 20, owner)) return
+			if(do_after(user, 20, owner)) return
 			if(owner.hatch_closed || !chosen_obj) return
 			if(user.put_in_active_hand(chosen_obj))
 				owner.visible_message(SPAN_NOTICE("\The [user] carefully grabs \the [chosen_obj] from \the [src]."))
@@ -47,7 +47,7 @@
 				return
 
 			owner.visible_message(SPAN_NOTICE("\The [owner] begins loading \the [O]."))
-			if(do_after(owner, 20, O, 0, 1))
+			if(!do_after(owner, 20, O, do_flags = DO_DEFAULT ^ DO_USER_SAME_HAND))
 				if(O in carrying || O.buckled_mob || O.anchored || (locate(/mob/living) in O)) //Repeat checks
 					return
 				if(length(carrying) >= carrying_capacity)
@@ -363,7 +363,7 @@
 		//Better materials = faster drill!
 		var/delay = max(5, 20 - drill_head.material.brute_armor)
 		owner.setClickCooldown(delay) //Don't spamclick!
-		if(do_after(owner, delay, target) && drill_head)
+		if(!do_after(owner, delay, target) && drill_head)
 			if(src == owner.selected_system)
 				if(drill_head.durability <= 0)
 					drill_head.shatter()

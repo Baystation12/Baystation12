@@ -39,7 +39,7 @@
 /obj/item/clothing/mask/gas/attack_self(var/mob/user)
 	if(clogged)
 		user.visible_message("<span class='notice'>\The [user] begins unclogging the intakes of \the [src].</span>")
-		if(do_after(user, 100, progress = 1) && clogged)
+		if(!do_after(user, 100) && clogged)
 			user.visible_message("<span class='notice'>\The [user] has unclogged \the [src].</span>")
 			clogged = FALSE
 		return

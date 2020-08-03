@@ -169,7 +169,7 @@
 		if(ishuman(user) && !user.incapacitated() && Adjacent(user))
 			spawn(0)
 				user.visible_message("<b>\The [user]</b> checks \the [src]'s pulse.", "You check \the [src]'s pulse.")
-				if(do_after(user, 15, src))
+				if(!do_after(user, 15, src))
 					if(pulse() == PULSE_NONE)
 						to_chat(user, "<span class='deadsay'>[T.He] [T.has] no pulse.</span>")
 					else

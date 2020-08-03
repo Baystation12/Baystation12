@@ -60,7 +60,7 @@
 
 	var/stages = 4
 	for(var/i = 1 to stages)
-		if(do_after(src, breakouttime*0.25, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+		if(!do_after(src, breakouttime*0.25, incapacitation_flags = INCAPACITATION_DEFAULT ^ INCAPACITATION_RESTRAINED))
 			if(!handcuffed || buckled)
 				return
 			visible_message(
@@ -108,7 +108,7 @@
 		"<span class='warning'>You attempt to break your [handcuffed.name]. (This will take around 5 seconds and you need to stand still)</span>"
 		)
 
-	if(do_after(src, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT & ~INCAPACITATION_RESTRAINED))
+	if(!do_after(src, 5 SECONDS, incapacitation_flags = INCAPACITATION_DEFAULT ^ INCAPACITATION_RESTRAINED))
 		if(!handcuffed || buckled)
 			return
 
@@ -153,7 +153,7 @@
 	if(unbuckle_time && buckled)
 		var/stages = 2
 		for(var/i = 1 to stages)
-			if(!unbuckle_time || do_after(usr, unbuckle_time*0.5, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
+			if(!unbuckle_time || !do_after(usr, unbuckle_time*0.5, incapacitation_flags = INCAPACITATION_DISABLED))
 				if(!buckled)
 					return
 				visible_message(

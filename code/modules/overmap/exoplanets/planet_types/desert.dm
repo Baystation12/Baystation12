@@ -97,7 +97,7 @@
 				"<span class='notice'>You hear water sloushing.</span>"
 				)
 		busy = 1
-		if(do_after(user, delay, src))
+		if(!do_after(user, delay, src))
 			busy = 0
 			if(user == buckled_mob)
 				if(prob(80))

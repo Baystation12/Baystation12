@@ -84,7 +84,7 @@
 		var/target_text = trans_dest? "\the [trans_dest]" : "\the [user.loc]"
 		user.visible_message("<span class='danger'>\The [user] begins to wring out [src] over [target_text].</span>", "<span class='notice'>You begin to wring out [src] over [target_text].</span>")
 
-		if(do_after(user, reagents.total_volume*5, progress = 0)) //50 for a fully soaked rag
+		if(do_after(user, reagents.total_volume*5, do_flags = DO_DEFAULT ^ DO_SHOW_PROGRESS)) //50 for a fully soaked rag
 			if(trans_dest)
 				reagents.trans_to(trans_dest, reagents.total_volume)
 			else
@@ -99,7 +99,7 @@
 		user.visible_message("\The [user] starts to wipe down [A] with [src]!")
 		reagents.splash(A, 1) //get a small amount of liquid on the thing we're wiping.
 		update_name()
-		if(do_after(user,30, progress = 1))
+		if(do_after(user,30))
 			user.visible_message("\The [user] finishes wiping off the [A]!")
 			if(isturf(A))
 				var/turf/T = A

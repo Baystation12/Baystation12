@@ -279,7 +279,7 @@
 /mob/living/simple_animal/hostile/proc/pry_door(var/mob/user, var/delay, var/obj/machinery/door/pesky_door)
 	visible_message("<span class='warning'>\The [user] begins [pry_desc] at \the [pesky_door]!</span>")
 	stop_automation = TRUE
-	if(do_after(user, delay, pesky_door))
+	if(!do_after(user, delay, pesky_door))
 		pesky_door.open(1)
 		stop_automation = FALSE
 	else

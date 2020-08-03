@@ -739,7 +739,7 @@
 			return
 		var/datum/gender/G = gender_datums[gender]
 		visible_message(SPAN_DANGER("\The [src] starts sticking a finger down [G.his] own throat. It looks like [G.he] [G.is] trying to throw up!"))
-		if(!do_after(src, 30))
+		if(do_after(src, 30))
 			return
 		timevomit = max(timevomit, 5)
 
@@ -1470,7 +1470,7 @@
 		to_chat(src, "<span class='warning'>You brace yourself to relocate your [current_limb.joint]...</span>")
 	else
 		to_chat(U, "<span class='warning'>You begin to relocate [S]'s [current_limb.joint]...</span>")
-	if(!do_after(U, 30, src))
+	if(do_after(U, 30, src))
 		return
 	if(!current_limb || !S || !U)
 		return

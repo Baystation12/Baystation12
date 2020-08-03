@@ -92,7 +92,7 @@ var/bomb_set
 
 					user.visible_message("[user] starts cutting loose the anchoring bolt covers on [src].", "You start cutting loose the anchoring bolt covers with [O]...")
 
-					if(do_after(user,40, src))
+					if(!do_after(user,40, src))
 						if(!src || !user || !WT.remove_fuel(5, user)) return
 						user.visible_message("\The [user] cuts through the bolt covers on \the [src].", "You cut through the bolt cover.")
 						removal_stage = 1
@@ -102,7 +102,7 @@ var/bomb_set
 				if(isCrowbar(O))
 					user.visible_message("[user] starts forcing open the bolt covers on [src].", "You start forcing open the anchoring bolt covers with [O]...")
 
-					if(do_after(user, 15, src))
+					if(!do_after(user, 15, src))
 						if(!src || !user) return
 						user.visible_message("\The [user] forces open the bolt covers on \the [src].", "You force open the bolt covers.")
 						removal_stage = 2
@@ -118,7 +118,7 @@ var/bomb_set
 
 					user.visible_message("[user] starts cutting apart the anchoring system sealant on [src].", "You start cutting apart the anchoring system's sealant with [O]...")
 
-					if(do_after(user, 40, src))
+					if(!do_after(user, 40, src))
 						if(!src || !user || !WT.remove_fuel(5, user)) return
 						user.visible_message("\The [user] cuts apart the anchoring system sealant on \the [src].", "You cut apart the anchoring system's sealant.")
 						removal_stage = 3
@@ -127,7 +127,7 @@ var/bomb_set
 			if(3)
 				if(isWrench(O))
 					user.visible_message("[user] begins unwrenching the anchoring bolts on [src].", "You begin unwrenching the anchoring bolts...")
-					if(do_after(user, 50, src))
+					if(!do_after(user, 50, src))
 						if(!src || !user) return
 						user.visible_message("[user] unwrenches the anchoring bolts on [src].", "You unwrench the anchoring bolts.")
 						removal_stage = 4
@@ -136,7 +136,7 @@ var/bomb_set
 			if(4)
 				if(isCrowbar(O))
 					user.visible_message("[user] begins lifting [src] off of the anchors.", "You begin lifting the device off the anchors...")
-					if(do_after(user, 80, src))
+					if(!do_after(user, 80, src))
 						if(!src || !user) return
 						user.visible_message("\The [user] crowbars \the [src] off of the anchors. It can now be moved.", "You jam the crowbar under the nuclear device and lift it off its anchors. You can now move it!")
 						anchored = 0

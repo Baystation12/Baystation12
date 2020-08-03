@@ -103,7 +103,7 @@
 
 /obj/machinery/suit_storage_unit/attackby(var/obj/item/I, var/mob/user)
 	if(isScrewdriver(I))
-		if(do_after(user, 50, src))
+		if(!do_after(user, 50, src))
 			panelopen = !panelopen
 			playsound(loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			to_chat(user, SPAN_NOTICE("You [panelopen ? "open" : "close"] the unit's maintenance panel."))
@@ -113,7 +113,7 @@
 	if(isCrowbar(I))
 		if(inoperable() && !islocked && !isopen)
 			to_chat(user, SPAN_NOTICE("You begin prying the unit open."))
-			if(do_after(user, 50, src))
+			if(!do_after(user, 50, src))
 				isopen = TRUE
 				to_chat(user, SPAN_NOTICE("You pry the unit open."))
 				SSnano.update_uis(src)
@@ -135,7 +135,7 @@
 			to_chat(user, SPAN_NOTICE("The unit's storage area is too cluttered."))
 			return
 		visible_message(SPAN_WARNING("[user] starts putting [G.affecting.name] into the Suit Storage Unit."))
-		if(do_after(user, 20, src) && G && G.affecting)
+		if(!do_after(user, 20, src) && G && G.affecting)
 			var/mob/M = G.affecting
 			if(M.client)
 				M.client.perspective = EYE_PERSPECTIVE
@@ -415,7 +415,7 @@
 		to_chat(usr, SPAN_WARNING("It's too cluttered inside for you to fit in!"))
 		return
 	visible_message(SPAN_NOTICE("\The [usr] starts squeezing into the suit storage unit!"))
-	if(do_after(usr, 10, src))
+	if(!do_after(usr, 10, src))
 		usr.reset_view(src)
 		usr.stop_pulling()
 		usr.forceMove(src)
