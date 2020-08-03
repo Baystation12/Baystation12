@@ -32,7 +32,7 @@
 /obj/machinery/atmospherics/unary/outlet_injector/Initialize()
 	. = ..()
 	//Give it a small reservoir for injecting. Also allows it to have a higher flow rate limit than vent pumps, to differentiate injectors a bit more.
-	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500	
+	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500
 
 /obj/machinery/atmospherics/unary/outlet_injector/Initialize()
 	. = ..()
@@ -43,7 +43,7 @@
 	unregister_radio(src, frequency)
 	. = ..()
 
-/obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()	
+/obj/machinery/atmospherics/unary/outlet_injector/on_update_icon()
 	if (!node)
 		update_use_power(POWER_USE_OFF)
 
@@ -83,7 +83,7 @@
 	if((. = ..()))
 		return
 	if(href_list["toggle_power"])
-		use_power = update_use_power(!use_power)
+		update_use_power(!use_power)
 		queue_icon_update()
 		to_chat(user, "<span class='notice'>The multitool emits a short beep confirming the change.</span>")
 		return TOPIC_REFRESH
@@ -180,9 +180,11 @@
 
 	if(signal.data["power"])
 		update_use_power(sanitize_integer(text2num(signal.data["power"]), POWER_USE_OFF, POWER_USE_ACTIVE, use_power))
+		queue_icon_update()
 
 	if(signal.data["power_toggle"] || signal.data["command"] == "valve_toggle") // some atmos buttons use "valve_toggle" as a command
 		update_use_power(!use_power)
+		queue_icon_update()
 
 	if(signal.data["inject"])
 		inject()
@@ -194,11 +196,9 @@
 
 	if(signal.data["status"])
 		addtimer(CALLBACK(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
-		return //do not update_icon
+		return
 
 	addtimer(CALLBACK(src, .proc/broadcast_status), 2, TIMER_UNIQUE)
-
-	queue_icon_update()
 
 /obj/machinery/atmospherics/unary/outlet_injector/hide(var/i)
 	update_underlays()
@@ -209,7 +209,7 @@
 		popup.set_content(jointext(get_console_data(),"<br>"))
 		popup.open()
 		return
-		
+
 	if(isWrench(O))
 		new /obj/item/pipe(loc, src)
 		qdel(src)
