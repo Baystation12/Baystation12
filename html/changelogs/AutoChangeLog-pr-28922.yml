@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - bugfix: "Certain telecomms setups that don't use hubs will now correctly be garbled."
