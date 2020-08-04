@@ -427,7 +427,7 @@
 				return
 	if(!user.incapacitated() && !user.anchored && user.Adjacent(src) && user.Adjacent(target))
 		visible_message("[user] starts putting [target] into \the [src].", range = 3)
-		if(do_after(user, 20, src)|| QDELETED(target))
+		if(!do_after(user, 20, src)|| QDELETED(target))
 			return
 		set_occupant(target)
 
@@ -506,7 +506,7 @@
 
 	visible_message("\The [usr] starts climbing into \the [src].", range = 3)
 
-	if(!do_after(usr, 20, src))
+	if(do_after(usr, 20, src))
 
 		if(!usr || !usr.client)
 			return
@@ -587,7 +587,7 @@
 		if (isCrowbar(W))
 			busy = 1
 			visible_message("[user] starts to pry the glass cover off of \the [src].")
-			if (do_after(user, 50, src))
+			if (!do_after(user, 50, src))
 				visible_message("[user] stops trying to pry the glass off of \the [src].")
 				busy = 0
 				return

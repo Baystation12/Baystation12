@@ -13,7 +13,7 @@
 
 /obj/item/supply_beacon/attack_self(var/mob/user)
 	user.visible_message("<span class='notice'>\The [user] begins setting up \the [src].</span>")
-	if(do_after(user, deploy_time, src))
+	if(!do_after(user, deploy_time, src))
 		return
 	if(!user.unEquip(src))
 		return

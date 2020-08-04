@@ -218,7 +218,7 @@ obj/effect/energy_net/user_unbuckle_mob(mob/user)
 		"<span class='warning'>\The [user] attempts to free themselves from \the [src]!</span>",
 		"<span class='warning'>You attempt to free yourself from \the [src]!</span>"
 		)
-	if(!do_after(user, rand(min_free_time, max_free_time), src, incapacitation_flags = INCAPACITATION_DISABLED))
+	if(do_after(user, rand(min_free_time, max_free_time), src, incapacitation_flags = INCAPACITATION_DISABLED))
 		health = 0
 		healthcheck()
 		return 1

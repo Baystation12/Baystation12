@@ -81,7 +81,7 @@
 	// Removing components.
 	if(isCrowbar(thing))
 		if(is_reinforced == FRAME_REINFORCED)
-			if(do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
+			if(!do_after(user, 5 * user.skill_delay_mult(SKILL_DEVICES)) || !material)
 				return
 			user.visible_message(SPAN_NOTICE("\The [user] crowbars the reinforcement off \the [src]."))
 			material.place_sheet(src.loc, 10)
@@ -168,7 +168,7 @@
 
 		user.visible_message("\The [user] begins wiring \the [src]...")
 
-		if(do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)))
+		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)))
 			return
 
 		if(!CC || !user || !src || CC.get_amount() < 10 || is_wired)
@@ -186,7 +186,7 @@
 
 		user.visible_message("\The [user] begins adjusting the wiring inside \the [src]...")
 		var/last_wiring_state = is_wired
-		if(do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)) || last_wiring_state != is_wired)
+		if(!do_after(user, 30 * user.skill_delay_mult(SKILL_ELECTRICAL)) || last_wiring_state != is_wired)
 			return
 
 		visible_message("\The [user] [(is_wired == FRAME_WIRED_ADJUSTED) ? "snips some of" : "neatens"] the wiring in \the [src].")
@@ -205,7 +205,7 @@
 
 			visible_message("\The [user] begins layering the interior of the \the [src] with \the [M].")
 
-			if(do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || is_reinforced)
+			if(!do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || is_reinforced)
 				return
 
 			visible_message("\The [user] reinforces \the [src] with \the [M].")
@@ -249,7 +249,7 @@
 
 			var/last_reinforced_state = is_reinforced
 			visible_message("\The [user] begins welding the metal reinforcement inside \the [src].")
-			if(do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
+			if(!do_after(user, 20 * user.skill_delay_mult(SKILL_DEVICES)) || last_reinforced_state != is_reinforced)
 				return
 
 			visible_message("\The [user] [(is_reinforced == FRAME_REINFORCED_WELDED) ? "unwelds the reinforcement from" : "welds the reinforcement into"] \the [src].")
@@ -306,7 +306,7 @@
 		return 0
 	if(user)
 		visible_message(SPAN_NOTICE("\The [user] begins installing \the [thing] into \the [src]."))
-		if(!user.canUnEquip(thing) || do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_hand() != thing)
+		if(!user.canUnEquip(thing) || !do_after(user, 30 * user.skill_delay_mult(SKILL_DEVICES)) || user.get_active_hand() != thing)
 			return
 		if(!user.unEquip(thing))
 			return
@@ -318,7 +318,7 @@
 /obj/structure/heavy_vehicle_frame/proc/uninstall_component(var/obj/item/component, var/mob/user)
 	if(!istype(component) || (component.loc != src) || !istype(user))
 		return FALSE
-	if(do_after(user, 40 * user.skill_delay_mult(SKILL_DEVICES)) || component.loc != src)
+	if(!do_after(user, 40 * user.skill_delay_mult(SKILL_DEVICES)) || component.loc != src)
 		return FALSE
 	user.visible_message(SPAN_NOTICE("\The [user] crowbars \the [component] off \the [src]."))
 	component.forceMove(get_turf(src))

@@ -62,7 +62,7 @@
 		break
 	converting = TRUE
 	update_icon()
-	if(target && !do_after(target, 50, incapacitation_flags = INCAPACITATION_NONE))
+	if(target && do_after(target, 50, incapacitation_flags = INCAPACITATION_NONE))
 		GLOB.godcult.add_antagonist_mind(target.mind)
 		owner.add_follower(target)
 	converting = FALSE

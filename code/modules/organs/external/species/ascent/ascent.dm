@@ -43,7 +43,7 @@
 		cooldown = TRUE
 		refresh_action_button()
 		addtimer(CALLBACK(src, .proc/reset_cooldown), web_weave_time)
-		if(!do_after(owner, web_weave_time) && length(existing_webs) < max_webs)
+		if(do_after(owner, web_weave_time) && length(existing_webs) < max_webs)
 			playsound(user, 'sound/effects/razorweb.ogg', 70, 0)
 			owner.visible_message(SPAN_DANGER("\The [owner] completes a razorweb!"))
 			var/obj/effect/razorweb/web = new(owner.loc)
