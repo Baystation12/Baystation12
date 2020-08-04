@@ -33,7 +33,7 @@
 	proc/fireEvent()
 //		log_debug("Events in [args[1]] called")
 
-		var/list/event = listgetindex(events,args[1])
+		var/list/event = LAZYACCESS(events, args[1])
 		if(istype(event))
 			spawn(-1)
 				for(var/datum/event/E in event)
@@ -43,12 +43,12 @@
 
 	// Arguments: event_type as text, E as /datum/event
 	// Returns: 1 if event cleared, null on error
-	proc/clearEvent(event_type as text, datum/event/E)
-		if(!event_type || !E)
-			return
-		var/list/event = listgetindex(events,event_type)
-		event -= E
-		return 1
+	proc/clearEvent(event_type, datum/event/E)
+		if (E && event_type)
+			var/list/event = LAZYACCESS(events, event_type)
+			if (event)
+				event -= E
+				return TRUE
 
 
 /datum/event

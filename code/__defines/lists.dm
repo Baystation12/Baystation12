@@ -4,7 +4,7 @@
 // All of these are null-safe, you can use them without knowing if the list var is initialized yet
 
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
+#define LAZYPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
 // Ensures L is initailized after this point
 #define LAZYINITLIST(L) if (!L) L = list()
 // Sets a L back to null iff it is empty
@@ -25,7 +25,7 @@
 #define LAZYLEN(L) length(L)
 // Safely checks if I is in L
 #define LAZYISIN(L, I) (L ? (I in L) : FALSE)
-// Null-safe L.Cut()
+// Null-safe List.Cut() and discard.
 #define LAZYCLEARLIST(L) if(L) { L.Cut(); L = null; }
 // Reads L or an empty list if L is not a list.  Note: Does NOT assign, L may be an expression.
 #define SANITIZE_LIST(L) ( islist(L) ? L : list() )
