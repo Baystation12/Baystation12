@@ -1026,6 +1026,16 @@
 	glass_desc = "Long live the guy who everyone had mistaken for a girl. Baka!"
 	glass_special = list(DRINK_FIZZ)
 
+/datum/reagent/drink/triplecitrus
+	name = "Triple Citrus"
+	description = "Triple the citrus, triple the fun."
+	taste_description = "unbearable sweetness"
+	color = "#ff7f07"
+	adj_temp = -5
+
+	glass_name = "Triple Citrus"
+	glass_desc = "Triple the citrus, triple the fun."
+
 /datum/reagent/drink/orange_soda
 	name = "Fizzy Orange"
 	description = "Artificial sugars and orange essence with fizz."

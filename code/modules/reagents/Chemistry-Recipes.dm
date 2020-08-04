@@ -2196,6 +2196,12 @@
 	required_reagents = list(/datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/sodawater = 1)
 	result_amount = 3
 
+/datum/chemical_reaction/triplecitrus
+	name = "Triple Citrus"
+	result = /datum/reagent/drink/triplecitrus
+	required_reagents = list(/datum/reagent/drink/juice/orange = 1, /datum/reagent/drink/juice/lime = 1, /datum/reagent/drink/juice/lemon = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/milkshake
 	name = "Milkshake"
 	result = /datum/reagent/drink/milkshake
