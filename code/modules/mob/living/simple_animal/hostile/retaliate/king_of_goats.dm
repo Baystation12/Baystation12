@@ -130,7 +130,7 @@
 		else if(prob(5)) //earthquake spell
 			visible_message("<span class='cultannounce'>\The [src]' eyes begin to glow ominously as dust and debris in the area is kicked up in a light breeze.</span>")
 			stop_automation = TRUE
-			if(!do_after(src, 6 SECONDS, src))
+			if(do_after(src, 6 SECONDS, src))
 				var/health_holder = health
 				visible_message(SPAN_MFAUNA("\The [src] raises its fore-hooves and stomps them into the ground with incredible force!"))
 				explosion(get_step(src,pick(GLOB.cardinal)), -1, 2, 2, 3, 6)

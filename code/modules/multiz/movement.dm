@@ -268,7 +268,7 @@
 			return FALSE
 
 		visible_message("<span class='notice'>[src] starts climbing onto \the [A]!</span>", "<span class='notice'>You start climbing onto \the [A]!</span>")
-		if(!do_after(src, 50, A))
+		if(do_after(src, 50, A))
 			visible_message("<span class='notice'>[src] climbs onto \the [A]!</span>", "<span class='notice'>You climb onto \the [A]!</span>")
 			src.Move(T)
 		else

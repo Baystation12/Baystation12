@@ -142,7 +142,7 @@ var/list/ventcrawl_machinery = list(
 						to_chat(src, "<span class='warning'>You feel a strong current pushing you away from the vent.</span>")
 					if(HAZARD_HIGH_PRESSURE to INFINITY)
 						to_chat(src, "<span class='danger'>You feel a roaring wind pushing you away from the vent!</span>")
-			if(do_after(src, 45, vent_found))
+			if(!do_after(src, 45, vent_found, 1, 1))
 				return
 			if(!can_ventcrawl())
 				return

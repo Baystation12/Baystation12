@@ -383,8 +383,6 @@
 			return global.dna_activity_bounds;
 		if("dna_genes")
 			return global.dna_genes;
-		if("do_unique_user_inc")
-			return global.do_unique_user_inc;
 		if("doppler_arrays")
 			return global.doppler_arrays;
 		if("dreams")
@@ -1296,8 +1294,6 @@
 			global.dna_activity_bounds=newval;
 		if("dna_genes")
 			global.dna_genes=newval;
-		if("do_unique_user_inc")
-			global.do_unique_user_inc=newval;
 		if("doppler_arrays")
 			global.doppler_arrays=newval;
 		if("dreams")
@@ -2017,7 +2013,6 @@
 	"diary",
 	"dna_activity_bounds",
 	"dna_genes",
-	"do_unique_user_inc",
 	"doppler_arrays",
 	"dreams",
 	"dummy_lighting_corner",

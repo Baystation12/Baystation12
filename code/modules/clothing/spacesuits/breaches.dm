@@ -238,7 +238,7 @@
 			playsound(src, 'sound/effects/tape.ogg',25)
 			var/mob/living/carbon/human/H = user
 			if(!istype(H)) return
-			if(!do_after(user, H.wear_suit == src? 60 : 30, istype(src.loc,/mob/living)? src.loc : null)) //Sealing a breach on your own suit is awkward and time consuming
+			if(do_after(user, H.wear_suit == src? 60 : 30, istype(src.loc,/mob/living)? src.loc : null)) //Sealing a breach on your own suit is awkward and time consuming
 				user.visible_message("<b>[user]</b> uses \the [W] to seal \the [target_breach.descriptor] on \the [src].")
 				target_breach.patched = TRUE
 				target_breach.update_descriptor()
