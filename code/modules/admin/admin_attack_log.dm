@@ -4,7 +4,7 @@
 	var/mob/attack_logs_ = list()
 
 /proc/log_and_message_admins(var/message as text, var/mob/user = usr, var/turf/location)
-	var/turf/T = location ? location : (user ? get_turf(user) : null)
+	var/turf/T = location ? get_turf(location) : (user ? get_turf(user) : null)
 	message = append_admin_tools(message, user, T)
 
 	log_admin(user ? "[key_name(user)] [message]" : "EVENT [message]")

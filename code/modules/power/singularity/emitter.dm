@@ -71,11 +71,12 @@
 			to_chat(user, "\The [src] isn't connected to a wire.")
 			return 1
 		if(!src.locked)
+			var/area/A = get_area(src)
 			if(src.active==1)
 				src.active = 0
 				to_chat(user, "You turn off \the [src].")
-				log_and_message_admins("turned off \the [src]")
-				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)]","singulo")
+				log_and_message_admins("turned off \the [src] in [A.name]", user, src)
+				investigate_log("turned <font color='red'>off</font> by [key_name_admin(user || usr)] in [A.name]","singulo")
 			else
 				src.active = 1
 				if(user)
@@ -84,8 +85,8 @@
 				to_chat(user, "You turn on \the [src].")
 				src.shot_number = 0
 				src.fire_delay = get_initial_fire_delay()
-				log_and_message_admins("turned on \the [src]")
-				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user || usr)]","singulo")
+				log_and_message_admins("turned on \the [src] in [A.name]", user, src)
+				investigate_log("turned <font color='green'>on</font> by [key_name_admin(user || usr)] in [A.name]","singulo")
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>The controls are locked!</span>")
