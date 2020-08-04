@@ -114,7 +114,7 @@
 	var/turf/starting
 	var/obj/item/projectile/P = damage_source
 	if(istype(P))
-		starting = P.starting
+		starting = get_turf(P)
 	else
 		starting = get_turf(damage_source)
 
