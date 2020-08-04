@@ -115,7 +115,7 @@
 /obj/item/weapon/reagent_containers/hypospray/vial/attackby(obj/item/weapon/W, mob/user)
 	var/usermessage = ""
 	if(istype(W, /obj/item/weapon/reagent_containers/glass/beaker/vial))
-		if(do_after(user,10) || !(W in user))
+		if(!do_after(user,10) || !(W in user))
 			return 0
 		if(!user.unEquip(W, src))
 			return

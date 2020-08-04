@@ -361,7 +361,7 @@
 /mob/living/silicon/robot/verb/toggle_panel_lock()
 	set name = "Toggle Panel Lock"
 	set category = "Silicon Commands"
-	if(!opened && has_power && !do_after(usr, 60) && !opened && has_power)
+	if(!opened && has_power && do_after(usr, 60) && !opened && has_power)
 		to_chat(src, "You [locked ? "un" : ""]lock your panel.")
 		locked = !locked
 
@@ -541,7 +541,7 @@
 		if(opened)
 			if(cell)
 				user.visible_message("<span class='notice'>\The [user] begins clasping shut \the [src]'s maintenance hatch.</span>", "<span class='notice'>You begin closing up \the [src].</span>")
-				if(!do_after(user, 50, src))
+				if(do_after(user, 50, src))
 					to_chat(user, "<span class='notice'>You close \the [src]'s maintenance hatch.</span>")
 					opened = 0
 					update_icon()
@@ -553,7 +553,7 @@
 					return
 
 				user.visible_message("<span class='notice'>\The [user] begins ripping [mmi] from [src].</span>", "<span class='notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
-				if(!do_after(user, 50, src))
+				if(do_after(user, 50, src))
 					dismantle(user)
 
 			else
@@ -586,7 +586,7 @@
 				to_chat(user, "The cover is locked and cannot be opened.")
 			else
 				user.visible_message("<span class='notice'>\The [user] begins prying open \the [src]'s maintenance hatch.</span>", "<span class='notice'>You start opening \the [src]'s maintenance hatch.</span>")
-				if(!do_after(user, 50, src))
+				if(do_after(user, 50, src))
 					to_chat(user, "<span class='notice'>You open \the [src]'s maintenance hatch.</span>")
 					opened = 1
 					update_icon()

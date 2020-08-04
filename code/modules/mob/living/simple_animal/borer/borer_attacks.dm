@@ -33,7 +33,7 @@
 	to_chat(src, SPAN_NOTICE("You slither up [M] and begin probing at their ear canal..."))
 	set_ability_cooldown(5 SECONDS)
 
-	if(do_after(src, 3 SECONDS, M))
+	if(!do_after(src, 3 SECONDS, M))
 		return
 
 	to_chat(src, SPAN_NOTICE("You wiggle into \the [M]'s ear."))

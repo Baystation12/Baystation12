@@ -348,7 +348,7 @@
 		make_announcement("buzzes, \"Warning - Patient is in hypovolemic shock and may require a blood transfusion.\"", "warning") //also includes heart damage
 
 	//placed on chest and short delay to shock for dramatic effect, revive time is 5sec total
-	if(do_after(user, chargetime, H))
+	if(!do_after(user, chargetime, H))
 		return
 
 	//deduct charge here, in case the base unit was EMPed or something during the delay time
@@ -413,7 +413,7 @@
 	playsound(get_turf(src), 'sound/machines/defib_charge.ogg', 50, 0)
 	audible_message("<span class='warning'>\The [src] lets out a steadily rising hum...</span>")
 
-	if(do_after(user, chargetime, H))
+	if(!do_after(user, chargetime, H))
 		return
 
 	//deduct charge here, in case the base unit was EMPed or something during the delay time

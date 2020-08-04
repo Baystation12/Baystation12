@@ -284,7 +284,7 @@
 			return
 		playsound(src, 'sound/items/Welder.ogg', 80, 1)
 		visible_message("<span class='notice'>[user] has started slicing through the window's frame!</span>")
-		if(!do_after(user,20,src))
+		if(do_after(user,20,src))
 			visible_message("<span class='warning'>[user] has sliced through the window's frame!</span>")
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0
@@ -572,7 +572,7 @@
 			to_chat(user, "<span class='notice'>There is already a window there.</span>")
 			return
 	to_chat(user, "<span class='notice'>You start placing the window.</span>")
-	if(!do_after(user,20))
+	if(do_after(user,20))
 		for(var/obj/structure/window/WINDOW in loc)
 			if(WINDOW.dir == dir_to_set)//checking this for a 2nd time to check if a window was made while we were waiting.
 				to_chat(user, "<span class='notice'>There is already a window facing this way there.</span>")

@@ -119,7 +119,7 @@
 
 	user.visible_message("<span class='danger'>\The [user] starts to put \the [victim] into \the [src]!</span>")
 	src.add_fingerprint(user)
-	if(!do_after(user, 30, src) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
+	if(do_after(user, 30, src) && victim.Adjacent(src) && user.Adjacent(src) && victim.Adjacent(user) && !occupant)
 		user.visible_message("<span class='danger'>\The [user] stuffs \the [victim] into \the [src]!</span>")
 		if(victim.client)
 			victim.client.perspective = EYE_PERSPECTIVE

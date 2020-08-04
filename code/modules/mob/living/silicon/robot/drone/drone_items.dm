@@ -335,7 +335,7 @@
 
 			to_chat(D, "<span class='danger'>You begin decompiling [M].</span>")
 
-			if(do_after(D,50,M))
+			if(!do_after(D,50,M))
 				to_chat(D, "<span class='danger'>You need to remain still while decompiling such a large object.</span>")
 				return
 

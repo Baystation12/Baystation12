@@ -162,7 +162,7 @@
 
 /obj/item/mech_component/chassis/MouseDrop_T(atom/dropping, mob/user)
 	var/obj/machinery/portable_atmospherics/canister/C = dropping
-	if(istype(C) && !C.anchored && !do_after(user, 5, src))
+	if(istype(C) && !C.anchored && do_after(user, 5, src))
 		if(C.anchored)
 			return
 		to_chat(user, SPAN_NOTICE("You install the canister in the [src]."))

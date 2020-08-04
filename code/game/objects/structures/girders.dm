@@ -67,13 +67,13 @@
 		if(anchored && !reinf_material)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-			if(!do_after(user, 40,src))
+			if(do_after(user, 40,src))
 				to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 				dismantle()
 		else if(!anchored)
 			playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now securing the girder...</span>")
-			if(!do_after(user, 40,src))
+			if(do_after(user, 40,src))
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
 
@@ -84,7 +84,7 @@
 				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
-		if(!do_after(user,reinf_material ? 40: 20,src))
+		if(do_after(user,reinf_material ? 40: 20,src))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
 			if(reinf_material)
 				reinf_material.place_dismantled_product(get_turf(src))
@@ -92,7 +92,7 @@
 
 	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		if(!do_after(user,reinf_material ? 60 : 40,src))
+		if(do_after(user,reinf_material ? 60 : 40,src))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 			if(reinf_material)
 				reinf_material.place_dismantled_product(get_turf(src))
@@ -102,7 +102,7 @@
 		if(state == 2)
 			playsound(src.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 			to_chat(user, "<span class='notice'>Now unsecuring support struts...</span>")
-			if(!do_after(user, 40,src))
+			if(do_after(user, 40,src))
 				to_chat(user, "<span class='notice'>You unsecured the support struts!</span>")
 				state = 1
 		else if(anchored && !reinf_material)
@@ -113,7 +113,7 @@
 	else if(isWirecutter(W) && state == 1)
 		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now removing support struts...</span>")
-		if(!do_after(user, 40,src))
+		if(do_after(user, 40,src))
 			to_chat(user, "<span class='notice'>You removed the support struts!</span>")
 
 			if(reinf_material)
@@ -125,7 +125,7 @@
 	else if(isCrowbar(W) && state == 0 && anchored)
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now dislodging the girder...</span>")
-		if(!do_after(user, 40,src))
+		if(do_after(user, 40,src))
 			to_chat(user, "<span class='notice'>You dislodged the girder!</span>")
 			icon_state = "displaced"
 			anchored = 0
@@ -162,7 +162,7 @@
 
 	to_chat(user, "<span class='notice'>You begin adding the plating...</span>")
 
-	if(do_after(user,40,src) || !S.use(2))
+	if(!do_after(user,40,src) || !S.use(2))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(anchored)
@@ -196,7 +196,7 @@
 		return 0
 
 	to_chat(user, "<span class='notice'>Now reinforcing...</span>")
-	if (do_after(user, 40,src) || !S.use(2))
+	if (!do_after(user, 40,src) || !S.use(2))
 		return 1 //don't call parent attackby() past this point
 	to_chat(user, "<span class='notice'>You added reinforcement!</span>")
 
@@ -252,7 +252,7 @@
 	if(isWrench(W))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-		if(!do_after(user,40,src))
+		if(do_after(user,40,src))
 			to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 			dismantle()
 
@@ -263,12 +263,12 @@
 				return
 		playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
-		if(!do_after(user,30,src))
+		if(do_after(user,30,src))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
 		playsound(src.loc, 'sound/weapons/Genhit.ogg', 100, 1)
-		if(!do_after(user,40,src))
+		if(do_after(user,40,src))
 			to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 			dismantle()

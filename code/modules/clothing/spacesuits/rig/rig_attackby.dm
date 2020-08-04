@@ -101,7 +101,7 @@
 						return 1
 
 			to_chat(user, "You begin installing \the [mod] into \the [src].")
-			if(do_after(user,40,src))
+			if(!do_after(user,40,src))
 				return
 			if(!user || !W)
 				return
