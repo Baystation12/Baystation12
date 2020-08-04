@@ -440,7 +440,7 @@
 			to_chat(user, "<span class='notice'>There is no tape left inside.</span>")
 			return
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
-		if(do_after(user, 120, target = src))
+		if(do_after(user, 120, src))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return

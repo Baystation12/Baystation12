@@ -153,7 +153,7 @@
 	if(unbuckle_time && buckled)
 		var/stages = 2
 		for(var/i = 1 to stages)
-			if(!unbuckle_time || do_after(usr, unbuckle_time*0.5, incapacitation_flags = INCAPACITATION_DEFAULT & ~(INCAPACITATION_RESTRAINED | INCAPACITATION_BUCKLED_FULLY)))
+			if(!unbuckle_time || do_after(usr, unbuckle_time*0.5, incapacitation_flags = INCAPACITATION_DISABLED))
 				if(!buckled)
 					return
 				visible_message(
