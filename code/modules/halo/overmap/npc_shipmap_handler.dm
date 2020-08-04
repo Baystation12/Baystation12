@@ -25,8 +25,14 @@ var/global/datum/npc_ship_map_handler/shipmap_handler = new
 	if(isnull(z_level))
 		return
 	message_admins("Clearing unused ship-z level:[z_level]. This may lag.")
+	var/obj/effect/overmap/our_om = map_sectors["[z_level]"]
+	var/list/coords_start = list(1,1)
+	var/list/coords_end = list(255,255)
+	if(our_om)
+		coords_start = list(our_om.map_bounds[1],our_om.map_bounds[4])
+		coords_end = list(our_om.map_bounds[2],our_om.map_bounds[3])
 	sleep(10)//Ensure above message is shown.
-	var/list/z_level_toclear = block(locate(1,1,z_level),locate(255,255,z_level))
+	var/list/z_level_toclear = block(locate(coords_start[1],coords_start[2],z_level),locate(coords_end[2],coords_end[3],z_level))
 	for(var/turf/to_clear in z_level_toclear)
 		for(var/atom/movable/obj_to_clear in to_clear.contents)
 			var/del_me = 0
