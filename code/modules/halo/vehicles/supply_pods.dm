@@ -41,10 +41,10 @@
 	pod_range = 4
 	drop_accuracy = 2
 	launch_arm_time = 3 SECOND
-	vehicle_size = 16
+	vehicle_size = ITEM_SIZE_VEHICLE_SMALL
 
 	capacity_flag = ITEM_SIZE_VEHICLE
-	vehicle_carry_size = ITEM_SIZE_VEHICLE_LARGE
+	vehicle_carry_size = ITEM_SIZE_VEHICLE_SMALL
 
 /obj/vehicles/drop_pod/supply_pod
 	icon = 'code/modules/halo/vehicles/supply_unsc.dmi'

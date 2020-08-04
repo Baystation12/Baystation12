@@ -106,6 +106,12 @@
 /obj/screen/weapondisplay/Destroy()
 	for(var/bullet in bulletsprites)
 		qdel(bullet)
+	lastgun = null
+	if(ammobar)
+		qdel(ammobar)
+		qdel(basebar)
+	if(user && user.client)
+		user.client.screen -= src
 	. = ..()
 
 /mob/living/carbon/human/Stat()
