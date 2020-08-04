@@ -21,6 +21,7 @@
 	dispersion = list(0.2,0.3,0.5,0.73)
 	accuracy = 1
 	one_hand_penalty = 2
+	hud_bullet_usebar = 1
 
 	overheat_capacity = 48
 	overheat_fullclear_delay = 30
@@ -71,6 +72,9 @@
 	magazine_type = /obj/item/ammo_magazine/concussion_rifle
 	one_hand_penalty = -1
 	dispersion = list(0.73)
+	hud_bullet_row_num = 6
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
+	hud_bullet_iconstate = "concround"
 	caliber = "plasConcRifle"
 	handle_casings = CASELESS
 	slot_flags = SLOT_BACK|SLOT_BELT

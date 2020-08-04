@@ -21,6 +21,9 @@
 	wielded_item_state = "carbine-wielded"
 	advanced_covenant = 1
 	matter = list("nanolaminate" = 1)
+	hud_bullet_row_num = 9
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
+	hud_bullet_iconstate = "carbineround"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
@@ -79,6 +82,8 @@
 	overheat_sfx = 'code/modules/halo/sounds/beam_rifle_overheat.ogg'
 	overheat_capacity = 4 //SRS mag equiv, but overheats on 4th click
 	overheat_fullclear_delay = 40
+	hud_bullet_usebar = 1
+
 	alt_charge_method = 1
 	matter = list("nanolaminate" = 2)
 	salvage_components = list(/obj/item/plasma_core)
@@ -124,6 +129,9 @@
 	one_hand_penalty = -1
 	fire_delay = 10
 	dispersion = list(0.26)
+	hud_bullet_row_num = 6
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
+	hud_bullet_iconstate = "bigneedle"
 	accuracy = 2
 	wielded_item_state = "needlerifle-wielded"
 	matter = list("nanolaminate" = 1)

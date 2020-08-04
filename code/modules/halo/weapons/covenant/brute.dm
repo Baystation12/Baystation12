@@ -71,6 +71,8 @@
 	armor_penetration = 35
 	accuracy = -1
 	dispersion = list(0.2,0.3,0.5)
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_5x6.dmi'
+	hud_bullet_iconstate = "spike"
 	//reload_sound = 'code/modules/halo/sounds/Spikershotfire.ogg'
 	item_state_slots = list(slot_l_hand_str = "spiker", slot_r_hand_str = "spiker")
 	sprite_sheets = list(\
@@ -148,6 +150,8 @@
 	armor_penetration = 35
 	accuracy = -1
 	dispersion = list(0.45)
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
+	hud_bullet_iconstate = "mauler"
 	w_class = ITEM_SIZE_NORMAL
 	item_state_slots = list(slot_l_hand_str = "mauler", slot_r_hand_str = "mauler")
 	sprite_sheets = list(\

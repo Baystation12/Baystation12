@@ -14,6 +14,9 @@
 	fire_delay = 8
 	one_hand_penalty = -1
 	dispersion = list(0.73)
+	hud_bullet_row_num = 2
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_32x16.dmi'
+	hud_bullet_iconstate = "rocket"
 	caliber = "spnkr"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE
@@ -58,6 +61,9 @@
 	fire_delay = 8
 	dispersion = list(0.73)
 	one_hand_penalty = -1
+	hud_bullet_row_num = 1
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_32x16.dmi'
+	hud_bullet_iconstate = "rocket"
 	caliber = "m26"
 	handle_casings = CASELESS
 	w_class = ITEM_SIZE_HUGE

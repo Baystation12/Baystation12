@@ -25,6 +25,7 @@
 	one_hand_penalty = 2
 	allowed_magazines = list(/obj/item/ammo_magazine/m5, /obj/item/ammo_magazine/m5/rubber)
 	w_class = ITEM_SIZE_NORMAL
+	hud_bullet_row_num = 20
 	wielded_item_state = "m7-wielded"
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',
