@@ -152,49 +152,102 @@ proc/age2agedescription(age)
 	if (progbar)
 		qdel(progbar)
 
-/proc/do_after(mob/user, delay, atom/target = null, needhand = 1, progress = 1, var/incapacitation_flags = INCAPACITATION_DEFAULT, var/same_direction = 0, var/can_move = 0)
-	if(!user)
-		return 0
-	var/atom/target_loc = null
-	var/target_type = null
 
-	var/original_dir = user.dir
+/mob/var/do_unique_user_handle = 0
+/atom/var/do_unique_target_user
 
-	if(target)
-		target_loc = target.loc
-		target_type = target.type
+#define DO_USER_CAN_MOVE     0x1
+#define DO_USER_CAN_TURN     0x2
+#define DO_USER_UNIQUE_ACT   0x4
+#define DO_USER_SAME_HAND    0x8
+#define DO_TARGET_CAN_MOVE   0x10
+#define DO_TARGET_CAN_TURN   0x20
+#define DO_TARGET_UNIQUE_ACT 0x40
+#define DO_SHOW_PROGRESS     0x80
 
-	var/atom/original_loc = user.loc
+#define DO_BOTH_CAN_MOVE     (DO_USER_CAN_MOVE | DO_TARGET_CAN_MOVE)
+#define DO_BOTH_CAN_TURN     (DO_USER_CAN_TURN | DO_TARGET_CAN_TURN)
+#define DO_BOTH_UNIQUE_ACT   (DO_USER_UNIQUE_ACT | DO_TARGET_UNIQUE_ACT)
+#define DO_DEFAULT           (DO_SHOW_PROGRESS | DO_USER_SAME_HAND | DO_BOTH_CAN_TURN)
 
-	var/holding = user.get_active_hand()
+#define DO_MISSING_USER      (-1)
+#define DO_MISSING_TARGET    (-2)
+#define DO_INCAPACITATED     (-3)
 
-	var/datum/progressbar/progbar
-	if (progress)
-		progbar = new(user, delay, target)
+/proc/do_after(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
+	return !do_after_detailed(user, delay, target, do_flags, incapacitation_flags)
 
-	var/endtime = world.time + delay
-	var/starttime = world.time
-	. = 1
-	while (world.time < endtime)
+/proc/do_after_detailed(mob/user, delay, atom/target, do_flags = DO_DEFAULT, incapacitation_flags = INCAPACITATION_DEFAULT)
+	if (!delay)
+		return FALSE
+
+	if (!user)
+		return DO_MISSING_USER
+
+	var/initial_handle
+	if (do_flags & DO_USER_UNIQUE_ACT)
+		initial_handle = sequential_id("/proc/do_after")
+		user.do_unique_user_handle = initial_handle
+
+	if (target?.do_unique_target_user)
+		return DO_TARGET_UNIQUE_ACT
+
+	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
+		target.do_unique_target_user = user
+
+	var/atom/user_loc = do_flags & DO_USER_CAN_MOVE ? null : user.loc
+	var/user_dir = do_flags & DO_USER_CAN_TURN ? null : user.dir
+	var/user_hand = do_flags & DO_USER_SAME_HAND ? user.hand : null
+
+	var/atom/target_loc = do_flags & DO_TARGET_CAN_MOVE ? null : target?.loc
+	var/target_dir = do_flags & DO_TARGET_CAN_TURN ? null : target?.dir
+	var/target_type = target?.type
+
+	var/datum/progressbar/bar = do_flags & DO_SHOW_PROGRESS ? new(user, delay, target) : null
+
+	var/start_time = world.time
+	var/end_time = start_time + delay
+
+	. = FALSE
+
+	for (var/time = world.time, time < end_time, time = world.time)
 		sleep(1)
-		if (progress)
-			progbar.update(world.time - starttime)
-
-		if(QDELETED(user) || user.incapacitated(incapacitation_flags) || (user.loc != original_loc && !can_move) || (same_direction && user.dir != original_dir))
-			. = 0
+		if (bar)
+			bar.update(time - start_time)
+		if (QDELETED(user))
+			. = DO_MISSING_USER
+			break
+		if (target_type && QDELETED(target))
+			. = DO_MISSING_TARGET
+			break
+		if (user.incapacitated(incapacitation_flags))
+			. = DO_INCAPACITATED
+			break
+		if (user_loc && user_loc != user.loc)
+			. = DO_USER_CAN_MOVE
+			break
+		if (target_loc && target_loc != target.loc)
+			. = DO_TARGET_CAN_MOVE
+			break
+		if (user_dir && user_dir != user.dir)
+			. = DO_USER_CAN_TURN
+			break
+		if (target_dir && target_dir != target.dir)
+			. = DO_TARGET_CAN_TURN
+			break
+		if (!isnull(user_hand) && user_hand != user.hand)
+			. = DO_USER_SAME_HAND
+			break
+		if (initial_handle && initial_handle != user.do_unique_user_handle)
+			. = DO_USER_UNIQUE_ACT
 			break
 
-		if(target_loc && (QDELETED(target) || target_loc != target.loc || target_type != target.type))
-			. = 0
-			break
-
-		if(needhand)
-			if(user.get_active_hand() != holding)
-				. = 0
-				break
-
-	if (progbar)
-		qdel(progbar)
+	if (bar)
+		qdel(bar)
+	if ((do_flags & DO_USER_UNIQUE_ACT) && user.do_unique_user_handle == initial_handle)
+		user.do_unique_user_handle = 0
+	if ((do_flags & DO_TARGET_UNIQUE_ACT) && target)
+		target.do_unique_target_user = null
 
 /proc/able_mobs_in_oview(var/origin)
 	var/list/mobs = list()

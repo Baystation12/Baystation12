@@ -107,7 +107,7 @@
 		if (user.get_skill_value(SKILL_ELECTRICAL) < SKILL_ADEPT)
 			length += rand(40, 60)
 		while(C.charge < C.maxcharge)
-			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length, target = user))
+			if(MyC.charge > max(0, MyC.charge*failsafe) && do_after(user, length))
 				if(CannotUse(user))
 					return TRUE
 				if(QDELETED(C))

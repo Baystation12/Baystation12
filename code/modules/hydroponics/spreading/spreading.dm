@@ -232,7 +232,7 @@
 		var/chop_time = (health/W.force) * 0.5 SECONDS
 		if(user.skill_check(SKILL_BOTANY, SKILL_ADEPT))
 			chop_time *= 0.5
-		if(do_after(user, chop_time, src, TRUE))
+		if(do_after(user, chop_time, src))
 			visible_message(SPAN_NOTICE("[user] chops down \the [src]."))
 			playsound(get_turf(src), W.hitsound, 100, 1)
 			die_off()

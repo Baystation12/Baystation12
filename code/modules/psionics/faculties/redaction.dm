@@ -171,7 +171,7 @@
 			return TRUE
 
 		user.visible_message(SPAN_NOTICE("<i>\The [user] splays out their hands over \the [target]'s body...</i>"))
-		if(!do_after(user, 100, target, 0, 1))
+		if(!do_after(user, 100, target))
 			user.psi.backblast(rand(10,25))
 			return TRUE
 
