@@ -1,4 +1,0 @@
-author: "Hubblenaut"
-delete-after: True
-changes: 
-  - bugfix: "Fixes constructed windows not blending in with spawned ones."
