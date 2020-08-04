@@ -129,7 +129,7 @@
 	one_hand_penalty = -1
 	fire_delay = 10
 	dispersion = list(0.26)
-	hud_bullet_row_num = 6
+	hud_bullet_row_num = 7
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
 	hud_bullet_iconstate = "bigneedle"
 	accuracy = 2

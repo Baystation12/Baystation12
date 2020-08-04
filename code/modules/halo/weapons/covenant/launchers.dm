@@ -12,7 +12,7 @@
 	one_hand_penalty = -1
 	dispersion = list(0.73)
 	hud_bullet_row_num = 5
-	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_32x16.dmi'
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_12x8.dmi'
 	hud_bullet_iconstate = "fuelrod"
 	caliber = "fuel rod"
 	handle_casings = CASELESS
