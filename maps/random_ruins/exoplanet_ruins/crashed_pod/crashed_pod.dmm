@@ -898,11 +898,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/map_template/crashed_pod)
 "gE" = (
-/obj/structure/bed/chair/shuttle/black{
-	dir = 8;
-	icon_state = "shuttle_chair_preview"
+/obj/machinery/sleeper{
+	dir = 8
 	},
-/obj/effect/submap_landmark/spawnpoint/crashed_pod_survivor,
+/obj/effect/floor_decal/industrial/outline/blue,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
 "gF" = (
@@ -1046,21 +1045,23 @@
 /area/map_template/crashed_pod)
 "pO" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "vG" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/machinery/sleeper{
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "ED" = (
 /obj/effect/submap_landmark/joinable_submap/crashed_pod,
-/obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/tiled/dark/monotile,
+/area/map_template/crashed_pod)
+"Gp" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/effect/floor_decal/industrial/outline/blue,
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "RN" = (
 /obj/structure/table/steel_reinforced,
@@ -1074,16 +1075,8 @@
 /turf/simulated/floor/tiled/dark,
 /area/map_template/crashed_pod)
 "ZI" = (
-/obj/structure/closet/emcloset,
-/obj/item/weapon/crowbar,
-/obj/item/weapon/crowbar,
 /obj/effect/floor_decal/industrial/outline/blue,
-/obj/item/clothing/suit/space/emergency,
-/obj/item/clothing/suit/space/emergency,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/weapon/tank/emergency/oxygen/double,
-/obj/item/clothing/head/helmet/space/emergency,
-/obj/item/clothing/head/helmet/space/emergency,
+/obj/machinery/portable_atmospherics/powered/scrubber,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/map_template/crashed_pod)
 
@@ -1271,7 +1264,7 @@ ay
 gz
 gK
 gZ
-vG
+Gp
 ab
 "}
 (12,1,1) = {"
