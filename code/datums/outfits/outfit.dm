@@ -19,6 +19,26 @@ var/list/outfits_decls_by_type_
 	outfits_decls_by_type_ = list()
 	outfits_decls_root_ = decls_repository.get_decl(/decl/hierarchy/outfit)
 
+/proc/has_clothing(obj/item/clothing/C, decl/hierarchy/outfit/O)
+	if (ispath(C, /obj/item/clothing/under))
+		return initial(O.uniform)
+	if (ispath(C, /obj/item/clothing/suit))
+		return initial(O.suit)
+	if (ispath(C, /obj/item/clothing/glasses))
+		return initial(O.glasses)
+	if (ispath(C, /obj/item/clothing/gloves))
+		return initial(O.gloves)
+	if (ispath(C, /obj/item/clothing/head))
+		return initial(O.head)
+	if (ispath(C, /obj/item/clothing/shoes))
+		return initial(O.shoes)
+	if (ispath(C, /obj/item/clothing/mask))
+		return initial(O.mask)
+	if (ispath(C, /obj/item/clothing/ears))
+		return initial(O.l_ear)
+	return null
+
+
 /decl/hierarchy/outfit
 	name = "Naked"
 
@@ -41,6 +61,7 @@ var/list/outfits_decls_by_type_
 	var/l_hand = null
 	var/holster = null
 	var/list/backpack_contents = list() // In the list(path=count,otherpath=count) format
+	var/chameleon = TRUE
 
 	var/id_type
 	var/id_desc

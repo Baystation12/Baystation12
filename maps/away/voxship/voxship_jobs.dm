@@ -167,6 +167,7 @@
 	hierarchy_type = /decl/hierarchy/outfit/job/voxship
 	l_ear = null
 	r_ear = null
+	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/voxship/crew
 	id_type = /obj/item/weapon/card/id/voxship

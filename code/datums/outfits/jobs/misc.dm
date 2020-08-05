@@ -1,6 +1,7 @@
 /decl/hierarchy/outfit/job/silicon
 	head = /obj/item/clothing/head/cardborg
 	hierarchy_type = /decl/hierarchy/outfit/job/silicon
+	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/silicon/ai
 	name = OUTFIT_JOB_NAME("AI")

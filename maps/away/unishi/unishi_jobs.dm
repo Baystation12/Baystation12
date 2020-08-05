@@ -26,6 +26,7 @@
 	pda_slot = slot_l_store
 	l_ear = null
 	r_ear = null
+	chameleon = FALSE
 
 /decl/hierarchy/outfit/job/unishi/crew
 	name = UNISHI_OUTFIT_JOB_NAME("Unishi Crewman")

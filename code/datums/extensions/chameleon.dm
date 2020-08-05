@@ -24,6 +24,7 @@
 
 	atom_holder = holder
 	chameleon_verb += new/atom/proc/chameleon_appearance(atom_holder,"Change [atom_holder.name] Appearance")
+	chameleon_verb += new/atom/proc/change_outfit(atom_holder, "Change Chameleon Outfit")
 
 /datum/extension/chameleon/Destroy()
 	. = ..()
@@ -52,6 +53,18 @@
 
 	OnDisguise(copy)
 	qdel(copy)
+
+/datum/extension/chameleon/proc/initialize_outfits()
+	var/global/list/standard_outfit_options
+	if(!standard_outfit_options)	
+		standard_outfit_options = list()
+		for(var/path in typesof(/decl/hierarchy/outfit/job))
+			for(var/subpath in typesof(path))
+				var/decl/hierarchy/outfit/job/J = subpath
+				if(initial(J.chameleon))
+					standard_outfit_options[initial(J.name)] = subpath
+		sortTim(standard_outfit_options, /proc/cmp_text_asc)
+	return standard_outfit_options
 
 /datum/extension/chameleon/proc/OnDisguise(obj/item/copy)
 
@@ -89,12 +102,35 @@
 			target[name] = path
 
 /datum/extension/chameleon/proc/generate_chameleon_choices(basetype)
-	var/choices = list()
+	var/choices = list()	
 	var/types = islist(basetype) ? basetype : typesof(basetype)
 	for (var/path in types)
 		add_chameleon_choice(choices, path)
 	return sortAssoc(choices)
 
+/atom/proc/change_outfit()
+	set name = "Change Chameleon Outfit"
+	if(usr.incapacitated() || !ishuman(usr))
+		return FALSE
+	var/list/outfits = null
+	if (has_extension(src,/datum/extension/chameleon))
+		var/datum/extension/chameleon/C = get_extension(src, /datum/extension/chameleon)
+		outfits = C.initialize_outfits()
+	else
+		return FALSE
+	var/selected_key = input(usr, "Choose an Outfit", "Chameleon Outfit") as null|anything in outfits
+	if (!selected_key)
+		return FALSE
+	var/decl/hierarchy/outfit/selected = outfits[selected_key]
+	var/mob/living/carbon/human/user = usr
+	var/list/equipped = user.get_equipped_items()
+	for (var/obj/item/clothing/clothe in equipped)
+		if (has_extension(clothe,/datum/extension/chameleon) && has_clothing(clothe.parent_type, selected))
+			var/datum/extension/chameleon/C = get_extension(clothe, /datum/extension/chameleon)
+			C.disguise(has_clothing(clothe.parent_type, selected),user)
+	user.regenerate_icons()
+			
+	
 /atom/proc/chameleon_appearance()
 	set name = "Change Appearance"
 	set desc = "Activate the holographic appearance changing module."
