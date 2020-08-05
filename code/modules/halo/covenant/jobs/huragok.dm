@@ -6,5 +6,5 @@
 	faction_whitelist = "Covenant"
 	outfit_type = /decl/hierarchy/outfit/huragok_cov
 	whitelisted_species = list()
-	access = list(access_covenant, access_covenant_command)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	pop_balance_mult = 0.5

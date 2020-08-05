@@ -6,7 +6,7 @@
 	icon = 'code/modules/halo/overmap/slipspace/slipspace_drive_cov.dmi'
 	core_to_spawn = /obj/payload/slipspace_core/cov
 	precise_jump = TRUE
-	req_access = list(access_covenant_command)
+	req_access = list(access_covenant_slipspace)
 
 /obj/machinery/slipspace_engine/covenant/allowed(var/mob/user)
 	if(!is_covenant_mob(user))

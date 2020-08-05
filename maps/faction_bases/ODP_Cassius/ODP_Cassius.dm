@@ -35,4 +35,10 @@
 			GLOB.UNSC.unlock_special_job()
 			GLOB.COVENANT.unlock_special_job()
 
+		//this is janky, i really should fix spawns instead
+		//its necessary because the AI initial spawn is on the ODP
+		//without the ODP the AI will spawn somewhere random like the Cov ship
+		var/datum/job/ai_job = job_master.occupations_by_type[/datum/job/unsc_ai]
+		ai_job.total_positions = 0
+
 	. = ..()
