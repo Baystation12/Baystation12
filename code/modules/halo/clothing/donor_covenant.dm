@@ -560,3 +560,31 @@
 	shoes = /obj/item/clothing/shoes/sangheili/zane
 	head = /obj/item/clothing/head/helmet/sangheili/zane
 	l_pocket = /obj/item/weapon/grenade/plasma
+
+//CommanderXor//
+
+/obj/item/xor_harness_replacer
+	name = "Harness Replacer"
+	icon = 'code/modules/halo/covenant/species/yanmee/yanmee_gear.dmi'
+	icon_state = "xor_pa"
+
+/obj/item/xor_harness_replacer/resolve_attackby(var/obj/item/clothing/suit/armor/special/yanmee/h, mob/user, var/click_params)
+	if(istype(h))
+		var/mob/living/carbon/human/m = h.loc
+		var/obj/item/clothing/suit/armor/special/yanmee/leader/xor/newarmour = new(h.loc)
+		if(istype(m))
+			m.drop_from_inventory(h)
+			m.equip_to_slot(newarmour,slot_wear_suit,1)
+		qdel(h)
+	else
+		. = ..()
+
+/obj/item/clothing/suit/armor/special/yanmee/leader/xor
+	name = "Yanme'e Reinforced Combat Harness"
+	icon_state = "xor_pa"
+
+/obj/item/weapon/storage/box/large/donator/xor_yanmee
+	startswith = list(/obj/item/xor_harness_replacer,
+					)
+	can_hold = list(/obj/item/xor_harness_replacer,
+					)
