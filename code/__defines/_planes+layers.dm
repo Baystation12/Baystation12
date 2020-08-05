@@ -85,6 +85,7 @@ What is the naming convention for planes or layers?
 
 #define ABOVE_TURF_PLANE              -18 // For items which should appear above turfs but below other objects and hiding mobs, eg: wires & pipes
 
+	#define TURF_DETAIL_LAYER           0.9 //halo stuff
 	#define HOLOMAP_LAYER               1 // NOTE: ENSURE this is equal to the one at ABOVE_PLATING_PLANE!
 	#define DECAL_LAYER                 2
 	#define RUNE_LAYER                  3
