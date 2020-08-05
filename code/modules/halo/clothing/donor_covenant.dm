@@ -582,6 +582,7 @@
 /obj/item/clothing/suit/armor/special/yanmee/leader/xor
 	name = "Yanme'e Reinforced Combat Harness"
 	icon_state = "xor_pa"
+	item_state = "xor_pa"
 
 /obj/item/weapon/storage/box/large/donator/xor_yanmee
 	startswith = list(/obj/item/xor_harness_replacer,
