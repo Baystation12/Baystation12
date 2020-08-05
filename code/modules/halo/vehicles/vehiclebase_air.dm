@@ -69,7 +69,6 @@
 	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
-	to_chat(usr,"<span class = 'notice'>You start prepping [src] for [active ? "landing" : "takeoff"].</span>")
 	visible_message("<span class = 'notice'>[src] starts prepping for [active?"landing":"takeoff"].</span>")
 	if(!do_after(usr,TAKEOFF_LAND_DELAY,src))
 		return
@@ -96,11 +95,10 @@
 /obj/vehicles/air/proc/perform_move_sequence(var/obj/move_to_obj)
 	if(isnull(move_to_obj))
 		return
-/*
+
+	move_to_obj.visible_message("<span class = 'notice'>[src] flies in from the distance.</span>")
 	forceMove(get_turf(move_to_obj))
 
-/obj/vehicles/air/proc/proc_fly_to_waypoint()
-*/
 /obj/vehicles/air/verb/fly_to_waypoint()
 	set name = "Fly to waypoint"
 	set desc = "Fly to a waypoint. Used to traverse z-levels."
@@ -135,8 +133,7 @@
 						return
 		return
 
-	to_chat(usr,"<span class = 'notice'>You start prepping [src] for long-range flight..</span>")
-	visible_message("<span class = 'notice'>[src] starts prepping for long-range flight..</span>")
+	visible_message("<span class = 'notice'>[src] starts prepping for long-range flight.</span>")
 	if(!do_after(usr,WAYPOINT_FLIGHT_DELAY,src))
 		return
 
