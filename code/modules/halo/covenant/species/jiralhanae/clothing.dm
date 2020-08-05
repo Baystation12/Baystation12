@@ -76,7 +76,7 @@
 	desc = "The standard issue helmets of Jiralhanae soldiers within the covenant."
 	armor = list(melee = 55, bullet = 35, laser = 25,energy = 25, bomb = 20, bio = 25, rad = 25)
 	integrated_hud = /obj/item/clothing/glasses/hud/tactical/covenant
-	armor_thickness = 25
+	armor_thickness = 22
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/minor
 	name = "Jiralhanae Helm (Minor)"
@@ -87,12 +87,14 @@
 	name = "Jiralhanae Helm (Major)"
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "majorhelm"
+	armor_thickness = 24
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/captain
 	name = "Jiralhanae Helm (Captain)"
 	desc = "This modified helmet is of some significance to Jiralhanae clans. It is a mark of importance, however now diminished by the covenant hierarchy."
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainhelm"
+	armor_thickness = 26
 
 /obj/item/clothing/head/helmet/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit Helmet"
@@ -177,7 +179,7 @@
 	desc = "The armour of Jiralhanae soldiers within the covenant."
 	armor = list(melee = 50, bullet = 45, laser = 50, energy = 40, bomb = 35, bio = 20, rad = 20)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS
-	armor_thickness = 30 // 9 grace shots
+	armor_thickness = 24
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/EVA
 	name = "Jiralhanae Softsuit"
@@ -203,12 +205,14 @@
 	name = "Jiralhanae Armor (Major)"
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "majorchest"
+	armor_thickness = 27
 
 /obj/item/clothing/suit/armor/jiralhanae/covenant/captain
 	name = "Jiralhanae Armor (Captain)"
 	desc = "This modified armor used to be a mark of importance to a Jiralhanae clan. The Covenant hierarchy has diminished it's power."
 	icon = JIRALHANAE_ICON_PATH_OBJ
 	icon_state = "captainchest"
+	armor_thickness = 30
 
 /* SHOES */
 

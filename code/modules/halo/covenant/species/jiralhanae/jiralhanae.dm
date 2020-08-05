@@ -44,10 +44,9 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	pain_mod = 0.55
 	//ABOVE MODIFIERS ARE PLACEHOLDERS TO START BALANCING FROM.//
 	slowdown = -0.1 //A miniscule amount faster than most.
-	adrenal_break_threshold = 23 //at this threshold of adrenaline (which is generated through taking damage, damage/5)
-	//, the body consumes the adrenaline and creates a short-lived 120 painkill
-	//This lowered threshold means you can, through consistent aggressiveness, stave off the pain of the fight.
-	//Failing to be aggressive or smart hostiles stopping their fire at you means you will start to feel the effects
+	adrenal_break_threshold = 30//Originally, this was lower, however, the higher threshold allows brutes
+	//to sustain a longer lasting lower-level painkill rather than having their adrenaline
+	//forcefully swapped for a very short term buff
 	explosion_effect_mod = 0.5
 	can_force_door = 1
 	default_faction = "Covenant"
