@@ -19,6 +19,7 @@
 	burst_delay = 1.8
 	one_hand_penalty = -1
 	dispersion = list(0.0,0.2,0.3,0.5,0.73) //@ 7 tiles, deviation is 0 - 1 tiles.
+	hud_bullet_row_num = 20
 
 	var/on = 0
 	var/activation_sound = 'code/modules/halo/sounds/Assault_Rifle_Flashlight.wav'
@@ -68,6 +69,7 @@
 	burst = 3
 	burst_delay = 2.0
 	dispersion = list(0.0,0.3,0.5)
+	hud_bullet_row_num = 18
 
 	ammo_icon_state = null
 	allowed_magazines = list(/obj/item/ammo_magazine/m762_ap/MA37)
@@ -137,6 +139,7 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 1.2
+	hud_bullet_row_num = 18
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.26, 0.26, 0.26) //About a third of a tile at 7 tile range.
 	item_icons = list(
@@ -177,6 +180,7 @@
 	one_hand_penalty = -1
 	burst = 3
 	burst_delay = 1.2
+	hud_bullet_row_num = 18
 	w_class = ITEM_SIZE_LARGE
 	dispersion=list(0.26, 0.26, 0.26)
 	wielded_item_state = "br55-wielded"

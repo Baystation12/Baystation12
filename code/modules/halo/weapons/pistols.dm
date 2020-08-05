@@ -25,6 +25,9 @@
 		)
 
 	dispersion = list(0.4) //Maxes out at just about 1 tile @ 7 tiles range. Should rarely actually deviate to that tile, though.
+	hud_bullet_row_num = 6
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
+	hud_bullet_iconstate = "bigpistol"
 
 	slowdown_general = 0
 
@@ -145,6 +148,9 @@
 	w_class = ITEM_SIZE_NORMAL
 	accuracy = 0
 	wielded_item_state = "handgonne"
+	hud_bullet_row_num = 1
+	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_7x8.dmi'
+	hud_bullet_iconstate = "bigpistol"
 
 	item_icons = list(
 		slot_l_hand_str = 'code/modules/halo/weapons/icons/Weapon_Inhands_left.dmi',

@@ -30,6 +30,7 @@
 	burst = 5
 	burst_delay = 1.8
 	dispersion = list(0.0,0.2,0.3,0.5,0.73)
+	hud_bullet_usebar = 1
 
 	//mob sprites
 	var/item_state_full = "ma5p"
@@ -173,6 +174,7 @@
 	burst = 1
 	fire_delay = 10
 	dispersion = list(0.26)
+	hud_bullet_usebar = 1
 
 	//mob sprites
 	item_state = "m392"

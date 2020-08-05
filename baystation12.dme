@@ -2124,6 +2124,7 @@
 #include "code\modules\halo\weapons\drop_pod_beacon.dm"
 #include "code\modules\halo\weapons\dual_wielding.dm"
 #include "code\modules\halo\weapons\grenades.dm"
+#include "code\modules\halo\weapons\hud_counter.dm"
 #include "code\modules\halo\weapons\landmine.dm"
 #include "code\modules\halo\weapons\landmine_construct.dm"
 #include "code\modules\halo\weapons\landmine_presets.dm"

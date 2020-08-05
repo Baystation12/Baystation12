@@ -8,7 +8,7 @@
 	density = 1
 	anchored = 0
 	var/datum/game_mode/outer_colonies/gm
-	var/explosive_hits = 5
+	var/explosive_hits = 4
 	var/regen_at = 0
 
 /obj/structure/invasion_scanner/ex_act(var/severity)

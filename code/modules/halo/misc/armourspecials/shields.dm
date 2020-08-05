@@ -5,6 +5,53 @@
 #define SHIELD_RECHARGE 2
 #define SHIELD_DAMAGE 3
 
+/obj/screen/shieldbar
+	icon = 'code/modules/halo/icons/hud_display/hud_shieldbar.dmi'
+	icon_state = "bar_outer"
+	screen_loc = "NORTH,CENTER-1"
+	mouse_opacity = 0
+	var/transform_image_x = 1
+	var/transform_image_y = 0
+	var/matrix/base_transform
+	var/image/barimage
+
+/obj/screen/shieldbar/New(var/mob/living/l)
+	if(!istype(l) || !l.client)
+		return INITIALIZE_HINT_QDEL
+	l.client.screen += src
+	barimage = image(icon,src,"bar")
+	base_transform = new(barimage.transform)
+	to_chat(l,barimage)
+
+/obj/screen/shieldbar/proc/update(var/currshield,var/maxshield)
+	var/new_pct = min(1,max(0,currshield/maxshield))
+	var/matrix/m = new(base_transform)
+	m.Scale(transform_image_x ? new_pct : 1,transform_image_y ? new_pct : 1)
+	barimage.transform = m
+
+/obj/screen/shieldbar/Destroy()
+	qdel(barimage)
+	. = ..()
+
+/mob/living/carbon/human/Stat()
+	. = ..()
+	if(client)
+		var/obj/screen/shieldbar/bar = locate(/obj/screen/shieldbar) in client.screen
+		if(wear_suit && istype(wear_suit,/obj/item/clothing/suit/armor/special))
+			var/obj/item/clothing/suit/armor/special/suit = wear_suit
+			var/datum/armourspecials/shields/shield_datum = locate(/datum/armourspecials/shields) in suit.specials
+			var/datum/armourspecials/shieldmonitor/mon = locate(/datum/armourspecials/shieldmonitor) in suit.specials
+			if(shield_datum && mon)
+				for(var/helm in mon.valid_helmets)
+					if(istype(head,helm)) //No correct helm? No shield indicator.
+						if(!bar)
+							bar = new mon.bar_type (src)
+						bar.update(shield_datum.shieldstrength,shield_datum.totalshields)
+					return
+		if(bar)
+			client.screen -= bar
+			qdel(bar)
+
 /datum/armourspecials
 	var/mob/living/carbon/human/user
 
@@ -89,6 +136,13 @@
 		return 1
 	else
 		return 0
+
+/datum/armourspecials/shields/handle_shield(var/mob/living/m,damage,atom/damage_source)
+	. = ..()
+	if(istype(m))
+		var/obj/screen/shieldbar/bar = locate(/obj/screen/shieldbar) in m.client.screen
+		if(bar)
+			bar.update(shieldstrength,totalshields,m)
 
 /datum/armourspecials/shields/proc/update_overlay(var/new_icon_state)
 	if(mob_overlay)
