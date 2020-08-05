@@ -8,3 +8,8 @@
 /datum/access/covenant_command
 	id = access_covenant_command
 	desc = "Covenant Command Access"
+
+/var/const/access_covenant_slipspace = 802
+/datum/access/covenant_slipspace
+	id = access_covenant_slipspace
+	desc = "Covenant Slipspace Access"
