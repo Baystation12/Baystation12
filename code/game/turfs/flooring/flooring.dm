@@ -37,6 +37,8 @@ var/list/flooring_types
 	var/descriptor = "tiles"
 	var/flags
 	var/can_paint
+	var/burnt_icon_base		//set this to override the standard icon state for burnt overlays
+	var/broken_icon_base	//and this
 
 /decl/flooring/proc/on_remove()
 	return

@@ -7,21 +7,29 @@
 	break_tile()
 
 /turf/simulated/floor/proc/break_tile()
-	if(!flooring || !(flooring.flags & TURF_CAN_BREAK) || !isnull(broken))
+	if(!isnull(broken))
 		return
-	if(flooring.has_damage_range)
+	if(flooring)
+		if(!(flooring.flags & TURF_CAN_BREAK))
+			return
+		if(!flooring.has_damage_range)
+			return
 		broken = rand(0,flooring.has_damage_range)
 	else
-		broken = 0
+		broken = rand(0,4)
 	remove_decals()
 	update_icon()
 
 /turf/simulated/floor/proc/burn_tile(var/exposed_temperature)
-	if(!flooring || !(flooring.flags & TURF_CAN_BURN) || !isnull(burnt))
+	if(!isnull(burnt))
 		return
-	if(flooring.has_burn_range)
+	if(flooring)
+		if(!(flooring.flags & TURF_CAN_BURN))
+			return
+		if(!flooring.has_burn_range)
+			return
 		burnt = rand(0,flooring.has_burn_range)
 	else
-		burnt = 0
+		burnt = rand(0,4)
 	remove_decals()
 	update_icon()

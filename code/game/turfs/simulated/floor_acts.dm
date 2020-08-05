@@ -2,12 +2,25 @@
 	//set src in oview(1)
 
 	var/base_turf = get_base_turf_by_area(src)
-	if(istype(base_turf, /turf/space))
-		//no more floor breaking
-		if(prob(33))
-			new /obj/item/stack/material/steel(src)
-		if(prob(80))
-			src.break_tile_to_plating()
+	if(!base_turf || ispath(base_turf, /turf/space))
+		//no more floor breaking to space
+		switch(severity)
+			if(1.0)
+				src.break_tile_to_plating()
+				src.burn_tile(1000)
+			if(2.0)
+				if(prob(50))
+					src.break_tile_to_plating()
+					if(prob(33))
+						new /obj/item/stack/material/steel(src)
+					if(prob(50))
+						src.burn_tile(1000)
+				else
+					src.burn_tile(1000)
+			if(3.0)
+				if(prob(50))
+					src.burn_tile(1000)
+
 		src.hotspot_expose(1000,CELL_VOLUME)
 
 	else
