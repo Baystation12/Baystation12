@@ -39,6 +39,7 @@
 	/datum/job/covenant/unggoy_heavy,
 	/datum/job/covenant/skirmmurmillo,
 	/datum/job/covenant/skirmcommando,
+	/datum/job/covenant/skirmchampion,
 	/datum/job/covenant/brute_minor,
 	/datum/job/covenant/brute_major,
 	/datum/job/covenant/brute_captain,
