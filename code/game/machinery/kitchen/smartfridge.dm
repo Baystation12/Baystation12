@@ -11,6 +11,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	atom_flags = ATOM_FLAG_NO_TEMP_CHANGE | ATOM_FLAG_NO_REACT
+	obj_flags = OBJ_FLAG_ANCHORABLE | OBJ_FLAG_ROTATABLE
 	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/icon_base = "fridge_sci"
 	var/icon_contents = "chem"
@@ -294,6 +295,10 @@
 			user.visible_message("<span class='notice'>\The [user] loads \the [src] with the contents of \the [P].</span>", "<span class='notice'>You load \the [src] with the contents of \the [P].</span>")
 			if(P.contents.len > 0)
 				to_chat(user, "<span class='notice'>Some items were refused.</span>")
+
+	else if ((obj_flags & OBJ_FLAG_ANCHORABLE) && isWrench(O))
+		wrench_floor_bolts(user)
+		power_change()
 
 	else
 		to_chat(user, "<span class='notice'>\The [src] smartly refuses [O].</span>")
