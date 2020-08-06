@@ -115,21 +115,17 @@
 	..()
 	return
 
-/obj/item/weapon/grenade/proc/do_alt_explosion(var/apply_ex_act = 0) //ex act is for plasnades
+/obj/item/weapon/grenade/proc/do_alt_explosion() //ex act is for plasnades
 	if(alt_explosion_range == -1)
 		return 0
 
-	for(var/atom/movable/a in range(alt_explosion_range,loc))
-		var/mob/living/m = a
-		if(istype(m))
-			var/mult = 1
-			if(get_turf(m) != get_turf(loc))
-				mult = multiplier_non_direct
-			m.adjustFireLoss(alt_explosion_damage_max*mult)
-			m.updatehealth()
-			m.UpdateAppearance()
-		if(apply_ex_act)
-			a.ex_act(3)
+	for(var/mob/living/m in range(alt_explosion_range,loc))
+		var/mult = 1
+		if(get_turf(m) != get_turf(loc))
+			mult = multiplier_non_direct
+		m.adjustFireLoss(alt_explosion_damage_max*mult)
+		m.updatehealth()
+		m.UpdateAppearance()
 	return 1
 
 /obj/item/weapon/grenade/attack_hand()

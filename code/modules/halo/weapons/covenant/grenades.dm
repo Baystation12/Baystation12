@@ -9,7 +9,7 @@
 	can_adjust_timer = 0
 	arm_sound = 'code/modules/halo/sounds/Plasmanadethrow.ogg'
 	alt_explosion_range = 1
-	alt_explosion_damage_max = 45 //+ tier 1 explosion effects from the alt-explosion
+	alt_explosion_damage_max = 55
 	matter = list("nanolaminate" = 1, "kemocite" = 1)
 	salvage_components = list(/obj/item/plasma_core)
 	item_state_slots = list(slot_l_hand_str = "plasma_nade_off", slot_r_hand_str = "plasma_nade_off")
@@ -60,7 +60,8 @@
 			if(dist <= round(alt_explosion_range + world.view - 2, 1))
 				M.playsound_local(epicenter, 'code/modules/halo/sounds/Plasmanadedetonate.ogg', 100, 1)
 	var/mob/living/carbon/human/mob_containing = loc
-	do_alt_explosion(1)
+	do_alt_explosion()
+	explosion(get_turf(src),0,0,1,0)
 	if(istype(mob_containing))
 		mob_containing.contents -= src
 		mob_containing.embedded -= src
