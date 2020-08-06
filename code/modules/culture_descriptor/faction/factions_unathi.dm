@@ -1,39 +1,38 @@
 /decl/cultural_info/faction/unathi
-	name = FACTION_UNATHI_POLAR
-	description = "These Unathi hail from the dense jungles of Moghes' Poles. Generally they're the most welcoming of outsiders and the most \
-	common to find off world. Most of these Unathi are followers of the Precursors or the Fruitful Lights, with technology and progress being \
-	an important concept in the polar city-states."
-	language = LANGUAGE_UNATHI_SINTA
-	secondary_langs = list(LANGUAGE_UNATHI_YEOSA)
+	name = FACTION_UNATHI_HEGEMONY
+	description = "Headed by the so-called Council of Honourable light, the seats of the Hegemony are taken by the kaahnepos of the major clans and Krukzuz. \
+	The Hegemony's formal purpose is the promotion of unathi interests in trade and diplomacy with other species. In practice, this has often resulted \
+	in the reinforcement of city-states in the emerging market of off-world commerce."
 
-/decl/cultural_info/faction/unathi/desert
-	name = FACTION_UNATHI_DESERT
-	description = "These are the survivalists of the Unathi. They hunker down in long forgotten bunkers of the Precursors and survive on \
-	whatever creatures still live in the deserts. They're incredibly self sufficient despite their living conditions.They have a heavy focus on \
-	the Precursors and the Grand Strategem in their clan faiths, and are often considered the most spiritual."
+/decl/cultural_info/faction/unathi/baask
+	name = FACTION_UNATHI_BAASK
+	description = "The Ba'ask Krukzuz is one of the more prominent north polar factions. Heavily reliant on farming, they are credited with keeping the city fed. \
+	This has given them significant power in the area; combined with their alliance with other large clans, they have enjoyed a golden age of progress. \
+	Members of the Ba'ask Krukzuz primarily follow the Fruitful Lights and Hand of the Vine, with their focus now being on pushing unathi technology forward."
 
-/decl/cultural_info/faction/unathi/savannah
-	name = FACTION_UNATHI_SAVANNAH
-	description = "These Unathi are nomadic clans, traveling across the Great Plains of Moghes or the stars of our universe, hoping they can turn \
-	Moghes into a new paradise. Most Savannah Unathi follow the Hand of the Vines."
+/decl/cultural_info/faction/unathi/gresis
+	name = FACTION_UNATHI_GRESIS
+	description = "The most powerful Krukzuz in the Diamond Peaks, the Gresis clan is the embodiment of the Diamond Peaks' culture. Having made vassals of \
+	various clans, their strength is nearly uncontested in the area. Xenophobic, they see off-world mining as a threat to the area they call home and have \
+	numerous attacks to drive them out of the area. Offworlders are careful to not step into territory that is controlled by the Gresis clan, less they risk \
+	less the risk attack from them and their vassals."
 
-/decl/cultural_info/faction/unathi/peak
-	name = FACTION_UNATHI_DIAMOND_PEAK
-	description = "Brutish and isolationist, Unathi from the Diamond Peaks are not fond of outsiders, be it other Unathi or offworlders. They care \
-	about themselves. Conflict and victory are core values of their clans and you can find most of them in their clan strongholds fighting in \
-	gladiatorial matches in hopes to further their personal faith in the Grand Strategem."
+/decl/cultural_info/faction/unathi/rahzakeh
+	name = FACTION_UNATHI_RAH_ZAKEH
+	description = "The most prominent yeosa faction, the Rah'Zakeh league's duties primarily focus on the yeosa and upholding the Aga-Eakhe. This includes \
+	a judicial body that handles piracy, tomb raiding, smuggling, etc. They resolve religious disputes and keep records of claims as well as \
+	function as arbiters. This is only a small fraction of their duties, with over two hundred yeosa'unathi shamans that handle smaller matters. \
+	Among them are the Sentinels, volunteers that function as a force to put the Tribunal's decisions into effect." 
 
-/decl/cultural_info/faction/unathi/swamp
-	name = FACTION_UNATHI_SALT_SWAMP
-	description = "Often considered the least traditional of the Unathi, Salt Swamp Unathi are noted for their friendliness and openness to outsiders, \
-	along with their knack for rituals that often get mistaken as 'parties' by Humans. The Fruitful Lights and Hand of the Vines both have numerous \
-	followers with these Unathi."
+/decl/cultural_info/faction/unathi/tersten
+	name = FACTION_UNATHI_TERSTEN_HEGEMONY
+	description = "The Tersten Hegemony was formed as a result of the clans that have taken residence on Tersten. Its primary focus, much like the Moghes Hegemony, \
+	is to promote unathi interests in trade and diplomacy. However, most if not all clans that have settled on Tersten have joined the Hegemony with their \
+	kaahnepos seated as members of the council. The Tersten Hegemony enjoys a great deal of peace with the Tersten people. Most issues between the clans \
+	and the Tersten government are handled through the Hegemony, acting in the interests of maintaining their relationship with Tersten."
 
-/decl/cultural_info/faction/unathi/yeosa
-	name = FACTION_UNATHI_YEOSA
-	description = "The strangest of the Unathi groups, the Yeosa are notable for their aquatic lifestyles. Not only are they adapted biologically to an \
-	amphibious lifestyle, their culture focuses around the islands and seas of Moghes. They are very friendly and open to outsiders, often trading their goods and technologies \
-	to the Sinta of the land. Most strangely is their third sex, the Caretakers, of whom have given up masculine or feminine sexual characteristics to ascend to near-divine status in their clans, \
-	being in charge of taking care of children, and doing a majority of the medical work."
-	language = LANGUAGE_UNATHI_YEOSA
-	secondary_langs = list(LANGUAGE_UNATHI_SINTA)
+/decl/cultural_info/faction/unathi/independent
+	name = FACTION_UNATHI_INDEPENDENT
+	description = "The number of clans and alliances on Moghes is too numerous to name. You are either from an independent clan, are a lone outcast, or are \
+	part of a Krukzuz. Whatever the case, you are not affiliated with the Hegemony or one of the large unathi factions listed."
+	

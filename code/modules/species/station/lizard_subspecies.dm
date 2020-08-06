@@ -22,12 +22,16 @@
 		)
 
 	additional_available_cultural_info = list(
+		TAG_CULTURE = list(
+			CULTURE_UNATHI_YEOSA_ABYSS,
+			CULTURE_UNATHI_YEOSA_LITTORAL
+		),
 		TAG_FACTION = list(
-			FACTION_UNATHI_YEOSA
+			FACTION_UNATHI_RAH_ZAKEH
 		)
 	)
 
-	default_cultural_info = list(TAG_FACTION = FACTION_UNATHI_YEOSA)
+	default_cultural_info = list(TAG_FACTION = FACTION_UNATHI_INDEPENDENT)
 
 	has_organ = list(
 		BP_HEAD =     /obj/item/organ/external/head/yeosa,
