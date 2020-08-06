@@ -16,8 +16,8 @@
 		/obj/item/weapon/melee/blamite,\
 		/obj/item/weapon/melee/energy/elite_sword,\
 		/obj/item/clothing/gloves/shield_gauntlet,\
-		/obj/item/weapon/armor_patch/cov,\
-		/obj/item/weapon/plastique/covenant,\
+		/obj/item/weapon/armor_patch,\
+		/obj/item/weapon/plastique,\
 		/obj/item/weapon/tank/emergency/oxygen/covenant)
 
 /obj/item/weapon/storage/belt/covenant_medic
