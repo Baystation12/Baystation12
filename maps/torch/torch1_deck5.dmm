@@ -12898,14 +12898,6 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/shuttle/petrov/hallwaya)
-"GU" = (
-/obj/structure/sign/warning/hot_exhaust{
-	dir = 4;
-	icon_state = "fire"
-	},
-/obj/effect/paint/silver,
-/turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/isolation)
 "GX" = (
 /obj/structure/bed/chair/padded/red,
 /obj/structure/cable/cyan{
@@ -15839,7 +15831,7 @@
 "Rt" = (
 /obj/effect/paint/silver,
 /turf/simulated/wall/ocp_wall,
-/area/shuttle/petrov/isolation)
+/area/shuttle/petrov/toxins)
 "Rv" = (
 /obj/machinery/atmospherics/pipe/manifold4w/visible,
 /turf/simulated/floor/tiled/techfloor,
@@ -49299,7 +49291,7 @@ yo
 wU
 wU
 wU
-GU
+yo
 VP
 VP
 fF
