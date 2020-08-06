@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - rscadd: "There is now visible and audible feedback for when you begin grabbing a humanlike mob. The message varies depending on if they are standing or not, and there's another message for when you let go."
