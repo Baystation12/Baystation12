@@ -74,6 +74,8 @@
 	current_grab.hit_with_grab(src)
 
 /obj/item/grab/resolve_attackby(atom/A, mob/user, var/click_params)
+	if (QDELETED(src) || !assailant)
+		return TRUE
 	assailant.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 	if(!A.grab_attack(src))
 		return ..()
@@ -306,4 +308,3 @@
 
 /obj/item/grab/proc/resolve_openhand_attack()
 		return current_grab.resolve_openhand_attack(src)
-
