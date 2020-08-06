@@ -1,4 +1,0 @@
-author: "Albens"
-delete-after: True
-changes: 
-  - tweak: "Drops job count of Life pod from 4 to 2. Too small of a map, too many slots."
