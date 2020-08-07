@@ -50,6 +50,8 @@
 	pass_flags = 0
 	block_enter_exit = 0
 	overlays.Cut()
+	for(var/turf/t in locs)
+		t.Crossed(src)
 
 /obj/vehicles/air/verb/takeoff_land()
 	set name = "Takeoff/Land"
