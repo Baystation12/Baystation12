@@ -30,10 +30,15 @@
 	if(istype(gm))
 		gm.allow_scan = 1
 
-		//unlock a spartan slot after a short delay
-		spawn(100)
-			var/datum/job/special_job = job_master.occupations_by_type[/datum/job/unsc/spartan_two]
-			if(special_job)
-				special_job.total_positions += 1
-				GLOB.UNSC.AnnounceCommand("A Spartan II is being deployed to the battlefront.")
+		//unlock some new job slots after a short delay
+		spawn(30)
+			GLOB.UNSC.unlock_special_job()
+			GLOB.COVENANT.unlock_special_job()
+
+		//this is janky, i really should fix spawns instead
+		//its necessary because the AI initial spawn is on the ODP
+		//without the ODP the AI will spawn somewhere random like the Cov ship
+		var/datum/job/ai_job = job_master.occupations_by_type[/datum/job/unsc_ai]
+		ai_job.total_positions = 0
+
 	. = ..()

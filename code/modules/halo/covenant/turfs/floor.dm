@@ -29,6 +29,10 @@
 	build_time = 30
 	apply_thermal_conductivity = 0.025
 	apply_heat_capacity = 325000
+	burnt_icon_base = "burnt"
+	broken_icon_base = "broken"
+	has_burn_range = 3
+	has_damage_range = 3
 
 /obj/item/stack/tile/covenant
 	name = "nanolaminate floor tile"

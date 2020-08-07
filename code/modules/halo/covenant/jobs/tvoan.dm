@@ -4,7 +4,7 @@
 	total_positions = -1
 	spawn_positions = -1
 	outfit_type = /decl/hierarchy/outfit/skirmisher_minor
-	access = list(240,250)
+	access = list(access_covenant)
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
 /datum/job/covenant/skirmmajor
@@ -13,7 +13,7 @@
 	spawn_positions = 2
 	faction_whitelist = "Covenant"
 	outfit_type = /decl/hierarchy/outfit/skirmisher_major
-	access = list(240,250)
+	access = list(access_covenant, access_covenant_command)
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
 /datum/job/covenant/skirmmurmillo
@@ -21,7 +21,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/skirmisher_murmillo
-	access = list(240,250)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
@@ -30,7 +30,7 @@
 	total_positions = 1
 	spawn_positions = 1
 	outfit_type = /decl/hierarchy/outfit/skirmisher_commando
-	access = list(240,250)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)
 
@@ -39,6 +39,6 @@
 	total_positions = 0
 	spawn_positions = 0
 	outfit_type = /decl/hierarchy/outfit/skirmisher_champion
-	access = list(240,250)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/kig_yar_skirmisher)

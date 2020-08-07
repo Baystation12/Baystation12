@@ -4,12 +4,12 @@
 	department_flag = COM
 	total_positions = 1
 	spawn_positions = 1
-	track_players = 1
+	track_players = TRUE
 	outfit_type = /decl/hierarchy/outfit/sangheili/shipmaster
 	is_whitelisted = 1
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	pop_balance_mult = 3
 
 /datum/job/covenant/sangheili_ultra
@@ -20,7 +20,7 @@
 	outfit_type = /decl/hierarchy/outfit/sangheili/ultra
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	pop_balance_mult = 3
 
 /datum/job/covenant/sangheili_honour_guard
@@ -28,22 +28,22 @@
 	total_positions = 0
 	spawn_positions = 0
 	outfit_type = /decl/hierarchy/outfit/sangheili/honour_guard
-	is_whitelisted = 1
+	is_whitelisted = TRUE
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_major
 	title = "Sangheili Major"
 	total_positions = 2
 	spawn_positions = 2
-	open_slot_on_death = 1
+	open_slot_on_death = TRUE
 	department_flag = COM
 	outfit_type = /decl/hierarchy/outfit/sangheili/major
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	pop_balance_mult = 2
 
 /datum/job/covenant/sangheili_minor
@@ -51,10 +51,10 @@
 	total_positions = 2
 	spawn_positions = 2
 	outfit_type = /decl/hierarchy/outfit/sangheili/minor
-	access = list(access_covenant, access_covenant_command)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	faction_whitelist = "Covenant"
 	whitelisted_species = list(/datum/species/sangheili)
-	open_slot_on_death = 1 //just like brutes, lowest rank of a leader caste can respawn indefinitely although still capped low
+	open_slot_on_death = TRUE //just like brutes, lowest rank of a leader caste can respawn indefinitely although still capped low
 	pop_balance_mult = 2
 
 
@@ -64,7 +64,7 @@
 	title = "Sangheili Ranger"
 	supervisors = "the Majors"
 	outfit_type = /decl/hierarchy/outfit/sangheili/eva
-	access = list(access_covenant)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	total_positions = 1
 	spawn_positions = 1
 	faction_whitelist = "Covenant"
@@ -75,8 +75,8 @@
 	title = "Special Operations Sangheili"
 	supervisors = "the Shipmaster"
 	outfit_type = /decl/hierarchy/outfit/sangheili/specops
-	access = list(access_covenant)
-	is_whitelisted = 1
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
+	is_whitelisted = TRUE
 	spawn_positions = 0
 	total_positions = 0
 	faction_whitelist = "Covenant"
@@ -90,5 +90,5 @@
 	faction_whitelist = "Covenant"
 	outfit_type = /decl/hierarchy/outfit/sangheili/zealot
 	whitelisted_species = list(/datum/species/sangheili)
-	access = list(access_covenant, access_covenant_command)
+	access = list(access_covenant, access_covenant_command, access_covenant_slipspace)
 	pop_balance_mult = 2

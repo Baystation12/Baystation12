@@ -1,6 +1,6 @@
 
 /datum/job/colonist/unsc
-	title = "UEG Colonist"
+	title = "Colonist"
 	spawn_faction = "UNSC"
 	supervisors = " the UEG and the UNSC"
 	selection_color = "#0A0A95"

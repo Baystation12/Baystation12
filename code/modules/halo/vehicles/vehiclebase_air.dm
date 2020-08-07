@@ -28,6 +28,9 @@
 
 	vehicle_size = 128//Way too big
 
+	var/list/blocked_types = list(/obj/machinery/artifact = /obj/effect/landmark/dropship_land_point/unsc/no_artifact)
+	var/list/blocking_atoms = list()
+
 /obj/vehicles/air/proc/takeoff_vehicle(var/message_n_sound_override = 0)
 	active = 1
 	change_elevation(2)
@@ -68,7 +71,6 @@
 	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
-	to_chat(usr,"<span class = 'notice'>You start prepping [src] for [active ? "landing" : "takeoff"].</span>")
 	visible_message("<span class = 'notice'>[src] starts prepping for [active?"landing":"takeoff"].</span>")
 	if(!do_after(usr,TAKEOFF_LAND_DELAY,src))
 		return
@@ -96,14 +98,8 @@
 	if(isnull(move_to_obj))
 		return
 
+	move_to_obj.visible_message("<span class = 'notice'>[src] flies in from the distance.</span>")
 	forceMove(get_turf(move_to_obj))
-
-/obj/vehicles/air/proc/proc_fly_to_waypoint()
-	var/selected_landing_point = input("Choose a landing point.","Landing Point Selection","Cancel") in create_waypoint_list() + list("Cancel")
-	if(selected_landing_point == "Cancel")
-		return
-	var/obj/selected_landing_point_obj = get_waypoint_from_name(selected_landing_point)
-	perform_move_sequence(selected_landing_point_obj)
 
 /obj/vehicles/air/verb/fly_to_waypoint()
 	set name = "Fly to waypoint"
@@ -111,6 +107,7 @@
 	set category = "Vehicle"
 	set src in range(1)
 
+	//pre-checks
 	if(!(usr in get_occupants_in_position("driver")))
 		to_chat(usr,"<span class = 'notice'>You need to be the driver of [name] to do that!</span>")
 		return
@@ -121,11 +118,28 @@
 		to_chat(usr,"<span class = 'notice'>[src] is still finalising long-range deployment preparations!</span>")
 		return
 
-	to_chat(usr,"<span class = 'notice'>You start prepping [src] for long-range flight..</span>")
-	visible_message("<span class = 'notice'>[src] starts prepping for long-range flight..</span>")
+	//choose the landing point
+	var/selected_landing_point = input("Choose a landing point.","Landing Point Selection","Cancel") in create_waypoint_list() + list("Cancel")
+	if(selected_landing_point == "Cancel")
+		return
+	var/obj/selected_landing_point_obj = get_waypoint_from_name(selected_landing_point)
+
+	//are we carrying something that cant go here?
+	if(blocking_atoms.len)
+		for(var/atom/movable/M in blocking_atoms)
+			for(var/check_type in blocked_types)
+				if(istype(M, check_type))
+					var/loc_type = blocked_types[check_type]
+					if(istype(selected_landing_point_obj, loc_type))
+						to_chat(usr,"<span class = 'notice'>You cannot fly there with [M].</span>")
+						return
+		return
+
+	visible_message("<span class = 'notice'>[src] starts prepping for long-range flight.</span>")
 	if(!do_after(usr,WAYPOINT_FLIGHT_DELAY,src))
 		return
-	proc_fly_to_waypoint()
+
+	perform_move_sequence(selected_landing_point_obj)
 
 /obj/vehicles/air/inactive_pilot_effects()
 	//Crashing this vehicle with potential casualties.
@@ -140,5 +154,16 @@
 	if(crash_sound)
 		playsound(src,crash_sound,100,0)
 	explosion(get_turf(src),-1,3,4,7)
+
+/obj/vehicles/air/put_cargo_item(var/mob/user, var/obj/O)
+	. = ..()
+	if(.)
+		for(var/checktype in blocked_types)
+			if(istype(O, checktype))
+				blocking_atoms.Add(O)
+
+/obj/vehicles/air/eject_cargo_item(var/obj/object_removed, var/atom/movable/target)
+	. = ..()
+	blocking_atoms -= object_removed
 
 #undef VEHICLE_CONNECT_DELAY

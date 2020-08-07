@@ -22,22 +22,23 @@
 /obj/vehicles/proc/put_cargo_item(var/mob/user, var/obj/O)
 
 	if(!src.Adjacent(user) || !src.Adjacent(O))
-		return
+		return FALSE
 	if(!can_put_cargo(O))
 		to_chat(user,"<span class = 'notice'>[O] can not be loaded into [src]</span>")
-		return
+		return FALSE
 	var/confirm = alert(user,"Place [O] into [src]'s storage?",,"Yes","No")
 	if(confirm != "Yes")
-		return
+		return FALSE
 	var/cargo_size = get_cargo_size(O)
 	if(cargo_size > 4 && !do_after(user, 30, O, progbar_on_user = 1))
-		return
+		return FALSE
 	user.visible_message("<span class = 'notice'>[user] loads [O] into [src].</span>")
 	user.drop_from_inventory(O)
 	O.loc = src
 	cargo_contents += O
 	used_cargo_space += base_storage_cost(get_cargo_size(O))
 	src.verbs |= /obj/vehicles/proc/get_cargo_item
+	return TRUE
 
 /obj/vehicles/proc/load_vehicle(var/obj/vehicles/v,var/mob/user)
 	if(!vehicle_carry_size)
@@ -91,6 +92,10 @@
 
 	var/mob/living/user = usr
 	if(!istype(user) || user.incapacitated())
+		return
+
+	if(user.loc == src)
+		to_chat(user, "<span class='notice'>You cannot retrieve cargo while inside [src].</span>")
 		return
 
 	var/list/cargo_list_names = list("Cancel")

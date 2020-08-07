@@ -21,15 +21,14 @@
 	if(!HasBelow(z))
 		return
 	var/turf/below = GetBelow(src)
-	if(istype(below, /turf/space))
-		return
-	var/area/A = below.loc
-	if(!A)
-		return
-	if(A.flags & AREA_EXTERNAL)
-		return
-	if(!below.density && istype(below.loc, /area/space))
-		return
+	if(below)
+		var/area/A = below.loc
+		if(!A)
+			return
+		if(A.flags & AREA_EXTERNAL)
+			return
+		if(!below.density && istype(below.loc, /area/space))
+			return
 
 	// We alter area type before the turf to ensure the turf-change-event-propagation is handled as expected.
 	if(GLOB.using_map.base_floor_area)

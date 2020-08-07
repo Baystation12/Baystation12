@@ -1,7 +1,7 @@
 
 /obj/structure/covenant_slipspace
 	name = "Long Range Slipspace Generator"
-	icon = 'code/modules/halo/overmap/icons/slipspace_drive_cov.dmi'
+	icon = 'code/modules/halo/overmap/slipspace/slipspace_drive_cov.dmi'
 	icon_state = "slipspace"
 	desc = "An incredibly advanced machine capable of precise slipspace jumps, modified for single-purpose fast transportation to a pre-set endpoint."
 	anchored = 1
@@ -13,12 +13,9 @@
 	var/slipspace_jump_time = 0
 
 /obj/structure/covenant_slipspace/allowed(var/mob/user)
-	var/mob/living/carbon/human/h = user
-	if(istype(h) && h.species.type in COVENANT_SPECIES_AND_MOBS)
-		return 1
-	if(user && user.type in COVENANT_SPECIES_AND_MOBS)
-		return 1
-	return 0
+	if(!is_covenant_mob(user))
+		return FALSE
+	return ..()
 
 /obj/structure/covenant_slipspace/attack_hand(var/mob/user)
 	if(allowed(user))

@@ -3,42 +3,7 @@
 #define BASE_SCANNER_DESTROYABLE_AMOUNT 4
 #define SCAN_JAM_LOC_NAME "Orbital Defense Platform"
 
-// OC + variant specific objective, GM linked//
-
-/datum/objective/phase2_scan
-	short_text = "Successfully scan the colony for the holy relic."
-	explanation_text = "Deploy scanners at the marked locations, and protect them. The scan will reveal the location of the relic."
-	win_points = 50
-
-/datum/objective/phase2_scan/check_completion()
-	var/datum/game_mode/outer_colonies/gm = ticker.mode
-	if(!istype(gm))
-		return 0
-	if(gm.scan_percent >= 100)
-		return 1
-
-/datum/objective/phase2_scan_unsc
-	short_text = "Stop the Covenant from scanning the colony."
-	explanation_text = "Search and destroy for Covenant scanners. Eliminating enough will disrupt their scans permenantly and cause a rout."
-	win_points = 50
-	lose_points = 50
-
-/datum/objective/phase2_scan_unsc/check_completion()
-	var/datum/game_mode/outer_colonies/gm = ticker.mode
-	if(!istype(gm))
-		return 0
-	if(gm.scan_percent < 100)
-		return 1
-
-/obj/effect/overmap/ship/unsc_odp_cassius/Destroy()
-	var/datum/game_mode/outer_colonies/gm = ticker.mode
-	if(istype(gm))
-		gm.allow_scan = 1
-
-		GLOB.global_announcer.autosay("Our Orbital Defence Platform has fallen! Regroup at the ONI base, and get ready to strike out at covenant scanning devices.", "HIGHCOMM SIGINT", RADIO_FLEET, LANGUAGE_GALCOM)
-		GLOB.global_announcer.autosay("The human defences are down! Plant the holy scanners, and locate the relic! Do not be distracted by the human's groundside fortifications!", "Covenant Overwatch", RADIO_COV, LANGUAGE_SANGHEILI)
-
-	. = ..()
+#include "objectives.dm"
 
 /datum/game_mode/outer_colonies
 	name = "Outer Colonies"
@@ -349,10 +314,15 @@
 			winning_faction = faction
 		else if(!second_faction && winning_faction != faction)
 			second_faction = faction
+		if(faction.max_points)
+			to_debug_listeners("faction [faction.name] has max_points: [faction.max_points] prior to being reset at round end")
+		faction.max_points = 0
+
 		for(var/datum/objective/objective in faction.all_objectives)
 			if(objective.fake)
 				continue
 			var/result = objective.check_completion()
+			faction.max_points += objective.get_win_points()
 			if(result == 1)
 				text += "<span class='good'>Completed (+[objective.get_win_points()]): [objective.short_text]</span><br>"
 				faction.points += objective.get_win_points()
@@ -373,14 +343,19 @@
 		text += "<h4>Total [faction.name] Score: [faction.points] points</h4><br>"
 
 	//these victory tiers will need balancing depending on objectives and points
-	var/win_ratio
+	var/win_ratio = 0
 	if(second_faction.points == winning_faction.points)
 		text += "<h2>Tie! [winning_faction.name] and [second_faction.name] ([winning_faction.points] points)</h2>"
 	else if(all_points <= 0)
 		text += "<h2>Stalemate! All factions failed in their objectives.</h2>"
 	else
+		/*
 		//calculate the win type based on whether other faction scored points and how many of the winning faction objectives are completed
 		win_ratio = (winning_faction.points) / (all_points + winning_faction.max_points - winning_faction.points)
+		*/
+
+		//calculate points based on how many of their own objectives were completed
+		win_ratio = winning_faction.points / winning_faction.max_points
 
 		var/win_type = "Pyrrhic"
 		if(win_ratio <= 0.34)

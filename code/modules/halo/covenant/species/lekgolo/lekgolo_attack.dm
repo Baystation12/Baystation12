@@ -101,7 +101,7 @@
 		if(active_weapon.fire_sound)
 			playsound_local(loc,active_weapon.fire_sound,110,1,,5)
 		current_target = null
-		active_weapon.charge_amount -= active_weapon.charge_drain
+		//active_weapon.charge_amount -= active_weapon.charge_drain
 
 
 

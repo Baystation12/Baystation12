@@ -5,7 +5,7 @@
 	name = "Covenant"
 	var/list/objective_types = list()
 	enemy_faction_names = list("UNSC","Insurrection", "Human Colony","Flood")
-	commander_titles = list("Sangheili Shipmaster")
+	commander_job_types = list(/datum/job/covenant/sangheili_shipmaster)
 	default_language = LANGUAGE_SANGHEILI
 	ship_types = list(\
 		/obj/effect/overmap/ship/npc_ship/combat/covenant,\
@@ -27,18 +27,27 @@
 		/mob/living/simple_animal/hostile/covenant/elite/ultra = 2,\
 		/mob/living/simple_animal/hostile/covenant/elite/zealot = 1)
 	default_radio_channel = RADIO_COV
+	special_jobs = list(/datum/job/covenant/brute_captain,\
+		/datum/job/covenant/skirmchampion,\
+		/datum/job/covenant/sangheili_zealot)
 
 /datum/faction/covenant/New()
 	. = ..()
 	leader_name = "[pick(GLOB.sanshyuum_titles)] of [pick(GLOB.sanshyuum_virtues)]"
 
+/datum/faction/covenant/unlock_special_job()
+	. = ..()
+	var/datum/job/special_job = .
+	GLOB.COVENANT.AnnounceCommand("The heirarchs have dispatched a [special_job.title] to the system.")
+
+/*
 /datum/faction/covenant/get_commander(var/datum/mind/check_mind)
 
 	if(!. && check_mind && check_mind.assigned_role == "Sangheili - Shipmaster")
 		return check_mind
 
 	. = ..()
-
+*/
 
 
 /* UNSC */
@@ -47,7 +56,7 @@
 	name = "UNSC"
 	contraband_gear = "UNSC"
 	enemy_faction_names = list("Covenant","Insurrection","Flood")
-	commander_titles = list("UNSC Bertels Commanding Officer")
+	commander_job_types = list(/datum/job/unsc/commanding_officer)
 	ship_types = list(\
 		/obj/effect/overmap/ship/npc_ship/combat/unsc,\
 		/obj/effect/overmap/ship/npc_ship/combat/unsc/medium_armed,\
@@ -63,19 +72,26 @@
 	default_radio_channel = RADIO_SQUAD
 	income = 1000
 	income_delay = 15 MINUTES
+	special_jobs = list(/datum/job/unsc/spartan_two)
 
 /datum/faction/unsc/Initialize()
 	. = ..()
 	leader_name = "[pick("Vice Admiral","Rear Admiral","Admiral","Fleet Admiral")] [leader_name]"
 	money_account = create_account("UNSC", 1000)
 
+/datum/faction/unsc/unlock_special_job()
+	. = ..()
+	var/datum/job/special_job = .
+	GLOB.UNSC.AnnounceCommand("A [special_job.title] is being deployed to the battlefront.")
+
+/*
 /datum/faction/unsc/get_commander(var/datum/mind/check_mind)
 
 	if(!. && check_mind && check_mind.assigned_role == "UNSC Bertels Commanding Officer")
 		return check_mind
 
 	. = ..()
-
+*/
 /datum/faction/oni
 	name = "ONI"
 	contraband_gear = "UNSC"
@@ -100,7 +116,7 @@
 	name = "Insurrection"
 	contraband_gear = "Insurrection"
 	enemy_faction_names = list("UNSC","Covenant","Flood")
-	commander_titles = list("Insurrectionist Commander")
+	commander_job_types = list(/datum/job/geminus_innie/commander)
 	ship_types = list(\
 		/obj/effect/overmap/ship/npc_ship/combat/innie,\
 		/obj/effect/overmap/ship/npc_ship/combat/innie/medium_armed,\

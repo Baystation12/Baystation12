@@ -23,8 +23,8 @@
 	var/list/available_quests = list()
 	var/list/processing_quests = list()
 
-	var/datum/job/commander_job		//this needs to be set in the gamemode code
-	var/commander_titles = list()	//checks in order of priority for objective purposes
+	var/datum/job/commander_job			//this needs to be set in the gamemode code
+	var/commander_job_types = list()	//checks in order of priority for objective purposes
 	var/has_flagship = 0
 	var/flagship_slipspaced = 0
 	var/has_base = 0
@@ -51,6 +51,8 @@
 	var/income = 0	//credits
 	var/income_delay = 15 MINUTES
 	var/next_income = 0
+	var/list/special_jobs = list()
+	var/next_special_job = 0
 
 	var/list/listening_programs = list()
 
@@ -175,25 +177,47 @@
 	return archived_base_name
 
 /datum/faction/proc/get_commander(var/datum/mind/check_mind)
-	if(!commander_job)
-		for(var/title in commander_titles)
-			commander_job = job_master.occupations_by_title[title]
-			if(commander_job)
-				break
+
+	commander_job = null
+	for(var/job_type in commander_job_types)
+		commander_job = job_master.occupations_by_type[job_type]
+		if(commander_job)
+			break
 
 	if(commander_job)
+		//if(!. && check_mind && check_mind.assigned_role == "UNSC Bertels Commanding Officer")
+		if(check_mind && check_mind in commander_job.assigned_players)
+			return check_mind
+
 		for(var/mind in commander_job.assigned_players)
 			return mind
 
-/datum/faction/proc/get_objective_delivery_areas()
-	var/list/found_areas = list()
+/datum/faction
+	var/obj/effect/overmap/delivery_target
+
+/datum/faction/proc/find_objective_delivery_target()
 	var/obj/effect/overmap/delivery_target = get_base()
 	if(!delivery_target)
 		delivery_target = get_flagship()
 
+/datum/faction/proc/get_objective_delivery_areas()
+	if(!delivery_target)
+		find_objective_delivery_target()
+
+	var/list/found_areas = list()
 	if(delivery_target)
 		for(var/cur_area in typesof(delivery_target.parent_area_type) - delivery_target.parent_area_type)
 			var/area/A = locate(cur_area)
 			found_areas.Add(A)
 
 	return found_areas
+
+/datum/faction/proc/unlock_special_job()
+	//override this in children for faction announcements
+	if(special_jobs.len)
+		var/datum/job/special_job = job_master.occupations_by_type[pick(special_jobs)]
+		if(special_job)
+			special_job.total_positions += 1
+			. = special_job
+	else
+		log_and_message_admins("Warning, attempted to unlock a special job slot for [src.name] but none were listed!")

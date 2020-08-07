@@ -199,7 +199,8 @@
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(get_base_turf(src.z))
+			//src.ChangeTurf(get_base_turf(src.z))
+			dismantle_wall(no_product = TRUE)
 			return
 		if(2.0)
 			if(prob(75))

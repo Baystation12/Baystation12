@@ -9,26 +9,50 @@
 	icon = 'code/modules/halo/turfs/floor_tech.dmi'
 	icon_base = "techfloor_gray"
 	build_type = /obj/item/stack/tile/floor_tech
+	burnt_icon_base = "burnt"
+	broken_icon_base = "broken"
+	has_burn_range = 1
+	has_damage_range = 1
 
 /decl/flooring/tiling/tech/white
 	icon_base = "techfloor_white"
 	build_type = /obj/item/stack/tile/floor_tech_white
+	burnt_icon_base = "burnt"
+	broken_icon_base = "broken"
+	has_burn_range = 3
+	has_damage_range = 3
 
 /decl/flooring/tiling/tech/grid
 	icon_base = "techfloor_grid"
 	build_type = /obj/item/stack/tile/floor_tech_grid
+	burnt_icon_base = "burnt"
+	broken_icon_base = "broken"
+	has_burn_range = 3
+	has_damage_range = 3
 
 /decl/flooring/tiling/tech/maint
 	icon_base = "techmaint"
 	build_type = /obj/item/stack/tile/floor_tech_maint
+	burnt_icon_base = "burnt"
+	broken_icon_base = "broken"
+	has_burn_range = 3
+	has_damage_range = 3
 
 /decl/flooring/tiling/tech/steel
 	icon_base = "steel_grid"
 	build_type = /obj/item/stack/tile/floor_tech_steel
+	burnt_icon_base = "burnt"
+	broken_icon_base = "broken"
+	has_burn_range = 3
+	has_damage_range = 3
 
 /decl/flooring/tiling/tech/ridged
 	icon_base = "steel_ridged"
 	build_type = /obj/item/stack/tile/floor_tech_ridged
+	burnt_icon_base = "burnt"
+	broken_icon_base = "broken"
+	has_burn_range = 3
+	has_damage_range = 3
 
 
 

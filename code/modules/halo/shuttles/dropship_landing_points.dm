@@ -24,6 +24,8 @@
 	faction = "unsc"
 	icon_state = "dropship_unsc"
 
+/obj/effect/landmark/dropship_land_point/unsc/no_artifact
+
 /obj/effect/landmark/dropship_land_point/covenant
 	name = "Covenant Land Point"
 	faction = "covenant"
