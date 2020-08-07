@@ -6140,9 +6140,6 @@
 /turf/simulated/floor/bluegrid,
 /area/turret_protected/ai)
 "ml" = (
-/obj/effect/landmark/start{
-	name = "AI"
-	},
 /obj/machinery/requests_console{
 	department = "AI";
 	departmentType = 5;
