@@ -289,7 +289,7 @@
 			playsound(src, 'sound/items/Welder.ogg', 80, 1)
 			construction_state = 0
 			set_anchored(0)
-	else
+	else if (!istype(W, /obj/item/weapon/rcd))
 		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
 		if(W.damtype == BRUTE || W.damtype == BURN)
 			user.do_attack_animation(src)
