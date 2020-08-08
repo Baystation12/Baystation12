@@ -1,0 +1,4 @@
+author: "DeadmonWonderland"
+delete-after: True
+changes: 
+  - rscadd: "Adds more unsimulated tiles, mostly useful for building areas for events without worrying about atmos. Includes some tiles that are sitting unused in the files."
