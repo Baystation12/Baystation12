@@ -24471,6 +24471,14 @@
 /obj/effect/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/dark,
 /area/command/armoury)
+"oor" = (
+/obj/effect/floor_decal/industrial/warning,
+/obj/machinery/computer/upload/ai{
+	dir = 8;
+	icon_state = "computer"
+	},
+/turf/simulated/floor/blackgrid,
+/area/security/nuke_storage)
 "oox" = (
 /obj/effect/floor_decal/corner/research,
 /obj/machinery/firealarm{
@@ -30154,6 +30162,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/medical/equipstorage)
+"vES" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1;
+	icon_state = "warning"
+	},
+/obj/machinery/computer/upload/robot{
+	dir = 8
+	},
+/turf/simulated/floor/blackgrid,
+/area/security/nuke_storage)
 "vFa" = (
 /obj/structure/table/rack,
 /obj/item/weapon/shield/riot,
@@ -43315,11 +43333,11 @@ mkb
 axR
 axR
 axR
-axR
+vES
 axR
 aDL
 axR
-axR
+oor
 axR
 axR
 axR

@@ -2014,9 +2014,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
-"dm" = (
-/turf/simulated/wall/r_wall/hull,
-/area/turret_protected/ai_foyer)
 "dn" = (
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/office/cl/backroom)
@@ -2125,80 +2122,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/maintenance/substation/bridge)
-"dx" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/airless,
-/area/space)
-"dy" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/airless,
-/area/space)
-"dz" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/floor_decal/industrial/warning/corner,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/airless,
-/area/space)
-"dA" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/floor_decal/industrial/warning,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/airless,
-/area/space)
-"dB" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8;
-	icon_state = "warningcorner"
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/airless,
-/area/space)
-"dC" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/airless,
-/area/solar/bridge)
-"dD" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "dE" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -2229,6 +2152,9 @@
 	dir = 2;
 	health = 1e+007
 	},
+/obj/item/weapon/aiModule/solgov,
+/obj/item/weapon/aiModule/reset,
+/obj/item/weapon/aiModule/purge,
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/heads/office/ce)
 "dG" = (
@@ -2425,15 +2351,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
-"ea" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "eb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -2485,22 +2402,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
-"eh" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/airless,
-/area/space)
-"ei" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai_outer_chamber)
-"ej" = (
-/obj/machinery/ai_status_display,
-/turf/simulated/wall/r_wall/hull,
-/area/turret_protected/ai_outer_chamber)
 "ek" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -3131,15 +3032,6 @@
 /obj/structure/catwalk,
 /turf/simulated/floor/plating,
 /area/maintenance/bridge/aftstarboard)
-"fi" = (
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/airless,
-/area/space)
 "fj" = (
 /obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/reinforced/airless,
@@ -3200,30 +3092,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
-"fq" = (
-/obj/machinery/porta_turret{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/outline/grey,
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
-"fr" = (
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
-"fs" = (
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -28;
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
-	},
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
-"ft" = (
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
 "fu" = (
 /obj/structure/sign/warning/high_voltage{
 	dir = 8;
@@ -3804,19 +3672,6 @@
 /obj/item/device/radio,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
-"gt" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai_foyer)
-"gu" = (
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
 "gv" = (
 /obj/machinery/computer/modular/preset/cardslot/command{
 	dir = 8;
@@ -3945,22 +3800,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
-"gW" = (
-/obj/machinery/shield_diffuser,
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "bridge_eva_outer";
-	locked = 1;
-	name = "Bridge EVA External Access"
-	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/hallway/primary/bridge/aft)
 "gX" = (
 /obj/structure/sign/warning/airlock,
 /turf/simulated/wall/r_wall/hull,
@@ -4005,34 +3844,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/aquila/cockpit)
-"hd" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/porta_turret{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai_foyer)
-"he" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"hf" = (
-/obj/machinery/alarm{
-	pixel_y = 24
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"hg" = (
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"hh" = (
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
 "hi" = (
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/structure/table/rack{
@@ -4163,11 +3974,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 4
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
 "hK" = (
@@ -4230,58 +4036,6 @@
 /obj/structure/bed/chair/shuttle/blue,
 /turf/simulated/floor/tiled/dark,
 /area/aquila/mess)
-"hP" = (
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Fore Starboard Access";
-	dir = 4
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"hQ" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"hR" = (
-/obj/machinery/ai_slipper,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_x = 0;
-	pixel_y = -24
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"hS" = (
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Aft Starboard";
-	dir = 8
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
 "hV" = (
 /obj/machinery/door/firedoor,
 /obj/machinery/door/airlock/sol{
@@ -4545,21 +4299,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/crew_quarters/heads/office/xo)
-"iC" = (
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"iD" = (
-/obj/machinery/ai_status_display,
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai)
-"iE" = (
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai)
 "iI" = (
 /obj/structure/cable/green{
 	d2 = 2;
@@ -4791,61 +4530,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/passenger)
-"jm" = (
-/obj/effect/floor_decal/industrial/outline/yellow,
-/obj/machinery/atmospherics/portables_connector,
-/obj/machinery/portable_atmospherics/canister/empty,
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
-"jn" = (
-/obj/machinery/access_button{
-	command = "cycle_exterior";
-	frequency = 1379;
-	master_tag = "ai_core_airlock";
-	name = "exterior access button";
-	pixel_x = -24;
-	pixel_y = 0;
-	req_access = list("ACCESS_AI_UPLOAD")
-	},
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"jo" = (
-/obj/machinery/door/airlock/highsecurity{
-	icon_state = "closed";
-	locked = 1;
-	name = "AI Core Access"
-	},
-/turf/simulated/floor/tiled/dark/airless,
-/area/turret_protected/ai)
-"jp" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/computer/modular/preset/medical,
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"jq" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/computer/modular/preset/cardslot/command,
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Starboard"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"jr" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/computer/modular/preset/security,
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"js" = (
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
 "jw" = (
 /obj/effect/floor_decal/corner/blue,
 /turf/simulated/floor/tiled/dark,
@@ -5055,11 +4739,6 @@
 	locked = 1;
 	name = "Bridge EVA Internal Access"
 	},
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/bridge/aft)
 "kb" = (
@@ -5169,80 +4848,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/passenger)
-"kj" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/red,
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai_foyer)
-"kk" = (
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "ai_core_outer";
-	locked = 1;
-	name = "AI Core Internal Access"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"kl" = (
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 4;
-	pixel_x = -22
-	},
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"km" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/porta_turret{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"kn" = (
-/obj/machinery/flasher{
-	pixel_x = -32;
-	pixel_y = 32
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"ko" = (
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"kp" = (
-/obj/machinery/flasher{
-	pixel_x = 32;
-	pixel_y = 32
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"kq" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/porta_turret{
-	dir = 8
-	},
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"kr" = (
-/obj/machinery/door/airlock/highsecurity{
-	name = "AI Outer Ring Access"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_outer_chamber)
 "kv" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -5398,11 +5003,6 @@
 /area/hallway/primary/bridge/aft)
 "kS" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
 /obj/effect/floor_decal/corner/blue/mono,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/bridge/aft)
@@ -5475,195 +5075,6 @@
 	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/security/bridgecheck)
-"kY" = (
-/obj/machinery/teleport/hub,
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/turret_protected/ai_foyer)
-"kZ" = (
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/atmospherics/pipe/simple/hidden/red{
-	dir = 5;
-	icon_state = "intact"
-	},
-/obj/machinery/power/apc/super/critical{
-	dir = 1;
-	is_critical = 1;
-	name = "north bump";
-	pixel_y = 24
-	},
-/obj/effect/floor_decal/techfloor{
-	dir = 8;
-	icon_state = "techfloor_edges"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai_foyer)
-"la" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 8
-	},
-/obj/structure/sign/warning/lethal_turrets{
-	pixel_y = 32
-	},
-/obj/structure/table/rack,
-/obj/item/clothing/suit/space,
-/obj/item/clothing/mask/breath,
-/obj/item/clothing/head/helmet/space/fishbowl,
-/obj/item/weapon/tank/oxygen,
-/obj/effect/floor_decal/industrial/warning/corner,
-/turf/simulated/floor/tiled/dark/monotile,
-/area/turret_protected/ai_foyer)
-"lb" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/ai_status_display,
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai_foyer)
-"lc" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/porta_turret{
-	dir = 8
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 8;
-	icon_state = "warningcorner"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"ld" = (
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/machinery/embedded_controller/radio/airlock/airlock_controller{
-	frequency = 1379;
-	id_tag = "ai_core_airlock";
-	name = "AI Core Airlock Console";
-	pixel_x = 24;
-	pixel_y = 0;
-	req_access = list("ACCESS_AI_UPLOAD");
-	tag_airpump = "ai_core_pump";
-	tag_chamber_sensor = "ai_core_sensor";
-	tag_exterior_door = "ai_core_outer";
-	tag_interior_door = "ai_core_inner"
-	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 2;
-	id_tag = "ai_core_pump"
-	},
-/obj/machinery/light{
-	dir = 4;
-	icon_state = "tube1"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 1;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"le" = (
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"lf" = (
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/power/apc/super/critical{
-	dir = 8;
-	name = "west bump";
-	pixel_x = -24
-	},
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"lg" = (
-/obj/structure/cable/cyan{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/machinery/power/sensor{
-	name = "Powernet Sensor - AI Subgrid";
-	name_tag = "AI Subgrid"
-	},
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/structure/table/steel_reinforced,
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"lh" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai)
-"li" = (
-/obj/structure/cable/cyan{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"lj" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/porta_turret{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_outer_chamber)
-"lk" = (
-/obj/structure/sign/warning/lethal_turrets,
-/turf/simulated/wall/r_wall/hull,
-/area/turret_protected/ai_outer_chamber)
 "lm" = (
 /obj/machinery/hologram/holopad/longrange,
 /obj/effect/landmark{
@@ -5884,11 +5295,6 @@
 	dir = 4
 	},
 /obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable/green{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
@@ -6051,259 +5457,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/bridge)
-"md" = (
-/obj/machinery/teleport/station,
-/obj/structure/sign/kiddieplaque{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/turret_protected/ai_foyer)
-"me" = (
-/obj/machinery/bluespace_beacon,
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 6;
-	icon_state = "intact"
-	},
-/obj/effect/floor_decal/techfloor{
-	dir = 8;
-	icon_state = "techfloor_edges"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai_foyer)
-"mf" = (
-/obj/machinery/atmospherics/binary/pump/on{
-	dir = 4;
-	target_pressure = 200
-	},
-/obj/machinery/access_button{
-	command = "cycle_interior";
-	frequency = 1379;
-	master_tag = "ai_core_airlock";
-	name = "interior access button";
-	pixel_x = 24;
-	pixel_y = -24;
-	req_access = list("ACCESS_AI_UPLOAD")
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/turret_protected/ai_foyer)
-"mg" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 4;
-	icon_state = "intact"
-	},
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "ai_core_inner";
-	locked = 1;
-	name = "AI Internal Access"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"mh" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue{
-	dir = 4;
-	icon_state = "intact"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"mi" = (
-/obj/machinery/ai_slipper,
-/obj/machinery/atmospherics/pipe/manifold/hidden/blue{
-	dir = 4;
-	icon_state = "map"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"mj" = (
-/obj/machinery/status_display,
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai)
-"mk" = (
-/obj/machinery/ai_slipper,
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Fore";
-	dir = 4
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"ml" = (
-/obj/machinery/requests_console{
-	department = "AI";
-	departmentType = 5;
-	pixel_x = -32;
-	pixel_y = -32
-	},
-/obj/machinery/newscaster/security_unit{
-	pixel_x = 32;
-	pixel_y = -32
-	},
-/obj/machinery/button/blast_door{
-	desc = "A remote control-switch for the AI core maintenance door.";
-	id_tag = "AICore";
-	name = "AI Core Shutter Control";
-	pixel_x = 24;
-	pixel_y = 24
-	},
-/obj/machinery/flasher{
-	pixel_x = 24;
-	pixel_y = 38
-	},
-/obj/machinery/turretid/stun{
-	check_synth = 1;
-	name = "AI Chamber turret control";
-	pixel_x = -32;
-	pixel_y = 32
-	},
-/obj/item/device/radio/intercom{
-	dir = 1;
-	frequency = 1475;
-	pixel_y = -22
-	},
-/obj/item/device/radio/intercom{
-	dir = 4;
-	pixel_x = -21
-	},
-/obj/item/device/radio/intercom{
-	frequency = 1485;
-	pixel_y = 22
-	},
-/obj/structure/cable/cyan{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/turf/simulated/floor/greengrid,
-/area/turret_protected/ai)
-"mm" = (
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/bluegrid/airless,
-/area/turret_protected/ai)
-"mn" = (
-/obj/effect/landmark{
-	name = "lightsout"
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/bluegrid/airless,
-/area/turret_protected/ai)
-"mo" = (
-/obj/machinery/ai_slipper,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"mp" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/power/smes/buildable{
-	charge = 5e+006;
-	input_attempt = 1;
-	input_level = 125000;
-	output_attempt = 1;
-	output_level = 100000
-	},
-/obj/structure/cable/cyan,
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Aft";
-	dir = 8
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"mq" = (
-/obj/machinery/ai_slipper,
-/obj/structure/cable/cyan{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"ms" = (
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Auxiliary Access";
-	dir = 1
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -28;
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	pixel_y = 22
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_outer_chamber)
-"mt" = (
-/obj/machinery/ai_slipper,
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_outer_chamber)
-"mu" = (
-/obj/machinery/power/apc/super/critical{
-	dir = 1;
-	is_critical = 1;
-	name = "north bump";
-	pixel_y = 24
-	},
-/obj/structure/cable/cyan{
-	d2 = 8;
-	icon_state = "0-8"
-	},
-/obj/machinery/light,
-/obj/effect/floor_decal/industrial/warning{
-	dir = 4;
-	icon_state = "warning"
-	},
-/obj/machinery/turretid/stun{
-	pixel_y = -32
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_outer_chamber)
-"mv" = (
-/obj/machinery/door/airlock/vault/bolted{
-	name = "AI Core External Access"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_outer_chamber)
-"mw" = (
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8
-	},
-/turf/simulated/floor/reinforced/airless,
-/area/space)
 "mx" = (
 /obj/effect/paint/red,
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
@@ -6723,177 +5876,6 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/space)
-"ns" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/airless,
-/area/space)
-"nt" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/wall/r_wall/hull,
-/area/turret_protected/ai_outer_chamber)
-"nu" = (
-/obj/machinery/firealarm{
-	dir = 8;
-	pixel_x = -24;
-	pixel_y = 0
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/computer/teleporter{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
-/area/turret_protected/ai_foyer)
-"nv" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -28;
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/blue{
-	dir = 8;
-	icon_state = "map"
-	},
-/obj/machinery/light,
-/obj/effect/floor_decal/techfloor{
-	dir = 8;
-	icon_state = "techfloor_edges"
-	},
-/obj/effect/floor_decal/industrial/warning{
-	dir = 8;
-	icon_state = "warning"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai_foyer)
-"nw" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Entry";
-	dir = 1
-	},
-/obj/machinery/turretid/stun{
-	check_synth = 1;
-	name = "AI Entry Chamber turret control";
-	pixel_x = 0;
-	pixel_y = -32
-	},
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/turret_protected/ai_foyer)
-"nx" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai_foyer)
-"ny" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/porta_turret{
-	dir = 8
-	},
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/airlock_sensor{
-	frequency = 1379;
-	id_tag = "ai_core_sensor";
-	pixel_x = -24;
-	pixel_y = 0
-	},
-/obj/effect/floor_decal/industrial/warning/corner,
-/obj/effect/floor_decal/industrial/warning/corner{
-	dir = 1;
-	icon_state = "warningcorner"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"nz" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 8;
-	pixel_x = 22
-	},
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/airlock{
-	dir = 1;
-	id_tag = "ai_core_pump"
-	},
-/obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"nA" = (
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -25;
-	pixel_y = 0
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"nB" = (
-/obj/machinery/power/terminal{
-	dir = 1;
-	icon_state = "term"
-	},
-/obj/structure/cable/green{
-	d2 = 4;
-	icon_state = "0-4"
-	},
-/obj/structure/table/steel_reinforced,
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"nC" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai)
-"nD" = (
-/obj/structure/cable/green{
-	d1 = 2;
-	d2 = 8;
-	icon_state = "2-8"
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 4;
-	pixel_x = -22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
 "nE" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1;
@@ -7154,51 +6136,6 @@
 "on" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/aux_eva)
-"oq" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/blue,
-/turf/simulated/wall/r_wall/prepainted,
-/area/turret_protected/ai_foyer)
-"or" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/obj/machinery/door/airlock/external{
-	frequency = 1379;
-	icon_state = "closed";
-	id_tag = "ai_core_outer";
-	locked = 1;
-	name = "AI Core Internal Access"
-	},
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_foyer)
-"os" = (
-/obj/machinery/flasher{
-	pixel_x = -32;
-	pixel_y = -32
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"ot" = (
-/obj/machinery/flasher{
-	pixel_x = 32;
-	pixel_y = -32
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai)
-"ou" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
 "ox" = (
 /obj/structure/cable/green,
 /obj/structure/cable/green{
@@ -7474,41 +6411,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
-"pm" = (
-/obj/effect/floor_decal/industrial/outline/blue,
-/obj/machinery/atmospherics/portables_connector{
-	dir = 1
-	},
-/obj/machinery/portable_atmospherics/canister/air,
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
-"pn" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/computer/modular/preset/civilian{
-	dir = 1;
-	icon_state = "console"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"po" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Port";
-	dir = 1
-	},
-/obj/machinery/computer/modular/preset/engineering{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
-"pp" = (
-/obj/effect/floor_decal/industrial/outline/grey,
-/obj/machinery/computer/modular/preset/aislot/research{
-	dir = 1;
-	icon_state = "console"
-	},
-/turf/simulated/floor/tiled/dark,
-/area/turret_protected/ai)
 "py" = (
 /obj/structure/filingcabinet/chestdrawer{
 	dir = 1
@@ -8067,59 +6969,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
-"qJ" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Fore Port Access";
-	dir = 4
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"qK" = (
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"qL" = (
-/obj/machinery/ai_slipper,
-/obj/structure/cable/green{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"qM" = (
-/obj/structure/cable/green{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/machinery/camera/all/command{
-	c_tag = "AI Core - Aft Port";
-	dir = 8
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
 "qO" = (
 /turf/simulated/wall/r_wall/prepainted,
 /area/bridge/storage)
@@ -8455,25 +7304,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
-"rF" = (
-/obj/machinery/light,
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"rG" = (
-/obj/machinery/alarm{
-	dir = 1;
-	pixel_y = -28;
-	req_access = list(list("ACCESS_ENGINE_EQUIP","ACCESS_ATMOS"))
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
-"rH" = (
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/bluegrid,
-/area/turret_protected/ai_foyer)
 "rI" = (
 /obj/structure/bed/chair/comfy/blue{
 	dir = 8;
@@ -8760,24 +7590,6 @@
 	},
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
-"sv" = (
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
-"sw" = (
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
-	},
-/obj/item/device/radio/intercom/locked/ai_private{
-	dir = 1;
-	pixel_y = -22
-	},
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
 "sx" = (
 /obj/structure/sign/warning/high_voltage{
 	dir = 8;
@@ -9301,12 +8113,6 @@
 /obj/item/weapon/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white/monotile,
 /area/aquila/medical)
-"tP" = (
-/obj/machinery/alarm{
-	pixel_y = 24
-	},
-/turf/simulated/floor/reinforced,
-/area/turret_protected/ai_outer_chamber)
 "tR" = (
 /obj/machinery/hologram/holopad,
 /turf/simulated/floor/wood/walnut,
@@ -13954,23 +12760,6 @@
 /obj/item/weapon/storage/medical_lolli_jar,
 /turf/simulated/floor/tiled/white,
 /area/crew_quarters/heads/office/cmo)
-"Kg" = (
-/obj/machinery/door/airlock/vault/bolted{
-	name = "AI Core Backup Access"
-	},
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id_tag = "AICore";
-	name = "AI Core Security Shutters"
-	},
-/obj/structure/cable/cyan{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/obj/effect/floor_decal/industrial/hatch/yellow,
-/turf/simulated/floor/tiled/techmaint,
-/area/turret_protected/ai_outer_chamber)
 "Kh" = (
 /obj/structure/window/reinforced{
 	dir = 1
@@ -14018,6 +12807,7 @@
 /obj/structure/noticeboard{
 	pixel_y = 30
 	},
+/obj/item/weapon/aiModule/freeform,
 /turf/simulated/floor/carpet/blue,
 /area/crew_quarters/heads/cobed)
 "Ks" = (
@@ -15613,9 +14403,6 @@
 /obj/item/weapon/storage/secure/briefcase,
 /turf/simulated/floor/tiled/dark/monotile,
 /area/bridge/storage)
-"Rx" = (
-/turf/simulated/wall/r_wall/hull,
-/area/turret_protected/ai_outer_chamber)
 "Rz" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8;
@@ -33865,10 +32652,10 @@ cN
 bD
 bD
 gz
-dx
-ea
-ea
-gW
+ad
+ad
+ad
+gV
 hJ
 hJ
 hJ
@@ -34067,7 +32854,7 @@ bD
 bD
 bD
 ad
-dy
+ad
 Oc
 ad
 gX
@@ -34269,7 +33056,7 @@ bD
 bD
 ad
 ad
-dy
+ad
 ad
 DN
 DN
@@ -34471,7 +33258,7 @@ cO
 ad
 ad
 ad
-dy
+ad
 ad
 DN
 DN
@@ -34673,7 +33460,7 @@ cP
 ad
 ad
 ad
-dy
+ad
 ad
 DN
 DN
@@ -34875,7 +33662,7 @@ cP
 ad
 ad
 ad
-dy
+ad
 ad
 ad
 fj
@@ -35077,7 +33864,7 @@ cP
 ad
 ad
 ad
-dy
+ad
 ad
 ad
 gY
@@ -35276,10 +34063,10 @@ ah
 av
 aI
 cP
-dx
-ea
-ea
-fi
+ad
+ad
+ad
+ad
 ad
 ad
 gY
@@ -35478,7 +34265,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 ad
@@ -35680,7 +34467,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 fj
@@ -35882,7 +34669,7 @@ ah
 av
 aI
 cP
-dz
+fj
 eb
 eb
 fk
@@ -36084,7 +34871,7 @@ ah
 av
 aI
 cP
-dA
+gY
 ec
 SA
 SA
@@ -36286,7 +35073,7 @@ ah
 av
 aI
 cP
-dA
+gY
 Ib
 eH
 fm
@@ -36488,7 +35275,7 @@ ah
 av
 aI
 cP
-dA
+gY
 Ib
 eI
 fn
@@ -36690,7 +35477,7 @@ ah
 av
 aI
 cP
-dA
+gY
 Ib
 eJ
 fm
@@ -36892,7 +35679,7 @@ ah
 av
 aI
 cP
-dA
+gY
 ec
 SA
 SA
@@ -37094,7 +35881,7 @@ ah
 av
 aI
 cP
-dB
+fp
 eg
 eg
 nr
@@ -37296,7 +36083,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 fp
@@ -37498,7 +36285,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 ad
@@ -37700,7 +36487,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 ad
@@ -37902,7 +36689,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 ad
@@ -38104,7 +36891,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 ad
@@ -38306,7 +37093,7 @@ ah
 av
 aI
 cP
-dy
+ad
 ad
 ad
 ad
@@ -38508,7 +37295,7 @@ ah
 av
 aI
 cQ
-dC
+aH
 aH
 aH
 aH
@@ -38710,7 +37497,7 @@ ah
 av
 aI
 ad
-dy
+ad
 ad
 ad
 ad
@@ -38912,20 +37699,20 @@ ah
 av
 aI
 ad
-dD
-eh
-eh
-eh
-eh
-eh
-eh
-eh
-eh
-eh
-eh
-eh
-eh
-ns
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -39124,11 +37911,11 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-ej
-nt
-Rx
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -39321,21 +38108,21 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-nt
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -39522,23 +38309,23 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-dm
-kY
-md
-nu
-dm
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -39723,25 +38510,25 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-fr
-fr
-fr
-jm
-kj
-kZ
-me
-nv
-oq
-pm
-fr
-fr
-fr
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -39924,27 +38711,27 @@ aI
 ad
 ad
 ad
-Rx
-Rx
-Rx
-ft
-fr
-ei
-ei
-ei
-gt
-la
-mf
-nw
-gt
-ei
-ei
-ei
-fr
-sv
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -40125,29 +38912,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-Rx
-fr
-fr
-ei
-gt
-gt
-gt
-gt
-lb
-mg
-nx
-gt
-gt
-gt
-gt
-ei
-fr
-fr
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -40327,29 +39114,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fq
-fr
-ei
-gt
-gt
-hd
-jn
-gt
-lc
-mh
-ny
-gt
-jn
-hd
-gt
-gt
-ei
-fr
-fq
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -40529,29 +39316,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-gt
-hP
-iC
-iC
-kk
-ld
-mi
-nz
-or
-ou
-ou
-qJ
-gt
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -40731,29 +39518,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-hd
-hQ
-hh
-iE
-iE
-iE
-mj
-iE
-iE
-iE
-hh
-qK
-hd
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -40933,29 +39720,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-he
-hQ
-hd
-jo
-kl
-le
-mk
-ko
-kl
-jo
-hd
-qK
-rF
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -41135,29 +39922,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fs
-ei
-gt
-hf
-hQ
-iD
-iE
-km
-iE
-iE
-iE
-km
-iE
-iD
-qK
-rG
-gt
-ei
-tP
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -41337,29 +40124,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-hd
-hQ
-iE
-jp
-kn
-iE
-ml
-iE
-os
-pn
-iE
-qK
-hd
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -41539,29 +40326,29 @@ av
 aI
 ad
 ad
-ej
-Rx
-ft
-ei
-gt
-hg
-hR
-iE
-jq
-ko
-iE
-mm
-iE
-ko
-po
-iE
-qL
-rH
-gt
-ei
-sv
-Rx
-ej
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -41741,29 +40528,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-hd
-hQ
-iE
-jr
-km
-iE
-mn
-iE
-km
-pp
-iE
-qK
-hd
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -41943,29 +40730,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-hh
-hQ
-iD
-iE
-kp
-lf
-mo
-nA
-ot
-iE
-iD
-qK
-hh
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -42145,29 +40932,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-he
-hQ
-hd
-iE
-kq
-lg
-mp
-nB
-kq
-iE
-hd
-qK
-rF
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -42347,29 +41134,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-hd
-hQ
-hh
-iE
-iE
-lh
-mj
-nC
-iE
-iE
-hh
-qK
-hd
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -42549,29 +41336,29 @@ av
 aI
 ad
 ad
-Rx
-Rx
-fr
-ei
-gt
-gt
-hS
-iC
-iC
-iC
-li
-mq
-nD
-ou
-ou
-ou
-qM
-gt
-gt
-ei
-fr
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -42751,29 +41538,29 @@ aw
 aI
 ad
 ad
-Rx
-Rx
-fq
-fr
-ei
-gt
-gt
-hd
-js
-hh
-hd
-hQ
-hd
-hh
-js
-hd
-gt
-gt
-ei
-fr
-fq
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ah
@@ -42953,29 +41740,29 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-fr
-fr
-ei
-ei
-ei
-ei
-ei
-ei
-Kg
-ei
-ei
-ei
-ei
-ei
-ei
-fr
-fr
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -43156,27 +41943,27 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-gu
-fr
-ei
-ei
-ei
-ei
-ei
-ms
-ei
-ei
-ei
-ei
-ei
-fr
-sw
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -43359,25 +42146,25 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-fr
-fr
-fr
-fr
-kr
-lj
-mt
-lj
-kr
-fr
-fr
-fr
-fr
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -43562,23 +42349,23 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-mu
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -43765,21 +42552,21 @@ ad
 ad
 ad
 ad
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
-lk
-mv
-ej
-Rx
-Rx
-Rx
-Rx
-Rx
-Rx
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
+ad
 ad
 ad
 ad
@@ -43973,9 +42760,9 @@ ad
 ad
 ad
 ad
-fp
-mw
-nE
+ad
+ad
+ad
 ad
 ad
 ad
