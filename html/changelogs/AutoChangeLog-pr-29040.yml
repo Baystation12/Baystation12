@@ -1,4 +1,0 @@
-author: "DeadmonWonderland"
-delete-after: True
-changes: 
-  - bugfix: "Quick fix to Unathi cultures so proper languages are now assigned based on your culture."
