@@ -2,7 +2,7 @@
    icon = 'unishi.dmi'
 
 /area/unishi/bridge
-	name = "\improper Bridge"
+	name = "\improper SRV Verne Bridge"
 	icon_state = "bridge"
 
 /area/unishi/engineering

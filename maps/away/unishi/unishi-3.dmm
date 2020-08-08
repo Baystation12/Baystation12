@@ -24,120 +24,110 @@
 /turf/simulated/floor/airless,
 /area/unishi/bridge)
 "ag" = (
-/obj/machinery/computer/ship/engines,
-/turf/simulated/floor/tiled,
+/obj/structure/table/reinforced,
+/obj/random/action_figure,
+/turf/simulated/floor/tiled/white/monotile,
 /area/unishi/bridge)
 "ah" = (
-/obj/machinery/computer/ship/navigation,
-/turf/simulated/floor/tiled,
+/obj/structure/table/reinforced,
+/obj/machinery/recharger,
+/turf/simulated/floor/tiled/white/monotile,
 /area/unishi/bridge)
 "ai" = (
 /obj/machinery/computer/ship/helm,
-/obj/machinery/atmospherics/unary/vent_pump/on,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/white/monotile,
 /area/unishi/bridge)
 "aj" = (
 /obj/machinery/computer/ship/sensors,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"ak" = (
-/obj/machinery/computer/telecomms/server,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"al" = (
-/obj/structure/table/reinforced,
-/obj/item/paper/cig/fancy,
-/obj/random/action_figure,
-/obj/machinery/recharger,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"am" = (
-/obj/machinery/light,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"an" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"ao" = (
-/obj/effect/floor_decal/cti,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/machinery/atmospherics/unary/vent_scrubber/on,
 /turf/simulated/floor/tiled/white/monotile,
 /area/unishi/bridge)
-"ap" = (
-/obj/structure/bed/chair{
+"ak" = (
+/obj/structure/table/reinforced,
+/obj/random/smokes,
+/turf/simulated/floor/tiled/white/monotile,
+/area/unishi/bridge)
+"al" = (
+/obj/machinery/computer/ship/navigation{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/unishi/bridge)
+"ao" = (
+/obj/structure/bed/chair/comfy/brown{
 	dir = 1
 	},
-/obj/machinery/light,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/white,
 /area/unishi/bridge)
 "aq" = (
-/turf/simulated/floor/tiled,
+/obj/machinery/computer/ship/engines{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white/monotile,
 /area/unishi/bridge)
 "ar" = (
 /obj/structure/table/reinforced,
-/obj/item/trash/chips,
-/obj/item/trash/driedfish,
-/turf/simulated/floor/tiled,
+/obj/random/snack,
+/turf/simulated/floor/tiled/white/monotile,
 /area/unishi/bridge)
 "as" = (
 /turf/simulated/wall/r_wall,
 /area/unishi/bridge)
 "at" = (
+/obj/machinery/hologram/holopad/longrange/remoteship,
+/turf/simulated/floor/tiled/white/monotile,
+/area/unishi/bridge)
+"au" = (
+/obj/structure/closet/emcloset,
+/turf/simulated/floor/tiled/white/monotile,
+/area/unishi/bridge)
+"av" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/white,
+/area/unishi/bridge)
+"aw" = (
+/obj/structure/bed/chair/comfy/brown{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/white,
+/area/unishi/bridge)
+"ax" = (
+/obj/effect/floor_decal/cti,
+/turf/simulated/floor/tiled/white/monotile,
+/area/unishi/bridge)
+"ay" = (
+/obj/structure/table/reinforced,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/random/snack,
+/turf/simulated/floor/tiled/white/monotile,
+/area/unishi/bridge)
+"az" = (
 /obj/machinery/door/airlock/civilian,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"au" = (
-/obj/structure/bed/padded,
-/obj/structure/curtain/open/bed,
-/obj/item/weapon/bedsheet/brown,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"av" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"aw" = (
-/obj/item/trash/driedfish,
-/obj/machinery/light/small,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"ax" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"ay" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"az" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_crew,
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 8
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 4
-	},
+/obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aA" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/white,
+/area/unishi/bridge)
+"aB" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/turf/simulated/floor/tiled,
-/area/unishi/bridge)
-"aB" = (
-/obj/machinery/light/small,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/white,
 /area/unishi/bridge)
 "aC" = (
 /obj/machinery/shipsensors,
@@ -146,32 +136,18 @@
 "aD" = (
 /turf/simulated/wall/titanium,
 /area/unishi/bridge)
-"aE" = (
-/obj/structure/closet/crate/internals,
-/turf/simulated/floor,
-/area/unishi/bridge)
-"aF" = (
-/obj/structure/closet/toolcloset,
-/turf/simulated/floor,
-/area/unishi/bridge)
 "aG" = (
-/obj/structure/fireaxecabinet,
-/turf/simulated/wall/r_wall,
-/area/unishi/bridge)
-"aH" = (
-/obj/structure/closet/l3closet,
-/turf/simulated/floor,
-/area/unishi/bridge)
-"aI" = (
-/obj/structure/closet/radiation,
-/turf/simulated/floor,
-/area/unishi/bridge)
-"aJ" = (
-/turf/simulated/floor,
+/obj/structure/fireaxecabinet{
+	pixel_y = 32
+	},
+/obj/machinery/atmospherics/unary/vent_scrubber/on{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aK" = (
 /obj/machinery/light/small,
-/turf/simulated/floor,
+/turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aL" = (
 /obj/machinery/alarm{
@@ -180,25 +156,18 @@
 	pixel_y = 0;
 	req_access = newlist()
 	},
-/turf/simulated/floor,
+/turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aM" = (
 /obj/structure/cable{
 	icon_state = "2-8"
 	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
-	dir = 4
-	},
-/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
-	dir = 8
-	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aN" = (
-/obj/machinery/atmospherics/unary/vent_pump/on{
-	dir = 8
-	},
-/turf/simulated/floor,
+/turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "aO" = (
 /turf/simulated/floor/airless,
@@ -254,13 +223,13 @@
 	pixel_y = -30
 	},
 /turf/simulated/floor,
-/area/unishi/bridge)
+/area/unishi/living)
 "aX" = (
 /obj/machinery/door/airlock/highsecurity/bolted{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
-/area/unishi/bridge)
+/area/unishi/living)
 "aY" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 8
@@ -284,14 +253,14 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
-/area/unishi/bridge)
+/area/unishi/living)
 "ba" = (
 /obj/structure/closet/crate/freezer/rations,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
-/area/unishi/bridge)
+/area/unishi/living)
 "bb" = (
 /obj/structure/bedsheetbin,
 /obj/structure/closet/wardrobe,
@@ -687,14 +656,11 @@
 	pixel_y = -28;
 	req_access = newlist()
 	},
-/obj/machinery/atmospherics/unary/vent_scrubber/on{
-	dir = 4
-	},
 /obj/structure/cable{
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor,
+/turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "ch" = (
 /obj/random/medical/lite,
@@ -1062,9 +1028,9 @@
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "cU" = (
-/obj/effect/submap_landmark/spawnpoint/unishi_researcher,
-/turf/simulated/floor/tiled,
-/area/unishi/living)
+/obj/random/trash,
+/turf/simulated/floor/tiled/white,
+/area/unishi/bridge)
 "cV" = (
 /obj/machinery/vending/dinnerware,
 /turf/simulated/floor/tiled,
@@ -1073,10 +1039,6 @@
 /obj/structure/hygiene/sink/kitchen{
 	pixel_x = 0;
 	pixel_y = 32
-	},
-/obj/machinery/vending/boozeomat{
-	pixel_x = 32;
-	req_access = newlist()
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/kitchen)
@@ -1515,6 +1477,7 @@
 /obj/structure/curtain/open/bed,
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /obj/item/weapon/bedsheet/yellow,
+/obj/effect/submap_landmark/spawnpoint/unishi_researcher,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "dY" = (
@@ -1698,6 +1661,7 @@
 	},
 /obj/item/weapon/bedsheet/orange,
 /obj/machinery/light/small,
+/obj/effect/submap_landmark/spawnpoint/unishi_crew,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
 "ev" = (
@@ -2023,6 +1987,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/unishi/living)
+"gR" = (
+/obj/structure/closet/radiation,
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
+"ko" = (
+/obj/machinery/vending/boozeomat{
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled,
+/area/unishi/kitchen)
 "pd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -2052,7 +2026,10 @@
 /turf/simulated/floor/wood,
 /area/unishi/living)
 "ur" = (
-/obj/machinery/hologram/holopad/longrange/remoteship,
+/turf/simulated/floor/tiled/white,
+/area/unishi/bridge)
+"vj" = (
+/obj/structure/closet/crate/internals,
 /turf/simulated/floor/tiled,
 /area/unishi/bridge)
 "vn" = (
@@ -2078,6 +2055,36 @@
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/unishi/living)
+"Ja" = (
+/obj/structure/closet/emcloset,
+/obj/machinery/alarm{
+	dir = 4;
+	pixel_x = -23;
+	pixel_y = 0;
+	req_access = newlist()
+	},
+/turf/simulated/floor/tiled/white/monotile,
+/area/unishi/bridge)
+"KH" = (
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply{
+	dir = 8
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
+"Mi" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
+"RH" = (
+/obj/machinery/atmospherics/unary/vent_pump/on{
+	dir = 8
+	},
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
 "Um" = (
 /obj/machinery/light/small{
 	dir = 4;
@@ -2089,6 +2096,14 @@
 /obj/structure/railing/mapped,
 /turf/simulated/open,
 /area/unishi/living)
+"Yg" = (
+/obj/structure/closet/toolcloset,
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
+"ZP" = (
+/obj/structure/closet/l3closet,
+/turf/simulated/floor/tiled,
+/area/unishi/bridge)
 
 (1,1,1) = {"
 aa
@@ -6721,7 +6736,7 @@ bN
 cD
 dg
 cR
-cU
+bp
 cY
 bf
 dj
@@ -6801,14 +6816,14 @@ aa
 af
 af
 al
+aq
+Ja
 as
-au
-aw
-as
-aE
-aJ
+vj
+aL
+aN
 aR
-aR
+bg
 bg
 be
 be
@@ -6823,7 +6838,7 @@ bN
 cE
 cL
 cR
-cU
+bp
 cZ
 bf
 dk
@@ -6902,12 +6917,12 @@ aa
 aa
 af
 ag
-am
+ur
+aw
+ur
 as
-au
-ax
-as
-aF
+Yg
+aN
 aK
 aR
 aW
@@ -6925,7 +6940,7 @@ bN
 cF
 cM
 cR
-cU
+bp
 da
 bf
 bf
@@ -7004,10 +7019,10 @@ aa
 ac
 ad
 ah
-an
+ur
+ax
+aA
 as
-au
-ay
 as
 aG
 cg
@@ -7110,8 +7125,8 @@ ao
 at
 av
 az
-at
-av
+Mi
+KH
 aM
 aS
 aY
@@ -7208,12 +7223,12 @@ aa
 aa
 ad
 aj
-ap
+ur
+ax
+aB
 as
-au
-aA
 as
-as
+RH
 aN
 aD
 aZ
@@ -7311,12 +7326,12 @@ aa
 af
 ak
 ur
+ur
+cU
 as
-au
-aq
-as
-aH
-aJ
+ZP
+aN
+aN
 aD
 ba
 be
@@ -7413,14 +7428,14 @@ aa
 af
 af
 ar
-as
+ay
 au
-aB
 as
-aI
+gR
+aN
 aK
 aD
-aD
+be
 be
 bp
 bt
@@ -7520,7 +7535,7 @@ as
 as
 as
 as
-aJ
+aN
 aT
 bb
 be
@@ -7639,7 +7654,7 @@ cG
 cK
 cG
 dA
-dA
+ko
 dA
 dA
 dA

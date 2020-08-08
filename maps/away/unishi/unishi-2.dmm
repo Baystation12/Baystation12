@@ -2348,7 +2348,6 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/item/remains,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "fW" = (
@@ -2363,7 +2362,6 @@
 /obj/structure/window/phoronreinforced{
 	dir = 4
 	},
-/obj/item/remains,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "fY" = (
@@ -2418,7 +2416,6 @@
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "gg" = (
-/obj/effect/decal/remains,
 /obj/item/clothing/under/rank/chief_engineer,
 /obj/random/shoes,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
@@ -2469,7 +2466,6 @@
 "gm" = (
 /obj/machinery/atmospherics/binary/pump/high_power,
 /obj/structure/window/phoronreinforced,
-/obj/item/remains,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
@@ -2485,11 +2481,11 @@
 /obj/machinery/atmospherics/pipe/simple/visible/yellow{
 	dir = 5
 	},
+/obj/item/remains/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gq" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
-/obj/effect/decal/remains,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gr" = (
@@ -2507,7 +2503,6 @@
 /area/unishi/smresearch)
 "gs" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/yellow,
-/obj/item/remains,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 2;
 	level = 2
@@ -2537,24 +2532,12 @@
 /obj/structure/lattice,
 /turf/space,
 /area/space)
-"gx" = (
-/obj/machinery/door/blast/regular{
-	density = 0;
-	dir = 4;
-	icon_state = "pdoor0";
-	id_tag = "Biohazard";
-	name = "Biohazard Shutter";
-	opacity = 0
-	},
-/obj/item/remains,
-/turf/simulated/floor,
-/area/unishi/smresearch)
 "gy" = (
-/obj/effect/decal/remains,
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
+/obj/item/remains/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gz" = (
@@ -2579,7 +2562,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gB" = (
-/obj/item/remains,
 /obj/random/shoes,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/scrubbers,
@@ -2627,6 +2609,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
+/obj/item/remains/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "gE" = (
@@ -2698,7 +2681,6 @@
 "gL" = (
 /obj/effect/decal/cleanable/ash,
 /obj/effect/decal/cleanable/blood,
-/obj/item/clothing/under/blazer,
 /obj/machinery/computer/modular/preset/engineering{
 	dir = 4;
 	icon_state = "console"
@@ -2710,7 +2692,6 @@
 /area/unishi/smresearch)
 "gM" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/remains,
 /obj/random/shoes,
 /obj/item/clothing/under/bluepyjamas,
 /turf/simulated/floor/tiled/techfloor,
@@ -2799,10 +2780,6 @@
 /obj/structure/sign/warning/radioactive,
 /turf/simulated/wall/titanium,
 /area/unishi/smresearch)
-"gX" = (
-/obj/item/remains,
-/turf/simulated/floor/tiled/techfloor,
-/area/unishi/smresearch)
 "gY" = (
 /obj/item/weapon/paper/crumpled/bloody{
 	info = "I FUCKING KNEW that piece of shit was no good. To whoever finds this, his name is Robert Moreno. He is one of the undergrads here, or at least his story went. The fucker lured us here on the pretense of a huge emergency, and the second we came in, the shutters closed behind us. We have been hearing gunshots through the ship throughout. The emitter was locked and on, and kept hitting that rock thing that one of the profs was studying, and we cant get the damn thing to stop. It chewed through everything we put in front of it and it doesnt look like it's stopping any time soon. The grad student in charge of this monstrosity is screaming and telling us that it's all over. We've been vomiting non stop, and I think our time here is running out."
@@ -2876,7 +2853,6 @@
 /area/space)
 "hh" = (
 /obj/effect/decal/cleanable/blood,
-/obj/effect/decal/remains,
 /obj/item/clothing/suit/storage/toggle/labcoat/science{
 	name = "\improper labcoat"
 	},
@@ -2884,7 +2860,7 @@
 /area/unishi/smresearch)
 "hi" = (
 /obj/effect/decal/cleanable/blood,
-/obj/item/remains,
+/obj/item/remains/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "hj" = (
@@ -2957,7 +2933,6 @@
 	name = "Biohazard Shutter";
 	opacity = 0
 	},
-/obj/effect/decal/remains,
 /obj/random/shoes,
 /turf/simulated/floor,
 /area/unishi/smresearch)
@@ -2972,10 +2947,8 @@
 /area/unishi/smresearch)
 "hs" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green,
-/obj/effect/decal/remains,
 /obj/random/shoes,
 /obj/machinery/light/small,
-/obj/item/remains,
 /turf/simulated/floor/tiled/techfloor,
 /area/unishi/smresearch)
 "ht" = (
@@ -2995,6 +2968,7 @@
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 9
 	},
+/obj/effect/decal/cleanable/ash,
 /turf/simulated/floor/reinforced/nitrogen/engine,
 /area/unishi/smresearch)
 "hw" = (
@@ -3016,10 +2990,6 @@
 /turf/simulated/wall/ocp_wall,
 /area/unishi/smresearch)
 "hA" = (
-/turf/simulated/floor,
-/area/unishi/smresearch)
-"hB" = (
-/obj/item/remains,
 /turf/simulated/floor,
 /area/unishi/smresearch)
 "hC" = (
@@ -7706,7 +7676,7 @@ fL
 fL
 gf
 fL
-gx
+gf
 fL
 gf
 fL
@@ -7810,7 +7780,7 @@ gg
 go
 gy
 gL
-gX
+hq
 hh
 hq
 fK
@@ -8324,7 +8294,7 @@ hc
 hm
 gT
 fN
-hB
+hA
 gW
 aa
 aa
