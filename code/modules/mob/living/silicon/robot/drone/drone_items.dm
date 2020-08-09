@@ -399,6 +399,14 @@
 		else if(istype(W,/obj/item/weapon/material/shard/shrapnel))
 			if(metal)
 				metal.add_charge(1000)
+		else if(istype(W,/obj/item/stack/material/rods))
+			var/obj/item/stack/material/rods/R = W
+			var/amt = R.get_amount()
+			if(amt > 3)
+				to_chat(user, SPAN_NOTICE("The amount of rods is too high to fit into your decompiler."))
+				continue
+			if(metal)
+				metal.add_charge(500*amt)				
 		else if(istype(W,/obj/item/weapon/material/shard))
 			if(glass)
 				glass.add_charge(1000)
