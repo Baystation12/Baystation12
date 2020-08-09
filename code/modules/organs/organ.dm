@@ -14,6 +14,7 @@ var/list/organ_cache = list()
 	// Status tracking.
 	var/status = 0                    // Various status flags (such as robotic)
 	var/vital                         // Lose a vital limb, die immediately.
+	var/vulnerable					  // Indicates if the organ is vulnerable (was recently hurt)
 
 	// Reference data.
 	var/mob/living/carbon/human/owner // Current mob owning the organ.

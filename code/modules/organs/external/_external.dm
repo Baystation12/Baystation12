@@ -564,6 +564,7 @@ This function completely restores a damaged organ to perfect condition.
 obj/item/organ/external/proc/process_soreness()
 	if(!soreness || damage)
 		return
+	vulnerable = TRUE
 	switch(soreness)
 		if(101 to 200)
 			if(pain <= 20)
@@ -584,6 +585,9 @@ obj/item/organ/external/proc/process_soreness()
 	soreness = Floor(soreness * 0.98) - 1											//Slower decrease as soreness lowers. Faster if in bed
 	if(owner.buckled && owner.buckled.type == /obj/structure/bed)
 		soreness -= 2
+	if(soreness <=0)
+		soreness = 0
+		vulnerable = FALSE
 
 /obj/item/organ/external/Process()
 	if(owner)
