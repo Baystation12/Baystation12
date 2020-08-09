@@ -1,0 +1,8 @@
+author: "Boznar"
+delete-after: True
+changes: 
+  - maptweak: "Removes areas associated with the AI"
+  - maptweak: "Removes the now defunct AI core"
+  - maptweak: "Important law boards are now in the CE rack, and upload consoles are in the vault"
+  - maptweak: "Removes the AI upload, and replaces it with a rec room"
+  - maptweak: "Moves EVA down to deck four, and replaces it with an observation dome"
