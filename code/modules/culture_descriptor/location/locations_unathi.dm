@@ -6,6 +6,13 @@
 	back to life, or to become strong enough that they don't have to."
 	ruling_body = "Clan Hegemony"
 	distance = "20 light-years"
+		secondary_langs = list(
+		LANGUAGE_UNATHI_SINTA,
+		LANGUAGE_UNATHI_YEOSA,
+		LANGUAGE_SIGN,
+		LANGUAGE_HUMAN_EURO,
+		LANGUAGE_SPACER
+	)
 
 /decl/cultural_info/location/ouere
 	name = HOME_SYSTEM_OUERE
@@ -15,7 +22,14 @@ no clear consensus on how to treat this new world - either as a logical extensio
 or simply as a resource base for improving the home planet. Many colonists, artifact hunters, and ostracised groups have \
 flocked to the planet, with Markesheli communities growing quite rapidly in numbers compared to other parts of Moghes. "
 	ruling_body = "Clan Hegemony"
-	distance = "20 light-years"
+	distance = "20 light-years"	
+	secondary_langs = list(
+		LANGUAGE_UNATHI_SINTA,
+		LANGUAGE_UNATHI_YEOSA,
+		LANGUAGE_SIGN,
+		LANGUAGE_HUMAN_EURO,
+		LANGUAGE_SPACER
+	)
 
 /decl/cultural_info/location/offworld
 	name = HOME_SYSTEM_OFFWORLD
