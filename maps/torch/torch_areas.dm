@@ -939,6 +939,14 @@
 	name = "\improper Mess Hall"
 	icon_state = "cafeteria"
 
+/area/crew_quarters/recreation
+	name = "\improper Recreation"
+	icon_state = "crew_quarters"
+
+/area/crew_quarters/observation
+	name = "\improper Observation"
+	icon_state = "fitness"
+
 /area/crew_quarters/galley
 	name = "\improper Galley"
 	icon_state = "kitchen"
@@ -1054,19 +1062,6 @@
 	name = "\improper Fourth Deck Security Checkpoint"
 	icon_state = "checkpoint"
 
-// AI
-/area/turret_protected/ai_foyer
-	name = "\improper AI Chamber Foyer"
-	icon_state = "ai_foyer"
-	sound_env = SMALL_ENCLOSED
-	req_access = list(access_ai_upload)
-
-/area/turret_protected/ai_outer_chamber
-	name = "\improper Outer AI Chamber"
-	icon_state = "ai_chamber"
-	sound_env = SMALL_ENCLOSED
-	req_access = list(access_ai_upload)
-
 // Medbay
 
 /area/medical/equipstorage
@@ -1179,6 +1174,11 @@
 /area/solar/bridge
 	name = "\improper Bridge Solar Array"
 	icon_state = "panelsS"
+
+/area/eva
+	name = "\improper EVA Storage"
+	icon_state = "eva"
+	req_access = list(access_eva)
 
 /area/aux_eva
 	name = "\improper Command EVA Storage"
@@ -1594,35 +1594,6 @@ area/assembly/robotics/office
 /area/tcommsat/computer
 	name = "\improper Telecoms Control Room"
 	icon_state = "tcomsatcomp"
-
-// AI
-
-/area/ai_monitored
-	name = "AI Monitored Area"
-
-/area/ai_monitored/storage/eva
-	name = "\improper EVA Storage"
-	icon_state = "eva"
-	req_access = list(access_eva)
-
-/area/turret_protected/ai
-	name = "\improper AI Chamber"
-	icon_state = "ai_chamber"
-	ambience = list('sound/ambience/ambimalf.ogg')
-	req_access = list(access_ai_upload)
-
-/area/turret_protected/ai_upload
-	name = "\improper AI Upload Chamber"
-	icon_state = "ai_upload"
-	ambience = list('sound/ambience/ambimalf.ogg')
-	req_access = list(access_ai_upload)
-
-/area/turret_protected/ai_upload_foyer
-	name = "\improper  AI Upload Access"
-	icon_state = "ai_foyer"
-	ambience = list('sound/ambience/ambimalf.ogg')
-	sound_env = SMALL_ENCLOSED
-	req_access = list(access_ai_upload)
 
 // Chapel
 
