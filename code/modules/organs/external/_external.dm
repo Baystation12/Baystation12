@@ -561,7 +561,7 @@ This function completely restores a damaged organ to perfect condition.
 	return 0
 
 //This proc handles all the soreness related logic.
-obj/item/organ/external/proc/process_soreness()
+/obj/item/organ/external/proc/process_soreness()
 	if(!soreness || damage)
 		return
 	vulnerable = TRUE
@@ -573,7 +573,7 @@ obj/item/organ/external/proc/process_soreness()
 			if(pain <=30)
 				add_pain(25)
 
-	if(owner.life_tick % 5 == 0)													//Don't spam the chat
+	if(owner.life_tick % 5 == 0)	//Don't spam the chat
 		switch(soreness)
 			if(1 to 100)
 				to_chat(owner, SPAN_NOTICE("Your [name] feels sore."))
@@ -582,8 +582,8 @@ obj/item/organ/external/proc/process_soreness()
 			if(201 to INFINITY)
 				to_chat(owner, SPAN_NOTICE("Your [name] hurts very badly!"))
 
-	soreness = Floor(soreness * 0.98) - 1											//Slower decrease as soreness lowers. Faster if in bed
-	if(owner.buckled && owner.buckled.type == /obj/structure/bed)
+	soreness = Floor(soreness * 0.98) - 1	//Slower decrease as soreness lowers. Faster if in bed
+	if(owner.buckled && owner.buckled.type == /obj/structure/bed)	//TODO Comfiness
 		soreness -= 2
 	if(soreness <=0)
 		soreness = 0
