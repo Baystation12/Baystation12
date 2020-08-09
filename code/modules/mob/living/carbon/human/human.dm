@@ -714,9 +714,9 @@
 		if(stomach.ingested.total_volume)
 			stomach.ingested.trans_to_holder(D.reagents, 15)
 		return
-			
+
 	var/turf/location = loc
-	
+
 	visible_message(SPAN_DANGER("\The [src] throws up!"),SPAN_DANGER("You throw up!"))
 	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
 	if(istype(location, /turf/simulated))
@@ -1641,7 +1641,7 @@
 			var/feels = 1 + round(org.pain/100, 0.1)
 			var/brutedamage = org.brute_dam * feels
 			var/burndamage = org.burn_dam * feels
-
+			var/soreness = org.soreness
 			switch(brutedamage)
 				if(1 to 20)
 					status += "slightly sore"
@@ -1657,7 +1657,14 @@
 					status += "stinging"
 				if(40 to INFINITY)
 					status += "burning fiercely"
-
+			if(!brutedamage && !burndamage)
+				switch(soreness)
+					if(1 to 100)
+						status += "slightly sore"
+					if(101 to 200)
+						status += "hurting to the touch"
+					if(201 to INFINITY)
+						status += "throbing with pain"
 			if(org.is_stump())
 				status += "MISSING"
 			if(org.status & ORGAN_MUTATED)

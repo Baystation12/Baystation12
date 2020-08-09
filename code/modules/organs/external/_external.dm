@@ -44,6 +44,7 @@
 
 	// Wound and structural data.
 	var/wound_update_accuracy = 1      // how often wounds should be updated, a higher number means less often
+	var/soreness_update_accuracy = 3
 	var/list/wounds                    // wound datum list.
 	var/number_wounds = 0              // number of wounds, which is NOT wounds.len!
 	var/obj/item/organ/external/parent // Master-limb.
@@ -555,7 +556,34 @@ This function completely restores a damaged organ to perfect condition.
 		last_dam = brute_dam + burn_dam
 	if(germ_level)
 		return 1
+	if(soreness)
+		return 1
 	return 0
+
+//This proc handles all the soreness related logic.
+obj/item/organ/external/proc/process_soreness()
+	if(!soreness || damage)
+		return
+	switch(soreness)
+		if(101 to 200)
+			if(pain <= 20)
+				add_pain(15)
+		if(201 to INFINITY)
+			if(pain <=30)
+				add_pain(25)
+
+	if(owner.life_tick % 5 == 0)													//Don't spam the chat
+		switch(soreness)
+			if(1 to 100)
+				to_chat(owner, SPAN_NOTICE("Your [name] feels sore."))
+			if(101 to 200)
+				to_chat(owner, SPAN_NOTICE("Your [name] throbs with pain."))
+			if(201 to INFINITY)
+				to_chat(owner, SPAN_NOTICE("Your [name] hurts very badly!"))
+
+	soreness = Floor(soreness * 0.98) - 1											//Slower decrease as soreness lowers. Faster if in bed
+	if(owner.buckled && owner.buckled.type == /obj/structure/bed)
+		soreness -= 2
 
 /obj/item/organ/external/Process()
 	if(owner)
@@ -564,10 +592,15 @@ This function completely restores a damaged organ to perfect condition.
 			pain -= owner.lying ? 3 : 1
 			if(pain<0)
 				pain = 0
-
 		// Process wounds, doing healing etc. Only do this every few ticks to save processing power
 		if(owner.life_tick % wound_update_accuracy == 0)
 			update_wounds()
+		if(owner.life_tick % soreness_update_accuracy == 0)
+			if(!BP_IS_ROBOTIC(src))
+				if(damage * 10 > soreness)
+					soreness = 10 * damage  //A larger soreness number allows for fine tuning the decrease.
+				process_soreness()
+
 
 		//Infections
 		update_germs()

@@ -25,6 +25,7 @@ var/list/organ_cache = list()
 	var/min_broken_damage = 30        // Damage before becoming broken
 	var/max_damage = 30               // Damage cap
 	var/rejecting                     // Is this organ already being rejected?
+	var/soreness = 0				  // Current soreness to the organ
 
 	var/death_time
 
