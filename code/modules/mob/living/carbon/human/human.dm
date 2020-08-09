@@ -1664,7 +1664,7 @@
 					if(101 to 200)
 						status += "hurting to the touch"
 					if(201 to INFINITY)
-						status += "throbing with pain"
+						status += "throbbing with pain"
 			if(org.is_stump())
 				status += "MISSING"
 			if(org.status & ORGAN_MUTATED)
