@@ -5,6 +5,7 @@
 	var/construct_path
 	var/mob/living/chorus/owner
 	alpha = 25
+	density = FALSE
 
 /obj/structure/chorus_blueprint/Initialize(var/maploading, var/datum/chorus_building/cb, var/constructor)
 	. = ..()
