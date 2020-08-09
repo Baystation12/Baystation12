@@ -1153,6 +1153,7 @@
 #include "code\game\objects\structures\windoor_assembly.dm"
 #include "code\game\objects\structures\window.dm"
 #include "code\game\objects\structures\window_spawner.dm"
+#include "code\game\objects\structures\virologyprops.dm" 
 #include "code\game\objects\structures\crates_lockers\crates.dm"
 #include "code\game\objects\structures\crates_lockers\largecrate.dm"
 #include "code\game\objects\structures\crates_lockers\med_crate.dm"
