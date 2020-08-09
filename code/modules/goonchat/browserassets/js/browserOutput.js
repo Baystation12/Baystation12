@@ -371,7 +371,7 @@ function output(message, flag) {
 			} else {
 				badge = $('<span/>', {'class': 'r', 'text': 2});
 			}
-			lastmessages.html(message);
+			lastmessages.html(message.replace(/<br\s*\/?>\s*$/g,'&ensp;'));
 			lastmessages.find('[replaceRegex]').each(replaceRegex);
 			lastmessages.append(badge);
 			badge.animate({
