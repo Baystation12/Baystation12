@@ -5,7 +5,8 @@
 	var/list/chameleon_choices
 	var/static/list/chameleon_choices_by_type
 	var/atom/atom_holder
-	var/chameleon_verb
+	var/chameleon_app
+	var/chameleon_out
 
 /datum/extension/chameleon/New(datum/holder, base_type)
 	..()
@@ -23,12 +24,13 @@
 		chameleon_choices = sortAssoc(choices)
 
 	atom_holder = holder
-	chameleon_verb += new/atom/proc/chameleon_appearance(atom_holder,"Change [atom_holder.name] Appearance")
-	chameleon_verb += new/atom/proc/change_outfit(atom_holder, "Change Chameleon Outfit")
+	chameleon_app += new/atom/proc/chameleon_appearance(atom_holder,"Change [atom_holder.name] Appearance")
+	chameleon_out += new/atom/proc/change_outfit(atom_holder, "Change Chameleon Outfit")
 
 /datum/extension/chameleon/Destroy()
 	. = ..()
-	atom_holder.verbs -= chameleon_verb
+	atom_holder.verbs -= chameleon_app
+	atom_holder.verbs -= chameleon_out
 	atom_holder = null
 
 /datum/extension/chameleon/proc/disguise(newtype, mob/user)
