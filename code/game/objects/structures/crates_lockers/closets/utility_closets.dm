@@ -7,7 +7,7 @@
  *		Bombsuit Closet
  *		Hydrant
  *		First Aid
- *		Excavation Closet
+ *		Excavation Closet Away Site
  *		Shipping Supplies Closet
  */
 
@@ -184,6 +184,31 @@
 	return list(
 		/obj/random/firstaid,
 		/obj/random/medical/lite = 12)
+
+/obj/structure/closet/toolcloset/excavation/awaysite //no teleport beacons
+	name = "excavation equipment closet"
+	desc = "It's a storage unit for excavation equipment."
+	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools
+
+/obj/structure/closet/toolcloset/excavation/awaysite/WillContain()
+	return list(
+		/obj/item/weapon/storage/belt/archaeology,
+		/obj/item/weapon/storage/excavation,
+		/obj/item/device/flashlight/lantern,
+		/obj/item/device/ano_scanner,
+		/obj/item/device/depth_scanner,
+		/obj/item/device/core_sampler,
+		/obj/item/device/gps,
+		/obj/item/weapon/pinpointer/radio,
+		/obj/item/clothing/glasses/meson,
+		/obj/item/clothing/glasses/science,
+		/obj/item/weapon/pickaxe,
+		/obj/item/device/measuring_tape,
+		/obj/item/weapon/pickaxe/xeno/hand,
+		/obj/item/weapon/storage/bag/fossils,
+		/obj/item/weapon/hand_labeler,
+		/obj/item/device/spaceflare
+	)
 
 /obj/structure/closet/shipping_wall
 	name = "shipping supplies closet"
