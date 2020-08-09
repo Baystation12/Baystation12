@@ -544,20 +544,20 @@ This function completely restores a damaged organ to perfect condition.
 //Determines if we even need to process this organ.
 /obj/item/organ/external/proc/need_process()
 	if(get_pain())
-		return 1
+		return TRUE
 	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DEAD|ORGAN_MUTATED))
-		return 1
+		return TRUE
 	if((brute_dam || burn_dam) && !BP_IS_ROBOTIC(src)) //Robot limbs don't autoheal and thus don't need to process when damaged
-		return 1
+		return TRUE
 	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
 		last_dam = brute_dam + burn_dam
-		return 1
+		return TRUE
 	else
 		last_dam = brute_dam + burn_dam
 	if(germ_level)
-		return 1
+		return TRUE
 	if(soreness)
-		return 1
+		return TRUE
 	return 0
 
 //This proc handles all the soreness related logic.
