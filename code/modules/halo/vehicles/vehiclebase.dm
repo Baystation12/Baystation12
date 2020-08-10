@@ -618,14 +618,12 @@
 	return comp_prof.get_overall_resistance(resistance_type)
 
 /obj/vehicles/emp_act(severity)
-	//world << "[src.type]/emp_act([severity])"
 	//severity can be 1-3
 	var/resistance = get_overall_resistance("emp")
 	var/base_chance = 0
 	if(resistance < 100)
 		base_chance = min(100 - resistance + severity * 5, 100)
 	var/affected = FALSE
-	//world << "	resistance:[resistance], base_chance:[base_chance]"
 
 	if(spawn_datum && prob(base_chance))
 		affected = TRUE
