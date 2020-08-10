@@ -11,7 +11,7 @@
 "ak" = (/obj/structure/rearm_repair_station/human{dir = 1},/turf/simulated/floor/tech/steel,/area/faction_base/oni/garage)
 "al" = (/turf/simulated/floor/pavement,/area/faction_base/oni)
 "am" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTHWEST)"; icon_state = "techfloor_orangefulltwogrid"; dir = 9},/area/faction_base/oni/cryodorms)
-"an" = (/turf/simulated/floor/plating,/obj/effect/shuttle_landmark/oni_onsite_supply,/turf/simulated/shuttle/wall/corner/smoothwhite/sw,/area/shuttle/oni_shuttle_supply)
+"an" = (/obj/effect/landmark{name = "unscevacfb1"; tag = "unscevachere1"},/turf/simulated/floor/road/markings,/area/faction_base/oni)
 "ao" = (/obj/item/device/radio/intercom{name = "intercom"; pixel_y = 32},/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTH)"; icon_state = "techfloor_orangefulltwogrid"; dir = 1},/area/faction_base/oni/cryodorms)
 "ap" = (/turf/simulated/floor/tech/orange{tag = "icon-techfloor_orangefulltwogrid (NORTH)"; icon_state = "techfloor_orangefulltwogrid"; dir = 1},/area/faction_base/oni/cryodorms)
 "aq" = (/turf/simulated/floor/pavement/corner_invert,/area/faction_base/oni)
@@ -345,6 +345,7 @@
 "gG" = (/obj/machinery/optable,/obj/machinery/oxygen_pump/anesthetic{name = "surgery anesthetic"; pixel_y = -32},/turf/simulated/floor/tech/white,/area/faction_base/oni/medbay)
 "gH" = (/obj/structure/table/standard,/turf/simulated/floor/plating,/area/faction_base/oni/hangar)
 "gI" = (/obj/structure/ai_routing_node/unsc,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
+"gJ" = (/turf/simulated/floor/plating,/obj/effect/shuttle_landmark/oni_onsite_supply,/turf/simulated/shuttle/wall/corner/smoothwhite/sw,/area/shuttle/oni_shuttle_supply)
 "gM" = (/obj/structure/table/standard,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "gR" = (/obj/structure/closet/crate,/turf/simulated/floor/tech/maint,/area/faction_base/oni/hangar)
 "gS" = (/obj/machinery/light/colored/orange{tag = "icon-orange1 (EAST)"; icon_state = "orange1"; dir = 4},/turf/simulated/floor/tiled/dark,/area/faction_base/oni/blacksite)
@@ -357,7 +358,7 @@ aaabacacadafafafafafafafafahacacacaiajajajajajajajajajajajajajajajajajajajajajaj
 aaabacacfiafafafafafafafaffjacacacaiajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajaa
 aaabacacadafafafafafarararahacacacaiajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajaa
 aaabacacadafafagafafafafafahacacacaiajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajaa
-aaabacacadafafagafafafafafahacacacaiajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajaa
+aaabacacadafafanafafafafafahacacacaiajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajajaa
 aaabacacfiafafafafafarararfjacacacaiawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawaa
 aaabacacadafafafafafafafafahacacacaiawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawawaa
 aaabacacadafafafafafafafafahacacacaiaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -372,7 +373,7 @@ aaasbqbqeGcjcjaWaWaWaWcjcjcjcjasdbdbdRdHdIdIdIdIdIdSdbdbbBaTaPcxaMeKgMaPaPaLdVaP
 aaasckbqbqbqbqbqbqbqbqbqbqbqbqbqdbdbdMdNdNdNdNdNdNdOdbdbetaPaPaPaPaPaPaPaPaPaPaPgxgremememgyememeqaDaa
 aaasbqbqbqakcnbqbqbqakbqbqcnbqaudbdbdMdNdPdPdPdPdNdOfsdbaPaPaPaPaPaPaPaPaPaPaPaPgxgsemememgyememeqaDaa
 aabfbfeIbhbfbfbfbfbfbfeIbhbfbfbfdbdbdMdNdPdPdPdPdNdOdbdbfHaPaPaPaPaPaPaPaPaPaPaPgxgpemememgyememeqaDaa
-aabfbibhbhbhbjbhbkbhbhbhbhfTfUbfdbdbdMfqdUdNdNdNdNdOdbdbaDaXcaflgRgRaPaPaPaPeagRgBangtgtgmgmgtgtgnaDaa
+aabfbibhbhbhbjbhbkbhbhbhbhfTfUbfdbdbdMfqdUdNdNdNdNdOdbdbaDaXcaflgRgRaPaPaPaPeagRgBgJgtgtgmgmgtgtgnaDaa
 aabfblbhbhbmbnbmbhbmbnbmbhbhbhbhdbdbdRdWdWdWdWdWdWdRdbfgaDaDaDaDfYgbgwgzaPfYgbgbgwaDgDgEgEgEgEgEboboaa
 aabfbpbhbhbmbnbmbhbmbnbmbhbhbhfrdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbdbbrbrbrbrbrgSboaa
 aabfbtbhbhbmbnbmbhbmbnbmbhbhbubfeBeCdbdbdbdbdbdcdbdbeCdbdbdbdbeCdbdbdbdbdbdbdbdbdbdbdbbrbrbrbrbrbrboaa
