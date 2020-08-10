@@ -92,7 +92,7 @@
 
 
 /obj/item/weapon/reagent_containers/pill/cyanide
-	name = "Suicide pill"
+	name = "suicide pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
 	volume = 50
