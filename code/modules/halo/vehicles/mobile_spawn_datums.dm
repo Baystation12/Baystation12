@@ -11,6 +11,10 @@ GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,5 MINUTES)
 	var/access_list = list() //Our basic access list.
 	var/list/acquirable_items = list() //item name = typepath, autofilled by system.
 	var/list/item_costs = list() //item typepath = cost
+	var/emp_toggle_time = 0
+	var/emp_respawn = FALSE
+	var/max_spawns = -1
+	var/obj/vehicles/owner
 
 /datum/mobile_spawn/New()
 	for(var/item in item_costs)
@@ -28,19 +32,31 @@ GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,5 MINUTES)
 			holder_list += outfit_ref
 
 /datum/mobile_spawn/proc/process_resource_regen(var/amt = 0.5)
-	resource_pool = min(100,resource_pool+amt)
 
-/datum/mobile_spawn/proc/handle_requisition(var/mob/user,var/obj/vehicle_spawnfrom)
+	//should we re-enable after an EMP?
+	if(emp_toggle_time)
+		if(world.time > emp_toggle_time)
+			emp_toggle_time = 0
+			if(emp_respawn)
+				owner.set_mobile_spawn_deploy(TRUE)
+				emp_respawn = FALSE
+	else
+		resource_pool = min(100,resource_pool+amt)
+
+/datum/mobile_spawn/proc/handle_requisition(var/mob/user)
 	var/item_requisition = input(user,"What item do you want to requisition? ([resource_pool]/[initial(resource_pool)] resources left)","Item Requisition","Cancel") in acquirable_items + list("Cancel")
 	if(item_requisition == "Cancel")
+		return
+	if(item_costs[item_requisition] > resource_pool)
+		to_chat(user,"<span class='warning'>Insufficient requisition points.</span>")
 		return
 	var/confirm = alert(user,"[item_requisition] will cost [item_costs[item_requisition]] resources to obtain. Confirm?","Confirmation","Yes","No")
 	if(confirm == "No")
 		return
-	new item_requisition (vehicle_spawnfrom.loc)
+	new item_requisition(owner.loc)
 	resource_pool -= item_costs[item_requisition]
 
-/datum/mobile_spawn/proc/handle_spawn(var/mob/user,var/obj/vehicle_spawnfrom)
+/datum/mobile_spawn/proc/handle_spawn(var/mob/user)
 	if(GLOB.MOBILE_SPAWN_RESPAWN_TIME == -1)
 		to_chat(user,"<span class = 'notice'>Mobile respawn is disabled.</span>")
 		return
@@ -59,7 +75,7 @@ GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,5 MINUTES)
 	if(outfit_choice == "Cancel")
 		return
 
-	var/mob/living/carbon/human/h = new(vehicle_spawnfrom.loc,species_choice)
+	var/mob/living/carbon/human/h = new(owner.loc,species_choice)
 	h.faction = spawn_faction
 	outfit_choice.equip(h)
 	h.ckey = user.ckey
@@ -70,6 +86,10 @@ GLOBAL_VAR_INIT(MOBILE_SPAWN_RESPAWN_TIME,5 MINUTES)
 	if(lace)
 		lace.access = access_list
 	qdel(user)
+
+	max_spawns--
+	if(!max_spawns)
+		owner.set_mobile_spawn_deploy(FALSE)
 
 /datum/mobile_spawn/covenant
 	spawn_faction = "Covenant"
