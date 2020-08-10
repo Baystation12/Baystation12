@@ -5,7 +5,7 @@
 	supervisors = "The trust of your fellow crew."
 	info = "You are the pilot of your meagre Scavenger Crew. Keep your crew safe, and seek supplies for your rig. \
 	Your weapons are limited; trade, salvage, but avoid conflict as a matter of course."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN,SPECIES_MULE)
 	is_semi_antagonist = TRUE
 	min_skill = list(
 		SKILL_HAULING = SKILL_BASIC,
@@ -47,7 +47,7 @@
 	outfit_type = /decl/hierarchy/outfit/job/scavver/doctor
 	supervisors = "The trust of those you heal."
 	info = "You are the doctor aboard your meagre Salvage team. Keep everyone alive. Your weapons are limited; trade, salvage, but avoid conflict as a matter of course."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN,SPECIES_MULE)
 	is_semi_antagonist = TRUE
 	min_skill = list(
 		SKILL_HAULING = SKILL_BASIC,
@@ -90,7 +90,7 @@
 	supervisors = "The trust of your fellow crew."
 	info = "You are an Engineer aboard your meagre Salvage team. Keep your rig in functional order, upgrade what systems you can, and don't space yourself. \
 	Your weapons are limited; trade, salvage, but avoid conflict as a matter of course."
-	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC)
+	whitelisted_species = list(SPECIES_HUMAN,SPECIES_IPC,SPECIES_SPACER,SPECIES_GRAVWORLDER,SPECIES_VATGROWN,SPECIES_BOOSTER,SPECIES_TRITONIAN,SPECIES_MULE)
 	is_semi_antagonist = TRUE
 	min_skill = list(
 		SKILL_HAULING = SKILL_BASIC,
