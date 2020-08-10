@@ -82,3 +82,18 @@
 	name = "ghost casing"
 	caliber = "ghostPlas"
 	projectile_type = /obj/item/projectile/bullet/covenant/plasmarifle
+
+//UTILISED BY SUPPLY DROPS, DELETED/TURNED TO SCRAP ON DEATH//
+
+/obj/vehicles/ghost/supplydrop_recon
+	name = "Type-32 \"Ghost\" Rapid Recon Vehicle"
+	desc= "A variant of the Type-32 RAV, but disarmed of weapons and made faster."
+	ammo_containers = list()
+	max_speed = 2.0
+
+/obj/vehicles/ghost/supplydrop_recon/on_death()
+	. = ..()
+	for(var/turf in trange(2,loc))
+		if(prob(75))
+			new /obj/item/salvage/metal (turf)
+	qdel(src)
