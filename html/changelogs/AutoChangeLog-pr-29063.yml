@@ -1,0 +1,4 @@
+author: "mikomyazaki"
+delete-after: True
+changes: 
+  - tweak: "The duplicate message indicator in goonchat will now appear on the same line as the message."
