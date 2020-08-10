@@ -68,10 +68,18 @@
 	icon = 'code/modules/halo/vehicles/types/finalwarthog-turretless.dmi'
 	icon_state = "warthog-turretless"
 
+	ammo_containers = list()
 	max_speed = 2.3
 	capacity_flag = ITEM_SIZE_LARGE
 
 	occupants = list(2,0)
+
+/obj/vehicles/warthog/turretless/supplydrop_recon/on_death()
+	. = ..()
+	for(var/turf in trange(2,loc))
+		if(prob(75))
+			new /obj/item/salvage/metal (turf)
+	qdel(src)
 
 /obj/vehicles/warthog/troop
 	name = "M12 Warthog LRV Troop Transport Modified"
