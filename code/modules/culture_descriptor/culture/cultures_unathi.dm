@@ -7,9 +7,9 @@
 	economic_power = 0.8
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
+		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
@@ -20,9 +20,9 @@
 	an important concept in the polar city-states."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
+		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
@@ -33,9 +33,9 @@
 	the Precursors and the Grand Stratagem in their clan faiths, and are often considered the most spiritual."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
+		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
@@ -45,9 +45,9 @@
 	Excellent farmers, riders and herdsmen, most savannah unathi follow the Hand of the Vines."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
+		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 	
@@ -58,9 +58,9 @@
 	followers with these unathi."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
+		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
@@ -75,7 +75,6 @@
 		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
@@ -88,9 +87,9 @@
 	abandoned their homeland. Regardless, the clans on Tersten enjoy a peace that could not be achieved on the rough surface of Moghes."
 	language = LANGUAGE_UNATHI_SINTA
 	secondary_langs = list(
+		LANGUAGE_UNATHI_YEOSA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
@@ -111,7 +110,6 @@
 		LANGUAGE_UNATHI_SINTA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
 
@@ -127,6 +125,5 @@
 		LANGUAGE_UNATHI_SINTA,
 		LANGUAGE_SIGN,
 		LANGUAGE_HUMAN_EURO,
-		LANGUAGE_GUTTER,
 		LANGUAGE_SPACER
 	)
