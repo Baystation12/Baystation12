@@ -82,10 +82,6 @@
 
 	light_color = "#C1CEFF"
 
-/obj/vehicles/drop_pod/overmap/boarding_pod/covenant/post_drop_effects(var/turf/drop_turf)
-	. = ..()
-	set_mobile_spawn_deploy(TRUE)
-
 /obj/vehicles/drop_pod/overmap/boarding_pod/covenant/north
 	bound_width = 64
 	bound_height = 96

@@ -119,7 +119,7 @@
 		starting = get_turf(damage_source)
 
 	//was it from our blind spot?
-	if(get_dir(src, starting) in get_allowed_attack_dirs())
+	if(!(get_dir(src, starting) in get_blocked_attack_dirs()))
 		return 0
 
 	//did our shield absorb the shot?
@@ -135,11 +135,12 @@
 
 	return 0
 
-/obj/item/clothing/gloves/shield_gauntlet/proc/get_allowed_attack_dirs()
-	var/list/allowed_attack_dirs = list()
+/obj/item/clothing/gloves/shield_gauntlet/proc/get_blocked_attack_dirs()
+	return list(loc.dir,turn(loc.dir,45),turn(loc.dir,-45))
+	/*
 	switch(loc.dir)
 		if(NORTH)
-			allowed_attack_dirs = list(SOUTH,SOUTHEAST,SOUTHWEST)
+			allowed_attack_dirs = list(SOUTH,,SOUTHWEST)
 		if(SOUTH)
 			allowed_attack_dirs = list(NORTH,NORTHEAST,NORTHWEST)
 		if(EAST)
@@ -147,7 +148,7 @@
 		if(WEST)
 			allowed_attack_dirs = list(EAST,NORTHEAST,SOUTHEAST)
 
-	return allowed_attack_dirs
+	return allowed_attack_dirs*/
 
 /obj/item/clothing/gloves/shield_gauntlet/proc/drain_shield(var/damage)
 	if(connected_shield)
