@@ -1,0 +1,4 @@
+author: "Albens"
+delete-after: True
+changes: 
+  - bugfix: "Sub-humans can now spawn on the Gantry."
