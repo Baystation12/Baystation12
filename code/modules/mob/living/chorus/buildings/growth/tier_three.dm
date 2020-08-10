@@ -16,8 +16,8 @@
 	activation_cost_resource = /datum/chorus_resource/growth_nutrients
 	activation_cost_amount = 2
 	click_cooldown = 3 SECONDS
-	var/damage = 15
-	var/penetration = 10
+	var/damage = 10
+	var/penetration = 8
 
 /obj/structure/chorus/processor/sentry/tendril/trigger_effect(var/list/targets)
 	var/mob/living/L = pick(targets)
