@@ -3,7 +3,7 @@
 /obj/vehicles/drop_pod
 	name = "SOEIV Drop Pod"
 	desc = "A Single Occupant Exoatmospheric Insertion Vehicle for deployment of personnel or equipment from high orbit insertion onto a planet."
-	icon = 'code/modules/halo/structures/ODST_Droppod.dmi'
+	icon = 'code/modules/halo/vehicles/types/ODST_Droppod.dmi'
 	icon_state = "SOEIV" //Icon state should be set to the closed version of the pod.
 
 	density = 1
@@ -16,7 +16,7 @@
 	vehicle_size = ITEM_SIZE_VEHICLE_SMALL
 	capacity_flag = ITEM_SIZE_VEHICLE_SMALL
 
-	comp_prof =/datum/component_profile/drop_pod
+	comp_prof = /datum/component_profile/drop_pod
 
 	exposed_positions = list()
 
@@ -32,9 +32,6 @@
 
 	var/pod_range = 14 //Range of pod in overmap tiles
 	var/obj/effect/overmap/om_targ
-
-/obj/vehicles/drop_pod/on_death()
-	return
 
 /obj/vehicles/drop_pod/update_object_sprites()
 	overlays.Cut()
@@ -241,17 +238,13 @@
 	vital_components = newlist(/obj/item/vehicle_component/health_manager/drop_pod) //Vital components, engine, thrusters etc.
 
 /obj/item/vehicle_component/health_manager/drop_pod
-	integrity = 100
-	coverage = 100
-	resistances = list("bullet"= 100.0,"energy"= 100.0,"emp"= 100.0,"bomb" = 100.0) //Negates all damage. Let's pretend drop-pods are invincible.
-
-/obj/item/vehicle_component/health_manager/drop_pod/damage_integrity()
-	return
+	integrity = 200
+	resistances = list("bullet"= 25,"energy"= 25,"emp"= 25,"bomb" = 25)		//very little armour
 
 /obj/structure/drop_pod_launchbay
 	name = "Drop Pod Launch Bay"
 	desc = "Machinery to secure and launch a drop pod."
-	icon = 'code/modules/halo/structures/ODST_Droppod.dmi'
+	icon = 'code/modules/halo/vehicles/types/ODST_Droppod.dmi'
 	icon_state = "launch_bay"
 
 	density = 0
