@@ -59,13 +59,20 @@
 	light_range = 6
 
 /obj/vehicles/proc/mobile_spawn_check(var/mob/user)
-	if(spawn_datum.is_spawn_active == 0 && (guns_disabled || movement_destroyed))
+	if(spawn_datum.is_spawn_active == FALSE && (guns_disabled || movement_destroyed))
 		to_chat(user,"<span class = 'notice'>[src] is too damaged to lock down.</span>")
-		return 0
-	if(block_enter_exit == 1)
+		return FALSE
+	if(block_enter_exit == TRUE)
 		to_chat(user,"<span class = 'notice'>Cannot deploy in this current state.</span>")
-		return 0
-	return 1
+		return FALSE
+	if(!spawn_datum.max_spawns)
+		to_chat(user,"<span class = 'notice'>[src] can not spawn any more reinforcements.</span>")
+		return FALSE
+	if(spawn_datum.emp_toggle_time)
+		to_chat(user,"<span class = 'notice'>[src] is under the effects of an EMP and cannot deploy yet \
+			([round((spawn_datum.emp_toggle_time - world.time) / 10)] seconds left).</span>")
+		return FALSE
+	return TRUE
 
 /obj/vehicles/proc/toggle_mobile_spawn_deploy()
 	set name = "Toggle Mobile Spawn Status"
@@ -125,10 +132,13 @@
 	. = ..()
 	if(spawn_datum)
 		spawn_datum = new spawn_datum
+		spawn_datum.owner = src
 		verbs += /obj/vehicles/proc/toggle_mobile_spawn_deploy
 	if(internal_air)
 		internal_air.volume = 2500
 		internal_air.temperature = T20C
+
+	GLOB.emp_candidates.Add(src)
 
 /obj/vehicles/lost_in_space()
 	if(!can_space_move)
@@ -222,6 +232,7 @@
 /obj/vehicles/Destroy()
 	GLOB.processing_objects -= src
 	kick_occupants()
+	GLOB.emp_candidates -= src
 	. = ..()
 
 /obj/vehicles/proc/on_death()
@@ -602,3 +613,51 @@
 		comp_prof.take_component_damage(I.force,I.damtype)
 		return
 	put_cargo_item(user,I)
+
+/obj/vehicles/proc/get_overall_resistance(var/resistance_type)
+	return comp_prof.get_overall_resistance(resistance_type)
+
+/obj/vehicles/emp_act(severity)
+	//world << "[src.type]/emp_act([severity])"
+	//severity can be 1-3
+	var/resistance = get_overall_resistance("emp")
+	var/base_chance = 0
+	if(resistance < 100)
+		base_chance = min(100 - resistance + severity * 5, 100)
+	var/affected = FALSE
+	//world << "	resistance:[resistance], base_chance:[base_chance]"
+
+	if(spawn_datum && prob(base_chance))
+		affected = TRUE
+
+		//drain our item requisition resources
+		spawn_datum.resource_pool = 0
+
+		//disable our mobile spawn
+		if(spawn_datum.is_spawn_active)
+			set_mobile_spawn_deploy(FALSE)
+			spawn_datum.emp_respawn = TRUE
+
+		//have it return after a few minutes
+		var/new_time = world.time + 2 * severity MINUTES
+		if(new_time > spawn_datum.emp_toggle_time)
+			spawn_datum.emp_toggle_time = new_time
+
+	//25% lower chance to crash if we are flying
+	if(base_chance && prob(max(base_chance - 25, 5)))
+		//lose control of the vehicle
+		inactive_pilot_effects()
+		affected = TRUE
+
+	if(affected)
+		src.visible_message("\icon[src] <span class='notice'>[src] is affected by the EMP!</span>")
+
+		//put an overlay effect
+		var/image/I = image('icons/effects/effects.dmi', src, "empdisable")
+		I.pixel_x = bound_width / 2
+		I.pixel_y = bound_height/ 2
+		overlays += I
+		show_image(src.loc, I)
+		spawn(10)
+			overlays -= I
+			qdel(I)

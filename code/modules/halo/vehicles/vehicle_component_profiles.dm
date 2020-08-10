@@ -130,6 +130,22 @@
 		user.visible_message("<span class = 'notice'>[user] repairs [contained_vehicle] with [I]</span>")
 		component_last_inspected.repair_with_tool(I,user)
 
+/datum/component_profile/proc/get_overall_resistance(var/resistance_type)
+	//get the average resistance to this damage type across all components
+	var/total = 0
+	var/number = 0
+	if(components)
+		for(var/obj/item/vehicle_component/comp in components)
+			total += comp.get_resistance_for(resistance_type)
+			number++
+
+	if(vital_components)
+		for(var/obj/item/vehicle_component/comp in vital_components)
+			total += comp.get_resistance_for(resistance_type)
+			number++
+	total /= number
+	return total
+
 //BASE VEHICLE COMPONENT DEFINE
 /obj/item/vehicle_component
 	name = "Vehicle Component"
