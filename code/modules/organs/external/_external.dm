@@ -576,11 +576,11 @@ This function completely restores a damaged organ to perfect condition.
 	if(owner.life_tick % 5 == 0)	//Don't spam the chat
 		switch(soreness)
 			if(1 to 100)
-				to_chat(owner, SPAN_NOTICE("Your [name] feels sore."))
+				to_chat(owner, SPAN_WARNING("Your [name] feels sore."))
 			if(101 to 200)
-				to_chat(owner, SPAN_NOTICE("Your [name] throbs with pain."))
+				to_chat(owner, SPAN_WARNING("Your [name] throbs with pain."))
 			if(201 to INFINITY)
-				to_chat(owner, SPAN_NOTICE("Your [name] hurts very badly!"))
+				to_chat(owner, SPAN_DANGER("Your [name] hurts very badly!"))
 
 	soreness = Floor(soreness * 0.98) - 1	//Slower decrease as soreness lowers. Faster if in bed
 	if(owner.buckled && owner.buckled.type == /obj/structure/bed)	//TODO Comfiness
