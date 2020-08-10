@@ -558,7 +558,7 @@ This function completely restores a damaged organ to perfect condition.
 		return TRUE
 	if(soreness)
 		return TRUE
-	return 0
+	return FALSE
 
 //This proc handles all the soreness related logic.
 /obj/item/organ/external/proc/process_soreness()
@@ -573,7 +573,7 @@ This function completely restores a damaged organ to perfect condition.
 			if(pain <=30)
 				add_pain(25)
 
-	if(owner.life_tick % 5 == 0)	//Don't spam the chat
+	if(owner.life_tick % 10 == 0)	//Don't spam the chat
 		switch(soreness)
 			if(1 to 100)
 				to_chat(owner, SPAN_WARNING("Your [name] feels sore."))
