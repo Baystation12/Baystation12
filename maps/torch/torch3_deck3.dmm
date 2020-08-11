@@ -2821,7 +2821,6 @@
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4
 	},
-/obj/structure/reagent_dispensers/beerkeg,
 /obj/structure/table/marble,
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
@@ -3819,7 +3818,6 @@
 "hC" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table/marble,
-/obj/machinery/chemical_dispenser/bar_alc/full,
 /turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
 "hD" = (
@@ -3832,11 +3830,6 @@
 /obj/structure/table/marble,
 /obj/machinery/microwave,
 /turf/simulated/floor/plating,
-/area/vacant/mess)
-"hF" = (
-/obj/effect/floor_decal/corner/red/diagonal,
-/obj/machinery/vending/boozeomat,
-/turf/simulated/floor/tiled/dark,
 /area/vacant/mess)
 "hG" = (
 /obj/structure/catwalk,
@@ -10875,15 +10868,6 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/engineering/hardstorage)
-"yF" = (
-/obj/effect/floor_decal/corner/green/half,
-/obj/structure/table/standard,
-/obj/machinery/chemical_dispenser/bar_coffee/full{
-	dir = 1;
-	pixel_y = 3
-	},
-/turf/simulated/floor/tiled/dark/monotile,
-/area/crew_quarters/observation)
 "yG" = (
 /obj/effect/floor_decal/corner/green/half,
 /obj/structure/table/standard,
@@ -15531,11 +15515,8 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/port)
 "KZ" = (
+/obj/item/weapon/stool/padded,
 /obj/effect/floor_decal/corner/green/half,
-/obj/structure/table/standard,
-/obj/machinery/chemical_dispenser/bar_soft/full{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/dark/monotile,
 /area/crew_quarters/observation)
 "La" = (
@@ -16181,7 +16162,6 @@
 "MP" = (
 /obj/structure/table/woodentable,
 /obj/effect/floor_decal/spline/fancy/wood,
-/obj/structure/reagent_dispensers/beerkeg,
 /obj/machinery/camera/network/third_deck{
 	c_tag = "Recreation Room"
 	},
@@ -18248,6 +18228,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/thirddeck/fore)
+"Tr" = (
+/obj/effect/floor_decal/corner/red/diagonal,
+/turf/simulated/floor/tiled/dark,
+/area/vacant/mess)
 "Ts" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/thirddeck/port)
@@ -29416,7 +29400,7 @@ Yr
 vy
 Yr
 Yr
-yF
+KZ
 yH
 BV
 BV
@@ -43537,8 +43521,8 @@ Ms
 dX
 eG
 fR
+Tr
 gJ
-hF
 nA
 nA
 kj
