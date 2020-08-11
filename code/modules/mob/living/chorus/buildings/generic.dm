@@ -1,6 +1,7 @@
 /obj/structure/chorus/processor
 	name = "Processor"
 	desc = "Activates through process, not clicking"
+	var/warning = TRUE
 
 /obj/structure/chorus/processor/Initialize()
 	. = ..()
@@ -11,7 +12,9 @@
 	. = ..()
 
 /obj/structure/chorus/processor/chorus_click(var/mob/living/chorus/C)
-	to_chat(C, "<span class='warning'>\The [src] is automatic; it does not need to be activated</span>")
+	if(warning)
+		to_chat(C, SPAN_WARNING("\The [src] is automatic; it does not need to be activated"))
+		warning = FALSE
 
 /obj/structure/chorus/processor/clicker
 	name = "Clicker"

@@ -27,6 +27,7 @@
 	desc = "A organic facsimile to a mouth without teeth."
 	icon_state = "growth_articulation"
 	speaking_verb = "wails"
+	density = FALSE
 	click_cooldown = 5 SECONDS
 	gives_sight = FALSE
 
@@ -46,6 +47,7 @@
 	desc = "A cluster of nerve endings sprouting from the floor"
 	icon_state = "growth_nerves"
 	gives_sight = FALSE
+	density = FALSE
 
 /datum/chorus_building/set_to_turf/growth/sight_organ
 	desc = "An eye to see the world, inside and out."
@@ -57,6 +59,7 @@
 	name = "sight organ"
 	desc = "An eye on a stalk... it seems to look about the room."
 	icon_state = "growth_eye"
+	density = FALSE
 
 /datum/chorus_building/set_to_turf/growth/bitter
 	desc = "A small teeth-filled hole, used to injure prey"

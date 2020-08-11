@@ -40,8 +40,9 @@
 /mob/living/chorus/Life()
 	. = ..()
 	if(.)
+		var/real_construct_speed = 25 * construct_speed / (24 + construct_speed)
 		if(currently_building.len)
-			var/con_speed = construct_speed / currently_building.len
+			var/con_speed = real_construct_speed / currently_building.len
 			for(var/b in currently_building)
 				var/obj/structure/chorus_blueprint/cb = b
 				if(cb.build_amount(con_speed))
