@@ -1018,4 +1018,3 @@
 	..()
 	M.add_chemical_effect(CE_TOXIN, 1)
 	M.immunity -= 0.5 //inverse effects when abused
-

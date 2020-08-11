@@ -484,6 +484,7 @@
 	if(!alien)
 		M.change_hair("Very Long Hair")
 		M.change_facial_hair("Very Long Beard")
+		to_chat(M, "Your hair grows to extraordinary lengths!")
 
 /datum/reagent/hair_dye
 	name = "Hair Dye"
@@ -535,6 +536,7 @@
 		var/green = hex2num(copytext(src.color, 4, 6))
 		var/blue = hex2num(copytext(src.color, 6, 8))
 		M.change_hair_color(red, green, blue)
+		to_chat(M, "Your hair suddenly changes color!")
 
 /datum/reagent/anfo
 	name = "ANFO"
