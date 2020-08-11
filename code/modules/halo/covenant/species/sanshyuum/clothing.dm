@@ -67,15 +67,6 @@
 	slot_l_hand_str = "santa_prophet_bag_left_inhands",
 	slot_r_hand_str = "santa_prophet_bag_right_inhands" )
 
-/datum/language/sanshyuum
-	name = "Janjur Qomi"
-	desc = "The language of the SanShyuum"
-	native = 1
-	colour = "sanshyuum"
-	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
-	key = "P"
-	flags = RESTRICTED
-
 /decl/hierarchy/outfit/lesser_prophet
 	name = "Lesser Prophet"
 	suit = /obj/item/clothing/suit/armor/special/shielded_prophet_robe

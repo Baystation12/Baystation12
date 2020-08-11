@@ -45,7 +45,7 @@
 
 	//announce over radio
 	GLOB.global_announcer.autosay("I've just arrived in the system. My crew is available for hire as mercenaries.", \
-		"Kig\'Yar Pirate", "System", "Sangheili")
+		"Kig\'Yar Pirate", "System", LANGUAGE_SANGHEILI)
 
 /obj/structure/merc_dropship
 	name = "Type-25 \"Spirit\" Troop Carrier"
@@ -109,7 +109,7 @@
 			GLOB.global_announcer.autosay(\
 				"I've dispatched some of the mercenaries you hired and they will arrive in [merc_respawn_wave] seconds. \
 				Good hunting, [pick("[clan_name] clan","apes","hair balls","brutes")].", \
-				"Kig\'Yar Pirate", radio_channel, "Sangheili")
+				"Kig\'Yar Pirate", radio_channel, LANGUAGE_SANGHEILI)
 
 /obj/effect/landmark/mercspawn/proc/arrive_planet()
 	time_merc_dropoff = 0

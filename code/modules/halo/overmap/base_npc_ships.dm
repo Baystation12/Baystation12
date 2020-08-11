@@ -40,7 +40,7 @@ GLOBAL_LIST_INIT(om_base_sectors, list())
 
 	var/list/messages_on_hit = ON_PROJECTILE_HIT_MESSAGES
 	var/list/messages_on_death = ON_DEATH_MESSAGES
-	var/radio_language = "Galactic Common"
+	var/radio_language = ENGLISH_LANGUAGE
 	var/radio_channel = RADIO_HUMAN
 
 	var/hull = 1000 //Essentially used to tell the ship when to "stop" trying to move towards it's area.

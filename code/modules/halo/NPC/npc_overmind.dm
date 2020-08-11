@@ -63,7 +63,7 @@ GLOBAL_DATUM(flood_overmind, /datum/npc_overmind/flood)
 	var/form_squad_searchrange = SQUADFORM_SEARCHRANGE
 
 	var/comms_channel = RADIO_HUMAN
-	var/comms_language = "Galactic Common"
+	var/comms_language = LANGUAGE_ENGLISH
 	var/next_comms_at = 0
 
 /datum/npc_overmind/proc/create_comms_message(var/message,var/override = 0, var/mob/living/source_mob)

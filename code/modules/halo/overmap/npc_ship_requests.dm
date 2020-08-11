@@ -276,7 +276,7 @@
 // The /insecure subtype reports it's location to EBAND once a certain amount of activations is reached.
 /datum/npc_ship_request/shipyard_repair/insecure
 	var/repairs_until_loc_transmit = 2 //loc transmit will trigger on 3rd repair.
-	var/transmit_lang = "Galactic Common"
+	var/transmit_lang = ENGLISH_LANGUAGE
 
 /datum/npc_ship_request/shipyard_repair/insecure/do_request(var/obj/effect/overmap/ship/npc_ship/shipyard/ship_source,var/mob/requester)
 	. = ..()

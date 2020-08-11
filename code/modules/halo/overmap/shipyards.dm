@@ -48,7 +48,7 @@
 	icon_state = "cov_defenseplatform"
 
 	faction = "Covenant"
-	radio_language = "Sangheili"
+	radio_language = LANGUAGE_SANGHEILI
 	radio_channel = "BattleNet"
 
 	templates_available = list(/obj/effect/overmap/ship/covenant_light_cruiser = "maps/CRS_Unyielding_Transgression/CRS_Unyielding_Transgression")

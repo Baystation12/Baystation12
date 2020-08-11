@@ -109,7 +109,6 @@
 	spark_system.attach(src)
 
 	add_language("Robot Talk", 1)
-	add_language(LANGUAGE_EAL, 1)
 
 	wires = new(src)
 

@@ -21,7 +21,7 @@
 	inhand_icon_offsets = list(list(-2,0),list(2,0),null,list(0,0),null,null,null,list(0,0),null)
 	slowdown = -0.5
 	can_force_door = 1
-	additional_langs = list("Sign Language")
+	additional_langs = list(LANGUAGE_SIGN)
 	inherent_verbs = list()
 	unarmed_types = list(/datum/unarmed_attack/spartan_punch)
 

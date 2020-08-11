@@ -1567,7 +1567,6 @@
 #include "code\modules\halo\covenant\species\lekgolo\lekgolo.dm"
 #include "code\modules\halo\covenant\species\lekgolo\lekgolo_attack.dm"
 #include "code\modules\halo\covenant\species\lekgolo\lekgolo_defence.dm"
-#include "code\modules\halo\covenant\species\lekgolo\lekgolo_language.dm"
 #include "code\modules\halo\covenant\species\lekgolo\lekgolo_ui.dm"
 #include "code\modules\halo\covenant\species\sangheili\armoursets.dm"
 #include "code\modules\halo\covenant\species\sangheili\clothing.dm"

@@ -13,9 +13,9 @@
 	blood_color = "#00F7FF" //Same blood colour as Elites.
 	icobase = 'code/modules/halo/covenant/species/unggoy/r_unggoy.dmi'
 	deform = 'code/modules/halo/covenant/species/unggoy/r_unggoy.dmi'
-	default_language = "Sangheili" //Just for now, no special language just yet
-	language = "Sangheili"
-	additional_langs = list("Balahese")
+	default_language = LANGUAGE_SANGHEILI //Just for now, no special language just yet
+	language = LANGUAGE_SANGHEILI
+	additional_langs = list(LANGUAGE_UNGGOY)
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	spawn_flags = SPECIES_CAN_JOIN
 	flags = NO_MINOR_CUT
@@ -82,12 +82,3 @@
 
 /mob/living/carbon/human/covenant/unggoy/New(var/new_loc) //Species definition in code/modules/mob/living/human/species/outsider.
 	. = ..(new_loc,"Unggoy")							//Code breaks if not placed in species folder,
-
-/datum/language/balahese
-	name = "Balahese"
-	desc = "The language of the Unggoy"
-	native = 1
-	colour = "unggoy"
-	syllables = list("nnse","nee","kooree","keeoh","cheenoh","rehmah","nnteh","hahdeh","nnrah","kahwah","ee","hoo","roh","usoh","ahnee","ruh","eerayrah","sohruh","eesah")
-	key = "B"
-	flags = RESTRICTED

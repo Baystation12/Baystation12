@@ -13,7 +13,7 @@
 
 /obj/item/language_learner/sangheili
 	name = "Sangheili Language Learner"
-	language_string = "Sangheili"
+	language_string = LANGUAGE_SANGHEILI
 
 /datum/research_design/language_learner_sangheili
 	name = "Language learner: Sangheili"

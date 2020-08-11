@@ -4,15 +4,6 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 /mob/living/carbon/human/covenant/jiralhanae/New(var/new_loc)
 	. = ..(new_loc,"Jiralhanae")
 
-/datum/language/doisacci
-	name = "Doisacci"
-	desc = "The language of the Jiralhanae"
-	native = 1
-	colour = "jiralhanae"
-	syllables = list("ung","ugh","uhh","hss","grss","grah","argh","hng","ung","uss","hoh","rog")
-	key = "D"
-	flags = RESTRICTED
-
 /datum/species/brutes
 	name = "Jiralhanae"
 	name_plural = "Jiralhanae"
@@ -31,9 +22,9 @@ GLOBAL_LIST_INIT(first_names_jiralhanae, world.file2list('code/modules/halo/cove
 	damage_overlays = 'code/modules/halo/covenant/species/jiralhanae/dam_jiralhanae.dmi'
 	damage_mask = 'code/modules/halo/covenant/species/jiralhanae/dam_mask_jiralhanae.dmi'
 	blood_mask = 'code/modules/halo/covenant/species/jiralhanae/blood_jiralhanae.dmi'
-	default_language = "Sangheili"
-	language = "Sangheili"
-	additional_langs = list("Doisacci")
+	default_language = LANGUAGE_SANGHEILI
+	language = LANGUAGE_SANGHEILI
+	additional_langs = list(LANGUAGE_BRUTE)
 	flags = NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_TONE
 	total_health = 200 //Not quite elites, but their adrenline makes up for it
