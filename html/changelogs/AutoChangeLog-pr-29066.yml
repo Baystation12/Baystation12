@@ -1,6 +1,0 @@
-author: "Kearel"
-delete-after: True
-changes: 
-  - tweak: "Chorus construction speed is now hardcapped using the algorithm (25 * speed)/(24+speed). This means each point is worth slightly less than the previous one."
-  - tweak: "Removed the density of a few chorus objects that shouldn't have them"
-  - tweak: "Processor structures for chorus now only warn you once per structure that you don't have to click it."
