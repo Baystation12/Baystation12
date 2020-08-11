@@ -1003,6 +1003,14 @@
 	name = "\improper Telecoms Storage"
 	icon_state = "tcomsatstore"
 
+// Borg Upload
+
+/area/synth/borg_upload
+	name = "\improper Cyborg Upload Chamber"
+	icon_state = "ai_upload"
+	ambience = list('sound/ambience/ambimalf.ogg')
+	req_access = list(access_ai_upload)
+
 // Security
 
 /area/security/bo
