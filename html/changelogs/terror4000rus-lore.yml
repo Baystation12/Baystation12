@@ -1,8 +1,0 @@
-author: Terror4000rus
-delete-after: True
-changes: 
-  - rscadd: "Added new lore-friendly languages for humans, such as: english, germany, french, mandarin. Every but first one are optional."
-  - rscdel: "Removed Galactic Common, Independent and many other legacy BS12 languages from selection list. Let's pray it will not break everything."
-  - bugfix: "Fixed huragoks languages. They can understand everyone around, but cannot speak but at sign language."
-  - maptweak: "Replaced ODP silver walls with reinforced one (and painted)."
-  - spellcheck: "Changed game year to 2540."

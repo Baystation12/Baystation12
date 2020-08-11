@@ -20,4 +20,4 @@
 #define LANGUAGE_BRUTE      "Doisacci"
 #define LANGUAGE_SANSHYUUM  "Janjur Qomi"
 #define LANGUAGE_TVOAI      "T\'voai"
-#define LANGUAGE_YANMEE_HIVE"Yanme e Hivemind"
+#define LANGUAGE_YANMEE_HIVE "Yanme e Hivemind"
