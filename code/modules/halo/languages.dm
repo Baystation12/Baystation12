@@ -3,7 +3,7 @@
 	desc = "One of the most common languages on Earth and the colonies, and standard language of the UNSC."
 	speech_verb = "says"
 	whisper_verb = "whispers"
-	key = "1"
+	key = "E"
 	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 
 /datum/language/mandarin
@@ -12,7 +12,7 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "rough"
-	key = "2"
+	key = "M"
 	flags = RESTRICTED
 	syllables = list(\
 		"a","ai","an","ang","ao","ba",\
@@ -92,7 +92,7 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "terran"
-	key = "3"
+	key = "G"
 	flags = RESTRICTED
 	syllables = list(\
 		"abe","and","auf","aus","ann",\
@@ -111,7 +111,7 @@
 	speech_verb = "says"
 	whisper_verb = "whispers"
 	colour = "solcom"
-	key = "4"
+	key = "F"
 	flags = RESTRICTED
 	syllables = list(\
 		"ais","ans","ant","ati","lus","men",\
