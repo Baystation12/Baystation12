@@ -133,7 +133,7 @@
 "cC" = (/obj/machinery/light/invis,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/droppods_sb)
 "cD" = (/obj/structure/closet/walllocker/emerglocker/covvie/south,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardhangar)
 "cE" = (/obj/machinery/door/airlock/multi_tile/covenant{dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
-"cF" = (/obj/machinery/door/airlock/covenant,/turf/simulated/wall/covenant,/area/covenant_light_cruiser/Rearhallway)
+"cF" = (/obj/machinery/door/airlock/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/Rearhallway)
 "cG" = (/obj/structure/closet/covenant,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/starboardgarage)
 "cH" = (/obj/machinery/camera/autoname/invis/crs_transgression,/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/porthangar)
 "cI" = (/obj/machinery/light/covenant/west,/obj/machinery/camera/autoname/invis/crs_transgression{icon_state = "camera"; dir = 4},/turf/simulated/floor/covenant{icon_state = "cov_floor"},/area/covenant_light_cruiser/dockingumbilicalstarboard)
