@@ -33,7 +33,7 @@
 	var/capture_score = 0
 	var/is_winner
 	var/list/controlled_nodes = list()
-	var/radio_language = LANGUAGE_GALCOM
+	var/radio_language = LANGUAGE_ENGLISH
 	var/radio_name = "Sovereignty Announcer"
 
 //obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/language_name)

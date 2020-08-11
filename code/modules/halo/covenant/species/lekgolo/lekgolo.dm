@@ -1,6 +1,3 @@
-
-#define LANGUAGE_LEKGOLO "Lekgolo"
-
 //Mgalekgolo defines//
 /mob/living/simple_animal/mgalekgolo
 	name = "mgalekgolo"

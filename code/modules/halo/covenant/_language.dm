@@ -1,6 +1,3 @@
-
-#define LANGUAGE_SANGHEILI "Sangheili"
-
 /datum/language/sangheili
 	name = LANGUAGE_SANGHEILI
 	desc = "The ancient language of the Sangheili and common language of the Covenant."

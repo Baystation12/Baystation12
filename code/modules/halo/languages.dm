@@ -1,17 +1,19 @@
-
 /datum/language/english
-	name = "English"
+	name = LANGUAGE_ENGLISH
 	desc = "One of the most common languages on Earth and the colonies, and standard language of the UNSC."
+	speech_verb = "says"
+	whisper_verb = "whispers"
 	key = "1"
-	flags = WHITELISTED
 	syllables = list("blah","blah","blah","bleh","meh","neh","nah","wah")
 
 /datum/language/mandarin
-	name = "Mandarin"
+	name = LANGUAGE_MANDARIN
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
-	colour = "solcom"
+	speech_verb = "says"
+	whisper_verb = "whispers"
+	colour = "rough"
 	key = "2"
-	flags = WHITELISTED
+	flags = RESTRICTED
 	syllables = list(\
 		"a","ai","an","ang","ao","ba",\
 		"bai","ban","bang","bao","bei","ben",\
@@ -85,43 +87,45 @@
 		"zuo","zu")
 
 /datum/language/german
-	name = "German"
+	name = LANGUAGE_GERMAN
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
-	colour = "solcom"
-	key = "2"
-	flags = WHITELISTED
+	speech_verb = "says"
+	whisper_verb = "whispers"
+	colour = "terran"
+	key = "3"
+	flags = RESTRICTED
 	syllables = list(\
 		"abe","and","auf","aus","ann",\
-		"ber","che","däs","erß","ere",\
+		"ber","che","dgs","er","ere",\
 		"die","ein","eit","end","ver",\
-		"ese","ine","röt","müll","ung",\
-		"ilß","men","mit","und","bit",\
+		"ese","ine","rut","mill","ung",\
+		"il","men","mit","und","bit",\
 		"nen","nic","sch","ter","ten",\
-		"sen","sie","ßte")
-	ending_syllables = list(\
+		"sen","sie","te", \
 		"ige","ich","der","sch","den","schloss","nte",\
 		"ach","ben","cht","sch","lle","schlus")
 
 /datum/language/french
-	name = "French"
+	name = LANGUAGE_FRENCH
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
+	speech_verb = "says"
+	whisper_verb = "whispers"
 	colour = "solcom"
-	key = "2"
-	flags = WHITELISTED
+	key = "4"
+	flags = RESTRICTED
 	syllables = list(\
 		"ais","ans","ant","ati","lus","men",\
-		"ava","avé","cha","che","com","con",\
+		"ava","avu","cha","che","com","con",\
 		"dan","des","ell","eme","ent","est",\
 		"eur","fai","bien","eta","mai","ver",\
 		"nte","ont","our","ous","out","une",\
 		"ouv","par","pas","plu","pou","que",\
-		"res","sur","tai","tio","tou","tré")
-	ending_syllables = list(\
-		"mme","omm","uré","son","eux","ion",\
-		"lés","ain","ait","vou","lle","ire")
-
+		"res","sur","tai","tio","tou","tru",\
+		"mme","omm","uru","son","eux","ion",\
+		"lus","ain","ait","vou","lle","ire")
+/*
 /datum/language/spanish
-	name = "Spanish"
+	name = LANGUAGE_SPANISH
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -137,7 +141,7 @@
 		"nte","ido","ién","iér","los","nto")
 
 /datum/language/italian
-	name = "Italian"
+	name = LANGUAGE_ITALIAN
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -172,7 +176,7 @@
 	"rdi","ün","aba","hat","sin","rim","mak")
 
 /datum/language/indonesian
-	name = "Indonesian"
+	name = LANGUAGE_INDONESIAN
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -218,7 +222,7 @@
 		"nt","uk","pe","ik","nd")
 
 /datum/language/swedish
-	name = "Swedish"
+	name = LANGUAGE_SWEDISH
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -233,7 +237,7 @@
 		"sta","ste","slu")
 
 /datum/language/danish
-	name = "Danish"
+	name = LANGUAGE_DANISH
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -248,7 +252,7 @@
 		"dan","hvor","har")
 
 /datum/language/norwegian
-	name = "Norwegian"
+	name = LANGUAGE_NORWEGIAN
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -263,7 +267,7 @@
 		"haak","bæh","dæh","dær","bær")
 
 /datum/language/icelandic
-	name = "Icelandic"
+	name = LANGUAGE_ICELANDIC
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -277,7 +281,7 @@
 		"viÐ","Ður","ÞaÐ","Þei")
 
 /datum/language/finnish
-	name = "Finnish"
+	name = LANGUAGE_FINNISH
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -294,7 +298,7 @@
 	"utt","taa","itt","ikk","än","lä","vä","ttä","le")
 
 /datum/language/japanese
-	name = "Japanese"
+	name = LANGUAGE_JAPANESE
 	desc = "A language spoken by one of the early space exploring cultures on Earth."
 	colour = "solcom"
 	key = "2"
@@ -319,3 +323,4 @@
 		"ba","bi","bu","be","bo","bya",\
 		"byu","byo","pa","pi","pu","pe",\
 		"po","pya","pyu","py")
+*/

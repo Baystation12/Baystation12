@@ -102,12 +102,12 @@
 
 /obj/item/weapon/implant/language_english/implanted(var/mob/source)
 	. = ..()
-	imp_in.languages_understand |= LANGUAGE_GALCOM
+	imp_in.languages_understand |= LANGUAGE_ENGLISH
 
 /obj/item/weapon/implant/language_english/meltdown()
-	imp_in.languages_understand -= LANGUAGE_GALCOM
+	imp_in.languages_understand -= LANGUAGE_ENGLISH
 	. = ..()
 
 /obj/item/weapon/implant/language_english/removed()
-	imp_in.languages_understand -= LANGUAGE_GALCOM
+	imp_in.languages_understand -= LANGUAGE_ENGLISH
 	. = ..()

@@ -1,0 +1,16 @@
+diff a/code/modules/halo/languages.dm b/code/modules/halo/languages.dm	(rejected hunks)
+@@ -173,13 +173,13 @@
+ 		"deg","sak","yat","h�l","kaf","bud",\
+ 		"bir")
+ 	ending_syllables = list(\
+ 	"rdi","�n","aba","hat","sin","rim","mak")
+ 
+ /datum/language/indonesian
+-	name = "Indonesian"
++	name = LANGUAGE_INDONESIAN
+ 	desc = "A language spoken by one of the early space exploring cultures on Earth."
+ 	colour = "solcom"
+ 	key = "2"
+ 	flags = WHITELISTED
+ 	syllables = list(\
+ 		"ada","aka","ala","ama","ana","and",\
