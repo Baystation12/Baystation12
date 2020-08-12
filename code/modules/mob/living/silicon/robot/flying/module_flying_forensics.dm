@@ -5,7 +5,7 @@
 	networks = list(NETWORK_SECURITY)
 	subsystems = list(
 		/datum/nano_module/crew_monitor,
-		/datum/nano_module/digitalwarrant,
+		/datum/nano_module/program/digitalwarrant,
 		/datum/nano_module/records
 	)
 	sprites = list(
