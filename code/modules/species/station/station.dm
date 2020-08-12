@@ -314,9 +314,9 @@
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 2000
-	heat_level_2 = 2550
-	heat_level_3 = 3100
+	heat_level_1 = 3000
+	heat_level_2 = 4000
+	heat_level_3 = 5000
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
