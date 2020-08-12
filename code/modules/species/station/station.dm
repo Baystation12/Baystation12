@@ -305,16 +305,18 @@
 		/mob/living/carbon/human/proc/diona_heal_toggle
 		)
 
-	warning_low_pressure = 50
+	warning_low_pressure = -1
 	hazard_low_pressure = -1
-
-	cold_level_1 = 50
+	warning_high_pressure = 95000
+	hazard_high_pressure = 120000
+	
+	cold_level_1 = -1
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 2000
-	heat_level_2 = 3000
-	heat_level_3 = 4000
+	heat_level_1 = 32000
+	heat_level_2 = 40000
+	heat_level_3 = 45000
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
