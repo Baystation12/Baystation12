@@ -36,6 +36,13 @@
 	update_connections(1)
 	update_icon()
 
+/obj/structure/grille/Destroy()
+	var/turf/location = loc
+	. = ..()
+	for(var/obj/structure/grille/G in orange(1, location))
+		G.update_connections()
+		G.queue_icon_update()
+
 /obj/structure/grille/ex_act(severity)
 	qdel(src)
 

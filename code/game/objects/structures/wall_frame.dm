@@ -33,6 +33,14 @@
 	update_connections(1)
 	update_icon()
 
+/obj/structure/wall_frame/Destroy()
+	var/turf/location = loc
+	. = ..()
+	for(var/obj/structure/wall_frame/W in orange(1, location))
+		W.update_connections()
+		W.queue_icon_update()
+
+
 /obj/structure/wall_frame/examine(mob/user)
 	. = ..()
 

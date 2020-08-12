@@ -74,8 +74,9 @@
 	update_nearby_tiles()
 	var/turf/location = loc
 	. = ..()
-	for(var/obj/structure/window/W in orange(location, 1))
-		W.update_icon()
+	for(var/obj/structure/window/W in orange(1, location))
+		W.update_connections()
+		W.queue_icon_update()
 
 /obj/structure/window/examine(mob/user)
 	. = ..(user)
