@@ -145,21 +145,25 @@ Checks if a list has the same entries and values as an element of big.
 		else
 			.[key] = call(merge_method)(.[key], b_value)
 
-//Pretends to pick an element based on its weight but really just seems to pick a random element.
+/* pickweight
+	given an associative list of (key = weight, key = weight, ...), returns a random key biased by weights
+	if the argument is a list that does not appear associative by its first key, returns pick(list)
+	if the argument is empty or not a list, returns null
+*/
 /proc/pickweight(list/L)
-	var/total = 0
-	var/item
-	for (item in L)
-		if (!L[item])
-			L[item] = 1
-		total += L[item]
-
-	total = rand(1, total)
-	for (item in L)
-		total -=L [item]
-		if (total <= 0)
-			return item
-
+	var/len = length(L)
+	if (len && islist(L))
+		if (isnum(L[1]))
+			return pick(L)
+		var/sum = 0
+		for (var/key in L)
+			sum += L[key]
+		sum *= rand()
+		for (var/key in L)
+			sum -= L[key]
+			if (sum <= 0)
+				return key
+		return L[len]
 	return null
 
 //Pick a random element from the list and remove it from the list.
