@@ -384,6 +384,7 @@ datum/unit_test/mob_damage/halloss
 /datum/unit_test/mob_damage/diona/tox
 	name = "MOB: Diona Toxins Damage Check"
 	damagetype = TOX
+	expected_vulnerability = IMMUNE
 
 /datum/unit_test/mob_damage/diona/oxy
 	name = "MOB: Diona Oxygen Damage Check"
