@@ -307,16 +307,16 @@
 
 	warning_low_pressure = -1
 	hazard_low_pressure = -1
-	warning_high_pressure = 95000
-	hazard_high_pressure = 120000
+	warning_high_pressure = 1500
+	hazard_high_pressure = 2000
 	
 	cold_level_1 = -1
 	cold_level_2 = -1
 	cold_level_3 = -1
 
-	heat_level_1 = 32000
-	heat_level_2 = 40000
-	heat_level_3 = 45000
+	heat_level_1 = 2000
+	heat_level_2 = 2550
+	heat_level_3 = 3100
 
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
