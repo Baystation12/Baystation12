@@ -168,6 +168,7 @@
  
 #define FACTION_UNATHI_HEGEMONY          "Moghes Hegemony"
 #define FACTION_UNATHI_TERSTEN_HEGEMONY  "Tersten Hegemony"
+#define FACTION_UNATHI_SSEN_UUMA         "Ssen-Uuma Convent"
 #define FACTION_UNATHI_INDEPENDENT       "Independent Faction"
 #define FACTION_UNATHI_BAASK             "Ba'ask Krukzuz"
 #define FACTION_UNATHI_GRESIS            "Gresis Krukzuz"
@@ -178,6 +179,8 @@
 #define RELIGION_UNATHI_VINE         "Hand of the Vine"
 #define RELIGION_UNATHI_LIGHTS       "The Fruitful Lights"
 #define RELIGION_UNATHI_MARKESHELI   "Cult of Markesh"
+#define RELIGION_UNATHI_ANCESTOR     "Ancestor Worship"
+#define RELIGION_UNATHI_AGA_EAKHE    "Aga-Eakhe"
 
 // Nabber grades.
 #define CULTURE_NABBER_CMINUS "Grade C-"
