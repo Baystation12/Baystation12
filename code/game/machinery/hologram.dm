@@ -81,7 +81,14 @@ var/const/HOLOPAD_MODE = RANGE_BASED
 
 	. = TRUE
 	var/handle_type = "Holocomms"
-	if(allow_ai)
+	var/ai_exists = FALSE
+
+	for(var/mob/living/silicon/ai/AI in GLOB.living_mob_list_)
+		if(!AI.client)	continue
+		ai_exists = TRUE
+		break
+
+	if(allow_ai && ai_exists)
 		handle_type = alert(user,"Would you like to request an AI's presence or establish communications with another pad?", "Holopad","AI","Holocomms","Cancel")
 
 	switch(handle_type)
