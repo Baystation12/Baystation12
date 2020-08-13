@@ -111,26 +111,28 @@
 	var/burns_per_grid = 1/ (burn_delay * get_speed())
 	return round(num_burns/burns_per_grid)
 
-/obj/effect/overmap/visitable/ship/proc/decelerate()
-	if(((speed[1]) || (speed[2])) && can_burn())
-		if (speed[1])
-			adjust_speed(-SIGN(speed[1]) * min(get_burn_acceleration(),abs(speed[1])), 0)
-		if (speed[2])
-			adjust_speed(0, -SIGN(speed[2]) * min(get_burn_acceleration(),abs(speed[2])))
-		last_burn = world.time
+/obj/effect/overmap/visitable/ship/proc/decelerate(accel_limit)
+	if ((!speed[1] && !speed[2]) || !can_burn())
+		return
+	last_burn = world.time
+	var/delta = accel_limit ? min(get_burn_acceleration(), accel_limit) : get_burn_acceleration()
+	var/mag = sqrt(speed[1] ** 2 + speed[2] ** 2)
+	if (delta >= mag)
+		adjust_speed(-speed[1], -speed[2])
+	else
+		adjust_speed(-(speed[1] * delta) / mag, -(speed[2] * delta) / mag)
 
 /obj/effect/overmap/visitable/ship/proc/accelerate(direction, accel_limit)
-	if(can_burn())
-		last_burn = world.time
-		var/acceleration = min(get_burn_acceleration(), accel_limit)
-		if(direction & EAST)
-			adjust_speed(acceleration, 0)
-		if(direction & WEST)
-			adjust_speed(-acceleration, 0)
-		if(direction & NORTH)
-			adjust_speed(0, acceleration)
-		if(direction & SOUTH)
-			adjust_speed(0, -acceleration)
+	if (!direction || !can_burn())
+		return
+	last_burn = world.time
+	var/delta = accel_limit ? min(get_burn_acceleration(), accel_limit) : get_burn_acceleration()
+	var/dx = (direction & EAST) ? 1 : ((direction & WEST) ? -1 : 0)
+	var/dy = (direction & NORTH) ? 1 : ((direction & SOUTH) ? -1 : 0)
+	if (dx && dy)
+		dx *= 0.5
+		dy *= 0.5
+	adjust_speed(delta * dx, delta * dy)
 
 /obj/effect/overmap/visitable/ship/Process()
 	if(!halted && !is_still())
