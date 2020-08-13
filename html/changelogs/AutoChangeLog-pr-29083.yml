@@ -1,5 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - bugfix: "When pulling a humanlike mob, the message will now change depending on if they have both arms, only one arm, or no arms."
-  - soundadd: "The sound volume for pulling a humanlike mob has been decreased slightly."

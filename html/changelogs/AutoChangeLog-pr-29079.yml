@@ -1,6 +1,0 @@
-author: "zaredman"
-delete-after: True
-changes: 
-  - maptweak: "Moves Cyborg upload to D2 at old Janitor's room. Access from Drone maint."
-  - maptweak: "Removes AI upload console from D1 vault."
-  - maptweak: "Restores some synth boards; Reset, Purge, Sol, Sol Aggressive, Quarrantine, and Asimov"

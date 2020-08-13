@@ -1,5 +1,0 @@
-author: "Spookerton"
-delete-after: True
-changes: 
-  - bugfix: "Ships no longer apply burn acceleration twice for diagonals."
-  - bugfix: "Ships no longer burn twice per deceleration step."

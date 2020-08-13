@@ -1,4 +1,0 @@
-author: "CrimsonShrike"
-delete-after: True
-changes: 
-  - rscadd: "Exosuits can now force airlocks and firelocks. They are still stopped by bolted airlocks."
