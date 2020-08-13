@@ -4405,7 +4405,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/fuel{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -4827,7 +4827,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftstarboard)
 "jw" = (
@@ -7934,7 +7934,7 @@
 /area/hallway/primary/thirddeck/fore)
 "qM" = (
 /obj/structure/catwalk,
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/aftport)
 "qN" = (
@@ -9283,7 +9283,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/crew_quarters/gym)
 "tU" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/shutoff{
@@ -14367,7 +14367,7 @@
 /area/maintenance/thirddeck/forestarboard)
 "IN" = (
 /obj/random/junk,
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/railing/mapped{
 	dir = 4;
 	icon_state = "railing0-1"
@@ -14554,7 +14554,7 @@
 /turf/simulated/floor/plating,
 /area/hallway/primary/thirddeck/aft)
 "Jc" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/green,
@@ -15935,7 +15935,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/thirddeck/foreport)
 "Ma" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
@@ -16643,7 +16643,7 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/maintenance/thirddeck/foreport)
 "Ov" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/railing/mapped,
@@ -19343,7 +19343,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/fuel{
 	dir = 4
 	},
 /turf/simulated/open,

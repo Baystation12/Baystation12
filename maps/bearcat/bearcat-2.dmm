@@ -4145,7 +4145,7 @@
 	icon_state = "alarm0";
 	pixel_x = -24
 	},
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/floor/plating,
 /area/ship/scrap/maintenance/engine/aft)
 "jJ" = (

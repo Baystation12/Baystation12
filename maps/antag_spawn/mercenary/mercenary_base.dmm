@@ -1589,9 +1589,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cv" = (
-/obj/machinery/atmospherics/valve/shutoff{
-	level = 2
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 9
 	},
@@ -1600,6 +1597,7 @@
 	icon_state = "handrail"
 	},
 /obj/effect/floor_decal/industrial/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cw" = (
@@ -1656,9 +1654,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cB" = (
-/obj/machinery/atmospherics/valve/shutoff{
-	level = 2
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -1668,6 +1663,7 @@
 	icon_state = "handrail"
 	},
 /obj/effect/floor_decal/industrial/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/map_template/merc_shuttle/rear)
 "cC" = (

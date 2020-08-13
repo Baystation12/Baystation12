@@ -34,7 +34,7 @@
 	dir = 1;
 	pixel_y = -25
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/machinery/light,
@@ -2778,7 +2778,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "aeQ" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -3470,10 +3470,10 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "afX" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/effect/floor_decal/industrial/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/fuel{
 	dir = 4
 	},
-/obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/aftstarboard)
 "afY" = (
@@ -3923,7 +3923,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "agQ" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -5089,7 +5089,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "ajH" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -6844,7 +6844,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/centralstarboard)
 "asF" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/catwalk,
@@ -9659,7 +9659,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aFf" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
@@ -9927,7 +9927,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/crew_quarters/sleep/cryo/aux)
 "aGw" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
@@ -10464,7 +10464,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftport)
 "aJj" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/railing/mapped{
 	dir = 8;
 	icon_state = "railing0-1"
@@ -12289,7 +12289,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/foreport)
 "aQy" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/railing/mapped,
@@ -12958,7 +12958,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/open,
 /area/maintenance/firstdeck/aftport)
 "aSf" = (
@@ -13122,7 +13122,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -16712,7 +16712,7 @@
 	icon_state = "railing0-1"
 	},
 /obj/structure/railing/mapped,
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/fuel{
 	dir = 4
 	},
 /turf/simulated/open,
@@ -19549,7 +19549,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/security/opscheck)
 "ikZ" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff,
 /turf/simulated/floor/tiled/techfloor,
 /area/maintenance/firstdeck/centralstarboard)
@@ -26840,7 +26840,7 @@
 /turf/simulated/floor/tiled/white/monotile,
 /area/rnd/xenobiology/xenoflora)
 "rcx" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/industrial/shutoff,
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled,
@@ -28393,7 +28393,7 @@
 	dir = 8;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/floor/plating,
 /area/maintenance/firstdeck/aftstarboard)
 "sCx" = (

@@ -10098,7 +10098,7 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -11569,7 +11569,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -12922,7 +12922,7 @@
 /area/maintenance/waterstore)
 "Qa" = (
 /obj/structure/railing/mapped,
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -13144,7 +13144,7 @@
 	dir = 4;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -15795,7 +15795,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/fourthdeck/aft)
 "Xw" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/railing/mapped{

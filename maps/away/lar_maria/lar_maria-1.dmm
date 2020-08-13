@@ -3753,7 +3753,7 @@
 /turf/space,
 /area/space)
 "jb" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/scrubbers{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -3765,7 +3765,7 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /turf/simulated/floor/plating,

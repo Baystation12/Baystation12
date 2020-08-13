@@ -1095,7 +1095,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/starboard)
 "ca" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/cable/green{
@@ -2103,7 +2103,7 @@
 	icon_state = "alarm0";
 	pixel_y = -22
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /turf/simulated/floor/plating,
@@ -3416,7 +3416,7 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/hallway/port)
 "fU" = (
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/blue{
@@ -8488,7 +8488,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "uK" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/machinery/alarm{
 	dir = 4;
 	pixel_x = -23;
@@ -9847,7 +9847,7 @@
 /turf/simulated/floor/tiled,
 /area/hallway/primary/bridge/fore)
 "xT" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/effect/floor_decal/corner/blue{
 	dir = 9
 	},
@@ -10113,7 +10113,7 @@
 /obj/effect/floor_decal/corner/paleblue{
 	dir = 10
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/shutoff{
