@@ -29,3 +29,16 @@
 	wiped two millennia later, other unathi view Markesheli as a dark spot in their history. A cult that thrived on violence and sacrifice, \
 	Makrkesheli are tolerated due to the popular discontent of pushing them out. Many off-world Markesheli are the more moderate of the cult's \
 	followers. However, most unathi still see them as a evil entity, in part due to their history of violence."
+
+/decl/cultural_info/religion/unathi_ancestor
+	name = RELIGION_UNATHI_ANCESTOR
+	description = "In order to ensure the normal functioning of natural and societal life, Unathi seek patronage with the powerful spirits of the \
+	past, especially with those of their own kin, whom the call the Ancestors - the ranks of which every unathi is bound to join at some point. \
+	The worship of the Ancestors is almost universal, and serves as the basis for other spiritual movements of Moghes."
+
+/decl/cultural_info/religion/unathi_aga_eakhe
+	name = RELIGION_UNATHI_AGA_EAKHE
+	description = "Traditional Yeosa religion is based on totemic worship of Ancestors and other spirits, which manifest themselves as monstrous \
+	creatures dwelling on the seabed. Revered by Yeosa, those physical avatars of the powerful ones rest beneath the dark waters, their mere movements \
+	causing a change of sea. Aga-Eakhe has its own oral tradition and commandments, designed to facilitate the survival of Yeosa in their \
+	aquatic homeworld - those religious laws are respected by the majority of World Sea clans."
