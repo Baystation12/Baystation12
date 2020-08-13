@@ -635,7 +635,7 @@
 /datum/chemical_reaction/capilliumate
 	name = "Capilliumate"
 	result =/datum/reagent/capilliumate
-	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/protein = 1, /datum/reagent/mutagen = 1)
+	required_reagents = list(/datum/reagent/radium = 1, /datum/reagent/nutriment/protein = 1, /datum/reagent/mutagen = 1)
 	result_amount = 1
 	mix_message = "The solution bubbles and thickens into strands."
 
