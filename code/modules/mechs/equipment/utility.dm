@@ -9,7 +9,7 @@
 	var/list/obj/carrying = list()
 
 /obj/item/mech_equipment/clamp/resolve_attackby(atom/A, mob/user, click_params)
-	if(istype(A, /obj/structure/closet) && owner)
+	if(owner)
 		return 0
 	return ..()
 
@@ -43,6 +43,55 @@
 				return
 
 			if(O.anchored)
+				//Special door handling
+				if(istype(O, /obj/machinery/door/firedoor))
+					var/obj/machinery/door/firedoor/FD = O
+					if(FD.blocked)
+						FD.visible_message(SPAN_DANGER("\The [owner] begins prying on \the [FD]!"))
+						if(do_after(owner,10 SECONDS,FD) && FD.blocked)
+							playsound(FD, 'sound/effects/meteorimpact.ogg', 100, 1)
+							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
+							FD.blocked = FALSE
+							addtimer(CALLBACK(FD, /obj/machinery/door/firedoor/.proc/open, TRUE), 0)
+							FD.visible_message(SPAN_WARNING("\The [owner] tears \the [FD] open!"))
+					else
+						FD.visible_message(SPAN_DANGER("\The [owner] begins forcing \the [FD]!"))
+						if(do_after(owner, 4 SECONDS,FD) && !FD.blocked)
+							playsound(FD, 'sound/machines/airlock_creaking.ogg', 100, 1)
+							if(FD.density)
+								FD.visible_message(SPAN_DANGER("\The [owner] forces \the [FD] open!"))
+								addtimer(CALLBACK(FD, /obj/machinery/door/firedoor/.proc/open, TRUE), 0)
+							else
+								FD.visible_message(SPAN_WARNING("\The [owner] forces \the [FD] closed!"))
+								addtimer(CALLBACK(FD, /obj/machinery/door/firedoor/.proc/close, TRUE), 0)
+					return
+				else if(istype(O, /obj/machinery/door/airlock))
+					var/obj/machinery/door/airlock/AD = O
+					if(!AD.operating && !AD.locked)
+						if(AD.welded)
+							AD.visible_message(SPAN_DANGER("\The [owner] begins prying on \the [AD]!"))
+							if(do_after(owner, 15 SECONDS,AD) && !AD.locked)
+								AD.welded = FALSE
+								AD.update_icon()
+								playsound(AD, 'sound/effects/meteorimpact.ogg', 100, 1)
+								playsound(AD, 'sound/machines/airlock_creaking.ogg', 100, 1)
+								AD.visible_message(SPAN_DANGER("\The [owner] tears \the [AD] open!"))
+								addtimer(CALLBACK(AD, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
+								return
+						else
+							AD.visible_message(SPAN_DANGER("\The [owner] begins forcing \the [AD]!"))
+							if((AD.is_broken(NOPOWER) || do_after(owner, 5 SECONDS,AD)) && !(AD.operating || AD.welded || AD.locked))
+								playsound(AD, 'sound/machines/airlock_creaking.ogg', 100, 1)
+								if(AD.density)
+									addtimer(CALLBACK(AD, /obj/machinery/door/airlock/.proc/open, TRUE), 0)
+									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] open!"))
+								else
+									addtimer(CALLBACK(AD, /obj/machinery/door/airlock/.proc/close, TRUE), 0)
+									AD.visible_message(SPAN_DANGER("\The [owner] forces \the [AD] closed!"))
+					if(AD.locked)
+						to_chat(user, SPAN_NOTICE("The airlock's bolts prevent it from being forced."))
+					return
+
 				to_chat(user, SPAN_WARNING("\The [target] is firmly secured."))
 				return
 
