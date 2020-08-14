@@ -13,14 +13,14 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 	requires_ntnet = 1
 	available_on_ntnet = 1
 	required_access = access_security
-	nanomodule_path = /datum/nano_module/digitalwarrant/
+	nanomodule_path = /datum/nano_module/program/digitalwarrant/
 	category = PROG_SEC
 
-/datum/nano_module/digitalwarrant/
+/datum/nano_module/program/digitalwarrant/
 	name = "Warrant Assistant"
 	var/datum/computer_file/data/warrant/activewarrant
 
-/datum/nano_module/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
+/datum/nano_module/program/digitalwarrant/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = GLOB.default_state)
 	var/list/data = host.initial_data()
 
 	if(activewarrant)
@@ -62,15 +62,15 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		ui.set_initial_data(data)
 		ui.open()
 
-/datum/nano_module/digitalwarrant/Topic(href, href_list)
+/datum/nano_module/program/digitalwarrant/Topic(href, href_list)
 	if(..())
-		return 1
+		return TRUE
 
 	if(href_list["sw_menu"])
 		activewarrant = null
 
 	if(href_list["editwarrant"])
-		. = 1
+		. = TRUE
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			if(W.uid == text2num(href_list["editwarrant"]))
 				activewarrant = W
@@ -89,21 +89,21 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		return
 
 	if(href_list["sendtoarchive"])
-		. = 1
+		. = TRUE
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			if(W.uid == text2num(href_list["sendtoarchive"]))
 				W.archived = TRUE
 				break
 
 	if(href_list["restore"])
-		. = 1
+		. = TRUE
 		for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 			if(W.uid == text2num(href_list["restore"]))
 				W.archived = FALSE
 				break
 
 	if(href_list["addwarrant"])
-		. = 1
+		. = TRUE
 		var/datum/computer_file/data/warrant/W = new()
 		if(CanInteract(user, GLOB.default_state))
 			W.fields["namewarrant"] = "Unknown"
@@ -120,7 +120,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			activewarrant = W
 
 	if(href_list["savewarrant"])
-		. = 1
+		. = TRUE
 		if(!activewarrant)
 			return
 		broadcast_security_hud_message("\A [activewarrant.fields["arrestsearch"]] warrant for <b>[activewarrant.fields["namewarrant"]]</b> has been [(activewarrant in GLOB.all_warrants) ? "edited" : "uploaded"].", nano_host())
@@ -128,7 +128,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		activewarrant = null
 
 	if(href_list["deletewarrant"])
-		. = 1
+		. = TRUE
 		if(!activewarrant)
 			for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
 				if(W.uid == text2num(href_list["deletewarrant"]))
@@ -137,8 +137,25 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		GLOB.all_warrants -= activewarrant
 		activewarrant = null
 
+	if(href_list["printwarrant"])
+		. = TRUE
+		if(!program.computer.has_component(PART_PRINTER))
+			to_chat(src, SPAN_WARNING("Hardware Error: Printer not found."))
+			return
+		if(!activewarrant)
+			var/puid = text2num(href_list["printwarrant"])
+			for(var/datum/computer_file/data/warrant/W in GLOB.all_warrants)
+				if(W.uid == puid)
+					activewarrant = W
+					break
+		if(activewarrant)
+			program.computer.print_paper(warranttotext(activewarrant), capitalize(activewarrant.fields["arrestsearch"]) + " Warrant - " + activewarrant.fields["namewarrant"])
+		else 
+			to_chat(src, SPAN_WARNING("Internal error: Warrant not found."))
+
+
 	if(href_list["editwarrantname"])
-		. = 1
+		. = TRUE
 		var/namelist = list()
 		for(var/datum/computer_file/report/crew_record/CR in GLOB.all_crew_records)
 			namelist += "[CR.get_name()] \[[CR.get_job()]\]"
@@ -154,7 +171,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			activewarrant.fields["jobwarrant"] = job
 
 	if(href_list["editwarrantnamecustom"])
-		. = 1
+		. = TRUE
 		var/new_name = sanitize(input("Please input name") as null|text)
 		var/new_job = sanitize(input("Please input job") as null|text)
 		if(CanInteract(user, GLOB.default_state))
@@ -164,7 +181,7 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			activewarrant.fields["jobwarrant"] = new_job
 
 	if(href_list["editwarrantcharges"])
-		. = 1
+		. = TRUE
 		var/new_charges = sanitize(input("Please input charges", "Charges", activewarrant.fields["charges"]) as null|text)
 		if(CanInteract(user, GLOB.default_state))
 			if (!new_charges || !activewarrant)
@@ -172,13 +189,13 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 			activewarrant.fields["charges"] = new_charges
 
 	if(href_list["editwarrantauth"])
-		. = 1
+		. = TRUE
 		if(!activewarrant)
 			return
 		activewarrant.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"
 
 	if(href_list["editwarrantidauth"])
-		. = 1
+		. = TRUE
 		if(!activewarrant)
 			return
 		// access-granting is only available for arrest warrants
@@ -210,5 +227,28 @@ LEGACY_RECORD_STRUCTURE(all_warrants, warrant)
 		activewarrant.fields["access"] = warrant_access
 
 	if(href_list["back"])
-		. = 1
+		. = TRUE
 		activewarrant = null
+
+
+//SEV Torch Arrest Warrant
+//System: Geneva 291
+//
+//Suspect Name: Joe Schmoe
+//Suspect Job: Assistant
+//Charges: Vandalism
+//
+//Authorized by: Notthe Capitano - Commanding Officer
+//Access authorized by: Notthe Capitano - Commanding Officer
+//
+//(legal notice)
+/datum/nano_module/program/digitalwarrant/proc/warranttotext(var/datum/computer_file/data/warrant/warrant)
+	. += "\[center]\[h3]" + GLOB.using_map.station_name + " " + capitalize(warrant.fields["arrestsearch"]) + " Warrant\[/center]\[/h3] \
+	      \[b]System: \[/b]" + GLOB.using_map.system_name
+	. += "\n\n\[b]Suspect Name: \[/b]" + warrant.fields["namewarrant"]
+	. += "\n\[b]Suspect Job: \[/b]"  + warrant.fields["jobwarrant"]
+	. += "\n\[b]Charges: \[/b]" + warrant.fields["charges"]
+	. += "\n\n\[b]Authorized by: \[/b]" + warrant.fields["auth"]
+	. += "\n\[b]Access authorized by: \[/b]" + warrant.fields["idauth"]
+	. += "\n\n\[small]THIS WARRANT IS ONLY VALID WITH PROPER AUTHORIZATION FROM AN APPROPRIATE HEAD OF STAFF ONBOARD THE VESSEL OR AS EXCEPTED IN SOLGOV LAW. \
+		  THIS PAPER IS DESIGNED FOR RECORDKEEPING PURPOSES ONLY AND SHOULD NOT BE PRESENTED TO THE SUSPECT.\[/small]"
