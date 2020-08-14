@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - rscadd: "You can now print out warrants to a paper on computers that have a printer installed. They are designed for recordkeeping purposes only."
