@@ -1016,6 +1016,7 @@
 "cg" = (
 /obj/effect/floor_decal/techfloor,
 /obj/machinery/atmospherics/valve/open{
+	layer = 2.07;
 	open = 0
 	},
 /obj/machinery/atmospherics/pipe/simple/visible{
