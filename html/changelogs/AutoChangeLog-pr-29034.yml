@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - maptweak: "Toxins lab window shutters should no longer randomly drop when the isolation lab has an alarm"

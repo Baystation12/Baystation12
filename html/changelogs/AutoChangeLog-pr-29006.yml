@@ -1,5 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - rscadd: "Codex now includes entries for the imprinting implanter that explains how to use it and the mindbreaker requirements."
-  - rscdel: "Removed unused/broken `remove_implant` verb"

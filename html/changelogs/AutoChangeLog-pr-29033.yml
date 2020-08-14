@@ -1,4 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - rscadd: "Windows now have damage overlays similar to walls. If a window is damaged, you can tell without having to examine it now."
