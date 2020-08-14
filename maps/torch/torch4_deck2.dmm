@@ -1993,12 +1993,6 @@
 	},
 /turf/simulated/open,
 /area/maintenance/seconddeck/aftstarboard)
-"dN" = (
-/obj/random/junk,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken5"
-	},
-/area/vacant/chapel)
 "dO" = (
 /obj/structure/table/rack{
 	desc = "A simple wooden altar covered in cloth.";
@@ -2800,9 +2794,7 @@
 /area/vacant/chapel)
 "fg" = (
 /obj/effect/decal/cleanable/generic,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
+/turf/simulated/floor/wood/walnut,
 /area/vacant/chapel)
 "fh" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
@@ -9857,9 +9849,7 @@
 /area/engineering/atmos)
 "wR" = (
 /obj/structure/reagent_dispensers/fueltank,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
+/turf/simulated/floor/wood/walnut,
 /area/vacant/chapel)
 "wS" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -13777,9 +13767,7 @@
 /area/maintenance/seconddeck/aftstarboard)
 "Hz" = (
 /obj/random/junk,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
+/turf/simulated/floor/wood/walnut,
 /area/vacant/chapel)
 "HB" = (
 /obj/structure/cable{
@@ -15009,13 +14997,6 @@
 /obj/machinery/door/firedoor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/hallway/primary/seconddeck/fore)
-"LU" = (
-/obj/structure/table/standard,
-/obj/item/weapon/flame/candle,
-/turf/simulated/floor/wood/walnut{
-	icon_state = "walnut_broken3"
-	},
-/area/vacant/chapel)
 "LX" = (
 /obj/machinery/atmospherics/unary/outlet_injector{
 	dir = 4;
@@ -31261,7 +31242,7 @@ aa
 aa
 aa
 aa
-aa
+JX
 JX
 JX
 JX
@@ -31462,8 +31443,8 @@ aa
 aa
 aa
 aa
-aa
-aa
+JX
+JX
 JX
 JX
 fd
@@ -31664,8 +31645,8 @@ aa
 aa
 aa
 JX
-aa
-aa
+JX
+JX
 JX
 ex
 fe
@@ -31866,8 +31847,8 @@ aa
 aa
 aa
 JX
-aa
-aa
+JX
+JX
 cH
 bE
 bE
@@ -32068,14 +32049,14 @@ aa
 aa
 aa
 JX
-aa
-aa
-dN
+JX
+JX
+Hz
 ey
 ff
 fZ
 gN
-LU
+gO
 iu
 Kv
 ci
@@ -32270,8 +32251,8 @@ aa
 aa
 JX
 JX
-aa
-aa
+JX
+JX
 dO
 dq
 EQ
