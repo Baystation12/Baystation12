@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - rscdel: "AI slippers have been removed from the codebase. (They were broken anyway)"
