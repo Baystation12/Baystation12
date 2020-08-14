@@ -670,7 +670,6 @@ var/list/worths = list(
 					/obj/machinery/atmospherics/unary/vent_scrubber = -2300,
 					/obj/machinery/bodyscanner = -6000,
 					/obj/machinery/body_scanconsole = -1500,
-					/obj/machinery/ai_slipper = -500,
 					/obj/machinery/alarm = -800,
 					/obj/machinery/air_sensor = -800,
 					/obj/machinery/fabricator = -3300,
@@ -730,4 +729,3 @@ var/list/worths = list(
 					/obj/machinery/bookbinder = -1200,
 					/obj/machinery = -1000,
 					) //Must be in descending order. Child before parents, otherwise it doesn't work.,
-
