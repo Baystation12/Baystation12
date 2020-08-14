@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - tweak: "Admin logs for supermatter related things will now clarify which supermatter and provide a jump link."
