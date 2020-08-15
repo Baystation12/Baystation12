@@ -31,23 +31,26 @@
 /obj/machinery/atmospherics/valve/shutoff/Initialize()
 	. = ..()
 	open()
-	hide(1)
 
-/obj/machinery/atmospherics/valve/shutoff/interface_interact(var/mob/user)
+/obj/machinery/atmospherics/valve/atmos_init()
+	. = ..()
+	var/turf/T = loc
+	hide(hides_under_flooring() && !T.is_plating())
+
+/obj/machinery/atmospherics/valve/shutoff/interface_interact(mob/user)
 	if(CanInteract(user, DefaultTopicState()))
 		close_on_leaks = !close_on_leaks
 		update_icon()
 		to_chat(user, "You [close_on_leaks ? "enable" : "disable"] the automatic shutoff circuit.")
 		return TRUE
 
+/obj/machinery/atmospherics/valve/shutoff/physical_attack_hand(mob/user)
+	return FALSE
+
 /obj/machinery/atmospherics/valve/shutoff/hide(var/do_hide)
-	if(do_hide)
-		if(level == 1)
-			layer = PIPE_LAYER
-		else if(level == 2)
-			..()
-	else
-		reset_plane_and_layer()
+	if(istype(loc, /turf/simulated))
+		set_invisibility(do_hide ? 101 : 0)
+	update_underlays()
 
 /obj/machinery/atmospherics/valve/shutoff/Process()
 	..()
