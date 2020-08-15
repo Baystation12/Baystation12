@@ -1,5 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - tweak: "RCDs can now dismantle windows, grilles, and low walls. Low walls can only be dismantled if the accompanying grille and window is already dismantled."
-  - bugfix: "RCDs can now build on open space tiles and on space tiles that aren't in `/area/space`"
