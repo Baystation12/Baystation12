@@ -268,7 +268,7 @@
 	work_type = /turf/simulated/floor/airless
 
 /decl/hierarchy/rcd_mode/floor_and_walls/base_turf/can_handle_work(var/rcd, var/turf/target)
-	return istype(target) && (isspace(target) || istype(target, get_base_turf_by_area(target)))
+	return istype(target) && (isspaceturf(target) || isopenspace(target) || istype(target, get_base_turf_by_area(target)))
 
 /decl/hierarchy/rcd_mode/floor_and_walls/floor_turf
 	cost = 3
@@ -306,3 +306,28 @@
 
 /decl/hierarchy/rcd_mode/deconstruction/wall/can_handle_work(var/obj/item/weapon/rcd/rcd, var/turf/simulated/wall/target)
 	return ..() && (rcd.canRwall || !target.reinf_material)
+
+/decl/hierarchy/rcd_mode/deconstruction/wall_frame
+	cost = 4
+	delay = 2 SECONDS
+	handles_type = /obj/structure/wall_frame
+
+/decl/hierarchy/rcd_mode/deconstruction/wall_frame/can_handle_work(obj/item/weapon/rcd/rcd, obj/structure/wall_frame/target)
+	. = ..()
+	if (.)
+		var/turf/T = get_turf(target)
+		if ((locate(/obj/structure/window) in T) || (locate(/obj/structure/grille) in T))
+			return FALSE
+
+/decl/hierarchy/rcd_mode/deconstruction/window
+	cost = 4
+	delay = 2 SECONDS
+	handles_type = /obj/structure/window
+
+/decl/hierarchy/rcd_mode/deconstruction/window/can_handle_work(obj/item/weapon/rcd/rcd, obj/structure/window/target)
+	return ..() && (rcd.canRwall || !target.reinf_material)
+
+/decl/hierarchy/rcd_mode/deconstruction/grille
+	cost = 2
+	delay = 1 SECOND
+	handles_type = /obj/structure/grille
