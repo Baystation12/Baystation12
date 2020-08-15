@@ -1,0 +1,5 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - tweak: "There is now one type of shutoff valve for every pipe layer."
+  - tweak: "Shutoff valves now hint at the direction of a leak."
