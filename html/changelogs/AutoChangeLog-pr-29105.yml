@@ -1,0 +1,4 @@
+author: "Detritus-Ha"
+delete-after: True
+changes: 
+  - maptweak: "Desperado turrets start disabled (you can now safely be naked in the mercenary base)."
