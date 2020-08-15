@@ -36,9 +36,9 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 			if(linked.is_still())
 				autopilot = 0
 			else
-				linked.decelerate()
+				linked.decelerate(accellimit)
 		else
-			var/brake_path = linked.get_brake_path()
+			var/brake_path = linked.get_brake_path() / HALF_UNIT_DIAGONAL //get_dist is steps, not hypotenuse
 			var/direction = get_dir(linked.loc, T)
 			var/acceleration = min(linked.get_acceleration(), accellimit)
 			var/speed = linked.get_speed()
@@ -46,7 +46,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 
 			// Destination is current grid or speedlimit is exceeded
 			if ((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
-				linked.decelerate()
+				linked.decelerate(accellimit)
 			// Heading does not match direction
 			else if (heading & ~direction)
 				linked.accelerate(turn(heading & ~direction, 180), accellimit)
@@ -199,7 +199,7 @@ LEGACY_RECORD_STRUCTURE(all_waypoints, waypoint)
 		linked.relaymove(user, ndir, accellimit)
 
 	if (href_list["brake"])
-		linked.decelerate()
+		linked.decelerate(accellimit)
 
 	if (href_list["apilot"])
 		autopilot = !autopilot

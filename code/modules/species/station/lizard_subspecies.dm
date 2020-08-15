@@ -28,6 +28,9 @@
 		),
 		TAG_FACTION = list(
 			FACTION_UNATHI_RAH_ZAKEH
+		),
+		TAG_RELIGION = list(
+			RELIGION_UNATHI_AGA_EAKHE
 		)
 	)
 

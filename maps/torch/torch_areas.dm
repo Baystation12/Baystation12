@@ -87,9 +87,6 @@
 /area/maintenance/substation/fourthdeck
 	name = "Fourth Deck Substation"
 
-/area/crew_quarters/safe_room/fourthdeck
-	name = "\improper Fourth Deck Safe Room"
-
 //Third Deck (Z-2)
 /area/hallway/primary/thirddeck/fore
 	name = "\improper Third Deck Fore Hallway"
@@ -1003,6 +1000,14 @@
 	name = "\improper Telecoms Storage"
 	icon_state = "tcomsatstore"
 
+// Borg Upload
+
+/area/synth/borg_upload
+	name = "\improper Cyborg Upload Chamber"
+	icon_state = "ai_upload"
+	ambience = list('sound/ambience/ambimalf.ogg')
+	req_access = list(access_ai_upload)
+
 // Security
 
 /area/security/bo
@@ -1579,8 +1584,8 @@ area/assembly/robotics/office
 	icon_state = "janitor"
 	req_access = list(access_janitor)
 
-/area/janitor/aux
-	name = "\improper Aux Custodial Closet"
+/area/janitor/storage
+	name = "\improper Custodial Storage Closet"
 
 // Tcomm
 /area/tcommsat/

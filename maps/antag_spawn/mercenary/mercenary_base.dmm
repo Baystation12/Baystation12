@@ -218,6 +218,7 @@
 	},
 /obj/machinery/turretid/lethal{
 	ailock = 1;
+	enabled = 0;
 	check_arrest = 0;
 	check_records = 0;
 	pixel_y = 32;

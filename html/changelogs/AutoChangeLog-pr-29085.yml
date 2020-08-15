@@ -1,4 +1,0 @@
-author: "Shadowtail117"
-delete-after: True
-changes: 
-  - bugfix: "Surgery failure messages no longer appear while eating on top of a chair or table."

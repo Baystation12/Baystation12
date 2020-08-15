@@ -3,6 +3,14 @@
 	description = "Headed by the so-called Council of Honourable light, the seats of the Hegemony are taken by the kaahnepos of the major clans and Krukzuz. \
 	The Hegemony's formal purpose is the promotion of unathi interests in trade and diplomacy with other species. In practice, this has often resulted \
 	in the reinforcement of city-states in the emerging market of off-world commerce."
+	
+/decl/cultural_info/faction/unathi/ssen_uuma
+	name = FACTION_UNATHI_SSEN_UUMA
+	description = "Established in 2257 by a group of prominent Diamond Peak Kaahnepos, the Ssen-Uuma Convent seeks to ensure the preservation of the \
+	established order, well-being, and independence of Moghes. This is done by protecting it from harmful influence and possible aggression of more \
+	developed alien races. Essentially a military alliance between major clans of the area, administered by a strictly ranked General Staff. Ssen-Uuma \
+	gathers military and political intelligence on alien empires, purchases modern equipment and supports unathi mercenaries operating off Moghes. \
+	They seek closer ties to the powerhouses of the region in the form of alien government agencies and corporations." 
 
 /decl/cultural_info/faction/unathi/baask
 	name = FACTION_UNATHI_BAASK

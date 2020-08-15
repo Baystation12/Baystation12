@@ -68,7 +68,7 @@
 		return 1
 
 /obj/machinery/atm/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/card))
+	if(istype(I, /obj/item/weapon/card/id))
 		if(emagged > 0)
 			//prevent inserting id into an emagged ATM
 			to_chat(user, "[icon2html(src, user)] <span class='warning'>CARD READER ERROR. This system has been compromised!</span>")

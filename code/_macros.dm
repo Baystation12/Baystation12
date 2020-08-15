@@ -69,6 +69,8 @@
 
 #define isspace(A) istype(A, /area/space)
 
+#define isspaceturf(A) istype(A, /turf/space)
+
 #define ispAI(A) istype(A, /mob/living/silicon/pai)
 
 #define isrobot(A) istype(A, /mob/living/silicon/robot)

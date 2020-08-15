@@ -120,18 +120,19 @@
 		return
 
 	// Generic checks, similar to checks done by supermatter monitor program.
-	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised.", FALSE)
-	aw_notify = status_adminwarn_check(SUPERMATTER_NOTIFY, aw_notify, "INFO: Supermatter crystal is approaching unsafe operating temperature.", FALSE)
-	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage!", FALSE)
-	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%!", TRUE)
-	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%!", FALSE)
-	aw_delam = status_adminwarn_check(SUPERMATTER_DELAMINATING, aw_delam, "CRIT: Supermatter is delaminating!", TRUE)
+	aw_normal = status_adminwarn_check(SUPERMATTER_NORMAL, aw_normal, "INFO: Supermatter crystal has been energised", FALSE)
+	aw_notify = status_adminwarn_check(SUPERMATTER_NOTIFY, aw_notify, "INFO: Supermatter crystal is approaching unsafe operating temperature", FALSE)
+	aw_warning = status_adminwarn_check(SUPERMATTER_WARNING, aw_warning, "WARN: Supermatter crystal is taking integrity damage", FALSE)
+	aw_danger = status_adminwarn_check(SUPERMATTER_DANGER, aw_danger, "WARN: Supermatter integrity is below 50%", TRUE)
+	aw_emerg = status_adminwarn_check(SUPERMATTER_EMERGENCY, aw_emerg, "CRIT: Supermatter integrity is below 25%", FALSE)
+	aw_delam = status_adminwarn_check(SUPERMATTER_DELAMINATING, aw_delam, "CRIT: Supermatter is delaminating", TRUE)
 
 	// EPR check. Only runs when supermatter is energised. Triggers when there is very low amount of coolant in the core (less than one standard canister).
 	// This usually means a core breach or deliberate venting.
 	if(get_status() && (get_epr() < 0.5))
 		if(!aw_EPR)
-			log_and_message_admins("WARN: Supermatter EPR value low. Possible core breach detected.")
+			var/area/A = get_area(src)
+			log_and_message_admins("WARN: Supermatter EPR value low. Possible core breach detected in [A.name]", null, src)
 		aw_EPR = TRUE
 	else
 		aw_EPR = FALSE
@@ -140,9 +141,10 @@
 	var/status = get_status()
 	if(status >= min_status)
 		if(!current_state)
-			log_and_message_admins(message)
+			var/area/A = get_area(src)
+			log_and_message_admins(message + " in [A.name]", null, src)
 			if(send_to_irc)
-				send2adminirc(message)
+				send2adminirc(message + " in [A.name]")
 		return TRUE
 	else
 		return FALSE

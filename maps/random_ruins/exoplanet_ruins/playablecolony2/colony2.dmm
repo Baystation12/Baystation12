@@ -104,6 +104,16 @@
 /obj/effect/paint/ocean,
 /turf/simulated/wall/r_wall,
 /area/map_template/colony2/commons)
+"cw" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 4;
+	start_pressure = 120
+	},
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
 "cD" = (
 /obj/effect/wallframe_spawn/reinforced,
 /obj/effect/paint/ocean,
@@ -558,6 +568,12 @@
 /obj/machinery/meter,
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/external)
+"kf" = (
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
 "kn" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen{
 	dir = 4
@@ -836,6 +852,9 @@
 	id = "colonymine2"
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/light/spot{
+	dir = 4
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
 "sO" = (
@@ -1191,6 +1210,9 @@
 	},
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
+"BZ" = (
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
 "Ch" = (
 /obj/machinery/portable_atmospherics/powered/scrubber,
 /obj/machinery/atmospherics/portables_connector,
@@ -1471,7 +1493,6 @@
 /obj/effect/floor_decal/industrial/loading{
 	dir = 4
 	},
-/obj/machinery/light/spot,
 /obj/effect/floor_decal/industrial/hatch,
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
@@ -1652,9 +1673,6 @@
 	id_tag = "colony2atmos";
 	name = "Atmospheric Pod Blast Shutter"
 	},
-/obj/machinery/light/spot{
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/hatch,
 /turf/simulated/floor/reinforced,
 /area/map_template/colony2/external)
@@ -1736,6 +1754,12 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/map_template/colony2/atmospherics)
+"KV" = (
+/obj/machinery/light/spot{
+	dir = 8
+	},
+/turf/simulated/floor/reinforced,
+/area/map_template/colony2/external)
 "Ls" = (
 /obj/effect/paint/ocean,
 /turf/simulated/wall/r_wall,
@@ -1772,18 +1796,6 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/map_template/colony2/ship)
-"Ml" = (
-/obj/machinery/door/blast/regular{
-	dir = 4;
-	id_tag = "colony2atmos";
-	name = "Atmospheric Pod Blast Shutter"
-	},
-/obj/machinery/light/spot{
-	dir = 1
-	},
-/obj/effect/floor_decal/industrial/hatch,
-/turf/simulated/floor/reinforced/airless,
-/area/map_template/colony2/external)
 "Mv" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
@@ -2385,9 +2397,6 @@
 	id_tag = "colony2atmos";
 	name = "Atmospheric Pod Blast Shutter"
 	},
-/obj/machinery/light/spot{
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/hatch,
 /turf/simulated/floor/reinforced/airless,
 /area/map_template/colony2/external)
@@ -2513,6 +2522,16 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/airless,
 /area/map_template/colony2/external)
+"Xt" = (
+/obj/machinery/atmospherics/unary/tank/carbon_dioxide{
+	dir = 8;
+	start_pressure = 120
+	},
+/obj/machinery/light/spot{
+	dir = 4
+	},
+/turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
 "XB" = (
 /obj/machinery/door/blast/regular{
 	dir = 2;
@@ -2521,6 +2540,12 @@
 	},
 /obj/effect/floor_decal/industrial/hatch,
 /turf/simulated/floor/reinforced/airless,
+/area/map_template/colony2/external)
+"XO" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/turf/simulated/floor/reinforced,
 /area/map_template/colony2/external)
 "XU" = (
 /obj/machinery/atmospherics/unary/tank/nitrogen{
@@ -2668,7 +2693,7 @@ Dw
 Dw
 Dw
 Ls
-aB
+an
 Ls
 UW
 UW
@@ -2748,11 +2773,11 @@ an
 Ls
 HD
 HD
-HD
+Xt
 HD
 WM
 Ls
-an
+aB
 Ls
 Jg
 Jg
@@ -2833,9 +2858,9 @@ Og
 Og
 Og
 Og
-Og
+kf
 zd
-Og
+BZ
 Og
 Og
 Og
@@ -2878,7 +2903,7 @@ Ls
 Ls
 Jq
 Ls
-Og
+XO
 Ls
 Ls
 Ls
@@ -2920,7 +2945,7 @@ YI
 BR
 Is
 Ls
-Ml
+Rp
 Ls
 tZ
 Mv
@@ -3046,7 +3071,7 @@ PS
 BR
 Is
 Ls
-Ml
+Rp
 Ls
 Et
 SJ
@@ -3088,7 +3113,7 @@ Ls
 Ls
 Jq
 Ls
-Og
+XO
 Ls
 Ls
 Ls
@@ -3127,8 +3152,9 @@ Og
 Og
 Og
 Og
-Og
+KV
 zd
+BZ
 Og
 Og
 Og
@@ -3137,13 +3163,12 @@ Og
 Og
 Og
 Og
-Og
-Og
-Xf
-Xf
-Og
-Og
-Og
+kf
+BZ
+BZ
+BZ
+BZ
+kf
 "}
 (14,1,1) = {"
 Og
@@ -3181,7 +3206,7 @@ Ls
 Ls
 Og
 Ls
-Ml
+Rp
 Rp
 Rp
 Gq
@@ -3210,11 +3235,11 @@ an
 Ls
 Dw
 Dw
-Dw
+cw
 Dw
 WM
 Ls
-an
+aB
 Ls
 kn
 kn
@@ -3298,7 +3323,7 @@ HD
 HD
 HD
 Ls
-aB
+an
 Ls
 XU
 XU
