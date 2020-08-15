@@ -428,7 +428,7 @@
 		var/list/banned_chems = list(
 			/datum/reagent/adminordrazine,
 			/datum/reagent/nutriment,
-			/datum/reagent/nanites,
+			/datum/reagent/nanites
 			)
 
 		for(var/x=1;x<=additional_chems;x++)
