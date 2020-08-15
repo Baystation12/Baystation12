@@ -93,19 +93,28 @@ var/global/list/string_slot_flags = list(
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair
 	for(var/path in paths)
-		var/datum/sprite_accessory/hair/H = new path()
+		var/datum/sprite_accessory/hair/H = path
+		if (!initial(H.name))
+			continue
+		H = new path()
 		GLOB.hair_styles_list[H.name] = H
 
 	//Facial Hair - Initialise all /datum/sprite_accessory/facial_hair into an list indexed by facialhair-style name
 	paths = typesof(/datum/sprite_accessory/facial_hair) - /datum/sprite_accessory/facial_hair
 	for(var/path in paths)
-		var/datum/sprite_accessory/facial_hair/H = new path()
+		var/datum/sprite_accessory/facial_hair/H = path
+		if (!initial(H.name))
+			continue
+		H = new path()
 		GLOB.facial_hair_styles_list[H.name] = H
 
 	//Body markings - Initialise all /datum/sprite_accessory/marking into an list indexed by marking name
 	paths = typesof(/datum/sprite_accessory/marking) - /datum/sprite_accessory/marking
 	for(var/path in paths)
-		var/datum/sprite_accessory/marking/M = new path()
+		var/datum/sprite_accessory/marking/M = path
+		if (!initial(M.name))
+			continue
+		M = new path()
 		GLOB.body_marking_styles_list[M.name] = M
 
 	//Languages and species.
