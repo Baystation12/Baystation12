@@ -92,7 +92,7 @@
 
 
 /obj/item/weapon/reagent_containers/pill/cyanide
-	name = "strange pill"
+	name = "cyanide pill"
 	desc = "It's marked 'KCN'. Smells vaguely of almonds."
 	icon_state = "pillC"
 	volume = 50
