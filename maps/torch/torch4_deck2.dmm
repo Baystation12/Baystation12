@@ -566,7 +566,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/aftstarboard)
 "ba" = (
@@ -12861,7 +12861,7 @@
 /turf/simulated/floor/plating,
 /area/maintenance/seconddeck/forestarboard)
 "EY" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/structure/cable/green{
 	d1 = 1;
 	d2 = 2;
@@ -13776,7 +13776,7 @@
 	icon_state = "4-8";
 	pixel_x = 0
 	},
-/obj/machinery/atmospherics/valve/shutoff{
+/obj/machinery/atmospherics/valve/shutoff/supply{
 	dir = 4
 	},
 /obj/structure/railing/mapped{
@@ -15976,10 +15976,10 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
-/obj/machinery/atmospherics/valve/shutoff,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/floor/plating,
 /area/engineering/fuelbay)
 "OY" = (
@@ -17206,7 +17206,7 @@
 /turf/simulated/open,
 /area/hallway/primary/seconddeck/center)
 "SH" = (
-/obj/machinery/atmospherics/valve/shutoff,
+/obj/machinery/atmospherics/valve/shutoff/supply,
 /obj/item/device/radio/intercom{
 	dir = 4;
 	pixel_x = -21

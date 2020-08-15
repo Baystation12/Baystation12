@@ -63,6 +63,17 @@
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down
 
+/datum/pipe/pipe_dispenser/simple/autoshutoff
+	name = "automatic shutoff valve"
+	desc = "a valve that can automatically shut itself off"
+	build_path = /obj/item/pipe
+	build_icon_state = "svalve"
+	colorable = FALSE
+	pipe_color = PIPE_COLOR_WHITE
+	constructed_path = /obj/machinery/atmospherics/valve/shutoff
+	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
+
 /datum/pipe/pipe_dispenser/supply
 	category = "Supply Pipes"
 	colorable = FALSE
@@ -125,6 +136,17 @@
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/supply
 
+/datum/pipe/pipe_dispenser/supply/autoshutoff
+	name = "supply shutoff valve"
+	desc = "a valve that can automatically shut itself off"
+	build_path = /obj/item/pipe
+	build_icon_state = "svalve"
+	colorable = FALSE
+	pipe_color = PIPE_COLOR_WHITE
+	constructed_path = /obj/machinery/atmospherics/valve/shutoff/supply
+	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
+
 /datum/pipe/pipe_dispenser/scrubber
 	category = "Scrubber Pipes"
 	colorable = FALSE
@@ -185,6 +207,17 @@
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/scrubbers
+
+/datum/pipe/pipe_dispenser/scrubber/autoshutoff
+	name = "scrubber shutoff valve"
+	desc = "a valve that can automatically shut itself off"
+	build_path = /obj/item/pipe
+	build_icon_state = "svalve"
+	colorable = FALSE
+	pipe_color = PIPE_COLOR_WHITE
+	constructed_path = /obj/machinery/atmospherics/valve/shutoff/scrubbers
+	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/fuel
 	category = "Fuel Pipes"
@@ -247,6 +280,17 @@
 	build_icon = 'icons/obj/structures.dmi'
 	build_icon_state = "down"
 	constructed_path = /obj/machinery/atmospherics/pipe/zpipe/down/fuel
+
+/datum/pipe/pipe_dispenser/fuel/autoshutoff
+	name = "fuel shutoff valve"
+	desc = "a valve that can automatically shut itself off"
+	build_path = /obj/item/pipe
+	build_icon_state = "svalve"
+	colorable = FALSE
+	pipe_color = PIPE_COLOR_WHITE
+	constructed_path = /obj/machinery/atmospherics/valve/shutoff/fuel
+	pipe_class = PIPE_CLASS_BINARY
+	rotate_class = PIPE_ROTATE_TWODIR
 
 /datum/pipe/pipe_dispenser/he
 	category = "Heat Exchange Pipes"

@@ -5228,13 +5228,13 @@
 /turf/simulated/floor/tiled/airless,
 /area/ship/scrap/maintenance/atmos)
 "iU" = (
-/obj/machinery/atmospherics/valve/shutoff,
 /obj/machinery/alarm{
 	dir = 4;
 	icon_state = "alarm0";
 	pixel_x = -24;
 	req_access = newlist()
 	},
+/obj/machinery/atmospherics/valve/shutoff/fuel,
 /turf/simulated/floor/airless,
 /area/ship/scrap/maintenance/engine/aft)
 "iV" = (
