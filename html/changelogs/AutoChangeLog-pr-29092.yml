@@ -1,0 +1,4 @@
+author: "Mucker"
+delete-after: True
+changes: 
+  - tweak: "Removes the \"Request AI Presence\" button from holopads if no AI exists."
