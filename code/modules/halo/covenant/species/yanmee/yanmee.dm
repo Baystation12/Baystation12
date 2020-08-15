@@ -37,7 +37,7 @@ Huragok Engineers. Their flight makes them hard to hit during combat and their n
 	darksight = 4
 	brute_mod = 1.2
 	burn_mod = 1.2
-	slowdown = -0.3
+	slowdown = -0.2 //Better than a brute, worse than an elite.
 	gluttonous = GLUT_ANYTHING
 	pixel_offset_x = -1
 	default_faction = "Covenant"
