@@ -271,6 +271,7 @@
 	pixel_x = -25
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/chem_master,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "O" = (
@@ -287,6 +288,7 @@
 	icon_state = "tube1"
 	},
 /obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/reagentgrinder,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 "Q" = (
@@ -330,6 +332,29 @@
 "U" = (
 /obj/machinery/light,
 /obj/effect/floor_decal/corner/blue/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"V" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/reagent_temperature/cooler,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"W" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/reagent_temperature,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"X" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/machinery/chemical_dispenser/full,
+/turf/simulated/floor/tiled/white,
+/area/medical/surgery)
+"Z" = (
+/obj/effect/floor_decal/corner/blue/diagonal,
+/obj/item/weapon/reagent_containers/glass/beaker/large,
+/obj/item/weapon/reagent_containers/glass/beaker/insulated/large,
+/obj/item/weapon/reagent_containers/glass/beaker/noreact,
+/obj/structure/table/rack,
 /turf/simulated/floor/tiled/white,
 /area/medical/surgery)
 
@@ -963,7 +988,7 @@ t
 z
 F
 J
-i
+X
 N
 P
 R
@@ -997,9 +1022,9 @@ i
 i
 i
 i
+W
 i
-i
-i
+V
 i
 i
 i
@@ -1031,7 +1056,7 @@ i
 A
 i
 K
-i
+Z
 i
 i
 i
