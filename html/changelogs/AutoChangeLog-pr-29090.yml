@@ -1,0 +1,4 @@
+author: "SierraKomodo"
+delete-after: True
+changes: 
+  - bugfix: "Walls, grilles, and windows now update connections properly when a neighboring wall/grille/window is deleted."
