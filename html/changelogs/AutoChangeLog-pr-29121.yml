@@ -1,0 +1,4 @@
+author: "Shadowtail117"
+delete-after: True
+changes: 
+  - bugfix: "In accordance with the removal of the AI from the Torch, you can no longer select it as a job in your character setup."
