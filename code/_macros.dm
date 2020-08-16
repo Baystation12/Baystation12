@@ -77,6 +77,8 @@
 
 #define issilicon(A) istype(A, /mob/living/silicon)
 
+#define ismachinerestricted(A) (issilicon(A) && A.machine_restriction)
+
 #define isslime(A) istype(A, /mob/living/carbon/slime)
 
 #define isunderwear(A) istype(A, /obj/item/underwear)

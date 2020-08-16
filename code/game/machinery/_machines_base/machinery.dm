@@ -223,7 +223,8 @@ Class Procs:
 		return STATUS_CLOSE
 
 	if(user.direct_machine_interface(src))
-		if (silicon_restriction && issilicon(user))
+		var/mob/living/silicon/silicon = user
+		if (silicon_restriction && ismachinerestricted(silicon))
 			if (silicon_restriction == STATUS_CLOSE)
 				to_chat(user, SPAN_WARNING("Remote AI systems detected. Firewall protections forbid remote AI access."))
 			return silicon_restriction
