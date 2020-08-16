@@ -450,6 +450,8 @@
 	can_hold = list(
 		/obj/item/device/soulstone
 		)
+/obj/item/weapon/storage/belt/soulstone/disrupts_psionics()
+	return FALSE
 
 /obj/item/weapon/storage/belt/soulstone/full/New()
 	..()
