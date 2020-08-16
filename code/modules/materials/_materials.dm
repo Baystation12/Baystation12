@@ -139,11 +139,12 @@
 
 	to_chat(user, "<span class='notice'>You reinforce the [target_stack] with the [reinf_mat.display_name].</span>")
 	used_stack.use(1)
+	var/target_loc = target_stack.loc
 	var/obj/item/stack/material/S = target_stack.split(needed_sheets)
 	S.reinf_material = reinf_mat
 	S.update_strings()
 	S.update_icon()
-	S.dropInto(target_stack.loc)
+	S.dropInto(target_loc)
 
 /material/proc/build_wired_product(var/mob/user, var/obj/item/stack/used_stack, var/obj/item/stack/target_stack)
 	if(!wire_product)
