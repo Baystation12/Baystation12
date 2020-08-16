@@ -1,0 +1,6 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Accessories attached to uniforms are hidden by suits that cover them."
+  - tweak: "Clothing & accessories flagged as bulky cannot occupy the same body zones."
+  - rscadd: "Adds a light & medium armor that can be attached to uniforms. Antag-buyable for 15/25."
