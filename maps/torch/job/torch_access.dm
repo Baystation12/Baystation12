@@ -209,3 +209,9 @@
 	id = access_petrov_maint
 	desc = "Petrov Maintenance"
 	region = ACCESS_REGION_NT
+
+/var/const/access_torch_helm = "ACCESS_TORCH_HELM"
+/datum/access/torch_helm
+	id = access_torch_helm
+	desc = "Torch Helm"
+	region = ACCESS_REGION_COMMAND

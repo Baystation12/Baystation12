@@ -732,7 +732,9 @@
 /turf/simulated/floor/plating,
 /area/exploration_shuttle/cockpit)
 "bw" = (
-/obj/machinery/computer/ship/helm,
+/obj/machinery/computer/ship/helm{
+	req_access = list(list("ACCESS_EXPLO_HELM"))
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/exploration_shuttle/cockpit)
 "bx" = (
@@ -2022,7 +2024,8 @@
 /area/exploration_shuttle/airlock)
 "dM" = (
 /obj/machinery/computer/ship/helm{
-	dir = 1
+	dir = 1;
+	req_access = list(list("ACCESS_TORCH_GUP_HELM"))
 	},
 /obj/machinery/light{
 	dir = 8

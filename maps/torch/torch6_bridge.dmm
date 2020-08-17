@@ -2698,7 +2698,9 @@
 /turf/simulated/floor/tiled/dark,
 /area/bridge/meeting_room)
 "eH" = (
-/obj/machinery/computer/ship/helm,
+/obj/machinery/computer/ship/helm{
+	req_access = list(list("ACCESS_TORCH_AQUILA_HELM"))
+	},
 /turf/simulated/floor/tiled/dark,
 /area/aquila/cockpit)
 "eI" = (
@@ -14338,7 +14340,8 @@
 "Rq" = (
 /obj/machinery/computer/ship/helm{
 	dir = 4;
-	icon_state = "computer"
+	icon_state = "computer";
+	req_access = list(list("ACCESS_TORCH_HELM"))
 	},
 /obj/effect/floor_decal/corner/blue/mono,
 /obj/structure/cable/green{
