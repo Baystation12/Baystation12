@@ -769,7 +769,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			T.ttemp = 293.15
 */
 /client/proc/cmd_admin_headset_message(mob/M)
-	set category = "Event"
+	set category = "Fun"
 	set name = "Headset Message"
 
 	admin_headset_message(M)
@@ -800,7 +800,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	log_admin("[key_name(src)] replied to [key_name(H)]'s [sender] message with the message [input].")
 	message_admins("[key_name_admin(src)] replied to [key_name_admin(H)]'s [sender] message with: \"[input]\"")
-	to_chat(H, "<span class='boldannounce'>Atención, transmisión prioritaria entrante de [sender == "Syndicate" ? "tu benefactor" : "Comando Central"]... La comunicación es : </span><span class = 'notice'> [input]  </span>")
+	to_chat(H, "<span class='specialnoticebold'>Atención, transmisión prioritaria entrante de [sender == "Syndicate" ? "tu benefactor" : "Comando Central"]... La comunicación es : </span><span class = 'specialnotice'> [input]  </span>")
 
 /client/proc/toggle_view_range()
 	set category = "Special Verbs"
