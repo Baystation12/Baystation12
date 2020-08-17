@@ -1248,6 +1248,16 @@
 
 		usr.client.cmd_admin_animalize(M)
 
+	else if(href_list["makezombie"])
+		if(!check_rights(R_ADMIN))	return
+
+		var/mob/living/carbon/human/H = locate(href_list["makezombie"])
+		if(!istype(H))
+			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human")
+
+		log_and_message_admins("attempting to zombify [key_name_admin(H)]")
+		H.zombify()
+
 	else if(href_list["togmutate"])
 		if(!check_rights(R_SPAWN))	return
 

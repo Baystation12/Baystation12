@@ -816,6 +816,96 @@
 		new_mob.key = M.key
 	qdel(M)
 
+/datum/reagent/zombie
+	var/list/stage1_messages = list(
+		"You feel uncomfortably warm.",
+		"You feel rather feverish.",
+		"Your throat is extremely dry...",
+		"Your muscles cramp...",
+		"You feel dizzy.",
+		"You feel slightly fatigued.",
+		"You feel light-headed."
+	)
+
+	var/list/stage2_messages = list(
+		"You feel something under your skin!",
+		"Mucus runs down the back of your throat",
+		"Your muscles burn.",
+		"Your skin itches.",
+		"Your bones ache.",
+		"Sweat runs down the side of your neck.",
+		"Your heart races."
+	)
+
+	var/list/stage3_messages = list(
+		"Your head feels like it's splitting open!",
+		"Your skin is peeling away!",
+		"Your body stings all over!",
+		"It feels like your insides are squirming!",
+		"You're in agony!"
+	)
+
+	name = "Liquid Corruption"
+	description = "A filthy, oily substance which slowly churns of its own accord."
+	taste_description = "decaying blood"
+	color = "#540000"
+	taste_mult = 5
+	metabolism = REM
+	overdose = 200
+	hidden_from_codex = TRUE
+	heating_products = null
+	heating_point = null
+
+/datum/reagent/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(!istype(M, /mob/living/carbon/human))
+		return
+
+	var/mob/living/carbon/human/H = M
+	if(!(H.species.name in ORGANIC_SPECIES) || isspecies(H,SPECIES_DIONA) || H.isFBP()) //Don't affect zombies, diona, FBPs, etc.
+		remove_self(volume)
+		return
+	var/true_dose = H.chem_doses[type] + volume
+
+	if(true_dose >= 30)
+		if(M.getBrainLoss() > 140)
+			H.zombify()
+		if(prob(1))
+			to_chat(M, SPAN_WARNING("<font style='font-size:[rand(1,2)]'>[pick(stage1_messages)]</font>"))
+
+	if(true_dose >= 60)
+		M.bodytemperature += 7.5
+		if(prob(3))
+			to_chat(M, SPAN_WARNING("<font style='font-size:2'>[pick(stage1_messages)]</font>"))
+		if(M.getBrainLoss() < 20)
+			M.adjustBrainLoss(rand(1,2))
+
+	if(true_dose >= 90)
+		M.add_chemical_effect(CE_MIND, -2)
+		M.hallucination(50, min(true_dose/2, 50))
+		if(M.getBrainLoss() < 75)
+			M.adjustBrainLoss(rand(1,2))
+		if(prob(0.5))
+			H.seizure()
+			H.adjustBrainLoss(rand(12, 24))
+		if(prob(5))
+			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(2,3)]'>[pick(stage2_messages)]</font>"))
+		M.bodytemperature += 9
+
+	if(true_dose >= 110)
+		M.adjustHalLoss(5)
+		M.make_dizzy(10)
+		if(prob(8))
+			to_chat(M, SPAN_DANGER("<font style='font-size:[rand(3,4)]'>[pick(stage3_messages)]</font>"))
+
+	if(true_dose >= 135)
+		if(prob(3))
+			H.zombify()
+
+	M.reagents.add_reagent(/datum/reagent/zombie, rand(0.5,1.5))
+
+/datum/reagent/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	affect_blood(M, alien, removed * 0.5)
+
 /datum/reagent/nanites
 	name = "Nanomachines"
 	description = "Microscopic construction robots."
@@ -852,35 +942,6 @@
 	M.species.set_default_hair(M)
 	to_chat(M, "<span class='warning'>You feel a chill and your skin feels lighter..</span>")
 	remove_self(volume)
-
-/datum/reagent/toxin/zombie
-	name = "Liquid Corruption"
-	description = "A filthy, oily substance which slowly churns of its own accord."
-	taste_description = "decaying blood"
-	color = "#800000"
-	taste_mult = 5
-	strength = 10
-	metabolism = REM * 5
-	overdose = 30
-	hidden_from_codex = TRUE
-	heating_products = null
-	heating_point = null
-	var/amount_to_zombify = 5
-
-/datum/reagent/toxin/zombie/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_blood(M, alien, removed * 0.5)
-
-/datum/reagent/toxin/zombie/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if (istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
-		var/true_dose = H.chem_doses[type] + volume
-		if (true_dose >= amount_to_zombify)
-			H.zombify()
-		else if (true_dose > 1 && prob(20))
-			H.zombify()
-		else if (prob(10))
-			to_chat(H, "<span class='warning'>You feel terribly ill!</span>")
 
 /datum/reagent/toxin/bromide
 	name = "Bromide"

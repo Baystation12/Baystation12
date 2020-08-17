@@ -210,6 +210,8 @@
 		var/obj/item/organ/external/temp = H.organs_by_name[BP_R_HAND]
 		if (user.hand)
 			temp = H.organs_by_name[BP_L_HAND]
+		if(MUTATION_FERAL in user.mutations)
+			return
 		if(temp && !temp.is_usable())
 			to_chat(user, "<span class='notice'>You try to move your [temp.name], but cannot!</span>")
 			return

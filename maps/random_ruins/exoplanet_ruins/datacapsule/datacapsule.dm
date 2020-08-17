@@ -29,12 +29,11 @@
 	suit = /obj/item/clothing/suit/bio_suit/anomaly
 	head = /obj/item/clothing/head/bio_hood/anomaly
 
-/datum/reagent/toxin/zombie/science
+/datum/reagent/zombie/science
 	name = "Isolated Corruption"
 	description = "An incredibly dark, oily substance. Moves very slightly."
 	taste_description = "decayed blood"
 	color = "#800000"
-	amount_to_zombify = 3
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random_podchem
 	name = "unmarked vial"
@@ -42,7 +41,7 @@
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random_podchem/Initialize()
 	. = ..()
 	desc += "Label is smudged, and there's crusted blood fingerprints on it."
-	var/reagent_type = pick(/datum/reagent/random, /datum/reagent/toxin/zombie/science, /datum/reagent/rezadone, /datum/reagent/three_eye)
+	var/reagent_type = pick(/datum/reagent/random, /datum/reagent/zombie/science, /datum/reagent/rezadone, /datum/reagent/three_eye)
 	reagents.add_reagent(pick(reagent_type), 5)
 
 /obj/structure/backup_server

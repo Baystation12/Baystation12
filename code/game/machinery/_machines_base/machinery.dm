@@ -293,6 +293,10 @@ Class Procs:
 /obj/machinery/attack_hand(mob/user)
 	if((. = ..())) // Buckling, climbers; unlikely to return true.
 		return
+	if(MUTATION_FERAL in user.mutations)
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
+		attack_generic(user, 10, "smashes")
+		return TRUE
 	if(!CanPhysicallyInteract(user))
 		return FALSE // The interactions below all assume physical access to the machine. If this is not the case, we let the machine take further action.
 	if(!user.IsAdvancedToolUser())
@@ -302,10 +306,10 @@ Class Procs:
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 55)
 			visible_message("<span class='warning'>[H] stares cluelessly at \the [src].</span>")
-			return 1
+			return TRUE
 		else if(prob(H.getBrainLoss()))
 			to_chat(user, "<span class='warning'>You momentarily forget how to use \the [src].</span>")
-			return 1
+			return TRUE
 	if((. = component_attack_hand(user)))
 		return
 	if(wires && (. = wires.Interact(user)))

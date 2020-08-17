@@ -444,6 +444,10 @@
 			if(do_after(user, 30) && user.Adjacent(src) && (pilot in pilots) && !hatch_closed)
 				user.visible_message(SPAN_DANGER("\The [user] drags \the [pilot] out of \the [src]!"))
 				eject(pilot, silent=1)
+		else if(hatch_closed)
+			if(MUTATION_FERAL in user.mutations)
+				user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
+				attack_generic(user, 5)
 		return
 
 	// Otherwise toggle the hatch.
@@ -455,6 +459,11 @@
 	hud_open.queue_icon_update()
 	queue_icon_update()
 	return
+
+/mob/living/exosuit/attack_generic(var/mob/user, var/damage, var/attack_message = "smashes into")
+	if(..())
+		playsound(loc, 'sound/effects/metal_close.ogg', 40, 1)
+		playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
 
 /mob/living/exosuit/proc/attack_self(var/mob/user)
 	return visible_message("\The [src] pokes itself.")

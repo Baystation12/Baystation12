@@ -92,3 +92,92 @@
 
 /mob/living/carbon/proc/move_to_stomach(atom/movable/victim)
 	return
+
+/mob/living/carbon/proc/consume()
+	set name = "Consume"
+	set desc = "Regain life and infect others by feeding upon them."
+	set category = "Abilities"
+
+	if (last_special > world.time)
+		to_chat(src, SPAN_WARNING("You aren't ready to do that! Wait [round(last_special - world.time) / 10] seconds."))
+		return
+
+	var/mob/living/carbon/human/target
+	var/list/victims = list()
+	for (var/mob/living/carbon/human/L in get_turf(src))
+		if (L != src && (L.lying || L.stat == DEAD))
+			if(isspecies(L, SPECIES_ZOMBIE))
+				to_chat(src, SPAN_WARNING("\The [L] isn't fresh anymore!"))
+				continue
+			if(!(L.species.name in ORGANIC_SPECIES) || isspecies(L,SPECIES_DIONA) || L.isFBP())
+				to_chat(src, SPAN_WARNING("You'd break your teeth on \the [L]!"))
+				continue
+			victims += L
+
+	if(!victims.len)
+		to_chat(src, SPAN_WARNING("No valid targets nearby!"))
+		return
+	if(client)
+		if(victims.len == 1) //No need to choose
+			target = victims[1]
+		else
+			target = input("Who would you like to consume?") as null|anything in victims
+	else //NPCs
+		if(victims.len > 0)
+			target = victims[1]
+
+	if (!target)
+		to_chat(src, SPAN_WARNING("You aren't on top of a victim!"))
+		return
+	if (get_turf(src) != get_turf(target) || !(target.lying || target.stat == DEAD))
+		to_chat(src, SPAN_WARNING("You're no longer on top of \the [target]!"))
+		return
+
+	last_special = world.time + 5 SECONDS
+
+	src.visible_message(SPAN_DANGER("\The [src] hunkers down over \the [target], tearing into their flesh."))
+	playsound(loc, 'sound/effects/bonebreak3.ogg', 20, 1)
+
+	target.adjustHalLoss(50)
+
+	if(do_after(src, 5 SECONDS, target, DO_DEFAULT, INCAPACITATION_KNOCKOUT))
+		admin_attack_log(src, target, "Consumed their victim.", "Was consumed.", "consumed")
+
+		if (!target.lying && target.stat != DEAD) //Check victims are still prone
+			return
+
+		target.reagents.add_reagent(/datum/reagent/zombie, 35) //Just in case they haven't been infected already
+		if(target.getBruteLoss() > target.maxHealth*1.5)
+			if(target.stat != DEAD)
+				to_chat(src,SPAN_WARNING("You've scraped \the [target] down to the bones already!."))
+				target.zombify()
+			else
+				to_chat(src,SPAN_DANGER("You shred and rip apart \the [target]'s remains!."))
+				target.gib()
+				playsound(loc, 'sound/effects/splat.ogg', 40, 1)
+			return
+
+		to_chat(target,SPAN_DANGER("\The [src] scrapes your flesh from your bones!"))
+		to_chat(src,SPAN_DANGER("You feed hungrily off \the [target]'s flesh."))
+
+		if(isspecies(target, SPECIES_ZOMBIE)) //Just in case they turn whilst being eaten
+			return
+
+		target.apply_damage(rand(50,60), BRUTE, BP_CHEST)
+		target.adjustBruteLoss(20)
+		target.update_surgery() //Update broken ribcage sprites etc.
+
+		src.adjustBruteLoss(-5)
+		src.adjustFireLoss(-15)
+		src.adjustToxLoss(-5)
+		src.adjustBrainLoss(-5)
+		src.adjust_nutrition(40)
+
+		playsound(loc, 'sound/effects/splat.ogg', 20, 1)
+		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), target.species.blood_color)
+		if(target.getBruteLoss() > target.maxHealth*0.75)
+			if(prob(50))
+				gibs(get_turf(src), target.dna)
+				src.visible_message(SPAN_DANGER("\The [src] tears out \the [target]'s insides!"))
+	else
+		src.visible_message(SPAN_WARNING("\The [src] leaves their meal for later."))

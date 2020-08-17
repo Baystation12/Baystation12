@@ -141,6 +141,12 @@
 			return TRUE
 	return FALSE
 
+/obj/machinery/door/firedoor/attack_generic(var/mob/user, var/damage)
+	playsound(loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+	if(stat & BROKEN)
+		qdel(src)
+	..()
+
 /obj/machinery/door/firedoor/attack_hand(mob/user as mob)
 	add_fingerprint(user)
 	if(operating)

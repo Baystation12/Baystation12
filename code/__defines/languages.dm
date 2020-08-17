@@ -27,6 +27,7 @@
 #define LANGUAGE_CULT              "Cult"
 #define LANGUAGE_CULT_GLOBAL       "Occult"
 #define LANGUAGE_ALIUM             "Alium"
+#define LANGUAGE_ZOMBIE            "Zombie"
 
 //Other
 #define LANGUAGE_PRIMITIVE         "Primitive"

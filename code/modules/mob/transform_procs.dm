@@ -297,15 +297,38 @@
 
 
 /mob/living/carbon/human/proc/zombify()
-	ChangeToHusk()
-	mutations |= MUTATION_CLUMSY
-	src.visible_message("<span class='danger'>\The [src]'s skin decays before your very eyes!</span>", "<span class='danger'>Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift.</span>")
-	if (src.mind)
-		if (src.mind.special_role == "Zombie")
+	if(!(species.name in ORGANIC_SPECIES) || isspecies(src,SPECIES_DIONA) || isspecies(src,SPECIES_ZOMBIE) || isFBP())
+		return
+
+	if (mind)
+		if (mind.special_role == "Zombie")
 			return
-		src.mind.special_role = "Zombie"
+		mind.special_role = "Zombie"
+
+	var/turf/T = get_turf(src)
+	new /obj/effect/decal/cleanable/vomit(T)
+	playsound(T, 'sound/effects/splat.ogg', 20, 1)
+
+	addtimer(CALLBACK(src, .proc/transform_zombie), 20)
+
+/mob/living/carbon/human/proc/transform_zombie()
+	make_jittery(300)
+	adjustBruteLoss(100)
+	sleep(150)
+
+	if(isspecies(src,SPECIES_ZOMBIE)) //Check again otherwise Consume can run this twice at once
+		return
+
+	rejuvenate()
+	ChangeToHusk()
+	visible_message(SPAN_DANGER("\The [src]'s skin decays before your very eyes!"), SPAN_DANGER("Your entire body is ripe with pain as it is consumed down to flesh and bones. You ... hunger. Not only for flesh, but to spread this gift. Use Abilities -> Consume to infect and feed upon your prey."))
 	log_admin("[key_name(src)] has transformed into a zombie!")
-	Weaken(5)
+
+	Weaken(4)
+	jitteriness = 0
+	dizziness = 0
+	hallucination_power = 0
+	hallucination_duration = 0
 	if (should_have_organ(BP_HEART))
 		vessel.add_reagent(/datum/reagent/blood, species.blood_volume - vessel.total_volume)
 	for (var/o in organs)
@@ -313,8 +336,22 @@
 		organ.vital = 0
 		if (!BP_IS_ROBOTIC(organ))
 			organ.rejuvenate(1)
-			organ.max_damage *= 3
+			organ.max_damage *= 2
 			organ.min_broken_damage = Floor(organ.max_damage * 0.75)
-	verbs += /mob/living/proc/breath_death
-	verbs += /mob/living/proc/consume
-	playsound(get_turf(src), 'sound/hallucinations/wail.ogg', 20, 1)
+
+	resuscitate()
+	set_stat(CONSCIOUS)
+
+	if(skillset && skillset.skill_list)
+		skillset.skill_list = list()
+		for(var/decl/hierarchy/skill/S in GLOB.skills) //Only want trained CQC and athletics
+			skillset.skill_list[S.type] = SKILL_NONE
+		skillset.skill_list[SKILL_HAULING] = SKILL_ADEPT
+		skillset.skill_list[SKILL_COMBAT] = SKILL_ADEPT
+		skillset.on_levels_change()
+
+	species = all_species[SPECIES_ZOMBIE]
+	species.handle_post_spawn(src)
+
+	var/turf/T = get_turf(src)
+	playsound(T, 'sound/hallucinations/wail.ogg', 25, 1)

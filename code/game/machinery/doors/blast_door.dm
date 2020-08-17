@@ -302,3 +302,8 @@
 
 /obj/machinery/door/blast/shutters/open
 	begins_closed = FALSE
+
+/obj/machinery/door/blast/shutters/attack_generic(var/mob/user, var/damage)
+	if(stat & BROKEN)
+		qdel(src)
+	..()

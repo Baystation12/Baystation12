@@ -112,6 +112,12 @@
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src] and it crumbles!"), SPAN_DANGER("You punch \the [src] and it crumbles!"))
 					dismantle_wall()
 					playsound(src, pick(GLOB.punch_sound), 20)
+				if (MUTATION_FERAL in user.mutations)
+					M.visible_message(SPAN_DANGER("[M.name] slams into \the [src]!"), SPAN_DANGER("You slam into \the [src]!"))
+					playsound(src, pick(GLOB.punch_sound), 45)
+					take_damage(5)
+					user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2) //Additional cooldown
+					attack_animation(user)
 				else
 					M.visible_message(SPAN_DANGER("[M.name] punches \the [src]!"), SPAN_DANGER("You punch \the [src]!"))
 					M.apply_damage(3, BRUTE, M.hand ? BP_L_HAND : BP_R_HAND)

@@ -72,6 +72,8 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
+			if(MUTATION_FERAL in M.mutations)
+				return 0
 			if(H != src && istype(H) && (is_asystole() || (status_flags & FAKEDEATH) || failed_last_breath) && !(H.zone_sel.selecting == BP_R_ARM || H.zone_sel.selecting == BP_L_ARM))
 				if (!cpr_time)
 					return 0

@@ -62,6 +62,11 @@
 
 /obj/structure/attack_hand(mob/user)
 	..()
+	if(MUTATION_FERAL in user.mutations)
+		attack_generic(user,10,"smashes")
+		user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
+		attack_animation(user)
+		playsound(loc, 'sound/weapons/tablehit1.ogg', 40, 1)
 	if(breakable)
 		if(MUTATION_HULK in user.mutations)
 			user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!" ))

@@ -129,3 +129,18 @@
 	for(var/i=0 to length)
 		new_name += pick(syllables)
 	return capitalize(new_name)
+
+/datum/language/zombie
+	name = LANGUAGE_ZOMBIE
+	desc = "A crude form of feral communication utilized by the shuffling horrors. The living only hear guttoral wails of agony."
+	colour = "cult"
+	key = "a"
+	speech_verb = "growls"
+	exclaim_verb = "wails"
+	partial_understanding = list(
+		LANGUAGE_HUMAN_EURO = 30,
+		LANGUAGE_SPACER = 35
+	)
+	syllables = list("mhh..", "grr..", "nnh..")
+	shorthand = "ZM"
+	hidden_from_codex = TRUE

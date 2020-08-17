@@ -53,6 +53,9 @@
 	if(environment_smash >= 1)
 		damage = max(damage, 10)
 
+	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN*2)
+	playsound(loc, hitsound, 50, 1)
+
 	if(damage >= 10)
 		visible_message("<span class='danger'>\The [user] [attack_verb] into \the [src]!</span>")
 		take_damage(damage)
