@@ -1,0 +1,6 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - bugfix: "Fixes valves not connecting to adjacent pipes when being constructed."
+  - bugfix: "Fixes shutoff valves not being interactable."
+  - bugfix: "Fixes shutoff valves layering."
