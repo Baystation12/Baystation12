@@ -84,9 +84,18 @@
 	return 0
 
 /obj/structure/closet/body_bag/proc/fold(var/user)
-	if(!(ishuman(user) || isrobot(user)))	return 0
-	if(opened)	return 0
-	if(contents.len)	return 0
+	if(!(ishuman(user) || isrobot(user)))
+		to_chat(user, SPAN_NOTICE("You lack the dexterity to close \the [name]."))
+		return FALSE
+
+	if(opened)
+		to_chat(user, SPAN_NOTICE("You must close \the [name] before it can be folded."))
+		return FALSE
+
+	if(contents.len)
+		to_chat(user, SPAN_NOTICE("You can't fold \the [name] while it has something inside it."))
+		return FALSE
+
 	visible_message("[user] folds up the [name]")
 	. = new item_path(get_turf(src))
 	qdel(src)
