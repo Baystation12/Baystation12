@@ -17,11 +17,11 @@ var/global/datum/loot_distributor/loot_distributor = new
 	return loot_pickfrom
 
 /datum/loot_distributor/proc/add_distribute_loc(var/loc,var/type)
-	var/list/lootlist = get_lootlist_for_type(type)
-	if(!lootlist)
-		lootlist = list()
-	lootlist += loc
-	loot_list[type] = lootlist
+	var/list/loclist = distribute_locs[type]
+	if(!loclist)
+		loclist = list()
+	loclist += loc
+	distribute_locs[type] = loclist
 	GLOB.processing_objects |= src
 
 /datum/loot_distributor/proc/process()
@@ -33,17 +33,14 @@ var/global/datum/loot_distributor/loot_distributor = new
 			lootlist -= item
 			var/spawnloc = pick(loclist)
 			loclist -= spawnloc
-			if(loclist.len <= 0)
-				distribute_locs -= tag
-			else
-				distribute_locs[tag] = loclist
 			//This if statement is to allow backwards compatability with the older system.//
 			if(isnull(item))
 				continue
-			new item (loclist)
+			new item (spawnloc)
+		distribute_locs[tag] = loclist
 		loot_list[tag] = lootlist
 
-	GLOB.processing_objects -= src
+	return PROCESS_KILL
 
 /obj/effect/loot_marker
 	opacity = 0
