@@ -23,7 +23,7 @@
 	. = ..(mapload)
 
 /obj/item/device/soulstone/disrupts_psionics()
-	return (full == SOULSTONE_EMPTY) ? src : FALSE
+	return (full == SOULSTONE_ESSENCE) ? src : FALSE
 
 /obj/item/device/soulstone/proc/shatter()
 	playsound(loc, "shatter", 70, 1)
