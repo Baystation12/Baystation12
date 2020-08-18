@@ -95,10 +95,6 @@
 	if (config.log_adminwarn)
 		game_log("ADMINWARN", text)
 
-/proc/log_pda(text)
-	if (config.log_pda)
-		game_log("PDA", text)
-
 /proc/log_misc(text)
 	game_log("MISC", text)
 

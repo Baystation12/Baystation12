@@ -867,19 +867,6 @@ var/global/floorIsLava = 0
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TE") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/datum/admins/proc/toggleAI()
-	set category = "Server"
-	set desc="People can't be AI"
-	set name="Toggle AI"
-	config.allow_ai = !( config.allow_ai )
-	if (!( config.allow_ai ))
-		to_world("<B>The AI job is no longer chooseable.</B>")
-	else
-		to_world("<B>The AI job is chooseable now.</B>")
-	log_admin("[key_name(usr)] toggled AI allowed.")
-	world.update_status()
-	SSstatistics.add_field_details("admin_verb","TAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
 /datum/admins/proc/toggleaban()
 	set category = "Server"
 	set desc="Respawn basically"
@@ -892,29 +879,6 @@ var/global/floorIsLava = 0
 	log_and_message_admins("toggled respawn to [config.abandon_allowed ? "On" : "Off"].")
 	world.update_status()
 	SSstatistics.add_field_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/datum/admins/proc/toggle_aliens()
-	set category = "Server"
-	set desc="Toggle alien mobs"
-	set name="Toggle Aliens"
-	if(!check_rights(R_ADMIN))
-		return
-
-	config.aliens_allowed = !config.aliens_allowed
-	log_admin("[key_name(usr)] toggled Aliens to [config.aliens_allowed].")
-	message_admins("[key_name_admin(usr)] toggled Aliens [config.aliens_allowed ? "on" : "off"].", 1)
-	SSstatistics.add_field_details("admin_verb","TA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-
-/datum/admins/proc/toggle_space_ninja()
-	set category = "Server"
-	set desc="Toggle space ninjas spawning."
-	set name="Toggle Space Ninjas"
-	if(!check_rights(R_ADMIN))
-		return
-
-	config.ninjas_allowed = !config.ninjas_allowed
-	log_and_message_admins("toggled Space Ninjas [config.ninjas_allowed ? "on" : "off"].")
-	SSstatistics.add_field_details("admin_verb","TSN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/delay()
 	set category = "Server"

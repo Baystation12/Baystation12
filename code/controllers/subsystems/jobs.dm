@@ -24,7 +24,6 @@ SUBSYSTEM_DEF(jobs)
 	var/list/unassigned_roundstart =   list()
 	var/list/positions_by_department = list()
 	var/list/job_icons =               list()
-	var/job_config_file = "config/jobs.txt"
 
 /datum/controller/subsystem/jobs/Initialize(timeofday)
 
@@ -49,28 +48,6 @@ SUBSYSTEM_DEF(jobs)
 				job = get_by_path(jobtype)
 			if(job)
 				archetype_job_datums |= job
-
-	// Load job configuration (is this even used anymore?)
-	if(job_config_file && config.load_jobs_from_txt)
-		var/list/jobEntries = file2list(job_config_file)
-		for(var/job in jobEntries)
-			if(!job)
-				continue
-			job = trim(job)
-			if(!length(job))
-				continue
-			var/pos = findtext(job, "=")
-			if(pos)
-				continue
-			var/name = copytext(job, 1, pos)
-			var/value = copytext(job, pos + 1)
-			if(name && value)
-				var/datum/job/J = get_by_title(name)
-				if(J)
-					J.total_positions = text2num(value)
-					J.spawn_positions = text2num(value)
-					if(name == "AI" || name == "Robot")//I dont like this here but it will do for now
-						J.total_positions = 0
 
 	// Init skills.
 	if(!GLOB.skills.len)

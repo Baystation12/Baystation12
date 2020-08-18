@@ -20,9 +20,6 @@ GLOBAL_DATUM_INIT(ninjas, /datum/antagonist/ninja, new)
 	faction = "ninja"
 	base_to_load = /datum/map_template/ruin/antag_spawn/ninja
 
-/datum/antagonist/ninja/attempt_random_spawn()
-	if(config.ninjas_allowed) ..()
-
 /datum/antagonist/ninja/create_objectives(var/datum/mind/ninja)
 
 	if(!..())

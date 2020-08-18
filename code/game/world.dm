@@ -138,7 +138,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		s["respawn"] = config.abandon_allowed
 		s["enter"] = config.enter_allowed
 		s["vote"] = config.allow_vote_mode
-		s["ai"] = config.allow_ai
+		s["ai"] = !!length(empty_playable_ai_cores)
 		s["host"] = host ? host : null
 
 		// This is dumb, but spacestation13.com's banners break if player count isn't the 8th field of the reply, so... this has to go here.
@@ -593,9 +593,6 @@ var/world_topic_spam_protect_time = world.timeofday
 
 	if (config && config.allow_vote_mode)
 		features += "vote"
-
-	if (config && config.allow_ai)
-		features += "AI allowed"
 
 	var/n = 0
 	for (var/mob/M in GLOB.player_list)
