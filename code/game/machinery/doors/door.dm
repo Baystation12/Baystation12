@@ -399,7 +399,9 @@
 		if("deny")
 			if(density && !(stat & (NOPOWER|BROKEN)))
 				flick("door_deny", src)
-				playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
+				if (world.time > next_clicksound)
+					next_clicksound = world.time + CLICKSOUND_INTERVAL
+					playsound(src.loc, 'sound/machines/buzz-two.ogg', 50, 0)
 	return
 
 
