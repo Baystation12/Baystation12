@@ -594,9 +594,6 @@ var/world_topic_spam_protect_time = world.timeofday
 	if (config && config.allow_vote_mode)
 		features += "vote"
 
-	if (config && config.allow_ai)
-		features += "AI allowed"
-
 	var/n = 0
 	for (var/mob/M in GLOB.player_list)
 		if (M.client)
