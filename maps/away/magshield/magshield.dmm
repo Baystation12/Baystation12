@@ -3369,20 +3369,14 @@
 /area/magshield/west)
 "iL" = (
 /obj/structure/hygiene/toilet,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iM" = (
 /obj/structure/hygiene/urinal{
 	pixel_y = 25
 	},
 /obj/random/trash,
-/turf/simulated/floor/tiled/white/usedup,
-/area/magshield/south)
-"iN" = (
-/obj/structure/hygiene/sink{
-	pixel_y = 25
-	},
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -3454,19 +3448,15 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "iZ" = (
 /obj/machinery/light,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "ja" = (
 /mob/living/simple_animal/hostile/carp,
-/turf/simulated/floor/tiled/white/usedup,
-/area/magshield/south)
-"jb" = (
-/obj/machinery/door/airlock,
-/turf/simulated/floor/tiled/white/usedup,
+/turf/simulated/floor/tiled/white,
 /area/magshield/south)
 "jc" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -19444,7 +19434,7 @@ ga
 ga
 fB
 fu
-iN
+jz
 ja
 iq
 jI
@@ -19647,7 +19637,7 @@ fA
 fB
 fu
 iq
-jb
+iT
 iq
 jJ
 jd
