@@ -1,0 +1,4 @@
+author: "Spookerton"
+delete-after: True
+changes: 
+  - tweak: "Soulstones disrupt spells and psionics when full instead of empty."
