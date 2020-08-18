@@ -1,0 +1,4 @@
+author: "Hubblenaut"
+delete-after: True
+changes: 
+  - bugfix: "Fixes windows dropping more than four rods and glass shards."
