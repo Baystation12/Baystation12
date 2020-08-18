@@ -69,5 +69,7 @@
 
 /datum/support_option/supply_drop/evac/cov
 	name = "Call For Evac (Covenant)"
+	arrival_sfx = 'code/modules/halo/sound/sprit_flyby.ogg'
+	drop_delay = 2 SECONDS
 	tag_evac_to = "covevacto"
 	fallbacks = 0

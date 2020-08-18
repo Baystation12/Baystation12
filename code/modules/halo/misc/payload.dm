@@ -112,6 +112,19 @@
 	anchored = 1
 	invisibility = 100 //Don't want this to be seen at all.
 
+/obj/effect/bombpoint_mark
+	name = "Structural Weakpoint Marker"
+	icon = 'code/modules/halo/misc/payload.dmi'
+	icon_state = "floormark"
+	desc = "These panels are placed nearby to structural weakpoints to identify them to repair crews and structural refit crews."
+	anchored = 1
+
+/obj/effect/bombpoint_mark/Initialize()
+	. = ..()
+	for(var/turf/simulated/floor/f in range(1,src))
+		new /obj/effect/bomblocation (f)
+		f.ChangeTurf(/turf/simulated/floor/plating)
+
 /obj/payload/covenant
 	name = "Antimatter Bomb"
 	desc = "Menacing spikes jut out from this device's frame."

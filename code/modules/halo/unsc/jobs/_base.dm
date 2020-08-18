@@ -21,7 +21,7 @@
 	name = "UNSC Ship Crew"
 	l_ear = /obj/item/device/radio/headset/unsc
 	starting_accessories = list(/obj/item/clothing/accessory/rank/fleet/enlisted/e3)
-	shoes = /obj/item/clothing/shoes/black
+	shoes = /obj/item/clothing/shoes/dutyboots
 	uniform = /obj/item/clothing/under/unsc/red
 	id_type = /obj/item/weapon/card/id/unsc
 	pda_slot = null

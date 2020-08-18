@@ -384,7 +384,7 @@
 
 /obj/item/weapon/storage/box/spnkr
 	name = "102mm HEAT SPNKr crate"
-	desc = "UNSC certified crate containing four tubes of SPNKr rockets for a total of eight rockets to be loaded in the M41 SSR."
+	desc = "UNSC certified crate containing four tubes of SPNKr rockets for a total of six rockets to be loaded in the M41 SSR."
 	icon = 'code/modules/halo/icons/objs/halohumanmisc.dmi'
 	icon_state = "ssrcrate"
 	max_storage_space = base_storage_capacity(12)

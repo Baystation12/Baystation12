@@ -11,6 +11,8 @@
 	fire_delay = 10 //Slightly higher due to higher magsize
 	one_hand_penalty = -1
 	dispersion = list(0.73)
+	arm_time = 15
+	charge_sound = null
 	hud_bullet_row_num = 5
 	hud_bullet_reffile = 'code/modules/halo/icons/hud_display/hud_bullet_12x8.dmi'
 	hud_bullet_iconstate = "fuelrod"
