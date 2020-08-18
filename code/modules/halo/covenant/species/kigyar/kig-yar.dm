@@ -10,9 +10,9 @@
 	blood_color = "#532476"
 	icobase = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi' //The DMI needed modification to fit the usual format (see other species' dmis)
 	deform = 'code/modules/halo/covenant/species/kigyar/r_kig-yar.dmi'
-	default_language = "Sangheili" //Just for now, no special language just yet
-	language = "Sangheili"
-	additional_langs = list("Ruuhti")
+	default_language = LANGUAGE_SANGHEILI
+	language = LANGUAGE_SANGHEILI
+	additional_langs = list(LANGUAGE_KIGYAR)
 	radiation_mod = 0.6 //Covie weapons emit beta radiation. Resistant to 1/3 types of radiation.
 	inherent_verbs = list(/mob/living/carbon/human/proc/focus_view)
 	spawn_flags = SPECIES_CAN_JOIN
@@ -54,15 +54,6 @@ GLOBAL_LIST_INIT(first_names_kig_yar, world.file2list('code/modules/halo/covenan
 
 /mob/living/carbon/human/covenant/kigyar/New(var/new_loc)
 	. = ..(new_loc,"Kig-Yar")
-
-/datum/language/ruuhti
-	name = "Ruuhti"
-	desc = "The language of the Ruuhtian KigYar"
-	native = 1
-	colour = "ruutian"
-	syllables = list("hss","rar","hrar","har","rah","huss","hee","ha","schra","skraw","skree","skrss","hos","hosk")
-	key = "R"
-	flags = RESTRICTED
 
 /obj/item/clothing/shoes/ruutian_boots/dropped(mob/user as mob)
 	. = ..()

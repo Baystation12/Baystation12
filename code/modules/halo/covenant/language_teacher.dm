@@ -7,7 +7,7 @@
 	item_state = "paper"
 	w_class = ITEM_SIZE_SMALL
 
-	var/language_string = "Galactic Common"
+	var/language_string = LANGUAGE_ENGLISH
 
 /obj/item/language_learner/attack_self(var/mob/living/carbon/human/h)
 	to_chat(h,"<span class = 'notice'>You read [name]...</span>")

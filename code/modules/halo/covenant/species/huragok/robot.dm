@@ -51,10 +51,9 @@
 /mob/living/silicon/robot/huragok/New()
 	. =.. ()
 	remove_language("Robot Talk", 1)
-	remove_language(LANGUAGE_EAL, 1)
-	remove_language(LANGUAGE_SOL_COMMON, 1)
+	remove_language(LANGUAGE_ENGLISH, 1)
 	add_language(LANGUAGE_SIGN, 1)
-	//add_language("Sangheili",1)
+	add_language(LANGUAGE_SANGHEILI, 0)
 	default_language = all_languages[LANGUAGE_SIGN]
 	radio.create_channel_dongle(RADIO_COV)
 

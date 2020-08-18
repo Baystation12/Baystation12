@@ -1,6 +1,3 @@
-
-#define LANGUAGE_LEKGOLO "Lekgolo"
-
 //Mgalekgolo defines//
 /mob/living/simple_animal/mgalekgolo
 	name = "mgalekgolo"
@@ -32,7 +29,7 @@
 	mob_push_flags = HEAVY
 	var/custom_name
 
-	languages = list(LANGUAGE_SANGHEILI,LANGUAGE_LEKGOLO)
+	languages = list(LANGUAGE_SANGHEILI, LANGUAGE_LEKGOLO)
 	melee_damage_lower = 30
 	melee_damage_upper = 50
 	attacktext = "swiped"
