@@ -446,3 +446,7 @@ RADIATION_LOWER_LIMIT 0.15
 ## clients will still download from the server *too*. This will randomly select one URL if more than one is provided.
 ## Spaces are prohibited in each URL by spec, you must use encoded spaces.
 #RESOURCE_URLS URL URL2 URL3
+
+## Add lines of 'DISALLOW_VOTABLE_MODE config_tag' to prevent a normally votable mode from being votable, eg:
+## DISALLOW_VOTABLE_MODE changeling
+## DISALLOW_VOTABLE_MODE malfunction

@@ -785,6 +785,9 @@ var/list/gamemode_cache = list()
 				if ("forbidden_message_hide_details")
 					config.forbidden_message_hide_details = TRUE
 
+				if ("disallow_votable_mode")
+					config.votable_modes -= value
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
