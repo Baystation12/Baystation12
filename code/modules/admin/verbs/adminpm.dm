@@ -109,19 +109,6 @@
 			to_chat(C, recieve_message)
 			C.adminhelped = 0
 
-		//AdminPM popup for ApocStation and anybody else who wants to use it. Set it with POPUP_ADMIN_PM in config.txt ~Carn
-		if(config.popup_admin_pm)
-			spawn(0)	//so we don't hold the caller proc up
-				var/sender = src
-				var/sendername = key
-				var/reply = sanitize(input(C, msg,"[recieve_pm_type] PM from [sendername]", "") as text|null)		//show message and await a reply
-				if(C && reply)
-					if(sender)
-						C.cmd_admin_pm(sender,reply)										//sender is still about, let's reply to them
-					else
-						adminhelp(reply)													//sender has left, adminhelp instead
-				return
-
 	var/sender_message = "<span class='pm'><span class='out'>" + create_text_tag("pm_out_alt", "PM", src) + " to <span class='name'>[get_options_bar(C, holder ? 1 : 0, holder ? 1 : 0, 1)]</span>"
 	if(holder)
 		sender_message += " (<a href='?_src_=holder;take_ticket=\ref[ticket]'>[(ticket.status == TICKET_OPEN) ? "TAKE" : "JOIN"]</a>) (<a href='?src=\ref[usr];close_ticket=\ref[ticket]'>CLOSE</a>)"
