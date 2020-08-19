@@ -133,9 +133,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/template_noop)
-"w" = (
-/turf/simulated/floor/wood/usedup,
-/area/template_noop)
 "x" = (
 /obj/structure/table/woodentable,
 /obj/item/device/flashlight/lamp,
@@ -291,7 +288,7 @@ b
 d
 i
 r
-w
+o
 E
 b
 a
@@ -396,7 +393,7 @@ b
 n
 u
 z
-w
+o
 b
 b
 b
@@ -411,7 +408,7 @@ o
 o
 o
 o
-w
+o
 Q
 S
 b
