@@ -11,6 +11,8 @@
 
 	if(flooring)
 		if(isCrowbar(C))
+			if(user.a_intent != I_HELP)
+				return
 			if(broken || burnt)
 				to_chat(user, "<span class='notice'>You remove the broken [flooring.descriptor].</span>")
 				make_plating()
