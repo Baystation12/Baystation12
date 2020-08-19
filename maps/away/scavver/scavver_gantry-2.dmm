@@ -22,6 +22,7 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
+/obj/machinery/fabricator/hacked,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up1)
 "ae" = (
@@ -140,10 +141,6 @@
 	dir = 5
 	},
 /turf/simulated/floor/plating,
-/area/scavver/hab)
-"bR" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "bS" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
@@ -282,10 +279,8 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/scavver/lifepod)
 "dj" = (
-/obj/structure/table/reinforced,
-/obj/machinery/microwave,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/turf/simulated/floor/tiled/monotile,
+/mob/living/simple_animal/mouse/brown/Tom,
+/turf/simulated/floor/tiled,
 /area/scavver/hab)
 "dm" = (
 /obj/structure/cable{
@@ -471,8 +466,8 @@
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up2)
 "er" = (
-/obj/effect/floor_decal/corner/lightgrey{
-	dir = 5
+/obj/structure/bed/chair/padded/black{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
@@ -991,13 +986,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
-"jW" = (
-/obj/structure/table/reinforced,
-/obj/item/weapon/storage/box/glasses/pint,
-/obj/item/weapon/storage/box/donkpockets,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/turf/simulated/floor/tiled/monotile,
-/area/scavver/hab)
 "kb" = (
 /obj/machinery/airlock_sensor/airlock_exterior{
 	frequency = 1380;
@@ -1138,6 +1126,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/scavver/escapepod)
+"lS" = (
+/obj/structure/table/reinforced,
+/obj/random/single/cola,
+/obj/random/snack,
+/turf/simulated/floor/tiled,
+/area/scavver/hab)
 "lU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
 /turf/simulated/floor/airless,
@@ -1178,14 +1172,12 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/scavver/lifepod)
 "mj" = (
-/obj/machinery/atmospherics/pipe/simple/visible/blue{
-	dir = 4
-	},
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
 	},
+/obj/machinery/atmospherics/pipe/manifold/visible/blue,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/scavver/lifepod)
 "ml" = (
@@ -1504,6 +1496,11 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/lifepod)
+"pz" = (
+/obj/structure/table/reinforced,
+/obj/random/snack,
+/turf/simulated/floor/wood/yew,
+/area/scavver/hab)
 "pK" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
@@ -1547,6 +1544,15 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
+"qr" = (
+/obj/structure/bed/chair/padded/black{
+	dir = 8
+	},
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/scavver/hab)
 "qv" = (
 /obj/structure/lattice,
 /obj/effect/catwalk_plated/dark,
@@ -1607,6 +1613,8 @@
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
 "qV" = (
+/obj/structure/table/reinforced,
+/obj/structure/reagent_dispensers/beerkeg,
 /obj/machinery/light,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
@@ -1643,6 +1651,7 @@
 	id_tag = "dropodwest_interior_door";
 	locked = 1
 	},
+/obj/machinery/atmospherics/pipe/simple/visible/blue,
 /turf/simulated/floor/reinforced/airless,
 /area/scavver/lifepod)
 "rt" = (
@@ -2141,12 +2150,11 @@
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "wJ" = (
-/obj/machinery/alarm{
-	dir = 4;
-	locked = 0;
-	pixel_x = -25;
-	pixel_y = 0;
-	req_access = list()
+/obj/machinery/vending/cigarette{
+	dir = 1;
+	name = "hacked cigarette machine";
+	prices = list();
+	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
 	},
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
@@ -2179,12 +2187,6 @@
 /obj/structure/girder/displaced,
 /turf/simulated/floor/airless,
 /area/scavver/yachtup)
-"xg" = (
-/obj/structure/table/reinforced,
-/obj/random/snack,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/wood/yew,
-/area/scavver/hab)
 "xh" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black,
 /obj/structure/lattice,
@@ -2410,7 +2412,8 @@
 /turf/simulated/floor/tiled/dark/monotile,
 /area/scavver/lifepod)
 "zR" = (
-/obj/item/weapon/stool/padded,
+/obj/structure/table/reinforced,
+/obj/item/weapon/storage/box/donkpockets,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "zU" = (
@@ -2466,7 +2469,9 @@
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "AI" = (
-/mob/living/simple_animal/mouse/brown/Tom,
+/obj/structure/table/reinforced,
+/obj/machinery/fabricator/micro,
+/obj/item/stack/material/plastic,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "AM" = (
@@ -2610,6 +2615,13 @@
 	pixel_y = 0
 	},
 /turf/simulated/floor/tiled/freezer,
+/area/scavver/hab)
+"BQ" = (
+/obj/structure/table/reinforced,
+/obj/machinery/cell_charger,
+/obj/random/maintenance,
+/obj/machinery/light,
+/turf/simulated/floor/tiled,
 /area/scavver/hab)
 "BR" = (
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
@@ -2902,6 +2914,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/external_air{
+	id_tag = "dropodwest_pump";
+	power_rating = 25000
+	},
 /turf/simulated/floor/reinforced/airless,
 /area/scavver/lifepod)
 "FC" = (
@@ -3097,13 +3113,8 @@
 /turf/simulated/floor/plating,
 /area/scavver/hab)
 "HN" = (
-/obj/structure/table/reinforced,
-/obj/item/weapon/material/kitchen/utensil/spork/plastic,
-/obj/item/weapon/material/kitchen/utensil/spork/plastic,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/obj/random/maintenance,
-/obj/machinery/cell_charger,
-/turf/simulated/floor/tiled/monotile,
+/obj/structure/bed/chair/padded/black,
+/turf/simulated/floor/tiled,
 /area/scavver/hab)
 "HR" = (
 /obj/machinery/atmospherics/pipe/simple/visible/red,
@@ -3121,7 +3132,6 @@
 	dir = 1;
 	icon_state = "railing0-1"
 	},
-/obj/machinery/fabricator/hacked,
 /obj/effect/floor_decal/corner_steel_grid{
 	dir = 1
 	},
@@ -3292,12 +3302,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/scavver/lifepod)
-"Ko" = (
-/obj/structure/table/reinforced,
-/obj/item/weapon/material/ashtray/plastic,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/wood/yew,
-/area/scavver/hab)
 "Ks" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue{
 	dir = 4
@@ -3698,12 +3702,6 @@
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/scavver/lifepod)
-"Ow" = (
-/obj/structure/table/reinforced,
-/obj/random/single/cola,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/wood/yew,
-/area/scavver/hab)
 "Oy" = (
 /obj/machinery/atmospherics/pipe/simple/visible/blue,
 /obj/effect/decal/cleanable/dirt,
@@ -3813,12 +3811,6 @@
 /obj/machinery/power/solar/improved,
 /turf/simulated/floor/airless,
 /area/scavver/escapepod)
-"Qe" = (
-/obj/structure/table/reinforced,
-/obj/structure/reagent_dispensers/beerkeg,
-/obj/effect/floor_decal/corner/lightgrey/mono,
-/turf/simulated/floor/tiled/monotile,
-/area/scavver/hab)
 "Qh" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/fuel{
 	dir = 8
@@ -3934,9 +3926,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/machinery/light{
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "RE" = (
@@ -3952,6 +3941,10 @@
 /obj/structure/table/rack,
 /obj/item/weapon/tank/jetpack/oxygen,
 /turf/simulated/floor/tiled/dark/monotile,
+/area/scavver/hab)
+"RR" = (
+/obj/machinery/media/jukebox/old,
+/turf/simulated/floor/tiled,
 /area/scavver/hab)
 "RU" = (
 /obj/structure/railing/mapped{
@@ -3993,11 +3986,8 @@
 /turf/simulated/floor/airless,
 /area/scavver/gantry/up1)
 "Sn" = (
-/obj/machinery/vending/cigarette{
-	name = "hacked cigarette machine";
-	prices = list();
-	products = list(/obj/item/weapon/storage/fancy/cigarettes = 10, /obj/item/weapon/storage/box/matches = 10, /obj/item/weapon/flame/lighter/zippo/random = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
-	},
+/obj/structure/table/reinforced,
+/obj/machinery/reagentgrinder/juicer,
 /obj/machinery/light{
 	dir = 1
 	},
@@ -4092,7 +4082,8 @@
 /turf/simulated/floor/tiled,
 /area/scavver/hab)
 "TY" = (
-/obj/machinery/media/jukebox/old,
+/obj/structure/table/reinforced,
+/obj/machinery/microwave,
 /turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "Ub" = (
@@ -4261,6 +4252,11 @@
 /obj/effect/floor_decal/corner/lightgrey/mono,
 /obj/effect/submap_landmark/spawnpoint/scavver_engineer,
 /turf/simulated/floor/tiled/monotile,
+/area/scavver/hab)
+"Wh" = (
+/obj/structure/table/reinforced,
+/obj/item/weapon/material/ashtray/plastic,
+/turf/simulated/floor/tiled,
 /area/scavver/hab)
 "Wl" = (
 /obj/effect/catwalk_plated,
@@ -4522,6 +4518,12 @@
 	icon_state = "4-8"
 	},
 /turf/simulated/floor/plating,
+/area/scavver/hab)
+"ZR" = (
+/obj/structure/closet/secure_closet/freezer/fridge/bearcat{
+	locked = 0
+	},
+/turf/simulated/floor/wood/yew,
 /area/scavver/hab)
 "ZX" = (
 /obj/machinery/meter,
@@ -17537,11 +17539,11 @@ eN
 eN
 Qn
 TY
+pz
+zR
+wI
 mS
-zR
-xg
-Ko
-zR
+mS
 wJ
 Qn
 dV
@@ -17690,10 +17692,10 @@ eN
 Qn
 Sn
 mS
-zR
-Ow
-xg
-zR
+mS
+mS
+mS
+mS
 qV
 Qn
 Vi
@@ -17840,11 +17842,11 @@ BJ
 hX
 hX
 Qn
-wI
+ZR
 mS
 mS
 mS
-bR
+mS
 mS
 AI
 Qn
@@ -17995,9 +17997,9 @@ Qn
 Qn
 dj
 er
-EU
 so
-EU
+so
+RR
 Qn
 Qn
 pc
@@ -18146,10 +18148,10 @@ eN
 eN
 VY
 HN
-er
-EU
+lS
+so
 mN
-EU
+BQ
 Qn
 qN
 xu
@@ -18297,8 +18299,8 @@ eN
 eN
 eN
 VY
-jW
-er
+HN
+Wh
 EU
 Yd
 zp
@@ -18448,9 +18450,9 @@ TK
 eN
 eN
 eN
-Qn
-Qe
-er
+VY
+so
+qr
 so
 Rv
 qf

@@ -510,6 +510,19 @@
 /obj/machinery/atmospherics/pipe/simple/visible/fuel{
 	dir = 10
 	},
+/obj/machinery/power/apc/super{
+	dir = 1;
+	locked = 0;
+	name = "north bump";
+	operating = 0;
+	pixel_y = 24;
+	req_access = list()
+	},
+/obj/structure/cable{
+	d2 = 2;
+	icon_state = "0-2";
+	pixel_y = 1
+	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown)
 "kt" = (
@@ -1674,21 +1687,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/scavver/yachtdown)
-"HY" = (
-/obj/machinery/power/apc/super{
-	dir = 1;
-	locked = 0;
-	name = "north bump";
-	operating = 0;
-	pixel_y = 24;
-	req_access = list()
-	},
-/obj/structure/cable{
-	d2 = 2;
-	icon_state = "0-2"
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtdown)
 "ID" = (
 /obj/structure/lattice,
 /obj/effect/catwalk_plated/dark,
@@ -2330,19 +2328,6 @@
 /obj/structure/closet/crate/freezer/rations,
 /turf/simulated/floor/airless,
 /area/scavver/gantry/down1)
-"XN" = (
-/obj/structure/cable{
-	d1 = 1;
-	d2 = 8;
-	icon_state = "1-8"
-	},
-/obj/structure/cable{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/airless,
-/area/scavver/yachtdown)
 "XQ" = (
 /obj/machinery/shipsensors/weak{
 	use_power = 0
@@ -12715,8 +12700,8 @@ vM
 vM
 vM
 SF
-HY
-XN
+WM
+DK
 SF
 vM
 UM
