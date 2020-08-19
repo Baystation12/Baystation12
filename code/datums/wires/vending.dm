@@ -3,13 +3,13 @@
 	wire_count = 4
 	descriptions = list(
 		new /datum/wire_description(VENDING_WIRE_THROW, "This wire leads to the item dispensor force controls."),
-		new /datum/wire_description(VENDING_WIRE_CONTRABAND, "This wire appears connected to a reserve inventory compartment."),
+		new /datum/wire_description(VENDING_WIRE_HIDDEN, "This wire appears connected to a reserve inventory compartment."),
 		new /datum/wire_description(VENDING_WIRE_ELECTRIFY, "This wire seems to be carrying a heavy current."),
 		new /datum/wire_description(VENDING_WIRE_IDSCAN, "This wire is connected to the ID scanning panel.", SKILL_EXPERT)
 	)
 
 var/const/VENDING_WIRE_THROW = 1
-var/const/VENDING_WIRE_CONTRABAND = 2
+var/const/VENDING_WIRE_HIDDEN = 2
 var/const/VENDING_WIRE_ELECTRIFY = 4
 var/const/VENDING_WIRE_IDSCAN = 8
 
@@ -36,7 +36,7 @@ var/const/VENDING_WIRE_IDSCAN = 8
 	switch(index)
 		if(VENDING_WIRE_THROW)
 			V.shoot_inventory = !V.shoot_inventory
-		if(VENDING_WIRE_CONTRABAND)
+		if(VENDING_WIRE_HIDDEN)
 			V.categories ^= CAT_HIDDEN
 		if(VENDING_WIRE_ELECTRIFY)
 			V.seconds_electrified = 30
@@ -48,7 +48,7 @@ var/const/VENDING_WIRE_IDSCAN = 8
 	switch(index)
 		if(VENDING_WIRE_THROW)
 			V.shoot_inventory = !mended
-		if(VENDING_WIRE_CONTRABAND)
+		if(VENDING_WIRE_HIDDEN)
 			if(mended)
 				V.categories &= ~CAT_HIDDEN
 			else

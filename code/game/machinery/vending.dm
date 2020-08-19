@@ -40,7 +40,7 @@
 		product_records is specified
 	*/
 	var/list/products	= list() // For each, use the following pattern:
-	var/list/contraband	= list() // list(/type/path = amount,/type/path2 = amount2)
+	var/list/hidden	= list() // list(/type/path = amount,/type/path2 = amount2)
 	var/list/premium 	= list() // No specified amount = only one in stock
 	var/list/prices     = list() // Prices for each item, list(/type/path = price), items not in the list don't have a price.
 
@@ -90,14 +90,14 @@
 /**
  *  Build src.produdct_records from the products lists
  *
- *  src.products, src.contraband, src.premium, and src.prices allow specifying
+ *  src.products, src.hidden, src.premium, and src.prices allow specifying
  *  products that the vending machine is to carry without manually populating
  *  src.product_records.
  */
 /obj/machinery/vending/proc/build_inventory(populate_parts = FALSE)
 	var/list/all_products = list(
 		list(src.products, CAT_NORMAL),
-		list(src.contraband, CAT_HIDDEN),
+		list(src.hidden, CAT_HIDDEN),
 		list(src.premium, CAT_COIN))
 
 	for(var/current_list in all_products)
@@ -139,7 +139,7 @@
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if (!emagged)
 		emagged = 1
-		wires.CutWireIndex(VENDING_WIRE_CONTRABAND, FALSE)
+		wires.CutWireIndex(VENDING_WIRE_HIDDEN, FALSE)
 		req_access.Cut()
 		SSnano.update_uis(src)
 		to_chat(user, "You short out the product lock on \the [src]")
@@ -571,7 +571,7 @@
 	icon_state = ""
 	vend_delay = 15
 	products = list()
-	contraband = list()
+	hidden = list()
 	premium = list()
 
 */
@@ -639,7 +639,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/ice = 10,
 					/obj/item/weapon/glass_extra/stick = 15,
 					/obj/item/weapon/glass_extra/straw = 15)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine = 5,
+	hidden = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumwine = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/premiumvodka = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/patron = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/goldschlager = 5,
@@ -655,12 +655,12 @@
 /obj/machinery/vending/assist
 	products = list(	/obj/item/device/assembly/prox_sensor = 5,/obj/item/device/assembly/igniter = 3,/obj/item/device/assembly/signaler = 4,
 						/obj/item/weapon/wirecutters = 1)
-	contraband = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2)
+	hidden = list(/obj/item/device/flashlight = 5,/obj/item/device/assembly/timer = 2)
 	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
 
 /obj/machinery/vending/assist/antag
 	name = "\improper AntagCorpVend"
-	contraband = list()
+	hidden = list()
 	products = list(	/obj/item/device/assembly/prox_sensor = 5, /obj/item/device/assembly/signaler = 4,
 						/obj/item/device/assembly/infra = 4, /obj/item/device/assembly/prox_sensor = 4,
 						/obj/item/weapon/handcuffs = 8, /obj/item/device/flash = 4, /obj/item/clothing/glasses/sunglasses = 4)
@@ -724,7 +724,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/candy = 6,/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 6,/obj/item/weapon/reagent_containers/food/snacks/chips =6,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 6,/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 6,/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 6, /obj/item/weapon/reagent_containers/food/snacks/tastybread = 6)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6, /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 3)
+	hidden = list(/obj/item/weapon/reagent_containers/food/snacks/syndicake = 6, /obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 3)
 	prices = list(/obj/item/clothing/mask/chewable/candy/lolli = 2,
 					/obj/item/weapon/storage/chewables/candy/gum = 4,
 					/obj/item/weapon/storage/chewables/candy/cookies = 4,
@@ -746,7 +746,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice = 10)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5, /obj/item/weapon/reagent_containers/food/snacks/liquidfood = 6)
+	hidden = list(/obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko = 5, /obj/item/weapon/reagent_containers/food/snacks/liquidfood = 6)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/ionbru = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,/obj/item/weapon/reagent_containers/food/drinks/cans/space_up = 1,
@@ -767,7 +767,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape = 10,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_lemonlime = 10, /obj/item/weapon/reagent_containers/food/drinks/cans/cola_strawberry = 10)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_pork = 10)
+	hidden = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_pork = 10)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/cola_diet = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/rootbeer = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/cola_apple = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_orange = 1,
 					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 1,/obj/item/weapon/reagent_containers/food/drinks/cans/cola_grape = 1,
@@ -802,7 +802,7 @@
 					/obj/item/weapon/reagent_containers/pill/diet = 25,
 					/obj/item/weapon/towel/random = 40)
 
-	contraband = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
+	hidden = list(/obj/item/weapon/reagent_containers/syringe/steroid = 4)
 
 /obj/machinery/vending/fitness/on_update_icon()
 	..()
@@ -867,7 +867,7 @@
 					/obj/item/weapon/reagent_containers/ecig_cartridge/lemonlime = 5,
 					/obj/item/weapon/reagent_containers/ecig_cartridge/coffee = 5,
 					/obj/item/weapon/reagent_containers/ecig_cartridge/blanknico = 2)
-	contraband = list(/obj/item/weapon/flame/lighter/zippo = 4,
+	hidden = list(/obj/item/weapon/flame/lighter/zippo = 4,
 					/obj/item/clothing/mask/smokable/cigarette/rolled/sausage = 3)
 	premium = list(/obj/item/weapon/storage/fancy/cigar = 5,/obj/item/weapon/storage/fancy/cigarettes/killthroat = 5)
 
@@ -922,7 +922,7 @@
 					/obj/item/device/scanner/health = 5,/obj/item/weapon/reagent_containers/glass/beaker = 4, /obj/item/weapon/reagent_containers/dropper = 2,
 					/obj/item/stack/medical/advanced/bruise_pack = 3, /obj/item/stack/medical/advanced/ointment = 3, /obj/item/stack/medical/splint = 2,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 4)
-	contraband = list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
+	hidden = list(/obj/item/clothing/mask/chewable/candy/lolli/meds = 8,
 					/obj/item/weapon/reagent_containers/pill/tox = 3,/obj/item/weapon/reagent_containers/pill/stox = 4,/obj/item/weapon/reagent_containers/pill/antitox = 6,
 					/obj/item/weapon/reagent_containers/hypospray/autoinjector/combatpain = 2)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
@@ -955,7 +955,7 @@
 		/obj/item/weapon/storage/med_pouch/oxyloss,
 		/obj/item/weapon/storage/med_pouch/toxin
 		)
-	contraband = list(/obj/item/weapon/reagent_containers/syringe/antitoxin = 4,/obj/item/weapon/reagent_containers/syringe/antiviral = 4,/obj/item/weapon/reagent_containers/pill/tox = 1)
+	hidden = list(/obj/item/weapon/reagent_containers/syringe/antitoxin = 4,/obj/item/weapon/reagent_containers/syringe/antiviral = 4,/obj/item/weapon/reagent_containers/pill/tox = 1)
 
 /obj/machinery/vending/wallmed2
 	name = "\improper NanoMed Mini"
@@ -976,7 +976,7 @@
 		/obj/item/weapon/storage/med_pouch/toxin,
 		/obj/item/weapon/storage/med_pouch/radiation
 		)
-	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3, /obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 2)
+	hidden = list(/obj/item/weapon/reagent_containers/pill/tox = 3, /obj/item/weapon/reagent_containers/hypospray/autoinjector/pain = 2)
 
 /obj/machinery/vending/security
 	name = "\improper SecTech"
@@ -995,7 +995,7 @@
 		/obj/item/device/flash = 5,
 		/obj/item/weapon/reagent_containers/food/snacks/donut/normal = 12,
 		/obj/item/weapon/storage/box/evidence = 6)
-	contraband = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/box/donut = 2)
+	hidden = list(/obj/item/clothing/glasses/sunglasses = 2,/obj/item/weapon/storage/box/donut = 2)
 
 /obj/machinery/vending/hydronutrients
 	name = "\improper NutriMax"
@@ -1033,7 +1033,7 @@
 					/obj/item/seeds/poppyseed = 3,/obj/item/seeds/sugarcaneseed = 3,/obj/item/seeds/ambrosiavulgarisseed = 3,/obj/item/seeds/peanutseed = 3,/obj/item/seeds/whitebeetseed = 3,/obj/item/seeds/watermelonseed = 3,/obj/item/seeds/limeseed = 3,
 					/obj/item/seeds/lemonseed = 3,/obj/item/seeds/orangeseed = 3,/obj/item/seeds/grassseed = 3,/obj/item/seeds/cocoapodseed = 3,/obj/item/seeds/plumpmycelium = 2,
 					/obj/item/seeds/cabbageseed = 3,/obj/item/seeds/grapeseed = 3,/obj/item/seeds/pumpkinseed = 3,/obj/item/seeds/cherryseed = 3,/obj/item/seeds/plastiseed = 3,/obj/item/seeds/riceseed = 3,/obj/item/seeds/lavenderseed = 3)
-	contraband = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
+	hidden = list(/obj/item/seeds/amanitamycelium = 2,/obj/item/seeds/glowshroom = 2,/obj/item/seeds/libertymycelium = 2,/obj/item/seeds/mtearseed = 2,
 					  /obj/item/seeds/nettleseed = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/reishimycelium = 2,/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/weapon/reagent_containers/spray/waterflower = 1)
 
@@ -1055,7 +1055,7 @@
 /obj/machinery/vending/hydroseeds/build_inventory()
 	var/list/all_products = list(
 		list(src.products, CAT_NORMAL),
-		list(src.contraband, CAT_HIDDEN),
+		list(src.hidden, CAT_HIDDEN),
 		list(src.premium, CAT_COIN))
 
 	for(var/current_list in all_products)
@@ -1115,7 +1115,7 @@
 	/obj/item/weapon/material/knife/kitchen/cleaver = 1)
 
 
-	contraband = list(/obj/item/weapon/material/knife/kitchen/cleaver/bronze = 1)
+	hidden = list(/obj/item/weapon/material/knife/kitchen/cleaver/bronze = 1)
 
 /obj/machinery/vending/sovietsoda
 	name = "\improper BODA"
@@ -1130,7 +1130,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/cans/artbru = 20,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/square/boda = 20,
 					/obj/item/weapon/reagent_containers/food/drinks/glass2/square/bodaplus = 20)
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 300) // TODO Russian cola can
+	hidden = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 300) // TODO Russian cola can
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 
 /obj/machinery/vending/tool
@@ -1144,7 +1144,7 @@
 	products = list(/obj/item/stack/cable_coil/random = 10,/obj/item/weapon/crowbar = 5,/obj/item/weapon/weldingtool = 3,/obj/item/weapon/wirecutters = 5,
 					/obj/item/weapon/wrench = 5,/obj/item/device/scanner/gas = 5,/obj/item/device/t_scanner = 5,/obj/item/weapon/screwdriver = 5,
 					/obj/item/device/flashlight/flare/glowstick = 3, /obj/item/device/flashlight/flare/glowstick/red = 3, /obj/item/weapon/tape_roll = 8)
-	contraband = list(/obj/item/weapon/weldingtool/hugetank = 2, /obj/item/clothing/gloves/insulated = 1)
+	hidden = list(/obj/item/weapon/weldingtool/hugetank = 2, /obj/item/clothing/gloves/insulated = 1)
 	premium = list(/obj/item/clothing/gloves/insulated/cheap = 2)
 
 /obj/machinery/vending/tool/adherent
@@ -1180,7 +1180,7 @@
 	base_type = /obj/machinery/vending/engivend
 	req_access = list(list(access_atmospherics,access_engine_equip))
 	products = list(/obj/item/clothing/glasses/meson = 2,/obj/item/device/multitool = 4,/obj/item/device/geiger = 4,/obj/item/weapon/airlock_electronics = 10,/obj/item/weapon/module/power_control = 10,/obj/item/weapon/airalarm_electronics = 10,/obj/item/weapon/cell = 10,/obj/item/clamp = 10)
-	contraband = list(/obj/item/weapon/cell/high = 3)
+	hidden = list(/obj/item/weapon/cell/high = 3)
 	premium = list(/obj/item/weapon/storage/belt/utility = 3)
 
 //This one's from bay12
@@ -1199,7 +1199,7 @@
 					/obj/item/weapon/light/tube = 10,/obj/item/weapon/stock_parts/scanning_module = 5,/obj/item/weapon/stock_parts/micro_laser = 5,
 					/obj/item/weapon/stock_parts/matter_bin = 5,/obj/item/weapon/stock_parts/manipulator = 5,/obj/item/weapon/stock_parts/console_screen = 5,
 					/obj/item/weapon/stock_parts/capacitor = 5, /obj/item/weapon/stock_parts/keyboard = 5, /obj/item/weapon/stock_parts/power/apc/buildable = 5)
-	contraband = list(/obj/item/weapon/rcd = 1, /obj/item/weapon/rcd_ammo = 5)
+	hidden = list(/obj/item/weapon/rcd = 1, /obj/item/weapon/rcd_ammo = 5)
 	// There was an incorrect entry (cablecoil/power).  I improvised to cablecoil/heavyduty.
 	// Another invalid entry, /obj/item/weapon/circuitry.  I don't even know what that would translate to, removed it.
 	// The original products list wasn't finished.  The ones without given quantities became quantity 5.  -Sayu
@@ -1217,7 +1217,7 @@
 					/obj/item/stack/cable_coil = 4,/obj/item/device/flash/synthetic = 4,/obj/item/weapon/cell = 4,/obj/item/device/scanner/health = 2,
 					/obj/item/weapon/scalpel = 1,/obj/item/weapon/circular_saw = 1,/obj/item/weapon/tank/anesthetic = 2,/obj/item/clothing/mask/breath/medical = 5,
 					/obj/item/weapon/screwdriver = 2,/obj/item/weapon/crowbar = 2)
-	contraband = list(/obj/item/device/flash = 2)
+	hidden = list(/obj/item/device/flash = 2)
 
 //FOR ACTORS GUILD - mainly props that cannot be spawned otherwise
 /obj/machinery/vending/props
@@ -1260,7 +1260,7 @@
 					/obj/item/weapon/lipstick/purple = 3,
 					/obj/item/weapon/lipstick/jade = 3,
 					/obj/item/weapon/storage/wallet/poly = 2)
-	contraband = list(/obj/item/clothing/glasses/eyepatch = 2, /obj/item/clothing/accessory/horrible = 2)
+	hidden = list(/obj/item/clothing/glasses/eyepatch = 2, /obj/item/clothing/accessory/horrible = 2)
 	premium = list(/obj/item/clothing/mask/smokable/pipe = 3)
 	prices = list(/obj/item/weapon/mirror = 60,
 					/obj/item/weapon/haircomb = 40,
@@ -1286,7 +1286,7 @@
 	products = list(/obj/item/toy/blink = 5, /obj/item/toy/eightball = 8, /obj/item/weapon/deck/cards = 5, /obj/item/weapon/deck/tarot = 5, /obj/item/weapon/pack/cardemon = 6, /obj/item/weapon/pack/spaceball = 6, /obj/item/weapon/storage/pill_bottle/dice_nerd = 5, /obj/item/weapon/storage/pill_bottle/dice = 5, /obj/item/weapon/storage/box/checkers = 2, /obj/item/weapon/storage/box/checkers/chess/red = 2, /obj/item/weapon/storage/box/checkers/chess = 2, /obj/item/weapon/board = 2)
 	prices = list(/obj/item/toy/blink = 3, /obj/item/toy/eightball = 10, /obj/item/weapon/deck/tarot = 3, /obj/item/weapon/deck/cards = 3, /obj/item/weapon/pack/cardemon = 5, /obj/item/weapon/pack/spaceball = 5, /obj/item/weapon/storage/pill_bottle/dice_nerd = 6, /obj/item/weapon/storage/pill_bottle/dice = 6, /obj/item/weapon/storage/box/checkers = 10, /obj/item/weapon/storage/box/checkers/chess/red = 10, /obj/item/weapon/storage/box/checkers/chess = 10, /obj/item/weapon/board = 2)
 	premium = list(/obj/item/weapon/spirit_board = 1, /obj/item/weapon/gun/projectile/revolver/capgun = 1, /obj/item/ammo_magazine/caps = 4)
-	contraband = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
+	hidden = list(/obj/item/weapon/reagent_containers/spray/waterflower = 2, /obj/item/weapon/storage/box/snappops = 3)
 
 //Cajoes/Kyos/BloodyMan's Lavatory Articles Dispensiary
 
@@ -1307,7 +1307,7 @@
 					/obj/item/weapon/towel/random = 6,
 					/obj/item/weapon/reagent_containers/spray/cleaner/deodorant = 5
 					)
-	contraband = list(/obj/item/weapon/inflatable_duck = 1)
+	hidden = list(/obj/item/weapon/inflatable_duck = 1)
 	prices = list(/obj/item/weapon/soap = 20,
 				  /obj/item/weapon/mirror = 40,
 				  /obj/item/weapon/haircomb/random = 40,
@@ -1336,7 +1336,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 7,
 					)
 
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
+	hidden = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
 
 /obj/machinery/vending/snix/on_update_icon()
 	..()
@@ -1444,7 +1444,7 @@
 		/obj/item/weapon/storage/mre/menu10 = 10
 	)
 
-	contraband = list(
+	hidden = list(
 		/obj/item/weapon/storage/mre/menu11 = 5,
 		/obj/item/weapon/reagent_containers/food/snacks/liquidfood = 5
 	)
