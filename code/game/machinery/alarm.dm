@@ -886,7 +886,7 @@ FIRE ALARM
 
 /obj/machinery/firealarm/Initialize()
 	. = ..()
-	update_icon()
+	queue_icon_update()
 
 /obj/machinery/firealarm/proc/get_cached_overlay(state)
 	if(!LAZYACCESS(overlays_cache, state))
