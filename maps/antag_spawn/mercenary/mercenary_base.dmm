@@ -2903,7 +2903,7 @@
 "Nm" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/mech_component/manipulators/powerloader,
-/obj/item/mech_equipment/drill,
+/obj/item/mech_equipment/drill/steel,
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4;
 	icon_state = "stripe"
