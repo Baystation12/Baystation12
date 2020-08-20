@@ -12,6 +12,7 @@
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_shuttle)
 	area_usage_test_exempted_root_areas = list(/area/voxship)
 	ban_ruins = list(/datum/map_template/ruin/away_site/scavship)
+	spawn_weight = 0.33
 
 /obj/effect/overmap/visitable/sector/vox_base
 	name = "large asteroid"
@@ -96,6 +97,7 @@
 	cost = 0.5
 	shuttles_to_initialise = list(/datum/shuttle/autodock/overmap/vox_ship, /datum/shuttle/autodock/overmap/vox_lander)
 	ban_ruins = list(/datum/map_template/ruin/away_site/voxship)
+	spawn_weight = 0.33
 
 /obj/effect/overmap/visitable/sector/vox_scav_ship
 	name = "small asteroid cluster"

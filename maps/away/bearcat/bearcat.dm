@@ -50,6 +50,7 @@
 		/area/ship/scrap/shuttle/lift = NO_SCRUBBER|NO_VENT|NO_APC,
 		/area/ship/scrap/command/hallway = NO_SCRUBBER|NO_VENT
 	)
+	spawn_weight = 0.67
 
 /datum/shuttle/autodock/ferry/lift
 	name = "Cargo Lift"

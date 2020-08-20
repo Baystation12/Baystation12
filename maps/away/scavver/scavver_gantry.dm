@@ -14,11 +14,12 @@
 		/datum/shuttle/autodock/ferry/gantry
 	)
 	ban_ruins = list(
-		list(/datum/map_template/ruin/away_site/bearcat_wreck,
+		/datum/map_template/ruin/away_site/bearcat_wreck,
 		/datum/map_template/ruin/exoplanet/playablecolony,
-		/datum/map_template/ruin/exoplanet/playablecolony2)
+		/datum/map_template/ruin/exoplanet/playablecolony2
 	)
 	area_usage_test_exempted_root_areas = list(/area/scavver)
+	spawn_weight = 0.67
 
 /obj/effect/submap_landmark/joinable_submap/scavver_gantry
 	name = "Salvage Gantry"

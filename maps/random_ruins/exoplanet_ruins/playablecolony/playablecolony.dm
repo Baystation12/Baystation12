@@ -10,6 +10,7 @@
 	apc_test_exempt_areas = list(
 		/area/map_template/colony/mineralprocessing = NO_SCRUBBER|NO_VENT
 	)
+	spawn_weight = 0.33
 
 /decl/submap_archetype/playablecolony
 	descriptor = "established colony"
