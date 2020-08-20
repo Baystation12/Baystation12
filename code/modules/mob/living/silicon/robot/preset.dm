@@ -42,11 +42,12 @@
 	module = /obj/item/weapon/robot_module/flying/ascent
 	req_access = list(access_ascent)
 	silicon_radio = null
+	machine_restriction = FALSE
 	var/global/ascent_drone_count = 0
 
 /mob/living/silicon/robot/flying/ascent/add_ion_law(law)
 	return FALSE
-	
+
 /mob/living/silicon/robot/flying/ascent/Initialize()
 	. = ..()
 	remove_language(LANGUAGE_HUMAN_EURO)

@@ -35,6 +35,8 @@
 	var/list/access_rights
 	var/obj/item/weapon/card/id/idcard = /obj/item/weapon/card/id/synthetic
 
+	var/machine_restriction = TRUE // Whether or not the silicon mob is affected by the `silicon_restriction` var on machines
+
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
 

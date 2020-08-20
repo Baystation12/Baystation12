@@ -28,7 +28,8 @@
 	var/data[0]
 
 	data["viewing"] = viewing_overmap(user)
-	data["viewing_silicon"] = issilicon(user)
+	var/mob/living/silicon/silicon = user
+	data["viewing_silicon"] = ismachinerestricted(silicon)
 	if(sensors)
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
