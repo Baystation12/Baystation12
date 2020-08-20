@@ -188,7 +188,7 @@
 				new map_type(null,1,1,zlevel,maxx,maxy,0,1,1,planetary_area)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/generate_features()
-	spawned_features = seedRuins(map_z, features_budget, /area/exoplanet, possible_features, maxx, maxy)
+	spawned_features = seedRuins(map_z, features_budget, possible_features, /area/exoplanet, maxx, maxy)
 
 /obj/effect/overmap/visitable/sector/exoplanet/proc/get_biostuff(var/datum/random_map/noise/exoplanet/random_map)
 	if(!istype(random_map))
