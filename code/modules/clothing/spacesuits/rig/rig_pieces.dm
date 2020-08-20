@@ -27,13 +27,24 @@
 
 /obj/item/clothing/shoes/magboots/rig
 	name = "boots"
-	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT
+	item_flags = ITEM_FLAG_THICKMATERIAL | ITEM_FLAG_AIRTIGHT | ITEM_FLAG_SILENT
 	body_parts_covered = FEET
 	cold_protection = FEET
 	heat_protection = FEET
 	species_restricted = null
 	gender = PLURAL
 	icon_base = null
+	var/footstep = 1
+
+/obj/item/clothing/shoes/magboots/rig/handle_movement(var/turf/walking, var/running)
+	if(running)
+		if(footstep >= 2)
+			footstep = 0
+			playsound(src, "sound/machines/rigstep.ogg", 50, 1) // this will get annoying very fast.
+		else
+			footstep++
+	else
+		playsound(src, "sound/machines/rigstep.ogg", 20, 1)
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"
