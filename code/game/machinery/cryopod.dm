@@ -432,7 +432,10 @@
 		set_occupant(target)
 
 		// Book keeping!
-		log_and_message_admins("has entered a stasis pod")
+		if (target == user)
+			log_and_message_admins("has entered a stasis pod")
+		else
+			log_and_message_admins("has placed [key_name_admin(target)] into a stasis pod")
 
 		//Despawning occurs when process() is called with an occupant without a client.
 		src.add_fingerprint(target)
