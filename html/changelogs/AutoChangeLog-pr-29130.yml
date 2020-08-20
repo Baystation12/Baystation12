@@ -1,5 +1,0 @@
-author: "SierraKomodo"
-delete-after: True
-changes: 
-  - bugfix: "Rescue bags will no longer randomly delete their air tanks when trying to fold them while open, holding someone, or other failure states."
-  - tweak: "Body bags, stasis bags, rescue bags, etc now provide a failure hint in chat when you fail to fold them."
