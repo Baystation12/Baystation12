@@ -20,7 +20,7 @@
 
 	parent_area_type = /area/faction_base/unsc
 
-	map_bounds = list(23,106,140,32) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
+	map_bounds = list(32,150,170,57) //Format: (TOP_LEFT_X,TOP_LEFT_Y,BOTTOM_RIGHT_X,BOTTOM_RIGHT_Y)
 
 	occupy_range = 7
 
