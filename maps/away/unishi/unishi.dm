@@ -32,6 +32,7 @@
 	suffixes = list("unishi/unishi-1.dmm", "unishi/unishi-2.dmm", "unishi/unishi-3.dmm")
 	cost = 2
 	area_usage_test_exempted_root_areas = list(/area/unishi)
+	spawn_weight = 0.67
 
 
 /obj/effect/shuttle_landmark/nav_unishi/nav1
@@ -170,4 +171,3 @@ obj/item/weapon/paper/prof2
 
 /datum/chemical_reaction/clonexadone/nophoron
 	required_reagents = list(/datum/reagent/cryoxadone = 1, /datum/reagent/sodium = 1, /datum/reagent/toxin/phoron/safe = 0.1)
-

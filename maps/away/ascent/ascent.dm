@@ -15,6 +15,7 @@
 		/datum/shuttle/autodock/overmap/ascent, 
 		/datum/shuttle/autodock/overmap/ascent/two
 	)
+	spawn_weight = 0.67
 
 // Overmap objects.
 /obj/effect/overmap/visitable/ship/ascent_seedship
